@@ -5,7 +5,7 @@
  */
 
 import type { AnimateOptions, ScrollAnimateInstance } from './types';
-import { createScrollAnimate, hasDOM, prepareElement, supportsObserver } from './core';
+import { createScrollAnimate, hasDOM, prepareElement, stopAnimation, supportsObserver } from './core';
 
 export interface StaggerOptions extends AnimateOptions {
   /** Delay between consecutive children in ms (default: 80) */
@@ -89,6 +89,12 @@ export function staggerChildren(
   return () => {
     io.disconnect();
     mo?.disconnect();
+    // Stopped before the container was revealed: never leave the children hidden.
+    if (!revealed) {
+      revealed = true;
+      items.forEach((child) => stopAnimation(child));
+      items = [];
+    }
     late.forEach((el) => sa.unobserve(el));
     late.length = 0;
   };

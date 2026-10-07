@@ -70,6 +70,8 @@ export function sequence(steps: SequenceStep[], options: SequenceOptions = {}): 
   let io: IntersectionObserver | undefined;
   let active: Planned[] = [];
   let settle: (() => void) | undefined;
+  // Targets hidden while waiting for `trigger`; revealed if cancelled before it fires.
+  let prepared: Element[] = [];
 
   const controller: SequenceController = {
     play() {
@@ -100,6 +102,8 @@ export function sequence(steps: SequenceStep[], options: SequenceOptions = {}): 
     cancel() {
       io?.disconnect();
       io = undefined;
+      prepared.forEach((el) => stopAnimation(el));
+      prepared = [];
       active.forEach(({ el }) => stopAnimation(el));
       active = [];
       settle?.();
@@ -113,12 +117,14 @@ export function sequence(steps: SequenceStep[], options: SequenceOptions = {}): 
   if (trigger && hasDOM() && supportsObserver()) {
     const el = resolveTargets(trigger)[0];
     if (el) {
-      plan(steps, defaults).forEach(({ el: target }) => prepareElement(target));
+      prepared = plan(steps, defaults).map(({ el: target }) => target);
+      prepared.forEach((target) => prepareElement(target));
       io = new IntersectionObserver(
         (entries) => {
           if (!entries.some((e) => e.isIntersecting)) return;
           io?.disconnect();
           io = undefined;
+          prepared = []; // play() takes over from here
           controller.play();
         },
         { threshold: defaults.threshold ?? 0.1, rootMargin: defaults.rootMargin ?? '0px' }
