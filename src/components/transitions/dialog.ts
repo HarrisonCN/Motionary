@@ -11,7 +11,7 @@ export type DialogVariant = 'modal' | 'drawer-start' | 'drawer-end' | 'drawer-bo
  * React / Vue / Svelte keep owning them). Style with `::part(panel)`,
  * `::part(backdrop)` and the `--usa-dialog-*` custom properties.
  *
- * Attributes: `open` (reflects; set/remove to open/close), `variant`
+ * Attributes: `open` (reflects; set/remove to open/close), `kind`
  * (`modal` default — Fluent scale + fade; `drawer-start` / `drawer-end`
  * slide from the side, `drawer-bottom` / `sheet` from below), `label`
  * (accessible name), `no-backdrop-close`, `no-esc`. Elements inside
@@ -40,7 +40,7 @@ export function defineDialog(tag = 'usa-dialog'): CustomElementConstructor | und
     (Base) =>
       class UsaDialog extends Base {
         static get observedAttributes(): string[] {
-          return ['open', 'kind', 'variant', 'label'];
+          return ['open', 'kind', 'label'];
         }
 
         private _dialog: HTMLDialogElement | null = null;
@@ -60,7 +60,7 @@ export function defineDialog(tag = 'usa-dialog'): CustomElementConstructor | und
           this.toggleAttribute('open', !!v);
         }
 
-        private get variant(): string {
+        private get kind(): string {
           return kindOf(this, FROM, 'modal');
         }
 
@@ -74,7 +74,7 @@ export function defineDialog(tag = 'usa-dialog'): CustomElementConstructor | und
 
         private syncAttrs(): void {
           if (!this._dialog) return;
-          this._dialog.setAttribute('data-variant', this.variant);
+          this._dialog.setAttribute('data-kind', this.kind);
           this._dialog.setAttribute('aria-modal', 'true');
           const label = this.getAttribute('label');
           if (label) this._dialog.setAttribute('aria-label', label);
@@ -134,9 +134,9 @@ export function defineDialog(tag = 'usa-dialog'): CustomElementConstructor | und
             return;
           }
           await this.animate2(
-            [{ opacity: 0, transform: FROM[this.variant] }, { opacity: 1, transform: 'none' }],
+            [{ opacity: 0, transform: FROM[this.kind] }, { opacity: 1, transform: 'none' }],
             [{ opacity: 0 }, { opacity: 1 }],
-            this.variant === 'modal' ? 260 : 360,
+            this.kind === 'modal' ? 260 : 360,
             FLUENT_DECELERATE
           );
         }
@@ -154,7 +154,7 @@ export function defineDialog(tag = 'usa-dialog'): CustomElementConstructor | und
           }
           this.returnValue = returnValue;
           this._busy = (async () => {
-            const panelTo = this.reduced ? { opacity: 0 } : { opacity: 0, transform: FROM[this.variant] };
+            const panelTo = this.reduced ? { opacity: 0 } : { opacity: 0, transform: FROM[this.kind] };
             const panelFrom = this.reduced ? { opacity: 1 } : { opacity: 1, transform: 'none' };
             await this.animate2([panelFrom, panelTo], [{ opacity: 1 }, { opacity: 0 }], this.reduced ? 120 : 200, 'cubic-bezier(0.7, 0, 0.84, 0)', 'forwards');
             try {

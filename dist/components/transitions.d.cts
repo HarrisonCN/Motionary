@@ -51,7 +51,7 @@ type DialogVariant = 'modal' | 'drawer-start' | 'drawer-end' | 'drawer-bottom' |
  * React / Vue / Svelte keep owning them). Style with `::part(panel)`,
  * `::part(backdrop)` and the `--usa-dialog-*` custom properties.
  *
- * Attributes: `open` (reflects; set/remove to open/close), `variant`
+ * Attributes: `open` (reflects; set/remove to open/close), `kind`
  * (`modal` default — Fluent scale + fade; `drawer-start` / `drawer-end`
  * slide from the side, `drawer-bottom` / `sheet` from below), `label`
  * (accessible name), `no-backdrop-close`, `no-esc`. Elements inside

@@ -92,12 +92,12 @@ describe('reduced motion', () => {
     expect(node.classList.contains('sa-visible')).toBe(true);
   });
 
-  it('scroll progress still reaches onProgress but parallax transforms are skipped', async () => {
+  it('scroll progress still reaches onProgress under reduced motion', async () => {
     const { createScrollAnimate } = await load({ reducedMotion: true });
     const sa = createScrollAnimate();
     const node = el();
     const onProgress = vi.fn();
-    sa.observe(node, { progressMode: 'scroll', parallax: { y: 100 }, onProgress });
+    sa.observe(node, { progressMode: 'scroll', onProgress });
     setRect(node, -500, 1000);
     MockIO.instances.find((i) => i.options.threshold === 0)!.fire(node, true);
     expect(onProgress).toHaveBeenCalledWith(node, 0.75);

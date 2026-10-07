@@ -425,7 +425,7 @@ type SpinnerVariant = (typeof SPINNER_VARIANTS)[number];
  * `<usa-spinner>` — indeterminate loading indicators, pure CSS animations
  * of `transform` / `opacity` (plus an SVG stroke for `fluent`).
  *
- * Kinds (`kind`; `variant` is a deprecated alias until 3.0): `fluent` (default — the WinUI / Windows 11
+ * Kinds (`kind`): `fluent` (default — the WinUI / Windows 11
  * ProgressRing arc), `windows` (the Windows 10 boot "orbiting dots"),
  * `ring` (classic border spinner), `dots` (three bouncing dots / typing
  * indicator), `pulse` (expanding ripple), `bars` (equalizer).
@@ -437,8 +437,6 @@ type SpinnerVariant = (typeof SPINNER_VARIANTS)[number];
 interface UsaSpinnerElement extends UsaElement {
     /** Spinner kind (`kind` attribute). */
     kind: SpinnerVariant;
-    /** @deprecated alias of `kind`, removed in 3.0. */
-    variant: SpinnerVariant;
 }
 declare function defineSpinner(tag?: string): CustomElementConstructor | undefined;
 
@@ -524,7 +522,7 @@ declare function toast(message: string, options?: ToastOptions): ToastHandle | n
  * `<usa-check>` — an animated result icon: the circle draws itself, then the
  * check mark (or cross / exclamation) strokes in with a little pop.
  *
- * Attributes: `variant` (`success` default, `error`, `warning`), `size`
+ * Attributes: `kind` (`success` default, `error`, `warning`), `size`
  * (px, 56), `start` (`view` default | `load` | `manual`), `label`
  * (accessible name, e.g. "Payment complete"; the icon is decorative
  * without it). Event: `usa:complete`. Reduced motion: drawn instantly.
@@ -619,7 +617,7 @@ declare function defineMarquee(tag?: string): CustomElementConstructor | undefin
  * tints from `--usa-mica-source`, a gradient you control). Optional
  * `shimmer` adds a light sweep when it appears or on hover.
  *
- * Attributes: `kind` (`acrylic` default | `mica`; `variant` is a deprecated alias until 3.0), `tint` (colour),
+ * Attributes: `kind` (`acrylic` default | `mica`), `tint` (colour),
  * `tint-opacity` (0–1, 0.55), `blur` (px, 30), `shimmer`
  * (`hover` | `load` | `none`, default `none`). Falls back to a solid tint
  * without `backdrop-filter` and under `prefers-reduced-transparency` or
@@ -715,7 +713,7 @@ type DialogVariant = 'modal' | 'drawer-start' | 'drawer-end' | 'drawer-bottom' |
  * React / Vue / Svelte keep owning them). Style with `::part(panel)`,
  * `::part(backdrop)` and the `--usa-dialog-*` custom properties.
  *
- * Attributes: `open` (reflects; set/remove to open/close), `variant`
+ * Attributes: `open` (reflects; set/remove to open/close), `kind`
  * (`modal` default — Fluent scale + fade; `drawer-start` / `drawer-end`
  * slide from the side, `drawer-bottom` / `sheet` from below), `label`
  * (accessible name), `no-backdrop-close`, `no-esc`. Elements inside

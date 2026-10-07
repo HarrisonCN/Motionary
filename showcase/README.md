@@ -7,7 +7,7 @@ and copy the generated code (Vanilla / React / Vue / Svelte / Solid /
 
 - **No build step, no framework.** `app.js` imports the library from `../dist/`
   (dogfooding the ESM build, plus `dist/element.js` and `dist/svelte.js`) and
-  falls back to `https://unpkg.com/use-scroll-animate@2/dist/`.
+  falls back to `https://unpkg.com/use-scroll-animate@3/dist/`.
 - `catalog.js` (cards), `codegen.js` (snippets) and `i18n.js` (English / 中文)
   are plain data/pure functions covered by `test/showcase.test.ts`.
 

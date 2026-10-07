@@ -1,12 +1,12 @@
-import { c as createScrollAnimate } from './chunks/core-J_KM443q.js';
-import { s as staggerChildren } from './chunks/stagger-CGF18oNs.js';
+import { c as createScrollAnimate } from './chunks/core-mV_TPgG_.js';
+import { s as staggerChildren } from './chunks/stagger-BFAhKknX.js';
 
 /**
  * use-scroll-animate - Vue 3 Integration
  * Provides useScrollAnimate and useScrollStagger composables for Vue 3 applications.
  *
  * A thin wrapper around the core engine, so it shares its behaviour: `once`,
- * `offset`, custom easing functions, parallax, `prefers-reduced-motion`
+ * `offset`, custom easing functions, progress, `prefers-reduced-motion`
  * support, and cleanup on unmount.
  */
 /** Support refs on components (`$el`) as well as plain elements. */

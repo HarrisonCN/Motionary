@@ -89,7 +89,7 @@ describe('component gallery page', () => {
     expect(html).toContain('<script type="module" src="./gallery.js"></script>');
     expect(js).toContain("new URL('../dist/', import.meta.url)");
     expect(js).toContain("'components.js'");
-    expect(js).toContain('https://unpkg.com/use-scroll-animate@2/dist/');
+    expect(js).toContain('https://unpkg.com/use-scroll-animate@3/dist/');
     expect(js).toContain('prefers-reduced-motion');
   });
 

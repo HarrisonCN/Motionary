@@ -21,7 +21,6 @@ export type {
   EasingType,
   AnimationKeyframe,
   CustomAnimation,
-  ParallaxOptions,
   ProgressMode,
   ScrollEngine,
   AnimateOptions,

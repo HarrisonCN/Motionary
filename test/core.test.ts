@@ -129,26 +129,26 @@ describe('observe / animate', () => {
   });
 });
 
-describe('parallax & progress', () => {
-  it('keeps parallax running after the once-animation fires', async () => {
+describe('progress', () => {
+  it('keeps progress tracking running after the once-animation fires', async () => {
     const { createScrollAnimate } = await load();
     const sa = createScrollAnimate();
     const node = el();
-    sa.observe(node, { parallax: { y: 100 } });
+    sa.observe(node, { progressVar: '--p' });
     fireAll([node], true);
     animations[0].finish();
     const progress = MockIO.instances.find((io) => Array.isArray(io.options.threshold) && (io.options.threshold as number[]).length === 101)!;
     expect(progress.targets.has(node)).toBe(true);
     progress.fire(node, true, 1);
-    expect(node.style.transform).toBe('translateY(100px)');
+    expect(node.style.getPropertyValue('--p')).toBe('1');
   });
 
-  it('numeric data-sa-parallax strings are treated as px', async () => {
+  it('3.0: the legacy parallax option and data-sa-parallax-* are gone (no transform written)', async () => {
     const { createScrollAnimate } = await load();
     const node = el('<div data-sa data-sa-parallax-y="100"></div>');
     const sa = createScrollAnimate();
     sa.init();
-    expect(sa.getObservedElements()[0].options.parallax.y).toBe(100);
+    expect((sa.getObservedElements()[0].options as any).parallax).toBeUndefined();
   });
 });
 
@@ -158,7 +158,7 @@ describe('robustness', () => {
     const sa = createScrollAnimate();
     const node = el();
     const onComplete = vi.fn();
-    sa.observe(node, { onComplete, parallax: { y: 50 } });
+    sa.observe(node, { onComplete });
     expect(node.style.opacity).toBe('');
     fireAll([node], true, 1);
     expect(animations).toHaveLength(0);

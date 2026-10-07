@@ -4,7 +4,7 @@
  * `useScrollStagger({ observeChildren: true })` also animates children added later.
  *
  * Both hooks are thin wrappers around the core engine, so they share its
- * behaviour: `once`, `offset`, custom easing functions, parallax,
+ * behaviour: `once`, `offset`, custom easing functions, progress,
  * `prefers-reduced-motion` support, and proper cleanup on unmount.
  */
 

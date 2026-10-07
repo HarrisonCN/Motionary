@@ -1,14 +1,14 @@
 'use strict';
 
-var core = require('./chunks/core-C1cEwjJj.cjs');
-var stagger = require('./chunks/stagger-DtKKS6GP.cjs');
+var core = require('./chunks/core-qpECfEkb.cjs');
+var stagger = require('./chunks/stagger-CLc3j58T.cjs');
 
 /**
  * use-scroll-animate - Vue 3 Integration
  * Provides useScrollAnimate and useScrollStagger composables for Vue 3 applications.
  *
  * A thin wrapper around the core engine, so it shares its behaviour: `once`,
- * `offset`, custom easing functions, parallax, `prefers-reduced-motion`
+ * `offset`, custom easing functions, progress, `prefers-reduced-motion`
  * support, and cleanup on unmount.
  */
 /** Support refs on components (`$el`) as well as plain elements. */

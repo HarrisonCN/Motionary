@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0] - 2026-10-07
+
+3.0 removes what 2.9 deprecated. Every change has a drop-in replacement — see **[Upgrading to 3.0](./docs/upgrading-3.md)** (run your app on 2.9 first: it warns once wherever old usage is found).
+
+### ⚠ Breaking changes
+- **`variant` no longer selects a component's kind.** `<usa-spinner>`, `<usa-check>`, `<usa-dialog>` and `<usa-acrylic>` use **`kind`** (`<usa-spinner kind="windows">`, `<usa-dialog kind="drawer-end">`, `<usa-acrylic kind="mica">`); `variant` on every element now only selects a style variant (`minimal`, `neon`, `glass`, `brutalist`, `fluent`, `material`). The `spinner.variant` property is removed (use `.kind`); internal state attributes are now `data-kind`.
+- **Removed the legacy transform-based parallax** of the scroll engine: the `parallax` option of `observe()` / `animate()`, the `data-sa-parallax-x|y|rotate|scale|speed` attributes (also on `<scroll-animate>`) and the `ParallaxOptions` type. Use `parallax(el, { speed })` (writes `translate` + `--sa-parallax`, composes with entrance animations) or `progressVar`.
+- **Node ≥ 20** for SSR imports (`engines`); Node 18 is end-of-life.
+- CDN snippets in docs and the showcase now point at `use-scroll-animate@3`.
+
+### Changed
+- The scroll core is smaller without the legacy parallax path (`progress` tracking now only runs for `onProgress` / `progressVar`).
+- `examples/vanilla` uses `parallax()`.
+
+### Migration
+| 2.x | 3.0 |
+|---|---|
+| `<usa-spinner variant="dots">` | `<usa-spinner kind="dots">` |
+| `<usa-check variant="error">` | `<usa-check kind="error">` |
+| `<usa-dialog variant="sheet">` | `<usa-dialog kind="sheet">` |
+| `<usa-acrylic variant="mica">` | `<usa-acrylic kind="mica">` |
+| `spinner.variant = 'ring'` | `spinner.kind = 'ring'` |
+| `observe(el, { parallax: { y: 80 } })` / `data-sa-parallax-y="80"` | `parallax(el, { speed: 0.2 })` or `progressVar: '--p'` + CSS |
+
 ## [2.9.0] - 2026-10-07
 
 ### Added

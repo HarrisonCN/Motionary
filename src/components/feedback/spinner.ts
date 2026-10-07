@@ -8,7 +8,7 @@ export type SpinnerVariant = (typeof SPINNER_VARIANTS)[number];
  * `<usa-spinner>` — indeterminate loading indicators, pure CSS animations
  * of `transform` / `opacity` (plus an SVG stroke for `fluent`).
  *
- * Kinds (`kind`; `variant` is a deprecated alias until 3.0): `fluent` (default — the WinUI / Windows 11
+ * Kinds (`kind`): `fluent` (default — the WinUI / Windows 11
  * ProgressRing arc), `windows` (the Windows 10 boot "orbiting dots"),
  * `ring` (classic border spinner), `dots` (three bouncing dots / typing
  * indicator), `pulse` (expanding ripple), `bars` (equalizer).
@@ -20,8 +20,6 @@ export type SpinnerVariant = (typeof SPINNER_VARIANTS)[number];
 export interface UsaSpinnerElement extends UsaElement {
   /** Spinner kind (`kind` attribute). */
   kind: SpinnerVariant;
-  /** @deprecated alias of `kind`, removed in 3.0. */
-  variant: SpinnerVariant;
 }
 
 function markup(variant: string): string {
@@ -47,29 +45,23 @@ export function defineSpinner(tag = 'usa-spinner'): CustomElementConstructor | u
     (Base) =>
       class UsaSpinner extends Base {
         static get observedAttributes(): string[] {
-          return ['kind', 'variant', 'size', 'label'];
+          return ['kind', 'size', 'label'];
         }
 
-        /** The spinner kind (`kind` attribute; `variant` is a deprecated alias until 3.0). */
+        /** The spinner kind (`kind` attribute). */
         get kind(): SpinnerVariant {
           return kindOf(this, SPINNER_VARIANTS, 'fluent') as SpinnerVariant;
         }
         set kind(v: SpinnerVariant) {
           this.setAttribute('kind', v);
         }
-        /** @deprecated use `kind` (removed in 3.0). */
-        get variant(): SpinnerVariant {
-          return this.kind;
-        }
-        set variant(v: SpinnerVariant) {
-          this.kind = v;
-        }
+
 
         mount(): void {
           const variant = this.kind;
-          if (this.getAttribute('data-variant') !== variant) {
+          if (this.getAttribute('data-kind') !== variant) {
             this.innerHTML = markup(variant);
-            this.setAttribute('data-variant', variant);
+            this.setAttribute('data-kind', variant);
           }
           const size = this.getAttribute('size');
           if (size) this.style.setProperty('--usa-spinner-size', `${Number(size)}px`);

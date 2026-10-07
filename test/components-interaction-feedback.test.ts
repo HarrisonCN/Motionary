@@ -143,17 +143,17 @@ describe('<usa-press>, <usa-magnetic>, <usa-tilt>, <usa-spotlight>', () => {
 describe('<usa-spinner>', () => {
   it('renders every variant as an indeterminate progressbar', () => {
     for (const v of SPINNER_VARIANTS) {
-      const el = mount<any>(`<usa-spinner variant="${v}" size="20"></usa-spinner>`);
+      const el = mount<any>(`<usa-spinner kind="${v}" size="20"></usa-spinner>`);
       expect(el.getAttribute('role')).toBe('progressbar');
       expect(el.getAttribute('aria-label')).toBe('Loading');
       expect(el.hasAttribute('aria-valuenow')).toBe(false);
-      expect(el.getAttribute('data-variant')).toBe(v);
+      expect(el.getAttribute('data-kind')).toBe(v);
       expect(el.children.length).toBeGreaterThan(0);
       expect(el.style.getPropertyValue('--usa-spinner-size')).toBe('20px');
     }
-    const w = mount('<usa-spinner variant="windows"></usa-spinner>');
+    const w = mount('<usa-spinner kind="windows"></usa-spinner>');
     expect(w.querySelectorAll('i')).toHaveLength(5);
-    expect(mount('<usa-spinner variant="nope"></usa-spinner>').querySelector('svg')).toBeTruthy();
+    expect(mount('<usa-spinner kind="nope"></usa-spinner>').querySelector('svg')).toBeTruthy();
   });
 });
 
@@ -227,7 +227,7 @@ describe('toast() / <usa-toaster>', () => {
 
 describe('<usa-check>', () => {
   it('draws the circle then the mark when visible', async () => {
-    const el = mount<any>('<usa-check variant="error" label="Failed"></usa-check>');
+    const el = mount<any>('<usa-check kind="error" label="Failed"></usa-check>');
     expect(el.getAttribute('data-state')).toBe('idle');
     expect(el.getAttribute('role')).toBe('img');
     const done = vi.fn();

@@ -1,4 +1,4 @@
-import { r as readOptions, c as createScrollAnimate } from './chunks/core-J_KM443q.js';
+import { r as readOptions, c as createScrollAnimate } from './chunks/core-mV_TPgG_.js';
 
 /**
  * use-scroll-animate - `<scroll-animate>` Web Component
@@ -14,14 +14,13 @@ import { r as readOptions, c as createScrollAnimate } from './chunks/core-J_KM44
  * Attributes mirror the `data-sa-*` attributes without the prefix
  * (`animation`, `duration`, `delay`, `easing`, `threshold`, `root-margin`,
  * `offset`, `once`, `repeat`, `engine`, `view-range`, `progress`,
- * `progress-var`, `exit`, `parallax-*`). The element dispatches `sa:enter`,
+ * `progress-var`, `exit`). The element dispatches `sa:enter`,
  * `sa:leave`, `sa:start`, `sa:complete` and `sa:progress` (`detail.progress`)
  * events. It renders as `display: block` unless styled otherwise.
  */
 const ATTRIBUTES = [
     'animation', 'duration', 'delay', 'easing', 'threshold', 'root-margin', 'offset', 'once', 'repeat',
     'stagger', 'engine', 'view-range', 'progress', 'progress-var', 'exit',
-    'parallax-x', 'parallax-y', 'parallax-rotate', 'parallax-scale', 'parallax-speed',
 ];
 let shared = null;
 /**

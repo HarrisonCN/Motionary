@@ -212,7 +212,7 @@ describe('engine option (native scroll-driven timeline)', () => {
     expect(b.style.opacity).toBe('');
   });
 
-  it('progress/parallax keep working with the native engine', async () => {
+  it('progress keeps working with the native engine', async () => {
     const { createScrollAnimate } = await load();
     const sa = createScrollAnimate({ defaultEngine: 'auto' });
     const node = el();

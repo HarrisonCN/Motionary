@@ -83,7 +83,7 @@
 <body>
 
   <div class="hero">
-    <div class="parallax-bg" data-sa data-sa-parallax-y="-200px" data-sa-parallax-speed="0.3"></div>
+    <div class="parallax-bg" data-parallax="0.3"></div>
     <h1 data-sa data-sa-animation="fade-in-down, zoom-in" data-sa-duration="1000">
       use-scroll-animate
     </h1>
@@ -120,7 +120,7 @@
     <div class="card" data-sa data-sa-animation="slide-right" data-sa-delay="100">
       <h2>Parallax Effect</h2>
       <p>Elements can move, rotate, or scale based on scroll position. Try scrolling!</p>
-      <div style="height: 100px; background: #222; margin-top: 1rem; display: flex; align-items: center; justify-content: center;" data-sa data-sa-parallax-y="-50px" data-sa-parallax-rotate="15" data-sa-parallax-speed="0.8">
+      <div style="height: 100px; background: #222; margin-top: 1rem; display: flex; align-items: center; justify-content: center;" data-parallax="-0.15">
         <span style="font-size: 1.5rem;">Parallax Element</span>
       </div>
     </div>
@@ -208,7 +208,8 @@
   <p class="scroll-hint">↓ Scroll to see animations</p>
 
   <script type="module">
-    import { createScrollAnimate, sequence, staggerChildren } from '../../dist/index.js';
+    import { createScrollAnimate, sequence, staggerChildren, parallax } from '../../dist/index.js';
+    document.querySelectorAll('[data-parallax]').forEach((el) => parallax(el, { speed: Number(el.dataset.parallax) }));
 
     const sa = createScrollAnimate(); // Create a new instance to use onProgress
 

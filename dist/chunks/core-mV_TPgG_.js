@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * use-scroll-animate - Animation Presets
  * Defines keyframes for all built-in animation presets
@@ -263,13 +261,6 @@ function num(value) {
     const n = parseFloat(value);
     return Number.isFinite(n) ? n : undefined;
 }
-/** Numeric strings ("100") become numbers (px); strings with units stay as-is. */
-function lengthValue(value) {
-    if (value === undefined || value.trim() === '')
-        return undefined;
-    const v = value.trim();
-    return /^-?(\d+\.?\d*|\.\d+)$/.test(v) ? parseFloat(v) : v;
-}
 const DEFAULT_PROGRESS_VAR = '--sa-progress';
 const DEFAULT_VIEW_RANGE = ['entry 0%', 'entry 100%'];
 /** `''` (bare attribute) -> default name; `sa-progress` -> `--sa-progress`. */
@@ -343,19 +334,6 @@ function readOptions(get) {
     const progress = get('progress');
     if (progress)
         opts.progressMode = progress.trim() === 'scroll' ? 'scroll' : 'ratio';
-    const px = get('parallax-x');
-    const py = get('parallax-y');
-    const pr = get('parallax-rotate');
-    const ps = get('parallax-scale');
-    if (px || py || pr || ps) {
-        opts.parallax = {
-            x: lengthValue(px),
-            y: lengthValue(py),
-            rotate: num(pr),
-            scale: num(ps),
-            speed: num(get('parallax-speed')) ?? 1,
-        };
-    }
     // Drop keys that were not set, so they don't override defaults when spread.
     Object.keys(opts).forEach((k) => opts[k] === undefined && delete opts[k]);
     return opts;
@@ -386,7 +364,6 @@ function mergeOptions(opts, config) {
         once: opts.once ?? (repeat ? false : config.defaultOnce),
         offset: opts.offset ?? config.defaultOffset,
         stagger: opts.stagger ?? 0,
-        parallax: warnLegacyParallax(opts.parallax) ?? {},
         onStart: opts.onStart ?? noop,
         onComplete: opts.onComplete ?? noop,
         onEnter: opts.onEnter ?? noop,
@@ -428,11 +405,8 @@ function applyOffset(rootMargin, offset) {
     const base = m ? parseFloat(m[1]) : 0; // non-px bottoms (e.g. %) cannot be combined; offset wins
     return `${top} ${right} ${base - offset}px ${left}`;
 }
-function hasParallax(p) {
-    return !!p && Object.keys(p).some((k) => p[k] !== undefined);
-}
 function needsProgress(opts) {
-    return hasParallax(opts.parallax) || opts.onProgress !== noop || !!opts.progressVar;
+    return opts.onProgress !== noop || !!opts.progressVar;
 }
 /**
  * True scroll progress of `el` through the viewport (or `root`): 0 when its top
@@ -710,30 +684,6 @@ function startNative(el, opts, onFrozen) {
     };
     return anim;
 }
-let parallaxWarned = false;
-/** 2.9: the transform-based `parallax` option is deprecated (removed in 3.0). */
-function warnLegacyParallax(p) {
-    if (p && !parallaxWarned && typeof console !== 'undefined' && Object.keys(p).length) {
-        parallaxWarned = true;
-        console.warn('[use-scroll-animate] The `parallax` option / data-sa-parallax-* attributes are deprecated and removed in 3.0. Use parallax(el, { speed }) or progressVar instead.');
-    }
-    return p;
-}
-function applyParallax(el, progress, parallax) {
-    const { x = 0, y = 0, rotate = 0, scale = 1, speed = 1 } = parallax;
-    const p = (progress - 0.5) * 2 * speed;
-    const axis = (v) => (typeof v === 'number' ? `${v * p}px` : `calc(${v} * ${p})`);
-    let transform = '';
-    if (x)
-        transform += ` translateX(${axis(x)})`;
-    if (y)
-        transform += ` translateY(${axis(y)})`;
-    if (rotate)
-        transform += ` rotate(${rotate * p}deg)`;
-    if (scale !== 1)
-        transform += ` scale(${1 + (scale - 1) * p})`;
-    el.style.transform = transform.trim();
-}
 /** Play the exit animation (entrance or `exit` preset, reversed), ending hidden. */
 function runExit(el, opts, config) {
     if (config.useClassNames || typeof el.animate !== 'function') {
@@ -852,8 +802,6 @@ function createScrollAnimate(userConfig = {}) {
             if (style)
                 style.setProperty(opts.progressVar, String(+progress.toFixed(4)));
         }
-        if (hasParallax(opts.parallax) && !motionDisabled(config))
-            applyParallax(el, progress, opts.parallax);
     }
     function update() {
         frame = 0;
@@ -1149,18 +1097,5 @@ function createScrollAnimate(userConfig = {}) {
     return instance;
 }
 
-exports.EASING_MAP = EASING_MAP;
-exports.PRESETS = PRESETS;
-exports.createScrollAnimate = createScrollAnimate;
-exports.getScrollProgress = getScrollProgress;
-exports.hasDOM = hasDOM;
-exports.prefersReducedMotion = prefersReducedMotion;
-exports.prepareElement = prepareElement;
-exports.readOptions = readOptions;
-exports.resolveEasing = resolveEasing;
-exports.resolvePreset = resolvePreset;
-exports.resolveTargets = resolveTargets;
-exports.stopAnimation = stopAnimation;
-exports.supportsObserver = supportsObserver;
-exports.supportsScrollTimeline = supportsScrollTimeline;
-//# sourceMappingURL=core-C1cEwjJj.cjs.map
+export { EASING_MAP as E, PRESETS as P, stopAnimation as a, resolveTargets as b, createScrollAnimate as c, prefersReducedMotion as d, resolveEasing as e, resolvePreset as f, getScrollProgress as g, hasDOM as h, supportsScrollTimeline as i, prepareElement as p, readOptions as r, supportsObserver as s };
+//# sourceMappingURL=core-mV_TPgG_.js.map

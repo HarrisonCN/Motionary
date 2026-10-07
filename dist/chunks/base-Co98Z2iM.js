@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * use-scroll-animate/components — shared base for the `<usa-*>` custom elements.
  *
@@ -233,52 +231,15 @@ const EASE_OUT = 'cubic-bezier(0.22, 1, 0.36, 1)';
 const EASE_SPRING = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
 /** Windows Fluent "decelerate" / "point-to-point" curves. */
 const FLUENT_DECELERATE = 'cubic-bezier(0.1, 0.9, 0.2, 1)';
-const warned = new Set();
-/** Log a deprecation once per key (console.warn). */
-function deprecate(key, message) {
-    if (warned.has(key))
-        return;
-    warned.add(key);
-    if (typeof console !== 'undefined')
-        console.warn(`[use-scroll-animate] ${message}`);
-}
 /**
- * The `kind` attribute of elements whose `variant` used to pick their kind
- * (`<usa-spinner>`, `<usa-check>`, `<usa-dialog>`). `variant` still works in
- * 2.x for those values (with a deprecation warning) and is removed in 3.0,
- * where `variant` only selects a style variant.
+ * The `kind` attribute of `<usa-spinner>`, `<usa-check>`, `<usa-dialog>` and
+ * `<usa-acrylic>` (3.0: `variant` only selects a style variant).
  */
 function kindOf(el, valid, fallback) {
-    const ok = (v) => !!v && (Array.isArray(valid) ? valid.includes(v) : v in valid);
     const k = el.getAttribute('kind');
-    if (ok(k))
-        return k;
-    const v = el.getAttribute('variant');
-    if (ok(v)) {
-        deprecate(`kind:${el.localName}`, `<${el.localName} variant="${v}"> is deprecated, use kind="${v}" (variant is reserved for style variants and stops selecting the kind in 3.0).`);
-        return v;
-    }
-    return fallback;
+    return k && (Array.isArray(valid) ? valid.includes(k) : k in valid) ? k : fallback;
 }
 const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
 
-exports.EASE_OUT = EASE_OUT;
-exports.EASE_SPRING = EASE_SPRING;
-exports.FLUENT_DECELERATE = FLUENT_DECELERATE;
-exports.MOTION_SCALE = MOTION_SCALE;
-exports.adoptStyles = adoptStyles;
-exports.applyFrame = applyFrame;
-exports.caf = caf;
-exports.canDefine = canDefine;
-exports.clamp = clamp;
-exports.configureComponents = configureComponents;
-exports.defineElement = defineElement;
-exports.getMotionIntensity = getMotionIntensity;
-exports.kindOf = kindOf;
-exports.motionScale = motionScale;
-exports.now = now;
-exports.prefersReducedMotion = prefersReducedMotion;
-exports.raf = raf;
-exports.shadowStyles = shadowStyles;
-exports.srText = srText;
-//# sourceMappingURL=base-BkQcvoSG.cjs.map
+export { EASE_SPRING as E, FLUENT_DECELERATE as F, MOTION_SCALE as M, configureComponents as a, applyFrame as b, canDefine as c, caf as d, adoptStyles as e, defineElement as f, getMotionIntensity as g, clamp as h, EASE_OUT as i, srText as j, kindOf as k, motionScale as m, now as n, prefersReducedMotion as p, raf as r, shadowStyles as s };
+//# sourceMappingURL=base-Co98Z2iM.js.map

@@ -1,6 +1,6 @@
 'use strict';
 
-var core = require('./core-C1cEwjJj.cjs');
+var core = require('./core-qpECfEkb.cjs');
 
 /**
  * use-scroll-animate - Staggered children
@@ -83,4 +83,4 @@ function staggerChildren(container, options = {}, instance) {
 }
 
 exports.staggerChildren = staggerChildren;
-//# sourceMappingURL=stagger-DtKKS6GP.cjs.map
+//# sourceMappingURL=stagger-CLc3j58T.cjs.map

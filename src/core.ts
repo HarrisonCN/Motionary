@@ -9,7 +9,6 @@ import type {
   AnimatedElement,
   ScrollAnimateConfig,
   ScrollAnimateInstance,
-  ParallaxOptions,
 } from './types';
 import { resolvePreset, resolveEasing } from './presets';
 
@@ -94,12 +93,6 @@ function num(value: string | undefined): number | undefined {
   return Number.isFinite(n) ? n : undefined;
 }
 
-/** Numeric strings ("100") become numbers (px); strings with units stay as-is. */
-function lengthValue(value: string | undefined): string | number | undefined {
-  if (value === undefined || value.trim() === '') return undefined;
-  const v = value.trim();
-  return /^-?(\d+\.?\d*|\.\d+)$/.test(v) ? parseFloat(v) : v;
-}
 
 const DEFAULT_PROGRESS_VAR = '--sa-progress';
 const DEFAULT_VIEW_RANGE: [string, string] = ['entry 0%', 'entry 100%'];
@@ -168,20 +161,6 @@ export function readOptions(get: (name: string) => string | undefined): AnimateO
   const progress = get('progress');
   if (progress) opts.progressMode = progress.trim() === 'scroll' ? 'scroll' : 'ratio';
 
-  const px = get('parallax-x');
-  const py = get('parallax-y');
-  const pr = get('parallax-rotate');
-  const ps = get('parallax-scale');
-  if (px || py || pr || ps) {
-    opts.parallax = {
-      x: lengthValue(px),
-      y: lengthValue(py),
-      rotate: num(pr),
-      scale: num(ps),
-      speed: num(get('parallax-speed')) ?? 1,
-    };
-  }
-
   // Drop keys that were not set, so they don't override defaults when spread.
   (Object.keys(opts) as Array<keyof AnimateOptions>).forEach((k) => opts[k] === undefined && delete opts[k]);
   return opts;
@@ -217,7 +196,6 @@ function mergeOptions(opts: AnimateOptions, config: Required<ScrollAnimateConfig
     once: opts.once ?? (repeat ? false : config.defaultOnce),
     offset: opts.offset ?? config.defaultOffset,
     stagger: opts.stagger ?? 0,
-    parallax: warnLegacyParallax(opts.parallax) ?? {},
     onStart: opts.onStart ?? noop,
     onComplete: opts.onComplete ?? noop,
     onEnter: opts.onEnter ?? noop,
@@ -258,12 +236,8 @@ export function applyOffset(rootMargin: string, offset: number): string {
   return `${top} ${right} ${base - offset}px ${left}`;
 }
 
-function hasParallax(p: ParallaxOptions | undefined): boolean {
-  return !!p && Object.keys(p).some((k) => (p as Record<string, unknown>)[k] !== undefined);
-}
-
 function needsProgress(opts: Required<AnimateOptions>): boolean {
-  return hasParallax(opts.parallax) || opts.onProgress !== noop || !!opts.progressVar;
+  return opts.onProgress !== noop || !!opts.progressVar;
 }
 
 /**
@@ -561,30 +535,6 @@ function startNative(el: Element, opts: Required<AnimateOptions>, onFrozen?: () 
   return anim;
 }
 
-let parallaxWarned = false;
-/** 2.9: the transform-based `parallax` option is deprecated (removed in 3.0). */
-function warnLegacyParallax<T>(p: T): T {
-  if (p && !parallaxWarned && typeof console !== 'undefined' && Object.keys(p as object).length) {
-    parallaxWarned = true;
-    console.warn('[use-scroll-animate] The `parallax` option / data-sa-parallax-* attributes are deprecated and removed in 3.0. Use parallax(el, { speed }) or progressVar instead.');
-  }
-  return p;
-}
-
-function applyParallax(el: Element, progress: number, parallax: ParallaxOptions): void {
-  const { x = 0, y = 0, rotate = 0, scale = 1, speed = 1 } = parallax;
-  const p = (progress - 0.5) * 2 * speed;
-  const axis = (v: string | number) => (typeof v === 'number' ? `${v * p}px` : `calc(${v} * ${p})`);
-
-  let transform = '';
-  if (x) transform += ` translateX(${axis(x)})`;
-  if (y) transform += ` translateY(${axis(y)})`;
-  if (rotate) transform += ` rotate(${rotate * p}deg)`;
-  if (scale !== 1) transform += ` scale(${1 + (scale - 1) * p})`;
-
-  (el as HTMLElement).style.transform = transform.trim();
-}
-
 /** Play the exit animation (entrance or `exit` preset, reversed), ending hidden. */
 function runExit(el: Element, opts: Required<AnimateOptions>, config: Required<ScrollAnimateConfig>): void {
   if (config.useClassNames || typeof el.animate !== 'function') {
@@ -702,7 +652,6 @@ export function createScrollAnimate(userConfig: ScrollAnimateConfig = {}): Scrol
       const style = (el as HTMLElement).style;
       if (style) style.setProperty(opts.progressVar, String(+progress.toFixed(4)));
     }
-    if (hasParallax(opts.parallax) && !motionDisabled(config)) applyParallax(el, progress, opts.parallax);
   }
 
   function update(): void {
