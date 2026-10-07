@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * use-scroll-animate - Animation Presets
  * Defines keyframes for all built-in animation presets
@@ -138,9 +140,8 @@ const PRESETS = {
     },
 };
 function resolvePreset(animation) {
-    var _a;
     if (typeof animation === 'string') {
-        return (_a = PRESETS[animation.trim()]) !== null && _a !== void 0 ? _a : PRESETS['fade-in-up'];
+        return PRESETS[animation.trim()] ?? PRESETS['fade-in-up'];
     }
     if (Array.isArray(animation)) {
         const combined = { from: {}, to: {} };
@@ -181,9 +182,8 @@ const EASING_MAP = {
     'heavy-bounce': 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
 };
 function resolveEasing(easing) {
-    var _a;
     if (typeof easing === 'string') {
-        return (_a = EASING_MAP[easing]) !== null && _a !== void 0 ? _a : easing;
+        return EASING_MAP[easing] ?? easing;
     }
     if (Array.isArray(easing)) {
         return `cubic-bezier(${easing.join(', ')})`;
@@ -217,6 +217,7 @@ const DEFAULT_CONFIG = {
     disabled: false,
     root: null,
     autoUnregister: true,
+    defaultEngine: 'auto',
 };
 const noop = () => undefined;
 /* ------------------------------------------------------------------ */
@@ -236,6 +237,23 @@ function prefersReducedMotion() {
     }
     return !!reducedMotionQuery && reducedMotionQuery.matches;
 }
+let scrollTimelineSupported;
+/**
+ * Whether the browser can run presets on a native scroll-driven timeline:
+ * `CSS.supports('animation-timeline: view()')` plus the `ViewTimeline`
+ * constructor used to attach it from JavaScript. Cached. SSR-safe.
+ */
+function supportsScrollTimeline() {
+    if (scrollTimelineSupported === undefined) {
+        scrollTimelineSupported =
+            hasDOM() &&
+                typeof CSS !== 'undefined' &&
+                typeof CSS.supports === 'function' &&
+                CSS.supports('animation-timeline: view()') &&
+                typeof globalThis.ViewTimeline === 'function';
+    }
+    return scrollTimelineSupported;
+}
 /* ------------------------------------------------------------------ */
 /* Option parsing                                                      */
 /* ------------------------------------------------------------------ */
@@ -253,6 +271,7 @@ function lengthValue(value) {
     return /^-?(\d+\.?\d*|\.\d+)$/.test(v) ? parseFloat(v) : v;
 }
 const DEFAULT_PROGRESS_VAR = '--sa-progress';
+const DEFAULT_VIEW_RANGE = ['entry 0%', 'entry 100%'];
 /** `''` (bare attribute) -> default name; `sa-progress` -> `--sa-progress`. */
 function normalizeVar(name) {
     const v = name.trim();
@@ -260,23 +279,28 @@ function normalizeVar(name) {
         return DEFAULT_PROGRESS_VAR;
     return v.startsWith('--') ? v : `--${v}`;
 }
-function parseDataAttributes(el, config) {
-    var _a;
-    const dataset = el.dataset || {};
+/**
+ * @internal Read options from string attributes. `get(name)` returns the raw
+ * value of the attribute `name` (kebab-case, e.g. `root-margin`), `''` for a
+ * bare attribute and `undefined` when absent. Shared by `data-sa-*` and the
+ * `<scroll-animate>` element.
+ */
+function readOptions(get) {
     const opts = {};
-    if (dataset.saAnimation) {
-        const anim = dataset.saAnimation;
+    const anim = get('animation');
+    if (anim) {
         opts.animation = (anim.includes(',') ? anim.split(',').map((s) => s.trim()) : anim.trim());
     }
-    opts.duration = num(dataset.saDuration);
-    opts.delay = num(dataset.saDelay);
-    if (dataset.saEasing) {
-        const e = dataset.saEasing.trim();
+    opts.duration = num(get('duration'));
+    opts.delay = num(get('delay'));
+    const easing = get('easing');
+    if (easing) {
+        const e = easing.trim();
         if (e.startsWith('[')) {
             try {
                 opts.easing = JSON.parse(e);
             }
-            catch (_b) {
+            catch {
                 // Malformed JSON: fall back to the default easing instead of throwing
             }
         }
@@ -284,58 +308,95 @@ function parseDataAttributes(el, config) {
             opts.easing = e;
         }
     }
-    if (dataset.saThreshold) {
-        const t = dataset.saThreshold;
-        opts.threshold = t.includes(',')
-            ? t.split(',').map(parseFloat).filter(Number.isFinite)
-            : num(t);
+    const t = get('threshold');
+    if (t) {
+        opts.threshold = t.includes(',') ? t.split(',').map(parseFloat).filter(Number.isFinite) : num(t);
     }
-    if (dataset.saRootMargin)
-        opts.rootMargin = dataset.saRootMargin;
-    if (dataset.saRepeat !== undefined)
-        opts.repeat = dataset.saRepeat !== 'false';
-    if (dataset.saOnce !== undefined)
-        opts.once = dataset.saOnce !== 'false';
-    opts.offset = num(dataset.saOffset);
-    opts.stagger = num(dataset.saStagger);
-    if (dataset.saProgressVar !== undefined)
-        opts.progressVar = normalizeVar(dataset.saProgressVar);
-    if (dataset.saProgress)
-        opts.progressMode = dataset.saProgress.trim() === 'scroll' ? 'scroll' : 'ratio';
-    if (dataset.saParallaxX || dataset.saParallaxY || dataset.saParallaxRotate || dataset.saParallaxScale) {
+    const rootMargin = get('root-margin');
+    if (rootMargin)
+        opts.rootMargin = rootMargin;
+    const repeat = get('repeat');
+    if (repeat !== undefined)
+        opts.repeat = repeat !== 'false';
+    const once = get('once');
+    if (once !== undefined)
+        opts.once = once !== 'false';
+    opts.offset = num(get('offset'));
+    opts.stagger = num(get('stagger'));
+    const progressVar = get('progress-var');
+    if (progressVar !== undefined)
+        opts.progressVar = normalizeVar(progressVar);
+    const engine = get('engine')?.trim();
+    if (engine === 'auto' || engine === 'js' || engine === 'css')
+        opts.engine = engine;
+    const range = get('view-range');
+    if (range) {
+        const [start, end] = range.split(',').map((s) => s.trim());
+        if (start && end)
+            opts.viewRange = [start, end];
+    }
+    const exit = get('exit');
+    if (exit !== undefined) {
+        const e = exit.trim();
+        opts.exit = e === '' || e === 'true' ? true : e === 'false' ? false : (e.includes(',') ? e.split(',').map((s) => s.trim()) : e);
+    }
+    const progress = get('progress');
+    if (progress)
+        opts.progressMode = progress.trim() === 'scroll' ? 'scroll' : 'ratio';
+    const px = get('parallax-x');
+    const py = get('parallax-y');
+    const pr = get('parallax-rotate');
+    const ps = get('parallax-scale');
+    if (px || py || pr || ps) {
         opts.parallax = {
-            x: lengthValue(dataset.saParallaxX),
-            y: lengthValue(dataset.saParallaxY),
-            rotate: num(dataset.saParallaxRotate),
-            scale: num(dataset.saParallaxScale),
-            speed: (_a = num(dataset.saParallaxSpeed)) !== null && _a !== void 0 ? _a : 1,
+            x: lengthValue(px),
+            y: lengthValue(py),
+            rotate: num(pr),
+            scale: num(ps),
+            speed: num(get('parallax-speed')) ?? 1,
         };
     }
-    return mergeOptions(opts, config);
+    // Drop keys that were not set, so they don't override defaults when spread.
+    Object.keys(opts).forEach((k) => opts[k] === undefined && delete opts[k]);
+    return opts;
+}
+function parseDataAttributes(el, config) {
+    return mergeOptions(readOptions((name) => {
+        const v = el.getAttribute(`data-sa-${name}`);
+        return v === null ? undefined : v;
+    }), config);
 }
 function mergeOptions(opts, config) {
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s;
-    const repeat = (_a = opts.repeat) !== null && _a !== void 0 ? _a : config.defaultRepeat;
-    const threshold = (_b = opts.threshold) !== null && _b !== void 0 ? _b : config.defaultThreshold;
+    let engine = opts.engine ?? config.defaultEngine;
+    // 'auto' keeps time-based semantics when the element asks for them explicitly.
+    if (engine === 'auto' && (opts.duration !== undefined || opts.delay !== undefined || opts.offset !== undefined || (opts.stagger ?? 0) > 0)) {
+        engine = 'js';
+    }
+    const exit = opts.exit ?? false;
+    const repeat = opts.repeat ?? (exit ? true : config.defaultRepeat);
+    const threshold = opts.threshold ?? config.defaultThreshold;
     return {
-        animation: (_c = opts.animation) !== null && _c !== void 0 ? _c : config.defaultAnimation,
-        duration: (_d = opts.duration) !== null && _d !== void 0 ? _d : config.defaultDuration,
-        delay: (_e = opts.delay) !== null && _e !== void 0 ? _e : config.defaultDelay,
-        easing: (_f = opts.easing) !== null && _f !== void 0 ? _f : config.defaultEasing,
+        animation: opts.animation ?? config.defaultAnimation,
+        duration: opts.duration ?? config.defaultDuration,
+        delay: opts.delay ?? config.defaultDelay,
+        easing: opts.easing ?? config.defaultEasing,
         threshold: Array.isArray(threshold) && threshold.length === 0 ? config.defaultThreshold : threshold,
-        rootMargin: (_g = opts.rootMargin) !== null && _g !== void 0 ? _g : config.defaultRootMargin,
+        rootMargin: opts.rootMargin ?? config.defaultRootMargin,
         repeat,
-        once: (_h = opts.once) !== null && _h !== void 0 ? _h : (repeat ? false : config.defaultOnce),
-        offset: (_j = opts.offset) !== null && _j !== void 0 ? _j : config.defaultOffset,
-        stagger: (_k = opts.stagger) !== null && _k !== void 0 ? _k : 0,
-        parallax: (_l = opts.parallax) !== null && _l !== void 0 ? _l : {},
-        onStart: (_m = opts.onStart) !== null && _m !== void 0 ? _m : noop,
-        onComplete: (_o = opts.onComplete) !== null && _o !== void 0 ? _o : noop,
-        onEnter: (_p = opts.onEnter) !== null && _p !== void 0 ? _p : noop,
-        onLeave: (_q = opts.onLeave) !== null && _q !== void 0 ? _q : noop,
-        onProgress: (_r = opts.onProgress) !== null && _r !== void 0 ? _r : noop,
-        progressMode: (_s = opts.progressMode) !== null && _s !== void 0 ? _s : 'ratio',
+        once: opts.once ?? (repeat ? false : config.defaultOnce),
+        offset: opts.offset ?? config.defaultOffset,
+        stagger: opts.stagger ?? 0,
+        parallax: opts.parallax ?? {},
+        onStart: opts.onStart ?? noop,
+        onComplete: opts.onComplete ?? noop,
+        onEnter: opts.onEnter ?? noop,
+        onLeave: opts.onLeave ?? noop,
+        onProgress: opts.onProgress ?? noop,
+        progressMode: opts.progressMode ?? 'ratio',
         progressVar: opts.progressVar ? normalizeVar(opts.progressVar) : '',
+        engine,
+        viewRange: opts.viewRange ?? DEFAULT_VIEW_RANGE,
+        exit,
     };
 }
 function resolveTargets(target) {
@@ -356,14 +417,13 @@ function resolveTargets(target) {
  * @internal
  */
 function applyOffset(rootMargin, offset) {
-    var _a, _b, _c;
     if (!offset)
         return rootMargin;
     const parts = (rootMargin || '0px').trim().split(/\s+/);
     const top = parts[0];
-    const right = (_a = parts[1]) !== null && _a !== void 0 ? _a : top;
-    const bottom = (_b = parts[2]) !== null && _b !== void 0 ? _b : top;
-    const left = (_c = parts[3]) !== null && _c !== void 0 ? _c : right;
+    const right = parts[1] ?? top;
+    const bottom = parts[2] ?? top;
+    const left = parts[3] ?? right;
     const m = /^(-?\d*\.?\d+)(px)?$/.exec(bottom);
     const base = m ? parseFloat(m[1]) : 0; // non-px bottoms (e.g. %) cannot be combined; offset wins
     return `${top} ${right} ${base - offset}px ${left}`;
@@ -401,8 +461,15 @@ function getScrollProgress(el, root) {
 /* ------------------------------------------------------------------ */
 /** The animation currently running on an element, so it can be cancelled/replaced. */
 const running = new WeakMap();
+/** Native engine: the scroll-linked exit animation, next to the entrance in `running`. */
+const exits = new WeakMap();
 const timers = new WeakMap();
 function cancelRunning(el) {
+    const exitAnim = exits.get(el);
+    if (exitAnim) {
+        exits.delete(el);
+        exitAnim.cancel();
+    }
     const anim = running.get(el);
     if (anim) {
         running.delete(el);
@@ -513,7 +580,7 @@ function stopAnimation(el, config = {}) {
 function motionDisabled(config) {
     return !!config.disabled || prefersReducedMotion();
 }
-function runAnimation(el, opts, config, staggerIndex = 0) {
+function runAnimation(el, opts, config, staggerIndex = 0, pending) {
     const { duration, delay, stagger, onStart, onComplete } = opts;
     const totalDelay = Math.max(0, delay + staggerIndex * stagger);
     cancelRunning(el);
@@ -529,8 +596,10 @@ function runAnimation(el, opts, config, staggerIndex = 0) {
         el.classList.remove(config.hiddenClass);
         el.classList.add(config.visibleClass);
         onStart(el);
+        pending?.add(el);
         timers.set(el, setTimeout(() => {
             timers.delete(el);
+            pending?.delete(el);
             onComplete(el);
         }, duration + totalDelay));
         return;
@@ -555,7 +624,7 @@ function runAnimation(el, opts, config, staggerIndex = 0) {
     try {
         anim = el.animate(built.keyframes, timing);
     }
-    catch (_a) {
+    catch {
         // Invalid user easing string (WAAPI throws a TypeError): fall back to 'ease'
         anim = el.animate(built.keyframes, { ...timing, easing: 'ease' });
     }
@@ -570,13 +639,76 @@ function runAnimation(el, opts, config, staggerIndex = 0) {
             try {
                 anim.commitStyles();
             }
-            catch (_a) {
+            catch {
                 setStyles(el, preset.to);
             }
             anim.cancel();
         }
         onComplete(el);
     };
+}
+/**
+ * Native engine: attach the preset to a `ViewTimeline` of the element, so the
+ * browser drives it from scroll position. Returns `null` when that fails
+ * (caller falls back to the JS engine).
+ */
+function startNative(el, opts, onFrozen) {
+    if (typeof el.animate !== 'function')
+        return null;
+    const preset = resolvePreset(opts.animation);
+    const built = buildAnimation(preset, opts.easing);
+    let anim;
+    try {
+        const timeline = new globalThis.ViewTimeline({ subject: el, axis: 'block' });
+        const timing = {
+            fill: 'both',
+            easing: built.easing,
+            timeline,
+            rangeStart: opts.viewRange[0],
+            rangeEnd: opts.viewRange[1],
+        };
+        try {
+            anim = el.animate(built.keyframes, timing);
+        }
+        catch {
+            anim = el.animate(built.keyframes, { ...timing, easing: 'linear' });
+        }
+    }
+    catch {
+        return null;
+    }
+    running.set(el, anim);
+    if (opts.exit) {
+        // Reverse keyframes over the `exit` range; `fill: 'forwards'` so it has
+        // no effect before the element starts leaving.
+        const leave = resolvePreset(opts.exit === true ? opts.animation : opts.exit);
+        const out = buildAnimation({ from: leave.to, to: leave.from }, opts.easing);
+        try {
+            const timeline = new globalThis.ViewTimeline({ subject: el, axis: 'block' });
+            const timing = { fill: 'forwards', easing: out.easing, timeline, rangeStart: 'exit 0%', rangeEnd: 'exit 100%' };
+            exits.set(el, el.animate(out.keyframes, timing));
+        }
+        catch {
+            // Exit is cosmetic: ignore if unsupported.
+        }
+    }
+    const keep = opts.repeat || !opts.once;
+    anim.onfinish = () => {
+        // `once`: freeze the end state, so scrolling back up does not reverse it.
+        if (!keep && running.get(el) === anim) {
+            running.delete(el);
+            try {
+                anim.commitStyles();
+            }
+            catch {
+                setStyles(el, preset.to);
+            }
+            anim.cancel();
+            onFrozen?.();
+        }
+        opts.onComplete(el);
+    };
+    return anim;
 }
 function applyParallax(el, progress, parallax) {
     const { x = 0, y = 0, rotate = 0, scale = 1, speed = 1 } = parallax;
@@ -592,6 +724,26 @@ function applyParallax(el, progress, parallax) {
     if (scale !== 1)
         transform += ` scale(${1 + (scale - 1) * p})`;
     el.style.transform = transform.trim();
+}
+/** Play the exit animation (entrance or `exit` preset, reversed), ending hidden. */
+function runExit(el, opts, config) {
+    if (config.useClassNames || typeof el.animate !== 'function') {
+        hideElement(el, config);
+        return;
+    }
+    cancelRunning(el);
+    const preset = resolvePreset(opts.exit === true ? opts.animation : opts.exit);
+    const built = buildAnimation({ from: preset.to, to: preset.from }, opts.easing);
+    const timing = { duration: opts.duration, easing: built.easing, fill: 'forwards' };
+    let anim;
+    try {
+        anim = el.animate(built.keyframes, timing);
+    }
+    catch {
+        anim = el.animate(built.keyframes, { ...timing, easing: 'ease' });
+    }
+    // Kept (filling) until the next entrance cancels it.
+    running.set(el, anim);
 }
 function hideElement(el, config) {
     cancelRunning(el);
@@ -635,6 +787,10 @@ function createScrollAnimate(userConfig = {}) {
     let listening = null;
     // Active watch() MutationObservers, disconnected by destroy().
     const watchers = new Set();
+    // Elements with a pending class-name completion timer started by this instance.
+    const pending = new Set();
+    // Elements whose entrance runs on a native scroll-driven timeline.
+    const natives = new Set();
     // Observers are shared between elements with the same root/threshold/rootMargin,
     // instead of one (or two) IntersectionObservers per element.
     const pools = new Map();
@@ -648,14 +804,22 @@ function createScrollAnimate(userConfig = {}) {
         return io;
     }
     function teardown(el, restore) {
-        var _a;
         const record = registry.get(el);
         if (!record)
             return;
         record.observer.unobserve(el);
-        (_a = record.progressObserver) === null || _a === void 0 ? void 0 : _a.unobserve(el);
+        record.progressObserver?.unobserve(el);
         registry.delete(el);
         untrack(el);
+        if (record.engine === 'css') {
+            // A scroll-linked animation would keep following the scroll: stop it and
+            // show the element (unless it finished and is just being released).
+            if (restore) {
+                natives.delete(el);
+                reveal(el, config);
+            }
+            return;
+        }
         // An element that never animated would otherwise stay invisible forever.
         if (restore && !record.animated)
             reveal(el, config);
@@ -724,7 +888,6 @@ function createScrollAnimate(userConfig = {}) {
     function onIntersect(entries) {
         const staggerCounts = new Map();
         entries.forEach((entry) => {
-            var _a;
             const el = entry.target;
             const record = registry.get(el);
             if (!record)
@@ -732,6 +895,29 @@ function createScrollAnimate(userConfig = {}) {
             const opts = record.options;
             if (el.isConnected === false) {
                 teardown(el, false);
+                return;
+            }
+            if (record.engine === 'css') {
+                // The browser drives the animation; only lifecycle bookkeeping here.
+                if (entry.isIntersecting) {
+                    opts.onEnter(el);
+                    if (!record.animated) {
+                        record.animated = true;
+                        opts.onStart(el);
+                    }
+                    if (opts.once && !opts.repeat) {
+                        record.observer.unobserve(el);
+                        if (config.autoUnregister && !record.progressObserver) {
+                            finished.add(el);
+                            teardown(el, false);
+                        }
+                    }
+                }
+                else {
+                    opts.onLeave(el);
+                    if (opts.repeat)
+                        record.animated = false;
+                }
                 return;
             }
             if (entry.isIntersecting) {
@@ -743,10 +929,10 @@ function createScrollAnimate(userConfig = {}) {
                 let staggerIndex = 0;
                 if (opts.stagger > 0) {
                     const parent = el.parentElement;
-                    staggerIndex = (_a = staggerCounts.get(parent)) !== null && _a !== void 0 ? _a : 0;
+                    staggerIndex = staggerCounts.get(parent) ?? 0;
                     staggerCounts.set(parent, staggerIndex + 1);
                 }
-                runAnimation(el, opts, config, staggerIndex);
+                runAnimation(el, opts, config, staggerIndex, pending);
                 record.animated = true;
                 if (opts.once && !opts.repeat) {
                     // Keep the progress observer: parallax/onProgress must keep working.
@@ -762,8 +948,12 @@ function createScrollAnimate(userConfig = {}) {
             else {
                 opts.onLeave(el);
                 if (opts.repeat && record.animated) {
-                    if (!motionDisabled(config))
-                        hideElement(el, config);
+                    if (!motionDisabled(config)) {
+                        if (opts.exit)
+                            runExit(el, opts, config);
+                        else
+                            hideElement(el, config);
+                    }
                     record.animated = false;
                 }
             }
@@ -797,12 +987,14 @@ function createScrollAnimate(userConfig = {}) {
         }));
     }
     function attach(el, record, observeMain) {
-        var _a;
         record.observer = getObserver(record.options);
         if (observeMain)
             record.observer.observe(el);
         record.progressObserver = needsProgress(record.options) ? getProgressObserver(record.options) : undefined;
-        (_a = record.progressObserver) === null || _a === void 0 ? void 0 : _a.observe(el);
+        record.progressObserver?.observe(el);
+    }
+    function wantsNative(opts) {
+        return opts.engine !== 'js' && !config.useClassNames && !motionDisabled(config) && supportsScrollTimeline();
     }
     function observeElement(el, opts) {
         if (registry.has(el) || finished.has(el))
@@ -812,9 +1004,16 @@ function createScrollAnimate(userConfig = {}) {
             reveal(el, config);
             return;
         }
-        if (!motionDisabled(config))
+        const record = { element: el, options: opts, animated: false, engine: 'js' };
+        if (wantsNative(opts)) {
+            cancelRunning(el);
+            if (startNative(el, opts, () => natives.delete(el))) {
+                record.engine = 'css';
+                natives.add(el);
+            }
+        }
+        if (record.engine === 'js' && !motionDisabled(config))
             hideElement(el, config);
-        const record = { element: el, options: opts, animated: false };
         registry.set(el, record);
         attach(el, record, true);
     }
@@ -835,14 +1034,14 @@ function createScrollAnimate(userConfig = {}) {
             });
         },
         init(rootElement) {
-            const scope = rootElement !== null && rootElement !== void 0 ? rootElement : (hasDOM() ? document : null);
+            const scope = rootElement ?? (hasDOM() ? document : null);
             if (!scope)
                 return;
             pruneDetached();
             scope.querySelectorAll('[data-sa]').forEach(observeDataElement);
         },
         watch(rootElement) {
-            const scope = rootElement !== null && rootElement !== void 0 ? rootElement : (hasDOM() ? document : null);
+            const scope = rootElement ?? (hasDOM() ? document : null);
             if (!scope || typeof MutationObserver === 'undefined')
                 return noop;
             instance.init(scope);
@@ -881,10 +1080,25 @@ function createScrollAnimate(userConfig = {}) {
         destroy() {
             watchers.forEach((mo) => mo.disconnect());
             watchers.clear();
+            // Class-name mode: drop completion timers so onComplete never fires after destroy().
+            pending.forEach((el) => {
+                const timer = timers.get(el);
+                if (timer !== undefined) {
+                    clearTimeout(timer);
+                    timers.delete(el);
+                }
+            });
+            pending.clear();
             registry.forEach((record, el) => {
-                if (!record.animated)
+                if (!record.animated && record.engine !== 'css')
                     reveal(el, config);
             });
+            // Native scroll-linked animations still running: stop them, show content.
+            natives.forEach((el) => {
+                if (running.has(el))
+                    reveal(el, config);
+            });
+            natives.clear();
             pools.forEach((pool) => pool.forEach((io) => io.disconnect()));
             pools.clear();
             registry.clear();
@@ -909,7 +1123,7 @@ function createScrollAnimate(userConfig = {}) {
         },
         animate(target, options = {}) {
             const opts = mergeOptions(options, config);
-            resolveTargets(target).forEach((el) => runAnimation(el, opts, config, 0));
+            resolveTargets(target).forEach((el) => runAnimation(el, opts, config, 0, pending));
         },
         getObservedElements() {
             return Array.from(registry.values());
@@ -921,329 +1135,18 @@ function createScrollAnimate(userConfig = {}) {
     return instance;
 }
 
-/**
- * use-scroll-animate - Staggered children
- * Reveal a container's children one after another when the container scrolls
- * into view, optionally also animating children that are added later.
- */
-let fallback$1 = null;
-/**
- * Animate the children of `container` with a stagger once it enters the
- * viewport. Returns a cleanup function. SSR-safe (no-op without a DOM).
- *
- * @example
- * const stop = staggerChildren(document.querySelector('ul'), { stagger: 60, observeChildren: true });
- */
-function staggerChildren(container, options = {}, instance) {
-    if (!container || !hasDOM() || !supportsObserver())
-        return () => undefined; // leave content visible
-    const sa = instance || fallback$1 || (fallback$1 = createScrollAnimate());
-    const { stagger = 80, delay = 0, threshold = 0.1, rootMargin = '0px', observeChildren = false, ...rest } = options;
-    let items = Array.from(container.children);
-    let revealed = false;
-    const late = [];
-    items.forEach((child) => prepareElement(child));
-    const io = new IntersectionObserver((entries) => {
-        if (revealed || !entries.some((entry) => entry.isIntersecting))
-            return;
-        revealed = true;
-        io.disconnect();
-        items.forEach((child, i) => {
-            if (child.parentNode === container)
-                sa.animate(child, { ...rest, delay: delay + i * stagger });
-        });
-        items = [];
-    }, { threshold, rootMargin });
-    io.observe(container);
-    let mo;
-    if (observeChildren && typeof MutationObserver !== 'undefined') {
-        mo = new MutationObserver((records) => {
-            records.forEach((record) => {
-                record.addedNodes.forEach((node) => {
-                    if (!(node instanceof Element) || node.parentNode !== container)
-                        return;
-                    if (!revealed) {
-                        prepareElement(node);
-                        items.push(node);
-                    }
-                    else {
-                        // The core engine staggers siblings relative to the batch that
-                        // enters the viewport together.
-                        late.push(node);
-                        sa.observe(node, { ...rest, delay, stagger, threshold, rootMargin });
-                    }
-                });
-                record.removedNodes.forEach((node) => {
-                    if (!(node instanceof Element))
-                        return;
-                    items = items.filter((el) => el !== node);
-                    const i = late.indexOf(node);
-                    if (i >= 0) {
-                        late.splice(i, 1);
-                        sa.unobserve(node);
-                    }
-                });
-            });
-        });
-        mo.observe(container, { childList: true });
-    }
-    return () => {
-        io.disconnect();
-        mo === null || mo === void 0 ? void 0 : mo.disconnect();
-        // Stopped before the container was revealed: never leave the children hidden.
-        if (!revealed) {
-            revealed = true;
-            items.forEach((child) => stopAnimation(child));
-            items = [];
-        }
-        late.forEach((el) => sa.unobserve(el));
-        late.length = 0;
-    };
-}
-
-/**
- * use-scroll-animate - Sequence / timeline helper
- * Chain animations on several targets, one after another (or overlapping).
- */
-let fallback = null;
-function plan(steps, defaults) {
-    const out = [];
-    let cursor = 0;
-    steps.forEach((step) => {
-        var _a, _b;
-        const { target, gap = 0, at, ...stepOpts } = step;
-        const opts = { ...defaults, ...stepOpts };
-        const duration = (_a = opts.duration) !== null && _a !== void 0 ? _a : 600;
-        const start = Math.max(0, at !== null && at !== void 0 ? at : cursor + gap) + ((_b = opts.delay) !== null && _b !== void 0 ? _b : 0);
-        let end = Math.max(cursor, start);
-        resolveTargets(target).forEach((el, i) => {
-            var _a;
-            const delay = start + i * ((_a = opts.stagger) !== null && _a !== void 0 ? _a : 0);
-            out.push({ el, opts: { ...opts, duration, delay, stagger: 0 }, end: delay + duration });
-            end = Math.max(end, delay + duration);
-        });
-        cursor = end;
-    });
-    return out;
-}
-/**
- * Build a timeline of animations.
- *
- * @example
- * sequence([
- *   { target: '.title', animation: 'fade-in-up' },
- *   { target: '.subtitle', animation: 'blur-in', gap: -300 },   // overlap by 300ms
- *   { target: '.card', animation: 'scale-up', stagger: 80 },
- * ], { trigger: '.hero' });
- */
-function sequence(steps, options = {}) {
-    var _a, _b;
-    const { trigger, instance, ...defaults } = options;
-    const sa = () => instance || fallback || (fallback = createScrollAnimate());
-    let io;
-    let active = [];
-    let settle;
-    // Targets hidden while waiting for `trigger`; revealed if cancelled before it fires.
-    let prepared = [];
-    const controller = {
-        play() {
-            controller.cancel();
-            if (!hasDOM())
-                return Promise.resolve();
-            active = plan(steps, defaults);
-            return new Promise((resolve) => {
-                let left = active.length;
-                settle = () => {
-                    settle = undefined;
-                    resolve();
-                };
-                if (!left)
-                    return settle();
-                const run = active;
-                run.forEach(({ el, opts }) => {
-                    const done = opts.onComplete;
-                    sa().animate(el, {
-                        ...opts,
-                        onComplete: (node) => {
-                            done === null || done === void 0 ? void 0 : done(node);
-                            if (run === active && --left === 0)
-                                settle === null || settle === void 0 ? void 0 : settle();
-                        },
-                    });
-                });
-            });
-        },
-        cancel() {
-            io === null || io === void 0 ? void 0 : io.disconnect();
-            io = undefined;
-            prepared.forEach((el) => stopAnimation(el));
-            prepared = [];
-            active.forEach(({ el }) => stopAnimation(el));
-            active = [];
-            settle === null || settle === void 0 ? void 0 : settle();
-        },
-        duration() {
-            return plan(steps, defaults).reduce((max, p) => Math.max(max, p.end), 0);
-        },
-    };
-    if (trigger && hasDOM() && supportsObserver()) {
-        const el = resolveTargets(trigger)[0];
-        if (el) {
-            prepared = plan(steps, defaults).map(({ el: target }) => target);
-            prepared.forEach((target) => prepareElement(target));
-            io = new IntersectionObserver((entries) => {
-                if (!entries.some((e) => e.isIntersecting))
-                    return;
-                io === null || io === void 0 ? void 0 : io.disconnect();
-                io = undefined;
-                prepared = []; // play() takes over from here
-                controller.play();
-            }, { threshold: (_a = defaults.threshold) !== null && _a !== void 0 ? _a : 0.1, rootMargin: (_b = defaults.rootMargin) !== null && _b !== void 0 ? _b : '0px' });
-            io.observe(el);
-        }
-    }
-    return controller;
-}
-
-/**
- * use-scroll-animate - React Integration
- * Provides useScrollAnimate and useScrollStagger hooks for React applications.
- * `useScrollStagger({ observeChildren: true })` also animates children added later.
- *
- * Both hooks are thin wrappers around the core engine, so they share its
- * behaviour: `once`, `offset`, custom easing functions, parallax,
- * `prefers-reduced-motion` support, and proper cleanup on unmount.
- */
-const CALLBACKS = ['onStart', 'onComplete', 'onEnter', 'onLeave', 'onProgress'];
-/**
- * Wrap the callbacks that exist at mount so they always call the latest
- * version from the most recent render (avoids stale closures without
- * re-creating observers on every render).
- * @internal
- */
-function withLatestCallbacks(latest) {
-    const initial = latest.current || {};
-    const opts = { ...initial };
-    CALLBACKS.forEach((name) => {
-        if (typeof initial[name] === 'function') {
-            opts[name] = (...args) => { var _a, _b; return (_b = (_a = latest.current) === null || _a === void 0 ? void 0 : _a[name]) === null || _b === void 0 ? void 0 : _b.call(_a, ...args); };
-        }
-    });
-    return opts;
-}
-function createReactHooks(React) {
-    // Created lazily on the client so importing on the server is side-effect free.
-    let instance = null;
-    const getInstance = () => instance || (instance = createScrollAnimate());
-    function useScrollAnimate(options = {}) {
-        const ref = React.useRef(null);
-        const optionsRef = React.useRef(options);
-        optionsRef.current = options;
-        React.useEffect(() => {
-            const el = ref.current;
-            if (!el)
-                return;
-            const sa = getInstance();
-            sa.observe(el, withLatestCallbacks(optionsRef));
-            return () => sa.unobserve(el);
-        }, []);
-        return ref;
-    }
-    function useScrollStagger(options = {}) {
-        const ref = React.useRef(null);
-        const optionsRef = React.useRef(options);
-        optionsRef.current = options;
-        React.useEffect(() => {
-            const container = ref.current;
-            if (!container)
-                return;
-            return staggerChildren(container, withLatestCallbacks(optionsRef), getInstance());
-        }, []);
-        return ref;
-    }
-    return { useScrollAnimate, useScrollStagger };
-}
-
-/**
- * use-scroll-animate - Vue 3 Integration
- * Provides useScrollAnimate and useScrollStagger composables for Vue 3 applications.
- *
- * A thin wrapper around the core engine, so it shares its behaviour: `once`,
- * `offset`, custom easing functions, parallax, `prefers-reduced-motion`
- * support, and cleanup on unmount.
- */
-/** Support refs on components (`$el`) as well as plain elements. */
-function unwrap(value) {
-    if (value && typeof Element !== 'undefined' && !(value instanceof Element) && value.$el instanceof Element) {
-        return value.$el;
-    }
-    return value || null;
-}
-function createVueComposables(Vue) {
-    // Created lazily on the client so importing on the server is side-effect free.
-    let instance = null;
-    const getInstance = () => instance || (instance = createScrollAnimate());
-    function useScrollAnimate(options = {}) {
-        const animateRef = Vue.ref(null);
-        let el = null;
-        Vue.onMounted(() => {
-            const target = unwrap(animateRef.value);
-            if (!target)
-                return;
-            el = target;
-            getInstance().observe(el, options);
-        });
-        Vue.onUnmounted(() => {
-            if (el)
-                getInstance().unobserve(el);
-            el = null;
-        });
-        return { animateRef };
-    }
-    /** Stagger the children of `staggerRef`; `observeChildren: true` also animates children added later. */
-    function useScrollStagger(options = {}) {
-        const staggerRef = Vue.ref(null);
-        let stop;
-        Vue.onMounted(() => {
-            const target = unwrap(staggerRef.value);
-            if (target)
-                stop = staggerChildren(target, options, getInstance());
-        });
-        Vue.onUnmounted(() => {
-            stop === null || stop === void 0 ? void 0 : stop();
-            stop = undefined;
-        });
-        return { staggerRef };
-    }
-    return { useScrollAnimate, useScrollStagger };
-}
-
-/**
- * use-scroll-animate
- *
- * A lightweight, dependency-free scroll animation library for modern web
- * applications. Built with TypeScript, powered by IntersectionObserver and
- * the Web Animations API. Safe to import during SSR.
- *
- * @license MIT
- * @see https://github.com/HarrisonCN/use-scroll-animate
- */
-/**
- * Default singleton instance of ScrollAnimate.
- * Ready to use out of the box with sensible defaults.
- *
- * @example
- * ```js
- * import ScrollAnimate from 'use-scroll-animate';
- *
- * // Auto-initialize all elements with data-sa attribute
- * ScrollAnimate.init();
- *
- * // Or manually observe elements
- * ScrollAnimate.observe('.my-element', { animation: 'fade-in-up' });
- * ```
- */
-const ScrollAnimate = createScrollAnimate();
-
-export { EASING_MAP, PRESETS, createReactHooks, createScrollAnimate, createVueComposables, ScrollAnimate as default, getScrollProgress, resolveEasing, resolvePreset, sequence, staggerChildren };
-//# sourceMappingURL=index.mjs.map
+exports.EASING_MAP = EASING_MAP;
+exports.PRESETS = PRESETS;
+exports.createScrollAnimate = createScrollAnimate;
+exports.getScrollProgress = getScrollProgress;
+exports.hasDOM = hasDOM;
+exports.prefersReducedMotion = prefersReducedMotion;
+exports.prepareElement = prepareElement;
+exports.readOptions = readOptions;
+exports.resolveEasing = resolveEasing;
+exports.resolvePreset = resolvePreset;
+exports.resolveTargets = resolveTargets;
+exports.stopAnimation = stopAnimation;
+exports.supportsObserver = supportsObserver;
+exports.supportsScrollTimeline = supportsScrollTimeline;
+//# sourceMappingURL=core-CH41ekIo.cjs.map

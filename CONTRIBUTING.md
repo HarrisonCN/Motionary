@@ -66,6 +66,14 @@ Enhancement suggestions are tracked as GitHub issues. When you are creating an e
    npm test
    ```
 
+6. After building, check the published entry points and the size budgets:
+   ```bash
+   npm run check:exports
+   npm run size:check   # budgets live in size-budget.json
+   ```
+
+`dist/` is committed only in release PRs; feature PRs leave it untouched.
+
 ## Commit Messages
 
 We follow the [Conventional Commits](https://www.conventionalcommits.org/) specification. Please ensure your commit messages adhere to this format:

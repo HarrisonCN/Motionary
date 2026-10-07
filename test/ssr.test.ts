@@ -58,7 +58,8 @@ describe('SSR (no DOM): side effects and safe fallbacks', () => {
 
   it('React hooks and Vue composables render on the server without touching the DOM', async () => {
     vi.resetModules();
-    const { createReactHooks, createVueComposables } = await import('../src/index');
+    const { createReactHooks } = await import('../src/react');
+    const { createVueComposables } = await import('../src/vue');
     // Server renderers never run effects / mounted hooks.
     const React = { useRef: <T,>(v: T | null) => ({ current: v }), useEffect: vi.fn() };
     const { useScrollAnimate, useScrollStagger } = createReactHooks(React as any);

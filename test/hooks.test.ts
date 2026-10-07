@@ -22,7 +22,7 @@ describe('React hooks', () => {
   it('useScrollAnimate observes, animates, cleans up', async () => {
     vi.resetModules();
     installMocks();
-    const { createReactHooks } = await import('../src/index');
+    const { createReactHooks } = await import('../src/react');
     const React = fakeReact();
     const node = document.createElement('div');
     document.body.appendChild(node);
@@ -46,7 +46,7 @@ describe('React hooks', () => {
   it('useScrollStagger animates children with stagger delay', async () => {
     vi.resetModules();
     installMocks();
-    const { createReactHooks } = await import('../src/index');
+    const { createReactHooks } = await import('../src/react');
     const React = fakeReact();
     const ul = document.createElement('ul');
     ul.innerHTML = '<li></li><li></li><li></li>';
@@ -69,7 +69,7 @@ describe('Vue composable', () => {
   it('observes on mount and unobserves on unmount', async () => {
     vi.resetModules();
     installMocks();
-    const { createVueComposables } = await import('../src/index');
+    const { createVueComposables } = await import('../src/vue');
     let mounted!: () => void;
     let unmounted!: () => void;
     const node = document.createElement('div');

@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { createReactHooks } from 'use-scroll-animate';
+import { createReactHooks } from 'use-scroll-animate/react';
 
 const { useScrollAnimate, useScrollStagger } = createReactHooks(React);
 

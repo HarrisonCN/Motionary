@@ -33,7 +33,7 @@ const DEFAULT_CONFIG: Required<ScrollAnimateConfig> = {
   disabled: false,
   root: null,
   autoUnregister: true,
-  defaultEngine: 'js',
+  defaultEngine: 'auto',
 };
 
 const noop = () => undefined;
@@ -198,6 +198,11 @@ function parseDataAttributes(el: Element, config: Required<ScrollAnimateConfig>)
 }
 
 function mergeOptions(opts: AnimateOptions, config: Required<ScrollAnimateConfig>): Required<AnimateOptions> {
+  let engine = opts.engine ?? config.defaultEngine;
+  // 'auto' keeps time-based semantics when the element asks for them explicitly.
+  if (engine === 'auto' && (opts.duration !== undefined || opts.delay !== undefined || opts.offset !== undefined || (opts.stagger ?? 0) > 0)) {
+    engine = 'js';
+  }
   const exit = opts.exit ?? false;
   const repeat = opts.repeat ?? (exit ? true : config.defaultRepeat);
   const threshold = opts.threshold ?? config.defaultThreshold;
@@ -220,7 +225,7 @@ function mergeOptions(opts: AnimateOptions, config: Required<ScrollAnimateConfig
     onProgress: opts.onProgress ?? noop,
     progressMode: opts.progressMode ?? 'ratio',
     progressVar: opts.progressVar ? normalizeVar(opts.progressVar) : '',
-    engine: opts.engine ?? config.defaultEngine,
+    engine,
     viewRange: opts.viewRange ?? DEFAULT_VIEW_RANGE,
     exit,
   };

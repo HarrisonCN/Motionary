@@ -49,11 +49,13 @@ export type ProgressMode = 'ratio' | 'scroll';
 
 /**
  * Which engine runs the entrance animation.
- * - `'js'` (default in 1.x): IntersectionObserver triggers a time-based Web Animation.
+ * - `'js'`: IntersectionObserver triggers a time-based Web Animation.
  * - `'css'`: the preset runs on the browser's native scroll-driven timeline
  *   (`animation-timeline: view()`), so its progress follows the scroll position
  *   off the main thread. Falls back to `'js'` where unsupported.
- * - `'auto'`: same as `'css'` (native when supported, JS otherwise).
+ * - `'auto'` (default since 2.0): native when supported, JS otherwise — and JS
+ *   whenever the element sets `duration`, `delay`, `offset` or `stagger` itself,
+ *   since those only mean something for a time-based animation.
  */
 export type ScrollEngine = 'auto' | 'js' | 'css';
 
@@ -139,7 +141,7 @@ export interface AnimateOptions {
    */
   progressVar?: string;
   /**
-   * Animation engine (default: `'js'`, see `ScrollEngine`). With the native
+   * Animation engine (default: `'auto'`, see `ScrollEngine`). With the native
    * engine the animation is linked to scroll position: `duration`, `delay`,
    * `threshold`, `offset` and `stagger` do not apply; `viewRange` does.
    */
@@ -197,7 +199,7 @@ export interface ScrollAnimateConfig {
    * never re-hide or replay them. (default: true)
    */
   autoUnregister?: boolean;
-  /** Default animation engine (default: `'js'`) */
+  /** Default animation engine (default: `'auto'`; `'js'` restores the 1.x behaviour) */
   defaultEngine?: ScrollEngine;
 }
 

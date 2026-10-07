@@ -1,6 +1,6 @@
 # API reference
 
-`use-scroll-animate` — every public export, option and attribute. See the [README](../README.md) for a tour, the [demo](../demo/index.html) to try every preset, and the migration guides for [AOS](./migration-from-aos.md) and [GSAP ScrollTrigger](./migration-from-gsap-scrolltrigger.md). Items scheduled for removal are listed in [Deprecations](./deprecations.md).
+`use-scroll-animate` — every public export, option and attribute. See the [README](../README.md) for a tour, the [demo](../demo/index.html) to try every preset, and the migration guides for [AOS](./migration-from-aos.md) and [GSAP ScrollTrigger](./migration-from-gsap-scrolltrigger.md). Upgrading from 1.x: see [Upgrading to 2.0](./deprecations.md).
 
 - [Entry points](#entry-points)
 - [Default instance & `createScrollAnimate(config)`](#default-instance--createscrollanimateconfig)
@@ -26,7 +26,7 @@
 | `dist/index.umd.js` | Global `ScrollAnimate` (`ScrollAnimate.default` is the instance, other exports as properties) |
 | `dist/element.umd.js` | Registers `<scroll-animate>` on load; global `ScrollAnimateElement` |
 
-Every entry is ESM + CommonJS with its own type declarations, SSR-safe (no DOM access at import), and has zero runtime dependencies.
+Every entry is ESM-first (`import` → `.js` + `.d.ts`) with a CommonJS build (`require` → `.cjs` + `.d.cts`), SSR-safe (no DOM access at import), and has zero runtime dependencies.
 
 ## Default instance & `createScrollAnimate(config)`
 
@@ -60,8 +60,8 @@ const sa = createScrollAnimate({ defaultDuration: 800, defaultEngine: 'auto' });
 | Option | Type | Default | Description |
 |---|---|---|---|
 | `animation` | `AnimationPreset \| AnimationPreset[] \| { from, to }` | `'fade-in-up'` | Preset, presets combined (transforms are concatenated), or custom keyframes |
-| `duration` | `number` (ms) | `600` | JS engine only |
-| `delay` | `number` (ms) | `0` | JS engine only |
+| `duration` | `number` (ms) | `600` | JS engine only (setting it makes `'auto'` pick JS) |
+| `delay` | `number` (ms) | `0` | JS engine only (setting it makes `'auto'` pick JS) |
 | `easing` | `EasingType` | `'ease'` | CSS easing string, named easing, `[x1, y1, x2, y2]`, or `(t) => number` (sampled into `linear()`) |
 | `threshold` | `number \| number[]` | `0.1` | IntersectionObserver threshold(s) |
 | `rootMargin` | `string` | `'0px'` | IntersectionObserver root margin |
@@ -70,7 +70,7 @@ const sa = createScrollAnimate({ defaultDuration: 800, defaultEngine: 'auto' });
 | `repeat` | `boolean` | `false` | Re-hide on leave, replay on each entry |
 | `exit` | `boolean \| preset \| preset[] \| { from, to }` | `false` | Animate out (in reverse) when leaving; implies `repeat` |
 | `stagger` | `number` (ms) | `0` | Extra delay per sibling revealed in the same batch |
-| `engine` | `'js' \| 'auto' \| 'css'` | `'js'` | `'auto'`/`'css'`: native scroll-driven timeline when supported, else JS |
+| `engine` | `'auto' \| 'js' \| 'css'` | `'auto'` | `'auto'`: native scroll-driven timeline when supported, else JS — and JS when the element sets `duration`/`delay`/`offset`/`stagger`; `'css'`: native whenever supported; `'js'`: always time-based |
 | `viewRange` | `[string, string]` | `['entry 0%', 'entry 100%']` | Native engine: view-timeline range of the entrance |
 | `parallax` | `{ x?, y?, rotate?, scale?, speed? }` | `{}` | Legacy transform-based parallax (writes `transform`); see also `parallax()` |
 | `progressMode` | `'ratio' \| 'scroll'` | `'ratio'` | `onProgress` source: visible ratio, or true scroll progress (0 = top enters at the bottom, 1 = bottom leaves at the top) |
@@ -92,7 +92,7 @@ Boolean attributes are true when present unless their value is `"false"`.
 | Key | Default | Description |
 |---|---|---|
 | `defaultAnimation`, `defaultDuration`, `defaultDelay`, `defaultEasing`, `defaultThreshold`, `defaultRootMargin`, `defaultRepeat`, `defaultOnce`, `defaultOffset` | as per-element defaults | Defaults for options not set per element |
-| `defaultEngine` | `'js'` | Default `engine` |
+| `defaultEngine` | `'auto'` | Default `engine` (`'js'` = 1.x behaviour) |
 | `useClassNames` | `false` | Toggle `hiddenClass`/`visibleClass` instead of Web Animations (animate with your own CSS) |
 | `hiddenClass` / `visibleClass` | `'sa-hidden'` / `'sa-visible'` | Class names for class-name mode |
 | `disabled` | `false` | Show everything immediately, no motion (callbacks still fire) |
@@ -136,4 +136,4 @@ True scroll progress 0–1 of `el` through the viewport or `root`. `0` without a
 - **SSR**: every entry can be imported and called on the server; calls are no-ops without a DOM.
 - **No IntersectionObserver**: content is shown immediately.
 - **Native engine**: scroll-linked, so `duration`/`delay`/`threshold`/`offset`/`stagger` don't apply; `once` freezes the end state on completion; class-name mode, reduced motion, `animate()`, `sequence()` and `staggerChildren()` always use JS.
-- **Deprecation warnings** are printed once per API in development builds only (`process.env.NODE_ENV !== 'production'`, replaced by your bundler); unbundled `<script>` usage never logs.
+- **Native engine by default**: in browsers without `animation-timeline: view()` everything runs on the JS engine.

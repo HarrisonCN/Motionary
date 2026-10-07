@@ -1,0 +1,54 @@
+name: Bug report
+description: Something doesn't animate, animates wrongly, or throws
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for reporting! A minimal reproduction (CodePen, StackBlitz or a small repo) makes fixes much faster.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What you did, what you expected, and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction
+      description: Link or code snippet (options / data attributes used).
+      render: html
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: use-scroll-animate version
+      placeholder: 2.0.0
+    validations:
+      required: true
+  - type: dropdown
+    id: entry
+    attributes:
+      label: Entry point
+      multiple: true
+      options: [vanilla / data-sa, React, Vue, Svelte, Solid, "<scroll-animate> Web Component", UMD / CDN]
+  - type: dropdown
+    id: engine
+    attributes:
+      label: Engine
+      options: ["auto (default)", js, css, "don't know"]
+  - type: input
+    id: browser
+    attributes:
+      label: Browser(s) and OS
+      placeholder: Chrome 130 on macOS 15; Safari 18 on iOS
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I checked whether `prefers-reduced-motion` is enabled (animations are skipped on purpose then).
+        - label: I searched existing issues.

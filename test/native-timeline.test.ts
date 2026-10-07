@@ -44,9 +44,29 @@ describe('engine option (native scroll-driven timeline)', () => {
     expect(mod.supportsScrollTimeline()).toBe(false);
   });
 
-  it("defaults to the JS engine in 1.x even when native is supported", async () => {
+  it("defaults to 'auto' since 2.0: native when supported", async () => {
     const { createScrollAnimate } = await load();
     const sa = createScrollAnimate();
+    const node = el();
+    sa.observe(node, { animation: 'fade-in' });
+    expect(animations).toHaveLength(1);
+    expect(sa.getObservedElements()[0].engine).toBe('css');
+  });
+
+  it("'auto' uses JS when the element sets duration, delay, offset or stagger; 'css' does not", async () => {
+    const { createScrollAnimate } = await load();
+    const sa = createScrollAnimate();
+    const opts = [{ duration: 900 }, { delay: 100 }, { offset: 50 }, { stagger: 80 }];
+    opts.forEach((o) => sa.observe(el(), o));
+    expect(animations).toHaveLength(0);
+    expect(sa.getObservedElements().every((r) => r.engine === 'js')).toBe(true);
+    sa.observe(el(), { duration: 900, engine: 'css' });
+    expect(animations).toHaveLength(1);
+  });
+
+  it("defaultEngine: 'js' restores the 1.x behaviour", async () => {
+    const { createScrollAnimate } = await load();
+    const sa = createScrollAnimate({ defaultEngine: 'js' });
     const node = el();
     sa.observe(node, { animation: 'fade-in' });
     expect(node.style.opacity).toBe('0');
@@ -118,7 +138,7 @@ describe('engine option (native scroll-driven timeline)', () => {
 
   it('honours defaultEngine, data-sa-engine and data-sa-view-range', async () => {
     const { createScrollAnimate } = await load();
-    const sa = createScrollAnimate();
+    const sa = createScrollAnimate({ defaultEngine: 'js' });
     el('<div data-sa data-sa-engine="css" data-sa-view-range="cover 0%, cover 50%"></div>');
     el('<div data-sa></div>');
     sa.init();

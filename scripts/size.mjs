@@ -20,7 +20,7 @@ async function treeShaken(source) {
     plugins: [
       {
         name: 'virtual',
-        resolveId: (id) => (id === 'entry' ? id : id.startsWith('pkg') ? `dist/${id === 'pkg' ? 'index' : id.slice(4)}.mjs` : null),
+        resolveId: (id) => (id === 'entry' ? id : id.startsWith('pkg') ? `dist/${id === 'pkg' ? 'index' : id.slice(4)}.js` : null),
         load: (id) => (id === 'entry' ? source : null),
       },
       terser(),
