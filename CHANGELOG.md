@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.3.0] - 2026-10-07
+
+### Added
+- **SVG** — new category `use-scroll-animate/components/svg`:
+  - `<usa-draw>` — line drawing for every stroke of the SVG inside (normalised `pathLength`, no `getTotalLength()`): `trigger` (`view` · `hover` · `click` · `scrub`), `duration`, `stagger`, `fill`, `repeat`; `progress`, `play()`, `usa:complete`.
+  - `<usa-morph>` — path morph through `paths="A | B | C"` on `click` (keyboard accessible) · `hover` · `view` · `auto`; same-structure paths morph point by point, others switch at the midpoint.
+  - `<usa-mask-reveal>` — clip-path mask reveals: `circle`, `diamond`, `star`, `iris`, `wipe`, `wipe-up`, origin `at`, `trigger`, `repeat`.
+  - `<usa-anim-icon>` — animated stroke icons (`bell`, `heart`, `check`, `arrow`, `star`, `gear`, `search`, `download`) on hover / focus, click, view or loop; decorative unless `label` is set.
+  - Helpers: `morphTo()`, `interpolatePath()`, `pathsCompatible()`, `drawLines()`, `MASK_SHAPES`, `ANIM_ICONS`.
+- Reduced motion: drawings appear complete, morphs switch instantly (`auto` does not cycle), masks are not applied, icons stay still.
+- Showcase: new **SVG** gallery category (draw, morph, mask, icons, `morphTo()` demo).
+
 ## [3.2.0] - 2026-10-07
 
 ### Added

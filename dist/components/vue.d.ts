@@ -1421,6 +1421,69 @@ declare global {
     }
 }
 
+/**
+ * `<usa-draw>` — line drawing: every stroke of the SVG inside draws itself.
+ * Attributes: `trigger` (`view` default · `hover` · `click` · `scrub`),
+ * `duration` (1600), `stagger` (0–0.9 share of the timeline, 0.2), `fill`
+ * (fade the fill in after drawing), `repeat`. Method `play()`, property
+ * `progress`, event `usa:complete`. Reduced motion: drawn immediately.
+ */
+interface UsaDrawElement extends UsaElement {
+    play(): void;
+    progress: number;
+}
+
+/**
+ * `<usa-morph>` — morphs an SVG path through a list of shapes.
+ * Put a `<svg><path></path></svg>` inside (one is created otherwise) and set
+ * `paths="M… | M… | M…"` (same command structure morphs smoothly, others
+ * switch at the midpoint). Attributes: `trigger` (`click` default · `hover`
+ * · `auto` · `view`), `interval` (ms for auto, 2000), `duration` (600).
+ * Property `index`, method `next()`, event `usa:change`.
+ * Reduced motion: shapes switch without animating; `auto` does not cycle.
+ */
+interface UsaMorphElement extends UsaElement {
+    readonly index: number;
+    next(): Promise<void>;
+}
+
+/**
+ * `<usa-mask-reveal>` — reveals its content through a growing mask shape.
+ * Attributes: `shape` (`circle` default · `diamond` · `wipe` · `wipe-up` ·
+ * `iris` · `star`), `duration` (900), `delay`, `trigger` (`view` · `hover`
+ * · `click`), `repeat`, `at` (`x% y%` origin for circle). Event
+ * `usa:complete`. Reduced motion: content is shown without the mask.
+ */
+interface UsaMaskRevealElement extends UsaElement {
+    reveal(): Promise<void>;
+}
+
+/**
+ * `<usa-anim-icon name="bell">` — an animated stroke icon that plays its
+ * motion on `trigger` (`hover` default · `click` · `view` · `loop`).
+ * Attributes: `name` (see `ANIM_ICONS`), `size` (24), `label` (accessible
+ * name; decorative when absent). Method `play()`. Reduced motion: static.
+ */
+interface UsaAnimIconElement extends UsaElement {
+    play(): void;
+}
+
+/**
+ * use-scroll-animate/components/svg — SVG animation (v3.3).
+ * `<usa-draw>` (line drawing), `<usa-morph>` (path morph), `<usa-mask-reveal>`
+ * (mask / clip-path reveals) and `<usa-anim-icon>` (animated icons), plus
+ * `interpolatePath()`, `morphTo()`, `drawLines()`.
+ */
+
+declare global {
+    interface HTMLElementTagNameMap {
+        'usa-draw': UsaDrawElement;
+        'usa-morph': UsaMorphElement;
+        'usa-mask-reveal': UsaMaskRevealElement;
+        'usa-anim-icon': UsaAnimIconElement;
+    }
+}
+
 /** The component categories and their default tags. */
 declare const COMPONENT_CATEGORIES: {
     readonly reveal: readonly ["usa-reveal", "usa-stagger", "usa-scroll-progress", "usa-scrolly"];
@@ -1436,6 +1499,7 @@ declare const COMPONENT_CATEGORIES: {
     readonly page: readonly ["usa-cursor", "usa-fullpage", "usa-loading-bar", "usa-back-to-top", "usa-ambient", "usa-splash", "usa-auto-skeleton", "usa-motion-switch"];
     readonly timeline: readonly ["usa-timeline"];
     readonly gesture: readonly ["usa-swipeable", "usa-pinch-zoom"];
+    readonly svg: readonly ["usa-draw", "usa-morph", "usa-mask-reveal", "usa-anim-icon"];
 };
 type ComponentCategory = keyof typeof COMPONENT_CATEGORIES;
 

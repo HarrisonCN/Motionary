@@ -13,9 +13,10 @@ var components_ui = require('./components/ui.cjs');
 var components_page = require('./components/page.cjs');
 var components_timeline = require('./components/timeline.cjs');
 var components_gesture = require('./components/gesture.cjs');
+var components_svg = require('./components/svg.cjs');
 var variants = require('./chunks/variants-BNIrn4ch.cjs');
 var base = require('./chunks/base-CXx7jZ-o.cjs');
-var indexTags = require('./chunks/index-tags-DCTX4F9b.cjs');
+var indexTags = require('./chunks/index-tags-Cz4iTBEK.cjs');
 var spring = require('./chunks/spring-2OTnYCzm.cjs');
 
 /**
@@ -52,6 +53,7 @@ const BY_CATEGORY = {
     page: components_page.definePageComponents,
     timeline: components_timeline.defineTimelineComponents,
     gesture: components_gesture.defineGestureComponents,
+    svg: components_svg.defineSvgComponents,
 };
 /**
  * Register every `<usa-*>` component (or only the given categories).
@@ -192,6 +194,17 @@ exports.defineSwipeable = components_gesture.defineSwipeable;
 exports.gesture = components_gesture.gesture;
 exports.pinchScale = components_gesture.pinchScale;
 exports.swipeDirection = components_gesture.swipeDirection;
+exports.ANIM_ICONS = components_svg.ANIM_ICONS;
+exports.MASK_SHAPES = components_svg.MASK_SHAPES;
+exports.defineAnimIcon = components_svg.defineAnimIcon;
+exports.defineDraw = components_svg.defineDraw;
+exports.defineMaskReveal = components_svg.defineMaskReveal;
+exports.defineMorph = components_svg.defineMorph;
+exports.defineSvgComponents = components_svg.defineSvgComponents;
+exports.drawLines = components_svg.drawLines;
+exports.interpolatePath = components_svg.interpolatePath;
+exports.morphTo = components_svg.morphTo;
+exports.pathsCompatible = components_svg.pathsCompatible;
 exports.VARIANTS = variants.VARIANTS;
 exports.adoptVariants = variants.adoptVariants;
 exports.setVariant = variants.setVariant;

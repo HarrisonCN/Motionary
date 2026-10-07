@@ -223,5 +223,15 @@
     "name": "import { defineGestureComponents } from '…/components/gesture'",
     "import": "export { defineGestureComponents } from 'pkg/components/gesture';",
     "limit": 5120
+  },
+  {
+    "name": "import 'use-scroll-animate/components/svg'",
+    "import": "export * from 'pkg/components/svg';",
+    "limit": 5376
+  },
+  {
+    "name": "import { defineSvgComponents } from '…/components/svg'",
+    "import": "export { defineSvgComponents } from 'pkg/components/svg';",
+    "limit": 5120
   }
 ]

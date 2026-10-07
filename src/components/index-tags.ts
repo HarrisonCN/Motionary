@@ -14,6 +14,7 @@ export const COMPONENT_CATEGORIES = {
   page: ['usa-cursor', 'usa-fullpage', 'usa-loading-bar', 'usa-back-to-top', 'usa-ambient', 'usa-splash', 'usa-auto-skeleton', 'usa-motion-switch'],
   timeline: ['usa-timeline'],
   gesture: ['usa-swipeable', 'usa-pinch-zoom'],
+  svg: ['usa-draw', 'usa-morph', 'usa-mask-reveal', 'usa-anim-icon'],
 } as const;
 
 export type ComponentCategory = keyof typeof COMPONENT_CATEGORIES;

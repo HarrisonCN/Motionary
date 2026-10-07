@@ -57,6 +57,7 @@ defineComponents(); // or per category: import { defineTextComponents } from 'us
 | **Page & app-wide** (`/components/page`) | `pageTransition()` (fade · slide · circle · blinds · pixel · zoom; SPA + MPA) · `themeTransition()` · `<usa-cursor>` · `smoothScroll()` · `<usa-fullpage>` · `<usa-loading-bar>` · `<usa-back-to-top>` · `<usa-ambient>` (particles · snow · stars · noise · gradient) · `<usa-splash>` · `<usa-auto-skeleton>` · `<usa-motion-switch>` / `setMotionIntensity()` |
 | **Timeline & choreography** (`/components/timeline`) | `timeline()` (chain · overlap · labels · seek · reverse · scrub) · `<usa-timeline>` (`data-tl` steps) |
 | **Gestures** (`/components/gesture`) | `gesture()` (pan · swipe · pinch · long-press · tap · double-tap → springs) · `<usa-swipeable>` · `<usa-pinch-zoom>` |
+| **SVG** (`/components/svg`) | `<usa-draw>` (line drawing) · `<usa-morph>` (path morph) · `<usa-mask-reveal>` · `<usa-anim-icon>` · `morphTo()` · `interpolatePath()` |
 
 Whole bundle ≈ 22 kB gzip (JS + CSS); one category 3.5–6.4 kB; a single component ≈ 2 kB. The scroll-animation core below is unaffected.
 

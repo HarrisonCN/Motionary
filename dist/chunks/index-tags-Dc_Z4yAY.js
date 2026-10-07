@@ -14,7 +14,8 @@ const COMPONENT_CATEGORIES = {
     page: ['usa-cursor', 'usa-fullpage', 'usa-loading-bar', 'usa-back-to-top', 'usa-ambient', 'usa-splash', 'usa-auto-skeleton', 'usa-motion-switch'],
     timeline: ['usa-timeline'],
     gesture: ['usa-swipeable', 'usa-pinch-zoom'],
+    svg: ['usa-draw', 'usa-morph', 'usa-mask-reveal', 'usa-anim-icon'],
 };
 
 export { COMPONENT_CATEGORIES as C };
-//# sourceMappingURL=index-tags-DZ-gjMZc.js.map
+//# sourceMappingURL=index-tags-Dc_Z4yAY.js.map
