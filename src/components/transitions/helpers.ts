@@ -1,4 +1,4 @@
-import { prefersReducedMotion, EASE_OUT, FLUENT_DECELERATE } from '../base';
+import { deprecate, prefersReducedMotion, EASE_OUT, FLUENT_DECELERATE } from '../base';
 
 export interface ViewTransitionOptions {
   /**
@@ -116,8 +116,11 @@ export interface ConnectedOptions {
  * `ConnectedAnimationService`: `to` flies from the position and size of
  * `from` into its own place (e.g. a thumbnail opening into a detail view).
  * Call it right after `to` is shown. Transforms only.
+ *
+ * @deprecated since 3.9, removed in 4.0 — use `sharedTransition()` (components/layout).
  */
 export async function connectedAnimation(from: Element, to: HTMLElement, options: ConnectedOptions = {}): Promise<void> {
+  deprecate('connectedAnimation', "connectedAnimation() is deprecated and will be removed in 4.0 — use sharedTransition() from 'use-scroll-animate/components/layout' (data-shared=\"id\" on both elements). See docs/upgrading-4.md.");
   if (prefersReducedMotion() || typeof to.animate !== 'function') return;
   const a = from.getBoundingClientRect();
   const b = to.getBoundingClientRect();

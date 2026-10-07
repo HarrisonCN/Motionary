@@ -20,7 +20,8 @@ const COMPONENT_CATEGORIES = {
     webgl: ['usa-shader', 'usa-distort', 'usa-liquid'],
     depth: ['usa-cube', 'usa-depth'],
     layout: ['usa-auto-animate', 'usa-masonry'],
+    packs: ['usa-pack'],
 };
 
 exports.COMPONENT_CATEGORIES = COMPONENT_CATEGORIES;
-//# sourceMappingURL=index-tags-wbuPiMR6.cjs.map
+//# sourceMappingURL=index-tags-DYYsgbba.cjs.map

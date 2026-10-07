@@ -32,6 +32,7 @@ export interface SequenceController {
 }
 
 let fallback: ScrollAnimateInstance | null = null;
+let warned = false;
 
 type Planned = { el: Element; opts: AnimateOptions; end: number };
 
@@ -57,6 +58,8 @@ function plan(steps: SequenceStep[], defaults: AnimateOptions): Planned[] {
 /**
  * Build a timeline of animations.
  *
+ * @deprecated since 3.9, removed in 4.0 — use `timeline()` (`.to(target, preset, { at: '-=300' })`).
+ *
  * @example
  * sequence([
  *   { target: '.title', animation: 'fade-in-up' },
@@ -65,6 +68,10 @@ function plan(steps: SequenceStep[], defaults: AnimateOptions): Planned[] {
  * ], { trigger: '.hero' });
  */
 export function sequence(steps: SequenceStep[], options: SequenceOptions = {}): SequenceController {
+  if (!warned && typeof console !== 'undefined') {
+    warned = true;
+    console.warn("[use-scroll-animate] sequence() is deprecated and will be removed in 4.0 — use timeline() from 'use-scroll-animate/components/timeline' (also exported from 'use-scroll-animate' in 4.0). See docs/upgrading-4.md.");
+  }
   const { trigger, instance, ...defaults } = options;
   const sa = () => instance || fallback || (fallback = createScrollAnimate());
   let io: IntersectionObserver | undefined;

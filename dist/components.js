@@ -32,13 +32,15 @@ import { defineDepthComponents } from './components/depth.js';
 export { defineCube, defineDepth, deviceTilt, orientationToTilt, requestOrientationPermission, supportsOrientation } from './components/depth.js';
 import { defineLayoutComponents } from './components/layout.js';
 export { autoAnimate, defineAutoAnimate, defineMasonry, flipFrames, masonryLayout, sharedTransition } from './components/layout.js';
-import { a as adoptVariants } from './chunks/variants-CHe1VbSn.js';
-export { V as VARIANTS, s as setVariant } from './chunks/variants-CHe1VbSn.js';
-import { c as canDefine } from './chunks/base-BpROOcey.js';
-export { M as MOTION_SCALE, a as configureComponents, g as getMotionIntensity, p as prefersReducedMotion } from './chunks/base-BpROOcey.js';
-export { C as COMPONENT_CATEGORIES } from './chunks/index-tags-BANJ-e4H.js';
-export { S as SPRING_PRESETS, c as createSpring, l as linearEasing, p as projectInertia, r as resolveSpring, a as rubberBand, s as snapTo, b as spring, d as springEasing, e as springSamples, f as stepSpring, g as supportsLinearEasing } from './chunks/spring-C-fw7_9f.js';
-export { g as gesture, p as pinchScale, s as swipeDirection } from './chunks/core-uxs3ETou.js';
+import { definePacksComponents } from './components/packs.js';
+export { PACKS, PACK_PRIMITIVES, applyPack, countUp, definePack, flyToCart } from './components/packs.js';
+import { a as adoptVariants } from './chunks/variants-DTypaOH3.js';
+export { V as VARIANTS, s as setVariant } from './chunks/variants-DTypaOH3.js';
+import { c as canDefine } from './chunks/base-BRIPyPtX.js';
+export { M as MOTION_SCALE, a as configureComponents, g as getMotionIntensity, p as prefersReducedMotion } from './chunks/base-BRIPyPtX.js';
+export { C as COMPONENT_CATEGORIES } from './chunks/index-tags-BmQR17Sb.js';
+export { S as SPRING_PRESETS, c as createSpring, l as linearEasing, p as projectInertia, r as resolveSpring, a as rubberBand, s as snapTo, b as spring, d as springEasing, e as springSamples, f as stepSpring, g as supportsLinearEasing } from './chunks/spring-UBPhrh1X.js';
+export { g as gesture, p as pinchScale, s as swipeDirection } from './chunks/core-CYozf_E-.js';
 
 /**
  * use-scroll-animate/components
@@ -78,6 +80,7 @@ const BY_CATEGORY = {
     webgl: defineWebglComponents,
     depth: defineDepthComponents,
     layout: defineLayoutComponents,
+    packs: definePacksComponents,
 };
 /**
  * Register every `<usa-*>` component (or only the given categories).
@@ -89,5 +92,5 @@ function defineComponents(categories) {
     (categories || Object.keys(BY_CATEGORY)).forEach((c) => BY_CATEGORY[c]?.());
 }
 
-export { adoptVariants, defineBackgroundComponents, defineCardComponents, defineClickComponents, defineComponents, defineDepthComponents, defineFeedbackComponents, defineGestureComponents, defineInteractionComponents, defineLayoutComponents, definePageComponents, definePhysicsComponents, defineRevealComponents, defineSvgComponents, defineTextComponents, defineTimelineComponents, defineTransitionComponents, defineUiComponents, defineWebglComponents };
+export { adoptVariants, defineBackgroundComponents, defineCardComponents, defineClickComponents, defineComponents, defineDepthComponents, defineFeedbackComponents, defineGestureComponents, defineInteractionComponents, defineLayoutComponents, definePacksComponents, definePageComponents, definePhysicsComponents, defineRevealComponents, defineSvgComponents, defineTextComponents, defineTimelineComponents, defineTransitionComponents, defineUiComponents, defineWebglComponents };
 //# sourceMappingURL=components.js.map

@@ -17,11 +17,12 @@ var components_svg = require('./components/svg.cjs');
 var components_webgl = require('./components/webgl.cjs');
 var components_depth = require('./components/depth.cjs');
 var components_layout = require('./components/layout.cjs');
-var variants = require('./chunks/variants-BNIrn4ch.cjs');
-var base = require('./chunks/base-CXx7jZ-o.cjs');
-var indexTags = require('./chunks/index-tags-wbuPiMR6.cjs');
-var spring = require('./chunks/spring-2OTnYCzm.cjs');
-var core = require('./chunks/core-IaorbTdu.cjs');
+var components_packs = require('./components/packs.cjs');
+var variants = require('./chunks/variants-_dC-ey6R.cjs');
+var base = require('./chunks/base-Dm6ee5ug.cjs');
+var indexTags = require('./chunks/index-tags-DYYsgbba.cjs');
+var spring = require('./chunks/spring-Dp5BllPB.cjs');
+var core = require('./chunks/core-CHAtivHV.cjs');
 
 /**
  * use-scroll-animate/components
@@ -61,6 +62,7 @@ const BY_CATEGORY = {
     webgl: components_webgl.defineWebglComponents,
     depth: components_depth.defineDepthComponents,
     layout: components_layout.defineLayoutComponents,
+    packs: components_packs.definePacksComponents,
 };
 /**
  * Register every `<usa-*>` component (or only the given categories).
@@ -231,6 +233,13 @@ exports.defineMasonry = components_layout.defineMasonry;
 exports.flipFrames = components_layout.flipFrames;
 exports.masonryLayout = components_layout.masonryLayout;
 exports.sharedTransition = components_layout.sharedTransition;
+exports.PACKS = components_packs.PACKS;
+exports.PACK_PRIMITIVES = components_packs.PACK_PRIMITIVES;
+exports.applyPack = components_packs.applyPack;
+exports.countUp = components_packs.countUp;
+exports.definePack = components_packs.definePack;
+exports.definePacksComponents = components_packs.definePacksComponents;
+exports.flyToCart = components_packs.flyToCart;
 exports.VARIANTS = variants.VARIANTS;
 exports.adoptVariants = variants.adoptVariants;
 exports.setVariant = variants.setVariant;

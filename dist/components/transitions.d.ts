@@ -164,6 +164,8 @@ interface ConnectedOptions {
  * `ConnectedAnimationService`: `to` flies from the position and size of
  * `from` into its own place (e.g. a thumbnail opening into a detail view).
  * Call it right after `to` is shown. Transforms only.
+ *
+ * @deprecated since 3.9, removed in 4.0 — use `sharedTransition()` (components/layout).
  */
 declare function connectedAnimation(from: Element, to: HTMLElement, options?: ConnectedOptions): Promise<void>;
 

@@ -1,5 +1,5 @@
-import { h as defineElement, n as now, e as caf, b as clamp, r as raf } from '../chunks/base-BpROOcey.js';
-export { a as configureComponents, p as prefersReducedMotion } from '../chunks/base-BpROOcey.js';
+import { i as defineElement, n as now, e as caf, b as clamp, r as raf } from '../chunks/base-BRIPyPtX.js';
+export { a as configureComponents, p as prefersReducedMotion } from '../chunks/base-BRIPyPtX.js';
 
 /** Minimal WebGL runner: one full-canvas quad, one fragment shader, optional image texture. */
 const VERTEX = 'attribute vec2 p;varying vec2 v_uv;void main(){v_uv=p*.5+.5;gl_Position=vec4(p,0.,1.);}';

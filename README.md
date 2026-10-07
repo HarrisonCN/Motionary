@@ -61,6 +61,7 @@ defineComponents(); // or per category: import { defineTextComponents } from 'us
 | **Canvas & WebGL** (`/components/webgl`) | `<usa-shader>` (gradient · plasma · waves · aurora · custom GLSL) · `<usa-distort>` · `<usa-liquid>` · `glQuad()` — graceful fallback |
 | **3D & depth** (`/components/depth`) | `<usa-cube>` · `<usa-depth>` (pointer · gyroscope · scroll depth parallax) · `deviceTilt()` · (+ `<usa-carousel-3d>` in cards) |
 | **Layout animation** (`/components/layout`) | `<usa-auto-animate>` / `autoAnimate()` (list & grid reflow) · `<usa-masonry>` · `sharedTransition()` (shared elements) |
+| **Effect packs** (`/components/packs`) | `<usa-pack>` (`name="ecommerce \| portfolio \| dashboard \| game \| landing"`) · `applyPack()` · `flyToCart()` · `countUp()` |
 
 Whole bundle ≈ 22 kB gzip (JS + CSS); one category 3.5–6.4 kB; a single component ≈ 2 kB. The scroll-animation core below is unaffected.
 

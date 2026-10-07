@@ -1,6 +1,6 @@
 'use strict';
 
-var indexTags = require('../chunks/index-tags-wbuPiMR6.cjs');
+var indexTags = require('../chunks/index-tags-DYYsgbba.cjs');
 
 /**
  * use-scroll-animate/components/react — React wrappers for every `<usa-*>`
