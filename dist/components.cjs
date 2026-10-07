@@ -10,8 +10,9 @@ var components_physics = require('./components/physics.cjs');
 var components_cards = require('./components/cards.cjs');
 var components_click = require('./components/click.cjs');
 var components_ui = require('./components/ui.cjs');
-var base = require('./chunks/base-5DFCAnvH.cjs');
-var spring = require('./chunks/spring-Bi4qY0pL.cjs');
+var components_page = require('./components/page.cjs');
+var base = require('./chunks/base-BR6fYLBA.cjs');
+var spring = require('./chunks/spring-DyHe1Hfa.cjs');
 
 /**
  * use-scroll-animate/components
@@ -45,6 +46,7 @@ const COMPONENT_CATEGORIES = {
     cards: ['usa-card', 'usa-card-stack', 'usa-sticky-stack', 'usa-carousel-3d'],
     click: ['usa-click', 'usa-button', 'usa-icon-morph', 'usa-like', 'usa-hold', 'usa-double-tap', 'usa-checkbox'],
     ui: ['usa-tabs', 'usa-drawer', 'usa-bottom-sheet', 'usa-pull-refresh', 'usa-fab', 'usa-navbar', 'usa-slider', 'usa-rating', 'usa-tooltip', 'usa-popover', 'usa-badge', 'usa-avatar-stack'],
+    page: ['usa-cursor', 'usa-fullpage', 'usa-loading-bar', 'usa-back-to-top', 'usa-ambient', 'usa-splash', 'usa-auto-skeleton', 'usa-motion-switch'],
 };
 const BY_CATEGORY = {
     reveal: components_reveal.defineRevealComponents,
@@ -57,6 +59,7 @@ const BY_CATEGORY = {
     cards: components_cards.defineCardComponents,
     click: components_click.defineClickComponents,
     ui: components_ui.defineUiComponents,
+    page: components_page.definePageComponents,
 };
 /**
  * Register every `<usa-*>` component (or only the given categories).
@@ -158,7 +161,30 @@ exports.defineTabs = components_ui.defineTabs;
 exports.defineTooltip = components_ui.defineTooltip;
 exports.defineUiComponents = components_ui.defineUiComponents;
 exports.setVariant = components_ui.setVariant;
+exports.AMBIENT_EFFECTS = components_page.AMBIENT_EFFECTS;
+exports.CURSOR_MODES = components_page.CURSOR_MODES;
+exports.PAGE_EFFECTS = components_page.PAGE_EFFECTS;
+exports.defineAmbient = components_page.defineAmbient;
+exports.defineAutoSkeleton = components_page.defineAutoSkeleton;
+exports.defineBackToTop = components_page.defineBackToTop;
+exports.defineCursor = components_page.defineCursor;
+exports.defineFullpage = components_page.defineFullpage;
+exports.defineLoadingBar = components_page.defineLoadingBar;
+exports.defineMotionSwitch = components_page.defineMotionSwitch;
+exports.definePageComponents = components_page.definePageComponents;
+exports.defineSplash = components_page.defineSplash;
+exports.enableMpaTransitions = components_page.enableMpaTransitions;
+exports.loadingBar = components_page.loadingBar;
+exports.pageTransition = components_page.pageTransition;
+exports.restoreMotionIntensity = components_page.restoreMotionIntensity;
+exports.scrollToTarget = components_page.scrollToTarget;
+exports.setMotionIntensity = components_page.setMotionIntensity;
+exports.smoothScroll = components_page.smoothScroll;
+exports.supportsViewTransitions = components_page.supportsViewTransitions;
+exports.themeTransition = components_page.themeTransition;
+exports.MOTION_SCALE = base.MOTION_SCALE;
 exports.configureComponents = base.configureComponents;
+exports.getMotionIntensity = base.getMotionIntensity;
 exports.prefersReducedMotion = base.prefersReducedMotion;
 exports.SPRING_PRESETS = spring.SPRING_PRESETS;
 exports.createSpring = spring.createSpring;

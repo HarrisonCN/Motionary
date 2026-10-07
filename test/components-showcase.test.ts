@@ -41,7 +41,7 @@ describe('component gallery catalog', () => {
   });
 
   it('every element demo actually uses its element', () => {
-    COMPONENTS.filter((c: any) => !['usa-scrolly', 'usa-toaster', 'usa-dialog', 'usa-sticky-stack'].includes(c.tag)).forEach((c: any) => expect(c.demo, c.tag).toContain(`<${c.tag}`));
+    COMPONENTS.filter((c: any) => !['usa-scrolly', 'usa-toaster', 'usa-dialog', 'usa-sticky-stack', 'usa-ambient', 'usa-splash'].includes(c.tag)).forEach((c: any) => expect(c.demo, c.tag).toContain(`<${c.tag}`));
   });
 
   it('search matches tags, English, Chinese and category names', () => {

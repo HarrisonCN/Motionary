@@ -1,0 +1,31 @@
+/* page transitions (View Transitions) */
+::view-transition-group(root) { animation-duration: var(--usa-pt-duration, 600ms); }
+html[data-usa-pt] ::view-transition-old(root), html[data-usa-pt] ::view-transition-new(root) { animation-duration: var(--usa-pt-duration, 600ms); animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); mix-blend-mode: normal; }
+html[data-usa-pt="slide"] ::view-transition-old(root), html[data-usa-pt="slide-left"] ::view-transition-old(root) { animation-name: usa-pt-out-left; }
+html[data-usa-pt="slide"] ::view-transition-new(root), html[data-usa-pt="slide-left"] ::view-transition-new(root) { animation-name: usa-pt-in-right; }
+html[data-usa-pt="slide-right"] ::view-transition-old(root) { animation-name: usa-pt-out-right; }
+html[data-usa-pt="slide-right"] ::view-transition-new(root) { animation-name: usa-pt-in-left; }
+html[data-usa-pt="slide-up"] ::view-transition-old(root) { animation-name: usa-pt-out-up; }
+html[data-usa-pt="slide-up"] ::view-transition-new(root) { animation-name: usa-pt-in-up; }
+html[data-usa-pt="zoom"] ::view-transition-old(root) { animation-name: usa-pt-zoom-out; }
+html[data-usa-pt="zoom"] ::view-transition-new(root) { animation-name: usa-pt-zoom-in; }
+html[data-usa-pt="circle"] ::view-transition-old(root) { animation: none; }
+html[data-usa-pt="circle"] ::view-transition-new(root) { animation-name: usa-pt-circle; }
+html[data-usa-pt="blinds"] ::view-transition-old(root) { animation: none; }
+html[data-usa-pt="blinds"] ::view-transition-new(root) { animation-name: usa-pt-blinds; -webkit-mask-image: repeating-linear-gradient(to bottom, #000 0 var(--usa-blind), transparent var(--usa-blind) 10vh); mask-image: repeating-linear-gradient(to bottom, #000 0 var(--usa-blind), transparent var(--usa-blind) 10vh); }
+html[data-usa-pt="pixel"] ::view-transition-old(root) { animation-name: usa-pt-pixel-out; animation-timing-function: steps(10, end); }
+html[data-usa-pt="pixel"] ::view-transition-new(root) { animation-name: usa-pt-pixel-in; animation-timing-function: steps(10, end); }
+@property --usa-blind { syntax: "<length-percentage>"; inherits: false; initial-value: 0vh; }
+@keyframes usa-pt-out-left { to { transform: translateX(-30%); opacity: 0; } }
+@keyframes usa-pt-in-right { from { transform: translateX(30%); opacity: 0; } }
+@keyframes usa-pt-out-right { to { transform: translateX(30%); opacity: 0; } }
+@keyframes usa-pt-in-left { from { transform: translateX(-30%); opacity: 0; } }
+@keyframes usa-pt-out-up { to { transform: translateY(-12%); opacity: 0; } }
+@keyframes usa-pt-in-up { from { transform: translateY(12%); opacity: 0; } }
+@keyframes usa-pt-zoom-out { to { transform: scale(0.92); opacity: 0; } }
+@keyframes usa-pt-zoom-in { from { transform: scale(1.08); opacity: 0; } }
+@keyframes usa-pt-circle { from { clip-path: circle(0 at var(--usa-pt-x, 50%) var(--usa-pt-y, 50%)); } to { clip-path: circle(var(--usa-pt-r, 150vmax) at var(--usa-pt-x, 50%) var(--usa-pt-y, 50%)); } }
+@keyframes usa-pt-blinds { from { --usa-blind: 0vh; } to { --usa-blind: 10vh; } }
+@keyframes usa-pt-pixel-out { to { opacity: 0; filter: blur(6px) contrast(1.4); } }
+@keyframes usa-pt-pixel-in { from { opacity: 0; filter: blur(6px) contrast(1.4); } }
+@media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }

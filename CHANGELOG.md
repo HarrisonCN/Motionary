@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.7.0] - 2026-10-07
+
+### Added
+- **Page & app-wide effects** — new category `use-scroll-animate/components/page` (+ `components/page.css`):
+  - **Page transitions** on the View Transitions API: `pageTransition(update, { effect })` for SPA route changes — `fade`, `slide` / `slide-left` / `slide-right` / `slide-up`, `circle` (reveal from the click point), `blinds`, `pixel` (stepped dissolve), `zoom`; `enableMpaTransitions(effect)` for multi-page sites (`@view-transition { navigation: auto }`); `themeTransition(apply)` circle-reveal theme switch. Falls back to an instant update (optional cross-fade) without View Transitions.
+  - `<usa-cursor mode="dot | trail | magnetic | glow">` custom cursors (fine pointers only, `hide-native`).
+  - `smoothScroll()` (inertial wheel smoothing, touch/keyboard stay native) and `scrollToTarget()` (spring timing).
+  - `<usa-fullpage>` full-screen snapping sections with keyboard paging and dot navigation.
+  - `<usa-loading-bar>` + `loadingBar.start() / set() / done() / track(promise)` top loading bar (the scroll progress bar remains `<usa-scroll-progress>`).
+  - `<usa-back-to-top>` with a reading-progress ring, spring scroll and focus return.
+  - `<usa-ambient effect="particles | snow | stars | noise | gradient">` page-wide ambient layer (scroll-driven gradient, canvas paused in hidden tabs).
+  - `<usa-splash>` launch / splash screen (`fade`, `scale`, `slide-up`, `circle` exit; `min` duration; `manual` + `done()`).
+  - `<usa-auto-skeleton loading>` automatic skeletons from the existing markup.
+  - **Global motion intensity**: `setMotionIntensity('off' | 'low' | 'normal' | 'high', persist?)`, `restoreMotionIntensity()`, `getMotionIntensity()`, `configureComponents({ motionIntensity })` and the `<usa-motion-switch>` control. It scales every component animation (and `spring()`), sets `--usa-motion` / `data-usa-motion` on `<html>`, and `off` behaves like `prefers-reduced-motion`.
+  - Reduced motion: transitions update instantly, no cursor / smooth scrolling / ambient animation, instant jumps.
+- Showcase: **Page & app-wide** category with live page-transition, theme reveal, cursor, ambient, splash, loading-bar, auto-skeleton, fullpage and motion-intensity demos.
+
 ## [2.6.0] - 2026-10-07
 
 ### Added

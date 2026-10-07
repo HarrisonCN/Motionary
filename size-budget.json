@@ -67,17 +67,17 @@
   {
     "name": "dist/components.umd.js (minified, all components + CSS)",
     "file": "dist/components.umd.js",
-    "limit": 52992
+    "limit": 61184
   },
   {
     "name": "dist/components.css",
     "file": "dist/components.css",
-    "limit": 12032
+    "limit": 14592
   },
   {
     "name": "import 'use-scroll-animate/components' (everything)",
     "import": "export * from 'pkg/components';",
-    "limit": 52736
+    "limit": 60928
   },
   {
     "name": "import 'use-scroll-animate/components/reveal'",
@@ -178,5 +178,15 @@
     "name": "import { defineTabs } from '…/components/ui'",
     "import": "export { defineTabs } from 'pkg/components/ui';",
     "limit": 4352
+  },
+  {
+    "name": "import 'use-scroll-animate/components/page'",
+    "import": "export * from 'pkg/components/page';",
+    "limit": 11520
+  },
+  {
+    "name": "import { pageTransition } from '…/components/page'",
+    "import": "export { pageTransition } from 'pkg/components/page';",
+    "limit": 1792
   }
 ]

@@ -1,0 +1,11 @@
+/* <usa-auto-skeleton> */
+usa-auto-skeleton { display: block; --usa-skel-base: color-mix(in srgb, currentColor 10%, transparent); --usa-skel-shine: color-mix(in srgb, currentColor 18%, transparent); }
+usa-auto-skeleton[loading] :is(h1, h2, h3, h4, h5, h6, p, li, span, a, button, label, img, svg, video, input, select, textarea, td, th, figcaption, blockquote, [data-skeleton]):not([data-no-skeleton]):not(:has(:is(h1, h2, h3, h4, h5, h6, p, li, img, button, input))) {
+  color: transparent !important; border-color: transparent !important; box-shadow: none !important; user-select: none; pointer-events: none;
+  background: linear-gradient(90deg, var(--usa-skel-base) 25%, var(--usa-skel-shine) 50%, var(--usa-skel-base) 75%) 0 0 / 300% 100% !important;
+  border-radius: 6px; animation: usa-skel-shimmer 1.4s ease-in-out infinite;
+}
+usa-auto-skeleton[loading] :is(img, svg, video) { opacity: 0; }
+usa-auto-skeleton[loading] :is(img, svg, video):not([data-no-skeleton]) { opacity: 1; object-position: -9999px; }
+@keyframes usa-skel-shimmer { from { background-position: 100% 0; } to { background-position: 0 0; } }
+@media (prefers-reduced-motion: reduce) { usa-auto-skeleton[loading] * { animation: none !important; } }

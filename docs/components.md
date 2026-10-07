@@ -175,6 +175,23 @@ Presets (`SPRING_PRESETS`): `default` (170/26), `gentle` (120/14), `wobbly` (180
 | `<usa-avatar-stack>` | Overlapping avatars | `max` (5), `size` (36), `overlap` (0.35), `label` | — |
 | `setVariant(v)` · `VARIANTS` · `adoptVariants()` | Page-wide variant / token sheet | — | — |
 
+### 11. Page & app-wide — `components/page`
+
+| Element / API | What it does | Key attributes / options | JS API / events |
+|---|---|---|---|
+| `pageTransition(update, opts)` | SPA page transition (View Transitions) | `effect` (`fade` · `slide` · `slide-left` · `slide-right` · `slide-up` · `circle` · `blinds` · `pixel` · `zoom`), `x`, `y`, `duration`, `fallback` | Promise |
+| `enableMpaTransitions(effect)` | Cross-document (MPA) transitions | effect, duration | — |
+| `themeTransition(apply, { x, y })` | Circle-reveal theme switch | — | Promise |
+| `<usa-cursor>` | Custom cursor | `mode` (`dot` · `trail` · `magnetic` · `glow`), `color`, `size`, `hide-native`, `targets` | `active` |
+| `smoothScroll(opts)` · `scrollToTarget(to, opts)` | Wheel smoothing · spring scroll-to | `target`, `lerp` (0.12), `wheelMultiplier` · `offset`, `preset` | returns stop fn · Promise |
+| `<usa-fullpage>` | Full-screen snapping sections | `dots`, `axis` (`y` · `x`) | `index`, `go(i)`, `next()`, `prev()`; `usa:section` |
+| `<usa-loading-bar>` · `loadingBar` | Top loading bar | `color`, `height` (3), `position` | `start()`, `set(p)`, `done()`, `track(promise)` |
+| `<usa-back-to-top>` | Back-to-top with progress ring | `offset` (300), `label`, `focus-target`, `position` | `visible` |
+| `<usa-ambient>` | Page-wide ambient layer | `effect` (`particles` · `snow` · `stars` · `noise` · `gradient`), `density`, `color`, `opacity`, `layer`, `speed` | — |
+| `<usa-splash>` | Splash / launch screen | `min` (600), `exit` (`fade` · `scale` · `slide-up` · `circle`), `manual`, `label` | `done()`; `usa:done` |
+| `<usa-auto-skeleton>` | Automatic skeletons | `loading`; `data-no-skeleton` on children | `loading` |
+| `<usa-motion-switch>` · `setMotionIntensity()` | Global motion intensity | `labels`, `label` · `'off' \| 'low' \| 'normal' \| 'high'`, `persist` | `usa:change`; `--usa-motion`, `data-usa-motion` |
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

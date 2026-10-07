@@ -53,6 +53,7 @@ defineComponents(); // 或按分类：import { defineTextComponents } from 'use-
 | **卡片效果**（`/components/cards`） | `<usa-card>` 翻转 · 全息 · 玻璃 · 边框光晕 · 流光边框 · 悬浮 · 聚光 · 扫光 · 视差分层 · 展开详情（可组合）· `<usa-card-stack>` 滑动卡堆 · `<usa-sticky-stack>` 滚动堆叠 · `<usa-carousel-3d>` 3D 轮播 |
 | **点击与轻触**（`/components/click`） | `<usa-button>` 按钮点击形变（挤压拉伸 · 弹性圆角 · 液态粘滞 · 按压凹陷 · 形状变形 · 提交→加载→成功）· `<usa-icon-morph>` 图标变形 · `<usa-click>` 水波纹 / 迸发 / 彩带 / 抖动 · `<usa-like>` · `<usa-hold>` · `<usa-double-tap>` · `<usa-checkbox>` |
 | **UI 组件与风格变体**（`/components/ui`） | `<usa-tabs>` 标签页 · `<usa-drawer>` 抽屉 · `<usa-bottom-sheet>` 底部面板 · `<usa-pull-refresh>` 下拉刷新 · `<usa-fab>` 悬浮按钮 · `<usa-navbar>` 自动隐藏导航栏 · `<usa-slider>` 滑块 · `<usa-rating>` 评分 · `<usa-tooltip>` · `<usa-popover>` · `<usa-badge>` · `<usa-avatar-stack>` · 所有组件均支持 `variant`（极简 / 霓虹 / 玻璃 / 粗野 / Fluent / Material） |
+| **页面与全局效果**（`/components/page`） | `pageTransition()` 页面切换（淡入 · 滑动 · 圆形揭示 · 百叶窗 · 像素溶解，单页 + 多页）· `themeTransition()` 主题圆形切换 · `<usa-cursor>` 自定义光标 · `smoothScroll()` · `<usa-fullpage>` 整屏 · `<usa-loading-bar>` · `<usa-back-to-top>` · `<usa-ambient>` 雪花 / 星空 / 噪点 · `<usa-splash>` 启动屏 · `<usa-auto-skeleton>` 自动骨架屏 · `<usa-motion-switch>` 动效强度 |
 
 完整包约 22 kB gzip（JS + CSS）；单个分类 3.5–6.4 kB；单个组件约 2 kB。下方的滚动动画核心不受影响。
 

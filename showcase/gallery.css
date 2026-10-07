@@ -189,3 +189,7 @@ usa-toggle { --usa-toggle-on: var(--accent); }
 .demo-avatar { background: hsl(var(--h) 70% 55%) !important; color: #fff; }
 .demo-variants { gap: 12px; }
 .demo-wide { width: min(100%, 320px); }
+.demo-fullpage { height: 170px !important; width: min(100%, 300px); border-radius: 14px; border: 1px solid color-mix(in srgb, currentColor 18%, transparent); }
+.demo-fullpage section { display: grid; place-content: center; text-align: center; height: 170px; min-height: 0 !important; }
+.demo-fullpage section:nth-child(2) { background: color-mix(in srgb, var(--accent, #7c5cff) 18%, transparent); }
+.demo-fullpage section:nth-child(3) { background: color-mix(in srgb, var(--accent-2, #22d3ee) 18%, transparent); }

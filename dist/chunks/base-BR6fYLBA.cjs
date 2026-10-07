@@ -8,14 +8,29 @@
  * imported during SSR (Next, Nuxt, Astro…) and in Electron/Tauri preload
  * scripts. Classes are created the first time a `define*()` function runs.
  */
-const config = { injectStyles: true, reducedMotion: 'user' };
+const MOTION_SCALE = { off: 0, low: 0.6, normal: 1, high: 1.25 };
+const config = { injectStyles: true, reducedMotion: 'user', motionIntensity: 'normal' };
 /** Change global component settings (call before `define*()` for `injectStyles`). */
 function configureComponents(options) {
     Object.assign(config, options);
+    if (options.motionIntensity && typeof document !== 'undefined') {
+        document.documentElement.style.setProperty('--usa-motion', String(MOTION_SCALE[options.motionIntensity] ?? 1));
+        document.documentElement.setAttribute('data-usa-motion', options.motionIntensity);
+    }
+}
+/** The current global motion intensity. */
+function getMotionIntensity() {
+    return config.motionIntensity;
+}
+/** Duration multiplier for the current intensity (1 when `normal`). */
+function motionScale() {
+    return MOTION_SCALE[config.motionIntensity] ?? 1;
 }
 const canDefine = () => typeof customElements !== 'undefined' && typeof HTMLElement !== 'undefined';
 /** `true` when animations should be reduced (OS setting or `configureComponents`). */
 function prefersReducedMotion() {
+    if (config.motionIntensity === 'off')
+        return true;
     if (config.reducedMotion !== 'user')
         return config.reducedMotion === 'reduce';
     return typeof matchMedia === 'function' && !!matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -156,6 +171,9 @@ function getBase() {
                 applyFrame(el, keyframes[keyframes.length - 1]);
                 return null;
             }
+            const k = motionScale();
+            if (k !== 1 && k > 0 && typeof options.duration === 'number')
+                options = { ...options, duration: options.duration * k, delay: (options.delay || 0) * k };
             return el.animate(keyframes, options);
         }
         emit(type, detail) {
@@ -220,6 +238,7 @@ const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
 exports.EASE_OUT = EASE_OUT;
 exports.EASE_SPRING = EASE_SPRING;
 exports.FLUENT_DECELERATE = FLUENT_DECELERATE;
+exports.MOTION_SCALE = MOTION_SCALE;
 exports.adoptStyles = adoptStyles;
 exports.applyFrame = applyFrame;
 exports.caf = caf;
@@ -227,9 +246,11 @@ exports.canDefine = canDefine;
 exports.clamp = clamp;
 exports.configureComponents = configureComponents;
 exports.defineElement = defineElement;
+exports.getMotionIntensity = getMotionIntensity;
+exports.motionScale = motionScale;
 exports.now = now;
 exports.prefersReducedMotion = prefersReducedMotion;
 exports.raf = raf;
 exports.shadowStyles = shadowStyles;
 exports.srText = srText;
-//# sourceMappingURL=base-5DFCAnvH.cjs.map
+//# sourceMappingURL=base-BR6fYLBA.cjs.map
