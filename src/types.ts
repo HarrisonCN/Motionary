@@ -122,6 +122,12 @@ export interface AnimateOptions {
   onProgress?: (element: Element, progress: number) => void;
   /** How progress for `onProgress`/parallax is measured (default: 'ratio') */
   progressMode?: ProgressMode;
+  /**
+   * Name of a CSS custom property (e.g. `'--sa-progress'`) that receives the
+   * element's progress (0 to 1, same value as `onProgress`) as an inline
+   * style, for scroll-driven effects written in plain CSS. Off by default.
+   */
+  progressVar?: string;
 }
 
 /** Global configuration for ScrollAnimate instance */

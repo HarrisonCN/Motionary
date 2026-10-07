@@ -144,12 +144,34 @@ We've added high-quality physics-based easing presets:
 | `onStart` / `onComplete` / `onEnter` / `onLeave` | `(el) => void` | – | Lifecycle callbacks |
 | `onProgress` | `(el, progress) => void` | – | Progress (0–1) as the element scrolls — visible ratio, or true scroll progress with `progressMode: 'scroll'` |
 | `progressMode` | `'ratio'` \| `'scroll'` | `'ratio'` | How `onProgress`/parallax progress is measured (`'scroll'`: 0 = top enters at the bottom, 1 = bottom leaves at the top) |
+| `progressVar` | `string` | – | Write progress (0–1, same value as `onProgress`) to this CSS custom property, e.g. `'--sa-progress'`, for scroll-driven effects in plain CSS |
 
-Every option is also available as a data attribute: `data-sa-animation`, `data-sa-duration`, `data-sa-delay`, `data-sa-easing`, `data-sa-threshold`, `data-sa-root-margin`, `data-sa-once`, `data-sa-repeat`, `data-sa-offset`, `data-sa-stagger`, `data-sa-progress`, `data-sa-parallax-x|y|rotate|scale|speed`.
+Every option is also available as a data attribute: `data-sa-animation`, `data-sa-duration`, `data-sa-delay`, `data-sa-easing`, `data-sa-threshold`, `data-sa-root-margin`, `data-sa-once`, `data-sa-repeat`, `data-sa-offset`, `data-sa-stagger`, `data-sa-progress`, `data-sa-progress-var` (bare attribute = `--sa-progress`), `data-sa-parallax-x|y|rotate|scale|speed`.
 
 **Presets:** `fade-in`, `fade-in-up|down|left|right`, `zoom-in`, `zoom-out`, `scale-up`, `flip-x`, `flip-y`, `flip-up`, `flip-down`, `slide-up|down|left|right`, `bounce`, `rotate-in`, `rotate-left`, `rotate-right`, `blur-in`, `blur-in-up`, `skew-in`, `scale-x`, `scale-y`, `clip-up|down|left|right`, `clip-circle`, `shimmer`, `pulse`, `swing`. Combine them with an array, e.g. `['fade-in', 'clip-up']`.
 
 **Global config** (`createScrollAnimate(config)` / `configure()`): `defaultAnimation`, `defaultDuration`, `defaultDelay`, `defaultEasing`, `defaultThreshold`, `defaultRootMargin`, `defaultRepeat`, `defaultOnce`, `defaultOffset`, `hiddenClass`, `visibleClass`, `useClassNames`, `disabled`, `root`, `autoUnregister` (default `true`).
+
+### Progress as a CSS variable (`progressVar`)
+
+Drive any CSS property from scroll position without writing JavaScript callbacks. The element's progress is written to a custom property on the element itself:
+
+```html
+<div data-sa data-sa-progress="scroll" data-sa-progress-var class="hero">…</div>
+
+<style>
+  @media (prefers-reduced-motion: no-preference) {
+    .hero { transform: translateY(calc((1 - var(--sa-progress, 0)) * 60px)); opacity: calc(0.4 + var(--sa-progress, 0)); }
+  }
+</style>
+```
+
+```js
+ScrollAnimate.observe('.bar', { progressVar: '--fill', progressMode: 'scroll' });
+// .bar::after { transform: scaleX(var(--fill, 0)); }
+```
+
+It uses the same rAF-throttled / IntersectionObserver pipeline as `onProgress`, keeps updating after the entrance animation, and is still written under reduced motion (it is data) — guard motion in your CSS with `prefers-reduced-motion` as above.
 
 ## Instance API
 
