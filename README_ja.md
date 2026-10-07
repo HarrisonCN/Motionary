@@ -100,6 +100,31 @@ const sa = createScrollAnimate({ defaultEngine: 'auto' });
 - **新しいプリセット**：`shimmer`（シマー）、`pulse`（パルス）、`swing`（スイング）を追加。
 - **多言語サポート**：中国語と日本語のドキュメントを追加。
 
+## フレームワーク連携（v1.7）
+
+各連携は独立したエントリポイント（`use-scroll-animate/react`・`/vue`・`/svelte`・`/solid`・`/element`）で、コアのコードを共有します。
+
+```svelte
+<!-- Svelte：action（svelte の import 不要） -->
+<script>import { scrollAnimate, scrollStagger } from 'use-scroll-animate/svelte';</script>
+<div use:scrollAnimate={{ animation: 'fade-in-up' }}>…</div>
+```
+
+```tsx
+// Solid：ディレクティブ + ref プリミティブ（solid-js は optional な peer 依存）
+import { scrollAnimate, useScrollAnimate } from 'use-scroll-animate/solid';
+<div use:scrollAnimate={{ animation: 'zoom-in' }}>…</div>
+```
+
+```html
+<!-- Web Component：属性は data-sa-* から接頭辞を除いたもの。sa:enter / sa:leave / sa:start / sa:complete / sa:progress イベントを発火 -->
+<script type="module">
+  import { defineScrollAnimate } from 'use-scroll-animate/element';
+  defineScrollAnimate();
+</script>
+<scroll-animate animation="fade-in-up" duration="800">…</scroll-animate>
+```
+
 ## 主な設定
 
 | オプション | 型 | デフォルト | 説明 |

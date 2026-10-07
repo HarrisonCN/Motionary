@@ -1,8 +1,62 @@
 [
-  { "name": "dist/index.umd.js (minified)", "file": "dist/index.umd.js", "limit": 7680 },
-  { "name": "import everything (minified)", "import": "export * from 'pkg'; export { default } from 'pkg';", "limit": 7680 },
-  { "name": "import default instance", "import": "export { default } from 'pkg';", "limit": 6144 },
-  { "name": "import { createScrollAnimate }", "import": "export { createScrollAnimate } from 'pkg';", "limit": 6144 },
-  { "name": "import { sequence }", "import": "export { sequence } from 'pkg';", "limit": 6656 },
-  { "name": "import { staggerChildren }", "import": "export { staggerChildren } from 'pkg';", "limit": 6400 }
+  {
+    "name": "dist/index.umd.js (minified)",
+    "file": "dist/index.umd.js",
+    "limit": 7680
+  },
+  {
+    "name": "dist/element.umd.js (minified)",
+    "file": "dist/element.umd.js",
+    "limit": 6656
+  },
+  {
+    "name": "import everything (minified)",
+    "import": "export * from 'pkg'; export { default } from 'pkg';",
+    "limit": 7680
+  },
+  {
+    "name": "import default instance",
+    "import": "export { default } from 'pkg';",
+    "limit": 6144
+  },
+  {
+    "name": "import { createScrollAnimate }",
+    "import": "export { createScrollAnimate } from 'pkg';",
+    "limit": 6144
+  },
+  {
+    "name": "import { sequence }",
+    "import": "export { sequence } from 'pkg';",
+    "limit": 6656
+  },
+  {
+    "name": "import { staggerChildren }",
+    "import": "export { staggerChildren } from 'pkg';",
+    "limit": 6400
+  },
+  {
+    "name": "import 'use-scroll-animate/svelte'",
+    "import": "export * from 'pkg/svelte';",
+    "limit": 6656
+  },
+  {
+    "name": "import 'use-scroll-animate/solid'",
+    "import": "export * from 'pkg/solid';",
+    "limit": 6656
+  },
+  {
+    "name": "import 'use-scroll-animate/element'",
+    "import": "export * from 'pkg/element';",
+    "limit": 6400
+  },
+  {
+    "name": "import 'use-scroll-animate/react'",
+    "import": "export * from 'pkg/react';",
+    "limit": 6400
+  },
+  {
+    "name": "import 'use-scroll-animate/vue'",
+    "import": "export * from 'pkg/vue';",
+    "limit": 6400
+  }
 ]

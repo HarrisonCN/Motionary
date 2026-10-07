@@ -20,7 +20,7 @@ In 2025, performance is everything. Traditional scroll animation libraries often
 - ⚡ **Zero Dependencies**: Pure Vanilla JS/TypeScript.
 - 🚀 **High Performance**: Powered by `IntersectionObserver` and the native `Web Animations API`. No scroll event listeners by default (the opt-in scroll-progress mode uses a single passive, rAF-throttled listener, only while tracked elements are on screen).
 - 🪶 **Ultra Lightweight**: ~5.5KB gzipped for the core (tree-shaken, minified ESM); everything incl. `sequence`, `staggerChildren` and the React/Vue helpers is ~6.7KB (UMD ~6.9KB). Every entry has a gzip budget enforced in CI (`size-budget.json`, `npm run size:check`).
-- 🧩 **Framework Agnostic**: Works seamlessly with Vanilla JS, React, Vue, Svelte, and more. First-class React Hooks and Vue Composables included.
+- 🧩 **Framework Agnostic**: Vanilla JS, React hooks, Vue composables, Svelte actions, Solid directives and a `<scroll-animate>` Web Component, each as its own entry point (`use-scroll-animate/react`, `/vue`, `/svelte`, `/solid`, `/element`).
 - ♿ **Accessible**: Respects `prefers-reduced-motion` out of the box (content is shown immediately, no entrance or parallax motion).
 - 🖥️ **SSR-safe**: Importing (and even calling) the API on the server is a no-op.
 
@@ -244,11 +244,13 @@ Via a `<script>` tag (UMD build), the default instance lives at `ScrollAnimate.d
 <script>ScrollAnimate.default.init();</script>
 ```
 
-## React & Vue
+## Frameworks
+
+### React & Vue
 
 ```jsx
 import React from 'react';
-import { createReactHooks } from 'use-scroll-animate';
+import { createReactHooks } from 'use-scroll-animate/react'; // or from 'use-scroll-animate'
 const { useScrollAnimate, useScrollStagger } = createReactHooks(React);
 
 function Card() {
@@ -259,7 +261,7 @@ function Card() {
 
 ```js
 import { ref, onMounted, onUnmounted } from 'vue';
-import { createVueComposables } from 'use-scroll-animate';
+import { createVueComposables } from 'use-scroll-animate/vue'; // or from 'use-scroll-animate'
 const { useScrollAnimate, useScrollStagger } = createVueComposables({ ref, onMounted, onUnmounted });
 const { animateRef } = useScrollAnimate({ animation: 'fade-in-left' });
 const { staggerRef } = useScrollStagger({ stagger: 60, observeChildren: true }); // <ul ref="staggerRef">
@@ -273,7 +275,59 @@ function Feed({ items }) {
 }
 ```
 
-Hooks and composables share the core engine, so `once`, `offset`, custom easing functions, parallax and reduced-motion handling behave exactly like the vanilla API.
+### Svelte (`use-scroll-animate/svelte`)
+
+Actions, no `svelte` import needed (Svelte 3, 4 and 5):
+
+```svelte
+<script>
+  import { scrollAnimate, scrollStagger } from 'use-scroll-animate/svelte';
+  let items = [];
+</script>
+
+<h2 use:scrollAnimate={{ animation: 'fade-in-up', duration: 800 }}>Title</h2>
+<ul use:scrollStagger={{ stagger: 60, observeChildren: true }}>
+  {#each items as item}<li>{item}</li>{/each}
+</ul>
+```
+
+Updating the action's parameter swaps the callbacks immediately; other options are applied if the element has not animated yet (so visible content is never re-hidden). Pass `instance` to use your own `createScrollAnimate()` instance.
+
+### Solid (`use-scroll-animate/solid`)
+
+Directives and a `ref` primitive (`solid-js` is an optional peer dependency, needed only for this entry):
+
+```tsx
+import { scrollAnimate, scrollStagger, useScrollAnimate } from 'use-scroll-animate/solid';
+scrollAnimate; scrollStagger; // keep the directive imports (TypeScript)
+
+<div use:scrollAnimate={{ animation: 'zoom-in' }}>…</div>
+<ul use:scrollStagger={{ stagger: 60 }}>…</ul>
+<div ref={useScrollAnimate({ animation: 'fade-in-left' })}>…</div>
+```
+
+`use:scrollAnimate` / `use:scrollStagger` are typed through `JSX.Directives`. Elements are observed on mount and released on cleanup.
+
+### Web Component (`use-scroll-animate/element`)
+
+```html
+<script type="module">
+  import { defineScrollAnimate } from 'use-scroll-animate/element';
+  defineScrollAnimate(); // registers <scroll-animate>; defineScrollAnimate('my-reveal') for another tag
+</script>
+
+<scroll-animate animation="fade-in-up" duration="800" easing="spring">…</scroll-animate>
+```
+
+Or without a build step (registers `<scroll-animate>` on load):
+
+```html
+<script src="https://unpkg.com/use-scroll-animate/dist/element.umd.js"></script>
+```
+
+Attributes are the `data-sa-*` attributes without the prefix (`animation`, `duration`, `delay`, `easing`, `threshold`, `root-margin`, `offset`, `once`, `repeat`, `engine`, `view-range`, `progress`, `progress-var`, `parallax-*`). The element dispatches `sa:enter`, `sa:leave`, `sa:start`, `sa:complete` and, with `progress`/`progress-var`, `sa:progress` (`event.detail.progress`). It renders as `display: block` unless you style it.
+
+All integrations share the core engine (and, through shared chunks, the same code when you import several entries), so `once`, `offset`, custom easing functions, parallax, the native engine and reduced-motion handling behave exactly like the vanilla API.
 
 ## Contributing
 
