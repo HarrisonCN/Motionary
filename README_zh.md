@@ -10,6 +10,8 @@
 
 [English](./README.md) | [简体中文](./README_zh.md) | [日本語](./README_ja.md)
 
+**[✨ 在线效果商店：所有动画实时预览，代码一键复制](https://harrisoncn.github.io/use-scroll-animate/)**
+
 </div>
 
 ## 为什么选择 `use-scroll-animate`？

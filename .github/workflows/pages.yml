@@ -1,0 +1,62 @@
+name: Showcase (GitHub Pages)
+
+# Builds dist/ and publishes the no-build showcase (showcase/), the preset
+# playground (demo/) and the dist/ files they import to GitHub Pages.
+# Requires Settings → Pages → Source: "GitHub Actions".
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build site
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npm run build
+      - name: Assemble _site
+        run: |
+          mkdir -p _site
+          cp -r showcase demo dist _site/
+          rm -f _site/dist/*.map _site/dist/chunks/*.map
+          touch _site/.nojekyll
+          cat > _site/index.html <<'HTML'
+          <!doctype html>
+          <meta charset="utf-8">
+          <title>use-scroll-animate</title>
+          <meta http-equiv="refresh" content="0; url=./showcase/">
+          <script>location.replace('./showcase/' + location.hash)</script>
+          <a href="./showcase/">use-scroll-animate showcase</a>
+          HTML
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}showcase/
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
