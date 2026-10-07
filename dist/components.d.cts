@@ -826,6 +826,8 @@ interface ConnectedOptions {
  * `ConnectedAnimationService`: `to` flies from the position and size of
  * `from` into its own place (e.g. a thumbnail opening into a detail view).
  * Call it right after `to` is shown. Transforms only.
+ *
+ * @deprecated since 3.9, removed in 4.0 — use `sharedTransition()` (components/layout).
  */
 declare function connectedAnimation(from: Element, to: HTMLElement, options?: ConnectedOptions): Promise<void>;
 
@@ -2342,6 +2344,66 @@ declare global {
     }
 }
 
+/**
+ * `<usa-pack name="ecommerce">` — applies an effect pack (`ecommerce` ·
+ * `portfolio` · `dashboard` · `game` · `landing`) to its subtree:
+ * descendants opt in with `data-role` (see `PACKS`). Re-applies when
+ * `name` changes; undone on disconnect.
+ */
+interface UsaPackElement extends UsaElement {
+    readonly roles: string[];
+}
+declare function definePack(tag?: string): CustomElementConstructor | undefined;
+
+type Cleanup = () => void;
+interface PackContext {
+    root: HTMLElement;
+    /** Index of the element among those with the same role (for staggering). */
+    index: number;
+    reduced: boolean;
+}
+/** Count `el`'s number up from 0 when it enters the view (keeps prefix / suffix / decimals). */
+declare function countUp(el: HTMLElement, duration?: number): Cleanup;
+/**
+ * Fly a copy of `from` (e.g. a product image) into `to` (the cart icon) along
+ * an arc, then bump the target. Resolves when it lands. Instant under
+ * reduced motion (only the bump's state change, no flight).
+ */
+declare function flyToCart(from: Element, to: Element, o?: {
+    duration?: number;
+}): Promise<void>;
+/** The five effect packs: `data-role` → primitives. */
+declare const PACKS: Record<string, Record<string, string[]>>;
+type PackName = keyof typeof PACKS;
+/**
+ * Apply an effect pack to `root`: every descendant with a `data-role` the
+ * pack knows gets its effects (staggered by index). Returns an undo function.
+ * Reduced motion: only non-motion behaviour (e.g. the cart event) remains.
+ *
+ * @example
+ * applyPack('ecommerce', document.querySelector('main'));
+ * // <article data-role="product">… <button data-role="add-to-cart"> … <a data-role="cart">
+ */
+declare function applyPack(name: PackName | string, root?: HTMLElement | Document): Cleanup;
+/** Primitive names a pack uses (for docs / tooling). */
+declare const PACK_PRIMITIVES: string[];
+
+/**
+ * use-scroll-animate/components/packs — effect packs (v3.9).
+ * Ready-made motion for e-commerce, portfolio, dashboard, game UI and
+ * landing pages: mark elements with `data-role` and apply a pack with
+ * `<usa-pack name="…">` or `applyPack(name, root)`. Includes `flyToCart()`
+ * and `countUp()`.
+ */
+
+/** Register every component of this category under its default tag. */
+declare function definePacksComponents(): void;
+declare global {
+    interface HTMLElementTagNameMap {
+        'usa-pack': UsaPackElement;
+    }
+}
+
 /** The component categories and their default tags. */
 declare const COMPONENT_CATEGORIES: {
     readonly reveal: readonly ["usa-reveal", "usa-stagger", "usa-scroll-progress", "usa-scrolly"];
@@ -2361,6 +2423,7 @@ declare const COMPONENT_CATEGORIES: {
     readonly webgl: readonly ["usa-shader", "usa-distort", "usa-liquid"];
     readonly depth: readonly ["usa-cube", "usa-depth"];
     readonly layout: readonly ["usa-auto-animate", "usa-masonry"];
+    readonly packs: readonly ["usa-pack"];
 };
 type ComponentCategory = keyof typeof COMPONENT_CATEGORIES;
 
@@ -2370,5 +2433,5 @@ type ComponentCategory = keyof typeof COMPONENT_CATEGORIES;
  */
 declare function defineComponents(categories?: ComponentCategory[]): void;
 
-export { AMBIENT_EFFECTS, ANIM_ICONS, BUTTON_DEFORMS, CARD_EFFECTS, CLICK_EFFECTS, COMPONENT_CATEGORIES, CURSOR_MODES, MASK_SHAPES, MORPH_ICONS, MOTION_SCALE, PAGE_EFFECTS, REVEAL_EFFECTS, SHADERS, SPINNER_VARIANTS, SPRING_EFFECTS, SPRING_PRESETS, TIMELINE_PRESETS, VARIANTS, adoptVariants, autoAnimate, burst, confetti, configureComponents, connectedAnimation, createSpring, defineAccordion, defineAcrylic, defineAmbient, defineAnimIcon, defineAurora, defineAutoAnimate, defineAutoSkeleton, defineAvatarStack, defineBackToTop, defineBackgroundComponents, defineBadge, defineBlobs, defineBottomSheet, defineButton, defineCard, defineCardComponents, defineCardStack, defineCarousel3d, defineCheck, defineCheckbox, defineClick, defineClickComponents, defineComponents, defineCounter, defineCube, defineCursor, defineDepth, defineDepthComponents, defineDialog, defineDistort, defineDotNetwork, defineDoubleTap, defineDraggable, defineDraw, defineDrawer, defineFab, defineFeedbackComponents, defineFlipList, defineFullpage, defineGestureComponents, defineGlitch, defineGradientText, defineGrain, defineGridGlow, defineHandwriting, defineHold, defineIconMorph, defineInteractionComponents, defineLayoutComponents, defineLike, defineLiquid, defineLoadingBar, defineMagnetic, defineMarquee, defineMaskReveal, defineMasonry, defineMorph, defineMotionSwitch, defineNavbar, defineOverscroll, definePageComponents, defineParticles, definePhysicsComponents, definePinchZoom, definePopover, definePress, defineProgress, definePullRefresh, defineRating, defineReveal, defineRevealComponents, defineRipple, defineScramble, defineScrollHighlight, defineScrollProgress, defineScrolly, defineShader, defineShimmerText, defineSkeleton, defineSlider, defineSpinner, defineSplash, defineSplitText, defineSpotlight, defineSpring, defineStagger, defineStickyStack, defineSvgComponents, defineSwipeable, defineTabs, defineTextComponents, defineTextRotate, defineTilt, defineTimeline, defineTimelineComponents, defineToaster, defineToggle, defineTooltip, defineTransitionComponents, defineTypewriter, defineUiComponents, defineViewSwitch, defineWaterRipple, defineWaveText, defineWebglComponents, deviceTilt, drawLines, easeOutExpo, enableMpaTransitions, flip, flipFrames, fluentPreset, fragmentSource, gesture, getMotionIntensity, glQuad, haptic, interpolatePath, linearEasing, loadingBar, masonryLayout, morphPath, morphTo, orientationToTilt, pageTransition, pathsCompatible, pinchScale, prefersReducedMotion, projectInertia, readScrollProgress, requestOrientationPermission, resolvePosition, resolveSpring, restoreMotionIntensity, revealKeyframes, rubberBand, scrambleFrame, scrollToTarget, setMotionIntensity, setVariant, shake, sharedTransition, smoothScroll, snapTo, spring, springEasing, springEffectKeyframes, springSamples, stepSpring, supportsLinearEasing, supportsOrientation, supportsViewTransitions, supportsWebGL, swipeDirection, themeTransition, timeline, toast, viewTransition };
-export type { AmbientEffect, AutoAnimateOptions, BurstOptions, ButtonDeform, ButtonShape, ButtonState, CardEffect, ClickEffect, ComponentCategory, ComponentsConfig, ConfettiOptions, ConnectedOptions, CursorMode, DialogVariant, FlipOptions, FluentPresetOptions, GLQuad, GestureHandlers, GestureOptions, MorphOptions, MotionIntensity, PageEffect, PageTransitionOptions, PanState, PinchState, Placement, PressState, RevealEffect, ScrubOptions, SharedOptions, SmoothScrollOptions, SpinnerVariant, SpringConfig, SpringEffect, SpringInput, SpringPreset, SpringValue, SpringValueOptions, SwipeDirection, SwipeState, TiltReading, Timeline, TimelineOptions, TimelinePosition, TimelineStepOptions, ToastHandle, ToastOptions, ToastType, UsaAccordionElement, UsaAcrylicElement, UsaAmbientElement, UsaAnimIconElement, UsaAuroraElement, UsaAutoAnimateElement, UsaAutoSkeletonElement, UsaAvatarStackElement, UsaBackToTopElement, UsaBadgeElement, UsaBlobsElement, UsaBottomSheetElement, UsaButtonElement, UsaCardElement, UsaCardStackElement, UsaCarousel3dElement, UsaCheckElement, UsaCheckboxElement, UsaClickElement, UsaCounterElement, UsaCubeElement, UsaCursorElement, UsaDepthElement, UsaDialogElement, UsaDotNetworkElement, UsaDoubleTapElement, UsaDraggableElement, UsaDrawElement, UsaDrawerElement, UsaElement, UsaFabElement, UsaFlipListElement, UsaFullpageElement, UsaGLElement, UsaGlitchElement, UsaGradientTextElement, UsaGrainElement, UsaGridGlowElement, UsaHandwritingElement, UsaHoldElement, UsaIconMorphElement, UsaLikeElement, UsaLoadingBarElement, UsaMagneticElement, UsaMarqueeElement, UsaMaskRevealElement, UsaMasonryElement, UsaMorphElement, UsaMotionSwitchElement, UsaNavbarElement, UsaOverscrollElement, UsaParticlesElement, UsaPinchZoomElement, UsaPopoverElement, UsaPressElement, UsaProgressElement, UsaPullRefreshElement, UsaRatingElement, UsaRevealElement, UsaRippleElement, UsaScrambleElement, UsaScrollHighlightElement, UsaScrollProgressElement, UsaScrollyElement, UsaShimmerTextElement, UsaSkeletonElement, UsaSliderElement, UsaSpinnerElement, UsaSplashElement, UsaSplitTextElement, UsaSpotlightElement, UsaSpringElement, UsaStaggerElement, UsaStickyStackElement, UsaSwipeableElement, UsaTabsElement, UsaTextRotateElement, UsaTiltElement, UsaTimelineElement, UsaToasterElement, UsaToggleElement, UsaTooltipElement, UsaTypewriterElement, UsaViewSwitchElement, UsaWaterRippleElement, UsaWaveTextElement, Variant, ViewTransitionOptions };
+export { AMBIENT_EFFECTS, ANIM_ICONS, BUTTON_DEFORMS, CARD_EFFECTS, CLICK_EFFECTS, COMPONENT_CATEGORIES, CURSOR_MODES, MASK_SHAPES, MORPH_ICONS, MOTION_SCALE, PACKS, PACK_PRIMITIVES, PAGE_EFFECTS, REVEAL_EFFECTS, SHADERS, SPINNER_VARIANTS, SPRING_EFFECTS, SPRING_PRESETS, TIMELINE_PRESETS, VARIANTS, adoptVariants, applyPack, autoAnimate, burst, confetti, configureComponents, connectedAnimation, countUp, createSpring, defineAccordion, defineAcrylic, defineAmbient, defineAnimIcon, defineAurora, defineAutoAnimate, defineAutoSkeleton, defineAvatarStack, defineBackToTop, defineBackgroundComponents, defineBadge, defineBlobs, defineBottomSheet, defineButton, defineCard, defineCardComponents, defineCardStack, defineCarousel3d, defineCheck, defineCheckbox, defineClick, defineClickComponents, defineComponents, defineCounter, defineCube, defineCursor, defineDepth, defineDepthComponents, defineDialog, defineDistort, defineDotNetwork, defineDoubleTap, defineDraggable, defineDraw, defineDrawer, defineFab, defineFeedbackComponents, defineFlipList, defineFullpage, defineGestureComponents, defineGlitch, defineGradientText, defineGrain, defineGridGlow, defineHandwriting, defineHold, defineIconMorph, defineInteractionComponents, defineLayoutComponents, defineLike, defineLiquid, defineLoadingBar, defineMagnetic, defineMarquee, defineMaskReveal, defineMasonry, defineMorph, defineMotionSwitch, defineNavbar, defineOverscroll, definePack, definePacksComponents, definePageComponents, defineParticles, definePhysicsComponents, definePinchZoom, definePopover, definePress, defineProgress, definePullRefresh, defineRating, defineReveal, defineRevealComponents, defineRipple, defineScramble, defineScrollHighlight, defineScrollProgress, defineScrolly, defineShader, defineShimmerText, defineSkeleton, defineSlider, defineSpinner, defineSplash, defineSplitText, defineSpotlight, defineSpring, defineStagger, defineStickyStack, defineSvgComponents, defineSwipeable, defineTabs, defineTextComponents, defineTextRotate, defineTilt, defineTimeline, defineTimelineComponents, defineToaster, defineToggle, defineTooltip, defineTransitionComponents, defineTypewriter, defineUiComponents, defineViewSwitch, defineWaterRipple, defineWaveText, defineWebglComponents, deviceTilt, drawLines, easeOutExpo, enableMpaTransitions, flip, flipFrames, fluentPreset, flyToCart, fragmentSource, gesture, getMotionIntensity, glQuad, haptic, interpolatePath, linearEasing, loadingBar, masonryLayout, morphPath, morphTo, orientationToTilt, pageTransition, pathsCompatible, pinchScale, prefersReducedMotion, projectInertia, readScrollProgress, requestOrientationPermission, resolvePosition, resolveSpring, restoreMotionIntensity, revealKeyframes, rubberBand, scrambleFrame, scrollToTarget, setMotionIntensity, setVariant, shake, sharedTransition, smoothScroll, snapTo, spring, springEasing, springEffectKeyframes, springSamples, stepSpring, supportsLinearEasing, supportsOrientation, supportsViewTransitions, supportsWebGL, swipeDirection, themeTransition, timeline, toast, viewTransition };
+export type { AmbientEffect, AutoAnimateOptions, BurstOptions, ButtonDeform, ButtonShape, ButtonState, CardEffect, ClickEffect, ComponentCategory, ComponentsConfig, ConfettiOptions, ConnectedOptions, CursorMode, DialogVariant, FlipOptions, FluentPresetOptions, GLQuad, GestureHandlers, GestureOptions, MorphOptions, MotionIntensity, PackContext, PackName, PageEffect, PageTransitionOptions, PanState, PinchState, Placement, PressState, RevealEffect, ScrubOptions, SharedOptions, SmoothScrollOptions, SpinnerVariant, SpringConfig, SpringEffect, SpringInput, SpringPreset, SpringValue, SpringValueOptions, SwipeDirection, SwipeState, TiltReading, Timeline, TimelineOptions, TimelinePosition, TimelineStepOptions, ToastHandle, ToastOptions, ToastType, UsaAccordionElement, UsaAcrylicElement, UsaAmbientElement, UsaAnimIconElement, UsaAuroraElement, UsaAutoAnimateElement, UsaAutoSkeletonElement, UsaAvatarStackElement, UsaBackToTopElement, UsaBadgeElement, UsaBlobsElement, UsaBottomSheetElement, UsaButtonElement, UsaCardElement, UsaCardStackElement, UsaCarousel3dElement, UsaCheckElement, UsaCheckboxElement, UsaClickElement, UsaCounterElement, UsaCubeElement, UsaCursorElement, UsaDepthElement, UsaDialogElement, UsaDotNetworkElement, UsaDoubleTapElement, UsaDraggableElement, UsaDrawElement, UsaDrawerElement, UsaElement, UsaFabElement, UsaFlipListElement, UsaFullpageElement, UsaGLElement, UsaGlitchElement, UsaGradientTextElement, UsaGrainElement, UsaGridGlowElement, UsaHandwritingElement, UsaHoldElement, UsaIconMorphElement, UsaLikeElement, UsaLoadingBarElement, UsaMagneticElement, UsaMarqueeElement, UsaMaskRevealElement, UsaMasonryElement, UsaMorphElement, UsaMotionSwitchElement, UsaNavbarElement, UsaOverscrollElement, UsaPackElement, UsaParticlesElement, UsaPinchZoomElement, UsaPopoverElement, UsaPressElement, UsaProgressElement, UsaPullRefreshElement, UsaRatingElement, UsaRevealElement, UsaRippleElement, UsaScrambleElement, UsaScrollHighlightElement, UsaScrollProgressElement, UsaScrollyElement, UsaShimmerTextElement, UsaSkeletonElement, UsaSliderElement, UsaSpinnerElement, UsaSplashElement, UsaSplitTextElement, UsaSpotlightElement, UsaSpringElement, UsaStaggerElement, UsaStickyStackElement, UsaSwipeableElement, UsaTabsElement, UsaTextRotateElement, UsaTiltElement, UsaTimelineElement, UsaToasterElement, UsaToggleElement, UsaTooltipElement, UsaTypewriterElement, UsaViewSwitchElement, UsaWaterRippleElement, UsaWaveTextElement, Variant, ViewTransitionOptions };

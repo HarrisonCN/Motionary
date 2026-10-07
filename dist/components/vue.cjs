@@ -2,27 +2,28 @@
 
 var components = require('../components.cjs');
 require('./reveal.cjs');
-require('../chunks/base-CXx7jZ-o.cjs');
+require('../chunks/base-Dm6ee5ug.cjs');
 require('./text.cjs');
 require('./interaction.cjs');
 require('./feedback.cjs');
 require('./background.cjs');
-require('../chunks/variants-BNIrn4ch.cjs');
+require('../chunks/variants-_dC-ey6R.cjs');
 require('./transitions.cjs');
 require('./physics.cjs');
-require('../chunks/spring-2OTnYCzm.cjs');
+require('../chunks/spring-Dp5BllPB.cjs');
 require('./cards.cjs');
 require('./click.cjs');
 require('./ui.cjs');
 require('./page.cjs');
 require('./timeline.cjs');
 require('./gesture.cjs');
-require('../chunks/core-IaorbTdu.cjs');
+require('../chunks/core-CHAtivHV.cjs');
 require('./svg.cjs');
 require('./webgl.cjs');
 require('./depth.cjs');
 require('./layout.cjs');
-require('../chunks/index-tags-wbuPiMR6.cjs');
+require('./packs.cjs');
+require('../chunks/index-tags-DYYsgbba.cjs');
 
 /**
  * use-scroll-animate/components/vue — Vue integration (v2.9).

@@ -1,4 +1,4 @@
-import { defineElement, FLUENT_DECELERATE, type UsaElement } from '../base';
+import { defineElement, deprecate, FLUENT_DECELERATE, type UsaElement } from '../base';
 import css from './flip-list.css?raw';
 
 /**
@@ -36,6 +36,7 @@ export function defineFlipList(tag = 'usa-flip-list'): CustomElementConstructor 
         }
 
         mount(): void {
+          deprecate('usa-flip-list', '<usa-flip-list> is deprecated and will be removed in 4.0 — use <usa-auto-animate> (components/layout), which also animates additions and removals. See docs/upgrading-4.md.');
           this.snapshot();
           if (typeof MutationObserver !== 'undefined') {
             const mo = new MutationObserver(() => {

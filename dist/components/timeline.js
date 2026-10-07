@@ -1,5 +1,5 @@
-import { p as prefersReducedMotion, e as caf, b as clamp, d as applyFrame, r as raf, m as motionScale, n as now, h as defineElement } from '../chunks/base-BpROOcey.js';
-export { a as configureComponents } from '../chunks/base-BpROOcey.js';
+import { p as prefersReducedMotion, e as caf, b as clamp, d as applyFrame, r as raf, m as motionScale, n as now, i as defineElement } from '../chunks/base-BRIPyPtX.js';
+export { a as configureComponents } from '../chunks/base-BRIPyPtX.js';
 
 /** Keyframe presets usable by name in `to()` and `data-tl`. */
 const TIMELINE_PRESETS = {

@@ -216,3 +216,10 @@ usa-toggle { --usa-toggle-on: var(--accent); }
 .demo-masonry > div { border-radius: 8px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); opacity: 0.85; }
 .demo-shared__thumb { width: 56px; height: 56px; border-radius: 12px; border: 0; color: #fff; font-weight: 800; background: linear-gradient(135deg, var(--accent), var(--accent-2)); cursor: pointer; }
 .demo-shared__big { width: 200px; height: 120px; border-radius: 18px; display: grid; place-items: center; color: #fff; font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, var(--accent), var(--accent-2)); margin-bottom: 8px; }
+
+/* v3.9 effect packs */
+.demo-pack { width: min(100%, 340px); }
+.demo-pack h4 { margin: 0 0 8px; }
+.demo-pack__card { display: grid; gap: 6px; justify-items: center; padding: 10px; border-radius: 14px; background: rgba(127, 127, 127, 0.12); min-width: 84px; }
+.demo-pack__thumb { font-size: 1.8rem; }
+.demo-pack__cart { font-size: 1.6rem; display: inline-block; }

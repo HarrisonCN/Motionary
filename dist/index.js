@@ -7,6 +7,7 @@ export { s as staggerChildren } from './chunks/stagger-BFAhKknX.js';
  * Chain animations on several targets, one after another (or overlapping).
  */
 let fallback = null;
+let warned = false;
 function plan(steps, defaults) {
     const out = [];
     let cursor = 0;
@@ -28,6 +29,8 @@ function plan(steps, defaults) {
 /**
  * Build a timeline of animations.
  *
+ * @deprecated since 3.9, removed in 4.0 — use `timeline()` (`.to(target, preset, { at: '-=300' })`).
+ *
  * @example
  * sequence([
  *   { target: '.title', animation: 'fade-in-up' },
@@ -36,6 +39,10 @@ function plan(steps, defaults) {
  * ], { trigger: '.hero' });
  */
 function sequence(steps, options = {}) {
+    if (!warned && typeof console !== 'undefined') {
+        warned = true;
+        console.warn("[use-scroll-animate] sequence() is deprecated and will be removed in 4.0 — use timeline() from 'use-scroll-animate/components/timeline' (also exported from 'use-scroll-animate' in 4.0). See docs/upgrading-4.md.");
+    }
     const { trigger, instance, ...defaults } = options;
     const sa = () => instance || fallback || (fallback = createScrollAnimate());
     let io;

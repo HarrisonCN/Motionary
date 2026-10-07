@@ -17,6 +17,7 @@ declare const COMPONENT_CATEGORIES: {
     readonly webgl: readonly ["usa-shader", "usa-distort", "usa-liquid"];
     readonly depth: readonly ["usa-cube", "usa-depth"];
     readonly layout: readonly ["usa-auto-animate", "usa-masonry"];
+    readonly packs: readonly ["usa-pack"];
 };
 
 /**

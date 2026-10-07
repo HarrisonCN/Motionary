@@ -51,6 +51,7 @@ defineComponents(); // カテゴリ単位: import { defineTextComponents } from 
 | **Canvas / WebGL** (`/components/webgl`) | `<usa-shader>`（gradient · plasma · waves · aurora · カスタム GLSL）· `<usa-distort>` · `<usa-liquid>` · `glQuad()` |
 | **3D / 奥行き** (`/components/depth`) | `<usa-cube>` · `<usa-depth>`（ポインター · ジャイロ · スクロール視差）· `deviceTilt()` |
 | **レイアウト** (`/components/layout`) | `<usa-auto-animate>` / `autoAnimate()` · `<usa-masonry>` · `sharedTransition()`（共有要素） |
+| **エフェクトパック** (`/components/packs`) | `<usa-pack>` (`name="ecommerce \| portfolio \| dashboard \| game \| landing"`) · `applyPack()` · `flyToCart()` |
 
 ## ドキュメント
 

@@ -303,6 +303,20 @@ Also see `flip()` / `connectedAnimation()` / `<usa-flip-list>` in `components/tr
 
 Hybrid / desktop hosts (MAUI, Flutter WebView, Electron, Tauri): [hybrid-apps.md](./hybrid-apps.md).
 
+### v3.9 Effect packs (`components/packs`)
+
+| Pack | `data-role` → effect |
+|---|---|
+| `ecommerce` | `product` reveal + lift · `add-to-cart` press + fly to `cart` · `cart` bump · `price` count up · `badge` pulse |
+| `portfolio` | `project` reveal + lift · `heading` reveal · `stat` count up · `contact` press + pulse |
+| `dashboard` | `card` reveal · `stat` count up · `alert` pulse · `action` press |
+| `game` | `button` press · `score` count up + bump · `item` float · `hit` shake · `reward` pulse |
+| `landing` | `hero` reveal · `feature` reveal + lift · `cta` press + pulse · `logo` float · `stat` count up |
+
+`<usa-pack>` (e.g. `<usa-pack name="ecommerce">…</usa-pack>`) or `applyPack('ecommerce', root)`; helpers `flyToCart(from, to)`, `countUp(el)`.
+
+**Deprecated in 3.9, removed in 4.0:** `sequence()`, `connectedAnimation()`, `<usa-flip-list>` — see [upgrading-4.md](./upgrading-4.md).
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

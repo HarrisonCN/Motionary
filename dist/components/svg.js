@@ -1,5 +1,5 @@
-import { b as clamp, m as motionScale, e as caf, p as prefersReducedMotion, n as now, r as raf, h as defineElement, i as EASE_OUT } from '../chunks/base-BpROOcey.js';
-export { a as configureComponents } from '../chunks/base-BpROOcey.js';
+import { b as clamp, m as motionScale, e as caf, p as prefersReducedMotion, n as now, r as raf, i as defineElement, h as EASE_OUT } from '../chunks/base-BRIPyPtX.js';
+export { a as configureComponents } from '../chunks/base-BRIPyPtX.js';
 
 const NUM = /-?(?:\d+\.?\d*|\.\d+)(?:e[-+]?\d+)?/gi;
 /** `true` when two path strings share the same commands (so their numbers can be interpolated). */

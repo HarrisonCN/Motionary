@@ -1590,6 +1590,30 @@ declare global {
     }
 }
 
+/**
+ * `<usa-pack name="ecommerce">` — applies an effect pack (`ecommerce` ·
+ * `portfolio` · `dashboard` · `game` · `landing`) to its subtree:
+ * descendants opt in with `data-role` (see `PACKS`). Re-applies when
+ * `name` changes; undone on disconnect.
+ */
+interface UsaPackElement extends UsaElement {
+    readonly roles: string[];
+}
+
+/**
+ * use-scroll-animate/components/packs — effect packs (v3.9).
+ * Ready-made motion for e-commerce, portfolio, dashboard, game UI and
+ * landing pages: mark elements with `data-role` and apply a pack with
+ * `<usa-pack name="…">` or `applyPack(name, root)`. Includes `flyToCart()`
+ * and `countUp()`.
+ */
+
+declare global {
+    interface HTMLElementTagNameMap {
+        'usa-pack': UsaPackElement;
+    }
+}
+
 /** The component categories and their default tags. */
 declare const COMPONENT_CATEGORIES: {
     readonly reveal: readonly ["usa-reveal", "usa-stagger", "usa-scroll-progress", "usa-scrolly"];
@@ -1609,6 +1633,7 @@ declare const COMPONENT_CATEGORIES: {
     readonly webgl: readonly ["usa-shader", "usa-distort", "usa-liquid"];
     readonly depth: readonly ["usa-cube", "usa-depth"];
     readonly layout: readonly ["usa-auto-animate", "usa-masonry"];
+    readonly packs: readonly ["usa-pack"];
 };
 type ComponentCategory = keyof typeof COMPONENT_CATEGORIES;
 

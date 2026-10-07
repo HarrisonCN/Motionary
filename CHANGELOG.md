@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.9.0] - 2026-10-07
+
+### Added
+- **Effect packs** — new category `use-scroll-animate/components/packs`: ready-made motion for whole page types. Mark elements with `data-role` and apply a pack with `<usa-pack name="…">` or `applyPack(name, root)` (returns undo):
+  - `ecommerce` — `product` (reveal + lift), `add-to-cart` (press + fly to cart), `cart` (bump), `price` (count up), `badge` (pulse)
+  - `portfolio` — `project`, `heading`, `stat`, `contact`
+  - `dashboard` — `card`, `stat`, `alert`, `action`
+  - `game` — `button`, `score`, `item` (float), `hit` (shake), `reward`
+  - `landing` — `hero`, `feature`, `cta`, `logo`, `stat`
+  - Helpers: `flyToCart(from, to)` (arc flight + cart bump), `countUp(el)` (keeps currency / separators / decimals, accessible label), `PACKS`, `PACK_PRIMITIVES`.
+- Reduced motion: packs leave content static (numbers show their final value, no flights / pulses / floats).
+- Showcase: new **Effect packs** gallery category with a live demo per pack and a `flyToCart()` demo.
+
+### Deprecated (removed in 4.0)
+- `sequence()` → `timeline()` (since 3.1).
+- `connectedAnimation()` → `sharedTransition()` (since 3.6).
+- `<usa-flip-list>` / `defineFlipList()` → `<usa-auto-animate>` / `autoAnimate()` (since 3.6).
+
+Each logs a one-time console warning linking to the new **[Upgrading to 4.0](./docs/upgrading-4.md)** guide.
+
 ## [3.8.0] - 2026-10-07
 
 ### Added

@@ -248,6 +248,8 @@ interface SequenceController {
 /**
  * Build a timeline of animations.
  *
+ * @deprecated since 3.9, removed in 4.0 — use `timeline()` (`.to(target, preset, { at: '-=300' })`).
+ *
  * @example
  * sequence([
  *   { target: '.title', animation: 'fade-in-up' },

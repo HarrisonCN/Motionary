@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * use-scroll-animate/components — shared base for the `<usa-*>` custom elements.
  *
@@ -231,6 +233,15 @@ const EASE_OUT = 'cubic-bezier(0.22, 1, 0.36, 1)';
 const EASE_SPRING = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
 /** Windows Fluent "decelerate" / "point-to-point" curves. */
 const FLUENT_DECELERATE = 'cubic-bezier(0.1, 0.9, 0.2, 1)';
+const warned = new Set();
+/** Log a deprecation once per key (console.warn). */
+function deprecate(key, message) {
+    if (warned.has(key))
+        return;
+    warned.add(key);
+    if (typeof console !== 'undefined')
+        console.warn(`[use-scroll-animate] ${message}`);
+}
 /**
  * The `kind` attribute of `<usa-spinner>`, `<usa-check>`, `<usa-dialog>` and
  * `<usa-acrylic>` (3.0: `variant` only selects a style variant).
@@ -241,5 +252,24 @@ function kindOf(el, valid, fallback) {
 }
 const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
 
-export { EASE_SPRING as E, FLUENT_DECELERATE as F, MOTION_SCALE as M, configureComponents as a, clamp as b, canDefine as c, applyFrame as d, caf as e, adoptStyles as f, getMotionIntensity as g, defineElement as h, EASE_OUT as i, srText as j, kindOf as k, motionScale as m, now as n, prefersReducedMotion as p, raf as r, shadowStyles as s };
-//# sourceMappingURL=base-BpROOcey.js.map
+exports.EASE_OUT = EASE_OUT;
+exports.EASE_SPRING = EASE_SPRING;
+exports.FLUENT_DECELERATE = FLUENT_DECELERATE;
+exports.MOTION_SCALE = MOTION_SCALE;
+exports.adoptStyles = adoptStyles;
+exports.applyFrame = applyFrame;
+exports.caf = caf;
+exports.canDefine = canDefine;
+exports.clamp = clamp;
+exports.configureComponents = configureComponents;
+exports.defineElement = defineElement;
+exports.deprecate = deprecate;
+exports.getMotionIntensity = getMotionIntensity;
+exports.kindOf = kindOf;
+exports.motionScale = motionScale;
+exports.now = now;
+exports.prefersReducedMotion = prefersReducedMotion;
+exports.raf = raf;
+exports.shadowStyles = shadowStyles;
+exports.srText = srText;
+//# sourceMappingURL=base-Dm6ee5ug.cjs.map

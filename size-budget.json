@@ -67,7 +67,7 @@
   {
     "name": "dist/components.umd.js (minified, all components + CSS)",
     "file": "dist/components.umd.js",
-    "limit": 76544
+    "limit": 82176
   },
   {
     "name": "dist/components.css",
@@ -77,7 +77,7 @@
   {
     "name": "import 'use-scroll-animate/components' (everything)",
     "import": "export * from 'pkg/components';",
-    "limit": 76032
+    "limit": 81920
   },
   {
     "name": "import 'use-scroll-animate/components/reveal'",
@@ -197,7 +197,7 @@
   {
     "name": "import 'use-scroll-animate/components/vue'",
     "import": "export * from 'pkg/components/vue';",
-    "limit": 71424
+    "limit": 76288
   },
   {
     "name": "import 'use-scroll-animate/components/lazy'",
@@ -278,5 +278,15 @@
     "name": "import 'use-scroll-animate/components/angular'",
     "import": "export * from 'pkg/components/angular';",
     "limit": 74496
+  },
+  {
+    "name": "import 'use-scroll-animate/components/packs'",
+    "import": "export * from 'pkg/components/packs';",
+    "limit": 3840
+  },
+  {
+    "name": "import { definePacksComponents } from '…/components/packs'",
+    "import": "export { definePacksComponents } from 'pkg/components/packs';",
+    "limit": 3584
   }
 ]
