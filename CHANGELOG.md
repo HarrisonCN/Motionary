@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.1] - 2026-10-07
+
+Bug-fix release; no API changes.
+
+### Fixed
+- Native engine (`engine: 'css'` / `'auto'`): elements that left the DOM (pruned by `watch()` / `init()`) stayed referenced by the instance until `destroy()`, which then cancelled their animations and rewrote their styles. They are now released when pruned.
+
+### Changed (maintenance)
+- Test for function easings no longer depends on the test DOM lacking `CSS.supports`.
+- Dependabot ignores semver-major npm updates (TypeScript 7 breaks the Rollup build, jsdom 30 drops Node 20); majors are adopted deliberately.
+
 ## [2.0.0] - 2026-10-07
 
 2.0 collects the 1.6–1.9 roadmap (native scroll timeline, Svelte/Solid/Web Component entries, exit animations and `parallax()`, docs and demo) and removes what 1.9 deprecated. See **MIGRATION from 1.x** below.

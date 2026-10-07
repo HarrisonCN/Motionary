@@ -668,6 +668,10 @@ export function createScrollAnimate(userConfig: ScrollAnimateConfig = {}): Scrol
       if (restore) {
         natives.delete(el);
         reveal(el, config);
+      } else if (el.isConnected === false) {
+        // Left the DOM: drop it too, or the instance keeps it alive (and
+        // destroy() touches it) for its whole lifetime.
+        natives.delete(el);
       }
       return;
     }

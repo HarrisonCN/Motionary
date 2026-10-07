@@ -11,6 +11,10 @@ updates:
         update-types: [minor, patch]
     commit-message:
       prefix: chore(deps)
+    # Majors are adopted deliberately (TypeScript 7 breaks the Rollup build, jsdom 30 drops Node 20).
+    ignore:
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
   - package-ecosystem: github-actions
     directory: /
     schedule:

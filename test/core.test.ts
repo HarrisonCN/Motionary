@@ -95,9 +95,12 @@ describe('observe / animate', () => {
 
   it('custom easing functions produce interpolated keyframes for any transform', async () => {
     const { createScrollAnimate } = await load();
+    // Without CSS linear() support (newer jsdom implements CSS.supports).
+    (globalThis as any).CSS = { supports: () => false };
     const sa = createScrollAnimate();
     const node = el();
     sa.animate(node, { animation: 'zoom-in', easing: (t) => t });
+    delete (globalThis as any).CSS;
     const kf = animations[0].keyframes;
     expect(kf.length).toBe(31);
     expect(kf[15].transform).toBe('scale(0.9)');

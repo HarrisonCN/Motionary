@@ -1,6 +1,6 @@
 {
   "name": "use-scroll-animate",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A lightweight, high-performance, dependency-free scroll animation library for modern web.",
   "type": "module",
   "main": "./dist/index.cjs",

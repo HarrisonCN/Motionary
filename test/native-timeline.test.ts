@@ -232,4 +232,17 @@ describe('engine option (native scroll-driven timeline)', () => {
     expect((animations[0].timing as any).timeline).toBeUndefined();
     expect(animations[0].timing.duration).toBe(600);
   });
+  it('releases native-engine elements that left the DOM (no longer held or touched by destroy())', async () => {
+    const { createScrollAnimate } = await load();
+    const sa = createScrollAnimate();
+    const node = el();
+    sa.observe(node, { animation: 'fade-in', repeat: true });
+    expect(sa.getObservedElements()[0].engine).toBe('css');
+    node.remove();
+    sa.init(); // prunes detached elements
+    expect(sa.getObservedElements()).toHaveLength(0);
+    sa.destroy();
+    expect(animations[0].cancelled).toBe(false);
+    expect(node.style.opacity).toBe('');
+  });
 });

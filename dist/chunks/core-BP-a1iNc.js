@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * use-scroll-animate - Animation Presets
  * Defines keyframes for all built-in animation presets
@@ -818,6 +816,11 @@ function createScrollAnimate(userConfig = {}) {
                 natives.delete(el);
                 reveal(el, config);
             }
+            else if (el.isConnected === false) {
+                // Left the DOM: drop it too, or the instance keeps it alive (and
+                // destroy() touches it) for its whole lifetime.
+                natives.delete(el);
+            }
             return;
         }
         // An element that never animated would otherwise stay invisible forever.
@@ -1135,18 +1138,5 @@ function createScrollAnimate(userConfig = {}) {
     return instance;
 }
 
-exports.EASING_MAP = EASING_MAP;
-exports.PRESETS = PRESETS;
-exports.createScrollAnimate = createScrollAnimate;
-exports.getScrollProgress = getScrollProgress;
-exports.hasDOM = hasDOM;
-exports.prefersReducedMotion = prefersReducedMotion;
-exports.prepareElement = prepareElement;
-exports.readOptions = readOptions;
-exports.resolveEasing = resolveEasing;
-exports.resolvePreset = resolvePreset;
-exports.resolveTargets = resolveTargets;
-exports.stopAnimation = stopAnimation;
-exports.supportsObserver = supportsObserver;
-exports.supportsScrollTimeline = supportsScrollTimeline;
-//# sourceMappingURL=core-CH41ekIo.cjs.map
+export { EASING_MAP as E, PRESETS as P, stopAnimation as a, prefersReducedMotion as b, createScrollAnimate as c, resolveEasing as d, resolvePreset as e, supportsScrollTimeline as f, getScrollProgress as g, hasDOM as h, readOptions as i, prepareElement as p, resolveTargets as r, supportsObserver as s };
+//# sourceMappingURL=core-BP-a1iNc.js.map
