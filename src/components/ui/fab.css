@@ -1,0 +1,10 @@
+/* <usa-fab> */
+usa-fab { position: fixed; right: max(20px, env(safe-area-inset-right)); bottom: max(20px, env(safe-area-inset-bottom)); z-index: 900; display: grid; place-items: center; }
+usa-fab[position="bottom-left"] { right: auto; left: max(20px, env(safe-area-inset-left)); }
+usa-fab[position="inline"] { position: relative; right: auto; bottom: auto; display: inline-grid; }
+usa-fab > * { grid-area: 1 / 1; }
+usa-fab .usa-fab-main { position: relative; z-index: 1; width: 56px; height: 56px; border-radius: min(var(--usa-radius, 14px) * 1.2, 28px); border: 0; display: grid; place-items: center; font-size: 24px; cursor: pointer; background: var(--usa-accent, #7c5cff); color: var(--usa-accent-text, #fff); box-shadow: var(--usa-shadow); transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); }
+usa-fab[open] .usa-fab-main { transform: rotate(45deg); }
+usa-fab .usa-fab-action { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; opacity: 0; transform: scale(0.4); will-change: transform, opacity; }
+usa-fab .usa-fab-main:focus-visible, usa-fab .usa-fab-action:focus-visible { outline: 2px solid var(--usa-accent, #7c5cff); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { usa-fab .usa-fab-main { transition: none; } }

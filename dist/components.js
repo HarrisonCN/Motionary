@@ -16,8 +16,11 @@ import { defineCardComponents } from './components/cards.js';
 export { CARD_EFFECTS, defineCard, defineCardStack, defineCarousel3d, defineStickyStack } from './components/cards.js';
 import { defineClickComponents } from './components/click.js';
 export { BUTTON_DEFORMS, CLICK_EFFECTS, MORPH_ICONS, burst, confetti, defineButton, defineCheckbox, defineClick, defineDoubleTap, defineHold, defineIconMorph, defineLike, haptic, morphPath, shake } from './components/click.js';
-export { S as SPRING_PRESETS, c as createSpring, l as linearEasing, p as projectInertia, r as resolveSpring, a as rubberBand, s as snapTo, b as spring, d as springEasing, e as springSamples, f as stepSpring, g as supportsLinearEasing } from './chunks/spring-BKUU7-Xm.js';
-export { c as configureComponents, p as prefersReducedMotion } from './chunks/base-CuvCgqLy.js';
+import { adoptVariants, defineUiComponents } from './components/ui.js';
+export { VARIANTS, defineAvatarStack, defineBadge, defineBottomSheet, defineDrawer, defineFab, defineNavbar, definePopover, definePullRefresh, defineRating, defineSlider, defineTabs, defineTooltip, setVariant } from './components/ui.js';
+import { c as canDefine } from './chunks/base-08OYzphB.js';
+export { a as configureComponents, p as prefersReducedMotion } from './chunks/base-08OYzphB.js';
+export { S as SPRING_PRESETS, c as createSpring, l as linearEasing, p as projectInertia, r as resolveSpring, a as rubberBand, s as snapTo, b as spring, d as springEasing, e as springSamples, f as stepSpring, g as supportsLinearEasing } from './chunks/spring-CpeFkxNd.js';
 
 /**
  * use-scroll-animate/components
@@ -50,6 +53,7 @@ const COMPONENT_CATEGORIES = {
     physics: ['usa-spring', 'usa-draggable', 'usa-overscroll'],
     cards: ['usa-card', 'usa-card-stack', 'usa-sticky-stack', 'usa-carousel-3d'],
     click: ['usa-click', 'usa-button', 'usa-icon-morph', 'usa-like', 'usa-hold', 'usa-double-tap', 'usa-checkbox'],
+    ui: ['usa-tabs', 'usa-drawer', 'usa-bottom-sheet', 'usa-pull-refresh', 'usa-fab', 'usa-navbar', 'usa-slider', 'usa-rating', 'usa-tooltip', 'usa-popover', 'usa-badge', 'usa-avatar-stack'],
 };
 const BY_CATEGORY = {
     reveal: defineRevealComponents,
@@ -61,14 +65,17 @@ const BY_CATEGORY = {
     physics: definePhysicsComponents,
     cards: defineCardComponents,
     click: defineClickComponents,
+    ui: defineUiComponents,
 };
 /**
  * Register every `<usa-*>` component (or only the given categories).
  * Safe to call more than once and on the server (no-op without DOM).
  */
 function defineComponents(categories) {
+    if (canDefine())
+        adoptVariants();
     (categories || Object.keys(BY_CATEGORY)).forEach((c) => BY_CATEGORY[c]?.());
 }
 
-export { COMPONENT_CATEGORIES, defineBackgroundComponents, defineCardComponents, defineClickComponents, defineComponents, defineFeedbackComponents, defineInteractionComponents, definePhysicsComponents, defineRevealComponents, defineTextComponents, defineTransitionComponents };
+export { COMPONENT_CATEGORIES, adoptVariants, defineBackgroundComponents, defineCardComponents, defineClickComponents, defineComponents, defineFeedbackComponents, defineInteractionComponents, definePhysicsComponents, defineRevealComponents, defineTextComponents, defineTransitionComponents, defineUiComponents };
 //# sourceMappingURL=components.js.map

@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.6.0] - 2026-10-07
+
+### Added
+- **Style variants** for every component: `variant="minimal | neon | glass | brutalist | fluent | material"` on any `<usa-*>` element, `data-usa-variant` on any ancestor, or `setVariant()` for the whole app. Variants set shared design tokens (`--usa-accent`, `--usa-accent-text`, `--usa-surface`, `--usa-text`, `--usa-radius`, `--usa-border`, `--usa-shadow`, `--usa-blur`, `--usa-font`) that the components read (existing `<usa-toggle>`, `<usa-progress>`, cards, checkbox… now use `--usa-accent`). `fluent` follows the Windows 11 palette (light/dark), `material` Material 3. `defineComponents()` injects the token sheet; it is also in `components.css`.
+- **UI components** — new category `use-scroll-animate/components/ui` (+ `components/ui.css`):
+  - `<usa-tabs>` (sliding spring indicator, `line` / `pill`, roving tabindex, panels slide in from the direction of travel),
+  - `<usa-drawer>` (left / right / top / bottom, spring in, drag / swipe to close, backdrop, Esc, focus return),
+  - `<usa-bottom-sheet>` (snap points, inertia, drag-down-to-dismiss, grabber),
+  - `<usa-pull-refresh>` (rubber-band pull, `usa:refresh` with `detail.done()`, `aria-busy` + status),
+  - `<usa-fab>` (speed dial: up / down / left / right / radial, staggered spring, `aria-expanded`, inert while closed),
+  - `<usa-navbar>` (auto-hide on scroll down, show on scroll up, `shrink`, page or `target` scroller),
+  - `<usa-slider>` (form-associated `role="slider"`, spring thumb, value bubble, full keyboard),
+  - `<usa-rating>` (hover preview, spring pop, number keys, `readonly`, form value),
+  - `<usa-tooltip>` (spring-in, flips to stay on screen, `aria-describedby`),
+  - `<usa-popover>` (click-to-open, spring from the trigger, Esc / outside click, focus return),
+  - `<usa-badge>` (spring bump on change, `99+`, `dot`, `pulse`),
+  - `<usa-avatar-stack>` (overlap that spreads on hover, `+N`).
+  - All respect `prefers-reduced-motion` (instant open/close, no bumps, pulses or spreading).
+- Showcase: **UI components & variants** category with live demos and per-card variant pickers, plus a `setVariant()` card.
+
 ## [2.5.0] - 2026-10-07
 
 ### Added

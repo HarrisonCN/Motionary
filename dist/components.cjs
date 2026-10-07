@@ -9,8 +9,9 @@ var components_transitions = require('./components/transitions.cjs');
 var components_physics = require('./components/physics.cjs');
 var components_cards = require('./components/cards.cjs');
 var components_click = require('./components/click.cjs');
-var spring = require('./chunks/spring-CGO9Jd9b.cjs');
-var base = require('./chunks/base-CJ7XfidP.cjs');
+var components_ui = require('./components/ui.cjs');
+var base = require('./chunks/base-5DFCAnvH.cjs');
+var spring = require('./chunks/spring-Bi4qY0pL.cjs');
 
 /**
  * use-scroll-animate/components
@@ -43,6 +44,7 @@ const COMPONENT_CATEGORIES = {
     physics: ['usa-spring', 'usa-draggable', 'usa-overscroll'],
     cards: ['usa-card', 'usa-card-stack', 'usa-sticky-stack', 'usa-carousel-3d'],
     click: ['usa-click', 'usa-button', 'usa-icon-morph', 'usa-like', 'usa-hold', 'usa-double-tap', 'usa-checkbox'],
+    ui: ['usa-tabs', 'usa-drawer', 'usa-bottom-sheet', 'usa-pull-refresh', 'usa-fab', 'usa-navbar', 'usa-slider', 'usa-rating', 'usa-tooltip', 'usa-popover', 'usa-badge', 'usa-avatar-stack'],
 };
 const BY_CATEGORY = {
     reveal: components_reveal.defineRevealComponents,
@@ -54,12 +56,15 @@ const BY_CATEGORY = {
     physics: components_physics.definePhysicsComponents,
     cards: components_cards.defineCardComponents,
     click: components_click.defineClickComponents,
+    ui: components_ui.defineUiComponents,
 };
 /**
  * Register every `<usa-*>` component (or only the given categories).
  * Safe to call more than once and on the server (no-op without DOM).
  */
 function defineComponents(categories) {
+    if (base.canDefine())
+        components_ui.adoptVariants();
     (categories || Object.keys(BY_CATEGORY)).forEach((c) => BY_CATEGORY[c]?.());
 }
 
@@ -137,6 +142,24 @@ exports.defineLike = components_click.defineLike;
 exports.haptic = components_click.haptic;
 exports.morphPath = components_click.morphPath;
 exports.shake = components_click.shake;
+exports.VARIANTS = components_ui.VARIANTS;
+exports.adoptVariants = components_ui.adoptVariants;
+exports.defineAvatarStack = components_ui.defineAvatarStack;
+exports.defineBadge = components_ui.defineBadge;
+exports.defineBottomSheet = components_ui.defineBottomSheet;
+exports.defineDrawer = components_ui.defineDrawer;
+exports.defineFab = components_ui.defineFab;
+exports.defineNavbar = components_ui.defineNavbar;
+exports.definePopover = components_ui.definePopover;
+exports.definePullRefresh = components_ui.definePullRefresh;
+exports.defineRating = components_ui.defineRating;
+exports.defineSlider = components_ui.defineSlider;
+exports.defineTabs = components_ui.defineTabs;
+exports.defineTooltip = components_ui.defineTooltip;
+exports.defineUiComponents = components_ui.defineUiComponents;
+exports.setVariant = components_ui.setVariant;
+exports.configureComponents = base.configureComponents;
+exports.prefersReducedMotion = base.prefersReducedMotion;
 exports.SPRING_PRESETS = spring.SPRING_PRESETS;
 exports.createSpring = spring.createSpring;
 exports.linearEasing = spring.linearEasing;
@@ -149,8 +172,6 @@ exports.springEasing = spring.springEasing;
 exports.springSamples = spring.springSamples;
 exports.stepSpring = spring.stepSpring;
 exports.supportsLinearEasing = spring.supportsLinearEasing;
-exports.configureComponents = base.configureComponents;
-exports.prefersReducedMotion = base.prefersReducedMotion;
 exports.COMPONENT_CATEGORIES = COMPONENT_CATEGORIES;
 exports.defineComponents = defineComponents;
 //# sourceMappingURL=components.cjs.map

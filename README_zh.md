@@ -52,6 +52,7 @@ defineComponents(); // 或按分类：import { defineTextComponents } from 'use-
 | **弹簧与物理**（`/components/physics`） | `<usa-spring>` 弹入 / 弹出 / 掉落 / 果冻 / 橡皮筋 · `<usa-draggable>` 拖拽回弹、惯性、吸附 · `<usa-overscroll>` 弹性越界 · `spring()` · `createSpring()` · 预设 gentle / wobbly / stiff / bouncy |
 | **卡片效果**（`/components/cards`） | `<usa-card>` 翻转 · 全息 · 玻璃 · 边框光晕 · 流光边框 · 悬浮 · 聚光 · 扫光 · 视差分层 · 展开详情（可组合）· `<usa-card-stack>` 滑动卡堆 · `<usa-sticky-stack>` 滚动堆叠 · `<usa-carousel-3d>` 3D 轮播 |
 | **点击与轻触**（`/components/click`） | `<usa-button>` 按钮点击形变（挤压拉伸 · 弹性圆角 · 液态粘滞 · 按压凹陷 · 形状变形 · 提交→加载→成功）· `<usa-icon-morph>` 图标变形 · `<usa-click>` 水波纹 / 迸发 / 彩带 / 抖动 · `<usa-like>` · `<usa-hold>` · `<usa-double-tap>` · `<usa-checkbox>` |
+| **UI 组件与风格变体**（`/components/ui`） | `<usa-tabs>` 标签页 · `<usa-drawer>` 抽屉 · `<usa-bottom-sheet>` 底部面板 · `<usa-pull-refresh>` 下拉刷新 · `<usa-fab>` 悬浮按钮 · `<usa-navbar>` 自动隐藏导航栏 · `<usa-slider>` 滑块 · `<usa-rating>` 评分 · `<usa-tooltip>` · `<usa-popover>` · `<usa-badge>` · `<usa-avatar-stack>` · 所有组件均支持 `variant`（极简 / 霓虹 / 玻璃 / 粗野 / Fluent / Material） |
 
 完整包约 22 kB gzip（JS + CSS）；单个分类 3.5–6.4 kB；单个组件约 2 kB。下方的滚动动画核心不受影响。
 
