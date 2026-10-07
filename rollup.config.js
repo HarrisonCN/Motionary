@@ -23,6 +23,7 @@ module.exports = [
         file: 'dist/index.umd.js',
         format: 'umd',
         name: 'ScrollAnimate',
+        exports: 'named',
         sourcemap: true,
         plugins: [terser()],
       },

@@ -2,7 +2,7 @@
 
 # use-scroll-animate 🚀
 
-**A lightweight (~2.9KB gzipped), dependency-free scroll animation library for the modern web.**
+**A lightweight (~4KB gzipped), dependency-free scroll animation library for the modern web.**
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/HarrisonCN/use-scroll-animate?style=flat-square)](https://github.com/HarrisonCN/use-scroll-animate/releases)
 [![GitHub repo size](https://img.shields.io/github/repo-size/HarrisonCN/use-scroll-animate?style=flat-square)](https://github.com/HarrisonCN/use-scroll-animate)
@@ -19,9 +19,10 @@ In 2025, performance is everything. Traditional scroll animation libraries often
 `use-scroll-animate` is built differently:
 - ⚡ **Zero Dependencies**: Pure Vanilla JS/TypeScript.
 - 🚀 **High Performance**: Powered by `IntersectionObserver` and the native `Web Animations API`. No scroll event listeners, no layout thrashing.
-- 🪶 **Ultra Lightweight**: Only ~2.9KB gzipped.
+- 🪶 **Ultra Lightweight**: ~4KB gzipped for the core (tree-shaken ESM); the all-in-one UMD build incl. React/Vue helpers is ~4.8KB.
 - 🧩 **Framework Agnostic**: Works seamlessly with Vanilla JS, React, Vue, Svelte, and more. First-class React Hooks and Vue Composables included.
-- ♿ **Accessible**: Respects `prefers-reduced-motion` out of the box.
+- ♿ **Accessible**: Respects `prefers-reduced-motion` out of the box (content is shown immediately, no entrance or parallax motion).
+- 🖥️ **SSR-safe**: Importing (and even calling) the API on the server is a no-op.
 
 ## Installation
 
@@ -75,15 +76,70 @@ We've added high-quality physics-based easing presets:
 </script>
 ```
 
-## Core Configuration
+## Options
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| `animation` | `string` \| `string[]` | `'fade-in-up'` | Preset name or array of presets |
-| `easing` | `string` \| `number[]` \| `function` | `'ease'` | CSS easing, cubic-bezier array, or function |
-| `once` | `boolean` | `true` | Trigger animation only once |
-| `offset` | `number` | `0` | Viewport offset in pixels |
-| `parallax` | `object` | `{}` | Parallax effect configuration |
+| `animation` | `string` \| `string[]` \| `{ from, to }` | `'fade-in-up'` | Preset name, array of presets to combine, or custom keyframes |
+| `duration` | `number` | `600` | Duration in ms |
+| `delay` | `number` | `0` | Delay in ms |
+| `easing` | `string` \| `number[]` \| `function` | `'ease'` | CSS easing, preset (`spring`, `soft-spring`, `heavy-bounce`), cubic-bezier array, or `(t) => number` |
+| `threshold` | `number` \| `number[]` | `0.1` | IntersectionObserver threshold(s) |
+| `rootMargin` | `string` | `'0px'` | IntersectionObserver root margin |
+| `once` | `boolean` | `true` | Animate only the first time the element enters |
+| `repeat` | `boolean` | `false` | Re-hide on leave and replay on every entry |
+| `offset` | `number` | `0` | Trigger the animation this many px after the element enters the viewport |
+| `stagger` | `number` | `0` | Extra delay (ms) per sibling revealed in the same batch |
+| `parallax` | `{ x, y, rotate, scale, speed }` | `{}` | Scroll-driven parallax (keeps running after the entrance animation) |
+| `onStart` / `onComplete` / `onEnter` / `onLeave` | `(el) => void` | – | Lifecycle callbacks |
+| `onProgress` | `(el, progress) => void` | – | Visible ratio of the element (0–1) as it scrolls |
+
+Every option is also available as a data attribute: `data-sa-animation`, `data-sa-duration`, `data-sa-delay`, `data-sa-easing`, `data-sa-threshold`, `data-sa-root-margin`, `data-sa-once`, `data-sa-repeat`, `data-sa-offset`, `data-sa-stagger`, `data-sa-parallax-x|y|rotate|scale|speed`.
+
+## Instance API
+
+```js
+import ScrollAnimate, { createScrollAnimate } from 'use-scroll-animate';
+
+ScrollAnimate.init(root?);            // observe every [data-sa] element (safe to call again after DOM changes)
+ScrollAnimate.observe(target, opts);  // selector, Element, NodeList or Element[]
+ScrollAnimate.unobserve(target);      // stop observing (elements that never animated are made visible)
+ScrollAnimate.animate(target, opts);  // play an animation right now
+ScrollAnimate.refresh();              // rebuild observers, e.g. after configure({ root })
+ScrollAnimate.configure({ ... });     // update global defaults
+ScrollAnimate.destroy();              // disconnect everything
+
+const sa = createScrollAnimate({ root: document.querySelector('#scroller') }); // isolated instance
+```
+
+Via a `<script>` tag (UMD build), the default instance lives at `ScrollAnimate.default`:
+
+```html
+<script src="https://unpkg.com/use-scroll-animate"></script>
+<script>ScrollAnimate.default.init();</script>
+```
+
+## React & Vue
+
+```jsx
+import React from 'react';
+import { createReactHooks } from 'use-scroll-animate';
+const { useScrollAnimate, useScrollStagger } = createReactHooks(React);
+
+function Card() {
+  const ref = useScrollAnimate({ animation: 'zoom-in', easing: 'spring' });
+  return <div ref={ref}>Hello</div>;
+}
+```
+
+```js
+import { ref, onMounted, onUnmounted } from 'vue';
+import { createVueComposables } from 'use-scroll-animate';
+const { useScrollAnimate } = createVueComposables({ ref, onMounted, onUnmounted });
+const { animateRef } = useScrollAnimate({ animation: 'fade-in-left' });
+```
+
+Hooks and composables share the core engine, so `once`, `offset`, custom easing functions, parallax and reduced-motion handling behave exactly like the vanilla API.
 
 ## Contributing
 

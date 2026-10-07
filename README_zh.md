@@ -2,7 +2,7 @@
 
 # use-scroll-animate 🚀
 
-**一个轻量级（~2.9KB gzipped）、零依赖的现代 Web 滚动动画库。**
+**一个轻量级（~4KB gzipped）、零依赖的现代 Web 滚动动画库。**
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/HarrisonCN/use-scroll-animate?style=flat-square)](https://github.com/HarrisonCN/use-scroll-animate/releases)
 [![GitHub repo size](https://img.shields.io/github/repo-size/HarrisonCN/use-scroll-animate?style=flat-square)](https://github.com/HarrisonCN/use-scroll-animate)
@@ -19,7 +19,7 @@
 `use-scroll-animate` 的设计初衷截然不同：
 - ⚡ **零依赖**：纯原生 JS/TypeScript 编写。
 - 🚀 **高性能**：由 `IntersectionObserver` 和原生 `Web Animations API` 驱动。无滚动事件监听，无布局抖动。
-- 🪶 **极轻量**：Gzip 后仅约 2.9KB。
+- 🪶 **极轻量**：Gzip 后核心约 4KB。
 - 🧩 **框架无关**：完美支持原生 JS、React、Vue、Svelte 等。内置一流的 React Hooks 和 Vue Composables。
 - ♿ **无障碍**：原生支持 `prefers-reduced-motion`。
 

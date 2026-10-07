@@ -4,12 +4,24 @@
   "description": "A lightweight, high-performance, dependency-free scroll animation library for modern web.",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
-  "browser": "dist/index.umd.js",
+  "unpkg": "dist/index.umd.js",
+  "jsdelivr": "dist/index.umd.js",
   "types": "dist/types/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "README_zh.md",
+    "README_ja.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "sideEffects": false,
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "typecheck": "tsc --noEmit -p .",
+    "test": "vitest run",
+    "prepublishOnly": "npm run typecheck && npm test && npm run build"
   },
   "keywords": [
     "scroll",
@@ -21,15 +33,25 @@
     "frontend",
     "ui"
   ],
-  "author": "",
+  "author": "HarrisonCN",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HarrisonCN/use-scroll-animate.git"
+  },
+  "bugs": {
+    "url": "https://github.com/HarrisonCN/use-scroll-animate/issues"
+  },
+  "homepage": "https://github.com/HarrisonCN/use-scroll-animate#readme",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^29.0.2",
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@rollup/plugin-terser": "^1.0.0",
     "@rollup/plugin-typescript": "^12.3.0",
+    "jsdom": "^26.1.0",
     "rollup": "^4.60.0",
     "tslib": "^2.8.1",
-    "typescript": "^6.0.2"
+    "typescript": "^6.0.2",
+    "vitest": "^3.2.7"
   }
 }

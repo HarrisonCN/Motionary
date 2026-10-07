@@ -179,9 +179,9 @@
   <p class="scroll-hint">↓ Scroll to see animations</p>
 
   <script type="module">
-    import ScrollAnimate from '../../dist/index.esm.js';
-    
-    const sa = ScrollAnimate.createScrollAnimate(); // Create a new instance to use onProgress
+    import { createScrollAnimate } from '../../dist/index.esm.js';
+
+    const sa = createScrollAnimate(); // Create a new instance to use onProgress
 
     sa.init();
 
@@ -190,10 +190,10 @@
       document.getElementById("myProgressBar"),
       {
         onProgress: (el, progress) => {
-          (el as HTMLElement).style.width = `${progress * 100}%`;
+          el.style.width = `${progress * 100}%`;
           document.getElementById("progressText").innerText = `${Math.round(progress * 100)}%`;
         },
-        threshold: Array.from({ length: 101 }, (_, i) => i / 100), // Full range for progress
+        animation: 'fade-in', // onProgress gets a dedicated 0..1 observer automatically
       }
     );
   </script>
