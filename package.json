@@ -39,7 +39,8 @@
     "check:exports": "node scripts/check-exports.mjs",
     "lint:package": "publint && attw --pack . --profile node16",
     "size": "node scripts/size.mjs",
-    "prepublishOnly": "npm run typecheck && npm test && npm run build && npm run check:exports"
+    "prepublishOnly": "npm run typecheck && npm test && npm run build && npm run check:exports",
+    "size:check": "node scripts/size.mjs --check"
   },
   "keywords": [
     "scroll",

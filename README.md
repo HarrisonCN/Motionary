@@ -2,7 +2,7 @@
 
 # use-scroll-animate 🚀
 
-**A lightweight (~5KB gzipped), dependency-free scroll animation library for the modern web.**
+**A lightweight (~5.5KB gzipped), dependency-free scroll animation library for the modern web.**
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/HarrisonCN/use-scroll-animate?style=flat-square)](https://github.com/HarrisonCN/use-scroll-animate/releases)
 [![GitHub repo size](https://img.shields.io/github/repo-size/HarrisonCN/use-scroll-animate?style=flat-square)](https://github.com/HarrisonCN/use-scroll-animate)
@@ -19,7 +19,7 @@ In 2025, performance is everything. Traditional scroll animation libraries often
 `use-scroll-animate` is built differently:
 - ⚡ **Zero Dependencies**: Pure Vanilla JS/TypeScript.
 - 🚀 **High Performance**: Powered by `IntersectionObserver` and the native `Web Animations API`. No scroll event listeners by default (the opt-in scroll-progress mode uses a single passive, rAF-throttled listener, only while tracked elements are on screen).
-- 🪶 **Ultra Lightweight**: ~4.8KB gzipped for the core (tree-shaken, minified ESM); everything incl. `sequence`, `staggerChildren` and the React/Vue helpers is ~6.1KB (UMD ~6.2KB).
+- 🪶 **Ultra Lightweight**: ~5.5KB gzipped for the core (tree-shaken, minified ESM); everything incl. `sequence`, `staggerChildren` and the React/Vue helpers is ~6.7KB (UMD ~6.9KB). Every entry has a gzip budget enforced in CI (`size-budget.json`, `npm run size:check`).
 - 🧩 **Framework Agnostic**: Works seamlessly with Vanilla JS, React, Vue, Svelte, and more. First-class React Hooks and Vue Composables included.
 - ♿ **Accessible**: Respects `prefers-reduced-motion` out of the box (content is shown immediately, no entrance or parallax motion).
 - 🖥️ **SSR-safe**: Importing (and even calling) the API on the server is a no-op.
@@ -29,6 +29,32 @@ In 2025, performance is everything. Traditional scroll animation libraries often
 ```bash
 npm install use-scroll-animate
 ```
+
+## Native scroll-driven engine (`engine`) 🏎️
+
+In browsers that support CSS scroll-driven animations (`CSS.supports('animation-timeline: view()')`), presets can run on the browser's native **view timeline** instead of the JavaScript engine. The animation is then linked to the scroll position (it plays as the element scrolls in, off the main thread) rather than started by IntersectionObserver and played over a fixed `duration`.
+
+```js
+ScrollAnimate.observe('.card', { animation: 'fade-in-up', engine: 'auto' });
+// or for every element of an instance
+const sa = createScrollAnimate({ defaultEngine: 'auto' });
+```
+
+```html
+<div data-sa data-sa-animation="zoom-in" data-sa-engine="auto" data-sa-view-range="entry 0%, cover 40%">…</div>
+```
+
+| `engine` | Behaviour |
+|---|---|
+| `'js'` | **Default in 1.x.** IntersectionObserver + time-based Web Animation (unchanged). |
+| `'auto'` / `'css'` | Native view timeline when supported, otherwise falls back to `'js'` automatically. |
+
+Notes:
+- With the native engine, `duration`, `delay`, `threshold`, `offset` and `stagger` don't apply; the animation spans `viewRange` (default `['entry 0%', 'entry 100%']`, i.e. from the moment the element starts entering until it is fully in view). `easing` still applies.
+- `once` (default) freezes the end state when the animation completes, so scrolling back up does not reverse it; with `repeat: true` it keeps following the scroll in both directions.
+- Callbacks (`onEnter`, `onLeave`, `onStart`, `onComplete`), `onProgress`, `progressVar` and `parallax` keep working.
+- Class-name mode (`useClassNames`), `prefers-reduced-motion`, `animate()`, `sequence()` and `staggerChildren()` always use the JS engine.
+- `supportsScrollTimeline()` is exported if you want to branch on support yourself.
 
 ## v1.4.0 New Features ✨
 
@@ -144,13 +170,15 @@ We've added high-quality physics-based easing presets:
 | `onStart` / `onComplete` / `onEnter` / `onLeave` | `(el) => void` | – | Lifecycle callbacks |
 | `onProgress` | `(el, progress) => void` | – | Progress (0–1) as the element scrolls — visible ratio, or true scroll progress with `progressMode: 'scroll'` |
 | `progressMode` | `'ratio'` \| `'scroll'` | `'ratio'` | How `onProgress`/parallax progress is measured (`'scroll'`: 0 = top enters at the bottom, 1 = bottom leaves at the top) |
+| `engine` | `'js'` \| `'auto'` \| `'css'` | `'js'` | Run presets on the browser's native scroll-driven timeline when supported (`'auto'`/`'css'`), falling back to JS. See [Native scroll-driven engine](#native-scroll-driven-engine-engine-) |
+| `viewRange` | `[string, string]` | `['entry 0%', 'entry 100%']` | Native engine only: view-timeline range of the entrance |
 | `progressVar` | `string` | – | Write progress (0–1, same value as `onProgress`) to this CSS custom property, e.g. `'--sa-progress'`, for scroll-driven effects in plain CSS |
 
-Every option is also available as a data attribute: `data-sa-animation`, `data-sa-duration`, `data-sa-delay`, `data-sa-easing`, `data-sa-threshold`, `data-sa-root-margin`, `data-sa-once`, `data-sa-repeat`, `data-sa-offset`, `data-sa-stagger`, `data-sa-progress`, `data-sa-progress-var` (bare attribute = `--sa-progress`), `data-sa-parallax-x|y|rotate|scale|speed`.
+Every option is also available as a data attribute: `data-sa-animation`, `data-sa-duration`, `data-sa-delay`, `data-sa-easing`, `data-sa-threshold`, `data-sa-root-margin`, `data-sa-once`, `data-sa-repeat`, `data-sa-offset`, `data-sa-stagger`, `data-sa-progress`, `data-sa-progress-var` (bare attribute = `--sa-progress`), `data-sa-engine`, `data-sa-view-range` (`"entry 0%, cover 40%"`), `data-sa-parallax-x|y|rotate|scale|speed`.
 
 **Presets:** `fade-in`, `fade-in-up|down|left|right`, `zoom-in`, `zoom-out`, `scale-up`, `flip-x`, `flip-y`, `flip-up`, `flip-down`, `slide-up|down|left|right`, `bounce`, `rotate-in`, `rotate-left`, `rotate-right`, `blur-in`, `blur-in-up`, `skew-in`, `scale-x`, `scale-y`, `clip-up|down|left|right`, `clip-circle`, `shimmer`, `pulse`, `swing`. Combine them with an array, e.g. `['fade-in', 'clip-up']`.
 
-**Global config** (`createScrollAnimate(config)` / `configure()`): `defaultAnimation`, `defaultDuration`, `defaultDelay`, `defaultEasing`, `defaultThreshold`, `defaultRootMargin`, `defaultRepeat`, `defaultOnce`, `defaultOffset`, `hiddenClass`, `visibleClass`, `useClassNames`, `disabled`, `root`, `autoUnregister` (default `true`).
+**Global config** (`createScrollAnimate(config)` / `configure()`): `defaultAnimation`, `defaultDuration`, `defaultDelay`, `defaultEasing`, `defaultThreshold`, `defaultRootMargin`, `defaultRepeat`, `defaultOnce`, `defaultOffset`, `hiddenClass`, `visibleClass`, `useClassNames`, `disabled`, `root`, `autoUnregister` (default `true`), `defaultEngine` (default `'js'`).
 
 ### Progress as a CSS variable (`progressVar`)
 

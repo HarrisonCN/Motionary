@@ -46,6 +46,20 @@ npm install use-scroll-animate
 </script>
 ```
 
+## 原生滚动驱动引擎 `engine`（v1.6）
+
+在支持 CSS 滚动驱动动画（`CSS.supports('animation-timeline: view()')`）的浏览器中，预设动画可以运行在浏览器原生的 **view timeline** 上：动画进度跟随滚动位置（在主线程之外），而不是由 IntersectionObserver 触发后按固定 `duration` 播放。
+
+```js
+ScrollAnimate.observe('.card', { animation: 'fade-in-up', engine: 'auto' });
+const sa = createScrollAnimate({ defaultEngine: 'auto' }); // 实例级默认
+```
+
+- `'js'`：1.x 的**默认值**，行为不变。`'auto'` / `'css'`：支持时使用原生时间线，否则自动回退到 JS。
+- 原生引擎下 `duration`、`delay`、`threshold`、`offset`、`stagger` 不生效；动画区间由 `viewRange` 决定（默认 `['entry 0%', 'entry 100%']`），`easing` 仍然有效。HTML：`data-sa-engine`、`data-sa-view-range="entry 0%, cover 40%"`。
+- `once`（默认）在动画完成后固定最终状态；`repeat: true` 时随滚动双向播放。回调、`onProgress`、`progressVar`、视差照常工作。
+- 类名模式、`prefers-reduced-motion`、`animate()`、`sequence()`、`staggerChildren()` 始终使用 JS 引擎。另导出 `supportsScrollTimeline()`。
+
 ## v1.4.0 新特性 ✨
 
 - **真实滚动进度 `progressMode: 'scroll'`**（可选）：`onProgress` 默认返回元素的可见比例，对高于屏幕的元素永远到不了 1。开启后进度为：元素顶部到达视口底部时为 `0`，底部离开视口顶部时为 `1`。视差同样使用该进度。HTML 写法：`data-sa-progress="scroll"`；另导出辅助函数 `getScrollProgress(el, root?)`。
@@ -100,6 +114,8 @@ npm install use-scroll-animate
 | `stagger` | `number` | `0` | 同批次显现的兄弟元素之间的额外延迟 (ms) |
 | `onProgress` | `(el, progress) => void` | – | 滚动进度回调 (0–1) |
 | `progressMode` | `'ratio'` \| `'scroll'` | `'ratio'` | 进度计算方式：可见比例或真实滚动进度 |
+| `engine` | `'js'` \| `'auto'` \| `'css'` | `'js'` | 支持时使用原生滚动驱动时间线，否则回退 JS |
+| `viewRange` | `[string, string]` | `['entry 0%', 'entry 100%']` | 仅原生引擎：入场动画的时间线区间 |
 
 ## 许可证
 

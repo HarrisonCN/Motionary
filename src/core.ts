@@ -33,6 +33,7 @@ const DEFAULT_CONFIG: Required<ScrollAnimateConfig> = {
   disabled: false,
   root: null,
   autoUnregister: true,
+  defaultEngine: 'js',
 };
 
 const noop = () => undefined;
@@ -58,6 +59,31 @@ export function prefersReducedMotion(): boolean {
   return !!reducedMotionQuery && reducedMotionQuery.matches;
 }
 
+let scrollTimelineSupported: boolean | undefined;
+
+/**
+ * Whether the browser can run presets on a native scroll-driven timeline:
+ * `CSS.supports('animation-timeline: view()')` plus the `ViewTimeline`
+ * constructor used to attach it from JavaScript. Cached. SSR-safe.
+ */
+export function supportsScrollTimeline(): boolean {
+  if (scrollTimelineSupported === undefined) {
+    scrollTimelineSupported =
+      hasDOM() &&
+      typeof CSS !== 'undefined' &&
+      typeof CSS.supports === 'function' &&
+      CSS.supports('animation-timeline: view()') &&
+      typeof (globalThis as any).ViewTimeline === 'function';
+  }
+  return scrollTimelineSupported;
+}
+
+/** @internal Reset the cached feature checks (tests). */
+export function resetFeatureCache(): void {
+  scrollTimelineSupported = undefined;
+  linearSupported = undefined;
+}
+
 /* ------------------------------------------------------------------ */
 /* Option parsing                                                      */
 /* ------------------------------------------------------------------ */
@@ -76,6 +102,7 @@ function lengthValue(value: string | undefined): string | number | undefined {
 }
 
 const DEFAULT_PROGRESS_VAR = '--sa-progress';
+const DEFAULT_VIEW_RANGE: [string, string] = ['entry 0%', 'entry 100%'];
 
 /** `''` (bare attribute) -> default name; `sa-progress` -> `--sa-progress`. */
 function normalizeVar(name: string): string {
@@ -118,6 +145,14 @@ function parseDataAttributes(el: Element, config: Required<ScrollAnimateConfig>)
   opts.offset = num(dataset.saOffset);
   opts.stagger = num(dataset.saStagger);
   if (dataset.saProgressVar !== undefined) opts.progressVar = normalizeVar(dataset.saProgressVar);
+  if (dataset.saEngine) {
+    const e = dataset.saEngine.trim();
+    if (e === 'auto' || e === 'js' || e === 'css') opts.engine = e;
+  }
+  if (dataset.saViewRange) {
+    const [start, end] = dataset.saViewRange.split(',').map((s) => s.trim());
+    if (start && end) opts.viewRange = [start, end];
+  }
   if (dataset.saProgress) opts.progressMode = dataset.saProgress.trim() === 'scroll' ? 'scroll' : 'ratio';
 
   if (dataset.saParallaxX || dataset.saParallaxY || dataset.saParallaxRotate || dataset.saParallaxScale) {
@@ -155,6 +190,8 @@ function mergeOptions(opts: AnimateOptions, config: Required<ScrollAnimateConfig
     onProgress: opts.onProgress ?? noop,
     progressMode: opts.progressMode ?? 'ratio',
     progressVar: opts.progressVar ? normalizeVar(opts.progressVar) : '',
+    engine: opts.engine ?? config.defaultEngine,
+    viewRange: opts.viewRange ?? DEFAULT_VIEW_RANGE,
   };
 }
 
@@ -422,6 +459,52 @@ function runAnimation(
   };
 }
 
+/**
+ * Native engine: attach the preset to a `ViewTimeline` of the element, so the
+ * browser drives it from scroll position. Returns `null` when that fails
+ * (caller falls back to the JS engine).
+ */
+function startNative(el: Element, opts: Required<AnimateOptions>, onFrozen?: () => void): Animation | null {
+  if (typeof el.animate !== 'function') return null;
+  const preset = resolvePreset(opts.animation);
+  const built = buildAnimation(preset, opts.easing);
+  let anim: Animation;
+  try {
+    const timeline = new (globalThis as any).ViewTimeline({ subject: el, axis: 'block' });
+    const timing = {
+      fill: 'both',
+      easing: built.easing,
+      timeline,
+      rangeStart: opts.viewRange[0],
+      rangeEnd: opts.viewRange[1],
+    } as KeyframeAnimationOptions;
+    try {
+      anim = el.animate(built.keyframes, timing);
+    } catch {
+      anim = el.animate(built.keyframes, { ...timing, easing: 'linear' });
+    }
+  } catch {
+    return null;
+  }
+  running.set(el, anim);
+  const keep = opts.repeat || !opts.once;
+  anim.onfinish = () => {
+    // `once`: freeze the end state, so scrolling back up does not reverse it.
+    if (!keep && running.get(el) === anim) {
+      running.delete(el);
+      try {
+        anim.commitStyles();
+      } catch {
+        setStyles(el, preset.to);
+      }
+      anim.cancel();
+      onFrozen?.();
+    }
+    opts.onComplete(el);
+  };
+  return anim;
+}
+
 function applyParallax(el: Element, progress: number, parallax: ParallaxOptions): void {
   const { x = 0, y = 0, rotate = 0, scale = 1, speed = 1 } = parallax;
   const p = (progress - 0.5) * 2 * speed;
@@ -481,6 +564,8 @@ export function createScrollAnimate(userConfig: ScrollAnimateConfig = {}): Scrol
   const watchers = new Set<MutationObserver>();
   // Elements with a pending class-name completion timer started by this instance.
   const pending = new Set<Element>();
+  // Elements whose entrance runs on a native scroll-driven timeline.
+  const natives = new Set<Element>();
 
   // Observers are shared between elements with the same root/threshold/rootMargin,
   // instead of one (or two) IntersectionObservers per element.
@@ -501,6 +586,15 @@ export function createScrollAnimate(userConfig: ScrollAnimateConfig = {}): Scrol
     record.progressObserver?.unobserve(el);
     registry.delete(el);
     untrack(el);
+    if (record.engine === 'css') {
+      // A scroll-linked animation would keep following the scroll: stop it and
+      // show the element (unless it finished and is just being released).
+      if (restore) {
+        natives.delete(el);
+        reveal(el, config);
+      }
+      return;
+    }
     // An element that never animated would otherwise stay invisible forever.
     if (restore && !record.animated) reveal(el, config);
   }
@@ -575,6 +669,28 @@ export function createScrollAnimate(userConfig: ScrollAnimateConfig = {}): Scrol
 
       if (el.isConnected === false) {
         teardown(el, false);
+        return;
+      }
+
+      if (record.engine === 'css') {
+        // The browser drives the animation; only lifecycle bookkeeping here.
+        if (entry.isIntersecting) {
+          opts.onEnter(el);
+          if (!record.animated) {
+            record.animated = true;
+            opts.onStart(el);
+          }
+          if (opts.once && !opts.repeat) {
+            record.observer.unobserve(el);
+            if (config.autoUnregister && !record.progressObserver) {
+              finished.add(el);
+              teardown(el, false);
+            }
+          }
+        } else {
+          opts.onLeave(el);
+          if (opts.repeat) record.animated = false;
+        }
         return;
       }
 
@@ -656,6 +772,10 @@ export function createScrollAnimate(userConfig: ScrollAnimateConfig = {}): Scrol
     record.progressObserver?.observe(el);
   }
 
+  function wantsNative(opts: Required<AnimateOptions>): boolean {
+    return opts.engine !== 'js' && !config.useClassNames && !motionDisabled(config) && supportsScrollTimeline();
+  }
+
   function observeElement(el: Element, opts: Required<AnimateOptions>): void {
     if (registry.has(el) || finished.has(el)) return;
 
@@ -665,9 +785,16 @@ export function createScrollAnimate(userConfig: ScrollAnimateConfig = {}): Scrol
       return;
     }
 
-    if (!motionDisabled(config)) hideElement(el, config);
+    const record = { element: el, options: opts, animated: false, engine: 'js' } as AnimatedElement;
+    if (wantsNative(opts)) {
+      cancelRunning(el);
+      if (startNative(el, opts, () => natives.delete(el))) {
+        record.engine = 'css';
+        natives.add(el);
+      }
+    }
+    if (record.engine === 'js' && !motionDisabled(config)) hideElement(el, config);
 
-    const record = { element: el, options: opts, animated: false } as AnimatedElement;
     registry.set(el, record);
     attach(el, record, true);
   }
@@ -742,8 +869,13 @@ export function createScrollAnimate(userConfig: ScrollAnimateConfig = {}): Scrol
       });
       pending.clear();
       registry.forEach((record, el) => {
-        if (!record.animated) reveal(el, config);
+        if (!record.animated && record.engine !== 'css') reveal(el, config);
       });
+      // Native scroll-linked animations still running: stop them, show content.
+      natives.forEach((el) => {
+        if (running.has(el)) reveal(el, config);
+      });
+      natives.clear();
       pools.forEach((pool) => pool.forEach((io) => io.disconnect()));
       pools.clear();
       registry.clear();

@@ -47,6 +47,16 @@ export type AnimationPreset =
  */
 export type ProgressMode = 'ratio' | 'scroll';
 
+/**
+ * Which engine runs the entrance animation.
+ * - `'js'` (default in 1.x): IntersectionObserver triggers a time-based Web Animation.
+ * - `'css'`: the preset runs on the browser's native scroll-driven timeline
+ *   (`animation-timeline: view()`), so its progress follows the scroll position
+ *   off the main thread. Falls back to `'js'` where unsupported.
+ * - `'auto'`: same as `'css'` (native when supported, JS otherwise).
+ */
+export type ScrollEngine = 'auto' | 'js' | 'css';
+
 /** Easing function types */
 export type EasingType =
   | 'linear'
@@ -128,6 +138,17 @@ export interface AnimateOptions {
    * style, for scroll-driven effects written in plain CSS. Off by default.
    */
   progressVar?: string;
+  /**
+   * Animation engine (default: `'js'`, see `ScrollEngine`). With the native
+   * engine the animation is linked to scroll position: `duration`, `delay`,
+   * `threshold`, `offset` and `stagger` do not apply; `viewRange` does.
+   */
+  engine?: ScrollEngine;
+  /**
+   * Native engine only: the view-timeline range the entrance animation spans,
+   * as `[rangeStart, rangeEnd]` (default: `['entry 0%', 'entry 100%']`).
+   */
+  viewRange?: [string, string];
 }
 
 /** Global configuration for ScrollAnimate instance */
@@ -167,6 +188,8 @@ export interface ScrollAnimateConfig {
    * never re-hide or replay them. (default: true)
    */
   autoUnregister?: boolean;
+  /** Default animation engine (default: `'js'`) */
+  defaultEngine?: ScrollEngine;
 }
 
 /** Registered element entry */
@@ -176,6 +199,8 @@ export interface AnimatedElement {
   observer: IntersectionObserver;
   animated: boolean;
   progressObserver?: IntersectionObserver;
+  /** Engine actually used for this element (`'css'` = native scroll-driven timeline) */
+  engine?: 'js' | 'css';
 }
 
 /** ScrollAnimate public API */
