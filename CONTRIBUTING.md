@@ -60,6 +60,12 @@ Enhancement suggestions are tracked as GitHub issues. When you are creating an e
    npm run build
    ```
 
+5. Type-check and run the tests (Vitest + jsdom):
+   ```bash
+   npm run typecheck
+   npm test
+   ```
+
 ## Commit Messages
 
 We follow the [Conventional Commits](https://www.conventionalcommits.org/) specification. Please ensure your commit messages adhere to this format:

@@ -10,9 +10,12 @@ import type {
   ScrollAnimateConfig,
   ScrollAnimateInstance,
   ParallaxOptions,
-  EasingType,
 } from './types';
 import { resolvePreset, resolveEasing } from './presets';
+
+type KeyframeMap = ReturnType<typeof resolvePreset>;
+type Target = string | Element | NodeList | Element[];
+type Root = Element | Document | null;
 
 const DEFAULT_CONFIG: Required<ScrollAnimateConfig> = {
   defaultAnimation: 'fade-in-up',
@@ -31,107 +34,271 @@ const DEFAULT_CONFIG: Required<ScrollAnimateConfig> = {
   root: null,
 };
 
-const DEFAULT_OPTIONS: Required<AnimateOptions> = {
-  animation: 'fade-in-up',
-  duration: 600,
-  delay: 0,
-  easing: 'ease',
-  threshold: 0.1,
-  rootMargin: '0px',
-  repeat: false,
-  once: true,
-  offset: 0,
-  stagger: 0,
-  parallax: {},
-  onStart: () => undefined,
-  onComplete: () => undefined,
-  onEnter: () => undefined,
-  onLeave: () => undefined,
-  onProgress: () => undefined,
-};
+const noop = () => undefined;
+
+/* ------------------------------------------------------------------ */
+/* Environment helpers (all SSR-safe: never touch globals at import)   */
+/* ------------------------------------------------------------------ */
+
+const hasDOM = (): boolean => typeof window !== 'undefined' && typeof document !== 'undefined';
+
+/** @internal */
+export const supportsObserver = (): boolean => hasDOM() && typeof IntersectionObserver !== 'undefined';
+
+let reducedMotionQuery: MediaQueryList | null | undefined;
+
+/** @internal Whether the user asked the OS/browser to reduce motion. */
+export function prefersReducedMotion(): boolean {
+  if (!hasDOM()) return false;
+  if (reducedMotionQuery === undefined) {
+    reducedMotionQuery =
+      typeof window.matchMedia === 'function' ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+  }
+  return !!reducedMotionQuery && reducedMotionQuery.matches;
+}
+
+/* ------------------------------------------------------------------ */
+/* Option parsing                                                      */
+/* ------------------------------------------------------------------ */
+
+function num(value: string | undefined): number | undefined {
+  if (value === undefined || value.trim() === '') return undefined;
+  const n = parseFloat(value);
+  return Number.isFinite(n) ? n : undefined;
+}
+
+/** Numeric strings ("100") become numbers (px); strings with units stay as-is. */
+function lengthValue(value: string | undefined): string | number | undefined {
+  if (value === undefined || value.trim() === '') return undefined;
+  const v = value.trim();
+  return /^-?(\d+\.?\d*|\.\d+)$/.test(v) ? parseFloat(v) : v;
+}
 
 function parseDataAttributes(el: Element, config: Required<ScrollAnimateConfig>): Required<AnimateOptions> {
-  const dataset = (el as HTMLElement).dataset;
+  const dataset = (el as HTMLElement).dataset || {};
   const opts: AnimateOptions = {};
 
   if (dataset.saAnimation) {
     const anim = dataset.saAnimation;
-    opts.animation = anim.includes(',') 
-      ? anim.split(',').map(s => s.trim()) as any 
-      : anim as any;
+    opts.animation = (anim.includes(',') ? anim.split(',').map((s) => s.trim()) : anim.trim()) as any;
   }
-  if (dataset.saDuration) opts.duration = parseInt(dataset.saDuration, 10);
-  if (dataset.saDelay) opts.delay = parseInt(dataset.saDelay, 10);
+  opts.duration = num(dataset.saDuration);
+  opts.delay = num(dataset.saDelay);
   if (dataset.saEasing) {
-    const e = dataset.saEasing;
-    opts.easing = e.startsWith('[') ? JSON.parse(e) : e;
+    const e = dataset.saEasing.trim();
+    if (e.startsWith('[')) {
+      try {
+        opts.easing = JSON.parse(e);
+      } catch {
+        // Malformed JSON: fall back to the default easing instead of throwing
+      }
+    } else {
+      opts.easing = e;
+    }
   }
   if (dataset.saThreshold) {
     const t = dataset.saThreshold;
-    opts.threshold = t.includes(',') ? t.split(',').map(parseFloat) : parseFloat(t);
+    opts.threshold = t.includes(',')
+      ? t.split(',').map(parseFloat).filter(Number.isFinite)
+      : num(t);
   }
   if (dataset.saRootMargin) opts.rootMargin = dataset.saRootMargin;
   if (dataset.saRepeat !== undefined) opts.repeat = dataset.saRepeat !== 'false';
   if (dataset.saOnce !== undefined) opts.once = dataset.saOnce !== 'false';
-  if (dataset.saOffset) opts.offset = parseInt(dataset.saOffset, 10);
-  if (dataset.saStagger) opts.stagger = parseInt(dataset.saStagger, 10);
-  
+  opts.offset = num(dataset.saOffset);
+  opts.stagger = num(dataset.saStagger);
+
   if (dataset.saParallaxX || dataset.saParallaxY || dataset.saParallaxRotate || dataset.saParallaxScale) {
     opts.parallax = {
-      x: dataset.saParallaxX,
-      y: dataset.saParallaxY,
-      rotate: dataset.saParallaxRotate ? parseFloat(dataset.saParallaxRotate) : undefined,
-      scale: dataset.saParallaxScale ? parseFloat(dataset.saParallaxScale) : undefined,
-      speed: dataset.saParallaxSpeed ? parseFloat(dataset.saParallaxSpeed) : 1,
+      x: lengthValue(dataset.saParallaxX),
+      y: lengthValue(dataset.saParallaxY),
+      rotate: num(dataset.saParallaxRotate),
+      scale: num(dataset.saParallaxScale),
+      speed: num(dataset.saParallaxSpeed) ?? 1,
     };
   }
 
   return mergeOptions(opts, config);
 }
 
-function mergeOptions(
-  opts: AnimateOptions,
-  config: Required<ScrollAnimateConfig>
-): Required<AnimateOptions> {
+function mergeOptions(opts: AnimateOptions, config: Required<ScrollAnimateConfig>): Required<AnimateOptions> {
   const repeat = opts.repeat ?? config.defaultRepeat;
+  const threshold = opts.threshold ?? config.defaultThreshold;
   return {
     animation: opts.animation ?? config.defaultAnimation,
     duration: opts.duration ?? config.defaultDuration,
     delay: opts.delay ?? config.defaultDelay,
     easing: opts.easing ?? config.defaultEasing,
-    threshold: opts.threshold ?? config.defaultThreshold,
+    threshold: Array.isArray(threshold) && threshold.length === 0 ? config.defaultThreshold : threshold,
     rootMargin: opts.rootMargin ?? config.defaultRootMargin,
-    repeat: repeat,
+    repeat,
     once: opts.once ?? (repeat ? false : config.defaultOnce),
     offset: opts.offset ?? config.defaultOffset,
-    stagger: opts.stagger ?? DEFAULT_OPTIONS.stagger,
-    parallax: opts.parallax ?? DEFAULT_OPTIONS.parallax,
-    onStart: opts.onStart ?? DEFAULT_OPTIONS.onStart,
-    onComplete: opts.onComplete ?? DEFAULT_OPTIONS.onComplete,
-    onEnter: opts.onEnter ?? DEFAULT_OPTIONS.onEnter,
-    onLeave: opts.onLeave ?? DEFAULT_OPTIONS.onLeave,
-    onProgress: opts.onProgress ?? DEFAULT_OPTIONS.onProgress,
+    stagger: opts.stagger ?? 0,
+    parallax: opts.parallax ?? {},
+    onStart: opts.onStart ?? noop,
+    onComplete: opts.onComplete ?? noop,
+    onEnter: opts.onEnter ?? noop,
+    onLeave: opts.onLeave ?? noop,
+    onProgress: opts.onProgress ?? noop,
   };
 }
 
-function resolveTargets(target: string | Element | NodeList | Element[]): Element[] {
-  if (typeof target === 'string') {
-    return Array.from(document.querySelectorAll(target));
-  }
-  if (target instanceof Element) {
-    return [target];
-  }
-  if (target instanceof NodeList) {
-    return Array.from(target) as Element[];
-  }
-  if (Array.isArray(target)) {
-    return target;
+function resolveTargets(target: Target | null | undefined): Element[] {
+  if (!target || !hasDOM()) return [];
+  if (typeof target === 'string') return Array.from(document.querySelectorAll(target));
+  if (target instanceof Element) return [target];
+  if (Array.isArray(target) || target instanceof NodeList) {
+    return (Array.from(target as ArrayLike<Node>) as Element[]).filter((el) => el instanceof Element);
   }
   return [];
 }
 
-function prefersReducedMotion(): boolean {
-  return window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+/**
+ * Apply `offset` to the bottom edge of a rootMargin, preserving the other
+ * three sides. `offset: 100` means "trigger 100px later" (bottom -100px).
+ * @internal
+ */
+export function applyOffset(rootMargin: string, offset: number): string {
+  if (!offset) return rootMargin;
+  const parts = (rootMargin || '0px').trim().split(/\s+/);
+  const top = parts[0];
+  const right = parts[1] ?? top;
+  const bottom = parts[2] ?? top;
+  const left = parts[3] ?? right;
+  const m = /^(-?\d*\.?\d+)(px)?$/.exec(bottom);
+  const base = m ? parseFloat(m[1]) : 0; // non-px bottoms (e.g. %) cannot be combined; offset wins
+  return `${top} ${right} ${base - offset}px ${left}`;
+}
+
+function hasParallax(p: ParallaxOptions | undefined): boolean {
+  return !!p && Object.keys(p).some((k) => (p as Record<string, unknown>)[k] !== undefined);
+}
+
+function needsProgress(opts: Required<AnimateOptions>): boolean {
+  return hasParallax(opts.parallax) || opts.onProgress !== noop;
+}
+
+/* ------------------------------------------------------------------ */
+/* Animation                                                           */
+/* ------------------------------------------------------------------ */
+
+/** The animation currently running on an element, so it can be cancelled/replaced. */
+const running = new WeakMap<Element, Animation>();
+const timers = new WeakMap<Element, ReturnType<typeof setTimeout>>();
+
+function cancelRunning(el: Element): void {
+  const anim = running.get(el);
+  if (anim) {
+    running.delete(el);
+    anim.onfinish = null;
+    anim.cancel();
+  }
+  const timer = timers.get(el);
+  if (timer !== undefined) {
+    clearTimeout(timer);
+    timers.delete(el);
+  }
+}
+
+function setStyles(el: Element, styles: Record<string, string | number>): void {
+  const style = (el as HTMLElement).style;
+  if (!style) return;
+  Object.keys(styles).forEach((prop) => {
+    (style as any)[prop] = String(styles[prop]);
+  });
+}
+
+const NUM_UNIT = /(-?(?:\d+\.?\d*|\.\d+)(?:e[+-]?\d+)?)([a-z%]*)/gi;
+
+/**
+ * Interpolate two CSS values at `t`. Numbers interpolate directly; strings
+ * interpolate when they share the same structure (e.g. `translateY(40px)` ->
+ * `translateY(0px)`, or `scale(0.8)` -> `scale(1)`). Otherwise snaps at 0.5.
+ * @internal
+ */
+export function interpolateValue(from: string | number, to: string | number, t: number): string | number {
+  if (typeof from === 'number' && typeof to === 'number') return from + (to - from) * t;
+  const a = String(from);
+  const b = String(to);
+  const ta: Array<[number, string]> = [];
+  const tb: Array<[number, string]> = [];
+  const skA = a.replace(NUM_UNIT, (_, n, u) => (ta.push([parseFloat(n), u]), '#'));
+  const skB = b.replace(NUM_UNIT, (_, n, u) => (tb.push([parseFloat(n), u]), '#'));
+  if (skA !== skB || ta.length !== tb.length) return t < 0.5 ? from : to;
+  let i = 0;
+  let ok = true;
+  const out = skA.replace(/#/g, () => {
+    const [na, ua] = ta[i];
+    const [nb, ub] = tb[i++];
+    if (ua !== ub && na !== 0 && nb !== 0 && ua && ub) ok = false;
+    const unit = ua || ub;
+    return `${+(na + (nb - na) * t).toFixed(4)}${unit}`;
+  });
+  return ok ? out : t < 0.5 ? from : to;
+}
+
+const EASING_SAMPLES = 30;
+let linearSupported: boolean | undefined;
+
+function supportsLinearEasing(): boolean {
+  if (linearSupported === undefined) {
+    linearSupported =
+      typeof CSS !== 'undefined' &&
+      typeof CSS.supports === 'function' &&
+      CSS.supports('animation-timing-function', 'linear(0, 1)');
+  }
+  return linearSupported;
+}
+
+function sampleEasing(fn: (t: number) => number): number[] {
+  const values: number[] = [];
+  for (let i = 0; i <= EASING_SAMPLES; i++) {
+    const v = fn(i / EASING_SAMPLES);
+    values.push(Number.isFinite(v) ? +v.toFixed(4) : i / EASING_SAMPLES);
+  }
+  return values;
+}
+
+function buildAnimation(
+  preset: KeyframeMap,
+  easing: Required<AnimateOptions>['easing']
+): { keyframes: Keyframe[]; easing: string } {
+  if (typeof easing !== 'function') {
+    return { keyframes: [preset.from as Keyframe, preset.to as Keyframe], easing: resolveEasing(easing) };
+  }
+  const samples = sampleEasing(easing);
+  // Modern browsers: an exact, property-agnostic `linear()` easing curve.
+  if (supportsLinearEasing()) {
+    return { keyframes: [preset.from as Keyframe, preset.to as Keyframe], easing: `linear(${samples.join(', ')})` };
+  }
+  // Fallback: approximate the curve with interpolated keyframes.
+  const props = Object.keys(preset.from).filter((p) => p in preset.to);
+  const keyframes = samples.map((eased, i) => {
+    const frame: Keyframe = { offset: i / EASING_SAMPLES };
+    props.forEach((prop) => {
+      frame[prop] = interpolateValue(preset.from[prop], preset.to[prop], eased);
+    });
+    return frame;
+  });
+  return { keyframes, easing: 'linear' };
+}
+
+/** Make an element visible without animating (reduced motion / disabled / no WAAPI). */
+function reveal(el: Element, config: Required<ScrollAnimateConfig>): void {
+  cancelRunning(el);
+  if (config.useClassNames) {
+    el.classList.remove(config.hiddenClass);
+    el.classList.add(config.visibleClass);
+  } else {
+    const style = (el as HTMLElement).style;
+    if (style) style.opacity = '';
+  }
+}
+
+/** @internal Whether animations should be skipped entirely. */
+export function motionDisabled(config: Pick<ScrollAnimateConfig, 'disabled'>): boolean {
+  return !!config.disabled || prefersReducedMotion();
 }
 
 function runAnimation(
@@ -140,275 +307,288 @@ function runAnimation(
   config: Required<ScrollAnimateConfig>,
   staggerIndex = 0
 ): void {
-  const { animation, duration, delay, easing, stagger, onStart, onComplete } = opts;
-  const totalDelay = delay + staggerIndex * stagger;
-  const preset = resolvePreset(animation);
-  
-  let easingValue: string;
-  let customEasingFn: ((t: number) => number) | null = null;
+  const { duration, delay, stagger, onStart, onComplete } = opts;
+  const totalDelay = Math.max(0, delay + staggerIndex * stagger);
+  cancelRunning(el);
 
-  if (typeof easing === 'function') {
-    easingValue = 'linear';
-    customEasingFn = easing;
-  } else {
-    easingValue = resolveEasing(easing);
+  if (motionDisabled(config)) {
+    reveal(el, config);
+    onStart(el);
+    onComplete(el);
+    return;
   }
 
   if (config.useClassNames) {
-    if (totalDelay > 0) {
-      (el as HTMLElement).style.animationDelay = `${totalDelay}ms`;
-    }
+    if (totalDelay > 0) (el as HTMLElement).style.animationDelay = `${totalDelay}ms`;
     el.classList.remove(config.hiddenClass);
     el.classList.add(config.visibleClass);
     onStart(el);
-    setTimeout(() => onComplete(el), duration + totalDelay);
+    timers.set(
+      el,
+      setTimeout(() => {
+        timers.delete(el);
+        onComplete(el);
+      }, duration + totalDelay)
+    );
     return;
   }
 
-  const keyframes: Keyframe[] = [
-    preset.from as Keyframe,
-    preset.to as Keyframe,
-  ];
+  const preset = resolvePreset(opts.animation);
 
-  // If custom easing function is provided, we generate more keyframes to approximate it
-  if (customEasingFn) {
-    const steps = 30;
-    const generatedKeyframes: Keyframe[] = [];
-    for (let i = 0; i <= steps; i++) {
-      const t = i / steps;
-      const easedT = customEasingFn(t);
-      const currentKeyframe: Keyframe = {};
-      
-      // Interpolate each property
-      Object.keys(preset.from).forEach(prop => {
-        const fromVal = preset.from[prop];
-        const toVal = preset.to[prop];
-        
-        if (typeof fromVal === 'number' && typeof toVal === 'number') {
-          currentKeyframe[prop] = fromVal + (toVal - fromVal) * easedT;
-        } else if (prop === 'transform' && typeof fromVal === 'string' && typeof toVal === 'string') {
-          // Simple transform interpolation (only works for same-type transforms)
-          // For complex transforms, this is a simplified approximation
-          if (fromVal.includes('translateY') && toVal.includes('translateY')) {
-            const fromY = parseFloat(fromVal.match(/-?\d+/)?.[0] || '0');
-            const toY = parseFloat(toVal.match(/-?\d+/)?.[0] || '0');
-            currentKeyframe[prop] = `translateY(${fromY + (toY - fromY) * easedT}px)`;
-          } else {
-            currentKeyframe[prop] = t < 0.5 ? fromVal : toVal;
-          }
-        } else {
-          currentKeyframe[prop] = t < 0.5 ? fromVal : toVal;
-        }
-      });
-      generatedKeyframes.push(currentKeyframe);
-    }
-    
-    const anim = el.animate(generatedKeyframes, {
-      duration,
-      delay: totalDelay,
-      easing: 'linear',
-      fill: 'both',
-    });
-    onStart(el);
-    anim.onfinish = () => onComplete(el);
-    return;
-  }
-
-  const timing: KeyframeAnimationOptions = {
-    duration,
-    delay: totalDelay,
-    easing: easingValue,
-    fill: 'both',
-  };
-
-  if (typeof el.animate === 'function') {
-    const anim = el.animate(keyframes, timing);
-    onStart(el);
-    anim.onfinish = () => onComplete(el);
-  } else {
-    (el as HTMLElement).style.opacity = '1';
-    (el as HTMLElement).style.transform = 'none';
+  if (typeof el.animate !== 'function') {
+    setStyles(el, preset.to);
     onStart(el);
     onComplete(el);
+    return;
   }
+
+  const built = buildAnimation(preset, opts.easing);
+  const timing: KeyframeAnimationOptions = { duration, delay: totalDelay, easing: built.easing, fill: 'both' };
+  let anim: Animation;
+  try {
+    anim = el.animate(built.keyframes, timing);
+  } catch {
+    // Invalid user easing string (WAAPI throws a TypeError): fall back to 'ease'
+    anim = el.animate(built.keyframes, { ...timing, easing: 'ease' });
+  }
+  running.set(el, anim);
+  onStart(el);
+  anim.onfinish = () => {
+    if (running.get(el) === anim) {
+      running.delete(el);
+      // Persist the end state inline and drop the filling animation. This frees
+      // the Animation object and lets later inline styles (parallax, user code)
+      // take effect instead of being masked by `fill: forwards`.
+      try {
+        anim.commitStyles();
+      } catch {
+        setStyles(el, preset.to);
+      }
+      anim.cancel();
+    }
+    onComplete(el);
+  };
 }
 
 function applyParallax(el: Element, progress: number, parallax: ParallaxOptions): void {
   const { x = 0, y = 0, rotate = 0, scale = 1, speed = 1 } = parallax;
   const p = (progress - 0.5) * 2 * speed;
-  
+  const axis = (v: string | number) => (typeof v === 'number' ? `${v * p}px` : `calc(${v} * ${p})`);
+
   let transform = '';
-  if (x) transform += ` translateX(${typeof x === 'number' ? x * p + 'px' : 'calc(' + x + ' * ' + p + ')'})`;
-  if (y) transform += ` translateY(${typeof y === 'number' ? y * p + 'px' : 'calc(' + y + ' * ' + p + ')'})`;
+  if (x) transform += ` translateX(${axis(x)})`;
+  if (y) transform += ` translateY(${axis(y)})`;
   if (rotate) transform += ` rotate(${rotate * p}deg)`;
   if (scale !== 1) transform += ` scale(${1 + (scale - 1) * p})`;
-  
-  (el as HTMLElement).style.transform = transform;
+
+  (el as HTMLElement).style.transform = transform.trim();
 }
 
 function hideElement(el: Element, config: Required<ScrollAnimateConfig>): void {
+  cancelRunning(el);
   if (config.useClassNames) {
     el.classList.add(config.hiddenClass);
     el.classList.remove(config.visibleClass);
   } else {
-    (el as HTMLElement).style.opacity = '0';
+    const style = (el as HTMLElement).style;
+    if (style) style.opacity = '0';
   }
 }
+
+/** @internal Hide an element before its entrance animation, unless motion is off. */
+export function prepareElement(el: Element, config: ScrollAnimateConfig = {}): void {
+  const full = { ...DEFAULT_CONFIG, ...config };
+  if (!motionDisabled(full)) hideElement(el, full);
+}
+
+let progressThresholds: number[] | undefined;
+function getProgressThresholds(): number[] {
+  if (!progressThresholds) {
+    progressThresholds = [];
+    for (let i = 0; i <= 100; i++) progressThresholds.push(i / 100);
+  }
+  return progressThresholds;
+}
+
+/* ------------------------------------------------------------------ */
+/* Instance                                                            */
+/* ------------------------------------------------------------------ */
 
 export function createScrollAnimate(userConfig: ScrollAnimateConfig = {}): ScrollAnimateInstance {
   let config: Required<ScrollAnimateConfig> = { ...DEFAULT_CONFIG, ...userConfig };
   const registry = new Map<Element, AnimatedElement>();
 
-  function createObserver(opts: Required<AnimateOptions>): IntersectionObserver {
-    const rootMargin = opts.offset !== 0 
-      ? `${opts.rootMargin.split(' ')[0]} 0px -${opts.offset}px 0px`
-      : opts.rootMargin;
+  // Observers are shared between elements with the same root/threshold/rootMargin,
+  // instead of one (or two) IntersectionObservers per element.
+  const pools = new Map<Root, Map<string, IntersectionObserver>>();
 
-    return new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const record = registry.get(entry.target);
-          if (!record) return;
+  function pooled(root: Root, key: string, create: () => IntersectionObserver): IntersectionObserver {
+    let pool = pools.get(root);
+    if (!pool) pools.set(root, (pool = new Map()));
+    let io = pool.get(key);
+    if (!io) pool.set(key, (io = create()));
+    return io;
+  }
 
-          if (entry.isIntersecting) {
-            opts.onEnter(entry.target);
+  function teardown(el: Element, restore: boolean): void {
+    const record = registry.get(el);
+    if (!record) return;
+    record.observer.unobserve(el);
+    record.progressObserver?.unobserve(el);
+    registry.delete(el);
+    // An element that never animated would otherwise stay invisible forever.
+    if (restore && !record.animated) reveal(el, config);
+  }
 
-            if (!record.animated || opts.repeat) {
-              const parent = entry.target.parentElement;
-              let staggerIndex = 0;
-              if (parent && opts.stagger > 0) {
-                const siblings = Array.from(parent.children).filter((c) => registry.has(c));
-                staggerIndex = siblings.indexOf(entry.target);
-              }
+  function pruneDetached(): void {
+    registry.forEach((record, el) => {
+      if (el.isConnected === false) teardown(el, false);
+    });
+  }
 
-              if (!config.disabled && !prefersReducedMotion()) {
-                runAnimation(entry.target, opts, config, staggerIndex);
-              } else {
-                (entry.target as HTMLElement).style.opacity = '1';
-                (entry.target as HTMLElement).style.transform = '';
-              }
+  function onIntersect(entries: IntersectionObserverEntry[]): void {
+    const staggerCounts = new Map<Element | null, number>();
+    entries.forEach((entry) => {
+      const el = entry.target;
+      const record = registry.get(el);
+      if (!record) return;
+      const opts = record.options;
 
-              record.animated = true;
-              
-              if (opts.once) {
-                record.observer.unobserve(entry.target);
-                record.progressObserver?.unobserve(entry.target);
-              }
-            }
-          } else {
-            opts.onLeave(entry.target);
-            if (opts.repeat && record.animated) {
-              hideElement(entry.target, config);
-              record.animated = false;
-            }
-          }
-        });
-      },
-      {
-        threshold: typeof opts.threshold === 'number' ? opts.threshold : opts.threshold[0],
-        rootMargin: rootMargin,
-        root: config.root,
+      if (el.isConnected === false) {
+        teardown(el, false);
+        return;
       }
+
+      if (entry.isIntersecting) {
+        opts.onEnter(el);
+        if (record.animated && !opts.repeat) return;
+
+        // Stagger relative to siblings revealed in the same batch, so elements
+        // scrolled into view later don't inherit an ever-growing delay.
+        let staggerIndex = 0;
+        if (opts.stagger > 0) {
+          const parent = el.parentElement;
+          staggerIndex = staggerCounts.get(parent) ?? 0;
+          staggerCounts.set(parent, staggerIndex + 1);
+        }
+
+        runAnimation(el, opts, config, staggerIndex);
+        record.animated = true;
+
+        if (opts.once && !opts.repeat) {
+          // Keep the progress observer: parallax/onProgress must keep working.
+          record.observer.unobserve(el);
+        }
+      } else {
+        opts.onLeave(el);
+        if (opts.repeat && record.animated) {
+          if (!motionDisabled(config)) hideElement(el, config);
+          record.animated = false;
+        }
+      }
+    });
+  }
+
+  function onProgress(entries: IntersectionObserverEntry[]): void {
+    entries.forEach((entry) => {
+      const record = registry.get(entry.target);
+      if (!record) return;
+      const opts = record.options;
+      opts.onProgress(entry.target, entry.intersectionRatio);
+      if (hasParallax(opts.parallax) && !motionDisabled(config)) {
+        applyParallax(entry.target, entry.intersectionRatio, opts.parallax);
+      }
+    });
+  }
+
+  function getObserver(opts: Required<AnimateOptions>): IntersectionObserver {
+    const rootMargin = applyOffset(opts.rootMargin, opts.offset);
+    const threshold = opts.threshold;
+    const root = config.root;
+    return pooled(root, `m|${rootMargin}|${String(threshold)}`, () =>
+      new IntersectionObserver(onIntersect, { threshold, rootMargin, root: root as Element | null })
     );
   }
 
-  function createProgressObserver(el: Element, opts: Required<AnimateOptions>): IntersectionObserver {
-    const thresholds = [];
-    for (let i = 0; i <= 100; i++) thresholds.push(i / 100);
-
-    return new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const progress = entry.intersectionRatio;
-          opts.onProgress(el, progress);
-          
-          if (Object.keys(opts.parallax).length > 0) {
-            applyParallax(el, progress, opts.parallax);
-          }
-        });
-      },
-      {
-        threshold: thresholds,
+  function getProgressObserver(opts: Required<AnimateOptions>): IntersectionObserver {
+    const root = config.root;
+    return pooled(root, `p|${opts.rootMargin}`, () =>
+      new IntersectionObserver(onProgress, {
+        threshold: getProgressThresholds(),
         rootMargin: opts.rootMargin,
-        root: config.root,
-      }
+        root: root as Element | null,
+      })
     );
+  }
+
+  function attach(el: Element, record: AnimatedElement, observeMain: boolean): void {
+    record.observer = getObserver(record.options);
+    if (observeMain) record.observer.observe(el);
+    record.progressObserver = needsProgress(record.options) ? getProgressObserver(record.options) : undefined;
+    record.progressObserver?.observe(el);
   }
 
   function observeElement(el: Element, opts: Required<AnimateOptions>): void {
     if (registry.has(el)) return;
 
-    if (!config.useClassNames) {
-      hideElement(el, config);
+    if (!supportsObserver()) {
+      // No IntersectionObserver (very old browser): never leave content hidden.
+      reveal(el, config);
+      return;
     }
 
-    const observer = createObserver(opts);
-    observer.observe(el);
+    if (!motionDisabled(config)) hideElement(el, config);
 
-    let progressObserver;
-    if (Object.keys(opts.parallax).length > 0 || opts.onProgress !== DEFAULT_OPTIONS.onProgress) {
-      progressObserver = createProgressObserver(el, opts);
-      progressObserver.observe(el);
-    }
-
-    registry.set(el, { 
-      element: el, 
-      options: opts, 
-      observer, 
-      animated: false,
-      progressObserver 
-    });
+    const record = { element: el, options: opts, animated: false } as AnimatedElement;
+    registry.set(el, record);
+    attach(el, record, true);
   }
 
   const instance: ScrollAnimateInstance = {
     observe(target, options = {}) {
-      const elements = resolveTargets(target);
+      pruneDetached();
       const opts = mergeOptions(options, config);
-      elements.forEach((el) => observeElement(el, opts));
+      resolveTargets(target).forEach((el) => observeElement(el, opts));
     },
 
     unobserve(target) {
-      const elements = resolveTargets(target);
-      elements.forEach((el) => {
-        const record = registry.get(el);
-        if (record) {
-          record.observer.disconnect();
-          record.progressObserver?.disconnect();
-          registry.delete(el);
-        }
-      });
+      resolveTargets(target).forEach((el) => teardown(el, true));
     },
 
-    init(rootElement = document) {
-      const elements = rootElement.querySelectorAll('[data-sa]');
-      elements.forEach((el) => {
-        const opts = parseDataAttributes(el, config);
-        observeElement(el, opts);
+    init(rootElement) {
+      const scope = rootElement ?? (hasDOM() ? document : null);
+      if (!scope) return;
+      pruneDetached();
+      scope.querySelectorAll('[data-sa]').forEach((el) => {
+        if (!registry.has(el)) observeElement(el, parseDataAttributes(el, config));
       });
     },
 
     destroy() {
-      registry.forEach((record) => {
-        record.observer.disconnect();
-        record.progressObserver?.disconnect();
+      registry.forEach((record, el) => {
+        if (!record.animated) reveal(el, config);
       });
+      pools.forEach((pool) => pool.forEach((io) => io.disconnect()));
+      pools.clear();
       registry.clear();
     },
 
     refresh() {
-      const entries = Array.from(registry.entries());
-      instance.destroy();
-      entries.forEach(([el, record]) => {
-        observeElement(el, record.options);
+      // Rebuild observers (e.g. after configure({ root })) without re-hiding or
+      // replaying elements that have already animated.
+      pools.forEach((pool) => pool.forEach((io) => io.disconnect()));
+      pools.clear();
+      pruneDetached();
+      if (!supportsObserver()) return;
+      registry.forEach((record, el) => {
+        const done = record.animated && record.options.once && !record.options.repeat;
+        attach(el, record, !done);
       });
     },
 
     animate(target, options = {}) {
-      const elements = resolveTargets(target);
       const opts = mergeOptions(options, config);
-      elements.forEach((el) => {
-        runAnimation(el, opts, config, 0);
-      });
+      resolveTargets(target).forEach((el) => runAnimation(el, opts, config, 0));
     },
 
     getObservedElements() {

@@ -2,7 +2,7 @@
 
 # use-scroll-animate 🚀
 
-**軽量（~2.9KB gzipped）、依存関係なしのモダンWeb向けスクロールアニメーションライブラリ。**
+**軽量（~4KB gzipped）、依存関係なしのモダンWeb向けスクロールアニメーションライブラリ。**
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/HarrisonCN/use-scroll-animate?style=flat-square)](https://github.com/HarrisonCN/use-scroll-animate/releases)
 [![GitHub repo size](https://img.shields.io/github/repo-size/HarrisonCN/use-scroll-animate?style=flat-square)](https://github.com/HarrisonCN/use-scroll-animate)
@@ -19,7 +19,7 @@
 `use-scroll-animate` は違います：
 - ⚡ **依存関係なし**：純粋な Vanilla JS/TypeScript。
 - 🚀 **高パフォーマンス**：`IntersectionObserver` とネイティブの `Web Animations API` で駆動。スクロールイベントリスナーなし、レイアウトスラッシングなし。
-- 🪶 **超軽量**：Gzip後わずか約2.9KB。
+- 🪶 **超軽量**：Gzip後コア約4KB。
 - 🧩 **フレームワークに依存しない**：Vanilla JS、React、Vue、Svelteなどとシームレスに動作。一流の React Hooks と Vue Composables を内蔵。
 - ♿ **アクセシブル**：`prefers-reduced-motion` を標準でサポート。
 

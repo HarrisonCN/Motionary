@@ -1,6 +1,10 @@
 /**
  * use-scroll-animate - Vue 3 Integration
  * Provides useScrollAnimate composable for Vue 3 applications.
+ *
+ * A thin wrapper around the core engine, so it shares its behaviour: `once`,
+ * `offset`, custom easing functions, parallax, `prefers-reduced-motion`
+ * support, and cleanup on unmount.
  */
 import type { AnimateOptions } from './types';
 export declare function createVueComposables(Vue: {

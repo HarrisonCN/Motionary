@@ -1,114 +1,55 @@
 /**
  * use-scroll-animate - React Integration
- * Provides useScrollAnimate and useScrollRef hooks for React applications.
+ * Provides useScrollAnimate and useScrollStagger hooks for React applications.
+ *
+ * Both hooks are thin wrappers around the core engine, so they share its
+ * behaviour: `once`, `offset`, custom easing functions, parallax,
+ * `prefers-reduced-motion` support, and proper cleanup on unmount.
  */
 
-import type { AnimateOptions } from './types';
-import { resolvePreset, resolveEasing } from './presets';
+import type { AnimateOptions, ScrollAnimateInstance } from './types';
+import { createScrollAnimate, prepareElement, supportsObserver } from './core';
 
 type ReactRef<T> = { current: T | null };
+
+const CALLBACKS = ['onStart', 'onComplete', 'onEnter', 'onLeave', 'onProgress'] as const;
+
+/**
+ * Wrap the callbacks that exist at mount so they always call the latest
+ * version from the most recent render (avoids stale closures without
+ * re-creating observers on every render).
+ * @internal
+ */
+export function withLatestCallbacks(latest: ReactRef<AnimateOptions>): AnimateOptions {
+  const initial = latest.current || {};
+  const opts: AnimateOptions = { ...initial };
+  CALLBACKS.forEach((name) => {
+    if (typeof initial[name] === 'function') {
+      (opts as any)[name] = (...args: unknown[]) => (latest.current?.[name] as any)?.(...args);
+    }
+  });
+  return opts;
+}
 
 export function createReactHooks(React: {
   useRef: <T>(initial: T | null) => ReactRef<T>;
   useEffect: (effect: () => (() => void) | void, deps?: unknown[]) => void;
 }) {
+  // Created lazily on the client so importing on the server is side-effect free.
+  let instance: ScrollAnimateInstance | null = null;
+  const getInstance = () => instance || (instance = createScrollAnimate());
+
   function useScrollAnimate(options: AnimateOptions = {}) {
     const ref = React.useRef<Element>(null);
+    const optionsRef = React.useRef<AnimateOptions>(options);
+    optionsRef.current = options;
 
     React.useEffect(() => {
       const el = ref.current;
       if (!el) return;
-
-      const {
-        animation = 'fade-in-up',
-        duration = 600,
-        delay = 0,
-        easing = 'ease',
-        threshold = 0.1,
-        rootMargin = '0px',
-        repeat = false,
-        parallax = {},
-        onStart,
-        onComplete,
-        onEnter,
-        onLeave,
-        onProgress,
-      } = options;
-
-      const preset = resolvePreset(animation);
-      const easingValue = resolveEasing(easing);
-      let animated = false;
-
-      (el as HTMLElement).style.opacity = '0';
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              onEnter?.(el);
-              if (!animated || repeat) {
-                const keyframes: Keyframe[] = [
-                  preset.from as Keyframe,
-                  preset.to as Keyframe,
-                ];
-                const anim = el.animate(keyframes, {
-                  duration,
-                  delay,
-                  easing: easingValue,
-                  fill: 'both',
-                });
-                onStart?.(el);
-                anim.onfinish = () => onComplete?.(el);
-                animated = true;
-                if (!repeat && !Object.keys(parallax).length && !onProgress) {
-                  observer.unobserve(el);
-                }
-              }
-            } else {
-              onLeave?.(el);
-              if (repeat && animated) {
-                (el as HTMLElement).style.opacity = '0';
-                animated = false;
-              }
-            }
-          });
-        },
-        { threshold: typeof threshold === 'number' ? threshold : threshold[0], rootMargin }
-      );
-
-      let progressObserver: IntersectionObserver | null = null;
-      if (Object.keys(parallax).length > 0 || onProgress) {
-        const thresholds = [];
-        for (let i = 0; i <= 100; i++) thresholds.push(i / 100);
-        
-        progressObserver = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              const progress = entry.intersectionRatio;
-              onProgress?.(el, progress);
-              
-              if (Object.keys(parallax).length > 0) {
-                const { x = 0, y = 0, rotate = 0, scale = 1, speed = 1 } = parallax;
-                const p = (progress - 0.5) * 2 * speed;
-                let transform = '';
-                if (x) transform += ` translateX(${typeof x === 'number' ? x * p + 'px' : 'calc(' + x + ' * ' + p + ')'})`;
-                if (y) transform += ` translateY(${typeof y === 'number' ? y * p + 'px' : 'calc(' + y + ' * ' + p + ')'})`;
-                if (rotate) transform += ` rotate(${rotate * p}deg)`;
-                if (scale !== 1) transform += ` scale(${1 + (scale - 1) * p})`;
-                (el as HTMLElement).style.transform = transform;
-              }
-            });
-          },
-          { threshold: thresholds, rootMargin }
-        );
-        progressObserver.observe(el);
-      }
-
-      observer.observe(el);
-      return () => {
-        observer.disconnect();
-        progressObserver?.disconnect();
-      };
+      const sa = getInstance();
+      sa.observe(el, withLatestCallbacks(optionsRef));
+      return () => sa.unobserve(el);
     }, []);
 
     return ref;
@@ -116,52 +57,30 @@ export function createReactHooks(React: {
 
   function useScrollStagger(options: AnimateOptions & { stagger?: number } = {}) {
     const ref = React.useRef<Element>(null);
+    const optionsRef = React.useRef<AnimateOptions>(options);
+    optionsRef.current = options;
 
     React.useEffect(() => {
       const container = ref.current;
       if (!container) return;
 
-      const {
-        animation = 'fade-in-up',
-        duration = 600,
-        delay = 0,
-        easing = 'ease',
-        threshold = 0.1,
-        rootMargin = '0px',
-        stagger = 80,
-      } = options;
+      const sa = getInstance();
+      const { stagger = 80, delay = 0, threshold = 0.1, rootMargin = '0px', ...rest } =
+        withLatestCallbacks(optionsRef);
+      const children = Array.from(container.children);
+      if (!supportsObserver()) return; // leave content visible
 
-      const children = Array.from(container.children) as HTMLElement[];
-      const preset = resolvePreset(animation);
-      const easingValue = resolveEasing(easing);
-
-      children.forEach((child) => {
-        child.style.opacity = '0';
-      });
-
-      let animated = false;
+      children.forEach((child) => prepareElement(child));
 
       const observer = new IntersectionObserver(
         (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting && !animated) {
-              animated = true;
-              children.forEach((child, i) => {
-                child.animate(
-                  [preset.from as Keyframe, preset.to as Keyframe],
-                  {
-                    duration,
-                    delay: delay + i * stagger,
-                    easing: easingValue,
-                    fill: 'both',
-                  }
-                );
-              });
-              observer.unobserve(container);
-            }
+          if (!entries.some((entry) => entry.isIntersecting)) return;
+          observer.disconnect();
+          children.forEach((child, i) => {
+            sa.animate(child, { ...rest, delay: delay + i * stagger });
           });
         },
-        { threshold: typeof threshold === 'number' ? threshold : threshold[0], rootMargin }
+        { threshold, rootMargin }
       );
 
       observer.observe(container);

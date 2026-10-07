@@ -1,13 +1,12 @@
 /**
  * use-scroll-animate
  *
- * A lightweight (~4KB gzipped), dependency-free scroll animation library
- * for modern web applications. Built with TypeScript, powered by
- * IntersectionObserver and the Web Animations API.
+ * A lightweight, dependency-free scroll animation library for modern web
+ * applications. Built with TypeScript, powered by IntersectionObserver and
+ * the Web Animations API. Safe to import during SSR.
  *
- * @version 1.0.0
  * @license MIT
- * @see https://github.com/use-scroll-animate/use-scroll-animate
+ * @see https://github.com/HarrisonCN/use-scroll-animate
  */
 
 export { createScrollAnimate } from './core';
@@ -20,6 +19,7 @@ export type {
   EasingType,
   AnimationKeyframe,
   CustomAnimation,
+  ParallaxOptions,
   AnimateOptions,
   ScrollAnimateConfig,
   AnimatedElement,
