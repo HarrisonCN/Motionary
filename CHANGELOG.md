@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.2.0] - 2026-10-07
+
+### Added
+- **Gestures** — new category `use-scroll-animate/components/gesture`:
+  - `gesture(el, handlers, options)` — one Pointer Events recognizer for **pan** (`dx`, `dy`, `vx`, `vy`, `first`, `last`), **swipe** (direction + velocity), **pinch** (two pointers, or Ctrl/⌘ + wheel / trackpad pinch), **long-press**, **tap** and **double-tap**; `axis` lock keeps native scrolling on the other axis. Release velocities go straight into springs: `spring.set(0, vx)`. Pure helpers `swipeDirection()` and `pinchScale()` are exported.
+  - `<usa-swipeable>` — swipe-to-dismiss / swipe actions: follows the finger (rubber-banded past `distance`), flies out on a swipe, springs home otherwise; `axis`, `distance`, `preset`, `dismiss`; Delete / arrow keys; cancelable `usa:swipe`, `usa:dismiss`.
+  - `<usa-pinch-zoom>` — pinch / Ctrl + wheel zoom, pan while zoomed, double-tap toggle, springs back inside bounds; `min`, `max`, `double-tap`; `+` / `-` / `0` keys; `usa:zoom`.
+- Reduced motion: no follow or fly-out animation (events still fire), zoom changes instantly.
+- Showcase: new **Gestures** gallery category with a live `gesture()` + spring demo.
+
 ## [3.1.0] - 2026-10-07
 
 ### Added

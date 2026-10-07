@@ -240,6 +240,14 @@ See [frameworks-ssr.md](./frameworks-ssr.md) and [accessibility.md](./accessibil
 
 Positions: `'>'` chain (default) · `'<'` with previous · `'-=200'` overlap · `'+=100'` gap · `'<+=50'` · `'label+=100'` · ms.
 
+### v3.2 Gestures (`components/gesture`)
+
+| Element / API | What it does | Key options |
+|---|---|---|
+| `gesture(el, handlers, opts)` | Pan · swipe · pinch · long-press · tap · double-tap | `onPan({ dx, dy, vx, vy, first, last })`, `onSwipe({ direction, velocity })`, `onPinch({ scale })`, `onLongPress`, `onTap`, `onDoubleTap`; `axis`, `threshold`, `swipeDistance`, `swipeVelocity`, `longPress`, `wheelPinch` |
+| `<usa-swipeable>` | Swipe to dismiss, spring home | `axis`, `distance` (120), `preset`, `dismiss`; `usa:swipe`, `usa:dismiss`; `swipe(dir)`, `reset()` |
+| `<usa-pinch-zoom>` | Pinch / Ctrl+wheel zoom + pan | `min` (1), `max` (4), `double-tap` (2), `preset`; `zoomTo(k)`, `usa:zoom` |
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

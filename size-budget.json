@@ -67,7 +67,7 @@
   {
     "name": "dist/components.umd.js (minified, all components + CSS)",
     "file": "dist/components.umd.js",
-    "limit": 65792
+    "limit": 70400
   },
   {
     "name": "dist/components.css",
@@ -77,7 +77,7 @@
   {
     "name": "import 'use-scroll-animate/components' (everything)",
     "import": "export * from 'pkg/components';",
-    "limit": 65536
+    "limit": 70144
   },
   {
     "name": "import 'use-scroll-animate/components/reveal'",
@@ -197,7 +197,7 @@
   {
     "name": "import 'use-scroll-animate/components/vue'",
     "import": "export * from 'pkg/components/vue';",
-    "limit": 60928
+    "limit": 65536
   },
   {
     "name": "import 'use-scroll-animate/components/lazy'",
@@ -213,5 +213,15 @@
     "name": "import { defineTimelineComponents } from '…/components/timeline'",
     "import": "export { defineTimelineComponents } from 'pkg/components/timeline';",
     "limit": 3840
+  },
+  {
+    "name": "import 'use-scroll-animate/components/gesture'",
+    "import": "export * from 'pkg/components/gesture';",
+    "limit": 5376
+  },
+  {
+    "name": "import { defineGestureComponents } from '…/components/gesture'",
+    "import": "export { defineGestureComponents } from 'pkg/components/gesture';",
+    "limit": 5120
   }
 ]

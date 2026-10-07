@@ -1,3 +1,5 @@
+'use strict';
+
 // The component categories and their default tags (no imports: safe for lazy loaders).
 /** The component categories and their default tags. */
 const COMPONENT_CATEGORIES = {
@@ -13,7 +15,8 @@ const COMPONENT_CATEGORIES = {
     ui: ['usa-tabs', 'usa-drawer', 'usa-bottom-sheet', 'usa-pull-refresh', 'usa-fab', 'usa-navbar', 'usa-slider', 'usa-rating', 'usa-tooltip', 'usa-popover', 'usa-badge', 'usa-avatar-stack'],
     page: ['usa-cursor', 'usa-fullpage', 'usa-loading-bar', 'usa-back-to-top', 'usa-ambient', 'usa-splash', 'usa-auto-skeleton', 'usa-motion-switch'],
     timeline: ['usa-timeline'],
+    gesture: ['usa-swipeable', 'usa-pinch-zoom'],
 };
 
-export { COMPONENT_CATEGORIES as C };
-//# sourceMappingURL=index-tags-D7NynL4r.js.map
+exports.COMPONENT_CATEGORIES = COMPONENT_CATEGORIES;
+//# sourceMappingURL=index-tags-DCTX4F9b.cjs.map

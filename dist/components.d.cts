@@ -1891,6 +1891,128 @@ declare global {
     }
 }
 
+interface PanState {
+    /** Offset from the gesture start (px). */
+    dx: number;
+    dy: number;
+    /** Velocity (px/s). */
+    vx: number;
+    vy: number;
+    first: boolean;
+    last: boolean;
+    event: Event;
+}
+type SwipeDirection = 'left' | 'right' | 'up' | 'down';
+interface SwipeState {
+    direction: SwipeDirection;
+    velocity: number;
+    dx: number;
+    dy: number;
+}
+interface PinchState {
+    scale: number; /** Midpoint of the two pointers (client px). */
+    x: number;
+    y: number;
+    first: boolean;
+    last: boolean;
+}
+interface PressState {
+    x: number;
+    y: number;
+}
+interface GestureHandlers {
+    onPan?: (s: PanState) => void;
+    onSwipe?: (s: SwipeState) => void;
+    onPinch?: (s: PinchState) => void;
+    onLongPress?: (s: PressState) => void;
+    onTap?: (s: PressState) => void;
+    onDoubleTap?: (s: PressState) => void;
+}
+interface GestureOptions {
+    /** Restrict panning to an axis. */
+    axis?: 'x' | 'y';
+    /** Movement (px) before a pan starts (default 4). */
+    threshold?: number;
+    /** Minimum distance (px, default 40) and speed (px/s, default 300) for a swipe. */
+    swipeDistance?: number;
+    swipeVelocity?: number;
+    /** Long-press delay (ms, default 500). */
+    longPress?: number;
+    /** Ctrl/⌘ + wheel (trackpad pinch) counts as pinch (default true). */
+    wheelPinch?: boolean;
+}
+/** The swipe a pointer release represents, or `null` (pure). */
+declare function swipeDirection(dx: number, dy: number, vx: number, vy: number, o?: {
+    distance?: number;
+    velocity?: number;
+    axis?: 'x' | 'y';
+}): SwipeState | null;
+/** Scale between two pointer distances, clamped to [min, max] (pure). */
+declare function pinchScale(startDistance: number, distance: number, base?: number, min?: number, max?: number): number;
+/**
+ * One recognizer for pan, swipe, pinch (two pointers or Ctrl + wheel),
+ * long-press, tap and double-tap, with velocities ready to hand to a spring
+ * (`createSpring().set(target, velocity)`). Works with mouse, touch and pen
+ * through Pointer Events. Returns a cleanup function.
+ *
+ * @example
+ * const x = createSpring({ onUpdate: (v) => (card.style.translate = `${v}px`) });
+ * gesture(card, {
+ *   onPan: ({ dx, last, vx }) => (last ? x.set(0, vx) : x.jump(dx)),
+ *   onSwipe: ({ direction }) => dismiss(direction),
+ * }, { axis: 'x' });
+ */
+declare function gesture(el: HTMLElement, h: GestureHandlers, o?: GestureOptions): () => void;
+
+/**
+ * `<usa-swipeable>` — swipe-to-dismiss / swipe actions. The content follows
+ * the finger (rubber-banded past `distance`), flies out on a swipe or a drag
+ * past `distance`, otherwise springs home with the release velocity.
+ *
+ * Attributes: `axis` (`x` default · `y`), `distance` (px, 120), `preset`
+ * (spring), `dismiss` (remove the element after flying out), `disabled`.
+ * Keyboard: Delete/Backspace dismisses, ←/→ swipe. Events `usa:swipe`
+ * (`{ direction }`, cancelable), `usa:dismiss`. Methods `swipe(dir)`, `reset()`.
+ * Reduced motion: no follow / fly-out animation, events still fire.
+ */
+interface UsaSwipeableElement extends UsaElement {
+    swipe(direction: SwipeDirection): void;
+    reset(): void;
+    readonly offset: number;
+}
+declare function defineSwipeable(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-pinch-zoom>` — pinch (two fingers or Ctrl/⌘ + wheel / trackpad
+ * pinch) to zoom its content, pan while zoomed, double-tap to toggle zoom;
+ * scale and position spring back inside the bounds on release.
+ *
+ * Attributes: `min` (1), `max` (4), `double-tap` (zoom level, 2), `preset`.
+ * Keyboard: `+` / `-` / `0`. Property `scale`, method `zoomTo(scale)`.
+ * Event `usa:zoom` (`{ scale }`). Reduced motion: zoom changes instantly.
+ */
+interface UsaPinchZoomElement extends UsaElement {
+    readonly scale: number;
+    zoomTo(scale: number): void;
+}
+declare function definePinchZoom(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * use-scroll-animate/components/gesture — unified gestures (v3.2).
+ * `gesture()` recognises pan, swipe, pinch, long-press, tap and double-tap
+ * with release velocities for springs; `<usa-swipeable>` (swipe-to-dismiss)
+ * and `<usa-pinch-zoom>` are built on it.
+ */
+
+/** Register every component of this category under its default tag. */
+declare function defineGestureComponents(): void;
+declare global {
+    interface HTMLElementTagNameMap {
+        'usa-swipeable': UsaSwipeableElement;
+        'usa-pinch-zoom': UsaPinchZoomElement;
+    }
+}
+
 /** The component categories and their default tags. */
 declare const COMPONENT_CATEGORIES: {
     readonly reveal: readonly ["usa-reveal", "usa-stagger", "usa-scroll-progress", "usa-scrolly"];
@@ -1905,6 +2027,7 @@ declare const COMPONENT_CATEGORIES: {
     readonly ui: readonly ["usa-tabs", "usa-drawer", "usa-bottom-sheet", "usa-pull-refresh", "usa-fab", "usa-navbar", "usa-slider", "usa-rating", "usa-tooltip", "usa-popover", "usa-badge", "usa-avatar-stack"];
     readonly page: readonly ["usa-cursor", "usa-fullpage", "usa-loading-bar", "usa-back-to-top", "usa-ambient", "usa-splash", "usa-auto-skeleton", "usa-motion-switch"];
     readonly timeline: readonly ["usa-timeline"];
+    readonly gesture: readonly ["usa-swipeable", "usa-pinch-zoom"];
 };
 type ComponentCategory = keyof typeof COMPONENT_CATEGORIES;
 
@@ -1914,5 +2037,5 @@ type ComponentCategory = keyof typeof COMPONENT_CATEGORIES;
  */
 declare function defineComponents(categories?: ComponentCategory[]): void;
 
-export { AMBIENT_EFFECTS, BUTTON_DEFORMS, CARD_EFFECTS, CLICK_EFFECTS, COMPONENT_CATEGORIES, CURSOR_MODES, MORPH_ICONS, MOTION_SCALE, PAGE_EFFECTS, REVEAL_EFFECTS, SPINNER_VARIANTS, SPRING_EFFECTS, SPRING_PRESETS, TIMELINE_PRESETS, VARIANTS, adoptVariants, burst, confetti, configureComponents, connectedAnimation, createSpring, defineAccordion, defineAcrylic, defineAmbient, defineAurora, defineAutoSkeleton, defineAvatarStack, defineBackToTop, defineBackgroundComponents, defineBadge, defineBlobs, defineBottomSheet, defineButton, defineCard, defineCardComponents, defineCardStack, defineCarousel3d, defineCheck, defineCheckbox, defineClick, defineClickComponents, defineComponents, defineCounter, defineCursor, defineDialog, defineDotNetwork, defineDoubleTap, defineDraggable, defineDrawer, defineFab, defineFeedbackComponents, defineFlipList, defineFullpage, defineGlitch, defineGradientText, defineGrain, defineGridGlow, defineHandwriting, defineHold, defineIconMorph, defineInteractionComponents, defineLike, defineLoadingBar, defineMagnetic, defineMarquee, defineMotionSwitch, defineNavbar, defineOverscroll, definePageComponents, defineParticles, definePhysicsComponents, definePopover, definePress, defineProgress, definePullRefresh, defineRating, defineReveal, defineRevealComponents, defineRipple, defineScramble, defineScrollHighlight, defineScrollProgress, defineScrolly, defineShimmerText, defineSkeleton, defineSlider, defineSpinner, defineSplash, defineSplitText, defineSpotlight, defineSpring, defineStagger, defineStickyStack, defineTabs, defineTextComponents, defineTextRotate, defineTilt, defineTimeline, defineTimelineComponents, defineToaster, defineToggle, defineTooltip, defineTransitionComponents, defineTypewriter, defineUiComponents, defineViewSwitch, defineWaterRipple, defineWaveText, easeOutExpo, enableMpaTransitions, flip, fluentPreset, getMotionIntensity, haptic, linearEasing, loadingBar, morphPath, pageTransition, prefersReducedMotion, projectInertia, readScrollProgress, resolvePosition, resolveSpring, restoreMotionIntensity, revealKeyframes, rubberBand, scrambleFrame, scrollToTarget, setMotionIntensity, setVariant, shake, smoothScroll, snapTo, spring, springEasing, springEffectKeyframes, springSamples, stepSpring, supportsLinearEasing, supportsViewTransitions, themeTransition, timeline, toast, viewTransition };
-export type { AmbientEffect, BurstOptions, ButtonDeform, ButtonShape, ButtonState, CardEffect, ClickEffect, ComponentCategory, ComponentsConfig, ConfettiOptions, ConnectedOptions, CursorMode, DialogVariant, FlipOptions, FluentPresetOptions, MotionIntensity, PageEffect, PageTransitionOptions, Placement, RevealEffect, ScrubOptions, SmoothScrollOptions, SpinnerVariant, SpringConfig, SpringEffect, SpringInput, SpringPreset, SpringValue, SpringValueOptions, Timeline, TimelineOptions, TimelinePosition, TimelineStepOptions, ToastHandle, ToastOptions, ToastType, UsaAccordionElement, UsaAcrylicElement, UsaAmbientElement, UsaAuroraElement, UsaAutoSkeletonElement, UsaAvatarStackElement, UsaBackToTopElement, UsaBadgeElement, UsaBlobsElement, UsaBottomSheetElement, UsaButtonElement, UsaCardElement, UsaCardStackElement, UsaCarousel3dElement, UsaCheckElement, UsaCheckboxElement, UsaClickElement, UsaCounterElement, UsaCursorElement, UsaDialogElement, UsaDotNetworkElement, UsaDoubleTapElement, UsaDraggableElement, UsaDrawerElement, UsaElement, UsaFabElement, UsaFlipListElement, UsaFullpageElement, UsaGlitchElement, UsaGradientTextElement, UsaGrainElement, UsaGridGlowElement, UsaHandwritingElement, UsaHoldElement, UsaIconMorphElement, UsaLikeElement, UsaLoadingBarElement, UsaMagneticElement, UsaMarqueeElement, UsaMotionSwitchElement, UsaNavbarElement, UsaOverscrollElement, UsaParticlesElement, UsaPopoverElement, UsaPressElement, UsaProgressElement, UsaPullRefreshElement, UsaRatingElement, UsaRevealElement, UsaRippleElement, UsaScrambleElement, UsaScrollHighlightElement, UsaScrollProgressElement, UsaScrollyElement, UsaShimmerTextElement, UsaSkeletonElement, UsaSliderElement, UsaSpinnerElement, UsaSplashElement, UsaSplitTextElement, UsaSpotlightElement, UsaSpringElement, UsaStaggerElement, UsaStickyStackElement, UsaTabsElement, UsaTextRotateElement, UsaTiltElement, UsaTimelineElement, UsaToasterElement, UsaToggleElement, UsaTooltipElement, UsaTypewriterElement, UsaViewSwitchElement, UsaWaterRippleElement, UsaWaveTextElement, Variant, ViewTransitionOptions };
+export { AMBIENT_EFFECTS, BUTTON_DEFORMS, CARD_EFFECTS, CLICK_EFFECTS, COMPONENT_CATEGORIES, CURSOR_MODES, MORPH_ICONS, MOTION_SCALE, PAGE_EFFECTS, REVEAL_EFFECTS, SPINNER_VARIANTS, SPRING_EFFECTS, SPRING_PRESETS, TIMELINE_PRESETS, VARIANTS, adoptVariants, burst, confetti, configureComponents, connectedAnimation, createSpring, defineAccordion, defineAcrylic, defineAmbient, defineAurora, defineAutoSkeleton, defineAvatarStack, defineBackToTop, defineBackgroundComponents, defineBadge, defineBlobs, defineBottomSheet, defineButton, defineCard, defineCardComponents, defineCardStack, defineCarousel3d, defineCheck, defineCheckbox, defineClick, defineClickComponents, defineComponents, defineCounter, defineCursor, defineDialog, defineDotNetwork, defineDoubleTap, defineDraggable, defineDrawer, defineFab, defineFeedbackComponents, defineFlipList, defineFullpage, defineGestureComponents, defineGlitch, defineGradientText, defineGrain, defineGridGlow, defineHandwriting, defineHold, defineIconMorph, defineInteractionComponents, defineLike, defineLoadingBar, defineMagnetic, defineMarquee, defineMotionSwitch, defineNavbar, defineOverscroll, definePageComponents, defineParticles, definePhysicsComponents, definePinchZoom, definePopover, definePress, defineProgress, definePullRefresh, defineRating, defineReveal, defineRevealComponents, defineRipple, defineScramble, defineScrollHighlight, defineScrollProgress, defineScrolly, defineShimmerText, defineSkeleton, defineSlider, defineSpinner, defineSplash, defineSplitText, defineSpotlight, defineSpring, defineStagger, defineStickyStack, defineSwipeable, defineTabs, defineTextComponents, defineTextRotate, defineTilt, defineTimeline, defineTimelineComponents, defineToaster, defineToggle, defineTooltip, defineTransitionComponents, defineTypewriter, defineUiComponents, defineViewSwitch, defineWaterRipple, defineWaveText, easeOutExpo, enableMpaTransitions, flip, fluentPreset, gesture, getMotionIntensity, haptic, linearEasing, loadingBar, morphPath, pageTransition, pinchScale, prefersReducedMotion, projectInertia, readScrollProgress, resolvePosition, resolveSpring, restoreMotionIntensity, revealKeyframes, rubberBand, scrambleFrame, scrollToTarget, setMotionIntensity, setVariant, shake, smoothScroll, snapTo, spring, springEasing, springEffectKeyframes, springSamples, stepSpring, supportsLinearEasing, supportsViewTransitions, swipeDirection, themeTransition, timeline, toast, viewTransition };
+export type { AmbientEffect, BurstOptions, ButtonDeform, ButtonShape, ButtonState, CardEffect, ClickEffect, ComponentCategory, ComponentsConfig, ConfettiOptions, ConnectedOptions, CursorMode, DialogVariant, FlipOptions, FluentPresetOptions, GestureHandlers, GestureOptions, MotionIntensity, PageEffect, PageTransitionOptions, PanState, PinchState, Placement, PressState, RevealEffect, ScrubOptions, SmoothScrollOptions, SpinnerVariant, SpringConfig, SpringEffect, SpringInput, SpringPreset, SpringValue, SpringValueOptions, SwipeDirection, SwipeState, Timeline, TimelineOptions, TimelinePosition, TimelineStepOptions, ToastHandle, ToastOptions, ToastType, UsaAccordionElement, UsaAcrylicElement, UsaAmbientElement, UsaAuroraElement, UsaAutoSkeletonElement, UsaAvatarStackElement, UsaBackToTopElement, UsaBadgeElement, UsaBlobsElement, UsaBottomSheetElement, UsaButtonElement, UsaCardElement, UsaCardStackElement, UsaCarousel3dElement, UsaCheckElement, UsaCheckboxElement, UsaClickElement, UsaCounterElement, UsaCursorElement, UsaDialogElement, UsaDotNetworkElement, UsaDoubleTapElement, UsaDraggableElement, UsaDrawerElement, UsaElement, UsaFabElement, UsaFlipListElement, UsaFullpageElement, UsaGlitchElement, UsaGradientTextElement, UsaGrainElement, UsaGridGlowElement, UsaHandwritingElement, UsaHoldElement, UsaIconMorphElement, UsaLikeElement, UsaLoadingBarElement, UsaMagneticElement, UsaMarqueeElement, UsaMotionSwitchElement, UsaNavbarElement, UsaOverscrollElement, UsaParticlesElement, UsaPinchZoomElement, UsaPopoverElement, UsaPressElement, UsaProgressElement, UsaPullRefreshElement, UsaRatingElement, UsaRevealElement, UsaRippleElement, UsaScrambleElement, UsaScrollHighlightElement, UsaScrollProgressElement, UsaScrollyElement, UsaShimmerTextElement, UsaSkeletonElement, UsaSliderElement, UsaSpinnerElement, UsaSplashElement, UsaSplitTextElement, UsaSpotlightElement, UsaSpringElement, UsaStaggerElement, UsaStickyStackElement, UsaSwipeableElement, UsaTabsElement, UsaTextRotateElement, UsaTiltElement, UsaTimelineElement, UsaToasterElement, UsaToggleElement, UsaTooltipElement, UsaTypewriterElement, UsaViewSwitchElement, UsaWaterRippleElement, UsaWaveTextElement, Variant, ViewTransitionOptions };

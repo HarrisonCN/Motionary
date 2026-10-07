@@ -56,6 +56,7 @@ defineComponents(); // or per category: import { defineTextComponents } from 'us
 | **UI components & variants** (`/components/ui`) | `<usa-tabs>` · `<usa-drawer>` · `<usa-bottom-sheet>` · `<usa-pull-refresh>` · `<usa-fab>` · `<usa-navbar>` · `<usa-slider>` · `<usa-rating>` · `<usa-tooltip>` · `<usa-popover>` · `<usa-badge>` · `<usa-avatar-stack>` · `variant="minimal \| neon \| glass \| brutalist \| fluent \| material"` on every component |
 | **Page & app-wide** (`/components/page`) | `pageTransition()` (fade · slide · circle · blinds · pixel · zoom; SPA + MPA) · `themeTransition()` · `<usa-cursor>` · `smoothScroll()` · `<usa-fullpage>` · `<usa-loading-bar>` · `<usa-back-to-top>` · `<usa-ambient>` (particles · snow · stars · noise · gradient) · `<usa-splash>` · `<usa-auto-skeleton>` · `<usa-motion-switch>` / `setMotionIntensity()` |
 | **Timeline & choreography** (`/components/timeline`) | `timeline()` (chain · overlap · labels · seek · reverse · scrub) · `<usa-timeline>` (`data-tl` steps) |
+| **Gestures** (`/components/gesture`) | `gesture()` (pan · swipe · pinch · long-press · tap · double-tap → springs) · `<usa-swipeable>` · `<usa-pinch-zoom>` |
 
 Whole bundle ≈ 22 kB gzip (JS + CSS); one category 3.5–6.4 kB; a single component ≈ 2 kB. The scroll-animation core below is unaffected.
 

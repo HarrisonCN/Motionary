@@ -1374,6 +1374,53 @@ declare global {
     }
 }
 
+type SwipeDirection = 'left' | 'right' | 'up' | 'down';
+
+/**
+ * `<usa-swipeable>` — swipe-to-dismiss / swipe actions. The content follows
+ * the finger (rubber-banded past `distance`), flies out on a swipe or a drag
+ * past `distance`, otherwise springs home with the release velocity.
+ *
+ * Attributes: `axis` (`x` default · `y`), `distance` (px, 120), `preset`
+ * (spring), `dismiss` (remove the element after flying out), `disabled`.
+ * Keyboard: Delete/Backspace dismisses, ←/→ swipe. Events `usa:swipe`
+ * (`{ direction }`, cancelable), `usa:dismiss`. Methods `swipe(dir)`, `reset()`.
+ * Reduced motion: no follow / fly-out animation, events still fire.
+ */
+interface UsaSwipeableElement extends UsaElement {
+    swipe(direction: SwipeDirection): void;
+    reset(): void;
+    readonly offset: number;
+}
+
+/**
+ * `<usa-pinch-zoom>` — pinch (two fingers or Ctrl/⌘ + wheel / trackpad
+ * pinch) to zoom its content, pan while zoomed, double-tap to toggle zoom;
+ * scale and position spring back inside the bounds on release.
+ *
+ * Attributes: `min` (1), `max` (4), `double-tap` (zoom level, 2), `preset`.
+ * Keyboard: `+` / `-` / `0`. Property `scale`, method `zoomTo(scale)`.
+ * Event `usa:zoom` (`{ scale }`). Reduced motion: zoom changes instantly.
+ */
+interface UsaPinchZoomElement extends UsaElement {
+    readonly scale: number;
+    zoomTo(scale: number): void;
+}
+
+/**
+ * use-scroll-animate/components/gesture — unified gestures (v3.2).
+ * `gesture()` recognises pan, swipe, pinch, long-press, tap and double-tap
+ * with release velocities for springs; `<usa-swipeable>` (swipe-to-dismiss)
+ * and `<usa-pinch-zoom>` are built on it.
+ */
+
+declare global {
+    interface HTMLElementTagNameMap {
+        'usa-swipeable': UsaSwipeableElement;
+        'usa-pinch-zoom': UsaPinchZoomElement;
+    }
+}
+
 /** The component categories and their default tags. */
 declare const COMPONENT_CATEGORIES: {
     readonly reveal: readonly ["usa-reveal", "usa-stagger", "usa-scroll-progress", "usa-scrolly"];
@@ -1388,6 +1435,7 @@ declare const COMPONENT_CATEGORIES: {
     readonly ui: readonly ["usa-tabs", "usa-drawer", "usa-bottom-sheet", "usa-pull-refresh", "usa-fab", "usa-navbar", "usa-slider", "usa-rating", "usa-tooltip", "usa-popover", "usa-badge", "usa-avatar-stack"];
     readonly page: readonly ["usa-cursor", "usa-fullpage", "usa-loading-bar", "usa-back-to-top", "usa-ambient", "usa-splash", "usa-auto-skeleton", "usa-motion-switch"];
     readonly timeline: readonly ["usa-timeline"];
+    readonly gesture: readonly ["usa-swipeable", "usa-pinch-zoom"];
 };
 type ComponentCategory = keyof typeof COMPONENT_CATEGORIES;
 

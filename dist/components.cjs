@@ -12,9 +12,10 @@ var components_click = require('./components/click.cjs');
 var components_ui = require('./components/ui.cjs');
 var components_page = require('./components/page.cjs');
 var components_timeline = require('./components/timeline.cjs');
+var components_gesture = require('./components/gesture.cjs');
 var variants = require('./chunks/variants-BNIrn4ch.cjs');
 var base = require('./chunks/base-CXx7jZ-o.cjs');
-var indexTags = require('./chunks/index-tags-Gw1G06Pb.cjs');
+var indexTags = require('./chunks/index-tags-DCTX4F9b.cjs');
 var spring = require('./chunks/spring-2OTnYCzm.cjs');
 
 /**
@@ -50,6 +51,7 @@ const BY_CATEGORY = {
     ui: components_ui.defineUiComponents,
     page: components_page.definePageComponents,
     timeline: components_timeline.defineTimelineComponents,
+    gesture: components_gesture.defineGestureComponents,
 };
 /**
  * Register every `<usa-*>` component (or only the given categories).
@@ -184,6 +186,12 @@ exports.defineTimeline = components_timeline.defineTimeline;
 exports.defineTimelineComponents = components_timeline.defineTimelineComponents;
 exports.resolvePosition = components_timeline.resolvePosition;
 exports.timeline = components_timeline.timeline;
+exports.defineGestureComponents = components_gesture.defineGestureComponents;
+exports.definePinchZoom = components_gesture.definePinchZoom;
+exports.defineSwipeable = components_gesture.defineSwipeable;
+exports.gesture = components_gesture.gesture;
+exports.pinchScale = components_gesture.pinchScale;
+exports.swipeDirection = components_gesture.swipeDirection;
 exports.VARIANTS = variants.VARIANTS;
 exports.adoptVariants = variants.adoptVariants;
 exports.setVariant = variants.setVariant;

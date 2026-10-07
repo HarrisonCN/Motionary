@@ -13,6 +13,7 @@ export const COMPONENT_CATEGORIES = {
   ui: ['usa-tabs', 'usa-drawer', 'usa-bottom-sheet', 'usa-pull-refresh', 'usa-fab', 'usa-navbar', 'usa-slider', 'usa-rating', 'usa-tooltip', 'usa-popover', 'usa-badge', 'usa-avatar-stack'],
   page: ['usa-cursor', 'usa-fullpage', 'usa-loading-bar', 'usa-back-to-top', 'usa-ambient', 'usa-splash', 'usa-auto-skeleton', 'usa-motion-switch'],
   timeline: ['usa-timeline'],
+  gesture: ['usa-swipeable', 'usa-pinch-zoom'],
 } as const;
 
 export type ComponentCategory = keyof typeof COMPONENT_CATEGORIES;
