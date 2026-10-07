@@ -8,7 +8,7 @@ const COMPONENT_CATEGORIES = {
     interaction: ['usa-ripple', 'usa-magnetic', 'usa-tilt', 'usa-spotlight', 'usa-press', 'usa-toggle'],
     feedback: ['usa-spinner', 'usa-skeleton', 'usa-progress', 'usa-toaster', 'usa-check'],
     background: ['usa-aurora', 'usa-particles', 'usa-grain', 'usa-marquee', 'usa-acrylic', 'usa-grid-glow', 'usa-blobs', 'usa-water-ripple', 'usa-dot-network'],
-    transitions: ['usa-dialog', 'usa-accordion', 'usa-flip-list', 'usa-view-switch'],
+    transitions: ['usa-dialog', 'usa-accordion', 'usa-view-switch'],
     physics: ['usa-spring', 'usa-draggable', 'usa-overscroll'],
     cards: ['usa-card', 'usa-card-stack', 'usa-sticky-stack', 'usa-carousel-3d'],
     click: ['usa-click', 'usa-button', 'usa-icon-morph', 'usa-like', 'usa-hold', 'usa-double-tap', 'usa-checkbox'],
@@ -24,4 +24,4 @@ const COMPONENT_CATEGORIES = {
 };
 
 exports.COMPONENT_CATEGORIES = COMPONENT_CATEGORIES;
-//# sourceMappingURL=index-tags-DYYsgbba.cjs.map
+//# sourceMappingURL=index-tags-BQh_uGqH.cjs.map

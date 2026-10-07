@@ -12,7 +12,7 @@ import { t as tr } from './i18n.js';
 /* ------------------------------------------------------------------ */
 
 const LOCAL = new URL('../dist/', import.meta.url).href;
-const CDN = 'https://unpkg.com/use-scroll-animate@3/dist/';
+const CDN = 'https://unpkg.com/use-scroll-animate@4/dist/';
 const KEY = 'usa-showcase:';
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
@@ -278,29 +278,30 @@ function createDemo(item, host, state, { firstReveal = false } = {}) {
   } else if (item.recipe === 'sequence') {
     const seq = h('div', { class: 'seq' }, [h('span'), h('span'), h('span')]);
     host.append(seq);
-    let ctrl = null;
-    const steps = () => {
+    let tl = null;
+    const build = () => {
+      tl?.cancel();
       const [a, b, c] = seq.children;
       const gap = Number(st.gap);
-      return [
-        { target: a, animation: 'fade-in-up' },
-        { target: b, animation: 'fade-in-up', gap },
-        { target: c, animation: 'zoom-in', gap },
-      ];
+      const at = gap ? `${gap < 0 ? '-' : '+'}=${Math.abs(gap)}` : undefined;
+      tl = lib.timeline({ defaults: { duration: Number(st.duration), easing: 'ease-out' } }).to(a, 'fade-up').to(b, 'fade-up', { at }).to(c, 'scale', { at });
+      tl.seek(0);
+      return tl;
     };
     if (firstReveal) {
-      ctrl = lib.sequence(steps(), { trigger: host, duration: Number(st.duration), easing: 'ease-out', instance: sa });
+      build();
+      const io = new IntersectionObserver(([e]) => e.isIntersecting && (io.disconnect(), tl.play()));
+      io.observe(host);
+      cleanups.push(() => io.disconnect());
     }
     api = {
       play() {
-        if (ctrl) ctrl.cancel();
-        ctrl = lib.sequence(steps(), { duration: Number(st.duration), easing: 'ease-out', instance: sa });
-        ctrl.play();
+        build().play();
       },
-      cycle: () => (ctrl ? ctrl.duration() : 3 * Number(st.duration)) + 1600,
+      cycle: () => (tl ? tl.duration : 3 * Number(st.duration)) + 1600,
       targets: Array.from(seq.children),
     };
-    cleanups.push(() => ctrl && ctrl.cancel());
+    cleanups.push(() => tl && tl.cancel());
   } else {
     // Scroll-linked recipes run in a mini scroll container (root option)
     let scroller;
@@ -821,7 +822,7 @@ function liveNote(item) {
   if (item.framework) return T('detail.demoNote');
   if (item.recipe === 'parallax') return T('detail.live', { what: 'parallax()' }) + ' ' + T('detail.paraNote');
   if (item.recipe === 'engine') return T('detail.engineInfo', { v: T(lib.supportsScrollTimeline() ? 'detail.yes' : 'detail.no') });
-  const what = { stagger: 'staggerChildren()', parallax: 'parallax()', progress: 'progressVar', sequence: 'sequence()' }[item.recipe] || 'ScrollAnimate.animate() / observe()';
+  const what = { stagger: 'staggerChildren()', parallax: 'parallax()', progress: 'progressVar', sequence: 'timeline()' }[item.recipe] || 'ScrollAnimate.animate() / observe()';
   return T('detail.live', { what });
 }
 

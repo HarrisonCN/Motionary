@@ -1,6 +1,6 @@
 'use strict';
 
-var indexTags = require('../chunks/index-tags-DYYsgbba.cjs');
+var indexTags = require('../chunks/index-tags-BQh_uGqH.cjs');
 
 /**
  * use-scroll-animate/components/react — React wrappers for every `<usa-*>`
@@ -21,7 +21,7 @@ var indexTags = require('../chunks/index-tags-DYYsgbba.cjs');
  * JSX types for the raw tags (`<usa-card effect="flip">`) come from
  * `use-scroll-animate/components/jsx` (see `UsaIntrinsicElements`).
  */
-/** `usa-flip-list` → `UsaFlipList` */
+/** `usa-auto-animate` → `UsaAutoAnimate` */
 const pascal = (tag) => tag.replace(/(^|-)([a-z0-9])/g, (_, __, c) => c.toUpperCase());
 /** `onUsaChange` → `usa:change`, `onUsaDragEnd` → `usa:drag-end`; `onChange` → `change`. */
 function eventName(prop) {

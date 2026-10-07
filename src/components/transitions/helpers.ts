@@ -1,4 +1,4 @@
-import { deprecate, prefersReducedMotion, EASE_OUT, FLUENT_DECELERATE } from '../base';
+import { prefersReducedMotion, EASE_OUT, FLUENT_DECELERATE } from '../base';
 
 export interface ViewTransitionOptions {
   /**
@@ -102,39 +102,4 @@ export async function flip(targets: Targets, mutate: () => void | Promise<void>,
     );
   });
   await Promise.all(anims.map((a) => a.finished.catch(() => undefined)));
-}
-
-export interface ConnectedOptions {
-  duration?: number;
-  easing?: string;
-  /** Hide `from` while the animation runs (default true). */
-  hideSource?: boolean;
-}
-
-/**
- * Connected (shared-element) animation, like WinUI's
- * `ConnectedAnimationService`: `to` flies from the position and size of
- * `from` into its own place (e.g. a thumbnail opening into a detail view).
- * Call it right after `to` is shown. Transforms only.
- *
- * @deprecated since 3.9, removed in 4.0 — use `sharedTransition()` (components/layout).
- */
-export async function connectedAnimation(from: Element, to: HTMLElement, options: ConnectedOptions = {}): Promise<void> {
-  deprecate('connectedAnimation', "connectedAnimation() is deprecated and will be removed in 4.0 — use sharedTransition() from 'use-scroll-animate/components/layout' (data-shared=\"id\" on both elements). See docs/upgrading-4.md.");
-  if (prefersReducedMotion() || typeof to.animate !== 'function') return;
-  const a = from.getBoundingClientRect();
-  const b = to.getBoundingClientRect();
-  if (!b.width || !b.height) return;
-  const hide = options.hideSource !== false && from instanceof HTMLElement;
-  const prev = hide ? (from as HTMLElement).style.visibility : '';
-  if (hide) (from as HTMLElement).style.visibility = 'hidden';
-  const anim = to.animate(
-    [
-      { transformOrigin: '0 0', transform: `translate(${a.left - b.left}px, ${a.top - b.top}px) scale(${a.width / b.width}, ${a.height / b.height})` },
-      { transformOrigin: '0 0', transform: 'none' },
-    ],
-    { duration: options.duration ?? 480, easing: options.easing ?? FLUENT_DECELERATE }
-  );
-  await anim.finished.catch(() => undefined);
-  if (hide) (from as HTMLElement).style.visibility = prev;
 }

@@ -28,7 +28,7 @@ interface ReactLike {
   useLayoutEffect?: (fn: () => void | (() => void), deps?: unknown[]) => void;
 }
 
-/** `usa-flip-list` → `UsaFlipList` */
+/** `usa-auto-animate` → `UsaAutoAnimate` */
 export const pascal = (tag: string): string => tag.replace(/(^|-)([a-z0-9])/g, (_, __, c) => c.toUpperCase());
 /** `onUsaChange` → `usa:change`, `onUsaDragEnd` → `usa:drag-end`; `onChange` → `change`. */
 export function eventName(prop: string): string | null {

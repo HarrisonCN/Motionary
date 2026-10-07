@@ -1,28 +1,29 @@
 import { defineComponents } from '../components.js';
 export { b as bindUsa, u as usaEventName } from '../chunks/bind-B_CTL6Qn.js';
 import './reveal.js';
-import '../chunks/base-BRIPyPtX.js';
+import '../chunks/base-ZARFccur.js';
 import './text.js';
 import './interaction.js';
 import './feedback.js';
 import './background.js';
-import '../chunks/variants-DTypaOH3.js';
+import '../chunks/variants-DvnxvRCM.js';
 import './transitions.js';
 import './physics.js';
-import '../chunks/spring-UBPhrh1X.js';
+import '../chunks/spring-E2ickYNI.js';
 import './cards.js';
 import './click.js';
 import './ui.js';
 import './page.js';
 import './timeline.js';
+import '../chunks/core-Co-6AL0h.js';
 import './gesture.js';
-import '../chunks/core-CYozf_E-.js';
+import '../chunks/core-DKY-fVzR.js';
 import './svg.js';
 import './webgl.js';
 import './depth.js';
 import './layout.js';
 import './packs.js';
-import '../chunks/index-tags-BmQR17Sb.js';
+import '../chunks/index-tags-43Xtd01A.js';
 
 /**
  * use-scroll-animate/components/angular — Angular integration (v3.8).

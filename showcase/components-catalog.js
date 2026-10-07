@@ -10,7 +10,7 @@
 import { C } from './catalog/make.js';
 import { EXTENSIONS } from './catalog/index.js';
 
-export const VERSION_RANGE = '3';
+export const VERSION_RANGE = '4';
 
 /** Component categories, in display order (ids match the subpath exports). */
 export const COMPONENT_CATEGORIES = [
@@ -247,12 +247,6 @@ export const COMPONENTS = [
     ['<details>', 'height'],
     '<usa-accordion>\n  <details><summary>Shipping</summary><p>…</p></details>\n  <details><summary>Returns</summary><p>…</p></details>\n</usa-accordion>',
     '<usa-accordion class="demo-accordion"><details open><summary>Does it work in Electron?</summary><p>Yes — and in Tauri, WebView2 and any modern browser.</p></details><details><summary>Dependencies?</summary><p>None. Custom Elements + CSS + WAAPI.</p></details><details><summary>Reduced motion?</summary><p>Respected everywhere.</p></details></usa-accordion>'),
-  C('usa-flip-list', 'transitions', 'FLIP list', 'FLIP 列表',
-    'Children glide to their new places whenever they are added, removed or reordered — works with React, Vue and Svelte lists.',
-    '子元素增删或重排时平滑移动到新位置——适用于 React、Vue、Svelte 列表。',
-    ['FLIP', 'reorder'],
-    '<usa-flip-list>\n  <li>A</li>\n  <li>B</li>\n</usa-flip-list>\n<!-- reorder the children any way you like -->',
-    `<div class="demo-stack"><usa-flip-list class="demo-flip">${pills(8, 'demo-flip-item')}</usa-flip-list><button class="demo-link" type="button" data-act="shuffle">Shuffle</button></div>`),
   C('usa-view-switch', 'transitions', 'View switch', '视图切换',
     'One view at a time with direction-aware slide, fade, scale or drill transitions — tabs, wizards, app pages.',
     '一次显示一个视图，支持方向感知的滑动、淡入、缩放或钻取过渡——标签页、向导、应用页面。',
@@ -277,18 +271,18 @@ export const HELPERS = [
     demo: '<div class="demo-stack demo-wide"><div class="demo-vt" data-vt-panel>Page 1</div><button class="demo-link" type="button" data-act="vt">Next page</button></div>',
   },
   {
-    id: 'connected-animation',
+    id: 'flip',
     kind: 'helper',
     category: 'transitions',
-    fn: 'connectedAnimation',
-    title: { en: 'connectedAnimation()', zh: 'connectedAnimation()' },
+    fn: 'flip',
+    title: { en: 'flip()', zh: 'flip()' },
     desc: {
-      en: 'WinUI-style connected animation: an element flies from a thumbnail into its detail view (shared-element). Plus flip() for any layout change.',
-      zh: 'WinUI 风格连接动画：元素从缩略图飞入详情视图（共享元素）。另有 flip() 处理任意布局变化。',
+      en: 'FLIP any layout change: measure, mutate the DOM, and the elements glide from their old place. For whole lists use <usa-auto-animate>; for shared elements, sharedTransition().',
+      zh: 'FLIP 任意布局变化：测量、修改 DOM，元素从旧位置平滑移动。整个列表请用 <usa-auto-animate>；共享元素请用 sharedTransition()。',
     },
-    tags: ['shared element', 'FLIP'],
-    usage: "import { connectedAnimation, flip } from 'use-scroll-animate/components/transitions';\n\ndetail.hidden = false;\nconnectedAnimation(thumbnail, detail);\n\nawait flip(list, () => list.append(...sorted));",
-    demo: '<div class="demo-connected"><div class="demo-thumbs"><button type="button" data-ca="0" aria-label="Open 1"></button><button type="button" data-ca="1" aria-label="Open 2"></button><button type="button" data-ca="2" aria-label="Open 3"></button></div><div class="demo-detail" hidden data-ca-detail><button type="button" class="demo-link" data-ca-close>Back</button></div></div>',
+    tags: ['FLIP', 'reorder', 'layout'],
+    usage: "import { flip } from 'use-scroll-animate/components/transitions';\n\nawait flip(list.children, () => list.append(...sorted));",
+    demo: `<div class="demo-stack"><div class="demo-flip">${pills(8, 'demo-flip-item')}</div><button class="demo-link" type="button" data-act="shuffle">Shuffle</button></div>`,
   },
 ];
 

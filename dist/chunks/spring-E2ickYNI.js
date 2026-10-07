@@ -1,6 +1,4 @@
-'use strict';
-
-var base = require('./base-Dm6ee5ug.cjs');
+import { p as prefersReducedMotion, e as applyFrame, m as motionScale, E as EASE_SPRING, n as now, r as raf, b as caf } from './base-ZARFccur.js';
 
 const SPRING_PRESETS = {
     default: { stiffness: 170, damping: 26, mass: 1 },
@@ -76,7 +74,7 @@ function supportsLinearEasing() {
 function springEasing(input, points = 48) {
     const { values, duration } = springSamples(input);
     if (!supportsLinearEasing())
-        return { easing: base.EASE_SPRING, duration: Math.min(duration, 1200) };
+        return { easing: EASE_SPRING, duration: Math.min(duration, 1200) };
     return { easing: linearEasing(values, points), duration };
 }
 /** Build a CSS `linear()` easing from samples (down-sampled to `points`). */
@@ -96,12 +94,12 @@ function linearEasing(values, points = 48) {
  */
 function spring(el, keyframes, input, options = {}) {
     const target = el;
-    if (base.prefersReducedMotion() || typeof target.animate !== 'function') {
-        base.applyFrame(target, keyframes[keyframes.length - 1]);
+    if (prefersReducedMotion() || typeof target.animate !== 'function') {
+        applyFrame(target, keyframes[keyframes.length - 1]);
         return null;
     }
     const { easing, duration } = springEasing(input);
-    return target.animate(keyframes, { duration: duration * base.motionScale(), easing, fill: 'both', ...options });
+    return target.animate(keyframes, { duration: duration * motionScale(), easing, fill: 'both', ...options });
 }
 /**
  * An interruptible spring-animated number: call `set()` as often as you like,
@@ -118,11 +116,11 @@ function createSpring(opts = {}) {
     let running = false;
     const stop = () => {
         if (running)
-            base.caf(id);
+            caf(id);
         running = false;
     };
     const loop = () => {
-        const t = base.now();
+        const t = now();
         let dt = Math.min(64, Math.max(1, t - last));
         last = t;
         while (dt > 0) {
@@ -140,7 +138,7 @@ function createSpring(opts = {}) {
             return;
         }
         opts.onUpdate?.(x, v);
-        id = base.raf(loop);
+        id = raf(loop);
     };
     const api = {
         get value() {
@@ -159,15 +157,15 @@ function createSpring(opts = {}) {
             to = target;
             if (velocity !== undefined && Number.isFinite(velocity))
                 v = velocity;
-            if (base.prefersReducedMotion()) {
+            if (prefersReducedMotion()) {
                 api.jump(target);
                 opts.onRest?.(target);
                 return;
             }
             if (!running) {
                 running = true;
-                last = base.now();
-                id = base.raf(loop);
+                last = now();
+                id = raf(loop);
             }
         },
         jump(value) {
@@ -217,16 +215,5 @@ function rubberBand(distance, dimension, constant = 0.55) {
     return sign * (1 - 1 / ((d * constant) / dimension + 1)) * dimension;
 }
 
-exports.SPRING_PRESETS = SPRING_PRESETS;
-exports.createSpring = createSpring;
-exports.linearEasing = linearEasing;
-exports.projectInertia = projectInertia;
-exports.resolveSpring = resolveSpring;
-exports.rubberBand = rubberBand;
-exports.snapTo = snapTo;
-exports.spring = spring;
-exports.springEasing = springEasing;
-exports.springSamples = springSamples;
-exports.stepSpring = stepSpring;
-exports.supportsLinearEasing = supportsLinearEasing;
-//# sourceMappingURL=spring-Dp5BllPB.cjs.map
+export { SPRING_PRESETS as S, rubberBand as a, spring as b, createSpring as c, springEasing as d, springSamples as e, stepSpring as f, supportsLinearEasing as g, linearEasing as l, projectInertia as p, resolveSpring as r, snapTo as s };
+//# sourceMappingURL=spring-E2ickYNI.js.map

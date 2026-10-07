@@ -5,13 +5,13 @@ import { existsSync } from 'node:fs';
 
 const require = createRequire(import.meta.url);
 const entries = {
-  'use-scroll-animate': ['createScrollAnimate', 'getScrollProgress', 'supportsScrollTimeline', 'staggerChildren', 'sequence', 'parallax', 'PRESETS'],
+  'use-scroll-animate': ['createScrollAnimate', 'getScrollProgress', 'supportsScrollTimeline', 'staggerChildren', 'timeline', 'parallax', 'PRESETS'],
   'use-scroll-animate/react': ['createReactHooks'],
   'use-scroll-animate/vue': ['createVueComposables'],
   'use-scroll-animate/svelte': ['scrollAnimate', 'scrollStagger'],
   'use-scroll-animate/solid': ['scrollAnimate', 'scrollStagger', 'useScrollAnimate'],
   'use-scroll-animate/element': ['defineScrollAnimate'],
-  'use-scroll-animate/components': ['defineComponents', 'COMPONENT_CATEGORIES', 'configureComponents', 'toast', 'viewTransition', 'flip', 'connectedAnimation', 'defineTypewriter', 'defineDialog'],
+  'use-scroll-animate/components': ['defineComponents', 'COMPONENT_CATEGORIES', 'configureComponents', 'toast', 'viewTransition', 'flip', 'sharedTransition', 'defineTypewriter', 'defineDialog'],
   'use-scroll-animate/components/reveal': ['defineRevealComponents', 'defineReveal', 'defineStagger', 'defineScrollProgress', 'defineScrolly'],
   'use-scroll-animate/components/text': ['defineTextComponents', 'defineTypewriter', 'defineSplitText', 'defineScramble', 'defineCounter', 'defineShimmerText', 'defineTextRotate', 'defineWaveText', 'defineGlitch', 'defineGradientText', 'defineHandwriting', 'defineScrollHighlight'],
   'use-scroll-animate/components/interaction': ['defineInteractionComponents', 'defineRipple', 'defineMagnetic', 'defineTilt', 'defineSpotlight', 'definePress', 'defineToggle'],
@@ -28,7 +28,7 @@ const entries = {
   'use-scroll-animate/components/solid': ['usa', 'defineUsa', 'bindUsa'],
   'use-scroll-animate/components/angular': ['usaInitializer', 'defineUsa', 'usaDetail', 'bindUsa'],
   'use-scroll-animate/components/lazy': ['lazyDefine', 'defineUsed', 'loadCategory', 'categoryOfTag'],
-  'use-scroll-animate/components/transitions': ['defineTransitionComponents', 'defineDialog', 'defineAccordion', 'defineFlipList', 'defineViewSwitch', 'viewTransition', 'flip', 'connectedAnimation'],
+  'use-scroll-animate/components/transitions': ['defineTransitionComponents', 'defineDialog', 'defineAccordion', 'defineViewSwitch', 'viewTransition', 'flip'],
 };
 
 for (const [id, names] of Object.entries(entries)) {

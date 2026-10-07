@@ -9,7 +9,7 @@ export { SPINNER_VARIANTS, defineCheck, defineProgress, defineSkeleton, defineSp
 import { defineBackgroundComponents } from './components/background.js';
 export { defineAcrylic, defineAurora, defineBlobs, defineDotNetwork, defineGrain, defineGridGlow, defineMarquee, defineParticles, defineWaterRipple, fluentPreset } from './components/background.js';
 import { defineTransitionComponents } from './components/transitions.js';
-export { connectedAnimation, defineAccordion, defineDialog, defineFlipList, defineViewSwitch, flip, viewTransition } from './components/transitions.js';
+export { defineAccordion, defineDialog, defineViewSwitch, flip, viewTransition } from './components/transitions.js';
 import { definePhysicsComponents } from './components/physics.js';
 export { SPRING_EFFECTS, defineDraggable, defineOverscroll, defineSpring, springEffectKeyframes } from './components/physics.js';
 import { defineCardComponents } from './components/cards.js';
@@ -21,7 +21,7 @@ export { defineAvatarStack, defineBadge, defineBottomSheet, defineDrawer, define
 import { definePageComponents } from './components/page.js';
 export { AMBIENT_EFFECTS, CURSOR_MODES, PAGE_EFFECTS, defineAmbient, defineAutoSkeleton, defineBackToTop, defineCursor, defineFullpage, defineLoadingBar, defineMotionSwitch, defineSplash, enableMpaTransitions, loadingBar, pageTransition, restoreMotionIntensity, scrollToTarget, setMotionIntensity, smoothScroll, supportsViewTransitions, themeTransition } from './components/page.js';
 import { defineTimelineComponents } from './components/timeline.js';
-export { TIMELINE_PRESETS, defineTimeline, resolvePosition, timeline } from './components/timeline.js';
+export { defineTimeline } from './components/timeline.js';
 import { defineGestureComponents } from './components/gesture.js';
 export { definePinchZoom, defineSwipeable } from './components/gesture.js';
 import { defineSvgComponents } from './components/svg.js';
@@ -34,13 +34,14 @@ import { defineLayoutComponents } from './components/layout.js';
 export { autoAnimate, defineAutoAnimate, defineMasonry, flipFrames, masonryLayout, sharedTransition } from './components/layout.js';
 import { definePacksComponents } from './components/packs.js';
 export { PACKS, PACK_PRIMITIVES, applyPack, countUp, definePack, flyToCart } from './components/packs.js';
-import { a as adoptVariants } from './chunks/variants-DTypaOH3.js';
-export { V as VARIANTS, s as setVariant } from './chunks/variants-DTypaOH3.js';
-import { c as canDefine } from './chunks/base-BRIPyPtX.js';
-export { M as MOTION_SCALE, a as configureComponents, g as getMotionIntensity, p as prefersReducedMotion } from './chunks/base-BRIPyPtX.js';
-export { C as COMPONENT_CATEGORIES } from './chunks/index-tags-BmQR17Sb.js';
-export { S as SPRING_PRESETS, c as createSpring, l as linearEasing, p as projectInertia, r as resolveSpring, a as rubberBand, s as snapTo, b as spring, d as springEasing, e as springSamples, f as stepSpring, g as supportsLinearEasing } from './chunks/spring-UBPhrh1X.js';
-export { g as gesture, p as pinchScale, s as swipeDirection } from './chunks/core-CYozf_E-.js';
+import { a as adoptVariants } from './chunks/variants-DvnxvRCM.js';
+export { V as VARIANTS, s as setVariant } from './chunks/variants-DvnxvRCM.js';
+import { c as canDefine } from './chunks/base-ZARFccur.js';
+export { M as MOTION_SCALE, a as configureComponents, g as getMotionIntensity, p as prefersReducedMotion } from './chunks/base-ZARFccur.js';
+export { C as COMPONENT_CATEGORIES } from './chunks/index-tags-43Xtd01A.js';
+export { S as SPRING_PRESETS, c as createSpring, l as linearEasing, p as projectInertia, r as resolveSpring, a as rubberBand, s as snapTo, b as spring, d as springEasing, e as springSamples, f as stepSpring, g as supportsLinearEasing } from './chunks/spring-E2ickYNI.js';
+export { T as TIMELINE_PRESETS, r as resolvePosition, t as timeline } from './chunks/core-Co-6AL0h.js';
+export { g as gesture, p as pinchScale, s as swipeDirection } from './chunks/core-DKY-fVzR.js';
 
 /**
  * use-scroll-animate/components

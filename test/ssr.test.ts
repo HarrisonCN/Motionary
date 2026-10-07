@@ -14,8 +14,9 @@ describe('SSR', () => {
       sa.watch()();
       sa.destroy();
       mod.staggerChildren(null, { observeChildren: true })();
-      const tl = mod.sequence([{ target: '.x' }], { trigger: '.y' });
+      const tl = mod.timeline().to('.x', 'fade');
       tl.play();
+      tl.scrub({} as Element)();
       tl.cancel();
     }).not.toThrow();
   });
@@ -51,8 +52,8 @@ describe('SSR (no DOM): side effects and safe fallbacks', () => {
     sa.configure({ defaultDuration: 1 });
     expect(sa.getObservedElements()).toEqual([]);
     expect(() => sa.unobserve('.x')).not.toThrow();
-    const tl = mod.sequence([{ target: '.x', duration: 100 }]);
-    expect(tl.duration()).toBe(0);
+    const tl = mod.timeline().to('.x', 'fade', { duration: 100 });
+    expect(tl.duration).toBe(0);
     await expect(tl.play()).resolves.toBeUndefined();
   });
 

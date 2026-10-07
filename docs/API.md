@@ -9,7 +9,7 @@
 - [Data attributes](#data-attributes)
 - [Global config (`ScrollAnimateConfig`)](#global-config-scrollanimateconfig)
 - [Presets & easings](#presets--easings)
-- [Helpers: `staggerChildren`, `sequence`, `parallax`, `getScrollProgress`, `supportsScrollTimeline`](#helpers)
+- [Helpers: `staggerChildren`, `timeline`, `parallax`, `getScrollProgress`, `supportsScrollTimeline`](#helpers)
 - [Framework integrations](#framework-integrations)
 - [Behaviour notes](#behaviour-notes)
 
@@ -17,7 +17,7 @@
 
 | Import | Contents |
 |---|---|
-| `use-scroll-animate` | Default instance, `createScrollAnimate`, `staggerChildren`, `sequence`, `parallax`, `getScrollProgress`, `supportsScrollTimeline`, `PRESETS`, `resolvePreset`, `resolveEasing`, `EASING_MAP`, all types |
+| `use-scroll-animate` | Default instance, `createScrollAnimate`, `staggerChildren`, `timeline`, `parallax`, `getScrollProgress`, `supportsScrollTimeline`, `PRESETS`, `resolvePreset`, `resolveEasing`, `EASING_MAP`, all types |
 | `use-scroll-animate/react` | `createReactHooks(React)` |
 | `use-scroll-animate/vue` | `createVueComposables({ ref, onMounted, onUnmounted })` |
 | `use-scroll-animate/svelte` | `scrollAnimate`, `scrollStagger` actions |
@@ -25,7 +25,7 @@
 | `use-scroll-animate/element` | `defineScrollAnimate(tagName?, instance?)` for `<scroll-animate>` |
 | `dist/index.umd.js` | Global `ScrollAnimate` (`ScrollAnimate.default` is the instance, other exports as properties) |
 | `dist/element.umd.js` | Registers `<scroll-animate>` on load; global `ScrollAnimateElement` |
-| `use-scroll-animate/components` (+ `/components/reveal`, `/text`, `/interaction`, `/feedback`, `/background`, `/transitions`) | 30 animated `<usa-*>` Web Components, `defineComponents()`, `configureComponents()`, `toast()`, `viewTransition()`, `flip()`, `connectedAnimation()` — see **[components.md](./components.md)** |
+| `use-scroll-animate/components` (+ `/components/reveal`, `/text`, `/interaction`, `/feedback`, `/background`, `/transitions`) | 30 animated `<usa-*>` Web Components, `defineComponents()`, `configureComponents()`, `toast()`, `viewTransition()`, `flip()` — see **[components.md](./components.md)** |
 | `dist/components.umd.js`, `use-scroll-animate/components.css` | Registers every `<usa-*>` on load (global `UsaComponents`); the component styles as a file |
 
 Every entry is ESM-first (`import` → `.js` + `.d.ts`) with a CommonJS build (`require` → `.cjs` + `.d.cts`), SSR-safe (no DOM access at import), and has zero runtime dependencies.
@@ -111,8 +111,8 @@ Boolean attributes are true when present unless their value is `"false"`.
 ### `staggerChildren(container, options?, instance?)` → `() => void`
 Reveal the children of `container` one after another when it enters. `StaggerOptions` = `AnimateOptions` + `stagger` (default `80` ms) + `observeChildren` (MutationObserver for children added later). Stopping before the reveal makes the children visible.
 
-### `sequence(steps, options?)` → `SequenceController`
-Timeline across targets. `SequenceStep` = `AnimateOptions` + `target` + `gap` (ms after the previous step; negative overlaps) or `at` (absolute ms). `SequenceOptions` = `AnimateOptions` + `trigger` (play once when it enters) + `instance`. Controller: `play(): Promise<void>`, `cancel()`, `duration()`.
+### `timeline(options?)` → `Timeline` (4.0; replaces `sequence()`)
+One playhead for many WAAPI animations. `options` = `{ defaults: { duration = 600, easing, stagger }, speed, onUpdate(p), onComplete() }`. Build with `.to(target, keyframes | preset, { at, duration, easing, stagger })`, `.label(name, at?)`, `.call(fn, at?)`; positions `'>'` (default), `'<'`, `'-=ms'`, `'+=ms'`, `'<+=ms'`, `'label+=ms'` or ms (`resolvePosition()`). Control: `play(from?)` / `reverse()` (Promises), `pause()`, `seek(ms | label)`, `progress(p?)`, `scrub(el, { offset, smooth })` → stop, `cancel()`; read `duration`, `time`, `labels`. Presets: `TIMELINE_PRESETS`. Reduced motion jumps to the end. Also in `use-scroll-animate/components/timeline` with `<usa-timeline>`.
 
 ### `parallax(target, options?)` → `() => void`
 `{ speed = 0.2, axis = 'y', progressVar = '--sa-parallax', root = null, respectReducedMotion = true }`. Offset `(progress − 0.5) × speed × 100vh` (or `vw`) on the `translate` property; progress (0–1) in the CSS variable. The stop function removes listeners and inline styles.
@@ -136,5 +136,5 @@ True scroll progress 0–1 of `el` through the viewport or `root`. `0` without a
 - **Reduced motion**: with `prefers-reduced-motion: reduce` (or `disabled: true`) nothing is hidden or moved; callbacks still fire; `progressVar` is still written (it is data); `parallax()` writes only its variable.
 - **SSR**: every entry can be imported and called on the server; calls are no-ops without a DOM.
 - **No IntersectionObserver**: content is shown immediately.
-- **Native engine**: scroll-linked, so `duration`/`delay`/`threshold`/`offset`/`stagger` don't apply; `once` freezes the end state on completion; class-name mode, reduced motion, `animate()`, `sequence()` and `staggerChildren()` always use JS.
+- **Native engine**: scroll-linked, so `duration`/`delay`/`threshold`/`offset`/`stagger` don't apply; `once` freezes the end state on completion; class-name mode, reduced motion, `animate()`, `timeline()` and `staggerChildren()` always use JS.
 - **Native engine by default**: in browsers without `animation-timeline: view()` everything runs on the JS engine.

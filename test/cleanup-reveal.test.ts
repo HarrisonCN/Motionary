@@ -65,29 +65,4 @@ describe('cleanup never leaves content hidden', () => {
     cleanups.forEach((c) => c());
     expect((list.firstElementChild as HTMLElement).style.opacity).toBe('');
   });
-
-  it('sequence: cancel() before the trigger fired shows the prepared targets', async () => {
-    const { sequence } = await load();
-    const trigger = el();
-    const a = el();
-    const b = el();
-    const tl = sequence([{ target: a }, { target: b }], { trigger });
-    expect(a.style.opacity).toBe('0');
-    expect(b.style.opacity).toBe('0');
-    tl.cancel();
-    expect(a.style.opacity).toBe('');
-    expect(b.style.opacity).toBe('');
-    fireAll([trigger], true);
-    expect(animations).toHaveLength(0);
-  });
-
-  it('sequence: play() after cancel() still animates', async () => {
-    const { sequence } = await load();
-    const trigger = el();
-    const a = el();
-    const tl = sequence([{ target: a }], { trigger });
-    tl.cancel();
-    tl.play();
-    expect(animations).toHaveLength(1);
-  });
 });

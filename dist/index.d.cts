@@ -219,45 +219,85 @@ interface StaggerOptions extends AnimateOptions {
 declare function staggerChildren(container: Element | null | undefined, options?: StaggerOptions, instance?: ScrollAnimateInstance): () => void;
 
 /**
- * use-scroll-animate - Sequence / timeline helper
- * Chain animations on several targets, one after another (or overlapping).
+ * Where a step starts on a timeline:
+ * - a number: absolute time in ms
+ * - `'>'` (default): when the previous step ends · `'<'`: when it starts
+ * - `'+=200'` / `'-=200'`: after / overlapping the previous end
+ * - `'<+=100'`: 100ms after the previous step's start
+ * - `'intro'` / `'intro+=150'`: at (or relative to) a label
  */
-
-interface SequenceStep extends AnimateOptions {
-    /** Selector, Element, NodeList or Element[] to animate in this step */
-    target: string | Element | NodeList | Element[];
-    /** Pause (ms) after the previous step ends before this one starts. Negative values overlap. (default: 0) */
-    gap?: number;
-    /** Absolute start time (ms) on the timeline; overrides `gap` */
-    at?: number;
+type TimelinePosition = number | string;
+interface TimelineStepOptions {
+    /** Duration in ms (default: timeline default, 600). */
+    duration?: number;
+    /** CSS easing (default `cubic-bezier(0.22, 1, 0.36, 1)`). */
+    easing?: string;
+    /** Start position, see `TimelinePosition`. */
+    at?: TimelinePosition;
+    /** ms between targets when the selector matches several elements. */
+    stagger?: number;
 }
-interface SequenceOptions extends AnimateOptions {
-    /** Play automatically (once) when this element/selector enters the viewport */
-    trigger?: string | Element;
-    /** Instance whose global config (easing, classes, `disabled`) is used */
-    instance?: ScrollAnimateInstance;
+interface TimelineOptions {
+    /** Defaults for every step. */
+    defaults?: Pick<TimelineStepOptions, 'duration' | 'easing' | 'stagger'>;
+    /** Playback rate (1 = normal). */
+    speed?: number;
+    /** Called after `play()` reaches the end (or the start when reversed). */
+    onComplete?: () => void;
+    /** Called on every frame with progress 0–1. */
+    onUpdate?: (progress: number) => void;
 }
-interface SequenceController {
-    /** Play (or replay) the timeline. Resolves when every step has completed, or on `cancel()`. */
-    play(): Promise<void>;
-    /** Stop the trigger and running animations; elements are left visible. */
+interface ScrubOptions {
+    /** Scroll offset (px) before the source's top reaches the viewport bottom where progress starts. */
+    offset?: number;
+    /** Smoothing 0–1 (0 = immediate, default 0). */
+    smooth?: number;
+}
+interface Timeline {
+    /** Total length in ms. */
+    readonly duration: number;
+    /** Label positions in ms. */
+    readonly labels: Readonly<Record<string, number>>;
+    /** Current playhead in ms. */
+    readonly time: number;
+    /** Add a step: animate `target` with keyframes or a preset name (`fade-up`, `scale`…). */
+    to(target: string | Element | Element[] | NodeList, frames: Keyframe[] | string, options?: TimelineStepOptions): Timeline;
+    /** Name a position (default: the current end). */
+    label(name: string, at?: TimelinePosition): Timeline;
+    /** Run `fn` when the playhead passes `at`. */
+    call(fn: () => void, at?: TimelinePosition): Timeline;
+    /** Play forwards from the playhead (from 0 when at the end). Resolves at the end. */
+    play(from?: TimelinePosition): Promise<void>;
+    /** Play backwards to 0. */
+    reverse(): Promise<void>;
+    pause(): Timeline;
+    /** Jump to a time (ms) or label. */
+    seek(to: TimelinePosition): Timeline;
+    /** Get or set progress 0–1. */
+    progress(p?: number): number;
+    /** Tie progress to the scroll position of `source` (it moves through the viewport). Returns a stop function. */
+    scrub(source: Element, options?: ScrubOptions): () => void;
+    /** Stop and drop every animation (elements keep their last frame). */
     cancel(): void;
-    /** Total duration of the timeline in ms (computed for the current DOM). */
-    duration(): number;
 }
+/** Keyframe presets usable by name in `to()` and `data-tl`. */
+declare const TIMELINE_PRESETS: Record<string, Keyframe[]>;
+/** Resolve a position against the previous step and labels (pure). */
+declare function resolvePosition(pos: TimelinePosition | undefined, end: number, prevStart: number, labels?: Record<string, number>): number;
 /**
- * Build a timeline of animations.
- *
- * @deprecated since 3.9, removed in 4.0 — use `timeline()` (`.to(target, preset, { at: '-=300' })`).
+ * Choreograph animations on one clock: chain, overlap, label, seek, reverse and
+ * scrub them with scroll. Built on WAAPI (paused animations driven by one
+ * playhead); without WAAPI or under reduced motion it jumps to the end state.
  *
  * @example
- * sequence([
- *   { target: '.title', animation: 'fade-in-up' },
- *   { target: '.subtitle', animation: 'blur-in', gap: -300 },   // overlap by 300ms
- *   { target: '.card', animation: 'scale-up', stagger: 80 },
- * ], { trigger: '.hero' });
+ * const tl = timeline({ defaults: { duration: 500 } })
+ *   .to('.title', 'fade-up')
+ *   .label('cards')
+ *   .to('.card', 'scale', { stagger: 80, at: '-=200' })
+ *   .to('.cta', [{ opacity: 0 }, { opacity: 1 }], { at: 'cards+=400' });
+ * tl.play();             // or tl.scrub(document.querySelector('.hero'))
  */
-declare function sequence(steps: SequenceStep[], options?: SequenceOptions): SequenceController;
+declare function timeline(options?: TimelineOptions): Timeline;
 
 /**
  * use-scroll-animate - parallax() helper
@@ -332,5 +372,5 @@ declare function resolveEasing(easing: EasingType): string;
  */
 declare const ScrollAnimate: ScrollAnimateInstance;
 
-export { EASING_MAP, PRESETS, createScrollAnimate, ScrollAnimate as default, getScrollProgress, parallax, resolveEasing, resolvePreset, sequence, staggerChildren, supportsScrollTimeline };
-export type { AnimateOptions, AnimatedElement, AnimationKeyframe, AnimationPreset, CustomAnimation, EasingType, ParallaxHelperOptions, ProgressMode, ScrollAnimateConfig, ScrollAnimateInstance, ScrollEngine, SequenceController, SequenceOptions, SequenceStep, StaggerOptions };
+export { EASING_MAP, PRESETS, TIMELINE_PRESETS, createScrollAnimate, ScrollAnimate as default, getScrollProgress, parallax, resolveEasing, resolvePosition, resolvePreset, staggerChildren, supportsScrollTimeline, timeline };
+export type { AnimateOptions, AnimatedElement, AnimationKeyframe, AnimationPreset, CustomAnimation, EasingType, ParallaxHelperOptions, ProgressMode, ScrollAnimateConfig, ScrollAnimateInstance, ScrollEngine, ScrubOptions, StaggerOptions, Timeline, TimelineOptions, TimelinePosition, TimelineStepOptions };

@@ -138,7 +138,7 @@ export function timeline(options: TimelineOptions = {}): Timeline {
     for (const s of steps) {
       if (typeof (s.el as HTMLElement).animate !== 'function') { s.anim = null; continue; }
       s.anim = (s.el as HTMLElement).animate(s.frames, { duration: s.duration, delay: s.start, easing: s.easing, fill: 'both' });
-      s.anim.pause();
+      s.anim.pause?.();
     }
   };
   const render = (to: number, from: number) => {
@@ -205,7 +205,7 @@ export function timeline(options: TimelineOptions = {}): Timeline {
       prevStart = start;
       end = Math.max(end, last);
       built = false;
-      steps.forEach((s) => s.anim?.cancel());
+      steps.forEach((s) => s.anim?.cancel?.());
       return api;
     },
     label(name, at) {
@@ -269,7 +269,7 @@ export function timeline(options: TimelineOptions = {}): Timeline {
     cancel() {
       stop();
       settle?.();
-      steps.forEach((s) => s.anim?.cancel());
+      steps.forEach((s) => s.anim?.cancel?.());
       built = false;
     },
   };

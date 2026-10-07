@@ -1,8 +1,6 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import { installComponentMocks, anims, mount, intersect } from './components-setup';
 import { definePacksComponents, applyPack, flyToCart, countUp, PACKS, PACK_PRIMITIVES } from '../src/components/packs';
-import { connectedAnimation, defineFlipList } from '../src/components/transitions';
-import { sequence } from '../src';
 
 beforeEach(() => {
   installComponentMocks();
@@ -68,20 +66,17 @@ describe('effect packs', () => {
   });
 });
 
-describe('4.0 deprecation warnings', () => {
-  it('sequence(), connectedAnimation() and <usa-flip-list> warn once', async () => {
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-    sequence([]);
-    sequence([]);
-    await connectedAnimation(document.body, document.createElement('div'));
-    defineFlipList();
-    mount('<usa-flip-list><p>a</p></usa-flip-list>');
-    mount('<usa-flip-list><p>b</p></usa-flip-list>');
-    const msgs = warn.mock.calls.map((c) => String(c[0]));
-    expect(msgs.filter((m) => m.includes('sequence() is deprecated'))).toHaveLength(1);
-    expect(msgs.filter((m) => m.includes('connectedAnimation() is deprecated'))).toHaveLength(1);
-    expect(msgs.filter((m) => m.includes('<usa-flip-list> is deprecated'))).toHaveLength(1);
-    msgs.forEach((m) => expect(m).toContain('upgrading-4.md'));
-    warn.mockRestore();
+describe('4.0 removals', () => {
+  it('sequence(), connectedAnimation() and <usa-flip-list> are gone', async () => {
+    const root: any = await import('../src');
+    const tr: any = await import('../src/components/transitions');
+    const all: any = await import('../src/components');
+    expect(root.sequence).toBeUndefined();
+    expect(typeof root.timeline).toBe('function');
+    expect(tr.connectedAnimation).toBeUndefined();
+    expect(tr.defineFlipList).toBeUndefined();
+    expect(Object.values(all.COMPONENT_CATEGORIES).flat()).not.toContain('usa-flip-list');
+    expect(typeof all.sharedTransition).toBe('function');
+    expect(typeof all.autoAnimate).toBe('function');
   });
 });

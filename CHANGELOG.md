@@ -7,6 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.0.0] - 2026-10-07
+
+4.0 completes the 3.x release train by consolidating overlapping APIs. Every removal has a drop-in replacement that shipped during 3.x — see **[Upgrading to 4.0](./docs/upgrading-4.md)** (run your app on 3.9 first: it warns once wherever removed APIs are used).
+
+### ⚠ Breaking changes
+- **`sequence()` removed** from `use-scroll-animate` → use **`timeline()`**, now also exported from the root entry (`import { timeline } from 'use-scroll-animate'`, `ScrollAnimate.timeline` in the UMD build) alongside `resolvePosition` and `TIMELINE_PRESETS`. `SequenceStep` / `SequenceOptions` / `SequenceController` types removed (use `Timeline`, `TimelineOptions`, `TimelineStepOptions`).
+- **`connectedAnimation()` removed** from `components/transitions` → use **`sharedTransition(update)`** with `data-shared="id"` (`components/layout`; View Transitions API + FLIP fallback). `ConnectedOptions` type removed.
+- **`<usa-flip-list>` / `defineFlipList()` removed** from `components/transitions` → use **`<usa-auto-animate>` / `autoAnimate()`** (`components/layout`), which also animates additions, removals and size changes. `flip()` stays.
+- CDN snippets in docs and the showcase now point at `use-scroll-animate@4`.
+
+### Changed
+- The Animation Store's timeline recipe, the vanilla example, README (EN / 中文 / 日本語), API docs and the AOS / GSAP migration guides use `timeline()`.
+- The component gallery's transitions category shows a `flip()` demo instead of the removed helpers.
+
+### Docs
+- New **[docs/upgrading-4.md](./docs/upgrading-4.md)** (step-by-step migration with before / after code).
+- New **[docs/ROADMAP.md](./docs/ROADMAP.md)** — the post-4.0 plan (v4.1 → v5.0).
+
+### Migration
+| 3.x | 4.0 |
+|---|---|
+| `sequence([{ target: '.a' }, { target: '.b', gap: -200 }], { trigger: '.hero' })` | `timeline().to('.a', 'fade-up').to('.b', 'fade-up', { at: '-=200' })` + play on view / `scrub()` |
+| `connectedAnimation(thumb, detail)` | `sharedTransition(() => { … })` with `data-shared="id"` on both |
+| `<usa-flip-list>` | `<usa-auto-animate>` |
+
+npm: **4.0.0 is published as `latest`**; 3.x remains installable as `use-scroll-animate@3`.
+
 ## [3.9.0] - 2026-10-07
 
 ### Added

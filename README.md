@@ -12,6 +12,8 @@
 
 **[✨ Live showcase — every effect, live, with copy-paste code](https://harrisoncn.github.io/use-scroll-animate/)** · **[🧩 Component gallery](https://harrisoncn.github.io/use-scroll-animate/showcase/components.html)** · **[🎛 Playground](https://harrisoncn.github.io/use-scroll-animate/showcase/playground.html)**
 
+> **4.0** consolidates the API: `timeline()` replaces `sequence()`, `sharedTransition()` replaces `connectedAnimation()`, `<usa-auto-animate>` replaces `<usa-flip-list>` — see [Upgrading to 4.0](./docs/upgrading-4.md) · [Roadmap](./docs/ROADMAP.md).
+
 </div>
 
 ## Why `use-scroll-animate`?
@@ -37,7 +39,7 @@ defineComponents(); // or per category: import { defineTextComponents } from 'us
 
 ```html
 <!-- or with no build step -->
-<script src="https://unpkg.com/use-scroll-animate@3/dist/components.umd.js"></script>
+<script src="https://unpkg.com/use-scroll-animate@4/dist/components.umd.js"></script>
 <usa-typewriter words="Hello, Windows.|Hello, web."></usa-typewriter>
 <usa-spinner kind="fluent"></usa-spinner>
 ```
@@ -49,7 +51,7 @@ defineComponents(); // or per category: import { defineTextComponents } from 'us
 | **Interaction** (`/components/interaction`) | `<usa-ripple>` · `<usa-magnetic>` · `<usa-tilt>` · `<usa-spotlight>` (Fluent reveal highlight) · `<usa-press>` · `<usa-toggle>` |
 | **Loading & feedback** (`/components/feedback`) | `<usa-spinner>` (WinUI ring, Windows dots, ring, dots, pulse, bars) · `<usa-skeleton>` · `<usa-progress>` · `<usa-toaster>` + `toast()` · `<usa-check>` |
 | **Background & decoration** (`/components/background`) | `<usa-aurora>` · `<usa-particles>` · `<usa-grain>` · `<usa-marquee>` · `<usa-acrylic>` (Acrylic / Mica) · `<usa-grid-glow>` · `<usa-blobs>` · `<usa-water-ripple>` · `<usa-dot-network>` · `fluentPreset()` (Mica · Acrylic · Reveal) |
-| **Transitions** (`/components/transitions`) | `<usa-dialog>` (modal / drawer / sheet) · `<usa-accordion>` · `<usa-flip-list>` · `<usa-view-switch>` · `viewTransition()` · `flip()` · `connectedAnimation()` |
+| **Transitions** (`/components/transitions`) | `<usa-dialog>` (modal / drawer / sheet) · `<usa-accordion>` · `<usa-view-switch>` · `viewTransition()` · `flip()` |
 | **Spring & physics** (`/components/physics`) | `<usa-spring>` (bounce-in · pop · drop · jelly · rubber-band) · `<usa-draggable>` (spring-back · inertia · snap) · `<usa-overscroll>` · `spring()` · `createSpring()` · `SPRING_PRESETS` |
 | **Card effects** (`/components/cards`) | `<usa-card>` (flip · holo · glass · border-glow · conic-border · lift · spotlight · sheen · parallax-layers · expand — combinable) · `<usa-card-stack>` (swipe) · `<usa-sticky-stack>` · `<usa-carousel-3d>` |
 | **Click & tap** (`/components/click`) | `<usa-button>` **button click deformation** (squash · wobble · gooey · dent · shape morph · submit→loading→success) · `<usa-icon-morph>` · `<usa-click>` (ripple · burst · confetti · squish · press-spring · shake) · `<usa-like>` · `<usa-hold>` · `<usa-double-tap>` · `<usa-checkbox>` · `confetti()` · `haptic()` |
@@ -109,7 +111,7 @@ Notes:
 - With the native engine, `duration`, `delay`, `threshold`, `offset` and `stagger` don't apply; the animation spans `viewRange` (default `['entry 0%', 'entry 100%']`, i.e. from the moment the element starts entering until it is fully in view). `easing` still applies.
 - `once` (default) freezes the end state when the animation completes, so scrolling back up does not reverse it; with `repeat: true` it keeps following the scroll in both directions.
 - Callbacks (`onEnter`, `onLeave`, `onStart`, `onComplete`), `onProgress`, `progressVar` and `parallax` keep working.
-- Class-name mode (`useClassNames`), `prefers-reduced-motion`, `animate()`, `sequence()` and `staggerChildren()` always use the JS engine.
+- Class-name mode (`useClassNames`), `prefers-reduced-motion`, `animate()`, `timeline()` and `staggerChildren()` always use the JS engine.
 - `supportsScrollTimeline()` is exported if you want to branch on support yourself.
 
 ## v1.4.0 New Features ✨
@@ -137,21 +139,21 @@ const stop = staggerChildren(document.querySelector('#feed'), {
 // later: stop();
 ```
 
-### Timelines with `sequence()`
-Chain animations across elements. Each step starts when the previous one ends; `gap` adds a pause (negative values overlap) and `at` sets an absolute start time.
+### Timelines with `timeline()`
+Chain animations across elements on one playhead. Each step starts when the previous one ends; `at` overlaps (`'-=300'`), waits (`'+=200'`), aligns with the previous step (`'<'`), jumps to a label or an absolute time. Play it, reverse it, seek it, or scrub it with scroll. (Replaces `sequence()`, removed in 4.0 — see [upgrading-4.md](./docs/upgrading-4.md).)
 
 ```js
-import { sequence } from 'use-scroll-animate';
+import { timeline } from 'use-scroll-animate';
 
-const tl = sequence([
-  { target: '.hero h1', animation: 'fade-in-up', duration: 700 },
-  { target: '.hero p', animation: 'blur-in', gap: -300 },
-  { target: '.hero .btn', animation: 'scale-up', stagger: 80 },
-], { trigger: '.hero', easing: 'soft-spring' }); // auto-plays once when .hero enters
+const tl = timeline({ defaults: { duration: 700 } })
+  .to('.hero h1', 'fade-up')
+  .to('.hero p', 'blur', { at: '-=300' })
+  .to('.hero .btn', 'scale', { stagger: 80 });
 
-await tl.play();   // or play manually; resolves when every step is done
-tl.cancel();       // stop and leave everything visible
+await tl.play();                              // resolves at the end
+tl.scrub(document.querySelector('.hero'));    // or tie progress to scroll
 ```
+Declaratively: `<usa-timeline>` with `data-tl="fade-up"` children (`use-scroll-animate/components/timeline`).
 
 ### New presets
 `scale-up`, `blur-in-up`, `flip-up`, `flip-down`, `rotate-left`, `rotate-right`, and clip-path reveals `clip-up`, `clip-down`, `clip-left`, `clip-right`, `clip-circle`.
@@ -311,7 +313,7 @@ ScrollAnimate.destroy();              // disconnect everything
 const sa = createScrollAnimate({ root: document.querySelector('#scroller') }); // isolated instance
 
 // Helpers (tree-shakeable)
-import { sequence, staggerChildren, getScrollProgress } from 'use-scroll-animate';
+import { timeline, staggerChildren, getScrollProgress } from 'use-scroll-animate';
 ```
 
 ### Watching the DOM (`watch()`)

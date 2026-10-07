@@ -15,8 +15,8 @@ export const TABS = [
 ];
 
 export const PKG = 'use-scroll-animate';
-export const CDN_UMD = 'https://unpkg.com/use-scroll-animate@3/dist/index.umd.js';
-export const CDN_ELEMENT = 'https://unpkg.com/use-scroll-animate@3/dist/element.umd.js';
+export const CDN_UMD = 'https://unpkg.com/use-scroll-animate@4/dist/index.umd.js';
+export const CDN_ELEMENT = 'https://unpkg.com/use-scroll-animate@4/dist/element.umd.js';
 
 export const INSTALL = {
   npm: `npm i ${PKG}`,
@@ -517,31 +517,40 @@ console.log('native:', supportsScrollTimeline());`;
 function sequenceSnippets(state) {
   const d = Number(state.duration);
   const gap = Number(state.gap);
-  const steps = `[
-  { target: '.hero .title', animation: 'fade-in-up' },
-  { target: '.hero .subtitle', animation: 'fade-in-up', gap: ${gap} },
-  { target: '.hero .cta', animation: 'zoom-in', gap: ${gap} },
-]`;
-  const indented = (n) => steps.replace(/\n/g, '\n' + ' '.repeat(n));
-  const call = (n) => `sequence(${indented(n)}, { trigger: '.hero', duration: ${d} })`;
+  const at = gap ? `, { at: '${gap < 0 ? '-' : '+'}=${Math.abs(gap)}' }` : '';
+  const chain = (n) => {
+    const p = ' '.repeat(n);
+    return `timeline({ defaults: { duration: ${d} } })
+${p}  .to('.hero .title', 'fade-up')
+${p}  .to('.hero .subtitle', 'fade-up'${at})
+${p}  .to('.hero .cta', 'scale'${at})`;
+  };
+  const onView = (n, v = 'tl') => `${' '.repeat(n)}new IntersectionObserver(([e], io) => e.isIntersecting && (io.disconnect(), ${v}.play())).observe(document.querySelector('.hero'));`;
   const markup = `<section class="hero">
   <h1 class="title">Title</h1>
   <p class="subtitle">Subtitle</p>
   <a class="cta" href="#">Get started</a>
 </section>`;
+  const declarative = `<usa-timeline${gap < 0 ? ` overlap="${Math.abs(gap)}"` : ''} duration="${d}">
+  <h1 data-tl="fade-up">Title</h1>
+  <p data-tl="fade-up">Subtitle</p>
+  <a data-tl="scale" href="#">Get started</a>
+</usa-timeline>`;
   return {
-    vanilla: `import { sequence } from '${PKG}';
+    vanilla: `import { timeline } from '${PKG}';
 
-// Plays once when .hero enters the viewport; negative gaps overlap the steps
-const timeline = ${call(0)};
-// timeline.play() replays it, timeline.cancel() stops it`,
+// One playhead: '-=200' overlaps the previous step, '+=200' waits
+const tl = ${chain(0)};
+// play once when .hero scrolls in (or: tl.scrub(document.querySelector('.hero')))
+${onView(0)}`,
     react: `import { useEffect } from 'react';
-import { sequence } from '${PKG}';
+import { timeline } from '${PKG}';
 
 export function Hero() {
   useEffect(() => {
-    const timeline = ${call(4)};
-    return () => timeline.cancel();
+    const tl = ${chain(4)};
+${onView(4)}
+    return () => tl.cancel();
   }, []);
   return (
 ${markup.replace(/^/gm, '    ').replace(/class=/g, 'className=')}
@@ -549,13 +558,14 @@ ${markup.replace(/^/gm, '    ').replace(/class=/g, 'className=')}
 }`,
     vue: `<script setup>
 import { onMounted, onUnmounted } from 'vue';
-import { sequence } from '${PKG}';
+import { timeline } from '${PKG}';
 
-let timeline;
+let tl;
 onMounted(() => {
-  timeline = ${call(2)};
+  tl = ${chain(2)};
+${onView(2)}
 });
-onUnmounted(() => timeline?.cancel());
+onUnmounted(() => tl?.cancel());
 </script>
 
 <template>
@@ -563,40 +573,43 @@ ${markup.replace(/^/gm, '  ')}
 </template>`,
     svelte: `<script>
   import { onMount } from 'svelte';
-  import { sequence } from '${PKG}';
+  import { timeline } from '${PKG}';
 
   onMount(() => {
-    const timeline = ${call(4)};
-    return () => timeline.cancel();
+    const tl = ${chain(4)};
+${onView(4)}
+    return () => tl.cancel();
   });
 </script>
 
 ${markup}`,
     solid: `import { onCleanup, onMount } from 'solid-js';
-import { sequence } from '${PKG}';
+import { timeline } from '${PKG}';
 
 export function Hero() {
   onMount(() => {
-    const timeline = ${call(4)};
-    onCleanup(() => timeline.cancel());
+    const tl = ${chain(4)};
+${onView(4)}
+    onCleanup(() => tl.cancel());
   });
   return (
 ${markup.replace(/^/gm, '    ')}
   );
 }`,
-    element: `<!-- sequence() is a JS API; it works on any elements, including <scroll-animate> -->
-${markup}
+    element: `<!-- declarative: <usa-timeline> from use-scroll-animate/components/timeline -->
+${declarative}
 
 <script type="module">
-  import { sequence } from '${PKG}';
-  ${call(2)};
+  import { defineTimelineComponents } from '${PKG}/components/timeline';
+  defineTimelineComponents();
 </script>`,
     cdn: `<script src="${CDN_UMD}"></script>
 
 ${markup}
 
 <script>
-  ScrollAnimate.${call(2)};
+  const tl = ScrollAnimate.${chain(2)};
+${onView(2)}
 </script>`,
   };
 }

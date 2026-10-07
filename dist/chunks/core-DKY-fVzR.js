@@ -1,6 +1,4 @@
-'use strict';
-
-var base = require('./base-Dm6ee5ug.cjs');
+import { d as clamp } from './base-ZARFccur.js';
 
 /** The swipe a pointer release represents, or `null` (pure). */
 function swipeDirection(dx, dy, vx, vy, o = {}) {
@@ -17,10 +15,10 @@ function swipeDirection(dx, dy, vx, vy, o = {}) {
     return { direction, velocity: Math.abs(v), dx, dy };
 }
 /** Scale between two pointer distances, clamped to [min, max] (pure). */
-function pinchScale(startDistance, distance, base$1 = 1, min = 0.5, max = 4) {
+function pinchScale(startDistance, distance, base = 1, min = 0.5, max = 4) {
     if (!startDistance)
-        return base$1;
-    return base.clamp(base$1 * (distance / startDistance), min, max);
+        return base;
+    return clamp(base * (distance / startDistance), min, max);
 }
 const pid = (e) => (typeof e.pointerId === 'number' ? e.pointerId : 1);
 /**
@@ -179,7 +177,5 @@ function gesture(el, h, o = {}) {
     };
 }
 
-exports.gesture = gesture;
-exports.pinchScale = pinchScale;
-exports.swipeDirection = swipeDirection;
-//# sourceMappingURL=core-CHAtivHV.cjs.map
+export { gesture as g, pinchScale as p, swipeDirection as s };
+//# sourceMappingURL=core-DKY-fVzR.js.map

@@ -1,10 +1,10 @@
 'use strict';
 
-var base = require('../chunks/base-Dm6ee5ug.cjs');
+var base = require('../chunks/base-CXx7jZ-o.cjs');
 
 var shadowCss = ":host{display:contents}dialog{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:transparent;color:inherit;overflow:hidden}dialog:not([open]){display:none}dialog::backdrop{background:transparent}[part=\"backdrop\"]{position:absolute;inset:0;background:var(--usa-dialog-backdrop,rgb(0 0 0 / 0.42))}[part=\"panel\"]{position:absolute;left:50%;top:50%;translate:-50% -50%;box-sizing:border-box;width:min(var(--usa-dialog-width,480px),calc(100vw - 32px));max-height:calc(100vh - 32px);overflow:auto;padding:var(--usa-dialog-padding,24px);border-radius:var(--usa-dialog-radius,12px);background:var(--usa-dialog-bg,Canvas);color:var(--usa-dialog-fg,CanvasText);box-shadow:0 32px 64px -12px rgb(0 0 0 / 0.45),0 0 0 1px rgb(127 127 127 / 0.18)}dialog[data-kind^=\"drawer\"] [part=\"panel\"]{top:0;bottom:0;translate:none;max-height:none;height:100%;border-radius:0;width:min(var(--usa-dialog-width,380px),88vw)}dialog[data-kind=\"drawer-start\"] [part=\"panel\"]{left:0}dialog[data-kind=\"drawer-end\"] [part=\"panel\"]{left:auto;right:0}dialog[data-kind=\"drawer-bottom\"] [part=\"panel\"],dialog[data-kind=\"sheet\"] [part=\"panel\"]{top:auto;bottom:0;left:0;right:0;translate:none;width:100%;height:auto;max-height:85vh;border-radius:var(--usa-dialog-radius,16px) var(--usa-dialog-radius,16px) 0 0}dialog[data-kind=\"sheet\"] [part=\"panel\"]{left:50%;translate:-50% 0;width:min(var(--usa-dialog-width,560px),100vw)}";
 
-var css$3 = "usa-dialog{display:contents}usa-dialog:not(:defined){display:none}";
+var css$2 = "usa-dialog{display:contents}usa-dialog:not(:defined){display:none}";
 
 const FROM = {
     modal: 'scale(0.94)',
@@ -159,10 +159,10 @@ function defineDialog(tag = 'usa-dialog') {
             const b = this._backdrop ? this.motion(this._backdrop, backdrop, { duration, easing: 'linear', fill }) : null;
             return Promise.all([a?.finished, b?.finished].map((p) => p?.catch(() => undefined))).then(() => undefined);
         }
-    }, { id: 'dialog', text: css$3 });
+    }, { id: 'dialog', text: css$2 });
 }
 
-var css$2 = "usa-accordion{display:block}usa-accordion>details>summary{cursor:pointer}usa-accordion>details>summary::-webkit-details-marker{display:none}usa-accordion>details>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:1em}usa-accordion>details>summary::after{content:\"\";flex:none;width:0.5em;height:0.5em;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-25%) rotate(45deg);transition:transform 0.3s cubic-bezier(0.22,1,0.36,1);opacity:0.7}usa-accordion>details[open]:not([data-closing])>summary::after{transform:translateY(25%) rotate(-135deg)}@media (prefers-reduced-motion:reduce){usa-accordion>details>summary::after{transition:none}}";
+var css$1 = "usa-accordion{display:block}usa-accordion>details>summary{cursor:pointer}usa-accordion>details>summary::-webkit-details-marker{display:none}usa-accordion>details>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:1em}usa-accordion>details>summary::after{content:\"\";flex:none;width:0.5em;height:0.5em;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-25%) rotate(45deg);transition:transform 0.3s cubic-bezier(0.22,1,0.36,1);opacity:0.7}usa-accordion>details[open]:not([data-closing])>summary::after{transform:translateY(25%) rotate(-135deg)}@media (prefers-reduced-motion:reduce){usa-accordion>details>summary::after{transition:none}}";
 
 function defineAccordion(tag = 'usa-accordion') {
     return base.defineElement(tag, (Base) => class UsaAccordion extends Base {
@@ -228,94 +228,7 @@ function defineAccordion(tag = 'usa-accordion') {
                 d.removeAttribute('data-closing');
             }
         }
-    }, { id: 'accordion', text: css$2 });
-}
-
-var css$1 = "usa-flip-list{display:block}";
-
-function defineFlipList(tag = 'usa-flip-list') {
-    return base.defineElement(tag, (Base) => class UsaFlipList extends Base {
-        constructor() {
-            super(...arguments);
-            /** Child positions relative to the host, from the last layout we saw. */
-            this._pos = new WeakMap();
-            this._manual = false;
-        }
-        static get observedAttributes() {
-            return [];
-        }
-        snapshot() {
-            const host = this.getBoundingClientRect();
-            for (const el of Array.from(this.children)) {
-                const r = el.getBoundingClientRect();
-                this._pos.set(el, { x: r.left - host.left, y: r.top - host.top });
-            }
-        }
-        mount() {
-            base.deprecate('usa-flip-list', '<usa-flip-list> is deprecated and will be removed in 4.0 — use <usa-auto-animate> (components/layout), which also animates additions and removals. See docs/upgrading-4.md.');
-            this.snapshot();
-            if (typeof MutationObserver !== 'undefined') {
-                const mo = new MutationObserver(() => {
-                    if (!this._manual)
-                        this.animateFrom(this._pos);
-                });
-                mo.observe(this, { childList: true });
-                this.onCleanup(() => mo.disconnect());
-            }
-            if (typeof ResizeObserver !== 'undefined') {
-                const ro = new ResizeObserver(() => this.snapshot());
-                ro.observe(this);
-                this.onCleanup(() => ro.disconnect());
-            }
-        }
-        animateFrom(prev) {
-            const off = this.reduced || this.flag('disabled');
-            const host = this.getBoundingClientRect();
-            const kids = Array.from(this.children);
-            const now = kids.map((el) => {
-                const r = el.getBoundingClientRect();
-                return { x: r.left - host.left, y: r.top - host.top };
-            });
-            const anims = [];
-            const duration = this.num('duration', 420);
-            const easing = this.str('easing', base.FLUENT_DECELERATE);
-            kids.forEach((el, i) => {
-                const before = prev.get(el);
-                this._pos.set(el, now[i]);
-                if (off || typeof el.animate !== 'function')
-                    return;
-                if (!before) {
-                    anims.push(el.animate([{ opacity: 0, transform: 'scale(0.92)' }, { opacity: 1, transform: 'none' }], { duration, easing }).finished.catch(() => 0));
-                    return;
-                }
-                const dx = before.x - now[i].x;
-                const dy = before.y - now[i].y;
-                if (Math.abs(dx) < 0.5 && Math.abs(dy) < 0.5)
-                    return;
-                anims.push(el.animate([{ transform: `translate(${dx}px, ${dy}px)` }, { transform: 'none' }], { duration, easing, composite: 'add' }).finished.catch(() => 0));
-            });
-            return Promise.all(anims).then(() => undefined);
-        }
-        async flip(mutate) {
-            this.snapshot();
-            const prev = this._pos;
-            this._pos = new WeakMap();
-            // Copy the snapshot so the observer does not overwrite it mid-mutation
-            for (const el of Array.from(this.children)) {
-                const p = prev.get(el);
-                if (p)
-                    this._pos.set(el, p);
-            }
-            this._manual = true;
-            try {
-                await mutate();
-            }
-            finally {
-                this._manual = false;
-            }
-            await this.animateFrom(prev);
-        }
-    }, { id: 'flip-list', text: css$1 });
+    }, { id: 'accordion', text: css$1 });
 }
 
 var css = "usa-view-switch{display:grid}usa-view-switch>*{grid-area:1 / 1;min-width:0}usa-view-switch>[hidden]:not([data-leaving]){display:none !important}usa-view-switch>[data-leaving]{display:block;pointer-events:none}";
@@ -494,54 +407,24 @@ async function flip(targets, mutate, options = {}) {
     });
     await Promise.all(anims.map((a) => a.finished.catch(() => undefined)));
 }
-/**
- * Connected (shared-element) animation, like WinUI's
- * `ConnectedAnimationService`: `to` flies from the position and size of
- * `from` into its own place (e.g. a thumbnail opening into a detail view).
- * Call it right after `to` is shown. Transforms only.
- *
- * @deprecated since 3.9, removed in 4.0 — use `sharedTransition()` (components/layout).
- */
-async function connectedAnimation(from, to, options = {}) {
-    base.deprecate('connectedAnimation', "connectedAnimation() is deprecated and will be removed in 4.0 — use sharedTransition() from 'use-scroll-animate/components/layout' (data-shared=\"id\" on both elements). See docs/upgrading-4.md.");
-    if (base.prefersReducedMotion() || typeof to.animate !== 'function')
-        return;
-    const a = from.getBoundingClientRect();
-    const b = to.getBoundingClientRect();
-    if (!b.width || !b.height)
-        return;
-    const hide = options.hideSource !== false && from instanceof HTMLElement;
-    const prev = hide ? from.style.visibility : '';
-    if (hide)
-        from.style.visibility = 'hidden';
-    const anim = to.animate([
-        { transformOrigin: '0 0', transform: `translate(${a.left - b.left}px, ${a.top - b.top}px) scale(${a.width / b.width}, ${a.height / b.height})` },
-        { transformOrigin: '0 0', transform: 'none' },
-    ], { duration: options.duration ?? 480, easing: options.easing ?? base.FLUENT_DECELERATE });
-    await anim.finished.catch(() => undefined);
-    if (hide)
-        from.style.visibility = prev;
-}
 
 /**
  * use-scroll-animate/components/transitions — view & layout transitions.
- * `<usa-dialog>`, `<usa-accordion>`, `<usa-flip-list>`, `<usa-view-switch>`
- * and the `viewTransition()`, `flip()`, `connectedAnimation()` helpers.
+ * `<usa-dialog>`, `<usa-accordion>`, `<usa-view-switch>`
+ * and the `viewTransition()` and `flip()` helpers (4.0: `<usa-flip-list>` → `<usa-auto-animate>`,
+ * `connectedAnimation()` → `sharedTransition()`, both in `components/layout`).
  */
 /** Register every component of this category under its default tag. */
 function defineTransitionComponents() {
     defineDialog();
     defineAccordion();
-    defineFlipList();
     defineViewSwitch();
 }
 
 exports.configureComponents = base.configureComponents;
 exports.prefersReducedMotion = base.prefersReducedMotion;
-exports.connectedAnimation = connectedAnimation;
 exports.defineAccordion = defineAccordion;
 exports.defineDialog = defineDialog;
-exports.defineFlipList = defineFlipList;
 exports.defineTransitionComponents = defineTransitionComponents;
 exports.defineViewSwitch = defineViewSwitch;
 exports.flip = flip;

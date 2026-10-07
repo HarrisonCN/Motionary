@@ -25,8 +25,8 @@
     "limit": 6144
   },
   {
-    "name": "import { sequence }",
-    "import": "export { sequence } from 'pkg';",
+    "name": "import { timeline }",
+    "import": "export { timeline } from 'pkg';",
     "limit": 6656
   },
   {

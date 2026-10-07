@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { installComponentMocks, anims, finishAll, intersect, ioFor, mount, tick } from './components-setup';
 import { defineBackgroundComponents } from '../src/components/background';
-import { defineTransitionComponents, viewTransition, flip, connectedAnimation } from '../src/components/transitions';
+import { defineTransitionComponents, viewTransition, flip } from '../src/components/transitions';
 import { defineComponents, COMPONENT_CATEGORIES } from '../src/components';
 
 beforeEach(() => {
@@ -176,7 +176,7 @@ describe('<usa-accordion>', () => {
   });
 });
 
-describe('<usa-flip-list> and flip()', () => {
+describe('flip()', () => {
   it('flip() animates moved elements from their old position', async () => {
     const list = mount('<ul><li>1</li><li>2</li></ul>');
     const [one, two] = Array.from(list.children);
@@ -191,23 +191,6 @@ describe('<usa-flip-list> and flip()', () => {
     const moved = anims.filter((a) => a.el === one || a.el === two);
     expect(moved).toHaveLength(2);
     expect((moved.find((a) => a.el === one)!.keyframes[0] as any).transform).toBe('translate(0px, -30px) scale(1, 1)');
-    await finishAll();
-    await p;
-  });
-
-  it('the element animates DOM reorders by itself', async () => {
-    const el = mount<any>('<usa-flip-list><i>a</i><i>b</i></usa-flip-list>');
-    box(el, {});
-    const [a, b] = Array.from(el.children) as HTMLElement[];
-    const pos = new Map<Element, number>([[a, 0], [b, 20]]);
-    for (const n of [a, b]) n.getBoundingClientRect = () => ({ left: 0, top: pos.get(n)!, width: 10, height: 20 }) as DOMRect;
-    const p = el.flip(() => {
-      el.append(a);
-      pos.set(a, 20);
-      pos.set(b, 0);
-    });
-    await tick();
-    expect(anims.filter((x) => x.el === a || x.el === b)).toHaveLength(2);
     await finishAll();
     await p;
   });
@@ -262,19 +245,6 @@ describe('helpers', () => {
     const u2 = vi.fn();
     await viewTransition(u2);
     expect(u2).toHaveBeenCalledOnce();
-  });
-
-  it('connectedAnimation() flies `to` from the rect of `from`', async () => {
-    const from = mount('<img>');
-    const to = mount('<div></div>');
-    box(from, { left: 10, top: 20, width: 50, height: 25 });
-    box(to, { left: 100, top: 200, width: 100, height: 50 });
-    const p = connectedAnimation(from, to);
-    expect(from.style.visibility).toBe('hidden');
-    expect((anims.at(-1)!.keyframes[0] as any).transform).toBe('translate(-90px, -180px) scale(0.5, 0.5)');
-    await finishAll();
-    await p;
-    expect(from.style.visibility).toBe('');
   });
 });
 

@@ -21,7 +21,7 @@
 `use-scroll-animate` 的设计初衷截然不同：
 - ⚡ **零依赖**：纯原生 JS/TypeScript 编写。
 - 🚀 **高性能**：由 `IntersectionObserver` 和原生 `Web Animations API` 驱动。默认不监听滚动事件（可选的滚动进度模式仅在被追踪元素可见时使用一个 passive、rAF 节流的监听器），无布局抖动。
-- 🪶 **极轻量**：Gzip 后核心约 4.8KB（含 `sequence`、`staggerChildren` 与 React/Vue 辅助在内全部约 6.1KB）。
+- 🪶 **极轻量**：Gzip 后核心约 4.8KB（含 `timeline`、`staggerChildren` 与 React/Vue 辅助在内全部约 6.1KB）。
 - 🧩 **框架无关**：完美支持原生 JS、React、Vue、Svelte 等。内置一流的 React Hooks 和 Vue Composables。
 - ♿ **无障碍**：原生支持 `prefers-reduced-motion`。
 
@@ -36,7 +36,7 @@ defineComponents(); // 或按分类：import { defineTextComponents } from 'use-
 
 ```html
 <!-- 或免构建直接使用 -->
-<script src="https://unpkg.com/use-scroll-animate@3/dist/components.umd.js"></script>
+<script src="https://unpkg.com/use-scroll-animate@4/dist/components.umd.js"></script>
 <usa-typewriter words="你好，Windows。|你好，Web。"></usa-typewriter>
 <usa-spinner kind="fluent"></usa-spinner>
 ```
@@ -48,7 +48,7 @@ defineComponents(); // 或按分类：import { defineTextComponents } from 'use-
 | **交互反馈**（`/components/interaction`） | `<usa-ripple>` 水波纹 · `<usa-magnetic>` 磁吸按钮 · `<usa-tilt>` 3D 倾斜卡片 · `<usa-spotlight>` Fluent 光照高亮 · `<usa-press>` 按压反馈 · `<usa-toggle>` 切换开关 |
 | **加载与反馈**（`/components/feedback`） | `<usa-spinner>`（WinUI 进度环、Windows 圆点等 6 种）· `<usa-skeleton>` 骨架屏 · `<usa-progress>` 进度条 · `<usa-toaster>` + `toast()` 通知 · `<usa-check>` 结果图标 |
 | **背景与装饰**（`/components/background`） | `<usa-aurora>` 极光 · `<usa-particles>` 粒子 · `<usa-grain>` 胶片颗粒 · `<usa-marquee>` 无限跑马灯 · `<usa-acrylic>` 亚克力 / 云母材质 · `<usa-grid-glow>` 网格光晕 · `<usa-blobs>` 流体色块 · `<usa-water-ripple>` 水波 · `<usa-dot-network>` 点阵 · `fluentPreset()` Fluent 预设 |
-| **过渡动画**（`/components/transitions`） | `<usa-dialog>` 弹窗 / 抽屉 / 底部面板 · `<usa-accordion>` 手风琴 · `<usa-flip-list>` FLIP 列表 · `<usa-view-switch>` 视图切换 · `viewTransition()` · `flip()` · `connectedAnimation()` |
+| **过渡动画**（`/components/transitions`） | `<usa-dialog>` 弹窗 / 抽屉 / 底部面板 · `<usa-accordion>` 手风琴 · `<usa-view-switch>` 视图切换 · `viewTransition()` · `flip()` |
 | **弹簧与物理**（`/components/physics`） | `<usa-spring>` 弹入 / 弹出 / 掉落 / 果冻 / 橡皮筋 · `<usa-draggable>` 拖拽回弹、惯性、吸附 · `<usa-overscroll>` 弹性越界 · `spring()` · `createSpring()` · 预设 gentle / wobbly / stiff / bouncy |
 | **卡片效果**（`/components/cards`） | `<usa-card>` 翻转 · 全息 · 玻璃 · 边框光晕 · 流光边框 · 悬浮 · 聚光 · 扫光 · 视差分层 · 展开详情（可组合）· `<usa-card-stack>` 滑动卡堆 · `<usa-sticky-stack>` 滚动堆叠 · `<usa-carousel-3d>` 3D 轮播 |
 | **点击与轻触**（`/components/click`） | `<usa-button>` 按钮点击形变（挤压拉伸 · 弹性圆角 · 液态粘滞 · 按压凹陷 · 形状变形 · 提交→加载→成功）· `<usa-icon-morph>` 图标变形 · `<usa-click>` 水波纹 / 迸发 / 彩带 / 抖动 · `<usa-like>` · `<usa-hold>` · `<usa-double-tap>` · `<usa-checkbox>` |
@@ -107,7 +107,7 @@ const sa = createScrollAnimate({ defaultEngine: 'auto' }); // 实例级默认
 - `'auto'`：**2.0 起的默认值**，支持时使用原生时间线，否则回退 JS；若元素自行设置了 `duration`、`delay`、`offset` 或 `stagger`，则使用 JS。`'css'`：支持时始终使用原生时间线。`'js'`：1.x 的行为（`defaultEngine: 'js'` 可全局恢复）。
 - 原生引擎下 `duration`、`delay`、`threshold`、`offset`、`stagger` 不生效；动画区间由 `viewRange` 决定（默认 `['entry 0%', 'entry 100%']`），`easing` 仍然有效。HTML：`data-sa-engine`、`data-sa-view-range="entry 0%, cover 40%"`。
 - `once`（默认）在动画完成后固定最终状态；`repeat: true` 时随滚动双向播放。回调、`onProgress`、`progressVar`、视差照常工作。
-- 类名模式、`prefers-reduced-motion`、`animate()`、`sequence()`、`staggerChildren()` 始终使用 JS 引擎。另导出 `supportsScrollTimeline()`。
+- 类名模式、`prefers-reduced-motion`、`animate()`、`timeline()`、`staggerChildren()` 始终使用 JS 引擎。另导出 `supportsScrollTimeline()`。
 
 ## v1.4.0 新特性 ✨
 
@@ -127,16 +127,15 @@ const sa = createScrollAnimate({ defaultEngine: 'auto' }); // 实例级默认
   const stop = staggerChildren(document.querySelector('#feed'), { stagger: 60, observeChildren: true });
   ```
 
-- **时间线 `sequence()`**：串联多个元素的动画。每一步在上一步结束后开始；`gap` 设置间隔（负值表示重叠），`at` 设置绝对开始时间；`trigger` 可在元素进入视口时自动播放一次。
+- **时间线 `timeline()`**：在同一播放头上串联多个元素的动画。默认每步在上一步结束后开始；`at` 可重叠（`'-=300'`）、延后（`'+=200'`）、与上一步同时（`'<'`）、对齐标签或绝对时间；支持播放、倒放、跳转与随滚动擦洗。（取代 4.0 中移除的 `sequence()`，见 [upgrading-4.md](./docs/upgrading-4.md)。）
 
   ```js
-  import { sequence } from 'use-scroll-animate';
-  const tl = sequence([
-    { target: '.hero h1', animation: 'fade-in-up', duration: 700 },
-    { target: '.hero p', animation: 'blur-in', gap: -300 },
-    { target: '.hero .btn', animation: 'scale-up', stagger: 80 },
-  ], { trigger: '.hero' });
-  await tl.play(); // 全部完成后 resolve；tl.cancel() 停止并保持元素可见
+  import { timeline } from 'use-scroll-animate';
+  const tl = timeline({ defaults: { duration: 700 } })
+    .to('.hero h1', 'fade-up')
+    .to('.hero p', 'blur', { at: '-=300' })
+    .to('.hero .btn', 'scale', { stagger: 80 });
+  await tl.play(); // 全部完成后 resolve；或 tl.scrub(hero) 随滚动
   ```
 
 - **新预设**：`scale-up`、`blur-in-up`、`flip-up`、`flip-down`、`rotate-left`、`rotate-right`，以及 clip-path 揭示 `clip-up`、`clip-down`、`clip-left`、`clip-right`、`clip-circle`。
