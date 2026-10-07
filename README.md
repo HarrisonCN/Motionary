@@ -26,7 +26,7 @@ In 2025, performance is everything. Traditional scroll animation libraries often
 - ♿ **Accessible**: Respects `prefers-reduced-motion` out of the box (content is shown immediately, no entrance or parallax motion).
 - 🖥️ **SSR-safe**: Importing (and even calling) the API on the server is a no-op.
 
-## Animated components (v2.2) 🧩
+## Animated components (v2.2+) 🧩
 
 **30 dependency-free animated Web Components** (`<usa-*>`) in six categories — for **web pages and Windows desktop apps** (Electron, Tauri, WebView2 in WinUI/WPF/WinForms, PWAs). Custom Elements + CSS + Web Animations only: tree-shakable, SSR-safe, `prefers-reduced-motion` everywhere. **[Live gallery](https://harrisoncn.github.io/use-scroll-animate/showcase/components.html)** · [Component docs](./docs/components.md) · [Windows apps guide](./docs/windows-apps.md)
 
@@ -50,6 +50,7 @@ defineComponents(); // or per category: import { defineTextComponents } from 'us
 | **Loading & feedback** (`/components/feedback`) | `<usa-spinner>` (WinUI ring, Windows dots, ring, dots, pulse, bars) · `<usa-skeleton>` · `<usa-progress>` · `<usa-toaster>` + `toast()` · `<usa-check>` |
 | **Background & decoration** (`/components/background`) | `<usa-aurora>` · `<usa-particles>` · `<usa-grain>` · `<usa-marquee>` · `<usa-acrylic>` (Acrylic / Mica) |
 | **Transitions** (`/components/transitions`) | `<usa-dialog>` (modal / drawer / sheet) · `<usa-accordion>` · `<usa-flip-list>` · `<usa-view-switch>` · `viewTransition()` · `flip()` · `connectedAnimation()` |
+| **Spring & physics** (`/components/physics`) | `<usa-spring>` (bounce-in · pop · drop · jelly · rubber-band) · `<usa-draggable>` (spring-back · inertia · snap) · `<usa-overscroll>` · `spring()` · `createSpring()` · `SPRING_PRESETS` |
 
 Whole bundle ≈ 22 kB gzip (JS + CSS); one category 3.5–6.4 kB; a single component ≈ 2 kB. The scroll-animation core below is unaffected.
 

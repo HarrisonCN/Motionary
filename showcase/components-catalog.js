@@ -7,6 +7,9 @@
  * (richer) markup rendered in the live preview.
  */
 
+import { C } from './catalog/make.js';
+import { EXTENSIONS } from './catalog/index.js';
+
 export const VERSION_RANGE = '2';
 
 /** Component categories, in display order (ids match the subpath exports). */
@@ -54,22 +57,6 @@ export const COMPONENT_CATEGORIES = [
     desc: { en: 'Modals and drawers, accordions, FLIP list reorders, view switching and connected (shared-element) animations.', zh: '弹窗与抽屉、手风琴、FLIP 列表重排、视图切换与连接（共享元素）动画。' },
   },
 ];
-
-const define = (tag) => 'define' + tag.replace(/^usa-/, '').replace(/(^|-)([a-z])/g, (_, __, c) => c.toUpperCase());
-
-const C = (tag, category, en, zh, descEn, descZh, tags, usage, demo, extra = {}) => ({
-  id: tag.replace(/^usa-/, ''),
-  kind: 'element',
-  tag,
-  category,
-  define: extra.define || define(tag),
-  title: { en, zh },
-  desc: { en: descEn, zh: descZh },
-  tags,
-  usage,
-  demo: demo || usage,
-  ...extra,
-});
 
 const pills = (n, cls = 'demo-pill') => Array.from({ length: n }, (_, i) => `<span class="${cls}">${i + 1}</span>`).join('');
 
@@ -304,6 +291,12 @@ export const HELPERS = [
     demo: '<div class="demo-connected"><div class="demo-thumbs"><button type="button" data-ca="0" aria-label="Open 1"></button><button type="button" data-ca="1" aria-label="Open 2"></button><button type="button" data-ca="2" aria-label="Open 3"></button></div><div class="demo-detail" hidden data-ca-detail><button type="button" class="demo-link" data-ca-close>Back</button></div></div>',
   },
 ];
+
+for (const ext of EXTENSIONS) {
+  COMPONENT_CATEGORIES.push(ext.category);
+  COMPONENTS.push(...ext.components);
+  HELPERS.push(...(ext.helpers || []));
+}
 
 export const GALLERY = [...COMPONENTS, ...HELPERS];
 

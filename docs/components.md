@@ -119,6 +119,20 @@ All attributes are optional unless noted. Events are `CustomEvent`s that bubble,
 | `flip(targets, mutate, opts?)` | FLIP-animates any layout change | `{ duration, easing, animateEnter }` | `Promise<void>` |
 | `connectedAnimation(from, to, opts?)` | WinUI-style connected / shared-element animation | `{ duration, easing, hideSource }` | `Promise<void>` |
 
+### 7. Spring & physics — `components/physics`
+
+| Element / API | What it does | Key attributes / options | JS API / events |
+|---|---|---|---|
+| `<usa-spring>` | Spring entrances (`bounce-in`, `pop`, `drop`) and attention effects (`jelly`, `rubber-band`) | `effect`, `trigger` (`view` · `hover` · `click` · `manual`), `preset` or `stiffness` / `damping` / `mass`, `delay`, `duration` (attention, 900), `repeat`, `block` | `play()`, `reset()`; `usa:complete` |
+| `<usa-draggable>` | Drag with pointer or arrow keys, physics on release | `axis` (`both` · `x` · `y`), `spring-back`, `inertia`, `snap` (`80` grid or `0,120,240` points), `bounds="parent"`, `preset` (`wobbly`), `step` (16), `disabled` | `x`, `y`, `dragging`, `moveTo(x, y, animate?)`, `reset()`; `usa:drag-start`, `usa:drag`, `usa:drag-end`, `usa:settle`; `--usa-drag-x/-y` |
+| `<usa-overscroll>` | Elastic scroll container (rubber-band edges) | `axis` (`y` · `x`), `max` (120), `preset`, `disabled` | `offset`; `--usa-overscroll` |
+| `spring(el, keyframes, preset?, options?)` | WAAPI animation with spring timing | preset name or `{ stiffness, damping, mass, velocity }` | returns `Animation` (or `null` under reduced motion) |
+| `springEasing(preset?)` | `{ easing: 'linear(…)', duration }` for CSS / WAAPI | — | cubic-bezier fallback without `linear()` |
+| `createSpring({ value, spring, onUpdate, onRest })` | Interruptible spring value for gestures | — | `set(target, velocity?)`, `jump(v)`, `stop()`, `configure()` |
+| `projectInertia(v, velocity)` · `snapTo(v, grid \| points)` · `rubberBand(d, dim)` | Inertia, snapping and resistance math | — | pure functions |
+
+Presets (`SPRING_PRESETS`): `default` (170/26), `gentle` (120/14), `wobbly` (180/12), `stiff` (210/20), `bouncy` (300/10), `slow` (280/60), `molasses` (280/120) — stiffness/damping, mass 1.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

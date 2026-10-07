@@ -17,6 +17,7 @@ const entries = {
   'use-scroll-animate/components/interaction': ['defineInteractionComponents', 'defineRipple', 'defineMagnetic', 'defineTilt', 'defineSpotlight', 'definePress', 'defineToggle'],
   'use-scroll-animate/components/feedback': ['defineFeedbackComponents', 'defineSpinner', 'defineSkeleton', 'defineProgress', 'defineToaster', 'defineCheck', 'toast'],
   'use-scroll-animate/components/background': ['defineBackgroundComponents', 'defineAurora', 'defineParticles', 'defineGrain', 'defineMarquee', 'defineAcrylic'],
+  'use-scroll-animate/components/physics': ['definePhysicsComponents', 'defineSpring', 'defineDraggable', 'defineOverscroll', 'spring', 'springEasing', 'createSpring', 'SPRING_PRESETS', 'projectInertia', 'snapTo', 'rubberBand'],
   'use-scroll-animate/components/transitions': ['defineTransitionComponents', 'defineDialog', 'defineAccordion', 'defineFlipList', 'defineViewSwitch', 'viewTransition', 'flip', 'connectedAnimation'],
 };
 

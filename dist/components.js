@@ -10,7 +10,9 @@ import { defineBackgroundComponents } from './components/background.js';
 export { defineAcrylic, defineAurora, defineGrain, defineMarquee, defineParticles } from './components/background.js';
 import { defineTransitionComponents } from './components/transitions.js';
 export { connectedAnimation, defineAccordion, defineDialog, defineFlipList, defineViewSwitch, flip, viewTransition } from './components/transitions.js';
-export { c as configureComponents, p as prefersReducedMotion } from './chunks/base-CFtnmfli.js';
+import { definePhysicsComponents } from './components/physics.js';
+export { SPRING_EFFECTS, SPRING_PRESETS, createSpring, defineDraggable, defineOverscroll, defineSpring, linearEasing, projectInertia, resolveSpring, rubberBand, snapTo, spring, springEasing, springEffectKeyframes, springSamples, stepSpring, supportsLinearEasing } from './components/physics.js';
+export { c as configureComponents, p as prefersReducedMotion } from './chunks/base-CuvCgqLy.js';
 
 /**
  * use-scroll-animate/components
@@ -40,6 +42,7 @@ const COMPONENT_CATEGORIES = {
     feedback: ['usa-spinner', 'usa-skeleton', 'usa-progress', 'usa-toaster', 'usa-check'],
     background: ['usa-aurora', 'usa-particles', 'usa-grain', 'usa-marquee', 'usa-acrylic'],
     transitions: ['usa-dialog', 'usa-accordion', 'usa-flip-list', 'usa-view-switch'],
+    physics: ['usa-spring', 'usa-draggable', 'usa-overscroll'],
 };
 const BY_CATEGORY = {
     reveal: defineRevealComponents,
@@ -48,6 +51,7 @@ const BY_CATEGORY = {
     feedback: defineFeedbackComponents,
     background: defineBackgroundComponents,
     transitions: defineTransitionComponents,
+    physics: definePhysicsComponents,
 };
 /**
  * Register every `<usa-*>` component (or only the given categories).
@@ -57,5 +61,5 @@ function defineComponents(categories) {
     (categories || Object.keys(BY_CATEGORY)).forEach((c) => BY_CATEGORY[c]?.());
 }
 
-export { COMPONENT_CATEGORIES, defineBackgroundComponents, defineComponents, defineFeedbackComponents, defineInteractionComponents, defineRevealComponents, defineTextComponents, defineTransitionComponents };
+export { COMPONENT_CATEGORIES, defineBackgroundComponents, defineComponents, defineFeedbackComponents, defineInteractionComponents, definePhysicsComponents, defineRevealComponents, defineTextComponents, defineTransitionComponents };
 //# sourceMappingURL=components.js.map

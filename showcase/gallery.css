@@ -162,3 +162,9 @@ usa-toggle { --usa-toggle-on: var(--accent); }
   .demo-jump b, .demo-acrylic-bg > i { animation: none; }
   .g-scrolly-shape { transition: none; }
 }
+
+/* v2.3+ demos */
+.demo-drag-area { position: relative; min-height: 120px; width: 100%; justify-content: center; border: 1px dashed color-mix(in srgb, currentColor 25%, transparent); border-radius: 18px; padding: 12px; }
+.demo-scroll { height: 150px; width: min(100%, 260px); border-radius: 14px; border: 1px solid color-mix(in srgb, currentColor 18%, transparent); }
+.demo-list { list-style: none; margin: 0; padding: 6px; display: grid; gap: 6px; }
+.demo-list li { padding: 10px 12px; border-radius: 10px; background: color-mix(in srgb, currentColor 7%, transparent); }

@@ -67,7 +67,7 @@
   {
     "name": "dist/components.umd.js (minified, all components + CSS)",
     "file": "dist/components.umd.js",
-    "limit": 25088
+    "limit": 28928
   },
   {
     "name": "dist/components.css",
@@ -77,7 +77,7 @@
   {
     "name": "import 'use-scroll-animate/components' (everything)",
     "import": "export * from 'pkg/components';",
-    "limit": 25088
+    "limit": 28928
   },
   {
     "name": "import 'use-scroll-animate/components/reveal'",
@@ -110,33 +110,43 @@
     "limit": 6144
   },
   {
-    "name": "import { defineTypewriter } from '\u2026/components/text'",
+    "name": "import { defineTypewriter } from '…/components/text'",
     "import": "export { defineTypewriter } from 'pkg/components/text';",
     "limit": 2304
   },
   {
-    "name": "import { defineSpinner } from '\u2026/components/feedback'",
+    "name": "import { defineSpinner } from '…/components/feedback'",
     "import": "export { defineSpinner } from 'pkg/components/feedback';",
     "limit": 2816
   },
   {
-    "name": "import { defineReveal } from '\u2026/components/reveal'",
+    "name": "import { defineReveal } from '…/components/reveal'",
     "import": "export { defineReveal } from 'pkg/components/reveal';",
     "limit": 2304
   },
   {
-    "name": "import { defineRipple } from '\u2026/components/interaction'",
+    "name": "import { defineRipple } from '…/components/interaction'",
     "import": "export { defineRipple } from 'pkg/components/interaction';",
     "limit": 2048
   },
   {
-    "name": "import { defineMarquee } from '\u2026/components/background'",
+    "name": "import { defineMarquee } from '…/components/background'",
     "import": "export { defineMarquee } from 'pkg/components/background';",
     "limit": 2560
   },
   {
-    "name": "import { viewTransition } from '\u2026/components/transitions'",
+    "name": "import { viewTransition } from '…/components/transitions'",
     "import": "export { viewTransition } from 'pkg/components/transitions';",
     "limit": 768
+  },
+  {
+    "name": "import 'use-scroll-animate/components/physics'",
+    "import": "export * from 'pkg/components/physics';",
+    "limit": 6400
+  },
+  {
+    "name": "import { defineSpring } from '…/components/physics'",
+    "import": "export { defineSpring } from 'pkg/components/physics';",
+    "limit": 3328
   }
 ]

@@ -3,6 +3,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
 import { dts } from 'rollup-plugin-dts';
 import { readFileSync, readdirSync } from 'node:fs';
+import { CATEGORIES } from './scripts/categories.mjs';
 
 // `import css from './x.css?raw'` → the minified stylesheet as a string
 // (Vite/Vitest support `?raw` natively; this mirrors it for the build).
@@ -33,7 +34,7 @@ const cssRaw = () => ({
 // dist/components.css (+ one file per category) for apps that load styles
 // themselves (e.g. a strict CSP, or configureComponents({ injectStyles: false })).
 const CSS_CATEGORIES = Object.fromEntries(
-  ['reveal', 'text', 'interaction', 'feedback', 'background', 'transitions'].map((cat) => [
+  CATEGORIES.map((cat) => [
     cat,
     readdirSync(`src/components/${cat}`)
       .filter((f) => f.endsWith('.css') && !f.endsWith('.shadow.css'))
@@ -69,12 +70,7 @@ const entries = {
   solid: 'src/solid.ts',
   element: 'src/element.ts',
   components: 'src/components/index.ts',
-  'components/reveal': 'src/components/reveal/index.ts',
-  'components/text': 'src/components/text/index.ts',
-  'components/interaction': 'src/components/interaction/index.ts',
-  'components/feedback': 'src/components/feedback/index.ts',
-  'components/background': 'src/components/background/index.ts',
-  'components/transitions': 'src/components/transitions/index.ts',
+  ...Object.fromEntries(CATEGORIES.map((c) => [`components/${c}`, `src/components/${c}/index.ts`])),
 };
 
 const ts = () => typescript({ tsconfig: './tsconfig.json', declaration: false, declarationDir: undefined });
