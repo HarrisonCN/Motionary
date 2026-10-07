@@ -160,6 +160,11 @@ export function readOptions(get: (name: string) => string | undefined): AnimateO
     const [start, end] = range.split(',').map((s) => s.trim());
     if (start && end) opts.viewRange = [start, end];
   }
+  const exit = get('exit');
+  if (exit !== undefined) {
+    const e = exit.trim();
+    opts.exit = e === '' || e === 'true' ? true : e === 'false' ? false : ((e.includes(',') ? e.split(',').map((s) => s.trim()) : e) as any);
+  }
   const progress = get('progress');
   if (progress) opts.progressMode = progress.trim() === 'scroll' ? 'scroll' : 'ratio';
 
@@ -193,7 +198,8 @@ function parseDataAttributes(el: Element, config: Required<ScrollAnimateConfig>)
 }
 
 function mergeOptions(opts: AnimateOptions, config: Required<ScrollAnimateConfig>): Required<AnimateOptions> {
-  const repeat = opts.repeat ?? config.defaultRepeat;
+  const exit = opts.exit ?? false;
+  const repeat = opts.repeat ?? (exit ? true : config.defaultRepeat);
   const threshold = opts.threshold ?? config.defaultThreshold;
   return {
     animation: opts.animation ?? config.defaultAnimation,
@@ -216,6 +222,7 @@ function mergeOptions(opts: AnimateOptions, config: Required<ScrollAnimateConfig
     progressVar: opts.progressVar ? normalizeVar(opts.progressVar) : '',
     engine: opts.engine ?? config.defaultEngine,
     viewRange: opts.viewRange ?? DEFAULT_VIEW_RANGE,
+    exit,
   };
 }
 
@@ -281,9 +288,16 @@ export function getScrollProgress(el: Element, root?: Element | null): number {
 
 /** The animation currently running on an element, so it can be cancelled/replaced. */
 const running = new WeakMap<Element, Animation>();
+/** Native engine: the scroll-linked exit animation, next to the entrance in `running`. */
+const exits = new WeakMap<Element, Animation>();
 const timers = new WeakMap<Element, ReturnType<typeof setTimeout>>();
 
 function cancelRunning(el: Element): void {
+  const exitAnim = exits.get(el);
+  if (exitAnim) {
+    exits.delete(el);
+    exitAnim.cancel();
+  }
   const anim = running.get(el);
   if (anim) {
     running.delete(el);
@@ -511,6 +525,19 @@ function startNative(el: Element, opts: Required<AnimateOptions>, onFrozen?: () 
     return null;
   }
   running.set(el, anim);
+  if (opts.exit) {
+    // Reverse keyframes over the `exit` range; `fill: 'forwards'` so it has
+    // no effect before the element starts leaving.
+    const leave = resolvePreset(opts.exit === true ? opts.animation : opts.exit);
+    const out = buildAnimation({ from: leave.to, to: leave.from }, opts.easing);
+    try {
+      const timeline = new (globalThis as any).ViewTimeline({ subject: el, axis: 'block' });
+      const timing = { fill: 'forwards', easing: out.easing, timeline, rangeStart: 'exit 0%', rangeEnd: 'exit 100%' };
+      exits.set(el, el.animate(out.keyframes, timing as KeyframeAnimationOptions));
+    } catch {
+      // Exit is cosmetic: ignore if unsupported.
+    }
+  }
   const keep = opts.repeat || !opts.once;
   anim.onfinish = () => {
     // `once`: freeze the end state, so scrolling back up does not reverse it.
@@ -541,6 +568,26 @@ function applyParallax(el: Element, progress: number, parallax: ParallaxOptions)
   if (scale !== 1) transform += ` scale(${1 + (scale - 1) * p})`;
 
   (el as HTMLElement).style.transform = transform.trim();
+}
+
+/** Play the exit animation (entrance or `exit` preset, reversed), ending hidden. */
+function runExit(el: Element, opts: Required<AnimateOptions>, config: Required<ScrollAnimateConfig>): void {
+  if (config.useClassNames || typeof el.animate !== 'function') {
+    hideElement(el, config);
+    return;
+  }
+  cancelRunning(el);
+  const preset = resolvePreset(opts.exit === true ? opts.animation : (opts.exit as Exclude<typeof opts.exit, boolean>));
+  const built = buildAnimation({ from: preset.to, to: preset.from }, opts.easing);
+  const timing: KeyframeAnimationOptions = { duration: opts.duration, easing: built.easing, fill: 'forwards' };
+  let anim: Animation;
+  try {
+    anim = el.animate(built.keyframes, timing);
+  } catch {
+    anim = el.animate(built.keyframes, { ...timing, easing: 'ease' });
+  }
+  // Kept (filling) until the next entrance cancels it.
+  running.set(el, anim);
 }
 
 function hideElement(el: Element, config: Required<ScrollAnimateConfig>): void {
@@ -747,7 +794,10 @@ export function createScrollAnimate(userConfig: ScrollAnimateConfig = {}): Scrol
       } else {
         opts.onLeave(el);
         if (opts.repeat && record.animated) {
-          if (!motionDisabled(config)) hideElement(el, config);
+          if (!motionDisabled(config)) {
+            if (opts.exit) runExit(el, opts, config);
+            else hideElement(el, config);
+          }
           record.animated = false;
         }
       }

@@ -129,6 +129,23 @@ import { scrollAnimate, useScrollAnimate } from 'use-scroll-animate/solid';
 <!-- 无构建：<script src="https://unpkg.com/use-scroll-animate/dist/element.umd.js"></script> -->
 ```
 
+## 退场动画与视差辅助函数（v1.8）
+
+```js
+ScrollAnimate.observe('.card', { animation: 'fade-in-up', exit: true });          // 离开视口时反向播放入场动画
+ScrollAnimate.observe('.toast', { animation: 'zoom-in', exit: 'fade-in-down' });  // 用另一个预设（反向）退场
+```
+
+- `exit`：`true`、预设名、预设数组或 `{ from, to }`；离开视口时反向播放，再次进入时重新入场（默认隐含 `repeat: true`）。HTML：`data-sa-exit` / `data-sa-exit="zoom-out"`。原生引擎下退场同样随滚动驱动；减少动态效果时不播放。
+
+```js
+import { parallax } from 'use-scroll-animate';
+const stop = parallax('.hero-bg', { speed: 0.3 });   // 正值：比页面慢（背景）；负值：比页面快
+parallax('.badge', { speed: -0.15, axis: 'x' });
+```
+
+- `parallax(target, { speed = 0.2, axis = 'y', progressVar = '--sa-parallax', root, respectReducedMotion = true })`：进度写入 CSS 变量，位移写入独立的 `translate` 属性（与 `transform` 和入场动画互不冲突）；`prefers-reduced-motion` 时只写变量不位移。返回停止函数。
+
 ## 核心配置
 
 | 选项 | 类型 | 默认值 | 描述 |

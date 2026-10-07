@@ -2,7 +2,7 @@
   {
     "name": "dist/index.umd.js (minified)",
     "file": "dist/index.umd.js",
-    "limit": 7680
+    "limit": 8192
   },
   {
     "name": "dist/element.umd.js (minified)",
@@ -12,7 +12,7 @@
   {
     "name": "import everything (minified)",
     "import": "export * from 'pkg'; export { default } from 'pkg';",
-    "limit": 7680
+    "limit": 8192
   },
   {
     "name": "import default instance",
@@ -58,5 +58,10 @@
     "name": "import 'use-scroll-animate/vue'",
     "import": "export * from 'pkg/vue';",
     "limit": 6400
+  },
+  {
+    "name": "import { parallax }",
+    "import": "export { parallax } from 'pkg';",
+    "limit": 2048
   }
 ]

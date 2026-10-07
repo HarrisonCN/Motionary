@@ -125,6 +125,18 @@ import { scrollAnimate, useScrollAnimate } from 'use-scroll-animate/solid';
 <scroll-animate animation="fade-in-up" duration="800">…</scroll-animate>
 ```
 
+## 退場アニメーションとパララックス（v1.8）
+
+```js
+ScrollAnimate.observe('.card', { animation: 'fade-in-up', exit: true });          // ビューポート外へ出るとき入場を逆再生
+ScrollAnimate.observe('.toast', { animation: 'zoom-in', exit: 'fade-in-down' });  // 別プリセットを逆再生して退場
+import { parallax } from 'use-scroll-animate';
+parallax('.hero-bg', { speed: 0.3 });  // 正：ページより遅い、負：速い。axis: 'x' も可
+```
+
+- `exit`：`true`・プリセット名・配列・`{ from, to }`。`repeat: true` を暗黙に有効化。`data-sa-exit` 属性にも対応。reduced motion 時は再生しません。
+- `parallax()`：進行度を CSS 変数（既定 `--sa-parallax`）に、オフセットを個別の `translate` プロパティに書き込むため `transform` と競合しません。reduced motion 時はオフセットなし。停止関数を返します。
+
 ## 主な設定
 
 | オプション | 型 | デフォルト | 説明 |

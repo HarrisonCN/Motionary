@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 
 const require = createRequire(import.meta.url);
 const entries = {
-  'use-scroll-animate': ['createScrollAnimate', 'getScrollProgress', 'supportsScrollTimeline', 'staggerChildren', 'sequence', 'createReactHooks', 'createVueComposables', 'PRESETS'],
+  'use-scroll-animate': ['createScrollAnimate', 'getScrollProgress', 'supportsScrollTimeline', 'staggerChildren', 'sequence', 'parallax', 'createReactHooks', 'createVueComposables', 'PRESETS'],
   'use-scroll-animate/react': ['createReactHooks'],
   'use-scroll-animate/vue': ['createVueComposables'],
   'use-scroll-animate/svelte': ['scrollAnimate', 'scrollStagger'],
