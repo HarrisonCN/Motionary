@@ -20,11 +20,12 @@ import { defineUiComponents } from './components/ui.js';
 export { defineAvatarStack, defineBadge, defineBottomSheet, defineDrawer, defineFab, defineNavbar, definePopover, definePullRefresh, defineRating, defineSlider, defineTabs, defineTooltip } from './components/ui.js';
 import { definePageComponents } from './components/page.js';
 export { AMBIENT_EFFECTS, CURSOR_MODES, PAGE_EFFECTS, defineAmbient, defineAutoSkeleton, defineBackToTop, defineCursor, defineFullpage, defineLoadingBar, defineMotionSwitch, defineSplash, enableMpaTransitions, loadingBar, pageTransition, restoreMotionIntensity, scrollToTarget, setMotionIntensity, smoothScroll, supportsViewTransitions, themeTransition } from './components/page.js';
-import { a as adoptVariants } from './chunks/variants-idgMVXhE.js';
-export { V as VARIANTS, s as setVariant } from './chunks/variants-idgMVXhE.js';
-import { c as canDefine } from './chunks/base-C_w9ibbn.js';
-export { M as MOTION_SCALE, a as configureComponents, g as getMotionIntensity, p as prefersReducedMotion } from './chunks/base-C_w9ibbn.js';
-export { S as SPRING_PRESETS, c as createSpring, l as linearEasing, p as projectInertia, r as resolveSpring, a as rubberBand, s as snapTo, b as spring, d as springEasing, e as springSamples, f as stepSpring, g as supportsLinearEasing } from './chunks/spring-Dc8ZqDWE.js';
+import { a as adoptVariants } from './chunks/variants-Ce9CboVc.js';
+export { V as VARIANTS, s as setVariant } from './chunks/variants-Ce9CboVc.js';
+import { c as canDefine } from './chunks/base-CB8gChoe.js';
+export { M as MOTION_SCALE, a as configureComponents, g as getMotionIntensity, p as prefersReducedMotion } from './chunks/base-CB8gChoe.js';
+export { C as COMPONENT_CATEGORIES } from './chunks/index-tags-f37txHmb.js';
+export { S as SPRING_PRESETS, c as createSpring, l as linearEasing, p as projectInertia, r as resolveSpring, a as rubberBand, s as snapTo, b as spring, d as springEasing, e as springSamples, f as stepSpring, g as supportsLinearEasing } from './chunks/spring-ka0YJ_ZR.js';
 
 /**
  * use-scroll-animate/components
@@ -46,20 +47,6 @@ export { S as SPRING_PRESETS, c as createSpring, l as linearEasing, p as project
  *
  * @license MIT
  */
-/** The component categories and their default tags. */
-const COMPONENT_CATEGORIES = {
-    reveal: ['usa-reveal', 'usa-stagger', 'usa-scroll-progress', 'usa-scrolly'],
-    text: ['usa-typewriter', 'usa-split-text', 'usa-scramble', 'usa-counter', 'usa-shimmer-text', 'usa-text-rotate', 'usa-wave-text', 'usa-glitch', 'usa-gradient-text', 'usa-handwriting', 'usa-scroll-highlight'],
-    interaction: ['usa-ripple', 'usa-magnetic', 'usa-tilt', 'usa-spotlight', 'usa-press', 'usa-toggle'],
-    feedback: ['usa-spinner', 'usa-skeleton', 'usa-progress', 'usa-toaster', 'usa-check'],
-    background: ['usa-aurora', 'usa-particles', 'usa-grain', 'usa-marquee', 'usa-acrylic', 'usa-grid-glow', 'usa-blobs', 'usa-water-ripple', 'usa-dot-network'],
-    transitions: ['usa-dialog', 'usa-accordion', 'usa-flip-list', 'usa-view-switch'],
-    physics: ['usa-spring', 'usa-draggable', 'usa-overscroll'],
-    cards: ['usa-card', 'usa-card-stack', 'usa-sticky-stack', 'usa-carousel-3d'],
-    click: ['usa-click', 'usa-button', 'usa-icon-morph', 'usa-like', 'usa-hold', 'usa-double-tap', 'usa-checkbox'],
-    ui: ['usa-tabs', 'usa-drawer', 'usa-bottom-sheet', 'usa-pull-refresh', 'usa-fab', 'usa-navbar', 'usa-slider', 'usa-rating', 'usa-tooltip', 'usa-popover', 'usa-badge', 'usa-avatar-stack'],
-    page: ['usa-cursor', 'usa-fullpage', 'usa-loading-bar', 'usa-back-to-top', 'usa-ambient', 'usa-splash', 'usa-auto-skeleton', 'usa-motion-switch'],
-};
 const BY_CATEGORY = {
     reveal: defineRevealComponents,
     text: defineTextComponents,
@@ -83,5 +70,5 @@ function defineComponents(categories) {
     (categories || Object.keys(BY_CATEGORY)).forEach((c) => BY_CATEGORY[c]?.());
 }
 
-export { COMPONENT_CATEGORIES, adoptVariants, defineBackgroundComponents, defineCardComponents, defineClickComponents, defineComponents, defineFeedbackComponents, defineInteractionComponents, definePageComponents, definePhysicsComponents, defineRevealComponents, defineTextComponents, defineTransitionComponents, defineUiComponents };
+export { adoptVariants, defineBackgroundComponents, defineCardComponents, defineClickComponents, defineComponents, defineFeedbackComponents, defineInteractionComponents, definePageComponents, definePhysicsComponents, defineRevealComponents, defineTextComponents, defineTransitionComponents, defineUiComponents };
 //# sourceMappingURL=components.js.map

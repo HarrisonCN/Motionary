@@ -1,7 +1,7 @@
 // Regenerates the `./components/<category>` entries of package.json
 // `exports` and the `lint:package` CSS exclusions from scripts/categories.mjs.
 import { readFileSync, writeFileSync } from 'node:fs';
-import { CATEGORIES } from './categories.mjs';
+import { CATEGORIES, COMPONENT_ENTRIES } from './categories.mjs';
 
 const file = new URL('../package.json', import.meta.url);
 const pkg = JSON.parse(readFileSync(file, 'utf8'));
@@ -15,6 +15,7 @@ for (const [k, v] of Object.entries(pkg.exports)) {
   out[k] = v;
 }
 for (const c of CATEGORIES) out[`./components/${c}`] = entry(`components/${c}`);
+for (const n of Object.keys(COMPONENT_ENTRIES)) out[`./components/${n}`] = entry(`components/${n}`);
 out['./components.css'] = './dist/components.css';
 for (const c of CATEGORIES) out[`./components/${c}.css`] = `./dist/components/${c}.css`;
 out['./package.json'] = './package.json';

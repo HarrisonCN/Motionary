@@ -20,7 +20,7 @@ usa-acrylic::after {
 }
 usa-acrylic[shimmer="hover"]:hover::after, usa-acrylic[data-shine]::after { animation: usa-acrylic-shine 1.1s cubic-bezier(0.22, 1, 0.36, 1) both; }
 @keyframes usa-acrylic-shine { from { transform: translateX(-120%); } to { transform: translateX(120%); } }
-usa-acrylic[variant="mica"] {
+usa-acrylic:is([kind="mica"], [variant="mica"]) {
   --usa-acrylic-opacity: 80%;
   -webkit-backdrop-filter: none; backdrop-filter: none;
   background:

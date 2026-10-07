@@ -1,4 +1,4 @@
-import { i as readOptions, c as createScrollAnimate } from './chunks/core-BP-a1iNc.js';
+import { r as readOptions, c as createScrollAnimate } from './chunks/core-J_KM443q.js';
 
 /**
  * use-scroll-animate - `<scroll-animate>` Web Component

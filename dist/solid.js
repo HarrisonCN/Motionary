@@ -1,6 +1,6 @@
 import { onMount, onCleanup } from 'solid-js';
-import { c as createScrollAnimate } from './chunks/core-BP-a1iNc.js';
-import { s as staggerChildren } from './chunks/stagger-DTv_WiUQ.js';
+import { c as createScrollAnimate } from './chunks/core-J_KM443q.js';
+import { s as staggerChildren } from './chunks/stagger-CGF18oNs.js';
 
 /**
  * use-scroll-animate - Solid integration

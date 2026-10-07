@@ -52,7 +52,7 @@
   {
     "name": "import 'use-scroll-animate/react'",
     "import": "export * from 'pkg/react';",
-    "limit": 6400
+    "limit": 6912
   },
   {
     "name": "import 'use-scroll-animate/vue'",
@@ -97,7 +97,7 @@
   {
     "name": "import 'use-scroll-animate/components/feedback'",
     "import": "export * from 'pkg/components/feedback';",
-    "limit": 7168
+    "limit": 7936
   },
   {
     "name": "import 'use-scroll-animate/components/background'",
@@ -117,7 +117,7 @@
   {
     "name": "import { defineSpinner } from '…/components/feedback'",
     "import": "export { defineSpinner } from 'pkg/components/feedback';",
-    "limit": 2816
+    "limit": 3328
   },
   {
     "name": "import { defineReveal } from '…/components/reveal'",
@@ -188,5 +188,20 @@
     "name": "import { pageTransition } from '…/components/page'",
     "import": "export { pageTransition } from 'pkg/components/page';",
     "limit": 1792
+  },
+  {
+    "name": "import 'use-scroll-animate/components/react'",
+    "import": "export * from 'pkg/components/react';",
+    "limit": 1536
+  },
+  {
+    "name": "import 'use-scroll-animate/components/vue'",
+    "import": "export * from 'pkg/components/vue';",
+    "limit": 60928
+  },
+  {
+    "name": "import 'use-scroll-animate/components/lazy'",
+    "import": "export * from 'pkg/components/lazy';",
+    "limit": 1536
   }
 ]

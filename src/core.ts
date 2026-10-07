@@ -217,7 +217,7 @@ function mergeOptions(opts: AnimateOptions, config: Required<ScrollAnimateConfig
     once: opts.once ?? (repeat ? false : config.defaultOnce),
     offset: opts.offset ?? config.defaultOffset,
     stagger: opts.stagger ?? 0,
-    parallax: opts.parallax ?? {},
+    parallax: warnLegacyParallax(opts.parallax) ?? {},
     onStart: opts.onStart ?? noop,
     onComplete: opts.onComplete ?? noop,
     onEnter: opts.onEnter ?? noop,
@@ -559,6 +559,16 @@ function startNative(el: Element, opts: Required<AnimateOptions>, onFrozen?: () 
     opts.onComplete(el);
   };
   return anim;
+}
+
+let parallaxWarned = false;
+/** 2.9: the transform-based `parallax` option is deprecated (removed in 3.0). */
+function warnLegacyParallax<T>(p: T): T {
+  if (p && !parallaxWarned && typeof console !== 'undefined' && Object.keys(p as object).length) {
+    parallaxWarned = true;
+    console.warn('[use-scroll-animate] The `parallax` option / data-sa-parallax-* attributes are deprecated and removed in 3.0. Use parallax(el, { speed }) or progressVar instead.');
+  }
+  return p;
 }
 
 function applyParallax(el: Element, progress: number, parallax: ParallaxOptions): void {

@@ -55,7 +55,8 @@ export function installComponentMocks(opts: { reducedMotion?: boolean } = {}) {
     addEventListener() {},
     removeEventListener() {},
   })) as any;
-  configureComponents({ reducedMotion: 'user', injectStyles: true });
+  (HTMLCanvasElement.prototype as any).getContext = () => null; // jsdom has no canvas: silence its warning
+  configureComponents({ reducedMotion: 'user', injectStyles: true, motionIntensity: 'normal' });
 }
 
 /** Finish every running mock animation (repeatedly, for chained ones). */

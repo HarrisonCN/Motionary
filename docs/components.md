@@ -91,11 +91,11 @@ All attributes are optional unless noted. Events are `CustomEvent`s that bubble,
 
 | Element | What it does | Key attributes | JS API / events |
 |---|---|---|---|
-| `<usa-spinner>` | Indeterminate indicators | `variant` (`fluent`* = WinUI ProgressRing, `windows` = Windows 10 orbiting dots, `ring`, `dots`, `pulse`, `bars`), `size` (32), `label`, `paused` | `variant` |
+| `<usa-spinner>` | Indeterminate indicators | `kind` (`fluent`* = WinUI ProgressRing, `windows` = Windows 10 orbiting dots, `ring`, `dots`, `pulse`, `bars`), `size` (32), `label`, `paused` | `kind` |
 | `<usa-skeleton>` | Shimmer placeholders; content fades in when loading ends | `loading`, `lines` (3), `avatar`, `circle`, `width`, `height`, `radius` | `loading`; `usa:loaded` |
 | `<usa-progress>` | Linear progress; Fluent indeterminate animation without a value | `value`, `max` (100), `indeterminate`, `state` (`paused`, `error`), `label` | `value`, `max`, `ratio`; `usa:complete` |
 | `<usa-toaster>` + `toast()` | Notifications that slide in, pause on hover, stack with FLIP | `position` (`bottom-right`*, `bottom-left`, `bottom-center`, `top-*`), `max` (4), `label` | `toast(msg, { type, duration, action, dismissible })` → `{ element, close() }`; `show()`, `clear()` |
-| `<usa-check>` | Animated success / error / warning icon | `variant` (`success`*, `error`, `warning`), `size` (56), `start`, `label` | `play()`, `reset()`; `usa:complete` |
+| `<usa-check>` | Animated success / error / warning icon | `kind` (`success`*, `error`, `warning`), `size` (56), `start`, `label` | `play()`, `reset()`; `usa:complete` |
 
 ### 5. Background & decoration — `components/background`
 
@@ -105,13 +105,13 @@ All attributes are optional unless noted. Events are `CustomEvent`s that bubble,
 | `<usa-particles>` | Canvas constellation that avoids the pointer | `count` (60), `color`, `size`, `speed`, `links` (110, `0` = off), `interactive`, `paused` | `reset()` |
 | `<usa-grain>` | SVG-noise film-grain overlay | `opacity` (0.12), `animated`, `blend`, `scale` | — |
 | `<usa-marquee>` | Seamless infinite ticker | `speed` (50 px/s), `direction` (`left`*, `right`, `up`, `down`), `gap`, `pause-on-hover`, `fade`, `paused` | `pause()`, `resume()` |
-| `<usa-acrylic>` | Fluent **Acrylic** / **Mica** materials | `variant` (`acrylic`*, `mica`), `tint`, `tint-opacity`, `blur`, `shimmer` (`hover`, `load`) | — (solid under `prefers-reduced-transparency` / forced colours) |
+| `<usa-acrylic>` | Fluent **Acrylic** / **Mica** materials | `kind` (`acrylic`*, `mica`), `tint`, `tint-opacity`, `blur`, `shimmer` (`hover`, `load`) | — (solid under `prefers-reduced-transparency` / forced colours) |
 
 ### 6. Transitions — `components/transitions`
 
 | Element / helper | What it does | Key attributes / options | JS API / events |
 |---|---|---|---|
-| `<usa-dialog>` | Animated modal / drawer / sheet on the native `<dialog>` (focus trap, Esc, top layer); content is slotted, so frameworks keep owning it | `open`, `variant` (`modal`*, `drawer-start`, `drawer-end`, `drawer-bottom`, `sheet`), `label`, `no-backdrop-close`, `no-esc`; `[data-close]` children close it; `::part(panel/backdrop)`, `--usa-dialog-*` | `show()`, `close(value?)`, `open`, `returnValue`; `usa:open`, `usa:beforeclose` (cancelable), `usa:close` |
+| `<usa-dialog>` | Animated modal / drawer / sheet on the native `<dialog>` (focus trap, Esc, top layer); content is slotted, so frameworks keep owning it | `open`, `kind` (`modal`*, `drawer-start`, `drawer-end`, `drawer-bottom`, `sheet`), `label`, `no-backdrop-close`, `no-esc`; `[data-close]` children close it; `::part(panel/backdrop)`, `--usa-dialog-*` | `show()`, `close(value?)`, `open`, `returnValue`; `usa:open`, `usa:beforeclose` (cancelable), `usa:close` |
 | `<usa-accordion>` | Smooth height animation for native `<details>` | `multiple`, `duration` (300) | `toggleItem(details, open?)`, `items`; `usa:toggle` |
 | `<usa-flip-list>` | Children glide to new places on add / remove / reorder (FLIP) | `duration` (420), `easing`, `disabled` | `flip(mutate)` |
 | `<usa-view-switch>` | One view at a time with direction-aware transitions | `active` (name or index), `effect` (`slide`*, `fade`, `scale`, `drill`), `duration` | `show(view)`, `active`, `views`; `usa:change` |
@@ -157,7 +157,7 @@ Presets (`SPRING_PRESETS`): `default` (170/26), `gentle` (120/14), `wobbly` (180
 
 ### 10. UI components & variants — `components/ui`
 
-**Style variants.** `variant="minimal | neon | glass | brutalist | fluent | material"` works on every `<usa-*>` element (or `data-usa-variant` on an ancestor, or `setVariant('fluent')` page-wide). Variants only set design tokens — `--usa-accent`, `--usa-accent-text`, `--usa-surface`, `--usa-text`, `--usa-radius`, `--usa-border`, `--usa-shadow`, `--usa-blur`, `--usa-font` — which you can also set yourself. (`<usa-spinner>` / `<usa-check>` / `<usa-dialog>` keep using `variant` for their kind; `fluent` means the Windows look in both.)
+**Style variants.** `variant="minimal | neon | glass | brutalist | fluent | material"` works on every `<usa-*>` element (or `data-usa-variant` on an ancestor, or `setVariant('fluent')` page-wide). Variants only set design tokens — `--usa-accent`, `--usa-accent-text`, `--usa-surface`, `--usa-text`, `--usa-radius`, `--usa-border`, `--usa-shadow`, `--usa-blur`, `--usa-font` — which you can also set yourself. (Since 2.9 `<usa-spinner>`, `<usa-check>`, `<usa-dialog>` and `<usa-acrylic>` pick their kind with `kind`; using `variant` for that is deprecated and stops working in 3.0.)
 
 | Element | What it does | Key attributes | JS API / events |
 |---|---|---|---|
@@ -209,6 +209,28 @@ Presets (`SPRING_PRESETS`): `default` (170/26), `gentle` (120/14), `wobbly` (180
 
 WinUI 3 / WebView2 sample app: [`examples/webview2-winui/`](../examples/webview2-winui/).
 
+## Theme tokens
+
+Every component reads these CSS custom properties (set them on `:root`, any ancestor, or via `variant` / `setVariant()`):
+
+| Token | Used for |
+|---|---|
+| `--usa-accent` / `--usa-accent-text` | primary colour (toggles, sliders, tabs indicator, checkbox, progress, focus rings) / text on it |
+| `--usa-surface` / `--usa-text` | panels (drawer, sheet, popover, tooltip, back-to-top) |
+| `--usa-radius`, `--usa-border`, `--usa-shadow`, `--usa-blur`, `--usa-font` | shape, outline, elevation, glass blur, typography |
+| `--usa-motion` | global motion intensity (0 · 0.6 · 1 · 1.25), set by `setMotionIntensity()` |
+
+## Framework entry points (v2.9)
+
+| Import | What |
+|---|---|
+| `use-scroll-animate/components/react` | `createUsaComponents(React)` typed wrappers (props, ref, `onUsa*` events) |
+| `use-scroll-animate/components/vue` | `isUsaElement`, `UsaPlugin` |
+| `use-scroll-animate/components/jsx` | `UsaIntrinsicElements` JSX types |
+| `use-scroll-animate/components/lazy` | `lazyDefine()`, `defineUsed()`, `loadCategory()` |
+
+See [frameworks-ssr.md](./frameworks-ssr.md) and [accessibility.md](./accessibility.md).
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.
@@ -219,7 +241,7 @@ import { defineFeedbackComponents, toast } from 'use-scroll-animate/components/f
 defineFeedbackComponents();
 
 export function Save() {
-  return <button onClick={() => toast('Saved', { type: 'success' })}>Save <usa-spinner variant="dots" size="16" /></button>;
+  return <button onClick={() => toast('Saved', { type: 'success' })}>Save <usa-spinner kind="dots" size="16" /></button>;
 }
 ```
 

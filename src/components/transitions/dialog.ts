@@ -1,4 +1,4 @@
-import { defineElement, shadowStyles, EASE_OUT, FLUENT_DECELERATE, type UsaElement } from '../base';
+import { kindOf, defineElement, shadowStyles, EASE_OUT, FLUENT_DECELERATE, type UsaElement } from '../base';
 import shadowCss from './dialog.shadow.css?raw';
 import css from './dialog.css?raw';
 
@@ -40,7 +40,7 @@ export function defineDialog(tag = 'usa-dialog'): CustomElementConstructor | und
     (Base) =>
       class UsaDialog extends Base {
         static get observedAttributes(): string[] {
-          return ['open', 'variant', 'label'];
+          return ['open', 'kind', 'variant', 'label'];
         }
 
         private _dialog: HTMLDialogElement | null = null;
@@ -61,8 +61,7 @@ export function defineDialog(tag = 'usa-dialog'): CustomElementConstructor | und
         }
 
         private get variant(): string {
-          const v = this.str('variant', 'modal');
-          return FROM[v] ? v : 'modal';
+          return kindOf(this, FROM, 'modal');
         }
 
         changed(name: string): void {

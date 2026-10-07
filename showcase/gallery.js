@@ -76,7 +76,14 @@ function card(item) {
       const current = new RegExp(`\\b${c.key}="([^"]+)"`).exec(item.demo)?.[1];
       c.values.forEach((v) => sel.append(h('option', { value: v, text: v, selected: v === current })));
       sel.addEventListener('change', () => {
-        $$(item.tag, stage).forEach((el) => el.setAttribute(c.key, sel.value));
+        $$(item.tag || '[data-usa-variant]', stage).forEach((el) => {
+          if (sel.value === '' ) el.removeAttribute(c.key);
+          else el.setAttribute(c.key, sel.value);
+        });
+        // live parameters flow into the copyable code
+        item.live = { ...(item.live || {}), [c.key]: sel.value };
+        const box = $('.ccard-code', el);
+        if (box && !box.hidden) renderCode(item, box);
         replay(item, stage);
       });
       controls.append(sel);
@@ -201,7 +208,7 @@ function wire(item, stage) {
         const b = e.target.closest('[data-dialog]');
         if (!b) return;
         const dlg = $('#demo-dialog');
-        dlg.setAttribute('variant', b.dataset.dialog);
+        dlg.setAttribute('kind', b.dataset.dialog);
         dlg.show();
       });
       break;
