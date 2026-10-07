@@ -1,0 +1,8 @@
+/* <usa-draggable> */
+usa-draggable { display: inline-block; touch-action: none; user-select: none; -webkit-user-select: none; cursor: grab; will-change: transform; -webkit-tap-highlight-color: transparent; }
+usa-draggable[axis="x"] { touch-action: pan-y; }
+usa-draggable[axis="y"] { touch-action: pan-x; }
+usa-draggable[block] { display: block; }
+usa-draggable[data-dragging] { cursor: grabbing; }
+usa-draggable[disabled] { cursor: default; }
+usa-draggable:focus-visible { outline: 2px solid var(--usa-accent, #7c5cff); outline-offset: 3px; }

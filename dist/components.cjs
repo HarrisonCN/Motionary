@@ -6,7 +6,8 @@ var components_interaction = require('./components/interaction.cjs');
 var components_feedback = require('./components/feedback.cjs');
 var components_background = require('./components/background.cjs');
 var components_transitions = require('./components/transitions.cjs');
-var base = require('./chunks/base-BiTc85p_.cjs');
+var components_physics = require('./components/physics.cjs');
+var base = require('./chunks/base-CJ7XfidP.cjs');
 
 /**
  * use-scroll-animate/components
@@ -36,6 +37,7 @@ const COMPONENT_CATEGORIES = {
     feedback: ['usa-spinner', 'usa-skeleton', 'usa-progress', 'usa-toaster', 'usa-check'],
     background: ['usa-aurora', 'usa-particles', 'usa-grain', 'usa-marquee', 'usa-acrylic'],
     transitions: ['usa-dialog', 'usa-accordion', 'usa-flip-list', 'usa-view-switch'],
+    physics: ['usa-spring', 'usa-draggable', 'usa-overscroll'],
 };
 const BY_CATEGORY = {
     reveal: components_reveal.defineRevealComponents,
@@ -44,6 +46,7 @@ const BY_CATEGORY = {
     feedback: components_feedback.defineFeedbackComponents,
     background: components_background.defineBackgroundComponents,
     transitions: components_transitions.defineTransitionComponents,
+    physics: components_physics.definePhysicsComponents,
 };
 /**
  * Register every `<usa-*>` component (or only the given categories).
@@ -99,6 +102,24 @@ exports.defineTransitionComponents = components_transitions.defineTransitionComp
 exports.defineViewSwitch = components_transitions.defineViewSwitch;
 exports.flip = components_transitions.flip;
 exports.viewTransition = components_transitions.viewTransition;
+exports.SPRING_EFFECTS = components_physics.SPRING_EFFECTS;
+exports.SPRING_PRESETS = components_physics.SPRING_PRESETS;
+exports.createSpring = components_physics.createSpring;
+exports.defineDraggable = components_physics.defineDraggable;
+exports.defineOverscroll = components_physics.defineOverscroll;
+exports.definePhysicsComponents = components_physics.definePhysicsComponents;
+exports.defineSpring = components_physics.defineSpring;
+exports.linearEasing = components_physics.linearEasing;
+exports.projectInertia = components_physics.projectInertia;
+exports.resolveSpring = components_physics.resolveSpring;
+exports.rubberBand = components_physics.rubberBand;
+exports.snapTo = components_physics.snapTo;
+exports.spring = components_physics.spring;
+exports.springEasing = components_physics.springEasing;
+exports.springEffectKeyframes = components_physics.springEffectKeyframes;
+exports.springSamples = components_physics.springSamples;
+exports.stepSpring = components_physics.stepSpring;
+exports.supportsLinearEasing = components_physics.supportsLinearEasing;
 exports.configureComponents = base.configureComponents;
 exports.prefersReducedMotion = base.prefersReducedMotion;
 exports.COMPONENT_CATEGORIES = COMPONENT_CATEGORIES;

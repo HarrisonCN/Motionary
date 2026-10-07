@@ -1,0 +1,6 @@
+/* <usa-overscroll> */
+usa-overscroll { display: block; overflow: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+usa-overscroll[axis="x"] { overflow-y: hidden; }
+usa-overscroll > * { transform: translate3d(0, var(--usa-overscroll, 0px), 0); }
+usa-overscroll[axis="x"] > * { transform: translate3d(var(--usa-overscroll, 0px), 0, 0); }
+usa-overscroll[data-stretched] > * { will-change: transform; }

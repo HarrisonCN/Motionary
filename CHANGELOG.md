@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.0] - 2026-10-07
+
+### Added
+- **Spring & physics** — new category `use-scroll-animate/components/physics` (+ `components/physics.css`):
+  - **Spring core**: a damped-spring solver (`stiffness`, `damping`, `mass`, initial `velocity`) with presets `gentle`, `wobbly`, `stiff`, `bouncy` (plus `default`, `slow`, `molasses`). `springEasing()` converts a spring into a CSS `linear()` easing + duration for WAAPI/CSS (cubic-bezier fallback where `linear()` is unsupported); `spring(el, keyframes, preset)` animates with it; `createSpring()` is an interruptible, velocity-preserving spring value for gestures. Helpers `projectInertia()` (flick projection), `snapTo()` (grid / points) and `rubberBand()` (iOS-style resistance).
+  - `<usa-spring>`: `bounce-in`, `pop`, `drop` entrances with true spring timing, `jelly` and `rubber-band` attention effects; `trigger="view|hover|click|manual"`, `preset` or `stiffness`/`damping`/`mass`, `repeat`.
+  - `<usa-draggable>`: drag with mouse, touch, pen or arrow keys; `spring-back`, `inertia`, `snap` (grid or points), `bounds="parent"` with rubber-banding, `axis`; events `usa:drag-start` / `usa:drag-end` / `usa:settle`.
+  - `<usa-overscroll>`: elastic scroll container — pulling past an edge (touch, trackpad, wheel) stretches with rubber-band resistance and springs back.
+  - Reduced motion: entrances fade, attention effects and overscroll stretch are skipped, springs jump to their target.
+- Showcase: new **Spring & physics** category in the component gallery with live demos (effect / preset pickers, drag areas, elastic list, `spring()` playground).
+- `npm run sync:exports` regenerates the per-category `exports` from `scripts/categories.mjs` (single list used by Rollup, the CSS bundle and a sync test).
+
 ## [2.2.0] - 2026-10-07
 
 ### Added

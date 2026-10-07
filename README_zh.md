@@ -49,6 +49,7 @@ defineComponents(); // 或按分类：import { defineTextComponents } from 'use-
 | **加载与反馈**（`/components/feedback`） | `<usa-spinner>`（WinUI 进度环、Windows 圆点等 6 种）· `<usa-skeleton>` 骨架屏 · `<usa-progress>` 进度条 · `<usa-toaster>` + `toast()` 通知 · `<usa-check>` 结果图标 |
 | **背景与装饰**（`/components/background`） | `<usa-aurora>` 极光 · `<usa-particles>` 粒子 · `<usa-grain>` 胶片颗粒 · `<usa-marquee>` 无限跑马灯 · `<usa-acrylic>` 亚克力 / 云母材质 |
 | **过渡动画**（`/components/transitions`） | `<usa-dialog>` 弹窗 / 抽屉 / 底部面板 · `<usa-accordion>` 手风琴 · `<usa-flip-list>` FLIP 列表 · `<usa-view-switch>` 视图切换 · `viewTransition()` · `flip()` · `connectedAnimation()` |
+| **弹簧与物理**（`/components/physics`） | `<usa-spring>` 弹入 / 弹出 / 掉落 / 果冻 / 橡皮筋 · `<usa-draggable>` 拖拽回弹、惯性、吸附 · `<usa-overscroll>` 弹性越界 · `spring()` · `createSpring()` · 预设 gentle / wobbly / stiff / bouncy |
 
 完整包约 22 kB gzip（JS + CSS）；单个分类 3.5–6.4 kB；单个组件约 2 kB。下方的滚动动画核心不受影响。
 
