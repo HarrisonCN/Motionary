@@ -11,6 +11,7 @@ var components_cards = require('./components/cards.cjs');
 var components_click = require('./components/click.cjs');
 var components_ui = require('./components/ui.cjs');
 var components_page = require('./components/page.cjs');
+var variants = require('./chunks/variants-Bbatdq8d.cjs');
 var base = require('./chunks/base-BR6fYLBA.cjs');
 var spring = require('./chunks/spring-DyHe1Hfa.cjs');
 
@@ -37,10 +38,10 @@ var spring = require('./chunks/spring-DyHe1Hfa.cjs');
 /** The component categories and their default tags. */
 const COMPONENT_CATEGORIES = {
     reveal: ['usa-reveal', 'usa-stagger', 'usa-scroll-progress', 'usa-scrolly'],
-    text: ['usa-typewriter', 'usa-split-text', 'usa-scramble', 'usa-counter', 'usa-shimmer-text', 'usa-text-rotate'],
+    text: ['usa-typewriter', 'usa-split-text', 'usa-scramble', 'usa-counter', 'usa-shimmer-text', 'usa-text-rotate', 'usa-wave-text', 'usa-glitch', 'usa-gradient-text', 'usa-handwriting', 'usa-scroll-highlight'],
     interaction: ['usa-ripple', 'usa-magnetic', 'usa-tilt', 'usa-spotlight', 'usa-press', 'usa-toggle'],
     feedback: ['usa-spinner', 'usa-skeleton', 'usa-progress', 'usa-toaster', 'usa-check'],
-    background: ['usa-aurora', 'usa-particles', 'usa-grain', 'usa-marquee', 'usa-acrylic'],
+    background: ['usa-aurora', 'usa-particles', 'usa-grain', 'usa-marquee', 'usa-acrylic', 'usa-grid-glow', 'usa-blobs', 'usa-water-ripple', 'usa-dot-network'],
     transitions: ['usa-dialog', 'usa-accordion', 'usa-flip-list', 'usa-view-switch'],
     physics: ['usa-spring', 'usa-draggable', 'usa-overscroll'],
     cards: ['usa-card', 'usa-card-stack', 'usa-sticky-stack', 'usa-carousel-3d'],
@@ -67,7 +68,7 @@ const BY_CATEGORY = {
  */
 function defineComponents(categories) {
     if (base.canDefine())
-        components_ui.adoptVariants();
+        variants.adoptVariants();
     (categories || Object.keys(BY_CATEGORY)).forEach((c) => BY_CATEGORY[c]?.());
 }
 
@@ -80,12 +81,17 @@ exports.defineStagger = components_reveal.defineStagger;
 exports.readScrollProgress = components_reveal.readScrollProgress;
 exports.revealKeyframes = components_reveal.revealKeyframes;
 exports.defineCounter = components_text.defineCounter;
+exports.defineGlitch = components_text.defineGlitch;
+exports.defineGradientText = components_text.defineGradientText;
+exports.defineHandwriting = components_text.defineHandwriting;
 exports.defineScramble = components_text.defineScramble;
+exports.defineScrollHighlight = components_text.defineScrollHighlight;
 exports.defineShimmerText = components_text.defineShimmerText;
 exports.defineSplitText = components_text.defineSplitText;
 exports.defineTextComponents = components_text.defineTextComponents;
 exports.defineTextRotate = components_text.defineTextRotate;
 exports.defineTypewriter = components_text.defineTypewriter;
+exports.defineWaveText = components_text.defineWaveText;
 exports.easeOutExpo = components_text.easeOutExpo;
 exports.scrambleFrame = components_text.scrambleFrame;
 exports.defineInteractionComponents = components_interaction.defineInteractionComponents;
@@ -106,9 +112,14 @@ exports.toast = components_feedback.toast;
 exports.defineAcrylic = components_background.defineAcrylic;
 exports.defineAurora = components_background.defineAurora;
 exports.defineBackgroundComponents = components_background.defineBackgroundComponents;
+exports.defineBlobs = components_background.defineBlobs;
+exports.defineDotNetwork = components_background.defineDotNetwork;
 exports.defineGrain = components_background.defineGrain;
+exports.defineGridGlow = components_background.defineGridGlow;
 exports.defineMarquee = components_background.defineMarquee;
 exports.defineParticles = components_background.defineParticles;
+exports.defineWaterRipple = components_background.defineWaterRipple;
+exports.fluentPreset = components_background.fluentPreset;
 exports.connectedAnimation = components_transitions.connectedAnimation;
 exports.defineAccordion = components_transitions.defineAccordion;
 exports.defineDialog = components_transitions.defineDialog;
@@ -145,8 +156,6 @@ exports.defineLike = components_click.defineLike;
 exports.haptic = components_click.haptic;
 exports.morphPath = components_click.morphPath;
 exports.shake = components_click.shake;
-exports.VARIANTS = components_ui.VARIANTS;
-exports.adoptVariants = components_ui.adoptVariants;
 exports.defineAvatarStack = components_ui.defineAvatarStack;
 exports.defineBadge = components_ui.defineBadge;
 exports.defineBottomSheet = components_ui.defineBottomSheet;
@@ -160,7 +169,6 @@ exports.defineSlider = components_ui.defineSlider;
 exports.defineTabs = components_ui.defineTabs;
 exports.defineTooltip = components_ui.defineTooltip;
 exports.defineUiComponents = components_ui.defineUiComponents;
-exports.setVariant = components_ui.setVariant;
 exports.AMBIENT_EFFECTS = components_page.AMBIENT_EFFECTS;
 exports.CURSOR_MODES = components_page.CURSOR_MODES;
 exports.PAGE_EFFECTS = components_page.PAGE_EFFECTS;
@@ -182,6 +190,9 @@ exports.setMotionIntensity = components_page.setMotionIntensity;
 exports.smoothScroll = components_page.smoothScroll;
 exports.supportsViewTransitions = components_page.supportsViewTransitions;
 exports.themeTransition = components_page.themeTransition;
+exports.VARIANTS = variants.VARIANTS;
+exports.adoptVariants = variants.adoptVariants;
+exports.setVariant = variants.setVariant;
 exports.MOTION_SCALE = base.MOTION_SCALE;
 exports.configureComponents = base.configureComponents;
 exports.getMotionIntensity = base.getMotionIntensity;

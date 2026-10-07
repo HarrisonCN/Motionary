@@ -45,10 +45,10 @@ defineComponents(); // or per category: import { defineTextComponents } from 'us
 | Category (import) | Components |
 |---|---|
 | **Entrance & scroll** (`/components/reveal`) | `<usa-reveal>` (12 effects) · `<usa-stagger>` · `<usa-scroll-progress>` · `<usa-scrolly>` (sticky scrollytelling) |
-| **Text** (`/components/text`) | `<usa-typewriter>` · `<usa-split-text>` · `<usa-scramble>` · `<usa-counter>` · `<usa-shimmer-text>` · `<usa-text-rotate>` |
+| **Text** (`/components/text`) | `<usa-typewriter>` · `<usa-split-text>` · `<usa-scramble>` · `<usa-counter>` · `<usa-shimmer-text>` · `<usa-text-rotate>` · `<usa-wave-text>` · `<usa-glitch>` · `<usa-gradient-text>` · `<usa-handwriting>` · `<usa-scroll-highlight>` |
 | **Interaction** (`/components/interaction`) | `<usa-ripple>` · `<usa-magnetic>` · `<usa-tilt>` · `<usa-spotlight>` (Fluent reveal highlight) · `<usa-press>` · `<usa-toggle>` |
 | **Loading & feedback** (`/components/feedback`) | `<usa-spinner>` (WinUI ring, Windows dots, ring, dots, pulse, bars) · `<usa-skeleton>` · `<usa-progress>` · `<usa-toaster>` + `toast()` · `<usa-check>` |
-| **Background & decoration** (`/components/background`) | `<usa-aurora>` · `<usa-particles>` · `<usa-grain>` · `<usa-marquee>` · `<usa-acrylic>` (Acrylic / Mica) |
+| **Background & decoration** (`/components/background`) | `<usa-aurora>` · `<usa-particles>` · `<usa-grain>` · `<usa-marquee>` · `<usa-acrylic>` (Acrylic / Mica) · `<usa-grid-glow>` · `<usa-blobs>` · `<usa-water-ripple>` · `<usa-dot-network>` · `fluentPreset()` (Mica · Acrylic · Reveal) |
 | **Transitions** (`/components/transitions`) | `<usa-dialog>` (modal / drawer / sheet) · `<usa-accordion>` · `<usa-flip-list>` · `<usa-view-switch>` · `viewTransition()` · `flip()` · `connectedAnimation()` |
 | **Spring & physics** (`/components/physics`) | `<usa-spring>` (bounce-in · pop · drop · jelly · rubber-band) · `<usa-draggable>` (spring-back · inertia · snap) · `<usa-overscroll>` · `spring()` · `createSpring()` · `SPRING_PRESETS` |
 | **Card effects** (`/components/cards`) | `<usa-card>` (flip · holo · glass · border-glow · conic-border · lift · spotlight · sheen · parallax-layers · expand — combinable) · `<usa-card-stack>` (swipe) · `<usa-sticky-stack>` · `<usa-carousel-3d>` |

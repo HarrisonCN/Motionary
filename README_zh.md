@@ -44,10 +44,10 @@ defineComponents(); // 或按分类：import { defineTextComponents } from 'use-
 | 分类（导入路径） | 组件 |
 |---|---|
 | **入场与滚动**（`/components/reveal`） | `<usa-reveal>` 滚动揭示（12 种效果）· `<usa-stagger>` 错峰列表 · `<usa-scroll-progress>` 阅读进度条 · `<usa-scrolly>` 粘性滚动叙事 |
-| **文字**（`/components/text`） | `<usa-typewriter>` 打字机 · `<usa-split-text>` 逐字揭示 · `<usa-scramble>` 乱码解码 · `<usa-counter>` 数字滚动 · `<usa-shimmer-text>` 流光文字 · `<usa-text-rotate>` 轮换词语 |
+| **文字**（`/components/text`） | `<usa-typewriter>` 打字机 · `<usa-split-text>` 逐字揭示 · `<usa-scramble>` 乱码解码 · `<usa-counter>` 数字滚动 · `<usa-shimmer-text>` 流光文字 · `<usa-text-rotate>` 轮换词语 · `<usa-wave-text>` 波浪 · `<usa-glitch>` 故障 · `<usa-gradient-text>` 流动渐变 · `<usa-handwriting>` 手写 · `<usa-scroll-highlight>` 滚动高亮 |
 | **交互反馈**（`/components/interaction`） | `<usa-ripple>` 水波纹 · `<usa-magnetic>` 磁吸按钮 · `<usa-tilt>` 3D 倾斜卡片 · `<usa-spotlight>` Fluent 光照高亮 · `<usa-press>` 按压反馈 · `<usa-toggle>` 切换开关 |
 | **加载与反馈**（`/components/feedback`） | `<usa-spinner>`（WinUI 进度环、Windows 圆点等 6 种）· `<usa-skeleton>` 骨架屏 · `<usa-progress>` 进度条 · `<usa-toaster>` + `toast()` 通知 · `<usa-check>` 结果图标 |
-| **背景与装饰**（`/components/background`） | `<usa-aurora>` 极光 · `<usa-particles>` 粒子 · `<usa-grain>` 胶片颗粒 · `<usa-marquee>` 无限跑马灯 · `<usa-acrylic>` 亚克力 / 云母材质 |
+| **背景与装饰**（`/components/background`） | `<usa-aurora>` 极光 · `<usa-particles>` 粒子 · `<usa-grain>` 胶片颗粒 · `<usa-marquee>` 无限跑马灯 · `<usa-acrylic>` 亚克力 / 云母材质 · `<usa-grid-glow>` 网格光晕 · `<usa-blobs>` 流体色块 · `<usa-water-ripple>` 水波 · `<usa-dot-network>` 点阵 · `fluentPreset()` Fluent 预设 |
 | **过渡动画**（`/components/transitions`） | `<usa-dialog>` 弹窗 / 抽屉 / 底部面板 · `<usa-accordion>` 手风琴 · `<usa-flip-list>` FLIP 列表 · `<usa-view-switch>` 视图切换 · `viewTransition()` · `flip()` · `connectedAnimation()` |
 | **弹簧与物理**（`/components/physics`） | `<usa-spring>` 弹入 / 弹出 / 掉落 / 果冻 / 橡皮筋 · `<usa-draggable>` 拖拽回弹、惯性、吸附 · `<usa-overscroll>` 弹性越界 · `spring()` · `createSpring()` · 预设 gentle / wobbly / stiff / bouncy |
 | **卡片效果**（`/components/cards`） | `<usa-card>` 翻转 · 全息 · 玻璃 · 边框光晕 · 流光边框 · 悬浮 · 聚光 · 扫光 · 视差分层 · 展开详情（可组合）· `<usa-card-stack>` 滑动卡堆 · `<usa-sticky-stack>` 滚动堆叠 · `<usa-carousel-3d>` 3D 轮播 |

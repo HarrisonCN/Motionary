@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'">
+  <title>use-scroll-animate · WinUI sample</title>
+  <style>
+    html, body { margin: 0; background: transparent; color: var(--usa-text); }
+    main { padding: 48px 32px; display: grid; gap: 24px; max-width: 760px; }
+    .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+    button { font: inherit; padding: 8px 16px; border-radius: var(--usa-radius); border: var(--usa-border); background: var(--usa-surface); color: inherit; }
+    button.accent { background: var(--usa-accent); color: var(--usa-accent-text); border-color: transparent; }
+    .panel { padding: 20px; }
+  </style>
+  <script src="./components.umd.js"></script>
+</head>
+<body>
+  <usa-splash min="500" exit="scale"><usa-spinner variant="fluent" size="40" label="Starting"></usa-spinner></usa-splash>
+  <usa-loading-bar></usa-loading-bar>
+  <main>
+    <usa-split-text effect="rise"><h1>Hello from WinUI 3</h1></usa-split-text>
+    <div class="row">
+      <usa-button morph="submit" deform="squash"><button class="accent" id="save">Save</button></usa-button>
+      <usa-toggle checked>Animations</usa-toggle>
+      <usa-motion-switch></usa-motion-switch>
+    </div>
+    <div class="panel usa-acrylic">
+      <usa-tabs indicator="line">
+        <nav><button data-tab>General</button><button data-tab>Appearance</button><button data-tab>About</button></nav>
+        <section data-panel><usa-slider value="40" bubble label="Volume"></usa-slider></section>
+        <section data-panel><usa-checkbox checked>Use Mica</usa-checkbox></section>
+        <section data-panel><p>Built with use-scroll-animate &lt;usa-*&gt; Web Components.</p></section>
+      </usa-tabs>
+    </div>
+  </main>
+  <script>
+    UsaComponents.fluentPreset({ mica: false }); // the window already has native Mica
+    document.querySelector('usa-button').addEventListener('usa:submit', (e) => {
+      UsaComponents.loadingBar.start();
+      setTimeout(() => { UsaComponents.loadingBar.done(); e.detail.done(true); }, 900);
+    });
+  </script>
+</body>
+</html>

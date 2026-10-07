@@ -293,7 +293,7 @@ export const HELPERS = [
 ];
 
 for (const ext of EXTENSIONS) {
-  COMPONENT_CATEGORIES.push(ext.category);
+  if (ext.category) COMPONENT_CATEGORIES.push(ext.category);
   COMPONENTS.push(...ext.components);
   HELPERS.push(...(ext.helpers || []));
 }

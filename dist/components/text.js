@@ -1,7 +1,7 @@
-import { d as defineElement, s as srText, e as caf, n as now, r as raf, E as EASE_OUT, f as EASE_SPRING } from '../chunks/base-D6zLiNGH.js';
-export { a as configureComponents, p as prefersReducedMotion } from '../chunks/base-D6zLiNGH.js';
+import { d as defineElement, s as srText, e as caf, n as now, r as raf, E as EASE_OUT, f as EASE_SPRING, b as clamp } from '../chunks/base-C_w9ibbn.js';
+export { a as configureComponents, p as prefersReducedMotion } from '../chunks/base-C_w9ibbn.js';
 
-var css$4 = "usa-typewriter{white-space:pre-wrap}usa-typewriter .usa-tw-caret{display:inline-block;width:var(--usa-caret-width,0.08em);height:1.05em;margin-left:0.06em;vertical-align:-0.12em;background:var(--usa-caret-color,currentColor);animation:usa-caret 1.06s steps(1) infinite}usa-typewriter[data-typing] .usa-tw-caret{animation:none}usa-typewriter[data-no-cursor] .usa-tw-caret{display:none}@keyframes usa-caret{50%{opacity:0}}@media (prefers-reduced-motion:reduce){usa-typewriter .usa-tw-caret,usa-shimmer-text{animation:none}}";
+var css$5 = "usa-typewriter{white-space:pre-wrap}usa-typewriter .usa-tw-caret{display:inline-block;width:var(--usa-caret-width,0.08em);height:1.05em;margin-left:0.06em;vertical-align:-0.12em;background:var(--usa-caret-color,currentColor);animation:usa-caret 1.06s steps(1) infinite}usa-typewriter[data-typing] .usa-tw-caret{animation:none}usa-typewriter[data-no-cursor] .usa-tw-caret{display:none}@keyframes usa-caret{50%{opacity:0}}@media (prefers-reduced-motion:reduce){usa-typewriter .usa-tw-caret,usa-shimmer-text{animation:none}}";
 
 function defineTypewriter(tag = 'usa-typewriter') {
     return defineElement(tag, (Base) => class UsaTypewriter extends Base {
@@ -115,10 +115,10 @@ function defineTypewriter(tag = 'usa-typewriter') {
             };
             this._timer = setTimeout(tick, this.num('delay', 0));
         }
-    }, { id: 'typewriter', text: css$4 });
+    }, { id: 'typewriter', text: css$5 });
 }
 
-var css$3 = "usa-split-text .usa-split-word{display:inline-block;white-space:nowrap}usa-split-text .usa-split-unit{display:inline-block;white-space:pre}usa-split-text[data-state=\"hidden\"] .usa-split-unit{opacity:0}usa-split-text[data-state=\"play\"] .usa-split-unit{animation:usa-split-rise var(--usa-split-duration,620ms) cubic-bezier(0.22,1,0.36,1) both;animation-delay:calc(var(--usa-split-delay,0ms) + var(--i,0) * var(--usa-split-stagger,28ms))}usa-split-text[effect=\"fade\"][data-state=\"play\"] .usa-split-unit{animation-name:usa-split-fade}usa-split-text[effect=\"blur\"][data-state=\"play\"] .usa-split-unit{animation-name:usa-split-blur}usa-split-text[effect=\"flip\"][data-state=\"play\"] .usa-split-unit{animation-name:usa-split-flip;transform-origin:50% 100%}usa-split-text[effect=\"pop\"][data-state=\"play\"] .usa-split-unit{animation-name:usa-split-pop;animation-timing-function:cubic-bezier(0.34,1.56,0.64,1)}@keyframes usa-split-rise{from{opacity:0;transform:translate3d(0,0.6em,0)}to{opacity:1;transform:none}}@keyframes usa-split-fade{from{opacity:0}to{opacity:1}}@keyframes usa-split-blur{from{opacity:0;filter:blur(8px)}to{opacity:1;filter:none}}@keyframes usa-split-flip{from{opacity:0;transform:perspective(500px) rotateX(-80deg)}to{opacity:1;transform:none}}@keyframes usa-split-pop{from{opacity:0;transform:scale(0.3)}to{opacity:1;transform:none}}@media (prefers-reduced-motion:reduce){usa-split-text .usa-split-unit{animation:none !important;opacity:1 !important}}";
+var css$4 = "usa-split-text .usa-split-word{display:inline-block;white-space:nowrap}usa-split-text .usa-split-unit{display:inline-block;white-space:pre}usa-split-text[data-state=\"hidden\"] .usa-split-unit{opacity:0}usa-split-text[data-state=\"play\"] .usa-split-unit{animation:usa-split-rise var(--usa-split-duration,620ms) cubic-bezier(0.22,1,0.36,1) both;animation-delay:calc(var(--usa-split-delay,0ms) + var(--i,0) * var(--usa-split-stagger,28ms))}usa-split-text[effect=\"fade\"][data-state=\"play\"] .usa-split-unit{animation-name:usa-split-fade}usa-split-text[effect=\"blur\"][data-state=\"play\"] .usa-split-unit{animation-name:usa-split-blur}usa-split-text[effect=\"flip\"][data-state=\"play\"] .usa-split-unit{animation-name:usa-split-flip;transform-origin:50% 100%}usa-split-text[effect=\"pop\"][data-state=\"play\"] .usa-split-unit{animation-name:usa-split-pop;animation-timing-function:cubic-bezier(0.34,1.56,0.64,1)}@keyframes usa-split-rise{from{opacity:0;transform:translate3d(0,0.6em,0)}to{opacity:1;transform:none}}@keyframes usa-split-fade{from{opacity:0}to{opacity:1}}@keyframes usa-split-blur{from{opacity:0;filter:blur(8px)}to{opacity:1;filter:none}}@keyframes usa-split-flip{from{opacity:0;transform:perspective(500px) rotateX(-80deg)}to{opacity:1;transform:none}}@keyframes usa-split-pop{from{opacity:0;transform:scale(0.3)}to{opacity:1;transform:none}}@media (prefers-reduced-motion:reduce){usa-split-text .usa-split-unit{animation:none !important;opacity:1 !important}}";
 
 function defineSplitText(tag = 'usa-split-text') {
     return defineElement(tag, (Base) => class UsaSplitText extends Base {
@@ -203,7 +203,7 @@ function defineSplitText(tag = 'usa-split-text') {
             clearTimeout(this._timer);
             this.setAttribute('data-state', this.reduced ? 'shown' : 'hidden');
         }
-    }, { id: 'split-text', text: css$3 });
+    }, { id: 'split-text', text: css$4 });
 }
 
 const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%&*+=<>/\\?!';
@@ -297,7 +297,7 @@ function defineScramble(tag = 'usa-scramble') {
     }, undefined);
 }
 
-var css$2 = "usa-counter{font-variant-numeric:tabular-nums}";
+var css$3 = "usa-counter{font-variant-numeric:tabular-nums}";
 
 /** easeOutExpo */
 const easeOutExpo = (t) => (t >= 1 ? 1 : 1 - Math.pow(2, -10 * t));
@@ -397,10 +397,10 @@ function defineCounter(tag = 'usa-counter') {
                 this._frame = raf(step);
             });
         }
-    }, { id: 'counter', text: css$2 });
+    }, { id: 'counter', text: css$3 });
 }
 
-var css$1 = "usa-shimmer-text{--usa-shimmer-color:currentColor;--usa-shimmer-shine:#fff;background:linear-gradient(var(--usa-shimmer-angle,110deg),var(--usa-shimmer-color) 35%,var(--usa-shimmer-shine) 50%,var(--usa-shimmer-color) 65%) 0 0 / 250% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:usa-shimmer var(--usa-shimmer-duration,2600ms) linear infinite}@keyframes usa-shimmer{from{background-position:100% 0}to{background-position:-150% 0}}";
+var css$2 = "usa-shimmer-text{--usa-shimmer-color:currentColor;--usa-shimmer-shine:#fff;background:linear-gradient(var(--usa-shimmer-angle,110deg),var(--usa-shimmer-color) 35%,var(--usa-shimmer-shine) 50%,var(--usa-shimmer-color) 65%) 0 0 / 250% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:usa-shimmer var(--usa-shimmer-duration,2600ms) linear infinite}@keyframes usa-shimmer{from{background-position:100% 0}to{background-position:-150% 0}}";
 
 function defineShimmerText(tag = 'usa-shimmer-text') {
     return defineElement(tag, (Base) => class UsaShimmerText extends Base {
@@ -420,10 +420,10 @@ function defineShimmerText(tag = 'usa-shimmer-text') {
             set('shine', '--usa-shimmer-shine');
             set('angle', '--usa-shimmer-angle', 'deg');
         }
-    }, { id: 'shimmer-text', text: css$1 });
+    }, { id: 'shimmer-text', text: css$2 });
 }
 
-var css = "usa-text-rotate{display:inline-grid;vertical-align:bottom;overflow:hidden;padding-block:0.08em}usa-text-rotate .usa-rotate-word{grid-area:1 / 1;white-space:nowrap}usa-text-rotate .usa-rotate-word[data-hidden]{opacity:0}";
+var css$1 = "usa-text-rotate{display:inline-grid;vertical-align:bottom;overflow:hidden;padding-block:0.08em}usa-text-rotate .usa-rotate-word{grid-area:1 / 1;white-space:nowrap}usa-text-rotate .usa-rotate-word[data-hidden]{opacity:0}";
 
 function defineTextRotate(tag = 'usa-text-rotate') {
     return defineElement(tag, (Base) => class UsaTextRotate extends Base {
@@ -495,7 +495,166 @@ function defineTextRotate(tag = 'usa-text-rotate') {
             this.motion(cur, [inFrom, pick(inFrom)], { duration: 520, easing: effect === 'slide' ? EASE_SPRING : EASE_OUT });
             this.emit('change', { index: this._index, word: cur.textContent });
         }
-    }, { id: 'text-rotate', text: css });
+    }, { id: 'text-rotate', text: css$1 });
+}
+
+var css = "usa-wave-text .usa-word,usa-scroll-highlight .usa-word{display:inline-block;white-space:nowrap}usa-wave-text .usa-char{display:inline-block;animation:usa-wave var(--usa-wave-s,1.6s) ease-in-out infinite;animation-delay:calc(var(--i) * var(--usa-wave-d,0.06s))}@keyframes usa-wave{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(calc(var(--usa-wave-a,0.25em) * -1))}}usa-glitch{position:relative;display:inline-block}usa-glitch::before,usa-glitch::after{content:attr(data-text);position:absolute;inset:0;pointer-events:none}usa-glitch::before{color:#ff2bd6;transform:translate(calc(var(--usa-glitch-i,3px) * -1),0);clip-path:inset(0 0 55% 0);mix-blend-mode:screen;animation:usa-glitch-a 2.4s steps(2,end) infinite}usa-glitch::after{color:#00f0ff;transform:translate(var(--usa-glitch-i,3px),0);clip-path:inset(50% 0 0 0);mix-blend-mode:screen;animation:usa-glitch-b 1.9s steps(2,end) infinite}usa-glitch[trigger=\"hover\"]::before,usa-glitch[trigger=\"hover\"]::after{animation-play-state:paused;opacity:0}usa-glitch[trigger=\"hover\"]:hover::before,usa-glitch[trigger=\"hover\"]:hover::after{animation-play-state:running;opacity:1}@keyframes usa-glitch-a{0%{clip-path:inset(0 0 80% 0)}20%{clip-path:inset(30% 0 40% 0)}40%{clip-path:inset(70% 0 5% 0)}60%{clip-path:inset(10% 0 60% 0)}80%{clip-path:inset(50% 0 30% 0)}100%{clip-path:inset(0 0 80% 0)}}@keyframes usa-glitch-b{0%{clip-path:inset(60% 0 10% 0)}25%{clip-path:inset(15% 0 70% 0)}50%{clip-path:inset(80% 0 2% 0)}75%{clip-path:inset(40% 0 35% 0)}100%{clip-path:inset(60% 0 10% 0)}}usa-gradient-text{background:var(--usa-grad) 0 50% / 300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:usa-grad-flow var(--usa-grad-s,6s) linear infinite}@keyframes usa-grad-flow{to{background-position:150% 50%}}usa-handwriting{--usa-hw-stroke:currentColor;display:inline-block;line-height:0}usa-handwriting svg{max-width:100%;height:auto;overflow:visible}usa-handwriting text{fill:transparent;stroke:var(--usa-hw-stroke);stroke-width:1.2;stroke-dasharray:1600;stroke-dashoffset:1600;font-family:\"Segoe Script\",\"Brush Script MT\",\"Snell Roundhand\",cursive}usa-handwriting[data-state=\"drawing\"] text{animation:usa-hw-draw var(--usa-hw-d,2400ms) cubic-bezier(0.55,0,0.45,1) forwards,usa-hw-fill 0.6s ease calc(var(--usa-hw-d,2400ms) * 0.8) forwards}usa-handwriting[data-state=\"done\"] text{stroke-dashoffset:0;fill:currentColor}@keyframes usa-hw-draw{to{stroke-dashoffset:0}}@keyframes usa-hw-fill{to{fill:currentColor}}usa-scroll-highlight .usa-hl-word{opacity:var(--usa-hl-dim,0.2);transition:opacity 0.35s ease}usa-scroll-highlight .usa-hl-word[data-on]{opacity:1}usa-scroll-highlight[mode=\"marker\"]{--usa-hl-color:color-mix(in srgb,#facc15 55%,transparent);background:linear-gradient(var(--usa-hl-color),var(--usa-hl-color)) 0 88% / 0% 40% no-repeat;transition:background-size 1s cubic-bezier(0.65,0,0.35,1);-webkit-box-decoration-break:clone;box-decoration-break:clone}usa-scroll-highlight[mode=\"marker\"][data-lit]{background-size:100% 40%}@media (prefers-reduced-motion:reduce){usa-wave-text .usa-char,usa-glitch::before,usa-glitch::after,usa-gradient-text{animation:none !important}usa-glitch::before,usa-glitch::after{display:none}usa-scroll-highlight .usa-hl-word,usa-scroll-highlight[mode=\"marker\"]{transition:none}}";
+
+/** Split `text` into per-character spans (words never break). The animated copy is aria-hidden. */
+function splitChars(host, text) {
+    const vis = document.createElement('span');
+    vis.setAttribute('aria-hidden', 'true');
+    const chars = [];
+    text.split(/(\s+)/).forEach((w) => {
+        if (/^\s+$/.test(w)) {
+            vis.append(document.createTextNode(w));
+            return;
+        }
+        const word = document.createElement('span');
+        word.className = 'usa-word';
+        for (const c of Array.from(w)) {
+            const s = document.createElement('span');
+            s.className = 'usa-char';
+            s.textContent = c;
+            s.style.setProperty('--i', String(chars.length));
+            word.append(s);
+            chars.push(s);
+        }
+        vis.append(word);
+    });
+    host.replaceChildren(srText(text), vis);
+    return chars;
+}
+const textOf = (el) => (el.getAttribute('text') ?? el.dataset.usaText ?? (el.dataset.usaText = (el.textContent || '').trim()));
+function defineWaveText(tag = 'usa-wave-text') {
+    return defineElement(tag, (Base) => class extends Base {
+        static get observedAttributes() { return ['text']; }
+        mount() {
+            splitChars(this, textOf(this));
+            this.style.setProperty('--usa-wave-a', `${this.num('amplitude', 0.25)}em`);
+            this.style.setProperty('--usa-wave-s', `${this.num('speed', 1.6)}s`);
+            this.style.setProperty('--usa-wave-d', `${this.num('stagger', 0.06)}s`);
+        }
+    }, { id: 'text-fx', text: css });
+}
+function defineGlitch(tag = 'usa-glitch') {
+    return defineElement(tag, (Base) => class extends Base {
+        static get observedAttributes() { return ['text', 'intensity']; }
+        mount() {
+            const t = textOf(this);
+            this.setAttribute('data-text', t);
+            this.style.setProperty('--usa-glitch-i', `${this.num('intensity', 3)}px`);
+            if (!this.firstChild)
+                this.textContent = t;
+        }
+    }, { id: 'text-fx', text: css });
+}
+function defineGradientText(tag = 'usa-gradient-text') {
+    return defineElement(tag, (Base) => class extends Base {
+        static get observedAttributes() { return ['colors', 'speed', 'angle']; }
+        mount() {
+            const c = this.str('colors', '#7c5cff,#22d3ee,#f472b6,#facc15').split(',').map((s) => s.trim());
+            this.style.setProperty('--usa-grad', `linear-gradient(${this.num('angle', 90)}deg, ${[...c, c[0]].join(', ')})`);
+            this.style.setProperty('--usa-grad-s', `${this.num('speed', 6)}s`);
+        }
+    }, { id: 'text-fx', text: css });
+}
+function defineHandwriting(tag = 'usa-handwriting') {
+    return defineElement(tag, (Base) => class extends Base {
+        static get observedAttributes() { return ['text', 'size', 'font']; }
+        mount() {
+            const t = textOf(this);
+            const size = this.num('size', 64);
+            const w = Math.ceil(t.length * size * 0.62) + 8;
+            this.replaceChildren(srText(t));
+            this.insertAdjacentHTML('beforeend', `<svg aria-hidden="true" viewBox="0 0 ${w} ${Math.ceil(size * 1.3)}" width="${w}" height="${Math.ceil(size * 1.3)}"><text x="4" y="${Math.round(size)}" font-size="${size}"></text></svg>`);
+            const text = this.querySelector('text');
+            text.textContent = t;
+            if (this.str('font'))
+                text.setAttribute('font-family', this.str('font'));
+            if (this.str('stroke'))
+                this.style.setProperty('--usa-hw-stroke', this.str('stroke'));
+            this.style.setProperty('--usa-hw-d', `${this.num('duration', 2400)}ms`);
+            if (this.reduced) {
+                this.setAttribute('data-state', 'done');
+                return;
+            }
+            this.inView((v) => v && this.play(), { threshold: 0.3 });
+        }
+        play() {
+            this.removeAttribute('data-state');
+            void this.offsetWidth;
+            this.setAttribute('data-state', 'drawing');
+            setTimeout(() => {
+                this.setAttribute('data-state', 'done');
+                this.emit('complete');
+            }, this.reduced ? 0 : this.num('duration', 2400));
+        }
+    }, { id: 'text-fx', text: css });
+}
+function defineScrollHighlight(tag = 'usa-scroll-highlight') {
+    return defineElement(tag, (Base) => class extends Base {
+        constructor() {
+            super(...arguments);
+            this._f = 0;
+            this._p = 0;
+        }
+        static get observedAttributes() { return ['mode', 'text']; }
+        get progress() { return this._p; }
+        mount() {
+            const mode = this.str('mode', 'words');
+            if (this.str('color'))
+                this.style.setProperty('--usa-hl-color', this.str('color'));
+            this.style.setProperty('--usa-hl-dim', String(this.num('dim', 0.2)));
+            if (mode === 'marker') {
+                if (this.reduced)
+                    this.setAttribute('data-lit', '');
+                else
+                    this.inView((v) => v && this.setAttribute('data-lit', ''), { threshold: 0.6 });
+                return;
+            }
+            const t = textOf(this);
+            const vis = document.createElement('span');
+            vis.setAttribute('aria-hidden', 'true');
+            const words = t.split(/\s+/).filter(Boolean).map((w) => {
+                const s = document.createElement('span');
+                s.className = 'usa-hl-word';
+                s.textContent = w;
+                vis.append(s, ' ');
+                return s;
+            });
+            this.replaceChildren(srText(t), vis);
+            if (this.reduced) {
+                words.forEach((w) => w.setAttribute('data-on', ''));
+                return;
+            }
+            const update = () => {
+                this._f = 0;
+                const r = this.getBoundingClientRect();
+                const H = window.innerHeight || 800;
+                this._p = clamp((H * 0.85 - r.top) / (r.height + H * 0.35), 0, 1);
+                const lit = Math.round(this._p * words.length);
+                words.forEach((w, i) => w.toggleAttribute('data-on', i < lit));
+            };
+            const on = () => !this._f && (this._f = raf(update));
+            let active = false;
+            this.inView((v) => {
+                if (v === active)
+                    return;
+                active = v;
+                if (v)
+                    window.addEventListener('scroll', on, { passive: true });
+                else
+                    window.removeEventListener('scroll', on);
+                on();
+            });
+            this.onCleanup(() => window.removeEventListener('scroll', on));
+        }
+        unmount() {
+            caf(this._f);
+            this._f = 0;
+        }
+    }, { id: 'text-fx', text: css });
 }
 
 /**
@@ -511,7 +670,12 @@ function defineTextComponents() {
     defineCounter();
     defineShimmerText();
     defineTextRotate();
+    defineWaveText();
+    defineGlitch();
+    defineGradientText();
+    defineHandwriting();
+    defineScrollHighlight();
 }
 
-export { defineCounter, defineScramble, defineShimmerText, defineSplitText, defineTextComponents, defineTextRotate, defineTypewriter, easeOutExpo, scrambleFrame };
+export { defineCounter, defineGlitch, defineGradientText, defineHandwriting, defineScramble, defineScrollHighlight, defineShimmerText, defineSplitText, defineTextComponents, defineTextRotate, defineTypewriter, defineWaveText, easeOutExpo, scrambleFrame };
 //# sourceMappingURL=text.js.map

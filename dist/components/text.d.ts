@@ -150,6 +150,53 @@ interface UsaTextRotateElement extends UsaElement {
 declare function defineTextRotate(tag?: string): CustomElementConstructor | undefined;
 
 /**
+ * `<usa-wave-text>` — letters bob in a travelling wave.
+ * Attributes: `amplitude` (em, 0.25), `speed` (s per cycle, 1.6), `stagger`
+ * (s between letters, 0.06). Reduced motion: still text.
+ */
+interface UsaWaveTextElement extends UsaElement {
+}
+declare function defineWaveText(tag?: string): CustomElementConstructor | undefined;
+/**
+ * `<usa-glitch>` — an RGB-split glitch on its text (`trigger="always"`
+ * default, or `hover`). Attributes: `intensity` (px, 3), `trigger`.
+ * Reduced motion: no animation (plain text).
+ */
+interface UsaGlitchElement extends UsaElement {
+}
+declare function defineGlitch(tag?: string): CustomElementConstructor | undefined;
+/**
+ * `<usa-gradient-text>` — text filled with a flowing multi-colour gradient.
+ * Attributes: `colors` (comma list), `speed` (s, 6), `angle` (deg, 90).
+ * Reduced motion: a static gradient.
+ */
+interface UsaGradientTextElement extends UsaElement {
+}
+declare function defineGradientText(tag?: string): CustomElementConstructor | undefined;
+/**
+ * `<usa-handwriting>` — the text draws itself stroke by stroke (SVG text
+ * outline), then fills in, when it scrolls into view.
+ * Attributes: `text`, `duration` (ms, 2400), `stroke` (colour), `size` (px,
+ * 64), `font` (family; a script font looks best). Events: `usa:complete`.
+ * Reduced motion: the filled text appears at once.
+ */
+interface UsaHandwritingElement extends UsaElement {
+    play(): void;
+}
+declare function defineHandwriting(tag?: string): CustomElementConstructor | undefined;
+/**
+ * `<usa-scroll-highlight>` — reading highlight: words light up one by one
+ * as the paragraph scrolls through the viewport (`mode="words"`, default),
+ * or a highlighter marker sweeps behind the text on enter (`mode="marker"`).
+ * Attributes: `mode`, `color` (marker), `dim` (opacity of unread words,
+ * 0.2). Reduced motion: fully highlighted text.
+ */
+interface UsaScrollHighlightElement extends UsaElement {
+    readonly progress: number;
+}
+declare function defineScrollHighlight(tag?: string): CustomElementConstructor | undefined;
+
+/**
  * use-scroll-animate/components/text — text effects.
  * `<usa-typewriter>`, `<usa-split-text>`, `<usa-scramble>`, `<usa-counter>`,
  * `<usa-shimmer-text>`, `<usa-text-rotate>`.
@@ -159,6 +206,11 @@ declare function defineTextRotate(tag?: string): CustomElementConstructor | unde
 declare function defineTextComponents(): void;
 declare global {
     interface HTMLElementTagNameMap {
+        'usa-wave-text': UsaWaveTextElement;
+        'usa-glitch': UsaGlitchElement;
+        'usa-gradient-text': UsaGradientTextElement;
+        'usa-handwriting': UsaHandwritingElement;
+        'usa-scroll-highlight': UsaScrollHighlightElement;
         'usa-typewriter': UsaTypewriterElement;
         'usa-split-text': UsaSplitTextElement;
         'usa-scramble': UsaScrambleElement;
@@ -168,5 +220,5 @@ declare global {
     }
 }
 
-export { configureComponents, defineCounter, defineScramble, defineShimmerText, defineSplitText, defineTextComponents, defineTextRotate, defineTypewriter, easeOutExpo, prefersReducedMotion, scrambleFrame };
-export type { ComponentsConfig, UsaCounterElement, UsaElement, UsaScrambleElement, UsaShimmerTextElement, UsaSplitTextElement, UsaTextRotateElement, UsaTypewriterElement };
+export { configureComponents, defineCounter, defineGlitch, defineGradientText, defineHandwriting, defineScramble, defineScrollHighlight, defineShimmerText, defineSplitText, defineTextComponents, defineTextRotate, defineTypewriter, defineWaveText, easeOutExpo, prefersReducedMotion, scrambleFrame };
+export type { ComponentsConfig, UsaCounterElement, UsaElement, UsaGlitchElement, UsaGradientTextElement, UsaHandwritingElement, UsaScrambleElement, UsaScrollHighlightElement, UsaShimmerTextElement, UsaSplitTextElement, UsaTextRotateElement, UsaTypewriterElement, UsaWaveTextElement };

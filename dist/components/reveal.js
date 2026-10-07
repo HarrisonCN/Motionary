@@ -1,5 +1,5 @@
-import { d as defineElement, E as EASE_OUT, b as clamp, e as caf, r as raf } from '../chunks/base-D6zLiNGH.js';
-export { a as configureComponents, p as prefersReducedMotion } from '../chunks/base-D6zLiNGH.js';
+import { d as defineElement, E as EASE_OUT, b as clamp, e as caf, r as raf } from '../chunks/base-C_w9ibbn.js';
+export { a as configureComponents, p as prefersReducedMotion } from '../chunks/base-C_w9ibbn.js';
 
 /** Entrance effects shared by `<usa-reveal>` and `<usa-stagger>` (transform / opacity / filter only). */
 const REVEAL_EFFECTS = [

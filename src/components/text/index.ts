@@ -10,10 +10,14 @@ import { defineCounter, type UsaCounterElement } from './counter';
 import { defineShimmerText, type UsaShimmerTextElement } from './shimmer-text';
 import { defineTextRotate, type UsaTextRotateElement } from './text-rotate';
 
+import { defineWaveText, defineGlitch, defineGradientText, defineHandwriting, defineScrollHighlight } from './text-fx';
+import type { UsaWaveTextElement, UsaGlitchElement, UsaGradientTextElement, UsaHandwritingElement, UsaScrollHighlightElement } from './text-fx';
 export { defineTypewriter, defineSplitText, defineScramble, defineCounter, defineShimmerText, defineTextRotate };
 export { scrambleFrame } from './scramble';
 export { easeOutExpo } from './counter';
 export type { UsaTypewriterElement, UsaSplitTextElement, UsaScrambleElement, UsaCounterElement, UsaShimmerTextElement, UsaTextRotateElement };
+export { defineWaveText, defineGlitch, defineGradientText, defineHandwriting, defineScrollHighlight };
+export type { UsaWaveTextElement, UsaGlitchElement, UsaGradientTextElement, UsaHandwritingElement, UsaScrollHighlightElement };
 export { configureComponents, prefersReducedMotion } from '../base';
 export type { ComponentsConfig, UsaElement } from '../base';
 
@@ -25,10 +29,20 @@ export function defineTextComponents(): void {
   defineCounter();
   defineShimmerText();
   defineTextRotate();
+  defineWaveText();
+  defineGlitch();
+  defineGradientText();
+  defineHandwriting();
+  defineScrollHighlight();
 }
 
 declare global {
   interface HTMLElementTagNameMap {
+    'usa-wave-text': UsaWaveTextElement;
+    'usa-glitch': UsaGlitchElement;
+    'usa-gradient-text': UsaGradientTextElement;
+    'usa-handwriting': UsaHandwritingElement;
+    'usa-scroll-highlight': UsaScrollHighlightElement;
     'usa-typewriter': UsaTypewriterElement;
     'usa-split-text': UsaSplitTextElement;
     'usa-scramble': UsaScrambleElement;

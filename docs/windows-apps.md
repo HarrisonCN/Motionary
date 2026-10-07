@@ -106,3 +106,14 @@ Link the bundle (or import it in your module graph) and install the site from Ed
 - Register only what you use (`define<Category>Components()` or single `define*()` calls) to keep start-up light.
 - Background effects (`<usa-aurora>`, `<usa-particles>`, `<usa-marquee>`) stop animating when off-screen and when the window is hidden/minimised (`document.hidden`).
 - All motion runs on the compositor (`transform` / `opacity`), so it stays smooth on integrated GPUs and in battery-saver mode; call `configureComponents({ reducedMotion: 'reduce' })` to force the calm variants (e.g. for a "Reduce animations" toggle in your app settings).
+
+## WinUI 3 sample app + Fluent preset (v2.8)
+
+[`examples/webview2-winui/`](../examples/webview2-winui/) is a complete WinUI 3 app (Windows App SDK, native **Mica** backdrop, full-window WebView2 with `SetVirtualHostNameToFolderMapping`) whose UI is a plain `index.html` using `components.umd.js`.
+
+```js
+import { fluentPreset } from 'use-scroll-animate/components/background';
+const off = fluentPreset({ reveal: true, mica: true }); // Fluent variant + Mica-style bg + Acrylic + Reveal highlight
+```
+
+`fluentPreset()` sets `variant="fluent"` page-wide (Segoe UI Variable, Windows 11 accent `#0067c0` / `#4cc2ff` dark, 8 px radii), tints the body like Mica (skip with `mica: false` when the host window already uses `MicaBackdrop`), turns `.usa-acrylic` / `[data-acrylic]` into Acrylic surfaces and adds Reveal highlight to buttons and `[data-fluent-reveal]` items. Reduced motion / reduced transparency / high contrast fall back to solid materials without Reveal tracking.

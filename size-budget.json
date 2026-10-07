@@ -67,17 +67,17 @@
   {
     "name": "dist/components.umd.js (minified, all components + CSS)",
     "file": "dist/components.umd.js",
-    "limit": 61184
+    "limit": 65792
   },
   {
     "name": "dist/components.css",
     "file": "dist/components.css",
-    "limit": 14592
+    "limit": 16128
   },
   {
     "name": "import 'use-scroll-animate/components' (everything)",
     "import": "export * from 'pkg/components';",
-    "limit": 60928
+    "limit": 65536
   },
   {
     "name": "import 'use-scroll-animate/components/reveal'",
@@ -87,7 +87,7 @@
   {
     "name": "import 'use-scroll-animate/components/text'",
     "import": "export * from 'pkg/components/text';",
-    "limit": 5632
+    "limit": 7936
   },
   {
     "name": "import 'use-scroll-animate/components/interaction'",
@@ -102,7 +102,7 @@
   {
     "name": "import 'use-scroll-animate/components/background'",
     "import": "export * from 'pkg/components/background';",
-    "limit": 6144
+    "limit": 9472
   },
   {
     "name": "import 'use-scroll-animate/components/transitions'",
