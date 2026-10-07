@@ -179,3 +179,6 @@ usa-toggle { --usa-toggle-on: var(--accent); }
 .g-sticky { padding: 48px 20px; max-width: 760px; margin: 0 auto; }
 .g-sticky-card { padding: 36px 28px; min-height: 220px; border-radius: 24px; color: #fff; background: linear-gradient(135deg, #7c5cff, #22d3ee); box-shadow: 0 20px 50px -24px rgb(0 0 0 / 0.6); }
 .g-sticky-card:nth-child(2) { background: linear-gradient(135deg, #f472b6, #c084fc); } .g-sticky-card:nth-child(3) { background: linear-gradient(135deg, #fb923c, #f43f5e); }
+.demo-icons usa-icon-morph { padding: 8px; border-radius: 12px; background: color-mix(in srgb, currentColor 8%, transparent); }
+.demo-photo { width: min(100%, 240px); border-radius: 18px; overflow: hidden; }
+.demo-btn[data-shape="circle"], .demo-btn[data-shape="icon"] { min-width: 0; width: 46px; height: 46px; }

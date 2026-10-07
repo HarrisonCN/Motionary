@@ -67,17 +67,17 @@
   {
     "name": "dist/components.umd.js (minified, all components + CSS)",
     "file": "dist/components.umd.js",
-    "limit": 34560
+    "limit": 43264
   },
   {
     "name": "dist/components.css",
     "file": "dist/components.css",
-    "limit": 7936
+    "limit": 9216
   },
   {
     "name": "import 'use-scroll-animate/components' (everything)",
     "import": "export * from 'pkg/components';",
-    "limit": 34560
+    "limit": 43008
   },
   {
     "name": "import 'use-scroll-animate/components/reveal'",
@@ -158,5 +158,15 @@
     "name": "import { defineCard } from '…/components/cards'",
     "import": "export { defineCard } from 'pkg/components/cards';",
     "limit": 5632
+  },
+  {
+    "name": "import 'use-scroll-animate/components/click'",
+    "import": "export * from 'pkg/components/click';",
+    "limit": 12288
+  },
+  {
+    "name": "import { defineButton } from '…/components/click'",
+    "import": "export { defineButton } from 'pkg/components/click';",
+    "limit": 5888
   }
 ]

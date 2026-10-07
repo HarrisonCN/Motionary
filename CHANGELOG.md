@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.5.0] - 2026-10-07
+
+### Added
+- **Click & tap** — new category `use-scroll-animate/components/click` (+ `components/click.css`):
+  - **Button click deformation (按钮点击形变)** — `<usa-button>` around a native `<button>` / `<a>` (or acting as a button itself), spring-driven:
+    - `deform="squash"` (squash on press, stretch-and-settle on release), `"wobble"` (elastic border-radius wobble), `"gooey"` (liquid droplets squeeze out from the press point and merge back, SVG goo filter), `"dent"` (the surface dents toward the pressed point: 3D tilt + inner shade). Combinable: `deform="squash wobble"`.
+    - **Shape morph** `shape="pill | circle | icon"` / `morphTo(shape)`: the outline springs between pill, circle and icon-only, label (`[data-label]`) and icon (`[data-icon]`) cross-fade.
+    - **Submit morph** `morph="submit"`: click → `loading` (shrinks to a spinner, `aria-busy`, live "Loading…" status) → `success` (drawn check) or `error` (shake + cross) → back to `idle` after `reset` ms. Drive with `state` or `event.detail.done(ok)` from `usa:submit`.
+  - `<usa-icon-morph>`: point-interpolated, spring-driven icon morphs — `play ↔ pause`, `menu ↔ close`, `plus ↔ minus`, `check`, `arrow-right` (any pair); `toggle` + `labels` make it an accessible button. `MORPH_ICONS`, `morphPath()`.
+  - `<usa-click effect="…">` (combinable): enhanced `ripple`, `burst` particles (`shape`: circle, square, star, heart, emoji), `confetti`, `squish`, `press-spring`, `shake` (also on `invalid` form fields).
+  - `<usa-like>` (heart pop + burst, `aria-pressed`, count), `<usa-hold>` (hold-to-confirm progress ring; pointer, Space, Enter), `<usa-double-tap>` (heart at the tap point; `L` key), `<usa-checkbox>` (form-associated, spring box, self-drawing check, `indeterminate`).
+  - Functions: `burst(x, y, opts)`, `confetti(opts)`, `shake(el)`, `haptic(pattern)` (`navigator.vibrate` where supported); `haptic` attribute on the elements.
+  - Reduced motion: no deformation, particles or shaking (an outline flash instead); shape, icon and state changes are instant; statuses are still announced.
+- Showcase: **Click & tap** category with button-deformation, shape-morph, submit, icon-morph, like, hold, double-tap, checkbox and confetti demos.
+
 ## [2.4.0] - 2026-10-07
 
 ### Added

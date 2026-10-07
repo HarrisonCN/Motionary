@@ -1,0 +1,7 @@
+/* <usa-like> */
+usa-like { --usa-like-color: #f43f5e; display: inline-flex; align-items: center; gap: 0.35em; cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent; vertical-align: middle; }
+usa-like .usa-like-heart { fill: transparent; stroke: currentColor; stroke-width: 1.8; transition: fill 0.2s ease, stroke 0.2s ease; overflow: visible; }
+usa-like[liked] .usa-like-heart { fill: var(--usa-like-color); stroke: var(--usa-like-color); }
+usa-like .usa-like-count { font-variant-numeric: tabular-nums; }
+usa-like[disabled] { opacity: 0.5; cursor: not-allowed; }
+usa-like:focus-visible { outline: 2px solid var(--usa-like-color); outline-offset: 3px; border-radius: 8px; }
