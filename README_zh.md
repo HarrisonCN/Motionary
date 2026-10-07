@@ -55,6 +55,7 @@ defineComponents(); // 或按分类：import { defineTextComponents } from 'use-
 | **UI 组件与风格变体**（`/components/ui`） | `<usa-tabs>` 标签页 · `<usa-drawer>` 抽屉 · `<usa-bottom-sheet>` 底部面板 · `<usa-pull-refresh>` 下拉刷新 · `<usa-fab>` 悬浮按钮 · `<usa-navbar>` 自动隐藏导航栏 · `<usa-slider>` 滑块 · `<usa-rating>` 评分 · `<usa-tooltip>` · `<usa-popover>` · `<usa-badge>` · `<usa-avatar-stack>` · 所有组件均支持 `variant`（极简 / 霓虹 / 玻璃 / 粗野 / Fluent / Material） |
 | **页面与全局效果**（`/components/page`） | `pageTransition()` 页面切换（淡入 · 滑动 · 圆形揭示 · 百叶窗 · 像素溶解，单页 + 多页）· `themeTransition()` 主题圆形切换 · `<usa-cursor>` 自定义光标 · `smoothScroll()` · `<usa-fullpage>` 整屏 · `<usa-loading-bar>` · `<usa-back-to-top>` · `<usa-ambient>` 雪花 / 星空 / 噪点 · `<usa-splash>` 启动屏 · `<usa-auto-skeleton>` 自动骨架屏 · `<usa-motion-switch>` 动效强度 |
 | **时间线与编排** (`/components/timeline`) | `timeline()`（串联 · 重叠 · 标签 · 跳转 · 倒放 · 滚动擦洗）· `<usa-timeline>`（`data-tl` 步骤） |
+| **手势** (`/components/gesture`) | `gesture()`（拖动 · 轻扫 · 捏合 · 长按 · 单击 · 双击 → 弹簧）· `<usa-swipeable>` · `<usa-pinch-zoom>` |
 
 完整包约 22 kB gzip（JS + CSS）；单个分类 3.5–6.4 kB；单个组件约 2 kB。下方的滚动动画核心不受影响。
 

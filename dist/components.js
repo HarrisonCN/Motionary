@@ -22,11 +22,13 @@ import { definePageComponents } from './components/page.js';
 export { AMBIENT_EFFECTS, CURSOR_MODES, PAGE_EFFECTS, defineAmbient, defineAutoSkeleton, defineBackToTop, defineCursor, defineFullpage, defineLoadingBar, defineMotionSwitch, defineSplash, enableMpaTransitions, loadingBar, pageTransition, restoreMotionIntensity, scrollToTarget, setMotionIntensity, smoothScroll, supportsViewTransitions, themeTransition } from './components/page.js';
 import { defineTimelineComponents } from './components/timeline.js';
 export { TIMELINE_PRESETS, defineTimeline, resolvePosition, timeline } from './components/timeline.js';
+import { defineGestureComponents } from './components/gesture.js';
+export { definePinchZoom, defineSwipeable, gesture, pinchScale, swipeDirection } from './components/gesture.js';
 import { a as adoptVariants } from './chunks/variants-BQ3gCb5L.js';
 export { V as VARIANTS, s as setVariant } from './chunks/variants-BQ3gCb5L.js';
 import { c as canDefine } from './chunks/base-Cu-86Z31.js';
 export { M as MOTION_SCALE, a as configureComponents, g as getMotionIntensity, p as prefersReducedMotion } from './chunks/base-Cu-86Z31.js';
-export { C as COMPONENT_CATEGORIES } from './chunks/index-tags-D7NynL4r.js';
+export { C as COMPONENT_CATEGORIES } from './chunks/index-tags-DZ-gjMZc.js';
 export { S as SPRING_PRESETS, c as createSpring, l as linearEasing, p as projectInertia, r as resolveSpring, a as rubberBand, s as snapTo, b as spring, d as springEasing, e as springSamples, f as stepSpring, g as supportsLinearEasing } from './chunks/spring-BV-cpTHC.js';
 
 /**
@@ -62,6 +64,7 @@ const BY_CATEGORY = {
     ui: defineUiComponents,
     page: definePageComponents,
     timeline: defineTimelineComponents,
+    gesture: defineGestureComponents,
 };
 /**
  * Register every `<usa-*>` component (or only the given categories).
@@ -73,5 +76,5 @@ function defineComponents(categories) {
     (categories || Object.keys(BY_CATEGORY)).forEach((c) => BY_CATEGORY[c]?.());
 }
 
-export { adoptVariants, defineBackgroundComponents, defineCardComponents, defineClickComponents, defineComponents, defineFeedbackComponents, defineInteractionComponents, definePageComponents, definePhysicsComponents, defineRevealComponents, defineTextComponents, defineTimelineComponents, defineTransitionComponents, defineUiComponents };
+export { adoptVariants, defineBackgroundComponents, defineCardComponents, defineClickComponents, defineComponents, defineFeedbackComponents, defineGestureComponents, defineInteractionComponents, definePageComponents, definePhysicsComponents, defineRevealComponents, defineTextComponents, defineTimelineComponents, defineTransitionComponents, defineUiComponents };
 //# sourceMappingURL=components.js.map
