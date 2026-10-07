@@ -1,8 +1,8 @@
 'use strict';
 
 var solidJs = require('solid-js');
-var core = require('./chunks/core-CH41ekIo.cjs');
-var stagger = require('./chunks/stagger-XD-0-FQz.cjs');
+var core = require('./chunks/core-B_J4rXbC.cjs');
+var stagger = require('./chunks/stagger-DHw0ExuR.cjs');
 
 /**
  * use-scroll-animate - Solid integration

@@ -1,5 +1,5 @@
-import { c as createScrollAnimate } from './chunks/core-FUEi4ncH.js';
-import { s as staggerChildren } from './chunks/stagger-DabrnrcE.js';
+import { c as createScrollAnimate } from './chunks/core-BP-a1iNc.js';
+import { s as staggerChildren } from './chunks/stagger-DTv_WiUQ.js';
 
 /**
  * use-scroll-animate - Vue 3 Integration

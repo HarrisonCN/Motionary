@@ -1,7 +1,7 @@
 'use strict';
 
-var core = require('./chunks/core-CH41ekIo.cjs');
-var stagger = require('./chunks/stagger-XD-0-FQz.cjs');
+var core = require('./chunks/core-B_J4rXbC.cjs');
+var stagger = require('./chunks/stagger-DHw0ExuR.cjs');
 
 /**
  * use-scroll-animate - React Integration
