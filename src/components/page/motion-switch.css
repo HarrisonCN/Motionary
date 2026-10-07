@@ -1,0 +1,7 @@
+/* <usa-motion-switch> */
+usa-motion-switch { --usa-motion-i: 2; position: relative; display: inline-grid; grid-auto-flow: column; grid-auto-columns: 1fr; padding: 3px; border-radius: 999px; background: color-mix(in srgb, currentColor 9%, transparent); isolation: isolate; }
+usa-motion-switch button { position: relative; z-index: 1; padding: 6px 12px; border: 0; background: none; color: inherit; font: inherit; font-size: 0.85em; border-radius: 999px; cursor: pointer; }
+usa-motion-switch button[aria-checked="true"] { color: var(--usa-accent-text, #fff); }
+usa-motion-switch button:focus-visible { outline: 2px solid var(--usa-accent, #7c5cff); outline-offset: 1px; }
+usa-motion-switch .usa-motion-thumb { position: absolute; z-index: 0; top: 3px; bottom: 3px; left: 3px; width: calc((100% - 6px) / 4); border-radius: 999px; background: var(--usa-accent, #7c5cff); transform: translateX(calc(var(--usa-motion-i) * 100%)); transition: transform 0.4s cubic-bezier(0.34, 1.4, 0.64, 1); }
+@media (prefers-reduced-motion: reduce) { usa-motion-switch .usa-motion-thumb { transition: none; } }

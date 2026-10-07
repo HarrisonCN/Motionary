@@ -20,9 +20,20 @@ interface ComponentsConfig {
      * `'no-preference'` ignores the OS setting (only for demos — respect your users).
      */
     reducedMotion?: 'user' | 'reduce' | 'no-preference';
+    /**
+     * Global motion intensity (v2.7): `'off'` (same as reduced motion),
+     * `'low'` (shorter, calmer), `'normal'` (default) or `'high'`. Scales every
+     * component animation's duration and sets `--usa-motion` (0 / 0.6 / 1 /
+     * 1.25) on `<html>` for your own CSS. See `setMotionIntensity()`.
+     */
+    motionIntensity?: MotionIntensity;
 }
+type MotionIntensity = 'off' | 'low' | 'normal' | 'high';
+declare const MOTION_SCALE: Record<MotionIntensity, number>;
 /** Change global component settings (call before `define*()` for `injectStyles`). */
 declare function configureComponents(options: ComponentsConfig): void;
+/** The current global motion intensity. */
+declare function getMotionIntensity(): MotionIntensity;
 /** `true` when animations should be reduced (OS setting or `configureComponents`). */
 declare function prefersReducedMotion(): boolean;
 /**
@@ -1424,6 +1435,231 @@ declare global {
     }
 }
 
+declare const CURSOR_MODES: readonly ["dot", "trail", "magnetic", "glow"];
+type CursorMode = (typeof CURSOR_MODES)[number];
+/**
+ * `<usa-cursor mode="dot | trail | magnetic | glow">` — a custom cursor for
+ * the page (place it once, e.g. at the end of `<body>`).
+ * - `dot` — a ring that follows with spring lag around the real pointer;
+ * - `trail` — a comet tail of dots;
+ * - `magnetic` — the ring snaps onto and wraps hovered targets (`a`,
+ *   `button`, `[data-cursor]`);
+ * - `glow` — a large soft light following the pointer (great on dark UIs).
+ * Attributes: `mode`, `color`, `size` (px, 28), `hide-native` (hide the
+ * system cursor), `targets` (selector, magnetic). Only for fine pointers
+ * (mouse / pen); never on touch. Reduced motion: not rendered.
+ */
+interface UsaCursorElement extends UsaElement {
+    readonly active: boolean;
+}
+declare function defineCursor(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-fullpage>` — full-screen sections (its element children) that snap
+ * one at a time (CSS scroll snap), with keyboard paging (PageUp/PageDown,
+ * arrows, Home/End), optional dot navigation and the current section in
+ * `aria-current` + `usa:section`.
+ * Attributes: `dots` (show the dot nav), `axis` (`y` default, `x`).
+ * Methods: `go(i)`, `next()`, `prev()`. Reduced motion: snapping stays,
+ * jumps are instant.
+ */
+interface UsaFullpageElement extends UsaElement {
+    readonly index: number;
+    go(i: number): void;
+    next(): void;
+    prev(): void;
+}
+declare function defineFullpage(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-loading-bar>` — a slim top loading bar for route changes and fetches
+ * (NProgress-style): `start()` trickles towards 90 %, `done()` completes and
+ * fades out, `set(0–1)` for real progress. `loadingBar` drives the first bar
+ * on the page (created on demand). `role="progressbar"`, `aria-busy`.
+ * Attributes: `color`, `height` (px, 3), `position` (`top` default, `bottom`).
+ * Reduced motion: no trickle animation — the bar shows / hides.
+ */
+interface UsaLoadingBarElement extends UsaElement {
+    readonly progress: number;
+    start(): void;
+    set(p: number): void;
+    done(): void;
+}
+declare function defineLoadingBar(tag?: string): CustomElementConstructor | undefined;
+/** Drive the page's `<usa-loading-bar>` (created on first use). */
+declare const loadingBar: {
+    start: () => void;
+    set: (p: number) => void;
+    done: () => void;
+    /** Run `task` with the bar shown; resolves with its result. */
+    track<T>(task: Promise<T> | (() => Promise<T>)): Promise<T>;
+};
+
+/**
+ * `<usa-back-to-top>` — a floating button that appears after `offset` px
+ * (300) of scrolling, shows page progress as a ring and springs the page
+ * back to the top (then focuses `focus-target`, default `#main` / `body`).
+ * Attributes: `offset`, `label` ("Back to top"), `focus-target`, `position`
+ * (`bottom-right` default, `bottom-left`). Reduced motion: instant jump.
+ */
+interface UsaBackToTopElement extends UsaElement {
+    readonly visible: boolean;
+}
+declare function defineBackToTop(tag?: string): CustomElementConstructor | undefined;
+
+declare const AMBIENT_EFFECTS: readonly ["particles", "snow", "stars", "noise", "gradient"];
+type AmbientEffect = (typeof AMBIENT_EFFECTS)[number];
+/**
+ * `<usa-ambient effect="particles | snow | stars | noise | gradient">` — a
+ * fixed, page-wide ambient layer behind (or, with `layer="front"`, over)
+ * the content, never catching the pointer.
+ * - `particles` — slow drifting dots; `snow` — falling flakes with sway;
+ *   `stars` — twinkling starfield (canvas, paused in hidden tabs, DPR ≤ 2);
+ * - `noise` — animated film grain (CSS, SVG turbulence);
+ * - `gradient` — a gradient whose hue shifts with the scroll position.
+ * Attributes: `effect`, `density` (0.2–3, 1), `color`, `opacity` (0.6),
+ * `layer` (`back` default, `front`), `speed` (1). Reduced motion: one
+ * static frame (no falling, twinkling or grain flicker).
+ */
+interface UsaAmbientElement extends UsaElement {
+}
+declare function defineAmbient(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-splash>` — an app splash / launch screen: shows its content (logo,
+ * spinner) over the page, then leaves with `exit` (`fade` default, `scale`,
+ * `slide-up`, `circle`) once the page has loaded (or when you call
+ * `done()`), but never sooner than `min` ms (600) — no flash.
+ * Attributes: `min`, `exit`, `manual` (wait for `done()`), `label`.
+ * Events: `usa:done`. The page underneath is `aria-busy` until then.
+ * Reduced motion: fades.
+ */
+interface UsaSplashElement extends UsaElement {
+    done(): Promise<void>;
+}
+declare function defineSplash(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-auto-skeleton loading>` — automatic skeletons: while `loading` is
+ * set, every text block, image, button and input inside is drawn as a
+ * shimmering placeholder of its own size — no separate skeleton markup.
+ * Remove `loading` (or set `.loading = false`) and the content fades in.
+ * `aria-busy` while loading. Opt elements out with `data-no-skeleton`.
+ * Reduced motion: static placeholders, no shimmer or fade.
+ */
+interface UsaAutoSkeletonElement extends UsaElement {
+    loading: boolean;
+}
+declare function defineAutoSkeleton(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * Set the global motion intensity for every `<usa-*>` component:
+ * `'off'` (like reduced motion), `'low'`, `'normal'` (default), `'high'`.
+ * Sets `--usa-motion` and `data-usa-motion` on `<html>`; with `persist`
+ * the choice is remembered (localStorage) and restored by `restoreMotionIntensity()`.
+ */
+declare function setMotionIntensity(level: MotionIntensity, persist?: boolean): void;
+/** Re-apply a persisted intensity (call early on page load). Returns it. */
+declare function restoreMotionIntensity(): MotionIntensity;
+/**
+ * `<usa-motion-switch>` — a segmented control letting users choose the
+ * app's motion intensity (Off · Low · Normal · High), persisted.
+ * `role="radiogroup"`; arrow keys move. Attributes: `labels` (comma list),
+ * `label` ("Motion"). Events: `usa:change` (`{ level }`).
+ */
+interface UsaMotionSwitchElement extends UsaElement {
+    value: MotionIntensity;
+}
+declare function defineMotionSwitch(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * Page & app-wide transitions (v2.7), built on the View Transitions API
+ * (Chromium: Chrome, Edge, Electron, WebView2) with graceful fallbacks.
+ *
+ * - `pageTransition(update, { effect })` — SPA route changes: `fade`,
+ *   `slide` (`slide-left` / `slide-right` / `slide-up`), `circle` (reveal
+ *   from `x`, `y`), `blinds`, `pixel` (stepped dissolve), `zoom`.
+ * - `enableMpaTransitions(effect)` — the same effects for multi-page sites
+ *   (`@view-transition { navigation: auto }`); call it on every page.
+ * - `themeTransition(apply, { x, y })` — a circle-reveal theme switch.
+ *
+ * Without View Transitions (Firefox, older Safari) or under reduced motion
+ * the update runs immediately (`fade` falls back to a short cross-fade of
+ * `fallback` when given).
+ */
+declare const PAGE_EFFECTS: readonly ["fade", "slide", "slide-left", "slide-right", "slide-up", "circle", "blinds", "pixel", "zoom"];
+type PageEffect = (typeof PAGE_EFFECTS)[number];
+interface PageTransitionOptions {
+    effect?: PageEffect;
+    /** Circle origin in client px (default: viewport centre / last pointer). */
+    x?: number;
+    y?: number;
+    /** Duration in ms (default 600). */
+    duration?: number;
+    /** Element to cross-fade when View Transitions are unavailable. */
+    fallback?: Element | null;
+}
+/** `true` when `document.startViewTransition` exists. */
+declare const supportsViewTransitions: () => boolean;
+/** Run `update` (sync or async) as an animated page transition. Resolves when it is done. */
+declare function pageTransition(update: () => unknown, options?: PageTransitionOptions): Promise<void>;
+/** Opt a multi-page site into cross-document view transitions with `effect`. */
+declare function enableMpaTransitions(effect?: PageEffect, duration?: number): void;
+/**
+ * Switch theme with a circle reveal from (`x`, `y`) (default: last pointer).
+ * `apply` flips your theme (e.g. toggles a class / `data-theme`).
+ */
+declare function themeTransition(apply: () => unknown, options?: Omit<PageTransitionOptions, 'effect'>): Promise<void>;
+
+/**
+ * `smoothScroll()` — inertial wheel smoothing for the page (or a scroll
+ * container): wheel deltas are eased with a lerp each frame. Touch and
+ * keyboard scrolling stay native. Returns a function that turns it off.
+ * No-op under reduced motion, on touch-only devices and on the server.
+ */
+interface SmoothScrollOptions {
+    /** Scroll container (default: the page). */
+    target?: HTMLElement | null;
+    /** 0–1, lower = smoother / longer glide (default 0.12). */
+    lerp?: number;
+    /** Wheel multiplier (default 1). */
+    wheelMultiplier?: number;
+}
+declare function smoothScroll(options?: SmoothScrollOptions): () => void;
+/**
+ * Scroll to a y position, element or selector with spring timing (or
+ * instantly under reduced motion). Resolves when done.
+ */
+declare function scrollToTarget(to: number | Element | string, options?: {
+    offset?: number;
+    target?: HTMLElement | null;
+    preset?: string;
+}): Promise<void>;
+
+/**
+ * use-scroll-animate/components/page — page & app-wide effects (v2.7).
+ * Page transitions (`pageTransition()`, `enableMpaTransitions()`,
+ * `themeTransition()`), `<usa-cursor>`, `smoothScroll()` / `scrollToTarget()`,
+ * `<usa-fullpage>`, `<usa-loading-bar>` + `loadingBar`, `<usa-back-to-top>`,
+ * `<usa-ambient>`, `<usa-splash>`, `<usa-auto-skeleton>` and the global motion
+ * intensity (`setMotionIntensity()`, `<usa-motion-switch>`).
+ */
+
+/** Register every component of this category under its default tag. */
+declare function definePageComponents(): void;
+declare global {
+    interface HTMLElementTagNameMap {
+        'usa-cursor': UsaCursorElement;
+        'usa-fullpage': UsaFullpageElement;
+        'usa-loading-bar': UsaLoadingBarElement;
+        'usa-back-to-top': UsaBackToTopElement;
+        'usa-ambient': UsaAmbientElement;
+        'usa-splash': UsaSplashElement;
+        'usa-auto-skeleton': UsaAutoSkeletonElement;
+        'usa-motion-switch': UsaMotionSwitchElement;
+    }
+}
+
 /** The component categories and their default tags. */
 declare const COMPONENT_CATEGORIES: {
     readonly reveal: readonly ["usa-reveal", "usa-stagger", "usa-scroll-progress", "usa-scrolly"];
@@ -1436,6 +1672,7 @@ declare const COMPONENT_CATEGORIES: {
     readonly cards: readonly ["usa-card", "usa-card-stack", "usa-sticky-stack", "usa-carousel-3d"];
     readonly click: readonly ["usa-click", "usa-button", "usa-icon-morph", "usa-like", "usa-hold", "usa-double-tap", "usa-checkbox"];
     readonly ui: readonly ["usa-tabs", "usa-drawer", "usa-bottom-sheet", "usa-pull-refresh", "usa-fab", "usa-navbar", "usa-slider", "usa-rating", "usa-tooltip", "usa-popover", "usa-badge", "usa-avatar-stack"];
+    readonly page: readonly ["usa-cursor", "usa-fullpage", "usa-loading-bar", "usa-back-to-top", "usa-ambient", "usa-splash", "usa-auto-skeleton", "usa-motion-switch"];
 };
 type ComponentCategory = keyof typeof COMPONENT_CATEGORIES;
 /**
@@ -1444,5 +1681,5 @@ type ComponentCategory = keyof typeof COMPONENT_CATEGORIES;
  */
 declare function defineComponents(categories?: ComponentCategory[]): void;
 
-export { BUTTON_DEFORMS, CARD_EFFECTS, CLICK_EFFECTS, COMPONENT_CATEGORIES, MORPH_ICONS, REVEAL_EFFECTS, SPINNER_VARIANTS, SPRING_EFFECTS, SPRING_PRESETS, VARIANTS, adoptVariants, burst, confetti, configureComponents, connectedAnimation, createSpring, defineAccordion, defineAcrylic, defineAurora, defineAvatarStack, defineBackgroundComponents, defineBadge, defineBottomSheet, defineButton, defineCard, defineCardComponents, defineCardStack, defineCarousel3d, defineCheck, defineCheckbox, defineClick, defineClickComponents, defineComponents, defineCounter, defineDialog, defineDoubleTap, defineDraggable, defineDrawer, defineFab, defineFeedbackComponents, defineFlipList, defineGrain, defineHold, defineIconMorph, defineInteractionComponents, defineLike, defineMagnetic, defineMarquee, defineNavbar, defineOverscroll, defineParticles, definePhysicsComponents, definePopover, definePress, defineProgress, definePullRefresh, defineRating, defineReveal, defineRevealComponents, defineRipple, defineScramble, defineScrollProgress, defineScrolly, defineShimmerText, defineSkeleton, defineSlider, defineSpinner, defineSplitText, defineSpotlight, defineSpring, defineStagger, defineStickyStack, defineTabs, defineTextComponents, defineTextRotate, defineTilt, defineToaster, defineToggle, defineTooltip, defineTransitionComponents, defineTypewriter, defineUiComponents, defineViewSwitch, easeOutExpo, flip, haptic, linearEasing, morphPath, prefersReducedMotion, projectInertia, readScrollProgress, resolveSpring, revealKeyframes, rubberBand, scrambleFrame, setVariant, shake, snapTo, spring, springEasing, springEffectKeyframes, springSamples, stepSpring, supportsLinearEasing, toast, viewTransition };
-export type { BurstOptions, ButtonDeform, ButtonShape, ButtonState, CardEffect, ClickEffect, ComponentCategory, ComponentsConfig, ConfettiOptions, ConnectedOptions, DialogVariant, FlipOptions, Placement, RevealEffect, SpinnerVariant, SpringConfig, SpringEffect, SpringInput, SpringPreset, SpringValue, SpringValueOptions, ToastHandle, ToastOptions, ToastType, UsaAccordionElement, UsaAcrylicElement, UsaAuroraElement, UsaAvatarStackElement, UsaBadgeElement, UsaBottomSheetElement, UsaButtonElement, UsaCardElement, UsaCardStackElement, UsaCarousel3dElement, UsaCheckElement, UsaCheckboxElement, UsaClickElement, UsaCounterElement, UsaDialogElement, UsaDoubleTapElement, UsaDraggableElement, UsaDrawerElement, UsaElement, UsaFabElement, UsaFlipListElement, UsaGrainElement, UsaHoldElement, UsaIconMorphElement, UsaLikeElement, UsaMagneticElement, UsaMarqueeElement, UsaNavbarElement, UsaOverscrollElement, UsaParticlesElement, UsaPopoverElement, UsaPressElement, UsaProgressElement, UsaPullRefreshElement, UsaRatingElement, UsaRevealElement, UsaRippleElement, UsaScrambleElement, UsaScrollProgressElement, UsaScrollyElement, UsaShimmerTextElement, UsaSkeletonElement, UsaSliderElement, UsaSpinnerElement, UsaSplitTextElement, UsaSpotlightElement, UsaSpringElement, UsaStaggerElement, UsaStickyStackElement, UsaTabsElement, UsaTextRotateElement, UsaTiltElement, UsaToasterElement, UsaToggleElement, UsaTooltipElement, UsaTypewriterElement, UsaViewSwitchElement, Variant, ViewTransitionOptions };
+export { AMBIENT_EFFECTS, BUTTON_DEFORMS, CARD_EFFECTS, CLICK_EFFECTS, COMPONENT_CATEGORIES, CURSOR_MODES, MORPH_ICONS, MOTION_SCALE, PAGE_EFFECTS, REVEAL_EFFECTS, SPINNER_VARIANTS, SPRING_EFFECTS, SPRING_PRESETS, VARIANTS, adoptVariants, burst, confetti, configureComponents, connectedAnimation, createSpring, defineAccordion, defineAcrylic, defineAmbient, defineAurora, defineAutoSkeleton, defineAvatarStack, defineBackToTop, defineBackgroundComponents, defineBadge, defineBottomSheet, defineButton, defineCard, defineCardComponents, defineCardStack, defineCarousel3d, defineCheck, defineCheckbox, defineClick, defineClickComponents, defineComponents, defineCounter, defineCursor, defineDialog, defineDoubleTap, defineDraggable, defineDrawer, defineFab, defineFeedbackComponents, defineFlipList, defineFullpage, defineGrain, defineHold, defineIconMorph, defineInteractionComponents, defineLike, defineLoadingBar, defineMagnetic, defineMarquee, defineMotionSwitch, defineNavbar, defineOverscroll, definePageComponents, defineParticles, definePhysicsComponents, definePopover, definePress, defineProgress, definePullRefresh, defineRating, defineReveal, defineRevealComponents, defineRipple, defineScramble, defineScrollProgress, defineScrolly, defineShimmerText, defineSkeleton, defineSlider, defineSpinner, defineSplash, defineSplitText, defineSpotlight, defineSpring, defineStagger, defineStickyStack, defineTabs, defineTextComponents, defineTextRotate, defineTilt, defineToaster, defineToggle, defineTooltip, defineTransitionComponents, defineTypewriter, defineUiComponents, defineViewSwitch, easeOutExpo, enableMpaTransitions, flip, getMotionIntensity, haptic, linearEasing, loadingBar, morphPath, pageTransition, prefersReducedMotion, projectInertia, readScrollProgress, resolveSpring, restoreMotionIntensity, revealKeyframes, rubberBand, scrambleFrame, scrollToTarget, setMotionIntensity, setVariant, shake, smoothScroll, snapTo, spring, springEasing, springEffectKeyframes, springSamples, stepSpring, supportsLinearEasing, supportsViewTransitions, themeTransition, toast, viewTransition };
+export type { AmbientEffect, BurstOptions, ButtonDeform, ButtonShape, ButtonState, CardEffect, ClickEffect, ComponentCategory, ComponentsConfig, ConfettiOptions, ConnectedOptions, CursorMode, DialogVariant, FlipOptions, MotionIntensity, PageEffect, PageTransitionOptions, Placement, RevealEffect, SmoothScrollOptions, SpinnerVariant, SpringConfig, SpringEffect, SpringInput, SpringPreset, SpringValue, SpringValueOptions, ToastHandle, ToastOptions, ToastType, UsaAccordionElement, UsaAcrylicElement, UsaAmbientElement, UsaAuroraElement, UsaAutoSkeletonElement, UsaAvatarStackElement, UsaBackToTopElement, UsaBadgeElement, UsaBottomSheetElement, UsaButtonElement, UsaCardElement, UsaCardStackElement, UsaCarousel3dElement, UsaCheckElement, UsaCheckboxElement, UsaClickElement, UsaCounterElement, UsaCursorElement, UsaDialogElement, UsaDoubleTapElement, UsaDraggableElement, UsaDrawerElement, UsaElement, UsaFabElement, UsaFlipListElement, UsaFullpageElement, UsaGrainElement, UsaHoldElement, UsaIconMorphElement, UsaLikeElement, UsaLoadingBarElement, UsaMagneticElement, UsaMarqueeElement, UsaMotionSwitchElement, UsaNavbarElement, UsaOverscrollElement, UsaParticlesElement, UsaPopoverElement, UsaPressElement, UsaProgressElement, UsaPullRefreshElement, UsaRatingElement, UsaRevealElement, UsaRippleElement, UsaScrambleElement, UsaScrollProgressElement, UsaScrollyElement, UsaShimmerTextElement, UsaSkeletonElement, UsaSliderElement, UsaSpinnerElement, UsaSplashElement, UsaSplitTextElement, UsaSpotlightElement, UsaSpringElement, UsaStaggerElement, UsaStickyStackElement, UsaTabsElement, UsaTextRotateElement, UsaTiltElement, UsaToasterElement, UsaToggleElement, UsaTooltipElement, UsaTypewriterElement, UsaViewSwitchElement, Variant, ViewTransitionOptions };

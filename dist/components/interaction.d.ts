@@ -20,7 +20,15 @@ interface ComponentsConfig {
      * `'no-preference'` ignores the OS setting (only for demos — respect your users).
      */
     reducedMotion?: 'user' | 'reduce' | 'no-preference';
+    /**
+     * Global motion intensity (v2.7): `'off'` (same as reduced motion),
+     * `'low'` (shorter, calmer), `'normal'` (default) or `'high'`. Scales every
+     * component animation's duration and sets `--usa-motion` (0 / 0.6 / 1 /
+     * 1.25) on `<html>` for your own CSS. See `setMotionIntensity()`.
+     */
+    motionIntensity?: MotionIntensity;
 }
+type MotionIntensity = 'off' | 'low' | 'normal' | 'high';
 /** Change global component settings (call before `define*()` for `injectStyles`). */
 declare function configureComponents(options: ComponentsConfig): void;
 /** `true` when animations should be reduced (OS setting or `configureComponents`). */

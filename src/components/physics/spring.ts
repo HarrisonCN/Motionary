@@ -1,4 +1,4 @@
-import { prefersReducedMotion, raf, caf, now, applyFrame, EASE_SPRING } from '../base';
+import { prefersReducedMotion, motionScale, raf, caf, now, applyFrame, EASE_SPRING } from '../base';
 
 /**
  * Spring physics core (v2.3). A damped harmonic oscillator integrated in
@@ -132,7 +132,7 @@ export function spring(el: Element, keyframes: Keyframe[], input?: SpringInput, 
     return null;
   }
   const { easing, duration } = springEasing(input);
-  return target.animate(keyframes, { duration, easing, fill: 'both', ...options });
+  return target.animate(keyframes, { duration: duration * motionScale(), easing, fill: 'both', ...options });
 }
 
 /* ------------------------------------------------------------------ */

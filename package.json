@@ -1,6 +1,6 @@
 {
   "name": "use-scroll-animate",
-  "version": "2.6.0",
+  "version": "2.7.0",
   "description": "A lightweight, high-performance, dependency-free scroll animation library and animated UI components (Web Components) for the web and Windows web-view apps.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -178,6 +178,16 @@
         "default": "./dist/components/ui.cjs"
       }
     },
+    "./components/page": {
+      "import": {
+        "types": "./dist/components/page.d.ts",
+        "default": "./dist/components/page.js"
+      },
+      "require": {
+        "types": "./dist/components/page.d.cts",
+        "default": "./dist/components/page.cjs"
+      }
+    },
     "./components.css": "./dist/components.css",
     "./components/reveal.css": "./dist/components/reveal.css",
     "./components/text.css": "./dist/components/text.css",
@@ -189,6 +199,7 @@
     "./components/cards.css": "./dist/components/cards.css",
     "./components/click.css": "./dist/components/click.css",
     "./components/ui.css": "./dist/components/ui.css",
+    "./components/page.css": "./dist/components/page.css",
     "./package.json": "./package.json"
   },
   "files": [
@@ -209,7 +220,7 @@
     "typecheck": "tsc --noEmit -p .",
     "test": "vitest run",
     "check:exports": "node scripts/check-exports.mjs",
-    "lint:package": "publint && attw --pack . --profile node16 --exclude-entrypoints ./components.css ./components/reveal.css ./components/text.css ./components/interaction.css ./components/feedback.css ./components/background.css ./components/transitions.css ./components/physics.css ./components/cards.css ./components/click.css ./components/ui.css",
+    "lint:package": "publint && attw --pack . --profile node16 --exclude-entrypoints ./components.css ./components/reveal.css ./components/text.css ./components/interaction.css ./components/feedback.css ./components/background.css ./components/transitions.css ./components/physics.css ./components/cards.css ./components/click.css ./components/ui.css ./components/page.css",
     "size": "node scripts/size.mjs",
     "prepublishOnly": "npm run typecheck && npm test && npm run build && npm run check:exports",
     "size:check": "node scripts/size.mjs --check",

@@ -6,14 +6,29 @@
  * imported during SSR (Next, Nuxt, Astro…) and in Electron/Tauri preload
  * scripts. Classes are created the first time a `define*()` function runs.
  */
-const config = { injectStyles: true, reducedMotion: 'user' };
+const MOTION_SCALE = { off: 0, low: 0.6, normal: 1, high: 1.25 };
+const config = { injectStyles: true, reducedMotion: 'user', motionIntensity: 'normal' };
 /** Change global component settings (call before `define*()` for `injectStyles`). */
 function configureComponents(options) {
     Object.assign(config, options);
+    if (options.motionIntensity && typeof document !== 'undefined') {
+        document.documentElement.style.setProperty('--usa-motion', String(MOTION_SCALE[options.motionIntensity] ?? 1));
+        document.documentElement.setAttribute('data-usa-motion', options.motionIntensity);
+    }
+}
+/** The current global motion intensity. */
+function getMotionIntensity() {
+    return config.motionIntensity;
+}
+/** Duration multiplier for the current intensity (1 when `normal`). */
+function motionScale() {
+    return MOTION_SCALE[config.motionIntensity] ?? 1;
 }
 const canDefine = () => typeof customElements !== 'undefined' && typeof HTMLElement !== 'undefined';
 /** `true` when animations should be reduced (OS setting or `configureComponents`). */
 function prefersReducedMotion() {
+    if (config.motionIntensity === 'off')
+        return true;
     if (config.reducedMotion !== 'user')
         return config.reducedMotion === 'reduce';
     return typeof matchMedia === 'function' && !!matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -154,6 +169,9 @@ function getBase() {
                 applyFrame(el, keyframes[keyframes.length - 1]);
                 return null;
             }
+            const k = motionScale();
+            if (k !== 1 && k > 0 && typeof options.duration === 'number')
+                options = { ...options, duration: options.duration * k, delay: (options.delay || 0) * k };
             return el.animate(keyframes, options);
         }
         emit(type, detail) {
@@ -215,5 +233,5 @@ const EASE_SPRING = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
 const FLUENT_DECELERATE = 'cubic-bezier(0.1, 0.9, 0.2, 1)';
 const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
 
-export { EASE_OUT as E, FLUENT_DECELERATE as F, configureComponents as a, clamp as b, canDefine as c, defineElement as d, caf as e, EASE_SPRING as f, shadowStyles as g, adoptStyles as h, applyFrame as i, now as n, prefersReducedMotion as p, raf as r, srText as s };
-//# sourceMappingURL=base-08OYzphB.js.map
+export { EASE_OUT as E, FLUENT_DECELERATE as F, MOTION_SCALE as M, configureComponents as a, clamp as b, canDefine as c, defineElement as d, caf as e, EASE_SPRING as f, getMotionIntensity as g, shadowStyles as h, adoptStyles as i, applyFrame as j, motionScale as m, now as n, prefersReducedMotion as p, raf as r, srText as s };
+//# sourceMappingURL=base-D6zLiNGH.js.map

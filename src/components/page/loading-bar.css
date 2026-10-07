@@ -1,0 +1,6 @@
+/* <usa-loading-bar> */
+usa-loading-bar { --usa-loading: 0; --usa-loading-h: 3px; --usa-loading-color: var(--usa-accent, #7c5cff); position: fixed; left: 0; right: 0; top: 0; height: var(--usa-loading-h); z-index: 2147483500; pointer-events: none; opacity: 0; transition: opacity 0.3s ease; }
+usa-loading-bar[position="bottom"] { top: auto; bottom: 0; }
+usa-loading-bar[data-active] { opacity: 1; }
+usa-loading-bar .usa-loading-bar-fill { position: absolute; inset: 0; transform-origin: 0 50%; transform: scaleX(var(--usa-loading)); background: var(--usa-loading-color); box-shadow: 0 0 10px var(--usa-loading-color); transition: transform 0.2s ease-out; }
+@media (prefers-reduced-motion: reduce) { usa-loading-bar .usa-loading-bar-fill { transition: none; } }

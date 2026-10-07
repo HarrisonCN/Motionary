@@ -18,9 +18,11 @@ import { defineClickComponents } from './components/click.js';
 export { BUTTON_DEFORMS, CLICK_EFFECTS, MORPH_ICONS, burst, confetti, defineButton, defineCheckbox, defineClick, defineDoubleTap, defineHold, defineIconMorph, defineLike, haptic, morphPath, shake } from './components/click.js';
 import { adoptVariants, defineUiComponents } from './components/ui.js';
 export { VARIANTS, defineAvatarStack, defineBadge, defineBottomSheet, defineDrawer, defineFab, defineNavbar, definePopover, definePullRefresh, defineRating, defineSlider, defineTabs, defineTooltip, setVariant } from './components/ui.js';
-import { c as canDefine } from './chunks/base-08OYzphB.js';
-export { a as configureComponents, p as prefersReducedMotion } from './chunks/base-08OYzphB.js';
-export { S as SPRING_PRESETS, c as createSpring, l as linearEasing, p as projectInertia, r as resolveSpring, a as rubberBand, s as snapTo, b as spring, d as springEasing, e as springSamples, f as stepSpring, g as supportsLinearEasing } from './chunks/spring-CpeFkxNd.js';
+import { definePageComponents } from './components/page.js';
+export { AMBIENT_EFFECTS, CURSOR_MODES, PAGE_EFFECTS, defineAmbient, defineAutoSkeleton, defineBackToTop, defineCursor, defineFullpage, defineLoadingBar, defineMotionSwitch, defineSplash, enableMpaTransitions, loadingBar, pageTransition, restoreMotionIntensity, scrollToTarget, setMotionIntensity, smoothScroll, supportsViewTransitions, themeTransition } from './components/page.js';
+import { c as canDefine } from './chunks/base-D6zLiNGH.js';
+export { M as MOTION_SCALE, a as configureComponents, g as getMotionIntensity, p as prefersReducedMotion } from './chunks/base-D6zLiNGH.js';
+export { S as SPRING_PRESETS, c as createSpring, l as linearEasing, p as projectInertia, r as resolveSpring, a as rubberBand, s as snapTo, b as spring, d as springEasing, e as springSamples, f as stepSpring, g as supportsLinearEasing } from './chunks/spring-C2Megtcf.js';
 
 /**
  * use-scroll-animate/components
@@ -54,6 +56,7 @@ const COMPONENT_CATEGORIES = {
     cards: ['usa-card', 'usa-card-stack', 'usa-sticky-stack', 'usa-carousel-3d'],
     click: ['usa-click', 'usa-button', 'usa-icon-morph', 'usa-like', 'usa-hold', 'usa-double-tap', 'usa-checkbox'],
     ui: ['usa-tabs', 'usa-drawer', 'usa-bottom-sheet', 'usa-pull-refresh', 'usa-fab', 'usa-navbar', 'usa-slider', 'usa-rating', 'usa-tooltip', 'usa-popover', 'usa-badge', 'usa-avatar-stack'],
+    page: ['usa-cursor', 'usa-fullpage', 'usa-loading-bar', 'usa-back-to-top', 'usa-ambient', 'usa-splash', 'usa-auto-skeleton', 'usa-motion-switch'],
 };
 const BY_CATEGORY = {
     reveal: defineRevealComponents,
@@ -66,6 +69,7 @@ const BY_CATEGORY = {
     cards: defineCardComponents,
     click: defineClickComponents,
     ui: defineUiComponents,
+    page: definePageComponents,
 };
 /**
  * Register every `<usa-*>` component (or only the given categories).
@@ -77,5 +81,5 @@ function defineComponents(categories) {
     (categories || Object.keys(BY_CATEGORY)).forEach((c) => BY_CATEGORY[c]?.());
 }
 
-export { COMPONENT_CATEGORIES, adoptVariants, defineBackgroundComponents, defineCardComponents, defineClickComponents, defineComponents, defineFeedbackComponents, defineInteractionComponents, definePhysicsComponents, defineRevealComponents, defineTextComponents, defineTransitionComponents, defineUiComponents };
+export { COMPONENT_CATEGORIES, adoptVariants, defineBackgroundComponents, defineCardComponents, defineClickComponents, defineComponents, defineFeedbackComponents, defineInteractionComponents, definePageComponents, definePhysicsComponents, defineRevealComponents, defineTextComponents, defineTransitionComponents, defineUiComponents };
 //# sourceMappingURL=components.js.map

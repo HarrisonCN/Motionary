@@ -1,0 +1,8 @@
+/* <usa-ambient> */
+usa-ambient { --usa-ambient-opacity: 0.6; --usa-ambient-p: 0; position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: var(--usa-ambient-opacity); contain: strict; }
+usa-ambient[layer="front"] { z-index: 2147483000; }
+usa-ambient canvas { display: block; }
+usa-ambient[effect="noise"] { opacity: calc(var(--usa-ambient-opacity) * 0.25); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); animation: usa-ambient-grain 0.6s steps(4) infinite; mix-blend-mode: overlay; }
+@keyframes usa-ambient-grain { 25% { background-position: -40px 20px; } 50% { background-position: 30px -50px; } 75% { background-position: -20px -30px; } }
+usa-ambient[effect="gradient"] { background: linear-gradient(135deg, hsl(calc(250 + var(--usa-ambient-p) * 140) 85% 60%), hsl(calc(190 + var(--usa-ambient-p) * 160) 85% 55%) 50%, hsl(calc(320 + var(--usa-ambient-p) * 90) 85% 62%)); }
+@media (prefers-reduced-motion: reduce) { usa-ambient[effect="noise"] { animation: none; } }

@@ -21,19 +21,44 @@ export interface ComponentsConfig {
    * `'no-preference'` ignores the OS setting (only for demos — respect your users).
    */
   reducedMotion?: 'user' | 'reduce' | 'no-preference';
+  /**
+   * Global motion intensity (v2.7): `'off'` (same as reduced motion),
+   * `'low'` (shorter, calmer), `'normal'` (default) or `'high'`. Scales every
+   * component animation's duration and sets `--usa-motion` (0 / 0.6 / 1 /
+   * 1.25) on `<html>` for your own CSS. See `setMotionIntensity()`.
+   */
+  motionIntensity?: MotionIntensity;
 }
 
-const config: Required<ComponentsConfig> = { injectStyles: true, reducedMotion: 'user' };
+export type MotionIntensity = 'off' | 'low' | 'normal' | 'high';
+export const MOTION_SCALE: Record<MotionIntensity, number> = { off: 0, low: 0.6, normal: 1, high: 1.25 };
+
+const config: Required<ComponentsConfig> = { injectStyles: true, reducedMotion: 'user', motionIntensity: 'normal' };
 
 /** Change global component settings (call before `define*()` for `injectStyles`). */
 export function configureComponents(options: ComponentsConfig): void {
   Object.assign(config, options);
+  if (options.motionIntensity && typeof document !== 'undefined') {
+    document.documentElement.style.setProperty('--usa-motion', String(MOTION_SCALE[options.motionIntensity] ?? 1));
+    document.documentElement.setAttribute('data-usa-motion', options.motionIntensity);
+  }
+}
+
+/** The current global motion intensity. */
+export function getMotionIntensity(): MotionIntensity {
+  return config.motionIntensity;
+}
+
+/** Duration multiplier for the current intensity (1 when `normal`). */
+export function motionScale(): number {
+  return MOTION_SCALE[config.motionIntensity] ?? 1;
 }
 
 export const canDefine = (): boolean => typeof customElements !== 'undefined' && typeof HTMLElement !== 'undefined';
 
 /** `true` when animations should be reduced (OS setting or `configureComponents`). */
 export function prefersReducedMotion(): boolean {
+  if (config.motionIntensity === 'off') return true;
   if (config.reducedMotion !== 'user') return config.reducedMotion === 'reduce';
   return typeof matchMedia === 'function' && !!matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
@@ -213,6 +238,8 @@ export function getBase(): BaseCtor {
         applyFrame(el as HTMLElement, keyframes[keyframes.length - 1]);
         return null;
       }
+      const k = motionScale();
+      if (k !== 1 && k > 0 && typeof options.duration === 'number') options = { ...options, duration: options.duration * k, delay: (options.delay || 0) * k };
       return (el as HTMLElement).animate(keyframes, options);
     }
 
