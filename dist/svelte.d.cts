@@ -11,6 +11,17 @@ type AnimationPreset = 'fade-in' | 'fade-in-up' | 'fade-in-down' | 'fade-in-left
  *   viewport and 1 when its bottom leaves the top. Works for elements taller than the screen.
  */
 type ProgressMode = 'ratio' | 'scroll';
+/**
+ * Which engine runs the entrance animation.
+ * - `'js'`: IntersectionObserver triggers a time-based Web Animation.
+ * - `'css'`: the preset runs on the browser's native scroll-driven timeline
+ *   (`animation-timeline: view()`), so its progress follows the scroll position
+ *   off the main thread. Falls back to `'js'` where unsupported.
+ * - `'auto'` (default since 2.0): native when supported, JS otherwise — and JS
+ *   whenever the element sets `duration`, `delay`, `offset` or `stagger` itself,
+ *   since those only mean something for a time-based animation.
+ */
+type ScrollEngine = 'auto' | 'js' | 'css';
 /** Easing function types */
 type EasingType = 'linear' | 'ease' | 'ease-in' | 'ease-out' | 'ease-in-out' | 'spring' | 'soft-spring' | 'heavy-bounce' | [number, number, number, number] | ((t: number) => number) | string;
 /** Keyframe definition for custom animations */
@@ -77,6 +88,26 @@ interface AnimateOptions {
      * style, for scroll-driven effects written in plain CSS. Off by default.
      */
     progressVar?: string;
+    /**
+     * Animation engine (default: `'auto'`, see `ScrollEngine`). With the native
+     * engine the animation is linked to scroll position: `duration`, `delay`,
+     * `threshold`, `offset` and `stagger` do not apply; `viewRange` does.
+     */
+    engine?: ScrollEngine;
+    /**
+     * Native engine only: the view-timeline range the entrance animation spans,
+     * as `[rangeStart, rangeEnd]` (default: `['entry 0%', 'entry 100%']`).
+     */
+    viewRange?: [string, string];
+    /**
+     * Animate out when the element leaves the viewport, and back in when it
+     * re-enters (implies `repeat: true` unless `repeat` is set).
+     * - `true`: play the entrance animation in reverse.
+     * - a preset / presets / `{ from, to }`: play that animation in reverse
+     *   (e.g. `exit: 'fade-in-down'` leaves upwards).
+     * Skipped under reduced motion. (default: `false`)
+     */
+    exit?: boolean | AnimationPreset | AnimationPreset[] | CustomAnimation;
 }
 /** Global configuration for ScrollAnimate instance */
 interface ScrollAnimateConfig {
@@ -115,6 +146,8 @@ interface ScrollAnimateConfig {
      * never re-hide or replay them. (default: true)
      */
     autoUnregister?: boolean;
+    /** Default animation engine (default: `'auto'`; `'js'` restores the 1.x behaviour) */
+    defaultEngine?: ScrollEngine;
 }
 /** Registered element entry */
 interface AnimatedElement {
@@ -123,6 +156,8 @@ interface AnimatedElement {
     observer: IntersectionObserver;
     animated: boolean;
     progressObserver?: IntersectionObserver;
+    /** Engine actually used for this element (`'css'` = native scroll-driven timeline) */
+    engine?: 'js' | 'css';
 }
 /** ScrollAnimate public API */
 interface ScrollAnimateInstance {
@@ -153,20 +188,6 @@ interface ScrollAnimateInstance {
 }
 
 /**
- * use-scroll-animate - Core Implementation
- * Uses IntersectionObserver + Web Animations API for zero-dependency,
- * high-performance scroll-triggered animations.
- */
-
-/**
- * True scroll progress of `el` through the viewport (or `root`): 0 when its top
- * edge reaches the bottom of the viewport, 1 when its bottom edge passes the top.
- * Works for elements taller than the viewport. Returns 0 without a DOM.
- */
-declare function getScrollProgress(el: Element, root?: Element | null): number;
-declare function createScrollAnimate(userConfig?: ScrollAnimateConfig): ScrollAnimateInstance;
-
-/**
  * use-scroll-animate - Staggered children
  * Reveal a container's children one after another when the container scrolls
  * into view, optionally also animating children that are added later.
@@ -183,134 +204,41 @@ interface StaggerOptions extends AnimateOptions {
      */
     observeChildren?: boolean;
 }
-/**
- * Animate the children of `container` with a stagger once it enters the
- * viewport. Returns a cleanup function. SSR-safe (no-op without a DOM).
- *
- * @example
- * const stop = staggerChildren(document.querySelector('ul'), { stagger: 60, observeChildren: true });
- */
-declare function staggerChildren(container: Element | null | undefined, options?: StaggerOptions, instance?: ScrollAnimateInstance): () => void;
 
 /**
- * use-scroll-animate - Sequence / timeline helper
- * Chain animations on several targets, one after another (or overlapping).
- */
-
-interface SequenceStep extends AnimateOptions {
-    /** Selector, Element, NodeList or Element[] to animate in this step */
-    target: string | Element | NodeList | Element[];
-    /** Pause (ms) after the previous step ends before this one starts. Negative values overlap. (default: 0) */
-    gap?: number;
-    /** Absolute start time (ms) on the timeline; overrides `gap` */
-    at?: number;
-}
-interface SequenceOptions extends AnimateOptions {
-    /** Play automatically (once) when this element/selector enters the viewport */
-    trigger?: string | Element;
-    /** Instance whose global config (easing, classes, `disabled`) is used */
-    instance?: ScrollAnimateInstance;
-}
-interface SequenceController {
-    /** Play (or replay) the timeline. Resolves when every step has completed, or on `cancel()`. */
-    play(): Promise<void>;
-    /** Stop the trigger and running animations; elements are left visible. */
-    cancel(): void;
-    /** Total duration of the timeline in ms (computed for the current DOM). */
-    duration(): number;
-}
-/**
- * Build a timeline of animations.
+ * use-scroll-animate - Svelte integration
  *
- * @example
- * sequence([
- *   { target: '.title', animation: 'fade-in-up' },
- *   { target: '.subtitle', animation: 'blur-in', gap: -300 },   // overlap by 300ms
- *   { target: '.card', animation: 'scale-up', stagger: 80 },
- * ], { trigger: '.hero' });
- */
-declare function sequence(steps: SequenceStep[], options?: SequenceOptions): SequenceController;
-
-/**
- * use-scroll-animate - Animation Presets
- * Defines keyframes for all built-in animation presets
- */
-
-type KeyframeMap = {
-    from: Record<string, string | number>;
-    to: Record<string, string | number>;
-};
-declare const PRESETS: Record<AnimationPreset, KeyframeMap>;
-declare function resolvePreset(animation: AnimationPreset | AnimationPreset[] | CustomAnimation): KeyframeMap;
-/** Easing to CSS cubic-bezier mapping */
-declare const EASING_MAP: Record<string, string>;
-declare function resolveEasing(easing: EasingType): string;
-
-/**
- * use-scroll-animate - React Integration
- * Provides useScrollAnimate and useScrollStagger hooks for React applications.
- * `useScrollStagger({ observeChildren: true })` also animates children added later.
+ * Svelte actions (no import from `svelte` needed, works with Svelte 3, 4 and 5):
  *
- * Both hooks are thin wrappers around the core engine, so they share its
- * behaviour: `once`, `offset`, custom easing functions, parallax,
- * `prefers-reduced-motion` support, and proper cleanup on unmount.
- */
-
-type ReactRef<T> = {
-    current: T | null;
-};
-declare function createReactHooks(React: {
-    useRef: <T>(initial: T | null) => ReactRef<T>;
-    useEffect: (effect: () => (() => void) | void, deps?: unknown[]) => void;
-}): {
-    useScrollAnimate: (options?: AnimateOptions) => ReactRef<Element>;
-    useScrollStagger: (options?: StaggerOptions) => ReactRef<Element>;
-};
-
-/**
- * use-scroll-animate - Vue 3 Integration
- * Provides useScrollAnimate and useScrollStagger composables for Vue 3 applications.
- *
- * A thin wrapper around the core engine, so it shares its behaviour: `once`,
- * `offset`, custom easing functions, parallax, `prefers-reduced-motion`
- * support, and cleanup on unmount.
- */
-
-declare function createVueComposables(Vue: {
-    ref: <T>(value: T | null) => {
-        value: T | null;
-    };
-    onMounted: (fn: () => void) => void;
-    onUnmounted: (fn: () => void) => void;
-}): {
-    useScrollAnimate: (options?: AnimateOptions) => {
-        animateRef: {
-            value: Element | null;
-        };
-    };
-    useScrollStagger: (options?: StaggerOptions) => {
-        staggerRef: {
-            value: Element | null;
-        };
-    };
-};
-
-/**
- * Default singleton instance of ScrollAnimate.
- * Ready to use out of the box with sensible defaults.
- *
- * @example
- * ```js
- * import ScrollAnimate from 'use-scroll-animate';
- *
- * // Auto-initialize all elements with data-sa attribute
- * ScrollAnimate.init();
- *
- * // Or manually observe elements
- * ScrollAnimate.observe('.my-element', { animation: 'fade-in-up' });
+ * ```svelte
+ * <script>
+ *   import { scrollAnimate, scrollStagger } from 'use-scroll-animate/svelte';
+ * </script>
+ * <div use:scrollAnimate={{ animation: 'fade-in-up', duration: 800 }}>…</div>
+ * <ul use:scrollStagger={{ stagger: 60 }}>…</ul>
  * ```
  */
-declare const ScrollAnimate: ScrollAnimateInstance;
 
-export { EASING_MAP, PRESETS, createReactHooks, createScrollAnimate, createVueComposables, ScrollAnimate as default, getScrollProgress, resolveEasing, resolvePreset, sequence, staggerChildren };
-export type { AnimateOptions, AnimatedElement, AnimationKeyframe, AnimationPreset, CustomAnimation, EasingType, ParallaxOptions, ProgressMode, ScrollAnimateConfig, ScrollAnimateInstance, SequenceController, SequenceOptions, SequenceStep, StaggerOptions };
+interface ScrollAnimateActionOptions extends AnimateOptions {
+    /** Instance to register with (default: a shared instance created on first use) */
+    instance?: ScrollAnimateInstance;
+}
+interface ScrollStaggerActionOptions extends StaggerOptions {
+    instance?: ScrollAnimateInstance;
+}
+/** Shape of a Svelte action's return value. */
+interface ActionReturn<P> {
+    update?: (parameter: P) => void;
+    destroy?: () => void;
+}
+/**
+ * Animate `node` when it scrolls into view. Changing the parameter updates the
+ * callbacks right away; other options are applied if the element has not
+ * animated yet.
+ */
+declare function scrollAnimate(node: Element, options?: ScrollAnimateActionOptions): ActionReturn<ScrollAnimateActionOptions | undefined>;
+/** Stagger the children of `node` when it scrolls into view (`observeChildren: true` also animates children added later). */
+declare function scrollStagger(node: Element, options?: ScrollStaggerActionOptions): ActionReturn<ScrollStaggerActionOptions | undefined>;
+
+export { scrollAnimate, scrollStagger };
+export type { ActionReturn, ScrollAnimateActionOptions, ScrollStaggerActionOptions };

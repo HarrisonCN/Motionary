@@ -7,8 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.0] - 2026-10-07
+
+2.0 collects the 1.6–1.9 roadmap (native scroll timeline, Svelte/Solid/Web Component entries, exit animations and `parallax()`, docs and demo) and removes what 1.9 deprecated. See **MIGRATION from 1.x** below.
+
+### ⚠ Breaking changes
+- **`engine` defaults to `'auto'`**: presets run on the native scroll-driven timeline (`animation-timeline: view()`) where supported — scroll-linked instead of time-based. `'auto'` still picks the JS engine when an element sets `duration`, `delay`, `offset` or `stagger` itself. Set `defaultEngine: 'js'` for 1.x behaviour.
+- **Removed** the `createReactHooks` / `createVueComposables` re-exports from the main entry: import them from `use-scroll-animate/react` / `use-scroll-animate/vue`.
+- **ESM-first package** (`"type": "module"`): `import` → `dist/*.js` + `dist/*.d.ts`, `require` → `dist/*.cjs` + `dist/*.d.cts` for every entry; `main` is `dist/index.cjs`.
+- **Removed legacy build artefacts**: the `module` field, `dist/index.esm.js`, `dist/index.mjs`, `dist/*.d.mts`, the per-file `dist/types/*` declarations, and `use-scroll-animate/dist/*` deep imports (only the documented entry points resolve). `dist/index.umd.js` and `dist/element.umd.js` keep their CDN URLs.
+- **ES2020 output** (was ES2018): optional chaining / nullish coalescing are no longer down-levelled. Every browser that has `Animation.commitStyles()` (Chrome 84, Firefox 75, Safari 13.1), which the library already relied on, supports ES2020. Together with the removed re-exports: UMD 7.55 → 6.99 kB gz, core-only import 5.63 → 5.40 kB gz.
+- `engines.node >= 18` declared (only relevant for SSR imports).
+
 ### Added
-- **Native scroll-driven engine** (1.6): new `engine: 'auto' | 'js' | 'css'` option (`defaultEngine` config, `data-sa-engine` attribute). With `'auto'`/`'css'`, browsers that support `animation-timeline: view()` run the preset on a native `ViewTimeline` (scroll-linked, off the main thread); others fall back to the JS engine. Default stays `'js'` in 1.x. New `viewRange` option (`data-sa-view-range`) and `supportsScrollTimeline()` helper.
+- **Native scroll-driven engine** (1.6): new `engine: 'auto' | 'js' | 'css'` option (`defaultEngine` config, `data-sa-engine` attribute). With `'auto'`/`'css'`, browsers that support `animation-timeline: view()` run the preset on a native `ViewTimeline` (scroll-linked, off the main thread); others fall back to the JS engine (default `'auto'`, see Breaking changes). New `viewRange` option (`data-sa-view-range`) and `supportsScrollTimeline()` helper.
 - **Svelte actions** (1.7): `use-scroll-animate/svelte` exports `scrollAnimate` and `scrollStagger` (`use:` actions with `update`/`destroy`; no `svelte` import).
 - **Solid primitives** (1.7): `use-scroll-animate/solid` exports the `scrollAnimate` / `scrollStagger` directives (typed via `JSX.Directives`) and `useScrollAnimate()` ref primitive. `solid-js` is an optional peer dependency.
 - **`<scroll-animate>` Web Component** (1.7): `use-scroll-animate/element` exports `defineScrollAnimate(tagName?, instance?)`; attributes mirror `data-sa-*`, and it dispatches `sa:enter`/`sa:leave`/`sa:start`/`sa:complete`/`sa:progress` events. `dist/element.umd.js` registers it on load for CDN use.
@@ -16,20 +28,40 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Exit animations** (1.8): `exit: true | preset | presets | { from, to }` (`data-sa-exit`, `exit` attribute on `<scroll-animate>`) plays the entrance (or the given animation) in reverse when the element leaves the viewport and replays the entrance on re-entry; implies `repeat` unless set. Scroll-linked over the `exit` range with the native engine; class swap in class-name mode; skipped under reduced motion.
 - **`parallax(target, { speed, axis, progressVar, root, respectReducedMotion })`** (1.8): standalone parallax helper on the scroll-progress scale used by `progressVar`. Writes the progress to `--sa-parallax` and the offset to the individual `translate` property (composes with `transform`/entrance animations); no offset under reduced motion; listens only while targets are visible; returns a stop function. < 1 kB gzipped when tree-shaken.
 - **Size budgets** (1.6): `size-budget.json` defines a gzip budget per entry (UMD bundle and tree-shaken imports); `npm run size:check` fails when one is exceeded and runs in CI.
-
-- **Docs** (1.9): `docs/API.md` (full API reference), `docs/migration-from-aos.md`, `docs/migration-from-gsap-scrolltrigger.md`, `docs/deprecations.md`, and `demo/index.html` — a no-build preset playground (every preset clickable, scroll-triggered cards, parallax) that loads the UMD bundle.
-
-### Deprecated
-- Importing `createReactHooks` / `createVueComposables` from the main entry (1.9): use `use-scroll-animate/react` / `use-scroll-animate/vue`. Logs one `console.warn` per API in development builds only (`process.env.NODE_ENV !== 'production'`); removed in 2.0.
-- The `module` field / `dist/index.esm.js`, the per-file `dist/types/*` declarations and `use-scroll-animate/dist/*` deep imports (1.9, packaging only, no warning possible): removed in 2.0, see `docs/deprecations.md`.
+- **Docs** (1.9): `docs/API.md` (full API reference), `docs/migration-from-aos.md`, `docs/migration-from-gsap-scrolltrigger.md`, `docs/deprecations.md` (now "Upgrading to 2.0"), and `demo/index.html` — a no-build preset playground (every preset clickable, scroll-triggered cards, parallax) that loads the UMD bundle.
 
 ### Changed
 - The default instance export is annotated `/* @__PURE__ */`, so bundlers drop the core when only standalone helpers such as `parallax` are imported (1.8).
 - Size budgets for the UMD bundle and "import everything" raised from 7.5 to 8 kB gzip for exit + parallax (1.8).
-- Build (1.7): `dist/index.mjs` / `dist/index.js` are now small entry files that import shared chunks from `dist/chunks/` (public import paths are unchanged; `dist/index.esm.js` and `dist/index.umd.js` stay single files).
+- Build (1.7): ESM/CJS entries are small files that import shared chunks from `dist/chunks/`; the UMD bundles stay single files.
+- Build uses Rollup's ESM config (`rollup.config.mjs`); `@rollup/plugin-commonjs` dropped (no CommonJS inputs). `npm run build` cleans `dist/` first.
 
 ### Fixed
 - Class-name mode: `destroy()` now clears pending completion timers, so `onComplete` no longer fires after the instance was destroyed. Other instances' timers are unaffected.
+
+### Repository
+- Dependabot (npm + GitHub Actions, weekly, grouped), issue templates (bug report, feature request) and a pull-request template.
+
+### MIGRATION from 1.x
+
+1. **React / Vue imports**
+   ```diff
+   - import { createReactHooks } from 'use-scroll-animate';
+   + import { createReactHooks } from 'use-scroll-animate/react';
+   - import { createVueComposables } from 'use-scroll-animate';
+   + import { createVueComposables } from 'use-scroll-animate/vue';
+   ```
+   (1.9 already logged a dev-only warning for these.)
+2. **Engine**: if you rely on time-based entrances (`duration`/`delay` set globally via `defaultDuration`/`defaultDelay`, `onComplete` timing, `threshold`-based triggering), keep 1.x behaviour with
+   ```js
+   ScrollAnimate.configure({ defaultEngine: 'js' });      // default instance
+   createScrollAnimate({ defaultEngine: 'js' });          // own instances
+   ```
+   or per element `engine: 'js'` / `data-sa-engine="js"`. Elements that set `duration`, `delay`, `offset` or `stagger` themselves already stay on JS.
+3. **Deep imports**: replace `use-scroll-animate/dist/index.js`, `dist/index.mjs`, `dist/index.esm.js` or `dist/types/...` with `use-scroll-animate` (or a subpath entry). Type-only imports come from the package name: `import type { AnimateOptions } from 'use-scroll-animate'`.
+4. **CommonJS** consumers: `require('use-scroll-animate')` keeps working (now `dist/index.cjs`). If you referenced `dist/index.js` as CommonJS by path, it is ESM now.
+5. **`<script>` / CDN**: no change — `https://unpkg.com/use-scroll-animate/dist/index.umd.js` (global `ScrollAnimate`) and `dist/element.umd.js`.
+6. **Old browsers**: if you must support browsers without ES2020 (pre-2020 Safari/Chrome), transpile `use-scroll-animate` in your bundler, or stay on 1.x.
 
 ## [1.5.0] - 2026-10-07
 

@@ -57,49 +57,12 @@ describe('docs', () => {
   });
 });
 
-describe('deprecation warnings (dev only)', () => {
-  beforeEach(() => {
-    vi.resetModules();
-    installMocks();
-  });
-
-  it('warns once when createReactHooks / createVueComposables are imported from the main entry', async () => {
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
-    const lib = await import('../src/index');
-    const React = { useRef: () => ({ current: null }), useEffect: () => undefined } as any;
-    lib.createReactHooks(React);
-    lib.createReactHooks(React);
-    lib.createVueComposables({ ref: () => ({ value: null }), onMounted: () => undefined, onUnmounted: () => undefined } as any);
-    expect(warn).toHaveBeenCalledTimes(2);
-    expect(warn.mock.calls[0][0]).toContain("use-scroll-animate/react");
-    expect(warn.mock.calls[1][0]).toContain("use-scroll-animate/vue");
-    warn.mockRestore();
-  });
-
-  it('subpath imports do not warn', async () => {
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
-    const { createReactHooks } = await import('../src/react');
-    createReactHooks({ useRef: () => ({ current: null }), useEffect: () => undefined } as any);
-    expect(warn).not.toHaveBeenCalled();
-    warn.mockRestore();
-  });
-
-  it('is silent in production builds', async () => {
-    const prev = process.env.NODE_ENV;
-    process.env.NODE_ENV = 'production';
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
-    const lib = await import('../src/index');
-    lib.createReactHooks({ useRef: () => ({ current: null }), useEffect: () => undefined } as any);
-    expect(warn).not.toHaveBeenCalled();
-    warn.mockRestore();
-    process.env.NODE_ENV = prev;
-  });
-
-  it('still returns working hooks', async () => {
-    vi.spyOn(console, 'warn').mockImplementation(() => undefined);
-    const lib = await import('../src/index');
-    const hooks = lib.createReactHooks({ useRef: () => ({ current: null }), useEffect: () => undefined } as any);
-    expect(typeof hooks.useScrollAnimate).toBe('function');
-    expect(typeof hooks.useScrollStagger).toBe('function');
+describe('2.0 removals', () => {
+  it('the main entry no longer re-exports the React / Vue factories', async () => {
+    const lib: Record<string, unknown> = await import('../src/index');
+    expect(lib.createReactHooks).toBeUndefined();
+    expect(lib.createVueComposables).toBeUndefined();
+    expect(typeof (await import('../src/react')).createReactHooks).toBe('function');
+    expect(typeof (await import('../src/vue')).createVueComposables).toBe('function');
   });
 });

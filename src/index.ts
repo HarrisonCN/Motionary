@@ -3,7 +3,9 @@
  *
  * A lightweight, dependency-free scroll animation library for modern web
  * applications. Built with TypeScript, powered by IntersectionObserver and
- * the Web Animations API. Safe to import during SSR.
+ * the Web Animations API (or the native scroll-driven timeline). Safe to
+ * import during SSR. Framework integrations live in the subpath entries:
+ * `use-scroll-animate/react`, `/vue`, `/svelte`, `/solid`, `/element`.
  *
  * @license MIT
  * @see https://github.com/HarrisonCN/use-scroll-animate
@@ -14,28 +16,6 @@ export { staggerChildren } from './stagger';
 export { sequence } from './sequence';
 export { parallax } from './parallax';
 export { PRESETS, resolvePreset, resolveEasing, EASING_MAP } from './presets';
-import { createReactHooks as reactHooks } from './react';
-import { createVueComposables as vueComposables } from './vue';
-import { deprecate } from './dev';
-
-/**
- * @deprecated Import from `use-scroll-animate/react` instead. The re-export
- * from the main entry is removed in 2.0.
- */
-export const createReactHooks: typeof reactHooks = (React) => {
-  deprecate('react', "import { createReactHooks } from 'use-scroll-animate/react' (the main-entry re-export is removed in 2.0).");
-  return reactHooks(React);
-};
-
-/**
- * @deprecated Import from `use-scroll-animate/vue` instead. The re-export
- * from the main entry is removed in 2.0.
- */
-export const createVueComposables: typeof vueComposables = (Vue) => {
-  deprecate('vue', "import { createVueComposables } from 'use-scroll-animate/vue' (the main-entry re-export is removed in 2.0).");
-  return vueComposables(Vue);
-};
-
 export type {
   AnimationPreset,
   EasingType,

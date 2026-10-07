@@ -270,7 +270,8 @@ describe('cleanup', () => {
 
 describe('React hooks lifecycle', () => {
   it('unmounting before the element entered makes it visible and stops observing', async () => {
-    const { createReactHooks } = await load();
+    await load();
+    const { createReactHooks } = await import('../src/react');
     const node = el();
     const React = fakeReact(node);
     const { useScrollAnimate } = createReactHooks(React as any);
@@ -284,7 +285,8 @@ describe('React hooks lifecycle', () => {
   });
 
   it('does nothing when the ref was never attached', async () => {
-    const { createReactHooks } = await load();
+    await load();
+    const { createReactHooks } = await import('../src/react');
     const React = fakeReact(null);
     const { useScrollAnimate } = createReactHooks(React as any);
     expect(() => useScrollAnimate()).not.toThrow();
@@ -311,7 +313,8 @@ describe('React hooks lifecycle', () => {
   });
 
   it('useScrollStagger unmount disconnects the MutationObserver and releases late children', async () => {
-    const { createReactHooks } = await load();
+    await load();
+    const { createReactHooks } = await import('../src/react');
     const list = el('<ul><li></li></ul>');
     const React = fakeReact(list);
     const { useScrollStagger } = createReactHooks(React as any);
@@ -344,7 +347,8 @@ describe('Vue composables lifecycle', () => {
   }
 
   it('unwraps component refs ($el)', async () => {
-    const { createVueComposables } = await load();
+    await load();
+    const { createVueComposables } = await import('../src/vue');
     const node = el();
     const vue = fakeVue({ $el: node });
     createVueComposables(vue.api).useScrollAnimate();
@@ -356,7 +360,8 @@ describe('Vue composables lifecycle', () => {
   });
 
   it('a null ref is a no-op on mount and unmount', async () => {
-    const { createVueComposables } = await load();
+    await load();
+    const { createVueComposables } = await import('../src/vue');
     const vue = fakeVue(null);
     const { useScrollAnimate, useScrollStagger } = createVueComposables(vue.api);
     useScrollAnimate();

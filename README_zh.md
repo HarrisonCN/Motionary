@@ -27,7 +27,7 @@
 
 - [API 参考](./docs/API.md)（英文）· [演示页](./demo/index.html)（每个预设都可点击，无需构建）
 - 迁移指南：[从 AOS 迁移](./docs/migration-from-aos.md) · [从 GSAP ScrollTrigger 迁移](./docs/migration-from-gsap-scrolltrigger.md)
-- [弃用说明](./docs/deprecations.md)：从主入口导入 `createReactHooks` / `createVueComposables` 已弃用（开发环境下警告一次），请改用 `use-scroll-animate/react` / `use-scroll-animate/vue`，2.0 将移除。
+- [升级到 2.0](./docs/deprecations.md)：`createReactHooks` / `createVueComposables` 只能从 `use-scroll-animate/react` / `/vue` 导入；`dist/index.mjs`、`dist/index.esm.js`、`dist/types/*` 与 `dist/*` 深层导入已移除；默认引擎改为 `'auto'`。CDN 地址 `dist/index.umd.js` 不变。详见 [CHANGELOG](./CHANGELOG.md) 的 MIGRATION 部分。
 
 ## 安装
 
@@ -61,7 +61,7 @@ ScrollAnimate.observe('.card', { animation: 'fade-in-up', engine: 'auto' });
 const sa = createScrollAnimate({ defaultEngine: 'auto' }); // 实例级默认
 ```
 
-- `'js'`：1.x 的**默认值**，行为不变。`'auto'` / `'css'`：支持时使用原生时间线，否则自动回退到 JS。
+- `'auto'`：**2.0 起的默认值**，支持时使用原生时间线，否则回退 JS；若元素自行设置了 `duration`、`delay`、`offset` 或 `stagger`，则使用 JS。`'css'`：支持时始终使用原生时间线。`'js'`：1.x 的行为（`defaultEngine: 'js'` 可全局恢复）。
 - 原生引擎下 `duration`、`delay`、`threshold`、`offset`、`stagger` 不生效；动画区间由 `viewRange` 决定（默认 `['entry 0%', 'entry 100%']`），`easing` 仍然有效。HTML：`data-sa-engine`、`data-sa-view-range="entry 0%, cover 40%"`。
 - `once`（默认）在动画完成后固定最终状态；`repeat: true` 时随滚动双向播放。回调、`onProgress`、`progressVar`、视差照常工作。
 - 类名模式、`prefers-reduced-motion`、`animate()`、`sequence()`、`staggerChildren()` 始终使用 JS 引擎。另导出 `supportsScrollTimeline()`。
@@ -98,7 +98,7 @@ const sa = createScrollAnimate({ defaultEngine: 'auto' }); // 实例级默认
 
 - **新预设**：`scale-up`、`blur-in-up`、`flip-up`、`flip-down`、`rotate-left`、`rotate-right`，以及 clip-path 揭示 `clip-up`、`clip-down`、`clip-left`、`clip-right`、`clip-circle`。
 - **更省内存**：`once` 元素动画触发后自动从注册表移除（仍需视差/`onProgress` 的除外），并记录在 `WeakSet` 中，`init()`/`observe()` 不会重复播放。如需旧行为可设置 `createScrollAnimate({ autoUnregister: false })`。
-- **规范的 `exports` 字段**：Node ESM 解析到 `dist/index.mjs`，CommonJS 解析到 `dist/index.js`，均带对应类型声明；原有 `main`/`module`/`unpkg` 与 `dist/*` 深层导入保持可用。
+- **规范的 `exports` 字段**：2.0 起以 ESM 为主：`import` → `dist/*.js` + `*.d.ts`，`require` → `dist/*.cjs` + `*.d.cts`。
 
 ## v1.2.0 新特性
 
@@ -165,7 +165,7 @@ parallax('.badge', { speed: -0.15, axis: 'x' });
 | `stagger` | `number` | `0` | 同批次显现的兄弟元素之间的额外延迟 (ms) |
 | `onProgress` | `(el, progress) => void` | – | 滚动进度回调 (0–1) |
 | `progressMode` | `'ratio'` \| `'scroll'` | `'ratio'` | 进度计算方式：可见比例或真实滚动进度 |
-| `engine` | `'js'` \| `'auto'` \| `'css'` | `'js'` | 支持时使用原生滚动驱动时间线，否则回退 JS |
+| `engine` | `'auto'` \| `'js'` \| `'css'` | `'auto'` | 支持时使用原生滚动驱动时间线，否则回退 JS |
 | `viewRange` | `[string, string]` | `['entry 0%', 'entry 100%']` | 仅原生引擎：入场动画的时间线区间 |
 
 ## 许可证

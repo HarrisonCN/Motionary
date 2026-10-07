@@ -1,75 +1,73 @@
 {
   "name": "use-scroll-animate",
-  "version": "1.5.0",
+  "version": "2.0.0",
   "description": "A lightweight, high-performance, dependency-free scroll animation library for modern web.",
-  "type": "commonjs",
-  "main": "dist/index.js",
-  "module": "dist/index.esm.js",
+  "type": "module",
+  "main": "./dist/index.cjs",
   "unpkg": "dist/index.umd.js",
   "jsdelivr": "dist/index.umd.js",
-  "types": "dist/index.d.ts",
+  "types": "./dist/index.d.cts",
   "exports": {
     ".": {
       "import": {
-        "types": "./dist/index.d.mts",
-        "default": "./dist/index.mjs"
-      },
-      "require": {
         "types": "./dist/index.d.ts",
         "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
       }
     },
     "./react": {
       "import": {
-        "types": "./dist/react.d.mts",
-        "default": "./dist/react.mjs"
-      },
-      "require": {
         "types": "./dist/react.d.ts",
         "default": "./dist/react.js"
+      },
+      "require": {
+        "types": "./dist/react.d.cts",
+        "default": "./dist/react.cjs"
       }
     },
     "./vue": {
       "import": {
-        "types": "./dist/vue.d.mts",
-        "default": "./dist/vue.mjs"
-      },
-      "require": {
         "types": "./dist/vue.d.ts",
         "default": "./dist/vue.js"
+      },
+      "require": {
+        "types": "./dist/vue.d.cts",
+        "default": "./dist/vue.cjs"
       }
     },
     "./svelte": {
       "import": {
-        "types": "./dist/svelte.d.mts",
-        "default": "./dist/svelte.mjs"
-      },
-      "require": {
         "types": "./dist/svelte.d.ts",
         "default": "./dist/svelte.js"
+      },
+      "require": {
+        "types": "./dist/svelte.d.cts",
+        "default": "./dist/svelte.cjs"
       }
     },
     "./solid": {
       "import": {
-        "types": "./dist/solid.d.mts",
-        "default": "./dist/solid.mjs"
-      },
-      "require": {
         "types": "./dist/solid.d.ts",
         "default": "./dist/solid.js"
+      },
+      "require": {
+        "types": "./dist/solid.d.cts",
+        "default": "./dist/solid.cjs"
       }
     },
     "./element": {
       "import": {
-        "types": "./dist/element.d.mts",
-        "default": "./dist/element.mjs"
-      },
-      "require": {
         "types": "./dist/element.d.ts",
         "default": "./dist/element.js"
+      },
+      "require": {
+        "types": "./dist/element.d.cts",
+        "default": "./dist/element.cjs"
       }
     },
-    "./dist/*": "./dist/*",
     "./package.json": "./package.json"
   },
   "files": [
@@ -83,15 +81,16 @@
   ],
   "sideEffects": false,
   "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -c -w",
+    "build": "npm run clean && rollup -c rollup.config.mjs",
+    "dev": "rollup -c rollup.config.mjs -w",
     "typecheck": "tsc --noEmit -p .",
     "test": "vitest run",
     "check:exports": "node scripts/check-exports.mjs",
     "lint:package": "publint && attw --pack . --profile node16",
     "size": "node scripts/size.mjs",
     "prepublishOnly": "npm run typecheck && npm test && npm run build && npm run check:exports",
-    "size:check": "node scripts/size.mjs --check"
+    "size:check": "node scripts/size.mjs --check",
+    "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\""
   },
   "keywords": [
     "scroll",
@@ -123,7 +122,6 @@
   "homepage": "https://github.com/HarrisonCN/use-scroll-animate#readme",
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.5",
-    "@rollup/plugin-commonjs": "^29.0.2",
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@rollup/plugin-terser": "^1.0.0",
     "@rollup/plugin-typescript": "^12.3.0",
@@ -147,5 +145,8 @@
     "svelte": {
       "optional": true
     }
+  },
+  "engines": {
+    "node": ">=18"
   }
 }

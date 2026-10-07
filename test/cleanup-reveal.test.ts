@@ -48,7 +48,8 @@ describe('cleanup never leaves content hidden', () => {
   });
 
   it('useScrollStagger (React): unmounting before the reveal shows the children again', async () => {
-    const { createReactHooks } = await load();
+    await load();
+    const { createReactHooks } = await import('../src/react');
     const list = el('<ul><li></li></ul>');
     const cleanups: Array<() => void> = [];
     let first = true;

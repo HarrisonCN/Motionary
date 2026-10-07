@@ -27,7 +27,7 @@
 
 - [API リファレンス](./docs/API.md)（英語）· [デモ](./demo/index.html)（全プリセットをクリックで再生、ビルド不要）
 - 移行ガイド：[AOS から](./docs/migration-from-aos.md) · [GSAP ScrollTrigger から](./docs/migration-from-gsap-scrolltrigger.md)
-- [非推奨一覧](./docs/deprecations.md)：メインエントリからの `createReactHooks` / `createVueComposables` の import は非推奨（開発時に一度だけ警告）。`use-scroll-animate/react` / `/vue` を使ってください（2.0 で削除）。
+- [2.0 へのアップグレード](./docs/deprecations.md)：`createReactHooks` / `createVueComposables` は `use-scroll-animate/react` / `/vue` からのみ。`dist/index.mjs`・`dist/index.esm.js`・`dist/types/*`・`dist/*` ディープインポートは削除、デフォルトエンジンは `'auto'`。CDN の `dist/index.umd.js` は変更なし。詳細は [CHANGELOG](./CHANGELOG.md) の MIGRATION。
 
 ## インストール
 
@@ -61,7 +61,7 @@ ScrollAnimate.observe('.card', { animation: 'fade-in-up', engine: 'auto' });
 const sa = createScrollAnimate({ defaultEngine: 'auto' });
 ```
 
-- `'js'`：1.x の**デフォルト**（従来どおり）。`'auto'` / `'css'`：対応ブラウザではネイティブ、非対応なら自動的に JS にフォールバック。
+- `'auto'`：**2.0 からのデフォルト**。対応ブラウザではネイティブ、非対応なら JS。要素が `duration`・`delay`・`offset`・`stagger` を自分で指定した場合も JS。`'css'`：対応時は常にネイティブ。`'js'`：1.x の動作（`defaultEngine: 'js'` で全体に適用）。
 - ネイティブエンジンでは `duration`・`delay`・`threshold`・`offset`・`stagger` は無効で、範囲は `viewRange`（デフォルト `['entry 0%', 'entry 100%']`）。`easing` は有効。HTML：`data-sa-engine`、`data-sa-view-range`。
 - `once`（デフォルト）は完了時に最終状態を固定、`repeat: true` ではスクロールに双方向で追従。クラス名モード・reduced motion・`animate()`・`sequence()`・`staggerChildren()` は常に JS エンジン。`supportsScrollTimeline()` もエクスポート。
 
@@ -97,7 +97,7 @@ const sa = createScrollAnimate({ defaultEngine: 'auto' });
 
 - **新しいプリセット**：`scale-up`、`blur-in-up`、`flip-up`、`flip-down`、`rotate-left`、`rotate-right`、clip-path による `clip-up`、`clip-down`、`clip-left`、`clip-right`、`clip-circle`。
 - **メモリ使用量の削減**：`once` 要素はアニメーション開始後に自動でレジストリから削除されます（パララックス/`onProgress` が必要な要素を除く）。`WeakSet` で記憶されるため、`init()`/`observe()` で再生されることはありません。従来の挙動は `createScrollAnimate({ autoUnregister: false })`。
-- **正しい `exports` マップ**：Node ESM は `dist/index.mjs`、CommonJS は `dist/index.js` に解決され、それぞれ対応する型定義付き。従来の `main`/`module`/`unpkg` と `dist/*` のディープインポートも引き続き利用可能。
+- **正しい `exports` マップ**：2.0 から ESM 優先：`import` → `dist/*.js` + `*.d.ts`、`require` → `dist/*.cjs` + `*.d.cts`。
 
 ## v1.2.0 の新機能
 

@@ -2,7 +2,7 @@
 
 # use-scroll-animate 🚀
 
-**A lightweight (~5.5KB gzipped), dependency-free scroll animation library for the modern web.**
+**A lightweight (~5.7KB gzipped), dependency-free scroll animation library for the modern web.**
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/HarrisonCN/use-scroll-animate?style=flat-square)](https://github.com/HarrisonCN/use-scroll-animate/releases)
 [![GitHub repo size](https://img.shields.io/github/repo-size/HarrisonCN/use-scroll-animate?style=flat-square)](https://github.com/HarrisonCN/use-scroll-animate)
@@ -19,17 +19,23 @@ In 2025, performance is everything. Traditional scroll animation libraries often
 `use-scroll-animate` is built differently:
 - ⚡ **Zero Dependencies**: Pure Vanilla JS/TypeScript.
 - 🚀 **High Performance**: Powered by `IntersectionObserver` and the native `Web Animations API`. No scroll event listeners by default (the opt-in scroll-progress mode uses a single passive, rAF-throttled listener, only while tracked elements are on screen).
-- 🪶 **Ultra Lightweight**: ~5.5KB gzipped for the core (tree-shaken, minified ESM); everything incl. `sequence`, `staggerChildren` and the React/Vue helpers is ~6.7KB (UMD ~6.9KB). Every entry has a gzip budget enforced in CI (`size-budget.json`, `npm run size:check`).
+- 🪶 **Ultra Lightweight**: ~5.4–5.7KB gzipped for the core (tree-shaken, minified ESM); everything from the main entry is ~6.8KB (UMD ~7.0KB); `parallax()` alone < 1KB. Every entry has a gzip budget enforced in CI (`size-budget.json`, `npm run size:check`).
 - 🧩 **Framework Agnostic**: Vanilla JS, React hooks, Vue composables, Svelte actions, Solid directives and a `<scroll-animate>` Web Component, each as its own entry point (`use-scroll-animate/react`, `/vue`, `/svelte`, `/solid`, `/element`).
 - ♿ **Accessible**: Respects `prefers-reduced-motion` out of the box (content is shown immediately, no entrance or parallax motion).
 - 🖥️ **SSR-safe**: Importing (and even calling) the API on the server is a no-op.
+
+## v2.0.0 🎉
+
+- **Native scroll-driven animations by default** (`engine: 'auto'`) where the browser supports `animation-timeline: view()`, JS everywhere else.
+- **ESM-first package** with types for every entry: `use-scroll-animate`, `/react`, `/vue`, `/svelte`, `/solid`, `/element`.
+- **Breaking:** React/Vue factories moved to `/react` and `/vue`; `dist/index.mjs`, `dist/index.esm.js`, `dist/types/*` and `dist/*` deep imports are gone; ES2020 output. The CDN URLs `dist/index.umd.js` and `dist/element.umd.js` are unchanged. Upgrade steps: [MIGRATION](./CHANGELOG.md#migration-from-1x).
 
 ## Documentation
 
 - 📖 [API reference](./docs/API.md) — every export, option, attribute and config key
 - 🎛️ [Demo / preset playground](./demo/index.html) — every preset clickable, no build step (open `demo/index.html` from a clone)
 - 🔁 Migration guides: [from AOS](./docs/migration-from-aos.md) · [from GSAP ScrollTrigger](./docs/migration-from-gsap-scrolltrigger.md)
-- ⚠️ [Deprecations](./docs/deprecations.md) — what 2.0 removes and what replaces it
+- ⚠️ [Upgrading to 2.0](./docs/deprecations.md) — what 2.0 removed and what replaces it (also the MIGRATION section of the [CHANGELOG](./CHANGELOG.md))
 
 ## Installation
 
@@ -42,9 +48,9 @@ npm install use-scroll-animate
 In browsers that support CSS scroll-driven animations (`CSS.supports('animation-timeline: view()')`), presets can run on the browser's native **view timeline** instead of the JavaScript engine. The animation is then linked to the scroll position (it plays as the element scrolls in, off the main thread) rather than started by IntersectionObserver and played over a fixed `duration`.
 
 ```js
-ScrollAnimate.observe('.card', { animation: 'fade-in-up', engine: 'auto' });
-// or for every element of an instance
-const sa = createScrollAnimate({ defaultEngine: 'auto' });
+ScrollAnimate.observe('.card', { animation: 'fade-in-up' });            // native where supported (default 'auto')
+ScrollAnimate.observe('.card', { animation: 'fade-in-up', engine: 'js' }); // always time-based
+const sa = createScrollAnimate({ defaultEngine: 'js' });                 // 1.x behaviour for an instance
 ```
 
 ```html
@@ -53,8 +59,9 @@ const sa = createScrollAnimate({ defaultEngine: 'auto' });
 
 | `engine` | Behaviour |
 |---|---|
-| `'js'` | **Default in 1.x.** IntersectionObserver + time-based Web Animation (unchanged). |
-| `'auto'` / `'css'` | Native view timeline when supported, otherwise falls back to `'js'` automatically. |
+| `'auto'` | **Default since 2.0.** Native view timeline when supported, otherwise JS. Also JS when the element sets `duration`, `delay`, `offset` or `stagger` itself (those only mean something for a time-based animation). |
+| `'css'` | Native view timeline whenever supported (ignores time-based options), otherwise JS. |
+| `'js'` | IntersectionObserver + time-based Web Animation (the 1.x default). `createScrollAnimate({ defaultEngine: 'js' })` restores 1.x behaviour everywhere. |
 
 Notes:
 - With the native engine, `duration`, `delay`, `threshold`, `offset` and `stagger` don't apply; the animation spans `viewRange` (default `['entry 0%', 'entry 100%']`, i.e. from the moment the element starts entering until it is fully in view). `easing` still applies.
@@ -111,7 +118,7 @@ tl.cancel();       // stop and leave everything visible
 Finished `once` elements are dropped from the registry right after they animate (unless they still need parallax/`onProgress`), so long pages and SPAs don't keep thousands of records alive. They're remembered in a `WeakSet`, so `init()`/`observe()` never replay them. Set `createScrollAnimate({ autoUnregister: false })` to keep them listed in `getObservedElements()` as before.
 
 ### Proper `exports` map
-Node ESM (`import`) resolves to `dist/index.mjs`, CommonJS (`require`) to `dist/index.js`, each with matching bundled types. The legacy `main`/`module`/`unpkg` fields and `dist/*` deep imports keep working.
+ESM-first since 2.0: `import` resolves to `dist/*.js` + `dist/*.d.ts`, `require` to `dist/*.cjs` + `dist/*.d.cts`, for the main entry and every subpath. See [2.0](#v200-) below.
 
 ## v1.3.0: Custom Easing 🎨
 
@@ -177,7 +184,7 @@ We've added high-quality physics-based easing presets:
 | `onStart` / `onComplete` / `onEnter` / `onLeave` | `(el) => void` | – | Lifecycle callbacks |
 | `onProgress` | `(el, progress) => void` | – | Progress (0–1) as the element scrolls — visible ratio, or true scroll progress with `progressMode: 'scroll'` |
 | `progressMode` | `'ratio'` \| `'scroll'` | `'ratio'` | How `onProgress`/parallax progress is measured (`'scroll'`: 0 = top enters at the bottom, 1 = bottom leaves at the top) |
-| `engine` | `'js'` \| `'auto'` \| `'css'` | `'js'` | Run presets on the browser's native scroll-driven timeline when supported (`'auto'`/`'css'`), falling back to JS. See [Native scroll-driven engine](#native-scroll-driven-engine-engine-) |
+| `engine` | `'auto'` \| `'js'` \| `'css'` | `'auto'` | Run presets on the browser's native scroll-driven timeline when supported (`'auto'`/`'css'`), falling back to JS. See [Native scroll-driven engine](#native-scroll-driven-engine-engine-) |
 | `exit` | `boolean` \| preset \| `{ from, to }` | `false` | Animate out (reverse) when leaving the viewport, back in on re-entry. Implies `repeat`. See [Exit animations](#exit-animations-exit) |
 | `viewRange` | `[string, string]` | `['entry 0%', 'entry 100%']` | Native engine only: view-timeline range of the entrance |
 | `progressVar` | `string` | – | Write progress (0–1, same value as `onProgress`) to this CSS custom property, e.g. `'--sa-progress'`, for scroll-driven effects in plain CSS |
@@ -186,7 +193,7 @@ Every option is also available as a data attribute: `data-sa-animation`, `data-s
 
 **Presets:** `fade-in`, `fade-in-up|down|left|right`, `zoom-in`, `zoom-out`, `scale-up`, `flip-x`, `flip-y`, `flip-up`, `flip-down`, `slide-up|down|left|right`, `bounce`, `rotate-in`, `rotate-left`, `rotate-right`, `blur-in`, `blur-in-up`, `skew-in`, `scale-x`, `scale-y`, `clip-up|down|left|right`, `clip-circle`, `shimmer`, `pulse`, `swing`. Combine them with an array, e.g. `['fade-in', 'clip-up']`.
 
-**Global config** (`createScrollAnimate(config)` / `configure()`): `defaultAnimation`, `defaultDuration`, `defaultDelay`, `defaultEasing`, `defaultThreshold`, `defaultRootMargin`, `defaultRepeat`, `defaultOnce`, `defaultOffset`, `hiddenClass`, `visibleClass`, `useClassNames`, `disabled`, `root`, `autoUnregister` (default `true`), `defaultEngine` (default `'js'`).
+**Global config** (`createScrollAnimate(config)` / `configure()`): `defaultAnimation`, `defaultDuration`, `defaultDelay`, `defaultEasing`, `defaultThreshold`, `defaultRootMargin`, `defaultRepeat`, `defaultOnce`, `defaultOffset`, `hiddenClass`, `visibleClass`, `useClassNames`, `disabled`, `root`, `autoUnregister` (default `true`), `defaultEngine` (default `'auto'`).
 
 ### Progress as a CSS variable (`progressVar`)
 
@@ -319,7 +326,7 @@ function Feed({ items }) {
 }
 ```
 
-> Importing `createReactHooks` / `createVueComposables` from the main `use-scroll-animate` entry still works in 1.x but is **deprecated** (one dev-only warning) and removed in 2.0.
+> Since 2.0 `createReactHooks` / `createVueComposables` are only available from `use-scroll-animate/react` / `use-scroll-animate/vue`.
 
 ### Svelte (`use-scroll-animate/svelte`)
 

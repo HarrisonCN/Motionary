@@ -3,27 +3,38 @@
  * A lightweight, high-performance scroll animation library
  */
 /** Built-in animation presets */
-export type AnimationPreset = 'fade-in' | 'fade-in-up' | 'fade-in-down' | 'fade-in-left' | 'fade-in-right' | 'zoom-in' | 'zoom-out' | 'flip-x' | 'flip-y' | 'slide-up' | 'slide-down' | 'slide-left' | 'slide-right' | 'bounce' | 'rotate-in' | 'blur-in' | 'skew-in' | 'scale-x' | 'scale-y' | 'shimmer' | 'pulse' | 'swing' | 'scale-up' | 'blur-in-up' | 'flip-up' | 'flip-down' | 'rotate-left' | 'rotate-right' | 'clip-up' | 'clip-down' | 'clip-left' | 'clip-right' | 'clip-circle';
+type AnimationPreset = 'fade-in' | 'fade-in-up' | 'fade-in-down' | 'fade-in-left' | 'fade-in-right' | 'zoom-in' | 'zoom-out' | 'flip-x' | 'flip-y' | 'slide-up' | 'slide-down' | 'slide-left' | 'slide-right' | 'bounce' | 'rotate-in' | 'blur-in' | 'skew-in' | 'scale-x' | 'scale-y' | 'shimmer' | 'pulse' | 'swing' | 'scale-up' | 'blur-in-up' | 'flip-up' | 'flip-down' | 'rotate-left' | 'rotate-right' | 'clip-up' | 'clip-down' | 'clip-left' | 'clip-right' | 'clip-circle';
 /**
  * How `onProgress` (and parallax) progress is measured.
  * - `'ratio'` (default): the element's visible ratio (IntersectionObserver `intersectionRatio`).
  * - `'scroll'`: true scroll progress, 0 when the element's top touches the bottom of the
  *   viewport and 1 when its bottom leaves the top. Works for elements taller than the screen.
  */
-export type ProgressMode = 'ratio' | 'scroll';
+type ProgressMode = 'ratio' | 'scroll';
+/**
+ * Which engine runs the entrance animation.
+ * - `'js'`: IntersectionObserver triggers a time-based Web Animation.
+ * - `'css'`: the preset runs on the browser's native scroll-driven timeline
+ *   (`animation-timeline: view()`), so its progress follows the scroll position
+ *   off the main thread. Falls back to `'js'` where unsupported.
+ * - `'auto'` (default since 2.0): native when supported, JS otherwise — and JS
+ *   whenever the element sets `duration`, `delay`, `offset` or `stagger` itself,
+ *   since those only mean something for a time-based animation.
+ */
+type ScrollEngine = 'auto' | 'js' | 'css';
 /** Easing function types */
-export type EasingType = 'linear' | 'ease' | 'ease-in' | 'ease-out' | 'ease-in-out' | 'spring' | 'soft-spring' | 'heavy-bounce' | [number, number, number, number] | ((t: number) => number) | string;
+type EasingType = 'linear' | 'ease' | 'ease-in' | 'ease-out' | 'ease-in-out' | 'spring' | 'soft-spring' | 'heavy-bounce' | [number, number, number, number] | ((t: number) => number) | string;
 /** Keyframe definition for custom animations */
-export interface AnimationKeyframe {
+interface AnimationKeyframe {
     [property: string]: string | number;
 }
 /** Custom animation definition */
-export interface CustomAnimation {
+interface CustomAnimation {
     from: AnimationKeyframe;
     to: AnimationKeyframe;
 }
 /** Parallax configuration */
-export interface ParallaxOptions {
+interface ParallaxOptions {
     /** Movement on X axis (e.g., '100px', '20%') */
     x?: string | number;
     /** Movement on Y axis (e.g., '100px', '20%') */
@@ -36,7 +47,7 @@ export interface ParallaxOptions {
     speed?: number;
 }
 /** Per-element animation options */
-export interface AnimateOptions {
+interface AnimateOptions {
     /** Animation preset name, array of presets, or custom animation object */
     animation?: AnimationPreset | AnimationPreset[] | CustomAnimation;
     /** Duration in milliseconds (default: 600) */
@@ -77,9 +88,29 @@ export interface AnimateOptions {
      * style, for scroll-driven effects written in plain CSS. Off by default.
      */
     progressVar?: string;
+    /**
+     * Animation engine (default: `'auto'`, see `ScrollEngine`). With the native
+     * engine the animation is linked to scroll position: `duration`, `delay`,
+     * `threshold`, `offset` and `stagger` do not apply; `viewRange` does.
+     */
+    engine?: ScrollEngine;
+    /**
+     * Native engine only: the view-timeline range the entrance animation spans,
+     * as `[rangeStart, rangeEnd]` (default: `['entry 0%', 'entry 100%']`).
+     */
+    viewRange?: [string, string];
+    /**
+     * Animate out when the element leaves the viewport, and back in when it
+     * re-enters (implies `repeat: true` unless `repeat` is set).
+     * - `true`: play the entrance animation in reverse.
+     * - a preset / presets / `{ from, to }`: play that animation in reverse
+     *   (e.g. `exit: 'fade-in-down'` leaves upwards).
+     * Skipped under reduced motion. (default: `false`)
+     */
+    exit?: boolean | AnimationPreset | AnimationPreset[] | CustomAnimation;
 }
 /** Global configuration for ScrollAnimate instance */
-export interface ScrollAnimateConfig {
+interface ScrollAnimateConfig {
     /** Default animation preset (default: 'fade-in-up') */
     defaultAnimation?: AnimationPreset | AnimationPreset[] | CustomAnimation;
     /** Default duration in ms (default: 600) */
@@ -115,17 +146,21 @@ export interface ScrollAnimateConfig {
      * never re-hide or replay them. (default: true)
      */
     autoUnregister?: boolean;
+    /** Default animation engine (default: `'auto'`; `'js'` restores the 1.x behaviour) */
+    defaultEngine?: ScrollEngine;
 }
 /** Registered element entry */
-export interface AnimatedElement {
+interface AnimatedElement {
     element: Element;
     options: Required<AnimateOptions>;
     observer: IntersectionObserver;
     animated: boolean;
     progressObserver?: IntersectionObserver;
+    /** Engine actually used for this element (`'css'` = native scroll-driven timeline) */
+    engine?: 'js' | 'css';
 }
 /** ScrollAnimate public API */
-export interface ScrollAnimateInstance {
+interface ScrollAnimateInstance {
     /** Observe a single element or CSS selector */
     observe(target: string | Element | NodeList | Element[], options?: AnimateOptions): void;
     /** Stop observing a single element or CSS selector */
@@ -151,3 +186,59 @@ export interface ScrollAnimateInstance {
     /** Update global configuration */
     configure(config: Partial<ScrollAnimateConfig>): void;
 }
+
+/**
+ * use-scroll-animate - Staggered children
+ * Reveal a container's children one after another when the container scrolls
+ * into view, optionally also animating children that are added later.
+ */
+
+interface StaggerOptions extends AnimateOptions {
+    /** Delay between consecutive children in ms (default: 80) */
+    stagger?: number;
+    /**
+     * Watch the container with a MutationObserver and animate children added
+     * later (e.g. infinite lists). Children added after the container was
+     * revealed animate when they scroll into view, staggered per batch.
+     * (default: false)
+     */
+    observeChildren?: boolean;
+}
+
+/**
+ * use-scroll-animate - Svelte integration
+ *
+ * Svelte actions (no import from `svelte` needed, works with Svelte 3, 4 and 5):
+ *
+ * ```svelte
+ * <script>
+ *   import { scrollAnimate, scrollStagger } from 'use-scroll-animate/svelte';
+ * </script>
+ * <div use:scrollAnimate={{ animation: 'fade-in-up', duration: 800 }}>…</div>
+ * <ul use:scrollStagger={{ stagger: 60 }}>…</ul>
+ * ```
+ */
+
+interface ScrollAnimateActionOptions extends AnimateOptions {
+    /** Instance to register with (default: a shared instance created on first use) */
+    instance?: ScrollAnimateInstance;
+}
+interface ScrollStaggerActionOptions extends StaggerOptions {
+    instance?: ScrollAnimateInstance;
+}
+/** Shape of a Svelte action's return value. */
+interface ActionReturn<P> {
+    update?: (parameter: P) => void;
+    destroy?: () => void;
+}
+/**
+ * Animate `node` when it scrolls into view. Changing the parameter updates the
+ * callbacks right away; other options are applied if the element has not
+ * animated yet.
+ */
+declare function scrollAnimate(node: Element, options?: ScrollAnimateActionOptions): ActionReturn<ScrollAnimateActionOptions | undefined>;
+/** Stagger the children of `node` when it scrolls into view (`observeChildren: true` also animates children added later). */
+declare function scrollStagger(node: Element, options?: ScrollStaggerActionOptions): ActionReturn<ScrollStaggerActionOptions | undefined>;
+
+export { scrollAnimate, scrollStagger };
+export type { ActionReturn, ScrollAnimateActionOptions, ScrollStaggerActionOptions };

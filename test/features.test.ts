@@ -277,7 +277,8 @@ describe('sequence', () => {
 
 describe('Vue useScrollStagger', () => {
   it('staggers children on mount and cleans up on unmount', async () => {
-    const { createVueComposables } = await load();
+    await load();
+    const { createVueComposables } = await import('../src/vue');
     const ul = el('<ul><li></li><li></li></ul>');
     let mounted!: () => void;
     let unmounted!: () => void;
