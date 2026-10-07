@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.5.0] - 2026-10-07
+
+### Added
+- **3D & depth** — new category `use-scroll-animate/components/depth`:
+  - `<usa-cube>` — CSS 3D cube from up to six children (front, right, back, left, top, bottom): drag / swipe (via `gesture()`), arrow keys, `autoplay` (pauses on hover / focus), `show(face | index)`, `next()`, `prev()`; spring-driven, shortest-path rotation; only the front face is exposed to assistive tech; `usa:change`.
+  - `<usa-depth>` — layered depth parallax: `data-depth` (-1…1) layers shift and scale from `source="pointer | orientation | scroll"` (combinable), `strength`, optional scene `rotate`; `requestPermission()` for iOS motion sensors.
+  - `deviceTilt(cb, { range, smooth })`, `orientationToTilt()`, `requestOrientationPermission()`, `supportsOrientation()` — device-orientation tilt helpers.
+- The 3D ring carousel stays `<usa-carousel-3d>` (in `components/cards`) and is cross-linked from the new category.
+- Reduced motion: the cube switches faces instantly with no drag-rotate or autoplay; depth layers stay flat.
+- Showcase: new **3D & depth** gallery category (cube, depth scene, gyroscope demo).
+
 ## [3.4.0] - 2026-10-07
 
 ### Added

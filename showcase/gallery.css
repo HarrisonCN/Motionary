@@ -200,3 +200,12 @@ usa-toggle { --usa-toggle-on: var(--accent); }
 .demo-gl > img { width: 100%; height: 100%; object-fit: cover; }
 .demo-gl__label { color: #fff; font-weight: 700; text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4); }
 .demo-gl--canvas { display: block; background: linear-gradient(120deg, #6366f1, #22d3ee); }
+
+/* v3.5 3D demos */
+.demo-cube { margin: 12px auto; }
+.demo-face { display: grid; place-items: center; font-size: 2rem; font-weight: 800; color: #fff; border-radius: 10px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); border: 1px solid rgba(255, 255, 255, 0.3); }
+.demo-depth { width: min(100%, 320px); }
+.demo-depth__scene { position: relative; height: 180px; display: grid; place-items: center; border-radius: 16px; overflow: hidden; background: #0f172a; }
+.demo-depth__l { position: absolute; border-radius: 50%; filter: blur(2px); }
+.demo-depth__l--1 { width: 220px; height: 220px; left: -40px; top: -60px; background: radial-gradient(circle, #6366f1 0, transparent 70%); }
+.demo-depth__l--2 { width: 160px; height: 160px; right: -20px; bottom: -40px; background: radial-gradient(circle, #ec4899 0, transparent 70%); }
