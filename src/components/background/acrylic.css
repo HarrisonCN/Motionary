@@ -1,0 +1,40 @@
+/* <usa-acrylic> */
+usa-acrylic {
+  --usa-acrylic-tint: #f3f3f3; --usa-acrylic-opacity: 55%; --usa-acrylic-blur: 30px;
+  position: relative; display: block; isolation: isolate; overflow: hidden;
+  background-color: color-mix(in srgb, var(--usa-acrylic-tint) var(--usa-acrylic-opacity), transparent);
+  -webkit-backdrop-filter: blur(var(--usa-acrylic-blur)) saturate(1.6);
+  backdrop-filter: blur(var(--usa-acrylic-blur)) saturate(1.6);
+  border: 1px solid color-mix(in srgb, #fff 22%, transparent);
+}
+@media (prefers-color-scheme: dark) {
+  usa-acrylic { --usa-acrylic-tint: #2c2c2c; }
+}
+usa-acrylic::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+usa-acrylic::after {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; transform: translateX(-120%);
+  background: linear-gradient(105deg, transparent 30%, rgb(255 255 255 / 0.28) 50%, transparent 70%);
+}
+usa-acrylic[shimmer="hover"]:hover::after, usa-acrylic[data-shine]::after { animation: usa-acrylic-shine 1.1s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@keyframes usa-acrylic-shine { from { transform: translateX(-120%); } to { transform: translateX(120%); } }
+usa-acrylic[variant="mica"] {
+  --usa-acrylic-opacity: 80%;
+  -webkit-backdrop-filter: none; backdrop-filter: none;
+  background:
+    linear-gradient(color-mix(in srgb, var(--usa-acrylic-tint) var(--usa-acrylic-opacity), transparent), color-mix(in srgb, var(--usa-acrylic-tint) var(--usa-acrylic-opacity), transparent)),
+    var(--usa-mica-source, linear-gradient(135deg, #b8c6ff, #ffd6e8));
+  border-color: transparent;
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  usa-acrylic { background-color: var(--usa-acrylic-tint); }
+}
+@media (prefers-reduced-transparency: reduce) {
+  usa-acrylic { background: var(--usa-acrylic-tint); -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+@media (forced-colors: active) {
+  usa-acrylic { background: Canvas; -webkit-backdrop-filter: none; backdrop-filter: none; border-color: CanvasText; }
+  usa-acrylic::before, usa-acrylic::after { display: none; }
+}

@@ -1,0 +1,6 @@
+/* <usa-reveal> / <usa-stagger> */
+usa-reveal, usa-stagger { display: block; }
+usa-reveal[data-state="hidden"], usa-stagger[data-state="hidden"] > * { opacity: 0; }
+@media (prefers-reduced-motion: reduce) {
+  usa-reveal[data-state="hidden"], usa-stagger[data-state="hidden"] > * { opacity: 1; }
+}

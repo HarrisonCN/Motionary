@@ -1,0 +1,21 @@
+/* <usa-skeleton> */
+usa-skeleton { display: block; --usa-skeleton-base: color-mix(in srgb, currentColor 10%, transparent); --usa-skeleton-shine: color-mix(in srgb, currentColor 9%, transparent); --usa-skeleton-radius: 8px; }
+usa-skeleton[loading] > :not(.usa-skeleton-ph) { display: none !important; }
+usa-skeleton .usa-skeleton-ph { display: flex; gap: 14px; align-items: flex-start; }
+usa-skeleton .usa-bone-lines { flex: 1; display: grid; gap: 10px; min-width: 0; }
+usa-skeleton .usa-bone {
+  position: relative; display: block; overflow: hidden; height: 0.9em; border-radius: var(--usa-skeleton-radius); background: var(--usa-skeleton-base);
+}
+usa-skeleton .usa-bone-last { width: 62%; }
+usa-skeleton .usa-bone-block { height: 120px; }
+usa-skeleton .usa-bone-circle { border-radius: 50%; flex: none; }
+usa-skeleton .usa-bone-avatar { width: 44px; height: 44px; }
+usa-skeleton .usa-bone::after {
+  content: ""; position: absolute; inset: 0; transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, var(--usa-skeleton-shine), transparent);
+  animation: usa-skeleton 1.5s ease-in-out infinite;
+}
+@keyframes usa-skeleton { to { transform: translateX(100%); } }
+@media (prefers-reduced-motion: reduce) {
+  usa-skeleton .usa-bone::after { animation: none; }
+}

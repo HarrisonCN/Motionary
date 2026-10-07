@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.0] - 2026-10-07
+
+### Added
+- **Animated components** — `use-scroll-animate/components`: 30 framework-agnostic, dependency-free `<usa-*>` custom elements (Custom Elements + CSS + Web Animations API) that run in browsers and in Windows desktop apps rendering with a web view (Electron, Tauri, WebView2 in WinUI 3 / WPF / WinForms, PWAs). Organised in six categories, each its own subpath export:
+  - **Entrance & scroll** (`/components/reveal`): `<usa-reveal>` (12 effects, `repeat`), `<usa-stagger>`, `<usa-scroll-progress>` (page or `target`, `role="progressbar"`), `<usa-scrolly>` (sticky scrollytelling with `usa:step`).
+  - **Text** (`/components/text`): `<usa-typewriter>`, `<usa-split-text>`, `<usa-scramble>`, `<usa-counter>` (`Intl.NumberFormat`, animated `.value`), `<usa-shimmer-text>`, `<usa-text-rotate>`. Animated text keeps a visually hidden plain copy for screen readers.
+  - **Interaction** (`/components/interaction`): `<usa-ripple>`, `<usa-magnetic>`, `<usa-tilt>` (glare, `--usa-tilt-x/y`), `<usa-spotlight>` (Fluent Reveal highlight), `<usa-press>`, `<usa-toggle>` (`role="switch"`, form-associated).
+  - **Loading & feedback** (`/components/feedback`): `<usa-spinner>` (`fluent` WinUI ring, `windows` orbiting dots, `ring`, `dots`, `pulse`, `bars`), `<usa-skeleton>`, `<usa-progress>` (Fluent indeterminate, paused / error states), `<usa-toaster>` + `toast()`, `<usa-check>`.
+  - **Background & decoration** (`/components/background`): `<usa-aurora>`, `<usa-particles>` (canvas, runs only while visible), `<usa-grain>`, `<usa-marquee>`, `<usa-acrylic>` (Acrylic / Mica, solid under `prefers-reduced-transparency` / forced colours).
+  - **Transitions** (`/components/transitions`): `<usa-dialog>` (native `<dialog>`; modal, drawers, sheet), `<usa-accordion>` (native `<details>`), `<usa-flip-list>`, `<usa-view-switch>`, and the helpers `viewTransition()` (View Transitions API with fallback), `flip()` and `connectedAnimation()` (WinUI-style shared-element animation).
+- `defineComponents(categories?)`, `define<Category>Components()`, one `define*()` per element (custom tag names supported), `COMPONENT_CATEGORIES`, `configureComponents({ injectStyles, reducedMotion })`. Typed via `HTMLElementTagNameMap`.
+- Every component honours `prefers-reduced-motion`, animates `transform` / `opacity` (and `filter` for blurs), batches layout reads/writes per frame, pauses loops off-screen / in hidden tabs, and is SSR-safe (no DOM access at import; `define*()` is a no-op on the server).
+- Styles are injected per component as constructable stylesheets (CSP `style-src 'self'` friendly) or loaded as files: `use-scroll-animate/components.css` and `use-scroll-animate/components/<category>.css`.
+- **No-build bundle** `dist/components.umd.js` (IIFE/UMD, global `UsaComponents`) registers every element on load.
+- Docs: [`docs/components.md`](./docs/components.md) (every element, attribute, method and event, by category) and [`docs/windows-apps.md`](./docs/windows-apps.md) (Electron, Tauri, WinUI 3 / WPF / WinForms with WebView2, PWA, CSP, native Mica). README sections in English, 中文 and 日本語.
+- **Showcase**: new component gallery `showcase/components.html` with category navigation, search, live demos of every element, per-card code tabs (HTML / ES module / React / Vue / Electron·Tauri·WebView2), English / 中文, dark / light; linked from the Animation Store and deployed by the existing Pages workflow.
+- Size budgets for the bundle, the CSS file, each category and single-component imports (`size-budget.json`); `check:exports` covers the new entries and stylesheets.
+
+### Changed
+- `package.json` `sideEffects` is now `["*.css"]` (was `false`) so bundlers keep the optional stylesheet imports; all JS stays side-effect free.
+
 ## [2.1.0] - 2026-10-07
 
 ### Added

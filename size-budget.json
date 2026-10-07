@@ -63,5 +63,80 @@
     "name": "import { parallax }",
     "import": "export { parallax } from 'pkg';",
     "limit": 2048
+  },
+  {
+    "name": "dist/components.umd.js (minified, all components + CSS)",
+    "file": "dist/components.umd.js",
+    "limit": 25088
+  },
+  {
+    "name": "dist/components.css",
+    "file": "dist/components.css",
+    "limit": 6400
+  },
+  {
+    "name": "import 'use-scroll-animate/components' (everything)",
+    "import": "export * from 'pkg/components';",
+    "limit": 25088
+  },
+  {
+    "name": "import 'use-scroll-animate/components/reveal'",
+    "import": "export * from 'pkg/components/reveal';",
+    "limit": 4096
+  },
+  {
+    "name": "import 'use-scroll-animate/components/text'",
+    "import": "export * from 'pkg/components/text';",
+    "limit": 5632
+  },
+  {
+    "name": "import 'use-scroll-animate/components/interaction'",
+    "import": "export * from 'pkg/components/interaction';",
+    "limit": 5632
+  },
+  {
+    "name": "import 'use-scroll-animate/components/feedback'",
+    "import": "export * from 'pkg/components/feedback';",
+    "limit": 7168
+  },
+  {
+    "name": "import 'use-scroll-animate/components/background'",
+    "import": "export * from 'pkg/components/background';",
+    "limit": 6144
+  },
+  {
+    "name": "import 'use-scroll-animate/components/transitions'",
+    "import": "export * from 'pkg/components/transitions';",
+    "limit": 6144
+  },
+  {
+    "name": "import { defineTypewriter } from '\u2026/components/text'",
+    "import": "export { defineTypewriter } from 'pkg/components/text';",
+    "limit": 2304
+  },
+  {
+    "name": "import { defineSpinner } from '\u2026/components/feedback'",
+    "import": "export { defineSpinner } from 'pkg/components/feedback';",
+    "limit": 2816
+  },
+  {
+    "name": "import { defineReveal } from '\u2026/components/reveal'",
+    "import": "export { defineReveal } from 'pkg/components/reveal';",
+    "limit": 2304
+  },
+  {
+    "name": "import { defineRipple } from '\u2026/components/interaction'",
+    "import": "export { defineRipple } from 'pkg/components/interaction';",
+    "limit": 2048
+  },
+  {
+    "name": "import { defineMarquee } from '\u2026/components/background'",
+    "import": "export { defineMarquee } from 'pkg/components/background';",
+    "limit": 2560
+  },
+  {
+    "name": "import { viewTransition } from '\u2026/components/transitions'",
+    "import": "export { viewTransition } from 'pkg/components/transitions';",
+    "limit": 768
   }
 ]

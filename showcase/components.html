@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>use-scroll-animate · Animated Components</title>
+  <meta name="description" content="30+ dependency-free animated Web Components (&lt;usa-*&gt;) in six categories — for web pages and Windows apps built with Electron, Tauri, WebView2 or as a PWA." />
+  <meta name="theme-color" content="#0b0d12" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%237c5cff'/%3E%3Cpath d='M18 40 32 22l14 18' fill='none' stroke='white' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+  <script>
+    (function () {
+      try {
+        var d = document.documentElement;
+        var theme = localStorage.getItem('usa-showcase:theme') || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        d.setAttribute('data-theme', theme);
+        var lang = localStorage.getItem('usa-showcase:lang') || ((navigator.language || '').toLowerCase().indexOf('zh') === 0 ? 'zh' : 'en');
+        d.setAttribute('lang', lang === 'zh' ? 'zh-CN' : 'en');
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./gallery.css" />
+  <link rel="modulepreload" href="./gallery.js" />
+</head>
+<body class="gallery-page">
+  <a class="skip" href="#gallery" data-i18n="skip">Skip to components</a>
+  <usa-scroll-progress label="Page progress"></usa-scroll-progress>
+
+  <header class="topbar" id="top">
+    <a class="brand" href="./" aria-label="use-scroll-animate Animation Store">
+      <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 15 12 7l7 8" /></svg></span>
+      <span class="brand-name">use-scroll-animate</span>
+      <span class="brand-store" data-i18n="brand">Components</span>
+    </a>
+    <nav class="topbar-actions" aria-label="Site">
+      <a class="icon-btn nav-link" href="./" data-i18n="nav.store">Animation Store</a>
+      <button class="icon-btn" id="lang-toggle" type="button" aria-label="Switch language"><span data-i18n="lang.toggle">中文</span></button>
+      <button class="icon-btn" id="theme-toggle" type="button" aria-label="Toggle theme">
+        <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5" /><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8" /></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z" /></svg>
+      </button>
+      <a class="icon-btn" href="https://github.com/HarrisonCN/use-scroll-animate" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true" class="i-fill"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.4-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.4 1.1 3 .8.1-.6.3-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7 3.6 3.6 0 0 1 .1-2.7s.8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .4 1 .4 1.9.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.8V21c0 .3.2.6.7.5A10 10 0 0 0 12 2Z" /></svg>
+      </a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <usa-aurora class="g-hero" colors="#7c5cff,#22d3ee,#f472b6,#34d399" intensity="0.55">
+      <div class="g-hero-copy">
+        <p class="kicker" data-i18n="hero.kicker">New in v2.2 · Web Components</p>
+        <h1 id="hero-title" data-i18n="hero.title">Animated components for web pages and Windows apps.</h1>
+        <p class="lead" data-i18n="hero.lead">30 dependency-free &lt;usa-*&gt; custom elements in six categories. Plain HTML, React, Vue, Svelte — and Electron, Tauri, WebView2 or a PWA on Windows.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#gallery" data-i18n="hero.cta">Browse components</a>
+          <button class="btn btn-ghost install-pill" type="button" id="hero-install"><code>npm i use-scroll-animate</code><span class="copy-ico" aria-hidden="true"></span><span class="sr-only" data-i18n="hero.install">Copy install</span></button>
+        </div>
+        <ul class="g-platforms" aria-label="Runs in">
+          <li>Chrome · Edge · Firefox · Safari</li><li>Electron</li><li>Tauri</li><li>WebView2 (WinUI · WPF · WinForms)</li><li>PWA</li>
+        </ul>
+      </div>
+    </usa-aurora>
+
+    <section class="shop" aria-label="Components">
+      <div class="toolbar" id="toolbar">
+        <label class="search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" /><path d="m16 16 4.5 4.5" /></svg>
+          <span class="sr-only" data-i18n="search.label">Search components</span>
+          <input id="search" type="search" autocomplete="off" spellcheck="false" placeholder="Search components…" data-i18n-placeholder="search.placeholder" />
+          <kbd aria-hidden="true">/</kbd>
+        </label>
+        <div class="chips" id="chips" role="toolbar" aria-label="Filter by category"></div>
+      </div>
+      <p class="rm-notice" id="rm-notice" hidden data-i18n="rm.notice"></p>
+      <p class="results" id="results" aria-live="polite"></p>
+      <div id="gallery" tabindex="-1">
+        <p class="g-loading"><usa-spinner variant="fluent" size="28" label="Loading"></usa-spinner></p>
+      </div>
+      <div class="empty" id="empty" hidden>
+        <p data-i18n="results.empty">No components match.</p>
+        <button class="btn btn-ghost" type="button" id="clear-filters" data-i18n="results.clear">Clear filters</button>
+      </div>
+    </section>
+
+    <section class="g-scrolly" id="scrolly-demo" aria-labelledby="scrolly-title">
+      <h2 id="scrolly-title" data-i18n="scrolly.title">&lt;usa-scrolly&gt; — sticky scrollytelling</h2>
+      <usa-scrolly class="g-scrolly-body">
+        <figure data-sticky class="g-scrolly-figure" aria-hidden="true"><div class="g-scrolly-shape"></div><usa-counter class="g-scrolly-num" to="1" start="manual"></usa-counter></figure>
+        <div class="g-scrolly-steps">
+          <section data-step="web"><h3 data-i18n="scrolly.s1.t">1 · The web</h3><p data-i18n="scrolly.s1.d">Any modern browser: Chrome, Edge, Firefox, Safari.</p></section>
+          <section data-step="electron"><h3 data-i18n="scrolly.s2.t">2 · Electron</h3><p data-i18n="scrolly.s2.d">Desktop apps for Windows, macOS and Linux, Chromium inside.</p></section>
+          <section data-step="tauri"><h3 data-i18n="scrolly.s3.t">3 · Tauri</h3><p data-i18n="scrolly.s3.d">Rust-powered apps rendering with WebView2 on Windows.</p></section>
+          <section data-step="webview2"><h3 data-i18n="scrolly.s4.t">4 · WebView2</h3><p data-i18n="scrolly.s4.d">Embed in WinUI 3, WPF or WinForms — same components.</p></section>
+        </div>
+      </usa-scrolly>
+    </section>
+
+    <section class="g-windows" id="windows" aria-labelledby="windows-title">
+      <h2 id="windows-title" data-i18n="win.title">Use them in Windows desktop software</h2>
+      <p class="lead" data-i18n="win.lead">They are standard Custom Elements + CSS + Web Animations, so they run wherever a modern web view renders your UI.</p>
+      <usa-stagger class="g-win-grid" effect="rise">
+        <article><h3>Electron</h3><pre><code>// renderer.js (bundled)
+import { defineComponents } from
+  'use-scroll-animate/components';
+defineComponents();</code></pre></article>
+        <article><h3>Tauri</h3><pre><code>// src/main.ts — Vite + WebView2
+import { defineTextComponents } from
+  'use-scroll-animate/components/text';
+defineTextComponents();</code></pre></article>
+        <article><h3>WebView2 · WinUI 3 / WPF</h3><pre><code>&lt;!-- wwwroot/index.html, mapped via
+     SetVirtualHostNameToFolderMapping --&gt;
+&lt;script src="components.umd.js"&gt;&lt;/script&gt;
+&lt;usa-spinner variant="fluent"&gt;&lt;/usa-spinner&gt;</code></pre></article>
+        <article><h3>PWA / browser</h3><pre><code>&lt;script src="https://unpkg.com/
+  use-scroll-animate@2/dist/components.umd.js"&gt;
+&lt;/script&gt;</code></pre></article>
+      </usa-stagger>
+      <p><a class="btn btn-ghost" href="https://github.com/HarrisonCN/use-scroll-animate/blob/main/docs/windows-apps.md" target="_blank" rel="noopener" data-i18n="win.guide">Read the Windows apps guide →</a></p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p data-i18n="footer.made">Every demo on this page is a real &lt;usa-*&gt; element from dist/.</p>
+    <p class="footer-links">
+      <a href="./" data-i18n="nav.store">Animation Store</a>
+      <a href="https://github.com/HarrisonCN/use-scroll-animate/blob/main/docs/components.md" target="_blank" rel="noopener" data-i18n="footer.docs">Component docs</a>
+      <a href="https://www.npmjs.com/package/use-scroll-animate" target="_blank" rel="noopener">npm</a>
+    </p>
+  </footer>
+
+  <usa-dialog id="demo-dialog" label="Demo dialog">
+    <h2 class="dlg-title" data-i18n="dlg.title">Hello from &lt;usa-dialog&gt;</h2>
+    <p data-i18n="dlg.body">Native &lt;dialog&gt; underneath: focus is trapped, the page is inert, Esc or the backdrop closes it.</p>
+    <div class="dlg-actions"><usa-toggle checked><span data-i18n="dlg.toggle">Animations</span></usa-toggle><button class="btn btn-primary" type="button" data-close="ok" data-i18n="dlg.ok">Done</button></div>
+  </usa-dialog>
+  <usa-toaster position="bottom-right"></usa-toaster>
+
+  <noscript><p class="noscript">This gallery needs JavaScript to run the components.</p></noscript>
+  <script type="module" src="./gallery.js"></script>
+</body>
+</html>

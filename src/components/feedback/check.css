@@ -1,0 +1,8 @@
+/* <usa-check> */
+usa-check { --usa-check-size: 56px; --usa-check-color: #0f9d58; display: inline-block; width: var(--usa-check-size); height: var(--usa-check-size); vertical-align: middle; }
+usa-check[data-variant="error"] { --usa-check-color: #d13438; }
+usa-check[data-variant="warning"] { --usa-check-color: #c19c00; }
+usa-check svg { width: 100%; height: 100%; overflow: visible; }
+usa-check circle, usa-check path { fill: none; stroke: var(--usa-check-color); stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1 1; }
+usa-check[data-state="idle"] circle, usa-check[data-state="idle"] path { stroke-dashoffset: 1; }
+usa-check[data-state="done"] circle, usa-check[data-state="done"] path { stroke-dashoffset: 0; }

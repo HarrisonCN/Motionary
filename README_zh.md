@@ -25,6 +25,35 @@
 - 🧩 **框架无关**：完美支持原生 JS、React、Vue、Svelte 等。内置一流的 React Hooks 和 Vue Composables。
 - ♿ **无障碍**：原生支持 `prefers-reduced-motion`。
 
+## 动画组件（v2.2）🧩
+
+**30 个零依赖的动画 Web Components**（`<usa-*>`），分为六大类——**同时适用于网页与 Windows 桌面软件**（Electron、Tauri、WinUI/WPF/WinForms 中的 WebView2、PWA）。仅基于 Custom Elements + CSS + Web Animations：可摇树、SSR 安全、全面遵循 `prefers-reduced-motion`。**[在线组件库](https://harrisoncn.github.io/use-scroll-animate/showcase/components.html)** · [组件文档](./docs/components.md)（英文）· [Windows 应用指南](./docs/windows-apps.md)（英文）
+
+```js
+import { defineComponents } from 'use-scroll-animate/components';
+defineComponents(); // 或按分类：import { defineTextComponents } from 'use-scroll-animate/components/text'
+```
+
+```html
+<!-- 或免构建直接使用 -->
+<script src="https://unpkg.com/use-scroll-animate@2/dist/components.umd.js"></script>
+<usa-typewriter words="你好，Windows。|你好，Web。"></usa-typewriter>
+<usa-spinner variant="fluent"></usa-spinner>
+```
+
+| 分类（导入路径） | 组件 |
+|---|---|
+| **入场与滚动**（`/components/reveal`） | `<usa-reveal>` 滚动揭示（12 种效果）· `<usa-stagger>` 错峰列表 · `<usa-scroll-progress>` 阅读进度条 · `<usa-scrolly>` 粘性滚动叙事 |
+| **文字**（`/components/text`） | `<usa-typewriter>` 打字机 · `<usa-split-text>` 逐字揭示 · `<usa-scramble>` 乱码解码 · `<usa-counter>` 数字滚动 · `<usa-shimmer-text>` 流光文字 · `<usa-text-rotate>` 轮换词语 |
+| **交互反馈**（`/components/interaction`） | `<usa-ripple>` 水波纹 · `<usa-magnetic>` 磁吸按钮 · `<usa-tilt>` 3D 倾斜卡片 · `<usa-spotlight>` Fluent 光照高亮 · `<usa-press>` 按压反馈 · `<usa-toggle>` 切换开关 |
+| **加载与反馈**（`/components/feedback`） | `<usa-spinner>`（WinUI 进度环、Windows 圆点等 6 种）· `<usa-skeleton>` 骨架屏 · `<usa-progress>` 进度条 · `<usa-toaster>` + `toast()` 通知 · `<usa-check>` 结果图标 |
+| **背景与装饰**（`/components/background`） | `<usa-aurora>` 极光 · `<usa-particles>` 粒子 · `<usa-grain>` 胶片颗粒 · `<usa-marquee>` 无限跑马灯 · `<usa-acrylic>` 亚克力 / 云母材质 |
+| **过渡动画**（`/components/transitions`） | `<usa-dialog>` 弹窗 / 抽屉 / 底部面板 · `<usa-accordion>` 手风琴 · `<usa-flip-list>` FLIP 列表 · `<usa-view-switch>` 视图切换 · `viewTransition()` · `flip()` · `connectedAnimation()` |
+
+完整包约 22 kB gzip（JS + CSS）；单个分类 3.5–6.4 kB；单个组件约 2 kB。下方的滚动动画核心不受影响。
+
+**在 Windows 软件中使用**：组件只是标准 Web 代码，Electron / Tauri 渲染进程中直接 `import` 即可；WinUI 3 / WPF / WinForms 用 WebView2 加载本地页面（`SetVirtualHostNameToFolderMapping`）并通过 `<script src="components.umd.js">` 引入。样式以 constructable stylesheet 注入，兼容严格 CSP；也可改为引入 `use-scroll-animate/components.css` 并调用 `configureComponents({ injectStyles: false })`。系统“动画效果”关闭时（`prefers-reduced-motion`）自动使用平静版本。
+
 ## 文档
 
 - [API 参考](./docs/API.md)（英文）· [演示页](./demo/index.html)（每个预设都可点击，无需构建）

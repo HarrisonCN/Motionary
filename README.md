@@ -2,7 +2,7 @@
 
 # use-scroll-animate 🚀
 
-**A lightweight (~5.7KB gzipped), dependency-free scroll animation library for the modern web.**
+**A lightweight (~5.7KB gzipped), dependency-free scroll animation library for the modern web — plus 30 animated Web Components for web pages and Windows apps.**
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/HarrisonCN/use-scroll-animate?style=flat-square)](https://github.com/HarrisonCN/use-scroll-animate/releases)
 [![GitHub repo size](https://img.shields.io/github/repo-size/HarrisonCN/use-scroll-animate?style=flat-square)](https://github.com/HarrisonCN/use-scroll-animate)
@@ -10,7 +10,7 @@
 
 [English](./README.md) | [简体中文](./README_zh.md) | [日本語](./README_ja.md)
 
-**[✨ Live showcase — every effect, live, with copy-paste code](https://harrisoncn.github.io/use-scroll-animate/)**
+**[✨ Live showcase — every effect, live, with copy-paste code](https://harrisoncn.github.io/use-scroll-animate/)** · **[🧩 Component gallery](https://harrisoncn.github.io/use-scroll-animate/showcase/components.html)**
 
 </div>
 
@@ -26,6 +26,33 @@ In 2025, performance is everything. Traditional scroll animation libraries often
 - ♿ **Accessible**: Respects `prefers-reduced-motion` out of the box (content is shown immediately, no entrance or parallax motion).
 - 🖥️ **SSR-safe**: Importing (and even calling) the API on the server is a no-op.
 
+## Animated components (v2.2) 🧩
+
+**30 dependency-free animated Web Components** (`<usa-*>`) in six categories — for **web pages and Windows desktop apps** (Electron, Tauri, WebView2 in WinUI/WPF/WinForms, PWAs). Custom Elements + CSS + Web Animations only: tree-shakable, SSR-safe, `prefers-reduced-motion` everywhere. **[Live gallery](https://harrisoncn.github.io/use-scroll-animate/showcase/components.html)** · [Component docs](./docs/components.md) · [Windows apps guide](./docs/windows-apps.md)
+
+```js
+import { defineComponents } from 'use-scroll-animate/components';
+defineComponents(); // or per category: import { defineTextComponents } from 'use-scroll-animate/components/text'
+```
+
+```html
+<!-- or with no build step -->
+<script src="https://unpkg.com/use-scroll-animate@2/dist/components.umd.js"></script>
+<usa-typewriter words="Hello, Windows.|Hello, web."></usa-typewriter>
+<usa-spinner variant="fluent"></usa-spinner>
+```
+
+| Category (import) | Components |
+|---|---|
+| **Entrance & scroll** (`/components/reveal`) | `<usa-reveal>` (12 effects) · `<usa-stagger>` · `<usa-scroll-progress>` · `<usa-scrolly>` (sticky scrollytelling) |
+| **Text** (`/components/text`) | `<usa-typewriter>` · `<usa-split-text>` · `<usa-scramble>` · `<usa-counter>` · `<usa-shimmer-text>` · `<usa-text-rotate>` |
+| **Interaction** (`/components/interaction`) | `<usa-ripple>` · `<usa-magnetic>` · `<usa-tilt>` · `<usa-spotlight>` (Fluent reveal highlight) · `<usa-press>` · `<usa-toggle>` |
+| **Loading & feedback** (`/components/feedback`) | `<usa-spinner>` (WinUI ring, Windows dots, ring, dots, pulse, bars) · `<usa-skeleton>` · `<usa-progress>` · `<usa-toaster>` + `toast()` · `<usa-check>` |
+| **Background & decoration** (`/components/background`) | `<usa-aurora>` · `<usa-particles>` · `<usa-grain>` · `<usa-marquee>` · `<usa-acrylic>` (Acrylic / Mica) |
+| **Transitions** (`/components/transitions`) | `<usa-dialog>` (modal / drawer / sheet) · `<usa-accordion>` · `<usa-flip-list>` · `<usa-view-switch>` · `viewTransition()` · `flip()` · `connectedAnimation()` |
+
+Whole bundle ≈ 22 kB gzip (JS + CSS); one category 3.5–6.4 kB; a single component ≈ 2 kB. The scroll-animation core below is unaffected.
+
 ## v2.0.0 🎉
 
 - **Native scroll-driven animations by default** (`engine: 'auto'`) where the browser supports `animation-timeline: view()`, JS everywhere else.
@@ -35,6 +62,7 @@ In 2025, performance is everything. Traditional scroll animation libraries often
 ## Documentation
 
 - 📖 [API reference](./docs/API.md) — every export, option, attribute and config key
+- 🧩 [Animated components](./docs/components.md) — every `<usa-*>` element, by category · [Windows apps guide](./docs/windows-apps.md) (Electron, Tauri, WebView2, PWA)
 - 🎛️ [Demo / preset playground](./demo/index.html) — every preset clickable, no build step (open `demo/index.html` from a clone)
 - 🔁 Migration guides: [from AOS](./docs/migration-from-aos.md) · [from GSAP ScrollTrigger](./docs/migration-from-gsap-scrolltrigger.md)
 - ⚠️ [Upgrading to 2.0](./docs/deprecations.md) — what 2.0 removed and what replaces it (also the MIGRATION section of the [CHANGELOG](./CHANGELOG.md))

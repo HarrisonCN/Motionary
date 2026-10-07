@@ -1,0 +1,12 @@
+/* <usa-shimmer-text> */
+usa-shimmer-text {
+  --usa-shimmer-color: currentColor;
+  --usa-shimmer-shine: #fff;
+  background: linear-gradient(var(--usa-shimmer-angle, 110deg), var(--usa-shimmer-color) 35%, var(--usa-shimmer-shine) 50%, var(--usa-shimmer-color) 65%) 0 0 / 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: usa-shimmer var(--usa-shimmer-duration, 2600ms) linear infinite;
+}
+@keyframes usa-shimmer { from { background-position: 100% 0; } to { background-position: -150% 0; } }

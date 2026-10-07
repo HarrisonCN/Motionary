@@ -1,0 +1,5 @@
+/* <usa-view-switch> */
+usa-view-switch { display: grid; }
+usa-view-switch > * { grid-area: 1 / 1; min-width: 0; }
+usa-view-switch > [hidden]:not([data-leaving]) { display: none !important; }
+usa-view-switch > [data-leaving] { display: block; pointer-events: none; }
