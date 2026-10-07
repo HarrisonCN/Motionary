@@ -1,6 +1,7 @@
 /**
  * use-scroll-animate - React Integration
  * Provides useScrollAnimate and useScrollStagger hooks for React applications.
+ * `useScrollStagger({ observeChildren: true })` also animates children added later.
  *
  * Both hooks are thin wrappers around the core engine, so they share its
  * behaviour: `once`, `offset`, custom easing functions, parallax,
@@ -8,7 +9,8 @@
  */
 
 import type { AnimateOptions, ScrollAnimateInstance } from './types';
-import { createScrollAnimate, prepareElement, supportsObserver } from './core';
+import { createScrollAnimate } from './core';
+import { staggerChildren, type StaggerOptions } from './stagger';
 
 type ReactRef<T> = { current: T | null };
 
@@ -55,7 +57,7 @@ export function createReactHooks(React: {
     return ref;
   }
 
-  function useScrollStagger(options: AnimateOptions & { stagger?: number } = {}) {
+  function useScrollStagger(options: StaggerOptions = {}) {
     const ref = React.useRef<Element>(null);
     const optionsRef = React.useRef<AnimateOptions>(options);
     optionsRef.current = options;
@@ -63,28 +65,7 @@ export function createReactHooks(React: {
     React.useEffect(() => {
       const container = ref.current;
       if (!container) return;
-
-      const sa = getInstance();
-      const { stagger = 80, delay = 0, threshold = 0.1, rootMargin = '0px', ...rest } =
-        withLatestCallbacks(optionsRef);
-      const children = Array.from(container.children);
-      if (!supportsObserver()) return; // leave content visible
-
-      children.forEach((child) => prepareElement(child));
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          if (!entries.some((entry) => entry.isIntersecting)) return;
-          observer.disconnect();
-          children.forEach((child, i) => {
-            sa.animate(child, { ...rest, delay: delay + i * stagger });
-          });
-        },
-        { threshold, rootMargin }
-      );
-
-      observer.observe(container);
-      return () => observer.disconnect();
+      return staggerChildren(container, withLatestCallbacks(optionsRef) as StaggerOptions, getInstance());
     }, []);
 
     return ref;

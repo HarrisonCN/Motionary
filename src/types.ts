@@ -26,7 +26,26 @@ export type AnimationPreset =
   | 'scale-y'
   | 'shimmer'
   | 'pulse'
-  | 'swing';
+  | 'swing'
+  | 'scale-up'
+  | 'blur-in-up'
+  | 'flip-up'
+  | 'flip-down'
+  | 'rotate-left'
+  | 'rotate-right'
+  | 'clip-up'
+  | 'clip-down'
+  | 'clip-left'
+  | 'clip-right'
+  | 'clip-circle';
+
+/**
+ * How `onProgress` (and parallax) progress is measured.
+ * - `'ratio'` (default): the element's visible ratio (IntersectionObserver `intersectionRatio`).
+ * - `'scroll'`: true scroll progress, 0 when the element's top touches the bottom of the
+ *   viewport and 1 when its bottom leaves the top. Works for elements taller than the screen.
+ */
+export type ProgressMode = 'ratio' | 'scroll';
 
 /** Easing function types */
 export type EasingType =
@@ -101,6 +120,8 @@ export interface AnimateOptions {
   onLeave?: (element: Element) => void;
   /** Callback fired with scroll progress (0 to 1) */
   onProgress?: (element: Element, progress: number) => void;
+  /** How progress for `onProgress`/parallax is measured (default: 'ratio') */
+  progressMode?: ProgressMode;
 }
 
 /** Global configuration for ScrollAnimate instance */
@@ -133,6 +154,13 @@ export interface ScrollAnimateConfig {
   disabled?: boolean;
   /** Custom IntersectionObserver root element */
   root?: Element | null;
+  /**
+   * Drop `once` elements from the registry as soon as their entrance animation
+   * has been triggered (unless they still need parallax/onProgress), so they can
+   * be garbage-collected. They are remembered in a WeakSet, so `init()`/`observe()`
+   * never re-hide or replay them. (default: true)
+   */
+  autoUnregister?: boolean;
 }
 
 /** Registered element entry */

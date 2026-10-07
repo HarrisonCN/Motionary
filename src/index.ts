@@ -9,7 +9,9 @@
  * @see https://github.com/HarrisonCN/use-scroll-animate
  */
 
-export { createScrollAnimate } from './core';
+export { createScrollAnimate, getScrollProgress } from './core';
+export { staggerChildren } from './stagger';
+export { sequence } from './sequence';
 export { PRESETS, resolvePreset, resolveEasing, EASING_MAP } from './presets';
 export { createReactHooks } from './react';
 export { createVueComposables } from './vue';
@@ -20,11 +22,14 @@ export type {
   AnimationKeyframe,
   CustomAnimation,
   ParallaxOptions,
+  ProgressMode,
   AnimateOptions,
   ScrollAnimateConfig,
   AnimatedElement,
   ScrollAnimateInstance,
 } from './types';
+export type { StaggerOptions } from './stagger';
+export type { SequenceStep, SequenceOptions, SequenceController } from './sequence';
 
 // Default export: a ready-to-use singleton instance
 import { createScrollAnimate } from './core';

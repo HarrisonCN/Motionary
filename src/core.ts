@@ -32,6 +32,7 @@ const DEFAULT_CONFIG: Required<ScrollAnimateConfig> = {
   useClassNames: false,
   disabled: false,
   root: null,
+  autoUnregister: true,
 };
 
 const noop = () => undefined;
@@ -107,6 +108,7 @@ function parseDataAttributes(el: Element, config: Required<ScrollAnimateConfig>)
   if (dataset.saOnce !== undefined) opts.once = dataset.saOnce !== 'false';
   opts.offset = num(dataset.saOffset);
   opts.stagger = num(dataset.saStagger);
+  if (dataset.saProgress) opts.progressMode = dataset.saProgress.trim() === 'scroll' ? 'scroll' : 'ratio';
 
   if (dataset.saParallaxX || dataset.saParallaxY || dataset.saParallaxRotate || dataset.saParallaxScale) {
     opts.parallax = {
@@ -141,6 +143,7 @@ function mergeOptions(opts: AnimateOptions, config: Required<ScrollAnimateConfig
     onEnter: opts.onEnter ?? noop,
     onLeave: opts.onLeave ?? noop,
     onProgress: opts.onProgress ?? noop,
+    progressMode: opts.progressMode ?? 'ratio',
   };
 }
 
@@ -177,6 +180,27 @@ function hasParallax(p: ParallaxOptions | undefined): boolean {
 
 function needsProgress(opts: Required<AnimateOptions>): boolean {
   return hasParallax(opts.parallax) || opts.onProgress !== noop;
+}
+
+/**
+ * True scroll progress of `el` through the viewport (or `root`): 0 when its top
+ * edge reaches the bottom of the viewport, 1 when its bottom edge passes the top.
+ * Works for elements taller than the viewport. Returns 0 without a DOM.
+ */
+export function getScrollProgress(el: Element, root?: Element | null): number {
+  if (!hasDOM()) return 0;
+  const rect = el.getBoundingClientRect();
+  let top = 0;
+  let height = window.innerHeight || document.documentElement.clientHeight || 0;
+  if (root) {
+    const r = root.getBoundingClientRect();
+    top = r.top;
+    height = r.height;
+  }
+  const total = height + rect.height;
+  if (total <= 0) return 0;
+  const p = (top + height - rect.top) / total;
+  return p < 0 ? 0 : p > 1 ? 1 : p;
 }
 
 /* ------------------------------------------------------------------ */
@@ -296,6 +320,14 @@ function reveal(el: Element, config: Required<ScrollAnimateConfig>): void {
   }
 }
 
+/** @internal Cancel a running/pending animation and make the element visible. */
+export function stopAnimation(el: Element, config: ScrollAnimateConfig = {}): void {
+  reveal(el, { ...DEFAULT_CONFIG, ...config });
+}
+
+/** @internal Resolve a selector / Element / NodeList / Element[] to elements (SSR-safe). */
+export { resolveTargets, hasDOM };
+
 /** @internal Whether animations should be skipped entirely. */
 export function motionDisabled(config: Pick<ScrollAnimateConfig, 'disabled'>): boolean {
   return !!config.disabled || prefersReducedMotion();
@@ -334,6 +366,12 @@ function runAnimation(
   }
 
   const preset = resolvePreset(opts.animation);
+  // Presets that don't animate opacity (slide-*, clip-*, scale-x, ...) would
+  // otherwise stay at the `opacity: 0` applied while waiting to enter.
+  if (!('opacity' in preset.to)) {
+    const style = (el as HTMLElement).style;
+    if (style && style.opacity === '0') style.opacity = '';
+  }
 
   if (typeof el.animate !== 'function') {
     setStyles(el, preset.to);
@@ -410,6 +448,8 @@ function getProgressThresholds(): number[] {
   return progressThresholds;
 }
 
+const PASSIVE: AddEventListenerOptions = { passive: true };
+
 /* ------------------------------------------------------------------ */
 /* Instance                                                            */
 /* ------------------------------------------------------------------ */
@@ -417,6 +457,12 @@ function getProgressThresholds(): number[] {
 export function createScrollAnimate(userConfig: ScrollAnimateConfig = {}): ScrollAnimateInstance {
   let config: Required<ScrollAnimateConfig> = { ...DEFAULT_CONFIG, ...userConfig };
   const registry = new Map<Element, AnimatedElement>();
+  // `once` elements that finished and were dropped from the registry (autoUnregister).
+  let finished = new WeakSet<Element>();
+  // Elements in `progressMode: 'scroll'` that are currently inside the viewport.
+  const scrolling = new Set<Element>();
+  let frame = 0;
+  let listening: EventTarget | null = null;
 
   // Observers are shared between elements with the same root/threshold/rootMargin,
   // instead of one (or two) IntersectionObservers per element.
@@ -436,6 +482,7 @@ export function createScrollAnimate(userConfig: ScrollAnimateConfig = {}): Scrol
     record.observer.unobserve(el);
     record.progressObserver?.unobserve(el);
     registry.delete(el);
+    untrack(el);
     // An element that never animated would otherwise stay invisible forever.
     if (restore && !record.animated) reveal(el, config);
   }
@@ -443,6 +490,56 @@ export function createScrollAnimate(userConfig: ScrollAnimateConfig = {}): Scrol
   function pruneDetached(): void {
     registry.forEach((record, el) => {
       if (el.isConnected === false) teardown(el, false);
+    });
+  }
+
+  function emitProgress(el: Element, record: AnimatedElement, progress: number): void {
+    const opts = record.options;
+    opts.onProgress(el, progress);
+    if (hasParallax(opts.parallax) && !motionDisabled(config)) applyParallax(el, progress, opts.parallax);
+  }
+
+  function update(): void {
+    frame = 0;
+    scrolling.forEach((el) => {
+      const record = registry.get(el);
+      if (record) emitProgress(el, record, getScrollProgress(el, config.root));
+    });
+  }
+
+  // rAF-throttled; IntersectionObserver-capable browsers all have rAF.
+  const schedule = () => frame || (frame = requestAnimationFrame(update));
+
+  function listen(on: boolean): void {
+    if (on === !!listening) return;
+    const method = on ? 'addEventListener' : 'removeEventListener';
+    const target: EventTarget = listening || (config.root as EventTarget | null) || window;
+    target[method]('scroll', schedule, PASSIVE);
+    window[method]('resize', schedule, PASSIVE);
+    listening = on ? target : null;
+    if (!on && frame) {
+      cancelAnimationFrame(frame);
+      frame = 0;
+    }
+  }
+
+  function untrack(el: Element): void {
+    if (scrolling.delete(el) && !scrolling.size) listen(false);
+  }
+
+  function onScrollIntersect(entries: IntersectionObserverEntry[]): void {
+    entries.forEach((entry) => {
+      const el = entry.target;
+      const record = registry.get(el);
+      if (!record) return;
+      if (entry.isIntersecting) {
+        scrolling.add(el);
+        listen(true);
+      } else {
+        untrack(el);
+      }
+      // Emit right away so the edges (0 / 1) are reported even on fast scrolls.
+      emitProgress(el, record, getScrollProgress(el, config.root));
     });
   }
 
@@ -478,6 +575,12 @@ export function createScrollAnimate(userConfig: ScrollAnimateConfig = {}): Scrol
         if (opts.once && !opts.repeat) {
           // Keep the progress observer: parallax/onProgress must keep working.
           record.observer.unobserve(el);
+          if (config.autoUnregister && !record.progressObserver) {
+            // Nothing left to watch: free the record (the running animation
+            // keeps its own reference until it finishes).
+            finished.add(el);
+            teardown(el, false);
+          }
         }
       } else {
         opts.onLeave(el);
@@ -493,11 +596,7 @@ export function createScrollAnimate(userConfig: ScrollAnimateConfig = {}): Scrol
     entries.forEach((entry) => {
       const record = registry.get(entry.target);
       if (!record) return;
-      const opts = record.options;
-      opts.onProgress(entry.target, entry.intersectionRatio);
-      if (hasParallax(opts.parallax) && !motionDisabled(config)) {
-        applyParallax(entry.target, entry.intersectionRatio, opts.parallax);
-      }
+      emitProgress(entry.target, record, entry.intersectionRatio);
     });
   }
 
@@ -512,6 +611,13 @@ export function createScrollAnimate(userConfig: ScrollAnimateConfig = {}): Scrol
 
   function getProgressObserver(opts: Required<AnimateOptions>): IntersectionObserver {
     const root = config.root;
+    if (opts.progressMode === 'scroll') {
+      // Only used to know when to start/stop measuring; progress itself comes
+      // from a single shared, rAF-throttled passive scroll listener.
+      return pooled(root, `s|${opts.rootMargin}`, () =>
+        new IntersectionObserver(onScrollIntersect, { threshold: 0, rootMargin: opts.rootMargin, root: root as Element | null })
+      );
+    }
     return pooled(root, `p|${opts.rootMargin}`, () =>
       new IntersectionObserver(onProgress, {
         threshold: getProgressThresholds(),
@@ -529,7 +635,7 @@ export function createScrollAnimate(userConfig: ScrollAnimateConfig = {}): Scrol
   }
 
   function observeElement(el: Element, opts: Required<AnimateOptions>): void {
-    if (registry.has(el)) return;
+    if (registry.has(el) || finished.has(el)) return;
 
     if (!supportsObserver()) {
       // No IntersectionObserver (very old browser): never leave content hidden.
@@ -552,7 +658,10 @@ export function createScrollAnimate(userConfig: ScrollAnimateConfig = {}): Scrol
     },
 
     unobserve(target) {
-      resolveTargets(target).forEach((el) => teardown(el, true));
+      resolveTargets(target).forEach((el) => {
+        finished.delete(el);
+        teardown(el, true);
+      });
     },
 
     init(rootElement) {
@@ -571,6 +680,9 @@ export function createScrollAnimate(userConfig: ScrollAnimateConfig = {}): Scrol
       pools.forEach((pool) => pool.forEach((io) => io.disconnect()));
       pools.clear();
       registry.clear();
+      scrolling.clear();
+      listen(false);
+      finished = new WeakSet();
     },
 
     refresh() {
@@ -578,6 +690,8 @@ export function createScrollAnimate(userConfig: ScrollAnimateConfig = {}): Scrol
       // replaying elements that have already animated.
       pools.forEach((pool) => pool.forEach((io) => io.disconnect()));
       pools.clear();
+      scrolling.clear();
+      listen(false);
       pruneDetached();
       if (!supportsObserver()) return;
       registry.forEach((record, el) => {

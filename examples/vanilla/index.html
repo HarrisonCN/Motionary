@@ -176,10 +176,39 @@
     </div>
   </div>
 
+  <div class="section" id="v14">
+    <h2 style="text-align: center; margin-bottom: 2rem;" class="seq-title">New in v1.4.0</h2>
+    <p style="text-align: center; color: #aaa; margin-bottom: 2rem;" class="seq-sub">sequence(), true scroll progress, dynamic stagger, clip-path presets</p>
+
+    <div class="card" id="tall" style="min-height: 160vh;">
+      <h2>True scroll progress</h2>
+      <p>This card is taller than the screen. With <code>progressMode: 'scroll'</code> the bar goes 0 → 100% as it travels through the viewport.</p>
+      <div class="progress-container" style="position: sticky; top: 1rem;">
+        <div class="progress-bar" id="tallBar"></div>
+      </div>
+    </div>
+
+    <div class="grid" style="margin-bottom: 2rem;">
+      <div class="badge" data-sa data-sa-animation="clip-up"><h3>clip-up</h3><span>Clip reveal</span></div>
+      <div class="badge" data-sa data-sa-animation="clip-circle"><h3>clip-circle</h3><span>Iris reveal</span></div>
+      <div class="badge" data-sa data-sa-animation="scale-up"><h3>scale-up</h3><span>Pop in</span></div>
+      <div class="badge" data-sa data-sa-animation="flip-up"><h3>flip-up</h3><span>Perspective flip</span></div>
+      <div class="badge" data-sa data-sa-animation="blur-in-up"><h3>blur-in-up</h3><span>Focus + rise</span></div>
+      <div class="badge" data-sa data-sa-animation="rotate-left"><h3>rotate-left</h3><span>Tilted entrance</span></div>
+    </div>
+
+    <div class="grid" id="feed">
+      <div class="badge"><h3>Item 1</h3></div>
+      <div class="badge"><h3>Item 2</h3></div>
+      <div class="badge"><h3>Item 3</h3></div>
+    </div>
+    <p style="text-align: center; margin-top: 1.5rem;"><button id="more">Load more</button></p>
+  </div>
+
   <p class="scroll-hint">↓ Scroll to see animations</p>
 
   <script type="module">
-    import { createScrollAnimate } from '../../dist/index.esm.js';
+    import { createScrollAnimate, sequence, staggerChildren } from '../../dist/index.mjs';
 
     const sa = createScrollAnimate(); // Create a new instance to use onProgress
 
@@ -196,6 +225,32 @@
         animation: 'fade-in', // onProgress gets a dedicated 0..1 observer automatically
       }
     );
+
+    // v1.4.0: true scroll progress for an element taller than the viewport
+    sa.observe(document.getElementById('tall'), {
+      animation: 'fade-in',
+      progressMode: 'scroll',
+      onProgress: (el, p) => (document.getElementById('tallBar').style.width = `${p * 100}%`),
+    });
+
+    // v1.4.0: timeline, auto-played when the section enters
+    sequence([
+      { target: '.seq-title', animation: 'clip-up', duration: 700 },
+      { target: '.seq-sub', animation: 'blur-in-up', gap: -300 },
+    ], { trigger: '#v14' });
+
+    // v1.4.0: stagger children added later
+    const feed = document.getElementById('feed');
+    staggerChildren(feed, { animation: 'scale-up', stagger: 80, observeChildren: true }, sa);
+    let n = 3;
+    document.getElementById('more').addEventListener('click', () => {
+      for (let i = 0; i < 3; i++) {
+        const item = document.createElement('div');
+        item.className = 'badge';
+        item.innerHTML = `<h3>Item ${++n}</h3>`;
+        feed.appendChild(item);
+      }
+    });
   </script>
 </body>
 </html>

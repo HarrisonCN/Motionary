@@ -99,6 +99,51 @@ export const PRESETS: Record<AnimationPreset, KeyframeMap> = {
     from: { transform: 'rotate(-10deg)' },
     to: { transform: 'rotate(10deg)' },
   },
+  'scale-up': {
+    from: { opacity: 0, transform: 'scale(0.5)' },
+    to: { opacity: 1, transform: 'scale(1)' },
+  },
+  'blur-in-up': {
+    from: { opacity: 0, filter: 'blur(12px)', transform: 'translateY(40px)' },
+    to: { opacity: 1, filter: 'blur(0px)', transform: 'translateY(0px)' },
+  },
+  'flip-up': {
+    from: { opacity: 0, transform: 'perspective(800px) rotateX(60deg)' },
+    to: { opacity: 1, transform: 'perspective(800px) rotateX(0deg)' },
+  },
+  'flip-down': {
+    from: { opacity: 0, transform: 'perspective(800px) rotateX(-60deg)' },
+    to: { opacity: 1, transform: 'perspective(800px) rotateX(0deg)' },
+  },
+  'rotate-left': {
+    from: { opacity: 0, transform: 'rotate(-15deg) translateX(-40px)' },
+    to: { opacity: 1, transform: 'rotate(0deg) translateX(0px)' },
+  },
+  'rotate-right': {
+    from: { opacity: 0, transform: 'rotate(15deg) translateX(40px)' },
+    to: { opacity: 1, transform: 'rotate(0deg) translateX(0px)' },
+  },
+  // clip-path reveals: content is uncovered without moving or fading
+  'clip-up': {
+    from: { clipPath: 'inset(100% 0% 0% 0%)' },
+    to: { clipPath: 'inset(0% 0% 0% 0%)' },
+  },
+  'clip-down': {
+    from: { clipPath: 'inset(0% 0% 100% 0%)' },
+    to: { clipPath: 'inset(0% 0% 0% 0%)' },
+  },
+  'clip-left': {
+    from: { clipPath: 'inset(0% 0% 0% 100%)' },
+    to: { clipPath: 'inset(0% 0% 0% 0%)' },
+  },
+  'clip-right': {
+    from: { clipPath: 'inset(0% 100% 0% 0%)' },
+    to: { clipPath: 'inset(0% 0% 0% 0%)' },
+  },
+  'clip-circle': {
+    from: { clipPath: 'circle(0% at 50% 50%)' },
+    to: { clipPath: 'circle(75% at 50% 50%)' },
+  },
 };
 
 export function resolvePreset(animation: AnimationPreset | AnimationPreset[] | CustomAnimation): KeyframeMap {
