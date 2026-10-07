@@ -230,6 +230,32 @@ describe('cleanup', () => {
     }
   });
 
+  it('useClassNames: destroy() clears pending completion timers', async () => {
+    vi.useFakeTimers();
+    try {
+      const { createScrollAnimate } = await load();
+      const sa = createScrollAnimate({ useClassNames: true });
+      const node = el();
+      const onComplete = vi.fn();
+      sa.animate(node, { duration: 300, delay: 100, onComplete });
+      sa.destroy();
+      vi.advanceTimersByTime(1000);
+      expect(onComplete).not.toHaveBeenCalled();
+      expect(node.classList.contains('sa-visible')).toBe(true);
+
+      // A second instance's timers are untouched by the first one's destroy().
+      const other = createScrollAnimate({ useClassNames: true });
+      const node2 = el();
+      const done2 = vi.fn();
+      other.animate(node2, { duration: 200, onComplete: done2 });
+      sa.destroy();
+      vi.advanceTimersByTime(200);
+      expect(done2).toHaveBeenCalledTimes(1);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
   it('falls back to setting the end styles when the Web Animations API is missing', async () => {
     const { createScrollAnimate } = await load();
     delete (Element.prototype as any).animate;
