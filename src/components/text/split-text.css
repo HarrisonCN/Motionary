@@ -1,0 +1,20 @@
+/* <usa-split-text> */
+usa-split-text .usa-split-word { display: inline-block; white-space: nowrap; }
+usa-split-text .usa-split-unit { display: inline-block; white-space: pre; }
+usa-split-text[data-state="hidden"] .usa-split-unit { opacity: 0; }
+usa-split-text[data-state="play"] .usa-split-unit {
+  animation: usa-split-rise var(--usa-split-duration, 620ms) cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--usa-split-delay, 0ms) + var(--i, 0) * var(--usa-split-stagger, 28ms));
+}
+usa-split-text[effect="fade"][data-state="play"] .usa-split-unit { animation-name: usa-split-fade; }
+usa-split-text[effect="blur"][data-state="play"] .usa-split-unit { animation-name: usa-split-blur; }
+usa-split-text[effect="flip"][data-state="play"] .usa-split-unit { animation-name: usa-split-flip; transform-origin: 50% 100%; }
+usa-split-text[effect="pop"][data-state="play"] .usa-split-unit { animation-name: usa-split-pop; animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1); }
+@keyframes usa-split-rise { from { opacity: 0; transform: translate3d(0, 0.6em, 0); } to { opacity: 1; transform: none; } }
+@keyframes usa-split-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes usa-split-blur { from { opacity: 0; filter: blur(8px); } to { opacity: 1; filter: none; } }
+@keyframes usa-split-flip { from { opacity: 0; transform: perspective(500px) rotateX(-80deg); } to { opacity: 1; transform: none; } }
+@keyframes usa-split-pop { from { opacity: 0; transform: scale(0.3); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  usa-split-text .usa-split-unit { animation: none !important; opacity: 1 !important; }
+}

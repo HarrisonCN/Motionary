@@ -1,7 +1,7 @@
 {
   "name": "use-scroll-animate",
-  "version": "2.1.0",
-  "description": "A lightweight, high-performance, dependency-free scroll animation library for modern web.",
+  "version": "2.2.0",
+  "description": "A lightweight, high-performance, dependency-free scroll animation library and animated UI components (Web Components) for the web and Windows web-view apps.",
   "type": "module",
   "main": "./dist/index.cjs",
   "unpkg": "dist/index.umd.js",
@@ -68,6 +68,83 @@
         "default": "./dist/element.cjs"
       }
     },
+    "./components": {
+      "import": {
+        "types": "./dist/components.d.ts",
+        "default": "./dist/components.js"
+      },
+      "require": {
+        "types": "./dist/components.d.cts",
+        "default": "./dist/components.cjs"
+      }
+    },
+    "./components/reveal": {
+      "import": {
+        "types": "./dist/components/reveal.d.ts",
+        "default": "./dist/components/reveal.js"
+      },
+      "require": {
+        "types": "./dist/components/reveal.d.cts",
+        "default": "./dist/components/reveal.cjs"
+      }
+    },
+    "./components/text": {
+      "import": {
+        "types": "./dist/components/text.d.ts",
+        "default": "./dist/components/text.js"
+      },
+      "require": {
+        "types": "./dist/components/text.d.cts",
+        "default": "./dist/components/text.cjs"
+      }
+    },
+    "./components/interaction": {
+      "import": {
+        "types": "./dist/components/interaction.d.ts",
+        "default": "./dist/components/interaction.js"
+      },
+      "require": {
+        "types": "./dist/components/interaction.d.cts",
+        "default": "./dist/components/interaction.cjs"
+      }
+    },
+    "./components/feedback": {
+      "import": {
+        "types": "./dist/components/feedback.d.ts",
+        "default": "./dist/components/feedback.js"
+      },
+      "require": {
+        "types": "./dist/components/feedback.d.cts",
+        "default": "./dist/components/feedback.cjs"
+      }
+    },
+    "./components/background": {
+      "import": {
+        "types": "./dist/components/background.d.ts",
+        "default": "./dist/components/background.js"
+      },
+      "require": {
+        "types": "./dist/components/background.d.cts",
+        "default": "./dist/components/background.cjs"
+      }
+    },
+    "./components/transitions": {
+      "import": {
+        "types": "./dist/components/transitions.d.ts",
+        "default": "./dist/components/transitions.js"
+      },
+      "require": {
+        "types": "./dist/components/transitions.d.cts",
+        "default": "./dist/components/transitions.cjs"
+      }
+    },
+    "./components.css": "./dist/components.css",
+    "./components/reveal.css": "./dist/components/reveal.css",
+    "./components/text.css": "./dist/components/text.css",
+    "./components/interaction.css": "./dist/components/interaction.css",
+    "./components/feedback.css": "./dist/components/feedback.css",
+    "./components/background.css": "./dist/components/background.css",
+    "./components/transitions.css": "./dist/components/transitions.css",
     "./package.json": "./package.json"
   },
   "files": [
@@ -79,7 +156,9 @@
     "LICENSE",
     "CHANGELOG.md"
   ],
-  "sideEffects": false,
+  "sideEffects": [
+    "*.css"
+  ],
   "scripts": {
     "build": "npm run clean && rollup -c rollup.config.mjs",
     "dev": "rollup -c rollup.config.mjs -w",
@@ -108,7 +187,16 @@
     "solid",
     "web-component",
     "custom-element",
-    "scroll-timeline"
+    "scroll-timeline",
+    "animated-components",
+    "ui-components",
+    "electron",
+    "tauri",
+    "webview2",
+    "fluent",
+    "typewriter",
+    "skeleton",
+    "toast"
   ],
   "author": "HarrisonCN",
   "license": "MIT",

@@ -1,0 +1,27 @@
+/* <usa-toaster> */
+usa-toaster {
+  position: fixed; z-index: 2147483000; right: 16px; bottom: 16px; display: flex; flex-direction: column; gap: 10px; width: min(360px, calc(100vw - 32px)); pointer-events: none;
+}
+usa-toaster[position^="top"] { bottom: auto; top: 16px; }
+usa-toaster[position$="left"] { right: auto; left: 16px; }
+usa-toaster[position$="center"] { right: auto; left: 50%; translate: -50% 0; }
+usa-toaster .usa-toast {
+  --usa-toast-accent: #0078d4;
+  pointer-events: auto; display: flex; align-items: flex-start; gap: 10px; padding: 12px 12px 12px 14px; border-radius: 10px;
+  background: var(--usa-toast-bg, color-mix(in srgb, Canvas 92%, transparent)); color: var(--usa-toast-fg, CanvasText);
+  border: 1px solid color-mix(in srgb, CanvasText 12%, transparent); border-left: 3px solid var(--usa-toast-accent);
+  box-shadow: 0 8px 28px -8px rgb(0 0 0 / 0.35); font: inherit; font-size: 14px; line-height: 1.4;
+  -webkit-backdrop-filter: blur(20px) saturate(1.4); backdrop-filter: blur(20px) saturate(1.4);
+}
+usa-toaster .usa-toast[data-type="success"] { --usa-toast-accent: #0f9d58; }
+usa-toaster .usa-toast[data-type="warning"] { --usa-toast-accent: #c19c00; }
+usa-toaster .usa-toast[data-type="error"] { --usa-toast-accent: #d13438; }
+usa-toaster .usa-toast-icon { flex: none; width: 20px; height: 20px; fill: none; stroke: var(--usa-toast-accent); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+usa-toaster .usa-toast-msg { flex: 1; min-width: 0; padding-top: 1px; overflow-wrap: anywhere; }
+usa-toaster .usa-toast-action, usa-toaster .usa-toast-close {
+  flex: none; border: 0; background: transparent; color: inherit; font: inherit; cursor: pointer; border-radius: 6px; padding: 2px 6px;
+}
+usa-toaster .usa-toast-action { color: var(--usa-toast-accent); font-weight: 600; }
+usa-toaster .usa-toast-close { opacity: 0.6; line-height: 0; padding: 3px; }
+usa-toaster .usa-toast-close svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+usa-toaster .usa-toast-action:hover, usa-toaster .usa-toast-close:hover { background: color-mix(in srgb, currentColor 10%, transparent); opacity: 1; }

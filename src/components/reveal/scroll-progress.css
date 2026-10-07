@@ -1,0 +1,23 @@
+/* <usa-scroll-progress> */
+usa-scroll-progress {
+  display: block;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 1000;
+  height: var(--usa-progress-height, 3px);
+  background: var(--usa-progress-track, transparent);
+  pointer-events: none;
+  contain: strict;
+}
+usa-scroll-progress[position="bottom"] { top: auto; bottom: 0; }
+usa-scroll-progress[position="inline"] { position: relative; z-index: auto; border-radius: 999px; overflow: hidden; }
+usa-scroll-progress .usa-progress-fill {
+  display: block;
+  height: 100%;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  background: var(--usa-progress-color, linear-gradient(90deg, #7c5cff, #22d3ee));
+  will-change: transform;
+}

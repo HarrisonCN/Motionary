@@ -1,0 +1,20 @@
+/* <usa-spotlight> */
+usa-spotlight { display: block; --usa-spot-size: 160px; --usa-spot-color: rgb(255 255 255 / 0.55); --usa-spot-border: 1px; }
+usa-spotlight .usa-spotlight-item { position: relative; isolation: isolate; }
+usa-spotlight .usa-spotlight-item::before,
+usa-spotlight .usa-spotlight-item::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity 0.25s ease;
+}
+usa-spotlight .usa-spotlight-item::before {
+  padding: var(--usa-spot-border);
+  background: radial-gradient(var(--usa-spot-size) circle at var(--usa-spot-x, -999px) var(--usa-spot-y, -999px), var(--usa-spot-color), transparent 70%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+usa-spotlight .usa-spotlight-item::after {
+  z-index: -1;
+  background: radial-gradient(calc(var(--usa-spot-size) * 0.9) circle at var(--usa-spot-x, -999px) var(--usa-spot-y, -999px), color-mix(in srgb, var(--usa-spot-color) 30%, transparent), transparent 70%);
+}
+usa-spotlight[data-lit] .usa-spotlight-item::before { opacity: 1; }
+usa-spotlight[data-lit] .usa-spotlight-item:hover::after { opacity: 1; }
+usa-spotlight[no-fill] .usa-spotlight-item::after { display: none; }

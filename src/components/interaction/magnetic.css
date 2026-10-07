@@ -1,0 +1,10 @@
+/* <usa-magnetic> */
+usa-magnetic { display: inline-block; }
+usa-magnetic > * {
+  transform: translate3d(var(--usa-mx, 0px), var(--usa-my, 0px), 0);
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+usa-magnetic[data-active] > * { transition-duration: 0.15s; transition-timing-function: ease-out; }
+@media (prefers-reduced-motion: reduce) {
+  usa-magnetic > *, usa-tilt, usa-toggle .usa-toggle-knob { transition: none; }
+}

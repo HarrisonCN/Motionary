@@ -1,0 +1,8 @@
+/* <usa-scrolly> */
+usa-scrolly { display: block; position: relative; }
+usa-scrolly [data-sticky] { position: sticky; top: var(--usa-sticky-top, 0px); }
+usa-scrolly [data-step] { opacity: var(--usa-step-dim, 0.35); transition: opacity 0.4s ease; }
+usa-scrolly [data-step][data-active] { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  usa-scrolly [data-step] { transition: none; }
+}

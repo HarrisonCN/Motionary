@@ -1,0 +1,4 @@
+/* <usa-text-rotate> */
+usa-text-rotate { display: inline-grid; vertical-align: bottom; overflow: hidden; padding-block: 0.08em; }
+usa-text-rotate .usa-rotate-word { grid-area: 1 / 1; white-space: nowrap; }
+usa-text-rotate .usa-rotate-word[data-hidden] { opacity: 0; }

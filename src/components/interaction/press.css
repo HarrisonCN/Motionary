@@ -1,0 +1,3 @@
+/* <usa-press> */
+usa-press { display: inline-block; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+usa-press[block] { display: block; }

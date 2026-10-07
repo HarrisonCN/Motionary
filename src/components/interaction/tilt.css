@@ -1,0 +1,9 @@
+/* <usa-tilt> */
+usa-tilt { display: block; position: relative; transform-style: preserve-3d; transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); will-change: transform; }
+usa-tilt[data-active] { transition-duration: 0.12s; }
+usa-tilt .usa-tilt-glare {
+  position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity 0.3s ease;
+  background: radial-gradient(circle at var(--usa-glare-x, 50%) var(--usa-glare-y, 50%), rgb(255 255 255 / 0.35), transparent 55%);
+  mix-blend-mode: soft-light;
+}
+usa-tilt[data-active] .usa-tilt-glare { opacity: 1; }
