@@ -27,6 +27,7 @@ const LOADERS: Record<ComponentCategory, () => Promise<Record<string, any>>> = {
   page: () => import('./page/index'),
   timeline: () => import('./timeline/index'),
   gesture: () => import('./gesture/index'),
+  svg: () => import('./svg/index'),
 };
 
 const TAG_TO_CAT = new Map<string, ComponentCategory>();

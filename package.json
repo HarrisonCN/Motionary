@@ -1,6 +1,6 @@
 {
   "name": "use-scroll-animate",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "description": "A lightweight, high-performance, dependency-free scroll animation library and animated UI components (Web Components) for the web and Windows web-view apps.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -208,6 +208,16 @@
         "default": "./dist/components/gesture.cjs"
       }
     },
+    "./components/svg": {
+      "import": {
+        "types": "./dist/components/svg.d.ts",
+        "default": "./dist/components/svg.js"
+      },
+      "require": {
+        "types": "./dist/components/svg.d.cts",
+        "default": "./dist/components/svg.cjs"
+      }
+    },
     "./components/react": {
       "import": {
         "types": "./dist/components/react.d.ts",
@@ -262,6 +272,7 @@
     "./components/page.css": "./dist/components/page.css",
     "./components/timeline.css": "./dist/components/timeline.css",
     "./components/gesture.css": "./dist/components/gesture.css",
+    "./components/svg.css": "./dist/components/svg.css",
     "./package.json": "./package.json"
   },
   "files": [
@@ -282,7 +293,7 @@
     "typecheck": "tsc --noEmit -p .",
     "test": "vitest run",
     "check:exports": "node scripts/check-exports.mjs",
-    "lint:package": "publint && attw --pack . --profile node16 --exclude-entrypoints ./components.css ./components/reveal.css ./components/text.css ./components/interaction.css ./components/feedback.css ./components/background.css ./components/transitions.css ./components/physics.css ./components/cards.css ./components/click.css ./components/ui.css ./components/page.css ./components/timeline.css ./components/gesture.css",
+    "lint:package": "publint && attw --pack . --profile node16 --exclude-entrypoints ./components.css ./components/reveal.css ./components/text.css ./components/interaction.css ./components/feedback.css ./components/background.css ./components/transitions.css ./components/physics.css ./components/cards.css ./components/click.css ./components/ui.css ./components/page.css ./components/timeline.css ./components/gesture.css ./components/svg.css",
     "size": "node scripts/size.mjs",
     "prepublishOnly": "npm run typecheck && npm test && npm run build && npm run check:exports",
     "size:check": "node scripts/size.mjs --check",

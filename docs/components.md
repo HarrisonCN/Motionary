@@ -248,6 +248,16 @@ Positions: `'>'` chain (default) · `'<'` with previous · `'-=200'` overlap · 
 | `<usa-swipeable>` | Swipe to dismiss, spring home | `axis`, `distance` (120), `preset`, `dismiss`; `usa:swipe`, `usa:dismiss`; `swipe(dir)`, `reset()` |
 | `<usa-pinch-zoom>` | Pinch / Ctrl+wheel zoom + pan | `min` (1), `max` (4), `double-tap` (2), `preset`; `zoomTo(k)`, `usa:zoom` |
 
+### v3.3 SVG (`components/svg`)
+
+| Element / API | What it does | Key attributes |
+|---|---|---|
+| `<usa-draw>` | Strokes draw themselves | `trigger` (`view` · `hover` · `click` · `scrub`), `duration` (1600), `stagger` (0.2), `fill`, `repeat`; `progress`, `play()` |
+| `<usa-morph>` | Path morph through shapes | `paths="A \| B"`, `trigger` (`click` · `hover` · `view` · `auto`), `interval` (2000), `duration` (600); `next()`, `usa:change` |
+| `<usa-mask-reveal>` | Mask / clip-path reveal | `shape` (`circle` · `diamond` · `star` · `iris` · `wipe` · `wipe-up`), `at`, `duration` (900), `trigger`, `repeat` |
+| `<usa-anim-icon>` | Animated stroke icons | `name` (`bell` · `heart` · `check` · `arrow` · `star` · `gear` · `search` · `download`), `size`, `label`, `trigger` (`hover` · `click` · `view` · `loop`) |
+| `morphTo(path, d, opts)` · `interpolatePath(a, b, t)` · `drawLines(root)` | Path helpers | `duration`, `easing`; `stagger` |
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

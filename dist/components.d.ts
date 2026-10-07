@@ -2013,6 +2013,107 @@ declare global {
     }
 }
 
+/**
+ * `<usa-draw>` — line drawing: every stroke of the SVG inside draws itself.
+ * Attributes: `trigger` (`view` default · `hover` · `click` · `scrub`),
+ * `duration` (1600), `stagger` (0–0.9 share of the timeline, 0.2), `fill`
+ * (fade the fill in after drawing), `repeat`. Method `play()`, property
+ * `progress`, event `usa:complete`. Reduced motion: drawn immediately.
+ */
+interface UsaDrawElement extends UsaElement {
+    play(): void;
+    progress: number;
+}
+declare function defineDraw(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-morph>` — morphs an SVG path through a list of shapes.
+ * Put a `<svg><path></path></svg>` inside (one is created otherwise) and set
+ * `paths="M… | M… | M…"` (same command structure morphs smoothly, others
+ * switch at the midpoint). Attributes: `trigger` (`click` default · `hover`
+ * · `auto` · `view`), `interval` (ms for auto, 2000), `duration` (600).
+ * Property `index`, method `next()`, event `usa:change`.
+ * Reduced motion: shapes switch without animating; `auto` does not cycle.
+ */
+interface UsaMorphElement extends UsaElement {
+    readonly index: number;
+    next(): Promise<void>;
+}
+declare function defineMorph(tag?: string): CustomElementConstructor | undefined;
+
+/** Clip-path start / end frames for each reveal shape. */
+declare const MASK_SHAPES: Record<string, [string, string]>;
+/**
+ * `<usa-mask-reveal>` — reveals its content through a growing mask shape.
+ * Attributes: `shape` (`circle` default · `diamond` · `wipe` · `wipe-up` ·
+ * `iris` · `star`), `duration` (900), `delay`, `trigger` (`view` · `hover`
+ * · `click`), `repeat`, `at` (`x% y%` origin for circle). Event
+ * `usa:complete`. Reduced motion: content is shown without the mask.
+ */
+interface UsaMaskRevealElement extends UsaElement {
+    reveal(): Promise<void>;
+}
+declare function defineMaskReveal(tag?: string): CustomElementConstructor | undefined;
+
+type Icon = {
+    d: string;
+    frames: Keyframe[];
+    duration: number;
+    origin?: string;
+};
+/** Built-in animated icons (24×24 strokes) and the motion each one plays. */
+declare const ANIM_ICONS: Record<string, Icon>;
+/**
+ * `<usa-anim-icon name="bell">` — an animated stroke icon that plays its
+ * motion on `trigger` (`hover` default · `click` · `view` · `loop`).
+ * Attributes: `name` (see `ANIM_ICONS`), `size` (24), `label` (accessible
+ * name; decorative when absent). Method `play()`. Reduced motion: static.
+ */
+interface UsaAnimIconElement extends UsaElement {
+    play(): void;
+}
+declare function defineAnimIcon(tag?: string): CustomElementConstructor | undefined;
+
+/** `true` when two path strings share the same commands (so their numbers can be interpolated). */
+declare function pathsCompatible(a: string, b: string): boolean;
+/**
+ * Path data between `a` and `b` at `t` (0–1). Paths with the same command
+ * structure morph number-by-number; others switch at the midpoint.
+ */
+declare function interpolatePath(a: string, b: string, t: number): string;
+interface MorphOptions {
+    duration?: number;
+    easing?: (t: number) => number;
+}
+/** Animate a `<path>`'s `d` to `to`. Resolves when done; instant under reduced motion. */
+declare function morphTo(path: SVGPathElement | Element, to: string, o?: MorphOptions): Promise<void>;
+/**
+ * Prepare every stroke in `root` for line drawing (normalised `pathLength=1`,
+ * so no `getTotalLength()` is needed) and return a function that sets
+ * progress 0–1, optionally staggered between shapes.
+ */
+declare function drawLines(root: Element, o?: {
+    stagger?: number;
+}): (progress: number) => void;
+
+/**
+ * use-scroll-animate/components/svg — SVG animation (v3.3).
+ * `<usa-draw>` (line drawing), `<usa-morph>` (path morph), `<usa-mask-reveal>`
+ * (mask / clip-path reveals) and `<usa-anim-icon>` (animated icons), plus
+ * `interpolatePath()`, `morphTo()`, `drawLines()`.
+ */
+
+/** Register every component of this category under its default tag. */
+declare function defineSvgComponents(): void;
+declare global {
+    interface HTMLElementTagNameMap {
+        'usa-draw': UsaDrawElement;
+        'usa-morph': UsaMorphElement;
+        'usa-mask-reveal': UsaMaskRevealElement;
+        'usa-anim-icon': UsaAnimIconElement;
+    }
+}
+
 /** The component categories and their default tags. */
 declare const COMPONENT_CATEGORIES: {
     readonly reveal: readonly ["usa-reveal", "usa-stagger", "usa-scroll-progress", "usa-scrolly"];
@@ -2028,6 +2129,7 @@ declare const COMPONENT_CATEGORIES: {
     readonly page: readonly ["usa-cursor", "usa-fullpage", "usa-loading-bar", "usa-back-to-top", "usa-ambient", "usa-splash", "usa-auto-skeleton", "usa-motion-switch"];
     readonly timeline: readonly ["usa-timeline"];
     readonly gesture: readonly ["usa-swipeable", "usa-pinch-zoom"];
+    readonly svg: readonly ["usa-draw", "usa-morph", "usa-mask-reveal", "usa-anim-icon"];
 };
 type ComponentCategory = keyof typeof COMPONENT_CATEGORIES;
 
@@ -2037,5 +2139,5 @@ type ComponentCategory = keyof typeof COMPONENT_CATEGORIES;
  */
 declare function defineComponents(categories?: ComponentCategory[]): void;
 
-export { AMBIENT_EFFECTS, BUTTON_DEFORMS, CARD_EFFECTS, CLICK_EFFECTS, COMPONENT_CATEGORIES, CURSOR_MODES, MORPH_ICONS, MOTION_SCALE, PAGE_EFFECTS, REVEAL_EFFECTS, SPINNER_VARIANTS, SPRING_EFFECTS, SPRING_PRESETS, TIMELINE_PRESETS, VARIANTS, adoptVariants, burst, confetti, configureComponents, connectedAnimation, createSpring, defineAccordion, defineAcrylic, defineAmbient, defineAurora, defineAutoSkeleton, defineAvatarStack, defineBackToTop, defineBackgroundComponents, defineBadge, defineBlobs, defineBottomSheet, defineButton, defineCard, defineCardComponents, defineCardStack, defineCarousel3d, defineCheck, defineCheckbox, defineClick, defineClickComponents, defineComponents, defineCounter, defineCursor, defineDialog, defineDotNetwork, defineDoubleTap, defineDraggable, defineDrawer, defineFab, defineFeedbackComponents, defineFlipList, defineFullpage, defineGestureComponents, defineGlitch, defineGradientText, defineGrain, defineGridGlow, defineHandwriting, defineHold, defineIconMorph, defineInteractionComponents, defineLike, defineLoadingBar, defineMagnetic, defineMarquee, defineMotionSwitch, defineNavbar, defineOverscroll, definePageComponents, defineParticles, definePhysicsComponents, definePinchZoom, definePopover, definePress, defineProgress, definePullRefresh, defineRating, defineReveal, defineRevealComponents, defineRipple, defineScramble, defineScrollHighlight, defineScrollProgress, defineScrolly, defineShimmerText, defineSkeleton, defineSlider, defineSpinner, defineSplash, defineSplitText, defineSpotlight, defineSpring, defineStagger, defineStickyStack, defineSwipeable, defineTabs, defineTextComponents, defineTextRotate, defineTilt, defineTimeline, defineTimelineComponents, defineToaster, defineToggle, defineTooltip, defineTransitionComponents, defineTypewriter, defineUiComponents, defineViewSwitch, defineWaterRipple, defineWaveText, easeOutExpo, enableMpaTransitions, flip, fluentPreset, gesture, getMotionIntensity, haptic, linearEasing, loadingBar, morphPath, pageTransition, pinchScale, prefersReducedMotion, projectInertia, readScrollProgress, resolvePosition, resolveSpring, restoreMotionIntensity, revealKeyframes, rubberBand, scrambleFrame, scrollToTarget, setMotionIntensity, setVariant, shake, smoothScroll, snapTo, spring, springEasing, springEffectKeyframes, springSamples, stepSpring, supportsLinearEasing, supportsViewTransitions, swipeDirection, themeTransition, timeline, toast, viewTransition };
-export type { AmbientEffect, BurstOptions, ButtonDeform, ButtonShape, ButtonState, CardEffect, ClickEffect, ComponentCategory, ComponentsConfig, ConfettiOptions, ConnectedOptions, CursorMode, DialogVariant, FlipOptions, FluentPresetOptions, GestureHandlers, GestureOptions, MotionIntensity, PageEffect, PageTransitionOptions, PanState, PinchState, Placement, PressState, RevealEffect, ScrubOptions, SmoothScrollOptions, SpinnerVariant, SpringConfig, SpringEffect, SpringInput, SpringPreset, SpringValue, SpringValueOptions, SwipeDirection, SwipeState, Timeline, TimelineOptions, TimelinePosition, TimelineStepOptions, ToastHandle, ToastOptions, ToastType, UsaAccordionElement, UsaAcrylicElement, UsaAmbientElement, UsaAuroraElement, UsaAutoSkeletonElement, UsaAvatarStackElement, UsaBackToTopElement, UsaBadgeElement, UsaBlobsElement, UsaBottomSheetElement, UsaButtonElement, UsaCardElement, UsaCardStackElement, UsaCarousel3dElement, UsaCheckElement, UsaCheckboxElement, UsaClickElement, UsaCounterElement, UsaCursorElement, UsaDialogElement, UsaDotNetworkElement, UsaDoubleTapElement, UsaDraggableElement, UsaDrawerElement, UsaElement, UsaFabElement, UsaFlipListElement, UsaFullpageElement, UsaGlitchElement, UsaGradientTextElement, UsaGrainElement, UsaGridGlowElement, UsaHandwritingElement, UsaHoldElement, UsaIconMorphElement, UsaLikeElement, UsaLoadingBarElement, UsaMagneticElement, UsaMarqueeElement, UsaMotionSwitchElement, UsaNavbarElement, UsaOverscrollElement, UsaParticlesElement, UsaPinchZoomElement, UsaPopoverElement, UsaPressElement, UsaProgressElement, UsaPullRefreshElement, UsaRatingElement, UsaRevealElement, UsaRippleElement, UsaScrambleElement, UsaScrollHighlightElement, UsaScrollProgressElement, UsaScrollyElement, UsaShimmerTextElement, UsaSkeletonElement, UsaSliderElement, UsaSpinnerElement, UsaSplashElement, UsaSplitTextElement, UsaSpotlightElement, UsaSpringElement, UsaStaggerElement, UsaStickyStackElement, UsaSwipeableElement, UsaTabsElement, UsaTextRotateElement, UsaTiltElement, UsaTimelineElement, UsaToasterElement, UsaToggleElement, UsaTooltipElement, UsaTypewriterElement, UsaViewSwitchElement, UsaWaterRippleElement, UsaWaveTextElement, Variant, ViewTransitionOptions };
+export { AMBIENT_EFFECTS, ANIM_ICONS, BUTTON_DEFORMS, CARD_EFFECTS, CLICK_EFFECTS, COMPONENT_CATEGORIES, CURSOR_MODES, MASK_SHAPES, MORPH_ICONS, MOTION_SCALE, PAGE_EFFECTS, REVEAL_EFFECTS, SPINNER_VARIANTS, SPRING_EFFECTS, SPRING_PRESETS, TIMELINE_PRESETS, VARIANTS, adoptVariants, burst, confetti, configureComponents, connectedAnimation, createSpring, defineAccordion, defineAcrylic, defineAmbient, defineAnimIcon, defineAurora, defineAutoSkeleton, defineAvatarStack, defineBackToTop, defineBackgroundComponents, defineBadge, defineBlobs, defineBottomSheet, defineButton, defineCard, defineCardComponents, defineCardStack, defineCarousel3d, defineCheck, defineCheckbox, defineClick, defineClickComponents, defineComponents, defineCounter, defineCursor, defineDialog, defineDotNetwork, defineDoubleTap, defineDraggable, defineDraw, defineDrawer, defineFab, defineFeedbackComponents, defineFlipList, defineFullpage, defineGestureComponents, defineGlitch, defineGradientText, defineGrain, defineGridGlow, defineHandwriting, defineHold, defineIconMorph, defineInteractionComponents, defineLike, defineLoadingBar, defineMagnetic, defineMarquee, defineMaskReveal, defineMorph, defineMotionSwitch, defineNavbar, defineOverscroll, definePageComponents, defineParticles, definePhysicsComponents, definePinchZoom, definePopover, definePress, defineProgress, definePullRefresh, defineRating, defineReveal, defineRevealComponents, defineRipple, defineScramble, defineScrollHighlight, defineScrollProgress, defineScrolly, defineShimmerText, defineSkeleton, defineSlider, defineSpinner, defineSplash, defineSplitText, defineSpotlight, defineSpring, defineStagger, defineStickyStack, defineSvgComponents, defineSwipeable, defineTabs, defineTextComponents, defineTextRotate, defineTilt, defineTimeline, defineTimelineComponents, defineToaster, defineToggle, defineTooltip, defineTransitionComponents, defineTypewriter, defineUiComponents, defineViewSwitch, defineWaterRipple, defineWaveText, drawLines, easeOutExpo, enableMpaTransitions, flip, fluentPreset, gesture, getMotionIntensity, haptic, interpolatePath, linearEasing, loadingBar, morphPath, morphTo, pageTransition, pathsCompatible, pinchScale, prefersReducedMotion, projectInertia, readScrollProgress, resolvePosition, resolveSpring, restoreMotionIntensity, revealKeyframes, rubberBand, scrambleFrame, scrollToTarget, setMotionIntensity, setVariant, shake, smoothScroll, snapTo, spring, springEasing, springEffectKeyframes, springSamples, stepSpring, supportsLinearEasing, supportsViewTransitions, swipeDirection, themeTransition, timeline, toast, viewTransition };
+export type { AmbientEffect, BurstOptions, ButtonDeform, ButtonShape, ButtonState, CardEffect, ClickEffect, ComponentCategory, ComponentsConfig, ConfettiOptions, ConnectedOptions, CursorMode, DialogVariant, FlipOptions, FluentPresetOptions, GestureHandlers, GestureOptions, MorphOptions, MotionIntensity, PageEffect, PageTransitionOptions, PanState, PinchState, Placement, PressState, RevealEffect, ScrubOptions, SmoothScrollOptions, SpinnerVariant, SpringConfig, SpringEffect, SpringInput, SpringPreset, SpringValue, SpringValueOptions, SwipeDirection, SwipeState, Timeline, TimelineOptions, TimelinePosition, TimelineStepOptions, ToastHandle, ToastOptions, ToastType, UsaAccordionElement, UsaAcrylicElement, UsaAmbientElement, UsaAnimIconElement, UsaAuroraElement, UsaAutoSkeletonElement, UsaAvatarStackElement, UsaBackToTopElement, UsaBadgeElement, UsaBlobsElement, UsaBottomSheetElement, UsaButtonElement, UsaCardElement, UsaCardStackElement, UsaCarousel3dElement, UsaCheckElement, UsaCheckboxElement, UsaClickElement, UsaCounterElement, UsaCursorElement, UsaDialogElement, UsaDotNetworkElement, UsaDoubleTapElement, UsaDraggableElement, UsaDrawElement, UsaDrawerElement, UsaElement, UsaFabElement, UsaFlipListElement, UsaFullpageElement, UsaGlitchElement, UsaGradientTextElement, UsaGrainElement, UsaGridGlowElement, UsaHandwritingElement, UsaHoldElement, UsaIconMorphElement, UsaLikeElement, UsaLoadingBarElement, UsaMagneticElement, UsaMarqueeElement, UsaMaskRevealElement, UsaMorphElement, UsaMotionSwitchElement, UsaNavbarElement, UsaOverscrollElement, UsaParticlesElement, UsaPinchZoomElement, UsaPopoverElement, UsaPressElement, UsaProgressElement, UsaPullRefreshElement, UsaRatingElement, UsaRevealElement, UsaRippleElement, UsaScrambleElement, UsaScrollHighlightElement, UsaScrollProgressElement, UsaScrollyElement, UsaShimmerTextElement, UsaSkeletonElement, UsaSliderElement, UsaSpinnerElement, UsaSplashElement, UsaSplitTextElement, UsaSpotlightElement, UsaSpringElement, UsaStaggerElement, UsaStickyStackElement, UsaSwipeableElement, UsaTabsElement, UsaTextRotateElement, UsaTiltElement, UsaTimelineElement, UsaToasterElement, UsaToggleElement, UsaTooltipElement, UsaTypewriterElement, UsaViewSwitchElement, UsaWaterRippleElement, UsaWaveTextElement, Variant, ViewTransitionOptions };

@@ -3,7 +3,7 @@
 // (+ `components/<id>.css`). Keep in sync with COMPONENT_CATEGORIES in
 // src/components/index.ts (a test checks it); `npm run sync:exports`
 // regenerates the package.json exports from this list.
-export const CATEGORIES = ['reveal', 'text', 'interaction', 'feedback', 'background', 'transitions', 'physics', 'cards', 'click', 'ui', 'page', 'timeline', 'gesture'];
+export const CATEGORIES = ['reveal', 'text', 'interaction', 'feedback', 'background', 'transitions', 'physics', 'cards', 'click', 'ui', 'page', 'timeline', 'gesture', 'svg'];
 
 // Extra `use-scroll-animate/components/<name>` entry points (name → source under src/components/).
 export const COMPONENT_ENTRIES = { react: 'frameworks/react', vue: 'frameworks/vue', jsx: 'frameworks/jsx', lazy: 'lazy' };
