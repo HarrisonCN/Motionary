@@ -1,0 +1,11 @@
+/* Windows 11 Fluent preset */
+.usa-fluent { font-family: "Segoe UI Variable", "Segoe UI", system-ui, sans-serif; accent-color: var(--usa-accent, #0067c0); }
+.usa-fluent-mica body { background: linear-gradient(135deg, color-mix(in srgb, var(--usa-accent, #0067c0) 8%, #f3f3f3), #f3f3f3 60%); }
+@media (prefers-color-scheme: dark) { .usa-fluent-mica body { background: linear-gradient(135deg, color-mix(in srgb, var(--usa-accent, #4cc2ff) 10%, #202020), #202020 60%); } }
+.usa-fluent :is(.usa-acrylic, [data-acrylic]) { background: color-mix(in srgb, var(--usa-surface) 70%, transparent); -webkit-backdrop-filter: blur(30px) saturate(1.25); backdrop-filter: blur(30px) saturate(1.25); border: var(--usa-border); border-radius: var(--usa-radius); }
+.usa-fluent :is(button, [role="button"], [data-fluent-reveal], .usa-fluent-item) { position: relative; }
+.usa-fluent [data-reveal]::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; padding: 1px;
+  background: radial-gradient(90px circle at var(--usa-reveal-x) var(--usa-reveal-y), rgb(255 255 255 / 0.55), transparent 70%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); }
+.usa-fluent [data-reveal] { background-image: radial-gradient(120px circle at var(--usa-reveal-x) var(--usa-reveal-y), rgb(255 255 255 / 0.1), transparent 70%); }
+@media (prefers-reduced-transparency: reduce), (forced-colors: active) { .usa-fluent :is(.usa-acrylic, [data-acrylic]) { background: var(--usa-surface); -webkit-backdrop-filter: none; backdrop-filter: none; } }

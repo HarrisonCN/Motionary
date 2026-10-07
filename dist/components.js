@@ -1,13 +1,13 @@
 import { defineRevealComponents } from './components/reveal.js';
 export { REVEAL_EFFECTS, defineReveal, defineScrollProgress, defineScrolly, defineStagger, readScrollProgress, revealKeyframes } from './components/reveal.js';
 import { defineTextComponents } from './components/text.js';
-export { defineCounter, defineScramble, defineShimmerText, defineSplitText, defineTextRotate, defineTypewriter, easeOutExpo, scrambleFrame } from './components/text.js';
+export { defineCounter, defineGlitch, defineGradientText, defineHandwriting, defineScramble, defineScrollHighlight, defineShimmerText, defineSplitText, defineTextRotate, defineTypewriter, defineWaveText, easeOutExpo, scrambleFrame } from './components/text.js';
 import { defineInteractionComponents } from './components/interaction.js';
 export { defineMagnetic, definePress, defineRipple, defineSpotlight, defineTilt, defineToggle } from './components/interaction.js';
 import { defineFeedbackComponents } from './components/feedback.js';
 export { SPINNER_VARIANTS, defineCheck, defineProgress, defineSkeleton, defineSpinner, defineToaster, toast } from './components/feedback.js';
 import { defineBackgroundComponents } from './components/background.js';
-export { defineAcrylic, defineAurora, defineGrain, defineMarquee, defineParticles } from './components/background.js';
+export { defineAcrylic, defineAurora, defineBlobs, defineDotNetwork, defineGrain, defineGridGlow, defineMarquee, defineParticles, defineWaterRipple, fluentPreset } from './components/background.js';
 import { defineTransitionComponents } from './components/transitions.js';
 export { connectedAnimation, defineAccordion, defineDialog, defineFlipList, defineViewSwitch, flip, viewTransition } from './components/transitions.js';
 import { definePhysicsComponents } from './components/physics.js';
@@ -16,13 +16,15 @@ import { defineCardComponents } from './components/cards.js';
 export { CARD_EFFECTS, defineCard, defineCardStack, defineCarousel3d, defineStickyStack } from './components/cards.js';
 import { defineClickComponents } from './components/click.js';
 export { BUTTON_DEFORMS, CLICK_EFFECTS, MORPH_ICONS, burst, confetti, defineButton, defineCheckbox, defineClick, defineDoubleTap, defineHold, defineIconMorph, defineLike, haptic, morphPath, shake } from './components/click.js';
-import { adoptVariants, defineUiComponents } from './components/ui.js';
-export { VARIANTS, defineAvatarStack, defineBadge, defineBottomSheet, defineDrawer, defineFab, defineNavbar, definePopover, definePullRefresh, defineRating, defineSlider, defineTabs, defineTooltip, setVariant } from './components/ui.js';
+import { defineUiComponents } from './components/ui.js';
+export { defineAvatarStack, defineBadge, defineBottomSheet, defineDrawer, defineFab, defineNavbar, definePopover, definePullRefresh, defineRating, defineSlider, defineTabs, defineTooltip } from './components/ui.js';
 import { definePageComponents } from './components/page.js';
 export { AMBIENT_EFFECTS, CURSOR_MODES, PAGE_EFFECTS, defineAmbient, defineAutoSkeleton, defineBackToTop, defineCursor, defineFullpage, defineLoadingBar, defineMotionSwitch, defineSplash, enableMpaTransitions, loadingBar, pageTransition, restoreMotionIntensity, scrollToTarget, setMotionIntensity, smoothScroll, supportsViewTransitions, themeTransition } from './components/page.js';
-import { c as canDefine } from './chunks/base-D6zLiNGH.js';
-export { M as MOTION_SCALE, a as configureComponents, g as getMotionIntensity, p as prefersReducedMotion } from './chunks/base-D6zLiNGH.js';
-export { S as SPRING_PRESETS, c as createSpring, l as linearEasing, p as projectInertia, r as resolveSpring, a as rubberBand, s as snapTo, b as spring, d as springEasing, e as springSamples, f as stepSpring, g as supportsLinearEasing } from './chunks/spring-C2Megtcf.js';
+import { a as adoptVariants } from './chunks/variants-idgMVXhE.js';
+export { V as VARIANTS, s as setVariant } from './chunks/variants-idgMVXhE.js';
+import { c as canDefine } from './chunks/base-C_w9ibbn.js';
+export { M as MOTION_SCALE, a as configureComponents, g as getMotionIntensity, p as prefersReducedMotion } from './chunks/base-C_w9ibbn.js';
+export { S as SPRING_PRESETS, c as createSpring, l as linearEasing, p as projectInertia, r as resolveSpring, a as rubberBand, s as snapTo, b as spring, d as springEasing, e as springSamples, f as stepSpring, g as supportsLinearEasing } from './chunks/spring-Dc8ZqDWE.js';
 
 /**
  * use-scroll-animate/components
@@ -47,10 +49,10 @@ export { S as SPRING_PRESETS, c as createSpring, l as linearEasing, p as project
 /** The component categories and their default tags. */
 const COMPONENT_CATEGORIES = {
     reveal: ['usa-reveal', 'usa-stagger', 'usa-scroll-progress', 'usa-scrolly'],
-    text: ['usa-typewriter', 'usa-split-text', 'usa-scramble', 'usa-counter', 'usa-shimmer-text', 'usa-text-rotate'],
+    text: ['usa-typewriter', 'usa-split-text', 'usa-scramble', 'usa-counter', 'usa-shimmer-text', 'usa-text-rotate', 'usa-wave-text', 'usa-glitch', 'usa-gradient-text', 'usa-handwriting', 'usa-scroll-highlight'],
     interaction: ['usa-ripple', 'usa-magnetic', 'usa-tilt', 'usa-spotlight', 'usa-press', 'usa-toggle'],
     feedback: ['usa-spinner', 'usa-skeleton', 'usa-progress', 'usa-toaster', 'usa-check'],
-    background: ['usa-aurora', 'usa-particles', 'usa-grain', 'usa-marquee', 'usa-acrylic'],
+    background: ['usa-aurora', 'usa-particles', 'usa-grain', 'usa-marquee', 'usa-acrylic', 'usa-grid-glow', 'usa-blobs', 'usa-water-ripple', 'usa-dot-network'],
     transitions: ['usa-dialog', 'usa-accordion', 'usa-flip-list', 'usa-view-switch'],
     physics: ['usa-spring', 'usa-draggable', 'usa-overscroll'],
     cards: ['usa-card', 'usa-card-stack', 'usa-sticky-stack', 'usa-carousel-3d'],

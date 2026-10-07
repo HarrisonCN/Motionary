@@ -35,10 +35,10 @@ defineComponents(); // カテゴリ単位: import { defineTextComponents } from 
 | カテゴリ（インポート） | コンポーネント |
 |---|---|
 | **入場・スクロール**（`/components/reveal`） | `<usa-reveal>` · `<usa-stagger>` · `<usa-scroll-progress>` · `<usa-scrolly>` |
-| **テキスト**（`/components/text`） | `<usa-typewriter>` · `<usa-split-text>` · `<usa-scramble>` · `<usa-counter>` · `<usa-shimmer-text>` · `<usa-text-rotate>` |
+| **テキスト**（`/components/text`） | `<usa-typewriter>` · `<usa-split-text>` · `<usa-scramble>` · `<usa-counter>` · `<usa-shimmer-text>` · `<usa-text-rotate>` · `<usa-wave-text>` · `<usa-glitch>` · `<usa-gradient-text>` · `<usa-handwriting>` · `<usa-scroll-highlight>` |
 | **インタラクション**（`/components/interaction`） | `<usa-ripple>` · `<usa-magnetic>` · `<usa-tilt>` · `<usa-spotlight>`（Fluent Reveal）· `<usa-press>` · `<usa-toggle>` |
 | **ローディング・フィードバック**（`/components/feedback`） | `<usa-spinner>` · `<usa-skeleton>` · `<usa-progress>` · `<usa-toaster>` + `toast()` · `<usa-check>` |
-| **背景・装飾**（`/components/background`） | `<usa-aurora>` · `<usa-particles>` · `<usa-grain>` · `<usa-marquee>` · `<usa-acrylic>`（Acrylic / Mica） |
+| **背景・装飾**（`/components/background`） | `<usa-aurora>` · `<usa-particles>` · `<usa-grain>` · `<usa-marquee>` · `<usa-acrylic>`（Acrylic / Mica） · `<usa-grid-glow>` · `<usa-blobs>` · `<usa-water-ripple>` · `<usa-dot-network>` · `fluentPreset()` |
 | **トランジション**（`/components/transitions`） | `<usa-dialog>` · `<usa-accordion>` · `<usa-flip-list>` · `<usa-view-switch>` · `viewTransition()` · `flip()` · `connectedAnimation()` |
 | **スプリング・物理**（`/components/physics`） | `<usa-spring>`（bounce-in · pop · drop · jelly · rubber-band）· `<usa-draggable>` · `<usa-overscroll>` · `spring()` · `createSpring()` |
 | **カード効果**（`/components/cards`） | `<usa-card>`（flip · holo · glass · border-glow · conic-border · lift · spotlight · sheen · parallax-layers · expand）· `<usa-card-stack>` · `<usa-sticky-stack>` · `<usa-carousel-3d>` |

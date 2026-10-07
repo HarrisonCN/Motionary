@@ -1,0 +1,13 @@
+/* <usa-grid-glow>, <usa-blobs>, <usa-water-ripple>, <usa-dot-network> */
+usa-grid-glow, usa-blobs, usa-water-ripple, usa-dot-network { position: relative; display: block; isolation: isolate; overflow: hidden; }
+usa-grid-glow { --usa-grid: 32px; --usa-grid-r: 220px; --usa-grid-color: var(--usa-accent, #7c5cff); --usa-grid-x: 50%; --usa-grid-y: 50%; }
+usa-grid-glow::before, usa-grid-glow::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background-image: linear-gradient(to right, var(--l) 1px, transparent 1px), linear-gradient(to bottom, var(--l) 1px, transparent 1px); background-size: var(--usa-grid) var(--usa-grid); }
+usa-grid-glow::before { --l: color-mix(in srgb, currentColor 9%, transparent); }
+usa-grid-glow::after { --l: var(--usa-grid-color); -webkit-mask: radial-gradient(var(--usa-grid-r) circle at var(--usa-grid-x) var(--usa-grid-y), #000, transparent 70%); mask: radial-gradient(var(--usa-grid-r) circle at var(--usa-grid-x) var(--usa-grid-y), #000, transparent 70%); }
+usa-blobs .usa-blobs-layer { position: absolute; inset: -20%; z-index: -1; filter: blur(var(--usa-blobs-blur, 60px)) saturate(1.3); pointer-events: none; }
+usa-blobs .usa-blobs-layer i { position: absolute; width: 45%; aspect-ratio: 1; border-radius: 42% 58% 60% 40% / 45% 45% 55% 55%; background: var(--c); opacity: 0.75; left: calc(10% + var(--i) * 18%); top: calc(10% + var(--i) * 14%);
+  animation: usa-blob calc(14s / var(--usa-blobs-speed, 1)) ease-in-out infinite alternate; animation-delay: calc(var(--i) * -3.5s); }
+@keyframes usa-blob { 0% { transform: translate(0, 0) rotate(0) scale(1); border-radius: 42% 58% 60% 40% / 45% 45% 55% 55%; } 50% { transform: translate(18%, -12%) rotate(120deg) scale(1.15); border-radius: 60% 40% 35% 65% / 55% 60% 40% 45%; } 100% { transform: translate(-14%, 14%) rotate(240deg) scale(0.9); border-radius: 38% 62% 55% 45% / 62% 38% 62% 38%; } }
+usa-water-ripple .usa-bg-canvas { position: absolute; inset: 0; z-index: 1; pointer-events: none; mix-blend-mode: screen; }
+usa-dot-network .usa-bg-canvas { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { usa-blobs .usa-blobs-layer i { animation: none; } }

@@ -193,3 +193,4 @@ usa-toggle { --usa-toggle-on: var(--accent); }
 .demo-fullpage section { display: grid; place-content: center; text-align: center; height: 170px; min-height: 0 !important; }
 .demo-fullpage section:nth-child(2) { background: color-mix(in srgb, var(--accent, #7c5cff) 18%, transparent); }
 .demo-fullpage section:nth-child(3) { background: color-mix(in srgb, var(--accent-2, #22d3ee) 18%, transparent); }
+.demo-water { background: linear-gradient(135deg, #0ea5e9, #1e3a8a); color: #fff; }

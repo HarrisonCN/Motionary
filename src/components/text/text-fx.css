@@ -1,0 +1,30 @@
+/* <usa-wave-text>, <usa-glitch>, <usa-gradient-text>, <usa-handwriting>, <usa-scroll-highlight> */
+usa-wave-text .usa-word, usa-scroll-highlight .usa-word { display: inline-block; white-space: nowrap; }
+usa-wave-text .usa-char { display: inline-block; animation: usa-wave var(--usa-wave-s, 1.6s) ease-in-out infinite; animation-delay: calc(var(--i) * var(--usa-wave-d, 0.06s)); }
+@keyframes usa-wave { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(calc(var(--usa-wave-a, 0.25em) * -1)); } }
+usa-glitch { position: relative; display: inline-block; }
+usa-glitch::before, usa-glitch::after { content: attr(data-text); position: absolute; inset: 0; pointer-events: none; }
+usa-glitch::before { color: #ff2bd6; transform: translate(calc(var(--usa-glitch-i, 3px) * -1), 0); clip-path: inset(0 0 55% 0); mix-blend-mode: screen; animation: usa-glitch-a 2.4s steps(2, end) infinite; }
+usa-glitch::after { color: #00f0ff; transform: translate(var(--usa-glitch-i, 3px), 0); clip-path: inset(50% 0 0 0); mix-blend-mode: screen; animation: usa-glitch-b 1.9s steps(2, end) infinite; }
+usa-glitch[trigger="hover"]::before, usa-glitch[trigger="hover"]::after { animation-play-state: paused; opacity: 0; }
+usa-glitch[trigger="hover"]:hover::before, usa-glitch[trigger="hover"]:hover::after { animation-play-state: running; opacity: 1; }
+@keyframes usa-glitch-a { 0% { clip-path: inset(0 0 80% 0); } 20% { clip-path: inset(30% 0 40% 0); } 40% { clip-path: inset(70% 0 5% 0); } 60% { clip-path: inset(10% 0 60% 0); } 80% { clip-path: inset(50% 0 30% 0); } 100% { clip-path: inset(0 0 80% 0); } }
+@keyframes usa-glitch-b { 0% { clip-path: inset(60% 0 10% 0); } 25% { clip-path: inset(15% 0 70% 0); } 50% { clip-path: inset(80% 0 2% 0); } 75% { clip-path: inset(40% 0 35% 0); } 100% { clip-path: inset(60% 0 10% 0); } }
+usa-gradient-text { background: var(--usa-grad) 0 50% / 300% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; animation: usa-grad-flow var(--usa-grad-s, 6s) linear infinite; }
+@keyframes usa-grad-flow { to { background-position: 150% 50%; } }
+usa-handwriting { --usa-hw-stroke: currentColor; display: inline-block; line-height: 0; }
+usa-handwriting svg { max-width: 100%; height: auto; overflow: visible; }
+usa-handwriting text { fill: transparent; stroke: var(--usa-hw-stroke); stroke-width: 1.2; stroke-dasharray: 1600; stroke-dashoffset: 1600; font-family: "Segoe Script", "Brush Script MT", "Snell Roundhand", cursive; }
+usa-handwriting[data-state="drawing"] text { animation: usa-hw-draw var(--usa-hw-d, 2400ms) cubic-bezier(0.55, 0, 0.45, 1) forwards, usa-hw-fill 0.6s ease calc(var(--usa-hw-d, 2400ms) * 0.8) forwards; }
+usa-handwriting[data-state="done"] text { stroke-dashoffset: 0; fill: currentColor; }
+@keyframes usa-hw-draw { to { stroke-dashoffset: 0; } }
+@keyframes usa-hw-fill { to { fill: currentColor; } }
+usa-scroll-highlight .usa-hl-word { opacity: var(--usa-hl-dim, 0.2); transition: opacity 0.35s ease; }
+usa-scroll-highlight .usa-hl-word[data-on] { opacity: 1; }
+usa-scroll-highlight[mode="marker"] { --usa-hl-color: color-mix(in srgb, #facc15 55%, transparent); background: linear-gradient(var(--usa-hl-color), var(--usa-hl-color)) 0 88% / 0% 40% no-repeat; transition: background-size 1s cubic-bezier(0.65, 0, 0.35, 1); -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+usa-scroll-highlight[mode="marker"][data-lit] { background-size: 100% 40%; }
+@media (prefers-reduced-motion: reduce) {
+  usa-wave-text .usa-char, usa-glitch::before, usa-glitch::after, usa-gradient-text { animation: none !important; }
+  usa-glitch::before, usa-glitch::after { display: none; }
+  usa-scroll-highlight .usa-hl-word, usa-scroll-highlight[mode="marker"] { transition: none; }
+}

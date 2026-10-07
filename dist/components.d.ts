@@ -246,6 +246,53 @@ interface UsaTextRotateElement extends UsaElement {
 declare function defineTextRotate(tag?: string): CustomElementConstructor | undefined;
 
 /**
+ * `<usa-wave-text>` — letters bob in a travelling wave.
+ * Attributes: `amplitude` (em, 0.25), `speed` (s per cycle, 1.6), `stagger`
+ * (s between letters, 0.06). Reduced motion: still text.
+ */
+interface UsaWaveTextElement extends UsaElement {
+}
+declare function defineWaveText(tag?: string): CustomElementConstructor | undefined;
+/**
+ * `<usa-glitch>` — an RGB-split glitch on its text (`trigger="always"`
+ * default, or `hover`). Attributes: `intensity` (px, 3), `trigger`.
+ * Reduced motion: no animation (plain text).
+ */
+interface UsaGlitchElement extends UsaElement {
+}
+declare function defineGlitch(tag?: string): CustomElementConstructor | undefined;
+/**
+ * `<usa-gradient-text>` — text filled with a flowing multi-colour gradient.
+ * Attributes: `colors` (comma list), `speed` (s, 6), `angle` (deg, 90).
+ * Reduced motion: a static gradient.
+ */
+interface UsaGradientTextElement extends UsaElement {
+}
+declare function defineGradientText(tag?: string): CustomElementConstructor | undefined;
+/**
+ * `<usa-handwriting>` — the text draws itself stroke by stroke (SVG text
+ * outline), then fills in, when it scrolls into view.
+ * Attributes: `text`, `duration` (ms, 2400), `stroke` (colour), `size` (px,
+ * 64), `font` (family; a script font looks best). Events: `usa:complete`.
+ * Reduced motion: the filled text appears at once.
+ */
+interface UsaHandwritingElement extends UsaElement {
+    play(): void;
+}
+declare function defineHandwriting(tag?: string): CustomElementConstructor | undefined;
+/**
+ * `<usa-scroll-highlight>` — reading highlight: words light up one by one
+ * as the paragraph scrolls through the viewport (`mode="words"`, default),
+ * or a highlighter marker sweeps behind the text on enter (`mode="marker"`).
+ * Attributes: `mode`, `color` (marker), `dim` (opacity of unread words,
+ * 0.2). Reduced motion: fully highlighted text.
+ */
+interface UsaScrollHighlightElement extends UsaElement {
+    readonly progress: number;
+}
+declare function defineScrollHighlight(tag?: string): CustomElementConstructor | undefined;
+
+/**
  * use-scroll-animate/components/text — text effects.
  * `<usa-typewriter>`, `<usa-split-text>`, `<usa-scramble>`, `<usa-counter>`,
  * `<usa-shimmer-text>`, `<usa-text-rotate>`.
@@ -255,6 +302,11 @@ declare function defineTextRotate(tag?: string): CustomElementConstructor | unde
 declare function defineTextComponents(): void;
 declare global {
     interface HTMLElementTagNameMap {
+        'usa-wave-text': UsaWaveTextElement;
+        'usa-glitch': UsaGlitchElement;
+        'usa-gradient-text': UsaGradientTextElement;
+        'usa-handwriting': UsaHandwritingElement;
+        'usa-scroll-highlight': UsaScrollHighlightElement;
         'usa-typewriter': UsaTypewriterElement;
         'usa-split-text': UsaSplitTextElement;
         'usa-scramble': UsaScrambleElement;
@@ -574,6 +626,63 @@ type UsaAcrylicElement = UsaElement;
 declare function defineAcrylic(tag?: string): CustomElementConstructor | undefined;
 
 /**
+ * `<usa-grid-glow>` — a line grid behind its content that lights up around
+ * the pointer. Attributes: `size` (cell px, 32), `color`, `radius` (px, 220).
+ * Reduced motion: the grid stays, a soft static glow in the centre.
+ */
+interface UsaGridGlowElement extends UsaElement {
+}
+declare function defineGridGlow(tag?: string): CustomElementConstructor | undefined;
+/**
+ * `<usa-blobs>` — soft, slowly morphing colour blobs (fluid gradient
+ * backdrop). Attributes: `colors` (comma list), `speed` (1), `blur` (px, 60).
+ * Reduced motion: still blobs.
+ */
+interface UsaBlobsElement extends UsaElement {
+}
+declare function defineBlobs(tag?: string): CustomElementConstructor | undefined;
+/**
+ * `<usa-water-ripple>` — interactive water ripples on a canvas over its
+ * content (pointer moves and taps disturb the surface). Low-resolution height
+ * map, paused off-screen. Attributes: `damping` (0.96), `strength` (1),
+ * `color` (highlight). Reduced motion: nothing is drawn.
+ */
+interface UsaWaterRippleElement extends UsaElement {
+    drop(x: number, y: number, strength?: number): void;
+}
+declare function defineWaterRipple(tag?: string): CustomElementConstructor | undefined;
+/**
+ * `<usa-dot-network>` — a grid of dots that swell and link up with lines
+ * around the pointer (a living network backdrop). Attributes: `gap` (px,
+ * 28), `color`, `radius` (px of influence, 140). Reduced motion: a static
+ * dot grid.
+ */
+interface UsaDotNetworkElement extends UsaElement {
+}
+declare function defineDotNetwork(tag?: string): CustomElementConstructor | undefined;
+
+interface FluentPresetOptions {
+    /** Root to apply to (default `document.documentElement`). */
+    root?: HTMLElement;
+    /** Reveal highlight on interactive elements (default `true`). */
+    reveal?: boolean;
+    /** Reveal targets (default buttons, links, `[data-fluent-reveal]`). */
+    selector?: string;
+    /** Mica-style tinted window background on `<body>` (default `true`). */
+    mica?: boolean;
+}
+/**
+ * Windows 11 **Fluent preset** (v2.8): applies the `fluent` variant
+ * (Segoe UI Variable, Windows accent, 8 px radii), a Mica-style tinted
+ * window background, Acrylic on `.usa-acrylic` / `[data-acrylic]`, and
+ * Reveal highlight (a light following the pointer on borders and
+ * backgrounds of interactive elements). Ideal for WebView2 / Electron /
+ * Tauri apps on Windows. Returns a function that removes it.
+ * Respects reduced motion / transparency (no Reveal tracking; solid materials).
+ */
+declare function fluentPreset(options?: FluentPresetOptions): () => void;
+
+/**
  * use-scroll-animate/components/background — backgrounds & decoration.
  * `<usa-aurora>`, `<usa-particles>`, `<usa-grain>`, `<usa-marquee>`,
  * `<usa-acrylic>`.
@@ -583,6 +692,10 @@ declare function defineAcrylic(tag?: string): CustomElementConstructor | undefin
 declare function defineBackgroundComponents(): void;
 declare global {
     interface HTMLElementTagNameMap {
+        'usa-grid-glow': UsaGridGlowElement;
+        'usa-blobs': UsaBlobsElement;
+        'usa-water-ripple': UsaWaterRippleElement;
+        'usa-dot-network': UsaDotNetworkElement;
         'usa-aurora': UsaAuroraElement;
         'usa-particles': UsaParticlesElement;
         'usa-grain': UsaGrainElement;
@@ -1663,10 +1776,10 @@ declare global {
 /** The component categories and their default tags. */
 declare const COMPONENT_CATEGORIES: {
     readonly reveal: readonly ["usa-reveal", "usa-stagger", "usa-scroll-progress", "usa-scrolly"];
-    readonly text: readonly ["usa-typewriter", "usa-split-text", "usa-scramble", "usa-counter", "usa-shimmer-text", "usa-text-rotate"];
+    readonly text: readonly ["usa-typewriter", "usa-split-text", "usa-scramble", "usa-counter", "usa-shimmer-text", "usa-text-rotate", "usa-wave-text", "usa-glitch", "usa-gradient-text", "usa-handwriting", "usa-scroll-highlight"];
     readonly interaction: readonly ["usa-ripple", "usa-magnetic", "usa-tilt", "usa-spotlight", "usa-press", "usa-toggle"];
     readonly feedback: readonly ["usa-spinner", "usa-skeleton", "usa-progress", "usa-toaster", "usa-check"];
-    readonly background: readonly ["usa-aurora", "usa-particles", "usa-grain", "usa-marquee", "usa-acrylic"];
+    readonly background: readonly ["usa-aurora", "usa-particles", "usa-grain", "usa-marquee", "usa-acrylic", "usa-grid-glow", "usa-blobs", "usa-water-ripple", "usa-dot-network"];
     readonly transitions: readonly ["usa-dialog", "usa-accordion", "usa-flip-list", "usa-view-switch"];
     readonly physics: readonly ["usa-spring", "usa-draggable", "usa-overscroll"];
     readonly cards: readonly ["usa-card", "usa-card-stack", "usa-sticky-stack", "usa-carousel-3d"];
@@ -1681,5 +1794,5 @@ type ComponentCategory = keyof typeof COMPONENT_CATEGORIES;
  */
 declare function defineComponents(categories?: ComponentCategory[]): void;
 
-export { AMBIENT_EFFECTS, BUTTON_DEFORMS, CARD_EFFECTS, CLICK_EFFECTS, COMPONENT_CATEGORIES, CURSOR_MODES, MORPH_ICONS, MOTION_SCALE, PAGE_EFFECTS, REVEAL_EFFECTS, SPINNER_VARIANTS, SPRING_EFFECTS, SPRING_PRESETS, VARIANTS, adoptVariants, burst, confetti, configureComponents, connectedAnimation, createSpring, defineAccordion, defineAcrylic, defineAmbient, defineAurora, defineAutoSkeleton, defineAvatarStack, defineBackToTop, defineBackgroundComponents, defineBadge, defineBottomSheet, defineButton, defineCard, defineCardComponents, defineCardStack, defineCarousel3d, defineCheck, defineCheckbox, defineClick, defineClickComponents, defineComponents, defineCounter, defineCursor, defineDialog, defineDoubleTap, defineDraggable, defineDrawer, defineFab, defineFeedbackComponents, defineFlipList, defineFullpage, defineGrain, defineHold, defineIconMorph, defineInteractionComponents, defineLike, defineLoadingBar, defineMagnetic, defineMarquee, defineMotionSwitch, defineNavbar, defineOverscroll, definePageComponents, defineParticles, definePhysicsComponents, definePopover, definePress, defineProgress, definePullRefresh, defineRating, defineReveal, defineRevealComponents, defineRipple, defineScramble, defineScrollProgress, defineScrolly, defineShimmerText, defineSkeleton, defineSlider, defineSpinner, defineSplash, defineSplitText, defineSpotlight, defineSpring, defineStagger, defineStickyStack, defineTabs, defineTextComponents, defineTextRotate, defineTilt, defineToaster, defineToggle, defineTooltip, defineTransitionComponents, defineTypewriter, defineUiComponents, defineViewSwitch, easeOutExpo, enableMpaTransitions, flip, getMotionIntensity, haptic, linearEasing, loadingBar, morphPath, pageTransition, prefersReducedMotion, projectInertia, readScrollProgress, resolveSpring, restoreMotionIntensity, revealKeyframes, rubberBand, scrambleFrame, scrollToTarget, setMotionIntensity, setVariant, shake, smoothScroll, snapTo, spring, springEasing, springEffectKeyframes, springSamples, stepSpring, supportsLinearEasing, supportsViewTransitions, themeTransition, toast, viewTransition };
-export type { AmbientEffect, BurstOptions, ButtonDeform, ButtonShape, ButtonState, CardEffect, ClickEffect, ComponentCategory, ComponentsConfig, ConfettiOptions, ConnectedOptions, CursorMode, DialogVariant, FlipOptions, MotionIntensity, PageEffect, PageTransitionOptions, Placement, RevealEffect, SmoothScrollOptions, SpinnerVariant, SpringConfig, SpringEffect, SpringInput, SpringPreset, SpringValue, SpringValueOptions, ToastHandle, ToastOptions, ToastType, UsaAccordionElement, UsaAcrylicElement, UsaAmbientElement, UsaAuroraElement, UsaAutoSkeletonElement, UsaAvatarStackElement, UsaBackToTopElement, UsaBadgeElement, UsaBottomSheetElement, UsaButtonElement, UsaCardElement, UsaCardStackElement, UsaCarousel3dElement, UsaCheckElement, UsaCheckboxElement, UsaClickElement, UsaCounterElement, UsaCursorElement, UsaDialogElement, UsaDoubleTapElement, UsaDraggableElement, UsaDrawerElement, UsaElement, UsaFabElement, UsaFlipListElement, UsaFullpageElement, UsaGrainElement, UsaHoldElement, UsaIconMorphElement, UsaLikeElement, UsaLoadingBarElement, UsaMagneticElement, UsaMarqueeElement, UsaMotionSwitchElement, UsaNavbarElement, UsaOverscrollElement, UsaParticlesElement, UsaPopoverElement, UsaPressElement, UsaProgressElement, UsaPullRefreshElement, UsaRatingElement, UsaRevealElement, UsaRippleElement, UsaScrambleElement, UsaScrollProgressElement, UsaScrollyElement, UsaShimmerTextElement, UsaSkeletonElement, UsaSliderElement, UsaSpinnerElement, UsaSplashElement, UsaSplitTextElement, UsaSpotlightElement, UsaSpringElement, UsaStaggerElement, UsaStickyStackElement, UsaTabsElement, UsaTextRotateElement, UsaTiltElement, UsaToasterElement, UsaToggleElement, UsaTooltipElement, UsaTypewriterElement, UsaViewSwitchElement, Variant, ViewTransitionOptions };
+export { AMBIENT_EFFECTS, BUTTON_DEFORMS, CARD_EFFECTS, CLICK_EFFECTS, COMPONENT_CATEGORIES, CURSOR_MODES, MORPH_ICONS, MOTION_SCALE, PAGE_EFFECTS, REVEAL_EFFECTS, SPINNER_VARIANTS, SPRING_EFFECTS, SPRING_PRESETS, VARIANTS, adoptVariants, burst, confetti, configureComponents, connectedAnimation, createSpring, defineAccordion, defineAcrylic, defineAmbient, defineAurora, defineAutoSkeleton, defineAvatarStack, defineBackToTop, defineBackgroundComponents, defineBadge, defineBlobs, defineBottomSheet, defineButton, defineCard, defineCardComponents, defineCardStack, defineCarousel3d, defineCheck, defineCheckbox, defineClick, defineClickComponents, defineComponents, defineCounter, defineCursor, defineDialog, defineDotNetwork, defineDoubleTap, defineDraggable, defineDrawer, defineFab, defineFeedbackComponents, defineFlipList, defineFullpage, defineGlitch, defineGradientText, defineGrain, defineGridGlow, defineHandwriting, defineHold, defineIconMorph, defineInteractionComponents, defineLike, defineLoadingBar, defineMagnetic, defineMarquee, defineMotionSwitch, defineNavbar, defineOverscroll, definePageComponents, defineParticles, definePhysicsComponents, definePopover, definePress, defineProgress, definePullRefresh, defineRating, defineReveal, defineRevealComponents, defineRipple, defineScramble, defineScrollHighlight, defineScrollProgress, defineScrolly, defineShimmerText, defineSkeleton, defineSlider, defineSpinner, defineSplash, defineSplitText, defineSpotlight, defineSpring, defineStagger, defineStickyStack, defineTabs, defineTextComponents, defineTextRotate, defineTilt, defineToaster, defineToggle, defineTooltip, defineTransitionComponents, defineTypewriter, defineUiComponents, defineViewSwitch, defineWaterRipple, defineWaveText, easeOutExpo, enableMpaTransitions, flip, fluentPreset, getMotionIntensity, haptic, linearEasing, loadingBar, morphPath, pageTransition, prefersReducedMotion, projectInertia, readScrollProgress, resolveSpring, restoreMotionIntensity, revealKeyframes, rubberBand, scrambleFrame, scrollToTarget, setMotionIntensity, setVariant, shake, smoothScroll, snapTo, spring, springEasing, springEffectKeyframes, springSamples, stepSpring, supportsLinearEasing, supportsViewTransitions, themeTransition, toast, viewTransition };
+export type { AmbientEffect, BurstOptions, ButtonDeform, ButtonShape, ButtonState, CardEffect, ClickEffect, ComponentCategory, ComponentsConfig, ConfettiOptions, ConnectedOptions, CursorMode, DialogVariant, FlipOptions, FluentPresetOptions, MotionIntensity, PageEffect, PageTransitionOptions, Placement, RevealEffect, SmoothScrollOptions, SpinnerVariant, SpringConfig, SpringEffect, SpringInput, SpringPreset, SpringValue, SpringValueOptions, ToastHandle, ToastOptions, ToastType, UsaAccordionElement, UsaAcrylicElement, UsaAmbientElement, UsaAuroraElement, UsaAutoSkeletonElement, UsaAvatarStackElement, UsaBackToTopElement, UsaBadgeElement, UsaBlobsElement, UsaBottomSheetElement, UsaButtonElement, UsaCardElement, UsaCardStackElement, UsaCarousel3dElement, UsaCheckElement, UsaCheckboxElement, UsaClickElement, UsaCounterElement, UsaCursorElement, UsaDialogElement, UsaDotNetworkElement, UsaDoubleTapElement, UsaDraggableElement, UsaDrawerElement, UsaElement, UsaFabElement, UsaFlipListElement, UsaFullpageElement, UsaGlitchElement, UsaGradientTextElement, UsaGrainElement, UsaGridGlowElement, UsaHandwritingElement, UsaHoldElement, UsaIconMorphElement, UsaLikeElement, UsaLoadingBarElement, UsaMagneticElement, UsaMarqueeElement, UsaMotionSwitchElement, UsaNavbarElement, UsaOverscrollElement, UsaParticlesElement, UsaPopoverElement, UsaPressElement, UsaProgressElement, UsaPullRefreshElement, UsaRatingElement, UsaRevealElement, UsaRippleElement, UsaScrambleElement, UsaScrollHighlightElement, UsaScrollProgressElement, UsaScrollyElement, UsaShimmerTextElement, UsaSkeletonElement, UsaSliderElement, UsaSpinnerElement, UsaSplashElement, UsaSplitTextElement, UsaSpotlightElement, UsaSpringElement, UsaStaggerElement, UsaStickyStackElement, UsaTabsElement, UsaTextRotateElement, UsaTiltElement, UsaToasterElement, UsaToggleElement, UsaTooltipElement, UsaTypewriterElement, UsaViewSwitchElement, UsaWaterRippleElement, UsaWaveTextElement, Variant, ViewTransitionOptions };

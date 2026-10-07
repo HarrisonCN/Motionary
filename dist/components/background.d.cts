@@ -119,6 +119,63 @@ type UsaAcrylicElement = UsaElement;
 declare function defineAcrylic(tag?: string): CustomElementConstructor | undefined;
 
 /**
+ * `<usa-grid-glow>` — a line grid behind its content that lights up around
+ * the pointer. Attributes: `size` (cell px, 32), `color`, `radius` (px, 220).
+ * Reduced motion: the grid stays, a soft static glow in the centre.
+ */
+interface UsaGridGlowElement extends UsaElement {
+}
+declare function defineGridGlow(tag?: string): CustomElementConstructor | undefined;
+/**
+ * `<usa-blobs>` — soft, slowly morphing colour blobs (fluid gradient
+ * backdrop). Attributes: `colors` (comma list), `speed` (1), `blur` (px, 60).
+ * Reduced motion: still blobs.
+ */
+interface UsaBlobsElement extends UsaElement {
+}
+declare function defineBlobs(tag?: string): CustomElementConstructor | undefined;
+/**
+ * `<usa-water-ripple>` — interactive water ripples on a canvas over its
+ * content (pointer moves and taps disturb the surface). Low-resolution height
+ * map, paused off-screen. Attributes: `damping` (0.96), `strength` (1),
+ * `color` (highlight). Reduced motion: nothing is drawn.
+ */
+interface UsaWaterRippleElement extends UsaElement {
+    drop(x: number, y: number, strength?: number): void;
+}
+declare function defineWaterRipple(tag?: string): CustomElementConstructor | undefined;
+/**
+ * `<usa-dot-network>` — a grid of dots that swell and link up with lines
+ * around the pointer (a living network backdrop). Attributes: `gap` (px,
+ * 28), `color`, `radius` (px of influence, 140). Reduced motion: a static
+ * dot grid.
+ */
+interface UsaDotNetworkElement extends UsaElement {
+}
+declare function defineDotNetwork(tag?: string): CustomElementConstructor | undefined;
+
+interface FluentPresetOptions {
+    /** Root to apply to (default `document.documentElement`). */
+    root?: HTMLElement;
+    /** Reveal highlight on interactive elements (default `true`). */
+    reveal?: boolean;
+    /** Reveal targets (default buttons, links, `[data-fluent-reveal]`). */
+    selector?: string;
+    /** Mica-style tinted window background on `<body>` (default `true`). */
+    mica?: boolean;
+}
+/**
+ * Windows 11 **Fluent preset** (v2.8): applies the `fluent` variant
+ * (Segoe UI Variable, Windows accent, 8 px radii), a Mica-style tinted
+ * window background, Acrylic on `.usa-acrylic` / `[data-acrylic]`, and
+ * Reveal highlight (a light following the pointer on borders and
+ * backgrounds of interactive elements). Ideal for WebView2 / Electron /
+ * Tauri apps on Windows. Returns a function that removes it.
+ * Respects reduced motion / transparency (no Reveal tracking; solid materials).
+ */
+declare function fluentPreset(options?: FluentPresetOptions): () => void;
+
+/**
  * use-scroll-animate/components/background — backgrounds & decoration.
  * `<usa-aurora>`, `<usa-particles>`, `<usa-grain>`, `<usa-marquee>`,
  * `<usa-acrylic>`.
@@ -128,6 +185,10 @@ declare function defineAcrylic(tag?: string): CustomElementConstructor | undefin
 declare function defineBackgroundComponents(): void;
 declare global {
     interface HTMLElementTagNameMap {
+        'usa-grid-glow': UsaGridGlowElement;
+        'usa-blobs': UsaBlobsElement;
+        'usa-water-ripple': UsaWaterRippleElement;
+        'usa-dot-network': UsaDotNetworkElement;
         'usa-aurora': UsaAuroraElement;
         'usa-particles': UsaParticlesElement;
         'usa-grain': UsaGrainElement;
@@ -136,5 +197,5 @@ declare global {
     }
 }
 
-export { configureComponents, defineAcrylic, defineAurora, defineBackgroundComponents, defineGrain, defineMarquee, defineParticles, prefersReducedMotion };
-export type { ComponentsConfig, UsaAcrylicElement, UsaAuroraElement, UsaElement, UsaGrainElement, UsaMarqueeElement, UsaParticlesElement };
+export { configureComponents, defineAcrylic, defineAurora, defineBackgroundComponents, defineBlobs, defineDotNetwork, defineGrain, defineGridGlow, defineMarquee, defineParticles, defineWaterRipple, fluentPreset, prefersReducedMotion };
+export type { ComponentsConfig, FluentPresetOptions, UsaAcrylicElement, UsaAuroraElement, UsaBlobsElement, UsaDotNetworkElement, UsaElement, UsaGrainElement, UsaGridGlowElement, UsaMarqueeElement, UsaParticlesElement, UsaWaterRippleElement };

@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.8.0] - 2026-10-07
+
+### Added
+- **Text effects** (in `components/text`): `<usa-wave-text>` (travelling letter wave), `<usa-glitch>` (RGB-split slice glitch, always / hover), `<usa-gradient-text>` (flowing multi-colour gradient fill), `<usa-handwriting>` (text draws itself stroke by stroke, then fills; `usa:complete`), `<usa-scroll-highlight>` (words light up as you read down the page, or `mode="marker"` highlighter sweep). Animated copies are `aria-hidden` with a plain screen-reader copy.
+- **Backgrounds** (in `components/background`): `<usa-grid-glow>` (line grid lit around the pointer), `<usa-blobs>` (fluid morphing colour blobs), `<usa-water-ripple>` (interactive canvas water ripples, `drop(x, y)`), `<usa-dot-network>` (dot grid that swells and links to the pointer). Canvas effects run only while visible and the tab is shown, DPR ≤ 2.
+- **Windows Fluent preset** `fluentPreset({ reveal, mica, selector })` (in `components/background`): `fluent` variant page-wide (Segoe UI Variable, Windows 11 accent, radii), Mica-style window tint, Acrylic on `.usa-acrylic` / `[data-acrylic]`, and **Reveal highlight** on buttons / `[data-fluent-reveal]`; returns an undo function.
+- **WinUI 3 + WebView2 sample app** in [`examples/webview2-winui/`](./examples/webview2-winui/) (Windows App SDK, native Mica backdrop, `SetVirtualHostNameToFolderMapping`, `components.umd.js` + `fluentPreset()`), documented in `docs/windows-apps.md`.
+- Reduced motion: wave / glitch / gradient flow stop, handwriting and highlights appear complete, backgrounds are static, no Reveal tracking; reduced transparency keeps materials solid.
+- Showcase: the new text and background demos in their categories, plus a `fluentPreset()` card.
+
 ## [2.7.0] - 2026-10-07
 
 ### Added

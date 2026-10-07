@@ -192,6 +192,23 @@ Presets (`SPRING_PRESETS`): `default` (170/26), `gentle` (120/14), `wobbly` (180
 | `<usa-auto-skeleton>` | Automatic skeletons | `loading`; `data-no-skeleton` on children | `loading` |
 | `<usa-motion-switch>` · `setMotionIntensity()` | Global motion intensity | `labels`, `label` · `'off' \| 'low' \| 'normal' \| 'high'`, `persist` | `usa:change`; `--usa-motion`, `data-usa-motion` |
 
+### v2.8 additions to Text, Background & Windows
+
+| Element / API | Category | What it does | Key attributes |
+|---|---|---|---|
+| `<usa-wave-text>` | text | Letters bob in a wave | `amplitude` (0.25em), `speed` (1.6s), `stagger` (0.06s) |
+| `<usa-glitch>` | text | RGB-split glitch | `trigger` (`always` · `hover`), `intensity` (3px) |
+| `<usa-gradient-text>` | text | Flowing gradient fill | `colors`, `speed` (6s), `angle` (90) |
+| `<usa-handwriting>` | text | Stroke-by-stroke draw, then fill | `text`, `duration` (2400), `size` (64), `font`, `stroke`; `play()`, `usa:complete` |
+| `<usa-scroll-highlight>` | text | Words light up while reading / marker sweep | `mode` (`words` · `marker`), `dim` (0.2), `color`; `progress` |
+| `<usa-grid-glow>` | background | Grid lit around the pointer | `size` (32), `radius` (220), `color` |
+| `<usa-blobs>` | background | Fluid morphing blobs | `colors`, `speed` (1), `blur` (60) |
+| `<usa-water-ripple>` | background | Interactive water ripples (canvas) | `damping` (0.96), `strength` (1), `color` (`r,g,b`); `drop(x, y, s?)` |
+| `<usa-dot-network>` | background | Dot grid linking to the pointer (canvas) | `gap` (28), `radius` (140), `color` (`r,g,b`) |
+| `fluentPreset(opts)` | background | Windows 11 Fluent: variant + Mica tint + Acrylic + Reveal highlight | `reveal`, `mica`, `selector`, `root`; returns undo |
+
+WinUI 3 / WebView2 sample app: [`examples/webview2-winui/`](../examples/webview2-winui/).
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.
