@@ -14,9 +14,10 @@ var components_page = require('./components/page.cjs');
 var components_timeline = require('./components/timeline.cjs');
 var components_gesture = require('./components/gesture.cjs');
 var components_svg = require('./components/svg.cjs');
+var components_webgl = require('./components/webgl.cjs');
 var variants = require('./chunks/variants-BNIrn4ch.cjs');
 var base = require('./chunks/base-CXx7jZ-o.cjs');
-var indexTags = require('./chunks/index-tags-Cz4iTBEK.cjs');
+var indexTags = require('./chunks/index-tags-BKcHAxBK.cjs');
 var spring = require('./chunks/spring-2OTnYCzm.cjs');
 
 /**
@@ -54,6 +55,7 @@ const BY_CATEGORY = {
     timeline: components_timeline.defineTimelineComponents,
     gesture: components_gesture.defineGestureComponents,
     svg: components_svg.defineSvgComponents,
+    webgl: components_webgl.defineWebglComponents,
 };
 /**
  * Register every `<usa-*>` component (or only the given categories).
@@ -205,6 +207,14 @@ exports.drawLines = components_svg.drawLines;
 exports.interpolatePath = components_svg.interpolatePath;
 exports.morphTo = components_svg.morphTo;
 exports.pathsCompatible = components_svg.pathsCompatible;
+exports.SHADERS = components_webgl.SHADERS;
+exports.defineDistort = components_webgl.defineDistort;
+exports.defineLiquid = components_webgl.defineLiquid;
+exports.defineShader = components_webgl.defineShader;
+exports.defineWebglComponents = components_webgl.defineWebglComponents;
+exports.fragmentSource = components_webgl.fragmentSource;
+exports.glQuad = components_webgl.glQuad;
+exports.supportsWebGL = components_webgl.supportsWebGL;
 exports.VARIANTS = variants.VARIANTS;
 exports.adoptVariants = variants.adoptVariants;
 exports.setVariant = variants.setVariant;

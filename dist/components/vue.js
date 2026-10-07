@@ -16,7 +16,8 @@ import './page.js';
 import './timeline.js';
 import './gesture.js';
 import './svg.js';
-import '../chunks/index-tags-Dc_Z4yAY.js';
+import './webgl.js';
+import '../chunks/index-tags-qc6OWsJ8.js';
 
 /**
  * use-scroll-animate/components/vue — Vue integration (v2.9).

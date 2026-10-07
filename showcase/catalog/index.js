@@ -8,8 +8,9 @@ import * as v28 from './text-bg-fluent.js';
 import * as timeline from './timeline.js';
 import * as gesture from './gesture.js';
 import * as svg from './svg.js';
+import * as webgl from './webgl.js';
 
-export const EXTENSIONS = [physics, cards, click, ui, page, v28, timeline, gesture, svg];
+export const EXTENSIONS = [physics, cards, click, ui, page, v28, timeline, gesture, svg, webgl];
 
 /** item id → (stage, lib, T) => void: live-demo wiring contributed by the extensions. */
 export const WIRES = Object.assign({}, ...EXTENSIONS.map((e) => e.wire || {}));

@@ -1484,6 +1484,32 @@ declare global {
     }
 }
 
+/**
+ * Shared shell for the WebGL elements: a canvas over (or behind) the
+ * content that renders only while visible and the tab is shown, a DPR cap
+ * of 2, and a graceful fallback (`data-fallback`) when WebGL, the shader
+ * or the image (CORS) is unavailable — the original content / CSS stays.
+ */
+interface UsaGLElement extends UsaElement {
+    /** `true` once WebGL rendering is active (otherwise the CSS fallback shows). */
+    readonly active: boolean;
+}
+
+/**
+ * use-scroll-animate/components/webgl — lightweight canvas / WebGL (v3.4).
+ * `<usa-shader>` (shader backgrounds), `<usa-distort>` (hover image
+ * distortion), `<usa-liquid>` (ripple images) on a tiny single-quad runner
+ * (`glQuad()`), with graceful fallbacks when WebGL is unavailable.
+ */
+
+declare global {
+    interface HTMLElementTagNameMap {
+        'usa-shader': UsaGLElement;
+        'usa-distort': UsaGLElement;
+        'usa-liquid': UsaGLElement;
+    }
+}
+
 /** The component categories and their default tags. */
 declare const COMPONENT_CATEGORIES: {
     readonly reveal: readonly ["usa-reveal", "usa-stagger", "usa-scroll-progress", "usa-scrolly"];
@@ -1500,6 +1526,7 @@ declare const COMPONENT_CATEGORIES: {
     readonly timeline: readonly ["usa-timeline"];
     readonly gesture: readonly ["usa-swipeable", "usa-pinch-zoom"];
     readonly svg: readonly ["usa-draw", "usa-morph", "usa-mask-reveal", "usa-anim-icon"];
+    readonly webgl: readonly ["usa-shader", "usa-distort", "usa-liquid"];
 };
 type ComponentCategory = keyof typeof COMPONENT_CATEGORIES;
 

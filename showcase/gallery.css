@@ -194,3 +194,9 @@ usa-toggle { --usa-toggle-on: var(--accent); }
 .demo-fullpage section:nth-child(2) { background: color-mix(in srgb, var(--accent, #7c5cff) 18%, transparent); }
 .demo-fullpage section:nth-child(3) { background: color-mix(in srgb, var(--accent-2, #22d3ee) 18%, transparent); }
 .demo-water { background: linear-gradient(135deg, #0ea5e9, #1e3a8a); color: #fff; }
+
+/* v3.4 WebGL demos */
+.demo-gl { width: min(100%, 320px); aspect-ratio: 16 / 10; border-radius: 14px; display: grid; place-items: center; }
+.demo-gl > img { width: 100%; height: 100%; object-fit: cover; }
+.demo-gl__label { color: #fff; font-weight: 700; text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4); }
+.demo-gl--canvas { display: block; background: linear-gradient(120deg, #6366f1, #22d3ee); }

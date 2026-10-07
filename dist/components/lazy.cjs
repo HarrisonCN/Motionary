@@ -1,6 +1,6 @@
 'use strict';
 
-var indexTags = require('../chunks/index-tags-Cz4iTBEK.cjs');
+var indexTags = require('../chunks/index-tags-BKcHAxBK.cjs');
 
 /**
  * use-scroll-animate/components/lazy — lazy, per-category registration (v2.9).
@@ -30,6 +30,7 @@ const LOADERS = {
     timeline: () => Promise.resolve().then(function () { return require('./timeline.cjs'); }),
     gesture: () => Promise.resolve().then(function () { return require('./gesture.cjs'); }),
     svg: () => Promise.resolve().then(function () { return require('./svg.cjs'); }),
+    webgl: () => Promise.resolve().then(function () { return require('./webgl.cjs'); }),
 };
 const TAG_TO_CAT = new Map();
 for (const [cat, tags] of Object.entries(indexTags.COMPONENT_CATEGORIES))
