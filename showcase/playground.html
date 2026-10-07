@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>use-scroll-animate · Playground</title>
+  <meta name="description" content="Compose use-scroll-animate effects visually, tweak every parameter live and export HTML, ES module, React or Vue code." />
+  <meta name="theme-color" content="#0b0d12" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%237c5cff'/%3E%3Cpath d='M18 40 32 22l14 18' fill='none' stroke='white' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+  <script>
+    (function () {
+      try {
+        var d = document.documentElement;
+        d.setAttribute('data-theme', localStorage.getItem('usa-showcase:theme') || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
+        var lang = localStorage.getItem('usa-showcase:lang') || ((navigator.language || '').toLowerCase().indexOf('zh') === 0 ? 'zh' : 'en');
+        d.setAttribute('lang', lang === 'zh' ? 'zh-CN' : 'en');
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./gallery.css" />
+  <link rel="stylesheet" href="./playground.css" />
+</head>
+<body class="gallery-page pg-page">
+  <header class="topbar">
+    <a class="brand" href="./components.html">
+      <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 15 12 7l7 8" /></svg></span>
+      <span class="brand-name">use-scroll-animate</span>
+      <span class="brand-store" data-pg="title">Playground</span>
+    </a>
+    <nav class="topbar-actions" aria-label="Site">
+      <a class="icon-btn nav-link" href="./components.html" data-pg="back">Components</a>
+      <button class="icon-btn" id="pg-lang" type="button" aria-label="Switch language">中文</button>
+    </nav>
+  </header>
+  <main class="pg" id="main">
+    <p class="pg-lead" data-pg="lead">Stack effects, tweak them live, and copy the code.</p>
+    <p class="pg-note" id="pg-reduced" hidden data-pg="reduced"></p>
+    <div class="pg-grid">
+      <section class="pg-panel" aria-labelledby="pg-layers-h">
+        <label class="pg-field"><span data-pg="content">Content</span> <select id="pg-content"></select></label>
+        <div class="pg-add"><select id="pg-effect" aria-label="Effect"></select> <button type="button" class="demo-link" id="pg-add" data-pg="add">Add effect</button></div>
+        <h2 id="pg-layers-h" data-pg="layers">Layers (outermost first)</h2>
+        <ol class="pg-layers" id="pg-layers"></ol>
+      </section>
+      <section class="pg-panel" aria-labelledby="pg-prev-h">
+        <div class="pg-row"><h2 id="pg-prev-h" data-pg="preview">Preview</h2><button type="button" class="demo-link" id="pg-replay" data-pg="replay">Replay</button></div>
+        <div class="pg-stage" id="pg-stage" aria-live="off"></div>
+      </section>
+      <section class="pg-panel pg-code" aria-labelledby="pg-code-h">
+        <div class="pg-row"><h2 id="pg-code-h" data-pg="code">Export code</h2><button type="button" class="demo-link" id="pg-share" data-pg="share">Copy share link</button></div>
+        <div class="pg-tabs" role="tablist" id="pg-tabs"></div>
+        <pre class="pg-pre"><code id="pg-out"></code></pre>
+        <button type="button" class="demo-link" id="pg-copy" data-pg="copy">Copy</button>
+      </section>
+    </div>
+  </main>
+  <script type="module" src="./playground.js"></script>
+</body>
+</html>

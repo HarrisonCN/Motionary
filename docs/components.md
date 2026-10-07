@@ -289,6 +289,10 @@ Fallbacks set `data-fallback` (`webgl` · `image` · `no-image`); cross-origin i
 
 Also see `flip()` / `connectedAnimation()` / `<usa-flip-list>` in `components/transitions`.
 
+### v3.7 Visual playground
+
+[`showcase/playground.html`](../showcase/playground.html) — stack `<usa-*>` effects around sample content, tweak every attribute live, and export HTML / ES module / React / Vue code or a share link (state in the URL hash).
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

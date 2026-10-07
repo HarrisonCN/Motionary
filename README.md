@@ -10,7 +10,7 @@
 
 [English](./README.md) | [简体中文](./README_zh.md) | [日本語](./README_ja.md)
 
-**[✨ Live showcase — every effect, live, with copy-paste code](https://harrisoncn.github.io/use-scroll-animate/)** · **[🧩 Component gallery](https://harrisoncn.github.io/use-scroll-animate/showcase/components.html)**
+**[✨ Live showcase — every effect, live, with copy-paste code](https://harrisoncn.github.io/use-scroll-animate/)** · **[🧩 Component gallery](https://harrisoncn.github.io/use-scroll-animate/showcase/components.html)** · **[🎛 Playground](https://harrisoncn.github.io/use-scroll-animate/showcase/playground.html)**
 
 </div>
 

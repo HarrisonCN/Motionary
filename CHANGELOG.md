@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.7.0] - 2026-10-07
+
+### Added
+- **Visual playground** — [`showcase/playground.html`](./showcase/playground.html) (no build, dogfoods `dist/components.js` with a CDN fallback):
+  - **Compose**: stack effect layers around a card, button, heading or image — scroll reveal, 3D tilt, magnetic, spring, mask reveal, depth, swipeable, click ripple, shader background, glitch and gradient text — and reorder or remove them.
+  - **Tweak**: every attribute has a live control (selects, sliders, toggles); the preview re-renders instantly, with a Replay button.
+  - **Export**: HTML (CDN, no build), ES module (per-category imports with the right `define*Components()`), React (JSX via `components/jsx` types) and Vue (`isCustomElement` hint) code, copy to clipboard.
+  - **Share**: the composition is encoded in the URL hash (`encodeState()` / `decodeState()`), so a link reproduces it.
+  - English / 中文, keyboard accessible controls, honours `prefers-reduced-motion` (shows a notice; effects render their final state).
+- Pure, tested playground core in `showcase/playground-core.js` (`PLAYGROUND_EFFECTS`, `composeMarkup()`, `playgroundSnippets()`); the component gallery links to the playground.
+
 ## [3.6.0] - 2026-10-07
 
 ### Added
