@@ -348,7 +348,8 @@ function runAnimation(
   el: Element,
   opts: Required<AnimateOptions>,
   config: Required<ScrollAnimateConfig>,
-  staggerIndex = 0
+  staggerIndex = 0,
+  pending?: Set<Element>
 ): void {
   const { duration, delay, stagger, onStart, onComplete } = opts;
   const totalDelay = Math.max(0, delay + staggerIndex * stagger);
@@ -366,10 +367,12 @@ function runAnimation(
     el.classList.remove(config.hiddenClass);
     el.classList.add(config.visibleClass);
     onStart(el);
+    pending?.add(el);
     timers.set(
       el,
       setTimeout(() => {
         timers.delete(el);
+        pending?.delete(el);
         onComplete(el);
       }, duration + totalDelay)
     );
@@ -476,6 +479,8 @@ export function createScrollAnimate(userConfig: ScrollAnimateConfig = {}): Scrol
   let listening: EventTarget | null = null;
   // Active watch() MutationObservers, disconnected by destroy().
   const watchers = new Set<MutationObserver>();
+  // Elements with a pending class-name completion timer started by this instance.
+  const pending = new Set<Element>();
 
   // Observers are shared between elements with the same root/threshold/rootMargin,
   // instead of one (or two) IntersectionObservers per element.
@@ -586,7 +591,7 @@ export function createScrollAnimate(userConfig: ScrollAnimateConfig = {}): Scrol
           staggerCounts.set(parent, staggerIndex + 1);
         }
 
-        runAnimation(el, opts, config, staggerIndex);
+        runAnimation(el, opts, config, staggerIndex, pending);
         record.animated = true;
 
         if (opts.once && !opts.repeat) {
@@ -727,6 +732,15 @@ export function createScrollAnimate(userConfig: ScrollAnimateConfig = {}): Scrol
     destroy() {
       watchers.forEach((mo) => mo.disconnect());
       watchers.clear();
+      // Class-name mode: drop completion timers so onComplete never fires after destroy().
+      pending.forEach((el) => {
+        const timer = timers.get(el);
+        if (timer !== undefined) {
+          clearTimeout(timer);
+          timers.delete(el);
+        }
+      });
+      pending.clear();
       registry.forEach((record, el) => {
         if (!record.animated) reveal(el, config);
       });
@@ -755,7 +769,7 @@ export function createScrollAnimate(userConfig: ScrollAnimateConfig = {}): Scrol
 
     animate(target, options = {}) {
       const opts = mergeOptions(options, config);
-      resolveTargets(target).forEach((el) => runAnimation(el, opts, config, 0));
+      resolveTargets(target).forEach((el) => runAnimation(el, opts, config, 0, pending));
     },
 
     getObservedElements() {
