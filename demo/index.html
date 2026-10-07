@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>use-scroll-animate — preset playground</title>
+  <style>
+    :root { color-scheme: dark; --bg: #0b0c10; --card: #16181f; --line: #2a2d38; --text: #e8e9ee; --muted: #9aa0b0; --accent: #7c9cff; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 15px/1.5 system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background: var(--bg); color: var(--text); }
+    header { padding: 3rem 1.5rem 1rem; max-width: 1100px; margin: 0 auto; }
+    h1 { margin: 0 0 .25rem; font-size: clamp(1.8rem, 4vw, 2.6rem); }
+    p.lead { margin: 0; color: var(--muted); }
+    code { background: #1f2230; padding: .1em .35em; border-radius: 4px; font-size: .9em; }
+    main { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+    .stage { position: sticky; top: 0; z-index: 2; background: linear-gradient(var(--bg) 85%, transparent); padding: 1rem 0 1.5rem; }
+    .stage-box { height: 180px; display: grid; place-items: center; border: 1px dashed var(--line); border-radius: 14px; overflow: hidden; perspective: 800px; }
+    .target { width: 140px; height: 100px; border-radius: 12px; display: grid; place-items: center; font-weight: 600; background: linear-gradient(135deg, #7c9cff, #c47cff); color: #0b0c10; }
+    .controls { display: flex; flex-wrap: wrap; gap: .75rem 1.25rem; align-items: center; margin-top: .75rem; color: var(--muted); }
+    .controls label { display: inline-flex; gap: .4rem; align-items: center; }
+    select, input[type=number] { background: var(--card); color: var(--text); border: 1px solid var(--line); border-radius: 6px; padding: .25rem .4rem; }
+    input[type=number] { width: 5.5rem; }
+    .snippet { margin-top: .5rem; color: var(--muted); font-size: .85rem; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: .6rem; margin: 1rem 0 3rem; }
+    .grid button { appearance: none; border: 1px solid var(--line); background: var(--card); color: var(--text); border-radius: 10px; padding: .7rem .5rem; font: inherit; cursor: pointer; }
+    .grid button:hover, .grid button[aria-pressed=true] { border-color: var(--accent); color: var(--accent); }
+    h2 { margin: 3rem 0 .5rem; font-size: 1.3rem; }
+    .scroll-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+    .scroll-list .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 2.5rem 1rem; text-align: center; }
+    .parallax-band { position: relative; height: 320px; margin-top: 2rem; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); display: grid; place-items: center; }
+    .parallax-band .bg { position: absolute; inset: -20% 0; background: radial-gradient(circle at 30% 40%, #3b4cff55, transparent 60%), radial-gradient(circle at 70% 60%, #c47cff55, transparent 60%); }
+    .note { color: var(--muted); font-size: .9rem; }
+    footer { text-align: center; color: var(--muted); padding: 2rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>use-scroll-animate playground</h1>
+    <p class="lead">Click any preset to play it on the box. Scroll down to see every preset triggered by scrolling. No build step: this page loads the UMD bundle from <code>../dist/index.umd.js</code> (falling back to unpkg).</p>
+  </header>
+
+  <main>
+    <section class="stage" aria-label="Preview">
+      <div class="stage-box"><div class="target" id="target">preview</div></div>
+      <div class="controls">
+        <label>duration <input id="duration" type="number" value="700" min="0" step="50" /> ms</label>
+        <label>easing
+          <select id="easing">
+            <option>ease</option><option>ease-out</option><option>ease-in-out</option><option>linear</option>
+            <option>spring</option><option>soft-spring</option><option>heavy-bounce</option>
+          </select>
+        </label>
+        <span id="engine-info" class="note"></span>
+      </div>
+      <div class="snippet" id="snippet">ScrollAnimate.animate(el, { animation: 'fade-in-up' })</div>
+    </section>
+
+    <h2>Presets</h2>
+    <div class="grid" id="presets" role="group" aria-label="Presets"></div>
+
+    <h2>On scroll</h2>
+    <p class="note">Each card uses <code>data-sa data-sa-animation="…"</code>; <code>ScrollAnimate.watch()</code> picks them up. Cards replay when they re-enter (<code>repeat</code>, plus <code>exit</code> where the loaded build supports it).</p>
+    <div class="scroll-list" id="scroll-list"></div>
+
+    <h2>Parallax</h2>
+    <div class="parallax-band"><div class="bg" id="parallax-bg"></div><div id="parallax-label" class="note">parallax()</div></div>
+  </main>
+
+  <footer>MIT · <a href="https://github.com/HarrisonCN/use-scroll-animate" style="color: var(--accent)">github.com/HarrisonCN/use-scroll-animate</a></footer>
+
+  <script>
+    // Load the local UMD build; fall back to the published one (e.g. when the file is opened from a copy of this page).
+    (function load() {
+      var s = document.createElement('script');
+      s.src = '../dist/index.umd.js';
+      s.onload = start;
+      s.onerror = function () {
+        var cdn = document.createElement('script');
+        cdn.src = 'https://unpkg.com/use-scroll-animate/dist/index.umd.js';
+        cdn.onload = start;
+        document.head.appendChild(cdn);
+      };
+      document.head.appendChild(s);
+    })();
+
+    function start() {
+      var lib = window.ScrollAnimate;
+      var sa = lib.default;
+      var names = Object.keys(lib.PRESETS);
+      var target = document.getElementById('target');
+      var grid = document.getElementById('presets');
+      var list = document.getElementById('scroll-list');
+      var snippet = document.getElementById('snippet');
+      var hasExit = typeof lib.parallax === 'function'; // exit + parallax ship together (1.8+)
+
+      document.getElementById('engine-info').textContent =
+        typeof lib.supportsScrollTimeline === 'function'
+          ? 'native scroll timeline: ' + (lib.supportsScrollTimeline() ? 'supported' : 'not supported (JS engine)')
+          : '';
+
+      function play(name, button) {
+        var duration = Number(document.getElementById('duration').value) || 0;
+        var easing = document.getElementById('easing').value;
+        grid.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', String(b === button)); });
+        target.textContent = name;
+        sa.animate(target, { animation: name, duration: duration, easing: easing });
+        snippet.textContent = "ScrollAnimate.animate(el, { animation: '" + name + "', duration: " + duration + ", easing: '" + easing + "' })";
+      }
+
+      names.forEach(function (name) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = name;
+        b.setAttribute('aria-pressed', 'false');
+        b.addEventListener('click', function () { play(name, b); });
+        grid.appendChild(b);
+
+        var card = document.createElement('div');
+        card.className = 'card';
+        card.textContent = name;
+        card.setAttribute('data-sa', '');
+        card.setAttribute('data-sa-animation', name);
+        card.setAttribute('data-sa-repeat', '');
+        if (hasExit) card.setAttribute('data-sa-exit', '');
+        list.appendChild(card);
+      });
+
+      sa.watch();
+
+      if (hasExit) {
+        lib.parallax('#parallax-bg', { speed: 0.5 });
+      } else {
+        document.getElementById('parallax-label').textContent = 'parallax() needs v1.8+ (rebuild dist/)';
+      }
+    }
+  </script>
+</body>
+</html>

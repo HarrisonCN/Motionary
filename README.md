@@ -24,6 +24,13 @@ In 2025, performance is everything. Traditional scroll animation libraries often
 - ♿ **Accessible**: Respects `prefers-reduced-motion` out of the box (content is shown immediately, no entrance or parallax motion).
 - 🖥️ **SSR-safe**: Importing (and even calling) the API on the server is a no-op.
 
+## Documentation
+
+- 📖 [API reference](./docs/API.md) — every export, option, attribute and config key
+- 🎛️ [Demo / preset playground](./demo/index.html) — every preset clickable, no build step (open `demo/index.html` from a clone)
+- 🔁 Migration guides: [from AOS](./docs/migration-from-aos.md) · [from GSAP ScrollTrigger](./docs/migration-from-gsap-scrolltrigger.md)
+- ⚠️ [Deprecations](./docs/deprecations.md) — what 2.0 removes and what replaces it
+
 ## Installation
 
 ```bash
@@ -287,7 +294,7 @@ Via a `<script>` tag (UMD build), the default instance lives at `ScrollAnimate.d
 
 ```jsx
 import React from 'react';
-import { createReactHooks } from 'use-scroll-animate/react'; // or from 'use-scroll-animate'
+import { createReactHooks } from 'use-scroll-animate/react';
 const { useScrollAnimate, useScrollStagger } = createReactHooks(React);
 
 function Card() {
@@ -298,7 +305,7 @@ function Card() {
 
 ```js
 import { ref, onMounted, onUnmounted } from 'vue';
-import { createVueComposables } from 'use-scroll-animate/vue'; // or from 'use-scroll-animate'
+import { createVueComposables } from 'use-scroll-animate/vue';
 const { useScrollAnimate, useScrollStagger } = createVueComposables({ ref, onMounted, onUnmounted });
 const { animateRef } = useScrollAnimate({ animation: 'fade-in-left' });
 const { staggerRef } = useScrollStagger({ stagger: 60, observeChildren: true }); // <ul ref="staggerRef">
@@ -311,6 +318,8 @@ function Feed({ items }) {
   return <ul ref={ref}>{items.map((i) => <li key={i.id}>{i.title}</li>)}</ul>;
 }
 ```
+
+> Importing `createReactHooks` / `createVueComposables` from the main `use-scroll-animate` entry still works in 1.x but is **deprecated** (one dev-only warning) and removed in 2.0.
 
 ### Svelte (`use-scroll-animate/svelte`)
 

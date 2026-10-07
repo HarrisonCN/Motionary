@@ -14,8 +14,27 @@ export { staggerChildren } from './stagger';
 export { sequence } from './sequence';
 export { parallax } from './parallax';
 export { PRESETS, resolvePreset, resolveEasing, EASING_MAP } from './presets';
-export { createReactHooks } from './react';
-export { createVueComposables } from './vue';
+import { createReactHooks as reactHooks } from './react';
+import { createVueComposables as vueComposables } from './vue';
+import { deprecate } from './dev';
+
+/**
+ * @deprecated Import from `use-scroll-animate/react` instead. The re-export
+ * from the main entry is removed in 2.0.
+ */
+export const createReactHooks: typeof reactHooks = (React) => {
+  deprecate('react', "import { createReactHooks } from 'use-scroll-animate/react' (the main-entry re-export is removed in 2.0).");
+  return reactHooks(React);
+};
+
+/**
+ * @deprecated Import from `use-scroll-animate/vue` instead. The re-export
+ * from the main entry is removed in 2.0.
+ */
+export const createVueComposables: typeof vueComposables = (Vue) => {
+  deprecate('vue', "import { createVueComposables } from 'use-scroll-animate/vue' (the main-entry re-export is removed in 2.0).");
+  return vueComposables(Vue);
+};
 
 export type {
   AnimationPreset,

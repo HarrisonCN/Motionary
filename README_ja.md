@@ -23,6 +23,12 @@
 - 🧩 **フレームワークに依存しない**：Vanilla JS、React、Vue、Svelteなどとシームレスに動作。一流の React Hooks と Vue Composables を内蔵。
 - ♿ **アクセシブル**：`prefers-reduced-motion` を標準でサポート。
 
+## ドキュメント
+
+- [API リファレンス](./docs/API.md)（英語）· [デモ](./demo/index.html)（全プリセットをクリックで再生、ビルド不要）
+- 移行ガイド：[AOS から](./docs/migration-from-aos.md) · [GSAP ScrollTrigger から](./docs/migration-from-gsap-scrolltrigger.md)
+- [非推奨一覧](./docs/deprecations.md)：メインエントリからの `createReactHooks` / `createVueComposables` の import は非推奨（開発時に一度だけ警告）。`use-scroll-animate/react` / `/vue` を使ってください（2.0 で削除）。
+
 ## インストール
 
 ```bash
