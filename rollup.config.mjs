@@ -3,7 +3,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
 import { dts } from 'rollup-plugin-dts';
 import { readFileSync, readdirSync } from 'node:fs';
-import { CATEGORIES } from './scripts/categories.mjs';
+import { CATEGORIES, COMPONENT_ENTRIES } from './scripts/categories.mjs';
 
 // `import css from './x.css?raw'` → the minified stylesheet as a string
 // (Vite/Vitest support `?raw` natively; this mirrors it for the build).
@@ -71,6 +71,7 @@ const entries = {
   element: 'src/element.ts',
   components: 'src/components/index.ts',
   ...Object.fromEntries(CATEGORIES.map((c) => [`components/${c}`, `src/components/${c}/index.ts`])),
+  ...Object.fromEntries(Object.entries(COMPONENT_ENTRIES).map(([n, src]) => [`components/${n}`, `src/components/${src}.ts`])),
 };
 
 const ts = () => typescript({ tsconfig: './tsconfig.json', declaration: false, declarationDir: undefined });

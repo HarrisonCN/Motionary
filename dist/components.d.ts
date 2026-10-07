@@ -1788,6 +1788,7 @@ declare const COMPONENT_CATEGORIES: {
     readonly page: readonly ["usa-cursor", "usa-fullpage", "usa-loading-bar", "usa-back-to-top", "usa-ambient", "usa-splash", "usa-auto-skeleton", "usa-motion-switch"];
 };
 type ComponentCategory = keyof typeof COMPONENT_CATEGORIES;
+
 /**
  * Register every `<usa-*>` component (or only the given categories).
  * Safe to call more than once and on the server (no-op without DOM).

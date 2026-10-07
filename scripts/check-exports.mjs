@@ -22,6 +22,9 @@ const entries = {
   'use-scroll-animate/components/click': ['defineClickComponents', 'defineClick', 'defineButton', 'defineIconMorph', 'defineLike', 'defineHold', 'defineDoubleTap', 'defineCheckbox', 'burst', 'confetti', 'shake', 'haptic', 'morphPath', 'BUTTON_DEFORMS'],
   'use-scroll-animate/components/ui': ['defineUiComponents', 'defineTabs', 'defineDrawer', 'defineBottomSheet', 'definePullRefresh', 'defineFab', 'defineNavbar', 'defineSlider', 'defineRating', 'defineTooltip', 'definePopover', 'defineBadge', 'defineAvatarStack', 'VARIANTS', 'setVariant'],
   'use-scroll-animate/components/page': ['definePageComponents', 'defineCursor', 'defineFullpage', 'defineLoadingBar', 'defineBackToTop', 'defineAmbient', 'defineSplash', 'defineAutoSkeleton', 'defineMotionSwitch', 'pageTransition', 'enableMpaTransitions', 'themeTransition', 'smoothScroll', 'scrollToTarget', 'loadingBar', 'setMotionIntensity'],
+  'use-scroll-animate/components/react': ['createUsaComponents', 'USA_TAGS', 'eventName'],
+  'use-scroll-animate/components/vue': ['UsaPlugin', 'isUsaElement'],
+  'use-scroll-animate/components/lazy': ['lazyDefine', 'defineUsed', 'loadCategory', 'categoryOfTag'],
   'use-scroll-animate/components/transitions': ['defineTransitionComponents', 'defineDialog', 'defineAccordion', 'defineFlipList', 'defineViewSwitch', 'viewTransition', 'flip', 'connectedAnimation'],
 };
 

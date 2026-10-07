@@ -1138,5 +1138,5 @@ function createScrollAnimate(userConfig = {}) {
     return instance;
 }
 
-export { EASING_MAP as E, PRESETS as P, stopAnimation as a, prefersReducedMotion as b, createScrollAnimate as c, resolveEasing as d, resolvePreset as e, supportsScrollTimeline as f, getScrollProgress as g, hasDOM as h, readOptions as i, prepareElement as p, resolveTargets as r, supportsObserver as s };
-//# sourceMappingURL=core-BP-a1iNc.js.map
+export { EASING_MAP as E, PRESETS as P, stopAnimation as a, resolveTargets as b, createScrollAnimate as c, prefersReducedMotion as d, resolveEasing as e, resolvePreset as f, getScrollProgress as g, hasDOM as h, supportsScrollTimeline as i, prepareElement as p, readOptions as r, supportsObserver as s };
+//# sourceMappingURL=core-D4jSNuvs.js.map

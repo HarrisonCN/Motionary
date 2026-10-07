@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.9.0] - 2026-10-07
+
+### Added
+- **React wrappers** `use-scroll-animate/components/react`: `createUsaComponents(React)` returns a typed wrapper for every `<usa-*>` element (`UsaButton`, `UsaCard`, `UsaToggle`, …) that sets properties (`checked`, `value`, `state`, `open`, …), forwards `ref` and maps `onUsaChange` / `onUsaDragEnd`-style props to `usa:*` events (works on React 18 and 19). `USA_TAGS`, `eventName()`, `pascal()`.
+- **Vue integration** `use-scroll-animate/components/vue`: `isUsaElement` (`compilerOptions.isCustomElement`) and `UsaPlugin` (`app.use(UsaPlugin, { categories })`).
+- **JSX types** `use-scroll-animate/components/jsx`: `UsaIntrinsicElements` / `UsaTag` / `UsaAttributes` to type raw `<usa-*>` tags in React, Preact or Solid JSX.
+- **Lazy per-component registration** `use-scroll-animate/components/lazy`: `lazyDefine()` watches the DOM and dynamically imports only the categories whose tags are used (one chunk per category); `defineUsed(root)`, `loadCategory(cat)`, `categoryOfTag(tag)`.
+- **Accessibility audit**: automated sweep that mounts every `<usa-*>` element in normal, reduced-motion and motion-`off` modes and checks roles / focusability of interactive elements and `aria-hidden` on decorative layers; [`docs/accessibility.md`](./docs/accessibility.md) (motion, keyboard map, roles & states, transparency).
+- **Guides**: [`docs/frameworks-ssr.md`](./docs/frameworks-ssr.md) — Next.js (App Router), Astro (incl. MPA view transitions), Vue / Nuxt, Svelte, Solid, Angular, lazy loading.
+- **Theme tokens** documented: `--usa-accent`, `--usa-accent-text`, `--usa-surface`, `--usa-text`, `--usa-radius`, `--usa-border`, `--usa-shadow`, `--usa-blur`, `--usa-font`, `--usa-motion`.
+- **Perf benchmark** `npm run bench` (`scripts/bench.mjs`, jsdom: define + mount/unmount N of every element) and size budgets for the new entries.
+- **Showcase**: every card's parameter controls now flow into the generated code (HTML / ESM / React / Vue / desktop tabs) so what you tweak is what you copy; category navigation covers all 11 categories.
+
+### Changed
+- `COMPONENT_CATEGORIES` lives in a dependency-free module (re-exported unchanged) so the lazy loader and framework helpers do not pull in every component.
+
+### Deferred
+- Pixel-based visual regression tests need real browsers (Playwright) in CI; deferred to a later release (the jsdom suite covers behaviour, ARIA and reduced motion).
+
 ## [2.8.0] - 2026-10-07
 
 ### Added

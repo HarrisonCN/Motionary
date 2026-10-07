@@ -1,5 +1,5 @@
-import { c as createScrollAnimate } from './chunks/core-BP-a1iNc.js';
-import { s as staggerChildren } from './chunks/stagger-DTv_WiUQ.js';
+import { c as createScrollAnimate } from './chunks/core-D4jSNuvs.js';
+import { s as staggerChildren } from './chunks/stagger-D5yONhmn.js';
 
 /**
  * use-scroll-animate - React Integration

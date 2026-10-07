@@ -352,7 +352,13 @@ export function componentSnippets(item) {
       desktop: desktopSnippet(item, sub),
     };
   }
-  const markup = item.usage;
+  let markup = item.usage;
+  // live parameter values chosen in the gallery (item.live) replace / add attributes on the first tag
+  for (const [k, v] of Object.entries(item.live || {})) {
+    const re = new RegExp(`(<${item.tag}\\b[^>]*?)\\s${k}="[^"]*"`);
+    if (re.test(markup)) markup = markup.replace(re, v === '' ? '$1' : `$1 ${k}="${v}"`);
+    else if (v !== '') markup = markup.replace(new RegExp(`<${item.tag}\\b`), `<${item.tag} ${k}="${v}"`);
+  }
   const html = stripScripts(markup);
   return {
     html: `<!-- registers every <usa-*> element -->\n<script src="${cdn}"></script>\n\n${markup}`,

@@ -209,6 +209,28 @@ Presets (`SPRING_PRESETS`): `default` (170/26), `gentle` (120/14), `wobbly` (180
 
 WinUI 3 / WebView2 sample app: [`examples/webview2-winui/`](../examples/webview2-winui/).
 
+## Theme tokens
+
+Every component reads these CSS custom properties (set them on `:root`, any ancestor, or via `variant` / `setVariant()`):
+
+| Token | Used for |
+|---|---|
+| `--usa-accent` / `--usa-accent-text` | primary colour (toggles, sliders, tabs indicator, checkbox, progress, focus rings) / text on it |
+| `--usa-surface` / `--usa-text` | panels (drawer, sheet, popover, tooltip, back-to-top) |
+| `--usa-radius`, `--usa-border`, `--usa-shadow`, `--usa-blur`, `--usa-font` | shape, outline, elevation, glass blur, typography |
+| `--usa-motion` | global motion intensity (0 · 0.6 · 1 · 1.25), set by `setMotionIntensity()` |
+
+## Framework entry points (v2.9)
+
+| Import | What |
+|---|---|
+| `use-scroll-animate/components/react` | `createUsaComponents(React)` typed wrappers (props, ref, `onUsa*` events) |
+| `use-scroll-animate/components/vue` | `isUsaElement`, `UsaPlugin` |
+| `use-scroll-animate/components/jsx` | `UsaIntrinsicElements` JSX types |
+| `use-scroll-animate/components/lazy` | `lazyDefine()`, `defineUsed()`, `loadCategory()` |
+
+See [frameworks-ssr.md](./frameworks-ssr.md) and [accessibility.md](./accessibility.md).
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

@@ -1,4 +1,4 @@
-import { h as hasDOM, s as supportsObserver, c as createScrollAnimate, p as prepareElement, a as stopAnimation } from './core-BP-a1iNc.js';
+import { h as hasDOM, s as supportsObserver, c as createScrollAnimate, p as prepareElement, a as stopAnimation } from './core-D4jSNuvs.js';
 
 /**
  * use-scroll-animate - Staggered children
@@ -81,4 +81,4 @@ function staggerChildren(container, options = {}, instance) {
 }
 
 export { staggerChildren as s };
-//# sourceMappingURL=stagger-DTv_WiUQ.js.map
+//# sourceMappingURL=stagger-D5yONhmn.js.map

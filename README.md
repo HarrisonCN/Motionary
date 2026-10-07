@@ -28,7 +28,7 @@ In 2025, performance is everything. Traditional scroll animation libraries often
 
 ## Animated components (v2.2+) 🧩
 
-**30 dependency-free animated Web Components** (`<usa-*>`) in six categories — for **web pages and Windows desktop apps** (Electron, Tauri, WebView2 in WinUI/WPF/WinForms, PWAs). Custom Elements + CSS + Web Animations only: tree-shakable, SSR-safe, `prefers-reduced-motion` everywhere. **[Live gallery](https://harrisoncn.github.io/use-scroll-animate/showcase/components.html)** · [Component docs](./docs/components.md) · [Windows apps guide](./docs/windows-apps.md)
+**30 dependency-free animated Web Components** (`<usa-*>`) in six categories — for **web pages and Windows desktop apps** (Electron, Tauri, WebView2 in WinUI/WPF/WinForms, PWAs). Custom Elements + CSS + Web Animations only: tree-shakable, SSR-safe, `prefers-reduced-motion` everywhere. **[Live gallery](https://harrisoncn.github.io/use-scroll-animate/showcase/components.html)** · [Component docs](./docs/components.md) · [Windows apps guide](./docs/windows-apps.md) · [Next / Astro / React / Vue](./docs/frameworks-ssr.md) · [Accessibility](./docs/accessibility.md)
 
 ```js
 import { defineComponents } from 'use-scroll-animate/components';
