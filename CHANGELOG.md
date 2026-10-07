@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.1.0] - 2026-10-07
+
+### Added
+- **Timeline & choreography** — new category `use-scroll-animate/components/timeline`:
+  - `timeline()` — one playhead for many WAAPI animations: `.to(target, keyframes | preset, { at, duration, easing, stagger })`, `.label()`, `.call()`, `play()`, `reverse()`, `pause()`, `seek(ms | label)`, `progress(p)`, `scrub(section, { smooth })` and `cancel()`. Positions: `'>'` (chain, default), `'<'` (with previous), `'-=200'` (overlap), `'+=100'` (gap), `'<+=50'`, `'label+=100'` or absolute ms (`resolvePosition()` is exported).
+  - `TIMELINE_PRESETS`: `fade`, `fade-up/down/left/right`, `scale`, `blur`, `rotate`, `clip-up`, `clip-right`.
+  - `<usa-timeline>` — declarative: `data-tl` children become steps (`data-at`, `data-duration`, `data-label`); `trigger` (`view` · `click` · `manual`), `scrub`, `overlap`, `stagger`, `repeat`; `usa:complete`.
+- Reduced motion: timelines jump to their end state, scrub is disabled; without WAAPI the final frames are applied.
+- Showcase: new **Timeline & choreography** gallery category (declarative demo + interactive play / reverse / scrub slider).
+
 ## [3.0.0] - 2026-10-07
 
 3.0 removes what 2.9 deprecated. Every change has a drop-in replacement — see **[Upgrading to 3.0](./docs/upgrading-3.md)** (run your app on 2.9 first: it warns once wherever old usage is found).

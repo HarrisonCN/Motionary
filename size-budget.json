@@ -203,5 +203,15 @@
     "name": "import 'use-scroll-animate/components/lazy'",
     "import": "export * from 'pkg/components/lazy';",
     "limit": 1536
+  },
+  {
+    "name": "import 'use-scroll-animate/components/timeline'",
+    "import": "export * from 'pkg/components/timeline';",
+    "limit": 4096
+  },
+  {
+    "name": "import { defineTimelineComponents } from '…/components/timeline'",
+    "import": "export { defineTimelineComponents } from 'pkg/components/timeline';",
+    "limit": 3840
   }
 ]

@@ -45,6 +45,7 @@ defineComponents(); // カテゴリ単位: import { defineTextComponents } from 
 | **クリック・タップ**（`/components/click`） | `<usa-button>`（squash · wobble · gooey · dent · shape morph · submit）· `<usa-icon-morph>` · `<usa-click>` · `<usa-like>` · `<usa-hold>` · `<usa-double-tap>` · `<usa-checkbox>` |
 | **UI コンポーネント・バリアント**（`/components/ui`） | `<usa-tabs>` · `<usa-drawer>` · `<usa-bottom-sheet>` · `<usa-pull-refresh>` · `<usa-fab>` · `<usa-navbar>` · `<usa-slider>` · `<usa-rating>` · `<usa-tooltip>` · `<usa-popover>` · `<usa-badge>` · `<usa-avatar-stack>` · 全コンポーネントで `variant` |
 | **ページ・アプリ全体**（`/components/page`） | `pageTransition()` · `themeTransition()` · `<usa-cursor>` · `smoothScroll()` · `<usa-fullpage>` · `<usa-loading-bar>` · `<usa-back-to-top>` · `<usa-ambient>` · `<usa-splash>` · `<usa-auto-skeleton>` · `<usa-motion-switch>` |
+| **タイムライン** (`/components/timeline`) | `timeline()`（連結 · 重ね · ラベル · シーク · 逆再生 · スクラブ）· `<usa-timeline>`（`data-tl` ステップ） |
 
 ## ドキュメント
 

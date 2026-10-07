@@ -14,7 +14,8 @@ const COMPONENT_CATEGORIES = {
     click: ['usa-click', 'usa-button', 'usa-icon-morph', 'usa-like', 'usa-hold', 'usa-double-tap', 'usa-checkbox'],
     ui: ['usa-tabs', 'usa-drawer', 'usa-bottom-sheet', 'usa-pull-refresh', 'usa-fab', 'usa-navbar', 'usa-slider', 'usa-rating', 'usa-tooltip', 'usa-popover', 'usa-badge', 'usa-avatar-stack'],
     page: ['usa-cursor', 'usa-fullpage', 'usa-loading-bar', 'usa-back-to-top', 'usa-ambient', 'usa-splash', 'usa-auto-skeleton', 'usa-motion-switch'],
+    timeline: ['usa-timeline'],
 };
 
 exports.COMPONENT_CATEGORIES = COMPONENT_CATEGORIES;
-//# sourceMappingURL=index-tags-BEM98giN.cjs.map
+//# sourceMappingURL=index-tags-Gw1G06Pb.cjs.map
