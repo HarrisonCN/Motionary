@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.6.0] - 2026-10-07
+
+### Added
+- **Layout animation** — new category `use-scroll-animate/components/layout`:
+  - `autoAnimate(parent, { duration, easing, scale })` and `<usa-auto-animate>` — zero-config list / grid reflow: added children fade-scale in, removed children fade out in place (as positioned ghosts), moved or resized ones glide with FLIP (sort, filter, insert, container resize); `enable()` / `disable()` / `stop()`.
+  - `<usa-masonry>` — masonry grid (`columns` or `min` column width, `gap`): shortest-column placement, items glide when the width, the set of items or their sizes change (ResizeObserver); CSS multi-column before JS runs.
+  - `sharedTransition(update, root?, opts)` — shared-element transitions: elements with the same `data-shared="id"` before and after `update()` morph into each other via the View Transitions API (`view-transition-name` assigned per id) with a FLIP fallback.
+  - Pure helpers `flipFrames()`, `masonryLayout()`.
+- Reduced motion: layout changes apply instantly, masonry does not glide, shared transitions just run `update()`.
+- Showcase: new **Layout animation** gallery category (interactive add / shuffle / remove, masonry, shared-element thumbnails → detail).
+
 ## [3.5.0] - 2026-10-07
 
 ### Added

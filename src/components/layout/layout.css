@@ -1,0 +1,8 @@
+/* <usa-auto-animate> */
+usa-auto-animate { display: block; }
+/* <usa-masonry> */
+usa-masonry { display: block; column-width: 220px; column-gap: 16px; }
+usa-masonry > * { break-inside: avoid; margin-bottom: 16px; }
+usa-masonry[data-js] { position: relative; columns: auto; }
+usa-masonry[data-js] > * { position: absolute; left: 0; top: 0; margin: 0; box-sizing: border-box; transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1); }
+@media (prefers-reduced-motion: reduce) { usa-masonry[data-js] > * { transition: none; } }

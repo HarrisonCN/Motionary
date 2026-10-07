@@ -279,6 +279,16 @@ Fallbacks set `data-fallback` (`webgl` · `image` · `no-image`); cross-origin i
 
 3D ring carousel: `<usa-carousel-3d>` (cards).
 
+### v3.6 Layout animation (`components/layout`)
+
+| Element / API | What it does | Key options |
+|---|---|---|
+| `<usa-auto-animate>` · `autoAnimate(el)` | Add / remove / move / resize of children animates | `duration` (300), `no-scale` / `scale`; `enable()`, `disable()`, `stop()` |
+| `<usa-masonry>` | Masonry grid with animated reflow | `columns` or `min` (220), `gap` (16); `layout()` |
+| `sharedTransition(update, root?)` | Shared-element transition via `data-shared="id"` | `duration` (450), `easing`; View Transitions API or FLIP |
+
+Also see `flip()` / `connectedAnimation()` / `<usa-flip-list>` in `components/transitions`.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

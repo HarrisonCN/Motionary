@@ -17,6 +17,7 @@ export const COMPONENT_CATEGORIES = {
   svg: ['usa-draw', 'usa-morph', 'usa-mask-reveal', 'usa-anim-icon'],
   webgl: ['usa-shader', 'usa-distort', 'usa-liquid'],
   depth: ['usa-cube', 'usa-depth'],
+  layout: ['usa-auto-animate', 'usa-masonry'],
 } as const;
 
 export type ComponentCategory = keyof typeof COMPONENT_CATEGORIES;

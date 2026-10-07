@@ -17,7 +17,8 @@ const COMPONENT_CATEGORIES = {
     svg: ['usa-draw', 'usa-morph', 'usa-mask-reveal', 'usa-anim-icon'],
     webgl: ['usa-shader', 'usa-distort', 'usa-liquid'],
     depth: ['usa-cube', 'usa-depth'],
+    layout: ['usa-auto-animate', 'usa-masonry'],
 };
 
 export { COMPONENT_CATEGORIES as C };
-//# sourceMappingURL=index-tags-uw1Fospg.js.map
+//# sourceMappingURL=index-tags-BANJ-e4H.js.map

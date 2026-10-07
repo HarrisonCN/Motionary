@@ -1,4 +1,4 @@
-import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-uw1Fospg.js';
+import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-BANJ-e4H.js';
 
 /**
  * use-scroll-animate/components/react — React wrappers for every `<usa-*>`

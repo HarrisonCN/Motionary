@@ -209,3 +209,10 @@ usa-toggle { --usa-toggle-on: var(--accent); }
 .demo-depth__l { position: absolute; border-radius: 50%; filter: blur(2px); }
 .demo-depth__l--1 { width: 220px; height: 220px; left: -40px; top: -60px; background: radial-gradient(circle, #6366f1 0, transparent 70%); }
 .demo-depth__l--2 { width: 160px; height: 160px; right: -20px; bottom: -40px; background: radial-gradient(circle, #ec4899 0, transparent 70%); }
+
+/* v3.6 layout demos */
+.demo-aa { display: flex; flex-wrap: wrap; gap: 8px; max-width: 320px; }
+.demo-masonry { width: min(100%, 320px); }
+.demo-masonry > div { border-radius: 8px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); opacity: 0.85; }
+.demo-shared__thumb { width: 56px; height: 56px; border-radius: 12px; border: 0; color: #fff; font-weight: 800; background: linear-gradient(135deg, var(--accent), var(--accent-2)); cursor: pointer; }
+.demo-shared__big { width: 200px; height: 120px; border-radius: 18px; display: grid; place-items: center; color: #fff; font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, var(--accent), var(--accent-2)); margin-bottom: 8px; }
