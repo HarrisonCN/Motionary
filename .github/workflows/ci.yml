@@ -16,6 +16,7 @@ jobs:
   test:
     name: Node ${{ matrix.node }}
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     strategy:
       fail-fast: false
       matrix:
@@ -26,7 +27,7 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
           cache: npm
-      - run: npm ci
+      - run: npm ci --no-audit --no-fund
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
@@ -34,6 +35,9 @@ jobs:
       - name: Package lint (publint + are-the-types-wrong)
         if: matrix.node == 22
         run: npm run lint:package
+      - name: Package contents (dry run)
+        if: matrix.node == 22
+        run: npm pack --dry-run
       - name: Bundle size
         if: matrix.node == 22
         run: npm run size >> "$GITHUB_STEP_SUMMARY"
