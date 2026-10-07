@@ -12,6 +12,10 @@ describe('SSR', () => {
       sa.animate('.x');
       sa.refresh();
       sa.destroy();
+      mod.staggerChildren(null, { observeChildren: true })();
+      const tl = mod.sequence([{ target: '.x' }], { trigger: '.y' });
+      tl.play();
+      tl.cancel();
     }).not.toThrow();
   });
 });

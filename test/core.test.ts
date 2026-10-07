@@ -187,7 +187,7 @@ describe('robustness', () => {
 
   it('refresh does not replay or re-hide already animated once-elements', async () => {
     const { createScrollAnimate } = await load();
-    const sa = createScrollAnimate();
+    const sa = createScrollAnimate({ autoUnregister: false });
     const node = el();
     sa.observe(node);
     fireAll([node], true);

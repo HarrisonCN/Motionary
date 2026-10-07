@@ -2,7 +2,7 @@
 
 # use-scroll-animate 🚀
 
-**A lightweight (~4KB gzipped), dependency-free scroll animation library for the modern web.**
+**A lightweight (~5KB gzipped), dependency-free scroll animation library for the modern web.**
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/HarrisonCN/use-scroll-animate?style=flat-square)](https://github.com/HarrisonCN/use-scroll-animate/releases)
 [![GitHub repo size](https://img.shields.io/github/repo-size/HarrisonCN/use-scroll-animate?style=flat-square)](https://github.com/HarrisonCN/use-scroll-animate)
@@ -18,8 +18,8 @@ In 2025, performance is everything. Traditional scroll animation libraries often
 
 `use-scroll-animate` is built differently:
 - ⚡ **Zero Dependencies**: Pure Vanilla JS/TypeScript.
-- 🚀 **High Performance**: Powered by `IntersectionObserver` and the native `Web Animations API`. No scroll event listeners, no layout thrashing.
-- 🪶 **Ultra Lightweight**: ~4KB gzipped for the core (tree-shaken ESM); the all-in-one UMD build incl. React/Vue helpers is ~4.8KB.
+- 🚀 **High Performance**: Powered by `IntersectionObserver` and the native `Web Animations API`. No scroll event listeners by default (the opt-in scroll-progress mode uses a single passive, rAF-throttled listener, only while tracked elements are on screen).
+- 🪶 **Ultra Lightweight**: ~4.8KB gzipped for the core (tree-shaken, minified ESM); everything incl. `sequence`, `staggerChildren` and the React/Vue helpers is ~6.1KB (UMD ~6.2KB).
 - 🧩 **Framework Agnostic**: Works seamlessly with Vanilla JS, React, Vue, Svelte, and more. First-class React Hooks and Vue Composables included.
 - ♿ **Accessible**: Respects `prefers-reduced-motion` out of the box (content is shown immediately, no entrance or parallax motion).
 - 🖥️ **SSR-safe**: Importing (and even calling) the API on the server is a no-op.
@@ -30,7 +30,57 @@ In 2025, performance is everything. Traditional scroll animation libraries often
 npm install use-scroll-animate
 ```
 
-## v1.3.0 New Features: Custom Easing 🎨
+## v1.4.0 New Features ✨
+
+### True scroll progress (`progressMode: 'scroll'`)
+By default `onProgress` reports the element's *visible ratio*, which never reaches 1 for elements taller than the screen. Opt in to real scroll progress: `0` when the element's top reaches the bottom of the viewport, `1` when its bottom leaves the top.
+
+```js
+ScrollAnimate.observe('.chapter', {
+  progressMode: 'scroll',
+  onProgress: (el, p) => el.style.setProperty('--progress', p),
+});
+```
+
+Parallax uses the same progress, so `progressMode: 'scroll'` also gives smooth parallax on tall sections. HTML: `data-sa-progress="scroll"`. Also exported as a helper: `getScrollProgress(el, root?)`.
+
+### Stagger dynamically added children
+`staggerChildren()` (vanilla), `useScrollStagger()` (React **and now Vue**) accept `observeChildren: true`. A `MutationObserver` picks up children added later (infinite lists, "load more"): those added before the reveal join the stagger; those added after it animate when they scroll into view, staggered per batch.
+
+```js
+import { staggerChildren } from 'use-scroll-animate';
+const stop = staggerChildren(document.querySelector('#feed'), {
+  animation: 'fade-in-up', stagger: 60, observeChildren: true,
+});
+// later: stop();
+```
+
+### Timelines with `sequence()`
+Chain animations across elements. Each step starts when the previous one ends; `gap` adds a pause (negative values overlap) and `at` sets an absolute start time.
+
+```js
+import { sequence } from 'use-scroll-animate';
+
+const tl = sequence([
+  { target: '.hero h1', animation: 'fade-in-up', duration: 700 },
+  { target: '.hero p', animation: 'blur-in', gap: -300 },
+  { target: '.hero .btn', animation: 'scale-up', stagger: 80 },
+], { trigger: '.hero', easing: 'soft-spring' }); // auto-plays once when .hero enters
+
+await tl.play();   // or play manually; resolves when every step is done
+tl.cancel();       // stop and leave everything visible
+```
+
+### New presets
+`scale-up`, `blur-in-up`, `flip-up`, `flip-down`, `rotate-left`, `rotate-right`, and clip-path reveals `clip-up`, `clip-down`, `clip-left`, `clip-right`, `clip-circle`.
+
+### Smaller memory footprint
+Finished `once` elements are dropped from the registry right after they animate (unless they still need parallax/`onProgress`), so long pages and SPAs don't keep thousands of records alive. They're remembered in a `WeakSet`, so `init()`/`observe()` never replay them. Set `createScrollAnimate({ autoUnregister: false })` to keep them listed in `getObservedElements()` as before.
+
+### Proper `exports` map
+Node ESM (`import`) resolves to `dist/index.mjs`, CommonJS (`require`) to `dist/index.js`, each with matching bundled types. The legacy `main`/`module`/`unpkg` fields and `dist/*` deep imports keep working.
+
+## v1.3.0: Custom Easing 🎨
 
 You can now use custom cubic-bezier curves or even JavaScript functions to create complex physical effects.
 
@@ -92,9 +142,14 @@ We've added high-quality physics-based easing presets:
 | `stagger` | `number` | `0` | Extra delay (ms) per sibling revealed in the same batch |
 | `parallax` | `{ x, y, rotate, scale, speed }` | `{}` | Scroll-driven parallax (keeps running after the entrance animation) |
 | `onStart` / `onComplete` / `onEnter` / `onLeave` | `(el) => void` | – | Lifecycle callbacks |
-| `onProgress` | `(el, progress) => void` | – | Visible ratio of the element (0–1) as it scrolls |
+| `onProgress` | `(el, progress) => void` | – | Progress (0–1) as the element scrolls — visible ratio, or true scroll progress with `progressMode: 'scroll'` |
+| `progressMode` | `'ratio'` \| `'scroll'` | `'ratio'` | How `onProgress`/parallax progress is measured (`'scroll'`: 0 = top enters at the bottom, 1 = bottom leaves at the top) |
 
-Every option is also available as a data attribute: `data-sa-animation`, `data-sa-duration`, `data-sa-delay`, `data-sa-easing`, `data-sa-threshold`, `data-sa-root-margin`, `data-sa-once`, `data-sa-repeat`, `data-sa-offset`, `data-sa-stagger`, `data-sa-parallax-x|y|rotate|scale|speed`.
+Every option is also available as a data attribute: `data-sa-animation`, `data-sa-duration`, `data-sa-delay`, `data-sa-easing`, `data-sa-threshold`, `data-sa-root-margin`, `data-sa-once`, `data-sa-repeat`, `data-sa-offset`, `data-sa-stagger`, `data-sa-progress`, `data-sa-parallax-x|y|rotate|scale|speed`.
+
+**Presets:** `fade-in`, `fade-in-up|down|left|right`, `zoom-in`, `zoom-out`, `scale-up`, `flip-x`, `flip-y`, `flip-up`, `flip-down`, `slide-up|down|left|right`, `bounce`, `rotate-in`, `rotate-left`, `rotate-right`, `blur-in`, `blur-in-up`, `skew-in`, `scale-x`, `scale-y`, `clip-up|down|left|right`, `clip-circle`, `shimmer`, `pulse`, `swing`. Combine them with an array, e.g. `['fade-in', 'clip-up']`.
+
+**Global config** (`createScrollAnimate(config)` / `configure()`): `defaultAnimation`, `defaultDuration`, `defaultDelay`, `defaultEasing`, `defaultThreshold`, `defaultRootMargin`, `defaultRepeat`, `defaultOnce`, `defaultOffset`, `hiddenClass`, `visibleClass`, `useClassNames`, `disabled`, `root`, `autoUnregister` (default `true`).
 
 ## Instance API
 
@@ -110,6 +165,9 @@ ScrollAnimate.configure({ ... });     // update global defaults
 ScrollAnimate.destroy();              // disconnect everything
 
 const sa = createScrollAnimate({ root: document.querySelector('#scroller') }); // isolated instance
+
+// Helpers (tree-shakeable)
+import { sequence, staggerChildren, getScrollProgress } from 'use-scroll-animate';
 ```
 
 Via a `<script>` tag (UMD build), the default instance lives at `ScrollAnimate.default`:
@@ -135,8 +193,17 @@ function Card() {
 ```js
 import { ref, onMounted, onUnmounted } from 'vue';
 import { createVueComposables } from 'use-scroll-animate';
-const { useScrollAnimate } = createVueComposables({ ref, onMounted, onUnmounted });
+const { useScrollAnimate, useScrollStagger } = createVueComposables({ ref, onMounted, onUnmounted });
 const { animateRef } = useScrollAnimate({ animation: 'fade-in-left' });
+const { staggerRef } = useScrollStagger({ stagger: 60, observeChildren: true }); // <ul ref="staggerRef">
+```
+
+```jsx
+// React: also animate items appended later
+function Feed({ items }) {
+  const ref = useScrollStagger({ animation: 'fade-in-up', stagger: 60, observeChildren: true });
+  return <ul ref={ref}>{items.map((i) => <li key={i.id}>{i.title}</li>)}</ul>;
+}
 ```
 
 Hooks and composables share the core engine, so `once`, `offset`, custom easing functions, parallax and reduced-motion handling behave exactly like the vanilla API.

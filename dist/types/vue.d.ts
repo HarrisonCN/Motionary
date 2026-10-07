@@ -1,12 +1,13 @@
 /**
  * use-scroll-animate - Vue 3 Integration
- * Provides useScrollAnimate composable for Vue 3 applications.
+ * Provides useScrollAnimate and useScrollStagger composables for Vue 3 applications.
  *
  * A thin wrapper around the core engine, so it shares its behaviour: `once`,
  * `offset`, custom easing functions, parallax, `prefers-reduced-motion`
  * support, and cleanup on unmount.
  */
 import type { AnimateOptions } from './types';
+import { type StaggerOptions } from './stagger';
 export declare function createVueComposables(Vue: {
     ref: <T>(value: T | null) => {
         value: T | null;
@@ -16,6 +17,11 @@ export declare function createVueComposables(Vue: {
 }): {
     useScrollAnimate: (options?: AnimateOptions) => {
         animateRef: {
+            value: Element | null;
+        };
+    };
+    useScrollStagger: (options?: StaggerOptions) => {
+        staggerRef: {
             value: Element | null;
         };
     };

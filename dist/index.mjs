@@ -1176,4 +1176,4 @@ function createVueComposables(Vue) {
 const ScrollAnimate = createScrollAnimate();
 
 export { EASING_MAP, PRESETS, createReactHooks, createScrollAnimate, createVueComposables, ScrollAnimate as default, getScrollProgress, resolveEasing, resolvePreset, sequence, staggerChildren };
-//# sourceMappingURL=index.esm.js.map
+//# sourceMappingURL=index.mjs.map
