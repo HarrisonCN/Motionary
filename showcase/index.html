@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>use-scroll-animate · Animation Store</title>
+  <meta name="description" content="Live showcase of every use-scroll-animate preset, helper and framework adapter — tweak the options and copy the code." />
+  <meta name="theme-color" content="#0b0d12" />
+  <meta name="view-transition" content="same-origin" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%237c5cff'/%3E%3Cpath d='M18 40 32 22l14 18' fill='none' stroke='white' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+  <script>
+    // Theme + language before first paint (no flash)
+    (function () {
+      try {
+        var d = document.documentElement;
+        var theme = localStorage.getItem('usa-showcase:theme') || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        d.setAttribute('data-theme', theme);
+        var lang = localStorage.getItem('usa-showcase:lang') || ((navigator.language || '').toLowerCase().indexOf('zh') === 0 ? 'zh' : 'en');
+        d.setAttribute('lang', lang === 'zh' ? 'zh-CN' : 'en');
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="modulepreload" href="./app.js" />
+</head>
+<body>
+  <a class="skip" href="#grid" data-i18n="skip">Skip to effects</a>
+
+  <header class="topbar" id="top">
+    <a class="brand" href="./" aria-label="use-scroll-animate Animation Store">
+      <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 15 12 7l7 8" /></svg></span>
+      <span class="brand-name">use-scroll-animate</span>
+      <span class="brand-store" data-i18n="brand.store">Animation Store</span>
+    </a>
+    <div class="topbar-actions">
+      <button class="icon-btn" id="lang-toggle" type="button" data-i18n-aria="lang.label" aria-label="Switch language"><span data-i18n="lang.toggle">中文</span></button>
+      <button class="icon-btn" id="theme-toggle" type="button" data-i18n-aria="theme.toggle" aria-label="Toggle theme">
+        <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5" /><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8" /></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z" /></svg>
+      </button>
+      <a class="icon-btn" href="https://github.com/HarrisonCN/use-scroll-animate" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true" class="i-fill"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.4-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.4 1.1 3 .8.1-.6.3-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7 3.6 3.6 0 0 1 .1-2.7s.8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .4 1 .4 1.9.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.8V21c0 .3.2.6.7.5A10 10 0 0 0 12 2Z" /></svg>
+      </a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy" id="hero-copy">
+        <p class="kicker" data-i18n="hero.kicker">use-scroll-animate v2</p>
+        <h1 id="hero-title" data-i18n-html="hero.title">Pick an animation.<br>Take the code.</h1>
+        <p class="lead" data-i18n="hero.lead">Every preset, helper and framework adapter — live, tweakable, free.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#grid" data-i18n="hero.cta">Browse effects</a>
+          <button class="btn btn-ghost install-pill" type="button" id="hero-install"><code>npm i use-scroll-animate</code><span class="copy-ico" aria-hidden="true"></span><span class="sr-only" data-i18n="hero.install">Copy install</span></button>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="orb orb-a"></div><div class="orb orb-b"></div><div class="orb orb-c"></div>
+      </div>
+    </section>
+
+    <section class="shop" aria-label="Effects">
+      <div class="toolbar" id="toolbar">
+        <label class="search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" /><path d="m16 16 4.5 4.5" /></svg>
+          <span class="sr-only" data-i18n="search.label">Search effects</span>
+          <input id="search" type="search" autocomplete="off" spellcheck="false" data-i18n-placeholder="search.placeholder" placeholder="Search effects…" />
+          <kbd aria-hidden="true">/</kbd>
+        </label>
+        <div class="chips" id="chips" role="toolbar" data-i18n-aria="filter.label" aria-label="Filter by category"></div>
+      </div>
+      <p class="rm-notice" id="rm-notice" hidden data-i18n="rm.notice"></p>
+      <p class="results" id="results" aria-live="polite"></p>
+      <div class="grid" id="grid" tabindex="-1">
+        <!-- Skeletons until app.js renders the catalog -->
+        <div class="card skeleton" aria-hidden="true"><div class="card-stage"></div><div class="sk-line"></div><div class="sk-line short"></div></div>
+        <div class="card skeleton" aria-hidden="true"><div class="card-stage"></div><div class="sk-line"></div><div class="sk-line short"></div></div>
+        <div class="card skeleton" aria-hidden="true"><div class="card-stage"></div><div class="sk-line"></div><div class="sk-line short"></div></div>
+        <div class="card skeleton" aria-hidden="true"><div class="card-stage"></div><div class="sk-line"></div><div class="sk-line short"></div></div>
+        <div class="card skeleton" aria-hidden="true"><div class="card-stage"></div><div class="sk-line"></div><div class="sk-line short"></div></div>
+        <div class="card skeleton" aria-hidden="true"><div class="card-stage"></div><div class="sk-line"></div><div class="sk-line short"></div></div>
+        <div class="card skeleton" aria-hidden="true"><div class="card-stage"></div><div class="sk-line"></div><div class="sk-line short"></div></div>
+        <div class="card skeleton" aria-hidden="true"><div class="card-stage"></div><div class="sk-line"></div><div class="sk-line short"></div></div>
+      </div>
+      <div class="empty" id="empty" hidden>
+        <p data-i18n="results.empty">No effects match.</p>
+        <button class="btn btn-ghost" type="button" id="clear-filters" data-i18n="results.clear">Clear filters</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p data-i18n="footer.made">Built with use-scroll-animate itself.</p>
+    <p class="footer-links">
+      <a href="https://github.com/HarrisonCN/use-scroll-animate" target="_blank" rel="noopener" data-i18n="footer.github">GitHub</a>
+      <a href="https://www.npmjs.com/package/use-scroll-animate" target="_blank" rel="noopener" data-i18n="footer.npm">npm</a>
+      <a href="https://github.com/HarrisonCN/use-scroll-animate/blob/main/docs/API.md" target="_blank" rel="noopener" data-i18n="footer.docs">API docs</a>
+    </p>
+  </footer>
+
+  <div class="detail" id="detail" hidden>
+    <div class="detail-backdrop" data-close></div>
+    <div class="detail-sheet" id="detail-sheet" role="dialog" aria-modal="true" aria-labelledby="detail-title" tabindex="-1"></div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <noscript><p class="noscript">This showcase needs JavaScript to play the animations.</p></noscript>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

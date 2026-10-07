@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **Showcase site** (`showcase/`): an "Animation Store" where every preset, feature (stagger, exit, parallax, progressVar, native engine, sequence, combined presets, spring easings) and framework adapter (React, Vue, Svelte, Solid, `<scroll-animate>`) is a product card with a live preview. Opening a card expands it (View Transitions API, FLIP fallback) into a detail view with a tweakable live demo (duration, easing, delay, distance, once/repeat, exit), a scroll test, and generated code for Vanilla / React / Vue / Svelte / Solid / HTML element / CDN with copy buttons. Search, category filters, favorites (localStorage), deep links (`#preset-name`), dark/light theme, English/中文, `prefers-reduced-motion` respected. No build step: it imports the library from `dist/` (dogfooding), falling back to the CDN build.
+- **GitHub Pages workflow** (`.github/workflows/pages.yml`): builds `dist/` and deploys `showcase/` + `demo/` on every push to `main`.
+
 ## [2.0.1] - 2026-10-07
 
 Bug-fix release; no API changes.
