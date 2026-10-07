@@ -8,6 +8,7 @@ var components_background = require('./components/background.cjs');
 var components_transitions = require('./components/transitions.cjs');
 var components_physics = require('./components/physics.cjs');
 var components_cards = require('./components/cards.cjs');
+var components_click = require('./components/click.cjs');
 var spring = require('./chunks/spring-CGO9Jd9b.cjs');
 var base = require('./chunks/base-CJ7XfidP.cjs');
 
@@ -41,6 +42,7 @@ const COMPONENT_CATEGORIES = {
     transitions: ['usa-dialog', 'usa-accordion', 'usa-flip-list', 'usa-view-switch'],
     physics: ['usa-spring', 'usa-draggable', 'usa-overscroll'],
     cards: ['usa-card', 'usa-card-stack', 'usa-sticky-stack', 'usa-carousel-3d'],
+    click: ['usa-click', 'usa-button', 'usa-icon-morph', 'usa-like', 'usa-hold', 'usa-double-tap', 'usa-checkbox'],
 };
 const BY_CATEGORY = {
     reveal: components_reveal.defineRevealComponents,
@@ -51,6 +53,7 @@ const BY_CATEGORY = {
     transitions: components_transitions.defineTransitionComponents,
     physics: components_physics.definePhysicsComponents,
     cards: components_cards.defineCardComponents,
+    click: components_click.defineClickComponents,
 };
 /**
  * Register every `<usa-*>` component (or only the given categories).
@@ -118,6 +121,22 @@ exports.defineCardComponents = components_cards.defineCardComponents;
 exports.defineCardStack = components_cards.defineCardStack;
 exports.defineCarousel3d = components_cards.defineCarousel3d;
 exports.defineStickyStack = components_cards.defineStickyStack;
+exports.BUTTON_DEFORMS = components_click.BUTTON_DEFORMS;
+exports.CLICK_EFFECTS = components_click.CLICK_EFFECTS;
+exports.MORPH_ICONS = components_click.MORPH_ICONS;
+exports.burst = components_click.burst;
+exports.confetti = components_click.confetti;
+exports.defineButton = components_click.defineButton;
+exports.defineCheckbox = components_click.defineCheckbox;
+exports.defineClick = components_click.defineClick;
+exports.defineClickComponents = components_click.defineClickComponents;
+exports.defineDoubleTap = components_click.defineDoubleTap;
+exports.defineHold = components_click.defineHold;
+exports.defineIconMorph = components_click.defineIconMorph;
+exports.defineLike = components_click.defineLike;
+exports.haptic = components_click.haptic;
+exports.morphPath = components_click.morphPath;
+exports.shake = components_click.shake;
 exports.SPRING_PRESETS = spring.SPRING_PRESETS;
 exports.createSpring = spring.createSpring;
 exports.linearEasing = spring.linearEasing;

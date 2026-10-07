@@ -142,6 +142,19 @@ Presets (`SPRING_PRESETS`): `default` (170/26), `gentle` (120/14), `wobbly` (180
 | `<usa-sticky-stack>` | Cards stack while scrolling; covered ones shrink & dim | `top` (80), `gap` (16), `scale` (0.06) | `update()` |
 | `<usa-carousel-3d>` | 3D ring carousel with spring rotation | `radius` (auto), `perspective` (1200), `autoplay` (ms), `index` | `index`, `next()`, `prev()`, `goTo(i)`; `usa:change` |
 
+### 9. Click & tap — `components/click`
+
+| Element / API | What it does | Key attributes | JS API / events |
+|---|---|---|---|
+| `<usa-button>` | **Button click deformation**: `squash`, `wobble`, `gooey`, `dent` (combinable); shape morph; submit morph | `deform`, `shape` (`pill` · `circle` · `icon`), `morph="submit"`, `state` (`idle` · `loading` · `success` · `error`), `reset` (1800 ms), `haptic`, `disabled`; children `[data-label]`, `[data-icon]` | `target`, `shape`, `state`, `morphTo(shape)`; `usa:submit` (`detail.done(ok)`), `usa:state`; `--usa-dent-x/-y` |
+| `<usa-icon-morph>` | Spring icon morphs (play/pause, menu/close, plus/minus, check, arrow-right) | `icons` (`play,pause`), `index`, `size` (24), `toggle`, `labels`, `preset` | `next()`, `show(name \| i)`, `icon`; `usa:change` |
+| `<usa-click>` | `ripple`, `burst`, `confetti`, `squish`, `press-spring`, `shake` (combinable) | `effect`, `color` (comma list), `shape`, `count`, `trigger="click"` (shake), `haptic`, `disabled` | `play(x?, y?)`, `shake()`; `usa:click-effect` |
+| `<usa-like>` | Heart toggle with pop + burst | `liked`, `count`, `label`, `color`, `size`, `haptic` | `liked`, `count`, `toggle()`; `change`, `usa:change` |
+| `<usa-hold>` | Hold-to-confirm ring | `duration` (1200), `label`, `color`, `haptic` | `progress`, `cancel()`; `usa:progress`, `usa:confirm`, `usa:cancel`; `--usa-hold` |
+| `<usa-double-tap>` | Double tap → heart at the point | `icon` (♥), `color`, `delay` (300), `haptic` | `pop(x?, y?)`; `usa:double-tap` |
+| `<usa-checkbox>` | Animated form-associated checkbox | `checked`, `indeterminate`, `name`, `value`, `label`, `shape` (`circle`) | `checked`, `toggle()`; `change`, `usa:change` |
+| `burst()` · `confetti()` · `shake()` · `haptic()` | The click-effect engine as functions | — | particles skip under reduced motion |
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

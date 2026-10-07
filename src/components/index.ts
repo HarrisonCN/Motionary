@@ -26,6 +26,7 @@ import { defineBackgroundComponents } from './background/index';
 import { defineTransitionComponents } from './transitions/index';
 import { definePhysicsComponents } from './physics/index';
 import { defineCardComponents } from './cards/index';
+import { defineClickComponents } from './click/index';
 
 export * from './reveal/index';
 export * from './text/index';
@@ -35,6 +36,7 @@ export * from './background/index';
 export * from './transitions/index';
 export * from './physics/index';
 export * from './cards/index';
+export * from './click/index';
 
 /** The component categories and their default tags. */
 export const COMPONENT_CATEGORIES = {
@@ -46,6 +48,7 @@ export const COMPONENT_CATEGORIES = {
   transitions: ['usa-dialog', 'usa-accordion', 'usa-flip-list', 'usa-view-switch'],
   physics: ['usa-spring', 'usa-draggable', 'usa-overscroll'],
   cards: ['usa-card', 'usa-card-stack', 'usa-sticky-stack', 'usa-carousel-3d'],
+  click: ['usa-click', 'usa-button', 'usa-icon-morph', 'usa-like', 'usa-hold', 'usa-double-tap', 'usa-checkbox'],
 } as const;
 
 export type ComponentCategory = keyof typeof COMPONENT_CATEGORIES;
@@ -59,6 +62,7 @@ const BY_CATEGORY: Record<ComponentCategory, () => void> = {
   transitions: defineTransitionComponents,
   physics: definePhysicsComponents,
   cards: defineCardComponents,
+  click: defineClickComponents,
 };
 
 /**

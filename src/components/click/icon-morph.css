@@ -1,0 +1,5 @@
+/* <usa-icon-morph> */
+usa-icon-morph { display: inline-grid; place-items: center; line-height: 0; color: inherit; -webkit-tap-highlight-color: transparent; vertical-align: middle; }
+usa-icon-morph svg { fill: currentColor; overflow: visible; }
+usa-icon-morph[toggle] { cursor: pointer; border-radius: 8px; }
+usa-icon-morph[toggle]:focus-visible { outline: 2px solid var(--usa-accent, #7c5cff); outline-offset: 3px; }

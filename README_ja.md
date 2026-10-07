@@ -42,6 +42,7 @@ defineComponents(); // カテゴリ単位: import { defineTextComponents } from 
 | **トランジション**（`/components/transitions`） | `<usa-dialog>` · `<usa-accordion>` · `<usa-flip-list>` · `<usa-view-switch>` · `viewTransition()` · `flip()` · `connectedAnimation()` |
 | **スプリング・物理**（`/components/physics`） | `<usa-spring>`（bounce-in · pop · drop · jelly · rubber-band）· `<usa-draggable>` · `<usa-overscroll>` · `spring()` · `createSpring()` |
 | **カード効果**（`/components/cards`） | `<usa-card>`（flip · holo · glass · border-glow · conic-border · lift · spotlight · sheen · parallax-layers · expand）· `<usa-card-stack>` · `<usa-sticky-stack>` · `<usa-carousel-3d>` |
+| **クリック・タップ**（`/components/click`） | `<usa-button>`（squash · wobble · gooey · dent · shape morph · submit）· `<usa-icon-morph>` · `<usa-click>` · `<usa-like>` · `<usa-hold>` · `<usa-double-tap>` · `<usa-checkbox>` |
 
 ## ドキュメント
 

@@ -52,6 +52,7 @@ defineComponents(); // or per category: import { defineTextComponents } from 'us
 | **Transitions** (`/components/transitions`) | `<usa-dialog>` (modal / drawer / sheet) · `<usa-accordion>` · `<usa-flip-list>` · `<usa-view-switch>` · `viewTransition()` · `flip()` · `connectedAnimation()` |
 | **Spring & physics** (`/components/physics`) | `<usa-spring>` (bounce-in · pop · drop · jelly · rubber-band) · `<usa-draggable>` (spring-back · inertia · snap) · `<usa-overscroll>` · `spring()` · `createSpring()` · `SPRING_PRESETS` |
 | **Card effects** (`/components/cards`) | `<usa-card>` (flip · holo · glass · border-glow · conic-border · lift · spotlight · sheen · parallax-layers · expand — combinable) · `<usa-card-stack>` (swipe) · `<usa-sticky-stack>` · `<usa-carousel-3d>` |
+| **Click & tap** (`/components/click`) | `<usa-button>` **button click deformation** (squash · wobble · gooey · dent · shape morph · submit→loading→success) · `<usa-icon-morph>` · `<usa-click>` (ripple · burst · confetti · squish · press-spring · shake) · `<usa-like>` · `<usa-hold>` · `<usa-double-tap>` · `<usa-checkbox>` · `confetti()` · `haptic()` |
 
 Whole bundle ≈ 22 kB gzip (JS + CSS); one category 3.5–6.4 kB; a single component ≈ 2 kB. The scroll-animation core below is unaffected.
 

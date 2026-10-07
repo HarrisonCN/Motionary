@@ -14,6 +14,8 @@ import { definePhysicsComponents } from './components/physics.js';
 export { SPRING_EFFECTS, defineDraggable, defineOverscroll, defineSpring, springEffectKeyframes } from './components/physics.js';
 import { defineCardComponents } from './components/cards.js';
 export { CARD_EFFECTS, defineCard, defineCardStack, defineCarousel3d, defineStickyStack } from './components/cards.js';
+import { defineClickComponents } from './components/click.js';
+export { BUTTON_DEFORMS, CLICK_EFFECTS, MORPH_ICONS, burst, confetti, defineButton, defineCheckbox, defineClick, defineDoubleTap, defineHold, defineIconMorph, defineLike, haptic, morphPath, shake } from './components/click.js';
 export { S as SPRING_PRESETS, c as createSpring, l as linearEasing, p as projectInertia, r as resolveSpring, a as rubberBand, s as snapTo, b as spring, d as springEasing, e as springSamples, f as stepSpring, g as supportsLinearEasing } from './chunks/spring-BKUU7-Xm.js';
 export { c as configureComponents, p as prefersReducedMotion } from './chunks/base-CuvCgqLy.js';
 
@@ -47,6 +49,7 @@ const COMPONENT_CATEGORIES = {
     transitions: ['usa-dialog', 'usa-accordion', 'usa-flip-list', 'usa-view-switch'],
     physics: ['usa-spring', 'usa-draggable', 'usa-overscroll'],
     cards: ['usa-card', 'usa-card-stack', 'usa-sticky-stack', 'usa-carousel-3d'],
+    click: ['usa-click', 'usa-button', 'usa-icon-morph', 'usa-like', 'usa-hold', 'usa-double-tap', 'usa-checkbox'],
 };
 const BY_CATEGORY = {
     reveal: defineRevealComponents,
@@ -57,6 +60,7 @@ const BY_CATEGORY = {
     transitions: defineTransitionComponents,
     physics: definePhysicsComponents,
     cards: defineCardComponents,
+    click: defineClickComponents,
 };
 /**
  * Register every `<usa-*>` component (or only the given categories).
@@ -66,5 +70,5 @@ function defineComponents(categories) {
     (categories || Object.keys(BY_CATEGORY)).forEach((c) => BY_CATEGORY[c]?.());
 }
 
-export { COMPONENT_CATEGORIES, defineBackgroundComponents, defineCardComponents, defineComponents, defineFeedbackComponents, defineInteractionComponents, definePhysicsComponents, defineRevealComponents, defineTextComponents, defineTransitionComponents };
+export { COMPONENT_CATEGORIES, defineBackgroundComponents, defineCardComponents, defineClickComponents, defineComponents, defineFeedbackComponents, defineInteractionComponents, definePhysicsComponents, defineRevealComponents, defineTextComponents, defineTransitionComponents };
 //# sourceMappingURL=components.js.map
