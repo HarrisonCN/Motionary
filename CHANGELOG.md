@@ -17,6 +17,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`parallax(target, { speed, axis, progressVar, root, respectReducedMotion })`** (1.8): standalone parallax helper on the scroll-progress scale used by `progressVar`. Writes the progress to `--sa-parallax` and the offset to the individual `translate` property (composes with `transform`/entrance animations); no offset under reduced motion; listens only while targets are visible; returns a stop function. < 1 kB gzipped when tree-shaken.
 - **Size budgets** (1.6): `size-budget.json` defines a gzip budget per entry (UMD bundle and tree-shaken imports); `npm run size:check` fails when one is exceeded and runs in CI.
 
+- **Docs** (1.9): `docs/API.md` (full API reference), `docs/migration-from-aos.md`, `docs/migration-from-gsap-scrolltrigger.md`, `docs/deprecations.md`, and `demo/index.html` — a no-build preset playground (every preset clickable, scroll-triggered cards, parallax) that loads the UMD bundle.
+
+### Deprecated
+- Importing `createReactHooks` / `createVueComposables` from the main entry (1.9): use `use-scroll-animate/react` / `use-scroll-animate/vue`. Logs one `console.warn` per API in development builds only (`process.env.NODE_ENV !== 'production'`); removed in 2.0.
+- The `module` field / `dist/index.esm.js`, the per-file `dist/types/*` declarations and `use-scroll-animate/dist/*` deep imports (1.9, packaging only, no warning possible): removed in 2.0, see `docs/deprecations.md`.
+
 ### Changed
 - The default instance export is annotated `/* @__PURE__ */`, so bundlers drop the core when only standalone helpers such as `parallax` are imported (1.8).
 - Size budgets for the UMD bundle and "import everything" raised from 7.5 to 8 kB gzip for exit + parallax (1.8).

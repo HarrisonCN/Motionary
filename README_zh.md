@@ -23,6 +23,12 @@
 - 🧩 **框架无关**：完美支持原生 JS、React、Vue、Svelte 等。内置一流的 React Hooks 和 Vue Composables。
 - ♿ **无障碍**：原生支持 `prefers-reduced-motion`。
 
+## 文档
+
+- [API 参考](./docs/API.md)（英文）· [演示页](./demo/index.html)（每个预设都可点击，无需构建）
+- 迁移指南：[从 AOS 迁移](./docs/migration-from-aos.md) · [从 GSAP ScrollTrigger 迁移](./docs/migration-from-gsap-scrolltrigger.md)
+- [弃用说明](./docs/deprecations.md)：从主入口导入 `createReactHooks` / `createVueComposables` 已弃用（开发环境下警告一次），请改用 `use-scroll-animate/react` / `use-scroll-animate/vue`，2.0 将移除。
+
 ## 安装
 
 ```bash
