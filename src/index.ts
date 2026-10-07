@@ -9,7 +9,7 @@
  * @see https://github.com/HarrisonCN/use-scroll-animate
  */
 
-export { createScrollAnimate, getScrollProgress } from './core';
+export { createScrollAnimate, getScrollProgress, supportsScrollTimeline } from './core';
 export { staggerChildren } from './stagger';
 export { sequence } from './sequence';
 export { PRESETS, resolvePreset, resolveEasing, EASING_MAP } from './presets';
@@ -23,6 +23,7 @@ export type {
   CustomAnimation,
   ParallaxOptions,
   ProgressMode,
+  ScrollEngine,
   AnimateOptions,
   ScrollAnimateConfig,
   AnimatedElement,

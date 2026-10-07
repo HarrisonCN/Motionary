@@ -38,6 +38,6 @@ jobs:
       - name: Package contents (dry run)
         if: matrix.node == 22
         run: npm pack --dry-run
-      - name: Bundle size
+      - name: Bundle size budget
         if: matrix.node == 22
-        run: npm run size >> "$GITHUB_STEP_SUMMARY"
+        run: npm run size:check | tee -a "$GITHUB_STEP_SUMMARY"

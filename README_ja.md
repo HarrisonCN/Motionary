@@ -46,6 +46,19 @@ npm install use-scroll-animate
 </script>
 ```
 
+## ネイティブのスクロール駆動エンジン `engine`（v1.6）
+
+CSS スクロール駆動アニメーション（`CSS.supports('animation-timeline: view()')`）に対応したブラウザでは、プリセットをブラウザ標準の **view timeline** 上で実行できます。進行度はスクロール位置に連動し（メインスレッド外）、IntersectionObserver で開始して固定の `duration` で再生する方式ではありません。
+
+```js
+ScrollAnimate.observe('.card', { animation: 'fade-in-up', engine: 'auto' });
+const sa = createScrollAnimate({ defaultEngine: 'auto' });
+```
+
+- `'js'`：1.x の**デフォルト**（従来どおり）。`'auto'` / `'css'`：対応ブラウザではネイティブ、非対応なら自動的に JS にフォールバック。
+- ネイティブエンジンでは `duration`・`delay`・`threshold`・`offset`・`stagger` は無効で、範囲は `viewRange`（デフォルト `['entry 0%', 'entry 100%']`）。`easing` は有効。HTML：`data-sa-engine`、`data-sa-view-range`。
+- `once`（デフォルト）は完了時に最終状態を固定、`repeat: true` ではスクロールに双方向で追従。クラス名モード・reduced motion・`animate()`・`sequence()`・`staggerChildren()` は常に JS エンジン。`supportsScrollTimeline()` もエクスポート。
+
 ## v1.4.0 の新機能 ✨
 
 - **本当のスクロール進捗 `progressMode: 'scroll'`**（オプトイン）：`onProgress` はデフォルトで要素の表示比率を返すため、画面より高い要素では 1 に到達しません。有効にすると、要素の上端がビューポート下端に達したとき `0`、下端がビューポート上端を抜けたとき `1` になります。パララックスも同じ進捗を使用します。HTML では `data-sa-progress="scroll"`。ヘルパー `getScrollProgress(el, root?)` もエクスポートされています。
