@@ -231,6 +231,15 @@ Every component reads these CSS custom properties (set them on `:root`, any ance
 
 See [frameworks-ssr.md](./frameworks-ssr.md) and [accessibility.md](./accessibility.md).
 
+### v3.1 Timeline & choreography (`components/timeline`)
+
+| Element / API | What it does | Key options |
+|---|---|---|
+| `timeline(opts)` | One playhead for many animations | `.to(target, frames \| preset, { at, duration, easing, stagger })`, `.label()`, `.call()`, `play()`, `reverse()`, `seek()`, `progress()`, `scrub(el, { smooth })` |
+| `<usa-timeline>` | `data-tl` children become steps | `trigger` (`view` · `click` · `manual`), `scrub`, `overlap`, `duration`, `stagger`, `repeat`; child `data-at`, `data-duration`, `data-label` |
+
+Positions: `'>'` chain (default) · `'<'` with previous · `'-=200'` overlap · `'+=100'` gap · `'<+=50'` · `'label+=100'` · ms.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

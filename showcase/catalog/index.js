@@ -5,8 +5,9 @@ import * as click from './click.js';
 import * as ui from './ui.js';
 import * as page from './page.js';
 import * as v28 from './text-bg-fluent.js';
+import * as timeline from './timeline.js';
 
-export const EXTENSIONS = [physics, cards, click, ui, page, v28];
+export const EXTENSIONS = [physics, cards, click, ui, page, v28, timeline];
 
 /** item id → (stage, lib, T) => void: live-demo wiring contributed by the extensions. */
 export const WIRES = Object.assign({}, ...EXTENSIONS.map((e) => e.wire || {}));

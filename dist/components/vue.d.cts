@@ -1288,6 +1288,92 @@ declare global {
     }
 }
 
+/**
+ * Where a step starts on a timeline:
+ * - a number: absolute time in ms
+ * - `'>'` (default): when the previous step ends · `'<'`: when it starts
+ * - `'+=200'` / `'-=200'`: after / overlapping the previous end
+ * - `'<+=100'`: 100ms after the previous step's start
+ * - `'intro'` / `'intro+=150'`: at (or relative to) a label
+ */
+type TimelinePosition = number | string;
+interface TimelineStepOptions {
+    /** Duration in ms (default: timeline default, 600). */
+    duration?: number;
+    /** CSS easing (default `cubic-bezier(0.22, 1, 0.36, 1)`). */
+    easing?: string;
+    /** Start position, see `TimelinePosition`. */
+    at?: TimelinePosition;
+    /** ms between targets when the selector matches several elements. */
+    stagger?: number;
+}
+interface ScrubOptions {
+    /** Scroll offset (px) before the source's top reaches the viewport bottom where progress starts. */
+    offset?: number;
+    /** Smoothing 0–1 (0 = immediate, default 0). */
+    smooth?: number;
+}
+interface Timeline {
+    /** Total length in ms. */
+    readonly duration: number;
+    /** Label positions in ms. */
+    readonly labels: Readonly<Record<string, number>>;
+    /** Current playhead in ms. */
+    readonly time: number;
+    /** Add a step: animate `target` with keyframes or a preset name (`fade-up`, `scale`…). */
+    to(target: string | Element | Element[] | NodeList, frames: Keyframe[] | string, options?: TimelineStepOptions): Timeline;
+    /** Name a position (default: the current end). */
+    label(name: string, at?: TimelinePosition): Timeline;
+    /** Run `fn` when the playhead passes `at`. */
+    call(fn: () => void, at?: TimelinePosition): Timeline;
+    /** Play forwards from the playhead (from 0 when at the end). Resolves at the end. */
+    play(from?: TimelinePosition): Promise<void>;
+    /** Play backwards to 0. */
+    reverse(): Promise<void>;
+    pause(): Timeline;
+    /** Jump to a time (ms) or label. */
+    seek(to: TimelinePosition): Timeline;
+    /** Get or set progress 0–1. */
+    progress(p?: number): number;
+    /** Tie progress to the scroll position of `source` (it moves through the viewport). Returns a stop function. */
+    scrub(source: Element, options?: ScrubOptions): () => void;
+    /** Stop and drop every animation (elements keep their last frame). */
+    cancel(): void;
+}
+
+/**
+ * `<usa-timeline>` — declarative choreography. Every descendant with
+ * `data-tl="<preset>"` becomes a step, in document order; `data-at`
+ * (`'-=200'`, `'<'`, `'label+=100'`, ms), `data-duration` and `data-label`
+ * fine-tune it.
+ *
+ * Attributes: `trigger` (`view` default · `click` · `manual`), `scrub`
+ * (progress follows scroll instead of playing), `overlap` (ms each step
+ * overlaps the previous, default 0), `duration` (600), `stagger` (ms),
+ * `repeat` (replay every time it enters the viewport). Methods: `play()`,
+ * `reverse()`, `seek(t)`; property `timeline`. Event `usa:complete`.
+ * Reduced motion: steps appear in their final state.
+ */
+interface UsaTimelineElement extends UsaElement {
+    readonly timeline: Timeline | null;
+    play(): Promise<void>;
+    reverse(): Promise<void>;
+    seek(to: number | string): void;
+}
+
+/**
+ * use-scroll-animate/components/timeline — choreography (v3.1).
+ * `timeline()` chains, overlaps, labels, seeks, reverses and scroll-scrubs
+ * WAAPI animations on one playhead; `<usa-timeline>` builds one from
+ * `data-tl` children.
+ */
+
+declare global {
+    interface HTMLElementTagNameMap {
+        'usa-timeline': UsaTimelineElement;
+    }
+}
+
 /** The component categories and their default tags. */
 declare const COMPONENT_CATEGORIES: {
     readonly reveal: readonly ["usa-reveal", "usa-stagger", "usa-scroll-progress", "usa-scrolly"];
@@ -1301,6 +1387,7 @@ declare const COMPONENT_CATEGORIES: {
     readonly click: readonly ["usa-click", "usa-button", "usa-icon-morph", "usa-like", "usa-hold", "usa-double-tap", "usa-checkbox"];
     readonly ui: readonly ["usa-tabs", "usa-drawer", "usa-bottom-sheet", "usa-pull-refresh", "usa-fab", "usa-navbar", "usa-slider", "usa-rating", "usa-tooltip", "usa-popover", "usa-badge", "usa-avatar-stack"];
     readonly page: readonly ["usa-cursor", "usa-fullpage", "usa-loading-bar", "usa-back-to-top", "usa-ambient", "usa-splash", "usa-auto-skeleton", "usa-motion-switch"];
+    readonly timeline: readonly ["usa-timeline"];
 };
 type ComponentCategory = keyof typeof COMPONENT_CATEGORIES;
 

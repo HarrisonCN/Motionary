@@ -55,6 +55,7 @@ defineComponents(); // or per category: import { defineTextComponents } from 'us
 | **Click & tap** (`/components/click`) | `<usa-button>` **button click deformation** (squash · wobble · gooey · dent · shape morph · submit→loading→success) · `<usa-icon-morph>` · `<usa-click>` (ripple · burst · confetti · squish · press-spring · shake) · `<usa-like>` · `<usa-hold>` · `<usa-double-tap>` · `<usa-checkbox>` · `confetti()` · `haptic()` |
 | **UI components & variants** (`/components/ui`) | `<usa-tabs>` · `<usa-drawer>` · `<usa-bottom-sheet>` · `<usa-pull-refresh>` · `<usa-fab>` · `<usa-navbar>` · `<usa-slider>` · `<usa-rating>` · `<usa-tooltip>` · `<usa-popover>` · `<usa-badge>` · `<usa-avatar-stack>` · `variant="minimal \| neon \| glass \| brutalist \| fluent \| material"` on every component |
 | **Page & app-wide** (`/components/page`) | `pageTransition()` (fade · slide · circle · blinds · pixel · zoom; SPA + MPA) · `themeTransition()` · `<usa-cursor>` · `smoothScroll()` · `<usa-fullpage>` · `<usa-loading-bar>` · `<usa-back-to-top>` · `<usa-ambient>` (particles · snow · stars · noise · gradient) · `<usa-splash>` · `<usa-auto-skeleton>` · `<usa-motion-switch>` / `setMotionIntensity()` |
+| **Timeline & choreography** (`/components/timeline`) | `timeline()` (chain · overlap · labels · seek · reverse · scrub) · `<usa-timeline>` (`data-tl` steps) |
 
 Whole bundle ≈ 22 kB gzip (JS + CSS); one category 3.5–6.4 kB; a single component ≈ 2 kB. The scroll-animation core below is unaffected.
 

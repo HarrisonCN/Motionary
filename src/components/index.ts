@@ -29,6 +29,7 @@ import { defineCardComponents } from './cards/index';
 import { defineClickComponents } from './click/index';
 import { defineUiComponents } from './ui/index';
 import { definePageComponents } from './page/index';
+import { defineTimelineComponents } from './timeline/index';
 import { adoptVariants } from './ui/variants';
 import { canDefine } from './base';
 
@@ -43,6 +44,7 @@ export * from './cards/index';
 export * from './click/index';
 export * from './ui/index';
 export * from './page/index';
+export * from './timeline/index';
 
 export { COMPONENT_CATEGORIES } from './index-tags';
 export type { ComponentCategory } from './index-tags';
@@ -60,6 +62,7 @@ const BY_CATEGORY: Record<ComponentCategory, () => void> = {
   click: defineClickComponents,
   ui: defineUiComponents,
   page: definePageComponents,
+  timeline: defineTimelineComponents,
 };
 
 /**
