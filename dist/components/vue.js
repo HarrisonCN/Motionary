@@ -1,23 +1,25 @@
 import { defineComponents } from '../components.js';
 import './reveal.js';
-import '../chunks/base-Cu-86Z31.js';
+import '../chunks/base-BpROOcey.js';
 import './text.js';
 import './interaction.js';
 import './feedback.js';
 import './background.js';
-import '../chunks/variants-BQ3gCb5L.js';
+import '../chunks/variants-CHe1VbSn.js';
 import './transitions.js';
 import './physics.js';
-import '../chunks/spring-BV-cpTHC.js';
+import '../chunks/spring-C-fw7_9f.js';
 import './cards.js';
 import './click.js';
 import './ui.js';
 import './page.js';
 import './timeline.js';
 import './gesture.js';
+import '../chunks/core-uxs3ETou.js';
 import './svg.js';
 import './webgl.js';
-import '../chunks/index-tags-qc6OWsJ8.js';
+import './depth.js';
+import '../chunks/index-tags-uw1Fospg.js';
 
 /**
  * use-scroll-animate/components/vue — Vue integration (v2.9).

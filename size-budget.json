@@ -243,5 +243,15 @@
     "name": "import { defineWebglComponents } from '…/components/webgl'",
     "import": "export { defineWebglComponents } from 'pkg/components/webgl';",
     "limit": 4864
+  },
+  {
+    "name": "import 'use-scroll-animate/components/depth'",
+    "import": "export * from 'pkg/components/depth';",
+    "limit": 6144
+  },
+  {
+    "name": "import { defineDepthComponents } from '…/components/depth'",
+    "import": "export { defineDepthComponents } from 'pkg/components/depth';",
+    "limit": 5888
   }
 ]

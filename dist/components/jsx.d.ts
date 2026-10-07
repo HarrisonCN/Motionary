@@ -15,6 +15,7 @@ declare const COMPONENT_CATEGORIES: {
     readonly gesture: readonly ["usa-swipeable", "usa-pinch-zoom"];
     readonly svg: readonly ["usa-draw", "usa-morph", "usa-mask-reveal", "usa-anim-icon"];
     readonly webgl: readonly ["usa-shader", "usa-distort", "usa-liquid"];
+    readonly depth: readonly ["usa-cube", "usa-depth"];
 };
 
 /**

@@ -1510,6 +1510,52 @@ declare global {
     }
 }
 
+/**
+ * `<usa-cube>` — a CSS 3D cube whose up-to-six element children are its faces
+ * (front, right, back, left, top, bottom). Rotate with drag / swipe, arrow
+ * keys, `autoplay` (ms) or `show(face | index)`; spring-driven.
+ * Attributes: `size` (px, 200), `autoplay`, `perspective` (900).
+ * `usa:change` (`{ index, face }`). Reduced motion: instant face switch.
+ */
+interface UsaCubeElement extends UsaElement {
+    readonly index: number;
+    show(face: number | string): void;
+    next(): void;
+    prev(): void;
+}
+
+/**
+ * `<usa-depth>` — depth parallax: children with `data-depth` (-1…1, 0 = the
+ * screen plane) move and scale by depth as the pointer moves, the device
+ * tilts (`orientation`) or the page scrolls (`scroll`).
+ * Attributes: `source` (`pointer` default · `orientation` · `scroll` ·
+ * space-separated mix), `strength` (px at depth 1, 40), `rotate` (max tilt
+ * of the whole scene in deg, 0). `requestPermission()` for iOS motion.
+ * Reduced motion: layers stay flat.
+ */
+interface UsaDepthElement extends UsaElement {
+    /** Current -1…1 input. */
+    readonly tilt: {
+        x: number;
+        y: number;
+    };
+    requestPermission(): Promise<boolean>;
+}
+
+/**
+ * use-scroll-animate/components/depth — 3D (v3.5).
+ * `<usa-cube>` (CSS 3D cube), `<usa-depth>` (layered depth parallax driven by
+ * pointer, device orientation or scroll) and `deviceTilt()`. The 3D ring
+ * carousel is `<usa-carousel-3d>` in `components/cards`.
+ */
+
+declare global {
+    interface HTMLElementTagNameMap {
+        'usa-cube': UsaCubeElement;
+        'usa-depth': UsaDepthElement;
+    }
+}
+
 /** The component categories and their default tags. */
 declare const COMPONENT_CATEGORIES: {
     readonly reveal: readonly ["usa-reveal", "usa-stagger", "usa-scroll-progress", "usa-scrolly"];
@@ -1527,6 +1573,7 @@ declare const COMPONENT_CATEGORIES: {
     readonly gesture: readonly ["usa-swipeable", "usa-pinch-zoom"];
     readonly svg: readonly ["usa-draw", "usa-morph", "usa-mask-reveal", "usa-anim-icon"];
     readonly webgl: readonly ["usa-shader", "usa-distort", "usa-liquid"];
+    readonly depth: readonly ["usa-cube", "usa-depth"];
 };
 type ComponentCategory = keyof typeof COMPONENT_CATEGORIES;
 

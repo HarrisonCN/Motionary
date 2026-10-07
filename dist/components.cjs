@@ -15,10 +15,12 @@ var components_timeline = require('./components/timeline.cjs');
 var components_gesture = require('./components/gesture.cjs');
 var components_svg = require('./components/svg.cjs');
 var components_webgl = require('./components/webgl.cjs');
+var components_depth = require('./components/depth.cjs');
 var variants = require('./chunks/variants-BNIrn4ch.cjs');
 var base = require('./chunks/base-CXx7jZ-o.cjs');
-var indexTags = require('./chunks/index-tags-BKcHAxBK.cjs');
+var indexTags = require('./chunks/index-tags-CLFrjVR7.cjs');
 var spring = require('./chunks/spring-2OTnYCzm.cjs');
+var core = require('./chunks/core-IaorbTdu.cjs');
 
 /**
  * use-scroll-animate/components
@@ -56,6 +58,7 @@ const BY_CATEGORY = {
     gesture: components_gesture.defineGestureComponents,
     svg: components_svg.defineSvgComponents,
     webgl: components_webgl.defineWebglComponents,
+    depth: components_depth.defineDepthComponents,
 };
 /**
  * Register every `<usa-*>` component (or only the given categories).
@@ -193,9 +196,6 @@ exports.timeline = components_timeline.timeline;
 exports.defineGestureComponents = components_gesture.defineGestureComponents;
 exports.definePinchZoom = components_gesture.definePinchZoom;
 exports.defineSwipeable = components_gesture.defineSwipeable;
-exports.gesture = components_gesture.gesture;
-exports.pinchScale = components_gesture.pinchScale;
-exports.swipeDirection = components_gesture.swipeDirection;
 exports.ANIM_ICONS = components_svg.ANIM_ICONS;
 exports.MASK_SHAPES = components_svg.MASK_SHAPES;
 exports.defineAnimIcon = components_svg.defineAnimIcon;
@@ -215,6 +215,13 @@ exports.defineWebglComponents = components_webgl.defineWebglComponents;
 exports.fragmentSource = components_webgl.fragmentSource;
 exports.glQuad = components_webgl.glQuad;
 exports.supportsWebGL = components_webgl.supportsWebGL;
+exports.defineCube = components_depth.defineCube;
+exports.defineDepth = components_depth.defineDepth;
+exports.defineDepthComponents = components_depth.defineDepthComponents;
+exports.deviceTilt = components_depth.deviceTilt;
+exports.orientationToTilt = components_depth.orientationToTilt;
+exports.requestOrientationPermission = components_depth.requestOrientationPermission;
+exports.supportsOrientation = components_depth.supportsOrientation;
 exports.VARIANTS = variants.VARIANTS;
 exports.adoptVariants = variants.adoptVariants;
 exports.setVariant = variants.setVariant;
@@ -235,5 +242,8 @@ exports.springEasing = spring.springEasing;
 exports.springSamples = spring.springSamples;
 exports.stepSpring = spring.stepSpring;
 exports.supportsLinearEasing = spring.supportsLinearEasing;
+exports.gesture = core.gesture;
+exports.pinchScale = core.pinchScale;
+exports.swipeDirection = core.swipeDirection;
 exports.defineComponents = defineComponents;
 //# sourceMappingURL=components.cjs.map

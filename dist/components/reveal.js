@@ -1,5 +1,5 @@
-import { h as defineElement, i as EASE_OUT, f as clamp, d as caf, r as raf } from '../chunks/base-Cu-86Z31.js';
-export { a as configureComponents, p as prefersReducedMotion } from '../chunks/base-Cu-86Z31.js';
+import { h as defineElement, i as EASE_OUT, b as clamp, e as caf, r as raf } from '../chunks/base-BpROOcey.js';
+export { a as configureComponents, p as prefersReducedMotion } from '../chunks/base-BpROOcey.js';
 
 /** Entrance effects shared by `<usa-reveal>` and `<usa-stagger>` (transform / opacity / filter only). */
 const REVEAL_EFFECTS = [

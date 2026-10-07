@@ -49,6 +49,7 @@ defineComponents(); // カテゴリ単位: import { defineTextComponents } from 
 | **ジェスチャー** (`/components/gesture`) | `gesture()`（パン · スワイプ · ピンチ · 長押し · タップ → スプリング）· `<usa-swipeable>` · `<usa-pinch-zoom>` |
 | **SVG** (`/components/svg`) | `<usa-draw>`（線描画）· `<usa-morph>`（パスモーフ）· `<usa-mask-reveal>` · `<usa-anim-icon>` · `morphTo()` |
 | **Canvas / WebGL** (`/components/webgl`) | `<usa-shader>`（gradient · plasma · waves · aurora · カスタム GLSL）· `<usa-distort>` · `<usa-liquid>` · `glQuad()` |
+| **3D / 奥行き** (`/components/depth`) | `<usa-cube>` · `<usa-depth>`（ポインター · ジャイロ · スクロール視差）· `deviceTilt()` |
 
 ## ドキュメント
 

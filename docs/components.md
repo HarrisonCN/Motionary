@@ -269,6 +269,16 @@ Positions: `'>'` chain (default) · `'<'` with previous · `'-=200'` overlap · 
 
 Fallbacks set `data-fallback` (`webgl` · `image` · `no-image`); cross-origin images need CORS headers.
 
+### v3.5 3D & depth (`components/depth`)
+
+| Element / API | What it does | Key attributes |
+|---|---|---|
+| `<usa-cube>` | CSS 3D cube, children = faces | `size` (200), `autoplay` (ms), `perspective` (900); `show(face)`, `next()`, `prev()`, `usa:change` |
+| `<usa-depth>` | Depth parallax for `data-depth` layers | `source` (`pointer` · `orientation` · `scroll`), `strength` (40), `rotate` (0); `requestPermission()` |
+| `deviceTilt(cb, opts)` · `requestOrientationPermission()` | Gyroscope tilt -1…1 | `range` (30°), `smooth` (0.2) |
+
+3D ring carousel: `<usa-carousel-3d>` (cards).
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.
