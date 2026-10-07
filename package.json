@@ -1,6 +1,6 @@
 {
   "name": "use-scroll-animate",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "A lightweight, high-performance, dependency-free scroll animation library for modern web.",
   "type": "commonjs",
   "main": "dist/index.js",

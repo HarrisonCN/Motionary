@@ -71,6 +71,12 @@ interface AnimateOptions {
     onProgress?: (element: Element, progress: number) => void;
     /** How progress for `onProgress`/parallax is measured (default: 'ratio') */
     progressMode?: ProgressMode;
+    /**
+     * Name of a CSS custom property (e.g. `'--sa-progress'`) that receives the
+     * element's progress (0 to 1, same value as `onProgress`) as an inline
+     * style, for scroll-driven effects written in plain CSS. Off by default.
+     */
+    progressVar?: string;
 }
 /** Global configuration for ScrollAnimate instance */
 interface ScrollAnimateConfig {
@@ -126,6 +132,14 @@ interface ScrollAnimateInstance {
     unobserve(target: string | Element | NodeList | Element[]): void;
     /** Observe all elements matching the data-sa attribute */
     init(rootElement?: Element | Document): void;
+    /**
+     * Like `init()`, then keep watching `rootElement` (default: `document`) with a
+     * MutationObserver: `[data-sa]` elements added later (or that gain the
+     * attribute) are observed automatically, and removed ones are released.
+     * Returns a function that stops watching. `destroy()` stops every watcher.
+     * SSR-safe: a no-op without a DOM / MutationObserver.
+     */
+    watch(rootElement?: Element | Document): () => void;
     /** Destroy the instance and clean up all observers */
     destroy(): void;
     /** Refresh all observers (useful after DOM changes) */
