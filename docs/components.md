@@ -258,6 +258,17 @@ Positions: `'>'` chain (default) · `'<'` with previous · `'-=200'` overlap · 
 | `<usa-anim-icon>` | Animated stroke icons | `name` (`bell` · `heart` · `check` · `arrow` · `star` · `gear` · `search` · `download`), `size`, `label`, `trigger` (`hover` · `click` · `view` · `loop`) |
 | `morphTo(path, d, opts)` · `interpolatePath(a, b, t)` · `drawLines(root)` | Path helpers | `duration`, `easing`; `stagger` |
 
+### v3.4 Canvas & WebGL (`components/webgl`)
+
+| Element / API | What it does | Key attributes |
+|---|---|---|
+| `<usa-shader>` | GPU shader background | `preset` (`gradient` · `plasma` · `waves` · `aurora`), `speed` (1); custom `<script type="x-shader/x-fragment">` |
+| `<usa-distort>` | Hover distortion + RGB split on the `<img>` inside | — (fallback: CSS zoom) |
+| `<usa-liquid>` | Click ripples + hover wobble on the `<img>` inside | `strength` (1) |
+| `glQuad(canvas, frag)` · `supportsWebGL()` | Single-quad WebGL runner | `render({ time, mouse, hover, ripples })`, `resize()`, `texture(img)`, `dispose()` |
+
+Fallbacks set `data-fallback` (`webgl` · `image` · `no-image`); cross-origin images need CORS headers.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

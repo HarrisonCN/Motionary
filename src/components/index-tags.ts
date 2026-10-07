@@ -15,6 +15,7 @@ export const COMPONENT_CATEGORIES = {
   timeline: ['usa-timeline'],
   gesture: ['usa-swipeable', 'usa-pinch-zoom'],
   svg: ['usa-draw', 'usa-morph', 'usa-mask-reveal', 'usa-anim-icon'],
+  webgl: ['usa-shader', 'usa-distort', 'usa-liquid'],
 } as const;
 
 export type ComponentCategory = keyof typeof COMPONENT_CATEGORIES;

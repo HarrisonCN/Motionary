@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.4.0] - 2026-10-07
+
+### Added
+- **Canvas & WebGL** — new category `use-scroll-animate/components/webgl` (no three.js; one tiny single-quad runner):
+  - `<usa-shader>` — GPU shader backgrounds behind content: presets `gradient`, `plasma`, `waves`, `aurora`, or your own GLSL in `<script type="x-shader/x-fragment">` (uniforms `u_time`, `u_resolution`, `u_mouse`, `v_uv`); `speed`.
+  - `<usa-distort>` — hover image distortion with RGB split around the pointer.
+  - `<usa-liquid>` — liquid / ripple images: clicks send up to four water ripples through the image, hover wobbles; `strength`.
+  - `glQuad(canvas, fragment)` (returns `{ render, resize, texture, dispose }` or `null`), `supportsWebGL()`, `fragmentSource()`, `SHADERS`.
+- **Graceful fallback**: without WebGL, when a shader fails to compile, or for a cross-origin image without CORS, the canvas is removed and `data-fallback="webgl | image | no-image"` is set — `<usa-shader>` keeps its CSS gradient, images stay visible (`<usa-distort>` falls back to a CSS hover zoom).
+- Performance: renders only while in view and the tab is visible, DPR capped at 2, contexts released on disconnect.
+- Reduced motion: a single static frame, no animation loop.
+- Showcase: new **Canvas & WebGL** gallery category (shader presets, distortion, liquid image, live `glQuad()` demo) with a generated demo photo in `showcase/assets/`.
+
 ## [3.3.0] - 2026-10-07
 
 ### Added

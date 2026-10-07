@@ -32,6 +32,7 @@ import { definePageComponents } from './page/index';
 import { defineTimelineComponents } from './timeline/index';
 import { defineGestureComponents } from './gesture/index';
 import { defineSvgComponents } from './svg/index';
+import { defineWebglComponents } from './webgl/index';
 import { adoptVariants } from './ui/variants';
 import { canDefine } from './base';
 
@@ -49,6 +50,7 @@ export * from './page/index';
 export * from './timeline/index';
 export * from './gesture/index';
 export * from './svg/index';
+export * from './webgl/index';
 
 export { COMPONENT_CATEGORIES } from './index-tags';
 export type { ComponentCategory } from './index-tags';
@@ -69,6 +71,7 @@ const BY_CATEGORY: Record<ComponentCategory, () => void> = {
   timeline: defineTimelineComponents,
   gesture: defineGestureComponents,
   svg: defineSvgComponents,
+  webgl: defineWebglComponents,
 };
 
 /**

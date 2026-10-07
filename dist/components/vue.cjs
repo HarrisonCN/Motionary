@@ -18,7 +18,8 @@ require('./page.cjs');
 require('./timeline.cjs');
 require('./gesture.cjs');
 require('./svg.cjs');
-require('../chunks/index-tags-Cz4iTBEK.cjs');
+require('./webgl.cjs');
+require('../chunks/index-tags-BKcHAxBK.cjs');
 
 /**
  * use-scroll-animate/components/vue — Vue integration (v2.9).

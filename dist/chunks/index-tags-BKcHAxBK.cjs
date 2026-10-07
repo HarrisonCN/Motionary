@@ -1,3 +1,5 @@
+'use strict';
+
 // The component categories and their default tags (no imports: safe for lazy loaders).
 /** The component categories and their default tags. */
 const COMPONENT_CATEGORIES = {
@@ -15,7 +17,8 @@ const COMPONENT_CATEGORIES = {
     timeline: ['usa-timeline'],
     gesture: ['usa-swipeable', 'usa-pinch-zoom'],
     svg: ['usa-draw', 'usa-morph', 'usa-mask-reveal', 'usa-anim-icon'],
+    webgl: ['usa-shader', 'usa-distort', 'usa-liquid'],
 };
 
-export { COMPONENT_CATEGORIES as C };
-//# sourceMappingURL=index-tags-Dc_Z4yAY.js.map
+exports.COMPONENT_CATEGORIES = COMPONENT_CATEGORIES;
+//# sourceMappingURL=index-tags-BKcHAxBK.cjs.map
