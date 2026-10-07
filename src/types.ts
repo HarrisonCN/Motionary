@@ -180,6 +180,14 @@ export interface ScrollAnimateInstance {
   unobserve(target: string | Element | NodeList | Element[]): void;
   /** Observe all elements matching the data-sa attribute */
   init(rootElement?: Element | Document): void;
+  /**
+   * Like `init()`, then keep watching `rootElement` (default: `document`) with a
+   * MutationObserver: `[data-sa]` elements added later (or that gain the
+   * attribute) are observed automatically, and removed ones are released.
+   * Returns a function that stops watching. `destroy()` stops every watcher.
+   * SSR-safe: a no-op without a DOM / MutationObserver.
+   */
+  watch(rootElement?: Element | Document): () => void;
   /** Destroy the instance and clean up all observers */
   destroy(): void;
   /** Refresh all observers (useful after DOM changes) */

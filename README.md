@@ -157,6 +157,7 @@ Every option is also available as a data attribute: `data-sa-animation`, `data-s
 import ScrollAnimate, { createScrollAnimate } from 'use-scroll-animate';
 
 ScrollAnimate.init(root?);            // observe every [data-sa] element (safe to call again after DOM changes)
+const stop = ScrollAnimate.watch(root?); // init() + auto-observe [data-sa] elements added later; stop() to end
 ScrollAnimate.observe(target, opts);  // selector, Element, NodeList or Element[]
 ScrollAnimate.unobserve(target);      // stop observing (elements that never animated are made visible)
 ScrollAnimate.animate(target, opts);  // play an animation right now
@@ -169,6 +170,22 @@ const sa = createScrollAnimate({ root: document.querySelector('#scroller') }); /
 // Helpers (tree-shakeable)
 import { sequence, staggerChildren, getScrollProgress } from 'use-scroll-animate';
 ```
+
+### Watching the DOM (`watch()`)
+
+For SPAs, CMS content, infinite lists or anything rendered after page load, `watch()` replaces "call `init()` again after every DOM change":
+
+```js
+import ScrollAnimate from 'use-scroll-animate';
+
+const stop = ScrollAnimate.watch();              // or watch(document.querySelector('#app'))
+// [data-sa] elements inserted later — even deep inside a new subtree, or an existing
+// element that gains the data-sa attribute — are observed with their data-sa-* options.
+// Elements removed from the DOM are released; finished `once` elements are never replayed.
+stop();                                          // stop watching (destroy() also stops every watcher)
+```
+
+It uses a single `MutationObserver` per call and is a no-op on the server or without `MutationObserver`.
 
 Via a `<script>` tag (UMD build), the default instance lives at `ScrollAnimate.default`:
 

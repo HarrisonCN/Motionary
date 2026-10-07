@@ -463,6 +463,8 @@ export function createScrollAnimate(userConfig: ScrollAnimateConfig = {}): Scrol
   const scrolling = new Set<Element>();
   let frame = 0;
   let listening: EventTarget | null = null;
+  // Active watch() MutationObservers, disconnected by destroy().
+  const watchers = new Set<MutationObserver>();
 
   // Observers are shared between elements with the same root/threshold/rootMargin,
   // instead of one (or two) IntersectionObservers per element.
@@ -650,6 +652,10 @@ export function createScrollAnimate(userConfig: ScrollAnimateConfig = {}): Scrol
     attach(el, record, true);
   }
 
+  function observeDataElement(el: Element): void {
+    if (!registry.has(el)) observeElement(el, parseDataAttributes(el, config));
+  }
+
   const instance: ScrollAnimateInstance = {
     observe(target, options = {}) {
       pruneDetached();
@@ -668,12 +674,44 @@ export function createScrollAnimate(userConfig: ScrollAnimateConfig = {}): Scrol
       const scope = rootElement ?? (hasDOM() ? document : null);
       if (!scope) return;
       pruneDetached();
-      scope.querySelectorAll('[data-sa]').forEach((el) => {
-        if (!registry.has(el)) observeElement(el, parseDataAttributes(el, config));
+      scope.querySelectorAll('[data-sa]').forEach(observeDataElement);
+    },
+
+    watch(rootElement) {
+      const scope = rootElement ?? (hasDOM() ? document : null);
+      if (!scope || typeof MutationObserver === 'undefined') return noop;
+      instance.init(scope);
+      const observeTree = (node: Element) => {
+        if (node.hasAttribute('data-sa')) observeDataElement(node);
+        node.querySelectorAll('[data-sa]').forEach(observeDataElement);
+      };
+      const mo = new MutationObserver((records) => {
+        let removed = false;
+        records.forEach((record) => {
+          if (record.type === 'attributes') {
+            const target = record.target as Element;
+            if (target.isConnected !== false) observeTree(target);
+            return;
+          }
+          record.addedNodes.forEach((node) => {
+            if (node instanceof Element && node.isConnected !== false) observeTree(node);
+          });
+          if (record.removedNodes.length) removed = true;
+        });
+        // Free elements that left the DOM (they can't animate any more).
+        if (removed) pruneDetached();
       });
+      mo.observe(scope, { childList: true, subtree: true, attributes: true, attributeFilter: ['data-sa'] });
+      watchers.add(mo);
+      return () => {
+        mo.disconnect();
+        watchers.delete(mo);
+      };
     },
 
     destroy() {
+      watchers.forEach((mo) => mo.disconnect());
+      watchers.clear();
       registry.forEach((record, el) => {
         if (!record.animated) reveal(el, config);
       });

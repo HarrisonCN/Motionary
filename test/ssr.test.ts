@@ -11,6 +11,7 @@ describe('SSR', () => {
       sa.observe('.x');
       sa.animate('.x');
       sa.refresh();
+      sa.watch()();
       sa.destroy();
       mod.staggerChildren(null, { observeChildren: true })();
       const tl = mod.sequence([{ target: '.x' }], { trigger: '.y' });
