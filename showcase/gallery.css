@@ -168,3 +168,14 @@ usa-toggle { --usa-toggle-on: var(--accent); }
 .demo-scroll { height: 150px; width: min(100%, 260px); border-radius: 14px; border: 1px solid color-mix(in srgb, currentColor 18%, transparent); }
 .demo-list { list-style: none; margin: 0; padding: 6px; display: grid; gap: 6px; }
 .demo-list li { padding: 10px 12px; border-radius: 10px; background: color-mix(in srgb, currentColor 7%, transparent); }
+.demo-card { width: min(100%, 220px); }
+.demo-face { display: grid; place-items: center; min-height: 120px; padding: 16px; border-radius: 18px; font-weight: 800; color: #fff; background: linear-gradient(135deg, var(--accent, #7c5cff), var(--accent-2, #22d3ee)); }
+.demo-face-back { background: linear-gradient(135deg, #f472b6, #fb923c); }
+.demo-face-b { background: linear-gradient(135deg, #22d3ee, #34d399); } .demo-face-c { background: linear-gradient(135deg, #f472b6, #c084fc); } .demo-face-d { background: linear-gradient(135deg, #fb923c, #facc15); }
+.demo-face-sm { min-height: 90px; width: 90px; padding: 8px; }
+.demo-deck { width: 200px; }
+.demo-c3d { width: 100%; min-height: 170px; }
+.demo-detail-body { padding: 18px; display: grid; gap: 10px; justify-items: start; }
+.g-sticky { padding: 48px 20px; max-width: 760px; margin: 0 auto; }
+.g-sticky-card { padding: 36px 28px; min-height: 220px; border-radius: 24px; color: #fff; background: linear-gradient(135deg, #7c5cff, #22d3ee); box-shadow: 0 20px 50px -24px rgb(0 0 0 / 0.6); }
+.g-sticky-card:nth-child(2) { background: linear-gradient(135deg, #f472b6, #c084fc); } .g-sticky-card:nth-child(3) { background: linear-gradient(135deg, #fb923c, #f43f5e); }

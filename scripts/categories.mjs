@@ -3,4 +3,4 @@
 // (+ `components/<id>.css`). Keep in sync with COMPONENT_CATEGORIES in
 // src/components/index.ts (a test checks it); `npm run sync:exports`
 // regenerates the package.json exports from this list.
-export const CATEGORIES = ['reveal', 'text', 'interaction', 'feedback', 'background', 'transitions', 'physics'];
+export const CATEGORIES = ['reveal', 'text', 'interaction', 'feedback', 'background', 'transitions', 'physics', 'cards'];

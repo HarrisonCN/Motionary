@@ -133,6 +133,15 @@ All attributes are optional unless noted. Events are `CustomEvent`s that bubble,
 
 Presets (`SPRING_PRESETS`): `default` (170/26), `gentle` (120/14), `wobbly` (180/12), `stiff` (210/20), `bouncy` (300/10), `slow` (280/60), `molasses` (280/120) — stiffness/damping, mass 1.
 
+### 8. Card effects — `components/cards`
+
+| Element | What it does | Key attributes | JS API / events |
+|---|---|---|---|
+| `<usa-card>` | Combinable card effects: `flip`, `holo`, `glass`, `border-glow`, `conic-border`, `lift`, `spotlight`, `sheen`, `parallax-layers`, `expand` | `effect` (space-separated), `trigger` (`hover` · `click`, flip), `axis` (`y` · `x`), `depth` (16), `color`, `flipped`, `disabled`; children `[data-front]` / `[data-back]` / `[data-detail]` / `[data-depth]` / `[data-close]` | `flip(force?)`, `expand()`, `collapse()`, `flipped`, `expanded`; `usa:flip`, `usa:expand`, `usa:collapse`; `--usa-card-x/-y/-nx/-ny`, `--usa-card-radius`, `--usa-card-bg`, `--usa-card-glow` |
+| `<usa-card-stack>` | Swipeable deck, cards fan out behind the top one | `threshold` (90), `visible` (3), `offset` (10), `loop`, `disabled` | `top`, `swipe('left' \| 'right')`; `usa:swipe`, `usa:empty` |
+| `<usa-sticky-stack>` | Cards stack while scrolling; covered ones shrink & dim | `top` (80), `gap` (16), `scale` (0.06) | `update()` |
+| `<usa-carousel-3d>` | 3D ring carousel with spring rotation | `radius` (auto), `perspective` (1200), `autoplay` (ms), `index` | `index`, `next()`, `prev()`, `goTo(i)`; `usa:change` |
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

@@ -67,17 +67,17 @@
   {
     "name": "dist/components.umd.js (minified, all components + CSS)",
     "file": "dist/components.umd.js",
-    "limit": 28928
+    "limit": 34560
   },
   {
     "name": "dist/components.css",
     "file": "dist/components.css",
-    "limit": 6400
+    "limit": 7936
   },
   {
     "name": "import 'use-scroll-animate/components' (everything)",
     "import": "export * from 'pkg/components';",
-    "limit": 28928
+    "limit": 34560
   },
   {
     "name": "import 'use-scroll-animate/components/reveal'",
@@ -148,5 +148,15 @@
     "name": "import { defineSpring } from '…/components/physics'",
     "import": "export { defineSpring } from 'pkg/components/physics';",
     "limit": 3328
+  },
+  {
+    "name": "import 'use-scroll-animate/components/cards'",
+    "import": "export * from 'pkg/components/cards';",
+    "limit": 8704
+  },
+  {
+    "name": "import { defineCard } from '…/components/cards'",
+    "import": "export { defineCard } from 'pkg/components/cards';",
+    "limit": 5632
   }
 ]

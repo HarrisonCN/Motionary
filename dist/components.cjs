@@ -7,6 +7,8 @@ var components_feedback = require('./components/feedback.cjs');
 var components_background = require('./components/background.cjs');
 var components_transitions = require('./components/transitions.cjs');
 var components_physics = require('./components/physics.cjs');
+var components_cards = require('./components/cards.cjs');
+var spring = require('./chunks/spring-CGO9Jd9b.cjs');
 var base = require('./chunks/base-CJ7XfidP.cjs');
 
 /**
@@ -38,6 +40,7 @@ const COMPONENT_CATEGORIES = {
     background: ['usa-aurora', 'usa-particles', 'usa-grain', 'usa-marquee', 'usa-acrylic'],
     transitions: ['usa-dialog', 'usa-accordion', 'usa-flip-list', 'usa-view-switch'],
     physics: ['usa-spring', 'usa-draggable', 'usa-overscroll'],
+    cards: ['usa-card', 'usa-card-stack', 'usa-sticky-stack', 'usa-carousel-3d'],
 };
 const BY_CATEGORY = {
     reveal: components_reveal.defineRevealComponents,
@@ -47,6 +50,7 @@ const BY_CATEGORY = {
     background: components_background.defineBackgroundComponents,
     transitions: components_transitions.defineTransitionComponents,
     physics: components_physics.definePhysicsComponents,
+    cards: components_cards.defineCardComponents,
 };
 /**
  * Register every `<usa-*>` component (or only the given categories).
@@ -103,23 +107,29 @@ exports.defineViewSwitch = components_transitions.defineViewSwitch;
 exports.flip = components_transitions.flip;
 exports.viewTransition = components_transitions.viewTransition;
 exports.SPRING_EFFECTS = components_physics.SPRING_EFFECTS;
-exports.SPRING_PRESETS = components_physics.SPRING_PRESETS;
-exports.createSpring = components_physics.createSpring;
 exports.defineDraggable = components_physics.defineDraggable;
 exports.defineOverscroll = components_physics.defineOverscroll;
 exports.definePhysicsComponents = components_physics.definePhysicsComponents;
 exports.defineSpring = components_physics.defineSpring;
-exports.linearEasing = components_physics.linearEasing;
-exports.projectInertia = components_physics.projectInertia;
-exports.resolveSpring = components_physics.resolveSpring;
-exports.rubberBand = components_physics.rubberBand;
-exports.snapTo = components_physics.snapTo;
-exports.spring = components_physics.spring;
-exports.springEasing = components_physics.springEasing;
 exports.springEffectKeyframes = components_physics.springEffectKeyframes;
-exports.springSamples = components_physics.springSamples;
-exports.stepSpring = components_physics.stepSpring;
-exports.supportsLinearEasing = components_physics.supportsLinearEasing;
+exports.CARD_EFFECTS = components_cards.CARD_EFFECTS;
+exports.defineCard = components_cards.defineCard;
+exports.defineCardComponents = components_cards.defineCardComponents;
+exports.defineCardStack = components_cards.defineCardStack;
+exports.defineCarousel3d = components_cards.defineCarousel3d;
+exports.defineStickyStack = components_cards.defineStickyStack;
+exports.SPRING_PRESETS = spring.SPRING_PRESETS;
+exports.createSpring = spring.createSpring;
+exports.linearEasing = spring.linearEasing;
+exports.projectInertia = spring.projectInertia;
+exports.resolveSpring = spring.resolveSpring;
+exports.rubberBand = spring.rubberBand;
+exports.snapTo = spring.snapTo;
+exports.spring = spring.spring;
+exports.springEasing = spring.springEasing;
+exports.springSamples = spring.springSamples;
+exports.stepSpring = spring.stepSpring;
+exports.supportsLinearEasing = spring.supportsLinearEasing;
 exports.configureComponents = base.configureComponents;
 exports.prefersReducedMotion = base.prefersReducedMotion;
 exports.COMPONENT_CATEGORIES = COMPONENT_CATEGORIES;
