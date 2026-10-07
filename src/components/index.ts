@@ -27,6 +27,9 @@ import { defineTransitionComponents } from './transitions/index';
 import { definePhysicsComponents } from './physics/index';
 import { defineCardComponents } from './cards/index';
 import { defineClickComponents } from './click/index';
+import { defineUiComponents } from './ui/index';
+import { adoptVariants } from './ui/variants';
+import { canDefine } from './base';
 
 export * from './reveal/index';
 export * from './text/index';
@@ -37,6 +40,7 @@ export * from './transitions/index';
 export * from './physics/index';
 export * from './cards/index';
 export * from './click/index';
+export * from './ui/index';
 
 /** The component categories and their default tags. */
 export const COMPONENT_CATEGORIES = {
@@ -49,6 +53,7 @@ export const COMPONENT_CATEGORIES = {
   physics: ['usa-spring', 'usa-draggable', 'usa-overscroll'],
   cards: ['usa-card', 'usa-card-stack', 'usa-sticky-stack', 'usa-carousel-3d'],
   click: ['usa-click', 'usa-button', 'usa-icon-morph', 'usa-like', 'usa-hold', 'usa-double-tap', 'usa-checkbox'],
+  ui: ['usa-tabs', 'usa-drawer', 'usa-bottom-sheet', 'usa-pull-refresh', 'usa-fab', 'usa-navbar', 'usa-slider', 'usa-rating', 'usa-tooltip', 'usa-popover', 'usa-badge', 'usa-avatar-stack'],
 } as const;
 
 export type ComponentCategory = keyof typeof COMPONENT_CATEGORIES;
@@ -63,6 +68,7 @@ const BY_CATEGORY: Record<ComponentCategory, () => void> = {
   physics: definePhysicsComponents,
   cards: defineCardComponents,
   click: defineClickComponents,
+  ui: defineUiComponents,
 };
 
 /**
@@ -70,5 +76,6 @@ const BY_CATEGORY: Record<ComponentCategory, () => void> = {
  * Safe to call more than once and on the server (no-op without DOM).
  */
 export function defineComponents(categories?: ComponentCategory[]): void {
+  if (canDefine()) adoptVariants();
   (categories || (Object.keys(BY_CATEGORY) as ComponentCategory[])).forEach((c) => BY_CATEGORY[c]?.());
 }

@@ -1,0 +1,10 @@
+/* <usa-drawer>, <usa-bottom-sheet> */
+usa-drawer, usa-bottom-sheet { position: fixed; z-index: 1001; box-sizing: border-box; overflow: auto; overscroll-behavior: contain; touch-action: pan-y; will-change: transform; outline: none; }
+usa-drawer { top: 0; bottom: 0; left: 0; width: min(86vw, 360px); border-radius: 0 var(--usa-radius, 14px) var(--usa-radius, 14px) 0; padding: 20px; }
+usa-drawer[side="right"] { left: auto; right: 0; border-radius: var(--usa-radius, 14px) 0 0 var(--usa-radius, 14px); }
+usa-drawer[side="top"], usa-drawer[side="bottom"] { left: 0; right: 0; width: auto; bottom: auto; max-height: 80vh; border-radius: 0 0 var(--usa-radius, 14px) var(--usa-radius, 14px); touch-action: pan-x; }
+usa-drawer[side="bottom"] { top: auto; bottom: 0; border-radius: var(--usa-radius, 14px) var(--usa-radius, 14px) 0 0; }
+usa-bottom-sheet { left: 0; right: 0; bottom: 0; margin: 0 auto; max-width: 640px; border-radius: 22px 22px 0 0; padding: 8px 20px 24px; touch-action: none; }
+usa-bottom-sheet .usa-sheet-handle { width: 40px; height: 5px; border-radius: 3px; margin: 4px auto 14px; background: color-mix(in srgb, currentColor 35%, transparent); cursor: grab; }
+usa-drawer[hidden], usa-bottom-sheet[hidden] { display: none; }
+.usa-panel-backdrop { position: fixed; inset: 0; z-index: 1000; background: rgb(0 0 0 / 0.45); }

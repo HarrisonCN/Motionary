@@ -1,0 +1,8 @@
+/* <usa-badge> */
+usa-badge { position: relative; display: inline-block; }
+usa-badge .usa-badge-count { position: absolute; top: 0; right: 0; transform-origin: 50% 50%; translate: 45% -45%; min-width: 18px; height: 18px; padding: 0 5px; box-sizing: border-box; border-radius: 9px; display: grid; place-items: center; font: 700 11px/1 system-ui, sans-serif; color: var(--usa-accent-text, #fff); background: var(--usa-badge-color, #e5484d); box-shadow: 0 0 0 2px var(--usa-badge-ring, Canvas); pointer-events: none; }
+usa-badge[data-dot] .usa-badge-count { min-width: 10px; width: 10px; height: 10px; padding: 0; }
+usa-badge .usa-badge-count[hidden] { display: none; }
+usa-badge[pulse] .usa-badge-count::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: inherit; animation: usa-badge-pulse 1.6s ease-out infinite; z-index: -1; }
+@keyframes usa-badge-pulse { from { transform: scale(1); opacity: 0.6; } to { transform: scale(2.4); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { usa-badge[pulse] .usa-badge-count::after { animation: none; } }

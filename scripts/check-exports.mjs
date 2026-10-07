@@ -20,6 +20,7 @@ const entries = {
   'use-scroll-animate/components/physics': ['definePhysicsComponents', 'defineSpring', 'defineDraggable', 'defineOverscroll', 'spring', 'springEasing', 'createSpring', 'SPRING_PRESETS', 'projectInertia', 'snapTo', 'rubberBand'],
   'use-scroll-animate/components/cards': ['defineCardComponents', 'defineCard', 'defineCardStack', 'defineStickyStack', 'defineCarousel3d', 'CARD_EFFECTS'],
   'use-scroll-animate/components/click': ['defineClickComponents', 'defineClick', 'defineButton', 'defineIconMorph', 'defineLike', 'defineHold', 'defineDoubleTap', 'defineCheckbox', 'burst', 'confetti', 'shake', 'haptic', 'morphPath', 'BUTTON_DEFORMS'],
+  'use-scroll-animate/components/ui': ['defineUiComponents', 'defineTabs', 'defineDrawer', 'defineBottomSheet', 'definePullRefresh', 'defineFab', 'defineNavbar', 'defineSlider', 'defineRating', 'defineTooltip', 'definePopover', 'defineBadge', 'defineAvatarStack', 'VARIANTS', 'setVariant'],
   'use-scroll-animate/components/transitions': ['defineTransitionComponents', 'defineDialog', 'defineAccordion', 'defineFlipList', 'defineViewSwitch', 'viewTransition', 'flip', 'connectedAnimation'],
 };
 

@@ -1,0 +1,4 @@
+/* <usa-popover> */
+usa-popover { display: inline-block; }
+usa-popover .usa-popover-panel { position: fixed; z-index: 1500; min-width: 180px; max-width: min(92vw, 360px); padding: 12px 14px; outline: none; }
+usa-popover .usa-popover-panel[hidden] { display: none; }

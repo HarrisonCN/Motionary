@@ -182,3 +182,10 @@ usa-toggle { --usa-toggle-on: var(--accent); }
 .demo-icons usa-icon-morph { padding: 8px; border-radius: 12px; background: color-mix(in srgb, currentColor 8%, transparent); }
 .demo-photo { width: min(100%, 240px); border-radius: 18px; overflow: hidden; }
 .demo-btn[data-shape="circle"], .demo-btn[data-shape="icon"] { min-width: 0; width: 46px; height: 46px; }
+.demo-fab-wrap { display: grid; place-items: center; min-height: 160px; width: 100%; }
+.demo-fab-wrap usa-fab { margin-top: 70px; }
+.demo-nav-scroll { position: relative; }
+.demo-navbar { display: block; padding: 12px 14px; background: color-mix(in srgb, var(--bg, #0b0d12) 88%, var(--accent, #7c5cff)); border-radius: 12px 12px 0 0; }
+.demo-avatar { background: hsl(var(--h) 70% 55%) !important; color: #fff; }
+.demo-variants { gap: 12px; }
+.demo-wide { width: min(100%, 320px); }

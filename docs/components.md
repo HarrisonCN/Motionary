@@ -155,6 +155,26 @@ Presets (`SPRING_PRESETS`): `default` (170/26), `gentle` (120/14), `wobbly` (180
 | `<usa-checkbox>` | Animated form-associated checkbox | `checked`, `indeterminate`, `name`, `value`, `label`, `shape` (`circle`) | `checked`, `toggle()`; `change`, `usa:change` |
 | `burst()` · `confetti()` · `shake()` · `haptic()` | The click-effect engine as functions | — | particles skip under reduced motion |
 
+### 10. UI components & variants — `components/ui`
+
+**Style variants.** `variant="minimal | neon | glass | brutalist | fluent | material"` works on every `<usa-*>` element (or `data-usa-variant` on an ancestor, or `setVariant('fluent')` page-wide). Variants only set design tokens — `--usa-accent`, `--usa-accent-text`, `--usa-surface`, `--usa-text`, `--usa-radius`, `--usa-border`, `--usa-shadow`, `--usa-blur`, `--usa-font` — which you can also set yourself. (`<usa-spinner>` / `<usa-check>` / `<usa-dialog>` keep using `variant` for their kind; `fluent` means the Windows look in both.)
+
+| Element | What it does | Key attributes | JS API / events |
+|---|---|---|---|
+| `<usa-tabs>` | Tabs with a sliding spring indicator (`[data-tab]` + `[data-panel]`) | `selected`, `indicator` (`line` · `pill`) | `selected`, `select(i)`; `usa:change` |
+| `<usa-drawer>` | Side panel, swipe to close | `open`, `side` (`left` · `right` · `top` · `bottom`), `label`; `[data-close]` | `open`, `show()`, `close()`; `usa:open`, `usa:close` |
+| `<usa-bottom-sheet>` | Draggable sheet with snap points | `open`, `snap` (`0.5,0.92`), `start`, `label`; `[data-handle]` | `usa:open`, `usa:close`, `usa:snap` |
+| `<usa-pull-refresh>` | Pull-to-refresh scroller | `threshold` (70), `label`, `disabled` | `refresh()`, `refreshing`; `usa:refresh` (`detail.done()`), `onrefresh` |
+| `<usa-fab>` | FAB speed dial (first child = main button) | `open`, `direction` (`up` · `down` · `left` · `right` · `radial`), `position`, `gap` (56) | `open`, `toggle()`; `usa:toggle` |
+| `<usa-navbar>` | Auto-hiding app bar | `threshold` (64), `shrink`, `target` | `show()`, `hiddenByScroll`; `usa:hide`, `usa:show` |
+| `<usa-slider>` | Range slider (form-associated) | `value`, `min`, `max`, `step`, `name`, `label`, `bubble`, `disabled` | `value`; `input`/`change`, `usa:input`/`usa:change`; `--usa-slider` |
+| `<usa-rating>` | Star rating | `value`, `max` (5), `icon`, `readonly`, `label`, `name` | `value`; `change`, `usa:change` |
+| `<usa-tooltip>` | Tooltip on hover / focus | `text`, `placement` (`top`), `delay` (300) | `show()`, `hide()` |
+| `<usa-popover>` | Click-to-open panel (`[data-popover]`) | `open`, `placement` (`bottom`) | `open`, `toggle()`; `usa:open`, `usa:close` |
+| `<usa-badge>` | Count / dot badge | `value`, `max` (99), `dot`, `pulse`, `show-zero`, `label` | `value` |
+| `<usa-avatar-stack>` | Overlapping avatars | `max` (5), `size` (36), `overlap` (0.35), `label` | — |
+| `setVariant(v)` · `VARIANTS` · `adoptVariants()` | Page-wide variant / token sheet | — | — |
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

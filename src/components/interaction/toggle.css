@@ -1,6 +1,6 @@
 /* <usa-toggle> */
 usa-toggle {
-  --usa-toggle-w: 40px; --usa-toggle-h: 20px; --usa-toggle-on: #7c5cff; --usa-toggle-off: transparent; --usa-toggle-line: currentColor;
+  --usa-toggle-w: 40px; --usa-toggle-h: 20px; --usa-toggle-on: var(--usa-accent, #7c5cff); --usa-toggle-off: transparent; --usa-toggle-line: currentColor;
   display: inline-flex; align-items: center; gap: 0.6em; cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent; vertical-align: middle;
 }
 usa-toggle[disabled] { cursor: not-allowed; opacity: 0.45; }

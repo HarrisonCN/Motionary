@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * use-scroll-animate/components — shared base for the `<usa-*>` custom elements.
  *
@@ -215,5 +217,19 @@ const EASE_SPRING = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
 const FLUENT_DECELERATE = 'cubic-bezier(0.1, 0.9, 0.2, 1)';
 const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
 
-export { EASE_OUT as E, FLUENT_DECELERATE as F, clamp as a, caf as b, configureComponents as c, defineElement as d, EASE_SPRING as e, shadowStyles as f, applyFrame as g, now as n, prefersReducedMotion as p, raf as r, srText as s };
-//# sourceMappingURL=base-CuvCgqLy.js.map
+exports.EASE_OUT = EASE_OUT;
+exports.EASE_SPRING = EASE_SPRING;
+exports.FLUENT_DECELERATE = FLUENT_DECELERATE;
+exports.adoptStyles = adoptStyles;
+exports.applyFrame = applyFrame;
+exports.caf = caf;
+exports.canDefine = canDefine;
+exports.clamp = clamp;
+exports.configureComponents = configureComponents;
+exports.defineElement = defineElement;
+exports.now = now;
+exports.prefersReducedMotion = prefersReducedMotion;
+exports.raf = raf;
+exports.shadowStyles = shadowStyles;
+exports.srText = srText;
+//# sourceMappingURL=base-5DFCAnvH.cjs.map

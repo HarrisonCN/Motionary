@@ -1,0 +1,11 @@
+/* <usa-tabs> */
+usa-tabs { display: block; font-family: var(--usa-font); }
+usa-tabs .usa-tabs-list { position: relative; display: flex; gap: 4px; border-bottom: 1px solid color-mix(in srgb, currentColor 14%, transparent); }
+usa-tabs [role="tab"] { position: relative; z-index: 1; padding: 10px 14px; border: 0; background: none; color: inherit; font: inherit; cursor: pointer; opacity: 0.7; transition: opacity 0.2s ease, color 0.2s ease; border-radius: calc(var(--usa-radius, 14px) / 2); }
+usa-tabs [role="tab"][aria-selected="true"] { opacity: 1; color: var(--usa-accent, #7c5cff); }
+usa-tabs [role="tab"]:focus-visible { outline: 2px solid var(--usa-accent, #7c5cff); outline-offset: -2px; }
+usa-tabs .usa-tabs-indicator { position: absolute; left: 0; bottom: -1px; height: 3px; width: 0; border-radius: 3px; background: var(--usa-accent, #7c5cff); pointer-events: none; }
+usa-tabs[indicator="pill"] .usa-tabs-list { border-bottom: 0; padding: 4px; border-radius: 999px; background: color-mix(in srgb, currentColor 8%, transparent); }
+usa-tabs[indicator="pill"] .usa-tabs-indicator { top: 4px; bottom: 4px; height: auto; border-radius: 999px; opacity: 0.18; }
+usa-tabs [role="tabpanel"] { padding: 14px 2px; }
+usa-tabs [role="tabpanel"]:focus-visible { outline: 2px solid var(--usa-accent, #7c5cff); outline-offset: 2px; border-radius: 6px; }

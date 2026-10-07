@@ -1,0 +1,6 @@
+/* <usa-navbar> */
+usa-navbar { position: sticky; top: 0; z-index: 800; display: block; transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), padding 0.25s ease, box-shadow 0.25s ease; will-change: transform; }
+usa-navbar[data-hidden] { transform: translateY(-100%); }
+usa-navbar[data-scrolled] { box-shadow: var(--usa-shadow, 0 6px 20px -10px rgb(0 0 0 / 0.4)); }
+usa-navbar[shrink][data-scrolled] { padding-block: 4px; }
+@media (prefers-reduced-motion: reduce) { usa-navbar { transition: none; } }
