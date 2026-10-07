@@ -49,7 +49,7 @@ type SpinnerVariant = (typeof SPINNER_VARIANTS)[number];
  * `<usa-spinner>` — indeterminate loading indicators, pure CSS animations
  * of `transform` / `opacity` (plus an SVG stroke for `fluent`).
  *
- * Kinds (`kind`; `variant` is a deprecated alias until 3.0): `fluent` (default — the WinUI / Windows 11
+ * Kinds (`kind`): `fluent` (default — the WinUI / Windows 11
  * ProgressRing arc), `windows` (the Windows 10 boot "orbiting dots"),
  * `ring` (classic border spinner), `dots` (three bouncing dots / typing
  * indicator), `pulse` (expanding ripple), `bars` (equalizer).
@@ -61,8 +61,6 @@ type SpinnerVariant = (typeof SPINNER_VARIANTS)[number];
 interface UsaSpinnerElement extends UsaElement {
     /** Spinner kind (`kind` attribute). */
     kind: SpinnerVariant;
-    /** @deprecated alias of `kind`, removed in 3.0. */
-    variant: SpinnerVariant;
 }
 declare function defineSpinner(tag?: string): CustomElementConstructor | undefined;
 
@@ -148,7 +146,7 @@ declare function toast(message: string, options?: ToastOptions): ToastHandle | n
  * `<usa-check>` — an animated result icon: the circle draws itself, then the
  * check mark (or cross / exclamation) strokes in with a little pop.
  *
- * Attributes: `variant` (`success` default, `error`, `warning`), `size`
+ * Attributes: `kind` (`success` default, `error`, `warning`), `size`
  * (px, 56), `start` (`view` default | `load` | `manual`), `label`
  * (accessible name, e.g. "Payment complete"; the icon is decorative
  * without it). Event: `usa:complete`. Reduced motion: drawn instantly.

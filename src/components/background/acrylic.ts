@@ -8,7 +8,7 @@ import css from './acrylic.css?raw';
  * tints from `--usa-mica-source`, a gradient you control). Optional
  * `shimmer` adds a light sweep when it appears or on hover.
  *
- * Attributes: `kind` (`acrylic` default | `mica`; `variant` is a deprecated alias until 3.0), `tint` (colour),
+ * Attributes: `kind` (`acrylic` default | `mica`), `tint` (colour),
  * `tint-opacity` (0–1, 0.55), `blur` (px, 30), `shimmer`
  * (`hover` | `load` | `none`, default `none`). Falls back to a solid tint
  * without `backdrop-filter` and under `prefers-reduced-transparency` or

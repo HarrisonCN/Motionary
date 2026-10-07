@@ -1,6 +1,6 @@
 # Animated components (`use-scroll-animate/components`)
 
-Since **v2.2** the package ships **30 animated UI components** as standard Web Components (`<usa-*>` custom elements) plus three transition helpers. They are built only on Custom Elements, CSS and the Web Animations API, so the same code runs:
+Since **v2.2** (now **v3**) the package ships **30 animated UI components** as standard Web Components (`<usa-*>` custom elements) plus three transition helpers. They are built only on Custom Elements, CSS and the Web Animations API, so the same code runs:
 
 - in any modern browser (Chrome, Edge, Firefox, Safari), and with React, Vue, Svelte, Solid, Angular or no framework;
 - in **Windows desktop software** that renders its UI with a web view — Electron, Tauri (WebView2), WinUI 3 / WPF / WinForms with WebView2, and installed PWAs. See **[Windows apps guide](./windows-apps.md)**.
@@ -40,7 +40,7 @@ defineTypewriter();
 No build step (registers every `<usa-*>` and exposes the API as `window.UsaComponents`):
 
 ```html
-<script src="https://unpkg.com/use-scroll-animate@2/dist/components.umd.js"></script>
+<script src="https://unpkg.com/use-scroll-animate@3/dist/components.umd.js"></script>
 <usa-typewriter words="Hello, Windows.|Hello, web."></usa-typewriter>
 <script>UsaComponents.toast('Ready', { type: 'success' });</script>
 ```
@@ -157,7 +157,7 @@ Presets (`SPRING_PRESETS`): `default` (170/26), `gentle` (120/14), `wobbly` (180
 
 ### 10. UI components & variants — `components/ui`
 
-**Style variants.** `variant="minimal | neon | glass | brutalist | fluent | material"` works on every `<usa-*>` element (or `data-usa-variant` on an ancestor, or `setVariant('fluent')` page-wide). Variants only set design tokens — `--usa-accent`, `--usa-accent-text`, `--usa-surface`, `--usa-text`, `--usa-radius`, `--usa-border`, `--usa-shadow`, `--usa-blur`, `--usa-font` — which you can also set yourself. (Since 2.9 `<usa-spinner>`, `<usa-check>`, `<usa-dialog>` and `<usa-acrylic>` pick their kind with `kind`; using `variant` for that is deprecated and stops working in 3.0.)
+**Style variants.** `variant="minimal | neon | glass | brutalist | fluent | material"` works on every `<usa-*>` element (or `data-usa-variant` on an ancestor, or `setVariant('fluent')` page-wide). Variants only set design tokens — `--usa-accent`, `--usa-accent-text`, `--usa-surface`, `--usa-text`, `--usa-radius`, `--usa-border`, `--usa-shadow`, `--usa-blur`, `--usa-font` — which you can also set yourself. (`<usa-spinner>`, `<usa-check>`, `<usa-dialog>` and `<usa-acrylic>` pick their kind with `kind`; since 3.0 `variant` is only a style variant everywhere.)
 
 | Element | What it does | Key attributes | JS API / events |
 |---|---|---|---|

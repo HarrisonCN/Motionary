@@ -102,11 +102,11 @@ describe('<usa-marquee>', () => {
 
 describe('<usa-dialog>', () => {
   it('slots its content, opens with an animation and closes via data-close', async () => {
-    const el = mount<any>('<usa-dialog variant="drawer-end" label="Settings"><h2>Settings</h2><button data-close="done">OK</button></usa-dialog>');
+    const el = mount<any>('<usa-dialog kind="drawer-end" label="Settings"><h2>Settings</h2><button data-close="done">OK</button></usa-dialog>');
     const dlg = el.dialog as HTMLDialogElement;
     expect(el.shadowRoot.querySelector('slot')).toBeTruthy();
     expect(el.querySelector('h2')!.parentElement).toBe(el); // light DOM untouched
-    expect(dlg.getAttribute('data-variant')).toBe('drawer-end');
+    expect(dlg.getAttribute('data-kind')).toBe('drawer-end');
     expect(dlg.getAttribute('aria-label')).toBe('Settings');
     const opened = vi.fn();
     const closed = vi.fn();

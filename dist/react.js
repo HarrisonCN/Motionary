@@ -1,5 +1,5 @@
-import { c as createScrollAnimate } from './chunks/core-J_KM443q.js';
-import { s as staggerChildren } from './chunks/stagger-CGF18oNs.js';
+import { c as createScrollAnimate } from './chunks/core-mV_TPgG_.js';
+import { s as staggerChildren } from './chunks/stagger-BFAhKknX.js';
 
 /**
  * use-scroll-animate - React Integration
@@ -7,7 +7,7 @@ import { s as staggerChildren } from './chunks/stagger-CGF18oNs.js';
  * `useScrollStagger({ observeChildren: true })` also animates children added later.
  *
  * Both hooks are thin wrappers around the core engine, so they share its
- * behaviour: `once`, `offset`, custom easing functions, parallax,
+ * behaviour: `once`, `offset`, custom easing functions, progress,
  * `prefers-reduced-motion` support, and proper cleanup on unmount.
  */
 const CALLBACKS = ['onStart', 'onComplete', 'onEnter', 'onLeave', 'onProgress'];

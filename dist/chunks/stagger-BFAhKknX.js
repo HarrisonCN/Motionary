@@ -1,4 +1,4 @@
-import { h as hasDOM, s as supportsObserver, c as createScrollAnimate, p as prepareElement, a as stopAnimation } from './core-J_KM443q.js';
+import { h as hasDOM, s as supportsObserver, c as createScrollAnimate, p as prepareElement, a as stopAnimation } from './core-mV_TPgG_.js';
 
 /**
  * use-scroll-animate - Staggered children
@@ -81,4 +81,4 @@ function staggerChildren(container, options = {}, instance) {
 }
 
 export { staggerChildren as s };
-//# sourceMappingURL=stagger-CGF18oNs.js.map
+//# sourceMappingURL=stagger-BFAhKknX.js.map

@@ -1,7 +1,7 @@
 'use strict';
 
-var core = require('./chunks/core-C1cEwjJj.cjs');
-var stagger = require('./chunks/stagger-DtKKS6GP.cjs');
+var core = require('./chunks/core-qpECfEkb.cjs');
+var stagger = require('./chunks/stagger-CLc3j58T.cjs');
 
 /**
  * use-scroll-animate - React Integration
@@ -9,7 +9,7 @@ var stagger = require('./chunks/stagger-DtKKS6GP.cjs');
  * `useScrollStagger({ observeChildren: true })` also animates children added later.
  *
  * Both hooks are thin wrappers around the core engine, so they share its
- * behaviour: `once`, `offset`, custom easing functions, parallax,
+ * behaviour: `once`, `offset`, custom easing functions, progress,
  * `prefers-reduced-motion` support, and proper cleanup on unmount.
  */
 const CALLBACKS = ['onStart', 'onComplete', 'onEnter', 'onLeave', 'onProgress'];

@@ -40,7 +40,7 @@ export type AnimationPreset =
   | 'clip-circle';
 
 /**
- * How `onProgress` (and parallax) progress is measured.
+ * How `onProgress` / `progressVar` progress is measured.
  * - `'ratio'` (default): the element's visible ratio (IntersectionObserver `intersectionRatio`).
  * - `'scroll'`: true scroll progress, 0 when the element's top touches the bottom of the
  *   viewport and 1 when its bottom leaves the top. Works for elements taller than the screen.
@@ -84,20 +84,6 @@ export interface CustomAnimation {
   to: AnimationKeyframe;
 }
 
-/** Parallax configuration */
-export interface ParallaxOptions {
-  /** Movement on X axis (e.g., '100px', '20%') */
-  x?: string | number;
-  /** Movement on Y axis (e.g., '100px', '20%') */
-  y?: string | number;
-  /** Rotation in degrees */
-  rotate?: number;
-  /** Scale factor */
-  scale?: number;
-  /** Speed multiplier (default: 1) */
-  speed?: number;
-}
-
 /** Per-element animation options */
 export interface AnimateOptions {
   /** Animation preset name, array of presets, or custom animation object */
@@ -120,8 +106,6 @@ export interface AnimateOptions {
   offset?: number;
   /** Stagger delay for child elements in ms (default: 0) */
   stagger?: number;
-  /** Parallax effect configuration */
-  parallax?: ParallaxOptions;
   /** Callback fired when animation starts */
   onStart?: (element: Element) => void;
   /** Callback fired when animation completes */
@@ -132,7 +116,7 @@ export interface AnimateOptions {
   onLeave?: (element: Element) => void;
   /** Callback fired with scroll progress (0 to 1) */
   onProgress?: (element: Element, progress: number) => void;
-  /** How progress for `onProgress`/parallax is measured (default: 'ratio') */
+  /** How progress for `onProgress`/`progressVar` is measured (default: 'ratio') */
   progressMode?: ProgressMode;
   /**
    * Name of a CSS custom property (e.g. `'--sa-progress'`) that receives the
@@ -194,7 +178,7 @@ export interface ScrollAnimateConfig {
   root?: Element | null;
   /**
    * Drop `once` elements from the registry as soon as their entrance animation
-   * has been triggered (unless they still need parallax/onProgress), so they can
+   * has been triggered (unless they still need onProgress/progressVar), so they can
    * be garbage-collected. They are remembered in a WeakSet, so `init()`/`observe()`
    * never re-hide or replay them. (default: true)
    */

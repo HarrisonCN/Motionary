@@ -12,7 +12,7 @@
  * Attributes mirror the `data-sa-*` attributes without the prefix
  * (`animation`, `duration`, `delay`, `easing`, `threshold`, `root-margin`,
  * `offset`, `once`, `repeat`, `engine`, `view-range`, `progress`,
- * `progress-var`, `exit`, `parallax-*`). The element dispatches `sa:enter`,
+ * `progress-var`, `exit`). The element dispatches `sa:enter`,
  * `sa:leave`, `sa:start`, `sa:complete` and `sa:progress` (`detail.progress`)
  * events. It renders as `display: block` unless styled otherwise.
  */
@@ -23,7 +23,6 @@ import { createScrollAnimate, readOptions } from './core';
 const ATTRIBUTES = [
   'animation', 'duration', 'delay', 'easing', 'threshold', 'root-margin', 'offset', 'once', 'repeat',
   'stagger', 'engine', 'view-range', 'progress', 'progress-var', 'exit',
-  'parallax-x', 'parallax-y', 'parallax-rotate', 'parallax-scale', 'parallax-speed',
 ];
 
 let shared: ScrollAnimateInstance | null = null;

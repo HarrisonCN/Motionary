@@ -1,7 +1,7 @@
-import { f as defineElement, k as kindOf, s as shadowStyles, i as EASE_OUT, F as FLUENT_DECELERATE, p as prefersReducedMotion } from '../chunks/base-CB8gChoe.js';
-export { a as configureComponents } from '../chunks/base-CB8gChoe.js';
+import { f as defineElement, k as kindOf, s as shadowStyles, i as EASE_OUT, F as FLUENT_DECELERATE, p as prefersReducedMotion } from '../chunks/base-Co98Z2iM.js';
+export { a as configureComponents } from '../chunks/base-Co98Z2iM.js';
 
-var shadowCss = ":host{display:contents}dialog{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:transparent;color:inherit;overflow:hidden}dialog:not([open]){display:none}dialog::backdrop{background:transparent}[part=\"backdrop\"]{position:absolute;inset:0;background:var(--usa-dialog-backdrop,rgb(0 0 0 / 0.42))}[part=\"panel\"]{position:absolute;left:50%;top:50%;translate:-50% -50%;box-sizing:border-box;width:min(var(--usa-dialog-width,480px),calc(100vw - 32px));max-height:calc(100vh - 32px);overflow:auto;padding:var(--usa-dialog-padding,24px);border-radius:var(--usa-dialog-radius,12px);background:var(--usa-dialog-bg,Canvas);color:var(--usa-dialog-fg,CanvasText);box-shadow:0 32px 64px -12px rgb(0 0 0 / 0.45),0 0 0 1px rgb(127 127 127 / 0.18)}dialog[data-variant^=\"drawer\"] [part=\"panel\"]{top:0;bottom:0;translate:none;max-height:none;height:100%;border-radius:0;width:min(var(--usa-dialog-width,380px),88vw)}dialog[data-variant=\"drawer-start\"] [part=\"panel\"]{left:0}dialog[data-variant=\"drawer-end\"] [part=\"panel\"]{left:auto;right:0}dialog[data-variant=\"drawer-bottom\"] [part=\"panel\"],dialog[data-variant=\"sheet\"] [part=\"panel\"]{top:auto;bottom:0;left:0;right:0;translate:none;width:100%;height:auto;max-height:85vh;border-radius:var(--usa-dialog-radius,16px) var(--usa-dialog-radius,16px) 0 0}dialog[data-variant=\"sheet\"] [part=\"panel\"]{left:50%;translate:-50% 0;width:min(var(--usa-dialog-width,560px),100vw)}";
+var shadowCss = ":host{display:contents}dialog{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:transparent;color:inherit;overflow:hidden}dialog:not([open]){display:none}dialog::backdrop{background:transparent}[part=\"backdrop\"]{position:absolute;inset:0;background:var(--usa-dialog-backdrop,rgb(0 0 0 / 0.42))}[part=\"panel\"]{position:absolute;left:50%;top:50%;translate:-50% -50%;box-sizing:border-box;width:min(var(--usa-dialog-width,480px),calc(100vw - 32px));max-height:calc(100vh - 32px);overflow:auto;padding:var(--usa-dialog-padding,24px);border-radius:var(--usa-dialog-radius,12px);background:var(--usa-dialog-bg,Canvas);color:var(--usa-dialog-fg,CanvasText);box-shadow:0 32px 64px -12px rgb(0 0 0 / 0.45),0 0 0 1px rgb(127 127 127 / 0.18)}dialog[data-kind^=\"drawer\"] [part=\"panel\"]{top:0;bottom:0;translate:none;max-height:none;height:100%;border-radius:0;width:min(var(--usa-dialog-width,380px),88vw)}dialog[data-kind=\"drawer-start\"] [part=\"panel\"]{left:0}dialog[data-kind=\"drawer-end\"] [part=\"panel\"]{left:auto;right:0}dialog[data-kind=\"drawer-bottom\"] [part=\"panel\"],dialog[data-kind=\"sheet\"] [part=\"panel\"]{top:auto;bottom:0;left:0;right:0;translate:none;width:100%;height:auto;max-height:85vh;border-radius:var(--usa-dialog-radius,16px) var(--usa-dialog-radius,16px) 0 0}dialog[data-kind=\"sheet\"] [part=\"panel\"]{left:50%;translate:-50% 0;width:min(var(--usa-dialog-width,560px),100vw)}";
 
 var css$3 = "usa-dialog{display:contents}usa-dialog:not(:defined){display:none}";
 
@@ -24,7 +24,7 @@ function defineDialog(tag = 'usa-dialog') {
             this.returnValue = '';
         }
         static get observedAttributes() {
-            return ['open', 'kind', 'variant', 'label'];
+            return ['open', 'kind', 'label'];
         }
         get dialog() {
             return this._dialog;
@@ -35,7 +35,7 @@ function defineDialog(tag = 'usa-dialog') {
         set open(v) {
             this.toggleAttribute('open', !!v);
         }
-        get variant() {
+        get kind() {
             return kindOf(this, FROM, 'modal');
         }
         changed(name) {
@@ -53,7 +53,7 @@ function defineDialog(tag = 'usa-dialog') {
         syncAttrs() {
             if (!this._dialog)
                 return;
-            this._dialog.setAttribute('data-variant', this.variant);
+            this._dialog.setAttribute('data-kind', this.kind);
             this._dialog.setAttribute('aria-modal', 'true');
             const label = this.getAttribute('label');
             if (label)
@@ -117,7 +117,7 @@ function defineDialog(tag = 'usa-dialog') {
                 await this.animate2([{ opacity: 0 }, { opacity: 1 }], [{ opacity: 0 }, { opacity: 1 }], 160, EASE_OUT);
                 return;
             }
-            await this.animate2([{ opacity: 0, transform: FROM[this.variant] }, { opacity: 1, transform: 'none' }], [{ opacity: 0 }, { opacity: 1 }], this.variant === 'modal' ? 260 : 360, FLUENT_DECELERATE);
+            await this.animate2([{ opacity: 0, transform: FROM[this.kind] }, { opacity: 1, transform: 'none' }], [{ opacity: 0 }, { opacity: 1 }], this.kind === 'modal' ? 260 : 360, FLUENT_DECELERATE);
         }
         async close(returnValue = '') {
             await this._busy;
@@ -132,7 +132,7 @@ function defineDialog(tag = 'usa-dialog') {
             }
             this.returnValue = returnValue;
             this._busy = (async () => {
-                const panelTo = this.reduced ? { opacity: 0 } : { opacity: 0, transform: FROM[this.variant] };
+                const panelTo = this.reduced ? { opacity: 0 } : { opacity: 0, transform: FROM[this.kind] };
                 const panelFrom = this.reduced ? { opacity: 1 } : { opacity: 1, transform: 'none' };
                 await this.animate2([panelFrom, panelTo], [{ opacity: 1 }, { opacity: 0 }], this.reduced ? 120 : 200, 'cubic-bezier(0.7, 0, 0.84, 0)', 'forwards');
                 try {

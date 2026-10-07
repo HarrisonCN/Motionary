@@ -1,6 +1,6 @@
-import { h as hasDOM, s as supportsObserver, b as resolveTargets, p as prepareElement, a as stopAnimation, c as createScrollAnimate, g as getScrollProgress, d as prefersReducedMotion } from './chunks/core-J_KM443q.js';
-export { E as EASING_MAP, P as PRESETS, e as resolveEasing, f as resolvePreset, i as supportsScrollTimeline } from './chunks/core-J_KM443q.js';
-export { s as staggerChildren } from './chunks/stagger-CGF18oNs.js';
+import { h as hasDOM, s as supportsObserver, b as resolveTargets, p as prepareElement, a as stopAnimation, c as createScrollAnimate, g as getScrollProgress, d as prefersReducedMotion } from './chunks/core-mV_TPgG_.js';
+export { E as EASING_MAP, P as PRESETS, e as resolveEasing, f as resolvePreset, i as supportsScrollTimeline } from './chunks/core-mV_TPgG_.js';
+export { s as staggerChildren } from './chunks/stagger-BFAhKknX.js';
 
 /**
  * use-scroll-animate - Sequence / timeline helper

@@ -1,6 +1,6 @@
 'use strict';
 
-var core = require('./chunks/core-C1cEwjJj.cjs');
+var core = require('./chunks/core-qpECfEkb.cjs');
 
 /**
  * use-scroll-animate - `<scroll-animate>` Web Component
@@ -16,14 +16,13 @@ var core = require('./chunks/core-C1cEwjJj.cjs');
  * Attributes mirror the `data-sa-*` attributes without the prefix
  * (`animation`, `duration`, `delay`, `easing`, `threshold`, `root-margin`,
  * `offset`, `once`, `repeat`, `engine`, `view-range`, `progress`,
- * `progress-var`, `exit`, `parallax-*`). The element dispatches `sa:enter`,
+ * `progress-var`, `exit`). The element dispatches `sa:enter`,
  * `sa:leave`, `sa:start`, `sa:complete` and `sa:progress` (`detail.progress`)
  * events. It renders as `display: block` unless styled otherwise.
  */
 const ATTRIBUTES = [
     'animation', 'duration', 'delay', 'easing', 'threshold', 'root-margin', 'offset', 'once', 'repeat',
     'stagger', 'engine', 'view-range', 'progress', 'progress-var', 'exit',
-    'parallax-x', 'parallax-y', 'parallax-rotate', 'parallax-scale', 'parallax-speed',
 ];
 let shared = null;
 /**

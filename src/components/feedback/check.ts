@@ -5,7 +5,7 @@ import css from './check.css?raw';
  * `<usa-check>` — an animated result icon: the circle draws itself, then the
  * check mark (or cross / exclamation) strokes in with a little pop.
  *
- * Attributes: `variant` (`success` default, `error`, `warning`), `size`
+ * Attributes: `kind` (`success` default, `error`, `warning`), `size`
  * (px, 56), `start` (`view` default | `load` | `manual`), `label`
  * (accessible name, e.g. "Payment complete"; the icon is decorative
  * without it). Event: `usa:complete`. Reduced motion: drawn instantly.
@@ -27,7 +27,7 @@ export function defineCheck(tag = 'usa-check'): CustomElementConstructor | undef
     (Base) =>
       class UsaCheck extends Base {
         static get observedAttributes(): string[] {
-          return ['kind', 'variant', 'size', 'label'];
+          return ['kind', 'size', 'label'];
         }
 
         private _anims: Animation[] = [];
@@ -35,7 +35,7 @@ export function defineCheck(tag = 'usa-check'): CustomElementConstructor | undef
         mount(): void {
           const variant = kindOf(this, PATHS, 'success');
           this.innerHTML = `<svg viewBox="0 0 52 52" aria-hidden="true"><circle class="usa-check-circle" cx="26" cy="26" r="23" pathLength="1"/><path class="usa-check-mark" d="${PATHS[variant]}" pathLength="1"/></svg>`;
-          this.setAttribute('data-variant', variant);
+          this.setAttribute('data-kind', variant);
           const size = this.getAttribute('size');
           if (size) this.style.setProperty('--usa-check-size', `${Number(size)}px`);
           const label = this.getAttribute('label');

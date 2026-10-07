@@ -72,15 +72,15 @@ describe('progressMode: scroll', () => {
     sa.destroy();
   });
 
-  it('drives parallax with scroll progress and reads data-sa-progress', async () => {
+  it('drives progressVar with scroll progress and reads data-sa-progress', async () => {
     const { createScrollAnimate } = await load();
-    const node = el('<div data-sa data-sa-progress="scroll" data-sa-parallax-y="100"></div>');
+    const node = el('<div data-sa data-sa-progress="scroll" data-sa-progress-var="--p"></div>');
     const sa = createScrollAnimate();
     sa.init();
     expect(sa.getObservedElements()[0].options.progressMode).toBe('scroll');
     setRect(node, -500, 1000); // progress 0.75
     MockIO.instances.find((i) => i.options.threshold === 0)!.fire(node, true);
-    expect(node.style.transform).toBe('translateY(50px)');
+    expect(node.style.getPropertyValue('--p')).toBe('0.75');
   });
 
   it('default progressMode is still the intersection ratio', async () => {

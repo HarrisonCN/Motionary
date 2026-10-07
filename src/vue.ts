@@ -3,7 +3,7 @@
  * Provides useScrollAnimate and useScrollStagger composables for Vue 3 applications.
  *
  * A thin wrapper around the core engine, so it shares its behaviour: `once`,
- * `offset`, custom easing functions, parallax, `prefers-reduced-motion`
+ * `offset`, custom easing functions, progress, `prefers-reduced-motion`
  * support, and cleanup on unmount.
  */
 

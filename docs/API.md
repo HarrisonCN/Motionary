@@ -74,7 +74,6 @@ const sa = createScrollAnimate({ defaultDuration: 800, defaultEngine: 'auto' });
 | `stagger` | `number` (ms) | `0` | Extra delay per sibling revealed in the same batch |
 | `engine` | `'auto' \| 'js' \| 'css'` | `'auto'` | `'auto'`: native scroll-driven timeline when supported, else JS — and JS when the element sets `duration`/`delay`/`offset`/`stagger`; `'css'`: native whenever supported; `'js'`: always time-based |
 | `viewRange` | `[string, string]` | `['entry 0%', 'entry 100%']` | Native engine: view-timeline range of the entrance |
-| `parallax` | `{ x?, y?, rotate?, scale?, speed? }` | `{}` | Legacy transform-based parallax (writes `transform`); see also `parallax()` |
 | `progressMode` | `'ratio' \| 'scroll'` | `'ratio'` | `onProgress` source: visible ratio, or true scroll progress (0 = top enters at the bottom, 1 = bottom leaves at the top) |
 | `progressVar` | `string` | – | CSS custom property that receives the progress |
 | `onEnter` / `onLeave` | `(el) => void` | – | Viewport entry / exit |
@@ -85,7 +84,7 @@ const sa = createScrollAnimate({ defaultDuration: 800, defaultEngine: 'auto' });
 
 Mark elements with `data-sa` and call `init()` / `watch()`. Every option has an attribute:
 
-`data-sa-animation` (comma-separated to combine), `data-sa-duration`, `data-sa-delay`, `data-sa-easing` (name, CSS string or JSON array), `data-sa-threshold` (comma-separated list allowed), `data-sa-root-margin`, `data-sa-offset`, `data-sa-once`, `data-sa-repeat`, `data-sa-exit` (bare = `true`, or preset name), `data-sa-stagger`, `data-sa-engine`, `data-sa-view-range` (`"entry 0%, cover 40%"`), `data-sa-progress` (`"scroll"`), `data-sa-progress-var` (bare = `--sa-progress`), `data-sa-parallax-x|y|rotate|scale|speed`.
+`data-sa-animation` (comma-separated to combine), `data-sa-duration`, `data-sa-delay`, `data-sa-easing` (name, CSS string or JSON array), `data-sa-threshold` (comma-separated list allowed), `data-sa-root-margin`, `data-sa-offset`, `data-sa-once`, `data-sa-repeat`, `data-sa-exit` (bare = `true`, or preset name), `data-sa-stagger`, `data-sa-engine`, `data-sa-view-range` (`"entry 0%, cover 40%"`), `data-sa-progress` (`"scroll"`), `data-sa-progress-var` (bare = `--sa-progress`).
 
 Boolean attributes are true when present unless their value is `"false"`.
 

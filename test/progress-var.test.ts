@@ -109,7 +109,7 @@ describe('progressVar', () => {
   it('is still written under reduced motion (it is data, like onProgress)', async () => {
     const { createScrollAnimate } = await load({ reducedMotion: true });
     const node = el();
-    createScrollAnimate().observe(node, { progressVar: '--p', parallax: { y: 50 } });
+    createScrollAnimate().observe(node, { progressVar: '--p' });
     ratioObserver().fire(node, true, 0.6);
     expect(node.style.getPropertyValue('--p')).toBe('0.6');
     expect(node.style.transform).toBe('');

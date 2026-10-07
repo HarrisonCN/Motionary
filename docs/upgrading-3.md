@@ -8,6 +8,7 @@
 | `spinner.variant` property | `spinner.kind` |
 | `observe(el, { parallax: { y: 80 } })`, `data-sa-parallax-x/-y/-rotate/-scale/-speed` | `parallax(el, { speed: 0.3 })` (writes `--sa-parallax`, use it in CSS: `transform: translateY(calc(var(--sa-parallax) * -80px))`) or `progressVar: '--p'` |
 | `ParallaxOptions` type | `ParallaxHelperOptions` |
+| `data-variant` on spinner / check / dialog (internal styling hook) | `data-kind` |
 | Node 18 for SSR imports | Node ≥ 20 (`engines`) |
 
 Search & replace:

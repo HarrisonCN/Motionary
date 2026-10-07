@@ -37,7 +37,7 @@ defineComponents(); // or per category: import { defineTextComponents } from 'us
 
 ```html
 <!-- or with no build step -->
-<script src="https://unpkg.com/use-scroll-animate@2/dist/components.umd.js"></script>
+<script src="https://unpkg.com/use-scroll-animate@3/dist/components.umd.js"></script>
 <usa-typewriter words="Hello, Windows.|Hello, web."></usa-typewriter>
 <usa-spinner kind="fluent"></usa-spinner>
 ```
@@ -224,7 +224,7 @@ We've added high-quality physics-based easing presets:
 | `viewRange` | `[string, string]` | `['entry 0%', 'entry 100%']` | Native engine only: view-timeline range of the entrance |
 | `progressVar` | `string` | – | Write progress (0–1, same value as `onProgress`) to this CSS custom property, e.g. `'--sa-progress'`, for scroll-driven effects in plain CSS |
 
-Every option is also available as a data attribute: `data-sa-animation`, `data-sa-duration`, `data-sa-delay`, `data-sa-easing`, `data-sa-threshold`, `data-sa-root-margin`, `data-sa-once`, `data-sa-repeat`, `data-sa-offset`, `data-sa-stagger`, `data-sa-progress`, `data-sa-progress-var` (bare attribute = `--sa-progress`), `data-sa-engine`, `data-sa-exit` (bare = `true`, or a preset), `data-sa-view-range` (`"entry 0%, cover 40%"`), `data-sa-parallax-x|y|rotate|scale|speed`.
+Every option is also available as a data attribute: `data-sa-animation`, `data-sa-duration`, `data-sa-delay`, `data-sa-easing`, `data-sa-threshold`, `data-sa-root-margin`, `data-sa-once`, `data-sa-repeat`, `data-sa-offset`, `data-sa-stagger`, `data-sa-progress`, `data-sa-progress-var` (bare attribute = `--sa-progress`), `data-sa-engine`, `data-sa-exit` (bare = `true`, or a preset), `data-sa-view-range` (`"entry 0%, cover 40%"`).
 
 **Presets:** `fade-in`, `fade-in-up|down|left|right`, `zoom-in`, `zoom-out`, `scale-up`, `flip-x`, `flip-y`, `flip-up`, `flip-down`, `slide-up|down|left|right`, `bounce`, `rotate-in`, `rotate-left`, `rotate-right`, `blur-in`, `blur-in-up`, `skew-in`, `scale-x`, `scale-y`, `clip-up|down|left|right`, `clip-circle`, `shimmer`, `pulse`, `swing`. Combine them with an array, e.g. `['fade-in', 'clip-up']`.
 
@@ -285,7 +285,7 @@ stop(); // remove listeners and the inline styles it set
 | `root` | viewport | Scroll container |
 | `respectReducedMotion` | `true` | Under `prefers-reduced-motion: reduce` only the variable is written, no offset |
 
-It writes the offset to the individual CSS **`translate`** property, so it composes with entrance animations and any `transform` you set. One IntersectionObserver plus a passive, rAF-throttled scroll listener that is attached only while a target is on screen. Tree-shaken it adds under 1 kB gzipped. (The older `parallax: { x, y, rotate, scale }` option still works; it writes `transform`.)
+It writes the offset to the individual CSS **`translate`** property, so it composes with entrance animations and any `transform` you set. One IntersectionObserver plus a passive, rAF-throttled scroll listener that is attached only while a target is on screen. Tree-shaken it adds under 1 kB gzipped. (The old `parallax: { x, y, rotate, scale }` option was removed in 3.0 — see [Upgrading to 3.0](./docs/upgrading-3.md).)
 
 ## Instance API
 
