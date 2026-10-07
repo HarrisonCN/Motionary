@@ -4,114 +4,8 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 var core = require('./chunks/core-qpECfEkb.cjs');
 var stagger = require('./chunks/stagger-CLc3j58T.cjs');
-
-/**
- * use-scroll-animate - Sequence / timeline helper
- * Chain animations on several targets, one after another (or overlapping).
- */
-let fallback = null;
-let warned = false;
-function plan(steps, defaults) {
-    const out = [];
-    let cursor = 0;
-    steps.forEach((step) => {
-        const { target, gap = 0, at, ...stepOpts } = step;
-        const opts = { ...defaults, ...stepOpts };
-        const duration = opts.duration ?? 600;
-        const start = Math.max(0, at ?? cursor + gap) + (opts.delay ?? 0);
-        let end = Math.max(cursor, start);
-        core.resolveTargets(target).forEach((el, i) => {
-            const delay = start + i * (opts.stagger ?? 0);
-            out.push({ el, opts: { ...opts, duration, delay, stagger: 0 }, end: delay + duration });
-            end = Math.max(end, delay + duration);
-        });
-        cursor = end;
-    });
-    return out;
-}
-/**
- * Build a timeline of animations.
- *
- * @deprecated since 3.9, removed in 4.0 — use `timeline()` (`.to(target, preset, { at: '-=300' })`).
- *
- * @example
- * sequence([
- *   { target: '.title', animation: 'fade-in-up' },
- *   { target: '.subtitle', animation: 'blur-in', gap: -300 },   // overlap by 300ms
- *   { target: '.card', animation: 'scale-up', stagger: 80 },
- * ], { trigger: '.hero' });
- */
-function sequence(steps, options = {}) {
-    if (!warned && typeof console !== 'undefined') {
-        warned = true;
-        console.warn("[use-scroll-animate] sequence() is deprecated and will be removed in 4.0 — use timeline() from 'use-scroll-animate/components/timeline' (also exported from 'use-scroll-animate' in 4.0). See docs/upgrading-4.md.");
-    }
-    const { trigger, instance, ...defaults } = options;
-    const sa = () => instance || fallback || (fallback = core.createScrollAnimate());
-    let io;
-    let active = [];
-    let settle;
-    // Targets hidden while waiting for `trigger`; revealed if cancelled before it fires.
-    let prepared = [];
-    const controller = {
-        play() {
-            controller.cancel();
-            if (!core.hasDOM())
-                return Promise.resolve();
-            active = plan(steps, defaults);
-            return new Promise((resolve) => {
-                let left = active.length;
-                settle = () => {
-                    settle = undefined;
-                    resolve();
-                };
-                if (!left)
-                    return settle();
-                const run = active;
-                run.forEach(({ el, opts }) => {
-                    const done = opts.onComplete;
-                    sa().animate(el, {
-                        ...opts,
-                        onComplete: (node) => {
-                            done?.(node);
-                            if (run === active && --left === 0)
-                                settle?.();
-                        },
-                    });
-                });
-            });
-        },
-        cancel() {
-            io?.disconnect();
-            io = undefined;
-            prepared.forEach((el) => core.stopAnimation(el));
-            prepared = [];
-            active.forEach(({ el }) => core.stopAnimation(el));
-            active = [];
-            settle?.();
-        },
-        duration() {
-            return plan(steps, defaults).reduce((max, p) => Math.max(max, p.end), 0);
-        },
-    };
-    if (trigger && core.hasDOM() && core.supportsObserver()) {
-        const el = core.resolveTargets(trigger)[0];
-        if (el) {
-            prepared = plan(steps, defaults).map(({ el: target }) => target);
-            prepared.forEach((target) => core.prepareElement(target));
-            io = new IntersectionObserver((entries) => {
-                if (!entries.some((e) => e.isIntersecting))
-                    return;
-                io?.disconnect();
-                io = undefined;
-                prepared = []; // play() takes over from here
-                controller.play();
-            }, { threshold: defaults.threshold ?? 0.1, rootMargin: defaults.rootMargin ?? '0px' });
-            io.observe(el);
-        }
-    }
-    return controller;
-}
+var core$1 = require('./chunks/core-DXqZm5Il.cjs');
+require('./chunks/base-CXx7jZ-o.cjs');
 
 /**
  * use-scroll-animate - parallax() helper
@@ -242,7 +136,9 @@ exports.resolveEasing = core.resolveEasing;
 exports.resolvePreset = core.resolvePreset;
 exports.supportsScrollTimeline = core.supportsScrollTimeline;
 exports.staggerChildren = stagger.staggerChildren;
+exports.TIMELINE_PRESETS = core$1.TIMELINE_PRESETS;
+exports.resolvePosition = core$1.resolvePosition;
+exports.timeline = core$1.timeline;
 exports.default = ScrollAnimate;
 exports.parallax = parallax;
-exports.sequence = sequence;
 //# sourceMappingURL=index.cjs.map

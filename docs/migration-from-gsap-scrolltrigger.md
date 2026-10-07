@@ -35,14 +35,14 @@ GSAP + ScrollTrigger is a full animation platform; `use-scroll-animate` covers t
 - tl.from('.title', { opacity: 0, y: 40 })
 -   .from('.subtitle', { opacity: 0 }, '-=0.2')
 -   .from('.cta', { scale: 0.8, opacity: 0 }, 1.2);
-+ sequence([
-+   { target: '.title', animation: 'fade-in-up' },
-+   { target: '.subtitle', animation: 'fade-in', gap: -200 },
-+   { target: '.cta', animation: 'zoom-in', at: 1200 },
-+ ], { trigger: '.hero' });
++ const tl = timeline()
++   .to('.title', 'fade-up')
++   .to('.subtitle', 'fade', { at: '-=200' })
++   .to('.cta', 'scale', { at: 1200 });
++ tl.scrub(document.querySelector('.hero')); // or tl.play() when it enters
 ```
 
-`play()` returns a Promise; `cancel()` stops it and leaves content visible.
+`play()` / `reverse()` return Promises; `seek()`, `progress()`, labels and `scrub()` work like GSAP's timeline controls.
 
 ## Scrub (progress-linked) animations
 

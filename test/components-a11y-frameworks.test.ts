@@ -55,7 +55,7 @@ describe('a11y sweep over every <usa-*> element', () => {
 
 describe('framework helpers', () => {
   it('React wrappers: names, event mapping, element creation', () => {
-    expect(pascal('usa-flip-list')).toBe('UsaFlipList');
+    expect(pascal('usa-auto-animate')).toBe('UsaAutoAnimate');
     expect(pascal('usa-carousel-3d')).toBe('UsaCarousel3d');
     expect(eventName('onUsaChange')).toBe('usa:change');
     expect(eventName('onUsaDragEnd')).toBe('usa:drag-end');

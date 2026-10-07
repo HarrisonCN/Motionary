@@ -40,7 +40,7 @@ defineTypewriter();
 No build step (registers every `<usa-*>` and exposes the API as `window.UsaComponents`):
 
 ```html
-<script src="https://unpkg.com/use-scroll-animate@3/dist/components.umd.js"></script>
+<script src="https://unpkg.com/use-scroll-animate@4/dist/components.umd.js"></script>
 <usa-typewriter words="Hello, Windows.|Hello, web."></usa-typewriter>
 <script>UsaComponents.toast('Ready', { type: 'success' });</script>
 ```
@@ -113,11 +113,9 @@ All attributes are optional unless noted. Events are `CustomEvent`s that bubble,
 |---|---|---|---|
 | `<usa-dialog>` | Animated modal / drawer / sheet on the native `<dialog>` (focus trap, Esc, top layer); content is slotted, so frameworks keep owning it | `open`, `kind` (`modal`*, `drawer-start`, `drawer-end`, `drawer-bottom`, `sheet`), `label`, `no-backdrop-close`, `no-esc`; `[data-close]` children close it; `::part(panel/backdrop)`, `--usa-dialog-*` | `show()`, `close(value?)`, `open`, `returnValue`; `usa:open`, `usa:beforeclose` (cancelable), `usa:close` |
 | `<usa-accordion>` | Smooth height animation for native `<details>` | `multiple`, `duration` (300) | `toggleItem(details, open?)`, `items`; `usa:toggle` |
-| `<usa-flip-list>` | Children glide to new places on add / remove / reorder (FLIP) | `duration` (420), `easing`, `disabled` | `flip(mutate)` |
 | `<usa-view-switch>` | One view at a time with direction-aware transitions | `active` (name or index), `effect` (`slide`*, `fade`, `scale`, `drill`), `duration` | `show(view)`, `active`, `views`; `usa:change` |
 | `viewTransition(update, opts?)` | Runs a DOM update inside `document.startViewTransition()`, cross-fade fallback | `{ fallback, duration, types }` | `Promise<void>` |
 | `flip(targets, mutate, opts?)` | FLIP-animates any layout change | `{ duration, easing, animateEnter }` | `Promise<void>` |
-| `connectedAnimation(from, to, opts?)` | WinUI-style connected / shared-element animation | `{ duration, easing, hideSource }` | `Promise<void>` |
 
 ### 7. Spring & physics — `components/physics`
 
@@ -287,7 +285,7 @@ Fallbacks set `data-fallback` (`webgl` · `image` · `no-image`); cross-origin i
 | `<usa-masonry>` | Masonry grid with animated reflow | `columns` or `min` (220), `gap` (16); `layout()` |
 | `sharedTransition(update, root?)` | Shared-element transition via `data-shared="id"` | `duration` (450), `easing`; View Transitions API or FLIP |
 
-Also see `flip()` / `connectedAnimation()` / `<usa-flip-list>` in `components/transitions`.
+Also see `flip()` in `components/transitions`. (4.0 removed `<usa-flip-list>` and `connectedAnimation()` in favour of these.)
 
 ### v3.7 Visual playground
 
@@ -315,7 +313,7 @@ Hybrid / desktop hosts (MAUI, Flutter WebView, Electron, Tauri): [hybrid-apps.md
 
 `<usa-pack>` (e.g. `<usa-pack name="ecommerce">…</usa-pack>`) or `applyPack('ecommerce', root)`; helpers `flyToCart(from, to)`, `countUp(el)`.
 
-**Deprecated in 3.9, removed in 4.0:** `sequence()`, `connectedAnimation()`, `<usa-flip-list>` — see [upgrading-4.md](./upgrading-4.md).
+**Deprecated in 3.9, removed in 4.0.0:** `sequence()`, `connectedAnimation()`, `<usa-flip-list>` — see [upgrading-4.md](./upgrading-4.md).
 
 ## Frameworks
 

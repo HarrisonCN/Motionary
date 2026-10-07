@@ -84,20 +84,6 @@ interface UsaAccordionElement extends UsaElement {
 declare function defineAccordion(tag?: string): CustomElementConstructor | undefined;
 
 /**
- * `<usa-flip-list>` — animates its children to their new places whenever
- * they are added, removed or reordered (FLIP: transforms only). Works with
- * any rendering: plain DOM, React keyed lists, Vue `v-for`, Svelte `{#each}`.
- *
- * Attributes: `duration` (ms, 420), `easing`, `disabled`.
- * Method: `flip(mutate)` for explicit changes (also measures resizes).
- * Reduced motion: no animation.
- */
-interface UsaFlipListElement extends UsaElement {
-    flip(mutate: () => void | Promise<void>): Promise<void>;
-}
-declare function defineFlipList(tag?: string): CustomElementConstructor | undefined;
-
-/**
  * `<usa-view-switch>` — shows one of its children at a time (tabs, wizard
  * steps, app pages) and animates between them. Children are views; name
  * them with `data-view`, or address them by index.
@@ -153,26 +139,12 @@ type Targets = Element | Iterable<Element> | ArrayLike<Element>;
  * ```
  */
 declare function flip(targets: Targets, mutate: () => void | Promise<void>, options?: FlipOptions): Promise<void>;
-interface ConnectedOptions {
-    duration?: number;
-    easing?: string;
-    /** Hide `from` while the animation runs (default true). */
-    hideSource?: boolean;
-}
-/**
- * Connected (shared-element) animation, like WinUI's
- * `ConnectedAnimationService`: `to` flies from the position and size of
- * `from` into its own place (e.g. a thumbnail opening into a detail view).
- * Call it right after `to` is shown. Transforms only.
- *
- * @deprecated since 3.9, removed in 4.0 — use `sharedTransition()` (components/layout).
- */
-declare function connectedAnimation(from: Element, to: HTMLElement, options?: ConnectedOptions): Promise<void>;
 
 /**
  * use-scroll-animate/components/transitions — view & layout transitions.
- * `<usa-dialog>`, `<usa-accordion>`, `<usa-flip-list>`, `<usa-view-switch>`
- * and the `viewTransition()`, `flip()`, `connectedAnimation()` helpers.
+ * `<usa-dialog>`, `<usa-accordion>`, `<usa-view-switch>`
+ * and the `viewTransition()` and `flip()` helpers (4.0: `<usa-flip-list>` → `<usa-auto-animate>`,
+ * `connectedAnimation()` → `sharedTransition()`, both in `components/layout`).
  */
 
 /** Register every component of this category under its default tag. */
@@ -181,10 +153,9 @@ declare global {
     interface HTMLElementTagNameMap {
         'usa-dialog': UsaDialogElement;
         'usa-accordion': UsaAccordionElement;
-        'usa-flip-list': UsaFlipListElement;
         'usa-view-switch': UsaViewSwitchElement;
     }
 }
 
-export { configureComponents, connectedAnimation, defineAccordion, defineDialog, defineFlipList, defineTransitionComponents, defineViewSwitch, flip, prefersReducedMotion, viewTransition };
-export type { ComponentsConfig, ConnectedOptions, DialogVariant, FlipOptions, UsaAccordionElement, UsaDialogElement, UsaElement, UsaFlipListElement, UsaViewSwitchElement, ViewTransitionOptions };
+export { configureComponents, defineAccordion, defineDialog, defineTransitionComponents, defineViewSwitch, flip, prefersReducedMotion, viewTransition };
+export type { ComponentsConfig, DialogVariant, FlipOptions, UsaAccordionElement, UsaDialogElement, UsaElement, UsaViewSwitchElement, ViewTransitionOptions };

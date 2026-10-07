@@ -60,7 +60,7 @@ describe('docs', () => {
       expect(readme, tag).toContain(`<${tag}>`);
       expect(zh, tag).toContain(`<${tag}>`);
     });
-    ['viewTransition', 'flip', 'connectedAnimation', 'toast', 'configureComponents', 'defineComponents'].forEach((n) => expect(doc, n).toContain(n));
+    ['viewTransition', 'flip', 'sharedTransition', 'toast', 'configureComponents', 'defineComponents'].forEach((n) => expect(doc, n).toContain(n));
   });
 
   it('API reference documents every runtime export of the main entry', async () => {

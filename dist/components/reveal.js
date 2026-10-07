@@ -1,5 +1,5 @@
-import { i as defineElement, h as EASE_OUT, b as clamp, e as caf, r as raf } from '../chunks/base-BRIPyPtX.js';
-export { a as configureComponents, p as prefersReducedMotion } from '../chunks/base-BRIPyPtX.js';
+import { h as defineElement, i as EASE_OUT, d as clamp, b as caf, r as raf } from '../chunks/base-ZARFccur.js';
+export { a as configureComponents, p as prefersReducedMotion } from '../chunks/base-ZARFccur.js';
 
 /** Entrance effects shared by `<usa-reveal>` and `<usa-stagger>` (transform / opacity / filter only). */
 const REVEAL_EFFECTS = [

@@ -4,7 +4,7 @@
  *
  * kind:
  *  - 'preset'    one built-in preset (src/presets.ts)
- *  - 'feature'   an option / helper (stagger, exit, parallax, progressVar, engine, sequence, combo, easing)
+ *  - 'feature'   an option / helper (stagger, exit, parallax, progressVar, engine, sequence (timeline), combo, easing)
  *  - 'framework' an adapter entry point (react, vue, svelte, solid, element)
  * recipe: which code generator / demo the item uses (see codegen.js and app.js)
  */
@@ -136,11 +136,11 @@ export const FEATURE_ITEMS = [
     kind: 'feature',
     recipe: 'sequence',
     category: 'feature',
-    title: { en: 'Sequence timeline', zh: '序列时间线' },
-    tags: ['sequence()', 'timeline'],
+    title: { en: 'Timeline', zh: '时间线' },
+    tags: ['timeline()', 'sequence', 'choreography'],
     desc: {
-      en: 'Chain animations on several targets, one after another or overlapping, triggered when a section scrolls in.',
-      zh: '把多个目标的动画串成时间线，可依次或重叠播放，并在区块进入视口时触发。',
+      en: 'timeline(): chain animations on several targets on one playhead — one after another or overlapping (\'-=200\'), played when a section scrolls in or scrubbed with scroll.',
+      zh: 'timeline()：在同一播放头上串联多个目标的动画 —— 依次或重叠（\'-=200\'），在区块进入视口时播放或随滚动擦洗。',
     },
   },
   {

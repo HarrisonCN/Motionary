@@ -10,7 +10,7 @@ import { WIRES } from './catalog/index.js';
 
 const COMPONENTS_COUNT = COMPONENTS.length;
 const LOCAL = new URL('../dist/', import.meta.url).href;
-const CDN = 'https://unpkg.com/use-scroll-animate@3/dist/';
+const CDN = 'https://unpkg.com/use-scroll-animate@4/dist/';
 const KEY = 'usa-showcase:';
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
@@ -212,15 +212,15 @@ function wire(item, stage) {
         dlg.show();
       });
       break;
-    case 'flip-list':
+    case 'flip':
       $('[data-act=shuffle]', stage).addEventListener('click', () => {
-        const list = $('usa-flip-list', stage);
+        const list = $('.demo-flip', stage);
         const kids = Array.from(list.children);
         for (let i = kids.length - 1; i > 0; i--) {
           const j = Math.floor(Math.random() * (i + 1));
           [kids[i], kids[j]] = [kids[j], kids[i]];
         }
-        list.append(...kids); // the element animates the reorder by itself
+        lib.flip(list.children, () => list.append(...kids));
       });
       break;
     case 'view-switch': {
@@ -242,29 +242,6 @@ function wire(item, stage) {
           panel.textContent = `${T('demo.page')} ${n}`;
           panel.dataset.n = String(n);
         }, { fallback: panel });
-      });
-      break;
-    }
-    case 'connected-animation': {
-      const detail = $('[data-ca-detail]', stage);
-      const thumbs = $('.demo-thumbs', stage);
-      let from = null;
-      thumbs.addEventListener('click', (e) => {
-        const b = e.target.closest('[data-ca]');
-        if (!b) return;
-        from = b;
-        detail.dataset.n = b.dataset.ca;
-        detail.hidden = false;
-        thumbs.setAttribute('inert', '');
-        lib.connectedAnimation(b, detail);
-      });
-      $('[data-ca-close]', stage).addEventListener('click', async () => {
-        detail.hidden = true;
-        thumbs.removeAttribute('inert');
-        if (from) {
-          from.focus();
-          await lib.connectedAnimation(detail, from, { hideSource: false, duration: 360 });
-        }
       });
       break;
     }

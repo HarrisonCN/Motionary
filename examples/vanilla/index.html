@@ -178,7 +178,7 @@
 
   <div class="section" id="v14">
     <h2 style="text-align: center; margin-bottom: 2rem;" class="seq-title">New in v1.4.0</h2>
-    <p style="text-align: center; color: #aaa; margin-bottom: 2rem;" class="seq-sub">sequence(), true scroll progress, dynamic stagger, clip-path presets</p>
+    <p style="text-align: center; color: #aaa; margin-bottom: 2rem;" class="seq-sub">timeline(), true scroll progress, dynamic stagger, clip-path presets</p>
 
     <div class="card" id="tall" style="min-height: 160vh;">
       <h2>True scroll progress</h2>
@@ -208,7 +208,7 @@
   <p class="scroll-hint">↓ Scroll to see animations</p>
 
   <script type="module">
-    import { createScrollAnimate, sequence, staggerChildren, parallax } from '../../dist/index.js';
+    import { createScrollAnimate, timeline, staggerChildren, parallax } from '../../dist/index.js';
     document.querySelectorAll('[data-parallax]').forEach((el) => parallax(el, { speed: Number(el.dataset.parallax) }));
 
     const sa = createScrollAnimate(); // Create a new instance to use onProgress
@@ -234,11 +234,10 @@
       onProgress: (el, p) => (document.getElementById('tallBar').style.width = `${p * 100}%`),
     });
 
-    // v1.4.0: timeline, auto-played when the section enters
-    sequence([
-      { target: '.seq-title', animation: 'clip-up', duration: 700 },
-      { target: '.seq-sub', animation: 'blur-in-up', gap: -300 },
-    ], { trigger: '#v14' });
+    // timeline (4.0), auto-played when the section enters
+    const tl = timeline({ defaults: { duration: 700 } }).to('.seq-title', 'clip-up').to('.seq-sub', 'blur', { at: '-=300' });
+    tl.seek(0);
+    new IntersectionObserver(([e], io) => e.isIntersecting && (io.disconnect(), tl.play())).observe(document.getElementById('v14'));
 
     // v1.4.0: stagger children added later
     const feed = document.getElementById('feed');

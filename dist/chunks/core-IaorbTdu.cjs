@@ -1,4 +1,6 @@
-import { b as clamp } from './base-BRIPyPtX.js';
+'use strict';
+
+var base = require('./base-CXx7jZ-o.cjs');
 
 /** The swipe a pointer release represents, or `null` (pure). */
 function swipeDirection(dx, dy, vx, vy, o = {}) {
@@ -15,10 +17,10 @@ function swipeDirection(dx, dy, vx, vy, o = {}) {
     return { direction, velocity: Math.abs(v), dx, dy };
 }
 /** Scale between two pointer distances, clamped to [min, max] (pure). */
-function pinchScale(startDistance, distance, base = 1, min = 0.5, max = 4) {
+function pinchScale(startDistance, distance, base$1 = 1, min = 0.5, max = 4) {
     if (!startDistance)
-        return base;
-    return clamp(base * (distance / startDistance), min, max);
+        return base$1;
+    return base.clamp(base$1 * (distance / startDistance), min, max);
 }
 const pid = (e) => (typeof e.pointerId === 'number' ? e.pointerId : 1);
 /**
@@ -177,5 +179,7 @@ function gesture(el, h, o = {}) {
     };
 }
 
-export { gesture as g, pinchScale as p, swipeDirection as s };
-//# sourceMappingURL=core-CYozf_E-.js.map
+exports.gesture = gesture;
+exports.pinchScale = pinchScale;
+exports.swipeDirection = swipeDirection;
+//# sourceMappingURL=core-IaorbTdu.cjs.map

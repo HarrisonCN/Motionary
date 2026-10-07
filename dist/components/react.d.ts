@@ -7,7 +7,7 @@ interface ReactLike {
     useEffect: (fn: () => void | (() => void), deps?: unknown[]) => void;
     useLayoutEffect?: (fn: () => void | (() => void), deps?: unknown[]) => void;
 }
-/** `usa-flip-list` → `UsaFlipList` */
+/** `usa-auto-animate` → `UsaAutoAnimate` */
 declare const pascal: (tag: string) => string;
 /** `onUsaChange` → `usa:change`, `onUsaDragEnd` → `usa:drag-end`; `onChange` → `change`. */
 declare function eventName(prop: string): string | null;

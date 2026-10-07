@@ -105,8 +105,8 @@ describe('reduced motion', () => {
     sa.destroy();
   });
 
-  it('staggerChildren and sequence leave content visible and finish immediately', async () => {
-    const { staggerChildren, sequence } = await load({ reducedMotion: true });
+  it('staggerChildren and timeline leave content visible and finish immediately', async () => {
+    const { staggerChildren, timeline } = await load({ reducedMotion: true });
     const list = el('<ul><li></li><li></li></ul>');
     staggerChildren(list, { stagger: 50 });
     expect(Array.from(list.children).every((c) => (c as HTMLElement).style.opacity === '')).toBe(true);
@@ -115,9 +115,10 @@ describe('reduced motion', () => {
 
     const title = el('<h1 class="t"></h1>');
     const done = vi.fn();
-    await sequence([{ target: title, onComplete: done }]).play();
-    expect(done).toHaveBeenCalledWith(title);
-    expect(animations).toHaveLength(0);
+    const tl = timeline({ onComplete: done }).to(title, 'fade-up');
+    await tl.play();
+    expect(done).toHaveBeenCalled();
+    expect(tl.progress()).toBe(1);
   });
 
   it('honours a preference that changes after the instance was created', async () => {

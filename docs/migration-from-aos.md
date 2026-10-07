@@ -27,7 +27,7 @@ No stylesheet is needed: animations run through the Web Animations API (or opt i
 | `data-aos-once="true"` | `data-sa-once` (default) |
 | `data-aos-mirror="true"` (animate out when scrolling past) | `data-sa-exit` |
 | `data-aos-anchor-placement="top-center"` | `data-sa-threshold="0.5"` or `data-sa-root-margin="0px 0px -50% 0px"` |
-| `data-aos-anchor=".other"` | `sequence([...], { trigger: '.other' })` |
+| `data-aos-anchor=".other"` | `timeline()` played when `.other` enters (or `<usa-timeline>` around it) |
 
 ## 3. Animation names
 

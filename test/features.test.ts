@@ -216,62 +216,16 @@ describe('staggerChildren / observeChildren', () => {
   });
 });
 
-describe('sequence', () => {
-  it('chains steps with durations, gaps (overlap), stagger and absolute times', async () => {
-    const { sequence } = await load();
+describe('timeline (root export, replaces sequence() in 4.0)', () => {
+  it('is exported from the root entry and chains / overlaps steps', async () => {
+    const mod: any = await load();
+    expect(mod.sequence).toBeUndefined();
     el('<h1 class="t"></h1>');
     el('<p class="s"></p>');
-    el('<i class="c"></i>');
-    el('<i class="c"></i>');
-    el('<b class="z"></b>');
-    const tl = sequence([
-      { target: '.t', duration: 500 },
-      { target: '.s', duration: 400, gap: -200 },
-      { target: '.c', duration: 300, stagger: 100, gap: 50 },
-      { target: '.z', at: 0, duration: 100 },
-    ]);
-    expect(tl.duration()).toBe(1150);
-    const done = tl.play();
-    expect(animations.map((a) => a.timing.delay)).toEqual([0, 300, 750, 850, 0]);
-    let resolved = false;
-    done.then(() => (resolved = true));
-    animations.slice(0, 4).forEach((a) => a.finish());
-    await flush();
-    expect(resolved).toBe(false);
-    animations[4].finish();
-    await flush();
-    expect(resolved).toBe(true);
-  });
-
-  it('auto-plays once when the trigger enters, hiding targets until then', async () => {
-    const { sequence } = await load();
-    const hero = el('<section></section>');
-    const t = el('<h1 class="t"></h1>');
-    sequence([{ target: '.t', animation: 'scale-up' }], { trigger: hero });
-    expect(t.style.opacity).toBe('0');
-    expect(animations).toHaveLength(0);
-    fireAll([hero], true);
-    expect(animations).toHaveLength(1);
-    fireAll([hero], true);
-    expect(animations).toHaveLength(1);
-  });
-
-  it('cancel() reveals elements and resolves the pending play()', async () => {
-    const { sequence } = await load();
-    const t = el('<h1 class="t"></h1>');
-    const tl = sequence([{ target: t }]);
-    const p = tl.play();
-    tl.cancel();
-    await expect(p).resolves.toBeUndefined();
-    expect(animations[0].cancelled).toBe(true);
-    expect(t.style.opacity).toBe('');
-  });
-
-  it('reduced motion: completes immediately without animating', async () => {
-    const { sequence } = await load({ reducedMotion: true });
-    el('<h1 class="t"></h1>');
-    await sequence([{ target: '.t' }, { target: '.t' }]).play();
-    expect(animations).toHaveLength(0);
+    const tl = mod.timeline({ defaults: { duration: 500 } }).to('.t', 'fade-up').to('.s', 'blur', { at: '-=200', duration: 400 });
+    expect(tl.duration).toBe(700);
+    expect(mod.resolvePosition('-=200', 500, 0)).toBe(300);
+    expect(Object.keys(mod.TIMELINE_PRESETS)).toContain('fade-up');
   });
 });
 

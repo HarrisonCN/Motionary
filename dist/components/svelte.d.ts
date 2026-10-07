@@ -623,19 +623,6 @@ interface UsaAccordionElement extends UsaElement {
 }
 
 /**
- * `<usa-flip-list>` — animates its children to their new places whenever
- * they are added, removed or reordered (FLIP: transforms only). Works with
- * any rendering: plain DOM, React keyed lists, Vue `v-for`, Svelte `{#each}`.
- *
- * Attributes: `duration` (ms, 420), `easing`, `disabled`.
- * Method: `flip(mutate)` for explicit changes (also measures resizes).
- * Reduced motion: no animation.
- */
-interface UsaFlipListElement extends UsaElement {
-    flip(mutate: () => void | Promise<void>): Promise<void>;
-}
-
-/**
  * `<usa-view-switch>` — shows one of its children at a time (tabs, wizard
  * steps, app pages) and animates between them. Children are views; name
  * them with `data-view`, or address them by index.
@@ -654,15 +641,15 @@ interface UsaViewSwitchElement extends UsaElement {
 
 /**
  * use-scroll-animate/components/transitions — view & layout transitions.
- * `<usa-dialog>`, `<usa-accordion>`, `<usa-flip-list>`, `<usa-view-switch>`
- * and the `viewTransition()`, `flip()`, `connectedAnimation()` helpers.
+ * `<usa-dialog>`, `<usa-accordion>`, `<usa-view-switch>`
+ * and the `viewTransition()` and `flip()` helpers (4.0: `<usa-flip-list>` → `<usa-auto-animate>`,
+ * `connectedAnimation()` → `sharedTransition()`, both in `components/layout`).
  */
 
 declare global {
     interface HTMLElementTagNameMap {
         'usa-dialog': UsaDialogElement;
         'usa-accordion': UsaAccordionElement;
-        'usa-flip-list': UsaFlipListElement;
         'usa-view-switch': UsaViewSwitchElement;
     }
 }
@@ -1621,7 +1608,7 @@ declare const COMPONENT_CATEGORIES: {
     readonly interaction: readonly ["usa-ripple", "usa-magnetic", "usa-tilt", "usa-spotlight", "usa-press", "usa-toggle"];
     readonly feedback: readonly ["usa-spinner", "usa-skeleton", "usa-progress", "usa-toaster", "usa-check"];
     readonly background: readonly ["usa-aurora", "usa-particles", "usa-grain", "usa-marquee", "usa-acrylic", "usa-grid-glow", "usa-blobs", "usa-water-ripple", "usa-dot-network"];
-    readonly transitions: readonly ["usa-dialog", "usa-accordion", "usa-flip-list", "usa-view-switch"];
+    readonly transitions: readonly ["usa-dialog", "usa-accordion", "usa-view-switch"];
     readonly physics: readonly ["usa-spring", "usa-draggable", "usa-overscroll"];
     readonly cards: readonly ["usa-card", "usa-card-stack", "usa-sticky-stack", "usa-carousel-3d"];
     readonly click: readonly ["usa-click", "usa-button", "usa-icon-morph", "usa-like", "usa-hold", "usa-double-tap", "usa-checkbox"];

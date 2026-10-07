@@ -19,7 +19,7 @@
 `use-scroll-animate` は違います：
 - ⚡ **依存関係なし**：純粋な Vanilla JS/TypeScript。
 - 🚀 **高パフォーマンス**：`IntersectionObserver` とネイティブの `Web Animations API` で駆動。デフォルトではスクロールイベントリスナーなし（オプトインのスクロール進捗モードは、対象要素が画面内にある間だけ passive・rAF スロットルのリスナーを1つ使用）、レイアウトスラッシングなし。
-- 🪶 **超軽量**：Gzip後コア約4.8KB（`sequence`・`staggerChildren`・React/Vue ヘルパーを含む全体で約6.1KB）。
+- 🪶 **超軽量**：Gzip後コア約4.8KB（`timeline`・`staggerChildren`・React/Vue ヘルパーを含む全体で約6.1KB）。
 - 🧩 **フレームワークに依存しない**：Vanilla JS、React、Vue、Svelteなどとシームレスに動作。一流の React Hooks と Vue Composables を内蔵。
 - ♿ **アクセシブル**：`prefers-reduced-motion` を標準でサポート。
 
@@ -39,7 +39,7 @@ defineComponents(); // カテゴリ単位: import { defineTextComponents } from 
 | **インタラクション**（`/components/interaction`） | `<usa-ripple>` · `<usa-magnetic>` · `<usa-tilt>` · `<usa-spotlight>`（Fluent Reveal）· `<usa-press>` · `<usa-toggle>` |
 | **ローディング・フィードバック**（`/components/feedback`） | `<usa-spinner>` · `<usa-skeleton>` · `<usa-progress>` · `<usa-toaster>` + `toast()` · `<usa-check>` |
 | **背景・装飾**（`/components/background`） | `<usa-aurora>` · `<usa-particles>` · `<usa-grain>` · `<usa-marquee>` · `<usa-acrylic>`（Acrylic / Mica） · `<usa-grid-glow>` · `<usa-blobs>` · `<usa-water-ripple>` · `<usa-dot-network>` · `fluentPreset()` |
-| **トランジション**（`/components/transitions`） | `<usa-dialog>` · `<usa-accordion>` · `<usa-flip-list>` · `<usa-view-switch>` · `viewTransition()` · `flip()` · `connectedAnimation()` |
+| **トランジション**（`/components/transitions`） | `<usa-dialog>` · `<usa-accordion>` · `<usa-view-switch>` · `viewTransition()` · `flip()` |
 | **スプリング・物理**（`/components/physics`） | `<usa-spring>`（bounce-in · pop · drop · jelly · rubber-band）· `<usa-draggable>` · `<usa-overscroll>` · `spring()` · `createSpring()` |
 | **カード効果**（`/components/cards`） | `<usa-card>`（flip · holo · glass · border-glow · conic-border · lift · spotlight · sheen · parallax-layers · expand）· `<usa-card-stack>` · `<usa-sticky-stack>` · `<usa-carousel-3d>` |
 | **クリック・タップ**（`/components/click`） | `<usa-button>`（squash · wobble · gooey · dent · shape morph · submit）· `<usa-icon-morph>` · `<usa-click>` · `<usa-like>` · `<usa-hold>` · `<usa-double-tap>` · `<usa-checkbox>` |
@@ -93,7 +93,7 @@ const sa = createScrollAnimate({ defaultEngine: 'auto' });
 
 - `'auto'`：**2.0 からのデフォルト**。対応ブラウザではネイティブ、非対応なら JS。要素が `duration`・`delay`・`offset`・`stagger` を自分で指定した場合も JS。`'css'`：対応時は常にネイティブ。`'js'`：1.x の動作（`defaultEngine: 'js'` で全体に適用）。
 - ネイティブエンジンでは `duration`・`delay`・`threshold`・`offset`・`stagger` は無効で、範囲は `viewRange`（デフォルト `['entry 0%', 'entry 100%']`）。`easing` は有効。HTML：`data-sa-engine`、`data-sa-view-range`。
-- `once`（デフォルト）は完了時に最終状態を固定、`repeat: true` ではスクロールに双方向で追従。クラス名モード・reduced motion・`animate()`・`sequence()`・`staggerChildren()` は常に JS エンジン。`supportsScrollTimeline()` もエクスポート。
+- `once`（デフォルト）は完了時に最終状態を固定、`repeat: true` ではスクロールに双方向で追従。クラス名モード・reduced motion・`animate()`・`timeline()`・`staggerChildren()` は常に JS エンジン。`supportsScrollTimeline()` もエクスポート。
 
 ## v1.4.0 の新機能 ✨
 
@@ -113,16 +113,15 @@ const sa = createScrollAnimate({ defaultEngine: 'auto' });
   const stop = staggerChildren(document.querySelector('#feed'), { stagger: 60, observeChildren: true });
   ```
 
-- **タイムライン `sequence()`**：複数要素のアニメーションを連結。各ステップは前のステップの終了後に開始し、`gap` で間隔（負の値で重ね合わせ）、`at` で絶対開始時刻を指定できます。`trigger` を指定するとその要素が表示されたときに一度だけ自動再生します。
+- **タイムライン `timeline()`**：1 つの再生ヘッドで複数要素のアニメーションを連結。既定では前のステップの終了後に開始し、`at` で重ね（`'-=300'`）、待機（`'+=200'`）、前と同時（`'<'`）、ラベル・絶対時刻を指定。再生・逆再生・シーク・スクロール連動（scrub）に対応。（4.0 で削除された `sequence()` の後継。[upgrading-4.md](./docs/upgrading-4.md) 参照。）
 
   ```js
-  import { sequence } from 'use-scroll-animate';
-  const tl = sequence([
-    { target: '.hero h1', animation: 'fade-in-up', duration: 700 },
-    { target: '.hero p', animation: 'blur-in', gap: -300 },
-    { target: '.hero .btn', animation: 'scale-up', stagger: 80 },
-  ], { trigger: '.hero' });
-  await tl.play(); // すべて完了すると resolve。tl.cancel() で停止し要素は表示されたまま
+  import { timeline } from 'use-scroll-animate';
+  const tl = timeline({ defaults: { duration: 700 } })
+    .to('.hero h1', 'fade-up')
+    .to('.hero p', 'blur', { at: '-=300' })
+    .to('.hero .btn', 'scale', { stagger: 80 });
+  await tl.play(); // 完了で resolve。tl.scrub(hero) でスクロール連動
   ```
 
 - **新しいプリセット**：`scale-up`、`blur-in-up`、`flip-up`、`flip-down`、`rotate-left`、`rotate-right`、clip-path による `clip-up`、`clip-down`、`clip-left`、`clip-right`、`clip-circle`。

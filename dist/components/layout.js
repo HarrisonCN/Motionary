@@ -1,5 +1,5 @@
-import { p as prefersReducedMotion, h as EASE_OUT, m as motionScale, i as defineElement } from '../chunks/base-BRIPyPtX.js';
-export { a as configureComponents } from '../chunks/base-BRIPyPtX.js';
+import { p as prefersReducedMotion, i as EASE_OUT, m as motionScale, h as defineElement } from '../chunks/base-ZARFccur.js';
+export { a as configureComponents } from '../chunks/base-ZARFccur.js';
 
 /** FLIP keyframes from a previous box to the current one (pure). */
 function flipFrames(from, to, scale = true) {

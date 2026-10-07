@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-Dm6ee5ug.cjs');
+var base = require('../chunks/base-CXx7jZ-o.cjs');
 
 const anim = (el, frames, o) => {
     if (typeof el.animate !== 'function')
