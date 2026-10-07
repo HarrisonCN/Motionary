@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.8.0] - 2026-10-07
+
+### Added
+- **Svelte** — `use-scroll-animate/components/svelte`: `use:usa={{ props, on }}` action (sets DOM properties, binds `usa:*` events with update / destroy; works in Svelte 3, 4 and 5) and `defineUsa(categories?)` (client-only, SvelteKit-safe).
+- **Solid** — `use-scroll-animate/components/solid`: `use:usa` directive (`refresh()` / `destroy()`), `defineUsa()`, `SolidUsaIntrinsicElements` JSX types; native `prop:` / `on:usa:change` documented.
+- **Angular** — `use-scroll-animate/components/angular`: `usaInitializer(categories?)` for `APP_INITIALIZER`, `defineUsa()`, `usaDetail($event)`; `CUSTOM_ELEMENTS_SCHEMA` + `[prop]` / `(usa:event)` binding documented. No `@angular/*` import.
+- Shared framework-neutral `bindUsa(el, { props, on })` / `usaEventName()` (exported from all three entries).
+- **Docs**: new [docs/hybrid-apps.md](./docs/hybrid-apps.md) — .NET MAUI (`HybridWebView`, `BlazorWebView`), Flutter (`webview_flutter` / `flutter_inappwebview`, `JavaScriptChannel`), Electron (context isolation, preload bridge), Tauri v2 (strict CSP, `invoke`), with native ↔ web event bridges and OS reduced-motion mirroring; `docs/frameworks-ssr.md` gains Svelte, Solid and Angular sections.
+
 ## [3.7.0] - 2026-10-07
 
 ### Added

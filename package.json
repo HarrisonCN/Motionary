@@ -1,6 +1,6 @@
 {
   "name": "use-scroll-animate",
-  "version": "3.7.0",
+  "version": "3.8.0",
   "description": "A lightweight, high-performance, dependency-free scroll animation library and animated UI components (Web Components) for the web and Windows web-view apps.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -266,6 +266,36 @@
       "require": {
         "types": "./dist/components/vue.d.cts",
         "default": "./dist/components/vue.cjs"
+      }
+    },
+    "./components/svelte": {
+      "import": {
+        "types": "./dist/components/svelte.d.ts",
+        "default": "./dist/components/svelte.js"
+      },
+      "require": {
+        "types": "./dist/components/svelte.d.cts",
+        "default": "./dist/components/svelte.cjs"
+      }
+    },
+    "./components/solid": {
+      "import": {
+        "types": "./dist/components/solid.d.ts",
+        "default": "./dist/components/solid.js"
+      },
+      "require": {
+        "types": "./dist/components/solid.d.cts",
+        "default": "./dist/components/solid.cjs"
+      }
+    },
+    "./components/angular": {
+      "import": {
+        "types": "./dist/components/angular.d.ts",
+        "default": "./dist/components/angular.js"
+      },
+      "require": {
+        "types": "./dist/components/angular.d.cts",
+        "default": "./dist/components/angular.cjs"
       }
     },
     "./components/jsx": {

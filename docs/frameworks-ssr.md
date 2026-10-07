@@ -62,3 +62,39 @@ Custom elements work as-is: Svelte (`on:usa:change`), Solid (`on:usa:change`, `p
 
 ## Lazy registration
 `lazyDefine()` (from `use-scroll-animate/components/lazy`) watches the DOM and dynamically imports only the categories whose tags appear — a page with just `<usa-button>` loads the click chunk only.
+
+## Svelte / SvelteKit (v3.8)
+
+```svelte
+<script>
+  import { onMount } from 'svelte';
+  import { usa, defineUsa } from 'use-scroll-animate/components/svelte';
+  onMount(() => defineUsa());
+  let on = false;
+</script>
+<usa-toggle use:usa={{ props: { checked: on }, on: { change: (e) => (on = e.detail.checked) } }}></usa-toggle>
+```
+
+## Solid / SolidStart (v3.8)
+
+```tsx
+import { onMount } from 'solid-js';
+import { defineUsa } from 'use-scroll-animate/components/solid';
+onMount(() => defineUsa());
+<usa-toggle prop:checked={on()} on:usa:change={(e) => setOn(e.detail.checked)} />;
+```
+
+## Angular (v3.8)
+
+```ts
+import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
+import { usaInitializer, usaDetail } from 'use-scroll-animate/components/angular';
+// app.config.ts
+providers: [{ provide: APP_INITIALIZER, multi: true, useFactory: usaInitializer() }];
+// component
+@Component({ standalone: true, schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  template: `<usa-toggle [checked]="on" (usa:change)="on = detail($event).checked"></usa-toggle>` })
+export class Settings { on = false; detail = usaDetail; }
+```
+
+MAUI, Flutter WebView, Electron and Tauri: see [hybrid-apps.md](./hybrid-apps.md).
