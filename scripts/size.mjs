@@ -16,6 +16,7 @@ async function treeShaken(source) {
   const bundle = await rollup({
     input: 'entry',
     onwarn: () => undefined,
+    external: ['solid-js'],
     plugins: [
       {
         name: 'virtual',

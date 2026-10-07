@@ -101,6 +101,34 @@ const sa = createScrollAnimate({ defaultEngine: 'auto' }); // 实例级默认
 - **新预设**：新增 `shimmer`（流光）、`pulse`（脉冲）、`swing`（摇摆）。
 - **多语言支持**：新增中文和日文文档。
 
+## 框架集成（v1.7）
+
+每个集成都是独立的入口（`use-scroll-animate/react`、`/vue`、`/svelte`、`/solid`、`/element`），共享同一份核心代码。
+
+```svelte
+<!-- Svelte：action，无需引入 svelte -->
+<script>import { scrollAnimate, scrollStagger } from 'use-scroll-animate/svelte';</script>
+<div use:scrollAnimate={{ animation: 'fade-in-up' }}>…</div>
+<ul use:scrollStagger={{ stagger: 60 }}>…</ul>
+```
+
+```tsx
+// Solid：指令 + ref 原语（solid-js 为可选 peer 依赖）
+import { scrollAnimate, useScrollAnimate } from 'use-scroll-animate/solid';
+<div use:scrollAnimate={{ animation: 'zoom-in' }}>…</div>
+<div ref={useScrollAnimate({ animation: 'fade-in-left' })}>…</div>
+```
+
+```html
+<!-- Web Component：属性与 data-sa-* 相同（去掉前缀），并派发 sa:enter / sa:leave / sa:start / sa:complete / sa:progress 事件 -->
+<script type="module">
+  import { defineScrollAnimate } from 'use-scroll-animate/element';
+  defineScrollAnimate();
+</script>
+<scroll-animate animation="fade-in-up" duration="800">…</scroll-animate>
+<!-- 无构建：<script src="https://unpkg.com/use-scroll-animate/dist/element.umd.js"></script> -->
+```
+
 ## 核心配置
 
 | 选项 | 类型 | 默认值 | 描述 |

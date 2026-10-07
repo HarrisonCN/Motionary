@@ -111,18 +111,24 @@ function normalizeVar(name: string): string {
   return v.startsWith('--') ? v : `--${v}`;
 }
 
-function parseDataAttributes(el: Element, config: Required<ScrollAnimateConfig>): Required<AnimateOptions> {
-  const dataset = (el as HTMLElement).dataset || {};
+/**
+ * @internal Read options from string attributes. `get(name)` returns the raw
+ * value of the attribute `name` (kebab-case, e.g. `root-margin`), `''` for a
+ * bare attribute and `undefined` when absent. Shared by `data-sa-*` and the
+ * `<scroll-animate>` element.
+ */
+export function readOptions(get: (name: string) => string | undefined): AnimateOptions {
   const opts: AnimateOptions = {};
 
-  if (dataset.saAnimation) {
-    const anim = dataset.saAnimation;
+  const anim = get('animation');
+  if (anim) {
     opts.animation = (anim.includes(',') ? anim.split(',').map((s) => s.trim()) : anim.trim()) as any;
   }
-  opts.duration = num(dataset.saDuration);
-  opts.delay = num(dataset.saDelay);
-  if (dataset.saEasing) {
-    const e = dataset.saEasing.trim();
+  opts.duration = num(get('duration'));
+  opts.delay = num(get('delay'));
+  const easing = get('easing');
+  if (easing) {
+    const e = easing.trim();
     if (e.startsWith('[')) {
       try {
         opts.easing = JSON.parse(e);
@@ -133,39 +139,57 @@ function parseDataAttributes(el: Element, config: Required<ScrollAnimateConfig>)
       opts.easing = e;
     }
   }
-  if (dataset.saThreshold) {
-    const t = dataset.saThreshold;
-    opts.threshold = t.includes(',')
-      ? t.split(',').map(parseFloat).filter(Number.isFinite)
-      : num(t);
+  const t = get('threshold');
+  if (t) {
+    opts.threshold = t.includes(',') ? t.split(',').map(parseFloat).filter(Number.isFinite) : num(t);
   }
-  if (dataset.saRootMargin) opts.rootMargin = dataset.saRootMargin;
-  if (dataset.saRepeat !== undefined) opts.repeat = dataset.saRepeat !== 'false';
-  if (dataset.saOnce !== undefined) opts.once = dataset.saOnce !== 'false';
-  opts.offset = num(dataset.saOffset);
-  opts.stagger = num(dataset.saStagger);
-  if (dataset.saProgressVar !== undefined) opts.progressVar = normalizeVar(dataset.saProgressVar);
-  if (dataset.saEngine) {
-    const e = dataset.saEngine.trim();
-    if (e === 'auto' || e === 'js' || e === 'css') opts.engine = e;
-  }
-  if (dataset.saViewRange) {
-    const [start, end] = dataset.saViewRange.split(',').map((s) => s.trim());
+  const rootMargin = get('root-margin');
+  if (rootMargin) opts.rootMargin = rootMargin;
+  const repeat = get('repeat');
+  if (repeat !== undefined) opts.repeat = repeat !== 'false';
+  const once = get('once');
+  if (once !== undefined) opts.once = once !== 'false';
+  opts.offset = num(get('offset'));
+  opts.stagger = num(get('stagger'));
+  const progressVar = get('progress-var');
+  if (progressVar !== undefined) opts.progressVar = normalizeVar(progressVar);
+  const engine = get('engine')?.trim();
+  if (engine === 'auto' || engine === 'js' || engine === 'css') opts.engine = engine;
+  const range = get('view-range');
+  if (range) {
+    const [start, end] = range.split(',').map((s) => s.trim());
     if (start && end) opts.viewRange = [start, end];
   }
-  if (dataset.saProgress) opts.progressMode = dataset.saProgress.trim() === 'scroll' ? 'scroll' : 'ratio';
+  const progress = get('progress');
+  if (progress) opts.progressMode = progress.trim() === 'scroll' ? 'scroll' : 'ratio';
 
-  if (dataset.saParallaxX || dataset.saParallaxY || dataset.saParallaxRotate || dataset.saParallaxScale) {
+  const px = get('parallax-x');
+  const py = get('parallax-y');
+  const pr = get('parallax-rotate');
+  const ps = get('parallax-scale');
+  if (px || py || pr || ps) {
     opts.parallax = {
-      x: lengthValue(dataset.saParallaxX),
-      y: lengthValue(dataset.saParallaxY),
-      rotate: num(dataset.saParallaxRotate),
-      scale: num(dataset.saParallaxScale),
-      speed: num(dataset.saParallaxSpeed) ?? 1,
+      x: lengthValue(px),
+      y: lengthValue(py),
+      rotate: num(pr),
+      scale: num(ps),
+      speed: num(get('parallax-speed')) ?? 1,
     };
   }
 
-  return mergeOptions(opts, config);
+  // Drop keys that were not set, so they don't override defaults when spread.
+  (Object.keys(opts) as Array<keyof AnimateOptions>).forEach((k) => opts[k] === undefined && delete opts[k]);
+  return opts;
+}
+
+function parseDataAttributes(el: Element, config: Required<ScrollAnimateConfig>): Required<AnimateOptions> {
+  return mergeOptions(
+    readOptions((name) => {
+      const v = el.getAttribute(`data-sa-${name}`);
+      return v === null ? undefined : v;
+    }),
+    config
+  );
 }
 
 function mergeOptions(opts: AnimateOptions, config: Required<ScrollAnimateConfig>): Required<AnimateOptions> {

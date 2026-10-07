@@ -19,6 +19,56 @@
         "default": "./dist/index.js"
       }
     },
+    "./react": {
+      "import": {
+        "types": "./dist/react.d.mts",
+        "default": "./dist/react.mjs"
+      },
+      "require": {
+        "types": "./dist/react.d.ts",
+        "default": "./dist/react.js"
+      }
+    },
+    "./vue": {
+      "import": {
+        "types": "./dist/vue.d.mts",
+        "default": "./dist/vue.mjs"
+      },
+      "require": {
+        "types": "./dist/vue.d.ts",
+        "default": "./dist/vue.js"
+      }
+    },
+    "./svelte": {
+      "import": {
+        "types": "./dist/svelte.d.mts",
+        "default": "./dist/svelte.mjs"
+      },
+      "require": {
+        "types": "./dist/svelte.d.ts",
+        "default": "./dist/svelte.js"
+      }
+    },
+    "./solid": {
+      "import": {
+        "types": "./dist/solid.d.mts",
+        "default": "./dist/solid.mjs"
+      },
+      "require": {
+        "types": "./dist/solid.d.ts",
+        "default": "./dist/solid.js"
+      }
+    },
+    "./element": {
+      "import": {
+        "types": "./dist/element.d.mts",
+        "default": "./dist/element.mjs"
+      },
+      "require": {
+        "types": "./dist/element.d.ts",
+        "default": "./dist/element.js"
+      }
+    },
     "./dist/*": "./dist/*",
     "./package.json": "./package.json"
   },
@@ -53,7 +103,12 @@
     "ui",
     "scroll-progress",
     "stagger",
-    "timeline"
+    "timeline",
+    "svelte",
+    "solid",
+    "web-component",
+    "custom-element",
+    "scroll-timeline"
   ],
   "author": "HarrisonCN",
   "license": "MIT",
@@ -75,8 +130,21 @@
     "publint": "^0.3.25",
     "rollup": "^4.60.0",
     "rollup-plugin-dts": "^6.5.1",
+    "solid-js": "^1.9.16",
     "tslib": "^2.8.1",
     "typescript": "^6.0.2",
     "vitest": "^3.2.7"
+  },
+  "peerDependencies": {
+    "solid-js": ">=1.6.0",
+    "svelte": ">=3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "solid-js": {
+      "optional": true
+    },
+    "svelte": {
+      "optional": true
+    }
   }
 }
