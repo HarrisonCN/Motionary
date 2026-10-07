@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { installComponentMocks, mount, tick } from './components-setup';
 import { defineComponents, COMPONENT_CATEGORIES } from '../src/components';
 import { configureComponents } from '../src/components/base';
@@ -97,5 +97,26 @@ describe('framework helpers', () => {
     expect(cats.every((c) => c === 'ui') || cats.length === 0).toBe(true);
     await loadCategory('ui');
     expect(customElements.get('usa-fab')).toBeTruthy();
+  });
+});
+
+describe('2.9 deprecations', () => {
+  it('kind picks the kind; variant still works with a one-time warning', async () => {
+    installComponentMocks();
+    defineComponents(['feedback', 'transitions']);
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+    const s = mount<any>('<usa-spinner kind="dots"></usa-spinner>');
+    expect(s.kind).toBe('dots');
+    expect(s.getAttribute('data-variant')).toBe('dots');
+    expect(warn).not.toHaveBeenCalled();
+    const old = mount<any>('<usa-spinner variant="bars"></usa-spinner>');
+    expect(old.kind).toBe('bars');
+    mount('<usa-spinner variant="ring"></usa-spinner>');
+    expect(warn).toHaveBeenCalledTimes(1);
+    // a style variant on a spinner is not a kind and does not warn
+    expect(mount<any>('<usa-spinner variant="neon"></usa-spinner>').kind).toBe('fluent');
+    expect(warn).toHaveBeenCalledTimes(1);
+    expect(mount<any>('<usa-check kind="warning"></usa-check>').getAttribute('data-variant')).toBe('warning');
+    warn.mockRestore();
   });
 });

@@ -386,7 +386,7 @@ function mergeOptions(opts, config) {
         once: opts.once ?? (repeat ? false : config.defaultOnce),
         offset: opts.offset ?? config.defaultOffset,
         stagger: opts.stagger ?? 0,
-        parallax: opts.parallax ?? {},
+        parallax: warnLegacyParallax(opts.parallax) ?? {},
         onStart: opts.onStart ?? noop,
         onComplete: opts.onComplete ?? noop,
         onEnter: opts.onEnter ?? noop,
@@ -709,6 +709,15 @@ function startNative(el, opts, onFrozen) {
         opts.onComplete(el);
     };
     return anim;
+}
+let parallaxWarned = false;
+/** 2.9: the transform-based `parallax` option is deprecated (removed in 3.0). */
+function warnLegacyParallax(p) {
+    if (p && !parallaxWarned && typeof console !== 'undefined' && Object.keys(p).length) {
+        parallaxWarned = true;
+        console.warn('[use-scroll-animate] The `parallax` option / data-sa-parallax-* attributes are deprecated and removed in 3.0. Use parallax(el, { speed }) or progressVar instead.');
+    }
+    return p;
 }
 function applyParallax(el, progress, parallax) {
     const { x = 0, y = 0, rotate = 0, scale = 1, speed = 1 } = parallax;
@@ -1154,4 +1163,4 @@ exports.resolveTargets = resolveTargets;
 exports.stopAnimation = stopAnimation;
 exports.supportsObserver = supportsObserver;
 exports.supportsScrollTimeline = supportsScrollTimeline;
-//# sourceMappingURL=core-B_J4rXbC.cjs.map
+//# sourceMappingURL=core-C1cEwjJj.cjs.map

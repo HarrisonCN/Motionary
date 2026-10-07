@@ -39,7 +39,7 @@ defineComponents(); // or per category: import { defineTextComponents } from 'us
 <!-- or with no build step -->
 <script src="https://unpkg.com/use-scroll-animate@2/dist/components.umd.js"></script>
 <usa-typewriter words="Hello, Windows.|Hello, web."></usa-typewriter>
-<usa-spinner variant="fluent"></usa-spinner>
+<usa-spinner kind="fluent"></usa-spinner>
 ```
 
 | Category (import) | Components |

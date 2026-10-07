@@ -86,7 +86,7 @@
 .demo-spinners { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px 28px; color: var(--accent); }
 .demo-spinners figure { display: grid; justify-items: center; gap: 8px; margin: 0; }
 .demo-spinners figcaption { font: 600 0.72rem var(--mono); color: var(--muted); }
-.demo-spinners usa-spinner[variant="windows"] { color: var(--accent-2); }
+.demo-spinners usa-spinner[kind="windows"] { color: var(--accent-2); }
 .demo-profile { display: flex; gap: 14px; align-items: center; }
 .demo-profile p { margin: 2px 0 0; color: var(--muted); font-size: 0.85rem; }
 .demo-avatar { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; color: #fff; font-weight: 800; background: linear-gradient(135deg, var(--accent), var(--accent-2)); }

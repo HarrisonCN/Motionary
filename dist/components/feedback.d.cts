@@ -49,7 +49,7 @@ type SpinnerVariant = (typeof SPINNER_VARIANTS)[number];
  * `<usa-spinner>` — indeterminate loading indicators, pure CSS animations
  * of `transform` / `opacity` (plus an SVG stroke for `fluent`).
  *
- * Variants (`variant`): `fluent` (default — the WinUI / Windows 11
+ * Kinds (`kind`; `variant` is a deprecated alias until 3.0): `fluent` (default — the WinUI / Windows 11
  * ProgressRing arc), `windows` (the Windows 10 boot "orbiting dots"),
  * `ring` (classic border spinner), `dots` (three bouncing dots / typing
  * indicator), `pulse` (expanding ripple), `bars` (equalizer).
@@ -59,6 +59,9 @@ type SpinnerVariant = (typeof SPINNER_VARIANTS)[number];
  * a slow opacity pulse instead of movement.
  */
 interface UsaSpinnerElement extends UsaElement {
+    /** Spinner kind (`kind` attribute). */
+    kind: SpinnerVariant;
+    /** @deprecated alias of `kind`, removed in 3.0. */
     variant: SpinnerVariant;
 }
 declare function defineSpinner(tag?: string): CustomElementConstructor | undefined;

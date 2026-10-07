@@ -425,7 +425,7 @@ type SpinnerVariant = (typeof SPINNER_VARIANTS)[number];
  * `<usa-spinner>` — indeterminate loading indicators, pure CSS animations
  * of `transform` / `opacity` (plus an SVG stroke for `fluent`).
  *
- * Variants (`variant`): `fluent` (default — the WinUI / Windows 11
+ * Kinds (`kind`; `variant` is a deprecated alias until 3.0): `fluent` (default — the WinUI / Windows 11
  * ProgressRing arc), `windows` (the Windows 10 boot "orbiting dots"),
  * `ring` (classic border spinner), `dots` (three bouncing dots / typing
  * indicator), `pulse` (expanding ripple), `bars` (equalizer).
@@ -435,6 +435,9 @@ type SpinnerVariant = (typeof SPINNER_VARIANTS)[number];
  * a slow opacity pulse instead of movement.
  */
 interface UsaSpinnerElement extends UsaElement {
+    /** Spinner kind (`kind` attribute). */
+    kind: SpinnerVariant;
+    /** @deprecated alias of `kind`, removed in 3.0. */
     variant: SpinnerVariant;
 }
 declare function defineSpinner(tag?: string): CustomElementConstructor | undefined;
@@ -616,7 +619,7 @@ declare function defineMarquee(tag?: string): CustomElementConstructor | undefin
  * tints from `--usa-mica-source`, a gradient you control). Optional
  * `shimmer` adds a light sweep when it appears or on hover.
  *
- * Attributes: `variant` (`acrylic` default | `mica`), `tint` (colour),
+ * Attributes: `kind` (`acrylic` default | `mica`; `variant` is a deprecated alias until 3.0), `tint` (colour),
  * `tint-opacity` (0–1, 0.55), `blur` (px, 30), `shimmer`
  * (`hover` | `load` | `none`, default `none`). Falls back to a solid tint
  * without `backdrop-filter` and under `prefers-reduced-transparency` or

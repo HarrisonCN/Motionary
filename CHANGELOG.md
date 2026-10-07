@@ -23,6 +23,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - `COMPONENT_CATEGORIES` lives in a dependency-free module (re-exported unchanged) so the lazy loader and framework helpers do not pull in every component.
 
+### Deprecated (removed in 3.0)
+- `variant` as the **kind** selector of `<usa-spinner>`, `<usa-check>`, `<usa-dialog>` and `<usa-acrylic>` → use the new `kind` attribute / `.kind` property (`<usa-spinner kind="windows">`). `variant` is reserved for style variants. Old usage keeps working in 2.x with a one-time console warning.
+- The transform-writing `parallax` option of `observe()` / `data-sa-parallax-*` attributes → use `parallax(el, { speed })` (CSS-variable based, composes with entrance transforms) or `progressVar`. One-time console warning.
+- See [docs/upgrading-3.md](./docs/upgrading-3.md).
+
 ### Deferred
 - Pixel-based visual regression tests need real browsers (Playwright) in CI; deferred to a later release (the jsdom suite covers behaviour, ARIA and reduced motion).
 

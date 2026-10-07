@@ -30,7 +30,7 @@ window.api?.onSaved?.(() => toast('Saved', { type: 'success' }));
 
 ```html
 <!-- renderer/index.html -->
-<usa-acrylic variant="mica" style="min-height:100vh">
+<usa-acrylic kind="mica" style="min-height:100vh">
   <usa-view-switch active="home">
     <section data-view="home"><usa-typewriter words="Welcome back"></usa-typewriter></section>
     <section data-view="settings"><usa-toggle checked>Start with Windows</usa-toggle></section>
@@ -85,7 +85,7 @@ MyWebView.Source = new Uri("https://app.local/index.html");
 <meta name="color-scheme" content="light dark">
 <script src="components.umd.js"></script>
 <usa-progress id="p" value="0" label="Installing"></usa-progress>
-<usa-spinner variant="fluent"></usa-spinner>
+<usa-spinner kind="fluent"></usa-spinner>
 <script>
   // messages from C#: CoreWebView2.PostWebMessageAsJson("{\"progress\":42}")
   chrome.webview.addEventListener('message', (e) => (p.value = e.data.progress));

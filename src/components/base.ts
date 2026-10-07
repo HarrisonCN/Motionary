@@ -305,4 +305,30 @@ export const EASE_SPRING = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
 /** Windows Fluent "decelerate" / "point-to-point" curves. */
 export const FLUENT_DECELERATE = 'cubic-bezier(0.1, 0.9, 0.2, 1)';
 
+const warned = new Set<string>();
+/** Log a deprecation once per key (console.warn). */
+export function deprecate(key: string, message: string): void {
+  if (warned.has(key)) return;
+  warned.add(key);
+  if (typeof console !== 'undefined') console.warn(`[use-scroll-animate] ${message}`);
+}
+
+/**
+ * The `kind` attribute of elements whose `variant` used to pick their kind
+ * (`<usa-spinner>`, `<usa-check>`, `<usa-dialog>`). `variant` still works in
+ * 2.x for those values (with a deprecation warning) and is removed in 3.0,
+ * where `variant` only selects a style variant.
+ */
+export function kindOf(el: Element, valid: readonly string[] | Record<string, unknown>, fallback: string): string {
+  const ok = (v: string | null): v is string => !!v && (Array.isArray(valid) ? valid.includes(v) : v in (valid as object));
+  const k = el.getAttribute('kind');
+  if (ok(k)) return k;
+  const v = el.getAttribute('variant');
+  if (ok(v)) {
+    deprecate(`kind:${el.localName}`, `<${el.localName} variant="${v}"> is deprecated, use kind="${v}" (variant is reserved for style variants and stops selecting the kind in 3.0).`);
+    return v;
+  }
+  return fallback;
+}
+
 export const clamp = (v: number, min: number, max: number): number => Math.min(max, Math.max(min, v));

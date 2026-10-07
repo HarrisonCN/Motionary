@@ -38,7 +38,7 @@ defineComponents(); // 或按分类：import { defineTextComponents } from 'use-
 <!-- 或免构建直接使用 -->
 <script src="https://unpkg.com/use-scroll-animate@2/dist/components.umd.js"></script>
 <usa-typewriter words="你好，Windows。|你好，Web。"></usa-typewriter>
-<usa-spinner variant="fluent"></usa-spinner>
+<usa-spinner kind="fluent"></usa-spinner>
 ```
 
 | 分类（导入路径） | 组件 |

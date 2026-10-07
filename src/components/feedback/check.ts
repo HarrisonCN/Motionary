@@ -1,4 +1,4 @@
-import { defineElement, EASE_OUT, EASE_SPRING, type UsaElement } from '../base';
+import { kindOf, defineElement, EASE_OUT, EASE_SPRING, type UsaElement } from '../base';
 import css from './check.css?raw';
 
 /**
@@ -27,13 +27,13 @@ export function defineCheck(tag = 'usa-check'): CustomElementConstructor | undef
     (Base) =>
       class UsaCheck extends Base {
         static get observedAttributes(): string[] {
-          return ['variant', 'size', 'label'];
+          return ['kind', 'variant', 'size', 'label'];
         }
 
         private _anims: Animation[] = [];
 
         mount(): void {
-          const variant = PATHS[this.str('variant', 'success')] ? this.str('variant', 'success') : 'success';
+          const variant = kindOf(this, PATHS, 'success');
           this.innerHTML = `<svg viewBox="0 0 52 52" aria-hidden="true"><circle class="usa-check-circle" cx="26" cy="26" r="23" pathLength="1"/><path class="usa-check-mark" d="${PATHS[variant]}" pathLength="1"/></svg>`;
           this.setAttribute('data-variant', variant);
           const size = this.getAttribute('size');

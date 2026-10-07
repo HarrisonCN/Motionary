@@ -384,7 +384,7 @@ function mergeOptions(opts, config) {
         once: opts.once ?? (repeat ? false : config.defaultOnce),
         offset: opts.offset ?? config.defaultOffset,
         stagger: opts.stagger ?? 0,
-        parallax: opts.parallax ?? {},
+        parallax: warnLegacyParallax(opts.parallax) ?? {},
         onStart: opts.onStart ?? noop,
         onComplete: opts.onComplete ?? noop,
         onEnter: opts.onEnter ?? noop,
@@ -707,6 +707,15 @@ function startNative(el, opts, onFrozen) {
         opts.onComplete(el);
     };
     return anim;
+}
+let parallaxWarned = false;
+/** 2.9: the transform-based `parallax` option is deprecated (removed in 3.0). */
+function warnLegacyParallax(p) {
+    if (p && !parallaxWarned && typeof console !== 'undefined' && Object.keys(p).length) {
+        parallaxWarned = true;
+        console.warn('[use-scroll-animate] The `parallax` option / data-sa-parallax-* attributes are deprecated and removed in 3.0. Use parallax(el, { speed }) or progressVar instead.');
+    }
+    return p;
 }
 function applyParallax(el, progress, parallax) {
     const { x = 0, y = 0, rotate = 0, scale = 1, speed = 1 } = parallax;
@@ -1139,4 +1148,4 @@ function createScrollAnimate(userConfig = {}) {
 }
 
 export { EASING_MAP as E, PRESETS as P, stopAnimation as a, resolveTargets as b, createScrollAnimate as c, prefersReducedMotion as d, resolveEasing as e, resolvePreset as f, getScrollProgress as g, hasDOM as h, supportsScrollTimeline as i, prepareElement as p, readOptions as r, supportsObserver as s };
-//# sourceMappingURL=core-D4jSNuvs.js.map
+//# sourceMappingURL=core-J_KM443q.js.map

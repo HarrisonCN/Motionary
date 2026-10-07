@@ -208,7 +208,7 @@ function wire(item, stage) {
         const b = e.target.closest('[data-dialog]');
         if (!b) return;
         const dlg = $('#demo-dialog');
-        dlg.setAttribute('variant', b.dataset.dialog);
+        dlg.setAttribute('kind', b.dataset.dialog);
         dlg.show();
       });
       break;

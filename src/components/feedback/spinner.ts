@@ -1,4 +1,4 @@
-import { defineElement, type UsaElement } from '../base';
+import { kindOf, defineElement, type UsaElement } from '../base';
 import css from './spinner.css?raw';
 
 export const SPINNER_VARIANTS = ['fluent', 'windows', 'ring', 'dots', 'pulse', 'bars'] as const;
@@ -8,7 +8,7 @@ export type SpinnerVariant = (typeof SPINNER_VARIANTS)[number];
  * `<usa-spinner>` — indeterminate loading indicators, pure CSS animations
  * of `transform` / `opacity` (plus an SVG stroke for `fluent`).
  *
- * Variants (`variant`): `fluent` (default — the WinUI / Windows 11
+ * Kinds (`kind`; `variant` is a deprecated alias until 3.0): `fluent` (default — the WinUI / Windows 11
  * ProgressRing arc), `windows` (the Windows 10 boot "orbiting dots"),
  * `ring` (classic border spinner), `dots` (three bouncing dots / typing
  * indicator), `pulse` (expanding ripple), `bars` (equalizer).
@@ -18,6 +18,9 @@ export type SpinnerVariant = (typeof SPINNER_VARIANTS)[number];
  * a slow opacity pulse instead of movement.
  */
 export interface UsaSpinnerElement extends UsaElement {
+  /** Spinner kind (`kind` attribute). */
+  kind: SpinnerVariant;
+  /** @deprecated alias of `kind`, removed in 3.0. */
   variant: SpinnerVariant;
 }
 
@@ -44,19 +47,26 @@ export function defineSpinner(tag = 'usa-spinner'): CustomElementConstructor | u
     (Base) =>
       class UsaSpinner extends Base {
         static get observedAttributes(): string[] {
-          return ['variant', 'size', 'label'];
+          return ['kind', 'variant', 'size', 'label'];
         }
 
+        /** The spinner kind (`kind` attribute; `variant` is a deprecated alias until 3.0). */
+        get kind(): SpinnerVariant {
+          return kindOf(this, SPINNER_VARIANTS, 'fluent') as SpinnerVariant;
+        }
+        set kind(v: SpinnerVariant) {
+          this.setAttribute('kind', v);
+        }
+        /** @deprecated use `kind` (removed in 3.0). */
         get variant(): SpinnerVariant {
-          const v = this.str('variant', 'fluent') as SpinnerVariant;
-          return (SPINNER_VARIANTS as readonly string[]).includes(v) ? v : 'fluent';
+          return this.kind;
         }
         set variant(v: SpinnerVariant) {
-          this.setAttribute('variant', v);
+          this.kind = v;
         }
 
         mount(): void {
-          const variant = this.variant;
+          const variant = this.kind;
           if (this.getAttribute('data-variant') !== variant) {
             this.innerHTML = markup(variant);
             this.setAttribute('data-variant', variant);
