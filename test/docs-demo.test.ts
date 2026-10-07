@@ -44,10 +44,23 @@ describe('demo/index.html', () => {
 });
 
 describe('docs', () => {
-  it.each(['docs/API.md', 'docs/migration-from-aos.md', 'docs/migration-from-gsap-scrolltrigger.md', 'docs/deprecations.md'])('%s exists and its relative links resolve', (file) => {
+  it.each(['docs/API.md', 'docs/migration-from-aos.md', 'docs/migration-from-gsap-scrolltrigger.md', 'docs/deprecations.md', 'docs/components.md', 'docs/windows-apps.md'])('%s exists and its relative links resolve', (file) => {
     const text = readFileSync(resolve(root, file), 'utf8');
     const links = Array.from(text.matchAll(/\]\((\.{1,2}\/[^)#]+)/g)).map((m) => m[1]);
     links.forEach((link) => expect(existsSync(resolve(root, 'docs', link)), `${file} -> ${link}`).toBe(true));
+  });
+
+  it('component docs list every <usa-*> element and every define function', async () => {
+    const mod: any = await import('../src/components');
+    const doc = readFileSync(resolve(root, 'docs/components.md'), 'utf8');
+    const readme = readFileSync(resolve(root, 'README.md'), 'utf8');
+    const zh = readFileSync(resolve(root, 'README_zh.md'), 'utf8');
+    Object.values(mod.COMPONENT_CATEGORIES).flat().forEach((tag: any) => {
+      expect(doc, tag).toContain(`<${tag}>`);
+      expect(readme, tag).toContain(`<${tag}>`);
+      expect(zh, tag).toContain(`<${tag}>`);
+    });
+    ['viewTransition', 'flip', 'connectedAnimation', 'toast', 'configureComponents', 'defineComponents'].forEach((n) => expect(doc, n).toContain(n));
   });
 
   it('API reference documents every runtime export of the main entry', async () => {

@@ -126,6 +126,16 @@ export function getBase(): BaseCtor {
     connectedCallback(): void {
       if (this._connected) return;
       this._connected = true;
+      // Upgraded while the parser is still inside us (a <script> in <head>
+      // defined the element): children/text are not there yet, so wait.
+      if (typeof document !== 'undefined' && document.readyState === 'loading' && !this.nextSibling && !this.childNodes.length) {
+        const go = () => {
+          if (this._connected && this.isConnected) this.mount();
+        };
+        document.addEventListener('DOMContentLoaded', go, { once: true });
+        this._cleanups.push(() => document.removeEventListener('DOMContentLoaded', go));
+        return;
+      }
       this.mount();
     }
 

@@ -11,12 +11,21 @@ and copy the generated code (Vanilla / React / Vue / Svelte / Solid /
 - `catalog.js` (cards), `codegen.js` (snippets) and `i18n.js` (English / 中文)
   are plain data/pure functions covered by `test/showcase.test.ts`.
 
+## Component gallery (`components.html`)
+
+`components.html` + `gallery.js` showcase the 30 `<usa-*>` animated components
+(`use-scroll-animate/components`) by category, with live demos, search and
+code tabs (HTML / ES module / React / Vue / Electron·Tauri·WebView2). It imports
+`../dist/components.js` (CDN fallback). `components-catalog.js` and
+`gallery-i18n.js` are pure data covered by `test/components-showcase.test.ts`.
+
 ## Run locally
 
 ```bash
 npm run build          # only if dist/ is missing or stale
 npx serve .            # or: python3 -m http.server
 # open http://localhost:3000/showcase/   (deep link: /showcase/#flip-up)
+# components: http://localhost:3000/showcase/components.html#cat-text
 ```
 
 It must be served from the repository root so `../dist/` resolves.

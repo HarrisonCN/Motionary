@@ -25,6 +25,8 @@
 | `use-scroll-animate/element` | `defineScrollAnimate(tagName?, instance?)` for `<scroll-animate>` |
 | `dist/index.umd.js` | Global `ScrollAnimate` (`ScrollAnimate.default` is the instance, other exports as properties) |
 | `dist/element.umd.js` | Registers `<scroll-animate>` on load; global `ScrollAnimateElement` |
+| `use-scroll-animate/components` (+ `/components/reveal`, `/text`, `/interaction`, `/feedback`, `/background`, `/transitions`) | 30 animated `<usa-*>` Web Components, `defineComponents()`, `configureComponents()`, `toast()`, `viewTransition()`, `flip()`, `connectedAnimation()` — see **[components.md](./components.md)** |
+| `dist/components.umd.js`, `use-scroll-animate/components.css` | Registers every `<usa-*>` on load (global `UsaComponents`); the component styles as a file |
 
 Every entry is ESM-first (`import` → `.js` + `.d.ts`) with a CommonJS build (`require` → `.cjs` + `.d.cts`), SSR-safe (no DOM access at import), and has zero runtime dependencies.
 

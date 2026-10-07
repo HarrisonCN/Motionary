@@ -165,7 +165,7 @@
     "typecheck": "tsc --noEmit -p .",
     "test": "vitest run",
     "check:exports": "node scripts/check-exports.mjs",
-    "lint:package": "publint && attw --pack . --profile node16",
+    "lint:package": "publint && attw --pack . --profile node16 --exclude-entrypoints ./components.css ./components/reveal.css ./components/text.css ./components/interaction.css ./components/feedback.css ./components/background.css ./components/transitions.css",
     "size": "node scripts/size.mjs",
     "prepublishOnly": "npm run typecheck && npm test && npm run build && npm run check:exports",
     "size:check": "node scripts/size.mjs --check",

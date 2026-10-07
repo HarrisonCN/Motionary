@@ -23,6 +23,24 @@
 - 🧩 **フレームワークに依存しない**：Vanilla JS、React、Vue、Svelteなどとシームレスに動作。一流の React Hooks と Vue Composables を内蔵。
 - ♿ **アクセシブル**：`prefers-reduced-motion` を標準でサポート。
 
+## アニメーションコンポーネント（v2.2）🧩
+
+依存ゼロの**アニメーション Web Components 30 種**（`<usa-*>`）を 6 カテゴリで提供。**Web ページと Windows デスクトップアプリ**（Electron、Tauri、WinUI/WPF/WinForms の WebView2、PWA）の両方で動作します。Custom Elements + CSS + Web Animations のみ、ツリーシェイク可能、SSR セーフ、`prefers-reduced-motion` 対応。**[ライブギャラリー](https://harrisoncn.github.io/use-scroll-animate/showcase/components.html)** · [コンポーネント文書](./docs/components.md)（英語）· [Windows アプリガイド](./docs/windows-apps.md)（英語）
+
+```js
+import { defineComponents } from 'use-scroll-animate/components';
+defineComponents(); // カテゴリ単位: import { defineTextComponents } from 'use-scroll-animate/components/text'
+```
+
+| カテゴリ（インポート） | コンポーネント |
+|---|---|
+| **入場・スクロール**（`/components/reveal`） | `<usa-reveal>` · `<usa-stagger>` · `<usa-scroll-progress>` · `<usa-scrolly>` |
+| **テキスト**（`/components/text`） | `<usa-typewriter>` · `<usa-split-text>` · `<usa-scramble>` · `<usa-counter>` · `<usa-shimmer-text>` · `<usa-text-rotate>` |
+| **インタラクション**（`/components/interaction`） | `<usa-ripple>` · `<usa-magnetic>` · `<usa-tilt>` · `<usa-spotlight>`（Fluent Reveal）· `<usa-press>` · `<usa-toggle>` |
+| **ローディング・フィードバック**（`/components/feedback`） | `<usa-spinner>` · `<usa-skeleton>` · `<usa-progress>` · `<usa-toaster>` + `toast()` · `<usa-check>` |
+| **背景・装飾**（`/components/background`） | `<usa-aurora>` · `<usa-particles>` · `<usa-grain>` · `<usa-marquee>` · `<usa-acrylic>`（Acrylic / Mica） |
+| **トランジション**（`/components/transitions`） | `<usa-dialog>` · `<usa-accordion>` · `<usa-flip-list>` · `<usa-view-switch>` · `viewTransition()` · `flip()` · `connectedAnimation()` |
+
 ## ドキュメント
 
 - [API リファレンス](./docs/API.md)（英語）· [デモ](./demo/index.html)（全プリセットをクリックで再生、ビルド不要）
