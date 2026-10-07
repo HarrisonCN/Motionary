@@ -14,9 +14,9 @@ import { STRINGS } from '../showcase/i18n.js';
 const root = resolve(__dirname, '..');
 
 describe('component gallery catalog', () => {
-  it('has exactly one card per <usa-*> element, in the right category', () => {
+  it('has a card for every <usa-*> element (variant cards allowed), in the right category', () => {
     const srcTags = Object.entries(SRC_CATEGORIES).flatMap(([cat, tags]) => (tags as readonly string[]).map((t) => `${cat}:${t}`)).sort();
-    const cardTags = COMPONENTS.map((c: any) => `${c.category}:${c.tag}`).sort();
+    const cardTags = [...new Set(COMPONENTS.map((c: any) => `${c.category}:${c.tag}`))].sort();
     expect(cardTags).toEqual(srcTags);
   });
 
@@ -33,7 +33,7 @@ describe('component gallery catalog', () => {
     const ids = GALLERY.map((i: any) => i.id);
     expect(new Set(ids).size).toBe(ids.length);
     GALLERY.forEach((i: any) => {
-      expect(i.id).toMatch(/^[a-z][a-z-]*$/);
+      expect(i.id).toMatch(/^[a-z][a-z0-9-]*$/);
       expect(i.title.en && i.title.zh && i.desc.en && i.desc.zh, i.id).toBeTruthy();
       expect(i.demo, i.id).toMatch(/\S/);
     });
@@ -41,7 +41,7 @@ describe('component gallery catalog', () => {
   });
 
   it('every element demo actually uses its element', () => {
-    COMPONENTS.filter((c: any) => !['usa-scrolly', 'usa-toaster', 'usa-dialog'].includes(c.tag)).forEach((c: any) => expect(c.demo, c.tag).toContain(`<${c.tag}`));
+    COMPONENTS.filter((c: any) => !['usa-scrolly', 'usa-toaster', 'usa-dialog', 'usa-sticky-stack'].includes(c.tag)).forEach((c: any) => expect(c.demo, c.tag).toContain(`<${c.tag}`));
   });
 
   it('search matches tags, English, Chinese and category names', () => {

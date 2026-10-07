@@ -1,0 +1,3 @@
+/* <usa-sticky-stack> */
+usa-sticky-stack { display: grid; gap: 28vh; padding-bottom: 10vh; }
+usa-sticky-stack > * { position: sticky; transform-origin: 50% 0; will-change: transform; }

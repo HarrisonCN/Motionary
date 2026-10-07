@@ -50,6 +50,7 @@ defineComponents(); // 或按分类：import { defineTextComponents } from 'use-
 | **背景与装饰**（`/components/background`） | `<usa-aurora>` 极光 · `<usa-particles>` 粒子 · `<usa-grain>` 胶片颗粒 · `<usa-marquee>` 无限跑马灯 · `<usa-acrylic>` 亚克力 / 云母材质 |
 | **过渡动画**（`/components/transitions`） | `<usa-dialog>` 弹窗 / 抽屉 / 底部面板 · `<usa-accordion>` 手风琴 · `<usa-flip-list>` FLIP 列表 · `<usa-view-switch>` 视图切换 · `viewTransition()` · `flip()` · `connectedAnimation()` |
 | **弹簧与物理**（`/components/physics`） | `<usa-spring>` 弹入 / 弹出 / 掉落 / 果冻 / 橡皮筋 · `<usa-draggable>` 拖拽回弹、惯性、吸附 · `<usa-overscroll>` 弹性越界 · `spring()` · `createSpring()` · 预设 gentle / wobbly / stiff / bouncy |
+| **卡片效果**（`/components/cards`） | `<usa-card>` 翻转 · 全息 · 玻璃 · 边框光晕 · 流光边框 · 悬浮 · 聚光 · 扫光 · 视差分层 · 展开详情（可组合）· `<usa-card-stack>` 滑动卡堆 · `<usa-sticky-stack>` 滚动堆叠 · `<usa-carousel-3d>` 3D 轮播 |
 
 完整包约 22 kB gzip（JS + CSS）；单个分类 3.5–6.4 kB；单个组件约 2 kB。下方的滚动动画核心不受影响。
 

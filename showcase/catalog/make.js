@@ -1,6 +1,6 @@
 /** Helpers shared by the component gallery catalog files (pure data, no DOM). */
 
-export const defineName = (tag) => 'define' + tag.replace(/^usa-/, '').replace(/(^|-)([a-z])/g, (_, __, c) => c.toUpperCase());
+export const defineName = (tag) => 'define' + tag.replace(/^usa-/, '').replace(/(^|-)([a-z0-9])/g, (_, __, c) => c.toUpperCase());
 
 /** An element card: C(tag, category, titleEn, titleZh, descEn, descZh, tags, usage, demo?, extra?) */
 export const C = (tag, category, en, zh, descEn, descZh, tags, usage, demo, extra = {}) => ({

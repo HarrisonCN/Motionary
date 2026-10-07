@@ -11,7 +11,10 @@ export { defineAcrylic, defineAurora, defineGrain, defineMarquee, defineParticle
 import { defineTransitionComponents } from './components/transitions.js';
 export { connectedAnimation, defineAccordion, defineDialog, defineFlipList, defineViewSwitch, flip, viewTransition } from './components/transitions.js';
 import { definePhysicsComponents } from './components/physics.js';
-export { SPRING_EFFECTS, SPRING_PRESETS, createSpring, defineDraggable, defineOverscroll, defineSpring, linearEasing, projectInertia, resolveSpring, rubberBand, snapTo, spring, springEasing, springEffectKeyframes, springSamples, stepSpring, supportsLinearEasing } from './components/physics.js';
+export { SPRING_EFFECTS, defineDraggable, defineOverscroll, defineSpring, springEffectKeyframes } from './components/physics.js';
+import { defineCardComponents } from './components/cards.js';
+export { CARD_EFFECTS, defineCard, defineCardStack, defineCarousel3d, defineStickyStack } from './components/cards.js';
+export { S as SPRING_PRESETS, c as createSpring, l as linearEasing, p as projectInertia, r as resolveSpring, a as rubberBand, s as snapTo, b as spring, d as springEasing, e as springSamples, f as stepSpring, g as supportsLinearEasing } from './chunks/spring-BKUU7-Xm.js';
 export { c as configureComponents, p as prefersReducedMotion } from './chunks/base-CuvCgqLy.js';
 
 /**
@@ -43,6 +46,7 @@ const COMPONENT_CATEGORIES = {
     background: ['usa-aurora', 'usa-particles', 'usa-grain', 'usa-marquee', 'usa-acrylic'],
     transitions: ['usa-dialog', 'usa-accordion', 'usa-flip-list', 'usa-view-switch'],
     physics: ['usa-spring', 'usa-draggable', 'usa-overscroll'],
+    cards: ['usa-card', 'usa-card-stack', 'usa-sticky-stack', 'usa-carousel-3d'],
 };
 const BY_CATEGORY = {
     reveal: defineRevealComponents,
@@ -52,6 +56,7 @@ const BY_CATEGORY = {
     background: defineBackgroundComponents,
     transitions: defineTransitionComponents,
     physics: definePhysicsComponents,
+    cards: defineCardComponents,
 };
 /**
  * Register every `<usa-*>` component (or only the given categories).
@@ -61,5 +66,5 @@ function defineComponents(categories) {
     (categories || Object.keys(BY_CATEGORY)).forEach((c) => BY_CATEGORY[c]?.());
 }
 
-export { COMPONENT_CATEGORIES, defineBackgroundComponents, defineComponents, defineFeedbackComponents, defineInteractionComponents, definePhysicsComponents, defineRevealComponents, defineTextComponents, defineTransitionComponents };
+export { COMPONENT_CATEGORIES, defineBackgroundComponents, defineCardComponents, defineComponents, defineFeedbackComponents, defineInteractionComponents, definePhysicsComponents, defineRevealComponents, defineTextComponents, defineTransitionComponents };
 //# sourceMappingURL=components.js.map

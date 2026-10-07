@@ -48,7 +48,7 @@
   <main id="main">
     <usa-aurora class="g-hero" colors="#7c5cff,#22d3ee,#f472b6,#34d399" intensity="0.55">
       <div class="g-hero-copy">
-        <p class="kicker" data-i18n="hero.kicker">New in v2.3 · Spring physics</p>
+        <p class="kicker" data-i18n="hero.kicker">New in v2.4 · Card effects</p>
         <h1 id="hero-title" data-i18n="hero.title">Animated components for web pages and Windows apps.</h1>
         <p class="lead" data-i18n="hero.lead">Dozens of dependency-free &lt;usa-*&gt; custom elements by category. Plain HTML, React, Vue, Svelte — and Electron, Tauri, WebView2 or a PWA on Windows.</p>
         <div class="hero-actions">
@@ -93,6 +93,15 @@
           <section data-step="webview2"><h3 data-i18n="scrolly.s4.t">4 · WebView2</h3><p data-i18n="scrolly.s4.d">Embed in WinUI 3, WPF or WinForms — same components.</p></section>
         </div>
       </usa-scrolly>
+    </section>
+
+    <section class="g-sticky" id="sticky-demo" aria-labelledby="sticky-title">
+      <h2 id="sticky-title" data-i18n="sticky.title">&lt;usa-sticky-stack&gt; — cards that stack as you scroll</h2>
+      <usa-sticky-stack class="g-sticky-body" top="90" gap="18">
+        <article class="g-sticky-card"><h3>01 · Spring physics</h3><p data-i18n="sticky.c1">Stiffness, damping and mass, not canned curves.</p></article>
+        <article class="g-sticky-card"><h3>02 · Card effects</h3><p data-i18n="sticky.c2">Flip, holo, glass, glow, expand — combinable.</p></article>
+        <article class="g-sticky-card"><h3>03 · Windows apps</h3><p data-i18n="sticky.c3">Same elements in Electron, Tauri and WebView2.</p></article>
+      </usa-sticky-stack>
     </section>
 
     <section class="g-windows" id="windows" aria-labelledby="windows-title">

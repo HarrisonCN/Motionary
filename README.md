@@ -51,6 +51,7 @@ defineComponents(); // or per category: import { defineTextComponents } from 'us
 | **Background & decoration** (`/components/background`) | `<usa-aurora>` · `<usa-particles>` · `<usa-grain>` · `<usa-marquee>` · `<usa-acrylic>` (Acrylic / Mica) |
 | **Transitions** (`/components/transitions`) | `<usa-dialog>` (modal / drawer / sheet) · `<usa-accordion>` · `<usa-flip-list>` · `<usa-view-switch>` · `viewTransition()` · `flip()` · `connectedAnimation()` |
 | **Spring & physics** (`/components/physics`) | `<usa-spring>` (bounce-in · pop · drop · jelly · rubber-band) · `<usa-draggable>` (spring-back · inertia · snap) · `<usa-overscroll>` · `spring()` · `createSpring()` · `SPRING_PRESETS` |
+| **Card effects** (`/components/cards`) | `<usa-card>` (flip · holo · glass · border-glow · conic-border · lift · spotlight · sheen · parallax-layers · expand — combinable) · `<usa-card-stack>` (swipe) · `<usa-sticky-stack>` · `<usa-carousel-3d>` |
 
 Whole bundle ≈ 22 kB gzip (JS + CSS); one category 3.5–6.4 kB; a single component ≈ 2 kB. The scroll-animation core below is unaffected.
 

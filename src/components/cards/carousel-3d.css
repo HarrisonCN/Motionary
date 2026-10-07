@@ -1,0 +1,6 @@
+/* <usa-carousel-3d> */
+usa-carousel-3d { position: relative; display: grid; place-items: center; perspective: var(--usa-c3d-perspective, 1200px); transform-style: preserve-3d; touch-action: pan-y; user-select: none; -webkit-user-select: none; min-height: 220px; }
+usa-carousel-3d > * { grid-area: 1 / 1; backface-visibility: hidden; transition: opacity 0.3s ease; cursor: pointer; }
+usa-carousel-3d > [aria-current] { cursor: default; }
+usa-carousel-3d:focus-visible { outline: 2px solid var(--usa-accent, #7c5cff); outline-offset: 4px; border-radius: 12px; }
+@media (prefers-reduced-motion: reduce) { usa-carousel-3d { perspective: none; } usa-carousel-3d > :not([aria-current]) { visibility: hidden; } }

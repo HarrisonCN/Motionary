@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.4.0] - 2026-10-07
+
+### Added
+- **Card effects** — new category `use-scroll-animate/components/cards` (+ `components/cards.css`):
+  - `<usa-card effect="…">` with ten **combinable** effects (`effect="lift sheen"`): `flip` (hover or `trigger="click"`, `axis="y|x"`, `[data-front]` / `[data-back]`, `aria-pressed`), `holo` (holographic foil following the pointer), `glass` (frosted backdrop blur; solid under `prefers-reduced-transparency` / forced colours), `border-glow`, `conic-border` (rotating gradient border), `lift` (spring rise + slight tilt), `spotlight`, `sheen` (light sweep), `parallax-layers` (`[data-depth]` children) and `expand` (card → detail view with FLIP + spring; Esc / backdrop / `[data-close]` collapse). Pointer position is exposed as `--usa-card-x/-y` and `--usa-card-nx/-ny`.
+  - `<usa-card-stack>`: swipeable deck (pointer, touch, arrow keys) with a spring fan-out, `loop`, `usa:swipe` / `usa:empty`.
+  - `<usa-sticky-stack>`: cards stick while scrolling and covered cards shrink and dim.
+  - `<usa-carousel-3d>`: items on a 3D ring rotated by drag, keys, clicks or `autoplay`, spring-driven, `aria-current` on the front item.
+  - Reduced motion: no pointer tracking, tilt, parallax or sweeps; flips and expansions cross-fade; the carousel switches flat and instantly.
+- Showcase: **Card effects** category (effect picker, flip, expand, swipe deck, 3D carousel) and a live sticky-stack section. The gallery now allows several demo cards per element.
+
 ## [2.3.0] - 2026-10-07
 
 ### Added
