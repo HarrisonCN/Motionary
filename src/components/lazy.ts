@@ -30,6 +30,7 @@ const LOADERS: Record<ComponentCategory, () => Promise<Record<string, any>>> = {
   svg: () => import('./svg/index'),
   webgl: () => import('./webgl/index'),
   depth: () => import('./depth/index'),
+  layout: () => import('./layout/index'),
 };
 
 const TAG_TO_CAT = new Map<string, ComponentCategory>();

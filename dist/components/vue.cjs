@@ -21,7 +21,8 @@ require('../chunks/core-IaorbTdu.cjs');
 require('./svg.cjs');
 require('./webgl.cjs');
 require('./depth.cjs');
-require('../chunks/index-tags-CLFrjVR7.cjs');
+require('./layout.cjs');
+require('../chunks/index-tags-wbuPiMR6.cjs');
 
 /**
  * use-scroll-animate/components/vue — Vue integration (v2.9).

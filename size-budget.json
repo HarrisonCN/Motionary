@@ -253,5 +253,15 @@
     "name": "import { defineDepthComponents } from '…/components/depth'",
     "import": "export { defineDepthComponents } from 'pkg/components/depth';",
     "limit": 5888
+  },
+  {
+    "name": "import 'use-scroll-animate/components/layout'",
+    "import": "export * from 'pkg/components/layout';",
+    "limit": 3840
+  },
+  {
+    "name": "import { defineLayoutComponents } from '…/components/layout'",
+    "import": "export { defineLayoutComponents } from 'pkg/components/layout';",
+    "limit": 3328
   }
 ]

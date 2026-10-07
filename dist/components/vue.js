@@ -19,7 +19,8 @@ import '../chunks/core-uxs3ETou.js';
 import './svg.js';
 import './webgl.js';
 import './depth.js';
-import '../chunks/index-tags-uw1Fospg.js';
+import './layout.js';
+import '../chunks/index-tags-BANJ-e4H.js';
 
 /**
  * use-scroll-animate/components/vue — Vue integration (v2.9).

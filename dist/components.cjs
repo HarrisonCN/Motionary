@@ -16,9 +16,10 @@ var components_gesture = require('./components/gesture.cjs');
 var components_svg = require('./components/svg.cjs');
 var components_webgl = require('./components/webgl.cjs');
 var components_depth = require('./components/depth.cjs');
+var components_layout = require('./components/layout.cjs');
 var variants = require('./chunks/variants-BNIrn4ch.cjs');
 var base = require('./chunks/base-CXx7jZ-o.cjs');
-var indexTags = require('./chunks/index-tags-CLFrjVR7.cjs');
+var indexTags = require('./chunks/index-tags-wbuPiMR6.cjs');
 var spring = require('./chunks/spring-2OTnYCzm.cjs');
 var core = require('./chunks/core-IaorbTdu.cjs');
 
@@ -59,6 +60,7 @@ const BY_CATEGORY = {
     svg: components_svg.defineSvgComponents,
     webgl: components_webgl.defineWebglComponents,
     depth: components_depth.defineDepthComponents,
+    layout: components_layout.defineLayoutComponents,
 };
 /**
  * Register every `<usa-*>` component (or only the given categories).
@@ -222,6 +224,13 @@ exports.deviceTilt = components_depth.deviceTilt;
 exports.orientationToTilt = components_depth.orientationToTilt;
 exports.requestOrientationPermission = components_depth.requestOrientationPermission;
 exports.supportsOrientation = components_depth.supportsOrientation;
+exports.autoAnimate = components_layout.autoAnimate;
+exports.defineAutoAnimate = components_layout.defineAutoAnimate;
+exports.defineLayoutComponents = components_layout.defineLayoutComponents;
+exports.defineMasonry = components_layout.defineMasonry;
+exports.flipFrames = components_layout.flipFrames;
+exports.masonryLayout = components_layout.masonryLayout;
+exports.sharedTransition = components_layout.sharedTransition;
 exports.VARIANTS = variants.VARIANTS;
 exports.adoptVariants = variants.adoptVariants;
 exports.setVariant = variants.setVariant;

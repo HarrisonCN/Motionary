@@ -1556,6 +1556,40 @@ declare global {
     }
 }
 
+/**
+ * `<usa-auto-animate>` — wraps `autoAnimate()`: any change to its children
+ * (add, remove, re-order, filter, size) animates. Attributes `duration`
+ * (300), `no-scale`. Works for lists and CSS grids alike.
+ */
+interface UsaAutoAnimateElement extends UsaElement {
+    enable(): void;
+    disable(): void;
+}
+/**
+ * `<usa-masonry>` — a masonry (Pinterest-style) grid: children are placed in
+ * the shortest column and glide to new spots when the width, the items or
+ * their sizes change. Attributes `columns` (fixed count) or `min` (min
+ * column width px, 220), `gap` (16). Without JS layout support it is a
+ * plain CSS multi-column flow. Reduced motion: no glide.
+ */
+interface UsaMasonryElement extends UsaElement {
+    layout(): void;
+}
+
+/**
+ * use-scroll-animate/components/layout — layout animation (v3.6).
+ * `autoAnimate()` / `<usa-auto-animate>` (list & grid reflow),
+ * `<usa-masonry>`, and `sharedTransition()` for shared-element transitions
+ * (View Transitions API with a FLIP fallback).
+ */
+
+declare global {
+    interface HTMLElementTagNameMap {
+        'usa-auto-animate': UsaAutoAnimateElement;
+        'usa-masonry': UsaMasonryElement;
+    }
+}
+
 /** The component categories and their default tags. */
 declare const COMPONENT_CATEGORIES: {
     readonly reveal: readonly ["usa-reveal", "usa-stagger", "usa-scroll-progress", "usa-scrolly"];
@@ -1574,6 +1608,7 @@ declare const COMPONENT_CATEGORIES: {
     readonly svg: readonly ["usa-draw", "usa-morph", "usa-mask-reveal", "usa-anim-icon"];
     readonly webgl: readonly ["usa-shader", "usa-distort", "usa-liquid"];
     readonly depth: readonly ["usa-cube", "usa-depth"];
+    readonly layout: readonly ["usa-auto-animate", "usa-masonry"];
 };
 type ComponentCategory = keyof typeof COMPONENT_CATEGORIES;
 

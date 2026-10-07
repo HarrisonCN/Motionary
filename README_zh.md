@@ -59,6 +59,7 @@ defineComponents(); // 或按分类：import { defineTextComponents } from 'use-
 | **SVG 动画** (`/components/svg`) | `<usa-draw>`（线条描绘）· `<usa-morph>`（路径变形）· `<usa-mask-reveal>` · `<usa-anim-icon>` · `morphTo()` · `interpolatePath()` |
 | **Canvas 与 WebGL** (`/components/webgl`) | `<usa-shader>`（gradient · plasma · waves · aurora · 自定义 GLSL）· `<usa-distort>` · `<usa-liquid>` · `glQuad()` —— 优雅降级 |
 | **3D 与景深** (`/components/depth`) | `<usa-cube>` · `<usa-depth>`（指针 · 陀螺仪 · 滚动景深视差）· `deviceTilt()` ·（另见 cards 中的 `<usa-carousel-3d>`） |
+| **布局动画** (`/components/layout`) | `<usa-auto-animate>` / `autoAnimate()`（列表与网格重排）· `<usa-masonry>`（瀑布流）· `sharedTransition()`（共享元素） |
 
 完整包约 22 kB gzip（JS + CSS）；单个分类 3.5–6.4 kB；单个组件约 2 kB。下方的滚动动画核心不受影响。
 
