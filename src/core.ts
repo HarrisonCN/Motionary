@@ -75,6 +75,15 @@ function lengthValue(value: string | undefined): string | number | undefined {
   return /^-?(\d+\.?\d*|\.\d+)$/.test(v) ? parseFloat(v) : v;
 }
 
+const DEFAULT_PROGRESS_VAR = '--sa-progress';
+
+/** `''` (bare attribute) -> default name; `sa-progress` -> `--sa-progress`. */
+function normalizeVar(name: string): string {
+  const v = name.trim();
+  if (!v) return DEFAULT_PROGRESS_VAR;
+  return v.startsWith('--') ? v : `--${v}`;
+}
+
 function parseDataAttributes(el: Element, config: Required<ScrollAnimateConfig>): Required<AnimateOptions> {
   const dataset = (el as HTMLElement).dataset || {};
   const opts: AnimateOptions = {};
@@ -108,6 +117,7 @@ function parseDataAttributes(el: Element, config: Required<ScrollAnimateConfig>)
   if (dataset.saOnce !== undefined) opts.once = dataset.saOnce !== 'false';
   opts.offset = num(dataset.saOffset);
   opts.stagger = num(dataset.saStagger);
+  if (dataset.saProgressVar !== undefined) opts.progressVar = normalizeVar(dataset.saProgressVar);
   if (dataset.saProgress) opts.progressMode = dataset.saProgress.trim() === 'scroll' ? 'scroll' : 'ratio';
 
   if (dataset.saParallaxX || dataset.saParallaxY || dataset.saParallaxRotate || dataset.saParallaxScale) {
@@ -144,6 +154,7 @@ function mergeOptions(opts: AnimateOptions, config: Required<ScrollAnimateConfig
     onLeave: opts.onLeave ?? noop,
     onProgress: opts.onProgress ?? noop,
     progressMode: opts.progressMode ?? 'ratio',
+    progressVar: opts.progressVar ? normalizeVar(opts.progressVar) : '',
   };
 }
 
@@ -179,7 +190,7 @@ function hasParallax(p: ParallaxOptions | undefined): boolean {
 }
 
 function needsProgress(opts: Required<AnimateOptions>): boolean {
-  return hasParallax(opts.parallax) || opts.onProgress !== noop;
+  return hasParallax(opts.parallax) || opts.onProgress !== noop || !!opts.progressVar;
 }
 
 /**
@@ -498,6 +509,10 @@ export function createScrollAnimate(userConfig: ScrollAnimateConfig = {}): Scrol
   function emitProgress(el: Element, record: AnimatedElement, progress: number): void {
     const opts = record.options;
     opts.onProgress(el, progress);
+    if (opts.progressVar) {
+      const style = (el as HTMLElement).style;
+      if (style) style.setProperty(opts.progressVar, String(+progress.toFixed(4)));
+    }
     if (hasParallax(opts.parallax) && !motionDisabled(config)) applyParallax(el, progress, opts.parallax);
   }
 
