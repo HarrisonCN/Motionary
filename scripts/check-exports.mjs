@@ -24,6 +24,9 @@ const entries = {
   'use-scroll-animate/components/page': ['definePageComponents', 'defineCursor', 'defineFullpage', 'defineLoadingBar', 'defineBackToTop', 'defineAmbient', 'defineSplash', 'defineAutoSkeleton', 'defineMotionSwitch', 'pageTransition', 'enableMpaTransitions', 'themeTransition', 'smoothScroll', 'scrollToTarget', 'loadingBar', 'setMotionIntensity'],
   'use-scroll-animate/components/react': ['createUsaComponents', 'USA_TAGS', 'eventName'],
   'use-scroll-animate/components/vue': ['UsaPlugin', 'isUsaElement'],
+  'use-scroll-animate/components/svelte': ['usa', 'defineUsa', 'bindUsa'],
+  'use-scroll-animate/components/solid': ['usa', 'defineUsa', 'bindUsa'],
+  'use-scroll-animate/components/angular': ['usaInitializer', 'defineUsa', 'usaDetail', 'bindUsa'],
   'use-scroll-animate/components/lazy': ['lazyDefine', 'defineUsed', 'loadCategory', 'categoryOfTag'],
   'use-scroll-animate/components/transitions': ['defineTransitionComponents', 'defineDialog', 'defineAccordion', 'defineFlipList', 'defineViewSwitch', 'viewTransition', 'flip', 'connectedAnimation'],
 };

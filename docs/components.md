@@ -293,6 +293,16 @@ Also see `flip()` / `connectedAnimation()` / `<usa-flip-list>` in `components/tr
 
 [`showcase/playground.html`](../showcase/playground.html) — stack `<usa-*>` effects around sample content, tweak every attribute live, and export HTML / ES module / React / Vue code or a share link (state in the URL hash).
 
+### v3.8 Svelte, Solid & Angular
+
+| Entry | API |
+|---|---|
+| `components/svelte` | `use:usa={{ props, on }}`, `defineUsa()` |
+| `components/solid` | `use:usa` directive, `defineUsa()`, JSX types (`prop:` / `on:usa:*` natively) |
+| `components/angular` | `usaInitializer()` (`APP_INITIALIZER`), `defineUsa()`, `usaDetail()`; `CUSTOM_ELEMENTS_SCHEMA` |
+
+Hybrid / desktop hosts (MAUI, Flutter WebView, Electron, Tauri): [hybrid-apps.md](./hybrid-apps.md).
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

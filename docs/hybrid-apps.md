@@ -1,0 +1,130 @@
+# Hybrid & desktop apps: MAUI, Flutter WebView, Electron, Tauri
+
+`<usa-*>` components are plain Web Components (Custom Elements + CSS + Web Animations): anything that hosts a modern web view can run them, with **no bundler** if you want — copy `dist/components.umd.js` (and optionally `dist/components.css`) next to your HTML. For WinUI 3 / WPF / WinForms with WebView2 see [windows-apps.md](./windows-apps.md).
+
+General rules for every host:
+
+- **Load locally, not from a CDN**, so the app works offline and passes store review: ship `components.umd.js` as an asset and reference it with a relative URL.
+- **Strict CSP is fine**: styles are adopted as constructable stylesheets. If you load `components.css` yourself, call `configureComponents({ injectStyles: false })`.
+- **Reduced motion follows the OS** (`prefers-reduced-motion`) inside every web view listed here. To mirror an in-app setting, call `setMotionIntensity('off' | 'low' | 'normal' | 'high')` (or `configureComponents({ reducedMotion: 'reduce' })`) from the native side.
+- **Performance**: canvas / WebGL effects (`<usa-shader>`, `<usa-liquid>`, backgrounds) render only while visible and cap DPR at 2; they fall back to CSS where WebGL is unavailable (some Android web views).
+- **Native ↔ web**: listen to `usa:*` events in JS and forward them over the host bridge (examples below).
+
+## .NET MAUI
+
+MAUI 9+ has `HybridWebView` (raw HTML + JS bridge); `BlazorWebView` also works (Razor renders the tags; enable the elements in `wwwroot/index.html`).
+
+```text
+Resources/Raw/wwwroot/
+  index.html
+  components.umd.js     ← copied from node_modules/use-scroll-animate/dist/
+```
+
+```xml
+<!-- MainPage.xaml -->
+<HybridWebView x:Name="Web" DefaultFile="index.html" RawMessageReceived="OnMessage" />
+```
+
+```html
+<!-- Resources/Raw/wwwroot/index.html -->
+<script src="components.umd.js"></script>
+<script src="_framework/hybridwebview.js"></script>
+<usa-toggle id="t"></usa-toggle>
+<script>
+  document.getElementById('t').addEventListener('usa:change', (e) =>
+    window.HybridWebView.SendRawMessage(JSON.stringify({ checked: e.detail.checked })));
+</script>
+```
+
+```csharp
+void OnMessage(object s, HybridWebViewRawMessageReceivedEventArgs e) => Debug.WriteLine(e.Message);
+// native → web
+await Web.EvaluateJavaScriptAsync("UsaComponents.setMotionIntensity('low')");
+```
+
+Notes: Android uses the system WebView (Chromium) — keep it updated; iOS / Mac Catalyst use WKWebView (Safari engine), where `linear()` spring easings fall back to cubic-bezier automatically.
+
+## Flutter (webview_flutter / flutter_inappwebview)
+
+```yaml
+# pubspec.yaml
+dependencies:
+  webview_flutter: ^4.10.0
+flutter:
+  assets:
+    - assets/web/index.html
+    - assets/web/components.umd.js
+```
+
+```dart
+final controller = WebViewController()
+  ..setJavaScriptMode(JavaScriptMode.unrestricted)
+  ..addJavaScriptChannel('Usa', onMessageReceived: (m) => debugPrint(m.message))
+  ..loadFlutterAsset('assets/web/index.html');
+
+// native → web (e.g. follow the platform's "reduce motion" setting)
+final reduce = MediaQuery.of(context).disableAnimations;
+controller.runJavaScript("UsaComponents.setMotionIntensity('${reduce ? 'off' : 'normal'}')");
+```
+
+```html
+<!-- assets/web/index.html -->
+<script src="components.umd.js"></script>
+<usa-like id="like"></usa-like>
+<script>
+  document.getElementById('like').addEventListener('usa:change', (e) => Usa.postMessage(JSON.stringify(e.detail)));
+</script>
+```
+
+`loadFlutterAsset` serves from a `file://`-like origin; ES-module builds (`components.js`) need an HTTP origin, so prefer the UMD file here. On Flutter Web you can use the components directly in `web/index.html` via `HtmlElementView`.
+
+## Electron
+
+The renderer is Chromium — use the npm package with your bundler, or the UMD file without one.
+
+```js
+// renderer.js (bundled)
+import { defineComponents, configureComponents } from 'use-scroll-animate/components';
+configureComponents({ injectStyles: true });
+defineComponents();
+```
+
+```js
+// main.js — keep contextIsolation on; expose only what you need
+new BrowserWindow({ webPreferences: { preload: path.join(__dirname, 'preload.js'), contextIsolation: true, sandbox: true } });
+```
+
+```js
+// preload.js — forward component events to the main process
+const { contextBridge, ipcRenderer } = require('electron');
+contextBridge.exposeInMainWorld('usaBridge', { send: (type, detail) => ipcRenderer.send('usa', type, detail) });
+```
+
+Imports are SSR-safe (no `window` access at import time), so the same modules can be imported in preload scripts.
+
+## Tauri (v2)
+
+```js
+// src/main.js (Vite)
+import { defineComponents } from 'use-scroll-animate/components';
+import { invoke } from '@tauri-apps/api/core';
+defineComponents();
+document.querySelector('usa-toggle').addEventListener('usa:change', (e) => invoke('set_setting', { on: e.detail.checked }));
+```
+
+```json
+// tauri.conf.json — a strict CSP works (constructable stylesheets)
+{ "app": { "security": { "csp": "default-src 'self'; style-src 'self'; script-src 'self'" } } }
+```
+
+Tauri uses WebView2 on Windows, WKWebView on macOS / iOS and WebKitGTK on Linux. WebKitGTK may disable WebGL on some drivers: WebGL components then set `data-fallback="webgl"` and show their CSS fallback.
+
+## Framework wrappers
+
+| Framework | Entry | What it gives you |
+|---|---|---|
+| React | `use-scroll-animate/components/react` | `createUsaComponents(React)` typed wrappers |
+| Vue | `use-scroll-animate/components/vue` | `UsaPlugin`, `isUsaElement` |
+| Svelte | `use-scroll-animate/components/svelte` | `use:usa={{ props, on }}` action, `defineUsa()` |
+| Solid | `use-scroll-animate/components/solid` | `use:usa` directive, `defineUsa()`, JSX types |
+| Angular | `use-scroll-animate/components/angular` | `usaInitializer()` for `APP_INITIALIZER`, `usaDetail()`; use `CUSTOM_ELEMENTS_SCHEMA` |
