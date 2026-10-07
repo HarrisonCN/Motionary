@@ -256,6 +256,14 @@ function lengthValue(value) {
     const v = value.trim();
     return /^-?(\d+\.?\d*|\.\d+)$/.test(v) ? parseFloat(v) : v;
 }
+const DEFAULT_PROGRESS_VAR = '--sa-progress';
+/** `''` (bare attribute) -> default name; `sa-progress` -> `--sa-progress`. */
+function normalizeVar(name) {
+    const v = name.trim();
+    if (!v)
+        return DEFAULT_PROGRESS_VAR;
+    return v.startsWith('--') ? v : `--${v}`;
+}
 function parseDataAttributes(el, config) {
     var _a;
     const dataset = el.dataset || {};
@@ -294,6 +302,8 @@ function parseDataAttributes(el, config) {
         opts.once = dataset.saOnce !== 'false';
     opts.offset = num(dataset.saOffset);
     opts.stagger = num(dataset.saStagger);
+    if (dataset.saProgressVar !== undefined)
+        opts.progressVar = normalizeVar(dataset.saProgressVar);
     if (dataset.saProgress)
         opts.progressMode = dataset.saProgress.trim() === 'scroll' ? 'scroll' : 'ratio';
     if (dataset.saParallaxX || dataset.saParallaxY || dataset.saParallaxRotate || dataset.saParallaxScale) {
@@ -329,6 +339,7 @@ function mergeOptions(opts, config) {
         onLeave: (_q = opts.onLeave) !== null && _q !== void 0 ? _q : noop,
         onProgress: (_r = opts.onProgress) !== null && _r !== void 0 ? _r : noop,
         progressMode: (_s = opts.progressMode) !== null && _s !== void 0 ? _s : 'ratio',
+        progressVar: opts.progressVar ? normalizeVar(opts.progressVar) : '',
     };
 }
 function resolveTargets(target) {
@@ -365,7 +376,7 @@ function hasParallax(p) {
     return !!p && Object.keys(p).some((k) => p[k] !== undefined);
 }
 function needsProgress(opts) {
-    return hasParallax(opts.parallax) || opts.onProgress !== noop;
+    return hasParallax(opts.parallax) || opts.onProgress !== noop || !!opts.progressVar;
 }
 /**
  * True scroll progress of `el` through the viewport (or `root`): 0 when its top
@@ -626,6 +637,8 @@ function createScrollAnimate(userConfig = {}) {
     const scrolling = new Set();
     let frame = 0;
     let listening = null;
+    // Active watch() MutationObservers, disconnected by destroy().
+    const watchers = new Set();
     // Observers are shared between elements with the same root/threshold/rootMargin,
     // instead of one (or two) IntersectionObservers per element.
     const pools = new Map();
@@ -660,6 +673,11 @@ function createScrollAnimate(userConfig = {}) {
     function emitProgress(el, record, progress) {
         const opts = record.options;
         opts.onProgress(el, progress);
+        if (opts.progressVar) {
+            const style = el.style;
+            if (style)
+                style.setProperty(opts.progressVar, String(+progress.toFixed(4)));
+        }
         if (hasParallax(opts.parallax) && !motionDisabled(config))
             applyParallax(el, progress, opts.parallax);
     }
@@ -804,6 +822,10 @@ function createScrollAnimate(userConfig = {}) {
         registry.set(el, record);
         attach(el, record, true);
     }
+    function observeDataElement(el) {
+        if (!registry.has(el))
+            observeElement(el, parseDataAttributes(el, config));
+    }
     const instance = {
         observe(target, options = {}) {
             pruneDetached();
@@ -821,12 +843,48 @@ function createScrollAnimate(userConfig = {}) {
             if (!scope)
                 return;
             pruneDetached();
-            scope.querySelectorAll('[data-sa]').forEach((el) => {
-                if (!registry.has(el))
-                    observeElement(el, parseDataAttributes(el, config));
+            scope.querySelectorAll('[data-sa]').forEach(observeDataElement);
+        },
+        watch(rootElement) {
+            const scope = rootElement !== null && rootElement !== void 0 ? rootElement : (hasDOM() ? document : null);
+            if (!scope || typeof MutationObserver === 'undefined')
+                return noop;
+            instance.init(scope);
+            const observeTree = (node) => {
+                if (node.hasAttribute('data-sa'))
+                    observeDataElement(node);
+                node.querySelectorAll('[data-sa]').forEach(observeDataElement);
+            };
+            const mo = new MutationObserver((records) => {
+                let removed = false;
+                records.forEach((record) => {
+                    if (record.type === 'attributes') {
+                        const target = record.target;
+                        if (target.isConnected !== false)
+                            observeTree(target);
+                        return;
+                    }
+                    record.addedNodes.forEach((node) => {
+                        if (node instanceof Element && node.isConnected !== false)
+                            observeTree(node);
+                    });
+                    if (record.removedNodes.length)
+                        removed = true;
+                });
+                // Free elements that left the DOM (they can't animate any more).
+                if (removed)
+                    pruneDetached();
             });
+            mo.observe(scope, { childList: true, subtree: true, attributes: true, attributeFilter: ['data-sa'] });
+            watchers.add(mo);
+            return () => {
+                mo.disconnect();
+                watchers.delete(mo);
+            };
         },
         destroy() {
+            watchers.forEach((mo) => mo.disconnect());
+            watchers.clear();
             registry.forEach((record, el) => {
                 if (!record.animated)
                     reveal(el, config);
@@ -936,6 +994,12 @@ function staggerChildren(container, options = {}, instance) {
     return () => {
         io.disconnect();
         mo === null || mo === void 0 ? void 0 : mo.disconnect();
+        // Stopped before the container was revealed: never leave the children hidden.
+        if (!revealed) {
+            revealed = true;
+            items.forEach((child) => stopAnimation(child));
+            items = [];
+        }
         late.forEach((el) => sa.unobserve(el));
         late.length = 0;
     };
@@ -983,6 +1047,8 @@ function sequence(steps, options = {}) {
     let io;
     let active = [];
     let settle;
+    // Targets hidden while waiting for `trigger`; revealed if cancelled before it fires.
+    let prepared = [];
     const controller = {
         play() {
             controller.cancel();
@@ -1014,6 +1080,8 @@ function sequence(steps, options = {}) {
         cancel() {
             io === null || io === void 0 ? void 0 : io.disconnect();
             io = undefined;
+            prepared.forEach((el) => stopAnimation(el));
+            prepared = [];
             active.forEach(({ el }) => stopAnimation(el));
             active = [];
             settle === null || settle === void 0 ? void 0 : settle();
@@ -1025,12 +1093,14 @@ function sequence(steps, options = {}) {
     if (trigger && hasDOM() && supportsObserver()) {
         const el = resolveTargets(trigger)[0];
         if (el) {
-            plan(steps, defaults).forEach(({ el: target }) => prepareElement(target));
+            prepared = plan(steps, defaults).map(({ el: target }) => target);
+            prepared.forEach((target) => prepareElement(target));
             io = new IntersectionObserver((entries) => {
                 if (!entries.some((e) => e.isIntersecting))
                     return;
                 io === null || io === void 0 ? void 0 : io.disconnect();
                 io = undefined;
+                prepared = []; // play() takes over from here
                 controller.play();
             }, { threshold: (_a = defaults.threshold) !== null && _a !== void 0 ? _a : 0.1, rootMargin: (_b = defaults.rootMargin) !== null && _b !== void 0 ? _b : '0px' });
             io.observe(el);
