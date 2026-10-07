@@ -171,10 +171,11 @@ We've added high-quality physics-based easing presets:
 | `onProgress` | `(el, progress) => void` | – | Progress (0–1) as the element scrolls — visible ratio, or true scroll progress with `progressMode: 'scroll'` |
 | `progressMode` | `'ratio'` \| `'scroll'` | `'ratio'` | How `onProgress`/parallax progress is measured (`'scroll'`: 0 = top enters at the bottom, 1 = bottom leaves at the top) |
 | `engine` | `'js'` \| `'auto'` \| `'css'` | `'js'` | Run presets on the browser's native scroll-driven timeline when supported (`'auto'`/`'css'`), falling back to JS. See [Native scroll-driven engine](#native-scroll-driven-engine-engine-) |
+| `exit` | `boolean` \| preset \| `{ from, to }` | `false` | Animate out (reverse) when leaving the viewport, back in on re-entry. Implies `repeat`. See [Exit animations](#exit-animations-exit) |
 | `viewRange` | `[string, string]` | `['entry 0%', 'entry 100%']` | Native engine only: view-timeline range of the entrance |
 | `progressVar` | `string` | – | Write progress (0–1, same value as `onProgress`) to this CSS custom property, e.g. `'--sa-progress'`, for scroll-driven effects in plain CSS |
 
-Every option is also available as a data attribute: `data-sa-animation`, `data-sa-duration`, `data-sa-delay`, `data-sa-easing`, `data-sa-threshold`, `data-sa-root-margin`, `data-sa-once`, `data-sa-repeat`, `data-sa-offset`, `data-sa-stagger`, `data-sa-progress`, `data-sa-progress-var` (bare attribute = `--sa-progress`), `data-sa-engine`, `data-sa-view-range` (`"entry 0%, cover 40%"`), `data-sa-parallax-x|y|rotate|scale|speed`.
+Every option is also available as a data attribute: `data-sa-animation`, `data-sa-duration`, `data-sa-delay`, `data-sa-easing`, `data-sa-threshold`, `data-sa-root-margin`, `data-sa-once`, `data-sa-repeat`, `data-sa-offset`, `data-sa-stagger`, `data-sa-progress`, `data-sa-progress-var` (bare attribute = `--sa-progress`), `data-sa-engine`, `data-sa-exit` (bare = `true`, or a preset), `data-sa-view-range` (`"entry 0%, cover 40%"`), `data-sa-parallax-x|y|rotate|scale|speed`.
 
 **Presets:** `fade-in`, `fade-in-up|down|left|right`, `zoom-in`, `zoom-out`, `scale-up`, `flip-x`, `flip-y`, `flip-up`, `flip-down`, `slide-up|down|left|right`, `bounce`, `rotate-in`, `rotate-left`, `rotate-right`, `blur-in`, `blur-in-up`, `skew-in`, `scale-x`, `scale-y`, `clip-up|down|left|right`, `clip-circle`, `shimmer`, `pulse`, `swing`. Combine them with an array, e.g. `['fade-in', 'clip-up']`.
 
@@ -200,6 +201,42 @@ ScrollAnimate.observe('.bar', { progressVar: '--fill', progressMode: 'scroll' })
 ```
 
 It uses the same rAF-throttled / IntersectionObserver pipeline as `onProgress`, keeps updating after the entrance animation, and is still written under reduced motion (it is data) — guard motion in your CSS with `prefers-reduced-motion` as above.
+
+### Exit animations (`exit`)
+
+Animate elements out when they leave the viewport, and back in when they return:
+
+```js
+ScrollAnimate.observe('.card', { animation: 'fade-in-up', exit: true });          // reverse of the entrance
+ScrollAnimate.observe('.toast', { animation: 'zoom-in', exit: 'fade-in-down' });  // leave with another preset (played in reverse)
+```
+
+```html
+<div data-sa data-sa-animation="fade-in-left" data-sa-exit>…</div>
+<div data-sa data-sa-exit="zoom-out">…</div>
+```
+
+`exit` accepts `true`, a preset name, an array of presets or `{ from, to }`; the exit plays that animation **in reverse** over `duration` (no delay) and the element stays in its hidden state until it re-enters. It implies `repeat: true` (set `repeat` explicitly to override). With the native engine the exit is scroll-linked too (the view timeline's `exit` range). In class-name mode the hidden/visible classes are swapped back. Under `prefers-reduced-motion` nothing moves and the element stays visible.
+
+### Parallax helper (`parallax()`)
+
+```js
+import { parallax } from 'use-scroll-animate';
+
+const stop = parallax('.hero-bg', { speed: 0.3 });     // lags behind the scroll (background)
+parallax('.badge', { speed: -0.15, axis: 'x' });        // drifts sideways, ahead of the scroll
+stop(); // remove listeners and the inline styles it set
+```
+
+| Option | Default | Description |
+|---|---|---|
+| `speed` | `0.2` | Total shift while the element crosses the viewport, as a fraction of the viewport (`0.2` = 20vh / 20vw). Positive = slower than the page, negative = faster |
+| `axis` | `'y'` | `'y'` or `'x'` |
+| `progressVar` | `'--sa-parallax'` | CSS custom property receiving the scroll progress (0–1, same scale as `progressVar` with `progressMode: 'scroll'`) |
+| `root` | viewport | Scroll container |
+| `respectReducedMotion` | `true` | Under `prefers-reduced-motion: reduce` only the variable is written, no offset |
+
+It writes the offset to the individual CSS **`translate`** property, so it composes with entrance animations and any `transform` you set. One IntersectionObserver plus a passive, rAF-throttled scroll listener that is attached only while a target is on screen. Tree-shaken it adds under 1 kB gzipped. (The older `parallax: { x, y, rotate, scale }` option still works; it writes `transform`.)
 
 ## Instance API
 
@@ -325,7 +362,7 @@ Or without a build step (registers `<scroll-animate>` on load):
 <script src="https://unpkg.com/use-scroll-animate/dist/element.umd.js"></script>
 ```
 
-Attributes are the `data-sa-*` attributes without the prefix (`animation`, `duration`, `delay`, `easing`, `threshold`, `root-margin`, `offset`, `once`, `repeat`, `engine`, `view-range`, `progress`, `progress-var`, `parallax-*`). The element dispatches `sa:enter`, `sa:leave`, `sa:start`, `sa:complete` and, with `progress`/`progress-var`, `sa:progress` (`event.detail.progress`). It renders as `display: block` unless you style it.
+Attributes are the `data-sa-*` attributes without the prefix (`animation`, `duration`, `delay`, `easing`, `threshold`, `root-margin`, `offset`, `once`, `repeat`, `engine`, `view-range`, `progress`, `progress-var`, `exit`, `parallax-*`). The element dispatches `sa:enter`, `sa:leave`, `sa:start`, `sa:complete` and, with `progress`/`progress-var`, `sa:progress` (`event.detail.progress`). It renders as `display: block` unless you style it.
 
 All integrations share the core engine (and, through shared chunks, the same code when you import several entries), so `once`, `offset`, custom easing functions, parallax, the native engine and reduced-motion handling behave exactly like the vanilla API.
 

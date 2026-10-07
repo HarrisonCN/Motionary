@@ -12,6 +12,7 @@
 export { createScrollAnimate, getScrollProgress, supportsScrollTimeline } from './core';
 export { staggerChildren } from './stagger';
 export { sequence } from './sequence';
+export { parallax } from './parallax';
 export { PRESETS, resolvePreset, resolveEasing, EASING_MAP } from './presets';
 export { createReactHooks } from './react';
 export { createVueComposables } from './vue';
@@ -30,6 +31,7 @@ export type {
   ScrollAnimateInstance,
 } from './types';
 export type { StaggerOptions } from './stagger';
+export type { ParallaxHelperOptions } from './parallax';
 export type { SequenceStep, SequenceOptions, SequenceController } from './sequence';
 
 // Default export: a ready-to-use singleton instance
@@ -50,5 +52,5 @@ import { createScrollAnimate } from './core';
  * ScrollAnimate.observe('.my-element', { animation: 'fade-in-up' });
  * ```
  */
-const ScrollAnimate = createScrollAnimate();
+const ScrollAnimate = /* @__PURE__ */ createScrollAnimate();
 export default ScrollAnimate;

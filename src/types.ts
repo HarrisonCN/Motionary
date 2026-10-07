@@ -149,6 +149,15 @@ export interface AnimateOptions {
    * as `[rangeStart, rangeEnd]` (default: `['entry 0%', 'entry 100%']`).
    */
   viewRange?: [string, string];
+  /**
+   * Animate out when the element leaves the viewport, and back in when it
+   * re-enters (implies `repeat: true` unless `repeat` is set).
+   * - `true`: play the entrance animation in reverse.
+   * - a preset / presets / `{ from, to }`: play that animation in reverse
+   *   (e.g. `exit: 'fade-in-down'` leaves upwards).
+   * Skipped under reduced motion. (default: `false`)
+   */
+  exit?: boolean | AnimationPreset | AnimationPreset[] | CustomAnimation;
 }
 
 /** Global configuration for ScrollAnimate instance */
