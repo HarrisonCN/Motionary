@@ -148,6 +148,94 @@ declare function canvasBackground(el: HTMLElement, fx: EffectContext, spec: Gene
 declare const GENERATIVE_FX: EffectDefinition[];
 
 /**
+ * 5.6 — sound-reactive effects (Web Audio).
+ *
+ * - `enableAudio(input)` — start analysing the microphone (`'mic'`), an
+ *   `<audio>` / `<video>` element (or a selector for one) or a `MediaStream`.
+ *   Browsers only allow an `AudioContext` to start inside a user gesture, so
+ *   call it from a click handler (or use `<usa-audio>`, which renders the
+ *   toggle button for you).
+ * - Background effects (kind `background`, Canvas 2D through
+ *   `canvasBackground()`): `spectrum-bars`, `pulse-ring`, `wave-ring`. Before
+ *   audio is enabled they idle gently.
+ * - Beat detection: `createBeatDetector()` (pure: energy → beat?), `onBeat(cb)`
+ *   and `bindBeat(el, effect, options)`, which plays any registered effect on
+ *   every beat. `<usa-audio>` does the same for `[data-usa-beat="effect"]`
+ *   children and emits `usa-beat`.
+ * - While audio runs, `--usa-audio-level` and `--usa-audio-bass` (0–1) are set
+ *   on `<html>` for CSS-driven reactions.
+ *
+ * Reduced motion: the visual effects are skipped, beats play no effects and
+ * the CSS variables stay at 0 — audio itself keeps playing.
+ */
+
+type AudioInput = 'mic' | HTMLMediaElement | MediaStream | string;
+interface AudioSample {
+    /** Overall loudness (RMS of the waveform), 0–1. */
+    level: number;
+    /** Low-frequency energy (first ~8 % of the spectrum), 0–1. */
+    bass: number;
+    /** Frequency bins, 0–255 each. */
+    freq: Uint8Array;
+    /** Time-domain waveform, 0–255 (128 = silence). */
+    wave: Uint8Array;
+}
+interface AudioReactive {
+    readonly context: AudioContext;
+    readonly analyser: AnalyserNode;
+    /** Read the analyser now. */
+    sample(): AudioSample;
+    /** Stop analysing (media keeps playing; the microphone is released). */
+    stop(): void;
+}
+interface BeatOptions {
+    /** A beat is energy above `threshold` × the recent average (default 1.35). */
+    threshold?: number;
+    /** Minimum ms between beats (default 250). */
+    cooldown?: number;
+    /** Frames of history for the average (default 43 ≈ 0.7 s). */
+    history?: number;
+    /** Ignore energy below this floor, 0–1 (default 0.08). */
+    floor?: number;
+}
+/** The running analyser, if `enableAudio()` was called. */
+declare const getAudio: () => AudioReactive | null;
+/**
+ * Start analysing `input` and make it the source of every sound-reactive
+ * effect. Call from a user gesture. Replaces a previous source.
+ */
+declare function enableAudio(input?: AudioInput, opts?: {
+    fftSize?: number;
+    smoothing?: number;
+}): Promise<AudioReactive>;
+/** Stop the current audio source (if any). */
+declare function disableAudio(): void;
+/** A pure beat detector: feed it energy (0–1) and a timestamp per frame; it answers "beat?". */
+declare function createBeatDetector(o?: BeatOptions): (energy: number, now: number) => boolean;
+/** Call `cb` on every detected beat of the current audio source. Returns an unsubscribe. */
+declare function onBeat(cb: (detail: {
+    energy: number;
+    time: number;
+}) => void, o?: BeatOptions): () => void;
+/** Play the registered effect `name` on `el` at every beat (not under reduced motion). Returns an unbind. */
+declare function bindBeat(el: HTMLElement, name: string, options?: Record<string, unknown> & BeatOptions): () => void;
+declare const AUDIO_FX: EffectDefinition[];
+interface UsaAudioElement extends UsaElement {
+    /** `true` while this element's audio source is being analysed. */
+    readonly active: boolean;
+    /** Start (from a user gesture) or stop analysing. */
+    toggle(): Promise<void>;
+}
+/**
+ * `<usa-audio source="#track | mic" label="…">` — a toggle button (yours, as
+ * `[data-audio-toggle]`, or one it renders) that enables the audio source on
+ * click; children with `data-usa-beat="effect"` play that effect on every
+ * beat (`data-usa-beat-options` JSON; `threshold` / `cooldown` attributes).
+ * Emits `usa-beat` and `usa-audio-error`.
+ */
+declare function defineAudio(tag?: string): CustomElementConstructor | undefined;
+
+/**
  * 5.4 — `<usa-story template="…">` scroll-storytelling templates.
  *
  * - `pin` — a sticky `[data-stage]` while `[data-step]` sections scroll past; the
@@ -199,10 +287,12 @@ declare function registerPhysicsEffects(): void;
 declare function registerPageEffects(): void;
 /** 5.5: generative Canvas 2D backgrounds. */
 declare function registerGenerativeEffects(): void;
+/** 5.6: sound-reactive (Web Audio) backgrounds. */
+declare function registerAudioEffects(): void;
 /** Define the 5.x elements of this entry (`<usa-story>`, …) under their default tags. */
 declare function defineEffectElements(): void;
 /** Register the built-ins and every pack (idempotent). */
 declare function registerAllEffects(): void;
 
-export { CARD_FX, CLICK_FX, EFFECT_PACKS, GENERATIVE_FX, PAGE_FX, PHYSICS_FX, STORY_TEMPLATES, bounceKeyframes, canvasBackground, defineEffectElements, defineStory, formatCount, fxLayer, hexRgb, noise2, registerAllEffects, registerCardClickEffects, registerGenerativeEffects, registerPageEffects, registerPhysicsEffects, solveSpring, springKeyframes, storyProgress };
-export type { GenFrame, GenerativeSpec, SpringOptions, StoryTemplate, UsaStoryElement };
+export { AUDIO_FX, CARD_FX, CLICK_FX, EFFECT_PACKS, GENERATIVE_FX, PAGE_FX, PHYSICS_FX, STORY_TEMPLATES, bindBeat, bounceKeyframes, canvasBackground, createBeatDetector, defineAudio, defineEffectElements, defineStory, disableAudio, enableAudio, formatCount, fxLayer, getAudio, hexRgb, noise2, onBeat, registerAllEffects, registerAudioEffects, registerCardClickEffects, registerGenerativeEffects, registerPageEffects, registerPhysicsEffects, solveSpring, springKeyframes, storyProgress };
+export type { AudioInput, AudioReactive, AudioSample, BeatOptions, GenFrame, GenerativeSpec, SpringOptions, StoryTemplate, UsaAudioElement, UsaStoryElement };

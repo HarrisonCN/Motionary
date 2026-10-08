@@ -8,6 +8,8 @@ const FX = (id, en, zh, descEn, descZh, tags, usage, demo, controls, pack) => C(
 /** A 5.x effect-pack card (registers use-scroll-animate/components/effects in its code). */
 const PK = (id, en, zh, descEn, descZh, tags, usage, demo, controls) => FX(id, en, zh, descEn, descZh, tags, usage, demo, controls, true);
 /** A 5.4 <usa-story> card (defineStory from use-scroll-animate/components/effects). */
+/** A 5.6 <usa-audio> card (defineAudio from use-scroll-animate/components/effects). */
+const AU = (id, en, zh, descEn, descZh, tags, usage, demo, controls) => C('usa-audio', 'fx', en, zh, descEn, descZh, tags, usage, demo, { id, define: 'defineAudio', entry: 'effects', pack: true, controls });
 const SC = (id, en, zh, descEn, descZh, tags, usage, demo, controls) => C('usa-story', 'fx', en, zh, descEn, descZh, tags, usage, demo, { id, define: 'defineStory', entry: 'effects', pack: true, controls });
 
 export const components = [
@@ -111,6 +113,19 @@ export const components = [
     '<usa-fx effect="mesh-gradient" trigger="load" self class="hero">\n  <h1>Hello</h1>\n</usa-fx>',
     '<usa-fx effect="mesh-gradient" trigger="load"><div class="demo-tile demo-gen">Generative</div></usa-fx>',
     [{ key: 'effect', values: ['mesh-gradient', 'flow-field', 'voronoi', 'starfield', 'metaballs', 'contours'] }]),
+  PK('fx-audio', 'Sound-reactive backgrounds', '声音响应背景',
+    '5.6: spectrum bars, pulse rings and a waveform ring driven by a Web Audio analyser (microphone, <audio>/<video> or a MediaStream via enableAudio()). They idle gently until audio is enabled; skipped under reduced motion.',
+    '5.6：由 Web Audio 分析器驱动的频谱柱、脉冲光环与波形环（麦克风、<audio>/<video> 或 MediaStream，经 enableAudio() 开启）。开启音频前轻柔待机；减少动态效果时不运行。',
+    ['audio', 'sound', 'music', 'spectrum', 'equalizer', 'visualizer', 'web audio', 'beat'],
+    '<usa-fx effect="spectrum-bars" trigger="load" self options=\'{"mirror":true}\'>\n  <h2>Now playing</h2>\n</usa-fx>',
+    '<usa-fx effect="spectrum-bars" trigger="load"><div class="demo-tile demo-gen">Sound</div></usa-fx>',
+    [{ key: 'effect', values: ['spectrum-bars', 'pulse-ring', 'wave-ring'] }]),
+  AU('fx-audio-beat', 'Beat-triggered effects', '节拍触发特效',
+    '5.6: <usa-audio> renders a toggle (a user gesture starts Web Audio), detects beats and plays any registered effect on children with data-usa-beat="effect". JS: bindBeat(el, "pop"). Beats play nothing under reduced motion.',
+    '5.6：<usa-audio> 渲染一个开关按钮（由用户手势启动 Web Audio），检测节拍并在带 data-usa-beat="效果名" 的子元素上播放任意已注册效果。JS：bindBeat(el, "pop")。减少动态效果时节拍不触发动画。',
+    ['audio', 'beat', 'microphone', 'music', 'sound', 'reactive'],
+    '<audio id="track" src="song.mp3" controls></audio>\n<usa-audio source="#track" label="Play with visuals">\n  <div data-usa-beat="pop">♪</div>\n</usa-audio>',
+    '<usa-audio source="mic" label="🎤 Use microphone"><div class="demo-tile" data-usa-beat="pop">♪ beat</div></usa-audio>'),
 ];
 
 export const helpers = [

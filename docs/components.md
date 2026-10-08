@@ -416,6 +416,27 @@ registerEffect({ name: 'pulse-bg', kind: 'background', reduced: 'run',
   run: (el, o, ctx) => canvasBackground(el, ctx, { draw: ({ ctx: g, w, h, t }) => { g.fillStyle = `hsl(${t * 40} 70% 50%)`; g.fillRect(0, 0, w, h); } }, o) });
 ```
 
+### v5.6 Sound-reactive effects (`components/effects`)
+
+`spectrum-bars` · `pulse-ring` · `wave-ring` (kind `background`) react to a Web Audio analyser; `enableAudio()` must run inside a user gesture. Beat detection plays any registered effect.
+
+```html
+<audio id="track" src="song.mp3" controls></audio>
+<usa-audio source="#track" label="Play with visuals">
+  <usa-fx effect="spectrum-bars" trigger="load" self options='{"mirror":true}'><h2>Now playing</h2></usa-fx>
+  <div data-usa-beat="pop">♪</div>
+</usa-audio>
+```
+```js
+import { enableAudio, bindBeat, registerAllEffects } from 'use-scroll-animate/components/effects';
+registerAllEffects();
+button.addEventListener('click', async () => {
+  await enableAudio('mic');            // or an <audio>/<video> element, selector or MediaStream
+  bindBeat(logo, 'pop', { threshold: 1.4, cooldown: 300 });
+});
+```
+Reduced motion: visuals skipped, beats trigger nothing; audio keeps playing.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.
