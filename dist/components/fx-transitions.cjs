@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-DehBVRDV.cjs');
 var base = require('../chunks/base-BaQV-2ha.cjs');
+var registry = require('../chunks/registry-DehBVRDV.cjs');
 var shared = require('../chunks/shared-jkgRH-Hx.cjs');
 
 const fade = (el, ctx, out) => ctx.animate(el, out ? [{ opacity: 1 }, { opacity: 0 }] : [{ opacity: 0 }, { opacity: 1 }], { duration: 200, fill: out ? 'forwards' : 'none' });
@@ -238,12 +238,18 @@ function crossDocumentTransitions(effect = 'ripple-dissolve', duration = 700) {
     return () => style.remove();
 }
 /** Register the 6.7 transitions pack (idempotent). */
-function registerTransitionEffects2() {
+function registerTransitionsPack() {
     registry.registerEffects(TRANSITIONS2_FX);
+}
+/** @deprecated since 6.9 — use `registerTransitionsPack()` (removed in 7.0; `npx usa-codemod-7`). */
+function registerTransitionEffects2() {
+    base.deprecate('registerTransitionEffects2', 'registerTransitionEffects2() is deprecated since 6.9 and removed in 7.0 — use registerTransitionsPack() (npx usa-codemod-7).');
+    registerTransitionsPack();
 }
 
 exports.TRANSITIONS2_FX = TRANSITIONS2_FX;
 exports.crossDocumentTransitions = crossDocumentTransitions;
 exports.pageTransition = pageTransition;
 exports.registerTransitionEffects2 = registerTransitionEffects2;
+exports.registerTransitionsPack = registerTransitionsPack;
 //# sourceMappingURL=fx-transitions.cjs.map

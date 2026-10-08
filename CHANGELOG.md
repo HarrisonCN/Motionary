@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.9.0] - 2026-10-08
+
+### Added
+- **4 new components (6.9)** in `motionary/components/widgets` (also in `dist/widgets.umd.js`):
+  - `<usa-date-picker>` — inline calendar: months slide in from the direction of travel, the chosen day pops in a spring circle, today has a ring; full date-grid keyboard (arrows, PageUp / PageDown, Home / End, Enter), `min` / `max`, `first-day`, `locale`; `usa:change`. Helpers `monthGrid()`, `parseISODate()`.
+  - `<usa-color-picker>` — saturation / brightness square + hue strip (keyboard sliders, Shift ×10) with spring-follow thumbs, morphing preview chip, popping `swatches`; `value` `#rrggbb`; `usa:input` / `usa:change`. Helpers `hsvToHex()`, `hexToHsv()`.
+  - `<usa-file-drop>` — drop zone with marching-ants on drag-over and a lifting icon; files (dropped or browsed via the built-in input) fly into a list with progress bars and a drawn check; `setProgress(i, p)`, `simulate`, `accept`, `multiple`; `usa:files`.
+  - `<usa-keyframe-editor>` — **animation editor 2.0**: a timeline for `<usa-player>` JSON — drag bars to move tracks, drag edges to resize (or ← / →, Shift + ← / →), scrub or play the preview of the `for` element; reads / writes format `use-scroll-animate/animation` v1; `usa:change`.
+- **Focus & feedback — `motionary/components/fx-focus`** (`registerFocusPack()`): `focus-draw`, `marching-ants`, `success-check`, `highlight-sweep`.
+- **Effect marketplace manifest — `motionary/components/marketplace`**: format `motionary/effect-pack` v1; `packManifest()`, `validateManifest()`, `loadEffectPack(url | module, { override })` (validates, refuses to replace existing effects unless `override`). Also exported from `motionary/components/fx2`.
+- **`npx usa-codemod-7`** (new bin) and **[docs/upgrading-7.md](./docs/upgrading-7.md)**.
+- Consistent pack registrars: `registerGpuPack()`, `registerTextPack()`, `registerLightPack()`, `register3dPack()`, `registerMorphPack()`, `registerTransitionsPack()`, `registerWeatherPack()`, `registerPhysicsPack()`, `registerFocusPack()`; `registerEffectPacks()` + `EFFECT_PACKS` for all of them.
+- Showcase: 6 new gallery cards with copyable code; Animation Store “Components 6.x” 52 → 58 entries (279 → 285 items).
+
+### Deprecated (removed in 7.0 — warn once in the console)
+- `registerFx2()` → `registerEffectPacks()`; `FX2_PACKS` → `EFFECT_PACKS`.
+- `registerGpuEffects` / `registerTextEffects3` / `registerLightEffects` / `register3dEffects` / `registerMorphEffects2` / `registerTransitionEffects2` / `registerWeatherEffects` / `registerPhysicsEffects2` → the `register*Pack()` names above.
+- `<usa-tooltip>` → `<usa-tip>` (6.6); `<usa-toggle>` → `<usa-switch>` (6.7). Same attributes.
+- `npx usa-codemod-7 --write src` rewrites all of the above (manual report for `defineTooltip` / `defineToggle`, `createElement` and CSS selectors).
+
+### Accessibility
+- Date picker is a `grid` with labelled cells, `aria-selected`, `aria-disabled` and a live month title; color picker areas are `slider`s with `aria-valuetext`; file drop is a keyboard button around a real file input with a polite list; editor clips are keyboard sliders. Reduced motion: no slide / pop / ants / fly-in; the editor preview jumps to the end; every focus effect becomes a fade (marching-ants static).
+
 ## [6.8.0] - 2026-10-08
 
 ### Added

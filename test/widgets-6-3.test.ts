@@ -263,7 +263,7 @@ describe('6.3 showcase + Store', () => {
       expect(s.react).toContain('export function Demo');
     }
     const fx: any = COMPONENTS.find((c: any) => c.id === 'fx-text');
-    expect(componentSnippets(fx).esm).toContain("import { registerTextEffects3 } from 'motionary/components/fx-text'");
+    expect(componentSnippets(fx).esm).toContain("import { registerTextPack } from 'motionary/components/fx-text'");
     for (const id of ['toast-stack', 'modal', 'sheet', 'menu', 'fx-text', 'fx-text-loop', 'fx-text-trail']) expect(COMPONENT_ITEMS.some((i: any) => i.gallery === id), id).toBe(true);
   });
   it('docs describe the 6.3 additions', () => {

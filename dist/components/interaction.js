@@ -1,4 +1,4 @@
-import { y as defineElement, z as EASE_OUT, r as raf, l as caf, k as clamp, E as EASE_SPRING } from '../chunks/base-DchG4q_S.js';
+import { y as defineElement, z as EASE_OUT, r as raf, l as caf, k as clamp, E as EASE_SPRING, u as deprecate } from '../chunks/base-D5MHqeDd.js';
 
 var css$5 = "usa-ripple{position:relative;display:inline-block;overflow:hidden;isolation:isolate;border-radius:inherit;-webkit-tap-highlight-color:transparent}usa-ripple[block]{display:block}usa-ripple .usa-ripple-wave{position:absolute;border-radius:50%;pointer-events:none;transform:scale(0);z-index:-1;will-change:transform,opacity}";
 
@@ -358,6 +358,7 @@ function defineToggle(tag = 'usa-toggle') {
                 this._internals?.setFormValue?.(this.checked ? this.str('value', 'on') : null);
             }
             mount() {
+                deprecate('usa-toggle', '<usa-toggle> is deprecated since 6.9 and removed in 7.0 — use <usa-switch> (motionary/components/widgets; npx usa-codemod-7).');
                 if (!this.querySelector(':scope > .usa-toggle-track')) {
                     const track = document.createElement('span');
                     track.className = 'usa-toggle-track';

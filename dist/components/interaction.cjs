@@ -360,6 +360,7 @@ function defineToggle(tag = 'usa-toggle') {
                 this._internals?.setFormValue?.(this.checked ? this.str('value', 'on') : null);
             }
             mount() {
+                base.deprecate('usa-toggle', '<usa-toggle> is deprecated since 6.9 and removed in 7.0 — use <usa-switch> (motionary/components/widgets; npx usa-codemod-7).');
                 if (!this.querySelector(':scope > .usa-toggle-track')) {
                     const track = document.createElement('span');
                     track.className = 'usa-toggle-track';

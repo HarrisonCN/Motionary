@@ -17,6 +17,7 @@
  * frame and the hover effects do nothing.
  */
 import type { EffectContext, EffectDefinition } from '../fx/registry';
+import { deprecate } from '../base';
 import { registerEffects } from '../fx/registry';
 import { canvasBackground, type GenerativeSpec } from '../effects/generative';
 
@@ -333,6 +334,12 @@ export const PHYSICS2_FX: EffectDefinition[] = [
 ];
 
 /** Register the 6.8 physics 2.0 pack (idempotent). */
-export function registerPhysicsEffects2(): void {
+export function registerPhysicsPack(): void {
   registerEffects(PHYSICS2_FX);
+}
+
+/** @deprecated since 6.9 — use `registerPhysicsPack()` (removed in 7.0; `npx usa-codemod-7`). */
+export function registerPhysicsEffects2(): void {
+  deprecate('registerPhysicsEffects2', 'registerPhysicsEffects2() is deprecated since 6.9 and removed in 7.0 — use registerPhysicsPack() (npx usa-codemod-7).');
+  registerPhysicsPack();
 }

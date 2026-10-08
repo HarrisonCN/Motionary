@@ -1,6 +1,9 @@
-import { registerEffects } from './registry-D23neB4M.js';
-import { c as canvasBackground, h as hexRgb, n as noise2 } from './generative-2LhxG5BJ.js';
-import { b as origin, s as spawn, a as all, r as rand } from './shared-CkKHWrtJ.js';
+'use strict';
+
+var base = require('./base-BaQV-2ha.cjs');
+var registry = require('./registry-DehBVRDV.cjs');
+var generative = require('./generative-BHIj-NU0.cjs');
+var shared = require('./shared-jkgRH-Hx.cjs');
 
 /** GLSL shared by every shader: uniforms, hash, value noise, fbm. */
 const GLSL_HEAD = `#version 300 es
@@ -44,7 +47,7 @@ function compile(gl, frag) {
     gl.linkProgram(p);
     return gl.getProgramParameter(p, gl.LINK_STATUS) ? p : null;
 }
-const rgb = (c) => hexRgb(c).map((v) => v / 255);
+const rgb = (c) => generative.hexRgb(c).map((v) => v / 255);
 /**
  * Mount a shader background behind `el` (options: `colors` [3 hex], `speed`,
  * `scale`, `quality`, `backend` = `'auto' | 'webgl2' | 'canvas'`). Returns the cleanup.
@@ -52,7 +55,7 @@ const rgb = (c) => hexRgb(c).map((v) => v / 255);
 function shaderBackground(el, fx, spec, o) {
     const fallback = () => {
         el.dataset.usaBackend = 'canvas';
-        const stop = canvasBackground(el, fx, spec.fallback, o);
+        const stop = generative.canvasBackground(el, fx, spec.fallback, o);
         return () => {
             stop();
             delete el.dataset.usaBackend;
@@ -213,7 +216,7 @@ const sstep = (a, b, x) => {
     return t * t * (3 - 2 * t);
 };
 /** fbm-like noise in 0–1 built on `noise2`. */
-const fbm2 = (x, y, t = 0) => 0.5 + 0.35 * noise2(x, y, t) + 0.15 * noise2(x * 2.1 + 3, y * 2.1 - 1, t * 1.3);
+const fbm2 = (x, y, t = 0) => 0.5 + 0.35 * generative.noise2(x, y, t) + 0.15 * generative.noise2(x * 2.1 + 3, y * 2.1 - 1, t * 1.3);
 
 const shader = (name, description, colors, spec, extra = {}) => ({
     name,
@@ -227,7 +230,7 @@ const shader = (name, description, colors, spec, extra = {}) => ({
         return stop;
     },
 });
-const C = (o) => o.colors.map(hexRgb);
+const C = (o) => o.colors.map(generative.hexRgb);
 const GPU_FX = [
     shader('fluid', 'Domain-warped fluid colors that swirl around the pointer (WebGL2, Canvas 2D fallback).', ['#1b1446', '#7c5cff', '#22d3ee'], {
         body: 'vec2 q=vec2(fbm(p+t*.1),fbm(p+vec2(5.2,1.3)-t*.08));vec2 d=uv-u_ptr;q+=.5*exp(-dot(d,d)*14.)*vec2(sin(t*1.3),cos(t*1.1));float f=fbm(p+3.*q+t*.05);vec3 c=mix(u_c0,u_c1,clamp(f*1.7-.2,0.,1.));c=mix(c,u_c2,clamp(length(q)*1.1-.45,0.,1.));o=vec4(c,1.);',
@@ -287,7 +290,7 @@ const GPU_FX = [
     }),
 ];
 const fall = (draw) => ({
-    init: (w, h, o) => ({ f: Array.from({ length: o.count }, () => ({ x: Math.random() * w, y: Math.random() * h, r: rand(5, 11) * (o.size || 1), a: rand(0, 6.3), va: rand(-1.5, 1.5), vy: rand(18, 46), ph: rand(0, 6.3), c: o.colors[Math.floor(Math.random() * o.colors.length)] })), last: 0 }),
+    init: (w, h, o) => ({ f: Array.from({ length: o.count }, () => ({ x: Math.random() * w, y: Math.random() * h, r: shared.rand(5, 11) * (o.size || 1), a: shared.rand(0, 6.3), va: shared.rand(-1.5, 1.5), vy: shared.rand(18, 46), ph: shared.rand(0, 6.3), c: o.colors[Math.floor(Math.random() * o.colors.length)] })), last: 0 }),
     draw: ({ ctx, w, h, t, state, o, quality }) => {
         const dt = state.last ? Math.min(0.05, t - state.last) : 0;
         state.last = t;
@@ -321,7 +324,7 @@ const particles = (name, description, defaults, spec) => ({
     reduced: 'run',
     defaults: { speed: 1, quality: 1, ...defaults },
     run: (el, o, ctx) => {
-        const stop = canvasBackground(el, ctx, spec, o);
+        const stop = generative.canvasBackground(el, ctx, spec, o);
         ctx.onCleanup(stop);
         return stop;
     },
@@ -351,31 +354,42 @@ GPU_FX.push({
     description: 'A water splash from the pointer: a ring plus droplets that arc out and fall with gravity.',
     defaults: { color: '#38bdf8', count: 14 },
     run: (el, o, ctx) => {
-        const { x, y } = origin(el, ctx);
+        const { x, y } = shared.origin(el, ctx);
         if (ctx.reduced)
-            return spawn(x - 12, y - 12, `width:24px;height:24px;border-radius:50%;background:${o.color};opacity:.5`, ctx, [{ opacity: 0.5 }, { opacity: 0 }], { duration: 300 });
+            return shared.spawn(x - 12, y - 12, `width:24px;height:24px;border-radius:50%;background:${o.color};opacity:.5`, ctx, [{ opacity: 0.5 }, { opacity: 0 }], { duration: 300 });
         const anims = [
-            spawn(x - 30, y - 30, `width:60px;height:60px;border-radius:50%;border:3px solid ${o.color}`, ctx, [{ transform: 'scale(.2)', opacity: 1 }, { transform: 'scale(1.6)', opacity: 0 }], { duration: 520, easing: 'cubic-bezier(.2,.8,.3,1)' }),
+            shared.spawn(x - 30, y - 30, `width:60px;height:60px;border-radius:50%;border:3px solid ${o.color}`, ctx, [{ transform: 'scale(.2)', opacity: 1 }, { transform: 'scale(1.6)', opacity: 0 }], { duration: 520, easing: 'cubic-bezier(.2,.8,.3,1)' }),
         ];
         for (let i = 0; i < o.count; i++) {
-            const ang = -Math.PI / 2 + rand(-1.15, 1.15);
-            const v = rand(50, 110);
+            const ang = -Math.PI / 2 + shared.rand(-1.15, 1.15);
+            const v = shared.rand(50, 110);
             const dx = Math.cos(ang) * v;
-            const s = rand(4, 9);
+            const s = shared.rand(4, 9);
             const peak = Math.sin(ang) * v;
-            anims.push(spawn(x - s / 2, y - s / 2, `width:${s}px;height:${s * 1.25}px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:${o.color}`, ctx, [
+            anims.push(shared.spawn(x - s / 2, y - s / 2, `width:${s}px;height:${s * 1.25}px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:${o.color}`, ctx, [
                 { transform: 'translate(0,0) scale(1)', opacity: 1 },
                 { transform: `translate(${dx * 0.6}px,${peak}px) scale(1)`, opacity: 1, offset: 0.45, easing: 'cubic-bezier(.3,0,.7,1)' },
                 { transform: `translate(${dx}px,${peak + 90}px) scale(.6)`, opacity: 0 },
-            ], { duration: rand(650, 900), easing: 'cubic-bezier(.15,.6,.4,1)' }));
+            ], { duration: shared.rand(650, 900), easing: 'cubic-bezier(.15,.6,.4,1)' }));
         }
-        return all(anims);
+        return shared.all(anims);
     },
 });
 /** Register the 6.2 GPU pack (idempotent). */
+function registerGpuPack() {
+    registry.registerEffects(GPU_FX);
+}
+/** @deprecated since 6.9 — use `registerGpuPack()` (removed in 7.0; `npx usa-codemod-7`). */
 function registerGpuEffects() {
-    registerEffects(GPU_FX);
+    base.deprecate('registerGpuEffects', 'registerGpuEffects() is deprecated since 6.9 and removed in 7.0 — use registerGpuPack() (npx usa-codemod-7).');
+    registerGpuPack();
 }
 
-export { GPU_FX as G, GLSL_HEAD as a, supportsWebGL2 as b, fieldFallback as f, registerGpuEffects as r, shaderBackground as s };
-//# sourceMappingURL=gpu-CsP2ZB3x.js.map
+exports.GLSL_HEAD = GLSL_HEAD;
+exports.GPU_FX = GPU_FX;
+exports.fieldFallback = fieldFallback;
+exports.registerGpuEffects = registerGpuEffects;
+exports.registerGpuPack = registerGpuPack;
+exports.shaderBackground = shaderBackground;
+exports.supportsWebGL2 = supportsWebGL2;
+//# sourceMappingURL=gpu-C2D4T9Q-.cjs.map

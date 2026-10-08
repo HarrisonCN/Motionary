@@ -58,6 +58,8 @@ interface EffectDefinition<O extends Record<string, unknown> = Record<string, an
 
 declare const GPU_FX: EffectDefinition[];
 /** Register the 6.2 GPU pack (idempotent). */
+declare function registerGpuPack(): void;
+/** @deprecated since 6.9 — use `registerGpuPack()` (removed in 7.0; `npx usa-codemod-7`). */
 declare function registerGpuEffects(): void;
 
-export { GPU_FX, registerGpuEffects };
+export { GPU_FX, registerGpuEffects, registerGpuPack };

@@ -19,6 +19,7 @@
  * Reduced motion: plain short fades.
  */
 import type { EffectContext, EffectDefinition } from '../fx/registry';
+import { deprecate } from '../base';
 import { registerEffects, getEffect } from '../fx/registry';
 import { prefersReducedMotion } from '../base';
 import { all, origin } from '../effects/shared';
@@ -248,6 +249,12 @@ export function crossDocumentTransitions(effect = 'ripple-dissolve', duration = 
 }
 
 /** Register the 6.7 transitions pack (idempotent). */
-export function registerTransitionEffects2(): void {
+export function registerTransitionsPack(): void {
   registerEffects(TRANSITIONS2_FX);
+}
+
+/** @deprecated since 6.9 — use `registerTransitionsPack()` (removed in 7.0; `npx usa-codemod-7`). */
+export function registerTransitionEffects2(): void {
+  deprecate('registerTransitionEffects2', 'registerTransitionEffects2() is deprecated since 6.9 and removed in 7.0 — use registerTransitionsPack() (npx usa-codemod-7).');
+  registerTransitionsPack();
 }

@@ -689,6 +689,34 @@ defineWidgets(); registerWeatherEffects(); registerPhysicsEffects2();
 - Weather: `rain-glass` · `snowfall` (`pile`) · `lightning` (`interval` ≥ 2.5, `glow` ≤ 0.22) · `fog` · `aurora-veil` · `day-cycle` (`cycle`, `hour`); `skyAt(hour)`.
 - Physics 2.0: `soft-body` (`stiffness`, `damping`) · `magnet` (`strength`, `radius`) · `cloth` · `rope` · `pinball`; `new VerletWorld(gravity, damping, iterations)`.
 
+### v6.9 Widgets: date picker, color picker, file drop, keyframe editor (`components/widgets`) + focus & feedback (`components/fx-focus`) + marketplace manifest (`components/marketplace`)
+
+```html
+<usa-date-picker value="2026-10-08" min="2026-01-01"></usa-date-picker>
+<usa-color-picker value="#7c5cff" swatches="#f43f5e,#22c55e,#0ea5e9"></usa-color-picker>
+<usa-file-drop multiple accept="image/*"></usa-file-drop>
+<div id="hero"><h1>Title</h1><p>…</p></div>
+<usa-keyframe-editor for="hero"></usa-keyframe-editor>
+
+<usa-fx effect="focus-draw" trigger="click"><input></usa-fx>
+<usa-fx effect="success-check" trigger="click"><button>Save</button></usa-fx>
+```
+```js
+import { defineWidgets } from 'motionary/components/widgets';
+import { registerFocusPack } from 'motionary/components/fx-focus';
+import { packManifest, validateManifest, loadEffectPack } from 'motionary/components/marketplace';
+defineWidgets(); registerFocusPack();
+await loadEffectPack('https://cdn.example.com/@acme/motion-snow/index.js');   // validates its manifest, registers its effects
+const manifest = packManifest('@acme/motion-snow', '1.0.0', MY_EFFECTS, { license: 'MIT' });
+```
+- `<usa-date-picker value min max first-day locale>`: `value`, `month`, `showMonth(±n)`; `usa:change` (`{ value, date }`).
+- `<usa-color-picker value swatches>`: `value`; `usa:input`, `usa:change` (`{ value }`); `hsvToHex()`, `hexToHsv()`.
+- `<usa-file-drop accept multiple simulate label>`: `files`, `addFiles()`, `setProgress(i, 0–1)`, `clear()`; `usa:files`.
+- `<usa-keyframe-editor for>`: `animation` (get / set, JSON string or object, or a `<script type="application/json">` child), `toJSON()`, `play()`, `seek(ms)`; `usa:change`.
+- Focus & feedback: `focus-draw` · `marching-ants` · `success-check` · `highlight-sweep`.
+- Marketplace (`motionary/effect-pack` v1): `{ format, version: 1, name, packVersion, effects: [{ name, kind, description, defaults }], license, author, entry, requires }`.
+- 6.9 deprecations (removed in 7.0): see [upgrading-7.md](./upgrading-7.md) — `npx usa-codemod-7 --write src`.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

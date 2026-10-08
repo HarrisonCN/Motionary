@@ -296,3 +296,5 @@ usa-carousel[data-effect="cards"].demo-carousel .demo-slide{margin:0 18%}
 .demo-kanban{width:100%;font-size:12px}.demo-kanban .usa-kb-col{min-height:60px;padding:8px}.demo-deck{--usa-sd-w:170px;--usa-sd-h:130px}
 .demo-amb{width:min(260px,100%);height:150px;color:#fff;font-weight:700;text-shadow:0 1px 4px rgba(0,0,0,.5);background:transparent!important}.demo-light{background:#f8fafc!important;color:#334155;text-shadow:none}
 .demo-wc{--usa-wc-w:240px}.demo-pc{height:170px}
+.demo-dp{--usa-dp-w:250px;transform:scale(.86);transform-origin:50% 50%;margin:-18px 0}.demo-cp{--usa-cp-w:220px}.demo-fd{--usa-fd-w:260px}
+.demo-ke-stage{display:flex;gap:10px;align-items:center;justify-content:center}.demo-ke-stage>*{padding:6px 10px;border-radius:8px;background:linear-gradient(135deg,#7c5cff,#22d3ee);color:#fff;font:700 12px system-ui;font-style:normal}.demo-ke{width:100%}

@@ -1,0 +1,16 @@
+usa-date-picker{--usa-dp-c:#7c5cff;display:inline-block;width:var(--usa-dp-w,280px);max-width:100%;padding:12px;border-radius:16px;background:var(--usa-dp-bg,#fff);color:#111827;box-shadow:0 10px 30px -12px rgba(0,0,0,.3);font:500 13px/1 system-ui,sans-serif;user-select:none}
+.usa-dp-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.usa-dp-title{font-weight:700;font-size:14px}
+.usa-dp-nav{width:30px;height:30px;border:0;border-radius:8px;background:none;color:inherit;font-size:18px;cursor:pointer}
+.usa-dp-nav:hover{background:rgba(127,127,127,.14)}
+.usa-dp-viewport{overflow:hidden}
+.usa-dp-row{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+.usa-dp-dow{margin-bottom:4px;font-size:11px;opacity:.55;text-align:center}
+.usa-dp-day{position:relative;display:grid;place-items:center;aspect-ratio:1;border-radius:50%;cursor:pointer;font-variant-numeric:tabular-nums;outline:none;transition:background .2s,color .2s}
+.usa-dp-day:hover{background:rgba(124,92,255,.12)}
+.usa-dp-day[data-out]{opacity:.35}
+.usa-dp-day[data-today]{box-shadow:inset 0 0 0 1.5px var(--usa-dp-c)}
+.usa-dp-day[aria-selected="true"]{background:var(--usa-dp-c);color:#fff}
+.usa-dp-day[aria-disabled]{opacity:.2;cursor:not-allowed;text-decoration:line-through}
+.usa-dp-day:focus-visible{box-shadow:0 0 0 2px #fff,0 0 0 4px var(--usa-dp-c)}
+@media (prefers-reduced-motion:reduce){.usa-dp-day{transition:none}}

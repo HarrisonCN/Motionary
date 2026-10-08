@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-DehBVRDV.cjs');
 var base = require('../chunks/base-BaQV-2ha.cjs');
+var registry = require('../chunks/registry-DehBVRDV.cjs');
 var shared = require('../chunks/shared-jkgRH-Hx.cjs');
 
 /** Split `el`'s text into `aria-hidden` inline-block characters (idempotent). Returns them. */
@@ -257,11 +257,17 @@ const TEXT3_FX = [
     },
 ];
 /** Register the 6.3 text pack (idempotent). */
-function registerTextEffects3() {
+function registerTextPack() {
     registry.registerEffects(TEXT3_FX);
+}
+/** @deprecated since 6.9 — use `registerTextPack()` (removed in 7.0; `npx usa-codemod-7`). */
+function registerTextEffects3() {
+    base.deprecate('registerTextEffects3', 'registerTextEffects3() is deprecated since 6.9 and removed in 7.0 — use registerTextPack() (npx usa-codemod-7).');
+    registerTextPack();
 }
 
 exports.TEXT3_FX = TEXT3_FX;
 exports.registerTextEffects3 = registerTextEffects3;
+exports.registerTextPack = registerTextPack;
 exports.splitChars = splitChars;
 //# sourceMappingURL=fx-text.cjs.map

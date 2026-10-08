@@ -1,4 +1,4 @@
-import { defineElement, type UsaElement } from '../base';
+import { deprecate, defineElement, type UsaElement } from '../base';
 import { springEasing } from '../physics/spring';
 import { adoptVariants } from './variants';
 import { place, nextId, type Placement } from './position';
@@ -30,6 +30,7 @@ export function defineTooltip(tag = 'usa-tooltip'): CustomElementConstructor | u
         private _t: ReturnType<typeof setTimeout> | undefined;
 
         mount(): void {
+          deprecate('usa-tooltip', '<usa-tooltip> is deprecated since 6.9 and removed in 7.0 — use <usa-tip> (motionary/components/widgets; npx usa-codemod-7).');
           const trigger = (this.firstElementChild as HTMLElement) || this;
           const tip = document.createElement('span');
           tip.className = 'usa-tooltip-bubble usa-surface';

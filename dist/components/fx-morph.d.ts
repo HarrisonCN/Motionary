@@ -66,6 +66,8 @@ declare function samplePath(d: string, n?: number): [number, number][] | null;
 declare const pointsToPath: (pts: [number, number][]) => string;
 declare const MORPH2_FX: EffectDefinition[];
 /** Register the 6.6 morph & SVG pack (idempotent). */
+declare function registerMorphPack(): void;
+/** @deprecated since 6.9 — use `registerMorphPack()` (removed in 7.0; `npx usa-codemod-7`). */
 declare function registerMorphEffects2(): void;
 
-export { MORPH2_FX, pointsToPath, registerMorphEffects2, samplePath };
+export { MORPH2_FX, pointsToPath, registerMorphEffects2, registerMorphPack, samplePath };
