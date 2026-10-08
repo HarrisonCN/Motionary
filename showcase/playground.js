@@ -2,7 +2,7 @@
  * Visual playground (v3.7): no build step, dogfoods ../dist/components.js
  * (CDN fallback). State lives in the URL hash so compositions can be shared.
  */
-import { PLAYGROUND_EFFECTS, PLAYGROUND_CONTENT, PLAYGROUND_TABS, PG_STRINGS, DEFAULT_STATE, findEffect, newLayer, composeMarkup, playgroundSnippets, encodeState, decodeState } from './playground-core.js';
+import { PLAYGROUND_EFFECTS, PLAYGROUND_CONTENT, PLAYGROUND_TABS, PG_STRINGS, DEFAULT_STATE, DEFAULT_TRACKS, TRACK_PRESETS, TRACK_LIMITS, findEffect, newTrack, normalizeTracks, tracksDuration, trackBar, dragTrack, timelineMarkup, listPresets, savePreset, loadPreset, deletePreset, presetToJSON, presetFromJSON, newLayer, composeMarkup, playgroundSnippets, encodeState, decodeState } from './playground-core.js';
 import { highlight } from './codegen.js';
 
 const LOCAL = new URL('../dist/', import.meta.url).href;
@@ -11,6 +11,7 @@ const $ = (s) => document.querySelector(s);
 let lang = document.documentElement.lang === 'zh-CN' ? 'zh' : 'en';
 let tab = 'html';
 let state = (location.hash.length > 1 && decodeState(location.hash.slice(1))) || structuredClone(DEFAULT_STATE);
+if (!state.tracks) state.tracks = structuredClone(DEFAULT_TRACKS);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)');
 const t = (k) => PG_STRINGS[lang][k];
 
@@ -77,6 +78,74 @@ function renderLayers() {
   );
 }
 
+// --- 4.6 keyframe track editor ---
+function renderTracks() {
+  const total = Math.max(tracksDuration(state.tracks), 1000);
+  $('#pg-ruler').replaceChildren(...[0, 0.25, 0.5, 0.75, 1].map((f) => h('span', { style: `left:${f * 100}%`, text: `${Math.round(total * f)}ms` })));
+  $('#pg-tracks').replaceChildren(
+    ...state.tracks.map((tr, i) => {
+      const set = (k) => (e) => {
+        state.tracks[i] = newTrack(k === 'preset' ? e.target.value : tr.preset, k === 'start' ? e.target.value : tr.start, k === 'duration' ? e.target.value : tr.duration, k === 'label' ? e.target.value : tr.label);
+        renderTracks();
+        update();
+      };
+      const bar = trackBar(tr, total);
+      const el = h('span', { class: 'pg-bar', tabindex: '0', role: 'slider', 'aria-label': `${tr.label || tr.preset} ${t('start')}`, 'aria-valuemin': TRACK_LIMITS.start[0], 'aria-valuemax': TRACK_LIMITS.start[1], 'aria-valuenow': tr.start, style: `left:${bar.left}%;width:${bar.width}%`, text: tr.preset }, [h('i', { 'data-resize': '' })]);
+      el.addEventListener('keydown', (e) => {
+        const d = e.key === 'ArrowRight' ? 50 : e.key === 'ArrowLeft' ? -50 : 0;
+        if (!d) return;
+        e.preventDefault();
+        state.tracks[i] = dragTrack(tr, e.shiftKey ? 'resize' : 'move', d);
+        renderTracks();
+        update();
+        $('#pg-tracks').children[i]?.querySelector('.pg-bar')?.focus();
+      });
+      el.addEventListener('pointerdown', (e) => {
+        const lane = el.parentElement.getBoundingClientRect();
+        const mode = e.target.hasAttribute('data-resize') ? 'resize' : 'move';
+        const x0 = e.clientX;
+        const orig = { ...tr };
+        el.setPointerCapture(e.pointerId);
+        const mv = (ev) => {
+          const next = dragTrack(orig, mode, ((ev.clientX - x0) / lane.width) * total);
+          state.tracks[i] = next;
+          const b = trackBar(next, total);
+          el.style.left = `${b.left}%`;
+          el.style.width = `${b.width}%`;
+        };
+        const up = () => {
+          el.removeEventListener('pointermove', mv);
+          renderTracks();
+          update();
+        };
+        el.addEventListener('pointermove', mv);
+        el.addEventListener('pointerup', up, { once: true });
+      });
+      return h('li', { class: 'pg-track' }, [
+        h('div', { class: 'pg-track-ctl' }, [
+          h('select', { 'aria-label': 'preset', onchange: set('preset') }, TRACK_PRESETS.map((p) => h('option', { value: p, text: p, selected: p === tr.preset }))),
+          h('input', { type: 'text', 'aria-label': t('label'), value: tr.label, placeholder: t('label'), onchange: set('label') }),
+          h('input', { type: 'number', 'aria-label': t('start'), min: TRACK_LIMITS.start[0], max: TRACK_LIMITS.start[1], step: 50, value: tr.start, onchange: set('start') }),
+          h('input', { type: 'number', 'aria-label': t('duration'), min: TRACK_LIMITS.duration[0], max: TRACK_LIMITS.duration[1], step: 50, value: tr.duration, onchange: set('duration') }),
+          h('button', { type: 'button', class: 'icon-btn', 'aria-label': t('remove'), text: '×', onclick: () => (state.tracks.splice(i, 1), renderTracks(), update()) }),
+        ]),
+        h('div', { class: 'pg-lane' }, [el]),
+      ]);
+    })
+  );
+}
+
+function playTimeline() {
+  const stage = $('#pg-tl-stage');
+  stage.innerHTML = timelineMarkup(state.tracks, { trigger: 'manual' });
+  requestAnimationFrame(() => stage.querySelector('usa-timeline')?.play?.());
+}
+
+function renderPresets(selected) {
+  const all = listPresets();
+  $('#pg-preset-list').replaceChildren(h('option', { value: '', text: '—' }), ...Object.keys(all).map((n) => h('option', { value: n, text: n, selected: n === selected })));
+}
+
 function renderCode() {
   const out = playgroundSnippets(state);
   $('#pg-tabs').replaceChildren(
@@ -92,10 +161,50 @@ function update() {
   history.replaceState(null, '', `#${encodeState(state)}`);
 }
 
+let copy = () => {};
 async function boot() {
   i18n();
   renderLayers();
+  renderTracks();
+  renderPresets();
   update();
+  $('#pg-add-track').addEventListener('click', () => {
+    state.tracks.push(newTrack('fade-up', tracksDuration(state.tracks), 500, `Step ${state.tracks.length + 1}`));
+    renderTracks();
+    update();
+  });
+  $('#pg-play-tl').addEventListener('click', playTimeline);
+  $('#pg-preset-save').addEventListener('click', () => {
+    const name = $('#pg-preset-name').value.trim() || `Preset ${Object.keys(listPresets()).length + 1}`;
+    savePreset(name, state);
+    renderPresets(name);
+  });
+  $('#pg-preset-list').addEventListener('change', (e) => {
+    const s2 = e.target.value && loadPreset(e.target.value);
+    if (!s2) return;
+    state = { ...s2, tracks: s2.tracks || structuredClone(DEFAULT_TRACKS) };
+    $('#pg-preset-name').value = e.target.value;
+    renderLayers();
+    renderTracks();
+    update();
+  });
+  $('#pg-preset-del').addEventListener('click', () => {
+    const n = $('#pg-preset-list').value;
+    if (n) deletePreset(n);
+    renderPresets();
+  });
+  $('#pg-preset-json').addEventListener('click', () => copy($('#pg-preset-json'), presetToJSON($('#pg-preset-name').value || 'preset', state), 'copied', 'exportJson'));
+  $('#pg-preset-file').addEventListener('change', async (e) => {
+    const f = e.target.files?.[0];
+    const p = f && presetFromJSON(await f.text());
+    if (!p) return;
+    savePreset(p.name, p.state);
+    state = { ...p.state, tracks: p.state.tracks || structuredClone(DEFAULT_TRACKS) };
+    renderPresets(p.name);
+    renderLayers();
+    renderTracks();
+    update();
+  });
   $('#pg-add').addEventListener('click', () => {
     state.layers.push(newLayer($('#pg-effect').value));
     renderLayers();
@@ -104,7 +213,7 @@ async function boot() {
   $('#pg-content').addEventListener('change', (e) => ((state.content = e.target.value), update()));
   $('#pg-replay').addEventListener('click', update);
   // 4.0.1: clipboard can be denied (insecure context, permissions) — never throw
-  const copy = async (btn, text, done, idle) => {
+  copy = async (btn, text, done, idle) => {
     let ok = false;
     try {
       await navigator.clipboard.writeText(text);
@@ -123,6 +232,7 @@ async function boot() {
     document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
     i18n();
     renderLayers();
+    renderTracks();
     renderCode();
   });
   reduced.addEventListener?.('change', i18n);

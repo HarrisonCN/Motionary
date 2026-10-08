@@ -86,6 +86,7 @@ export function playgroundSnippets(state) {
     esm: `${imports || "import { defineComponents } from 'use-scroll-animate/components';"}\n\n${calls || 'defineComponents();'}\n\n// HTML\n${markup.split('\n').map((l) => '// ' + l).join('\n')}`,
     react: `${imports}\nimport 'use-scroll-animate/components/jsx';\n\n${calls}\n\nexport function Hero() {\n  return (\n${ind(jsx, 4)}\n  );\n}`,
     vue: `<script setup>\n${imports}\n${calls}\n</script>\n\n<template>\n${ind(markup, 2)}\n</template>\n\n<!-- vite.config: vue({ template: { compilerOptions: { isCustomElement: (t) => t.startsWith('usa-') } } }) -->`,
+    timeline: `<script type="module">\n  import { defineTimeline } from 'use-scroll-animate/components/timeline';\n  defineTimeline();\n</script>\n\n${timelineMarkup(state.tracks?.length ? state.tracks : DEFAULT_TRACKS)}`,
   };
 }
 
@@ -94,11 +95,107 @@ export const PLAYGROUND_TABS = [
   { id: 'esm', en: 'ES module', zh: 'ES 模块' },
   { id: 'react', en: 'React', zh: 'React' },
   { id: 'vue', en: 'Vue', zh: 'Vue' },
+  { id: 'timeline', en: '<usa-timeline>', zh: '<usa-timeline>' },
 ];
+
+// --- 4.6: keyframe track editor ------------------------------------------------
+/** Presets a track can use (same names as TIMELINE_PRESETS in components/timeline). */
+export const TRACK_PRESETS = ['fade', 'fade-up', 'fade-down', 'fade-left', 'fade-right', 'scale', 'blur', 'rotate', 'clip-up', 'clip-right'];
+export const TRACK_LIMITS = { start: [0, 4000], duration: [100, 3000] };
+const clampN = (v, [a, b]) => Math.min(b, Math.max(a, Math.round(Number(v) || 0)));
+
+/** A new track: one step of a <usa-timeline>, with an absolute start time (ms). */
+export function newTrack(preset = 'fade-up', start = 0, duration = 600, label = '') {
+  return { preset: TRACK_PRESETS.includes(preset) ? preset : 'fade', start: clampN(start, TRACK_LIMITS.start), duration: clampN(duration, TRACK_LIMITS.duration), label: String(label).slice(0, 40) };
+}
+
+/** Tracks with valid values, ordered by start time (stable). */
+export function normalizeTracks(tracks = []) {
+  return tracks.map((t) => newTrack(t.preset, t.start, t.duration, t.label)).map((t, i) => [t, i]).sort((a, b) => a[0].start - b[0].start || a[1] - b[1]).map(([t]) => t);
+}
+
+/** Total length of a track list in ms. */
+export const tracksDuration = (tracks = []) => tracks.reduce((m, t) => Math.max(m, t.start + t.duration), 0);
+
+/** Track bar geometry in % of the ruler (for the editor lanes). */
+export function trackBar(track, total) {
+  const T = Math.max(total, 1);
+  return { left: (track.start / T) * 100, width: (track.duration / T) * 100 };
+}
+
+/** Move / resize a track by a pointer delta in ms ("move" | "resize"), clamped. */
+export function dragTrack(track, mode, deltaMs, snap = 50) {
+  const q = (v) => Math.round(v / snap) * snap;
+  return mode === 'resize' ? newTrack(track.preset, track.start, q(track.duration + deltaMs), track.label) : newTrack(track.preset, q(track.start + deltaMs), track.duration, track.label);
+}
+
+const escAttr = (v) => String(v).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+/** Export the tracks as declarative <usa-timeline> markup (data-at = absolute ms). */
+export function timelineMarkup(tracks = [], { trigger = 'view', indent = '  ' } = {}) {
+  const list = normalizeTracks(tracks);
+  const attrs = trigger && trigger !== 'view' ? ` trigger="${escAttr(trigger)}"` : '';
+  const steps = list.map((t, i) => `${indent}<div data-tl="${t.preset}" data-at="${t.start}" data-duration="${t.duration}">${escAttr(t.label || `Step ${i + 1}`).replace(/&quot;/g, '"')}</div>`);
+  return `<usa-timeline${attrs}>\n${steps.join('\n')}\n</usa-timeline>`;
+}
+
+export const DEFAULT_TRACKS = [newTrack('fade-up', 0, 600, 'Title'), newTrack('fade-left', 300, 600, 'Subtitle'), newTrack('scale', 700, 500, 'Button')];
+
+// --- 4.6: saved presets ---------------------------------------------------------
+export const PRESET_KEY = 'usa-playground:presets';
+const store = (s) => s || (typeof localStorage !== 'undefined' ? localStorage : null);
+
+/** Saved presets: { name: encodedState }. */
+export function listPresets(storage) {
+  try {
+    const d = JSON.parse(store(storage)?.getItem(PRESET_KEY) || '{}');
+    return d && typeof d === 'object' && !Array.isArray(d) ? d : {};
+  } catch {
+    return {};
+  }
+}
+
+/** Save the current state under a name (max 40 chars, 30 presets). Returns the list. */
+export function savePreset(name, state, storage) {
+  const n = String(name || '').trim().slice(0, 40);
+  if (!n) return listPresets(storage);
+  const all = listPresets(storage);
+  all[n] = encodeState(state);
+  const names = Object.keys(all);
+  if (names.length > 30) delete all[names[0]];
+  store(storage)?.setItem(PRESET_KEY, JSON.stringify(all));
+  return all;
+}
+
+export function loadPreset(name, storage) {
+  const code = listPresets(storage)[name];
+  return code ? decodeState(code) : null;
+}
+
+export function deletePreset(name, storage) {
+  const all = listPresets(storage);
+  delete all[name];
+  store(storage)?.setItem(PRESET_KEY, JSON.stringify(all));
+  return all;
+}
+
+/** Portable preset file (JSON) and back (invalid → null). */
+export const presetToJSON = (name, state) => JSON.stringify({ format: 'use-scroll-animate/playground', version: 2, name, state: encodeState(state) }, null, 2);
+export function presetFromJSON(text) {
+  try {
+    const d = JSON.parse(text);
+    if (d?.format !== 'use-scroll-animate/playground') return null;
+    const state = decodeState(d.state);
+    return state ? { name: String(d.name || 'preset'), state } : null;
+  } catch {
+    return null;
+  }
+}
 
 /** URL-safe share string for a composition, and back (invalid input → null). */
 export function encodeState(state) {
-  const json = JSON.stringify({ c: state.content, l: (state.layers || []).map((l) => [l.tag, l.attrs]) });
+  const o = { c: state.content, l: (state.layers || []).map((l) => [l.tag, l.attrs]) };
+  if (state.tracks?.length) o.t = state.tracks.map((t) => [t.preset, t.start, t.duration, t.label]);
+  const json = JSON.stringify(o);
   const b64 = typeof btoa === 'function' ? btoa(unescape(encodeURIComponent(json))) : Buffer.from(json, 'utf8').toString('base64');
   return b64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 }
@@ -109,7 +206,9 @@ export function decodeState(s) {
     const json = typeof atob === 'function' ? decodeURIComponent(escape(atob(b64))) : Buffer.from(b64, 'base64').toString('utf8');
     const d = JSON.parse(json);
     const layers = (d.l || []).filter(([t]) => findEffect(t)).map(([tag, attrs]) => ({ tag, attrs: { ...newLayer(tag).attrs, ...attrs } }));
-    return { content: PLAYGROUND_CONTENT[d.c] ? d.c : 'card', layers };
+    const out = { content: PLAYGROUND_CONTENT[d.c] ? d.c : 'card', layers };
+    if (Array.isArray(d.t)) out.tracks = d.t.map(([p, st, du, la]) => newTrack(p, st, du, la || ''));
+    return out;
   } catch {
     return null;
   }
@@ -119,6 +218,6 @@ export function decodeState(s) {
 export const DEFAULT_STATE = { content: 'card', layers: [newLayer('usa-reveal'), newLayer('usa-tilt')] };
 
 export const PG_STRINGS = {
-  en: { title: 'Playground', lead: 'Stack effects, tweak them live, and copy the code.', add: 'Add effect', content: 'Content', layers: 'Layers (outermost first)', remove: 'Remove', up: 'Move up', down: 'Move down', preview: 'Preview', replay: 'Replay', code: 'Export code', copy: 'Copy', copied: 'Copied', copyFail: 'Copy failed', share: 'Copy share link', empty: 'No effects yet — add one.', back: 'Components', reduced: 'Reduced motion is on: effects show their final state.' },
-  zh: { title: '动效实验室', lead: '叠加效果、实时调参，并复制代码。', add: '添加效果', content: '内容', layers: '图层（由外到内）', remove: '移除', up: '上移', down: '下移', preview: '预览', replay: '重播', code: '导出代码', copy: '复制', copied: '已复制', copyFail: '复制失败', share: '复制分享链接', empty: '还没有效果 —— 添加一个吧。', back: '组件库', reduced: '已开启“减少动态效果”：效果直接显示最终状态。' },
+  en: { tracks: 'Timeline tracks', addTrack: 'Add track', playTl: 'Play timeline', presets: 'Presets', savePreset: 'Save', deletePreset: 'Delete', exportJson: 'Copy preset JSON', importJson: 'Import JSON…', presetName: 'Preset name', start: 'start', duration: 'duration', label: 'label', title: 'Playground', lead: 'Stack effects, tweak them live, and copy the code.', add: 'Add effect', content: 'Content', layers: 'Layers (outermost first)', remove: 'Remove', up: 'Move up', down: 'Move down', preview: 'Preview', replay: 'Replay', code: 'Export code', copy: 'Copy', copied: 'Copied', copyFail: 'Copy failed', share: 'Copy share link', empty: 'No effects yet — add one.', back: 'Components', reduced: 'Reduced motion is on: effects show their final state.' },
+  zh: { tracks: '时间线轨道', addTrack: '添加轨道', playTl: '播放时间线', presets: '预设', savePreset: '保存', deletePreset: '删除', exportJson: '复制预设 JSON', importJson: '导入 JSON…', presetName: '预设名称', start: '开始', duration: '时长', label: '文字', title: '动效实验室', lead: '叠加效果、实时调参，并复制代码。', add: '添加效果', content: '内容', layers: '图层（由外到内）', remove: '移除', up: '上移', down: '下移', preview: '预览', replay: '重播', code: '导出代码', copy: '复制', copied: '已复制', copyFail: '复制失败', share: '复制分享链接', empty: '还没有效果 —— 添加一个吧。', back: '组件库', reduced: '已开启“减少动态效果”：效果直接显示最终状态。' },
 };
