@@ -413,5 +413,10 @@
     "name": "import 'motionary/components/fx-music'",
     "import": "export * from 'pkg/components/fx-music';",
     "limit": 5888
+  },
+  {
+    "name": "import { registerMusicPack } from '…/components/fx-music'",
+    "import": "export { registerMusicPack } from 'pkg/components/fx-music';",
+    "limit": 5888
   }
 ]
