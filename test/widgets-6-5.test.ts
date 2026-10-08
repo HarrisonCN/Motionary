@@ -203,8 +203,8 @@ describe('6.5 showcase + Store + docs', () => {
       expect(card.since).toBe('6.5');
       expect(componentSnippets(card).html).toContain('widgets.umd.js');
     }
-    expect(componentSnippets(COMPONENTS.find((c: any) => c.id === 'fx-3d')).esm).toContain("from 'motionary/components/fx-3d'");
-    for (const id of ['milestones', 'masonry-flow', 'compare', 'cube-gallery', 'fx-3d', 'fx-3d-flip', 'fx-origami']) expect(COMPONENT_ITEMS.some((i: any) => i.gallery === id), id).toBe(true);
+    expect(componentSnippets(COMPONENTS.find((c: any) => c.id === 'fx-depth')).esm).toContain("from 'motionary/components/fx-3d'");
+    for (const id of ['milestones', 'masonry-flow', 'compare', 'cube-gallery', 'fx-depth', 'fx-depth-flip', 'fx-origami']) expect(COMPONENT_ITEMS.some((i: any) => i.gallery === id), id).toBe(true);
     const doc = readFileSync('docs/components.md', 'utf8');
     for (const s of ['<usa-milestones', '<usa-masonry-flow', '<usa-compare', '<usa-cube-gallery', 'fx-3d', 'orbit-camera']) expect(doc).toContain(s);
   });
