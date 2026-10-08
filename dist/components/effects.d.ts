@@ -307,6 +307,114 @@ interface UsaGestureFxElement extends UsaElement {
 declare function defineGestureFx(tag?: string): CustomElementConstructor | undefined;
 
 /**
+ * 5.8 — micro-interaction library (23 effects, registered through
+ * `registerEffect()`). Each one does the small piece of UI work as well as the
+ * motion — toggling `aria-pressed`, swapping a label, bumping a count, copying
+ * to the clipboard — so the state change still happens under reduced motion;
+ * only the animation is dropped (`ctx.animate` returns `null` there).
+ *
+ * Click: `copy-success`, `toggle-morph`, `password-reveal`, `favorite-star`,
+ * `like-heart`, `bookmark-flip`, `download-progress`, `submit-loading`,
+ * `send-plane`, `add-to-cart`, `counter-bump`, `upvote`, `clap`,
+ * `emoji-react`, `refresh-spin`, `trash-shake`, `check-toggle`.
+ * Attention: `input-shake`, `error-flash`, `success-check`, `nudge-hint`,
+ * `focus-pulse`, `notify-badge`.
+ */
+
+/** Toggle `aria-pressed` (or set it) and return the new state. */
+declare function togglePressed(el: HTMLElement, force?: boolean): boolean;
+/** Swap `el`'s label for `ms` (polite live region), then restore it. */
+declare function swapLabel(el: HTMLElement, text: string, ms: number): Promise<void>;
+/** Add `delta` to the number in `[data-count]` (or `el`), keeping it in `data-count`. Returns the new value. */
+declare function bumpCount(el: HTMLElement, delta: number, ctx?: EffectContext): number;
+declare const MICRO_FX: EffectDefinition[];
+
+/**
+ * use-scroll-animate/components/tokens — motion design tokens (4.2).
+ *
+ * One source of truth for durations, easings and springs: as CSS custom
+ * properties (`--usa-duration-fast`, `--usa-easing-emphasized`,
+ * `--usa-spring-bouncy-stiffness`…), as W3C Design Tokens JSON, and importable
+ * from Figma Tokens (Tokens Studio) or Style Dictionary exports.
+ *
+ * ```ts
+ * import { applyMotionTokens, importMotionTokens, motionToken } from 'use-scroll-animate/components/tokens';
+ * applyMotionTokens(importMotionTokens(await (await fetch('/tokens.json')).json()));
+ * el.animate(frames, { duration: motionToken('duration', 'slow'), easing: motionToken('easing', 'emphasized') });
+ * ```
+ */
+interface SpringToken {
+    stiffness: number;
+    damping: number;
+    mass: number;
+}
+interface MotionTokens {
+    /** Durations in ms. */
+    duration: Record<string, number>;
+    /** CSS easing strings. */
+    easing: Record<string, string>;
+    /** Spring physics parameters. */
+    spring: Record<string, SpringToken>;
+}
+type DeepPartialTokens = {
+    [K in keyof MotionTokens]?: Partial<MotionTokens[K]>;
+};
+
+/**
+ * 5.8 — theme packs: `neon`, `paper`, `glass`, `retro`, `brutalist`.
+ *
+ * A theme pack is design tokens (`--usa-theme-*` custom properties), motion
+ * tokens (merged over the 3.x motion scale) and effect presets per role
+ * (`enter`, `hover`, `click`, `attention`, `background`). Five theme effects
+ * ship with them: `neon-flicker`, `paper-fold`, `glass-shine`,
+ * `retro-scanlines`, `brutal-shift`.
+ *
+ * - `applyTheme(name, root?)` — on `<html>` (default) it also makes the motion
+ *   tokens active for `motionToken()`; on any other element the tokens are
+ *   only written as variables there. Returns an undo.
+ * - `themePreset(name, role)`, `playThemeEffect(el, role)` (theme of the
+ *   closest `[data-usa-theme]`).
+ * - `<usa-theme name="neon">` — scopes a theme to its subtree and binds the
+ *   presets to children with `data-theme-fx="click | hover | enter | attention"`.
+ */
+
+declare const THEME_ROLES: readonly ["enter", "hover", "click", "attention", "background"];
+type ThemeRole = (typeof THEME_ROLES)[number];
+interface ThemePack {
+    name: string;
+    /** Design tokens, written as `--usa-theme-<key>`. */
+    vars: Record<'bg' | 'fg' | 'accent' | 'accent-2' | 'surface' | 'border' | 'radius' | 'shadow' | 'font', string>;
+    /** Motion tokens merged over the defaults. */
+    motion: DeepPartialTokens;
+    /** Effect preset per role. */
+    presets: Record<ThemeRole, {
+        effect: string;
+        options?: Record<string, unknown>;
+    }>;
+}
+declare const THEMES: Record<string, ThemePack>;
+declare const THEME_NAMES: string[];
+/** The CSS custom properties of a theme (design + motion tokens). */
+declare function themeVars(t: string | ThemePack): Record<string, string>;
+/** A theme as a CSS rule (`selector` default `[data-usa-theme=<name>]`) — for SSR / static CSS. */
+declare function themeCss(t: string | ThemePack, selector?: string): string;
+/** Apply a theme to `root` (default `<html>`). Returns an undo. */
+declare function applyTheme(t: string | ThemePack, root?: HTMLElement): () => void;
+/** The effect preset of a theme for a role. */
+declare function themePreset(t: string | ThemePack, role: ThemeRole): {
+    effect: string;
+    options?: Record<string, unknown>;
+};
+/** Play the preset for `role` of the theme on the closest `[data-usa-theme]` (or `theme`). */
+declare function playThemeEffect(el: HTMLElement, role: ThemeRole, theme?: string): Promise<void>;
+declare const THEME_FX: EffectDefinition[];
+interface UsaThemeElement extends UsaElement {
+    readonly theme: string;
+}
+/** `<usa-theme name="neon | paper | glass | retro | brutalist">` — a themed subtree. */
+declare function defineTheme(tag?: string): CustomElementConstructor | undefined;
+
+/**
  * 5.4 — `<usa-story template="…">` scroll-storytelling templates.
  *
  * - `pin` — a sticky `[data-stage]` while `[data-step]` sections scroll past; the
@@ -362,10 +470,12 @@ declare function registerGenerativeEffects(): void;
 declare function registerAudioEffects(): void;
 /** 5.7: cursor trails, magnetic dots, spotlight cursor. */
 declare function registerCursorEffects(): void;
+/** 5.8: micro-interactions + theme-pack effects. */
+declare function registerMicroEffects(): void;
 /** Define the 5.x elements of this entry (`<usa-story>`, …) under their default tags. */
 declare function defineEffectElements(): void;
 /** Register the built-ins and every pack (idempotent). */
 declare function registerAllEffects(): void;
 
-export { AUDIO_FX, CARD_FX, CLICK_FX, CURSOR_FX, EFFECT_PACKS, GENERATIVE_FX, GESTURES, PAGE_FX, PHYSICS_FX, STORY_TEMPLATES, angleDelta, bindBeat, bindGesture, bounceKeyframes, canvasBackground, createBeatDetector, defineAudio, defineEffectElements, defineGestureFx, defineStory, disableAudio, enableAudio, flingVelocity, formatCount, fxLayer, getAudio, hexRgb, noise2, onBeat, registerAllEffects, registerAudioEffects, registerCardClickEffects, registerCursorEffects, registerGenerativeEffects, registerPageEffects, registerPhysicsEffects, solveSpring, springKeyframes, storyProgress };
-export type { AudioInput, AudioReactive, AudioSample, BeatOptions, GenFrame, GenerativeSpec, GestureDetail, GestureFxOptions, GestureName, SpringOptions, StoryTemplate, UsaAudioElement, UsaGestureFxElement, UsaStoryElement };
+export { AUDIO_FX, CARD_FX, CLICK_FX, CURSOR_FX, EFFECT_PACKS, GENERATIVE_FX, GESTURES, MICRO_FX, PAGE_FX, PHYSICS_FX, STORY_TEMPLATES, THEMES, THEME_FX, THEME_NAMES, THEME_ROLES, angleDelta, applyTheme, bindBeat, bindGesture, bounceKeyframes, bumpCount, canvasBackground, createBeatDetector, defineAudio, defineEffectElements, defineGestureFx, defineStory, defineTheme, disableAudio, enableAudio, flingVelocity, formatCount, fxLayer, getAudio, hexRgb, noise2, onBeat, playThemeEffect, registerAllEffects, registerAudioEffects, registerCardClickEffects, registerCursorEffects, registerGenerativeEffects, registerMicroEffects, registerPageEffects, registerPhysicsEffects, solveSpring, springKeyframes, storyProgress, swapLabel, themeCss, themePreset, themeVars, togglePressed };
+export type { AudioInput, AudioReactive, AudioSample, BeatOptions, GenFrame, GenerativeSpec, GestureDetail, GestureFxOptions, GestureName, SpringOptions, StoryTemplate, ThemePack, ThemeRole, UsaAudioElement, UsaGestureFxElement, UsaStoryElement, UsaThemeElement };

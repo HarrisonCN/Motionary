@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.8.0] - 2026-10-08
+
+### Added
+- **Theme packs** (`use-scroll-animate/components/effects`): `neon`, `paper`, `glass`, `retro`, `brutalist` — each = design tokens (`--usa-theme-bg|fg|accent|accent-2|surface|border|radius|shadow|font`), motion tokens merged over the motion scale, and effect presets per role (`enter`, `hover`, `click`, `attention`, `background`). API: `THEMES`, `applyTheme(name, root?)` (on `<html>` also activates the motion tokens; on an element scopes them; returns an undo), `themeVars()`, `themeCss(name, selector?)` for static / SSR CSS, `themePreset(name, role)`, `playThemeEffect(el, role)`. Helper classes `.usa-surface`, `.usa-accent`.
+- `<usa-theme name="…">` — a themed subtree; children with `data-theme-fx="click | hover | enter | attention"` get that role's preset.
+- Theme effects: `neon-flicker` (dims, never blacks out; < 3 flashes / s), `paper-fold`, `glass-shine`, `retro-scanlines` (static under reduced motion), `brutal-shift`.
+- **23 micro-interactions** (`MICRO_FX`, `registerMicroEffects()`), each doing the UI work as well as the motion: `copy-success` (clipboard + "Copied ✓"), `toggle-morph`, `password-reveal`, `favorite-star`, `like-heart`, `bookmark-flip` (all `aria-pressed`), `download-progress` / `submit-loading` (`aria-busy`, `usa-done`), `send-plane`, `add-to-cart`, `counter-bump`, `upvote`, `clap`, `emoji-react`, `refresh-spin`, `trash-shake` (`remove: true`), `check-toggle` (`aria-checked` on `role=checkbox`), `input-shake` (`aria-invalid`), `error-flash`, `success-check`, `nudge-hint`, `focus-pulse`, `notify-badge`. Helpers `togglePressed()`, `swapLabel()`, `bumpCount()`.
+- Showcase: **Micro-interactions** and **Theme packs** cards.
+
+### Accessibility
+- State changes (pressed, busy, invalid, counts, labels via a polite live region) happen with or without motion; under reduced motion only the animation is dropped.
+
 ## [5.7.0] - 2026-10-08
 
 ### Added
