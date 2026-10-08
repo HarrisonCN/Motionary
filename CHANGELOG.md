@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.6.0] - 2026-10-08
+
+### Added
+- **Sound-reactive pack** (`use-scroll-animate/components/effects`, `registerAudioEffects()`, `AUDIO_FX`, kind `background`): `spectrum-bars` (`bars`, `gap`, `mirror`), `pulse-ring` (`rings`, `color`), `wave-ring` (`color`, `amplitude`) — Canvas 2D on the 5.5 `canvasBackground()` runner (visible-only, adaptive quality); they idle gently until audio is enabled.
+- `enableAudio(input)` — analyse the microphone (`'mic'`), an `<audio>` / `<video>` element or selector, or a `MediaStream` through one shared Web Audio analyser. Must be called from a user gesture (the context is resumed there). The microphone is never routed to the speakers and is released on `stop()`; media stays audible after `stop()`. Also `disableAudio()`, `getAudio()`, `sample()` → `{ level, bass, freq, wave }`.
+- Beat detection: `createBeatDetector({ threshold, cooldown, history, floor })` (pure), `onBeat(cb)`, and `bindBeat(el, effect, options)` — plays **any registered effect** on every beat.
+- `<usa-audio source="#track | mic" label="…">` — renders (or uses your `[data-audio-toggle]`) an `aria-pressed` toggle button; children with `data-usa-beat="effect"` (`data-usa-beat-options` JSON) play that effect on beats; events `usa-beat`, `usa-audio-error` (`data-audio-error` on the host).
+- While audio runs, `--usa-audio-level` / `--usa-audio-bass` (0–1) are set on `<html>` for CSS-driven reactions.
+- Showcase: **Sound-reactive backgrounds** and **Beat-triggered effects** cards.
+
+### Accessibility
+- Audio only starts from a user gesture. Under reduced motion the visual effects are skipped, beats trigger no effects and the CSS variables stay at 0 (sound keeps playing).
+
 ## [5.5.0] - 2026-10-08
 
 ### Added
