@@ -9,6 +9,7 @@ export { b as bindBeat, c as createBeatDetector, a as disableAudio, e as enableA
 import { playEffect, bindEffect, registerEffects } from '../chunks/registry-CyKExAmE.js';
 import { u as defineElement, x as adoptStyles } from '../chunks/base-2-yYc93C.js';
 import { applyMotionTokens, motionTokensToVars, mergeMotionTokens } from './tokens.js';
+import '../chunks/builtins-HlqAkK0f.js';
 import '../chunks/core-D5rU0CV6.js';
 import '../chunks/fx-CMxWNwH8.js';
 

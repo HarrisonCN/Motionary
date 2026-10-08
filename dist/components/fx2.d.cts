@@ -442,6 +442,32 @@ declare const CHART_FX: EffectDefinition[];
 declare function registerChartPack(): void;
 
 /**
+ * 7.3 — E-commerce motion (`motionary/fx/shop`, also
+ * `motionary/components/fx-shop`):
+ *
+ * - `fly-to-cart` (click) — a ghost of the element (or its first `img`) flies
+ *   on an arc into the cart (`to`, default `[data-cart]`), shrinking; the cart
+ *   bumps when it lands.
+ * - `price-flip` (enter) — the price flips like a split-flap display from
+ *   `data-from` (or a scramble) to its text.
+ * - `stock-pulse` (loop) — a soft urgency pulse (glow ring) for low stock.
+ * - `sale-shine` (hover) — a diagonal light sweep across the element.
+ * - `badge-pop` (attention) — a sale badge pops in with a wobble.
+ *
+ * Reduced motion: fly-to-cart only bumps the cart with a fade, price-flip
+ * sets the text, stock-pulse and sale-shine do nothing, badge-pop fades.
+ */
+
+/** Quadratic-bezier arc points from a to b, lifted by `lift` px (7.3). */
+declare function arcPath(ax: number, ay: number, bx: number, by: number, lift?: number, steps?: number): {
+    x: number;
+    y: number;
+}[];
+declare const SHOP_FX: EffectDefinition[];
+/** Register the 7.3 e-commerce pack (idempotent). */
+declare function registerShopPack(): void;
+
+/**
  * 5.5 — generative backgrounds on Canvas 2D, registered through
  * `registerEffect()` (kind `background`): `flow-field`, `voronoi`,
  * `mesh-gradient`, `starfield`, `metaballs`, `contours`.
@@ -550,5 +576,5 @@ declare const EFFECT_PACKS: Record<string, EffectDefinition[]>;
 /** Register every 6.x effect pack (idempotent). */
 declare function registerEffectPacks(): void;
 
-export { CHART_FX, DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FOCUS_FX, GLSL_HEAD, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, PHYSICS2_FX, TEXT3_FX, TRANSITIONS2_FX, VerletWorld, WEATHER_FX, WGSL_HEAD, crossDocumentTransitions, fieldFallback, glslToWgsl, loadEffectPack, musicSample, packManifest, pageTransition, parseFigure, pointsToPath, register3dPack, registerChartPack, registerEffectPacks, registerFocusPack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerPhysicsPack, registerTextPack, registerTransitionsPack, registerWeatherPack, samplePath, shaderBackground, skyAt, splitChars, supportsWebGL2, supportsWebGPU, syntheticSample, trackPointer, validateManifest, webgpuBackground, wgslModule };
+export { CHART_FX, DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FOCUS_FX, GLSL_HEAD, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, PHYSICS2_FX, SHOP_FX, TEXT3_FX, TRANSITIONS2_FX, VerletWorld, WEATHER_FX, WGSL_HEAD, arcPath, crossDocumentTransitions, fieldFallback, glslToWgsl, loadEffectPack, musicSample, packManifest, pageTransition, parseFigure, pointsToPath, register3dPack, registerChartPack, registerEffectPacks, registerFocusPack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerPhysicsPack, registerShopPack, registerTextPack, registerTransitionsPack, registerWeatherPack, samplePath, shaderBackground, skyAt, splitChars, supportsWebGL2, supportsWebGPU, syntheticSample, trackPointer, validateManifest, webgpuBackground, wgslModule };
 export type { EffectPackManifest, ShaderSpec };

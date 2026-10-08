@@ -1,0 +1,7 @@
+usa-countdown{display:inline-block;font:700 12px/1.2 system-ui,sans-serif;color:var(--usa-cd-fg,inherit)}
+.usa-cd-row{display:flex;gap:var(--usa-cd-gap,10px)}
+.usa-cd-unit{display:flex;flex-direction:column;align-items:center;gap:4px}
+.usa-cd-unit small{font-size:10px;text-transform:uppercase;letter-spacing:.08em;opacity:.6}
+.usa-cd-digits{display:flex;gap:3px;perspective:300px}
+.usa-cd-d{display:grid;place-items:center;width:var(--usa-cd-w,28px);height:calc(var(--usa-cd-w,28px) * 1.35);border-radius:6px;background:var(--usa-cd-bg,#111827);color:var(--usa-cd-c,#fff);font:800 calc(var(--usa-cd-w,28px) * .8)/1 ui-monospace,monospace;box-shadow:inset 0 -1px 0 rgba(255,255,255,.08),0 4px 10px -4px rgba(0,0,0,.5);background-image:linear-gradient(transparent 49%,rgba(0,0,0,.35) 50%,transparent 51%);transform-origin:50% 50%}
+usa-countdown[data-done] .usa-cd-d{background-color:var(--usa-cd-done,#ef4444)}
