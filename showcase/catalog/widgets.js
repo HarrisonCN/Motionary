@@ -285,7 +285,7 @@ export const components = [
     '<usa-switch variant="daynight" name="dark" label="Dark mode"></usa-switch>',
     '<div class="demo-row"><usa-switch variant="ios" checked label="Wi-Fi"></usa-switch><usa-switch variant="daynight" label="Dark mode"></usa-switch><usa-switch variant="bounce" label="Bounce"></usa-switch><usa-switch variant="liquid" label="Liquid"></usa-switch></div>',
     undefined, { since: '6.7' }),
-  X('fx-transitions2', ['fx-transitions', 'registerTransitionEffects2'], 'Transitions 2.0: ripple dissolve & liquid wipe', '转场 2.0：涟漪溶解与液体擦除',
+  X('fx-ripple-wipe', ['fx-transitions', 'registerTransitionEffects2'], 'Transitions 2.0: ripple dissolve & liquid wipe', '转场 2.0：涟漪溶解与液体擦除',
     '6.7: ripple-dissolve grows a circle from the pointer; liquid-wipe sweeps a wavy edge across. pageTransition() runs them inside the View Transitions API; crossDocumentTransitions() gives an MPA the same look.',
     '6.7：ripple-dissolve 从指针处扩散圆形揭示；liquid-wipe 以波浪边缘横扫。pageTransition() 在 View Transitions API 内运行它们；crossDocumentTransitions() 让多页站点获得同样效果。',
     ['transition', 'view transitions', 'ripple', 'wipe', 'mpa', 'page'],

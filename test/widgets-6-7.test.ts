@@ -170,7 +170,7 @@ describe('6.7 showcase + Store + docs', () => {
       expect(componentSnippets(card).esm).toContain(card.define);
     }
     expect(componentSnippets(COMPONENTS.find((c: any) => c.id === 'fx-shatter')).esm).toContain("from 'motionary/components/fx-transitions'");
-    for (const id of ['stepper', 'pagination', 'segmented', 'switch', 'fx-transitions2', 'fx-shatter', 'fx-curl']) expect(COMPONENT_ITEMS.some((i: any) => i.gallery === id), id).toBe(true);
+    for (const id of ['stepper', 'pagination', 'segmented', 'switch', 'fx-ripple-wipe', 'fx-shatter', 'fx-curl']) expect(COMPONENT_ITEMS.some((i: any) => i.gallery === id), id).toBe(true);
     const doc = readFileSync('docs/components.md', 'utf8');
     for (const s of ['<usa-stepper', '<usa-pagination', '<usa-segmented', '<usa-switch', 'fx-transitions', 'pageTransition']) expect(doc).toContain(s);
   });
