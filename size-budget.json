@@ -87,7 +87,7 @@
   {
     "name": "import 'use-scroll-animate/components/text'",
     "import": "export * from 'pkg/components/text';",
-    "limit": 7936
+    "limit": 12288
   },
   {
     "name": "import 'use-scroll-animate/components/interaction'",
@@ -112,7 +112,7 @@
   {
     "name": "import { defineTypewriter } from '…/components/text'",
     "import": "export { defineTypewriter } from 'pkg/components/text';",
-    "limit": 2304
+    "limit": 2816
   },
   {
     "name": "import { defineSpinner } from '…/components/feedback'",

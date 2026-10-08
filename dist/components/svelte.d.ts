@@ -117,7 +117,11 @@ interface UsaTypewriterElement extends UsaElement {
  * them in a cascade (pure CSS animation per unit, transform / opacity /
  * filter only). Words never break across lines.
  *
- * Attributes: `by` (`chars` | `words`, default `chars`), `effect`
+ * 4.3: `Intl.Segmenter`-aware (emoji, CJK words), Arabic-script words are
+ * never split below the word, `by="lines"` reveals line by line, and `from`
+ * (`start` · `end` · `center` · `edges` · `random`) sets the cascade order.
+ *
+ * Attributes: `by` (`chars` | `words` | `lines`, default `chars`), `effect`
  * (`rise` | `fade` | `blur` | `flip` | `pop`, default `rise`), `stagger`
  * (ms between units, 28 for chars / 70 for words), `duration` (ms, 620),
  * `delay` (ms, 0), `trigger` (`view` | `load` | `manual`, default `view`),
@@ -228,6 +232,81 @@ interface UsaHandwritingElement extends UsaElement {
  */
 interface UsaScrollHighlightElement extends UsaElement {
     readonly progress: number;
+}
+
+/**
+ * Where a step starts on a timeline:
+ * - a number: absolute time in ms
+ * - `'>'` (default): when the previous step ends · `'<'`: when it starts
+ * - `'+=200'` / `'-=200'`: after / overlapping the previous end
+ * - `'<+=100'`: 100ms after the previous step's start
+ * - `'intro'` / `'intro+=150'`: at (or relative to) a label
+ */
+type TimelinePosition = number | string;
+interface TimelineStepOptions {
+    /** Duration in ms or a motion token name (`'fast'`, `'slow'`…; 4.2). Default: timeline default, 600. */
+    duration?: number | string;
+    /** CSS easing or a motion token name (`'emphasized'`, `'spring'`…; 4.2). Default `cubic-bezier(0.22, 1, 0.36, 1)`. */
+    easing?: string;
+    /** Start position, see `TimelinePosition`. */
+    at?: TimelinePosition;
+    /** ms between targets when the selector matches several elements. */
+    stagger?: number;
+}
+interface ScrubOptions {
+    /** Scroll offset (px) before the source's top reaches the viewport bottom where progress starts (JS engine only). */
+    offset?: number;
+    /** Smoothing 0–1 (0 = immediate, default 0). Smoothing needs the JS engine. */
+    smooth?: number;
+    /**
+     * 4.1: which progress source drives the timeline.
+     * - `'view'` (default): `source` moving through the viewport (CSS `ViewTimeline`, range `cover`).
+     * - `'scroll'`: the scroll position of `source` itself (a scroll container; CSS `ScrollTimeline`).
+     */
+    source?: 'view' | 'scroll';
+    /** 4.1: `'auto'` (default) uses the browser's native scroll-driven animations when available, `'js'` forces the fallback. */
+    engine?: 'auto' | 'native' | 'js';
+    /** 4.1: scroll axis, `'block'` (default) · `'inline'` · `'x'` · `'y'`. */
+    axis?: 'block' | 'inline' | 'x' | 'y';
+}
+/** The function `scrub()` returns: call it to stop. `native` tells which engine runs it. */
+interface ScrubHandle {
+    (): void;
+    /** `true` when the browser's ScrollTimeline / ViewTimeline drives it (compositor, no JS per frame). */
+    readonly native: boolean;
+}
+interface Timeline {
+    /** Total length in ms. */
+    readonly duration: number;
+    /** Label positions in ms. */
+    readonly labels: Readonly<Record<string, number>>;
+    /** Current playhead in ms. */
+    readonly time: number;
+    /** Add a step: animate `target` with keyframes or a preset name (`fade-up`, `scale`…). */
+    to(target: string | Element | Element[] | NodeList, frames: Keyframe[] | string, options?: TimelineStepOptions): Timeline;
+    /** Name a position (default: the current end). */
+    label(name: string, at?: TimelinePosition): Timeline;
+    /** Run `fn` when the playhead passes `at`. */
+    call(fn: () => void, at?: TimelinePosition): Timeline;
+    /** Play forwards from the playhead (from 0 when at the end). Resolves at the end. */
+    play(from?: TimelinePosition): Promise<void>;
+    /** Play backwards to 0. */
+    reverse(): Promise<void>;
+    pause(): Timeline;
+    /** Jump to a time (ms) or label. */
+    seek(to: TimelinePosition): Timeline;
+    /** Get or set progress 0–1. */
+    progress(p?: number): number;
+    /**
+     * Tie progress to scroll: `source` moving through the viewport (or, with
+     * `{ source: 'scroll' }`, a scroll container's own position). Runs on native
+     * ScrollTimeline / ViewTimeline when available (and no `smooth`, `offset`,
+     * `call()` cues or `onUpdate` need JS), else on a rAF-throttled listener.
+     * Returns a stop function with a `native` flag.
+     */
+    scrub(source: Element, options?: ScrubOptions): ScrubHandle;
+    /** Stop and drop every animation (elements keep their last frame). */
+    cancel(): void;
 }
 
 /**
@@ -1273,81 +1352,6 @@ declare global {
         'usa-auto-skeleton': UsaAutoSkeletonElement;
         'usa-motion-switch': UsaMotionSwitchElement;
     }
-}
-
-/**
- * Where a step starts on a timeline:
- * - a number: absolute time in ms
- * - `'>'` (default): when the previous step ends · `'<'`: when it starts
- * - `'+=200'` / `'-=200'`: after / overlapping the previous end
- * - `'<+=100'`: 100ms after the previous step's start
- * - `'intro'` / `'intro+=150'`: at (or relative to) a label
- */
-type TimelinePosition = number | string;
-interface TimelineStepOptions {
-    /** Duration in ms or a motion token name (`'fast'`, `'slow'`…; 4.2). Default: timeline default, 600. */
-    duration?: number | string;
-    /** CSS easing or a motion token name (`'emphasized'`, `'spring'`…; 4.2). Default `cubic-bezier(0.22, 1, 0.36, 1)`. */
-    easing?: string;
-    /** Start position, see `TimelinePosition`. */
-    at?: TimelinePosition;
-    /** ms between targets when the selector matches several elements. */
-    stagger?: number;
-}
-interface ScrubOptions {
-    /** Scroll offset (px) before the source's top reaches the viewport bottom where progress starts (JS engine only). */
-    offset?: number;
-    /** Smoothing 0–1 (0 = immediate, default 0). Smoothing needs the JS engine. */
-    smooth?: number;
-    /**
-     * 4.1: which progress source drives the timeline.
-     * - `'view'` (default): `source` moving through the viewport (CSS `ViewTimeline`, range `cover`).
-     * - `'scroll'`: the scroll position of `source` itself (a scroll container; CSS `ScrollTimeline`).
-     */
-    source?: 'view' | 'scroll';
-    /** 4.1: `'auto'` (default) uses the browser's native scroll-driven animations when available, `'js'` forces the fallback. */
-    engine?: 'auto' | 'native' | 'js';
-    /** 4.1: scroll axis, `'block'` (default) · `'inline'` · `'x'` · `'y'`. */
-    axis?: 'block' | 'inline' | 'x' | 'y';
-}
-/** The function `scrub()` returns: call it to stop. `native` tells which engine runs it. */
-interface ScrubHandle {
-    (): void;
-    /** `true` when the browser's ScrollTimeline / ViewTimeline drives it (compositor, no JS per frame). */
-    readonly native: boolean;
-}
-interface Timeline {
-    /** Total length in ms. */
-    readonly duration: number;
-    /** Label positions in ms. */
-    readonly labels: Readonly<Record<string, number>>;
-    /** Current playhead in ms. */
-    readonly time: number;
-    /** Add a step: animate `target` with keyframes or a preset name (`fade-up`, `scale`…). */
-    to(target: string | Element | Element[] | NodeList, frames: Keyframe[] | string, options?: TimelineStepOptions): Timeline;
-    /** Name a position (default: the current end). */
-    label(name: string, at?: TimelinePosition): Timeline;
-    /** Run `fn` when the playhead passes `at`. */
-    call(fn: () => void, at?: TimelinePosition): Timeline;
-    /** Play forwards from the playhead (from 0 when at the end). Resolves at the end. */
-    play(from?: TimelinePosition): Promise<void>;
-    /** Play backwards to 0. */
-    reverse(): Promise<void>;
-    pause(): Timeline;
-    /** Jump to a time (ms) or label. */
-    seek(to: TimelinePosition): Timeline;
-    /** Get or set progress 0–1. */
-    progress(p?: number): number;
-    /**
-     * Tie progress to scroll: `source` moving through the viewport (or, with
-     * `{ source: 'scroll' }`, a scroll container's own position). Runs on native
-     * ScrollTimeline / ViewTimeline when available (and no `smooth`, `offset`,
-     * `call()` cues or `onUpdate` need JS), else on a rAF-throttled listener.
-     * Returns a stop function with a `native` flag.
-     */
-    scrub(source: Element, options?: ScrubOptions): ScrubHandle;
-    /** Stop and drop every animation (elements keep their last frame). */
-    cancel(): void;
 }
 
 /**
