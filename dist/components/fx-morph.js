@@ -1,6 +1,6 @@
-import { u as deprecate } from '../chunks/base-D5MHqeDd.js';
-import { registerEffects } from '../chunks/registry-CTLWeg-J.js';
+import { registerEffects } from '../chunks/registry-D23neB4M.js';
 import { a as all } from '../chunks/shared-CkKHWrtJ.js';
+import '../chunks/base-DchG4q_S.js';
 
 const NS = 'http://www.w3.org/2000/svg';
 const raf = (f) => (typeof requestAnimationFrame === 'function' ? requestAnimationFrame(f) : 0);
@@ -282,11 +282,6 @@ const MORPH2_FX = [
 function registerMorphPack() {
     registerEffects(MORPH2_FX);
 }
-/** @deprecated since 6.9 — use `registerMorphPack()` (removed in 7.0; `npx usa-codemod-7`). */
-function registerMorphEffects2() {
-    deprecate('registerMorphEffects2', 'registerMorphEffects2() is deprecated since 6.9 and removed in 7.0 — use registerMorphPack() (npx usa-codemod-7).');
-    registerMorphPack();
-}
 
-export { MORPH2_FX, pointsToPath, registerMorphEffects2, registerMorphPack, samplePath };
+export { MORPH2_FX, pointsToPath, registerMorphPack, samplePath };
 //# sourceMappingURL=fx-morph.js.map

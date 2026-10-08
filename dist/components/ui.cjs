@@ -36,7 +36,7 @@ function place(floating, anchor, placement = 'top', gap = 8) {
 let uid = 0;
 const nextId = (prefix) => `${prefix}-${++uid}`;
 
-var css$a = "usa-tabs{display:block;font-family:var(--usa-font)}usa-tabs .usa-tabs-list{position:relative;display:flex;gap:4px;border-bottom:1px solid color-mix(in srgb,currentColor 14%,transparent)}usa-tabs [role=\"tab\"]{position:relative;z-index:1;padding:10px 14px;border:0;background:none;color:inherit;font:inherit;cursor:pointer;opacity:0.7;transition:opacity 0.2s ease,color 0.2s ease;border-radius:calc(var(--usa-radius,14px) / 2)}usa-tabs [role=\"tab\"][aria-selected=\"true\"]{opacity:1;color:var(--usa-accent,#7c5cff)}usa-tabs [role=\"tab\"]:focus-visible{outline:2px solid var(--usa-accent,#7c5cff);outline-offset:-2px}usa-tabs .usa-tabs-indicator{position:absolute;left:0;bottom:-1px;height:3px;width:0;border-radius:3px;background:var(--usa-accent,#7c5cff);pointer-events:none}usa-tabs[indicator=\"pill\"] .usa-tabs-list{border-bottom:0;padding:4px;border-radius:999px;background:color-mix(in srgb,currentColor 8%,transparent)}usa-tabs[indicator=\"pill\"] .usa-tabs-indicator{top:4px;bottom:4px;height:auto;border-radius:999px;opacity:0.18}usa-tabs [role=\"tabpanel\"]{padding:14px 2px}usa-tabs [role=\"tabpanel\"]:focus-visible{outline:2px solid var(--usa-accent,#7c5cff);outline-offset:2px;border-radius:6px}";
+var css$9 = "usa-tabs{display:block;font-family:var(--usa-font)}usa-tabs .usa-tabs-list{position:relative;display:flex;gap:4px;border-bottom:1px solid color-mix(in srgb,currentColor 14%,transparent)}usa-tabs [role=\"tab\"]{position:relative;z-index:1;padding:10px 14px;border:0;background:none;color:inherit;font:inherit;cursor:pointer;opacity:0.7;transition:opacity 0.2s ease,color 0.2s ease;border-radius:calc(var(--usa-radius,14px) / 2)}usa-tabs [role=\"tab\"][aria-selected=\"true\"]{opacity:1;color:var(--usa-accent,#7c5cff)}usa-tabs [role=\"tab\"]:focus-visible{outline:2px solid var(--usa-accent,#7c5cff);outline-offset:-2px}usa-tabs .usa-tabs-indicator{position:absolute;left:0;bottom:-1px;height:3px;width:0;border-radius:3px;background:var(--usa-accent,#7c5cff);pointer-events:none}usa-tabs[indicator=\"pill\"] .usa-tabs-list{border-bottom:0;padding:4px;border-radius:999px;background:color-mix(in srgb,currentColor 8%,transparent)}usa-tabs[indicator=\"pill\"] .usa-tabs-indicator{top:4px;bottom:4px;height:auto;border-radius:999px;opacity:0.18}usa-tabs [role=\"tabpanel\"]{padding:14px 2px}usa-tabs [role=\"tabpanel\"]:focus-visible{outline:2px solid var(--usa-accent,#7c5cff);outline-offset:2px;border-radius:6px}";
 
 function defineTabs(tag = 'usa-tabs') {
     variants.adoptVariants();
@@ -139,10 +139,10 @@ function defineTabs(tag = 'usa-tabs') {
                 this.motion(p, [{ opacity: 0, transform: `translateX(${i > prev ? 16 : -16}px)` }, { opacity: 1, transform: 'none' }], { duration: 280, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' });
             this.emit('change', { index: i });
         }
-    }, { id: 'tabs', text: css$a });
+    }, { id: 'tabs', text: css$9 });
 }
 
-var css$9 = "usa-drawer,usa-bottom-sheet{position:fixed;z-index:1001;box-sizing:border-box;overflow:auto;overscroll-behavior:contain;touch-action:pan-y;will-change:transform;outline:none}usa-drawer{top:0;bottom:0;left:0;width:min(86vw,360px);border-radius:0 var(--usa-radius,14px) var(--usa-radius,14px) 0;padding:20px}usa-drawer[side=\"right\"]{left:auto;right:0;border-radius:var(--usa-radius,14px) 0 0 var(--usa-radius,14px)}usa-drawer[side=\"top\"],usa-drawer[side=\"bottom\"]{left:0;right:0;width:auto;bottom:auto;max-height:80vh;border-radius:0 0 var(--usa-radius,14px) var(--usa-radius,14px);touch-action:pan-x}usa-drawer[side=\"bottom\"]{top:auto;bottom:0;border-radius:var(--usa-radius,14px) var(--usa-radius,14px) 0 0}usa-bottom-sheet{left:0;right:0;bottom:0;margin:0 auto;max-width:640px;border-radius:22px 22px 0 0;padding:8px 20px 24px;touch-action:none}usa-bottom-sheet .usa-sheet-handle{width:40px;height:5px;border-radius:3px;margin:4px auto 14px;background:color-mix(in srgb,currentColor 35%,transparent);cursor:grab}usa-drawer[hidden],usa-bottom-sheet[hidden]{display:none}.usa-panel-backdrop{position:fixed;inset:0;z-index:1000;background:rgb(0 0 0 / 0.45)}";
+var css$8 = "usa-drawer,usa-bottom-sheet{position:fixed;z-index:1001;box-sizing:border-box;overflow:auto;overscroll-behavior:contain;touch-action:pan-y;will-change:transform;outline:none}usa-drawer{top:0;bottom:0;left:0;width:min(86vw,360px);border-radius:0 var(--usa-radius,14px) var(--usa-radius,14px) 0;padding:20px}usa-drawer[side=\"right\"]{left:auto;right:0;border-radius:var(--usa-radius,14px) 0 0 var(--usa-radius,14px)}usa-drawer[side=\"top\"],usa-drawer[side=\"bottom\"]{left:0;right:0;width:auto;bottom:auto;max-height:80vh;border-radius:0 0 var(--usa-radius,14px) var(--usa-radius,14px);touch-action:pan-x}usa-drawer[side=\"bottom\"]{top:auto;bottom:0;border-radius:var(--usa-radius,14px) var(--usa-radius,14px) 0 0}usa-bottom-sheet{left:0;right:0;bottom:0;margin:0 auto;max-width:640px;border-radius:22px 22px 0 0;padding:8px 20px 24px;touch-action:none}usa-bottom-sheet .usa-sheet-handle{width:40px;height:5px;border-radius:3px;margin:4px auto 14px;background:color-mix(in srgb,currentColor 35%,transparent);cursor:grab}usa-drawer[hidden],usa-bottom-sheet[hidden]{display:none}.usa-panel-backdrop{position:fixed;inset:0;z-index:1000;background:rgb(0 0 0 / 0.45)}";
 
 /** Shared machinery of `<usa-drawer>` and `<usa-bottom-sheet>`: backdrop, focus, Esc, drag-to-dismiss. */
 function makePanel(Base, kind) {
@@ -299,7 +299,7 @@ function makePanel(Base, kind) {
 }
 function defineDrawer(tag = 'usa-drawer') {
     variants.adoptVariants();
-    return base.defineElement(tag, (Base) => makePanel(Base, 'drawer'), { id: 'sheet', text: css$9 });
+    return base.defineElement(tag, (Base) => makePanel(Base, 'drawer'), { id: 'sheet', text: css$8 });
 }
 function defineBottomSheet(tag = 'usa-bottom-sheet') {
     variants.adoptVariants();
@@ -342,10 +342,10 @@ function defineBottomSheet(tag = 'usa-bottom-sheet') {
                 super.render(v);
             }
         };
-    }, { id: 'sheet', text: css$9 });
+    }, { id: 'sheet', text: css$8 });
 }
 
-var css$8 = "usa-pull-refresh{position:relative;display:block;overflow:auto;overscroll-behavior-y:contain;touch-action:pan-x pan-down}usa-pull-refresh>:not(.usa-pull-indicator):not(.usa-sr){transform:translateY(var(--usa-pull,0px))}usa-pull-refresh .usa-pull-indicator{position:absolute;left:50%;top:0;width:34px;height:34px;margin-left:-17px;z-index:2;display:grid;place-items:center;border-radius:50%;background:var(--usa-surface,#1b1e27);box-shadow:var(--usa-shadow);color:var(--usa-accent,#7c5cff);transform:translateY(calc(var(--usa-pull,0px) - 40px)) rotate(calc(var(--usa-pull-p,0) * 270deg));opacity:var(--usa-pull-p,0);pointer-events:none}usa-pull-refresh .usa-pull-indicator svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round}usa-pull-refresh .usa-pull-indicator circle{stroke-dasharray:calc(var(--usa-pull-p,0) * 75) 100}usa-pull-refresh[data-armed] .usa-pull-indicator{background:var(--usa-accent,#7c5cff);color:var(--usa-accent-text,#fff)}usa-pull-refresh[data-refreshing] .usa-pull-indicator{opacity:1;animation:usa-pull-spin 0.8s linear infinite}usa-pull-refresh[data-refreshing] .usa-pull-indicator circle{stroke-dasharray:60 100}@keyframes usa-pull-spin{from{transform:translateY(calc(var(--usa-pull,0px) - 40px)) rotate(0)}to{transform:translateY(calc(var(--usa-pull,0px) - 40px)) rotate(360deg)}}@media (prefers-reduced-motion:reduce){usa-pull-refresh[data-refreshing] .usa-pull-indicator{animation-duration:2.4s;transform:translateY(8px)}}";
+var css$7 = "usa-pull-refresh{position:relative;display:block;overflow:auto;overscroll-behavior-y:contain;touch-action:pan-x pan-down}usa-pull-refresh>:not(.usa-pull-indicator):not(.usa-sr){transform:translateY(var(--usa-pull,0px))}usa-pull-refresh .usa-pull-indicator{position:absolute;left:50%;top:0;width:34px;height:34px;margin-left:-17px;z-index:2;display:grid;place-items:center;border-radius:50%;background:var(--usa-surface,#1b1e27);box-shadow:var(--usa-shadow);color:var(--usa-accent,#7c5cff);transform:translateY(calc(var(--usa-pull,0px) - 40px)) rotate(calc(var(--usa-pull-p,0) * 270deg));opacity:var(--usa-pull-p,0);pointer-events:none}usa-pull-refresh .usa-pull-indicator svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round}usa-pull-refresh .usa-pull-indicator circle{stroke-dasharray:calc(var(--usa-pull-p,0) * 75) 100}usa-pull-refresh[data-armed] .usa-pull-indicator{background:var(--usa-accent,#7c5cff);color:var(--usa-accent-text,#fff)}usa-pull-refresh[data-refreshing] .usa-pull-indicator{opacity:1;animation:usa-pull-spin 0.8s linear infinite}usa-pull-refresh[data-refreshing] .usa-pull-indicator circle{stroke-dasharray:60 100}@keyframes usa-pull-spin{from{transform:translateY(calc(var(--usa-pull,0px) - 40px)) rotate(0)}to{transform:translateY(calc(var(--usa-pull,0px) - 40px)) rotate(360deg)}}@media (prefers-reduced-motion:reduce){usa-pull-refresh[data-refreshing] .usa-pull-indicator{animation-duration:2.4s;transform:translateY(8px)}}";
 
 function definePullRefresh(tag = 'usa-pull-refresh') {
     variants.adoptVariants();
@@ -444,10 +444,10 @@ function definePullRefresh(tag = 'usa-pull-refresh') {
                     Promise.resolve(fn(ev)).then(done, done);
             });
         }
-    }, { id: 'pull-refresh', text: css$8 });
+    }, { id: 'pull-refresh', text: css$7 });
 }
 
-var css$7 = "usa-fab{position:fixed;right:max(20px,env(safe-area-inset-right));bottom:max(20px,env(safe-area-inset-bottom));z-index:900;display:grid;place-items:center}usa-fab[position=\"bottom-left\"]{right:auto;left:max(20px,env(safe-area-inset-left))}usa-fab[position=\"inline\"]{position:relative;right:auto;bottom:auto;display:inline-grid}usa-fab>*{grid-area:1 / 1}usa-fab .usa-fab-main{position:relative;z-index:1;width:56px;height:56px;border-radius:min(var(--usa-radius,14px) * 1.2,28px);border:0;display:grid;place-items:center;font-size:24px;cursor:pointer;background:var(--usa-accent,#7c5cff);color:var(--usa-accent-text,#fff);box-shadow:var(--usa-shadow);transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1)}usa-fab[open] .usa-fab-main{transform:rotate(45deg)}usa-fab .usa-fab-action{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;opacity:0;transform:scale(0.4);will-change:transform,opacity}usa-fab .usa-fab-main:focus-visible,usa-fab .usa-fab-action:focus-visible{outline:2px solid var(--usa-accent,#7c5cff);outline-offset:3px}@media (prefers-reduced-motion:reduce){usa-fab .usa-fab-main{transition:none}}";
+var css$6 = "usa-fab{position:fixed;right:max(20px,env(safe-area-inset-right));bottom:max(20px,env(safe-area-inset-bottom));z-index:900;display:grid;place-items:center}usa-fab[position=\"bottom-left\"]{right:auto;left:max(20px,env(safe-area-inset-left))}usa-fab[position=\"inline\"]{position:relative;right:auto;bottom:auto;display:inline-grid}usa-fab>*{grid-area:1 / 1}usa-fab .usa-fab-main{position:relative;z-index:1;width:56px;height:56px;border-radius:min(var(--usa-radius,14px) * 1.2,28px);border:0;display:grid;place-items:center;font-size:24px;cursor:pointer;background:var(--usa-accent,#7c5cff);color:var(--usa-accent-text,#fff);box-shadow:var(--usa-shadow);transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1)}usa-fab[open] .usa-fab-main{transform:rotate(45deg)}usa-fab .usa-fab-action{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;opacity:0;transform:scale(0.4);will-change:transform,opacity}usa-fab .usa-fab-main:focus-visible,usa-fab .usa-fab-action:focus-visible{outline:2px solid var(--usa-accent,#7c5cff);outline-offset:3px}@media (prefers-reduced-motion:reduce){usa-fab .usa-fab-main{transition:none}}";
 
 function defineFab(tag = 'usa-fab') {
     variants.adoptVariants();
@@ -533,10 +533,10 @@ function defineFab(tag = 'usa-fab') {
             this.apply(true);
             this.emit('toggle', { open: next });
         }
-    }, { id: 'fab', text: css$7 });
+    }, { id: 'fab', text: css$6 });
 }
 
-var css$6 = "usa-navbar{position:sticky;top:0;z-index:800;display:block;transition:transform 0.35s cubic-bezier(0.22,1,0.36,1),padding 0.25s ease,box-shadow 0.25s ease;will-change:transform}usa-navbar[data-hidden]{transform:translateY(-100%)}usa-navbar[data-scrolled]{box-shadow:var(--usa-shadow,0 6px 20px -10px rgb(0 0 0 / 0.4))}usa-navbar[shrink][data-scrolled]{padding-block:4px}@media (prefers-reduced-motion:reduce){usa-navbar{transition:none}}";
+var css$5 = "usa-navbar{position:sticky;top:0;z-index:800;display:block;transition:transform 0.35s cubic-bezier(0.22,1,0.36,1),padding 0.25s ease,box-shadow 0.25s ease;will-change:transform}usa-navbar[data-hidden]{transform:translateY(-100%)}usa-navbar[data-scrolled]{box-shadow:var(--usa-shadow,0 6px 20px -10px rgb(0 0 0 / 0.4))}usa-navbar[shrink][data-scrolled]{padding-block:4px}@media (prefers-reduced-motion:reduce){usa-navbar{transition:none}}";
 
 function defineNavbar(tag = 'usa-navbar') {
     variants.adoptVariants();
@@ -589,10 +589,10 @@ function defineNavbar(tag = 'usa-navbar') {
             this.removeAttribute('data-hidden');
             this.emit('show');
         }
-    }, { id: 'navbar', text: css$6 });
+    }, { id: 'navbar', text: css$5 });
 }
 
-var css$5 = "usa-slider{--usa-slider:0;position:relative;display:block;height:28px;min-width:120px;touch-action:none;cursor:pointer;-webkit-tap-highlight-color:transparent}usa-slider .usa-slider-track{position:absolute;left:0;right:0;top:50%;height:6px;margin-top:-3px;border-radius:3px;background:color-mix(in srgb,currentColor 16%,transparent);overflow:hidden}usa-slider .usa-slider-fill{position:absolute;inset:0;background:var(--usa-accent,#7c5cff);transform-origin:0 50%;transform:scaleX(var(--usa-slider))}usa-slider .usa-slider-thumb{position:absolute;top:50%;left:calc(var(--usa-slider) * 100%);width:20px;height:20px;margin:-10px 0 0 -10px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgb(0 0 0 / 0.35),0 0 0 4px color-mix(in srgb,var(--usa-accent,#7c5cff) 0%,transparent);transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.2s ease}usa-slider:hover .usa-slider-thumb,usa-slider:focus-visible .usa-slider-thumb{box-shadow:0 1px 4px rgb(0 0 0 / 0.35),0 0 0 6px color-mix(in srgb,var(--usa-accent,#7c5cff) 25%,transparent)}usa-slider[data-dragging] .usa-slider-thumb{transform:scale(1.25)}usa-slider .usa-slider-bubble{position:absolute;bottom:150%;left:50%;transform:translateX(-50%) scale(0.6);opacity:0;padding:2px 8px;border-radius:8px;font:600 12px/1.6 system-ui,sans-serif;color:var(--usa-accent-text,#fff);background:var(--usa-accent,#7c5cff);white-space:nowrap;pointer-events:none;transition:opacity 0.15s ease,transform 0.25s cubic-bezier(0.34,1.56,0.64,1)}usa-slider[bubble][data-dragging] .usa-slider-bubble,usa-slider[bubble]:focus-visible .usa-slider-bubble{opacity:1;transform:translateX(-50%) scale(1)}usa-slider:focus-visible{outline:none}usa-slider[disabled]{opacity:0.45;cursor:not-allowed}@media (prefers-reduced-motion:reduce){usa-slider .usa-slider-thumb,usa-slider .usa-slider-bubble{transition:none}}";
+var css$4 = "usa-slider{--usa-slider:0;position:relative;display:block;height:28px;min-width:120px;touch-action:none;cursor:pointer;-webkit-tap-highlight-color:transparent}usa-slider .usa-slider-track{position:absolute;left:0;right:0;top:50%;height:6px;margin-top:-3px;border-radius:3px;background:color-mix(in srgb,currentColor 16%,transparent);overflow:hidden}usa-slider .usa-slider-fill{position:absolute;inset:0;background:var(--usa-accent,#7c5cff);transform-origin:0 50%;transform:scaleX(var(--usa-slider))}usa-slider .usa-slider-thumb{position:absolute;top:50%;left:calc(var(--usa-slider) * 100%);width:20px;height:20px;margin:-10px 0 0 -10px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgb(0 0 0 / 0.35),0 0 0 4px color-mix(in srgb,var(--usa-accent,#7c5cff) 0%,transparent);transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.2s ease}usa-slider:hover .usa-slider-thumb,usa-slider:focus-visible .usa-slider-thumb{box-shadow:0 1px 4px rgb(0 0 0 / 0.35),0 0 0 6px color-mix(in srgb,var(--usa-accent,#7c5cff) 25%,transparent)}usa-slider[data-dragging] .usa-slider-thumb{transform:scale(1.25)}usa-slider .usa-slider-bubble{position:absolute;bottom:150%;left:50%;transform:translateX(-50%) scale(0.6);opacity:0;padding:2px 8px;border-radius:8px;font:600 12px/1.6 system-ui,sans-serif;color:var(--usa-accent-text,#fff);background:var(--usa-accent,#7c5cff);white-space:nowrap;pointer-events:none;transition:opacity 0.15s ease,transform 0.25s cubic-bezier(0.34,1.56,0.64,1)}usa-slider[bubble][data-dragging] .usa-slider-bubble,usa-slider[bubble]:focus-visible .usa-slider-bubble{opacity:1;transform:translateX(-50%) scale(1)}usa-slider:focus-visible{outline:none}usa-slider[disabled]{opacity:0.45;cursor:not-allowed}@media (prefers-reduced-motion:reduce){usa-slider .usa-slider-thumb,usa-slider .usa-slider-bubble{transition:none}}";
 
 function defineSlider(tag = 'usa-slider') {
     variants.adoptVariants();
@@ -713,10 +713,10 @@ function defineSlider(tag = 'usa-slider') {
         }
         UsaSlider.formAssociated = true;
         return UsaSlider;
-    }, { id: 'slider', text: css$5 });
+    }, { id: 'slider', text: css$4 });
 }
 
-var css$4 = "usa-rating{--usa-rating-on:#f5b301;display:inline-flex;gap:2px;font-size:1.5em;line-height:1;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}usa-rating[readonly]{cursor:default}usa-rating .usa-rating-star{display:inline-block;color:color-mix(in srgb,currentColor 22%,transparent);transition:color 0.15s ease,transform 0.2s ease}usa-rating .usa-rating-star[data-on]{color:var(--usa-rating-on)}usa-rating[data-previewing] .usa-rating-star{color:color-mix(in srgb,currentColor 22%,transparent)}usa-rating[data-previewing] .usa-rating-star[data-preview]{color:var(--usa-rating-on);transform:scale(1.12)}usa-rating:focus-visible{outline:2px solid var(--usa-accent,#7c5cff);outline-offset:3px;border-radius:6px}@media (prefers-reduced-motion:reduce){usa-rating .usa-rating-star{transition:none;transform:none !important}}";
+var css$3 = "usa-rating{--usa-rating-on:#f5b301;display:inline-flex;gap:2px;font-size:1.5em;line-height:1;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}usa-rating[readonly]{cursor:default}usa-rating .usa-rating-star{display:inline-block;color:color-mix(in srgb,currentColor 22%,transparent);transition:color 0.15s ease,transform 0.2s ease}usa-rating .usa-rating-star[data-on]{color:var(--usa-rating-on)}usa-rating[data-previewing] .usa-rating-star{color:color-mix(in srgb,currentColor 22%,transparent)}usa-rating[data-previewing] .usa-rating-star[data-preview]{color:var(--usa-rating-on);transform:scale(1.12)}usa-rating:focus-visible{outline:2px solid var(--usa-accent,#7c5cff);outline-offset:3px;border-radius:6px}@media (prefers-reduced-motion:reduce){usa-rating .usa-rating-star{transition:none;transform:none !important}}";
 
 function defineRating(tag = 'usa-rating') {
     variants.adoptVariants();
@@ -801,64 +801,7 @@ function defineRating(tag = 'usa-rating') {
         }
         UsaRating.formAssociated = true;
         return UsaRating;
-    }, { id: 'rating', text: css$4 });
-}
-
-var css$3 = "usa-tooltip{display:inline-block}usa-tooltip .usa-tooltip-bubble{position:fixed;z-index:2000;max-width:260px;padding:6px 10px;font-size:0.85rem;line-height:1.4;pointer-events:none;--usa-radius:8px;white-space:normal}usa-tooltip .usa-tooltip-bubble[hidden]{display:none}";
-
-function defineTooltip(tag = 'usa-tooltip') {
-    variants.adoptVariants();
-    return base.defineElement(tag, (Base) => class UsaTooltip extends Base {
-        constructor() {
-            super(...arguments);
-            this._tip = null;
-        }
-        static get observedAttributes() {
-            return ['text'];
-        }
-        mount() {
-            base.deprecate('usa-tooltip', '<usa-tooltip> is deprecated since 6.9 and removed in 7.0 — use <usa-tip> (motionary/components/widgets; npx usa-codemod-7).');
-            const trigger = this.firstElementChild || this;
-            const tip = document.createElement('span');
-            tip.className = 'usa-tooltip-bubble usa-surface';
-            tip.setAttribute('role', 'tooltip');
-            tip.id = nextId('usa-tip');
-            tip.textContent = this.str('text');
-            tip.hidden = true;
-            this.append(tip);
-            this._tip = tip;
-            trigger.setAttribute('aria-describedby', tip.id);
-            const later = () => {
-                clearTimeout(this._t);
-                this._t = setTimeout(() => this.show(), this.num('delay', 300));
-            };
-            this.listen(this, 'pointerenter', later);
-            this.listen(this, 'pointerleave', () => this.hide());
-            this.listen(this, 'focusin', () => this.show());
-            this.listen(this, 'focusout', () => this.hide());
-            this.listen(document, 'keydown', (e) => e.key === 'Escape' && this.hide());
-            this.onCleanup(() => {
-                clearTimeout(this._t);
-                tip.remove();
-                trigger.removeAttribute('aria-describedby');
-            });
-        }
-        show() {
-            const tip = this._tip;
-            if (!tip || !tip.hidden || !this.str('text'))
-                return;
-            clearTimeout(this._t);
-            tip.hidden = false;
-            const p = place(tip, this.firstElementChild || this, this.str('placement', 'top'));
-            const d = { top: [0, 6], bottom: [0, -6], left: [6, 0], right: [-6, 0] }[p];
-            this.motion(tip, this.reduced ? [{ opacity: 0 }, { opacity: 1 }] : [{ opacity: 0, transform: `translate(${d[0]}px, ${d[1]}px) scale(0.85)` }, { opacity: 1, transform: 'none' }], this.reduced ? { duration: 120 } : spring.springEasing('stiff'));
-        }
-        hide() {
-            clearTimeout(this._t);
-            if (this._tip)
-                this._tip.hidden = true;
-        }
-    }, { id: 'tooltip', text: css$3 });
+    }, { id: 'rating', text: css$3 });
 }
 
 var css$2 = "usa-popover{display:inline-block}usa-popover .usa-popover-panel{position:fixed;z-index:1500;min-width:180px;max-width:min(92vw,360px);padding:12px 14px;outline:none}usa-popover .usa-popover-panel[hidden]{display:none}";
@@ -1012,7 +955,7 @@ function defineAvatarStack(tag = 'usa-avatar-stack') {
  * motionary/components/ui — animated UI components + style variants (v2.6).
  * `<usa-tabs>`, `<usa-drawer>`, `<usa-bottom-sheet>`, `<usa-pull-refresh>`,
  * `<usa-fab>`, `<usa-navbar>`, `<usa-slider>`, `<usa-rating>`,
- * `<usa-tooltip>`, `<usa-popover>`, `<usa-badge>`, `<usa-avatar-stack>`,
+ * `<usa-popover>`, `<usa-badge>`, `<usa-avatar-stack>`,
  * and `variant="minimal | neon | glass | brutalist | fluent | material"`
  * design tokens (`setVariant()`, `VARIANTS`).
  */
@@ -1026,7 +969,6 @@ function defineUiComponents() {
     defineNavbar();
     defineSlider();
     defineRating();
-    defineTooltip();
     definePopover();
     defineBadge();
     defineAvatarStack();
@@ -1046,6 +988,5 @@ exports.definePullRefresh = definePullRefresh;
 exports.defineRating = defineRating;
 exports.defineSlider = defineSlider;
 exports.defineTabs = defineTabs;
-exports.defineTooltip = defineTooltip;
 exports.defineUiComponents = defineUiComponents;
 //# sourceMappingURL=ui.cjs.map

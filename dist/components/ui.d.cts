@@ -120,20 +120,6 @@ interface UsaRatingElement extends UsaElement {
 declare function defineRating(tag?: string): CustomElementConstructor | undefined;
 
 /**
- * `<usa-tooltip text="…">` — a tooltip for the element it wraps, shown on
- * hover (after `delay` ms, 300) and on keyboard focus, hidden on Esc / blur.
- * It springs in from its placement side and flips to stay on screen; the
- * trigger gets `aria-describedby`.
- * Attributes: `text`, `placement` (`top` default, `bottom`, `left`, `right`),
- * `delay`, `variant`. Reduced motion: fades only.
- */
-interface UsaTooltipElement extends UsaElement {
-    show(): void;
-    hide(): void;
-}
-declare function defineTooltip(tag?: string): CustomElementConstructor | undefined;
-
-/**
  * `<usa-popover>` — a click-to-open popover: the first element child is the
  * trigger, `[data-popover]` is the content. Springs open from the trigger,
  * flips to stay on screen; Esc or an outside click closes and focus returns
@@ -196,7 +182,7 @@ type Placement = 'top' | 'bottom' | 'left' | 'right';
  * motionary/components/ui — animated UI components + style variants (v2.6).
  * `<usa-tabs>`, `<usa-drawer>`, `<usa-bottom-sheet>`, `<usa-pull-refresh>`,
  * `<usa-fab>`, `<usa-navbar>`, `<usa-slider>`, `<usa-rating>`,
- * `<usa-tooltip>`, `<usa-popover>`, `<usa-badge>`, `<usa-avatar-stack>`,
+ * `<usa-popover>`, `<usa-badge>`, `<usa-avatar-stack>`,
  * and `variant="minimal | neon | glass | brutalist | fluent | material"`
  * design tokens (`setVariant()`, `VARIANTS`).
  */
@@ -213,12 +199,11 @@ declare global {
         'usa-navbar': UsaNavbarElement;
         'usa-slider': UsaSliderElement;
         'usa-rating': UsaRatingElement;
-        'usa-tooltip': UsaTooltipElement;
         'usa-popover': UsaPopoverElement;
         'usa-badge': UsaBadgeElement;
         'usa-avatar-stack': UsaAvatarStackElement;
     }
 }
 
-export { VARIANTS, adoptVariants, defineAvatarStack, defineBadge, defineBottomSheet, defineDrawer, defineFab, defineNavbar, definePopover, definePullRefresh, defineRating, defineSlider, defineTabs, defineTooltip, defineUiComponents, setVariant };
-export type { Placement, UsaAvatarStackElement, UsaBadgeElement, UsaBottomSheetElement, UsaDrawerElement, UsaFabElement, UsaNavbarElement, UsaPopoverElement, UsaPullRefreshElement, UsaRatingElement, UsaSliderElement, UsaTabsElement, UsaTooltipElement, Variant };
+export { VARIANTS, adoptVariants, defineAvatarStack, defineBadge, defineBottomSheet, defineDrawer, defineFab, defineNavbar, definePopover, definePullRefresh, defineRating, defineSlider, defineTabs, defineUiComponents, setVariant };
+export type { Placement, UsaAvatarStackElement, UsaBadgeElement, UsaBottomSheetElement, UsaDrawerElement, UsaFabElement, UsaNavbarElement, UsaPopoverElement, UsaPullRefreshElement, UsaRatingElement, UsaSliderElement, UsaTabsElement, Variant };

@@ -1,6 +1,6 @@
-import { u as deprecate, i as getMotionSensitivity, a as MOTION_SENSITIVITY_LEVELS, g as configureComponents, x as adoptStyles } from '../chunks/base-D5MHqeDd.js';
-export { d as adaptKeyframes } from '../chunks/base-D5MHqeDd.js';
-import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-DucKMQr_.js';
+import { x as deprecate, i as getMotionSensitivity, a as MOTION_SENSITIVITY_LEVELS, g as configureComponents, v as adoptStyles } from '../chunks/base-DchG4q_S.js';
+export { d as adaptKeyframes } from '../chunks/base-DchG4q_S.js';
+import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-C04JP8g4.js';
 
 /**
  * 4.9 — the 5.0 modern-browser baseline. `baselineReport()` lists which

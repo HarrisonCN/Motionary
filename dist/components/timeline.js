@@ -1,6 +1,6 @@
-import { y as defineElement } from '../chunks/base-D5MHqeDd.js';
-import { t as timeline, T as TIMELINE_PRESETS } from '../chunks/core-DyJu5r5a.js';
-export { r as resolvePosition, s as supportsNativeScrub } from '../chunks/core-DyJu5r5a.js';
+import { y as defineElement } from '../chunks/base-DchG4q_S.js';
+import { t as timeline, T as TIMELINE_PRESETS } from '../chunks/core-DVyTlo9Q.js';
+export { r as resolvePosition, s as supportsNativeScrub } from '../chunks/core-DVyTlo9Q.js';
 import './tokens.js';
 
 var css = "usa-timeline{display:block}usa-timeline[scrub]{position:relative}@media (prefers-reduced-motion:reduce){usa-timeline [data-tl]{opacity:1 !important;transform:none !important;filter:none !important;clip-path:none !important}}";

@@ -122,8 +122,6 @@ declare function loadEffectPack(src: string | {
 declare const GPU_FX: EffectDefinition[];
 /** Register the 6.2 GPU pack (idempotent). */
 declare function registerGpuPack(): void;
-/** @deprecated since 6.9 — use `registerGpuPack()` (removed in 7.0; `npx usa-codemod-7`). */
-declare function registerGpuEffects(): void;
 
 /**
  * 6.3 — Text effects 3.0 (`motionary/components/fx-text`), registered through
@@ -150,8 +148,6 @@ declare function splitChars(el: HTMLElement): HTMLElement[];
 declare const TEXT3_FX: EffectDefinition[];
 /** Register the 6.3 text pack (idempotent). */
 declare function registerTextPack(): void;
-/** @deprecated since 6.9 — use `registerTextPack()` (removed in 7.0; `npx usa-codemod-7`). */
-declare function registerTextEffects3(): void;
 
 /**
  * 6.4 — Light & materials (`motionary/components/fx-light`), registered
@@ -180,8 +176,6 @@ declare function trackPointer(el: HTMLElement, ctx: EffectContext, fn: (x: numbe
 declare const LIGHT_FX: EffectDefinition[];
 /** Register the 6.4 light & materials pack (idempotent). */
 declare function registerLightPack(): void;
-/** @deprecated since 6.9 — use `registerLightPack()` (removed in 7.0; `npx usa-codemod-7`). */
-declare function registerLightEffects(): void;
 
 /**
  * 6.5 — 3D scene cards (`motionary/components/fx-3d`), registered through
@@ -205,8 +199,6 @@ declare function registerLightEffects(): void;
 declare const DEPTH3_FX: EffectDefinition[];
 /** Register the 6.5 3D pack (idempotent). */
 declare function register3dPack(): void;
-/** @deprecated since 6.9 — use `register3dPack()` (removed in 7.0; `npx usa-codemod-7`). */
-declare function register3dEffects(): void;
 
 /**
  * 6.6 — Morph & SVG 2.0 (`motionary/components/fx-morph`), registered
@@ -234,8 +226,6 @@ declare const pointsToPath: (pts: [number, number][]) => string;
 declare const MORPH2_FX: EffectDefinition[];
 /** Register the 6.6 morph & SVG pack (idempotent). */
 declare function registerMorphPack(): void;
-/** @deprecated since 6.9 — use `registerMorphPack()` (removed in 7.0; `npx usa-codemod-7`). */
-declare function registerMorphEffects2(): void;
 
 /**
  * 6.7 — Transitions 2.0 (`motionary/components/fx-transitions`), registered
@@ -269,8 +259,6 @@ declare function pageTransition(update: () => void | Promise<void>, effect?: str
 declare function crossDocumentTransitions(effect?: string, duration?: number): () => void;
 /** Register the 6.7 transitions pack (idempotent). */
 declare function registerTransitionsPack(): void;
-/** @deprecated since 6.9 — use `registerTransitionsPack()` (removed in 7.0; `npx usa-codemod-7`). */
-declare function registerTransitionEffects2(): void;
 
 /**
  * 6.8 — Weather & ambience (`motionary/components/fx-weather`), registered
@@ -297,8 +285,6 @@ declare function skyAt(hour: number): [string, string];
 declare const WEATHER_FX: EffectDefinition[];
 /** Register the 6.8 weather & ambience pack (idempotent). */
 declare function registerWeatherPack(): void;
-/** @deprecated since 6.9 — use `registerWeatherPack()` (removed in 7.0; `npx usa-codemod-7`). */
-declare function registerWeatherEffects(): void;
 
 /**
  * 6.8 — Interactive physics 2.0 (`motionary/components/fx-physics`) on a tiny
@@ -346,8 +332,6 @@ declare class VerletWorld {
 declare const PHYSICS2_FX: EffectDefinition[];
 /** Register the 6.8 physics 2.0 pack (idempotent). */
 declare function registerPhysicsPack(): void;
-/** @deprecated since 6.9 — use `registerPhysicsPack()` (removed in 7.0; `npx usa-codemod-7`). */
-declare function registerPhysicsEffects2(): void;
 
 /**
  * 6.9 — Focus & feedback (`motionary/components/fx-focus`), registered
@@ -414,6 +398,8 @@ interface GenerativeSpec {
 /** GLSL shared by every shader: uniforms, hash, value noise, fbm. */
 declare const GLSL_HEAD = "#version 300 es\nprecision highp float;\nuniform vec2 u_res;uniform float u_t;uniform vec3 u_c0,u_c1,u_c2;uniform vec2 u_ptr;uniform float u_speed,u_scale;\nout vec4 o;\nfloat h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}\nfloat n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+1.),f.x),f.y);}\nfloat fbm(vec2 p){float v=0.,a=.5;for(int k=0;k<5;k++){v+=a*n(p);p=p*2.03+vec2(1.7,9.2);a*=.5;}return v;}\n";
 interface ShaderSpec {
+    /** 7.0: hand-written WGSL statements for the WebGPU backend (default: `glslToWgsl(body)`). */
+    wgsl?: string;
     /** GLSL body of `main()`: `uv` (0–1), `p` (aspect-corrected, scaled), `t` (s × speed) are in scope; write `o`. */
     body: string;
     /** Canvas 2D fallback. */
@@ -422,7 +408,9 @@ interface ShaderSpec {
 declare function supportsWebGL2(): boolean;
 /**
  * Mount a shader background behind `el` (options: `colors` [3 hex], `speed`,
- * `scale`, `quality`, `backend` = `'auto' | 'webgl2' | 'canvas'`). Returns the cleanup.
+ * `scale`, `quality`, `backend` = `'auto' | 'webgpu' | 'webgl2' | 'canvas'`).
+ * 7.0: `auto` tries WebGPU first, then WebGL2, then Canvas 2D
+ * (`el.dataset.usaBackend` names the one running). Returns the cleanup.
  */
 declare function shaderBackground(el: HTMLElement, fx: EffectContext, spec: ShaderSpec, o: any): () => void;
 /**
@@ -430,6 +418,39 @@ declare function shaderBackground(el: HTMLElement, fx: EffectContext, spec: Shad
  * returns `[r, g, b]` (0–255), sampled on a coarse grid and scaled up smoothly.
  */
 declare function fieldFallback(color: (x: number, y: number, t: number, o: any) => [number, number, number], cell?: number): GenerativeSpec;
+
+/**
+ * 7.0 — WebGPU backend for the shader backgrounds (`shaderBackground()`).
+ *
+ * Every 6.x shader is written once as a small GLSL `main()` body. 7.0 runs it
+ * on **WebGPU** where the browser has it: `glslToWgsl()` translates the body
+ * (types, constructors, literals, loops, uniforms) into a WGSL fragment
+ * shader with the same noise helpers; a spec can also ship hand-written
+ * `wgsl`. If WebGPU is missing, the adapter / device is refused, or the
+ * shader does not compile, the effect falls back to **WebGL2**, then to the
+ * Canvas 2D fallback — `el.dataset.usaBackend` says which one runs.
+ */
+
+/** WGSL shared by every shader: uniforms, hash, value noise, fbm (mirrors `GLSL_HEAD`). */
+declare const WGSL_HEAD = "struct U{res:vec2f,ptr:vec2f,t:f32,speed:f32,scale:f32,pad:f32,c0:vec4f,c1:vec4f,c2:vec4f};\n@group(0) @binding(0) var<uniform> u:U;\nfn h(p:vec2f)->f32{return fract(sin(dot(p,vec2f(127.1,311.7)))*43758.5453);}\nfn n(p:vec2f)->f32{let i=floor(p);var f=fract(p);f=f*f*(3.0-2.0*f);return mix(mix(h(i),h(i+vec2f(1.0,0.0)),f.x),mix(h(i+vec2f(0.0,1.0)),h(i+vec2f(1.0,1.0)),f.x),f.y);}\nfn fbm(p0:vec2f)->f32{var v=0.0;var a=0.5;var p=p0;for(var k=0;k<5;k++){v+=a*n(p);p=p*2.03+vec2f(1.7,9.2);a*=0.5;}return v;}\n@vertex fn vs(@builtin(vertex_index) i:u32)->@builtin(position) vec4f{var q=array<vec2f,3>(vec2f(-1.0,-1.0),vec2f(3.0,-1.0),vec2f(-1.0,3.0));return vec4f(q[i],0.0,1.0);}\n";
+/**
+ * Translate a GLSL `main()` body (the 6.x `ShaderSpec.body` dialect) to WGSL
+ * statements. Throws on constructs it does not support (ternaries, `mod`,
+ * `discard`, user functions) so the caller can fall back to WebGL2.
+ */
+declare function glslToWgsl(body: string): string;
+/** The full WGSL module for a body. */
+declare const wgslModule: (body: string) => string;
+/** `true` when `navigator.gpu` exists (the adapter may still be refused). */
+declare const supportsWebGPU: () => boolean;
+/**
+ * Start a WebGPU shader background behind `el`. Resolves to its cleanup, or
+ * `null` when WebGPU cannot run this shader (the caller falls back).
+ */
+declare function webgpuBackground(el: HTMLElement, fx: EffectContext, spec: {
+    body: string;
+    wgsl?: string;
+}, o: any): Promise<(() => void) | null>;
 
 /**
  * The 6.x effect packs, one entry each (`motionary/components/fx-gpu`, …) so
@@ -441,10 +462,6 @@ declare function fieldFallback(color: (x: number, y: number, t: number, o: any) 
 declare const EFFECT_PACKS: Record<string, EffectDefinition[]>;
 /** Register every 6.x effect pack (idempotent). */
 declare function registerEffectPacks(): void;
-/** @deprecated since 6.9 — `EFFECT_PACKS` (removed in 7.0). */
-declare const FX2_PACKS: Record<string, EffectDefinition<Record<string, any>>[]>;
-/** @deprecated since 6.9 — use `registerEffectPacks()` (removed in 7.0; `npx usa-codemod-7`). */
-declare function registerFx2(): void;
 
-export { DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FOCUS_FX, FX2_PACKS, GLSL_HEAD, GPU_FX, LIGHT_FX, MORPH2_FX, PHYSICS2_FX, TEXT3_FX, TRANSITIONS2_FX, VerletWorld, WEATHER_FX, crossDocumentTransitions, fieldFallback, loadEffectPack, packManifest, pageTransition, pointsToPath, register3dEffects, register3dPack, registerEffectPacks, registerFocusPack, registerFx2, registerGpuEffects, registerGpuPack, registerLightEffects, registerLightPack, registerMorphEffects2, registerMorphPack, registerPhysicsEffects2, registerPhysicsPack, registerTextEffects3, registerTextPack, registerTransitionEffects2, registerTransitionsPack, registerWeatherEffects, registerWeatherPack, samplePath, shaderBackground, skyAt, splitChars, supportsWebGL2, trackPointer, validateManifest };
+export { DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FOCUS_FX, GLSL_HEAD, GPU_FX, LIGHT_FX, MORPH2_FX, PHYSICS2_FX, TEXT3_FX, TRANSITIONS2_FX, VerletWorld, WEATHER_FX, WGSL_HEAD, crossDocumentTransitions, fieldFallback, glslToWgsl, loadEffectPack, packManifest, pageTransition, pointsToPath, register3dPack, registerEffectPacks, registerFocusPack, registerGpuPack, registerLightPack, registerMorphPack, registerPhysicsPack, registerTextPack, registerTransitionsPack, registerWeatherPack, samplePath, shaderBackground, skyAt, splitChars, supportsWebGL2, supportsWebGPU, trackPointer, validateManifest, webgpuBackground, wgslModule };
 export type { EffectPackManifest, ShaderSpec };

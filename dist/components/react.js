@@ -1,4 +1,4 @@
-import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-DucKMQr_.js';
+import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-C04JP8g4.js';
 
 /**
  * motionary/components/react — React wrappers for every `<usa-*>`
@@ -12,7 +12,7 @@ import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-DucKMQr_.js';
  * import { createUsaComponents } from 'motionary/components/react';
  * import { defineComponents } from 'motionary/components';
  * defineComponents();
- * const { UsaButton, UsaToggle } = createUsaComponents(React);
+ * const { UsaButton, UsaSwitch } = createUsaComponents(React);
  * <UsaButton deform="squash" onUsaSubmit={(e) => e.detail.done(true)}><button>Pay</button></UsaButton>
  * ```
  *

@@ -29,7 +29,7 @@ require('./packs.cjs');
 require('./fx.cjs');
 require('../chunks/registry-DehBVRDV.cjs');
 require('./a11y.cjs');
-require('../chunks/index-tags-wv0R_vkO.cjs');
+require('../chunks/index-tags-BTMwrfgV.cjs');
 require('./perf.cjs');
 require('./bridge.cjs');
 
@@ -47,7 +47,7 @@ require('./bridge.cjs');
  * app.use(UsaPlugin, { categories: ['click', 'cards'] });
  * ```
  * In templates, listen with `@usa:change="…"` and bind properties with
- * `.prop`: `<usa-toggle :checked.prop="on" @usa:change="on = $event.detail.checked">`.
+ * `.prop`: `<usa-switch :checked.prop="on" @usa:change="on = $event.detail.checked">`.
  */
 /** `compilerOptions.isCustomElement` predicate for every `<usa-*>` tag. */
 const isUsaElement = (tag) => tag.startsWith('usa-');

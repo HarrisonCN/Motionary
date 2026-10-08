@@ -1,5 +1,5 @@
-import { p as prefersReducedMotion, u as deprecate } from '../chunks/base-D5MHqeDd.js';
-import { getEffect, registerEffects } from '../chunks/registry-CTLWeg-J.js';
+import { getEffect, registerEffects } from '../chunks/registry-D23neB4M.js';
+import { p as prefersReducedMotion } from '../chunks/base-DchG4q_S.js';
 import { b as origin, a as all } from '../chunks/shared-CkKHWrtJ.js';
 
 const fade = (el, ctx, out) => ctx.animate(el, out ? [{ opacity: 1 }, { opacity: 0 }] : [{ opacity: 0 }, { opacity: 1 }], { duration: 200, fill: out ? 'forwards' : 'none' });
@@ -222,7 +222,7 @@ async function pageTransition(update, effect = 'ripple-dissolve', options = {}, 
     await update();
     const el = target || document.body.firstElementChild;
     if (el && def) {
-        const { playEffect } = await import('../chunks/registry-CTLWeg-J.js');
+        const { playEffect } = await import('../chunks/registry-D23neB4M.js');
         await playEffect(el, effect, { ...options, mode: 'in' });
     }
 }
@@ -239,11 +239,6 @@ function crossDocumentTransitions(effect = 'ripple-dissolve', duration = 700) {
 function registerTransitionsPack() {
     registerEffects(TRANSITIONS2_FX);
 }
-/** @deprecated since 6.9 — use `registerTransitionsPack()` (removed in 7.0; `npx usa-codemod-7`). */
-function registerTransitionEffects2() {
-    deprecate('registerTransitionEffects2', 'registerTransitionEffects2() is deprecated since 6.9 and removed in 7.0 — use registerTransitionsPack() (npx usa-codemod-7).');
-    registerTransitionsPack();
-}
 
-export { TRANSITIONS2_FX, crossDocumentTransitions, pageTransition, registerTransitionEffects2, registerTransitionsPack };
+export { TRANSITIONS2_FX, crossDocumentTransitions, pageTransition, registerTransitionsPack };
 //# sourceMappingURL=fx-transitions.js.map

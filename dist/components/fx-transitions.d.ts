@@ -73,7 +73,5 @@ declare function pageTransition(update: () => void | Promise<void>, effect?: str
 declare function crossDocumentTransitions(effect?: string, duration?: number): () => void;
 /** Register the 6.7 transitions pack (idempotent). */
 declare function registerTransitionsPack(): void;
-/** @deprecated since 6.9 — use `registerTransitionsPack()` (removed in 7.0; `npx usa-codemod-7`). */
-declare function registerTransitionEffects2(): void;
 
-export { TRANSITIONS2_FX, crossDocumentTransitions, pageTransition, registerTransitionEffects2, registerTransitionsPack };
+export { TRANSITIONS2_FX, crossDocumentTransitions, pageTransition, registerTransitionsPack };

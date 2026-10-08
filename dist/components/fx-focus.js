@@ -1,5 +1,5 @@
-import { registerEffects } from '../chunks/registry-CTLWeg-J.js';
-import '../chunks/base-D5MHqeDd.js';
+import { registerEffects } from '../chunks/registry-D23neB4M.js';
+import '../chunks/base-DchG4q_S.js';
 
 const NS = 'http://www.w3.org/2000/svg';
 function overlay(el, z = 1) {

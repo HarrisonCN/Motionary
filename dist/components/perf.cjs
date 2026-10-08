@@ -1,7 +1,7 @@
 'use strict';
 
 var base = require('../chunks/base-BaQV-2ha.cjs');
-var indexTags = require('../chunks/index-tags-wv0R_vkO.cjs');
+var indexTags = require('../chunks/index-tags-BTMwrfgV.cjs');
 
 /**
  * motionary/components/perf — performance toolkit (4.5).

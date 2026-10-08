@@ -1,6 +1,6 @@
-import { playEffect } from './registry-CTLWeg-J.js';
-import { y as defineElement, p as prefersReducedMotion } from './base-D5MHqeDd.js';
-import { T as TIMELINE_PRESETS } from './core-DyJu5r5a.js';
+import { playEffect } from './registry-D23neB4M.js';
+import { y as defineElement, p as prefersReducedMotion } from './base-DchG4q_S.js';
+import { T as TIMELINE_PRESETS } from './core-DVyTlo9Q.js';
 
 /**
  * 5.4 — `<usa-story template="…">` scroll-storytelling templates.
@@ -513,4 +513,4 @@ function definePlayer(tag = 'usa-player') {
 }
 
 export { ANIMATION_FORMAT as A, STORY_TEMPLATES as S, definePlayer as a, createPlayer as c, defineStory as d, formatCount as f, normalizeAnimation as n, storyProgress as s };
-//# sourceMappingURL=player-DH3TIz-t.js.map
+//# sourceMappingURL=player-C-TwEEy6.js.map

@@ -63,7 +63,5 @@ interface EffectDefinition<O extends Record<string, unknown> = Record<string, an
 declare const DEPTH3_FX: EffectDefinition[];
 /** Register the 6.5 3D pack (idempotent). */
 declare function register3dPack(): void;
-/** @deprecated since 6.9 — use `register3dPack()` (removed in 7.0; `npx usa-codemod-7`). */
-declare function register3dEffects(): void;
 
-export { DEPTH3_FX, register3dEffects, register3dPack };
+export { DEPTH3_FX, register3dPack };
