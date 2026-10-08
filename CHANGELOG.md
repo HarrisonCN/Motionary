@@ -19,6 +19,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Showcase: 6 new gallery cards with copyable code and live demos; Animation Store 305 → 311 items.
 - Note: the plan's “avatar stack” already ships as `<usa-avatar-stack>` (unchanged), so 7.4 adds `<usa-presence>` instead.
 
+### Fixed
+- `<usa-reactions>` (pre-release staging): two type errors broke `tsc` — `picker.hidden` (now `boolean | "until-found"` in the DOM lib) passed to a boolean toggle, and `.type` set on an `HTMLElement` — fixed (`=== true`, `setAttribute('type','button')`).
+
 ### Accessibility
 - Message list = `log` (polite) with a labelled typing bubble; reactions = labelled `group` of `aria-pressed` toggle buttons with counts in their labels; bell = `button` with `aria-expanded` and the unread count in its label, list = labelled region, Esc returns focus; presence = labelled `img` ("Ada Lovelace, online"). Reduced motion: no pop, smooth scroll, roll, float, swing, bump, slide, ripple, pulse or ring spin; typing dots are static; `reaction-burst` does nothing, `read-receipt` / `mention-glow` show their end state.
 
