@@ -9,6 +9,10 @@ import { MORPH2_FX, registerMorphEffects2 } from './fx-morph.js';
 export { pointsToPath, samplePath } from './fx-morph.js';
 import { TRANSITIONS2_FX, registerTransitionEffects2 } from './fx-transitions.js';
 export { crossDocumentTransitions, pageTransition } from './fx-transitions.js';
+import { WEATHER_FX, registerWeatherEffects } from './fx-weather.js';
+export { skyAt } from './fx-weather.js';
+import { PHYSICS2_FX, registerPhysicsEffects2 } from './fx-physics.js';
+export { VerletWorld } from './fx-physics.js';
 import '../chunks/registry-D23neB4M.js';
 import '../chunks/base-DchG4q_S.js';
 import '../chunks/generative-2LhxG5BJ.js';
@@ -22,6 +26,8 @@ const FX2_PACKS = {
     depth: DEPTH3_FX,
     morph: MORPH2_FX,
     transitions: TRANSITIONS2_FX,
+    weather: WEATHER_FX,
+    physics: PHYSICS2_FX,
 };
 /** Register every 6.x pack (idempotent). */
 function registerFx2() {
@@ -31,7 +37,9 @@ function registerFx2() {
     register3dEffects();
     registerMorphEffects2();
     registerTransitionEffects2();
+    registerWeatherEffects();
+    registerPhysicsEffects2();
 }
 
-export { DEPTH3_FX, FX2_PACKS, GPU_FX, LIGHT_FX, MORPH2_FX, TEXT3_FX, TRANSITIONS2_FX, register3dEffects, registerFx2, registerGpuEffects, registerLightEffects, registerMorphEffects2, registerTextEffects3, registerTransitionEffects2 };
+export { DEPTH3_FX, FX2_PACKS, GPU_FX, LIGHT_FX, MORPH2_FX, PHYSICS2_FX, TEXT3_FX, TRANSITIONS2_FX, WEATHER_FX, register3dEffects, registerFx2, registerGpuEffects, registerLightEffects, registerMorphEffects2, registerPhysicsEffects2, registerTextEffects3, registerTransitionEffects2, registerWeatherEffects };
 //# sourceMappingURL=fx2.js.map

@@ -662,6 +662,33 @@ crossDocumentTransitions('camera-dolly');                       // MPA: @view-tr
 - `<usa-switch variant="ios | daynight | bounce | liquid" checked disabled name value>`: `checked`, `toggle()`; `usa:change`.
 - Transitions 2.0 (`mode: "in" | "out"`): `ripple-dissolve` (`x`, `y`, from the pointer on click) · `shatter` (`pieces`) · `mosaic-flip` (`cols`, `rows`) · `liquid-wipe` (`direction`, `waves`) · `page-curl` · `camera-dolly` (`scale`). Reduced motion: short fades.
 
+### v6.8 Widgets: kanban, swipe deck, weather card, pull-cord (`components/widgets`) + weather & ambience (`components/fx-weather`) + physics 2.0 (`components/fx-physics`)
+
+```html
+<usa-kanban label="Sprint">
+  <section data-title="To do"><h3>To do</h3><div data-card>Design</div></section>
+  <section data-title="Done"><h3>Done</h3></section>
+</usa-kanban>
+<usa-swipe-deck threshold="110"><article>Ada</article><article>Grace</article></usa-swipe-deck>
+<usa-weather-card condition="snow" temp="-3" place="Oslo"></usa-weather-card>
+<usa-pull-cord label="Desk lamp"></usa-pull-cord>
+
+<usa-fx effect="rain-glass" trigger="load"><header>…</header></usa-fx>
+<usa-fx effect="cloth" trigger="load"><div class="banner">…</div></usa-fx>
+```
+```js
+import { defineWidgets } from 'motionary/components/widgets';
+import { registerWeatherEffects } from 'motionary/components/fx-weather';
+import { registerPhysicsEffects2, VerletWorld } from 'motionary/components/fx-physics';
+defineWidgets(); registerWeatherEffects(); registerPhysicsEffects2();
+```
+- `<usa-kanban>`: columns = children (`data-title` / first heading), cards = `[data-card]` or `<li>`; `move(card, column, index)`; `usa:move` (`{ card, from, to, index }`).
+- `<usa-swipe-deck threshold>`: `like()`, `nope()`, `undo()`, `top`; `usa:swipe` (`{ card, dir, index }`), `usa:empty`.
+- `<usa-weather-card condition temp unit place label>`: conditions `clear | cloudy | rain | snow | storm | fog | night`.
+- `<usa-pull-cord threshold on>`: `on`, `toggle()`; `usa:change` (`{ on }`).
+- Weather: `rain-glass` · `snowfall` (`pile`) · `lightning` (`interval` ≥ 2.5, `glow` ≤ 0.22) · `fog` · `aurora-veil` · `day-cycle` (`cycle`, `hour`); `skyAt(hour)`.
+- Physics 2.0: `soft-body` (`stiffness`, `damping`) · `magnet` (`strength`, `radius`) · `cloth` · `rope` · `pinball`; `new VerletWorld(gravity, damping, iterations)`.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

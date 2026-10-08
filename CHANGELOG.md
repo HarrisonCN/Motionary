@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.8.0] - 2026-10-08
+
+### Added
+- **4 new components (6.8)** in `motionary/components/widgets` (also in `dist/widgets.umd.js`; the existing `<usa-swipeable>`, `<usa-draggable>` and `<usa-pull-refresh>` are unchanged):
+  - `<usa-kanban>` — kanban board with drag-sort: lifted card tilts with the drag, a placeholder opens at the drop point and the other cards glide aside (FLIP); full keyboard move (Space / arrows / Space, Esc) with polite announcements; `move()`; `usa:move`.
+  - `<usa-swipe-deck>` — Tinder-style deck: drag / fling the top card off with rotation and LIKE / NOPE stamps, spring back below `threshold`; `like()`, `nope()`, `undo()`, ← / →; `usa:swipe`, `usa:empty`.
+  - `<usa-weather-card>` — animated weather widget: `condition="clear | cloudy | rain | snow | storm | fog | night"` scenes (turning sun, drifting clouds, rain, snow, flash-safe bolt, fog bands, stars), cross-fade on change, temperature count-up; `temp`, `unit`, `place`, `label`.
+  - `<usa-pull-cord>` — lamp pull-cord switch: drag the cord past `threshold`, release to toggle; the cord swings back on a damped spring (SVG); click / Space / Enter tug it; `role="switch"`; `usa:change`.
+- **Weather & ambience — `motionary/components/fx-weather`** (6 Canvas 2D backgrounds, `registerWeatherEffects()`, also in `registerFx2()`): `rain-glass`, `snowfall` (piles up), `lightning` (photosensitive-safe: ≥ 2.5 s between bolts, glow ≤ 22 %, none under reduced motion), `fog`, `aurora-veil`, `day-cycle` (dawn → night, sun / moon arc, or fixed `hour`). Helper `skyAt(hour)`.
+- **Physics 2.0 — `motionary/components/fx-physics`** (`registerPhysicsEffects2()`, also in `registerFx2()`): `soft-body` and `magnet` (hover), `cloth`, `rope` and `pinball` (Canvas 2D backgrounds that react to the pointer); exported `VerletWorld` (points, sticks, gravity, damping, `push()`).
+- Showcase: 10 new gallery cards with copyable code; Animation Store “Components 6.x” 42 → 52 entries (269 → 279 items).
+
+### Accessibility
+- Kanban columns are labelled lists, cards are focusable with keyboard pick-up / move / drop and live announcements; the deck is a labelled region with arrow keys; the weather card is a group whose label is the text summary (scene `aria-hidden`); the pull-cord is a `switch`. Reduced motion: no tilt / glide / fly / swing / count-up; weather and physics backgrounds draw one static frame; lightning never flashes.
+
 ## [6.7.0] - 2026-10-08
 
 ### Added

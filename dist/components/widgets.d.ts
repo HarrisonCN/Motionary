@@ -423,6 +423,73 @@ declare const SWITCH_VARIANTS: readonly ["ios", "daynight", "bounce", "liquid"];
 declare function defineSwitch(tag?: string): CustomElementConstructor | undefined;
 
 /**
+ * `<usa-kanban>` (6.8) — a kanban board with drag-sort. Children are the
+ * columns (any element; a `[data-title]` attribute or its first heading is
+ * the title); the column's `[data-card]` children (or `<li>`s) are cards.
+ * Drag a card (pointer or touch): it lifts and tilts toward the drag
+ * direction, a placeholder opens where it will land, and the other cards
+ * glide out of the way (FLIP). Keyboard: Space / Enter picks a card up,
+ * arrows move it (← → between columns, ↑ ↓ within), Space drops, Esc cancels;
+ * moves are announced politely. Event `usa:move` (`{ card, from, to, index }`).
+ * Reduced motion: no tilt or glide.
+ */
+interface UsaKanbanElement extends UsaElement {
+    readonly columns: HTMLElement[];
+    cardsOf(col: HTMLElement): HTMLElement[];
+    move(card: HTMLElement, to: HTMLElement, index: number): void;
+}
+declare function defineKanban(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-swipe-deck>` (6.8) — a stack of swipe cards (Tinder style). Drag the
+ * top card: it follows the pointer and rotates, "LIKE" / "NOPE" stamps fade
+ * in, and past `threshold` px (or a fast fling) it flies off; otherwise it
+ * springs back. The next card scales up from behind. Buttons / keys:
+ * `like()`, `nope()`, ← / →, and `undo()` brings the last card back.
+ * Event `usa:swipe` (`{ card, dir: 'left' | 'right', index }`) and
+ * `usa:empty`. Reduced motion: cards fade instead of flying.
+ */
+interface UsaSwipeDeckElement extends UsaElement {
+    readonly cards: HTMLElement[];
+    readonly top: HTMLElement | null;
+    like(): void;
+    nope(): void;
+    undo(): void;
+}
+declare function defineSwipeDeck(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-weather-card>` (6.8) — an animated weather widget. `condition`
+ * (`clear | cloudy | rain | snow | storm | fog | night`) picks an animated
+ * icon and sky (sun rays turn, clouds drift, rain and snow fall, a gentle —
+ * flash-safe — bolt, fog bands, twinkling stars); `temp` counts up to the
+ * value, `unit` (°), `place` and `label` fill the text. Changing `condition`
+ * cross-fades the scene. Reduced motion: static icon, no count-up. The scene
+ * is decorative; the text is the accessible summary (`role="group"` with an
+ * `aria-label` like "Rain, 12°, Lisbon").
+ */
+interface UsaWeatherCardElement extends UsaElement {
+    condition: string;
+}
+declare const WEATHER_CONDITIONS: readonly ["clear", "cloudy", "rain", "snow", "storm", "fog", "night"];
+declare function defineWeatherCard(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-pull-cord>` (6.8) — a lamp pull-cord switch. Drag the handle down
+ * (or click / Space / Enter): the cord stretches, and when released past
+ * `threshold` px it toggles `on` with a click-bounce; the cord swings back on
+ * a damped spring (simulated, drawn as an SVG curve). The lamp shade above
+ * glows when on (CSS custom property `--usa-pc-glow`). A real switch:
+ * `role="switch"`, `aria-checked`; event `usa:change` (`{ on }`). Reduced
+ * motion: no swing — it just toggles.
+ */
+interface UsaPullCordElement extends UsaElement {
+    on: boolean;
+    toggle(force?: boolean): void;
+}
+declare function definePullCord(tag?: string): CustomElementConstructor | undefined;
+
+/**
  * motionary/components/widgets — the 6.x animated UI widgets, in their own
  * entry so `motionary/components` and `components/lite` keep their size
  * budgets. Every widget is reduced-motion safe and keyboard accessible.
@@ -467,8 +534,12 @@ declare global {
         'usa-pagination': UsaPaginationElement;
         'usa-segmented': UsaSegmentedElement;
         'usa-switch': UsaSwitchElement;
+        'usa-kanban': UsaKanbanElement;
+        'usa-swipe-deck': UsaSwipeDeckElement;
+        'usa-weather-card': UsaWeatherCardElement;
+        'usa-pull-cord': UsaPullCordElement;
     }
 }
 
-export { CAROUSEL_EFFECTS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PROGRESS_VARIANTS, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WIDGETS, WIDGET_TAGS, defineCarousel, defineCompare, defineCubeGallery, defineDisclosure, defineDock, defineMasonryFlow, defineMenu, defineMenuToggle, defineMilestones, defineModal, defineNavMorph, defineOdometer, definePagination, defineProgressRing, defineSegmented, defineSheet, defineSkeletonReveal, defineStarRating, defineStepper, defineStories, defineSwitch, defineTabBar, defineTip, defineToastStack, defineWidgets, pageWindow, stackToast };
-export type { StackToastOptions, UsaCarouselElement, UsaCompareElement, UsaCubeGalleryElement, UsaDisclosureElement, UsaDockElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMilestonesElement, UsaModalElement, UsaNavMorphElement, UsaOdometerElement, UsaPaginationElement, UsaProgressRingElement, UsaSegmentedElement, UsaSheetElement, UsaSkeletonRevealElement, UsaStarRatingElement, UsaStepperElement, UsaStoriesElement, UsaSwitchElement, UsaTabBarElement, UsaTipElement, UsaToastStackElement };
+export { CAROUSEL_EFFECTS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PROGRESS_VARIANTS, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, defineCarousel, defineCompare, defineCubeGallery, defineDisclosure, defineDock, defineKanban, defineMasonryFlow, defineMenu, defineMenuToggle, defineMilestones, defineModal, defineNavMorph, defineOdometer, definePagination, defineProgressRing, definePullCord, defineSegmented, defineSheet, defineSkeletonReveal, defineStarRating, defineStepper, defineStories, defineSwipeDeck, defineSwitch, defineTabBar, defineTip, defineToastStack, defineWeatherCard, defineWidgets, pageWindow, stackToast };
+export type { StackToastOptions, UsaCarouselElement, UsaCompareElement, UsaCubeGalleryElement, UsaDisclosureElement, UsaDockElement, UsaKanbanElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMilestonesElement, UsaModalElement, UsaNavMorphElement, UsaOdometerElement, UsaPaginationElement, UsaProgressRingElement, UsaPullCordElement, UsaSegmentedElement, UsaSheetElement, UsaSkeletonRevealElement, UsaStarRatingElement, UsaStepperElement, UsaStoriesElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTipElement, UsaToastStackElement, UsaWeatherCardElement };
