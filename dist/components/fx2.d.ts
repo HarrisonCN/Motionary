@@ -115,6 +115,29 @@ declare const LIGHT_FX: EffectDefinition[];
 declare function registerLightEffects(): void;
 
 /**
+ * 6.5 — 3D scene cards (`motionary/components/fx-3d`), registered through
+ * `registerEffect()`:
+ *
+ * - `depth-stack` (card, persistent) — the children (or `[data-depth]`
+ *   layers) separate in Z and parallax against each other as the card tilts
+ *   toward the pointer.
+ * - `product-spin` (card, persistent) — a 360° product viewer: drag to turn
+ *   the element in 3D with inertia, idles with a slow turntable spin.
+ * - `card-flip-3d` (click) — a thick card flips to its back face (second
+ *   child) with an edge that shows its depth.
+ * - `origami` (enter) — the element unfolds panel by panel like folded paper.
+ * - `orbit-camera` (scroll, persistent) — while the element scrolls through
+ *   the viewport the camera orbits its 3D children.
+ *
+ * Reduced motion: no tilt, spin, orbit or fold; the flip swaps faces with a
+ * crossfade.
+ */
+
+declare const DEPTH3_FX: EffectDefinition[];
+/** Register the 6.5 3D pack (idempotent). */
+declare function register3dEffects(): void;
+
+/**
  * 5.5 — generative backgrounds on Canvas 2D, registered through
  * `registerEffect()` (kind `background`): `flow-field`, `voronoi`,
  * `mesh-gradient`, `starfield`, `metaballs`, `contours`.
@@ -186,5 +209,5 @@ declare const FX2_PACKS: Record<string, EffectDefinition[]>;
 /** Register every 6.x pack (idempotent). */
 declare function registerFx2(): void;
 
-export { FX2_PACKS, GLSL_HEAD, GPU_FX, LIGHT_FX, TEXT3_FX, fieldFallback, registerFx2, registerGpuEffects, registerLightEffects, registerTextEffects3, shaderBackground, splitChars, supportsWebGL2, trackPointer };
+export { DEPTH3_FX, FX2_PACKS, GLSL_HEAD, GPU_FX, LIGHT_FX, TEXT3_FX, fieldFallback, register3dEffects, registerFx2, registerGpuEffects, registerLightEffects, registerTextEffects3, shaderBackground, splitChars, supportsWebGL2, trackPointer };
 export type { ShaderSpec };

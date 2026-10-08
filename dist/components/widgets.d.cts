@@ -232,6 +232,67 @@ interface UsaStarRatingElement extends UsaElement {
 declare function defineStarRating(tag?: string): CustomElementConstructor | undefined;
 
 /**
+ * `<usa-milestones>` (6.5) — a scroll-drawn timeline: a progress line grows
+ * down the rail as you scroll, and each milestone (a child element, with an
+ * optional `data-date`) pops its dot and slides its card in when the line
+ * reaches it. Cards alternate sides on wide screens (`layout="alternate"`,
+ * default) or sit on one side (`layout="left"`); below 640 px they always
+ * stack. Events `usa:reach` (`{ index }`). Reduced motion: everything is
+ * shown, the line is full.
+ */
+interface UsaMilestonesElement extends UsaElement {
+    readonly reached: number;
+}
+declare function defineMilestones(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-masonry-flow>` (6.5) — a masonry grid whose items glide to their
+ * new places (FLIP) whenever the layout changes: resize, items added or
+ * removed, `filter()`, `shuffle()`, `sort()`. Columns come from `min`
+ * (minimum column width, px) and `gap`. Hidden items scale out, shown ones
+ * scale in. Event `usa:layout` (`{ columns }`). Reduced motion: items jump.
+ */
+interface UsaMasonryFlowElement extends UsaElement {
+    readonly columns: number;
+    layout(animate?: boolean): void;
+    filter(fn: ((el: HTMLElement) => boolean) | string | null): void;
+    shuffle(): void;
+    sort(compare: (a: HTMLElement, b: HTMLElement) => number): void;
+}
+declare function defineMasonryFlow(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-compare>` (6.5) — before / after image compare slider. The first
+ * child is "before", the second "after" (images, videos or any element).
+ * Drag the handle (or anywhere with `hover`), click to jump, or use the
+ * keyboard (it is a `role="slider"`: arrows, Page Up / Down, Home / End).
+ * `position` (0–100, default 50), `orientation="horizontal | vertical"`,
+ * `intro` plays a short sweep when it scrolls into view, `labels="Before,
+ * After"`. Event `usa:change` (`{ position }`). Reduced motion: no intro
+ * sweep or eased jumps.
+ */
+interface UsaCompareElement extends UsaElement {
+    position: number;
+}
+declare function defineCompare(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-cube-gallery>` (6.5) — a gallery on a turning 3D cube: the current
+ * slide and the next one sit on adjacent faces and the cube rotates between
+ * them. Swipe / drag, arrow keys, prev / next buttons, `autoplay` (ms;
+ * pauses on hover, focus and off screen), `axis="y | x"`. API `next()`,
+ * `prev()`, `goTo(i)`, `index`; event `usa:change`. Reduced motion: slides
+ * switch with a fade.
+ */
+interface UsaCubeGalleryElement extends UsaElement {
+    readonly index: number;
+    next(): void;
+    prev(): void;
+    goTo(i: number): void;
+}
+declare function defineCubeGallery(tag?: string): CustomElementConstructor | undefined;
+
+/**
  * motionary/components/widgets — the 6.x animated UI widgets, in their own
  * entry so `motionary/components` and `components/lite` keep their size
  * budgets. Every widget is reduced-motion safe and keyboard accessible.
@@ -264,8 +325,12 @@ declare global {
         'usa-odometer': UsaOdometerElement;
         'usa-skeleton-reveal': UsaSkeletonRevealElement;
         'usa-star-rating': UsaStarRatingElement;
+        'usa-milestones': UsaMilestonesElement;
+        'usa-masonry-flow': UsaMasonryFlowElement;
+        'usa-compare': UsaCompareElement;
+        'usa-cube-gallery': UsaCubeGalleryElement;
     }
 }
 
-export { CAROUSEL_EFFECTS, MENU_EFFECTS, MODAL_EFFECTS, PROGRESS_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, TAB_INDICATORS, TOAST_POSITIONS, WIDGETS, WIDGET_TAGS, defineCarousel, defineDisclosure, defineMenu, defineModal, defineOdometer, defineProgressRing, defineSheet, defineSkeletonReveal, defineStarRating, defineStories, defineTabBar, defineToastStack, defineWidgets, stackToast };
-export type { StackToastOptions, UsaCarouselElement, UsaDisclosureElement, UsaMenuElement, UsaModalElement, UsaOdometerElement, UsaProgressRingElement, UsaSheetElement, UsaSkeletonRevealElement, UsaStarRatingElement, UsaStoriesElement, UsaTabBarElement, UsaToastStackElement };
+export { CAROUSEL_EFFECTS, MENU_EFFECTS, MODAL_EFFECTS, PROGRESS_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, TAB_INDICATORS, TOAST_POSITIONS, WIDGETS, WIDGET_TAGS, defineCarousel, defineCompare, defineCubeGallery, defineDisclosure, defineMasonryFlow, defineMenu, defineMilestones, defineModal, defineOdometer, defineProgressRing, defineSheet, defineSkeletonReveal, defineStarRating, defineStories, defineTabBar, defineToastStack, defineWidgets, stackToast };
+export type { StackToastOptions, UsaCarouselElement, UsaCompareElement, UsaCubeGalleryElement, UsaDisclosureElement, UsaMasonryFlowElement, UsaMenuElement, UsaMilestonesElement, UsaModalElement, UsaOdometerElement, UsaProgressRingElement, UsaSheetElement, UsaSkeletonRevealElement, UsaStarRatingElement, UsaStoriesElement, UsaTabBarElement, UsaToastStackElement };

@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.5.0] - 2026-10-08
+
+### Added
+- **4 new components (6.5)** in `motionary/components/widgets` (also in `dist/widgets.umd.js`; the existing `<usa-timeline>`, `<usa-masonry>` and `<usa-cube>` are unchanged):
+  - `<usa-milestones>` — scroll-drawn timeline: the rail fills as you scroll, each milestone pops its dot and slides its card in when reached; `layout="alternate | left"` (one column below 640 px), `data-date` labels; `role="list"`; `usa:reach`.
+  - `<usa-masonry-flow>` — masonry grid with FLIP layout animation on resize, insert / remove, `filter()`, `shuffle()`, `sort()`; `min` column width, `gap`; `usa:layout`.
+  - `<usa-compare>` — before / after compare slider: drag, click-to-jump (eased), `hover` mode, keyboard (`role="slider"`), `orientation="vertical"`, `labels`, one-time `intro` sweep; `usa:change`.
+  - `<usa-cube-gallery>` — slides on adjacent faces of a 3D cube that turns between them; swipe, arrow keys, buttons, `autoplay` (pauses on hover / focus / off screen), `axis="x"`; `usa:change`.
+- **3D scene cards — `motionary/components/fx-3d`** (5 effects, `register3dEffects()`, also in `registerFx2()`): `depth-stack` (layers separate in Z and parallax with the tilt), `product-spin` (drag-to-rotate 360° viewer with inertia + idle turntable), `card-flip-3d` (thick card flip, faces swap `aria-hidden`), `origami` (panel-by-panel unfold), `orbit-camera` (scroll-linked camera orbit, `--usa-orbit` progress variable).
+- Showcase: 7 new gallery cards (shuffle / filter buttons for the masonry) with copyable code; Animation Store “Components 6.x” 21 → 28 entries (248 → 255 items).
+
+### Accessibility
+- Milestones are a list, the compare slider and cube gallery are keyboard operable with ARIA roles. Reduced motion: milestones are shown at once, the cube fades, masonry items jump, 3D tilt / spin / orbit / origami are off and the flip crossfades.
+
 ## [6.4.0] - 2026-10-08
 
 ### Added
