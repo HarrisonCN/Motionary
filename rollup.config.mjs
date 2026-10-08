@@ -138,7 +138,7 @@ export default [
         generateBundle(opts) {
           if (opts.format !== 'es') return;
           for (const ext of ['d.ts', 'd.cts']) {
-            const from = ext === 'd.ts' ? '' : '.cjs';
+            const from = ext === 'd.ts' ? '.js' : '.cjs';
             this.emitFile({ type: 'asset', fileName: `lite.${ext}`, source: `export * from '../components${from}';\nexport * from './perf${from}';\n/** The dist/ folder this module was loaded from. */\nexport declare const STYLE_BASE: string;\n` });
           }
         },
