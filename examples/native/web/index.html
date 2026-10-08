@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>use-scroll-animate · native bridge sample</title>
+  <!-- Copy node_modules/use-scroll-animate/dist/components.umd.js next to this file. -->
+  <script src="./components.umd.js"></script>
+  <style>
+    html { color-scheme: light dark; font-family: system-ui, "Segoe UI Variable", sans-serif; }
+    html[data-theme="dark"] { background: #1c1c1c; color: #fff; }
+    html[data-usa-contrast] { background: #000; color: #ff0; }
+    main { padding: 32px; display: grid; gap: 20px; }
+    .accent { background: var(--usa-accent, #0078d4); color: #fff; border: 0; border-radius: 6px; padding: 8px 16px; }
+  </style>
+</head>
+<body>
+  <main>
+    <usa-split-text effect="rise"><h1>Hello from the native shell</h1></usa-split-text>
+    <usa-button deform="squash"><button class="accent">Accent button</button></usa-button>
+    <p id="state">Waiting for the host…</p>
+  </main>
+  <script>
+    // Same file for WinUI 3 (WebView2), .NET MAUI and Flutter.
+    const { connectNativeShell } = UsaComponents;
+    const { host } = connectNativeShell({
+      onSettings: (s, h) => (document.getElementById('state').textContent = `${h}: ${JSON.stringify(s)}`),
+    });
+    document.getElementById('state').textContent = `Host: ${host}`;
+  </script>
+</body>
+</html>

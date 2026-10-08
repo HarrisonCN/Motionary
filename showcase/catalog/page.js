@@ -56,6 +56,12 @@ export const components = [
 ];
 
 export const helpers = [
+  H('native-bridge', 'page', 'connectNativeShell',
+    'Native shell bridges (4.7): WinUI 3 (WebView2), .NET MAUI and Flutter hosts push the system’s reduce-motion, light / dark / high-contrast theme and accent color into the page; connectNativeShell() applies them to every component. Samples in examples/native.',
+    '原生壳桥接（4.7）：WinUI 3（WebView2）、.NET MAUI 与 Flutter 宿主把系统“减少动态效果”、浅色/深色/高对比度主题与强调色推送给页面，connectNativeShell() 应用到所有组件。示例见 examples/native。',
+    ['WinUI 3', 'WebView2', '.NET MAUI', 'Flutter', 'theme sync'],
+    "import { connectNativeShell } from 'use-scroll-animate/components/bridge';\n\nconst { host } = connectNativeShell();   // 'webview2' | 'maui' | 'flutter' | 'browser'…\n// C#:   webView.CoreWebView2.PostWebMessageAsJson(\"{\\\"type\\\":\\\"usa:settings\\\",\\\"theme\\\":\\\"dark\\\"}\");\n// Dart: controller.runJavaScript('window.usaNative.apply({reducedMotion: true})');",
+    '<p class="demo-note" data-nb-host></p><div class="demo-row"><button type="button" class="demo-link" data-nb=\'{"theme":"dark","accent":"#0078d4"}\'>Windows dark</button><button type="button" class="demo-link" data-nb=\'{"theme":"light","accent":"#512bd4"}\'>MAUI light</button><button type="button" class="demo-link" data-nb=\'{"theme":"high-contrast"}\'>High contrast</button><button type="button" class="demo-link" data-nb=\'{"reducedMotion":true}\'>Reduce motion</button></div><div class="demo-tile" data-nb-tile style="background:var(--nb-accent,#7c5cff);color:#fff">Accent</div>'),
   H('auto-degrade', 'page', 'autoDegrade',
     'Performance toolkit (4.5): every component loop shares one requestAnimationFrame (onFrame, schedulerStats), setAnimationBudget() caps concurrent animations, autoDegrade() steps motion down while fps drops and restores it, and components/lite loads each category’s CSS on demand (≈62 KB gzip for everything).',
     '性能工具（4.5）：所有组件循环共享一个 requestAnimationFrame（onFrame、schedulerStats），setAnimationBudget() 限制并发动画数，autoDegrade() 在帧率下降时自动降级并在恢复后还原，components/lite 按需加载各分类 CSS（全部组件约 62 KB gzip）。',
@@ -89,6 +95,20 @@ export const helpers = [
 ];
 
 export const wire = {
+  'native-bridge': (stage, lib) => {
+    // Simulate a host on the demo tile only (never touches the gallery's own theme).
+    const tile = stage.querySelector('[data-nb-tile]');
+    stage.querySelector('[data-nb-host]').textContent = `detectNativeHost(): ${lib.detectNativeHost()}`;
+    stage.addEventListener('click', (e) => {
+      const b = e.target.closest('[data-nb]');
+      if (!b) return;
+      const s = lib.parseNativeSettings({ type: 'usa:settings', ...JSON.parse(b.dataset.nb) });
+      if (s.accent) tile.style.setProperty('--nb-accent', s.accent);
+      tile.style.outline = s.theme === 'high-contrast' ? '3px solid #ff0' : '';
+      tile.textContent = JSON.stringify(s);
+      tile.animate([{ transform: 'scale(.96)' }, { transform: 'none' }], { duration: s.reducedMotion ? 1 : 300 });
+    });
+  },
   'auto-degrade': (stage, lib) => {
     const row = stage.querySelector('[data-perf-row]');
     const out = stage.querySelector('[data-perf-out]');

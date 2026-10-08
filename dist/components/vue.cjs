@@ -28,6 +28,7 @@ require('./packs.cjs');
 require('./a11y.cjs');
 require('../chunks/index-tags-BQh_uGqH.cjs');
 require('./perf.cjs');
+require('./bridge.cjs');
 
 /**
  * use-scroll-animate/components/vue — Vue integration (v2.9).
