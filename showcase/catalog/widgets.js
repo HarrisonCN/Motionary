@@ -562,6 +562,49 @@ export const components = [
     '<usa-fx effect="price-flip" trigger="enter"><span data-from="129.00">$89.00</span></usa-fx>\n<usa-fx effect="stock-pulse" trigger="load"><b>Only 3 left</b></usa-fx>',
     '<div class="demo-col"><usa-fx effect="price-flip" trigger="enter"><span class="demo-price" data-from="$129.00">$89.00</span></usa-fx><usa-fx effect="stock-pulse" trigger="load"><b class="demo-stock">Only 3 left</b></usa-fx></div>',
     [{ key: 'effect', values: ['price-flip', 'stock-pulse', 'sale-shine'] }], '7.3'),
+  // ---- 7.4 -------------------------------------------------------------
+  W('usa-message-list', 'ui', 'Chat thread', '聊天消息列表',
+    '7.4: a chat thread — new bubbles pop in from their side, consecutive messages group, the list sticks to the bottom (or shows a “↓ New messages” pill when you scrolled up) and typing(name) shows animated typing dots.',
+    '7.4：聊天消息列表 —— 新气泡从各自一侧弹入，同一发送者的连续消息自动合并，列表保持在底部（向上翻看时显示“↓ 新消息”按钮），typing(name) 显示“正在输入”动画。',
+    ['chat', 'messages', 'bubbles', 'typing', 'social'],
+    '<usa-message-list>\n  <p data-from="Ada">Hi! 👋</p>\n  <p data-me>Hey Ada</p>\n</usa-message-list>\n<script>list.typing(\'Ada\'); list.push({ from: \'Ada\', text: \'Ship it?\' });</script>',
+    '<div class="demo-col"><usa-message-list class="demo-ml"><p data-from="Ada">Hi! 👋 Is v7.4 out?</p><p data-me>Almost — tests are green</p></usa-message-list><button type="button" class="demo-btn" data-ml>Reply</button></div>',
+    undefined, { since: '7.4' }),
+  W('usa-reactions', 'ui', 'Emoji reactions', '表情回应',
+    '7.4: a reaction bar — clicking a pill toggles your reaction: the emoji pops, the count rolls and copies float up; ＋ springs open a picker. Each pill is a toggle button with a count label.',
+    '7.4：表情回应栏 —— 点击切换你的回应：表情弹跳、计数滚动并有小表情向上飘；＋ 弹出表情选择器。每个按钮都是带计数标签的切换按钮。',
+    ['reactions', 'emoji', 'like', 'chat', 'social'],
+    '<usa-reactions emojis="👍,❤️,😂,🎉" counts="3,1,0,2"></usa-reactions>',
+    '<usa-reactions emojis="👍,❤️,😂,🎉" counts="3,1,0,2"></usa-reactions>',
+    undefined, { since: '7.4' }),
+  W('usa-notification-bell', 'ui', 'Notification bell', '通知铃铛',
+    '7.4: a bell with an unread badge and a dropdown — notify() swings the bell, bumps the badge and slides the notice in; “Mark all read” shrinks the badge away. Esc / outside click close it.',
+    '7.4：带未读角标与下拉列表的铃铛 —— notify() 让铃铛摆动、角标弹跳、通知滑入；“全部已读”让角标缩小消失。Esc / 点击外部关闭。',
+    ['notification', 'bell', 'badge', 'inbox', 'dropdown'],
+    '<usa-notification-bell>\n  <li data-time="2m">Ada liked your post</li>\n</usa-notification-bell>\n<script>bell.notify({ text: \'New follower\', time: \'now\' });</script>',
+    '<div class="demo-row"><usa-notification-bell class="demo-nb"><li data-time="2m">Ada liked your post</li><li data-time="1h" data-read>Weekly report is ready</li></usa-notification-bell><button type="button" class="demo-btn" data-nb>Notify</button></div>',
+    undefined, { since: '7.4' }),
+  W('usa-presence', 'ui', 'Presence avatar', '在线状态头像',
+    '7.4: an avatar with a live status dot (online, away, busy, offline) — coming online sends a ripple, speaking adds a pulsing ring and story an animated gradient ring. Initials when there is no photo.',
+    '7.4：带实时状态点的头像（在线、离开、忙碌、离线）—— 上线时发出涟漪，speaking 显示脉冲光环，story 显示旋转渐变环。无照片时显示姓名首字母。',
+    ['avatar', 'presence', 'online', 'status', 'story'],
+    '<usa-presence name="Ada Lovelace" status="online"></usa-presence>\n<usa-presence name="Alan Turing" status="away" speaking></usa-presence>\n<usa-presence name="Grace Hopper" status="busy" story></usa-presence>',
+    '<div class="demo-row"><usa-presence name="Ada Lovelace" status="online"></usa-presence><usa-presence name="Alan Turing" status="away" speaking></usa-presence><usa-presence name="Grace Hopper" status="busy" story></usa-presence><button type="button" class="demo-btn" data-pr>Cycle status</button></div>',
+    undefined, { since: '7.4' }),
+  X('fx-chat', ['fx-social', 'registerSocialPack'], 'Typing dots & message in', '输入提示与消息弹入',
+    '7.4: typing-dots adds the bouncing “…” to any element; message-in pops a chat bubble in from its side (data-side="right" for your own).',
+    '7.4：typing-dots 为任意元素添加跳动的“…”；message-in 让聊天气泡从所在一侧弹入（自己的消息用 data-side="right"）。',
+    ['typing', 'chat', 'bubble', 'dots', 'message'],
+    '<usa-fx effect="typing-dots" trigger="load"><span class="bubble"></span></usa-fx>\n<usa-fx effect="message-in" trigger="enter"><p class="bubble" data-side="right">On my way!</p></usa-fx>',
+    '<div class="demo-col"><usa-fx effect="typing-dots" trigger="load"><span class="demo-bubble"></span></usa-fx><usa-fx effect="message-in" trigger="enter"><p class="demo-bubble demo-me" data-side="right">On my way!</p></usa-fx></div>',
+    [{ key: 'effect', values: ['typing-dots', 'message-in'] }], '7.4'),
+  X('fx-react', ['fx-social', 'registerSocialPack'], 'Reaction burst & read receipt', '表情迸发与已读回执',
+    '7.4: reaction-burst floats the emoji up in a fan on click; read-receipt draws ✓✓ and turns them blue; mention-glow sweeps a highlight behind an @mention.',
+    '7.4：reaction-burst 点击时让表情呈扇形向上飘散；read-receipt 绘出 ✓✓ 并变蓝；mention-glow 在 @提及 背后扫出高亮。',
+    ['reaction', 'emoji', 'read', 'seen', 'mention'],
+    '<usa-fx effect="reaction-burst" trigger="click"><button>❤️</button></usa-fx>\n<usa-fx effect="read-receipt" trigger="enter"><span>Seen</span></usa-fx>',
+    '<div class="demo-row"><usa-fx effect="reaction-burst" trigger="click"><button type="button" class="demo-btn">❤️ React</button></usa-fx><usa-fx effect="read-receipt" trigger="enter"><span class="demo-seen">Seen 12:04</span></usa-fx><usa-fx effect="mention-glow" trigger="enter"><b>@ada</b></usa-fx></div>',
+    [{ key: 'effect', values: ['reaction-burst', 'read-receipt', 'mention-glow'] }], '7.4'),
 ];
 
 /** item id → live-demo wiring. */
@@ -636,5 +679,19 @@ export const wire = {
   countdown: (stage) => {
     const c = stage.querySelector('usa-countdown');
     stage.querySelector('[data-cdn]')?.addEventListener('click', () => { c.removeAttribute('data-done'); c.setAttribute('seconds', String(10 + Math.random() / 1000)); });
+  },
+  'message-list': (stage) => {
+    const l = stage.querySelector('usa-message-list');
+    const R = ['Nice! 🎉', 'Shipping tonight', 'Can you check the Store?', 'LGTM ✅'];
+    stage.querySelector('[data-ml]')?.addEventListener('click', () => { l.typing('Ada'); setTimeout(() => l.push({ from: 'Ada', text: R[Math.floor(Math.random() * R.length)] }), 900); });
+  },
+  'notification-bell': (stage) => {
+    const b = stage.querySelector('usa-notification-bell');
+    const N = ['New follower: Alan', 'Grace mentioned you', 'Build #812 passed', 'Your order shipped'];
+    stage.querySelector('[data-nb]')?.addEventListener('click', () => b.notify({ text: N[Math.floor(Math.random() * N.length)], time: 'now' }));
+  },
+  presence: (stage) => {
+    const S = ['online', 'away', 'busy', 'offline'];
+    stage.querySelector('[data-pr]')?.addEventListener('click', () => stage.querySelectorAll('usa-presence').forEach((p) => { p.status = S[(S.indexOf(p.status) + 1) % 4]; }));
   },
 };

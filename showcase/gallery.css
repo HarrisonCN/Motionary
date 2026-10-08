@@ -305,3 +305,5 @@ usa-carousel[data-effect="cards"].demo-carousel .demo-slide{margin:0 18%}
 .demo-shop{display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:center}.demo-prod{display:flex;flex-direction:column;align-items:center;gap:8px}.demo-prod img{width:84px;height:84px;border-radius:12px}
 .demo-pgal{--usa-pg2-w:240px;--usa-pg2-t:46px}.demo-cdn{--usa-cd-w:24px}.demo-fxprod{width:72px;height:72px;border-radius:12px;cursor:pointer}.demo-fxcart{font-size:30px;margin-left:40px}
 .demo-price{display:inline-block;font:800 26px/1 ui-monospace,monospace;perspective:300px}.demo-stock{display:inline-block;padding:6px 12px;border-radius:999px;background:#fee2e2;color:#b91c1c;font-size:13px}
+.demo-ml{--usa-ml-w:280px;--usa-ml-h:150px}.demo-nb{margin-right:8px}
+.demo-bubble{display:inline-block;min-width:44px;min-height:18px;margin:0;padding:8px 12px;border-radius:16px 16px 16px 4px;background:#e2e8f0;color:#0f172a;font-size:14px}.demo-me{background:#7c5cff;color:#fff;border-radius:16px 16px 4px 16px}.demo-seen{font-size:13px;opacity:.75}

@@ -52,6 +52,10 @@ import { defineAddToCart, type UsaAddToCartElement } from './add-to-cart';
 import { defineCartDrawer, cartTotal, type UsaCartDrawerElement, type CartItem } from './cart-drawer';
 import { defineProductGallery, wrapIndex, type UsaProductGalleryElement } from './product-gallery';
 import { defineCountdown, splitTime, type UsaCountdownElement } from './countdown';
+import { defineMessageList, type UsaMessageListElement, type ChatMessage } from './message-list';
+import { defineReactions, parseReactions, type UsaReactionsElement } from './reactions';
+import { defineNotificationBell, type UsaNotificationBellElement, type BellNotice } from './notification-bell';
+import { definePresence, PRESENCE_STATES, initials, type UsaPresenceElement, type PresenceState } from './presence';
 
 export { defineCarousel, defineTabBar, defineDisclosure, defineStories, CAROUSEL_EFFECTS, TAB_INDICATORS };
 export type { UsaCarouselElement, UsaTabBarElement, UsaDisclosureElement, UsaStoriesElement };
@@ -85,6 +89,9 @@ export type { UsaBarChartElement, UsaGaugeElement, UsaSparklineElement, UsaKpiEl
 export { defineAddToCart, defineCartDrawer, cartTotal, defineProductGallery, wrapIndex, defineCountdown, splitTime };
 export type { UsaAddToCartElement, UsaCartDrawerElement, CartItem, UsaProductGalleryElement, UsaCountdownElement };
 
+export { defineMessageList, defineReactions, parseReactions, defineNotificationBell, definePresence, PRESENCE_STATES, initials };
+export type { UsaMessageListElement, ChatMessage, UsaReactionsElement, UsaNotificationBellElement, BellNotice, UsaPresenceElement, PresenceState };
+
 /** The widgets by release (tag → define function). */
 export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElementConstructor | undefined>> = {
   '6.2': { 'usa-carousel': defineCarousel, 'usa-tab-bar': defineTabBar, 'usa-disclosure': defineDisclosure, 'usa-stories': defineStories },
@@ -98,6 +105,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '7.1': { 'usa-music-player': defineMusicPlayer, 'usa-volume-knob': defineVolumeKnob, 'usa-equalizer': defineEqualizer, 'usa-lyrics': defineLyrics },
   '7.2': { 'usa-bar-chart': defineBarChart, 'usa-gauge': defineGauge, 'usa-sparkline': defineSparkline, 'usa-kpi': defineKpi },
   '7.3': { 'usa-add-to-cart': defineAddToCart, 'usa-cart-drawer': defineCartDrawer, 'usa-product-gallery': defineProductGallery, 'usa-countdown': defineCountdown },
+  '7.4': { 'usa-message-list': defineMessageList, 'usa-reactions': defineReactions, 'usa-notification-bell': defineNotificationBell, 'usa-presence': definePresence },
 };
 
 /** Every widget tag, in release order. */
@@ -154,5 +162,9 @@ declare global {
     'usa-cart-drawer': UsaCartDrawerElement;
     'usa-product-gallery': UsaProductGalleryElement;
     'usa-countdown': UsaCountdownElement;
+    'usa-message-list': UsaMessageListElement;
+    'usa-reactions': UsaReactionsElement;
+    'usa-notification-bell': UsaNotificationBellElement;
+    'usa-presence': UsaPresenceElement;
   }
 }

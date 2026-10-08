@@ -1,0 +1,12 @@
+usa-reactions{position:relative;display:inline-flex;flex-wrap:wrap;align-items:center;gap:6px;font:600 13px/1 system-ui,sans-serif}
+.usa-rx-row{display:inline-flex;flex-wrap:wrap;gap:6px}
+.usa-rx-pill,.usa-rx-add{position:relative;display:inline-flex;align-items:center;gap:5px;height:28px;padding:0 10px;border:1px solid rgba(15,23,42,.12);border-radius:999px;background:var(--usa-rx-bg,#fff);color:inherit;font:inherit;cursor:pointer}
+.usa-rx-pill[hidden]{display:none}
+.usa-rx-pill[aria-pressed=true]{border-color:var(--usa-rx-accent,#7c5cff);background:color-mix(in srgb,var(--usa-rx-accent,#7c5cff) 14%,#fff)}
+.usa-rx-emo{display:inline-block;font-size:15px}.usa-rx-n{display:inline-block;min-width:1ch;font-variant-numeric:tabular-nums}
+.usa-rx-float{position:absolute;left:50%;top:0;font-size:16px;pointer-events:none}
+.usa-rx-picker{position:absolute;bottom:calc(100% + 6px);left:0;display:flex;gap:2px;padding:4px;border-radius:999px;background:#fff;box-shadow:0 10px 30px -10px rgba(15,23,42,.45);transform-origin:20% 100%;z-index:5}
+.usa-rx-picker[hidden]{display:none}
+.usa-rx-picker button{border:0;background:none;font-size:20px;width:32px;height:32px;border-radius:50%;cursor:pointer}
+.usa-rx-picker button:hover,.usa-rx-picker button:focus-visible{background:#f1f5f9}
+.usa-rx-pill:focus-visible,.usa-rx-add:focus-visible{outline:2px solid #7c5cff;outline-offset:2px}

@@ -18,6 +18,7 @@ import { FOCUS_FX, registerFocusPack } from './focus';
 import { MUSIC_FX, registerMusicPack, syntheticSample, musicSample } from './music';
 import { CHART_FX, registerChartPack, parseFigure } from './chart';
 import { SHOP_FX, registerShopPack, arcPath } from './shop';
+import { SOCIAL_FX, registerSocialPack, fanAngles } from './social';
 
 export { GPU_FX, registerGpuPack, TEXT3_FX, registerTextPack, splitChars };
 export { shaderBackground, supportsWebGL2, fieldFallback, GLSL_HEAD } from './gl';
@@ -44,6 +45,8 @@ export { CHART_FX, registerChartPack, parseFigure };
 
 export { SHOP_FX, registerShopPack, arcPath };
 
+export { SOCIAL_FX, registerSocialPack, fanAngles };
+
 /** The 6.x effect packs by name. */
 export const EFFECT_PACKS: Record<string, EffectDefinition[]> = {
   gpu: GPU_FX,
@@ -58,6 +61,7 @@ export const EFFECT_PACKS: Record<string, EffectDefinition[]> = {
   music: MUSIC_FX,
   chart: CHART_FX,
   shop: SHOP_FX,
+  social: SOCIAL_FX,
 };
 
 /** Register every 6.x effect pack (idempotent). */
@@ -74,6 +78,7 @@ export function registerEffectPacks(): void {
   registerMusicPack();
   registerChartPack();
   registerShopPack();
+  registerSocialPack();
 }
 
 

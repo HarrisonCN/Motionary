@@ -803,6 +803,30 @@ cart.add({ id: 'tee', name: 'T-shirt', price: 24, img: 'tee.jpg' }); cart.toggle
 - `<usa-countdown to seconds units labels label>`: `left`, `start()`, `stop()`; `usa:tick`, `usa:done`; `splitTime(sec)`.
 - Shop: `fly-to-cart` (`to`, `duration`, `lift`) · `price-flip` (`stagger`, `duration`; `data-from`) · `stock-pulse` (`color`, `period`) · `sale-shine` · `badge-pop`; `arcPath(ax, ay, bx, by, lift, steps)`.
 
+### v7.4 Widgets: message list, reactions, notification bell, presence (`components/widgets`) + chat & social motion (`motionary/fx/social`)
+
+```html
+<usa-message-list><p data-from="Ada">Hi! 👋</p><p data-me>Hey Ada</p></usa-message-list>
+<usa-reactions emojis="👍,❤️,😂,🎉" counts="3,1,0,2"></usa-reactions>
+<usa-notification-bell><li data-time="2m">Ada liked your post</li></usa-notification-bell>
+<usa-presence name="Ada Lovelace" status="online" speaking></usa-presence>
+
+<usa-fx effect="typing-dots" trigger="load"><span class="bubble"></span></usa-fx>
+<usa-fx effect="reaction-burst" trigger="click"><button>❤️</button></usa-fx>
+```
+```js
+import { defineWidgets } from 'motionary/components/widgets';
+import { registerSocialPack } from 'motionary/fx/social';
+defineWidgets(); registerSocialPack();
+list.typing('Ada'); list.push({ from: 'Ada', text: 'Ship it?' });
+bell.notify({ text: 'New follower', time: 'now' }); avatar.status = 'away';
+```
+- `<usa-message-list label>`: `messages`, `push(msg)`, `typing(name | false)`; `usa:message`.
+- `<usa-reactions emojis counts picker>`: `counts`, `mine`, `toggle(emoji, on?)`; `usa:react`; `parseReactions()`.
+- `<usa-notification-bell label>`: `unread`, `notices`, `open`, `notify()`, `markAllRead()`, `ring()`; `usa:notify`, `usa:read`.
+- `<usa-presence name src status speaking story>`: `status`; `PRESENCE_STATES`, `initials()`.
+- Social: `typing-dots` (`color`, `period`) · `message-in` (`side`, `duration`) · `reaction-burst` (`emoji`, `count`, `spread`) · `read-receipt` (`color`) · `mention-glow` (`color`); `fanAngles(n, spread)`.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.
