@@ -29,6 +29,7 @@ require('./depth.cjs');
 require('./layout.cjs');
 require('./packs.cjs');
 require('./fx.cjs');
+require('../chunks/registry-DehBVRDV.cjs');
 require('./a11y.cjs');
 require('../chunks/index-tags-wv0R_vkO.cjs');
 require('./perf.cjs');

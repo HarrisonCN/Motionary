@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.2.0] - 2026-10-08
+
+### Added
+- **New entry `motionary/components/widgets`** — the 6.x animated UI widgets, kept out of `motionary/components` and `components/lite` (lite stays ≤ 70 KB). `defineWidgets(release?)`, `WIDGETS` (by release), `WIDGET_TAGS`. No-build bundle **`dist/widgets.umd.js`** (`window.UsaWidgets`) registers every widget and every 6.x effect pack.
+- **4 new components (6.2)**:
+  - `<usa-carousel>` — swipe / drag / arrow keys / dots / autoplay (pauses on hover, focus, off screen); effects `slide`, `fade`, `scale`, `cards` (3D coverflow); `loop`; API `next()`, `prev()`, `goTo()`, `index`, `usa:change`.
+  - `<usa-tab-bar>` — tabs whose indicator stretches from the old tab to the new one (leading edge first); `indicator="pill | underline | glow | gooey"`; panels (`data-panel`) slide in from the side of travel; full tablist keyboard support; `select()`, `usa:change`.
+  - `<usa-disclosure>` — accordion 2.0 on native `<details>`: spring height + fade, overshooting chevron, single or `multiple`, `variant="cards"`; `toggle()`, `openAll()`, `closeAll()`, `usa:toggle`.
+  - `<usa-stories>` — story viewer: segmented progress, auto-advance, tap left / right, press-and-hold pause, pause button (WCAG 2.2.2); `usa:change`, `usa:end`.
+- **GPU effect pack `motionary/components/fx-gpu`** (8 effects, `registerGpuEffects()`): WebGL2 shaders `fluid` (swirls around the pointer), `smoke`, `fire`, `ink`, `fireflies` with an automatic **Canvas 2D fallback** (no WebGL2, compile error or lost context; `data-usa-backend="webgl2 | canvas"`, `backend: 'canvas'` to force it); Canvas 2D particles `sakura` and `leaves`; click effect `splash`. Visible-only rendering, adaptive resolution. Helpers `shaderBackground()`, `supportsWebGL2()`, `fieldFallback()`, `GLSL_HEAD` for your own shaders. `motionary/components/fx2` registers every 6.x pack (`registerFx2()`).
+- Showcase: gallery cards for the 4 widgets + 3 effect cards (copyable HTML / ESM / React / Vue / desktop code); **Animation Store: new “Components 6.x” chip** with 7 entries (snippets for every tab + link to the live demo) — 227 → 234 items.
+
+### Changed
+- The effect registry is shared per page through `Symbol.for('use-scroll-animate.effects')`, so several bundles (e.g. `components.umd.js` + `widgets.umd.js`) register into one table.
+- docs/ROADMAP.md: 6.2 → 7.0 replanned — every release now also adds new animated UI components; weather and interactive physics 2.0 merge into 6.8, 7.0 prep is 6.9.
+
+### Accessibility
+- Every widget is keyboard accessible with ARIA roles; under reduced motion the carousel and tabs switch instantly, accordions open instantly, stories don't auto-advance, GPU backgrounds draw a single still frame.
+
 ## [6.1.1] - 2026-10-08
 
 ### Changed — the project is now **Motionary**

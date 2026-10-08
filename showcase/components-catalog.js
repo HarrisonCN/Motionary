@@ -355,10 +355,18 @@ export function componentSnippets(item) {
   }
   const html = stripScripts(markup);
   // 5.1: effect-pack cards also register the packs (motionary/components/effects)
-  const pre = item.pack && !item.entry ? `import { registerAllEffects } from 'motionary/components/effects';\n` : '';
-  const preCall = item.pack && !item.entry ? 'registerAllEffects();\n' : '';
+  let pre = item.pack && !item.entry ? `import { registerAllEffects } from 'motionary/components/effects';\n` : '';
+  let preCall = item.pack && !item.entry ? 'registerAllEffects();\n' : '';
+  // 6.2+: a 6.x effect pack (its own entry) — item.reg = [entry, registerFn]
+  if (item.reg) {
+    pre = `import { ${item.reg[1]} } from 'motionary/components/${item.reg[0]}';\n`;
+    preCall = `${item.reg[1]}();\n`;
+  }
+  // 6.2+: widgets and 6.x packs ship in dist/widgets.umd.js for <script> pages
+  const six = item.reg || item.entry === 'widgets';
+  const scripts = six ? `<script src="${cdn}"></script>\n<!-- 6.x widgets + effect packs -->\n<script src="${cdn.replace('components.umd.js', 'widgets.umd.js')}"></script>` : `<script src="${cdn}"></script>`;
   return {
-    html: `<!-- registers every <usa-*> element and effect -->\n<script src="${cdn}"></script>\n\n${markup}`,
+    html: `<!-- registers every <usa-*> element and effect -->\n${scripts}\n\n${markup}`,
     esm: `${pre}import { ${item.define} } from '${sub}';\n\n${preCall}${item.define}(); // registers <${item.tag}>\n\n/* then use it in your HTML:\n${html}\n*/`,
     react: `${pre}import { ${item.define} } from '${sub}';\n\n${preCall}${item.define}();\n\nexport function Demo() {\n  return (\n    <>\n${indent(toJsx(markup), 6)}\n    </>\n  );\n}`,
     vue: `<!-- vite.config: vue({ template: { compilerOptions: { isCustomElement: (t) => t.startsWith('usa-') } } }) -->\n<script setup>\n${pre}import { ${item.define} } from '${sub}';\n${preCall}${item.define}();\n</script>\n\n<template>\n${indent(html, 2)}\n</template>`,

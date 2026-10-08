@@ -143,12 +143,12 @@ describe('6.1 extended presets — runtime', () => {
 describe('6.1 Animation Store', () => {
   it('lists every preset (≥ 160 items) with a known, filterable category', () => {
     expect(ITEMS.length).toBeGreaterThanOrEqual(160);
-    expect(ITEMS.length).toBe(33 + 181 + 13);
+    expect(ITEMS.filter((i: any) => i.kind !== 'component').length).toBe(33 + 181 + 13); // + 6.2 'Components 6.x' entries
     const presetIds = ITEMS.filter((i: any) => i.kind === 'preset').map((i: any) => i.id).sort();
     expect(presetIds).toEqual(Object.keys(ALL).sort());
     expect(EXTENDED_ITEMS.map((i: any) => i.id)).toEqual(EXT_NAMES);
     const cats = CATEGORIES.map((c: any) => c.id);
-    expect(cats).toEqual([...PRESET_CATEGORIES.map((c: any) => c.id), 'feature', 'framework']);
+    expect(cats).toEqual([...PRESET_CATEGORIES.map((c: any) => c.id), 'components', 'feature', 'framework']);
     for (const id of ['elastic', 'light', 'depth', 'special', 'stagger', 'scrub']) {
       expect(ITEMS.filter((i: any) => i.category === id).length, id).toBeGreaterThanOrEqual(8);
     }

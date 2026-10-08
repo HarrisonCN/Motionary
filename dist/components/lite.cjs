@@ -10099,17 +10099,13 @@ function definePacksComponents() {
     definePack();
 }
 
-/**
- * 5.0 — unified plugin-style effect registration. Every effect (built-in or
- * yours) is a plain object registered once and played the same way:
- * `playEffect(el, name)`, `bindEffect(el, name, { trigger })` or
- * `<usa-fx effect="name" trigger="click">`. Effects get a context that
- * already applies reduced motion, motion sensitivity, intensity and the
- * animation budget.
- */
+var _a;
 const EFFECT_KINDS = ['enter', 'exit', 'attention', 'click', 'hover', 'card', 'loop', 'page', 'background', 'text', 'cursor', 'scroll'];
 const EFFECT_TRIGGERS = ['click', 'hover', 'enter', 'load', 'loop', 'manual'];
-const registry = new Map();
+// 6.2: one table per page (Symbol.for), shared by every bundle that registers effects —
+// e.g. dist/components.umd.js and dist/widgets.umd.js on the same page.
+const REG_KEY = Symbol.for('use-scroll-animate.effects');
+const registry = ((_a = globalThis)[REG_KEY] || (_a[REG_KEY] = new Map()));
 /** Register an effect (throws on a duplicate name unless `override`). Returns an unregister function. */
 function registerEffect(def, opts = {}) {
     if (!/^[a-z][a-z0-9-]*$/.test(def.name))

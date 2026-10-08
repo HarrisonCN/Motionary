@@ -5,15 +5,18 @@
  * kind:
  *  - 'preset'    one built-in preset (src/presets.ts, or the 6.1 extended set: catalog-extended.js)
  *  - 'feature'   an option / helper (stagger, exit, parallax, progressVar, engine, sequence (timeline), combo, easing)
+ *  - 'component' a 6.x widget or effect pack (catalog-components.js; ready-made snippets, live demo in the gallery)
  *  - 'framework' an adapter entry point (react, vue, svelte, solid, element)
  * recipe: which code generator / demo the item uses (see codegen.js and app.js)
  */
 
 import { PRESET_CATEGORIES, EXTENDED_ITEMS } from './catalog-extended.js';
+import { COMPONENT_CATEGORY, COMPONENT_ITEMS } from './catalog-components.js';
 
 /** Category chips, in display order (preset families, then features and frameworks). */
 export const CATEGORIES = [
   ...PRESET_CATEGORIES,
+  COMPONENT_CATEGORY,
   { id: 'feature', en: 'Features', zh: '功能' },
   { id: 'framework', en: 'Frameworks', zh: '框架' },
 ];
@@ -245,7 +248,8 @@ const order = (item) => CATEGORIES.findIndex((c) => c.id === item.category);
 export const ALL_PRESET_ITEMS = [...PRESET_ITEMS, ...EXTENDED_ITEMS].sort((a, b) => order(a) - order(b));
 
 export { EXTENDED_ITEMS };
-export const ITEMS = [...ALL_PRESET_ITEMS, ...FEATURE_ITEMS, ...FRAMEWORK_ITEMS];
+export { COMPONENT_ITEMS };
+export const ITEMS = [...ALL_PRESET_ITEMS, ...COMPONENT_ITEMS, ...FEATURE_ITEMS, ...FRAMEWORK_ITEMS];
 
 export function findItem(id) {
   return ITEMS.find((item) => item.id === id) || null;

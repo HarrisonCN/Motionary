@@ -1,4 +1,4 @@
-import { p as prefersReducedMotion } from './base-Yno7N2eC.js';
+import { p as prefersReducedMotion } from './base-C_3cAoRz.js';
 
 /**
  * Click-effect helpers (v2.5): `burst()`, `confetti()`, `shake()`, `haptic()`.
@@ -106,4 +106,4 @@ function haptic(pattern = 10) {
 }
 
 export { burst as b, confetti as c, haptic as h, shake as s };
-//# sourceMappingURL=fx-BqDeFywO.js.map
+//# sourceMappingURL=fx-Bs6IrV4Q.js.map

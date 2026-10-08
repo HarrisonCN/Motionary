@@ -1,58 +1,12 @@
 'use strict';
 
 var components_fx = require('./fx.cjs');
+var generative = require('../chunks/generative-DzIZq-_g.cjs');
 var base = require('../chunks/base-BaQV-2ha.cjs');
+var registry = require('../chunks/registry-DehBVRDV.cjs');
 var components_tokens = require('./tokens.cjs');
 var core = require('../chunks/core-BGAyaY6L.cjs');
 require('../chunks/fx-lBGVtQO1.cjs');
-
-let layer = null;
-/** A fixed, pointer-transparent, aria-hidden layer for transient particles. */
-function fxLayer() {
-    if (layer?.isConnected)
-        return layer;
-    layer = document.createElement('div');
-    layer.setAttribute('aria-hidden', 'true');
-    layer.setAttribute('data-usa-fx-layer', '');
-    layer.style.cssText = 'position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:2147483000;contain:strict';
-    document.body.appendChild(layer);
-    return layer;
-}
-/** Client point of the triggering pointer event, or the element's center. */
-function origin(el, ctx) {
-    const e = ctx.event;
-    const r = el.getBoundingClientRect();
-    return e && typeof e.clientX === 'number' && (e.clientX || e.clientY) ? { x: e.clientX, y: e.clientY } : { x: r.left + r.width / 2, y: r.top + r.height / 2 };
-}
-/** Spawn an absolutely positioned node in the fx layer at (x, y); removed when its animation ends. */
-function spawn(x, y, css, ctx, frames, opts, text = '') {
-    const n = document.createElement('span');
-    n.style.cssText = `position:absolute;left:${x}px;top:${y}px;${css}`;
-    if (text)
-        n.textContent = text;
-    fxLayer().appendChild(n);
-    const a = ctx.animate(n, frames, { fill: 'forwards', ...opts });
-    const rm = () => n.remove();
-    if (a)
-        a.finished.then(rm, rm);
-    else
-        rm();
-    return a;
-}
-/** An overlay child covering `el` (makes `el` a positioning context). Returns it and a remover. */
-function overlay(el, css) {
-    const o = document.createElement('span');
-    o.setAttribute('aria-hidden', 'true');
-    o.style.cssText = `position:absolute;inset:0;pointer-events:none;border-radius:inherit;${css}`;
-    if (getComputedStyle(el).position === 'static')
-        el.style.position = 'relative';
-    el.appendChild(o);
-    return [o, () => o.remove()];
-}
-const PALETTE = ['#7c5cff', '#ff5c8a', '#22d3ee', '#facc15', '#34d399'];
-const rand = (a, b) => a + Math.random() * (b - a);
-/** Wait for all animations (ignoring nulls). */
-const all = (anims) => Promise.all(anims.filter(Boolean).map((a) => a.finished.catch(() => undefined)));
 
 const CARD_FX = [
     {
@@ -62,7 +16,7 @@ const CARD_FX = [
         reduced: 'run',
         defaults: { strength: 0.55 },
         run: (el, o, ctx) => {
-            const [layer, remove] = overlay(el, `mix-blend-mode:color-dodge;opacity:${o.strength};background:linear-gradient(115deg,transparent 20%,#ff8bd855 35%,#8bf3ff55 45%,#fff58b55 55%,transparent 70%),repeating-linear-gradient(55deg,#ffffff10 0 2px,transparent 2px 6px);background-size:250% 250%,100% 100%;background-position:50% 50%;transition:background-position .2s ease-out`);
+            const [layer, remove] = generative.overlay(el, `mix-blend-mode:color-dodge;opacity:${o.strength};background:linear-gradient(115deg,transparent 20%,#ff8bd855 35%,#8bf3ff55 45%,#fff58b55 55%,transparent 70%),repeating-linear-gradient(55deg,#ffffff10 0 2px,transparent 2px 6px);background-size:250% 250%,100% 100%;background-position:50% 50%;transition:background-position .2s ease-out`);
             if (ctx.reduced)
                 return remove;
             const move = (e) => {
@@ -94,7 +48,7 @@ const CARD_FX = [
         run: (el, o, ctx) => {
             if (ctx.reduced)
                 return;
-            const [g, remove] = overlay(el, `overflow:hidden;background:linear-gradient(105deg,transparent 35%,${o.color} 50%,transparent 65%);background-size:250% 100%`);
+            const [g, remove] = generative.overlay(el, `overflow:hidden;background:linear-gradient(105deg,transparent 35%,${o.color} 50%,transparent 65%);background-size:250% 100%`);
             const a = ctx.animate(g, [{ backgroundPosition: '150% 0' }, { backgroundPosition: '-50% 0' }], { duration: o.duration, easing: 'ease-in-out' });
             if (a)
                 a.finished.then(remove, remove);
@@ -121,7 +75,7 @@ const CARD_FX = [
         run: (el, o, ctx) => {
             const kids = Array.from(el.children);
             const mid = (kids.length - 1) / 2;
-            return all(kids.map((k, i) => ctx.animate(k, [{ transform: 'none' }, { transform: `translateX(${(i - mid) * o.spread}px) rotate(${(i - mid) * (o.spread / 2)}deg)`, offset: 0.5 }, { transform: 'none' }], { duration: o.duration, easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)' })));
+            return generative.all(kids.map((k, i) => ctx.animate(k, [{ transform: 'none' }, { transform: `translateX(${(i - mid) * o.spread}px) rotate(${(i - mid) * (o.spread / 2)}deg)`, offset: 0.5 }, { transform: 'none' }], { duration: o.duration, easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)' })));
         },
     },
     {
@@ -154,24 +108,24 @@ const CLICK_FX = [
         run: (el, o, ctx) => {
             if (ctx.reduced)
                 return;
-            const { x, y } = origin(el, ctx);
-            return all([0, 120].map((delay) => spawn(x, y, `width:${o.size}px;height:${o.size}px;margin:${-o.size / 2}px 0 0 ${-o.size / 2}px;border:3px solid ${o.color};border-radius:50%`, ctx, [{ transform: 'scale(0)', opacity: 0.9 }, { transform: 'scale(1)', opacity: 0 }], { duration: o.duration, delay, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' })));
+            const { x, y } = generative.origin(el, ctx);
+            return generative.all([0, 120].map((delay) => generative.spawn(x, y, `width:${o.size}px;height:${o.size}px;margin:${-o.size / 2}px 0 0 ${-o.size / 2}px;border:3px solid ${o.color};border-radius:50%`, ctx, [{ transform: 'scale(0)', opacity: 0.9 }, { transform: 'scale(1)', opacity: 0 }], { duration: o.duration, delay, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' })));
         },
     },
     {
         name: 'ink-splash',
         kind: 'click',
         description: 'Ink blobs splatter from the click point and fade.',
-        defaults: { count: 9, colors: PALETTE, duration: 800 },
+        defaults: { count: 9, colors: generative.PALETTE, duration: 800 },
         run: (el, o, ctx) => {
             if (ctx.reduced)
                 return;
-            const { x, y } = origin(el, ctx);
-            return all(Array.from({ length: o.count }, (_, i) => {
-                const s = rand(6, 22);
-                const ang = rand(0, Math.PI * 2);
-                const d = rand(20, 70);
-                return spawn(x, y, `width:${s}px;height:${s}px;margin:${-s / 2}px 0 0 ${-s / 2}px;background:${o.colors[i % o.colors.length]};border-radius:${rand(40, 50)}% ${rand(50, 60)}% ${rand(40, 60)}% ${rand(45, 55)}%`, ctx, [{ transform: 'translate(0,0) scale(.3)', opacity: 1 }, { transform: `translate(${Math.cos(ang) * d}px,${Math.sin(ang) * d}px) scale(1)`, opacity: 0.9, offset: 0.5 }, { transform: `translate(${Math.cos(ang) * d}px,${Math.sin(ang) * d + 8}px) scale(1.1)`, opacity: 0 }], { duration: o.duration, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' });
+            const { x, y } = generative.origin(el, ctx);
+            return generative.all(Array.from({ length: o.count }, (_, i) => {
+                const s = generative.rand(6, 22);
+                const ang = generative.rand(0, Math.PI * 2);
+                const d = generative.rand(20, 70);
+                return generative.spawn(x, y, `width:${s}px;height:${s}px;margin:${-s / 2}px 0 0 ${-s / 2}px;background:${o.colors[i % o.colors.length]};border-radius:${generative.rand(40, 50)}% ${generative.rand(50, 60)}% ${generative.rand(40, 60)}% ${generative.rand(45, 55)}%`, ctx, [{ transform: 'translate(0,0) scale(.3)', opacity: 1 }, { transform: `translate(${Math.cos(ang) * d}px,${Math.sin(ang) * d}px) scale(1)`, opacity: 0.9, offset: 0.5 }, { transform: `translate(${Math.cos(ang) * d}px,${Math.sin(ang) * d + 8}px) scale(1.1)`, opacity: 0 }], { duration: o.duration, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' });
             }));
         },
     },
@@ -183,12 +137,12 @@ const CLICK_FX = [
         run: (el, o, ctx) => {
             if (ctx.reduced)
                 return;
-            const { x, y } = origin(el, ctx);
-            return all(Array.from({ length: o.count }, (_, i) => {
+            const { x, y } = generative.origin(el, ctx);
+            return generative.all(Array.from({ length: o.count }, (_, i) => {
                 const ang = (i / o.count) * Math.PI * 2;
-                const d = rand(40, 80);
-                const s = rand(12, 22);
-                return spawn(x, y, `font-size:${s}px;line-height:1;margin:${-s / 2}px 0 0 ${-s / 2}px;color:${o.colors[i % o.colors.length]}`, ctx, [{ transform: 'translate(0,0) rotate(0) scale(.2)', opacity: 1 }, { transform: `translate(${Math.cos(ang) * d}px,${Math.sin(ang) * d}px) rotate(${rand(180, 360)}deg) scale(1)`, opacity: 0 }], { duration: o.duration, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' }, '★');
+                const d = generative.rand(40, 80);
+                const s = generative.rand(12, 22);
+                return generative.spawn(x, y, `font-size:${s}px;line-height:1;margin:${-s / 2}px 0 0 ${-s / 2}px;color:${o.colors[i % o.colors.length]}`, ctx, [{ transform: 'translate(0,0) rotate(0) scale(.2)', opacity: 1 }, { transform: `translate(${Math.cos(ang) * d}px,${Math.sin(ang) * d}px) rotate(${generative.rand(180, 360)}deg) scale(1)`, opacity: 0 }], { duration: o.duration, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' }, '★');
             }));
         },
     },
@@ -207,8 +161,8 @@ const CLICK_FX = [
         run: (el, o, ctx) => {
             if (ctx.reduced)
                 return;
-            const { x, y } = origin(el, ctx);
-            return all(Array.from({ length: o.rings }, (_, i) => spawn(x, y, `width:${o.size}px;height:${o.size}px;margin:${-o.size / 2}px 0 0 ${-o.size / 2}px;border:2px solid ${o.color};border-radius:50%`, ctx, [{ transform: 'scale(.1)', opacity: 0.8 }, { transform: 'scale(1)', opacity: 0 }], { duration: o.duration, delay: i * 160, easing: 'ease-out' })));
+            const { x, y } = generative.origin(el, ctx);
+            return generative.all(Array.from({ length: o.rings }, (_, i) => generative.spawn(x, y, `width:${o.size}px;height:${o.size}px;margin:${-o.size / 2}px 0 0 ${-o.size / 2}px;border:2px solid ${o.color};border-radius:50%`, ctx, [{ transform: 'scale(.1)', opacity: 0.8 }, { transform: 'scale(1)', opacity: 0 }], { duration: o.duration, delay: i * 160, easing: 'ease-out' })));
         },
     },
     {
@@ -219,11 +173,11 @@ const CLICK_FX = [
         run: (el, o, ctx) => {
             if (ctx.reduced)
                 return;
-            const { x, y } = origin(el, ctx);
+            const { x, y } = generative.origin(el, ctx);
             const chars = Array.from(String(o.emoji));
-            return all(Array.from({ length: o.count }, (_, i) => {
-                const dx = rand(-90, 90);
-                return spawn(x, y, `font-size:${rand(16, 28)}px;line-height:1`, ctx, [{ transform: 'translate(0,0) scale(.4)', opacity: 0 }, { transform: `translate(${dx * 0.6}px,${rand(-90, -50)}px) scale(1)`, opacity: 1, offset: 0.35 }, { transform: `translate(${dx}px,${rand(40, 90)}px) rotate(${rand(-60, 60)}deg) scale(.9)`, opacity: 0 }], { duration: o.duration, delay: i * 25, easing: 'cubic-bezier(0.33, 0, 0.67, 1)' }, chars[i % chars.length]);
+            return generative.all(Array.from({ length: o.count }, (_, i) => {
+                const dx = generative.rand(-90, 90);
+                return generative.spawn(x, y, `font-size:${generative.rand(16, 28)}px;line-height:1`, ctx, [{ transform: 'translate(0,0) scale(.4)', opacity: 0 }, { transform: `translate(${dx * 0.6}px,${generative.rand(-90, -50)}px) scale(1)`, opacity: 1, offset: 0.35 }, { transform: `translate(${dx}px,${generative.rand(40, 90)}px) rotate(${generative.rand(-60, 60)}deg) scale(.9)`, opacity: 0 }], { duration: o.duration, delay: i * 25, easing: 'cubic-bezier(0.33, 0, 0.67, 1)' }, chars[i % chars.length]);
             }));
         },
     },
@@ -370,7 +324,7 @@ const PHYSICS_FX = [
                 el.dataset.usaSplit = '1';
             }
             const hs = bounceKeyframes(o.bounce, 32);
-            return all(Array.from(el.children).map((s, i) => ctx.animate(s, hs.map((h) => ({ transform: `translateY(${(-h * o.height).toFixed(1)}px)` })), { duration: o.duration, delay: i * o.stagger, easing: 'linear', fill: 'backwards' })));
+            return generative.all(Array.from(el.children).map((s, i) => ctx.animate(s, hs.map((h) => ({ transform: `translateY(${(-h * o.height).toFixed(1)}px)` })), { duration: o.duration, delay: i * o.stagger, easing: 'linear', fill: 'backwards' })));
         },
     },
     {
@@ -504,7 +458,7 @@ const PAGE_FX = [
         reduced: 'run',
         defaults: TRANSITION_DEFAULTS,
         run: transition((s, o, ctx, el) => {
-            const { x, y } = origin(el, ctx);
+            const { x, y } = generative.origin(el, ctx);
             const r = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y)) + 2;
             // a huge box-shadow ring around a hole: the hole shrinks to 0 to cover
             const p = part(s, `left:${x}px;top:${y}px;width:0;height:0;border-radius:50%;box-shadow:0 0 0 ${Math.ceil(r)}px ${o.color}`);
@@ -829,292 +783,6 @@ function defineStory(tag = 'usa-story') {
     }, { id: 'usa-story', text: CSS });
 }
 
-/** Deterministic smooth pseudo-noise in [-1, 1] (sum of sines — cheap, no tables). */
-function noise2(x, y, t = 0) {
-    return (Math.sin(x * 1.7 + t) * Math.cos(y * 1.3 - t * 0.7) + Math.sin((x + y) * 0.9 + t * 0.5) * 0.5 + Math.cos(x * 0.6 - y * 1.1 - t * 0.3) * 0.5) / 2;
-}
-/** Hex `#rrggbb` → [r, g, b]. */
-function hexRgb(hex) {
-    const m = /^#?([\da-f]{2})([\da-f]{2})([\da-f]{2})$/i.exec(hex.trim());
-    return m ? [parseInt(m[1], 16), parseInt(m[2], 16), parseInt(m[3], 16)] : [124, 92, 255];
-}
-/**
- * Mount a generative canvas behind `el` and run `spec` on it. Returns the
- * cleanup. Exposed for custom generative effects.
- */
-function canvasBackground(el, fx, spec, o) {
-    const canvas = document.createElement('canvas');
-    canvas.setAttribute('aria-hidden', 'true');
-    canvas.setAttribute('data-usa-fx-canvas', '');
-    canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:-1;border-radius:inherit';
-    const restore = [];
-    const set = (k, v) => {
-        restore.push([k, el.style[k]]);
-        el.style[k] = v;
-    };
-    if (getComputedStyle(el).position === 'static')
-        set('position', 'relative');
-    set('isolation', 'isolate');
-    el.prepend(canvas);
-    const ctx = canvas.getContext('2d');
-    let raf = 0;
-    let visible = true;
-    let quality = Math.min(1, Math.max(0.35, Number(o.quality) || 1));
-    let w = 0;
-    let h = 0;
-    let state = null;
-    const t0 = performance.now();
-    let last = t0;
-    let slow = 0;
-    let fast = 0;
-    const resize = () => {
-        const r = el.getBoundingClientRect();
-        w = Math.max(1, Math.round(r.width));
-        h = Math.max(1, Math.round(r.height));
-        const dpr = Math.min(2, (typeof devicePixelRatio === 'number' ? devicePixelRatio : 1) || 1) * quality;
-        canvas.width = Math.max(1, Math.round(w * dpr));
-        canvas.height = Math.max(1, Math.round(h * dpr));
-        if (ctx)
-            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        state = spec.init ? spec.init(w, h, o) : {};
-    };
-    const frame = (now) => {
-        raf = 0;
-        if (!ctx)
-            return;
-        const dt = now - last;
-        last = now;
-        // adaptive quality: sustained slow frames lower the render scale, fast ones raise it
-        if (dt > 28)
-            slow++;
-        else if (dt < 18)
-            fast++;
-        if (slow > 20 && quality > 0.35) {
-            quality = Math.max(0.35, quality - 0.15);
-            slow = fast = 0;
-            resize();
-        }
-        else if (fast > 240 && quality < 1) {
-            quality = Math.min(1, quality + 0.15);
-            slow = fast = 0;
-            resize();
-        }
-        spec.draw({ ctx, w, h, t: (now - t0) / 1000, quality, state, o });
-        if (visible && !document.hidden)
-            raf = requestAnimationFrame(frame);
-    };
-    const start = () => {
-        if (!raf && ctx && !fx.reduced) {
-            last = performance.now();
-            raf = requestAnimationFrame(frame);
-        }
-    };
-    resize();
-    if (ctx)
-        spec.draw({ ctx, w, h, t: 0, quality, state, o }); // first / static frame
-    const io = typeof IntersectionObserver === 'function' ? new IntersectionObserver((es) => {
-        visible = es.some((e) => e.isIntersecting);
-        if (visible)
-            start();
-    }) : null;
-    io?.observe(el);
-    const ro = typeof ResizeObserver === 'function' ? new ResizeObserver(() => {
-        resize();
-        if (ctx && fx.reduced)
-            spec.draw({ ctx, w, h, t: 0, quality, state, o });
-    }) : null;
-    ro?.observe(el);
-    const vis = () => !document.hidden && visible && start();
-    document.addEventListener('visibilitychange', vis);
-    start();
-    return () => {
-        cancelAnimationFrame(raf);
-        raf = 0;
-        io?.disconnect();
-        ro?.disconnect();
-        document.removeEventListener('visibilitychange', vis);
-        canvas.remove();
-        for (const [k, v] of restore)
-            el.style[k] = v;
-    };
-}
-const gen = (name, description, defaults, spec) => ({
-    name,
-    kind: 'background',
-    description,
-    reduced: 'run',
-    defaults: { colors: PALETTE, background: '#0b0d12', speed: 1, quality: 1, ...defaults },
-    run: (el, o, ctx) => canvasBackground(el, ctx, spec, o),
-});
-/** Low-resolution scalar field → ImageData, drawn scaled up (used by voronoi / metaballs / contours). */
-function field(f, cell, px) {
-    const step = Math.max(2, Math.round(cell / f.quality));
-    const cw = Math.max(1, Math.ceil(f.w / step));
-    const ch = Math.max(1, Math.ceil(f.h / step));
-    const st = f.state;
-    if (!st.buf || st.buf.width !== cw || st.buf.height !== ch) {
-        st.buf = document.createElement('canvas');
-        st.buf.width = cw;
-        st.buf.height = ch;
-        st.bctx = st.buf.getContext('2d');
-        st.img = st.bctx?.createImageData(cw, ch);
-    }
-    if (!st.bctx || !st.img)
-        return;
-    const d = st.img.data;
-    for (let y = 0; y < ch; y++)
-        for (let x = 0; x < cw; x++)
-            px(x * step, y * step, d, (y * cw + x) * 4);
-    st.bctx.putImageData(st.img, 0, 0);
-    f.ctx.imageSmoothingEnabled = true;
-    f.ctx.drawImage(st.buf, 0, 0, f.w, f.h);
-}
-const GENERATIVE_FX = [
-    gen('flow-field', 'Particles drift along a slowly changing flow field, leaving silky trails.', { count: 600, fade: 0.06 }, {
-        init: (w, h, o) => ({ p: Array.from({ length: o.count }, () => [Math.random() * w, Math.random() * h]) }),
-        draw: ({ ctx, w, h, t, state, o, quality }) => {
-            ctx.fillStyle = o.background;
-            ctx.globalAlpha = t === 0 ? 1 : o.fade;
-            ctx.fillRect(0, 0, w, h);
-            ctx.globalAlpha = 0.8;
-            const n = Math.round(state.p.length * quality);
-            const steps = t === 0 ? 40 : 1;
-            for (let i = 0; i < n; i++) {
-                const q = state.p[i];
-                ctx.fillStyle = o.colors[i % o.colors.length];
-                for (let s = 0; s < steps; s++) {
-                    const a = noise2(q[0] * 0.004, q[1] * 0.004, t * 0.15 * o.speed) * Math.PI * 2;
-                    q[0] += Math.cos(a) * 1.2 * o.speed;
-                    q[1] += Math.sin(a) * 1.2 * o.speed;
-                    if (q[0] < 0 || q[0] > w || q[1] < 0 || q[1] > h)
-                        (q[0] = Math.random() * w), (q[1] = Math.random() * h);
-                    ctx.fillRect(q[0], q[1], 1.4, 1.4);
-                }
-            }
-            ctx.globalAlpha = 1;
-        },
-    }),
-    gen('voronoi', 'Drifting Voronoi cells in the palette, with darker borders.', { seeds: 14, cell: 6 }, {
-        init: (w, h, o) => ({ s: Array.from({ length: o.seeds }, (_, i) => ({ x: Math.random() * w, y: Math.random() * h, vx: Math.random() - 0.5, vy: Math.random() - 0.5, c: hexRgb(o.colors[i % o.colors.length]) })) }),
-        draw: (f) => {
-            const { w, h, state, o } = f;
-            for (const s of state.s) {
-                s.x += s.vx * o.speed;
-                s.y += s.vy * o.speed;
-                if (s.x < 0 || s.x > w)
-                    s.vx *= -1;
-                if (s.y < 0 || s.y > h)
-                    s.vy *= -1;
-            }
-            field(f, o.cell, (x, y, d, i) => {
-                let b = Infinity;
-                let b2 = Infinity;
-                let c = state.s[0].c;
-                for (const s of state.s) {
-                    const dd = (s.x - x) ** 2 + (s.y - y) ** 2;
-                    if (dd < b)
-                        (b2 = b), (b = dd), (c = s.c);
-                    else if (dd < b2)
-                        b2 = dd;
-                }
-                const edge = Math.sqrt(b2) - Math.sqrt(b) < 6 ? 0.55 : 1;
-                d[i] = c[0] * edge;
-                d[i + 1] = c[1] * edge;
-                d[i + 2] = c[2] * edge;
-                d[i + 3] = 255;
-            });
-        },
-    }),
-    gen('mesh-gradient', 'Soft blobs of colour orbit and blend into a living mesh gradient.', { blobs: 4, blur: 0.65 }, {
-        draw: ({ ctx, w, h, t, o }) => {
-            ctx.fillStyle = o.background;
-            ctx.fillRect(0, 0, w, h);
-            const r = Math.max(w, h) * o.blur;
-            for (let i = 0; i < o.blobs; i++) {
-                const a = t * 0.25 * o.speed + (i * Math.PI * 2) / o.blobs;
-                const x = w / 2 + Math.cos(a * (1 + i * 0.13)) * w * 0.32;
-                const y = h / 2 + Math.sin(a * (0.8 + i * 0.11)) * h * 0.32;
-                const [cr, cg, cb] = hexRgb(o.colors[i % o.colors.length]);
-                const g = ctx.createRadialGradient(x, y, 0, x, y, r);
-                g.addColorStop(0, `rgba(${cr},${cg},${cb},0.7)`);
-                g.addColorStop(1, `rgba(${cr},${cg},${cb},0)`);
-                ctx.fillStyle = g;
-                ctx.fillRect(0, 0, w, h);
-            }
-        },
-    }),
-    gen('starfield', 'Stars stream toward the viewer (warp speed with `speed: 4`).', { stars: 400, color: '#ffffff' }, {
-        init: (_w, _h, o) => ({ s: Array.from({ length: o.stars }, () => [Math.random() * 2 - 1, Math.random() * 2 - 1, Math.random()]) }),
-        draw: ({ ctx, w, h, t, state, o, quality }) => {
-            ctx.fillStyle = o.background;
-            ctx.fillRect(0, 0, w, h);
-            ctx.fillStyle = o.color;
-            const n = Math.round(state.s.length * quality);
-            for (let i = 0; i < n; i++) {
-                const s = state.s[i];
-                if (t > 0)
-                    s[2] -= 0.004 * o.speed;
-                if (s[2] <= 0.01)
-                    (s[0] = Math.random() * 2 - 1), (s[1] = Math.random() * 2 - 1), (s[2] = 1);
-                const x = w / 2 + (s[0] / s[2]) * w * 0.5;
-                const y = h / 2 + (s[1] / s[2]) * h * 0.5;
-                if (x < 0 || x > w || y < 0 || y > h)
-                    continue;
-                const size = (1 - s[2]) * 2.6;
-                ctx.globalAlpha = Math.min(1, (1 - s[2]) * 1.6);
-                ctx.fillRect(x, y, size, size);
-            }
-            ctx.globalAlpha = 1;
-        },
-    }),
-    gen('metaballs', 'Gooey blobs that merge and split (low-resolution field, scaled up).', { balls: 6, cell: 5, threshold: 1 }, {
-        init: (w, h, o) => ({ b: Array.from({ length: o.balls }, () => ({ x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - 0.5) * 1.6, vy: (Math.random() - 0.5) * 1.6, r: Math.min(w, h) * (0.08 + Math.random() * 0.08) })) }),
-        draw: (f) => {
-            const { w, h, state, o } = f;
-            for (const b of state.b) {
-                b.x += b.vx * o.speed;
-                b.y += b.vy * o.speed;
-                if (b.x < 0 || b.x > w)
-                    b.vx *= -1;
-                if (b.y < 0 || b.y > h)
-                    b.vy *= -1;
-            }
-            const [ar, ag, ab] = hexRgb(o.colors[0]);
-            const [br, bg, bb] = hexRgb(o.colors[1] || o.colors[0]);
-            const [kr, kg, kb] = hexRgb(o.background);
-            field(f, o.cell, (x, y, d, i) => {
-                let v = 0;
-                for (const b of state.b)
-                    v += (b.r * b.r) / ((b.x - x) ** 2 + (b.y - y) ** 2 + 1);
-                const inside = v >= o.threshold;
-                const k = Math.min(1, (v - o.threshold) * 0.8);
-                d[i] = inside ? ar + (br - ar) * k : kr;
-                d[i + 1] = inside ? ag + (bg - ag) * k : kg;
-                d[i + 2] = inside ? ab + (bb - ab) * k : kb;
-                d[i + 3] = 255;
-            });
-        },
-    }),
-    gen('contours', 'Topographic contour lines over a slowly shifting height field.', { levels: 9, cell: 4, color: '#7c5cff' }, {
-        draw: (f) => {
-            const { t, o } = f;
-            const [lr, lg, lb] = hexRgb(o.color);
-            const [kr, kg, kb] = hexRgb(o.background);
-            const z = (x, y) => (noise2(x * 0.006, y * 0.006, t * 0.2 * o.speed) + 1) / 2;
-            const step = Math.max(2, Math.round(o.cell / f.quality));
-            field(f, o.cell, (x, y, d, i) => {
-                const a = Math.floor(z(x, y) * o.levels);
-                const line = a !== Math.floor(z(x + step, y) * o.levels) || a !== Math.floor(z(x, y + step) * o.levels);
-                const shade = 0.12 + (a / o.levels) * 0.18;
-                d[i] = line ? lr : kr + (lr - kr) * shade;
-                d[i + 1] = line ? lg : kg + (lg - kg) * shade;
-                d[i + 2] = line ? lb : kb + (lb - kb) * shade;
-                d[i + 3] = 255;
-            });
-        },
-    }),
-];
-
 let actx = null;
 let current = null;
 const mediaSources = new WeakMap();
@@ -1279,7 +947,7 @@ function bindBeat(el, name, options = {}) {
     const { threshold, cooldown, history, floor, ...fx } = options;
     return onBeat(() => {
         if (!base.prefersReducedMotion())
-            components_fx.playEffect(el, name, fx).catch(() => undefined);
+            registry.playEffect(el, name, fx).catch(() => undefined);
     }, { threshold, cooldown, history, floor });
 }
 // --- visual effects ----------------------------------------------------------
@@ -1300,8 +968,8 @@ const audioFx = (name, description, defaults, spec) => ({
     kind: 'background',
     description,
     reduced: 'skip',
-    defaults: { colors: PALETTE, background: '#0b0d12', speed: 1, quality: 1, ...defaults },
-    run: (el, o, ctx) => canvasBackground(el, ctx, spec, o),
+    defaults: { colors: generative.PALETTE, background: '#0b0d12', speed: 1, quality: 1, ...defaults },
+    run: (el, o, ctx) => generative.canvasBackground(el, ctx, spec, o),
 });
 const AUDIO_FX = [
     audioFx('spectrum-bars', 'Frequency bars dance to the audio (mirror them with `mirror: true`).', { bars: 48, gap: 2, mirror: false }, {
@@ -1326,7 +994,7 @@ const AUDIO_FX = [
             ctx.fillStyle = o.background;
             ctx.fillRect(0, 0, w, h);
             const s = read(t, 32);
-            const [r, g, b] = hexRgb(o.color);
+            const [r, g, b] = generative.hexRgb(o.color);
             const base = Math.min(w, h) * 0.18;
             for (let i = 0; i < o.rings; i++) {
                 const rad = base * (1 + i * 0.55) * (1 + s.bass * 0.6);
@@ -1414,7 +1082,7 @@ function defineAudio(tag = 'usa-audio') {
                         catch {
                             /* ignore bad JSON */
                         }
-                        components_fx.playEffect(el, el.dataset.usaBeat || 'pulse', opts).catch(() => undefined);
+                        registry.playEffect(el, el.dataset.usaBeat || 'pulse', opts).catch(() => undefined);
                     });
                 }, { threshold: this.num('threshold', 1.35), cooldown: this.num('cooldown', 250) });
             }
@@ -1446,7 +1114,7 @@ const touchOk = (e, o) => o.touch || e.pointerType !== 'touch';
 function overlayCanvas(draw) {
     const c = document.createElement('canvas');
     c.style.cssText = 'position:absolute;inset:0;width:100%;height:100%';
-    fxLayer().appendChild(c);
+    generative.fxLayer().appendChild(c);
     const g = c.getContext('2d');
     let raf = 0;
     const frame = (now) => {
@@ -1508,7 +1176,7 @@ const CURSOR_FX = [
         description: 'A glowing comet tail follows the pointer over the element (persistent; `color`, `width`, `life`).',
         defaults: { color: '#7c5cff', width: 10, life: 320, touch: false },
         run: (el, o) => trail(el, o, (g, pts, now) => {
-            const [r, gg, b] = hexRgb(o.color);
+            const [r, gg, b] = generative.hexRgb(o.color);
             g.lineCap = 'round';
             for (let i = 1; i < pts.length; i++) {
                 const k = 1 - (now - pts[i].t) / o.life;
@@ -1546,7 +1214,7 @@ const CURSOR_FX = [
         name: 'sparkle-trail',
         kind: 'cursor',
         description: 'Little stars twinkle off the pointer as it moves (persistent; `colors`, `spacing` px between stars).',
-        defaults: { colors: PALETTE, spacing: 14, size: 14, touch: false },
+        defaults: { colors: generative.PALETTE, spacing: 14, size: 14, touch: false },
         run: (el, o, ctx) => {
             let lx = -1e4;
             let ly = -1e4;
@@ -1555,8 +1223,8 @@ const CURSOR_FX = [
                     return;
                 lx = e.clientX;
                 ly = e.clientY;
-                const s = o.size * rand(0.6, 1.2);
-                spawn(e.clientX - s / 2, e.clientY - s / 2, `font-size:${s}px;line-height:1;color:${o.colors[Math.floor(rand(0, o.colors.length))]}`, ctx, [{ transform: 'translate(0,0) scale(0) rotate(0deg)', opacity: 1 }, { transform: `translate(${rand(-14, 14)}px,${rand(4, 26)}px) scale(1) rotate(${rand(-90, 90)}deg)`, opacity: 0 }], { duration: rand(500, 800), easing: 'ease-out' }, '✦');
+                const s = o.size * generative.rand(0.6, 1.2);
+                generative.spawn(e.clientX - s / 2, e.clientY - s / 2, `font-size:${s}px;line-height:1;color:${o.colors[Math.floor(generative.rand(0, o.colors.length))]}`, ctx, [{ transform: 'translate(0,0) scale(0) rotate(0deg)', opacity: 1 }, { transform: `translate(${generative.rand(-14, 14)}px,${generative.rand(4, 26)}px) scale(1) rotate(${generative.rand(-90, 90)}deg)`, opacity: 0 }], { duration: generative.rand(500, 800), easing: 'ease-out' }, '✦');
             };
             el.addEventListener('pointermove', move, { passive: true });
             return () => el.removeEventListener('pointermove', move);
@@ -1580,7 +1248,7 @@ const CURSOR_FX = [
             const leave = () => ((p.x = -1e4), (p.y = -1e4));
             el.addEventListener('pointermove', move, { passive: true });
             el.addEventListener('pointerleave', leave);
-            const off = canvasBackground(el, ctx, {
+            const off = generative.canvasBackground(el, ctx, {
                 draw: ({ ctx: g, w, h }) => {
                     g.clearRect(0, 0, w, h);
                     if (o.background !== 'transparent') {
@@ -1614,7 +1282,7 @@ const CURSOR_FX = [
         description: 'A soft light follows the pointer across the element, easing behind it (persistent; `color`, `size`).',
         defaults: { color: '#ffffff', size: 260, ease: 0.18, touch: false },
         run: (el, o) => {
-            const [r, g, b] = hexRgb(o.color);
+            const [r, g, b] = generative.hexRgb(o.color);
             const s = document.createElement('span');
             s.setAttribute('aria-hidden', 'true');
             s.style.cssText = `position:absolute;inset:0;pointer-events:none;border-radius:inherit;opacity:0;transition:opacity .25s;mix-blend-mode:soft-light;background:radial-gradient(circle ${o.size / 2}px at var(--sx,50%) var(--sy,50%),rgba(${r},${g},${b},.75),transparent)`;
@@ -1700,7 +1368,7 @@ function bindGesture(el, gesture, effect, o = {}) {
         if (typeof effect === 'function')
             effect(d, e);
         else
-            components_fx.playEffect(el, effect, effectOptions, e).catch(() => undefined);
+            registry.playEffect(el, effect, effectOptions, e).catch(() => undefined);
     };
     const twistAngle = () => {
         const [a, b] = [...pts.values()];
@@ -1814,7 +1482,7 @@ function defineGestureFx(tag = 'usa-gesture-fx') {
             }
             const target = this.flag('self') ? this : this.firstElementChild || this;
             const effect = this.str('effect', 'pulse');
-            this.onCleanup(bindGesture(this, this.gesture, (_d, e) => void components_fx.playEffect(target, effect, effectOptions, e).catch(() => undefined), {
+            this.onCleanup(bindGesture(this, this.gesture, (_d, e) => void registry.playEffect(target, effect, effectOptions, e).catch(() => undefined), {
                 velocity: this.num('velocity', 0.8),
                 angle: this.num('angle', 30),
                 duration: this.num('duration', 650),
@@ -1855,11 +1523,11 @@ function bumpCount(el, delta, ctx) {
 const pop = (el, ctx, s = 1.25, d = 380) => ctx.animate(el, [{ transform: 'scale(1)' }, { transform: `scale(${s})`, offset: 0.4 }, { transform: 'scale(1)' }], { duration: d, easing: 'cubic-bezier(.2,1.4,.4,1)' });
 /** A few glyphs flying out of the pointer / centre. */
 function burst(el, ctx, glyph, color, n = 6, rise = false) {
-    const { x, y } = origin(el, ctx);
-    return all(Array.from({ length: n }, (_, i) => {
-        const a = rise ? -Math.PI / 2 + rand(-0.6, 0.6) : (i / n) * Math.PI * 2;
-        const d = rand(28, 56);
-        return spawn(x - 7, y - 7, `font-size:14px;line-height:1;color:${color}`, ctx, [{ transform: 'translate(0,0) scale(.4)', opacity: 1 }, { transform: `translate(${Math.cos(a) * d}px,${Math.sin(a) * d}px) scale(1)`, opacity: 0 }], { duration: rand(500, 750), easing: 'cubic-bezier(.2,.8,.3,1)' }, glyph);
+    const { x, y } = generative.origin(el, ctx);
+    return generative.all(Array.from({ length: n }, (_, i) => {
+        const a = rise ? -Math.PI / 2 + generative.rand(-0.6, 0.6) : (i / n) * Math.PI * 2;
+        const d = generative.rand(28, 56);
+        return generative.spawn(x - 7, y - 7, `font-size:14px;line-height:1;color:${color}`, ctx, [{ transform: 'translate(0,0) scale(.4)', opacity: 1 }, { transform: `translate(${Math.cos(a) * d}px,${Math.sin(a) * d}px) scale(1)`, opacity: 0 }], { duration: generative.rand(500, 750), easing: 'cubic-bezier(.2,.8,.3,1)' }, glyph);
     }));
 }
 const click = (name, description, defaults, run) => ({ name, kind: 'click', description, defaults, run });
@@ -1902,7 +1570,7 @@ const MICRO_FX = [
         if (el.getAttribute('aria-busy') === 'true')
             return;
         el.setAttribute('aria-busy', 'true');
-        const [bar, remove] = overlay(el, `background:${o.color}55;transform-origin:left;transform:scaleX(0)`);
+        const [bar, remove] = generative.overlay(el, `background:${o.color}55;transform-origin:left;transform:scaleX(0)`);
         const a = ctx.animate(bar, [{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], { duration: o.duration, easing: 'linear', fill: 'forwards' });
         const done = a ? a.finished.catch(() => undefined) : Promise.resolve();
         return done.then(() => {
@@ -1928,12 +1596,12 @@ const MICRO_FX = [
     click('send-plane', 'A paper plane ✈ takes off from the button.', { color: '#22d3ee' }, (el, o, ctx) => {
         const r = el.getBoundingClientRect();
         pop(el, ctx, 0.92, 200);
-        return spawn(r.left + r.width / 2 - 8, r.top + r.height / 2 - 8, `font-size:16px;color:${o.color}`, ctx, [{ transform: 'translate(0,0) rotate(0)', opacity: 1 }, { transform: 'translate(40px,-10px) rotate(-10deg)', opacity: 1, offset: 0.4 }, { transform: 'translate(160px,-90px) rotate(-25deg)', opacity: 0 }], { duration: 800, easing: 'ease-in' }, '✈')?.finished;
+        return generative.spawn(r.left + r.width / 2 - 8, r.top + r.height / 2 - 8, `font-size:16px;color:${o.color}`, ctx, [{ transform: 'translate(0,0) rotate(0)', opacity: 1 }, { transform: 'translate(40px,-10px) rotate(-10deg)', opacity: 1, offset: 0.4 }, { transform: 'translate(160px,-90px) rotate(-25deg)', opacity: 0 }], { duration: 800, easing: 'ease-in' }, '✈')?.finished;
     }),
     click('add-to-cart', 'Bumps `[data-count]` by one and floats a "+1" (`text`).', { text: '+1', color: '#34d399' }, (el, o, ctx) => {
         bumpCount(el, 1, ctx);
-        const { x, y } = origin(el, ctx);
-        return spawn(x - 10, y - 10, `font:700 14px system-ui;color:${o.color}`, ctx, [{ transform: 'translateY(0)', opacity: 1 }, { transform: 'translateY(-40px)', opacity: 0 }], { duration: 700, easing: 'ease-out' }, o.text)?.finished;
+        const { x, y } = generative.origin(el, ctx);
+        return generative.spawn(x - 10, y - 10, `font:700 14px system-ui;color:${o.color}`, ctx, [{ transform: 'translateY(0)', opacity: 1 }, { transform: 'translateY(-40px)', opacity: 0 }], { duration: 700, easing: 'ease-out' }, o.text)?.finished;
     }),
     click('counter-bump', 'Adds `step` to `[data-count]` with a rolling number.', { step: 1 }, (el, o, ctx) => void bumpCount(el, Number(o.step) || 1, ctx)),
     click('upvote', 'Toggles an upvote: the arrow nudges up and `[data-count]` ±1.', {}, (el, _o, ctx) => {
@@ -1967,7 +1635,7 @@ const MICRO_FX = [
     }),
     attn('error-flash', 'Flashes the element red once (no more than one flash per call).', { color: '#ff5c8a' }, (el, o, ctx) => ctx.animate(el, [{ boxShadow: `0 0 0 0 ${o.color}00` }, { boxShadow: `0 0 0 4px ${o.color}`, offset: 0.3 }, { boxShadow: `0 0 0 0 ${o.color}00` }], { duration: 700 })),
     attn('success-check', 'A green ✓ badge pops over the element and fades.', { color: '#34d399' }, (el, o, ctx) => {
-        const [b, remove] = overlay(el, `display:grid;place-items:center;font:700 22px system-ui;color:#fff;background:${o.color}d0`);
+        const [b, remove] = generative.overlay(el, `display:grid;place-items:center;font:700 22px system-ui;color:#fff;background:${o.color}d0`);
         b.textContent = '✓';
         const a = ctx.animate(b, [{ opacity: 0, transform: 'scale(.6)' }, { opacity: 1, transform: 'scale(1)', offset: 0.3 }, { opacity: 1, offset: 0.75 }, { opacity: 0 }], { duration: 1100, easing: 'ease-out' });
         return a ? a.finished.then(remove, remove) : void setTimeout(remove, 900);
@@ -2082,7 +1750,7 @@ function themePreset(t, role) {
 function playThemeEffect(el, role, theme) {
     const name = theme || el.closest('[data-usa-theme]')?.getAttribute('data-usa-theme') || 'neon';
     const pr = themePreset(name, role);
-    return components_fx.playEffect(el, pr.effect, pr.options);
+    return registry.playEffect(el, pr.effect, pr.options);
 }
 const THEME_FX = [
     {
@@ -2105,7 +1773,7 @@ const THEME_FX = [
         description: 'A bright diagonal shine sweeps across frosted glass.',
         defaults: { duration: 700 },
         run: (el, o, ctx) => {
-            const [s, remove] = overlay(el, 'overflow:hidden;background:linear-gradient(105deg,transparent 35%,#ffffff8c 50%,transparent 65%);background-size:250% 100%;background-position:120% 0');
+            const [s, remove] = generative.overlay(el, 'overflow:hidden;background:linear-gradient(105deg,transparent 35%,#ffffff8c 50%,transparent 65%);background-size:250% 100%;background-position:120% 0');
             const a = ctx.animate(s, [{ backgroundPosition: '120% 0' }, { backgroundPosition: '-20% 0' }], { duration: o.duration, easing: 'ease-in-out' });
             return a ? a.finished.then(remove, remove) : void remove();
         },
@@ -2117,7 +1785,7 @@ const THEME_FX = [
         reduced: 'run',
         defaults: { opacity: 0.18 },
         run: (el, o, ctx) => {
-            const [s, remove] = overlay(el, `opacity:${o.opacity};background:repeating-linear-gradient(0deg,#000 0 1px,transparent 1px 3px);mix-blend-mode:multiply`);
+            const [s, remove] = generative.overlay(el, `opacity:${o.opacity};background:repeating-linear-gradient(0deg,#000 0 1px,transparent 1px 3px);mix-blend-mode:multiply`);
             const a = ctx.reduced ? null : ctx.animate(s, [{ backgroundPosition: '0 0' }, { backgroundPosition: '0 30px' }], { duration: 2400, iterations: Infinity, easing: 'linear' });
             return () => {
                 a?.cancel();
@@ -2152,7 +1820,7 @@ function defineTheme(tag = 'usa-theme') {
                 const pr = themePreset(this.theme, role);
                 const trigger = role === 'attention' ? 'click' : role === 'background' ? 'load' : role;
                 try {
-                    this.onCleanup(components_fx.bindEffect(el, pr.effect, { ...(pr.options || {}), trigger }));
+                    this.onCleanup(registry.bindEffect(el, pr.effect, { ...(pr.options || {}), trigger }));
                 }
                 catch {
                     /* effect not registered: call registerAllEffects() */
@@ -2271,7 +1939,7 @@ function createPlayer(root, animation, o = {}) {
             if (!e.fired && time >= e.t.start) {
                 e.fired = true;
                 for (const el of e.els)
-                    components_fx.playEffect(el, e.t.effect, e.t.options || {}).catch(() => undefined);
+                    registry.playEffect(el, e.t.effect, e.t.options || {}).catch(() => undefined);
             }
     };
     const done = () => {
@@ -2479,7 +2147,7 @@ const EFFECT_PACKS = {
     'cards-click': [...CARD_FX, ...CLICK_FX],
     physics: PHYSICS_FX,
     page: PAGE_FX,
-    generative: GENERATIVE_FX,
+    generative: generative.GENERATIVE_FX,
     audio: AUDIO_FX,
     cursor: CURSOR_FX,
     micro: MICRO_FX,
@@ -2487,32 +2155,32 @@ const EFFECT_PACKS = {
 };
 /** 5.1: card & click effects 2.0. */
 function registerCardClickEffects() {
-    components_fx.registerEffects(EFFECT_PACKS['cards-click']);
+    registry.registerEffects(EFFECT_PACKS['cards-click']);
 }
 /** 5.2: bounce & physics micro-interactions. */
 function registerPhysicsEffects() {
-    components_fx.registerEffects(EFFECT_PACKS.physics);
+    registry.registerEffects(EFFECT_PACKS.physics);
 }
 /** 5.3: page-wide transitions and effects. */
 function registerPageEffects() {
-    components_fx.registerEffects(EFFECT_PACKS.page);
+    registry.registerEffects(EFFECT_PACKS.page);
 }
 /** 5.5: generative Canvas 2D backgrounds. */
 function registerGenerativeEffects() {
-    components_fx.registerEffects(EFFECT_PACKS.generative);
+    registry.registerEffects(EFFECT_PACKS.generative);
 }
 /** 5.6: sound-reactive (Web Audio) backgrounds. */
 function registerAudioEffects() {
-    components_fx.registerEffects(EFFECT_PACKS.audio);
+    registry.registerEffects(EFFECT_PACKS.audio);
 }
 /** 5.7: cursor trails, magnetic dots, spotlight cursor. */
 function registerCursorEffects() {
-    components_fx.registerEffects(EFFECT_PACKS.cursor);
+    registry.registerEffects(EFFECT_PACKS.cursor);
 }
 /** 5.8: micro-interactions + theme-pack effects. */
 function registerMicroEffects() {
-    components_fx.registerEffects(EFFECT_PACKS.micro);
-    components_fx.registerEffects(EFFECT_PACKS.themes);
+    registry.registerEffects(EFFECT_PACKS.micro);
+    registry.registerEffects(EFFECT_PACKS.themes);
 }
 /** Define the 5.x elements of this entry (`<usa-story>`, …) under their default tags. */
 function defineEffectElements() {
@@ -2526,16 +2194,20 @@ function defineEffectElements() {
 function registerAllEffects() {
     components_fx.registerBuiltinEffects();
     for (const defs of Object.values(EFFECT_PACKS))
-        components_fx.registerEffects(defs);
+        registry.registerEffects(defs);
 }
 
+exports.GENERATIVE_FX = generative.GENERATIVE_FX;
+exports.canvasBackground = generative.canvasBackground;
+exports.fxLayer = generative.fxLayer;
+exports.hexRgb = generative.hexRgb;
+exports.noise2 = generative.noise2;
 exports.ANIMATION_FORMAT = ANIMATION_FORMAT;
 exports.AUDIO_FX = AUDIO_FX;
 exports.CARD_FX = CARD_FX;
 exports.CLICK_FX = CLICK_FX;
 exports.CURSOR_FX = CURSOR_FX;
 exports.EFFECT_PACKS = EFFECT_PACKS;
-exports.GENERATIVE_FX = GENERATIVE_FX;
 exports.GESTURES = GESTURES;
 exports.MICRO_FX = MICRO_FX;
 exports.PAGE_FX = PAGE_FX;
@@ -2551,7 +2223,6 @@ exports.bindBeat = bindBeat;
 exports.bindGesture = bindGesture;
 exports.bounceKeyframes = bounceKeyframes;
 exports.bumpCount = bumpCount;
-exports.canvasBackground = canvasBackground;
 exports.createBeatDetector = createBeatDetector;
 exports.createPlayer = createPlayer;
 exports.defineAudio = defineAudio;
@@ -2564,10 +2235,7 @@ exports.disableAudio = disableAudio;
 exports.enableAudio = enableAudio;
 exports.flingVelocity = flingVelocity;
 exports.formatCount = formatCount;
-exports.fxLayer = fxLayer;
 exports.getAudio = getAudio;
-exports.hexRgb = hexRgb;
-exports.noise2 = noise2;
 exports.normalizeAnimation = normalizeAnimation;
 exports.onBeat = onBeat;
 exports.playThemeEffect = playThemeEffect;

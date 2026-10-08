@@ -55,10 +55,12 @@ function h(tag, attrs = {}, children = []) {
 
 async function loadLibrary() {
   try {
-    lib = { ...(await import(LOCAL + 'components.js')), ...(await import(LOCAL + 'components/effects.js')) };
+    lib = { ...(await import(LOCAL + 'components.js')), ...(await import(LOCAL + 'components/effects.js')), ...(await import(LOCAL + 'components/widgets.js')), ...(await import(LOCAL + 'components/fx2.js')) };
   } catch {
-    lib = { ...(await import(CDN + 'components.js')), ...(await import(CDN + 'components/effects.js')) };
+    lib = { ...(await import(CDN + 'components.js')), ...(await import(CDN + 'components/effects.js')), ...(await import(CDN + 'components/widgets.js')), ...(await import(CDN + 'components/fx2.js')) };
   }
+  lib.defineWidgets?.(); // 6.2+: motionary/components/widgets
+  lib.registerFx2?.(); // 6.2+: the 6.x effect packs
   lib.defineComponents();
   lib.registerAllEffects(); // 5.x effect packs (motionary/components/effects)
   lib.defineEffectElements?.(); // 5.4+: <usa-story>, …
