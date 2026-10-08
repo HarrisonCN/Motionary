@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.3.0] - 2026-10-08
+
+### Added
+- **Page-wide pack** (`use-scroll-animate/components/effects`, `registerPageEffects()`, `PAGE_FX`):
+  - Transitions — `curtain`, `iris` (closes on the click point), `pixel-dissolve` (`cols` × `rows`), `blinds` (`slats`). Each covers the viewport, awaits `onCovered()` (swap your route / content there), optionally `hold`s, then reveals; `playEffect()` resolves when the page is visible again.
+  - Persistent — `velocity-skew` (skews with scroll speed, eases back), `spotlight` (dims everything but a circle at the pointer), `edge-glow` (lights the viewport edge you scroll toward).
+- Showcase: **Page transitions** and **Velocity skew & edge glow** cards.
+
+### Accessibility
+- Transition layers are `aria-hidden`; under reduced motion every transition becomes a 150 ms cross-fade that still calls `onCovered()`. `velocity-skew`, `spotlight` and `edge-glow` don’t run under reduced motion.
+
 ## [5.2.0] - 2026-10-08
 
 ### Added

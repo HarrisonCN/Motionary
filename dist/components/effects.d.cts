@@ -84,6 +84,19 @@ declare function springKeyframes(map: (p: number) => Keyframe, spring?: SpringOp
 declare function bounceKeyframes(bounce?: number, steps?: number): number[];
 declare const PHYSICS_FX: EffectDefinition[];
 
+/**
+ * 5.3 — page-wide effects, registered through `registerEffect()`.
+ * Transitions (cover → `onCovered()` → reveal): `curtain`, `iris`,
+ * `pixel-dissolve`, `blinds`. Persistent page effects: `velocity-skew`,
+ * `spotlight`, `edge-glow`.
+ *
+ * ```ts
+ * await playEffect(document.body, 'iris', { onCovered: () => router.go('/next') });
+ * ```
+ */
+
+declare const PAGE_FX: EffectDefinition[];
+
 /** Helpers shared by the 5.x effect packs. */
 
 /** A fixed, pointer-transparent, aria-hidden layer for transient particles. */
@@ -95,8 +108,10 @@ declare const EFFECT_PACKS: Record<string, EffectDefinition[]>;
 declare function registerCardClickEffects(): void;
 /** 5.2: bounce & physics micro-interactions. */
 declare function registerPhysicsEffects(): void;
+/** 5.3: page-wide transitions and effects. */
+declare function registerPageEffects(): void;
 /** Register the built-ins and every pack (idempotent). */
 declare function registerAllEffects(): void;
 
-export { CARD_FX, CLICK_FX, EFFECT_PACKS, PHYSICS_FX, bounceKeyframes, fxLayer, registerAllEffects, registerCardClickEffects, registerPhysicsEffects, solveSpring, springKeyframes };
+export { CARD_FX, CLICK_FX, EFFECT_PACKS, PAGE_FX, PHYSICS_FX, bounceKeyframes, fxLayer, registerAllEffects, registerCardClickEffects, registerPageEffects, registerPhysicsEffects, solveSpring, springKeyframes };
 export type { SpringOptions };

@@ -365,6 +365,22 @@ el.animate(frames, { duration });
 <usa-fx effect="elastic-hover" trigger="load"><article class="card">…</article></usa-fx>
 ```
 
+### v5.3 Page-wide effects (`components/effects`)
+
+Transitions `curtain` · `iris` · `pixel-dissolve` · `blinds` cover the viewport, await `onCovered()`, then reveal:
+
+```js
+import { registerAllEffects } from 'use-scroll-animate/components/effects';
+import { playEffect } from 'use-scroll-animate/components/fx';
+registerAllEffects();
+link.addEventListener('click', (e) => {
+  e.preventDefault();
+  playEffect(link, 'iris', { onCovered: () => router.go(link.href), color: '#111' });
+});
+```
+
+Persistent: `<usa-fx effect="velocity-skew" trigger="load">`, `spotlight` (`radius`, `dim`), `edge-glow` (`color`, `size`). Reduced motion: transitions cross-fade (150 ms), persistent effects are off.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

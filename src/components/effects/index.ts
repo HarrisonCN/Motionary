@@ -14,8 +14,9 @@ import { registerEffects, registerBuiltinEffects } from '../fx/index';
 import type { EffectDefinition } from '../fx/registry';
 import { CARD_FX, CLICK_FX } from './cards-click';
 import { PHYSICS_FX } from './physics';
+import { PAGE_FX } from './page';
 
-export { CARD_FX, CLICK_FX, PHYSICS_FX };
+export { CARD_FX, CLICK_FX, PHYSICS_FX, PAGE_FX };
 export { solveSpring, springKeyframes, bounceKeyframes } from './physics';
 export type { SpringOptions } from './physics';
 export { fxLayer } from './shared';
@@ -24,6 +25,7 @@ export { fxLayer } from './shared';
 export const EFFECT_PACKS: Record<string, EffectDefinition[]> = {
   'cards-click': [...CARD_FX, ...CLICK_FX],
   physics: PHYSICS_FX,
+  page: PAGE_FX,
 };
 
 /** 5.1: card & click effects 2.0. */
@@ -34,6 +36,11 @@ export function registerCardClickEffects(): void {
 /** 5.2: bounce & physics micro-interactions. */
 export function registerPhysicsEffects(): void {
   registerEffects(EFFECT_PACKS.physics);
+}
+
+/** 5.3: page-wide transitions and effects. */
+export function registerPageEffects(): void {
+  registerEffects(EFFECT_PACKS.page);
 }
 
 /** Register the built-ins and every pack (idempotent). */
