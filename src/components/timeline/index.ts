@@ -10,8 +10,6 @@ export { defineTimeline };
 export { timeline, resolvePosition, TIMELINE_PRESETS, supportsNativeScrub } from './core';
 export type { Timeline, TimelineOptions, TimelineStepOptions, TimelinePosition, ScrubOptions, ScrubHandle } from './core';
 export type { UsaTimelineElement };
-export { configureComponents, prefersReducedMotion } from '../base';
-export type { ComponentsConfig, UsaElement } from '../base';
 
 /** Register every component of this category under its default tag. */
 export function defineTimelineComponents(): void {

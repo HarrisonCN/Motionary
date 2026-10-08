@@ -7,17 +7,16 @@
  * scripts. Classes are created the first time a `define*()` function runs.
  */
 const MOTION_SENSITIVITY_LEVELS = ['full', 'gentle', 'minimal', 'static'];
-const MOTION_SCALE = { off: 0, low: 0.6, normal: 1, high: 1.25 };
+const MOTION_SCALE = { low: 0.6, normal: 1, high: 1.25 };
 const config = { injectStyles: true, reducedMotion: 'user', motionIntensity: 'normal', motionSensitivity: 'full' };
 /** Change global component settings (call before `define*()` for `injectStyles`). */
 function configureComponents(options) {
-    if (!quiet) {
-        // 4.9: removed in 5.0 (see docs/upgrading-5.md, `npx usa-codemod-5`)
-        if (options.motionIntensity === 'off')
-            deprecate('intensity-off', "motionIntensity: 'off' is deprecated and will be removed in 5.0 — use motionSensitivity: 'minimal' (setMotionSensitivity('minimal')) instead.");
-        if (options.reducedMotion === 'no-preference')
-            deprecate('reduced-no-preference', "reducedMotion: 'no-preference' is deprecated and will be removed in 5.0 — the OS setting is always respected; use 'user' (default) or 'reduce'.");
-    }
+    options = { ...options };
+    // 5.0: removed values are ignored (see docs/upgrading-5.md)
+    if (options.motionIntensity && !(options.motionIntensity in MOTION_SCALE))
+        delete options.motionIntensity;
+    if (options.reducedMotion && options.reducedMotion !== 'reduce')
+        options.reducedMotion = 'user';
     Object.assign(config, options);
     if (options.motionIntensity && typeof document !== 'undefined') {
         document.documentElement.style.setProperty('--usa-motion', String(MOTION_SCALE[options.motionIntensity] ?? 1));
@@ -62,15 +61,12 @@ function adaptKeyframes(frames, level = config.motionSensitivity) {
         return out;
     });
 }
-let quiet = 0;
 /** Run `fn` without 4.9 deprecation warnings (library-internal calls). */
 function withoutDeprecations(fn) {
-    quiet++;
     try {
         return fn();
     }
     finally {
-        quiet--;
     }
 }
 /** The current global motion intensity. */
@@ -84,10 +80,10 @@ function motionScale() {
 const canDefine = () => typeof customElements !== 'undefined' && typeof HTMLElement !== 'undefined';
 /** `true` when animations should be reduced (OS setting or `configureComponents`). */
 function prefersReducedMotion() {
-    if (config.motionIntensity === 'off' || config.motionSensitivity === 'minimal' || config.motionSensitivity === 'static')
+    if (config.motionSensitivity === 'minimal' || config.motionSensitivity === 'static')
         return true;
-    if (config.reducedMotion !== 'user')
-        return config.reducedMotion === 'reduce';
+    if (config.reducedMotion === 'reduce')
+        return true;
     return typeof matchMedia === 'function' && !!matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 const injected = new Set();
@@ -223,31 +219,7 @@ function getBase() {
         }
         /** `el.animate()` that returns `null` (and applies the last frame) without WAAPI. */
         motion(el, keyframes, options) {
-            if (typeof el.animate !== 'function' || config.motionSensitivity === 'static') {
-                applyFrame(el, keyframes[keyframes.length - 1]);
-                return null;
-            }
-            keyframes = adaptKeyframes(keyframes);
-            if (active$1 >= maxActive) {
-                applyFrame(el, keyframes[keyframes.length - 1]);
-                return null;
-            }
-            const k = motionScale();
-            if (k !== 1 && k > 0 && typeof options.duration === 'number')
-                options = { ...options, duration: options.duration * k, delay: (options.delay || 0) * k };
-            const a = el.animate(keyframes, options);
-            if (options.iterations !== Infinity) {
-                active$1++;
-                let done = false;
-                const end = () => {
-                    if (!done) {
-                        done = true;
-                        active$1--;
-                    }
-                };
-                a?.finished?.then(end, end);
-            }
-            return a;
+            return animateWithMotion(el, keyframes, options);
         }
         emit(type, detail) {
             return this.dispatchEvent(new CustomEvent(`usa:${type}`, { detail, bubbles: true, cancelable: true }));
@@ -255,6 +227,39 @@ function getBase() {
     }
     baseClass = Base;
     return baseClass;
+}
+/**
+ * `el.animate()` with the library's motion rules (5.0, shared by elements and
+ * registered effects): motion sensitivity (keyframes adapted, `static` →
+ * final frame), intensity (duration scale) and the animation budget. Returns
+ * `null` (final frame applied) when nothing should animate.
+ */
+function animateWithMotion(el, keyframes, options) {
+    if (typeof el.animate !== 'function' || config.motionSensitivity === 'static') {
+        applyFrame(el, keyframes[keyframes.length - 1]);
+        return null;
+    }
+    keyframes = adaptKeyframes(keyframes);
+    if (active$1 >= maxActive) {
+        applyFrame(el, keyframes[keyframes.length - 1]);
+        return null;
+    }
+    const k = motionScale();
+    if (k !== 1 && k > 0 && typeof options.duration === 'number')
+        options = { ...options, duration: options.duration * k, delay: (options.delay || 0) * k };
+    const a = el.animate(keyframes, options);
+    if (options.iterations !== Infinity) {
+        active$1++;
+        let done = false;
+        const end = () => {
+            if (!done) {
+                done = true;
+                active$1--;
+            }
+        };
+        a?.finished?.then(end, end);
+    }
+    return a;
 }
 /** Write a keyframe's properties as inline styles (no-WAAPI fallback). */
 function applyFrame(el, frame) {
@@ -416,6 +421,7 @@ const COMPONENT_CATEGORIES = {
     depth: ['usa-cube', 'usa-depth'],
     layout: ['usa-auto-animate', 'usa-masonry'],
     packs: ['usa-pack'],
+    fx: ['usa-fx'],
 };
 
 /**
@@ -451,8 +457,7 @@ function autoDegrade(options = {}) {
         state.reason = reason;
         if (degraded) {
             prev = { intensity: getMotionIntensity(), budget: animationBudget() };
-            if (prev.intensity !== 'off')
-                configureComponents({ motionIntensity: 'low' });
+            configureComponents({ motionIntensity: 'low' });
             setAnimationBudget(Math.max(4, Math.floor(maxActive / 2)));
         }
         else if (prev) {
@@ -7968,21 +7973,23 @@ function defineAutoSkeleton(tag = 'usa-auto-skeleton') {
 
 var css$7 = "";
 
+const INTENSITIES = ['low', 'normal', 'high'];
 const LEVELS = ['off', 'low', 'normal', 'high'];
 const KEY$1 = 'usa:motion';
-let fromSwitch = false;
 /**
  * Set the global motion intensity for every `<usa-*>` component:
- * `'off'` (like reduced motion), `'low'`, `'normal'` (default), `'high'`.
- * Sets `--usa-motion` and `data-usa-motion` on `<html>`; with `persist`
- * the choice is remembered (localStorage) and restored by `restoreMotionIntensity()`.
+ * `'low'`, `'normal'` (default), `'high'`. Sets `--usa-motion` and
+ * `data-usa-motion` on `<html>`; with `persist` the choice is remembered
+ * (localStorage) and restored by `restoreMotionIntensity()`.
+ * 5.0: `'off'` was removed — use `setMotionSensitivity('minimal')`.
  */
 function setMotionIntensity(level, persist = false) {
-    if (!LEVELS.includes(level))
+    if (!INTENSITIES.includes(level))
         return;
-    if (level === 'off' && !fromSwitch)
-        deprecate('set-intensity-off', "setMotionIntensity('off') is deprecated and will be removed in 5.0 — use setMotionSensitivity('minimal') from use-scroll-animate/components/a11y.");
-    withoutDeprecations(() => configureComponents({ motionIntensity: level }));
+    configureComponents({ motionIntensity: level });
+    store(level, persist);
+}
+function store(level, persist) {
     if (persist) {
         try {
             localStorage.setItem(KEY$1, level);
@@ -7994,30 +8001,39 @@ function setMotionIntensity(level, persist = false) {
     if (typeof document !== 'undefined')
         document.dispatchEvent(new CustomEvent('usa:motion', { detail: { level } }));
 }
-/** Re-apply a persisted intensity (call early on page load). Returns it. */
+/** Apply a switch level: `'off'` = motion sensitivity `minimal`, otherwise full motion at that intensity. */
+function setMotionLevel(level, persist = false) {
+    if (!LEVELS.includes(level))
+        return;
+    if (level === 'off')
+        configureComponents({ motionSensitivity: 'minimal' });
+    else
+        configureComponents({ motionIntensity: level, ...(getMotionSensitivity() === 'minimal' ? { motionSensitivity: 'full' } : {}) });
+    store(level, persist);
+}
+/** The current switch level. */
+function getMotionLevel() {
+    return getMotionSensitivity() === 'minimal' || getMotionSensitivity() === 'static' ? 'off' : getMotionIntensity();
+}
+/** Re-apply a persisted level (call early on page load). Returns the active intensity. */
 function restoreMotionIntensity() {
     try {
         const v = localStorage.getItem(KEY$1);
-        if (v && LEVELS.includes(v)) {
-            fromSwitch = true;
-            setMotionIntensity(v);
-        }
+        if (v && LEVELS.includes(v))
+            setMotionLevel(v);
     }
     catch {
         /* ignore */
     }
-    fromSwitch = false;
     return getMotionIntensity();
 }
 function defineMotionSwitch(tag = 'usa-motion-switch') {
     return defineElement(tag, (Base) => class UsaMotionSwitch extends Base {
         get value() {
-            return getMotionIntensity();
+            return getMotionLevel();
         }
         set value(v) {
-            fromSwitch = true;
-            setMotionIntensity(v, true);
-            fromSwitch = false;
+            setMotionLevel(v, true);
             this.sync();
         }
         mount() {
@@ -8208,9 +8224,7 @@ function defineTimeline(tag = 'usa-timeline') {
                 // (0–0.95) or `scrub="js"` opt into the JS engine, `scrub="scroll"`
                 // follows this element's own scroll position.
                 const v = this.str('scrub');
-                if (v === 'js')
-                    deprecate('timeline-scrub-js', '<usa-timeline scrub="js"> is deprecated and will be removed in 5.0 — the JS engine is picked automatically where native scroll timelines are missing; add smooth="…" to opt into smoothing.');
-                const stop = tl.scrub(this, { smooth: this.num('smooth', 0), engine: v === 'js' ? 'js' : 'auto', source: v === 'scroll' ? 'scroll' : 'view' });
+                const stop = tl.scrub(this, { smooth: this.num('smooth', 0), engine: 'auto', source: v === 'scroll' ? 'scroll' : 'view' });
                 this.toggleAttribute('data-native', stop.native);
                 this.onCleanup(stop);
                 return;
@@ -9007,7 +9021,7 @@ function supportsWebGL() {
         return support;
     try {
         const c = typeof document !== 'undefined' ? document.createElement('canvas') : null;
-        support = !!(c && (c.getContext('webgl') || c.getContext('experimental-webgl')));
+        support = !!(c && (c.getContext('webgl')));
     }
     catch {
         support = false;
@@ -9018,7 +9032,7 @@ function supportsWebGL() {
 function glQuad(canvas, frag) {
     let gl = null;
     try {
-        gl = (canvas.getContext('webgl', { premultipliedAlpha: false, antialias: false }) || canvas.getContext('experimental-webgl'));
+        gl = (canvas.getContext('webgl', { premultipliedAlpha: false, antialias: false }));
     }
     catch {
         gl = null;
@@ -10077,6 +10091,270 @@ function definePacksComponents() {
 }
 
 /**
+ * 5.0 — unified plugin-style effect registration. Every effect (built-in or
+ * yours) is a plain object registered once and played the same way:
+ * `playEffect(el, name)`, `bindEffect(el, name, { trigger })` or
+ * `<usa-fx effect="name" trigger="click">`. Effects get a context that
+ * already applies reduced motion, motion sensitivity, intensity and the
+ * animation budget.
+ */
+const EFFECT_KINDS = ['enter', 'exit', 'attention', 'click', 'hover', 'card', 'loop', 'page', 'background', 'text', 'cursor', 'scroll'];
+const EFFECT_TRIGGERS = ['click', 'hover', 'enter', 'load', 'loop', 'manual'];
+const registry = new Map();
+/** Register an effect (throws on a duplicate name unless `override`). Returns an unregister function. */
+function registerEffect(def, opts = {}) {
+    if (!/^[a-z][a-z0-9-]*$/.test(def.name))
+        throw new Error(`[use-scroll-animate] invalid effect name "${def.name}"`);
+    if (!EFFECT_KINDS.includes(def.kind))
+        throw new Error(`[use-scroll-animate] unknown effect kind "${def.kind}"`);
+    if (registry.has(def.name) && !opts.override)
+        throw new Error(`[use-scroll-animate] effect "${def.name}" is already registered`);
+    registry.set(def.name, def);
+    return () => {
+        if (registry.get(def.name) === def)
+            registry.delete(def.name);
+    };
+}
+/** Register several effects at once (already-registered names are skipped). */
+function registerEffects(defs) {
+    for (const d of defs)
+        if (!registry.has(d.name))
+            registerEffect(d);
+}
+const getEffect = (name) => registry.get(name);
+const hasEffect = (name) => registry.has(name);
+/** Registered effects (optionally of one kind), sorted by name. */
+function listEffects(kind) {
+    return Array.from(registry.values())
+        .filter((d) => !kind || d.kind === kind)
+        .sort((a, b) => a.name.localeCompare(b.name));
+}
+const SKIP_BY_DEFAULT = ['loop', 'background', 'cursor'];
+function context(event) {
+    const cleanups = [];
+    return {
+        reduced: prefersReducedMotion(),
+        sensitivity: getMotionSensitivity(),
+        event,
+        animate: animateWithMotion,
+        onCleanup: (fn) => cleanups.push(fn),
+        cleanups,
+    };
+}
+/**
+ * Play a registered effect once on `el`. Resolves when it finishes (or
+ * immediately for fire-and-forget effects). Unknown names reject.
+ */
+async function playEffect(el, name, options = {}, event) {
+    const def = registry.get(name);
+    if (!def)
+        throw new Error(`[use-scroll-animate] unknown effect "${name}" — registered: ${Array.from(registry.keys()).join(', ')}`);
+    const ctx = context(event);
+    if (ctx.reduced && (def.reduced ?? (SKIP_BY_DEFAULT.includes(def.kind) ? 'skip' : 'run')) === 'skip')
+        return;
+    const out = def.run(el, { ...(def.defaults || {}), ...options }, ctx);
+    if (out && typeof out.finished?.then === 'function')
+        await out.finished.catch(() => undefined);
+    else if (out && typeof out.then === 'function')
+        await out;
+}
+/**
+ * Bind an effect to a trigger on `el`: `click`, `hover` (pointerenter / focus),
+ * `enter` (scrolls into view; `once` by default), `load` (now), `loop`
+ * (starts now, cleanup stops it) or `manual` (nothing). Returns an unbind.
+ */
+function bindEffect(el, name, options = {}) {
+    const { trigger = 'click', once, ...opts } = options;
+    const def = registry.get(name);
+    if (!def)
+        throw new Error(`[use-scroll-animate] unknown effect "${name}"`);
+    const offs = [];
+    const fire = (e) => {
+        if (trigger === 'loop' || def.kind === 'loop' || def.kind === 'background' || def.kind === 'cursor') {
+            const ctx = context(e);
+            if (ctx.reduced && (def.reduced ?? 'skip') === 'skip')
+                return;
+            const out = def.run(el, { ...(def.defaults || {}), ...opts }, ctx);
+            if (typeof out === 'function')
+                offs.push(out);
+            offs.push(...ctx.cleanups);
+            return;
+        }
+        void playEffect(el, name, opts, e).catch(() => undefined);
+    };
+    const on = (type, opt) => {
+        el.addEventListener(type, fire, opt);
+        offs.push(() => el.removeEventListener(type, fire, opt));
+    };
+    if (trigger === 'click')
+        on('click', { once: !!once });
+    else if (trigger === 'hover')
+        (on('pointerenter'), on('focusin'));
+    else if (trigger === 'load' || trigger === 'loop')
+        fire();
+    else if (trigger === 'enter' && typeof IntersectionObserver !== 'undefined') {
+        const io = new IntersectionObserver((entries) => {
+            for (const en of entries)
+                if (en.isIntersecting) {
+                    fire();
+                    if (once !== false)
+                        io.disconnect();
+                }
+        }, { threshold: 0.15 });
+        io.observe(el);
+        offs.push(() => io.disconnect());
+    }
+    return () => offs.splice(0).reverse().forEach((f) => f());
+}
+
+function defineFx(tag = 'usa-fx') {
+    return defineElement(tag, (Base) => class UsaFx extends Base {
+        static get observedAttributes() {
+            return ['effect', 'trigger', 'options'];
+        }
+        get target() {
+            return this.flag('self') ? this : (this.firstElementChild || this);
+        }
+        opts() {
+            try {
+                return JSON.parse(this.str('options', '{}')) || {};
+            }
+            catch {
+                return {};
+            }
+        }
+        play() {
+            return playEffect(this.target, this.str('effect', 'pop'), this.opts()).catch(() => undefined);
+        }
+        mount() {
+            if (!this.style.display)
+                this.style.display = 'inline-block';
+            const name = this.str('effect', 'pop');
+            const t = this.str('trigger', 'click');
+            try {
+                this.onCleanup(bindEffect(this.target, name, { ...this.opts(), trigger: EFFECT_TRIGGERS.includes(t) ? t : 'click', once: this.flag('once') }));
+                this.removeAttribute('data-unknown');
+            }
+            catch {
+                this.setAttribute('data-unknown', name); // not registered (yet)
+            }
+        }
+    });
+}
+
+/**
+ * 5.0 built-in effects, all registered through `registerEffect()`:
+ * every timeline preset as an `enter` effect, attention seekers, and the
+ * click effects (burst, confetti, shake, ripple).
+ */
+const enter = Object.entries(TIMELINE_PRESETS).map(([name, frames]) => ({
+    name,
+    kind: 'enter',
+    description: `Entrance: ${name} (same keyframes as the timeline preset).`,
+    defaults: { duration: 600, delay: 0, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' },
+    run: (el, o, ctx) => ctx.animate(el, ctx.reduced ? [{ opacity: 0 }, { opacity: 1 }] : frames, { duration: o.duration, delay: o.delay, easing: o.easing, fill: 'backwards' }),
+}));
+const A = (name, description, frames, duration = 700, easing = 'ease-in-out') => ({
+    name,
+    kind: 'attention',
+    description,
+    defaults: { duration, iterations: 1 },
+    run: (el, o, ctx) => (ctx.reduced ? ctx.animate(el, [{ opacity: 1 }, { opacity: 0.6 }, { opacity: 1 }], { duration: 400 }) : ctx.animate(el, frames, { duration: o.duration, easing, iterations: o.iterations })),
+});
+const attention = [
+    A('pulse', 'Gentle scale pulse.', [{ transform: 'scale(1)' }, { transform: 'scale(1.08)' }, { transform: 'scale(1)' }], 600),
+    A('pop', 'Quick overshoot pop.', [{ transform: 'scale(1)' }, { transform: 'scale(1.18)', offset: 0.4 }, { transform: 'scale(0.96)', offset: 0.7 }, { transform: 'scale(1)' }], 450, 'cubic-bezier(0.34, 1.56, 0.64, 1)'),
+    A('jelly', 'Rubbery squash-and-stretch.', [{ transform: 'scale(1,1)' }, { transform: 'scale(1.25,0.75)', offset: 0.3 }, { transform: 'scale(0.75,1.25)', offset: 0.4 }, { transform: 'scale(1.15,0.85)', offset: 0.5 }, { transform: 'scale(0.95,1.05)', offset: 0.65 }, { transform: 'scale(1.05,0.95)', offset: 0.75 }, { transform: 'scale(1,1)' }], 900),
+    A('wiggle', 'Playful rotate wiggle.', [{ transform: 'rotate(0)' }, { transform: 'rotate(-8deg)', offset: 0.2 }, { transform: 'rotate(7deg)', offset: 0.4 }, { transform: 'rotate(-5deg)', offset: 0.6 }, { transform: 'rotate(3deg)', offset: 0.8 }, { transform: 'rotate(0)' }], 650),
+    A('heartbeat', 'Double-beat heart pulse.', [{ transform: 'scale(1)' }, { transform: 'scale(1.2)', offset: 0.14 }, { transform: 'scale(1)', offset: 0.28 }, { transform: 'scale(1.2)', offset: 0.42 }, { transform: 'scale(1)', offset: 0.7 }], 1100),
+    A('bounce', 'Hop up and settle with a squash.', [{ transform: 'translateY(0) scale(1,1)' }, { transform: 'translateY(-22px) scale(0.95,1.05)', offset: 0.35 }, { transform: 'translateY(0) scale(1.08,0.92)', offset: 0.6 }, { transform: 'translateY(-6px) scale(1,1)', offset: 0.8 }, { transform: 'translateY(0) scale(1,1)' }], 800),
+    A('flash', 'Two soft flashes (well under 3 per second).', [{ opacity: 1 }, { opacity: 0.25, offset: 0.25 }, { opacity: 1, offset: 0.5 }, { opacity: 0.25, offset: 0.75 }, { opacity: 1 }], 1400),
+    A('tada', 'Scale + shake celebration.', [{ transform: 'scale(1) rotate(0)' }, { transform: 'scale(0.9) rotate(-3deg)', offset: 0.1 }, { transform: 'scale(1.1) rotate(3deg)', offset: 0.3 }, { transform: 'scale(1.1) rotate(-3deg)', offset: 0.5 }, { transform: 'scale(1.1) rotate(3deg)', offset: 0.7 }, { transform: 'scale(1) rotate(0)' }], 1000),
+];
+const click = [
+    {
+        name: 'burst',
+        kind: 'click',
+        description: 'Particle burst from the click point (or the element center).',
+        defaults: { count: 12 },
+        run: (el, o, ctx) => {
+            if (ctx.reduced)
+                return;
+            const r = el.getBoundingClientRect();
+            const e = ctx.event;
+            burst(e?.clientX ?? r.left + r.width / 2, e?.clientY ?? r.top + r.height / 2, o);
+        },
+    },
+    {
+        name: 'confetti',
+        kind: 'click',
+        description: 'Confetti cannon from the element.',
+        defaults: { count: 80 },
+        run: (el, o, ctx) => {
+            if (ctx.reduced)
+                return;
+            const r = el.getBoundingClientRect();
+            confetti({ x: r.left + r.width / 2, y: r.top + r.height / 2, ...o });
+        },
+    },
+    {
+        name: 'shake',
+        kind: 'attention',
+        description: 'Horizontal "no" shake (errors, wrong password).',
+        defaults: { intensity: 8, duration: 480 },
+        run: (el, o, ctx) => (ctx.reduced ? ctx.animate(el, [{ opacity: 1 }, { opacity: 0.5 }, { opacity: 1 }], { duration: 300 }) : shake(el, o.intensity, o.duration)),
+    },
+    {
+        name: 'ripple',
+        kind: 'click',
+        description: 'Material-style ink ripple from the pointer.',
+        defaults: { color: 'currentColor', duration: 600 },
+        run: (el, o, ctx) => {
+            var _a;
+            if (ctx.reduced)
+                return;
+            const r = el.getBoundingClientRect();
+            const e = ctx.event;
+            const d = Math.hypot(r.width, r.height) * 2;
+            const dot = document.createElement('span');
+            dot.setAttribute('aria-hidden', 'true');
+            Object.assign(dot.style, { position: 'absolute', left: `${(e?.clientX ?? r.left + r.width / 2) - r.left - d / 2}px`, top: `${(e?.clientY ?? r.top + r.height / 2) - r.top - d / 2}px`, width: `${d}px`, height: `${d}px`, borderRadius: '50%', background: o.color, opacity: '0.25', pointerEvents: 'none' });
+            if (getComputedStyle(el).position === 'static')
+                el.style.position = 'relative';
+            (_a = el.style).overflow || (_a.overflow = 'hidden');
+            el.appendChild(dot);
+            const a = ctx.animate(dot, [{ transform: 'scale(0)', opacity: 0.3 }, { transform: 'scale(1)', opacity: 0 }], { duration: o.duration, easing: 'ease-out' });
+            const done = () => dot.remove();
+            if (a)
+                a.finished.then(done, done);
+            else
+                done();
+            return a;
+        },
+    },
+];
+/** Every built-in 5.0 effect definition. */
+const BUILTIN_EFFECTS = [...enter, ...attention, ...click];
+
+/**
+ * use-scroll-animate/components/fx — unified plugin-style effects (5.0).
+ * `registerEffect({ name, kind, run })`, `playEffect(el, name)`,
+ * `bindEffect(el, name, { trigger })`, `<usa-fx effect trigger>`. Built-ins:
+ * every timeline preset (`enter`), `pulse` · `pop` · `jelly` · `wiggle` ·
+ * `heartbeat` · `bounce` · `flash` · `tada` · `shake` (attention),
+ * `burst` · `confetti` · `ripple` (click). More packs: `use-scroll-animate/components/effects`.
+ */
+/** Register the built-in effects (idempotent; `defineFxComponents()` calls it). */
+function registerBuiltinEffects() {
+    registerEffects(BUILTIN_EFFECTS);
+}
+/** Register every component of this category under its default tag (+ the built-in effects). */
+function defineFxComponents() {
+    registerBuiltinEffects();
+    defineFx();
+}
+
+/**
  * 4.9 — the 5.0 modern-browser baseline. `baselineReport()` lists which
  * required / progressive features this browser has; `warnBaseline()` logs
  * once in development when a required one is missing.
@@ -10200,6 +10478,7 @@ const STATIC_ALTERNATIVES = {
     depth: 'Flat, front-facing layout.',
     layout: 'Items reflow instantly.',
     packs: 'Roles are styled but not animated.',
+    fx: 'Effects are skipped or reduced to a short fade; the content is unchanged.',
 };
 /**
  * Freeze a subtree at its static alternative: finishes running animations
@@ -10510,6 +10789,7 @@ const BY_CATEGORY = {
     depth: defineDepthComponents,
     layout: defineLayoutComponents,
     packs: definePacksComponents,
+    fx: defineFxComponents,
 };
 /**
  * Register every `<usa-*>` component (or only the given categories).
@@ -10537,5 +10817,5 @@ function defineComponents(categories) {
 const STYLE_BASE = new URL('../', import.meta.url).href;
 onDemandStyles(STYLE_BASE);
 
-export { ALL_TAGS, AMBIENT_EFFECTS, ANIM_ICONS, BRIDGE_PROTOCOL_VERSION, BUTTON_DEFORMS, CARD_EFFECTS, CLICK_EFFECTS, COMPONENT_CATEGORIES, CURSOR_MODES, GL_FALLBACKS, JOINING_SCRIPT, LIVE_REGION_IDS, MASK_SHAPES, MORPH_ICONS, MOTION_SCALE, MOTION_SENSITIVITY, MOTION_SENSITIVITY_LEVELS, MOTION_TOKENS, PACKS, PACK_PRIMITIVES, PAGE_EFFECTS, PARTICLE_PRESETS, POST_EFFECTS, REVEAL_EFFECTS, SENSITIVITY_CSS, SHADERS, SPINNER_VARIANTS, SPRING_EFFECTS, SPRING_PRESETS, STATIC_ALTERNATIVES, STYLE_BASE, TIMELINE_PRESETS, VARIANTS, activeAnimations, adaptKeyframes, adoptVariants, animationBudget, announce, applyMotionTokens, applyNativeSettings, applyPack, auditMotionA11y, autoAnimate, autoDegrade, baselineReport, burst, categoryOf, confetti, configureComponents, connectNativeShell, countUp, createSpring, defineAccordion, defineAcrylic, defineAmbient, defineAnimIcon, defineAurora, defineAutoAnimate, defineAutoSkeleton, defineAvatarStack, defineBackToTop, defineBackgroundComponents, defineBadge, defineBlobs, defineBottomSheet, defineButton, defineCard, defineCardComponents, defineCardStack, defineCarousel3d, defineCheck, defineCheckbox, defineClick, defineClickComponents, defineComponents, defineCounter, defineCube, defineCursor, defineDepth, defineDepthComponents, defineDialog, defineDistort, defineDotNetwork, defineDoubleTap, defineDraggable, defineDraw, defineDrawer, defineFab, defineFeedbackComponents, defineFullpage, defineGestureComponents, defineGlitch, defineGradientText, defineGrain, defineGridGlow, defineHandwriting, defineHold, defineIconMorph, defineInteractionComponents, defineLayoutComponents, defineLike, defineLiquid, defineLoadingBar, defineMagnetic, defineMarquee, defineMaskReveal, defineMasonry, defineMorph, defineMotionSwitch, defineNavbar, defineOverscroll, definePack, definePacksComponents, definePageComponents, defineParticles, definePhysicsComponents, definePinchZoom, definePopover, definePostFx, definePress, defineProgress, definePullRefresh, defineRating, defineReveal, defineRevealComponents, defineRipple, defineScramble, defineScrollHighlight, defineScrollProgress, defineScrolly, defineShader, defineShimmerText, defineSkeleton, defineSlider, defineSpinner, defineSplash, defineSplitText, defineSpotlight, defineSpring, defineStagger, defineStickyStack, defineSvgComponents, defineSwipeable, defineTabs, defineTextComponents, defineTextRotate, defineTilt, defineTimeline, defineTimelineComponents, defineToaster, defineToggle, defineTooltip, defineTransitionComponents, defineTypewriter, defineUiComponents, defineViewSwitch, defineWaterRipple, defineWaveText, defineWebglComponents, detectNativeHost, deviceTilt, drawLines, easeOutExpo, enableMpaTransitions, flip, flipFrames, fluentPreset, flyToCart, fragmentSource, gesture, getMotionIntensity, getMotionSensitivity, getMotionTokens, glFallbackCss, glGovernor, glQuad, graphemes, haptic, importMotionTokens, interpolatePath, linearEasing, liveRegion, loadCategoryStyles, loadedStyles, loadingBar, masonryLayout, mergeMotionTokens, morphPath, morphTo, motionAllowed, motionToken, motionTokensToCss, motionTokensToJSON, motionTokensToVars, motionVar, onDemandStyles, onFrame, orientationToTilt, pageTransition, parseDuration, parseEasing, parseNativeSettings, pathsCompatible, pinchScale, postFxShader, postToNative, prefersReducedMotion, projectInertia, readScrollProgress, requestOrientationPermission, resolveDurationToken, resolveEasingToken, resolvePosition, resolveSpring, restoreMotionIntensity, restoreMotionSensitivity, revealKeyframes, rubberBand, schedulerStats, scrambleFrame, scrollToTarget, setAnimationBudget, setMotionIntensity, setMotionSensitivity, setVariant, shake, sharedTransition, smoothScroll, snapTo, splitOrder, splitText, splitTimeline, words as splitWords, spring, springEasing, springEffectKeyframes, springSamples, staticAlternative, stepSpring, supportsLinearEasing, supportsNativeScrub, supportsOrientation, supportsViewTransitions, supportsWebGL, swipeDirection, themeTransition, timeline, toast, viewTransition, warnBaseline, watchPowerSaver };
+export { ALL_TAGS, AMBIENT_EFFECTS, ANIM_ICONS, BRIDGE_PROTOCOL_VERSION, BUILTIN_EFFECTS, BUTTON_DEFORMS, CARD_EFFECTS, CLICK_EFFECTS, COMPONENT_CATEGORIES, CURSOR_MODES, EFFECT_KINDS, EFFECT_TRIGGERS, GL_FALLBACKS, JOINING_SCRIPT, LIVE_REGION_IDS, MASK_SHAPES, MORPH_ICONS, MOTION_SCALE, MOTION_SENSITIVITY, MOTION_SENSITIVITY_LEVELS, MOTION_TOKENS, PACKS, PACK_PRIMITIVES, PAGE_EFFECTS, PARTICLE_PRESETS, POST_EFFECTS, REVEAL_EFFECTS, SENSITIVITY_CSS, SHADERS, SPINNER_VARIANTS, SPRING_EFFECTS, SPRING_PRESETS, STATIC_ALTERNATIVES, STYLE_BASE, TIMELINE_PRESETS, VARIANTS, activeAnimations, adaptKeyframes, adoptVariants, animateWithMotion, animationBudget, announce, applyMotionTokens, applyNativeSettings, applyPack, auditMotionA11y, autoAnimate, autoDegrade, baselineReport, bindEffect, burst, categoryOf, confetti, configureComponents, connectNativeShell, countUp, createSpring, defineAccordion, defineAcrylic, defineAmbient, defineAnimIcon, defineAurora, defineAutoAnimate, defineAutoSkeleton, defineAvatarStack, defineBackToTop, defineBackgroundComponents, defineBadge, defineBlobs, defineBottomSheet, defineButton, defineCard, defineCardComponents, defineCardStack, defineCarousel3d, defineCheck, defineCheckbox, defineClick, defineClickComponents, defineComponents, defineCounter, defineCube, defineCursor, defineDepth, defineDepthComponents, defineDialog, defineDistort, defineDotNetwork, defineDoubleTap, defineDraggable, defineDraw, defineDrawer, defineFab, defineFeedbackComponents, defineFullpage, defineFx, defineFxComponents, defineGestureComponents, defineGlitch, defineGradientText, defineGrain, defineGridGlow, defineHandwriting, defineHold, defineIconMorph, defineInteractionComponents, defineLayoutComponents, defineLike, defineLiquid, defineLoadingBar, defineMagnetic, defineMarquee, defineMaskReveal, defineMasonry, defineMorph, defineMotionSwitch, defineNavbar, defineOverscroll, definePack, definePacksComponents, definePageComponents, defineParticles, definePhysicsComponents, definePinchZoom, definePopover, definePostFx, definePress, defineProgress, definePullRefresh, defineRating, defineReveal, defineRevealComponents, defineRipple, defineScramble, defineScrollHighlight, defineScrollProgress, defineScrolly, defineShader, defineShimmerText, defineSkeleton, defineSlider, defineSpinner, defineSplash, defineSplitText, defineSpotlight, defineSpring, defineStagger, defineStickyStack, defineSvgComponents, defineSwipeable, defineTabs, defineTextComponents, defineTextRotate, defineTilt, defineTimeline, defineTimelineComponents, defineToaster, defineToggle, defineTooltip, defineTransitionComponents, defineTypewriter, defineUiComponents, defineViewSwitch, defineWaterRipple, defineWaveText, defineWebglComponents, detectNativeHost, deviceTilt, drawLines, easeOutExpo, enableMpaTransitions, flip, flipFrames, fluentPreset, flyToCart, fragmentSource, gesture, getEffect, getMotionIntensity, getMotionLevel, getMotionSensitivity, getMotionTokens, glFallbackCss, glGovernor, glQuad, graphemes, haptic, hasEffect, importMotionTokens, interpolatePath, linearEasing, listEffects, liveRegion, loadCategoryStyles, loadedStyles, loadingBar, masonryLayout, mergeMotionTokens, morphPath, morphTo, motionAllowed, motionScale, motionToken, motionTokensToCss, motionTokensToJSON, motionTokensToVars, motionVar, onDemandStyles, onFrame, orientationToTilt, pageTransition, parseDuration, parseEasing, parseNativeSettings, pathsCompatible, pinchScale, playEffect, postFxShader, postToNative, prefersReducedMotion, projectInertia, readScrollProgress, registerBuiltinEffects, registerEffect, registerEffects, requestOrientationPermission, resolveDurationToken, resolveEasingToken, resolvePosition, resolveSpring, restoreMotionIntensity, restoreMotionSensitivity, revealKeyframes, rubberBand, schedulerStats, scrambleFrame, scrollToTarget, setAnimationBudget, setMotionIntensity, setMotionLevel, setMotionSensitivity, setVariant, shake, sharedTransition, smoothScroll, snapTo, splitOrder, splitText, splitTimeline, words as splitWords, spring, springEasing, springEffectKeyframes, springSamples, staticAlternative, stepSpring, supportsLinearEasing, supportsNativeScrub, supportsOrientation, supportsViewTransitions, supportsWebGL, swipeDirection, themeTransition, timeline, toast, viewTransition, warnBaseline, watchPowerSaver, withoutDeprecations };
 //# sourceMappingURL=lite.js.map

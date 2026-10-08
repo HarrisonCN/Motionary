@@ -1,7 +1,6 @@
-import { v as defineElement, j as clamp } from '../chunks/base-DbbRUxaa.js';
-export { f as configureComponents, p as prefersReducedMotion } from '../chunks/base-DbbRUxaa.js';
-import { d as springEasing, c as createSpring, s as snapTo, a as rubberBand, p as projectInertia } from '../chunks/spring-B6w7mVCU.js';
-export { S as SPRING_PRESETS, l as linearEasing, r as resolveSpring, b as spring, e as springSamples, f as stepSpring, g as supportsLinearEasing } from '../chunks/spring-B6w7mVCU.js';
+import { x as defineElement, k as clamp } from '../chunks/base-C3Sw9sAO.js';
+import { d as springEasing, c as createSpring, s as snapTo, a as rubberBand, p as projectInertia } from '../chunks/spring-CckMe3x0.js';
+export { S as SPRING_PRESETS, l as linearEasing, r as resolveSpring, b as spring, e as springSamples, f as stepSpring, g as supportsLinearEasing } from '../chunks/spring-CckMe3x0.js';
 
 var css$2 = "usa-spring{display:inline-block;transform-origin:50% 70%}usa-spring[block]{display:block}usa-spring[effect=\"drop\"]{transform-origin:50% 100%}usa-spring[data-state=\"hidden\"]{opacity:0}usa-spring[trigger=\"click\"],usa-spring[trigger=\"hover\"]{cursor:pointer;-webkit-tap-highlight-color:transparent}";
 

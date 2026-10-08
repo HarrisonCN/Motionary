@@ -39,7 +39,7 @@ defineComponents(); // or per category: import { defineTextComponents } from 'us
 
 ```html
 <!-- or with no build step -->
-<script src="https://unpkg.com/use-scroll-animate@4/dist/components.umd.js"></script>
+<script src="https://unpkg.com/use-scroll-animate@5/dist/components.umd.js"></script>
 <usa-typewriter words="Hello, Windows.|Hello, web."></usa-typewriter>
 <usa-spinner kind="fluent"></usa-spinner>
 ```
@@ -64,6 +64,7 @@ defineComponents(); // or per category: import { defineTextComponents } from 'us
 | **3D & depth** (`/components/depth`) | `<usa-cube>` · `<usa-depth>` (pointer · gyroscope · scroll depth parallax) · `deviceTilt()` · (+ `<usa-carousel-3d>` in cards) |
 | **Layout animation** (`/components/layout`) | `<usa-auto-animate>` / `autoAnimate()` (list & grid reflow) · `<usa-masonry>` · `sharedTransition()` (shared elements) |
 | **Effect packs** (`/components/packs`) | `<usa-pack>` (`name="ecommerce \| portfolio \| dashboard \| game \| landing"`) · `applyPack()` · `flyToCart()` · `countUp()` |
+| **Effects — plugin API** (`/components/fx`) | `<usa-fx>` (`effect` · `trigger` click / hover / enter / load / loop) · `registerEffect()` · `playEffect()` · `bindEffect()` · built-ins: every timeline entrance, pulse · pop · jelly · wiggle · heartbeat · bounce · flash · tada · shake, burst · confetti · ripple |
 
 Whole bundle ≈ 22 kB gzip (JS + CSS); one category 3.5–6.4 kB; a single component ≈ 2 kB. The scroll-animation core below is unaffected.
 

@@ -104,6 +104,7 @@ export const STATIC_ALTERNATIVES: Record<ComponentCategory, string> = {
   depth: 'Flat, front-facing layout.',
   layout: 'Items reflow instantly.',
   packs: 'Roles are styled but not animated.',
+  fx: 'Effects are skipped or reduced to a short fade; the content is unchanged.',
 };
 
 /**

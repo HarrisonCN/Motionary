@@ -32,6 +32,7 @@ const LOADERS: Record<ComponentCategory, () => Promise<Record<string, any>>> = {
   depth: () => import('./depth/index'),
   layout: () => import('./layout/index'),
   packs: () => import('./packs/index'),
+  fx: () => import('./fx/index'),
 };
 
 const TAG_TO_CAT = new Map<string, ComponentCategory>();

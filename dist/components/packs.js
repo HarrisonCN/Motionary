@@ -1,5 +1,4 @@
-import { p as prefersReducedMotion, n as now, m as motionScale, r as raf, w as EASE_OUT, j as clamp, E as EASE_SPRING, v as defineElement } from '../chunks/base-DbbRUxaa.js';
-export { f as configureComponents } from '../chunks/base-DbbRUxaa.js';
+import { p as prefersReducedMotion, n as now, m as motionScale, r as raf, y as EASE_OUT, k as clamp, E as EASE_SPRING, x as defineElement } from '../chunks/base-C3Sw9sAO.js';
 
 const anim = (el, frames, o) => {
     if (typeof el.animate !== 'function')
@@ -181,5 +180,5 @@ function definePacksComponents() {
     definePack();
 }
 
-export { PACKS, PACK_PRIMITIVES, applyPack, countUp, definePack, definePacksComponents, flyToCart, prefersReducedMotion };
+export { PACKS, PACK_PRIMITIVES, applyPack, countUp, definePack, definePacksComponents, flyToCart };
 //# sourceMappingURL=packs.js.map

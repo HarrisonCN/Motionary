@@ -67,7 +67,7 @@ export function autoDegrade(options: AutoDegradeOptions = {}): () => void {
     state.reason = reason;
     if (degraded) {
       prev = { intensity: getMotionIntensity(), budget: animationBudget() };
-      if (prev.intensity !== 'off') configureComponents({ motionIntensity: 'low' });
+      configureComponents({ motionIntensity: 'low' });
       setAnimationBudget(Math.max(4, Math.floor(maxActive / 2)));
     } else if (prev) {
       configureComponents({ motionIntensity: prev.intensity });

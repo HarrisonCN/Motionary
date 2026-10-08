@@ -1,4 +1,4 @@
-import { defineElement, deprecate, type UsaElement } from '../base';
+import { defineElement, type UsaElement } from '../base';
 import { timeline, TIMELINE_PRESETS, type Timeline } from './core';
 import css from './timeline.css?raw';
 
@@ -12,8 +12,8 @@ import css from './timeline.css?raw';
  * (progress follows scroll instead of playing), `overlap` (ms each step
  * overlaps the previous, default 0), `duration` (600), `stagger` (ms),
  * `repeat` (replay every time it enters the viewport). 4.1: `scrub` runs on native
- * ScrollTimeline / ViewTimeline when supported (`data-native` is set); `scrub="js"`,
- * `scrub="scroll"` and `smooth` tune it. Methods: `play()`,
+ * ScrollTimeline / ViewTimeline when supported (`data-native` is set); `scrub="scroll"`
+ * and `smooth` tune it (5.0: `scrub="js"` removed — the JS engine is automatic). Methods: `play()`,
  * `reverse()`, `seek(t)`; property `timeline`. Event `usa:complete`.
  * Reduced motion: steps appear in their final state.
  */
@@ -71,8 +71,7 @@ export function defineTimeline(tag = 'usa-timeline'): CustomElementConstructor |
             // (0–0.95) or `scrub="js"` opt into the JS engine, `scrub="scroll"`
             // follows this element's own scroll position.
             const v = this.str('scrub');
-            if (v === 'js') deprecate('timeline-scrub-js', '<usa-timeline scrub="js"> is deprecated and will be removed in 5.0 — the JS engine is picked automatically where native scroll timelines are missing; add smooth="…" to opt into smoothing.');
-            const stop = tl.scrub(this, { smooth: this.num('smooth', 0), engine: v === 'js' ? 'js' : 'auto', source: v === 'scroll' ? 'scroll' : 'view' });
+            const stop = tl.scrub(this, { smooth: this.num('smooth', 0), engine: 'auto', source: v === 'scroll' ? 'scroll' : 'view' });
             this.toggleAttribute('data-native', stop.native);
             this.onCleanup(stop);
             return;

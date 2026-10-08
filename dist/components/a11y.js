@@ -1,6 +1,6 @@
-import { u as deprecate, h as getMotionSensitivity, a as MOTION_SENSITIVITY_LEVELS, f as configureComponents, t as adoptStyles } from '../chunks/base-DbbRUxaa.js';
-export { d as adaptKeyframes } from '../chunks/base-DbbRUxaa.js';
-import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-Dh8nwXqw.js';
+import { v as deprecate, i as getMotionSensitivity, a as MOTION_SENSITIVITY_LEVELS, g as configureComponents, u as adoptStyles } from '../chunks/base-C3Sw9sAO.js';
+export { d as adaptKeyframes } from '../chunks/base-C3Sw9sAO.js';
+import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-DucKMQr_.js';
 
 /**
  * 4.9 — the 5.0 modern-browser baseline. `baselineReport()` lists which
@@ -126,6 +126,7 @@ const STATIC_ALTERNATIVES = {
     depth: 'Flat, front-facing layout.',
     layout: 'Items reflow instantly.',
     packs: 'Roles are styled but not animated.',
+    fx: 'Effects are skipped or reduced to a short fade; the content is unchanged.',
 };
 /**
  * Freeze a subtree at its static alternative: finishes running animations

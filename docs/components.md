@@ -40,7 +40,7 @@ defineTypewriter();
 No build step (registers every `<usa-*>` and exposes the API as `window.UsaComponents`):
 
 ```html
-<script src="https://unpkg.com/use-scroll-animate@4/dist/components.umd.js"></script>
+<script src="https://unpkg.com/use-scroll-animate@5/dist/components.umd.js"></script>
 <usa-typewriter words="Hello, Windows.|Hello, web."></usa-typewriter>
 <script>UsaComponents.toast('Ready', { type: 'success' });</script>
 ```
@@ -321,6 +321,19 @@ Hybrid / desktop hosts (MAUI, Flutter WebView, Electron, Tauri): [hybrid-apps.md
 - **`<usa-post-fx>`** (`definePostFx()`), e.g. `<usa-post-fx effects="vignette grain" intensity="0.6"><img …></usa-post-fx>` — chained passes `vignette` · `grain` · `chromatic` · `scanlines` · `crt` · `bloom` · `pixelate` · `duotone` · `glitch`; `postFxShader(list)` builds the same shader for your own `glQuad()`.
 - **Unified fallback** — without WebGL every preset shows a still CSS rendering (`GL_FALLBACKS`, `glFallbackCss()`); post-fx images get an approximate CSS filter.
 - **Adaptive quality** — every GL element measures its frame rate: after two slow seconds (< 40 fps) the drawing buffer drops to 50 % then 35 % resolution and climbs back after five good seconds; on battery saver (Battery Status API ≤ 20 % and not charging, or Save-Data) it renders at ≤ 30 fps and ≤ 60 % resolution. `quality="high"` opts out; `data-quality` shows the current scale. `glGovernor()` / `watchPowerSaver()` for your own loops; `glQuad().render({ extra })` sets any float uniform, `resize(scale)` scales the buffer.
+
+### v5.0 Effects — unified plugin API (`components/fx`)
+
+`<usa-fx>` (`defineFx()`, `defineFxComponents()`) plays any registered effect on its first child: `<usa-fx effect="jelly" trigger="click"><button>Go</button></usa-fx>` — `trigger` `click` · `hover` · `enter` · `load` · `loop` · `manual`, `options` (JSON), `once`, `self`.
+
+```js
+import { registerEffect, playEffect, bindEffect, listEffects } from 'use-scroll-animate/components/fx';
+registerEffect({ name: 'spin-pop', kind: 'attention', run: (el, o, ctx) => ctx.animate(el, frames, { duration: 700 }) });
+await playEffect(el, 'spin-pop');
+const unbind = bindEffect(card, 'fade-up', { trigger: 'enter' });
+```
+
+Built-ins (`BUILTIN_EFFECTS`): every timeline preset as an `enter` effect (`fade-up`, `clip-up`, `blur`…), attention seekers `pulse` · `pop` · `jelly` · `wiggle` · `heartbeat` · `bounce` · `flash` · `tada` · `shake`, click effects `burst` · `confetti` · `ripple`. `ctx.animate()` applies reduced motion, motion sensitivity, intensity and the animation budget; `loop` / `background` / `cursor` effects are skipped under reduced motion unless they declare `reduced: 'run'`.
 
 ## Frameworks
 

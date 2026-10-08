@@ -1,5 +1,4 @@
-import { p as prefersReducedMotion, w as EASE_OUT, m as motionScale, v as defineElement } from '../chunks/base-DbbRUxaa.js';
-export { f as configureComponents } from '../chunks/base-DbbRUxaa.js';
+import { p as prefersReducedMotion, y as EASE_OUT, m as motionScale, x as defineElement } from '../chunks/base-C3Sw9sAO.js';
 
 /** FLIP keyframes from a previous box to the current one (pure). */
 function flipFrames(from, to, scale = true) {
@@ -246,5 +245,5 @@ function defineLayoutComponents() {
     defineMasonry();
 }
 
-export { autoAnimate, defineAutoAnimate, defineLayoutComponents, defineMasonry, flipFrames, masonryLayout, prefersReducedMotion, sharedTransition };
+export { autoAnimate, defineAutoAnimate, defineLayoutComponents, defineMasonry, flipFrames, masonryLayout, sharedTransition };
 //# sourceMappingURL=layout.js.map

@@ -12,8 +12,6 @@ export { readScrollProgress } from './scroll-progress';
 export { REVEAL_EFFECTS, revealKeyframes } from './effects';
 export type { RevealEffect } from './effects';
 export type { UsaRevealElement, UsaStaggerElement, UsaScrollProgressElement, UsaScrollyElement };
-export { configureComponents, prefersReducedMotion } from '../base';
-export type { ComponentsConfig, UsaElement } from '../base';
 
 /** Register every component of this category under its default tag. */
 export function defineRevealComponents(): void {

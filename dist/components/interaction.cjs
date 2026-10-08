@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-BvpQ4Ggj.cjs');
+var base = require('../chunks/base-B5i8qQPR.cjs');
 
 var css$5 = "usa-ripple{position:relative;display:inline-block;overflow:hidden;isolation:isolate;border-radius:inherit;-webkit-tap-highlight-color:transparent}usa-ripple[block]{display:block}usa-ripple .usa-ripple-wave{position:absolute;border-radius:50%;pointer-events:none;transform:scale(0);z-index:-1;will-change:transform,opacity}";
 
@@ -414,8 +414,6 @@ function defineInteractionComponents() {
     defineToggle();
 }
 
-exports.configureComponents = base.configureComponents;
-exports.prefersReducedMotion = base.prefersReducedMotion;
 exports.defineInteractionComponents = defineInteractionComponents;
 exports.defineMagnetic = defineMagnetic;
 exports.definePress = definePress;

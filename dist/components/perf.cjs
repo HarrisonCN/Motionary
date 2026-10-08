@@ -1,7 +1,7 @@
 'use strict';
 
-var base = require('../chunks/base-BvpQ4Ggj.cjs');
-var indexTags = require('../chunks/index-tags-CIRY2KnU.cjs');
+var base = require('../chunks/base-B5i8qQPR.cjs');
+var indexTags = require('../chunks/index-tags-wv0R_vkO.cjs');
 
 /**
  * use-scroll-animate/components/perf — performance toolkit (4.5).
@@ -36,8 +36,7 @@ function autoDegrade(options = {}) {
         state.reason = reason;
         if (degraded) {
             prev = { intensity: base.getMotionIntensity(), budget: base.animationBudget() };
-            if (prev.intensity !== 'off')
-                base.configureComponents({ motionIntensity: 'low' });
+            base.configureComponents({ motionIntensity: 'low' });
             base.setAnimationBudget(Math.max(4, Math.floor(maxActive / 2)));
         }
         else if (prev) {

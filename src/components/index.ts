@@ -36,8 +36,11 @@ import { defineWebglComponents } from './webgl/index';
 import { defineDepthComponents } from './depth/index';
 import { defineLayoutComponents } from './layout/index';
 import { definePacksComponents } from './packs/index';
+import { defineFxComponents } from './fx/index';
 import { adoptVariants } from './ui/variants';
 import { canDefine } from './base';
+export { configureComponents, prefersReducedMotion, getMotionIntensity, motionScale, animateWithMotion, withoutDeprecations, MOTION_SCALE } from './base';
+export type { ComponentsConfig, UsaElement, MotionIntensity, MotionSensitivity } from './base';
 
 export * from './reveal/index';
 export * from './text/index';
@@ -61,6 +64,7 @@ export * from './tokens/index';
 export * from './a11y/index';
 export * from './perf/index';
 export * from './bridge/index';
+export * from './fx/index';
 
 export { COMPONENT_CATEGORIES } from './index-tags';
 export type { ComponentCategory } from './index-tags';
@@ -85,6 +89,7 @@ const BY_CATEGORY: Record<ComponentCategory, () => void> = {
   depth: defineDepthComponents,
   layout: defineLayoutComponents,
   packs: definePacksComponents,
+  fx: defineFxComponents,
 };
 
 /**

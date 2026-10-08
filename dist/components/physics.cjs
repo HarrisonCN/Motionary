@@ -1,7 +1,7 @@
 'use strict';
 
-var base = require('../chunks/base-BvpQ4Ggj.cjs');
-var spring = require('../chunks/spring-fFkqE9J0.cjs');
+var base = require('../chunks/base-B5i8qQPR.cjs');
+var spring = require('../chunks/spring--oZh55tB.cjs');
 
 var css$2 = "usa-spring{display:inline-block;transform-origin:50% 70%}usa-spring[block]{display:block}usa-spring[effect=\"drop\"]{transform-origin:50% 100%}usa-spring[data-state=\"hidden\"]{opacity:0}usa-spring[trigger=\"click\"],usa-spring[trigger=\"hover\"]{cursor:pointer;-webkit-tap-highlight-color:transparent}";
 
@@ -427,8 +427,6 @@ function definePhysicsComponents() {
     defineOverscroll();
 }
 
-exports.configureComponents = base.configureComponents;
-exports.prefersReducedMotion = base.prefersReducedMotion;
 exports.SPRING_PRESETS = spring.SPRING_PRESETS;
 exports.createSpring = spring.createSpring;
 exports.linearEasing = spring.linearEasing;

@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.0.0] - 2026-10-08
+
+### ⚠ BREAKING CHANGES (see [docs/upgrading-5.md](./docs/upgrading-5.md); `npx usa-codemod-5 --write src`)
+- **Modern-browser baseline**: Custom Elements, Web Animations, IntersectionObserver, ResizeObserver and constructable stylesheets are required (Chrome / Edge ≥ 111, Safari ≥ 16.4, Firefox ≥ 115, WebView2, Electron ≥ 24). The `experimental-webgl` context is no longer requested. View Transitions and scroll-driven animations remain progressive.
+- `motionIntensity: 'off'` / `setMotionIntensity('off')` removed (ignored at runtime) → `motionSensitivity: 'minimal'`. `MotionIntensity` is `'low' | 'normal' | 'high'`; `MOTION_SCALE` has no `off`.
+- `reducedMotion: 'no-preference'` removed (treated as `'user'`) — the OS setting is always honoured.
+- `<usa-timeline scrub="js">` removed — `scrub` picks the JS engine automatically; `smooth="…"` opts into smoothing.
+- Category entries (`use-scroll-animate/components/<category>`) no longer re-export `configureComponents`, `prefersReducedMotion`, `ComponentsConfig`, `UsaElement` — import them from `use-scroll-animate/components`.
+
+### Added
+- **Unified plugin-style effect registration** — new category `use-scroll-animate/components/fx`: `registerEffect({ name, kind, defaults, reduced, run })`, `registerEffects()`, `playEffect(el, name, options)`, `bindEffect(el, name, { trigger: 'click' | 'hover' | 'enter' | 'load' | 'loop' | 'manual' })`, `listEffects(kind?)`, `getEffect()`, `hasEffect()`, `EFFECT_KINDS`, `EFFECT_TRIGGERS`. Effects receive a context whose `animate()` applies reduced motion, motion sensitivity, intensity and the animation budget.
+- **`<usa-fx effect="…" trigger="…">`** plays any registered effect on its child.
+- **Built-in effects** (`BUILTIN_EFFECTS`): every timeline preset as an `enter` effect; attention seekers `pulse` · `pop` · `jelly` · `wiggle` · `heartbeat` · `bounce` · `flash` · `tada` · `shake`; click effects `burst` · `confetti` · `ripple`.
+- `animateWithMotion(el, frames, options)` — the shared motion-aware `animate()` used by elements and effects.
+- `<usa-motion-switch>` keeps its Off button (now motion sensitivity `minimal`); `setMotionLevel()`, `getMotionLevel()`, `MotionSwitchLevel`.
+- Showcase: new **Effects (plugin API)** category — attention seekers, click effects, scroll entrances, `registerEffect()` live demo.
+- **[docs/ROADMAP.md](./docs/ROADMAP.md)**: the 5.1 → 6.0 plan (card & click 2.0, bounce physics, page-wide, scroll storytelling, generative backgrounds, sound-reactive, cursor & gesture packs, theme packs & micro-interactions, JSON animation player, 6.0 cleanup).
+- CDN examples now use `use-scroll-animate@5`.
+
 ## [4.9.0] - 2026-10-08
 
 ### Deprecated (removed in 5.0 — each warns once in the console)

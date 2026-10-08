@@ -15,8 +15,6 @@ export { SPINNER_VARIANTS } from './spinner';
 export type { SpinnerVariant } from './spinner';
 export type { ToastOptions, ToastHandle, ToastType } from './toast';
 export type { UsaSpinnerElement, UsaSkeletonElement, UsaProgressElement, UsaToasterElement, UsaCheckElement };
-export { configureComponents, prefersReducedMotion } from '../base';
-export type { ComponentsConfig, UsaElement } from '../base';
 
 /** Register every component of this category under its default tag. */
 export function defineFeedbackComponents(): void {

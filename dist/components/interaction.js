@@ -1,5 +1,4 @@
-import { v as defineElement, w as EASE_OUT, r as raf, k as caf, j as clamp, E as EASE_SPRING } from '../chunks/base-DbbRUxaa.js';
-export { f as configureComponents, p as prefersReducedMotion } from '../chunks/base-DbbRUxaa.js';
+import { x as defineElement, y as EASE_OUT, r as raf, q as caf, k as clamp, E as EASE_SPRING } from '../chunks/base-C3Sw9sAO.js';
 
 var css$5 = "usa-ripple{position:relative;display:inline-block;overflow:hidden;isolation:isolate;border-radius:inherit;-webkit-tap-highlight-color:transparent}usa-ripple[block]{display:block}usa-ripple .usa-ripple-wave{position:absolute;border-radius:50%;pointer-events:none;transform:scale(0);z-index:-1;will-change:transform,opacity}";
 

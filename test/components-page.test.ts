@@ -9,6 +9,7 @@ import {
   scrollToTarget,
   loadingBar,
   setMotionIntensity,
+  setMotionLevel,
   restoreMotionIntensity,
   getMotionIntensity,
   PAGE_EFFECTS,
@@ -43,8 +44,12 @@ describe('motion intensity', () => {
     const el = mount<any>('<usa-auto-skeleton loading></usa-auto-skeleton>');
     el.loading = false;
     expect(anims[anims.length - 1].timing.duration).toBeCloseTo(180);
-    setMotionIntensity('off');
+    setMotionIntensity('off' as any); // 5.0: removed — ignored
+    expect(getMotionIntensity()).toBe('low');
+    setMotionLevel('off');
     expect(prefersReducedMotion()).toBe(true);
+    setMotionLevel('normal');
+    expect(prefersReducedMotion()).toBe(false);
   });
 
   it('persists and restores; <usa-motion-switch> is a radiogroup', () => {

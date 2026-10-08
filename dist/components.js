@@ -15,11 +15,11 @@ export { SPRING_EFFECTS, defineDraggable, defineOverscroll, defineSpring, spring
 import { defineCardComponents } from './components/cards.js';
 export { CARD_EFFECTS, defineCard, defineCardStack, defineCarousel3d, defineStickyStack } from './components/cards.js';
 import { defineClickComponents } from './components/click.js';
-export { BUTTON_DEFORMS, CLICK_EFFECTS, MORPH_ICONS, burst, confetti, defineButton, defineCheckbox, defineClick, defineDoubleTap, defineHold, defineIconMorph, defineLike, haptic, morphPath, shake } from './components/click.js';
+export { BUTTON_DEFORMS, CLICK_EFFECTS, MORPH_ICONS, defineButton, defineCheckbox, defineClick, defineDoubleTap, defineHold, defineIconMorph, defineLike, morphPath } from './components/click.js';
 import { defineUiComponents } from './components/ui.js';
 export { defineAvatarStack, defineBadge, defineBottomSheet, defineDrawer, defineFab, defineNavbar, definePopover, definePullRefresh, defineRating, defineSlider, defineTabs, defineTooltip } from './components/ui.js';
 import { definePageComponents } from './components/page.js';
-export { AMBIENT_EFFECTS, CURSOR_MODES, PAGE_EFFECTS, defineAmbient, defineAutoSkeleton, defineBackToTop, defineCursor, defineFullpage, defineLoadingBar, defineMotionSwitch, defineSplash, enableMpaTransitions, loadingBar, pageTransition, restoreMotionIntensity, scrollToTarget, setMotionIntensity, smoothScroll, supportsViewTransitions, themeTransition } from './components/page.js';
+export { AMBIENT_EFFECTS, CURSOR_MODES, PAGE_EFFECTS, defineAmbient, defineAutoSkeleton, defineBackToTop, defineCursor, defineFullpage, defineLoadingBar, defineMotionSwitch, defineSplash, enableMpaTransitions, getMotionLevel, loadingBar, pageTransition, restoreMotionIntensity, scrollToTarget, setMotionIntensity, setMotionLevel, smoothScroll, supportsViewTransitions, themeTransition } from './components/page.js';
 import { defineTimelineComponents } from './components/timeline.js';
 export { defineTimeline } from './components/timeline.js';
 import { defineGestureComponents } from './components/gesture.js';
@@ -34,18 +34,21 @@ import { defineLayoutComponents } from './components/layout.js';
 export { autoAnimate, defineAutoAnimate, defineMasonry, flipFrames, masonryLayout, sharedTransition } from './components/layout.js';
 import { definePacksComponents } from './components/packs.js';
 export { PACKS, PACK_PRIMITIVES, applyPack, countUp, definePack, flyToCart } from './components/packs.js';
-import { a as adoptVariants } from './chunks/variants-Cal4DB0E.js';
-export { V as VARIANTS, s as setVariant } from './chunks/variants-Cal4DB0E.js';
-import { c as canDefine } from './chunks/base-DbbRUxaa.js';
-export { M as MOTION_SCALE, a as MOTION_SENSITIVITY_LEVELS, b as activeAnimations, d as adaptKeyframes, e as animationBudget, f as configureComponents, g as getMotionIntensity, h as getMotionSensitivity, o as onFrame, p as prefersReducedMotion, s as schedulerStats, i as setAnimationBudget } from './chunks/base-DbbRUxaa.js';
+import { defineFxComponents } from './components/fx.js';
+export { BUILTIN_EFFECTS, EFFECT_KINDS, EFFECT_TRIGGERS, bindEffect, defineFx, getEffect, hasEffect, listEffects, playEffect, registerBuiltinEffects, registerEffect, registerEffects } from './components/fx.js';
+import { a as adoptVariants } from './chunks/variants-Bsevy6Xm.js';
+export { V as VARIANTS, s as setVariant } from './chunks/variants-Bsevy6Xm.js';
+import { c as canDefine } from './chunks/base-C3Sw9sAO.js';
+export { M as MOTION_SCALE, a as MOTION_SENSITIVITY_LEVELS, b as activeAnimations, d as adaptKeyframes, e as animateWithMotion, f as animationBudget, g as configureComponents, h as getMotionIntensity, i as getMotionSensitivity, m as motionScale, o as onFrame, p as prefersReducedMotion, s as schedulerStats, j as setAnimationBudget, w as withoutDeprecations } from './chunks/base-C3Sw9sAO.js';
 export { MOTION_TOKENS, applyMotionTokens, getMotionTokens, importMotionTokens, mergeMotionTokens, motionToken, motionTokensToCss, motionTokensToJSON, motionTokensToVars, motionVar, parseDuration, parseEasing, resolveDurationToken, resolveEasingToken } from './components/tokens.js';
 export { ALL_TAGS, LIVE_REGION_IDS, MOTION_SENSITIVITY, SENSITIVITY_CSS, STATIC_ALTERNATIVES, announce, auditMotionA11y, baselineReport, liveRegion, motionAllowed, restoreMotionSensitivity, setMotionSensitivity, staticAlternative, warnBaseline } from './components/a11y.js';
 export { autoDegrade, categoryOf, loadCategoryStyles, loadedStyles, onDemandStyles } from './components/perf.js';
 export { BRIDGE_PROTOCOL_VERSION, applyNativeSettings, connectNativeShell, detectNativeHost, parseNativeSettings, postToNative } from './components/bridge.js';
-export { C as COMPONENT_CATEGORIES } from './chunks/index-tags-Dh8nwXqw.js';
-export { S as SPRING_PRESETS, c as createSpring, l as linearEasing, p as projectInertia, r as resolveSpring, a as rubberBand, s as snapTo, b as spring, d as springEasing, e as springSamples, f as stepSpring, g as supportsLinearEasing } from './chunks/spring-B6w7mVCU.js';
-export { T as TIMELINE_PRESETS, r as resolvePosition, s as supportsNativeScrub, t as timeline } from './chunks/core-BVTuet9o.js';
-export { g as gesture, p as pinchScale, s as swipeDirection } from './chunks/core-CcaSsbV8.js';
+export { C as COMPONENT_CATEGORIES } from './chunks/index-tags-DucKMQr_.js';
+export { S as SPRING_PRESETS, c as createSpring, l as linearEasing, p as projectInertia, r as resolveSpring, a as rubberBand, s as snapTo, b as spring, d as springEasing, e as springSamples, f as stepSpring, g as supportsLinearEasing } from './chunks/spring-CckMe3x0.js';
+export { T as TIMELINE_PRESETS, r as resolvePosition, s as supportsNativeScrub, t as timeline } from './chunks/core-DN3hHbHh.js';
+export { b as burst, c as confetti, h as haptic, s as shake } from './chunks/fx-ChjxrMBo.js';
+export { g as gesture, p as pinchScale, s as swipeDirection } from './chunks/core-BTf__I-8.js';
 
 /**
  * use-scroll-animate/components
@@ -86,6 +89,7 @@ const BY_CATEGORY = {
     depth: defineDepthComponents,
     layout: defineLayoutComponents,
     packs: definePacksComponents,
+    fx: defineFxComponents,
 };
 /**
  * Register every `<usa-*>` component (or only the given categories).
@@ -97,5 +101,5 @@ function defineComponents(categories) {
     (categories || Object.keys(BY_CATEGORY)).forEach((c) => BY_CATEGORY[c]?.());
 }
 
-export { adoptVariants, defineBackgroundComponents, defineCardComponents, defineClickComponents, defineComponents, defineDepthComponents, defineFeedbackComponents, defineGestureComponents, defineInteractionComponents, defineLayoutComponents, definePacksComponents, definePageComponents, definePhysicsComponents, defineRevealComponents, defineSvgComponents, defineTextComponents, defineTimelineComponents, defineTransitionComponents, defineUiComponents, defineWebglComponents };
+export { adoptVariants, defineBackgroundComponents, defineCardComponents, defineClickComponents, defineComponents, defineDepthComponents, defineFeedbackComponents, defineFxComponents, defineGestureComponents, defineInteractionComponents, defineLayoutComponents, definePacksComponents, definePageComponents, definePhysicsComponents, defineRevealComponents, defineSvgComponents, defineTextComponents, defineTimelineComponents, defineTransitionComponents, defineUiComponents, defineWebglComponents };
 //# sourceMappingURL=components.js.map

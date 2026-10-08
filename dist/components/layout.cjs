@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-BvpQ4Ggj.cjs');
+var base = require('../chunks/base-B5i8qQPR.cjs');
 
 /** FLIP keyframes from a previous box to the current one (pure). */
 function flipFrames(from, to, scale = true) {
@@ -247,8 +247,6 @@ function defineLayoutComponents() {
     defineMasonry();
 }
 
-exports.configureComponents = base.configureComponents;
-exports.prefersReducedMotion = base.prefersReducedMotion;
 exports.autoAnimate = autoAnimate;
 exports.defineAutoAnimate = defineAutoAnimate;
 exports.defineLayoutComponents = defineLayoutComponents;

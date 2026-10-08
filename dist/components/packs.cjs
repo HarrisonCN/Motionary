@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-BvpQ4Ggj.cjs');
+var base = require('../chunks/base-B5i8qQPR.cjs');
 
 const anim = (el, frames, o) => {
     if (typeof el.animate !== 'function')
@@ -182,8 +182,6 @@ function definePacksComponents() {
     definePack();
 }
 
-exports.configureComponents = base.configureComponents;
-exports.prefersReducedMotion = base.prefersReducedMotion;
 exports.PACKS = PACKS;
 exports.PACK_PRIMITIVES = PACK_PRIMITIVES;
 exports.applyPack = applyPack;

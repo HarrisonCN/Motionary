@@ -1,8 +1,8 @@
 'use strict';
 
-var base = require('../chunks/base-BvpQ4Ggj.cjs');
-var spring = require('../chunks/spring-fFkqE9J0.cjs');
-var variants = require('../chunks/variants-C8xj8gfd.cjs');
+var base = require('../chunks/base-B5i8qQPR.cjs');
+var spring = require('../chunks/spring--oZh55tB.cjs');
+var variants = require('../chunks/variants-DxPmgrNX.cjs');
 
 /** Position a fixed `floating` element next to `anchor`, flipping when it would leave the viewport. */
 function place(floating, anchor, placement = 'top', gap = 8) {
@@ -1031,8 +1031,6 @@ function defineUiComponents() {
     defineAvatarStack();
 }
 
-exports.configureComponents = base.configureComponents;
-exports.prefersReducedMotion = base.prefersReducedMotion;
 exports.VARIANTS = variants.VARIANTS;
 exports.adoptVariants = variants.adoptVariants;
 exports.setVariant = variants.setVariant;

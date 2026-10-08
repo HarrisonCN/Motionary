@@ -1,51 +1,7 @@
-/**
- * use-scroll-animate/components — shared base for the `<usa-*>` custom elements.
- *
- * Everything here is lazy: nothing touches `window`, `document`,
- * `HTMLElement` or `matchMedia` at import time, so the components can be
- * imported during SSR (Next, Nuxt, Astro…) and in Electron/Tauri preload
- * scripts. Classes are created the first time a `define*()` function runs.
- */
-interface ComponentsConfig {
-    /**
-     * Inject each component's CSS when it is defined (default `true`). Uses a
-     * constructable stylesheet (`document.adoptedStyleSheets`, which a strict
-     * `style-src` CSP does not block) and falls back to a `<style>` tag. Set
-     * to `false` when you load `use-scroll-animate/components.css` yourself.
-     */
-    injectStyles?: boolean;
-    /**
-     * `'user'` (default) follows `prefers-reduced-motion`; `'reduce'` always
-     * uses the reduced variants (e.g. a kiosk / battery-saver mode);
-     * `'no-preference'` ignores the OS setting (only for demos — respect your users).
-     */
-    reducedMotion?: 'user' | 'reduce' | 'no-preference';
-    /**
-     * Global motion intensity (v2.7): `'off'` (same as reduced motion),
-     * `'low'` (shorter, calmer), `'normal'` (default) or `'high'`. Scales every
-     * component animation's duration and sets `--usa-motion` (0 / 0.6 / 1 /
-     * 1.25) on `<html>` for your own CSS. See `setMotionIntensity()`.
-     */
-    motionIntensity?: MotionIntensity;
-    /**
-     * Motion-sensitivity level (v4.4), finer than reduced motion:
-     * `'full'` (default) · `'gentle'` (no spins, zooms, skews or parallax —
-     * translations and fades only, safe for vestibular disorders) ·
-     * `'minimal'` (fades only; components use their reduced-motion variants) ·
-     * `'static'` (no animation: every component shows its static alternative).
-     * See `setMotionSensitivity()` in `use-scroll-animate/components/a11y`.
-     */
-    motionSensitivity?: MotionSensitivity;
-}
-type MotionSensitivity = 'full' | 'gentle' | 'minimal' | 'static';
-type MotionIntensity = 'off' | 'low' | 'normal' | 'high';
+type MotionIntensity = 'low' | 'normal' | 'high';
 declare const MOTION_SCALE: Record<MotionIntensity, number>;
-/** Change global component settings (call before `define*()` for `injectStyles`). */
-declare function configureComponents(options: ComponentsConfig): void;
 /** The current global motion intensity. */
 declare function getMotionIntensity(): MotionIntensity;
-/** `true` when animations should be reduced (OS setting or `configureComponents`). */
-declare function prefersReducedMotion(): boolean;
 /**
  * Members shared by every `<usa-*>` element. Attribute helpers, a cleanup
  * bag that is emptied on disconnect, and motion helpers that degrade to the
@@ -173,14 +129,21 @@ interface UsaAutoSkeletonElement extends UsaElement {
 }
 declare function defineAutoSkeleton(tag?: string): CustomElementConstructor | undefined;
 
+/** The switch's levels: Off (motion sensitivity `minimal`) + the three intensities. */
+type MotionSwitchLevel = 'off' | MotionIntensity;
 /**
  * Set the global motion intensity for every `<usa-*>` component:
- * `'off'` (like reduced motion), `'low'`, `'normal'` (default), `'high'`.
- * Sets `--usa-motion` and `data-usa-motion` on `<html>`; with `persist`
- * the choice is remembered (localStorage) and restored by `restoreMotionIntensity()`.
+ * `'low'`, `'normal'` (default), `'high'`. Sets `--usa-motion` and
+ * `data-usa-motion` on `<html>`; with `persist` the choice is remembered
+ * (localStorage) and restored by `restoreMotionIntensity()`.
+ * 5.0: `'off'` was removed — use `setMotionSensitivity('minimal')`.
  */
 declare function setMotionIntensity(level: MotionIntensity, persist?: boolean): void;
-/** Re-apply a persisted intensity (call early on page load). Returns it. */
+/** Apply a switch level: `'off'` = motion sensitivity `minimal`, otherwise full motion at that intensity. */
+declare function setMotionLevel(level: MotionSwitchLevel, persist?: boolean): void;
+/** The current switch level. */
+declare function getMotionLevel(): MotionSwitchLevel;
+/** Re-apply a persisted level (call early on page load). Returns the active intensity. */
 declare function restoreMotionIntensity(): MotionIntensity;
 /**
  * `<usa-motion-switch>` — a segmented control letting users choose the
@@ -189,7 +152,7 @@ declare function restoreMotionIntensity(): MotionIntensity;
  * `label` ("Motion"). Events: `usa:change` (`{ level }`).
  */
 interface UsaMotionSwitchElement extends UsaElement {
-    value: MotionIntensity;
+    value: MotionSwitchLevel;
 }
 declare function defineMotionSwitch(tag?: string): CustomElementConstructor | undefined;
 
@@ -281,5 +244,5 @@ declare global {
     }
 }
 
-export { AMBIENT_EFFECTS, CURSOR_MODES, MOTION_SCALE, PAGE_EFFECTS, configureComponents, defineAmbient, defineAutoSkeleton, defineBackToTop, defineCursor, defineFullpage, defineLoadingBar, defineMotionSwitch, definePageComponents, defineSplash, enableMpaTransitions, getMotionIntensity, loadingBar, pageTransition, prefersReducedMotion, restoreMotionIntensity, scrollToTarget, setMotionIntensity, smoothScroll, supportsViewTransitions, themeTransition };
-export type { AmbientEffect, ComponentsConfig, CursorMode, MotionIntensity, PageEffect, PageTransitionOptions, SmoothScrollOptions, UsaAmbientElement, UsaAutoSkeletonElement, UsaBackToTopElement, UsaCursorElement, UsaElement, UsaFullpageElement, UsaLoadingBarElement, UsaMotionSwitchElement, UsaSplashElement };
+export { AMBIENT_EFFECTS, CURSOR_MODES, MOTION_SCALE, PAGE_EFFECTS, defineAmbient, defineAutoSkeleton, defineBackToTop, defineCursor, defineFullpage, defineLoadingBar, defineMotionSwitch, definePageComponents, defineSplash, enableMpaTransitions, getMotionIntensity, getMotionLevel, loadingBar, pageTransition, restoreMotionIntensity, scrollToTarget, setMotionIntensity, setMotionLevel, smoothScroll, supportsViewTransitions, themeTransition };
+export type { AmbientEffect, CursorMode, MotionIntensity, MotionSwitchLevel, PageEffect, PageTransitionOptions, SmoothScrollOptions, UsaAmbientElement, UsaAutoSkeletonElement, UsaBackToTopElement, UsaCursorElement, UsaFullpageElement, UsaLoadingBarElement, UsaMotionSwitchElement, UsaSplashElement };

@@ -17,8 +17,6 @@ export { defineGridGlow, defineBlobs, defineWaterRipple, defineDotNetwork };
 export type { UsaGridGlowElement, UsaBlobsElement, UsaWaterRippleElement, UsaDotNetworkElement };
 export { fluentPreset } from './fluent';
 export type { FluentPresetOptions } from './fluent';
-export { configureComponents, prefersReducedMotion } from '../base';
-export type { ComponentsConfig, UsaElement } from '../base';
 
 /** Register every component of this category under its default tag. */
 export function defineBackgroundComponents(): void {

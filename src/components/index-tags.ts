@@ -19,6 +19,7 @@ export const COMPONENT_CATEGORIES = {
   depth: ['usa-cube', 'usa-depth'],
   layout: ['usa-auto-animate', 'usa-masonry'],
   packs: ['usa-pack'],
+  fx: ['usa-fx'],
 } as const;
 
 export type ComponentCategory = keyof typeof COMPONENT_CATEGORIES;

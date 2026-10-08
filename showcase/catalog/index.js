@@ -12,8 +12,9 @@ import * as webgl from './webgl.js';
 import * as depth from './depth.js';
 import * as layout from './layout.js';
 import * as packs from './packs.js';
+import * as fx from './fx.js';
 
-export const EXTENSIONS = [physics, cards, click, ui, page, v28, timeline, gesture, svg, webgl, depth, layout, packs];
+export const EXTENSIONS = [physics, cards, click, ui, page, v28, timeline, gesture, svg, webgl, depth, layout, packs, fx];
 
 /** item id → (stage, lib, T) => void: live-demo wiring contributed by the extensions. */
 export const WIRES = Object.assign({}, ...EXTENSIONS.map((e) => e.wire || {}));
