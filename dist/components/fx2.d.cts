@@ -355,6 +355,64 @@ declare const FOCUS_FX: EffectDefinition[];
 declare function registerFocusPack(): void;
 
 /**
+ * 5.6 — sound-reactive effects (Web Audio).
+ *
+ * - `enableAudio(input)` — start analysing the microphone (`'mic'`), an
+ *   `<audio>` / `<video>` element (or a selector for one) or a `MediaStream`.
+ *   Browsers only allow an `AudioContext` to start inside a user gesture, so
+ *   call it from a click handler (or use `<usa-audio>`, which renders the
+ *   toggle button for you).
+ * - Background effects (kind `background`, Canvas 2D through
+ *   `canvasBackground()`): `spectrum-bars`, `pulse-ring`, `wave-ring`. Before
+ *   audio is enabled they idle gently.
+ * - Beat detection: `createBeatDetector()` (pure: energy → beat?), `onBeat(cb)`
+ *   and `bindBeat(el, effect, options)`, which plays any registered effect on
+ *   every beat. `<usa-audio>` does the same for `[data-usa-beat="effect"]`
+ *   children and emits `usa-beat`.
+ * - While audio runs, `--usa-audio-level` and `--usa-audio-bass` (0–1) are set
+ *   on `<html>` for CSS-driven reactions.
+ *
+ * Reduced motion: the visual effects are skipped, beats play no effects and
+ * the CSS variables stay at 0 — audio itself keeps playing.
+ */
+
+interface AudioSample {
+    /** Overall loudness (RMS of the waveform), 0–1. */
+    level: number;
+    /** Low-frequency energy (first ~8 % of the spectrum), 0–1. */
+    bass: number;
+    /** Frequency bins, 0–255 each. */
+    freq: Uint8Array;
+    /** Time-domain waveform, 0–255 (128 = silence). */
+    wave: Uint8Array;
+}
+
+/**
+ * 7.1 — Music visualization (`motionary/fx/music`, also
+ * `motionary/components/fx-music`), registered through `registerEffect()`.
+ * Every effect reads the running analyser (`enableAudio()` / `<usa-audio>`);
+ * without one it plays a gentle synthetic signal (`syntheticSample()`), so
+ * the visuals work as decoration too.
+ *
+ * - `waveform-scope` (background) — an oscilloscope line of the waveform.
+ * - `radial-spectrum` (background) — spectrum bars around a circle.
+ * - `spectrum-mirror` (background) — mirrored bars with a reflection.
+ * - `sound-particles` (background) — particles launched by the bass.
+ * - `beat-bounce` (loop) — the element pumps with the bass.
+ * - `vinyl-spin` (loop) — the element turns like a record; level speeds it.
+ *
+ * Reduced motion: backgrounds draw one static frame, loops do nothing.
+ */
+
+/** A smooth, deterministic fake analyser frame at time `t` (s). */
+declare function syntheticSample(t: number, bins?: number): AudioSample;
+/** The live analyser frame, or the synthetic one. */
+declare const musicSample: (t: number) => AudioSample;
+declare const MUSIC_FX: EffectDefinition[];
+/** Register the 7.1 music visualization pack (idempotent). */
+declare function registerMusicPack(): void;
+
+/**
  * 5.5 — generative backgrounds on Canvas 2D, registered through
  * `registerEffect()` (kind `background`): `flow-field`, `voronoi`,
  * `mesh-gradient`, `starfield`, `metaballs`, `contours`.
@@ -463,5 +521,5 @@ declare const EFFECT_PACKS: Record<string, EffectDefinition[]>;
 /** Register every 6.x effect pack (idempotent). */
 declare function registerEffectPacks(): void;
 
-export { DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FOCUS_FX, GLSL_HEAD, GPU_FX, LIGHT_FX, MORPH2_FX, PHYSICS2_FX, TEXT3_FX, TRANSITIONS2_FX, VerletWorld, WEATHER_FX, WGSL_HEAD, crossDocumentTransitions, fieldFallback, glslToWgsl, loadEffectPack, packManifest, pageTransition, pointsToPath, register3dPack, registerEffectPacks, registerFocusPack, registerGpuPack, registerLightPack, registerMorphPack, registerPhysicsPack, registerTextPack, registerTransitionsPack, registerWeatherPack, samplePath, shaderBackground, skyAt, splitChars, supportsWebGL2, supportsWebGPU, trackPointer, validateManifest, webgpuBackground, wgslModule };
+export { DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FOCUS_FX, GLSL_HEAD, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, PHYSICS2_FX, TEXT3_FX, TRANSITIONS2_FX, VerletWorld, WEATHER_FX, WGSL_HEAD, crossDocumentTransitions, fieldFallback, glslToWgsl, loadEffectPack, musicSample, packManifest, pageTransition, pointsToPath, register3dPack, registerEffectPacks, registerFocusPack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerPhysicsPack, registerTextPack, registerTransitionsPack, registerWeatherPack, samplePath, shaderBackground, skyAt, splitChars, supportsWebGL2, supportsWebGPU, syntheticSample, trackPointer, validateManifest, webgpuBackground, wgslModule };
 export type { EffectPackManifest, ShaderSpec };
