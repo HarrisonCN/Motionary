@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('./base-CXx7jZ-o.cjs');
+var base = require('./base-DE2yzxE7.cjs');
 
 /** The swipe a pointer release represents, or `null` (pure). */
 function swipeDirection(dx, dy, vx, vy, o = {}) {
@@ -182,4 +182,4 @@ function gesture(el, h, o = {}) {
 exports.gesture = gesture;
 exports.pinchScale = pinchScale;
 exports.swipeDirection = swipeDirection;
-//# sourceMappingURL=core-IaorbTdu.cjs.map
+//# sourceMappingURL=core-DPYjLqA0.cjs.map

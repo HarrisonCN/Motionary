@@ -3,29 +3,30 @@
 var components = require('../components.cjs');
 var bind = require('../chunks/bind-Ui43-n2d.cjs');
 require('./reveal.cjs');
-require('../chunks/base-CXx7jZ-o.cjs');
+require('../chunks/base-DE2yzxE7.cjs');
 require('./text.cjs');
-require('../chunks/core-BRIIoKeS.cjs');
+require('../chunks/core-BC9S2osy.cjs');
 require('./tokens.cjs');
 require('./interaction.cjs');
 require('./feedback.cjs');
 require('./background.cjs');
-require('../chunks/variants-BNIrn4ch.cjs');
+require('../chunks/variants-CM2zaG8v.cjs');
 require('./transitions.cjs');
 require('./physics.cjs');
-require('../chunks/spring-2OTnYCzm.cjs');
+require('../chunks/spring-hsmgd7ml.cjs');
 require('./cards.cjs');
 require('./click.cjs');
 require('./ui.cjs');
 require('./page.cjs');
 require('./timeline.cjs');
 require('./gesture.cjs');
-require('../chunks/core-IaorbTdu.cjs');
+require('../chunks/core-DPYjLqA0.cjs');
 require('./svg.cjs');
 require('./webgl.cjs');
 require('./depth.cjs');
 require('./layout.cjs');
 require('./packs.cjs');
+require('./a11y.cjs');
 require('../chunks/index-tags-BQh_uGqH.cjs');
 
 /**

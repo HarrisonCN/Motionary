@@ -36,7 +36,11 @@ export function defineCursor(tag = 'usa-cursor'): CustomElementConstructor | und
         mount(): void {
           this.setAttribute('aria-hidden', 'true');
           const fine = typeof matchMedia !== 'function' || matchMedia('(pointer: fine)').matches || matchMedia('(hover: hover)').matches;
-          if (this.reduced || !fine) return;
+          if (this.reduced || !fine) {
+            // Decorative only: never leave (focusable) content inside aria-hidden (4.4 audit).
+            this.replaceChildren();
+            return;
+          }
           const mode = this.str('mode', 'dot');
           const n = mode === 'trail' ? 8 : 1;
           this.innerHTML = Array.from({ length: n }, (_, i) => `<span class="usa-cursor-${mode === 'glow' ? 'glow' : 'ring'}" style="--i:${i}"></span>`).join('') + (mode === 'glow' ? '' : '<span class="usa-cursor-dot"></span>');

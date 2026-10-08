@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * use-scroll-animate/components — shared base for the `<usa-*>` custom elements.
  *
@@ -6,8 +8,9 @@
  * imported during SSR (Next, Nuxt, Astro…) and in Electron/Tauri preload
  * scripts. Classes are created the first time a `define*()` function runs.
  */
+const MOTION_SENSITIVITY_LEVELS = ['full', 'gentle', 'minimal', 'static'];
 const MOTION_SCALE = { off: 0, low: 0.6, normal: 1, high: 1.25 };
-const config = { injectStyles: true, reducedMotion: 'user', motionIntensity: 'normal' };
+const config = { injectStyles: true, reducedMotion: 'user', motionIntensity: 'normal', motionSensitivity: 'full' };
 /** Change global component settings (call before `define*()` for `injectStyles`). */
 function configureComponents(options) {
     Object.assign(config, options);
@@ -15,6 +18,44 @@ function configureComponents(options) {
         document.documentElement.style.setProperty('--usa-motion', String(MOTION_SCALE[options.motionIntensity] ?? 1));
         document.documentElement.setAttribute('data-usa-motion', options.motionIntensity);
     }
+    if (options.motionSensitivity && typeof document !== 'undefined') {
+        if (options.motionSensitivity === 'full')
+            document.documentElement.removeAttribute('data-usa-sensitivity');
+        else
+            document.documentElement.setAttribute('data-usa-sensitivity', options.motionSensitivity);
+    }
+}
+/** The current motion-sensitivity level (v4.4). */
+function getMotionSensitivity() {
+    return config.motionSensitivity;
+}
+const VESTIBULAR = /rotate|scale|skew|perspective|matrix3d/;
+/**
+ * Adapt keyframes to the sensitivity level: `gentle` drops transforms that
+ * spin, zoom or skew (and 3D), `minimal` keeps opacity only, `static` keeps
+ * just the final frame. `full` returns them unchanged.
+ */
+function adaptKeyframes(frames, level = config.motionSensitivity) {
+    if (level === 'full' || !frames.length)
+        return frames;
+    if (level === 'static')
+        return [frames[frames.length - 1]];
+    return frames.map((f) => {
+        const out = {};
+        for (const [k, v] of Object.entries(f)) {
+            if (k === 'offset' || k === 'easing' || k === 'composite')
+                out[k] = v;
+            else if (level === 'minimal') {
+                if (k === 'opacity')
+                    out[k] = v;
+            }
+            else if (k === 'rotate' || k === 'scale' || (k === 'transform' && VESTIBULAR.test(String(v))))
+                continue;
+            else
+                out[k] = v;
+        }
+        return out;
+    });
 }
 /** The current global motion intensity. */
 function getMotionIntensity() {
@@ -27,7 +68,7 @@ function motionScale() {
 const canDefine = () => typeof customElements !== 'undefined' && typeof HTMLElement !== 'undefined';
 /** `true` when animations should be reduced (OS setting or `configureComponents`). */
 function prefersReducedMotion() {
-    if (config.motionIntensity === 'off')
+    if (config.motionIntensity === 'off' || config.motionSensitivity === 'minimal' || config.motionSensitivity === 'static')
         return true;
     if (config.reducedMotion !== 'user')
         return config.reducedMotion === 'reduce';
@@ -165,10 +206,11 @@ function getBase() {
         }
         /** `el.animate()` that returns `null` (and applies the last frame) without WAAPI. */
         motion(el, keyframes, options) {
-            if (typeof el.animate !== 'function') {
+            if (typeof el.animate !== 'function' || config.motionSensitivity === 'static') {
                 applyFrame(el, keyframes[keyframes.length - 1]);
                 return null;
             }
+            keyframes = adaptKeyframes(keyframes);
             const k = motionScale();
             if (k !== 1 && k > 0 && typeof options.duration === 'number')
                 options = { ...options, duration: options.duration * k, delay: (options.delay || 0) * k };
@@ -241,5 +283,26 @@ function kindOf(el, valid, fallback) {
 }
 const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
 
-export { EASE_SPRING as E, FLUENT_DECELERATE as F, MOTION_SCALE as M, configureComponents as a, clamp as b, canDefine as c, caf as d, applyFrame as e, adoptStyles as f, getMotionIntensity as g, defineElement as h, EASE_OUT as i, srText as j, kindOf as k, motionScale as m, now as n, prefersReducedMotion as p, raf as r, shadowStyles as s };
-//# sourceMappingURL=base-BPG5zvex.js.map
+exports.EASE_OUT = EASE_OUT;
+exports.EASE_SPRING = EASE_SPRING;
+exports.FLUENT_DECELERATE = FLUENT_DECELERATE;
+exports.MOTION_SCALE = MOTION_SCALE;
+exports.MOTION_SENSITIVITY_LEVELS = MOTION_SENSITIVITY_LEVELS;
+exports.adaptKeyframes = adaptKeyframes;
+exports.adoptStyles = adoptStyles;
+exports.applyFrame = applyFrame;
+exports.caf = caf;
+exports.canDefine = canDefine;
+exports.clamp = clamp;
+exports.configureComponents = configureComponents;
+exports.defineElement = defineElement;
+exports.getMotionIntensity = getMotionIntensity;
+exports.getMotionSensitivity = getMotionSensitivity;
+exports.kindOf = kindOf;
+exports.motionScale = motionScale;
+exports.now = now;
+exports.prefersReducedMotion = prefersReducedMotion;
+exports.raf = raf;
+exports.shadowStyles = shadowStyles;
+exports.srText = srText;
+//# sourceMappingURL=base-DE2yzxE7.cjs.map

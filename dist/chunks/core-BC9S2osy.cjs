@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('./base-CXx7jZ-o.cjs');
+var base = require('./base-DE2yzxE7.cjs');
 var components_tokens = require('../components/tokens.cjs');
 
 /** 4.1: whether `scrub()` can use native ScrollTimeline / ViewTimeline here. */
@@ -262,4 +262,4 @@ exports.TIMELINE_PRESETS = TIMELINE_PRESETS;
 exports.resolvePosition = resolvePosition;
 exports.supportsNativeScrub = supportsNativeScrub;
 exports.timeline = timeline;
-//# sourceMappingURL=core-BRIIoKeS.cjs.map
+//# sourceMappingURL=core-BC9S2osy.cjs.map

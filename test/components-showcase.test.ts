@@ -2,6 +2,8 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { COMPONENT_CATEGORIES as SRC_CATEGORIES } from '../src/components';
+// @ts-ignore - untyped .mjs
+import { COMPONENT_ENTRIES } from '../scripts/categories.mjs';
 import * as components from '../src/components';
 // Plain ESM modules of the no-build component gallery
 // @ts-ignore - untyped .js
@@ -53,7 +55,7 @@ describe('component gallery catalog', () => {
   });
 
   it('generates every code tab and imports only documented entry points', () => {
-    const allowed = new Set(['use-scroll-animate/components', 'use-scroll-animate/components/tokens', ...Object.keys(SRC_CATEGORIES).map((c) => `use-scroll-animate/components/${c}`)]);
+    const allowed = new Set(['use-scroll-animate/components', ...Object.keys(COMPONENT_ENTRIES).filter((e) => !/react|vue|svelte|solid|angular|jsx/.test(e)).map((e) => `use-scroll-animate/components/${e}`), ...Object.keys(SRC_CATEGORIES).map((c) => `use-scroll-animate/components/${c}`)]);
     GALLERY.forEach((item: any) => {
       const out = componentSnippets(item);
       CODE_TABS.forEach((t: any) => expect(out[t.id], `${item.id}/${t.id}`).toMatch(/\S/));

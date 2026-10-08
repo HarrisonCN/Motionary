@@ -67,7 +67,7 @@
   {
     "name": "dist/components.umd.js (minified, all components + CSS)",
     "file": "dist/components.umd.js",
-    "limit": 82176
+    "limit": 88576
   },
   {
     "name": "dist/components.css",
@@ -77,12 +77,12 @@
   {
     "name": "import 'use-scroll-animate/components' (everything)",
     "import": "export * from 'pkg/components';",
-    "limit": 81920
+    "limit": 88064
   },
   {
     "name": "import 'use-scroll-animate/components/reveal'",
     "import": "export * from 'pkg/components/reveal';",
-    "limit": 4096
+    "limit": 4608
   },
   {
     "name": "import 'use-scroll-animate/components/text'",
@@ -127,12 +127,12 @@
   {
     "name": "import { defineRipple } from '…/components/interaction'",
     "import": "export { defineRipple } from 'pkg/components/interaction';",
-    "limit": 2048
+    "limit": 2304
   },
   {
     "name": "import { defineMarquee } from '…/components/background'",
     "import": "export { defineMarquee } from 'pkg/components/background';",
-    "limit": 2560
+    "limit": 3072
   },
   {
     "name": "import { viewTransition } from '…/components/transitions'",
@@ -293,5 +293,10 @@
     "name": "import 'use-scroll-animate/components/tokens'",
     "import": "export * from 'pkg/components/tokens';",
     "limit": 2048
+  },
+  {
+    "name": "import 'use-scroll-animate/components/a11y'",
+    "import": "export * from 'pkg/components/a11y';",
+    "limit": 4352
   }
 ]

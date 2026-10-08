@@ -30,3 +30,31 @@ Animated text (`<usa-split-text>`, `<usa-typewriter>`, `<usa-wave-text>`, `<usa-
 
 ## Transparency & contrast
 Glass, acrylic and Fluent materials fall back to solid surfaces under `prefers-reduced-transparency: reduce` and `forced-colors: active`.
+
+## Motion-sensitivity levels (4.4)
+
+`import { setMotionSensitivity, restoreMotionSensitivity } from 'use-scroll-animate/components/a11y'`
+
+| Level | What moves | Use for |
+|---|---|---|
+| `full` (default) | everything | — |
+| `gentle` | fades and translations; **no** spins, zooms, skews, 3D or parallax | vestibular disorders, motion sickness |
+| `minimal` | fades only (components use their reduced-motion variants) | `prefers-reduced-motion` plus |
+| `static` | nothing — every component shows its static alternative; your own CSS animations are stopped too | seizure / attention sensitivity, kiosks, screenshots |
+
+`setMotionSensitivity(level, persist)` sets `data-usa-sensitivity` on `<html>` (style your own CSS with it) and dispatches `usa:sensitivity`; `motionAllowed('rotate')` tells your code what the level permits; `adaptKeyframes(frames)` filters your own WAAPI keyframes the same way the components do.
+
+## Static alternatives
+
+Every category has a defined static rendering (`STATIC_ALTERNATIVES`): content lands on its final, readable state; loops, particles and cursors stop; gestures keep keyboard / button equivalents. `staticAlternative(root)` freezes any subtree (finishes finite animations, cancels endless ones).
+
+## aria-live conventions
+
+- One shared **polite** region (`#usa-live-polite`, `role="status"`) and one **assertive** region (`#usa-live-assertive`, `role="alert"`) — `announce(message, { politeness })`.
+- Polite for results of the user's own action (added, copied, saved, loading done); assertive only for blocking errors.
+- Identical messages within 500 ms are dropped; the region is cleared before each message so repeats are read.
+- Component-owned regions (toasts, submit button, pull-to-refresh, badge) stay `role="status"` / polite.
+
+## Automated regression tests
+
+`test/a11y-regression.test.ts` mounts **every** `<usa-*>` element at every sensitivity level and runs `auditMotionA11y()`: focusable content inside `aria-hidden`, widget roles without a name, sliders without `aria-valuenow`, images without `alt` (errors), assertive regions outside `role="alert"` and endless animations without a motion control (WCAG 2.2.2, warnings). Run the same audit in your app's tests.

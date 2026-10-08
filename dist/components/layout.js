@@ -1,5 +1,5 @@
-import { p as prefersReducedMotion, i as EASE_OUT, m as motionScale, h as defineElement } from '../chunks/base-BPG5zvex.js';
-export { a as configureComponents } from '../chunks/base-BPG5zvex.js';
+import { p as prefersReducedMotion, l as EASE_OUT, m as motionScale, k as defineElement } from '../chunks/base-BtJDNCB6.js';
+export { d as configureComponents } from '../chunks/base-BtJDNCB6.js';
 
 /** FLIP keyframes from a previous box to the current one (pure). */
 function flipFrames(from, to, scale = true) {

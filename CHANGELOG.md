@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.4.0] - 2026-10-08
+
+### Added
+- **Accessibility toolkit** — new entry `use-scroll-animate/components/a11y` (also re-exported from `use-scroll-animate/components`):
+  - **Motion-sensitivity levels** `setMotionSensitivity('full' | 'gentle' | 'minimal' | 'static', persist?)`, `restoreMotionSensitivity()`, `getMotionSensitivity()`, `motionAllowed(kind)`, `MOTION_SENSITIVITY`. `gentle` strips spins, zooms, skews and 3D from every component animation (vestibular-safe); `minimal` = fades only; `static` = no animation at all (also stops page CSS animations). `configureComponents({ motionSensitivity })` and `adaptKeyframes(frames, level)` for your own WAAPI code.
+  - **Static alternatives** — `STATIC_ALTERNATIVES` documents the static rendering of every category; `staticAlternative(root)` freezes a subtree at its final state.
+  - **aria-live conventions** — one shared polite (`role="status"`) and one assertive (`role="alert"`) region; `announce(message, { politeness, dedupe })`, `liveRegion()`.
+  - **`auditMotionA11y(root)`** — focusable-in-`aria-hidden`, unnamed widget roles, sliders without `aria-valuenow`, `<img>` without `alt`, assertive regions outside alerts, endless animations without a motion control (WCAG 2.2.2).
+- **Automated a11y regression tests**: every `<usa-*>` element is mounted at all four sensitivity levels and audited (`test/a11y-regression.test.ts`).
+- Showcase: **setMotionSensitivity()** card (Page & app-wide) — replay a spin-zoom entrance at each level, announce, audit the page.
+- Docs: levels, static alternatives, live-region conventions and the audit in [docs/accessibility.md](./docs/accessibility.md).
+
+### Fixed
+- `<usa-cursor>` under reduced motion / on touch no longer keeps author content inside its `aria-hidden` host (found by the new audit).
+
 ## [4.3.0] - 2026-10-08
 
 ### Added
