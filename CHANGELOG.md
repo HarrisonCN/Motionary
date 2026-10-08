@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.0.1] - 2026-10-08
+
+### Fixed
+- **Showcase — components gallery overflowed phones horizontally (~48 px at 390 px wide).** The header's six nav items (Store · Playground · Story · language · theme · GitHub) could not shrink, so the whole page scrolled sideways and the scroll-progress bar ran past the edge. On screens ≤ 480 px the bar now shrinks and tightens to one row (the sticky filter bar keeps its offset): the duplicate “Animation Store” link is hidden (the logo already links to the store) along with the “Components” badge, and below 375 px the GitHub icon moves to the footer link only. Checked in headless Chromium at 320 / 360 / 390 / 414 / 480 px in English and Chinese: `scrollWidth` equals the viewport width and every remaining header control is on screen.
+- Crawl of all showcase pages (`/showcase/`, `components.html`, `playground.html`, `story.html`, desktop 1280 px + mobile 390 px): no other console errors, failed requests or overflow found.
+
+### Tests
+- New `test/fixes-6-0-1.test.ts` regression suite.
+
 ## [6.0.0] - 2026-10-08
 
 ### ⚠ BREAKING CHANGES
