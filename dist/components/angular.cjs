@@ -27,7 +27,7 @@ require('./depth.cjs');
 require('./layout.cjs');
 require('./packs.cjs');
 require('./a11y.cjs');
-require('../chunks/index-tags-BQh_uGqH.cjs');
+require('../chunks/index-tags-CIRY2KnU.cjs');
 require('./perf.cjs');
 require('./bridge.cjs');
 

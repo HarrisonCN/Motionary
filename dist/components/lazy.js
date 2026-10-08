@@ -1,4 +1,4 @@
-import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-43Xtd01A.js';
+import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-Dh8nwXqw.js';
 
 /**
  * use-scroll-animate/components/lazy — lazy, per-category registration (v2.9).

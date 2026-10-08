@@ -26,7 +26,7 @@ import './depth.js';
 import './layout.js';
 import './packs.js';
 import './a11y.js';
-import '../chunks/index-tags-43Xtd01A.js';
+import '../chunks/index-tags-Dh8nwXqw.js';
 import './perf.js';
 import './bridge.js';
 

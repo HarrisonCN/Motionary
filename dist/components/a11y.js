@@ -1,6 +1,6 @@
 import { h as getMotionSensitivity, a as MOTION_SENSITIVITY_LEVELS, f as configureComponents, q as adoptStyles } from '../chunks/base-CZiIAMBc.js';
 export { d as adaptKeyframes } from '../chunks/base-CZiIAMBc.js';
-import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-43Xtd01A.js';
+import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-Dh8nwXqw.js';
 
 /**
  * use-scroll-animate/components/a11y — accessibility toolkit (4.4).

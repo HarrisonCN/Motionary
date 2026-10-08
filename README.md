@@ -60,7 +60,7 @@ defineComponents(); // or per category: import { defineTextComponents } from 'us
 | **Timeline & choreography** (`/components/timeline`) | `timeline()` (chain · overlap · labels · seek · reverse · scrub) · `<usa-timeline>` (`data-tl` steps) |
 | **Gestures** (`/components/gesture`) | `gesture()` (pan · swipe · pinch · long-press · tap · double-tap → springs) · `<usa-swipeable>` · `<usa-pinch-zoom>` |
 | **SVG** (`/components/svg`) | `<usa-draw>` (line drawing) · `<usa-morph>` (path morph) · `<usa-mask-reveal>` · `<usa-anim-icon>` · `morphTo()` · `interpolatePath()` |
-| **Canvas & WebGL** (`/components/webgl`) | `<usa-shader>` (gradient · plasma · waves · aurora · custom GLSL) · `<usa-distort>` · `<usa-liquid>` · `glQuad()` — graceful fallback |
+| **Canvas & WebGL** (`/components/webgl`) | `<usa-shader>` (gradient · plasma · waves · aurora · snow · fireflies · stars · bokeh · rain · custom GLSL) · `<usa-post-fx>` (vignette · grain · chromatic · CRT · bloom · pixelate · duotone · glitch) · `<usa-distort>` · `<usa-liquid>` · `glQuad()` — adaptive quality, graceful fallback |
 | **3D & depth** (`/components/depth`) | `<usa-cube>` · `<usa-depth>` (pointer · gyroscope · scroll depth parallax) · `deviceTilt()` · (+ `<usa-carousel-3d>` in cards) |
 | **Layout animation** (`/components/layout`) | `<usa-auto-animate>` / `autoAnimate()` (list & grid reflow) · `<usa-masonry>` · `sharedTransition()` (shared elements) |
 | **Effect packs** (`/components/packs`) | `<usa-pack>` (`name="ecommerce \| portfolio \| dashboard \| game \| landing"`) · `applyPack()` · `flyToCart()` · `countUp()` |

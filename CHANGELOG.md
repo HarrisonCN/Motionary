@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.8.0] - 2026-10-08
+
+### Added
+- **GPU particle presets** on `glQuad()` for `<usa-shader preset="…">`: `snow`, `fireflies`, `stars` (warp starfield), `bokeh`, `rain` — procedural in one fragment shader (no buffers, no per-particle JS). `PARTICLE_PRESETS`.
+- **`<usa-post-fx effects="…" intensity="0.6">`** — chainable GPU post-processing over an `<img>`: `vignette` · `grain` · `chromatic` · `scanlines` · `crt` · `bloom` · `pixelate` · `duotone` · `glitch`. `POST_EFFECTS`, `postFxShader(list)` for your own `glQuad()`.
+- **Unified WebGL fallback** — every preset has a still CSS rendering (`GL_FALLBACKS`, `glFallbackCss()`; `--usa-gl-fallback` on `<usa-shader>`), post-fx images get an approximate CSS filter (`--usa-gl-filter`).
+- **Battery / fps adaptive quality** for all GL elements: resolution steps 100 % → 50 % → 35 % after two slow seconds (< 40 fps) and back after five good ones; battery saver (≤ 20 % and discharging, or Save-Data) caps at 30 fps and ≤ 60 % resolution. `quality="high"` opts out; `data-quality` reflects the scale. `glGovernor()`, `watchPowerSaver()`.
+- `glQuad().render({ extra })` sets any float uniform; `resize(scale)` scales the drawing buffer.
+- Showcase: **GPU particles** and **Post-processing** cards (Canvas & WebGL). All new shaders verified to compile in Chromium (SwiftShader).
+
 ## [4.7.0] - 2026-10-08
 
 ### Added

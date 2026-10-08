@@ -197,7 +197,7 @@
   {
     "name": "import 'use-scroll-animate/components/vue'",
     "import": "export * from 'pkg/components/vue';",
-    "limit": 76288
+    "limit": 81664
   },
   {
     "name": "import 'use-scroll-animate/components/lazy'",
@@ -237,12 +237,12 @@
   {
     "name": "import 'use-scroll-animate/components/webgl'",
     "import": "export * from 'pkg/components/webgl';",
-    "limit": 5888
+    "limit": 8704
   },
   {
     "name": "import { defineWebglComponents } from '…/components/webgl'",
     "import": "export { defineWebglComponents } from 'pkg/components/webgl';",
-    "limit": 5376
+    "limit": 7936
   },
   {
     "name": "import 'use-scroll-animate/components/depth'",
@@ -267,17 +267,17 @@
   {
     "name": "import 'use-scroll-animate/components/svelte'",
     "import": "export * from 'pkg/components/svelte';",
-    "limit": 74496
+    "limit": 81920
   },
   {
     "name": "import 'use-scroll-animate/components/solid'",
     "import": "export * from 'pkg/components/solid';",
-    "limit": 74496
+    "limit": 81920
   },
   {
     "name": "import 'use-scroll-animate/components/angular'",
     "import": "export * from 'pkg/components/angular';",
-    "limit": 74496
+    "limit": 81920
   },
   {
     "name": "import 'use-scroll-animate/components/packs'",
@@ -313,5 +313,10 @@
     "name": "import 'use-scroll-animate/components/bridge'",
     "import": "export * from 'pkg/components/bridge';",
     "limit": 1536
+  },
+  {
+    "name": "import { definePostFx } from '…/components/webgl'",
+    "import": "export { definePostFx } from 'pkg/components/webgl';",
+    "limit": 7680
   }
 ]

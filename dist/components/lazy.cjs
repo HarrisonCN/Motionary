@@ -1,6 +1,6 @@
 'use strict';
 
-var indexTags = require('../chunks/index-tags-BQh_uGqH.cjs');
+var indexTags = require('../chunks/index-tags-CIRY2KnU.cjs');
 
 /**
  * use-scroll-animate/components/lazy — lazy, per-category registration (v2.9).

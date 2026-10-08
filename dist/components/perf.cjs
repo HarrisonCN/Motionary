@@ -1,7 +1,7 @@
 'use strict';
 
 var base = require('../chunks/base-CxYU2NK_.cjs');
-var indexTags = require('../chunks/index-tags-BQh_uGqH.cjs');
+var indexTags = require('../chunks/index-tags-CIRY2KnU.cjs');
 
 /**
  * use-scroll-animate/components/perf — performance toolkit (4.5).

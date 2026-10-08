@@ -2253,6 +2253,58 @@ declare function defineDistort(tag?: string): CustomElementConstructor | undefin
  * `<img>` inside, hover adds a gentle wobble; `strength`. Fallback: plain image.
  */
 declare function defineLiquid(tag?: string): CustomElementConstructor | undefined;
+/**
+ * `<usa-post-fx effects="vignette grain crt" intensity="0.6">` — GPU
+ * post-processing over the `<img>` inside (4.8): `vignette` · `grain` ·
+ * `chromatic` · `scanlines` · `crt` · `bloom` · `pixelate` · `duotone` ·
+ * `glitch`, chained in order. `quality="high"` disables adaptive quality.
+ * Fallback: the image with an approximate CSS filter.
+ */
+declare function definePostFx(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * 4.8 — WebGL preset library on `glQuad()`: particle presets (`snow`,
+ * `fireflies`, `stars`, `bokeh`, `rain` — usable as `<usa-shader preset>`),
+ * chainable post-processing passes for images (`<usa-post-fx>`), one CSS
+ * fallback per preset, and an adaptive quality governor (fps + battery).
+ */
+declare const PARTICLE_PRESETS: readonly ["snow", "fireflies", "stars", "bokeh", "rain"];
+type ParticlePreset = (typeof PARTICLE_PRESETS)[number];
+/** Post-processing passes: `vec3 fx(vec3 c, vec2 uv)` bodies, applied in order. `u_intensity` 0–1. */
+declare const POST_EFFECTS: Record<string, string>;
+type PostEffect = keyof typeof POST_EFFECTS;
+/** One fragment shader running the passes in order over `u_tex` (pixel-sampling passes read the source). */
+declare function postFxShader(effects: string[]): string;
+/** The unified CSS fallback (no WebGL / reduced data): a still background or image filter per preset. */
+declare const GL_FALLBACKS: Record<string, string>;
+/** CSS fallback for a shader preset / post effect list. */
+declare function glFallbackCss(preset: string, post?: boolean): string;
+interface GLGovernorOptions {
+    /** Below this fps quality drops (default 40). */
+    minFps?: number;
+    /** Frame-rate cap on battery saver / low battery (default 30). */
+    saverFps?: number;
+}
+interface GLGovernor {
+    /** Feed a frame time (ms); returns `true` when this frame should render. */
+    tick(t: number): boolean;
+    /** Current resolution scale (1 → 0.5 → 0.35). */
+    readonly scale: number;
+    /** Measured fps over the last second. */
+    readonly fps: number;
+    /** Battery saver / low battery: renders at `saverFps` and scale ≤ 0.6. */
+    saver: boolean;
+    /** Called when `scale` changes (resize the canvas). */
+    onScale?: (scale: number) => void;
+}
+/**
+ * Adaptive quality for GL loops: measures fps, steps the resolution scale
+ * down (1 → 0.5 → 0.35) after two slow seconds and back up after five good
+ * ones, and caps the frame rate in battery-saver mode. Pure — feed it times.
+ */
+declare function glGovernor(options?: GLGovernorOptions): GLGovernor;
+/** Watch the Battery Status API (where available) and Save-Data; calls `cb(true)` in saver conditions. Returns a stop function. */
+declare function watchPowerSaver(cb: (saver: boolean) => void): () => void;
 
 /** Built-in fragment shaders (bodies; uniforms `u_time`, `u_resolution`, `u_mouse` 0–1, `u_hover` 0–1, `u_tex`, `u_ripples[4]` = x, y, age, strength). */
 declare const SHADERS: Record<string, string>;
@@ -2260,15 +2312,16 @@ declare const SHADERS: Record<string, string>;
 declare function fragmentSource(body: string): string;
 declare function supportsWebGL(): boolean;
 interface GLQuad {
-    /** Draw a frame with these uniform values. */
+    /** Draw a frame with these uniform values (`extra`: any other float uniforms by name, 4.8). */
     render(u: {
         time?: number;
         mouse?: [number, number];
         hover?: number;
         ripples?: number[];
+        extra?: Record<string, number>;
     }): void;
-    /** Resize the drawing buffer to the canvas' CSS size × DPR (≤ 2). */
-    resize(): void;
+    /** Resize the drawing buffer to the canvas' CSS size × DPR (≤ 2) × `scale` (4.8 adaptive quality). */
+    resize(scale?: number): void;
     /** Upload an image as `u_tex`. */
     texture(img: TexImageSource): void;
     dispose(): void;
@@ -2290,6 +2343,7 @@ declare global {
         'usa-shader': UsaGLElement;
         'usa-distort': UsaGLElement;
         'usa-liquid': UsaGLElement;
+        'usa-post-fx': UsaGLElement;
     }
 }
 
@@ -2602,7 +2656,7 @@ declare const COMPONENT_CATEGORIES: {
     readonly timeline: readonly ["usa-timeline"];
     readonly gesture: readonly ["usa-swipeable", "usa-pinch-zoom"];
     readonly svg: readonly ["usa-draw", "usa-morph", "usa-mask-reveal", "usa-anim-icon"];
-    readonly webgl: readonly ["usa-shader", "usa-distort", "usa-liquid"];
+    readonly webgl: readonly ["usa-shader", "usa-distort", "usa-liquid", "usa-post-fx"];
     readonly depth: readonly ["usa-cube", "usa-depth"];
     readonly layout: readonly ["usa-auto-animate", "usa-masonry"];
     readonly packs: readonly ["usa-pack"];
@@ -2813,5 +2867,5 @@ declare function connectNativeShell(options?: NativeShellOptions): {
  */
 declare function defineComponents(categories?: ComponentCategory[]): void;
 
-export { ALL_TAGS, AMBIENT_EFFECTS, ANIM_ICONS, BRIDGE_PROTOCOL_VERSION, BUTTON_DEFORMS, CARD_EFFECTS, CLICK_EFFECTS, COMPONENT_CATEGORIES, CURSOR_MODES, JOINING_SCRIPT, LIVE_REGION_IDS, MASK_SHAPES, MORPH_ICONS, MOTION_SCALE, MOTION_SENSITIVITY, MOTION_SENSITIVITY_LEVELS, MOTION_TOKENS, PACKS, PACK_PRIMITIVES, PAGE_EFFECTS, REVEAL_EFFECTS, SENSITIVITY_CSS, SHADERS, SPINNER_VARIANTS, SPRING_EFFECTS, SPRING_PRESETS, STATIC_ALTERNATIVES, TIMELINE_PRESETS, VARIANTS, activeAnimations, adaptKeyframes, adoptVariants, animationBudget, announce, applyMotionTokens, applyNativeSettings, applyPack, auditMotionA11y, autoAnimate, autoDegrade, burst, categoryOf, confetti, configureComponents, connectNativeShell, countUp, createSpring, defineAccordion, defineAcrylic, defineAmbient, defineAnimIcon, defineAurora, defineAutoAnimate, defineAutoSkeleton, defineAvatarStack, defineBackToTop, defineBackgroundComponents, defineBadge, defineBlobs, defineBottomSheet, defineButton, defineCard, defineCardComponents, defineCardStack, defineCarousel3d, defineCheck, defineCheckbox, defineClick, defineClickComponents, defineComponents, defineCounter, defineCube, defineCursor, defineDepth, defineDepthComponents, defineDialog, defineDistort, defineDotNetwork, defineDoubleTap, defineDraggable, defineDraw, defineDrawer, defineFab, defineFeedbackComponents, defineFullpage, defineGestureComponents, defineGlitch, defineGradientText, defineGrain, defineGridGlow, defineHandwriting, defineHold, defineIconMorph, defineInteractionComponents, defineLayoutComponents, defineLike, defineLiquid, defineLoadingBar, defineMagnetic, defineMarquee, defineMaskReveal, defineMasonry, defineMorph, defineMotionSwitch, defineNavbar, defineOverscroll, definePack, definePacksComponents, definePageComponents, defineParticles, definePhysicsComponents, definePinchZoom, definePopover, definePress, defineProgress, definePullRefresh, defineRating, defineReveal, defineRevealComponents, defineRipple, defineScramble, defineScrollHighlight, defineScrollProgress, defineScrolly, defineShader, defineShimmerText, defineSkeleton, defineSlider, defineSpinner, defineSplash, defineSplitText, defineSpotlight, defineSpring, defineStagger, defineStickyStack, defineSvgComponents, defineSwipeable, defineTabs, defineTextComponents, defineTextRotate, defineTilt, defineTimeline, defineTimelineComponents, defineToaster, defineToggle, defineTooltip, defineTransitionComponents, defineTypewriter, defineUiComponents, defineViewSwitch, defineWaterRipple, defineWaveText, defineWebglComponents, detectNativeHost, deviceTilt, drawLines, easeOutExpo, enableMpaTransitions, flip, flipFrames, fluentPreset, flyToCart, fragmentSource, gesture, getMotionIntensity, getMotionSensitivity, getMotionTokens, glQuad, graphemes, haptic, importMotionTokens, interpolatePath, linearEasing, liveRegion, loadCategoryStyles, loadedStyles, loadingBar, masonryLayout, mergeMotionTokens, morphPath, morphTo, motionAllowed, motionToken, motionTokensToCss, motionTokensToJSON, motionTokensToVars, motionVar, onDemandStyles, onFrame, orientationToTilt, pageTransition, parseDuration, parseEasing, parseNativeSettings, pathsCompatible, pinchScale, postToNative, prefersReducedMotion, projectInertia, readScrollProgress, requestOrientationPermission, resolveDurationToken, resolveEasingToken, resolvePosition, resolveSpring, restoreMotionIntensity, restoreMotionSensitivity, revealKeyframes, rubberBand, schedulerStats, scrambleFrame, scrollToTarget, setAnimationBudget, setMotionIntensity, setMotionSensitivity, setVariant, shake, sharedTransition, smoothScroll, snapTo, splitOrder, splitText, splitTimeline, words as splitWords, spring, springEasing, springEffectKeyframes, springSamples, staticAlternative, stepSpring, supportsLinearEasing, supportsNativeScrub, supportsOrientation, supportsViewTransitions, supportsWebGL, swipeDirection, themeTransition, timeline, toast, viewTransition };
-export type { A11yIssue, AmbientEffect, AutoAnimateOptions, AutoDegradeOptions, BurstOptions, ButtonDeform, ButtonShape, ButtonState, CardEffect, ClickEffect, ComponentCategory, ComponentsConfig, ConfettiOptions, CursorMode, DeepPartialTokens, DegradeState, DialogVariant, FlipOptions, FluentPresetOptions, GLQuad, GestureHandlers, GestureOptions, MorphOptions, MotionIntensity, MotionSensitivity, MotionTokenGroup, MotionTokens, NativeHost, NativeSettings, NativeShellOptions, NativeTheme, PackContext, PackName, PageEffect, PageTransitionOptions, PanState, PinchState, Placement, Politeness, PressState, RevealEffect, ScrubHandle, ScrubOptions, SharedOptions, SmoothScrollOptions, SpinnerVariant, SplitBy, SplitFrom, SplitResult, SplitTextOptions, SplitTimelineOptions, SpringConfig, SpringEffect, SpringInput, SpringPreset, SpringToken, SpringValue, SpringValueOptions, SwipeDirection, SwipeState, TiltReading, Timeline, TimelineOptions, TimelinePosition, TimelineStepOptions, ToastHandle, ToastOptions, ToastType, UsaAccordionElement, UsaAcrylicElement, UsaAmbientElement, UsaAnimIconElement, UsaAuroraElement, UsaAutoAnimateElement, UsaAutoSkeletonElement, UsaAvatarStackElement, UsaBackToTopElement, UsaBadgeElement, UsaBlobsElement, UsaBottomSheetElement, UsaButtonElement, UsaCardElement, UsaCardStackElement, UsaCarousel3dElement, UsaCheckElement, UsaCheckboxElement, UsaClickElement, UsaCounterElement, UsaCubeElement, UsaCursorElement, UsaDepthElement, UsaDialogElement, UsaDotNetworkElement, UsaDoubleTapElement, UsaDraggableElement, UsaDrawElement, UsaDrawerElement, UsaElement, UsaFabElement, UsaFullpageElement, UsaGLElement, UsaGlitchElement, UsaGradientTextElement, UsaGrainElement, UsaGridGlowElement, UsaHandwritingElement, UsaHoldElement, UsaIconMorphElement, UsaLikeElement, UsaLoadingBarElement, UsaMagneticElement, UsaMarqueeElement, UsaMaskRevealElement, UsaMasonryElement, UsaMorphElement, UsaMotionSwitchElement, UsaNavbarElement, UsaOverscrollElement, UsaPackElement, UsaParticlesElement, UsaPinchZoomElement, UsaPopoverElement, UsaPressElement, UsaProgressElement, UsaPullRefreshElement, UsaRatingElement, UsaRevealElement, UsaRippleElement, UsaScrambleElement, UsaScrollHighlightElement, UsaScrollProgressElement, UsaScrollyElement, UsaShimmerTextElement, UsaSkeletonElement, UsaSliderElement, UsaSpinnerElement, UsaSplashElement, UsaSplitTextElement, UsaSpotlightElement, UsaSpringElement, UsaStaggerElement, UsaStickyStackElement, UsaSwipeableElement, UsaTabsElement, UsaTextRotateElement, UsaTiltElement, UsaTimelineElement, UsaToasterElement, UsaToggleElement, UsaTooltipElement, UsaTypewriterElement, UsaViewSwitchElement, UsaWaterRippleElement, UsaWaveTextElement, Variant, ViewTransitionOptions };
+export { ALL_TAGS, AMBIENT_EFFECTS, ANIM_ICONS, BRIDGE_PROTOCOL_VERSION, BUTTON_DEFORMS, CARD_EFFECTS, CLICK_EFFECTS, COMPONENT_CATEGORIES, CURSOR_MODES, GL_FALLBACKS, JOINING_SCRIPT, LIVE_REGION_IDS, MASK_SHAPES, MORPH_ICONS, MOTION_SCALE, MOTION_SENSITIVITY, MOTION_SENSITIVITY_LEVELS, MOTION_TOKENS, PACKS, PACK_PRIMITIVES, PAGE_EFFECTS, PARTICLE_PRESETS, POST_EFFECTS, REVEAL_EFFECTS, SENSITIVITY_CSS, SHADERS, SPINNER_VARIANTS, SPRING_EFFECTS, SPRING_PRESETS, STATIC_ALTERNATIVES, TIMELINE_PRESETS, VARIANTS, activeAnimations, adaptKeyframes, adoptVariants, animationBudget, announce, applyMotionTokens, applyNativeSettings, applyPack, auditMotionA11y, autoAnimate, autoDegrade, burst, categoryOf, confetti, configureComponents, connectNativeShell, countUp, createSpring, defineAccordion, defineAcrylic, defineAmbient, defineAnimIcon, defineAurora, defineAutoAnimate, defineAutoSkeleton, defineAvatarStack, defineBackToTop, defineBackgroundComponents, defineBadge, defineBlobs, defineBottomSheet, defineButton, defineCard, defineCardComponents, defineCardStack, defineCarousel3d, defineCheck, defineCheckbox, defineClick, defineClickComponents, defineComponents, defineCounter, defineCube, defineCursor, defineDepth, defineDepthComponents, defineDialog, defineDistort, defineDotNetwork, defineDoubleTap, defineDraggable, defineDraw, defineDrawer, defineFab, defineFeedbackComponents, defineFullpage, defineGestureComponents, defineGlitch, defineGradientText, defineGrain, defineGridGlow, defineHandwriting, defineHold, defineIconMorph, defineInteractionComponents, defineLayoutComponents, defineLike, defineLiquid, defineLoadingBar, defineMagnetic, defineMarquee, defineMaskReveal, defineMasonry, defineMorph, defineMotionSwitch, defineNavbar, defineOverscroll, definePack, definePacksComponents, definePageComponents, defineParticles, definePhysicsComponents, definePinchZoom, definePopover, definePostFx, definePress, defineProgress, definePullRefresh, defineRating, defineReveal, defineRevealComponents, defineRipple, defineScramble, defineScrollHighlight, defineScrollProgress, defineScrolly, defineShader, defineShimmerText, defineSkeleton, defineSlider, defineSpinner, defineSplash, defineSplitText, defineSpotlight, defineSpring, defineStagger, defineStickyStack, defineSvgComponents, defineSwipeable, defineTabs, defineTextComponents, defineTextRotate, defineTilt, defineTimeline, defineTimelineComponents, defineToaster, defineToggle, defineTooltip, defineTransitionComponents, defineTypewriter, defineUiComponents, defineViewSwitch, defineWaterRipple, defineWaveText, defineWebglComponents, detectNativeHost, deviceTilt, drawLines, easeOutExpo, enableMpaTransitions, flip, flipFrames, fluentPreset, flyToCart, fragmentSource, gesture, getMotionIntensity, getMotionSensitivity, getMotionTokens, glFallbackCss, glGovernor, glQuad, graphemes, haptic, importMotionTokens, interpolatePath, linearEasing, liveRegion, loadCategoryStyles, loadedStyles, loadingBar, masonryLayout, mergeMotionTokens, morphPath, morphTo, motionAllowed, motionToken, motionTokensToCss, motionTokensToJSON, motionTokensToVars, motionVar, onDemandStyles, onFrame, orientationToTilt, pageTransition, parseDuration, parseEasing, parseNativeSettings, pathsCompatible, pinchScale, postFxShader, postToNative, prefersReducedMotion, projectInertia, readScrollProgress, requestOrientationPermission, resolveDurationToken, resolveEasingToken, resolvePosition, resolveSpring, restoreMotionIntensity, restoreMotionSensitivity, revealKeyframes, rubberBand, schedulerStats, scrambleFrame, scrollToTarget, setAnimationBudget, setMotionIntensity, setMotionSensitivity, setVariant, shake, sharedTransition, smoothScroll, snapTo, splitOrder, splitText, splitTimeline, words as splitWords, spring, springEasing, springEffectKeyframes, springSamples, staticAlternative, stepSpring, supportsLinearEasing, supportsNativeScrub, supportsOrientation, supportsViewTransitions, supportsWebGL, swipeDirection, themeTransition, timeline, toast, viewTransition, watchPowerSaver };
+export type { A11yIssue, AmbientEffect, AutoAnimateOptions, AutoDegradeOptions, BurstOptions, ButtonDeform, ButtonShape, ButtonState, CardEffect, ClickEffect, ComponentCategory, ComponentsConfig, ConfettiOptions, CursorMode, DeepPartialTokens, DegradeState, DialogVariant, FlipOptions, FluentPresetOptions, GLGovernor, GLGovernorOptions, GLQuad, GestureHandlers, GestureOptions, MorphOptions, MotionIntensity, MotionSensitivity, MotionTokenGroup, MotionTokens, NativeHost, NativeSettings, NativeShellOptions, NativeTheme, PackContext, PackName, PageEffect, PageTransitionOptions, PanState, ParticlePreset, PinchState, Placement, Politeness, PostEffect, PressState, RevealEffect, ScrubHandle, ScrubOptions, SharedOptions, SmoothScrollOptions, SpinnerVariant, SplitBy, SplitFrom, SplitResult, SplitTextOptions, SplitTimelineOptions, SpringConfig, SpringEffect, SpringInput, SpringPreset, SpringToken, SpringValue, SpringValueOptions, SwipeDirection, SwipeState, TiltReading, Timeline, TimelineOptions, TimelinePosition, TimelineStepOptions, ToastHandle, ToastOptions, ToastType, UsaAccordionElement, UsaAcrylicElement, UsaAmbientElement, UsaAnimIconElement, UsaAuroraElement, UsaAutoAnimateElement, UsaAutoSkeletonElement, UsaAvatarStackElement, UsaBackToTopElement, UsaBadgeElement, UsaBlobsElement, UsaBottomSheetElement, UsaButtonElement, UsaCardElement, UsaCardStackElement, UsaCarousel3dElement, UsaCheckElement, UsaCheckboxElement, UsaClickElement, UsaCounterElement, UsaCubeElement, UsaCursorElement, UsaDepthElement, UsaDialogElement, UsaDotNetworkElement, UsaDoubleTapElement, UsaDraggableElement, UsaDrawElement, UsaDrawerElement, UsaElement, UsaFabElement, UsaFullpageElement, UsaGLElement, UsaGlitchElement, UsaGradientTextElement, UsaGrainElement, UsaGridGlowElement, UsaHandwritingElement, UsaHoldElement, UsaIconMorphElement, UsaLikeElement, UsaLoadingBarElement, UsaMagneticElement, UsaMarqueeElement, UsaMaskRevealElement, UsaMasonryElement, UsaMorphElement, UsaMotionSwitchElement, UsaNavbarElement, UsaOverscrollElement, UsaPackElement, UsaParticlesElement, UsaPinchZoomElement, UsaPopoverElement, UsaPressElement, UsaProgressElement, UsaPullRefreshElement, UsaRatingElement, UsaRevealElement, UsaRippleElement, UsaScrambleElement, UsaScrollHighlightElement, UsaScrollProgressElement, UsaScrollyElement, UsaShimmerTextElement, UsaSkeletonElement, UsaSliderElement, UsaSpinnerElement, UsaSplashElement, UsaSplitTextElement, UsaSpotlightElement, UsaSpringElement, UsaStaggerElement, UsaStickyStackElement, UsaSwipeableElement, UsaTabsElement, UsaTextRotateElement, UsaTiltElement, UsaTimelineElement, UsaToasterElement, UsaToggleElement, UsaTooltipElement, UsaTypewriterElement, UsaViewSwitchElement, UsaWaterRippleElement, UsaWaveTextElement, Variant, ViewTransitionOptions };
