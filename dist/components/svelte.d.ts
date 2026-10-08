@@ -1033,8 +1033,8 @@ interface UsaCheckboxElement extends UsaElement {
  * `<usa-button>` (button click deformation: squash, wobble, gooey, dent;
  * shape morph; submit → loading → success), `<usa-icon-morph>`,
  * `<usa-like>`, `<usa-hold>`, `<usa-double-tap>`, `<usa-checkbox>`, plus
- * `haptic()` (`burst()`, `confetti()`, `shake()` are deprecated in 5.9 —
- * use the registered effects through `playEffect()`).
+ * `haptic()`. 6.0: `burst()`, `confetti()` and `shake()` were removed — play
+ * the registered effects instead: `playEffect(el, 'burst' | 'confetti' | 'shake')`.
  */
 
 declare global {
@@ -1226,10 +1226,11 @@ declare global {
 }
 
 /**
- * `<usa-cursor mode="dot | trail | magnetic | glow">` — a custom cursor for
+ * `<usa-cursor mode="dot | magnetic | glow">` — a custom cursor for
  * the page (place it once, e.g. at the end of `<body>`).
  * - `dot` — a ring that follows with spring lag around the real pointer;
- * - `trail` — a comet tail of dots;
+ * (6.0: `mode="trail"` was removed — use the registered `comet-trail` effect;
+ * unknown modes render as `dot`.)
  * - `magnetic` — the ring snaps onto and wraps hovered targets (`a`,
  *   `button`, `[data-cursor]`);
  * - `glow` — a large soft light following the pointer (great on dark UIs).

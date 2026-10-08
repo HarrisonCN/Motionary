@@ -12,13 +12,14 @@ interface UsaElement extends HTMLElement {
     readonly reduced: boolean;
 }
 
-declare const CURSOR_MODES: readonly ["dot", "trail", "magnetic", "glow"];
+declare const CURSOR_MODES: readonly ["dot", "magnetic", "glow"];
 type CursorMode = (typeof CURSOR_MODES)[number];
 /**
- * `<usa-cursor mode="dot | trail | magnetic | glow">` — a custom cursor for
+ * `<usa-cursor mode="dot | magnetic | glow">` — a custom cursor for
  * the page (place it once, e.g. at the end of `<body>`).
  * - `dot` — a ring that follows with spring lag around the real pointer;
- * - `trail` — a comet tail of dots;
+ * (6.0: `mode="trail"` was removed — use the registered `comet-trail` effect;
+ * unknown modes render as `dot`.)
  * - `magnetic` — the ring snaps onto and wraps hovered targets (`a`,
  *   `button`, `[data-cursor]`);
  * - `glow` — a large soft light following the pointer (great on dark UIs).

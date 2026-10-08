@@ -196,19 +196,9 @@ declare function haptic(pattern?: number | number[]): boolean;
  * `<usa-button>` (button click deformation: squash, wobble, gooey, dent;
  * shape morph; submit → loading → success), `<usa-icon-morph>`,
  * `<usa-like>`, `<usa-hold>`, `<usa-double-tap>`, `<usa-checkbox>`, plus
- * `haptic()` (`burst()`, `confetti()`, `shake()` are deprecated in 5.9 —
- * use the registered effects through `playEffect()`).
+ * `haptic()`. 6.0: `burst()`, `confetti()` and `shake()` were removed — play
+ * the registered effects instead: `playEffect(el, 'burst' | 'confetti' | 'shake')`.
  */
-
-/**
- * @deprecated 5.9 — removed in 6.0. Use the registered effect:
- * `playEffect(document.body, 'burst', { x, y, ...options })` (`use-scroll-animate/components/fx`).
- */
-declare function burst(x: number, y: number, options?: BurstOptions): number;
-/** @deprecated 5.9 — removed in 6.0. Use `playEffect(document.body, 'confetti', options)`. */
-declare function confetti(options?: ConfettiOptions): number;
-/** @deprecated 5.9 — removed in 6.0. Use `playEffect(el, 'shake', { intensity, duration })`. */
-declare function shake(el: Element, intensity?: number, duration?: number): Animation | null;
 
 /** Register every component of this category under its default tag. */
 declare function defineClickComponents(): void;
@@ -224,5 +214,5 @@ declare global {
     }
 }
 
-export { BUTTON_DEFORMS, CLICK_EFFECTS, MORPH_ICONS, burst, confetti, defineButton, defineCheckbox, defineClick, defineClickComponents, defineDoubleTap, defineHold, defineIconMorph, defineLike, haptic, morphPath, shake };
+export { BUTTON_DEFORMS, CLICK_EFFECTS, MORPH_ICONS, defineButton, defineCheckbox, defineClick, defineClickComponents, defineDoubleTap, defineHold, defineIconMorph, defineLike, haptic, morphPath };
 export type { BurstOptions, ButtonDeform, ButtonShape, ButtonState, ClickEffect, ConfettiOptions, UsaButtonElement, UsaCheckboxElement, UsaClickElement, UsaDoubleTapElement, UsaHoldElement, UsaIconMorphElement, UsaLikeElement };
