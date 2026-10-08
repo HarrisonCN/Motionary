@@ -1,4 +1,4 @@
-import { defineElement, type UsaElement } from '../base';
+import { deprecate, defineElement, type UsaElement } from '../base';
 import css from './toggle.css?raw';
 
 /**
@@ -65,6 +65,7 @@ export function defineToggle(tag = 'usa-toggle'): CustomElementConstructor | und
         }
 
         mount(): void {
+          deprecate('usa-toggle', '<usa-toggle> is deprecated since 6.9 and removed in 7.0 — use <usa-switch> (motionary/components/widgets; npx usa-codemod-7).');
           if (!this.querySelector(':scope > .usa-toggle-track')) {
             const track = document.createElement('span');
             track.className = 'usa-toggle-track';

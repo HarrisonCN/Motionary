@@ -1,6 +1,6 @@
 {
   "name": "motionary",
-  "version": "6.8.0",
+  "version": "6.9.0",
   "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 94 animated Web Components — 214 scroll-reveal presets, card/click/button morphs, physics, page transitions, generative & sound-reactive backgrounds, cursor/gesture effects, themes, micro-interactions, <usa-player>, WebGL. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -498,6 +498,26 @@
         "default": "./dist/components/fx-physics.cjs"
       }
     },
+    "./components/fx-focus": {
+      "import": {
+        "types": "./dist/components/fx-focus.d.ts",
+        "default": "./dist/components/fx-focus.js"
+      },
+      "require": {
+        "types": "./dist/components/fx-focus.d.cts",
+        "default": "./dist/components/fx-focus.cjs"
+      }
+    },
+    "./components/marketplace": {
+      "import": {
+        "types": "./dist/components/marketplace.d.ts",
+        "default": "./dist/components/marketplace.js"
+      },
+      "require": {
+        "types": "./dist/components/marketplace.d.cts",
+        "default": "./dist/components/marketplace.cjs"
+      }
+    },
     "./components/lite": {
       "import": {
         "types": "./dist/components/lite.d.ts",
@@ -629,6 +649,7 @@
   },
   "bin": {
     "usa-codemod-5": "./bin/usa-codemod-5.mjs",
-    "usa-codemod-6": "./bin/usa-codemod-6.mjs"
+    "usa-codemod-6": "./bin/usa-codemod-6.mjs",
+    "usa-codemod-7": "./bin/usa-codemod-7.mjs"
   }
 }

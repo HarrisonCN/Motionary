@@ -1,5 +1,9 @@
 # Deprecations
 
+## Deprecated in 6.9, removed in 7.0
+
+See [upgrading-7.md](./upgrading-7.md) — `registerFx2()` / `FX2_PACKS` (use `registerEffectPacks()` / `EFFECT_PACKS`), the 6.x pack registrars `registerGpuEffects`, `registerTextEffects3`, `registerLightEffects`, `register3dEffects`, `registerMorphEffects2`, `registerTransitionEffects2`, `registerWeatherEffects`, `registerPhysicsEffects2` (use the `register*Pack()` names), `<usa-tooltip>` (use `<usa-tip>`) and `<usa-toggle>` (use `<usa-switch>`). Run `npx usa-codemod-7 --write src`.
+
 ## Deprecated in 5.9, removed in 6.0
 
 See [upgrading-6.md](./upgrading-6.md) — `burst()`, `confetti()`, `shake()` (use `playEffect(el, 'burst' | 'confetti' | 'shake', …)`), `<usa-cursor mode="trail">` (use the `comet-trail` effect). Run `npx usa-codemod-6 --write src`.

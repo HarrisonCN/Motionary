@@ -13,6 +13,7 @@
  * frames are slow, and draws one static frame under reduced motion.
  */
 import type { EffectContext, EffectDefinition } from '../fx/registry';
+import { deprecate } from '../base';
 import { registerEffects } from '../fx/registry';
 import { canvasBackground, type GenerativeSpec } from '../effects/generative';
 import { origin, spawn, rand, all } from '../effects/shared';
@@ -191,6 +192,12 @@ GPU_FX.push({
 });
 
 /** Register the 6.2 GPU pack (idempotent). */
-export function registerGpuEffects(): void {
+export function registerGpuPack(): void {
   registerEffects(GPU_FX);
+}
+
+/** @deprecated since 6.9 — use `registerGpuPack()` (removed in 7.0; `npx usa-codemod-7`). */
+export function registerGpuEffects(): void {
+  deprecate('registerGpuEffects', 'registerGpuEffects() is deprecated since 6.9 and removed in 7.0 — use registerGpuPack() (npx usa-codemod-7).');
+  registerGpuPack();
 }
