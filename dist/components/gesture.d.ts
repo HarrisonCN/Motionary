@@ -1,49 +1,4 @@
 /**
- * use-scroll-animate/components — shared base for the `<usa-*>` custom elements.
- *
- * Everything here is lazy: nothing touches `window`, `document`,
- * `HTMLElement` or `matchMedia` at import time, so the components can be
- * imported during SSR (Next, Nuxt, Astro…) and in Electron/Tauri preload
- * scripts. Classes are created the first time a `define*()` function runs.
- */
-interface ComponentsConfig {
-    /**
-     * Inject each component's CSS when it is defined (default `true`). Uses a
-     * constructable stylesheet (`document.adoptedStyleSheets`, which a strict
-     * `style-src` CSP does not block) and falls back to a `<style>` tag. Set
-     * to `false` when you load `use-scroll-animate/components.css` yourself.
-     */
-    injectStyles?: boolean;
-    /**
-     * `'user'` (default) follows `prefers-reduced-motion`; `'reduce'` always
-     * uses the reduced variants (e.g. a kiosk / battery-saver mode);
-     * `'no-preference'` ignores the OS setting (only for demos — respect your users).
-     */
-    reducedMotion?: 'user' | 'reduce' | 'no-preference';
-    /**
-     * Global motion intensity (v2.7): `'off'` (same as reduced motion),
-     * `'low'` (shorter, calmer), `'normal'` (default) or `'high'`. Scales every
-     * component animation's duration and sets `--usa-motion` (0 / 0.6 / 1 /
-     * 1.25) on `<html>` for your own CSS. See `setMotionIntensity()`.
-     */
-    motionIntensity?: MotionIntensity;
-    /**
-     * Motion-sensitivity level (v4.4), finer than reduced motion:
-     * `'full'` (default) · `'gentle'` (no spins, zooms, skews or parallax —
-     * translations and fades only, safe for vestibular disorders) ·
-     * `'minimal'` (fades only; components use their reduced-motion variants) ·
-     * `'static'` (no animation: every component shows its static alternative).
-     * See `setMotionSensitivity()` in `use-scroll-animate/components/a11y`.
-     */
-    motionSensitivity?: MotionSensitivity;
-}
-type MotionSensitivity = 'full' | 'gentle' | 'minimal' | 'static';
-type MotionIntensity = 'off' | 'low' | 'normal' | 'high';
-/** Change global component settings (call before `define*()` for `injectStyles`). */
-declare function configureComponents(options: ComponentsConfig): void;
-/** `true` when animations should be reduced (OS setting or `configureComponents`). */
-declare function prefersReducedMotion(): boolean;
-/**
  * Members shared by every `<usa-*>` element. Attribute helpers, a cleanup
  * bag that is emptied on disconnect, and motion helpers that degrade to the
  * final state without WAAPI or under reduced motion.
@@ -175,5 +130,5 @@ declare global {
     }
 }
 
-export { configureComponents, defineGestureComponents, definePinchZoom, defineSwipeable, gesture, pinchScale, prefersReducedMotion, swipeDirection };
-export type { ComponentsConfig, GestureHandlers, GestureOptions, PanState, PinchState, PressState, SwipeDirection, SwipeState, UsaElement, UsaPinchZoomElement, UsaSwipeableElement };
+export { defineGestureComponents, definePinchZoom, defineSwipeable, gesture, pinchScale, swipeDirection };
+export type { GestureHandlers, GestureOptions, PanState, PinchState, PressState, SwipeDirection, SwipeState, UsaPinchZoomElement, UsaSwipeableElement };

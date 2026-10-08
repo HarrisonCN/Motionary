@@ -31,7 +31,7 @@ export function supportsWebGL(): boolean {
   if (support !== undefined) return support;
   try {
     const c = typeof document !== 'undefined' ? document.createElement('canvas') : null;
-    support = !!(c && (c.getContext('webgl') || c.getContext('experimental-webgl')));
+    support = !!(c && (c.getContext('webgl')));
   } catch {
     support = false;
   }
@@ -52,7 +52,7 @@ export interface GLQuad {
 export function glQuad(canvas: HTMLCanvasElement, frag: string): GLQuad | null {
   let gl: WebGLRenderingContext | null = null;
   try {
-    gl = (canvas.getContext('webgl', { premultipliedAlpha: false, antialias: false }) || canvas.getContext('experimental-webgl')) as WebGLRenderingContext | null;
+    gl = (canvas.getContext('webgl', { premultipliedAlpha: false, antialias: false })) as WebGLRenderingContext | null;
   } catch {
     gl = null;
   }

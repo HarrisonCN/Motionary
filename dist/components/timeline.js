@@ -1,7 +1,6 @@
-import { v as defineElement, u as deprecate } from '../chunks/base-DbbRUxaa.js';
-export { f as configureComponents, p as prefersReducedMotion } from '../chunks/base-DbbRUxaa.js';
-import { t as timeline, T as TIMELINE_PRESETS } from '../chunks/core-BVTuet9o.js';
-export { r as resolvePosition, s as supportsNativeScrub } from '../chunks/core-BVTuet9o.js';
+import { x as defineElement } from '../chunks/base-C3Sw9sAO.js';
+import { t as timeline, T as TIMELINE_PRESETS } from '../chunks/core-DN3hHbHh.js';
+export { r as resolvePosition, s as supportsNativeScrub } from '../chunks/core-DN3hHbHh.js';
 import './tokens.js';
 
 var css = "usa-timeline{display:block}usa-timeline[scrub]{position:relative}@media (prefers-reduced-motion:reduce){usa-timeline [data-tl]{opacity:1 !important;transform:none !important;filter:none !important;clip-path:none !important}}";
@@ -49,9 +48,7 @@ function defineTimeline(tag = 'usa-timeline') {
                 // (0–0.95) or `scrub="js"` opt into the JS engine, `scrub="scroll"`
                 // follows this element's own scroll position.
                 const v = this.str('scrub');
-                if (v === 'js')
-                    deprecate('timeline-scrub-js', '<usa-timeline scrub="js"> is deprecated and will be removed in 5.0 — the JS engine is picked automatically where native scroll timelines are missing; add smooth="…" to opt into smoothing.');
-                const stop = tl.scrub(this, { smooth: this.num('smooth', 0), engine: v === 'js' ? 'js' : 'auto', source: v === 'scroll' ? 'scroll' : 'view' });
+                const stop = tl.scrub(this, { smooth: this.num('smooth', 0), engine: 'auto', source: v === 'scroll' ? 'scroll' : 'view' });
                 this.toggleAttribute('data-native', stop.native);
                 this.onCleanup(stop);
                 return;

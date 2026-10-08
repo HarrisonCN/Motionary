@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-BvpQ4Ggj.cjs');
+var base = require('../chunks/base-B5i8qQPR.cjs');
 
 const NUM = /-?(?:\d+\.?\d*|\.\d+)(?:e[-+]?\d+)?/gi;
 /** `true` when two path strings share the same commands (so their numbers can be interpolated). */
@@ -345,8 +345,6 @@ function defineSvgComponents() {
     defineAnimIcon();
 }
 
-exports.configureComponents = base.configureComponents;
-exports.prefersReducedMotion = base.prefersReducedMotion;
 exports.ANIM_ICONS = ANIM_ICONS;
 exports.MASK_SHAPES = MASK_SHAPES;
 exports.defineAnimIcon = defineAnimIcon;

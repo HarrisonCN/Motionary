@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-BvpQ4Ggj.cjs');
+var base = require('../chunks/base-B5i8qQPR.cjs');
 
 /** Entrance effects shared by `<usa-reveal>` and `<usa-stagger>` (transform / opacity / filter only). */
 const REVEAL_EFFECTS = [
@@ -347,8 +347,6 @@ function defineRevealComponents() {
     defineScrolly();
 }
 
-exports.configureComponents = base.configureComponents;
-exports.prefersReducedMotion = base.prefersReducedMotion;
 exports.REVEAL_EFFECTS = REVEAL_EFFECTS;
 exports.defineReveal = defineReveal;
 exports.defineRevealComponents = defineRevealComponents;

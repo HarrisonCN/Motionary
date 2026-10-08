@@ -1,21 +1,26 @@
-import { defineElement, configureComponents, getMotionIntensity, withoutDeprecations, deprecate, type MotionIntensity, type UsaElement } from '../base';
+import { defineElement, configureComponents, getMotionIntensity, getMotionSensitivity, type MotionIntensity, type UsaElement } from '../base';
 import css from './motion-switch.css?raw';
 
-const LEVELS: MotionIntensity[] = ['off', 'low', 'normal', 'high'];
+const INTENSITIES: MotionIntensity[] = ['low', 'normal', 'high'];
+/** The switch's levels: Off (motion sensitivity `minimal`) + the three intensities. */
+export type MotionSwitchLevel = 'off' | MotionIntensity;
+const LEVELS: MotionSwitchLevel[] = ['off', 'low', 'normal', 'high'];
 const KEY = 'usa:motion';
-let fromSwitch = false;
 
 /**
  * Set the global motion intensity for every `<usa-*>` component:
- * `'off'` (like reduced motion), `'low'`, `'normal'` (default), `'high'`.
- * Sets `--usa-motion` and `data-usa-motion` on `<html>`; with `persist`
- * the choice is remembered (localStorage) and restored by `restoreMotionIntensity()`.
+ * `'low'`, `'normal'` (default), `'high'`. Sets `--usa-motion` and
+ * `data-usa-motion` on `<html>`; with `persist` the choice is remembered
+ * (localStorage) and restored by `restoreMotionIntensity()`.
+ * 5.0: `'off'` was removed — use `setMotionSensitivity('minimal')`.
  */
 export function setMotionIntensity(level: MotionIntensity, persist = false): void {
-  if (!LEVELS.includes(level)) return;
-  if (level === 'off' && !fromSwitch)
-    deprecate('set-intensity-off', "setMotionIntensity('off') is deprecated and will be removed in 5.0 — use setMotionSensitivity('minimal') from use-scroll-animate/components/a11y.");
-  withoutDeprecations(() => configureComponents({ motionIntensity: level }));
+  if (!INTENSITIES.includes(level)) return;
+  configureComponents({ motionIntensity: level });
+  store(level, persist);
+}
+
+function store(level: MotionSwitchLevel, persist: boolean): void {
   if (persist) {
     try {
       localStorage.setItem(KEY, level);
@@ -26,18 +31,27 @@ export function setMotionIntensity(level: MotionIntensity, persist = false): voi
   if (typeof document !== 'undefined') document.dispatchEvent(new CustomEvent('usa:motion', { detail: { level } }));
 }
 
-/** Re-apply a persisted intensity (call early on page load). Returns it. */
+/** Apply a switch level: `'off'` = motion sensitivity `minimal`, otherwise full motion at that intensity. */
+export function setMotionLevel(level: MotionSwitchLevel, persist = false): void {
+  if (!LEVELS.includes(level)) return;
+  if (level === 'off') configureComponents({ motionSensitivity: 'minimal' });
+  else configureComponents({ motionIntensity: level, ...(getMotionSensitivity() === 'minimal' ? { motionSensitivity: 'full' as const } : {}) });
+  store(level, persist);
+}
+
+/** The current switch level. */
+export function getMotionLevel(): MotionSwitchLevel {
+  return getMotionSensitivity() === 'minimal' || getMotionSensitivity() === 'static' ? 'off' : getMotionIntensity();
+}
+
+/** Re-apply a persisted level (call early on page load). Returns the active intensity. */
 export function restoreMotionIntensity(): MotionIntensity {
   try {
-    const v = localStorage.getItem(KEY) as MotionIntensity | null;
-    if (v && LEVELS.includes(v)) {
-      fromSwitch = true;
-      setMotionIntensity(v);
-    }
+    const v = localStorage.getItem(KEY) as MotionSwitchLevel | null;
+    if (v && LEVELS.includes(v)) setMotionLevel(v);
   } catch {
     /* ignore */
   }
-  fromSwitch = false;
   return getMotionIntensity();
 }
 
@@ -48,7 +62,7 @@ export function restoreMotionIntensity(): MotionIntensity {
  * `label` ("Motion"). Events: `usa:change` (`{ level }`).
  */
 export interface UsaMotionSwitchElement extends UsaElement {
-  value: MotionIntensity;
+  value: MotionSwitchLevel;
 }
 
 export function defineMotionSwitch(tag = 'usa-motion-switch'): CustomElementConstructor | undefined {
@@ -56,13 +70,11 @@ export function defineMotionSwitch(tag = 'usa-motion-switch'): CustomElementCons
     tag,
     (Base) =>
       class UsaMotionSwitch extends Base {
-        get value(): MotionIntensity {
-          return getMotionIntensity();
+        get value(): MotionSwitchLevel {
+          return getMotionLevel();
         }
-        set value(v: MotionIntensity) {
-          fromSwitch = true;
-          setMotionIntensity(v, true);
-          fromSwitch = false;
+        set value(v: MotionSwitchLevel) {
+          setMotionLevel(v, true);
           this.sync();
         }
         mount(): void {
@@ -73,7 +85,7 @@ export function defineMotionSwitch(tag = 'usa-motion-switch'): CustomElementCons
           this.innerHTML = LEVELS.map((l, i) => `<button type="button" role="radio" data-level="${l}">${labels[i] || l}</button><span hidden></span>`.replace('<span hidden></span>', '')).join('') + '<span class="usa-motion-thumb" aria-hidden="true"></span>';
           this.listen(this, 'click', (e: MouseEvent) => {
             const b = (e.target as Element).closest?.('[data-level]') as HTMLElement | null;
-            if (b) this.pick(b.dataset.level as MotionIntensity);
+            if (b) this.pick(b.dataset.level as MotionSwitchLevel);
           });
           this.listen(this, 'keydown', (e: KeyboardEvent) => {
             const i = LEVELS.indexOf(this.value);
@@ -86,7 +98,7 @@ export function defineMotionSwitch(tag = 'usa-motion-switch'): CustomElementCons
           this.listen(document, 'usa:motion', () => this.sync());
           this.sync();
         }
-        private pick(l: MotionIntensity): void {
+        private pick(l: MotionSwitchLevel): void {
           this.value = l;
           this.emit('change', { level: l });
         }

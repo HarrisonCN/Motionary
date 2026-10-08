@@ -1,6 +1,6 @@
 # Upgrading to 5.0
 
-5.0 is the next major. 4.9 already **warns once in the console** for everything below, and a codemod rewrites most of it:
+5.0.0 is released. 4.9 **warned once in the console** for everything below, and a codemod rewrites most of it:
 
 ```sh
 npx usa-codemod-5 src            # dry run: lists every change
@@ -20,7 +20,7 @@ npx usa-codemod-5 --write src    # apply
 
 ## Modern-browser baseline
 
-5.0 requires **Custom Elements, Web Animations, IntersectionObserver, ResizeObserver and constructable stylesheets** (`adoptedStyleSheets`) — every evergreen browser since 2023 (Chrome / Edge ≥ 111, Safari ≥ 16.4, Firefox ≥ 115, WebView2, Electron ≥ 24). The no-WAAPI / no-IntersectionObserver / `experimental-webgl` code paths are removed. View Transitions and scroll-driven animations stay **progressive** (used when present, JS fallback otherwise).
+5.0 requires **Custom Elements, Web Animations, IntersectionObserver, ResizeObserver and constructable stylesheets** (`adoptedStyleSheets`) — every evergreen browser since 2023 (Chrome / Edge ≥ 111, Safari ≥ 16.4, Firefox ≥ 115, WebView2, Electron ≥ 24). The legacy `experimental-webgl` context is no longer requested, and browsers without the required features are no longer tested or supported (the remaining no-WAAPI guards only keep SSR / test environments from throwing). View Transitions and scroll-driven animations stay **progressive** (used when present, JS fallback otherwise).
 
 Check a browser with `baselineReport()` / `warnBaseline()` from `use-scroll-animate/components/a11y` (4.9).
 

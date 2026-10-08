@@ -25,12 +25,11 @@ export { CURSOR_MODES } from './cursor';
 export type { CursorMode } from './cursor';
 export { AMBIENT_EFFECTS } from './ambient';
 export type { AmbientEffect } from './ambient';
-export { setMotionIntensity, restoreMotionIntensity } from './motion-switch';
+export { setMotionIntensity, restoreMotionIntensity, setMotionLevel, getMotionLevel } from './motion-switch';
+export type { MotionSwitchLevel } from './motion-switch';
 export { getMotionIntensity, MOTION_SCALE } from '../base';
 export type { MotionIntensity } from '../base';
 export type { UsaCursorElement, UsaFullpageElement, UsaLoadingBarElement, UsaBackToTopElement, UsaAmbientElement, UsaSplashElement, UsaAutoSkeletonElement, UsaMotionSwitchElement };
-export { configureComponents, prefersReducedMotion } from '../base';
-export type { ComponentsConfig, UsaElement } from '../base';
 
 /** Register every component of this category under its default tag. */
 export function definePageComponents(): void {

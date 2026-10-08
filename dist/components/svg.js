@@ -1,5 +1,4 @@
-import { j as clamp, m as motionScale, k as caf, p as prefersReducedMotion, n as now, r as raf, v as defineElement, w as EASE_OUT } from '../chunks/base-DbbRUxaa.js';
-export { f as configureComponents } from '../chunks/base-DbbRUxaa.js';
+import { k as clamp, m as motionScale, q as caf, p as prefersReducedMotion, n as now, r as raf, x as defineElement, y as EASE_OUT } from '../chunks/base-C3Sw9sAO.js';
 
 const NUM = /-?(?:\d+\.?\d*|\.\d+)(?:e[-+]?\d+)?/gi;
 /** `true` when two path strings share the same commands (so their numbers can be interpolated). */
@@ -344,5 +343,5 @@ function defineSvgComponents() {
     defineAnimIcon();
 }
 
-export { ANIM_ICONS, MASK_SHAPES, defineAnimIcon, defineDraw, defineMaskReveal, defineMorph, defineSvgComponents, drawLines, interpolatePath, morphTo, pathsCompatible, prefersReducedMotion };
+export { ANIM_ICONS, MASK_SHAPES, defineAnimIcon, defineDraw, defineMaskReveal, defineMorph, defineSvgComponents, drawLines, interpolatePath, morphTo, pathsCompatible };
 //# sourceMappingURL=svg.js.map

@@ -10,7 +10,7 @@
 import { C } from './catalog/make.js';
 import { EXTENSIONS } from './catalog/index.js';
 
-export const VERSION_RANGE = '4';
+export const VERSION_RANGE = '5';
 
 /** Component categories, in display order (ids match the subpath exports). */
 export const COMPONENT_CATEGORIES = [

@@ -34,9 +34,9 @@ describe('a11y sweep over every <usa-*> element', () => {
         el.remove();
       }
     }
-    configureComponents({ reducedMotion: 'user', motionIntensity: 'off' });
+    configureComponents({ reducedMotion: 'user', motionSensitivity: 'minimal' });
     for (const tag of TAGS) mount(`<${tag}></${tag}>`).remove();
-    configureComponents({ motionIntensity: 'normal' });
+    configureComponents({ motionIntensity: 'normal', motionSensitivity: 'full' });
     await tick();
   });
 

@@ -52,6 +52,7 @@ defineComponents(); // カテゴリ単位: import { defineTextComponents } from 
 | **3D / 奥行き** (`/components/depth`) | `<usa-cube>` · `<usa-depth>`（ポインター · ジャイロ · スクロール視差）· `deviceTilt()` |
 | **レイアウト** (`/components/layout`) | `<usa-auto-animate>` / `autoAnimate()` · `<usa-masonry>` · `sharedTransition()`（共有要素） |
 | **エフェクトパック** (`/components/packs`) | `<usa-pack>` (`name="ecommerce \| portfolio \| dashboard \| game \| landing"`) · `applyPack()` · `flyToCart()` |
+| **エフェクト API** (`/components/fx`) | `<usa-fx>` · `registerEffect()` · `playEffect()` · `bindEffect()` · 内蔵: タイムライン入場、pulse · pop · jelly · wiggle · bounce · tada · shake、burst · confetti · ripple |
 
 ## ドキュメント
 

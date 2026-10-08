@@ -67,7 +67,7 @@
   {
     "name": "dist/components.umd.js (minified, all components + CSS)",
     "file": "dist/components.umd.js",
-    "limit": 88576
+    "limit": 96512
   },
   {
     "name": "dist/components.css",
@@ -77,7 +77,7 @@
   {
     "name": "import 'use-scroll-animate/components' (everything)",
     "import": "export * from 'pkg/components';",
-    "limit": 88064
+    "limit": 96000
   },
   {
     "name": "import 'use-scroll-animate/components/reveal'",
@@ -202,7 +202,7 @@
   {
     "name": "import 'use-scroll-animate/components/lazy'",
     "import": "export * from 'pkg/components/lazy';",
-    "limit": 1536
+    "limit": 1792
   },
   {
     "name": "import 'use-scroll-animate/components/timeline'",
@@ -318,5 +318,15 @@
     "name": "import { definePostFx } from '…/components/webgl'",
     "import": "export { definePostFx } from 'pkg/components/webgl';",
     "limit": 7680
+  },
+  {
+    "name": "import 'use-scroll-animate/components/fx'",
+    "import": "export * from 'pkg/components/fx';",
+    "limit": 6144
+  },
+  {
+    "name": "import { defineFxComponents } from '…/components/fx'",
+    "import": "export { defineFxComponents } from 'pkg/components/fx';",
+    "limit": 5888
   }
 ]

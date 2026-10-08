@@ -11,8 +11,6 @@ export { defineCube, defineDepth };
 export { deviceTilt, orientationToTilt, requestOrientationPermission, supportsOrientation } from './core';
 export type { TiltReading } from './core';
 export type { UsaCubeElement, UsaDepthElement };
-export { configureComponents, prefersReducedMotion } from '../base';
-export type { ComponentsConfig, UsaElement } from '../base';
 
 /** Register every component of this category under its default tag. */
 export function defineDepthComponents(): void {

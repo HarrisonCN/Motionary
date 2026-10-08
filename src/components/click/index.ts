@@ -23,8 +23,6 @@ export { MORPH_ICONS, morphPath } from './icon-morph';
 export { burst, confetti, shake, haptic } from './fx';
 export type { BurstOptions, ConfettiOptions } from './fx';
 export type { UsaClickElement, UsaButtonElement, UsaIconMorphElement, UsaLikeElement, UsaHoldElement, UsaDoubleTapElement, UsaCheckboxElement };
-export { configureComponents, prefersReducedMotion } from '../base';
-export type { ComponentsConfig, UsaElement } from '../base';
 
 /** Register every component of this category under its default tag. */
 export function defineClickComponents(): void {

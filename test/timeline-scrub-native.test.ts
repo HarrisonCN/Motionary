@@ -71,7 +71,10 @@ describe('timeline().scrub() — native ScrollTimeline / ViewTimeline (4.1)', ()
     defineTimelineComponents();
     const el = mount('<usa-timeline scrub><p data-tl="fade">x</p></usa-timeline>');
     expect(el.hasAttribute('data-native')).toBe(true);
+    const smooth = mount('<usa-timeline scrub smooth="0.2"><p data-tl="fade">x</p></usa-timeline>');
+    expect(smooth.hasAttribute('data-native')).toBe(false);
+    // 5.0: scrub="js" was removed — it is a plain (native when possible) scrub now
     const js = mount('<usa-timeline scrub="js"><p data-tl="fade">x</p></usa-timeline>');
-    expect(js.hasAttribute('data-native')).toBe(false);
+    expect(js.hasAttribute('data-native')).toBe(true);
   });
 });

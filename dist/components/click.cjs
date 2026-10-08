@@ -1,112 +1,8 @@
 'use strict';
 
-var base = require('../chunks/base-BvpQ4Ggj.cjs');
-var spring = require('../chunks/spring-fFkqE9J0.cjs');
-
-/**
- * Click-effect helpers (v2.5): `burst()`, `confetti()`, `shake()`, `haptic()`.
- * Particles live in one fixed, pointer-transparent layer and are removed when
- * their animation ends. Under reduced motion particles are skipped and
- * `shake()` only flashes an outline.
- */
-let layer = null;
-function fxLayer() {
-    if (layer && layer.isConnected)
-        return layer;
-    layer = document.createElement('div');
-    layer.className = 'usa-fx-layer';
-    layer.setAttribute('aria-hidden', 'true');
-    layer.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:2147483000;overflow:hidden;contain:strict';
-    document.body.appendChild(layer);
-    return layer;
-}
-const PALETTE = ['#7c5cff', '#22d3ee', '#f472b6', '#facc15', '#34d399', '#fb923c'];
-const GLYPH = { star: '★', heart: '♥' };
-function particle(x, y, size, color, shape) {
-    const p = document.createElement('span');
-    const glyph = GLYPH[shape] || (shape !== 'circle' && shape !== 'square' ? shape : '');
-    p.style.cssText = `position:absolute;left:${x}px;top:${y}px;width:${size}px;height:${size}px;margin:${-size / 2}px 0 0 ${-size / 2}px;will-change:transform,opacity;` +
-        (glyph ? `font-size:${size * 2}px;line-height:${size}px;text-align:center;color:${color}` : `background:${color};border-radius:${shape === 'square' ? '2px' : '50%'}`);
-    if (glyph)
-        p.textContent = glyph;
-    fxLayer().appendChild(p);
-    return p;
-}
-const done = (a, el) => {
-    if (a)
-        a.onfinish = () => el.remove();
-    else
-        el.remove();
-};
-/** Particles radiating from client point (x, y). Returns the number spawned. */
-function burst(x, y, options = {}) {
-    if (typeof document === 'undefined' || base.prefersReducedMotion())
-        return 0;
-    const { count = 12, colors = PALETTE, distance = 48, size = 6, shape = 'circle', duration = 600 } = options;
-    for (let i = 0; i < count; i++) {
-        const angle = (i / count) * Math.PI * 2 + Math.random() * 0.4;
-        const d = distance * (0.7 + Math.random() * 0.5);
-        const p = particle(x, y, size, colors[i % colors.length], shape);
-        const a = typeof p.animate === 'function'
-            ? p.animate([
-                { transform: 'translate(0,0) scale(1)', opacity: 1 },
-                { transform: `translate(${Math.cos(angle) * d}px, ${Math.sin(angle) * d}px) scale(0.2)`, opacity: 0 },
-            ], { duration: duration * (0.8 + Math.random() * 0.4), easing: 'cubic-bezier(0.22, 1, 0.36, 1)', fill: 'forwards' })
-            : null;
-        done(a, p);
-    }
-    return count;
-}
-/** A confetti cannon (paper pieces with gravity, drift and spin). */
-function confetti(options = {}) {
-    if (typeof document === 'undefined' || base.prefersReducedMotion())
-        return 0;
-    const W = window.innerWidth || 800;
-    const H = window.innerHeight || 600;
-    const { x = W / 2, y = H * 0.66, count = 80, spread = 70, velocity = 1, colors = PALETTE, duration = 1600 } = options;
-    for (let i = 0; i < count; i++) {
-        const angle = ((-90 + (Math.random() - 0.5) * spread) * Math.PI) / 180;
-        const speed = (260 + Math.random() * 320) * velocity;
-        const vx = Math.cos(angle) * speed;
-        const vy = Math.sin(angle) * speed;
-        const p = particle(x, y, 6 + Math.random() * 5, colors[i % colors.length], Math.random() > 0.5 ? 'square' : 'circle');
-        p.style.height = `${4 + Math.random() * 3}px`;
-        const frames = [];
-        const steps = 8;
-        const T = duration / 1000;
-        const spin = (Math.random() - 0.5) * 1440;
-        for (let s = 0; s <= steps; s++) {
-            const t = (s / steps) * T;
-            const g = 900;
-            frames.push({
-                transform: `translate(${(vx * t * 0.8).toFixed(1)}px, ${(vy * t + 0.5 * g * t * t).toFixed(1)}px) rotate(${((spin * s) / steps).toFixed(0)}deg) rotateX(${s * 120}deg)`,
-                opacity: s === steps ? 0 : 1,
-            });
-        }
-        const a = typeof p.animate === 'function' ? p.animate(frames, { duration: duration * (0.85 + Math.random() * 0.3), easing: 'linear', fill: 'forwards' }) : null;
-        done(a, p);
-    }
-    return count;
-}
-/** Horizontal error shake (`intensity` px, default 8). Reduced motion: a red outline flash. */
-function shake(el, intensity = 8, duration = 480) {
-    const t = el;
-    if (typeof t.animate !== 'function')
-        return null;
-    if (base.prefersReducedMotion())
-        return t.animate([{ outline: '2px solid #e5484d' }, { outline: '2px solid transparent' }], { duration: 600 });
-    const k = intensity;
-    return t.animate([0, -k, k, -k * 0.75, k * 0.75, -k * 0.4, k * 0.4, 0].map((v) => ({ transform: `translateX(${v}px)` })), { duration, easing: 'ease-in-out' });
-}
-/** `navigator.vibrate()` where supported (Android Chrome, some WebViews). Returns whether it ran. */
-function haptic(pattern = 10) {
-    try {
-        return typeof navigator !== 'undefined' && typeof navigator.vibrate === 'function' ? navigator.vibrate(pattern) : false;
-    }
-    catch {
-        return false;
-    }
-}
+var base = require('../chunks/base-B5i8qQPR.cjs');
+var spring = require('../chunks/spring--oZh55tB.cjs');
+var fx = require('../chunks/fx-B8hk1Fby.cjs');
 
 var css$6 = "usa-click{position:relative;display:inline-block;overflow:hidden;isolation:isolate;border-radius:inherit;-webkit-tap-highlight-color:transparent;touch-action:manipulation}usa-click[block]{display:block}usa-click .usa-click-wave{position:absolute;border-radius:50%;pointer-events:none;z-index:-1;transform:scale(0);background:radial-gradient(circle,var(--usa-wave) 0 55%,color-mix(in srgb,var(--usa-wave) 40%,transparent) 70%,transparent 72%)}";
 
@@ -163,20 +59,20 @@ function defineClick(tag = 'usa-click') {
                 x = r.left + r.width / 2;
                 y = r.top + r.height / 2;
             }
-            const fx = this.effects;
+            const fx$1 = this.effects;
             const colors = this.str('color') ? this.str('color').split(',') : undefined;
-            if (fx.includes('burst'))
-                burst(x, y, { count: this.num('count', 12), shape: this.str('shape', 'circle'), colors });
-            if (fx.includes('confetti'))
-                confetti({ x, y, count: this.num('count', 60), colors, spread: 90, velocity: 0.8 });
+            if (fx$1.includes('burst'))
+                fx.burst(x, y, { count: this.num('count', 12), shape: this.str('shape', 'circle'), colors });
+            if (fx$1.includes('confetti'))
+                fx.confetti({ x, y, count: this.num('count', 60), colors, spread: 90, velocity: 0.8 });
             if (this.hasAttribute('haptic'))
-                haptic(this.num('haptic', 10));
-            this.emit('click-effect', { x, y, effects: fx });
+                fx.haptic(this.num('haptic', 10));
+            this.emit('click-effect', { x, y, effects: fx$1 });
         }
         shake() {
-            shake(this);
+            fx.shake(this);
             if (this.hasAttribute('haptic'))
-                haptic([30, 40, 30]);
+                fx.haptic([30, 40, 30]);
         }
         ripple(x, y) {
             if (this.reduced)
@@ -324,7 +220,7 @@ function defineButton(tag = 'usa-button') {
                 if (this.deforms().includes('wobble'))
                     this.wobble();
                 if (this.hasAttribute('haptic'))
-                    haptic(this.num('haptic', 10));
+                    fx.haptic(this.num('haptic', 10));
                 if (this.str('morph') === 'submit' && this.state === 'idle')
                     this.submit();
             });
@@ -479,9 +375,9 @@ function defineButton(tag = 'usa-button') {
                 t.removeAttribute('aria-busy');
             }
             if (s === 'error') {
-                shake(t);
+                fx.shake(t);
                 if (this.hasAttribute('haptic'))
-                    haptic([30, 40, 30]);
+                    fx.haptic([30, 40, 30]);
             }
             if (s === 'success' && !this.reduced) {
                 const ok = t.querySelector('.usa-button-ok');
@@ -685,10 +581,10 @@ function defineLike(tag = 'usa-like') {
             if (next && heart && !this.reduced) {
                 this.motion(heart, [{ transform: 'scale(0.4)' }, { transform: 'scale(1)' }], spring.springEasing('bouncy'));
                 const r = heart.getBoundingClientRect();
-                burst(r.left + r.width / 2, r.top + r.height / 2, { count: 10, distance: 28, size: 5, colors: [getComputedStyle(this).getPropertyValue('--usa-like-color').trim() || '#f43f5e', '#fb923c', '#facc15'] });
+                fx.burst(r.left + r.width / 2, r.top + r.height / 2, { count: 10, distance: 28, size: 5, colors: [getComputedStyle(this).getPropertyValue('--usa-like-color').trim() || '#f43f5e', '#fb923c', '#facc15'] });
             }
             if (this.hasAttribute('haptic'))
-                haptic(this.num('haptic', 12));
+                fx.haptic(this.num('haptic', 12));
             this.dispatchEvent(new Event('change', { bubbles: true }));
             this.emit('change', { liked: next, count: this.count });
         }
@@ -766,7 +662,7 @@ function defineHold(tag = 'usa-hold') {
                     this.removeAttribute('data-holding');
                     this.setAttribute('data-done', '');
                     if (this.hasAttribute('haptic'))
-                        haptic(20);
+                        fx.haptic(20);
                     this.emit('confirm');
                     setTimeout(() => {
                         this.removeAttribute('data-done');
@@ -862,9 +758,9 @@ function defineDoubleTap(tag = 'usa-double-tap') {
                 a.onfinish = () => icon.remove();
             else
                 icon.remove();
-            burst(x, y, { count: 8, distance: 40, size: 5, colors: [this.str('color', '#f43f5e'), '#fb923c', '#facc15'] });
+            fx.burst(x, y, { count: 8, distance: 40, size: 5, colors: [this.str('color', '#f43f5e'), '#fb923c', '#facc15'] });
             if (this.hasAttribute('haptic'))
-                haptic(15);
+                fx.haptic(15);
             this.emit('double-tap', { x: x - r.left, y: y - r.top });
         }
     }, { id: 'double-tap', text: css$1 });
@@ -964,13 +860,13 @@ function defineClickComponents() {
     defineCheckbox();
 }
 
-exports.configureComponents = base.configureComponents;
-exports.prefersReducedMotion = base.prefersReducedMotion;
+exports.burst = fx.burst;
+exports.confetti = fx.confetti;
+exports.haptic = fx.haptic;
+exports.shake = fx.shake;
 exports.BUTTON_DEFORMS = BUTTON_DEFORMS;
 exports.CLICK_EFFECTS = CLICK_EFFECTS;
 exports.MORPH_ICONS = MORPH_ICONS;
-exports.burst = burst;
-exports.confetti = confetti;
 exports.defineButton = defineButton;
 exports.defineCheckbox = defineCheckbox;
 exports.defineClick = defineClick;
@@ -979,7 +875,5 @@ exports.defineDoubleTap = defineDoubleTap;
 exports.defineHold = defineHold;
 exports.defineIconMorph = defineIconMorph;
 exports.defineLike = defineLike;
-exports.haptic = haptic;
 exports.morphPath = morphPath;
-exports.shake = shake;
 //# sourceMappingURL=click.cjs.map

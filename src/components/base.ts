@@ -17,15 +17,15 @@ export interface ComponentsConfig {
   injectStyles?: boolean;
   /**
    * `'user'` (default) follows `prefers-reduced-motion`; `'reduce'` always
-   * uses the reduced variants (e.g. a kiosk / battery-saver mode);
-   * `'no-preference'` ignores the OS setting (only for demos — respect your users).
+   * uses the reduced variants (e.g. a kiosk / battery-saver mode). 5.0: the
+   * OS setting can no longer be ignored (`'no-preference'` was removed).
    */
-  reducedMotion?: 'user' | 'reduce' | 'no-preference';
+  reducedMotion?: 'user' | 'reduce';
   /**
-   * Global motion intensity (v2.7): `'off'` (same as reduced motion),
-   * `'low'` (shorter, calmer), `'normal'` (default) or `'high'`. Scales every
-   * component animation's duration and sets `--usa-motion` (0 / 0.6 / 1 /
-   * 1.25) on `<html>` for your own CSS. See `setMotionIntensity()`.
+   * Global motion intensity (v2.7): `'low'` (shorter, calmer), `'normal'`
+   * (default) or `'high'`. Scales every component animation's duration and
+   * sets `--usa-motion` (0.6 / 1 / 1.25) on `<html>` for your own CSS. 5.0:
+   * `'off'` was removed — use `motionSensitivity: 'minimal'`.
    */
   motionIntensity?: MotionIntensity;
   /**
@@ -42,20 +42,17 @@ export interface ComponentsConfig {
 export type MotionSensitivity = 'full' | 'gentle' | 'minimal' | 'static';
 export const MOTION_SENSITIVITY_LEVELS: readonly MotionSensitivity[] = ['full', 'gentle', 'minimal', 'static'];
 
-export type MotionIntensity = 'off' | 'low' | 'normal' | 'high';
-export const MOTION_SCALE: Record<MotionIntensity, number> = { off: 0, low: 0.6, normal: 1, high: 1.25 };
+export type MotionIntensity = 'low' | 'normal' | 'high';
+export const MOTION_SCALE: Record<MotionIntensity, number> = { low: 0.6, normal: 1, high: 1.25 };
 
 const config: Required<ComponentsConfig> = { injectStyles: true, reducedMotion: 'user', motionIntensity: 'normal', motionSensitivity: 'full' };
 
 /** Change global component settings (call before `define*()` for `injectStyles`). */
 export function configureComponents(options: ComponentsConfig): void {
-  if (!quiet) {
-    // 4.9: removed in 5.0 (see docs/upgrading-5.md, `npx usa-codemod-5`)
-    if (options.motionIntensity === 'off')
-      deprecate('intensity-off', "motionIntensity: 'off' is deprecated and will be removed in 5.0 — use motionSensitivity: 'minimal' (setMotionSensitivity('minimal')) instead.");
-    if (options.reducedMotion === 'no-preference')
-      deprecate('reduced-no-preference', "reducedMotion: 'no-preference' is deprecated and will be removed in 5.0 — the OS setting is always respected; use 'user' (default) or 'reduce'.");
-  }
+  options = { ...options };
+  // 5.0: removed values are ignored (see docs/upgrading-5.md)
+  if (options.motionIntensity && !(options.motionIntensity in MOTION_SCALE)) delete options.motionIntensity;
+  if (options.reducedMotion && options.reducedMotion !== 'reduce') options.reducedMotion = 'user';
   Object.assign(config, options);
   if (options.motionIntensity && typeof document !== 'undefined') {
     document.documentElement.style.setProperty('--usa-motion', String(MOTION_SCALE[options.motionIntensity] ?? 1));
@@ -119,8 +116,8 @@ export const canDefine = (): boolean => typeof customElements !== 'undefined' &&
 
 /** `true` when animations should be reduced (OS setting or `configureComponents`). */
 export function prefersReducedMotion(): boolean {
-  if (config.motionIntensity === 'off' || config.motionSensitivity === 'minimal' || config.motionSensitivity === 'static') return true;
-  if (config.reducedMotion !== 'user') return config.reducedMotion === 'reduce';
+  if (config.motionSensitivity === 'minimal' || config.motionSensitivity === 'static') return true;
+  if (config.reducedMotion === 'reduce') return true;
   return typeof matchMedia === 'function' && !!matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
@@ -296,30 +293,7 @@ export function getBase(): BaseCtor {
 
     /** `el.animate()` that returns `null` (and applies the last frame) without WAAPI. */
     motion(el: Element, keyframes: Keyframe[], options: KeyframeAnimationOptions): Animation | null {
-      if (typeof (el as HTMLElement).animate !== 'function' || config.motionSensitivity === 'static') {
-        applyFrame(el as HTMLElement, keyframes[keyframes.length - 1]);
-        return null;
-      }
-      keyframes = adaptKeyframes(keyframes);
-      if (active >= maxActive) {
-        applyFrame(el as HTMLElement, keyframes[keyframes.length - 1]);
-        return null;
-      }
-      const k = motionScale();
-      if (k !== 1 && k > 0 && typeof options.duration === 'number') options = { ...options, duration: options.duration * k, delay: (options.delay || 0) * k };
-      const a = (el as HTMLElement).animate(keyframes, options);
-      if (options.iterations !== Infinity) {
-        active++;
-        let done = false;
-        const end = () => {
-          if (!done) {
-            done = true;
-            active--;
-          }
-        };
-        a?.finished?.then(end, end);
-      }
-      return a;
+      return animateWithMotion(el, keyframes, options);
     }
 
     emit(type: string, detail?: unknown): boolean {
@@ -328,6 +302,39 @@ export function getBase(): BaseCtor {
   }
   baseClass = Base as unknown as BaseCtor;
   return baseClass;
+}
+
+/**
+ * `el.animate()` with the library's motion rules (5.0, shared by elements and
+ * registered effects): motion sensitivity (keyframes adapted, `static` →
+ * final frame), intensity (duration scale) and the animation budget. Returns
+ * `null` (final frame applied) when nothing should animate.
+ */
+export function animateWithMotion(el: Element, keyframes: Keyframe[], options: KeyframeAnimationOptions): Animation | null {
+  if (typeof (el as HTMLElement).animate !== 'function' || config.motionSensitivity === 'static') {
+    applyFrame(el as HTMLElement, keyframes[keyframes.length - 1]);
+    return null;
+  }
+  keyframes = adaptKeyframes(keyframes);
+  if (active >= maxActive) {
+    applyFrame(el as HTMLElement, keyframes[keyframes.length - 1]);
+    return null;
+  }
+  const k = motionScale();
+  if (k !== 1 && k > 0 && typeof options.duration === 'number') options = { ...options, duration: options.duration * k, delay: (options.delay || 0) * k };
+  const a = (el as HTMLElement).animate(keyframes, options);
+  if (options.iterations !== Infinity) {
+    active++;
+    let done = false;
+    const end = () => {
+      if (!done) {
+        done = true;
+        active--;
+      }
+    };
+    a?.finished?.then(end, end);
+  }
+  return a;
 }
 
 /** Write a keyframe's properties as inline styles (no-WAAPI fallback). */

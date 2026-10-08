@@ -13,8 +13,6 @@ export { viewTransition, flip } from './helpers';
 export type { ViewTransitionOptions, FlipOptions } from './helpers';
 export type { DialogVariant } from './dialog';
 export type { UsaDialogElement, UsaAccordionElement, UsaViewSwitchElement };
-export { configureComponents, prefersReducedMotion } from '../base';
-export type { ComponentsConfig, UsaElement } from '../base';
 
 /** Register every component of this category under its default tag. */
 export function defineTransitionComponents(): void {

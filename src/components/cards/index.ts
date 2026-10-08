@@ -14,8 +14,6 @@ export { defineCard, defineCardStack, defineStickyStack, defineCarousel3d };
 export { CARD_EFFECTS } from './card';
 export type { CardEffect } from './card';
 export type { UsaCardElement, UsaCardStackElement, UsaStickyStackElement, UsaCarousel3dElement };
-export { configureComponents, prefersReducedMotion } from '../base';
-export type { ComponentsConfig, UsaElement } from '../base';
 
 /** Register every component of this category under its default tag. */
 export function defineCardComponents(): void {

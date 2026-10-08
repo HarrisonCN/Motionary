@@ -16,15 +16,15 @@ interface ComponentsConfig {
     injectStyles?: boolean;
     /**
      * `'user'` (default) follows `prefers-reduced-motion`; `'reduce'` always
-     * uses the reduced variants (e.g. a kiosk / battery-saver mode);
-     * `'no-preference'` ignores the OS setting (only for demos — respect your users).
+     * uses the reduced variants (e.g. a kiosk / battery-saver mode). 5.0: the
+     * OS setting can no longer be ignored (`'no-preference'` was removed).
      */
-    reducedMotion?: 'user' | 'reduce' | 'no-preference';
+    reducedMotion?: 'user' | 'reduce';
     /**
-     * Global motion intensity (v2.7): `'off'` (same as reduced motion),
-     * `'low'` (shorter, calmer), `'normal'` (default) or `'high'`. Scales every
-     * component animation's duration and sets `--usa-motion` (0 / 0.6 / 1 /
-     * 1.25) on `<html>` for your own CSS. See `setMotionIntensity()`.
+     * Global motion intensity (v2.7): `'low'` (shorter, calmer), `'normal'`
+     * (default) or `'high'`. Scales every component animation's duration and
+     * sets `--usa-motion` (0.6 / 1 / 1.25) on `<html>` for your own CSS. 5.0:
+     * `'off'` was removed — use `motionSensitivity: 'minimal'`.
      */
     motionIntensity?: MotionIntensity;
     /**
@@ -39,7 +39,7 @@ interface ComponentsConfig {
 }
 type MotionSensitivity = 'full' | 'gentle' | 'minimal' | 'static';
 declare const MOTION_SENSITIVITY_LEVELS: readonly MotionSensitivity[];
-type MotionIntensity = 'off' | 'low' | 'normal' | 'high';
+type MotionIntensity = 'low' | 'normal' | 'high';
 declare const MOTION_SCALE: Record<MotionIntensity, number>;
 /** Change global component settings (call before `define*()` for `injectStyles`). */
 declare function configureComponents(options: ComponentsConfig): void;
@@ -51,10 +51,15 @@ declare function getMotionSensitivity(): MotionSensitivity;
  * just the final frame. `full` returns them unchanged.
  */
 declare function adaptKeyframes(frames: Keyframe[], level?: MotionSensitivity): Keyframe[];
+/** Run `fn` without 4.9 deprecation warnings (library-internal calls). */
+declare function withoutDeprecations<T>(fn: () => T): T;
 /** The current global motion intensity. */
 declare function getMotionIntensity(): MotionIntensity;
+/** Duration multiplier for the current intensity (1 when `normal`). */
+declare function motionScale(): number;
 /** `true` when animations should be reduced (OS setting or `configureComponents`). */
 declare function prefersReducedMotion(): boolean;
+type Cleanup$1 = () => void;
 /**
  * Members shared by every `<usa-*>` element. Attribute helpers, a cleanup
  * bag that is emptied on disconnect, and motion helpers that degrade to the
@@ -64,6 +69,13 @@ interface UsaElement extends HTMLElement {
     /** `true` while reduced motion applies to this element. */
     readonly reduced: boolean;
 }
+/**
+ * `el.animate()` with the library's motion rules (5.0, shared by elements and
+ * registered effects): motion sensitivity (keyframes adapted, `static` →
+ * final frame), intensity (duration scale) and the animation budget. Returns
+ * `null` (final frame applied) when nothing should animate.
+ */
+declare function animateWithMotion(el: Element, keyframes: Keyframe[], options: KeyframeAnimationOptions): Animation | null;
 /** Run `fn(time, dt)` every frame on the shared scheduler until the returned function is called. */
 declare function onFrame(fn: (t: number, dt: number) => void): () => void;
 /** Scheduler counters: frames flushed, callbacks run, peak callbacks in one frame, pending now. */
@@ -1857,14 +1869,21 @@ interface UsaAutoSkeletonElement extends UsaElement {
 }
 declare function defineAutoSkeleton(tag?: string): CustomElementConstructor | undefined;
 
+/** The switch's levels: Off (motion sensitivity `minimal`) + the three intensities. */
+type MotionSwitchLevel = 'off' | MotionIntensity;
 /**
  * Set the global motion intensity for every `<usa-*>` component:
- * `'off'` (like reduced motion), `'low'`, `'normal'` (default), `'high'`.
- * Sets `--usa-motion` and `data-usa-motion` on `<html>`; with `persist`
- * the choice is remembered (localStorage) and restored by `restoreMotionIntensity()`.
+ * `'low'`, `'normal'` (default), `'high'`. Sets `--usa-motion` and
+ * `data-usa-motion` on `<html>`; with `persist` the choice is remembered
+ * (localStorage) and restored by `restoreMotionIntensity()`.
+ * 5.0: `'off'` was removed — use `setMotionSensitivity('minimal')`.
  */
 declare function setMotionIntensity(level: MotionIntensity, persist?: boolean): void;
-/** Re-apply a persisted intensity (call early on page load). Returns it. */
+/** Apply a switch level: `'off'` = motion sensitivity `minimal`, otherwise full motion at that intensity. */
+declare function setMotionLevel(level: MotionSwitchLevel, persist?: boolean): void;
+/** The current switch level. */
+declare function getMotionLevel(): MotionSwitchLevel;
+/** Re-apply a persisted level (call early on page load). Returns the active intensity. */
 declare function restoreMotionIntensity(): MotionIntensity;
 /**
  * `<usa-motion-switch>` — a segmented control letting users choose the
@@ -1873,7 +1892,7 @@ declare function restoreMotionIntensity(): MotionIntensity;
  * `label` ("Motion"). Events: `usa:change` (`{ level }`).
  */
 interface UsaMotionSwitchElement extends UsaElement {
-    value: MotionIntensity;
+    value: MotionSwitchLevel;
 }
 declare function defineMotionSwitch(tag?: string): CustomElementConstructor | undefined;
 
@@ -1975,8 +1994,8 @@ declare global {
  * (progress follows scroll instead of playing), `overlap` (ms each step
  * overlaps the previous, default 0), `duration` (600), `stagger` (ms),
  * `repeat` (replay every time it enters the viewport). 4.1: `scrub` runs on native
- * ScrollTimeline / ViewTimeline when supported (`data-native` is set); `scrub="js"`,
- * `scrub="scroll"` and `smooth` tune it. Methods: `play()`,
+ * ScrollTimeline / ViewTimeline when supported (`data-native` is set); `scrub="scroll"`
+ * and `smooth` tune it (5.0: `scrub="js"` removed — the JS engine is automatic). Methods: `play()`,
  * `reverse()`, `seek(t)`; property `timeline`. Event `usa:complete`.
  * Reduced motion: steps appear in their final state.
  */
@@ -2660,6 +2679,7 @@ declare const COMPONENT_CATEGORIES: {
     readonly depth: readonly ["usa-cube", "usa-depth"];
     readonly layout: readonly ["usa-auto-animate", "usa-masonry"];
     readonly packs: readonly ["usa-pack"];
+    readonly fx: readonly ["usa-fx"];
 };
 type ComponentCategory = keyof typeof COMPONENT_CATEGORIES;
 
@@ -2872,10 +2892,110 @@ declare function connectNativeShell(options?: NativeShellOptions): {
 };
 
 /**
+ * `<usa-fx effect="pop" trigger="click">` — plays any registered effect
+ * (`registerEffect()`) on its first element child (or itself with `self`).
+ * `trigger`: `click` (default) · `hover` · `enter` · `load` · `loop` · `manual`;
+ * `options` (JSON) is passed to the effect; `once`. Method `play()`.
+ */
+interface UsaFxElement extends UsaElement {
+    readonly target: HTMLElement;
+    play(): Promise<void>;
+}
+declare function defineFx(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * 5.0 — unified plugin-style effect registration. Every effect (built-in or
+ * yours) is a plain object registered once and played the same way:
+ * `playEffect(el, name)`, `bindEffect(el, name, { trigger })` or
+ * `<usa-fx effect="name" trigger="click">`. Effects get a context that
+ * already applies reduced motion, motion sensitivity, intensity and the
+ * animation budget.
+ */
+
+declare const EFFECT_KINDS: readonly ["enter", "exit", "attention", "click", "hover", "card", "loop", "page", "background", "text", "cursor", "scroll"];
+type EffectKind = (typeof EFFECT_KINDS)[number];
+declare const EFFECT_TRIGGERS: readonly ["click", "hover", "enter", "load", "loop", "manual"];
+type EffectTrigger = (typeof EFFECT_TRIGGERS)[number];
+interface EffectContext {
+    /** Reduced motion applies (OS setting, `minimal` / `static` sensitivity). */
+    readonly reduced: boolean;
+    readonly sensitivity: MotionSensitivity;
+    /** The triggering event (pointer position for click effects), if any. */
+    readonly event?: Event;
+    /** `el.animate()` with the library's motion rules (may return `null`). */
+    animate(el: Element, keyframes: Keyframe[], options: KeyframeAnimationOptions): Animation | null;
+    /** Register teardown for long-running effects (loops, listeners). */
+    onCleanup(fn: Cleanup$1): void;
+}
+interface EffectDefinition<O extends Record<string, unknown> = Record<string, any>> {
+    /** Unique, kebab-case. */
+    name: string;
+    kind: EffectKind;
+    /** One line for docs and the gallery. */
+    description?: string;
+    /** Option defaults (merged under the caller's options). */
+    defaults?: Partial<O>;
+    /**
+     * Under reduced motion: `'skip'` (do nothing — default for loop, background
+     * and cursor effects) or `'run'` (run with `ctx.reduced === true`, the
+     * effect degrades itself — default for everything else).
+     */
+    reduced?: 'skip' | 'run';
+    /** Play the effect. Return an Animation / Promise to be awaited, or a cleanup. */
+    run(el: HTMLElement, options: O, ctx: EffectContext): void | Cleanup$1 | Animation | null | Promise<unknown>;
+}
+/** Register an effect (throws on a duplicate name unless `override`). Returns an unregister function. */
+declare function registerEffect<O extends Record<string, unknown>>(def: EffectDefinition<O>, opts?: {
+    override?: boolean;
+}): () => void;
+/** Register several effects at once (already-registered names are skipped). */
+declare function registerEffects(defs: EffectDefinition<any>[]): void;
+declare const getEffect: (name: string) => EffectDefinition | undefined;
+declare const hasEffect: (name: string) => boolean;
+/** Registered effects (optionally of one kind), sorted by name. */
+declare function listEffects(kind?: EffectKind): EffectDefinition[];
+/**
+ * Play a registered effect once on `el`. Resolves when it finishes (or
+ * immediately for fire-and-forget effects). Unknown names reject.
+ */
+declare function playEffect(el: HTMLElement, name: string, options?: Record<string, unknown>, event?: Event): Promise<void>;
+/**
+ * Bind an effect to a trigger on `el`: `click`, `hover` (pointerenter / focus),
+ * `enter` (scrolls into view; `once` by default), `load` (now), `loop`
+ * (starts now, cleanup stops it) or `manual` (nothing). Returns an unbind.
+ */
+declare function bindEffect(el: HTMLElement, name: string, options?: Record<string, unknown> & {
+    trigger?: EffectTrigger;
+    once?: boolean;
+}): Cleanup$1;
+
+/** Every built-in 5.0 effect definition. */
+declare const BUILTIN_EFFECTS: EffectDefinition[];
+
+/**
+ * use-scroll-animate/components/fx — unified plugin-style effects (5.0).
+ * `registerEffect({ name, kind, run })`, `playEffect(el, name)`,
+ * `bindEffect(el, name, { trigger })`, `<usa-fx effect trigger>`. Built-ins:
+ * every timeline preset (`enter`), `pulse` · `pop` · `jelly` · `wiggle` ·
+ * `heartbeat` · `bounce` · `flash` · `tada` · `shake` (attention),
+ * `burst` · `confetti` · `ripple` (click). More packs: `use-scroll-animate/components/effects`.
+ */
+
+/** Register the built-in effects (idempotent; `defineFxComponents()` calls it). */
+declare function registerBuiltinEffects(): void;
+/** Register every component of this category under its default tag (+ the built-in effects). */
+declare function defineFxComponents(): void;
+declare global {
+    interface HTMLElementTagNameMap {
+        'usa-fx': UsaFxElement;
+    }
+}
+
+/**
  * Register every `<usa-*>` component (or only the given categories).
  * Safe to call more than once and on the server (no-op without DOM).
  */
 declare function defineComponents(categories?: ComponentCategory[]): void;
 
-export { ALL_TAGS, AMBIENT_EFFECTS, ANIM_ICONS, BRIDGE_PROTOCOL_VERSION, BUTTON_DEFORMS, CARD_EFFECTS, CLICK_EFFECTS, COMPONENT_CATEGORIES, CURSOR_MODES, GL_FALLBACKS, JOINING_SCRIPT, LIVE_REGION_IDS, MASK_SHAPES, MORPH_ICONS, MOTION_SCALE, MOTION_SENSITIVITY, MOTION_SENSITIVITY_LEVELS, MOTION_TOKENS, PACKS, PACK_PRIMITIVES, PAGE_EFFECTS, PARTICLE_PRESETS, POST_EFFECTS, REVEAL_EFFECTS, SENSITIVITY_CSS, SHADERS, SPINNER_VARIANTS, SPRING_EFFECTS, SPRING_PRESETS, STATIC_ALTERNATIVES, TIMELINE_PRESETS, VARIANTS, activeAnimations, adaptKeyframes, adoptVariants, animationBudget, announce, applyMotionTokens, applyNativeSettings, applyPack, auditMotionA11y, autoAnimate, autoDegrade, baselineReport, burst, categoryOf, confetti, configureComponents, connectNativeShell, countUp, createSpring, defineAccordion, defineAcrylic, defineAmbient, defineAnimIcon, defineAurora, defineAutoAnimate, defineAutoSkeleton, defineAvatarStack, defineBackToTop, defineBackgroundComponents, defineBadge, defineBlobs, defineBottomSheet, defineButton, defineCard, defineCardComponents, defineCardStack, defineCarousel3d, defineCheck, defineCheckbox, defineClick, defineClickComponents, defineComponents, defineCounter, defineCube, defineCursor, defineDepth, defineDepthComponents, defineDialog, defineDistort, defineDotNetwork, defineDoubleTap, defineDraggable, defineDraw, defineDrawer, defineFab, defineFeedbackComponents, defineFullpage, defineGestureComponents, defineGlitch, defineGradientText, defineGrain, defineGridGlow, defineHandwriting, defineHold, defineIconMorph, defineInteractionComponents, defineLayoutComponents, defineLike, defineLiquid, defineLoadingBar, defineMagnetic, defineMarquee, defineMaskReveal, defineMasonry, defineMorph, defineMotionSwitch, defineNavbar, defineOverscroll, definePack, definePacksComponents, definePageComponents, defineParticles, definePhysicsComponents, definePinchZoom, definePopover, definePostFx, definePress, defineProgress, definePullRefresh, defineRating, defineReveal, defineRevealComponents, defineRipple, defineScramble, defineScrollHighlight, defineScrollProgress, defineScrolly, defineShader, defineShimmerText, defineSkeleton, defineSlider, defineSpinner, defineSplash, defineSplitText, defineSpotlight, defineSpring, defineStagger, defineStickyStack, defineSvgComponents, defineSwipeable, defineTabs, defineTextComponents, defineTextRotate, defineTilt, defineTimeline, defineTimelineComponents, defineToaster, defineToggle, defineTooltip, defineTransitionComponents, defineTypewriter, defineUiComponents, defineViewSwitch, defineWaterRipple, defineWaveText, defineWebglComponents, detectNativeHost, deviceTilt, drawLines, easeOutExpo, enableMpaTransitions, flip, flipFrames, fluentPreset, flyToCart, fragmentSource, gesture, getMotionIntensity, getMotionSensitivity, getMotionTokens, glFallbackCss, glGovernor, glQuad, graphemes, haptic, importMotionTokens, interpolatePath, linearEasing, liveRegion, loadCategoryStyles, loadedStyles, loadingBar, masonryLayout, mergeMotionTokens, morphPath, morphTo, motionAllowed, motionToken, motionTokensToCss, motionTokensToJSON, motionTokensToVars, motionVar, onDemandStyles, onFrame, orientationToTilt, pageTransition, parseDuration, parseEasing, parseNativeSettings, pathsCompatible, pinchScale, postFxShader, postToNative, prefersReducedMotion, projectInertia, readScrollProgress, requestOrientationPermission, resolveDurationToken, resolveEasingToken, resolvePosition, resolveSpring, restoreMotionIntensity, restoreMotionSensitivity, revealKeyframes, rubberBand, schedulerStats, scrambleFrame, scrollToTarget, setAnimationBudget, setMotionIntensity, setMotionSensitivity, setVariant, shake, sharedTransition, smoothScroll, snapTo, splitOrder, splitText, splitTimeline, words as splitWords, spring, springEasing, springEffectKeyframes, springSamples, staticAlternative, stepSpring, supportsLinearEasing, supportsNativeScrub, supportsOrientation, supportsViewTransitions, supportsWebGL, swipeDirection, themeTransition, timeline, toast, viewTransition, warnBaseline, watchPowerSaver };
-export type { A11yIssue, AmbientEffect, AutoAnimateOptions, AutoDegradeOptions, BaselineFeature, BurstOptions, ButtonDeform, ButtonShape, ButtonState, CardEffect, ClickEffect, ComponentCategory, ComponentsConfig, ConfettiOptions, CursorMode, DeepPartialTokens, DegradeState, DialogVariant, FlipOptions, FluentPresetOptions, GLGovernor, GLGovernorOptions, GLQuad, GestureHandlers, GestureOptions, MorphOptions, MotionIntensity, MotionSensitivity, MotionTokenGroup, MotionTokens, NativeHost, NativeSettings, NativeShellOptions, NativeTheme, PackContext, PackName, PageEffect, PageTransitionOptions, PanState, ParticlePreset, PinchState, Placement, Politeness, PostEffect, PressState, RevealEffect, ScrubHandle, ScrubOptions, SharedOptions, SmoothScrollOptions, SpinnerVariant, SplitBy, SplitFrom, SplitResult, SplitTextOptions, SplitTimelineOptions, SpringConfig, SpringEffect, SpringInput, SpringPreset, SpringToken, SpringValue, SpringValueOptions, SwipeDirection, SwipeState, TiltReading, Timeline, TimelineOptions, TimelinePosition, TimelineStepOptions, ToastHandle, ToastOptions, ToastType, UsaAccordionElement, UsaAcrylicElement, UsaAmbientElement, UsaAnimIconElement, UsaAuroraElement, UsaAutoAnimateElement, UsaAutoSkeletonElement, UsaAvatarStackElement, UsaBackToTopElement, UsaBadgeElement, UsaBlobsElement, UsaBottomSheetElement, UsaButtonElement, UsaCardElement, UsaCardStackElement, UsaCarousel3dElement, UsaCheckElement, UsaCheckboxElement, UsaClickElement, UsaCounterElement, UsaCubeElement, UsaCursorElement, UsaDepthElement, UsaDialogElement, UsaDotNetworkElement, UsaDoubleTapElement, UsaDraggableElement, UsaDrawElement, UsaDrawerElement, UsaElement, UsaFabElement, UsaFullpageElement, UsaGLElement, UsaGlitchElement, UsaGradientTextElement, UsaGrainElement, UsaGridGlowElement, UsaHandwritingElement, UsaHoldElement, UsaIconMorphElement, UsaLikeElement, UsaLoadingBarElement, UsaMagneticElement, UsaMarqueeElement, UsaMaskRevealElement, UsaMasonryElement, UsaMorphElement, UsaMotionSwitchElement, UsaNavbarElement, UsaOverscrollElement, UsaPackElement, UsaParticlesElement, UsaPinchZoomElement, UsaPopoverElement, UsaPressElement, UsaProgressElement, UsaPullRefreshElement, UsaRatingElement, UsaRevealElement, UsaRippleElement, UsaScrambleElement, UsaScrollHighlightElement, UsaScrollProgressElement, UsaScrollyElement, UsaShimmerTextElement, UsaSkeletonElement, UsaSliderElement, UsaSpinnerElement, UsaSplashElement, UsaSplitTextElement, UsaSpotlightElement, UsaSpringElement, UsaStaggerElement, UsaStickyStackElement, UsaSwipeableElement, UsaTabsElement, UsaTextRotateElement, UsaTiltElement, UsaTimelineElement, UsaToasterElement, UsaToggleElement, UsaTooltipElement, UsaTypewriterElement, UsaViewSwitchElement, UsaWaterRippleElement, UsaWaveTextElement, Variant, ViewTransitionOptions };
+export { ALL_TAGS, AMBIENT_EFFECTS, ANIM_ICONS, BRIDGE_PROTOCOL_VERSION, BUILTIN_EFFECTS, BUTTON_DEFORMS, CARD_EFFECTS, CLICK_EFFECTS, COMPONENT_CATEGORIES, CURSOR_MODES, EFFECT_KINDS, EFFECT_TRIGGERS, GL_FALLBACKS, JOINING_SCRIPT, LIVE_REGION_IDS, MASK_SHAPES, MORPH_ICONS, MOTION_SCALE, MOTION_SENSITIVITY, MOTION_SENSITIVITY_LEVELS, MOTION_TOKENS, PACKS, PACK_PRIMITIVES, PAGE_EFFECTS, PARTICLE_PRESETS, POST_EFFECTS, REVEAL_EFFECTS, SENSITIVITY_CSS, SHADERS, SPINNER_VARIANTS, SPRING_EFFECTS, SPRING_PRESETS, STATIC_ALTERNATIVES, TIMELINE_PRESETS, VARIANTS, activeAnimations, adaptKeyframes, adoptVariants, animateWithMotion, animationBudget, announce, applyMotionTokens, applyNativeSettings, applyPack, auditMotionA11y, autoAnimate, autoDegrade, baselineReport, bindEffect, burst, categoryOf, confetti, configureComponents, connectNativeShell, countUp, createSpring, defineAccordion, defineAcrylic, defineAmbient, defineAnimIcon, defineAurora, defineAutoAnimate, defineAutoSkeleton, defineAvatarStack, defineBackToTop, defineBackgroundComponents, defineBadge, defineBlobs, defineBottomSheet, defineButton, defineCard, defineCardComponents, defineCardStack, defineCarousel3d, defineCheck, defineCheckbox, defineClick, defineClickComponents, defineComponents, defineCounter, defineCube, defineCursor, defineDepth, defineDepthComponents, defineDialog, defineDistort, defineDotNetwork, defineDoubleTap, defineDraggable, defineDraw, defineDrawer, defineFab, defineFeedbackComponents, defineFullpage, defineFx, defineFxComponents, defineGestureComponents, defineGlitch, defineGradientText, defineGrain, defineGridGlow, defineHandwriting, defineHold, defineIconMorph, defineInteractionComponents, defineLayoutComponents, defineLike, defineLiquid, defineLoadingBar, defineMagnetic, defineMarquee, defineMaskReveal, defineMasonry, defineMorph, defineMotionSwitch, defineNavbar, defineOverscroll, definePack, definePacksComponents, definePageComponents, defineParticles, definePhysicsComponents, definePinchZoom, definePopover, definePostFx, definePress, defineProgress, definePullRefresh, defineRating, defineReveal, defineRevealComponents, defineRipple, defineScramble, defineScrollHighlight, defineScrollProgress, defineScrolly, defineShader, defineShimmerText, defineSkeleton, defineSlider, defineSpinner, defineSplash, defineSplitText, defineSpotlight, defineSpring, defineStagger, defineStickyStack, defineSvgComponents, defineSwipeable, defineTabs, defineTextComponents, defineTextRotate, defineTilt, defineTimeline, defineTimelineComponents, defineToaster, defineToggle, defineTooltip, defineTransitionComponents, defineTypewriter, defineUiComponents, defineViewSwitch, defineWaterRipple, defineWaveText, defineWebglComponents, detectNativeHost, deviceTilt, drawLines, easeOutExpo, enableMpaTransitions, flip, flipFrames, fluentPreset, flyToCart, fragmentSource, gesture, getEffect, getMotionIntensity, getMotionLevel, getMotionSensitivity, getMotionTokens, glFallbackCss, glGovernor, glQuad, graphemes, haptic, hasEffect, importMotionTokens, interpolatePath, linearEasing, listEffects, liveRegion, loadCategoryStyles, loadedStyles, loadingBar, masonryLayout, mergeMotionTokens, morphPath, morphTo, motionAllowed, motionScale, motionToken, motionTokensToCss, motionTokensToJSON, motionTokensToVars, motionVar, onDemandStyles, onFrame, orientationToTilt, pageTransition, parseDuration, parseEasing, parseNativeSettings, pathsCompatible, pinchScale, playEffect, postFxShader, postToNative, prefersReducedMotion, projectInertia, readScrollProgress, registerBuiltinEffects, registerEffect, registerEffects, requestOrientationPermission, resolveDurationToken, resolveEasingToken, resolvePosition, resolveSpring, restoreMotionIntensity, restoreMotionSensitivity, revealKeyframes, rubberBand, schedulerStats, scrambleFrame, scrollToTarget, setAnimationBudget, setMotionIntensity, setMotionLevel, setMotionSensitivity, setVariant, shake, sharedTransition, smoothScroll, snapTo, splitOrder, splitText, splitTimeline, words as splitWords, spring, springEasing, springEffectKeyframes, springSamples, staticAlternative, stepSpring, supportsLinearEasing, supportsNativeScrub, supportsOrientation, supportsViewTransitions, supportsWebGL, swipeDirection, themeTransition, timeline, toast, viewTransition, warnBaseline, watchPowerSaver, withoutDeprecations };
+export type { A11yIssue, AmbientEffect, AutoAnimateOptions, AutoDegradeOptions, BaselineFeature, BurstOptions, ButtonDeform, ButtonShape, ButtonState, CardEffect, ClickEffect, ComponentCategory, ComponentsConfig, ConfettiOptions, CursorMode, DeepPartialTokens, DegradeState, DialogVariant, EffectContext, EffectDefinition, EffectKind, EffectTrigger, FlipOptions, FluentPresetOptions, GLGovernor, GLGovernorOptions, GLQuad, GestureHandlers, GestureOptions, MorphOptions, MotionIntensity, MotionSensitivity, MotionSwitchLevel, MotionTokenGroup, MotionTokens, NativeHost, NativeSettings, NativeShellOptions, NativeTheme, PackContext, PackName, PageEffect, PageTransitionOptions, PanState, ParticlePreset, PinchState, Placement, Politeness, PostEffect, PressState, RevealEffect, ScrubHandle, ScrubOptions, SharedOptions, SmoothScrollOptions, SpinnerVariant, SplitBy, SplitFrom, SplitResult, SplitTextOptions, SplitTimelineOptions, SpringConfig, SpringEffect, SpringInput, SpringPreset, SpringToken, SpringValue, SpringValueOptions, SwipeDirection, SwipeState, TiltReading, Timeline, TimelineOptions, TimelinePosition, TimelineStepOptions, ToastHandle, ToastOptions, ToastType, UsaAccordionElement, UsaAcrylicElement, UsaAmbientElement, UsaAnimIconElement, UsaAuroraElement, UsaAutoAnimateElement, UsaAutoSkeletonElement, UsaAvatarStackElement, UsaBackToTopElement, UsaBadgeElement, UsaBlobsElement, UsaBottomSheetElement, UsaButtonElement, UsaCardElement, UsaCardStackElement, UsaCarousel3dElement, UsaCheckElement, UsaCheckboxElement, UsaClickElement, UsaCounterElement, UsaCubeElement, UsaCursorElement, UsaDepthElement, UsaDialogElement, UsaDotNetworkElement, UsaDoubleTapElement, UsaDraggableElement, UsaDrawElement, UsaDrawerElement, UsaElement, UsaFabElement, UsaFullpageElement, UsaFxElement, UsaGLElement, UsaGlitchElement, UsaGradientTextElement, UsaGrainElement, UsaGridGlowElement, UsaHandwritingElement, UsaHoldElement, UsaIconMorphElement, UsaLikeElement, UsaLoadingBarElement, UsaMagneticElement, UsaMarqueeElement, UsaMaskRevealElement, UsaMasonryElement, UsaMorphElement, UsaMotionSwitchElement, UsaNavbarElement, UsaOverscrollElement, UsaPackElement, UsaParticlesElement, UsaPinchZoomElement, UsaPopoverElement, UsaPressElement, UsaProgressElement, UsaPullRefreshElement, UsaRatingElement, UsaRevealElement, UsaRippleElement, UsaScrambleElement, UsaScrollHighlightElement, UsaScrollProgressElement, UsaScrollyElement, UsaShimmerTextElement, UsaSkeletonElement, UsaSliderElement, UsaSpinnerElement, UsaSplashElement, UsaSplitTextElement, UsaSpotlightElement, UsaSpringElement, UsaStaggerElement, UsaStickyStackElement, UsaSwipeableElement, UsaTabsElement, UsaTextRotateElement, UsaTiltElement, UsaTimelineElement, UsaToasterElement, UsaToggleElement, UsaTooltipElement, UsaTypewriterElement, UsaViewSwitchElement, UsaWaterRippleElement, UsaWaveTextElement, Variant, ViewTransitionOptions };

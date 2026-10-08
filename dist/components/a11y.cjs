@@ -1,7 +1,7 @@
 'use strict';
 
-var base = require('../chunks/base-BvpQ4Ggj.cjs');
-var indexTags = require('../chunks/index-tags-CIRY2KnU.cjs');
+var base = require('../chunks/base-B5i8qQPR.cjs');
+var indexTags = require('../chunks/index-tags-wv0R_vkO.cjs');
 
 /**
  * 4.9 — the 5.0 modern-browser baseline. `baselineReport()` lists which
@@ -127,6 +127,7 @@ const STATIC_ALTERNATIVES = {
     depth: 'Flat, front-facing layout.',
     layout: 'Items reflow instantly.',
     packs: 'Roles are styled but not animated.',
+    fx: 'Effects are skipped or reduced to a short fade; the content is unchanged.',
 };
 /**
  * Freeze a subtree at its static alternative: finishes running animations

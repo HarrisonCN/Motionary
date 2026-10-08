@@ -1,6 +1,6 @@
-import { o as onFrame, q as setStyleLoader, e as animationBudget, g as getMotionIntensity, f as configureComponents, i as setAnimationBudget, b as activeAnimations } from '../chunks/base-DbbRUxaa.js';
-export { s as schedulerStats } from '../chunks/base-DbbRUxaa.js';
-import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-Dh8nwXqw.js';
+import { o as onFrame, t as setStyleLoader, f as animationBudget, h as getMotionIntensity, g as configureComponents, j as setAnimationBudget, b as activeAnimations } from '../chunks/base-C3Sw9sAO.js';
+export { s as schedulerStats } from '../chunks/base-C3Sw9sAO.js';
+import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-DucKMQr_.js';
 
 /**
  * use-scroll-animate/components/perf — performance toolkit (4.5).
@@ -35,8 +35,7 @@ function autoDegrade(options = {}) {
         state.reason = reason;
         if (degraded) {
             prev = { intensity: getMotionIntensity(), budget: animationBudget() };
-            if (prev.intensity !== 'off')
-                configureComponents({ motionIntensity: 'low' });
+            configureComponents({ motionIntensity: 'low' });
             setAnimationBudget(Math.max(4, Math.floor(maxActive / 2)));
         }
         else if (prev) {

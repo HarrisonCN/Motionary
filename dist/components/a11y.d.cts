@@ -29,6 +29,7 @@ declare const COMPONENT_CATEGORIES: {
     readonly depth: readonly ["usa-cube", "usa-depth"];
     readonly layout: readonly ["usa-auto-animate", "usa-masonry"];
     readonly packs: readonly ["usa-pack"];
+    readonly fx: readonly ["usa-fx"];
 };
 type ComponentCategory = keyof typeof COMPONENT_CATEGORIES;
 

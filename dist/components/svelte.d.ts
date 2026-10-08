@@ -1,4 +1,4 @@
-type MotionIntensity = 'off' | 'low' | 'normal' | 'high';
+type MotionIntensity = 'low' | 'normal' | 'high';
 /**
  * Members shared by every `<usa-*>` element. Attribute helpers, a cleanup
  * bag that is emptied on disconnect, and motion helpers that degrade to the
@@ -1322,6 +1322,8 @@ interface UsaAutoSkeletonElement extends UsaElement {
     loading: boolean;
 }
 
+/** The switch's levels: Off (motion sensitivity `minimal`) + the three intensities. */
+type MotionSwitchLevel = 'off' | MotionIntensity;
 /**
  * `<usa-motion-switch>` — a segmented control letting users choose the
  * app's motion intensity (Off · Low · Normal · High), persisted.
@@ -1329,7 +1331,7 @@ interface UsaAutoSkeletonElement extends UsaElement {
  * `label` ("Motion"). Events: `usa:change` (`{ level }`).
  */
 interface UsaMotionSwitchElement extends UsaElement {
-    value: MotionIntensity;
+    value: MotionSwitchLevel;
 }
 
 /**
@@ -1364,8 +1366,8 @@ declare global {
  * (progress follows scroll instead of playing), `overlap` (ms each step
  * overlaps the previous, default 0), `duration` (600), `stagger` (ms),
  * `repeat` (replay every time it enters the viewport). 4.1: `scrub` runs on native
- * ScrollTimeline / ViewTimeline when supported (`data-native` is set); `scrub="js"`,
- * `scrub="scroll"` and `smooth` tune it. Methods: `play()`,
+ * ScrollTimeline / ViewTimeline when supported (`data-native` is set); `scrub="scroll"`
+ * and `smooth` tune it (5.0: `scrub="js"` removed — the JS engine is automatic). Methods: `play()`,
  * `reverse()`, `seek(t)`; property `timeline`. Event `usa:complete`.
  * Reduced motion: steps appear in their final state.
  */
@@ -1650,8 +1652,35 @@ declare const COMPONENT_CATEGORIES: {
     readonly depth: readonly ["usa-cube", "usa-depth"];
     readonly layout: readonly ["usa-auto-animate", "usa-masonry"];
     readonly packs: readonly ["usa-pack"];
+    readonly fx: readonly ["usa-fx"];
 };
 type ComponentCategory = keyof typeof COMPONENT_CATEGORIES;
+
+/**
+ * `<usa-fx effect="pop" trigger="click">` — plays any registered effect
+ * (`registerEffect()`) on its first element child (or itself with `self`).
+ * `trigger`: `click` (default) · `hover` · `enter` · `load` · `loop` · `manual`;
+ * `options` (JSON) is passed to the effect; `once`. Method `play()`.
+ */
+interface UsaFxElement extends UsaElement {
+    readonly target: HTMLElement;
+    play(): Promise<void>;
+}
+
+/**
+ * use-scroll-animate/components/fx — unified plugin-style effects (5.0).
+ * `registerEffect({ name, kind, run })`, `playEffect(el, name)`,
+ * `bindEffect(el, name, { trigger })`, `<usa-fx effect trigger>`. Built-ins:
+ * every timeline preset (`enter`), `pulse` · `pop` · `jelly` · `wiggle` ·
+ * `heartbeat` · `bounce` · `flash` · `tada` · `shake` (attention),
+ * `burst` · `confetti` · `ripple` (click). More packs: `use-scroll-animate/components/effects`.
+ */
+
+declare global {
+    interface HTMLElementTagNameMap {
+        'usa-fx': UsaFxElement;
+    }
+}
 
 /**
  * Framework-neutral binding for `<usa-*>` elements (v3.8): set DOM

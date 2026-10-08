@@ -11,8 +11,6 @@ export { definePack };
 export { applyPack, flyToCart, countUp, PACKS, PACK_PRIMITIVES } from './core';
 export type { PackName, PackContext } from './core';
 export type { UsaPackElement };
-export { configureComponents, prefersReducedMotion } from '../base';
-export type { ComponentsConfig, UsaElement } from '../base';
 
 /** Register every component of this category under its default tag. */
 export function definePacksComponents(): void {

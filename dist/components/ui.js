@@ -1,8 +1,7 @@
-import { v as defineElement, j as clamp, k as caf, r as raf } from '../chunks/base-DbbRUxaa.js';
-export { f as configureComponents, p as prefersReducedMotion } from '../chunks/base-DbbRUxaa.js';
-import { d as springEasing, c as createSpring, p as projectInertia, s as snapTo, a as rubberBand } from '../chunks/spring-B6w7mVCU.js';
-import { a as adoptVariants } from '../chunks/variants-Cal4DB0E.js';
-export { V as VARIANTS, s as setVariant } from '../chunks/variants-Cal4DB0E.js';
+import { x as defineElement, k as clamp, q as caf, r as raf } from '../chunks/base-C3Sw9sAO.js';
+import { d as springEasing, c as createSpring, p as projectInertia, s as snapTo, a as rubberBand } from '../chunks/spring-CckMe3x0.js';
+import { a as adoptVariants } from '../chunks/variants-Bsevy6Xm.js';
+export { V as VARIANTS, s as setVariant } from '../chunks/variants-Bsevy6Xm.js';
 
 /** Position a fixed `floating` element next to `anchor`, flipping when it would leave the viewport. */
 function place(floating, anchor, placement = 'top', gap = 8) {

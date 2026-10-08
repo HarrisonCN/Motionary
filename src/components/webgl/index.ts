@@ -12,8 +12,6 @@ export type { ParticlePreset, PostEffect, GLGovernor, GLGovernorOptions } from '
 export { glQuad, supportsWebGL, fragmentSource, SHADERS } from './gl';
 export type { GLQuad } from './gl';
 export type { UsaGLElement };
-export { configureComponents, prefersReducedMotion } from '../base';
-export type { ComponentsConfig, UsaElement } from '../base';
 
 /** Register every component of this category under its default tag. */
 export function defineWebglComponents(): void {

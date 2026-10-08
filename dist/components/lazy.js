@@ -1,4 +1,4 @@
-import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-Dh8nwXqw.js';
+import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-DucKMQr_.js';
 
 /**
  * use-scroll-animate/components/lazy — lazy, per-category registration (v2.9).
@@ -32,6 +32,7 @@ const LOADERS = {
     depth: () => import('./depth.js'),
     layout: () => import('./layout.js'),
     packs: () => import('./packs.js'),
+    fx: () => import('./fx.js'),
 };
 const TAG_TO_CAT = new Map();
 for (const [cat, tags] of Object.entries(COMPONENT_CATEGORIES))

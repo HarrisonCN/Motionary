@@ -20,8 +20,6 @@ export { easeOutExpo } from './counter';
 export type { UsaTypewriterElement, UsaSplitTextElement, UsaScrambleElement, UsaCounterElement, UsaShimmerTextElement, UsaTextRotateElement };
 export { defineWaveText, defineGlitch, defineGradientText, defineHandwriting, defineScrollHighlight };
 export type { UsaWaveTextElement, UsaGlitchElement, UsaGradientTextElement, UsaHandwritingElement, UsaScrollHighlightElement };
-export { configureComponents, prefersReducedMotion } from '../base';
-export type { ComponentsConfig, UsaElement } from '../base';
 
 /** Register every component of this category under its default tag. */
 export function defineTextComponents(): void {

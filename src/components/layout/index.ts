@@ -10,8 +10,6 @@ export { defineAutoAnimate, defineMasonry };
 export { autoAnimate, masonryLayout, sharedTransition, flipFrames } from './core';
 export type { AutoAnimateOptions, SharedOptions } from './core';
 export type { UsaAutoAnimateElement, UsaMasonryElement };
-export { configureComponents, prefersReducedMotion } from '../base';
-export type { ComponentsConfig, UsaElement } from '../base';
 
 /** Register every component of this category under its default tag. */
 export function defineLayoutComponents(): void {

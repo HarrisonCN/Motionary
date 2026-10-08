@@ -1,8 +1,8 @@
 'use strict';
 
-var base = require('../chunks/base-BvpQ4Ggj.cjs');
-var spring = require('../chunks/spring-fFkqE9J0.cjs');
-var core = require('../chunks/core-CCAM3nKw.cjs');
+var base = require('../chunks/base-B5i8qQPR.cjs');
+var spring = require('../chunks/spring--oZh55tB.cjs');
+var core = require('../chunks/core-BjOYKSrV.cjs');
 
 var css = "usa-swipeable{display:block;touch-action:pan-y;user-select:none;-webkit-user-select:none}usa-swipeable[axis=\"y\"]{touch-action:pan-x}usa-swipeable>*{transform:translate3d(var(--usa-swipe,0px),0,0);opacity:calc(1 - var(--usa-swipe-p,0) * 0.5)}usa-swipeable[axis=\"y\"]>*{transform:translate3d(0,var(--usa-swipe,0px),0)}usa-swipeable:focus-visible{outline:2px solid currentColor;outline-offset:2px}usa-pinch-zoom{display:block;overflow:hidden;touch-action:none;position:relative}usa-pinch-zoom>*{transform:translate3d(var(--usa-zoom-x,0px),var(--usa-zoom-y,0px),0) scale(var(--usa-zoom,1));transform-origin:50% 50%}usa-pinch-zoom[data-zoomed]{cursor:grab}usa-pinch-zoom:focus-visible{outline:2px solid currentColor;outline-offset:2px}";
 
@@ -200,8 +200,6 @@ function defineGestureComponents() {
     definePinchZoom();
 }
 
-exports.configureComponents = base.configureComponents;
-exports.prefersReducedMotion = base.prefersReducedMotion;
 exports.gesture = core.gesture;
 exports.pinchScale = core.pinchScale;
 exports.swipeDirection = core.swipeDirection;

@@ -36,7 +36,7 @@ defineComponents(); // 或按分类：import { defineTextComponents } from 'use-
 
 ```html
 <!-- 或免构建直接使用 -->
-<script src="https://unpkg.com/use-scroll-animate@4/dist/components.umd.js"></script>
+<script src="https://unpkg.com/use-scroll-animate@5/dist/components.umd.js"></script>
 <usa-typewriter words="你好，Windows。|你好，Web。"></usa-typewriter>
 <usa-spinner kind="fluent"></usa-spinner>
 ```
@@ -61,6 +61,7 @@ defineComponents(); // 或按分类：import { defineTextComponents } from 'use-
 | **3D 与景深** (`/components/depth`) | `<usa-cube>` · `<usa-depth>`（指针 · 陀螺仪 · 滚动景深视差）· `deviceTilt()` ·（另见 cards 中的 `<usa-carousel-3d>`） |
 | **布局动画** (`/components/layout`) | `<usa-auto-animate>` / `autoAnimate()`（列表与网格重排）· `<usa-masonry>`（瀑布流）· `sharedTransition()`（共享元素） |
 | **效果包** (`/components/packs`) | `<usa-pack>` (`name="ecommerce \| portfolio \| dashboard \| game \| landing"`) · `applyPack()` · `flyToCart()` · `countUp()` |
+| **特效插件 API** (`/components/fx`) | `<usa-fx>`（`effect` · `trigger`）· `registerEffect()` · `playEffect()` · `bindEffect()` · 内置：全部时间线入场、pulse · pop · jelly · wiggle · heartbeat · bounce · flash · tada · shake、burst · confetti · ripple |
 
 完整包约 22 kB gzip（JS + CSS）；单个分类 3.5–6.4 kB；单个组件约 2 kB。下方的滚动动画核心不受影响。
 

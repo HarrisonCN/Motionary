@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-BvpQ4Ggj.cjs');
+var base = require('../chunks/base-B5i8qQPR.cjs');
 
 /** Minimal WebGL runner: one full-canvas quad, one fragment shader, optional image texture. */
 const VERTEX = 'attribute vec2 p;varying vec2 v_uv;void main(){v_uv=p*.5+.5;gl_Position=vec4(p,0.,1.);}';
@@ -32,7 +32,7 @@ function supportsWebGL() {
         return support;
     try {
         const c = typeof document !== 'undefined' ? document.createElement('canvas') : null;
-        support = !!(c && (c.getContext('webgl') || c.getContext('experimental-webgl')));
+        support = !!(c && (c.getContext('webgl')));
     }
     catch {
         support = false;
@@ -43,7 +43,7 @@ function supportsWebGL() {
 function glQuad(canvas, frag) {
     let gl = null;
     try {
-        gl = (canvas.getContext('webgl', { premultipliedAlpha: false, antialias: false }) || canvas.getContext('experimental-webgl'));
+        gl = (canvas.getContext('webgl', { premultipliedAlpha: false, antialias: false }));
     }
     catch {
         gl = null;
@@ -440,8 +440,6 @@ function defineWebglComponents() {
     definePostFx();
 }
 
-exports.configureComponents = base.configureComponents;
-exports.prefersReducedMotion = base.prefersReducedMotion;
 exports.GL_FALLBACKS = GL_FALLBACKS;
 exports.PARTICLE_PRESETS = PARTICLE_PRESETS;
 exports.POST_EFFECTS = POST_EFFECTS;

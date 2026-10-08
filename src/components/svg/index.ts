@@ -15,8 +15,6 @@ export type { MorphOptions } from './core';
 export { MASK_SHAPES } from './mask-reveal';
 export { ANIM_ICONS } from './anim-icon';
 export type { UsaDrawElement, UsaMorphElement, UsaMaskRevealElement, UsaAnimIconElement };
-export { configureComponents, prefersReducedMotion } from '../base';
-export type { ComponentsConfig, UsaElement } from '../base';
 
 /** Register every component of this category under its default tag. */
 export function defineSvgComponents(): void {

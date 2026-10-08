@@ -11,8 +11,6 @@ export { defineSwipeable, definePinchZoom };
 export { gesture, swipeDirection, pinchScale } from './core';
 export type { GestureHandlers, GestureOptions, PanState, SwipeState, SwipeDirection, PinchState, PressState } from './core';
 export type { UsaSwipeableElement, UsaPinchZoomElement };
-export { configureComponents, prefersReducedMotion } from '../base';
-export type { ComponentsConfig, UsaElement } from '../base';
 
 /** Register every component of this category under its default tag. */
 export function defineGestureComponents(): void {
