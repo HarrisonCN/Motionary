@@ -117,5 +117,5 @@ function bindEffect(el, name, options = {}) {
     return () => offs.splice(0).reverse().forEach((f) => f());
 }
 
-export { EFFECT_KINDS as E, EFFECT_TRIGGERS as a, bindEffect as b, registerEffects as c, getEffect as g, hasEffect as h, listEffects as l, playEffect as p, registerEffect as r };
-//# sourceMappingURL=registry-Bu5NrAyA.js.map
+export { EFFECT_KINDS, EFFECT_TRIGGERS, bindEffect, getEffect, hasEffect, listEffects, playEffect, registerEffect, registerEffects };
+//# sourceMappingURL=registry-D23neB4M.js.map

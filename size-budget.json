@@ -347,12 +347,12 @@
   {
     "name": "dist/widgets.umd.js (minified, 6.x widgets + 6.x effect packs)",
     "file": "dist/widgets.umd.js",
-    "limit": 46080
+    "limit": 53248
   },
   {
     "name": "import 'motionary/components/widgets'",
     "import": "export * from 'pkg/components/widgets';",
-    "limit": 28416
+    "limit": 32512
   },
   {
     "name": "import 'motionary/components/fx-gpu'",
@@ -362,7 +362,7 @@
   {
     "name": "import 'motionary/components/fx2' (every 6.x effect pack)",
     "import": "export * from 'pkg/components/fx2';",
-    "limit": 18432
+    "limit": 21504
   },
   {
     "name": "import 'motionary/components/fx-text'",
@@ -383,5 +383,10 @@
     "name": "import 'motionary/components/fx-morph'",
     "import": "export * from 'pkg/components/fx-morph';",
     "limit": 3840
+  },
+  {
+    "name": "import 'motionary/components/fx-transitions'",
+    "import": "export * from 'pkg/components/fx-transitions';",
+    "limit": 4608
   }
 ]

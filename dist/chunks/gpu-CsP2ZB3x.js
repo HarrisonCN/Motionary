@@ -1,4 +1,4 @@
-import { c as registerEffects } from './registry-Bu5NrAyA.js';
+import { registerEffects } from './registry-D23neB4M.js';
 import { c as canvasBackground, h as hexRgb, n as noise2 } from './generative-2LhxG5BJ.js';
 import { b as origin, s as spawn, a as all, r as rand } from './shared-CkKHWrtJ.js';
 
@@ -378,4 +378,4 @@ function registerGpuEffects() {
 }
 
 export { GPU_FX as G, GLSL_HEAD as a, supportsWebGL2 as b, fieldFallback as f, registerGpuEffects as r, shaderBackground as s };
-//# sourceMappingURL=gpu-EjV49FQk.js.map
+//# sourceMappingURL=gpu-CsP2ZB3x.js.map

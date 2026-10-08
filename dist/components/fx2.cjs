@@ -5,6 +5,7 @@ var components_fxText = require('./fx-text.cjs');
 var components_fxLight = require('./fx-light.cjs');
 var components_fx3d = require('./fx-3d.cjs');
 var components_fxMorph = require('./fx-morph.cjs');
+var components_fxTransitions = require('./fx-transitions.cjs');
 require('../chunks/registry-DehBVRDV.cjs');
 require('../chunks/base-BaQV-2ha.cjs');
 require('../chunks/generative-BHIj-NU0.cjs');
@@ -17,6 +18,7 @@ const FX2_PACKS = {
     light: components_fxLight.LIGHT_FX,
     depth: components_fx3d.DEPTH3_FX,
     morph: components_fxMorph.MORPH2_FX,
+    transitions: components_fxTransitions.TRANSITIONS2_FX,
 };
 /** Register every 6.x pack (idempotent). */
 function registerFx2() {
@@ -25,6 +27,7 @@ function registerFx2() {
     components_fxLight.registerLightEffects();
     components_fx3d.register3dEffects();
     components_fxMorph.registerMorphEffects2();
+    components_fxTransitions.registerTransitionEffects2();
 }
 
 exports.GLSL_HEAD = components_fxGpu.GLSL_HEAD;
@@ -45,6 +48,10 @@ exports.MORPH2_FX = components_fxMorph.MORPH2_FX;
 exports.pointsToPath = components_fxMorph.pointsToPath;
 exports.registerMorphEffects2 = components_fxMorph.registerMorphEffects2;
 exports.samplePath = components_fxMorph.samplePath;
+exports.TRANSITIONS2_FX = components_fxTransitions.TRANSITIONS2_FX;
+exports.crossDocumentTransitions = components_fxTransitions.crossDocumentTransitions;
+exports.pageTransition = components_fxTransitions.pageTransition;
+exports.registerTransitionEffects2 = components_fxTransitions.registerTransitionEffects2;
 exports.FX2_PACKS = FX2_PACKS;
 exports.registerFx2 = registerFx2;
 //# sourceMappingURL=fx2.cjs.map

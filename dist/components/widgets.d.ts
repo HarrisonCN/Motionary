@@ -357,6 +357,72 @@ declare const TIP_PLACEMENTS: readonly ["top", "bottom", "left", "right"];
 declare function defineTip(tag?: string): CustomElementConstructor | undefined;
 
 /**
+ * `<usa-stepper>` (6.7) — a step indicator / wizard. Each child is a step
+ * (its text is the label). `value` is the current step (0-based); finished
+ * steps pop a check mark, the connecting rail fills toward the current step
+ * and the current step pulses once. `orientation="vertical"` stacks the
+ * steps. `next()` / `prev()` / `value`; event `usa:change` (`{ value }`).
+ * The list is an ordered list with `aria-current="step"`. Reduced motion: no
+ * pop or pulse, the rail jumps.
+ */
+interface UsaStepperElement extends UsaElement {
+    value: number;
+    readonly steps: HTMLElement[];
+    next(): void;
+    prev(): void;
+}
+declare function defineStepper(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-pagination>` (6.7) — page buttons with a sliding "ink" that springs
+ * to the current page (squashing as it travels) and numbers that slide in
+ * from the direction of travel when the window of pages shifts. Attributes
+ * `total`, `page` (1-based), `siblings` (pages each side, 1). Prev / next
+ * buttons, ellipses, `aria-current="page"`; event `usa:change` (`{ page }`).
+ * Reduced motion: the ink jumps and numbers do not slide.
+ */
+interface UsaPaginationElement extends UsaElement {
+    page: number;
+    readonly total: number;
+}
+/** The visible page list: numbers and `'…'` gaps (1-based). */
+declare function pageWindow(page: number, total: number, siblings?: number): (number | '…')[];
+declare function definePagination(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-segmented>` (6.7) — a segmented control (iOS style): a thumb slides
+ * under the chosen segment with a spring and stretches while it travels;
+ * the chosen label scales up slightly. Children are the segments (buttons
+ * or any element). It is a radio group (`role="radiogroup"`, arrow keys,
+ * Home / End, roving tabindex). `value` is the selected index; `usa:change`
+ * (`{ value, label }`). `variant="ios | pill | outline"`. Reduced motion:
+ * the thumb jumps.
+ */
+interface UsaSegmentedElement extends UsaElement {
+    value: number;
+    readonly segments: HTMLElement[];
+}
+declare const SEGMENTED_VARIANTS: readonly ["ios", "pill", "outline"];
+declare function defineSegmented(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-switch>` (6.7) — toggle switch variants: `ios` (the thumb stretches
+ * while pressed and slides), `daynight` (sun → moon with stars and
+ * clouds), `bounce` (the thumb squashes and bounces at the end) and
+ * `liquid` (a gooey fill pours behind the thumb). A real switch:
+ * `role="switch"`, `aria-checked`, Space / Enter, `disabled`; `checked`
+ * property / attribute; inside a `<form>` with `name` it submits `value`
+ * ("on") when checked. Event `usa:change` (`{ checked }`). Reduced motion:
+ * no squash, bounce or pour — it just switches.
+ */
+interface UsaSwitchElement extends UsaElement {
+    checked: boolean;
+    toggle(force?: boolean): void;
+}
+declare const SWITCH_VARIANTS: readonly ["ios", "daynight", "bounce", "liquid"];
+declare function defineSwitch(tag?: string): CustomElementConstructor | undefined;
+
+/**
  * motionary/components/widgets — the 6.x animated UI widgets, in their own
  * entry so `motionary/components` and `components/lite` keep their size
  * budgets. Every widget is reduced-motion safe and keyboard accessible.
@@ -397,8 +463,12 @@ declare global {
         'usa-nav-morph': UsaNavMorphElement;
         'usa-menu-toggle': UsaMenuToggleElement;
         'usa-tip': UsaTipElement;
+        'usa-stepper': UsaStepperElement;
+        'usa-pagination': UsaPaginationElement;
+        'usa-segmented': UsaSegmentedElement;
+        'usa-switch': UsaSwitchElement;
     }
 }
 
-export { CAROUSEL_EFFECTS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PROGRESS_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WIDGETS, WIDGET_TAGS, defineCarousel, defineCompare, defineCubeGallery, defineDisclosure, defineDock, defineMasonryFlow, defineMenu, defineMenuToggle, defineMilestones, defineModal, defineNavMorph, defineOdometer, defineProgressRing, defineSheet, defineSkeletonReveal, defineStarRating, defineStories, defineTabBar, defineTip, defineToastStack, defineWidgets, stackToast };
-export type { StackToastOptions, UsaCarouselElement, UsaCompareElement, UsaCubeGalleryElement, UsaDisclosureElement, UsaDockElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMilestonesElement, UsaModalElement, UsaNavMorphElement, UsaOdometerElement, UsaProgressRingElement, UsaSheetElement, UsaSkeletonRevealElement, UsaStarRatingElement, UsaStoriesElement, UsaTabBarElement, UsaTipElement, UsaToastStackElement };
+export { CAROUSEL_EFFECTS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PROGRESS_VARIANTS, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WIDGETS, WIDGET_TAGS, defineCarousel, defineCompare, defineCubeGallery, defineDisclosure, defineDock, defineMasonryFlow, defineMenu, defineMenuToggle, defineMilestones, defineModal, defineNavMorph, defineOdometer, definePagination, defineProgressRing, defineSegmented, defineSheet, defineSkeletonReveal, defineStarRating, defineStepper, defineStories, defineSwitch, defineTabBar, defineTip, defineToastStack, defineWidgets, pageWindow, stackToast };
+export type { StackToastOptions, UsaCarouselElement, UsaCompareElement, UsaCubeGalleryElement, UsaDisclosureElement, UsaDockElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMilestonesElement, UsaModalElement, UsaNavMorphElement, UsaOdometerElement, UsaPaginationElement, UsaProgressRingElement, UsaSegmentedElement, UsaSheetElement, UsaSkeletonRevealElement, UsaStarRatingElement, UsaStepperElement, UsaStoriesElement, UsaSwitchElement, UsaTabBarElement, UsaTipElement, UsaToastStackElement };
