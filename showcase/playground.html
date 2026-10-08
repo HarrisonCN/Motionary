@@ -47,6 +47,20 @@
         <div class="pg-row"><h2 id="pg-prev-h" data-pg="preview">Preview</h2><button type="button" class="demo-link" id="pg-replay" data-pg="replay">Replay</button></div>
         <div class="pg-stage" id="pg-stage" aria-live="off"></div>
       </section>
+      <section class="pg-panel pg-tl" aria-labelledby="pg-tl-h">
+        <div class="pg-row"><h2 id="pg-tl-h" data-pg="tracks">Timeline tracks</h2><span><button type="button" class="demo-link" id="pg-add-track" data-pg="addTrack">Add track</button> <button type="button" class="demo-link" id="pg-play-tl" data-pg="playTl">Play timeline</button></span></div>
+        <div class="pg-ruler" id="pg-ruler" aria-hidden="true"></div>
+        <ol class="pg-tracks" id="pg-tracks"></ol>
+        <div class="pg-tl-stage" id="pg-tl-stage"></div>
+        <div class="pg-row pg-presets"><h3 data-pg="presets">Presets</h3>
+          <input id="pg-preset-name" type="text" maxlength="40" aria-label="Preset name" />
+          <button type="button" class="demo-link" id="pg-preset-save" data-pg="savePreset">Save</button>
+          <select id="pg-preset-list" aria-label="Saved presets"></select>
+          <button type="button" class="demo-link" id="pg-preset-del" data-pg="deletePreset">Delete</button>
+          <button type="button" class="demo-link" id="pg-preset-json" data-pg="exportJson">Copy preset JSON</button>
+          <label class="demo-link pg-file"><span data-pg="importJson">Import JSON…</span><input type="file" id="pg-preset-file" accept="application/json,.json" hidden /></label>
+        </div>
+      </section>
       <section class="pg-panel pg-code" aria-labelledby="pg-code-h">
         <div class="pg-row"><h2 id="pg-code-h" data-pg="code">Export code</h2><button type="button" class="demo-link" id="pg-share" data-pg="share">Copy share link</button></div>
         <div class="pg-tabs" role="tablist" id="pg-tabs"></div>

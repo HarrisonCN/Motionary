@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.6.0] - 2026-10-08
+
+### Added
+- **Playground 2.0** ([showcase/playground.html](https://harrisoncn.github.io/use-scroll-animate/showcase/playground.html)):
+  - **Keyframe track editor** — one lane per timeline step on a ms ruler; drag a bar to move it, drag its right edge to change duration (50 ms snapping), arrow keys (Shift = resize) for keyboard users; preset, label, start and duration fields; **Play timeline** previews it with a real `<usa-timeline>`.
+  - **Save / share presets** — named presets in localStorage, share links now carry the tracks (old links still open), portable preset JSON (`Copy preset JSON` / `Import JSON…`).
+  - **Export as `<usa-timeline>`** — new code tab with declarative markup (`data-tl`, absolute `data-at`, `data-duration`) plus the `defineTimeline()` import.
+- `showcase/playground-core.js`: `newTrack`, `normalizeTracks`, `tracksDuration`, `trackBar`, `dragTrack`, `timelineMarkup`, `listPresets` / `savePreset` / `loadPreset` / `deletePreset`, `presetToJSON` / `presetFromJSON` (pure, unit-tested).
+
 ## [4.5.0] - 2026-10-08
 
 ### Added

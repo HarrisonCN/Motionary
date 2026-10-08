@@ -64,3 +64,60 @@ describe('visual playground', () => {
     expect(readFileSync(resolve(root, 'showcase/components.html'), 'utf8')).toContain('href="./playground.html"');
   });
 });
+
+describe('playground 2.0 (4.6): keyframe tracks, presets, <usa-timeline> export', async () => {
+  // @ts-ignore - untyped .js
+  const core = await import('../showcase/playground-core.js');
+  const { TIMELINE_PRESETS } = await import('../src/components/timeline/core');
+
+  it('track presets are real timeline presets; values are clamped and ordered', () => {
+    expect(core.TRACK_PRESETS.sort()).toEqual(Object.keys(TIMELINE_PRESETS).sort());
+    expect(core.newTrack('nope', -5, 99999, 'x')).toEqual({ preset: 'fade', start: 0, duration: 3000, label: 'x' });
+    const list = core.normalizeTracks([core.newTrack('fade', 500), core.newTrack('scale', 0), core.newTrack('blur', 500)]);
+    expect(list.map((t: any) => t.preset)).toEqual(['scale', 'fade', 'blur']);
+    expect(core.tracksDuration(list)).toBe(1100);
+  });
+
+  it('drag moves / resizes with snapping; bars are laid out in %', () => {
+    const t = core.newTrack('fade-up', 200, 600);
+    expect(core.dragTrack(t, 'move', 130)).toMatchObject({ start: 350, duration: 600 });
+    expect(core.dragTrack(t, 'resize', -1000)).toMatchObject({ start: 200, duration: 100 });
+    expect(core.trackBar(t, 1000)).toEqual({ left: 20, width: 60 });
+  });
+
+  it('exports <usa-timeline> markup that the element really plays in order', async () => {
+    const html = core.timelineMarkup([core.newTrack('scale', 700, 500, 'Go'), core.newTrack('fade-up', 0, 600, 'Hi <b>')], { trigger: 'click' });
+    expect(html).toBe('<usa-timeline trigger="click">\n  <div data-tl="fade-up" data-at="0" data-duration="600">Hi &lt;b></div>\n  <div data-tl="scale" data-at="700" data-duration="500">Go</div>\n</usa-timeline>');
+    const out = core.playgroundSnippets({ ...core.DEFAULT_STATE, tracks: core.DEFAULT_TRACKS });
+    expect(out.timeline).toContain("import { defineTimeline } from 'use-scroll-animate/components/timeline';");
+    expect(out.timeline).toContain('data-tl="fade-left" data-at="300"');
+    const { timeline } = await import('../src/components/timeline/core');
+    expect(typeof timeline).toBe('function');
+  });
+
+  it('share links carry tracks; old links (no tracks) still decode', () => {
+    const s = { content: 'card', layers: [], tracks: [core.newTrack('blur', 100, 400, 'A')] };
+    expect(core.decodeState(core.encodeState(s))).toEqual(s);
+    expect(core.decodeState(core.encodeState({ content: 'card', layers: [] })).tracks).toBeUndefined();
+  });
+
+  it('saves, lists, loads, deletes and round-trips presets as JSON', () => {
+    const mem: Record<string, string> = {};
+    const storage = { getItem: (k: string) => mem[k] ?? null, setItem: (k: string, v: string) => (mem[k] = v) };
+    const s = { content: 'button', layers: [core.newLayer('usa-tilt')], tracks: core.DEFAULT_TRACKS };
+    core.savePreset('Hero', s, storage);
+    expect(Object.keys(core.listPresets(storage))).toEqual(['Hero']);
+    expect(core.loadPreset('Hero', storage)).toEqual(s);
+    expect(core.presetFromJSON(core.presetToJSON('Hero', s))).toEqual({ name: 'Hero', state: s });
+    expect(core.presetFromJSON('{"format":"other"}')).toBeNull();
+    expect(core.presetFromJSON('garbage')).toBeNull();
+    core.deletePreset('Hero', storage);
+    expect(core.listPresets(storage)).toEqual({});
+  });
+
+  it('the page has the track editor and preset controls with i18n keys', () => {
+    const html = readFileSync(resolve(root, 'showcase/playground.html'), 'utf8');
+    ['pg-tracks', 'pg-add-track', 'pg-play-tl', 'pg-preset-save', 'pg-preset-list', 'pg-preset-json', 'pg-preset-file'].forEach((id) => expect(html).toContain(`id="${id}"`));
+    for (const m of html.matchAll(/data-pg="([^"]+)"/g)) expect(core.PG_STRINGS.zh[m[1]], m[1]).toBeDefined();
+  });
+});
