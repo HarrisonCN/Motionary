@@ -32,6 +32,10 @@ import { defineStepper, type UsaStepperElement } from './stepper';
 import { definePagination, pageWindow, type UsaPaginationElement } from './pagination';
 import { defineSegmented, SEGMENTED_VARIANTS, type UsaSegmentedElement } from './segmented';
 import { defineSwitch, SWITCH_VARIANTS, type UsaSwitchElement } from './switch';
+import { defineKanban, type UsaKanbanElement } from './kanban';
+import { defineSwipeDeck, type UsaSwipeDeckElement } from './swipe-deck';
+import { defineWeatherCard, WEATHER_CONDITIONS, type UsaWeatherCardElement } from './weather-card';
+import { definePullCord, type UsaPullCordElement } from './pull-cord';
 
 export { defineCarousel, defineTabBar, defineDisclosure, defineStories, CAROUSEL_EFFECTS, TAB_INDICATORS };
 export type { UsaCarouselElement, UsaTabBarElement, UsaDisclosureElement, UsaStoriesElement };
@@ -50,6 +54,9 @@ export type { UsaDockElement, UsaNavMorphElement, UsaMenuToggleElement, UsaTipEl
 export { defineStepper, definePagination, pageWindow, defineSegmented, SEGMENTED_VARIANTS, defineSwitch, SWITCH_VARIANTS };
 export type { UsaStepperElement, UsaPaginationElement, UsaSegmentedElement, UsaSwitchElement };
 
+export { defineKanban, defineSwipeDeck, defineWeatherCard, WEATHER_CONDITIONS, definePullCord };
+export type { UsaKanbanElement, UsaSwipeDeckElement, UsaWeatherCardElement, UsaPullCordElement };
+
 /** The widgets by release (tag → define function). */
 export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElementConstructor | undefined>> = {
   '6.2': { 'usa-carousel': defineCarousel, 'usa-tab-bar': defineTabBar, 'usa-disclosure': defineDisclosure, 'usa-stories': defineStories },
@@ -58,6 +65,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '6.5': { 'usa-milestones': defineMilestones, 'usa-masonry-flow': defineMasonryFlow, 'usa-compare': defineCompare, 'usa-cube-gallery': defineCubeGallery },
   '6.6': { 'usa-dock': defineDock, 'usa-nav-morph': defineNavMorph, 'usa-menu-toggle': defineMenuToggle, 'usa-tip': defineTip },
   '6.7': { 'usa-stepper': defineStepper, 'usa-pagination': definePagination, 'usa-segmented': defineSegmented, 'usa-switch': defineSwitch },
+  '6.8': { 'usa-kanban': defineKanban, 'usa-swipe-deck': defineSwipeDeck, 'usa-weather-card': defineWeatherCard, 'usa-pull-cord': definePullCord },
 };
 
 /** Every widget tag, in release order. */
@@ -94,5 +102,9 @@ declare global {
     'usa-pagination': UsaPaginationElement;
     'usa-segmented': UsaSegmentedElement;
     'usa-switch': UsaSwitchElement;
+    'usa-kanban': UsaKanbanElement;
+    'usa-swipe-deck': UsaSwipeDeckElement;
+    'usa-weather-card': UsaWeatherCardElement;
+    'usa-pull-cord': UsaPullCordElement;
   }
 }

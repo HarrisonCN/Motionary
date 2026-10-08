@@ -1,6 +1,6 @@
 {
   "name": "motionary",
-  "version": "6.7.0",
+  "version": "6.8.0",
   "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 94 animated Web Components — 214 scroll-reveal presets, card/click/button morphs, physics, page transitions, generative & sound-reactive backgrounds, cursor/gesture effects, themes, micro-interactions, <usa-player>, WebGL. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -476,6 +476,26 @@
       "require": {
         "types": "./dist/components/fx-transitions.d.cts",
         "default": "./dist/components/fx-transitions.cjs"
+      }
+    },
+    "./components/fx-weather": {
+      "import": {
+        "types": "./dist/components/fx-weather.d.ts",
+        "default": "./dist/components/fx-weather.js"
+      },
+      "require": {
+        "types": "./dist/components/fx-weather.d.cts",
+        "default": "./dist/components/fx-weather.cjs"
+      }
+    },
+    "./components/fx-physics": {
+      "import": {
+        "types": "./dist/components/fx-physics.d.ts",
+        "default": "./dist/components/fx-physics.js"
+      },
+      "require": {
+        "types": "./dist/components/fx-physics.d.cts",
+        "default": "./dist/components/fx-physics.cjs"
       }
     },
     "./components/lite": {
