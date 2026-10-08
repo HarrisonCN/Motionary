@@ -24,16 +24,46 @@ function read(accessor) {
     const v = accessor?.();
     return (v && v !== true ? v : {});
 }
-function observe(el, options) {
-    const { instance, ...opts } = options;
-    const sa = getInstance(instance);
-    // Wait until the element is in the document (directives/refs run before insertion).
-    solidJs.onMount(() => sa.observe(el, opts));
-    solidJs.onCleanup(() => sa.unobserve(el));
+const CALLBACKS = ['onStart', 'onComplete', 'onEnter', 'onLeave', 'onProgress'];
+/** Callbacks always call the latest options' version. */
+function liveCallbacks(opts, latest) {
+    const out = { ...opts };
+    CALLBACKS.forEach((name) => {
+        if (typeof opts[name] === 'function')
+            out[name] = (...args) => latest()[name]?.(...args);
+    });
+    return out;
 }
-/** Directive: `<div use:scrollAnimate={{ animation: 'fade-in' }} />` */
+/**
+ * Directive: `<div use:scrollAnimate={{ animation: 'fade-in' }} />`.
+ * 4.0.1: the accessor is tracked — when signals it reads change, callbacks
+ * update right away and the other options are re-applied if the element has
+ * not animated yet (no manual `refresh()` needed).
+ */
 function scrollAnimate(el, accessor) {
-    observe(el, read(accessor));
+    let latest = {};
+    let mounted = false;
+    let sa = null;
+    const apply = () => {
+        const { instance, ...opts } = latest;
+        const record = sa?.getObservedElements().find((r) => r.element === el);
+        if (sa && record?.animated)
+            return; // finished: callbacks stay live
+        sa?.unobserve(el);
+        sa = getInstance(instance);
+        sa.observe(el, liveCallbacks(opts, () => latest));
+    };
+    solidJs.createRenderEffect(() => {
+        latest = read(accessor);
+        if (mounted)
+            apply();
+    });
+    // Wait until the element is in the document (directives/refs run before insertion).
+    solidJs.onMount(() => {
+        mounted = true;
+        apply();
+    });
+    solidJs.onCleanup(() => sa?.unobserve(el));
 }
 /** Directive: `<ul use:scrollStagger={{ stagger: 60, observeChildren: true }} />` */
 function scrollStagger(el, accessor) {

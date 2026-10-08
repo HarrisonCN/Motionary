@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.0.1] - 2026-10-08
+
+### Fixed
+- **`<usa-mask-reveal>` never revealed in Chromium** (trigger `view`): Chromium's IntersectionObserver honours the target's own `clip-path`, so a fully clipped element never reported as intersecting. It now waits hidden with `opacity: 0`, and the clip-path animation uses `fill: 'both'` so the closed mask also covers the `delay`.
+- **`<usa-timeline trigger="click">` was invisible until first clicked** — it now shows the finished composition and replays from the start on click, `Enter` or `Space` (focusable by default).
+- **WebGL elements (`<usa-shader>`, `<usa-distort>`, `<usa-liquid>`)** only resized their canvas on window resize; they now follow their own size with a `ResizeObserver` (grid reflow, card expand, sidebars).
+- **`<usa-handwriting>`** keeps its intrinsic size when a page has a global `svg { width: … }` icon rule.
+- **Solid:** the `use:usa` directive (`components/solid`) and the `use:scrollAnimate` directive (`/solid`) now track their accessor with `createRenderEffect` — signals update props / options / handlers without calling `refresh()`; listeners are removed on cleanup.
+- **Showcase (checked in headless Chromium at 1280 px and 390 px):** demo SVGs (line drawing, handwriting, `morphTo()`) were squashed to 20 px by the showcase's global icon rule; the pinch-zoom and mask-reveal demos used undefined CSS classes (text overflowed the tile); the header hid the Playground / Store links on phones; deep links to `#c-carousel-3d` (ids with digits) did not resolve; the playground's copy / share buttons threw an unhandled rejection when clipboard access was denied and gave no feedback; stale “v2” / “v3.0” kickers and a Chinese phrase in the English category text.
+
+### Tests
+- New `test/fixes-4-0-1.test.ts` regression suite; `<usa-mask-reveal>` and Solid adapter tests updated.
+
 ## [4.0.0] - 2026-10-07
 
 4.0 completes the 3.x release train by consolidating overlapping APIs. Every removal has a drop-in replacement that shipped during 3.x — see **[Upgrading to 4.0](./docs/upgrading-4.md)** (run your app on 3.9 first: it warns once wherever removed APIs are used).

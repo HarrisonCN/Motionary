@@ -9,7 +9,8 @@ usa-morph[role="button"] { cursor: pointer; }
 /* <usa-mask-reveal> */
 usa-mask-reveal { display: block; }
 usa-mask-reveal[data-state="visible"] { clip-path: none !important; }
+usa-mask-reveal[data-state="hidden"] { opacity: 0; }
 /* <usa-anim-icon> */
 usa-anim-icon { display: inline-flex; line-height: 0; vertical-align: middle; }
 usa-anim-icon svg { overflow: visible; }
-@media (prefers-reduced-motion: reduce) { usa-mask-reveal { clip-path: none !important; } usa-draw svg * { stroke-dashoffset: 0 !important; } }
+@media (prefers-reduced-motion: reduce) { usa-mask-reveal { clip-path: none !important; opacity: 1 !important; } usa-draw svg * { stroke-dashoffset: 0 !important; } }

@@ -75,7 +75,7 @@ function drawLines(root, o = {}) {
     };
 }
 
-var css = "usa-draw{display:inline-block}usa-draw svg :is(path,line,polyline,polygon,circle,ellipse,rect){transition:fill-opacity 0.6s ease}usa-draw[fill]:not([data-drawn]) svg :is(path,polygon,circle,ellipse,rect){fill-opacity:0}usa-morph{display:inline-block;line-height:0}usa-morph svg{width:100%;height:100%;fill:currentColor}usa-morph[role=\"button\"]{cursor:pointer}usa-mask-reveal{display:block}usa-mask-reveal[data-state=\"visible\"]{clip-path:none !important}usa-anim-icon{display:inline-flex;line-height:0;vertical-align:middle}usa-anim-icon svg{overflow:visible}@media (prefers-reduced-motion:reduce){usa-mask-reveal{clip-path:none !important}usa-draw svg *{stroke-dashoffset:0 !important}}";
+var css = "usa-draw{display:inline-block}usa-draw svg :is(path,line,polyline,polygon,circle,ellipse,rect){transition:fill-opacity 0.6s ease}usa-draw[fill]:not([data-drawn]) svg :is(path,polygon,circle,ellipse,rect){fill-opacity:0}usa-morph{display:inline-block;line-height:0}usa-morph svg{width:100%;height:100%;fill:currentColor}usa-morph[role=\"button\"]{cursor:pointer}usa-mask-reveal{display:block}usa-mask-reveal[data-state=\"visible\"]{clip-path:none !important}usa-mask-reveal[data-state=\"hidden\"]{opacity:0}usa-anim-icon{display:inline-flex;line-height:0;vertical-align:middle}usa-anim-icon svg{overflow:visible}@media (prefers-reduced-motion:reduce){usa-mask-reveal{clip-path:none !important;opacity:1 !important}usa-draw svg *{stroke-dashoffset:0 !important}}";
 
 function defineDraw(tag = 'usa-draw') {
     return defineElement(tag, (Base) => class UsaDraw extends Base {
@@ -238,7 +238,9 @@ function defineMaskReveal(tag = 'usa-mask-reveal') {
         reveal() {
             const [a, b] = this.frames();
             this.setAttribute('data-state', 'revealing');
-            const anim = this.motion(this, [{ clipPath: a }, { clipPath: b }], { duration: this.num('duration', 900), delay: this.num('delay', 0), easing: EASE_OUT, fill: 'forwards' });
+            // fill 'both' keeps the closed mask applied during `delay`
+            const anim = this.motion(this, [{ clipPath: a }, { clipPath: b }], { duration: this.num('duration', 900), delay: this.num('delay', 0), easing: EASE_OUT, fill: 'both' });
+            this.style.opacity = '';
             const done = () => {
                 this.setAttribute('data-state', 'visible');
                 this.emit('complete');
@@ -252,9 +254,16 @@ function defineMaskReveal(tag = 'usa-mask-reveal') {
                 this.setAttribute('data-state', 'visible');
                 return;
             }
-            this.setAttribute('data-state', 'hidden');
-            this.style.clipPath = this.frames()[0];
-            this.onCleanup(() => (this.style.clipPath = ''));
+            // 4.0.1: hide with opacity, not the closed clip-path — Chromium's
+            // IntersectionObserver honours the target's own clip-path, so a fully
+            // clipped element never reports as intersecting and never revealed.
+            const hide = () => {
+                this.getAnimations?.().forEach((x) => x.cancel());
+                this.style.opacity = '0';
+                this.setAttribute('data-state', 'hidden');
+            };
+            hide();
+            this.onCleanup(() => ((this.style.opacity = ''), (this.style.clipPath = '')));
             const t = this.str('trigger', 'view');
             if (t === 'hover')
                 this.listen(this, 'pointerenter', () => void this.reveal());
@@ -267,11 +276,8 @@ function defineMaskReveal(tag = 'usa-mask-reveal') {
                         done = true;
                         void this.reveal();
                     }
-                    else if (!v && this.flag('repeat')) {
-                        this.getAnimations?.().forEach((x) => x.cancel());
-                        this.style.clipPath = this.frames()[0];
-                        this.setAttribute('data-state', 'hidden');
-                    }
+                    else if (!v && this.flag('repeat'))
+                        hide();
                 }, { threshold: 0.25 });
             }
         }

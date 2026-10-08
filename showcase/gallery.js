@@ -381,9 +381,9 @@ function wireChrome() {
 }
 
 function route() {
-  const m = /^#cat-([a-z]+)$/.exec(location.hash);
+  const m = /^#cat-([a-z0-9-]+)$/.exec(location.hash);
   if (m && COMPONENT_CATEGORIES.some((c) => c.id === m[1])) setCat(m[1], false);
-  const c = /^#c-([a-z-]+)$/.exec(location.hash);
+  const c = /^#c-([a-z0-9-]+)$/.exec(location.hash);
   if (c && findComponent(c[1])) {
     const el = document.getElementById(`c-${c[1]}`);
     el?.scrollIntoView({ block: 'center' });

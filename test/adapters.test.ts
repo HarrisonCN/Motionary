@@ -3,7 +3,9 @@ import { MockIO, installMocks, animations } from './setup';
 
 const cleanups: Array<() => void> = [];
 const mounts: Array<() => void> = [];
+const effects: Array<() => void> = [];
 vi.mock('solid-js', () => ({
+  createRenderEffect: (fn: () => void) => effects.push(fn) && fn(),
   onMount: (fn: () => void) => mounts.push(fn),
   onCleanup: (fn: () => void) => cleanups.push(fn),
 }));
@@ -25,6 +27,7 @@ beforeEach(() => {
   document.body.innerHTML = '';
   cleanups.length = 0;
   mounts.length = 0;
+  effects.length = 0;
 });
 
 describe('svelte actions (use-scroll-animate/svelte)', () => {

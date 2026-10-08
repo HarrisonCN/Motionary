@@ -39,7 +39,9 @@ export function defineMaskReveal(tag = 'usa-mask-reveal'): CustomElementConstruc
         reveal(): Promise<void> {
           const [a, b] = this.frames();
           this.setAttribute('data-state', 'revealing');
-          const anim = this.motion(this, [{ clipPath: a }, { clipPath: b }], { duration: this.num('duration', 900), delay: this.num('delay', 0), easing: EASE_OUT, fill: 'forwards' });
+          // fill 'both' keeps the closed mask applied during `delay`
+          const anim = this.motion(this, [{ clipPath: a }, { clipPath: b }], { duration: this.num('duration', 900), delay: this.num('delay', 0), easing: EASE_OUT, fill: 'both' });
+          this.style.opacity = '';
           const done = () => {
             this.setAttribute('data-state', 'visible');
             this.emit('complete');
@@ -53,9 +55,16 @@ export function defineMaskReveal(tag = 'usa-mask-reveal'): CustomElementConstruc
             this.setAttribute('data-state', 'visible');
             return;
           }
-          this.setAttribute('data-state', 'hidden');
-          this.style.clipPath = this.frames()[0];
-          this.onCleanup(() => (this.style.clipPath = ''));
+          // 4.0.1: hide with opacity, not the closed clip-path — Chromium's
+          // IntersectionObserver honours the target's own clip-path, so a fully
+          // clipped element never reports as intersecting and never revealed.
+          const hide = () => {
+            this.getAnimations?.().forEach((x) => x.cancel());
+            this.style.opacity = '0';
+            this.setAttribute('data-state', 'hidden');
+          };
+          hide();
+          this.onCleanup(() => ((this.style.opacity = ''), (this.style.clipPath = '')));
           const t = this.str('trigger', 'view');
           if (t === 'hover') this.listen(this, 'pointerenter', () => void this.reveal());
           else if (t === 'click') this.listen(this, 'click', () => void this.reveal());
@@ -65,11 +74,7 @@ export function defineMaskReveal(tag = 'usa-mask-reveal'): CustomElementConstruc
               if (v && (!done || this.flag('repeat'))) {
                 done = true;
                 void this.reveal();
-              } else if (!v && this.flag('repeat')) {
-                this.getAnimations?.().forEach((x) => x.cancel());
-                this.style.clipPath = this.frames()[0];
-                this.setAttribute('data-state', 'hidden');
-              }
+              } else if (!v && this.flag('repeat')) hide();
             }, { threshold: 0.25 });
           }
         }
