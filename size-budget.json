@@ -352,7 +352,7 @@
   {
     "name": "import 'motionary/components/widgets'",
     "import": "export * from 'pkg/components/widgets';",
-    "limit": 65280
+    "limit": 69888
   },
   {
     "name": "import 'motionary/components/fx-gpu'",
@@ -437,6 +437,11 @@
   {
     "name": "import { registerShopPack } from '…/components/fx-shop'",
     "import": "export { registerShopPack } from 'pkg/components/fx-shop';",
+    "limit": 2560
+  },
+  {
+    "name": "import 'motionary/components/fx-social'",
+    "import": "export * from 'pkg/components/fx-social';",
     "limit": 2560
   }
 ]

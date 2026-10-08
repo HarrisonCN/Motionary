@@ -468,6 +468,28 @@ declare const SHOP_FX: EffectDefinition[];
 declare function registerShopPack(): void;
 
 /**
+ * 7.4 — Chat & social motion (`motionary/fx/social`, also
+ * `motionary/components/fx-social`):
+ *
+ * - `typing-dots` (loop) — three dots bounce in a wave inside the element.
+ * - `message-in` (enter) — a chat bubble pops in from its side (`side`
+ *   "left" | "right", or `data-side`), with a little overshoot.
+ * - `reaction-burst` (click) — the element's emoji (`emoji`) floats up in a
+ *   small fan and fades.
+ * - `read-receipt` (enter) — ✓✓ ticks draw in and turn blue (`color`).
+ * - `mention-glow` (attention) — a soft highlight sweeps behind an @mention.
+ *
+ * Reduced motion: typing-dots shows static dots, message-in / read-receipt
+ * fade, reaction-burst does nothing, mention-glow sets a static highlight.
+ */
+
+/** Fan-out angles (deg) for `n` floating emoji, centred on straight up (7.4). */
+declare function fanAngles(n: number, spread?: number): number[];
+declare const SOCIAL_FX: EffectDefinition[];
+/** Register the 7.4 chat & social pack (idempotent). */
+declare function registerSocialPack(): void;
+
+/**
  * 5.5 — generative backgrounds on Canvas 2D, registered through
  * `registerEffect()` (kind `background`): `flow-field`, `voronoi`,
  * `mesh-gradient`, `starfield`, `metaballs`, `contours`.
@@ -576,5 +598,5 @@ declare const EFFECT_PACKS: Record<string, EffectDefinition[]>;
 /** Register every 6.x effect pack (idempotent). */
 declare function registerEffectPacks(): void;
 
-export { CHART_FX, DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FOCUS_FX, GLSL_HEAD, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, PHYSICS2_FX, SHOP_FX, TEXT3_FX, TRANSITIONS2_FX, VerletWorld, WEATHER_FX, WGSL_HEAD, arcPath, crossDocumentTransitions, fieldFallback, glslToWgsl, loadEffectPack, musicSample, packManifest, pageTransition, parseFigure, pointsToPath, register3dPack, registerChartPack, registerEffectPacks, registerFocusPack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerPhysicsPack, registerShopPack, registerTextPack, registerTransitionsPack, registerWeatherPack, samplePath, shaderBackground, skyAt, splitChars, supportsWebGL2, supportsWebGPU, syntheticSample, trackPointer, validateManifest, webgpuBackground, wgslModule };
+export { CHART_FX, DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FOCUS_FX, GLSL_HEAD, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, PHYSICS2_FX, SHOP_FX, SOCIAL_FX, TEXT3_FX, TRANSITIONS2_FX, VerletWorld, WEATHER_FX, WGSL_HEAD, arcPath, crossDocumentTransitions, fanAngles, fieldFallback, glslToWgsl, loadEffectPack, musicSample, packManifest, pageTransition, parseFigure, pointsToPath, register3dPack, registerChartPack, registerEffectPacks, registerFocusPack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerPhysicsPack, registerShopPack, registerSocialPack, registerTextPack, registerTransitionsPack, registerWeatherPack, samplePath, shaderBackground, skyAt, splitChars, supportsWebGL2, supportsWebGPU, syntheticSample, trackPointer, validateManifest, webgpuBackground, wgslModule };
 export type { EffectPackManifest, ShaderSpec };
