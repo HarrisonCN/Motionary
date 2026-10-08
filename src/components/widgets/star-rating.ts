@@ -50,7 +50,7 @@ export function defineStarRating(tag = 'usa-star-rating'): CustomElementConstruc
           const icon = PATHS[this.str('icon', 'star')] || PATHS.star;
           this._stars = [];
           for (let i = 0; i < this.max; i++) {
-            const s = part('span', 'usa-star', { 'aria-hidden': 'true' }, `<svg viewBox="0 0 24 24"><path class="usa-star-bg" d="${icon}"/></svg><span class="usa-star-fg"><svg viewBox="0 0 24 24"><path d="${icon}"/></svg></span>`);
+            const s = part('span', 'usa-star', { 'aria-hidden': 'true' }, `<svg viewBox="0 0 24 24" width="100%" height="100%"><path class="usa-star-bg" d="${icon}"/></svg><span class="usa-star-fg"><svg viewBox="0 0 24 24" width="24" height="24"><path d="${icon}"/></svg></span>`);
             this._stars.push(s);
             this.append(s);
           }

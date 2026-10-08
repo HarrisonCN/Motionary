@@ -2,7 +2,7 @@ usa-star-rating{display:inline-flex;gap:var(--usa-star-gap,4px);--usa-star-size:
 usa-star-rating[readonly]{cursor:default}
 usa-star-rating:focus-visible{outline:2px solid var(--usa-star-on);outline-offset:4px}
 .usa-star{position:relative;display:inline-block;width:var(--usa-star-size);height:var(--usa-star-size);--usa-star-fill:0%}
-.usa-star svg{display:block;width:100%;height:100%;overflow:visible}
+.usa-star svg{display:block;width:100%;height:100%;overflow:visible;stroke:none}
 .usa-star-bg{fill:var(--usa-star-off)}
 .usa-star-fg{position:absolute;left:0;top:0;bottom:0;width:var(--usa-star-fill);overflow:hidden;transition:width .18s ease-out}
 .usa-star-fg svg{width:var(--usa-star-size);height:var(--usa-star-size);fill:var(--usa-star-on);filter:drop-shadow(0 1px 3px rgba(251,191,36,.45))}

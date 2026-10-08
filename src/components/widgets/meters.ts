@@ -85,6 +85,8 @@ export function defineProgressRing(tag = 'usa-progress-ring'): CustomElementCons
             svg.setAttribute('data-usa-part', '');
             svg.setAttribute('aria-hidden', 'true');
             svg.setAttribute('class', 'usa-pr-svg');
+            svg.setAttribute('width', '100%');
+            svg.setAttribute('height', '100%');
             const semi = variant === 'semi';
             svg.setAttribute('viewBox', semi ? '0 0 100 56' : '0 0 100 100');
             const d = semi ? 'M 8 50 A 42 42 0 0 1 92 50' : 'M 50 8 A 42 42 0 1 1 49.99 8';
