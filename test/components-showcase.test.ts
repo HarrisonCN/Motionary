@@ -19,8 +19,10 @@ const root = resolve(__dirname, '..');
 describe('component gallery catalog', () => {
   it('has a card for every <usa-*> element (variant cards allowed), in the right category', () => {
     const srcTags = Object.entries(SRC_CATEGORIES).flatMap(([cat, tags]) => (tags as readonly string[]).map((t) => `${cat}:${t}`)).sort();
-    const cardTags = [...new Set(COMPONENTS.map((c: any) => `${c.category}:${c.tag}`))].sort();
+    const cardTags = [...new Set(COMPONENTS.filter((c: any) => !c.entry).map((c: any) => `${c.category}:${c.tag}`))].sort();
     expect(cardTags).toEqual(srcTags);
+    // 5.4+: elements of other entries (use-scroll-animate/components/effects) name their entry
+    COMPONENTS.filter((c: any) => c.entry).forEach((c: any) => expect(typeof (effects as any)[c.define], c.define).toBe('function'));
   });
 
   it('uses the same categories, in the same order, as the package', () => {
@@ -28,7 +30,7 @@ describe('component gallery catalog', () => {
   });
 
   it('names define functions and helpers that the entry points really export', () => {
-    COMPONENTS.forEach((c: any) => expect(typeof (components as any)[c.define], c.define).toBe('function'));
+    COMPONENTS.forEach((c: any) => expect(typeof ({ ...components, ...effects } as any)[c.define], c.define).toBe('function'));
     HELPERS.forEach((h: any) => expect(typeof ({ ...components, ...effects } as any)[h.fn], h.fn).toBe('function'));
   });
 

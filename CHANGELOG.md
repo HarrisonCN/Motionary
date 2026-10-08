@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.4.0] - 2026-10-08
+
+### Added
+- **`<usa-story template="…">`** (`defineStory()` from `use-scroll-animate/components/effects`; `defineEffectElements()` defines every element of the entry) — six scroll-storytelling templates:
+  - `pin` — a sticky `[data-stage]` while `[data-step]` sections scroll past; the active step gets `data-active`, the stage `data-active-step="<i>"`.
+  - `gallery` — a horizontal `[data-track]` slides sideways as you scroll down.
+  - `zoom` — zoom-through: the stage scales up to `zoom="6"` and fades.
+  - `compare` — before / after wipe driven by scroll, with a draggable, keyboard-accessible handle (`role="slider"`, ←/→, Shift for ×5, Home/End).
+  - `counter` — `[data-count="12,480"]` numbers count up on entering view (separators, decimals, prefix / suffix kept).
+  - `highlight` — the paragraph (or `[data-step]`) crossing the viewport center is highlighted.
+- Every template sets `--usa-story-progress` (0–1), exposes `progress` / `step` / `update()` and fires `usa-story-step`. Helpers: `storyProgress(el)`, `formatCount(target, t)`, `STORY_TEMPLATES`.
+- Showcase: new **[Scroll stories](./showcase/story.html)** page with all six templates full-page; gallery cards **Story: before / after**, **Story: data counters**, **Story: step highlight**. Gallery code tabs import from the card’s own entry.
+
+### Accessibility
+- Under reduced motion nothing slides or zooms (the gallery stacks vertically), counters show their final values immediately; counted numbers carry the final value as `aria-label`.
+
 ## [5.3.0] - 2026-10-08
 
 ### Added

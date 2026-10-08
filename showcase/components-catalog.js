@@ -334,7 +334,7 @@ export const CODE_TABS = [
 
 /** Code snippets for every tab. */
 export function componentSnippets(item) {
-  const sub = `use-scroll-animate/components/${item.category}`;
+  const sub = `use-scroll-animate/components/${item.entry || item.category}`;
   const cdn = `https://unpkg.com/use-scroll-animate@${VERSION_RANGE}/dist/components.umd.js`;
   if (item.kind === 'helper') {
     const body = item.usage.split('\n').slice(2).join('\n');
@@ -355,8 +355,8 @@ export function componentSnippets(item) {
   }
   const html = stripScripts(markup);
   // 5.1: effect-pack cards also register the packs (use-scroll-animate/components/effects)
-  const pre = item.pack ? `import { registerAllEffects } from 'use-scroll-animate/components/effects';\n` : '';
-  const preCall = item.pack ? 'registerAllEffects();\n' : '';
+  const pre = item.pack && !item.entry ? `import { registerAllEffects } from 'use-scroll-animate/components/effects';\n` : '';
+  const preCall = item.pack && !item.entry ? 'registerAllEffects();\n' : '';
   return {
     html: `<!-- registers every <usa-*> element and effect -->\n<script src="${cdn}"></script>\n\n${markup}`,
     esm: `${pre}import { ${item.define} } from '${sub}';\n\n${preCall}${item.define}(); // registers <${item.tag}>\n\n/* then use it in your HTML:\n${html}\n*/`,

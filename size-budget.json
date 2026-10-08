@@ -67,7 +67,7 @@
   {
     "name": "dist/components.umd.js (minified, all components + CSS)",
     "file": "dist/components.umd.js",
-    "limit": 96512
+    "limit": 104960
   },
   {
     "name": "dist/components.css",
@@ -332,6 +332,6 @@
   {
     "name": "import 'use-scroll-animate/components/effects'",
     "import": "export * from 'pkg/components/effects';",
-    "limit": 9984
+    "limit": 13312
   }
 ]

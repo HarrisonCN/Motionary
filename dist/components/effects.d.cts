@@ -1,5 +1,14 @@
 type MotionSensitivity = 'full' | 'gentle' | 'minimal' | 'static';
 type Cleanup = () => void;
+/**
+ * Members shared by every `<usa-*>` element. Attribute helpers, a cleanup
+ * bag that is emptied on disconnect, and motion helpers that degrade to the
+ * final state without WAAPI or under reduced motion.
+ */
+interface UsaElement extends HTMLElement {
+    /** `true` while reduced motion applies to this element. */
+    readonly reduced: boolean;
+}
 
 /**
  * 5.0 — unified plugin-style effect registration. Every effect (built-in or
@@ -97,6 +106,43 @@ declare const PHYSICS_FX: EffectDefinition[];
 
 declare const PAGE_FX: EffectDefinition[];
 
+/**
+ * 5.4 — `<usa-story template="…">` scroll-storytelling templates.
+ *
+ * - `pin` — a sticky `[data-stage]` while `[data-step]` sections scroll past; the
+ *   step in view gets `data-active`, the stage gets `data-active-step="<index>"`.
+ * - `gallery` — a horizontal `[data-track]` slides sideways as you scroll down.
+ * - `zoom` — the `[data-stage]` zooms toward the viewer (`zoom="6"`) and fades.
+ * - `compare` — before / after (`[data-before]`, `[data-after]`) wipe driven by
+ *   scroll, plus a draggable, keyboard-accessible handle (`role="slider"`).
+ * - `counter` — `[data-count="1234"]` numbers count up when they enter view.
+ * - `highlight` — paragraphs dim except the one crossing the viewport center.
+ *
+ * Every template sets `--usa-story-progress` (0–1) on the host and dispatches
+ * `usa-story-step` (`detail: { index }`). Reduced motion: no sliding / zooming
+ * (the gallery stacks vertically), counters show final values, the rest is
+ * class changes only.
+ */
+
+declare const STORY_TEMPLATES: readonly ["pin", "gallery", "zoom", "compare", "counter", "highlight"];
+type StoryTemplate = (typeof STORY_TEMPLATES)[number];
+interface UsaStoryElement extends UsaElement {
+    /** Scroll progress through the story, 0–1. */
+    readonly progress: number;
+    /** Index of the active step (pin / highlight), or -1. */
+    readonly step: number;
+}
+/** Progress of `el` through the viewport: 0 when its top hits the viewport top, 1 when its bottom hits the viewport bottom. */
+declare function storyProgress(el: Element, vh?: number): number;
+/** Format a counted value like the target (`1,234`, `12.5`, prefix / suffix kept). */
+declare function formatCount(target: string, t: number): string;
+declare function defineStory(tag?: string): CustomElementConstructor | undefined;
+declare global {
+    interface HTMLElementTagNameMap {
+        'usa-story': UsaStoryElement;
+    }
+}
+
 /** Helpers shared by the 5.x effect packs. */
 
 /** A fixed, pointer-transparent, aria-hidden layer for transient particles. */
@@ -110,8 +156,10 @@ declare function registerCardClickEffects(): void;
 declare function registerPhysicsEffects(): void;
 /** 5.3: page-wide transitions and effects. */
 declare function registerPageEffects(): void;
+/** Define the 5.x elements of this entry (`<usa-story>`, …) under their default tags. */
+declare function defineEffectElements(): void;
 /** Register the built-ins and every pack (idempotent). */
 declare function registerAllEffects(): void;
 
-export { CARD_FX, CLICK_FX, EFFECT_PACKS, PAGE_FX, PHYSICS_FX, bounceKeyframes, fxLayer, registerAllEffects, registerCardClickEffects, registerPageEffects, registerPhysicsEffects, solveSpring, springKeyframes };
-export type { SpringOptions };
+export { CARD_FX, CLICK_FX, EFFECT_PACKS, PAGE_FX, PHYSICS_FX, STORY_TEMPLATES, bounceKeyframes, defineEffectElements, defineStory, formatCount, fxLayer, registerAllEffects, registerCardClickEffects, registerPageEffects, registerPhysicsEffects, solveSpring, springKeyframes, storyProgress };
+export type { SpringOptions, StoryTemplate, UsaStoryElement };
