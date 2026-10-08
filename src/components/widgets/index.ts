@@ -14,13 +14,19 @@ import { defineCarousel, CAROUSEL_EFFECTS, type UsaCarouselElement } from './car
 import { defineTabBar, TAB_INDICATORS, type UsaTabBarElement } from './tab-bar';
 import { defineDisclosure, type UsaDisclosureElement } from './disclosure';
 import { defineStories, type UsaStoriesElement } from './stories';
+import { defineToastStack, stackToast, TOAST_POSITIONS, type UsaToastStackElement, type StackToastOptions } from './toast';
+import { defineModal, defineSheet, MODAL_EFFECTS, SHEET_SIDES, type UsaModalElement, type UsaSheetElement } from './overlay';
+import { defineMenu, MENU_EFFECTS, type UsaMenuElement } from './menu';
 
 export { defineCarousel, defineTabBar, defineDisclosure, defineStories, CAROUSEL_EFFECTS, TAB_INDICATORS };
 export type { UsaCarouselElement, UsaTabBarElement, UsaDisclosureElement, UsaStoriesElement };
+export { defineToastStack, stackToast, TOAST_POSITIONS, defineModal, defineSheet, MODAL_EFFECTS, SHEET_SIDES, defineMenu, MENU_EFFECTS };
+export type { UsaToastStackElement, StackToastOptions, UsaModalElement, UsaSheetElement, UsaMenuElement };
 
 /** The widgets by release (tag → define function). */
 export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElementConstructor | undefined>> = {
   '6.2': { 'usa-carousel': defineCarousel, 'usa-tab-bar': defineTabBar, 'usa-disclosure': defineDisclosure, 'usa-stories': defineStories },
+  '6.3': { 'usa-toast-stack': defineToastStack, 'usa-modal': defineModal, 'usa-sheet': defineSheet, 'usa-menu': defineMenu },
 };
 
 /** Every widget tag, in release order. */
@@ -37,5 +43,9 @@ declare global {
     'usa-tab-bar': UsaTabBarElement;
     'usa-disclosure': UsaDisclosureElement;
     'usa-stories': UsaStoriesElement;
+    'usa-toast-stack': UsaToastStackElement;
+    'usa-modal': UsaModalElement;
+    'usa-sheet': UsaSheetElement;
+    'usa-menu': UsaMenuElement;
   }
 }

@@ -79,6 +79,98 @@ interface UsaStoriesElement extends UsaElement {
 declare function defineStories(tag?: string): CustomElementConstructor | undefined;
 
 /**
+ * `<usa-toast-stack>` (6.3) — notifications that pile up into a collapsed
+ * stack (newest in front, older ones peeking behind), fan out on hover or
+ * focus, auto-dismiss (paused while hovered), and can be swiped away.
+ *
+ * Attributes: `position` (`bottom-right` · `bottom-left` · `bottom-center` ·
+ * `top-right` · `top-left` · `top-center`), `duration` (ms, `0` = sticky),
+ * `max` (visible in the stack), `contained` (positioned inside its parent
+ * instead of the viewport). API: `show(message | options)` → id,
+ * `dismiss(id)`, `clear()`; module helper `stackToast()` uses the first stack on
+ * the page (creating one). Any `[data-usa-toast="message"]` element shows a
+ * toast on click (`data-usa-toast-type`, `data-usa-target`). Events:
+ * `usa:show`, `usa:dismiss` (`{ id, reason }`). Toasts live in a polite live
+ * region. Reduced motion: no slide or swipe animation.
+ */
+interface StackToastOptions {
+    message?: string;
+    title?: string;
+    type?: 'info' | 'success' | 'warning' | 'error';
+    /** ms; 0 = stays until dismissed. Defaults to the stack's `duration`. */
+    duration?: number;
+    /** An action button. */
+    action?: {
+        label: string;
+        onClick?: () => void;
+    };
+}
+interface UsaToastStackElement extends UsaElement {
+    show(input: string | StackToastOptions): string;
+    dismiss(id: string, reason?: string): void;
+    clear(): void;
+    readonly count: number;
+}
+declare const TOAST_POSITIONS: readonly ["bottom-right", "bottom-left", "bottom-center", "top-right", "top-left", "top-center"];
+declare function defineToastStack(tag?: string): CustomElementConstructor | undefined;
+/** Show a toast on the first `<usa-toast-stack>` of the page (one is created when missing). */
+declare function stackToast(input: string | StackToastOptions, stack?: UsaToastStackElement | null): string;
+
+/**
+ * `<usa-modal>` and `<usa-sheet>` (6.3) — modal overlays on the native
+ * `<dialog>` (top layer, focus trap, Esc, inert page), with animated open
+ * and close and a fading, blurred backdrop.
+ *
+ * - `<usa-modal effect="scale | slide-up | flip | origin">` — `origin`
+ *   grows the dialog out of the button that opened it.
+ * - `<usa-sheet side="right | left | bottom | top">` — a side sheet; a
+ *   bottom sheet can be dragged down to dismiss (`<div data-handle>` or the
+ *   built-in grab handle).
+ *
+ * Attributes: `open` (initial), `label`, `persistent` (backdrop click / Esc
+ * don't close). Any element with `data-usa-open="<id>"` opens the overlay
+ * with that id; `[data-usa-close]` inside closes it. API: `show(trigger?)`,
+ * `close(value?)`, `toggle()`, `opened`. Events: `usa:open`, `usa:close`
+ * (`{ value }`). Focus returns to the opener. Reduced motion: no movement,
+ * a short fade.
+ */
+interface UsaOverlayElement extends UsaElement {
+    readonly opened: boolean;
+    readonly returnValue: string;
+    show(trigger?: Element | null): void;
+    close(value?: string): Promise<void>;
+    toggle(): void;
+}
+type UsaModalElement = UsaOverlayElement;
+type UsaSheetElement = UsaOverlayElement;
+declare const MODAL_EFFECTS: readonly ["scale", "slide-up", "flip", "origin"];
+declare const SHEET_SIDES: readonly ["right", "left", "bottom", "top"];
+declare const defineModal: (tag?: string) => CustomElementConstructor | undefined;
+declare const defineSheet: (tag?: string) => CustomElementConstructor | undefined;
+
+/**
+ * `<usa-menu>` (6.3) — a dropdown menu that unfolds from its button: the
+ * list scales out of the trigger corner and the items cascade in. The first
+ * child is the trigger (or `[data-trigger]`); the other children (`<button>`,
+ * `<a>`, `<hr>` separators) become menu items.
+ *
+ * Attributes: `placement` (`bottom-start` · `bottom-end` · `top-start` ·
+ * `top-end`), `effect` (`scale` · `fold` · `slide`). Keyboard: Enter / Space /
+ * ArrowDown open, arrows and Home / End move, Esc closes, Tab leaves; outside
+ * clicks close. API: `open()`, `close()`, `toggle()`, `opened`. Events:
+ * `usa:select` (`{ index, value, item }`), `usa:open`, `usa:close`. Reduced
+ * motion: a short fade.
+ */
+interface UsaMenuElement extends UsaElement {
+    readonly opened: boolean;
+    open(focus?: 'first' | 'last'): void;
+    close(focusTrigger?: boolean): void;
+    toggle(): void;
+}
+declare const MENU_EFFECTS: readonly ["scale", "fold", "slide"];
+declare function defineMenu(tag?: string): CustomElementConstructor | undefined;
+
+/**
  * motionary/components/widgets — the 6.x animated UI widgets, in their own
  * entry so `motionary/components` and `components/lite` keep their size
  * budgets. Every widget is reduced-motion safe and keyboard accessible.
@@ -103,8 +195,12 @@ declare global {
         'usa-tab-bar': UsaTabBarElement;
         'usa-disclosure': UsaDisclosureElement;
         'usa-stories': UsaStoriesElement;
+        'usa-toast-stack': UsaToastStackElement;
+        'usa-modal': UsaModalElement;
+        'usa-sheet': UsaSheetElement;
+        'usa-menu': UsaMenuElement;
     }
 }
 
-export { CAROUSEL_EFFECTS, TAB_INDICATORS, WIDGETS, WIDGET_TAGS, defineCarousel, defineDisclosure, defineStories, defineTabBar, defineWidgets };
-export type { UsaCarouselElement, UsaDisclosureElement, UsaStoriesElement, UsaTabBarElement };
+export { CAROUSEL_EFFECTS, MENU_EFFECTS, MODAL_EFFECTS, SHEET_SIDES, TAB_INDICATORS, TOAST_POSITIONS, WIDGETS, WIDGET_TAGS, defineCarousel, defineDisclosure, defineMenu, defineModal, defineSheet, defineStories, defineTabBar, defineToastStack, defineWidgets, stackToast };
+export type { StackToastOptions, UsaCarouselElement, UsaDisclosureElement, UsaMenuElement, UsaModalElement, UsaSheetElement, UsaStoriesElement, UsaTabBarElement, UsaToastStackElement };

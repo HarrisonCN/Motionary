@@ -5,17 +5,20 @@
  */
 import type { EffectDefinition } from '../fx/registry';
 import { GPU_FX, registerGpuEffects } from './gpu';
+import { TEXT3_FX, registerTextEffects3, splitChars } from './text3';
 
-export { GPU_FX, registerGpuEffects };
+export { GPU_FX, registerGpuEffects, TEXT3_FX, registerTextEffects3, splitChars };
 export { shaderBackground, supportsWebGL2, fieldFallback, GLSL_HEAD } from './gl';
 export type { ShaderSpec } from './gl';
 
 /** The 6.x effect packs by name. */
 export const FX2_PACKS: Record<string, EffectDefinition[]> = {
   gpu: GPU_FX,
+  text: TEXT3_FX,
 };
 
 /** Register every 6.x pack (idempotent). */
 export function registerFx2(): void {
   registerGpuEffects();
+  registerTextEffects3();
 }

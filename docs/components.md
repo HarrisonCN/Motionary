@@ -528,6 +528,38 @@ document.querySelector('usa-carousel').next();
 ```
 No build: `components.umd.js` + `widgets.umd.js`. GPU effects: `fluid` · `smoke` · `fire` · `ink` · `fireflies` (WebGL2 → Canvas 2D) · `sakura` · `leaves` (Canvas 2D) · `splash` (click). Reduced motion: instant switches, no autoplay, one still frame.
 
+### v6.3 Widgets: toast stack, dialog, drawer, menu (`components/widgets`) + text effects 3.0 (`components/fx-text`)
+
+```html
+<button data-usa-toast="Saved" data-usa-toast-type="success">Save</button>
+<usa-toast-stack position="bottom-right" duration="4000" max="3"></usa-toast-stack>
+
+<button data-usa-open="welcome">Open</button>
+<usa-modal id="welcome" effect="origin" label="Welcome">
+  <h2>Hello</h2><button data-usa-close="ok">Got it</button>
+</usa-modal>
+
+<usa-sheet id="cart" side="bottom" label="Cart">…<button data-usa-close>Close</button></usa-sheet>
+
+<usa-menu placement="bottom-start" effect="scale">
+  <button>Actions ▾</button><button>Edit</button><hr><button>Delete</button>
+</usa-menu>
+
+<usa-fx effect="flip-chars" trigger="enter"><h1>Motionary</h1></usa-fx>
+```
+```js
+import { defineWidgets, stackToast } from 'motionary/components/widgets';
+import { defineFx } from 'motionary/components/fx';
+import { registerTextEffects3 } from 'motionary/components/fx-text';
+defineWidgets(); defineFx(); registerTextEffects3();
+stackToast({ title: 'Done', message: 'Saved', type: 'success', action: { label: 'Undo', onClick: undo } });
+document.querySelector('usa-modal').show();
+```
+- `<usa-toast-stack>`: collapsed stack that fans out on hover / focus, auto-dismiss paused while hovered, swipe to dismiss; `show()`, `dismiss()`, `clear()`, `stackToast()`; `usa:show`, `usa:dismiss`.
+- `<usa-modal effect="scale | slide-up | flip | origin">` and `<usa-sheet side="right | left | bottom | top">`: native `<dialog>` (top layer, focus trap, Esc), blurred backdrop, `persistent`, `data-usa-open` / `data-usa-close`, bottom sheet drag-to-dismiss; `show()`, `close(value)`, `toggle()`; `usa:open`, `usa:close`.
+- `<usa-menu placement effect="scale | fold | slide">`: ARIA menu, cascade-in items, arrows / Home / End / Esc / Tab; `usa:select`.
+- Text effects 3.0: `liquid-text` · `neon-write` · `particle-text` · `glitch-text` · `text-trail` (cursor) · `font-breathe` · `flip-chars`; split text keeps a screen-reader copy. Reduced motion: overlays fade, loops / trail / particles are skipped, one-shots show their final state.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.
