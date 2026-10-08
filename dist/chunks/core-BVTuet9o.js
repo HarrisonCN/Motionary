@@ -1,7 +1,5 @@
-'use strict';
-
-var base = require('./base-CxYU2NK_.cjs');
-var components_tokens = require('../components/tokens.cjs');
+import { p as prefersReducedMotion, j as clamp, k as caf, l as applyFrame, r as raf, m as motionScale, n as now } from './base-DbbRUxaa.js';
+import { resolveDurationToken, resolveEasingToken } from '../components/tokens.js';
 
 /** 4.1: whether `scrub()` can use native ScrollTimeline / ViewTimeline here. */
 function supportsNativeScrub(source = 'view') {
@@ -80,12 +78,12 @@ function timeline(options = {}) {
     };
     const render = (to, from) => {
         build();
-        t = base.clamp(to, 0, total());
+        t = clamp(to, 0, total());
         for (const s of steps) {
             if (s.anim)
                 s.anim.currentTime = t;
             else
-                base.applyFrame(s.el, s.frames[t >= s.start ? s.frames.length - 1 : 0]);
+                applyFrame(s.el, s.frames[t >= s.start ? s.frames.length - 1 : 0]);
         }
         for (const c of cues)
             if ((from < c.at && t >= c.at) || (from > c.at && t <= c.at))
@@ -94,7 +92,7 @@ function timeline(options = {}) {
     };
     const stop = () => {
         if (frame)
-            base.caf(frame);
+            caf(frame);
         frame = 0;
     };
     const run = (direction) => {
@@ -102,8 +100,8 @@ function timeline(options = {}) {
         settle?.();
         dir = direction;
         const target = dir > 0 ? total() : 0;
-        const k = base.motionScale();
-        if (base.prefersReducedMotion() || k === 0 || !total()) {
+        const k = motionScale();
+        if (prefersReducedMotion() || k === 0 || !total()) {
             render(target, t);
             options.onComplete?.();
             return Promise.resolve();
@@ -111,9 +109,9 @@ function timeline(options = {}) {
         const rate = (options.speed ?? 1) / k;
         return new Promise((resolve) => {
             settle = () => { settle = undefined; resolve(); };
-            let last = base.now();
+            let last = now();
             const loop = () => {
-                const n = base.now();
+                const n = now();
                 const next = t + (n - last) * rate * dir;
                 last = n;
                 render(next, t);
@@ -123,9 +121,9 @@ function timeline(options = {}) {
                     settle?.();
                     return;
                 }
-                frame = base.raf(loop);
+                frame = raf(loop);
             };
-            frame = base.raf(loop);
+            frame = raf(loop);
         });
     };
     const api = {
@@ -135,12 +133,12 @@ function timeline(options = {}) {
         to(target, frames, o = {}) {
             const kf = typeof frames === 'string' ? TIMELINE_PRESETS[frames] || TIMELINE_PRESETS.fade : frames;
             const start = resolvePosition(o.at, end, prevStart, labels);
-            const duration = components_tokens.resolveDurationToken(o.duration ?? d.duration, 600);
+            const duration = resolveDurationToken(o.duration ?? d.duration, 600);
             const stagger = o.stagger ?? d.stagger;
             let last = start;
             toEls(target).forEach((el, i) => {
                 const s = start + i * stagger;
-                steps.push({ el, frames: kf, start: s, duration, easing: components_tokens.resolveEasingToken(o.easing ?? d.easing, 'cubic-bezier(0.22, 1, 0.36, 1)') });
+                steps.push({ el, frames: kf, start: s, duration, easing: resolveEasingToken(o.easing ?? d.easing, 'cubic-bezier(0.22, 1, 0.36, 1)') });
                 last = Math.max(last, s + duration);
             });
             prevStart = start;
@@ -178,12 +176,12 @@ function timeline(options = {}) {
         },
         progress(p) {
             if (p !== undefined)
-                api.seek(base.clamp(p, 0, 1) * total());
+                api.seek(clamp(p, 0, 1) * total());
             return total() ? t / total() : 0;
         },
         scrub(source, o = {}) {
             stop();
-            if (base.prefersReducedMotion() || typeof window === 'undefined') {
+            if (prefersReducedMotion() || typeof window === 'undefined') {
                 render(total(), t);
                 return handle(() => { }, false);
             }
@@ -218,25 +216,25 @@ function timeline(options = {}) {
                 const x = axis === 'x' || axis === 'inline';
                 if (scroller) {
                     const max = x ? scroller.scrollWidth - scroller.clientWidth : scroller.scrollHeight - scroller.clientHeight;
-                    return base.clamp((x ? scroller.scrollLeft : scroller.scrollTop) / (max || 1), 0, 1);
+                    return clamp((x ? scroller.scrollLeft : scroller.scrollTop) / (max || 1), 0, 1);
                 }
                 const r = source.getBoundingClientRect();
                 const vh = (x ? window.innerWidth : window.innerHeight) || 1;
                 const start = x ? r.left : r.top;
                 const size = x ? r.width : r.height;
-                return base.clamp((vh + (o.offset ?? 0) - start) / (vh + size || 1), 0, 1);
+                return clamp((vh + (o.offset ?? 0) - start) / (vh + size || 1), 0, 1);
             };
             const update = () => {
                 id = 0;
                 const goal = progressNow() * total();
-                const sm = base.clamp(o.smooth ?? 0, 0, 0.95);
+                const sm = clamp(o.smooth ?? 0, 0, 0.95);
                 cur = sm ? cur + (goal - cur) * (1 - sm) : goal;
                 render(cur, t);
                 if (sm && Math.abs(goal - cur) > 0.5)
-                    id = base.raf(update);
+                    id = raf(update);
             };
             const onScroll = () => { if (!id)
-                id = base.raf(update); };
+                id = raf(update); };
             const target = scroller || window;
             target.addEventListener('scroll', onScroll, { passive: true });
             window.addEventListener('resize', onScroll, { passive: true });
@@ -245,7 +243,7 @@ function timeline(options = {}) {
                 target.removeEventListener('scroll', onScroll);
                 window.removeEventListener('resize', onScroll);
                 if (id)
-                    base.caf(id);
+                    caf(id);
             }, false);
         },
         cancel() {
@@ -258,8 +256,5 @@ function timeline(options = {}) {
     return api;
 }
 
-exports.TIMELINE_PRESETS = TIMELINE_PRESETS;
-exports.resolvePosition = resolvePosition;
-exports.supportsNativeScrub = supportsNativeScrub;
-exports.timeline = timeline;
-//# sourceMappingURL=core-HLqH3qkA.cjs.map
+export { TIMELINE_PRESETS as T, resolvePosition as r, supportsNativeScrub as s, timeline as t };
+//# sourceMappingURL=core-BVTuet9o.js.map

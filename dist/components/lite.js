@@ -11,6 +11,13 @@ const MOTION_SCALE = { off: 0, low: 0.6, normal: 1, high: 1.25 };
 const config = { injectStyles: true, reducedMotion: 'user', motionIntensity: 'normal', motionSensitivity: 'full' };
 /** Change global component settings (call before `define*()` for `injectStyles`). */
 function configureComponents(options) {
+    if (!quiet) {
+        // 4.9: removed in 5.0 (see docs/upgrading-5.md, `npx usa-codemod-5`)
+        if (options.motionIntensity === 'off')
+            deprecate('intensity-off', "motionIntensity: 'off' is deprecated and will be removed in 5.0 — use motionSensitivity: 'minimal' (setMotionSensitivity('minimal')) instead.");
+        if (options.reducedMotion === 'no-preference')
+            deprecate('reduced-no-preference', "reducedMotion: 'no-preference' is deprecated and will be removed in 5.0 — the OS setting is always respected; use 'user' (default) or 'reduce'.");
+    }
     Object.assign(config, options);
     if (options.motionIntensity && typeof document !== 'undefined') {
         document.documentElement.style.setProperty('--usa-motion', String(MOTION_SCALE[options.motionIntensity] ?? 1));
@@ -54,6 +61,17 @@ function adaptKeyframes(frames, level = config.motionSensitivity) {
         }
         return out;
     });
+}
+let quiet = 0;
+/** Run `fn` without 4.9 deprecation warnings (library-internal calls). */
+function withoutDeprecations(fn) {
+    quiet++;
+    try {
+        return fn();
+    }
+    finally {
+        quiet--;
+    }
 }
 /** The current global motion intensity. */
 function getMotionIntensity() {
@@ -358,6 +376,15 @@ const EASE_OUT = 'cubic-bezier(0.22, 1, 0.36, 1)';
 const EASE_SPRING = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
 /** Windows Fluent "decelerate" / "point-to-point" curves. */
 const FLUENT_DECELERATE = 'cubic-bezier(0.1, 0.9, 0.2, 1)';
+const warned = new Set();
+/** Log a deprecation once per key (console.warn). */
+function deprecate(key, message) {
+    if (warned.has(key))
+        return;
+    warned.add(key);
+    if (typeof console !== 'undefined')
+        console.warn(`[use-scroll-animate] ${message}`);
+}
 /**
  * The `kind` attribute of `<usa-spinner>`, `<usa-check>`, `<usa-dialog>` and
  * `<usa-acrylic>` (3.0: `variant` only selects a style variant).
@@ -7943,6 +7970,7 @@ var css$7 = "";
 
 const LEVELS = ['off', 'low', 'normal', 'high'];
 const KEY$1 = 'usa:motion';
+let fromSwitch = false;
 /**
  * Set the global motion intensity for every `<usa-*>` component:
  * `'off'` (like reduced motion), `'low'`, `'normal'` (default), `'high'`.
@@ -7952,7 +7980,9 @@ const KEY$1 = 'usa:motion';
 function setMotionIntensity(level, persist = false) {
     if (!LEVELS.includes(level))
         return;
-    configureComponents({ motionIntensity: level });
+    if (level === 'off' && !fromSwitch)
+        deprecate('set-intensity-off', "setMotionIntensity('off') is deprecated and will be removed in 5.0 — use setMotionSensitivity('minimal') from use-scroll-animate/components/a11y.");
+    withoutDeprecations(() => configureComponents({ motionIntensity: level }));
     if (persist) {
         try {
             localStorage.setItem(KEY$1, level);
@@ -7968,12 +7998,15 @@ function setMotionIntensity(level, persist = false) {
 function restoreMotionIntensity() {
     try {
         const v = localStorage.getItem(KEY$1);
-        if (v && LEVELS.includes(v))
+        if (v && LEVELS.includes(v)) {
+            fromSwitch = true;
             setMotionIntensity(v);
+        }
     }
     catch {
         /* ignore */
     }
+    fromSwitch = false;
     return getMotionIntensity();
 }
 function defineMotionSwitch(tag = 'usa-motion-switch') {
@@ -7982,7 +8015,9 @@ function defineMotionSwitch(tag = 'usa-motion-switch') {
             return getMotionIntensity();
         }
         set value(v) {
+            fromSwitch = true;
             setMotionIntensity(v, true);
+            fromSwitch = false;
             this.sync();
         }
         mount() {
@@ -8173,6 +8208,8 @@ function defineTimeline(tag = 'usa-timeline') {
                 // (0–0.95) or `scrub="js"` opt into the JS engine, `scrub="scroll"`
                 // follows this element's own scroll position.
                 const v = this.str('scrub');
+                if (v === 'js')
+                    deprecate('timeline-scrub-js', '<usa-timeline scrub="js"> is deprecated and will be removed in 5.0 — the JS engine is picked automatically where native scroll timelines are missing; add smooth="…" to opt into smoothing.');
                 const stop = tl.scrub(this, { smooth: this.num('smooth', 0), engine: v === 'js' ? 'js' : 'auto', source: v === 'scroll' ? 'scroll' : 'view' });
                 this.toggleAttribute('data-native', stop.native);
                 this.onCleanup(stop);
@@ -10040,6 +10077,40 @@ function definePacksComponents() {
 }
 
 /**
+ * 4.9 — the 5.0 modern-browser baseline. `baselineReport()` lists which
+ * required / progressive features this browser has; `warnBaseline()` logs
+ * once in development when a required one is missing.
+ */
+/** Required in 5.0: Custom Elements, WAAPI, IntersectionObserver, ResizeObserver, adoptedStyleSheets. Progressive: View Transitions, scroll-driven animations, WebGL. */
+function baselineReport() {
+    const w = (typeof window !== 'undefined' ? window : {});
+    const d = (typeof document !== 'undefined' ? document : {});
+    const css = (q) => typeof w.CSS?.supports === 'function' && w.CSS.supports(q);
+    return [
+        { id: 'custom-elements', required: true, supported: !!w.customElements },
+        { id: 'web-animations', required: true, supported: typeof w.Element?.prototype?.animate === 'function' },
+        { id: 'intersection-observer', required: true, supported: typeof w.IntersectionObserver === 'function' },
+        { id: 'resize-observer', required: true, supported: typeof w.ResizeObserver === 'function' },
+        { id: 'adopted-stylesheets', required: true, supported: 'adoptedStyleSheets' in d },
+        { id: 'view-transitions', required: false, supported: typeof d.startViewTransition === 'function' },
+        { id: 'scroll-driven-animations', required: false, supported: css('animation-timeline: view()') },
+        { id: 'webgl', required: false, supported: !!(d.createElement && (() => { try {
+                return d.createElement('canvas').getContext('webgl');
+            }
+            catch {
+                return null;
+            } })()) },
+    ];
+}
+/** Log (once) which required 5.0 features are missing here. Returns the missing ids. */
+function warnBaseline() {
+    const missing = baselineReport().filter((f) => f.required && !f.supported).map((f) => f.id);
+    if (missing.length)
+        deprecate('baseline', `this browser lacks ${missing.join(', ')}; use-scroll-animate 5.0 requires them (modern-browser baseline, see docs/upgrading-5.md).`);
+    return missing;
+}
+
+/**
  * use-scroll-animate/components/a11y — accessibility toolkit (4.4).
  *
  * - Motion-sensitivity levels: `setMotionSensitivity('full' | 'gentle' | 'minimal' | 'static')`.
@@ -10466,5 +10537,5 @@ function defineComponents(categories) {
 const STYLE_BASE = new URL('../', import.meta.url).href;
 onDemandStyles(STYLE_BASE);
 
-export { ALL_TAGS, AMBIENT_EFFECTS, ANIM_ICONS, BRIDGE_PROTOCOL_VERSION, BUTTON_DEFORMS, CARD_EFFECTS, CLICK_EFFECTS, COMPONENT_CATEGORIES, CURSOR_MODES, GL_FALLBACKS, JOINING_SCRIPT, LIVE_REGION_IDS, MASK_SHAPES, MORPH_ICONS, MOTION_SCALE, MOTION_SENSITIVITY, MOTION_SENSITIVITY_LEVELS, MOTION_TOKENS, PACKS, PACK_PRIMITIVES, PAGE_EFFECTS, PARTICLE_PRESETS, POST_EFFECTS, REVEAL_EFFECTS, SENSITIVITY_CSS, SHADERS, SPINNER_VARIANTS, SPRING_EFFECTS, SPRING_PRESETS, STATIC_ALTERNATIVES, STYLE_BASE, TIMELINE_PRESETS, VARIANTS, activeAnimations, adaptKeyframes, adoptVariants, animationBudget, announce, applyMotionTokens, applyNativeSettings, applyPack, auditMotionA11y, autoAnimate, autoDegrade, burst, categoryOf, confetti, configureComponents, connectNativeShell, countUp, createSpring, defineAccordion, defineAcrylic, defineAmbient, defineAnimIcon, defineAurora, defineAutoAnimate, defineAutoSkeleton, defineAvatarStack, defineBackToTop, defineBackgroundComponents, defineBadge, defineBlobs, defineBottomSheet, defineButton, defineCard, defineCardComponents, defineCardStack, defineCarousel3d, defineCheck, defineCheckbox, defineClick, defineClickComponents, defineComponents, defineCounter, defineCube, defineCursor, defineDepth, defineDepthComponents, defineDialog, defineDistort, defineDotNetwork, defineDoubleTap, defineDraggable, defineDraw, defineDrawer, defineFab, defineFeedbackComponents, defineFullpage, defineGestureComponents, defineGlitch, defineGradientText, defineGrain, defineGridGlow, defineHandwriting, defineHold, defineIconMorph, defineInteractionComponents, defineLayoutComponents, defineLike, defineLiquid, defineLoadingBar, defineMagnetic, defineMarquee, defineMaskReveal, defineMasonry, defineMorph, defineMotionSwitch, defineNavbar, defineOverscroll, definePack, definePacksComponents, definePageComponents, defineParticles, definePhysicsComponents, definePinchZoom, definePopover, definePostFx, definePress, defineProgress, definePullRefresh, defineRating, defineReveal, defineRevealComponents, defineRipple, defineScramble, defineScrollHighlight, defineScrollProgress, defineScrolly, defineShader, defineShimmerText, defineSkeleton, defineSlider, defineSpinner, defineSplash, defineSplitText, defineSpotlight, defineSpring, defineStagger, defineStickyStack, defineSvgComponents, defineSwipeable, defineTabs, defineTextComponents, defineTextRotate, defineTilt, defineTimeline, defineTimelineComponents, defineToaster, defineToggle, defineTooltip, defineTransitionComponents, defineTypewriter, defineUiComponents, defineViewSwitch, defineWaterRipple, defineWaveText, defineWebglComponents, detectNativeHost, deviceTilt, drawLines, easeOutExpo, enableMpaTransitions, flip, flipFrames, fluentPreset, flyToCart, fragmentSource, gesture, getMotionIntensity, getMotionSensitivity, getMotionTokens, glFallbackCss, glGovernor, glQuad, graphemes, haptic, importMotionTokens, interpolatePath, linearEasing, liveRegion, loadCategoryStyles, loadedStyles, loadingBar, masonryLayout, mergeMotionTokens, morphPath, morphTo, motionAllowed, motionToken, motionTokensToCss, motionTokensToJSON, motionTokensToVars, motionVar, onDemandStyles, onFrame, orientationToTilt, pageTransition, parseDuration, parseEasing, parseNativeSettings, pathsCompatible, pinchScale, postFxShader, postToNative, prefersReducedMotion, projectInertia, readScrollProgress, requestOrientationPermission, resolveDurationToken, resolveEasingToken, resolvePosition, resolveSpring, restoreMotionIntensity, restoreMotionSensitivity, revealKeyframes, rubberBand, schedulerStats, scrambleFrame, scrollToTarget, setAnimationBudget, setMotionIntensity, setMotionSensitivity, setVariant, shake, sharedTransition, smoothScroll, snapTo, splitOrder, splitText, splitTimeline, words as splitWords, spring, springEasing, springEffectKeyframes, springSamples, staticAlternative, stepSpring, supportsLinearEasing, supportsNativeScrub, supportsOrientation, supportsViewTransitions, supportsWebGL, swipeDirection, themeTransition, timeline, toast, viewTransition, watchPowerSaver };
+export { ALL_TAGS, AMBIENT_EFFECTS, ANIM_ICONS, BRIDGE_PROTOCOL_VERSION, BUTTON_DEFORMS, CARD_EFFECTS, CLICK_EFFECTS, COMPONENT_CATEGORIES, CURSOR_MODES, GL_FALLBACKS, JOINING_SCRIPT, LIVE_REGION_IDS, MASK_SHAPES, MORPH_ICONS, MOTION_SCALE, MOTION_SENSITIVITY, MOTION_SENSITIVITY_LEVELS, MOTION_TOKENS, PACKS, PACK_PRIMITIVES, PAGE_EFFECTS, PARTICLE_PRESETS, POST_EFFECTS, REVEAL_EFFECTS, SENSITIVITY_CSS, SHADERS, SPINNER_VARIANTS, SPRING_EFFECTS, SPRING_PRESETS, STATIC_ALTERNATIVES, STYLE_BASE, TIMELINE_PRESETS, VARIANTS, activeAnimations, adaptKeyframes, adoptVariants, animationBudget, announce, applyMotionTokens, applyNativeSettings, applyPack, auditMotionA11y, autoAnimate, autoDegrade, baselineReport, burst, categoryOf, confetti, configureComponents, connectNativeShell, countUp, createSpring, defineAccordion, defineAcrylic, defineAmbient, defineAnimIcon, defineAurora, defineAutoAnimate, defineAutoSkeleton, defineAvatarStack, defineBackToTop, defineBackgroundComponents, defineBadge, defineBlobs, defineBottomSheet, defineButton, defineCard, defineCardComponents, defineCardStack, defineCarousel3d, defineCheck, defineCheckbox, defineClick, defineClickComponents, defineComponents, defineCounter, defineCube, defineCursor, defineDepth, defineDepthComponents, defineDialog, defineDistort, defineDotNetwork, defineDoubleTap, defineDraggable, defineDraw, defineDrawer, defineFab, defineFeedbackComponents, defineFullpage, defineGestureComponents, defineGlitch, defineGradientText, defineGrain, defineGridGlow, defineHandwriting, defineHold, defineIconMorph, defineInteractionComponents, defineLayoutComponents, defineLike, defineLiquid, defineLoadingBar, defineMagnetic, defineMarquee, defineMaskReveal, defineMasonry, defineMorph, defineMotionSwitch, defineNavbar, defineOverscroll, definePack, definePacksComponents, definePageComponents, defineParticles, definePhysicsComponents, definePinchZoom, definePopover, definePostFx, definePress, defineProgress, definePullRefresh, defineRating, defineReveal, defineRevealComponents, defineRipple, defineScramble, defineScrollHighlight, defineScrollProgress, defineScrolly, defineShader, defineShimmerText, defineSkeleton, defineSlider, defineSpinner, defineSplash, defineSplitText, defineSpotlight, defineSpring, defineStagger, defineStickyStack, defineSvgComponents, defineSwipeable, defineTabs, defineTextComponents, defineTextRotate, defineTilt, defineTimeline, defineTimelineComponents, defineToaster, defineToggle, defineTooltip, defineTransitionComponents, defineTypewriter, defineUiComponents, defineViewSwitch, defineWaterRipple, defineWaveText, defineWebglComponents, detectNativeHost, deviceTilt, drawLines, easeOutExpo, enableMpaTransitions, flip, flipFrames, fluentPreset, flyToCart, fragmentSource, gesture, getMotionIntensity, getMotionSensitivity, getMotionTokens, glFallbackCss, glGovernor, glQuad, graphemes, haptic, importMotionTokens, interpolatePath, linearEasing, liveRegion, loadCategoryStyles, loadedStyles, loadingBar, masonryLayout, mergeMotionTokens, morphPath, morphTo, motionAllowed, motionToken, motionTokensToCss, motionTokensToJSON, motionTokensToVars, motionVar, onDemandStyles, onFrame, orientationToTilt, pageTransition, parseDuration, parseEasing, parseNativeSettings, pathsCompatible, pinchScale, postFxShader, postToNative, prefersReducedMotion, projectInertia, readScrollProgress, requestOrientationPermission, resolveDurationToken, resolveEasingToken, resolvePosition, resolveSpring, restoreMotionIntensity, restoreMotionSensitivity, revealKeyframes, rubberBand, schedulerStats, scrambleFrame, scrollToTarget, setAnimationBudget, setMotionIntensity, setMotionSensitivity, setVariant, shake, sharedTransition, smoothScroll, snapTo, splitOrder, splitText, splitTimeline, words as splitWords, spring, springEasing, springEffectKeyframes, springSamples, staticAlternative, stepSpring, supportsLinearEasing, supportsNativeScrub, supportsOrientation, supportsViewTransitions, supportsWebGL, swipeDirection, themeTransition, timeline, toast, viewTransition, warnBaseline, watchPowerSaver };
 //# sourceMappingURL=lite.js.map

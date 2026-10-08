@@ -1,4 +1,4 @@
-import { f as configureComponents, a as MOTION_SENSITIVITY_LEVELS } from '../chunks/base-CZiIAMBc.js';
+import { f as configureComponents, a as MOTION_SENSITIVITY_LEVELS } from '../chunks/base-DbbRUxaa.js';
 
 /**
  * use-scroll-animate/components/bridge — native shell bridges (4.7).

@@ -82,7 +82,7 @@
   {
     "name": "import 'use-scroll-animate/components/reveal'",
     "import": "export * from 'pkg/components/reveal';",
-    "limit": 4608
+    "limit": 5120
   },
   {
     "name": "import 'use-scroll-animate/components/text'",
@@ -102,7 +102,7 @@
   {
     "name": "import 'use-scroll-animate/components/background'",
     "import": "export * from 'pkg/components/background';",
-    "limit": 9472
+    "limit": 10240
   },
   {
     "name": "import 'use-scroll-animate/components/transitions'",
@@ -152,7 +152,7 @@
   {
     "name": "import 'use-scroll-animate/components/cards'",
     "import": "export * from 'pkg/components/cards';",
-    "limit": 8704
+    "limit": 9728
   },
   {
     "name": "import { defineCard } from '…/components/cards'",
@@ -162,7 +162,7 @@
   {
     "name": "import 'use-scroll-animate/components/click'",
     "import": "export * from 'pkg/components/click';",
-    "limit": 12288
+    "limit": 13312
   },
   {
     "name": "import { defineButton } from '…/components/click'",
@@ -182,7 +182,7 @@
   {
     "name": "import 'use-scroll-animate/components/page'",
     "import": "export * from 'pkg/components/page';",
-    "limit": 11520
+    "limit": 12544
   },
   {
     "name": "import { pageTransition } from '…/components/page'",
@@ -257,7 +257,7 @@
   {
     "name": "import 'use-scroll-animate/components/layout'",
     "import": "export * from 'pkg/components/layout';",
-    "limit": 3840
+    "limit": 4352
   },
   {
     "name": "import { defineLayoutComponents } from '…/components/layout'",
@@ -297,7 +297,7 @@
   {
     "name": "import 'use-scroll-animate/components/a11y'",
     "import": "export * from 'pkg/components/a11y';",
-    "limit": 4352
+    "limit": 4864
   },
   {
     "name": "import 'use-scroll-animate/components/lite'",
@@ -312,7 +312,7 @@
   {
     "name": "import 'use-scroll-animate/components/bridge'",
     "import": "export * from 'pkg/components/bridge';",
-    "limit": 1536
+    "limit": 1792
   },
   {
     "name": "import { definePostFx } from '…/components/webgl'",

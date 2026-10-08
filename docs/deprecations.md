@@ -1,3 +1,9 @@
+# Deprecations
+
+## Deprecated in 4.9, removed in 5.0
+
+See [upgrading-5.md](./upgrading-5.md) — `motionIntensity: 'off'` / `setMotionIntensity('off')`, `reducedMotion: 'no-preference'`, `<usa-timeline scrub="js">`, shared names re-exported from category entries. Run `npx usa-codemod-5 --write src`.
+
 # Upgrading to 2.0 (removed APIs)
 
 Everything below was deprecated in 1.9 and is **removed in 2.0.0**. The full step-by-step list is the MIGRATION section of the [CHANGELOG](../CHANGELOG.md).

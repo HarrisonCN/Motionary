@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-CxYU2NK_.cjs');
+var base = require('../chunks/base-BvpQ4Ggj.cjs');
 var indexTags = require('../chunks/index-tags-CIRY2KnU.cjs');
 
 /**

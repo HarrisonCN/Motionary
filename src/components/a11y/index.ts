@@ -27,6 +27,8 @@ import {
 import { COMPONENT_CATEGORIES, type ComponentCategory } from '../index-tags';
 
 export { getMotionSensitivity, adaptKeyframes, MOTION_SENSITIVITY_LEVELS };
+export { baselineReport, warnBaseline } from './baseline';
+export type { BaselineFeature } from './baseline';
 export type { MotionSensitivity };
 
 const KEY = 'usa:sensitivity';

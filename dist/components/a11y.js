@@ -1,6 +1,40 @@
-import { h as getMotionSensitivity, a as MOTION_SENSITIVITY_LEVELS, f as configureComponents, q as adoptStyles } from '../chunks/base-CZiIAMBc.js';
-export { d as adaptKeyframes } from '../chunks/base-CZiIAMBc.js';
+import { u as deprecate, h as getMotionSensitivity, a as MOTION_SENSITIVITY_LEVELS, f as configureComponents, t as adoptStyles } from '../chunks/base-DbbRUxaa.js';
+export { d as adaptKeyframes } from '../chunks/base-DbbRUxaa.js';
 import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-Dh8nwXqw.js';
+
+/**
+ * 4.9 — the 5.0 modern-browser baseline. `baselineReport()` lists which
+ * required / progressive features this browser has; `warnBaseline()` logs
+ * once in development when a required one is missing.
+ */
+/** Required in 5.0: Custom Elements, WAAPI, IntersectionObserver, ResizeObserver, adoptedStyleSheets. Progressive: View Transitions, scroll-driven animations, WebGL. */
+function baselineReport() {
+    const w = (typeof window !== 'undefined' ? window : {});
+    const d = (typeof document !== 'undefined' ? document : {});
+    const css = (q) => typeof w.CSS?.supports === 'function' && w.CSS.supports(q);
+    return [
+        { id: 'custom-elements', required: true, supported: !!w.customElements },
+        { id: 'web-animations', required: true, supported: typeof w.Element?.prototype?.animate === 'function' },
+        { id: 'intersection-observer', required: true, supported: typeof w.IntersectionObserver === 'function' },
+        { id: 'resize-observer', required: true, supported: typeof w.ResizeObserver === 'function' },
+        { id: 'adopted-stylesheets', required: true, supported: 'adoptedStyleSheets' in d },
+        { id: 'view-transitions', required: false, supported: typeof d.startViewTransition === 'function' },
+        { id: 'scroll-driven-animations', required: false, supported: css('animation-timeline: view()') },
+        { id: 'webgl', required: false, supported: !!(d.createElement && (() => { try {
+                return d.createElement('canvas').getContext('webgl');
+            }
+            catch {
+                return null;
+            } })()) },
+    ];
+}
+/** Log (once) which required 5.0 features are missing here. Returns the missing ids. */
+function warnBaseline() {
+    const missing = baselineReport().filter((f) => f.required && !f.supported).map((f) => f.id);
+    if (missing.length)
+        deprecate('baseline', `this browser lacks ${missing.join(', ')}; use-scroll-animate 5.0 requires them (modern-browser baseline, see docs/upgrading-5.md).`);
+    return missing;
+}
 
 /**
  * use-scroll-animate/components/a11y — accessibility toolkit (4.4).
@@ -220,5 +254,5 @@ function auditMotionA11y(root) {
 /** Every `<usa-*>` tag, for sweeping audits. */
 const ALL_TAGS = Object.values(COMPONENT_CATEGORIES).flat();
 
-export { ALL_TAGS, LIVE_REGION_IDS, MOTION_SENSITIVITY, MOTION_SENSITIVITY_LEVELS, SENSITIVITY_CSS, STATIC_ALTERNATIVES, announce, auditMotionA11y, getMotionSensitivity, liveRegion, motionAllowed, restoreMotionSensitivity, setMotionSensitivity, staticAlternative };
+export { ALL_TAGS, LIVE_REGION_IDS, MOTION_SENSITIVITY, MOTION_SENSITIVITY_LEVELS, SENSITIVITY_CSS, STATIC_ALTERNATIVES, announce, auditMotionA11y, baselineReport, getMotionSensitivity, liveRegion, motionAllowed, restoreMotionSensitivity, setMotionSensitivity, staticAlternative, warnBaseline };
 //# sourceMappingURL=a11y.js.map

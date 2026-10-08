@@ -1,6 +1,6 @@
-import { u as defineElement, k as caf, r as raf, p as prefersReducedMotion, n as now, g as getMotionIntensity, f as configureComponents, q as adoptStyles } from '../chunks/base-CZiIAMBc.js';
-export { M as MOTION_SCALE } from '../chunks/base-CZiIAMBc.js';
-import { e as springSamples } from '../chunks/spring-BS5tg6aK.js';
+import { v as defineElement, k as caf, r as raf, p as prefersReducedMotion, n as now, g as getMotionIntensity, u as deprecate, A as withoutDeprecations, f as configureComponents, t as adoptStyles } from '../chunks/base-DbbRUxaa.js';
+export { M as MOTION_SCALE } from '../chunks/base-DbbRUxaa.js';
+import { e as springSamples } from '../chunks/spring-B6w7mVCU.js';
 
 var css$8 = "usa-cursor{--usa-cursor-color:var(--usa-accent,#7c5cff);--usa-cursor-size:28px;position:fixed;inset:0;pointer-events:none;z-index:2147483600;opacity:0;transition:opacity 0.2s ease;contain:strict}usa-cursor[data-active]{opacity:1}usa-cursor .usa-cursor-ring{position:absolute;left:0;top:0;width:var(--usa-cursor-size);height:var(--usa-cursor-size);margin:calc(var(--usa-cursor-size) / -2) 0 0 calc(var(--usa-cursor-size) / -2);border:1.5px solid var(--usa-cursor-color);border-radius:999px;box-sizing:border-box;transition:width 0.25s cubic-bezier(0.34,1.56,0.64,1),height 0.25s cubic-bezier(0.34,1.56,0.64,1),margin 0.25s ease,border-radius 0.25s ease,background-color 0.2s ease;will-change:transform}usa-cursor[mode=\"trail\"] .usa-cursor-ring{border:0;background:var(--usa-cursor-color);width:calc(var(--usa-cursor-size) * (0.45 - var(--i) * 0.04));height:calc(var(--usa-cursor-size) * (0.45 - var(--i) * 0.04));margin:calc(var(--usa-cursor-size) * (0.45 - var(--i) * 0.04) / -2) 0 0 calc(var(--usa-cursor-size) * (0.45 - var(--i) * 0.04) / -2);opacity:calc(1 - var(--i) * 0.11)}usa-cursor[data-hover] .usa-cursor-ring:first-child{width:calc(var(--usa-cursor-size) * 1.6);height:calc(var(--usa-cursor-size) * 1.6);margin:calc(var(--usa-cursor-size) * -0.8) 0 0 calc(var(--usa-cursor-size) * -0.8);background:color-mix(in srgb,var(--usa-cursor-color) 15%,transparent)}usa-cursor[data-snapped] .usa-cursor-ring{border-radius:12px;background:color-mix(in srgb,var(--usa-cursor-color) 12%,transparent);translate:-50% -50%;margin:0}usa-cursor[data-down] .usa-cursor-ring:first-child{scale:0.8}usa-cursor .usa-cursor-dot{position:absolute;left:-3px;top:-3px;width:6px;height:6px;border-radius:50%;background:var(--usa-cursor-color)}usa-cursor[data-snapped] .usa-cursor-dot{opacity:0}usa-cursor .usa-cursor-glow{position:absolute;left:-200px;top:-200px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--usa-cursor-color) 35%,transparent),transparent 65%);mix-blend-mode:screen}.usa-cursor-none,.usa-cursor-none *{cursor:none !important}@media (pointer:coarse),(prefers-reduced-motion:reduce){usa-cursor{display:none}.usa-cursor-none,.usa-cursor-none *{cursor:auto !important}}";
 
@@ -590,6 +590,7 @@ var css$1 = "usa-motion-switch{--usa-motion-i:2;position:relative;display:inline
 
 const LEVELS = ['off', 'low', 'normal', 'high'];
 const KEY = 'usa:motion';
+let fromSwitch = false;
 /**
  * Set the global motion intensity for every `<usa-*>` component:
  * `'off'` (like reduced motion), `'low'`, `'normal'` (default), `'high'`.
@@ -599,7 +600,9 @@ const KEY = 'usa:motion';
 function setMotionIntensity(level, persist = false) {
     if (!LEVELS.includes(level))
         return;
-    configureComponents({ motionIntensity: level });
+    if (level === 'off' && !fromSwitch)
+        deprecate('set-intensity-off', "setMotionIntensity('off') is deprecated and will be removed in 5.0 — use setMotionSensitivity('minimal') from use-scroll-animate/components/a11y.");
+    withoutDeprecations(() => configureComponents({ motionIntensity: level }));
     if (persist) {
         try {
             localStorage.setItem(KEY, level);
@@ -615,12 +618,15 @@ function setMotionIntensity(level, persist = false) {
 function restoreMotionIntensity() {
     try {
         const v = localStorage.getItem(KEY);
-        if (v && LEVELS.includes(v))
+        if (v && LEVELS.includes(v)) {
+            fromSwitch = true;
             setMotionIntensity(v);
+        }
     }
     catch {
         /* ignore */
     }
+    fromSwitch = false;
     return getMotionIntensity();
 }
 function defineMotionSwitch(tag = 'usa-motion-switch') {
@@ -629,7 +635,9 @@ function defineMotionSwitch(tag = 'usa-motion-switch') {
             return getMotionIntensity();
         }
         set value(v) {
+            fromSwitch = true;
             setMotionIntensity(v, true);
+            fromSwitch = false;
             this.sync();
         }
         mount() {

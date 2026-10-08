@@ -1,8 +1,9 @@
-import { defineElement, configureComponents, getMotionIntensity, type MotionIntensity, type UsaElement } from '../base';
+import { defineElement, configureComponents, getMotionIntensity, withoutDeprecations, deprecate, type MotionIntensity, type UsaElement } from '../base';
 import css from './motion-switch.css?raw';
 
 const LEVELS: MotionIntensity[] = ['off', 'low', 'normal', 'high'];
 const KEY = 'usa:motion';
+let fromSwitch = false;
 
 /**
  * Set the global motion intensity for every `<usa-*>` component:
@@ -12,7 +13,9 @@ const KEY = 'usa:motion';
  */
 export function setMotionIntensity(level: MotionIntensity, persist = false): void {
   if (!LEVELS.includes(level)) return;
-  configureComponents({ motionIntensity: level });
+  if (level === 'off' && !fromSwitch)
+    deprecate('set-intensity-off', "setMotionIntensity('off') is deprecated and will be removed in 5.0 — use setMotionSensitivity('minimal') from use-scroll-animate/components/a11y.");
+  withoutDeprecations(() => configureComponents({ motionIntensity: level }));
   if (persist) {
     try {
       localStorage.setItem(KEY, level);
@@ -27,10 +30,14 @@ export function setMotionIntensity(level: MotionIntensity, persist = false): voi
 export function restoreMotionIntensity(): MotionIntensity {
   try {
     const v = localStorage.getItem(KEY) as MotionIntensity | null;
-    if (v && LEVELS.includes(v)) setMotionIntensity(v);
+    if (v && LEVELS.includes(v)) {
+      fromSwitch = true;
+      setMotionIntensity(v);
+    }
   } catch {
     /* ignore */
   }
+  fromSwitch = false;
   return getMotionIntensity();
 }
 
@@ -53,7 +60,9 @@ export function defineMotionSwitch(tag = 'usa-motion-switch'): CustomElementCons
           return getMotionIntensity();
         }
         set value(v: MotionIntensity) {
+          fromSwitch = true;
           setMotionIntensity(v, true);
+          fromSwitch = false;
           this.sync();
         }
         mount(): void {

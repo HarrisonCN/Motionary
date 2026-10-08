@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-CxYU2NK_.cjs');
+var base = require('../chunks/base-BvpQ4Ggj.cjs');
 
 const NUM = /-?(?:\d+\.?\d*|\.\d+)(?:e[-+]?\d+)?/gi;
 /** `true` when two path strings share the same commands (so their numbers can be interpolated). */

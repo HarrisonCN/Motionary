@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.9.0] - 2026-10-08
+
+### Deprecated (removed in 5.0 — each warns once in the console)
+- `configureComponents({ motionIntensity: 'off' })` and `setMotionIntensity('off')` → `motionSensitivity: 'minimal'` / `setMotionSensitivity('minimal')`. (`<usa-motion-switch>`'s Off button and restoring a saved level stay silent.)
+- `configureComponents({ reducedMotion: 'no-preference' })` → removed; the OS setting is always honoured (`'user'` / `'reduce'`).
+- `<usa-timeline scrub="js">` → `scrub` (automatic JS fallback) + `smooth="…"`.
+- `configureComponents` / `prefersReducedMotion` / `ComponentsConfig` / `UsaElement` imported from category entries → import from `use-scroll-animate/components`.
+
+### Added
+- **Codemod** `npx usa-codemod-5 [--write] [paths…]` (new `bin`): rewrites all of the above in `.js/.ts/.jsx/.tsx/.vue/.svelte/.html/.astro` files; dry run by default.
+- **[docs/upgrading-5.md](./docs/upgrading-5.md)** — removals, the 5.0 modern-browser baseline, what's new.
+- `baselineReport()` / `warnBaseline()` (`components/a11y`): which 5.0-required (Custom Elements, WAAPI, IntersectionObserver, ResizeObserver, adoptedStyleSheets) and progressive (View Transitions, scroll-driven animations, WebGL) features this browser has.
+- `withoutDeprecations(fn)` for library-internal calls.
+
 ## [4.8.0] - 2026-10-08
 
 ### Added

@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('./base-CxYU2NK_.cjs');
+var base = require('./base-BvpQ4Ggj.cjs');
 
 const SPRING_PRESETS = {
     default: { stiffness: 170, damping: 26, mass: 1 },
@@ -229,4 +229,4 @@ exports.springEasing = springEasing;
 exports.springSamples = springSamples;
 exports.stepSpring = stepSpring;
 exports.supportsLinearEasing = supportsLinearEasing;
-//# sourceMappingURL=spring-Dkpygsuj.cjs.map
+//# sourceMappingURL=spring-fFkqE9J0.cjs.map
