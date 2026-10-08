@@ -1,5 +1,5 @@
-import { registerEffects } from '../chunks/registry-D23neB4M.js';
-import { u as srText } from '../chunks/base-DchG4q_S.js';
+import { u as deprecate, v as srText } from '../chunks/base-D5MHqeDd.js';
+import { registerEffects } from '../chunks/registry-CTLWeg-J.js';
 import { a as all, r as rand, f as fxLayer, s as spawn } from '../chunks/shared-CkKHWrtJ.js';
 
 /** Split `el`'s text into `aria-hidden` inline-block characters (idempotent). Returns them. */
@@ -255,9 +255,14 @@ const TEXT3_FX = [
     },
 ];
 /** Register the 6.3 text pack (idempotent). */
-function registerTextEffects3() {
+function registerTextPack() {
     registerEffects(TEXT3_FX);
 }
+/** @deprecated since 6.9 — use `registerTextPack()` (removed in 7.0; `npx usa-codemod-7`). */
+function registerTextEffects3() {
+    deprecate('registerTextEffects3', 'registerTextEffects3() is deprecated since 6.9 and removed in 7.0 — use registerTextPack() (npx usa-codemod-7).');
+    registerTextPack();
+}
 
-export { TEXT3_FX, registerTextEffects3, splitChars };
+export { TEXT3_FX, registerTextEffects3, registerTextPack, splitChars };
 //# sourceMappingURL=fx-text.js.map

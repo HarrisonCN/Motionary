@@ -42,6 +42,69 @@ interface EffectDefinition<O extends Record<string, unknown> = Record<string, an
 }
 
 /**
+ * 6.9 — effect marketplace manifest (`motionary/components/marketplace`).
+ *
+ * A third-party effect pack is an ES module that exports its effects (an
+ * `EffectDefinition[]` as `effects` or `default`) plus a JSON manifest:
+ *
+ * ```json
+ * { "format": "motionary/effect-pack", "version": 1,
+ *   "name": "@acme/motion-snow", "packVersion": "1.2.0",
+ *   "description": "Snow and frost effects", "license": "MIT",
+ *   "author": "Acme", "entry": "./dist/index.js", "requires": ">=6.9",
+ *   "effects": [{ "name": "frost", "kind": "background", "description": "…",
+ *                 "defaults": { "speed": 1 } }] }
+ * ```
+ *
+ * `packManifest()` writes one from your effects, `validateManifest()` checks
+ * one (format, semver, unique kebab-case names, known kinds, effects match
+ * the module), and `loadEffectPack()` imports a pack (URL or module),
+ * validates it and registers its effects — refusing names that already
+ * exist unless `override`.
+ */
+
+declare const EFFECT_PACK_FORMAT = "motionary/effect-pack";
+interface EffectPackManifest {
+    format: typeof EFFECT_PACK_FORMAT;
+    version: 1;
+    name: string;
+    packVersion: string;
+    description?: string;
+    license?: string;
+    author?: string;
+    homepage?: string;
+    entry?: string;
+    requires?: string;
+    keywords?: string[];
+    effects: {
+        name: string;
+        kind: string;
+        description?: string;
+        defaults?: Record<string, unknown>;
+    }[];
+}
+/** Build a manifest from an effect pack. */
+declare function packManifest(name: string, packVersion: string, effects: EffectDefinition[], extra?: Partial<Omit<EffectPackManifest, 'format' | 'version' | 'name' | 'packVersion' | 'effects'>>): EffectPackManifest;
+/** Check a manifest (and optionally the module's effects against it). */
+declare function validateManifest(m: unknown, effects?: EffectDefinition[]): {
+    ok: boolean;
+    errors: string[];
+};
+/**
+ * Import an effect pack (a URL / specifier, or an already imported module
+ * with `effects` / `default` and `manifest`), validate and register it.
+ * Returns the registered effect names.
+ */
+declare function loadEffectPack(src: string | {
+    effects?: EffectDefinition[];
+    default?: EffectDefinition[];
+    manifest?: EffectPackManifest;
+}, opts?: {
+    manifest?: EffectPackManifest;
+    override?: boolean;
+}): Promise<string[]>;
+
+/**
  * 6.2 — GPU effect pack (`motionary/components/fx-gpu`), registered through
  * `registerEffect()`:
  *
@@ -58,6 +121,8 @@ interface EffectDefinition<O extends Record<string, unknown> = Record<string, an
 
 declare const GPU_FX: EffectDefinition[];
 /** Register the 6.2 GPU pack (idempotent). */
+declare function registerGpuPack(): void;
+/** @deprecated since 6.9 — use `registerGpuPack()` (removed in 7.0; `npx usa-codemod-7`). */
 declare function registerGpuEffects(): void;
 
 /**
@@ -84,6 +149,8 @@ declare function registerGpuEffects(): void;
 declare function splitChars(el: HTMLElement): HTMLElement[];
 declare const TEXT3_FX: EffectDefinition[];
 /** Register the 6.3 text pack (idempotent). */
+declare function registerTextPack(): void;
+/** @deprecated since 6.9 — use `registerTextPack()` (removed in 7.0; `npx usa-codemod-7`). */
 declare function registerTextEffects3(): void;
 
 /**
@@ -112,6 +179,8 @@ declare function registerTextEffects3(): void;
 declare function trackPointer(el: HTMLElement, ctx: EffectContext, fn: (x: number, y: number, inside: boolean) => void, x0?: number, y0?: number): () => void;
 declare const LIGHT_FX: EffectDefinition[];
 /** Register the 6.4 light & materials pack (idempotent). */
+declare function registerLightPack(): void;
+/** @deprecated since 6.9 — use `registerLightPack()` (removed in 7.0; `npx usa-codemod-7`). */
 declare function registerLightEffects(): void;
 
 /**
@@ -135,6 +204,8 @@ declare function registerLightEffects(): void;
 
 declare const DEPTH3_FX: EffectDefinition[];
 /** Register the 6.5 3D pack (idempotent). */
+declare function register3dPack(): void;
+/** @deprecated since 6.9 — use `register3dPack()` (removed in 7.0; `npx usa-codemod-7`). */
 declare function register3dEffects(): void;
 
 /**
@@ -162,6 +233,8 @@ declare function samplePath(d: string, n?: number): [number, number][] | null;
 declare const pointsToPath: (pts: [number, number][]) => string;
 declare const MORPH2_FX: EffectDefinition[];
 /** Register the 6.6 morph & SVG pack (idempotent). */
+declare function registerMorphPack(): void;
+/** @deprecated since 6.9 — use `registerMorphPack()` (removed in 7.0; `npx usa-codemod-7`). */
 declare function registerMorphEffects2(): void;
 
 /**
@@ -195,6 +268,8 @@ declare function pageTransition(update: () => void | Promise<void>, effect?: str
 /** Opt a multi-page site into cross-document view transitions with an effect's look. Returns a remover. */
 declare function crossDocumentTransitions(effect?: string, duration?: number): () => void;
 /** Register the 6.7 transitions pack (idempotent). */
+declare function registerTransitionsPack(): void;
+/** @deprecated since 6.9 — use `registerTransitionsPack()` (removed in 7.0; `npx usa-codemod-7`). */
 declare function registerTransitionEffects2(): void;
 
 /**
@@ -221,6 +296,8 @@ declare function registerTransitionEffects2(): void;
 declare function skyAt(hour: number): [string, string];
 declare const WEATHER_FX: EffectDefinition[];
 /** Register the 6.8 weather & ambience pack (idempotent). */
+declare function registerWeatherPack(): void;
+/** @deprecated since 6.9 — use `registerWeatherPack()` (removed in 7.0; `npx usa-codemod-7`). */
 declare function registerWeatherEffects(): void;
 
 /**
@@ -268,7 +345,30 @@ declare class VerletWorld {
 }
 declare const PHYSICS2_FX: EffectDefinition[];
 /** Register the 6.8 physics 2.0 pack (idempotent). */
+declare function registerPhysicsPack(): void;
+/** @deprecated since 6.9 — use `registerPhysicsPack()` (removed in 7.0; `npx usa-codemod-7`). */
 declare function registerPhysicsEffects2(): void;
+
+/**
+ * 6.9 — Focus & feedback (`motionary/components/fx-focus`), registered
+ * through `registerEffect()`:
+ *
+ * - `focus-draw` (kind `attention`) — a rounded ring draws itself around the
+ *   element, then fades (great on `focus`).
+ * - `marching-ants` (kind `loop`) — a dashed selection border that marches
+ *   (drop targets, selections).
+ * - `success-check` (kind `click`) — a check mark draws over the element on a
+ *   soft green disc, then fades away.
+ * - `highlight-sweep` (kind `attention`) — a highlighter stroke sweeps
+ *   behind the element's text.
+ *
+ * Overlays are SVG / spans marked `aria-hidden` and removed when done.
+ * Reduced motion: a plain fade of the final state (marching-ants is static).
+ */
+
+declare const FOCUS_FX: EffectDefinition[];
+/** Register the 6.9 focus & feedback pack (idempotent). */
+declare function registerFocusPack(): void;
 
 /**
  * 5.5 — generative backgrounds on Canvas 2D, registered through
@@ -338,9 +438,13 @@ declare function fieldFallback(color: (x: number, y: number, t: number, o: any) 
  */
 
 /** The 6.x effect packs by name. */
-declare const FX2_PACKS: Record<string, EffectDefinition[]>;
-/** Register every 6.x pack (idempotent). */
+declare const EFFECT_PACKS: Record<string, EffectDefinition[]>;
+/** Register every 6.x effect pack (idempotent). */
+declare function registerEffectPacks(): void;
+/** @deprecated since 6.9 — `EFFECT_PACKS` (removed in 7.0). */
+declare const FX2_PACKS: Record<string, EffectDefinition<Record<string, any>>[]>;
+/** @deprecated since 6.9 — use `registerEffectPacks()` (removed in 7.0; `npx usa-codemod-7`). */
 declare function registerFx2(): void;
 
-export { DEPTH3_FX, FX2_PACKS, GLSL_HEAD, GPU_FX, LIGHT_FX, MORPH2_FX, PHYSICS2_FX, TEXT3_FX, TRANSITIONS2_FX, VerletWorld, WEATHER_FX, crossDocumentTransitions, fieldFallback, pageTransition, pointsToPath, register3dEffects, registerFx2, registerGpuEffects, registerLightEffects, registerMorphEffects2, registerPhysicsEffects2, registerTextEffects3, registerTransitionEffects2, registerWeatherEffects, samplePath, shaderBackground, skyAt, splitChars, supportsWebGL2, trackPointer };
-export type { ShaderSpec };
+export { DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FOCUS_FX, FX2_PACKS, GLSL_HEAD, GPU_FX, LIGHT_FX, MORPH2_FX, PHYSICS2_FX, TEXT3_FX, TRANSITIONS2_FX, VerletWorld, WEATHER_FX, crossDocumentTransitions, fieldFallback, loadEffectPack, packManifest, pageTransition, pointsToPath, register3dEffects, register3dPack, registerEffectPacks, registerFocusPack, registerFx2, registerGpuEffects, registerGpuPack, registerLightEffects, registerLightPack, registerMorphEffects2, registerMorphPack, registerPhysicsEffects2, registerPhysicsPack, registerTextEffects3, registerTextPack, registerTransitionEffects2, registerTransitionsPack, registerWeatherEffects, registerWeatherPack, samplePath, shaderBackground, skyAt, splitChars, supportsWebGL2, trackPointer, validateManifest };
+export type { EffectPackManifest, ShaderSpec };

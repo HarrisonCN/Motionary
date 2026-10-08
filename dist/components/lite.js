@@ -2640,6 +2640,7 @@ function defineToggle(tag = 'usa-toggle') {
                 this._internals?.setFormValue?.(this.checked ? this.str('value', 'on') : null);
             }
             mount() {
+                deprecate('usa-toggle', '<usa-toggle> is deprecated since 6.9 and removed in 7.0 — use <usa-switch> (motionary/components/widgets; npx usa-codemod-7).');
                 if (!this.querySelector(':scope > .usa-toggle-track')) {
                     const track = document.createElement('span');
                     track.className = 'usa-toggle-track';
@@ -7178,6 +7179,7 @@ function defineTooltip(tag = 'usa-tooltip') {
             return ['text'];
         }
         mount() {
+            deprecate('usa-tooltip', '<usa-tooltip> is deprecated since 6.9 and removed in 7.0 — use <usa-tip> (motionary/components/widgets; npx usa-codemod-7).');
             const trigger = this.firstElementChild || this;
             const tip = document.createElement('span');
             tip.className = 'usa-tooltip-bubble usa-surface';

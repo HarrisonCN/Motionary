@@ -1,7 +1,7 @@
-import { registerEffects } from '../chunks/registry-D23neB4M.js';
+import { u as deprecate } from '../chunks/base-D5MHqeDd.js';
+import { registerEffects } from '../chunks/registry-CTLWeg-J.js';
 import { c as canvasBackground } from '../chunks/generative-2LhxG5BJ.js';
 import { r as rand } from '../chunks/shared-CkKHWrtJ.js';
-import '../chunks/base-DchG4q_S.js';
 
 const bg = (name, description, defaults, spec) => ({
     name,
@@ -253,9 +253,14 @@ const WEATHER_FX = [
     }),
 ];
 /** Register the 6.8 weather & ambience pack (idempotent). */
-function registerWeatherEffects() {
+function registerWeatherPack() {
     registerEffects(WEATHER_FX);
 }
+/** @deprecated since 6.9 — use `registerWeatherPack()` (removed in 7.0; `npx usa-codemod-7`). */
+function registerWeatherEffects() {
+    deprecate('registerWeatherEffects', 'registerWeatherEffects() is deprecated since 6.9 and removed in 7.0 — use registerWeatherPack() (npx usa-codemod-7).');
+    registerWeatherPack();
+}
 
-export { WEATHER_FX, registerWeatherEffects, skyAt };
+export { WEATHER_FX, registerWeatherEffects, registerWeatherPack, skyAt };
 //# sourceMappingURL=fx-weather.js.map

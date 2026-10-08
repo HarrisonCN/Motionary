@@ -238,7 +238,7 @@ describe('6.2 showcase + Store', () => {
       expect(s.esm).toContain("from 'motionary/components/widgets'");
     }
     const gpu: any = COMPONENTS.find((c: any) => c.id === 'fx-gpu');
-    expect(componentSnippets(gpu).esm).toContain("import { registerGpuEffects } from 'motionary/components/fx-gpu'");
+    expect(componentSnippets(gpu).esm).toContain("import { registerGpuPack } from 'motionary/components/fx-gpu'");
   });
   it('Store: one Components 6.x entry per card, with snippets for every tab', () => {
     expect(CATEGORIES.some((c: any) => c.id === 'components')).toBe(true);

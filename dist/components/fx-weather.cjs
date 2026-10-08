@@ -1,9 +1,9 @@
 'use strict';
 
+var base = require('../chunks/base-BaQV-2ha.cjs');
 var registry = require('../chunks/registry-DehBVRDV.cjs');
 var generative = require('../chunks/generative-BHIj-NU0.cjs');
 var shared = require('../chunks/shared-jkgRH-Hx.cjs');
-require('../chunks/base-BaQV-2ha.cjs');
 
 const bg = (name, description, defaults, spec) => ({
     name,
@@ -255,11 +255,17 @@ const WEATHER_FX = [
     }),
 ];
 /** Register the 6.8 weather & ambience pack (idempotent). */
-function registerWeatherEffects() {
+function registerWeatherPack() {
     registry.registerEffects(WEATHER_FX);
+}
+/** @deprecated since 6.9 — use `registerWeatherPack()` (removed in 7.0; `npx usa-codemod-7`). */
+function registerWeatherEffects() {
+    base.deprecate('registerWeatherEffects', 'registerWeatherEffects() is deprecated since 6.9 and removed in 7.0 — use registerWeatherPack() (npx usa-codemod-7).');
+    registerWeatherPack();
 }
 
 exports.WEATHER_FX = WEATHER_FX;
 exports.registerWeatherEffects = registerWeatherEffects;
+exports.registerWeatherPack = registerWeatherPack;
 exports.skyAt = skyAt;
 //# sourceMappingURL=fx-weather.cjs.map

@@ -1,6 +1,6 @@
-import { registerEffects } from '../chunks/registry-D23neB4M.js';
+import { u as deprecate } from '../chunks/base-D5MHqeDd.js';
+import { registerEffects } from '../chunks/registry-CTLWeg-J.js';
 import { c as canvasBackground } from '../chunks/generative-2LhxG5BJ.js';
-import '../chunks/base-DchG4q_S.js';
 import '../chunks/shared-CkKHWrtJ.js';
 
 /** A minimal Verlet world: points, distance sticks, gravity, damping. */
@@ -332,9 +332,14 @@ const PHYSICS2_FX = [
     }),
 ];
 /** Register the 6.8 physics 2.0 pack (idempotent). */
-function registerPhysicsEffects2() {
+function registerPhysicsPack() {
     registerEffects(PHYSICS2_FX);
 }
+/** @deprecated since 6.9 — use `registerPhysicsPack()` (removed in 7.0; `npx usa-codemod-7`). */
+function registerPhysicsEffects2() {
+    deprecate('registerPhysicsEffects2', 'registerPhysicsEffects2() is deprecated since 6.9 and removed in 7.0 — use registerPhysicsPack() (npx usa-codemod-7).');
+    registerPhysicsPack();
+}
 
-export { PHYSICS2_FX, VerletWorld, registerPhysicsEffects2 };
+export { PHYSICS2_FX, VerletWorld, registerPhysicsEffects2, registerPhysicsPack };
 //# sourceMappingURL=fx-physics.js.map

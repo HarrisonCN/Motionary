@@ -1,7 +1,7 @@
-import { y as defineElement, k as clamp, l as caf, r as raf } from '../chunks/base-DchG4q_S.js';
-import { d as springEasing, c as createSpring, p as projectInertia, s as snapTo, a as rubberBand } from '../chunks/spring-BhoT09Qb.js';
-import { a as adoptVariants } from '../chunks/variants-C_hv_s23.js';
-export { V as VARIANTS, s as setVariant } from '../chunks/variants-C_hv_s23.js';
+import { y as defineElement, k as clamp, l as caf, r as raf, u as deprecate } from '../chunks/base-D5MHqeDd.js';
+import { d as springEasing, c as createSpring, p as projectInertia, s as snapTo, a as rubberBand } from '../chunks/spring-B-9MZOrW.js';
+import { a as adoptVariants } from '../chunks/variants-CoZn3k_5.js';
+export { V as VARIANTS, s as setVariant } from '../chunks/variants-CoZn3k_5.js';
 
 /** Position a fixed `floating` element next to `anchor`, flipping when it would leave the viewport. */
 function place(floating, anchor, placement = 'top', gap = 8) {
@@ -816,6 +816,7 @@ function defineTooltip(tag = 'usa-tooltip') {
             return ['text'];
         }
         mount() {
+            deprecate('usa-tooltip', '<usa-tooltip> is deprecated since 6.9 and removed in 7.0 — use <usa-tip> (motionary/components/widgets; npx usa-codemod-7).');
             const trigger = this.firstElementChild || this;
             const tip = document.createElement('span');
             tip.className = 'usa-tooltip-bubble usa-surface';

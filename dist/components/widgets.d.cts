@@ -490,6 +490,106 @@ interface UsaPullCordElement extends UsaElement {
 declare function definePullCord(tag?: string): CustomElementConstructor | undefined;
 
 /**
+ * `<usa-date-picker>` (6.9) — an inline calendar. Changing month slides the
+ * grid in from the direction of travel, the selected day pops inside a
+ * spring circle and today has a ring. A real date grid: `role="grid"`,
+ * arrows (day / week), PageUp / PageDown (month), Home / End (week start /
+ * end), Enter / Space selects; `min` / `max` (ISO `YYYY-MM-DD`) disable days
+ * outside the range. `value` (ISO), `first-day` (0 = Sunday, 1 = Monday,
+ * default 1), `locale`. Event `usa:change` (`{ value, date }`). Reduced
+ * motion: no slide or pop.
+ */
+interface UsaDatePickerElement extends UsaElement {
+    value: string;
+    month: string;
+    showMonth(delta: number): void;
+}
+/** Parse `YYYY-MM-DD` as a local date (or null). */
+declare function parseISODate(s: string | null | undefined): Date | null;
+/** The 6×7 day grid of a month (first row starts on `firstDay`). */
+declare function monthGrid(year: number, month: number, firstDay?: number): Date[];
+declare function defineDatePicker(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-color-picker>` (6.9) — a colour picker: a saturation / brightness
+ * square and a hue strip (both `role="slider"`, arrow keys, Shift = ×10),
+ * spring-follow thumbs, a preview chip that morphs to the new colour, and
+ * optional `swatches` (comma-separated hex) that pop on pick. `value` is
+ * `#rrggbb`. Events `usa:input` while dragging and `usa:change` on release
+ * (`{ value }`). Reduced motion: thumbs jump, no pop.
+ */
+interface UsaColorPickerElement extends UsaElement {
+    value: string;
+}
+/** HSV (h 0–360, s / v 0–1) → `#rrggbb`. */
+declare function hsvToHex(h: number, s: number, v: number): string;
+/** `#rrggbb` → HSV (or null). */
+declare function hexToHsv(hex: string): [number, number, number] | null;
+declare function defineColorPicker(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-file-drop>` (6.9) — a file drop zone. Dragging files over it lights
+ * the zone with marching-ants borders and lifts the icon; dropping (or
+ * choosing via the built-in file input — click / Enter / Space) flies each
+ * file into a list with a progress bar. Progress is yours to report with
+ * `setProgress(index, 0–1)`, or `simulate` fakes it for demos; a finished
+ * file draws a check. Attributes `accept`, `multiple`, `label`. Event
+ * `usa:files` (`{ files }`). Reduced motion: no ants, lift or fly-in.
+ */
+interface UsaFileDropElement extends UsaElement {
+    readonly files: File[];
+    setProgress(index: number, value: number): void;
+    addFiles(files: ArrayLike<File>): void;
+    clear(): void;
+}
+declare function defineFileDrop(tag?: string): CustomElementConstructor | undefined;
+
+interface AnimationTrack {
+    /** Selector inside the player (`:scope` = the player). */
+    target?: string;
+    /** Start time in ms. */
+    start?: number;
+    duration?: number;
+    /** A timeline preset (`fade-up`, `scale`, `blur`…). */
+    preset?: string;
+    keyframes?: Keyframe[];
+    easing?: string;
+    /** A registered effect fired at `start` (instead of keyframes). */
+    effect?: string;
+    options?: Record<string, unknown>;
+    label?: string;
+}
+interface AnimationJSON {
+    format?: string;
+    version?: number;
+    name?: string;
+    loop?: boolean;
+    /** Total length; defaults to the end of the last track. */
+    duration?: number;
+    tracks: AnimationTrack[];
+}
+
+/**
+ * `<usa-keyframe-editor>` (6.9) — animation editor 2.0: a compact timeline
+ * for `<usa-player>` JSON. Each track is a row with a draggable bar (drag to
+ * move, drag the right edge to resize; ← / → move by 50 ms, Shift + ← / →
+ * resize); a playhead scrubs the preview, ▶ plays it. The preview target is
+ * the element with id `for` (its children are the tracks' targets). Set
+ * `animation` (object or JSON string, or a `<script type="application/json">`
+ * child); read `animation` / `toJSON()` for the edited JSON (format
+ * `use-scroll-animate/animation` v1 — playable by `<usa-player>`). Event
+ * `usa:change` (`{ animation }`). Reduced motion: the preview jumps to the
+ * end state.
+ */
+interface UsaKeyframeEditorElement extends UsaElement {
+    animation: AnimationJSON;
+    toJSON(): AnimationJSON;
+    play(): void;
+    seek(ms: number): void;
+}
+declare function defineKeyframeEditor(tag?: string): CustomElementConstructor | undefined;
+
+/**
  * motionary/components/widgets — the 6.x animated UI widgets, in their own
  * entry so `motionary/components` and `components/lite` keep their size
  * budgets. Every widget is reduced-motion safe and keyboard accessible.
@@ -538,8 +638,12 @@ declare global {
         'usa-swipe-deck': UsaSwipeDeckElement;
         'usa-weather-card': UsaWeatherCardElement;
         'usa-pull-cord': UsaPullCordElement;
+        'usa-date-picker': UsaDatePickerElement;
+        'usa-color-picker': UsaColorPickerElement;
+        'usa-file-drop': UsaFileDropElement;
+        'usa-keyframe-editor': UsaKeyframeEditorElement;
     }
 }
 
-export { CAROUSEL_EFFECTS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PROGRESS_VARIANTS, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, defineCarousel, defineCompare, defineCubeGallery, defineDisclosure, defineDock, defineKanban, defineMasonryFlow, defineMenu, defineMenuToggle, defineMilestones, defineModal, defineNavMorph, defineOdometer, definePagination, defineProgressRing, definePullCord, defineSegmented, defineSheet, defineSkeletonReveal, defineStarRating, defineStepper, defineStories, defineSwipeDeck, defineSwitch, defineTabBar, defineTip, defineToastStack, defineWeatherCard, defineWidgets, pageWindow, stackToast };
-export type { StackToastOptions, UsaCarouselElement, UsaCompareElement, UsaCubeGalleryElement, UsaDisclosureElement, UsaDockElement, UsaKanbanElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMilestonesElement, UsaModalElement, UsaNavMorphElement, UsaOdometerElement, UsaPaginationElement, UsaProgressRingElement, UsaPullCordElement, UsaSegmentedElement, UsaSheetElement, UsaSkeletonRevealElement, UsaStarRatingElement, UsaStepperElement, UsaStoriesElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTipElement, UsaToastStackElement, UsaWeatherCardElement };
+export { CAROUSEL_EFFECTS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PROGRESS_VARIANTS, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, defineCarousel, defineColorPicker, defineCompare, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineFileDrop, defineKanban, defineKeyframeEditor, defineMasonryFlow, defineMenu, defineMenuToggle, defineMilestones, defineModal, defineNavMorph, defineOdometer, definePagination, defineProgressRing, definePullCord, defineSegmented, defineSheet, defineSkeletonReveal, defineStarRating, defineStepper, defineStories, defineSwipeDeck, defineSwitch, defineTabBar, defineTip, defineToastStack, defineWeatherCard, defineWidgets, hexToHsv, hsvToHex, monthGrid, pageWindow, parseISODate, stackToast };
+export type { StackToastOptions, UsaCarouselElement, UsaColorPickerElement, UsaCompareElement, UsaCubeGalleryElement, UsaDatePickerElement, UsaDisclosureElement, UsaDockElement, UsaFileDropElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMilestonesElement, UsaModalElement, UsaNavMorphElement, UsaOdometerElement, UsaPaginationElement, UsaProgressRingElement, UsaPullCordElement, UsaSegmentedElement, UsaSheetElement, UsaSkeletonRevealElement, UsaStarRatingElement, UsaStepperElement, UsaStoriesElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTipElement, UsaToastStackElement, UsaWeatherCardElement };

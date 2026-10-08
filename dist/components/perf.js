@@ -1,5 +1,5 @@
-import { o as onFrame, t as setStyleLoader, f as animationBudget, h as getMotionIntensity, g as configureComponents, j as setAnimationBudget, b as activeAnimations } from '../chunks/base-DchG4q_S.js';
-export { s as schedulerStats } from '../chunks/base-DchG4q_S.js';
+import { o as onFrame, t as setStyleLoader, f as animationBudget, h as getMotionIntensity, g as configureComponents, j as setAnimationBudget, b as activeAnimations } from '../chunks/base-D5MHqeDd.js';
+export { s as schedulerStats } from '../chunks/base-D5MHqeDd.js';
 import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-DucKMQr_.js';
 
 /**

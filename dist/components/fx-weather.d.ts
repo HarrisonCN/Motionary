@@ -65,6 +65,8 @@ interface EffectDefinition<O extends Record<string, unknown> = Record<string, an
 declare function skyAt(hour: number): [string, string];
 declare const WEATHER_FX: EffectDefinition[];
 /** Register the 6.8 weather & ambience pack (idempotent). */
+declare function registerWeatherPack(): void;
+/** @deprecated since 6.9 — use `registerWeatherPack()` (removed in 7.0; `npx usa-codemod-7`). */
 declare function registerWeatherEffects(): void;
 
-export { WEATHER_FX, registerWeatherEffects, skyAt };
+export { WEATHER_FX, registerWeatherEffects, registerWeatherPack, skyAt };

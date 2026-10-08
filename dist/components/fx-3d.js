@@ -1,7 +1,7 @@
-import { registerEffects } from '../chunks/registry-D23neB4M.js';
+import { u as deprecate } from '../chunks/base-D5MHqeDd.js';
+import { registerEffects } from '../chunks/registry-CTLWeg-J.js';
 import { a as all } from '../chunks/shared-CkKHWrtJ.js';
 import { trackPointer } from './fx-light.js';
-import '../chunks/base-DchG4q_S.js';
 import '../chunks/generative-2LhxG5BJ.js';
 
 const layers = (el) => {
@@ -225,9 +225,14 @@ const DEPTH3_FX = [
     },
 ];
 /** Register the 6.5 3D pack (idempotent). */
-function register3dEffects() {
+function register3dPack() {
     registerEffects(DEPTH3_FX);
 }
+/** @deprecated since 6.9 — use `register3dPack()` (removed in 7.0; `npx usa-codemod-7`). */
+function register3dEffects() {
+    deprecate('register3dEffects', 'register3dEffects() is deprecated since 6.9 and removed in 7.0 — use register3dPack() (npx usa-codemod-7).');
+    register3dPack();
+}
 
-export { DEPTH3_FX, register3dEffects };
+export { DEPTH3_FX, register3dEffects, register3dPack };
 //# sourceMappingURL=fx-3d.js.map

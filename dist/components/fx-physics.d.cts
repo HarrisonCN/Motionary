@@ -86,7 +86,9 @@ declare class VerletWorld {
 }
 declare const PHYSICS2_FX: EffectDefinition[];
 /** Register the 6.8 physics 2.0 pack (idempotent). */
+declare function registerPhysicsPack(): void;
+/** @deprecated since 6.9 — use `registerPhysicsPack()` (removed in 7.0; `npx usa-codemod-7`). */
 declare function registerPhysicsEffects2(): void;
 
-export { PHYSICS2_FX, VerletWorld, registerPhysicsEffects2 };
+export { PHYSICS2_FX, VerletWorld, registerPhysicsEffects2, registerPhysicsPack };
 export type { VerletPoint };
