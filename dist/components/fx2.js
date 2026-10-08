@@ -17,6 +17,8 @@ export { VerletWorld } from './fx-physics.js';
 import { FOCUS_FX, registerFocusPack } from './fx-focus.js';
 import { MUSIC_FX, registerMusicPack } from './fx-music.js';
 export { musicSample, syntheticSample } from './fx-music.js';
+import { CHART_FX, registerChartPack } from './fx-chart.js';
+export { parseFigure } from './fx-chart.js';
 import '../chunks/registry-CyKExAmE.js';
 import '../chunks/base-2-yYc93C.js';
 import '../chunks/generative-2LhxG5BJ.js';
@@ -35,6 +37,7 @@ const EFFECT_PACKS = {
     physics: PHYSICS2_FX,
     focus: FOCUS_FX,
     music: MUSIC_FX,
+    chart: CHART_FX,
 };
 /** Register every 6.x effect pack (idempotent). */
 function registerEffectPacks() {
@@ -48,7 +51,8 @@ function registerEffectPacks() {
     registerPhysicsPack();
     registerFocusPack();
     registerMusicPack();
+    registerChartPack();
 }
 
-export { DEPTH3_FX, EFFECT_PACKS, FOCUS_FX, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, PHYSICS2_FX, TEXT3_FX, TRANSITIONS2_FX, WEATHER_FX, register3dPack, registerEffectPacks, registerFocusPack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerPhysicsPack, registerTextPack, registerTransitionsPack, registerWeatherPack };
+export { CHART_FX, DEPTH3_FX, EFFECT_PACKS, FOCUS_FX, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, PHYSICS2_FX, TEXT3_FX, TRANSITIONS2_FX, WEATHER_FX, register3dPack, registerChartPack, registerEffectPacks, registerFocusPack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerPhysicsPack, registerTextPack, registerTransitionsPack, registerWeatherPack };
 //# sourceMappingURL=fx2.js.map

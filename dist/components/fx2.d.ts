@@ -413,6 +413,35 @@ declare const MUSIC_FX: EffectDefinition[];
 declare function registerMusicPack(): void;
 
 /**
+ * 7.2 — Data-viz motion (`motionary/fx/chart`, also
+ * `motionary/components/fx-chart`): entrances for the charts you already
+ * have (any SVG or HTML chart library), registered through `registerEffect()`:
+ *
+ * - `bars-grow` (enter) — bars (`[data-bar]`, `rect`, or the children) grow
+ *   from the baseline in a stagger.
+ * - `line-draw` (enter) — every SVG `path` / `polyline` / `line` draws itself.
+ * - `ring-sweep` (enter) — SVG `circle` arcs sweep around from 12 o'clock.
+ * - `sankey-flow` (loop) — dashes flow along the SVG links (`[data-flow]` or
+ *   every stroked `path`) to show direction and volume.
+ * - `number-roll` (enter) — numbers (`[data-value]` or the text) count up
+ *   with locale formatting.
+ * - `dots-pop` (enter) — scatter / line points (`circle`, `[data-dot]`) pop in.
+ *
+ * Reduced motion: final state with a short fade (sankey-flow is static).
+ */
+
+/** Parse a number out of text like "$1,234.5k" → { n, pre, post, dec }. */
+declare function parseFigure(s: string): {
+    n: number;
+    pre: string;
+    post: string;
+    dec: number;
+} | null;
+declare const CHART_FX: EffectDefinition[];
+/** Register the 7.2 data-viz motion pack (idempotent). */
+declare function registerChartPack(): void;
+
+/**
  * 5.5 — generative backgrounds on Canvas 2D, registered through
  * `registerEffect()` (kind `background`): `flow-field`, `voronoi`,
  * `mesh-gradient`, `starfield`, `metaballs`, `contours`.
@@ -521,5 +550,5 @@ declare const EFFECT_PACKS: Record<string, EffectDefinition[]>;
 /** Register every 6.x effect pack (idempotent). */
 declare function registerEffectPacks(): void;
 
-export { DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FOCUS_FX, GLSL_HEAD, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, PHYSICS2_FX, TEXT3_FX, TRANSITIONS2_FX, VerletWorld, WEATHER_FX, WGSL_HEAD, crossDocumentTransitions, fieldFallback, glslToWgsl, loadEffectPack, musicSample, packManifest, pageTransition, pointsToPath, register3dPack, registerEffectPacks, registerFocusPack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerPhysicsPack, registerTextPack, registerTransitionsPack, registerWeatherPack, samplePath, shaderBackground, skyAt, splitChars, supportsWebGL2, supportsWebGPU, syntheticSample, trackPointer, validateManifest, webgpuBackground, wgslModule };
+export { CHART_FX, DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FOCUS_FX, GLSL_HEAD, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, PHYSICS2_FX, TEXT3_FX, TRANSITIONS2_FX, VerletWorld, WEATHER_FX, WGSL_HEAD, crossDocumentTransitions, fieldFallback, glslToWgsl, loadEffectPack, musicSample, packManifest, pageTransition, parseFigure, pointsToPath, register3dPack, registerChartPack, registerEffectPacks, registerFocusPack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerPhysicsPack, registerTextPack, registerTransitionsPack, registerWeatherPack, samplePath, shaderBackground, skyAt, splitChars, supportsWebGL2, supportsWebGPU, syntheticSample, trackPointer, validateManifest, webgpuBackground, wgslModule };
 export type { EffectPackManifest, ShaderSpec };
