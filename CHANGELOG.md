@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.7.0] - 2026-10-08
+
+### Added
+- **4 new components (6.7)** in `motionary/components/widgets` (also in `dist/widgets.umd.js`; the existing `<usa-toggle>` and `<usa-tabs>` are unchanged):
+  - `<usa-stepper>` — step indicator / wizard: the rail fills toward the current step, finished steps pop a drawn check, the current step pulses; horizontal or vertical, `clickable`, `next()` / `prev()` / `value`; `usa:change`.
+  - `<usa-pagination>` — pager with a sliding, squashing ink and page numbers that slide in from the direction of travel; `total`, `page`, `siblings`, ellipses, prev / next, `aria-current`; `usa:change`. Helper `pageWindow()`.
+  - `<usa-segmented>` — segmented control whose thumb springs and stretches between segments; radio group with arrow keys; `variant="ios | pill | outline"`; `usa:change`.
+  - `<usa-switch>` — toggle switch variants `ios` (press-stretch), `daynight` (sun → moon + stars), `bounce` (squash), `liquid` (gooey pour); `role="switch"`, form value via `name`, `disabled`; `usa:change`.
+- **Transitions 2.0 — `motionary/components/fx-transitions`** (6 effects of kind `page`, `registerTransitionEffects2()`, also in `registerFx2()`; option `mode: "in" | "out"`): `ripple-dissolve`, `shatter`, `mosaic-flip`, `liquid-wipe`, `page-curl`, `camera-dolly`. `pageTransition(update, effect)` runs a DOM update inside the View Transitions API (fallback: update + effect); `crossDocumentTransitions(effect)` opts an MPA into cross-document view transitions with the same look.
+- Showcase: 7 new gallery cards with copyable code; Animation Store “Components 6.x” 35 → 42 entries (262 → 269 items).
+
+### Accessibility
+- Stepper is a labelled list with `aria-current="step"`; pagination is a labelled navigation with `aria-current="page"` and disabled prev / next at the ends; segmented is a `radiogroup` with roving tabindex; switch is `role="switch"` with `aria-checked`. Reduced motion: no pop, ink squash, thumb stretch, bounce or pour; every transition becomes a short fade (and cross-document transitions ~1 ms).
+
 ## [6.6.0] - 2026-10-08
 
 ### Added

@@ -291,3 +291,5 @@ usa-carousel[data-effect="cards"].demo-carousel .demo-slide{margin:0 18%}
 .demo-navm{font-size:14px}.demo-mt{color:var(--text,#111)}
 .demo-morph-svg path{fill:#7c5cff;stroke:#22d3ee;stroke-width:2}
 .demo-blob-btn{border:0;background:none;color:#fff;font:700 16px system-ui;padding:16px 26px;cursor:pointer}
+.demo-stepper{width:min(300px,100%)}.demo-col{display:flex;flex-direction:column;align-items:center;gap:14px;width:100%}
+.demo-trans{background:linear-gradient(135deg,#0ea5e9,#7c5cff)!important;color:#fff}.demo-trans-b{background:linear-gradient(135deg,#f43f5e,#f59e0b)!important}.demo-trans-c{background:linear-gradient(135deg,#10b981,#0ea5e9)!important}

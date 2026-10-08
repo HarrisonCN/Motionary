@@ -256,6 +256,56 @@ export const components = [
     '<usa-fx effect="noise-reveal" trigger="enter">\n  <img src="hero.jpg" alt="…">\n</usa-fx>\n<usa-fx effect="icon-swap">\n  <button><span>☀️</span><span>🌙</span></button>\n</usa-fx>',
     '<usa-fx effect="noise-reveal" trigger="click"><div class="demo-tile demo-trail">Click: reveal</div></usa-fx>',
     [{ key: 'effect', values: ['noise-reveal', 'icon-swap'] }], '6.6'),
+  // ---- 6.7 -------------------------------------------------------------
+  W('usa-stepper', 'ui', 'Stepper / wizard', '步骤条 / 向导',
+    '6.7: the rail fills toward the current step, finished steps pop a drawn check mark and the current step pulses. Horizontal or vertical; next() / prev() / value.',
+    '6.7：进度轨道向当前步骤填充，已完成步骤弹出描边勾选，当前步骤脉冲一次。支持水平或垂直；next() / prev() / value。',
+    ['stepper', 'wizard', 'steps', 'progress', 'checkout'],
+    '<usa-stepper value="1" label="Checkout">\n  <span>Cart</span>\n  <span>Shipping</span>\n  <span>Payment</span>\n  <span>Done</span>\n</usa-stepper>',
+    '<div class="demo-col"><usa-stepper value="1" class="demo-stepper" label="Checkout"><span>Cart</span><span>Ship</span><span>Pay</span><span>Done</span></usa-stepper><div class="demo-row"><button type="button" class="demo-btn" data-st="prev">Back</button><button type="button" class="demo-btn" data-st="next">Next</button></div></div>',
+    undefined, { since: '6.7' }),
+  W('usa-pagination', 'ui', 'Pagination with sliding ink', '滑动墨迹分页',
+    '6.7: the highlight springs to the chosen page (squashing on the way) and page numbers slide in from the direction of travel when the window shifts. Prev / next, ellipses, aria-current.',
+    '6.7：高亮块以弹簧动画移到所选页（途中挤压变形），页码窗口移动时数字从移动方向滑入。上一页 / 下一页、省略号、aria-current。',
+    ['pagination', 'pages', 'pager', 'ink', 'navigation'],
+    '<usa-pagination total="20" page="1" siblings="1"></usa-pagination>',
+    '<usa-pagination total="12" page="3" class="demo-pg"></usa-pagination>',
+    undefined, { since: '6.7' }),
+  W('usa-segmented', 'ui', 'Segmented control', '分段控件',
+    '6.7: an iOS-style thumb slides under the chosen segment with a spring and stretches while it travels. A real radio group: arrow keys, Home / End. iOS, pill or outline.',
+    '6.7：iOS 风格滑块以弹簧动画移到所选分段，移动途中拉伸。真正的单选组：方向键、Home / End。iOS、胶囊或描边样式。',
+    ['segmented', 'radio', 'toggle group', 'ios', 'switcher'],
+    '<usa-segmented variant="ios" label="View">\n  <button>Day</button>\n  <button>Week</button>\n  <button>Month</button>\n</usa-segmented>',
+    '<usa-segmented variant="ios" class="demo-seg" label="View"><button type="button">Day</button><button type="button">Week</button><button type="button">Month</button><button type="button">Year</button></usa-segmented>',
+    [{ key: 'variant', values: ['ios', 'pill', 'outline'] }], { since: '6.7' }),
+  W('usa-switch', 'click', 'Toggle switch variants', '开关变体',
+    '6.7: four switches — iOS (the thumb stretches while pressed), day / night (sun becomes moon, stars appear), bounce (squash at the end) and liquid (a gooey fill pours in). role="switch", forms, keyboard.',
+    '6.7：四种开关 —— iOS（按下时滑块拉长）、昼夜（太阳变月亮、星星出现）、弹跳（到端点时挤压回弹）与液态（粘稠填充倾泻而入）。role="switch"、表单、键盘。',
+    ['switch', 'toggle', 'day night', 'dark mode', 'ios'],
+    '<usa-switch variant="daynight" name="dark" label="Dark mode"></usa-switch>',
+    '<div class="demo-row"><usa-switch variant="ios" checked label="Wi-Fi"></usa-switch><usa-switch variant="daynight" label="Dark mode"></usa-switch><usa-switch variant="bounce" label="Bounce"></usa-switch><usa-switch variant="liquid" label="Liquid"></usa-switch></div>',
+    undefined, { since: '6.7' }),
+  X('fx-transitions2', ['fx-transitions', 'registerTransitionEffects2'], 'Transitions 2.0: ripple dissolve & liquid wipe', '转场 2.0：涟漪溶解与液体擦除',
+    '6.7: ripple-dissolve grows a circle from the pointer; liquid-wipe sweeps a wavy edge across. pageTransition() runs them inside the View Transitions API; crossDocumentTransitions() gives an MPA the same look.',
+    '6.7：ripple-dissolve 从指针处扩散圆形揭示；liquid-wipe 以波浪边缘横扫。pageTransition() 在 View Transitions API 内运行它们；crossDocumentTransitions() 让多页站点获得同样效果。',
+    ['transition', 'view transitions', 'ripple', 'wipe', 'mpa', 'page'],
+    '<usa-fx effect="ripple-dissolve" trigger="click" options=\'{"mode":"in"}\'>\n  <section>…</section>\n</usa-fx>\n<script type="module">\n  import { pageTransition } from \'motionary/components/fx-transitions\';\n  pageTransition(() => render(next), \'liquid-wipe\');\n</script>',
+    '<usa-fx effect="ripple-dissolve" trigger="click" options=\'{"mode":"in"}\'><div class="demo-tile demo-trans">Click: ripple dissolve</div></usa-fx>',
+    [{ key: 'effect', values: ['ripple-dissolve', 'liquid-wipe', 'camera-dolly'] }], '6.7'),
+  X('fx-shatter', ['fx-transitions', 'registerTransitionEffects2'], 'Shatter & mosaic flip', '碎片爆裂与马赛克翻牌',
+    '6.7: shatter breaks the element into triangular shards that fly together (in) or apart (out); mosaic-flip turns a grid of tiles over in a diagonal wave.',
+    '6.7：shatter 将元素碎成三角形碎片后聚合（in）或飞散（out）；mosaic-flip 让网格瓷砖沿对角线波浪式翻转。',
+    ['shatter', 'shards', 'mosaic', 'tiles', 'flip', 'transition'],
+    '<usa-fx effect="shatter" trigger="click" options=\'{"mode":"in","pieces":16}\'>\n  <img src="photo.jpg" alt="…">\n</usa-fx>',
+    '<usa-fx effect="shatter" trigger="click" options=\'{"mode":"in","pieces":16}\'><div class="demo-tile demo-trans demo-trans-b">Click: shatter in</div></usa-fx>',
+    [{ key: 'effect', values: ['shatter', 'mosaic-flip'] }], '6.7'),
+  X('fx-curl', ['fx-transitions', 'registerTransitionEffects2'], 'Page curl & camera dolly', '卷页与镜头推拉',
+    '6.7: page-curl turns the element like a book page around its left edge with a moving shade; camera-dolly moves it in from depth with a depth-of-field blur.',
+    '6.7：page-curl 让元素像书页一样绕左边缘翻动并带移动阴影；camera-dolly 以景深模糊从远处推近。',
+    ['page curl', 'book', 'dolly', 'zoom', 'transition'],
+    '<usa-fx effect="page-curl" trigger="enter">\n  <article>…</article>\n</usa-fx>',
+    '<usa-fx effect="page-curl" trigger="click"><div class="demo-tile demo-trans demo-trans-c">Click: page curl</div></usa-fx>',
+    [{ key: 'effect', values: ['page-curl', 'camera-dolly'] }], '6.7'),
 ];
 
 /** item id → live-demo wiring. */
@@ -281,5 +331,10 @@ export const wire = {
     let only = false;
     stage.querySelector('[data-mf=shuffle]')?.addEventListener('click', () => g.shuffle());
     stage.querySelector('[data-mf=filter]')?.addEventListener('click', () => g.filter((only = !only) ? '.odd' : null));
+  },
+  stepper: (stage) => {
+    const s = stage.querySelector('usa-stepper');
+    stage.querySelector('[data-st=next]')?.addEventListener('click', () => (s.value >= s.steps.length - 1 ? (s.value = 0) : s.next()));
+    stage.querySelector('[data-st=prev]')?.addEventListener('click', () => s.prev());
   },
 };
