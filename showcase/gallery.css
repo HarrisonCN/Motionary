@@ -3,6 +3,19 @@
 .nav-link { padding: 0 12px; }
 .gallery-page .toolbar { background: color-mix(in srgb, var(--bg) 82%, transparent); -webkit-backdrop-filter: saturate(1.6) blur(14px); backdrop-filter: saturate(1.6) blur(14px); margin-inline: calc(-1 * clamp(16px, 4vw, 40px)); padding-inline: clamp(16px, 4vw, 40px); padding-bottom: 10px; }
 @media (max-width: 640px) { .nav-link { padding: 0 9px; font-size: 0.78rem; } .topbar .brand-name { display: none; } }
+/* 6.0.1: six nav items overflowed a 390px viewport by ~48px — let the bar shrink and tighten on phones (one row, so the sticky toolbar offset still holds) */
+.gallery-page .topbar-actions { min-width: 0; }
+@media (max-width: 480px) {
+  .gallery-page .topbar { gap: 8px; }
+  .gallery-page .topbar-actions { gap: 4px; }
+  .gallery-page .topbar-actions .icon-btn { flex: none; min-width: 34px; height: 36px; padding: 0 7px; border-radius: 10px; }
+  .gallery-page .topbar-actions .nav-link { padding: 0 7px; font-size: 0.74rem; }
+  .gallery-page .topbar-actions .nav-link[href="./"] { display: none; } /* the brand already links to the store */
+  .gallery-page .topbar .brand-store { display: none; }
+}
+@media (max-width: 374px) { .gallery-page .topbar-actions a.icon-btn[href^="https://github.com"] { display: none; } /* GitHub stays in the footer */ }
+@media (max-width: 340px) { .gallery-page .topbar { padding-inline: 10px; gap: 6px; } .gallery-page .topbar-actions .nav-link { padding: 0 5px; } }
+
 
 /* Hero: a real <usa-aurora> */
 .g-hero { display: block; padding: clamp(48px, 9vw, 110px) clamp(16px, 4vw, 40px) clamp(40px, 6vw, 72px); border-bottom: 1px solid var(--line); }
