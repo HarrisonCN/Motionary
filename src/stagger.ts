@@ -1,5 +1,5 @@
 /**
- * use-scroll-animate - Staggered children
+ * motionary - Staggered children
  * Reveal a container's children one after another when the container scrolls
  * into view, optionally also animating children that are added later.
  */

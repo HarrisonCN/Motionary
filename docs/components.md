@@ -1,55 +1,55 @@
-# Animated components (`use-scroll-animate/components`)
+# Animated components (`motionary/components`)
 
 Since **v2.2** (now **v3**) the package ships **30 animated UI components** as standard Web Components (`<usa-*>` custom elements) plus three transition helpers. They are built only on Custom Elements, CSS and the Web Animations API, so the same code runs:
 
 - in any modern browser (Chrome, Edge, Firefox, Safari), and with React, Vue, Svelte, Solid, Angular or no framework;
 - in **Windows desktop software** that renders its UI with a web view — Electron, Tauri (WebView2), WinUI 3 / WPF / WinForms with WebView2, and installed PWAs. See **[Windows apps guide](./windows-apps.md)**.
 
-Live gallery: <https://harrisoncn.github.io/use-scroll-animate/showcase/components.html>
+Live gallery: <https://harrisoncn.github.io/motionary/showcase/components.html>
 
 ## Principles
 
-- **Zero dependencies, tree-shakable.** Import one category (`use-scroll-animate/components/text`) or one component (`import { defineTypewriter } …`) and only that ships.
+- **Zero dependencies, tree-shakable.** Import one category (`motionary/components/text`) or one component (`import { defineTypewriter } …`) and only that ships.
 - **SSR-safe.** Importing never touches `window`/`document`; every `define*()` is a no-op on the server.
 - **Opt-in registration.** Nothing is registered until you call `define*()` (or load the IIFE bundle). Every `define*()` accepts a custom tag name: `defineSpinner('my-loader')`.
 - **`prefers-reduced-motion` everywhere.** Each component has a calm variant (instant reveal, fade instead of slide, static background…). Override globally with `configureComponents({ reducedMotion: 'reduce' | 'no-preference' | 'user' })`.
 - **GPU-friendly.** Animations use `transform` / `opacity` (plus `filter` for blur effects); layout is read and written in separate phases, at most once per frame, and loops pause when off-screen or the tab is hidden.
 - **Accessible.** Animated text keeps a visually-hidden plain copy for screen readers; switches, progress bars, toasts and dialogs carry the right roles and ARIA states.
-- **Styles included.** Each component injects its own small stylesheet once (as a constructable stylesheet, which a `style-src 'self'` CSP allows). Prefer a file? `import 'use-scroll-animate/components.css'` (or `/components/<category>.css`) and call `configureComponents({ injectStyles: false })`.
+- **Styles included.** Each component injects its own small stylesheet once (as a constructable stylesheet, which a `style-src 'self'` CSP allows). Prefer a file? `import 'motionary/components.css'` (or `/components/<category>.css`) and call `configureComponents({ injectStyles: false })`.
 
 ## Install & register
 
 ```bash
-npm i use-scroll-animate
+npm i motionary
 ```
 
 ```js
 // everything
-import { defineComponents } from 'use-scroll-animate/components';
+import { defineComponents } from 'motionary/components';
 defineComponents();                       // or defineComponents(['text', 'feedback'])
 
 // one category
-import { defineTextComponents } from 'use-scroll-animate/components/text';
+import { defineTextComponents } from 'motionary/components/text';
 defineTextComponents();
 
 // one component
-import { defineTypewriter } from 'use-scroll-animate/components/text';
+import { defineTypewriter } from 'motionary/components/text';
 defineTypewriter();
 ```
 
 No build step (registers every `<usa-*>` and exposes the API as `window.UsaComponents`):
 
 ```html
-<script src="https://unpkg.com/use-scroll-animate@6/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@6/dist/components.umd.js"></script>
 <usa-typewriter words="Hello, Windows.|Hello, web."></usa-typewriter>
 <script>UsaComponents.toast('Ready', { type: 'success' });</script>
 ```
 
 | Entry | Contents |
 |---|---|
-| `use-scroll-animate/components` | everything + `defineComponents()`, `COMPONENT_CATEGORIES`, `configureComponents()` |
-| `use-scroll-animate/components/reveal` · `/text` · `/interaction` · `/feedback` · `/background` · `/transitions` | one category + `define<Category>Components()` |
-| `use-scroll-animate/components.css`, `/components/<category>.css` | the same styles as files |
+| `motionary/components` | everything + `defineComponents()`, `COMPONENT_CATEGORIES`, `configureComponents()` |
+| `motionary/components/reveal` · `/text` · `/interaction` · `/feedback` · `/background` · `/transitions` | one category + `define<Category>Components()` |
+| `motionary/components.css`, `/components/<category>.css` | the same styles as files |
 | `dist/components.umd.js` | IIFE/UMD bundle for `<script>` tags, auto-registers |
 
 ## Components by category
@@ -60,7 +60,7 @@ All attributes are optional unless noted. Events are `CustomEvent`s that bubble,
 
 | Element | What it does | Key attributes | JS API / events |
 |---|---|---|---|
-| `<usa-reveal>` | Reveals content when it enters the viewport | `effect` (`fade`, `fade-up`*, `fade-down`, `fade-left`, `fade-right`, `zoom-in`, `zoom-out`, `blur`, `blur-up`, `flip-up`, `flip-left`, `rise`, or since 6.1 any registered scroll preset name such as `bounce-in-up` / `clip-diamond` once `use-scroll-animate` or `use-scroll-animate/presets/extended` is loaded — see [presets.md](./presets.md)), `duration` (700), `delay`, `distance` (32), `easing`, `threshold` (0.15), `root-margin`, `repeat` | `reveal()`, `reset()`, `revealed`; `usa:enter`, `usa:leave`, `usa:complete` |
+| `<usa-reveal>` | Reveals content when it enters the viewport | `effect` (`fade`, `fade-up`*, `fade-down`, `fade-left`, `fade-right`, `zoom-in`, `zoom-out`, `blur`, `blur-up`, `flip-up`, `flip-left`, `rise`, or since 6.1 any registered scroll preset name such as `bounce-in-up` / `clip-diamond` once `motionary` or `motionary/presets/extended` is loaded — see [presets.md](./presets.md)), `duration` (700), `delay`, `distance` (32), `easing`, `threshold` (0.15), `root-margin`, `repeat` | `reveal()`, `reset()`, `revealed`; `usa:enter`, `usa:leave`, `usa:complete` |
 | `<usa-stagger>` | Reveals its children one after another | `effect`, `interval` (70 ms), `duration`, `delay`, `distance`, `threshold`, `repeat` | `reveal()`, `reset()`; `usa:enter`, `usa:complete` |
 | `<usa-scroll-progress>` | Reading-progress bar for the page or one article | `target` (selector), `position` (`top`*, `bottom`, `inline`), `label`; CSS `--usa-progress-color/-height/-track` | `progress`, `update()`; `usa:progress` (`detail.progress`); `--usa-progress` on the element |
 | `<usa-scrolly>` | Sticky scrollytelling: `[data-sticky]` stays pinned while `[data-step]` children scroll by | `offset` (trigger line, 0.5) | `active`, `steps`; `usa:step` (`detail.index/step/name`); `data-step-name` + `--usa-step` on the host, `data-active` on the step |
@@ -222,10 +222,10 @@ Every component reads these CSS custom properties (set them on `:root`, any ance
 
 | Import | What |
 |---|---|
-| `use-scroll-animate/components/react` | `createUsaComponents(React)` typed wrappers (props, ref, `onUsa*` events) |
-| `use-scroll-animate/components/vue` | `isUsaElement`, `UsaPlugin` |
-| `use-scroll-animate/components/jsx` | `UsaIntrinsicElements` JSX types |
-| `use-scroll-animate/components/lazy` | `lazyDefine()`, `defineUsed()`, `loadCategory()` |
+| `motionary/components/react` | `createUsaComponents(React)` typed wrappers (props, ref, `onUsa*` events) |
+| `motionary/components/vue` | `isUsaElement`, `UsaPlugin` |
+| `motionary/components/jsx` | `UsaIntrinsicElements` JSX types |
+| `motionary/components/lazy` | `lazyDefine()`, `defineUsed()`, `loadCategory()` |
 
 See [frameworks-ssr.md](./frameworks-ssr.md) and [accessibility.md](./accessibility.md).
 
@@ -327,7 +327,7 @@ Hybrid / desktop hosts (MAUI, Flutter WebView, Electron, Tauri): [hybrid-apps.md
 `<usa-fx>` (`defineFx()`, `defineFxComponents()`) plays any registered effect on its first child: `<usa-fx effect="jelly" trigger="click"><button>Go</button></usa-fx>` — `trigger` `click` · `hover` · `enter` · `load` · `loop` · `manual`, `options` (JSON), `once`, `self`.
 
 ```js
-import { registerEffect, playEffect, bindEffect, listEffects } from 'use-scroll-animate/components/fx';
+import { registerEffect, playEffect, bindEffect, listEffects } from 'motionary/components/fx';
 registerEffect({ name: 'spin-pop', kind: 'attention', run: (el, o, ctx) => ctx.animate(el, frames, { duration: 700 }) });
 await playEffect(el, 'spin-pop');
 const unbind = bindEffect(card, 'fade-up', { trigger: 'enter' });
@@ -337,10 +337,10 @@ Built-ins (`BUILTIN_EFFECTS`): every timeline preset as an `enter` effect (`fade
 
 ### v5.1 Card & click effects 2.0 (`components/effects`)
 
-The 5.x effect packs live in `use-scroll-animate/components/effects` (not in `components` / `components/lite`). Register them once, then use any name with `<usa-fx>`, `playEffect()` or `bindEffect()`:
+The 5.x effect packs live in `motionary/components/effects` (not in `components` / `components/lite`). Register them once, then use any name with `<usa-fx>`, `playEffect()` or `bindEffect()`:
 
 ```js
-import { registerAllEffects } from 'use-scroll-animate/components/effects';
+import { registerAllEffects } from 'motionary/components/effects';
 registerAllEffects();
 ```
 ```html
@@ -355,7 +355,7 @@ Card: `holo` · `glare-sweep` · `book-open` · `card-fan` · `topple` · `float
 `bounce-in` · `rubber-band` · `elastic-hover` · `drop-bounce` · `gravity-text` · `spring-follow` · `bell-swing` — keyframes come from a damped-spring / gravity solver and play on WAAPI.
 
 ```js
-import { registerAllEffects, solveSpring, springKeyframes } from 'use-scroll-animate/components/effects';
+import { registerAllEffects, solveSpring, springKeyframes } from 'motionary/components/effects';
 registerAllEffects();
 const { frames, duration } = springKeyframes((p) => ({ transform: `scale(${p})` }), { stiffness: 220, damping: 11 });
 el.animate(frames, { duration });
@@ -370,8 +370,8 @@ el.animate(frames, { duration });
 Transitions `curtain` · `iris` · `pixel-dissolve` · `blinds` cover the viewport, await `onCovered()`, then reveal:
 
 ```js
-import { registerAllEffects } from 'use-scroll-animate/components/effects';
-import { playEffect } from 'use-scroll-animate/components/fx';
+import { registerAllEffects } from 'motionary/components/effects';
+import { playEffect } from 'motionary/components/fx';
 registerAllEffects();
 link.addEventListener('click', (e) => {
   e.preventDefault();
@@ -384,7 +384,7 @@ Persistent: `<usa-fx effect="velocity-skew" trigger="load">`, `spotlight` (`radi
 ### v5.4 Scroll stories — `<usa-story>` (`components/effects`)
 
 ```js
-import { defineStory } from 'use-scroll-animate/components/effects';
+import { defineStory } from 'motionary/components/effects';
 defineStory();
 ```
 ```html
@@ -410,8 +410,8 @@ Templates `pin` · `gallery` · `zoom` (`zoom="6"`) · `compare` · `counter` ·
 </usa-fx>
 ```
 ```js
-import { registerEffect } from 'use-scroll-animate/components/fx';
-import { canvasBackground } from 'use-scroll-animate/components/effects';
+import { registerEffect } from 'motionary/components/fx';
+import { canvasBackground } from 'motionary/components/effects';
 registerEffect({ name: 'pulse-bg', kind: 'background', reduced: 'run',
   run: (el, o, ctx) => canvasBackground(el, ctx, { draw: ({ ctx: g, w, h, t }) => { g.fillStyle = `hsl(${t * 40} 70% 50%)`; g.fillRect(0, 0, w, h); } }, o) });
 ```
@@ -428,7 +428,7 @@ registerEffect({ name: 'pulse-bg', kind: 'background', reduced: 'run',
 </usa-audio>
 ```
 ```js
-import { enableAudio, bindBeat, registerAllEffects } from 'use-scroll-animate/components/effects';
+import { enableAudio, bindBeat, registerAllEffects } from 'motionary/components/effects';
 registerAllEffects();
 button.addEventListener('click', async () => {
   await enableAudio('mic');            // or an <audio>/<video> element, selector or MediaStream
@@ -446,7 +446,7 @@ Cursor effects (`comet-trail` · `ribbon-trail` · `sparkle-trail` · `magnetic-
 <usa-gesture-fx gesture="long-press" effect="tada"><button>Hold me</button></usa-gesture-fx>
 ```
 ```js
-import { bindGesture, registerAllEffects } from 'use-scroll-animate/components/effects';
+import { bindGesture, registerAllEffects } from 'motionary/components/effects';
 registerAllEffects();
 bindGesture(card, 'fling', 'confetti', { velocity: 1 });
 bindGesture(dial, 'twist', ({ direction }) => step(direction === 'cw' ? 1 : -1));
@@ -460,12 +460,12 @@ bindGesture(dial, 'twist', ({ direction }) => step(direction === 'cw' ? 1 : -1))
   <div class="usa-surface">
     <button data-theme-fx="click">Tap</button>
     <usa-fx effect="like-heart" trigger="click"><button aria-pressed="false">♥ <span data-count="12">12</span></button></usa-fx>
-    <usa-fx effect="copy-success" trigger="click"><button data-copy="npm i use-scroll-animate">Copy</button></usa-fx>
+    <usa-fx effect="copy-success" trigger="click"><button data-copy="npm i motionary">Copy</button></usa-fx>
   </div>
 </usa-theme>
 ```
 ```js
-import { applyTheme, themeCss, playEffect, registerAllEffects } from 'use-scroll-animate/components/effects';
+import { applyTheme, themeCss, playEffect, registerAllEffects } from 'motionary/components/effects';
 registerAllEffects();
 const undo = applyTheme('neon');          // whole page: design + motion tokens + data-usa-theme
 const css = themeCss('paper', ':root');   // static CSS for SSR
@@ -492,7 +492,7 @@ Plays JSON animations made of timeline presets, keyframes and registered effects
 </usa-player>
 ```
 ```js
-import { createPlayer, registerAllEffects } from 'use-scroll-animate/components/effects';
+import { createPlayer, registerAllEffects } from 'motionary/components/effects';
 registerAllEffects();
 const p = createPlayer(hero, await (await fetch('/hero.json')).json());
 p.play(); p.seek(500); p.rate = 0.5;
@@ -505,7 +505,7 @@ Custom elements work in every framework. Register once (e.g. in your entry file)
 
 ```jsx
 // React 19 passes props to custom elements as properties; React 18 passes strings — both work for attributes.
-import { defineFeedbackComponents, toast } from 'use-scroll-animate/components/feedback';
+import { defineFeedbackComponents, toast } from 'motionary/components/feedback';
 defineFeedbackComponents();
 
 export function Save() {
@@ -532,4 +532,4 @@ Gzipped, minified (budgets enforced in CI by `npm run size:check`):
 | `viewTransition` only | ≈ 0.4 kB |
 | `dist/components.css` | ≈ 5.5 kB |
 
-The scroll-animation core (`use-scroll-animate`) is unchanged and is not pulled in by the components.
+The scroll-animation core (`motionary`) is unchanged and is not pulled in by the components.

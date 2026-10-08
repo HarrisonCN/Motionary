@@ -1,18 +1,18 @@
 # Presets
 
-`use-scroll-animate` ships **214 scroll-reveal presets**: 33 in the core (always available) and **181 extended presets** added in 6.1 ("Scroll presets 2.0").
+`motionary` ships **214 scroll-reveal presets**: 33 in the core (always available) and **181 extended presets** added in 6.1 ("Scroll presets 2.0").
 
 ```js
-import ScrollAnimate from 'use-scroll-animate';
-import 'use-scroll-animate/presets/extended'; // registers the extended set (≈ 4 kB gzip, separate entry)
+import ScrollAnimate from 'motionary';
+import 'motionary/presets/extended'; // registers the extended set (≈ 4 kB gzip, separate entry)
 
 ScrollAnimate.observe('.card', { animation: 'bounce-in-up', duration: 900 });
 ```
 
 ```html
 <!-- No build: the UMD core, then the extended set (registers itself) -->
-<script src="https://unpkg.com/use-scroll-animate@6/dist/index.umd.js"></script>
-<script src="https://unpkg.com/use-scroll-animate@6/dist/presets-extended.umd.js"></script>
+<script src="https://unpkg.com/motionary@6/dist/index.umd.js"></script>
+<script src="https://unpkg.com/motionary@6/dist/presets-extended.umd.js"></script>
 <div data-sa data-sa-animation="clip-diamond">…</div>
 <script>ScrollAnimate.default.init();</script>
 ```

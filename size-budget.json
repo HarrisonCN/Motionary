@@ -35,27 +35,27 @@
     "limit": 6400
   },
   {
-    "name": "import 'use-scroll-animate/svelte'",
+    "name": "import 'motionary/svelte'",
     "import": "export * from 'pkg/svelte';",
     "limit": 6656
   },
   {
-    "name": "import 'use-scroll-animate/solid'",
+    "name": "import 'motionary/solid'",
     "import": "export * from 'pkg/solid';",
     "limit": 6656
   },
   {
-    "name": "import 'use-scroll-animate/element'",
+    "name": "import 'motionary/element'",
     "import": "export * from 'pkg/element';",
     "limit": 6400
   },
   {
-    "name": "import 'use-scroll-animate/react'",
+    "name": "import 'motionary/react'",
     "import": "export * from 'pkg/react';",
     "limit": 6912
   },
   {
-    "name": "import 'use-scroll-animate/vue'",
+    "name": "import 'motionary/vue'",
     "import": "export * from 'pkg/vue';",
     "limit": 6400
   },
@@ -70,7 +70,7 @@
     "limit": 5120
   },
   {
-    "name": "import 'use-scroll-animate/presets/extended'",
+    "name": "import 'motionary/presets/extended'",
     "import": "export * from 'pkg/presets/extended';",
     "limit": 5376
   },
@@ -85,37 +85,37 @@
     "limit": 16128
   },
   {
-    "name": "import 'use-scroll-animate/components' (everything)",
+    "name": "import 'motionary/components' (everything)",
     "import": "export * from 'pkg/components';",
     "limit": 96000
   },
   {
-    "name": "import 'use-scroll-animate/components/reveal'",
+    "name": "import 'motionary/components/reveal'",
     "import": "export * from 'pkg/components/reveal';",
     "limit": 5120
   },
   {
-    "name": "import 'use-scroll-animate/components/text'",
+    "name": "import 'motionary/components/text'",
     "import": "export * from 'pkg/components/text';",
     "limit": 12288
   },
   {
-    "name": "import 'use-scroll-animate/components/interaction'",
+    "name": "import 'motionary/components/interaction'",
     "import": "export * from 'pkg/components/interaction';",
     "limit": 6400
   },
   {
-    "name": "import 'use-scroll-animate/components/feedback'",
+    "name": "import 'motionary/components/feedback'",
     "import": "export * from 'pkg/components/feedback';",
     "limit": 7936
   },
   {
-    "name": "import 'use-scroll-animate/components/background'",
+    "name": "import 'motionary/components/background'",
     "import": "export * from 'pkg/components/background';",
     "limit": 10240
   },
   {
-    "name": "import 'use-scroll-animate/components/transitions'",
+    "name": "import 'motionary/components/transitions'",
     "import": "export * from 'pkg/components/transitions';",
     "limit": 6144
   },
@@ -150,7 +150,7 @@
     "limit": 768
   },
   {
-    "name": "import 'use-scroll-animate/components/physics'",
+    "name": "import 'motionary/components/physics'",
     "import": "export * from 'pkg/components/physics';",
     "limit": 7168
   },
@@ -160,7 +160,7 @@
     "limit": 3328
   },
   {
-    "name": "import 'use-scroll-animate/components/cards'",
+    "name": "import 'motionary/components/cards'",
     "import": "export * from 'pkg/components/cards';",
     "limit": 9728
   },
@@ -170,7 +170,7 @@
     "limit": 6144
   },
   {
-    "name": "import 'use-scroll-animate/components/click'",
+    "name": "import 'motionary/components/click'",
     "import": "export * from 'pkg/components/click';",
     "limit": 13312
   },
@@ -180,7 +180,7 @@
     "limit": 5888
   },
   {
-    "name": "import 'use-scroll-animate/components/ui'",
+    "name": "import 'motionary/components/ui'",
     "import": "export * from 'pkg/components/ui';",
     "limit": 13568
   },
@@ -190,7 +190,7 @@
     "limit": 4352
   },
   {
-    "name": "import 'use-scroll-animate/components/page'",
+    "name": "import 'motionary/components/page'",
     "import": "export * from 'pkg/components/page';",
     "limit": 12544
   },
@@ -200,22 +200,22 @@
     "limit": 1792
   },
   {
-    "name": "import 'use-scroll-animate/components/react'",
+    "name": "import 'motionary/components/react'",
     "import": "export * from 'pkg/components/react';",
     "limit": 1536
   },
   {
-    "name": "import 'use-scroll-animate/components/vue'",
+    "name": "import 'motionary/components/vue'",
     "import": "export * from 'pkg/components/vue';",
     "limit": 81664
   },
   {
-    "name": "import 'use-scroll-animate/components/lazy'",
+    "name": "import 'motionary/components/lazy'",
     "import": "export * from 'pkg/components/lazy';",
     "limit": 1792
   },
   {
-    "name": "import 'use-scroll-animate/components/timeline'",
+    "name": "import 'motionary/components/timeline'",
     "import": "export * from 'pkg/components/timeline';",
     "limit": 5632
   },
@@ -225,7 +225,7 @@
     "limit": 5376
   },
   {
-    "name": "import 'use-scroll-animate/components/gesture'",
+    "name": "import 'motionary/components/gesture'",
     "import": "export * from 'pkg/components/gesture';",
     "limit": 6144
   },
@@ -235,7 +235,7 @@
     "limit": 5632
   },
   {
-    "name": "import 'use-scroll-animate/components/svg'",
+    "name": "import 'motionary/components/svg'",
     "import": "export * from 'pkg/components/svg';",
     "limit": 5888
   },
@@ -245,7 +245,7 @@
     "limit": 5120
   },
   {
-    "name": "import 'use-scroll-animate/components/webgl'",
+    "name": "import 'motionary/components/webgl'",
     "import": "export * from 'pkg/components/webgl';",
     "limit": 8704
   },
@@ -255,7 +255,7 @@
     "limit": 7936
   },
   {
-    "name": "import 'use-scroll-animate/components/depth'",
+    "name": "import 'motionary/components/depth'",
     "import": "export * from 'pkg/components/depth';",
     "limit": 6656
   },
@@ -265,7 +265,7 @@
     "limit": 5888
   },
   {
-    "name": "import 'use-scroll-animate/components/layout'",
+    "name": "import 'motionary/components/layout'",
     "import": "export * from 'pkg/components/layout';",
     "limit": 4352
   },
@@ -275,22 +275,22 @@
     "limit": 3328
   },
   {
-    "name": "import 'use-scroll-animate/components/svelte'",
+    "name": "import 'motionary/components/svelte'",
     "import": "export * from 'pkg/components/svelte';",
     "limit": 81920
   },
   {
-    "name": "import 'use-scroll-animate/components/solid'",
+    "name": "import 'motionary/components/solid'",
     "import": "export * from 'pkg/components/solid';",
     "limit": 81920
   },
   {
-    "name": "import 'use-scroll-animate/components/angular'",
+    "name": "import 'motionary/components/angular'",
     "import": "export * from 'pkg/components/angular';",
     "limit": 81920
   },
   {
-    "name": "import 'use-scroll-animate/components/packs'",
+    "name": "import 'motionary/components/packs'",
     "import": "export * from 'pkg/components/packs';",
     "limit": 4352
   },
@@ -300,27 +300,27 @@
     "limit": 4096
   },
   {
-    "name": "import 'use-scroll-animate/components/tokens'",
+    "name": "import 'motionary/components/tokens'",
     "import": "export * from 'pkg/components/tokens';",
     "limit": 2048
   },
   {
-    "name": "import 'use-scroll-animate/components/a11y'",
+    "name": "import 'motionary/components/a11y'",
     "import": "export * from 'pkg/components/a11y';",
     "limit": 4864
   },
   {
-    "name": "import 'use-scroll-animate/components/lite'",
+    "name": "import 'motionary/components/lite'",
     "import": "export * from 'pkg/components/lite';",
     "limit": 71680
   },
   {
-    "name": "import 'use-scroll-animate/components/perf'",
+    "name": "import 'motionary/components/perf'",
     "import": "export * from 'pkg/components/perf';",
     "limit": 2304
   },
   {
-    "name": "import 'use-scroll-animate/components/bridge'",
+    "name": "import 'motionary/components/bridge'",
     "import": "export * from 'pkg/components/bridge';",
     "limit": 1792
   },
@@ -330,7 +330,7 @@
     "limit": 7680
   },
   {
-    "name": "import 'use-scroll-animate/components/fx'",
+    "name": "import 'motionary/components/fx'",
     "import": "export * from 'pkg/components/fx';",
     "limit": 6144
   },
@@ -340,7 +340,7 @@
     "limit": 5888
   },
   {
-    "name": "import 'use-scroll-animate/components/effects'",
+    "name": "import 'motionary/components/effects'",
     "import": "export * from 'pkg/components/effects';",
     "limit": 27904
   }

@@ -1,6 +1,6 @@
-import { x as defineElement } from '../chunks/base-C3Sw9sAO.js';
-import { t as timeline, T as TIMELINE_PRESETS } from '../chunks/core-DN3hHbHh.js';
-export { r as resolvePosition, s as supportsNativeScrub } from '../chunks/core-DN3hHbHh.js';
+import { x as defineElement } from '../chunks/base-Yno7N2eC.js';
+import { t as timeline, T as TIMELINE_PRESETS } from '../chunks/core-CUGCsMsJ.js';
+export { r as resolvePosition, s as supportsNativeScrub } from '../chunks/core-CUGCsMsJ.js';
 import './tokens.js';
 
 var css = "usa-timeline{display:block}usa-timeline[scrub]{position:relative}@media (prefers-reduced-motion:reduce){usa-timeline [data-tl]{opacity:1 !important;transform:none !important;filter:none !important;clip-path:none !important}}";
@@ -89,7 +89,7 @@ function defineTimeline(tag = 'usa-timeline') {
 }
 
 /**
- * use-scroll-animate/components/timeline — choreography (v3.1).
+ * motionary/components/timeline — choreography (v3.1).
  * `timeline()` chains, overlaps, labels, seeks, reverses and scroll-scrubs
  * WAAPI animations on one playhead; `<usa-timeline>` builds one from
  * `data-tl` children.

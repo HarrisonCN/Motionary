@@ -1,5 +1,5 @@
 /**
- * use-scroll-animate showcase — the 6.1 extended presets ("Scroll presets 2.0").
+ * motionary showcase — the 6.1 extended presets ("Scroll presets 2.0").
  * GENERATED alongside src/extended-presets-data.ts. Pure data (unit-tested).
  */
 

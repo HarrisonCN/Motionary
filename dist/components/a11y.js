@@ -1,5 +1,5 @@
-import { v as deprecate, i as getMotionSensitivity, a as MOTION_SENSITIVITY_LEVELS, g as configureComponents, u as adoptStyles } from '../chunks/base-C3Sw9sAO.js';
-export { d as adaptKeyframes } from '../chunks/base-C3Sw9sAO.js';
+import { v as deprecate, i as getMotionSensitivity, a as MOTION_SENSITIVITY_LEVELS, g as configureComponents, u as adoptStyles } from '../chunks/base-Yno7N2eC.js';
+export { d as adaptKeyframes } from '../chunks/base-Yno7N2eC.js';
 import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-DucKMQr_.js';
 
 /**
@@ -32,12 +32,12 @@ function baselineReport() {
 function warnBaseline() {
     const missing = baselineReport().filter((f) => f.required && !f.supported).map((f) => f.id);
     if (missing.length)
-        deprecate('baseline', `this browser lacks ${missing.join(', ')}; use-scroll-animate 5.0 requires them (modern-browser baseline, see docs/upgrading-5.md).`);
+        deprecate('baseline', `this browser lacks ${missing.join(', ')}; motionary 5.0 requires them (modern-browser baseline, see docs/upgrading-5.md).`);
     return missing;
 }
 
 /**
- * use-scroll-animate/components/a11y — accessibility toolkit (4.4).
+ * motionary/components/a11y — accessibility toolkit (4.4).
  *
  * - Motion-sensitivity levels: `setMotionSensitivity('full' | 'gentle' | 'minimal' | 'static')`.
  * - Static alternatives: what every component shows when motion is off, and
@@ -48,7 +48,7 @@ function warnBaseline() {
  *   over every `<usa-*>` element — usable in your own tests too.
  *
  * ```ts
- * import { setMotionSensitivity, announce, auditMotionA11y } from 'use-scroll-animate/components/a11y';
+ * import { setMotionSensitivity, announce, auditMotionA11y } from 'motionary/components/a11y';
  * setMotionSensitivity('gentle', true);           // no spins / zooms / parallax, remembered
  * announce('3 items added to cart');               // polite live region
  * expect(auditMotionA11y(document.body).errors).toEqual([]);

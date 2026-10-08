@@ -1,5 +1,5 @@
 /**
- * use-scroll-animate showcase — <usa-*> component gallery.
+ * motionary showcase — <usa-*> component gallery.
  * No build step: imports the component bundle from ../dist/ (dogfooding the
  * ESM build), falling back to the CDN. Every preview is a real element.
  */
@@ -10,7 +10,7 @@ import { WIRES } from './catalog/index.js';
 
 const COMPONENTS_COUNT = COMPONENTS.length;
 const LOCAL = new URL('../dist/', import.meta.url).href;
-const CDN = 'https://unpkg.com/use-scroll-animate@6/dist/';
+const CDN = 'https://unpkg.com/motionary@6/dist/';
 const KEY = 'usa-showcase:';
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
@@ -60,7 +60,7 @@ async function loadLibrary() {
     lib = { ...(await import(CDN + 'components.js')), ...(await import(CDN + 'components/effects.js')) };
   }
   lib.defineComponents();
-  lib.registerAllEffects(); // 5.x effect packs (use-scroll-animate/components/effects)
+  lib.registerAllEffects(); // 5.x effect packs (motionary/components/effects)
   lib.defineEffectElements?.(); // 5.4+: <usa-story>, …
 }
 
@@ -268,7 +268,7 @@ function renderGallery() {
           h('h2', { id: `cat-${cat.id}-title`, 'data-cat-name': cat.id, text: cat[ui.lang] || cat.en }),
           h('p', { 'data-cat-desc': cat.id, text: L(cat.desc) }),
         ]),
-        h('code', { class: 'cat-import', text: `use-scroll-animate/components/${cat.id}` }),
+        h('code', { class: 'cat-import', text: `motionary/components/${cat.id}` }),
       ]),
       h('div', { class: 'cgrid' }, items.map(card)),
     ]);
@@ -364,7 +364,7 @@ function wireChrome() {
   });
   $('#hero-install').addEventListener('click', async () => {
     try {
-      await navigator.clipboard.writeText('npm i use-scroll-animate');
+      await navigator.clipboard.writeText('npm i motionary');
       lib?.toast(T('code.copied'), { type: 'success', duration: 1600 });
     } catch {
       /* ignore */

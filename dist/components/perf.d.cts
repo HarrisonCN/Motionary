@@ -40,7 +40,7 @@ declare const COMPONENT_CATEGORIES: {
 type ComponentCategory = keyof typeof COMPONENT_CATEGORIES;
 
 /**
- * use-scroll-animate/components/perf — performance toolkit (4.5).
+ * motionary/components/perf — performance toolkit (4.5).
  *
  * - One shared rAF scheduler for every component loop (`onFrame()`, `schedulerStats()`).
  * - Animation budget: `setAnimationBudget(n)` caps concurrent component
@@ -49,7 +49,7 @@ type ComponentCategory = keyof typeof COMPONENT_CATEGORIES;
  *   down (`low`, then a tighter budget) while the device struggles, restoring
  *   it when frames recover.
  * - On-demand CSS: `loadCategoryStyles()` / `onDemandStyles()` — used by
- *   `use-scroll-animate/components/lite`, the build without inlined CSS.
+ *   `motionary/components/lite`, the build without inlined CSS.
  */
 
 interface AutoDegradeOptions {

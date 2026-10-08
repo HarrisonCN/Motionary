@@ -67,7 +67,7 @@ export const getAudio = (): AudioReactive | null => current;
 
 function audioContext(): AudioContext {
   const AC = (globalThis as any).AudioContext || (globalThis as any).webkitAudioContext;
-  if (!AC) throw new Error('[use-scroll-animate] Web Audio is not available');
+  if (!AC) throw new Error('[motionary] Web Audio is not available');
   if (!actx || actx.state === 'closed') actx = new AC() as AudioContext;
   return actx;
 }
@@ -115,7 +115,7 @@ export async function enableAudio(input: AudioInput = 'mic', opts: { fftSize?: n
   } else if (media && typeof (media as MediaStream).getTracks === 'function') {
     src = ac.createMediaStreamSource(media as MediaStream);
     src.connect(analyser);
-  } else throw new Error(`[use-scroll-animate] enableAudio: no audio source for ${String(input)}`);
+  } else throw new Error(`[motionary] enableAudio: no audio source for ${String(input)}`);
   const freq = new Uint8Array(analyser.frequencyBinCount);
   const wave = new Uint8Array(analyser.fftSize);
   const self: AudioReactive = {

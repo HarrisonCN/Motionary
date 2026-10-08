@@ -1,4 +1,4 @@
-import { x as defineElement, y as EASE_OUT, k as clamp, q as caf, r as raf } from '../chunks/base-C3Sw9sAO.js';
+import { x as defineElement, y as EASE_OUT, k as clamp, q as caf, r as raf } from '../chunks/base-Yno7N2eC.js';
 
 /** Entrance effects shared by `<usa-reveal>` and `<usa-stagger>` (transform / opacity / filter only). */
 const REVEAL_EFFECTS = [
@@ -338,7 +338,7 @@ function defineScrolly(tag = 'usa-scrolly') {
 }
 
 /**
- * use-scroll-animate/components/reveal — entrance & scroll reveal components.
+ * motionary/components/reveal — entrance & scroll reveal components.
  * `<usa-reveal>`, `<usa-stagger>`, `<usa-scroll-progress>`, `<usa-scrolly>`.
  */
 /** Register every component of this category under its default tag. */

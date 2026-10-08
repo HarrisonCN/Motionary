@@ -1,5 +1,5 @@
 /**
- * use-scroll-animate - Animation Presets
+ * motionary - Animation Presets
  * Defines keyframes for all built-in animation presets
  */
 
@@ -156,7 +156,7 @@ const share = (core: Record<string, KeyframeMap>): Record<string, KeyframeMap> =
 
 /**
  * Every registered preset: the 33 core presets, plus the 6.1 extended set once
- * `use-scroll-animate/presets/extended` is loaded, plus your own.
+ * `motionary/presets/extended` is loaded, plus your own.
  */
 export const PRESETS = /*#__PURE__*/ share(CORE) as Record<CorePreset, KeyframeMap> & Partial<Record<ExtendedPreset, KeyframeMap>>;
 

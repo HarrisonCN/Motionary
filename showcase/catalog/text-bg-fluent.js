@@ -38,13 +38,13 @@ export const helpers = [
     'splitText(el, { by: \'char\' | \'word\' | \'line\' }) (4.3) — Intl.Segmenter-aware (emoji, Chinese / Japanese words), keeps Arabic words whole for shaping, RTL aware, preserves inline markup. splitTimeline() turns the units into a timeline() — from start, end, center, edges or random.',
     'splitText(el, { by: \'char\' | \'word\' | \'line\' })（4.3）—— 基于 Intl.Segmenter（表情、中日文分词），阿拉伯文按词保持连写，支持 RTL，保留内联标记。splitTimeline() 把拆分单元变成 timeline() —— 可从开头、结尾、中心、两端或随机开始。',
     ['split', 'CJK', 'RTL', 'choreography', 'Intl.Segmenter'],
-    "import { splitTimeline } from 'use-scroll-animate/components/text';\n\nconst { timeline } = splitTimeline(title, { by: 'char', preset: 'fade-up', from: 'center', stagger: 30 });\ntimeline.play();      // or timeline.scrub(section)",
+    "import { splitTimeline } from 'motionary/components/text';\n\nconst { timeline } = splitTimeline(title, { by: 'char', preset: 'fade-up', from: 'center', stagger: 30 });\ntimeline.play();      // or timeline.scrub(section)",
     '<div class="demo-split"><p class="demo-split-line" data-split-a>Motion, char by char ✨</p><p class="demo-split-line" lang="zh" data-split-b>逐字编排的中文动画</p><p class="demo-split-line" dir="rtl" lang="ar" data-split-c>مرحبا بالعالم</p></div><div class="demo-row"><button type="button" class="demo-link" data-from="start">start</button><button type="button" class="demo-link" data-from="center">center</button><button type="button" class="demo-link" data-from="edges">edges</button><button type="button" class="demo-link" data-from="random">random</button></div>'),
   H('fluent-preset', 'background', 'fluentPreset',
     'Windows 11 Fluent preset: the fluent variant (Segoe UI Variable, accent, radii), a Mica-style window background, Acrylic surfaces and Reveal highlight on buttons — one call for WebView2, Electron and Tauri apps.',
     'Windows 11 Fluent 预设：fluent 风格（Segoe UI Variable、强调色、圆角）、云母风格窗口背景、亚克力表面与按钮 Reveal 光照——一次调用即可用于 WebView2、Electron 与 Tauri 应用。',
     ['Fluent', 'Mica', 'Acrylic', 'Reveal', 'WebView2'],
-    "import { fluentPreset } from 'use-scroll-animate/components/background';\n\nconst off = fluentPreset({ reveal: true, mica: true });",
+    "import { fluentPreset } from 'motionary/components/background';\n\nconst off = fluentPreset({ reveal: true, mica: true });",
     '<div class="demo-stack" data-fluent-demo><div class="demo-row"><button class="demo-btn demo-btn-alt" type="button" data-fluent-reveal>Reveal</button><button class="demo-btn demo-btn-alt" type="button" data-fluent-reveal>highlight</button></div><button class="demo-link" type="button" data-fluent-toggle>Apply fluentPreset()</button></div>'),
 ];
 

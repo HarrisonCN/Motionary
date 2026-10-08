@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>use-scroll-animate — preset playground</title>
+  <title>Motionary — preset playground</title>
   <style>
     :root { color-scheme: dark; --bg: #0b0c10; --card: #16181f; --line: #2a2d38; --text: #e8e9ee; --muted: #9aa0b0; --accent: #7c9cff; }
     * { box-sizing: border-box; }
@@ -35,7 +35,7 @@
 </head>
 <body>
   <header>
-    <h1>use-scroll-animate playground</h1>
+    <h1>motionary playground</h1>
     <p class="lead">Click any preset to play it on the box. Scroll down to see every preset triggered by scrolling. No build step: this page loads the UMD bundle from <code>../dist/index.umd.js</code> (falling back to unpkg).</p>
   </header>
 
@@ -66,7 +66,7 @@
     <div class="parallax-band"><div class="bg" id="parallax-bg"></div><div id="parallax-label" class="note">parallax()</div></div>
   </main>
 
-  <footer>MIT · <a href="https://github.com/HarrisonCN/use-scroll-animate" style="color: var(--accent)">github.com/HarrisonCN/use-scroll-animate</a></footer>
+  <footer>MIT · <a href="https://github.com/HarrisonCN/motionary" style="color: var(--accent)">github.com/HarrisonCN/motionary</a></footer>
 
   <script>
     // Load the local UMD build; fall back to the published one (e.g. when the file is opened from a copy of this page).
@@ -76,7 +76,7 @@
       s.onload = extended;
       s.onerror = function () {
         var cdn = document.createElement('script');
-        cdn.src = 'https://unpkg.com/use-scroll-animate/dist/index.umd.js';
+        cdn.src = 'https://unpkg.com/motionary/dist/index.umd.js';
         cdn.onload = start;
         document.head.appendChild(cdn);
       };

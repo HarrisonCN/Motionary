@@ -2,25 +2,25 @@ import { defineComponents } from '../components.js';
 import { b as bindUsa } from '../chunks/bind-B_CTL6Qn.js';
 export { u as usaEventName } from '../chunks/bind-B_CTL6Qn.js';
 import './reveal.js';
-import '../chunks/base-C3Sw9sAO.js';
+import '../chunks/base-Yno7N2eC.js';
 import './text.js';
-import '../chunks/core-DN3hHbHh.js';
+import '../chunks/core-CUGCsMsJ.js';
 import './tokens.js';
 import './interaction.js';
 import './feedback.js';
 import './background.js';
-import '../chunks/variants-Bsevy6Xm.js';
+import '../chunks/variants-VNscPeTD.js';
 import './transitions.js';
 import './physics.js';
-import '../chunks/spring-CckMe3x0.js';
+import '../chunks/spring-DfQO5USi.js';
 import './cards.js';
 import './click.js';
-import '../chunks/fx-ChjxrMBo.js';
+import '../chunks/fx-BqDeFywO.js';
 import './ui.js';
 import './page.js';
 import './timeline.js';
 import './gesture.js';
-import '../chunks/core-BTf__I-8.js';
+import '../chunks/core-BIOaYdgN.js';
 import './svg.js';
 import './webgl.js';
 import './depth.js';
@@ -33,14 +33,14 @@ import './perf.js';
 import './bridge.js';
 
 /**
- * use-scroll-animate/components/svelte — Svelte integration (v3.8).
+ * motionary/components/svelte — Svelte integration (v3.8).
  * Svelte (3, 4, 5) renders `<usa-*>` tags natively; `use:usa` sets
  * **properties** and `usa:*` listeners in one place, and `defineUsa()`
  * registers the elements on the client only (safe in SvelteKit SSR).
  *
  * ```svelte
  * <script>
- *   import { usa, defineUsa } from 'use-scroll-animate/components/svelte';
+ *   import { usa, defineUsa } from 'motionary/components/svelte';
  *   import { onMount } from 'svelte';
  *   onMount(() => defineUsa(['click', 'ui']));
  *   let on = false;

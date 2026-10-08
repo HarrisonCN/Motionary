@@ -4,25 +4,25 @@ var solidJs = require('solid-js');
 var components = require('../components.cjs');
 var bind = require('../chunks/bind-Ui43-n2d.cjs');
 require('./reveal.cjs');
-require('../chunks/base-B5i8qQPR.cjs');
+require('../chunks/base-BaQV-2ha.cjs');
 require('./text.cjs');
-require('../chunks/core-BDcszY4L.cjs');
+require('../chunks/core-BGAyaY6L.cjs');
 require('./tokens.cjs');
 require('./interaction.cjs');
 require('./feedback.cjs');
 require('./background.cjs');
-require('../chunks/variants-DxPmgrNX.cjs');
+require('../chunks/variants-BhjyddG8.cjs');
 require('./transitions.cjs');
 require('./physics.cjs');
-require('../chunks/spring--oZh55tB.cjs');
+require('../chunks/spring-Dgx187Vh.cjs');
 require('./cards.cjs');
 require('./click.cjs');
-require('../chunks/fx-B8hk1Fby.cjs');
+require('../chunks/fx-lBGVtQO1.cjs');
 require('./ui.cjs');
 require('./page.cjs');
 require('./timeline.cjs');
 require('./gesture.cjs');
-require('../chunks/core-BjOYKSrV.cjs');
+require('../chunks/core-zq17EeCI.cjs');
 require('./svg.cjs');
 require('./webgl.cjs');
 require('./depth.cjs');
@@ -35,15 +35,15 @@ require('./perf.cjs');
 require('./bridge.cjs');
 
 /**
- * use-scroll-animate/components/solid — Solid integration (v3.8).
+ * motionary/components/solid — Solid integration (v3.8).
  * Solid renders custom elements natively: set properties with `prop:` and
  * listen with `on:` (`<usa-toggle prop:checked={on()} on:usa:change={…}>`).
  * This entry adds `defineUsa()` (client only, SolidStart-safe), a `usa`
  * directive for `use:usa={{ props, on }}`, and JSX types.
  *
  * ```tsx
- * import { defineUsa, usa } from 'use-scroll-animate/components/solid';
- * import type {} from 'use-scroll-animate/components/solid'; // JSX types
+ * import { defineUsa, usa } from 'motionary/components/solid';
+ * import type {} from 'motionary/components/solid'; // JSX types
  * onMount(() => defineUsa());
  * false && usa; // keep the directive import (Solid convention)
  * <usa-card use:usa={{ on: { flip: (e) => console.log(e.detail) } }} effect="flip">…</usa-card>

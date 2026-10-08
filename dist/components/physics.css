@@ -1,4 +1,4 @@
-/* use-scroll-animate/components/physics */
+/* motionary/components/physics */
 .usa-sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
 usa-draggable{display:inline-block;touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab;will-change:transform;-webkit-tap-highlight-color:transparent}usa-draggable[axis="x"]{touch-action:pan-y}usa-draggable[axis="y"]{touch-action:pan-x}usa-draggable[block]{display:block}usa-draggable[data-dragging]{cursor:grabbing}usa-draggable[disabled]{cursor:default}usa-draggable:focus-visible{outline:2px solid var(--usa-accent,#7c5cff);outline-offset:3px}
 usa-overscroll{display:block;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}usa-overscroll[axis="x"]{overflow-y:hidden}usa-overscroll>*{transform:translate3d(0,var(--usa-overscroll,0px),0)}usa-overscroll[axis="x"]>*{transform:translate3d(var(--usa-overscroll,0px),0,0)}usa-overscroll[data-stretched]>*{will-change:transform}

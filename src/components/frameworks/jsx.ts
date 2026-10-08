@@ -1,9 +1,9 @@
 /**
- * use-scroll-animate/components/jsx — JSX typings for the raw `<usa-*>` tags (v2.9).
+ * motionary/components/jsx — JSX typings for the raw `<usa-*>` tags (v2.9).
  *
  * ```ts
  * // src/usa-jsx.d.ts (React 18/19)
- * import type { UsaIntrinsicElements } from 'use-scroll-animate/components/jsx';
+ * import type { UsaIntrinsicElements } from 'motionary/components/jsx';
  * declare module 'react' { namespace JSX { interface IntrinsicElements extends UsaIntrinsicElements {} } }
  * // Solid / Preact / other JSX: extend their JSX.IntrinsicElements the same way.
  * ```

@@ -1,7 +1,7 @@
 'use strict';
 
-var base = require('../chunks/base-B5i8qQPR.cjs');
-var core = require('../chunks/core-BDcszY4L.cjs');
+var base = require('../chunks/base-BaQV-2ha.cjs');
+var core = require('../chunks/core-BGAyaY6L.cjs');
 require('./tokens.cjs');
 
 var css = "usa-timeline{display:block}usa-timeline[scrub]{position:relative}@media (prefers-reduced-motion:reduce){usa-timeline [data-tl]{opacity:1 !important;transform:none !important;filter:none !important;clip-path:none !important}}";
@@ -90,7 +90,7 @@ function defineTimeline(tag = 'usa-timeline') {
 }
 
 /**
- * use-scroll-animate/components/timeline — choreography (v3.1).
+ * motionary/components/timeline — choreography (v3.1).
  * `timeline()` chains, overlaps, labels, seeks, reverses and scroll-scrubs
  * WAAPI animations on one playhead; `<usa-timeline>` builds one from
  * `data-tl` children.

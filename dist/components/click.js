@@ -1,6 +1,6 @@
-import { x as defineElement, y as EASE_OUT, k as clamp, q as caf, n as now, r as raf } from '../chunks/base-C3Sw9sAO.js';
-import { d as springEasing, c as createSpring } from '../chunks/spring-CckMe3x0.js';
-import { b as burst, c as confetti, h as haptic, s as shake } from '../chunks/fx-ChjxrMBo.js';
+import { x as defineElement, y as EASE_OUT, k as clamp, q as caf, n as now, r as raf } from '../chunks/base-Yno7N2eC.js';
+import { d as springEasing, c as createSpring } from '../chunks/spring-DfQO5USi.js';
+import { b as burst, c as confetti, h as haptic, s as shake } from '../chunks/fx-BqDeFywO.js';
 
 var css$6 = "usa-click{position:relative;display:inline-block;overflow:hidden;isolation:isolate;border-radius:inherit;-webkit-tap-highlight-color:transparent;touch-action:manipulation}usa-click[block]{display:block}usa-click .usa-click-wave{position:absolute;border-radius:50%;pointer-events:none;z-index:-1;transform:scale(0);background:radial-gradient(circle,var(--usa-wave) 0 55%,color-mix(in srgb,var(--usa-wave) 40%,transparent) 70%,transparent 72%)}";
 
@@ -840,7 +840,7 @@ function defineCheckbox(tag = 'usa-checkbox') {
 }
 
 /**
- * use-scroll-animate/components/click — click & tap effects (v2.5).
+ * motionary/components/click — click & tap effects (v2.5).
  * `<usa-click>` (ripple, burst, confetti, squish, press-spring, shake),
  * `<usa-button>` (button click deformation: squash, wobble, gooey, dent;
  * shape morph; submit → loading → success), `<usa-icon-morph>`,

@@ -1,6 +1,6 @@
-import { x as defineElement, k as clamp } from '../chunks/base-C3Sw9sAO.js';
-import { d as springEasing, c as createSpring, s as snapTo, a as rubberBand, p as projectInertia } from '../chunks/spring-CckMe3x0.js';
-export { S as SPRING_PRESETS, l as linearEasing, r as resolveSpring, b as spring, e as springSamples, f as stepSpring, g as supportsLinearEasing } from '../chunks/spring-CckMe3x0.js';
+import { x as defineElement, k as clamp } from '../chunks/base-Yno7N2eC.js';
+import { d as springEasing, c as createSpring, s as snapTo, a as rubberBand, p as projectInertia } from '../chunks/spring-DfQO5USi.js';
+export { S as SPRING_PRESETS, l as linearEasing, r as resolveSpring, b as spring, e as springSamples, f as stepSpring, g as supportsLinearEasing } from '../chunks/spring-DfQO5USi.js';
 
 var css$2 = "usa-spring{display:inline-block;transform-origin:50% 70%}usa-spring[block]{display:block}usa-spring[effect=\"drop\"]{transform-origin:50% 100%}usa-spring[data-state=\"hidden\"]{opacity:0}usa-spring[trigger=\"click\"],usa-spring[trigger=\"hover\"]{cursor:pointer;-webkit-tap-highlight-color:transparent}";
 
@@ -413,7 +413,7 @@ function defineOverscroll(tag = 'usa-overscroll') {
 }
 
 /**
- * use-scroll-animate/components/physics — spring & bounce physics (v2.3).
+ * motionary/components/physics — spring & bounce physics (v2.3).
  * `<usa-spring>` (bounce-in, pop, drop, jelly, rubber-band), `<usa-draggable>`
  * (spring-back, inertia, snap) and `<usa-overscroll>` (elastic edges), plus
  * the spring core: `spring()`, `springEasing()`, `createSpring()`,

@@ -1,8 +1,8 @@
 'use strict';
 
-var base = require('../chunks/base-B5i8qQPR.cjs');
-var spring = require('../chunks/spring--oZh55tB.cjs');
-var variants = require('../chunks/variants-DxPmgrNX.cjs');
+var base = require('../chunks/base-BaQV-2ha.cjs');
+var spring = require('../chunks/spring-Dgx187Vh.cjs');
+var variants = require('../chunks/variants-BhjyddG8.cjs');
 
 /** Position a fixed `floating` element next to `anchor`, flipping when it would leave the viewport. */
 function place(floating, anchor, placement = 'top', gap = 8) {
@@ -1008,7 +1008,7 @@ function defineAvatarStack(tag = 'usa-avatar-stack') {
 }
 
 /**
- * use-scroll-animate/components/ui — animated UI components + style variants (v2.6).
+ * motionary/components/ui — animated UI components + style variants (v2.6).
  * `<usa-tabs>`, `<usa-drawer>`, `<usa-bottom-sheet>`, `<usa-pull-refresh>`,
  * `<usa-fab>`, `<usa-navbar>`, `<usa-slider>`, `<usa-rating>`,
  * `<usa-tooltip>`, `<usa-popover>`, `<usa-badge>`, `<usa-avatar-stack>`,

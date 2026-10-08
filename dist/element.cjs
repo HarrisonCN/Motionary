@@ -1,14 +1,14 @@
 'use strict';
 
-var core = require('./chunks/core-BYLtO0Po.cjs');
-require('./chunks/presets-D2ksQNzJ.cjs');
+var core = require('./chunks/core-B5T0dhFH.cjs');
+require('./chunks/presets-CUHys3sK.cjs');
 
 /**
- * use-scroll-animate - `<scroll-animate>` Web Component
+ * motionary - `<scroll-animate>` Web Component
  *
  * ```html
  * <script type="module">
- *   import { defineScrollAnimate } from 'use-scroll-animate/element';
+ *   import { defineScrollAnimate } from 'motionary/element';
  *   defineScrollAnimate(); // registers <scroll-animate>
  * </script>
  * <scroll-animate animation="fade-in-up" duration="800">…</scroll-animate>

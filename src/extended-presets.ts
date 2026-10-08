@@ -1,5 +1,5 @@
 /**
- * `use-scroll-animate/presets/extended` — "Scroll presets 2.0" (6.1).
+ * `motionary/presets/extended` — "Scroll presets 2.0" (6.1).
  *
  * 181 extra scroll-reveal presets (fades with distances and diagonals, zooms,
  * 3D flips and doors, overshoot slides, back-in / light-speed, roll / spiral /
@@ -10,7 +10,7 @@
  * `<scroll-animate>` and `<usa-reveal effect>`. Kept out of the core bundle.
  *
  * ```js
- * import 'use-scroll-animate/presets/extended';
+ * import 'motionary/presets/extended';
  * ScrollAnimate.observe('.card', { animation: 'bounce-in-up' });
  * ```
  */

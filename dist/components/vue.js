@@ -1,24 +1,24 @@
 import { defineComponents } from '../components.js';
 import './reveal.js';
-import '../chunks/base-C3Sw9sAO.js';
+import '../chunks/base-Yno7N2eC.js';
 import './text.js';
-import '../chunks/core-DN3hHbHh.js';
+import '../chunks/core-CUGCsMsJ.js';
 import './tokens.js';
 import './interaction.js';
 import './feedback.js';
 import './background.js';
-import '../chunks/variants-Bsevy6Xm.js';
+import '../chunks/variants-VNscPeTD.js';
 import './transitions.js';
 import './physics.js';
-import '../chunks/spring-CckMe3x0.js';
+import '../chunks/spring-DfQO5USi.js';
 import './cards.js';
 import './click.js';
-import '../chunks/fx-ChjxrMBo.js';
+import '../chunks/fx-BqDeFywO.js';
 import './ui.js';
 import './page.js';
 import './timeline.js';
 import './gesture.js';
-import '../chunks/core-BTf__I-8.js';
+import '../chunks/core-BIOaYdgN.js';
 import './svg.js';
 import './webgl.js';
 import './depth.js';
@@ -31,16 +31,16 @@ import './perf.js';
 import './bridge.js';
 
 /**
- * use-scroll-animate/components/vue — Vue integration (v2.9).
+ * motionary/components/vue — Vue integration (v2.9).
  *
  * ```js
  * // vite.config.js
  * import vue from '@vitejs/plugin-vue';
- * import { isUsaElement } from 'use-scroll-animate/components/vue';
+ * import { isUsaElement } from 'motionary/components/vue';
  * export default { plugins: [vue({ template: { compilerOptions: { isCustomElement: isUsaElement } } })] };
  *
  * // main.js
- * import { UsaPlugin } from 'use-scroll-animate/components/vue';
+ * import { UsaPlugin } from 'motionary/components/vue';
  * app.use(UsaPlugin, { categories: ['click', 'cards'] });
  * ```
  * In templates, listen with `@usa:change="…"` and bind properties with

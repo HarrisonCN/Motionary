@@ -1,5 +1,5 @@
 /**
- * use-scroll-animate/components/svg — SVG animation (v3.3).
+ * motionary/components/svg — SVG animation (v3.3).
  * `<usa-draw>` (line drawing), `<usa-morph>` (path morph), `<usa-mask-reveal>`
  * (mask / clip-path reveals) and `<usa-anim-icon>` (animated icons), plus
  * `interpolatePath()`, `morphTo()`, `drawLines()`.

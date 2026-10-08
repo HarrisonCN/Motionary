@@ -168,7 +168,7 @@ declare function snapTo(value: number, to: number | number[] | null | undefined)
 declare function rubberBand(distance: number, dimension: number, constant?: number): number;
 
 /**
- * use-scroll-animate/components/physics — spring & bounce physics (v2.3).
+ * motionary/components/physics — spring & bounce physics (v2.3).
  * `<usa-spring>` (bounce-in, pop, drop, jelly, rubber-band), `<usa-draggable>`
  * (spring-back, inertia, snap) and `<usa-overscroll>` (elastic edges), plus
  * the spring core: `spring()`, `springEasing()`, `createSpring()`,

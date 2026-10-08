@@ -44,7 +44,7 @@ declare function baselineReport(): BaselineFeature[];
 declare function warnBaseline(): string[];
 
 /**
- * use-scroll-animate/components/a11y — accessibility toolkit (4.4).
+ * motionary/components/a11y — accessibility toolkit (4.4).
  *
  * - Motion-sensitivity levels: `setMotionSensitivity('full' | 'gentle' | 'minimal' | 'static')`.
  * - Static alternatives: what every component shows when motion is off, and
@@ -55,7 +55,7 @@ declare function warnBaseline(): string[];
  *   over every `<usa-*>` element — usable in your own tests too.
  *
  * ```ts
- * import { setMotionSensitivity, announce, auditMotionA11y } from 'use-scroll-animate/components/a11y';
+ * import { setMotionSensitivity, announce, auditMotionA11y } from 'motionary/components/a11y';
  * setMotionSensitivity('gentle', true);           // no spins / zooms / parallax, remembered
  * announce('3 items added to cart');               // polite live region
  * expect(auditMotionA11y(document.body).errors).toEqual([]);

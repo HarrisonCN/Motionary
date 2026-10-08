@@ -1,4 +1,4 @@
-import { x as defineElement, n as now, k as clamp, q as caf, r as raf } from '../chunks/base-C3Sw9sAO.js';
+import { x as defineElement, n as now, k as clamp, q as caf, r as raf } from '../chunks/base-Yno7N2eC.js';
 
 /** Minimal WebGL runner: one full-canvas quad, one fragment shader, optional image texture. */
 const VERTEX = 'attribute vec2 p;varying vec2 v_uv;void main(){v_uv=p*.5+.5;gl_Position=vec4(p,0.,1.);}';
@@ -425,7 +425,7 @@ function definePostFx(tag = 'usa-post-fx') {
 }
 
 /**
- * use-scroll-animate/components/webgl — lightweight canvas / WebGL (v3.4).
+ * motionary/components/webgl — lightweight canvas / WebGL (v3.4).
  * `<usa-shader>` (shader backgrounds), `<usa-distort>` (hover image
  * distortion), `<usa-liquid>` (ripple images) on a tiny single-quad runner
  * (`glQuad()`), with graceful fallbacks when WebGL is unavailable.

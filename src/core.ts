@@ -1,5 +1,5 @@
 /**
- * use-scroll-animate - Core Implementation
+ * motionary - Core Implementation
  * Uses IntersectionObserver + Web Animations API for zero-dependency,
  * high-performance scroll-triggered animations.
  */

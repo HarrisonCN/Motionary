@@ -1,9 +1,9 @@
-import { c as createScrollAnimate } from './chunks/core-BVQW34aX.js';
-import { s as staggerChildren } from './chunks/stagger-Dh4V-OL0.js';
-import './chunks/presets-BJ09NeTo.js';
+import { c as createScrollAnimate } from './chunks/core-D7cVumUu.js';
+import { s as staggerChildren } from './chunks/stagger-DtMKo2SK.js';
+import './chunks/presets-BYBVJVeP.js';
 
 /**
- * use-scroll-animate - Vue 3 Integration
+ * motionary - Vue 3 Integration
  * Provides useScrollAnimate and useScrollStagger composables for Vue 3 applications.
  *
  * A thin wrapper around the core engine, so it shares its behaviour: `once`,

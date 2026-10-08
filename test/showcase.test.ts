@@ -56,7 +56,7 @@ describe('showcase code generator', () => {
   });
 
   it('imports from the documented entry points only', () => {
-    const allowed = new Set(['use-scroll-animate', 'use-scroll-animate/react', 'use-scroll-animate/vue', 'use-scroll-animate/svelte', 'use-scroll-animate/solid', 'use-scroll-animate/element', 'use-scroll-animate/components/timeline', 'react', 'vue', 'svelte', 'solid-js']);
+    const allowed = new Set(['motionary', 'motionary/react', 'motionary/vue', 'motionary/svelte', 'motionary/solid', 'motionary/element', 'motionary/components/timeline', 'react', 'vue', 'svelte', 'solid-js']);
     ITEMS.forEach((item: any) => {
       const out = generate(item, defaultState(item), PRESETS);
       Object.values(out).forEach((code: any) => {
@@ -74,7 +74,7 @@ describe('showcase code generator', () => {
     expect(out.element).toContain('<scroll-animate animation="zoom-in" duration="900" delay="100" easing="spring" repeat>');
     expect(out.cdn).toContain('data-sa-animation="zoom-in"');
     expect(out.cdn).toContain('ScrollAnimate.default.init()');
-    expect(out.react).toContain("from 'use-scroll-animate/react'");
+    expect(out.react).toContain("from 'motionary/react'");
   });
 
   it('exit implies repeat and is written as a bare attribute', () => {
@@ -116,7 +116,7 @@ describe('showcase code generator', () => {
     expect(g('progress-var').cdn).toContain('data-sa-progress-var');
     expect(g('engine').vanilla).toContain("engine: 'css'");
     expect(g('engine').element).toContain('view-range="entry 0%, cover 40%"');
-    expect(g('sequence').vanilla).toContain("import { timeline } from 'use-scroll-animate';");
+    expect(g('sequence').vanilla).toContain("import { timeline } from 'motionary';");
     expect(g('sequence').vanilla).toContain("querySelector('.hero')");
     expect(g('sequence').element).toContain('<usa-timeline');
     Object.values(g('sequence')).forEach((code: any) => expect(code).not.toContain('sequence('));
@@ -140,7 +140,7 @@ describe('showcase site', () => {
     expect(app).toContain("new URL('../dist/', import.meta.url)");
     expect(app).toContain("'element.js'");
     expect(app).toContain("'svelte.js'");
-    expect(app).toContain('https://unpkg.com/use-scroll-animate@6/dist/');
+    expect(app).toContain('https://unpkg.com/motionary@6/dist/');
   });
 
   it('supports deep links, view transitions with a FLIP fallback and reduced motion', () => {

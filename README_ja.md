@@ -1,224 +1,219 @@
 <div align="center">
 
-# use-scroll-animate 🚀
+# Motionary
 
-**軽量（~5KB gzipped）、依存関係なしのモダンWeb向けスクロールアニメーションライブラリ。**
+**モダン Web のためのスクロールアニメーションとアニメーション Web Components — 214 のスクロールプリセット、90 のエフェクト、依存ゼロ。**
 
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/HarrisonCN/use-scroll-animate?style=flat-square)](https://github.com/HarrisonCN/use-scroll-animate/releases)
-[![GitHub repo size](https://img.shields.io/github/repo-size/HarrisonCN/use-scroll-animate?style=flat-square)](https://github.com/HarrisonCN/use-scroll-animate)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+_旧名 **use-scroll-animate** — API と `<usa-*>` タグはそのまま。旧 npm パッケージもエイリアスとして公開を継続します。_
+
+[![npm](https://img.shields.io/npm/v/motionary?style=flat-square)](https://www.npmjs.com/package/motionary) [![CI](https://github.com/HarrisonCN/motionary/actions/workflows/ci.yml/badge.svg)](https://github.com/HarrisonCN/motionary/actions/workflows/ci.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](./LICENSE)
 
 [English](./README.md) | [简体中文](./README_zh.md) | [日本語](./README_ja.md)
 
+**[🛍 アニメーションストア](https://harrisoncn.github.io/motionary/showcase/)** · **[🧩 コンポーネント](https://harrisoncn.github.io/motionary/showcase/components.html)** · **[🎛 Playground](https://harrisoncn.github.io/motionary/showcase/playground.html)** · **[📜 ストーリー](https://harrisoncn.github.io/motionary/showcase/story.html)**
+
+<sub>ストアでは全 <b>227</b> 件のアニメーション（214 のスクロールプリセットとカード・クリック・物理・ページ効果）をデスクトップ／スマホ幅でプレビュー・調整・コピーできます。</sub>
+
 </div>
 
-## なぜ `use-scroll-animate` なのか？
-
-2025年、パフォーマンスはすべてです。従来のスクロールアニメーションライブラリは、重い依存関係をバンドルしたり、古いスクロールイベントリスナーに依存したり、特定のフレームワークを強制したりすることがよくあります。
-
-`use-scroll-animate` は違います：
-- ⚡ **依存関係なし**：純粋な Vanilla JS/TypeScript。
-- 🚀 **高パフォーマンス**：`IntersectionObserver` とネイティブの `Web Animations API` で駆動。デフォルトではスクロールイベントリスナーなし（オプトインのスクロール進捗モードは、対象要素が画面内にある間だけ passive・rAF スロットルのリスナーを1つ使用）、レイアウトスラッシングなし。
-- 🪶 **超軽量**：Gzip後コア約4.8KB（`timeline`・`staggerChildren`・React/Vue ヘルパーを含む全体で約6.1KB）。
-- 🧩 **フレームワークに依存しない**：Vanilla JS、React、Vue、Svelteなどとシームレスに動作。一流の React Hooks と Vue Composables を内蔵。
-- ♿ **アクセシブル**：`prefers-reduced-motion` を標準でサポート。
-
-## スクロールプリセット 2.0（v6.1）🎞️
-
-**214 種類のスクロール入場プリセット**：コア 33 種 + **拡張 181 種**。拡張セットは独立したツリーシェイク可能なエントリ（gzip 約 4.7 kB、コアのサイズは予算内のまま）です。[アニメーションストア](https://harrisoncn.github.io/use-scroll-animate/showcase/) でライブデモとコードのコピーができ、全プリセットとキーフレームは [docs/presets.md](./docs/presets.md) に一覧があります。
-
-```js
-import ScrollAnimate from 'use-scroll-animate';
-import 'use-scroll-animate/presets/extended'; // import するだけで登録
-
-ScrollAnimate.observe('.card', { animation: 'bounce-in-up', duration: 900 });
-ScrollAnimate.observe('.hero img', { animation: 'scrub-shrink', engine: 'css', viewRange: ['cover 0%', 'cover 100%'] });
-```
-
-ビルドなしのページでは `dist/index.umd.js` の後に `dist/presets-extended.umd.js`（自動登録）を読み込みます。プリセット名は `animation` / `exit`、`data-sa-animation`、`useScrollAnimate` などのフレームワーク連携、`<scroll-animate animation>`、`<usa-reveal effect>` / `<usa-stagger effect>` で使えます。アニメーションするのは `transform`・`opacity`・`filter`・`clip-path` のみで、reduced motion 時は動きません。プリセットは中間キーフレーム `frames`（オーバーシュート、バウンス、グリッチ）を持てるようになり、独自プリセットも `registerPresets({ 'my-pop': { from, to, frames } })` で登録できます。
-
-| カテゴリ | 合計 | 6.1 で追加 |
-|---|---:|---|
-| フェード | 19 | `fade-in-up-sm` · `fade-in-down-sm` · `fade-in-left-sm` · `fade-in-right-sm` · `fade-in-up-lg` · `fade-in-down-lg` · `fade-in-left-lg` · `fade-in-right-lg` · `fade-in-up-left` · `fade-in-up-right` · `fade-in-down-left` · `fade-in-down-right` · `fade-in-scale` · `fade-in-half` |
-| ズーム・スケール | 23 | `zoom-in-up` · `zoom-in-down` · `zoom-in-left` · `zoom-in-right` · `zoom-out-up` · `zoom-out-down` · `zoom-out-left` · `zoom-out-right` · `zoom-in-big` · `zoom-out-big` · `zoom-bounce` · `zoom-in-rotate` · `scale-x-left` · `scale-x-right` · `scale-y-top` · `scale-y-bottom` · `stretch-x` · `stretch-y` |
-| 3D フリップ | 22 | `flip-x-reverse` · `flip-y-reverse` · `flip-y-full` · `flip-diagonal` · `flip-diagonal-reverse` · `flip-left` · `flip-right` · `unfold-down` · `unfold-up` · `door-open-left` · `door-open-right` · `fold-in` · `flip-x-bounce` · `flip-y-bounce` · `swing-in-top` · `swing-in-bottom` · `swing-in-left` · `swing-in-right` |
-| スライド | 20 | `slide-up-spring` · `slide-down-spring` · `slide-left-spring` · `slide-right-spring` · `slide-up-sm` · `slide-down-sm` · `back-in-up` · `back-in-down` · `back-in-left` · `back-in-right` · `light-speed-in-left` · `light-speed-in-right` · `rise-in` · `sink-in` · `float-in-up` · `float-in-down` |
-| 回転・スキュー | 20 | `roll-in-left` · `roll-in-right` · `spiral-in` · `spiral-in-reverse` · `spin-in` · `rotate-in-up-left` · `rotate-in-up-right` · `rotate-in-down-left` · `rotate-in-down-right` · `skew-in-left` · `skew-in-y` · `shear-in` · `shear-in-reverse` · `twist-in` · `tilt-in-left` · `tilt-in-right` |
-| ブラー・マスク | 14 | `blur-in-down` · `blur-in-left` · `blur-in-right` · `blur-in-strong` · `blur-in-zoom` · `blur-in-scale` · `blur-in-x` · `mask-up` · `mask-down` · `mask-left` · `mask-right` · `blur-mask-up` |
-| クリップ | 22 | `clip-circle-top` · `clip-circle-bottom` · `clip-circle-left` · `clip-circle-right` · `clip-circle-corner` · `clip-ellipse` · `clip-diamond` · `clip-split-x` · `clip-split-y` · `clip-box` · `clip-pill` · `clip-blinds` · `clip-blinds-x` · `clip-diagonal` · `clip-diagonal-reverse` · `clip-slant-right` · `clip-slant-left` |
-| バウンス・弾性 | 17 | `bounce-in` · `bounce-in-up` · `bounce-in-down` · `bounce-in-left` · `bounce-in-right` · `elastic-in` · `elastic-in-x` · `rubber-in` · `jello-in` · `wobble-in` · `tada-in` · `heartbeat-in` · `drop-in` · `pop-in` · `squash-in` · `shake-in` · `swing-in` |
-| 色・光 | 14 | `brightness-in` · `darken-in` · `color-in` · `saturate-in` · `hue-in` · `sepia-in` · `invert-in` · `contrast-in` · `exposure-in` · `vintage-in` · `blur-bright-in` · `shadow-lift` · `neon-glow-in` · `glow-in` |
-| 奥行き・遠近 | 10 | `perspective-in-up` · `perspective-in-down` · `perspective-in-left` · `perspective-in-right` · `depth-push` · `depth-pull` · `depth-in-up` · `swoop-in-left` · `swoop-in-right` · `card-tilt-in` |
-| グリッチ・特殊 | 9 | `glitch-in` · `glitch-in-color` · `typewriter` · `typewriter-lines` · `hinge-in` · `flicker-in` · `scan-in` · `materialize` · `teleport-in` |
-| スタッガー向け | 8 | `stagger-fade-up` · `stagger-pop` · `stagger-rise` · `stagger-slide` · `stagger-flip` · `stagger-blur` · `stagger-zoom` · `stagger-drop` |
-| スクロール連動 | 12 | `scrub-parallax-up` · `scrub-parallax-down` · `scrub-rotate` · `scrub-spin` · `scrub-scale` · `scrub-shrink` · `scrub-pan-left` · `scrub-pan-right` · `scrub-tilt` · `scrub-fade-through` · `scrub-blur-through` · `scrub-reveal-x` |
-
-## アニメーションコンポーネント（v2.2）🧩
-
-依存ゼロの**アニメーション Web Components 30 種**（`<usa-*>`）を 6 カテゴリで提供。**Web ページと Windows デスクトップアプリ**（Electron、Tauri、WinUI/WPF/WinForms の WebView2、PWA）の両方で動作します。Custom Elements + CSS + Web Animations のみ、ツリーシェイク可能、SSR セーフ、`prefers-reduced-motion` 対応。**[ライブギャラリー](https://harrisoncn.github.io/use-scroll-animate/showcase/components.html)** · [コンポーネント文書](./docs/components.md)（英語）· [Windows アプリガイド](./docs/windows-apps.md)（英語）
-
-```js
-import { defineComponents } from 'use-scroll-animate/components';
-defineComponents(); // カテゴリ単位: import { defineTextComponents } from 'use-scroll-animate/components/text'
-```
-
-| カテゴリ（インポート） | コンポーネント |
-|---|---|
-| **入場・スクロール**（`/components/reveal`） | `<usa-reveal>` · `<usa-stagger>` · `<usa-scroll-progress>` · `<usa-scrolly>` |
-| **テキスト**（`/components/text`） | `<usa-typewriter>` · `<usa-split-text>` · `<usa-scramble>` · `<usa-counter>` · `<usa-shimmer-text>` · `<usa-text-rotate>` · `<usa-wave-text>` · `<usa-glitch>` · `<usa-gradient-text>` · `<usa-handwriting>` · `<usa-scroll-highlight>` |
-| **インタラクション**（`/components/interaction`） | `<usa-ripple>` · `<usa-magnetic>` · `<usa-tilt>` · `<usa-spotlight>`（Fluent Reveal）· `<usa-press>` · `<usa-toggle>` |
-| **ローディング・フィードバック**（`/components/feedback`） | `<usa-spinner>` · `<usa-skeleton>` · `<usa-progress>` · `<usa-toaster>` + `toast()` · `<usa-check>` |
-| **背景・装飾**（`/components/background`） | `<usa-aurora>` · `<usa-particles>` · `<usa-grain>` · `<usa-marquee>` · `<usa-acrylic>`（Acrylic / Mica） · `<usa-grid-glow>` · `<usa-blobs>` · `<usa-water-ripple>` · `<usa-dot-network>` · `fluentPreset()` |
-| **トランジション**（`/components/transitions`） | `<usa-dialog>` · `<usa-accordion>` · `<usa-view-switch>` · `viewTransition()` · `flip()` |
-| **スプリング・物理**（`/components/physics`） | `<usa-spring>`（bounce-in · pop · drop · jelly · rubber-band）· `<usa-draggable>` · `<usa-overscroll>` · `spring()` · `createSpring()` |
-| **カード効果**（`/components/cards`） | `<usa-card>`（flip · holo · glass · border-glow · conic-border · lift · spotlight · sheen · parallax-layers · expand）· `<usa-card-stack>` · `<usa-sticky-stack>` · `<usa-carousel-3d>` |
-| **クリック・タップ**（`/components/click`） | `<usa-button>`（squash · wobble · gooey · dent · shape morph · submit）· `<usa-icon-morph>` · `<usa-click>` · `<usa-like>` · `<usa-hold>` · `<usa-double-tap>` · `<usa-checkbox>` |
-| **UI コンポーネント・バリアント**（`/components/ui`） | `<usa-tabs>` · `<usa-drawer>` · `<usa-bottom-sheet>` · `<usa-pull-refresh>` · `<usa-fab>` · `<usa-navbar>` · `<usa-slider>` · `<usa-rating>` · `<usa-tooltip>` · `<usa-popover>` · `<usa-badge>` · `<usa-avatar-stack>` · 全コンポーネントで `variant` |
-| **ページ・アプリ全体**（`/components/page`） | `pageTransition()` · `themeTransition()` · `<usa-cursor>` · `smoothScroll()` · `<usa-fullpage>` · `<usa-loading-bar>` · `<usa-back-to-top>` · `<usa-ambient>` · `<usa-splash>` · `<usa-auto-skeleton>` · `<usa-motion-switch>` |
-| **タイムライン** (`/components/timeline`) | `timeline()`（連結 · 重ね · ラベル · シーク · 逆再生 · スクラブ）· `<usa-timeline>`（`data-tl` ステップ） |
-| **ジェスチャー** (`/components/gesture`) | `gesture()`（パン · スワイプ · ピンチ · 長押し · タップ → スプリング）· `<usa-swipeable>` · `<usa-pinch-zoom>` |
-| **SVG** (`/components/svg`) | `<usa-draw>`（線描画）· `<usa-morph>`（パスモーフ）· `<usa-mask-reveal>` · `<usa-anim-icon>` · `morphTo()` |
-| **Canvas / WebGL** (`/components/webgl`) | `<usa-shader>`（gradient · plasma · waves · aurora · snow · fireflies · stars · bokeh · rain · カスタム GLSL）· `<usa-post-fx>` · `<usa-distort>` · `<usa-liquid>` · `glQuad()` |
-| **3D / 奥行き** (`/components/depth`) | `<usa-cube>` · `<usa-depth>`（ポインター · ジャイロ · スクロール視差）· `deviceTilt()` |
-| **レイアウト** (`/components/layout`) | `<usa-auto-animate>` / `autoAnimate()` · `<usa-masonry>` · `sharedTransition()`（共有要素） |
-| **エフェクトパック** (`/components/packs`) | `<usa-pack>` (`name="ecommerce \| portfolio \| dashboard \| game \| landing"`) · `applyPack()` · `flyToCart()` |
-| **エフェクト API** (`/components/fx`) | `<usa-fx>` · `registerEffect()` · `playEffect()` · `bindEffect()` · 内蔵: タイムライン入場、pulse · pop · jelly · wiggle · bounce · tada · shake、burst · confetti · ripple |
-| **エフェクトパック** (`/components/effects`) | `registerAllEffects()` · カード & クリック 2.0 · 物理 · ページ全体 · `<usa-story>` スクロールストーリー · ジェネレーティブ背景 · サウンド連動（`<usa-audio>`）· カーソル & ジェスチャー（`<usa-gesture-fx>`）· テーマパック（`<usa-theme>`）· マイクロインタラクション 23 種 · `<usa-player>` JSON アニメーション |
-
-## ドキュメント
-
-- [プリセット一覧](./docs/presets.md)（全 214 種、英語）
-- [API リファレンス](./docs/API.md)（英語）· [デモ](./demo/index.html)（全プリセットをクリックで再生、ビルド不要）
-- 移行ガイド：[AOS から](./docs/migration-from-aos.md) · [GSAP ScrollTrigger から](./docs/migration-from-gsap-scrolltrigger.md)
-- [2.0 へのアップグレード](./docs/deprecations.md)：`createReactHooks` / `createVueComposables` は `use-scroll-animate/react` / `/vue` からのみ。`dist/index.mjs`・`dist/index.esm.js`・`dist/types/*`・`dist/*` ディープインポートは削除、デフォルトエンジンは `'auto'`。CDN の `dist/index.umd.js` は変更なし。詳細は [CHANGELOG](./CHANGELOG.md) の MIGRATION。
+Motionary はスクロールで表示される要素をアニメーションさせ（IntersectionObserver + Web Animations、またはブラウザ標準のスクロールタイムライン）、カード・ボタン・物理・ページトランジション・背景・WebGL など 94 個のアニメーション付きカスタム要素を提供します。どのフレームワークでも、素の HTML でも、デスクトップの Web ビューアプリ（Electron・Tauri・WebView2）でも動き、すべて `prefers-reduced-motion` を尊重します。
 
 ## インストール
 
 ```bash
-npm install use-scroll-animate
+npm i motionary
 ```
 
-## クイックスタート (Vanilla JS / HTML)
+```html
+<!-- CDN (no build) -->
+<script src="https://unpkg.com/motionary@6/dist/index.umd.js"></script>            <!-- window.ScrollAnimate -->
+<script src="https://unpkg.com/motionary@6/dist/presets-extended.umd.js"></script> <!-- +181 presets -->
+<script src="https://unpkg.com/motionary@6/dist/components.umd.js"></script>       <!-- every <usa-*>, window.UsaComponents -->
+```
 
-最も簡単な方法は、HTML の `data-sa` 属性を使用することです。
+jsDelivr も利用できます：`https://cdn.jsdelivr.net/npm/motionary@6/dist/…`。既存の `use-scroll-animate` と `unpkg.com/use-scroll-animate@6` の URL もそのまま動きます。
+
+## 30 秒クイックスタート
+
+要素に `data-sa` を付け、`data-sa-animation` でプリセットを選びます（すべてのオプションに `data-sa-*` 属性あり）。JS API も使えます：
 
 ```html
-<!-- 1. 要素に data-sa 属性を追加 -->
-<div data-sa data-sa-animation="fade-in-up" data-sa-duration="800">
-  スクロールされるとアニメーションします！
-</div>
-
+<!-- 1. HTML only: data attributes + one init() call -->
+<h2 data-sa data-sa-animation="fade-in-up">Hello</h2>
+<div data-sa data-sa-animation="bounce-in-up" data-sa-delay="150">Card</div>
 <script type="module">
-  // 2. インポートして初期化
-  import ScrollAnimate from 'use-scroll-animate';
-  ScrollAnimate.init();
+  import ScrollAnimate from 'motionary';
+  import 'motionary/presets/extended'; // optional: +181 presets (bounce-in-up, clip-diamond, …)
+  ScrollAnimate.init(); // picks up every [data-sa]
 </script>
 ```
 
-## ネイティブのスクロール駆動エンジン `engine`（v1.6）
-
-CSS スクロール駆動アニメーション（`CSS.supports('animation-timeline: view()')`）に対応したブラウザでは、プリセットをブラウザ標準の **view timeline** 上で実行できます。進行度はスクロール位置に連動し（メインスレッド外）、IntersectionObserver で開始して固定の `duration` で再生する方式ではありません。
-
 ```js
-ScrollAnimate.observe('.card', { animation: 'fade-in-up', engine: 'auto' });
-const sa = createScrollAnimate({ defaultEngine: 'auto' });
+// 2. JS API
+import ScrollAnimate, { staggerChildren, parallax, timeline } from 'motionary';
+
+ScrollAnimate.observe('.card', { animation: 'zoom-in-up', duration: 800, easing: 'spring' });
+staggerChildren(document.querySelector('.grid'), { animation: 'stagger-pop', stagger: 60 });
+parallax('.hero-bg', { speed: 0.3 });
+ScrollAnimate.observe('.logo', { animation: 'scrub-spin', engine: 'css', viewRange: ['cover 0%', 'cover 100%'] });
 ```
 
-- `'auto'`：**2.0 からのデフォルト**。対応ブラウザではネイティブ、非対応なら JS。要素が `duration`・`delay`・`offset`・`stagger` を自分で指定した場合も JS。`'css'`：対応時は常にネイティブ。`'js'`：1.x の動作（`defaultEngine: 'js'` で全体に適用）。
-- ネイティブエンジンでは `duration`・`delay`・`threshold`・`offset`・`stagger` は無効で、範囲は `viewRange`（デフォルト `['entry 0%', 'entry 100%']`）。`easing` は有効。HTML：`data-sa-engine`、`data-sa-view-range`。
-- `once`（デフォルト）は完了時に最終状態を固定、`repeat: true` ではスクロールに双方向で追従。クラス名モード・reduced motion・`animate()`・`timeline()`・`staggerChildren()` は常に JS エンジン。`supportsScrollTimeline()` もエクスポート。
+フレームワーク — 各アダプターは独立したエントリで、アンマウント時に自動で後片付けします：
 
-## v1.4.0 の新機能 ✨
+```jsx
+// React
+import React from 'react';
+import { createReactHooks } from 'motionary/react';
+const { useScrollAnimate } = createReactHooks(React);
 
-- **本当のスクロール進捗 `progressMode: 'scroll'`**（オプトイン）：`onProgress` はデフォルトで要素の表示比率を返すため、画面より高い要素では 1 に到達しません。有効にすると、要素の上端がビューポート下端に達したとき `0`、下端がビューポート上端を抜けたとき `1` になります。パララックスも同じ進捗を使用します。HTML では `data-sa-progress="scroll"`。ヘルパー `getScrollProgress(el, root?)` もエクスポートされています。
+export function Card() {
+  const ref = useScrollAnimate({ animation: 'fade-in-up' });
+  return <div ref={ref}>Hello</div>;
+}
+```
 
-  ```js
-  ScrollAnimate.observe('.chapter', {
-    progressMode: 'scroll',
-    onProgress: (el, p) => el.style.setProperty('--progress', p),
-  });
-  ```
-
-- **動的に追加された子要素のスタッガー**：`staggerChildren()`（Vanilla）と `useScrollStagger()`（React、**Vue にも新たに対応**）に `observeChildren: true` を追加。`MutationObserver` で後から追加された子要素（無限リスト、「もっと見る」）を検出します。表示前に追加された要素はスタッガーに加わり、表示後に追加された要素はビューポートに入ったときにバッチ単位でスタッガー再生されます。
-
-  ```js
-  import { staggerChildren } from 'use-scroll-animate';
-  const stop = staggerChildren(document.querySelector('#feed'), { stagger: 60, observeChildren: true });
-  ```
-
-- **タイムライン `timeline()`**：1 つの再生ヘッドで複数要素のアニメーションを連結。既定では前のステップの終了後に開始し、`at` で重ね（`'-=300'`）、待機（`'+=200'`）、前と同時（`'<'`）、ラベル・絶対時刻を指定。再生・逆再生・シーク・スクロール連動（scrub）に対応。（4.0 で削除された `sequence()` の後継。[upgrading-4.md](./docs/upgrading-4.md) 参照。）
-
-  ```js
-  import { timeline } from 'use-scroll-animate';
-  const tl = timeline({ defaults: { duration: 700 } })
-    .to('.hero h1', 'fade-up')
-    .to('.hero p', 'blur', { at: '-=300' })
-    .to('.hero .btn', 'scale', { stagger: 80 });
-  await tl.play(); // 完了で resolve。tl.scrub(hero) でスクロール連動
-  ```
-
-- **新しいプリセット**：`scale-up`、`blur-in-up`、`flip-up`、`flip-down`、`rotate-left`、`rotate-right`、clip-path による `clip-up`、`clip-down`、`clip-left`、`clip-right`、`clip-circle`。
-- **メモリ使用量の削減**：`once` 要素はアニメーション開始後に自動でレジストリから削除されます（パララックス/`onProgress` が必要な要素を除く）。`WeakSet` で記憶されるため、`init()`/`observe()` で再生されることはありません。従来の挙動は `createScrollAnimate({ autoUnregister: false })`。
-- **正しい `exports` マップ**：2.0 から ESM 優先：`import` → `dist/*.js` + `*.d.ts`、`require` → `dist/*.cjs` + `*.d.cts`。
-
-## v1.2.0 の新機能
-
-- **一度だけ実行 (Once)**：アニメーション実行後に監視を自動停止し、リソースを節約。
-- **オフセット (Offset)**：要素がビューポートに入ってから何ピクセル後にアニメーションを開始するかを指定可能。
-- **新しいプリセット**：`shimmer`（シマー）、`pulse`（パルス）、`swing`（スイング）を追加。
-- **多言語サポート**：中国語と日本語のドキュメントを追加。
-
-## フレームワーク連携（v1.7）
-
-各連携は独立したエントリポイント（`use-scroll-animate/react`・`/vue`・`/svelte`・`/solid`・`/element`）で、コアのコードを共有します。
+```vue
+<!-- Vue 3 -->
+<script setup>
+import { ref, onMounted, onUnmounted } from 'vue';
+import { createVueComposables } from 'motionary/vue';
+const { useScrollAnimate } = createVueComposables({ ref, onMounted, onUnmounted });
+const { animateRef } = useScrollAnimate({ animation: 'zoom-in' });
+</script>
+<template><div ref="animateRef">Hello</div></template>
+```
 
 ```svelte
-<!-- Svelte：action（svelte の import 不要） -->
-<script>import { scrollAnimate, scrollStagger } from 'use-scroll-animate/svelte';</script>
-<div use:scrollAnimate={{ animation: 'fade-in-up' }}>…</div>
+<!-- Svelte 3–5 -->
+<script>
+  import { scrollAnimate } from 'motionary/svelte';
+</script>
+<div use:scrollAnimate={{ animation: 'flip-up' }}>Hello</div>
 ```
 
-```tsx
-// Solid：ディレクティブ + ref プリミティブ（solid-js は optional な peer 依存）
-import { scrollAnimate, useScrollAnimate } from 'use-scroll-animate/solid';
-<div use:scrollAnimate={{ animation: 'zoom-in' }}>…</div>
+```jsx
+// Solid
+import { scrollAnimate } from 'motionary/solid';
+scrollAnimate; // keep the directive import (TypeScript)
+export const Card = () => <div use:scrollAnimate={{ animation: 'blur-in-up' }}>Hello</div>;
 ```
+
+```ts
+// Angular (standalone) — the animated Web Components
+import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
+import { usaInitializer } from 'motionary/components/angular';
+import 'motionary/presets/extended'; // lets <usa-reveal effect> use every preset name
+// app.config.ts: providers: [{ provide: APP_INITIALIZER, multi: true, useFactory: usaInitializer() }]
+@Component({ standalone: true, schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  template: `<usa-reveal effect="bounce-in-up"><h2>Hello</h2></usa-reveal>` })
+export class Hero {}
+```
+
+アニメーションコンポーネントはフレームワーク不要：
 
 ```html
-<!-- Web Component：属性は data-sa-* から接頭辞を除いたもの。sa:enter / sa:leave / sa:start / sa:complete / sa:progress イベントを発火 -->
 <script type="module">
-  import { defineScrollAnimate } from 'use-scroll-animate/element';
-  defineScrollAnimate();
+  import { defineComponents } from 'motionary/components';
+  defineComponents(); // or lazyDefine() from 'motionary/components/lazy'
 </script>
-<scroll-animate animation="fade-in-up" duration="800">…</scroll-animate>
+<usa-card effect="holo">…</usa-card>
+<usa-button deform="gooey">Buy</usa-button>
+<usa-fx effect="confetti" trigger="click"><button>Celebrate</button></usa-fx>
 ```
 
-## 退場アニメーションとパララックス（v1.8）
+## 機能一覧
 
-```js
-ScrollAnimate.observe('.card', { animation: 'fade-in-up', exit: true });          // ビューポート外へ出るとき入場を逆再生
-ScrollAnimate.observe('.toast', { animation: 'zoom-in', exit: 'fade-in-down' });  // 別プリセットを逆再生して退場
-import { parallax } from 'use-scroll-animate';
-parallax('.hero-bg', { speed: 0.3 });  // 正：ページより遅い、負：速い。axis: 'x' も可
-```
+| 分野 | 内容 |
+|---|---|
+| **スクロールプリセット** | **214** 種の入場プリセット（コア 33 + `motionary/presets/extended` の 181）、14 系統：フェード、ズーム、3D フリップ・ドア、オーバーシュートスライド、clip-path 図形、ブラー・マスク、バウンス・弾性、色・光、奥行き、グリッチ / タイプライター、スタッガー向け、スクロール連動 `scrub-*`。`timeline()` と 10 種のタイムラインプリセットも |
+| **カード・クリック・ボタン変形** | `<usa-card>` の 10 エフェクト（flip・holo・glass・border glow など）、スタックと 3D カルーセル。クリック系 7 コンポーネント、4 種のボタン変形（squash · wobble · gooey · dent）とアイコンモーフ。登録済みカード / クリックエフェクト 12 種 |
+| **物理・バウンス** | `<usa-spring>`、`<usa-draggable>`（スプリングバック・慣性・スナップ）、`<usa-overscroll>`。`spring()` / `solveSpring()` と 7 種のバネプリセット、物理エフェクト 7 種 |
+| **ページトランジション** | `pageTransition()`・`viewTransition()`・`sharedTransition()`・`flip()`・MPA トランジション、ページエフェクト 7 種（curtain・iris・pixel-dissolve など）、`<usa-dialog>`・`<usa-view-switch>` |
+| **ジェネラティブ背景** | キャンバス背景 6 種（flow-field・voronoi・mesh-gradient・starfield・metaballs・contours）+ 背景要素 9 種（オーロラ・パーティクル・グレイン・Acrylic / Mica など） |
+| **サウンド連動** | `<usa-audio>` と Web Audio のビート検出（`createBeatDetector()`・`onBeat()`）、オーディオビジュアライザー 3 種、任意のエフェクトをビートで発火 |
+| **カーソル・ジェスチャー** | カーソルエフェクト 5 種 + `<usa-cursor>`、fling · twist · long-press でエフェクト（`<usa-gesture-fx>`）、`<usa-swipeable>`・`<usa-pinch-zoom>` |
+| **テーマ** | テーマ 5 種（neon · paper · glass · retro · brutalist）を `<usa-theme>` / `applyTheme()` で、各テーマに専用エフェクト。モーショントークン（`/components/tokens`） |
+| **マイクロインタラクション** | 既製の UI 演出 23 種：copy-success・like-heart・add-to-cart・send-plane・upvote・trash-shake など |
+| **`<usa-player>` とストーリー** | `<usa-player>` は Playground から書き出した JSON アニメーションを再生（キーフレーム・プリセット・エフェクト、load / view / scroll / click トリガー）。`<usa-story>` のストーリーテンプレート 6 種 |
+| **WebGL** | `<usa-shader>`・`<usa-distort>`・`<usa-liquid>`・`<usa-post-fx>` — パーティクル 5 種、ポストエフェクト 9 種（CSS フォールバックと省電力制御付き） |
 
-- `exit`：`true`・プリセット名・配列・`{ from, to }`。`repeat: true` を暗黙に有効化。`data-sa-exit` 属性にも対応。reduced motion 時は再生しません。
-- `parallax()`：進行度を CSS 変数（既定 `--sa-parallax`）に、オフセットを個別の `translate` プロパティに書き込むため `transform` と競合しません。reduced motion 時はオフセットなし。停止関数を返します。
+90 のエフェクトは 1 つのレジストリ（`registerEffect()` / `playEffect()` / `bindEffect()` / `<usa-fx>`、`motionary/components/fx`）を共有し、5.x のパックは `motionary/components/effects` にあります。
 
-## 主な設定
+### 全 94 コンポーネント
 
-| オプション | 型 | デフォルト | 説明 |
-|--------|------|---------|-------------|
-| `animation` | `string` \| `string[]` | `'fade-in-up'` | プリセット名またはプリセットの配列 |
-| `duration` | `number` | `600` | アニメーションの長さ (ms) |
-| `delay` | `number` | `0` | アニメーションの遅延 (ms) |
-| `once` | `boolean` | `true` | 一度だけ実行するかどうか |
-| `offset` | `number` | `0` | アニメーションを開始するビューポートのオフセット (px) |
-| `parallax` | `object` | `{}` | パララックス効果の設定 |
-| `stagger` | `number` | `0` | 同じバッチで表示される兄弟要素ごとの追加遅延 (ms) |
-| `onProgress` | `(el, progress) => void` | – | スクロール進捗のコールバック (0–1) |
-| `progressMode` | `'ratio'` \| `'scroll'` | `'ratio'` | 進捗の計算方法：表示比率または本当のスクロール進捗 |
+カテゴリ単位（`motionary/components/cards`）、全部（`motionary/components`）、CSS 遅延読み込みの `/components/lite`、またはページ上のタグだけを読む `lazyDefine()` から選べます。ラッパー：`/components/react`・`/vue`・`/svelte`・`/solid`・`/angular`。
 
-## ライセンス
+| エントリ | 要素 |
+|---|---|
+| **スクロール表示** (`/components/reveal`) | `<usa-reveal>` · `<usa-stagger>` · `<usa-scroll-progress>` · `<usa-scrolly>` |
+| **テキスト** (`/components/text`) | `<usa-typewriter>` · `<usa-split-text>` · `<usa-scramble>` · `<usa-counter>` · `<usa-shimmer-text>` · `<usa-text-rotate>` · `<usa-wave-text>` · `<usa-glitch>` · `<usa-gradient-text>` · `<usa-handwriting>` · `<usa-scroll-highlight>` |
+| **インタラクション** (`/components/interaction`) | `<usa-ripple>` · `<usa-magnetic>` · `<usa-tilt>` · `<usa-spotlight>` · `<usa-press>` · `<usa-toggle>` |
+| **フィードバック** (`/components/feedback`) | `<usa-spinner>` · `<usa-skeleton>` · `<usa-progress>` · `<usa-toaster>` · `<usa-check>` |
+| **背景** (`/components/background`) | `<usa-aurora>` · `<usa-particles>` · `<usa-grain>` · `<usa-marquee>` · `<usa-acrylic>` · `<usa-grid-glow>` · `<usa-blobs>` · `<usa-water-ripple>` · `<usa-dot-network>` |
+| **トランジション** (`/components/transitions`) | `<usa-dialog>` · `<usa-accordion>` · `<usa-view-switch>` |
+| **バネ・物理** (`/components/physics`) | `<usa-spring>` · `<usa-draggable>` · `<usa-overscroll>` |
+| **カード** (`/components/cards`) | `<usa-card>` · `<usa-card-stack>` · `<usa-sticky-stack>` · `<usa-carousel-3d>` |
+| **クリック・ボタン** (`/components/click`) | `<usa-click>` · `<usa-button>` · `<usa-icon-morph>` · `<usa-like>` · `<usa-hold>` · `<usa-double-tap>` · `<usa-checkbox>` |
+| **UI キット** (`/components/ui`) | `<usa-tabs>` · `<usa-drawer>` · `<usa-bottom-sheet>` · `<usa-pull-refresh>` · `<usa-fab>` · `<usa-navbar>` · `<usa-slider>` · `<usa-rating>` · `<usa-tooltip>` · `<usa-popover>` · `<usa-badge>` · `<usa-avatar-stack>` |
+| **ページ全体** (`/components/page`) | `<usa-cursor>` · `<usa-fullpage>` · `<usa-loading-bar>` · `<usa-back-to-top>` · `<usa-ambient>` · `<usa-splash>` · `<usa-auto-skeleton>` · `<usa-motion-switch>` |
+| **タイムライン** (`/components/timeline`) | `<usa-timeline>` |
+| **ジェスチャー** (`/components/gesture`) | `<usa-swipeable>` · `<usa-pinch-zoom>` |
+| **SVG** (`/components/svg`) | `<usa-draw>` · `<usa-morph>` · `<usa-mask-reveal>` · `<usa-anim-icon>` |
+| **WebGL** (`/components/webgl`) | `<usa-shader>` · `<usa-distort>` · `<usa-liquid>` · `<usa-post-fx>` |
+| **3D 奥行き** (`/components/depth`) | `<usa-cube>` · `<usa-depth>` |
+| **レイアウト** (`/components/layout`) | `<usa-auto-animate>` · `<usa-masonry>` |
+| **パック** (`/components/packs`) | `<usa-pack>` |
+| **エフェクト登録** (`/components/fx`) | `<usa-fx>` |
+| **エフェクトパック** (`/components/effects`) | `<usa-player>` · `<usa-story>` · `<usa-audio>` · `<usa-theme>` · `<usa-gesture-fx>` |
 
-このプロジェクトは MIT ライセンスの下でライセンスされています - 詳細は [LICENSE](LICENSE) ファイルを参照してください。
+## アクセシビリティと reduced motion
+
+- `prefers-reduced-motion: reduce` ではスクロール表示はすぐに表示され（入場・パララックス・スクラブなし）、コンポーネントは落ち着いた状態になります（`staticAlternative()` / `adaptKeyframes()`）。
+- `motionary/components/a11y`：`setMotionSensitivity()` のレベルで点滅・ループ・パララックスを抑制、`announce()` ライブリージョン、`auditMotionA11y()`、`baselineReport()`。`<usa-motion-switch>` はユーザー向けのモーション切替です。
+- 詳細：[docs/accessibility.md](./docs/accessibility.md)。
+
+## パフォーマンスとサイズ
+
+デフォルトで scroll リスナーなし（IntersectionObserver）、アニメーションはコンポジター上（`transform`・`opacity`・`filter`・`clip-path`）、メインスレッド外のネイティブスクロールタイムライン（`engine: 'css'`）も選べます。全エントリはツリーシェイク可能で、gzip 予算を CI で強制（`size-budget.json`）。6.1 の実測（minify + gzip）：
+
+| インポート | gzip |
+|---|---:|
+| `import ScrollAnimate from 'motionary'` (default instance) | 5.72 kB |
+| Everything from the main entry | 8.69 kB |
+| `dist/index.umd.js` (CDN) | 8.81 kB |
+| `parallax()` alone | 1.22 kB |
+| `motionary/presets/extended` (181 presets) | 4.69 kB |
+| `motionary/components/reveal` | 4.10 kB |
+| `motionary/components/effects` (8 effect packs) | 26.40 kB |
+| `motionary/components/lite` (every component, CSS on demand) | 68.48 kB |
+| `motionary/components` (every component + CSS) | 85.15 kB |
+| `dist/components.umd.js` (CDN, everything) | 106.75 kB |
+
+詳細：[docs/performance.md](./docs/performance.md)。
+
+## 対応ブラウザ
+
+2023 年以降のエバーグリーンブラウザ：Chrome / Edge ≥ 111、Safari ≥ 16.4、Firefox ≥ 115、WebView2、Electron ≥ 24（Custom Elements・Web Animations・IntersectionObserver・ResizeObserver・constructable stylesheets）。View Transitions とスクロール駆動アニメーションはプログレッシブ（対応時に使用、それ以外は JS）。サーバー（SSR）での import は何もしません。`baselineReport()` で確認できます。
+
+## ドキュメント
+
+- [API リファレンス](./docs/API.md)（英語）— 全エクスポート・オプション・`data-sa-*` 属性
+- [プリセット一覧](./docs/presets.md)（全 214 種）
+- [コンポーネント](./docs/components.md)（全 `<usa-*>` 要素・属性・イベント）
+- [フレームワークと SSR](./docs/frameworks-ssr.md) · [Windows アプリ](./docs/windows-apps.md) · [ハイブリッドアプリ](./docs/hybrid-apps.md)
+- [モーショントークン](./docs/motion-tokens.md) · [AOS からの移行](./docs/migration-from-aos.md) · [GSAP ScrollTrigger からの移行](./docs/migration-from-gsap-scrolltrigger.md)
+- [デモ](./demo/index.html)（全プリセットをクリックで再生）
+
+## アップグレード
+
+- `use-scroll-animate` から：`npm i motionary` を実行し、import と CDN URL の `use-scroll-animate` を `motionary` に置き換えるだけです（旧パッケージ名も同じリリースを継続）。
+- [6.0 へのアップグレード](./docs/upgrading-6.md)（`npx usa-codemod-6`）· [5.0](./docs/upgrading-5.md)（`npx usa-codemod-5`）· [4.0](./docs/upgrading-4.md) · [3.0](./docs/upgrading-3.md) · [2.0](./docs/deprecations.md)
+- [変更履歴](./CHANGELOG.md)
+
+## ロードマップ
+
+7.0 まで 1 バージョン 1 PR — パーティクルと流体、テキスト効果、光と質感、3D シーン、モーフィング、トランジション、天気、インタラクティブ物理：[docs/ROADMAP.md](./docs/ROADMAP.md)。
+
+## コントリビュートとライセンス
+
+Issue と PR を歓迎します — [CONTRIBUTING.md](./CONTRIBUTING.md) を参照。MIT © HarrisonCN — [LICENSE](./LICENSE)。

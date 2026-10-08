@@ -173,7 +173,7 @@ describe('6.1 Animation Store', () => {
   it('copy code imports the extended entry (or CDN script) only when an extended preset is used', () => {
     const item = findItem('clip-diamond');
     const code = generate(item, defaultState(item), ALL);
-    for (const tab of ['vanilla', 'react', 'vue', 'svelte', 'solid', 'element']) expect(code[tab], tab).toContain("import 'use-scroll-animate/presets/extended';");
+    for (const tab of ['vanilla', 'react', 'vue', 'svelte', 'solid', 'element']) expect(code[tab], tab).toContain("import 'motionary/presets/extended';");
     expect(code.cdn).toContain('dist/presets-extended.umd.js');
     expect(code.cdn).toContain('data-sa-animation="clip-diamond"');
     const core = generate(findItem('fade-in'), defaultState(findItem('fade-in')), ALL);

@@ -91,7 +91,7 @@ export const helpers = [
     'Six style variants for every component: variant="minimal | neon | glass | brutalist | fluent | material" on an element, data-usa-variant on any ancestor, or setVariant() for the whole app.',
     '适用于所有组件的六种风格：在元素上设置 variant="minimal | neon | glass | brutalist | fluent | material"，在任意祖先上设置 data-usa-variant，或用 setVariant() 作用于整个应用。',
     ['minimal', 'neon', 'glass', 'brutalist', 'fluent', 'material'],
-    "import { setVariant } from 'use-scroll-animate/components/ui';\n\nsetVariant('fluent'); // whole app (Windows 11 look)\n// or per element:\n// <usa-slider variant=\"neon\"></usa-slider>",
+    "import { setVariant } from 'motionary/components/ui';\n\nsetVariant('fluent'); // whole app (Windows 11 look)\n// or per element:\n// <usa-slider variant=\"neon\"></usa-slider>",
     '<div class="demo-stack demo-variants" data-variant-demo><div class="demo-row"><select aria-label="variant" data-variant-pick><option>neon</option><option>minimal</option><option>glass</option><option>brutalist</option><option>fluent</option><option>material</option></select></div><div class="demo-row" data-usa-variant="neon"><usa-toggle checked>Toggle</usa-toggle><usa-checkbox checked>Check</usa-checkbox></div><usa-slider value="60" data-usa-variant="neon" label="Demo"></usa-slider></div>'),
 ];
 

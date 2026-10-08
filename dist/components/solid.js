@@ -3,25 +3,25 @@ import { defineComponents } from '../components.js';
 import { b as bindUsa } from '../chunks/bind-B_CTL6Qn.js';
 export { u as usaEventName } from '../chunks/bind-B_CTL6Qn.js';
 import './reveal.js';
-import '../chunks/base-C3Sw9sAO.js';
+import '../chunks/base-Yno7N2eC.js';
 import './text.js';
-import '../chunks/core-DN3hHbHh.js';
+import '../chunks/core-CUGCsMsJ.js';
 import './tokens.js';
 import './interaction.js';
 import './feedback.js';
 import './background.js';
-import '../chunks/variants-Bsevy6Xm.js';
+import '../chunks/variants-VNscPeTD.js';
 import './transitions.js';
 import './physics.js';
-import '../chunks/spring-CckMe3x0.js';
+import '../chunks/spring-DfQO5USi.js';
 import './cards.js';
 import './click.js';
-import '../chunks/fx-ChjxrMBo.js';
+import '../chunks/fx-BqDeFywO.js';
 import './ui.js';
 import './page.js';
 import './timeline.js';
 import './gesture.js';
-import '../chunks/core-BTf__I-8.js';
+import '../chunks/core-BIOaYdgN.js';
 import './svg.js';
 import './webgl.js';
 import './depth.js';
@@ -34,15 +34,15 @@ import './perf.js';
 import './bridge.js';
 
 /**
- * use-scroll-animate/components/solid — Solid integration (v3.8).
+ * motionary/components/solid — Solid integration (v3.8).
  * Solid renders custom elements natively: set properties with `prop:` and
  * listen with `on:` (`<usa-toggle prop:checked={on()} on:usa:change={…}>`).
  * This entry adds `defineUsa()` (client only, SolidStart-safe), a `usa`
  * directive for `use:usa={{ props, on }}`, and JSX types.
  *
  * ```tsx
- * import { defineUsa, usa } from 'use-scroll-animate/components/solid';
- * import type {} from 'use-scroll-animate/components/solid'; // JSX types
+ * import { defineUsa, usa } from 'motionary/components/solid';
+ * import type {} from 'motionary/components/solid'; // JSX types
  * onMount(() => defineUsa());
  * false && usa; // keep the directive import (Solid convention)
  * <usa-card use:usa={{ on: { flip: (e) => console.log(e.detail) } }} effect="flip">…</usa-card>

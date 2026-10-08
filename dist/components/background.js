@@ -1,5 +1,5 @@
-import { x as defineElement, q as caf, r as raf, u as adoptStyles, p as prefersReducedMotion } from '../chunks/base-C3Sw9sAO.js';
-import { s as setVariant } from '../chunks/variants-Bsevy6Xm.js';
+import { x as defineElement, q as caf, r as raf, u as adoptStyles, p as prefersReducedMotion } from '../chunks/base-Yno7N2eC.js';
+import { s as setVariant } from '../chunks/variants-VNscPeTD.js';
 
 var css$6 = "usa-aurora{position:relative;display:block;isolation:isolate;overflow:hidden}usa-aurora .usa-aurora-layer{position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:var(--usa-aurora-opacity,0.7);overflow:hidden;contain:strict}usa-aurora .usa-aurora-layer i{position:absolute;display:block;width:70%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,var(--c),transparent);will-change:transform;animation:usa-aurora-a var(--usa-aurora-speed,18s) ease-in-out infinite alternate}usa-aurora .usa-aurora-layer i:nth-child(1){left:-15%;top:-30%}usa-aurora .usa-aurora-layer i:nth-child(2){right:-20%;top:-10%;animation-name:usa-aurora-b;animation-duration:calc(var(--usa-aurora-speed,18s) * 1.3)}usa-aurora .usa-aurora-layer i:nth-child(3){left:10%;bottom:-45%;animation-name:usa-aurora-c;animation-duration:calc(var(--usa-aurora-speed,18s) * 0.9)}usa-aurora .usa-aurora-layer i:nth-child(4){right:0;bottom:-30%;width:50%;animation-name:usa-aurora-b;animation-direction:alternate-reverse}usa-aurora[paused] .usa-aurora-layer i,usa-aurora[data-offscreen] .usa-aurora-layer i{animation-play-state:paused}@keyframes usa-aurora-a{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(30%,20%,0) scale(1.25)}}@keyframes usa-aurora-b{from{transform:translate3d(0,0,0) scale(1.1)}to{transform:translate3d(-35%,25%,0) scale(0.85)}}@keyframes usa-aurora-c{from{transform:translate3d(0,0,0) rotate(0deg) scale(1)}to{transform:translate3d(25%,-30%,0) rotate(40deg) scale(1.2)}}@media (prefers-reduced-motion:reduce){usa-aurora .usa-aurora-layer i,usa-grain .usa-grain-layer,usa-acrylic::after{animation:none !important}}";
 
@@ -626,7 +626,7 @@ function fluentPreset(options = {}) {
 }
 
 /**
- * use-scroll-animate/components/background — backgrounds & decoration.
+ * motionary/components/background — backgrounds & decoration.
  * `<usa-aurora>`, `<usa-particles>`, `<usa-grain>`, `<usa-marquee>`,
  * `<usa-acrylic>`.
  */

@@ -1,4 +1,4 @@
-/* use-scroll-animate/components/text */
+/* motionary/components/text */
 .usa-sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
 usa-counter{font-variant-numeric:tabular-nums}
 usa-shimmer-text{--usa-shimmer-color:currentColor;--usa-shimmer-shine:#fff;background:linear-gradient(var(--usa-shimmer-angle,110deg),var(--usa-shimmer-color) 35%,var(--usa-shimmer-shine) 50%,var(--usa-shimmer-color) 65%) 0 0 / 250% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:usa-shimmer var(--usa-shimmer-duration,2600ms) linear infinite}@keyframes usa-shimmer{from{background-position:100% 0}to{background-position:-150% 0}}

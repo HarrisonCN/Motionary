@@ -1,10 +1,10 @@
 'use strict';
 
 var components_fx = require('./fx.cjs');
-var base = require('../chunks/base-B5i8qQPR.cjs');
+var base = require('../chunks/base-BaQV-2ha.cjs');
 var components_tokens = require('./tokens.cjs');
-var core = require('../chunks/core-BDcszY4L.cjs');
-require('../chunks/fx-B8hk1Fby.cjs');
+var core = require('../chunks/core-BGAyaY6L.cjs');
+require('../chunks/fx-lBGVtQO1.cjs');
 
 let layer = null;
 /** A fixed, pointer-transparent, aria-hidden layer for transient particles. */
@@ -1123,7 +1123,7 @@ const getAudio = () => current;
 function audioContext() {
     const AC = globalThis.AudioContext || globalThis.webkitAudioContext;
     if (!AC)
-        throw new Error('[use-scroll-animate] Web Audio is not available');
+        throw new Error('[motionary] Web Audio is not available');
     if (!actx || actx.state === 'closed')
         actx = new AC();
     return actx;
@@ -1180,7 +1180,7 @@ async function enableAudio(input = 'mic', opts = {}) {
         src.connect(analyser);
     }
     else
-        throw new Error(`[use-scroll-animate] enableAudio: no audio source for ${String(input)}`);
+        throw new Error(`[motionary] enableAudio: no audio source for ${String(input)}`);
     const freq = new Uint8Array(analyser.frequencyBinCount);
     const wave = new Uint8Array(analyser.fftSize);
     const self = {
@@ -2028,7 +2028,7 @@ const BASE_CSS = `[data-usa-theme]{background:var(--usa-theme-bg);color:var(--us
 const pack = (t) => {
     const p = typeof t === 'string' ? THEMES[t] : t;
     if (!p)
-        throw new Error(`[use-scroll-animate] unknown theme "${String(t)}" — ${THEME_NAMES.join(', ')}`);
+        throw new Error(`[motionary] unknown theme "${String(t)}" — ${THEME_NAMES.join(', ')}`);
     return p;
 };
 /** The CSS custom properties of a theme (design + motion tokens). */
@@ -2203,18 +2203,18 @@ function decodePlayground(state) {
 function normalizeAnimation(input) {
     const d = typeof input === 'string' ? JSON.parse(input) : input;
     if (!d || typeof d !== 'object')
-        throw new Error('[use-scroll-animate] animation: expected an object');
+        throw new Error('[motionary] animation: expected an object');
     let tracks;
     if (d.format === 'use-scroll-animate/playground')
         tracks = decodePlayground(String(d.state || ''));
     else if (Array.isArray(d.tracks))
         tracks = d.tracks;
     else
-        throw new Error('[use-scroll-animate] animation: missing "tracks"');
+        throw new Error('[motionary] animation: missing "tracks"');
     if (d.format && d.format !== ANIMATION_FORMAT && d.format !== 'use-scroll-animate/playground')
-        throw new Error(`[use-scroll-animate] animation: unknown format "${d.format}"`);
+        throw new Error(`[motionary] animation: unknown format "${d.format}"`);
     if (d.version && d.version > 1 && d.format === ANIMATION_FORMAT)
-        throw new Error(`[use-scroll-animate] animation: version ${d.version} needs a newer use-scroll-animate`);
+        throw new Error(`[motionary] animation: version ${d.version} needs a newer motionary`);
     const out = tracks
         .filter((t) => t && (t.effect || t.preset || Array.isArray(t.keyframes)))
         .map((t) => ({ ...t, target: t.target || ':scope', start: Math.max(0, Number(t.start) || 0), duration: t.effect ? 0 : Math.max(1, Number(t.duration) || 600) }));
@@ -2463,14 +2463,14 @@ function definePlayer(tag = 'usa-player') {
 }
 
 /**
- * use-scroll-animate/components/effects — the 5.x effect packs, all
+ * motionary/components/effects — the 5.x effect packs, all
  * registered through `registerEffect()` (5.0) and playable with
  * `playEffect()`, `bindEffect()` or `<usa-fx>`. Kept out of
- * `use-scroll-animate/components` / `components/lite` so their size budgets
+ * `motionary/components` / `components/lite` so their size budgets
  * hold; the UMD bundle registers everything.
  *
  * ```ts
- * import { registerAllEffects } from 'use-scroll-animate/components/effects';
+ * import { registerAllEffects } from 'motionary/components/effects';
  * registerAllEffects();
  * ```
  */

@@ -1,7 +1,7 @@
 # WinUI 3 + WebView2 sample — `<usa-*>` components in a Windows app
 
 A minimal WinUI 3 (Windows App SDK) desktop app that hosts a local web UI in
-**WebView2** and uses `use-scroll-animate/components` with the **Fluent preset**
+**WebView2** and uses `motionary/components` with the **Fluent preset**
 (`fluentPreset()`: Fluent variant, Mica-style background, Acrylic, Reveal highlight).
 
 ```
@@ -15,7 +15,7 @@ webview2-winui/
 ## Run
 
 1. Windows 10 1809+ / Windows 11, Visual Studio 2022 with the *Windows App SDK* workload (or `dotnet` 8 SDK).
-2. Copy `node_modules/use-scroll-animate/dist/components.umd.js` (or download it from unpkg) into `wwwroot/`.
+2. Copy `node_modules/motionary/dist/components.umd.js` (or download it from unpkg) into `wwwroot/`.
 3. `dotnet run` (or F5 in Visual Studio).
 
 `MainWindow.xaml.cs` maps `https://app.local/` to the `wwwroot` folder with

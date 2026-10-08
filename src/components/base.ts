@@ -1,5 +1,5 @@
 /**
- * use-scroll-animate/components — shared base for the `<usa-*>` custom elements.
+ * motionary/components — shared base for the `<usa-*>` custom elements.
  *
  * Everything here is lazy: nothing touches `window`, `document`,
  * `HTMLElement` or `matchMedia` at import time, so the components can be
@@ -12,7 +12,7 @@ export interface ComponentsConfig {
    * Inject each component's CSS when it is defined (default `true`). Uses a
    * constructable stylesheet (`document.adoptedStyleSheets`, which a strict
    * `style-src` CSP does not block) and falls back to a `<style>` tag. Set
-   * to `false` when you load `use-scroll-animate/components.css` yourself.
+   * to `false` when you load `motionary/components.css` yourself.
    */
   injectStyles?: boolean;
   /**
@@ -34,7 +34,7 @@ export interface ComponentsConfig {
    * translations and fades only, safe for vestibular disorders) ·
    * `'minimal'` (fades only; components use their reduced-motion variants) ·
    * `'static'` (no animation: every component shows its static alternative).
-   * See `setMotionSensitivity()` in `use-scroll-animate/components/a11y`.
+   * See `setMotionSensitivity()` in `motionary/components/a11y`.
    */
   motionSensitivity?: MotionSensitivity;
 }
@@ -470,7 +470,7 @@ const warned = new Set<string>();
 export function deprecate(key: string, message: string): void {
   if (warned.has(key)) return;
   warned.add(key);
-  if (typeof console !== 'undefined') console.warn(`[use-scroll-animate] ${message}`);
+  if (typeof console !== 'undefined') console.warn(`[motionary] ${message}`);
 }
 
 /**

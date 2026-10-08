@@ -14,7 +14,7 @@ describe('demo/index.html', () => {
 
   it('loads the UMD build without a build step (local file, unpkg fallback)', () => {
     expect(html).toContain("'../dist/index.umd.js'");
-    expect(html).toContain('https://unpkg.com/use-scroll-animate/dist/index.umd.js');
+    expect(html).toContain('https://unpkg.com/motionary/dist/index.umd.js');
     expect(html).not.toMatch(/type=["']module["']/);
     expect(existsSync(resolve(root, 'dist/index.umd.js'))).toBe(true);
   });

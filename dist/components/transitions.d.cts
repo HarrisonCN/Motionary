@@ -106,7 +106,7 @@ type Targets = Element | Iterable<Element> | ArrayLike<Element>;
 declare function flip(targets: Targets, mutate: () => void | Promise<void>, options?: FlipOptions): Promise<void>;
 
 /**
- * use-scroll-animate/components/transitions — view & layout transitions.
+ * motionary/components/transitions — view & layout transitions.
  * `<usa-dialog>`, `<usa-accordion>`, `<usa-view-switch>`
  * and the `viewTransition()` and `flip()` helpers (4.0: `<usa-flip-list>` → `<usa-auto-animate>`,
  * `connectedAnimation()` → `sharedTransition()`, both in `components/layout`).

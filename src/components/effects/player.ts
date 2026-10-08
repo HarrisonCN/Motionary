@@ -70,13 +70,13 @@ function decodePlayground(state: string): AnimationTrack[] {
 /** Validate / normalise an animation (object or JSON text). Throws on anything unusable. */
 export function normalizeAnimation(input: string | AnimationJSON | Record<string, any>): Required<Pick<AnimationJSON, 'tracks' | 'duration' | 'loop' | 'name'>> {
   const d: any = typeof input === 'string' ? JSON.parse(input) : input;
-  if (!d || typeof d !== 'object') throw new Error('[use-scroll-animate] animation: expected an object');
+  if (!d || typeof d !== 'object') throw new Error('[motionary] animation: expected an object');
   let tracks: AnimationTrack[];
   if (d.format === 'use-scroll-animate/playground') tracks = decodePlayground(String(d.state || ''));
   else if (Array.isArray(d.tracks)) tracks = d.tracks;
-  else throw new Error('[use-scroll-animate] animation: missing "tracks"');
-  if (d.format && d.format !== ANIMATION_FORMAT && d.format !== 'use-scroll-animate/playground') throw new Error(`[use-scroll-animate] animation: unknown format "${d.format}"`);
-  if (d.version && d.version > 1 && d.format === ANIMATION_FORMAT) throw new Error(`[use-scroll-animate] animation: version ${d.version} needs a newer use-scroll-animate`);
+  else throw new Error('[motionary] animation: missing "tracks"');
+  if (d.format && d.format !== ANIMATION_FORMAT && d.format !== 'use-scroll-animate/playground') throw new Error(`[motionary] animation: unknown format "${d.format}"`);
+  if (d.version && d.version > 1 && d.format === ANIMATION_FORMAT) throw new Error(`[motionary] animation: version ${d.version} needs a newer motionary`);
   const out = tracks
     .filter((t) => t && (t.effect || t.preset || Array.isArray(t.keyframes)))
     .map((t) => ({ ...t, target: t.target || ':scope', start: Math.max(0, Number(t.start) || 0), duration: t.effect ? 0 : Math.max(1, Number(t.duration) || 600) }));

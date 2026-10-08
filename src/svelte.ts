@@ -1,11 +1,11 @@
 /**
- * use-scroll-animate - Svelte integration
+ * motionary - Svelte integration
  *
  * Svelte actions (no import from `svelte` needed, works with Svelte 3, 4 and 5):
  *
  * ```svelte
  * <script>
- *   import { scrollAnimate, scrollStagger } from 'use-scroll-animate/svelte';
+ *   import { scrollAnimate, scrollStagger } from 'motionary/svelte';
  * </script>
  * <div use:scrollAnimate={{ animation: 'fade-in-up', duration: 800 }}>…</div>
  * <ul use:scrollStagger={{ stagger: 60 }}>…</ul>

@@ -34,11 +34,11 @@ describe('visual playground', () => {
     const out = playgroundSnippets(state);
     PLAYGROUND_TABS.forEach((t: any) => expect(out[t.id]).toMatch(/\S/));
     expect(out.html).toContain('dist/components.umd.js');
-    expect(out.esm).toContain("import { defineSvgComponents } from 'use-scroll-animate/components/svg';");
+    expect(out.esm).toContain("import { defineSvgComponents } from 'motionary/components/svg';");
     expect(out.react).toContain('className="pg-card"');
     expect(out.vue).toContain('isCustomElement');
     for (const code of Object.values(out) as string[])
-      for (const m of code.matchAll(/import \{ (\w+) \} from 'use-scroll-animate\/components\/(\w+)'/g)) {
+      for (const m of code.matchAll(/import \{ (\w+) \} from 'motionary\/components\/(\w+)'/g)) {
         // 5.9: the <usa-player> tab imports from the effects entry
         if (m[2] === 'effects') expect(typeof (effects as any)[m[1]], m[1]).toBe('function');
         else {
@@ -94,7 +94,7 @@ describe('playground 2.0 (4.6): keyframe tracks, presets, <usa-timeline> export'
     const html = core.timelineMarkup([core.newTrack('scale', 700, 500, 'Go'), core.newTrack('fade-up', 0, 600, 'Hi <b>')], { trigger: 'click' });
     expect(html).toBe('<usa-timeline trigger="click">\n  <div data-tl="fade-up" data-at="0" data-duration="600">Hi &lt;b></div>\n  <div data-tl="scale" data-at="700" data-duration="500">Go</div>\n</usa-timeline>');
     const out = core.playgroundSnippets({ ...core.DEFAULT_STATE, tracks: core.DEFAULT_TRACKS });
-    expect(out.timeline).toContain("import { defineTimeline } from 'use-scroll-animate/components/timeline';");
+    expect(out.timeline).toContain("import { defineTimeline } from 'motionary/components/timeline';");
     expect(out.timeline).toContain('data-tl="fade-left" data-at="300"');
     const { timeline } = await import('../src/components/timeline/core');
     expect(typeof timeline).toBe('function');

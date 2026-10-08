@@ -1,13 +1,13 @@
 import { createRenderEffect, onMount, onCleanup } from 'solid-js';
-import { c as createScrollAnimate } from './chunks/core-BVQW34aX.js';
-import { s as staggerChildren } from './chunks/stagger-Dh4V-OL0.js';
-import './chunks/presets-BJ09NeTo.js';
+import { c as createScrollAnimate } from './chunks/core-D7cVumUu.js';
+import { s as staggerChildren } from './chunks/stagger-DtMKo2SK.js';
+import './chunks/presets-BYBVJVeP.js';
 
 /**
- * use-scroll-animate - Solid integration
+ * motionary - Solid integration
  *
  * ```tsx
- * import { scrollAnimate, scrollStagger, useScrollAnimate } from 'use-scroll-animate/solid';
+ * import { scrollAnimate, scrollStagger, useScrollAnimate } from 'motionary/solid';
  * false && scrollAnimate; // keep the directive import (TypeScript)
  *
  * <div use:scrollAnimate={{ animation: 'zoom-in' }}>…</div>

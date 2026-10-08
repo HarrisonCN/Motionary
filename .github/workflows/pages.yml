@@ -39,10 +39,10 @@ jobs:
           cat > _site/index.html <<'HTML'
           <!doctype html>
           <meta charset="utf-8">
-          <title>use-scroll-animate</title>
+          <title>Motionary</title>
           <meta http-equiv="refresh" content="0; url=./showcase/">
           <script>location.replace('./showcase/' + location.hash)</script>
-          <a href="./showcase/">use-scroll-animate showcase</a>
+          <a href="./showcase/">Motionary showcase</a>
           HTML
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

@@ -1,9 +1,9 @@
-import { c as createScrollAnimate } from './chunks/core-BVQW34aX.js';
-import { s as staggerChildren } from './chunks/stagger-Dh4V-OL0.js';
-import './chunks/presets-BJ09NeTo.js';
+import { c as createScrollAnimate } from './chunks/core-D7cVumUu.js';
+import { s as staggerChildren } from './chunks/stagger-DtMKo2SK.js';
+import './chunks/presets-BYBVJVeP.js';
 
 /**
- * use-scroll-animate - React Integration
+ * motionary - React Integration
  * Provides useScrollAnimate and useScrollStagger hooks for React applications.
  * `useScrollStagger({ observeChildren: true })` also animates children added later.
  *

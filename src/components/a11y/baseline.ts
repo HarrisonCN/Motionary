@@ -31,6 +31,6 @@ export function baselineReport(): BaselineFeature[] {
 /** Log (once) which required 5.0 features are missing here. Returns the missing ids. */
 export function warnBaseline(): string[] {
   const missing = baselineReport().filter((f) => f.required && !f.supported).map((f) => f.id);
-  if (missing.length) deprecate('baseline', `this browser lacks ${missing.join(', ')}; use-scroll-animate 5.0 requires them (modern-browser baseline, see docs/upgrading-5.md).`);
+  if (missing.length) deprecate('baseline', `this browser lacks ${missing.join(', ')}; motionary 5.0 requires them (modern-browser baseline, see docs/upgrading-5.md).`);
   return missing;
 }

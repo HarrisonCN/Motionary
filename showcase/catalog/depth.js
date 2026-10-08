@@ -25,7 +25,7 @@ export const helpers = [
     'deviceTilt(cb, { range, smooth }) streams smoothed -1…1 tilt from the gyroscope; call requestOrientationPermission() from a tap first on iOS.',
     'deviceTilt(cb, { range, smooth }) 输出平滑后的 -1…1 陀螺仪倾斜值；在 iOS 上需先在点击中调用 requestOrientationPermission()。',
     ['gyroscope', 'device orientation', 'tilt', 'mobile'],
-    "import { deviceTilt, requestOrientationPermission } from 'use-scroll-animate/components/depth';\n\nbutton.onclick = async () => {\n  if (!(await requestOrientationPermission())) return;\n  deviceTilt(({ x, y }) => card.style.setProperty('transform', `rotateY(${x * 15}deg) rotateX(${-y * 15}deg)`));\n};",
+    "import { deviceTilt, requestOrientationPermission } from 'motionary/components/depth';\n\nbutton.onclick = async () => {\n  if (!(await requestOrientationPermission())) return;\n  deviceTilt(({ x, y }) => card.style.setProperty('transform', `rotateY(${x * 15}deg) rotateX(${-y * 15}deg)`));\n};",
     '<button type="button" class="demo-link" data-tilt-btn>Enable tilt</button><p class="demo-note" data-tilt-out aria-live="polite">x 0 · y 0</p>'),
 ];
 

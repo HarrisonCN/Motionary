@@ -17,7 +17,7 @@ MAUI 9+ has `HybridWebView` (raw HTML + JS bridge); `BlazorWebView` also works (
 ```text
 Resources/Raw/wwwroot/
   index.html
-  components.umd.js     ← copied from node_modules/use-scroll-animate/dist/
+  components.umd.js     ← copied from node_modules/motionary/dist/
 ```
 
 ```xml
@@ -84,7 +84,7 @@ The renderer is Chromium — use the npm package with your bundler, or the UMD f
 
 ```js
 // renderer.js (bundled)
-import { defineComponents, configureComponents } from 'use-scroll-animate/components';
+import { defineComponents, configureComponents } from 'motionary/components';
 configureComponents({ injectStyles: true });
 defineComponents();
 ```
@@ -106,7 +106,7 @@ Imports are SSR-safe (no `window` access at import time), so the same modules ca
 
 ```js
 // src/main.js (Vite)
-import { defineComponents } from 'use-scroll-animate/components';
+import { defineComponents } from 'motionary/components';
 import { invoke } from '@tauri-apps/api/core';
 defineComponents();
 document.querySelector('usa-toggle').addEventListener('usa:change', (e) => invoke('set_setting', { on: e.detail.checked }));
@@ -121,10 +121,10 @@ Tauri uses WebView2 on Windows, WKWebView on macOS / iOS and WebKitGTK on Linux.
 
 ## Native shell bridge (4.7)
 
-`use-scroll-animate/components/bridge` keeps the page in sync with the host app's **system settings** — reduce motion, light / dark / high-contrast theme, accent color — on WinUI 3 / WPF (WebView2), .NET MAUI and Flutter:
+`motionary/components/bridge` keeps the page in sync with the host app's **system settings** — reduce motion, light / dark / high-contrast theme, accent color — on WinUI 3 / WPF (WebView2), .NET MAUI and Flutter:
 
 ```js
-import { connectNativeShell } from 'use-scroll-animate/components/bridge';
+import { connectNativeShell } from 'motionary/components/bridge';
 const { host } = connectNativeShell();   // 'webview2' | 'maui' | 'flutter' | 'electron' | 'tauri' | 'browser'
 ```
 
@@ -138,8 +138,8 @@ Helpers: `detectNativeHost()`, `postToNative(msg)`, `parseNativeSettings(data)`,
 
 | Framework | Entry | What it gives you |
 |---|---|---|
-| React | `use-scroll-animate/components/react` | `createUsaComponents(React)` typed wrappers |
-| Vue | `use-scroll-animate/components/vue` | `UsaPlugin`, `isUsaElement` |
-| Svelte | `use-scroll-animate/components/svelte` | `use:usa={{ props, on }}` action, `defineUsa()` |
-| Solid | `use-scroll-animate/components/solid` | `use:usa` directive, `defineUsa()`, JSX types |
-| Angular | `use-scroll-animate/components/angular` | `usaInitializer()` for `APP_INITIALIZER`, `usaDetail()`; use `CUSTOM_ELEMENTS_SCHEMA` |
+| React | `motionary/components/react` | `createUsaComponents(React)` typed wrappers |
+| Vue | `motionary/components/vue` | `UsaPlugin`, `isUsaElement` |
+| Svelte | `motionary/components/svelte` | `use:usa={{ props, on }}` action, `defineUsa()` |
+| Solid | `motionary/components/solid` | `use:usa` directive, `defineUsa()`, JSX types |
+| Angular | `motionary/components/angular` | `usaInitializer()` for `APP_INITIALIZER`, `usaDetail()`; use `CUSTOM_ELEMENTS_SCHEMA` |

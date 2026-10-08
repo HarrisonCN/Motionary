@@ -112,7 +112,7 @@ interface GLQuad {
 declare function glQuad(canvas: HTMLCanvasElement, frag: string): GLQuad | null;
 
 /**
- * use-scroll-animate/components/webgl — lightweight canvas / WebGL (v3.4).
+ * motionary/components/webgl — lightweight canvas / WebGL (v3.4).
  * `<usa-shader>` (shader backgrounds), `<usa-distort>` (hover image
  * distortion), `<usa-liquid>` (ripple images) on a tiny single-quad runner
  * (`glQuad()`), with graceful fallbacks when WebGL is unavailable.

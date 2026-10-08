@@ -1,9 +1,9 @@
-/** use-scroll-animate showcase — UI strings (English / 简体中文). */
+/** motionary showcase — UI strings (English / 简体中文). */
 
 export const STRINGS = {
   en: {
     'brand.store': 'Animation Store',
-    'hero.kicker': 'use-scroll-animate v6 · 214 presets',
+    'hero.kicker': 'Motionary v6 · 214 presets',
     'hero.title': 'Pick an animation.<br>Take the code.',
     'hero.lead': 'All 214 scroll presets, helpers and framework adapters of a dependency-free scroll animation library — live, tweakable, free.',
     'hero.cta': 'Browse effects',
@@ -78,7 +78,7 @@ export const STRINGS = {
     'toast.unfav': 'Removed from favorites',
     'toast.copyFail': 'Copy failed — select the text manually',
     'rm.notice': 'Reduced motion is on: the library shows content immediately, so previews are static.',
-    'footer.made': 'Built with use-scroll-animate itself — every demo on this page imports dist/.',
+    'footer.made': 'Built with Motionary itself — every demo on this page imports dist/.',
     'footer.github': 'GitHub',
     'footer.npm': 'npm',
     'footer.docs': 'API docs',
@@ -86,7 +86,7 @@ export const STRINGS = {
   },
   zh: {
     'brand.store': '动画商店',
-    'hero.kicker': 'use-scroll-animate v6 · 214 个预设',
+    'hero.kicker': 'Motionary v6 · 214 个预设',
     'hero.title': '挑一个动画，<br>直接拿走代码。',
     'hero.lead': '一个零依赖的滚动动画库：全部 214 个滚动预设、辅助函数与框架适配器都在这里——实时预览、随意调节、完全免费。',
     'hero.cta': '浏览效果',
@@ -161,7 +161,7 @@ export const STRINGS = {
     'toast.unfav': '已取消收藏',
     'toast.copyFail': '复制失败，请手动选择文本',
     'rm.notice': '已开启“减少动态效果”：库会直接显示内容，因此预览为静态。',
-    'footer.made': '本站由 use-scroll-animate 自身驱动——页面上的每个演示都直接引入 dist/。',
+    'footer.made': '本站由 Motionary 自身驱动——页面上的每个演示都直接引入 dist/。',
     'footer.github': 'GitHub',
     'footer.npm': 'npm',
     'footer.docs': 'API 文档',

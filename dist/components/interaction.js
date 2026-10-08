@@ -1,4 +1,4 @@
-import { x as defineElement, y as EASE_OUT, r as raf, q as caf, k as clamp, E as EASE_SPRING } from '../chunks/base-C3Sw9sAO.js';
+import { x as defineElement, y as EASE_OUT, r as raf, q as caf, k as clamp, E as EASE_SPRING } from '../chunks/base-Yno7N2eC.js';
 
 var css$5 = "usa-ripple{position:relative;display:inline-block;overflow:hidden;isolation:isolate;border-radius:inherit;-webkit-tap-highlight-color:transparent}usa-ripple[block]{display:block}usa-ripple .usa-ripple-wave{position:absolute;border-radius:50%;pointer-events:none;transform:scale(0);z-index:-1;will-change:transform,opacity}";
 
@@ -398,7 +398,7 @@ function defineToggle(tag = 'usa-toggle') {
 }
 
 /**
- * use-scroll-animate/components/interaction — micro-interactions.
+ * motionary/components/interaction — micro-interactions.
  * `<usa-ripple>`, `<usa-magnetic>`, `<usa-tilt>`, `<usa-spotlight>`,
  * `<usa-press>`, `<usa-toggle>`.
  */

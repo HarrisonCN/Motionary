@@ -1,11 +1,11 @@
 'use strict';
 
-var core = require('./chunks/core-BYLtO0Po.cjs');
-var stagger = require('./chunks/stagger-CvhYlKrF.cjs');
-require('./chunks/presets-D2ksQNzJ.cjs');
+var core = require('./chunks/core-B5T0dhFH.cjs');
+var stagger = require('./chunks/stagger-CCFyhzSw.cjs');
+require('./chunks/presets-CUHys3sK.cjs');
 
 /**
- * use-scroll-animate - Vue 3 Integration
+ * motionary - Vue 3 Integration
  * Provides useScrollAnimate and useScrollStagger composables for Vue 3 applications.
  *
  * A thin wrapper around the core engine, so it shares its behaviour: `once`,

@@ -1,5 +1,5 @@
 /**
- * use-scroll-animate showcase — the "product" catalog.
+ * motionary showcase — the "product" catalog.
  * Pure data (no DOM, no library import) so it can be unit-tested.
  *
  * kind:

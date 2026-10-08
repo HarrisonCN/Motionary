@@ -51,16 +51,16 @@ const componentsCss = () => ({
     for (const [cat, files] of Object.entries(CSS_CATEGORIES)) {
       const css = files.map(read).join('\n');
       all.push(css);
-      this.emitFile({ type: 'asset', fileName: `components/${cat}.css`, source: `/* use-scroll-animate/components/${cat} */\n${BASE_CSS}\n${css}\n` });
+      this.emitFile({ type: 'asset', fileName: `components/${cat}.css`, source: `/* motionary/components/${cat} */\n${BASE_CSS}\n${css}\n` });
     }
-    this.emitFile({ type: 'asset', fileName: 'components.css', source: `/* use-scroll-animate/components — all <usa-*> styles */\n${all.join('\n')}\n` });
+    this.emitFile({ type: 'asset', fileName: 'components.css', source: `/* motionary/components — all <usa-*> styles */\n${all.join('\n')}\n` });
   },
 });
 
 // Peer dependencies are never bundled.
 const external = ['solid-js'];
 
-// Every entry (`use-scroll-animate` and `use-scroll-animate/<name>`) shares
+// Every entry (`motionary` and `motionary/<name>`) shares
 // code through dist/chunks/, so importing several never loads the core twice.
 const entries = {
   index: 'src/index.ts',

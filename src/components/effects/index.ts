@@ -1,12 +1,12 @@
 /**
- * use-scroll-animate/components/effects — the 5.x effect packs, all
+ * motionary/components/effects — the 5.x effect packs, all
  * registered through `registerEffect()` (5.0) and playable with
  * `playEffect()`, `bindEffect()` or `<usa-fx>`. Kept out of
- * `use-scroll-animate/components` / `components/lite` so their size budgets
+ * `motionary/components` / `components/lite` so their size budgets
  * hold; the UMD bundle registers everything.
  *
  * ```ts
- * import { registerAllEffects } from 'use-scroll-animate/components/effects';
+ * import { registerAllEffects } from 'motionary/components/effects';
  * registerAllEffects();
  * ```
  */

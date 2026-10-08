@@ -1,4 +1,4 @@
-import { p as prefersReducedMotion, y as EASE_OUT, m as motionScale, x as defineElement } from '../chunks/base-C3Sw9sAO.js';
+import { p as prefersReducedMotion, y as EASE_OUT, m as motionScale, x as defineElement } from '../chunks/base-Yno7N2eC.js';
 
 /** FLIP keyframes from a previous box to the current one (pure). */
 function flipFrames(from, to, scale = true) {
@@ -234,7 +234,7 @@ function defineMasonry(tag = 'usa-masonry') {
 }
 
 /**
- * use-scroll-animate/components/layout — layout animation (v3.6).
+ * motionary/components/layout — layout animation (v3.6).
  * `autoAnimate()` / `<usa-auto-animate>` (list & grid reflow),
  * `<usa-masonry>`, and `sharedTransition()` for shared-element transitions
  * (View Transitions API with a FLIP fallback).

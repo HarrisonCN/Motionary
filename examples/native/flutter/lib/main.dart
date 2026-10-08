@@ -1,5 +1,5 @@
 // Flutter + webview_flutter: sync MediaQuery.disableAnimations (reduce motion), brightness /
-// high contrast and the accent color into the page (use-scroll-animate 4.7+).
+// high contrast and the accent color into the page (motionary 4.7+).
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';

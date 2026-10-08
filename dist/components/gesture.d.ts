@@ -115,7 +115,7 @@ interface UsaPinchZoomElement extends UsaElement {
 declare function definePinchZoom(tag?: string): CustomElementConstructor | undefined;
 
 /**
- * use-scroll-animate/components/gesture — unified gestures (v3.2).
+ * motionary/components/gesture — unified gestures (v3.2).
  * `gesture()` recognises pan, swipe, pinch, long-press, tap and double-tap
  * with release velocities for springs; `<usa-swipeable>` (swipe-to-dismiss)
  * and `<usa-pinch-zoom>` are built on it.

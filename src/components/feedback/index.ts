@@ -1,5 +1,5 @@
 /**
- * use-scroll-animate/components/feedback — loading & feedback.
+ * motionary/components/feedback — loading & feedback.
  * `<usa-spinner>`, `<usa-skeleton>`, `<usa-progress>`, `<usa-toaster>` +
  * `toast()`, `<usa-check>`.
  */

@@ -1,7 +1,7 @@
 'use strict';
 
-var base = require('../chunks/base-B5i8qQPR.cjs');
-var spring = require('../chunks/spring--oZh55tB.cjs');
+var base = require('../chunks/base-BaQV-2ha.cjs');
+var spring = require('../chunks/spring-Dgx187Vh.cjs');
 
 var css$2 = "usa-spring{display:inline-block;transform-origin:50% 70%}usa-spring[block]{display:block}usa-spring[effect=\"drop\"]{transform-origin:50% 100%}usa-spring[data-state=\"hidden\"]{opacity:0}usa-spring[trigger=\"click\"],usa-spring[trigger=\"hover\"]{cursor:pointer;-webkit-tap-highlight-color:transparent}";
 
@@ -414,7 +414,7 @@ function defineOverscroll(tag = 'usa-overscroll') {
 }
 
 /**
- * use-scroll-animate/components/physics — spring & bounce physics (v2.3).
+ * motionary/components/physics — spring & bounce physics (v2.3).
  * `<usa-spring>` (bounce-in, pop, drop, jelly, rubber-band), `<usa-draggable>`
  * (spring-back, inertia, snap) and `<usa-overscroll>` (elastic edges), plus
  * the spring core: `spring()`, `springEasing()`, `createSpring()`,

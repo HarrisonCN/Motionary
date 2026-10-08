@@ -1,4 +1,4 @@
-# Accessibility (`use-scroll-animate/components`)
+# Accessibility (`motionary/components`)
 
 Audited in v2.9 (automated sweep in `test/components-a11y-frameworks.test.ts` + per-component tests).
 
@@ -33,7 +33,7 @@ Glass, acrylic and Fluent materials fall back to solid surfaces under `prefers-r
 
 ## Motion-sensitivity levels (4.4)
 
-`import { setMotionSensitivity, restoreMotionSensitivity } from 'use-scroll-animate/components/a11y'`
+`import { setMotionSensitivity, restoreMotionSensitivity } from 'motionary/components/a11y'`
 
 | Level | What moves | Use for |
 |---|---|---|

@@ -1,248 +1,219 @@
 <div align="center">
 
-# use-scroll-animate 🚀
+# Motionary
 
-**一个轻量级（~5KB gzipped）、零依赖的现代 Web 滚动动画库。**
+**面向现代 Web 的滚动动画与动画 Web Components —— 214 个滚动预设、90 种效果、零依赖。**
 
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/HarrisonCN/use-scroll-animate?style=flat-square)](https://github.com/HarrisonCN/use-scroll-animate/releases)
-[![GitHub repo size](https://img.shields.io/github/repo-size/HarrisonCN/use-scroll-animate?style=flat-square)](https://github.com/HarrisonCN/use-scroll-animate)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+_原名 **use-scroll-animate** —— API 与 `<usa-*>` 标签完全不变；旧 npm 包继续作为别名发布。_
+
+[![npm](https://img.shields.io/npm/v/motionary?style=flat-square)](https://www.npmjs.com/package/motionary) [![CI](https://github.com/HarrisonCN/motionary/actions/workflows/ci.yml/badge.svg)](https://github.com/HarrisonCN/motionary/actions/workflows/ci.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](./LICENSE)
 
 [English](./README.md) | [简体中文](./README_zh.md) | [日本語](./README_ja.md)
 
-**[✨ 在线效果商店：所有动画实时预览，代码一键复制](https://harrisoncn.github.io/use-scroll-animate/)**
+**[🛍 动画商店](https://harrisoncn.github.io/motionary/showcase/)** · **[🧩 组件](https://harrisoncn.github.io/motionary/showcase/components.html)** · **[🎛 Playground](https://harrisoncn.github.io/motionary/showcase/playground.html)** · **[📜 滚动叙事](https://harrisoncn.github.io/motionary/showcase/story.html)**
+
+<sub>动画商店可预览、调整并复制全部 <b>227</b> 个动画 —— 214 个滚动预设，以及卡片、点击、物理与整页效果 —— 支持桌面与手机尺寸。</sub>
 
 </div>
 
-## 为什么选择 `use-scroll-animate`？
-
-在 2025 年，性能至关重要。传统的滚动动画库通常捆绑了沉重的依赖，依赖过时的滚动事件监听器，或者强制你使用特定的框架。
-
-`use-scroll-animate` 的设计初衷截然不同：
-- ⚡ **零依赖**：纯原生 JS/TypeScript 编写。
-- 🚀 **高性能**：由 `IntersectionObserver` 和原生 `Web Animations API` 驱动。默认不监听滚动事件（可选的滚动进度模式仅在被追踪元素可见时使用一个 passive、rAF 节流的监听器），无布局抖动。
-- 🪶 **极轻量**：Gzip 后核心约 4.8KB（含 `timeline`、`staggerChildren` 与 React/Vue 辅助在内全部约 6.1KB）。
-- 🧩 **框架无关**：完美支持原生 JS、React、Vue、Svelte 等。内置一流的 React Hooks 和 Vue Composables。
-- ♿ **无障碍**：原生支持 `prefers-reduced-motion`。
-
-## 滚动预设 2.0（v6.1）🎞️
-
-**214 个滚动入场预设**：33 个核心预设 + **181 个扩展预设**，扩展集位于独立、可摇树的入口（gzip 约 4.7 kB；核心包体积不变、仍在预算内）。在 [动画商店](https://harrisoncn.github.io/use-scroll-animate/showcase/) 中可实时预览并复制代码；全部预设及其关键帧见 [docs/presets.md](./docs/presets.md)。
-
-```js
-import ScrollAnimate from 'use-scroll-animate';
-import 'use-scroll-animate/presets/extended'; // 导入即注册扩展预设
-
-ScrollAnimate.observe('.card', { animation: 'bounce-in-up', duration: 900 });
-ScrollAnimate.observe('.hero img', { animation: 'scrub-shrink', engine: 'css', viewRange: ['cover 0%', 'cover 100%'] });
-```
-
-无构建页面：先加载 `dist/index.umd.js`，再加载 `dist/presets-extended.umd.js`（自动注册）。预设名可用于 `animation` / `exit`、`data-sa-animation`、`useScrollAnimate` 等框架适配器、`<scroll-animate animation>` 以及 `<usa-reveal effect>` / `<usa-stagger effect>`。只动画 `transform`、`opacity`、`filter`、`clip-path`，开启“减少动态效果”时不播放。预设现在支持中间关键帧 `frames`（过冲、弹跳、故障），自定义预设同样可用：`registerPresets({ 'my-pop': { from, to, frames } })`。
-
-| 分类 | 总数 | 6.1 新增 |
-|---|---:|---|
-| 淡入 | 19 | `fade-in-up-sm` · `fade-in-down-sm` · `fade-in-left-sm` · `fade-in-right-sm` · `fade-in-up-lg` · `fade-in-down-lg` · `fade-in-left-lg` · `fade-in-right-lg` · `fade-in-up-left` · `fade-in-up-right` · `fade-in-down-left` · `fade-in-down-right` · `fade-in-scale` · `fade-in-half` |
-| 缩放 | 23 | `zoom-in-up` · `zoom-in-down` · `zoom-in-left` · `zoom-in-right` · `zoom-out-up` · `zoom-out-down` · `zoom-out-left` · `zoom-out-right` · `zoom-in-big` · `zoom-out-big` · `zoom-bounce` · `zoom-in-rotate` · `scale-x-left` · `scale-x-right` · `scale-y-top` · `scale-y-bottom` · `stretch-x` · `stretch-y` |
-| 3D 翻转 | 22 | `flip-x-reverse` · `flip-y-reverse` · `flip-y-full` · `flip-diagonal` · `flip-diagonal-reverse` · `flip-left` · `flip-right` · `unfold-down` · `unfold-up` · `door-open-left` · `door-open-right` · `fold-in` · `flip-x-bounce` · `flip-y-bounce` · `swing-in-top` · `swing-in-bottom` · `swing-in-left` · `swing-in-right` |
-| 滑入 | 20 | `slide-up-spring` · `slide-down-spring` · `slide-left-spring` · `slide-right-spring` · `slide-up-sm` · `slide-down-sm` · `back-in-up` · `back-in-down` · `back-in-left` · `back-in-right` · `light-speed-in-left` · `light-speed-in-right` · `rise-in` · `sink-in` · `float-in-up` · `float-in-down` |
-| 旋转与倾斜 | 20 | `roll-in-left` · `roll-in-right` · `spiral-in` · `spiral-in-reverse` · `spin-in` · `rotate-in-up-left` · `rotate-in-up-right` · `rotate-in-down-left` · `rotate-in-down-right` · `skew-in-left` · `skew-in-y` · `shear-in` · `shear-in-reverse` · `twist-in` · `tilt-in-left` · `tilt-in-right` |
-| 模糊与遮罩 | 14 | `blur-in-down` · `blur-in-left` · `blur-in-right` · `blur-in-strong` · `blur-in-zoom` · `blur-in-scale` · `blur-in-x` · `mask-up` · `mask-down` · `mask-left` · `mask-right` · `blur-mask-up` |
-| 裁剪揭示 | 22 | `clip-circle-top` · `clip-circle-bottom` · `clip-circle-left` · `clip-circle-right` · `clip-circle-corner` · `clip-ellipse` · `clip-diamond` · `clip-split-x` · `clip-split-y` · `clip-box` · `clip-pill` · `clip-blinds` · `clip-blinds-x` · `clip-diagonal` · `clip-diagonal-reverse` · `clip-slant-right` · `clip-slant-left` |
-| 弹跳与弹性 | 17 | `bounce-in` · `bounce-in-up` · `bounce-in-down` · `bounce-in-left` · `bounce-in-right` · `elastic-in` · `elastic-in-x` · `rubber-in` · `jello-in` · `wobble-in` · `tada-in` · `heartbeat-in` · `drop-in` · `pop-in` · `squash-in` · `shake-in` · `swing-in` |
-| 色彩与光影 | 14 | `brightness-in` · `darken-in` · `color-in` · `saturate-in` · `hue-in` · `sepia-in` · `invert-in` · `contrast-in` · `exposure-in` · `vintage-in` · `blur-bright-in` · `shadow-lift` · `neon-glow-in` · `glow-in` |
-| 景深与透视 | 10 | `perspective-in-up` · `perspective-in-down` · `perspective-in-left` · `perspective-in-right` · `depth-push` · `depth-pull` · `depth-in-up` · `swoop-in-left` · `swoop-in-right` · `card-tilt-in` |
-| 故障与特效 | 9 | `glitch-in` · `glitch-in-color` · `typewriter` · `typewriter-lines` · `hinge-in` · `flicker-in` · `scan-in` · `materialize` · `teleport-in` |
-| 错峰列表 | 8 | `stagger-fade-up` · `stagger-pop` · `stagger-rise` · `stagger-slide` · `stagger-flip` · `stagger-blur` · `stagger-zoom` · `stagger-drop` |
-| 随滚动 | 12 | `scrub-parallax-up` · `scrub-parallax-down` · `scrub-rotate` · `scrub-spin` · `scrub-scale` · `scrub-shrink` · `scrub-pan-left` · `scrub-pan-right` · `scrub-tilt` · `scrub-fade-through` · `scrub-blur-through` · `scrub-reveal-x` |
-
-## 动画组件（v2.2）🧩
-
-**30 个零依赖的动画 Web Components**（`<usa-*>`），分为六大类——**同时适用于网页与 Windows 桌面软件**（Electron、Tauri、WinUI/WPF/WinForms 中的 WebView2、PWA）。仅基于 Custom Elements + CSS + Web Animations：可摇树、SSR 安全、全面遵循 `prefers-reduced-motion`。**[在线组件库](https://harrisoncn.github.io/use-scroll-animate/showcase/components.html)** · [组件文档](./docs/components.md)（英文）· [Windows 应用指南](./docs/windows-apps.md)（英文）
-
-```js
-import { defineComponents } from 'use-scroll-animate/components';
-defineComponents(); // 或按分类：import { defineTextComponents } from 'use-scroll-animate/components/text'
-```
-
-```html
-<!-- 或免构建直接使用 -->
-<script src="https://unpkg.com/use-scroll-animate@6/dist/components.umd.js"></script>
-<usa-typewriter words="你好，Windows。|你好，Web。"></usa-typewriter>
-<usa-spinner kind="fluent"></usa-spinner>
-```
-
-| 分类（导入路径） | 组件 |
-|---|---|
-| **入场与滚动**（`/components/reveal`） | `<usa-reveal>` 滚动揭示（12 种效果）· `<usa-stagger>` 错峰列表 · `<usa-scroll-progress>` 阅读进度条 · `<usa-scrolly>` 粘性滚动叙事 |
-| **文字**（`/components/text`） | `<usa-typewriter>` 打字机 · `<usa-split-text>` 逐字揭示 · `<usa-scramble>` 乱码解码 · `<usa-counter>` 数字滚动 · `<usa-shimmer-text>` 流光文字 · `<usa-text-rotate>` 轮换词语 · `<usa-wave-text>` 波浪 · `<usa-glitch>` 故障 · `<usa-gradient-text>` 流动渐变 · `<usa-handwriting>` 手写 · `<usa-scroll-highlight>` 滚动高亮 |
-| **交互反馈**（`/components/interaction`） | `<usa-ripple>` 水波纹 · `<usa-magnetic>` 磁吸按钮 · `<usa-tilt>` 3D 倾斜卡片 · `<usa-spotlight>` Fluent 光照高亮 · `<usa-press>` 按压反馈 · `<usa-toggle>` 切换开关 |
-| **加载与反馈**（`/components/feedback`） | `<usa-spinner>`（WinUI 进度环、Windows 圆点等 6 种）· `<usa-skeleton>` 骨架屏 · `<usa-progress>` 进度条 · `<usa-toaster>` + `toast()` 通知 · `<usa-check>` 结果图标 |
-| **背景与装饰**（`/components/background`） | `<usa-aurora>` 极光 · `<usa-particles>` 粒子 · `<usa-grain>` 胶片颗粒 · `<usa-marquee>` 无限跑马灯 · `<usa-acrylic>` 亚克力 / 云母材质 · `<usa-grid-glow>` 网格光晕 · `<usa-blobs>` 流体色块 · `<usa-water-ripple>` 水波 · `<usa-dot-network>` 点阵 · `fluentPreset()` Fluent 预设 |
-| **过渡动画**（`/components/transitions`） | `<usa-dialog>` 弹窗 / 抽屉 / 底部面板 · `<usa-accordion>` 手风琴 · `<usa-view-switch>` 视图切换 · `viewTransition()` · `flip()` |
-| **弹簧与物理**（`/components/physics`） | `<usa-spring>` 弹入 / 弹出 / 掉落 / 果冻 / 橡皮筋 · `<usa-draggable>` 拖拽回弹、惯性、吸附 · `<usa-overscroll>` 弹性越界 · `spring()` · `createSpring()` · 预设 gentle / wobbly / stiff / bouncy |
-| **卡片效果**（`/components/cards`） | `<usa-card>` 翻转 · 全息 · 玻璃 · 边框光晕 · 流光边框 · 悬浮 · 聚光 · 扫光 · 视差分层 · 展开详情（可组合）· `<usa-card-stack>` 滑动卡堆 · `<usa-sticky-stack>` 滚动堆叠 · `<usa-carousel-3d>` 3D 轮播 |
-| **点击与轻触**（`/components/click`） | `<usa-button>` 按钮点击形变（挤压拉伸 · 弹性圆角 · 液态粘滞 · 按压凹陷 · 形状变形 · 提交→加载→成功）· `<usa-icon-morph>` 图标变形 · `<usa-click>` 水波纹 / 迸发 / 彩带 / 抖动 · `<usa-like>` · `<usa-hold>` · `<usa-double-tap>` · `<usa-checkbox>` |
-| **UI 组件与风格变体**（`/components/ui`） | `<usa-tabs>` 标签页 · `<usa-drawer>` 抽屉 · `<usa-bottom-sheet>` 底部面板 · `<usa-pull-refresh>` 下拉刷新 · `<usa-fab>` 悬浮按钮 · `<usa-navbar>` 自动隐藏导航栏 · `<usa-slider>` 滑块 · `<usa-rating>` 评分 · `<usa-tooltip>` · `<usa-popover>` · `<usa-badge>` · `<usa-avatar-stack>` · 所有组件均支持 `variant`（极简 / 霓虹 / 玻璃 / 粗野 / Fluent / Material） |
-| **页面与全局效果**（`/components/page`） | `pageTransition()` 页面切换（淡入 · 滑动 · 圆形揭示 · 百叶窗 · 像素溶解，单页 + 多页）· `themeTransition()` 主题圆形切换 · `<usa-cursor>` 自定义光标 · `smoothScroll()` · `<usa-fullpage>` 整屏 · `<usa-loading-bar>` · `<usa-back-to-top>` · `<usa-ambient>` 雪花 / 星空 / 噪点 · `<usa-splash>` 启动屏 · `<usa-auto-skeleton>` 自动骨架屏 · `<usa-motion-switch>` 动效强度 |
-| **时间线与编排** (`/components/timeline`) | `timeline()`（串联 · 重叠 · 标签 · 跳转 · 倒放 · 滚动擦洗）· `<usa-timeline>`（`data-tl` 步骤） |
-| **手势** (`/components/gesture`) | `gesture()`（拖动 · 轻扫 · 捏合 · 长按 · 单击 · 双击 → 弹簧）· `<usa-swipeable>` · `<usa-pinch-zoom>` |
-| **SVG 动画** (`/components/svg`) | `<usa-draw>`（线条描绘）· `<usa-morph>`（路径变形）· `<usa-mask-reveal>` · `<usa-anim-icon>` · `morphTo()` · `interpolatePath()` |
-| **Canvas 与 WebGL** (`/components/webgl`) | `<usa-shader>`（gradient · plasma · waves · aurora · snow · fireflies · stars · bokeh · rain · 自定义 GLSL）· `<usa-post-fx>`（后期处理）· `<usa-distort>` · `<usa-liquid>` · `glQuad()` —— 优雅降级 |
-| **3D 与景深** (`/components/depth`) | `<usa-cube>` · `<usa-depth>`（指针 · 陀螺仪 · 滚动景深视差）· `deviceTilt()` ·（另见 cards 中的 `<usa-carousel-3d>`） |
-| **布局动画** (`/components/layout`) | `<usa-auto-animate>` / `autoAnimate()`（列表与网格重排）· `<usa-masonry>`（瀑布流）· `sharedTransition()`（共享元素） |
-| **效果包** (`/components/packs`) | `<usa-pack>` (`name="ecommerce \| portfolio \| dashboard \| game \| landing"`) · `applyPack()` · `flyToCart()` · `countUp()` |
-| **特效插件 API** (`/components/fx`) | `<usa-fx>`（`effect` · `trigger`）· `registerEffect()` · `playEffect()` · `bindEffect()` · 内置：全部时间线入场、pulse · pop · jelly · wiggle · heartbeat · bounce · flash · tada · shake、burst · confetti · ripple |
-| **特效包** (`/components/effects`) | `registerAllEffects()` · 卡片与点击 2.0 · 物理 · 全页特效 · `<usa-story>` 滚动叙事 · 生成式背景 · 声音响应（`<usa-audio>`）· 光标拖尾与手势（`<usa-gesture-fx>`）· 主题包（`<usa-theme>`）· 23 个微交互 · `<usa-player>` JSON 动画 |
-
-完整包约 22 kB gzip（JS + CSS）；单个分类 3.5–6.4 kB；单个组件约 2 kB。下方的滚动动画核心不受影响。
-
-**在 Windows 软件中使用**：组件只是标准 Web 代码，Electron / Tauri 渲染进程中直接 `import` 即可；WinUI 3 / WPF / WinForms 用 WebView2 加载本地页面（`SetVirtualHostNameToFolderMapping`）并通过 `<script src="components.umd.js">` 引入。样式以 constructable stylesheet 注入，兼容严格 CSP；也可改为引入 `use-scroll-animate/components.css` 并调用 `configureComponents({ injectStyles: false })`。系统“动画效果”关闭时（`prefers-reduced-motion`）自动使用平静版本。
-
-## 文档
-
-- [预设一览](./docs/presets.md)（全部 214 个预设，英文）
-- [API 参考](./docs/API.md)（英文）· [演示页](./demo/index.html)（每个预设都可点击，无需构建）
-- 迁移指南：[从 AOS 迁移](./docs/migration-from-aos.md) · [从 GSAP ScrollTrigger 迁移](./docs/migration-from-gsap-scrolltrigger.md)
-- [升级到 2.0](./docs/deprecations.md)：`createReactHooks` / `createVueComposables` 只能从 `use-scroll-animate/react` / `/vue` 导入；`dist/index.mjs`、`dist/index.esm.js`、`dist/types/*` 与 `dist/*` 深层导入已移除；默认引擎改为 `'auto'`。CDN 地址 `dist/index.umd.js` 不变。详见 [CHANGELOG](./CHANGELOG.md) 的 MIGRATION 部分。
+Motionary 在内容滚入视口时播放入场动画（IntersectionObserver + Web Animations，或浏览器原生滚动时间线），并提供 94 个动画自定义元素 —— 卡片、按钮、物理、页面转场、背景、WebGL 等 —— 可用于任何框架、纯 HTML 以及桌面 Web 视图应用（Electron、Tauri、WebView2）。全部遵循 `prefers-reduced-motion`。
 
 ## 安装
 
 ```bash
-npm install use-scroll-animate
+npm i motionary
 ```
 
-## 快速上手 (原生 JS / HTML)
+```html
+<!-- CDN (no build) -->
+<script src="https://unpkg.com/motionary@6/dist/index.umd.js"></script>            <!-- window.ScrollAnimate -->
+<script src="https://unpkg.com/motionary@6/dist/presets-extended.umd.js"></script> <!-- +181 presets -->
+<script src="https://unpkg.com/motionary@6/dist/components.umd.js"></script>       <!-- every <usa-*>, window.UsaComponents -->
+```
 
-最简单的方法是通过 HTML 的 `data-sa` 属性。
+jsDelivr 同样可用：`https://cdn.jsdelivr.net/npm/motionary@6/dist/…`。已有的 `use-scroll-animate` 安装与 `unpkg.com/use-scroll-animate@6` 链接继续可用。
+
+## 30 秒上手
+
+给元素加上 `data-sa`，用 `data-sa-animation` 选择预设（每个选项都有对应的 `data-sa-*` 属性），或使用 JS API：
 
 ```html
-<!-- 1. 为元素添加 data-sa 属性 -->
-<div data-sa data-sa-animation="fade-in-up" data-sa-duration="800">
-  当滚动到我时，我会动起来！
-</div>
-
+<!-- 1. HTML only: data attributes + one init() call -->
+<h2 data-sa data-sa-animation="fade-in-up">Hello</h2>
+<div data-sa data-sa-animation="bounce-in-up" data-sa-delay="150">Card</div>
 <script type="module">
-  // 2. 导入并初始化
-  import ScrollAnimate from 'use-scroll-animate';
-  ScrollAnimate.init();
+  import ScrollAnimate from 'motionary';
+  import 'motionary/presets/extended'; // optional: +181 presets (bounce-in-up, clip-diamond, …)
+  ScrollAnimate.init(); // picks up every [data-sa]
 </script>
 ```
 
-## 原生滚动驱动引擎 `engine`（v1.6）
-
-在支持 CSS 滚动驱动动画（`CSS.supports('animation-timeline: view()')`）的浏览器中，预设动画可以运行在浏览器原生的 **view timeline** 上：动画进度跟随滚动位置（在主线程之外），而不是由 IntersectionObserver 触发后按固定 `duration` 播放。
-
 ```js
-ScrollAnimate.observe('.card', { animation: 'fade-in-up', engine: 'auto' });
-const sa = createScrollAnimate({ defaultEngine: 'auto' }); // 实例级默认
+// 2. JS API
+import ScrollAnimate, { staggerChildren, parallax, timeline } from 'motionary';
+
+ScrollAnimate.observe('.card', { animation: 'zoom-in-up', duration: 800, easing: 'spring' });
+staggerChildren(document.querySelector('.grid'), { animation: 'stagger-pop', stagger: 60 });
+parallax('.hero-bg', { speed: 0.3 });
+ScrollAnimate.observe('.logo', { animation: 'scrub-spin', engine: 'css', viewRange: ['cover 0%', 'cover 100%'] });
 ```
 
-- `'auto'`：**2.0 起的默认值**，支持时使用原生时间线，否则回退 JS；若元素自行设置了 `duration`、`delay`、`offset` 或 `stagger`，则使用 JS。`'css'`：支持时始终使用原生时间线。`'js'`：1.x 的行为（`defaultEngine: 'js'` 可全局恢复）。
-- 原生引擎下 `duration`、`delay`、`threshold`、`offset`、`stagger` 不生效；动画区间由 `viewRange` 决定（默认 `['entry 0%', 'entry 100%']`），`easing` 仍然有效。HTML：`data-sa-engine`、`data-sa-view-range="entry 0%, cover 40%"`。
-- `once`（默认）在动画完成后固定最终状态；`repeat: true` 时随滚动双向播放。回调、`onProgress`、`progressVar`、视差照常工作。
-- 类名模式、`prefers-reduced-motion`、`animate()`、`timeline()`、`staggerChildren()` 始终使用 JS 引擎。另导出 `supportsScrollTimeline()`。
+框架 —— 每个适配器都是独立入口，卸载时自动清理：
 
-## v1.4.0 新特性 ✨
+```jsx
+// React
+import React from 'react';
+import { createReactHooks } from 'motionary/react';
+const { useScrollAnimate } = createReactHooks(React);
 
-- **真实滚动进度 `progressMode: 'scroll'`**（可选）：`onProgress` 默认返回元素的可见比例，对高于屏幕的元素永远到不了 1。开启后进度为：元素顶部到达视口底部时为 `0`，底部离开视口顶部时为 `1`。视差同样使用该进度。HTML 写法：`data-sa-progress="scroll"`；另导出辅助函数 `getScrollProgress(el, root?)`。
+export function Card() {
+  const ref = useScrollAnimate({ animation: 'fade-in-up' });
+  return <div ref={ref}>Hello</div>;
+}
+```
 
-  ```js
-  ScrollAnimate.observe('.chapter', {
-    progressMode: 'scroll',
-    onProgress: (el, p) => el.style.setProperty('--progress', p),
-  });
-  ```
-
-- **动态子元素交错动画**：`staggerChildren()`（原生）与 `useScrollStagger()`（React，**现已支持 Vue**）新增 `observeChildren: true`。通过 `MutationObserver` 监听后续新增的子元素（无限列表、“加载更多”）：显现前新增的会加入交错序列，显现后新增的在滚入视口时按批次交错播放。
-
-  ```js
-  import { staggerChildren } from 'use-scroll-animate';
-  const stop = staggerChildren(document.querySelector('#feed'), { stagger: 60, observeChildren: true });
-  ```
-
-- **时间线 `timeline()`**：在同一播放头上串联多个元素的动画。默认每步在上一步结束后开始；`at` 可重叠（`'-=300'`）、延后（`'+=200'`）、与上一步同时（`'<'`）、对齐标签或绝对时间；支持播放、倒放、跳转与随滚动擦洗。（取代 4.0 中移除的 `sequence()`，见 [upgrading-4.md](./docs/upgrading-4.md)。）
-
-  ```js
-  import { timeline } from 'use-scroll-animate';
-  const tl = timeline({ defaults: { duration: 700 } })
-    .to('.hero h1', 'fade-up')
-    .to('.hero p', 'blur', { at: '-=300' })
-    .to('.hero .btn', 'scale', { stagger: 80 });
-  await tl.play(); // 全部完成后 resolve；或 tl.scrub(hero) 随滚动
-  ```
-
-- **新预设**：`scale-up`、`blur-in-up`、`flip-up`、`flip-down`、`rotate-left`、`rotate-right`，以及 clip-path 揭示 `clip-up`、`clip-down`、`clip-left`、`clip-right`、`clip-circle`。
-- **更省内存**：`once` 元素动画触发后自动从注册表移除（仍需视差/`onProgress` 的除外），并记录在 `WeakSet` 中，`init()`/`observe()` 不会重复播放。如需旧行为可设置 `createScrollAnimate({ autoUnregister: false })`。
-- **规范的 `exports` 字段**：2.0 起以 ESM 为主：`import` → `dist/*.js` + `*.d.ts`，`require` → `dist/*.cjs` + `*.d.cts`。
-
-## v1.2.0 新特性
-
-- **单次触发 (Once)**：动画触发后自动停止观察，节省资源。
-- **视口偏移 (Offset)**：支持设置元素进入视口多少像素后才触发动画。
-- **新预设**：新增 `shimmer`（流光）、`pulse`（脉冲）、`swing`（摇摆）。
-- **多语言支持**：新增中文和日文文档。
-
-## 框架集成（v1.7）
-
-每个集成都是独立的入口（`use-scroll-animate/react`、`/vue`、`/svelte`、`/solid`、`/element`），共享同一份核心代码。
+```vue
+<!-- Vue 3 -->
+<script setup>
+import { ref, onMounted, onUnmounted } from 'vue';
+import { createVueComposables } from 'motionary/vue';
+const { useScrollAnimate } = createVueComposables({ ref, onMounted, onUnmounted });
+const { animateRef } = useScrollAnimate({ animation: 'zoom-in' });
+</script>
+<template><div ref="animateRef">Hello</div></template>
+```
 
 ```svelte
-<!-- Svelte：action，无需引入 svelte -->
-<script>import { scrollAnimate, scrollStagger } from 'use-scroll-animate/svelte';</script>
-<div use:scrollAnimate={{ animation: 'fade-in-up' }}>…</div>
-<ul use:scrollStagger={{ stagger: 60 }}>…</ul>
+<!-- Svelte 3–5 -->
+<script>
+  import { scrollAnimate } from 'motionary/svelte';
+</script>
+<div use:scrollAnimate={{ animation: 'flip-up' }}>Hello</div>
 ```
 
-```tsx
-// Solid：指令 + ref 原语（solid-js 为可选 peer 依赖）
-import { scrollAnimate, useScrollAnimate } from 'use-scroll-animate/solid';
-<div use:scrollAnimate={{ animation: 'zoom-in' }}>…</div>
-<div ref={useScrollAnimate({ animation: 'fade-in-left' })}>…</div>
+```jsx
+// Solid
+import { scrollAnimate } from 'motionary/solid';
+scrollAnimate; // keep the directive import (TypeScript)
+export const Card = () => <div use:scrollAnimate={{ animation: 'blur-in-up' }}>Hello</div>;
 ```
+
+```ts
+// Angular (standalone) — the animated Web Components
+import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
+import { usaInitializer } from 'motionary/components/angular';
+import 'motionary/presets/extended'; // lets <usa-reveal effect> use every preset name
+// app.config.ts: providers: [{ provide: APP_INITIALIZER, multi: true, useFactory: usaInitializer() }]
+@Component({ standalone: true, schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  template: `<usa-reveal effect="bounce-in-up"><h2>Hello</h2></usa-reveal>` })
+export class Hero {}
+```
+
+动画组件无需任何框架：
 
 ```html
-<!-- Web Component：属性与 data-sa-* 相同（去掉前缀），并派发 sa:enter / sa:leave / sa:start / sa:complete / sa:progress 事件 -->
 <script type="module">
-  import { defineScrollAnimate } from 'use-scroll-animate/element';
-  defineScrollAnimate();
+  import { defineComponents } from 'motionary/components';
+  defineComponents(); // or lazyDefine() from 'motionary/components/lazy'
 </script>
-<scroll-animate animation="fade-in-up" duration="800">…</scroll-animate>
-<!-- 无构建：<script src="https://unpkg.com/use-scroll-animate/dist/element.umd.js"></script> -->
+<usa-card effect="holo">…</usa-card>
+<usa-button deform="gooey">Buy</usa-button>
+<usa-fx effect="confetti" trigger="click"><button>Celebrate</button></usa-fx>
 ```
 
-## 退场动画与视差辅助函数（v1.8）
+## 功能一览
 
-```js
-ScrollAnimate.observe('.card', { animation: 'fade-in-up', exit: true });          // 离开视口时反向播放入场动画
-ScrollAnimate.observe('.toast', { animation: 'zoom-in', exit: 'fade-in-down' });  // 用另一个预设（反向）退场
-```
+| 领域 | 内容 |
+|---|---|
+| **滚动预设** | **214** 个入场预设（33 个核心 + 181 个位于 `motionary/presets/extended`），14 个系列：淡入、缩放、3D 翻转与开门、回弹滑入、clip-path 形状、模糊与遮罩、弹跳与弹性、色彩与光影、景深、故障 / 打字机、错峰列表与随滚动 `scrub-*`；另有 `timeline()` 与 10 个时间线预设 |
+| **卡片、点击与按钮形变** | `<usa-card>` 含 10 种效果（翻转、全息、玻璃、边框光晕……），卡片堆叠与 3D 轮播；7 个点击组件、4 种按钮形变（squash · wobble · gooey · dent）与图标变形；12 个注册的卡片 / 点击效果（holo、book-open、shockwave、ink-splash、emoji-rain……） |
+| **物理与弹跳** | `<usa-spring>`、`<usa-draggable>`（回弹 · 惯性 · 吸附）、`<usa-overscroll>`；`spring()` / `solveSpring()` 与 7 个弹簧预设；7 个物理效果（bounce-in、rubber-band、gravity-text、bell-swing……） |
+| **页面转场** | `pageTransition()`、`viewTransition()`、`sharedTransition()`、`flip()`、多页（MPA）转场；7 个页面效果（curtain、iris、pixel-dissolve、blinds、velocity-skew……）；`<usa-dialog>`、`<usa-view-switch>` |
+| **生成式背景** | 6 种画布背景（flow-field、voronoi、mesh-gradient、starfield、metaballs、contours）+ 9 个背景元素（极光、粒子、胶片颗粒、流体色块、水波、亚克力 / 云母……） |
+| **声音响应** | `<usa-audio>` + Web Audio 节拍检测（`createBeatDetector()`、`onBeat()`）；3 种音频可视化（spectrum-bars、pulse-ring、wave-ring）；任意效果都可随节拍触发 |
+| **光标与手势** | 5 种光标效果（彗星 / 丝带 / 星光拖尾、磁性圆点、聚光灯）+ `<usa-cursor>`；甩动 · 旋转 · 长按触发效果（`<usa-gesture-fx>`）；`<usa-swipeable>`、`<usa-pinch-zoom>` |
+| **主题** | 5 套主题（neon · paper · glass · retro · brutalist），通过 `<usa-theme>` / `applyTheme()` 使用，各带一个标志性效果；动效令牌（`/components/tokens`） |
+| **微交互** | 23 个现成的界面瞬间：copy-success、like-heart、add-to-cart、send-plane、upvote、trash-shake、input-shake、success-check、notify-badge…… |
+| **`<usa-player>` 与滚动叙事** | `<usa-player>` 播放 JSON 动画（关键帧轨道、预设、效果；load / view / scroll / click 触发），可从 Playground 导出；`<usa-story>` 含 6 个滚动叙事模板 |
+| **WebGL** | `<usa-shader>`、`<usa-distort>`、`<usa-liquid>`、`<usa-post-fx>` —— 5 个粒子预设、9 种后期效果（bloom、CRT、色散、故障……），带 CSS 降级与省电调速 |
 
-- `exit`：`true`、预设名、预设数组或 `{ from, to }`；离开视口时反向播放，再次进入时重新入场（默认隐含 `repeat: true`）。HTML：`data-sa-exit` / `data-sa-exit="zoom-out"`。原生引擎下退场同样随滚动驱动；减少动态效果时不播放。
+90 种效果共用一个注册表（`registerEffect()` / `playEffect()` / `bindEffect()` / `<usa-fx>`，位于 `motionary/components/fx`）；5.x 效果包位于 `motionary/components/effects`。
 
-```js
-import { parallax } from 'use-scroll-animate';
-const stop = parallax('.hero-bg', { speed: 0.3 });   // 正值：比页面慢（背景）；负值：比页面快
-parallax('.badge', { speed: -0.15, axis: 'x' });
-```
+### 全部 94 个动画组件
 
-- `parallax(target, { speed = 0.2, axis = 'y', progressVar = '--sa-parallax', root, respectReducedMotion = true })`：进度写入 CSS 变量，位移写入独立的 `translate` 属性（与 `transform` 和入场动画互不冲突）；`prefers-reduced-motion` 时只写变量不位移。返回停止函数。
+可按分类导入（`motionary/components/cards`）、全部导入（`motionary/components`）、使用按需加载 CSS 的 `/components/lite`，或用 `lazyDefine()` 只加载页面上出现的标签。框架封装：`/components/react`、`/vue`、`/svelte`、`/solid`、`/angular`。
 
-## 核心配置
+| 入口 | 元素 |
+|---|---|
+| **滚动揭示** (`/components/reveal`) | `<usa-reveal>` · `<usa-stagger>` · `<usa-scroll-progress>` · `<usa-scrolly>` |
+| **文字** (`/components/text`) | `<usa-typewriter>` · `<usa-split-text>` · `<usa-scramble>` · `<usa-counter>` · `<usa-shimmer-text>` · `<usa-text-rotate>` · `<usa-wave-text>` · `<usa-glitch>` · `<usa-gradient-text>` · `<usa-handwriting>` · `<usa-scroll-highlight>` |
+| **交互** (`/components/interaction`) | `<usa-ripple>` · `<usa-magnetic>` · `<usa-tilt>` · `<usa-spotlight>` · `<usa-press>` · `<usa-toggle>` |
+| **反馈** (`/components/feedback`) | `<usa-spinner>` · `<usa-skeleton>` · `<usa-progress>` · `<usa-toaster>` · `<usa-check>` |
+| **背景与装饰** (`/components/background`) | `<usa-aurora>` · `<usa-particles>` · `<usa-grain>` · `<usa-marquee>` · `<usa-acrylic>` · `<usa-grid-glow>` · `<usa-blobs>` · `<usa-water-ripple>` · `<usa-dot-network>` |
+| **转场** (`/components/transitions`) | `<usa-dialog>` · `<usa-accordion>` · `<usa-view-switch>` |
+| **弹簧与物理** (`/components/physics`) | `<usa-spring>` · `<usa-draggable>` · `<usa-overscroll>` |
+| **卡片** (`/components/cards`) | `<usa-card>` · `<usa-card-stack>` · `<usa-sticky-stack>` · `<usa-carousel-3d>` |
+| **点击与按钮** (`/components/click`) | `<usa-click>` · `<usa-button>` · `<usa-icon-morph>` · `<usa-like>` · `<usa-hold>` · `<usa-double-tap>` · `<usa-checkbox>` |
+| **UI 组件** (`/components/ui`) | `<usa-tabs>` · `<usa-drawer>` · `<usa-bottom-sheet>` · `<usa-pull-refresh>` · `<usa-fab>` · `<usa-navbar>` · `<usa-slider>` · `<usa-rating>` · `<usa-tooltip>` · `<usa-popover>` · `<usa-badge>` · `<usa-avatar-stack>` |
+| **整页** (`/components/page`) | `<usa-cursor>` · `<usa-fullpage>` · `<usa-loading-bar>` · `<usa-back-to-top>` · `<usa-ambient>` · `<usa-splash>` · `<usa-auto-skeleton>` · `<usa-motion-switch>` |
+| **时间线** (`/components/timeline`) | `<usa-timeline>` |
+| **手势** (`/components/gesture`) | `<usa-swipeable>` · `<usa-pinch-zoom>` |
+| **SVG** (`/components/svg`) | `<usa-draw>` · `<usa-morph>` · `<usa-mask-reveal>` · `<usa-anim-icon>` |
+| **WebGL** (`/components/webgl`) | `<usa-shader>` · `<usa-distort>` · `<usa-liquid>` · `<usa-post-fx>` |
+| **3D 景深** (`/components/depth`) | `<usa-cube>` · `<usa-depth>` |
+| **布局** (`/components/layout`) | `<usa-auto-animate>` · `<usa-masonry>` |
+| **效果包** (`/components/packs`) | `<usa-pack>` |
+| **效果注册表** (`/components/fx`) | `<usa-fx>` |
+| **效果包** (`/components/effects`) | `<usa-player>` · `<usa-story>` · `<usa-audio>` · `<usa-theme>` · `<usa-gesture-fx>` |
 
-| 选项 | 类型 | 默认值 | 描述 |
-|--------|------|---------|-------------|
-| `animation` | `string` \| `string[]` | `'fade-in-up'` | 预设名称或预设数组 |
-| `duration` | `number` | `600` | 动画持续时间 (ms) |
-| `delay` | `number` | `0` | 动画延迟 (ms) |
-| `once` | `boolean` | `true` | 是否只触发一次 |
-| `offset` | `number` | `0` | 触发动画的视口偏移量 (px) |
-| `parallax` | `object` | `{}` | 视差效果配置 |
-| `stagger` | `number` | `0` | 同批次显现的兄弟元素之间的额外延迟 (ms) |
-| `onProgress` | `(el, progress) => void` | – | 滚动进度回调 (0–1) |
-| `progressMode` | `'ratio'` \| `'scroll'` | `'ratio'` | 进度计算方式：可见比例或真实滚动进度 |
-| `engine` | `'auto'` \| `'js'` \| `'css'` | `'auto'` | 支持时使用原生滚动驱动时间线，否则回退 JS |
-| `viewRange` | `[string, string]` | `['entry 0%', 'entry 100%']` | 仅原生引擎：入场动画的时间线区间 |
+## 无障碍与减少动态效果
 
-## 许可证
+- 开启 `prefers-reduced-motion: reduce` 时，滚动揭示会立即显示内容（无入场、视差或随滚动动画），组件退回平静状态（`staticAlternative()` / `adaptKeyframes()`）。
+- `motionary/components/a11y`：`setMotionSensitivity()` 分级让用户关闭闪烁、循环或视差；`announce()` 实时播报区域；`auditMotionA11y()`；`baselineReport()`。`<usa-motion-switch>` 是现成的面向用户的动效开关。
+- 详见 [docs/accessibility.md](./docs/accessibility.md)。
 
-本项目采用 MIT 许可证 - 详情请参阅 [LICENSE](LICENSE) 文件。
+## 性能与体积
+
+默认不监听 scroll 事件（IntersectionObserver），动画运行在合成层（`transform`、`opacity`、`filter`、`clip-path`），可选主线程之外的原生滚动时间线（`engine: 'css'`）。每个入口都可摇树，并在 CI 中强制 gzip 预算（`size-budget.json`）。6.1 实测（压缩 + gzip）：
+
+| 导入内容 | gzip |
+|---|---:|
+| `import ScrollAnimate from 'motionary'` (default instance) | 5.72 kB |
+| Everything from the main entry | 8.69 kB |
+| `dist/index.umd.js` (CDN) | 8.81 kB |
+| `parallax()` alone | 1.22 kB |
+| `motionary/presets/extended` (181 presets) | 4.69 kB |
+| `motionary/components/reveal` | 4.10 kB |
+| `motionary/components/effects` (8 effect packs) | 26.40 kB |
+| `motionary/components/lite` (every component, CSS on demand) | 68.48 kB |
+| `motionary/components` (every component + CSS) | 85.15 kB |
+| `dist/components.umd.js` (CDN, everything) | 106.75 kB |
+
+更多：[docs/performance.md](./docs/performance.md)。
+
+## 浏览器支持
+
+2023 年以来的常青浏览器：Chrome / Edge ≥ 111、Safari ≥ 16.4、Firefox ≥ 115、WebView2、Electron ≥ 24（Custom Elements、Web Animations、IntersectionObserver、ResizeObserver、可构造样式表）。View Transitions 与滚动驱动动画为渐进增强 —— 支持时使用，否则回退到 JS。在服务端（SSR）导入不会执行任何操作。可用 `baselineReport()` 检查浏览器。
+
+## 文档
+
+- [API 参考](./docs/API.md)（英文）—— 所有导出、选项与 `data-sa-*` 属性
+- [预设一览](./docs/presets.md)（全部 214 个）
+- [组件文档](./docs/components.md)（每个 `<usa-*>` 元素、属性与事件）
+- [框架与 SSR](./docs/frameworks-ssr.md) · [Windows 应用](./docs/windows-apps.md) · [混合应用（MAUI、Flutter、Electron、Tauri）](./docs/hybrid-apps.md)
+- [动效令牌](./docs/motion-tokens.md) · [从 AOS 迁移](./docs/migration-from-aos.md) · [从 GSAP ScrollTrigger 迁移](./docs/migration-from-gsap-scrolltrigger.md)
+- [演示页](./demo/index.html)（每个预设都可点击，无需构建）
+
+## 升级
+
+- 从 `use-scroll-animate`：`npm i motionary`，把导入路径与 CDN 链接中的 `use-scroll-animate` 换成 `motionary` 即可，其余不变（旧包名会继续同步发布）。
+- [升级到 6.0](./docs/upgrading-6.md)（`npx usa-codemod-6`）· [升级到 5.0](./docs/upgrading-5.md)（`npx usa-codemod-5`）· [4.0](./docs/upgrading-4.md) · [3.0](./docs/upgrading-3.md) · [2.0](./docs/deprecations.md)
+- [更新日志](./CHANGELOG.md)
+
+## 路线图
+
+每个版本一个 PR，直至 7.0 —— 粒子与流体、文字特效、光影与材质、3D 场景、形变、转场、天气氛围、交互物理：[docs/ROADMAP.md](./docs/ROADMAP.md)。
+
+## 贡献与许可证
+
+欢迎提交 Issue 与 PR —— 参见 [CONTRIBUTING.md](./CONTRIBUTING.md)。MIT © HarrisonCN —— 参见 [LICENSE](./LICENSE)。

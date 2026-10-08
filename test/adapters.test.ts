@@ -30,7 +30,7 @@ beforeEach(() => {
   effects.length = 0;
 });
 
-describe('svelte actions (use-scroll-animate/svelte)', () => {
+describe('svelte actions (motionary/svelte)', () => {
   it('scrollAnimate observes the node and destroy() releases it', async () => {
     const { scrollAnimate } = await import('../src/svelte');
     const node = el();
@@ -95,7 +95,7 @@ describe('svelte actions (use-scroll-animate/svelte)', () => {
   });
 });
 
-describe('solid primitives (use-scroll-animate/solid)', () => {
+describe('solid primitives (motionary/solid)', () => {
   it('scrollAnimate directive observes on mount and unobserves on cleanup', async () => {
     const { scrollAnimate } = await import('../src/solid');
     const node = el();
@@ -141,7 +141,7 @@ describe('solid primitives (use-scroll-animate/solid)', () => {
   });
 });
 
-describe('<scroll-animate> custom element (use-scroll-animate/element)', () => {
+describe('<scroll-animate> custom element (motionary/element)', () => {
   it('defineScrollAnimate registers the tag once and returns the class', async () => {
     const { defineScrollAnimate } = await import('../src/element');
     const tag = 'sa-test-a';

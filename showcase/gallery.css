@@ -1,4 +1,4 @@
-/* use-scroll-animate showcase — component gallery (extends styles.css) */
+/* motionary showcase — component gallery (extends styles.css) */
 
 .nav-link { padding: 0 12px; }
 .gallery-page .toolbar { background: color-mix(in srgb, var(--bg) 82%, transparent); -webkit-backdrop-filter: saturate(1.6) blur(14px); backdrop-filter: saturate(1.6) blur(14px); margin-inline: calc(-1 * clamp(16px, 4vw, 40px)); padding-inline: clamp(16px, 4vw, 40px); padding-bottom: 10px; }

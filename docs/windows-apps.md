@@ -22,7 +22,7 @@ Bundle the renderer as usual (Vite, webpack, esbuild…):
 
 ```js
 // renderer/main.js
-import { defineComponents, toast } from 'use-scroll-animate/components';
+import { defineComponents, toast } from 'motionary/components';
 defineComponents();
 
 window.api?.onSaved?.(() => toast('Saved', { type: 'success' }));
@@ -38,13 +38,13 @@ window.api?.onSaved?.(() => toast('Saved', { type: 'success' }));
 </usa-acrylic>
 ```
 
-Without a bundler, copy `node_modules/use-scroll-animate/dist/components.umd.js` next to your HTML and use `<script src="components.umd.js"></script>` — no `nodeIntegration` needed, it works with `contextIsolation: true` and `sandbox: true`.
+Without a bundler, copy `node_modules/motionary/dist/components.umd.js` next to your HTML and use `<script src="components.umd.js"></script>` — no `nodeIntegration` needed, it works with `contextIsolation: true` and `sandbox: true`.
 
 **Content-Security-Policy.** Components inject styles via constructable stylesheets (`document.adoptedStyleSheets`), which are allowed by `style-src 'self'` without `'unsafe-inline'`. If you prefer files:
 
 ```js
-import 'use-scroll-animate/components.css';
-import { configureComponents, defineComponents } from 'use-scroll-animate/components';
+import 'motionary/components.css';
+import { configureComponents, defineComponents } from 'motionary/components';
 configureComponents({ injectStyles: false });
 defineComponents();
 ```
@@ -57,8 +57,8 @@ defineComponents();
 
 ```ts
 // src/main.ts (Vite template)
-import { defineFeedbackComponents } from 'use-scroll-animate/components/feedback';
-import { defineTransitionComponents } from 'use-scroll-animate/components/transitions';
+import { defineFeedbackComponents } from 'motionary/components/feedback';
+import { defineTransitionComponents } from 'motionary/components/transitions';
 defineFeedbackComponents();
 defineTransitionComponents();
 ```
@@ -67,7 +67,7 @@ Nothing to configure in `tauri.conf.json`. For window-level Mica/Acrylic use Tau
 
 ## WinUI 3 / WPF / WinForms with WebView2
 
-1. Put your page and the bundle in a folder that is copied to the output, e.g. `wwwroot/index.html` and `wwwroot/components.umd.js` (from `node_modules/use-scroll-animate/dist/`, or download it from unpkg).
+1. Put your page and the bundle in a folder that is copied to the output, e.g. `wwwroot/index.html` and `wwwroot/components.umd.js` (from `node_modules/motionary/dist/`, or download it from unpkg).
 2. Map the folder to a virtual host and navigate to it:
 
 ```csharp
@@ -112,7 +112,7 @@ Link the bundle (or import it in your module graph) and install the site from Ed
 [`examples/webview2-winui/`](../examples/webview2-winui/) is a complete WinUI 3 app (Windows App SDK, native **Mica** backdrop, full-window WebView2 with `SetVirtualHostNameToFolderMapping`) whose UI is a plain `index.html` using `components.umd.js`.
 
 ```js
-import { fluentPreset } from 'use-scroll-animate/components/background';
+import { fluentPreset } from 'motionary/components/background';
 const off = fluentPreset({ reveal: true, mica: true }); // Fluent variant + Mica-style bg + Acrylic + Reveal highlight
 ```
 

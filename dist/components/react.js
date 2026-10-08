@@ -1,7 +1,7 @@
 import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-DucKMQr_.js';
 
 /**
- * use-scroll-animate/components/react — React wrappers for every `<usa-*>`
+ * motionary/components/react — React wrappers for every `<usa-*>`
  * element (v2.9). React 19 handles custom elements natively; for React 18
  * (and nicer DX in both) `createUsaComponents(React)` returns typed wrapper
  * components that set **properties** (`checked`, `value`, `state`, …),
@@ -9,15 +9,15 @@ import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-DucKMQr_.js';
  *
  * ```tsx
  * import * as React from 'react';
- * import { createUsaComponents } from 'use-scroll-animate/components/react';
- * import { defineComponents } from 'use-scroll-animate/components';
+ * import { createUsaComponents } from 'motionary/components/react';
+ * import { defineComponents } from 'motionary/components';
  * defineComponents();
  * const { UsaButton, UsaToggle } = createUsaComponents(React);
  * <UsaButton deform="squash" onUsaSubmit={(e) => e.detail.done(true)}><button>Pay</button></UsaButton>
  * ```
  *
  * JSX types for the raw tags (`<usa-card effect="flip">`) come from
- * `use-scroll-animate/components/jsx` (see `UsaIntrinsicElements`).
+ * `motionary/components/jsx` (see `UsaIntrinsicElements`).
  */
 /** `usa-auto-animate` → `UsaAutoAnimate` */
 const pascal = (tag) => tag.replace(/(^|-)([a-z0-9])/g, (_, __, c) => c.toUpperCase());

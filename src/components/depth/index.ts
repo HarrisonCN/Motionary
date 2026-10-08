@@ -1,5 +1,5 @@
 /**
- * use-scroll-animate/components/depth — 3D (v3.5).
+ * motionary/components/depth — 3D (v3.5).
  * `<usa-cube>` (CSS 3D cube), `<usa-depth>` (layered depth parallax driven by
  * pointer, device orientation or scroll) and `deviceTilt()`. The 3D ring
  * carousel is `<usa-carousel-3d>` in `components/cards`.

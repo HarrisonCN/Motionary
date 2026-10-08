@@ -86,7 +86,7 @@ interface UsaScrollyElement extends UsaElement {
 declare function defineScrolly(tag?: string): CustomElementConstructor | undefined;
 
 /**
- * use-scroll-animate/components/reveal — entrance & scroll reveal components.
+ * motionary/components/reveal — entrance & scroll reveal components.
  * `<usa-reveal>`, `<usa-stagger>`, `<usa-scroll-progress>`, `<usa-scrolly>`.
  */
 

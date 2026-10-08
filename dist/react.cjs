@@ -1,11 +1,11 @@
 'use strict';
 
-var core = require('./chunks/core-BYLtO0Po.cjs');
-var stagger = require('./chunks/stagger-CvhYlKrF.cjs');
-require('./chunks/presets-D2ksQNzJ.cjs');
+var core = require('./chunks/core-B5T0dhFH.cjs');
+var stagger = require('./chunks/stagger-CCFyhzSw.cjs');
+require('./chunks/presets-CUHys3sK.cjs');
 
 /**
- * use-scroll-animate - React Integration
+ * motionary - React Integration
  * Provides useScrollAnimate and useScrollStagger hooks for React applications.
  * `useScrollStagger({ observeChildren: true })` also animates children added later.
  *

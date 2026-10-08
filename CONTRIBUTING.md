@@ -1,6 +1,6 @@
-# Contributing to use-scroll-animate
+# Contributing to motionary
 
-First off, thank you for considering contributing to `use-scroll-animate`! It's people like you that make the open-source community such a great place to learn, inspire, and create.
+First off, thank you for considering contributing to `motionary`! It's people like you that make the open-source community such a great place to learn, inspire, and create.
 
 ## Code of Conduct
 
@@ -41,8 +41,8 @@ Enhancement suggestions are tracked as GitHub issues. When you are creating an e
 
 1. Clone your fork:
    ```bash
-   git clone https://github.com/YOUR-USERNAME/use-scroll-animate.git
-   cd use-scroll-animate
+   git clone https://github.com/YOUR-USERNAME/motionary.git
+   cd motionary
    ```
 
 2. Install dependencies:

@@ -31,7 +31,7 @@ export const helpers = [
     'Animate anything with spring physics: presets gentle / wobbly / stiff / bouncy or your own stiffness, damping and mass. createSpring() gives an interruptible value for gestures.',
     '用弹簧物理驱动任意动画：预设 gentle / wobbly / stiff / bouncy，或自定义刚度、阻尼与质量。createSpring() 提供可打断的数值，适合手势。',
     ['stiffness', 'damping', 'mass', 'linear()'],
-    "import { spring, createSpring } from 'use-scroll-animate/components/physics';\n\nspring(card, [{ transform: 'scale(0.6)' }, { transform: 'scale(1)' }], 'bouncy');\n\nconst x = createSpring({ spring: { stiffness: 300, damping: 18 }, onUpdate: (v) => (box.style.translate = `${v}px`) });\nx.set(240);",
+    "import { spring, createSpring } from 'motionary/components/physics';\n\nspring(card, [{ transform: 'scale(0.6)' }, { transform: 'scale(1)' }], 'bouncy');\n\nconst x = createSpring({ spring: { stiffness: 300, damping: 18 }, onUpdate: (v) => (box.style.translate = `${v}px`) });\nx.set(240);",
     '<div class="demo-row"><button class="demo-btn" type="button" data-spring-demo>Spring it</button><span class="demo-tile" data-spring-box>●</span></div>'),
 ];
 

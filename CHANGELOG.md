@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.1.1] - 2026-10-08
+
+### Changed — the project is now **Motionary**
+- **Renamed to Motionary** (formerly `use-scroll-animate`): npm package **`motionary`**, repository `HarrisonCN/motionary`, showcase at `https://harrisoncn.github.io/motionary/showcase/`, CDN `https://unpkg.com/motionary@6/dist/…` (jsDelivr: `cdn.jsdelivr.net/npm/motionary@6`). **No breaking change**: every API name, the `<usa-*>` tags, `usa-` CSS classes, the `ScrollAnimate` / `UsaComponents` globals, the `usa-codemod-*` bins and the `use-scroll-animate/animation` player format id stay the same.
+- `use-scroll-animate` keeps being published at the same versions as a compatibility alias (same build); switching is `npm i motionary` + replacing `use-scroll-animate` with `motionary` in imports and CDN URLs.
+- New package description and keywords; `homepage` is the showcase.
+
+### Docs
+- README (EN / 中文 / 日本語) rewritten for 6.1: tagline, showcase links (Store · Components · Playground · Story), install (npm + CDN @6), 30-second quickstart (data attributes, JS API, React / Vue / Svelte / Solid / Angular), feature overview with real counts, all 94 animated elements, accessibility, measured gzip sizes, browser baseline, upgrading, roadmap, license. Stale per-version sections removed (details live in `docs/`).
+- Docs, examples, showcase code snippets and issue templates use the new name; showcase pages get Motionary titles and Open Graph / Twitter meta.
+
 ## [6.1.0] - 2026-10-08
 
 ### Added — Scroll presets 2.0
