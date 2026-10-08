@@ -1,4 +1,4 @@
-import { defineElement, type UsaElement } from '../base';
+import { defineElement, deprecate, type UsaElement } from '../base';
 import { timeline, TIMELINE_PRESETS, type Timeline } from './core';
 import css from './timeline.css?raw';
 
@@ -71,6 +71,7 @@ export function defineTimeline(tag = 'usa-timeline'): CustomElementConstructor |
             // (0–0.95) or `scrub="js"` opt into the JS engine, `scrub="scroll"`
             // follows this element's own scroll position.
             const v = this.str('scrub');
+            if (v === 'js') deprecate('timeline-scrub-js', '<usa-timeline scrub="js"> is deprecated and will be removed in 5.0 — the JS engine is picked automatically where native scroll timelines are missing; add smooth="…" to opt into smoothing.');
             const stop = tl.scrub(this, { smooth: this.num('smooth', 0), engine: v === 'js' ? 'js' : 'auto', source: v === 'scroll' ? 'scroll' : 'view' });
             this.toggleAttribute('data-native', stop.native);
             this.onCleanup(stop);

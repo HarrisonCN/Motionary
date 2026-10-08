@@ -1,5 +1,5 @@
-import { o as onFrame, t as setStyleLoader, e as animationBudget, g as getMotionIntensity, f as configureComponents, i as setAnimationBudget, b as activeAnimations } from '../chunks/base-CZiIAMBc.js';
-export { s as schedulerStats } from '../chunks/base-CZiIAMBc.js';
+import { o as onFrame, q as setStyleLoader, e as animationBudget, g as getMotionIntensity, f as configureComponents, i as setAnimationBudget, b as activeAnimations } from '../chunks/base-DbbRUxaa.js';
+export { s as schedulerStats } from '../chunks/base-DbbRUxaa.js';
 import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-Dh8nwXqw.js';
 
 /**

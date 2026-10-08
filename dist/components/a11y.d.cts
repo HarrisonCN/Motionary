@@ -32,6 +32,16 @@ declare const COMPONENT_CATEGORIES: {
 };
 type ComponentCategory = keyof typeof COMPONENT_CATEGORIES;
 
+interface BaselineFeature {
+    id: string;
+    required: boolean;
+    supported: boolean;
+}
+/** Required in 5.0: Custom Elements, WAAPI, IntersectionObserver, ResizeObserver, adoptedStyleSheets. Progressive: View Transitions, scroll-driven animations, WebGL. */
+declare function baselineReport(): BaselineFeature[];
+/** Log (once) which required 5.0 features are missing here. Returns the missing ids. */
+declare function warnBaseline(): string[];
+
 /**
  * use-scroll-animate/components/a11y — accessibility toolkit (4.4).
  *
@@ -116,5 +126,5 @@ declare function auditMotionA11y(root: Element | Document): {
 /** Every `<usa-*>` tag, for sweeping audits. */
 declare const ALL_TAGS: string[];
 
-export { ALL_TAGS, LIVE_REGION_IDS, MOTION_SENSITIVITY, MOTION_SENSITIVITY_LEVELS, SENSITIVITY_CSS, STATIC_ALTERNATIVES, adaptKeyframes, announce, auditMotionA11y, getMotionSensitivity, liveRegion, motionAllowed, restoreMotionSensitivity, setMotionSensitivity, staticAlternative };
-export type { A11yIssue, MotionSensitivity, Politeness };
+export { ALL_TAGS, LIVE_REGION_IDS, MOTION_SENSITIVITY, MOTION_SENSITIVITY_LEVELS, SENSITIVITY_CSS, STATIC_ALTERNATIVES, adaptKeyframes, announce, auditMotionA11y, baselineReport, getMotionSensitivity, liveRegion, motionAllowed, restoreMotionSensitivity, setMotionSensitivity, staticAlternative, warnBaseline };
+export type { A11yIssue, BaselineFeature, MotionSensitivity, Politeness };

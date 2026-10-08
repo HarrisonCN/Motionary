@@ -49,6 +49,13 @@ const config: Required<ComponentsConfig> = { injectStyles: true, reducedMotion: 
 
 /** Change global component settings (call before `define*()` for `injectStyles`). */
 export function configureComponents(options: ComponentsConfig): void {
+  if (!quiet) {
+    // 4.9: removed in 5.0 (see docs/upgrading-5.md, `npx usa-codemod-5`)
+    if (options.motionIntensity === 'off')
+      deprecate('intensity-off', "motionIntensity: 'off' is deprecated and will be removed in 5.0 — use motionSensitivity: 'minimal' (setMotionSensitivity('minimal')) instead.");
+    if (options.reducedMotion === 'no-preference')
+      deprecate('reduced-no-preference', "reducedMotion: 'no-preference' is deprecated and will be removed in 5.0 — the OS setting is always respected; use 'user' (default) or 'reduce'.");
+  }
   Object.assign(config, options);
   if (options.motionIntensity && typeof document !== 'undefined') {
     document.documentElement.style.setProperty('--usa-motion', String(MOTION_SCALE[options.motionIntensity] ?? 1));
@@ -85,6 +92,17 @@ export function adaptKeyframes(frames: Keyframe[], level: MotionSensitivity = co
     }
     return out;
   });
+}
+
+let quiet = 0;
+/** Run `fn` without 4.9 deprecation warnings (library-internal calls). */
+export function withoutDeprecations<T>(fn: () => T): T {
+  quiet++;
+  try {
+    return fn();
+  } finally {
+    quiet--;
+  }
 }
 
 /** The current global motion intensity. */

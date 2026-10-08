@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-CxYU2NK_.cjs');
+var base = require('../chunks/base-BvpQ4Ggj.cjs');
 
 /**
  * use-scroll-animate/components/bridge — native shell bridges (4.7).

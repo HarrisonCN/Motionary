@@ -18,16 +18,16 @@ var components_webgl = require('./components/webgl.cjs');
 var components_depth = require('./components/depth.cjs');
 var components_layout = require('./components/layout.cjs');
 var components_packs = require('./components/packs.cjs');
-var variants = require('./chunks/variants-CfJzrzMh.cjs');
-var base = require('./chunks/base-CxYU2NK_.cjs');
+var variants = require('./chunks/variants-C8xj8gfd.cjs');
+var base = require('./chunks/base-BvpQ4Ggj.cjs');
 var components_tokens = require('./components/tokens.cjs');
 var components_a11y = require('./components/a11y.cjs');
 var components_perf = require('./components/perf.cjs');
 var components_bridge = require('./components/bridge.cjs');
 var indexTags = require('./chunks/index-tags-CIRY2KnU.cjs');
-var spring = require('./chunks/spring-Dkpygsuj.cjs');
-var core = require('./chunks/core-HLqH3qkA.cjs');
-var core$1 = require('./chunks/core-CctNfzuP.cjs');
+var spring = require('./chunks/spring-fFkqE9J0.cjs');
+var core = require('./chunks/core-BWO7JKJ5.cjs');
+var core$1 = require('./chunks/core-CCAM3nKw.cjs');
 
 /**
  * use-scroll-animate/components
@@ -290,11 +290,13 @@ exports.SENSITIVITY_CSS = components_a11y.SENSITIVITY_CSS;
 exports.STATIC_ALTERNATIVES = components_a11y.STATIC_ALTERNATIVES;
 exports.announce = components_a11y.announce;
 exports.auditMotionA11y = components_a11y.auditMotionA11y;
+exports.baselineReport = components_a11y.baselineReport;
 exports.liveRegion = components_a11y.liveRegion;
 exports.motionAllowed = components_a11y.motionAllowed;
 exports.restoreMotionSensitivity = components_a11y.restoreMotionSensitivity;
 exports.setMotionSensitivity = components_a11y.setMotionSensitivity;
 exports.staticAlternative = components_a11y.staticAlternative;
+exports.warnBaseline = components_a11y.warnBaseline;
 exports.autoDegrade = components_perf.autoDegrade;
 exports.categoryOf = components_perf.categoryOf;
 exports.loadCategoryStyles = components_perf.loadCategoryStyles;

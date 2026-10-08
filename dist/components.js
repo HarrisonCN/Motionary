@@ -34,18 +34,18 @@ import { defineLayoutComponents } from './components/layout.js';
 export { autoAnimate, defineAutoAnimate, defineMasonry, flipFrames, masonryLayout, sharedTransition } from './components/layout.js';
 import { definePacksComponents } from './components/packs.js';
 export { PACKS, PACK_PRIMITIVES, applyPack, countUp, definePack, flyToCart } from './components/packs.js';
-import { a as adoptVariants } from './chunks/variants-D9n-3x27.js';
-export { V as VARIANTS, s as setVariant } from './chunks/variants-D9n-3x27.js';
-import { c as canDefine } from './chunks/base-CZiIAMBc.js';
-export { M as MOTION_SCALE, a as MOTION_SENSITIVITY_LEVELS, b as activeAnimations, d as adaptKeyframes, e as animationBudget, f as configureComponents, g as getMotionIntensity, h as getMotionSensitivity, o as onFrame, p as prefersReducedMotion, s as schedulerStats, i as setAnimationBudget } from './chunks/base-CZiIAMBc.js';
+import { a as adoptVariants } from './chunks/variants-Cal4DB0E.js';
+export { V as VARIANTS, s as setVariant } from './chunks/variants-Cal4DB0E.js';
+import { c as canDefine } from './chunks/base-DbbRUxaa.js';
+export { M as MOTION_SCALE, a as MOTION_SENSITIVITY_LEVELS, b as activeAnimations, d as adaptKeyframes, e as animationBudget, f as configureComponents, g as getMotionIntensity, h as getMotionSensitivity, o as onFrame, p as prefersReducedMotion, s as schedulerStats, i as setAnimationBudget } from './chunks/base-DbbRUxaa.js';
 export { MOTION_TOKENS, applyMotionTokens, getMotionTokens, importMotionTokens, mergeMotionTokens, motionToken, motionTokensToCss, motionTokensToJSON, motionTokensToVars, motionVar, parseDuration, parseEasing, resolveDurationToken, resolveEasingToken } from './components/tokens.js';
-export { ALL_TAGS, LIVE_REGION_IDS, MOTION_SENSITIVITY, SENSITIVITY_CSS, STATIC_ALTERNATIVES, announce, auditMotionA11y, liveRegion, motionAllowed, restoreMotionSensitivity, setMotionSensitivity, staticAlternative } from './components/a11y.js';
+export { ALL_TAGS, LIVE_REGION_IDS, MOTION_SENSITIVITY, SENSITIVITY_CSS, STATIC_ALTERNATIVES, announce, auditMotionA11y, baselineReport, liveRegion, motionAllowed, restoreMotionSensitivity, setMotionSensitivity, staticAlternative, warnBaseline } from './components/a11y.js';
 export { autoDegrade, categoryOf, loadCategoryStyles, loadedStyles, onDemandStyles } from './components/perf.js';
 export { BRIDGE_PROTOCOL_VERSION, applyNativeSettings, connectNativeShell, detectNativeHost, parseNativeSettings, postToNative } from './components/bridge.js';
 export { C as COMPONENT_CATEGORIES } from './chunks/index-tags-Dh8nwXqw.js';
-export { S as SPRING_PRESETS, c as createSpring, l as linearEasing, p as projectInertia, r as resolveSpring, a as rubberBand, s as snapTo, b as spring, d as springEasing, e as springSamples, f as stepSpring, g as supportsLinearEasing } from './chunks/spring-BS5tg6aK.js';
-export { T as TIMELINE_PRESETS, r as resolvePosition, s as supportsNativeScrub, t as timeline } from './chunks/core-CJHJeMI_.js';
-export { g as gesture, p as pinchScale, s as swipeDirection } from './chunks/core-COi3DrLx.js';
+export { S as SPRING_PRESETS, c as createSpring, l as linearEasing, p as projectInertia, r as resolveSpring, a as rubberBand, s as snapTo, b as spring, d as springEasing, e as springSamples, f as stepSpring, g as supportsLinearEasing } from './chunks/spring-B6w7mVCU.js';
+export { T as TIMELINE_PRESETS, r as resolvePosition, s as supportsNativeScrub, t as timeline } from './chunks/core-BVTuet9o.js';
+export { g as gesture, p as pinchScale, s as swipeDirection } from './chunks/core-CcaSsbV8.js';
 
 /**
  * use-scroll-animate/components

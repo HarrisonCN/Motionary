@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * use-scroll-animate/components — shared base for the `<usa-*>` custom elements.
  *
@@ -11,6 +13,13 @@ const MOTION_SCALE = { off: 0, low: 0.6, normal: 1, high: 1.25 };
 const config = { injectStyles: true, reducedMotion: 'user', motionIntensity: 'normal', motionSensitivity: 'full' };
 /** Change global component settings (call before `define*()` for `injectStyles`). */
 function configureComponents(options) {
+    if (!quiet) {
+        // 4.9: removed in 5.0 (see docs/upgrading-5.md, `npx usa-codemod-5`)
+        if (options.motionIntensity === 'off')
+            deprecate('intensity-off', "motionIntensity: 'off' is deprecated and will be removed in 5.0 — use motionSensitivity: 'minimal' (setMotionSensitivity('minimal')) instead.");
+        if (options.reducedMotion === 'no-preference')
+            deprecate('reduced-no-preference', "reducedMotion: 'no-preference' is deprecated and will be removed in 5.0 — the OS setting is always respected; use 'user' (default) or 'reduce'.");
+    }
     Object.assign(config, options);
     if (options.motionIntensity && typeof document !== 'undefined') {
         document.documentElement.style.setProperty('--usa-motion', String(MOTION_SCALE[options.motionIntensity] ?? 1));
@@ -54,6 +63,17 @@ function adaptKeyframes(frames, level = config.motionSensitivity) {
         }
         return out;
     });
+}
+let quiet = 0;
+/** Run `fn` without 4.9 deprecation warnings (library-internal calls). */
+function withoutDeprecations(fn) {
+    quiet++;
+    try {
+        return fn();
+    }
+    finally {
+        quiet--;
+    }
 }
 /** The current global motion intensity. */
 function getMotionIntensity() {
@@ -358,6 +378,15 @@ const EASE_OUT = 'cubic-bezier(0.22, 1, 0.36, 1)';
 const EASE_SPRING = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
 /** Windows Fluent "decelerate" / "point-to-point" curves. */
 const FLUENT_DECELERATE = 'cubic-bezier(0.1, 0.9, 0.2, 1)';
+const warned = new Set();
+/** Log a deprecation once per key (console.warn). */
+function deprecate(key, message) {
+    if (warned.has(key))
+        return;
+    warned.add(key);
+    if (typeof console !== 'undefined')
+        console.warn(`[use-scroll-animate] ${message}`);
+}
 /**
  * The `kind` attribute of `<usa-spinner>`, `<usa-check>`, `<usa-dialog>` and
  * `<usa-acrylic>` (3.0: `variant` only selects a style variant).
@@ -368,5 +397,34 @@ function kindOf(el, valid, fallback) {
 }
 const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
 
-export { EASE_SPRING as E, FLUENT_DECELERATE as F, MOTION_SCALE as M, MOTION_SENSITIVITY_LEVELS as a, activeAnimations as b, canDefine as c, adaptKeyframes as d, animationBudget as e, configureComponents as f, getMotionIntensity as g, getMotionSensitivity as h, setAnimationBudget as i, clamp as j, caf as k, applyFrame as l, motionScale as m, now as n, onFrame as o, prefersReducedMotion as p, adoptStyles as q, raf as r, schedulerStats as s, setStyleLoader as t, defineElement as u, EASE_OUT as v, kindOf as w, shadowStyles as x, srText as y };
-//# sourceMappingURL=base-CZiIAMBc.js.map
+exports.EASE_OUT = EASE_OUT;
+exports.EASE_SPRING = EASE_SPRING;
+exports.FLUENT_DECELERATE = FLUENT_DECELERATE;
+exports.MOTION_SCALE = MOTION_SCALE;
+exports.MOTION_SENSITIVITY_LEVELS = MOTION_SENSITIVITY_LEVELS;
+exports.activeAnimations = activeAnimations;
+exports.adaptKeyframes = adaptKeyframes;
+exports.adoptStyles = adoptStyles;
+exports.animationBudget = animationBudget;
+exports.applyFrame = applyFrame;
+exports.caf = caf;
+exports.canDefine = canDefine;
+exports.clamp = clamp;
+exports.configureComponents = configureComponents;
+exports.defineElement = defineElement;
+exports.deprecate = deprecate;
+exports.getMotionIntensity = getMotionIntensity;
+exports.getMotionSensitivity = getMotionSensitivity;
+exports.kindOf = kindOf;
+exports.motionScale = motionScale;
+exports.now = now;
+exports.onFrame = onFrame;
+exports.prefersReducedMotion = prefersReducedMotion;
+exports.raf = raf;
+exports.schedulerStats = schedulerStats;
+exports.setAnimationBudget = setAnimationBudget;
+exports.setStyleLoader = setStyleLoader;
+exports.shadowStyles = shadowStyles;
+exports.srText = srText;
+exports.withoutDeprecations = withoutDeprecations;
+//# sourceMappingURL=base-BvpQ4Ggj.cjs.map
