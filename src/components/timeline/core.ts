@@ -1,4 +1,5 @@
 import { prefersReducedMotion, motionScale, applyFrame, raf, caf, now, clamp } from '../base';
+import { resolveDurationToken, resolveEasingToken } from '../tokens/index';
 
 /**
  * Where a step starts on a timeline:
@@ -11,9 +12,9 @@ import { prefersReducedMotion, motionScale, applyFrame, raf, caf, now, clamp } f
 export type TimelinePosition = number | string;
 
 export interface TimelineStepOptions {
-  /** Duration in ms (default: timeline default, 600). */
-  duration?: number;
-  /** CSS easing (default `cubic-bezier(0.22, 1, 0.36, 1)`). */
+  /** Duration in ms or a motion token name (`'fast'`, `'slow'`…; 4.2). Default: timeline default, 600. */
+  duration?: number | string;
+  /** CSS easing or a motion token name (`'emphasized'`, `'spring'`…; 4.2). Default `cubic-bezier(0.22, 1, 0.36, 1)`. */
   easing?: string;
   /** Start position, see `TimelinePosition`. */
   at?: TimelinePosition;
@@ -225,12 +226,12 @@ export function timeline(options: TimelineOptions = {}): Timeline {
     to(target, frames, o = {}) {
       const kf = typeof frames === 'string' ? TIMELINE_PRESETS[frames] || TIMELINE_PRESETS.fade : frames;
       const start = resolvePosition(o.at, end, prevStart, labels);
-      const duration = o.duration ?? d.duration;
+      const duration = resolveDurationToken(o.duration ?? d.duration, 600);
       const stagger = o.stagger ?? d.stagger;
       let last = start;
       toEls(target).forEach((el, i) => {
         const s = start + i * stagger;
-        steps.push({ el, frames: kf, start: s, duration, easing: o.easing ?? d.easing });
+        steps.push({ el, frames: kf, start: s, duration, easing: resolveEasingToken(o.easing ?? d.easing, 'cubic-bezier(0.22, 1, 0.36, 1)') });
         last = Math.max(last, s + duration);
       });
       prevStart = start;

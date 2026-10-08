@@ -57,6 +57,7 @@ export * from './webgl/index';
 export * from './depth/index';
 export * from './layout/index';
 export * from './packs/index';
+export * from './tokens/index';
 
 export { COMPONENT_CATEGORIES } from './index-tags';
 export type { ComponentCategory } from './index-tags';

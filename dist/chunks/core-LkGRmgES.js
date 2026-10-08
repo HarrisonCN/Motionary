@@ -1,4 +1,5 @@
 import { p as prefersReducedMotion, b as clamp, d as caf, e as applyFrame, r as raf, m as motionScale, n as now } from './base-BPG5zvex.js';
+import { resolveDurationToken, resolveEasingToken } from '../components/tokens.js';
 
 /** 4.1: whether `scrub()` can use native ScrollTimeline / ViewTimeline here. */
 function supportsNativeScrub(source = 'view') {
@@ -132,12 +133,12 @@ function timeline(options = {}) {
         to(target, frames, o = {}) {
             const kf = typeof frames === 'string' ? TIMELINE_PRESETS[frames] || TIMELINE_PRESETS.fade : frames;
             const start = resolvePosition(o.at, end, prevStart, labels);
-            const duration = o.duration ?? d.duration;
+            const duration = resolveDurationToken(o.duration ?? d.duration, 600);
             const stagger = o.stagger ?? d.stagger;
             let last = start;
             toEls(target).forEach((el, i) => {
                 const s = start + i * stagger;
-                steps.push({ el, frames: kf, start: s, duration, easing: o.easing ?? d.easing });
+                steps.push({ el, frames: kf, start: s, duration, easing: resolveEasingToken(o.easing ?? d.easing, 'cubic-bezier(0.22, 1, 0.36, 1)') });
                 last = Math.max(last, s + duration);
             });
             prevStart = start;
@@ -256,4 +257,4 @@ function timeline(options = {}) {
 }
 
 export { TIMELINE_PRESETS as T, resolvePosition as r, supportsNativeScrub as s, timeline as t };
-//# sourceMappingURL=core-QTFk4kgO.js.map
+//# sourceMappingURL=core-LkGRmgES.js.map

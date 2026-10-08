@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.2.0] - 2026-10-08
+
+### Added
+- **Motion design tokens** — new entry `use-scroll-animate/components/tokens` (also re-exported from `use-scroll-animate/components`): one duration / easing / spring scale as CSS custom properties (`--usa-duration-fast`, `--usa-easing-emphasized`, `--usa-spring-bouncy-stiffness`…), W3C Design Tokens (DTCG) JSON and JS values.
+  - `MOTION_TOKENS` (durations `instant`→`slowest`, easings `standard` · `emphasized` · `decelerate` · `accelerate` · `spring` · `bounce`, springs `gentle` · `snappy` · `bouncy` · `wobbly` · `stiff`).
+  - `applyMotionTokens(partial?, root?)` (writes the vars, sets the active scale, returns undo), `motionToken()`, `motionVar()`, `getMotionTokens()`.
+  - `importMotionTokens(json)` reads **Figma Tokens / Tokens Studio** (`value` / `type`), **Style Dictionary** (nested `value`) and **DTCG** (`$value` / `$type`, incl. `transition` composites) exports; `motionTokensToCss()`, `motionTokensToVars()`, `motionTokensToJSON()`.
+  - Prebuilt `docs/motion-tokens.css` and `docs/motion.tokens.json`; guide in [docs/motion-tokens.md](./docs/motion-tokens.md).
+- `timeline()` steps and defaults accept token names: `{ duration: 'slow', easing: 'spring' }`.
+- Showcase: **applyMotionTokens()** card (Page & app-wide) — play a stagger at `fast` / `normal` / `slow` with any easing token.
+
 ## [4.1.0] - 2026-10-08
 
 ### Added

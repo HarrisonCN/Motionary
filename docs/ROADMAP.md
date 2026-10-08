@@ -3,7 +3,7 @@
 > 4.0.0 已完成 API 统一：`timeline()` 取代 `sequence()`，`sharedTransition()` 取代 `connectedAnimation()`，`<usa-auto-animate>` 取代 `<usa-flip-list>`。以下为 4.x → 5.0 的规划，每个版本一个 PR，按需调整。
 
 - ✅ **v4.1** — 滚动驱动时间线：`timeline().scrub()` 优先使用原生 `ScrollTimeline` / `ViewTimeline`（脱离主线程），JS 作为回退。
-- **v4.2** — 动效设计令牌：统一的时长 / 缓动 / 弹簧令牌（CSS 变量 + JSON），支持从 Figma Tokens / Style Dictionary 导入。
+- ✅ **v4.2** — 动效设计令牌：统一的时长 / 缓动 / 弹簧令牌（CSS 变量 + JSON），支持从 Figma Tokens / Style Dictionary 导入。
 - **v4.3** — 文本进阶：按字 / 词 / 行拆分的 `splitText()`，支持中日韩文字与 RTL，配合 `timeline()` 逐字编排。
 - **v4.4** — 无障碍增强：每个组件提供“静态替代”与 `aria-live` 规范，新增运动敏感度分级与自动化 a11y 回归测试。
 - **v4.5** — 性能与体积：按需加载 CSS、共享 rAF 调度器、动画数量自动降级，组件整体 gzip 目标 ≤ 70KB。
