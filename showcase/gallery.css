@@ -233,3 +233,7 @@ usa-toggle { --usa-toggle-on: var(--accent); }
 .demo-scrub { position: relative; width: min(100%, 260px); height: 130px; overflow-y: auto; border-radius: 14px; background: color-mix(in srgb, var(--accent) 8%, transparent); }
 .demo-scrub-pin { position: sticky; top: 0; height: 130px; display: flex; gap: 10px; align-items: center; justify-content: center; }
 .demo-scrub-track { height: 420px; }
+
+/* 4.3: splitText() demo */
+.demo-split { display: grid; gap: 4px; text-align: center; }
+.demo-split-line { margin: 0; font-weight: 800; font-size: 1.15rem; }

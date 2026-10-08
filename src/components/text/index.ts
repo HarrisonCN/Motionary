@@ -14,6 +14,8 @@ import { defineWaveText, defineGlitch, defineGradientText, defineHandwriting, de
 import type { UsaWaveTextElement, UsaGlitchElement, UsaGradientTextElement, UsaHandwritingElement, UsaScrollHighlightElement } from './text-fx';
 export { defineTypewriter, defineSplitText, defineScramble, defineCounter, defineShimmerText, defineTextRotate };
 export { scrambleFrame } from './scramble';
+export { splitText, splitTimeline, splitOrder, graphemes, words as splitWords, JOINING_SCRIPT } from './split';
+export type { SplitBy, SplitTextOptions, SplitResult, SplitFrom, SplitTimelineOptions } from './split';
 export { easeOutExpo } from './counter';
 export type { UsaTypewriterElement, UsaSplitTextElement, UsaScrambleElement, UsaCounterElement, UsaShimmerTextElement, UsaTextRotateElement };
 export { defineWaveText, defineGlitch, defineGradientText, defineHandwriting, defineScrollHighlight };

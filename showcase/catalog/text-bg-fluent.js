@@ -34,6 +34,12 @@ export const components = [
 ];
 
 export const helpers = [
+  H('split-text-api', 'text', 'splitText',
+    'splitText(el, { by: \'char\' | \'word\' | \'line\' }) (4.3) — Intl.Segmenter-aware (emoji, Chinese / Japanese words), keeps Arabic words whole for shaping, RTL aware, preserves inline markup. splitTimeline() turns the units into a timeline() — from start, end, center, edges or random.',
+    'splitText(el, { by: \'char\' | \'word\' | \'line\' })（4.3）—— 基于 Intl.Segmenter（表情、中日文分词），阿拉伯文按词保持连写，支持 RTL，保留内联标记。splitTimeline() 把拆分单元变成 timeline() —— 可从开头、结尾、中心、两端或随机开始。',
+    ['split', 'CJK', 'RTL', 'choreography', 'Intl.Segmenter'],
+    "import { splitTimeline } from 'use-scroll-animate/components/text';\n\nconst { timeline } = splitTimeline(title, { by: 'char', preset: 'fade-up', from: 'center', stagger: 30 });\ntimeline.play();      // or timeline.scrub(section)",
+    '<div class="demo-split"><p class="demo-split-line" data-split-a>Motion, char by char ✨</p><p class="demo-split-line" lang="zh" data-split-b>逐字编排的中文动画</p><p class="demo-split-line" dir="rtl" lang="ar" data-split-c>مرحبا بالعالم</p></div><div class="demo-row"><button type="button" class="demo-link" data-from="start">start</button><button type="button" class="demo-link" data-from="center">center</button><button type="button" class="demo-link" data-from="edges">edges</button><button type="button" class="demo-link" data-from="random">random</button></div>'),
   H('fluent-preset', 'background', 'fluentPreset',
     'Windows 11 Fluent preset: the fluent variant (Segoe UI Variable, accent, radii), a Mica-style window background, Acrylic surfaces and Reveal highlight on buttons — one call for WebView2, Electron and Tauri apps.',
     'Windows 11 Fluent 预设：fluent 风格（Segoe UI Variable、强调色、圆角）、云母风格窗口背景、亚克力表面与按钮 Reveal 光照——一次调用即可用于 WebView2、Electron 与 Tauri 应用。',
@@ -43,6 +49,26 @@ export const helpers = [
 ];
 
 export const wire = {
+  'split-text-api': (stage, lib) => {
+    const els = ['[data-split-a]', '[data-split-b]', '[data-split-c]'].map((s) => stage.querySelector(s));
+    const sources = els.map((e) => e.textContent);
+    let splits = [];
+    const run = (from) => {
+      splits.forEach((s) => s.revert());
+      splits = [];
+      els.forEach((el, i) => {
+        el.textContent = sources[i];
+        const { split, timeline } = lib.splitTimeline(el, { by: 'char', preset: 'fade-up', from, stagger: 35, duration: 450 });
+        splits.push(split);
+        timeline.play(0);
+      });
+    };
+    stage.addEventListener('click', (e) => {
+      const b = e.target.closest('[data-from]');
+      if (b) run(b.dataset.from);
+    });
+    run('start');
+  },
   'fluent-preset': (stage, lib) => {
     let off = null;
     const b = stage.querySelector('[data-fluent-toggle]');

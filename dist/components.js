@@ -1,7 +1,7 @@
 import { defineRevealComponents } from './components/reveal.js';
 export { REVEAL_EFFECTS, defineReveal, defineScrollProgress, defineScrolly, defineStagger, readScrollProgress, revealKeyframes } from './components/reveal.js';
 import { defineTextComponents } from './components/text.js';
-export { defineCounter, defineGlitch, defineGradientText, defineHandwriting, defineScramble, defineScrollHighlight, defineShimmerText, defineSplitText, defineTextRotate, defineTypewriter, defineWaveText, easeOutExpo, scrambleFrame } from './components/text.js';
+export { JOINING_SCRIPT, defineCounter, defineGlitch, defineGradientText, defineHandwriting, defineScramble, defineScrollHighlight, defineShimmerText, defineSplitText, defineTextRotate, defineTypewriter, defineWaveText, easeOutExpo, graphemes, scrambleFrame, splitOrder, splitText, splitTimeline, splitWords } from './components/text.js';
 import { defineInteractionComponents } from './components/interaction.js';
 export { defineMagnetic, definePress, defineRipple, defineSpotlight, defineTilt, defineToggle } from './components/interaction.js';
 import { defineFeedbackComponents } from './components/feedback.js';

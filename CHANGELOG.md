@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.3.0] - 2026-10-08
+
+### Added
+- **`splitText(el, { by: 'char' | 'word' | 'line' })`** in `use-scroll-animate/components/text` — `Intl.Segmenter`-aware splitting (emoji / grapheme clusters, Chinese & Japanese word boundaries), Arabic-script words kept whole so shaping survives, RTL aware, inline markup preserved; returns `{ units, chars, words, lines, revert() }`. Lines are re-measured on resize.
+- **`splitTimeline(el, options)`** — turns the split units into a `timeline()` (preset, stagger, duration, easing tokens) with `from: 'start' | 'end' | 'center' | 'edges' | 'random'`; `.play()` or `.scrub(section)`.
+- Helpers `splitOrder()`, `graphemes()`, `splitWords()`, `JOINING_SCRIPT`.
+- `<usa-split-text>` upgraded: `by="lines"` and `from="center|edges|end|random"` attributes, now built on `splitText()`.
+- Showcase: **splitText()** card (Text) — Latin + emoji, Chinese and Arabic RTL lines, replay from start / center / edges / random.
+
 ## [4.2.0] - 2026-10-08
 
 ### Added
