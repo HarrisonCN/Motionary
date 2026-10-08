@@ -81,9 +81,14 @@ describe('<usa-mask-reveal>', () => {
   it('starts masked and reveals with a clip-path animation in view', async () => {
     const el = mount<any>('<usa-mask-reveal shape="diamond"><img alt=""></usa-mask-reveal>');
     expect(el.dataset.state).toBe('hidden');
-    expect(el.style.clipPath).toBe(MASK_SHAPES.diamond[0]);
+    // 4.0.1: hidden with opacity (a closed clip-path blocks IntersectionObserver in Chromium)
+    expect(el.style.clipPath).toBe('');
+    expect(el.style.opacity).toBe('0');
     intersect(el, true);
+    expect(anims[0].keyframes[0].clipPath).toBe(MASK_SHAPES.diamond[0]);
     expect(anims[0].keyframes[1].clipPath).toBe(MASK_SHAPES.diamond[1]);
+    expect(anims[0].timing.fill).toBe('both');
+    expect(el.style.opacity).toBe('');
     await finishAll();
     expect(el.dataset.state).toBe('visible');
   });

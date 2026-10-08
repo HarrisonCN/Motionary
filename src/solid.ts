@@ -13,7 +13,7 @@
  * `solid-js` is an optional peer dependency (only needed for this entry).
  */
 
-import { onCleanup, onMount } from 'solid-js';
+import { createRenderEffect, onCleanup, onMount } from 'solid-js';
 import type { AnimateOptions, ScrollAnimateInstance } from './types';
 import { createScrollAnimate } from './core';
 import { staggerChildren, type StaggerOptions } from './stagger';
@@ -43,17 +43,45 @@ function read<T>(accessor?: () => T | true | undefined): T {
   return (v && v !== true ? v : {}) as T;
 }
 
-function observe(el: Element, options: SolidScrollAnimateOptions): void {
-  const { instance, ...opts } = options;
-  const sa = getInstance(instance);
-  // Wait until the element is in the document (directives/refs run before insertion).
-  onMount(() => sa.observe(el, opts));
-  onCleanup(() => sa.unobserve(el));
+const CALLBACKS = ['onStart', 'onComplete', 'onEnter', 'onLeave', 'onProgress'] as const;
+
+/** Callbacks always call the latest options' version. */
+function liveCallbacks(opts: AnimateOptions, latest: () => AnimateOptions): AnimateOptions {
+  const out: AnimateOptions = { ...opts };
+  CALLBACKS.forEach((name) => {
+    if (typeof opts[name] === 'function') (out as any)[name] = (...args: unknown[]) => (latest()[name] as any)?.(...args);
+  });
+  return out;
 }
 
-/** Directive: `<div use:scrollAnimate={{ animation: 'fade-in' }} />` */
+/**
+ * Directive: `<div use:scrollAnimate={{ animation: 'fade-in' }} />`.
+ * 4.0.1: the accessor is tracked — when signals it reads change, callbacks
+ * update right away and the other options are re-applied if the element has
+ * not animated yet (no manual `refresh()` needed).
+ */
 export function scrollAnimate(el: Element, accessor?: () => SolidScrollAnimateOptions | true | undefined): void {
-  observe(el, read(accessor));
+  let latest: SolidScrollAnimateOptions = {};
+  let mounted = false;
+  let sa: ScrollAnimateInstance | null = null;
+  const apply = () => {
+    const { instance, ...opts } = latest;
+    const record = sa?.getObservedElements().find((r) => r.element === el);
+    if (sa && record?.animated) return; // finished: callbacks stay live
+    sa?.unobserve(el);
+    sa = getInstance(instance);
+    sa.observe(el, liveCallbacks(opts, () => latest));
+  };
+  createRenderEffect(() => {
+    latest = read<SolidScrollAnimateOptions>(accessor);
+    if (mounted) apply();
+  });
+  // Wait until the element is in the document (directives/refs run before insertion).
+  onMount(() => {
+    mounted = true;
+    apply();
+  });
+  onCleanup(() => sa?.unobserve(el));
 }
 
 /** Directive: `<ul use:scrollStagger={{ stagger: 60, observeChildren: true }} />` */

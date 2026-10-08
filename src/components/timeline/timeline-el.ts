@@ -68,10 +68,23 @@ export function defineTimeline(tag = 'usa-timeline'): CustomElementConstructor |
             this.onCleanup(tl.scrub(this, { smooth: 0.2 }));
             return;
           }
-          tl.seek(0);
           const trigger = this.str('trigger', 'view');
-          if (trigger === 'click') this.listen(this, 'click', () => void this.play());
-          else if (trigger === 'view') {
+          if (trigger === 'click') {
+            // 4.0.1: show the finished composition until the first click
+            // (it used to sit invisible at t=0); Enter / Space replay it too.
+            tl.seek(tl.duration);
+            this.listen(this, 'click', () => void this.play());
+            this.listen(this, 'keydown', (e: KeyboardEvent) => {
+              if (e.target === this && (e.key === 'Enter' || e.key === ' ')) {
+                e.preventDefault();
+                void this.play();
+              }
+            });
+            if (!this.hasAttribute('tabindex')) this.tabIndex = 0;
+            return;
+          }
+          tl.seek(0);
+          if (trigger === 'view') {
             let played = false;
             this.inView((v) => {
               if (v && (!played || this.flag('repeat'))) {

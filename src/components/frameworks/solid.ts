@@ -13,6 +13,7 @@
  * <usa-card use:usa={{ on: { flip: (e) => console.log(e.detail) } }} effect="flip">…</usa-card>
  * ```
  */
+import { createRenderEffect, onCleanup } from 'solid-js';
 import { defineComponents, type ComponentCategory } from '../index';
 import { bindUsa, type UsaBinding } from './bind';
 import type { UsaIntrinsicElements } from './jsx';
@@ -22,12 +23,23 @@ export type { UsaBinding } from './bind';
 
 /**
  * Solid directive (`use:usa`). Solid calls it with the element and an
- * accessor; the binding is read once on mount and re-read whenever
- * `refresh()` on the returned handle is called (or wrap it in `createEffect`).
+ * accessor; since 4.0.1 the binding is tracked with `createRenderEffect`, so
+ * signals read inside `{{ props, on }}` update the element automatically and
+ * the listeners are removed on cleanup. `refresh()` is kept for code that
+ * calls the directive outside a reactive owner.
  */
 export function usa(el: HTMLElement, accessor: () => UsaBinding | undefined): { refresh(): void; destroy(): void } {
-  const b = bindUsa(el, accessor() || {});
-  return { refresh: () => b.update(accessor() || {}), destroy: b.destroy };
+  let b: ReturnType<typeof bindUsa> | null = null;
+  const run = () => {
+    const v = accessor() || {};
+    if (b) b.update(v);
+    else b = bindUsa(el, v);
+  };
+  createRenderEffect(run);
+  if (!b) run();
+  const destroy = () => b?.destroy();
+  onCleanup(destroy);
+  return { refresh: run, destroy };
 }
 
 /** Register the elements (all, or some categories) — call from `onMount` in SSR apps. */

@@ -1,7 +1,7 @@
 import { C, H, K } from './make.js';
 
 export const category = K('click', '✦', 'Click & tap', '点击与轻触',
-  'Click effects and button deformation (按钮点击形变): ripples, particle bursts, confetti, squash & stretch, elastic wobble, gooey liquid, press dents, shape and icon morphs, submit → loading → success, likes, hold-to-confirm, double-tap hearts, animated checkboxes and haptics.',
+  'Click effects and button deformation: ripples, particle bursts, confetti, squash & stretch, elastic wobble, gooey liquid, press dents, shape and icon morphs, submit → loading → success, likes, hold-to-confirm, double-tap hearts, animated checkboxes and haptics.',
   '点击效果与按钮点击形变：水波纹、粒子迸发、彩带、挤压拉伸、弹性圆角、液态粘滞、按压凹陷、形状与图标变形、提交→加载→成功、点赞、长按确认、双击爱心、动画复选框与触感反馈。');
 
 const btn = (label, extra = '') => `<button class="demo-btn" type="button"${extra}>${label}</button>`;

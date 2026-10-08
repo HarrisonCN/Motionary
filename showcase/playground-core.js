@@ -119,6 +119,6 @@ export function decodeState(s) {
 export const DEFAULT_STATE = { content: 'card', layers: [newLayer('usa-reveal'), newLayer('usa-tilt')] };
 
 export const PG_STRINGS = {
-  en: { title: 'Playground', lead: 'Stack effects, tweak them live, and copy the code.', add: 'Add effect', content: 'Content', layers: 'Layers (outermost first)', remove: 'Remove', up: 'Move up', down: 'Move down', preview: 'Preview', replay: 'Replay', code: 'Export code', copy: 'Copy', copied: 'Copied', share: 'Copy share link', empty: 'No effects yet — add one.', back: 'Components', reduced: 'Reduced motion is on: effects show their final state.' },
-  zh: { title: '动效实验室', lead: '叠加效果、实时调参，并复制代码。', add: '添加效果', content: '内容', layers: '图层（由外到内）', remove: '移除', up: '上移', down: '下移', preview: '预览', replay: '重播', code: '导出代码', copy: '复制', copied: '已复制', share: '复制分享链接', empty: '还没有效果 —— 添加一个吧。', back: '组件库', reduced: '已开启“减少动态效果”：效果直接显示最终状态。' },
+  en: { title: 'Playground', lead: 'Stack effects, tweak them live, and copy the code.', add: 'Add effect', content: 'Content', layers: 'Layers (outermost first)', remove: 'Remove', up: 'Move up', down: 'Move down', preview: 'Preview', replay: 'Replay', code: 'Export code', copy: 'Copy', copied: 'Copied', copyFail: 'Copy failed', share: 'Copy share link', empty: 'No effects yet — add one.', back: 'Components', reduced: 'Reduced motion is on: effects show their final state.' },
+  zh: { title: '动效实验室', lead: '叠加效果、实时调参，并复制代码。', add: '添加效果', content: '内容', layers: '图层（由外到内）', remove: '移除', up: '上移', down: '下移', preview: '预览', replay: '重播', code: '导出代码', copy: '复制', copied: '已复制', copyFail: '复制失败', share: '复制分享链接', empty: '还没有效果 —— 添加一个吧。', back: '组件库', reduced: '已开启“减少动态效果”：效果直接显示最终状态。' },
 };

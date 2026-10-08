@@ -1,3 +1,4 @@
+import { createRenderEffect, onCleanup } from 'solid-js';
 import { defineComponents } from '../components.js';
 import { b as bindUsa } from '../chunks/bind-B_CTL6Qn.js';
 export { u as usaEventName } from '../chunks/bind-B_CTL6Qn.js';
@@ -43,12 +44,26 @@ import '../chunks/index-tags-43Xtd01A.js';
  */
 /**
  * Solid directive (`use:usa`). Solid calls it with the element and an
- * accessor; the binding is read once on mount and re-read whenever
- * `refresh()` on the returned handle is called (or wrap it in `createEffect`).
+ * accessor; since 4.0.1 the binding is tracked with `createRenderEffect`, so
+ * signals read inside `{{ props, on }}` update the element automatically and
+ * the listeners are removed on cleanup. `refresh()` is kept for code that
+ * calls the directive outside a reactive owner.
  */
 function usa(el, accessor) {
-    const b = bindUsa(el, accessor() || {});
-    return { refresh: () => b.update(accessor() || {}), destroy: b.destroy };
+    let b = null;
+    const run = () => {
+        const v = accessor() || {};
+        if (b)
+            b.update(v);
+        else
+            b = bindUsa(el, v);
+    };
+    createRenderEffect(run);
+    if (!b)
+        run();
+    const destroy = () => b?.destroy();
+    onCleanup(destroy);
+    return { refresh: run, destroy };
 }
 /** Register the elements (all, or some categories) — call from `onMount` in SSR apps. */
 function defineUsa(categories) {

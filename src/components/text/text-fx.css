@@ -13,7 +13,7 @@ usa-glitch[trigger="hover"]:hover::before, usa-glitch[trigger="hover"]:hover::af
 usa-gradient-text { background: var(--usa-grad) 0 50% / 300% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; animation: usa-grad-flow var(--usa-grad-s, 6s) linear infinite; }
 @keyframes usa-grad-flow { to { background-position: 150% 50%; } }
 usa-handwriting { --usa-hw-stroke: currentColor; display: inline-block; line-height: 0; }
-usa-handwriting svg { max-width: 100%; height: auto; overflow: visible; }
+usa-handwriting svg { width: auto; max-width: 100%; height: auto; overflow: visible; }
 usa-handwriting text { fill: transparent; stroke: var(--usa-hw-stroke); stroke-width: 1.2; stroke-dasharray: 1600; stroke-dashoffset: 1600; font-family: "Segoe Script", "Brush Script MT", "Snell Roundhand", cursive; }
 usa-handwriting[data-state="drawing"] text { animation: usa-hw-draw var(--usa-hw-d, 2400ms) cubic-bezier(0.55, 0, 0.45, 1) forwards, usa-hw-fill 0.6s ease calc(var(--usa-hw-d, 2400ms) * 0.8) forwards; }
 usa-handwriting[data-state="done"] text { stroke-dashoffset: 0; fill: currentColor; }

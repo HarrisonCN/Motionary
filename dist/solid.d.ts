@@ -219,7 +219,12 @@ declare module 'solid-js' {
         }
     }
 }
-/** Directive: `<div use:scrollAnimate={{ animation: 'fade-in' }} />` */
+/**
+ * Directive: `<div use:scrollAnimate={{ animation: 'fade-in' }} />`.
+ * 4.0.1: the accessor is tracked — when signals it reads change, callbacks
+ * update right away and the other options are re-applied if the element has
+ * not animated yet (no manual `refresh()` needed).
+ */
 declare function scrollAnimate(el: Element, accessor?: () => SolidScrollAnimateOptions | true | undefined): void;
 /** Directive: `<ul use:scrollStagger={{ stagger: 60, observeChildren: true }} />` */
 declare function scrollStagger(el: Element, accessor?: () => SolidScrollStaggerOptions | true | undefined): void;

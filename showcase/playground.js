@@ -103,12 +103,20 @@ async function boot() {
   });
   $('#pg-content').addEventListener('change', (e) => ((state.content = e.target.value), update()));
   $('#pg-replay').addEventListener('click', update);
-  $('#pg-copy').addEventListener('click', async () => {
-    await navigator.clipboard?.writeText(playgroundSnippets(state)[tab]);
-    $('#pg-copy').textContent = t('copied');
-    setTimeout(() => ($('#pg-copy').textContent = t('copy')), 1200);
-  });
-  $('#pg-share').addEventListener('click', () => navigator.clipboard?.writeText(location.href));
+  // 4.0.1: clipboard can be denied (insecure context, permissions) — never throw
+  const copy = async (btn, text, done, idle) => {
+    let ok = false;
+    try {
+      await navigator.clipboard.writeText(text);
+      ok = true;
+    } catch {
+      /* denied */
+    }
+    btn.textContent = ok ? t(done) : t('copyFail');
+    setTimeout(() => (btn.textContent = t(idle)), 1200);
+  };
+  $('#pg-copy').addEventListener('click', () => copy($('#pg-copy'), playgroundSnippets(state)[tab], 'copied', 'copy'));
+  $('#pg-share').addEventListener('click', () => copy($('#pg-share'), location.href, 'copied', 'share'));
   $('#pg-lang').addEventListener('click', () => {
     lang = lang === 'zh' ? 'en' : 'zh';
     try { localStorage.setItem('usa-showcase:lang', lang); } catch {}

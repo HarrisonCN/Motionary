@@ -106,6 +106,15 @@ function make(kind: Kind) {
               this._ripples = [...this._ripples.slice(-3), { x: this._mouse[0], y: this._mouse[1], t: now() }];
             });
         }
+        // 4.0.1: also follow the element's own size (grid reflow, card expand…)
+        if (typeof ResizeObserver !== 'undefined') {
+          const ro = new ResizeObserver(() => {
+            q.resize();
+            if (!this._id) this.frame();
+          });
+          ro.observe(this);
+          this.onCleanup(() => ro.disconnect());
+        }
         if (this.reduced) return; // one static frame, no loop
         let visible = false;
         const loop = () => {

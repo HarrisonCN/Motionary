@@ -1672,25 +1672,11 @@ type UsaIntrinsicElements = {
 };
 
 /**
- * use-scroll-animate/components/solid — Solid integration (v3.8).
- * Solid renders custom elements natively: set properties with `prop:` and
- * listen with `on:` (`<usa-toggle prop:checked={on()} on:usa:change={…}>`).
- * This entry adds `defineUsa()` (client only, SolidStart-safe), a `usa`
- * directive for `use:usa={{ props, on }}`, and JSX types.
- *
- * ```tsx
- * import { defineUsa, usa } from 'use-scroll-animate/components/solid';
- * import type {} from 'use-scroll-animate/components/solid'; // JSX types
- * onMount(() => defineUsa());
- * false && usa; // keep the directive import (Solid convention)
- * <usa-card use:usa={{ on: { flip: (e) => console.log(e.detail) } }} effect="flip">…</usa-card>
- * ```
- */
-
-/**
  * Solid directive (`use:usa`). Solid calls it with the element and an
- * accessor; the binding is read once on mount and re-read whenever
- * `refresh()` on the returned handle is called (or wrap it in `createEffect`).
+ * accessor; since 4.0.1 the binding is tracked with `createRenderEffect`, so
+ * signals read inside `{{ props, on }}` update the element automatically and
+ * the listeners are removed on cleanup. `refresh()` is kept for code that
+ * calls the directive outside a reactive owner.
  */
 declare function usa(el: HTMLElement, accessor: () => UsaBinding | undefined): {
     refresh(): void;
