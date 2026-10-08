@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.3.0] - 2026-10-08
+
+### Added
+- **4 new components (7.3)** in `motionary/components/widgets` (also in `dist/widgets.umd.js`):
+  - `<usa-add-to-cart>` — buy button: the product photo (`from`, or the closest `[data-product] img`) flies on an arc into the cart (`cart` selector; a `<usa-cart-drawer>` gets `add(item)` with the `item` JSON), the button morphs to ✓ `added` for `hold` ms; `usa:add`; live-region announcement.
+  - `<usa-cart-drawer>` — cart button + count badge + side drawer: lines slide in or bump their quantity, removed lines collapse, the badge bumps, the total rolls; `add()` / `removeItem()` / `items` / `total` / `count` / `open` / `toggle()`; Esc / backdrop close, focus moves in and back; `currency`, `label`; `usa:change` / `usa:open` / `usa:close`. `cartTotal()`.
+  - `<usa-product-gallery>` — `<img>` children become a stage + thumbnail tabs: the stage cross-slides in the direction of travel, the selection ring glides, hover zoom under the pointer (`zoom`, `nozoom`), swipe and ←/→; `index`, `go()` / `next()` / `prev()`, `usa:change`. `wrapIndex()`.
+  - `<usa-countdown>` — split-flap countdown to `to` or for `seconds` (`units`, `labels`): changed digits flip; `usa:tick` / `usa:done`, `data-done`; `role="timer"` with a label updated once a minute. `splitTime()`.
+- **E-commerce motion — `motionary/fx/shop`** (= `motionary/components/fx-shop`, `registerShopPack()`, also in `registerEffectPacks()`): `fly-to-cart` (click), `price-flip` (enter), `stock-pulse` (loop), `sale-shine` (hover), `badge-pop` (attention). `arcPath()`.
+- Showcase: 6 new gallery cards with copyable code and live demos; Animation Store 299 → 305 items.
+
+### Fixed
+- `<usa-cart-drawer>` (pre-release staging): the panel's `display:flex` overrode `[hidden]`, so the drawer showed while closed — `[hidden]` now wins.
+- `<usa-countdown>`: restarting (changing `to` / `seconds`) after it finished kept `data-done` — now cleared.
+
+### Accessibility
+- Add-to-cart = real `<button>` + polite live region; cart drawer = `dialog` with `aria-modal`, labelled toggle with the item count, Esc; product gallery = labelled stage group + thumbnail `tab`s with roving tabindex; countdown = `timer` labelled once a minute. Reduced motion: no flight, morph, slide, glide, zoom, flip, bump or roll — state changes at once; `stock-pulse` / `sale-shine` do nothing, `fly-to-cart` only fades the cart.
+
 ## [7.2.0] - 2026-10-08
 
 ### Added

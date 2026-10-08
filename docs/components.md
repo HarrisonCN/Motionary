@@ -777,6 +777,32 @@ gauge.value = 91; kpi.value = '$52.0k'; spark.data = [4, 8, 6, 12];
 - `<usa-kpi label value delta invert trend caption locale>`: `value`.
 - Chart: `bars-grow` (`axis`, `stagger`, `duration`) · `line-draw` (`duration`, `stagger`) · `ring-sweep` · `dots-pop` · `number-roll` · `sankey-flow` (loop); `parseFigure(text)`.
 
+### v7.3 Widgets: add-to-cart, cart drawer, product gallery, countdown (`components/widgets`) + e-commerce motion (`motionary/fx/shop`)
+
+```html
+<usa-cart-drawer id="cart" currency="$"></usa-cart-drawer>
+<div data-product>
+  <img src="shoe.jpg" alt="Sneaker">
+  <usa-add-to-cart cart="#cart" item='{"name":"Sneaker","price":89}'></usa-add-to-cart>
+</div>
+<usa-product-gallery zoom="2"><img src="front.jpg" alt="Front"><img src="side.jpg" alt="Side"></usa-product-gallery>
+<usa-countdown to="2026-12-24T00:00:00" units="d,h,m,s"></usa-countdown>
+
+<usa-fx effect="fly-to-cart" trigger="click" options='{"to":"#cart"}'><img src="shoe.jpg" alt=""></usa-fx>
+<usa-fx effect="price-flip" trigger="enter"><span data-from="129.00">$89.00</span></usa-fx>
+```
+```js
+import { defineWidgets } from 'motionary/components/widgets';
+import { registerShopPack } from 'motionary/fx/shop';
+defineWidgets(); registerShopPack();
+cart.add({ id: 'tee', name: 'T-shirt', price: 24, img: 'tee.jpg' }); cart.toggle(true);
+```
+- `<usa-add-to-cart cart item from label added hold>`: `add()`; `usa:add`.
+- `<usa-cart-drawer currency label items>`: `items`, `total`, `count`, `open`, `add()`, `removeItem(id)`, `toggle()`; `cartTotal(items)`.
+- `<usa-product-gallery index zoom nozoom>`: `index`, `count`, `go()`, `next()`, `prev()`; `wrapIndex(i, n)`.
+- `<usa-countdown to seconds units labels label>`: `left`, `start()`, `stop()`; `usa:tick`, `usa:done`; `splitTime(sec)`.
+- Shop: `fly-to-cart` (`to`, `duration`, `lift`) · `price-flip` (`stagger`, `duration`; `data-from`) · `stock-pulse` (`color`, `period`) · `sale-shine` · `badge-pop`; `arcPath(ax, ay, bx, by, lift, steps)`.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

@@ -519,6 +519,49 @@ export const components = [
     '<usa-fx effect="sankey-flow" trigger="load">\n  <svg …><path data-flow d="…" /></svg>\n</usa-fx>',
     '<usa-fx effect="sankey-flow" trigger="load"><svg class="demo-svgchart demo-flow" viewBox="0 0 100 50"><path data-flow d="M5 10 C50 10 50 40 95 40" stroke-width="5"/><path data-flow d="M5 40 C50 40 50 12 95 12" stroke-width="3"/><path data-flow d="M5 25 L95 26" stroke-width="2"/></svg></usa-fx>',
     [{ key: 'effect', values: ['sankey-flow', 'number-roll'] }], '7.2'),
+  // ---- 7.3 -------------------------------------------------------------
+  W('usa-add-to-cart', 'ui', 'Add to cart (fly-to-cart)', '加入购物车（飞入购物车）',
+    '7.3: a buy button — the product photo flies on an arc into the cart, the cart badge bumps and the button morphs into a ✓ “Added” state. Works with <usa-cart-drawer> (calls add(item)) or any [data-cart] icon.',
+    '7.3：购买按钮 —— 商品图沿弧线飞入购物车，购物车角标弹跳，按钮变形为 ✓“已加入”状态。可配合 <usa-cart-drawer>（调用 add(item)）或任意 [data-cart] 图标。',
+    ['cart', 'shop', 'ecommerce', 'fly', 'button'],
+    '<usa-cart-drawer id="cart"></usa-cart-drawer>\n<div data-product>\n  <img src="shoe.jpg" alt="Sneaker">\n  <usa-add-to-cart cart="#cart" item=\'{"name":"Sneaker","price":89}\'></usa-add-to-cart>\n</div>',
+    '<div class="demo-shop"><div data-product class="demo-prod"><img src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 10 10%27%3E%3Crect width=%2710%27 height=%2710%27 fill=%27%23a78bfa%27/%3E%3Ctext x=%275%27 y=%276.6%27 font-size=%275%27 text-anchor=%27middle%27%3E%F0%9F%91%9F%3C/text%3E%3C/svg%3E" alt="Sneaker"><usa-add-to-cart cart="#demo-cart-a" item="{&quot;name&quot;:&quot;Sneaker&quot;,&quot;price&quot;:89}"></usa-add-to-cart></div><usa-cart-drawer id="demo-cart-a"></usa-cart-drawer></div>',
+    undefined, { since: '7.3' }),
+  W('usa-cart-drawer', 'ui', 'Cart drawer', '购物车抽屉',
+    '7.3: a cart button with a count badge and a drawer that slides in from the side — lines slide in (or bump their quantity), removed lines collapse, the badge bumps and the total rolls. Esc / backdrop close; focus is managed.',
+    '7.3：带数量角标的购物车按钮与从侧边滑入的抽屉 —— 新商品行滑入（或数量 +1 跳动），移除的行折叠消失，角标弹跳，总价滚动。Esc / 背景关闭，焦点自动管理。',
+    ['cart', 'drawer', 'badge', 'checkout', 'ecommerce'],
+    '<usa-cart-drawer currency="$"></usa-cart-drawer>\n<script>cart.add({ id: \'tee\', name: \'T-shirt\', price: 24 });</script>',
+    '<div class="demo-row"><usa-cart-drawer class="demo-cd"></usa-cart-drawer><button type="button" class="demo-btn" data-cd>Add item</button></div>',
+    undefined, { since: '7.3' }),
+  W('usa-product-gallery', 'ui', 'Product gallery', '商品图库',
+    '7.3: product photos with a thumbnail strip — the stage cross-slides in the direction of travel, the selection ring glides between thumbnails, hover zooms under the pointer, swipe and ←/→ work.',
+    '7.3：带缩略图条的商品图库 —— 主图按切换方向滑动过渡，选中框在缩略图间滑行，悬停放大指针下的细节，支持滑动与 ←/→。',
+    ['product', 'gallery', 'zoom', 'thumbnails', 'ecommerce'],
+    '<usa-product-gallery zoom="2">\n  <img src="front.jpg" alt="Front">\n  <img src="side.jpg" alt="Side">\n  <img src="back.jpg" alt="Back">\n</usa-product-gallery>',
+    '<usa-product-gallery class="demo-pgal"><img src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 10 10%27%3E%3Crect width=%2710%27 height=%2710%27 fill=%27%23a78bfa%27/%3E%3Ctext x=%275%27 y=%276.6%27 font-size=%275%27 text-anchor=%27middle%27%3E%F0%9F%91%9F%3C/text%3E%3C/svg%3E" alt="Violet"><img src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 10 10%27%3E%3Crect width=%2710%27 height=%2710%27 fill=%27%2322d3ee%27/%3E%3Ctext x=%275%27 y=%276.6%27 font-size=%275%27 text-anchor=%27middle%27%3E%F0%9F%91%9F%3C/text%3E%3C/svg%3E" alt="Cyan"><img src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 10 10%27%3E%3Crect width=%2710%27 height=%2710%27 fill=%27%23f472b6%27/%3E%3Ctext x=%275%27 y=%276.6%27 font-size=%275%27 text-anchor=%27middle%27%3E%F0%9F%A7%A6%3C/text%3E%3C/svg%3E" alt="Socks"><img src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 10 10%27%3E%3Crect width=%2710%27 height=%2710%27 fill=%27%23facc15%27/%3E%3Ctext x=%275%27 y=%276.6%27 font-size=%275%27 text-anchor=%27middle%27%3E%F0%9F%93%A6%3C/text%3E%3C/svg%3E" alt="Box"></usa-product-gallery>',
+    undefined, { since: '7.3' }),
+  W('usa-countdown', 'ui', 'Flip countdown', '翻牌倒计时',
+    '7.3: a split-flap countdown to a date (to) or for a number of seconds — every digit flips when it changes; fires usa:done at zero. The timer label updates once a minute so screen readers are not flooded.',
+    '7.3：翻牌式倒计时，可指定截止时间（to）或秒数 —— 每位数字变化时翻转；归零时触发 usa:done。计时器标签每分钟更新一次，避免读屏刷屏。',
+    ['countdown', 'timer', 'flip', 'sale', 'launch'],
+    '<usa-countdown to="2026-12-24T00:00:00" units="d,h,m,s"></usa-countdown>',
+    '<div class="demo-col"><usa-countdown seconds="3725" units="h,m,s" class="demo-cdn"></usa-countdown><button type="button" class="demo-btn" data-cdn>Restart (10 s)</button></div>',
+    undefined, { since: '7.3' }),
+  X('fx-cart', ['fx-shop', 'registerShopPack'], 'Fly to cart & badge pop', '飞入购物车与角标弹出',
+    '7.3: fly-to-cart sends a ghost of the product on an arc into any [data-cart] target, which bumps when it lands; badge-pop pops a sale badge in with a wobble.',
+    '7.3：fly-to-cart 让商品的“影子”沿弧线飞入任意 [data-cart] 目标，落地时目标弹跳；badge-pop 让促销角标摇摆弹出。',
+    ['cart', 'fly', 'arc', 'badge', 'ecommerce'],
+    '<usa-fx effect="fly-to-cart" trigger="click" options=\'{"to":"#cart"}\'>\n  <img src="shoe.jpg" alt="">\n</usa-fx>\n<span id="cart">🛒</span>',
+    '<div class="demo-row"><usa-fx effect="fly-to-cart" trigger="click" options=\'{"to":"#demo-fxcart"}\'><img class="demo-fxprod" src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 10 10%27%3E%3Crect width=%2710%27 height=%2710%27 fill=%27%2322d3ee%27/%3E%3Ctext x=%275%27 y=%276.6%27 font-size=%275%27 text-anchor=%27middle%27%3E%F0%9F%91%9F%3C/text%3E%3C/svg%3E" alt="Product — click"></usa-fx><span id="demo-fxcart" class="demo-fxcart">🛒</span></div>',
+    [{ key: 'effect', values: ['fly-to-cart', 'badge-pop'] }], '7.3'),
+  X('fx-price', ['fx-shop', 'registerShopPack'], 'Price flip & stock pulse', '价格翻牌与库存脉冲',
+    '7.3: price-flip flips a price like a split-flap board from data-from to its text; stock-pulse rings “only 3 left” with a soft urgency glow (static under reduced motion).',
+    '7.3：price-flip 让价格像翻牌一样从 data-from 翻到当前值；stock-pulse 为“仅剩 3 件”加上柔和的紧迫光圈（减少动态时静止）。',
+    ['price', 'flip', 'stock', 'urgency', 'sale'],
+    '<usa-fx effect="price-flip" trigger="enter"><span data-from="129.00">$89.00</span></usa-fx>\n<usa-fx effect="stock-pulse" trigger="load"><b>Only 3 left</b></usa-fx>',
+    '<div class="demo-col"><usa-fx effect="price-flip" trigger="enter"><span class="demo-price" data-from="$129.00">$89.00</span></usa-fx><usa-fx effect="stock-pulse" trigger="load"><b class="demo-stock">Only 3 left</b></usa-fx></div>',
+    [{ key: 'effect', values: ['price-flip', 'stock-pulse', 'sale-shine'] }], '7.3'),
 ];
 
 /** item id → live-demo wiring. */
@@ -584,5 +627,14 @@ export const wire = {
   kpi: (stage) => {
     const k = stage.querySelector('usa-kpi');
     stage.querySelector('[data-kpi]')?.addEventListener('click', () => { k.value = '$' + (30 + Math.random() * 40).toFixed(1) + 'k'; });
+  },
+  'cart-drawer': (stage) => {
+    const c = stage.querySelector('usa-cart-drawer');
+    const P = [['tee', 'T-shirt', 24], ['cap', 'Cap', 18], ['mug', 'Mug', 12]];
+    stage.querySelector('[data-cd]')?.addEventListener('click', () => { const p = P[Math.floor(Math.random() * P.length)]; c.add({ id: p[0], name: p[1], price: p[2] }); });
+  },
+  countdown: (stage) => {
+    const c = stage.querySelector('usa-countdown');
+    stage.querySelector('[data-cdn]')?.addEventListener('click', () => { c.removeAttribute('data-done'); c.setAttribute('seconds', String(10 + Math.random() / 1000)); });
   },
 };

@@ -48,6 +48,10 @@ import { defineBarChart, type UsaBarChartElement } from './bar-chart';
 import { defineGauge, type UsaGaugeElement } from './gauge';
 import { defineSparkline, SPARK_VARIANTS, sparkPoints, type UsaSparklineElement } from './sparkline';
 import { defineKpi, type UsaKpiElement } from './kpi';
+import { defineAddToCart, type UsaAddToCartElement } from './add-to-cart';
+import { defineCartDrawer, cartTotal, type UsaCartDrawerElement, type CartItem } from './cart-drawer';
+import { defineProductGallery, wrapIndex, type UsaProductGalleryElement } from './product-gallery';
+import { defineCountdown, splitTime, type UsaCountdownElement } from './countdown';
 
 export { defineCarousel, defineTabBar, defineDisclosure, defineStories, CAROUSEL_EFFECTS, TAB_INDICATORS };
 export type { UsaCarouselElement, UsaTabBarElement, UsaDisclosureElement, UsaStoriesElement };
@@ -78,6 +82,9 @@ export type { UsaMusicPlayerElement, UsaVolumeKnobElement, UsaEqualizerElement, 
 export { defineBarChart, defineGauge, defineSparkline, SPARK_VARIANTS, sparkPoints, defineKpi };
 export type { UsaBarChartElement, UsaGaugeElement, UsaSparklineElement, UsaKpiElement };
 
+export { defineAddToCart, defineCartDrawer, cartTotal, defineProductGallery, wrapIndex, defineCountdown, splitTime };
+export type { UsaAddToCartElement, UsaCartDrawerElement, CartItem, UsaProductGalleryElement, UsaCountdownElement };
+
 /** The widgets by release (tag → define function). */
 export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElementConstructor | undefined>> = {
   '6.2': { 'usa-carousel': defineCarousel, 'usa-tab-bar': defineTabBar, 'usa-disclosure': defineDisclosure, 'usa-stories': defineStories },
@@ -90,6 +97,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '6.9': { 'usa-date-picker': defineDatePicker, 'usa-color-picker': defineColorPicker, 'usa-file-drop': defineFileDrop, 'usa-keyframe-editor': defineKeyframeEditor },
   '7.1': { 'usa-music-player': defineMusicPlayer, 'usa-volume-knob': defineVolumeKnob, 'usa-equalizer': defineEqualizer, 'usa-lyrics': defineLyrics },
   '7.2': { 'usa-bar-chart': defineBarChart, 'usa-gauge': defineGauge, 'usa-sparkline': defineSparkline, 'usa-kpi': defineKpi },
+  '7.3': { 'usa-add-to-cart': defineAddToCart, 'usa-cart-drawer': defineCartDrawer, 'usa-product-gallery': defineProductGallery, 'usa-countdown': defineCountdown },
 };
 
 /** Every widget tag, in release order. */
@@ -142,5 +150,9 @@ declare global {
     'usa-gauge': UsaGaugeElement;
     'usa-sparkline': UsaSparklineElement;
     'usa-kpi': UsaKpiElement;
+    'usa-add-to-cart': UsaAddToCartElement;
+    'usa-cart-drawer': UsaCartDrawerElement;
+    'usa-product-gallery': UsaProductGalleryElement;
+    'usa-countdown': UsaCountdownElement;
   }
 }
