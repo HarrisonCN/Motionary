@@ -728,6 +728,31 @@ document.querySelector('.hero').dataset.usaBackend;          // 'webgpu' | 'webg
 - `glslToWgsl(body)` translates the 6.x shader-body dialect (vec / float / int declarations, constructors, literals, `for` loops, `u_c0…u_ptr` uniforms) and throws on unsupported constructs (ternaries, `mod`, `discard`) so the effect falls back to WebGL2; `ShaderSpec.wgsl` overrides it.
 - Removed in 7.0: `registerFx2`, `FX2_PACKS`, the version-suffixed 6.x registrars, `<usa-tooltip>`, `<usa-toggle>` — see [upgrading-7.md](./upgrading-7.md).
 
+### v7.1 Widgets: music player, volume knob, equalizer, lyrics (`components/widgets`) + music visualization (`motionary/fx/music`)
+
+```html
+<usa-music-player id="p" title="Night Drive" artist="Motionary" cover="cover.jpg"><audio src="track.mp3"></audio></usa-music-player>
+<usa-lyrics for="p"><script type="text/plain">[00:01.00] First line
+[00:04.50] Second line</script></usa-lyrics>
+<usa-volume-knob value="60"></usa-volume-knob>
+<usa-equalizer preset="rock"></usa-equalizer>
+
+<usa-fx effect="radial-spectrum" trigger="load"><section>…</section></usa-fx>
+<usa-fx effect="vinyl-spin" trigger="load"><img src="album.jpg" alt="…"></usa-fx>
+```
+```js
+import { defineWidgets } from 'motionary/components/widgets';
+import { registerMusicPack } from 'motionary/fx/music';
+import { enableAudio } from 'motionary/components/effects';
+defineWidgets(); registerMusicPack();
+enableAudio(document.querySelector('audio'));   // optional: without it the visuals use a synthetic signal
+```
+- `<usa-music-player title artist cover src duration>`: `playing`, `currentTime`, `duration`, `play()`, `pause()`, `toggle()`, `seek(s)`; `usa:play | pause | seek | prev | next`.
+- `<usa-volume-knob value min max label>`: `value`; `usa:input`, `usa:change`.
+- `<usa-equalizer bands preset>`: `values`, `applyPreset(name)`; `usa:change` (`{ values }`); `EQ_PRESETS`.
+- `<usa-lyrics for time>`: `time`, `lines`; `usa:seek` (`{ time }`); `parseLRC(text)`.
+- Music: `waveform-scope` · `radial-spectrum` (`bars`) · `spectrum-mirror` (`bars`, `gap`) · `sound-particles` (`max`) · `beat-bounce` (`amount`) · `vinyl-spin` (`rpm`); `syntheticSample(t)`, `musicSample(t)`.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

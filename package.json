@@ -1,6 +1,6 @@
 {
   "name": "motionary",
-  "version": "7.0.0",
+  "version": "7.1.0",
   "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 94 animated Web Components — 214 scroll-reveal presets, card/click/button morphs, physics, page transitions, generative & sound-reactive backgrounds, cursor/gesture effects, themes, micro-interactions, <usa-player>, WebGL. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -196,6 +196,16 @@
       "require": {
         "types": "./dist/components/marketplace.d.cts",
         "default": "./dist/components/marketplace.cjs"
+      }
+    },
+    "./fx/music": {
+      "import": {
+        "types": "./dist/components/fx-music.d.ts",
+        "default": "./dist/components/fx-music.js"
+      },
+      "require": {
+        "types": "./dist/components/fx-music.d.cts",
+        "default": "./dist/components/fx-music.cjs"
       }
     },
     "./components/reveal": {
@@ -626,6 +636,16 @@
       "require": {
         "types": "./dist/components/marketplace.d.cts",
         "default": "./dist/components/marketplace.cjs"
+      }
+    },
+    "./components/fx-music": {
+      "import": {
+        "types": "./dist/components/fx-music.d.ts",
+        "default": "./dist/components/fx-music.js"
+      },
+      "require": {
+        "types": "./dist/components/fx-music.d.cts",
+        "default": "./dist/components/fx-music.cjs"
       }
     },
     "./components/lite": {

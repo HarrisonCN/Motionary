@@ -15,6 +15,7 @@ import { TRANSITIONS2_FX, registerTransitionsPack, pageTransition, crossDocument
 import { WEATHER_FX, registerWeatherPack, skyAt } from './weather';
 import { PHYSICS2_FX, registerPhysicsPack, VerletWorld } from './physics2';
 import { FOCUS_FX, registerFocusPack } from './focus';
+import { MUSIC_FX, registerMusicPack, syntheticSample, musicSample } from './music';
 
 export { GPU_FX, registerGpuPack, TEXT3_FX, registerTextPack, splitChars };
 export { shaderBackground, supportsWebGL2, fieldFallback, GLSL_HEAD } from './gl';
@@ -35,6 +36,8 @@ export { PHYSICS2_FX, registerPhysicsPack, VerletWorld };
 
 export { FOCUS_FX, registerFocusPack };
 
+export { MUSIC_FX, registerMusicPack, syntheticSample, musicSample };
+
 /** The 6.x effect packs by name. */
 export const EFFECT_PACKS: Record<string, EffectDefinition[]> = {
   gpu: GPU_FX,
@@ -46,6 +49,7 @@ export const EFFECT_PACKS: Record<string, EffectDefinition[]> = {
   weather: WEATHER_FX,
   physics: PHYSICS2_FX,
   focus: FOCUS_FX,
+  music: MUSIC_FX,
 };
 
 /** Register every 6.x effect pack (idempotent). */
@@ -59,6 +63,7 @@ export function registerEffectPacks(): void {
   registerWeatherPack();
   registerPhysicsPack();
   registerFocusPack();
+  registerMusicPack();
 }
 
 

@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.1.0] - 2026-10-08
+
+### Added
+- **4 new components (7.1)** in `motionary/components/widgets` (also in `dist/widgets.umd.js`; the existing `<usa-audio>`, `<usa-beat>` and `<usa-player>` are unchanged):
+  - `<usa-music-player>` — music player card: the cover spins like a record while playing, play ↔ pause, dancing mini equalizer bars, scrubbable progress slider (← / → ±5 s); plays a child `<audio>` / `src` or simulates `duration`; `play()`, `pause()`, `toggle()`, `seek()`; `usa:play`, `usa:pause`, `usa:seek`, `usa:prev`, `usa:next`.
+  - `<usa-volume-knob>` — rotary knob (`role="slider"`): drag, wheel or keys; value arc + LED tick ring; the cap springs to the angle; `usa:input` / `usa:change`.
+  - `<usa-equalizer>` — graphic EQ: one vertical slider per band with springy caps and a smooth response curve; presets `flat | bass | vocal | rock | electronic` glide every band (`applyPreset()`); `values`; `usa:change`. `EQ_PRESETS`.
+  - `<usa-lyrics>` — synced karaoke lyrics from LRC or `[data-t]` lines: the active line glows, centres and fills word by word, past lines dim; follows `for` (`<audio>`, `<video>`, `<usa-music-player>`); click to `usa:seek`. `parseLRC()`.
+- **Music visualization — `motionary/fx/music`** (= `motionary/components/fx-music`, `registerMusicPack()`, also in `registerEffectPacks()`): `waveform-scope`, `radial-spectrum`, `spectrum-mirror`, `sound-particles` (Canvas 2D backgrounds) and `beat-bounce`, `vinyl-spin` (loops). They read the live analyser (`enableAudio()` / `<usa-audio>`) or a synthetic signal (`syntheticSample()`, `musicSample()`).
+- Showcase: 7 new gallery cards with copyable code (the lyrics card follows a demo player); Animation Store 285 → 292 items.
+
+### Accessibility
+- The player is a labelled group with a `slider` for progress and an `aria-pressed` play button; the knob and every EQ band are `slider`s with `aria-valuetext`; the lyrics region marks the current line with `aria-current`. Reduced motion: no spin, dancing bars, cap spring, glide, sweep or smooth scroll; visual backgrounds draw one static frame and the loop effects do nothing.
+
 ## [7.0.0] - 2026-10-08
 
 ### ⚠️ Breaking — removed (deprecated in 6.9; `npx usa-codemod-7 --write src`)

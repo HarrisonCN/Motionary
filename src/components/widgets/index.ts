@@ -40,6 +40,10 @@ import { defineDatePicker, monthGrid, parseISODate, type UsaDatePickerElement } 
 import { defineColorPicker, hsvToHex, hexToHsv, type UsaColorPickerElement } from './color-picker';
 import { defineFileDrop, type UsaFileDropElement } from './file-drop';
 import { defineKeyframeEditor, type UsaKeyframeEditorElement } from './keyframe-editor';
+import { defineMusicPlayer, type UsaMusicPlayerElement } from './music-player';
+import { defineVolumeKnob, type UsaVolumeKnobElement } from './volume-knob';
+import { defineEqualizer, EQ_PRESETS, type UsaEqualizerElement } from './equalizer';
+import { defineLyrics, parseLRC, type UsaLyricsElement } from './lyrics';
 
 export { defineCarousel, defineTabBar, defineDisclosure, defineStories, CAROUSEL_EFFECTS, TAB_INDICATORS };
 export type { UsaCarouselElement, UsaTabBarElement, UsaDisclosureElement, UsaStoriesElement };
@@ -64,6 +68,9 @@ export type { UsaKanbanElement, UsaSwipeDeckElement, UsaWeatherCardElement, UsaP
 export { defineDatePicker, monthGrid, parseISODate, defineColorPicker, hsvToHex, hexToHsv, defineFileDrop, defineKeyframeEditor };
 export type { UsaDatePickerElement, UsaColorPickerElement, UsaFileDropElement, UsaKeyframeEditorElement };
 
+export { defineMusicPlayer, defineVolumeKnob, defineEqualizer, EQ_PRESETS, defineLyrics, parseLRC };
+export type { UsaMusicPlayerElement, UsaVolumeKnobElement, UsaEqualizerElement, UsaLyricsElement };
+
 /** The widgets by release (tag → define function). */
 export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElementConstructor | undefined>> = {
   '6.2': { 'usa-carousel': defineCarousel, 'usa-tab-bar': defineTabBar, 'usa-disclosure': defineDisclosure, 'usa-stories': defineStories },
@@ -74,6 +81,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '6.7': { 'usa-stepper': defineStepper, 'usa-pagination': definePagination, 'usa-segmented': defineSegmented, 'usa-switch': defineSwitch },
   '6.8': { 'usa-kanban': defineKanban, 'usa-swipe-deck': defineSwipeDeck, 'usa-weather-card': defineWeatherCard, 'usa-pull-cord': definePullCord },
   '6.9': { 'usa-date-picker': defineDatePicker, 'usa-color-picker': defineColorPicker, 'usa-file-drop': defineFileDrop, 'usa-keyframe-editor': defineKeyframeEditor },
+  '7.1': { 'usa-music-player': defineMusicPlayer, 'usa-volume-knob': defineVolumeKnob, 'usa-equalizer': defineEqualizer, 'usa-lyrics': defineLyrics },
 };
 
 /** Every widget tag, in release order. */
@@ -118,5 +126,9 @@ declare global {
     'usa-color-picker': UsaColorPickerElement;
     'usa-file-drop': UsaFileDropElement;
     'usa-keyframe-editor': UsaKeyframeEditorElement;
+    'usa-music-player': UsaMusicPlayerElement;
+    'usa-volume-knob': UsaVolumeKnobElement;
+    'usa-equalizer': UsaEqualizerElement;
+    'usa-lyrics': UsaLyricsElement;
   }
 }
