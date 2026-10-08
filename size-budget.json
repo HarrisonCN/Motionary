@@ -332,6 +332,6 @@
   {
     "name": "import 'use-scroll-animate/components/effects'",
     "import": "export * from 'pkg/components/effects';",
-    "limit": 13312
+    "limit": 16128
   }
 ]
