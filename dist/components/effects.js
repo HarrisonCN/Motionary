@@ -1,7 +1,7 @@
-import { playEffect, registerBuiltinEffects, registerEffects } from './fx.js';
-import { x as defineElement, p as prefersReducedMotion } from '../chunks/base-C3Sw9sAO.js';
+import { playEffect, bindEffect, registerBuiltinEffects, registerEffects } from './fx.js';
+import { x as defineElement, p as prefersReducedMotion, u as adoptStyles } from '../chunks/base-C3Sw9sAO.js';
+import { applyMotionTokens, motionTokensToVars, mergeMotionTokens } from './tokens.js';
 import '../chunks/core-DN3hHbHh.js';
-import './tokens.js';
 import '../chunks/fx-ChjxrMBo.js';
 
 let layer = null;
@@ -1821,6 +1821,345 @@ function defineGestureFx(tag = 'usa-gesture-fx') {
     }, { id: 'usa-gesture-fx', text: 'usa-gesture-fx{display:inline-block;touch-action:none;user-select:none}' });
 }
 
+const saved = new WeakMap();
+/** Toggle `aria-pressed` (or set it) and return the new state. */
+function togglePressed(el, force) {
+    const on = force ?? el.getAttribute('aria-pressed') !== 'true';
+    el.setAttribute('aria-pressed', String(on));
+    return on;
+}
+/** Swap `el`'s label for `ms` (polite live region), then restore it. */
+function swapLabel(el, text, ms) {
+    if (!saved.has(el))
+        saved.set(el, el.innerHTML);
+    el.setAttribute('aria-live', 'polite');
+    el.textContent = text;
+    return new Promise((r) => setTimeout(() => {
+        el.innerHTML = saved.get(el);
+        saved.delete(el);
+        el.removeAttribute('aria-live');
+        r();
+    }, ms));
+}
+/** Add `delta` to the number in `[data-count]` (or `el`), keeping it in `data-count`. Returns the new value. */
+function bumpCount(el, delta, ctx) {
+    const t = el.querySelector('[data-count]') || el;
+    const n = (Number(t.dataset.count ?? (t.textContent || '').replace(/[^\d.-]/g, '')) || 0) + delta;
+    t.dataset.count = String(n);
+    t.textContent = String(n);
+    ctx?.animate(t, [{ transform: `translateY(${delta > 0 ? 60 : -60}%)`, opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 260, easing: 'cubic-bezier(.2,1.4,.4,1)' });
+    return n;
+}
+const pop = (el, ctx, s = 1.25, d = 380) => ctx.animate(el, [{ transform: 'scale(1)' }, { transform: `scale(${s})`, offset: 0.4 }, { transform: 'scale(1)' }], { duration: d, easing: 'cubic-bezier(.2,1.4,.4,1)' });
+/** A few glyphs flying out of the pointer / centre. */
+function burst(el, ctx, glyph, color, n = 6, rise = false) {
+    const { x, y } = origin(el, ctx);
+    return all(Array.from({ length: n }, (_, i) => {
+        const a = rise ? -Math.PI / 2 + rand(-0.6, 0.6) : (i / n) * Math.PI * 2;
+        const d = rand(28, 56);
+        return spawn(x - 7, y - 7, `font-size:14px;line-height:1;color:${color}`, ctx, [{ transform: 'translate(0,0) scale(.4)', opacity: 1 }, { transform: `translate(${Math.cos(a) * d}px,${Math.sin(a) * d}px) scale(1)`, opacity: 0 }], { duration: rand(500, 750), easing: 'cubic-bezier(.2,.8,.3,1)' }, glyph);
+    }));
+}
+const click = (name, description, defaults, run) => ({ name, kind: 'click', description, defaults, run });
+const attn = (name, description, defaults, run) => ({ name, kind: 'attention', description, defaults, run });
+const MICRO_FX = [
+    click('copy-success', 'Copies `text` (or `data-copy` / the target of `for`) to the clipboard and swaps the label to "Copied ✓".', { text: '', label: 'Copied ✓', ms: 1500 }, (el, o, ctx) => {
+        const src = el.getAttribute('for') ? document.getElementById(el.getAttribute('for')) : null;
+        const text = o.text || el.dataset.copy || src?.value || src?.textContent || '';
+        navigator.clipboard?.writeText(text).catch(() => undefined);
+        pop(el, ctx, 1.08);
+        return swapLabel(el, o.label, o.ms);
+    }),
+    click('toggle-morph', 'Toggles `aria-pressed` with a squash-and-stretch morph.', {}, (el, _o, ctx) => {
+        const on = togglePressed(el);
+        return ctx.animate(el, [{ transform: 'scale(1,1)' }, { transform: `scale(${on ? 1.15 : 0.85},${on ? 0.85 : 1.15})`, offset: 0.35 }, { transform: 'scale(1,1)' }], { duration: 360, easing: 'ease-out' });
+    }),
+    click('password-reveal', 'Shows / hides the password input (`for` id, or the previous input) with an eye blink.', { show: 'Hide password', hide: 'Show password' }, (el, o, ctx) => {
+        const input = (el.getAttribute('for') ? document.getElementById(el.getAttribute('for')) : el.previousElementSibling);
+        if (!input || !('type' in input))
+            return;
+        const show = input.type === 'password';
+        input.type = show ? 'text' : 'password';
+        togglePressed(el, show);
+        el.setAttribute('aria-label', show ? o.show : o.hide);
+        return ctx.animate(el, [{ transform: 'scaleY(1)' }, { transform: 'scaleY(.1)', offset: 0.5 }, { transform: 'scaleY(1)' }], { duration: 240, easing: 'ease-in-out' });
+    }),
+    click('favorite-star', 'Toggles a favourite: the star pops and throws little stars (`color`).', { color: '#facc15' }, (el, o, ctx) => {
+        const on = togglePressed(el);
+        return Promise.all([pop(el, ctx, on ? 1.35 : 0.85)?.finished, on ? burst(el, ctx, '★', o.color) : null]);
+    }),
+    click('like-heart', 'Toggles a like: the heart beats and hearts float up (`color`).', { color: '#ff5c8a' }, (el, o, ctx) => {
+        const on = togglePressed(el);
+        return Promise.all([pop(el, ctx, on ? 1.3 : 0.9)?.finished, on ? burst(el, ctx, '♥', o.color, 5, true) : null]);
+    }),
+    click('bookmark-flip', 'Toggles a bookmark with a 3D flip.', {}, (el, _o, ctx) => {
+        togglePressed(el);
+        return ctx.animate(el, [{ transform: 'perspective(400px) rotateY(0)' }, { transform: 'perspective(400px) rotateY(180deg)' }, { transform: 'perspective(400px) rotateY(360deg)' }], { duration: 520, easing: 'ease-in-out' });
+    }),
+    click('download-progress', 'Fills a progress bar over `duration` ms, then shows "Done ✓" (`aria-busy` while running; fires `usa-done`).', { duration: 1600, label: 'Done ✓', color: '#34d399' }, (el, o, ctx) => {
+        if (el.getAttribute('aria-busy') === 'true')
+            return;
+        el.setAttribute('aria-busy', 'true');
+        const [bar, remove] = overlay(el, `background:${o.color}55;transform-origin:left;transform:scaleX(0)`);
+        const a = ctx.animate(bar, [{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], { duration: o.duration, easing: 'linear', fill: 'forwards' });
+        const done = a ? a.finished.catch(() => undefined) : Promise.resolve();
+        return done.then(() => {
+            remove();
+            el.removeAttribute('aria-busy');
+            el.dispatchEvent(new CustomEvent('usa-done', { bubbles: true }));
+            return swapLabel(el, o.label, 1400);
+        });
+    }),
+    click('submit-loading', 'Shows "Sending…" with pulsing dots for `duration` ms, then "Sent ✓" (`aria-busy`, `usa-done`).', { duration: 1200, loading: 'Sending…', label: 'Sent ✓' }, (el, o, ctx) => {
+        if (el.getAttribute('aria-busy') === 'true')
+            return;
+        el.setAttribute('aria-busy', 'true');
+        const t = swapLabel(el, o.loading, o.duration);
+        const a = ctx.animate(el, [{ opacity: 1 }, { opacity: 0.55 }, { opacity: 1 }], { duration: 600, iterations: Math.max(1, Math.round(o.duration / 600)) });
+        return t.then(() => {
+            a?.cancel();
+            el.removeAttribute('aria-busy');
+            el.dispatchEvent(new CustomEvent('usa-done', { bubbles: true }));
+            return swapLabel(el, o.label, 1400);
+        });
+    }),
+    click('send-plane', 'A paper plane ✈ takes off from the button.', { color: '#22d3ee' }, (el, o, ctx) => {
+        const r = el.getBoundingClientRect();
+        pop(el, ctx, 0.92, 200);
+        return spawn(r.left + r.width / 2 - 8, r.top + r.height / 2 - 8, `font-size:16px;color:${o.color}`, ctx, [{ transform: 'translate(0,0) rotate(0)', opacity: 1 }, { transform: 'translate(40px,-10px) rotate(-10deg)', opacity: 1, offset: 0.4 }, { transform: 'translate(160px,-90px) rotate(-25deg)', opacity: 0 }], { duration: 800, easing: 'ease-in' }, '✈')?.finished;
+    }),
+    click('add-to-cart', 'Bumps `[data-count]` by one and floats a "+1" (`text`).', { text: '+1', color: '#34d399' }, (el, o, ctx) => {
+        bumpCount(el, 1, ctx);
+        const { x, y } = origin(el, ctx);
+        return spawn(x - 10, y - 10, `font:700 14px system-ui;color:${o.color}`, ctx, [{ transform: 'translateY(0)', opacity: 1 }, { transform: 'translateY(-40px)', opacity: 0 }], { duration: 700, easing: 'ease-out' }, o.text)?.finished;
+    }),
+    click('counter-bump', 'Adds `step` to `[data-count]` with a rolling number.', { step: 1 }, (el, o, ctx) => void bumpCount(el, Number(o.step) || 1, ctx)),
+    click('upvote', 'Toggles an upvote: the arrow nudges up and `[data-count]` ±1.', {}, (el, _o, ctx) => {
+        const on = togglePressed(el);
+        bumpCount(el, on ? 1 : -1, ctx);
+        return ctx.animate(el, [{ transform: 'translateY(0)' }, { transform: `translateY(${on ? -6 : 4}px)`, offset: 0.4 }, { transform: 'translateY(0)' }], { duration: 320, easing: 'cubic-bezier(.2,1.4,.4,1)' });
+    }),
+    click('clap', 'Counts claps in `[data-count]` with a 👏 burst on every press.', {}, (el, _o, ctx) => {
+        bumpCount(el, 1, ctx);
+        return Promise.all([pop(el, ctx, 1.15, 240)?.finished, burst(el, ctx, '👏', 'inherit', 3, true)]);
+    }),
+    click('emoji-react', 'Pops one `emoji` up from the pointer (reaction button).', { emoji: '🎉' }, (el, o, ctx) => burst(el, ctx, o.emoji, 'inherit', 1, true)),
+    click('refresh-spin', 'Spins the icon one turn (`turns`).', { turns: 1 }, (el, o, ctx) => ctx.animate(el, [{ transform: 'rotate(0)' }, { transform: `rotate(${360 * o.turns}deg)` }], { duration: 600 * o.turns, easing: 'cubic-bezier(.4,0,.2,1)' })),
+    click('trash-shake', 'Shakes, then drops and fades (`remove: true` removes the element afterwards).', { remove: false }, (el, o, ctx) => {
+        const a = ctx.animate(el, [{ transform: 'none', opacity: 1 }, { transform: 'rotate(-6deg)', offset: 0.15 }, { transform: 'rotate(6deg)', offset: 0.3 }, { transform: 'rotate(0)', offset: 0.45, opacity: 1 }, { transform: 'translateY(30px) scale(.8)', opacity: 0 }], { duration: 650, easing: 'ease-in', fill: 'forwards' });
+        const end = () => (o.remove ? el.remove() : a?.cancel());
+        return a ? a.finished.then(end, end) : void end();
+    }),
+    click('check-toggle', 'Toggles a check mark (`aria-checked` for role=checkbox, else `aria-pressed`) that scales in.', {}, (el, _o, ctx) => {
+        const attr = el.getAttribute('role') === 'checkbox' ? 'aria-checked' : 'aria-pressed';
+        const on = el.getAttribute(attr) !== 'true';
+        el.setAttribute(attr, String(on));
+        return ctx.animate(el, on ? [{ transform: 'scale(.6)' }, { transform: 'scale(1.15)', offset: 0.6 }, { transform: 'scale(1)' }] : [{ transform: 'scale(1)' }, { transform: 'scale(.85)' }, { transform: 'scale(1)' }], { duration: 280, easing: 'ease-out' });
+    }),
+    attn('input-shake', 'Shakes an invalid field side to side and sets `aria-invalid` (`color` outline flash).', { color: '#ff5c8a' }, (el, o, ctx) => {
+        el.setAttribute('aria-invalid', 'true');
+        const prev = el.style.outline;
+        el.style.outline = `2px solid ${o.color}`;
+        setTimeout(() => (el.style.outline = prev), 900);
+        return ctx.animate(el, [0, -8, 8, -6, 6, -3, 0].map((x) => ({ transform: `translateX(${x}px)` })), { duration: 420, easing: 'ease-out' });
+    }),
+    attn('error-flash', 'Flashes the element red once (no more than one flash per call).', { color: '#ff5c8a' }, (el, o, ctx) => ctx.animate(el, [{ boxShadow: `0 0 0 0 ${o.color}00` }, { boxShadow: `0 0 0 4px ${o.color}`, offset: 0.3 }, { boxShadow: `0 0 0 0 ${o.color}00` }], { duration: 700 })),
+    attn('success-check', 'A green ✓ badge pops over the element and fades.', { color: '#34d399' }, (el, o, ctx) => {
+        const [b, remove] = overlay(el, `display:grid;place-items:center;font:700 22px system-ui;color:#fff;background:${o.color}d0`);
+        b.textContent = '✓';
+        const a = ctx.animate(b, [{ opacity: 0, transform: 'scale(.6)' }, { opacity: 1, transform: 'scale(1)', offset: 0.3 }, { opacity: 1, offset: 0.75 }, { opacity: 0 }], { duration: 1100, easing: 'ease-out' });
+        return a ? a.finished.then(remove, remove) : void setTimeout(remove, 900);
+    }),
+    attn('nudge-hint', 'A small sideways nudge that says "try me" (`distance`).', { distance: 6 }, (el, o, ctx) => ctx.animate(el, [0, o.distance, 0, o.distance / 2, 0].map((x) => ({ transform: `translateX(${x}px)` })), { duration: 700, easing: 'ease-in-out' })),
+    attn('focus-pulse', 'A ring pulses around the element to draw focus to it (`color`).', { color: '#7c5cff' }, (el, o, ctx) => ctx.animate(el, [{ boxShadow: `0 0 0 0 ${o.color}aa` }, { boxShadow: `0 0 0 12px ${o.color}00` }], { duration: 900, iterations: 2, easing: 'ease-out' })),
+    attn('notify-badge', 'Bumps the badge count (`[data-count]`, `step`) with a pop — for new notifications.', { step: 1 }, (el, o, ctx) => {
+        bumpCount(el, Number(o.step) || 1, ctx);
+        return pop(el, ctx, 1.3, 320);
+    }),
+];
+
+const THEME_ROLES = ['enter', 'hover', 'click', 'attention', 'background'];
+const P = (enter, hover, click, attention, background) => ({
+    enter: { effect: enter },
+    hover: { effect: hover },
+    click: { effect: click },
+    attention: { effect: attention },
+    background: { effect: background },
+});
+const THEMES = {
+    neon: {
+        name: 'neon',
+        vars: { bg: '#07070c', fg: '#e8e8ff', accent: '#22d3ee', 'accent-2': '#ff2bd6', surface: '#11111c', border: '1px solid #22d3ee', radius: '10px', shadow: '0 0 18px #22d3ee66, inset 0 0 12px #ff2bd622', font: 'ui-monospace, SFMono-Regular, Menlo, monospace' },
+        motion: { duration: { fast: 120, normal: 220 }, easing: { standard: 'cubic-bezier(0.2, 0, 0, 1)' } },
+        presets: P('fade-up', 'neon-flicker', 'shockwave', 'neon-flicker', 'starfield'),
+    },
+    paper: {
+        name: 'paper',
+        vars: { bg: '#f6f1e7', fg: '#2b2721', accent: '#c2410c', 'accent-2': '#0f766e', surface: '#fffdf8', border: '1px solid #e3dccd', radius: '4px', shadow: '0 1px 0 #0000000d, 0 10px 24px -14px #00000040', font: 'Georgia, "Times New Roman", serif' },
+        motion: { duration: { fast: 200, normal: 380, slow: 700 }, easing: { standard: 'cubic-bezier(0, 0, 0, 1)' } },
+        presets: P('paper-fold', 'wiggle', 'ink-splash', 'nudge-hint', 'contours'),
+    },
+    glass: {
+        name: 'glass',
+        vars: { bg: 'linear-gradient(135deg, #1e1b4b, #0e7490)', fg: '#f8fafc', accent: '#a5f3fc', 'accent-2': '#c4b5fd', surface: '#ffffff1f', border: '1px solid #ffffff40', radius: '18px', shadow: '0 8px 32px #0000003d', font: 'system-ui, -apple-system, "Segoe UI", sans-serif' },
+        motion: { duration: { normal: 320 }, easing: { standard: 'cubic-bezier(0.22, 1, 0.36, 1)' } },
+        presets: P('blur', 'glass-shine', 'ripple', 'focus-pulse', 'mesh-gradient'),
+    },
+    retro: {
+        name: 'retro',
+        vars: { bg: '#1d1135', fg: '#ffe9a8', accent: '#ff6b35', 'accent-2': '#2ec4b6', surface: '#2a1b4d', border: '3px solid #ffe9a8', radius: '0', shadow: '4px 4px 0 #ff6b35', font: '"Courier New", ui-monospace, monospace' },
+        motion: { duration: { normal: 300 }, easing: { standard: 'steps(6, end)' } },
+        presets: P('clip-up', 'rubber-band', 'star-burst', 'tada', 'retro-scanlines'),
+    },
+    brutalist: {
+        name: 'brutalist',
+        vars: { bg: '#ffffff', fg: '#000000', accent: '#ff3b00', 'accent-2': '#0047ff', surface: '#fff200', border: '3px solid #000000', radius: '0', shadow: '6px 6px 0 #000000', font: '"Arial Black", Arial, sans-serif' },
+        motion: { duration: { fast: 80, normal: 160 }, easing: { standard: 'linear' } },
+        presets: P('drop-bounce', 'jelly', 'brutal-shift', 'shake', 'voronoi'),
+    },
+};
+const THEME_NAMES = Object.keys(THEMES);
+const BASE_CSS = `[data-usa-theme]{background:var(--usa-theme-bg);color:var(--usa-theme-fg);font-family:var(--usa-theme-font)}
+[data-usa-theme] .usa-surface{background:var(--usa-theme-surface);border:var(--usa-theme-border);border-radius:var(--usa-theme-radius);box-shadow:var(--usa-theme-shadow)}
+[data-usa-theme] .usa-accent{color:var(--usa-theme-accent)}
+[data-usa-theme=glass] .usa-surface{-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}`;
+const pack = (t) => {
+    const p = typeof t === 'string' ? THEMES[t] : t;
+    if (!p)
+        throw new Error(`[use-scroll-animate] unknown theme "${String(t)}" — ${THEME_NAMES.join(', ')}`);
+    return p;
+};
+/** The CSS custom properties of a theme (design + motion tokens). */
+function themeVars(t) {
+    const p = pack(t);
+    const out = {};
+    for (const [k, v] of Object.entries(p.vars))
+        out[`--usa-theme-${k}`] = v;
+    return { ...out, ...motionTokensToVars(mergeMotionTokens(p.motion)) };
+}
+/** A theme as a CSS rule (`selector` default `[data-usa-theme=<name>]`) — for SSR / static CSS. */
+function themeCss(t, selector) {
+    const p = pack(t);
+    return `${selector || `[data-usa-theme=${p.name}]`}{${Object.entries(themeVars(p)).map(([k, v]) => `${k}:${v}`).join(';')}}`;
+}
+/** Apply a theme to `root` (default `<html>`). Returns an undo. */
+function applyTheme(t, root) {
+    const p = pack(t);
+    const el = root || document.documentElement;
+    adoptStyles('usa-theme', BASE_CSS);
+    const prevAttr = el.getAttribute('data-usa-theme');
+    el.setAttribute('data-usa-theme', p.name);
+    const vars = Object.entries(p.vars).map(([k, v]) => [`--usa-theme-${k}`, v]);
+    const old = vars.map(([k]) => [k, el.style.getPropertyValue(k)]);
+    for (const [k, v] of vars)
+        el.style.setProperty(k, v);
+    let undoMotion;
+    if (el === document.documentElement)
+        undoMotion = applyMotionTokens(p.motion, el);
+    else {
+        const mv = Object.entries(motionTokensToVars(mergeMotionTokens(p.motion)));
+        const mold = mv.map(([k]) => [k, el.style.getPropertyValue(k)]);
+        for (const [k, v] of mv)
+            el.style.setProperty(k, v);
+        undoMotion = () => mold.forEach(([k, v]) => (v ? el.style.setProperty(k, v) : el.style.removeProperty(k)));
+    }
+    return () => {
+        undoMotion();
+        old.forEach(([k, v]) => (v ? el.style.setProperty(k, v) : el.style.removeProperty(k)));
+        if (prevAttr === null)
+            el.removeAttribute('data-usa-theme');
+        else
+            el.setAttribute('data-usa-theme', prevAttr);
+    };
+}
+/** The effect preset of a theme for a role. */
+function themePreset(t, role) {
+    return pack(t).presets[role];
+}
+/** Play the preset for `role` of the theme on the closest `[data-usa-theme]` (or `theme`). */
+function playThemeEffect(el, role, theme) {
+    const name = theme || el.closest('[data-usa-theme]')?.getAttribute('data-usa-theme') || 'neon';
+    const pr = themePreset(name, role);
+    return playEffect(el, pr.effect, pr.options);
+}
+const THEME_FX = [
+    {
+        name: 'neon-flicker',
+        kind: 'attention',
+        description: 'A neon tube flickering on — dims (never blacks out) twice, well under 3 flashes per second.',
+        defaults: { color: '#22d3ee' },
+        run: (el, o, ctx) => ctx.animate(el, [{ opacity: 1, filter: 'none' }, { opacity: 0.55, offset: 0.2 }, { opacity: 1, filter: `drop-shadow(0 0 6px ${o.color})`, offset: 0.35 }, { opacity: 0.7, offset: 0.6 }, { opacity: 1, filter: `drop-shadow(0 0 10px ${o.color})` }], { duration: 900, easing: 'linear' }),
+    },
+    {
+        name: 'paper-fold',
+        kind: 'enter',
+        description: 'Unfolds like a sheet of paper hinged at the top.',
+        defaults: { duration: 600 },
+        run: (el, o, ctx) => ctx.animate(el, [{ transform: 'perspective(800px) rotateX(-85deg)', transformOrigin: 'top', opacity: 0 }, { transform: 'perspective(800px) rotateX(12deg)', transformOrigin: 'top', opacity: 1, offset: 0.7 }, { transform: 'perspective(800px) rotateX(0)', transformOrigin: 'top', opacity: 1 }], { duration: o.duration, easing: 'ease-out', fill: 'backwards' }),
+    },
+    {
+        name: 'glass-shine',
+        kind: 'hover',
+        description: 'A bright diagonal shine sweeps across frosted glass.',
+        defaults: { duration: 700 },
+        run: (el, o, ctx) => {
+            const [s, remove] = overlay(el, 'overflow:hidden;background:linear-gradient(105deg,transparent 35%,#ffffff8c 50%,transparent 65%);background-size:250% 100%;background-position:120% 0');
+            const a = ctx.animate(s, [{ backgroundPosition: '120% 0' }, { backgroundPosition: '-20% 0' }], { duration: o.duration, easing: 'ease-in-out' });
+            return a ? a.finished.then(remove, remove) : void remove();
+        },
+    },
+    {
+        name: 'retro-scanlines',
+        kind: 'background',
+        description: 'CRT scanlines with a slow roll (static lines under reduced motion; persistent).',
+        reduced: 'run',
+        defaults: { opacity: 0.18 },
+        run: (el, o, ctx) => {
+            const [s, remove] = overlay(el, `opacity:${o.opacity};background:repeating-linear-gradient(0deg,#000 0 1px,transparent 1px 3px);mix-blend-mode:multiply`);
+            const a = ctx.reduced ? null : ctx.animate(s, [{ backgroundPosition: '0 0' }, { backgroundPosition: '0 30px' }], { duration: 2400, iterations: Infinity, easing: 'linear' });
+            return () => {
+                a?.cancel();
+                remove();
+            };
+        },
+    },
+    {
+        name: 'brutal-shift',
+        kind: 'click',
+        description: 'Presses into its hard drop shadow and springs back (brutalist buttons).',
+        defaults: { offset: 6 },
+        run: (el, o, ctx) => ctx.animate(el, [{ transform: 'translate(0,0)' }, { transform: `translate(${o.offset}px,${o.offset}px)`, boxShadow: '0 0 0 #000', offset: 0.3 }, { transform: 'translate(0,0)' }], { duration: 260, easing: 'ease-out' }),
+    },
+];
+/** `<usa-theme name="neon | paper | glass | retro | brutalist">` — a themed subtree. */
+function defineTheme(tag = 'usa-theme') {
+    return defineElement(tag, (Base) => class UsaTheme extends Base {
+        static get observedAttributes() {
+            return ['name'];
+        }
+        get theme() {
+            const n = this.str('name', 'neon');
+            return THEMES[n] ? n : 'neon';
+        }
+        mount() {
+            this.onCleanup(applyTheme(this.theme, this));
+            this.querySelectorAll('[data-theme-fx]').forEach((el) => {
+                const role = (el.dataset.themeFx || 'click');
+                if (!THEME_ROLES.includes(role))
+                    return;
+                const pr = themePreset(this.theme, role);
+                const trigger = role === 'attention' ? 'click' : role === 'background' ? 'load' : role;
+                try {
+                    this.onCleanup(bindEffect(el, pr.effect, { ...(pr.options || {}), trigger }));
+                }
+                catch {
+                    /* effect not registered: call registerAllEffects() */
+                }
+            });
+        }
+    }, { id: 'usa-theme-el', text: 'usa-theme{display:block}' });
+}
+
 /**
  * use-scroll-animate/components/effects — the 5.x effect packs, all
  * registered through `registerEffect()` (5.0) and playable with
@@ -1841,6 +2180,8 @@ const EFFECT_PACKS = {
     generative: GENERATIVE_FX,
     audio: AUDIO_FX,
     cursor: CURSOR_FX,
+    micro: MICRO_FX,
+    themes: THEME_FX,
 };
 /** 5.1: card & click effects 2.0. */
 function registerCardClickEffects() {
@@ -1866,11 +2207,17 @@ function registerAudioEffects() {
 function registerCursorEffects() {
     registerEffects(EFFECT_PACKS.cursor);
 }
+/** 5.8: micro-interactions + theme-pack effects. */
+function registerMicroEffects() {
+    registerEffects(EFFECT_PACKS.micro);
+    registerEffects(EFFECT_PACKS.themes);
+}
 /** Define the 5.x elements of this entry (`<usa-story>`, …) under their default tags. */
 function defineEffectElements() {
     defineStory();
     defineAudio();
     defineGestureFx();
+    defineTheme();
 }
 /** Register the built-ins and every pack (idempotent). */
 function registerAllEffects() {
@@ -1879,5 +2226,5 @@ function registerAllEffects() {
         registerEffects(defs);
 }
 
-export { AUDIO_FX, CARD_FX, CLICK_FX, CURSOR_FX, EFFECT_PACKS, GENERATIVE_FX, GESTURES, PAGE_FX, PHYSICS_FX, STORY_TEMPLATES, angleDelta, bindBeat, bindGesture, bounceKeyframes, canvasBackground, createBeatDetector, defineAudio, defineEffectElements, defineGestureFx, defineStory, disableAudio, enableAudio, flingVelocity, formatCount, fxLayer, getAudio, hexRgb, noise2, onBeat, registerAllEffects, registerAudioEffects, registerCardClickEffects, registerCursorEffects, registerGenerativeEffects, registerPageEffects, registerPhysicsEffects, solveSpring, springKeyframes, storyProgress };
+export { AUDIO_FX, CARD_FX, CLICK_FX, CURSOR_FX, EFFECT_PACKS, GENERATIVE_FX, GESTURES, MICRO_FX, PAGE_FX, PHYSICS_FX, STORY_TEMPLATES, THEMES, THEME_FX, THEME_NAMES, THEME_ROLES, angleDelta, applyTheme, bindBeat, bindGesture, bounceKeyframes, bumpCount, canvasBackground, createBeatDetector, defineAudio, defineEffectElements, defineGestureFx, defineStory, defineTheme, disableAudio, enableAudio, flingVelocity, formatCount, fxLayer, getAudio, hexRgb, noise2, onBeat, playThemeEffect, registerAllEffects, registerAudioEffects, registerCardClickEffects, registerCursorEffects, registerGenerativeEffects, registerMicroEffects, registerPageEffects, registerPhysicsEffects, solveSpring, springKeyframes, storyProgress, swapLabel, themeCss, themePreset, themeVars, togglePressed };
 //# sourceMappingURL=effects.js.map
