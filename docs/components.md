@@ -85,7 +85,6 @@ All attributes are optional unless noted. Events are `CustomEvent`s that bubble,
 | `<usa-tilt>` | 3D tilt toward the pointer, optional glare | `max` (10°), `scale` (1.03), `perspective` (900), `glare`, `reverse`, `disabled` | `--usa-tilt-x/-y` (−1…1) for inner parallax |
 | `<usa-spotlight>` | Windows Fluent **Reveal highlight**: light follows the pointer across a group, lighting borders | `size` (160), `color`, `border` (1), `no-fill`; items = children or `[data-spotlight]` | — |
 | `<usa-press>` | Press feedback: dip + spring back, or `bounce` | `scale` (0.95), `bounce`, `disabled`, `block` | `pressed` |
-| `<usa-toggle>` | Windows 11-style switch, form-associated | `checked`, `disabled`, `name`, `value`, `label` | `checked`, `toggle(force?)`; `change`, `usa:change` |
 
 ### 4. Loading & feedback — `components/feedback`
 
@@ -167,7 +166,6 @@ Presets (`SPRING_PRESETS`): `default` (170/26), `gentle` (120/14), `wobbly` (180
 | `<usa-navbar>` | Auto-hiding app bar | `threshold` (64), `shrink`, `target` | `show()`, `hiddenByScroll`; `usa:hide`, `usa:show` |
 | `<usa-slider>` | Range slider (form-associated) | `value`, `min`, `max`, `step`, `name`, `label`, `bubble`, `disabled` | `value`; `input`/`change`, `usa:input`/`usa:change`; `--usa-slider` |
 | `<usa-rating>` | Star rating | `value`, `max` (5), `icon`, `readonly`, `label`, `name` | `value`; `change`, `usa:change` |
-| `<usa-tooltip>` | Tooltip on hover / focus | `text`, `placement` (`top`), `delay` (300) | `show()`, `hide()` |
 | `<usa-popover>` | Click-to-open panel (`[data-popover]`) | `open`, `placement` (`bottom`) | `open`, `toggle()`; `usa:open`, `usa:close` |
 | `<usa-badge>` | Count / dot badge | `value`, `max` (99), `dot`, `pulse`, `show-zero`, `label` | `value` |
 | `<usa-avatar-stack>` | Overlapping avatars | `max` (5), `size` (36), `overlap` (0.35), `label` | — |
@@ -716,6 +714,19 @@ const manifest = packManifest('@acme/motion-snow', '1.0.0', MY_EFFECTS, { licens
 - Focus & feedback: `focus-draw` · `marching-ants` · `success-check` · `highlight-sweep`.
 - Marketplace (`motionary/effect-pack` v1): `{ format, version: 1, name, packVersion, effects: [{ name, kind, description, defaults }], license, author, entry, requires }`.
 - 6.9 deprecations (removed in 7.0): see [upgrading-7.md](./upgrading-7.md) — `npx usa-codemod-7 --write src`.
+
+### v7.0 WebGPU shader backend + per-pack entries (`motionary/fx/*`)
+
+```js
+import { registerGpuPack } from 'motionary/fx/gpu';          // = motionary/components/fx-gpu
+import { registerEffectPacks } from 'motionary/fx';          // every effect pack
+registerGpuPack();
+// <usa-fx effect="fluid" trigger="load"> → WebGPU where available, else WebGL2, else Canvas 2D
+document.querySelector('.hero').dataset.usaBackend;          // 'webgpu' | 'webgl2' | 'canvas'
+```
+- `options.backend`: `'auto'` (default: WebGPU → WebGL2 → Canvas 2D) · `'webgpu'` · `'webgl2'` · `'canvas'`.
+- `glslToWgsl(body)` translates the 6.x shader-body dialect (vec / float / int declarations, constructors, literals, `for` loops, `u_c0…u_ptr` uniforms) and throws on unsupported constructs (ternaries, `mod`, `discard`) so the effect falls back to WebGL2; `ShaderSpec.wgsl` overrides it.
+- Removed in 7.0: `registerFx2`, `FX2_PACKS`, the version-suffixed 6.x registrars, `<usa-tooltip>`, `<usa-toggle>` — see [upgrading-7.md](./upgrading-7.md).
 
 ## Frameworks
 

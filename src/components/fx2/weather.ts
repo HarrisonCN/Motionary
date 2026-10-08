@@ -18,7 +18,6 @@
  * static frame under reduced motion.
  */
 import type { EffectContext, EffectDefinition } from '../fx/registry';
-import { deprecate } from '../base';
 import { registerEffects } from '../fx/registry';
 import { canvasBackground, type GenerativeSpec } from '../effects/generative';
 import { rand } from '../effects/shared';
@@ -268,8 +267,3 @@ export function registerWeatherPack(): void {
   registerEffects(WEATHER_FX);
 }
 
-/** @deprecated since 6.9 — use `registerWeatherPack()` (removed in 7.0; `npx usa-codemod-7`). */
-export function registerWeatherEffects(): void {
-  deprecate('registerWeatherEffects', 'registerWeatherEffects() is deprecated since 6.9 and removed in 7.0 — use registerWeatherPack() (npx usa-codemod-7).');
-  registerWeatherPack();
-}

@@ -1,8 +1,8 @@
 'use strict';
 
-var base = require('../chunks/base-BaQV-2ha.cjs');
 var registry = require('../chunks/registry-DehBVRDV.cjs');
 var shared = require('../chunks/shared-jkgRH-Hx.cjs');
+require('../chunks/base-BaQV-2ha.cjs');
 
 const NS = 'http://www.w3.org/2000/svg';
 const raf = (f) => (typeof requestAnimationFrame === 'function' ? requestAnimationFrame(f) : 0);
@@ -284,15 +284,9 @@ const MORPH2_FX = [
 function registerMorphPack() {
     registry.registerEffects(MORPH2_FX);
 }
-/** @deprecated since 6.9 — use `registerMorphPack()` (removed in 7.0; `npx usa-codemod-7`). */
-function registerMorphEffects2() {
-    base.deprecate('registerMorphEffects2', 'registerMorphEffects2() is deprecated since 6.9 and removed in 7.0 — use registerMorphPack() (npx usa-codemod-7).');
-    registerMorphPack();
-}
 
 exports.MORPH2_FX = MORPH2_FX;
 exports.pointsToPath = pointsToPath;
-exports.registerMorphEffects2 = registerMorphEffects2;
 exports.registerMorphPack = registerMorphPack;
 exports.samplePath = samplePath;
 //# sourceMappingURL=fx-morph.cjs.map

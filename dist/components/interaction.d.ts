@@ -76,26 +76,9 @@ interface UsaPressElement extends UsaElement {
 declare function definePress(tag?: string): CustomElementConstructor | undefined;
 
 /**
- * `<usa-toggle>` — an accessible switch whose knob stretches while pressed
- * and glides across (the Windows 11 / iOS toggle). `role="switch"`,
- * keyboard (Space / Enter), and form-associated where `ElementInternals`
- * exists (submits `value`, default `"on"`, under `name` when checked).
- *
- * Attributes: `checked`, `disabled`, `name`, `value`, `label`
- * (accessible name if there is no `aria-label` / `<label>`). Events:
- * `change` and `usa:change` (`detail.checked`). Reduced motion: no glide.
- */
-interface UsaToggleElement extends UsaElement {
-    checked: boolean;
-    disabled: boolean;
-    toggle(force?: boolean): void;
-}
-declare function defineToggle(tag?: string): CustomElementConstructor | undefined;
-
-/**
  * motionary/components/interaction — micro-interactions.
  * `<usa-ripple>`, `<usa-magnetic>`, `<usa-tilt>`, `<usa-spotlight>`,
- * `<usa-press>`, `<usa-toggle>`.
+ * `<usa-press>`.
  */
 
 /** Register every component of this category under its default tag. */
@@ -107,9 +90,8 @@ declare global {
         'usa-tilt': UsaTiltElement;
         'usa-spotlight': UsaSpotlightElement;
         'usa-press': UsaPressElement;
-        'usa-toggle': UsaToggleElement;
     }
 }
 
-export { defineInteractionComponents, defineMagnetic, definePress, defineRipple, defineSpotlight, defineTilt, defineToggle };
-export type { UsaMagneticElement, UsaPressElement, UsaRippleElement, UsaSpotlightElement, UsaTiltElement, UsaToggleElement };
+export { defineInteractionComponents, defineMagnetic, definePress, defineRipple, defineSpotlight, defineTilt };
+export type { UsaMagneticElement, UsaPressElement, UsaRippleElement, UsaSpotlightElement, UsaTiltElement };

@@ -1,9 +1,9 @@
 'use strict';
 
-var base = require('../chunks/base-BaQV-2ha.cjs');
 var registry = require('../chunks/registry-DehBVRDV.cjs');
 var generative = require('../chunks/generative-BHIj-NU0.cjs');
 var shared = require('../chunks/shared-jkgRH-Hx.cjs');
+require('../chunks/base-BaQV-2ha.cjs');
 
 /** Track the pointer over `el` as 0–1 coordinates (`fn(x, y, inside)`); starts at (`x0`, `y0`). Returns a remover. */
 function trackPointer(el, ctx, fn, x0 = 0.3, y0 = 0.25) {
@@ -214,14 +214,8 @@ const LIGHT_FX = [
 function registerLightPack() {
     registry.registerEffects(LIGHT_FX);
 }
-/** @deprecated since 6.9 — use `registerLightPack()` (removed in 7.0; `npx usa-codemod-7`). */
-function registerLightEffects() {
-    base.deprecate('registerLightEffects', 'registerLightEffects() is deprecated since 6.9 and removed in 7.0 — use registerLightPack() (npx usa-codemod-7).');
-    registerLightPack();
-}
 
 exports.LIGHT_FX = LIGHT_FX;
-exports.registerLightEffects = registerLightEffects;
 exports.registerLightPack = registerLightPack;
 exports.trackPointer = trackPointer;
 //# sourceMappingURL=fx-light.cjs.map

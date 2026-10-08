@@ -1,17 +1,16 @@
 /**
  * motionary/components/interaction — micro-interactions.
  * `<usa-ripple>`, `<usa-magnetic>`, `<usa-tilt>`, `<usa-spotlight>`,
- * `<usa-press>`, `<usa-toggle>`.
+ * `<usa-press>`.
  */
 import { defineRipple, type UsaRippleElement } from './ripple';
 import { defineMagnetic, type UsaMagneticElement } from './magnetic';
 import { defineTilt, type UsaTiltElement } from './tilt';
 import { defineSpotlight, type UsaSpotlightElement } from './spotlight';
 import { definePress, type UsaPressElement } from './press';
-import { defineToggle, type UsaToggleElement } from './toggle';
 
-export { defineRipple, defineMagnetic, defineTilt, defineSpotlight, definePress, defineToggle };
-export type { UsaRippleElement, UsaMagneticElement, UsaTiltElement, UsaSpotlightElement, UsaPressElement, UsaToggleElement };
+export { defineRipple, defineMagnetic, defineTilt, defineSpotlight, definePress };
+export type { UsaRippleElement, UsaMagneticElement, UsaTiltElement, UsaSpotlightElement, UsaPressElement };
 
 /** Register every component of this category under its default tag. */
 export function defineInteractionComponents(): void {
@@ -20,7 +19,6 @@ export function defineInteractionComponents(): void {
   defineTilt();
   defineSpotlight();
   definePress();
-  defineToggle();
 }
 
 declare global {
@@ -30,6 +28,5 @@ declare global {
     'usa-tilt': UsaTiltElement;
     'usa-spotlight': UsaSpotlightElement;
     'usa-press': UsaPressElement;
-    'usa-toggle': UsaToggleElement;
   }
 }

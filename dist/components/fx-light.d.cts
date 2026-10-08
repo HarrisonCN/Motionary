@@ -68,7 +68,5 @@ declare function trackPointer(el: HTMLElement, ctx: EffectContext, fn: (x: numbe
 declare const LIGHT_FX: EffectDefinition[];
 /** Register the 6.4 light & materials pack (idempotent). */
 declare function registerLightPack(): void;
-/** @deprecated since 6.9 — use `registerLightPack()` (removed in 7.0; `npx usa-codemod-7`). */
-declare function registerLightEffects(): void;
 
-export { LIGHT_FX, registerLightEffects, registerLightPack, trackPointer };
+export { LIGHT_FX, registerLightPack, trackPointer };

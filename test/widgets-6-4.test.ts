@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { installComponentMocks, mount, anims } from './components-setup';
 import { configureComponents } from '../src/components/base';
 import { defineWidgets, WIDGETS, PROGRESS_VARIANTS, SKELETON_VARIANTS } from '../src/components/widgets';
-import { LIGHT_FX, registerLightEffects, registerFx2, FX2_PACKS, trackPointer } from '../src/components/fx2';
+import { LIGHT_FX, registerLightPack, registerEffectPacks, EFFECT_PACKS, trackPointer } from '../src/components/fx2';
 import { getEffect, playEffect } from '../src/components/fx';
 import { COMPONENT_ITEMS } from '../showcase/catalog-components.js';
 import { COMPONENTS, componentSnippets } from '../showcase/components-catalog.js';
@@ -145,11 +145,11 @@ describe('<usa-star-rating>', () => {
 
 describe('6.4 light & materials', () => {
   it('registers 6 effects in motionary/components/fx-light', () => {
-    registerLightEffects();
-    registerFx2();
+    registerLightPack();
+    registerEffectPacks();
     expect(LIGHT_FX.map((d) => d.name)).toEqual(['light-follow', 'refraction', 'brushed-metal', 'pearlescent', 'god-rays', 'pointer-shadow']);
     for (const d of LIGHT_FX) expect(getEffect(d.name)).toBe(d);
-    expect(FX2_PACKS.light).toBe(LIGHT_FX);
+    expect(EFFECT_PACKS.light).toBe(LIGHT_FX);
     expect(COMPONENT_ENTRIES['fx-light']).toBe('fx2/light');
   });
   it('trackPointer reports 0–1 coordinates and stops under reduced motion', () => {
@@ -167,7 +167,7 @@ describe('6.4 light & materials', () => {
     expect(s2).toHaveLength(1);
   });
   it('surface effects add overlays / lens / shadow and clean up', () => {
-    registerLightEffects();
+    registerLightPack();
     const el = mount<HTMLElement>('<div style="width:100px;height:80px"></div>');
     for (const n of ['light-follow', 'brushed-metal', 'pearlescent']) {
       const d = getEffect(n)!;
@@ -187,7 +187,7 @@ describe('6.4 light & materials', () => {
     expect(el.style.filter).toBe('');
   });
   it('god-rays draws on a canvas behind the content', async () => {
-    registerLightEffects();
+    registerLightPack();
     const calls: string[] = [];
     (HTMLCanvasElement.prototype as any).getContext = () => new Proxy({}, { get: (_t, p: string) => (p === 'createLinearGradient' || p === 'createRadialGradient' ? () => ({ addColorStop() {} }) : (...a: unknown[]) => void calls.push(p)), set: () => true });
     vi.stubGlobal('requestAnimationFrame', () => 1);

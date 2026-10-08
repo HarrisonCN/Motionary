@@ -1,4 +1,4 @@
-import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-DucKMQr_.js';
+import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-C04JP8g4.js';
 
 /**
  * motionary/components/lazy — lazy, per-category registration (v2.9).

@@ -1,7 +1,165 @@
-import { u as deprecate } from './base-D5MHqeDd.js';
-import { registerEffects } from './registry-CTLWeg-J.js';
-import { c as canvasBackground, h as hexRgb, n as noise2 } from './generative-2LhxG5BJ.js';
+import { registerEffects } from './registry-D23neB4M.js';
+import { h as hexRgb, c as canvasBackground, n as noise2 } from './generative-2LhxG5BJ.js';
 import { b as origin, s as spawn, a as all, r as rand } from './shared-CkKHWrtJ.js';
+
+/** WGSL shared by every shader: uniforms, hash, value noise, fbm (mirrors `GLSL_HEAD`). */
+const WGSL_HEAD = `struct U{res:vec2f,ptr:vec2f,t:f32,speed:f32,scale:f32,pad:f32,c0:vec4f,c1:vec4f,c2:vec4f};
+@group(0) @binding(0) var<uniform> u:U;
+fn h(p:vec2f)->f32{return fract(sin(dot(p,vec2f(127.1,311.7)))*43758.5453);}
+fn n(p:vec2f)->f32{let i=floor(p);var f=fract(p);f=f*f*(3.0-2.0*f);return mix(mix(h(i),h(i+vec2f(1.0,0.0)),f.x),mix(h(i+vec2f(0.0,1.0)),h(i+vec2f(1.0,1.0)),f.x),f.y);}
+fn fbm(p0:vec2f)->f32{var v=0.0;var a=0.5;var p=p0;for(var k=0;k<5;k++){v+=a*n(p);p=p*2.03+vec2f(1.7,9.2);a*=0.5;}return v;}
+@vertex fn vs(@builtin(vertex_index) i:u32)->@builtin(position) vec4f{var q=array<vec2f,3>(vec2f(-1.0,-1.0),vec2f(3.0,-1.0),vec2f(-1.0,3.0));return vec4f(q[i],0.0,1.0);}
+`;
+/**
+ * Translate a GLSL `main()` body (the 6.x `ShaderSpec.body` dialect) to WGSL
+ * statements. Throws on constructs it does not support (ternaries, `mod`,
+ * `discard`, user functions) so the caller can fall back to WebGL2.
+ */
+function glslToWgsl(body) {
+    if (/[?]|\bmod\s*\(|\bdiscard\b|\bstruct\b|\buniform\b|\bvoid\b/.test(body))
+        throw new Error('unsupported GLSL construct');
+    let s = body;
+    s = s.replace(/\bu_c([012])\b/g, 'u.c$1.xyz').replace(/\bu_ptr\b/g, 'u.ptr').replace(/\bu_res\b/g, 'u.res').replace(/\bu_t\b/g, 'u.t');
+    s = s.replace(/for\s*\(\s*int\s+(\w+)\s*=/g, 'for(var $1:i32=');
+    s = s.replace(/\bfloat\s+(\w+)\s*=/g, 'var $1:f32=');
+    s = s.replace(/\bvec([234])\s+(\w+)\s*=/g, 'var $2:vec$1f=');
+    s = s.replace(/\bint\s+(\w+)\s*=/g, 'var $1:i32=');
+    s = s.replace(/\bvec([234])\s*\(/g, 'vec$1f(').replace(/\bfloat\s*\(/g, 'f32(').replace(/\bint\s*\(/g, 'i32(').replace(/\batan\s*\(([^(),]+),/g, 'atan2($1,');
+    s = s.replace(/(\d)\.(?![\d\w])/g, '$1.0');
+    s = s.replace(/(^|[^\w.])\.(\d)/g, '$10.$2');
+    if (/\b(float|vec[234]|int|mat[234])\s+\w+\s*[,;]/.test(s))
+        throw new Error('unsupported declaration');
+    return s;
+}
+/** The full WGSL module for a body. */
+const wgslModule = (body) => `${WGSL_HEAD}@fragment fn fs(@builtin(position) fc:vec4f)->@location(0) vec4f{var uv=vec2f(fc.x,u.res.y-fc.y)/u.res;var p=uv*vec2f(u.res.x/u.res.y,1.0)*u.scale;var t=u.t*u.speed;var o=vec4f(0.0,0.0,0.0,1.0);${body}return o;}`;
+/** `true` when `navigator.gpu` exists (the adapter may still be refused). */
+const supportsWebGPU = () => typeof navigator !== 'undefined' && !!navigator.gpu;
+const rgb$1 = (c) => [...hexRgb(c).map((v) => v / 255), 1];
+/**
+ * Start a WebGPU shader background behind `el`. Resolves to its cleanup, or
+ * `null` when WebGPU cannot run this shader (the caller falls back).
+ */
+async function webgpuBackground(el, fx, spec, o) {
+    if (!supportsWebGPU())
+        return null;
+    let code;
+    try {
+        code = wgslModule(spec.wgsl || glslToWgsl(spec.body));
+    }
+    catch {
+        return null;
+    }
+    const gpu = navigator.gpu;
+    try {
+        const adapter = await gpu.requestAdapter({ powerPreference: 'low-power' });
+        if (!adapter)
+            return null;
+        const device = await adapter.requestDevice();
+        const module = device.createShaderModule({ code });
+        const info = await module.getCompilationInfo?.();
+        if (info?.messages?.some((m) => m.type === 'error'))
+            return (device.destroy?.(), null);
+        if (!el.isConnected)
+            return (device.destroy?.(), null);
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('webgpu');
+        if (!ctx)
+            return (device.destroy?.(), null);
+        const format = gpu.getPreferredCanvasFormat();
+        ctx.configure({ device, format, alphaMode: 'opaque' });
+        device.pushErrorScope?.('validation');
+        const pipeline = device.createRenderPipeline({ layout: 'auto', vertex: { module, entryPoint: 'vs' }, fragment: { module, entryPoint: 'fs', targets: [{ format }] }, primitive: { topology: 'triangle-list' } });
+        const ubuf = device.createBuffer({ size: 80, usage: 0x40 | 0x8 /* UNIFORM | COPY_DST */ });
+        const bind = device.createBindGroup({ layout: pipeline.getBindGroupLayout(0), entries: [{ binding: 0, resource: { buffer: ubuf } }] });
+        const err = await device.popErrorScope?.();
+        if (err)
+            return (device.destroy?.(), null);
+        canvas.setAttribute('aria-hidden', 'true');
+        canvas.setAttribute('data-usa-fx-canvas', '');
+        canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:-1;border-radius:inherit';
+        const restore = [];
+        const set = (k, v) => {
+            restore.push([k, el.style[k]]);
+            el.style[k] = v;
+        };
+        if (getComputedStyle(el).position === 'static')
+            set('position', 'relative');
+        set('isolation', 'isolate');
+        el.prepend(canvas);
+        el.dataset.usaBackend = 'webgpu';
+        const cols = o.colors || [];
+        const data = new Float32Array(20);
+        data.set([Number(o.speed) || 1, Number(o.scale) || 3, 0], 5);
+        [0, 1, 2].forEach((i) => data.set(rgb$1(cols[i] || cols[0] || '#7c5cff'), 8 + i * 4));
+        let ptr = [0.5, 0.5];
+        let quality = Math.min(1, Math.max(0.3, Number(o.quality) || 0.75));
+        let raf = 0;
+        let visible = true;
+        const t0 = performance.now();
+        const resize = () => {
+            const r = el.getBoundingClientRect();
+            const dpr = Math.min(2, devicePixelRatio || 1) * quality;
+            canvas.width = Math.max(1, Math.round(r.width * dpr));
+            canvas.height = Math.max(1, Math.round(r.height * dpr));
+        };
+        const draw = (t) => {
+            data.set([canvas.width, canvas.height, ptr[0], ptr[1], t], 0);
+            device.queue.writeBuffer(ubuf, 0, data);
+            const enc = device.createCommandEncoder();
+            const pass = enc.beginRenderPass({ colorAttachments: [{ view: ctx.getCurrentTexture().createView(), loadOp: 'clear', storeOp: 'store', clearValue: { r: 0, g: 0, b: 0, a: 1 } }] });
+            pass.setPipeline(pipeline);
+            pass.setBindGroup(0, bind);
+            pass.draw(3);
+            pass.end();
+            device.queue.submit([enc.finish()]);
+        };
+        let last = 0;
+        let slow = 0;
+        const frame = (now) => {
+            raf = 0;
+            if (last && now - last > 34 && ++slow > 24 && quality > 0.3)
+                ((quality = Math.max(0.3, quality - 0.15)), (slow = 0), resize());
+            last = now;
+            draw((now - t0) / 1000);
+            if (visible && !document.hidden)
+                raf = requestAnimationFrame(frame);
+        };
+        const start = () => {
+            if (!raf && !fx.reduced)
+                raf = requestAnimationFrame(frame);
+        };
+        resize();
+        draw(fx.reduced ? 7 : 0);
+        const move = (e) => {
+            const r = el.getBoundingClientRect();
+            ptr = [(e.clientX - r.left) / Math.max(1, r.width), 1 - (e.clientY - r.top) / Math.max(1, r.height)];
+        };
+        el.addEventListener('pointermove', move);
+        const io = typeof IntersectionObserver === 'function' ? new IntersectionObserver((es) => (visible = es.some((e) => e.isIntersecting)) && start()) : null;
+        io?.observe(el);
+        const ro = typeof ResizeObserver === 'function' ? new ResizeObserver(() => (resize(), fx.reduced && draw(7))) : null;
+        ro?.observe(el);
+        const vis = () => !document.hidden && visible && start();
+        document.addEventListener('visibilitychange', vis);
+        start();
+        return () => {
+            cancelAnimationFrame(raf);
+            io?.disconnect();
+            ro?.disconnect();
+            el.removeEventListener('pointermove', move);
+            document.removeEventListener('visibilitychange', vis);
+            canvas.remove();
+            for (const [k, v] of restore)
+                el.style[k] = v;
+            delete el.dataset.usaBackend;
+            device.destroy?.();
+        };
+    }
+    catch {
+        return null;
+    }
+}
 
 /** GLSL shared by every shader: uniforms, hash, value noise, fbm. */
 const GLSL_HEAD = `#version 300 es
@@ -48,9 +206,28 @@ function compile(gl, frag) {
 const rgb = (c) => hexRgb(c).map((v) => v / 255);
 /**
  * Mount a shader background behind `el` (options: `colors` [3 hex], `speed`,
- * `scale`, `quality`, `backend` = `'auto' | 'webgl2' | 'canvas'`). Returns the cleanup.
+ * `scale`, `quality`, `backend` = `'auto' | 'webgpu' | 'webgl2' | 'canvas'`).
+ * 7.0: `auto` tries WebGPU first, then WebGL2, then Canvas 2D
+ * (`el.dataset.usaBackend` names the one running). Returns the cleanup.
  */
 function shaderBackground(el, fx, spec, o) {
+    const want = o.backend || 'auto';
+    if ((want === 'auto' || want === 'webgpu') && supportsWebGPU()) {
+        let stop = null;
+        let dead = false;
+        webgpuBackground(el, fx, spec, o).then((s) => {
+            if (dead)
+                return s?.();
+            stop = s || webglBackground(el, fx, spec, o);
+        });
+        return () => {
+            dead = true;
+            stop?.();
+        };
+    }
+    return webglBackground(el, fx, spec, o);
+}
+function webglBackground(el, fx, spec, o) {
     const fallback = () => {
         el.dataset.usaBackend = 'canvas';
         const stop = canvasBackground(el, fx, spec.fallback, o);
@@ -377,11 +554,6 @@ GPU_FX.push({
 function registerGpuPack() {
     registerEffects(GPU_FX);
 }
-/** @deprecated since 6.9 — use `registerGpuPack()` (removed in 7.0; `npx usa-codemod-7`). */
-function registerGpuEffects() {
-    deprecate('registerGpuEffects', 'registerGpuEffects() is deprecated since 6.9 and removed in 7.0 — use registerGpuPack() (npx usa-codemod-7).');
-    registerGpuPack();
-}
 
-export { GPU_FX as G, GLSL_HEAD as a, registerGpuEffects as b, supportsWebGL2 as c, fieldFallback as f, registerGpuPack as r, shaderBackground as s };
-//# sourceMappingURL=gpu-DPhMkJq6.js.map
+export { GPU_FX as G, WGSL_HEAD as W, GLSL_HEAD as a, supportsWebGL2 as b, supportsWebGPU as c, wgslModule as d, fieldFallback as f, glslToWgsl as g, registerGpuPack as r, shaderBackground as s, webgpuBackground as w };
+//# sourceMappingURL=gpu-Bkw605Ds.js.map

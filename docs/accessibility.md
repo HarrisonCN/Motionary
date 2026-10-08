@@ -10,7 +10,7 @@ Audited in v2.9 (automated sweep in `test/components-a11y-frameworks.test.ts` + 
 ## Keyboard
 | Component | Keys |
 |---|---|
-| `<usa-toggle>`, `<usa-checkbox>`, `<usa-like>` | Space / Enter |
+| `<usa-switch>`, `<usa-checkbox>`, `<usa-like>` | Space / Enter |
 | `<usa-hold>` | hold Space / Enter |
 | `<usa-slider>` | ←/→/↑/↓, PageUp/PageDown, Home/End |
 | `<usa-rating>` | ←/→, number keys, Home/End |
@@ -20,7 +20,7 @@ Audited in v2.9 (automated sweep in `test/components-a11y-frameworks.test.ts` + 
 | `<usa-carousel-3d>` | ← / → |
 | `<usa-fullpage>` | PageUp/PageDown, ↑/↓, Space, Home/End |
 | `<usa-card effect="flip" trigger="click">`, `effect="expand"` | Enter / Space; Esc collapses |
-| `<usa-drawer>`, `<usa-bottom-sheet>`, `<usa-popover>`, `<usa-fab>`, `<usa-tooltip>`, `<usa-dialog>` | Esc closes, focus returns to the trigger |
+| `<usa-drawer>`, `<usa-bottom-sheet>`, `<usa-popover>`, `<usa-fab>`, `<usa-tip>`, `<usa-dialog>` | Esc closes, focus returns to the trigger |
 | `<usa-double-tap>` | `L` |
 
 ## Roles & states

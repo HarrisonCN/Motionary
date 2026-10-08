@@ -169,7 +169,7 @@ usa-scrolly[data-step-name="webview2"] .g-scrolly-shape { border-radius: 40% 10%
 #demo-dialog p { color: var(--muted); }
 #demo-dialog .dlg-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 18px; }
 usa-toaster .usa-toast { --usa-toast-bg: color-mix(in srgb, var(--surface) 88%, transparent); --usa-toast-fg: var(--text); }
-usa-toggle { --usa-toggle-on: var(--accent); }
+usa-switch { --usa-sw-c: var(--accent); }
 
 @media (prefers-reduced-motion: reduce) {
   .demo-jump b, .demo-acrylic-bg > i { animation: none; }

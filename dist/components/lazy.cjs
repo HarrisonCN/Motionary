@@ -1,6 +1,6 @@
 'use strict';
 
-var indexTags = require('../chunks/index-tags-wv0R_vkO.cjs');
+var indexTags = require('../chunks/index-tags-BTMwrfgV.cjs');
 
 /**
  * motionary/components/lazy — lazy, per-category registration (v2.9).

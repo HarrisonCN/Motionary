@@ -394,25 +394,9 @@ interface UsaPressElement extends UsaElement {
 }
 
 /**
- * `<usa-toggle>` — an accessible switch whose knob stretches while pressed
- * and glides across (the Windows 11 / iOS toggle). `role="switch"`,
- * keyboard (Space / Enter), and form-associated where `ElementInternals`
- * exists (submits `value`, default `"on"`, under `name` when checked).
- *
- * Attributes: `checked`, `disabled`, `name`, `value`, `label`
- * (accessible name if there is no `aria-label` / `<label>`). Events:
- * `change` and `usa:change` (`detail.checked`). Reduced motion: no glide.
- */
-interface UsaToggleElement extends UsaElement {
-    checked: boolean;
-    disabled: boolean;
-    toggle(force?: boolean): void;
-}
-
-/**
  * motionary/components/interaction — micro-interactions.
  * `<usa-ripple>`, `<usa-magnetic>`, `<usa-tilt>`, `<usa-spotlight>`,
- * `<usa-press>`, `<usa-toggle>`.
+ * `<usa-press>`.
  */
 
 declare global {
@@ -422,7 +406,6 @@ declare global {
         'usa-tilt': UsaTiltElement;
         'usa-spotlight': UsaSpotlightElement;
         'usa-press': UsaPressElement;
-        'usa-toggle': UsaToggleElement;
     }
 }
 
@@ -1153,19 +1136,6 @@ interface UsaRatingElement extends UsaElement {
 }
 
 /**
- * `<usa-tooltip text="…">` — a tooltip for the element it wraps, shown on
- * hover (after `delay` ms, 300) and on keyboard focus, hidden on Esc / blur.
- * It springs in from its placement side and flips to stay on screen; the
- * trigger gets `aria-describedby`.
- * Attributes: `text`, `placement` (`top` default, `bottom`, `left`, `right`),
- * `delay`, `variant`. Reduced motion: fades only.
- */
-interface UsaTooltipElement extends UsaElement {
-    show(): void;
-    hide(): void;
-}
-
-/**
  * `<usa-popover>` — a click-to-open popover: the first element child is the
  * trigger, `[data-popover]` is the content. Springs open from the trigger,
  * flips to stay on screen; Esc or an outside click closes and focus returns
@@ -1203,7 +1173,7 @@ interface UsaAvatarStackElement extends UsaElement {
  * motionary/components/ui — animated UI components + style variants (v2.6).
  * `<usa-tabs>`, `<usa-drawer>`, `<usa-bottom-sheet>`, `<usa-pull-refresh>`,
  * `<usa-fab>`, `<usa-navbar>`, `<usa-slider>`, `<usa-rating>`,
- * `<usa-tooltip>`, `<usa-popover>`, `<usa-badge>`, `<usa-avatar-stack>`,
+ * `<usa-popover>`, `<usa-badge>`, `<usa-avatar-stack>`,
  * and `variant="minimal | neon | glass | brutalist | fluent | material"`
  * design tokens (`setVariant()`, `VARIANTS`).
  */
@@ -1218,7 +1188,6 @@ declare global {
         'usa-navbar': UsaNavbarElement;
         'usa-slider': UsaSliderElement;
         'usa-rating': UsaRatingElement;
-        'usa-tooltip': UsaTooltipElement;
         'usa-popover': UsaPopoverElement;
         'usa-badge': UsaBadgeElement;
         'usa-avatar-stack': UsaAvatarStackElement;
@@ -1638,14 +1607,14 @@ declare global {
 declare const COMPONENT_CATEGORIES: {
     readonly reveal: readonly ["usa-reveal", "usa-stagger", "usa-scroll-progress", "usa-scrolly"];
     readonly text: readonly ["usa-typewriter", "usa-split-text", "usa-scramble", "usa-counter", "usa-shimmer-text", "usa-text-rotate", "usa-wave-text", "usa-glitch", "usa-gradient-text", "usa-handwriting", "usa-scroll-highlight"];
-    readonly interaction: readonly ["usa-ripple", "usa-magnetic", "usa-tilt", "usa-spotlight", "usa-press", "usa-toggle"];
+    readonly interaction: readonly ["usa-ripple", "usa-magnetic", "usa-tilt", "usa-spotlight", "usa-press"];
     readonly feedback: readonly ["usa-spinner", "usa-skeleton", "usa-progress", "usa-toaster", "usa-check"];
     readonly background: readonly ["usa-aurora", "usa-particles", "usa-grain", "usa-marquee", "usa-acrylic", "usa-grid-glow", "usa-blobs", "usa-water-ripple", "usa-dot-network"];
     readonly transitions: readonly ["usa-dialog", "usa-accordion", "usa-view-switch"];
     readonly physics: readonly ["usa-spring", "usa-draggable", "usa-overscroll"];
     readonly cards: readonly ["usa-card", "usa-card-stack", "usa-sticky-stack", "usa-carousel-3d"];
     readonly click: readonly ["usa-click", "usa-button", "usa-icon-morph", "usa-like", "usa-hold", "usa-double-tap", "usa-checkbox"];
-    readonly ui: readonly ["usa-tabs", "usa-drawer", "usa-bottom-sheet", "usa-pull-refresh", "usa-fab", "usa-navbar", "usa-slider", "usa-rating", "usa-tooltip", "usa-popover", "usa-badge", "usa-avatar-stack"];
+    readonly ui: readonly ["usa-tabs", "usa-drawer", "usa-bottom-sheet", "usa-pull-refresh", "usa-fab", "usa-navbar", "usa-slider", "usa-rating", "usa-popover", "usa-badge", "usa-avatar-stack"];
     readonly page: readonly ["usa-cursor", "usa-fullpage", "usa-loading-bar", "usa-back-to-top", "usa-ambient", "usa-splash", "usa-auto-skeleton", "usa-motion-switch"];
     readonly timeline: readonly ["usa-timeline"];
     readonly gesture: readonly ["usa-swipeable", "usa-pinch-zoom"];
@@ -1716,7 +1685,7 @@ declare function bindUsa(el: HTMLElement, binding?: UsaBinding): {
  *   onMount(() => defineUsa(['click', 'ui']));
  *   let on = false;
  * </script>
- * <usa-toggle use:usa={{ props: { checked: on }, on: { change: (e) => (on = e.detail.checked) } }}></usa-toggle>
+ * <usa-switch use:usa={{ props: { checked: on }, on: { change: (e) => (on = e.detail.checked) } }}></usa-switch>
  * ```
  * Plain `on:usa:change` does not compile in Svelte 3/4 (colon); use the action or `onusa:change` in Svelte 5.
  */

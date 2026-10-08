@@ -1,4 +1,0 @@
-/* <usa-tooltip> */
-usa-tooltip { display: inline-block; }
-usa-tooltip .usa-tooltip-bubble { position: fixed; z-index: 2000; max-width: 260px; padding: 6px 10px; font-size: 0.85rem; line-height: 1.4; pointer-events: none; --usa-radius: 8px; white-space: normal; }
-usa-tooltip .usa-tooltip-bubble[hidden] { display: none; }

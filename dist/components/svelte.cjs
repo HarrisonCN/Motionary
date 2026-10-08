@@ -30,7 +30,7 @@ require('./packs.cjs');
 require('./fx.cjs');
 require('../chunks/registry-DehBVRDV.cjs');
 require('./a11y.cjs');
-require('../chunks/index-tags-wv0R_vkO.cjs');
+require('../chunks/index-tags-BTMwrfgV.cjs');
 require('./perf.cjs');
 require('./bridge.cjs');
 
@@ -47,7 +47,7 @@ require('./bridge.cjs');
  *   onMount(() => defineUsa(['click', 'ui']));
  *   let on = false;
  * </script>
- * <usa-toggle use:usa={{ props: { checked: on }, on: { change: (e) => (on = e.detail.checked) } }}></usa-toggle>
+ * <usa-switch use:usa={{ props: { checked: on }, on: { change: (e) => (on = e.detail.checked) } }}></usa-switch>
  * ```
  * Plain `on:usa:change` does not compile in Svelte 3/4 (colon); use the action or `onusa:change` in Svelte 5.
  */

@@ -3,9 +3,9 @@ import { installComponentMocks, mount, anims } from './components-setup';
 import { configureComponents } from '../src/components/base';
 import { defineWidgets, WIDGETS, monthGrid, parseISODate, hsvToHex, hexToHsv } from '../src/components/widgets';
 import * as fx2 from '../src/components/fx2';
+import { defineComponents } from '../src/components';
 import { FOCUS_FX, registerFocusPack, registerEffectPacks, EFFECT_PACKS, packManifest, validateManifest, loadEffectPack, EFFECT_PACK_FORMAT } from '../src/components/fx2';
 import { getEffect, playEffect } from '../src/components/fx';
-import { defineTooltip } from '../src/components/ui/tooltip';
 import { COMPONENT_ITEMS } from '../showcase/catalog-components.js';
 import { COMPONENTS, componentSnippets } from '../showcase/components-catalog.js';
 import { COMPONENT_ENTRIES } from '../scripts/categories.mjs';
@@ -149,18 +149,14 @@ describe('focus pack + marketplace', () => {
 });
 
 describe('7.0 deprecations', () => {
-  it('old registrars and tags warn once and still work', () => {
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
-    fx2.registerFx2();
-    fx2.registerMorphEffects2();
-    expect(fx2.FX2_PACKS).toBe(EFFECT_PACKS);
-    defineTooltip();
-    mount('<usa-tooltip text="x"><button>b</button></usa-tooltip>');
-    mount('<usa-tooltip text="y"><button>c</button></usa-tooltip>');
-    const msgs = warn.mock.calls.map((c) => String(c[0]));
-    expect(msgs.filter((m) => m.includes('registerFx2()'))).toHaveLength(1);
-    expect(msgs.some((m) => m.includes('registerMorphPack()'))).toBe(true);
-    expect(msgs.filter((m) => m.includes('<usa-tooltip>'))).toHaveLength(1);
+  it('7.0 removed the deprecated registrars and tags', () => {
+    const m = fx2 as Record<string, unknown>;
+    for (const n of ['registerFx2', 'FX2_PACKS', 'registerGpuEffects', 'registerTextEffects3', 'registerLightEffects', 'register3dEffects', 'registerMorphEffects2', 'registerTransitionEffects2', 'registerWeatherEffects', 'registerPhysicsEffects2']) expect(m[n], n).toBeUndefined();
+    defineComponents();
+    expect(customElements.get('usa-tooltip')).toBeUndefined();
+    expect(customElements.get('usa-toggle')).toBeUndefined();
+    expect(customElements.get('usa-tip')).toBeTruthy();
+    expect(customElements.get('usa-switch')).toBeTruthy();
   });
   it('usa-codemod-7 rewrites registrars and tags, reports manual work', () => {
     const src = "import { registerFx2, registerTextEffects3 } from 'motionary/components/fx2';\nregisterFx2(); registerTextEffects3();\nconst p = FX2_PACKS;\n<usa-tooltip text=\"Hi\"><b>x</b></usa-tooltip><usa-toggle checked></usa-toggle><usa-toggle-knob></usa-toggle-knob>\ndefineTooltip();";

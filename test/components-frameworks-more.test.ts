@@ -42,7 +42,7 @@ describe('Svelte / Solid / Angular entries', () => {
   it('svelte: use:usa action and client-only defineUsa', () => {
     svelte.defineUsa(['click']);
     expect(customElements.get('usa-button')).toBeTruthy();
-    const el = mount('<usa-toggle></usa-toggle>') as any;
+    const el = mount('<usa-like></usa-like>') as any;
     const fn = vi.fn();
     const act = svelte.usa(el, { on: { change: fn } });
     el.dispatchEvent(new CustomEvent('usa:change'));

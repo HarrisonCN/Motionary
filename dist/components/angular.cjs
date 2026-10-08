@@ -30,7 +30,7 @@ require('./packs.cjs');
 require('./fx.cjs');
 require('../chunks/registry-DehBVRDV.cjs');
 require('./a11y.cjs');
-require('../chunks/index-tags-wv0R_vkO.cjs');
+require('../chunks/index-tags-BTMwrfgV.cjs');
 require('./perf.cjs');
 require('./bridge.cjs');
 
@@ -49,7 +49,7 @@ require('./bridge.cjs');
  * providers: [{ provide: APP_INITIALIZER, multi: true, useFactory: usaInitializer(['click', 'ui']) }]
  *
  * @Component({ standalone: true, schemas: [CUSTOM_ELEMENTS_SCHEMA],
- *   template: `<usa-toggle [checked]="on" (usa:change)="on = $any($event).detail.checked"></usa-toggle>` })
+ *   template: `<usa-switch [checked]="on" (usa:change)="on = $any($event).detail.checked"></usa-switch>` })
  * ```
  * `bindUsa(el, { props, on })` is available for directives that bind imperatively.
  */

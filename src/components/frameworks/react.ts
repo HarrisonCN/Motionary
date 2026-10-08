@@ -10,7 +10,7 @@
  * import { createUsaComponents } from 'motionary/components/react';
  * import { defineComponents } from 'motionary/components';
  * defineComponents();
- * const { UsaButton, UsaToggle } = createUsaComponents(React);
+ * const { UsaButton, UsaSwitch } = createUsaComponents(React);
  * <UsaButton deform="squash" onUsaSubmit={(e) => e.detail.done(true)}><button>Pay</button></UsaButton>
  * ```
  *

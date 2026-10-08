@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { installComponentMocks, mount, anims } from './components-setup';
 import { configureComponents } from '../src/components/base';
 import { defineWidgets, WIDGETS, NAV_INDICATORS, TOGGLE_VARIANTS, TIP_PLACEMENTS } from '../src/components/widgets';
-import { MORPH2_FX, registerMorphEffects2, registerFx2, FX2_PACKS, pointsToPath, samplePath } from '../src/components/fx2';
+import { MORPH2_FX, registerMorphPack, registerEffectPacks, EFFECT_PACKS, pointsToPath, samplePath } from '../src/components/fx2';
 import { getEffect, playEffect } from '../src/components/fx';
 import { COMPONENT_ITEMS } from '../showcase/catalog-components.js';
 import { COMPONENTS, componentSnippets } from '../showcase/components-catalog.js';
@@ -140,11 +140,11 @@ describe('<usa-tip>', () => {
 
 describe('6.6 morph & SVG effects', () => {
   it('registers 5 effects in motionary/components/fx-morph', () => {
-    registerMorphEffects2();
-    registerFx2();
+    registerMorphPack();
+    registerEffectPacks();
     expect(MORPH2_FX.map((d) => d.name)).toEqual(['path-morph', 'blob-button', 'stroke-draw', 'noise-reveal', 'icon-swap']);
     for (const d of MORPH2_FX) expect(getEffect(d.name)).toBe(d);
-    expect(FX2_PACKS.morph).toBe(MORPH2_FX);
+    expect(EFFECT_PACKS.morph).toBe(MORPH2_FX);
     expect(COMPONENT_ENTRIES['fx-morph']).toBe('fx2/morph2');
   });
   it('pointsToPath builds a closed path; samplePath needs SVG geometry (null in jsdom)', () => {
@@ -159,7 +159,7 @@ describe('6.6 morph & SVG effects', () => {
     proto.getTotalLength = function () { return 40; };
     proto.getPointAtLength = function (l: number) { const big = (this.getAttribute('d') || '').includes('20'); return { x: big ? l : l / 2, y: 0 }; };
     const el = mount<HTMLElement>('<div><svg><path d="M0 0 L10 0"/></svg></div>');
-    const def = getEffect('path-morph') || (registerMorphEffects2(), getEffect('path-morph'))!;
+    const def = getEffect('path-morph') || (registerMorphPack(), getEffect('path-morph'))!;
     const stop = def.run(el, { ...def.defaults, paths: ['M0 0 L20 0'], duration: 100, hold: 0, points: 4 }, ctx()) as () => void;
     expect(frames.length).toBe(1);
     frames.shift()!(performance.now() + 50);
@@ -174,7 +174,7 @@ describe('6.6 morph & SVG effects', () => {
   it('blob-button adds a blob path behind the element and cleans up', () => {
     vi.stubGlobal('requestAnimationFrame', () => 1);
     vi.stubGlobal('cancelAnimationFrame', () => undefined);
-    registerMorphEffects2();
+    registerMorphPack();
     const el = mount<HTMLElement>('<button>Go</button>');
     const def = getEffect('blob-button')!;
     const stop = def.run(el, { ...def.defaults }, ctx()) as () => void;
@@ -184,7 +184,7 @@ describe('6.6 morph & SVG effects', () => {
     expect(el.querySelector('svg')).toBeNull();
   });
   it('stroke-draw animates every shape; noise-reveal fades under reduced motion; icon-swap cycles icons', async () => {
-    registerMorphEffects2();
+    registerMorphPack();
     const svg = mount<HTMLElement>('<div><svg><path d="M0 0L5 5"/><circle r="3"/></svg></div>');
     anims.length = 0;
     playEffect(svg, 'stroke-draw');

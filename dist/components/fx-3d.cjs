@@ -1,9 +1,9 @@
 'use strict';
 
-var base = require('../chunks/base-BaQV-2ha.cjs');
 var registry = require('../chunks/registry-DehBVRDV.cjs');
 var shared = require('../chunks/shared-jkgRH-Hx.cjs');
 var components_fxLight = require('./fx-light.cjs');
+require('../chunks/base-BaQV-2ha.cjs');
 require('../chunks/generative-BHIj-NU0.cjs');
 
 const layers = (el) => {
@@ -230,13 +230,7 @@ const DEPTH3_FX = [
 function register3dPack() {
     registry.registerEffects(DEPTH3_FX);
 }
-/** @deprecated since 6.9 — use `register3dPack()` (removed in 7.0; `npx usa-codemod-7`). */
-function register3dEffects() {
-    base.deprecate('register3dEffects', 'register3dEffects() is deprecated since 6.9 and removed in 7.0 — use register3dPack() (npx usa-codemod-7).');
-    register3dPack();
-}
 
 exports.DEPTH3_FX = DEPTH3_FX;
-exports.register3dEffects = register3dEffects;
 exports.register3dPack = register3dPack;
 //# sourceMappingURL=fx-3d.cjs.map

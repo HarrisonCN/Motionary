@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { installComponentMocks, mount, anims } from './components-setup';
 import { configureComponents } from '../src/components/base';
 import { defineWidgets, WIDGETS, stackToast, TOAST_POSITIONS, MODAL_EFFECTS, SHEET_SIDES, MENU_EFFECTS } from '../src/components/widgets';
-import { TEXT3_FX, registerTextEffects3, registerFx2, FX2_PACKS, splitChars } from '../src/components/fx2';
+import { TEXT3_FX, registerTextPack, registerEffectPacks, EFFECT_PACKS, splitChars } from '../src/components/fx2';
 import { getEffect, playEffect } from '../src/components/fx';
 import { COMPONENT_ITEMS } from '../showcase/catalog-components.js';
 import { COMPONENTS, componentSnippets } from '../showcase/components-catalog.js';
@@ -171,11 +171,11 @@ describe('<usa-menu>', () => {
 
 describe('6.3 text effects 3.0', () => {
   it('registers 7 effects in motionary/components/fx-text', () => {
-    registerTextEffects3();
-    registerFx2();
+    registerTextPack();
+    registerEffectPacks();
     expect(TEXT3_FX.map((d) => d.name)).toEqual(['liquid-text', 'neon-write', 'particle-text', 'glitch-text', 'text-trail', 'font-breathe', 'flip-chars']);
     for (const d of TEXT3_FX) expect(getEffect(d.name)).toBe(d);
-    expect(FX2_PACKS.text).toBe(TEXT3_FX);
+    expect(EFFECT_PACKS.text).toBe(TEXT3_FX);
     expect(COMPONENT_ENTRIES['fx-text']).toBe('fx2/text3');
   });
   it('splitChars keeps a screen-reader copy and is idempotent', () => {
@@ -187,7 +187,7 @@ describe('6.3 text effects 3.0', () => {
     expect(splitChars(h)).toHaveLength(6);
   });
   it('flip-chars and neon-write animate every character; reduced motion = fade / static glow', () => {
-    registerTextEffects3();
+    registerTextPack();
     const h = mount<HTMLElement>('<h1>Wow</h1>');
     anims.length = 0;
     playEffect(h, 'flip-chars');
@@ -205,7 +205,7 @@ describe('6.3 text effects 3.0', () => {
     expect(JSON.stringify(anims[0].keyframes)).not.toContain('rotate');
   });
   it('glitch-text adds two RGB clones; font-breathe loops and cleans up; liquid-text adds an SVG filter', async () => {
-    registerTextEffects3();
+    registerTextPack();
     const h = mount<HTMLElement>('<h2>Glitch</h2>');
     anims.length = 0;
     playEffect(h, 'glitch-text');
@@ -230,7 +230,7 @@ describe('6.3 text effects 3.0', () => {
     expect(anims.every((a) => a.cancelled)).toBe(true);
   });
   it('text-trail spawns letters on pointer moves and removes its listener', () => {
-    registerTextEffects3();
+    registerTextPack();
     const def = getEffect('text-trail')!;
     const el = mount<HTMLElement>('<div></div>');
     anims.length = 0;
@@ -245,7 +245,7 @@ describe('6.3 text effects 3.0', () => {
   });
   it('particle-text is skipped under reduced motion', async () => {
     installComponentMocks({ reducedMotion: true });
-    registerTextEffects3();
+    registerTextPack();
     const h = mount<HTMLElement>('<h1>P</h1>');
     await playEffect(h, 'particle-text');
     expect(h.dataset.usaChars).toBeUndefined();

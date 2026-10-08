@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { installComponentMocks, mount, anims } from './components-setup';
 import { configureComponents } from '../src/components/base';
 import { defineWidgets, WIDGETS, pageWindow, SEGMENTED_VARIANTS, SWITCH_VARIANTS } from '../src/components/widgets';
-import { TRANSITIONS2_FX, registerTransitionEffects2, registerFx2, FX2_PACKS, pageTransition, crossDocumentTransitions } from '../src/components/fx2';
+import { TRANSITIONS2_FX, registerTransitionsPack, registerEffectPacks, EFFECT_PACKS, pageTransition, crossDocumentTransitions } from '../src/components/fx2';
 import { getEffect, playEffect } from '../src/components/fx';
 import { COMPONENT_ITEMS } from '../showcase/catalog-components.js';
 import { COMPONENTS, componentSnippets } from '../showcase/components-catalog.js';
@@ -100,19 +100,19 @@ describe('6.7 widgets', () => {
 });
 
 describe('Transitions 2.0 (fx-transitions)', () => {
-  it('registers 6 page effects (also via registerFx2) and is its own entry', () => {
-    registerTransitionEffects2();
-    registerFx2();
+  it('registers 6 page effects (also via registerEffectPacks) and is its own entry', () => {
+    registerTransitionsPack();
+    registerEffectPacks();
     expect(TRANSITIONS2_FX.map((d) => d.name)).toEqual(['ripple-dissolve', 'shatter', 'mosaic-flip', 'liquid-wipe', 'page-curl', 'camera-dolly']);
     for (const d of TRANSITIONS2_FX) {
       expect(getEffect(d.name)).toBe(d);
       expect(d.kind).toBe('page');
     }
-    expect(FX2_PACKS.transitions).toBe(TRANSITIONS2_FX);
+    expect(EFFECT_PACKS.transitions).toBe(TRANSITIONS2_FX);
     expect(COMPONENT_ENTRIES['fx-transitions']).toBe('fx2/transitions2');
   });
   it('shatter / mosaic-flip animate clipped pieces and clean them up', async () => {
-    registerTransitionEffects2();
+    registerTransitionsPack();
     const el = mount<HTMLElement>('<div id="x">Hello</div>');
     anims.length = 0;
     const p = playEffect(el, 'mosaic-flip', { cols: 3, rows: 2 });
@@ -126,7 +126,7 @@ describe('Transitions 2.0 (fx-transitions)', () => {
     expect(el.style.visibility).toBe('');
   });
   it('liquid-wipe / ripple-dissolve / page-curl / camera-dolly animate the element; reduced motion fades', () => {
-    registerTransitionEffects2();
+    registerTransitionsPack();
     const el = mount<HTMLElement>('<div>x</div>');
     for (const n of ['liquid-wipe', 'ripple-dissolve', 'page-curl', 'camera-dolly']) {
       anims.length = 0;
@@ -141,7 +141,7 @@ describe('Transitions 2.0 (fx-transitions)', () => {
     expect(r.children.length).toBe(0);
   });
   it('pageTransition uses startViewTransition when available, else update + effect; crossDocumentTransitions adds and removes a style', async () => {
-    registerTransitionEffects2();
+    registerTransitionsPack();
     const upd = vi.fn();
     (document as any).startViewTransition = (cb: () => void) => (cb(), { ready: Promise.resolve(), finished: Promise.resolve() });
     (document.documentElement as any).animate = vi.fn();

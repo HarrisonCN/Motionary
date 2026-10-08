@@ -17,7 +17,6 @@
  * Reduced motion: no loops / wobble; enter effects and swaps fade.
  */
 import type { EffectContext, EffectDefinition } from '../fx/registry';
-import { deprecate } from '../base';
 import { registerEffects } from '../fx/registry';
 import { all } from '../effects/shared';
 
@@ -289,8 +288,3 @@ export function registerMorphPack(): void {
   registerEffects(MORPH2_FX);
 }
 
-/** @deprecated since 6.9 — use `registerMorphPack()` (removed in 7.0; `npx usa-codemod-7`). */
-export function registerMorphEffects2(): void {
-  deprecate('registerMorphEffects2', 'registerMorphEffects2() is deprecated since 6.9 and removed in 7.0 — use registerMorphPack() (npx usa-codemod-7).');
-  registerMorphPack();
-}

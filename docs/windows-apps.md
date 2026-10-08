@@ -33,7 +33,7 @@ window.api?.onSaved?.(() => toast('Saved', { type: 'success' }));
 <usa-acrylic kind="mica" style="min-height:100vh">
   <usa-view-switch active="home">
     <section data-view="home"><usa-typewriter words="Welcome back"></usa-typewriter></section>
-    <section data-view="settings"><usa-toggle checked>Start with Windows</usa-toggle></section>
+    <section data-view="settings"><usa-switch checked>Start with Windows</usa-switch></section>
   </usa-view-switch>
 </usa-acrylic>
 ```

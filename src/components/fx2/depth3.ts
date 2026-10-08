@@ -17,7 +17,6 @@
  * crossfade.
  */
 import type { EffectContext, EffectDefinition } from '../fx/registry';
-import { deprecate } from '../base';
 import { registerEffects } from '../fx/registry';
 import { all } from '../effects/shared';
 import { trackPointer } from './light';
@@ -241,8 +240,3 @@ export function register3dPack(): void {
   registerEffects(DEPTH3_FX);
 }
 
-/** @deprecated since 6.9 — use `register3dPack()` (removed in 7.0; `npx usa-codemod-7`). */
-export function register3dEffects(): void {
-  deprecate('register3dEffects', 'register3dEffects() is deprecated since 6.9 and removed in 7.0 — use register3dPack() (npx usa-codemod-7).');
-  register3dPack();
-}

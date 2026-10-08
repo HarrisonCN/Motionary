@@ -1,6 +1,6 @@
 {
   "name": "motionary",
-  "version": "6.9.0",
+  "version": "7.0.0",
   "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 94 animated Web Components — 214 scroll-reveal presets, card/click/button morphs, physics, page transitions, generative & sound-reactive backgrounds, cursor/gesture effects, themes, micro-interactions, <usa-player>, WebGL. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -86,6 +86,116 @@
       "require": {
         "types": "./dist/components.d.cts",
         "default": "./dist/components.cjs"
+      }
+    },
+    "./fx": {
+      "import": {
+        "types": "./dist/components/fx2.d.ts",
+        "default": "./dist/components/fx2.js"
+      },
+      "require": {
+        "types": "./dist/components/fx2.d.cts",
+        "default": "./dist/components/fx2.cjs"
+      }
+    },
+    "./fx/gpu": {
+      "import": {
+        "types": "./dist/components/fx-gpu.d.ts",
+        "default": "./dist/components/fx-gpu.js"
+      },
+      "require": {
+        "types": "./dist/components/fx-gpu.d.cts",
+        "default": "./dist/components/fx-gpu.cjs"
+      }
+    },
+    "./fx/text": {
+      "import": {
+        "types": "./dist/components/fx-text.d.ts",
+        "default": "./dist/components/fx-text.js"
+      },
+      "require": {
+        "types": "./dist/components/fx-text.d.cts",
+        "default": "./dist/components/fx-text.cjs"
+      }
+    },
+    "./fx/light": {
+      "import": {
+        "types": "./dist/components/fx-light.d.ts",
+        "default": "./dist/components/fx-light.js"
+      },
+      "require": {
+        "types": "./dist/components/fx-light.d.cts",
+        "default": "./dist/components/fx-light.cjs"
+      }
+    },
+    "./fx/3d": {
+      "import": {
+        "types": "./dist/components/fx-3d.d.ts",
+        "default": "./dist/components/fx-3d.js"
+      },
+      "require": {
+        "types": "./dist/components/fx-3d.d.cts",
+        "default": "./dist/components/fx-3d.cjs"
+      }
+    },
+    "./fx/morph": {
+      "import": {
+        "types": "./dist/components/fx-morph.d.ts",
+        "default": "./dist/components/fx-morph.js"
+      },
+      "require": {
+        "types": "./dist/components/fx-morph.d.cts",
+        "default": "./dist/components/fx-morph.cjs"
+      }
+    },
+    "./fx/transitions": {
+      "import": {
+        "types": "./dist/components/fx-transitions.d.ts",
+        "default": "./dist/components/fx-transitions.js"
+      },
+      "require": {
+        "types": "./dist/components/fx-transitions.d.cts",
+        "default": "./dist/components/fx-transitions.cjs"
+      }
+    },
+    "./fx/weather": {
+      "import": {
+        "types": "./dist/components/fx-weather.d.ts",
+        "default": "./dist/components/fx-weather.js"
+      },
+      "require": {
+        "types": "./dist/components/fx-weather.d.cts",
+        "default": "./dist/components/fx-weather.cjs"
+      }
+    },
+    "./fx/physics": {
+      "import": {
+        "types": "./dist/components/fx-physics.d.ts",
+        "default": "./dist/components/fx-physics.js"
+      },
+      "require": {
+        "types": "./dist/components/fx-physics.d.cts",
+        "default": "./dist/components/fx-physics.cjs"
+      }
+    },
+    "./fx/focus": {
+      "import": {
+        "types": "./dist/components/fx-focus.d.ts",
+        "default": "./dist/components/fx-focus.js"
+      },
+      "require": {
+        "types": "./dist/components/fx-focus.d.cts",
+        "default": "./dist/components/fx-focus.cjs"
+      }
+    },
+    "./fx/marketplace": {
+      "import": {
+        "types": "./dist/components/marketplace.d.ts",
+        "default": "./dist/components/marketplace.js"
+      },
+      "require": {
+        "types": "./dist/components/marketplace.d.cts",
+        "default": "./dist/components/marketplace.cjs"
       }
     },
     "./components/reveal": {

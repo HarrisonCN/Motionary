@@ -1,4 +1,4 @@
-import { g as configureComponents, a as MOTION_SENSITIVITY_LEVELS } from '../chunks/base-D5MHqeDd.js';
+import { g as configureComponents, a as MOTION_SENSITIVITY_LEVELS } from '../chunks/base-DchG4q_S.js';
 
 /**
  * motionary/components/bridge — native shell bridges (4.7).

@@ -1,7 +1,7 @@
-import { u as deprecate } from '../chunks/base-D5MHqeDd.js';
-import { registerEffects } from '../chunks/registry-CTLWeg-J.js';
+import { registerEffects } from '../chunks/registry-D23neB4M.js';
 import { c as canvasBackground, h as hexRgb } from '../chunks/generative-2LhxG5BJ.js';
 import { o as overlay } from '../chunks/shared-CkKHWrtJ.js';
+import '../chunks/base-DchG4q_S.js';
 
 /** Track the pointer over `el` as 0–1 coordinates (`fn(x, y, inside)`); starts at (`x0`, `y0`). Returns a remover. */
 function trackPointer(el, ctx, fn, x0 = 0.3, y0 = 0.25) {
@@ -212,11 +212,6 @@ const LIGHT_FX = [
 function registerLightPack() {
     registerEffects(LIGHT_FX);
 }
-/** @deprecated since 6.9 — use `registerLightPack()` (removed in 7.0; `npx usa-codemod-7`). */
-function registerLightEffects() {
-    deprecate('registerLightEffects', 'registerLightEffects() is deprecated since 6.9 and removed in 7.0 — use registerLightPack() (npx usa-codemod-7).');
-    registerLightPack();
-}
 
-export { LIGHT_FX, registerLightEffects, registerLightPack, trackPointer };
+export { LIGHT_FX, registerLightPack, trackPointer };
 //# sourceMappingURL=fx-light.js.map

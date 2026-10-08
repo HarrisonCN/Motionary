@@ -66,7 +66,5 @@ declare function splitChars(el: HTMLElement): HTMLElement[];
 declare const TEXT3_FX: EffectDefinition[];
 /** Register the 6.3 text pack (idempotent). */
 declare function registerTextPack(): void;
-/** @deprecated since 6.9 — use `registerTextPack()` (removed in 7.0; `npx usa-codemod-7`). */
-declare function registerTextEffects3(): void;
 
-export { TEXT3_FX, registerTextEffects3, registerTextPack, splitChars };
+export { TEXT3_FX, registerTextPack, splitChars };

@@ -2,7 +2,7 @@
 
 var base = require('../chunks/base-BaQV-2ha.cjs');
 
-var css$5 = "usa-ripple{position:relative;display:inline-block;overflow:hidden;isolation:isolate;border-radius:inherit;-webkit-tap-highlight-color:transparent}usa-ripple[block]{display:block}usa-ripple .usa-ripple-wave{position:absolute;border-radius:50%;pointer-events:none;transform:scale(0);z-index:-1;will-change:transform,opacity}";
+var css$4 = "usa-ripple{position:relative;display:inline-block;overflow:hidden;isolation:isolate;border-radius:inherit;-webkit-tap-highlight-color:transparent}usa-ripple[block]{display:block}usa-ripple .usa-ripple-wave{position:absolute;border-radius:50%;pointer-events:none;transform:scale(0);z-index:-1;will-change:transform,opacity}";
 
 function defineRipple(tag = 'usa-ripple') {
     return base.defineElement(tag, (Base) => class UsaRipple extends Base {
@@ -49,10 +49,10 @@ function defineRipple(tag = 'usa-ripple') {
             else
                 setTimeout(() => wave.remove(), 0);
         }
-    }, { id: 'ripple', text: css$5 });
+    }, { id: 'ripple', text: css$4 });
 }
 
-var css$4 = "usa-magnetic{display:inline-block}usa-magnetic>*{transform:translate3d(var(--usa-mx,0px),var(--usa-my,0px),0);transition:transform 0.6s cubic-bezier(0.34,1.56,0.64,1)}usa-magnetic[data-active]>*{transition-duration:0.15s;transition-timing-function:ease-out}@media (prefers-reduced-motion:reduce){usa-magnetic>*,usa-tilt,usa-toggle .usa-toggle-knob{transition:none}}";
+var css$3 = "usa-magnetic{display:inline-block}usa-magnetic>*{transform:translate3d(var(--usa-mx,0px),var(--usa-my,0px),0);transition:transform 0.6s cubic-bezier(0.34,1.56,0.64,1)}usa-magnetic[data-active]>*{transition-duration:0.15s;transition-timing-function:ease-out}@media (prefers-reduced-motion:reduce){usa-magnetic>*,usa-tilt,usa-toggle .usa-toggle-knob{transition:none}}";
 
 function defineMagnetic(tag = 'usa-magnetic') {
     return base.defineElement(tag, (Base) => class UsaMagnetic extends Base {
@@ -109,10 +109,10 @@ function defineMagnetic(tag = 'usa-magnetic') {
             this._frame = 0;
             this.release();
         }
-    }, { id: 'magnetic', text: css$4 });
+    }, { id: 'magnetic', text: css$3 });
 }
 
-var css$3 = "usa-tilt{display:block;position:relative;transform-style:preserve-3d;transition:transform 0.5s cubic-bezier(0.22,1,0.36,1);will-change:transform}usa-tilt[data-active]{transition-duration:0.12s}usa-tilt .usa-tilt-glare{position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity 0.3s ease;background:radial-gradient(circle at var(--usa-glare-x,50%) var(--usa-glare-y,50%),rgb(255 255 255 / 0.35),transparent 55%);mix-blend-mode:soft-light}usa-tilt[data-active] .usa-tilt-glare{opacity:1}";
+var css$2 = "usa-tilt{display:block;position:relative;transform-style:preserve-3d;transition:transform 0.5s cubic-bezier(0.22,1,0.36,1);will-change:transform}usa-tilt[data-active]{transition-duration:0.12s}usa-tilt .usa-tilt-glare{position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity 0.3s ease;background:radial-gradient(circle at var(--usa-glare-x,50%) var(--usa-glare-y,50%),rgb(255 255 255 / 0.35),transparent 55%);mix-blend-mode:soft-light}usa-tilt[data-active] .usa-tilt-glare{opacity:1}";
 
 function defineTilt(tag = 'usa-tilt') {
     return base.defineElement(tag, (Base) => class UsaTilt extends Base {
@@ -181,10 +181,10 @@ function defineTilt(tag = 'usa-tilt') {
         unmount() {
             this.reset();
         }
-    }, { id: 'tilt', text: css$3 });
+    }, { id: 'tilt', text: css$2 });
 }
 
-var css$2 = "usa-spotlight{display:block;--usa-spot-size:160px;--usa-spot-color:rgb(255 255 255 / 0.55);--usa-spot-border:1px}usa-spotlight .usa-spotlight-item{position:relative;isolation:isolate}usa-spotlight .usa-spotlight-item::before,usa-spotlight .usa-spotlight-item::after{content:\"\";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity 0.25s ease}usa-spotlight .usa-spotlight-item::before{padding:var(--usa-spot-border);background:radial-gradient(var(--usa-spot-size) circle at var(--usa-spot-x,-999px) var(--usa-spot-y,-999px),var(--usa-spot-color),transparent 70%);-webkit-mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}usa-spotlight .usa-spotlight-item::after{z-index:-1;background:radial-gradient(calc(var(--usa-spot-size) * 0.9) circle at var(--usa-spot-x,-999px) var(--usa-spot-y,-999px),color-mix(in srgb,var(--usa-spot-color) 30%,transparent),transparent 70%)}usa-spotlight[data-lit] .usa-spotlight-item::before{opacity:1}usa-spotlight[data-lit] .usa-spotlight-item:hover::after{opacity:1}usa-spotlight[no-fill] .usa-spotlight-item::after{display:none}";
+var css$1 = "usa-spotlight{display:block;--usa-spot-size:160px;--usa-spot-color:rgb(255 255 255 / 0.55);--usa-spot-border:1px}usa-spotlight .usa-spotlight-item{position:relative;isolation:isolate}usa-spotlight .usa-spotlight-item::before,usa-spotlight .usa-spotlight-item::after{content:\"\";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity 0.25s ease}usa-spotlight .usa-spotlight-item::before{padding:var(--usa-spot-border);background:radial-gradient(var(--usa-spot-size) circle at var(--usa-spot-x,-999px) var(--usa-spot-y,-999px),var(--usa-spot-color),transparent 70%);-webkit-mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}usa-spotlight .usa-spotlight-item::after{z-index:-1;background:radial-gradient(calc(var(--usa-spot-size) * 0.9) circle at var(--usa-spot-x,-999px) var(--usa-spot-y,-999px),color-mix(in srgb,var(--usa-spot-color) 30%,transparent),transparent 70%)}usa-spotlight[data-lit] .usa-spotlight-item::before{opacity:1}usa-spotlight[data-lit] .usa-spotlight-item:hover::after{opacity:1}usa-spotlight[no-fill] .usa-spotlight-item::after{display:none}";
 
 function defineSpotlight(tag = 'usa-spotlight') {
     return base.defineElement(tag, (Base) => class UsaSpotlight extends Base {
@@ -246,10 +246,10 @@ function defineSpotlight(tag = 'usa-spotlight') {
             this._frame = 0;
             this.removeAttribute('data-lit');
         }
-    }, { id: 'spotlight', text: css$2 });
+    }, { id: 'spotlight', text: css$1 });
 }
 
-var css$1 = "usa-press{display:inline-block;touch-action:manipulation;-webkit-tap-highlight-color:transparent}usa-press[block]{display:block}";
+var css = "usa-press{display:inline-block;touch-action:manipulation;-webkit-tap-highlight-color:transparent}usa-press[block]{display:block}";
 
 function definePress(tag = 'usa-press') {
     return base.defineElement(tag, (Base) => class UsaPress extends Base {
@@ -315,95 +315,13 @@ function definePress(tag = 'usa-press') {
             this._anim = null;
             this._down = false;
         }
-    }, { id: 'press', text: css$1 });
-}
-
-var css = "usa-toggle{--usa-toggle-w:40px;--usa-toggle-h:20px;--usa-toggle-on:var(--usa-accent,#7c5cff);--usa-toggle-off:transparent;--usa-toggle-line:currentColor;display:inline-flex;align-items:center;gap:0.6em;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;vertical-align:middle}usa-toggle[disabled]{cursor:not-allowed;opacity:0.45}usa-toggle .usa-toggle-track{position:relative;flex:none;width:var(--usa-toggle-w);height:var(--usa-toggle-h);border-radius:999px;box-sizing:border-box;border:1px solid color-mix(in srgb,var(--usa-toggle-line) 60%,transparent);background:var(--usa-toggle-off);transition:background-color 0.2s ease,border-color 0.2s ease}usa-toggle .usa-toggle-knob{position:absolute;top:50%;left:3px;width:calc(var(--usa-toggle-h) - 8px);height:calc(var(--usa-toggle-h) - 8px);margin-top:calc((var(--usa-toggle-h) - 8px) / -2);border-radius:999px;background:color-mix(in srgb,var(--usa-toggle-line) 75%,transparent);transform-origin:left center;transition:transform 0.28s cubic-bezier(0.34,1.4,0.64,1),background-color 0.2s ease}usa-toggle:hover .usa-toggle-knob{transform:scale(1.15)}usa-toggle[data-pressed] .usa-toggle-knob{transform:scaleX(1.45)}usa-toggle[checked] .usa-toggle-track{background:var(--usa-toggle-on);border-color:var(--usa-toggle-on)}usa-toggle[checked] .usa-toggle-knob{background:#fff;transform:translateX(calc(var(--usa-toggle-w) - var(--usa-toggle-h)));transform-origin:right center}usa-toggle[checked]:hover .usa-toggle-knob{transform:translateX(calc(var(--usa-toggle-w) - var(--usa-toggle-h))) scale(1.15)}usa-toggle[checked][data-pressed] .usa-toggle-knob{transform:translateX(calc(var(--usa-toggle-w) - var(--usa-toggle-h) - 4px)) scaleX(1.45)}usa-toggle:focus-visible{outline:none}usa-toggle:focus-visible .usa-toggle-track{outline:2px solid var(--usa-toggle-on);outline-offset:2px}";
-
-function defineToggle(tag = 'usa-toggle') {
-    return base.defineElement(tag, (Base) => { var _a; return _a = class UsaToggle extends Base {
-            static get observedAttributes() {
-                return ['checked', 'disabled', 'label'];
-            }
-            constructor() {
-                super();
-                this._internals = null;
-                try {
-                    this._internals = typeof this.attachInternals === 'function' ? this.attachInternals() : null;
-                }
-                catch {
-                    this._internals = null;
-                }
-            }
-            get checked() {
-                return this.hasAttribute('checked');
-            }
-            set checked(v) {
-                this.toggleAttribute('checked', !!v);
-            }
-            get disabled() {
-                return this.hasAttribute('disabled');
-            }
-            set disabled(v) {
-                this.toggleAttribute('disabled', !!v);
-            }
-            changed() {
-                this.sync();
-            }
-            sync() {
-                this.setAttribute('aria-checked', String(this.checked));
-                this.setAttribute('aria-disabled', String(this.disabled));
-                this.tabIndex = this.disabled ? -1 : 0;
-                const label = this.getAttribute('label');
-                if (label && !this.hasAttribute('aria-label'))
-                    this.setAttribute('aria-label', label);
-                this._internals?.setFormValue?.(this.checked ? this.str('value', 'on') : null);
-            }
-            mount() {
-                base.deprecate('usa-toggle', '<usa-toggle> is deprecated since 6.9 and removed in 7.0 — use <usa-switch> (motionary/components/widgets; npx usa-codemod-7).');
-                if (!this.querySelector(':scope > .usa-toggle-track')) {
-                    const track = document.createElement('span');
-                    track.className = 'usa-toggle-track';
-                    track.setAttribute('aria-hidden', 'true');
-                    const knob = document.createElement('span');
-                    knob.className = 'usa-toggle-knob';
-                    track.append(knob);
-                    this.prepend(track);
-                }
-                this.setAttribute('role', 'switch');
-                this.sync();
-                this.listen(this, 'click', () => this.toggle());
-                this.listen(this, 'keydown', (e) => {
-                    if (e.key === ' ' || e.key === 'Enter') {
-                        e.preventDefault();
-                        if (!e.repeat)
-                            this.toggle();
-                    }
-                });
-                this.listen(this, 'pointerdown', () => !this.disabled && this.setAttribute('data-pressed', ''));
-                for (const t of ['pointerup', 'pointerleave', 'pointercancel'])
-                    this.listen(this, t, () => this.removeAttribute('data-pressed'));
-            }
-            toggle(force) {
-                if (this.disabled)
-                    return;
-                const next = force === undefined ? !this.checked : force;
-                if (next === this.checked)
-                    return;
-                this.checked = next;
-                this.sync();
-                this.dispatchEvent(new Event('change', { bubbles: true }));
-                this.emit('change', { checked: next });
-            }
-        },
-        _a.formAssociated = true,
-        _a; }, { id: 'toggle', text: css });
+    }, { id: 'press', text: css });
 }
 
 /**
  * motionary/components/interaction — micro-interactions.
  * `<usa-ripple>`, `<usa-magnetic>`, `<usa-tilt>`, `<usa-spotlight>`,
- * `<usa-press>`, `<usa-toggle>`.
+ * `<usa-press>`.
  */
 /** Register every component of this category under its default tag. */
 function defineInteractionComponents() {
@@ -412,7 +330,6 @@ function defineInteractionComponents() {
     defineTilt();
     defineSpotlight();
     definePress();
-    defineToggle();
 }
 
 exports.defineInteractionComponents = defineInteractionComponents;
@@ -421,5 +338,4 @@ exports.definePress = definePress;
 exports.defineRipple = defineRipple;
 exports.defineSpotlight = defineSpotlight;
 exports.defineTilt = defineTilt;
-exports.defineToggle = defineToggle;
 //# sourceMappingURL=interaction.cjs.map

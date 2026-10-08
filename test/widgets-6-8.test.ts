@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { installComponentMocks, mount, anims } from './components-setup';
 import { configureComponents } from '../src/components/base';
 import { defineWidgets, WIDGETS, WEATHER_CONDITIONS } from '../src/components/widgets';
-import { WEATHER_FX, PHYSICS2_FX, registerWeatherEffects, registerPhysicsEffects2, registerFx2, FX2_PACKS, VerletWorld, skyAt } from '../src/components/fx2';
+import { WEATHER_FX, PHYSICS2_FX, registerWeatherPack, registerPhysicsPack, registerEffectPacks, EFFECT_PACKS, VerletWorld, skyAt } from '../src/components/fx2';
 import { getEffect } from '../src/components/fx';
 import { COMPONENT_ITEMS } from '../showcase/catalog-components.js';
 import { COMPONENTS, componentSnippets } from '../showcase/components-catalog.js';
@@ -95,15 +95,15 @@ describe('6.8 widgets', () => {
 });
 
 describe('weather & physics packs', () => {
-  it('register (also via registerFx2) as their own entries', () => {
-    registerWeatherEffects();
-    registerPhysicsEffects2();
-    registerFx2();
+  it('register (also via registerEffectPacks) as their own entries', () => {
+    registerWeatherPack();
+    registerPhysicsPack();
+    registerEffectPacks();
     expect(WEATHER_FX.map((d) => d.name)).toEqual(['rain-glass', 'snowfall', 'lightning', 'fog', 'aurora-veil', 'day-cycle']);
     expect(PHYSICS2_FX.map((d) => d.name)).toEqual(['soft-body', 'magnet', 'cloth', 'rope', 'pinball']);
     for (const d of [...WEATHER_FX, ...PHYSICS2_FX]) expect(getEffect(d.name)).toBe(d);
-    expect(FX2_PACKS.weather).toBe(WEATHER_FX);
-    expect(FX2_PACKS.physics).toBe(PHYSICS2_FX);
+    expect(EFFECT_PACKS.weather).toBe(WEATHER_FX);
+    expect(EFFECT_PACKS.physics).toBe(PHYSICS2_FX);
     expect(COMPONENT_ENTRIES['fx-weather']).toBe('fx2/weather');
     expect(COMPONENT_ENTRIES['fx-physics']).toBe('fx2/physics2');
   });
@@ -132,8 +132,8 @@ describe('weather & physics packs', () => {
   });
   it('canvas backgrounds mount a canvas and clean up; soft-body / magnet move and restore', () => {
     vi.stubGlobal('requestAnimationFrame', () => 1);
-    registerWeatherEffects();
-    registerPhysicsEffects2();
+    registerWeatherPack();
+    registerPhysicsPack();
     const el = mount<HTMLElement>('<div><span>a</span><span>b</span></div>');
     for (const d of [...WEATHER_FX, ...PHYSICS2_FX.filter((x) => x.kind === 'background')]) {
       const stop = d.run(el, { ...d.defaults }, ctx()) as () => void;

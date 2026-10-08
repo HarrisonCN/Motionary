@@ -1,6 +1,6 @@
 'use strict';
 
-var indexTags = require('../chunks/index-tags-wv0R_vkO.cjs');
+var indexTags = require('../chunks/index-tags-BTMwrfgV.cjs');
 
 /**
  * motionary/components/react — React wrappers for every `<usa-*>`
@@ -14,7 +14,7 @@ var indexTags = require('../chunks/index-tags-wv0R_vkO.cjs');
  * import { createUsaComponents } from 'motionary/components/react';
  * import { defineComponents } from 'motionary/components';
  * defineComponents();
- * const { UsaButton, UsaToggle } = createUsaComponents(React);
+ * const { UsaButton, UsaSwitch } = createUsaComponents(React);
  * <UsaButton deform="squash" onUsaSubmit={(e) => e.detail.done(true)}><button>Pay</button></UsaButton>
  * ```
  *

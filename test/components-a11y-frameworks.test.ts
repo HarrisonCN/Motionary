@@ -9,7 +9,6 @@ import { categoryOfTag, defineUsed, loadCategory } from '../src/components/lazy'
 const TAGS = Object.values(COMPONENT_CATEGORIES).flat() as string[];
 /** Elements users operate directly must be focusable and carry a role. */
 const INTERACTIVE: Record<string, string> = {
-  'usa-toggle': 'switch',
   'usa-like': 'button',
   'usa-hold': 'button',
   'usa-checkbox': 'checkbox',

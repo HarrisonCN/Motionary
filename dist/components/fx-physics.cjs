@@ -1,8 +1,8 @@
 'use strict';
 
-var base = require('../chunks/base-BaQV-2ha.cjs');
 var registry = require('../chunks/registry-DehBVRDV.cjs');
 var generative = require('../chunks/generative-BHIj-NU0.cjs');
+require('../chunks/base-BaQV-2ha.cjs');
 require('../chunks/shared-jkgRH-Hx.cjs');
 
 /** A minimal Verlet world: points, distance sticks, gravity, damping. */
@@ -337,14 +337,8 @@ const PHYSICS2_FX = [
 function registerPhysicsPack() {
     registry.registerEffects(PHYSICS2_FX);
 }
-/** @deprecated since 6.9 — use `registerPhysicsPack()` (removed in 7.0; `npx usa-codemod-7`). */
-function registerPhysicsEffects2() {
-    base.deprecate('registerPhysicsEffects2', 'registerPhysicsEffects2() is deprecated since 6.9 and removed in 7.0 — use registerPhysicsPack() (npx usa-codemod-7).');
-    registerPhysicsPack();
-}
 
 exports.PHYSICS2_FX = PHYSICS2_FX;
 exports.VerletWorld = VerletWorld;
-exports.registerPhysicsEffects2 = registerPhysicsEffects2;
 exports.registerPhysicsPack = registerPhysicsPack;
 //# sourceMappingURL=fx-physics.cjs.map
