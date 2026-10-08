@@ -381,6 +381,25 @@ link.addEventListener('click', (e) => {
 
 Persistent: `<usa-fx effect="velocity-skew" trigger="load">`, `spotlight` (`radius`, `dim`), `edge-glow` (`color`, `size`). Reduced motion: transitions cross-fade (150 ms), persistent effects are off.
 
+### v5.4 Scroll stories — `<usa-story>` (`components/effects`)
+
+```js
+import { defineStory } from 'use-scroll-animate/components/effects';
+defineStory();
+```
+```html
+<usa-story template="pin">
+  <figure data-stage>…</figure>
+  <section data-step>Chapter 1</section>
+  <section data-step>Chapter 2</section>
+</usa-story>
+<usa-story template="gallery"><div data-sticky><div data-track>…cards…</div></div></usa-story>
+<usa-story template="compare" label="Before / after"><div data-sticky><img data-before …><img data-after …></div></usa-story>
+<usa-story template="counter"><strong data-count="12,480">0</strong></usa-story>
+```
+
+Templates `pin` · `gallery` · `zoom` (`zoom="6"`) · `compare` · `counter` · `highlight`. Each sets `--usa-story-progress`, fires `usa-story-step`, and exposes `progress`, `step`, `update()`. Reduced motion: no sliding / zooming, final counter values. Demo: `showcase/story.html`.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

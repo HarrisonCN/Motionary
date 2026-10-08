@@ -7,6 +7,8 @@ export const category = K('fx', '✨', 'Effects (plugin API)', '特效（插件 
 const FX = (id, en, zh, descEn, descZh, tags, usage, demo, controls, pack) => C('usa-fx', 'fx', en, zh, descEn, descZh, tags, usage, demo, { id, define: 'defineFx', controls, pack });
 /** A 5.x effect-pack card (registers use-scroll-animate/components/effects in its code). */
 const PK = (id, en, zh, descEn, descZh, tags, usage, demo, controls) => FX(id, en, zh, descEn, descZh, tags, usage, demo, controls, true);
+/** A 5.4 <usa-story> card (defineStory from use-scroll-animate/components/effects). */
+const SC = (id, en, zh, descEn, descZh, tags, usage, demo, controls) => C('usa-story', 'fx', en, zh, descEn, descZh, tags, usage, demo, { id, define: 'defineStory', entry: 'effects', pack: true, controls });
 
 export const components = [
   FX('fx', 'Attention seekers', '吸引注意', 
@@ -84,6 +86,24 @@ export const components = [
     '<usa-fx effect="velocity-skew" trigger="load">\n  <section class="gallery">…</section>\n</usa-fx>',
     '<usa-fx effect="velocity-skew" trigger="load"><div class="demo-tile">Scroll the page ↕</div></usa-fx>',
     [{ key: 'effect', values: ['velocity-skew', 'edge-glow'] }]),
+  SC('story-compare', 'Story: before / after', '叙事：前后对比',
+    '5.4: <usa-story template="compare"> wipes from before to after as you scroll; the handle is draggable and a keyboard slider (←/→, Home/End). Full-page templates (pin, gallery, zoom) live on the Scroll stories page.',
+    '5.4：<usa-story template="compare"> 随滚动从“之前”擦到“之后”；分隔把手可拖动，也是键盘滑块（←/→、Home/End）。整页模板（pin、gallery、zoom）见“滚动叙事”页面。',
+    ['story', 'scrollytelling', 'compare', 'before after', 'slider'],
+    '<usa-story template="compare" label="2019 vs 2026">\n  <div data-sticky>\n    <img data-before src="before.jpg" alt="Before">\n    <img data-after src="after.jpg" alt="After">\n  </div>\n</usa-story>',
+    '<usa-story template="compare" style="--usa-story-h:150px"><div data-sticky style="position:relative;border-radius:12px"><div data-before class="demo-tile" style="height:100%;background:#334155">Before</div><div data-after class="demo-tile" style="height:100%;background:#7c5cff;text-align:right">After</div></div></usa-story>'),
+  SC('story-counter', 'Story: data counters', '叙事：数据计数器',
+    '5.4: template="counter" counts every [data-count] up (easing out, separators and prefix/suffix kept) when it scrolls into view; screen readers get the final value.',
+    '5.4：template="counter" 让每个 [data-count] 在进入视口时递增计数（缓出，保留千分位与前后缀）；读屏器直接读到最终值。',
+    ['story', 'counter', 'numbers', 'data story'],
+    '<usa-story template="counter">\n  <strong data-count="12,480">0</strong> users\n  <strong data-count="99.9%">0</strong> uptime\n</usa-story>',
+    '<usa-story template="counter"><div class="demo-row"><span class="demo-pill" data-count="12,480">0</span><span class="demo-pill" data-count="99.9%">0</span><span class="demo-pill" data-count="$4.2">0</span></div></usa-story>'),
+  SC('story-highlight', 'Story: step highlight', '叙事：逐段高亮',
+    '5.4: template="highlight" dims every paragraph except the one crossing the viewport center (pin does the same for [data-step] sections next to a sticky [data-stage]); fires usa-story-step.',
+    '5.4：template="highlight" 让穿过视口中线的段落高亮、其余变暗（pin 模板对 [data-step] 章节做同样处理，并固定 [data-stage]）；触发 usa-story-step 事件。',
+    ['story', 'highlight', 'pin', 'steps', 'scrollytelling'],
+    '<usa-story template="pin">\n  <figure data-stage>…chart…</figure>\n  <section data-step>Step 1</section>\n  <section data-step>Step 2</section>\n</usa-story>',
+    '<usa-story template="highlight"><p class="demo-note">First, the idea.</p><p class="demo-note">Then the build.</p><p class="demo-note">Finally, the launch.</p></usa-story>'),
 ];
 
 export const helpers = [

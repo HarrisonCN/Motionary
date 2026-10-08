@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>use-scroll-animate · Scroll stories (&lt;usa-story&gt;)</title>
+  <meta name="description" content="Scroll-storytelling templates with &lt;usa-story&gt;: pinned chapters, horizontal gallery, zoom-through, before/after compare, data counters and step highlight." />
+  <meta name="theme-color" content="#0b0d12" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%237c5cff'/%3E%3Cpath d='M18 40 32 22l14 18' fill='none' stroke='white' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+  <style>
+    :root { color-scheme: dark; --accent: #7c5cff; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 16px/1.6 system-ui, -apple-system, 'Segoe UI', sans-serif; background: #0b0d12; color: #e7e9ee; }
+    header, .intro, footer { max-width: 760px; margin: 0 auto; padding: 48px 20px; }
+    header a, footer a { color: #b9a8ff; }
+    h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.1; margin: 0 0 12px; }
+    h2 { margin: 0 0 8px; }
+    .label { display: block; max-width: 760px; margin: 40px auto 8px; padding: 0 20px; font: 600 .8rem/1 ui-monospace, monospace; color: #9aa3b2; text-transform: uppercase; letter-spacing: .08em; }
+    /* pin */
+    .pin { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+    .pin [data-stage] { height: 100vh; display: grid; place-items: center; }
+    .pin .chart { width: min(360px, 80%); aspect-ratio: 1; border-radius: 24px; display: grid; place-items: center; font-size: 4rem; font-weight: 800; background: #1b1f2a; transition: background .4s, transform .4s; }
+    .pin [data-stage][data-active-step="1"] .chart { background: #7c5cff; transform: rotate(-6deg); }
+    .pin [data-stage][data-active-step="2"] .chart { background: #ff5c8a; transform: rotate(6deg) scale(1.05); }
+    .pin [data-step] { display: flex; align-items: center; font-size: 1.4rem; }
+    .pin .steps { grid-column: 2; }
+    .pin [data-stage] { grid-column: 1; grid-row: 1; }
+    /* gallery */
+    .gallery { height: 300vh; }
+    .gallery .tile { flex: 0 0 min(70vw, 420px); height: 60vh; border-radius: 24px; display: grid; place-items: center; font-size: 3rem; font-weight: 800; }
+    .gallery [data-track] { padding: 0 10vw; }
+    /* zoom */
+    .zoom { height: 250vh; }
+    .zoom .portal { font-size: clamp(3rem, 12vw, 9rem); font-weight: 900; background: linear-gradient(90deg, #7c5cff, #22d3ee); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    /* compare */
+    .compare { height: 220vh; max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+    .compare [data-sticky] { --usa-story-h: 70vh; top: 15vh; border-radius: 24px; }
+    .compare [data-before], .compare [data-after] { display: grid; place-items: center; font-size: 3rem; font-weight: 800; }
+    .compare [data-before] { background: #334155; }
+    .compare [data-after] { background: linear-gradient(135deg, #7c5cff, #ff5c8a); }
+    /* counter */
+    .counter { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; max-width: 900px; margin: 0 auto; padding: 20vh 20px; }
+    .counter div { background: #151924; border-radius: 20px; padding: 28px; text-align: center; }
+    .counter strong { display: block; font-size: 2.6rem; color: #b9a8ff; }
+    /* highlight */
+    .highlight { max-width: 680px; margin: 0 auto; padding: 30vh 20px; font-size: 1.5rem; }
+    .highlight p { margin: 0 0 30vh; }
+    @media (max-width: 720px) { .pin { grid-template-columns: 1fr; } .pin [data-stage] { position: sticky; height: 50vh; } .pin .steps { grid-column: 1; grid-row: 2; } }
+  </style>
+</head>
+<body>
+  <header>
+    <p><a href="./components.html">← Components</a> · <a href="./playground.html">Playground</a></p>
+    <h1>Scroll stories with &lt;usa-story&gt;</h1>
+    <p>Six scroll-storytelling templates (5.4) — each sets <code>--usa-story-progress</code> and fires <code>usa-story-step</code>. Under reduced motion nothing slides or zooms: the gallery stacks, counters show their final values.</p>
+  </header>
+
+  <span class="label">template="pin"</span>
+  <usa-story template="pin" class="pin">
+    <div data-stage><div class="chart" aria-hidden="true">◆</div></div>
+    <div class="steps">
+      <section data-step><p>Chapter one — the stage stays pinned while the text scrolls.</p></section>
+      <section data-step><p>Chapter two — the active step drives the stage via <code>data-active-step</code>.</p></section>
+      <section data-step><p>Chapter three — style it with plain CSS.</p></section>
+    </div>
+  </usa-story>
+
+  <span class="label">template="gallery"</span>
+  <usa-story template="gallery" class="gallery">
+    <div data-sticky>
+      <div data-track>
+        <div class="tile" style="background:#7c5cff">1</div>
+        <div class="tile" style="background:#ff5c8a">2</div>
+        <div class="tile" style="background:#22d3ee">3</div>
+        <div class="tile" style="background:#facc15;color:#111">4</div>
+        <div class="tile" style="background:#34d399;color:#111">5</div>
+      </div>
+    </div>
+  </usa-story>
+
+  <span class="label">template="zoom"</span>
+  <usa-story template="zoom" zoom="8" class="zoom">
+    <div data-stage><div class="portal">ZOOM</div></div>
+  </usa-story>
+
+  <span class="label">template="compare"</span>
+  <usa-story template="compare" label="Before / after" class="compare">
+    <div data-sticky>
+      <div data-before>Before</div>
+      <div data-after>After</div>
+    </div>
+  </usa-story>
+
+  <span class="label">template="counter"</span>
+  <usa-story template="counter" class="counter">
+    <div><strong data-count="12,480">0</strong>developers</div>
+    <div><strong data-count="99.9%">0</strong>uptime</div>
+    <div><strong data-count="$4.2M">0</strong>raised</div>
+  </usa-story>
+
+  <span class="label">template="highlight"</span>
+  <usa-story template="highlight" class="highlight">
+    <p>Every story starts with a question.</p>
+    <p>The paragraph crossing the middle of the screen lights up.</p>
+    <p>The others step back so the reader keeps their place.</p>
+  </usa-story>
+
+  <footer>
+    <p><code>import { defineStory } from 'use-scroll-animate/components/effects'; defineStory();</code></p>
+  </footer>
+
+  <script type="module">
+    const LOCAL = new URL('../dist/', import.meta.url).href;
+    const CDN = 'https://cdn.jsdelivr.net/npm/use-scroll-animate@5/dist/';
+    let lib;
+    try { lib = await import(LOCAL + 'components/effects.js'); } catch { lib = await import(CDN + 'components/effects.js'); }
+    lib.defineStory();
+  </script>
+</body>
+</html>

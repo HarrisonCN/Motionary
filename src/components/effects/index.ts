@@ -15,10 +15,13 @@ import type { EffectDefinition } from '../fx/registry';
 import { CARD_FX, CLICK_FX } from './cards-click';
 import { PHYSICS_FX } from './physics';
 import { PAGE_FX } from './page';
+import { defineStory } from './story';
 
 export { CARD_FX, CLICK_FX, PHYSICS_FX, PAGE_FX };
 export { solveSpring, springKeyframes, bounceKeyframes } from './physics';
 export type { SpringOptions } from './physics';
+export { defineStory, STORY_TEMPLATES, storyProgress, formatCount } from './story';
+export type { StoryTemplate, UsaStoryElement } from './story';
 export { fxLayer } from './shared';
 
 /** The effect packs by version, in release order. */
@@ -41,6 +44,11 @@ export function registerPhysicsEffects(): void {
 /** 5.3: page-wide transitions and effects. */
 export function registerPageEffects(): void {
   registerEffects(EFFECT_PACKS.page);
+}
+
+/** Define the 5.x elements of this entry (`<usa-story>`, …) under their default tags. */
+export function defineEffectElements(): void {
+  defineStory();
 }
 
 /** Register the built-ins and every pack (idempotent). */

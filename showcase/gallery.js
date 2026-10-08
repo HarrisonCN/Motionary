@@ -61,6 +61,7 @@ async function loadLibrary() {
   }
   lib.defineComponents();
   lib.registerAllEffects(); // 5.x effect packs (use-scroll-animate/components/effects)
+  lib.defineEffectElements?.(); // 5.4+: <usa-story>, …
 }
 
 /* ------------------------------------------------------------------ */
