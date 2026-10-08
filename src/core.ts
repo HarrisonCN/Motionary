@@ -10,7 +10,7 @@ import type {
   ScrollAnimateConfig,
   ScrollAnimateInstance,
 } from './types';
-import { resolvePreset, resolveEasing } from './presets';
+import { resolvePreset, resolveEasing, reversePreset } from './presets';
 
 type KeyframeMap = ReturnType<typeof resolvePreset>;
 type Target = string | Element | NodeList | Element[];
@@ -353,13 +353,15 @@ function buildAnimation(
   preset: KeyframeMap,
   easing: Required<AnimateOptions>['easing']
 ): { keyframes: Keyframe[]; easing: string } {
+  // `frames`: intermediate keyframes (overshoot, bounce, glitch …) between from and to
+  const list = [preset.from, ...(preset.frames || []), preset.to] as Keyframe[];
   if (typeof easing !== 'function') {
-    return { keyframes: [preset.from as Keyframe, preset.to as Keyframe], easing: resolveEasing(easing) };
+    return { keyframes: list, easing: resolveEasing(easing) };
   }
   const samples = sampleEasing(easing);
   // Modern browsers: an exact, property-agnostic `linear()` easing curve.
-  if (supportsLinearEasing()) {
-    return { keyframes: [preset.from as Keyframe, preset.to as Keyframe], easing: `linear(${samples.join(', ')})` };
+  if (supportsLinearEasing() || preset.frames) {
+    return { keyframes: list, easing: supportsLinearEasing() ? `linear(${samples.join(', ')})` : 'ease' };
   }
   // Fallback: approximate the curve with interpolated keyframes.
   const props = Object.keys(preset.from).filter((p) => p in preset.to);
@@ -508,7 +510,7 @@ function startNative(el: Element, opts: Required<AnimateOptions>, onFrozen?: () 
     // Reverse keyframes over the `exit` range; `fill: 'forwards'` so it has
     // no effect before the element starts leaving.
     const leave = resolvePreset(opts.exit === true ? opts.animation : opts.exit);
-    const out = buildAnimation({ from: leave.to, to: leave.from }, opts.easing);
+    const out = buildAnimation(reversePreset(leave), opts.easing);
     try {
       const timeline = new (globalThis as any).ViewTimeline({ subject: el, axis: 'block' });
       const timing = { fill: 'forwards', easing: out.easing, timeline, rangeStart: 'exit 0%', rangeEnd: 'exit 100%' };
@@ -543,7 +545,7 @@ function runExit(el: Element, opts: Required<AnimateOptions>, config: Required<S
   }
   cancelRunning(el);
   const preset = resolvePreset(opts.exit === true ? opts.animation : (opts.exit as Exclude<typeof opts.exit, boolean>));
-  const built = buildAnimation({ from: preset.to, to: preset.from }, opts.easing);
+  const built = buildAnimation(reversePreset(preset), opts.easing);
   const timing: KeyframeAnimationOptions = { duration: opts.duration, easing: built.easing, fill: 'forwards' };
   let anim: Animation;
   try {

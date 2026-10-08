@@ -23,6 +23,36 @@
 - 🧩 **フレームワークに依存しない**：Vanilla JS、React、Vue、Svelteなどとシームレスに動作。一流の React Hooks と Vue Composables を内蔵。
 - ♿ **アクセシブル**：`prefers-reduced-motion` を標準でサポート。
 
+## スクロールプリセット 2.0（v6.1）🎞️
+
+**214 種類のスクロール入場プリセット**：コア 33 種 + **拡張 181 種**。拡張セットは独立したツリーシェイク可能なエントリ（gzip 約 4.7 kB、コアのサイズは予算内のまま）です。[アニメーションストア](https://harrisoncn.github.io/use-scroll-animate/showcase/) でライブデモとコードのコピーができ、全プリセットとキーフレームは [docs/presets.md](./docs/presets.md) に一覧があります。
+
+```js
+import ScrollAnimate from 'use-scroll-animate';
+import 'use-scroll-animate/presets/extended'; // import するだけで登録
+
+ScrollAnimate.observe('.card', { animation: 'bounce-in-up', duration: 900 });
+ScrollAnimate.observe('.hero img', { animation: 'scrub-shrink', engine: 'css', viewRange: ['cover 0%', 'cover 100%'] });
+```
+
+ビルドなしのページでは `dist/index.umd.js` の後に `dist/presets-extended.umd.js`（自動登録）を読み込みます。プリセット名は `animation` / `exit`、`data-sa-animation`、`useScrollAnimate` などのフレームワーク連携、`<scroll-animate animation>`、`<usa-reveal effect>` / `<usa-stagger effect>` で使えます。アニメーションするのは `transform`・`opacity`・`filter`・`clip-path` のみで、reduced motion 時は動きません。プリセットは中間キーフレーム `frames`（オーバーシュート、バウンス、グリッチ）を持てるようになり、独自プリセットも `registerPresets({ 'my-pop': { from, to, frames } })` で登録できます。
+
+| カテゴリ | 合計 | 6.1 で追加 |
+|---|---:|---|
+| フェード | 19 | `fade-in-up-sm` · `fade-in-down-sm` · `fade-in-left-sm` · `fade-in-right-sm` · `fade-in-up-lg` · `fade-in-down-lg` · `fade-in-left-lg` · `fade-in-right-lg` · `fade-in-up-left` · `fade-in-up-right` · `fade-in-down-left` · `fade-in-down-right` · `fade-in-scale` · `fade-in-half` |
+| ズーム・スケール | 23 | `zoom-in-up` · `zoom-in-down` · `zoom-in-left` · `zoom-in-right` · `zoom-out-up` · `zoom-out-down` · `zoom-out-left` · `zoom-out-right` · `zoom-in-big` · `zoom-out-big` · `zoom-bounce` · `zoom-in-rotate` · `scale-x-left` · `scale-x-right` · `scale-y-top` · `scale-y-bottom` · `stretch-x` · `stretch-y` |
+| 3D フリップ | 22 | `flip-x-reverse` · `flip-y-reverse` · `flip-y-full` · `flip-diagonal` · `flip-diagonal-reverse` · `flip-left` · `flip-right` · `unfold-down` · `unfold-up` · `door-open-left` · `door-open-right` · `fold-in` · `flip-x-bounce` · `flip-y-bounce` · `swing-in-top` · `swing-in-bottom` · `swing-in-left` · `swing-in-right` |
+| スライド | 20 | `slide-up-spring` · `slide-down-spring` · `slide-left-spring` · `slide-right-spring` · `slide-up-sm` · `slide-down-sm` · `back-in-up` · `back-in-down` · `back-in-left` · `back-in-right` · `light-speed-in-left` · `light-speed-in-right` · `rise-in` · `sink-in` · `float-in-up` · `float-in-down` |
+| 回転・スキュー | 20 | `roll-in-left` · `roll-in-right` · `spiral-in` · `spiral-in-reverse` · `spin-in` · `rotate-in-up-left` · `rotate-in-up-right` · `rotate-in-down-left` · `rotate-in-down-right` · `skew-in-left` · `skew-in-y` · `shear-in` · `shear-in-reverse` · `twist-in` · `tilt-in-left` · `tilt-in-right` |
+| ブラー・マスク | 14 | `blur-in-down` · `blur-in-left` · `blur-in-right` · `blur-in-strong` · `blur-in-zoom` · `blur-in-scale` · `blur-in-x` · `mask-up` · `mask-down` · `mask-left` · `mask-right` · `blur-mask-up` |
+| クリップ | 22 | `clip-circle-top` · `clip-circle-bottom` · `clip-circle-left` · `clip-circle-right` · `clip-circle-corner` · `clip-ellipse` · `clip-diamond` · `clip-split-x` · `clip-split-y` · `clip-box` · `clip-pill` · `clip-blinds` · `clip-blinds-x` · `clip-diagonal` · `clip-diagonal-reverse` · `clip-slant-right` · `clip-slant-left` |
+| バウンス・弾性 | 17 | `bounce-in` · `bounce-in-up` · `bounce-in-down` · `bounce-in-left` · `bounce-in-right` · `elastic-in` · `elastic-in-x` · `rubber-in` · `jello-in` · `wobble-in` · `tada-in` · `heartbeat-in` · `drop-in` · `pop-in` · `squash-in` · `shake-in` · `swing-in` |
+| 色・光 | 14 | `brightness-in` · `darken-in` · `color-in` · `saturate-in` · `hue-in` · `sepia-in` · `invert-in` · `contrast-in` · `exposure-in` · `vintage-in` · `blur-bright-in` · `shadow-lift` · `neon-glow-in` · `glow-in` |
+| 奥行き・遠近 | 10 | `perspective-in-up` · `perspective-in-down` · `perspective-in-left` · `perspective-in-right` · `depth-push` · `depth-pull` · `depth-in-up` · `swoop-in-left` · `swoop-in-right` · `card-tilt-in` |
+| グリッチ・特殊 | 9 | `glitch-in` · `glitch-in-color` · `typewriter` · `typewriter-lines` · `hinge-in` · `flicker-in` · `scan-in` · `materialize` · `teleport-in` |
+| スタッガー向け | 8 | `stagger-fade-up` · `stagger-pop` · `stagger-rise` · `stagger-slide` · `stagger-flip` · `stagger-blur` · `stagger-zoom` · `stagger-drop` |
+| スクロール連動 | 12 | `scrub-parallax-up` · `scrub-parallax-down` · `scrub-rotate` · `scrub-spin` · `scrub-scale` · `scrub-shrink` · `scrub-pan-left` · `scrub-pan-right` · `scrub-tilt` · `scrub-fade-through` · `scrub-blur-through` · `scrub-reveal-x` |
+
 ## アニメーションコンポーネント（v2.2）🧩
 
 依存ゼロの**アニメーション Web Components 30 種**（`<usa-*>`）を 6 カテゴリで提供。**Web ページと Windows デスクトップアプリ**（Electron、Tauri、WinUI/WPF/WinForms の WebView2、PWA）の両方で動作します。Custom Elements + CSS + Web Animations のみ、ツリーシェイク可能、SSR セーフ、`prefers-reduced-motion` 対応。**[ライブギャラリー](https://harrisoncn.github.io/use-scroll-animate/showcase/components.html)** · [コンポーネント文書](./docs/components.md)（英語）· [Windows アプリガイド](./docs/windows-apps.md)（英語）
@@ -57,6 +87,7 @@ defineComponents(); // カテゴリ単位: import { defineTextComponents } from 
 
 ## ドキュメント
 
+- [プリセット一覧](./docs/presets.md)（全 214 種、英語）
 - [API リファレンス](./docs/API.md)（英語）· [デモ](./demo/index.html)（全プリセットをクリックで再生、ビルド不要）
 - 移行ガイド：[AOS から](./docs/migration-from-aos.md) · [GSAP ScrollTrigger から](./docs/migration-from-gsap-scrolltrigger.md)
 - [2.0 へのアップグレード](./docs/deprecations.md)：`createReactHooks` / `createVueComposables` は `use-scroll-animate/react` / `/vue` からのみ。`dist/index.mjs`・`dist/index.esm.js`・`dist/types/*`・`dist/*` ディープインポートは削除、デフォルトエンジンは `'auto'`。CDN の `dist/index.umd.js` は変更なし。詳細は [CHANGELOG](./CHANGELOG.md) の MIGRATION。

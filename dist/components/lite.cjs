@@ -579,6 +579,10 @@ function revealFrom(effect, distance = 32) {
 }
 /** Keyframes from the effect to the natural state. */
 function revealKeyframes(effect, distance) {
+    // Any preset registered with the scroll library (core, `presets/extended`, your own)
+    const p = REVEAL_EFFECTS.includes(effect) ? null : globalThis[Symbol.for('use-scroll-animate.presets')]?.[effect];
+    if (p)
+        return [p.from, ...(p.frames || []), p.to];
     const from = revealFrom(effect, distance);
     const to = {};
     for (const k of Object.keys(from)) {

@@ -240,6 +240,12 @@ code, kbd, pre { font-family: var(--mono); }
 [data-cat="blur"] { --g1: #a855f7; --g2: #ec4899; }
 [data-cat="clip"] { --g1: #10b981; --g2: #84cc16; }
 [data-cat="attention"] { --g1: #ef4444; --g2: #f59e0b; }
+[data-cat="elastic"] { --g1: #f43f5e; --g2: #fb923c; }
+[data-cat="light"] { --g1: #eab308; --g2: #f472b6; }
+[data-cat="depth"] { --g1: #0891b2; --g2: #818cf8; }
+[data-cat="special"] { --g1: #14b8a6; --g2: #a3e635; }
+[data-cat="stagger"] { --g1: #8b5cf6; --g2: #f472b6; }
+[data-cat="scrub"] { --g1: #2563eb; --g2: #a855f7; }
 [data-cat="feature"] { --g1: #6366f1; --g2: #22d3ee; }
 [data-cat="framework"] { --g1: #0ea5e9; --g2: #8b5cf6; }
 [data-fw="react"] { --g1: #149eca; --g2: #58c4dc; }
@@ -272,6 +278,7 @@ code, kbd, pre { font-family: var(--mono); }
 .erow { width: 56%; display: grid; gap: 14px; padding: 60% 0; }
 .erow .obj { width: 100%; aspect-ratio: 3 / 1; border-radius: 14px; }
 .erow .obj::after { display: none; }
+.erow.is-scrub .obj { aspect-ratio: 2 / 1; }
 
 /* ---------------- Detail ---------------- */
 .detail { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: clamp(0px, 3vw, 32px); }

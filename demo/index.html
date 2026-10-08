@@ -73,7 +73,7 @@
     (function load() {
       var s = document.createElement('script');
       s.src = '../dist/index.umd.js';
-      s.onload = start;
+      s.onload = extended;
       s.onerror = function () {
         var cdn = document.createElement('script');
         cdn.src = 'https://unpkg.com/use-scroll-animate/dist/index.umd.js';
@@ -82,6 +82,14 @@
       };
       document.head.appendChild(s);
     })();
+
+    // 6.1: the extended presets register themselves into the shared table (separate file).
+    function extended() {
+      var x = document.createElement('script');
+      x.src = '../dist/presets-extended.umd.js';
+      x.onload = x.onerror = start;
+      document.head.appendChild(x);
+    }
 
     function start() {
       var lib = window.ScrollAnimate;

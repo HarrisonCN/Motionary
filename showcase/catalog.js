@@ -3,22 +3,17 @@
  * Pure data (no DOM, no library import) so it can be unit-tested.
  *
  * kind:
- *  - 'preset'    one built-in preset (src/presets.ts)
+ *  - 'preset'    one built-in preset (src/presets.ts, or the 6.1 extended set: catalog-extended.js)
  *  - 'feature'   an option / helper (stagger, exit, parallax, progressVar, engine, sequence (timeline), combo, easing)
  *  - 'framework' an adapter entry point (react, vue, svelte, solid, element)
  * recipe: which code generator / demo the item uses (see codegen.js and app.js)
  */
 
-/** Category chips, in display order. */
+import { PRESET_CATEGORIES, EXTENDED_ITEMS } from './catalog-extended.js';
+
+/** Category chips, in display order (preset families, then features and frameworks). */
 export const CATEGORIES = [
-  { id: 'fade', en: 'Fade', zh: '淡入' },
-  { id: 'zoom', en: 'Zoom & scale', zh: '缩放' },
-  { id: 'flip', en: 'Flip 3D', zh: '3D 翻转' },
-  { id: 'slide', en: 'Slide', zh: '滑入' },
-  { id: 'rotate', en: 'Rotate & skew', zh: '旋转与倾斜' },
-  { id: 'blur', en: 'Blur', zh: '模糊' },
-  { id: 'clip', en: 'Clip reveal', zh: '裁剪揭示' },
-  { id: 'attention', en: 'Attention', zh: '强调' },
+  ...PRESET_CATEGORIES,
   { id: 'feature', en: 'Features', zh: '功能' },
   { id: 'framework', en: 'Frameworks', zh: '框架' },
 ];
@@ -245,7 +240,12 @@ export const FRAMEWORK_ITEMS = [
   },
 ];
 
-export const ITEMS = [...PRESET_ITEMS, ...FEATURE_ITEMS, ...FRAMEWORK_ITEMS];
+const order = (item) => CATEGORIES.findIndex((c) => c.id === item.category);
+/** Every preset (33 core + 181 extended), grouped by category, core first within each. */
+export const ALL_PRESET_ITEMS = [...PRESET_ITEMS, ...EXTENDED_ITEMS].sort((a, b) => order(a) - order(b));
+
+export { EXTENDED_ITEMS };
+export const ITEMS = [...ALL_PRESET_ITEMS, ...FEATURE_ITEMS, ...FRAMEWORK_ITEMS];
 
 export function findItem(id) {
   return ITEMS.find((item) => item.id === id) || null;

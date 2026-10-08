@@ -65,6 +65,16 @@
     "limit": 2048
   },
   {
+    "name": "dist/presets-extended.umd.js (minified, 181 extended presets)",
+    "file": "dist/presets-extended.umd.js",
+    "limit": 5120
+  },
+  {
+    "name": "import 'use-scroll-animate/presets/extended'",
+    "import": "export * from 'pkg/presets/extended';",
+    "limit": 5376
+  },
+  {
     "name": "dist/components.umd.js (minified, all components + CSS)",
     "file": "dist/components.umd.js",
     "limit": 118528

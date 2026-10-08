@@ -1,6 +1,7 @@
 'use strict';
 
-var core = require('./chunks/core-qpECfEkb.cjs');
+var core = require('./chunks/core-BYLtO0Po.cjs');
+require('./chunks/presets-D2ksQNzJ.cjs');
 
 /**
  * use-scroll-animate - `<scroll-animate>` Web Component

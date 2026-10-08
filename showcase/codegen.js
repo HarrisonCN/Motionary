@@ -4,6 +4,8 @@
  * copy-paste snippets for every entry point. Pure functions (unit-tested).
  */
 
+import { EXTENDED_ITEMS } from './catalog-extended.js';
+
 export const TABS = [
   { id: 'vanilla', label: 'Vanilla', lang: 'js' },
   { id: 'react', label: 'React', lang: 'jsx' },
@@ -17,6 +19,10 @@ export const TABS = [
 export const PKG = 'use-scroll-animate';
 export const CDN_UMD = 'https://unpkg.com/use-scroll-animate@6/dist/index.umd.js';
 export const CDN_ELEMENT = 'https://unpkg.com/use-scroll-animate@6/dist/element.umd.js';
+export const CDN_EXTENDED = 'https://unpkg.com/use-scroll-animate@6/dist/presets-extended.umd.js';
+
+/** Names of the 6.1 extended presets (they need `use-scroll-animate/presets/extended`). */
+export const EXTENDED_NAMES = new Set(EXTENDED_ITEMS.map((i) => i.id));
 
 export const INSTALL = {
   npm: `npm i ${PKG}`,
@@ -51,8 +57,9 @@ export function defaultState(item) {
     axis: 'y',
     progressMode: 'scroll',
     engine: 'css',
-    viewStart: 'entry 0%',
-    viewEnd: 'cover 40%',
+    // scroll-linked presets (recipe 'scrub') span the whole crossing of the viewport
+    viewStart: item.recipe === 'scrub' ? 'cover 0%' : 'entry 0%',
+    viewEnd: item.recipe === 'scrub' ? 'cover 100%' : 'cover 40%',
     gap: -200,
   };
 }
@@ -116,7 +123,7 @@ const TRANSLATE_PX = /translate([XY])\((-?)(\d+(?:\.\d+)?)px\)/;
 
 /** Default translate distance (px) of a preset, or null if it has none in px. */
 export function presetDistance(presets, name) {
-  if (typeof name !== 'string' || !presets || !presets[name]) return null;
+  if (typeof name !== 'string' || !presets || !presets[name] || presets[name].frames) return null;
   const t = presets[name].from.transform;
   const m = typeof t === 'string' ? TRANSLATE_PX.exec(t) : null;
   return m ? Number(m[3]) : null;
@@ -618,7 +625,7 @@ ${onView(2)}
  * Snippets for every tab: `{ vanilla, react, vue, svelte, solid, element, cdn }`.
  * `presets` is the library's PRESETS map (needed for custom distances).
  */
-export function generate(item, state, presets) {
+function snippetsFor(item, state, presets) {
   switch (item.recipe) {
     case 'stagger':
       return staggerSnippets(presets, state);
@@ -627,12 +634,39 @@ export function generate(item, state, presets) {
     case 'progress':
       return progressSnippets(state);
     case 'engine':
+    case 'scrub':
       return engineSnippets(presets, state);
     case 'sequence':
       return sequenceSnippets(state);
     default:
       return revealSnippets(revealOptions(presets, state));
   }
+}
+
+/** Whether the options use any 6.1 extended preset (entrance or exit). */
+export function usesExtended(state) {
+  const names = [].concat(state.preset || [], state.exit && state.exit !== 'none' && state.exit !== 'reverse' ? state.exit : []);
+  return names.some((n) => EXTENDED_NAMES.has(n));
+}
+
+/** Add the extended-presets import (or CDN script) to every tab. */
+export function withExtended(tabs) {
+  const out = {};
+  for (const [id, code] of Object.entries(tabs)) {
+    let next = code;
+    if (code.includes(CDN_UMD)) {
+      next = code.replace(`<script src="${CDN_UMD}"></script>`, `<script src="${CDN_UMD}"></script>\n<script src="${CDN_EXTENDED}"></script>`);
+    } else {
+      next = code.replace(new RegExp(`^([ \\t]*)import [^\\n]*from '${PKG}[^']*';$`, 'm'), (line, indent) => `${line}\n${indent}import '${PKG}/presets/extended'; // registers the 6.1 presets`);
+    }
+    out[id] = next;
+  }
+  return out;
+}
+
+export function generate(item, state, presets) {
+  const tabs = snippetsFor(item, state, presets);
+  return usesExtended(state) ? withExtended(tabs) : tabs;
 }
 
 /** Tab opened first in the detail view. */

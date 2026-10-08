@@ -1,5 +1,6 @@
-import { c as createScrollAnimate } from './chunks/core-mV_TPgG_.js';
-import { s as staggerChildren } from './chunks/stagger-BFAhKknX.js';
+import { c as createScrollAnimate } from './chunks/core-BVQW34aX.js';
+import { s as staggerChildren } from './chunks/stagger-Dh4V-OL0.js';
+import './chunks/presets-BJ09NeTo.js';
 
 /**
  * use-scroll-animate - Svelte integration

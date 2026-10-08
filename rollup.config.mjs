@@ -69,6 +69,7 @@ const entries = {
   svelte: 'src/svelte.ts',
   solid: 'src/solid.ts',
   element: 'src/element.ts',
+  'presets/extended': 'src/extended-presets.ts',
   components: 'src/components/index.ts',
   ...Object.fromEntries(CATEGORIES.map((c) => [`components/${c}`, `src/components/${c}/index.ts`])),
   ...Object.fromEntries(Object.entries(COMPONENT_ENTRIES).filter(([n]) => n !== 'lite').map(([n, src]) => [`components/${n}`, `src/components/${src}.ts`])),
@@ -104,6 +105,12 @@ export default [
   {
     input: 'src/index.ts',
     output: { file: 'dist/index.umd.js', format: 'umd', name: 'ScrollAnimate', exports: 'named', sourcemap: true, plugins: [terser()] },
+    plugins: [resolve(), ts()],
+  },
+  {
+    // 6.1 extended presets for <script> pages: registers itself into the shared preset table.
+    input: 'src/extended-presets-umd.ts',
+    output: { file: 'dist/presets-extended.umd.js', format: 'umd', name: 'ScrollAnimatePresets', exports: 'named', sourcemap: true, plugins: [terser()] },
     plugins: [resolve(), ts()],
   },
   {

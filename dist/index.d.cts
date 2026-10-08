@@ -2,8 +2,14 @@
  * use-scroll-animate - Core Type Definitions
  * A lightweight, high-performance scroll animation library
  */
-/** Built-in animation presets */
-type AnimationPreset = 'fade-in' | 'fade-in-up' | 'fade-in-down' | 'fade-in-left' | 'fade-in-right' | 'zoom-in' | 'zoom-out' | 'flip-x' | 'flip-y' | 'slide-up' | 'slide-down' | 'slide-left' | 'slide-right' | 'bounce' | 'rotate-in' | 'blur-in' | 'skew-in' | 'scale-x' | 'scale-y' | 'shimmer' | 'pulse' | 'swing' | 'scale-up' | 'blur-in-up' | 'flip-up' | 'flip-down' | 'rotate-left' | 'rotate-right' | 'clip-up' | 'clip-down' | 'clip-left' | 'clip-right' | 'clip-circle';
+/** The 33 core presets (always available in `PRESETS`). */
+type CorePreset = 'fade-in' | 'fade-in-up' | 'fade-in-down' | 'fade-in-left' | 'fade-in-right' | 'zoom-in' | 'zoom-out' | 'flip-x' | 'flip-y' | 'slide-up' | 'slide-down' | 'slide-left' | 'slide-right' | 'bounce' | 'rotate-in' | 'blur-in' | 'skew-in' | 'scale-x' | 'scale-y' | 'shimmer' | 'pulse' | 'swing' | 'scale-up' | 'blur-in-up' | 'flip-up' | 'flip-down' | 'rotate-left' | 'rotate-right' | 'clip-up' | 'clip-down' | 'clip-left' | 'clip-right' | 'clip-circle';
+/**
+ * Every built-in preset name: the core set plus the 6.1 extended set, which is
+ * available once `use-scroll-animate/presets/extended` is loaded (or after
+ * `registerPresets(EXTENDED_PRESETS)`).
+ */
+type AnimationPreset = CorePreset | ExtendedPreset;
 /**
  * How `onProgress` / `progressVar` progress is measured.
  * - `'ratio'` (default): the element's visible ratio (IntersectionObserver `intersectionRatio`).
@@ -22,17 +28,27 @@ type ProgressMode = 'ratio' | 'scroll';
  *   since those only mean something for a time-based animation.
  */
 type ScrollEngine = 'auto' | 'js' | 'css';
+/** The 6.1 extended presets (`use-scroll-animate/presets/extended`). */
+type ExtendedPreset = 'fade-in-up-sm' | 'fade-in-down-sm' | 'fade-in-left-sm' | 'fade-in-right-sm' | 'fade-in-up-lg' | 'fade-in-down-lg' | 'fade-in-left-lg' | 'fade-in-right-lg' | 'fade-in-up-left' | 'fade-in-up-right' | 'fade-in-down-left' | 'fade-in-down-right' | 'fade-in-scale' | 'fade-in-half' | 'zoom-in-up' | 'zoom-in-down' | 'zoom-in-left' | 'zoom-in-right' | 'zoom-out-up' | 'zoom-out-down' | 'zoom-out-left' | 'zoom-out-right' | 'zoom-in-big' | 'zoom-out-big' | 'zoom-bounce' | 'zoom-in-rotate' | 'scale-x-left' | 'scale-x-right' | 'scale-y-top' | 'scale-y-bottom' | 'stretch-x' | 'stretch-y' | 'flip-x-reverse' | 'flip-y-reverse' | 'flip-y-full' | 'flip-diagonal' | 'flip-diagonal-reverse' | 'flip-left' | 'flip-right' | 'unfold-down' | 'unfold-up' | 'door-open-left' | 'door-open-right' | 'fold-in' | 'flip-x-bounce' | 'flip-y-bounce' | 'swing-in-top' | 'swing-in-bottom' | 'swing-in-left' | 'swing-in-right' | 'slide-up-spring' | 'slide-down-spring' | 'slide-left-spring' | 'slide-right-spring' | 'slide-up-sm' | 'slide-down-sm' | 'back-in-up' | 'back-in-down' | 'back-in-left' | 'back-in-right' | 'light-speed-in-left' | 'light-speed-in-right' | 'rise-in' | 'sink-in' | 'float-in-up' | 'float-in-down' | 'roll-in-left' | 'roll-in-right' | 'spiral-in' | 'spiral-in-reverse' | 'spin-in' | 'rotate-in-up-left' | 'rotate-in-up-right' | 'rotate-in-down-left' | 'rotate-in-down-right' | 'skew-in-left' | 'skew-in-y' | 'shear-in' | 'shear-in-reverse' | 'twist-in' | 'tilt-in-left' | 'tilt-in-right' | 'blur-in-down' | 'blur-in-left' | 'blur-in-right' | 'blur-in-strong' | 'blur-in-zoom' | 'blur-in-scale' | 'blur-in-x' | 'mask-up' | 'mask-down' | 'mask-left' | 'mask-right' | 'blur-mask-up' | 'clip-circle-top' | 'clip-circle-bottom' | 'clip-circle-left' | 'clip-circle-right' | 'clip-circle-corner' | 'clip-ellipse' | 'clip-diamond' | 'clip-split-x' | 'clip-split-y' | 'clip-box' | 'clip-pill' | 'clip-blinds' | 'clip-blinds-x' | 'clip-diagonal' | 'clip-diagonal-reverse' | 'clip-slant-right' | 'clip-slant-left' | 'bounce-in' | 'bounce-in-up' | 'bounce-in-down' | 'bounce-in-left' | 'bounce-in-right' | 'elastic-in' | 'elastic-in-x' | 'rubber-in' | 'jello-in' | 'wobble-in' | 'tada-in' | 'heartbeat-in' | 'drop-in' | 'pop-in' | 'squash-in' | 'shake-in' | 'swing-in' | 'brightness-in' | 'darken-in' | 'color-in' | 'saturate-in' | 'hue-in' | 'sepia-in' | 'invert-in' | 'contrast-in' | 'exposure-in' | 'vintage-in' | 'blur-bright-in' | 'shadow-lift' | 'neon-glow-in' | 'glow-in' | 'perspective-in-up' | 'perspective-in-down' | 'perspective-in-left' | 'perspective-in-right' | 'depth-push' | 'depth-pull' | 'depth-in-up' | 'swoop-in-left' | 'swoop-in-right' | 'card-tilt-in' | 'glitch-in' | 'glitch-in-color' | 'typewriter' | 'typewriter-lines' | 'hinge-in' | 'flicker-in' | 'scan-in' | 'materialize' | 'teleport-in' | 'stagger-fade-up' | 'stagger-pop' | 'stagger-rise' | 'stagger-slide' | 'stagger-flip' | 'stagger-blur' | 'stagger-zoom' | 'stagger-drop' | 'scrub-parallax-up' | 'scrub-parallax-down' | 'scrub-rotate' | 'scrub-spin' | 'scrub-scale' | 'scrub-shrink' | 'scrub-pan-left' | 'scrub-pan-right' | 'scrub-tilt' | 'scrub-fade-through' | 'scrub-blur-through' | 'scrub-reveal-x';
 /** Easing function types */
 type EasingType = 'linear' | 'ease' | 'ease-in' | 'ease-out' | 'ease-in-out' | 'spring' | 'soft-spring' | 'heavy-bounce' | [number, number, number, number] | ((t: number) => number) | string;
 /** Keyframe definition for custom animations */
 interface AnimationKeyframe {
     [property: string]: string | number;
 }
+/** One intermediate keyframe of a preset: `offset` is 0 < offset < 1. */
+interface AnimationFrame extends AnimationKeyframe {
+    offset: number;
+}
 /** Custom animation definition */
 interface CustomAnimation {
     from: AnimationKeyframe;
     to: AnimationKeyframe;
+    /** Optional intermediate keyframes (overshoot, bounce, …), played between `from` and `to`. */
+    frames?: AnimationFrame[];
 }
+/** The keyframes of a preset (`PRESETS[name]`). */
+type PresetKeyframes = CustomAnimation;
 /** Per-element animation options */
 interface AnimateOptions {
     /** Animation preset name, array of presets, or custom animation object */
@@ -369,11 +385,20 @@ declare function parallax(target: string | Element | NodeList | Element[], optio
  * Defines keyframes for all built-in animation presets
  */
 
-type KeyframeMap = {
-    from: Record<string, string | number>;
-    to: Record<string, string | number>;
-};
-declare const PRESETS: Record<AnimationPreset, KeyframeMap>;
+type KeyframeMap = PresetKeyframes;
+/**
+ * Every registered preset: the 33 core presets, plus the 6.1 extended set once
+ * `use-scroll-animate/presets/extended` is loaded, plus your own.
+ */
+declare const PRESETS: Record<CorePreset, KeyframeMap> & Partial<Record<ExtendedPreset, KeyframeMap>>;
+/**
+ * Add (or replace) presets by name: `registerPresets({ 'my-pop': { from, to, frames? } })`.
+ * They work everywhere a preset name does (`animation`, `exit`, `data-sa-animation`,
+ * `<scroll-animate>`, `<usa-reveal effect>`).
+ */
+declare function registerPresets(presets: Record<string, PresetKeyframes>): void;
+/** The same keyframes played backwards (exit animations). */
+declare function reversePreset(p: KeyframeMap): KeyframeMap;
 declare function resolvePreset(animation: AnimationPreset | AnimationPreset[] | CustomAnimation): KeyframeMap;
 /** Easing to CSS cubic-bezier mapping */
 declare const EASING_MAP: Record<string, string>;
@@ -396,5 +421,5 @@ declare function resolveEasing(easing: EasingType): string;
  */
 declare const ScrollAnimate: ScrollAnimateInstance;
 
-export { EASING_MAP, PRESETS, TIMELINE_PRESETS, createScrollAnimate, ScrollAnimate as default, getScrollProgress, parallax, resolveEasing, resolvePosition, resolvePreset, staggerChildren, supportsNativeScrub, supportsScrollTimeline, timeline };
-export type { AnimateOptions, AnimatedElement, AnimationKeyframe, AnimationPreset, CustomAnimation, EasingType, ParallaxHelperOptions, ProgressMode, ScrollAnimateConfig, ScrollAnimateInstance, ScrollEngine, ScrubHandle, ScrubOptions, StaggerOptions, Timeline, TimelineOptions, TimelinePosition, TimelineStepOptions };
+export { EASING_MAP, PRESETS, TIMELINE_PRESETS, createScrollAnimate, ScrollAnimate as default, getScrollProgress, parallax, registerPresets, resolveEasing, resolvePosition, resolvePreset, reversePreset, staggerChildren, supportsNativeScrub, supportsScrollTimeline, timeline };
+export type { AnimateOptions, AnimatedElement, AnimationFrame, AnimationKeyframe, AnimationPreset, CorePreset, CustomAnimation, EasingType, ExtendedPreset, ParallaxHelperOptions, PresetKeyframes, ProgressMode, ScrollAnimateConfig, ScrollAnimateInstance, ScrollEngine, ScrubHandle, ScrubOptions, StaggerOptions, Timeline, TimelineOptions, TimelinePosition, TimelineStepOptions };
