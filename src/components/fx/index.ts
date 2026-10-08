@@ -1,10 +1,10 @@
 /**
- * use-scroll-animate/components/fx — unified plugin-style effects (5.0).
+ * motionary/components/fx — unified plugin-style effects (5.0).
  * `registerEffect({ name, kind, run })`, `playEffect(el, name)`,
  * `bindEffect(el, name, { trigger })`, `<usa-fx effect trigger>`. Built-ins:
  * every timeline preset (`enter`), `pulse` · `pop` · `jelly` · `wiggle` ·
  * `heartbeat` · `bounce` · `flash` · `tada` · `shake` (attention),
- * `burst` · `confetti` · `ripple` (click). More packs: `use-scroll-animate/components/effects`.
+ * `burst` · `confetti` · `ripple` (click). More packs: `motionary/components/effects`.
  */
 import { defineFx, type UsaFxElement } from './fx-el';
 import { registerEffects } from './registry';

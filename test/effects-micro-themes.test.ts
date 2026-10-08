@@ -68,9 +68,9 @@ describe('5.8 micro-interactions', () => {
     vi.useFakeTimers();
     const writeText = vi.fn(async () => undefined);
     Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText } });
-    const b = mount<HTMLElement>('<button data-copy="npm i use-scroll-animate">Copy</button>');
+    const b = mount<HTMLElement>('<button data-copy="npm i motionary">Copy</button>');
     const done = playEffect(b, 'copy-success');
-    expect(writeText).toHaveBeenCalledWith('npm i use-scroll-animate');
+    expect(writeText).toHaveBeenCalledWith('npm i motionary');
     expect(b.textContent).toBe('Copied ✓');
     anims.forEach((a) => a.finish());
     vi.advanceTimersByTime(1600);

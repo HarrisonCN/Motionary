@@ -1,17 +1,17 @@
 'use strict';
 
-var core = require('./chunks/core-BYLtO0Po.cjs');
-var stagger = require('./chunks/stagger-CvhYlKrF.cjs');
-require('./chunks/presets-D2ksQNzJ.cjs');
+var core = require('./chunks/core-B5T0dhFH.cjs');
+var stagger = require('./chunks/stagger-CCFyhzSw.cjs');
+require('./chunks/presets-CUHys3sK.cjs');
 
 /**
- * use-scroll-animate - Svelte integration
+ * motionary - Svelte integration
  *
  * Svelte actions (no import from `svelte` needed, works with Svelte 3, 4 and 5):
  *
  * ```svelte
  * <script>
- *   import { scrollAnimate, scrollStagger } from 'use-scroll-animate/svelte';
+ *   import { scrollAnimate, scrollStagger } from 'motionary/svelte';
  * </script>
  * <div use:scrollAnimate={{ animation: 'fade-in-up', duration: 800 }}>…</div>
  * <ul use:scrollStagger={{ stagger: 60 }}>…</ul>

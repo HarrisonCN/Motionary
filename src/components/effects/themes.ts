@@ -84,7 +84,7 @@ const BASE_CSS = `[data-usa-theme]{background:var(--usa-theme-bg);color:var(--us
 
 const pack = (t: string | ThemePack): ThemePack => {
   const p = typeof t === 'string' ? THEMES[t] : t;
-  if (!p) throw new Error(`[use-scroll-animate] unknown theme "${String(t)}" — ${THEME_NAMES.join(', ')}`);
+  if (!p) throw new Error(`[motionary] unknown theme "${String(t)}" — ${THEME_NAMES.join(', ')}`);
   return p;
 };
 

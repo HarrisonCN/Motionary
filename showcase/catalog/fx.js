@@ -5,10 +5,10 @@ export const category = K('fx', '✨', 'Effects (plugin API)', '特效（插件 
   '统一的效果注册与播放方式（5.0）：registerEffect({ name, kind, run })、playEffect(el, name)、bindEffect(el, name, { trigger }) 或 <usa-fx effect trigger>。内置：全部时间线入场效果、吸引注意效果与点击效果 —— 兼容“减少动态效果”。');
 
 const FX = (id, en, zh, descEn, descZh, tags, usage, demo, controls, pack) => C('usa-fx', 'fx', en, zh, descEn, descZh, tags, usage, demo, { id, define: 'defineFx', controls, pack });
-/** A 5.x effect-pack card (registers use-scroll-animate/components/effects in its code). */
+/** A 5.x effect-pack card (registers motionary/components/effects in its code). */
 const PK = (id, en, zh, descEn, descZh, tags, usage, demo, controls) => FX(id, en, zh, descEn, descZh, tags, usage, demo, controls, true);
-/** A 5.4 <usa-story> card (defineStory from use-scroll-animate/components/effects). */
-/** A 5.6 <usa-audio> card (defineAudio from use-scroll-animate/components/effects). */
+/** A 5.4 <usa-story> card (defineStory from motionary/components/effects). */
+/** A 5.6 <usa-audio> card (defineAudio from motionary/components/effects). */
 const AU = (id, en, zh, descEn, descZh, tags, usage, demo, controls) => C('usa-audio', 'fx', en, zh, descEn, descZh, tags, usage, demo, { id, define: 'defineAudio', entry: 'effects', pack: true, controls });
 /** A 5.7 <usa-gesture-fx> card. */
 const GX = (id, en, zh, descEn, descZh, tags, usage, demo, controls) => C('usa-gesture-fx', 'fx', en, zh, descEn, descZh, tags, usage, demo, { id, define: 'defineGestureFx', entry: 'effects', pack: true, controls });
@@ -145,7 +145,7 @@ export const components = [
     '5.8：23 个同时完成界面状态的微交互 —— 点赞 / 收藏 / 书签切换（aria-pressed）、复制并显示“已复制 ✓”、密码显隐、下载与提交进度（aria-busy）、计数器、顶、鼓掌、表情回应、刷新旋转、删除、输入抖动（aria-invalid）……',
     ['micro-interaction', 'like', 'favorite', 'copy', 'password', 'download', 'progress', 'counter', 'toggle', 'shake'],
     '<usa-fx effect="like-heart" trigger="click">\n  <button aria-pressed="false">♥ <span data-count="12">12</span></button>\n</usa-fx>',
-    '<usa-fx effect="like-heart" trigger="click"><button type="button" class="demo-btn" data-copy="npm i use-scroll-animate">♥ <span data-count="12">12</span></button></usa-fx>',
+    '<usa-fx effect="like-heart" trigger="click"><button type="button" class="demo-btn" data-copy="npm i motionary">♥ <span data-count="12">12</span></button></usa-fx>',
     [{ key: 'effect', values: ['like-heart', 'favorite-star', 'bookmark-flip', 'toggle-morph', 'copy-success', 'download-progress', 'submit-loading', 'send-plane', 'add-to-cart', 'counter-bump', 'upvote', 'clap', 'emoji-react', 'refresh-spin', 'check-toggle', 'input-shake', 'error-flash', 'success-check', 'nudge-hint', 'focus-pulse', 'notify-badge'] }]),
   TH('fx-theme', 'Theme packs', '主题包',
     '5.8: <usa-theme name> applies a theme pack — design tokens (--usa-theme-*), motion tokens and effect presets per role (enter / hover / click / attention / background). Neon, paper, glass, retro and brutalist; applyTheme() for the whole page.',
@@ -174,7 +174,7 @@ export const helpers = [
     'Add your own effect once and use it everywhere — playEffect(), bindEffect(), <usa-fx>. ctx.animate() already applies reduced motion, motion sensitivity, intensity and the animation budget.',
     '注册一次自定义效果，处处可用 —— playEffect()、bindEffect()、<usa-fx>。ctx.animate() 已自动处理减少动态效果、运动敏感度、强度与动画预算。',
     ['plugin', 'registry', 'custom effect'],
-    "import { registerEffect, playEffect } from 'use-scroll-animate/components/fx';\n\nregisterEffect({\n  name: 'spin-pop',\n  kind: 'attention',\n  run: (el, o, ctx) => ctx.animate(el, [{ transform: 'scale(1) rotate(0)' }, { transform: 'scale(1.2) rotate(180deg)' }, { transform: 'scale(1) rotate(360deg)' }], { duration: 700 }),\n});\nplayEffect(document.querySelector('.logo'), 'spin-pop');",
+    "import { registerEffect, playEffect } from 'motionary/components/fx';\n\nregisterEffect({\n  name: 'spin-pop',\n  kind: 'attention',\n  run: (el, o, ctx) => ctx.animate(el, [{ transform: 'scale(1) rotate(0)' }, { transform: 'scale(1.2) rotate(180deg)' }, { transform: 'scale(1) rotate(360deg)' }], { duration: 700 }),\n});\nplayEffect(document.querySelector('.logo'), 'spin-pop');",
     '<div class="demo-row"><span class="demo-pill" data-fx-target>✦</span><button type="button" class="demo-link" data-fx-go>playEffect(el, "spin-pop")</button></div><p class="demo-note" data-fx-list></p>'),
 ];
 

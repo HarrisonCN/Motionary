@@ -25,7 +25,7 @@ export const helpers = [
     'gesture(el, { onPan, onSwipe, onPinch, onLongPress, onTap, onDoubleTap }, { axis }) — pan states carry vx / vy so a spring can continue the motion: spring.set(0, vx).',
     'gesture(el, { onPan, onSwipe, onPinch, onLongPress, onTap, onDoubleTap }, { axis }) —— 拖动状态带有 vx / vy，可交给弹簧继续运动：spring.set(0, vx)。',
     ['pan', 'swipe', 'long press', 'velocity', 'spring'],
-    "import { gesture } from 'use-scroll-animate/components/gesture';\nimport { createSpring } from 'use-scroll-animate/components/physics';\n\nconst x = createSpring({ spring: 'wobbly', onUpdate: (v) => (card.style.translate = `${v}px`) });\ngesture(card, {\n  onPan: ({ dx, vx, last }) => (last ? x.set(0, vx) : x.jump(dx)),\n  onLongPress: () => card.classList.add('picked'),\n}, { axis: 'x' });",
+    "import { gesture } from 'motionary/components/gesture';\nimport { createSpring } from 'motionary/components/physics';\n\nconst x = createSpring({ spring: 'wobbly', onUpdate: (v) => (card.style.translate = `${v}px`) });\ngesture(card, {\n  onPan: ({ dx, vx, last }) => (last ? x.set(0, vx) : x.jump(dx)),\n  onLongPress: () => card.classList.add('picked'),\n}, { axis: 'x' });",
     '<div class="demo-row"><span class="demo-tile" data-gesture-box>Drag · flick · hold</span></div><p class="demo-note" data-gesture-log aria-live="polite">—</p>'),
 ];
 

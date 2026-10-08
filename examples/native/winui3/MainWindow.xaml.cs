@@ -1,5 +1,5 @@
 // WinUI 3 + WebView2: sync "Animation effects" (Settings → Accessibility → Visual effects),
-// light / dark / high-contrast theme and the accent color into the page (use-scroll-animate 4.7+).
+// light / dark / high-contrast theme and the accent color into the page (motionary 4.7+).
 // MainWindow.xaml: <WebView2 x:Name="Web" />  — wwwroot = examples/native/web.
 using System;
 using System.IO;

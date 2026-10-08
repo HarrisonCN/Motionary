@@ -1,5 +1,5 @@
 /**
- * use-scroll-animate showcase — code generator.
+ * motionary showcase — code generator.
  * Turns a catalog item + the options tweaked in the detail view into
  * copy-paste snippets for every entry point. Pure functions (unit-tested).
  */
@@ -16,12 +16,12 @@ export const TABS = [
   { id: 'cdn', label: 'CDN', lang: 'html' },
 ];
 
-export const PKG = 'use-scroll-animate';
-export const CDN_UMD = 'https://unpkg.com/use-scroll-animate@6/dist/index.umd.js';
-export const CDN_ELEMENT = 'https://unpkg.com/use-scroll-animate@6/dist/element.umd.js';
-export const CDN_EXTENDED = 'https://unpkg.com/use-scroll-animate@6/dist/presets-extended.umd.js';
+export const PKG = 'motionary';
+export const CDN_UMD = 'https://unpkg.com/motionary@6/dist/index.umd.js';
+export const CDN_ELEMENT = 'https://unpkg.com/motionary@6/dist/element.umd.js';
+export const CDN_EXTENDED = 'https://unpkg.com/motionary@6/dist/presets-extended.umd.js';
 
-/** Names of the 6.1 extended presets (they need `use-scroll-animate/presets/extended`). */
+/** Names of the 6.1 extended presets (they need `motionary/presets/extended`). */
 export const EXTENDED_NAMES = new Set(EXTENDED_ITEMS.map((i) => i.id));
 
 export const INSTALL = {
@@ -603,7 +603,7 @@ ${onView(4)}
 ${markup.replace(/^/gm, '    ')}
   );
 }`,
-    element: `<!-- declarative: <usa-timeline> from use-scroll-animate/components/timeline -->
+    element: `<!-- declarative: <usa-timeline> from motionary/components/timeline -->
 ${declarative}
 
 <script type="module">

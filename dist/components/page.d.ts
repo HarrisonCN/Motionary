@@ -222,7 +222,7 @@ declare function scrollToTarget(to: number | Element | string, options?: {
 }): Promise<void>;
 
 /**
- * use-scroll-animate/components/page — page & app-wide effects (v2.7).
+ * motionary/components/page — page & app-wide effects (v2.7).
  * Page transitions (`pageTransition()`, `enableMpaTransitions()`,
  * `themeTransition()`), `<usa-cursor>`, `smoothScroll()` / `scrollToTarget()`,
  * `<usa-fullpage>`, `<usa-loading-bar>` + `loadingBar`, `<usa-back-to-top>`,

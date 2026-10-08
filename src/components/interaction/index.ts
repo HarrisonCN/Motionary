@@ -1,5 +1,5 @@
 /**
- * use-scroll-animate/components/interaction — micro-interactions.
+ * motionary/components/interaction — micro-interactions.
  * `<usa-ripple>`, `<usa-magnetic>`, `<usa-tilt>`, `<usa-spotlight>`,
  * `<usa-press>`, `<usa-toggle>`.
  */

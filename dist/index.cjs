@@ -2,15 +2,15 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var core$1 = require('./chunks/core-BYLtO0Po.cjs');
-var stagger = require('./chunks/stagger-CvhYlKrF.cjs');
-var core = require('./chunks/core-BDcszY4L.cjs');
-var presets = require('./chunks/presets-D2ksQNzJ.cjs');
-require('./chunks/base-B5i8qQPR.cjs');
+var core$1 = require('./chunks/core-B5T0dhFH.cjs');
+var stagger = require('./chunks/stagger-CCFyhzSw.cjs');
+var core = require('./chunks/core-BGAyaY6L.cjs');
+var presets = require('./chunks/presets-CUHys3sK.cjs');
+require('./chunks/base-BaQV-2ha.cjs');
 require('./components/tokens.cjs');
 
 /**
- * use-scroll-animate - parallax() helper
+ * motionary - parallax() helper
  *
  * Moves elements at a different speed than the page while they cross the
  * viewport. Built on the same scroll progress as `progressVar` (0 when the
@@ -102,16 +102,16 @@ function parallax(target, options = {}) {
 }
 
 /**
- * use-scroll-animate
+ * motionary
  *
  * A lightweight, dependency-free scroll animation library for modern web
  * applications. Built with TypeScript, powered by IntersectionObserver and
  * the Web Animations API (or the native scroll-driven timeline). Safe to
  * import during SSR. Framework integrations live in the subpath entries:
- * `use-scroll-animate/react`, `/vue`, `/svelte`, `/solid`, `/element`.
+ * `motionary/react`, `/vue`, `/svelte`, `/solid`, `/element`.
  *
  * @license MIT
- * @see https://github.com/HarrisonCN/use-scroll-animate
+ * @see https://github.com/HarrisonCN/motionary
  */
 /**
  * Default singleton instance of ScrollAnimate.
@@ -119,7 +119,7 @@ function parallax(target, options = {}) {
  *
  * @example
  * ```js
- * import ScrollAnimate from 'use-scroll-animate';
+ * import ScrollAnimate from 'motionary';
  *
  * // Auto-initialize all elements with data-sa attribute
  * ScrollAnimate.init();

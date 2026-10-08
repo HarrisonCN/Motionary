@@ -1,5 +1,5 @@
 /**
- * use-scroll-animate showcase — the <usa-*> component gallery catalog.
+ * motionary showcase — the <usa-*> component gallery catalog.
  * Pure data + pure functions (no DOM, no library import) so it can be
  * unit-tested; kept in sync with COMPONENT_CATEGORIES in src/components.
  *
@@ -191,7 +191,7 @@ export const COMPONENTS = [
     'toast("Saved") slides a notification in; it pauses on hover, stacks with FLIP and announces politely (errors assertively).',
     'toast("已保存") 滑入通知；悬停暂停、FLIP 堆叠，礼貌播报（错误为紧急播报）。',
     ['toast()', 'aria-live'],
-    "<usa-toaster position=\"bottom-right\"></usa-toaster>\n<script type=\"module\">\n  import { toast } from 'use-scroll-animate/components/feedback';\n  toast('Saved', { type: 'success' });\n</script>",
+    "<usa-toaster position=\"bottom-right\"></usa-toaster>\n<script type=\"module\">\n  import { toast } from 'motionary/components/feedback';\n  toast('Saved', { type: 'success' });\n</script>",
     '<div class="demo-row"><button class="demo-btn" type="button" data-toast="success">Success</button><button class="demo-btn demo-btn-alt" type="button" data-toast="info">Info</button><button class="demo-btn demo-btn-alt" type="button" data-toast="error">Error</button></div>',
     { define: 'defineToaster' }),
   C('usa-check', 'feedback', 'Result icon', '结果图标',
@@ -267,7 +267,7 @@ export const HELPERS = [
       zh: '用 View Transitions API 包裹任意 DOM 更新（Chromium：Electron、WebView2、Edge、Chrome），其他环境回退为淡入淡出。',
     },
     tags: ['View Transitions', 'fallback'],
-    usage: "import { viewTransition } from 'use-scroll-animate/components/transitions';\n\nviewTransition(() => {\n  panel.textContent = 'Next page';\n}, { fallback: panel });",
+    usage: "import { viewTransition } from 'motionary/components/transitions';\n\nviewTransition(() => {\n  panel.textContent = 'Next page';\n}, { fallback: panel });",
     demo: '<div class="demo-stack demo-wide"><div class="demo-vt" data-vt-panel>Page 1</div><button class="demo-link" type="button" data-act="vt">Next page</button></div>',
   },
   {
@@ -281,7 +281,7 @@ export const HELPERS = [
       zh: 'FLIP 任意布局变化：测量、修改 DOM，元素从旧位置平滑移动。整个列表请用 <usa-auto-animate>；共享元素请用 sharedTransition()。',
     },
     tags: ['FLIP', 'reorder', 'layout'],
-    usage: "import { flip } from 'use-scroll-animate/components/transitions';\n\nawait flip(list.children, () => list.append(...sorted));",
+    usage: "import { flip } from 'motionary/components/transitions';\n\nawait flip(list.children, () => list.append(...sorted));",
     demo: `<div class="demo-stack"><div class="demo-flip">${pills(8, 'demo-flip-item')}</div><button class="demo-link" type="button" data-act="shuffle">Shuffle</button></div>`,
   },
 ];
@@ -334,8 +334,8 @@ export const CODE_TABS = [
 
 /** Code snippets for every tab. */
 export function componentSnippets(item) {
-  const sub = `use-scroll-animate/components/${item.entry || item.category}`;
-  const cdn = `https://unpkg.com/use-scroll-animate@${VERSION_RANGE}/dist/components.umd.js`;
+  const sub = `motionary/components/${item.entry || item.category}`;
+  const cdn = `https://unpkg.com/motionary@${VERSION_RANGE}/dist/components.umd.js`;
   if (item.kind === 'helper') {
     const body = item.usage.split('\n').slice(2).join('\n');
     return {
@@ -354,8 +354,8 @@ export function componentSnippets(item) {
     else if (v !== '') markup = markup.replace(new RegExp(`<${item.tag}\\b`), `<${item.tag} ${k}="${v}"`);
   }
   const html = stripScripts(markup);
-  // 5.1: effect-pack cards also register the packs (use-scroll-animate/components/effects)
-  const pre = item.pack && !item.entry ? `import { registerAllEffects } from 'use-scroll-animate/components/effects';\n` : '';
+  // 5.1: effect-pack cards also register the packs (motionary/components/effects)
+  const pre = item.pack && !item.entry ? `import { registerAllEffects } from 'motionary/components/effects';\n` : '';
   const preCall = item.pack && !item.entry ? 'registerAllEffects();\n' : '';
   return {
     html: `<!-- registers every <usa-*> element and effect -->\n<script src="${cdn}"></script>\n\n${markup}`,
@@ -376,7 +376,7 @@ function desktopSnippet(item, sub) {
     '',
     "// Strict CSP (style-src 'self')? Styles are adopted as constructable",
     '// stylesheets, which CSP allows. To ship a file instead:',
-    "//   import 'use-scroll-animate/components.css';",
+    "//   import 'motionary/components.css';",
     '//   configureComponents({ injectStyles: false });',
   ]
     .filter((l, i) => !(l === '' && i === 3))

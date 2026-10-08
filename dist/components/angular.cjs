@@ -3,25 +3,25 @@
 var components = require('../components.cjs');
 var bind = require('../chunks/bind-Ui43-n2d.cjs');
 require('./reveal.cjs');
-require('../chunks/base-B5i8qQPR.cjs');
+require('../chunks/base-BaQV-2ha.cjs');
 require('./text.cjs');
-require('../chunks/core-BDcszY4L.cjs');
+require('../chunks/core-BGAyaY6L.cjs');
 require('./tokens.cjs');
 require('./interaction.cjs');
 require('./feedback.cjs');
 require('./background.cjs');
-require('../chunks/variants-DxPmgrNX.cjs');
+require('../chunks/variants-BhjyddG8.cjs');
 require('./transitions.cjs');
 require('./physics.cjs');
-require('../chunks/spring--oZh55tB.cjs');
+require('../chunks/spring-Dgx187Vh.cjs');
 require('./cards.cjs');
 require('./click.cjs');
-require('../chunks/fx-B8hk1Fby.cjs');
+require('../chunks/fx-lBGVtQO1.cjs');
 require('./ui.cjs');
 require('./page.cjs');
 require('./timeline.cjs');
 require('./gesture.cjs');
-require('../chunks/core-BjOYKSrV.cjs');
+require('../chunks/core-zq17EeCI.cjs');
 require('./svg.cjs');
 require('./webgl.cjs');
 require('./depth.cjs');
@@ -34,7 +34,7 @@ require('./perf.cjs');
 require('./bridge.cjs');
 
 /**
- * use-scroll-animate/components/angular — Angular integration (v3.8).
+ * motionary/components/angular — Angular integration (v3.8).
  * Angular renders `<usa-*>` tags once the component (or NgModule) allows
  * custom elements with `CUSTOM_ELEMENTS_SCHEMA`; property binding
  * `[checked]="on"` and event binding `(usa:change)="…"` then work as is.
@@ -42,7 +42,7 @@ require('./bridge.cjs');
  *
  * ```ts
  * import { CUSTOM_ELEMENTS_SCHEMA, Component, APP_INITIALIZER } from '@angular/core';
- * import { usaInitializer } from 'use-scroll-animate/components/angular';
+ * import { usaInitializer } from 'motionary/components/angular';
  *
  * // app.config.ts
  * providers: [{ provide: APP_INITIALIZER, multi: true, useFactory: usaInitializer(['click', 'ui']) }]

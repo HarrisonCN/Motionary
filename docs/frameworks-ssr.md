@@ -8,22 +8,22 @@ All entry points are **SSR-safe**: importing never touches `window`/`document`; 
 'use client';
 import { useEffect } from 'react';
 export function UsaProvider() {
-  useEffect(() => { import('use-scroll-animate/components/lazy').then((m) => m.lazyDefine()); }, []);
+  useEffect(() => { import('motionary/components/lazy').then((m) => m.lazyDefine()); }, []);
   return null;
 }
 // app/layout.tsx → <body><UsaProvider />{children}</body>
 ```
-The raw tags render on the server as plain HTML and upgrade on hydration. Type them with `use-scroll-animate/components/jsx`:
+The raw tags render on the server as plain HTML and upgrade on hydration. Type them with `motionary/components/jsx`:
 ```ts
 // usa-jsx.d.ts
-import type { UsaIntrinsicElements } from 'use-scroll-animate/components/jsx';
+import type { UsaIntrinsicElements } from 'motionary/components/jsx';
 declare module 'react' { namespace JSX { interface IntrinsicElements extends UsaIntrinsicElements {} } }
 ```
 Prefer typed wrappers (React 18 sets properties & `usa:*` events for you):
 ```tsx
 'use client';
 import * as React from 'react';
-import { createUsaComponents } from 'use-scroll-animate/components/react';
+import { createUsaComponents } from 'motionary/components/react';
 export const { UsaButton, UsaToggle, UsaCard } = createUsaComponents(React);
 // <UsaToggle checked={on} onUsaChange={(e) => setOn(e.detail.checked)} />
 ```
@@ -37,8 +37,8 @@ Page transitions in the App Router: wrap `router.push` in `pageTransition(() => 
 <html><body>
   <slot />
   <script>
-    import { lazyDefine } from 'use-scroll-animate/components/lazy';
-    import { enableMpaTransitions } from 'use-scroll-animate/components/page';
+    import { lazyDefine } from 'motionary/components/lazy';
+    import { enableMpaTransitions } from 'motionary/components/page';
     lazyDefine();
     enableMpaTransitions('fade'); // cross-page View Transitions (or use Astro's <ClientRouter />)
   </script>
@@ -49,10 +49,10 @@ Use the tags directly in `.astro`, `.md` and island components. With `<ClientRou
 ## Vue / Nuxt
 ```js
 // vite.config.js
-import { isUsaElement } from 'use-scroll-animate/components/vue';
+import { isUsaElement } from 'motionary/components/vue';
 vue({ template: { compilerOptions: { isCustomElement: isUsaElement } } });
 // main.js (or a Nuxt client plugin: plugins/usa.client.ts)
-import { UsaPlugin } from 'use-scroll-animate/components/vue';
+import { UsaPlugin } from 'motionary/components/vue';
 app.use(UsaPlugin);            // or app.use(UsaPlugin, { categories: ['click', 'ui'] })
 ```
 `<usa-toggle :checked.prop="on" @usa:change="on = $event.detail.checked" />`
@@ -61,14 +61,14 @@ app.use(UsaPlugin);            // or app.use(UsaPlugin, { categories: ['click', 
 Custom elements work as-is: Svelte (`on:usa:change`), Solid (`on:usa:change`, `prop:checked`), Angular (`schemas: [CUSTOM_ELEMENTS_SCHEMA]`). Call `defineComponents()` or `lazyDefine()` in the client entry.
 
 ## Lazy registration
-`lazyDefine()` (from `use-scroll-animate/components/lazy`) watches the DOM and dynamically imports only the categories whose tags appear — a page with just `<usa-button>` loads the click chunk only.
+`lazyDefine()` (from `motionary/components/lazy`) watches the DOM and dynamically imports only the categories whose tags appear — a page with just `<usa-button>` loads the click chunk only.
 
 ## Svelte / SvelteKit (v3.8)
 
 ```svelte
 <script>
   import { onMount } from 'svelte';
-  import { usa, defineUsa } from 'use-scroll-animate/components/svelte';
+  import { usa, defineUsa } from 'motionary/components/svelte';
   onMount(() => defineUsa());
   let on = false;
 </script>
@@ -79,7 +79,7 @@ Custom elements work as-is: Svelte (`on:usa:change`), Solid (`on:usa:change`, `p
 
 ```tsx
 import { onMount } from 'solid-js';
-import { defineUsa } from 'use-scroll-animate/components/solid';
+import { defineUsa } from 'motionary/components/solid';
 onMount(() => defineUsa());
 <usa-toggle prop:checked={on()} on:usa:change={(e) => setOn(e.detail.checked)} />;
 ```
@@ -88,7 +88,7 @@ onMount(() => defineUsa());
 
 ```ts
 import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
-import { usaInitializer, usaDetail } from 'use-scroll-animate/components/angular';
+import { usaInitializer, usaDetail } from 'motionary/components/angular';
 // app.config.ts
 providers: [{ provide: APP_INITIALIZER, multi: true, useFactory: usaInitializer() }];
 // component

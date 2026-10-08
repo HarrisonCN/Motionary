@@ -47,7 +47,7 @@ export const helpers = [
     'glQuad(canvas, fragment) compiles one fragment shader on a full-canvas quad (u_time, u_resolution, u_mouse, u_tex) and returns { render, resize, texture, dispose } — or null so you can fall back.',
     'glQuad(canvas, fragment) 在全画布四边形上编译一个片元着色器（u_time、u_resolution、u_mouse、u_tex），返回 { render, resize, texture, dispose } —— 不支持时返回 null 以便回退。',
     ['webgl', 'glsl', 'canvas', 'fallback'],
-    "import { glQuad, supportsWebGL } from 'use-scroll-animate/components/webgl';\n\nconst q = supportsWebGL() && glQuad(canvas, 'void main(){ gl_FragColor = vec4(v_uv, 1., 1.); }');\nif (q) requestAnimationFrame(function loop(t) { q.render({ time: t / 1000 }); requestAnimationFrame(loop); });\nelse canvas.classList.add('fallback');",
+    "import { glQuad, supportsWebGL } from 'motionary/components/webgl';\n\nconst q = supportsWebGL() && glQuad(canvas, 'void main(){ gl_FragColor = vec4(v_uv, 1., 1.); }');\nif (q) requestAnimationFrame(function loop(t) { q.render({ time: t / 1000 }); requestAnimationFrame(loop); });\nelse canvas.classList.add('fallback');",
     '<canvas class="demo-gl demo-gl--canvas" data-gl-canvas aria-hidden="true"></canvas><p class="demo-note" data-gl-status aria-live="polite"></p>'),
 ];
 

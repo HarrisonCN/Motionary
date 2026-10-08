@@ -1,4 +1,4 @@
-import { k as clamp, m as motionScale, q as caf, p as prefersReducedMotion, n as now, r as raf, x as defineElement, y as EASE_OUT } from '../chunks/base-C3Sw9sAO.js';
+import { k as clamp, m as motionScale, q as caf, p as prefersReducedMotion, n as now, r as raf, x as defineElement, y as EASE_OUT } from '../chunks/base-Yno7N2eC.js';
 
 const NUM = /-?(?:\d+\.?\d*|\.\d+)(?:e[-+]?\d+)?/gi;
 /** `true` when two path strings share the same commands (so their numbers can be interpolated). */
@@ -330,7 +330,7 @@ function defineAnimIcon(tag = 'usa-anim-icon') {
 }
 
 /**
- * use-scroll-animate/components/svg — SVG animation (v3.3).
+ * motionary/components/svg — SVG animation (v3.3).
  * `<usa-draw>` (line drawing), `<usa-morph>` (path morph), `<usa-mask-reveal>`
  * (mask / clip-path reveals) and `<usa-anim-icon>` (animated icons), plus
  * `interpolatePath()`, `morphTo()`, `drawLines()`.

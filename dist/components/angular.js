@@ -1,25 +1,25 @@
 import { defineComponents } from '../components.js';
 export { b as bindUsa, u as usaEventName } from '../chunks/bind-B_CTL6Qn.js';
 import './reveal.js';
-import '../chunks/base-C3Sw9sAO.js';
+import '../chunks/base-Yno7N2eC.js';
 import './text.js';
-import '../chunks/core-DN3hHbHh.js';
+import '../chunks/core-CUGCsMsJ.js';
 import './tokens.js';
 import './interaction.js';
 import './feedback.js';
 import './background.js';
-import '../chunks/variants-Bsevy6Xm.js';
+import '../chunks/variants-VNscPeTD.js';
 import './transitions.js';
 import './physics.js';
-import '../chunks/spring-CckMe3x0.js';
+import '../chunks/spring-DfQO5USi.js';
 import './cards.js';
 import './click.js';
-import '../chunks/fx-ChjxrMBo.js';
+import '../chunks/fx-BqDeFywO.js';
 import './ui.js';
 import './page.js';
 import './timeline.js';
 import './gesture.js';
-import '../chunks/core-BTf__I-8.js';
+import '../chunks/core-BIOaYdgN.js';
 import './svg.js';
 import './webgl.js';
 import './depth.js';
@@ -32,7 +32,7 @@ import './perf.js';
 import './bridge.js';
 
 /**
- * use-scroll-animate/components/angular — Angular integration (v3.8).
+ * motionary/components/angular — Angular integration (v3.8).
  * Angular renders `<usa-*>` tags once the component (or NgModule) allows
  * custom elements with `CUSTOM_ELEMENTS_SCHEMA`; property binding
  * `[checked]="on"` and event binding `(usa:change)="…"` then work as is.
@@ -40,7 +40,7 @@ import './bridge.js';
  *
  * ```ts
  * import { CUSTOM_ELEMENTS_SCHEMA, Component, APP_INITIALIZER } from '@angular/core';
- * import { usaInitializer } from 'use-scroll-animate/components/angular';
+ * import { usaInitializer } from 'motionary/components/angular';
  *
  * // app.config.ts
  * providers: [{ provide: APP_INITIALIZER, multi: true, useFactory: usaInitializer(['click', 'ui']) }]

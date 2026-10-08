@@ -1,7 +1,7 @@
 'use strict';
 
-var base = require('../chunks/base-B5i8qQPR.cjs');
-var core = require('../chunks/core-BDcszY4L.cjs');
+var base = require('../chunks/base-BaQV-2ha.cjs');
+var core = require('../chunks/core-BGAyaY6L.cjs');
 require('./tokens.cjs');
 
 var css$5 = "usa-typewriter{white-space:pre-wrap}usa-typewriter .usa-tw-caret{display:inline-block;width:var(--usa-caret-width,0.08em);height:1.05em;margin-left:0.06em;vertical-align:-0.12em;background:var(--usa-caret-color,currentColor);animation:usa-caret 1.06s steps(1) infinite}usa-typewriter[data-typing] .usa-tw-caret{animation:none}usa-typewriter[data-no-cursor] .usa-tw-caret{display:none}@keyframes usa-caret{50%{opacity:0}}@media (prefers-reduced-motion:reduce){usa-typewriter .usa-tw-caret,usa-shimmer-text{animation:none}}";
@@ -926,7 +926,7 @@ function defineScrollHighlight(tag = 'usa-scroll-highlight') {
 }
 
 /**
- * use-scroll-animate/components/text — text effects.
+ * motionary/components/text — text effects.
  * `<usa-typewriter>`, `<usa-split-text>`, `<usa-scramble>`, `<usa-counter>`,
  * `<usa-shimmer-text>`, `<usa-text-rotate>`.
  */

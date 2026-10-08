@@ -1,14 +1,14 @@
 /**
- * use-scroll-animate
+ * motionary
  *
  * A lightweight, dependency-free scroll animation library for modern web
  * applications. Built with TypeScript, powered by IntersectionObserver and
  * the Web Animations API (or the native scroll-driven timeline). Safe to
  * import during SSR. Framework integrations live in the subpath entries:
- * `use-scroll-animate/react`, `/vue`, `/svelte`, `/solid`, `/element`.
+ * `motionary/react`, `/vue`, `/svelte`, `/solid`, `/element`.
  *
  * @license MIT
- * @see https://github.com/HarrisonCN/use-scroll-animate
+ * @see https://github.com/HarrisonCN/motionary
  */
 
 export { createScrollAnimate, getScrollProgress, supportsScrollTimeline } from './core';
@@ -45,7 +45,7 @@ import { createScrollAnimate } from './core';
  *
  * @example
  * ```js
- * import ScrollAnimate from 'use-scroll-animate';
+ * import ScrollAnimate from 'motionary';
  *
  * // Auto-initialize all elements with data-sa attribute
  * ScrollAnimate.init();

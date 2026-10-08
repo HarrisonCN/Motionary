@@ -1,6 +1,6 @@
-import { x as defineElement, k as clamp, r as raf, q as caf } from '../chunks/base-C3Sw9sAO.js';
-import { c as createSpring } from '../chunks/spring-CckMe3x0.js';
-import { g as gesture } from '../chunks/core-BTf__I-8.js';
+import { x as defineElement, k as clamp, r as raf, q as caf } from '../chunks/base-Yno7N2eC.js';
+import { c as createSpring } from '../chunks/spring-DfQO5USi.js';
+import { g as gesture } from '../chunks/core-BIOaYdgN.js';
 
 var css = "usa-cube{--usa-cube-size:200px;display:block;width:var(--usa-cube-size);height:var(--usa-cube-size);perspective:var(--usa-cube-perspective,900px);touch-action:pan-y;user-select:none;-webkit-user-select:none;position:relative}usa-cube>[data-face]{position:absolute;inset:0;backface-visibility:hidden;transform:translateZ(calc(var(--usa-cube-size) / -2)) rotateX(var(--usa-cube-rx,0deg)) rotateY(var(--usa-cube-ry,0deg)) var(--usa-face) translateZ(calc(var(--usa-cube-size) / 2));transform-origin:50% 50%}usa-cube>[data-face=\"front\"]{--usa-face:rotateY(0deg)}usa-cube>[data-face=\"right\"]{--usa-face:rotateY(90deg)}usa-cube>[data-face=\"back\"]{--usa-face:rotateY(180deg)}usa-cube>[data-face=\"left\"]{--usa-face:rotateY(-90deg)}usa-cube>[data-face=\"top\"]{--usa-face:rotateX(90deg)}usa-cube>[data-face=\"bottom\"]{--usa-face:rotateX(-90deg)}usa-cube:focus-visible{outline:2px solid currentColor;outline-offset:6px}usa-depth{display:block;position:relative;perspective:1000px}usa-depth>*{transform:var(--usa-depth-rot,none);transform-style:preserve-3d}usa-depth [data-depth]{will-change:transform;transition:transform 0.12s linear}@media (prefers-reduced-motion:reduce){usa-depth [data-depth]{transform:none !important}}";
 
@@ -227,7 +227,7 @@ function defineDepth(tag = 'usa-depth') {
 }
 
 /**
- * use-scroll-animate/components/depth — 3D (v3.5).
+ * motionary/components/depth — 3D (v3.5).
  * `<usa-cube>` (CSS 3D cube), `<usa-depth>` (layered depth parallax driven by
  * pointer, device orientation or scroll) and `deviceTilt()`. The 3D ring
  * carousel is `<usa-carousel-3d>` in `components/cards`.

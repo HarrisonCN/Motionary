@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * use-scroll-animate/components/tokens — motion design tokens (4.2).
+ * motionary/components/tokens — motion design tokens (4.2).
  *
  * One source of truth for durations, easings and springs: as CSS custom
  * properties (`--usa-duration-fast`, `--usa-easing-emphasized`,
@@ -9,7 +9,7 @@
  * from Figma Tokens (Tokens Studio) or Style Dictionary exports.
  *
  * ```ts
- * import { applyMotionTokens, importMotionTokens, motionToken } from 'use-scroll-animate/components/tokens';
+ * import { applyMotionTokens, importMotionTokens, motionToken } from 'motionary/components/tokens';
  * applyMotionTokens(importMotionTokens(await (await fetch('/tokens.json')).json()));
  * el.animate(frames, { duration: motionToken('duration', 'slow'), easing: motionToken('easing', 'emphasized') });
  * ```

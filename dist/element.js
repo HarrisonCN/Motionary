@@ -1,12 +1,12 @@
-import { r as readOptions, c as createScrollAnimate } from './chunks/core-BVQW34aX.js';
-import './chunks/presets-BJ09NeTo.js';
+import { r as readOptions, c as createScrollAnimate } from './chunks/core-D7cVumUu.js';
+import './chunks/presets-BYBVJVeP.js';
 
 /**
- * use-scroll-animate - `<scroll-animate>` Web Component
+ * motionary - `<scroll-animate>` Web Component
  *
  * ```html
  * <script type="module">
- *   import { defineScrollAnimate } from 'use-scroll-animate/element';
+ *   import { defineScrollAnimate } from 'motionary/element';
  *   defineScrollAnimate(); // registers <scroll-animate>
  * </script>
  * <scroll-animate animation="fade-in-up" duration="800">…</scroll-animate>

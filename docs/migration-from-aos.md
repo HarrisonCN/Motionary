@@ -1,6 +1,6 @@
 # Migrating from AOS (Animate On Scroll)
 
-AOS and `use-scroll-animate` work the same way at the markup level — mark elements with attributes and call `init()` — so most pages migrate with a search-and-replace.
+AOS and `motionary` work the same way at the markup level — mark elements with attributes and call `init()` — so most pages migrate with a search-and-replace.
 
 ## 1. Install and initialise
 
@@ -8,7 +8,7 @@ AOS and `use-scroll-animate` work the same way at the markup level — mark elem
 - import AOS from 'aos';
 - import 'aos/dist/aos.css';
 - AOS.init({ duration: 800, once: true, offset: 120 });
-+ import ScrollAnimate from 'use-scroll-animate';
++ import ScrollAnimate from 'motionary';
 + ScrollAnimate.configure({ defaultDuration: 800, defaultOnce: true, defaultOffset: 120 });
 + ScrollAnimate.watch(); // like init(), and also picks up elements added later (AOS.refreshHard())
 ```
@@ -17,7 +17,7 @@ No stylesheet is needed: animations run through the Web Animations API (or opt i
 
 ## 2. Attributes
 
-| AOS | use-scroll-animate |
+| AOS | motionary |
 |---|---|
 | `data-aos="fade-up"` | `data-sa data-sa-animation="fade-in-up"` |
 | `data-aos-duration="800"` | `data-sa-duration="800"` |
@@ -31,7 +31,7 @@ No stylesheet is needed: animations run through the Web Animations API (or opt i
 
 ## 3. Animation names
 
-| AOS | use-scroll-animate |
+| AOS | motionary |
 |---|---|
 | `fade` | `fade-in` |
 | `fade-up` / `fade-down` | `fade-in-up` / `fade-in-down` |
@@ -57,7 +57,7 @@ No stylesheet is needed: animations run through the Web Animations API (or opt i
 
 ## 5. Events and refresh
 
-| AOS | use-scroll-animate |
+| AOS | motionary |
 |---|---|
 | `document.addEventListener('aos:in', ...)` | `onEnter` / `onStart` options, or `<scroll-animate>`'s `sa:enter` / `sa:start` events |
 | `aos:out` | `onLeave` |

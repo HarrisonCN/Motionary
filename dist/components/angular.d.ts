@@ -79,7 +79,7 @@ interface UsaScrollyElement extends UsaElement {
 }
 
 /**
- * use-scroll-animate/components/reveal — entrance & scroll reveal components.
+ * motionary/components/reveal — entrance & scroll reveal components.
  * `<usa-reveal>`, `<usa-stagger>`, `<usa-scroll-progress>`, `<usa-scrolly>`.
  */
 
@@ -310,7 +310,7 @@ interface Timeline {
 }
 
 /**
- * use-scroll-animate/components/text — text effects.
+ * motionary/components/text — text effects.
  * `<usa-typewriter>`, `<usa-split-text>`, `<usa-scramble>`, `<usa-counter>`,
  * `<usa-shimmer-text>`, `<usa-text-rotate>`.
  */
@@ -410,7 +410,7 @@ interface UsaToggleElement extends UsaElement {
 }
 
 /**
- * use-scroll-animate/components/interaction — micro-interactions.
+ * motionary/components/interaction — micro-interactions.
  * `<usa-ripple>`, `<usa-magnetic>`, `<usa-tilt>`, `<usa-spotlight>`,
  * `<usa-press>`, `<usa-toggle>`.
  */
@@ -527,7 +527,7 @@ interface UsaCheckElement extends UsaElement {
 }
 
 /**
- * use-scroll-animate/components/feedback — loading & feedback.
+ * motionary/components/feedback — loading & feedback.
  * `<usa-spinner>`, `<usa-skeleton>`, `<usa-progress>`, `<usa-toaster>` +
  * `toast()`, `<usa-check>`.
  */
@@ -645,7 +645,7 @@ interface UsaDotNetworkElement extends UsaElement {
 }
 
 /**
- * use-scroll-animate/components/background — backgrounds & decoration.
+ * motionary/components/background — backgrounds & decoration.
  * `<usa-aurora>`, `<usa-particles>`, `<usa-grain>`, `<usa-marquee>`,
  * `<usa-acrylic>`.
  */
@@ -719,7 +719,7 @@ interface UsaViewSwitchElement extends UsaElement {
 }
 
 /**
- * use-scroll-animate/components/transitions — view & layout transitions.
+ * motionary/components/transitions — view & layout transitions.
  * `<usa-dialog>`, `<usa-accordion>`, `<usa-view-switch>`
  * and the `viewTransition()` and `flip()` helpers (4.0: `<usa-flip-list>` → `<usa-auto-animate>`,
  * `connectedAnimation()` → `sharedTransition()`, both in `components/layout`).
@@ -786,7 +786,7 @@ interface UsaOverscrollElement extends UsaElement {
 }
 
 /**
- * use-scroll-animate/components/physics — spring & bounce physics (v2.3).
+ * motionary/components/physics — spring & bounce physics (v2.3).
  * `<usa-spring>` (bounce-in, pop, drop, jelly, rubber-band), `<usa-draggable>`
  * (spring-back, inertia, snap) and `<usa-overscroll>` (elastic edges), plus
  * the spring core: `spring()`, `springEasing()`, `createSpring()`,
@@ -880,7 +880,7 @@ interface UsaCarousel3dElement extends UsaElement {
 }
 
 /**
- * use-scroll-animate/components/cards — card effects (v2.4).
+ * motionary/components/cards — card effects (v2.4).
  * `<usa-card effect="flip | holo | glass | border-glow | conic-border | lift |
  * spotlight | sheen | parallax-layers | expand">` (combinable),
  * `<usa-card-stack>` (swipeable deck), `<usa-sticky-stack>` (stacking on
@@ -1028,7 +1028,7 @@ interface UsaCheckboxElement extends UsaElement {
 }
 
 /**
- * use-scroll-animate/components/click — click & tap effects (v2.5).
+ * motionary/components/click — click & tap effects (v2.5).
  * `<usa-click>` (ripple, burst, confetti, squish, press-spring, shake),
  * `<usa-button>` (button click deformation: squash, wobble, gooey, dent;
  * shape morph; submit → loading → success), `<usa-icon-morph>`,
@@ -1200,7 +1200,7 @@ interface UsaAvatarStackElement extends UsaElement {
 }
 
 /**
- * use-scroll-animate/components/ui — animated UI components + style variants (v2.6).
+ * motionary/components/ui — animated UI components + style variants (v2.6).
  * `<usa-tabs>`, `<usa-drawer>`, `<usa-bottom-sheet>`, `<usa-pull-refresh>`,
  * `<usa-fab>`, `<usa-navbar>`, `<usa-slider>`, `<usa-rating>`,
  * `<usa-tooltip>`, `<usa-popover>`, `<usa-badge>`, `<usa-avatar-stack>`,
@@ -1337,7 +1337,7 @@ interface UsaMotionSwitchElement extends UsaElement {
 }
 
 /**
- * use-scroll-animate/components/page — page & app-wide effects (v2.7).
+ * motionary/components/page — page & app-wide effects (v2.7).
  * Page transitions (`pageTransition()`, `enableMpaTransitions()`,
  * `themeTransition()`), `<usa-cursor>`, `smoothScroll()` / `scrollToTarget()`,
  * `<usa-fullpage>`, `<usa-loading-bar>` + `loadingBar`, `<usa-back-to-top>`,
@@ -1381,7 +1381,7 @@ interface UsaTimelineElement extends UsaElement {
 }
 
 /**
- * use-scroll-animate/components/timeline — choreography (v3.1).
+ * motionary/components/timeline — choreography (v3.1).
  * `timeline()` chains, overlaps, labels, seeks, reverses and scroll-scrubs
  * WAAPI animations on one playhead; `<usa-timeline>` builds one from
  * `data-tl` children.
@@ -1427,7 +1427,7 @@ interface UsaPinchZoomElement extends UsaElement {
 }
 
 /**
- * use-scroll-animate/components/gesture — unified gestures (v3.2).
+ * motionary/components/gesture — unified gestures (v3.2).
  * `gesture()` recognises pan, swipe, pinch, long-press, tap and double-tap
  * with release velocities for springs; `<usa-swipeable>` (swipe-to-dismiss)
  * and `<usa-pinch-zoom>` are built on it.
@@ -1488,7 +1488,7 @@ interface UsaAnimIconElement extends UsaElement {
 }
 
 /**
- * use-scroll-animate/components/svg — SVG animation (v3.3).
+ * motionary/components/svg — SVG animation (v3.3).
  * `<usa-draw>` (line drawing), `<usa-morph>` (path morph), `<usa-mask-reveal>`
  * (mask / clip-path reveals) and `<usa-anim-icon>` (animated icons), plus
  * `interpolatePath()`, `morphTo()`, `drawLines()`.
@@ -1515,7 +1515,7 @@ interface UsaGLElement extends UsaElement {
 }
 
 /**
- * use-scroll-animate/components/webgl — lightweight canvas / WebGL (v3.4).
+ * motionary/components/webgl — lightweight canvas / WebGL (v3.4).
  * `<usa-shader>` (shader backgrounds), `<usa-distort>` (hover image
  * distortion), `<usa-liquid>` (ripple images) on a tiny single-quad runner
  * (`glQuad()`), with graceful fallbacks when WebGL is unavailable.
@@ -1563,7 +1563,7 @@ interface UsaDepthElement extends UsaElement {
 }
 
 /**
- * use-scroll-animate/components/depth — 3D (v3.5).
+ * motionary/components/depth — 3D (v3.5).
  * `<usa-cube>` (CSS 3D cube), `<usa-depth>` (layered depth parallax driven by
  * pointer, device orientation or scroll) and `deviceTilt()`. The 3D ring
  * carousel is `<usa-carousel-3d>` in `components/cards`.
@@ -1597,7 +1597,7 @@ interface UsaMasonryElement extends UsaElement {
 }
 
 /**
- * use-scroll-animate/components/layout — layout animation (v3.6).
+ * motionary/components/layout — layout animation (v3.6).
  * `autoAnimate()` / `<usa-auto-animate>` (list & grid reflow),
  * `<usa-masonry>`, and `sharedTransition()` for shared-element transitions
  * (View Transitions API with a FLIP fallback).
@@ -1621,7 +1621,7 @@ interface UsaPackElement extends UsaElement {
 }
 
 /**
- * use-scroll-animate/components/packs — effect packs (v3.9).
+ * motionary/components/packs — effect packs (v3.9).
  * Ready-made motion for e-commerce, portfolio, dashboard, game UI and
  * landing pages: mark elements with `data-role` and apply a pack with
  * `<usa-pack name="…">` or `applyPack(name, root)`. Includes `flyToCart()`
@@ -1670,12 +1670,12 @@ interface UsaFxElement extends UsaElement {
 }
 
 /**
- * use-scroll-animate/components/fx — unified plugin-style effects (5.0).
+ * motionary/components/fx — unified plugin-style effects (5.0).
  * `registerEffect({ name, kind, run })`, `playEffect(el, name)`,
  * `bindEffect(el, name, { trigger })`, `<usa-fx effect trigger>`. Built-ins:
  * every timeline preset (`enter`), `pulse` · `pop` · `jelly` · `wiggle` ·
  * `heartbeat` · `bounce` · `flash` · `tada` · `shake` (attention),
- * `burst` · `confetti` · `ripple` (click). More packs: `use-scroll-animate/components/effects`.
+ * `burst` · `confetti` · `ripple` (click). More packs: `motionary/components/effects`.
  */
 
 declare global {
@@ -1704,7 +1704,7 @@ declare function bindUsa(el: HTMLElement, binding?: UsaBinding): {
 };
 
 /**
- * use-scroll-animate/components/angular — Angular integration (v3.8).
+ * motionary/components/angular — Angular integration (v3.8).
  * Angular renders `<usa-*>` tags once the component (or NgModule) allows
  * custom elements with `CUSTOM_ELEMENTS_SCHEMA`; property binding
  * `[checked]="on"` and event binding `(usa:change)="…"` then work as is.
@@ -1712,7 +1712,7 @@ declare function bindUsa(el: HTMLElement, binding?: UsaBinding): {
  *
  * ```ts
  * import { CUSTOM_ELEMENTS_SCHEMA, Component, APP_INITIALIZER } from '@angular/core';
- * import { usaInitializer } from 'use-scroll-animate/components/angular';
+ * import { usaInitializer } from 'motionary/components/angular';
  *
  * // app.config.ts
  * providers: [{ provide: APP_INITIALIZER, multi: true, useFactory: usaInitializer(['click', 'ui']) }]

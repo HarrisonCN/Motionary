@@ -1,5 +1,5 @@
 /**
- * use-scroll-animate showcase — "Animation Store".
+ * motionary showcase — "Animation Store".
  * No framework, no build step. Every demo is driven by the library itself,
  * imported from ../dist (falls back to the published build on a CDN).
  */
@@ -12,7 +12,7 @@ import { t as tr } from './i18n.js';
 /* ------------------------------------------------------------------ */
 
 const LOCAL = new URL('../dist/', import.meta.url).href;
-const CDN = 'https://unpkg.com/use-scroll-animate@6/dist/';
+const CDN = 'https://unpkg.com/motionary@6/dist/';
 const KEY = 'usa-showcase:';
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
@@ -46,7 +46,7 @@ const legacy = (k, d) => {
   }
 };
 
-let lib = null; // the use-scroll-animate namespace (index.js)
+let lib = null; // the motionary namespace (index.js)
 let svelteMod = null;
 let base = LOCAL;
 let sa = null; // instance used by the previews
@@ -932,8 +932,8 @@ function renderDetail(item, keepState) {
   }
   right.append(
     h('div', { class: 'detail-links' }, [
-      h('a', { href: 'https://github.com/HarrisonCN/use-scroll-animate/blob/main/docs/API.md', target: '_blank', rel: 'noopener', text: `${T('detail.docs')} ↗` }),
-      h('a', { href: 'https://github.com/HarrisonCN/use-scroll-animate', target: '_blank', rel: 'noopener', text: 'GitHub ↗' }),
+      h('a', { href: 'https://github.com/HarrisonCN/motionary/blob/main/docs/API.md', target: '_blank', rel: 'noopener', text: `${T('detail.docs')} ↗` }),
+      h('a', { href: 'https://github.com/HarrisonCN/motionary', target: '_blank', rel: 'noopener', text: 'GitHub ↗' }),
     ])
   );
 
@@ -1371,7 +1371,7 @@ async function boot() {
     await loadLibrary();
   } catch (err) {
     $('#grid').innerHTML = '';
-    $('#results').textContent = 'Could not load use-scroll-animate (../dist or CDN).';
+    $('#results').textContent = 'Could not load motionary (../dist or CDN).';
     console.error(err);
     return;
   }

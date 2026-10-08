@@ -1,12 +1,12 @@
 /**
- * use-scroll-animate/components/svelte — Svelte integration (v3.8).
+ * motionary/components/svelte — Svelte integration (v3.8).
  * Svelte (3, 4, 5) renders `<usa-*>` tags natively; `use:usa` sets
  * **properties** and `usa:*` listeners in one place, and `defineUsa()`
  * registers the elements on the client only (safe in SvelteKit SSR).
  *
  * ```svelte
  * <script>
- *   import { usa, defineUsa } from 'use-scroll-animate/components/svelte';
+ *   import { usa, defineUsa } from 'motionary/components/svelte';
  *   import { onMount } from 'svelte';
  *   onMount(() => defineUsa(['click', 'ui']));
  *   let on = false;

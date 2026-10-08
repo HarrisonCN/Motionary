@@ -1,5 +1,5 @@
 /**
- * use-scroll-animate - Core Type Definitions
+ * motionary - Core Type Definitions
  * A lightweight, high-performance scroll animation library
  */
 
@@ -41,7 +41,7 @@ export type CorePreset =
 
 /**
  * Every built-in preset name: the core set plus the 6.1 extended set, which is
- * available once `use-scroll-animate/presets/extended` is loaded (or after
+ * available once `motionary/presets/extended` is loaded (or after
  * `registerPresets(EXTENDED_PRESETS)`).
  */
 export type AnimationPreset = CorePreset | ExtendedPreset;
@@ -67,7 +67,7 @@ export type ProgressMode = 'ratio' | 'scroll';
 export type ScrollEngine = 'auto' | 'js' | 'css';
 
 // <extended-presets>
-/** The 6.1 extended presets (`use-scroll-animate/presets/extended`). */
+/** The 6.1 extended presets (`motionary/presets/extended`). */
 export type ExtendedPreset =
   | 'fade-in-up-sm'
   | 'fade-in-down-sm'

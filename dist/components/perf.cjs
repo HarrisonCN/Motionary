@@ -1,10 +1,10 @@
 'use strict';
 
-var base = require('../chunks/base-B5i8qQPR.cjs');
+var base = require('../chunks/base-BaQV-2ha.cjs');
 var indexTags = require('../chunks/index-tags-wv0R_vkO.cjs');
 
 /**
- * use-scroll-animate/components/perf — performance toolkit (4.5).
+ * motionary/components/perf — performance toolkit (4.5).
  *
  * - One shared rAF scheduler for every component loop (`onFrame()`, `schedulerStats()`).
  * - Animation budget: `setAnimationBudget(n)` caps concurrent component
@@ -13,7 +13,7 @@ var indexTags = require('../chunks/index-tags-wv0R_vkO.cjs');
  *   down (`low`, then a tighter budget) while the device struggles, restoring
  *   it when frames recover.
  * - On-demand CSS: `loadCategoryStyles()` / `onDemandStyles()` — used by
- *   `use-scroll-animate/components/lite`, the build without inlined CSS.
+ *   `motionary/components/lite`, the build without inlined CSS.
  */
 /**
  * Watch frame rate and animation count; while the device struggles, set

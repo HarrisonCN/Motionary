@@ -1,9 +1,9 @@
-import { o as onFrame, t as setStyleLoader, f as animationBudget, h as getMotionIntensity, g as configureComponents, j as setAnimationBudget, b as activeAnimations } from '../chunks/base-C3Sw9sAO.js';
-export { s as schedulerStats } from '../chunks/base-C3Sw9sAO.js';
+import { o as onFrame, t as setStyleLoader, f as animationBudget, h as getMotionIntensity, g as configureComponents, j as setAnimationBudget, b as activeAnimations } from '../chunks/base-Yno7N2eC.js';
+export { s as schedulerStats } from '../chunks/base-Yno7N2eC.js';
 import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-DucKMQr_.js';
 
 /**
- * use-scroll-animate/components/perf — performance toolkit (4.5).
+ * motionary/components/perf — performance toolkit (4.5).
  *
  * - One shared rAF scheduler for every component loop (`onFrame()`, `schedulerStats()`).
  * - Animation budget: `setAnimationBudget(n)` caps concurrent component
@@ -12,7 +12,7 @@ import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-DucKMQr_.js';
  *   down (`low`, then a tighter budget) while the device struggles, restoring
  *   it when frames recover.
  * - On-demand CSS: `loadCategoryStyles()` / `onDemandStyles()` — used by
- *   `use-scroll-animate/components/lite`, the build without inlined CSS.
+ *   `motionary/components/lite`, the build without inlined CSS.
  */
 /**
  * Watch frame rate and animation count; while the device struggles, set

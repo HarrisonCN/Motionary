@@ -1,9 +1,9 @@
 'use strict';
 
-var base = require('../chunks/base-B5i8qQPR.cjs');
+var base = require('../chunks/base-BaQV-2ha.cjs');
 
 /**
- * use-scroll-animate/components/bridge — native shell bridges (4.7).
+ * motionary/components/bridge — native shell bridges (4.7).
  *
  * Keeps the web UI in sync with the host app's system settings when it runs
  * inside **WinUI 3 / WPF (WebView2)**, **.NET MAUI** (WebView / HybridWebView)

@@ -1,5 +1,5 @@
 name: usa_native_sample
-description: use-scroll-animate components in a Flutter WebView, synced with the system's reduce-motion and theme (4.7+).
+description: motionary components in a Flutter WebView, synced with the system's reduce-motion and theme (4.7+).
 publish_to: none
 environment:
   sdk: ">=3.3.0 <4.0.0"

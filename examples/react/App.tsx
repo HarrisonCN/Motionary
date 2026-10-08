@@ -1,12 +1,12 @@
 /**
- * use-scroll-animate — React Example
+ * motionary — React Example
  *
  * This example demonstrates how to use the useScrollAnimate and useScrollStagger
  * hooks in a React application.
  */
 
 import React from 'react';
-import { createReactHooks } from 'use-scroll-animate/react';
+import { createReactHooks } from 'motionary/react';
 
 const { useScrollAnimate, useScrollStagger } = createReactHooks(React);
 
@@ -28,7 +28,7 @@ export default function App() {
       {/* Hero Section */}
       <section style={{ height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '2rem' }}>
         <h1 ref={heroTitleRef} style={{ fontSize: 'clamp(2rem, 6vw, 5rem)', fontWeight: 800 }}>
-          use-scroll-animate
+          motionary
         </h1>
         <p ref={heroSubRef} style={{ fontSize: '1.2rem', color: '#aaa', marginTop: '1rem' }}>
           Lightweight. Dependency-free. Blazing fast.
@@ -52,7 +52,7 @@ export default function App() {
         <div ref={ctaRef} style={{ display: 'inline-block', background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', borderRadius: 16, padding: '3rem 4rem' }}>
           <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Get Started Today</h2>
           <code style={{ background: 'rgba(0,0,0,0.3)', padding: '0.5rem 1rem', borderRadius: 8, fontSize: '1rem' }}>
-            npm install use-scroll-animate
+            npm install motionary
           </code>
         </div>
       </section>

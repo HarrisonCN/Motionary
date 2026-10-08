@@ -141,7 +141,7 @@ interface FluentPresetOptions {
 declare function fluentPreset(options?: FluentPresetOptions): () => void;
 
 /**
- * use-scroll-animate/components/background — backgrounds & decoration.
+ * motionary/components/background — backgrounds & decoration.
  * `<usa-aurora>`, `<usa-particles>`, `<usa-grain>`, `<usa-marquee>`,
  * `<usa-acrylic>`.
  */

@@ -1,9 +1,9 @@
 # Motion design tokens (4.2)
 
-`use-scroll-animate/components/tokens` gives your product one motion scale — durations, easings and springs — as **CSS custom properties**, **W3C Design Tokens JSON**, and **JS values**, and imports the scale your designers keep in **Figma Tokens (Tokens Studio)** or **Style Dictionary**.
+`motionary/components/tokens` gives your product one motion scale — durations, easings and springs — as **CSS custom properties**, **W3C Design Tokens JSON**, and **JS values**, and imports the scale your designers keep in **Figma Tokens (Tokens Studio)** or **Style Dictionary**.
 
 ```ts
-import { applyMotionTokens, importMotionTokens, motionToken, motionVar } from 'use-scroll-animate/components/tokens';
+import { applyMotionTokens, importMotionTokens, motionToken, motionVar } from 'motionary/components/tokens';
 
 // 1. Use the defaults (writes --usa-* variables on <html>)…
 applyMotionTokens();

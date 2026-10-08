@@ -1,5 +1,5 @@
-import { x as defineElement, B as srText, q as caf, n as now, r as raf, y as EASE_OUT, E as EASE_SPRING, k as clamp } from '../chunks/base-C3Sw9sAO.js';
-import { t as timeline } from '../chunks/core-DN3hHbHh.js';
+import { x as defineElement, B as srText, q as caf, n as now, r as raf, y as EASE_OUT, E as EASE_SPRING, k as clamp } from '../chunks/base-Yno7N2eC.js';
+import { t as timeline } from '../chunks/core-CUGCsMsJ.js';
 import './tokens.js';
 
 var css$5 = "usa-typewriter{white-space:pre-wrap}usa-typewriter .usa-tw-caret{display:inline-block;width:var(--usa-caret-width,0.08em);height:1.05em;margin-left:0.06em;vertical-align:-0.12em;background:var(--usa-caret-color,currentColor);animation:usa-caret 1.06s steps(1) infinite}usa-typewriter[data-typing] .usa-tw-caret{animation:none}usa-typewriter[data-no-cursor] .usa-tw-caret{display:none}@keyframes usa-caret{50%{opacity:0}}@media (prefers-reduced-motion:reduce){usa-typewriter .usa-tw-caret,usa-shimmer-text{animation:none}}";
@@ -924,7 +924,7 @@ function defineScrollHighlight(tag = 'usa-scroll-highlight') {
 }
 
 /**
- * use-scroll-animate/components/text — text effects.
+ * motionary/components/text — text effects.
  * `<usa-typewriter>`, `<usa-split-text>`, `<usa-scramble>`, `<usa-counter>`,
  * `<usa-shimmer-text>`, `<usa-text-rotate>`.
  */

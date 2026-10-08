@@ -1,8 +1,8 @@
 /**
- * use-scroll-animate - Solid integration
+ * motionary - Solid integration
  *
  * ```tsx
- * import { scrollAnimate, scrollStagger, useScrollAnimate } from 'use-scroll-animate/solid';
+ * import { scrollAnimate, scrollStagger, useScrollAnimate } from 'motionary/solid';
  * false && scrollAnimate; // keep the directive import (TypeScript)
  *
  * <div use:scrollAnimate={{ animation: 'zoom-in' }}>…</div>

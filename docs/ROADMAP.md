@@ -1,8 +1,8 @@
 # 路线图（6.0 之后）
 
-> 6.0.0：移除 5.9 弃用的 API（`burst()` / `confetti()` / `shake()`、`<usa-cursor mode="trail">`），所有效果统一通过注册表（`registerEffect()` / `playEffect()` / `<usa-fx>`）提供。以下为 6.x → 7.0 的规划，每个版本一个 PR（6.1 插入“滚动预设 2.0”后，原 6.1–6.9 依次顺延为 6.2–6.10）；新效果继续集中在 `use-scroll-animate/components/effects`（`components/lite` 维持 70 KB 预算），全部兼容“减少动态效果”。
+> 6.0.0：移除 5.9 弃用的 API（`burst()` / `confetti()` / `shake()`、`<usa-cursor mode="trail">`），所有效果统一通过注册表（`registerEffect()` / `playEffect()` / `<usa-fx>`）提供。以下为 6.x → 7.0 的规划，每个版本一个 PR（6.1 插入“滚动预设 2.0”后，原 6.1–6.9 依次顺延为 6.2–6.10）；新效果继续集中在 `motionary/components/effects`（`components/lite` 维持 70 KB 预算），全部兼容“减少动态效果”。
 
-- **v6.1** ✅ — 滚动预设 2.0（Scroll presets 2.0，已发布）：新增 181 个滚动入场预设（总计 214 个），独立入口 `use-scroll-animate/presets/extended`（导入即注册，UMD `dist/presets-extended.umd.js`），核心包体积不变；预设支持中间关键帧 `frames`，新增 `registerPresets()` / `reversePreset()`；动画商店扩展到 227 个条目、14 个预设分类（含随滚动 `scrub-*` 与错峰 `stagger-*`）。
+- **v6.1** ✅ — 滚动预设 2.0（Scroll presets 2.0，已发布）：新增 181 个滚动入场预设（总计 214 个），独立入口 `motionary/presets/extended`（导入即注册，UMD `dist/presets-extended.umd.js`），核心包体积不变；预设支持中间关键帧 `frames`，新增 `registerPresets()` / `reversePreset()`；动画商店扩展到 227 个条目、14 个预设分类（含随滚动 `scrub-*` 与错峰 `stagger-*`）。
 - **v6.2** — 粒子与流体 2.0：GPU 流体模拟背景、烟雾与火焰、墨滴扩散、萤火虫群、樱花与落叶飘散、点击溅起水花 —— WebGL2 实现，自动降级到 Canvas 2D。
 - **v6.3** — 文字特效 3.0：液态文字、霓虹描边书写、文字粒子化聚散、故障（glitch）字、打字机光标拖影、可变字体呼吸、逐字 3D 翻转。
 - **v6.4** — 光影与材质：动态光源投影、玻璃折射、金属拉丝反光、珠光 / 镭射材质、体积光（god rays）、跟随指针的实时阴影。

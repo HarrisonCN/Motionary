@@ -1,4 +1,4 @@
-/** use-scroll-animate showcase — UI strings of the component gallery (English / 简体中文). */
+/** motionary showcase — UI strings of the component gallery (English / 简体中文). */
 
 export const GSTRINGS = {
   en: {

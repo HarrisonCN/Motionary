@@ -1,5 +1,5 @@
 // .NET MAUI (Windows, Android, iOS, macOS) + WebView: sync reduce motion, theme and accent
-// into the page (use-scroll-animate 4.7+). MainPage.xaml: <WebView x:Name="Web" Source="index.html" />
+// into the page (motionary 4.7+). MainPage.xaml: <WebView x:Name="Web" Source="index.html" />
 // with examples/native/web/* in Resources/Raw.
 using System.Text.Json;
 

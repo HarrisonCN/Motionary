@@ -1,6 +1,6 @@
-import { e as animateWithMotion, i as getMotionSensitivity, p as prefersReducedMotion, x as defineElement } from '../chunks/base-C3Sw9sAO.js';
-import { T as TIMELINE_PRESETS } from '../chunks/core-DN3hHbHh.js';
-import { b as burst, c as confetti, s as shake } from '../chunks/fx-ChjxrMBo.js';
+import { e as animateWithMotion, i as getMotionSensitivity, p as prefersReducedMotion, x as defineElement } from '../chunks/base-Yno7N2eC.js';
+import { T as TIMELINE_PRESETS } from '../chunks/core-CUGCsMsJ.js';
+import { b as burst, c as confetti, s as shake } from '../chunks/fx-BqDeFywO.js';
 import './tokens.js';
 
 /**
@@ -17,11 +17,11 @@ const registry = new Map();
 /** Register an effect (throws on a duplicate name unless `override`). Returns an unregister function. */
 function registerEffect(def, opts = {}) {
     if (!/^[a-z][a-z0-9-]*$/.test(def.name))
-        throw new Error(`[use-scroll-animate] invalid effect name "${def.name}"`);
+        throw new Error(`[motionary] invalid effect name "${def.name}"`);
     if (!EFFECT_KINDS.includes(def.kind))
-        throw new Error(`[use-scroll-animate] unknown effect kind "${def.kind}"`);
+        throw new Error(`[motionary] unknown effect kind "${def.kind}"`);
     if (registry.has(def.name) && !opts.override)
-        throw new Error(`[use-scroll-animate] effect "${def.name}" is already registered`);
+        throw new Error(`[motionary] effect "${def.name}" is already registered`);
     registry.set(def.name, def);
     return () => {
         if (registry.get(def.name) === def)
@@ -61,7 +61,7 @@ function context(event) {
 async function playEffect(el, name, options = {}, event) {
     const def = registry.get(name);
     if (!def)
-        throw new Error(`[use-scroll-animate] unknown effect "${name}" — registered: ${Array.from(registry.keys()).join(', ')}`);
+        throw new Error(`[motionary] unknown effect "${name}" — registered: ${Array.from(registry.keys()).join(', ')}`);
     const ctx = context(event);
     if (ctx.reduced && (def.reduced ?? (SKIP_BY_DEFAULT.includes(def.kind) ? 'skip' : 'run')) === 'skip')
         return;
@@ -80,7 +80,7 @@ function bindEffect(el, name, options = {}) {
     const { trigger = 'click', once, ...opts } = options;
     const def = registry.get(name);
     if (!def)
-        throw new Error(`[use-scroll-animate] unknown effect "${name}"`);
+        throw new Error(`[motionary] unknown effect "${name}"`);
     const offs = [];
     let current = null;
     const fire = (e) => {
@@ -254,12 +254,12 @@ const click = [
 const BUILTIN_EFFECTS = [...enter, ...attention, ...click];
 
 /**
- * use-scroll-animate/components/fx — unified plugin-style effects (5.0).
+ * motionary/components/fx — unified plugin-style effects (5.0).
  * `registerEffect({ name, kind, run })`, `playEffect(el, name)`,
  * `bindEffect(el, name, { trigger })`, `<usa-fx effect trigger>`. Built-ins:
  * every timeline preset (`enter`), `pulse` · `pop` · `jelly` · `wiggle` ·
  * `heartbeat` · `bounce` · `flash` · `tada` · `shake` (attention),
- * `burst` · `confetti` · `ripple` (click). More packs: `use-scroll-animate/components/effects`.
+ * `burst` · `confetti` · `ripple` (click). More packs: `motionary/components/effects`.
  */
 /** Register the built-in effects (idempotent; `defineFxComponents()` calls it). */
 function registerBuiltinEffects() {

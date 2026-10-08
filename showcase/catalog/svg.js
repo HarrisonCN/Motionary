@@ -42,7 +42,7 @@ export const helpers = [
     'morphTo(path, d, { duration }) animates any <path> to new data; interpolatePath(a, b, t) gives the in-between shape for your own loop or scroll progress.',
     'morphTo(path, d, { duration }) 将任意 <path> 变形为新数据；interpolatePath(a, b, t) 返回中间形状，可用于自定义循环或滚动进度。',
     ['morph', 'interpolate', 'path'],
-    "import { morphTo, interpolatePath } from 'use-scroll-animate/components/svg';\n\nawait morphTo(path, 'M10 10 L90 90 …', { duration: 600 });\npath.setAttribute('d', interpolatePath(a, b, progress));",
+    "import { morphTo, interpolatePath } from 'motionary/components/svg';\n\nawait morphTo(path, 'M10 10 L90 90 …', { duration: 600 });\npath.setAttribute('d', interpolatePath(a, b, progress));",
     `<svg viewBox="0 0 100 100" width="96" height="96" aria-hidden="true"><path fill="currentColor" d="${BLOB_A}" data-morph-path></path></svg><button type="button" class="demo-link" data-morph-btn>Morph</button>`),
 ];
 

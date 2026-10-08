@@ -1,14 +1,14 @@
 /**
- * use-scroll-animate/components/vue — Vue integration (v2.9).
+ * motionary/components/vue — Vue integration (v2.9).
  *
  * ```js
  * // vite.config.js
  * import vue from '@vitejs/plugin-vue';
- * import { isUsaElement } from 'use-scroll-animate/components/vue';
+ * import { isUsaElement } from 'motionary/components/vue';
  * export default { plugins: [vue({ template: { compilerOptions: { isCustomElement: isUsaElement } } })] };
  *
  * // main.js
- * import { UsaPlugin } from 'use-scroll-animate/components/vue';
+ * import { UsaPlugin } from 'motionary/components/vue';
  * app.use(UsaPlugin, { categories: ['click', 'cards'] });
  * ```
  * In templates, listen with `@usa:change="…"` and bind properties with

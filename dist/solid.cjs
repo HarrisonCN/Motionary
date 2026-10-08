@@ -1,15 +1,15 @@
 'use strict';
 
 var solidJs = require('solid-js');
-var core = require('./chunks/core-BYLtO0Po.cjs');
-var stagger = require('./chunks/stagger-CvhYlKrF.cjs');
-require('./chunks/presets-D2ksQNzJ.cjs');
+var core = require('./chunks/core-B5T0dhFH.cjs');
+var stagger = require('./chunks/stagger-CCFyhzSw.cjs');
+require('./chunks/presets-CUHys3sK.cjs');
 
 /**
- * use-scroll-animate - Solid integration
+ * motionary - Solid integration
  *
  * ```tsx
- * import { scrollAnimate, scrollStagger, useScrollAnimate } from 'use-scroll-animate/solid';
+ * import { scrollAnimate, scrollStagger, useScrollAnimate } from 'motionary/solid';
  * false && scrollAnimate; // keep the directive import (TypeScript)
  *
  * <div use:scrollAnimate={{ animation: 'zoom-in' }}>…</div>

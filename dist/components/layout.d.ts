@@ -80,7 +80,7 @@ interface SharedOptions {
 declare function sharedTransition(update: () => void | Promise<void>, root?: ParentNode, o?: SharedOptions): Promise<void>;
 
 /**
- * use-scroll-animate/components/layout — layout animation (v3.6).
+ * motionary/components/layout — layout animation (v3.6).
  * `autoAnimate()` / `<usa-auto-animate>` (list & grid reflow),
  * `<usa-masonry>`, and `sharedTransition()` for shared-element transitions
  * (View Transitions API with a FLIP fallback).

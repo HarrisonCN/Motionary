@@ -1,6 +1,6 @@
 # Migrating from GSAP ScrollTrigger
 
-GSAP + ScrollTrigger is a full animation platform; `use-scroll-animate` covers the common scroll cases — reveal on enter, staggered lists, timelines, scrubbed progress and parallax — in a few kB with no dependencies. If you rely on pinning, `snap`, morphing or arbitrary property tweens, keep GSAP for those parts.
+GSAP + ScrollTrigger is a full animation platform; `motionary` covers the common scroll cases — reveal on enter, staggered lists, timelines, scrubbed progress and parallax — in a few kB with no dependencies. If you rely on pinning, `snap`, morphing or arbitrary property tweens, keep GSAP for those parts.
 
 ## Reveal on enter
 
@@ -9,7 +9,7 @@ GSAP + ScrollTrigger is a full animation platform; `use-scroll-animate` covers t
 + ScrollAnimate.observe('.card', { animation: 'fade-in-up', duration: 600 });
 ```
 
-| ScrollTrigger | use-scroll-animate |
+| ScrollTrigger | motionary |
 |---|---|
 | `start: 'top 90%'` | `threshold` / `rootMargin` (`'0px 0px -10% 0px'`) or `offset` (px) |
 | `once: true` | `once: true` (default) |
@@ -69,7 +69,7 @@ ScrollAnimate.observe('.card', { animation: 'zoom-in', engine: 'auto', viewRange
 
 ## Cleanup
 
-| GSAP | use-scroll-animate |
+| GSAP | motionary |
 |---|---|
 | `ScrollTrigger.refresh()` | `refresh()` |
 | `trigger.kill()` / `ScrollTrigger.getAll().forEach(t => t.kill())` | `unobserve(target)` / `destroy()` |

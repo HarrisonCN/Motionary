@@ -1,5 +1,5 @@
 /**
- * use-scroll-animate/components/lazy — lazy, per-category registration (v2.9).
+ * motionary/components/lazy — lazy, per-category registration (v2.9).
  *
  * `lazyDefine()` scans the page (and watches it with a MutationObserver) for
  * `<usa-*>` tags that are not registered yet and dynamically imports only the
@@ -7,7 +7,7 @@
  * so a page that only uses `<usa-button>` loads just the click category.
  *
  * ```js
- * import { lazyDefine } from 'use-scroll-animate/components/lazy';
+ * import { lazyDefine } from 'motionary/components/lazy';
  * lazyDefine(); // returns a stop() function
  * ```
  */

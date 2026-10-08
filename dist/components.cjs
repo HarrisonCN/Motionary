@@ -19,20 +19,20 @@ var components_depth = require('./components/depth.cjs');
 var components_layout = require('./components/layout.cjs');
 var components_packs = require('./components/packs.cjs');
 var components_fx = require('./components/fx.cjs');
-var variants = require('./chunks/variants-DxPmgrNX.cjs');
-var base = require('./chunks/base-B5i8qQPR.cjs');
+var variants = require('./chunks/variants-BhjyddG8.cjs');
+var base = require('./chunks/base-BaQV-2ha.cjs');
 var components_tokens = require('./components/tokens.cjs');
 var components_a11y = require('./components/a11y.cjs');
 var components_perf = require('./components/perf.cjs');
 var components_bridge = require('./components/bridge.cjs');
 var indexTags = require('./chunks/index-tags-wv0R_vkO.cjs');
-var spring = require('./chunks/spring--oZh55tB.cjs');
-var core = require('./chunks/core-BDcszY4L.cjs');
-var core$1 = require('./chunks/core-BjOYKSrV.cjs');
-var fx = require('./chunks/fx-B8hk1Fby.cjs');
+var spring = require('./chunks/spring-Dgx187Vh.cjs');
+var core = require('./chunks/core-BGAyaY6L.cjs');
+var core$1 = require('./chunks/core-zq17EeCI.cjs');
+var fx = require('./chunks/fx-lBGVtQO1.cjs');
 
 /**
- * use-scroll-animate/components
+ * motionary/components
  *
  * Framework-agnostic, dependency-free animated UI components built on
  * Custom Elements + CSS + the Web Animations API. They run in any browser
@@ -40,10 +40,10 @@ var fx = require('./chunks/fx-B8hk1Fby.cjs');
  * (WebView2), WinUI 3 / WPF / WinForms with WebView2, and installed PWAs.
  *
  * ```js
- * import { defineComponents } from 'use-scroll-animate/components';
+ * import { defineComponents } from 'motionary/components';
  * defineComponents(); // registers every <usa-*> element
  * // or only what you use (tree-shakable):
- * import { defineTypewriter } from 'use-scroll-animate/components/text';
+ * import { defineTypewriter } from 'motionary/components/text';
  * ```
  *
  * Importing has no side effects and is SSR-safe; nothing is registered

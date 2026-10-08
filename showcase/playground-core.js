@@ -77,17 +77,17 @@ export function playgroundSnippets(state) {
   const markup = composeMarkup(state);
   const cats = categoriesOf(state);
   const ind = (s, n) => s.split('\n').map((l) => ' '.repeat(n) + l).join('\n');
-  const cdn = `https://unpkg.com/use-scroll-animate@${VERSION_RANGE}/dist/components.umd.js`;
-  const imports = cats.map((c) => `import { ${defineFn(c)} } from 'use-scroll-animate/components/${c}';`).join('\n');
+  const cdn = `https://unpkg.com/motionary@${VERSION_RANGE}/dist/components.umd.js`;
+  const imports = cats.map((c) => `import { ${defineFn(c)} } from 'motionary/components/${c}';`).join('\n');
   const calls = cats.map((c) => `${defineFn(c)}();`).join('\n');
   const jsx = toJsx(markup).replace(/<img([^>]*?[^/])>/g, '<img$1 />');
   return {
     html: `<!-- registers every <usa-*> element -->\n<script src="${cdn}"></script>\n\n${markup}`,
-    esm: `${imports || "import { defineComponents } from 'use-scroll-animate/components';"}\n\n${calls || 'defineComponents();'}\n\n// HTML\n${markup.split('\n').map((l) => '// ' + l).join('\n')}`,
-    react: `${imports}\nimport 'use-scroll-animate/components/jsx';\n\n${calls}\n\nexport function Hero() {\n  return (\n${ind(jsx, 4)}\n  );\n}`,
+    esm: `${imports || "import { defineComponents } from 'motionary/components';"}\n\n${calls || 'defineComponents();'}\n\n// HTML\n${markup.split('\n').map((l) => '// ' + l).join('\n')}`,
+    react: `${imports}\nimport 'motionary/components/jsx';\n\n${calls}\n\nexport function Hero() {\n  return (\n${ind(jsx, 4)}\n  );\n}`,
     vue: `<script setup>\n${imports}\n${calls}\n</script>\n\n<template>\n${ind(markup, 2)}\n</template>\n\n<!-- vite.config: vue({ template: { compilerOptions: { isCustomElement: (t) => t.startsWith('usa-') } } }) -->`,
     player: playerSnippet(state.tracks?.length ? state.tracks : DEFAULT_TRACKS),
-    timeline: `<script type="module">\n  import { defineTimeline } from 'use-scroll-animate/components/timeline';\n  defineTimeline();\n</script>\n\n${timelineMarkup(state.tracks?.length ? state.tracks : DEFAULT_TRACKS)}`,
+    timeline: `<script type="module">\n  import { defineTimeline } from 'motionary/components/timeline';\n  defineTimeline();\n</script>\n\n${timelineMarkup(state.tracks?.length ? state.tracks : DEFAULT_TRACKS)}`,
   };
 }
 
@@ -156,7 +156,7 @@ export function playerSnippet(tracks = []) {
   const list = normalizeTracks(tracks);
   const json = JSON.stringify(tracksToAnimation(list), null, 2).split('\n').map((l) => '    ' + l).join('\n');
   const kids = list.map((t, i) => `  <div>${escAttr(t.label || `Step ${i + 1}`).replace(/&quot;/g, '"')}</div>`).join('\n');
-  return `<script type="module">\n  import { definePlayer } from 'use-scroll-animate/components/effects';\n  definePlayer();\n</script>\n\n<usa-player trigger="view">\n${kids}\n  <script type="application/json">\n${json}\n  </script>\n</usa-player>`;
+  return `<script type="module">\n  import { definePlayer } from 'motionary/components/effects';\n  definePlayer();\n</script>\n\n<usa-player trigger="view">\n${kids}\n  <script type="application/json">\n${json}\n  </script>\n</usa-player>`;
 }
 
 export const DEFAULT_TRACKS = [newTrack('fade-up', 0, 600, 'Title'), newTrack('fade-left', 300, 600, 'Subtitle'), newTrack('scale', 700, 500, 'Button')];

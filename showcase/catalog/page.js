@@ -21,7 +21,7 @@ export const components = [
     'A slim NProgress-style bar for route changes and fetches: loadingBar.start() trickles, done() completes and fades.',
     'NProgress 风格的细加载条，适用于路由切换与请求：loadingBar.start() 渐进，done() 完成并淡出。',
     ['loadingBar', 'route change', 'role=progressbar'],
-    "<script type=\"module\">\n  import { loadingBar } from 'use-scroll-animate/components/page';\n  await loadingBar.track(fetch('/api'));\n</script>",
+    "<script type=\"module\">\n  import { loadingBar } from 'motionary/components/page';\n  await loadingBar.track(fetch('/api'));\n</script>",
     '<div class="demo-row"><button class="demo-btn" type="button" data-loading="start">start()</button><button class="demo-btn demo-btn-alt" type="button" data-loading="done">done()</button></div><usa-loading-bar></usa-loading-bar>'),
   C('usa-back-to-top', 'page', 'Back to top', '回到顶部',
     'Appears after you scroll, shows reading progress as a ring and springs the page back up, then moves focus to the top.',
@@ -60,37 +60,37 @@ export const helpers = [
     'Native shell bridges (4.7): WinUI 3 (WebView2), .NET MAUI and Flutter hosts push the system’s reduce-motion, light / dark / high-contrast theme and accent color into the page; connectNativeShell() applies them to every component. Samples in examples/native.',
     '原生壳桥接（4.7）：WinUI 3（WebView2）、.NET MAUI 与 Flutter 宿主把系统“减少动态效果”、浅色/深色/高对比度主题与强调色推送给页面，connectNativeShell() 应用到所有组件。示例见 examples/native。',
     ['WinUI 3', 'WebView2', '.NET MAUI', 'Flutter', 'theme sync'],
-    "import { connectNativeShell } from 'use-scroll-animate/components/bridge';\n\nconst { host } = connectNativeShell();   // 'webview2' | 'maui' | 'flutter' | 'browser'…\n// C#:   webView.CoreWebView2.PostWebMessageAsJson(\"{\\\"type\\\":\\\"usa:settings\\\",\\\"theme\\\":\\\"dark\\\"}\");\n// Dart: controller.runJavaScript('window.usaNative.apply({reducedMotion: true})');",
+    "import { connectNativeShell } from 'motionary/components/bridge';\n\nconst { host } = connectNativeShell();   // 'webview2' | 'maui' | 'flutter' | 'browser'…\n// C#:   webView.CoreWebView2.PostWebMessageAsJson(\"{\\\"type\\\":\\\"usa:settings\\\",\\\"theme\\\":\\\"dark\\\"}\");\n// Dart: controller.runJavaScript('window.usaNative.apply({reducedMotion: true})');",
     '<p class="demo-note" data-nb-host></p><div class="demo-row"><button type="button" class="demo-link" data-nb=\'{"theme":"dark","accent":"#0078d4"}\'>Windows dark</button><button type="button" class="demo-link" data-nb=\'{"theme":"light","accent":"#512bd4"}\'>MAUI light</button><button type="button" class="demo-link" data-nb=\'{"theme":"high-contrast"}\'>High contrast</button><button type="button" class="demo-link" data-nb=\'{"reducedMotion":true}\'>Reduce motion</button></div><div class="demo-tile" data-nb-tile style="background:var(--nb-accent,#7c5cff);color:#fff">Accent</div>'),
   H('auto-degrade', 'page', 'autoDegrade',
     'Performance toolkit (4.5): every component loop shares one requestAnimationFrame (onFrame, schedulerStats), setAnimationBudget() caps concurrent animations, autoDegrade() steps motion down while fps drops and restores it, and components/lite loads each category’s CSS on demand (≈62 KB gzip for everything).',
     '性能工具（4.5）：所有组件循环共享一个 requestAnimationFrame（onFrame、schedulerStats），setAnimationBudget() 限制并发动画数，autoDegrade() 在帧率下降时自动降级并在恢复后还原，components/lite 按需加载各分类 CSS（全部组件约 62 KB gzip）。',
     ['performance', 'rAF', 'fps', 'lazy CSS', 'budget'],
-    "import { defineComponents, autoDegrade } from 'use-scroll-animate/components/lite';\n\ndefineComponents();                 // CSS per category, loaded when first used\nautoDegrade({ minFps: 45, maxActive: 40 });\ndocument.addEventListener('usa:degrade', (e) => console.log(e.detail));",
+    "import { defineComponents, autoDegrade } from 'motionary/components/lite';\n\ndefineComponents();                 // CSS per category, loaded when first used\nautoDegrade({ minFps: 45, maxActive: 40 });\ndocument.addEventListener('usa:degrade', (e) => console.log(e.detail));",
     '<div class="demo-row" data-perf-row></div><div class="demo-row"><button type="button" class="demo-link" data-perf-go>Stress: 120 animations</button><label class="demo-note"><input type="checkbox" data-perf-cap> budget 24</label></div><p class="demo-note" data-perf-out>—</p>'),
   H('motion-sensitivity', 'page', 'setMotionSensitivity',
     'Accessibility toolkit (4.4): motion-sensitivity levels (full · gentle — no spins / zooms / parallax · minimal — fades only · static), static alternatives for every component, shared aria-live regions with announce(), and auditMotionA11y() — the rules the automated regression tests run over every element.',
     '无障碍工具（4.4）：运动敏感度分级（全部 · 温和——无旋转/缩放/视差 · 最少——仅淡入淡出 · 静态），每个组件的静态替代，共享 aria-live 区域与 announce()，以及 auditMotionA11y() —— 自动化回归测试对每个元素运行的同一套规则。',
     ['a11y', 'vestibular', 'aria-live', 'WCAG', 'reduced motion'],
-    "import { setMotionSensitivity, announce, auditMotionA11y } from 'use-scroll-animate/components/a11y';\n\nsetMotionSensitivity('gentle', true);   // remembered; restoreMotionSensitivity() on load\nannounce('Added to cart');                 // shared polite live region\nconsole.table(auditMotionA11y(document.body).errors);",
+    "import { setMotionSensitivity, announce, auditMotionA11y } from 'motionary/components/a11y';\n\nsetMotionSensitivity('gentle', true);   // remembered; restoreMotionSensitivity() on load\nannounce('Added to cart');                 // shared polite live region\nconsole.table(auditMotionA11y(document.body).errors);",
     '<div class="demo-row"><span class="demo-pill" data-sens-pill>✦</span><span class="demo-pill" data-sens-pill>✦</span><span class="demo-pill" data-sens-pill>✦</span></div><div class="demo-row"><button type="button" class="demo-link" data-sens="full">full</button><button type="button" class="demo-link" data-sens="gentle">gentle</button><button type="button" class="demo-link" data-sens="minimal">minimal</button><button type="button" class="demo-link" data-sens="static">static</button><button type="button" class="demo-link" data-sens-audit>audit page</button></div><p class="demo-note" data-sens-out aria-live="polite"></p>'),
   H('motion-tokens', 'page', 'applyMotionTokens',
     'Motion design tokens (4.2): duration, easing and spring scales as CSS variables (--usa-duration-fast, --usa-easing-emphasized…) and W3C Design Tokens JSON; import from Figma Tokens or Style Dictionary. timeline() accepts token names.',
     '动效设计令牌（4.2）：时长、缓动与弹簧刻度，以 CSS 变量（--usa-duration-fast、--usa-easing-emphasized…）与 W3C 设计令牌 JSON 提供；可从 Figma Tokens 或 Style Dictionary 导入。timeline() 可直接使用令牌名。',
     ['tokens', 'design system', 'Figma', 'Style Dictionary'],
-    "import { applyMotionTokens, importMotionTokens, motionVar } from 'use-scroll-animate/components/tokens';\n\napplyMotionTokens(importMotionTokens(figmaJson));\n// CSS: transition: transform var(--usa-duration-fast) var(--usa-easing-emphasized);\ntimeline().to('.card', 'fade-up', { duration: 'slow', easing: 'spring' });",
+    "import { applyMotionTokens, importMotionTokens, motionVar } from 'motionary/components/tokens';\n\napplyMotionTokens(importMotionTokens(figmaJson));\n// CSS: transition: transform var(--usa-duration-fast) var(--usa-easing-emphasized);\ntimeline().to('.card', 'fade-up', { duration: 'slow', easing: 'spring' });",
     '<div class="demo-row" data-tok-row><span class="demo-pill">1</span><span class="demo-pill">2</span><span class="demo-pill">3</span></div><div class="demo-row"><button type="button" class="demo-link" data-tok="fast">fast</button><button type="button" class="demo-link" data-tok="normal">normal</button><button type="button" class="demo-link" data-tok="slow">slow</button><select aria-label="Easing token" data-tok-ease><option>emphasized</option><option>spring</option><option>bounce</option><option>standard</option></select></div><p class="demo-note" data-tok-out></p>'),
   H('page-transition', 'page', 'pageTransition',
     'Animated route changes with the View Transitions API: fade, slide, circle reveal from the click, blinds, pixel dissolve, zoom. enableMpaTransitions() does the same across real page loads; themeTransition() circle-reveals a theme switch.',
     '基于 View Transitions API 的路由切换动画：淡入、滑动、从点击处圆形揭示、百叶窗、像素溶解、缩放。enableMpaTransitions() 用于真实页面跳转；themeTransition() 以圆形揭示切换主题。',
     ['View Transitions', 'SPA', 'MPA', 'theme'],
-    "import { pageTransition, themeTransition } from 'use-scroll-animate/components/page';\n\nawait pageTransition(() => router.render(next), { effect: 'circle' });\nthemeTransition(() => document.documentElement.classList.toggle('dark'));",
+    "import { pageTransition, themeTransition } from 'motionary/components/page';\n\nawait pageTransition(() => router.render(next), { effect: 'circle' });\nthemeTransition(() => document.documentElement.classList.toggle('dark'));",
     '<div class="demo-stack"><div class="demo-row"><select aria-label="effect" data-pt-pick><option>circle</option><option>fade</option><option>slide</option><option>slide-right</option><option>slide-up</option><option>blinds</option><option>pixel</option><option>zoom</option></select><button class="demo-btn" type="button" data-pt-go>Transition</button><button class="demo-btn demo-btn-alt" type="button" data-theme-go>Theme ◐</button></div><div class="demo-tile" data-pt-target>Page 1</div></div>'),
   H('smooth-scroll', 'page', 'smoothScroll',
     'Inertial wheel smoothing for the page (touch and keyboard stay native) and scrollToTarget() with spring timing. No-op under reduced motion.',
     '页面滚轮惯性平滑（触摸与键盘保持原生），以及弹簧节奏的 scrollToTarget()。减少动态效果时不生效。',
     ['smooth scroll', 'lerp', 'scrollTo'],
-    "import { smoothScroll, scrollToTarget } from 'use-scroll-animate/components/page';\n\nconst stop = smoothScroll({ lerp: 0.1 });\nscrollToTarget('#pricing', { offset: 80 });",
+    "import { smoothScroll, scrollToTarget } from 'motionary/components/page';\n\nconst stop = smoothScroll({ lerp: 0.1 });\nscrollToTarget('#pricing', { offset: 80 });",
     '<div class="demo-row"><button class="demo-btn" type="button" data-smooth>Enable smooth scroll</button><button class="demo-btn demo-btn-alt" type="button" data-scroll-to>scrollToTarget(#windows)</button></div>'),
 ];
 
@@ -196,7 +196,7 @@ export const wire = {
       const s = document.createElement('usa-splash');
       s.setAttribute('exit', 'circle');
       s.setAttribute('min', '900');
-      s.innerHTML = '<strong style="font-size:2rem">use-scroll-animate</strong>';
+      s.innerHTML = '<strong style="font-size:2rem">motionary</strong>';
       document.body.append(s);
       s.addEventListener('usa:done', () => s.remove());
     });

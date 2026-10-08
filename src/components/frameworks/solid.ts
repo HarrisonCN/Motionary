@@ -1,13 +1,13 @@
 /**
- * use-scroll-animate/components/solid — Solid integration (v3.8).
+ * motionary/components/solid — Solid integration (v3.8).
  * Solid renders custom elements natively: set properties with `prop:` and
  * listen with `on:` (`<usa-toggle prop:checked={on()} on:usa:change={…}>`).
  * This entry adds `defineUsa()` (client only, SolidStart-safe), a `usa`
  * directive for `use:usa={{ props, on }}`, and JSX types.
  *
  * ```tsx
- * import { defineUsa, usa } from 'use-scroll-animate/components/solid';
- * import type {} from 'use-scroll-animate/components/solid'; // JSX types
+ * import { defineUsa, usa } from 'motionary/components/solid';
+ * import type {} from 'motionary/components/solid'; // JSX types
  * onMount(() => defineUsa());
  * false && usa; // keep the directive import (Solid convention)
  * <usa-card use:usa={{ on: { flip: (e) => console.log(e.detail) } }} effect="flip">…</usa-card>

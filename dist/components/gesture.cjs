@@ -1,8 +1,8 @@
 'use strict';
 
-var base = require('../chunks/base-B5i8qQPR.cjs');
-var spring = require('../chunks/spring--oZh55tB.cjs');
-var core = require('../chunks/core-BjOYKSrV.cjs');
+var base = require('../chunks/base-BaQV-2ha.cjs');
+var spring = require('../chunks/spring-Dgx187Vh.cjs');
+var core = require('../chunks/core-zq17EeCI.cjs');
 
 var css = "usa-swipeable{display:block;touch-action:pan-y;user-select:none;-webkit-user-select:none}usa-swipeable[axis=\"y\"]{touch-action:pan-x}usa-swipeable>*{transform:translate3d(var(--usa-swipe,0px),0,0);opacity:calc(1 - var(--usa-swipe-p,0) * 0.5)}usa-swipeable[axis=\"y\"]>*{transform:translate3d(0,var(--usa-swipe,0px),0)}usa-swipeable:focus-visible{outline:2px solid currentColor;outline-offset:2px}usa-pinch-zoom{display:block;overflow:hidden;touch-action:none;position:relative}usa-pinch-zoom>*{transform:translate3d(var(--usa-zoom-x,0px),var(--usa-zoom-y,0px),0) scale(var(--usa-zoom,1));transform-origin:50% 50%}usa-pinch-zoom[data-zoomed]{cursor:grab}usa-pinch-zoom:focus-visible{outline:2px solid currentColor;outline-offset:2px}";
 
@@ -189,7 +189,7 @@ function definePinchZoom(tag = 'usa-pinch-zoom') {
 }
 
 /**
- * use-scroll-animate/components/gesture — unified gestures (v3.2).
+ * motionary/components/gesture — unified gestures (v3.2).
  * `gesture()` recognises pan, swipe, pinch, long-press, tap and double-tap
  * with release velocities for springs; `<usa-swipeable>` (swipe-to-dismiss)
  * and `<usa-pinch-zoom>` are built on it.

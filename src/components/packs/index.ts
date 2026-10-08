@@ -1,5 +1,5 @@
 /**
- * use-scroll-animate/components/packs — effect packs (v3.9).
+ * motionary/components/packs — effect packs (v3.9).
  * Ready-made motion for e-commerce, portfolio, dashboard, game UI and
  * landing pages: mark elements with `data-role` and apply a pack with
  * `<usa-pack name="…">` or `applyPack(name, root)`. Includes `flyToCart()`

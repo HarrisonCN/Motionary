@@ -67,7 +67,7 @@ describe('motion design tokens (4.2)', () => {
     expect(mergeMotionTokens({ easing: { x: 'linear' } }).easing.x).toBe('linear');
   });
 
-  it('ships as use-scroll-animate/components/tokens with generated docs files', () => {
+  it('ships as motionary/components/tokens with generated docs files', () => {
     expect(COMPONENT_ENTRIES.tokens).toBe('tokens/index');
     const json = JSON.parse(readFileSync(`${process.cwd()}/docs/motion.tokens.json`, 'utf8'));
     expect(json).toEqual(motionTokensToJSON(MOTION_TOKENS));

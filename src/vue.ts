@@ -1,5 +1,5 @@
 /**
- * use-scroll-animate - Vue 3 Integration
+ * motionary - Vue 3 Integration
  * Provides useScrollAnimate and useScrollStagger composables for Vue 3 applications.
  *
  * A thin wrapper around the core engine, so it shares its behaviour: `once`,

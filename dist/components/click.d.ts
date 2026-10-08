@@ -191,7 +191,7 @@ interface ConfettiOptions {
 declare function haptic(pattern?: number | number[]): boolean;
 
 /**
- * use-scroll-animate/components/click — click & tap effects (v2.5).
+ * motionary/components/click — click & tap effects (v2.5).
  * `<usa-click>` (ripple, burst, confetti, squish, press-spring, shake),
  * `<usa-button>` (button click deformation: squash, wobble, gooey, dent;
  * shape morph; submit → loading → success), `<usa-icon-morph>`,

@@ -1,5 +1,5 @@
 /**
- * use-scroll-animate/components/angular — Angular integration (v3.8).
+ * motionary/components/angular — Angular integration (v3.8).
  * Angular renders `<usa-*>` tags once the component (or NgModule) allows
  * custom elements with `CUSTOM_ELEMENTS_SCHEMA`; property binding
  * `[checked]="on"` and event binding `(usa:change)="…"` then work as is.
@@ -7,7 +7,7 @@
  *
  * ```ts
  * import { CUSTOM_ELEMENTS_SCHEMA, Component, APP_INITIALIZER } from '@angular/core';
- * import { usaInitializer } from 'use-scroll-animate/components/angular';
+ * import { usaInitializer } from 'motionary/components/angular';
  *
  * // app.config.ts
  * providers: [{ provide: APP_INITIALIZER, multi: true, useFactory: usaInitializer(['click', 'ui']) }]

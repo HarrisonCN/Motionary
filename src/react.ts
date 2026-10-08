@@ -1,5 +1,5 @@
 /**
- * use-scroll-animate - React Integration
+ * motionary - React Integration
  * Provides useScrollAnimate and useScrollStagger hooks for React applications.
  * `useScrollStagger({ observeChildren: true })` also animates children added later.
  *

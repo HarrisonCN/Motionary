@@ -2,7 +2,7 @@
 
 var _documentCurrentScript = typeof document !== 'undefined' ? document.currentScript : null;
 /**
- * use-scroll-animate/components — shared base for the `<usa-*>` custom elements.
+ * motionary/components — shared base for the `<usa-*>` custom elements.
  *
  * Everything here is lazy: nothing touches `window`, `document`,
  * `HTMLElement` or `matchMedia` at import time, so the components can be
@@ -391,7 +391,7 @@ function deprecate(key, message) {
         return;
     warned.add(key);
     if (typeof console !== 'undefined')
-        console.warn(`[use-scroll-animate] ${message}`);
+        console.warn(`[motionary] ${message}`);
 }
 /**
  * The `kind` attribute of `<usa-spinner>`, `<usa-check>`, `<usa-dialog>` and
@@ -428,7 +428,7 @@ const COMPONENT_CATEGORIES = {
 };
 
 /**
- * use-scroll-animate/components/perf — performance toolkit (4.5).
+ * motionary/components/perf — performance toolkit (4.5).
  *
  * - One shared rAF scheduler for every component loop (`onFrame()`, `schedulerStats()`).
  * - Animation budget: `setAnimationBudget(n)` caps concurrent component
@@ -437,7 +437,7 @@ const COMPONENT_CATEGORIES = {
  *   down (`low`, then a tighter budget) while the device struggles, restoring
  *   it when frames recover.
  * - On-demand CSS: `loadCategoryStyles()` / `onDemandStyles()` — used by
- *   `use-scroll-animate/components/lite`, the build without inlined CSS.
+ *   `motionary/components/lite`, the build without inlined CSS.
  */
 /**
  * Watch frame rate and animation count; while the device struggles, set
@@ -869,7 +869,7 @@ function defineScrolly(tag = 'usa-scrolly') {
 }
 
 /**
- * use-scroll-animate/components/reveal — entrance & scroll reveal components.
+ * motionary/components/reveal — entrance & scroll reveal components.
  * `<usa-reveal>`, `<usa-stagger>`, `<usa-scroll-progress>`, `<usa-scrolly>`.
  */
 /** Register every component of this category under its default tag. */
@@ -1000,7 +1000,7 @@ function defineTypewriter(tag = 'usa-typewriter') {
 var css$12 = "";
 
 /**
- * use-scroll-animate/components/tokens — motion design tokens (4.2).
+ * motionary/components/tokens — motion design tokens (4.2).
  *
  * One source of truth for durations, easings and springs: as CSS custom
  * properties (`--usa-duration-fast`, `--usa-easing-emphasized`,
@@ -1008,7 +1008,7 @@ var css$12 = "";
  * from Figma Tokens (Tokens Studio) or Style Dictionary exports.
  *
  * ```ts
- * import { applyMotionTokens, importMotionTokens, motionToken } from 'use-scroll-animate/components/tokens';
+ * import { applyMotionTokens, importMotionTokens, motionToken } from 'motionary/components/tokens';
  * applyMotionTokens(importMotionTokens(await (await fetch('/tokens.json')).json()));
  * el.animate(frames, { duration: motionToken('duration', 'slow'), easing: motionToken('easing', 'emphasized') });
  * ```
@@ -2266,7 +2266,7 @@ function defineScrollHighlight(tag = 'usa-scroll-highlight') {
 }
 
 /**
- * use-scroll-animate/components/text — text effects.
+ * motionary/components/text — text effects.
  * `<usa-typewriter>`, `<usa-split-text>`, `<usa-scramble>`, `<usa-counter>`,
  * `<usa-shimmer-text>`, `<usa-text-rotate>`.
  */
@@ -2683,7 +2683,7 @@ function defineToggle(tag = 'usa-toggle') {
 }
 
 /**
- * use-scroll-animate/components/interaction — micro-interactions.
+ * motionary/components/interaction — micro-interactions.
  * `<usa-ripple>`, `<usa-magnetic>`, `<usa-tilt>`, `<usa-spotlight>`,
  * `<usa-press>`, `<usa-toggle>`.
  */
@@ -3113,7 +3113,7 @@ function defineCheck(tag = 'usa-check') {
 }
 
 /**
- * use-scroll-animate/components/feedback — loading & feedback.
+ * motionary/components/feedback — loading & feedback.
  * `<usa-spinner>`, `<usa-skeleton>`, `<usa-progress>`, `<usa-toaster>` +
  * `toast()`, `<usa-check>`.
  */
@@ -3782,7 +3782,7 @@ function fluentPreset(options = {}) {
 }
 
 /**
- * use-scroll-animate/components/background — backgrounds & decoration.
+ * motionary/components/background — backgrounds & decoration.
  * `<usa-aurora>`, `<usa-particles>`, `<usa-grain>`, `<usa-marquee>`,
  * `<usa-acrylic>`.
  */
@@ -4206,7 +4206,7 @@ async function flip(targets, mutate, options = {}) {
 }
 
 /**
- * use-scroll-animate/components/transitions — view & layout transitions.
+ * motionary/components/transitions — view & layout transitions.
  * `<usa-dialog>`, `<usa-accordion>`, `<usa-view-switch>`
  * and the `viewTransition()` and `flip()` helpers (4.0: `<usa-flip-list>` → `<usa-auto-animate>`,
  * `connectedAnimation()` → `sharedTransition()`, both in `components/layout`).
@@ -4844,7 +4844,7 @@ function defineOverscroll(tag = 'usa-overscroll') {
 }
 
 /**
- * use-scroll-animate/components/physics — spring & bounce physics (v2.3).
+ * motionary/components/physics — spring & bounce physics (v2.3).
  * `<usa-spring>` (bounce-in, pop, drop, jelly, rubber-band), `<usa-draggable>`
  * (spring-back, inertia, snap) and `<usa-overscroll>` (elastic edges), plus
  * the spring core: `spring()`, `springEasing()`, `createSpring()`,
@@ -5392,7 +5392,7 @@ function defineCarousel3d(tag = 'usa-carousel-3d') {
 }
 
 /**
- * use-scroll-animate/components/cards — card effects (v2.4).
+ * motionary/components/cards — card effects (v2.4).
  * `<usa-card effect="flip | holo | glass | border-glow | conic-border | lift |
  * spotlight | sheen | parallax-layers | expand">` (combinable),
  * `<usa-card-stack>` (swipeable deck), `<usa-sticky-stack>` (stacking on
@@ -6349,7 +6349,7 @@ function defineCheckbox(tag = 'usa-checkbox') {
 }
 
 /**
- * use-scroll-animate/components/click — click & tap effects (v2.5).
+ * motionary/components/click — click & tap effects (v2.5).
  * `<usa-click>` (ripple, burst, confetti, squish, press-spring, shake),
  * `<usa-button>` (button click deformation: squash, wobble, gooey, dent;
  * shape morph; submit → loading → success), `<usa-icon-morph>`,
@@ -7372,7 +7372,7 @@ function defineAvatarStack(tag = 'usa-avatar-stack') {
 }
 
 /**
- * use-scroll-animate/components/ui — animated UI components + style variants (v2.6).
+ * motionary/components/ui — animated UI components + style variants (v2.6).
  * `<usa-tabs>`, `<usa-drawer>`, `<usa-bottom-sheet>`, `<usa-pull-refresh>`,
  * `<usa-fab>`, `<usa-navbar>`, `<usa-slider>`, `<usa-rating>`,
  * `<usa-tooltip>`, `<usa-popover>`, `<usa-badge>`, `<usa-avatar-stack>`,
@@ -8169,7 +8169,7 @@ function themeTransition(apply, options = {}) {
 }
 
 /**
- * use-scroll-animate/components/page — page & app-wide effects (v2.7).
+ * motionary/components/page — page & app-wide effects (v2.7).
  * Page transitions (`pageTransition()`, `enableMpaTransitions()`,
  * `themeTransition()`), `<usa-cursor>`, `smoothScroll()` / `scrollToTarget()`,
  * `<usa-fullpage>`, `<usa-loading-bar>` + `loadingBar`, `<usa-back-to-top>`,
@@ -8274,7 +8274,7 @@ function defineTimeline(tag = 'usa-timeline') {
 }
 
 /**
- * use-scroll-animate/components/timeline — choreography (v3.1).
+ * motionary/components/timeline — choreography (v3.1).
  * `timeline()` chains, overlaps, labels, seeks, reverses and scroll-scrubs
  * WAAPI animations on one playhead; `<usa-timeline>` builds one from
  * `data-tl` children.
@@ -8646,7 +8646,7 @@ function definePinchZoom(tag = 'usa-pinch-zoom') {
 }
 
 /**
- * use-scroll-animate/components/gesture — unified gestures (v3.2).
+ * motionary/components/gesture — unified gestures (v3.2).
  * `gesture()` recognises pan, swipe, pinch, long-press, tap and double-tap
  * with release velocities for springs; `<usa-swipeable>` (swipe-to-dismiss)
  * and `<usa-pinch-zoom>` are built on it.
@@ -8987,7 +8987,7 @@ function defineAnimIcon(tag = 'usa-anim-icon') {
 }
 
 /**
- * use-scroll-animate/components/svg — SVG animation (v3.3).
+ * motionary/components/svg — SVG animation (v3.3).
  * `<usa-draw>` (line drawing), `<usa-morph>` (path morph), `<usa-mask-reveal>`
  * (mask / clip-path reveals) and `<usa-anim-icon>` (animated icons), plus
  * `interpolatePath()`, `morphTo()`, `drawLines()`.
@@ -9425,7 +9425,7 @@ function definePostFx(tag = 'usa-post-fx') {
 }
 
 /**
- * use-scroll-animate/components/webgl — lightweight canvas / WebGL (v3.4).
+ * motionary/components/webgl — lightweight canvas / WebGL (v3.4).
  * `<usa-shader>` (shader backgrounds), `<usa-distort>` (hover image
  * distortion), `<usa-liquid>` (ripple images) on a tiny single-quad runner
  * (`glQuad()`), with graceful fallbacks when WebGL is unavailable.
@@ -9663,7 +9663,7 @@ function defineDepth(tag = 'usa-depth') {
 }
 
 /**
- * use-scroll-animate/components/depth — 3D (v3.5).
+ * motionary/components/depth — 3D (v3.5).
  * `<usa-cube>` (CSS 3D cube), `<usa-depth>` (layered depth parallax driven by
  * pointer, device orientation or scroll) and `deviceTilt()`. The 3D ring
  * carousel is `<usa-carousel-3d>` in `components/cards`.
@@ -9908,7 +9908,7 @@ function defineMasonry(tag = 'usa-masonry') {
 }
 
 /**
- * use-scroll-animate/components/layout — layout animation (v3.6).
+ * motionary/components/layout — layout animation (v3.6).
  * `autoAnimate()` / `<usa-auto-animate>` (list & grid reflow),
  * `<usa-masonry>`, and `sharedTransition()` for shared-element transitions
  * (View Transitions API with a FLIP fallback).
@@ -10088,7 +10088,7 @@ function definePack(tag = 'usa-pack') {
 }
 
 /**
- * use-scroll-animate/components/packs — effect packs (v3.9).
+ * motionary/components/packs — effect packs (v3.9).
  * Ready-made motion for e-commerce, portfolio, dashboard, game UI and
  * landing pages: mark elements with `data-role` and apply a pack with
  * `<usa-pack name="…">` or `applyPack(name, root)`. Includes `flyToCart()`
@@ -10113,11 +10113,11 @@ const registry = new Map();
 /** Register an effect (throws on a duplicate name unless `override`). Returns an unregister function. */
 function registerEffect(def, opts = {}) {
     if (!/^[a-z][a-z0-9-]*$/.test(def.name))
-        throw new Error(`[use-scroll-animate] invalid effect name "${def.name}"`);
+        throw new Error(`[motionary] invalid effect name "${def.name}"`);
     if (!EFFECT_KINDS.includes(def.kind))
-        throw new Error(`[use-scroll-animate] unknown effect kind "${def.kind}"`);
+        throw new Error(`[motionary] unknown effect kind "${def.kind}"`);
     if (registry.has(def.name) && !opts.override)
-        throw new Error(`[use-scroll-animate] effect "${def.name}" is already registered`);
+        throw new Error(`[motionary] effect "${def.name}" is already registered`);
     registry.set(def.name, def);
     return () => {
         if (registry.get(def.name) === def)
@@ -10157,7 +10157,7 @@ function context(event) {
 async function playEffect(el, name, options = {}, event) {
     const def = registry.get(name);
     if (!def)
-        throw new Error(`[use-scroll-animate] unknown effect "${name}" — registered: ${Array.from(registry.keys()).join(', ')}`);
+        throw new Error(`[motionary] unknown effect "${name}" — registered: ${Array.from(registry.keys()).join(', ')}`);
     const ctx = context(event);
     if (ctx.reduced && (def.reduced ?? (SKIP_BY_DEFAULT.includes(def.kind) ? 'skip' : 'run')) === 'skip')
         return;
@@ -10176,7 +10176,7 @@ function bindEffect(el, name, options = {}) {
     const { trigger = 'click', once, ...opts } = options;
     const def = registry.get(name);
     if (!def)
-        throw new Error(`[use-scroll-animate] unknown effect "${name}"`);
+        throw new Error(`[motionary] unknown effect "${name}"`);
     const offs = [];
     let current = null;
     const fire = (e) => {
@@ -10350,12 +10350,12 @@ const click = [
 const BUILTIN_EFFECTS = [...enter, ...attention, ...click];
 
 /**
- * use-scroll-animate/components/fx — unified plugin-style effects (5.0).
+ * motionary/components/fx — unified plugin-style effects (5.0).
  * `registerEffect({ name, kind, run })`, `playEffect(el, name)`,
  * `bindEffect(el, name, { trigger })`, `<usa-fx effect trigger>`. Built-ins:
  * every timeline preset (`enter`), `pulse` · `pop` · `jelly` · `wiggle` ·
  * `heartbeat` · `bounce` · `flash` · `tada` · `shake` (attention),
- * `burst` · `confetti` · `ripple` (click). More packs: `use-scroll-animate/components/effects`.
+ * `burst` · `confetti` · `ripple` (click). More packs: `motionary/components/effects`.
  */
 /** Register the built-in effects (idempotent; `defineFxComponents()` calls it). */
 function registerBuiltinEffects() {
@@ -10397,12 +10397,12 @@ function baselineReport() {
 function warnBaseline() {
     const missing = baselineReport().filter((f) => f.required && !f.supported).map((f) => f.id);
     if (missing.length)
-        deprecate('baseline', `this browser lacks ${missing.join(', ')}; use-scroll-animate 5.0 requires them (modern-browser baseline, see docs/upgrading-5.md).`);
+        deprecate('baseline', `this browser lacks ${missing.join(', ')}; motionary 5.0 requires them (modern-browser baseline, see docs/upgrading-5.md).`);
     return missing;
 }
 
 /**
- * use-scroll-animate/components/a11y — accessibility toolkit (4.4).
+ * motionary/components/a11y — accessibility toolkit (4.4).
  *
  * - Motion-sensitivity levels: `setMotionSensitivity('full' | 'gentle' | 'minimal' | 'static')`.
  * - Static alternatives: what every component shows when motion is off, and
@@ -10413,7 +10413,7 @@ function warnBaseline() {
  *   over every `<usa-*>` element — usable in your own tests too.
  *
  * ```ts
- * import { setMotionSensitivity, announce, auditMotionA11y } from 'use-scroll-animate/components/a11y';
+ * import { setMotionSensitivity, announce, auditMotionA11y } from 'motionary/components/a11y';
  * setMotionSensitivity('gentle', true);           // no spins / zooms / parallax, remembered
  * announce('3 items added to cart');               // polite live region
  * expect(auditMotionA11y(document.body).errors).toEqual([]);
@@ -10621,7 +10621,7 @@ function auditMotionA11y(root) {
 const ALL_TAGS = Object.values(COMPONENT_CATEGORIES).flat();
 
 /**
- * use-scroll-animate/components/bridge — native shell bridges (4.7).
+ * motionary/components/bridge — native shell bridges (4.7).
  *
  * Keeps the web UI in sync with the host app's system settings when it runs
  * inside **WinUI 3 / WPF (WebView2)**, **.NET MAUI** (WebView / HybridWebView)
@@ -10764,7 +10764,7 @@ function connectNativeShell(options = {}) {
 }
 
 /**
- * use-scroll-animate/components
+ * motionary/components
  *
  * Framework-agnostic, dependency-free animated UI components built on
  * Custom Elements + CSS + the Web Animations API. They run in any browser
@@ -10772,10 +10772,10 @@ function connectNativeShell(options = {}) {
  * (WebView2), WinUI 3 / WPF / WinForms with WebView2, and installed PWAs.
  *
  * ```js
- * import { defineComponents } from 'use-scroll-animate/components';
+ * import { defineComponents } from 'motionary/components';
  * defineComponents(); // registers every <usa-*> element
  * // or only what you use (tree-shakable):
- * import { defineTypewriter } from 'use-scroll-animate/components/text';
+ * import { defineTypewriter } from 'motionary/components/text';
  * ```
  *
  * Importing has no side effects and is SSR-safe; nothing is registered
@@ -10815,13 +10815,13 @@ function defineComponents(categories) {
 }
 
 /**
- * use-scroll-animate/components/lite — every component and helper **without
+ * motionary/components/lite — every component and helper **without
  * inlined CSS** (4.5): each category's stylesheet (`dist/components/<cat>.css`)
  * is loaded on demand the first time one of its elements connects.
- * Same API as `use-scroll-animate/components`; ~15 KB gzip smaller.
+ * Same API as `motionary/components`; ~15 KB gzip smaller.
  *
  * ```ts
- * import { defineComponents } from 'use-scroll-animate/components/lite';
+ * import { defineComponents } from 'motionary/components/lite';
  * defineComponents();            // CSS for <usa-card> loads when the first card mounts
  * ```
  * Override where the CSS comes from with `onDemandStyles(base)`.

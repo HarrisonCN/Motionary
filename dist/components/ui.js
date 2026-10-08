@@ -1,7 +1,7 @@
-import { x as defineElement, k as clamp, q as caf, r as raf } from '../chunks/base-C3Sw9sAO.js';
-import { d as springEasing, c as createSpring, p as projectInertia, s as snapTo, a as rubberBand } from '../chunks/spring-CckMe3x0.js';
-import { a as adoptVariants } from '../chunks/variants-Bsevy6Xm.js';
-export { V as VARIANTS, s as setVariant } from '../chunks/variants-Bsevy6Xm.js';
+import { x as defineElement, k as clamp, q as caf, r as raf } from '../chunks/base-Yno7N2eC.js';
+import { d as springEasing, c as createSpring, p as projectInertia, s as snapTo, a as rubberBand } from '../chunks/spring-DfQO5USi.js';
+import { a as adoptVariants } from '../chunks/variants-VNscPeTD.js';
+export { V as VARIANTS, s as setVariant } from '../chunks/variants-VNscPeTD.js';
 
 /** Position a fixed `floating` element next to `anchor`, flipping when it would leave the viewport. */
 function place(floating, anchor, placement = 'top', gap = 8) {
@@ -1007,7 +1007,7 @@ function defineAvatarStack(tag = 'usa-avatar-stack') {
 }
 
 /**
- * use-scroll-animate/components/ui — animated UI components + style variants (v2.6).
+ * motionary/components/ui — animated UI components + style variants (v2.6).
  * `<usa-tabs>`, `<usa-drawer>`, `<usa-bottom-sheet>`, `<usa-pull-refresh>`,
  * `<usa-fab>`, `<usa-navbar>`, `<usa-slider>`, `<usa-rating>`,
  * `<usa-tooltip>`, `<usa-popover>`, `<usa-badge>`, `<usa-avatar-stack>`,

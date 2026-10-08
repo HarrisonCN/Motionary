@@ -1,5 +1,5 @@
 /**
- * use-scroll-animate/components
+ * motionary/components
  *
  * Framework-agnostic, dependency-free animated UI components built on
  * Custom Elements + CSS + the Web Animations API. They run in any browser
@@ -7,10 +7,10 @@
  * (WebView2), WinUI 3 / WPF / WinForms with WebView2, and installed PWAs.
  *
  * ```js
- * import { defineComponents } from 'use-scroll-animate/components';
+ * import { defineComponents } from 'motionary/components';
  * defineComponents(); // registers every <usa-*> element
  * // or only what you use (tree-shakable):
- * import { defineTypewriter } from 'use-scroll-animate/components/text';
+ * import { defineTypewriter } from 'motionary/components/text';
  * ```
  *
  * Importing has no side effects and is SSR-safe; nothing is registered

@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-B5i8qQPR.cjs');
+var base = require('../chunks/base-BaQV-2ha.cjs');
 var indexTags = require('../chunks/index-tags-wv0R_vkO.cjs');
 
 /**
@@ -33,12 +33,12 @@ function baselineReport() {
 function warnBaseline() {
     const missing = baselineReport().filter((f) => f.required && !f.supported).map((f) => f.id);
     if (missing.length)
-        base.deprecate('baseline', `this browser lacks ${missing.join(', ')}; use-scroll-animate 5.0 requires them (modern-browser baseline, see docs/upgrading-5.md).`);
+        base.deprecate('baseline', `this browser lacks ${missing.join(', ')}; motionary 5.0 requires them (modern-browser baseline, see docs/upgrading-5.md).`);
     return missing;
 }
 
 /**
- * use-scroll-animate/components/a11y — accessibility toolkit (4.4).
+ * motionary/components/a11y — accessibility toolkit (4.4).
  *
  * - Motion-sensitivity levels: `setMotionSensitivity('full' | 'gentle' | 'minimal' | 'static')`.
  * - Static alternatives: what every component shows when motion is off, and
@@ -49,7 +49,7 @@ function warnBaseline() {
  *   over every `<usa-*>` element — usable in your own tests too.
  *
  * ```ts
- * import { setMotionSensitivity, announce, auditMotionA11y } from 'use-scroll-animate/components/a11y';
+ * import { setMotionSensitivity, announce, auditMotionA11y } from 'motionary/components/a11y';
  * setMotionSensitivity('gentle', true);           // no spins / zooms / parallax, remembered
  * announce('3 items added to cart');               // polite live region
  * expect(auditMotionA11y(document.body).errors).toEqual([]);

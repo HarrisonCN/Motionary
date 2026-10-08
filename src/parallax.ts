@@ -1,5 +1,5 @@
 /**
- * use-scroll-animate - parallax() helper
+ * motionary - parallax() helper
  *
  * Moves elements at a different speed than the page while they cross the
  * viewport. Built on the same scroll progress as `progressVar` (0 when the

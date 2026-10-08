@@ -1,7 +1,7 @@
-import { g as configureComponents, a as MOTION_SENSITIVITY_LEVELS } from '../chunks/base-C3Sw9sAO.js';
+import { g as configureComponents, a as MOTION_SENSITIVITY_LEVELS } from '../chunks/base-Yno7N2eC.js';
 
 /**
- * use-scroll-animate/components/bridge — native shell bridges (4.7).
+ * motionary/components/bridge — native shell bridges (4.7).
  *
  * Keeps the web UI in sync with the host app's system settings when it runs
  * inside **WinUI 3 / WPF (WebView2)**, **.NET MAUI** (WebView / HybridWebView)

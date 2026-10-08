@@ -21,7 +21,7 @@ describe('component gallery catalog', () => {
     const srcTags = Object.entries(SRC_CATEGORIES).flatMap(([cat, tags]) => (tags as readonly string[]).map((t) => `${cat}:${t}`)).sort();
     const cardTags = [...new Set(COMPONENTS.filter((c: any) => !c.entry).map((c: any) => `${c.category}:${c.tag}`))].sort();
     expect(cardTags).toEqual(srcTags);
-    // 5.4+: elements of other entries (use-scroll-animate/components/effects) name their entry
+    // 5.4+: elements of other entries (motionary/components/effects) name their entry
     COMPONENTS.filter((c: any) => c.entry).forEach((c: any) => expect(typeof (effects as any)[c.define], c.define).toBe('function'));
   });
 
@@ -58,18 +58,18 @@ describe('component gallery catalog', () => {
   });
 
   it('generates every code tab and imports only documented entry points', () => {
-    const allowed = new Set(['use-scroll-animate/components', ...Object.keys(COMPONENT_ENTRIES).filter((e) => !/react|vue|svelte|solid|angular|jsx/.test(e)).map((e) => `use-scroll-animate/components/${e}`), ...Object.keys(SRC_CATEGORIES).map((c) => `use-scroll-animate/components/${c}`)]);
+    const allowed = new Set(['motionary/components', ...Object.keys(COMPONENT_ENTRIES).filter((e) => !/react|vue|svelte|solid|angular|jsx/.test(e)).map((e) => `motionary/components/${e}`), ...Object.keys(SRC_CATEGORIES).map((c) => `motionary/components/${c}`)]);
     GALLERY.forEach((item: any) => {
       const out = componentSnippets(item);
       CODE_TABS.forEach((t: any) => expect(out[t.id], `${item.id}/${t.id}`).toMatch(/\S/));
       Object.values(out).forEach((code: any) => {
         for (const m of code.matchAll(/from '([^']+)'/g)) expect(allowed.has(m[1]), `${item.id}: ${m[1]}`).toBe(true);
-        for (const m of code.matchAll(/import '([^']+)'/g)) expect(m[1]).toMatch(/^use-scroll-animate\/components(\/[a-z]+)?\.css$/);
+        for (const m of code.matchAll(/import '([^']+)'/g)) expect(m[1]).toMatch(/^motionary\/components(\/[a-z]+)?\.css$/);
       });
     });
     const tw = componentSnippets(findComponent('typewriter'));
     expect(tw.html).toContain('dist/components.umd.js');
-    expect(tw.esm).toContain("import { defineTypewriter } from 'use-scroll-animate/components/text';");
+    expect(tw.esm).toContain("import { defineTypewriter } from 'motionary/components/text';");
     expect(tw.react).toContain('<usa-typewriter');
     expect(tw.vue).toContain('isCustomElement');
     expect(tw.desktop).toContain('configureComponents({ injectStyles: false })');
@@ -94,7 +94,7 @@ describe('component gallery page', () => {
     expect(html).toContain('<script type="module" src="./gallery.js"></script>');
     expect(js).toContain("new URL('../dist/', import.meta.url)");
     expect(js).toContain("'components.js'");
-    expect(js).toContain('https://unpkg.com/use-scroll-animate@6/dist/');
+    expect(js).toContain('https://unpkg.com/motionary@6/dist/');
     expect(js).toContain('prefers-reduced-motion');
   });
 

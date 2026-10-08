@@ -3,8 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>use-scroll-animate · Animated Components</title>
+  <title>Motionary · Animated Components</title>
   <meta name="description" content="30+ dependency-free animated Web Components (&lt;usa-*&gt;) in six categories — for web pages and Windows apps built with Electron, Tauri, WebView2 or as a PWA." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Motionary" />
+  <meta property="og:title" content="Motionary · Animated Components" />
+  <meta property="og:description" content="30+ dependency-free animated Web Components (&lt;usa-*&gt;) in six categories — for web pages and Windows apps built with Electron, Tauri, WebView2 or as a PWA." />
+  <meta property="og:url" content="https://harrisoncn.github.io/motionary/showcase/components.html" />
+  <meta property="og:image" content="https://harrisoncn.github.io/motionary/showcase/assets/og-motionary.png" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="theme-color" content="#0b0d12" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%237c5cff'/%3E%3Cpath d='M18 40 32 22l14 18' fill='none' stroke='white' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
   <script>
@@ -27,9 +34,9 @@
   <usa-scroll-progress label="Page progress"></usa-scroll-progress>
 
   <header class="topbar" id="top">
-    <a class="brand" href="./" aria-label="use-scroll-animate Animation Store">
+    <a class="brand" href="./" aria-label="Motionary Animation Store">
       <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 15 12 7l7 8" /></svg></span>
-      <span class="brand-name">use-scroll-animate</span>
+      <span class="brand-name">Motionary</span>
       <span class="brand-store" data-i18n="brand">Components</span>
     </a>
     <nav class="topbar-actions" aria-label="Site">
@@ -41,7 +48,7 @@
         <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5" /><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8" /></svg>
         <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z" /></svg>
       </button>
-      <a class="icon-btn" href="https://github.com/HarrisonCN/use-scroll-animate" target="_blank" rel="noopener" aria-label="GitHub">
+      <a class="icon-btn" href="https://github.com/HarrisonCN/motionary" target="_blank" rel="noopener" aria-label="GitHub">
         <svg viewBox="0 0 24 24" aria-hidden="true" class="i-fill"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.4-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.4 1.1 3 .8.1-.6.3-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7 3.6 3.6 0 0 1 .1-2.7s.8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .4 1 .4 1.9.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.8V21c0 .3.2.6.7.5A10 10 0 0 0 12 2Z" /></svg>
       </a>
     </nav>
@@ -55,7 +62,7 @@
         <p class="lead" data-i18n="hero.lead">Dozens of dependency-free &lt;usa-*&gt; custom elements by category. Plain HTML, React, Vue, Svelte — and Electron, Tauri, WebView2 or a PWA on Windows.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="#gallery" data-i18n="hero.cta">Browse components</a>
-          <button class="btn btn-ghost install-pill" type="button" id="hero-install"><code>npm i use-scroll-animate</code><span class="copy-ico" aria-hidden="true"></span><span class="sr-only" data-i18n="hero.install">Copy install</span></button>
+          <button class="btn btn-ghost install-pill" type="button" id="hero-install"><code>npm i motionary</code><span class="copy-ico" aria-hidden="true"></span><span class="sr-only" data-i18n="hero.install">Copy install</span></button>
         </div>
         <ul class="g-platforms" aria-label="Runs in">
           <li>Chrome · Edge · Firefox · Safari</li><li>Electron</li><li>Tauri</li><li>WebView2 (WinUI · WPF · WinForms)</li><li>PWA</li>
@@ -112,21 +119,21 @@
       <usa-stagger class="g-win-grid" effect="rise">
         <article><h3>Electron</h3><pre><code>// renderer.js (bundled)
 import { defineComponents } from
-  'use-scroll-animate/components';
+  'motionary/components';
 defineComponents();</code></pre></article>
         <article><h3>Tauri</h3><pre><code>// src/main.ts — Vite + WebView2
 import { defineTextComponents } from
-  'use-scroll-animate/components/text';
+  'motionary/components/text';
 defineTextComponents();</code></pre></article>
         <article><h3>WebView2 · WinUI 3 / WPF</h3><pre><code>&lt;!-- wwwroot/index.html, mapped via
      SetVirtualHostNameToFolderMapping --&gt;
 &lt;script src="components.umd.js"&gt;&lt;/script&gt;
 &lt;usa-spinner kind="fluent"&gt;&lt;/usa-spinner&gt;</code></pre></article>
         <article><h3>PWA / browser</h3><pre><code>&lt;script src="https://unpkg.com/
-  use-scroll-animate@6/dist/components.umd.js"&gt;
+  motionary@6/dist/components.umd.js"&gt;
 &lt;/script&gt;</code></pre></article>
       </usa-stagger>
-      <p><a class="btn btn-ghost" href="https://github.com/HarrisonCN/use-scroll-animate/blob/main/docs/windows-apps.md" target="_blank" rel="noopener" data-i18n="win.guide">Read the Windows apps guide →</a></p>
+      <p><a class="btn btn-ghost" href="https://github.com/HarrisonCN/motionary/blob/main/docs/windows-apps.md" target="_blank" rel="noopener" data-i18n="win.guide">Read the Windows apps guide →</a></p>
     </section>
   </main>
 
@@ -134,8 +141,8 @@ defineTextComponents();</code></pre></article>
     <p data-i18n="footer.made">Every demo on this page is a real &lt;usa-*&gt; element from dist/.</p>
     <p class="footer-links">
       <a href="./" data-i18n="nav.store">Animation Store</a>
-      <a href="https://github.com/HarrisonCN/use-scroll-animate/blob/main/docs/components.md" target="_blank" rel="noopener" data-i18n="footer.docs">Component docs</a>
-      <a href="https://www.npmjs.com/package/use-scroll-animate" target="_blank" rel="noopener">npm</a>
+      <a href="https://github.com/HarrisonCN/motionary/blob/main/docs/components.md" target="_blank" rel="noopener" data-i18n="footer.docs">Component docs</a>
+      <a href="https://www.npmjs.com/package/motionary" target="_blank" rel="noopener">npm</a>
     </p>
   </footer>
 

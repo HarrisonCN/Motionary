@@ -48,9 +48,9 @@ const registry = new Map<string, EffectDefinition>();
 
 /** Register an effect (throws on a duplicate name unless `override`). Returns an unregister function. */
 export function registerEffect<O extends Record<string, unknown>>(def: EffectDefinition<O>, opts: { override?: boolean } = {}): () => void {
-  if (!/^[a-z][a-z0-9-]*$/.test(def.name)) throw new Error(`[use-scroll-animate] invalid effect name "${def.name}"`);
-  if (!EFFECT_KINDS.includes(def.kind)) throw new Error(`[use-scroll-animate] unknown effect kind "${def.kind}"`);
-  if (registry.has(def.name) && !opts.override) throw new Error(`[use-scroll-animate] effect "${def.name}" is already registered`);
+  if (!/^[a-z][a-z0-9-]*$/.test(def.name)) throw new Error(`[motionary] invalid effect name "${def.name}"`);
+  if (!EFFECT_KINDS.includes(def.kind)) throw new Error(`[motionary] unknown effect kind "${def.kind}"`);
+  if (registry.has(def.name) && !opts.override) throw new Error(`[motionary] effect "${def.name}" is already registered`);
   registry.set(def.name, def as unknown as EffectDefinition);
   return () => {
     if (registry.get(def.name) === (def as unknown)) registry.delete(def.name);
@@ -91,7 +91,7 @@ function context(event?: Event): EffectContext & { cleanups: Cleanup[] } {
  */
 export async function playEffect(el: HTMLElement, name: string, options: Record<string, unknown> = {}, event?: Event): Promise<void> {
   const def = registry.get(name);
-  if (!def) throw new Error(`[use-scroll-animate] unknown effect "${name}" — registered: ${Array.from(registry.keys()).join(', ')}`);
+  if (!def) throw new Error(`[motionary] unknown effect "${name}" — registered: ${Array.from(registry.keys()).join(', ')}`);
   const ctx = context(event);
   if (ctx.reduced && (def.reduced ?? (SKIP_BY_DEFAULT.includes(def.kind) ? 'skip' : 'run')) === 'skip') return;
   const out = def.run(el, { ...(def.defaults || {}), ...options }, ctx);
@@ -107,7 +107,7 @@ export async function playEffect(el: HTMLElement, name: string, options: Record<
 export function bindEffect(el: HTMLElement, name: string, options: Record<string, unknown> & { trigger?: EffectTrigger; once?: boolean } = {}): Cleanup {
   const { trigger = 'click', once, ...opts } = options;
   const def = registry.get(name);
-  if (!def) throw new Error(`[use-scroll-animate] unknown effect "${name}"`);
+  if (!def) throw new Error(`[motionary] unknown effect "${name}"`);
   const offs: Cleanup[] = [];
   let current: Cleanup | null = null;
   const fire = (e?: Event) => {

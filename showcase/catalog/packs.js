@@ -45,7 +45,7 @@ export const helpers = [
     'applyPack(name, root) applies a pack to any container without the element; returns an undo function. flyToCart(from, to) and countUp(el) are exported too.',
     'applyPack(name, root) 无需元素即可对任意容器套用效果包，返回撤销函数。另导出 flyToCart(from, to) 与 countUp(el)。',
     ['pack', 'fly to cart', 'count up'],
-    "import { applyPack, flyToCart } from 'use-scroll-animate/components/packs';\n\nconst undo = applyPack('ecommerce', document.querySelector('main'));\nawait flyToCart(productImage, cartIcon);",
+    "import { applyPack, flyToCart } from 'motionary/components/packs';\n\nconst undo = applyPack('ecommerce', document.querySelector('main'));\nawait flyToCart(productImage, cartIcon);",
     '<div class="demo-row"><span class="demo-pill" data-fly-from>📦</span><span class="demo-pack__cart" data-fly-to>🛒</span><button type="button" class="demo-link" data-fly-btn>Fly</button></div>'),
 ];
 

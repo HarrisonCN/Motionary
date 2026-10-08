@@ -1,6 +1,6 @@
 # API reference
 
-`use-scroll-animate` — every public export, option and attribute. See the [README](../README.md) for a tour, the [demo](../demo/index.html) to try every preset, and the migration guides for [AOS](./migration-from-aos.md) and [GSAP ScrollTrigger](./migration-from-gsap-scrolltrigger.md). Upgrading from 1.x: see [Upgrading to 2.0](./deprecations.md).
+`motionary` — every public export, option and attribute. See the [README](../README.md) for a tour, the [demo](../demo/index.html) to try every preset, and the migration guides for [AOS](./migration-from-aos.md) and [GSAP ScrollTrigger](./migration-from-gsap-scrolltrigger.md). Upgrading from 1.x: see [Upgrading to 2.0](./deprecations.md).
 
 - [Entry points](#entry-points)
 - [Default instance & `createScrollAnimate(config)`](#default-instance--createscrollanimateconfig)
@@ -17,24 +17,24 @@
 
 | Import | Contents |
 |---|---|
-| `use-scroll-animate` | Default instance, `createScrollAnimate`, `staggerChildren`, `timeline`, `parallax`, `getScrollProgress`, `supportsScrollTimeline`, `PRESETS`, `registerPresets`, `reversePreset`, `resolvePreset`, `resolveEasing`, `EASING_MAP`, all types |
-| `use-scroll-animate/presets/extended` | Registers the 181 extended presets on import (6.1). Exports `EXTENDED_PRESETS`, `EXTENDED_PRESET_CATEGORIES`, `registerExtendedPresets()`. `<script>`: `dist/presets-extended.umd.js` (global `ScrollAnimatePresets`) |
-| `use-scroll-animate/react` | `createReactHooks(React)` |
-| `use-scroll-animate/vue` | `createVueComposables({ ref, onMounted, onUnmounted })` |
-| `use-scroll-animate/svelte` | `scrollAnimate`, `scrollStagger` actions |
-| `use-scroll-animate/solid` | `scrollAnimate`, `scrollStagger` directives, `useScrollAnimate()` (needs `solid-js`) |
-| `use-scroll-animate/element` | `defineScrollAnimate(tagName?, instance?)` for `<scroll-animate>` |
+| `motionary` | Default instance, `createScrollAnimate`, `staggerChildren`, `timeline`, `parallax`, `getScrollProgress`, `supportsScrollTimeline`, `PRESETS`, `registerPresets`, `reversePreset`, `resolvePreset`, `resolveEasing`, `EASING_MAP`, all types |
+| `motionary/presets/extended` | Registers the 181 extended presets on import (6.1). Exports `EXTENDED_PRESETS`, `EXTENDED_PRESET_CATEGORIES`, `registerExtendedPresets()`. `<script>`: `dist/presets-extended.umd.js` (global `ScrollAnimatePresets`) |
+| `motionary/react` | `createReactHooks(React)` |
+| `motionary/vue` | `createVueComposables({ ref, onMounted, onUnmounted })` |
+| `motionary/svelte` | `scrollAnimate`, `scrollStagger` actions |
+| `motionary/solid` | `scrollAnimate`, `scrollStagger` directives, `useScrollAnimate()` (needs `solid-js`) |
+| `motionary/element` | `defineScrollAnimate(tagName?, instance?)` for `<scroll-animate>` |
 | `dist/index.umd.js` | Global `ScrollAnimate` (`ScrollAnimate.default` is the instance, other exports as properties) |
 | `dist/element.umd.js` | Registers `<scroll-animate>` on load; global `ScrollAnimateElement` |
-| `use-scroll-animate/components` (+ `/components/reveal`, `/text`, `/interaction`, `/feedback`, `/background`, `/transitions`) | 30 animated `<usa-*>` Web Components, `defineComponents()`, `configureComponents()`, `toast()`, `viewTransition()`, `flip()` — see **[components.md](./components.md)** |
-| `dist/components.umd.js`, `use-scroll-animate/components.css` | Registers every `<usa-*>` on load (global `UsaComponents`); the component styles as a file |
+| `motionary/components` (+ `/components/reveal`, `/text`, `/interaction`, `/feedback`, `/background`, `/transitions`) | 30 animated `<usa-*>` Web Components, `defineComponents()`, `configureComponents()`, `toast()`, `viewTransition()`, `flip()` — see **[components.md](./components.md)** |
+| `dist/components.umd.js`, `motionary/components.css` | Registers every `<usa-*>` on load (global `UsaComponents`); the component styles as a file |
 
 Every entry is ESM-first (`import` → `.js` + `.d.ts`) with a CommonJS build (`require` → `.cjs` + `.d.cts`), SSR-safe (no DOM access at import), and has zero runtime dependencies.
 
 ## Default instance & `createScrollAnimate(config)`
 
 ```ts
-import ScrollAnimate, { createScrollAnimate } from 'use-scroll-animate';
+import ScrollAnimate, { createScrollAnimate } from 'motionary';
 
 ScrollAnimate.init();                               // shared default instance
 const sa = createScrollAnimate({ defaultDuration: 800, defaultEngine: 'auto' }); // isolated instance
@@ -105,7 +105,7 @@ Boolean attributes are true when present unless their value is `"false"`.
 
 `PRESETS` (`{ from, to, frames? }` by name) — the 33 core presets: `fade-in`, `fade-in-up`, `fade-in-down`, `fade-in-left`, `fade-in-right`, `zoom-in`, `zoom-out`, `scale-up`, `flip-x`, `flip-y`, `flip-up`, `flip-down`, `slide-up`, `slide-down`, `slide-left`, `slide-right`, `bounce`, `rotate-in`, `rotate-left`, `rotate-right`, `blur-in`, `blur-in-up`, `skew-in`, `scale-x`, `scale-y`, `clip-up`, `clip-down`, `clip-left`, `clip-right`, `clip-circle`, `shimmer`, `pulse`, `swing`.
 
-**Extended presets (6.1)** — 181 more after `import 'use-scroll-animate/presets/extended'` (or the `dist/presets-extended.umd.js` script); full list by category with keyframes in [presets.md](./presets.md). `PRESETS` is one table per page shared through `Symbol.for('use-scroll-animate.presets')`, so the ESM entries, the UMD bundle and `<usa-reveal effect>` / `<usa-stagger effect>` all see every registered preset.
+**Extended presets (6.1)** — 181 more after `import 'motionary/presets/extended'` (or the `dist/presets-extended.umd.js` script); full list by category with keyframes in [presets.md](./presets.md). `PRESETS` is one table per page shared through `Symbol.for('use-scroll-animate.presets')`, so the ESM entries, the UMD bundle and `<usa-reveal effect>` / `<usa-stagger effect>` all see every registered preset.
 
 `registerPresets({ name: { from, to, frames? } })` adds or replaces presets (usable by name everywhere). `frames` are intermediate keyframes with `offset` 0–1 (exclusive) played between `from` and `to`; a keyframe may carry its own `easing` (e.g. `steps(16, end)`). Presets combined in an array use only `from` / `to`. `reversePreset(p)` returns the same keyframes backwards (used by `exit`). Scroll-linked `scrub-*` presets are meant for `{ engine: 'css', viewRange: ['cover 0%', 'cover 100%'] }`.
 
@@ -117,7 +117,7 @@ Boolean attributes are true when present unless their value is `"false"`.
 Reveal the children of `container` one after another when it enters. `StaggerOptions` = `AnimateOptions` + `stagger` (default `80` ms) + `observeChildren` (MutationObserver for children added later). Stopping before the reveal makes the children visible.
 
 ### `timeline(options?)` → `Timeline` (4.0; replaces `sequence()`)
-One playhead for many WAAPI animations. `options` = `{ defaults: { duration = 600, easing, stagger }, speed, onUpdate(p), onComplete() }`. Build with `.to(target, keyframes | preset, { at, duration, easing, stagger })`, `.label(name, at?)`, `.call(fn, at?)`; positions `'>'` (default), `'<'`, `'-=ms'`, `'+=ms'`, `'<+=ms'`, `'label+=ms'` or ms (`resolvePosition()`). Control: `play(from?)` / `reverse()` (Promises), `pause()`, `seek(ms | label)`, `progress(p?)`, `scrub(el, { source: 'view' | 'scroll', engine: 'auto' | 'native' | 'js', axis, offset, smooth })` → stop (with `.native`), `cancel()`; read `duration`, `time`, `labels`. Presets: `TIMELINE_PRESETS`. Reduced motion jumps to the end. Also in `use-scroll-animate/components/timeline` with `<usa-timeline>`.
+One playhead for many WAAPI animations. `options` = `{ defaults: { duration = 600, easing, stagger }, speed, onUpdate(p), onComplete() }`. Build with `.to(target, keyframes | preset, { at, duration, easing, stagger })`, `.label(name, at?)`, `.call(fn, at?)`; positions `'>'` (default), `'<'`, `'-=ms'`, `'+=ms'`, `'<+=ms'`, `'label+=ms'` or ms (`resolvePosition()`). Control: `play(from?)` / `reverse()` (Promises), `pause()`, `seek(ms | label)`, `progress(p?)`, `scrub(el, { source: 'view' | 'scroll', engine: 'auto' | 'native' | 'js', axis, offset, smooth })` → stop (with `.native`), `cancel()`; read `duration`, `time`, `labels`. Presets: `TIMELINE_PRESETS`. Reduced motion jumps to the end. Also in `motionary/components/timeline` with `<usa-timeline>`.
 
 **4.1 — native scrub.** `scrub()` runs on the browser's `ViewTimeline` (default, range `cover`) or `ScrollTimeline` (`{ source: 'scroll' }`, the element is the scroll container) when available, so the playhead is driven off the main thread; each step becomes one scroll-driven animation over its slice of the range. It falls back to a rAF-throttled scroll listener without support, and whenever JS is needed: `smooth`, `offset`, `call()` cues, `onUpdate`, or `engine: 'js'`. `supportsNativeScrub(source?)` reports support. `<usa-timeline scrub>` uses it too (`data-native` is set; `scrub="scroll"`, `smooth`; 5.0 removed `scrub="js"`).
 

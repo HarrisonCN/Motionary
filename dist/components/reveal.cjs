@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-B5i8qQPR.cjs');
+var base = require('../chunks/base-BaQV-2ha.cjs');
 
 /** Entrance effects shared by `<usa-reveal>` and `<usa-stagger>` (transform / opacity / filter only). */
 const REVEAL_EFFECTS = [
@@ -340,7 +340,7 @@ function defineScrolly(tag = 'usa-scrolly') {
 }
 
 /**
- * use-scroll-animate/components/reveal — entrance & scroll reveal components.
+ * motionary/components/reveal — entrance & scroll reveal components.
  * `<usa-reveal>`, `<usa-stagger>`, `<usa-scroll-progress>`, `<usa-scrolly>`.
  */
 /** Register every component of this category under its default tag. */

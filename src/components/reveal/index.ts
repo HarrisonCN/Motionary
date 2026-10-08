@@ -1,5 +1,5 @@
 /**
- * use-scroll-animate/components/reveal — entrance & scroll reveal components.
+ * motionary/components/reveal — entrance & scroll reveal components.
  * `<usa-reveal>`, `<usa-stagger>`, `<usa-scroll-progress>`, `<usa-scrolly>`.
  */
 import { defineReveal, type UsaRevealElement } from './reveal';

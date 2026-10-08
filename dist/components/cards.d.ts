@@ -93,7 +93,7 @@ interface UsaCarousel3dElement extends UsaElement {
 declare function defineCarousel3d(tag?: string): CustomElementConstructor | undefined;
 
 /**
- * use-scroll-animate/components/cards — card effects (v2.4).
+ * motionary/components/cards — card effects (v2.4).
  * `<usa-card effect="flip | holo | glass | border-glow | conic-border | lift |
  * spotlight | sheen | parallax-layers | expand">` (combinable),
  * `<usa-card-stack>` (swipeable deck), `<usa-sticky-stack>` (stacking on
