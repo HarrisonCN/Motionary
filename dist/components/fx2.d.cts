@@ -138,6 +138,33 @@ declare const DEPTH3_FX: EffectDefinition[];
 declare function register3dEffects(): void;
 
 /**
+ * 6.6 — Morph & SVG 2.0 (`motionary/components/fx-morph`), registered
+ * through `registerEffect()`:
+ *
+ * - `path-morph` (loop) — an SVG `<path>` flows between shapes (`paths`, any
+ *   number of `d` strings): both shapes are resampled to the same number of
+ *   points, so paths with different commands still morph smoothly.
+ * - `blob-button` (hover, persistent) — a liquid blob behind the element
+ *   wobbles and bulges toward the pointer.
+ * - `stroke-draw` (enter) — every stroke in an inline SVG draws itself,
+ *   staggered, then the fills fade in.
+ * - `noise-reveal` (enter) — the element condenses out of SVG turbulence
+ *   (displacement + blur) — an SVG-filter transition.
+ * - `icon-swap` (click) — cycles through the element's child icons with a
+ *   gooey morph (blur + scale + rotate crossfade).
+ *
+ * Reduced motion: no loops / wobble; enter effects and swaps fade.
+ */
+
+/** Sample `d` into `n` points (needs SVG geometry support; `null` without it). */
+declare function samplePath(d: string, n?: number): [number, number][] | null;
+/** Points → closed path `d`. */
+declare const pointsToPath: (pts: [number, number][]) => string;
+declare const MORPH2_FX: EffectDefinition[];
+/** Register the 6.6 morph & SVG pack (idempotent). */
+declare function registerMorphEffects2(): void;
+
+/**
  * 5.5 — generative backgrounds on Canvas 2D, registered through
  * `registerEffect()` (kind `background`): `flow-field`, `voronoi`,
  * `mesh-gradient`, `starfield`, `metaballs`, `contours`.
@@ -209,5 +236,5 @@ declare const FX2_PACKS: Record<string, EffectDefinition[]>;
 /** Register every 6.x pack (idempotent). */
 declare function registerFx2(): void;
 
-export { DEPTH3_FX, FX2_PACKS, GLSL_HEAD, GPU_FX, LIGHT_FX, TEXT3_FX, fieldFallback, register3dEffects, registerFx2, registerGpuEffects, registerLightEffects, registerTextEffects3, shaderBackground, splitChars, supportsWebGL2, trackPointer };
+export { DEPTH3_FX, FX2_PACKS, GLSL_HEAD, GPU_FX, LIGHT_FX, MORPH2_FX, TEXT3_FX, fieldFallback, pointsToPath, register3dEffects, registerFx2, registerGpuEffects, registerLightEffects, registerMorphEffects2, registerTextEffects3, samplePath, shaderBackground, splitChars, supportsWebGL2, trackPointer };
 export type { ShaderSpec };

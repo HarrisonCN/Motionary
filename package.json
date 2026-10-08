@@ -1,6 +1,6 @@
 {
   "name": "motionary",
-  "version": "6.5.0",
+  "version": "6.6.0",
   "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 94 animated Web Components — 214 scroll-reveal presets, card/click/button morphs, physics, page transitions, generative & sound-reactive backgrounds, cursor/gesture effects, themes, micro-interactions, <usa-player>, WebGL. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -456,6 +456,16 @@
       "require": {
         "types": "./dist/components/fx-3d.d.cts",
         "default": "./dist/components/fx-3d.cjs"
+      }
+    },
+    "./components/fx-morph": {
+      "import": {
+        "types": "./dist/components/fx-morph.d.ts",
+        "default": "./dist/components/fx-morph.js"
+      },
+      "require": {
+        "types": "./dist/components/fx-morph.d.cts",
+        "default": "./dist/components/fx-morph.cjs"
       }
     },
     "./components/lite": {

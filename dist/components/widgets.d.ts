@@ -293,6 +293,70 @@ interface UsaCubeGalleryElement extends UsaElement {
 declare function defineCubeGallery(tag?: string): CustomElementConstructor | undefined;
 
 /**
+ * `<usa-dock>` (6.6) — a macOS-style dock: items magnify with a smooth
+ * cosine falloff as the pointer moves along it, neighbours make room, and a
+ * click bounces the item (`bounce`). Children are the items (`<a>` /
+ * `<button>`, each with an accessible name); `data-label` shows a tooltip
+ * label above the hovered item. Attributes: `magnify` (max scale, 1.9),
+ * `range` (px of influence, 140), `orientation="horizontal | vertical"`.
+ * Keyboard focus magnifies the focused item. Reduced motion: no
+ * magnification or bounce (labels still show).
+ */
+interface UsaDockElement extends UsaElement {
+    readonly items: HTMLElement[];
+}
+declare function defineDock(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-nav-morph>` (6.6) — navigation links with an indicator that morphs
+ * between them: it follows the hovered / focused link (stretching from the
+ * old one, leading edge first) and settles back on the current page
+ * (`aria-current="page"`, `active` index, or a click). `indicator="underline |
+ * pill | blob | dot"`. Arrow keys move focus across links. Event
+ * `usa:change` (`{ index }`). Reduced motion: the indicator jumps.
+ */
+interface UsaNavMorphElement extends UsaElement {
+    active: number;
+}
+declare const NAV_INDICATORS: readonly ["underline", "pill", "blob", "dot"];
+declare function defineNavMorph(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-menu-toggle>` (6.6) — the hamburger button that morphs into its
+ * "open" icon: `variant="cross"` (✕, default), `arrow` (←), `minus` (—) or
+ * `plus-x` (+ turning into ✕). It is a real `<button>`-like control
+ * (`role="button"`, Space / Enter, `aria-expanded`); `for="<id>"` sets
+ * `aria-controls` and toggles the `hidden` attribute (or `.open()` /
+ * `.close()` / `.show()`) of that element. `pressed` reflects the state.
+ * Event `usa:toggle` (`{ open }`). Reduced motion: the icon switches without
+ * the morph.
+ */
+interface UsaMenuToggleElement extends UsaElement {
+    open: boolean;
+    toggle(force?: boolean): void;
+}
+declare const TOGGLE_VARIANTS: readonly ["cross", "arrow", "minus", "plus-x"];
+declare function defineMenuToggle(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-tip>` (6.6) — tooltip / popover 2.0. Wrap the trigger; the tip
+ * content is the `text` attribute or a child with `[slot="tip"]` / `[data-tip]`
+ * (rich content). It springs out of the trigger with its arrow,
+ * auto-flips to stay inside the viewport and shifts along the edge.
+ * `placement="top | bottom | left | right"`, `trigger="hover | click"`
+ * (`click` = popover: toggles, Esc / outside click close), `delay` (ms).
+ * Hover tips also open on keyboard focus and close on Esc (WCAG 1.4.13).
+ * Events `usa:open`, `usa:close`. Reduced motion: a short fade.
+ */
+interface UsaTipElement extends UsaElement {
+    readonly opened: boolean;
+    show(): void;
+    hide(): void;
+}
+declare const TIP_PLACEMENTS: readonly ["top", "bottom", "left", "right"];
+declare function defineTip(tag?: string): CustomElementConstructor | undefined;
+
+/**
  * motionary/components/widgets — the 6.x animated UI widgets, in their own
  * entry so `motionary/components` and `components/lite` keep their size
  * budgets. Every widget is reduced-motion safe and keyboard accessible.
@@ -329,8 +393,12 @@ declare global {
         'usa-masonry-flow': UsaMasonryFlowElement;
         'usa-compare': UsaCompareElement;
         'usa-cube-gallery': UsaCubeGalleryElement;
+        'usa-dock': UsaDockElement;
+        'usa-nav-morph': UsaNavMorphElement;
+        'usa-menu-toggle': UsaMenuToggleElement;
+        'usa-tip': UsaTipElement;
     }
 }
 
-export { CAROUSEL_EFFECTS, MENU_EFFECTS, MODAL_EFFECTS, PROGRESS_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, TAB_INDICATORS, TOAST_POSITIONS, WIDGETS, WIDGET_TAGS, defineCarousel, defineCompare, defineCubeGallery, defineDisclosure, defineMasonryFlow, defineMenu, defineMilestones, defineModal, defineOdometer, defineProgressRing, defineSheet, defineSkeletonReveal, defineStarRating, defineStories, defineTabBar, defineToastStack, defineWidgets, stackToast };
-export type { StackToastOptions, UsaCarouselElement, UsaCompareElement, UsaCubeGalleryElement, UsaDisclosureElement, UsaMasonryFlowElement, UsaMenuElement, UsaMilestonesElement, UsaModalElement, UsaOdometerElement, UsaProgressRingElement, UsaSheetElement, UsaSkeletonRevealElement, UsaStarRatingElement, UsaStoriesElement, UsaTabBarElement, UsaToastStackElement };
+export { CAROUSEL_EFFECTS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PROGRESS_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WIDGETS, WIDGET_TAGS, defineCarousel, defineCompare, defineCubeGallery, defineDisclosure, defineDock, defineMasonryFlow, defineMenu, defineMenuToggle, defineMilestones, defineModal, defineNavMorph, defineOdometer, defineProgressRing, defineSheet, defineSkeletonReveal, defineStarRating, defineStories, defineTabBar, defineTip, defineToastStack, defineWidgets, stackToast };
+export type { StackToastOptions, UsaCarouselElement, UsaCompareElement, UsaCubeGalleryElement, UsaDisclosureElement, UsaDockElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMilestonesElement, UsaModalElement, UsaNavMorphElement, UsaOdometerElement, UsaProgressRingElement, UsaSheetElement, UsaSkeletonRevealElement, UsaStarRatingElement, UsaStoriesElement, UsaTabBarElement, UsaTipElement, UsaToastStackElement };

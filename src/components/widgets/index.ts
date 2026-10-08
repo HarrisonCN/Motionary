@@ -24,6 +24,10 @@ import { defineMilestones, type UsaMilestonesElement } from './milestones';
 import { defineMasonryFlow, type UsaMasonryFlowElement } from './masonry-flow';
 import { defineCompare, type UsaCompareElement } from './compare';
 import { defineCubeGallery, type UsaCubeGalleryElement } from './cube-gallery';
+import { defineDock, type UsaDockElement } from './dock';
+import { defineNavMorph, NAV_INDICATORS, type UsaNavMorphElement } from './nav-morph';
+import { defineMenuToggle, TOGGLE_VARIANTS, type UsaMenuToggleElement } from './menu-toggle';
+import { defineTip, TIP_PLACEMENTS, type UsaTipElement } from './tip';
 
 export { defineCarousel, defineTabBar, defineDisclosure, defineStories, CAROUSEL_EFFECTS, TAB_INDICATORS };
 export type { UsaCarouselElement, UsaTabBarElement, UsaDisclosureElement, UsaStoriesElement };
@@ -36,12 +40,16 @@ export type { UsaProgressRingElement, UsaOdometerElement, UsaSkeletonRevealEleme
 export { defineMilestones, defineMasonryFlow, defineCompare, defineCubeGallery };
 export type { UsaMilestonesElement, UsaMasonryFlowElement, UsaCompareElement, UsaCubeGalleryElement };
 
+export { defineDock, defineNavMorph, NAV_INDICATORS, defineMenuToggle, TOGGLE_VARIANTS, defineTip, TIP_PLACEMENTS };
+export type { UsaDockElement, UsaNavMorphElement, UsaMenuToggleElement, UsaTipElement };
+
 /** The widgets by release (tag → define function). */
 export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElementConstructor | undefined>> = {
   '6.2': { 'usa-carousel': defineCarousel, 'usa-tab-bar': defineTabBar, 'usa-disclosure': defineDisclosure, 'usa-stories': defineStories },
   '6.3': { 'usa-toast-stack': defineToastStack, 'usa-modal': defineModal, 'usa-sheet': defineSheet, 'usa-menu': defineMenu },
   '6.4': { 'usa-progress-ring': defineProgressRing, 'usa-odometer': defineOdometer, 'usa-skeleton-reveal': defineSkeletonReveal, 'usa-star-rating': defineStarRating },
   '6.5': { 'usa-milestones': defineMilestones, 'usa-masonry-flow': defineMasonryFlow, 'usa-compare': defineCompare, 'usa-cube-gallery': defineCubeGallery },
+  '6.6': { 'usa-dock': defineDock, 'usa-nav-morph': defineNavMorph, 'usa-menu-toggle': defineMenuToggle, 'usa-tip': defineTip },
 };
 
 /** Every widget tag, in release order. */
@@ -70,5 +78,9 @@ declare global {
     'usa-masonry-flow': UsaMasonryFlowElement;
     'usa-compare': UsaCompareElement;
     'usa-cube-gallery': UsaCubeGalleryElement;
+    'usa-dock': UsaDockElement;
+    'usa-nav-morph': UsaNavMorphElement;
+    'usa-menu-toggle': UsaMenuToggleElement;
+    'usa-tip': UsaTipElement;
   }
 }

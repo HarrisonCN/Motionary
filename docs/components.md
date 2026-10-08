@@ -614,6 +614,31 @@ document.querySelector('usa-masonry-flow').filter('.cats'); // items glide (FLIP
 - `<usa-cube-gallery axis="y | x" autoplay>`: slides on a turning 3D cube, swipe / keys / buttons; `next()`, `prev()`, `goTo()`; `usa:change`.
 - 3D scene cards: `depth-stack` · `product-spin` (card) · `card-flip-3d` (click) · `origami` (enter) · `orbit-camera` (scroll). Reduced motion: no tilt / spin / orbit / fold, flips crossfade, milestones fully shown, cube fades.
 
+### v6.6 Widgets: dock, nav morph, menu toggle, tip (`components/widgets`) + morph & SVG 2.0 (`components/fx-morph`)
+
+```html
+<usa-dock magnify="1.9" bounce label="Apps">
+  <button data-label="Music" aria-label="Music">🎵</button><a href="/mail" data-label="Mail" aria-label="Mail">✉️</a>
+</usa-dock>
+<usa-nav-morph indicator="underline"><a href="/" aria-current="page">Home</a><a href="/docs">Docs</a></usa-nav-morph>
+<usa-menu-toggle for="site-menu" variant="cross"></usa-menu-toggle><nav id="site-menu" hidden>…</nav>
+<usa-tip text="Copied!" placement="top"><button>Copy</button></usa-tip>
+
+<usa-fx effect="path-morph" trigger="loop" options='{"paths":["M…","M…"]}'><svg viewBox="0 0 100 100"><path d="M…"/></svg></usa-fx>
+<usa-fx effect="blob-button" trigger="load"><button>Get started</button></usa-fx>
+```
+```js
+import { defineWidgets } from 'motionary/components/widgets';
+import { defineFx } from 'motionary/components/fx';
+import { registerMorphEffects2 } from 'motionary/components/fx-morph';
+defineWidgets(); defineFx(); registerMorphEffects2();
+```
+- `<usa-dock magnify range bounce orientation>`: cosine magnification, labels from `data-label`, click bounce; `role="toolbar"`.
+- `<usa-nav-morph indicator="underline | pill | blob | dot">`: indicator stretches to the hovered / focused link and back to `aria-current="page"`; arrow keys; `usa:change`.
+- `<usa-menu-toggle variant="cross | arrow | minus | plus-x" for>`: hamburger morph toggle with `aria-expanded`, controls `hidden` / `show()` / `close()` of its target; `usa:toggle`.
+- `<usa-tip text placement trigger="hover | click" delay>`: spring-out tooltip / popover with arrow, viewport flip + shift, Esc, rich `[slot="tip"]` content.
+- Morph & SVG 2.0: `path-morph` (loop) · `blob-button` (hover) · `stroke-draw` · `noise-reveal` (enter) · `icon-swap` (click); helpers `samplePath()`, `pointsToPath()`. Reduced motion: no magnification / stretch / morph loops; reveals and swaps fade.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.
