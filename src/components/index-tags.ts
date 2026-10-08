@@ -15,7 +15,7 @@ export const COMPONENT_CATEGORIES = {
   timeline: ['usa-timeline'],
   gesture: ['usa-swipeable', 'usa-pinch-zoom'],
   svg: ['usa-draw', 'usa-morph', 'usa-mask-reveal', 'usa-anim-icon'],
-  webgl: ['usa-shader', 'usa-distort', 'usa-liquid'],
+  webgl: ['usa-shader', 'usa-distort', 'usa-liquid', 'usa-post-fx'],
   depth: ['usa-cube', 'usa-depth'],
   layout: ['usa-auto-animate', 'usa-masonry'],
   packs: ['usa-pack'],

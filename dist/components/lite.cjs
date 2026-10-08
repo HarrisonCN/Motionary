@@ -388,7 +388,7 @@ const COMPONENT_CATEGORIES = {
     timeline: ['usa-timeline'],
     gesture: ['usa-swipeable', 'usa-pinch-zoom'],
     svg: ['usa-draw', 'usa-morph', 'usa-mask-reveal', 'usa-anim-icon'],
-    webgl: ['usa-shader', 'usa-distort', 'usa-liquid'],
+    webgl: ['usa-shader', 'usa-distort', 'usa-liquid', 'usa-post-fx'],
     depth: ['usa-cube', 'usa-depth'],
     layout: ['usa-auto-animate', 'usa-masonry'],
     packs: ['usa-pack'],
@@ -8953,6 +8953,12 @@ const SHADERS = {
     waves: 'void main(){vec2 u=v_uv;float t=u_time*.4;float w=0.;for(int i=0;i<4;i++){float f=float(i)+1.;w+=sin(u.x*6.*f+t*f)*.08/f;}float l=smoothstep(.0,.02,abs(u.y-.5-w));vec3 col=mix(vec3(.2,.5,1.),vec3(.04,.06,.15),l)+vec3(.1,.0,.2)*u.y;gl_FragColor=vec4(col,1.);}',
     aurora: 'void main(){vec2 u=v_uv;float t=u_time*.2;float b=0.;for(int i=0;i<3;i++){float f=float(i);b+=.4/abs((u.y-.6+.15*sin(u.x*3.+t+f*1.7))*(8.+f*4.));}vec3 col=vec3(.02,.03,.08)+b*mix(vec3(.1,.9,.6),vec3(.6,.3,1.),u.x)*.35;gl_FragColor=vec4(col,1.);}',
     distort: 'void main(){vec2 u=v_uv;vec2 d=u-u_mouse;float r=length(d);float k=u_hover*.08*exp(-r*r*18.);u-=normalize(d+1e-4)*k;float s=u_hover*.006;vec3 col=vec3(texture2D(u_tex,u+vec2(s,0.)).r,texture2D(u_tex,u).g,texture2D(u_tex,u-vec2(s,0.)).b);gl_FragColor=vec4(col,1.);}',
+    // 4.8 particle presets (procedural, one quad: no buffers, no per-particle JS)
+    snow: 'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}void main(){vec2 u=v_uv;u.x*=u_resolution.x/max(u_resolution.y,1.);vec3 col=mix(vec3(.05,.08,.16),vec3(.12,.16,.3),v_uv.y);for(int l=0;l<3;l++){float s=8.+float(l)*7.;vec2 q=u*s;q.y+=u_time*(.6+float(l)*.35);q.x+=sin(q.y*.7+float(l))*.3;vec2 id=floor(q);vec2 f=fract(q)-.5;float r=h(id);if(r>.6){vec2 o=vec2(h(id+3.)-.5,h(id+7.)-.5)*.6;float d=length(f-o);col+=smoothstep(.09-float(l)*.02,0.,d)*(.5+.5*r);}}gl_FragColor=vec4(col,1.);}',
+    fireflies: 'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}void main(){vec2 u=v_uv;u.x*=u_resolution.x/max(u_resolution.y,1.);vec3 col=vec3(.02,.04,.03);for(int l=0;l<2;l++){vec2 q=u*(5.+float(l)*4.);vec2 id=floor(q);vec2 f=fract(q)-.5;float r=h(id+float(l)*13.);vec2 o=.35*vec2(sin(u_time*(.4+r)+r*6.28),cos(u_time*(.3+r)+r*12.));float d=length(f-o);float tw=.5+.5*sin(u_time*3.*r+r*20.);col+=vec3(1.,.85,.3)*smoothstep(.12,0.,d)*tw*step(.45,r);}gl_FragColor=vec4(col,1.);}',
+    stars: 'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}void main(){vec2 c=v_uv-.5;c.x*=u_resolution.x/max(u_resolution.y,1.);vec3 col=vec3(.01,.01,.04);for(int l=0;l<4;l++){float z=fract(float(l)*.25+u_time*.05);float sc=mix(20.,.5,z);vec2 q=c*sc+float(l)*7.;vec2 id=floor(q);vec2 f=fract(q)-.5;float r=h(id);float d=length(f-(vec2(h(id+1.),h(id+2.))-.5)*.7);col+=vec3(.8,.9,1.)*smoothstep(.06,0.,d)*step(.8,r)*smoothstep(0.,.5,z)*smoothstep(1.,.8,z)*2.;}gl_FragColor=vec4(col,1.);}',
+    bokeh: 'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}void main(){vec2 u=v_uv;u.x*=u_resolution.x/max(u_resolution.y,1.);vec3 col=mix(vec3(.08,.03,.12),vec3(.02,.05,.12),v_uv.y);for(int l=0;l<3;l++){vec2 q=u*(2.5+float(l)*1.5);q.y-=u_time*.05*(1.+float(l));vec2 id=floor(q);vec2 f=fract(q)-.5;float r=h(id+float(l)*5.);float d=length(f-(vec2(h(id+4.),h(id+9.))-.5)*.5);vec3 tint=.5+.5*cos(r*6.28+vec3(0.,2.,4.));col+=tint*smoothstep(.3,.26,d)*.18*step(.35,r);}gl_FragColor=vec4(col,1.);}',
+    rain: 'float h(float n){return fract(sin(n)*43758.5453);}void main(){vec2 u=v_uv;vec3 col=mix(vec3(.04,.06,.1),vec3(.1,.13,.2),u.y);float n=floor(u.x*120.);float sp=.8+h(n)*1.2;float y=fract(u.y+u_time*sp+h(n+1.));float drop=smoothstep(.0,.08,y)*smoothstep(.16,.08,y)*step(.7,h(n+2.));col+=vec3(.5,.6,.8)*drop*.6;gl_FragColor=vec4(col,1.);}',
     liquid: 'void main(){vec2 u=v_uv;vec2 o=vec2(0.);for(int i=0;i<4;i++){vec4 r=u_ripples[i];if(r.w>0.){float d=distance(u,r.xy);float w=sin(d*60.-r.z*12.)*exp(-d*6.)*exp(-r.z*1.6)*r.w*.02;o+=normalize(u-r.xy+1e-4)*w;}}o+=vec2(sin(u.y*10.+u_time),cos(u.x*10.+u_time))*.002*u_hover;gl_FragColor=texture2D(u_tex,u+o);}',
 };
 /** Full fragment source for a preset or custom body (adds the shared header). */
@@ -9012,9 +9018,10 @@ function glQuad(canvas, frag) {
     const U = (n) => g.getUniformLocation(prog, n);
     const uT = U('u_time'), uR = U('u_resolution'), uM = U('u_mouse'), uH = U('u_hover'), uRp = U('u_ripples');
     let tex = null;
+    const extraLoc = {};
     const quad = {
-        resize() {
-            const dpr = Math.min(2, (typeof devicePixelRatio === 'number' && devicePixelRatio) || 1);
+        resize(scale = 1) {
+            const dpr = Math.min(2, (typeof devicePixelRatio === 'number' && devicePixelRatio) || 1) * Math.min(1, Math.max(0.25, scale));
             const w = Math.max(1, Math.round((canvas.clientWidth || 300) * dpr));
             const h = Math.max(1, Math.round((canvas.clientHeight || 150) * dpr));
             if (canvas.width !== w || canvas.height !== h)
@@ -9037,6 +9044,9 @@ function glQuad(canvas, frag) {
             g.uniform1f(uH, u.hover ?? 0);
             if (uRp)
                 g.uniform4fv(uRp, new Float32Array((u.ripples ?? []).concat(Array(16).fill(0)).slice(0, 16)));
+            if (u.extra)
+                for (const [k, v] of Object.entries(u.extra))
+                    g.uniform1f((extraLoc[k] ?? (extraLoc[k] = U(k))), v);
             g.drawArrays(g.TRIANGLES, 0, 6);
         },
         dispose() {
@@ -9049,6 +9059,131 @@ function glQuad(canvas, frag) {
     };
     quad.resize();
     return quad;
+}
+
+/**
+ * 4.8 — WebGL preset library on `glQuad()`: particle presets (`snow`,
+ * `fireflies`, `stars`, `bokeh`, `rain` — usable as `<usa-shader preset>`),
+ * chainable post-processing passes for images (`<usa-post-fx>`), one CSS
+ * fallback per preset, and an adaptive quality governor (fps + battery).
+ */
+const PARTICLE_PRESETS = ['snow', 'fireflies', 'stars', 'bokeh', 'rain'];
+/** Post-processing passes: `vec3 fx(vec3 c, vec2 uv)` bodies, applied in order. `u_intensity` 0–1. */
+const POST_EFFECTS = {
+    vignette: 'c*=mix(1.,smoothstep(.85,.25,length(uv-.5)),u_intensity);',
+    grain: 'c+=(fract(sin(dot(uv*u_resolution+u_time,vec2(12.9898,78.233)))*43758.5453)-.5)*.18*u_intensity;',
+    chromatic: 'float s=.008*u_intensity;c=vec3(texture2D(u_tex,uv+vec2(s,0.)).r,c.g,texture2D(u_tex,uv-vec2(s,0.)).b);',
+    scanlines: 'c*=1.-.25*u_intensity*step(.5,fract(uv.y*u_resolution.y*.5));',
+    crt: 'vec2 d=uv-.5;float r=dot(d,d);c*=1.-.6*u_intensity*r;c*=.92+.08*sin(uv.y*u_resolution.y*3.14159);c.r*=1.+.05*u_intensity;',
+    bloom: 'vec3 b=vec3(0.);for(int i=0;i<8;i++){float a=float(i)*.785;b+=max(texture2D(u_tex,uv+vec2(cos(a),sin(a))*.012).rgb-.6,0.);}c+=b*.35*u_intensity;',
+    pixelate: 'float px=mix(1.,48.,u_intensity);vec2 g=floor(uv*u_resolution/px)*px/u_resolution;c=texture2D(u_tex,g+.5*px/u_resolution).rgb;',
+    duotone: 'float l=dot(c,vec3(.299,.587,.114));c=mix(c,mix(vec3(.12,.05,.35),vec3(1.,.55,.4),l),u_intensity);',
+    glitch: 'float k=step(.97,fract(sin(floor(uv.y*24.)+floor(u_time*6.))*4375.5));c=mix(c,texture2D(u_tex,uv+vec2(k*.04*u_intensity,0.)).rgb,k);',
+};
+/** One fragment shader running the passes in order over `u_tex` (pixel-sampling passes read the source). */
+function postFxShader(effects) {
+    const list = effects.filter((e) => POST_EFFECTS[e]);
+    const body = list.map((e) => `{${POST_EFFECTS[e]}}`).join('');
+    return `uniform float u_intensity;void main(){vec2 uv=v_uv;vec3 c=texture2D(u_tex,uv).rgb;${body}gl_FragColor=vec4(clamp(c,0.,1.),1.);}`;
+}
+/** The unified CSS fallback (no WebGL / reduced data): a still background or image filter per preset. */
+const GL_FALLBACKS = {
+    gradient: 'linear-gradient(120deg,#6366f1,#ec4899 50%,#22d3ee)',
+    plasma: 'conic-gradient(from 90deg,#f43f5e,#a855f7,#06b6d4,#f43f5e)',
+    waves: 'linear-gradient(#0a0f26,#1e3a8a)',
+    aurora: 'radial-gradient(120% 60% at 30% 40%,#10b98155,transparent),radial-gradient(100% 50% at 70% 50%,#8b5cf655,transparent),#05070f',
+    snow: 'radial-gradient(2px 2px at 20% 30%,#fff,transparent),radial-gradient(2px 2px at 70% 60%,#fff,transparent),radial-gradient(1.5px 1.5px at 40% 80%,#fff,transparent),linear-gradient(#0d1428,#1f2a4d)',
+    fireflies: 'radial-gradient(3px 3px at 25% 40%,#fde68a,transparent),radial-gradient(3px 3px at 65% 70%,#fde68a,transparent),#05090a',
+    stars: 'radial-gradient(1px 1px at 10% 20%,#fff,transparent),radial-gradient(1px 1px at 80% 30%,#fff,transparent),radial-gradient(1.5px 1.5px at 50% 70%,#cfe0ff,transparent),#02020a',
+    bokeh: 'radial-gradient(40px 40px at 30% 40%,#f472b633,transparent),radial-gradient(60px 60px at 70% 60%,#60a5fa33,transparent),#140820',
+    rain: 'repeating-linear-gradient(100deg,#ffffff10 0 1px,transparent 1px 14px),linear-gradient(#0a0f1a,#1a2133)',
+    // post-fx fallbacks are CSS filters on the <img>
+    'post:duotone': 'grayscale(1) sepia(.6) hue-rotate(220deg) saturate(2)',
+    'post:vignette': 'brightness(.95) contrast(1.05)',
+    'post:crt': 'contrast(1.15) saturate(1.2)',
+    'post:bloom': 'brightness(1.08) saturate(1.15)',
+};
+/** CSS fallback for a shader preset / post effect list. */
+function glFallbackCss(preset, post = false) {
+    if (post)
+        return preset.split(/\s+/).map((e) => GL_FALLBACKS[`post:${e}`]).filter(Boolean).join(' ');
+    return GL_FALLBACKS[preset] || GL_FALLBACKS.gradient;
+}
+/**
+ * Adaptive quality for GL loops: measures fps, steps the resolution scale
+ * down (1 → 0.5 → 0.35) after two slow seconds and back up after five good
+ * ones, and caps the frame rate in battery-saver mode. Pure — feed it times.
+ */
+function glGovernor(options = {}) {
+    const { minFps = 40, saverFps = 30 } = options;
+    const STEPS = [1, 0.5, 0.35];
+    let step = 0;
+    let frames = 0;
+    let winStart = -1;
+    let last = -Infinity;
+    let slow = 0;
+    let good = 0;
+    let fps = 60;
+    const g = {
+        saver: false,
+        get scale() {
+            return Math.min(STEPS[step], g.saver ? 0.6 : 1);
+        },
+        get fps() {
+            return fps;
+        },
+        tick(t) {
+            if (winStart < 0)
+                winStart = t;
+            if (g.saver && t - last < 1000 / saverFps - 1)
+                return false;
+            last = t;
+            frames++;
+            if (t - winStart >= 1000) {
+                fps = Math.round((frames * 1000) / (t - winStart));
+                frames = 0;
+                winStart = t;
+                const before = g.scale;
+                if (fps < minFps && !g.saver) {
+                    good = 0;
+                    if (++slow >= 2 && step < STEPS.length - 1)
+                        ((step++), (slow = 0));
+                }
+                else {
+                    slow = 0;
+                    if (++good >= 5 && step > 0)
+                        ((step--), (good = 0));
+                }
+                if (g.scale !== before)
+                    g.onScale?.(g.scale);
+            }
+            return true;
+        },
+    };
+    return g;
+}
+/** Watch the Battery Status API (where available) and Save-Data; calls `cb(true)` in saver conditions. Returns a stop function. */
+function watchPowerSaver(cb) {
+    let stopped = false;
+    const nav = (typeof navigator !== 'undefined' ? navigator : {});
+    const saveData = !!nav.connection?.saveData;
+    if (saveData)
+        cb(true);
+    if (typeof nav.getBattery !== 'function')
+        return () => undefined;
+    let battery = null;
+    const update = () => !stopped && cb(saveData || (!!battery && !battery.charging && battery.level <= 0.2));
+    nav.getBattery().then((b) => {
+        battery = b;
+        update();
+        b.addEventListener?.('levelchange', update);
+        b.addEventListener?.('chargingchange', update);
+    }, () => undefined);
+    return () => {
+        stopped = true;
+        battery?.removeEventListener?.('levelchange', update);
+        battery?.removeEventListener?.('chargingchange', update);
+    };
 }
 
 var css$2 = "";
@@ -9064,15 +9199,23 @@ function make(kind) {
             this._hover = 0;
             this._hoverTo = 0;
             this._ripples = [];
+            this._scale = 1;
         }
         static get observedAttributes() {
-            return kind === 'shader' ? ['preset', 'speed'] : ['src'];
+            return kind === 'shader' ? ['preset', 'speed', 'quality'] : kind === 'post' ? ['effects', 'intensity', 'quality'] : ['src'];
         }
         get active() {
             return !!this._q;
         }
         fallback(reason) {
             this.setAttribute('data-fallback', reason);
+            // 4.8 unified fallback: a still CSS rendering of the preset / effects
+            if (reason !== 'off') {
+                if (kind === 'shader')
+                    this.style.setProperty('--usa-gl-fallback', glFallbackCss(this.str('preset', 'gradient')));
+                if (kind === 'post')
+                    this.style.setProperty('--usa-gl-filter', glFallbackCss(this.str('effects', 'vignette grain'), true) || 'none');
+            }
             this._c?.remove();
             this._c = null;
             this._q?.dispose();
@@ -9090,12 +9233,13 @@ function make(kind) {
                 mouse: this._mouse,
                 hover: this._hover,
                 ripples: this._ripples.flatMap((r) => [r.x, r.y, (t - r.t) / 1000, this.num('strength', 1)]),
+                extra: kind === 'post' ? { u_intensity: clamp(this.num('intensity', 0.6), 0, 1) } : undefined,
             });
         }
         mount() {
             this.removeAttribute('data-fallback');
             const custom = this.querySelector('script[type="x-shader/x-fragment"]');
-            const frag = kind === 'shader' ? custom?.textContent || this.str('preset', 'gradient') : kind;
+            const frag = kind === 'shader' ? custom?.textContent || this.str('preset', 'gradient') : kind === 'post' ? postFxShader(this.str('effects', 'vignette grain').split(/[\s,]+/)) : kind;
             const img = kind === 'shader' ? null : this.querySelector('img');
             if (kind !== 'shader' && !img)
                 return this.fallback('no-image');
@@ -9120,7 +9264,7 @@ function make(kind) {
                 }
             };
             const draw = () => {
-                q.resize();
+                q.resize(this._scale);
                 this.frame();
             };
             if (img && !(img.complete && img.naturalWidth)) {
@@ -9134,7 +9278,7 @@ function make(kind) {
             this.setAttribute('data-active', '');
             this.onCleanup(() => this.removeAttribute('data-active'));
             draw();
-            if (kind !== 'shader') {
+            if (kind === 'distort' || kind === 'liquid') {
                 const pos = (e) => {
                     const r = this.getBoundingClientRect();
                     this._mouse = [clamp((e.clientX - r.left) / (r.width || 1), 0, 1), clamp(1 - (e.clientY - r.top) / (r.height || 1), 0, 1)];
@@ -9151,7 +9295,7 @@ function make(kind) {
             // 4.0.1: also follow the element's own size (grid reflow, card expand…)
             if (typeof ResizeObserver !== 'undefined') {
                 const ro = new ResizeObserver(() => {
-                    q.resize();
+                    q.resize(this._scale);
                     if (!this._id)
                         this.frame();
                 });
@@ -9160,9 +9304,20 @@ function make(kind) {
             }
             if (this.reduced)
                 return; // one static frame, no loop
+            // 4.8 adaptive quality: fps-driven resolution steps + battery saver frame cap
+            const gov = glGovernor();
+            const auto = this.str('quality', 'auto') !== 'high';
+            gov.onScale = (sc) => {
+                this._scale = sc;
+                this.setAttribute('data-quality', String(sc));
+                q.resize(sc);
+            };
+            if (auto)
+                this.onCleanup(watchPowerSaver((saver) => ((gov.saver = saver), gov.onScale?.(gov.scale))));
             let visible = false;
             const loop = () => {
-                this.frame();
+                if (!auto || gov.tick(now()))
+                    this.frame();
                 this._id = raf(loop);
             };
             const sync = () => {
@@ -9173,7 +9328,7 @@ function make(kind) {
             };
             this.inView((v) => ((visible = v), sync()));
             this.listen(document, 'visibilitychange', sync);
-            this.listen(window, 'resize', () => q.resize(), { passive: true });
+            this.listen(window, 'resize', () => q.resize(this._scale), { passive: true });
             this.onCleanup(() => caf(this._id));
         }
     };
@@ -9201,6 +9356,16 @@ function defineDistort(tag = 'usa-distort') {
 function defineLiquid(tag = 'usa-liquid') {
     return defineElement(tag, make('liquid'), { id: 'webgl', text: css$2 });
 }
+/**
+ * `<usa-post-fx effects="vignette grain crt" intensity="0.6">` — GPU
+ * post-processing over the `<img>` inside (4.8): `vignette` · `grain` ·
+ * `chromatic` · `scanlines` · `crt` · `bloom` · `pixelate` · `duotone` ·
+ * `glitch`, chained in order. `quality="high"` disables adaptive quality.
+ * Fallback: the image with an approximate CSS filter.
+ */
+function definePostFx(tag = 'usa-post-fx') {
+    return defineElement(tag, make('post'), { id: 'webgl', text: css$2 });
+}
 
 /**
  * use-scroll-animate/components/webgl — lightweight canvas / WebGL (v3.4).
@@ -9213,6 +9378,7 @@ function defineWebglComponents() {
     defineShader();
     defineDistort();
     defineLiquid();
+    definePostFx();
 }
 
 var css$1 = "";
@@ -10312,6 +10478,7 @@ exports.CARD_EFFECTS = CARD_EFFECTS;
 exports.CLICK_EFFECTS = CLICK_EFFECTS;
 exports.COMPONENT_CATEGORIES = COMPONENT_CATEGORIES;
 exports.CURSOR_MODES = CURSOR_MODES;
+exports.GL_FALLBACKS = GL_FALLBACKS;
 exports.JOINING_SCRIPT = JOINING_SCRIPT;
 exports.LIVE_REGION_IDS = LIVE_REGION_IDS;
 exports.MASK_SHAPES = MASK_SHAPES;
@@ -10323,6 +10490,8 @@ exports.MOTION_TOKENS = MOTION_TOKENS;
 exports.PACKS = PACKS;
 exports.PACK_PRIMITIVES = PACK_PRIMITIVES;
 exports.PAGE_EFFECTS = PAGE_EFFECTS;
+exports.PARTICLE_PRESETS = PARTICLE_PRESETS;
+exports.POST_EFFECTS = POST_EFFECTS;
 exports.REVEAL_EFFECTS = REVEAL_EFFECTS;
 exports.SENSITIVITY_CSS = SENSITIVITY_CSS;
 exports.SHADERS = SHADERS;
@@ -10417,6 +10586,7 @@ exports.defineParticles = defineParticles;
 exports.definePhysicsComponents = definePhysicsComponents;
 exports.definePinchZoom = definePinchZoom;
 exports.definePopover = definePopover;
+exports.definePostFx = definePostFx;
 exports.definePress = definePress;
 exports.defineProgress = defineProgress;
 exports.definePullRefresh = definePullRefresh;
@@ -10471,6 +10641,8 @@ exports.gesture = gesture;
 exports.getMotionIntensity = getMotionIntensity;
 exports.getMotionSensitivity = getMotionSensitivity;
 exports.getMotionTokens = getMotionTokens;
+exports.glFallbackCss = glFallbackCss;
+exports.glGovernor = glGovernor;
 exports.glQuad = glQuad;
 exports.graphemes = graphemes;
 exports.haptic = haptic;
@@ -10500,6 +10672,7 @@ exports.parseEasing = parseEasing;
 exports.parseNativeSettings = parseNativeSettings;
 exports.pathsCompatible = pathsCompatible;
 exports.pinchScale = pinchScale;
+exports.postFxShader = postFxShader;
 exports.postToNative = postToNative;
 exports.prefersReducedMotion = prefersReducedMotion;
 exports.projectInertia = projectInertia;
@@ -10544,4 +10717,5 @@ exports.themeTransition = themeTransition;
 exports.timeline = timeline;
 exports.toast = toast;
 exports.viewTransition = viewTransition;
+exports.watchPowerSaver = watchPowerSaver;
 //# sourceMappingURL=lite.cjs.map

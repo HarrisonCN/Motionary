@@ -315,6 +315,13 @@ Hybrid / desktop hosts (MAUI, Flutter WebView, Electron, Tauri): [hybrid-apps.md
 
 **Deprecated in 3.9, removed in 4.0.0:** `sequence()`, `connectedAnimation()`, `<usa-flip-list>` — see [upgrading-4.md](./upgrading-4.md).
 
+### v4.8 GPU particles, post-processing & adaptive quality (`components/webgl`)
+
+- **Particle presets** for `<usa-shader preset="…">`: `snow`, `fireflies`, `stars` (warp starfield), `bokeh`, `rain` — procedural in the fragment shader, no buffers or per-particle JS.
+- **`<usa-post-fx>`** (`definePostFx()`), e.g. `<usa-post-fx effects="vignette grain" intensity="0.6"><img …></usa-post-fx>` — chained passes `vignette` · `grain` · `chromatic` · `scanlines` · `crt` · `bloom` · `pixelate` · `duotone` · `glitch`; `postFxShader(list)` builds the same shader for your own `glQuad()`.
+- **Unified fallback** — without WebGL every preset shows a still CSS rendering (`GL_FALLBACKS`, `glFallbackCss()`); post-fx images get an approximate CSS filter.
+- **Adaptive quality** — every GL element measures its frame rate: after two slow seconds (< 40 fps) the drawing buffer drops to 50 % then 35 % resolution and climbs back after five good seconds; on battery saver (Battery Status API ≤ 20 % and not charging, or Save-Data) it renders at ≤ 30 fps and ≤ 60 % resolution. `quality="high"` opts out; `data-quality` shows the current scale. `glGovernor()` / `watchPowerSaver()` for your own loops; `glQuad().render({ extra })` sets any float uniform, `resize(scale)` scales the buffer.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

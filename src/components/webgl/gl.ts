@@ -10,6 +10,12 @@ export const SHADERS: Record<string, string> = {
   waves: 'void main(){vec2 u=v_uv;float t=u_time*.4;float w=0.;for(int i=0;i<4;i++){float f=float(i)+1.;w+=sin(u.x*6.*f+t*f)*.08/f;}float l=smoothstep(.0,.02,abs(u.y-.5-w));vec3 col=mix(vec3(.2,.5,1.),vec3(.04,.06,.15),l)+vec3(.1,.0,.2)*u.y;gl_FragColor=vec4(col,1.);}',
   aurora: 'void main(){vec2 u=v_uv;float t=u_time*.2;float b=0.;for(int i=0;i<3;i++){float f=float(i);b+=.4/abs((u.y-.6+.15*sin(u.x*3.+t+f*1.7))*(8.+f*4.));}vec3 col=vec3(.02,.03,.08)+b*mix(vec3(.1,.9,.6),vec3(.6,.3,1.),u.x)*.35;gl_FragColor=vec4(col,1.);}',
   distort: 'void main(){vec2 u=v_uv;vec2 d=u-u_mouse;float r=length(d);float k=u_hover*.08*exp(-r*r*18.);u-=normalize(d+1e-4)*k;float s=u_hover*.006;vec3 col=vec3(texture2D(u_tex,u+vec2(s,0.)).r,texture2D(u_tex,u).g,texture2D(u_tex,u-vec2(s,0.)).b);gl_FragColor=vec4(col,1.);}',
+  // 4.8 particle presets (procedural, one quad: no buffers, no per-particle JS)
+  snow: 'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}void main(){vec2 u=v_uv;u.x*=u_resolution.x/max(u_resolution.y,1.);vec3 col=mix(vec3(.05,.08,.16),vec3(.12,.16,.3),v_uv.y);for(int l=0;l<3;l++){float s=8.+float(l)*7.;vec2 q=u*s;q.y+=u_time*(.6+float(l)*.35);q.x+=sin(q.y*.7+float(l))*.3;vec2 id=floor(q);vec2 f=fract(q)-.5;float r=h(id);if(r>.6){vec2 o=vec2(h(id+3.)-.5,h(id+7.)-.5)*.6;float d=length(f-o);col+=smoothstep(.09-float(l)*.02,0.,d)*(.5+.5*r);}}gl_FragColor=vec4(col,1.);}',
+  fireflies: 'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}void main(){vec2 u=v_uv;u.x*=u_resolution.x/max(u_resolution.y,1.);vec3 col=vec3(.02,.04,.03);for(int l=0;l<2;l++){vec2 q=u*(5.+float(l)*4.);vec2 id=floor(q);vec2 f=fract(q)-.5;float r=h(id+float(l)*13.);vec2 o=.35*vec2(sin(u_time*(.4+r)+r*6.28),cos(u_time*(.3+r)+r*12.));float d=length(f-o);float tw=.5+.5*sin(u_time*3.*r+r*20.);col+=vec3(1.,.85,.3)*smoothstep(.12,0.,d)*tw*step(.45,r);}gl_FragColor=vec4(col,1.);}',
+  stars: 'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}void main(){vec2 c=v_uv-.5;c.x*=u_resolution.x/max(u_resolution.y,1.);vec3 col=vec3(.01,.01,.04);for(int l=0;l<4;l++){float z=fract(float(l)*.25+u_time*.05);float sc=mix(20.,.5,z);vec2 q=c*sc+float(l)*7.;vec2 id=floor(q);vec2 f=fract(q)-.5;float r=h(id);float d=length(f-(vec2(h(id+1.),h(id+2.))-.5)*.7);col+=vec3(.8,.9,1.)*smoothstep(.06,0.,d)*step(.8,r)*smoothstep(0.,.5,z)*smoothstep(1.,.8,z)*2.;}gl_FragColor=vec4(col,1.);}',
+  bokeh: 'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}void main(){vec2 u=v_uv;u.x*=u_resolution.x/max(u_resolution.y,1.);vec3 col=mix(vec3(.08,.03,.12),vec3(.02,.05,.12),v_uv.y);for(int l=0;l<3;l++){vec2 q=u*(2.5+float(l)*1.5);q.y-=u_time*.05*(1.+float(l));vec2 id=floor(q);vec2 f=fract(q)-.5;float r=h(id+float(l)*5.);float d=length(f-(vec2(h(id+4.),h(id+9.))-.5)*.5);vec3 tint=.5+.5*cos(r*6.28+vec3(0.,2.,4.));col+=tint*smoothstep(.3,.26,d)*.18*step(.35,r);}gl_FragColor=vec4(col,1.);}',
+  rain: 'float h(float n){return fract(sin(n)*43758.5453);}void main(){vec2 u=v_uv;vec3 col=mix(vec3(.04,.06,.1),vec3(.1,.13,.2),u.y);float n=floor(u.x*120.);float sp=.8+h(n)*1.2;float y=fract(u.y+u_time*sp+h(n+1.));float drop=smoothstep(.0,.08,y)*smoothstep(.16,.08,y)*step(.7,h(n+2.));col+=vec3(.5,.6,.8)*drop*.6;gl_FragColor=vec4(col,1.);}',
   liquid: 'void main(){vec2 u=v_uv;vec2 o=vec2(0.);for(int i=0;i<4;i++){vec4 r=u_ripples[i];if(r.w>0.){float d=distance(u,r.xy);float w=sin(d*60.-r.z*12.)*exp(-d*6.)*exp(-r.z*1.6)*r.w*.02;o+=normalize(u-r.xy+1e-4)*w;}}o+=vec2(sin(u.y*10.+u_time),cos(u.x*10.+u_time))*.002*u_hover;gl_FragColor=texture2D(u_tex,u+o);}',
 };
 
@@ -33,10 +39,10 @@ export function supportsWebGL(): boolean {
 }
 
 export interface GLQuad {
-  /** Draw a frame with these uniform values. */
-  render(u: { time?: number; mouse?: [number, number]; hover?: number; ripples?: number[] }): void;
-  /** Resize the drawing buffer to the canvas' CSS size × DPR (≤ 2). */
-  resize(): void;
+  /** Draw a frame with these uniform values (`extra`: any other float uniforms by name, 4.8). */
+  render(u: { time?: number; mouse?: [number, number]; hover?: number; ripples?: number[]; extra?: Record<string, number> }): void;
+  /** Resize the drawing buffer to the canvas' CSS size × DPR (≤ 2) × `scale` (4.8 adaptive quality). */
+  resize(scale?: number): void;
   /** Upload an image as `u_tex`. */
   texture(img: TexImageSource): void;
   dispose(): void;
@@ -76,9 +82,10 @@ export function glQuad(canvas: HTMLCanvasElement, frag: string): GLQuad | null {
   const U = (n: string) => g.getUniformLocation(prog, n);
   const uT = U('u_time'), uR = U('u_resolution'), uM = U('u_mouse'), uH = U('u_hover'), uRp = U('u_ripples');
   let tex: WebGLTexture | null = null;
+  const extraLoc: Record<string, WebGLUniformLocation | null> = {};
   const quad: GLQuad = {
-    resize() {
-      const dpr = Math.min(2, (typeof devicePixelRatio === 'number' && devicePixelRatio) || 1);
+    resize(scale = 1) {
+      const dpr = Math.min(2, (typeof devicePixelRatio === 'number' && devicePixelRatio) || 1) * Math.min(1, Math.max(0.25, scale));
       const w = Math.max(1, Math.round((canvas.clientWidth || 300) * dpr));
       const h = Math.max(1, Math.round((canvas.clientHeight || 150) * dpr));
       if (canvas.width !== w || canvas.height !== h) ((canvas.width = w), (canvas.height = h));
@@ -99,6 +106,7 @@ export function glQuad(canvas: HTMLCanvasElement, frag: string): GLQuad | null {
       g.uniform2f(uM, ...(u.mouse ?? [0.5, 0.5]));
       g.uniform1f(uH, u.hover ?? 0);
       if (uRp) g.uniform4fv(uRp, new Float32Array((u.ripples ?? []).concat(Array(16).fill(0)).slice(0, 16)));
+      if (u.extra) for (const [k, v] of Object.entries(u.extra)) g.uniform1f((extraLoc[k] ??= U(k)), v);
       g.drawArrays(g.TRIANGLES, 0, 6);
     },
     dispose() {

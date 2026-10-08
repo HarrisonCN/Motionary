@@ -2,6 +2,7 @@ import { defineElement, raf, caf, now, clamp, type UsaElement, getBase } from '.
 
 type BaseCtor = ReturnType<typeof getBase>;
 import { glQuad, type GLQuad } from './gl';
+import { postFxShader, glFallbackCss, glGovernor, watchPowerSaver } from './presets';
 import css from './webgl.css?raw';
 
 /**
@@ -15,13 +16,13 @@ export interface UsaGLElement extends UsaElement {
   readonly active: boolean;
 }
 
-type Kind = 'shader' | 'distort' | 'liquid';
+type Kind = 'shader' | 'distort' | 'liquid' | 'post';
 
 function make(kind: Kind) {
   return (Base: BaseCtor): CustomElementConstructor =>
     class extends Base {
       static get observedAttributes(): string[] {
-        return kind === 'shader' ? ['preset', 'speed'] : ['src'];
+        return kind === 'shader' ? ['preset', 'speed', 'quality'] : kind === 'post' ? ['effects', 'intensity', 'quality'] : ['src'];
       }
       private _q: GLQuad | null = null;
       private _c: HTMLCanvasElement | null = null;
@@ -35,8 +36,15 @@ function make(kind: Kind) {
         return !!this._q;
       }
 
+      private _scale = 1;
+
       private fallback(reason: string): void {
         this.setAttribute('data-fallback', reason);
+        // 4.8 unified fallback: a still CSS rendering of the preset / effects
+        if (reason !== 'off') {
+          if (kind === 'shader') this.style.setProperty('--usa-gl-fallback', glFallbackCss(this.str('preset', 'gradient')));
+          if (kind === 'post') this.style.setProperty('--usa-gl-filter', glFallbackCss(this.str('effects', 'vignette grain'), true) || 'none');
+        }
         this._c?.remove();
         this._c = null;
         this._q?.dispose();
@@ -54,13 +62,14 @@ function make(kind: Kind) {
           mouse: this._mouse,
           hover: this._hover,
           ripples: this._ripples.flatMap((r) => [r.x, r.y, (t - r.t) / 1000, this.num('strength', 1)]),
+          extra: kind === 'post' ? { u_intensity: clamp(this.num('intensity', 0.6), 0, 1) } : undefined,
         });
       }
 
       mount(): void {
         this.removeAttribute('data-fallback');
         const custom = this.querySelector('script[type="x-shader/x-fragment"]');
-        const frag = kind === 'shader' ? custom?.textContent || this.str('preset', 'gradient') : kind;
+        const frag = kind === 'shader' ? custom?.textContent || this.str('preset', 'gradient') : kind === 'post' ? postFxShader(this.str('effects', 'vignette grain').split(/[\s,]+/)) : kind;
         const img = kind === 'shader' ? null : (this.querySelector('img') as HTMLImageElement | null);
         if (kind !== 'shader' && !img) return this.fallback('no-image');
         const c = (this._c = document.createElement('canvas'));
@@ -81,7 +90,7 @@ function make(kind: Kind) {
           }
         };
         const draw = () => {
-          q.resize();
+          q.resize(this._scale);
           this.frame();
         };
         if (img && !(img.complete && img.naturalWidth)) {
@@ -92,7 +101,7 @@ function make(kind: Kind) {
         this.setAttribute('data-active', '');
         this.onCleanup(() => this.removeAttribute('data-active'));
         draw();
-        if (kind !== 'shader') {
+        if (kind === 'distort' || kind === 'liquid') {
           const pos = (e: PointerEvent) => {
             const r = this.getBoundingClientRect();
             this._mouse = [clamp((e.clientX - r.left) / (r.width || 1), 0, 1), clamp(1 - (e.clientY - r.top) / (r.height || 1), 0, 1)];
@@ -109,16 +118,25 @@ function make(kind: Kind) {
         // 4.0.1: also follow the element's own size (grid reflow, card expand…)
         if (typeof ResizeObserver !== 'undefined') {
           const ro = new ResizeObserver(() => {
-            q.resize();
+            q.resize(this._scale);
             if (!this._id) this.frame();
           });
           ro.observe(this);
           this.onCleanup(() => ro.disconnect());
         }
         if (this.reduced) return; // one static frame, no loop
+        // 4.8 adaptive quality: fps-driven resolution steps + battery saver frame cap
+        const gov = glGovernor();
+        const auto = this.str('quality', 'auto') !== 'high';
+        gov.onScale = (sc) => {
+          this._scale = sc;
+          this.setAttribute('data-quality', String(sc));
+          q.resize(sc);
+        };
+        if (auto) this.onCleanup(watchPowerSaver((saver) => ((gov.saver = saver), gov.onScale?.(gov.scale))));
         let visible = false;
         const loop = () => {
-          this.frame();
+          if (!auto || gov.tick(now())) this.frame();
           this._id = raf(loop);
         };
         const sync = () => {
@@ -128,7 +146,7 @@ function make(kind: Kind) {
         };
         this.inView((v: boolean) => ((visible = v), sync()));
         this.listen(document, 'visibilitychange', sync);
-        this.listen(window, 'resize', () => q.resize(), { passive: true });
+        this.listen(window, 'resize', () => q.resize(this._scale), { passive: true });
         this.onCleanup(() => caf(this._id));
       }
     };
@@ -158,4 +176,15 @@ export function defineDistort(tag = 'usa-distort'): CustomElementConstructor | u
  */
 export function defineLiquid(tag = 'usa-liquid'): CustomElementConstructor | undefined {
   return defineElement(tag, make('liquid'), { id: 'webgl', text: css });
+}
+
+/**
+ * `<usa-post-fx effects="vignette grain crt" intensity="0.6">` — GPU
+ * post-processing over the `<img>` inside (4.8): `vignette` · `grain` ·
+ * `chromatic` · `scanlines` · `crt` · `bloom` · `pixelate` · `duotone` ·
+ * `glitch`, chained in order. `quality="high"` disables adaptive quality.
+ * Fallback: the image with an approximate CSS filter.
+ */
+export function definePostFx(tag = 'usa-post-fx'): CustomElementConstructor | undefined {
+  return defineElement(tag, make('post'), { id: 'webgl', text: css });
 }

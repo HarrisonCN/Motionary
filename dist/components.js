@@ -27,7 +27,7 @@ export { definePinchZoom, defineSwipeable } from './components/gesture.js';
 import { defineSvgComponents } from './components/svg.js';
 export { ANIM_ICONS, MASK_SHAPES, defineAnimIcon, defineDraw, defineMaskReveal, defineMorph, drawLines, interpolatePath, morphTo, pathsCompatible } from './components/svg.js';
 import { defineWebglComponents } from './components/webgl.js';
-export { SHADERS, defineDistort, defineLiquid, defineShader, fragmentSource, glQuad, supportsWebGL } from './components/webgl.js';
+export { GL_FALLBACKS, PARTICLE_PRESETS, POST_EFFECTS, SHADERS, defineDistort, defineLiquid, definePostFx, defineShader, fragmentSource, glFallbackCss, glGovernor, glQuad, postFxShader, supportsWebGL, watchPowerSaver } from './components/webgl.js';
 import { defineDepthComponents } from './components/depth.js';
 export { defineCube, defineDepth, deviceTilt, orientationToTilt, requestOrientationPermission, supportsOrientation } from './components/depth.js';
 import { defineLayoutComponents } from './components/layout.js';
@@ -42,7 +42,7 @@ export { MOTION_TOKENS, applyMotionTokens, getMotionTokens, importMotionTokens, 
 export { ALL_TAGS, LIVE_REGION_IDS, MOTION_SENSITIVITY, SENSITIVITY_CSS, STATIC_ALTERNATIVES, announce, auditMotionA11y, liveRegion, motionAllowed, restoreMotionSensitivity, setMotionSensitivity, staticAlternative } from './components/a11y.js';
 export { autoDegrade, categoryOf, loadCategoryStyles, loadedStyles, onDemandStyles } from './components/perf.js';
 export { BRIDGE_PROTOCOL_VERSION, applyNativeSettings, connectNativeShell, detectNativeHost, parseNativeSettings, postToNative } from './components/bridge.js';
-export { C as COMPONENT_CATEGORIES } from './chunks/index-tags-43Xtd01A.js';
+export { C as COMPONENT_CATEGORIES } from './chunks/index-tags-Dh8nwXqw.js';
 export { S as SPRING_PRESETS, c as createSpring, l as linearEasing, p as projectInertia, r as resolveSpring, a as rubberBand, s as snapTo, b as spring, d as springEasing, e as springSamples, f as stepSpring, g as supportsLinearEasing } from './chunks/spring-BS5tg6aK.js';
 export { T as TIMELINE_PRESETS, r as resolvePosition, s as supportsNativeScrub, t as timeline } from './chunks/core-CJHJeMI_.js';
 export { g as gesture, p as pinchScale, s as swipeDirection } from './chunks/core-COi3DrLx.js';

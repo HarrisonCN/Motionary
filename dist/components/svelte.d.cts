@@ -1522,6 +1522,7 @@ declare global {
         'usa-shader': UsaGLElement;
         'usa-distort': UsaGLElement;
         'usa-liquid': UsaGLElement;
+        'usa-post-fx': UsaGLElement;
     }
 }
 
@@ -1645,7 +1646,7 @@ declare const COMPONENT_CATEGORIES: {
     readonly timeline: readonly ["usa-timeline"];
     readonly gesture: readonly ["usa-swipeable", "usa-pinch-zoom"];
     readonly svg: readonly ["usa-draw", "usa-morph", "usa-mask-reveal", "usa-anim-icon"];
-    readonly webgl: readonly ["usa-shader", "usa-distort", "usa-liquid"];
+    readonly webgl: readonly ["usa-shader", "usa-distort", "usa-liquid", "usa-post-fx"];
     readonly depth: readonly ["usa-cube", "usa-depth"];
     readonly layout: readonly ["usa-auto-animate", "usa-masonry"];
     readonly packs: readonly ["usa-pack"];

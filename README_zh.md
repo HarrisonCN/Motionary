@@ -57,7 +57,7 @@ defineComponents(); // 或按分类：import { defineTextComponents } from 'use-
 | **时间线与编排** (`/components/timeline`) | `timeline()`（串联 · 重叠 · 标签 · 跳转 · 倒放 · 滚动擦洗）· `<usa-timeline>`（`data-tl` 步骤） |
 | **手势** (`/components/gesture`) | `gesture()`（拖动 · 轻扫 · 捏合 · 长按 · 单击 · 双击 → 弹簧）· `<usa-swipeable>` · `<usa-pinch-zoom>` |
 | **SVG 动画** (`/components/svg`) | `<usa-draw>`（线条描绘）· `<usa-morph>`（路径变形）· `<usa-mask-reveal>` · `<usa-anim-icon>` · `morphTo()` · `interpolatePath()` |
-| **Canvas 与 WebGL** (`/components/webgl`) | `<usa-shader>`（gradient · plasma · waves · aurora · 自定义 GLSL）· `<usa-distort>` · `<usa-liquid>` · `glQuad()` —— 优雅降级 |
+| **Canvas 与 WebGL** (`/components/webgl`) | `<usa-shader>`（gradient · plasma · waves · aurora · snow · fireflies · stars · bokeh · rain · 自定义 GLSL）· `<usa-post-fx>`（后期处理）· `<usa-distort>` · `<usa-liquid>` · `glQuad()` —— 优雅降级 |
 | **3D 与景深** (`/components/depth`) | `<usa-cube>` · `<usa-depth>`（指针 · 陀螺仪 · 滚动景深视差）· `deviceTilt()` ·（另见 cards 中的 `<usa-carousel-3d>`） |
 | **布局动画** (`/components/layout`) | `<usa-auto-animate>` / `autoAnimate()`（列表与网格重排）· `<usa-masonry>`（瀑布流）· `sharedTransition()`（共享元素） |
 | **效果包** (`/components/packs`) | `<usa-pack>` (`name="ecommerce \| portfolio \| dashboard \| game \| landing"`) · `applyPack()` · `flyToCart()` · `countUp()` |
