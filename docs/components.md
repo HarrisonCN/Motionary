@@ -335,6 +335,21 @@ const unbind = bindEffect(card, 'fade-up', { trigger: 'enter' });
 
 Built-ins (`BUILTIN_EFFECTS`): every timeline preset as an `enter` effect (`fade-up`, `clip-up`, `blur`…), attention seekers `pulse` · `pop` · `jelly` · `wiggle` · `heartbeat` · `bounce` · `flash` · `tada` · `shake`, click effects `burst` · `confetti` · `ripple`. `ctx.animate()` applies reduced motion, motion sensitivity, intensity and the animation budget; `loop` / `background` / `cursor` effects are skipped under reduced motion unless they declare `reduced: 'run'`.
 
+### v5.1 Card & click effects 2.0 (`components/effects`)
+
+The 5.x effect packs live in `use-scroll-animate/components/effects` (not in `components` / `components/lite`). Register them once, then use any name with `<usa-fx>`, `playEffect()` or `bindEffect()`:
+
+```js
+import { registerAllEffects } from 'use-scroll-animate/components/effects';
+registerAllEffects();
+```
+```html
+<usa-fx effect="holo" trigger="load"><article class="card">…</article></usa-fx>
+<usa-fx effect="shockwave"><button>Boom</button></usa-fx>
+```
+
+Card: `holo` · `glare-sweep` · `book-open` · `card-fan` · `topple` · `float-tilt`. Click: `shockwave` · `ink-splash` · `star-burst` · `jelly-press` · `ring-ripple` · `emoji-rain`. Reduced motion: particles skipped, presses fade, loops don’t start.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

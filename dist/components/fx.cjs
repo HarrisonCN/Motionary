@@ -84,19 +84,23 @@ function bindEffect(el, name, options = {}) {
     if (!def)
         throw new Error(`[use-scroll-animate] unknown effect "${name}"`);
     const offs = [];
+    let current = null;
     const fire = (e) => {
-        if (trigger === 'loop' || def.kind === 'loop' || def.kind === 'background' || def.kind === 'cursor') {
-            const ctx = context(e);
-            if (ctx.reduced && (def.reduced ?? 'skip') === 'skip')
-                return;
-            const out = def.run(el, { ...(def.defaults || {}), ...opts }, ctx);
-            if (typeof out === 'function')
-                offs.push(out);
-            offs.push(...ctx.cleanups);
+        const ctx = context(e);
+        if (ctx.reduced && (def.reduced ?? (SKIP_BY_DEFAULT.includes(def.kind) ? 'skip' : 'run')) === 'skip')
             return;
-        }
-        void playEffect(el, name, opts, e).catch(() => undefined);
+        // A persistent effect (returns a cleanup) replaces its previous run instead of stacking.
+        current?.();
+        current = null;
+        const out = def.run(el, { ...(def.defaults || {}), ...opts }, ctx);
+        const stops = [...ctx.cleanups, ...(typeof out === 'function' ? [out] : [])];
+        if (stops.length)
+            current = () => stops.splice(0).forEach((f) => f());
     };
+    offs.push(() => {
+        current?.();
+        current = null;
+    });
     const on = (type, opt) => {
         el.addEventListener(type, fire, opt);
         offs.push(() => el.removeEventListener(type, fire, opt));
