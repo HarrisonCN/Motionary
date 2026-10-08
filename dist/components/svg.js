@@ -1,4 +1,4 @@
-import { k as clamp, m as motionScale, q as caf, p as prefersReducedMotion, n as now, r as raf, x as defineElement, y as EASE_OUT } from '../chunks/base-Yno7N2eC.js';
+import { k as clamp, m as motionScale, l as caf, p as prefersReducedMotion, q as now, r as raf, x as defineElement, y as EASE_OUT } from '../chunks/base-C_3cAoRz.js';
 
 const NUM = /-?(?:\d+\.?\d*|\.\d+)(?:e[-+]?\d+)?/gi;
 /** `true` when two path strings share the same commands (so their numbers can be interpolated). */

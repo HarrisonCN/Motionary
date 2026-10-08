@@ -1,0 +1,9 @@
+// dist/widgets.umd.js: registers every 6.x widget and every 6.x effect pack on load
+// (load after components.umd.js when you also use <usa-fx>). API: window.UsaWidgets.
+import { defineWidgets } from './index';
+import { registerFx2 } from '../fx2/index';
+
+defineWidgets();
+registerFx2();
+export * from './index';
+export * from '../fx2/index';

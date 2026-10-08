@@ -436,6 +436,7 @@ const cards = new Map(); // id -> { el, demo }
 function kindLabel(item) {
   if (item.kind === 'preset') return ui.lang === 'zh' ? '预设' : 'Preset';
   if (item.kind === 'feature') return ui.lang === 'zh' ? '功能' : 'Feature';
+  if (item.kind === 'component') return ui.lang === 'zh' ? '组件' : 'Component';
   return ui.lang === 'zh' ? '框架' : 'Framework';
 }
 
@@ -628,6 +629,7 @@ function controlDefs() {
 }
 
 function controlsFor(item) {
+  if (item.kind === 'component') return ['duration', 'easing'];
   switch (item.recipe) {
     case 'stagger':
       return ['animation', 'stagger', 'duration', 'easing'];
@@ -824,6 +826,7 @@ function updateLoopButton() {
 }
 
 function liveNote(item) {
+  if (item.kind === 'component') return ui.lang === 'zh' ? '卡片仅为预览；真实组件的在线演示见组件库。' : 'Preview only — the live component runs in the components gallery.';
   if (item.framework === 'element') return T('detail.live', { what: '<scroll-animate> (dist/element.js)' });
   if (item.framework === 'svelte') return T('detail.live', { what: 'scrollAnimate action (dist/svelte.js)' }) + ' ' + T('detail.demoNote');
   if (item.framework) return T('detail.demoNote');
@@ -878,6 +881,7 @@ function renderDetail(item, keepState) {
   right.append(
     h('div', {}, [
       h('p', { class: 'detail-desc', text: L(item.desc) }),
+      item.gallery ? h('p', {}, [h('a', { class: 'demo-link', href: `components.html#c-${item.gallery}`, text: ui.lang === 'zh' ? '打开在线演示 →' : 'Open the live demo →' })]) : null,
       h('ul', { class: 'tags', style: 'margin-top:10px' }, [item.id, ...(item.tags || [])].map((tg) => h('li', { class: 'tag', text: tg }))),
     ])
   );

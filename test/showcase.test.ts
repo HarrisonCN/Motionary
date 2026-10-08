@@ -56,11 +56,11 @@ describe('showcase code generator', () => {
   });
 
   it('imports from the documented entry points only', () => {
-    const allowed = new Set(['motionary', 'motionary/react', 'motionary/vue', 'motionary/svelte', 'motionary/solid', 'motionary/element', 'motionary/components/timeline', 'react', 'vue', 'svelte', 'solid-js']);
+    const allowed = new Set(['motionary', 'motionary/react', 'motionary/vue', 'motionary/svelte', 'motionary/solid', 'motionary/element', 'motionary/components/timeline', 'motionary/components/widgets', 'motionary/components/fx', 'react', 'vue', 'svelte', 'solid-js']);
     ITEMS.forEach((item: any) => {
       const out = generate(item, defaultState(item), PRESETS);
       Object.values(out).forEach((code: any) => {
-        for (const m of code.matchAll(/from '([^']+)'/g)) expect(allowed.has(m[1]), `${item.id}: ${m[1]}`).toBe(true);
+        for (const m of code.matchAll(/from '([^']+)'/g)) expect(allowed.has(m[1]) || /^motionary\/components\/fx-[a-z0-9]+$/.test(m[1]), `${item.id}: ${m[1]}`).toBe(true);
       });
     });
   });

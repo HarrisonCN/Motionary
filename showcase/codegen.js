@@ -665,6 +665,7 @@ export function withExtended(tabs) {
 }
 
 export function generate(item, state, presets) {
+  if (item.snippets) return item.snippets; // 6.2+: component entries
   const tabs = snippetsFor(item, state, presets);
   return usesExtended(state) ? withExtended(tabs) : tabs;
 }

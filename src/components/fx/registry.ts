@@ -44,7 +44,10 @@ export interface EffectDefinition<O extends Record<string, unknown> = Record<str
   run(el: HTMLElement, options: O, ctx: EffectContext): void | Cleanup | Animation | null | Promise<unknown>;
 }
 
-const registry = new Map<string, EffectDefinition>();
+// 6.2: one table per page (Symbol.for), shared by every bundle that registers effects —
+// e.g. dist/components.umd.js and dist/widgets.umd.js on the same page.
+const REG_KEY = Symbol.for('use-scroll-animate.effects');
+const registry: Map<string, EffectDefinition> = ((globalThis as any)[REG_KEY] ||= new Map<string, EffectDefinition>());
 
 /** Register an effect (throws on a duplicate name unless `override`). Returns an unregister function. */
 export function registerEffect<O extends Record<string, unknown>>(def: EffectDefinition<O>, opts: { override?: boolean } = {}): () => void {

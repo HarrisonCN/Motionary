@@ -1,6 +1,6 @@
 {
   "name": "motionary",
-  "version": "6.1.1",
+  "version": "6.2.0",
   "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 94 animated Web Components — 214 scroll-reveal presets, card/click/button morphs, physics, page transitions, generative & sound-reactive backgrounds, cursor/gesture effects, themes, micro-interactions, <usa-player>, WebGL. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -396,6 +396,36 @@
       "require": {
         "types": "./dist/components/effects.d.cts",
         "default": "./dist/components/effects.cjs"
+      }
+    },
+    "./components/widgets": {
+      "import": {
+        "types": "./dist/components/widgets.d.ts",
+        "default": "./dist/components/widgets.js"
+      },
+      "require": {
+        "types": "./dist/components/widgets.d.cts",
+        "default": "./dist/components/widgets.cjs"
+      }
+    },
+    "./components/fx2": {
+      "import": {
+        "types": "./dist/components/fx2.d.ts",
+        "default": "./dist/components/fx2.js"
+      },
+      "require": {
+        "types": "./dist/components/fx2.d.cts",
+        "default": "./dist/components/fx2.cjs"
+      }
+    },
+    "./components/fx-gpu": {
+      "import": {
+        "types": "./dist/components/fx-gpu.d.ts",
+        "default": "./dist/components/fx-gpu.js"
+      },
+      "require": {
+        "types": "./dist/components/fx-gpu.d.cts",
+        "default": "./dist/components/fx-gpu.cjs"
       }
     },
     "./components/lite": {

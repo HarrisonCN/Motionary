@@ -1,4 +1,4 @@
-import { p as prefersReducedMotion, y as EASE_OUT, m as motionScale, x as defineElement } from '../chunks/base-Yno7N2eC.js';
+import { p as prefersReducedMotion, y as EASE_OUT, m as motionScale, x as defineElement } from '../chunks/base-C_3cAoRz.js';
 
 /** FLIP keyframes from a previous box to the current one (pure). */
 function flipFrames(from, to, scale = true) {

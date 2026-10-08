@@ -126,6 +126,12 @@ export default [
     output: { dir: 'dist', entryFileNames: 'components.umd.js', format: 'umd', name: 'UsaComponents', exports: 'named', sourcemap: true, plugins: [terser()] },
     plugins: [cssRaw(), resolve(), ts(), componentsCss()],
   },
+  {
+    // 6.2+: <script src="widgets.umd.js"> registers every 6.x widget + 6.x effect pack (window.UsaWidgets).
+    input: 'src/components/widgets/auto.ts',
+    output: { file: 'dist/widgets.umd.js', format: 'umd', name: 'UsaWidgets', exports: 'named', sourcemap: true, plugins: [terser()] },
+    plugins: [cssRaw(), resolve(), ts()],
+  },
   // components/lite: everything, CSS loaded on demand (self-contained file, 4.5).
   {
     input: 'src/components/lite.ts',

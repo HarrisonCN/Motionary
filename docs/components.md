@@ -499,6 +499,35 @@ p.play(); p.seek(500); p.rate = 0.5;
 ```
 `trigger="scroll"` scrubs the animation with the page. Reduced motion: the final state, no effects. Export JSON from the Playground (`<usa-player> JSON` tab).
 
+### v6.2 Widgets: carousel, tab bar, accordion 2.0, stories (`components/widgets`) + GPU pack (`components/fx-gpu`)
+
+```html
+<usa-carousel effect="cards" loop autoplay="4000" label="Featured">
+  <img src="a.jpg" alt="…"><img src="b.jpg" alt="…"><img src="c.jpg" alt="…">
+</usa-carousel>
+
+<usa-tab-bar indicator="pill">
+  <button>Overview</button><button>Specs</button>
+  <div data-panel>…</div><div data-panel>…</div>
+</usa-tab-bar>
+
+<usa-disclosure variant="cards">
+  <details><summary>Shipping</summary><p>…</p></details>
+</usa-disclosure>
+
+<usa-stories duration="5000" loop><img src="1.jpg" alt="…"><img src="2.jpg" alt="…"></usa-stories>
+
+<usa-fx effect="fluid" trigger="load" self class="hero"><h1>Hello</h1></usa-fx>
+```
+```js
+import { defineWidgets } from 'motionary/components/widgets';
+import { defineFx } from 'motionary/components/fx';
+import { registerGpuEffects } from 'motionary/components/fx-gpu';
+defineWidgets(); defineFx(); registerGpuEffects();
+document.querySelector('usa-carousel').next();
+```
+No build: `components.umd.js` + `widgets.umd.js`. GPU effects: `fluid` · `smoke` · `fire` · `ink` · `fireflies` (WebGL2 → Canvas 2D) · `sakura` · `leaves` (Canvas 2D) · `splash` (click). Reduced motion: instant switches, no autoplay, one still frame.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

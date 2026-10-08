@@ -1,130 +1,10 @@
 'use strict';
 
 var base = require('../chunks/base-BaQV-2ha.cjs');
+var registry = require('../chunks/registry-DehBVRDV.cjs');
 var core = require('../chunks/core-BGAyaY6L.cjs');
 var fx = require('../chunks/fx-lBGVtQO1.cjs');
 require('./tokens.cjs');
-
-/**
- * 5.0 — unified plugin-style effect registration. Every effect (built-in or
- * yours) is a plain object registered once and played the same way:
- * `playEffect(el, name)`, `bindEffect(el, name, { trigger })` or
- * `<usa-fx effect="name" trigger="click">`. Effects get a context that
- * already applies reduced motion, motion sensitivity, intensity and the
- * animation budget.
- */
-const EFFECT_KINDS = ['enter', 'exit', 'attention', 'click', 'hover', 'card', 'loop', 'page', 'background', 'text', 'cursor', 'scroll'];
-const EFFECT_TRIGGERS = ['click', 'hover', 'enter', 'load', 'loop', 'manual'];
-const registry = new Map();
-/** Register an effect (throws on a duplicate name unless `override`). Returns an unregister function. */
-function registerEffect(def, opts = {}) {
-    if (!/^[a-z][a-z0-9-]*$/.test(def.name))
-        throw new Error(`[motionary] invalid effect name "${def.name}"`);
-    if (!EFFECT_KINDS.includes(def.kind))
-        throw new Error(`[motionary] unknown effect kind "${def.kind}"`);
-    if (registry.has(def.name) && !opts.override)
-        throw new Error(`[motionary] effect "${def.name}" is already registered`);
-    registry.set(def.name, def);
-    return () => {
-        if (registry.get(def.name) === def)
-            registry.delete(def.name);
-    };
-}
-/** Register several effects at once (already-registered names are skipped). */
-function registerEffects(defs) {
-    for (const d of defs)
-        if (!registry.has(d.name))
-            registerEffect(d);
-}
-const getEffect = (name) => registry.get(name);
-const hasEffect = (name) => registry.has(name);
-/** Registered effects (optionally of one kind), sorted by name. */
-function listEffects(kind) {
-    return Array.from(registry.values())
-        .filter((d) => !kind || d.kind === kind)
-        .sort((a, b) => a.name.localeCompare(b.name));
-}
-const SKIP_BY_DEFAULT = ['loop', 'background', 'cursor'];
-function context(event) {
-    const cleanups = [];
-    return {
-        reduced: base.prefersReducedMotion(),
-        sensitivity: base.getMotionSensitivity(),
-        event,
-        animate: base.animateWithMotion,
-        onCleanup: (fn) => cleanups.push(fn),
-        cleanups,
-    };
-}
-/**
- * Play a registered effect once on `el`. Resolves when it finishes (or
- * immediately for fire-and-forget effects). Unknown names reject.
- */
-async function playEffect(el, name, options = {}, event) {
-    const def = registry.get(name);
-    if (!def)
-        throw new Error(`[motionary] unknown effect "${name}" — registered: ${Array.from(registry.keys()).join(', ')}`);
-    const ctx = context(event);
-    if (ctx.reduced && (def.reduced ?? (SKIP_BY_DEFAULT.includes(def.kind) ? 'skip' : 'run')) === 'skip')
-        return;
-    const out = def.run(el, { ...(def.defaults || {}), ...options }, ctx);
-    if (out && typeof out.finished?.then === 'function')
-        await out.finished.catch(() => undefined);
-    else if (out && typeof out.then === 'function')
-        await out;
-}
-/**
- * Bind an effect to a trigger on `el`: `click`, `hover` (pointerenter / focus),
- * `enter` (scrolls into view; `once` by default), `load` (now), `loop`
- * (starts now, cleanup stops it) or `manual` (nothing). Returns an unbind.
- */
-function bindEffect(el, name, options = {}) {
-    const { trigger = 'click', once, ...opts } = options;
-    const def = registry.get(name);
-    if (!def)
-        throw new Error(`[motionary] unknown effect "${name}"`);
-    const offs = [];
-    let current = null;
-    const fire = (e) => {
-        const ctx = context(e);
-        if (ctx.reduced && (def.reduced ?? (SKIP_BY_DEFAULT.includes(def.kind) ? 'skip' : 'run')) === 'skip')
-            return;
-        // A persistent effect (returns a cleanup) replaces its previous run instead of stacking.
-        current?.();
-        current = null;
-        const out = def.run(el, { ...(def.defaults || {}), ...opts }, ctx);
-        const stops = [...ctx.cleanups, ...(typeof out === 'function' ? [out] : [])];
-        if (stops.length)
-            current = () => stops.splice(0).forEach((f) => f());
-    };
-    offs.push(() => {
-        current?.();
-        current = null;
-    });
-    const on = (type, opt) => {
-        el.addEventListener(type, fire, opt);
-        offs.push(() => el.removeEventListener(type, fire, opt));
-    };
-    if (trigger === 'click')
-        on('click', { once: !!once });
-    else if (trigger === 'hover')
-        (on('pointerenter'), on('focusin'));
-    else if (trigger === 'load' || trigger === 'loop')
-        fire();
-    else if (trigger === 'enter' && typeof IntersectionObserver !== 'undefined') {
-        const io = new IntersectionObserver((entries) => {
-            for (const en of entries)
-                if (en.isIntersecting) {
-                    fire();
-                    if (once !== false)
-                        io.disconnect();
-                }
-        }, { threshold: 0.15 });
-        io.observe(el);
-        offs.push(() => io.disconnect());
-    }
-    return () => offs.splice(0).reverse().forEach((f) => f());
-}
 
 function defineFx(tag = 'usa-fx') {
     return base.defineElement(tag, (Base) => class UsaFx extends Base {
@@ -143,7 +23,7 @@ function defineFx(tag = 'usa-fx') {
             }
         }
         play() {
-            return playEffect(this.target, this.str('effect', 'pop'), this.opts()).catch(() => undefined);
+            return registry.playEffect(this.target, this.str('effect', 'pop'), this.opts()).catch(() => undefined);
         }
         mount() {
             if (!this.style.display)
@@ -151,7 +31,7 @@ function defineFx(tag = 'usa-fx') {
             const name = this.str('effect', 'pop');
             const t = this.str('trigger', 'click');
             try {
-                this.onCleanup(bindEffect(this.target, name, { ...this.opts(), trigger: EFFECT_TRIGGERS.includes(t) ? t : 'click', once: this.flag('once') }));
+                this.onCleanup(registry.bindEffect(this.target, name, { ...this.opts(), trigger: registry.EFFECT_TRIGGERS.includes(t) ? t : 'click', once: this.flag('once') }));
                 this.removeAttribute('data-unknown');
             }
             catch {
@@ -265,7 +145,7 @@ const BUILTIN_EFFECTS = [...enter, ...attention, ...click];
  */
 /** Register the built-in effects (idempotent; `defineFxComponents()` calls it). */
 function registerBuiltinEffects() {
-    registerEffects(BUILTIN_EFFECTS);
+    registry.registerEffects(BUILTIN_EFFECTS);
 }
 /** Register every component of this category under its default tag (+ the built-in effects). */
 function defineFxComponents() {
@@ -273,17 +153,17 @@ function defineFxComponents() {
     defineFx();
 }
 
+exports.EFFECT_KINDS = registry.EFFECT_KINDS;
+exports.EFFECT_TRIGGERS = registry.EFFECT_TRIGGERS;
+exports.bindEffect = registry.bindEffect;
+exports.getEffect = registry.getEffect;
+exports.hasEffect = registry.hasEffect;
+exports.listEffects = registry.listEffects;
+exports.playEffect = registry.playEffect;
+exports.registerEffect = registry.registerEffect;
+exports.registerEffects = registry.registerEffects;
 exports.BUILTIN_EFFECTS = BUILTIN_EFFECTS;
-exports.EFFECT_KINDS = EFFECT_KINDS;
-exports.EFFECT_TRIGGERS = EFFECT_TRIGGERS;
-exports.bindEffect = bindEffect;
 exports.defineFx = defineFx;
 exports.defineFxComponents = defineFxComponents;
-exports.getEffect = getEffect;
-exports.hasEffect = hasEffect;
-exports.listEffects = listEffects;
-exports.playEffect = playEffect;
 exports.registerBuiltinEffects = registerBuiltinEffects;
-exports.registerEffect = registerEffect;
-exports.registerEffects = registerEffects;
 //# sourceMappingURL=fx.cjs.map
