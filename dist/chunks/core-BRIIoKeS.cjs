@@ -1,6 +1,7 @@
 'use strict';
 
 var base = require('./base-CXx7jZ-o.cjs');
+var components_tokens = require('../components/tokens.cjs');
 
 /** 4.1: whether `scrub()` can use native ScrollTimeline / ViewTimeline here. */
 function supportsNativeScrub(source = 'view') {
@@ -134,12 +135,12 @@ function timeline(options = {}) {
         to(target, frames, o = {}) {
             const kf = typeof frames === 'string' ? TIMELINE_PRESETS[frames] || TIMELINE_PRESETS.fade : frames;
             const start = resolvePosition(o.at, end, prevStart, labels);
-            const duration = o.duration ?? d.duration;
+            const duration = components_tokens.resolveDurationToken(o.duration ?? d.duration, 600);
             const stagger = o.stagger ?? d.stagger;
             let last = start;
             toEls(target).forEach((el, i) => {
                 const s = start + i * stagger;
-                steps.push({ el, frames: kf, start: s, duration, easing: o.easing ?? d.easing });
+                steps.push({ el, frames: kf, start: s, duration, easing: components_tokens.resolveEasingToken(o.easing ?? d.easing, 'cubic-bezier(0.22, 1, 0.36, 1)') });
                 last = Math.max(last, s + duration);
             });
             prevStart = start;
@@ -261,4 +262,4 @@ exports.TIMELINE_PRESETS = TIMELINE_PRESETS;
 exports.resolvePosition = resolvePosition;
 exports.supportsNativeScrub = supportsNativeScrub;
 exports.timeline = timeline;
-//# sourceMappingURL=core-CLu8ZrC-.cjs.map
+//# sourceMappingURL=core-BRIIoKeS.cjs.map

@@ -1,7 +1,8 @@
 import { h as defineElement } from '../chunks/base-BPG5zvex.js';
 export { a as configureComponents, p as prefersReducedMotion } from '../chunks/base-BPG5zvex.js';
-import { t as timeline, T as TIMELINE_PRESETS } from '../chunks/core-QTFk4kgO.js';
-export { r as resolvePosition, s as supportsNativeScrub } from '../chunks/core-QTFk4kgO.js';
+import { t as timeline, T as TIMELINE_PRESETS } from '../chunks/core-LkGRmgES.js';
+export { r as resolvePosition, s as supportsNativeScrub } from '../chunks/core-LkGRmgES.js';
+import './tokens.js';
 
 var css = "usa-timeline{display:block}usa-timeline[scrub]{position:relative}@media (prefers-reduced-motion:reduce){usa-timeline [data-tl]{opacity:1 !important;transform:none !important;filter:none !important;clip-path:none !important}}";
 

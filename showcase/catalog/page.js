@@ -56,6 +56,12 @@ export const components = [
 ];
 
 export const helpers = [
+  H('motion-tokens', 'page', 'applyMotionTokens',
+    'Motion design tokens (4.2): duration, easing and spring scales as CSS variables (--usa-duration-fast, --usa-easing-emphasized…) and W3C Design Tokens JSON; import from Figma Tokens or Style Dictionary. timeline() accepts token names.',
+    '动效设计令牌（4.2）：时长、缓动与弹簧刻度，以 CSS 变量（--usa-duration-fast、--usa-easing-emphasized…）与 W3C 设计令牌 JSON 提供；可从 Figma Tokens 或 Style Dictionary 导入。timeline() 可直接使用令牌名。',
+    ['tokens', 'design system', 'Figma', 'Style Dictionary'],
+    "import { applyMotionTokens, importMotionTokens, motionVar } from 'use-scroll-animate/components/tokens';\n\napplyMotionTokens(importMotionTokens(figmaJson));\n// CSS: transition: transform var(--usa-duration-fast) var(--usa-easing-emphasized);\ntimeline().to('.card', 'fade-up', { duration: 'slow', easing: 'spring' });",
+    '<div class="demo-row" data-tok-row><span class="demo-pill">1</span><span class="demo-pill">2</span><span class="demo-pill">3</span></div><div class="demo-row"><button type="button" class="demo-link" data-tok="fast">fast</button><button type="button" class="demo-link" data-tok="normal">normal</button><button type="button" class="demo-link" data-tok="slow">slow</button><select aria-label="Easing token" data-tok-ease><option>emphasized</option><option>spring</option><option>bounce</option><option>standard</option></select></div><p class="demo-note" data-tok-out></p>'),
   H('page-transition', 'page', 'pageTransition',
     'Animated route changes with the View Transitions API: fade, slide, circle reveal from the click, blinds, pixel dissolve, zoom. enableMpaTransitions() does the same across real page loads; themeTransition() circle-reveals a theme switch.',
     '基于 View Transitions API 的路由切换动画：淡入、滑动、从点击处圆形揭示、百叶窗、像素溶解、缩放。enableMpaTransitions() 用于真实页面跳转；themeTransition() 以圆形揭示切换主题。',
@@ -71,6 +77,16 @@ export const helpers = [
 ];
 
 export const wire = {
+  'motion-tokens': (stage, lib) => {
+    const q = (s) => stage.querySelector(s);
+    stage.addEventListener('click', (e) => {
+      const b = e.target.closest('[data-tok]');
+      if (!b) return;
+      const ease = q('[data-tok-ease]').value;
+      q('[data-tok-out]').textContent = `${lib.motionToken('duration', b.dataset.tok)}ms · ${lib.motionToken('easing', ease)}`;
+      lib.timeline({ defaults: { duration: b.dataset.tok, easing: ease, stagger: 60 } }).to(stage.querySelectorAll('[data-tok-row] .demo-pill'), 'fade-up').play(0);
+    });
+  },
   cursor: (stage) => {
     let cur = null;
     stage.addEventListener('click', (e) => {

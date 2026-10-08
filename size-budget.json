@@ -207,12 +207,12 @@
   {
     "name": "import 'use-scroll-animate/components/timeline'",
     "import": "export * from 'pkg/components/timeline';",
-    "limit": 4608
+    "limit": 5120
   },
   {
     "name": "import { defineTimelineComponents } from '…/components/timeline'",
     "import": "export { defineTimelineComponents } from 'pkg/components/timeline';",
-    "limit": 4352
+    "limit": 4864
   },
   {
     "name": "import 'use-scroll-animate/components/gesture'",
@@ -288,5 +288,10 @@
     "name": "import { definePacksComponents } from '…/components/packs'",
     "import": "export { definePacksComponents } from 'pkg/components/packs';",
     "limit": 3584
+  },
+  {
+    "name": "import 'use-scroll-animate/components/tokens'",
+    "import": "export * from 'pkg/components/tokens';",
+    "limit": 2048
   }
 ]

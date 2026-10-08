@@ -53,7 +53,7 @@ describe('component gallery catalog', () => {
   });
 
   it('generates every code tab and imports only documented entry points', () => {
-    const allowed = new Set(['use-scroll-animate/components', ...Object.keys(SRC_CATEGORIES).map((c) => `use-scroll-animate/components/${c}`)]);
+    const allowed = new Set(['use-scroll-animate/components', 'use-scroll-animate/components/tokens', ...Object.keys(SRC_CATEGORIES).map((c) => `use-scroll-animate/components/${c}`)]);
     GALLERY.forEach((item: any) => {
       const out = componentSnippets(item);
       CODE_TABS.forEach((t: any) => expect(out[t.id], `${item.id}/${t.id}`).toMatch(/\S/));

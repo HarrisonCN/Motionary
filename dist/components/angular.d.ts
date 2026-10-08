@@ -1285,9 +1285,9 @@ declare global {
  */
 type TimelinePosition = number | string;
 interface TimelineStepOptions {
-    /** Duration in ms (default: timeline default, 600). */
-    duration?: number;
-    /** CSS easing (default `cubic-bezier(0.22, 1, 0.36, 1)`). */
+    /** Duration in ms or a motion token name (`'fast'`, `'slow'`…; 4.2). Default: timeline default, 600. */
+    duration?: number | string;
+    /** CSS easing or a motion token name (`'emphasized'`, `'spring'`…; 4.2). Default `cubic-bezier(0.22, 1, 0.36, 1)`. */
     easing?: string;
     /** Start position, see `TimelinePosition`. */
     at?: TimelinePosition;
