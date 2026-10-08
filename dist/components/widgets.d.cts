@@ -663,6 +663,66 @@ declare function parseLRC(src: string): {
 declare function defineLyrics(tag?: string): CustomElementConstructor | undefined;
 
 /**
+ * `<usa-bar-chart>` (7.2) — an animated bar chart from data: bars grow in a
+ * stagger on first view, value labels count with them, and new data glides
+ * every bar to its new height (bars that appear grow, bars that leave
+ * shrink). Data from `data` (`[{ label, value }]`), a `values` +
+ * `labels` attribute pair, or `<data value="…">label</data>` children.
+ * `max`, `unit`, `horizontal`. Accessible as a list of "label: value"
+ * items. Reduced motion: no growth or glide.
+ */
+interface UsaBarChartElement extends UsaElement {
+    data: {
+        label: string;
+        value: number;
+    }[];
+}
+declare function defineBarChart(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-gauge>` (7.2) — a semicircular gauge: the needle swings to `value`
+ * on a damped spring (overshoot, settle), the arc fills with a colour that
+ * follows `zones` ("60:#22c55e,85:#f59e0b,100:#ef4444" — upper bound:color)
+ * and the number counts. `min` / `max` / `unit` / `label`; `role="meter"`.
+ * Reduced motion: no swing or count.
+ */
+interface UsaGaugeElement extends UsaElement {
+    value: number;
+}
+declare function defineGauge(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-sparkline>` (7.2) — a tiny inline trend line. `values`
+ * ("3,5,4,8,6,9") or the `data` property; it draws itself on first view, a
+ * soft area fades in under it, the last point pulses, and setting new data
+ * morphs the line (point-by-point tween). `variant="line | area | bars"`,
+ * `color`. Hover / touch shows a dot + value tooltip. Decorative by default
+ * with a text summary as `aria-label` ("Trend: 3 to 9, up 200%").
+ * Reduced motion: no draw, morph or pulse.
+ */
+interface UsaSparklineElement extends UsaElement {
+    data: number[];
+}
+declare const SPARK_VARIANTS: readonly ["line", "area", "bars"];
+/** Map values to SVG points in a w×h box (with padding). */
+declare function sparkPoints(vals: number[], w?: number, h?: number, pad?: number): [number, number][];
+declare function defineSparkline(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-kpi>` (7.2) — a KPI card: the value counts up on first view (keeps
+ * prefix / suffix / decimals: "$12.4k", "98.2%"), the delta chip slides in
+ * with an arrow that points and colours by sign (`delta="+12.5%"`, or
+ * `invert` when down is good), and an optional `trend` ("4,6,5,9") draws a
+ * sparkline. `label`, `value`, `delta`, `caption`. Setting `value` later
+ * rolls from the old number to the new one and flashes the card.
+ * Reduced motion: no count, slide or flash.
+ */
+interface UsaKpiElement extends UsaElement {
+    value: string;
+}
+declare function defineKpi(tag?: string): CustomElementConstructor | undefined;
+
+/**
  * motionary/components/widgets — the 6.x animated UI widgets, in their own
  * entry so `motionary/components` and `components/lite` keep their size
  * budgets. Every widget is reduced-motion safe and keyboard accessible.
@@ -719,8 +779,12 @@ declare global {
         'usa-volume-knob': UsaVolumeKnobElement;
         'usa-equalizer': UsaEqualizerElement;
         'usa-lyrics': UsaLyricsElement;
+        'usa-bar-chart': UsaBarChartElement;
+        'usa-gauge': UsaGaugeElement;
+        'usa-sparkline': UsaSparklineElement;
+        'usa-kpi': UsaKpiElement;
     }
 }
 
-export { CAROUSEL_EFFECTS, EQ_PRESETS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PROGRESS_VARIANTS, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, defineCarousel, defineColorPicker, defineCompare, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineFileDrop, defineKanban, defineKeyframeEditor, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMilestones, defineModal, defineMusicPlayer, defineNavMorph, defineOdometer, definePagination, defineProgressRing, definePullCord, defineSegmented, defineSheet, defineSkeletonReveal, defineStarRating, defineStepper, defineStories, defineSwipeDeck, defineSwitch, defineTabBar, defineTip, defineToastStack, defineVolumeKnob, defineWeatherCard, defineWidgets, hexToHsv, hsvToHex, monthGrid, pageWindow, parseISODate, parseLRC, stackToast };
-export type { StackToastOptions, UsaCarouselElement, UsaColorPickerElement, UsaCompareElement, UsaCubeGalleryElement, UsaDatePickerElement, UsaDisclosureElement, UsaDockElement, UsaEqualizerElement, UsaFileDropElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaLyricsElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMilestonesElement, UsaModalElement, UsaMusicPlayerElement, UsaNavMorphElement, UsaOdometerElement, UsaPaginationElement, UsaProgressRingElement, UsaPullCordElement, UsaSegmentedElement, UsaSheetElement, UsaSkeletonRevealElement, UsaStarRatingElement, UsaStepperElement, UsaStoriesElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTipElement, UsaToastStackElement, UsaVolumeKnobElement, UsaWeatherCardElement };
+export { CAROUSEL_EFFECTS, EQ_PRESETS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PROGRESS_VARIANTS, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SPARK_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, defineBarChart, defineCarousel, defineColorPicker, defineCompare, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineFileDrop, defineGauge, defineKanban, defineKeyframeEditor, defineKpi, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMilestones, defineModal, defineMusicPlayer, defineNavMorph, defineOdometer, definePagination, defineProgressRing, definePullCord, defineSegmented, defineSheet, defineSkeletonReveal, defineSparkline, defineStarRating, defineStepper, defineStories, defineSwipeDeck, defineSwitch, defineTabBar, defineTip, defineToastStack, defineVolumeKnob, defineWeatherCard, defineWidgets, hexToHsv, hsvToHex, monthGrid, pageWindow, parseISODate, parseLRC, sparkPoints, stackToast };
+export type { StackToastOptions, UsaBarChartElement, UsaCarouselElement, UsaColorPickerElement, UsaCompareElement, UsaCubeGalleryElement, UsaDatePickerElement, UsaDisclosureElement, UsaDockElement, UsaEqualizerElement, UsaFileDropElement, UsaGaugeElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaKpiElement, UsaLyricsElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMilestonesElement, UsaModalElement, UsaMusicPlayerElement, UsaNavMorphElement, UsaOdometerElement, UsaPaginationElement, UsaProgressRingElement, UsaPullCordElement, UsaSegmentedElement, UsaSheetElement, UsaSkeletonRevealElement, UsaSparklineElement, UsaStarRatingElement, UsaStepperElement, UsaStoriesElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTipElement, UsaToastStackElement, UsaVolumeKnobElement, UsaWeatherCardElement };

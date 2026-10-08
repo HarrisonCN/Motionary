@@ -753,6 +753,30 @@ enableAudio(document.querySelector('audio'));   // optional: without it the visu
 - `<usa-lyrics for time>`: `time`, `lines`; `usa:seek` (`{ time }`); `parseLRC(text)`.
 - Music: `waveform-scope` · `radial-spectrum` (`bars`) · `spectrum-mirror` (`bars`, `gap`) · `sound-particles` (`max`) · `beat-bounce` (`amount`) · `vinyl-spin` (`rpm`); `syntheticSample(t)`, `musicSample(t)`.
 
+### v7.2 Widgets: bar chart, gauge, sparkline, KPI (`components/widgets`) + data-viz motion (`motionary/fx/chart`)
+
+```html
+<usa-bar-chart values="12,19,8,15,22" labels="Mon,Tue,Wed,Thu,Fri" unit="k"></usa-bar-chart>
+<usa-gauge value="72" unit="%" label="CPU" zones="60:#22c55e,85:#f59e0b,100:#ef4444"></usa-gauge>
+<usa-sparkline values="3,5,4,8,6,9,12" variant="area"></usa-sparkline>
+<usa-kpi label="Revenue" value="$48.2k" delta="+12.5%" trend="4,6,5,9,8,12" caption="vs last month"></usa-kpi>
+
+<usa-fx effect="bars-grow" trigger="enter"><svg>…</svg></usa-fx>
+<usa-fx effect="line-draw" trigger="enter"><svg>…</svg></usa-fx>
+```
+```js
+import { defineWidgets } from 'motionary/components/widgets';
+import { registerChartPack } from 'motionary/fx/chart';
+defineWidgets(); registerChartPack();
+chart.data = [{ label: 'Mon', value: 18 }, { label: 'Tue', value: 9 }];   // glides
+gauge.value = 91; kpi.value = '$52.0k'; spark.data = [4, 8, 6, 12];
+```
+- `<usa-bar-chart values labels unit max horizontal>`: `data`.
+- `<usa-gauge value min max unit label zones>`: `value`, `zoneColor(v)`.
+- `<usa-sparkline values variant color label>`: `data`; `SPARK_VARIANTS`, `sparkPoints(values, w, h, pad)`.
+- `<usa-kpi label value delta invert trend caption locale>`: `value`.
+- Chart: `bars-grow` (`axis`, `stagger`, `duration`) · `line-draw` (`duration`, `stagger`) · `ring-sweep` · `dots-pop` · `number-roll` · `sankey-flow` (loop); `parseFigure(text)`.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.
