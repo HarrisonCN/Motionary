@@ -15,7 +15,7 @@ export { SPRING_EFFECTS, defineDraggable, defineOverscroll, defineSpring, spring
 import { defineCardComponents } from './components/cards.js';
 export { CARD_EFFECTS, defineCard, defineCardStack, defineCarousel3d, defineStickyStack } from './components/cards.js';
 import { defineClickComponents } from './components/click.js';
-export { BUTTON_DEFORMS, CLICK_EFFECTS, MORPH_ICONS, defineButton, defineCheckbox, defineClick, defineDoubleTap, defineHold, defineIconMorph, defineLike, morphPath } from './components/click.js';
+export { BUTTON_DEFORMS, CLICK_EFFECTS, MORPH_ICONS, burst, confetti, defineButton, defineCheckbox, defineClick, defineDoubleTap, defineHold, defineIconMorph, defineLike, morphPath, shake } from './components/click.js';
 import { defineUiComponents } from './components/ui.js';
 export { defineAvatarStack, defineBadge, defineBottomSheet, defineDrawer, defineFab, defineNavbar, definePopover, definePullRefresh, defineRating, defineSlider, defineTabs, defineTooltip } from './components/ui.js';
 import { definePageComponents } from './components/page.js';
@@ -47,8 +47,8 @@ export { BRIDGE_PROTOCOL_VERSION, applyNativeSettings, connectNativeShell, detec
 export { C as COMPONENT_CATEGORIES } from './chunks/index-tags-DucKMQr_.js';
 export { S as SPRING_PRESETS, c as createSpring, l as linearEasing, p as projectInertia, r as resolveSpring, a as rubberBand, s as snapTo, b as spring, d as springEasing, e as springSamples, f as stepSpring, g as supportsLinearEasing } from './chunks/spring-CckMe3x0.js';
 export { T as TIMELINE_PRESETS, r as resolvePosition, s as supportsNativeScrub, t as timeline } from './chunks/core-DN3hHbHh.js';
-export { b as burst, c as confetti, h as haptic, s as shake } from './chunks/fx-ChjxrMBo.js';
 export { g as gesture, p as pinchScale, s as swipeDirection } from './chunks/core-BTf__I-8.js';
+export { h as haptic } from './chunks/fx-ChjxrMBo.js';
 
 /**
  * use-scroll-animate/components

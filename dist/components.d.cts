@@ -1494,8 +1494,6 @@ interface BurstOptions {
     /** Duration in ms (default 600). */
     duration?: number;
 }
-/** Particles radiating from client point (x, y). Returns the number spawned. */
-declare function burst(x: number, y: number, options?: BurstOptions): number;
 interface ConfettiOptions {
     /** Origin in client px (default: centre-bottom third of the viewport). */
     x?: number;
@@ -1510,10 +1508,6 @@ interface ConfettiOptions {
     /** Duration in ms (default 1600). */
     duration?: number;
 }
-/** A confetti cannon (paper pieces with gravity, drift and spin). */
-declare function confetti(options?: ConfettiOptions): number;
-/** Horizontal error shake (`intensity` px, default 8). Reduced motion: a red outline flash. */
-declare function shake(el: Element, intensity?: number, duration?: number): Animation | null;
 /** `navigator.vibrate()` where supported (Android Chrome, some WebViews). Returns whether it ran. */
 declare function haptic(pattern?: number | number[]): boolean;
 
@@ -1523,8 +1517,19 @@ declare function haptic(pattern?: number | number[]): boolean;
  * `<usa-button>` (button click deformation: squash, wobble, gooey, dent;
  * shape morph; submit → loading → success), `<usa-icon-morph>`,
  * `<usa-like>`, `<usa-hold>`, `<usa-double-tap>`, `<usa-checkbox>`, plus
- * `burst()`, `confetti()`, `shake()` and `haptic()`.
+ * `haptic()` (`burst()`, `confetti()`, `shake()` are deprecated in 5.9 —
+ * use the registered effects through `playEffect()`).
  */
+
+/**
+ * @deprecated 5.9 — removed in 6.0. Use the registered effect:
+ * `playEffect(document.body, 'burst', { x, y, ...options })` (`use-scroll-animate/components/fx`).
+ */
+declare function burst(x: number, y: number, options?: BurstOptions): number;
+/** @deprecated 5.9 — removed in 6.0. Use `playEffect(document.body, 'confetti', options)`. */
+declare function confetti(options?: ConfettiOptions): number;
+/** @deprecated 5.9 — removed in 6.0. Use `playEffect(el, 'shake', { intensity, duration })`. */
+declare function shake(el: Element, intensity?: number, duration?: number): Animation | null;
 
 /** Register every component of this category under its default tag. */
 declare function defineClickComponents(): void;

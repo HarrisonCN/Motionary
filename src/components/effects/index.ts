@@ -21,11 +21,14 @@ import { AUDIO_FX, defineAudio } from './audio';
 import { CURSOR_FX, defineGestureFx } from './cursor';
 import { MICRO_FX } from './micro';
 import { THEME_FX, defineTheme } from './themes';
+import { definePlayer } from './player';
 
 export { CARD_FX, CLICK_FX, PHYSICS_FX, PAGE_FX, GENERATIVE_FX, AUDIO_FX, CURSOR_FX, MICRO_FX, THEME_FX };
 export { togglePressed, swapLabel, bumpCount } from './micro';
 export { THEMES, THEME_NAMES, THEME_ROLES, themeVars, themeCss, applyTheme, themePreset, playThemeEffect, defineTheme } from './themes';
 export type { ThemePack, ThemeRole, UsaThemeElement } from './themes';
+export { createPlayer, normalizeAnimation, definePlayer, ANIMATION_FORMAT } from './player';
+export type { AnimationJSON, AnimationTrack, Player, UsaPlayerElement } from './player';
 export { bindGesture, flingVelocity, angleDelta, GESTURES, defineGestureFx } from './cursor';
 export type { GestureName, GestureFxOptions, GestureDetail, UsaGestureFxElement } from './cursor';
 export { enableAudio, disableAudio, getAudio, createBeatDetector, onBeat, bindBeat, defineAudio } from './audio';
@@ -92,6 +95,7 @@ export function defineEffectElements(): void {
   defineAudio();
   defineGestureFx();
   defineTheme();
+  definePlayer();
 }
 
 /** Register the built-ins and every pack (idempotent). */

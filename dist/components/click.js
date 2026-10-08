@@ -1,6 +1,6 @@
-import { x as defineElement, y as EASE_OUT, k as clamp, q as caf, n as now, r as raf } from '../chunks/base-C3Sw9sAO.js';
+import { x as defineElement, y as EASE_OUT, k as clamp, q as caf, n as now, r as raf, v as deprecate } from '../chunks/base-C3Sw9sAO.js';
 import { d as springEasing, c as createSpring } from '../chunks/spring-CckMe3x0.js';
-import { b as burst, c as confetti, h as haptic, s as shake } from '../chunks/fx-ChjxrMBo.js';
+import { b as burst$1, c as confetti$1, h as haptic, s as shake$1 } from '../chunks/fx-ChjxrMBo.js';
 
 var css$6 = "usa-click{position:relative;display:inline-block;overflow:hidden;isolation:isolate;border-radius:inherit;-webkit-tap-highlight-color:transparent;touch-action:manipulation}usa-click[block]{display:block}usa-click .usa-click-wave{position:absolute;border-radius:50%;pointer-events:none;z-index:-1;transform:scale(0);background:radial-gradient(circle,var(--usa-wave) 0 55%,color-mix(in srgb,var(--usa-wave) 40%,transparent) 70%,transparent 72%)}";
 
@@ -60,15 +60,15 @@ function defineClick(tag = 'usa-click') {
             const fx = this.effects;
             const colors = this.str('color') ? this.str('color').split(',') : undefined;
             if (fx.includes('burst'))
-                burst(x, y, { count: this.num('count', 12), shape: this.str('shape', 'circle'), colors });
+                burst$1(x, y, { count: this.num('count', 12), shape: this.str('shape', 'circle'), colors });
             if (fx.includes('confetti'))
-                confetti({ x, y, count: this.num('count', 60), colors, spread: 90, velocity: 0.8 });
+                confetti$1({ x, y, count: this.num('count', 60), colors, spread: 90, velocity: 0.8 });
             if (this.hasAttribute('haptic'))
                 haptic(this.num('haptic', 10));
             this.emit('click-effect', { x, y, effects: fx });
         }
         shake() {
-            shake(this);
+            shake$1(this);
             if (this.hasAttribute('haptic'))
                 haptic([30, 40, 30]);
         }
@@ -373,7 +373,7 @@ function defineButton(tag = 'usa-button') {
                 t.removeAttribute('aria-busy');
             }
             if (s === 'error') {
-                shake(t);
+                shake$1(t);
                 if (this.hasAttribute('haptic'))
                     haptic([30, 40, 30]);
             }
@@ -579,7 +579,7 @@ function defineLike(tag = 'usa-like') {
             if (next && heart && !this.reduced) {
                 this.motion(heart, [{ transform: 'scale(0.4)' }, { transform: 'scale(1)' }], springEasing('bouncy'));
                 const r = heart.getBoundingClientRect();
-                burst(r.left + r.width / 2, r.top + r.height / 2, { count: 10, distance: 28, size: 5, colors: [getComputedStyle(this).getPropertyValue('--usa-like-color').trim() || '#f43f5e', '#fb923c', '#facc15'] });
+                burst$1(r.left + r.width / 2, r.top + r.height / 2, { count: 10, distance: 28, size: 5, colors: [getComputedStyle(this).getPropertyValue('--usa-like-color').trim() || '#f43f5e', '#fb923c', '#facc15'] });
             }
             if (this.hasAttribute('haptic'))
                 haptic(this.num('haptic', 12));
@@ -756,7 +756,7 @@ function defineDoubleTap(tag = 'usa-double-tap') {
                 a.onfinish = () => icon.remove();
             else
                 icon.remove();
-            burst(x, y, { count: 8, distance: 40, size: 5, colors: [this.str('color', '#f43f5e'), '#fb923c', '#facc15'] });
+            burst$1(x, y, { count: 8, distance: 40, size: 5, colors: [this.str('color', '#f43f5e'), '#fb923c', '#facc15'] });
             if (this.hasAttribute('haptic'))
                 haptic(15);
             this.emit('double-tap', { x: x - r.left, y: y - r.top });
@@ -845,8 +845,27 @@ function defineCheckbox(tag = 'usa-checkbox') {
  * `<usa-button>` (button click deformation: squash, wobble, gooey, dent;
  * shape morph; submit → loading → success), `<usa-icon-morph>`,
  * `<usa-like>`, `<usa-hold>`, `<usa-double-tap>`, `<usa-checkbox>`, plus
- * `burst()`, `confetti()`, `shake()` and `haptic()`.
+ * `haptic()` (`burst()`, `confetti()`, `shake()` are deprecated in 5.9 —
+ * use the registered effects through `playEffect()`).
  */
+/**
+ * @deprecated 5.9 — removed in 6.0. Use the registered effect:
+ * `playEffect(document.body, 'burst', { x, y, ...options })` (`use-scroll-animate/components/fx`).
+ */
+function burst(x, y, options = {}) {
+    deprecate('burst()', "burst() is deprecated and removed in 6.0 — use playEffect(el, 'burst', { x, y, …options }) from use-scroll-animate/components/fx (npx usa-codemod-6).");
+    return burst$1(x, y, options);
+}
+/** @deprecated 5.9 — removed in 6.0. Use `playEffect(document.body, 'confetti', options)`. */
+function confetti(options = {}) {
+    deprecate('confetti()', "confetti() is deprecated and removed in 6.0 — use playEffect(el, 'confetti', options) from use-scroll-animate/components/fx (npx usa-codemod-6).");
+    return confetti$1(options);
+}
+/** @deprecated 5.9 — removed in 6.0. Use `playEffect(el, 'shake', { intensity, duration })`. */
+function shake(el, intensity = 8, duration = 480) {
+    deprecate('shake()', "shake() is deprecated and removed in 6.0 — use playEffect(el, 'shake', { intensity, duration }) from use-scroll-animate/components/fx (npx usa-codemod-6).");
+    return shake$1(el, intensity, duration);
+}
 /** Register every component of this category under its default tag. */
 function defineClickComponents() {
     defineClick();

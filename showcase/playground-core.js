@@ -86,6 +86,7 @@ export function playgroundSnippets(state) {
     esm: `${imports || "import { defineComponents } from 'use-scroll-animate/components';"}\n\n${calls || 'defineComponents();'}\n\n// HTML\n${markup.split('\n').map((l) => '// ' + l).join('\n')}`,
     react: `${imports}\nimport 'use-scroll-animate/components/jsx';\n\n${calls}\n\nexport function Hero() {\n  return (\n${ind(jsx, 4)}\n  );\n}`,
     vue: `<script setup>\n${imports}\n${calls}\n</script>\n\n<template>\n${ind(markup, 2)}\n</template>\n\n<!-- vite.config: vue({ template: { compilerOptions: { isCustomElement: (t) => t.startsWith('usa-') } } }) -->`,
+    player: playerSnippet(state.tracks?.length ? state.tracks : DEFAULT_TRACKS),
     timeline: `<script type="module">\n  import { defineTimeline } from 'use-scroll-animate/components/timeline';\n  defineTimeline();\n</script>\n\n${timelineMarkup(state.tracks?.length ? state.tracks : DEFAULT_TRACKS)}`,
   };
 }
@@ -96,6 +97,7 @@ export const PLAYGROUND_TABS = [
   { id: 'react', en: 'React', zh: 'React' },
   { id: 'vue', en: 'Vue', zh: 'Vue' },
   { id: 'timeline', en: '<usa-timeline>', zh: '<usa-timeline>' },
+  { id: 'player', en: '<usa-player> JSON', zh: '<usa-player> JSON' },
 ];
 
 // --- 4.6: keyframe track editor ------------------------------------------------
@@ -136,6 +138,25 @@ export function timelineMarkup(tracks = [], { trigger = 'view', indent = '  ' } 
   const attrs = trigger && trigger !== 'view' ? ` trigger="${escAttr(trigger)}"` : '';
   const steps = list.map((t, i) => `${indent}<div data-tl="${t.preset}" data-at="${t.start}" data-duration="${t.duration}">${escAttr(t.label || `Step ${i + 1}`).replace(/&quot;/g, '"')}</div>`);
   return `<usa-timeline${attrs}>\n${steps.join('\n')}\n</usa-timeline>`;
+}
+
+/** 5.9: the tracks as a `use-scroll-animate/animation` JSON document for <usa-player>. */
+export function tracksToAnimation(tracks = [], name = 'playground') {
+  const list = normalizeTracks(tracks);
+  return {
+    format: 'use-scroll-animate/animation',
+    version: 1,
+    name,
+    tracks: list.map((t, i) => ({ target: `:scope > :nth-child(${i + 1})`, preset: t.preset, start: t.start, duration: t.duration, ...(t.label ? { label: t.label } : {}) })),
+  };
+}
+
+/** <usa-player> markup with the animation inline. */
+export function playerSnippet(tracks = []) {
+  const list = normalizeTracks(tracks);
+  const json = JSON.stringify(tracksToAnimation(list), null, 2).split('\n').map((l) => '    ' + l).join('\n');
+  const kids = list.map((t, i) => `  <div>${escAttr(t.label || `Step ${i + 1}`).replace(/&quot;/g, '"')}</div>`).join('\n');
+  return `<script type="module">\n  import { definePlayer } from 'use-scroll-animate/components/effects';\n  definePlayer();\n</script>\n\n<usa-player trigger="view">\n${kids}\n  <script type="application/json">\n${json}\n  </script>\n</usa-player>`;
 }
 
 export const DEFAULT_TRACKS = [newTrack('fade-up', 0, 600, 'Title'), newTrack('fade-left', 300, 600, 'Subtitle'), newTrack('scale', 700, 500, 'Button')];

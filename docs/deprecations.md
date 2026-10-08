@@ -1,5 +1,9 @@
 # Deprecations
 
+## Deprecated in 5.9, removed in 6.0
+
+See [upgrading-6.md](./upgrading-6.md) — `burst()`, `confetti()`, `shake()` (use `playEffect(el, 'burst' | 'confetti' | 'shake', …)`), `<usa-cursor mode="trail">` (use the `comet-trail` effect). Run `npx usa-codemod-6 --write src`.
+
 ## Deprecated in 4.9, removed in 5.0
 
 See [upgrading-5.md](./upgrading-5.md) — `motionIntensity: 'off'` / `setMotionIntensity('off')`, `reducedMotion: 'no-preference'`, `<usa-timeline scrub="js">`, shared names re-exported from category entries. Run `npx usa-codemod-5 --write src`.
