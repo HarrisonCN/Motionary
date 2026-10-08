@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.6.0] - 2026-10-08
+
+### Added
+- **4 new components (6.6)** in `motionary/components/widgets` (also in `dist/widgets.umd.js`; the existing `<usa-navbar>`, `<usa-tooltip>`, `<usa-popover>` and `<usa-icon-morph>` are unchanged):
+  - `<usa-dock>` — macOS-style dock: cosine-falloff magnification along the pointer (`magnify`, `range`), neighbours make room, `data-label` tooltips, click `bounce`, keyboard focus magnifies, vertical orientation; `role="toolbar"`.
+  - `<usa-nav-morph>` — navigation with an indicator that stretches to the hovered / focused link and settles on the current page; `indicator="underline | pill | blob | dot"`, arrow-key focus, manages `aria-current`; `usa:change`.
+  - `<usa-menu-toggle>` — hamburger that morphs into `cross`, `arrow`, `minus` or `plus-x`; a button with `aria-expanded` that opens / closes its `for` target (`hidden`, or `show()` / `close()` — works with `<usa-sheet>` and `<usa-modal>`); `usa:toggle`.
+  - `<usa-tip>` — tooltip / popover 2.0: springs out with an arrow, flips and shifts to stay in the viewport, hover + focus + Esc (WCAG 1.4.13) or `trigger="click"` popovers with rich `[slot="tip"]` content; `usa:open`, `usa:close`.
+- **Morph & SVG 2.0 — `motionary/components/fx-morph`** (5 effects, `registerMorphEffects2()`, also in `registerFx2()`): `path-morph` (resampled point morph between any SVG paths), `blob-button` (liquid blob that bulges toward the pointer), `stroke-draw` (every stroke draws, then fills fade in), `noise-reveal` (SVG turbulence + blur filter transition), `icon-swap` (gooey icon morph). Helpers `samplePath()`, `pointsToPath()`.
+- Showcase: 7 new gallery cards with copyable code; Animation Store “Components 6.x” 28 → 35 entries (255 → 262 items).
+
+### Accessibility
+- Dock is a toolbar with labelled items, the nav manages `aria-current`, the toggle exposes `aria-expanded` / `aria-controls`, tips use `role="tooltip"` + `aria-describedby` (or `role="dialog"` for click popovers) and close on Esc. Reduced motion: no magnification, stretch or morph loops; reveals and swaps fade.
+
 ## [6.5.0] - 2026-10-08
 
 ### Added

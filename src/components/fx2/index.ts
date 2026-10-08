@@ -8,6 +8,7 @@ import { GPU_FX, registerGpuEffects } from './gpu';
 import { TEXT3_FX, registerTextEffects3, splitChars } from './text3';
 import { LIGHT_FX, registerLightEffects, trackPointer } from './light';
 import { DEPTH3_FX, register3dEffects } from './depth3';
+import { MORPH2_FX, registerMorphEffects2, samplePath, pointsToPath } from './morph2';
 
 export { GPU_FX, registerGpuEffects, TEXT3_FX, registerTextEffects3, splitChars };
 export { shaderBackground, supportsWebGL2, fieldFallback, GLSL_HEAD } from './gl';
@@ -17,12 +18,15 @@ export { LIGHT_FX, registerLightEffects, trackPointer };
 
 export { DEPTH3_FX, register3dEffects };
 
+export { MORPH2_FX, registerMorphEffects2, samplePath, pointsToPath };
+
 /** The 6.x effect packs by name. */
 export const FX2_PACKS: Record<string, EffectDefinition[]> = {
   gpu: GPU_FX,
   text: TEXT3_FX,
   light: LIGHT_FX,
   depth: DEPTH3_FX,
+  morph: MORPH2_FX,
 };
 
 /** Register every 6.x pack (idempotent). */
@@ -31,4 +35,5 @@ export function registerFx2(): void {
   registerTextEffects3();
   registerLightEffects();
   register3dEffects();
+  registerMorphEffects2();
 }

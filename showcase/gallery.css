@@ -287,3 +287,7 @@ usa-carousel[data-effect="cards"].demo-carousel .demo-slide{margin:0 18%}
 .demo-depth3{position:relative;display:grid;place-items:center;width:180px;height:130px;border-radius:16px;background:linear-gradient(135deg,#1e1b4b,#4c1d95);color:#fff}
 .demo-d3-a{position:absolute;font-size:70px;opacity:.35}.demo-d3-b{position:absolute;top:28px;font:800 34px system-ui}.demo-d3-c{position:absolute;bottom:22px;font-size:13px;letter-spacing:.3em;text-transform:uppercase}
 .demo-flip3{width:180px;height:120px;cursor:pointer}.demo-flip3>div{display:grid;place-items:center;border-radius:14px;color:#fff;font-weight:700}
+.demo-dock{--usa-dock-size:38px}.demo-dock .usa-dock-item{font-weight:800}
+.demo-navm{font-size:14px}.demo-mt{color:var(--text,#111)}
+.demo-morph-svg path{fill:#7c5cff;stroke:#22d3ee;stroke-width:2}
+.demo-blob-btn{border:0;background:none;color:#fff;font:700 16px system-ui;padding:16px 26px;cursor:pointer}

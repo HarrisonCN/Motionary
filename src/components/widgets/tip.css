@@ -1,0 +1,10 @@
+usa-tip{position:relative;display:inline-block}
+.usa-tip-bubble{position:absolute;left:0;top:0;z-index:60;box-sizing:border-box;max-width:min(260px,calc(100vw - 16px));width:max-content;padding:7px 11px;border-radius:9px;background:var(--usa-tip-bg,#111827);color:var(--usa-tip-fg,#f9fafb);font:500 13px/1.4 system-ui,sans-serif;box-shadow:0 10px 26px -8px rgba(0,0,0,.4);text-align:left;white-space:normal}
+.usa-tip-bubble[hidden]{display:none}
+.usa-tip-bubble[data-placement="top"]{transform-origin:50% 100%}.usa-tip-bubble[data-placement="bottom"]{transform-origin:50% 0}
+.usa-tip-bubble[data-placement="left"]{transform-origin:100% 50%}.usa-tip-bubble[data-placement="right"]{transform-origin:0 50%}
+.usa-tip-arrow{position:absolute;width:10px;height:10px;background:inherit;transform:rotate(45deg)}
+.usa-tip-bubble[data-placement="top"] .usa-tip-arrow{bottom:-4px;left:calc(50% - 5px + var(--usa-tip-shift,0px))}
+.usa-tip-bubble[data-placement="bottom"] .usa-tip-arrow{top:-4px;left:calc(50% - 5px + var(--usa-tip-shift,0px))}
+.usa-tip-bubble[data-placement="left"] .usa-tip-arrow{right:-4px;top:calc(50% - 5px)}
+.usa-tip-bubble[data-placement="right"] .usa-tip-arrow{left:-4px;top:calc(50% - 5px)}
