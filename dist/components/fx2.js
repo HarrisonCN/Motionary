@@ -4,6 +4,7 @@ import { TEXT3_FX, registerTextEffects3 } from './fx-text.js';
 export { splitChars } from './fx-text.js';
 import { LIGHT_FX, registerLightEffects } from './fx-light.js';
 export { trackPointer } from './fx-light.js';
+import { DEPTH3_FX, register3dEffects } from './fx-3d.js';
 import '../chunks/registry-Bu5NrAyA.js';
 import '../chunks/base-DchG4q_S.js';
 import '../chunks/generative-2LhxG5BJ.js';
@@ -14,13 +15,15 @@ const FX2_PACKS = {
     gpu: GPU_FX,
     text: TEXT3_FX,
     light: LIGHT_FX,
+    depth: DEPTH3_FX,
 };
 /** Register every 6.x pack (idempotent). */
 function registerFx2() {
     registerGpuEffects();
     registerTextEffects3();
     registerLightEffects();
+    register3dEffects();
 }
 
-export { FX2_PACKS, GPU_FX, LIGHT_FX, TEXT3_FX, registerFx2, registerGpuEffects, registerLightEffects, registerTextEffects3 };
+export { DEPTH3_FX, FX2_PACKS, GPU_FX, LIGHT_FX, TEXT3_FX, register3dEffects, registerFx2, registerGpuEffects, registerLightEffects, registerTextEffects3 };
 //# sourceMappingURL=fx2.js.map

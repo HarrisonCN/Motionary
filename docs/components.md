@@ -588,6 +588,32 @@ document.querySelector('usa-skeleton-reveal').loading = false; // dissolve → c
 - `<usa-star-rating max step icon="star | heart" readonly>`: hover preview, half stars, pop + sparkle burst, `role="slider"` keyboard, `usa:change`.
 - Light & materials: `light-follow` · `refraction` · `pointer-shadow` (hover) · `brushed-metal` · `pearlescent` (card) · `god-rays` (background). Helper `trackPointer()`. Reduced motion: fixed lighting, one still frame, values switch instantly.
 
+### v6.5 Widgets: milestones, masonry flow, compare, cube gallery (`components/widgets`) + 3D scene cards (`components/fx-3d`)
+
+```html
+<usa-milestones>
+  <div data-date="2024"><h3>Idea</h3></div><div data-date="2026"><h3>Launch</h3></div>
+</usa-milestones>
+<usa-masonry-flow min="160" gap="12"><img src="1.jpg" alt="…"><img src="2.jpg" alt="…"></usa-masonry-flow>
+<usa-compare labels="Before,After" intro><img src="before.jpg" alt="Before"><img src="after.jpg" alt="After"></usa-compare>
+<usa-cube-gallery autoplay="4000"><img src="a.jpg" alt="…"><img src="b.jpg" alt="…"></usa-cube-gallery>
+
+<usa-fx effect="depth-stack" trigger="load"><div class="card"><img data-depth="1" src="bg.png" alt=""><h3 data-depth="3">Title</h3></div></usa-fx>
+<usa-fx effect="card-flip-3d"><div class="card"><div>Front</div><div>Back</div></div></usa-fx>
+```
+```js
+import { defineWidgets } from 'motionary/components/widgets';
+import { defineFx } from 'motionary/components/fx';
+import { register3dEffects } from 'motionary/components/fx-3d';
+defineWidgets(); defineFx(); register3dEffects();
+document.querySelector('usa-masonry-flow').filter('.cats'); // items glide (FLIP)
+```
+- `<usa-milestones layout="alternate | left">`: scroll-drawn rail, dots pop and cards slide in when reached; `usa:reach`.
+- `<usa-masonry-flow min gap>`: masonry with FLIP layout animation; `layout()`, `filter()`, `shuffle()`, `sort()`; `usa:layout`.
+- `<usa-compare orientation labels intro hover>`: before / after slider (`role="slider"`, keyboard), click-to-jump easing; `usa:change`.
+- `<usa-cube-gallery axis="y | x" autoplay>`: slides on a turning 3D cube, swipe / keys / buttons; `next()`, `prev()`, `goTo()`; `usa:change`.
+- 3D scene cards: `depth-stack` · `product-spin` (card) · `card-flip-3d` (click) · `origami` (enter) · `orbit-camera` (scroll). Reduced motion: no tilt / spin / orbit / fold, flips crossfade, milestones fully shown, cube fades.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

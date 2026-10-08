@@ -159,6 +159,54 @@ export const components = [
     ['god rays', 'volumetric', 'light', 'background', 'canvas'],
     '<usa-fx effect="god-rays" trigger="load" self class="hero">\n  <h1>Dawn</h1>\n</usa-fx>',
     '<usa-fx effect="god-rays" trigger="load"><div class="demo-tile demo-gen demo-rays">Dawn</div></usa-fx>', undefined, '6.4'),
+  // ---- 6.5 -------------------------------------------------------------
+  W('usa-milestones', 'timeline', 'Scroll-drawn milestones', '滚动绘制的里程碑',
+    '6.5: a progress line grows down the rail as you scroll; each milestone pops its dot and slides its card in when the line reaches it. Alternating sides on wide screens, one column on phones; data-date labels.',
+    '6.5：随着滚动，进度线沿轨道向下生长；线到达时，里程碑的圆点弹出、卡片滑入。宽屏左右交替，手机单列；支持 data-date 日期标签。',
+    ['timeline', 'milestones', 'roadmap', 'history', 'scroll'],
+    '<usa-milestones>\n  <div data-date="2024"><h3>Idea</h3><p>…</p></div>\n  <div data-date="2025"><h3>Beta</h3><p>…</p></div>\n  <div data-date="2026"><h3>Launch</h3><p>…</p></div>\n</usa-milestones>',
+    '<usa-milestones layout="left" class="demo-ms"><div data-date="2024"><strong>Idea</strong></div><div data-date="2025"><strong>Beta</strong></div><div data-date="2026"><strong>Launch 🚀</strong></div></usa-milestones>',
+    [{ key: 'layout', values: ['left', 'alternate'] }], { since: '6.5' }),
+  W('usa-masonry-flow', 'layout', 'Masonry with layout animation', '带布局动画的瀑布流',
+    '6.5: a masonry grid whose items glide to their new places (FLIP) on resize, insert / remove, filter(), shuffle() and sort(); hidden items scale out, new ones scale in.',
+    '6.5：瀑布流网格，在尺寸变化、增删、filter()、shuffle()、sort() 时项目平滑移动到新位置（FLIP）；隐藏项缩小消失，新项缩放进入。',
+    ['masonry', 'grid', 'flip', 'filter', 'shuffle', 'layout'],
+    '<usa-masonry-flow min="160" gap="12">\n  <img src="1.jpg" alt="…">\n  <img src="2.jpg" alt="…">\n  …\n</usa-masonry-flow>\n<!-- grid.filter(\'.cats\'), grid.shuffle(), grid.sort((a, b) => …) -->',
+    `<div class="demo-col demo-mf-wrap"><div class="demo-row"><button type="button" class="demo-btn" data-mf="shuffle">Shuffle</button><button type="button" class="demo-btn demo-btn-alt" data-mf="filter">Filter</button></div><usa-masonry-flow min="56" gap="8" class="demo-mf">${[60, 90, 50, 80, 70, 45, 95, 55].map((h, i) => `<div class="demo-slide-${i % 5} demo-mf-item${i % 2 ? ' odd' : ''}" style="height:${h}px">${i + 1}</div>`).join('')}</usa-masonry-flow></div>`,
+    undefined, { since: '6.5' }),
+  W('usa-compare', 'interaction', 'Before / after compare', '前后对比滑块',
+    '6.5: drag the handle (or hover with the hover attribute), click to jump, or use the keyboard slider; horizontal or vertical; an intro sweep plays once when it scrolls into view.',
+    '6.5：拖动手柄（或加 hover 属性随指针移动），点击跳转，或用键盘滑块操作；支持水平 / 垂直；首次滚入视口时播放一次引导滑动。',
+    ['compare', 'before after', 'slider', 'image', 'diff'],
+    '<usa-compare labels="Before,After" intro>\n  <img src="before.jpg" alt="Before">\n  <img src="after.jpg" alt="After">\n</usa-compare>',
+    '<usa-compare labels="Before,After" intro class="demo-cmp"><div class="demo-cmp-b">RAW</div><div class="demo-cmp-a">GRADED</div></usa-compare>',
+    [{ key: 'orientation', values: ['horizontal', 'vertical'] }], { since: '6.5' }),
+  W('usa-cube-gallery', 'cards', 'Cube gallery', '立方体画廊',
+    '6.5: slides sit on adjacent faces of a 3D cube that turns between them — swipe, arrow keys, buttons or autoplay (pauses on hover / focus / off screen); turn around the Y or X axis.',
+    '6.5：幻灯片位于 3D 立方体的相邻面上，立方体在它们之间转动 —— 支持滑动、方向键、按钮或自动播放（悬停 / 聚焦 / 离开视口时暂停）；可绕 Y 轴或 X 轴转动。',
+    ['cube', 'gallery', '3d', 'carousel', 'slider'],
+    '<usa-cube-gallery autoplay="4000" label="Products">\n  <img src="a.jpg" alt="…">\n  <img src="b.jpg" alt="…">\n  <img src="c.jpg" alt="…">\n</usa-cube-gallery>',
+    `<usa-cube-gallery class="demo-cube-g" label="Demo">${slides(4)}</usa-cube-gallery>`,
+    [{ key: 'axis', values: ['y', 'x'] }], { since: '6.5' }),
+  X('fx-3d', ['fx-3d', 'register3dEffects'], '3D depth, product spin & orbit', '3D 景深、商品旋转与环绕镜头',
+    '6.5: depth-stack (layers separate in Z and parallax as the card tilts), product-spin (drag to turn with inertia, idle turntable) and orbit-camera (the camera orbits the 3D layers while you scroll).',
+    '6.5：depth-stack（卡片倾斜时各层在 Z 轴分离并产生视差）、product-spin（拖动旋转带惯性，空闲时转台自转）与 orbit-camera（滚动时镜头环绕 3D 图层）。',
+    ['3d', 'depth', 'parallax', 'product viewer', '360', 'orbit'],
+    '<usa-fx effect="depth-stack" trigger="load">\n  <div class="card">\n    <img data-depth="1" src="bg.png" alt="">\n    <h3 data-depth="3">Title</h3>\n  </div>\n</usa-fx>',
+    '<usa-fx effect="depth-stack" trigger="load"><div class="demo-depth3"><span class="demo-d3-a">◆</span><span class="demo-d3-b">3D</span><span class="demo-d3-c">depth</span></div></usa-fx>',
+    [{ key: 'effect', values: ['depth-stack', 'product-spin', 'orbit-camera'] }], '6.5'),
+  X('fx-3d-flip', ['fx-3d', 'register3dEffects'], 'Thick card flip', '厚卡片翻转',
+    '6.5: card-flip-3d turns a card over to its back face (the second child) with a lift and visible thickness; the faces swap aria-hidden.',
+    '6.5：card-flip-3d 把卡片翻到背面（第二个子元素），翻转时抬起并显出厚度；正反面会切换 aria-hidden。',
+    ['flip', 'card', '3d', 'back face', 'click'],
+    '<usa-fx effect="card-flip-3d">\n  <div class="card">\n    <div>Front</div>\n    <div>Back</div>\n  </div>\n</usa-fx>',
+    '<usa-fx effect="card-flip-3d"><div class="demo-flip3"><div class="demo-slide-0">Tap me</div><div class="demo-slide-1">Back side ✨</div></div></usa-fx>', undefined, '6.5'),
+  X('fx-origami', ['fx-3d', 'register3dEffects'], 'Origami unfold', '折纸展开',
+    '6.5: origami unfolds the element panel by panel like folded paper (enter effect; skipped under reduced motion).',
+    '6.5：origami 让元素像折纸一样逐片展开（入场效果；减少动态效果时不播放）。',
+    ['origami', 'fold', 'paper', 'unfold', 'enter'],
+    '<usa-fx effect="origami" trigger="enter">\n  <article>…</article>\n</usa-fx>',
+    '<usa-fx effect="origami" trigger="click" options=\'{"panels":4}\'><div class="demo-tile demo-trail">Click to unfold</div></usa-fx>', undefined, '6.5'),
 ];
 
 /** item id → live-demo wiring. */
@@ -178,5 +226,11 @@ export const wire = {
       s.loading = !s.loading;
       b.textContent = s.loading ? 'Reveal' : 'Reload';
     });
+  },
+  'masonry-flow': (stage) => {
+    const g = stage.querySelector('usa-masonry-flow');
+    let only = false;
+    stage.querySelector('[data-mf=shuffle]')?.addEventListener('click', () => g.shuffle());
+    stage.querySelector('[data-mf=filter]')?.addEventListener('click', () => g.filter((only = !only) ? '.odd' : null));
   },
 };
