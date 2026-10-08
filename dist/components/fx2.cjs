@@ -12,6 +12,7 @@ var components_fxPhysics = require('./fx-physics.cjs');
 var components_fxFocus = require('./fx-focus.cjs');
 var components_fxMusic = require('./fx-music.cjs');
 var components_fxChart = require('./fx-chart.cjs');
+var components_fxShop = require('./fx-shop.cjs');
 require('../chunks/registry-DehBVRDV.cjs');
 require('../chunks/base-BaQV-2ha.cjs');
 require('../chunks/generative-BHIj-NU0.cjs');
@@ -31,6 +32,7 @@ const EFFECT_PACKS = {
     focus: components_fxFocus.FOCUS_FX,
     music: components_fxMusic.MUSIC_FX,
     chart: components_fxChart.CHART_FX,
+    shop: components_fxShop.SHOP_FX,
 };
 /** Register every 6.x effect pack (idempotent). */
 function registerEffectPacks() {
@@ -45,6 +47,7 @@ function registerEffectPacks() {
     components_fxFocus.registerFocusPack();
     components_fxMusic.registerMusicPack();
     components_fxChart.registerChartPack();
+    components_fxShop.registerShopPack();
 }
 
 exports.EFFECT_PACK_FORMAT = components_marketplace.EFFECT_PACK_FORMAT;
@@ -93,6 +96,9 @@ exports.syntheticSample = components_fxMusic.syntheticSample;
 exports.CHART_FX = components_fxChart.CHART_FX;
 exports.parseFigure = components_fxChart.parseFigure;
 exports.registerChartPack = components_fxChart.registerChartPack;
+exports.SHOP_FX = components_fxShop.SHOP_FX;
+exports.arcPath = components_fxShop.arcPath;
+exports.registerShopPack = components_fxShop.registerShopPack;
 exports.EFFECT_PACKS = EFFECT_PACKS;
 exports.registerEffectPacks = registerEffectPacks;
 //# sourceMappingURL=fx2.cjs.map

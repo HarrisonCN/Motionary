@@ -723,6 +723,94 @@ interface UsaKpiElement extends UsaElement {
 declare function defineKpi(tag?: string): CustomElementConstructor | undefined;
 
 /**
+ * `<usa-add-to-cart>` (7.3) — a buy button: on click a ghost of the product
+ * (`from` selector, default the closest `[data-product]` image) flies into
+ * the cart (`cart` selector, default `[data-cart]`, or a `<usa-cart-drawer>`
+ * whose `add()` is called with `item` JSON), then the button morphs into a
+ * ✓ "Added" state for `hold` ms. `usa:add` (`{ item }`). A real `<button>`
+ * inside; `aria-live` announces "Added to cart". Reduced motion: no flight
+ * or morph — the cart just bumps.
+ */
+interface UsaAddToCartElement extends UsaElement {
+    add(): void;
+}
+declare function defineAddToCart(tag?: string): CustomElementConstructor | undefined;
+
+interface CartItem {
+    id?: string;
+    name: string;
+    price: number;
+    qty?: number;
+    img?: string;
+}
+/**
+ * `<usa-cart-drawer>` (7.3) — a cart button with a count badge plus a drawer
+ * that slides in from the side. `add(item)` slides the line in (or bumps its
+ * quantity), the badge bumps and the total rolls; lines remove with a collapse.
+ * `open` / `close()` / `toggle()`; Esc and the backdrop close it; focus moves
+ * into the panel and back. `currency` (default "$"), `label`. Events
+ * `usa:change` (`{ items, total }`), `usa:open`, `usa:close`. The panel is a
+ * labelled `dialog`; the badge count is announced. Reduced motion: no slide,
+ * bump or roll.
+ */
+interface UsaCartDrawerElement extends UsaElement {
+    items: CartItem[];
+    readonly total: number;
+    readonly count: number;
+    open: boolean;
+    add(item: CartItem): void;
+    removeItem(id: string): void;
+    toggle(force?: boolean): void;
+}
+/** Cart total (7.3). */
+declare const cartTotal: (items: CartItem[]) => number;
+declare function defineCartDrawer(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-product-gallery>` (7.3) — a product image gallery from its `<img>`
+ * children: a large stage plus a thumbnail strip. Picking a thumbnail (click,
+ * ←/→, swipe on touch) cross-slides the stage in the direction of travel; the
+ * active thumbnail's ring glides to it. Hovering the stage zooms the photo
+ * under the pointer (`zoom`, default 2; `nozoom` turns it off). `index`
+ * property / attribute; `usa:change` (`{ index }`). The stage is a labelled
+ * `group` whose label says "Image 2 of 4: alt". Reduced motion: images swap
+ * instantly and the hover zoom is off.
+ */
+interface UsaProductGalleryElement extends UsaElement {
+    index: number;
+    readonly count: number;
+    go(i: number): void;
+    next(): void;
+    prev(): void;
+}
+/** Wrap an index into 0..n-1 (7.3). */
+declare const wrapIndex: (i: number, n: number) => number;
+declare function defineProductGallery(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-countdown>` (7.3) — a flip-card countdown to `to` (ISO date / time)
+ * or for `seconds`: days · hours · minutes · seconds, each digit flips like a
+ * split-flap card when it changes. `units` ("d,h,m,s"), `labels`. Fires
+ * `usa:tick` (`{ left }`) and `usa:done`; adds `data-done`. A `timer` with an
+ * `aria-label` that updates once a minute (not every second). Reduced motion:
+ * digits change without the flip.
+ */
+interface UsaCountdownElement extends UsaElement {
+    /** Seconds left. */
+    readonly left: number;
+    start(): void;
+    stop(): void;
+}
+/** Split seconds into d/h/m/s (7.3). */
+declare function splitTime(sec: number): {
+    d: number;
+    h: number;
+    m: number;
+    s: number;
+};
+declare function defineCountdown(tag?: string): CustomElementConstructor | undefined;
+
+/**
  * motionary/components/widgets — the 6.x animated UI widgets, in their own
  * entry so `motionary/components` and `components/lite` keep their size
  * budgets. Every widget is reduced-motion safe and keyboard accessible.
@@ -783,8 +871,12 @@ declare global {
         'usa-gauge': UsaGaugeElement;
         'usa-sparkline': UsaSparklineElement;
         'usa-kpi': UsaKpiElement;
+        'usa-add-to-cart': UsaAddToCartElement;
+        'usa-cart-drawer': UsaCartDrawerElement;
+        'usa-product-gallery': UsaProductGalleryElement;
+        'usa-countdown': UsaCountdownElement;
     }
 }
 
-export { CAROUSEL_EFFECTS, EQ_PRESETS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PROGRESS_VARIANTS, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SPARK_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, defineBarChart, defineCarousel, defineColorPicker, defineCompare, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineFileDrop, defineGauge, defineKanban, defineKeyframeEditor, defineKpi, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMilestones, defineModal, defineMusicPlayer, defineNavMorph, defineOdometer, definePagination, defineProgressRing, definePullCord, defineSegmented, defineSheet, defineSkeletonReveal, defineSparkline, defineStarRating, defineStepper, defineStories, defineSwipeDeck, defineSwitch, defineTabBar, defineTip, defineToastStack, defineVolumeKnob, defineWeatherCard, defineWidgets, hexToHsv, hsvToHex, monthGrid, pageWindow, parseISODate, parseLRC, sparkPoints, stackToast };
-export type { StackToastOptions, UsaBarChartElement, UsaCarouselElement, UsaColorPickerElement, UsaCompareElement, UsaCubeGalleryElement, UsaDatePickerElement, UsaDisclosureElement, UsaDockElement, UsaEqualizerElement, UsaFileDropElement, UsaGaugeElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaKpiElement, UsaLyricsElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMilestonesElement, UsaModalElement, UsaMusicPlayerElement, UsaNavMorphElement, UsaOdometerElement, UsaPaginationElement, UsaProgressRingElement, UsaPullCordElement, UsaSegmentedElement, UsaSheetElement, UsaSkeletonRevealElement, UsaSparklineElement, UsaStarRatingElement, UsaStepperElement, UsaStoriesElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTipElement, UsaToastStackElement, UsaVolumeKnobElement, UsaWeatherCardElement };
+export { CAROUSEL_EFFECTS, EQ_PRESETS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PROGRESS_VARIANTS, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SPARK_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, cartTotal, defineAddToCart, defineBarChart, defineCarousel, defineCartDrawer, defineColorPicker, defineCompare, defineCountdown, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineFileDrop, defineGauge, defineKanban, defineKeyframeEditor, defineKpi, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMilestones, defineModal, defineMusicPlayer, defineNavMorph, defineOdometer, definePagination, defineProductGallery, defineProgressRing, definePullCord, defineSegmented, defineSheet, defineSkeletonReveal, defineSparkline, defineStarRating, defineStepper, defineStories, defineSwipeDeck, defineSwitch, defineTabBar, defineTip, defineToastStack, defineVolumeKnob, defineWeatherCard, defineWidgets, hexToHsv, hsvToHex, monthGrid, pageWindow, parseISODate, parseLRC, sparkPoints, splitTime, stackToast, wrapIndex };
+export type { CartItem, StackToastOptions, UsaAddToCartElement, UsaBarChartElement, UsaCarouselElement, UsaCartDrawerElement, UsaColorPickerElement, UsaCompareElement, UsaCountdownElement, UsaCubeGalleryElement, UsaDatePickerElement, UsaDisclosureElement, UsaDockElement, UsaEqualizerElement, UsaFileDropElement, UsaGaugeElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaKpiElement, UsaLyricsElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMilestonesElement, UsaModalElement, UsaMusicPlayerElement, UsaNavMorphElement, UsaOdometerElement, UsaPaginationElement, UsaProductGalleryElement, UsaProgressRingElement, UsaPullCordElement, UsaSegmentedElement, UsaSheetElement, UsaSkeletonRevealElement, UsaSparklineElement, UsaStarRatingElement, UsaStepperElement, UsaStoriesElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTipElement, UsaToastStackElement, UsaVolumeKnobElement, UsaWeatherCardElement };

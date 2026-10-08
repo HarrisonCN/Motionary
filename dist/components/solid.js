@@ -29,6 +29,7 @@ import './layout.js';
 import './packs.js';
 import './fx.js';
 import '../chunks/registry-CyKExAmE.js';
+import '../chunks/builtins-HlqAkK0f.js';
 import './a11y.js';
 import '../chunks/index-tags-C04JP8g4.js';
 import './perf.js';

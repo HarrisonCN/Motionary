@@ -30,6 +30,7 @@ require('./layout.cjs');
 require('./packs.cjs');
 require('./fx.cjs');
 require('../chunks/registry-DehBVRDV.cjs');
+require('../chunks/builtins-xalxV2d5.cjs');
 require('./a11y.cjs');
 require('../chunks/index-tags-BTMwrfgV.cjs');
 require('./perf.cjs');

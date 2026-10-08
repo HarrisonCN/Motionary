@@ -8,6 +8,7 @@ var audio = require('../chunks/audio-EXUoijsG.cjs');
 var registry = require('../chunks/registry-DehBVRDV.cjs');
 var base = require('../chunks/base-BaQV-2ha.cjs');
 var components_tokens = require('./tokens.cjs');
+require('../chunks/builtins-xalxV2d5.cjs');
 require('../chunks/core-BGAyaY6L.cjs');
 require('../chunks/fx-lBGVtQO1.cjs');
 
