@@ -21,4 +21,4 @@ Same API as `use-scroll-animate/components`, but the light-DOM CSS is **not** in
 | `use-scroll-animate/components` (everything, CSS inlined) | ≈ 79 KB |
 | `use-scroll-animate/components/lite` (everything, CSS on demand) | **≈ 62 KB** (budget 70 KB, checked in CI) |
 
-Serve the CSS from somewhere else with `onDemandStyles('https://cdn.example/use-scroll-animate@5/dist/')`, or preload with `loadCategoryStyles('cards', base)`.
+Serve the CSS from somewhere else with `onDemandStyles('https://cdn.example/use-scroll-animate@6/dist/')`, or preload with `loadCategoryStyles('cards', base)`.

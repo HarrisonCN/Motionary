@@ -39,7 +39,7 @@ defineComponents(); // or per category: import { defineTextComponents } from 'us
 
 ```html
 <!-- or with no build step -->
-<script src="https://unpkg.com/use-scroll-animate@5/dist/components.umd.js"></script>
+<script src="https://unpkg.com/use-scroll-animate@6/dist/components.umd.js"></script>
 <usa-typewriter words="Hello, Windows.|Hello, web."></usa-typewriter>
 <usa-spinner kind="fluent"></usa-spinner>
 ```
@@ -54,7 +54,7 @@ defineComponents(); // or per category: import { defineTextComponents } from 'us
 | **Transitions** (`/components/transitions`) | `<usa-dialog>` (modal / drawer / sheet) · `<usa-accordion>` · `<usa-view-switch>` · `viewTransition()` · `flip()` |
 | **Spring & physics** (`/components/physics`) | `<usa-spring>` (bounce-in · pop · drop · jelly · rubber-band) · `<usa-draggable>` (spring-back · inertia · snap) · `<usa-overscroll>` · `spring()` · `createSpring()` · `SPRING_PRESETS` |
 | **Card effects** (`/components/cards`) | `<usa-card>` (flip · holo · glass · border-glow · conic-border · lift · spotlight · sheen · parallax-layers · expand — combinable) · `<usa-card-stack>` (swipe) · `<usa-sticky-stack>` · `<usa-carousel-3d>` |
-| **Click & tap** (`/components/click`) | `<usa-button>` **button click deformation** (squash · wobble · gooey · dent · shape morph · submit→loading→success) · `<usa-icon-morph>` · `<usa-click>` (ripple · burst · confetti · squish · press-spring · shake) · `<usa-like>` · `<usa-hold>` · `<usa-double-tap>` · `<usa-checkbox>` · `confetti()` · `haptic()` |
+| **Click & tap** (`/components/click`) | `<usa-button>` **button click deformation** (squash · wobble · gooey · dent · shape morph · submit→loading→success) · `<usa-icon-morph>` · `<usa-click>` (ripple · burst · confetti · squish · press-spring · shake) · `<usa-like>` · `<usa-hold>` · `<usa-double-tap>` · `<usa-checkbox>` · `haptic()` (click effects from code: `playEffect(el, 'confetti')`) |
 | **UI components & variants** (`/components/ui`) | `<usa-tabs>` · `<usa-drawer>` · `<usa-bottom-sheet>` · `<usa-pull-refresh>` · `<usa-fab>` · `<usa-navbar>` · `<usa-slider>` · `<usa-rating>` · `<usa-tooltip>` · `<usa-popover>` · `<usa-badge>` · `<usa-avatar-stack>` · `variant="minimal \| neon \| glass \| brutalist \| fluent \| material"` on every component |
 | **Page & app-wide** (`/components/page`) | `pageTransition()` (fade · slide · circle · blinds · pixel · zoom; SPA + MPA) · `themeTransition()` · `<usa-cursor>` · `smoothScroll()` · `<usa-fullpage>` · `<usa-loading-bar>` · `<usa-back-to-top>` · `<usa-ambient>` (particles · snow · stars · noise · gradient) · `<usa-splash>` · `<usa-auto-skeleton>` · `<usa-motion-switch>` / `setMotionIntensity()` |
 | **Timeline & choreography** (`/components/timeline`) | `timeline()` (chain · overlap · labels · seek · reverse · scrub) · `<usa-timeline>` (`data-tl` steps) |
@@ -65,6 +65,7 @@ defineComponents(); // or per category: import { defineTextComponents } from 'us
 | **Layout animation** (`/components/layout`) | `<usa-auto-animate>` / `autoAnimate()` (list & grid reflow) · `<usa-masonry>` · `sharedTransition()` (shared elements) |
 | **Effect packs** (`/components/packs`) | `<usa-pack>` (`name="ecommerce \| portfolio \| dashboard \| game \| landing"`) · `applyPack()` · `flyToCart()` · `countUp()` |
 | **Effects — plugin API** (`/components/fx`) | `<usa-fx>` (`effect` · `trigger` click / hover / enter / load / loop) · `registerEffect()` · `playEffect()` · `bindEffect()` · built-ins: every timeline entrance, pulse · pop · jelly · wiggle · heartbeat · bounce · flash · tada · shake, burst · confetti · ripple |
+| **Effect packs** (`/components/effects`) | `registerAllEffects()` · card & click 2.0 · physics · page-wide · `<usa-story>` scroll stories · generative backgrounds · sound-reactive (`<usa-audio>`) · cursor trails & gestures (`<usa-gesture-fx>`) · theme packs (`<usa-theme>`) · 23 micro-interactions · `<usa-player>` JSON animations |
 
 Whole bundle ≈ 22 kB gzip (JS + CSS); one category 3.5–6.4 kB; a single component ≈ 2 kB. The scroll-animation core below is unaffected.
 

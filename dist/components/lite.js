@@ -5435,7 +5435,7 @@ const done = (a, el) => {
         el.remove();
 };
 /** Particles radiating from client point (x, y). Returns the number spawned. */
-function burst$1(x, y, options = {}) {
+function burst(x, y, options = {}) {
     if (typeof document === 'undefined' || prefersReducedMotion())
         return 0;
     const { count = 12, colors = PALETTE, distance = 48, size = 6, shape = 'circle', duration = 600 } = options;
@@ -5454,7 +5454,7 @@ function burst$1(x, y, options = {}) {
     return count;
 }
 /** A confetti cannon (paper pieces with gravity, drift and spin). */
-function confetti$1(options = {}) {
+function confetti(options = {}) {
     if (typeof document === 'undefined' || prefersReducedMotion())
         return 0;
     const W = window.innerWidth || 800;
@@ -5485,7 +5485,7 @@ function confetti$1(options = {}) {
     return count;
 }
 /** Horizontal error shake (`intensity` px, default 8). Reduced motion: a red outline flash. */
-function shake$1(el, intensity = 8, duration = 480) {
+function shake(el, intensity = 8, duration = 480) {
     const t = el;
     if (typeof t.animate !== 'function')
         return null;
@@ -5562,15 +5562,15 @@ function defineClick(tag = 'usa-click') {
             const fx = this.effects;
             const colors = this.str('color') ? this.str('color').split(',') : undefined;
             if (fx.includes('burst'))
-                burst$1(x, y, { count: this.num('count', 12), shape: this.str('shape', 'circle'), colors });
+                burst(x, y, { count: this.num('count', 12), shape: this.str('shape', 'circle'), colors });
             if (fx.includes('confetti'))
-                confetti$1({ x, y, count: this.num('count', 60), colors, spread: 90, velocity: 0.8 });
+                confetti({ x, y, count: this.num('count', 60), colors, spread: 90, velocity: 0.8 });
             if (this.hasAttribute('haptic'))
                 haptic(this.num('haptic', 10));
             this.emit('click-effect', { x, y, effects: fx });
         }
         shake() {
-            shake$1(this);
+            shake(this);
             if (this.hasAttribute('haptic'))
                 haptic([30, 40, 30]);
         }
@@ -5875,7 +5875,7 @@ function defineButton(tag = 'usa-button') {
                 t.removeAttribute('aria-busy');
             }
             if (s === 'error') {
-                shake$1(t);
+                shake(t);
                 if (this.hasAttribute('haptic'))
                     haptic([30, 40, 30]);
             }
@@ -6081,7 +6081,7 @@ function defineLike(tag = 'usa-like') {
             if (next && heart && !this.reduced) {
                 this.motion(heart, [{ transform: 'scale(0.4)' }, { transform: 'scale(1)' }], springEasing('bouncy'));
                 const r = heart.getBoundingClientRect();
-                burst$1(r.left + r.width / 2, r.top + r.height / 2, { count: 10, distance: 28, size: 5, colors: [getComputedStyle(this).getPropertyValue('--usa-like-color').trim() || '#f43f5e', '#fb923c', '#facc15'] });
+                burst(r.left + r.width / 2, r.top + r.height / 2, { count: 10, distance: 28, size: 5, colors: [getComputedStyle(this).getPropertyValue('--usa-like-color').trim() || '#f43f5e', '#fb923c', '#facc15'] });
             }
             if (this.hasAttribute('haptic'))
                 haptic(this.num('haptic', 12));
@@ -6258,7 +6258,7 @@ function defineDoubleTap(tag = 'usa-double-tap') {
                 a.onfinish = () => icon.remove();
             else
                 icon.remove();
-            burst$1(x, y, { count: 8, distance: 40, size: 5, colors: [this.str('color', '#f43f5e'), '#fb923c', '#facc15'] });
+            burst(x, y, { count: 8, distance: 40, size: 5, colors: [this.str('color', '#f43f5e'), '#fb923c', '#facc15'] });
             if (this.hasAttribute('haptic'))
                 haptic(15);
             this.emit('double-tap', { x: x - r.left, y: y - r.top });
@@ -6347,27 +6347,9 @@ function defineCheckbox(tag = 'usa-checkbox') {
  * `<usa-button>` (button click deformation: squash, wobble, gooey, dent;
  * shape morph; submit → loading → success), `<usa-icon-morph>`,
  * `<usa-like>`, `<usa-hold>`, `<usa-double-tap>`, `<usa-checkbox>`, plus
- * `haptic()` (`burst()`, `confetti()`, `shake()` are deprecated in 5.9 —
- * use the registered effects through `playEffect()`).
+ * `haptic()`. 6.0: `burst()`, `confetti()` and `shake()` were removed — play
+ * the registered effects instead: `playEffect(el, 'burst' | 'confetti' | 'shake')`.
  */
-/**
- * @deprecated 5.9 — removed in 6.0. Use the registered effect:
- * `playEffect(document.body, 'burst', { x, y, ...options })` (`use-scroll-animate/components/fx`).
- */
-function burst(x, y, options = {}) {
-    deprecate('burst()', "burst() is deprecated and removed in 6.0 — use playEffect(el, 'burst', { x, y, …options }) from use-scroll-animate/components/fx (npx usa-codemod-6).");
-    return burst$1(x, y, options);
-}
-/** @deprecated 5.9 — removed in 6.0. Use `playEffect(document.body, 'confetti', options)`. */
-function confetti(options = {}) {
-    deprecate('confetti()', "confetti() is deprecated and removed in 6.0 — use playEffect(el, 'confetti', options) from use-scroll-animate/components/fx (npx usa-codemod-6).");
-    return confetti$1(options);
-}
-/** @deprecated 5.9 — removed in 6.0. Use `playEffect(el, 'shake', { intensity, duration })`. */
-function shake(el, intensity = 8, duration = 480) {
-    deprecate('shake()', "shake() is deprecated and removed in 6.0 — use playEffect(el, 'shake', { intensity, duration }) from use-scroll-animate/components/fx (npx usa-codemod-6).");
-    return shake$1(el, intensity, duration);
-}
 /** Register every component of this category under its default tag. */
 function defineClickComponents() {
     defineClick();
@@ -7408,7 +7390,7 @@ function defineUiComponents() {
 
 var css$e = "";
 
-const CURSOR_MODES = ['dot', 'trail', 'magnetic', 'glow'];
+const CURSOR_MODES = ['dot', 'magnetic', 'glow'];
 function defineCursor(tag = 'usa-cursor') {
     return defineElement(tag, (Base) => class UsaCursor extends Base {
         constructor() {
@@ -7429,10 +7411,9 @@ function defineCursor(tag = 'usa-cursor') {
                 this.replaceChildren();
                 return;
             }
-            const mode = this.str('mode', 'dot');
-            if (mode === 'trail')
-                deprecate('usa-cursor-trail', '<usa-cursor mode="trail"> is deprecated and removed in 6.0 — use the registered comet-trail effect: <usa-fx effect="comet-trail" trigger="load" self> around the page content (see docs/upgrading-6.md).');
-            const n = mode === 'trail' ? 8 : 1;
+            const m = this.str('mode', 'dot');
+            const mode = CURSOR_MODES.includes(m) ? m : 'dot';
+            const n = 1;
             this.innerHTML = Array.from({ length: n }, (_, i) => `<span class="usa-cursor-${mode === 'glow' ? 'glow' : 'ring'}" style="--i:${i}"></span>`).join('') + (mode === 'glow' ? '' : '<span class="usa-cursor-dot"></span>');
             if (this.str('color'))
                 this.style.setProperty('--usa-cursor-color', this.str('color'));
@@ -7452,7 +7433,7 @@ function defineCursor(tag = 'usa-cursor') {
                 let tx = mx;
                 let ty = my;
                 pts.forEach((p, i) => {
-                    const k = mode === 'trail' ? 0.35 - i * 0.03 : mode === 'glow' ? 0.12 : 0.22;
+                    const k = mode === 'glow' ? 0.12 : 0.22;
                     const goalX = snap && i === 0 ? snap.left + snap.width / 2 : tx;
                     const goalY = snap && i === 0 ? snap.top + snap.height / 2 : ty;
                     p.x += (goalX - p.x) * k;
@@ -10307,7 +10288,7 @@ const click = [
                 return;
             const r = el.getBoundingClientRect();
             const e = ctx.event;
-            burst$1(o.x ?? e?.clientX ?? r.left + r.width / 2, o.y ?? e?.clientY ?? r.top + r.height / 2, o);
+            burst(o.x ?? e?.clientX ?? r.left + r.width / 2, o.y ?? e?.clientY ?? r.top + r.height / 2, o);
         },
     },
     {
@@ -10319,7 +10300,7 @@ const click = [
             if (ctx.reduced)
                 return;
             const r = el.getBoundingClientRect();
-            confetti$1({ x: r.left + r.width / 2, y: r.top + r.height / 2, ...o });
+            confetti({ x: r.left + r.width / 2, y: r.top + r.height / 2, ...o });
         },
     },
     {
@@ -10327,7 +10308,7 @@ const click = [
         kind: 'attention',
         description: 'Horizontal "no" shake (errors, wrong password).',
         defaults: { intensity: 8, duration: 480 },
-        run: (el, o, ctx) => (ctx.reduced ? ctx.animate(el, [{ opacity: 1 }, { opacity: 0.5 }, { opacity: 1 }], { duration: 300 }) : shake$1(el, o.intensity, o.duration)),
+        run: (el, o, ctx) => (ctx.reduced ? ctx.animate(el, [{ opacity: 1 }, { opacity: 0.5 }, { opacity: 1 }], { duration: 300 }) : shake(el, o.intensity, o.duration)),
     },
     {
         name: 'ripple',
@@ -10842,5 +10823,5 @@ function defineComponents(categories) {
 const STYLE_BASE = new URL('../', import.meta.url).href;
 onDemandStyles(STYLE_BASE);
 
-export { ALL_TAGS, AMBIENT_EFFECTS, ANIM_ICONS, BRIDGE_PROTOCOL_VERSION, BUILTIN_EFFECTS, BUTTON_DEFORMS, CARD_EFFECTS, CLICK_EFFECTS, COMPONENT_CATEGORIES, CURSOR_MODES, EFFECT_KINDS, EFFECT_TRIGGERS, GL_FALLBACKS, JOINING_SCRIPT, LIVE_REGION_IDS, MASK_SHAPES, MORPH_ICONS, MOTION_SCALE, MOTION_SENSITIVITY, MOTION_SENSITIVITY_LEVELS, MOTION_TOKENS, PACKS, PACK_PRIMITIVES, PAGE_EFFECTS, PARTICLE_PRESETS, POST_EFFECTS, REVEAL_EFFECTS, SENSITIVITY_CSS, SHADERS, SPINNER_VARIANTS, SPRING_EFFECTS, SPRING_PRESETS, STATIC_ALTERNATIVES, STYLE_BASE, TIMELINE_PRESETS, VARIANTS, activeAnimations, adaptKeyframes, adoptVariants, animateWithMotion, animationBudget, announce, applyMotionTokens, applyNativeSettings, applyPack, auditMotionA11y, autoAnimate, autoDegrade, baselineReport, bindEffect, burst, categoryOf, confetti, configureComponents, connectNativeShell, countUp, createSpring, defineAccordion, defineAcrylic, defineAmbient, defineAnimIcon, defineAurora, defineAutoAnimate, defineAutoSkeleton, defineAvatarStack, defineBackToTop, defineBackgroundComponents, defineBadge, defineBlobs, defineBottomSheet, defineButton, defineCard, defineCardComponents, defineCardStack, defineCarousel3d, defineCheck, defineCheckbox, defineClick, defineClickComponents, defineComponents, defineCounter, defineCube, defineCursor, defineDepth, defineDepthComponents, defineDialog, defineDistort, defineDotNetwork, defineDoubleTap, defineDraggable, defineDraw, defineDrawer, defineFab, defineFeedbackComponents, defineFullpage, defineFx, defineFxComponents, defineGestureComponents, defineGlitch, defineGradientText, defineGrain, defineGridGlow, defineHandwriting, defineHold, defineIconMorph, defineInteractionComponents, defineLayoutComponents, defineLike, defineLiquid, defineLoadingBar, defineMagnetic, defineMarquee, defineMaskReveal, defineMasonry, defineMorph, defineMotionSwitch, defineNavbar, defineOverscroll, definePack, definePacksComponents, definePageComponents, defineParticles, definePhysicsComponents, definePinchZoom, definePopover, definePostFx, definePress, defineProgress, definePullRefresh, defineRating, defineReveal, defineRevealComponents, defineRipple, defineScramble, defineScrollHighlight, defineScrollProgress, defineScrolly, defineShader, defineShimmerText, defineSkeleton, defineSlider, defineSpinner, defineSplash, defineSplitText, defineSpotlight, defineSpring, defineStagger, defineStickyStack, defineSvgComponents, defineSwipeable, defineTabs, defineTextComponents, defineTextRotate, defineTilt, defineTimeline, defineTimelineComponents, defineToaster, defineToggle, defineTooltip, defineTransitionComponents, defineTypewriter, defineUiComponents, defineViewSwitch, defineWaterRipple, defineWaveText, defineWebglComponents, detectNativeHost, deviceTilt, drawLines, easeOutExpo, enableMpaTransitions, flip, flipFrames, fluentPreset, flyToCart, fragmentSource, gesture, getEffect, getMotionIntensity, getMotionLevel, getMotionSensitivity, getMotionTokens, glFallbackCss, glGovernor, glQuad, graphemes, haptic, hasEffect, importMotionTokens, interpolatePath, linearEasing, listEffects, liveRegion, loadCategoryStyles, loadedStyles, loadingBar, masonryLayout, mergeMotionTokens, morphPath, morphTo, motionAllowed, motionScale, motionToken, motionTokensToCss, motionTokensToJSON, motionTokensToVars, motionVar, onDemandStyles, onFrame, orientationToTilt, pageTransition, parseDuration, parseEasing, parseNativeSettings, pathsCompatible, pinchScale, playEffect, postFxShader, postToNative, prefersReducedMotion, projectInertia, readScrollProgress, registerBuiltinEffects, registerEffect, registerEffects, requestOrientationPermission, resolveDurationToken, resolveEasingToken, resolvePosition, resolveSpring, restoreMotionIntensity, restoreMotionSensitivity, revealKeyframes, rubberBand, schedulerStats, scrambleFrame, scrollToTarget, setAnimationBudget, setMotionIntensity, setMotionLevel, setMotionSensitivity, setVariant, shake, sharedTransition, smoothScroll, snapTo, splitOrder, splitText, splitTimeline, words as splitWords, spring, springEasing, springEffectKeyframes, springSamples, staticAlternative, stepSpring, supportsLinearEasing, supportsNativeScrub, supportsOrientation, supportsViewTransitions, supportsWebGL, swipeDirection, themeTransition, timeline, toast, viewTransition, warnBaseline, watchPowerSaver, withoutDeprecations };
+export { ALL_TAGS, AMBIENT_EFFECTS, ANIM_ICONS, BRIDGE_PROTOCOL_VERSION, BUILTIN_EFFECTS, BUTTON_DEFORMS, CARD_EFFECTS, CLICK_EFFECTS, COMPONENT_CATEGORIES, CURSOR_MODES, EFFECT_KINDS, EFFECT_TRIGGERS, GL_FALLBACKS, JOINING_SCRIPT, LIVE_REGION_IDS, MASK_SHAPES, MORPH_ICONS, MOTION_SCALE, MOTION_SENSITIVITY, MOTION_SENSITIVITY_LEVELS, MOTION_TOKENS, PACKS, PACK_PRIMITIVES, PAGE_EFFECTS, PARTICLE_PRESETS, POST_EFFECTS, REVEAL_EFFECTS, SENSITIVITY_CSS, SHADERS, SPINNER_VARIANTS, SPRING_EFFECTS, SPRING_PRESETS, STATIC_ALTERNATIVES, STYLE_BASE, TIMELINE_PRESETS, VARIANTS, activeAnimations, adaptKeyframes, adoptVariants, animateWithMotion, animationBudget, announce, applyMotionTokens, applyNativeSettings, applyPack, auditMotionA11y, autoAnimate, autoDegrade, baselineReport, bindEffect, categoryOf, configureComponents, connectNativeShell, countUp, createSpring, defineAccordion, defineAcrylic, defineAmbient, defineAnimIcon, defineAurora, defineAutoAnimate, defineAutoSkeleton, defineAvatarStack, defineBackToTop, defineBackgroundComponents, defineBadge, defineBlobs, defineBottomSheet, defineButton, defineCard, defineCardComponents, defineCardStack, defineCarousel3d, defineCheck, defineCheckbox, defineClick, defineClickComponents, defineComponents, defineCounter, defineCube, defineCursor, defineDepth, defineDepthComponents, defineDialog, defineDistort, defineDotNetwork, defineDoubleTap, defineDraggable, defineDraw, defineDrawer, defineFab, defineFeedbackComponents, defineFullpage, defineFx, defineFxComponents, defineGestureComponents, defineGlitch, defineGradientText, defineGrain, defineGridGlow, defineHandwriting, defineHold, defineIconMorph, defineInteractionComponents, defineLayoutComponents, defineLike, defineLiquid, defineLoadingBar, defineMagnetic, defineMarquee, defineMaskReveal, defineMasonry, defineMorph, defineMotionSwitch, defineNavbar, defineOverscroll, definePack, definePacksComponents, definePageComponents, defineParticles, definePhysicsComponents, definePinchZoom, definePopover, definePostFx, definePress, defineProgress, definePullRefresh, defineRating, defineReveal, defineRevealComponents, defineRipple, defineScramble, defineScrollHighlight, defineScrollProgress, defineScrolly, defineShader, defineShimmerText, defineSkeleton, defineSlider, defineSpinner, defineSplash, defineSplitText, defineSpotlight, defineSpring, defineStagger, defineStickyStack, defineSvgComponents, defineSwipeable, defineTabs, defineTextComponents, defineTextRotate, defineTilt, defineTimeline, defineTimelineComponents, defineToaster, defineToggle, defineTooltip, defineTransitionComponents, defineTypewriter, defineUiComponents, defineViewSwitch, defineWaterRipple, defineWaveText, defineWebglComponents, detectNativeHost, deviceTilt, drawLines, easeOutExpo, enableMpaTransitions, flip, flipFrames, fluentPreset, flyToCart, fragmentSource, gesture, getEffect, getMotionIntensity, getMotionLevel, getMotionSensitivity, getMotionTokens, glFallbackCss, glGovernor, glQuad, graphemes, haptic, hasEffect, importMotionTokens, interpolatePath, linearEasing, listEffects, liveRegion, loadCategoryStyles, loadedStyles, loadingBar, masonryLayout, mergeMotionTokens, morphPath, morphTo, motionAllowed, motionScale, motionToken, motionTokensToCss, motionTokensToJSON, motionTokensToVars, motionVar, onDemandStyles, onFrame, orientationToTilt, pageTransition, parseDuration, parseEasing, parseNativeSettings, pathsCompatible, pinchScale, playEffect, postFxShader, postToNative, prefersReducedMotion, projectInertia, readScrollProgress, registerBuiltinEffects, registerEffect, registerEffects, requestOrientationPermission, resolveDurationToken, resolveEasingToken, resolvePosition, resolveSpring, restoreMotionIntensity, restoreMotionSensitivity, revealKeyframes, rubberBand, schedulerStats, scrambleFrame, scrollToTarget, setAnimationBudget, setMotionIntensity, setMotionLevel, setMotionSensitivity, setVariant, sharedTransition, smoothScroll, snapTo, splitOrder, splitText, splitTimeline, words as splitWords, spring, springEasing, springEffectKeyframes, springSamples, staticAlternative, stepSpring, supportsLinearEasing, supportsNativeScrub, supportsOrientation, supportsViewTransitions, supportsWebGL, swipeDirection, themeTransition, timeline, toast, viewTransition, warnBaseline, watchPowerSaver, withoutDeprecations };
 //# sourceMappingURL=lite.js.map

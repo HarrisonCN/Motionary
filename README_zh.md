@@ -36,7 +36,7 @@ defineComponents(); // 或按分类：import { defineTextComponents } from 'use-
 
 ```html
 <!-- 或免构建直接使用 -->
-<script src="https://unpkg.com/use-scroll-animate@5/dist/components.umd.js"></script>
+<script src="https://unpkg.com/use-scroll-animate@6/dist/components.umd.js"></script>
 <usa-typewriter words="你好，Windows。|你好，Web。"></usa-typewriter>
 <usa-spinner kind="fluent"></usa-spinner>
 ```
@@ -62,6 +62,7 @@ defineComponents(); // 或按分类：import { defineTextComponents } from 'use-
 | **布局动画** (`/components/layout`) | `<usa-auto-animate>` / `autoAnimate()`（列表与网格重排）· `<usa-masonry>`（瀑布流）· `sharedTransition()`（共享元素） |
 | **效果包** (`/components/packs`) | `<usa-pack>` (`name="ecommerce \| portfolio \| dashboard \| game \| landing"`) · `applyPack()` · `flyToCart()` · `countUp()` |
 | **特效插件 API** (`/components/fx`) | `<usa-fx>`（`effect` · `trigger`）· `registerEffect()` · `playEffect()` · `bindEffect()` · 内置：全部时间线入场、pulse · pop · jelly · wiggle · heartbeat · bounce · flash · tada · shake、burst · confetti · ripple |
+| **特效包** (`/components/effects`) | `registerAllEffects()` · 卡片与点击 2.0 · 物理 · 全页特效 · `<usa-story>` 滚动叙事 · 生成式背景 · 声音响应（`<usa-audio>`）· 光标拖尾与手势（`<usa-gesture-fx>`）· 主题包（`<usa-theme>`）· 23 个微交互 · `<usa-player>` JSON 动画 |
 
 完整包约 22 kB gzip（JS + CSS）；单个分类 3.5–6.4 kB；单个组件约 2 kB。下方的滚动动画核心不受影响。
 

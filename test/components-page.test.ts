@@ -166,9 +166,10 @@ describe('page elements', () => {
   });
 
   it('cursor renders for fine pointers, not under reduced motion', () => {
-    const el = mount<any>('<usa-cursor mode="trail"></usa-cursor>');
+    const el = mount<any>('<usa-cursor mode="trail"></usa-cursor>'); // 6.0: trail removed → renders as dot
     expect(el.getAttribute('aria-hidden')).toBe('true');
-    expect(el.querySelectorAll('.usa-cursor-ring')).toHaveLength(8);
+    expect(el.querySelectorAll('.usa-cursor-ring')).toHaveLength(1);
+    expect(el.querySelector('.usa-cursor-dot')).not.toBeNull();
     document.dispatchEvent(new MouseEvent('pointermove', { clientX: 5, clientY: 5 }));
     expect(el.active).toBe(true);
     installComponentMocks({ reducedMotion: true });

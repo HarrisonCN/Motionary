@@ -6,11 +6,11 @@ export const category = K('page', '⬚', 'Page & app-wide', '页面与全局效�
 
 export const components = [
   C('usa-cursor', 'page', 'Custom cursor', '自定义光标',
-    'A spring-lagged ring, a comet trail, a magnetic ring that wraps buttons and links, or a soft glow following the pointer. Mouse / pen only.',
-    '弹簧跟随的圆环、彗星拖尾、吸附并包裹按钮与链接的磁性光标，或跟随指针的柔光。仅鼠标 / 手写笔。',
-    ['cursor', 'magnetic', 'trail', 'glow'],
+    'A spring-lagged ring, a magnetic ring that wraps buttons and links, or a soft glow following the pointer. Mouse / pen only. (6.0: for a comet tail use the comet-trail effect.)',
+    '弹簧跟随的圆环、吸附并包裹按钮与链接的磁性光标，或跟随指针的柔光。仅鼠标 / 手写笔。（6.0：彗星拖尾请使用 comet-trail 效果。）',
+    ['cursor', 'magnetic', 'ring', 'glow'],
     '<usa-cursor mode="magnetic" hide-native></usa-cursor>',
-    '<div class="demo-row"><button class="demo-btn" type="button" data-cursor-mode="magnetic">Magnetic</button><button class="demo-btn demo-btn-alt" type="button" data-cursor-mode="trail">Trail</button><button class="demo-btn demo-btn-alt" type="button" data-cursor-mode="glow">Glow</button><button class="demo-btn demo-btn-alt" type="button" data-cursor-mode="off">Off</button></div><usa-cursor hidden></usa-cursor>'),
+    '<div class="demo-row"><button class="demo-btn" type="button" data-cursor-mode="magnetic">Magnetic</button><button class="demo-btn demo-btn-alt" type="button" data-cursor-mode="dot">Ring</button><button class="demo-btn demo-btn-alt" type="button" data-cursor-mode="glow">Glow</button><button class="demo-btn demo-btn-alt" type="button" data-cursor-mode="off">Off</button></div><usa-cursor hidden></usa-cursor>'),
   C('usa-fullpage', 'page', 'Full-page sections', '整屏滚动',
     'Full-screen sections that snap one at a time, with keyboard paging, dot navigation and a usa:section event.',
     '一次吸附一屏的全屏分区，支持键盘翻页、圆点导航与 usa:section 事件。',

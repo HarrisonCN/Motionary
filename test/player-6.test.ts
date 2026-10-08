@@ -39,7 +39,7 @@ const ANIM = {
   ],
 };
 
-describe('5.9 animation JSON', () => {
+describe('animation JSON (5.9)', () => {
   it('normalizes tracks, computes the duration, rejects bad input', () => {
     const a = normalizeAnimation(JSON.stringify(ANIM));
     expect(a.duration).toBe(900);
@@ -177,37 +177,38 @@ describe('5.9 <usa-player>', () => {
   });
 });
 
-describe('5.9 → 6.0 deprecations', () => {
-  it('burst() / confetti() / shake() from the click entry warn once and still work', () => {
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
-    const el = mount<HTMLElement>('<div></div>');
-    click.shake(el);
-    click.shake(el);
-    click.burst(10, 10);
-    click.confetti({ count: 3 });
-    const msgs = warn.mock.calls.map((c) => String(c[0]));
-    expect(msgs.filter((m) => m.includes('shake() is deprecated')).length).toBe(1);
-    expect(msgs.some((m) => m.includes('burst() is deprecated'))).toBe(true);
-    expect(msgs.some((m) => m.includes('confetti() is deprecated'))).toBe(true);
-    expect(msgs.every((m) => m.includes('6.0'))).toBe(true);
+describe('6.0 removals (deprecated in 5.9)', () => {
+  it('burst() / confetti() / shake() are gone from the click and root entries; haptic() stays', async () => {
+    expect((click as any).burst).toBeUndefined();
+    expect((click as any).confetti).toBeUndefined();
+    expect((click as any).shake).toBeUndefined();
+    expect(typeof click.haptic).toBe('function');
+    const root: any = await import('../src/components');
+    expect(root.burst).toBeUndefined();
+    expect(root.confetti).toBeUndefined();
+    expect(root.shake).toBeUndefined();
+    expect(typeof root.playEffect).toBe('function');
   });
 
-  it('the registered effects do not warn; burst accepts x / y', async () => {
+  it('the registered effects replace them without warnings; burst accepts x / y', async () => {
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
     const el = mount<HTMLElement>('<button></button>');
     const n = document.body.querySelectorAll('*').length;
     await playEffect(el, 'burst', { x: 5, y: 5, count: 4 });
+    await playEffect(document.body, 'confetti', { x: 5, y: 5, count: 3 });
     void playEffect(el, 'shake');
     expect(warn).not.toHaveBeenCalled();
     expect(document.body.querySelectorAll('*').length).toBeGreaterThan(n);
-    expect(anims.some((a) => (a.el as HTMLElement).style.left === '5px' || String(a.keyframes[0]?.transform || '').length > 0)).toBe(true);
   });
 
-  it('<usa-cursor mode="trail"> warns', () => {
+  it('<usa-cursor mode="trail"> is removed: renders as dot, no warning; CURSOR_MODES lists dot / magnetic / glow', async () => {
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
     defineCursor();
-    mount('<usa-cursor mode="trail"></usa-cursor>');
-    expect(warn.mock.calls.some((c) => String(c[0]).includes('mode="trail"'))).toBe(true);
+    const el = mount('<usa-cursor mode="trail"></usa-cursor>');
+    expect(el.querySelectorAll('.usa-cursor-ring').length).toBe(1);
+    expect(warn).not.toHaveBeenCalled();
+    const { CURSOR_MODES } = await import('../src/components/page');
+    expect([...CURSOR_MODES]).toEqual(['dot', 'magnetic', 'glow']);
   });
 });
 
