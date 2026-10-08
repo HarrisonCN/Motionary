@@ -308,5 +308,10 @@
     "name": "import 'use-scroll-animate/components/perf'",
     "import": "export * from 'pkg/components/perf';",
     "limit": 2304
+  },
+  {
+    "name": "import 'use-scroll-animate/components/bridge'",
+    "import": "export * from 'pkg/components/bridge';",
+    "limit": 1536
   }
 ]

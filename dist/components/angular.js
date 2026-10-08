@@ -27,6 +27,7 @@ import './packs.js';
 import './a11y.js';
 import '../chunks/index-tags-43Xtd01A.js';
 import './perf.js';
+import './bridge.js';
 
 /**
  * use-scroll-animate/components/angular — Angular integration (v3.8).

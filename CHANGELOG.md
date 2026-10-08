@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.7.0] - 2026-10-08
+
+### Added
+- **Native shell bridges** — new entry `use-scroll-animate/components/bridge` (also on `UsaComponents` in the UMD build): `connectNativeShell()` syncs the host app's **reduce motion**, **light / dark / high-contrast theme** and **accent color** (and optional motion-sensitivity level) into every `<usa-*>` component. JSON protocol `usa:ready` / `usa:request-settings` / `usa:settings` over WebView2 web messages, `window.postMessage` or `window.usaNative.apply()`; incoming values validated. Helpers `detectNativeHost()`, `postToNative()`, `parseNativeSettings()`, `applyNativeSettings()`; event `usa:native-settings`.
+- **Official samples** in [examples/native](./examples/native/): **WinUI 3** (`UISettings.AnimationsEnabled`, accent, high contrast → `PostWebMessageAsJson`), **.NET MAUI** (Android animator scale, iOS Reduce Motion, Windows `UISettings`, `RequestedThemeChanged` → `EvaluateJavaScriptAsync`), **Flutter** (`MediaQuery.disableAnimations`, brightness, high contrast via a `UsaBridge` JavaScriptChannel), sharing one web page.
+- Showcase: **connectNativeShell()** card (Page & app-wide) — simulate host messages on a demo tile.
+- Docs: "Native shell bridge" in [docs/hybrid-apps.md](./docs/hybrid-apps.md).
+
 ## [4.6.0] - 2026-10-08
 
 ### Added

@@ -29,6 +29,7 @@ require('./packs.cjs');
 require('./a11y.cjs');
 require('../chunks/index-tags-BQh_uGqH.cjs');
 require('./perf.cjs');
+require('./bridge.cjs');
 
 /**
  * use-scroll-animate/components/angular — Angular integration (v3.8).

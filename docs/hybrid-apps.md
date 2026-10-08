@@ -119,6 +119,21 @@ document.querySelector('usa-toggle').addEventListener('usa:change', (e) => invok
 
 Tauri uses WebView2 on Windows, WKWebView on macOS / iOS and WebKitGTK on Linux. WebKitGTK may disable WebGL on some drivers: WebGL components then set `data-fallback="webgl"` and show their CSS fallback.
 
+## Native shell bridge (4.7)
+
+`use-scroll-animate/components/bridge` keeps the page in sync with the host app's **system settings** — reduce motion, light / dark / high-contrast theme, accent color — on WinUI 3 / WPF (WebView2), .NET MAUI and Flutter:
+
+```js
+import { connectNativeShell } from 'use-scroll-animate/components/bridge';
+const { host } = connectNativeShell();   // 'webview2' | 'maui' | 'flutter' | 'electron' | 'tauri' | 'browser'
+```
+
+Protocol (JSON): the page sends `{"type":"usa:ready","version":1}` and `{"type":"usa:request-settings"}`; the host answers (and re-sends on every system change) with `{"type":"usa:settings","reducedMotion":true,"theme":"dark","accent":"#0078d4","sensitivity":"gentle"}` — via `PostWebMessageAsJson` (WebView2), `window.postMessage`, or by running `window.usaNative.apply({...})`. Incoming values are validated (unknown fields and non-color accents are dropped); settings only affect presentation.
+
+Complete samples: [examples/native](../examples/native/) — `winui3/MainWindow.xaml.cs` (`UISettings.AnimationsEnabled`, accent, high contrast), `maui/MainPage.xaml.cs` (Android animator scale, iOS Reduce Motion, Windows `UISettings`, `RequestedThemeChanged`), `flutter/lib/main.dart` (`MediaQuery.disableAnimations`, brightness, high contrast via a `UsaBridge` JavaScriptChannel).
+
+Helpers: `detectNativeHost()`, `postToNative(msg)`, `parseNativeSettings(data)`, `applyNativeSettings(settings)`; event `usa:native-settings` on `document`.
+
 ## Framework wrappers
 
 | Framework | Entry | What it gives you |
