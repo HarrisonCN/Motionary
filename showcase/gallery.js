@@ -55,11 +55,12 @@ function h(tag, attrs = {}, children = []) {
 
 async function loadLibrary() {
   try {
-    lib = await import(LOCAL + 'components.js');
+    lib = { ...(await import(LOCAL + 'components.js')), ...(await import(LOCAL + 'components/effects.js')) };
   } catch {
-    lib = await import(CDN + 'components.js');
+    lib = { ...(await import(CDN + 'components.js')), ...(await import(CDN + 'components/effects.js')) };
   }
   lib.defineComponents();
+  lib.registerAllEffects(); // 5.x effect packs (use-scroll-animate/components/effects)
 }
 
 /* ------------------------------------------------------------------ */

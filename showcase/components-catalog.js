@@ -354,11 +354,14 @@ export function componentSnippets(item) {
     else if (v !== '') markup = markup.replace(new RegExp(`<${item.tag}\\b`), `<${item.tag} ${k}="${v}"`);
   }
   const html = stripScripts(markup);
+  // 5.1: effect-pack cards also register the packs (use-scroll-animate/components/effects)
+  const pre = item.pack ? `import { registerAllEffects } from 'use-scroll-animate/components/effects';\n` : '';
+  const preCall = item.pack ? 'registerAllEffects();\n' : '';
   return {
-    html: `<!-- registers every <usa-*> element -->\n<script src="${cdn}"></script>\n\n${markup}`,
-    esm: `import { ${item.define} } from '${sub}';\n\n${item.define}(); // registers <${item.tag}>\n\n/* then use it in your HTML:\n${html}\n*/`,
-    react: `import { ${item.define} } from '${sub}';\n\n${item.define}();\n\nexport function Demo() {\n  return (\n    <>\n${indent(toJsx(markup), 6)}\n    </>\n  );\n}`,
-    vue: `<!-- vite.config: vue({ template: { compilerOptions: { isCustomElement: (t) => t.startsWith('usa-') } } }) -->\n<script setup>\nimport { ${item.define} } from '${sub}';\n${item.define}();\n</script>\n\n<template>\n${indent(html, 2)}\n</template>`,
+    html: `<!-- registers every <usa-*> element and effect -->\n<script src="${cdn}"></script>\n\n${markup}`,
+    esm: `${pre}import { ${item.define} } from '${sub}';\n\n${preCall}${item.define}(); // registers <${item.tag}>\n\n/* then use it in your HTML:\n${html}\n*/`,
+    react: `${pre}import { ${item.define} } from '${sub}';\n\n${preCall}${item.define}();\n\nexport function Demo() {\n  return (\n    <>\n${indent(toJsx(markup), 6)}\n    </>\n  );\n}`,
+    vue: `<!-- vite.config: vue({ template: { compilerOptions: { isCustomElement: (t) => t.startsWith('usa-') } } }) -->\n<script setup>\n${pre}import { ${item.define} } from '${sub}';\n${preCall}${item.define}();\n</script>\n\n<template>\n${indent(html, 2)}\n</template>`,
     desktop: desktopSnippet(item, sub),
   };
 }

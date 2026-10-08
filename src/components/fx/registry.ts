@@ -109,17 +109,21 @@ export function bindEffect(el: HTMLElement, name: string, options: Record<string
   const def = registry.get(name);
   if (!def) throw new Error(`[use-scroll-animate] unknown effect "${name}"`);
   const offs: Cleanup[] = [];
+  let current: Cleanup | null = null;
   const fire = (e?: Event) => {
-    if (trigger === 'loop' || def.kind === 'loop' || def.kind === 'background' || def.kind === 'cursor') {
-      const ctx = context(e);
-      if (ctx.reduced && (def.reduced ?? 'skip') === 'skip') return;
-      const out = def.run(el, { ...(def.defaults || {}), ...opts }, ctx);
-      if (typeof out === 'function') offs.push(out as Cleanup);
-      offs.push(...ctx.cleanups);
-      return;
-    }
-    void playEffect(el, name, opts, e).catch(() => undefined);
+    const ctx = context(e);
+    if (ctx.reduced && (def.reduced ?? (SKIP_BY_DEFAULT.includes(def.kind) ? 'skip' : 'run')) === 'skip') return;
+    // A persistent effect (returns a cleanup) replaces its previous run instead of stacking.
+    current?.();
+    current = null;
+    const out = def.run(el, { ...(def.defaults || {}), ...opts }, ctx);
+    const stops = [...ctx.cleanups, ...(typeof out === 'function' ? [out as Cleanup] : [])];
+    if (stops.length) current = () => stops.splice(0).forEach((f) => f());
   };
+  offs.push(() => {
+    current?.();
+    current = null;
+  });
   const on = (type: string, opt?: AddEventListenerOptions) => {
     el.addEventListener(type, fire, opt);
     offs.push(() => el.removeEventListener(type, fire, opt));
