@@ -490,6 +490,32 @@ declare const SOCIAL_FX: EffectDefinition[];
 declare function registerSocialPack(): void;
 
 /**
+ * 7.5 — Gamification motion (`motionary/fx/game`, also
+ * `motionary/components/fx-game`):
+ *
+ * - `achievement-unlock` (attention) — the element slides in, a light sweep
+ *   crosses it and its icon (`[data-icon]` or first child) pops.
+ * - `level-up` (attention) — a scale-up with a ring shockwave.
+ * - `chest-open` (click) — the lid (`[data-lid]` or first child) flips open
+ *   and sparks fly out.
+ * - `coin-burst` (click) — coins (`coin`, default 🪙) arc up and fall.
+ * - `xp-gain` (enter) — a “+50 XP” label (`text` or `data-xp`) floats up and
+ *   fades.
+ *
+ * Reduced motion: unlock / level-up fade, chest-open sets the lid open,
+ * coin-burst and xp-gain do nothing.
+ */
+
+/** Ballistic keyframe points for a coin thrown at `deg` with `power` (7.5). */
+declare function throwPath(deg: number, power?: number, steps?: number, g?: number): {
+    x: number;
+    y: number;
+}[];
+declare const GAME_FX: EffectDefinition[];
+/** Register the 7.5 gamification pack (idempotent). */
+declare function registerGamePack(): void;
+
+/**
  * 5.5 — generative backgrounds on Canvas 2D, registered through
  * `registerEffect()` (kind `background`): `flow-field`, `voronoi`,
  * `mesh-gradient`, `starfield`, `metaballs`, `contours`.
@@ -598,5 +624,5 @@ declare const EFFECT_PACKS: Record<string, EffectDefinition[]>;
 /** Register every 6.x effect pack (idempotent). */
 declare function registerEffectPacks(): void;
 
-export { CHART_FX, DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FOCUS_FX, GLSL_HEAD, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, PHYSICS2_FX, SHOP_FX, SOCIAL_FX, TEXT3_FX, TRANSITIONS2_FX, VerletWorld, WEATHER_FX, WGSL_HEAD, arcPath, crossDocumentTransitions, fanAngles, fieldFallback, glslToWgsl, loadEffectPack, musicSample, packManifest, pageTransition, parseFigure, pointsToPath, register3dPack, registerChartPack, registerEffectPacks, registerFocusPack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerPhysicsPack, registerShopPack, registerSocialPack, registerTextPack, registerTransitionsPack, registerWeatherPack, samplePath, shaderBackground, skyAt, splitChars, supportsWebGL2, supportsWebGPU, syntheticSample, trackPointer, validateManifest, webgpuBackground, wgslModule };
+export { CHART_FX, DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FOCUS_FX, GAME_FX, GLSL_HEAD, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, PHYSICS2_FX, SHOP_FX, SOCIAL_FX, TEXT3_FX, TRANSITIONS2_FX, VerletWorld, WEATHER_FX, WGSL_HEAD, arcPath, crossDocumentTransitions, fanAngles, fieldFallback, glslToWgsl, loadEffectPack, musicSample, packManifest, pageTransition, parseFigure, pointsToPath, register3dPack, registerChartPack, registerEffectPacks, registerFocusPack, registerGamePack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerPhysicsPack, registerShopPack, registerSocialPack, registerTextPack, registerTransitionsPack, registerWeatherPack, samplePath, shaderBackground, skyAt, splitChars, supportsWebGL2, supportsWebGPU, syntheticSample, throwPath, trackPointer, validateManifest, webgpuBackground, wgslModule };
 export type { EffectPackManifest, ShaderSpec };

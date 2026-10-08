@@ -896,6 +896,92 @@ interface UsaPresenceElement extends UsaElement {
 declare const initials: (name: string) => string;
 declare function definePresence(tag?: string): CustomElementConstructor | undefined;
 
+interface LeaderRow {
+    name: string;
+    score: number;
+    avatar?: string;
+}
+/**
+ * `<usa-leaderboard>` (7.5) — a ranked list from `<li data-score>` children or
+ * the `rows` property. When scores change, rows glide to their new rank
+ * (FLIP), climbers flash green with ▲n, fallers red with ▼n, and scores roll.
+ * Top three get 🥇🥈🥉. `limit`, `me` (name to highlight). An ordered list
+ * whose items read "1. Ada, 980 points"; rank changes are announced politely.
+ * `usa:rank` (`{ name, from, to }`). Reduced motion: rows jump, no flash or roll.
+ */
+interface UsaLeaderboardElement extends UsaElement {
+    rows: LeaderRow[];
+    setScore(name: string, score: number): void;
+}
+/** Sort rows by score desc, then name (7.5). */
+declare const rankRows: (rows: LeaderRow[]) => LeaderRow[];
+declare function defineLeaderboard(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-xp-bar>` (7.5) — an experience bar: `level`, `xp`, `per` (XP per
+ * level, default 100). `add(n)` fills the bar smoothly; when it overflows the
+ * bar fills to the end, the level badge pops (“Level up!”) and the bar restarts
+ * with the remainder — several levels in a row if needed. A `progressbar`
+ * labelled "Level 3, 40 of 100 XP"; level-ups are announced politely.
+ * `usa:xp` (`{ level, xp, gained }`), `usa:levelup` (`{ level }`).
+ * Reduced motion: the bar and level change at once, no pop.
+ */
+interface UsaXpBarElement extends UsaElement {
+    level: number;
+    xp: number;
+    add(n: number): void;
+}
+/** Apply `gain` XP to (level, xp) with `per` XP per level (7.5). */
+declare function levelFor(level: number, xp: number, gain: number, per?: number): {
+    level: number;
+    xp: number;
+    ups: number;
+};
+declare function defineXpBar(tag?: string): CustomElementConstructor | undefined;
+
+interface WallBadge {
+    name: string;
+    icon: string;
+    locked: boolean;
+}
+/**
+ * `<usa-badge-wall>` (7.5) — an achievement grid from `<li data-icon
+ * data-locked>` children: locked badges are grey with a 🔒; `unlock(name)`
+ * flips the badge over to its colour side with a shine, and the
+ * “3 / 8 unlocked” counter rolls. Each badge is a labelled list item
+ * ("First win, unlocked"); unlocks are announced politely. `badges`,
+ * `usa:unlock` (`{ name }`). Reduced motion: the badge just changes, no flip.
+ */
+interface UsaBadgeWallElement extends UsaElement {
+    readonly badges: WallBadge[];
+    unlock(name: string): boolean;
+}
+/** Unlocked / total counts for a badge list (7.5). */
+declare const badgeProgress: (b: WallBadge[]) => {
+    unlocked: number;
+    total: number;
+};
+declare function defineBadgeWall(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-prize-wheel>` (7.5) — a lottery wheel from `segments`
+ * ("10%,Free ship,Try again,…"): the Spin button whirls the wheel and it eases
+ * out on the result (random, or `spin(index)`), the pointer ticks and the
+ * winning segment glows. `duration`, `turns`; `result`, `spinning`;
+ * `usa:result` (`{ index, label }`). The button is disabled while spinning and
+ * the result is announced politely. Reduced motion: the wheel jumps to the
+ * result.
+ */
+interface UsaPrizeWheelElement extends UsaElement {
+    readonly segments: string[];
+    readonly result: number;
+    readonly spinning: boolean;
+    spin(index?: number): Promise<number>;
+}
+/** Final wheel rotation (deg) that puts segment `index` of `count` under the top pointer after `turns` full turns (7.5). */
+declare function wheelAngle(index: number, count: number, turns?: number): number;
+declare function definePrizeWheel(tag?: string): CustomElementConstructor | undefined;
+
 /**
  * motionary/components/widgets — the 6.x animated UI widgets, in their own
  * entry so `motionary/components` and `components/lite` keep their size
@@ -965,8 +1051,12 @@ declare global {
         'usa-reactions': UsaReactionsElement;
         'usa-notification-bell': UsaNotificationBellElement;
         'usa-presence': UsaPresenceElement;
+        'usa-leaderboard': UsaLeaderboardElement;
+        'usa-xp-bar': UsaXpBarElement;
+        'usa-badge-wall': UsaBadgeWallElement;
+        'usa-prize-wheel': UsaPrizeWheelElement;
     }
 }
 
-export { CAROUSEL_EFFECTS, EQ_PRESETS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PRESENCE_STATES, PROGRESS_VARIANTS, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SPARK_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, cartTotal, defineAddToCart, defineBarChart, defineCarousel, defineCartDrawer, defineColorPicker, defineCompare, defineCountdown, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineFileDrop, defineGauge, defineKanban, defineKeyframeEditor, defineKpi, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMessageList, defineMilestones, defineModal, defineMusicPlayer, defineNavMorph, defineNotificationBell, defineOdometer, definePagination, definePresence, defineProductGallery, defineProgressRing, definePullCord, defineReactions, defineSegmented, defineSheet, defineSkeletonReveal, defineSparkline, defineStarRating, defineStepper, defineStories, defineSwipeDeck, defineSwitch, defineTabBar, defineTip, defineToastStack, defineVolumeKnob, defineWeatherCard, defineWidgets, hexToHsv, hsvToHex, initials, monthGrid, pageWindow, parseISODate, parseLRC, parseReactions, sparkPoints, splitTime, stackToast, wrapIndex };
-export type { BellNotice, CartItem, ChatMessage, PresenceState, StackToastOptions, UsaAddToCartElement, UsaBarChartElement, UsaCarouselElement, UsaCartDrawerElement, UsaColorPickerElement, UsaCompareElement, UsaCountdownElement, UsaCubeGalleryElement, UsaDatePickerElement, UsaDisclosureElement, UsaDockElement, UsaEqualizerElement, UsaFileDropElement, UsaGaugeElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaKpiElement, UsaLyricsElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMessageListElement, UsaMilestonesElement, UsaModalElement, UsaMusicPlayerElement, UsaNavMorphElement, UsaNotificationBellElement, UsaOdometerElement, UsaPaginationElement, UsaPresenceElement, UsaProductGalleryElement, UsaProgressRingElement, UsaPullCordElement, UsaReactionsElement, UsaSegmentedElement, UsaSheetElement, UsaSkeletonRevealElement, UsaSparklineElement, UsaStarRatingElement, UsaStepperElement, UsaStoriesElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTipElement, UsaToastStackElement, UsaVolumeKnobElement, UsaWeatherCardElement };
+export { CAROUSEL_EFFECTS, EQ_PRESETS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PRESENCE_STATES, PROGRESS_VARIANTS, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SPARK_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, badgeProgress, cartTotal, defineAddToCart, defineBadgeWall, defineBarChart, defineCarousel, defineCartDrawer, defineColorPicker, defineCompare, defineCountdown, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineFileDrop, defineGauge, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMessageList, defineMilestones, defineModal, defineMusicPlayer, defineNavMorph, defineNotificationBell, defineOdometer, definePagination, definePresence, definePrizeWheel, defineProductGallery, defineProgressRing, definePullCord, defineReactions, defineSegmented, defineSheet, defineSkeletonReveal, defineSparkline, defineStarRating, defineStepper, defineStories, defineSwipeDeck, defineSwitch, defineTabBar, defineTip, defineToastStack, defineVolumeKnob, defineWeatherCard, defineWidgets, defineXpBar, hexToHsv, hsvToHex, initials, levelFor, monthGrid, pageWindow, parseISODate, parseLRC, parseReactions, rankRows, sparkPoints, splitTime, stackToast, wheelAngle, wrapIndex };
+export type { BellNotice, CartItem, ChatMessage, LeaderRow, PresenceState, StackToastOptions, UsaAddToCartElement, UsaBadgeWallElement, UsaBarChartElement, UsaCarouselElement, UsaCartDrawerElement, UsaColorPickerElement, UsaCompareElement, UsaCountdownElement, UsaCubeGalleryElement, UsaDatePickerElement, UsaDisclosureElement, UsaDockElement, UsaEqualizerElement, UsaFileDropElement, UsaGaugeElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaKpiElement, UsaLeaderboardElement, UsaLyricsElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMessageListElement, UsaMilestonesElement, UsaModalElement, UsaMusicPlayerElement, UsaNavMorphElement, UsaNotificationBellElement, UsaOdometerElement, UsaPaginationElement, UsaPresenceElement, UsaPrizeWheelElement, UsaProductGalleryElement, UsaProgressRingElement, UsaPullCordElement, UsaReactionsElement, UsaSegmentedElement, UsaSheetElement, UsaSkeletonRevealElement, UsaSparklineElement, UsaStarRatingElement, UsaStepperElement, UsaStoriesElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTipElement, UsaToastStackElement, UsaVolumeKnobElement, UsaWeatherCardElement, UsaXpBarElement, WallBadge };
