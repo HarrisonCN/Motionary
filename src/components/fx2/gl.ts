@@ -8,6 +8,7 @@
  * `el.dataset.usaBackend` tells which one is active: `webgl2` or `canvas`.
  */
 import type { EffectContext } from '../fx/registry';
+import { webgpuBackground, supportsWebGPU } from './webgpu';
 import { canvasBackground, hexRgb, noise2, type GenerativeSpec } from '../effects/generative';
 
 export { hexRgb, noise2 };
@@ -25,6 +26,8 @@ const VERT = `#version 300 es
 in vec2 a;void main(){gl_Position=vec4(a,0.,1.);}`;
 
 export interface ShaderSpec {
+  /** 7.0: hand-written WGSL statements for the WebGPU backend (default: `glslToWgsl(body)`). */
+  wgsl?: string;
   /** GLSL body of `main()`: `uv` (0–1), `p` (aspect-corrected, scaled), `t` (s × speed) are in scope; write `o`. */
   body: string;
   /** Canvas 2D fallback. */
@@ -65,9 +68,28 @@ const rgb = (c: string): [number, number, number] => hexRgb(c).map((v) => v / 25
 
 /**
  * Mount a shader background behind `el` (options: `colors` [3 hex], `speed`,
- * `scale`, `quality`, `backend` = `'auto' | 'webgl2' | 'canvas'`). Returns the cleanup.
+ * `scale`, `quality`, `backend` = `'auto' | 'webgpu' | 'webgl2' | 'canvas'`).
+ * 7.0: `auto` tries WebGPU first, then WebGL2, then Canvas 2D
+ * (`el.dataset.usaBackend` names the one running). Returns the cleanup.
  */
 export function shaderBackground(el: HTMLElement, fx: EffectContext, spec: ShaderSpec, o: any): () => void {
+  const want = o.backend || 'auto';
+  if ((want === 'auto' || want === 'webgpu') && supportsWebGPU()) {
+    let stop: (() => void) | null = null;
+    let dead = false;
+    webgpuBackground(el, fx, spec, o).then((s) => {
+      if (dead) return s?.();
+      stop = s || webglBackground(el, fx, spec, o);
+    });
+    return () => {
+      dead = true;
+      stop?.();
+    };
+  }
+  return webglBackground(el, fx, spec, o);
+}
+
+function webglBackground(el: HTMLElement, fx: EffectContext, spec: ShaderSpec, o: any): () => void {
   const fallback = () => {
     el.dataset.usaBackend = 'canvas';
     const stop = canvasBackground(el, fx, spec.fallback, o);

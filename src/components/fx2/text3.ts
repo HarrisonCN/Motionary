@@ -18,7 +18,6 @@
  * skipped, one-shot effects show the final state without movement.
  */
 import type { EffectContext, EffectDefinition } from '../fx/registry';
-import { deprecate } from '../base';
 import { registerEffects } from '../fx/registry';
 import { srText } from '../base';
 import { fxLayer, spawn, rand, all } from '../effects/shared';
@@ -266,8 +265,3 @@ export function registerTextPack(): void {
 }
 
 
-/** @deprecated since 6.9 — use `registerTextPack()` (removed in 7.0; `npx usa-codemod-7`). */
-export function registerTextEffects3(): void {
-  deprecate('registerTextEffects3', 'registerTextEffects3() is deprecated since 6.9 and removed in 7.0 — use registerTextPack() (npx usa-codemod-7).');
-  registerTextPack();
-}

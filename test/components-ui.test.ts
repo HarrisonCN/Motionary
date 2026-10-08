@@ -194,19 +194,7 @@ describe('<usa-slider>, <usa-rating>', () => {
   });
 });
 
-describe('<usa-tooltip>, <usa-popover>, <usa-badge>, <usa-avatar-stack>', () => {
-  it('tooltip shows on focus with aria-describedby and hides on Esc', () => {
-    const el = mount<any>('<usa-tooltip text="Copy"><button>c</button></usa-tooltip>');
-    const tip = el.querySelector('[role=tooltip]');
-    expect(el.querySelector('button').getAttribute('aria-describedby')).toBe(tip.id);
-    expect(tip.hidden).toBe(true);
-    el.querySelector('button').dispatchEvent(new FocusEvent('focusin', { bubbles: true }));
-    expect(tip.hidden).toBe(false);
-    expect(tip.getAttribute('data-placement')).toBeTruthy();
-    key(document.body, 'Escape');
-    expect(tip.hidden).toBe(true);
-  });
-
+describe('<usa-popover>, <usa-badge>, <usa-avatar-stack>', () => {
   it('popover toggles with aria-expanded and closes on outside click', () => {
     const el = mount<any>('<usa-popover><button>Share</button><div data-popover>menu</div></usa-popover>');
     const [btn, panel] = [el.querySelector('button'), el.querySelector('[data-popover]')];

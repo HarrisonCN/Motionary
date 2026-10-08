@@ -12,7 +12,7 @@
  * app.use(UsaPlugin, { categories: ['click', 'cards'] });
  * ```
  * In templates, listen with `@usa:change="…"` and bind properties with
- * `.prop`: `<usa-toggle :checked.prop="on" @usa:change="on = $event.detail.checked">`.
+ * `.prop`: `<usa-switch :checked.prop="on" @usa:change="on = $event.detail.checked">`.
  */
 import { defineComponents, type ComponentCategory } from '../index';
 

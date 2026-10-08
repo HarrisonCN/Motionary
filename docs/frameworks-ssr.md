@@ -55,7 +55,7 @@ vue({ template: { compilerOptions: { isCustomElement: isUsaElement } } });
 import { UsaPlugin } from 'motionary/components/vue';
 app.use(UsaPlugin);            // or app.use(UsaPlugin, { categories: ['click', 'ui'] })
 ```
-`<usa-toggle :checked.prop="on" @usa:change="on = $event.detail.checked" />`
+`<usa-switch :checked.prop="on" @usa:change="on = $event.detail.checked" />`
 
 ## Svelte / Solid / Angular
 Custom elements work as-is: Svelte (`on:usa:change`), Solid (`on:usa:change`, `prop:checked`), Angular (`schemas: [CUSTOM_ELEMENTS_SCHEMA]`). Call `defineComponents()` or `lazyDefine()` in the client entry.
@@ -72,7 +72,7 @@ Custom elements work as-is: Svelte (`on:usa:change`), Solid (`on:usa:change`, `p
   onMount(() => defineUsa());
   let on = false;
 </script>
-<usa-toggle use:usa={{ props: { checked: on }, on: { change: (e) => (on = e.detail.checked) } }}></usa-toggle>
+<usa-switch use:usa={{ props: { checked: on }, on: { change: (e) => (on = e.detail.checked) } }}></usa-switch>
 ```
 
 ## Solid / SolidStart (v3.8)
@@ -81,7 +81,7 @@ Custom elements work as-is: Svelte (`on:usa:change`), Solid (`on:usa:change`, `p
 import { onMount } from 'solid-js';
 import { defineUsa } from 'motionary/components/solid';
 onMount(() => defineUsa());
-<usa-toggle prop:checked={on()} on:usa:change={(e) => setOn(e.detail.checked)} />;
+<usa-switch prop:checked={on()} on:usa:change={(e) => setOn(e.detail.checked)} />;
 ```
 
 ## Angular (v3.8)
@@ -93,7 +93,7 @@ import { usaInitializer, usaDetail } from 'motionary/components/angular';
 providers: [{ provide: APP_INITIALIZER, multi: true, useFactory: usaInitializer() }];
 // component
 @Component({ standalone: true, schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  template: `<usa-toggle [checked]="on" (usa:change)="on = detail($event).checked"></usa-toggle>` })
+  template: `<usa-switch [checked]="on" (usa:change)="on = detail($event).checked"></usa-switch>` })
 export class Settings { on = false; detail = usaDetail; }
 ```
 

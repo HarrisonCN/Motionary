@@ -29,7 +29,7 @@ Resources/Raw/wwwroot/
 <!-- Resources/Raw/wwwroot/index.html -->
 <script src="components.umd.js"></script>
 <script src="_framework/hybridwebview.js"></script>
-<usa-toggle id="t"></usa-toggle>
+<usa-switch id="t"></usa-switch>
 <script>
   document.getElementById('t').addEventListener('usa:change', (e) =>
     window.HybridWebView.SendRawMessage(JSON.stringify({ checked: e.detail.checked })));
@@ -109,7 +109,7 @@ Imports are SSR-safe (no `window` access at import time), so the same modules ca
 import { defineComponents } from 'motionary/components';
 import { invoke } from '@tauri-apps/api/core';
 defineComponents();
-document.querySelector('usa-toggle').addEventListener('usa:change', (e) => invoke('set_setting', { on: e.detail.checked }));
+document.querySelector('usa-switch').addEventListener('usa:change', (e) => invoke('set_setting', { on: e.detail.checked }));
 ```
 
 ```json

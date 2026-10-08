@@ -161,12 +161,6 @@ export const COMPONENTS = [
     ['spring', 'touch'],
     '<usa-press bounce><button>Press</button></usa-press>',
     '<div class="demo-row"><usa-press><button class="demo-btn" type="button">Press</button></usa-press><usa-press bounce><button class="demo-btn demo-btn-alt" type="button">Bounce</button></usa-press></div>'),
-  C('usa-toggle', 'interaction', 'Toggle switch', '切换开关',
-    'A Windows 11-style switch whose knob stretches while pressed. role="switch", keyboard and form support.',
-    'Windows 11 风格开关，按下时圆钮拉伸。role="switch"，支持键盘与表单。',
-    ['role=switch', 'form'],
-    '<usa-toggle name="wifi" checked>Wi-Fi</usa-toggle>',
-    '<div class="demo-col"><usa-toggle checked>Wi-Fi</usa-toggle><usa-toggle>Bluetooth</usa-toggle><usa-toggle disabled>Airplane mode</usa-toggle></div>'),
 
   // ---------------------------------------------------------------- feedback
   C('usa-spinner', 'feedback', 'Spinners', '加载动画',

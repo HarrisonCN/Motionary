@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.0.0] - 2026-10-08
+
+### ⚠️ Breaking — removed (deprecated in 6.9; `npx usa-codemod-7 --write src`)
+- `registerFx2()` → `registerEffectPacks()`; `FX2_PACKS` → `EFFECT_PACKS`.
+- `registerGpuEffects` / `registerTextEffects3` / `registerLightEffects` / `register3dEffects` / `registerMorphEffects2` / `registerTransitionEffects2` / `registerWeatherEffects` / `registerPhysicsEffects2` → `registerGpuPack` / `registerTextPack` / `registerLightPack` / `register3dPack` / `registerMorphPack` / `registerTransitionsPack` / `registerWeatherPack` / `registerPhysicsPack`.
+- `<usa-tooltip>` (`defineTooltip`) → `<usa-tip>` (`defineTip`, 6.6); `<usa-toggle>` (`defineToggle`) → `<usa-switch>` (`defineSwitch`, 6.7). Docs, framework examples and the showcase use the new tags.
+
+### Added
+- **WebGPU backend** for shader backgrounds: `backend: 'auto'` now tries WebGPU first (the GLSL body is translated by `glslToWgsl()`, or a spec ships `wgsl`), then WebGL2, then Canvas 2D; `el.dataset.usaBackend` = `webgpu` / `webgl2` / `canvas`. New exports `supportsWebGPU()`, `glslToWgsl()`, `wgslModule()`, `webgpuBackground()`, `WGSL_HEAD`.
+- **Per-pack entries**: `motionary/fx` (every pack) and `motionary/fx/gpu`, `/fx/text`, `/fx/light`, `/fx/3d`, `/fx/morph`, `/fx/transitions`, `/fx/weather`, `/fx/physics`, `/fx/focus`, `/fx/marketplace` (same builds as `motionary/components/fx-*`, which keep working).
+- **docs/ROADMAP.md** replaced by the post-7.0 roadmap (v7.1 → v8.0).
+- npm: `motionary@7.0.0` and the `use-scroll-animate@7.0.0` alias are published with the `latest` tag.
+
+### Upgrading
+- See [docs/upgrading-7.md](./docs/upgrading-7.md). Everything else (browser baseline, `<usa-player>` JSON, every 6.x widget API) is unchanged.
+
 ## [6.9.0] - 2026-10-08
 
 ### Added

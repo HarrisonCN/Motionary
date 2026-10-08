@@ -20,7 +20,6 @@
  * `god-rays` draws one still frame.
  */
 import type { EffectContext, EffectDefinition } from '../fx/registry';
-import { deprecate } from '../base';
 import { registerEffects } from '../fx/registry';
 import { canvasBackground, hexRgb } from '../effects/generative';
 import { overlay } from '../effects/shared';
@@ -235,8 +234,3 @@ export function registerLightPack(): void {
   registerEffects(LIGHT_FX);
 }
 
-/** @deprecated since 6.9 — use `registerLightPack()` (removed in 7.0; `npx usa-codemod-7`). */
-export function registerLightEffects(): void {
-  deprecate('registerLightEffects', 'registerLightEffects() is deprecated since 6.9 and removed in 7.0 — use registerLightPack() (npx usa-codemod-7).');
-  registerLightPack();
-}

@@ -50,38 +50,6 @@ describe('<usa-ripple>', () => {
   });
 });
 
-describe('<usa-toggle>', () => {
-  it('is an accessible switch toggled by click, Space and Enter', () => {
-    const el = mount<any>('<usa-toggle label="Wi-Fi"></usa-toggle>');
-    expect(el.getAttribute('role')).toBe('switch');
-    expect(el.getAttribute('aria-checked')).toBe('false');
-    expect(el.getAttribute('aria-label')).toBe('Wi-Fi');
-    expect(el.tabIndex).toBe(0);
-    const change = vi.fn();
-    el.addEventListener('change', change);
-    el.click();
-    expect(el.checked).toBe(true);
-    expect(el.getAttribute('aria-checked')).toBe('true');
-    el.dispatchEvent(key('keydown', ' '));
-    expect(el.checked).toBe(false);
-    el.dispatchEvent(key('keydown', 'Enter'));
-    expect(el.checked).toBe(true);
-    expect(change).toHaveBeenCalledTimes(3);
-  });
-
-  it('disabled ignores input; the checked attribute syncs aria', () => {
-    const el = mount<any>('<usa-toggle disabled></usa-toggle>');
-    el.click();
-    expect(el.checked).toBe(false);
-    expect(el.tabIndex).toBe(-1);
-    el.disabled = false;
-    el.setAttribute('checked', '');
-    expect(el.getAttribute('aria-checked')).toBe('true');
-    el.toggle(false);
-    expect(el.hasAttribute('checked')).toBe(false);
-  });
-});
-
 describe('<usa-press>, <usa-magnetic>, <usa-tilt>, <usa-spotlight>', () => {
   it('press scales down on pointerdown and springs back on release', () => {
     const el = mount<any>('<usa-press scale="0.9"><button>x</button></usa-press>');

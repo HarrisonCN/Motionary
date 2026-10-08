@@ -1,7 +1,7 @@
 /**
  * motionary/components/solid — Solid integration (v3.8).
  * Solid renders custom elements natively: set properties with `prop:` and
- * listen with `on:` (`<usa-toggle prop:checked={on()} on:usa:change={…}>`).
+ * listen with `on:` (`<usa-switch prop:checked={on()} on:usa:change={…}>`).
  * This entry adds `defineUsa()` (client only, SolidStart-safe), a `usa`
  * directive for `use:usa={{ props, on }}`, and JSX types.
  *

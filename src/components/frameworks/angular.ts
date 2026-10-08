@@ -13,7 +13,7 @@
  * providers: [{ provide: APP_INITIALIZER, multi: true, useFactory: usaInitializer(['click', 'ui']) }]
  *
  * @Component({ standalone: true, schemas: [CUSTOM_ELEMENTS_SCHEMA],
- *   template: `<usa-toggle [checked]="on" (usa:change)="on = $any($event).detail.checked"></usa-toggle>` })
+ *   template: `<usa-switch [checked]="on" (usa:change)="on = $any($event).detail.checked"></usa-switch>` })
  * ```
  * `bindUsa(el, { props, on })` is available for directives that bind imperatively.
  */

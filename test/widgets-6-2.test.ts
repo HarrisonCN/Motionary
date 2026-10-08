@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { installComponentMocks, mount, anims, finishAll } from './components-setup';
 import { configureComponents } from '../src/components/base';
 import { defineWidgets, WIDGETS, WIDGET_TAGS, CAROUSEL_EFFECTS, TAB_INDICATORS } from '../src/components/widgets';
-import { GPU_FX, registerGpuEffects, registerFx2, FX2_PACKS, supportsWebGL2, fieldFallback } from '../src/components/fx2';
+import { GPU_FX, registerGpuPack, registerEffectPacks, EFFECT_PACKS, supportsWebGL2, fieldFallback } from '../src/components/fx2';
 import { getEffect, playEffect, registerEffect } from '../src/components/fx';
 import { COMPONENT_ITEMS } from '../showcase/catalog-components.js';
 import { ITEMS, CATEGORIES } from '../showcase/catalog.js';
@@ -182,13 +182,13 @@ describe('<usa-stories>', () => {
 
 describe('6.2 GPU effect pack', () => {
   it('registers 8 effects: 5 shaders, 2 particle backgrounds, 1 click', () => {
-    registerGpuEffects();
-    registerFx2();
+    registerGpuPack();
+    registerEffectPacks();
     expect(GPU_FX.map((d) => d.name)).toEqual(['fluid', 'smoke', 'fire', 'ink', 'fireflies', 'sakura', 'leaves', 'splash']);
     for (const d of GPU_FX) expect(getEffect(d.name)).toBe(d);
     expect(GPU_FX.filter((d) => d.kind === 'background')).toHaveLength(7);
     expect(getEffect('splash')!.kind).toBe('click');
-    expect(FX2_PACKS.gpu).toBe(GPU_FX);
+    expect(EFFECT_PACKS.gpu).toBe(GPU_FX);
   });
   it('the registry is shared through Symbol.for (several bundles on one page)', () => {
     registerEffect({ name: 'zz-shared-62', kind: 'attention', run: () => undefined });
@@ -196,7 +196,7 @@ describe('6.2 GPU effect pack', () => {
     expect(table.has('zz-shared-62')).toBe(true);
   });
   it('falls back to Canvas 2D without WebGL2 and cleans up', async () => {
-    registerGpuEffects();
+    registerGpuPack();
     const calls: string[] = [];
     (HTMLCanvasElement.prototype as any).getContext = (k: string) =>
       k === '2d' ? new Proxy({}, { get: (_t, p: string) => (p === 'createImageData' ? (w: number, h: number) => ({ data: new Uint8ClampedArray(w * h * 4) }) : p === 'createRadialGradient' ? () => ({ addColorStop() {} }) : (...a: unknown[]) => void calls.push(p)), set: () => true }) : null;
@@ -215,13 +215,13 @@ describe('6.2 GPU effect pack', () => {
     expect(typeof spec.draw).toBe('function');
   });
   it('splash spawns droplets at the pointer; reduced motion = one soft dot', async () => {
-    registerGpuEffects();
+    registerGpuPack();
     const btn = mount('<button>x</button>');
     anims.length = 0;
     playEffect(btn, 'splash', { count: 6 });
     expect(anims.length).toBe(7);
     installComponentMocks({ reducedMotion: true });
-    registerGpuEffects();
+    registerGpuPack();
     playEffect(btn, 'splash');
     expect(anims.length).toBe(1);
   });

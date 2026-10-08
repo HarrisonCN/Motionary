@@ -1,8 +1,8 @@
 import { C, H, K } from './make.js';
 
 export const category = K('ui', '▤', 'UI components & variants', 'UI 组件与风格变体',
-  'Animated app components — tabs with a sliding indicator, drawers, bottom sheets, pull-to-refresh, FAB speed dial, auto-hide navbar, slider, rating, tooltip, popover, badge, avatar stack — and six style variants for every component: minimal, neon, glass, brutalist, fluent, material.',
-  '带动画的应用组件——滑动指示条标签页、抽屉、底部面板、下拉刷新、悬浮按钮菜单、自动隐藏导航栏、滑块、评分、提示、气泡卡片、徽标、头像组——以及适用于所有组件的六种风格：极简、霓虹、玻璃、粗野、Fluent、Material。');
+  'Animated app components — tabs with a sliding indicator, drawers, bottom sheets, pull-to-refresh, FAB speed dial, auto-hide navbar, slider, rating, popover, badge, avatar stack — and six style variants for every component: minimal, neon, glass, brutalist, fluent, material.',
+  '带动画的应用组件——滑动指示条标签页、抽屉、底部面板、下拉刷新、悬浮按钮菜单、自动隐藏导航栏、滑块、评分、气泡卡片、徽标、头像组——以及适用于所有组件的六种风格：极简、霓虹、玻璃、粗野、Fluent、Material。');
 
 const V = { key: 'variant', values: ['', 'minimal', 'neon', 'glass', 'brutalist', 'fluent', 'material'] };
 
@@ -58,13 +58,6 @@ export const components = [
     ['stars', 'role=slider'],
     '<usa-rating value="4" name="stars"></usa-rating>',
     '<div class="demo-stack"><usa-rating value="4"></usa-rating><usa-rating value="3" icon="♥" max="5" readonly style="--usa-rating-on:#f43f5e"></usa-rating></div>'),
-  C('usa-tooltip', 'ui', 'Tooltip', '文字提示',
-    'Springs in from its side on hover or keyboard focus, flips to stay on screen, wires aria-describedby.',
-    '悬停或键盘聚焦时从对应方向弹出，自动翻转以保持在屏幕内，并设置 aria-describedby。',
-    ['aria-describedby', 'placement'],
-    '<usa-tooltip text="Copy link">\n  <button>🔗</button>\n</usa-tooltip>',
-    '<div class="demo-row"><usa-tooltip text="Spring-in tooltip"><button class="demo-btn" type="button">Hover me</button></usa-tooltip><usa-tooltip text="Below" placement="bottom"><button class="demo-btn demo-btn-alt" type="button">Bottom</button></usa-tooltip></div>',
-    { controls: [V] }),
   C('usa-popover', 'ui', 'Popover', '气泡卡片',
     'Click-to-open panel that springs from its trigger; Esc / outside click closes, focus returns.',
     '点击打开、从触发元素弹出的面板；Esc 或点击外部关闭，焦点返回。',
@@ -92,7 +85,7 @@ export const helpers = [
     '适用于所有组件的六种风格：在元素上设置 variant="minimal | neon | glass | brutalist | fluent | material"，在任意祖先上设置 data-usa-variant，或用 setVariant() 作用于整个应用。',
     ['minimal', 'neon', 'glass', 'brutalist', 'fluent', 'material'],
     "import { setVariant } from 'motionary/components/ui';\n\nsetVariant('fluent'); // whole app (Windows 11 look)\n// or per element:\n// <usa-slider variant=\"neon\"></usa-slider>",
-    '<div class="demo-stack demo-variants" data-variant-demo><div class="demo-row"><select aria-label="variant" data-variant-pick><option>neon</option><option>minimal</option><option>glass</option><option>brutalist</option><option>fluent</option><option>material</option></select></div><div class="demo-row" data-usa-variant="neon"><usa-toggle checked>Toggle</usa-toggle><usa-checkbox checked>Check</usa-checkbox></div><usa-slider value="60" data-usa-variant="neon" label="Demo"></usa-slider></div>'),
+    '<div class="demo-stack demo-variants" data-variant-demo><div class="demo-row"><select aria-label="variant" data-variant-pick><option>neon</option><option>minimal</option><option>glass</option><option>brutalist</option><option>fluent</option><option>material</option></select></div><div class="demo-row" data-usa-variant="neon"><usa-switch checked>Switch</usa-switch><usa-checkbox checked>Check</usa-checkbox></div><usa-slider value="60" data-usa-variant="neon" label="Demo"></usa-slider></div>'),
 ];
 
 export const wire = {
