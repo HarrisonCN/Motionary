@@ -6,11 +6,11 @@
 
 _旧名 **use-scroll-animate** — API と `<usa-*>` タグはそのまま。旧 npm パッケージもエイリアスとして公開を継続します。_
 
-[![npm](https://img.shields.io/npm/v/motionary?style=flat-square)](https://www.npmjs.com/package/motionary) [![CI](https://github.com/HarrisonCN/motionary/actions/workflows/ci.yml/badge.svg)](https://github.com/HarrisonCN/motionary/actions/workflows/ci.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](./LICENSE)
+[![npm](https://img.shields.io/npm/v/motionary?style=flat-square)](https://www.npmjs.com/package/motionary) [![CI](https://github.com/HarrisonCN/Motionary/actions/workflows/ci.yml/badge.svg)](https://github.com/HarrisonCN/Motionary/actions/workflows/ci.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](./LICENSE)
 
 [English](./README.md) | [简体中文](./README_zh.md) | [日本語](./README_ja.md)
 
-**[🛍 アニメーションストア](https://harrisoncn.github.io/motionary/showcase/)** · **[🧩 コンポーネント](https://harrisoncn.github.io/motionary/showcase/components.html)** · **[🎛 Playground](https://harrisoncn.github.io/motionary/showcase/playground.html)** · **[📜 ストーリー](https://harrisoncn.github.io/motionary/showcase/story.html)**
+**[🛍 アニメーションストア](https://harrisoncn.github.io/Motionary/showcase/)** · **[🧩 コンポーネント](https://harrisoncn.github.io/Motionary/showcase/components.html)** · **[🎛 Playground](https://harrisoncn.github.io/Motionary/showcase/playground.html)** · **[📜 ストーリー](https://harrisoncn.github.io/Motionary/showcase/story.html)**
 
 <sub>ストアでは全 <b>227</b> 件のアニメーション（214 のスクロールプリセットとカード・クリック・物理・ページ効果）をデスクトップ／スマホ幅でプレビュー・調整・コピーできます。</sub>
 

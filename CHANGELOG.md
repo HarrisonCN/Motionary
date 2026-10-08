@@ -21,6 +21,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Accessibility
 - Progress ring and odometer expose their values (`aria-valuenow`, accessible name); the skeleton sets `aria-busy`; the rating is a keyboard slider. Reduced motion: values switch instantly, no shimmer / pop, lights stay fixed, god rays draw one still frame.
 
+### Fixed
+- Links: the repository is now **HarrisonCN/Motionary** (capital M). GitHub Pages URLs are case-sensitive, so every showcase / docs link in the README (EN / ZH / JA), `package.json` (`homepage`, `repository`, `bugs`), showcase meta / Open Graph tags, docs and issue templates now point to `https://harrisoncn.github.io/Motionary/…` (the lowercase `/motionary/` path returned 404).
+
 ## [6.3.0] - 2026-10-08
 
 ### Added
@@ -57,7 +60,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [6.1.1] - 2026-10-08
 
 ### Changed — the project is now **Motionary**
-- **Renamed to Motionary** (formerly `use-scroll-animate`): npm package **`motionary`**, repository `HarrisonCN/motionary`, showcase at `https://harrisoncn.github.io/motionary/showcase/`, CDN `https://unpkg.com/motionary@6/dist/…` (jsDelivr: `cdn.jsdelivr.net/npm/motionary@6`). **No breaking change**: every API name, the `<usa-*>` tags, `usa-` CSS classes, the `ScrollAnimate` / `UsaComponents` globals, the `usa-codemod-*` bins and the `use-scroll-animate/animation` player format id stay the same.
+- **Renamed to Motionary** (formerly `use-scroll-animate`): npm package **`motionary`**, repository `HarrisonCN/motionary`, showcase at `https://harrisoncn.github.io/Motionary/showcase/`, CDN `https://unpkg.com/motionary@6/dist/…` (jsDelivr: `cdn.jsdelivr.net/npm/motionary@6`). **No breaking change**: every API name, the `<usa-*>` tags, `usa-` CSS classes, the `ScrollAnimate` / `UsaComponents` globals, the `usa-codemod-*` bins and the `use-scroll-animate/animation` player format id stay the same.
 - `use-scroll-animate` keeps being published at the same versions as a compatibility alias (same build); switching is `npm i motionary` + replacing `use-scroll-animate` with `motionary` in imports and CDN URLs.
 - New package description and keywords; `homepage` is the showcase.
 
@@ -276,7 +279,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [4.6.0] - 2026-10-08
 
 ### Added
-- **Playground 2.0** ([showcase/playground.html](https://harrisoncn.github.io/use-scroll-animate/showcase/playground.html)):
+- **Playground 2.0** ([showcase/playground.html](https://harrisoncn.github.io/Motionary/showcase/playground.html)):
   - **Keyframe track editor** — one lane per timeline step on a ms ruler; drag a bar to move it, drag its right edge to change duration (50 ms snapping), arrow keys (Shift = resize) for keyboard users; preset, label, start and duration fields; **Play timeline** previews it with a real `<usa-timeline>`.
   - **Save / share presets** — named presets in localStorage, share links now carry the tracks (old links still open), portable preset JSON (`Copy preset JSON` / `Import JSON…`).
   - **Export as `<usa-timeline>`** — new code tab with declarative markup (`data-tl`, absolute `data-at`, `data-duration`) plus the `defineTimeline()` import.

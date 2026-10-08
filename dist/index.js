@@ -108,7 +108,7 @@ function parallax(target, options = {}) {
  * `motionary/react`, `/vue`, `/svelte`, `/solid`, `/element`.
  *
  * @license MIT
- * @see https://github.com/HarrisonCN/motionary
+ * @see https://github.com/HarrisonCN/Motionary
  */
 /**
  * Default singleton instance of ScrollAnimate.

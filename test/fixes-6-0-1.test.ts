@@ -17,7 +17,7 @@ describe('6.0.1 — showcase header fits a phone viewport', () => {
   it('only hides links that stay reachable elsewhere on the page', () => {
     // the brand links to the store, and GitHub stays in the footer
     expect(html).toMatch(/<a class="brand" href="\.\/"/);
-    expect(html.slice(html.indexOf('<footer'))).toContain('https://github.com/HarrisonCN/motionary');
+    expect(html.slice(html.indexOf('<footer'))).toContain('https://github.com/HarrisonCN/Motionary');
     expect(css).toMatch(/@media \(max-width: 374px\)[^\n]*a\.icon-btn\[href\^="https:\/\/github\.com"\]/);
   });
 });

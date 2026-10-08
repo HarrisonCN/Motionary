@@ -5,7 +5,7 @@ Since **v2.2** (now **v3**) the package ships **30 animated UI components** as s
 - in any modern browser (Chrome, Edge, Firefox, Safari), and with React, Vue, Svelte, Solid, Angular or no framework;
 - in **Windows desktop software** that renders its UI with a web view — Electron, Tauri (WebView2), WinUI 3 / WPF / WinForms with WebView2, and installed PWAs. See **[Windows apps guide](./windows-apps.md)**.
 
-Live gallery: <https://harrisoncn.github.io/motionary/showcase/components.html>
+Live gallery: <https://harrisoncn.github.io/Motionary/showcase/components.html>
 
 ## Principles
 

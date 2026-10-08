@@ -542,12 +542,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/HarrisonCN/motionary.git"
+    "url": "git+https://github.com/HarrisonCN/Motionary.git"
   },
   "bugs": {
-    "url": "https://github.com/HarrisonCN/motionary/issues"
+    "url": "https://github.com/HarrisonCN/Motionary/issues"
   },
-  "homepage": "https://harrisoncn.github.io/motionary/showcase/",
+  "homepage": "https://harrisoncn.github.io/Motionary/showcase/",
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.5",
     "@rollup/plugin-node-resolve": "^16.0.3",
