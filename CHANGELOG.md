@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.5.0] - 2026-10-08
+
+### Added
+- **Shared rAF scheduler** — every component loop now runs on one `requestAnimationFrame` per frame (batched, ordered; a throwing callback no longer starves the others). New entry `use-scroll-animate/components/perf`: `onFrame(fn)`, `schedulerStats()`.
+- **Animation budget & auto-degrade** — `setAnimationBudget(n)` / `animationBudget()` / `activeAnimations()`; `autoDegrade({ minFps, maxActive, sample, patience, recovery, onChange })` steps motion to `low` and halves the budget while fps drops or too many animations run, restores when frames recover, dispatches `usa:degrade`.
+- **On-demand CSS** — new entry **`use-scroll-animate/components/lite`**: the whole library without inlined CSS; each category's `dist/components/<cat>.css` is linked the first time one of its elements connects. **≈ 62 KB gzip** for everything (vs ≈ 79 KB), CI budget **≤ 70 KB**. `onDemandStyles(base)`, `loadCategoryStyles(cat, base)`, `categoryOf(tag)`, `loadedStyles()`.
+- Showcase: **autoDegrade()** card (Page & app-wide) — stress 120 animations, toggle a budget, watch scheduler stats.
+- Docs: [docs/performance.md](./docs/performance.md).
+
 ## [4.4.0] - 2026-10-08
 
 ### Added

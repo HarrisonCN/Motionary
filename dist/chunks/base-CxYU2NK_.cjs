@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * use-scroll-animate/components — shared base for the `<usa-*>` custom elements.
  *
@@ -129,6 +131,7 @@ function getBase() {
             if (this._connected)
                 return;
             this._connected = true;
+            styleLoader?.(this.localName);
             // Upgraded while the parser is still inside us (a <script> in <head>
             // defined the element): children/text are not there yet, so wait.
             if (typeof document !== 'undefined' && document.readyState === 'loading' && !this.nextSibling && !this.childNodes.length) {
@@ -209,10 +212,26 @@ function getBase() {
                 return null;
             }
             keyframes = adaptKeyframes(keyframes);
+            if (active >= maxActive) {
+                applyFrame(el, keyframes[keyframes.length - 1]);
+                return null;
+            }
             const k = motionScale();
             if (k !== 1 && k > 0 && typeof options.duration === 'number')
                 options = { ...options, duration: options.duration * k, delay: (options.delay || 0) * k };
-            return el.animate(keyframes, options);
+            const a = el.animate(keyframes, options);
+            if (options.iterations !== Infinity) {
+                active++;
+                let done = false;
+                const end = () => {
+                    if (!done) {
+                        done = true;
+                        active--;
+                    }
+                };
+                a?.finished?.then(end, end);
+            }
+            return a;
         }
         emit(type, detail) {
             return this.dispatchEvent(new CustomEvent(`usa:${type}`, { detail, bubbles: true, cancelable: true }));
@@ -256,17 +275,87 @@ function srText(text) {
     s.textContent = text;
     return s;
 }
-/** requestAnimationFrame with a timeout fallback (jsdom / hidden documents). */
-const raf = (cb) => typeof requestAnimationFrame === 'function' ? requestAnimationFrame(cb) : setTimeout(() => cb(Date.now()), 16);
+// --- shared rAF scheduler (4.5) ----------------------------------------------
+// Every component loop goes through one requestAnimationFrame per frame
+// instead of one per element: callbacks are batched, run in order, and a
+// throwing callback no longer starves the others (the first error is rethrown).
+const frameQueue = new Map();
+let frameSeq = 1;
+let frameHandle = 0;
+let frameVia = null;
+const frameStats = { frames: 0, callbacks: 0, peak: 0, last: 0 };
+const frameListeners = new Set();
+function flushFrame(t) {
+    frameHandle = 0;
+    const dt = frameStats.last && t > frameStats.last ? t - frameStats.last : 16.7;
+    frameStats.last = t;
+    frameStats.frames++;
+    const cbs = Array.from(frameQueue.values());
+    frameQueue.clear();
+    frameStats.callbacks += cbs.length;
+    frameStats.peak = Math.max(frameStats.peak, cbs.length);
+    let error = null;
+    for (const cb of cbs) {
+        try {
+            cb(t);
+        }
+        catch (e) {
+            error ?? (error = e);
+        }
+    }
+    frameListeners.forEach((fn) => fn(t, dt));
+    if (frameListeners.size)
+        requestFlush();
+    if (error)
+        throw error;
+}
+function requestFlush() {
+    const native = typeof requestAnimationFrame === 'function' ? requestAnimationFrame : null;
+    // A stale handle from a replaced requestAnimationFrame (tests, iframes) is dropped.
+    if (frameHandle && frameVia === native)
+        return;
+    frameVia = native;
+    frameHandle = native ? native(flushFrame) : setTimeout(() => flushFrame(now()), 16);
+}
+/** requestAnimationFrame through the shared scheduler (timeout fallback in jsdom / hidden documents). */
+const raf = (cb) => {
+    const id = frameSeq++;
+    frameQueue.set(id, cb);
+    requestFlush();
+    return id;
+};
 /** Monotonic time in ms (rAF callback timestamps differ between environments, so loops use this). */
 const now = () => (typeof performance !== 'undefined' ? performance.now() : Date.now());
 const caf = (id) => {
-    if (typeof cancelAnimationFrame === 'function')
-        cancelAnimationFrame(id);
-    else
-        clearTimeout(id);
+    frameQueue.delete(id);
 };
-/** Spring-ish easing used across the components. */
+/** Run `fn(time, dt)` every frame on the shared scheduler until the returned function is called. */
+function onFrame(fn) {
+    frameListeners.add(fn);
+    requestFlush();
+    return () => frameListeners.delete(fn);
+}
+/** Scheduler counters: frames flushed, callbacks run, peak callbacks in one frame, pending now. */
+function schedulerStats() {
+    return { frames: frameStats.frames, callbacks: frameStats.callbacks, peak: frameStats.peak, pending: frameQueue.size, loops: frameListeners.size };
+}
+// --- active animation budget (4.5) ---------------------------------------------
+let active = 0;
+let maxActive = Infinity;
+/** Number of component animations running right now. */
+const activeAnimations = () => active;
+/** Cap concurrent component animations; extra ones jump to their final frame (`Infinity` = no cap). */
+function setAnimationBudget(max) {
+    maxActive = max > 0 ? max : Infinity;
+}
+/** The current cap. */
+const animationBudget = () => maxActive;
+// --- on-demand styles (4.5) -----------------------------------------------------
+let styleLoader = null;
+/** Called with each element's tag the first time one connects (used by the `lite` build to load CSS on demand). */
+function setStyleLoader(fn) {
+    styleLoader = fn;
+}
 const EASE_OUT = 'cubic-bezier(0.22, 1, 0.36, 1)';
 const EASE_SPRING = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
 /** Windows Fluent "decelerate" / "point-to-point" curves. */
@@ -281,5 +370,32 @@ function kindOf(el, valid, fallback) {
 }
 const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
 
-export { EASE_SPRING as E, FLUENT_DECELERATE as F, MOTION_SCALE as M, MOTION_SENSITIVITY_LEVELS as a, adaptKeyframes as b, canDefine as c, configureComponents as d, getMotionSensitivity as e, clamp as f, getMotionIntensity as g, caf as h, applyFrame as i, adoptStyles as j, defineElement as k, EASE_OUT as l, motionScale as m, now as n, kindOf as o, prefersReducedMotion as p, srText as q, raf as r, shadowStyles as s };
-//# sourceMappingURL=base-BtJDNCB6.js.map
+exports.EASE_OUT = EASE_OUT;
+exports.EASE_SPRING = EASE_SPRING;
+exports.FLUENT_DECELERATE = FLUENT_DECELERATE;
+exports.MOTION_SCALE = MOTION_SCALE;
+exports.MOTION_SENSITIVITY_LEVELS = MOTION_SENSITIVITY_LEVELS;
+exports.activeAnimations = activeAnimations;
+exports.adaptKeyframes = adaptKeyframes;
+exports.adoptStyles = adoptStyles;
+exports.animationBudget = animationBudget;
+exports.applyFrame = applyFrame;
+exports.caf = caf;
+exports.canDefine = canDefine;
+exports.clamp = clamp;
+exports.configureComponents = configureComponents;
+exports.defineElement = defineElement;
+exports.getMotionIntensity = getMotionIntensity;
+exports.getMotionSensitivity = getMotionSensitivity;
+exports.kindOf = kindOf;
+exports.motionScale = motionScale;
+exports.now = now;
+exports.onFrame = onFrame;
+exports.prefersReducedMotion = prefersReducedMotion;
+exports.raf = raf;
+exports.schedulerStats = schedulerStats;
+exports.setAnimationBudget = setAnimationBudget;
+exports.setStyleLoader = setStyleLoader;
+exports.shadowStyles = shadowStyles;
+exports.srText = srText;
+//# sourceMappingURL=base-CxYU2NK_.cjs.map

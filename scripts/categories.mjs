@@ -6,4 +6,4 @@
 export const CATEGORIES = ['reveal', 'text', 'interaction', 'feedback', 'background', 'transitions', 'physics', 'cards', 'click', 'ui', 'page', 'timeline', 'gesture', 'svg', 'webgl', 'depth', 'layout', 'packs'];
 
 // Extra `use-scroll-animate/components/<name>` entry points (name → source under src/components/).
-export const COMPONENT_ENTRIES = { react: 'frameworks/react', vue: 'frameworks/vue', svelte: 'frameworks/svelte', solid: 'frameworks/solid', angular: 'frameworks/angular', jsx: 'frameworks/jsx', lazy: 'lazy', tokens: 'tokens/index', a11y: 'a11y/index' };
+export const COMPONENT_ENTRIES = { react: 'frameworks/react', vue: 'frameworks/vue', svelte: 'frameworks/svelte', solid: 'frameworks/solid', angular: 'frameworks/angular', jsx: 'frameworks/jsx', lazy: 'lazy', tokens: 'tokens/index', a11y: 'a11y/index', perf: 'perf/index', lite: 'lite' };

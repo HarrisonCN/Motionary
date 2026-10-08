@@ -3,24 +3,24 @@
 var components = require('../components.cjs');
 var bind = require('../chunks/bind-Ui43-n2d.cjs');
 require('./reveal.cjs');
-require('../chunks/base-DE2yzxE7.cjs');
+require('../chunks/base-CxYU2NK_.cjs');
 require('./text.cjs');
-require('../chunks/core-BC9S2osy.cjs');
+require('../chunks/core-HLqH3qkA.cjs');
 require('./tokens.cjs');
 require('./interaction.cjs');
 require('./feedback.cjs');
 require('./background.cjs');
-require('../chunks/variants-CM2zaG8v.cjs');
+require('../chunks/variants-CfJzrzMh.cjs');
 require('./transitions.cjs');
 require('./physics.cjs');
-require('../chunks/spring-hsmgd7ml.cjs');
+require('../chunks/spring-Dkpygsuj.cjs');
 require('./cards.cjs');
 require('./click.cjs');
 require('./ui.cjs');
 require('./page.cjs');
 require('./timeline.cjs');
 require('./gesture.cjs');
-require('../chunks/core-DPYjLqA0.cjs');
+require('../chunks/core-CctNfzuP.cjs');
 require('./svg.cjs');
 require('./webgl.cjs');
 require('./depth.cjs');
@@ -28,6 +28,7 @@ require('./layout.cjs');
 require('./packs.cjs');
 require('./a11y.cjs');
 require('../chunks/index-tags-BQh_uGqH.cjs');
+require('./perf.cjs');
 
 /**
  * use-scroll-animate/components/angular — Angular integration (v3.8).
