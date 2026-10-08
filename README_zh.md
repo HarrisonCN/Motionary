@@ -6,11 +6,11 @@
 
 _原名 **use-scroll-animate** —— API 与 `<usa-*>` 标签完全不变；旧 npm 包继续作为别名发布。_
 
-[![npm](https://img.shields.io/npm/v/motionary?style=flat-square)](https://www.npmjs.com/package/motionary) [![CI](https://github.com/HarrisonCN/motionary/actions/workflows/ci.yml/badge.svg)](https://github.com/HarrisonCN/motionary/actions/workflows/ci.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](./LICENSE)
+[![npm](https://img.shields.io/npm/v/motionary?style=flat-square)](https://www.npmjs.com/package/motionary) [![CI](https://github.com/HarrisonCN/Motionary/actions/workflows/ci.yml/badge.svg)](https://github.com/HarrisonCN/Motionary/actions/workflows/ci.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](./LICENSE)
 
 [English](./README.md) | [简体中文](./README_zh.md) | [日本語](./README_ja.md)
 
-**[🛍 动画商店](https://harrisoncn.github.io/motionary/showcase/)** · **[🧩 组件](https://harrisoncn.github.io/motionary/showcase/components.html)** · **[🎛 Playground](https://harrisoncn.github.io/motionary/showcase/playground.html)** · **[📜 滚动叙事](https://harrisoncn.github.io/motionary/showcase/story.html)**
+**[🛍 动画商店](https://harrisoncn.github.io/Motionary/showcase/)** · **[🧩 组件](https://harrisoncn.github.io/Motionary/showcase/components.html)** · **[🎛 Playground](https://harrisoncn.github.io/Motionary/showcase/playground.html)** · **[📜 滚动叙事](https://harrisoncn.github.io/Motionary/showcase/story.html)**
 
 <sub>动画商店可预览、调整并复制全部 <b>227</b> 个动画 —— 214 个滚动预设，以及卡片、点击、物理与整页效果 —— 支持桌面与手机尺寸。</sub>
 

@@ -936,8 +936,8 @@ function renderDetail(item, keepState) {
   }
   right.append(
     h('div', { class: 'detail-links' }, [
-      h('a', { href: 'https://github.com/HarrisonCN/motionary/blob/main/docs/API.md', target: '_blank', rel: 'noopener', text: `${T('detail.docs')} ↗` }),
-      h('a', { href: 'https://github.com/HarrisonCN/motionary', target: '_blank', rel: 'noopener', text: 'GitHub ↗' }),
+      h('a', { href: 'https://github.com/HarrisonCN/Motionary/blob/main/docs/API.md', target: '_blank', rel: 'noopener', text: `${T('detail.docs')} ↗` }),
+      h('a', { href: 'https://github.com/HarrisonCN/Motionary', target: '_blank', rel: 'noopener', text: 'GitHub ↗' }),
     ])
   );
 

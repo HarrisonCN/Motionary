@@ -36,7 +36,7 @@ function arrowIndex(e, i, n, vertical = false) {
     return -1;
 }
 
-var css$6 = "usa-carousel{display:block;position:relative;--usa-carousel-dur:520ms;--usa-carousel-ease:cubic-bezier(.22,1,.36,1);overflow:hidden;border-radius:var(--usa-radius,14px);touch-action:pan-y}.usa-carousel-viewport{position:relative;overflow:hidden;height:100%;min-height:inherit}.usa-carousel-track{display:flex;height:100%;transition:transform var(--usa-carousel-dur) var(--usa-carousel-ease);will-change:transform}.usa-carousel-track>*{flex:0 0 100%;min-width:0;box-sizing:border-box}usa-carousel:not([data-effect=\"slide\"]) .usa-carousel-track{display:grid}usa-carousel:not([data-effect=\"slide\"]) .usa-carousel-track>*{grid-area:1/1;transition:opacity var(--usa-carousel-dur) ease,transform var(--usa-carousel-dur) var(--usa-carousel-ease),filter var(--usa-carousel-dur) ease}usa-carousel[data-effect=\"cards\"] .usa-carousel-viewport{perspective:900px}usa-carousel[data-dragging] .usa-carousel-track,usa-carousel[data-dragging] .usa-carousel-track>*{transition:none}.usa-carousel-nav{position:absolute;top:50%;translate:0 -50%;z-index:2;width:36px;height:36px;border-radius:50%;border:0;background:rgba(255,255,255,.85);color:#111;font:600 18px/1 system-ui;cursor:pointer;display:grid;place-items:center;box-shadow:0 4px 14px rgba(0,0,0,.18);transition:transform .2s}.usa-carousel-nav:hover{transform:scale(1.08)}.usa-carousel-nav:focus-visible{outline:2px solid #7c5cff;outline-offset:2px}.usa-carousel-prev{left:10px}.usa-carousel-next{right:10px}.usa-carousel-dots{position:absolute;left:0;right:0;bottom:10px;display:flex;justify-content:center;gap:6px;z-index:2}.usa-carousel-dot{width:8px;height:8px;padding:0;border:0;border-radius:99px;background:rgba(255,255,255,.55);cursor:pointer;transition:width .35s var(--usa-carousel-ease),background .35s}.usa-carousel-dot[aria-current=\"true\"]{width:22px;background:#fff}@media (prefers-reduced-motion:reduce){usa-carousel .usa-carousel-track,usa-carousel .usa-carousel-track>*,.usa-carousel-dot{transition:none!important}}usa-carousel[data-reduced] .usa-carousel-track,usa-carousel[data-reduced] .usa-carousel-track>*{transition:none!important}";
+var css$9 = "usa-carousel{display:block;position:relative;--usa-carousel-dur:520ms;--usa-carousel-ease:cubic-bezier(.22,1,.36,1);overflow:hidden;border-radius:var(--usa-radius,14px);touch-action:pan-y}.usa-carousel-viewport{position:relative;overflow:hidden;height:100%;min-height:inherit}.usa-carousel-track{display:flex;height:100%;transition:transform var(--usa-carousel-dur) var(--usa-carousel-ease);will-change:transform}.usa-carousel-track>*{flex:0 0 100%;min-width:0;box-sizing:border-box}usa-carousel:not([data-effect=\"slide\"]) .usa-carousel-track{display:grid}usa-carousel:not([data-effect=\"slide\"]) .usa-carousel-track>*{grid-area:1/1;transition:opacity var(--usa-carousel-dur) ease,transform var(--usa-carousel-dur) var(--usa-carousel-ease),filter var(--usa-carousel-dur) ease}usa-carousel[data-effect=\"cards\"] .usa-carousel-viewport{perspective:900px}usa-carousel[data-dragging] .usa-carousel-track,usa-carousel[data-dragging] .usa-carousel-track>*{transition:none}.usa-carousel-nav{position:absolute;top:50%;translate:0 -50%;z-index:2;width:36px;height:36px;border-radius:50%;border:0;background:rgba(255,255,255,.85);color:#111;font:600 18px/1 system-ui;cursor:pointer;display:grid;place-items:center;box-shadow:0 4px 14px rgba(0,0,0,.18);transition:transform .2s}.usa-carousel-nav:hover{transform:scale(1.08)}.usa-carousel-nav:focus-visible{outline:2px solid #7c5cff;outline-offset:2px}.usa-carousel-prev{left:10px}.usa-carousel-next{right:10px}.usa-carousel-dots{position:absolute;left:0;right:0;bottom:10px;display:flex;justify-content:center;gap:6px;z-index:2}.usa-carousel-dot{width:8px;height:8px;padding:0;border:0;border-radius:99px;background:rgba(255,255,255,.55);cursor:pointer;transition:width .35s var(--usa-carousel-ease),background .35s}.usa-carousel-dot[aria-current=\"true\"]{width:22px;background:#fff}@media (prefers-reduced-motion:reduce){usa-carousel .usa-carousel-track,usa-carousel .usa-carousel-track>*,.usa-carousel-dot{transition:none!important}}usa-carousel[data-reduced] .usa-carousel-track,usa-carousel[data-reduced] .usa-carousel-track>*{transition:none!important}";
 
 const CAROUSEL_EFFECTS = ['slide', 'fade', 'scale', 'cards'];
 function defineCarousel(tag = 'usa-carousel') {
@@ -225,10 +225,10 @@ function defineCarousel(tag = 'usa-carousel') {
             }
         }
         return UsaCarousel;
-    }, { id: 'carousel', text: css$6 });
+    }, { id: 'carousel', text: css$9 });
 }
 
-var css$5 = "usa-tab-bar{display:block;--usa-tab-accent:#7c5cff;--usa-tab-ease:cubic-bezier(.22,1,.36,1)}.usa-tab-bar-list{position:relative;display:flex;gap:4px;padding:4px;border-radius:12px;background:rgba(127,127,127,.12);isolation:isolate;overflow-x:auto;scrollbar-width:none}.usa-tab-bar-list::-webkit-scrollbar{display:none}.usa-tab-bar-list>[role=\"tab\"]{position:relative;z-index:1;flex:1 0 auto;border:0;background:none;color:inherit;font:inherit;font-weight:600;padding:8px 14px;border-radius:9px;cursor:pointer;opacity:.7;transition:opacity .25s,color .25s;white-space:nowrap}.usa-tab-bar-list>[role=\"tab\"][aria-selected=\"true\"]{opacity:1}.usa-tab-bar-list>[role=\"tab\"]:focus-visible{outline:2px solid var(--usa-tab-accent);outline-offset:1px}.usa-tab-bar-ink{position:absolute;z-index:0;left:0;top:4px;bottom:4px;width:0;border-radius:9px;background:var(--usa-tab-accent);pointer-events:none}usa-tab-bar[data-indicator=\"pill\"] [aria-selected=\"true\"]{color:#fff}usa-tab-bar[data-indicator=\"underline\"] .usa-tab-bar-list{background:none;border-bottom:1px solid rgba(127,127,127,.25);border-radius:0}usa-tab-bar[data-indicator=\"underline\"] .usa-tab-bar-ink{top:auto;bottom:0;height:3px;border-radius:3px}usa-tab-bar[data-indicator=\"glow\"] .usa-tab-bar-ink{background:transparent;box-shadow:0 0 0 2px var(--usa-tab-accent),0 0 18px var(--usa-tab-accent)}usa-tab-bar[data-indicator=\"gooey\"] .usa-tab-bar-ink{filter:blur(.5px);border-radius:999px}usa-tab-bar[data-indicator=\"gooey\"] [aria-selected=\"true\"]{color:#fff}.usa-tab-bar-panel{padding:14px 2px}.usa-tab-bar-panel[hidden]{display:none}";
+var css$8 = "usa-tab-bar{display:block;--usa-tab-accent:#7c5cff;--usa-tab-ease:cubic-bezier(.22,1,.36,1)}.usa-tab-bar-list{position:relative;display:flex;gap:4px;padding:4px;border-radius:12px;background:rgba(127,127,127,.12);isolation:isolate;overflow-x:auto;scrollbar-width:none}.usa-tab-bar-list::-webkit-scrollbar{display:none}.usa-tab-bar-list>[role=\"tab\"]{position:relative;z-index:1;flex:1 0 auto;border:0;background:none;color:inherit;font:inherit;font-weight:600;padding:8px 14px;border-radius:9px;cursor:pointer;opacity:.7;transition:opacity .25s,color .25s;white-space:nowrap}.usa-tab-bar-list>[role=\"tab\"][aria-selected=\"true\"]{opacity:1}.usa-tab-bar-list>[role=\"tab\"]:focus-visible{outline:2px solid var(--usa-tab-accent);outline-offset:1px}.usa-tab-bar-ink{position:absolute;z-index:0;left:0;top:4px;bottom:4px;width:0;border-radius:9px;background:var(--usa-tab-accent);pointer-events:none}usa-tab-bar[data-indicator=\"pill\"] [aria-selected=\"true\"]{color:#fff}usa-tab-bar[data-indicator=\"underline\"] .usa-tab-bar-list{background:none;border-bottom:1px solid rgba(127,127,127,.25);border-radius:0}usa-tab-bar[data-indicator=\"underline\"] .usa-tab-bar-ink{top:auto;bottom:0;height:3px;border-radius:3px}usa-tab-bar[data-indicator=\"glow\"] .usa-tab-bar-ink{background:transparent;box-shadow:0 0 0 2px var(--usa-tab-accent),0 0 18px var(--usa-tab-accent)}usa-tab-bar[data-indicator=\"gooey\"] .usa-tab-bar-ink{filter:blur(.5px);border-radius:999px}usa-tab-bar[data-indicator=\"gooey\"] [aria-selected=\"true\"]{color:#fff}.usa-tab-bar-panel{padding:14px 2px}.usa-tab-bar-panel[hidden]{display:none}";
 
 const TAB_INDICATORS = ['pill', 'underline', 'glow', 'gooey'];
 function defineTabBar(tag = 'usa-tab-bar') {
@@ -341,10 +341,10 @@ function defineTabBar(tag = 'usa-tab-bar') {
             }
         }
         return UsaTabBar;
-    }, { id: 'tab-bar', text: css$5 });
+    }, { id: 'tab-bar', text: css$8 });
 }
 
-var css$4 = "usa-disclosure{display:block;--usa-disclosure-accent:#7c5cff}usa-disclosure>details{border-bottom:1px solid rgba(127,127,127,.25);overflow:hidden}usa-disclosure>details>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 4px;font-weight:600}usa-disclosure>details>summary::-webkit-details-marker{display:none}usa-disclosure>details>summary::after{content:\"\";flex:none;width:9px;height:9px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;rotate:45deg;translate:0 -3px;transition:rotate .35s cubic-bezier(.34,1.56,.64,1),translate .35s}usa-disclosure>details[open]>summary::after{rotate:225deg;translate:0 2px}usa-disclosure>details>summary:focus-visible{outline:2px solid var(--usa-disclosure-accent);outline-offset:2px;border-radius:6px}usa-disclosure>details>:not(summary){padding:0 4px 12px}usa-disclosure[variant=\"cards\"]>details{border:1px solid rgba(127,127,127,.25);border-radius:12px;margin-bottom:8px;padding:0 10px;transition:box-shadow .3s,border-color .3s}usa-disclosure[variant=\"cards\"]>details[open]{border-color:var(--usa-disclosure-accent);box-shadow:0 8px 24px rgba(124,92,255,.16)}@media (prefers-reduced-motion:reduce){usa-disclosure>details>summary::after{transition:none}}";
+var css$7 = "usa-disclosure{display:block;--usa-disclosure-accent:#7c5cff}usa-disclosure>details{border-bottom:1px solid rgba(127,127,127,.25);overflow:hidden}usa-disclosure>details>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 4px;font-weight:600}usa-disclosure>details>summary::-webkit-details-marker{display:none}usa-disclosure>details>summary::after{content:\"\";flex:none;width:9px;height:9px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;rotate:45deg;translate:0 -3px;transition:rotate .35s cubic-bezier(.34,1.56,.64,1),translate .35s}usa-disclosure>details[open]>summary::after{rotate:225deg;translate:0 2px}usa-disclosure>details>summary:focus-visible{outline:2px solid var(--usa-disclosure-accent);outline-offset:2px;border-radius:6px}usa-disclosure>details>:not(summary){padding:0 4px 12px}usa-disclosure[variant=\"cards\"]>details{border:1px solid rgba(127,127,127,.25);border-radius:12px;margin-bottom:8px;padding:0 10px;transition:box-shadow .3s,border-color .3s}usa-disclosure[variant=\"cards\"]>details[open]{border-color:var(--usa-disclosure-accent);box-shadow:0 8px 24px rgba(124,92,255,.16)}@media (prefers-reduced-motion:reduce){usa-disclosure>details>summary::after{transition:none}}";
 
 function defineDisclosure(tag = 'usa-disclosure') {
     return defineElement(tag, (Base) => {
@@ -412,10 +412,10 @@ function defineDisclosure(tag = 'usa-disclosure') {
             }
         }
         return UsaDisclosure;
-    }, { id: 'disclosure', text: css$4 });
+    }, { id: 'disclosure', text: css$7 });
 }
 
-var css$3 = "usa-stories{display:block;position:relative;overflow:hidden;border-radius:var(--usa-radius,16px);background:#111;color:#fff;aspect-ratio:9/14;max-height:520px;user-select:none;-webkit-user-select:none;touch-action:manipulation}usa-stories>:not([data-usa-part]){position:absolute;inset:0;opacity:0;transition:opacity .35s ease,transform .5s cubic-bezier(.22,1,.36,1);transform:scale(1.04);pointer-events:none;box-sizing:border-box}usa-stories>[data-active]:not([data-usa-part]){opacity:1;transform:none;pointer-events:auto}usa-stories>img:not([data-usa-part]){width:100%;height:100%;object-fit:cover}.usa-stories-bars{position:absolute;z-index:3;top:8px;left:8px;right:48px;display:flex;gap:4px}.usa-stories-bar{flex:1;height:3px;border-radius:3px;background:rgba(255,255,255,.35);overflow:hidden}.usa-stories-bar>i{display:block;height:100%;width:100%;background:#fff;transform-origin:left;transform:scaleX(0)}.usa-stories-bar[data-done]>i{transform:scaleX(1)}.usa-stories-toggle{position:absolute;z-index:3;top:2px;right:6px;width:36px;height:30px;border:0;background:none;color:#fff;font:700 14px/1 system-ui;cursor:pointer;border-radius:8px}.usa-stories-toggle:focus-visible{outline:2px solid #fff}@media (prefers-reduced-motion:reduce){usa-stories>*{transition:none!important;transform:none!important}}";
+var css$6 = "usa-stories{display:block;position:relative;overflow:hidden;border-radius:var(--usa-radius,16px);background:#111;color:#fff;aspect-ratio:9/14;max-height:520px;user-select:none;-webkit-user-select:none;touch-action:manipulation}usa-stories>:not([data-usa-part]){position:absolute;inset:0;opacity:0;transition:opacity .35s ease,transform .5s cubic-bezier(.22,1,.36,1);transform:scale(1.04);pointer-events:none;box-sizing:border-box}usa-stories>[data-active]:not([data-usa-part]){opacity:1;transform:none;pointer-events:auto}usa-stories>img:not([data-usa-part]){width:100%;height:100%;object-fit:cover}.usa-stories-bars{position:absolute;z-index:3;top:8px;left:8px;right:48px;display:flex;gap:4px}.usa-stories-bar{flex:1;height:3px;border-radius:3px;background:rgba(255,255,255,.35);overflow:hidden}.usa-stories-bar>i{display:block;height:100%;width:100%;background:#fff;transform-origin:left;transform:scaleX(0)}.usa-stories-bar[data-done]>i{transform:scaleX(1)}.usa-stories-toggle{position:absolute;z-index:3;top:2px;right:6px;width:36px;height:30px;border:0;background:none;color:#fff;font:700 14px/1 system-ui;cursor:pointer;border-radius:8px}.usa-stories-toggle:focus-visible{outline:2px solid #fff}@media (prefers-reduced-motion:reduce){usa-stories>*{transition:none!important;transform:none!important}}";
 
 function defineStories(tag = 'usa-stories') {
     return defineElement(tag, (Base) => {
@@ -548,10 +548,10 @@ function defineStories(tag = 'usa-stories') {
             }
         }
         return UsaStories;
-    }, { id: 'stories', text: css$3 });
+    }, { id: 'stories', text: css$6 });
 }
 
-var css$2 = "usa-modal,usa-sheet{display:contents}.usa-ov{border:0;padding:0;margin:auto;color:inherit;background:transparent;max-width:min(92vw,520px);max-height:88vh;overflow:visible}.usa-ov::backdrop{background:rgba(10,12,20,.45);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}.usa-ov-body{box-sizing:border-box;background:var(--usa-ov-bg,#fff);color:var(--usa-ov-fg,#111827);border-radius:var(--usa-ov-radius,18px);padding:var(--usa-ov-pad,22px);box-shadow:0 30px 80px -20px rgba(0,0,0,.45);max-height:88vh;overflow:auto}.usa-sheet-panel{margin:0;max-width:none;max-height:none}usa-sheet[data-side=\"right\"] .usa-sheet-panel{inset:0 0 0 auto;height:100%;width:min(88vw,var(--usa-sheet-size,380px))}usa-sheet[data-side=\"left\"] .usa-sheet-panel{inset:0 auto 0 0;height:100%;width:min(88vw,var(--usa-sheet-size,380px))}usa-sheet[data-side=\"bottom\"] .usa-sheet-panel{inset:auto 0 0 0;width:100%;max-height:85vh}usa-sheet[data-side=\"top\"] .usa-sheet-panel{inset:0 0 auto 0;width:100%;max-height:85vh}usa-sheet .usa-ov-body{height:100%;max-height:inherit;border-radius:0}usa-sheet[data-side=\"bottom\"] .usa-ov-body{border-radius:var(--usa-ov-radius,18px) var(--usa-ov-radius,18px) 0 0;height:auto;max-height:85vh;touch-action:none}usa-sheet[data-side=\"top\"] .usa-ov-body{border-radius:0 0 var(--usa-ov-radius,18px) var(--usa-ov-radius,18px);height:auto}.usa-ov-grab{width:44px;height:5px;border-radius:3px;background:rgba(127,127,127,.45);margin:-8px auto 14px;cursor:grab}@media (prefers-color-scheme:dark){.usa-ov-body{background:var(--usa-ov-bg,#171a23);color:var(--usa-ov-fg,#e5e7eb)}}";
+var css$5 = "usa-modal,usa-sheet{display:contents}.usa-ov{border:0;padding:0;margin:auto;color:inherit;background:transparent;max-width:min(92vw,520px);max-height:88vh;overflow:visible}.usa-ov::backdrop{background:rgba(10,12,20,.45);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}.usa-ov-body{box-sizing:border-box;background:var(--usa-ov-bg,#fff);color:var(--usa-ov-fg,#111827);border-radius:var(--usa-ov-radius,18px);padding:var(--usa-ov-pad,22px);box-shadow:0 30px 80px -20px rgba(0,0,0,.45);max-height:88vh;overflow:auto}.usa-sheet-panel{margin:0;max-width:none;max-height:none}usa-sheet[data-side=\"right\"] .usa-sheet-panel{inset:0 0 0 auto;height:100%;width:min(88vw,var(--usa-sheet-size,380px))}usa-sheet[data-side=\"left\"] .usa-sheet-panel{inset:0 auto 0 0;height:100%;width:min(88vw,var(--usa-sheet-size,380px))}usa-sheet[data-side=\"bottom\"] .usa-sheet-panel{inset:auto 0 0 0;width:100%;max-height:85vh}usa-sheet[data-side=\"top\"] .usa-sheet-panel{inset:0 0 auto 0;width:100%;max-height:85vh}usa-sheet .usa-ov-body{height:100%;max-height:inherit;border-radius:0}usa-sheet[data-side=\"bottom\"] .usa-ov-body{border-radius:var(--usa-ov-radius,18px) var(--usa-ov-radius,18px) 0 0;height:auto;max-height:85vh;touch-action:none}usa-sheet[data-side=\"top\"] .usa-ov-body{border-radius:0 0 var(--usa-ov-radius,18px) var(--usa-ov-radius,18px);height:auto}.usa-ov-grab{width:44px;height:5px;border-radius:3px;background:rgba(127,127,127,.45);margin:-8px auto 14px;cursor:grab}@media (prefers-color-scheme:dark){.usa-ov-body{background:var(--usa-ov-bg,#171a23);color:var(--usa-ov-fg,#e5e7eb)}}";
 
 const MODAL_EFFECTS = ['scale', 'slide-up', 'flip', 'origin'];
 const SHEET_SIDES = ['right', 'left', 'bottom', 'top'];
@@ -778,12 +778,12 @@ function defineOverlay(tag, kind) {
             }
         }
         return UsaOverlay;
-    }, { id: 'overlay', text: css$2 });
+    }, { id: 'overlay', text: css$5 });
 }
 const defineModal = (tag = 'usa-modal') => defineOverlay(tag, 'modal');
 const defineSheet = (tag = 'usa-sheet') => defineOverlay(tag, 'sheet');
 
-var css$1 = "usa-toast-stack{position:fixed;z-index:2147482000;width:min(360px,calc(100vw - 24px));pointer-events:none;--usa-tstack-bg:#111827;--usa-tstack-fg:#f9fafb}usa-toast-stack[contained]{position:absolute;width:min(360px,calc(100% - 24px))}usa-toast-stack[data-position^=\"bottom\"]{bottom:12px}usa-toast-stack[data-position^=\"top\"]{top:12px}usa-toast-stack[data-position$=\"right\"]{right:12px}usa-toast-stack[data-position$=\"left\"]{left:12px}usa-toast-stack[data-position$=\"center\"]{left:50%;transform:translateX(-50%)}.usa-tstack-list{position:relative;list-style:none;margin:0;padding:0;min-height:1px;transition:height .3s}.usa-tstack{position:absolute;left:0;right:0;display:flex;align-items:center;gap:10px;box-sizing:border-box;padding:12px 12px 12px 14px;border-radius:14px;background:var(--usa-tstack-bg);color:var(--usa-tstack-fg);box-shadow:0 12px 32px -10px rgba(0,0,0,.45);font:500 14px/1.35 system-ui,sans-serif;pointer-events:auto;touch-action:pan-y;transition:transform .38s cubic-bezier(.22,1,.36,1),opacity .3s;user-select:none}usa-toast-stack[data-position^=\"bottom\"] .usa-tstack{bottom:0;transform-origin:50% 100%}usa-toast-stack[data-position^=\"top\"] .usa-tstack{top:0;transform-origin:50% 0}.usa-tstack-icon{flex:none;display:grid;place-items:center;width:22px;height:22px;border-radius:50%;font-size:13px;font-weight:800;background:#3b82f6;color:#fff}.usa-tstack-success .usa-tstack-icon{background:#22c55e}.usa-tstack-warning .usa-tstack-icon{background:#f59e0b}.usa-tstack-error .usa-tstack-icon{background:#ef4444}.usa-tstack-text{flex:1;min-width:0;display:flex;flex-direction:column}.usa-tstack-text strong{font-weight:700}.usa-tstack-action{border:0;border-radius:8px;padding:6px 10px;background:rgba(255,255,255,.14);color:inherit;font:600 13px system-ui,sans-serif;cursor:pointer}.usa-tstack-close{border:0;background:none;color:inherit;opacity:.6;font-size:18px;line-height:1;cursor:pointer;padding:2px 4px}.usa-tstack-close:hover{opacity:1}@media (prefers-reduced-motion:reduce){.usa-tstack,.usa-tstack-list{transition:none}}";
+var css$4 = "usa-toast-stack{position:fixed;z-index:2147482000;width:min(360px,calc(100vw - 24px));pointer-events:none;--usa-tstack-bg:#111827;--usa-tstack-fg:#f9fafb}usa-toast-stack[contained]{position:absolute;width:min(360px,calc(100% - 24px))}usa-toast-stack[data-position^=\"bottom\"]{bottom:12px}usa-toast-stack[data-position^=\"top\"]{top:12px}usa-toast-stack[data-position$=\"right\"]{right:12px}usa-toast-stack[data-position$=\"left\"]{left:12px}usa-toast-stack[data-position$=\"center\"]{left:50%;transform:translateX(-50%)}.usa-tstack-list{position:relative;list-style:none;margin:0;padding:0;min-height:1px;transition:height .3s}.usa-tstack{position:absolute;left:0;right:0;display:flex;align-items:center;gap:10px;box-sizing:border-box;padding:12px 12px 12px 14px;border-radius:14px;background:var(--usa-tstack-bg);color:var(--usa-tstack-fg);box-shadow:0 12px 32px -10px rgba(0,0,0,.45);font:500 14px/1.35 system-ui,sans-serif;pointer-events:auto;touch-action:pan-y;transition:transform .38s cubic-bezier(.22,1,.36,1),opacity .3s;user-select:none}usa-toast-stack[data-position^=\"bottom\"] .usa-tstack{bottom:0;transform-origin:50% 100%}usa-toast-stack[data-position^=\"top\"] .usa-tstack{top:0;transform-origin:50% 0}.usa-tstack-icon{flex:none;display:grid;place-items:center;width:22px;height:22px;border-radius:50%;font-size:13px;font-weight:800;background:#3b82f6;color:#fff}.usa-tstack-success .usa-tstack-icon{background:#22c55e}.usa-tstack-warning .usa-tstack-icon{background:#f59e0b}.usa-tstack-error .usa-tstack-icon{background:#ef4444}.usa-tstack-text{flex:1;min-width:0;display:flex;flex-direction:column}.usa-tstack-text strong{font-weight:700}.usa-tstack-action{border:0;border-radius:8px;padding:6px 10px;background:rgba(255,255,255,.14);color:inherit;font:600 13px system-ui,sans-serif;cursor:pointer}.usa-tstack-close{border:0;background:none;color:inherit;opacity:.6;font-size:18px;line-height:1;cursor:pointer;padding:2px 4px}.usa-tstack-close:hover{opacity:1}@media (prefers-reduced-motion:reduce){.usa-tstack,.usa-tstack-list{transition:none}}";
 
 const TOAST_POSITIONS = ['bottom-right', 'bottom-left', 'bottom-center', 'top-right', 'top-left', 'top-center'];
 const ICONS = { info: 'ℹ', success: '✓', warning: '!', error: '✕' };
@@ -954,7 +954,7 @@ function defineToastStack(tag = 'usa-toast-stack') {
             }
         }
         return UsaToastStack;
-    }, { id: 'toast', text: css$1 });
+    }, { id: 'toast', text: css$4 });
 }
 /** Show a toast on the first `<usa-toast-stack>` of the page (one is created when missing). */
 function stackToast(input, stack) {
@@ -982,7 +982,7 @@ function installToastTriggers() {
     });
 }
 
-var css = "usa-menu{position:relative;display:inline-block}.usa-menu-list{position:absolute;z-index:50;min-width:180px;max-width:min(280px,90vw);box-sizing:border-box;padding:6px;border-radius:12px;background:var(--usa-menu-bg,#fff);color:var(--usa-menu-fg,#111827);box-shadow:0 18px 44px -12px rgba(0,0,0,.35),0 0 0 1px rgba(127,127,127,.15);display:flex;flex-direction:column;gap:2px;text-align:left}.usa-menu-list[hidden]{display:none}usa-menu[data-placement^=\"bottom\"] .usa-menu-list{top:calc(100% + 6px)}usa-menu[data-placement^=\"top\"] .usa-menu-list{bottom:calc(100% + 6px)}usa-menu[data-placement$=\"start\"] .usa-menu-list{left:0;transform-origin:0 0}usa-menu[data-placement$=\"end\"] .usa-menu-list{right:0;transform-origin:100% 0}usa-menu[data-placement=\"top-start\"] .usa-menu-list{transform-origin:0 100%}usa-menu[data-placement=\"top-end\"] .usa-menu-list{transform-origin:100% 100%}.usa-menu-list>[role=\"menuitem\"]{display:flex;align-items:center;gap:8px;width:100%;box-sizing:border-box;border:0;background:none;color:inherit;font:500 14px/1.3 system-ui,sans-serif;text-align:left;text-decoration:none;padding:8px 10px;border-radius:8px;cursor:pointer}.usa-menu-list>[role=\"menuitem\"]:hover,.usa-menu-list>[role=\"menuitem\"]:focus-visible{background:var(--usa-menu-hover,rgba(124,92,255,.14));outline:none}.usa-menu-list>hr{border:0;border-top:1px solid rgba(127,127,127,.2);margin:4px 2px}@media (prefers-color-scheme:dark){.usa-menu-list{background:var(--usa-menu-bg,#1d2130);color:var(--usa-menu-fg,#e5e7eb)}}";
+var css$3 = "usa-menu{position:relative;display:inline-block}.usa-menu-list{position:absolute;z-index:50;min-width:180px;max-width:min(280px,90vw);box-sizing:border-box;padding:6px;border-radius:12px;background:var(--usa-menu-bg,#fff);color:var(--usa-menu-fg,#111827);box-shadow:0 18px 44px -12px rgba(0,0,0,.35),0 0 0 1px rgba(127,127,127,.15);display:flex;flex-direction:column;gap:2px;text-align:left}.usa-menu-list[hidden]{display:none}usa-menu[data-placement^=\"bottom\"] .usa-menu-list{top:calc(100% + 6px)}usa-menu[data-placement^=\"top\"] .usa-menu-list{bottom:calc(100% + 6px)}usa-menu[data-placement$=\"start\"] .usa-menu-list{left:0;transform-origin:0 0}usa-menu[data-placement$=\"end\"] .usa-menu-list{right:0;transform-origin:100% 0}usa-menu[data-placement=\"top-start\"] .usa-menu-list{transform-origin:0 100%}usa-menu[data-placement=\"top-end\"] .usa-menu-list{transform-origin:100% 100%}.usa-menu-list>[role=\"menuitem\"]{display:flex;align-items:center;gap:8px;width:100%;box-sizing:border-box;border:0;background:none;color:inherit;font:500 14px/1.3 system-ui,sans-serif;text-align:left;text-decoration:none;padding:8px 10px;border-radius:8px;cursor:pointer}.usa-menu-list>[role=\"menuitem\"]:hover,.usa-menu-list>[role=\"menuitem\"]:focus-visible{background:var(--usa-menu-hover,rgba(124,92,255,.14));outline:none}.usa-menu-list>hr{border:0;border-top:1px solid rgba(127,127,127,.2);margin:4px 2px}@media (prefers-color-scheme:dark){.usa-menu-list{background:var(--usa-menu-bg,#1d2130);color:var(--usa-menu-fg,#e5e7eb)}}";
 
 const MENU_EFFECTS = ['scale', 'fold', 'slide'];
 function defineMenu(tag = 'usa-menu') {
@@ -1121,7 +1121,505 @@ function defineMenu(tag = 'usa-menu') {
             }
         }
         return UsaMenu;
-    }, { id: 'menu', text: css });
+    }, { id: 'menu', text: css$3 });
+}
+
+var css$2 = "usa-progress-ring{position:relative;display:inline-block;vertical-align:middle;width:var(--usa-pr-size,120px);aspect-ratio:1;--usa-pr-color:#7c5cff;--usa-pr-track:rgba(127,127,127,.18);--usa-pr-width:9;font:700 calc(var(--usa-pr-size,120px)*.2)/1 system-ui,sans-serif;font-variant-numeric:tabular-nums}usa-progress-ring[data-variant=\"semi\"]{aspect-ratio:100/56}.usa-pr-label{position:absolute;inset:0;display:grid;place-items:center}usa-progress-ring[data-variant=\"semi\"] .usa-pr-label{place-items:end center}usa-progress-ring[data-variant=\"bar\"]{display:inline-flex;width:var(--usa-pr-size,100%);aspect-ratio:auto;gap:10px;align-items:center;font-size:14px}usa-progress-ring[data-variant=\"bar\"]>.usa-pr-track{flex:1 1 auto;min-width:40px}usa-progress-ring[data-variant=\"bar\"] .usa-pr-label{position:static;display:inline}usa-progress-ring .usa-pr-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}.usa-pr-svg path{fill:none;stroke-width:var(--usa-pr-width);stroke-linecap:round}.usa-pr-svg .usa-pr-track{stroke:var(--usa-pr-track)}.usa-pr-svg .usa-pr-arc{stroke:var(--usa-pr-color)}usa-progress-ring[data-variant=\"semi\"] .usa-pr-label{padding-bottom:2%}.usa-pr-track:is(div){height:10px;border-radius:999px;background:var(--usa-pr-track);overflow:hidden}.usa-pr-fill{height:100%;border-radius:inherit;background:var(--usa-pr-color);transform-origin:0 50%;transform:scaleX(0)}usa-progress-ring[data-indeterminate] .usa-pr-svg{animation:usa-pr-spin 1.1s linear infinite}usa-progress-ring[data-indeterminate] .usa-pr-fill{width:35%;transform:none!important;animation:usa-pr-slide 1.3s ease-in-out infinite}@keyframes usa-pr-spin{to{transform:rotate(360deg)}}@keyframes usa-pr-slide{from{margin-left:-35%}to{margin-left:100%}}usa-odometer{display:inline-flex;align-items:flex-end;font-variant-numeric:tabular-nums;line-height:1.15}.usa-odo-row{display:inline-flex;align-items:flex-end}.usa-odo-col{display:inline-block;height:1.15em;overflow:hidden;-webkit-mask-image:linear-gradient(transparent,#000 18%,#000 82%,transparent);mask-image:linear-gradient(transparent,#000 18%,#000 82%,transparent)}.usa-odo-strip{display:block;white-space:pre;line-height:1.15em;text-align:center}.usa-odo-sym{display:inline-block;height:1.15em}@media (prefers-reduced-motion:reduce){usa-progress-ring[data-indeterminate] .usa-pr-svg,usa-progress-ring[data-indeterminate] .usa-pr-fill{animation-duration:4s}}";
+
+const PROGRESS_VARIANTS = ['ring', 'bar', 'semi'];
+const NS = 'http://www.w3.org/2000/svg';
+function defineProgressRing(tag = 'usa-progress-ring') {
+    return defineElement(tag, (Base) => {
+        class UsaProgressRing extends Base {
+            constructor() {
+                super(...arguments);
+                this._shown = 0;
+                this._arc = null;
+                this._label = null;
+                this._len = 1;
+                this._raf = 0;
+            }
+            static get observedAttributes() {
+                return ['variant', 'value', 'max', 'gradient'];
+            }
+            get value() {
+                return this.hasAttribute('value') ? this.num('value', 0) : null;
+            }
+            set value(v) {
+                if (v === null)
+                    this.removeAttribute('value');
+                else
+                    this.setAttribute('value', String(v));
+            }
+            get max() {
+                return Math.max(1e-9, this.num('max', 100));
+            }
+            set max(v) {
+                this.setAttribute('max', String(v));
+            }
+            changed(name) {
+                if (name === 'value' && this._arc)
+                    return this.update();
+                super.changed(name);
+            }
+            mount() {
+                const v = this.str('variant', 'ring');
+                const variant = PROGRESS_VARIANTS.includes(v) ? v : 'ring';
+                this.dataset.variant = variant;
+                this.setAttribute('role', 'progressbar');
+                this.setAttribute('aria-valuemin', '0');
+                this.querySelectorAll(':scope > [data-usa-part]').forEach((n) => n.remove());
+                const stops = this.str('gradient', '').split(',').map((s) => s.trim()).filter(Boolean);
+                const gid = `usa-pr-${Math.random().toString(36).slice(2, 8)}`;
+                if (variant === 'bar') {
+                    const track = part('div', 'usa-pr-track');
+                    const fill = part('div', 'usa-pr-fill');
+                    if (stops.length)
+                        fill.style.background = `linear-gradient(90deg,${stops.join(',')})`;
+                    track.append(fill);
+                    this.append(track);
+                    this._arc = fill;
+                }
+                else {
+                    const svg = document.createElementNS(NS, 'svg');
+                    svg.setAttribute('data-usa-part', '');
+                    svg.setAttribute('aria-hidden', 'true');
+                    svg.setAttribute('class', 'usa-pr-svg');
+                    svg.setAttribute('width', '100%');
+                    svg.setAttribute('height', '100%');
+                    const semi = variant === 'semi';
+                    svg.setAttribute('viewBox', semi ? '0 0 100 56' : '0 0 100 100');
+                    const d = semi ? 'M 8 50 A 42 42 0 0 1 92 50' : 'M 50 8 A 42 42 0 1 1 49.99 8';
+                    const grad = stops.length ? `<defs><linearGradient id="${gid}" x1="0" y1="0" x2="1" y2="1">${stops.map((c, i) => `<stop offset="${stops.length > 1 ? i / (stops.length - 1) : 0}" stop-color="${c}"/>`).join('')}</linearGradient></defs>` : '';
+                    svg.innerHTML = `${grad}<path class="usa-pr-track" d="${d}"/><path class="usa-pr-arc" d="${d}"${stops.length ? ` stroke="url(#${gid})"` : ''}/>`;
+                    this.append(svg);
+                    this._arc = svg.querySelector('.usa-pr-arc');
+                    this._len = semi ? Math.PI * 42 : Math.PI * 2 * 42;
+                    this._arc.style.strokeDasharray = `${this._len}`;
+                    this._arc.style.strokeDashoffset = `${this._len}`;
+                }
+                this._label = part('span', 'usa-pr-label', { 'aria-hidden': 'true' });
+                if (this.flag('no-label'))
+                    this._label.hidden = true;
+                this.append(this._label);
+                this._shown = 0;
+                this.onCleanup(() => {
+                    if (this._raf && typeof cancelAnimationFrame === 'function')
+                        cancelAnimationFrame(this._raf);
+                });
+                this.update();
+            }
+            paint(frac) {
+                const f = clampN(frac, 0, 1.08);
+                if (this._arc instanceof HTMLElement)
+                    this._arc.style.transform = `scaleX(${Math.min(1, f)})`;
+                else if (this._arc)
+                    this._arc.style.strokeDashoffset = `${(this._len * (1 - Math.min(1, f))).toFixed(2)}`;
+            }
+            update() {
+                const v = this.value;
+                const max = this.max;
+                this.setAttribute('aria-valuemax', String(max));
+                this.toggleAttribute('data-indeterminate', v === null);
+                if (v === null) {
+                    this.removeAttribute('aria-valuenow');
+                    if (this._label)
+                        this._label.textContent = '';
+                    this.paint(0.28);
+                    return;
+                }
+                const target = clampN(v, 0, max) / max;
+                this.setAttribute('aria-valuenow', String(clampN(v, 0, max)));
+                const from = this._shown;
+                this._shown = target;
+                const label = (f) => {
+                    if (this._label)
+                        this._label.textContent = `${Math.round(f * 100)}%`;
+                };
+                if (this._raf && typeof cancelAnimationFrame === 'function')
+                    cancelAnimationFrame(this._raf);
+                if (this.reduced || typeof requestAnimationFrame !== 'function') {
+                    this.paint(target);
+                    label(target);
+                }
+                else {
+                    const t0 = performance.now();
+                    const dur = this.num('duration', 900);
+                    const step = (now) => {
+                        const k = Math.min(1, (now - t0) / dur);
+                        // ease-out-back: a little overshoot, then settle
+                        const c = 1.4;
+                        const e = 1 + (c + 1) * Math.pow(k - 1, 3) + c * Math.pow(k - 1, 2);
+                        const f = from + (target - from) * e;
+                        this.paint(f);
+                        label(from + (target - from) * Math.min(1, k * 1.15));
+                        this._raf = k < 1 ? requestAnimationFrame(step) : 0;
+                        if (k >= 1)
+                            this.paint(target);
+                    };
+                    this._raf = requestAnimationFrame(step);
+                }
+                if (target >= 1 && from < 1)
+                    this.emit('complete', { value: v });
+            }
+        }
+        return UsaProgressRing;
+    }, { id: 'meters', text: css$2 });
+}
+function defineOdometer(tag = 'usa-odometer') {
+    return defineElement(tag, (Base) => {
+        class UsaOdometer extends Base {
+            constructor() {
+                super(...arguments);
+                this._row = null;
+                this._text = '';
+            }
+            static get observedAttributes() {
+                return ['value', 'locale', 'decimals', 'prefix', 'suffix'];
+            }
+            get value() {
+                return this.num('value', 0);
+            }
+            set value(v) {
+                this.setAttribute('value', String(v));
+            }
+            get text() {
+                return this._text;
+            }
+            changed(name) {
+                if (name === 'value' && this._row)
+                    return this.render(true);
+                super.changed(name);
+            }
+            mount() {
+                this.querySelectorAll(':scope > [data-usa-part]').forEach((n) => n.remove());
+                this._row = part('span', 'usa-odo-row', { 'aria-hidden': 'true' });
+                this.append(this._row);
+                this.setAttribute('role', 'img');
+                this._text = '';
+                this.render(false);
+            }
+            format() {
+                const d = Math.max(0, Math.min(6, Math.round(this.num('decimals', 0))));
+                let s;
+                try {
+                    s = new Intl.NumberFormat(this.str('locale', '') || undefined, { minimumFractionDigits: d, maximumFractionDigits: d }).format(this.value);
+                }
+                catch {
+                    s = this.value.toFixed(d);
+                }
+                return `${this.str('prefix', '')}${s}${this.str('suffix', '')}`;
+            }
+            column(ch) {
+                const isDigit = /\d/.test(ch);
+                const col = part('span', isDigit ? 'usa-odo-col' : 'usa-odo-sym');
+                if (isDigit) {
+                    const strip = document.createElement('span');
+                    strip.className = 'usa-odo-strip';
+                    strip.textContent = '01234567890123456789'.split('').join('\n');
+                    col.append(strip);
+                    col.dataset.d = ch;
+                    strip.style.transform = `translateY(${-Number(ch) * 5}%)`;
+                }
+                else
+                    col.textContent = ch;
+                return col;
+            }
+            render(animate) {
+                const row = this._row;
+                if (!row)
+                    return;
+                const next = this.format();
+                this._text = next;
+                this.setAttribute('aria-label', next);
+                const anim = animate && !this.reduced;
+                const dur = this.num('duration', 1100);
+                const chars = next.split('');
+                const old = Array.from(row.children);
+                const off = chars.length - old.length; // right-aligned: digits keep their place value
+                const fresh = new Set();
+                const cols = chars.map((ch, i) => {
+                    const o = old[i - off];
+                    const digit = /\d/.test(ch);
+                    if (o && digit && o.dataset.d !== undefined)
+                        return o;
+                    if (o && !digit && o.dataset.d === undefined) {
+                        o.textContent = ch;
+                        return o;
+                    }
+                    const c = this.column(ch);
+                    fresh.add(c);
+                    return c;
+                });
+                row.replaceChildren(...cols);
+                cols.forEach((c, i) => {
+                    if (fresh.has(c)) {
+                        if (anim)
+                            this.motion(c, [{ opacity: 0, transform: 'translateY(-60%)' }, { opacity: 1, transform: 'none' }], { duration: 420, easing: 'cubic-bezier(.22,1,.36,1)' });
+                        return;
+                    }
+                    if (c.dataset.d === undefined)
+                        return;
+                    const to = Number(chars[i]);
+                    const from = Number(c.dataset.d);
+                    c.dataset.d = String(to);
+                    const strip = c.firstElementChild;
+                    strip.style.transform = `translateY(${-to * 5}%)`;
+                    if (!anim || from === to)
+                        return;
+                    const end = to >= from ? -to * 5 : -(to + 10) * 5; // always roll forward
+                    const place = cols.length - i;
+                    this.motion(strip, [{ transform: `translateY(${-from * 5}%)` }, { transform: `translateY(${end}%)` }], { duration: Math.max(400, dur - place * 60), easing: 'cubic-bezier(.2,.9,.25,1.04)' });
+                });
+            }
+        }
+        return UsaOdometer;
+    }, { id: 'meters', text: css$2 });
+}
+
+var css$1 = "usa-skeleton-reveal{position:relative;display:block;--usa-sk-base:rgba(127,127,127,.16);--usa-sk-hi:rgba(255,255,255,.55)}usa-skeleton-reveal[data-loading]>:not(.usa-sk-layer){visibility:hidden}.usa-sk-layer{position:absolute;inset:0;pointer-events:none}.usa-sk-box{position:absolute;border-radius:6px;background:var(--usa-sk-base);overflow:hidden}usa-skeleton-reveal[data-variant=\"wave\"] .usa-sk-box{background:linear-gradient(100deg,var(--usa-sk-base) 30%,var(--usa-sk-hi) 50%,var(--usa-sk-base) 70%) var(--usa-sk-x,0) 0/var(--usa-sk-w,600px) 100% no-repeat,var(--usa-sk-base);animation:usa-sk-wave 1.4s linear infinite}usa-skeleton-reveal[data-variant=\"pulse\"] .usa-sk-box{animation:usa-sk-pulse 1.2s ease-in-out infinite alternate}usa-skeleton-reveal[data-variant=\"glow\"] .usa-sk-box{animation:usa-sk-glow 1.6s ease-in-out infinite alternate}@keyframes usa-sk-wave{from{background-position:calc(var(--usa-sk-x,0px) - var(--usa-sk-w,600px)) 0,0 0}to{background-position:calc(var(--usa-sk-x,0px) + var(--usa-sk-w,600px)) 0,0 0}}@keyframes usa-sk-pulse{from{opacity:1}to{opacity:.45}}@keyframes usa-sk-glow{from{box-shadow:0 0 0 rgba(124,92,255,0)}to{box-shadow:0 0 14px rgba(124,92,255,.45);background:rgba(124,92,255,.22)}}@media (prefers-color-scheme:dark){usa-skeleton-reveal{--usa-sk-hi:rgba(255,255,255,.16)}}@media (prefers-reduced-motion:reduce){.usa-sk-box{animation:none!important}}";
+
+const SKELETON_VARIANTS = ['wave', 'pulse', 'glow'];
+function defineSkeletonReveal(tag = 'usa-skeleton-reveal') {
+    return defineElement(tag, (Base) => {
+        class UsaSkeletonReveal extends Base {
+            constructor() {
+                super(...arguments);
+                this._layer = null;
+            }
+            static get observedAttributes() {
+                return ['loading', 'variant'];
+            }
+            get loading() {
+                return this.flag('loading');
+            }
+            set loading(v) {
+                this.setFlag('loading', v);
+            }
+            changed(name) {
+                if (name === 'loading') {
+                    if (this.loading)
+                        this.build();
+                    else
+                        void this.reveal();
+                    return;
+                }
+                super.changed(name);
+            }
+            mount() {
+                const v = this.str('variant', 'wave');
+                this.dataset.variant = SKELETON_VARIANTS.includes(v) ? v : 'wave';
+                if (this.loading)
+                    this.build();
+                if (typeof ResizeObserver === 'function') {
+                    const ro = new ResizeObserver(() => this.loading && this.build());
+                    ro.observe(this);
+                    this.onCleanup(() => ro.disconnect());
+                }
+                this.onCleanup(() => this._layer?.remove());
+            }
+            /** Measure the content and lay placeholders over it. */
+            build() {
+                this.setAttribute('aria-busy', 'true');
+                this.setAttribute('data-loading', '');
+                this._layer?.remove();
+                const layer = part('div', 'usa-sk-layer', { 'aria-hidden': 'true' });
+                const host = this.getBoundingClientRect();
+                const boxes = [];
+                const add = (r, round = false) => {
+                    if (r.width < 2 || r.height < 2)
+                        return;
+                    boxes.push([r.left - host.left, r.top - host.top, r.width, r.height, round]);
+                };
+                const marked = Array.from(this.querySelectorAll('[data-skeleton], img, svg, video, canvas, button, input'));
+                for (const m of marked)
+                    if (!m.closest('.usa-sk-layer'))
+                        add(m.getBoundingClientRect(), m.dataset.skeleton === 'circle' || getComputedStyle(m).borderRadius === '50%');
+                // text: one bar per rendered line (Range client rects), skipping marked elements
+                const walker = document.createTreeWalker(this, NodeFilter.SHOW_TEXT);
+                for (let n = walker.nextNode(); n; n = walker.nextNode()) {
+                    if (!n.textContent?.trim() || (n.parentElement && marked.some((m) => m.contains(n.parentElement))))
+                        continue;
+                    const range = document.createRange();
+                    range.selectNodeContents(n);
+                    const rects = typeof range.getClientRects === 'function' ? Array.from(range.getClientRects()) : [];
+                    for (const r of rects)
+                        add({ left: r.left, top: r.top + r.height * 0.18, width: r.width, height: r.height * 0.64 });
+                }
+                for (const [x, y, w, h, round] of boxes) {
+                    const b = document.createElement('span');
+                    b.className = 'usa-sk-box';
+                    b.style.cssText = `left:${x.toFixed(1)}px;top:${y.toFixed(1)}px;width:${w.toFixed(1)}px;height:${h.toFixed(1)}px;${round ? 'border-radius:50%' : ''}`;
+                    b.style.setProperty('--usa-sk-x', `${(-x).toFixed(1)}px`);
+                    layer.append(b);
+                }
+                this.append(layer);
+                this._layer = layer;
+            }
+            reveal() {
+                const layer = this._layer;
+                this.removeAttribute('aria-busy');
+                if (this.hasAttribute('loading'))
+                    this.removeAttribute('loading');
+                this._layer = null;
+                if (!layer) {
+                    this.removeAttribute('data-loading');
+                    return Promise.resolve();
+                }
+                const boxes = Array.from(layer.children);
+                const kids = Array.from(this.children).filter((c) => c !== layer);
+                this.removeAttribute('data-loading');
+                const done = [];
+                if (this.reduced) {
+                    const a = this.motion(layer, [{ opacity: 1 }, { opacity: 0 }], { duration: 200, fill: 'forwards' });
+                    if (a)
+                        done.push(a.finished);
+                }
+                else {
+                    const top = Math.min(...boxes.map((b) => parseFloat(b.style.top) || 0), 0);
+                    for (const b of boxes) {
+                        const a = this.motion(b, [{ opacity: 1, transform: 'none', filter: 'blur(0)' }, { opacity: 0, transform: 'scale(1.04)', filter: 'blur(6px)' }], { duration: 420, delay: Math.min(500, ((parseFloat(b.style.top) || 0) - top) * 1.2), easing: 'cubic-bezier(.4,0,.2,1)', fill: 'forwards' });
+                        if (a)
+                            done.push(a.finished);
+                    }
+                    kids.forEach((k, i) => this.motion(k, [{ opacity: 0, filter: 'blur(8px)', transform: 'translateY(6px)' }, { opacity: 1, filter: 'blur(0)', transform: 'none' }], { duration: 520, delay: 60 + i * 70, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'backwards' }));
+                }
+                const end = () => {
+                    layer.remove();
+                    this.emit('reveal');
+                };
+                return Promise.all(done).then(end, end);
+            }
+        }
+        return UsaSkeletonReveal;
+    }, { id: 'skeleton-reveal', text: css$1 });
+}
+
+var css = "usa-star-rating{display:inline-flex;gap:var(--usa-star-gap,4px);--usa-star-size:28px;--usa-star-on:#fbbf24;--usa-star-off:rgba(127,127,127,.28);cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;border-radius:8px}usa-star-rating[readonly]{cursor:default}usa-star-rating:focus-visible{outline:2px solid var(--usa-star-on);outline-offset:4px}.usa-star{position:relative;display:inline-block;width:var(--usa-star-size);height:var(--usa-star-size);--usa-star-fill:0%}.usa-star svg{display:block;width:100%;height:100%;overflow:visible;stroke:none}.usa-star-bg{fill:var(--usa-star-off)}.usa-star-fg{position:absolute;left:0;top:0;bottom:0;width:var(--usa-star-fill);overflow:hidden;transition:width .18s ease-out}.usa-star-fg svg{width:var(--usa-star-size);height:var(--usa-star-size);fill:var(--usa-star-on);filter:drop-shadow(0 1px 3px rgba(251,191,36,.45))}usa-star-rating[data-preview] .usa-star-fg{opacity:.8}.usa-star-spark{position:absolute;left:50%;top:50%;width:6px;height:6px;border-radius:50%;background:var(--usa-star-on);pointer-events:none}@media (prefers-reduced-motion:reduce){.usa-star-fg{transition:none}}";
+
+const PATHS = {
+    star: 'M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z',
+    heart: 'M12 21s-7.5-4.6-9.6-9.2C.9 8.4 2.9 4.5 6.6 4.5c2.1 0 3.6 1.2 5.4 3.1 1.8-1.9 3.3-3.1 5.4-3.1 3.7 0 5.7 3.9 4.2 7.3C19.5 16.4 12 21 12 21z',
+};
+function defineStarRating(tag = 'usa-star-rating') {
+    return defineElement(tag, (Base) => {
+        class UsaStarRating extends Base {
+            constructor() {
+                super(...arguments);
+                this._v = 0;
+                this._stars = [];
+            }
+            static get observedAttributes() {
+                return ['max', 'icon', 'readonly', 'step'];
+            }
+            get value() {
+                return this._v;
+            }
+            set value(v) {
+                this.set(v, false);
+            }
+            get max() {
+                return Math.max(1, Math.round(this.num('max', 5)));
+            }
+            get step() {
+                return this.num('step', 1) === 0.5 ? 0.5 : 1;
+            }
+            mount() {
+                this.querySelectorAll(':scope > [data-usa-part]').forEach((n) => n.remove());
+                const icon = PATHS[this.str('icon', 'star')] || PATHS.star;
+                this._stars = [];
+                for (let i = 0; i < this.max; i++) {
+                    const s = part('span', 'usa-star', { 'aria-hidden': 'true' }, `<svg viewBox="0 0 24 24" width="100%" height="100%"><path class="usa-star-bg" d="${icon}"/></svg><span class="usa-star-fg"><svg viewBox="0 0 24 24" width="24" height="24"><path d="${icon}"/></svg></span>`);
+                    this._stars.push(s);
+                    this.append(s);
+                }
+                const ro = this.flag('readonly');
+                this.setAttribute('role', ro ? 'img' : 'slider');
+                if (!ro) {
+                    this.tabIndex = 0;
+                    this.setAttribute('aria-valuemin', '0');
+                    this.setAttribute('aria-valuemax', String(this.max));
+                }
+                if (!this.hasAttribute('aria-label'))
+                    this.setAttribute('aria-label', this.str('label', 'Rating'));
+                this._v = clampN(this.num('value', 0), 0, this.max);
+                this.paint(this._v);
+                this.sync();
+                if (ro)
+                    return;
+                const at = (e) => {
+                    const r = this._stars[0].getBoundingClientRect();
+                    const last = this._stars[this._stars.length - 1].getBoundingClientRect();
+                    const w = last.right - r.left || 1;
+                    const raw = ((e.clientX - r.left) / w) * this.max;
+                    return clampN(Math.ceil(raw / this.step) * this.step, this.step, this.max);
+                };
+                this.listen(this, 'pointermove', (e) => {
+                    this.setAttribute('data-preview', '');
+                    this.paint(at(e));
+                });
+                this.listen(this, 'pointerleave', () => {
+                    this.removeAttribute('data-preview');
+                    this.paint(this._v);
+                });
+                this.listen(this, 'click', (e) => this.set(at(e), true));
+                this.listen(this, 'keydown', (e) => {
+                    const k = e.key;
+                    let v = this._v;
+                    if (k === 'ArrowRight' || k === 'ArrowUp')
+                        v += this.step;
+                    else if (k === 'ArrowLeft' || k === 'ArrowDown')
+                        v -= this.step;
+                    else if (k === 'Home')
+                        v = 0;
+                    else if (k === 'End')
+                        v = this.max;
+                    else
+                        return;
+                    e.preventDefault();
+                    this.set(v, true);
+                });
+            }
+            sync() {
+                this.setAttribute('aria-valuenow', String(this._v));
+                this.setAttribute('aria-valuetext', `${this._v} of ${this.max}`);
+                if (this.flag('readonly'))
+                    this.setAttribute('aria-label', `${this.str('label', 'Rating')}: ${this._v} of ${this.max}`);
+            }
+            paint(v) {
+                this._stars.forEach((s, i) => s.style.setProperty('--usa-star-fill', `${(clampN(v - i, 0, 1) * 100).toFixed(0)}%`));
+            }
+            set(v, user) {
+                const nv = clampN(Math.round(v / this.step) * this.step, 0, this.max);
+                const changed = nv !== this._v;
+                this._v = nv;
+                this.paint(nv);
+                this.sync();
+                if (!user)
+                    return;
+                const idx = Math.ceil(nv) - 1;
+                if (!this.reduced && idx >= 0) {
+                    const star = this._stars[idx];
+                    this.motion(star, [{ transform: 'scale(1)' }, { transform: 'scale(1.45) rotate(-12deg)', offset: 0.35 }, { transform: 'scale(.92)', offset: 0.7 }, { transform: 'none' }], { duration: 520, easing: 'cubic-bezier(.3,1.4,.5,1)' });
+                    this._stars.slice(0, idx).forEach((s, i) => this.motion(s, [{ transform: 'none' }, { transform: 'translateY(-5px)' }, { transform: 'none' }], { duration: 320, delay: i * 45, easing: 'ease-out' }));
+                    for (let k = 0; k < 8; k++) {
+                        const sp = part('span', 'usa-star-spark', { 'aria-hidden': 'true' });
+                        star.append(sp);
+                        const a = (k / 8) * Math.PI * 2;
+                        const anim = this.motion(sp, [{ transform: 'translate(-50%,-50%) scale(1)', opacity: 1 }, { transform: `translate(calc(-50% + ${(Math.cos(a) * 22).toFixed(1)}px), calc(-50% + ${(Math.sin(a) * 22).toFixed(1)}px)) scale(.2)`, opacity: 0 }], { duration: 520, easing: 'cubic-bezier(.2,.8,.3,1)', fill: 'forwards' });
+                        const rm = () => sp.remove();
+                        if (anim)
+                            anim.finished.then(rm, rm);
+                        else
+                            rm();
+                    }
+                }
+                if (changed)
+                    this.emit('change', { value: nv });
+            }
+        }
+        return UsaStarRating;
+    }, { id: 'star-rating', text: css });
 }
 
 /**
@@ -1140,6 +1638,7 @@ function defineMenu(tag = 'usa-menu') {
 const WIDGETS = {
     '6.2': { 'usa-carousel': defineCarousel, 'usa-tab-bar': defineTabBar, 'usa-disclosure': defineDisclosure, 'usa-stories': defineStories },
     '6.3': { 'usa-toast-stack': defineToastStack, 'usa-modal': defineModal, 'usa-sheet': defineSheet, 'usa-menu': defineMenu },
+    '6.4': { 'usa-progress-ring': defineProgressRing, 'usa-odometer': defineOdometer, 'usa-skeleton-reveal': defineSkeletonReveal, 'usa-star-rating': defineStarRating },
 };
 /** Every widget tag, in release order. */
 const WIDGET_TAGS = Object.values(WIDGETS).flatMap((g) => Object.keys(g));
@@ -1151,5 +1650,5 @@ function defineWidgets(release) {
                 fn(tag);
 }
 
-export { CAROUSEL_EFFECTS, MENU_EFFECTS, MODAL_EFFECTS, SHEET_SIDES, TAB_INDICATORS, TOAST_POSITIONS, WIDGETS, WIDGET_TAGS, defineCarousel, defineDisclosure, defineMenu, defineModal, defineSheet, defineStories, defineTabBar, defineToastStack, defineWidgets, stackToast };
+export { CAROUSEL_EFFECTS, MENU_EFFECTS, MODAL_EFFECTS, PROGRESS_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, TAB_INDICATORS, TOAST_POSITIONS, WIDGETS, WIDGET_TAGS, defineCarousel, defineDisclosure, defineMenu, defineModal, defineOdometer, defineProgressRing, defineSheet, defineSkeletonReveal, defineStarRating, defineStories, defineTabBar, defineToastStack, defineWidgets, stackToast };
 //# sourceMappingURL=widgets.js.map

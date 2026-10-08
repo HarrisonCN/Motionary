@@ -5,7 +5,7 @@ Since **v2.2** (now **v3**) the package ships **30 animated UI components** as s
 - in any modern browser (Chrome, Edge, Firefox, Safari), and with React, Vue, Svelte, Solid, Angular or no framework;
 - in **Windows desktop software** that renders its UI with a web view — Electron, Tauri (WebView2), WinUI 3 / WPF / WinForms with WebView2, and installed PWAs. See **[Windows apps guide](./windows-apps.md)**.
 
-Live gallery: <https://harrisoncn.github.io/motionary/showcase/components.html>
+Live gallery: <https://harrisoncn.github.io/Motionary/showcase/components.html>
 
 ## Principles
 
@@ -559,6 +559,34 @@ document.querySelector('usa-modal').show();
 - `<usa-modal effect="scale | slide-up | flip | origin">` and `<usa-sheet side="right | left | bottom | top">`: native `<dialog>` (top layer, focus trap, Esc), blurred backdrop, `persistent`, `data-usa-open` / `data-usa-close`, bottom sheet drag-to-dismiss; `show()`, `close(value)`, `toggle()`; `usa:open`, `usa:close`.
 - `<usa-menu placement effect="scale | fold | slide">`: ARIA menu, cascade-in items, arrows / Home / End / Esc / Tab; `usa:select`.
 - Text effects 3.0: `liquid-text` · `neon-write` · `particle-text` · `glitch-text` · `text-trail` (cursor) · `font-breathe` · `flip-chars`; split text keeps a screen-reader copy. Reduced motion: overlays fade, loops / trail / particles are skipped, one-shots show their final state.
+
+### v6.4 Widgets: progress ring, odometer, skeleton reveal, star rating (`components/widgets`) + light & materials (`components/fx-light`)
+
+```html
+<usa-progress-ring value="72" gradient="#7c5cff,#22d3ee"></usa-progress-ring>
+<usa-progress-ring variant="semi" value="88"></usa-progress-ring>
+<usa-odometer value="1284" locale="en-US" prefix="$"></usa-odometer>
+<usa-skeleton-reveal loading variant="wave">
+  <img src="avatar.jpg" alt="" data-skeleton="circle"><h3>Ada Lovelace</h3><p>…</p>
+</usa-skeleton-reveal>
+<usa-star-rating value="3.5" step="0.5" label="Your rating"></usa-star-rating>
+
+<usa-fx effect="light-follow" trigger="load"><div class="card">…</div></usa-fx>
+<usa-fx effect="god-rays" trigger="load" self class="hero"><h1>Dawn</h1></usa-fx>
+```
+```js
+import { defineWidgets } from 'motionary/components/widgets';
+import { defineFx } from 'motionary/components/fx';
+import { registerLightEffects } from 'motionary/components/fx-light';
+defineWidgets(); defineFx(); registerLightEffects();
+document.querySelector('usa-odometer').value = 2048;      // every digit rolls
+document.querySelector('usa-skeleton-reveal').loading = false; // dissolve → content
+```
+- `<usa-progress-ring variant="ring | bar | semi">`: eased arc with overshoot, counting label, gradient, indeterminate without `value`; `role="progressbar"`, `usa:complete`.
+- `<usa-odometer>`: rolling digit wheels (always forward), new digits slide in, `locale` / `decimals` / `prefix` / `suffix`; the formatted number is the accessible name.
+- `<usa-skeleton-reveal loading variant="wave | pulse | glow">`: placeholders measured from the real content (text lines via Range rects, images, `[data-skeleton]`), synchronized shimmer, top-to-bottom dissolve; `aria-busy`, `reveal()`, `usa:reveal`.
+- `<usa-star-rating max step icon="star | heart" readonly>`: hover preview, half stars, pop + sparkle burst, `role="slider"` keyboard, `usa:change`.
+- Light & materials: `light-follow` · `refraction` · `pointer-shadow` (hover) · `brushed-metal` · `pearlescent` (card) · `god-rays` (background). Helper `trackPointer()`. Reduced motion: fixed lighting, one still frame, values switch instantly.
 
 ## Frameworks
 

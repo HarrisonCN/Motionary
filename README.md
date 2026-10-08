@@ -6,11 +6,11 @@
 
 _Formerly **use-scroll-animate** — same API, same `<usa-*>` tags; the old npm package keeps working as an alias._
 
-[![npm](https://img.shields.io/npm/v/motionary?style=flat-square)](https://www.npmjs.com/package/motionary) [![CI](https://github.com/HarrisonCN/motionary/actions/workflows/ci.yml/badge.svg)](https://github.com/HarrisonCN/motionary/actions/workflows/ci.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](./LICENSE)
+[![npm](https://img.shields.io/npm/v/motionary?style=flat-square)](https://www.npmjs.com/package/motionary) [![CI](https://github.com/HarrisonCN/Motionary/actions/workflows/ci.yml/badge.svg)](https://github.com/HarrisonCN/Motionary/actions/workflows/ci.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](./LICENSE)
 
 [English](./README.md) | [简体中文](./README_zh.md) | [日本語](./README_ja.md)
 
-**[🛍 Animation Store](https://harrisoncn.github.io/motionary/showcase/)** · **[🧩 Components](https://harrisoncn.github.io/motionary/showcase/components.html)** · **[🎛 Playground](https://harrisoncn.github.io/motionary/showcase/playground.html)** · **[📜 Story](https://harrisoncn.github.io/motionary/showcase/story.html)**
+**[🛍 Animation Store](https://harrisoncn.github.io/Motionary/showcase/)** · **[🧩 Components](https://harrisoncn.github.io/Motionary/showcase/components.html)** · **[🎛 Playground](https://harrisoncn.github.io/Motionary/showcase/playground.html)** · **[📜 Story](https://harrisoncn.github.io/Motionary/showcase/story.html)**
 
 <sub>The Store lets you preview, tweak and copy all <b>227</b> animations — 214 scroll presets plus card, click, physics and page effects — at desktop and phone sizes.</sub>
 

@@ -12,7 +12,10 @@ describe('6.1.1 — renamed to Motionary (no breaking change)', () => {
     expect(pkg.description.length).toBeLessThanOrEqual(350);
     expect(pkg.description).toContain('formerly use-scroll-animate');
     expect(pkg.keywords).toContain('motionary');
-    expect(pkg.repository.url).toContain('HarrisonCN/motionary');
+    expect(pkg.repository.url).toContain('HarrisonCN/Motionary');
+    // 6.4: GitHub Pages paths are case-sensitive — the repo is HarrisonCN/Motionary
+    expect(pkg.homepage).toBe('https://harrisoncn.github.io/Motionary/showcase/');
+    for (const f of ['README.md', 'README_zh.md', 'README_ja.md', 'package.json', 'docs/components.md', 'showcase/index.html', 'showcase/components.html', 'showcase/playground.html', 'showcase/story.html']) expect(read(f), f).not.toMatch(/github\.io\/motionary\//);
     expect(Object.keys(pkg.bin)).toEqual(expect.arrayContaining(['usa-codemod-6']));
   });
 
@@ -21,7 +24,7 @@ describe('6.1.1 — renamed to Motionary (no breaking change)', () => {
       const r = read(f);
       expect(r, f).toMatch(/^<div align="center">\n\n# Motionary\n/);
       expect(r, f).toContain('use-scroll-animate');
-      for (const page of ['showcase/', 'showcase/components.html', 'showcase/playground.html', 'showcase/story.html']) expect(r, f).toContain(`https://harrisoncn.github.io/motionary/${page}`);
+      for (const page of ['showcase/', 'showcase/components.html', 'showcase/playground.html', 'showcase/story.html']) expect(r, f).toContain(`https://harrisoncn.github.io/Motionary/${page}`);
       expect(r, f).toContain('https://unpkg.com/motionary@6/dist/index.umd.js');
       for (const fw of ['motionary/react', 'motionary/vue', 'motionary/svelte', 'motionary/solid', 'motionary/components/angular']) expect(r, `${f} ${fw}`).toContain(fw);
       expect(r, f).toContain('./docs/upgrading-6.md');
@@ -35,7 +38,7 @@ describe('6.1.1 — renamed to Motionary (no breaking change)', () => {
       const h = read(`showcase/${f}`);
       expect(h, f).toMatch(/<title>Motionary · /);
       expect(h, f).toContain('property="og:title"');
-      expect(h, f).toContain('https://harrisoncn.github.io/motionary/showcase/assets/og-motionary.png');
+      expect(h, f).toContain('https://harrisoncn.github.io/Motionary/showcase/assets/og-motionary.png');
       expect(h, f).not.toMatch(/<title>[^<]*use-scroll-animate/);
     }
     expect(read('showcase/codegen.js')).toContain("export const PKG = 'motionary';");

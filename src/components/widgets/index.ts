@@ -17,16 +17,23 @@ import { defineStories, type UsaStoriesElement } from './stories';
 import { defineToastStack, stackToast, TOAST_POSITIONS, type UsaToastStackElement, type StackToastOptions } from './toast';
 import { defineModal, defineSheet, MODAL_EFFECTS, SHEET_SIDES, type UsaModalElement, type UsaSheetElement } from './overlay';
 import { defineMenu, MENU_EFFECTS, type UsaMenuElement } from './menu';
+import { defineProgressRing, defineOdometer, PROGRESS_VARIANTS, type UsaProgressRingElement, type UsaOdometerElement } from './meters';
+import { defineSkeletonReveal, SKELETON_VARIANTS, type UsaSkeletonRevealElement } from './skeleton-reveal';
+import { defineStarRating, type UsaStarRatingElement } from './star-rating';
 
 export { defineCarousel, defineTabBar, defineDisclosure, defineStories, CAROUSEL_EFFECTS, TAB_INDICATORS };
 export type { UsaCarouselElement, UsaTabBarElement, UsaDisclosureElement, UsaStoriesElement };
 export { defineToastStack, stackToast, TOAST_POSITIONS, defineModal, defineSheet, MODAL_EFFECTS, SHEET_SIDES, defineMenu, MENU_EFFECTS };
 export type { UsaToastStackElement, StackToastOptions, UsaModalElement, UsaSheetElement, UsaMenuElement };
 
+export { defineProgressRing, defineOdometer, PROGRESS_VARIANTS, defineSkeletonReveal, SKELETON_VARIANTS, defineStarRating };
+export type { UsaProgressRingElement, UsaOdometerElement, UsaSkeletonRevealElement, UsaStarRatingElement };
+
 /** The widgets by release (tag → define function). */
 export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElementConstructor | undefined>> = {
   '6.2': { 'usa-carousel': defineCarousel, 'usa-tab-bar': defineTabBar, 'usa-disclosure': defineDisclosure, 'usa-stories': defineStories },
   '6.3': { 'usa-toast-stack': defineToastStack, 'usa-modal': defineModal, 'usa-sheet': defineSheet, 'usa-menu': defineMenu },
+  '6.4': { 'usa-progress-ring': defineProgressRing, 'usa-odometer': defineOdometer, 'usa-skeleton-reveal': defineSkeletonReveal, 'usa-star-rating': defineStarRating },
 };
 
 /** Every widget tag, in release order. */
@@ -47,5 +54,9 @@ declare global {
     'usa-modal': UsaModalElement;
     'usa-sheet': UsaSheetElement;
     'usa-menu': UsaMenuElement;
+    'usa-progress-ring': UsaProgressRingElement;
+    'usa-odometer': UsaOdometerElement;
+    'usa-skeleton-reveal': UsaSkeletonRevealElement;
+    'usa-star-rating': UsaStarRatingElement;
   }
 }

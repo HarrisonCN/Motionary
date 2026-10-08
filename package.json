@@ -1,6 +1,6 @@
 {
   "name": "motionary",
-  "version": "6.3.0",
+  "version": "6.4.0",
   "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 94 animated Web Components — 214 scroll-reveal presets, card/click/button morphs, physics, page transitions, generative & sound-reactive backgrounds, cursor/gesture effects, themes, micro-interactions, <usa-player>, WebGL. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -438,6 +438,16 @@
         "default": "./dist/components/fx-text.cjs"
       }
     },
+    "./components/fx-light": {
+      "import": {
+        "types": "./dist/components/fx-light.d.ts",
+        "default": "./dist/components/fx-light.js"
+      },
+      "require": {
+        "types": "./dist/components/fx-light.d.cts",
+        "default": "./dist/components/fx-light.cjs"
+      }
+    },
     "./components/lite": {
       "import": {
         "types": "./dist/components/lite.d.ts",
@@ -532,12 +542,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/HarrisonCN/motionary.git"
+    "url": "git+https://github.com/HarrisonCN/Motionary.git"
   },
   "bugs": {
-    "url": "https://github.com/HarrisonCN/motionary/issues"
+    "url": "https://github.com/HarrisonCN/Motionary/issues"
   },
-  "homepage": "https://harrisoncn.github.io/motionary/showcase/",
+  "homepage": "https://harrisoncn.github.io/Motionary/showcase/",
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.5",
     "@rollup/plugin-node-resolve": "^16.0.3",

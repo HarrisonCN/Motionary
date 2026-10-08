@@ -1,0 +1,12 @@
+usa-skeleton-reveal{position:relative;display:block;--usa-sk-base:rgba(127,127,127,.16);--usa-sk-hi:rgba(255,255,255,.55)}
+usa-skeleton-reveal[data-loading]>:not(.usa-sk-layer){visibility:hidden}
+.usa-sk-layer{position:absolute;inset:0;pointer-events:none}
+.usa-sk-box{position:absolute;border-radius:6px;background:var(--usa-sk-base);overflow:hidden}
+usa-skeleton-reveal[data-variant="wave"] .usa-sk-box{background:linear-gradient(100deg,var(--usa-sk-base) 30%,var(--usa-sk-hi) 50%,var(--usa-sk-base) 70%) var(--usa-sk-x,0) 0/var(--usa-sk-w,600px) 100% no-repeat,var(--usa-sk-base);animation:usa-sk-wave 1.4s linear infinite}
+usa-skeleton-reveal[data-variant="pulse"] .usa-sk-box{animation:usa-sk-pulse 1.2s ease-in-out infinite alternate}
+usa-skeleton-reveal[data-variant="glow"] .usa-sk-box{animation:usa-sk-glow 1.6s ease-in-out infinite alternate}
+@keyframes usa-sk-wave{from{background-position:calc(var(--usa-sk-x,0px) - var(--usa-sk-w,600px)) 0,0 0}to{background-position:calc(var(--usa-sk-x,0px) + var(--usa-sk-w,600px)) 0,0 0}}
+@keyframes usa-sk-pulse{from{opacity:1}to{opacity:.45}}
+@keyframes usa-sk-glow{from{box-shadow:0 0 0 rgba(124,92,255,0)}to{box-shadow:0 0 14px rgba(124,92,255,.45);background:rgba(124,92,255,.22)}}
+@media (prefers-color-scheme:dark){usa-skeleton-reveal{--usa-sk-hi:rgba(255,255,255,.16)}}
+@media (prefers-reduced-motion:reduce){.usa-sk-box{animation:none!important}}

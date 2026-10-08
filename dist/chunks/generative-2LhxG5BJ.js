@@ -1,4 +1,4 @@
-import { P as PALETTE } from './shared-eweTlzxv.js';
+import { P as PALETTE } from './shared-CkKHWrtJ.js';
 
 /** Deterministic smooth pseudo-noise in [-1, 1] (sum of sines — cheap, no tables). */
 function noise2(x, y, t = 0) {
@@ -287,4 +287,4 @@ const GENERATIVE_FX = [
 ];
 
 export { GENERATIVE_FX as G, canvasBackground as c, hexRgb as h, noise2 as n };
-//# sourceMappingURL=generative-BRUZaIsX.js.map
+//# sourceMappingURL=generative-2LhxG5BJ.js.map
