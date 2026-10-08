@@ -14,6 +14,8 @@ const AU = (id, en, zh, descEn, descZh, tags, usage, demo, controls) => C('usa-a
 const GX = (id, en, zh, descEn, descZh, tags, usage, demo, controls) => C('usa-gesture-fx', 'fx', en, zh, descEn, descZh, tags, usage, demo, { id, define: 'defineGestureFx', entry: 'effects', pack: true, controls });
 /** A 5.8 <usa-theme> card. */
 const TH = (id, en, zh, descEn, descZh, tags, usage, demo, controls) => C('usa-theme', 'fx', en, zh, descEn, descZh, tags, usage, demo, { id, define: 'defineTheme', entry: 'effects', pack: true, controls });
+/** A 5.9 <usa-player> card. */
+const PL = (id, en, zh, descEn, descZh, tags, usage, demo, controls) => C('usa-player', 'fx', en, zh, descEn, descZh, tags, usage, demo, { id, define: 'definePlayer', entry: 'effects', pack: true, controls });
 const SC = (id, en, zh, descEn, descZh, tags, usage, demo, controls) => C('usa-story', 'fx', en, zh, descEn, descZh, tags, usage, demo, { id, define: 'defineStory', entry: 'effects', pack: true, controls });
 
 export const components = [
@@ -152,6 +154,13 @@ export const components = [
     '<usa-theme name="neon">\n  <div class="usa-surface">\n    <button data-theme-fx="click">Tap</button>\n  </div>\n</usa-theme>',
     '<usa-theme name="neon" class="demo-theme"><div class="usa-surface demo-theme-card"><b class="usa-accent">Aa</b> <button type="button" class="demo-btn" data-theme-fx="click">Tap</button></div></usa-theme>',
     [{ key: 'name', values: ['neon', 'paper', 'glass', 'retro', 'brutalist'] }]),
+  PL('fx-player', 'JSON animation player', 'JSON 动画播放器',
+    '5.9: <usa-player> plays a JSON animation — timeline presets, your own keyframes and any registered effect on a shared clock; play / pause / seek / rate / loop, scroll-scrubbing (trigger="scroll"). Export one from the Playground (<usa-player> JSON tab).',
+    '5.9：<usa-player> 播放 JSON 动画 —— 时间线预设、自定义关键帧与任意已注册效果共用一个时钟；播放 / 暂停 / 跳转 / 倍速 / 循环，可随滚动拖动（trigger="scroll"）。可从动效实验室导出（<usa-player> JSON 标签）。',
+    ['player', 'json', 'lottie', 'timeline', 'keyframes', 'scrub', 'export'],
+    '<usa-player src="hero.json" trigger="view">\n  <h1>Title</h1>\n  <a class="cta">Start</a>\n</usa-player>',
+    '<usa-player trigger="load" controls class="demo-player"><b class="pl-a">Title</b><span class="demo-btn pl-b">Button</span><i class="pl-c">subtitle</i><script type="application/json">{"format":"use-scroll-animate/animation","version":1,"loop":true,"tracks":[{"target":".pl-a","start":0,"duration":600,"preset":"fade-up"},{"target":".pl-b","start":300,"duration":600,"preset":"scale"},{"target":".pl-b","start":1000,"effect":"jelly"},{"target":".pl-c","start":700,"duration":700,"keyframes":[{"transform":"translateX(-40px)","opacity":0},{"transform":"none","opacity":1}]},{"target":":scope","start":2400,"duration":1,"preset":"fade"}]}</script></usa-player>',
+    [{ key: 'trigger', values: ['load', 'click', 'view'] }]),
   AU('fx-audio-beat', 'Beat-triggered effects', '节拍触发特效',
     '5.6: <usa-audio> renders a toggle (a user gesture starts Web Audio), detects beats and plays any registered effect on children with data-usa-beat="effect". JS: bindBeat(el, "pop"). Beats play nothing under reduced motion.',
     '5.6：<usa-audio> 渲染一个开关按钮（由用户手势启动 Web Audio），检测节拍并在带 data-usa-beat="效果名" 的子元素上播放任意已注册效果。JS：bindBeat(el, "pop")。减少动态效果时节拍不触发动画。',

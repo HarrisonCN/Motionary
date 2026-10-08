@@ -68,11 +68,11 @@ export const components = [
 ];
 
 export const helpers = [
-  H('confetti-api', 'click', 'confetti',
-    'confetti(), burst(x, y), shake(el) and haptic(ms) — the click-effect engine as functions, for your own buttons and events.',
-    'confetti()、burst(x, y)、shake(el) 与 haptic(ms)——以函数形式提供点击效果引擎，用于你自己的按钮与事件。',
-    ['confetti', 'burst', 'shake', 'vibrate'],
-    "import { confetti, burst, shake, haptic } from 'use-scroll-animate/components/click';\n\nconfetti({ count: 120 });\nburst(e.clientX, e.clientY, { shape: '★' });\nshake(form);\nhaptic(15);",
+  H('confetti-api', 'click', 'haptic',
+    "Click effects from code (5.9): playEffect(el, 'confetti' | 'burst' | 'shake', options) — the same registered effects as <usa-fx> — plus haptic(ms). The old confetti() / burst() / shake() functions are deprecated and removed in 6.0.",
+    "代码中触发点击效果（5.9）：playEffect(el, 'confetti' | 'burst' | 'shake', options) —— 与 <usa-fx> 相同的已注册效果 —— 以及 haptic(ms)。旧的 confetti() / burst() / shake() 函数已弃用，将在 6.0 移除。",
+    ['confetti', 'burst', 'shake', 'vibrate', 'playEffect'],
+    "import { playEffect } from 'use-scroll-animate/components/fx';\nimport { haptic } from 'use-scroll-animate/components/click';\n\nplayEffect(document.body, 'confetti', { x: e.clientX, y: e.clientY, count: 120 });\nplayEffect(document.body, 'burst', { x: e.clientX, y: e.clientY, shape: '★' });\nplayEffect(form, 'shake');\nhaptic(15);",
     '<div class="demo-row"><button class="demo-btn" type="button" data-confetti>Confetti 🎉</button><button class="demo-btn demo-btn-alt" type="button" data-shake>Shake</button></div>'),
 ];
 
@@ -92,9 +92,9 @@ export const wire = {
   },
   'confetti-api': (stage, lib) => {
     stage.querySelector('[data-confetti]').addEventListener('click', (e) => {
-      lib.confetti({ x: e.clientX, y: e.clientY, count: 90 });
+      lib.playEffect(document.body, 'confetti', { x: e.clientX, y: e.clientY, count: 90 });
       lib.haptic(12);
     });
-    stage.querySelector('[data-shake]').addEventListener('click', (e) => lib.shake(e.currentTarget));
+    stage.querySelector('[data-shake]').addEventListener('click', (e) => lib.playEffect(e.currentTarget, 'shake'));
   },
 };

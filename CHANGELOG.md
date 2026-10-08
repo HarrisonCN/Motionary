@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.9.0] - 2026-10-08
+
+### Added
+- **`<usa-player>`** (`use-scroll-animate/components/effects`, `definePlayer()`) — plays JSON animations (`format: "use-scroll-animate/animation"`, `version: 1`): tracks with a `target` selector, `start` / `duration`, and a timeline `preset`, your own `keyframes` + `easing`, or any registered `effect` fired at `start`. Source: `src="…json"` or an inline `<script type="application/json">`. `trigger="load | view | scroll | click | manual"` (`scroll` scrubs with the page), `loop`, `rate`, `controls`; methods `play()`, `pause()`, `seek(ms)`, `load(json)`; events `usa-player-ready`, `usa-player-finish`; `data-error` on bad input.
+- `createPlayer(root, animation, { autoplay, loop, rate })` → `{ play, pause, seek, rate, duration, currentTime, playing, finished, destroy }` — keyframe tracks are WAAPI animations driven by one clock; `normalizeAnimation()` validates (and reads Playground presets too).
+- Playground: new **`<usa-player> JSON`** export tab (`tracksToAnimation()`).
+- The registered `burst` effect accepts `x` / `y`.
+- `docs/upgrading-6.md` and **`npx usa-codemod-6 [--write] [paths]`**.
+
+### Deprecated (removed in 6.0 — warned once in the console)
+- `burst()`, `confetti()`, `shake()` (components / components/click entries, UMD global) → `playEffect(el, 'burst' | 'confetti' | 'shake', …)` — the codemod rewrites calls and imports.
+- `<usa-cursor mode="trail">` → the 5.7 `comet-trail` effect (`<usa-fx effect="comet-trail" trigger="load" self>`) — reported by the codemod for a manual edit.
+
+### Accessibility
+- Under reduced motion `<usa-player>` jumps to the final state and fires no effects.
+
 ## [5.8.0] - 2026-10-08
 
 ### Added

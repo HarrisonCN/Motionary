@@ -473,6 +473,32 @@ playEffect(passwordToggle, 'password-reveal');
 ```
 Themes: `neon` · `paper` · `glass` · `retro` · `brutalist`. Micro effects keep working (state, labels, counts) under reduced motion.
 
+### v5.9 `<usa-player>`
+
+Plays JSON animations made of timeline presets, keyframes and registered effects on one clock.
+
+```html
+<usa-player trigger="view" controls>
+  <h1>Title</h1>
+  <a class="cta">Start</a>
+  <script type="application/json">
+  { "format": "use-scroll-animate/animation", "version": 1,
+    "tracks": [
+      { "target": "h1", "start": 0, "duration": 600, "preset": "fade-up" },
+      { "target": ".cta", "start": 400, "duration": 500, "keyframes": [{ "opacity": 0, "transform": "scale(.8)" }, { "opacity": 1, "transform": "none" }] },
+      { "target": ".cta", "start": 1000, "effect": "jelly" }
+    ] }
+  </script>
+</usa-player>
+```
+```js
+import { createPlayer, registerAllEffects } from 'use-scroll-animate/components/effects';
+registerAllEffects();
+const p = createPlayer(hero, await (await fetch('/hero.json')).json());
+p.play(); p.seek(500); p.rate = 0.5;
+```
+`trigger="scroll"` scrubs the animation with the page. Reduced motion: the final state, no effects. Export JSON from the Playground (`<usa-player> JSON` tab).
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.
