@@ -1,4 +1,4 @@
-import { p as prefersReducedMotion, e as applyFrame, m as motionScale, E as EASE_SPRING, n as now, r as raf, b as caf } from './base-ZARFccur.js';
+import { p as prefersReducedMotion, e as applyFrame, m as motionScale, E as EASE_SPRING, n as now, r as raf, d as caf } from './base-BPG5zvex.js';
 
 const SPRING_PRESETS = {
     default: { stiffness: 170, damping: 26, mass: 1 },
@@ -216,4 +216,4 @@ function rubberBand(distance, dimension, constant = 0.55) {
 }
 
 export { SPRING_PRESETS as S, rubberBand as a, spring as b, createSpring as c, springEasing as d, springSamples as e, stepSpring as f, supportsLinearEasing as g, linearEasing as l, projectInertia as p, resolveSpring as r, snapTo as s };
-//# sourceMappingURL=spring-E2ickYNI.js.map
+//# sourceMappingURL=spring-BziPsW3r.js.map

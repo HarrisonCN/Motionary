@@ -11,7 +11,9 @@ import css from './timeline.css?raw';
  * Attributes: `trigger` (`view` default · `click` · `manual`), `scrub`
  * (progress follows scroll instead of playing), `overlap` (ms each step
  * overlaps the previous, default 0), `duration` (600), `stagger` (ms),
- * `repeat` (replay every time it enters the viewport). Methods: `play()`,
+ * `repeat` (replay every time it enters the viewport). 4.1: `scrub` runs on native
+ * ScrollTimeline / ViewTimeline when supported (`data-native` is set); `scrub="js"`,
+ * `scrub="scroll"` and `smooth` tune it. Methods: `play()`,
  * `reverse()`, `seek(t)`; property `timeline`. Event `usa:complete`.
  * Reduced motion: steps appear in their final state.
  */
@@ -65,7 +67,13 @@ export function defineTimeline(tag = 'usa-timeline'): CustomElementConstructor |
             return;
           }
           if (this.flag('scrub')) {
-            this.onCleanup(tl.scrub(this, { smooth: 0.2 }));
+            // 4.1: native ScrollTimeline / ViewTimeline when available; `smooth`
+            // (0–0.95) or `scrub="js"` opt into the JS engine, `scrub="scroll"`
+            // follows this element's own scroll position.
+            const v = this.str('scrub');
+            const stop = tl.scrub(this, { smooth: this.num('smooth', 0), engine: v === 'js' ? 'js' : 'auto', source: v === 'scroll' ? 'scroll' : 'view' });
+            this.toggleAttribute('data-native', stop.native);
+            this.onCleanup(stop);
             return;
           }
           const trigger = this.str('trigger', 'view');

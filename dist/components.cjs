@@ -22,7 +22,7 @@ var variants = require('./chunks/variants-BNIrn4ch.cjs');
 var base = require('./chunks/base-CXx7jZ-o.cjs');
 var indexTags = require('./chunks/index-tags-BQh_uGqH.cjs');
 var spring = require('./chunks/spring-2OTnYCzm.cjs');
-var core = require('./chunks/core-DXqZm5Il.cjs');
+var core = require('./chunks/core-CLu8ZrC-.cjs');
 var core$1 = require('./chunks/core-IaorbTdu.cjs');
 
 /**
@@ -258,6 +258,7 @@ exports.stepSpring = spring.stepSpring;
 exports.supportsLinearEasing = spring.supportsLinearEasing;
 exports.TIMELINE_PRESETS = core.TIMELINE_PRESETS;
 exports.resolvePosition = core.resolvePosition;
+exports.supportsNativeScrub = core.supportsNativeScrub;
 exports.timeline = core.timeline;
 exports.gesture = core$1.gesture;
 exports.pinchScale = core$1.pinchScale;

@@ -4,7 +4,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 var core = require('./chunks/core-qpECfEkb.cjs');
 var stagger = require('./chunks/stagger-CLc3j58T.cjs');
-var core$1 = require('./chunks/core-DXqZm5Il.cjs');
+var core$1 = require('./chunks/core-CLu8ZrC-.cjs');
 require('./chunks/base-CXx7jZ-o.cjs');
 
 /**
@@ -138,6 +138,7 @@ exports.supportsScrollTimeline = core.supportsScrollTimeline;
 exports.staggerChildren = stagger.staggerChildren;
 exports.TIMELINE_PRESETS = core$1.TIMELINE_PRESETS;
 exports.resolvePosition = core$1.resolvePosition;
+exports.supportsNativeScrub = core$1.supportsNativeScrub;
 exports.timeline = core$1.timeline;
 exports.default = ScrollAnimate;
 exports.parallax = parallax;

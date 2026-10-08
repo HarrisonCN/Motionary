@@ -2,6 +2,12 @@
 
 var base = require('./base-CXx7jZ-o.cjs');
 
+/** 4.1: whether `scrub()` can use native ScrollTimeline / ViewTimeline here. */
+function supportsNativeScrub(source = 'view') {
+    const g = globalThis;
+    return typeof g[source === 'scroll' ? 'ScrollTimeline' : 'ViewTimeline'] === 'function' && typeof g.Element?.prototype?.animate === 'function';
+}
+const handle = (stop, native) => Object.assign(stop, { native });
 /** Keyframe presets usable by name in `to()` and `data-tl`. */
 const TIMELINE_PRESETS = {
     fade: [{ opacity: 0 }, { opacity: 1 }],
@@ -178,16 +184,50 @@ function timeline(options = {}) {
             stop();
             if (base.prefersReducedMotion() || typeof window === 'undefined') {
                 render(total(), t);
-                return () => { };
+                return handle(() => { }, false);
+            }
+            const mode = o.source ?? 'view';
+            const axis = o.axis ?? 'block';
+            const needsJs = !!o.smooth || !!o.offset || cues.length > 0 || !!options.onUpdate || o.engine === 'js';
+            if (!needsJs && total() > 0 && supportsNativeScrub(mode) && steps.every((st) => typeof st.el.animate === 'function')) {
+                // Native: one scroll-driven animation per step, its slice of the
+                // timeline mapped onto the scroll range (`cover` for a view timeline).
+                const g = globalThis;
+                const tl = mode === 'scroll' ? new g.ScrollTimeline({ source, axis }) : new g.ViewTimeline({ subject: source, axis });
+                const T = total();
+                steps.forEach((st) => st.anim?.cancel?.());
+                built = false;
+                const pct = (ms) => `${((ms / T) * 100).toFixed(3)}%`;
+                const live = steps.map((st) => {
+                    const range = mode === 'view' ? { rangeStart: `cover ${pct(st.start)}`, rangeEnd: `cover ${pct(st.start + st.duration)}` } : {};
+                    const timing = { easing: st.easing, fill: 'both', timeline: tl, ...range };
+                    if (mode === 'scroll')
+                        Object.assign(timing, { duration: 'auto', rangeStart: pct(st.start), rangeEnd: pct(st.start + st.duration) });
+                    return st.el.animate(st.frames, timing);
+                });
+                return handle(() => {
+                    live.forEach((a) => a.cancel());
+                    render(t, t);
+                }, true);
             }
             let id = 0;
             let cur = t;
+            const scroller = mode === 'scroll' ? source : null;
+            const progressNow = () => {
+                const x = axis === 'x' || axis === 'inline';
+                if (scroller) {
+                    const max = x ? scroller.scrollWidth - scroller.clientWidth : scroller.scrollHeight - scroller.clientHeight;
+                    return base.clamp((x ? scroller.scrollLeft : scroller.scrollTop) / (max || 1), 0, 1);
+                }
+                const r = source.getBoundingClientRect();
+                const vh = (x ? window.innerWidth : window.innerHeight) || 1;
+                const start = x ? r.left : r.top;
+                const size = x ? r.width : r.height;
+                return base.clamp((vh + (o.offset ?? 0) - start) / (vh + size || 1), 0, 1);
+            };
             const update = () => {
                 id = 0;
-                const r = source.getBoundingClientRect();
-                const vh = window.innerHeight || 1;
-                const p = base.clamp((vh + (o.offset ?? 0) - r.top) / (vh + r.height || 1), 0, 1);
-                const goal = p * total();
+                const goal = progressNow() * total();
                 const sm = base.clamp(o.smooth ?? 0, 0, 0.95);
                 cur = sm ? cur + (goal - cur) * (1 - sm) : goal;
                 render(cur, t);
@@ -196,15 +236,16 @@ function timeline(options = {}) {
             };
             const onScroll = () => { if (!id)
                 id = base.raf(update); };
-            window.addEventListener('scroll', onScroll, { passive: true });
+            const target = scroller || window;
+            target.addEventListener('scroll', onScroll, { passive: true });
             window.addEventListener('resize', onScroll, { passive: true });
             update();
-            return () => {
-                window.removeEventListener('scroll', onScroll);
+            return handle(() => {
+                target.removeEventListener('scroll', onScroll);
                 window.removeEventListener('resize', onScroll);
                 if (id)
                     base.caf(id);
-            };
+            }, false);
         },
         cancel() {
             stop();
@@ -218,5 +259,6 @@ function timeline(options = {}) {
 
 exports.TIMELINE_PRESETS = TIMELINE_PRESETS;
 exports.resolvePosition = resolvePosition;
+exports.supportsNativeScrub = supportsNativeScrub;
 exports.timeline = timeline;
-//# sourceMappingURL=core-DXqZm5Il.cjs.map
+//# sourceMappingURL=core-CLu8ZrC-.cjs.map

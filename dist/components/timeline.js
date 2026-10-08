@@ -1,7 +1,7 @@
-import { h as defineElement } from '../chunks/base-ZARFccur.js';
-export { a as configureComponents, p as prefersReducedMotion } from '../chunks/base-ZARFccur.js';
-import { t as timeline, T as TIMELINE_PRESETS } from '../chunks/core-Co-6AL0h.js';
-export { r as resolvePosition } from '../chunks/core-Co-6AL0h.js';
+import { h as defineElement } from '../chunks/base-BPG5zvex.js';
+export { a as configureComponents, p as prefersReducedMotion } from '../chunks/base-BPG5zvex.js';
+import { t as timeline, T as TIMELINE_PRESETS } from '../chunks/core-QTFk4kgO.js';
+export { r as resolvePosition, s as supportsNativeScrub } from '../chunks/core-QTFk4kgO.js';
 
 var css = "usa-timeline{display:block}usa-timeline[scrub]{position:relative}@media (prefers-reduced-motion:reduce){usa-timeline [data-tl]{opacity:1 !important;transform:none !important;filter:none !important;clip-path:none !important}}";
 
@@ -44,7 +44,13 @@ function defineTimeline(tag = 'usa-timeline') {
                 return;
             }
             if (this.flag('scrub')) {
-                this.onCleanup(tl.scrub(this, { smooth: 0.2 }));
+                // 4.1: native ScrollTimeline / ViewTimeline when available; `smooth`
+                // (0–0.95) or `scrub="js"` opt into the JS engine, `scrub="scroll"`
+                // follows this element's own scroll position.
+                const v = this.str('scrub');
+                const stop = tl.scrub(this, { smooth: this.num('smooth', 0), engine: v === 'js' ? 'js' : 'auto', source: v === 'scroll' ? 'scroll' : 'view' });
+                this.toggleAttribute('data-native', stop.native);
+                this.onCleanup(stop);
                 return;
             }
             const trigger = this.str('trigger', 'view');
