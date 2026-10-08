@@ -198,6 +198,79 @@ declare function crossDocumentTransitions(effect?: string, duration?: number): (
 declare function registerTransitionEffects2(): void;
 
 /**
+ * 6.8 — Weather & ambience (`motionary/components/fx-weather`), registered
+ * through `registerEffect()` (kind `background`, Canvas 2D):
+ *
+ * - `rain-glass` — droplets sit on a window pane, grow, and run down leaving
+ *   trails.
+ * - `snowfall` — flakes drift down and pile up along the bottom edge.
+ * - `lightning` — a safe storm: branching bolts at most once per `interval`
+ *   (≥ 2.5 s, far below the WCAG 2.3.1 limit of 3 flashes / s), the sky glow
+ *   is capped at 22 % brightness and there is no flash at all under reduced
+ *   motion.
+ * - `fog` — soft layered fog banks drifting at different speeds.
+ * - `aurora-veil` — curtains of northern lights waving over a night sky.
+ * - `day-cycle` — the sky moves through dawn, day, dusk and night with the sun
+ *   and moon on an arc (`cycle` seconds, or a fixed `hour` 0–24).
+ *
+ * Every effect renders only while visible, adapts its quality and draws one
+ * static frame under reduced motion.
+ */
+
+/** Sky colours (top, bottom) for an hour 0–24. */
+declare function skyAt(hour: number): [string, string];
+declare const WEATHER_FX: EffectDefinition[];
+/** Register the 6.8 weather & ambience pack (idempotent). */
+declare function registerWeatherEffects(): void;
+
+/**
+ * 6.8 — Interactive physics 2.0 (`motionary/components/fx-physics`) on a tiny
+ * Verlet integrator (`VerletWorld`), registered through `registerEffect()`:
+ *
+ * - `soft-body` (kind `hover`) — the element wobbles like jelly: pointer
+ *   motion pushes a damped spring that squashes and skews it.
+ * - `magnet` (kind `hover`) — the element's children are pulled toward the
+ *   pointer on springs and settle back when it leaves.
+ * - `cloth` (kind `background`) — a cloth hangs from the top edge and ripples
+ *   when the pointer moves through it.
+ * - `rope` (kind `background`) — a rope with a weight swings from the top;
+ *   the pointer pushes it.
+ * - `pinball` (kind `background`) — balls fall through round bumpers that
+ *   light up on a hit; click to drop another ball.
+ *
+ * Canvas effects render only while visible; reduced motion draws one static
+ * frame and the hover effects do nothing.
+ */
+
+interface VerletPoint {
+    x: number;
+    y: number;
+    px: number;
+    py: number;
+    pinned: boolean;
+}
+/** A minimal Verlet world: points, distance sticks, gravity, damping. */
+declare class VerletWorld {
+    gravity: number;
+    damping: number;
+    iterations: number;
+    points: VerletPoint[];
+    sticks: [number, number, number][];
+    constructor(gravity?: number, damping?: number, iterations?: number);
+    add(x: number, y: number, pinned?: boolean): number;
+    link(a: number, b: number, len?: number): void;
+    step(dt: number, bounds?: {
+        w: number;
+        h: number;
+    }): void;
+    /** Push points within `r` px of (x, y) by (dx, dy). */
+    push(x: number, y: number, dx: number, dy: number, r?: number): void;
+}
+declare const PHYSICS2_FX: EffectDefinition[];
+/** Register the 6.8 physics 2.0 pack (idempotent). */
+declare function registerPhysicsEffects2(): void;
+
+/**
  * 5.5 — generative backgrounds on Canvas 2D, registered through
  * `registerEffect()` (kind `background`): `flow-field`, `voronoi`,
  * `mesh-gradient`, `starfield`, `metaballs`, `contours`.
@@ -269,5 +342,5 @@ declare const FX2_PACKS: Record<string, EffectDefinition[]>;
 /** Register every 6.x pack (idempotent). */
 declare function registerFx2(): void;
 
-export { DEPTH3_FX, FX2_PACKS, GLSL_HEAD, GPU_FX, LIGHT_FX, MORPH2_FX, TEXT3_FX, TRANSITIONS2_FX, crossDocumentTransitions, fieldFallback, pageTransition, pointsToPath, register3dEffects, registerFx2, registerGpuEffects, registerLightEffects, registerMorphEffects2, registerTextEffects3, registerTransitionEffects2, samplePath, shaderBackground, splitChars, supportsWebGL2, trackPointer };
+export { DEPTH3_FX, FX2_PACKS, GLSL_HEAD, GPU_FX, LIGHT_FX, MORPH2_FX, PHYSICS2_FX, TEXT3_FX, TRANSITIONS2_FX, VerletWorld, WEATHER_FX, crossDocumentTransitions, fieldFallback, pageTransition, pointsToPath, register3dEffects, registerFx2, registerGpuEffects, registerLightEffects, registerMorphEffects2, registerPhysicsEffects2, registerTextEffects3, registerTransitionEffects2, registerWeatherEffects, samplePath, shaderBackground, skyAt, splitChars, supportsWebGL2, trackPointer };
 export type { ShaderSpec };
