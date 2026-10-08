@@ -10,10 +10,12 @@ var components_fxTransitions = require('./fx-transitions.cjs');
 var components_fxWeather = require('./fx-weather.cjs');
 var components_fxPhysics = require('./fx-physics.cjs');
 var components_fxFocus = require('./fx-focus.cjs');
+var components_fxMusic = require('./fx-music.cjs');
 require('../chunks/registry-DehBVRDV.cjs');
 require('../chunks/base-BaQV-2ha.cjs');
 require('../chunks/generative-BHIj-NU0.cjs');
 require('../chunks/shared-jkgRH-Hx.cjs');
+require('../chunks/audio-EXUoijsG.cjs');
 
 /** The 6.x effect packs by name. */
 const EFFECT_PACKS = {
@@ -26,6 +28,7 @@ const EFFECT_PACKS = {
     weather: components_fxWeather.WEATHER_FX,
     physics: components_fxPhysics.PHYSICS2_FX,
     focus: components_fxFocus.FOCUS_FX,
+    music: components_fxMusic.MUSIC_FX,
 };
 /** Register every 6.x effect pack (idempotent). */
 function registerEffectPacks() {
@@ -38,6 +41,7 @@ function registerEffectPacks() {
     components_fxWeather.registerWeatherPack();
     components_fxPhysics.registerPhysicsPack();
     components_fxFocus.registerFocusPack();
+    components_fxMusic.registerMusicPack();
 }
 
 exports.EFFECT_PACK_FORMAT = components_marketplace.EFFECT_PACK_FORMAT;
@@ -79,6 +83,10 @@ exports.VerletWorld = components_fxPhysics.VerletWorld;
 exports.registerPhysicsPack = components_fxPhysics.registerPhysicsPack;
 exports.FOCUS_FX = components_fxFocus.FOCUS_FX;
 exports.registerFocusPack = components_fxFocus.registerFocusPack;
+exports.MUSIC_FX = components_fxMusic.MUSIC_FX;
+exports.musicSample = components_fxMusic.musicSample;
+exports.registerMusicPack = components_fxMusic.registerMusicPack;
+exports.syntheticSample = components_fxMusic.syntheticSample;
 exports.EFFECT_PACKS = EFFECT_PACKS;
 exports.registerEffectPacks = registerEffectPacks;
 //# sourceMappingURL=fx2.cjs.map

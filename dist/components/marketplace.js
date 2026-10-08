@@ -1,5 +1,5 @@
-import { hasEffect, registerEffect, EFFECT_KINDS } from '../chunks/registry-D23neB4M.js';
-import '../chunks/base-DchG4q_S.js';
+import { hasEffect, registerEffect, EFFECT_KINDS } from '../chunks/registry-CyKExAmE.js';
+import '../chunks/base-2-yYc93C.js';
 
 const EFFECT_PACK_FORMAT = 'motionary/effect-pack';
 const SEMVER = /^\d+\.\d+\.\d+(?:-[\w.]+)?$/;

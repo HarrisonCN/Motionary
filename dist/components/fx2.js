@@ -1,6 +1,6 @@
 export { EFFECT_PACK_FORMAT, loadEffectPack, packManifest, validateManifest } from './marketplace.js';
-import { G as GPU_FX, r as registerGpuPack } from '../chunks/gpu-Bkw605Ds.js';
-export { a as GLSL_HEAD, W as WGSL_HEAD, f as fieldFallback, g as glslToWgsl, s as shaderBackground, b as supportsWebGL2, c as supportsWebGPU, w as webgpuBackground, d as wgslModule } from '../chunks/gpu-Bkw605Ds.js';
+import { G as GPU_FX, r as registerGpuPack } from '../chunks/gpu-DLPghVWr.js';
+export { a as GLSL_HEAD, W as WGSL_HEAD, f as fieldFallback, g as glslToWgsl, s as shaderBackground, b as supportsWebGL2, c as supportsWebGPU, w as webgpuBackground, d as wgslModule } from '../chunks/gpu-DLPghVWr.js';
 import { TEXT3_FX, registerTextPack } from './fx-text.js';
 export { splitChars } from './fx-text.js';
 import { LIGHT_FX, registerLightPack } from './fx-light.js';
@@ -15,10 +15,13 @@ export { skyAt } from './fx-weather.js';
 import { PHYSICS2_FX, registerPhysicsPack } from './fx-physics.js';
 export { VerletWorld } from './fx-physics.js';
 import { FOCUS_FX, registerFocusPack } from './fx-focus.js';
-import '../chunks/registry-D23neB4M.js';
-import '../chunks/base-DchG4q_S.js';
+import { MUSIC_FX, registerMusicPack } from './fx-music.js';
+export { musicSample, syntheticSample } from './fx-music.js';
+import '../chunks/registry-CyKExAmE.js';
+import '../chunks/base-2-yYc93C.js';
 import '../chunks/generative-2LhxG5BJ.js';
 import '../chunks/shared-CkKHWrtJ.js';
+import '../chunks/audio-DcPvT2Kh.js';
 
 /** The 6.x effect packs by name. */
 const EFFECT_PACKS = {
@@ -31,6 +34,7 @@ const EFFECT_PACKS = {
     weather: WEATHER_FX,
     physics: PHYSICS2_FX,
     focus: FOCUS_FX,
+    music: MUSIC_FX,
 };
 /** Register every 6.x effect pack (idempotent). */
 function registerEffectPacks() {
@@ -43,7 +47,8 @@ function registerEffectPacks() {
     registerWeatherPack();
     registerPhysicsPack();
     registerFocusPack();
+    registerMusicPack();
 }
 
-export { DEPTH3_FX, EFFECT_PACKS, FOCUS_FX, GPU_FX, LIGHT_FX, MORPH2_FX, PHYSICS2_FX, TEXT3_FX, TRANSITIONS2_FX, WEATHER_FX, register3dPack, registerEffectPacks, registerFocusPack, registerGpuPack, registerLightPack, registerMorphPack, registerPhysicsPack, registerTextPack, registerTransitionsPack, registerWeatherPack };
+export { DEPTH3_FX, EFFECT_PACKS, FOCUS_FX, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, PHYSICS2_FX, TEXT3_FX, TRANSITIONS2_FX, WEATHER_FX, register3dPack, registerEffectPacks, registerFocusPack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerPhysicsPack, registerTextPack, registerTransitionsPack, registerWeatherPack };
 //# sourceMappingURL=fx2.js.map

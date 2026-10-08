@@ -1,6 +1,6 @@
-import { registerEffects } from '../chunks/registry-D23neB4M.js';
+import { registerEffects } from '../chunks/registry-CyKExAmE.js';
 import { c as canvasBackground } from '../chunks/generative-2LhxG5BJ.js';
-import '../chunks/base-DchG4q_S.js';
+import '../chunks/base-2-yYc93C.js';
 import '../chunks/shared-CkKHWrtJ.js';
 
 /** A minimal Verlet world: points, distance sticks, gravity, damping. */

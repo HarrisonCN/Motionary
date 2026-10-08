@@ -419,6 +419,56 @@ export const components = [
     '<usa-fx effect="success-check" trigger="click">\n  <button>Save</button>\n</usa-fx>',
     '<usa-fx effect="success-check" trigger="click"><button type="button" class="demo-btn">Save</button></usa-fx>',
     [{ key: 'effect', values: ['success-check', 'highlight-sweep'] }], '6.9'),
+  // ---- 7.1 -------------------------------------------------------------
+  W('usa-music-player', 'ui', 'Music player', '音乐播放器',
+    '7.1: the cover spins like a record while playing, play morphs to pause, mini equalizer bars dance and the progress bar is a scrubbable slider. Plays a child <audio> or simulates a track.',
+    '7.1：播放时封面像唱片一样旋转，播放键切换为暂停，迷你均衡条跳动，进度条可拖动定位。可播放子元素 <audio>，或模拟一条音轨。',
+    ['music', 'player', 'audio', 'vinyl', 'media'],
+    '<usa-music-player title="Night Drive" artist="Motionary" cover="cover.jpg">\n  <audio src="track.mp3"></audio>\n</usa-music-player>',
+    '<usa-music-player title="Night Drive" artist="Motionary" duration="200" class="demo-mp"></usa-music-player>',
+    undefined, { since: '7.1' }),
+  W('usa-volume-knob', 'interaction', 'Volume knob', '音量旋钮',
+    '7.1: a rotary knob — drag up / down, scroll or use the keys; the value arc fills, a ring of LED ticks lights up and the pointer springs to the angle. role="slider".',
+    '7.1：旋转旋钮 —— 上下拖动、滚轮或键盘调节；数值弧线填充，一圈 LED 刻度点亮，指针弹簧转到对应角度。role="slider"。',
+    ['knob', 'volume', 'rotary', 'dial', 'slider'],
+    '<usa-volume-knob value="60" label="Volume"></usa-volume-knob>',
+    '<usa-volume-knob value="60" label="Volume" class="demo-vk"></usa-volume-knob>',
+    undefined, { since: '7.1' }),
+  W('usa-equalizer', 'interaction', 'Graphic equalizer', '图形均衡器',
+    '7.1: one vertical slider per band with springy caps and a smooth response curve drawn through them; presets glide every band to its gain.',
+    '7.1：每个频段一个竖向滑块，滑帽带弹簧，频响曲线平滑穿过各点；切换预设时所有频段平滑滑到目标增益。',
+    ['equalizer', 'eq', 'audio', 'bands', 'sliders'],
+    '<usa-equalizer preset="rock" bands="60,150,400,1k,2.4k,6k,16k"></usa-equalizer>\n<script>eq.applyPreset(\'vocal\');</script>',
+    '<div class="demo-col"><usa-equalizer preset="rock" class="demo-eq"></usa-equalizer><div class="demo-row"><button type="button" class="demo-btn demo-btn-alt" data-eq="flat">Flat</button><button type="button" class="demo-btn demo-btn-alt" data-eq="bass">Bass</button><button type="button" class="demo-btn" data-eq="vocal">Vocal</button></div></div>',
+    undefined, { since: '7.1' }),
+  W('usa-lyrics', 'text', 'Synced karaoke lyrics', '同步卡拉 OK 歌词',
+    '7.1: LRC or [data-t] lines; the active line glows, scrolls to the centre and a highlight sweeps across it while past lines dim. Follows an <audio>, <video> or <usa-music-player> via for.',
+    '7.1：支持 LRC 或 [data-t] 歌词行；当前行发光、滚动到中央并有高亮从左扫到右，已唱过的行变暗。可通过 for 跟随 <audio>、<video> 或 <usa-music-player>。',
+    ['lyrics', 'karaoke', 'lrc', 'music', 'sync'],
+    '<usa-lyrics for="player">\n  <script type="text/plain">\n[00:01.00] First line\n[00:04.50] Second line\n  </script>\n</usa-lyrics>',
+    '<div class="demo-col"><usa-music-player id="ly-player" title="Lyrics demo" artist="Motionary" duration="24" class="demo-mp"></usa-music-player><usa-lyrics for="ly-player" class="demo-ly"><p data-t="0">Turn the music up</p><p data-t="3">Let the lights come alive</p><p data-t="6">Every beat in motion</p><p data-t="9">Every frame in time</p><p data-t="12">Spin the record slowly</p><p data-t="15">Watch the colours climb</p><p data-t="18">Motion is the melody</p></usa-lyrics></div>',
+    undefined, { since: '7.1' }),
+  X('fx-scope', ['fx-music', 'registerMusicPack'], 'Oscilloscope & radial spectrum', '示波器与环形频谱',
+    '7.1: waveform-scope draws the waveform as a glowing oscilloscope line; radial-spectrum puts the spectrum around a circle that breathes with the bass. Live analyser (enableAudio / <usa-audio>) or a synthetic signal.',
+    '7.1：waveform-scope 以发光示波器线条绘制波形；radial-spectrum 将频谱排成随低音呼吸的圆环。使用实时分析器（enableAudio / <usa-audio>）或合成信号。',
+    ['waveform', 'oscilloscope', 'spectrum', 'audio', 'visualizer'],
+    '<usa-fx effect="radial-spectrum" trigger="load">\n  <section class="now-playing">…</section>\n</usa-fx>',
+    '<usa-fx effect="radial-spectrum" trigger="load"><div class="demo-tile demo-amb demo-dark">Radial spectrum</div></usa-fx>',
+    [{ key: 'effect', values: ['radial-spectrum', 'waveform-scope'] }], '7.1'),
+  X('fx-spectrum', ['fx-music', 'registerMusicPack'], 'Mirrored spectrum & sound particles', '镜像频谱与声音粒子',
+    '7.1: spectrum-mirror — mirrored bars with a floor reflection; sound-particles — particles launched by the bass, coloured by pitch.',
+    '7.1：spectrum-mirror —— 带地面倒影的镜像频谱柱；sound-particles —— 由低音发射、按音高着色的粒子。',
+    ['spectrum', 'bars', 'particles', 'bass', 'music'],
+    '<usa-fx effect="spectrum-mirror" trigger="load">\n  <header>…</header>\n</usa-fx>',
+    '<usa-fx effect="spectrum-mirror" trigger="load"><div class="demo-tile demo-amb demo-dark">Spectrum mirror</div></usa-fx>',
+    [{ key: 'effect', values: ['spectrum-mirror', 'sound-particles'] }], '7.1'),
+  X('fx-vinyl', ['fx-music', 'registerMusicPack'], 'Beat bounce & vinyl spin', '节拍弹跳与唱片旋转',
+    '7.1: beat-bounce pumps the element with the bass; vinyl-spin turns it like a record at 33⅓ rpm, faster when the music is loud.',
+    '7.1：beat-bounce 让元素随低音律动；vinyl-spin 让元素以 33⅓ 转速像唱片一样旋转，音乐越响转得越快。',
+    ['beat', 'bounce', 'vinyl', 'record', 'spin'],
+    '<usa-fx effect="vinyl-spin" trigger="load">\n  <img class="cover" src="album.jpg" alt="…">\n</usa-fx>',
+    '<usa-fx effect="vinyl-spin" trigger="load"><div class="demo-vinyl"></div></usa-fx>',
+    [{ key: 'effect', values: ['vinyl-spin', 'beat-bounce'] }], '7.1'),
 ];
 
 /** item id → live-demo wiring. */
@@ -459,5 +509,14 @@ export const wire = {
   'file-drop': (stage) => {
     const d = stage.querySelector('usa-file-drop');
     stage.querySelector('[data-fd=demo]')?.addEventListener('click', () => d.addFiles([new File(['x'.repeat(48000)], 'hero.jpg'), new File(['y'.repeat(2100)], 'notes.md')]));
+  },
+  equalizer: (stage) => {
+    const eq = stage.querySelector('usa-equalizer');
+    stage.querySelectorAll('[data-eq]').forEach((b) => b.addEventListener('click', () => eq.applyPreset(b.dataset.eq)));
+  },
+  lyrics: (stage) => {
+    const p = stage.querySelector('usa-music-player');
+    const l = stage.querySelector('usa-lyrics');
+    l?.addEventListener('usa:seek', (e) => p?.seek(e.detail.time));
   },
 };

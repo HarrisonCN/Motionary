@@ -590,6 +590,79 @@ interface UsaKeyframeEditorElement extends UsaElement {
 declare function defineKeyframeEditor(tag?: string): CustomElementConstructor | undefined;
 
 /**
+ * `<usa-music-player>` (7.1) — a music player card: the cover turns like a
+ * record while playing, the play button morphs ▶ ↔ ❚❚, mini equalizer bars
+ * dance, and the progress bar is a scrubbable slider (arrows ±5 s). Plays a
+ * child `<audio>` (or `src`), or simulates a track of `duration` seconds for
+ * demos. Attributes `title`, `artist`, `cover` (image URL), `src`,
+ * `duration`. Methods `play()`, `pause()`, `toggle()`, `seek(s)`; events
+ * `usa:play`, `usa:pause`, `usa:seek`, `usa:prev`, `usa:next`. Reduced
+ * motion: no spin or dancing bars.
+ */
+interface UsaMusicPlayerElement extends UsaElement {
+    readonly playing: boolean;
+    currentTime: number;
+    readonly duration: number;
+    play(): void;
+    pause(): void;
+    toggle(): void;
+    seek(s: number): void;
+}
+declare function defineMusicPlayer(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-volume-knob>` (7.1) — a rotary knob: drag up / down (or around),
+ * scroll, or use the keyboard (arrows ±1, PageUp / PageDown ±10, Home / End)
+ * to turn it; the value arc fills, a ring of LED ticks lights up and the
+ * pointer springs to the new angle. `role="slider"`; attributes `value`,
+ * `min` (0), `max` (100), `label`, `size`. Events `usa:input` while turning,
+ * `usa:change` when done (`{ value }`). Reduced motion: no spring.
+ */
+interface UsaVolumeKnobElement extends UsaElement {
+    value: number;
+}
+declare function defineVolumeKnob(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-equalizer>` (7.1) — a graphic equalizer: one vertical slider per
+ * band (`bands`, comma-separated labels — default 60 Hz … 16 kHz), each with
+ * a springy cap; a smooth response curve is drawn through them. Presets
+ * (`preset="flat | bass | vocal | rock | electronic"` or `applyPreset()`)
+ * glide every band to its gain. Gains are −12…+12 dB; `values` (array),
+ * keyboard per band (↑ / ↓ ±1, PageUp / PageDown ±3). Event `usa:change`
+ * (`{ values }`). Reduced motion: bands jump.
+ */
+interface UsaEqualizerElement extends UsaElement {
+    values: number[];
+    applyPreset(name: string): void;
+}
+declare const EQ_PRESETS: Record<string, number[]>;
+declare function defineEqualizer(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-lyrics>` (7.1) — synced karaoke lyrics. Lines come from `[data-t]`
+ * children (start time in seconds) or LRC text (`[mm:ss.xx] line`) in a
+ * `<script type="text/plain">` child. Set `time` (s) — or `for` the id of an
+ * `<audio>` / `<video>` / `<usa-music-player>` to follow — and the active
+ * line glows and scrolls to the centre while a highlight sweeps across it
+ * word by word; past lines dim. Click a line to emit `usa:seek` (`{ time }`).
+ * Reduced motion: no sweep or smooth scroll — the active line just switches.
+ */
+interface UsaLyricsElement extends UsaElement {
+    time: number;
+    readonly lines: {
+        t: number;
+        text: string;
+    }[];
+}
+/** Parse LRC text into sorted `{ t, text }` lines. */
+declare function parseLRC(src: string): {
+    t: number;
+    text: string;
+}[];
+declare function defineLyrics(tag?: string): CustomElementConstructor | undefined;
+
+/**
  * motionary/components/widgets — the 6.x animated UI widgets, in their own
  * entry so `motionary/components` and `components/lite` keep their size
  * budgets. Every widget is reduced-motion safe and keyboard accessible.
@@ -642,8 +715,12 @@ declare global {
         'usa-color-picker': UsaColorPickerElement;
         'usa-file-drop': UsaFileDropElement;
         'usa-keyframe-editor': UsaKeyframeEditorElement;
+        'usa-music-player': UsaMusicPlayerElement;
+        'usa-volume-knob': UsaVolumeKnobElement;
+        'usa-equalizer': UsaEqualizerElement;
+        'usa-lyrics': UsaLyricsElement;
     }
 }
 
-export { CAROUSEL_EFFECTS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PROGRESS_VARIANTS, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, defineCarousel, defineColorPicker, defineCompare, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineFileDrop, defineKanban, defineKeyframeEditor, defineMasonryFlow, defineMenu, defineMenuToggle, defineMilestones, defineModal, defineNavMorph, defineOdometer, definePagination, defineProgressRing, definePullCord, defineSegmented, defineSheet, defineSkeletonReveal, defineStarRating, defineStepper, defineStories, defineSwipeDeck, defineSwitch, defineTabBar, defineTip, defineToastStack, defineWeatherCard, defineWidgets, hexToHsv, hsvToHex, monthGrid, pageWindow, parseISODate, stackToast };
-export type { StackToastOptions, UsaCarouselElement, UsaColorPickerElement, UsaCompareElement, UsaCubeGalleryElement, UsaDatePickerElement, UsaDisclosureElement, UsaDockElement, UsaFileDropElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMilestonesElement, UsaModalElement, UsaNavMorphElement, UsaOdometerElement, UsaPaginationElement, UsaProgressRingElement, UsaPullCordElement, UsaSegmentedElement, UsaSheetElement, UsaSkeletonRevealElement, UsaStarRatingElement, UsaStepperElement, UsaStoriesElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTipElement, UsaToastStackElement, UsaWeatherCardElement };
+export { CAROUSEL_EFFECTS, EQ_PRESETS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PROGRESS_VARIANTS, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, defineCarousel, defineColorPicker, defineCompare, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineFileDrop, defineKanban, defineKeyframeEditor, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMilestones, defineModal, defineMusicPlayer, defineNavMorph, defineOdometer, definePagination, defineProgressRing, definePullCord, defineSegmented, defineSheet, defineSkeletonReveal, defineStarRating, defineStepper, defineStories, defineSwipeDeck, defineSwitch, defineTabBar, defineTip, defineToastStack, defineVolumeKnob, defineWeatherCard, defineWidgets, hexToHsv, hsvToHex, monthGrid, pageWindow, parseISODate, parseLRC, stackToast };
+export type { StackToastOptions, UsaCarouselElement, UsaColorPickerElement, UsaCompareElement, UsaCubeGalleryElement, UsaDatePickerElement, UsaDisclosureElement, UsaDockElement, UsaEqualizerElement, UsaFileDropElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaLyricsElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMilestonesElement, UsaModalElement, UsaMusicPlayerElement, UsaNavMorphElement, UsaOdometerElement, UsaPaginationElement, UsaProgressRingElement, UsaPullCordElement, UsaSegmentedElement, UsaSheetElement, UsaSkeletonRevealElement, UsaStarRatingElement, UsaStepperElement, UsaStoriesElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTipElement, UsaToastStackElement, UsaVolumeKnobElement, UsaWeatherCardElement };
