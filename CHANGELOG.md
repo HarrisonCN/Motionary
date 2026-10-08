@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.2.0] - 2026-10-08
+
+### Added
+- **4 new components (7.2)** in `motionary/components/widgets` (also in `dist/widgets.umd.js`):
+  - `<usa-bar-chart>` — animated bar chart from `values` + `labels`, `<data>` children or the `data` property: bars grow in a stagger on first view, value labels show with `unit`; new data glides every bar (appearing bars grow, leaving bars shrink away); `horizontal`, `max`. A labelled `figure` with a list of “label: value” items.
+  - `<usa-gauge>` — semicircular gauge: the needle swings to `value` on a damped spring, the arc fills in the colour of its `zones` (`"60:#22c55e,85:#f59e0b,100:#ef4444"`), the number counts; `min` / `max` / `unit` / `label`; `role="meter"` with `aria-valuetext`.
+  - `<usa-sparkline>` — inline trend line (`values` or `data`): draws on first view, area fades in, the last point pulses, new data morphs point by point; `variant="line | area | bars"`, `color`; hover tooltip; text summary as `aria-label`. `SPARK_VARIANTS`, `sparkPoints()`.
+  - `<usa-kpi>` — KPI card: the value counts up keeping prefix / suffix / decimals, the `delta` chip slides in with a ▲ / ▼ coloured by sign (`invert` when down is good), optional `trend` sparkline, `caption`; setting `value` rolls from the old number and flashes the card.
+- **Data-viz motion — `motionary/fx/chart`** (= `motionary/components/fx-chart`, `registerChartPack()`, also in `registerEffectPacks()`): entrances for charts you already have (any SVG / HTML chart library) — `bars-grow`, `line-draw`, `ring-sweep`, `dots-pop`, `number-roll` (enter) and `sankey-flow` (loop). `parseFigure()`.
+- Showcase: 7 new gallery cards with copyable code and live “new data” buttons; Animation Store 292 → 299 items.
+
+### Accessibility
+- Bar chart = `figure` + list items labelled “label: value”; gauge = `meter` with `aria-valuenow` / `aria-valuetext`; sparkline = `img` with a trend summary; KPI = labelled `group`. Reduced motion: no growth, glide, swing, count, draw, morph, pulse or flash — final values are shown at once; chart effects end in their final state with a short fade and `sankey-flow` is static.
+
 ## [7.1.0] - 2026-10-08
 
 ### Added

@@ -469,6 +469,56 @@ export const components = [
     '<usa-fx effect="vinyl-spin" trigger="load">\n  <img class="cover" src="album.jpg" alt="…">\n</usa-fx>',
     '<usa-fx effect="vinyl-spin" trigger="load"><div class="demo-vinyl"></div></usa-fx>',
     [{ key: 'effect', values: ['vinyl-spin', 'beat-bounce'] }], '7.1'),
+  // ---- 7.2 -------------------------------------------------------------
+  W('usa-bar-chart', 'ui', 'Animated bar chart', '动画柱状图',
+    '7.2: bars grow from the baseline in a stagger on first view and new data glides every bar to its new height — bars that appear grow in, bars that leave shrink away. Data from values/labels, <data> children or the data property.',
+    '7.2：首次进入视口时柱子从基线依次长出；更新数据时每根柱子平滑过渡到新高度 —— 新增的长出，移除的缩小消失。数据来自 values/labels、<data> 子元素或 data 属性。',
+    ['chart', 'bar', 'data', 'dashboard', 'stagger'],
+    '<usa-bar-chart values="12,19,8,15,22" labels="Mon,Tue,Wed,Thu,Fri" unit="k"></usa-bar-chart>\n<script>chart.data = [{ label: \'Mon\', value: 18 }, …];</script>',
+    '<div class="demo-col"><usa-bar-chart values="12,19,8,15,22" labels="Mon,Tue,Wed,Thu,Fri" unit="k" class="demo-bc"></usa-bar-chart><button type="button" class="demo-btn" data-bc>New data</button></div>',
+    undefined, { since: '7.2' }),
+  W('usa-gauge', 'ui', 'Spring gauge', '弹簧仪表盘',
+    '7.2: a semicircular gauge — the needle swings to the value on a damped spring (overshoot, settle), the arc fills in the colour of its zone and the number counts. role="meter".',
+    '7.2：半圆仪表盘 —— 指针以阻尼弹簧摆到数值（过冲后回稳），弧线按所在区间着色填充，数字同步计数。role="meter"。',
+    ['gauge', 'meter', 'needle', 'dashboard', 'spring'],
+    '<usa-gauge value="72" unit="%" label="CPU" zones="60:#22c55e,85:#f59e0b,100:#ef4444"></usa-gauge>',
+    '<div class="demo-col"><usa-gauge value="72" unit="%" label="CPU" zones="60:#22c55e,85:#f59e0b,100:#ef4444" class="demo-gg"></usa-gauge><button type="button" class="demo-btn" data-gg>Random load</button></div>',
+    undefined, { since: '7.2' }),
+  W('usa-sparkline', 'ui', 'Sparkline', '迷你趋势线',
+    '7.2: a tiny inline trend — draws itself on first view, a soft area fades in, the last point pulses and new data morphs the line point by point. line | area | bars; hover shows the value.',
+    '7.2：小巧的行内趋势线 —— 首次可见时自绘，柔和面积渐显，末点脉冲，新数据逐点变形过渡。line | area | bars；悬停显示数值。',
+    ['sparkline', 'trend', 'line', 'inline', 'chart'],
+    '<usa-sparkline values="3,5,4,8,6,9,12" variant="area"></usa-sparkline>',
+    '<div class="demo-col"><usa-sparkline values="3,5,4,8,6,9,12" variant="area" class="demo-sl"></usa-sparkline><usa-sparkline values="6,4,7,5,9,8,11" variant="bars" class="demo-sl"></usa-sparkline><button type="button" class="demo-btn" data-sl>Morph</button></div>',
+    undefined, { since: '7.2' }),
+  W('usa-kpi', 'ui', 'KPI card', 'KPI 指标卡',
+    '7.2: the value counts up keeping prefix, suffix and decimals ("$12.4k", "98.2%"), the delta chip slides in with an arrow coloured by sign, and an optional trend draws a sparkline. Setting value rolls and flashes the card.',
+    '7.2：数值计数上涨并保留前后缀与小数（"$12.4k"、"98.2%"），涨跌标签带方向箭头滑入并按正负着色，可选 trend 画出迷你趋势线。更新 value 时数字滚动并闪烁卡片。',
+    ['kpi', 'metric', 'counter', 'dashboard', 'stat'],
+    '<usa-kpi label="Revenue" value="$48.2k" delta="+12.5%" trend="4,6,5,9,8,12" caption="vs last month"></usa-kpi>',
+    '<div class="demo-col"><usa-kpi label="Revenue" value="$48.2k" delta="+12.5%" trend="4,6,5,9,8,12" caption="vs last month" class="demo-kpi"></usa-kpi><button type="button" class="demo-btn" data-kpi>Update</button></div>',
+    undefined, { since: '7.2' }),
+  X('fx-bars', ['fx-chart', 'registerChartPack'], 'Bars grow & dots pop', '柱子生长与数据点弹出',
+    '7.2: entrances for any existing chart (SVG or HTML) — bars-grow grows [data-bar] / rect bars from the baseline in a stagger; dots-pop pops scatter / line points in.',
+    '7.2：为任何现有图表（SVG 或 HTML）提供入场动画 —— bars-grow 让 [data-bar] / rect 柱子从基线依次长出；dots-pop 让散点 / 折线数据点弹出。',
+    ['chart', 'bars', 'grow', 'scatter', 'entrance'],
+    '<usa-fx effect="bars-grow" trigger="enter">\n  <svg viewBox="0 0 100 50">…<rect …/></svg>\n</usa-fx>',
+    '<usa-fx effect="bars-grow" trigger="load"><svg class="demo-svgchart" viewBox="0 0 100 50"><rect x="8" y="22" width="12" height="26" rx="2"/><rect x="26" y="10" width="12" height="38" rx="2"/><rect x="44" y="28" width="12" height="20" rx="2"/><rect x="62" y="14" width="12" height="34" rx="2"/><rect x="80" y="4" width="12" height="44" rx="2"/></svg></usa-fx>',
+    [{ key: 'effect', values: ['bars-grow', 'dots-pop'] }], '7.2'),
+  X('fx-line', ['fx-chart', 'registerChartPack'], 'Line draw & ring sweep', '折线绘制与环形扫描',
+    '7.2: line-draw draws every SVG path / polyline / line then fades area fills in; ring-sweep sweeps donut arcs around from 12 o\'clock.',
+    '7.2：line-draw 依次绘制每条 SVG path / polyline / line，随后面积填充渐显；ring-sweep 让环形图弧段从 12 点方向扫出。',
+    ['line', 'draw', 'donut', 'ring', 'svg'],
+    '<usa-fx effect="line-draw" trigger="enter">\n  <svg …><polyline points="…" /></svg>\n</usa-fx>',
+    '<usa-fx effect="line-draw" trigger="load"><svg class="demo-svgchart" viewBox="0 0 100 50"><polyline fill="none" stroke-width="2.5" points="4,40 20,30 36,34 52,18 68,22 84,8 96,12"/></svg></usa-fx>',
+    [{ key: 'effect', values: ['line-draw', 'ring-sweep'] }], '7.2'),
+  X('fx-flow', ['fx-chart', 'registerChartPack'], 'Sankey flow & number roll', '桑基流动与数字滚动',
+    '7.2: sankey-flow runs dashes along the links to show direction and volume (static under reduced motion); number-roll counts [data-value] figures up with locale formatting.',
+    '7.2：sankey-flow 让虚线沿连线流动以表示方向与流量（减少动态时静止）；number-roll 让 [data-value] 数字按本地格式计数上涨。',
+    ['sankey', 'flow', 'number', 'count', 'dataviz'],
+    '<usa-fx effect="sankey-flow" trigger="load">\n  <svg …><path data-flow d="…" /></svg>\n</usa-fx>',
+    '<usa-fx effect="sankey-flow" trigger="load"><svg class="demo-svgchart demo-flow" viewBox="0 0 100 50"><path data-flow d="M5 10 C50 10 50 40 95 40" stroke-width="5"/><path data-flow d="M5 40 C50 40 50 12 95 12" stroke-width="3"/><path data-flow d="M5 25 L95 26" stroke-width="2"/></svg></usa-fx>',
+    [{ key: 'effect', values: ['sankey-flow', 'number-roll'] }], '7.2'),
 ];
 
 /** item id → live-demo wiring. */
@@ -518,5 +568,21 @@ export const wire = {
     const p = stage.querySelector('usa-music-player');
     const l = stage.querySelector('usa-lyrics');
     l?.addEventListener('usa:seek', (e) => p?.seek(e.detail.time));
+  },
+  'bar-chart': (stage) => {
+    const c = stage.querySelector('usa-bar-chart');
+    const L = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    stage.querySelector('[data-bc]')?.addEventListener('click', () => { const n = 4 + Math.floor(Math.random() * 3); c.data = L.slice(0, n).map((label) => ({ label, value: 4 + Math.round(Math.random() * 24) })); });
+  },
+  gauge: (stage) => {
+    const g = stage.querySelector('usa-gauge');
+    stage.querySelector('[data-gg]')?.addEventListener('click', () => { g.value = Math.round(Math.random() * 100); });
+  },
+  sparkline: (stage) => {
+    stage.querySelector('[data-sl]')?.addEventListener('click', () => stage.querySelectorAll('usa-sparkline').forEach((s) => { s.data = Array.from({ length: 7 }, () => 2 + Math.round(Math.random() * 12)); }));
+  },
+  kpi: (stage) => {
+    const k = stage.querySelector('usa-kpi');
+    stage.querySelector('[data-kpi]')?.addEventListener('click', () => { k.value = '$' + (30 + Math.random() * 40).toFixed(1) + 'k'; });
   },
 };
