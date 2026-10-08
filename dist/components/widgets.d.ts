@@ -171,6 +171,67 @@ declare const MENU_EFFECTS: readonly ["scale", "fold", "slide"];
 declare function defineMenu(tag?: string): CustomElementConstructor | undefined;
 
 /**
+ * 6.4 meters: `<usa-progress-ring>` and `<usa-odometer>`.
+ *
+ * `<usa-progress-ring value="64" max="100">` — a ring, `bar` or `semi`
+ * (semicircle gauge) `variant`; the arc eases (with a little overshoot) to
+ * each new value while the centre label counts; `gradient="#a,#b"`;
+ * no `value` = indeterminate (spinning arc). `role="progressbar"`.
+ * Event `usa:complete` when it reaches max.
+ *
+ * `<usa-odometer value="1234">` — rolling digit wheels: every digit column
+ * spins to its new digit (lower digits travel further), columns slide in /
+ * out when the length changes; `locale` grouping via Intl.NumberFormat,
+ * `decimals`, `prefix` / `suffix`, `duration`. The accessible name is the
+ * formatted number.
+ *
+ * Reduced motion: values switch without animation.
+ */
+interface UsaProgressRingElement extends UsaElement {
+    value: number | null;
+    max: number;
+}
+interface UsaOdometerElement extends UsaElement {
+    value: number;
+    readonly text: string;
+}
+declare const PROGRESS_VARIANTS: readonly ["ring", "bar", "semi"];
+declare function defineProgressRing(tag?: string): CustomElementConstructor | undefined;
+declare function defineOdometer(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-skeleton-reveal loading>` (6.4) — a skeleton generated from the
+ * real content: while `loading`, every text line, image and marked block
+ * (`[data-skeleton]`) of the children is measured and covered by a
+ * placeholder with one synchronized shimmer (`variant="wave | pulse |
+ * glow"`). Remove `loading` (or call `reveal()`) and the placeholders
+ * dissolve top-to-bottom while the content fades in from a blur.
+ *
+ * `aria-busy` follows `loading`. Event `usa:reveal`. Reduced motion: no
+ * shimmer, a plain crossfade.
+ */
+interface UsaSkeletonRevealElement extends UsaElement {
+    loading: boolean;
+    reveal(): Promise<void>;
+}
+declare const SKELETON_VARIANTS: readonly ["wave", "pulse", "glow"];
+declare function defineSkeletonReveal(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-star-rating value="3.5">` (6.4) — rating stars 2.0: the fill
+ * follows the pointer (hover preview, `step="0.5"` half stars), a click
+ * pops the chosen star and throws a small sparkle burst, the other stars
+ * ripple in sequence. `max`, `step` (`1` · `0.5`), `readonly`, `label`,
+ * `icon` (`star` · `heart`). Keyboard: it is a `role="slider"` — arrows,
+ * Home / End. Event `usa:change` (`{ value }`). Reduced motion: no pop,
+ * burst or ripple.
+ */
+interface UsaStarRatingElement extends UsaElement {
+    value: number;
+}
+declare function defineStarRating(tag?: string): CustomElementConstructor | undefined;
+
+/**
  * motionary/components/widgets — the 6.x animated UI widgets, in their own
  * entry so `motionary/components` and `components/lite` keep their size
  * budgets. Every widget is reduced-motion safe and keyboard accessible.
@@ -199,8 +260,12 @@ declare global {
         'usa-modal': UsaModalElement;
         'usa-sheet': UsaSheetElement;
         'usa-menu': UsaMenuElement;
+        'usa-progress-ring': UsaProgressRingElement;
+        'usa-odometer': UsaOdometerElement;
+        'usa-skeleton-reveal': UsaSkeletonRevealElement;
+        'usa-star-rating': UsaStarRatingElement;
     }
 }
 
-export { CAROUSEL_EFFECTS, MENU_EFFECTS, MODAL_EFFECTS, SHEET_SIDES, TAB_INDICATORS, TOAST_POSITIONS, WIDGETS, WIDGET_TAGS, defineCarousel, defineDisclosure, defineMenu, defineModal, defineSheet, defineStories, defineTabBar, defineToastStack, defineWidgets, stackToast };
-export type { StackToastOptions, UsaCarouselElement, UsaDisclosureElement, UsaMenuElement, UsaModalElement, UsaSheetElement, UsaStoriesElement, UsaTabBarElement, UsaToastStackElement };
+export { CAROUSEL_EFFECTS, MENU_EFFECTS, MODAL_EFFECTS, PROGRESS_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, TAB_INDICATORS, TOAST_POSITIONS, WIDGETS, WIDGET_TAGS, defineCarousel, defineDisclosure, defineMenu, defineModal, defineOdometer, defineProgressRing, defineSheet, defineSkeletonReveal, defineStarRating, defineStories, defineTabBar, defineToastStack, defineWidgets, stackToast };
+export type { StackToastOptions, UsaCarouselElement, UsaDisclosureElement, UsaMenuElement, UsaModalElement, UsaOdometerElement, UsaProgressRingElement, UsaSheetElement, UsaSkeletonRevealElement, UsaStarRatingElement, UsaStoriesElement, UsaTabBarElement, UsaToastStackElement };

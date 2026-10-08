@@ -87,6 +87,34 @@ declare const TEXT3_FX: EffectDefinition[];
 declare function registerTextEffects3(): void;
 
 /**
+ * 6.4 — Light & materials (`motionary/components/fx-light`), registered
+ * through `registerEffect()`. Persistent effects (use `trigger="load"`)
+ * that return a cleanup:
+ *
+ * - `light-follow` (hover) — a soft point light + specular highlight that
+ *   follows the pointer over the surface.
+ * - `refraction` (hover) — a glass lens that bends and magnifies what is
+ *   behind it as it follows the pointer (backdrop filter, chromatic rim).
+ * - `brushed-metal` (card) — fine brushed lines with an anisotropic sheen
+ *   that turns with the pointer angle.
+ * - `pearlescent` (card) — a nacre / holographic film whose hues shift with
+ *   the pointer position.
+ * - `god-rays` (background) — volumetric light shafts from a source point
+ *   (Canvas 2D, additive).
+ * - `pointer-shadow` (hover) — the pointer is the light: the element casts
+ *   a soft real-time shadow away from it.
+ *
+ * Reduced motion: surfaces stay lit from a fixed angle (no tracking),
+ * `god-rays` draws one still frame.
+ */
+
+/** Track the pointer over `el` as 0–1 coordinates (`fn(x, y, inside)`); starts at (`x0`, `y0`). Returns a remover. */
+declare function trackPointer(el: HTMLElement, ctx: EffectContext, fn: (x: number, y: number, inside: boolean) => void, x0?: number, y0?: number): () => void;
+declare const LIGHT_FX: EffectDefinition[];
+/** Register the 6.4 light & materials pack (idempotent). */
+declare function registerLightEffects(): void;
+
+/**
  * 5.5 — generative backgrounds on Canvas 2D, registered through
  * `registerEffect()` (kind `background`): `flow-field`, `voronoi`,
  * `mesh-gradient`, `starfield`, `metaballs`, `contours`.
@@ -158,5 +186,5 @@ declare const FX2_PACKS: Record<string, EffectDefinition[]>;
 /** Register every 6.x pack (idempotent). */
 declare function registerFx2(): void;
 
-export { FX2_PACKS, GLSL_HEAD, GPU_FX, TEXT3_FX, fieldFallback, registerFx2, registerGpuEffects, registerTextEffects3, shaderBackground, splitChars, supportsWebGL2 };
+export { FX2_PACKS, GLSL_HEAD, GPU_FX, LIGHT_FX, TEXT3_FX, fieldFallback, registerFx2, registerGpuEffects, registerLightEffects, registerTextEffects3, shaderBackground, splitChars, supportsWebGL2, trackPointer };
 export type { ShaderSpec };

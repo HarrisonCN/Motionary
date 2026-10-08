@@ -272,3 +272,10 @@ usa-carousel[data-effect="cards"].demo-carousel .demo-slide{margin:0 18%}
 .demo-word{margin:0;font:800 clamp(30px,8vw,44px)/1.1 system-ui,sans-serif;letter-spacing:.01em;color:var(--text,#111)}
 .demo-menu{align-self:start;margin-top:4px}
 .demo-trail{background:linear-gradient(135deg,#7c5cff,#22d3ee)!important;color:#fff!important}
+.demo-pr{--usa-pr-size:110px}.demo-pr[data-variant="bar"]{--usa-pr-size:190px}
+.demo-odo{font:800 34px/1 system-ui,sans-serif}
+.demo-skr{width:min(260px,100%);text-align:left;font-size:14px}.demo-skr p{margin:8px 0 0}.demo-skr-row{display:flex;align-items:center;gap:10px}
+.demo-skr-av{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#7c5cff,#22d3ee);color:#fff;font-weight:700}
+.demo-lens{background:repeating-linear-gradient(45deg,#7c5cff 0 12px,#22d3ee 12px 24px)!important;color:#fff!important;font-size:28px!important}
+.demo-metal{background:#94a3b8!important;color:#0f172a!important;letter-spacing:.08em}
+.demo-rays{color:#fff7d6!important}

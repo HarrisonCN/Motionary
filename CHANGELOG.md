@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.4.0] - 2026-10-08
+
+### Added
+- **4 new components (6.4)** in `motionary/components/widgets` (also in `dist/widgets.umd.js`; the existing `<usa-progress>`, `<usa-counter>`, `<usa-skeleton>` and `<usa-rating>` are unchanged):
+  - `<usa-progress-ring>` — ring, `bar` or `semi` gauge; the arc eases to each new value with a small overshoot while the label counts; `gradient`, `duration`, `no-label`; indeterminate without `value`; `role="progressbar"`, `usa:complete`.
+  - `<usa-odometer>` — rolling digit wheels: each digit spins forward to its new value, added digits slide in; `locale` (Intl.NumberFormat grouping), `decimals`, `prefix`, `suffix`, `duration`; the formatted number is the accessible name.
+  - `<usa-skeleton-reveal>` — a skeleton generated from the real content (one bar per rendered text line, blocks for images / buttons / `[data-skeleton]`), synchronized `wave` / `pulse` / `glow` shimmer; removing `loading` (or `reveal()`) dissolves the bars top-to-bottom while the content fades in from a blur; `aria-busy`, `usa:reveal`.
+  - `<usa-star-rating>` — rating stars 2.0: hover preview, `step="0.5"` half stars, click pop + sparkle burst + ripple, `icon="heart"`, `readonly`; keyboard slider; `usa:change`.
+- **Light & materials — `motionary/components/fx-light`** (6 effects, `registerLightEffects()`, also in `registerFx2()`): `light-follow` (point light + specular hot spot), `refraction` (glass lens following the pointer, backdrop-filter), `brushed-metal` (anisotropic sheen), `pearlescent` (nacre / holographic film), `god-rays` (volumetric light shafts, Canvas 2D), `pointer-shadow` (real-time cast shadow away from the pointer). Helper `trackPointer()`.
+- Showcase: 7 new gallery cards (live value buttons for the ring, odometer and skeleton) with copyable code; Animation Store “Components 6.x” 14 → 21 entries (241 → 248 items).
+
+### Accessibility
+- Progress ring and odometer expose their values (`aria-valuenow`, accessible name); the skeleton sets `aria-busy`; the rating is a keyboard slider. Reduced motion: values switch instantly, no shimmer / pop, lights stay fixed, god rays draw one still frame.
+
 ## [6.3.0] - 2026-10-08
 
 ### Added

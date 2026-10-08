@@ -110,7 +110,73 @@ export const components = [
     ['cursor', 'trail', 'letters', 'pointer'],
     '<usa-fx effect="text-trail" trigger="load" options=\'{"text":"HELLO"}\'>\n  <section class="hero">…</section>\n</usa-fx>',
     '<usa-fx effect="text-trail" trigger="load"><div class="demo-tile demo-trail">Move here</div></usa-fx>', undefined, '6.3'),
+  // ---- 6.4 -------------------------------------------------------------
+  W('usa-progress-ring', 'feedback', 'Progress ring / bar / gauge', '进度环 / 进度条 / 仪表',
+    '6.4: the arc eases to every new value with a little overshoot while the label counts up; ring, bar or semicircle gauge, gradient strokes, indeterminate spinner without a value. role="progressbar", usa:complete at 100%.',
+    '6.4：进度弧以轻微回弹缓动到新数值，中间数字同步滚动；环形、条形或半圆仪表，支持渐变描边，无 value 时为不确定进度。role="progressbar"，满 100% 触发 usa:complete。',
+    ['progress', 'ring', 'gauge', 'loader', 'percent'],
+    '<usa-progress-ring value="72" gradient="#7c5cff,#22d3ee"></usa-progress-ring>\n<usa-progress-ring variant="bar" value="40"></usa-progress-ring>\n<usa-progress-ring variant="semi" value="88"></usa-progress-ring>\n<!-- el.value = 90 animates to the new value -->',
+    '<div class="demo-row"><usa-progress-ring value="72" gradient="#7c5cff,#22d3ee" class="demo-pr"></usa-progress-ring><button type="button" class="demo-btn" data-pr-step>+ 20%</button></div>',
+    [{ key: 'variant', values: ['ring', 'semi', 'bar'] }], { since: '6.4' }),
+  W('usa-odometer', 'text', 'Odometer counter', '里程表计数器',
+    '6.4: rolling digit wheels — every digit spins forward to its new value, new digits slide in, locale grouping via Intl.NumberFormat, decimals, prefix / suffix. The accessible name is the formatted number.',
+    '6.4：滚轮式数字 —— 每一位向前滚动到新数字，新增位滑入；通过 Intl.NumberFormat 按地区分组，支持小数、前缀 / 后缀。可访问名称即格式化后的数字。',
+    ['odometer', 'counter', 'number', 'digits', 'rolling'],
+    '<usa-odometer value="1284" locale="en-US" prefix="$"></usa-odometer>\n<!-- el.value = 2048 rolls every digit -->',
+    '<div class="demo-row"><usa-odometer value="1284" prefix="$" class="demo-odo"></usa-odometer><button type="button" class="demo-btn" data-odo-step>Count</button></div>',
+    [{ key: 'locale', values: ['en-US', 'de-DE', 'hi-IN'] }], { since: '6.4' }),
+  W('usa-skeleton-reveal', 'feedback', 'Skeleton → content reveal', '骨架屏 → 内容揭示',
+    '6.4: the skeleton is generated from the real content — one bar per rendered text line, blocks for images and marked elements — with one synchronized shimmer (wave, pulse or glow). Remove loading and the bars dissolve top-to-bottom while the content fades in from a blur.',
+    '6.4：骨架由真实内容自动生成 —— 每一行文字一条、图片与标记元素各一块 —— 共享同步闪光（wave、pulse、glow）。移除 loading 后骨架自上而下溶解，内容从模糊中淡入。',
+    ['skeleton', 'loading', 'shimmer', 'placeholder', 'reveal'],
+    '<usa-skeleton-reveal loading variant="wave">\n  <img src="avatar.jpg" alt="" data-skeleton="circle">\n  <h3>Ada Lovelace</h3>\n  <p>…</p>\n</usa-skeleton-reveal>\n<!-- el.loading = false (or el.reveal()) when the data arrived -->',
+    '<div class="demo-col"><usa-skeleton-reveal loading class="demo-skr"><div class="demo-skr-row"><span class="demo-skr-av" data-skeleton="circle">AL</span><strong>Ada Lovelace</strong></div><p>First programmer — wrote the first published algorithm for a machine.</p></usa-skeleton-reveal><button type="button" class="demo-btn" data-skr-toggle>Reveal</button></div>',
+    [{ key: 'variant', values: ['wave', 'pulse', 'glow'] }], { since: '6.4' }),
+  W('usa-star-rating', 'click', 'Star rating 2.0', '评分星 2.0',
+    '6.4: the fill follows the pointer (half stars with step="0.5"), a click pops the chosen star with a sparkle burst while the others ripple; stars or hearts; a keyboard slider (arrows, Home / End); readonly mode.',
+    '6.4：填充跟随指针（step="0.5" 支持半星），点击时所选星星弹跳并迸出火花，其余星星依次波动；星星或爱心；键盘滑块（方向键、Home / End）；只读模式。',
+    ['rating', 'stars', 'review', 'slider', 'feedback'],
+    '<usa-star-rating value="3.5" step="0.5" label="Your rating"></usa-star-rating>\n<usa-star-rating value="4" readonly></usa-star-rating>',
+    '<usa-star-rating value="3.5" step="0.5" label="Your rating"></usa-star-rating>',
+    [{ key: 'icon', values: ['star', 'heart'] }], { since: '6.4' }),
+  X('fx-light', ['fx-light', 'registerLightEffects'], 'Dynamic light, lens & shadow', '动态光源、透镜与阴影',
+    '6.4: light-follow (a point light with a specular hot spot), refraction (a glass lens that bends and magnifies what is behind it) and pointer-shadow (the pointer is the light — a real-time cast shadow). Fixed lighting under reduced motion.',
+    '6.4：light-follow（带高光点的点光源跟随指针）、refraction（玻璃透镜折射并放大其后的内容）与 pointer-shadow（指针即光源 —— 实时投影）。减少动态效果时为固定光照。',
+    ['light', 'lens', 'refraction', 'glass', 'shadow', 'pointer'],
+    '<usa-fx effect="light-follow" trigger="load">\n  <div class="card">…</div>\n</usa-fx>',
+    '<usa-fx effect="light-follow" trigger="load"><div class="demo-tile demo-lens">Light</div></usa-fx>',
+    [{ key: 'effect', values: ['light-follow', 'refraction', 'pointer-shadow'] }], '6.4'),
+  X('fx-materials', ['fx-light', 'registerLightEffects'], 'Brushed metal & pearl', '金属拉丝与珠光',
+    '6.4: brushed-metal (fine lines with an anisotropic sheen that turns with the pointer) and pearlescent (a nacre / holographic film whose hues shift as you move).',
+    '6.4：brushed-metal（细密拉丝纹理，各向异性高光随指针转动）与 pearlescent（珍珠 / 镭射薄膜，色相随移动变化）。',
+    ['metal', 'brushed', 'pearl', 'holographic', 'material', 'card'],
+    '<usa-fx effect="brushed-metal" trigger="load">\n  <div class="card">…</div>\n</usa-fx>',
+    '<usa-fx effect="brushed-metal" trigger="load"><div class="demo-tile demo-metal">Titanium</div></usa-fx>',
+    [{ key: 'effect', values: ['brushed-metal', 'pearlescent'] }], '6.4'),
+  X('fx-god-rays', ['fx-light', 'registerLightEffects'], 'Volumetric light (god rays)', '体积光（耶稣光）',
+    '6.4: light shafts fan out from a source point and slowly sweep, drawn additively on Canvas 2D; renders only while visible, one still frame under reduced motion.',
+    '6.4：光束从光源点扇形散开并缓慢摆动，以叠加混合绘制在 Canvas 2D 上；仅在可见时渲染，减少动态效果时为一帧静态画面。',
+    ['god rays', 'volumetric', 'light', 'background', 'canvas'],
+    '<usa-fx effect="god-rays" trigger="load" self class="hero">\n  <h1>Dawn</h1>\n</usa-fx>',
+    '<usa-fx effect="god-rays" trigger="load"><div class="demo-tile demo-gen demo-rays">Dawn</div></usa-fx>', undefined, '6.4'),
 ];
 
 /** item id → live-demo wiring. */
-export const wire = {};
+export const wire = {
+  'progress-ring': (stage) => {
+    const r = stage.querySelector('usa-progress-ring');
+    stage.querySelector('[data-pr-step]')?.addEventListener('click', () => (r.value = r.value >= 100 ? 8 : Math.min(100, (r.value || 0) + 20)));
+  },
+  odometer: (stage) => {
+    const o = stage.querySelector('usa-odometer');
+    stage.querySelector('[data-odo-step]')?.addEventListener('click', () => (o.value = o.value + Math.round(37 + Math.random() * 900)));
+  },
+  'skeleton-reveal': (stage) => {
+    const s = stage.querySelector('usa-skeleton-reveal');
+    const b = stage.querySelector('[data-skr-toggle]');
+    b?.addEventListener('click', () => {
+      s.loading = !s.loading;
+      b.textContent = s.loading ? 'Reveal' : 'Reload';
+    });
+  },
+};

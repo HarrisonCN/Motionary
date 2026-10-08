@@ -1,6 +1,6 @@
 import { c as registerEffects } from './registry-Bu5NrAyA.js';
-import { c as canvasBackground, h as hexRgb, n as noise2 } from './generative-BRUZaIsX.js';
-import { o as origin, s as spawn, a as all, r as rand } from './shared-eweTlzxv.js';
+import { c as canvasBackground, h as hexRgb, n as noise2 } from './generative-2LhxG5BJ.js';
+import { b as origin, s as spawn, a as all, r as rand } from './shared-CkKHWrtJ.js';
 
 /** GLSL shared by every shader: uniforms, hash, value noise, fbm. */
 const GLSL_HEAD = `#version 300 es
@@ -378,4 +378,4 @@ function registerGpuEffects() {
 }
 
 export { GPU_FX as G, GLSL_HEAD as a, supportsWebGL2 as b, fieldFallback as f, registerGpuEffects as r, shaderBackground as s };
-//# sourceMappingURL=gpu-XHWzeNb5.js.map
+//# sourceMappingURL=gpu-EjV49FQk.js.map
