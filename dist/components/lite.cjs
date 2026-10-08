@@ -5438,7 +5438,7 @@ const done = (a, el) => {
         el.remove();
 };
 /** Particles radiating from client point (x, y). Returns the number spawned. */
-function burst(x, y, options = {}) {
+function burst$1(x, y, options = {}) {
     if (typeof document === 'undefined' || prefersReducedMotion())
         return 0;
     const { count = 12, colors = PALETTE, distance = 48, size = 6, shape = 'circle', duration = 600 } = options;
@@ -5457,7 +5457,7 @@ function burst(x, y, options = {}) {
     return count;
 }
 /** A confetti cannon (paper pieces with gravity, drift and spin). */
-function confetti(options = {}) {
+function confetti$1(options = {}) {
     if (typeof document === 'undefined' || prefersReducedMotion())
         return 0;
     const W = window.innerWidth || 800;
@@ -5488,7 +5488,7 @@ function confetti(options = {}) {
     return count;
 }
 /** Horizontal error shake (`intensity` px, default 8). Reduced motion: a red outline flash. */
-function shake(el, intensity = 8, duration = 480) {
+function shake$1(el, intensity = 8, duration = 480) {
     const t = el;
     if (typeof t.animate !== 'function')
         return null;
@@ -5565,15 +5565,15 @@ function defineClick(tag = 'usa-click') {
             const fx = this.effects;
             const colors = this.str('color') ? this.str('color').split(',') : undefined;
             if (fx.includes('burst'))
-                burst(x, y, { count: this.num('count', 12), shape: this.str('shape', 'circle'), colors });
+                burst$1(x, y, { count: this.num('count', 12), shape: this.str('shape', 'circle'), colors });
             if (fx.includes('confetti'))
-                confetti({ x, y, count: this.num('count', 60), colors, spread: 90, velocity: 0.8 });
+                confetti$1({ x, y, count: this.num('count', 60), colors, spread: 90, velocity: 0.8 });
             if (this.hasAttribute('haptic'))
                 haptic(this.num('haptic', 10));
             this.emit('click-effect', { x, y, effects: fx });
         }
         shake() {
-            shake(this);
+            shake$1(this);
             if (this.hasAttribute('haptic'))
                 haptic([30, 40, 30]);
         }
@@ -5878,7 +5878,7 @@ function defineButton(tag = 'usa-button') {
                 t.removeAttribute('aria-busy');
             }
             if (s === 'error') {
-                shake(t);
+                shake$1(t);
                 if (this.hasAttribute('haptic'))
                     haptic([30, 40, 30]);
             }
@@ -6084,7 +6084,7 @@ function defineLike(tag = 'usa-like') {
             if (next && heart && !this.reduced) {
                 this.motion(heart, [{ transform: 'scale(0.4)' }, { transform: 'scale(1)' }], springEasing('bouncy'));
                 const r = heart.getBoundingClientRect();
-                burst(r.left + r.width / 2, r.top + r.height / 2, { count: 10, distance: 28, size: 5, colors: [getComputedStyle(this).getPropertyValue('--usa-like-color').trim() || '#f43f5e', '#fb923c', '#facc15'] });
+                burst$1(r.left + r.width / 2, r.top + r.height / 2, { count: 10, distance: 28, size: 5, colors: [getComputedStyle(this).getPropertyValue('--usa-like-color').trim() || '#f43f5e', '#fb923c', '#facc15'] });
             }
             if (this.hasAttribute('haptic'))
                 haptic(this.num('haptic', 12));
@@ -6261,7 +6261,7 @@ function defineDoubleTap(tag = 'usa-double-tap') {
                 a.onfinish = () => icon.remove();
             else
                 icon.remove();
-            burst(x, y, { count: 8, distance: 40, size: 5, colors: [this.str('color', '#f43f5e'), '#fb923c', '#facc15'] });
+            burst$1(x, y, { count: 8, distance: 40, size: 5, colors: [this.str('color', '#f43f5e'), '#fb923c', '#facc15'] });
             if (this.hasAttribute('haptic'))
                 haptic(15);
             this.emit('double-tap', { x: x - r.left, y: y - r.top });
@@ -6350,8 +6350,27 @@ function defineCheckbox(tag = 'usa-checkbox') {
  * `<usa-button>` (button click deformation: squash, wobble, gooey, dent;
  * shape morph; submit → loading → success), `<usa-icon-morph>`,
  * `<usa-like>`, `<usa-hold>`, `<usa-double-tap>`, `<usa-checkbox>`, plus
- * `burst()`, `confetti()`, `shake()` and `haptic()`.
+ * `haptic()` (`burst()`, `confetti()`, `shake()` are deprecated in 5.9 —
+ * use the registered effects through `playEffect()`).
  */
+/**
+ * @deprecated 5.9 — removed in 6.0. Use the registered effect:
+ * `playEffect(document.body, 'burst', { x, y, ...options })` (`use-scroll-animate/components/fx`).
+ */
+function burst(x, y, options = {}) {
+    deprecate('burst()', "burst() is deprecated and removed in 6.0 — use playEffect(el, 'burst', { x, y, …options }) from use-scroll-animate/components/fx (npx usa-codemod-6).");
+    return burst$1(x, y, options);
+}
+/** @deprecated 5.9 — removed in 6.0. Use `playEffect(document.body, 'confetti', options)`. */
+function confetti(options = {}) {
+    deprecate('confetti()', "confetti() is deprecated and removed in 6.0 — use playEffect(el, 'confetti', options) from use-scroll-animate/components/fx (npx usa-codemod-6).");
+    return confetti$1(options);
+}
+/** @deprecated 5.9 — removed in 6.0. Use `playEffect(el, 'shake', { intensity, duration })`. */
+function shake(el, intensity = 8, duration = 480) {
+    deprecate('shake()', "shake() is deprecated and removed in 6.0 — use playEffect(el, 'shake', { intensity, duration }) from use-scroll-animate/components/fx (npx usa-codemod-6).");
+    return shake$1(el, intensity, duration);
+}
 /** Register every component of this category under its default tag. */
 function defineClickComponents() {
     defineClick();
@@ -7414,6 +7433,8 @@ function defineCursor(tag = 'usa-cursor') {
                 return;
             }
             const mode = this.str('mode', 'dot');
+            if (mode === 'trail')
+                deprecate('usa-cursor-trail', '<usa-cursor mode="trail"> is deprecated and removed in 6.0 — use the registered comet-trail effect: <usa-fx effect="comet-trail" trigger="load" self> around the page content (see docs/upgrading-6.md).');
             const n = mode === 'trail' ? 8 : 1;
             this.innerHTML = Array.from({ length: n }, (_, i) => `<span class="usa-cursor-${mode === 'glow' ? 'glow' : 'ring'}" style="--i:${i}"></span>`).join('') + (mode === 'glow' ? '' : '<span class="usa-cursor-dot"></span>');
             if (this.str('color'))
@@ -10282,14 +10303,14 @@ const click = [
     {
         name: 'burst',
         kind: 'click',
-        description: 'Particle burst from the click point (or the element center).',
+        description: 'Particle burst from the click point (or `x` / `y`, or the element center).',
         defaults: { count: 12 },
         run: (el, o, ctx) => {
             if (ctx.reduced)
                 return;
             const r = el.getBoundingClientRect();
             const e = ctx.event;
-            burst(e?.clientX ?? r.left + r.width / 2, e?.clientY ?? r.top + r.height / 2, o);
+            burst$1(o.x ?? e?.clientX ?? r.left + r.width / 2, o.y ?? e?.clientY ?? r.top + r.height / 2, o);
         },
     },
     {
@@ -10301,7 +10322,7 @@ const click = [
             if (ctx.reduced)
                 return;
             const r = el.getBoundingClientRect();
-            confetti({ x: r.left + r.width / 2, y: r.top + r.height / 2, ...o });
+            confetti$1({ x: r.left + r.width / 2, y: r.top + r.height / 2, ...o });
         },
     },
     {
@@ -10309,7 +10330,7 @@ const click = [
         kind: 'attention',
         description: 'Horizontal "no" shake (errors, wrong password).',
         defaults: { intensity: 8, duration: 480 },
-        run: (el, o, ctx) => (ctx.reduced ? ctx.animate(el, [{ opacity: 1 }, { opacity: 0.5 }, { opacity: 1 }], { duration: 300 }) : shake(el, o.intensity, o.duration)),
+        run: (el, o, ctx) => (ctx.reduced ? ctx.animate(el, [{ opacity: 1 }, { opacity: 0.5 }, { opacity: 1 }], { duration: 300 }) : shake$1(el, o.intensity, o.duration)),
     },
     {
         name: 'ripple',

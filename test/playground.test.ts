@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import * as components from '../src/components';
 import { COMPONENT_CATEGORIES } from '../src/components';
+import * as effects from '../src/components/effects';
 // @ts-ignore - untyped .js
 import { PLAYGROUND_EFFECTS, PLAYGROUND_CONTENT, PLAYGROUND_TABS, PG_STRINGS, DEFAULT_STATE, newLayer, composeMarkup, playgroundSnippets, encodeState, decodeState, categoriesOf } from '../showcase/playground-core.js';
 
@@ -38,8 +39,12 @@ describe('visual playground', () => {
     expect(out.vue).toContain('isCustomElement');
     for (const code of Object.values(out) as string[])
       for (const m of code.matchAll(/import \{ (\w+) \} from 'use-scroll-animate\/components\/(\w+)'/g)) {
-        expect(Object.keys(COMPONENT_CATEGORIES)).toContain(m[2]);
-        expect(typeof (components as any)[m[1]], m[1]).toBe('function');
+        // 5.9: the <usa-player> tab imports from the effects entry
+        if (m[2] === 'effects') expect(typeof (effects as any)[m[1]], m[1]).toBe('function');
+        else {
+          expect(Object.keys(COMPONENT_CATEGORIES)).toContain(m[2]);
+          expect(typeof (components as any)[m[1]], m[1]).toBe('function');
+        }
       }
   });
 

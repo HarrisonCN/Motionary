@@ -847,8 +847,27 @@ function defineCheckbox(tag = 'usa-checkbox') {
  * `<usa-button>` (button click deformation: squash, wobble, gooey, dent;
  * shape morph; submit → loading → success), `<usa-icon-morph>`,
  * `<usa-like>`, `<usa-hold>`, `<usa-double-tap>`, `<usa-checkbox>`, plus
- * `burst()`, `confetti()`, `shake()` and `haptic()`.
+ * `haptic()` (`burst()`, `confetti()`, `shake()` are deprecated in 5.9 —
+ * use the registered effects through `playEffect()`).
  */
+/**
+ * @deprecated 5.9 — removed in 6.0. Use the registered effect:
+ * `playEffect(document.body, 'burst', { x, y, ...options })` (`use-scroll-animate/components/fx`).
+ */
+function burst(x, y, options = {}) {
+    base.deprecate('burst()', "burst() is deprecated and removed in 6.0 — use playEffect(el, 'burst', { x, y, …options }) from use-scroll-animate/components/fx (npx usa-codemod-6).");
+    return fx.burst(x, y, options);
+}
+/** @deprecated 5.9 — removed in 6.0. Use `playEffect(document.body, 'confetti', options)`. */
+function confetti(options = {}) {
+    base.deprecate('confetti()', "confetti() is deprecated and removed in 6.0 — use playEffect(el, 'confetti', options) from use-scroll-animate/components/fx (npx usa-codemod-6).");
+    return fx.confetti(options);
+}
+/** @deprecated 5.9 — removed in 6.0. Use `playEffect(el, 'shake', { intensity, duration })`. */
+function shake(el, intensity = 8, duration = 480) {
+    base.deprecate('shake()', "shake() is deprecated and removed in 6.0 — use playEffect(el, 'shake', { intensity, duration }) from use-scroll-animate/components/fx (npx usa-codemod-6).");
+    return fx.shake(el, intensity, duration);
+}
 /** Register every component of this category under its default tag. */
 function defineClickComponents() {
     defineClick();
@@ -860,13 +879,12 @@ function defineClickComponents() {
     defineCheckbox();
 }
 
-exports.burst = fx.burst;
-exports.confetti = fx.confetti;
 exports.haptic = fx.haptic;
-exports.shake = fx.shake;
 exports.BUTTON_DEFORMS = BUTTON_DEFORMS;
 exports.CLICK_EFFECTS = CLICK_EFFECTS;
 exports.MORPH_ICONS = MORPH_ICONS;
+exports.burst = burst;
+exports.confetti = confetti;
 exports.defineButton = defineButton;
 exports.defineCheckbox = defineCheckbox;
 exports.defineClick = defineClick;
@@ -876,4 +894,5 @@ exports.defineHold = defineHold;
 exports.defineIconMorph = defineIconMorph;
 exports.defineLike = defineLike;
 exports.morphPath = morphPath;
+exports.shake = shake;
 //# sourceMappingURL=click.cjs.map

@@ -414,6 +414,70 @@ interface UsaThemeElement extends UsaElement {
 /** `<usa-theme name="neon | paper | glass | retro | brutalist">` — a themed subtree. */
 declare function defineTheme(tag?: string): CustomElementConstructor | undefined;
 
+interface AnimationTrack {
+    /** Selector inside the player (`:scope` = the player). */
+    target?: string;
+    /** Start time in ms. */
+    start?: number;
+    duration?: number;
+    /** A timeline preset (`fade-up`, `scale`, `blur`…). */
+    preset?: string;
+    keyframes?: Keyframe[];
+    easing?: string;
+    /** A registered effect fired at `start` (instead of keyframes). */
+    effect?: string;
+    options?: Record<string, unknown>;
+    label?: string;
+}
+interface AnimationJSON {
+    format?: string;
+    version?: number;
+    name?: string;
+    loop?: boolean;
+    /** Total length; defaults to the end of the last track. */
+    duration?: number;
+    tracks: AnimationTrack[];
+}
+declare const ANIMATION_FORMAT = "use-scroll-animate/animation";
+/** Validate / normalise an animation (object or JSON text). Throws on anything unusable. */
+declare function normalizeAnimation(input: string | AnimationJSON | Record<string, any>): Required<Pick<AnimationJSON, 'tracks' | 'duration' | 'loop' | 'name'>>;
+interface Player {
+    readonly duration: number;
+    readonly currentTime: number;
+    readonly playing: boolean;
+    play(): void;
+    pause(): void;
+    /** Jump to `ms` (effects between are not replayed). */
+    seek(ms: number): void;
+    /** Playback rate (default 1). */
+    rate: number;
+    /** Resolves each time the animation reaches its end (not when looping). */
+    readonly finished: Promise<void>;
+    destroy(): void;
+}
+/** Bind an animation to `root` and return its controller (paused at 0 unless `autoplay`). */
+declare function createPlayer(root: HTMLElement, animation: string | AnimationJSON, o?: {
+    autoplay?: boolean;
+    loop?: boolean;
+    rate?: number;
+    onFinish?: () => void;
+}): Player;
+interface UsaPlayerElement extends UsaElement {
+    readonly player: Player | null;
+    /** Load an animation (object or JSON text) and restart. */
+    load(animation: string | AnimationJSON): void;
+    play(): void;
+    pause(): void;
+    seek(ms: number): void;
+}
+/**
+ * `<usa-player src="hero.json" | <script type="application/json"> child
+ * trigger="load | view | scroll | click | manual" loop rate controls>`.
+ * Emits `usa-player-ready` and `usa-player-finish`; sets `data-error` when the
+ * animation cannot be loaded.
+ */
+declare function definePlayer(tag?: string): CustomElementConstructor | undefined;
+
 /**
  * 5.4 — `<usa-story template="…">` scroll-storytelling templates.
  *
@@ -477,5 +541,5 @@ declare function defineEffectElements(): void;
 /** Register the built-ins and every pack (idempotent). */
 declare function registerAllEffects(): void;
 
-export { AUDIO_FX, CARD_FX, CLICK_FX, CURSOR_FX, EFFECT_PACKS, GENERATIVE_FX, GESTURES, MICRO_FX, PAGE_FX, PHYSICS_FX, STORY_TEMPLATES, THEMES, THEME_FX, THEME_NAMES, THEME_ROLES, angleDelta, applyTheme, bindBeat, bindGesture, bounceKeyframes, bumpCount, canvasBackground, createBeatDetector, defineAudio, defineEffectElements, defineGestureFx, defineStory, defineTheme, disableAudio, enableAudio, flingVelocity, formatCount, fxLayer, getAudio, hexRgb, noise2, onBeat, playThemeEffect, registerAllEffects, registerAudioEffects, registerCardClickEffects, registerCursorEffects, registerGenerativeEffects, registerMicroEffects, registerPageEffects, registerPhysicsEffects, solveSpring, springKeyframes, storyProgress, swapLabel, themeCss, themePreset, themeVars, togglePressed };
-export type { AudioInput, AudioReactive, AudioSample, BeatOptions, GenFrame, GenerativeSpec, GestureDetail, GestureFxOptions, GestureName, SpringOptions, StoryTemplate, ThemePack, ThemeRole, UsaAudioElement, UsaGestureFxElement, UsaStoryElement, UsaThemeElement };
+export { ANIMATION_FORMAT, AUDIO_FX, CARD_FX, CLICK_FX, CURSOR_FX, EFFECT_PACKS, GENERATIVE_FX, GESTURES, MICRO_FX, PAGE_FX, PHYSICS_FX, STORY_TEMPLATES, THEMES, THEME_FX, THEME_NAMES, THEME_ROLES, angleDelta, applyTheme, bindBeat, bindGesture, bounceKeyframes, bumpCount, canvasBackground, createBeatDetector, createPlayer, defineAudio, defineEffectElements, defineGestureFx, definePlayer, defineStory, defineTheme, disableAudio, enableAudio, flingVelocity, formatCount, fxLayer, getAudio, hexRgb, noise2, normalizeAnimation, onBeat, playThemeEffect, registerAllEffects, registerAudioEffects, registerCardClickEffects, registerCursorEffects, registerGenerativeEffects, registerMicroEffects, registerPageEffects, registerPhysicsEffects, solveSpring, springKeyframes, storyProgress, swapLabel, themeCss, themePreset, themeVars, togglePressed };
+export type { AnimationJSON, AnimationTrack, AudioInput, AudioReactive, AudioSample, BeatOptions, GenFrame, GenerativeSpec, GestureDetail, GestureFxOptions, GestureName, Player, SpringOptions, StoryTemplate, ThemePack, ThemeRole, UsaAudioElement, UsaGestureFxElement, UsaPlayerElement, UsaStoryElement, UsaThemeElement };

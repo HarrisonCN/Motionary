@@ -1033,7 +1033,8 @@ interface UsaCheckboxElement extends UsaElement {
  * `<usa-button>` (button click deformation: squash, wobble, gooey, dent;
  * shape morph; submit → loading → success), `<usa-icon-morph>`,
  * `<usa-like>`, `<usa-hold>`, `<usa-double-tap>`, `<usa-checkbox>`, plus
- * `burst()`, `confetti()`, `shake()` and `haptic()`.
+ * `haptic()` (`burst()`, `confetti()`, `shake()` are deprecated in 5.9 —
+ * use the registered effects through `playEffect()`).
  */
 
 declare global {

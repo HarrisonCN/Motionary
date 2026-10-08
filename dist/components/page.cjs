@@ -27,6 +27,8 @@ function defineCursor(tag = 'usa-cursor') {
                 return;
             }
             const mode = this.str('mode', 'dot');
+            if (mode === 'trail')
+                base.deprecate('usa-cursor-trail', '<usa-cursor mode="trail"> is deprecated and removed in 6.0 — use the registered comet-trail effect: <usa-fx effect="comet-trail" trigger="load" self> around the page content (see docs/upgrading-6.md).');
             const n = mode === 'trail' ? 8 : 1;
             this.innerHTML = Array.from({ length: n }, (_, i) => `<span class="usa-cursor-${mode === 'glow' ? 'glow' : 'ring'}" style="--i:${i}"></span>`).join('') + (mode === 'glow' ? '' : '<span class="usa-cursor-dot"></span>');
             if (this.str('color'))

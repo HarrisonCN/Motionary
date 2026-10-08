@@ -192,14 +192,14 @@ const click = [
     {
         name: 'burst',
         kind: 'click',
-        description: 'Particle burst from the click point (or the element center).',
+        description: 'Particle burst from the click point (or `x` / `y`, or the element center).',
         defaults: { count: 12 },
         run: (el, o, ctx) => {
             if (ctx.reduced)
                 return;
             const r = el.getBoundingClientRect();
             const e = ctx.event;
-            burst(e?.clientX ?? r.left + r.width / 2, e?.clientY ?? r.top + r.height / 2, o);
+            burst(o.x ?? e?.clientX ?? r.left + r.width / 2, o.y ?? e?.clientY ?? r.top + r.height / 2, o);
         },
     },
     {

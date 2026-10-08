@@ -1,4 +1,4 @@
-import { x as defineElement, q as caf, r as raf, p as prefersReducedMotion, n as now, i as getMotionSensitivity, h as getMotionIntensity, g as configureComponents, u as adoptStyles } from '../chunks/base-C3Sw9sAO.js';
+import { x as defineElement, v as deprecate, q as caf, r as raf, p as prefersReducedMotion, n as now, i as getMotionSensitivity, h as getMotionIntensity, g as configureComponents, u as adoptStyles } from '../chunks/base-C3Sw9sAO.js';
 export { M as MOTION_SCALE } from '../chunks/base-C3Sw9sAO.js';
 import { e as springSamples } from '../chunks/spring-CckMe3x0.js';
 
@@ -26,6 +26,8 @@ function defineCursor(tag = 'usa-cursor') {
                 return;
             }
             const mode = this.str('mode', 'dot');
+            if (mode === 'trail')
+                deprecate('usa-cursor-trail', '<usa-cursor mode="trail"> is deprecated and removed in 6.0 — use the registered comet-trail effect: <usa-fx effect="comet-trail" trigger="load" self> around the page content (see docs/upgrading-6.md).');
             const n = mode === 'trail' ? 8 : 1;
             this.innerHTML = Array.from({ length: n }, (_, i) => `<span class="usa-cursor-${mode === 'glow' ? 'glow' : 'ring'}" style="--i:${i}"></span>`).join('') + (mode === 'glow' ? '' : '<span class="usa-cursor-dot"></span>');
             if (this.str('color'))
