@@ -4,7 +4,9 @@ export const category = K('fx', '✨', 'Effects (plugin API)', '特效（插件 
   'One way to register and play every effect (5.0): registerEffect({ name, kind, run }), playEffect(el, name), bindEffect(el, name, { trigger }) or <usa-fx effect trigger>. Built-ins: every timeline entrance, attention seekers and click effects — reduced-motion safe.',
   '统一的效果注册与播放方式（5.0）：registerEffect({ name, kind, run })、playEffect(el, name)、bindEffect(el, name, { trigger }) 或 <usa-fx effect trigger>。内置：全部时间线入场效果、吸引注意效果与点击效果 —— 兼容“减少动态效果”。');
 
-const FX = (id, en, zh, descEn, descZh, tags, usage, demo, controls) => C('usa-fx', 'fx', en, zh, descEn, descZh, tags, usage, demo, { id, define: 'defineFx', controls });
+const FX = (id, en, zh, descEn, descZh, tags, usage, demo, controls, pack) => C('usa-fx', 'fx', en, zh, descEn, descZh, tags, usage, demo, { id, define: 'defineFx', controls, pack });
+/** A 5.x effect-pack card (registers use-scroll-animate/components/effects in its code). */
+const PK = (id, en, zh, descEn, descZh, tags, usage, demo, controls) => FX(id, en, zh, descEn, descZh, tags, usage, demo, controls, true);
 
 export const components = [
   FX('fx', 'Attention seekers', '吸引注意', 
@@ -28,6 +30,26 @@ export const components = [
     '<usa-fx effect="fade-up" trigger="enter">\n  <h2>Hello</h2>\n</usa-fx>',
     '<usa-fx effect="clip-up" trigger="enter"><div class="demo-tile">Hello</div></usa-fx>',
     [{ key: 'effect', values: ['clip-up', 'fade-up', 'fade-left', 'scale', 'blur', 'rotate', 'clip-right'] }]),
+  PK('fx-holo', 'Holographic card', '全息镭射卡',
+    '5.1: a rainbow foil sheen and 3D tilt follow the pointer (trigger="load" keeps it on). Under reduced motion the sheen stays static.',
+    '5.1：彩虹镭射光泽与 3D 倾斜跟随指针（trigger="load" 常驻）。减少动态效果时光泽静止。',
+    ['card', 'holographic', 'foil', 'tilt'],
+    '<usa-fx effect="holo" trigger="load">\n  <article class="card">…</article>\n</usa-fx>',
+    '<usa-fx effect="holo" trigger="load"><div class="demo-tile demo-holo">✦ Rare card</div></usa-fx>'),
+  PK('fx-card-moves', 'Card moves', '卡片动作',
+    '5.1: glare sweep, book-open peek, card fan (children spread like a hand of cards), topple-and-spring — hover the card.',
+    '5.1：扫光、翻书窥视、卡牌扇形展开（子元素像手牌一样散开）、倾倒回弹 —— 悬停卡片试试。',
+    ['card', 'glare', 'book', 'fan', 'topple'],
+    '<usa-fx effect="glare-sweep" trigger="hover">\n  <article class="card">…</article>\n</usa-fx>',
+    '<usa-fx effect="card-fan" trigger="hover"><div class="demo-row demo-fan"><span class="demo-pill">A</span><span class="demo-pill">K</span><span class="demo-pill">Q</span><span class="demo-pill">J</span></div></usa-fx>',
+    [{ key: 'effect', values: ['card-fan', 'glare-sweep', 'book-open', 'topple', 'jelly', 'tada'] }]),
+  PK('fx-click2', 'Click effects 2.0', '点击特效 2.0',
+    '5.1: shockwave rings, ink splash, spinning star burst, jelly press, water ring ripple and emoji rain — all from the click point.',
+    '5.1：冲击波环、墨水飞溅、旋转星星爆裂、果冻按压、水波环涟漪与表情雨 —— 全部从点击处发出。',
+    ['click', 'shockwave', 'ink', 'stars', 'emoji'],
+    '<usa-fx effect="shockwave">\n  <button>Boom</button>\n</usa-fx>',
+    '<usa-fx effect="shockwave"><button type="button" class="demo-btn">Click me</button></usa-fx>',
+    [{ key: 'effect', values: ['shockwave', 'ink-splash', 'star-burst', 'jelly-press', 'ring-ripple', 'emoji-rain'] }]),
 ];
 
 export const helpers = [

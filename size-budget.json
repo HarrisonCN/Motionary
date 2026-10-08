@@ -328,5 +328,10 @@
     "name": "import { defineFxComponents } from '…/components/fx'",
     "import": "export { defineFxComponents } from 'pkg/components/fx';",
     "limit": 5888
+  },
+  {
+    "name": "import 'use-scroll-animate/components/effects'",
+    "import": "export * from 'pkg/components/effects';",
+    "limit": 6400
   }
 ]

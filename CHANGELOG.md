@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.1.0] - 2026-10-08
+
+### Added
+- **New entry `use-scroll-animate/components/effects`** — the 5.x effect packs, all registered through `registerEffect()` and playable with `playEffect()`, `bindEffect()` or `<usa-fx>`: `registerAllEffects()`, `registerCardClickEffects()`, `EFFECT_PACKS`, `CARD_FX`, `CLICK_FX`, `fxLayer()`. Kept out of `components` / `components/lite` (lite stays under its 70 KB budget); the UMD bundle registers every pack.
+- **Card effects 2.0**: `holo` (holographic foil + 3D tilt following the pointer), `glare-sweep`, `book-open`, `card-fan`, `topple`, `float-tilt`.
+- **Click effects 2.0**: `shockwave`, `ink-splash`, `star-burst`, `jelly-press`, `ring-ripple`, `emoji-rain` — particles spawn from the click point in a fixed, `aria-hidden`, pointer-transparent layer.
+- Showcase: **Holographic card**, **Card moves** and **Click effects 2.0** cards in the Effects category (code tabs import `components/effects`).
+
+### Changed
+- `bindEffect()` — a persistent effect (one that returns a cleanup) now *replaces* its previous run on re-trigger instead of stacking; every effect kind honours `reduced`.
+
+### Accessibility
+- Under reduced motion particles are skipped, presses fade instead of squashing, loops don’t start, `holo` keeps a static sheen.
+
 ## [5.0.0] - 2026-10-08
 
 ### ⚠ BREAKING CHANGES (see [docs/upgrading-5.md](./docs/upgrading-5.md); `npx usa-codemod-5 --write src`)

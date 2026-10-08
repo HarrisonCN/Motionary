@@ -5,6 +5,7 @@ import { COMPONENT_CATEGORIES as SRC_CATEGORIES } from '../src/components';
 // @ts-ignore - untyped .mjs
 import { COMPONENT_ENTRIES } from '../scripts/categories.mjs';
 import * as components from '../src/components';
+import * as effects from '../src/components/effects';
 // Plain ESM modules of the no-build component gallery
 // @ts-ignore - untyped .js
 import { COMPONENT_CATEGORIES, COMPONENTS, HELPERS, GALLERY, CODE_TABS, componentSnippets, matchesComponent, findComponent, toJsx } from '../showcase/components-catalog.js';
@@ -28,7 +29,7 @@ describe('component gallery catalog', () => {
 
   it('names define functions and helpers that the entry points really export', () => {
     COMPONENTS.forEach((c: any) => expect(typeof (components as any)[c.define], c.define).toBe('function'));
-    HELPERS.forEach((h: any) => expect(typeof (components as any)[h.fn], h.fn).toBe('function'));
+    HELPERS.forEach((h: any) => expect(typeof ({ ...components, ...effects } as any)[h.fn], h.fn).toBe('function'));
   });
 
   it('has unique URL-safe ids and bilingual copy', () => {
