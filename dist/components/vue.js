@@ -1,28 +1,29 @@
 import { defineComponents } from '../components.js';
 import './reveal.js';
-import '../chunks/base-BPG5zvex.js';
+import '../chunks/base-BtJDNCB6.js';
 import './text.js';
-import '../chunks/core-LkGRmgES.js';
+import '../chunks/core-DS1nrx5L.js';
 import './tokens.js';
 import './interaction.js';
 import './feedback.js';
 import './background.js';
-import '../chunks/variants-BVYMcxRv.js';
+import '../chunks/variants-dD6SbUMR.js';
 import './transitions.js';
 import './physics.js';
-import '../chunks/spring-BziPsW3r.js';
+import '../chunks/spring-CxRz49Wk.js';
 import './cards.js';
 import './click.js';
 import './ui.js';
 import './page.js';
 import './timeline.js';
 import './gesture.js';
-import '../chunks/core-eXX8rB_b.js';
+import '../chunks/core-DX6pdOoY.js';
 import './svg.js';
 import './webgl.js';
 import './depth.js';
 import './layout.js';
 import './packs.js';
+import './a11y.js';
 import '../chunks/index-tags-43Xtd01A.js';
 
 /**

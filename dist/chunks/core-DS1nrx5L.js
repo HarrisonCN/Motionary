@@ -1,4 +1,4 @@
-import { p as prefersReducedMotion, b as clamp, d as caf, e as applyFrame, r as raf, m as motionScale, n as now } from './base-BPG5zvex.js';
+import { p as prefersReducedMotion, f as clamp, h as caf, i as applyFrame, r as raf, m as motionScale, n as now } from './base-BtJDNCB6.js';
 import { resolveDurationToken, resolveEasingToken } from '../components/tokens.js';
 
 /** 4.1: whether `scrub()` can use native ScrollTimeline / ViewTimeline here. */
@@ -257,4 +257,4 @@ function timeline(options = {}) {
 }
 
 export { TIMELINE_PRESETS as T, resolvePosition as r, supportsNativeScrub as s, timeline as t };
-//# sourceMappingURL=core-LkGRmgES.js.map
+//# sourceMappingURL=core-DS1nrx5L.js.map

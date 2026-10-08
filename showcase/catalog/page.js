@@ -56,6 +56,12 @@ export const components = [
 ];
 
 export const helpers = [
+  H('motion-sensitivity', 'page', 'setMotionSensitivity',
+    'Accessibility toolkit (4.4): motion-sensitivity levels (full · gentle — no spins / zooms / parallax · minimal — fades only · static), static alternatives for every component, shared aria-live regions with announce(), and auditMotionA11y() — the rules the automated regression tests run over every element.',
+    '无障碍工具（4.4）：运动敏感度分级（全部 · 温和——无旋转/缩放/视差 · 最少——仅淡入淡出 · 静态），每个组件的静态替代，共享 aria-live 区域与 announce()，以及 auditMotionA11y() —— 自动化回归测试对每个元素运行的同一套规则。',
+    ['a11y', 'vestibular', 'aria-live', 'WCAG', 'reduced motion'],
+    "import { setMotionSensitivity, announce, auditMotionA11y } from 'use-scroll-animate/components/a11y';\n\nsetMotionSensitivity('gentle', true);   // remembered; restoreMotionSensitivity() on load\nannounce('Added to cart');                 // shared polite live region\nconsole.table(auditMotionA11y(document.body).errors);",
+    '<div class="demo-row"><span class="demo-pill" data-sens-pill>✦</span><span class="demo-pill" data-sens-pill>✦</span><span class="demo-pill" data-sens-pill>✦</span></div><div class="demo-row"><button type="button" class="demo-link" data-sens="full">full</button><button type="button" class="demo-link" data-sens="gentle">gentle</button><button type="button" class="demo-link" data-sens="minimal">minimal</button><button type="button" class="demo-link" data-sens="static">static</button><button type="button" class="demo-link" data-sens-audit>audit page</button></div><p class="demo-note" data-sens-out aria-live="polite"></p>'),
   H('motion-tokens', 'page', 'applyMotionTokens',
     'Motion design tokens (4.2): duration, easing and spring scales as CSS variables (--usa-duration-fast, --usa-easing-emphasized…) and W3C Design Tokens JSON; import from Figma Tokens or Style Dictionary. timeline() accepts token names.',
     '动效设计令牌（4.2）：时长、缓动与弹簧刻度，以 CSS 变量（--usa-duration-fast、--usa-easing-emphasized…）与 W3C 设计令牌 JSON 提供；可从 Figma Tokens 或 Style Dictionary 导入。timeline() 可直接使用令牌名。',
@@ -77,6 +83,24 @@ export const helpers = [
 ];
 
 export const wire = {
+  'motion-sensitivity': (stage, lib) => {
+    const out = stage.querySelector('[data-sens-out]');
+    const frames = [{ opacity: 0, transform: 'translateY(16px) scale(0.4) rotate(-180deg)' }, { opacity: 1, transform: 'none' }];
+    stage.addEventListener('click', (e) => {
+      const b = e.target.closest('[data-sens]');
+      if (b) {
+        const level = b.dataset.sens;
+        const f = lib.adaptKeyframes(frames, level);
+        stage.querySelectorAll('[data-sens-pill]').forEach((p, i) => (level === 'static' ? null : p.animate(f, { duration: 700, delay: i * 90, easing: 'cubic-bezier(0.22,1,0.36,1)', fill: 'backwards' })));
+        out.textContent = lib.MOTION_SENSITIVITY[level].en;
+        lib.announce(`Motion: ${level}`);
+      }
+      if (e.target.closest('[data-sens-audit]')) {
+        const r = lib.auditMotionA11y(document.querySelector('main') || document.body);
+        out.textContent = `${r.errors.length} errors · ${r.warnings.length} warnings`;
+      }
+    });
+  },
   'motion-tokens': (stage, lib) => {
     const q = (s) => stage.querySelector(s);
     stage.addEventListener('click', (e) => {

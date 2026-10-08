@@ -27,7 +27,17 @@ interface ComponentsConfig {
      * 1.25) on `<html>` for your own CSS. See `setMotionIntensity()`.
      */
     motionIntensity?: MotionIntensity;
+    /**
+     * Motion-sensitivity level (v4.4), finer than reduced motion:
+     * `'full'` (default) · `'gentle'` (no spins, zooms, skews or parallax —
+     * translations and fades only, safe for vestibular disorders) ·
+     * `'minimal'` (fades only; components use their reduced-motion variants) ·
+     * `'static'` (no animation: every component shows its static alternative).
+     * See `setMotionSensitivity()` in `use-scroll-animate/components/a11y`.
+     */
+    motionSensitivity?: MotionSensitivity;
 }
+type MotionSensitivity = 'full' | 'gentle' | 'minimal' | 'static';
 type MotionIntensity = 'off' | 'low' | 'normal' | 'high';
 declare const MOTION_SCALE: Record<MotionIntensity, number>;
 /** Change global component settings (call before `define*()` for `injectStyles`). */

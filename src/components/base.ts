@@ -28,12 +28,24 @@ export interface ComponentsConfig {
    * 1.25) on `<html>` for your own CSS. See `setMotionIntensity()`.
    */
   motionIntensity?: MotionIntensity;
+  /**
+   * Motion-sensitivity level (v4.4), finer than reduced motion:
+   * `'full'` (default) · `'gentle'` (no spins, zooms, skews or parallax —
+   * translations and fades only, safe for vestibular disorders) ·
+   * `'minimal'` (fades only; components use their reduced-motion variants) ·
+   * `'static'` (no animation: every component shows its static alternative).
+   * See `setMotionSensitivity()` in `use-scroll-animate/components/a11y`.
+   */
+  motionSensitivity?: MotionSensitivity;
 }
+
+export type MotionSensitivity = 'full' | 'gentle' | 'minimal' | 'static';
+export const MOTION_SENSITIVITY_LEVELS: readonly MotionSensitivity[] = ['full', 'gentle', 'minimal', 'static'];
 
 export type MotionIntensity = 'off' | 'low' | 'normal' | 'high';
 export const MOTION_SCALE: Record<MotionIntensity, number> = { off: 0, low: 0.6, normal: 1, high: 1.25 };
 
-const config: Required<ComponentsConfig> = { injectStyles: true, reducedMotion: 'user', motionIntensity: 'normal' };
+const config: Required<ComponentsConfig> = { injectStyles: true, reducedMotion: 'user', motionIntensity: 'normal', motionSensitivity: 'full' };
 
 /** Change global component settings (call before `define*()` for `injectStyles`). */
 export function configureComponents(options: ComponentsConfig): void {
@@ -42,6 +54,37 @@ export function configureComponents(options: ComponentsConfig): void {
     document.documentElement.style.setProperty('--usa-motion', String(MOTION_SCALE[options.motionIntensity] ?? 1));
     document.documentElement.setAttribute('data-usa-motion', options.motionIntensity);
   }
+  if (options.motionSensitivity && typeof document !== 'undefined') {
+    if (options.motionSensitivity === 'full') document.documentElement.removeAttribute('data-usa-sensitivity');
+    else document.documentElement.setAttribute('data-usa-sensitivity', options.motionSensitivity);
+  }
+}
+
+/** The current motion-sensitivity level (v4.4). */
+export function getMotionSensitivity(): MotionSensitivity {
+  return config.motionSensitivity;
+}
+
+const VESTIBULAR = /rotate|scale|skew|perspective|matrix3d/;
+/**
+ * Adapt keyframes to the sensitivity level: `gentle` drops transforms that
+ * spin, zoom or skew (and 3D), `minimal` keeps opacity only, `static` keeps
+ * just the final frame. `full` returns them unchanged.
+ */
+export function adaptKeyframes(frames: Keyframe[], level: MotionSensitivity = config.motionSensitivity): Keyframe[] {
+  if (level === 'full' || !frames.length) return frames;
+  if (level === 'static') return [frames[frames.length - 1]];
+  return frames.map((f) => {
+    const out: Keyframe = {};
+    for (const [k, v] of Object.entries(f)) {
+      if (k === 'offset' || k === 'easing' || k === 'composite') out[k] = v as any;
+      else if (level === 'minimal') {
+        if (k === 'opacity') out[k] = v as any;
+      } else if (k === 'rotate' || k === 'scale' || (k === 'transform' && VESTIBULAR.test(String(v)))) continue;
+      else out[k] = v as any;
+    }
+    return out;
+  });
 }
 
 /** The current global motion intensity. */
@@ -58,7 +101,7 @@ export const canDefine = (): boolean => typeof customElements !== 'undefined' &&
 
 /** `true` when animations should be reduced (OS setting or `configureComponents`). */
 export function prefersReducedMotion(): boolean {
-  if (config.motionIntensity === 'off') return true;
+  if (config.motionIntensity === 'off' || config.motionSensitivity === 'minimal' || config.motionSensitivity === 'static') return true;
   if (config.reducedMotion !== 'user') return config.reducedMotion === 'reduce';
   return typeof matchMedia === 'function' && !!matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
@@ -234,10 +277,11 @@ export function getBase(): BaseCtor {
 
     /** `el.animate()` that returns `null` (and applies the last frame) without WAAPI. */
     motion(el: Element, keyframes: Keyframe[], options: KeyframeAnimationOptions): Animation | null {
-      if (typeof (el as HTMLElement).animate !== 'function') {
+      if (typeof (el as HTMLElement).animate !== 'function' || config.motionSensitivity === 'static') {
         applyFrame(el as HTMLElement, keyframes[keyframes.length - 1]);
         return null;
       }
+      keyframes = adaptKeyframes(keyframes);
       const k = motionScale();
       if (k !== 1 && k > 0 && typeof options.duration === 'number') options = { ...options, duration: options.duration * k, delay: (options.delay || 0) * k };
       return (el as HTMLElement).animate(keyframes, options);
