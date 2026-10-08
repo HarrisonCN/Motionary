@@ -21,9 +21,24 @@ export const helpers = [
     ['timeline', 'scrub', 'seek', 'reverse'],
     "import { timeline } from 'use-scroll-animate/components/timeline';\n\nconst tl = timeline({ defaults: { duration: 500 } })\n  .to('.title', 'fade-up')\n  .label('cards')\n  .to('.card', 'scale', { stagger: 80, at: '-=200' })\n  .to('.cta', 'blur', { at: 'cards+=400' });\n\ntl.play();\n// or: tl.scrub(document.querySelector('.hero'))",
     '<div class="demo-row"><span class="demo-pill" data-tl-a>A</span><span class="demo-pill" data-tl-b>B</span><span class="demo-pill" data-tl-c>C</span></div><div class="demo-row"><button type="button" class="demo-link" data-tl-play>Play</button><button type="button" class="demo-link" data-tl-rev>Reverse</button><input type="range" min="0" max="100" value="0" aria-label="Scrub" data-tl-range></div>'),
+  H('scrub-native', 'timeline', 'supportsNativeScrub',
+    'tl.scrub(el) ties a timeline to scroll. 4.1 runs it on the browser\'s native ScrollTimeline / ViewTimeline (off the main thread) and falls back to a rAF listener elsewhere; { source: \'scroll\' } follows a scroll container. Scroll inside the box.',
+    'tl.scrub(el) 让时间线跟随滚动。4.1 起优先使用浏览器原生 ScrollTimeline / ViewTimeline（不占主线程），不支持时回退到 rAF 监听；{ source: \'scroll\' } 跟随滚动容器。请在框内滚动。',
+    ['scroll-driven', 'ScrollTimeline', 'ViewTimeline', 'fallback'],
+    "const stop = timeline({ defaults: { duration: 400 } })\n  .to('.a', 'fade-up')\n  .to('.b', 'scale', { at: '-=200' })\n  .scrub(box, { source: 'scroll' });\n\nstop.native; // true on Chromium 115+",
+    '<div class="demo-scrub" data-scrub-box tabindex="0" aria-label="Scrollable demo"><div class="demo-scrub-pin"><span class="demo-pill" data-s1>1</span><span class="demo-pill" data-s2>2</span><span class="demo-pill" data-s3>3</span></div><div class="demo-scrub-track"></div></div><p class="demo-note" data-scrub-out></p>'),
 ];
 
 export const wire = {
+  'scrub-native': (stage, lib) => {
+    const q = (s) => stage.querySelector(s);
+    const stop = lib.timeline({ defaults: { duration: 400 } })
+      .to(q('[data-s1]'), 'fade-up')
+      .to(q('[data-s2]'), 'scale', { at: '-=200' })
+      .to(q('[data-s3]'), 'rotate', { at: '-=200' })
+      .scrub(q('[data-scrub-box]'), { source: 'scroll' });
+    q('[data-scrub-out]').textContent = stop.native ? 'native ScrollTimeline ✓' : 'JS fallback';
+  },
   'timeline-api': (stage, lib) => {
     const q = (s) => stage.querySelector(s);
     const tl = lib.timeline({ defaults: { duration: 500 }, onUpdate: (p) => (q('[data-tl-range]').value = String(Math.round(p * 100))) })

@@ -33,11 +33,36 @@ export interface TimelineOptions {
 }
 
 export interface ScrubOptions {
-  /** Scroll offset (px) before the source's top reaches the viewport bottom where progress starts. */
+  /** Scroll offset (px) before the source's top reaches the viewport bottom where progress starts (JS engine only). */
   offset?: number;
-  /** Smoothing 0–1 (0 = immediate, default 0). */
+  /** Smoothing 0–1 (0 = immediate, default 0). Smoothing needs the JS engine. */
   smooth?: number;
+  /**
+   * 4.1: which progress source drives the timeline.
+   * - `'view'` (default): `source` moving through the viewport (CSS `ViewTimeline`, range `cover`).
+   * - `'scroll'`: the scroll position of `source` itself (a scroll container; CSS `ScrollTimeline`).
+   */
+  source?: 'view' | 'scroll';
+  /** 4.1: `'auto'` (default) uses the browser's native scroll-driven animations when available, `'js'` forces the fallback. */
+  engine?: 'auto' | 'native' | 'js';
+  /** 4.1: scroll axis, `'block'` (default) · `'inline'` · `'x'` · `'y'`. */
+  axis?: 'block' | 'inline' | 'x' | 'y';
 }
+
+/** The function `scrub()` returns: call it to stop. `native` tells which engine runs it. */
+export interface ScrubHandle {
+  (): void;
+  /** `true` when the browser's ScrollTimeline / ViewTimeline drives it (compositor, no JS per frame). */
+  readonly native: boolean;
+}
+
+/** 4.1: whether `scrub()` can use native ScrollTimeline / ViewTimeline here. */
+export function supportsNativeScrub(source: 'view' | 'scroll' = 'view'): boolean {
+  const g = globalThis as any;
+  return typeof g[source === 'scroll' ? 'ScrollTimeline' : 'ViewTimeline'] === 'function' && typeof g.Element?.prototype?.animate === 'function';
+}
+
+const handle = (stop: () => void, native: boolean): ScrubHandle => Object.assign(stop, { native }) as ScrubHandle;
 
 export interface Timeline {
   /** Total length in ms. */
@@ -61,8 +86,14 @@ export interface Timeline {
   seek(to: TimelinePosition): Timeline;
   /** Get or set progress 0–1. */
   progress(p?: number): number;
-  /** Tie progress to the scroll position of `source` (it moves through the viewport). Returns a stop function. */
-  scrub(source: Element, options?: ScrubOptions): () => void;
+  /**
+   * Tie progress to scroll: `source` moving through the viewport (or, with
+   * `{ source: 'scroll' }`, a scroll container's own position). Runs on native
+   * ScrollTimeline / ViewTimeline when available (and no `smooth`, `offset`,
+   * `call()` cues or `onUpdate` need JS), else on a rAF-throttled listener.
+   * Returns a stop function with a `native` flag.
+   */
+  scrub(source: Element, options?: ScrubOptions): ScrubHandle;
   /** Stop and drop every animation (elements keep their last frame). */
   cancel(): void;
 }
@@ -241,30 +272,64 @@ export function timeline(options: TimelineOptions = {}): Timeline {
       stop();
       if (prefersReducedMotion() || typeof window === 'undefined') {
         render(total(), t);
-        return () => {};
+        return handle(() => {}, false);
+      }
+      const mode = o.source ?? 'view';
+      const axis = o.axis ?? 'block';
+      const needsJs = !!o.smooth || !!o.offset || cues.length > 0 || !!options.onUpdate || o.engine === 'js';
+      if (!needsJs && total() > 0 && supportsNativeScrub(mode) && steps.every((st) => typeof (st.el as HTMLElement).animate === 'function')) {
+        // Native: one scroll-driven animation per step, its slice of the
+        // timeline mapped onto the scroll range (`cover` for a view timeline).
+        const g = globalThis as any;
+        const tl = mode === 'scroll' ? new g.ScrollTimeline({ source, axis }) : new g.ViewTimeline({ subject: source, axis });
+        const T = total();
+        steps.forEach((st) => st.anim?.cancel?.());
+        built = false;
+        const pct = (ms: number) => `${((ms / T) * 100).toFixed(3)}%`;
+        const live = steps.map((st) => {
+          const range = mode === 'view' ? { rangeStart: `cover ${pct(st.start)}`, rangeEnd: `cover ${pct(st.start + st.duration)}` } : {};
+          const timing: any = { easing: st.easing, fill: 'both', timeline: tl, ...range };
+          if (mode === 'scroll') Object.assign(timing, { duration: 'auto', rangeStart: pct(st.start), rangeEnd: pct(st.start + st.duration) });
+          return (st.el as HTMLElement).animate(st.frames, timing);
+        });
+        return handle(() => {
+          live.forEach((a) => a.cancel());
+          render(t, t);
+        }, true);
       }
       let id = 0;
       let cur = t;
+      const scroller = mode === 'scroll' ? (source as HTMLElement) : null;
+      const progressNow = () => {
+        const x = axis === 'x' || axis === 'inline';
+        if (scroller) {
+          const max = x ? scroller.scrollWidth - scroller.clientWidth : scroller.scrollHeight - scroller.clientHeight;
+          return clamp((x ? scroller.scrollLeft : scroller.scrollTop) / (max || 1), 0, 1);
+        }
+        const r = source.getBoundingClientRect();
+        const vh = (x ? window.innerWidth : window.innerHeight) || 1;
+        const start = x ? r.left : r.top;
+        const size = x ? r.width : r.height;
+        return clamp((vh + (o.offset ?? 0) - start) / (vh + size || 1), 0, 1);
+      };
       const update = () => {
         id = 0;
-        const r = source.getBoundingClientRect();
-        const vh = window.innerHeight || 1;
-        const p = clamp((vh + (o.offset ?? 0) - r.top) / (vh + r.height || 1), 0, 1);
-        const goal = p * total();
+        const goal = progressNow() * total();
         const sm = clamp(o.smooth ?? 0, 0, 0.95);
         cur = sm ? cur + (goal - cur) * (1 - sm) : goal;
         render(cur, t);
         if (sm && Math.abs(goal - cur) > 0.5) id = raf(update);
       };
       const onScroll = () => { if (!id) id = raf(update); };
-      window.addEventListener('scroll', onScroll, { passive: true });
+      const target: EventTarget = scroller || window;
+      target.addEventListener('scroll', onScroll, { passive: true });
       window.addEventListener('resize', onScroll, { passive: true });
       update();
-      return () => {
-        window.removeEventListener('scroll', onScroll);
+      return handle(() => {
+        target.removeEventListener('scroll', onScroll);
         window.removeEventListener('resize', onScroll);
         if (id) caf(id);
-      };
+      }, false);
     },
     cancel() {
       stop();

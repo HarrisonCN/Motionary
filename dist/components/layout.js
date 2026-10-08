@@ -1,5 +1,5 @@
-import { p as prefersReducedMotion, i as EASE_OUT, m as motionScale, h as defineElement } from '../chunks/base-ZARFccur.js';
-export { a as configureComponents } from '../chunks/base-ZARFccur.js';
+import { p as prefersReducedMotion, i as EASE_OUT, m as motionScale, h as defineElement } from '../chunks/base-BPG5zvex.js';
+export { a as configureComponents } from '../chunks/base-BPG5zvex.js';
 
 /** FLIP keyframes from a previous box to the current one (pure). */
 function flipFrames(from, to, scale = true) {

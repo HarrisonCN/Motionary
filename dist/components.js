@@ -34,14 +34,14 @@ import { defineLayoutComponents } from './components/layout.js';
 export { autoAnimate, defineAutoAnimate, defineMasonry, flipFrames, masonryLayout, sharedTransition } from './components/layout.js';
 import { definePacksComponents } from './components/packs.js';
 export { PACKS, PACK_PRIMITIVES, applyPack, countUp, definePack, flyToCart } from './components/packs.js';
-import { a as adoptVariants } from './chunks/variants-DvnxvRCM.js';
-export { V as VARIANTS, s as setVariant } from './chunks/variants-DvnxvRCM.js';
-import { c as canDefine } from './chunks/base-ZARFccur.js';
-export { M as MOTION_SCALE, a as configureComponents, g as getMotionIntensity, p as prefersReducedMotion } from './chunks/base-ZARFccur.js';
+import { a as adoptVariants } from './chunks/variants-BVYMcxRv.js';
+export { V as VARIANTS, s as setVariant } from './chunks/variants-BVYMcxRv.js';
+import { c as canDefine } from './chunks/base-BPG5zvex.js';
+export { M as MOTION_SCALE, a as configureComponents, g as getMotionIntensity, p as prefersReducedMotion } from './chunks/base-BPG5zvex.js';
 export { C as COMPONENT_CATEGORIES } from './chunks/index-tags-43Xtd01A.js';
-export { S as SPRING_PRESETS, c as createSpring, l as linearEasing, p as projectInertia, r as resolveSpring, a as rubberBand, s as snapTo, b as spring, d as springEasing, e as springSamples, f as stepSpring, g as supportsLinearEasing } from './chunks/spring-E2ickYNI.js';
-export { T as TIMELINE_PRESETS, r as resolvePosition, t as timeline } from './chunks/core-Co-6AL0h.js';
-export { g as gesture, p as pinchScale, s as swipeDirection } from './chunks/core-DKY-fVzR.js';
+export { S as SPRING_PRESETS, c as createSpring, l as linearEasing, p as projectInertia, r as resolveSpring, a as rubberBand, s as snapTo, b as spring, d as springEasing, e as springSamples, f as stepSpring, g as supportsLinearEasing } from './chunks/spring-BziPsW3r.js';
+export { T as TIMELINE_PRESETS, r as resolvePosition, s as supportsNativeScrub, t as timeline } from './chunks/core-QTFk4kgO.js';
+export { g as gesture, p as pinchScale, s as swipeDirection } from './chunks/core-eXX8rB_b.js';
 
 /**
  * use-scroll-animate/components

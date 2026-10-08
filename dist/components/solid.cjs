@@ -18,7 +18,7 @@ require('./click.cjs');
 require('./ui.cjs');
 require('./page.cjs');
 require('./timeline.cjs');
-require('../chunks/core-DXqZm5Il.cjs');
+require('../chunks/core-CLu8ZrC-.cjs');
 require('./gesture.cjs');
 require('../chunks/core-IaorbTdu.cjs');
 require('./svg.cjs');

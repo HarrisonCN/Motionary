@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.1.0] - 2026-10-08
+
+### Added
+- **Native scroll-driven scrub** — `timeline().scrub(el)` now runs on the browser's `ViewTimeline` (default; `el` moving through the viewport, range `cover`) or `ScrollTimeline` (`{ source: 'scroll' }`; `el` is the scroll container) when available. Each step becomes one scroll-driven animation over its slice of the range, so the playhead is driven off the main thread with no per-frame JS.
+- `scrub()` options: `source` (`'view'` · `'scroll'`), `engine` (`'auto'` · `'native'` · `'js'`), `axis` (`block` · `inline` · `x` · `y`). The returned stop function carries `.native`.
+- `supportsNativeScrub(source?)` (main entry and `components/timeline`); `ScrubHandle` type.
+- `<usa-timeline scrub>` uses the native engine (sets `data-native`); `scrub="scroll"`, `scrub="js"` and `smooth="0.2"` tune it.
+- JS fallback (rAF-throttled scroll listener) for browsers without scroll-driven animations and whenever JS is needed: `smooth`, `offset`, `call()` cues, `onUpdate`, `engine: 'js'`. The fallback now also supports `{ source: 'scroll' }` and horizontal axes.
+- Showcase: **supportsNativeScrub()** card — a scroll box scrubbing a three-step timeline, showing which engine runs it (verified in Chromium: native ScrollTimeline).
+
+### Changed
+- `<usa-timeline scrub>` no longer smooths by default (`smooth` was 0.2) so it can run natively; add `smooth="0.2"` for the previous feel.
+
 ## [4.0.1] - 2026-10-08
 
 ### Fixed

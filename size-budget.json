@@ -2,7 +2,7 @@
   {
     "name": "dist/index.umd.js (minified)",
     "file": "dist/index.umd.js",
-    "limit": 8192
+    "limit": 9216
   },
   {
     "name": "dist/element.umd.js (minified)",
@@ -12,7 +12,7 @@
   {
     "name": "import everything (minified)",
     "import": "export * from 'pkg'; export { default } from 'pkg';",
-    "limit": 8192
+    "limit": 9216
   },
   {
     "name": "import default instance",
@@ -207,12 +207,12 @@
   {
     "name": "import 'use-scroll-animate/components/timeline'",
     "import": "export * from 'pkg/components/timeline';",
-    "limit": 4096
+    "limit": 4608
   },
   {
     "name": "import { defineTimelineComponents } from '…/components/timeline'",
     "import": "export { defineTimelineComponents } from 'pkg/components/timeline';",
-    "limit": 3840
+    "limit": 4352
   },
   {
     "name": "import 'use-scroll-animate/components/gesture'",

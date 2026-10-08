@@ -13,7 +13,7 @@
 
 export { createScrollAnimate, getScrollProgress, supportsScrollTimeline } from './core';
 export { staggerChildren } from './stagger';
-export { timeline, resolvePosition, TIMELINE_PRESETS } from './components/timeline/core';
+export { timeline, resolvePosition, TIMELINE_PRESETS, supportsNativeScrub } from './components/timeline/core';
 export { parallax } from './parallax';
 export { PRESETS, resolvePreset, resolveEasing, EASING_MAP } from './presets';
 export type {
@@ -30,7 +30,7 @@ export type {
 } from './types';
 export type { StaggerOptions } from './stagger';
 export type { ParallaxHelperOptions } from './parallax';
-export type { Timeline, TimelineOptions, TimelineStepOptions, TimelinePosition, ScrubOptions } from './components/timeline/core';
+export type { Timeline, TimelineOptions, TimelineStepOptions, TimelinePosition, ScrubOptions, ScrubHandle } from './components/timeline/core';
 
 // Default export: a ready-to-use singleton instance
 import { createScrollAnimate } from './core';

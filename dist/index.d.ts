@@ -248,11 +248,29 @@ interface TimelineOptions {
     onUpdate?: (progress: number) => void;
 }
 interface ScrubOptions {
-    /** Scroll offset (px) before the source's top reaches the viewport bottom where progress starts. */
+    /** Scroll offset (px) before the source's top reaches the viewport bottom where progress starts (JS engine only). */
     offset?: number;
-    /** Smoothing 0–1 (0 = immediate, default 0). */
+    /** Smoothing 0–1 (0 = immediate, default 0). Smoothing needs the JS engine. */
     smooth?: number;
+    /**
+     * 4.1: which progress source drives the timeline.
+     * - `'view'` (default): `source` moving through the viewport (CSS `ViewTimeline`, range `cover`).
+     * - `'scroll'`: the scroll position of `source` itself (a scroll container; CSS `ScrollTimeline`).
+     */
+    source?: 'view' | 'scroll';
+    /** 4.1: `'auto'` (default) uses the browser's native scroll-driven animations when available, `'js'` forces the fallback. */
+    engine?: 'auto' | 'native' | 'js';
+    /** 4.1: scroll axis, `'block'` (default) · `'inline'` · `'x'` · `'y'`. */
+    axis?: 'block' | 'inline' | 'x' | 'y';
 }
+/** The function `scrub()` returns: call it to stop. `native` tells which engine runs it. */
+interface ScrubHandle {
+    (): void;
+    /** `true` when the browser's ScrollTimeline / ViewTimeline drives it (compositor, no JS per frame). */
+    readonly native: boolean;
+}
+/** 4.1: whether `scrub()` can use native ScrollTimeline / ViewTimeline here. */
+declare function supportsNativeScrub(source?: 'view' | 'scroll'): boolean;
 interface Timeline {
     /** Total length in ms. */
     readonly duration: number;
@@ -275,8 +293,14 @@ interface Timeline {
     seek(to: TimelinePosition): Timeline;
     /** Get or set progress 0–1. */
     progress(p?: number): number;
-    /** Tie progress to the scroll position of `source` (it moves through the viewport). Returns a stop function. */
-    scrub(source: Element, options?: ScrubOptions): () => void;
+    /**
+     * Tie progress to scroll: `source` moving through the viewport (or, with
+     * `{ source: 'scroll' }`, a scroll container's own position). Runs on native
+     * ScrollTimeline / ViewTimeline when available (and no `smooth`, `offset`,
+     * `call()` cues or `onUpdate` need JS), else on a rAF-throttled listener.
+     * Returns a stop function with a `native` flag.
+     */
+    scrub(source: Element, options?: ScrubOptions): ScrubHandle;
     /** Stop and drop every animation (elements keep their last frame). */
     cancel(): void;
 }
@@ -372,5 +396,5 @@ declare function resolveEasing(easing: EasingType): string;
  */
 declare const ScrollAnimate: ScrollAnimateInstance;
 
-export { EASING_MAP, PRESETS, TIMELINE_PRESETS, createScrollAnimate, ScrollAnimate as default, getScrollProgress, parallax, resolveEasing, resolvePosition, resolvePreset, staggerChildren, supportsScrollTimeline, timeline };
-export type { AnimateOptions, AnimatedElement, AnimationKeyframe, AnimationPreset, CustomAnimation, EasingType, ParallaxHelperOptions, ProgressMode, ScrollAnimateConfig, ScrollAnimateInstance, ScrollEngine, ScrubOptions, StaggerOptions, Timeline, TimelineOptions, TimelinePosition, TimelineStepOptions };
+export { EASING_MAP, PRESETS, TIMELINE_PRESETS, createScrollAnimate, ScrollAnimate as default, getScrollProgress, parallax, resolveEasing, resolvePosition, resolvePreset, staggerChildren, supportsNativeScrub, supportsScrollTimeline, timeline };
+export type { AnimateOptions, AnimatedElement, AnimationKeyframe, AnimationPreset, CustomAnimation, EasingType, ParallaxHelperOptions, ProgressMode, ScrollAnimateConfig, ScrollAnimateInstance, ScrollEngine, ScrubHandle, ScrubOptions, StaggerOptions, Timeline, TimelineOptions, TimelinePosition, TimelineStepOptions };

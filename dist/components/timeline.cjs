@@ -1,7 +1,7 @@
 'use strict';
 
 var base = require('../chunks/base-CXx7jZ-o.cjs');
-var core = require('../chunks/core-DXqZm5Il.cjs');
+var core = require('../chunks/core-CLu8ZrC-.cjs');
 
 var css = "usa-timeline{display:block}usa-timeline[scrub]{position:relative}@media (prefers-reduced-motion:reduce){usa-timeline [data-tl]{opacity:1 !important;transform:none !important;filter:none !important;clip-path:none !important}}";
 
@@ -44,7 +44,13 @@ function defineTimeline(tag = 'usa-timeline') {
                 return;
             }
             if (this.flag('scrub')) {
-                this.onCleanup(tl.scrub(this, { smooth: 0.2 }));
+                // 4.1: native ScrollTimeline / ViewTimeline when available; `smooth`
+                // (0–0.95) or `scrub="js"` opt into the JS engine, `scrub="scroll"`
+                // follows this element's own scroll position.
+                const v = this.str('scrub');
+                const stop = tl.scrub(this, { smooth: this.num('smooth', 0), engine: v === 'js' ? 'js' : 'auto', source: v === 'scroll' ? 'scroll' : 'view' });
+                this.toggleAttribute('data-native', stop.native);
+                this.onCleanup(stop);
                 return;
             }
             const trigger = this.str('trigger', 'view');
@@ -97,6 +103,7 @@ exports.configureComponents = base.configureComponents;
 exports.prefersReducedMotion = base.prefersReducedMotion;
 exports.TIMELINE_PRESETS = core.TIMELINE_PRESETS;
 exports.resolvePosition = core.resolvePosition;
+exports.supportsNativeScrub = core.supportsNativeScrub;
 exports.timeline = core.timeline;
 exports.defineTimeline = defineTimeline;
 exports.defineTimelineComponents = defineTimelineComponents;
