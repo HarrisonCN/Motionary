@@ -51,6 +51,39 @@ interface EffectDefinition<O extends Record<string, unknown> = Record<string, an
 declare const CARD_FX: EffectDefinition[];
 declare const CLICK_FX: EffectDefinition[];
 
+/**
+ * 5.2 — bounce & physics micro-interactions, registered through
+ * `registerEffect()`. Keyframes come from a damped-spring / gravity solver
+ * (`springKeyframes()`, `bounceKeyframes()`), so the motion is physical but
+ * still runs on the Web Animations API (compositor, reduced-motion aware).
+ * Effects: `bounce-in`, `rubber-band`, `elastic-hover`, `drop-bounce`,
+ * `gravity-text`, `spring-follow`, `bell-swing`.
+ */
+
+interface SpringOptions {
+    stiffness?: number;
+    damping?: number;
+    mass?: number;
+    /** Samples (keyframes). */
+    steps?: number;
+}
+/**
+ * Sample a damped spring from 0 → 1 and return the progress values plus the
+ * time (ms) it takes to settle. Pure, deterministic.
+ */
+declare function solveSpring({ stiffness, damping, mass, steps }?: SpringOptions): {
+    values: number[];
+    duration: number;
+};
+/** Keyframes for a property driven by a spring: `map(progress)` → keyframe. */
+declare function springKeyframes(map: (p: number) => Keyframe, spring?: SpringOptions): {
+    frames: Keyframe[];
+    duration: number;
+};
+/** Height (0 = floor, 1 = drop height) of a ball dropped with restitution `bounce`, sampled `steps` times. */
+declare function bounceKeyframes(bounce?: number, steps?: number): number[];
+declare const PHYSICS_FX: EffectDefinition[];
+
 /** Helpers shared by the 5.x effect packs. */
 
 /** A fixed, pointer-transparent, aria-hidden layer for transient particles. */
@@ -60,7 +93,10 @@ declare function fxLayer(): HTMLElement;
 declare const EFFECT_PACKS: Record<string, EffectDefinition[]>;
 /** 5.1: card & click effects 2.0. */
 declare function registerCardClickEffects(): void;
+/** 5.2: bounce & physics micro-interactions. */
+declare function registerPhysicsEffects(): void;
 /** Register the built-ins and every pack (idempotent). */
 declare function registerAllEffects(): void;
 
-export { CARD_FX, CLICK_FX, EFFECT_PACKS, fxLayer, registerAllEffects, registerCardClickEffects };
+export { CARD_FX, CLICK_FX, EFFECT_PACKS, PHYSICS_FX, bounceKeyframes, fxLayer, registerAllEffects, registerCardClickEffects, registerPhysicsEffects, solveSpring, springKeyframes };
+export type { SpringOptions };

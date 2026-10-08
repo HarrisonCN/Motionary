@@ -1,6 +1,6 @@
 {
   "name": "use-scroll-animate",
-  "version": "5.1.0",
+  "version": "5.2.0",
   "description": "A lightweight, high-performance, dependency-free scroll animation library and animated UI components (Web Components) for the web and Windows web-view apps.",
   "type": "module",
   "main": "./dist/index.cjs",
