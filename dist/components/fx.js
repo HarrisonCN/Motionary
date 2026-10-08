@@ -1,6 +1,6 @@
 import { y as defineElement } from '../chunks/base-DchG4q_S.js';
-import { p as playEffect, b as bindEffect, a as EFFECT_TRIGGERS, c as registerEffects } from '../chunks/registry-Bu5NrAyA.js';
-export { E as EFFECT_KINDS, g as getEffect, h as hasEffect, l as listEffects, r as registerEffect } from '../chunks/registry-Bu5NrAyA.js';
+import { playEffect, bindEffect, EFFECT_TRIGGERS, registerEffects } from '../chunks/registry-D23neB4M.js';
+export { EFFECT_KINDS, getEffect, hasEffect, listEffects, registerEffect } from '../chunks/registry-D23neB4M.js';
 import { T as TIMELINE_PRESETS } from '../chunks/core-DVyTlo9Q.js';
 import { b as burst, c as confetti, s as shake } from '../chunks/fx-DUMVKSvg.js';
 import './tokens.js';

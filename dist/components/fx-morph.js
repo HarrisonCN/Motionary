@@ -1,4 +1,4 @@
-import { c as registerEffects } from '../chunks/registry-Bu5NrAyA.js';
+import { registerEffects } from '../chunks/registry-D23neB4M.js';
 import { a as all } from '../chunks/shared-CkKHWrtJ.js';
 import '../chunks/base-DchG4q_S.js';
 

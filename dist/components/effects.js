@@ -3,7 +3,7 @@ import { P as PALETTE, o as overlay, a as all, b as origin, s as spawn, r as ran
 import { y as defineElement, p as prefersReducedMotion, v as adoptStyles } from '../chunks/base-DchG4q_S.js';
 import { c as canvasBackground, h as hexRgb, G as GENERATIVE_FX } from '../chunks/generative-2LhxG5BJ.js';
 export { n as noise2 } from '../chunks/generative-2LhxG5BJ.js';
-import { p as playEffect, b as bindEffect, c as registerEffects } from '../chunks/registry-Bu5NrAyA.js';
+import { playEffect, bindEffect, registerEffects } from '../chunks/registry-D23neB4M.js';
 import { applyMotionTokens, motionTokensToVars, mergeMotionTokens } from './tokens.js';
 import { T as TIMELINE_PRESETS } from '../chunks/core-DVyTlo9Q.js';
 import '../chunks/fx-DUMVKSvg.js';

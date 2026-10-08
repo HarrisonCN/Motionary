@@ -639,6 +639,29 @@ defineWidgets(); defineFx(); registerMorphEffects2();
 - `<usa-tip text placement trigger="hover | click" delay>`: spring-out tooltip / popover with arrow, viewport flip + shift, Esc, rich `[slot="tip"]` content.
 - Morph & SVG 2.0: `path-morph` (loop) · `blob-button` (hover) · `stroke-draw` · `noise-reveal` (enter) · `icon-swap` (click); helpers `samplePath()`, `pointsToPath()`. Reduced motion: no magnification / stretch / morph loops; reveals and swaps fade.
 
+### v6.7 Widgets: stepper, pagination, segmented control, switch (`components/widgets`) + Transitions 2.0 (`components/fx-transitions`)
+
+```html
+<usa-stepper value="1"><span>Cart</span><span>Shipping</span><span>Payment</span></usa-stepper>
+<usa-pagination total="20" page="1" siblings="1"></usa-pagination>
+<usa-segmented variant="ios"><button>Day</button><button>Week</button><button>Month</button></usa-segmented>
+<usa-switch variant="daynight" name="dark" label="Dark mode"></usa-switch>
+
+<usa-fx effect="ripple-dissolve" trigger="click" options='{"mode":"in"}'><section>…</section></usa-fx>
+```
+```js
+import { defineWidgets } from 'motionary/components/widgets';
+import { registerTransitionEffects2, pageTransition, crossDocumentTransitions } from 'motionary/components/fx-transitions';
+defineWidgets(); registerTransitionEffects2();
+await pageTransition(() => renderNextView(), 'liquid-wipe');   // SPA: View Transitions API, fallback = update + effect
+crossDocumentTransitions('camera-dolly');                       // MPA: @view-transition { navigation: auto }
+```
+- `<usa-stepper value orientation clickable>`: `next()`, `prev()`, `value`; `usa:change`.
+- `<usa-pagination total page siblings>`: `page`; `usa:change` (`{ page }`); `pageWindow(page, total, siblings)`.
+- `<usa-segmented variant="ios | pill | outline" value>`: radio group; `usa:change` (`{ value, label }`).
+- `<usa-switch variant="ios | daynight | bounce | liquid" checked disabled name value>`: `checked`, `toggle()`; `usa:change`.
+- Transitions 2.0 (`mode: "in" | "out"`): `ripple-dissolve` (`x`, `y`, from the pointer on click) · `shatter` (`pieces`) · `mosaic-flip` (`cols`, `rows`) · `liquid-wipe` (`direction`, `waves`) · `page-curl` · `camera-dolly` (`scale`). Reduced motion: short fades.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

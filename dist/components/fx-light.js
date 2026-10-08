@@ -1,4 +1,4 @@
-import { c as registerEffects } from '../chunks/registry-Bu5NrAyA.js';
+import { registerEffects } from '../chunks/registry-D23neB4M.js';
 import { c as canvasBackground, h as hexRgb } from '../chunks/generative-2LhxG5BJ.js';
 import { o as overlay } from '../chunks/shared-CkKHWrtJ.js';
 import '../chunks/base-DchG4q_S.js';

@@ -25,7 +25,7 @@ import './depth.js';
 import './layout.js';
 import './packs.js';
 import './fx.js';
-import '../chunks/registry-Bu5NrAyA.js';
+import '../chunks/registry-D23neB4M.js';
 import './a11y.js';
 import '../chunks/index-tags-DucKMQr_.js';
 import './perf.js';

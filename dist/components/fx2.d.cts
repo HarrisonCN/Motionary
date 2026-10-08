@@ -165,6 +165,39 @@ declare const MORPH2_FX: EffectDefinition[];
 declare function registerMorphEffects2(): void;
 
 /**
+ * 6.7 — Transitions 2.0 (`motionary/components/fx-transitions`), registered
+ * through `registerEffect()` (kind `page`; option `mode: 'in' | 'out'`):
+ *
+ * - `ripple-dissolve` — a circle with a ripple ring grows from the pointer
+ *   (or `x` / `y` 0–1) and reveals / hides the element.
+ * - `shatter` — the element breaks into shards that fly apart (out) or
+ *   fly together (in).
+ * - `mosaic-flip` — a grid of tiles flips over in a diagonal wave.
+ * - `liquid-wipe` — a wavy liquid edge sweeps across.
+ * - `page-curl` — the element turns like a page around its left edge.
+ * - `camera-dolly` — a dolly zoom: scale + depth blur + fade.
+ *
+ * `pageTransition(update, effect)` runs a DOM update inside the View
+ * Transitions API (when available) and plays the effect on the new snapshot;
+ * without the API it runs `update()` and plays the effect on `target`.
+ * `crossDocumentTransitions(effect)` opts an MPA into cross-document view
+ * transitions (`@view-transition { navigation: auto }`) with the same look.
+ * Reduced motion: plain short fades.
+ */
+
+declare const TRANSITIONS2_FX: EffectDefinition[];
+/**
+ * Run `update` (a DOM change) as a transition: inside `document.startViewTransition`
+ * when supported (the new snapshot plays `effect`), otherwise `update()` then the
+ * effect on `target` (default `document.body`'s first element).
+ */
+declare function pageTransition(update: () => void | Promise<void>, effect?: string, options?: Record<string, unknown>, target?: HTMLElement): Promise<void>;
+/** Opt a multi-page site into cross-document view transitions with an effect's look. Returns a remover. */
+declare function crossDocumentTransitions(effect?: string, duration?: number): () => void;
+/** Register the 6.7 transitions pack (idempotent). */
+declare function registerTransitionEffects2(): void;
+
+/**
  * 5.5 — generative backgrounds on Canvas 2D, registered through
  * `registerEffect()` (kind `background`): `flow-field`, `voronoi`,
  * `mesh-gradient`, `starfield`, `metaballs`, `contours`.
@@ -236,5 +269,5 @@ declare const FX2_PACKS: Record<string, EffectDefinition[]>;
 /** Register every 6.x pack (idempotent). */
 declare function registerFx2(): void;
 
-export { DEPTH3_FX, FX2_PACKS, GLSL_HEAD, GPU_FX, LIGHT_FX, MORPH2_FX, TEXT3_FX, fieldFallback, pointsToPath, register3dEffects, registerFx2, registerGpuEffects, registerLightEffects, registerMorphEffects2, registerTextEffects3, samplePath, shaderBackground, splitChars, supportsWebGL2, trackPointer };
+export { DEPTH3_FX, FX2_PACKS, GLSL_HEAD, GPU_FX, LIGHT_FX, MORPH2_FX, TEXT3_FX, TRANSITIONS2_FX, crossDocumentTransitions, fieldFallback, pageTransition, pointsToPath, register3dEffects, registerFx2, registerGpuEffects, registerLightEffects, registerMorphEffects2, registerTextEffects3, registerTransitionEffects2, samplePath, shaderBackground, splitChars, supportsWebGL2, trackPointer };
 export type { ShaderSpec };

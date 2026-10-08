@@ -45,7 +45,7 @@ export { ALL_TAGS, LIVE_REGION_IDS, MOTION_SENSITIVITY, SENSITIVITY_CSS, STATIC_
 export { autoDegrade, categoryOf, loadCategoryStyles, loadedStyles, onDemandStyles } from './components/perf.js';
 export { BRIDGE_PROTOCOL_VERSION, applyNativeSettings, connectNativeShell, detectNativeHost, parseNativeSettings, postToNative } from './components/bridge.js';
 export { C as COMPONENT_CATEGORIES } from './chunks/index-tags-DucKMQr_.js';
-export { E as EFFECT_KINDS, a as EFFECT_TRIGGERS, b as bindEffect, g as getEffect, h as hasEffect, l as listEffects, p as playEffect, r as registerEffect, c as registerEffects } from './chunks/registry-Bu5NrAyA.js';
+export { EFFECT_KINDS, EFFECT_TRIGGERS, bindEffect, getEffect, hasEffect, listEffects, playEffect, registerEffect, registerEffects } from './chunks/registry-D23neB4M.js';
 export { S as SPRING_PRESETS, c as createSpring, l as linearEasing, p as projectInertia, r as resolveSpring, a as rubberBand, s as snapTo, b as spring, d as springEasing, e as springSamples, f as stepSpring, g as supportsLinearEasing } from './chunks/spring-BhoT09Qb.js';
 export { T as TIMELINE_PRESETS, r as resolvePosition, s as supportsNativeScrub, t as timeline } from './chunks/core-DVyTlo9Q.js';
 export { g as gesture, p as pinchScale, s as swipeDirection } from './chunks/core-D2vF8kZb.js';
