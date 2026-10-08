@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.3.0] - 2026-10-08
+
+### Added
+- **4 new components (6.3)** in `motionary/components/widgets` (also in `dist/widgets.umd.js`):
+  - `<usa-toast-stack>` — notifications pile into a collapsed stack (newest in front, older ones peeking behind) and fan out on hover / focus; auto-dismiss paused while hovered, swipe to dismiss, action + close buttons, six `position`s, `max`, `contained`; polite live region (errors use `role="alert"`). API `show()`, `dismiss()`, `clear()`, module helper `stackToast()`, declarative `[data-usa-toast]` triggers; events `usa:show`, `usa:dismiss`.
+  - `<usa-modal>` — modal on the native `<dialog>` (top layer, focus trap, Esc) with a fading blurred backdrop; `effect="scale | slide-up | flip | origin"` (`origin` grows out of the opener); `persistent`; `[data-usa-open="id"]` / `[data-usa-close]`; focus returns to the opener. API `show()`, `close(value)`, `toggle()`; `usa:open`, `usa:close`.
+  - `<usa-sheet>` — side / bottom sheet (`side="right | left | bottom | top"`) on the same overlay core; the bottom sheet has a grab handle and drag-to-dismiss with spring-back.
+  - `<usa-menu>` — dropdown menu that scales / folds / slides out of its button with cascading items; full menu keyboard support, outside click closes; `usa:select`.
+- **Text effects 3.0 — `motionary/components/fx-text`** (7 effects, `registerTextEffects3()`, also in `registerFx2()`): `liquid-text` (animated SVG displacement), `neon-write` (letters flicker on like a neon sign), `particle-text` (particles assemble into the glyphs), `glitch-text` (RGB-split slices), `text-trail` (cursor: letters fall off the pointer), `font-breathe` (variable-font weight wave), `flip-chars` (per-character 3D flip). Helper `splitChars()` keeps a visually hidden copy for screen readers.
+- Showcase: 7 new gallery cards with copyable HTML / ESM / React / Vue / desktop code; Animation Store “Components 6.x” 7 → 14 entries (234 → 241 items).
+
+### Accessibility
+- Overlays use the native `<dialog>` modal semantics; menu and tabs follow the WAI-ARIA patterns. Under reduced motion overlays and menus fade, text loops / trail / particles are skipped and one-shot text effects show their final state.
+
 ## [6.2.0] - 2026-10-08
 
 ### Added

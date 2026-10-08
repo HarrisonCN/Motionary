@@ -61,6 +61,32 @@ declare const GPU_FX: EffectDefinition[];
 declare function registerGpuEffects(): void;
 
 /**
+ * 6.3 — Text effects 3.0 (`motionary/components/fx-text`), registered through
+ * `registerEffect()`:
+ *
+ * - `liquid-text` (loop) — the text ripples like liquid (animated SVG
+ *   turbulence + displacement filter).
+ * - `neon-write` (text) — letters flicker on one by one like a neon sign
+ *   being switched on, then keep a soft glow.
+ * - `particle-text` (text) — particles fly in from around the element and
+ *   assemble into the glyphs, then hand over to the real text.
+ * - `glitch-text` (text) — RGB-split slices jump sideways for a moment.
+ * - `text-trail` (cursor) — the letters of a word fall off the pointer.
+ * - `font-breathe` (loop) — a variable-font weight wave breathes through the text.
+ * - `flip-chars` (text) — every character flips up in 3D, staggered.
+ *
+ * Splitting keeps a visually hidden copy for screen readers (the animated
+ * characters are `aria-hidden`). Reduced motion: loops and the trail are
+ * skipped, one-shot effects show the final state without movement.
+ */
+
+/** Split `el`'s text into `aria-hidden` inline-block characters (idempotent). Returns them. */
+declare function splitChars(el: HTMLElement): HTMLElement[];
+declare const TEXT3_FX: EffectDefinition[];
+/** Register the 6.3 text pack (idempotent). */
+declare function registerTextEffects3(): void;
+
+/**
  * 5.5 — generative backgrounds on Canvas 2D, registered through
  * `registerEffect()` (kind `background`): `flow-field`, `voronoi`,
  * `mesh-gradient`, `starfield`, `metaballs`, `contours`.
@@ -132,5 +158,5 @@ declare const FX2_PACKS: Record<string, EffectDefinition[]>;
 /** Register every 6.x pack (idempotent). */
 declare function registerFx2(): void;
 
-export { FX2_PACKS, GLSL_HEAD, GPU_FX, fieldFallback, registerFx2, registerGpuEffects, shaderBackground, supportsWebGL2 };
+export { FX2_PACKS, GLSL_HEAD, GPU_FX, TEXT3_FX, fieldFallback, registerFx2, registerGpuEffects, registerTextEffects3, shaderBackground, splitChars, supportsWebGL2 };
 export type { ShaderSpec };

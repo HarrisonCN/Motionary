@@ -1,7 +1,8 @@
 'use strict';
 
 var registry = require('./registry-DehBVRDV.cjs');
-var generative = require('./generative-DzIZq-_g.cjs');
+var generative = require('./generative-BHIj-NU0.cjs');
+var shared = require('./shared-jkgRH-Hx.cjs');
 
 /** GLSL shared by every shader: uniforms, hash, value noise, fbm. */
 const GLSL_HEAD = `#version 300 es
@@ -288,7 +289,7 @@ const GPU_FX = [
     }),
 ];
 const fall = (draw) => ({
-    init: (w, h, o) => ({ f: Array.from({ length: o.count }, () => ({ x: Math.random() * w, y: Math.random() * h, r: generative.rand(5, 11) * (o.size || 1), a: generative.rand(0, 6.3), va: generative.rand(-1.5, 1.5), vy: generative.rand(18, 46), ph: generative.rand(0, 6.3), c: o.colors[Math.floor(Math.random() * o.colors.length)] })), last: 0 }),
+    init: (w, h, o) => ({ f: Array.from({ length: o.count }, () => ({ x: Math.random() * w, y: Math.random() * h, r: shared.rand(5, 11) * (o.size || 1), a: shared.rand(0, 6.3), va: shared.rand(-1.5, 1.5), vy: shared.rand(18, 46), ph: shared.rand(0, 6.3), c: o.colors[Math.floor(Math.random() * o.colors.length)] })), last: 0 }),
     draw: ({ ctx, w, h, t, state, o, quality }) => {
         const dt = state.last ? Math.min(0.05, t - state.last) : 0;
         state.last = t;
@@ -352,25 +353,25 @@ GPU_FX.push({
     description: 'A water splash from the pointer: a ring plus droplets that arc out and fall with gravity.',
     defaults: { color: '#38bdf8', count: 14 },
     run: (el, o, ctx) => {
-        const { x, y } = generative.origin(el, ctx);
+        const { x, y } = shared.origin(el, ctx);
         if (ctx.reduced)
-            return generative.spawn(x - 12, y - 12, `width:24px;height:24px;border-radius:50%;background:${o.color};opacity:.5`, ctx, [{ opacity: 0.5 }, { opacity: 0 }], { duration: 300 });
+            return shared.spawn(x - 12, y - 12, `width:24px;height:24px;border-radius:50%;background:${o.color};opacity:.5`, ctx, [{ opacity: 0.5 }, { opacity: 0 }], { duration: 300 });
         const anims = [
-            generative.spawn(x - 30, y - 30, `width:60px;height:60px;border-radius:50%;border:3px solid ${o.color}`, ctx, [{ transform: 'scale(.2)', opacity: 1 }, { transform: 'scale(1.6)', opacity: 0 }], { duration: 520, easing: 'cubic-bezier(.2,.8,.3,1)' }),
+            shared.spawn(x - 30, y - 30, `width:60px;height:60px;border-radius:50%;border:3px solid ${o.color}`, ctx, [{ transform: 'scale(.2)', opacity: 1 }, { transform: 'scale(1.6)', opacity: 0 }], { duration: 520, easing: 'cubic-bezier(.2,.8,.3,1)' }),
         ];
         for (let i = 0; i < o.count; i++) {
-            const ang = -Math.PI / 2 + generative.rand(-1.15, 1.15);
-            const v = generative.rand(50, 110);
+            const ang = -Math.PI / 2 + shared.rand(-1.15, 1.15);
+            const v = shared.rand(50, 110);
             const dx = Math.cos(ang) * v;
-            const s = generative.rand(4, 9);
+            const s = shared.rand(4, 9);
             const peak = Math.sin(ang) * v;
-            anims.push(generative.spawn(x - s / 2, y - s / 2, `width:${s}px;height:${s * 1.25}px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:${o.color}`, ctx, [
+            anims.push(shared.spawn(x - s / 2, y - s / 2, `width:${s}px;height:${s * 1.25}px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:${o.color}`, ctx, [
                 { transform: 'translate(0,0) scale(1)', opacity: 1 },
                 { transform: `translate(${dx * 0.6}px,${peak}px) scale(1)`, opacity: 1, offset: 0.45, easing: 'cubic-bezier(.3,0,.7,1)' },
                 { transform: `translate(${dx}px,${peak + 90}px) scale(.6)`, opacity: 0 },
-            ], { duration: generative.rand(650, 900), easing: 'cubic-bezier(.15,.6,.4,1)' }));
+            ], { duration: shared.rand(650, 900), easing: 'cubic-bezier(.15,.6,.4,1)' }));
         }
-        return generative.all(anims);
+        return shared.all(anims);
     },
 });
 /** Register the 6.2 GPU pack (idempotent). */
@@ -384,4 +385,4 @@ exports.fieldFallback = fieldFallback;
 exports.registerGpuEffects = registerGpuEffects;
 exports.shaderBackground = shaderBackground;
 exports.supportsWebGL2 = supportsWebGL2;
-//# sourceMappingURL=gpu-CenK2l6b.cjs.map
+//# sourceMappingURL=gpu-BBRLgEzM.cjs.map

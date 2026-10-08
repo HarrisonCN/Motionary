@@ -1,0 +1,19 @@
+usa-toast-stack{position:fixed;z-index:2147482000;width:min(360px,calc(100vw - 24px));pointer-events:none;--usa-tstack-bg:#111827;--usa-tstack-fg:#f9fafb}
+usa-toast-stack[contained]{position:absolute;width:min(360px,calc(100% - 24px))}
+usa-toast-stack[data-position^="bottom"]{bottom:12px}
+usa-toast-stack[data-position^="top"]{top:12px}
+usa-toast-stack[data-position$="right"]{right:12px}
+usa-toast-stack[data-position$="left"]{left:12px}
+usa-toast-stack[data-position$="center"]{left:50%;transform:translateX(-50%)}
+.usa-tstack-list{position:relative;list-style:none;margin:0;padding:0;min-height:1px;transition:height .3s}
+.usa-tstack{position:absolute;left:0;right:0;display:flex;align-items:center;gap:10px;box-sizing:border-box;padding:12px 12px 12px 14px;border-radius:14px;background:var(--usa-tstack-bg);color:var(--usa-tstack-fg);box-shadow:0 12px 32px -10px rgba(0,0,0,.45);font:500 14px/1.35 system-ui,sans-serif;pointer-events:auto;touch-action:pan-y;transition:transform .38s cubic-bezier(.22,1,.36,1),opacity .3s;user-select:none}
+usa-toast-stack[data-position^="bottom"] .usa-tstack{bottom:0;transform-origin:50% 100%}
+usa-toast-stack[data-position^="top"] .usa-tstack{top:0;transform-origin:50% 0}
+.usa-tstack-icon{flex:none;display:grid;place-items:center;width:22px;height:22px;border-radius:50%;font-size:13px;font-weight:800;background:#3b82f6;color:#fff}
+.usa-tstack-success .usa-tstack-icon{background:#22c55e}.usa-tstack-warning .usa-tstack-icon{background:#f59e0b}.usa-tstack-error .usa-tstack-icon{background:#ef4444}
+.usa-tstack-text{flex:1;min-width:0;display:flex;flex-direction:column}
+.usa-tstack-text strong{font-weight:700}
+.usa-tstack-action{border:0;border-radius:8px;padding:6px 10px;background:rgba(255,255,255,.14);color:inherit;font:600 13px system-ui,sans-serif;cursor:pointer}
+.usa-tstack-close{border:0;background:none;color:inherit;opacity:.6;font-size:18px;line-height:1;cursor:pointer;padding:2px 4px}
+.usa-tstack-close:hover{opacity:1}
+@media (prefers-reduced-motion:reduce){.usa-tstack,.usa-tstack-list{transition:none}}

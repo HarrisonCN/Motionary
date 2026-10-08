@@ -1,8 +1,9 @@
 'use strict';
 
 var components_fx = require('./fx.cjs');
-var generative = require('../chunks/generative-DzIZq-_g.cjs');
+var shared = require('../chunks/shared-jkgRH-Hx.cjs');
 var base = require('../chunks/base-BaQV-2ha.cjs');
+var generative = require('../chunks/generative-BHIj-NU0.cjs');
 var registry = require('../chunks/registry-DehBVRDV.cjs');
 var components_tokens = require('./tokens.cjs');
 var core = require('../chunks/core-BGAyaY6L.cjs');
@@ -16,7 +17,7 @@ const CARD_FX = [
         reduced: 'run',
         defaults: { strength: 0.55 },
         run: (el, o, ctx) => {
-            const [layer, remove] = generative.overlay(el, `mix-blend-mode:color-dodge;opacity:${o.strength};background:linear-gradient(115deg,transparent 20%,#ff8bd855 35%,#8bf3ff55 45%,#fff58b55 55%,transparent 70%),repeating-linear-gradient(55deg,#ffffff10 0 2px,transparent 2px 6px);background-size:250% 250%,100% 100%;background-position:50% 50%;transition:background-position .2s ease-out`);
+            const [layer, remove] = shared.overlay(el, `mix-blend-mode:color-dodge;opacity:${o.strength};background:linear-gradient(115deg,transparent 20%,#ff8bd855 35%,#8bf3ff55 45%,#fff58b55 55%,transparent 70%),repeating-linear-gradient(55deg,#ffffff10 0 2px,transparent 2px 6px);background-size:250% 250%,100% 100%;background-position:50% 50%;transition:background-position .2s ease-out`);
             if (ctx.reduced)
                 return remove;
             const move = (e) => {
@@ -48,7 +49,7 @@ const CARD_FX = [
         run: (el, o, ctx) => {
             if (ctx.reduced)
                 return;
-            const [g, remove] = generative.overlay(el, `overflow:hidden;background:linear-gradient(105deg,transparent 35%,${o.color} 50%,transparent 65%);background-size:250% 100%`);
+            const [g, remove] = shared.overlay(el, `overflow:hidden;background:linear-gradient(105deg,transparent 35%,${o.color} 50%,transparent 65%);background-size:250% 100%`);
             const a = ctx.animate(g, [{ backgroundPosition: '150% 0' }, { backgroundPosition: '-50% 0' }], { duration: o.duration, easing: 'ease-in-out' });
             if (a)
                 a.finished.then(remove, remove);
@@ -75,7 +76,7 @@ const CARD_FX = [
         run: (el, o, ctx) => {
             const kids = Array.from(el.children);
             const mid = (kids.length - 1) / 2;
-            return generative.all(kids.map((k, i) => ctx.animate(k, [{ transform: 'none' }, { transform: `translateX(${(i - mid) * o.spread}px) rotate(${(i - mid) * (o.spread / 2)}deg)`, offset: 0.5 }, { transform: 'none' }], { duration: o.duration, easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)' })));
+            return shared.all(kids.map((k, i) => ctx.animate(k, [{ transform: 'none' }, { transform: `translateX(${(i - mid) * o.spread}px) rotate(${(i - mid) * (o.spread / 2)}deg)`, offset: 0.5 }, { transform: 'none' }], { duration: o.duration, easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)' })));
         },
     },
     {
@@ -108,24 +109,24 @@ const CLICK_FX = [
         run: (el, o, ctx) => {
             if (ctx.reduced)
                 return;
-            const { x, y } = generative.origin(el, ctx);
-            return generative.all([0, 120].map((delay) => generative.spawn(x, y, `width:${o.size}px;height:${o.size}px;margin:${-o.size / 2}px 0 0 ${-o.size / 2}px;border:3px solid ${o.color};border-radius:50%`, ctx, [{ transform: 'scale(0)', opacity: 0.9 }, { transform: 'scale(1)', opacity: 0 }], { duration: o.duration, delay, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' })));
+            const { x, y } = shared.origin(el, ctx);
+            return shared.all([0, 120].map((delay) => shared.spawn(x, y, `width:${o.size}px;height:${o.size}px;margin:${-o.size / 2}px 0 0 ${-o.size / 2}px;border:3px solid ${o.color};border-radius:50%`, ctx, [{ transform: 'scale(0)', opacity: 0.9 }, { transform: 'scale(1)', opacity: 0 }], { duration: o.duration, delay, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' })));
         },
     },
     {
         name: 'ink-splash',
         kind: 'click',
         description: 'Ink blobs splatter from the click point and fade.',
-        defaults: { count: 9, colors: generative.PALETTE, duration: 800 },
+        defaults: { count: 9, colors: shared.PALETTE, duration: 800 },
         run: (el, o, ctx) => {
             if (ctx.reduced)
                 return;
-            const { x, y } = generative.origin(el, ctx);
-            return generative.all(Array.from({ length: o.count }, (_, i) => {
-                const s = generative.rand(6, 22);
-                const ang = generative.rand(0, Math.PI * 2);
-                const d = generative.rand(20, 70);
-                return generative.spawn(x, y, `width:${s}px;height:${s}px;margin:${-s / 2}px 0 0 ${-s / 2}px;background:${o.colors[i % o.colors.length]};border-radius:${generative.rand(40, 50)}% ${generative.rand(50, 60)}% ${generative.rand(40, 60)}% ${generative.rand(45, 55)}%`, ctx, [{ transform: 'translate(0,0) scale(.3)', opacity: 1 }, { transform: `translate(${Math.cos(ang) * d}px,${Math.sin(ang) * d}px) scale(1)`, opacity: 0.9, offset: 0.5 }, { transform: `translate(${Math.cos(ang) * d}px,${Math.sin(ang) * d + 8}px) scale(1.1)`, opacity: 0 }], { duration: o.duration, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' });
+            const { x, y } = shared.origin(el, ctx);
+            return shared.all(Array.from({ length: o.count }, (_, i) => {
+                const s = shared.rand(6, 22);
+                const ang = shared.rand(0, Math.PI * 2);
+                const d = shared.rand(20, 70);
+                return shared.spawn(x, y, `width:${s}px;height:${s}px;margin:${-s / 2}px 0 0 ${-s / 2}px;background:${o.colors[i % o.colors.length]};border-radius:${shared.rand(40, 50)}% ${shared.rand(50, 60)}% ${shared.rand(40, 60)}% ${shared.rand(45, 55)}%`, ctx, [{ transform: 'translate(0,0) scale(.3)', opacity: 1 }, { transform: `translate(${Math.cos(ang) * d}px,${Math.sin(ang) * d}px) scale(1)`, opacity: 0.9, offset: 0.5 }, { transform: `translate(${Math.cos(ang) * d}px,${Math.sin(ang) * d + 8}px) scale(1.1)`, opacity: 0 }], { duration: o.duration, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' });
             }));
         },
     },
@@ -137,12 +138,12 @@ const CLICK_FX = [
         run: (el, o, ctx) => {
             if (ctx.reduced)
                 return;
-            const { x, y } = generative.origin(el, ctx);
-            return generative.all(Array.from({ length: o.count }, (_, i) => {
+            const { x, y } = shared.origin(el, ctx);
+            return shared.all(Array.from({ length: o.count }, (_, i) => {
                 const ang = (i / o.count) * Math.PI * 2;
-                const d = generative.rand(40, 80);
-                const s = generative.rand(12, 22);
-                return generative.spawn(x, y, `font-size:${s}px;line-height:1;margin:${-s / 2}px 0 0 ${-s / 2}px;color:${o.colors[i % o.colors.length]}`, ctx, [{ transform: 'translate(0,0) rotate(0) scale(.2)', opacity: 1 }, { transform: `translate(${Math.cos(ang) * d}px,${Math.sin(ang) * d}px) rotate(${generative.rand(180, 360)}deg) scale(1)`, opacity: 0 }], { duration: o.duration, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' }, '★');
+                const d = shared.rand(40, 80);
+                const s = shared.rand(12, 22);
+                return shared.spawn(x, y, `font-size:${s}px;line-height:1;margin:${-s / 2}px 0 0 ${-s / 2}px;color:${o.colors[i % o.colors.length]}`, ctx, [{ transform: 'translate(0,0) rotate(0) scale(.2)', opacity: 1 }, { transform: `translate(${Math.cos(ang) * d}px,${Math.sin(ang) * d}px) rotate(${shared.rand(180, 360)}deg) scale(1)`, opacity: 0 }], { duration: o.duration, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' }, '★');
             }));
         },
     },
@@ -161,8 +162,8 @@ const CLICK_FX = [
         run: (el, o, ctx) => {
             if (ctx.reduced)
                 return;
-            const { x, y } = generative.origin(el, ctx);
-            return generative.all(Array.from({ length: o.rings }, (_, i) => generative.spawn(x, y, `width:${o.size}px;height:${o.size}px;margin:${-o.size / 2}px 0 0 ${-o.size / 2}px;border:2px solid ${o.color};border-radius:50%`, ctx, [{ transform: 'scale(.1)', opacity: 0.8 }, { transform: 'scale(1)', opacity: 0 }], { duration: o.duration, delay: i * 160, easing: 'ease-out' })));
+            const { x, y } = shared.origin(el, ctx);
+            return shared.all(Array.from({ length: o.rings }, (_, i) => shared.spawn(x, y, `width:${o.size}px;height:${o.size}px;margin:${-o.size / 2}px 0 0 ${-o.size / 2}px;border:2px solid ${o.color};border-radius:50%`, ctx, [{ transform: 'scale(.1)', opacity: 0.8 }, { transform: 'scale(1)', opacity: 0 }], { duration: o.duration, delay: i * 160, easing: 'ease-out' })));
         },
     },
     {
@@ -173,11 +174,11 @@ const CLICK_FX = [
         run: (el, o, ctx) => {
             if (ctx.reduced)
                 return;
-            const { x, y } = generative.origin(el, ctx);
+            const { x, y } = shared.origin(el, ctx);
             const chars = Array.from(String(o.emoji));
-            return generative.all(Array.from({ length: o.count }, (_, i) => {
-                const dx = generative.rand(-90, 90);
-                return generative.spawn(x, y, `font-size:${generative.rand(16, 28)}px;line-height:1`, ctx, [{ transform: 'translate(0,0) scale(.4)', opacity: 0 }, { transform: `translate(${dx * 0.6}px,${generative.rand(-90, -50)}px) scale(1)`, opacity: 1, offset: 0.35 }, { transform: `translate(${dx}px,${generative.rand(40, 90)}px) rotate(${generative.rand(-60, 60)}deg) scale(.9)`, opacity: 0 }], { duration: o.duration, delay: i * 25, easing: 'cubic-bezier(0.33, 0, 0.67, 1)' }, chars[i % chars.length]);
+            return shared.all(Array.from({ length: o.count }, (_, i) => {
+                const dx = shared.rand(-90, 90);
+                return shared.spawn(x, y, `font-size:${shared.rand(16, 28)}px;line-height:1`, ctx, [{ transform: 'translate(0,0) scale(.4)', opacity: 0 }, { transform: `translate(${dx * 0.6}px,${shared.rand(-90, -50)}px) scale(1)`, opacity: 1, offset: 0.35 }, { transform: `translate(${dx}px,${shared.rand(40, 90)}px) rotate(${shared.rand(-60, 60)}deg) scale(.9)`, opacity: 0 }], { duration: o.duration, delay: i * 25, easing: 'cubic-bezier(0.33, 0, 0.67, 1)' }, chars[i % chars.length]);
             }));
         },
     },
@@ -324,7 +325,7 @@ const PHYSICS_FX = [
                 el.dataset.usaSplit = '1';
             }
             const hs = bounceKeyframes(o.bounce, 32);
-            return generative.all(Array.from(el.children).map((s, i) => ctx.animate(s, hs.map((h) => ({ transform: `translateY(${(-h * o.height).toFixed(1)}px)` })), { duration: o.duration, delay: i * o.stagger, easing: 'linear', fill: 'backwards' })));
+            return shared.all(Array.from(el.children).map((s, i) => ctx.animate(s, hs.map((h) => ({ transform: `translateY(${(-h * o.height).toFixed(1)}px)` })), { duration: o.duration, delay: i * o.stagger, easing: 'linear', fill: 'backwards' })));
         },
     },
     {
@@ -458,7 +459,7 @@ const PAGE_FX = [
         reduced: 'run',
         defaults: TRANSITION_DEFAULTS,
         run: transition((s, o, ctx, el) => {
-            const { x, y } = generative.origin(el, ctx);
+            const { x, y } = shared.origin(el, ctx);
             const r = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y)) + 2;
             // a huge box-shadow ring around a hole: the hole shrinks to 0 to cover
             const p = part(s, `left:${x}px;top:${y}px;width:0;height:0;border-radius:50%;box-shadow:0 0 0 ${Math.ceil(r)}px ${o.color}`);
@@ -968,7 +969,7 @@ const audioFx = (name, description, defaults, spec) => ({
     kind: 'background',
     description,
     reduced: 'skip',
-    defaults: { colors: generative.PALETTE, background: '#0b0d12', speed: 1, quality: 1, ...defaults },
+    defaults: { colors: shared.PALETTE, background: '#0b0d12', speed: 1, quality: 1, ...defaults },
     run: (el, o, ctx) => generative.canvasBackground(el, ctx, spec, o),
 });
 const AUDIO_FX = [
@@ -1114,7 +1115,7 @@ const touchOk = (e, o) => o.touch || e.pointerType !== 'touch';
 function overlayCanvas(draw) {
     const c = document.createElement('canvas');
     c.style.cssText = 'position:absolute;inset:0;width:100%;height:100%';
-    generative.fxLayer().appendChild(c);
+    shared.fxLayer().appendChild(c);
     const g = c.getContext('2d');
     let raf = 0;
     const frame = (now) => {
@@ -1214,7 +1215,7 @@ const CURSOR_FX = [
         name: 'sparkle-trail',
         kind: 'cursor',
         description: 'Little stars twinkle off the pointer as it moves (persistent; `colors`, `spacing` px between stars).',
-        defaults: { colors: generative.PALETTE, spacing: 14, size: 14, touch: false },
+        defaults: { colors: shared.PALETTE, spacing: 14, size: 14, touch: false },
         run: (el, o, ctx) => {
             let lx = -1e4;
             let ly = -1e4;
@@ -1223,8 +1224,8 @@ const CURSOR_FX = [
                     return;
                 lx = e.clientX;
                 ly = e.clientY;
-                const s = o.size * generative.rand(0.6, 1.2);
-                generative.spawn(e.clientX - s / 2, e.clientY - s / 2, `font-size:${s}px;line-height:1;color:${o.colors[Math.floor(generative.rand(0, o.colors.length))]}`, ctx, [{ transform: 'translate(0,0) scale(0) rotate(0deg)', opacity: 1 }, { transform: `translate(${generative.rand(-14, 14)}px,${generative.rand(4, 26)}px) scale(1) rotate(${generative.rand(-90, 90)}deg)`, opacity: 0 }], { duration: generative.rand(500, 800), easing: 'ease-out' }, '✦');
+                const s = o.size * shared.rand(0.6, 1.2);
+                shared.spawn(e.clientX - s / 2, e.clientY - s / 2, `font-size:${s}px;line-height:1;color:${o.colors[Math.floor(shared.rand(0, o.colors.length))]}`, ctx, [{ transform: 'translate(0,0) scale(0) rotate(0deg)', opacity: 1 }, { transform: `translate(${shared.rand(-14, 14)}px,${shared.rand(4, 26)}px) scale(1) rotate(${shared.rand(-90, 90)}deg)`, opacity: 0 }], { duration: shared.rand(500, 800), easing: 'ease-out' }, '✦');
             };
             el.addEventListener('pointermove', move, { passive: true });
             return () => el.removeEventListener('pointermove', move);
@@ -1523,11 +1524,11 @@ function bumpCount(el, delta, ctx) {
 const pop = (el, ctx, s = 1.25, d = 380) => ctx.animate(el, [{ transform: 'scale(1)' }, { transform: `scale(${s})`, offset: 0.4 }, { transform: 'scale(1)' }], { duration: d, easing: 'cubic-bezier(.2,1.4,.4,1)' });
 /** A few glyphs flying out of the pointer / centre. */
 function burst(el, ctx, glyph, color, n = 6, rise = false) {
-    const { x, y } = generative.origin(el, ctx);
-    return generative.all(Array.from({ length: n }, (_, i) => {
-        const a = rise ? -Math.PI / 2 + generative.rand(-0.6, 0.6) : (i / n) * Math.PI * 2;
-        const d = generative.rand(28, 56);
-        return generative.spawn(x - 7, y - 7, `font-size:14px;line-height:1;color:${color}`, ctx, [{ transform: 'translate(0,0) scale(.4)', opacity: 1 }, { transform: `translate(${Math.cos(a) * d}px,${Math.sin(a) * d}px) scale(1)`, opacity: 0 }], { duration: generative.rand(500, 750), easing: 'cubic-bezier(.2,.8,.3,1)' }, glyph);
+    const { x, y } = shared.origin(el, ctx);
+    return shared.all(Array.from({ length: n }, (_, i) => {
+        const a = rise ? -Math.PI / 2 + shared.rand(-0.6, 0.6) : (i / n) * Math.PI * 2;
+        const d = shared.rand(28, 56);
+        return shared.spawn(x - 7, y - 7, `font-size:14px;line-height:1;color:${color}`, ctx, [{ transform: 'translate(0,0) scale(.4)', opacity: 1 }, { transform: `translate(${Math.cos(a) * d}px,${Math.sin(a) * d}px) scale(1)`, opacity: 0 }], { duration: shared.rand(500, 750), easing: 'cubic-bezier(.2,.8,.3,1)' }, glyph);
     }));
 }
 const click = (name, description, defaults, run) => ({ name, kind: 'click', description, defaults, run });
@@ -1570,7 +1571,7 @@ const MICRO_FX = [
         if (el.getAttribute('aria-busy') === 'true')
             return;
         el.setAttribute('aria-busy', 'true');
-        const [bar, remove] = generative.overlay(el, `background:${o.color}55;transform-origin:left;transform:scaleX(0)`);
+        const [bar, remove] = shared.overlay(el, `background:${o.color}55;transform-origin:left;transform:scaleX(0)`);
         const a = ctx.animate(bar, [{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], { duration: o.duration, easing: 'linear', fill: 'forwards' });
         const done = a ? a.finished.catch(() => undefined) : Promise.resolve();
         return done.then(() => {
@@ -1596,12 +1597,12 @@ const MICRO_FX = [
     click('send-plane', 'A paper plane ✈ takes off from the button.', { color: '#22d3ee' }, (el, o, ctx) => {
         const r = el.getBoundingClientRect();
         pop(el, ctx, 0.92, 200);
-        return generative.spawn(r.left + r.width / 2 - 8, r.top + r.height / 2 - 8, `font-size:16px;color:${o.color}`, ctx, [{ transform: 'translate(0,0) rotate(0)', opacity: 1 }, { transform: 'translate(40px,-10px) rotate(-10deg)', opacity: 1, offset: 0.4 }, { transform: 'translate(160px,-90px) rotate(-25deg)', opacity: 0 }], { duration: 800, easing: 'ease-in' }, '✈')?.finished;
+        return shared.spawn(r.left + r.width / 2 - 8, r.top + r.height / 2 - 8, `font-size:16px;color:${o.color}`, ctx, [{ transform: 'translate(0,0) rotate(0)', opacity: 1 }, { transform: 'translate(40px,-10px) rotate(-10deg)', opacity: 1, offset: 0.4 }, { transform: 'translate(160px,-90px) rotate(-25deg)', opacity: 0 }], { duration: 800, easing: 'ease-in' }, '✈')?.finished;
     }),
     click('add-to-cart', 'Bumps `[data-count]` by one and floats a "+1" (`text`).', { text: '+1', color: '#34d399' }, (el, o, ctx) => {
         bumpCount(el, 1, ctx);
-        const { x, y } = generative.origin(el, ctx);
-        return generative.spawn(x - 10, y - 10, `font:700 14px system-ui;color:${o.color}`, ctx, [{ transform: 'translateY(0)', opacity: 1 }, { transform: 'translateY(-40px)', opacity: 0 }], { duration: 700, easing: 'ease-out' }, o.text)?.finished;
+        const { x, y } = shared.origin(el, ctx);
+        return shared.spawn(x - 10, y - 10, `font:700 14px system-ui;color:${o.color}`, ctx, [{ transform: 'translateY(0)', opacity: 1 }, { transform: 'translateY(-40px)', opacity: 0 }], { duration: 700, easing: 'ease-out' }, o.text)?.finished;
     }),
     click('counter-bump', 'Adds `step` to `[data-count]` with a rolling number.', { step: 1 }, (el, o, ctx) => void bumpCount(el, Number(o.step) || 1, ctx)),
     click('upvote', 'Toggles an upvote: the arrow nudges up and `[data-count]` ±1.', {}, (el, _o, ctx) => {
@@ -1635,7 +1636,7 @@ const MICRO_FX = [
     }),
     attn('error-flash', 'Flashes the element red once (no more than one flash per call).', { color: '#ff5c8a' }, (el, o, ctx) => ctx.animate(el, [{ boxShadow: `0 0 0 0 ${o.color}00` }, { boxShadow: `0 0 0 4px ${o.color}`, offset: 0.3 }, { boxShadow: `0 0 0 0 ${o.color}00` }], { duration: 700 })),
     attn('success-check', 'A green ✓ badge pops over the element and fades.', { color: '#34d399' }, (el, o, ctx) => {
-        const [b, remove] = generative.overlay(el, `display:grid;place-items:center;font:700 22px system-ui;color:#fff;background:${o.color}d0`);
+        const [b, remove] = shared.overlay(el, `display:grid;place-items:center;font:700 22px system-ui;color:#fff;background:${o.color}d0`);
         b.textContent = '✓';
         const a = ctx.animate(b, [{ opacity: 0, transform: 'scale(.6)' }, { opacity: 1, transform: 'scale(1)', offset: 0.3 }, { opacity: 1, offset: 0.75 }, { opacity: 0 }], { duration: 1100, easing: 'ease-out' });
         return a ? a.finished.then(remove, remove) : void setTimeout(remove, 900);
@@ -1773,7 +1774,7 @@ const THEME_FX = [
         description: 'A bright diagonal shine sweeps across frosted glass.',
         defaults: { duration: 700 },
         run: (el, o, ctx) => {
-            const [s, remove] = generative.overlay(el, 'overflow:hidden;background:linear-gradient(105deg,transparent 35%,#ffffff8c 50%,transparent 65%);background-size:250% 100%;background-position:120% 0');
+            const [s, remove] = shared.overlay(el, 'overflow:hidden;background:linear-gradient(105deg,transparent 35%,#ffffff8c 50%,transparent 65%);background-size:250% 100%;background-position:120% 0');
             const a = ctx.animate(s, [{ backgroundPosition: '120% 0' }, { backgroundPosition: '-20% 0' }], { duration: o.duration, easing: 'ease-in-out' });
             return a ? a.finished.then(remove, remove) : void remove();
         },
@@ -1785,7 +1786,7 @@ const THEME_FX = [
         reduced: 'run',
         defaults: { opacity: 0.18 },
         run: (el, o, ctx) => {
-            const [s, remove] = generative.overlay(el, `opacity:${o.opacity};background:repeating-linear-gradient(0deg,#000 0 1px,transparent 1px 3px);mix-blend-mode:multiply`);
+            const [s, remove] = shared.overlay(el, `opacity:${o.opacity};background:repeating-linear-gradient(0deg,#000 0 1px,transparent 1px 3px);mix-blend-mode:multiply`);
             const a = ctx.reduced ? null : ctx.animate(s, [{ backgroundPosition: '0 0' }, { backgroundPosition: '0 30px' }], { duration: 2400, iterations: Infinity, easing: 'linear' });
             return () => {
                 a?.cancel();
@@ -2197,9 +2198,9 @@ function registerAllEffects() {
         registry.registerEffects(defs);
 }
 
+exports.fxLayer = shared.fxLayer;
 exports.GENERATIVE_FX = generative.GENERATIVE_FX;
 exports.canvasBackground = generative.canvasBackground;
-exports.fxLayer = generative.fxLayer;
 exports.hexRgb = generative.hexRgb;
 exports.noise2 = generative.noise2;
 exports.ANIMATION_FORMAT = ANIMATION_FORMAT;

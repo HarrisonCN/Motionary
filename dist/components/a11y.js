@@ -1,5 +1,5 @@
-import { v as deprecate, i as getMotionSensitivity, a as MOTION_SENSITIVITY_LEVELS, g as configureComponents, u as adoptStyles } from '../chunks/base-C_3cAoRz.js';
-export { d as adaptKeyframes } from '../chunks/base-C_3cAoRz.js';
+import { x as deprecate, i as getMotionSensitivity, a as MOTION_SENSITIVITY_LEVELS, g as configureComponents, v as adoptStyles } from '../chunks/base-DchG4q_S.js';
+export { d as adaptKeyframes } from '../chunks/base-DchG4q_S.js';
 import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-DucKMQr_.js';
 
 /**

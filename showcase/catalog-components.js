@@ -8,7 +8,7 @@ import { componentSnippets } from './components-catalog.js';
 
 export const COMPONENT_CATEGORY = { id: 'components', en: 'Components 6.x', zh: '组件 6.x' };
 
-const GLYPHS = { carousel: '🎠', 'tab-bar': '⇆', disclosure: '▾', stories: '◔', 'fx-gpu': '🔥', 'fx-nature': '🌸', 'fx-splash': '💧' };
+const GLYPHS = { carousel: '🎠', 'tab-bar': '⇆', disclosure: '▾', stories: '◔', 'fx-gpu': '🔥', 'fx-nature': '🌸', 'fx-splash': '💧', 'toast-stack': '🔔', modal: '🗔', sheet: '⇥', menu: '☰', 'fx-text': '🅰', 'fx-text-loop': '〰', 'fx-text-trail': '✍' };
 
 const svelte = (esm, html) => `<script>\n  ${esm.split('\n/*')[0].trim().replace(/\n/g, '\n  ')}\n</script>\n\n${html}`;
 
