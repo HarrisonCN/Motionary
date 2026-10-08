@@ -1,0 +1,13 @@
+usa-badge-wall{display:block;width:var(--usa-bw-w,320px);max-width:100%;font:600 12px/1.2 system-ui,sans-serif}
+.usa-bw-count{margin:0 0 8px;font-size:13px;opacity:.75;font-variant-numeric:tabular-nums}
+.usa-bw-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:8px;margin:0;padding:0;list-style:none}
+.usa-bw-badge{position:relative;display:grid;justify-items:center;gap:4px;padding:8px 4px;border-radius:12px;background:linear-gradient(160deg,#fde68a,#f59e0b);color:#422006;text-align:center;overflow:hidden}
+.usa-bw-icon{font-size:24px;line-height:1}
+.usa-bw-name{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.usa-bw-badge[data-locked]{background:var(--usa-bw-locked,#e2e8f0);color:#64748b}
+.usa-bw-badge[data-locked] .usa-bw-icon{filter:grayscale(1);opacity:.45}
+.usa-bw-badge[data-locked]::after{content:"🔒";position:absolute;top:3px;right:4px;font-size:11px}
+.usa-bw-badge[data-shine]::before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.75) 50%,transparent 65%) 120% 0/250% 100%;animation:usa-bw-shine 1s ease-in-out .3s both;pointer-events:none}
+@keyframes usa-bw-shine{to{background-position:-20% 0}}
+.usa-bw-live{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media (prefers-reduced-motion:reduce){.usa-bw-badge[data-shine]::before{animation:none;display:none}}

@@ -605,6 +605,49 @@ export const components = [
     '<usa-fx effect="reaction-burst" trigger="click"><button>❤️</button></usa-fx>\n<usa-fx effect="read-receipt" trigger="enter"><span>Seen</span></usa-fx>',
     '<div class="demo-row"><usa-fx effect="reaction-burst" trigger="click"><button type="button" class="demo-btn">❤️ React</button></usa-fx><usa-fx effect="read-receipt" trigger="enter"><span class="demo-seen">Seen 12:04</span></usa-fx><usa-fx effect="mention-glow" trigger="enter"><b>@ada</b></usa-fx></div>',
     [{ key: 'effect', values: ['reaction-burst', 'read-receipt', 'mention-glow'] }], '7.4'),
+  // ---- 7.5 -------------------------------------------------------------
+  W('usa-leaderboard', 'ui', 'Leaderboard', '排行榜',
+    '7.5: a ranked list — when scores change, rows glide to their new rank, climbers flash green with ▲n and fallers red with ▼n, scores roll and the top three get medals.',
+    '7.5：排行榜 —— 分数变化时各行平滑滑到新名次，上升者闪绿并显示 ▲n，下降者闪红并显示 ▼n，分数滚动，前三名显示奖牌。',
+    ['leaderboard', 'ranking', 'score', 'game', 'flip'],
+    '<usa-leaderboard me="Ada">\n  <li data-score="980">Ada</li>\n  <li data-score="870">Alan</li>\n  <li data-score="760">Grace</li>\n</usa-leaderboard>\n<script>board.setScore(\'Grace\', 1000);</script>',
+    '<div class="demo-col"><usa-leaderboard class="demo-lb" me="Ada" limit="4"><li data-score="980">Ada</li><li data-score="870">Alan</li><li data-score="760">Grace</li><li data-score="640">Linus</li></usa-leaderboard><button type="button" class="demo-btn" data-lb>Shuffle scores</button></div>',
+    undefined, { since: '7.5' }),
+  W('usa-xp-bar', 'ui', 'XP bar', '经验条',
+    '7.5: an experience bar — add(n) fills it smoothly; overflowing fills to the end, the level badge pops and the bar restarts with the remainder (several levels if needed).',
+    '7.5：经验条 —— add(n) 平滑填充；溢出时填满、等级徽章弹跳，并以余数重新开始（必要时连升多级）。',
+    ['xp', 'level', 'progress', 'game', 'experience'],
+    '<usa-xp-bar level="3" xp="40" per="100"></usa-xp-bar>\n<script>bar.add(75); // → level 4, 15 XP</script>',
+    '<div class="demo-col"><usa-xp-bar level="3" xp="40" per="100"></usa-xp-bar><button type="button" class="demo-btn" data-xp>+35 XP</button></div>',
+    undefined, { since: '7.5' }),
+  W('usa-badge-wall', 'ui', 'Badge wall', '成就徽章墙',
+    '7.5: an achievement grid — locked badges are grey with a 🔒; unlock(name) flips a badge to its colour side with a shine and the “n / m unlocked” counter updates.',
+    '7.5：成就徽章墙 —— 未解锁徽章为灰色并带 🔒；unlock(name) 让徽章翻转到彩色面并闪光，“已解锁 n / m”计数随之更新。',
+    ['badges', 'achievements', 'unlock', 'game', 'trophy'],
+    '<usa-badge-wall>\n  <li data-icon="🏆">First win</li>\n  <li data-icon="🔥" data-locked>7-day streak</li>\n</usa-badge-wall>\n<script>wall.unlock(\'7-day streak\');</script>',
+    '<div class="demo-col"><usa-badge-wall class="demo-bw"><li data-icon="🏆">First win</li><li data-icon="🔥" data-locked>Streak</li><li data-icon="🎯" data-locked>Sharp</li><li data-icon="🚀" data-locked>Launch</li></usa-badge-wall><button type="button" class="demo-btn" data-bw>Unlock next</button></div>',
+    undefined, { since: '7.5' }),
+  W('usa-prize-wheel', 'ui', 'Prize wheel', '幸运大转盘',
+    '7.5: a lottery wheel — Spin whirls it and it eases out on the result (random or spin(index)), the pointer ticks and the wheel glows; usa:result reports the prize.',
+    '7.5：幸运大转盘 —— 点击 Spin 旋转并缓停在结果上（随机或 spin(index)），指针抖动、转盘发光；usa:result 返回奖品。',
+    ['wheel', 'lottery', 'spin', 'prize', 'game'],
+    '<usa-prize-wheel segments="10% off,Free ship,Try again,🎁 Gift,5% off,Jackpot"></usa-prize-wheel>',
+    '<usa-prize-wheel class="demo-pw" segments="10% off,Free ship,Retry,🎁 Gift,5% off,Jackpot" duration="2600"></usa-prize-wheel>',
+    undefined, { since: '7.5' }),
+  X('fx-unlock', ['fx-game', 'registerGamePack'], 'Achievement unlock & level up', '成就解锁与升级',
+    '7.5: achievement-unlock slides a toast in with a light sweep and pops its icon; level-up scales the element with a ring shockwave; xp-gain floats “+50 XP”.',
+    '7.5：achievement-unlock 让成就提示滑入、光带扫过并弹出图标；level-up 放大元素并发出环形冲击波；xp-gain 飘出“+50 XP”。',
+    ['achievement', 'unlock', 'level', 'xp', 'game'],
+    '<usa-fx effect="achievement-unlock" trigger="enter"><div class="toast"><span data-icon>🏆</span> First win!</div></usa-fx>\n<usa-fx effect="xp-gain" trigger="enter"><b data-xp="50">Quest done</b></usa-fx>',
+    '<div class="demo-col"><usa-fx effect="achievement-unlock" trigger="enter"><div class="demo-ach"><span data-icon>🏆</span> First win!</div></usa-fx><usa-fx effect="level-up" trigger="click"><button type="button" class="demo-btn">Level up</button></usa-fx></div>',
+    [{ key: 'effect', values: ['achievement-unlock', 'level-up', 'xp-gain'] }], '7.5'),
+  X('fx-loot', ['fx-game', 'registerGamePack'], 'Chest open & coin burst', '宝箱开启与金币迸发',
+    '7.5: chest-open flips the lid and throws sparks; coin-burst arcs coins up out of the element and lets them fall away.',
+    '7.5：chest-open 翻开箱盖并抛出火花；coin-burst 让金币从元素中呈抛物线飞出并落下。',
+    ['chest', 'loot', 'coins', 'reward', 'game'],
+    '<usa-fx effect="chest-open" trigger="click"><div class="chest"><span data-lid>🟫</span>📦</div></usa-fx>\n<usa-fx effect="coin-burst" trigger="click"><button>Claim</button></usa-fx>',
+    '<div class="demo-row"><usa-fx effect="chest-open" trigger="click"><button type="button" class="demo-chest" aria-label="Open chest"><span data-lid>🟫</span>🧰</button></usa-fx><usa-fx effect="coin-burst" trigger="click"><button type="button" class="demo-btn">🪙 Claim</button></usa-fx></div>',
+    [{ key: 'effect', values: ['chest-open', 'coin-burst'] }], '7.5'),
 ];
 
 /** item id → live-demo wiring. */
@@ -693,5 +736,21 @@ export const wire = {
   presence: (stage) => {
     const S = ['online', 'away', 'busy', 'offline'];
     stage.querySelector('[data-pr]')?.addEventListener('click', () => stage.querySelectorAll('usa-presence').forEach((p) => { p.status = S[(S.indexOf(p.status) + 1) % 4]; }));
+  },
+  leaderboard: (stage) => {
+    const b = stage.querySelector('usa-leaderboard');
+    stage.querySelector('[data-lb]')?.addEventListener('click', () => b.rows.forEach((r) => b.setScore(r.name, r.score + Math.round(Math.random() * 300))));
+  },
+  'xp-bar': (stage) => {
+    stage.querySelector('[data-xp]')?.addEventListener('click', () => stage.querySelector('usa-xp-bar').add(35));
+  },
+  'badge-wall': (stage) => {
+    const SEED = '<li data-icon="🏆">First win</li><li data-icon="🔥" data-locked>Streak</li><li data-icon="🎯" data-locked>Sharp</li><li data-icon="🚀" data-locked>Launch</li>';
+    stage.querySelector('[data-bw]')?.addEventListener('click', () => {
+      const w = stage.querySelector('usa-badge-wall');
+      const n = w.badges.find((x) => x.locked);
+      if (n) w.unlock(n.name);
+      else { const c = w.cloneNode(false); c.innerHTML = SEED; w.replaceWith(c); }
+    });
   },
 };
