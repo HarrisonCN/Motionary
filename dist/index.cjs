@@ -2,9 +2,10 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var core = require('./chunks/core-qpECfEkb.cjs');
-var stagger = require('./chunks/stagger-CLc3j58T.cjs');
-var core$1 = require('./chunks/core-BDcszY4L.cjs');
+var core$1 = require('./chunks/core-BYLtO0Po.cjs');
+var stagger = require('./chunks/stagger-CvhYlKrF.cjs');
+var core = require('./chunks/core-BDcszY4L.cjs');
+var presets = require('./chunks/presets-D2ksQNzJ.cjs');
 require('./chunks/base-B5i8qQPR.cjs');
 require('./components/tokens.cjs');
 
@@ -29,8 +30,8 @@ const PASSIVE = { passive: true };
  * parallax('.badge', { speed: -0.15, axis: 'x' });
  */
 function parallax(target, options = {}) {
-    const els = core.resolveTargets(target);
-    if (!els.length || !core.hasDOM() || !core.supportsObserver())
+    const els = core$1.resolveTargets(target);
+    if (!els.length || !core$1.hasDOM() || !core$1.supportsObserver())
         return () => undefined;
     const { speed = 0.2, axis = 'y', root = null, respectReducedMotion = true } = options;
     const name = options.progressVar ? (options.progressVar.startsWith('--') ? options.progressVar : `--${options.progressVar}`) : '--sa-parallax';
@@ -43,9 +44,9 @@ function parallax(target, options = {}) {
         const style = el.style;
         if (!style)
             return;
-        const p = core.getScrollProgress(el, root);
+        const p = core$1.getScrollProgress(el, root);
         style.setProperty(name, String(+p.toFixed(4)));
-        if (respectReducedMotion && core.prefersReducedMotion()) {
+        if (respectReducedMotion && core$1.prefersReducedMotion()) {
             style.removeProperty('translate');
             return;
         }
@@ -127,20 +128,22 @@ function parallax(target, options = {}) {
  * ScrollAnimate.observe('.my-element', { animation: 'fade-in-up' });
  * ```
  */
-const ScrollAnimate = /* @__PURE__ */ core.createScrollAnimate();
+const ScrollAnimate = /* @__PURE__ */ core$1.createScrollAnimate();
 
-exports.EASING_MAP = core.EASING_MAP;
-exports.PRESETS = core.PRESETS;
-exports.createScrollAnimate = core.createScrollAnimate;
-exports.getScrollProgress = core.getScrollProgress;
-exports.resolveEasing = core.resolveEasing;
-exports.resolvePreset = core.resolvePreset;
-exports.supportsScrollTimeline = core.supportsScrollTimeline;
+exports.createScrollAnimate = core$1.createScrollAnimate;
+exports.getScrollProgress = core$1.getScrollProgress;
+exports.supportsScrollTimeline = core$1.supportsScrollTimeline;
 exports.staggerChildren = stagger.staggerChildren;
-exports.TIMELINE_PRESETS = core$1.TIMELINE_PRESETS;
-exports.resolvePosition = core$1.resolvePosition;
-exports.supportsNativeScrub = core$1.supportsNativeScrub;
-exports.timeline = core$1.timeline;
+exports.TIMELINE_PRESETS = core.TIMELINE_PRESETS;
+exports.resolvePosition = core.resolvePosition;
+exports.supportsNativeScrub = core.supportsNativeScrub;
+exports.timeline = core.timeline;
+exports.EASING_MAP = presets.EASING_MAP;
+exports.PRESETS = presets.PRESETS;
+exports.registerPresets = presets.registerPresets;
+exports.resolveEasing = presets.resolveEasing;
+exports.resolvePreset = presets.resolvePreset;
+exports.reversePreset = presets.reversePreset;
 exports.default = ScrollAnimate;
 exports.parallax = parallax;
 //# sourceMappingURL=index.cjs.map

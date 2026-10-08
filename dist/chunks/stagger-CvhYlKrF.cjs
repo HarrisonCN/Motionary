@@ -1,4 +1,6 @@
-import { h as hasDOM, s as supportsObserver, c as createScrollAnimate, p as prepareElement, a as stopAnimation } from './core-mV_TPgG_.js';
+'use strict';
+
+var core = require('./core-BYLtO0Po.cjs');
 
 /**
  * use-scroll-animate - Staggered children
@@ -14,14 +16,14 @@ let fallback = null;
  * const stop = staggerChildren(document.querySelector('ul'), { stagger: 60, observeChildren: true });
  */
 function staggerChildren(container, options = {}, instance) {
-    if (!container || !hasDOM() || !supportsObserver())
+    if (!container || !core.hasDOM() || !core.supportsObserver())
         return () => undefined; // leave content visible
-    const sa = instance || fallback || (fallback = createScrollAnimate());
+    const sa = instance || fallback || (fallback = core.createScrollAnimate());
     const { stagger = 80, delay = 0, threshold = 0.1, rootMargin = '0px', observeChildren = false, ...rest } = options;
     let items = Array.from(container.children);
     let revealed = false;
     const late = [];
-    items.forEach((child) => prepareElement(child));
+    items.forEach((child) => core.prepareElement(child));
     const io = new IntersectionObserver((entries) => {
         if (revealed || !entries.some((entry) => entry.isIntersecting))
             return;
@@ -42,7 +44,7 @@ function staggerChildren(container, options = {}, instance) {
                     if (!(node instanceof Element) || node.parentNode !== container)
                         return;
                     if (!revealed) {
-                        prepareElement(node);
+                        core.prepareElement(node);
                         items.push(node);
                     }
                     else {
@@ -72,7 +74,7 @@ function staggerChildren(container, options = {}, instance) {
         // Stopped before the container was revealed: never leave the children hidden.
         if (!revealed) {
             revealed = true;
-            items.forEach((child) => stopAnimation(child));
+            items.forEach((child) => core.stopAnimation(child));
             items = [];
         }
         late.forEach((el) => sa.unobserve(el));
@@ -80,5 +82,5 @@ function staggerChildren(container, options = {}, instance) {
     };
 }
 
-export { staggerChildren as s };
-//# sourceMappingURL=stagger-BFAhKknX.js.map
+exports.staggerChildren = staggerChildren;
+//# sourceMappingURL=stagger-CvhYlKrF.cjs.map

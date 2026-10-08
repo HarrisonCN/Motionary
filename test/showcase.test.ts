@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { PRESETS } from '../src/presets';
+import { EXTENDED_PRESETS } from '../src/extended-presets-data';
 // Plain ESM modules of the no-build showcase site
 // @ts-ignore - untyped .js
 import { ITEMS, CATEGORIES, findItem, matches } from '../showcase/catalog.js';
@@ -13,9 +14,9 @@ import { STRINGS } from '../showcase/i18n.js';
 const root = resolve(__dirname, '..');
 
 describe('showcase catalog', () => {
-  it('has a product card for every built-in preset (kept in sync with src/presets.ts)', () => {
+  it('has a product card for every built-in preset (core src/presets.ts + 6.1 extended set)', () => {
     const ids = ITEMS.filter((i: any) => i.kind === 'preset').map((i: any) => i.id).sort();
-    expect(ids).toEqual(Object.keys(PRESETS).sort());
+    expect(ids).toEqual(Array.from(new Set([...Object.keys(PRESETS), ...Object.keys(EXTENDED_PRESETS)])).sort());
   });
 
   it('covers the features and every framework entry point', () => {

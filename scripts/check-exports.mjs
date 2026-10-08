@@ -5,7 +5,8 @@ import { existsSync } from 'node:fs';
 
 const require = createRequire(import.meta.url);
 const entries = {
-  'use-scroll-animate': ['createScrollAnimate', 'getScrollProgress', 'supportsScrollTimeline', 'staggerChildren', 'timeline', 'parallax', 'PRESETS'],
+  'use-scroll-animate': ['createScrollAnimate', 'getScrollProgress', 'supportsScrollTimeline', 'staggerChildren', 'timeline', 'parallax', 'PRESETS', 'registerPresets', 'reversePreset'],
+  'use-scroll-animate/presets/extended': ['EXTENDED_PRESETS', 'EXTENDED_PRESET_CATEGORIES', 'registerExtendedPresets'],
   'use-scroll-animate/react': ['createReactHooks'],
   'use-scroll-animate/vue': ['createVueComposables'],
   'use-scroll-animate/svelte': ['scrollAnimate', 'scrollStagger'],
@@ -42,7 +43,7 @@ const root = await import('use-scroll-animate');
 assert.equal(typeof root.default.init, 'function', 'default instance');
 assert.equal(typeof require('use-scroll-animate').default.init, 'function', 'default instance (CJS)');
 // Browser bundles ship at their CDN paths (served by file path, not through `exports`)
-for (const f of ['dist/index.umd.js', 'dist/element.umd.js', 'dist/components.umd.js', 'dist/components.css']) assert.ok(existsSync(new URL(`../${f}`, import.meta.url)), `missing ${f}`);
+for (const f of ['dist/index.umd.js', 'dist/presets-extended.umd.js', 'dist/element.umd.js', 'dist/components.umd.js', 'dist/components.css']) assert.ok(existsSync(new URL(`../${f}`, import.meta.url)), `missing ${f}`);
 require('use-scroll-animate/package.json');
 // Component stylesheets resolve through `exports`
 for (const css of ['components.css', 'components/text.css']) assert.ok(require.resolve(`use-scroll-animate/${css}`).endsWith(`dist/${css}`), css);
@@ -52,4 +53,7 @@ assert.doesNotThrow(() => comps.defineComponents());
 assert.equal(comps.toast('x'), null);
 // 2.0: the main entry no longer re-exports the framework factories
 assert.equal(root.createReactHooks, undefined, 'createReactHooks moved to /react');
+// 6.1: importing presets/extended registers its presets in the shared table
+assert.ok(root.PRESETS['bounce-in-up'] && root.PRESETS['clip-diamond'], 'extended presets registered');
+assert.ok(Object.keys(root.PRESETS).length >= 200, 'preset count');
 console.log(`exports OK (ESM + CJS): ${Object.keys(entries).join(', ')}`);

@@ -69,8 +69,9 @@ async function loadLibrary() {
     base = CDN;
     lib = await import(CDN + 'index.js');
   }
-  // Entry points used to dogfood the Web Component and the Svelte action
-  const [el, sv] = await Promise.allSettled([import(base + 'element.js'), import(base + 'svelte.js')]);
+  // Entry points used to dogfood the Web Component and the Svelte action, plus the
+  // 6.1 extended presets (registering them into the shared preset table on import)
+  const [el, sv] = await Promise.allSettled([import(base + 'element.js'), import(base + 'svelte.js'), import(base + 'presets/extended.js')]);
   if (el.status === 'fulfilled') el.value.defineScrollAnimate();
   if (sv.status === 'fulfilled') svelteMod = sv.value;
   sa = lib.createScrollAnimate();
@@ -156,10 +157,12 @@ async function copyWithFeedback(btn, text, msg = T('toast.copied')) {
 /* ------------------------------------------------------------------ */
 
 const presetNames = () => Object.keys(lib.PRESETS);
+/** Scroll-linked demos on the native view timeline: the engine feature and the scrub-* presets. */
+const isEngine = (item) => item.recipe === 'engine' || item.recipe === 'scrub';
 
 function reversed(animation) {
   const kf = lib.resolvePreset(animation);
-  return { from: { ...kf.to }, to: { ...kf.from } };
+  return lib.reversePreset ? lib.reversePreset(kf) : { from: { ...kf.to }, to: { ...kf.from } };
 }
 
 /** Ping-pong auto-scroll of a mini scroll container (the thing being demoed is scrolling). */
@@ -348,9 +351,10 @@ function createDemo(item, host, state, { firstReveal = false } = {}) {
           progressMode: st.progressMode,
           onProgress: (_el, p) => (num.textContent = `${Math.round(p * 100)}%`),
         });
-      } else if (item.recipe === 'engine') {
-        const rows = h('div', { class: 'erow' });
-        for (let i = 0; i < 5; i++) rows.append(h('div', { class: 'obj' }));
+      } else if (isEngine(item)) {
+        const scrub = item.recipe === 'scrub';
+        const rows = h('div', { class: 'erow' + (scrub ? ' is-scrub' : '') });
+        for (let i = 0; i < (scrub ? 3 : 5); i++) rows.append(h('div', { class: 'obj' }));
         track.style.height = 'auto';
         track.append(rows);
         const opts = { animation: animationValue(lib.PRESETS, st), engine: st.engine };
@@ -618,7 +622,7 @@ function controlDefs() {
     progressMode: { type: 'seg', values: ['scroll', 'ratio'], labels: ['scroll', 'ratio'], label: 'opt.progressMode' },
     engine: { type: 'seg', values: ['css', 'auto', 'js'], labels: ['css', 'auto', 'js'], label: 'opt.engine' },
     viewStart: { ...SELECT(['entry 0%', 'entry 50%', 'cover 0%', 'cover 20%']), label: 'opt.viewStart' },
-    viewEnd: { ...SELECT(['entry 100%', 'cover 40%', 'cover 50%', 'contain 50%']), label: 'opt.viewEnd' },
+    viewEnd: { ...SELECT(['entry 100%', 'cover 40%', 'cover 50%', 'contain 50%', 'cover 100%']), label: 'opt.viewEnd' },
     gap: { type: 'range', min: -500, max: 400, step: 50, unit: 'ms', label: 'opt.gap' },
   };
 }
@@ -633,6 +637,8 @@ function controlsFor(item) {
       return ['progressMode'];
     case 'engine':
       return ['animation', 'engine', 'viewStart', 'viewEnd'];
+    case 'scrub':
+      return ['engine', 'viewStart', 'viewEnd'];
     case 'sequence':
       return ['duration', 'gap'];
     default: {
@@ -741,7 +747,8 @@ function renderKeyframes() {
   const kf = lib.resolvePreset(anim);
   const fmt = (o) => Object.entries(o).map(([k, v]) => `${k}: ${v}`).join('\n');
   box.querySelector('[data-from]').textContent = fmt(kf.from);
-  box.querySelector('[data-to]').textContent = fmt(kf.to);
+  const mid = kf.frames && kf.frames.length ? `\n\n+ ${kf.frames.length} ${T('detail.frames')}` : '';
+  box.querySelector('[data-to]').textContent = fmt(kf.to) + mid;
 }
 
 function selectTab(id, focus) {
@@ -821,7 +828,7 @@ function liveNote(item) {
   if (item.framework === 'svelte') return T('detail.live', { what: 'scrollAnimate action (dist/svelte.js)' }) + ' ' + T('detail.demoNote');
   if (item.framework) return T('detail.demoNote');
   if (item.recipe === 'parallax') return T('detail.live', { what: 'parallax()' }) + ' ' + T('detail.paraNote');
-  if (item.recipe === 'engine') return T('detail.engineInfo', { v: T(lib.supportsScrollTimeline() ? 'detail.yes' : 'detail.no') });
+  if (isEngine(item)) return T('detail.engineInfo', { v: T(lib.supportsScrollTimeline() ? 'detail.yes' : 'detail.no') });
   const what = { stagger: 'staggerChildren()', parallax: 'parallax()', progress: 'progressVar', sequence: 'timeline()' }[item.recipe] || 'ScrollAnimate.animate() / observe()';
   return T('detail.live', { what });
 }
@@ -851,7 +858,7 @@ function renderDetail(item, keepState) {
   const stage = h('div', { class: 'big-stage', id: 'big-stage' });
   const isReveal = item.recipe === 'reveal';
   const bar = h('div', { class: 'stage-bar' });
-  if (item.recipe === 'parallax' || item.recipe === 'progress' || item.recipe === 'engine') {
+  if (item.recipe === 'parallax' || item.recipe === 'progress' || isEngine(item)) {
     bar.append(h('button', { class: 'pill-btn primary', type: 'button', 'data-loop': true }));
   } else {
     bar.append(h('button', { class: 'pill-btn primary', type: 'button', 'data-replay': true, html: `${ICON.replay}<span>${T('detail.replay')}</span>` }));
@@ -874,7 +881,7 @@ function renderDetail(item, keepState) {
       h('ul', { class: 'tags', style: 'margin-top:10px' }, [item.id, ...(item.tags || [])].map((tg) => h('li', { class: 'tag', text: tg }))),
     ])
   );
-  if (isReveal || item.recipe === 'stagger' || item.recipe === 'engine') {
+  if (isReveal || item.recipe === 'stagger' || isEngine(item)) {
     right.append(
       h('section', { id: 'keyframes' }, [
         h('h3', { class: 'section-title', text: T('detail.keyframes') }),
@@ -933,7 +940,7 @@ function renderDetail(item, keepState) {
   sheet.append(head, h('div', { class: 'detail-body' }, [left, right]));
   mountDetailDemo(stage);
   renderControls($('#controls', sheet));
-  if (isReveal || item.recipe === 'stagger' || item.recipe === 'engine') renderKeyframes();
+  if (isReveal || item.recipe === 'stagger' || isEngine(item)) renderKeyframes();
   selectTab(detail.tab);
   updateLoopButton();
   if (detail.mode === 'scroll') setMode('scroll');

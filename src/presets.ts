@@ -3,14 +3,11 @@
  * Defines keyframes for all built-in animation presets
  */
 
-import type { AnimationPreset, CustomAnimation, EasingType } from './types';
+import type { AnimationPreset, CorePreset, CustomAnimation, EasingType, ExtendedPreset, PresetKeyframes } from './types';
 
-type KeyframeMap = {
-  from: Record<string, string | number>;
-  to: Record<string, string | number>;
-};
+type KeyframeMap = PresetKeyframes;
 
-export const PRESETS: Record<AnimationPreset, KeyframeMap> = {
+const CORE: Record<CorePreset, KeyframeMap> = {
   'fade-in': {
     from: { opacity: 0 },
     to: { opacity: 1 },
@@ -146,15 +143,48 @@ export const PRESETS: Record<AnimationPreset, KeyframeMap> = {
   },
 };
 
+/**
+ * One preset table per page, shared through a global symbol so every copy of
+ * the library (ESM entries, the UMD bundle, `presets/extended`) sees presets
+ * registered by any other copy. `<usa-reveal>` / `<usa-stagger>` read it too.
+ */
+const share = (core: Record<string, KeyframeMap>): Record<string, KeyframeMap> => {
+  const g = globalThis as any;
+  const key = Symbol.for('use-scroll-animate.presets');
+  return (g[key] = Object.assign(g[key] || {}, core));
+};
+
+/**
+ * Every registered preset: the 33 core presets, plus the 6.1 extended set once
+ * `use-scroll-animate/presets/extended` is loaded, plus your own.
+ */
+export const PRESETS = /*#__PURE__*/ share(CORE) as Record<CorePreset, KeyframeMap> & Partial<Record<ExtendedPreset, KeyframeMap>>;
+
+/**
+ * Add (or replace) presets by name: `registerPresets({ 'my-pop': { from, to, frames? } })`.
+ * They work everywhere a preset name does (`animation`, `exit`, `data-sa-animation`,
+ * `<scroll-animate>`, `<usa-reveal effect>`).
+ */
+export function registerPresets(presets: Record<string, PresetKeyframes>): void {
+  Object.assign(PRESETS, presets);
+}
+
+/** The same keyframes played backwards (exit animations). */
+export function reversePreset(p: KeyframeMap): KeyframeMap {
+  return { from: p.to, to: p.from, frames: p.frames && p.frames.map((f) => ({ ...f, offset: 1 - f.offset })).reverse() };
+}
+
+const lookup = (name: string): KeyframeMap | undefined => (PRESETS as Record<string, KeyframeMap>)[name.trim()];
+
 export function resolvePreset(animation: AnimationPreset | AnimationPreset[] | CustomAnimation): KeyframeMap {
   if (typeof animation === 'string') {
-    return PRESETS[animation.trim() as AnimationPreset] ?? PRESETS['fade-in-up'];
+    return lookup(animation) ?? PRESETS['fade-in-up'];
   }
   
   if (Array.isArray(animation)) {
     const combined: KeyframeMap = { from: {}, to: {} };
     animation.forEach(name => {
-      const preset = PRESETS[name.trim() as AnimationPreset];
+      const preset = lookup(name);
       if (preset) {
         Object.entries(preset.from).forEach(([key, val]) => {
           if (key === 'transform' && combined.from[key]) {

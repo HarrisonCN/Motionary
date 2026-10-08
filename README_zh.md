@@ -25,6 +25,36 @@
 - 🧩 **框架无关**：完美支持原生 JS、React、Vue、Svelte 等。内置一流的 React Hooks 和 Vue Composables。
 - ♿ **无障碍**：原生支持 `prefers-reduced-motion`。
 
+## 滚动预设 2.0（v6.1）🎞️
+
+**214 个滚动入场预设**：33 个核心预设 + **181 个扩展预设**，扩展集位于独立、可摇树的入口（gzip 约 4.7 kB；核心包体积不变、仍在预算内）。在 [动画商店](https://harrisoncn.github.io/use-scroll-animate/showcase/) 中可实时预览并复制代码；全部预设及其关键帧见 [docs/presets.md](./docs/presets.md)。
+
+```js
+import ScrollAnimate from 'use-scroll-animate';
+import 'use-scroll-animate/presets/extended'; // 导入即注册扩展预设
+
+ScrollAnimate.observe('.card', { animation: 'bounce-in-up', duration: 900 });
+ScrollAnimate.observe('.hero img', { animation: 'scrub-shrink', engine: 'css', viewRange: ['cover 0%', 'cover 100%'] });
+```
+
+无构建页面：先加载 `dist/index.umd.js`，再加载 `dist/presets-extended.umd.js`（自动注册）。预设名可用于 `animation` / `exit`、`data-sa-animation`、`useScrollAnimate` 等框架适配器、`<scroll-animate animation>` 以及 `<usa-reveal effect>` / `<usa-stagger effect>`。只动画 `transform`、`opacity`、`filter`、`clip-path`，开启“减少动态效果”时不播放。预设现在支持中间关键帧 `frames`（过冲、弹跳、故障），自定义预设同样可用：`registerPresets({ 'my-pop': { from, to, frames } })`。
+
+| 分类 | 总数 | 6.1 新增 |
+|---|---:|---|
+| 淡入 | 19 | `fade-in-up-sm` · `fade-in-down-sm` · `fade-in-left-sm` · `fade-in-right-sm` · `fade-in-up-lg` · `fade-in-down-lg` · `fade-in-left-lg` · `fade-in-right-lg` · `fade-in-up-left` · `fade-in-up-right` · `fade-in-down-left` · `fade-in-down-right` · `fade-in-scale` · `fade-in-half` |
+| 缩放 | 23 | `zoom-in-up` · `zoom-in-down` · `zoom-in-left` · `zoom-in-right` · `zoom-out-up` · `zoom-out-down` · `zoom-out-left` · `zoom-out-right` · `zoom-in-big` · `zoom-out-big` · `zoom-bounce` · `zoom-in-rotate` · `scale-x-left` · `scale-x-right` · `scale-y-top` · `scale-y-bottom` · `stretch-x` · `stretch-y` |
+| 3D 翻转 | 22 | `flip-x-reverse` · `flip-y-reverse` · `flip-y-full` · `flip-diagonal` · `flip-diagonal-reverse` · `flip-left` · `flip-right` · `unfold-down` · `unfold-up` · `door-open-left` · `door-open-right` · `fold-in` · `flip-x-bounce` · `flip-y-bounce` · `swing-in-top` · `swing-in-bottom` · `swing-in-left` · `swing-in-right` |
+| 滑入 | 20 | `slide-up-spring` · `slide-down-spring` · `slide-left-spring` · `slide-right-spring` · `slide-up-sm` · `slide-down-sm` · `back-in-up` · `back-in-down` · `back-in-left` · `back-in-right` · `light-speed-in-left` · `light-speed-in-right` · `rise-in` · `sink-in` · `float-in-up` · `float-in-down` |
+| 旋转与倾斜 | 20 | `roll-in-left` · `roll-in-right` · `spiral-in` · `spiral-in-reverse` · `spin-in` · `rotate-in-up-left` · `rotate-in-up-right` · `rotate-in-down-left` · `rotate-in-down-right` · `skew-in-left` · `skew-in-y` · `shear-in` · `shear-in-reverse` · `twist-in` · `tilt-in-left` · `tilt-in-right` |
+| 模糊与遮罩 | 14 | `blur-in-down` · `blur-in-left` · `blur-in-right` · `blur-in-strong` · `blur-in-zoom` · `blur-in-scale` · `blur-in-x` · `mask-up` · `mask-down` · `mask-left` · `mask-right` · `blur-mask-up` |
+| 裁剪揭示 | 22 | `clip-circle-top` · `clip-circle-bottom` · `clip-circle-left` · `clip-circle-right` · `clip-circle-corner` · `clip-ellipse` · `clip-diamond` · `clip-split-x` · `clip-split-y` · `clip-box` · `clip-pill` · `clip-blinds` · `clip-blinds-x` · `clip-diagonal` · `clip-diagonal-reverse` · `clip-slant-right` · `clip-slant-left` |
+| 弹跳与弹性 | 17 | `bounce-in` · `bounce-in-up` · `bounce-in-down` · `bounce-in-left` · `bounce-in-right` · `elastic-in` · `elastic-in-x` · `rubber-in` · `jello-in` · `wobble-in` · `tada-in` · `heartbeat-in` · `drop-in` · `pop-in` · `squash-in` · `shake-in` · `swing-in` |
+| 色彩与光影 | 14 | `brightness-in` · `darken-in` · `color-in` · `saturate-in` · `hue-in` · `sepia-in` · `invert-in` · `contrast-in` · `exposure-in` · `vintage-in` · `blur-bright-in` · `shadow-lift` · `neon-glow-in` · `glow-in` |
+| 景深与透视 | 10 | `perspective-in-up` · `perspective-in-down` · `perspective-in-left` · `perspective-in-right` · `depth-push` · `depth-pull` · `depth-in-up` · `swoop-in-left` · `swoop-in-right` · `card-tilt-in` |
+| 故障与特效 | 9 | `glitch-in` · `glitch-in-color` · `typewriter` · `typewriter-lines` · `hinge-in` · `flicker-in` · `scan-in` · `materialize` · `teleport-in` |
+| 错峰列表 | 8 | `stagger-fade-up` · `stagger-pop` · `stagger-rise` · `stagger-slide` · `stagger-flip` · `stagger-blur` · `stagger-zoom` · `stagger-drop` |
+| 随滚动 | 12 | `scrub-parallax-up` · `scrub-parallax-down` · `scrub-rotate` · `scrub-spin` · `scrub-scale` · `scrub-shrink` · `scrub-pan-left` · `scrub-pan-right` · `scrub-tilt` · `scrub-fade-through` · `scrub-blur-through` · `scrub-reveal-x` |
+
 ## 动画组件（v2.2）🧩
 
 **30 个零依赖的动画 Web Components**（`<usa-*>`），分为六大类——**同时适用于网页与 Windows 桌面软件**（Electron、Tauri、WinUI/WPF/WinForms 中的 WebView2、PWA）。仅基于 Custom Elements + CSS + Web Animations：可摇树、SSR 安全、全面遵循 `prefers-reduced-motion`。**[在线组件库](https://harrisoncn.github.io/use-scroll-animate/showcase/components.html)** · [组件文档](./docs/components.md)（英文）· [Windows 应用指南](./docs/windows-apps.md)（英文）
@@ -70,6 +100,7 @@ defineComponents(); // 或按分类：import { defineTextComponents } from 'use-
 
 ## 文档
 
+- [预设一览](./docs/presets.md)（全部 214 个预设，英文）
 - [API 参考](./docs/API.md)（英文）· [演示页](./demo/index.html)（每个预设都可点击，无需构建）
 - 迁移指南：[从 AOS 迁移](./docs/migration-from-aos.md) · [从 GSAP ScrollTrigger 迁移](./docs/migration-from-gsap-scrolltrigger.md)
 - [升级到 2.0](./docs/deprecations.md)：`createReactHooks` / `createVueComposables` 只能从 `use-scroll-animate/react` / `/vue` 导入；`dist/index.mjs`、`dist/index.esm.js`、`dist/types/*` 与 `dist/*` 深层导入已移除；默认引擎改为 `'auto'`。CDN 地址 `dist/index.umd.js` 不变。详见 [CHANGELOG](./CHANGELOG.md) 的 MIGRATION 部分。

@@ -28,6 +28,43 @@ In 2025, performance is everything. Traditional scroll animation libraries often
 - ♿ **Accessible**: Respects `prefers-reduced-motion` out of the box (content is shown immediately, no entrance or parallax motion).
 - 🖥️ **SSR-safe**: Importing (and even calling) the API on the server is a no-op.
 
+## Scroll presets 2.0 (v6.1) 🎞️
+
+**214 scroll-reveal presets**: the 33 core presets plus **181 extended presets** in a separate, tree-shakeable entry (≈ 4.7 kB gzip; the core bundle is unchanged within its budget). Browse them all with a live demo and copy-paste code in the [Animation Store](https://harrisoncn.github.io/use-scroll-animate/showcase/) — every preset, with its keyframes, is listed in [docs/presets.md](./docs/presets.md).
+
+```js
+import ScrollAnimate from 'use-scroll-animate';
+import 'use-scroll-animate/presets/extended'; // registers the extended set on import
+
+ScrollAnimate.observe('.card', { animation: 'bounce-in-up', duration: 900 });
+ScrollAnimate.observe('.hero img', { animation: 'scrub-shrink', engine: 'css', viewRange: ['cover 0%', 'cover 100%'] });
+```
+
+```html
+<script src="https://unpkg.com/use-scroll-animate@6/dist/index.umd.js"></script>
+<script src="https://unpkg.com/use-scroll-animate@6/dist/presets-extended.umd.js"></script>
+<div data-sa data-sa-animation="clip-diamond">…</div>
+<script>ScrollAnimate.default.init();</script>
+```
+
+The names work everywhere a preset does: `animation` / `exit`, `data-sa-animation`, `useScrollAnimate` and the other framework adapters, `<scroll-animate animation>`, and `<usa-reveal effect>` / `<usa-stagger effect>`. Only `transform`, `opacity`, `filter` and `clip-path` are animated, and nothing moves under `prefers-reduced-motion`. Presets can now carry intermediate `frames` (overshoot, bounce, glitch) — so can your own: `registerPresets({ 'my-pop': { from, to, frames } })`.
+
+| Category | Total | New in 6.1 |
+|---|---:|---|
+| Fade | 19 | `fade-in-up-sm` · `fade-in-down-sm` · `fade-in-left-sm` · `fade-in-right-sm` · `fade-in-up-lg` · `fade-in-down-lg` · `fade-in-left-lg` · `fade-in-right-lg` · `fade-in-up-left` · `fade-in-up-right` · `fade-in-down-left` · `fade-in-down-right` · `fade-in-scale` · `fade-in-half` |
+| Zoom & scale | 23 | `zoom-in-up` · `zoom-in-down` · `zoom-in-left` · `zoom-in-right` · `zoom-out-up` · `zoom-out-down` · `zoom-out-left` · `zoom-out-right` · `zoom-in-big` · `zoom-out-big` · `zoom-bounce` · `zoom-in-rotate` · `scale-x-left` · `scale-x-right` · `scale-y-top` · `scale-y-bottom` · `stretch-x` · `stretch-y` |
+| Flip 3D | 22 | `flip-x-reverse` · `flip-y-reverse` · `flip-y-full` · `flip-diagonal` · `flip-diagonal-reverse` · `flip-left` · `flip-right` · `unfold-down` · `unfold-up` · `door-open-left` · `door-open-right` · `fold-in` · `flip-x-bounce` · `flip-y-bounce` · `swing-in-top` · `swing-in-bottom` · `swing-in-left` · `swing-in-right` |
+| Slide | 20 | `slide-up-spring` · `slide-down-spring` · `slide-left-spring` · `slide-right-spring` · `slide-up-sm` · `slide-down-sm` · `back-in-up` · `back-in-down` · `back-in-left` · `back-in-right` · `light-speed-in-left` · `light-speed-in-right` · `rise-in` · `sink-in` · `float-in-up` · `float-in-down` |
+| Rotate & skew | 20 | `roll-in-left` · `roll-in-right` · `spiral-in` · `spiral-in-reverse` · `spin-in` · `rotate-in-up-left` · `rotate-in-up-right` · `rotate-in-down-left` · `rotate-in-down-right` · `skew-in-left` · `skew-in-y` · `shear-in` · `shear-in-reverse` · `twist-in` · `tilt-in-left` · `tilt-in-right` |
+| Blur & mask | 14 | `blur-in-down` · `blur-in-left` · `blur-in-right` · `blur-in-strong` · `blur-in-zoom` · `blur-in-scale` · `blur-in-x` · `mask-up` · `mask-down` · `mask-left` · `mask-right` · `blur-mask-up` |
+| Clip reveal | 22 | `clip-circle-top` · `clip-circle-bottom` · `clip-circle-left` · `clip-circle-right` · `clip-circle-corner` · `clip-ellipse` · `clip-diamond` · `clip-split-x` · `clip-split-y` · `clip-box` · `clip-pill` · `clip-blinds` · `clip-blinds-x` · `clip-diagonal` · `clip-diagonal-reverse` · `clip-slant-right` · `clip-slant-left` |
+| Bounce & elastic | 17 | `bounce-in` · `bounce-in-up` · `bounce-in-down` · `bounce-in-left` · `bounce-in-right` · `elastic-in` · `elastic-in-x` · `rubber-in` · `jello-in` · `wobble-in` · `tada-in` · `heartbeat-in` · `drop-in` · `pop-in` · `squash-in` · `shake-in` · `swing-in` |
+| Color & light | 14 | `brightness-in` · `darken-in` · `color-in` · `saturate-in` · `hue-in` · `sepia-in` · `invert-in` · `contrast-in` · `exposure-in` · `vintage-in` · `blur-bright-in` · `shadow-lift` · `neon-glow-in` · `glow-in` |
+| Depth & perspective | 10 | `perspective-in-up` · `perspective-in-down` · `perspective-in-left` · `perspective-in-right` · `depth-push` · `depth-pull` · `depth-in-up` · `swoop-in-left` · `swoop-in-right` · `card-tilt-in` |
+| Glitch & special | 9 | `glitch-in` · `glitch-in-color` · `typewriter` · `typewriter-lines` · `hinge-in` · `flicker-in` · `scan-in` · `materialize` · `teleport-in` |
+| Stagger-ready | 8 | `stagger-fade-up` · `stagger-pop` · `stagger-rise` · `stagger-slide` · `stagger-flip` · `stagger-blur` · `stagger-zoom` · `stagger-drop` |
+| Scroll-linked | 12 | `scrub-parallax-up` · `scrub-parallax-down` · `scrub-rotate` · `scrub-spin` · `scrub-scale` · `scrub-shrink` · `scrub-pan-left` · `scrub-pan-right` · `scrub-tilt` · `scrub-fade-through` · `scrub-blur-through` · `scrub-reveal-x` |
+
 ## Animated components (v2.2+) 🧩
 
 **30 dependency-free animated Web Components** (`<usa-*>`) in six categories — for **web pages and Windows desktop apps** (Electron, Tauri, WebView2 in WinUI/WPF/WinForms, PWAs). Custom Elements + CSS + Web Animations only: tree-shakable, SSR-safe, `prefers-reduced-motion` everywhere. **[Live gallery](https://harrisoncn.github.io/use-scroll-animate/showcase/components.html)** · [Component docs](./docs/components.md) · [Windows apps guide](./docs/windows-apps.md) · [Next / Astro / React / Vue](./docs/frameworks-ssr.md) · [Accessibility](./docs/accessibility.md)
@@ -80,6 +117,7 @@ Whole bundle ≈ 22 kB gzip (JS + CSS); one category 3.5–6.4 kB; a single comp
 - 📖 [API reference](./docs/API.md) — every export, option, attribute and config key
 - 🧩 [Animated components](./docs/components.md) — every `<usa-*>` element, by category · [Windows apps guide](./docs/windows-apps.md) (Electron, Tauri, WebView2, PWA)
 - 🎛️ [Demo / preset playground](./demo/index.html) — every preset clickable, no build step (open `demo/index.html` from a clone)
+- 🎞️ [Preset reference](./docs/presets.md) — all 214 presets by category (33 core + 181 extended)
 - 🔁 Migration guides: [from AOS](./docs/migration-from-aos.md) · [from GSAP ScrollTrigger](./docs/migration-from-gsap-scrolltrigger.md)
 - ⚠️ [Upgrading to 2.0](./docs/deprecations.md) — what 2.0 removed and what replaces it (also the MIGRATION section of the [CHANGELOG](./CHANGELOG.md))
 
@@ -237,7 +275,7 @@ We've added high-quality physics-based easing presets:
 
 Every option is also available as a data attribute: `data-sa-animation`, `data-sa-duration`, `data-sa-delay`, `data-sa-easing`, `data-sa-threshold`, `data-sa-root-margin`, `data-sa-once`, `data-sa-repeat`, `data-sa-offset`, `data-sa-stagger`, `data-sa-progress`, `data-sa-progress-var` (bare attribute = `--sa-progress`), `data-sa-engine`, `data-sa-exit` (bare = `true`, or a preset), `data-sa-view-range` (`"entry 0%, cover 40%"`).
 
-**Presets:** `fade-in`, `fade-in-up|down|left|right`, `zoom-in`, `zoom-out`, `scale-up`, `flip-x`, `flip-y`, `flip-up`, `flip-down`, `slide-up|down|left|right`, `bounce`, `rotate-in`, `rotate-left`, `rotate-right`, `blur-in`, `blur-in-up`, `skew-in`, `scale-x`, `scale-y`, `clip-up|down|left|right`, `clip-circle`, `shimmer`, `pulse`, `swing`. Combine them with an array, e.g. `['fade-in', 'clip-up']`.
+**Presets (33 core):** `fade-in`, `fade-in-up|down|left|right`, `zoom-in`, `zoom-out`, `scale-up`, `flip-x`, `flip-y`, `flip-up`, `flip-down`, `slide-up|down|left|right`, `bounce`, `rotate-in`, `rotate-left`, `rotate-right`, `blur-in`, `blur-in-up`, `skew-in`, `scale-x`, `scale-y`, `clip-up|down|left|right`, `clip-circle`, `shimmer`, `pulse`, `swing`. Combine them with an array, e.g. `['fade-in', 'clip-up']`. **+ 181 extended presets** with `import 'use-scroll-animate/presets/extended'` — see *Scroll presets 2.0* above and [docs/presets.md](./docs/presets.md).
 
 **Global config** (`createScrollAnimate(config)` / `configure()`): `defaultAnimation`, `defaultDuration`, `defaultDelay`, `defaultEasing`, `defaultThreshold`, `defaultRootMargin`, `defaultRepeat`, `defaultOnce`, `defaultOffset`, `hiddenClass`, `visibleClass`, `useClassNames`, `disabled`, `root`, `autoUnregister` (default `true`), `defaultEngine` (default `'auto'`).
 

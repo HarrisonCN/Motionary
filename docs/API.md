@@ -17,7 +17,8 @@
 
 | Import | Contents |
 |---|---|
-| `use-scroll-animate` | Default instance, `createScrollAnimate`, `staggerChildren`, `timeline`, `parallax`, `getScrollProgress`, `supportsScrollTimeline`, `PRESETS`, `resolvePreset`, `resolveEasing`, `EASING_MAP`, all types |
+| `use-scroll-animate` | Default instance, `createScrollAnimate`, `staggerChildren`, `timeline`, `parallax`, `getScrollProgress`, `supportsScrollTimeline`, `PRESETS`, `registerPresets`, `reversePreset`, `resolvePreset`, `resolveEasing`, `EASING_MAP`, all types |
+| `use-scroll-animate/presets/extended` | Registers the 181 extended presets on import (6.1). Exports `EXTENDED_PRESETS`, `EXTENDED_PRESET_CATEGORIES`, `registerExtendedPresets()`. `<script>`: `dist/presets-extended.umd.js` (global `ScrollAnimatePresets`) |
 | `use-scroll-animate/react` | `createReactHooks(React)` |
 | `use-scroll-animate/vue` | `createVueComposables({ ref, onMounted, onUnmounted })` |
 | `use-scroll-animate/svelte` | `scrollAnimate`, `scrollStagger` actions |
@@ -102,7 +103,11 @@ Boolean attributes are true when present unless their value is `"false"`.
 
 ## Presets & easings
 
-`PRESETS` (`Record<AnimationPreset, { from, to }>`): `fade-in`, `fade-in-up`, `fade-in-down`, `fade-in-left`, `fade-in-right`, `zoom-in`, `zoom-out`, `scale-up`, `flip-x`, `flip-y`, `flip-up`, `flip-down`, `slide-up`, `slide-down`, `slide-left`, `slide-right`, `bounce`, `rotate-in`, `rotate-left`, `rotate-right`, `blur-in`, `blur-in-up`, `skew-in`, `scale-x`, `scale-y`, `clip-up`, `clip-down`, `clip-left`, `clip-right`, `clip-circle`, `shimmer`, `pulse`, `swing`.
+`PRESETS` (`{ from, to, frames? }` by name) — the 33 core presets: `fade-in`, `fade-in-up`, `fade-in-down`, `fade-in-left`, `fade-in-right`, `zoom-in`, `zoom-out`, `scale-up`, `flip-x`, `flip-y`, `flip-up`, `flip-down`, `slide-up`, `slide-down`, `slide-left`, `slide-right`, `bounce`, `rotate-in`, `rotate-left`, `rotate-right`, `blur-in`, `blur-in-up`, `skew-in`, `scale-x`, `scale-y`, `clip-up`, `clip-down`, `clip-left`, `clip-right`, `clip-circle`, `shimmer`, `pulse`, `swing`.
+
+**Extended presets (6.1)** — 181 more after `import 'use-scroll-animate/presets/extended'` (or the `dist/presets-extended.umd.js` script); full list by category with keyframes in [presets.md](./presets.md). `PRESETS` is one table per page shared through `Symbol.for('use-scroll-animate.presets')`, so the ESM entries, the UMD bundle and `<usa-reveal effect>` / `<usa-stagger effect>` all see every registered preset.
+
+`registerPresets({ name: { from, to, frames? } })` adds or replaces presets (usable by name everywhere). `frames` are intermediate keyframes with `offset` 0–1 (exclusive) played between `from` and `to`; a keyframe may carry its own `easing` (e.g. `steps(16, end)`). Presets combined in an array use only `from` / `to`. `reversePreset(p)` returns the same keyframes backwards (used by `exit`). Scroll-linked `scrub-*` presets are meant for `{ engine: 'css', viewRange: ['cover 0%', 'cover 100%'] }`.
 
 `EASING_MAP`: `linear`, `ease`, `ease-in`, `ease-out`, `ease-in-out`, `spring`, `soft-spring`, `heavy-bounce`. `resolvePreset(animation)` and `resolveEasing(easing)` expose the resolution used internally.
 

@@ -1,6 +1,6 @@
 {
   "name": "use-scroll-animate",
-  "version": "6.0.1",
+  "version": "6.1.0",
   "description": "A lightweight, high-performance, dependency-free scroll animation library and animated UI components (Web Components) for the web and Windows web-view apps.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -66,6 +66,16 @@
       "require": {
         "types": "./dist/element.d.cts",
         "default": "./dist/element.cjs"
+      }
+    },
+    "./presets/extended": {
+      "import": {
+        "types": "./dist/presets/extended.d.ts",
+        "default": "./dist/presets/extended.js"
+      },
+      "require": {
+        "types": "./dist/presets/extended.d.cts",
+        "default": "./dist/presets/extended.cjs"
       }
     },
     "./components": {
@@ -431,7 +441,10 @@
     "CHANGELOG.md"
   ],
   "sideEffects": [
-    "*.css"
+    "*.css",
+    "./dist/presets/extended.js",
+    "./dist/presets/extended.cjs",
+    "./dist/presets-extended.umd.js"
   ],
   "scripts": {
     "build": "npm run clean && node --max-old-space-size=4096 ./node_modules/rollup/dist/bin/rollup -c rollup.config.mjs",

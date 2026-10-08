@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.1.0] - 2026-10-08
+
+### Added — Scroll presets 2.0
+- **181 new scroll-reveal presets** (214 in total) in a separate, tree-shakeable entry: `import 'use-scroll-animate/presets/extended'` registers them on import (exports `EXTENDED_PRESETS`, `EXTENDED_PRESET_CATEGORIES`, `registerExtendedPresets()`); `<script>` pages load `dist/presets-extended.umd.js` after (or before) `dist/index.umd.js`. ≈ 4.7 kB gzip; the core bundle stays within its budget (UMD 8.81 kB / 9 kB).
+  - Fade (+14: small/large distances, diagonals, settle, half) · Zoom & scale (+18: zoom-in/out up/down/left/right, from zero / 2×, zoom-bounce, origin-aware scale-x/y, stretch) · Flip 3D (+18: reverse, half turn, diagonal, edge flips, door-open, unfold, fold, bounce flips, swing-in) · Slide (+16: overshoot slides, back-in ×4, light-speed ×2, rise / sink, float) · Rotate & skew (+16: roll, spiral, spin, corner pivots, skew / shear, twist, tilt) · Blur & mask (+12: directional blur, zoom blur, motion blur, mask-up/down/left/right) · Clip reveal (+17: circles from edges/corner, ellipse, diamond, curtains, box, pill, blinds, diagonal & slanted wipes) · **Bounce & elastic** (+17: bounce-in ×5, elastic, rubber band, jello, wobble, tada, heartbeat, drop, pop, squash & stretch, shake, swing) · **Color & light** (+14: brightness, darken, colour / saturate / hue / sepia / invert / contrast / exposure / vintage, bloom, shadow lift, neon glow, glow) · **Depth & perspective** (+10) · **Glitch & special** (+9: glitch, colour glitch, typewriter, typewriter lines, hinge, flicker, scan, materialize, teleport) · **Stagger-ready** (+8 `stagger-*`) · **Scroll-linked** (+12 `scrub-*`: parallax drift, rotate / spin / scale / shrink / tilt on scroll, horizontal pan, sticky fade, focus through, wipe — for `engine: 'css'` with `viewRange: ['cover 0%', 'cover 100%']`).
+  - Only `transform`, `opacity`, `filter` and `clip-path` are animated (plus a constant `transform-origin`); reduced motion shows the element without moving it.
+- Presets may carry **intermediate keyframes** (`frames: [{ offset, …props }]`, optional per-keyframe `easing`), played between `from` and `to` by the JS and native engines and reversed for `exit`. Custom `{ from, to, frames }` animations work too.
+- `registerPresets(map)` and `reversePreset(p)` in the main entry. `PRESETS` is now one table per page shared through `Symbol.for('use-scroll-animate.presets')`, so the ESM entries, the UMD bundle and the extended set see each other's presets.
+- `<usa-reveal effect>` / `<usa-stagger effect>` accept any registered preset name (their own effects keep priority).
+- Types: `CorePreset`, `ExtendedPreset` (`AnimationPreset` = both), `PresetKeyframes`, `AnimationFrame`.
+
+### Showcase
+- The Animation Store lists all 214 presets (**227 items**, up from 46) in 14 preset categories with filter chips, live demos and copy-paste code; extended presets add the `presets/extended` import (or the CDN script) to every code tab. Scroll-linked presets demo on the native view timeline; stagger-ready presets demo on a row of items; the keyframes panel shows intermediate keyframe counts. The demo page loads the extended set too.
+
+### Docs
+- New `docs/presets.md` (every preset by category), README (EN / 中文 / 日本語) "Scroll presets 2.0" section, API reference, `<usa-reveal>` docs. `docs/ROADMAP.md`: 6.1 is Scroll presets 2.0; the previous 6.1–6.9 plans move to 6.2–6.10.
+
+### Tests
+- New `test/presets-extended.test.ts`: every preset (core + extended) has interpolable keyframes (same properties and function lists from → frames → to, GPU-friendly properties, ordered offsets), type union / categories in sync, shared registry (ESM + UMD source), frames through `observe()`, reduced motion, `<usa-reveal>` lookup, store count ≥ 160, recipes and generated code.
+
 ## [6.0.1] - 2026-10-08
 
 ### Fixed

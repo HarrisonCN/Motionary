@@ -15,9 +15,13 @@ export { createScrollAnimate, getScrollProgress, supportsScrollTimeline } from '
 export { staggerChildren } from './stagger';
 export { timeline, resolvePosition, TIMELINE_PRESETS, supportsNativeScrub } from './components/timeline/core';
 export { parallax } from './parallax';
-export { PRESETS, resolvePreset, resolveEasing, EASING_MAP } from './presets';
+export { PRESETS, registerPresets, reversePreset, resolvePreset, resolveEasing, EASING_MAP } from './presets';
 export type {
   AnimationPreset,
+  CorePreset,
+  ExtendedPreset,
+  PresetKeyframes,
+  AnimationFrame,
   EasingType,
   AnimationKeyframe,
   CustomAnimation,
