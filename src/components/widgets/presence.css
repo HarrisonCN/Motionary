@@ -1,0 +1,15 @@
+usa-presence{--s:var(--usa-pr2-size,48px);position:relative;display:inline-grid;place-items:center;width:var(--s);height:var(--s);vertical-align:middle}
+.usa-pr2-face{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;overflow:hidden;background:linear-gradient(135deg,#a78bfa,#22d3ee);color:#fff;font:700 calc(var(--s) * .36)/1 system-ui,sans-serif}
+.usa-pr2-face img{width:100%;height:100%;object-fit:cover}
+.usa-pr2-dot,.usa-pr2-ripple{position:absolute;right:0;bottom:0;width:calc(var(--s) * .28);height:calc(var(--s) * .28);border-radius:50%;box-sizing:border-box}
+.usa-pr2-dot{border:2px solid var(--usa-pr2-ring,#fff);background:#94a3b8;transition:background-color .3s}
+.usa-pr2-ripple{background:#22c55e;pointer-events:none}
+usa-presence[data-state=online] .usa-pr2-dot{background:#22c55e}
+usa-presence[data-state=away] .usa-pr2-dot{background:#f59e0b}
+usa-presence[data-state=busy] .usa-pr2-dot{background:#ef4444}
+usa-presence[speaking] .usa-pr2-face{box-shadow:0 0 0 3px #22c55e;animation:usa-pr2-speak 1.2s ease-in-out infinite}
+@keyframes usa-pr2-speak{50%{box-shadow:0 0 0 6px rgba(34,197,94,.35)}}
+usa-presence[story]::before{content:"";position:absolute;inset:-4px;border-radius:50%;background:conic-gradient(#f59e0b,#ef4444,#d946ef,#7c3aed,#f59e0b);animation:usa-pr2-spin 3s linear infinite;z-index:-1}
+usa-presence[story] .usa-pr2-face{box-shadow:0 0 0 2px var(--usa-pr2-ring,#fff)}
+@keyframes usa-pr2-spin{to{transform:rotate(1turn)}}
+@media (prefers-reduced-motion:reduce){usa-presence[speaking] .usa-pr2-face,usa-presence[story]::before{animation:none}.usa-pr2-dot{transition:none}}

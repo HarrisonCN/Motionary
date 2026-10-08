@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.4.0] - 2026-10-08
+
+### Added
+- **4 new components (7.4)** in `motionary/components/widgets` (also in `dist/widgets.umd.js`):
+  - `<usa-message-list>` — chat thread from `<p data-from data-me data-time>` children or `push(msg)`: bubbles pop in from their side, consecutive messages group, the list sticks to the bottom (smooth) or shows a “↓ New messages” pill when you scrolled up; `typing(name)` shows animated typing dots until the next message; `messages`, `usa:message`. `role="log"` + `aria-live="polite"`.
+  - `<usa-reactions>` — emoji reaction bar (`emojis`, `counts`, `picker`): clicking toggles your reaction (emoji pop, count roll, floating copies), ＋ springs open a picker; `counts`, `mine`, `toggle()`, `usa:react`. `parseReactions()`.
+  - `<usa-notification-bell>` — bell + unread badge + dropdown (`<li data-time data-read>` children): `notify()` swings the bell, bumps the badge and slides the notice in; `markAllRead()` shrinks the badge away; `unread`, `notices`, `open`, `ring()`; Esc / outside click close; `usa:notify`, `usa:read`.
+  - `<usa-presence>` — avatar + status dot (`status` online | away | busy | offline, `name`, `src`): coming online sends a ripple, `speaking` pulses a ring, `story` spins a gradient ring; initials fallback. `PRESENCE_STATES`, `initials()`.
+- **Chat & social motion — `motionary/fx/social`** (= `motionary/components/fx-social`, `registerSocialPack()`, also in `registerEffectPacks()`): `typing-dots` (loop), `message-in` (enter), `reaction-burst` (click), `read-receipt` (enter), `mention-glow` (attention). `fanAngles()`.
+- Showcase: 6 new gallery cards with copyable code and live demos; Animation Store 305 → 311 items.
+- Note: the plan's “avatar stack” already ships as `<usa-avatar-stack>` (unchanged), so 7.4 adds `<usa-presence>` instead.
+
+### Fixed
+- `<usa-reactions>` (pre-release staging): two type errors broke `tsc` — `picker.hidden` (now `boolean | "until-found"` in the DOM lib) passed to a boolean toggle, and `.type` set on an `HTMLElement` — fixed (`=== true`, `setAttribute('type','button')`).
+
+### Accessibility
+- Message list = `log` (polite) with a labelled typing bubble; reactions = labelled `group` of `aria-pressed` toggle buttons with counts in their labels; bell = `button` with `aria-expanded` and the unread count in its label, list = labelled region, Esc returns focus; presence = labelled `img` ("Ada Lovelace, online"). Reduced motion: no pop, smooth scroll, roll, float, swing, bump, slide, ripple, pulse or ring spin; typing dots are static; `reaction-burst` does nothing, `read-receipt` / `mention-glow` show their end state.
+
 ## [7.3.0] - 2026-10-08
 
 ### Added

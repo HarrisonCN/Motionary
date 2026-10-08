@@ -810,6 +810,92 @@ declare function splitTime(sec: number): {
 };
 declare function defineCountdown(tag?: string): CustomElementConstructor | undefined;
 
+interface ChatMessage {
+    text: string;
+    from?: string;
+    me?: boolean;
+    time?: string;
+}
+/**
+ * `<usa-message-list>` (7.4) — a chat thread. Messages come from `<p>`
+ * children (`data-me`, `data-from`, `data-time`) or `push(msg)`: each new
+ * bubble pops in from its side, consecutive bubbles from the same sender are
+ * grouped, and the list sticks to the bottom (smooth scroll) unless the
+ * reader scrolled up — then a “↓ New messages” pill appears. `typing(name)`
+ * shows an animated “… is typing” bubble until the next message (or
+ * `typing(false)`). A `log` with `aria-live="polite"`. Reduced motion: no pop
+ * or smooth scroll, the typing dots are static.
+ */
+interface UsaMessageListElement extends UsaElement {
+    readonly messages: ChatMessage[];
+    push(msg: ChatMessage): void;
+    typing(who: string | false): void;
+}
+declare function defineMessageList(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-reactions>` (7.4) — an emoji reaction bar (Slack / iMessage style).
+ * `emojis` ("👍,❤️,😂,🎉") with optional `counts` ("3,1,0,0"). Clicking a pill
+ * toggles your reaction: the count rolls up / down, the emoji pops and a few
+ * copies float up. A ＋ button opens a small picker that springs open. Each
+ * pill is a `button` with `aria-pressed` and a label ("❤️ 2 reactions").
+ * `usa:react` (`{ emoji, on, count }`). Reduced motion: no pop, roll or float.
+ */
+interface UsaReactionsElement extends UsaElement {
+    /** emoji → count */
+    readonly counts: Record<string, number>;
+    /** Your active reactions. */
+    readonly mine: string[];
+    toggle(emoji: string, on?: boolean): void;
+}
+/** Parse "👍,❤️" + "3,1" into ordered [emoji, count] pairs (7.4). */
+declare function parseReactions(emojis: string, counts?: string): [string, number][];
+declare function defineReactions(tag?: string): CustomElementConstructor | undefined;
+
+interface BellNotice {
+    id?: string;
+    text: string;
+    time?: string;
+    read?: boolean;
+}
+/**
+ * `<usa-notification-bell>` (7.4) — a bell button with an unread badge and a
+ * dropdown list. `notify(n)` rings the bell (a pendulum swing), bumps the
+ * badge and slides the notice in at the top of the list; opening the list and
+ * “Mark all read” clears the badge (it shrinks away). Notices from `<li>`
+ * children too. Esc / outside click close it. The bell is a `button` with
+ * `aria-expanded` and a label including the unread count; the list is a
+ * labelled region. `usa:notify`, `usa:read`. Reduced motion: no swing, bump
+ * or slide.
+ */
+interface UsaNotificationBellElement extends UsaElement {
+    readonly unread: number;
+    readonly notices: BellNotice[];
+    open: boolean;
+    notify(n: BellNotice | string): void;
+    markAllRead(): void;
+    ring(): void;
+}
+declare function defineNotificationBell(tag?: string): CustomElementConstructor | undefined;
+
+/** Presence states (7.4). */
+declare const PRESENCE_STATES: readonly ["online", "away", "busy", "offline"];
+type PresenceState = (typeof PRESENCE_STATES)[number];
+/**
+ * `<usa-presence>` (7.4) — an avatar with a live status dot: `status`
+ * online | away | busy | offline. Going online sends a ripple from the dot;
+ * every change cross-fades the dot colour; `speaking` adds a pulsing ring
+ * (voice chat), `story` an animated gradient ring (unseen story). Initials from
+ * `name` when there is no `src`. Labelled `img` ("Ada Lovelace, online").
+ * Reduced motion: no ripple, pulse or ring spin.
+ */
+interface UsaPresenceElement extends UsaElement {
+    status: PresenceState;
+}
+/** Initials for a display name (7.4). */
+declare const initials: (name: string) => string;
+declare function definePresence(tag?: string): CustomElementConstructor | undefined;
+
 /**
  * motionary/components/widgets — the 6.x animated UI widgets, in their own
  * entry so `motionary/components` and `components/lite` keep their size
@@ -875,8 +961,12 @@ declare global {
         'usa-cart-drawer': UsaCartDrawerElement;
         'usa-product-gallery': UsaProductGalleryElement;
         'usa-countdown': UsaCountdownElement;
+        'usa-message-list': UsaMessageListElement;
+        'usa-reactions': UsaReactionsElement;
+        'usa-notification-bell': UsaNotificationBellElement;
+        'usa-presence': UsaPresenceElement;
     }
 }
 
-export { CAROUSEL_EFFECTS, EQ_PRESETS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PROGRESS_VARIANTS, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SPARK_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, cartTotal, defineAddToCart, defineBarChart, defineCarousel, defineCartDrawer, defineColorPicker, defineCompare, defineCountdown, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineFileDrop, defineGauge, defineKanban, defineKeyframeEditor, defineKpi, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMilestones, defineModal, defineMusicPlayer, defineNavMorph, defineOdometer, definePagination, defineProductGallery, defineProgressRing, definePullCord, defineSegmented, defineSheet, defineSkeletonReveal, defineSparkline, defineStarRating, defineStepper, defineStories, defineSwipeDeck, defineSwitch, defineTabBar, defineTip, defineToastStack, defineVolumeKnob, defineWeatherCard, defineWidgets, hexToHsv, hsvToHex, monthGrid, pageWindow, parseISODate, parseLRC, sparkPoints, splitTime, stackToast, wrapIndex };
-export type { CartItem, StackToastOptions, UsaAddToCartElement, UsaBarChartElement, UsaCarouselElement, UsaCartDrawerElement, UsaColorPickerElement, UsaCompareElement, UsaCountdownElement, UsaCubeGalleryElement, UsaDatePickerElement, UsaDisclosureElement, UsaDockElement, UsaEqualizerElement, UsaFileDropElement, UsaGaugeElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaKpiElement, UsaLyricsElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMilestonesElement, UsaModalElement, UsaMusicPlayerElement, UsaNavMorphElement, UsaOdometerElement, UsaPaginationElement, UsaProductGalleryElement, UsaProgressRingElement, UsaPullCordElement, UsaSegmentedElement, UsaSheetElement, UsaSkeletonRevealElement, UsaSparklineElement, UsaStarRatingElement, UsaStepperElement, UsaStoriesElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTipElement, UsaToastStackElement, UsaVolumeKnobElement, UsaWeatherCardElement };
+export { CAROUSEL_EFFECTS, EQ_PRESETS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PRESENCE_STATES, PROGRESS_VARIANTS, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SPARK_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, cartTotal, defineAddToCart, defineBarChart, defineCarousel, defineCartDrawer, defineColorPicker, defineCompare, defineCountdown, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineFileDrop, defineGauge, defineKanban, defineKeyframeEditor, defineKpi, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMessageList, defineMilestones, defineModal, defineMusicPlayer, defineNavMorph, defineNotificationBell, defineOdometer, definePagination, definePresence, defineProductGallery, defineProgressRing, definePullCord, defineReactions, defineSegmented, defineSheet, defineSkeletonReveal, defineSparkline, defineStarRating, defineStepper, defineStories, defineSwipeDeck, defineSwitch, defineTabBar, defineTip, defineToastStack, defineVolumeKnob, defineWeatherCard, defineWidgets, hexToHsv, hsvToHex, initials, monthGrid, pageWindow, parseISODate, parseLRC, parseReactions, sparkPoints, splitTime, stackToast, wrapIndex };
+export type { BellNotice, CartItem, ChatMessage, PresenceState, StackToastOptions, UsaAddToCartElement, UsaBarChartElement, UsaCarouselElement, UsaCartDrawerElement, UsaColorPickerElement, UsaCompareElement, UsaCountdownElement, UsaCubeGalleryElement, UsaDatePickerElement, UsaDisclosureElement, UsaDockElement, UsaEqualizerElement, UsaFileDropElement, UsaGaugeElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaKpiElement, UsaLyricsElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMessageListElement, UsaMilestonesElement, UsaModalElement, UsaMusicPlayerElement, UsaNavMorphElement, UsaNotificationBellElement, UsaOdometerElement, UsaPaginationElement, UsaPresenceElement, UsaProductGalleryElement, UsaProgressRingElement, UsaPullCordElement, UsaReactionsElement, UsaSegmentedElement, UsaSheetElement, UsaSkeletonRevealElement, UsaSparklineElement, UsaStarRatingElement, UsaStepperElement, UsaStoriesElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTipElement, UsaToastStackElement, UsaVolumeKnobElement, UsaWeatherCardElement };
