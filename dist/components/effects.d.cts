@@ -107,6 +107,47 @@ declare const PHYSICS_FX: EffectDefinition[];
 declare const PAGE_FX: EffectDefinition[];
 
 /**
+ * 5.5 — generative backgrounds on Canvas 2D, registered through
+ * `registerEffect()` (kind `background`): `flow-field`, `voronoi`,
+ * `mesh-gradient`, `starfield`, `metaballs`, `contours`.
+ *
+ * Shared runner (`canvasBackground()`): a canvas behind the element's content
+ * (`aria-hidden`, pointer-transparent), rendering only while visible
+ * (IntersectionObserver) and the tab is shown, with adaptive quality — the
+ * render scale drops when frames get slow and recovers when they are fast.
+ * Reduced motion: one static frame, no loop.
+ */
+
+interface GenFrame {
+    ctx: CanvasRenderingContext2D;
+    /** CSS-pixel size of the canvas. */
+    w: number;
+    h: number;
+    /** Seconds since start (0 for the static reduced-motion frame). */
+    t: number;
+    /** Render scale 0.35–1 (adaptive quality). */
+    quality: number;
+    /** Per-effect state, created by `init`. */
+    state: any;
+    /** Merged options. */
+    o: any;
+}
+interface GenerativeSpec {
+    init?: (w: number, h: number, o: any) => any;
+    draw: (f: GenFrame) => void;
+}
+/** Deterministic smooth pseudo-noise in [-1, 1] (sum of sines — cheap, no tables). */
+declare function noise2(x: number, y: number, t?: number): number;
+/** Hex `#rrggbb` → [r, g, b]. */
+declare function hexRgb(hex: string): [number, number, number];
+/**
+ * Mount a generative canvas behind `el` and run `spec` on it. Returns the
+ * cleanup. Exposed for custom generative effects.
+ */
+declare function canvasBackground(el: HTMLElement, fx: EffectContext, spec: GenerativeSpec, o: any): () => void;
+declare const GENERATIVE_FX: EffectDefinition[];
+
+/**
  * 5.4 — `<usa-story template="…">` scroll-storytelling templates.
  *
  * - `pin` — a sticky `[data-stage]` while `[data-step]` sections scroll past; the
@@ -156,10 +197,12 @@ declare function registerCardClickEffects(): void;
 declare function registerPhysicsEffects(): void;
 /** 5.3: page-wide transitions and effects. */
 declare function registerPageEffects(): void;
+/** 5.5: generative Canvas 2D backgrounds. */
+declare function registerGenerativeEffects(): void;
 /** Define the 5.x elements of this entry (`<usa-story>`, …) under their default tags. */
 declare function defineEffectElements(): void;
 /** Register the built-ins and every pack (idempotent). */
 declare function registerAllEffects(): void;
 
-export { CARD_FX, CLICK_FX, EFFECT_PACKS, PAGE_FX, PHYSICS_FX, STORY_TEMPLATES, bounceKeyframes, defineEffectElements, defineStory, formatCount, fxLayer, registerAllEffects, registerCardClickEffects, registerPageEffects, registerPhysicsEffects, solveSpring, springKeyframes, storyProgress };
-export type { SpringOptions, StoryTemplate, UsaStoryElement };
+export { CARD_FX, CLICK_FX, EFFECT_PACKS, GENERATIVE_FX, PAGE_FX, PHYSICS_FX, STORY_TEMPLATES, bounceKeyframes, canvasBackground, defineEffectElements, defineStory, formatCount, fxLayer, hexRgb, noise2, registerAllEffects, registerCardClickEffects, registerGenerativeEffects, registerPageEffects, registerPhysicsEffects, solveSpring, springKeyframes, storyProgress };
+export type { GenFrame, GenerativeSpec, SpringOptions, StoryTemplate, UsaStoryElement };

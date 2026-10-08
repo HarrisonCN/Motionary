@@ -400,6 +400,22 @@ defineStory();
 
 Templates `pin` · `gallery` · `zoom` (`zoom="6"`) · `compare` · `counter` · `highlight`. Each sets `--usa-story-progress`, fires `usa-story-step`, and exposes `progress`, `step`, `update()`. Reduced motion: no sliding / zooming, final counter values. Demo: `showcase/story.html`.
 
+### v5.5 Generative backgrounds (`components/effects`)
+
+`flow-field` · `voronoi` · `mesh-gradient` · `starfield` · `metaballs` · `contours` (kind `background`) — Canvas 2D behind the element’s content, rendering only while visible, with adaptive quality; reduced motion draws one static frame.
+
+```html
+<usa-fx effect="mesh-gradient" trigger="load" self class="hero" options='{"colors":["#7c5cff","#ff5c8a","#22d3ee"],"speed":0.6}'>
+  <h1>Hello</h1>
+</usa-fx>
+```
+```js
+import { registerEffect } from 'use-scroll-animate/components/fx';
+import { canvasBackground } from 'use-scroll-animate/components/effects';
+registerEffect({ name: 'pulse-bg', kind: 'background', reduced: 'run',
+  run: (el, o, ctx) => canvasBackground(el, ctx, { draw: ({ ctx: g, w, h, t }) => { g.fillStyle = `hsl(${t * 40} 70% 50%)`; g.fillRect(0, 0, w, h); } }, o) });
+```
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

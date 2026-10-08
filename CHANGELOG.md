@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.5.0] - 2026-10-08
+
+### Added
+- **Generative backgrounds pack** (`use-scroll-animate/components/effects`, `registerGenerativeEffects()`, `GENERATIVE_FX`, kind `background`): `flow-field`, `voronoi`, `mesh-gradient`, `starfield`, `metaballs`, `contours` — Canvas 2D, options `colors`, `background`, `speed`, `quality` plus per-effect knobs (`count`, `seeds`, `blobs`, `stars`, `balls`, `levels`, `cell`…).
+- `canvasBackground(el, ctx, { init, draw }, options)` — the shared runner, exported for custom generative effects: an `aria-hidden`, pointer-transparent canvas behind the content (`isolation: isolate`), renders only while visible (IntersectionObserver) and the tab is shown, resizes with the element, and adapts quality (render scale 0.35–1 drops on sustained slow frames, recovers on fast ones). Helpers `noise2()`, `hexRgb()`.
+- Showcase: **Generative backgrounds** card (switch between all six).
+
+### Accessibility
+- Under reduced motion each background draws one static frame and never loops; canvases are `aria-hidden` and never take pointer events.
+
 ## [5.4.0] - 2026-10-08
 
 ### Added

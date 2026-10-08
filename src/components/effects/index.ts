@@ -16,8 +16,11 @@ import { CARD_FX, CLICK_FX } from './cards-click';
 import { PHYSICS_FX } from './physics';
 import { PAGE_FX } from './page';
 import { defineStory } from './story';
+import { GENERATIVE_FX } from './generative';
 
-export { CARD_FX, CLICK_FX, PHYSICS_FX, PAGE_FX };
+export { CARD_FX, CLICK_FX, PHYSICS_FX, PAGE_FX, GENERATIVE_FX };
+export { canvasBackground, noise2, hexRgb } from './generative';
+export type { GenFrame, GenerativeSpec } from './generative';
 export { solveSpring, springKeyframes, bounceKeyframes } from './physics';
 export type { SpringOptions } from './physics';
 export { defineStory, STORY_TEMPLATES, storyProgress, formatCount } from './story';
@@ -29,6 +32,7 @@ export const EFFECT_PACKS: Record<string, EffectDefinition[]> = {
   'cards-click': [...CARD_FX, ...CLICK_FX],
   physics: PHYSICS_FX,
   page: PAGE_FX,
+  generative: GENERATIVE_FX,
 };
 
 /** 5.1: card & click effects 2.0. */
@@ -44,6 +48,11 @@ export function registerPhysicsEffects(): void {
 /** 5.3: page-wide transitions and effects. */
 export function registerPageEffects(): void {
   registerEffects(EFFECT_PACKS.page);
+}
+
+/** 5.5: generative Canvas 2D backgrounds. */
+export function registerGenerativeEffects(): void {
+  registerEffects(EFFECT_PACKS.generative);
 }
 
 /** Define the 5.x elements of this entry (`<usa-story>`, …) under their default tags. */

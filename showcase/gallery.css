@@ -242,3 +242,4 @@ usa-toggle { --usa-toggle-on: var(--accent); }
 
 .demo-holo{min-height:110px;display:grid;place-items:center;background:linear-gradient(135deg,#1e1b4b,#312e81);color:#fff;border-radius:14px;font-weight:600}
 .demo-fan{justify-content:center}
+.demo-gen{min-height:140px;display:grid;place-items:center;color:#fff;font-weight:700;border-radius:14px;background:transparent}

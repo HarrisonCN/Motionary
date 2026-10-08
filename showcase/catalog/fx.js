@@ -104,6 +104,13 @@ export const components = [
     ['story', 'highlight', 'pin', 'steps', 'scrollytelling'],
     '<usa-story template="pin">\n  <figure data-stage>…chart…</figure>\n  <section data-step>Step 1</section>\n  <section data-step>Step 2</section>\n</usa-story>',
     '<usa-story template="highlight"><p class="demo-note">First, the idea.</p><p class="demo-note">Then the build.</p><p class="demo-note">Finally, the launch.</p></usa-story>'),
+  PK('fx-generative', 'Generative backgrounds', '生成式背景',
+    '5.5: flow field, Voronoi cells, mesh gradient, starfield, metaballs and topographic contours on Canvas 2D — rendered only while visible, with adaptive quality; one static frame under reduced motion.',
+    '5.5：流场、Voronoi 细胞、网格渐变、星空、metaballs 与等高线 —— Canvas 2D 实现，仅在可见时渲染并自适应画质；减少动态效果时只绘制一帧静态画面。',
+    ['background', 'generative', 'canvas', 'flow field', 'voronoi', 'mesh gradient', 'starfield', 'metaballs', 'contours'],
+    '<usa-fx effect="mesh-gradient" trigger="load" self class="hero">\n  <h1>Hello</h1>\n</usa-fx>',
+    '<usa-fx effect="mesh-gradient" trigger="load"><div class="demo-tile demo-gen">Generative</div></usa-fx>',
+    [{ key: 'effect', values: ['mesh-gradient', 'flow-field', 'voronoi', 'starfield', 'metaballs', 'contours'] }]),
 ];
 
 export const helpers = [
