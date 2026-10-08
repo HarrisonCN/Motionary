@@ -350,6 +350,21 @@ registerAllEffects();
 
 Card: `holo` · `glare-sweep` · `book-open` · `card-fan` · `topple` · `float-tilt`. Click: `shockwave` · `ink-splash` · `star-burst` · `jelly-press` · `ring-ripple` · `emoji-rain`. Reduced motion: particles skipped, presses fade, loops don’t start.
 
+### v5.2 Bounce & physics (`components/effects`)
+
+`bounce-in` · `rubber-band` · `elastic-hover` · `drop-bounce` · `gravity-text` · `spring-follow` · `bell-swing` — keyframes come from a damped-spring / gravity solver and play on WAAPI.
+
+```js
+import { registerAllEffects, solveSpring, springKeyframes } from 'use-scroll-animate/components/effects';
+registerAllEffects();
+const { frames, duration } = springKeyframes((p) => ({ transform: `scale(${p})` }), { stiffness: 220, damping: 11 });
+el.animate(frames, { duration });
+```
+```html
+<usa-fx effect="drop-bounce" trigger="enter" options='{"height":160,"bounce":0.6}'><img src="badge.svg" alt="New"></usa-fx>
+<usa-fx effect="elastic-hover" trigger="load"><article class="card">…</article></usa-fx>
+```
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

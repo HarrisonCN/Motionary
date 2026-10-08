@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.2.0] - 2026-10-08
+
+### Added
+- **Bounce & physics pack** (`use-scroll-animate/components/effects`, `registerPhysicsEffects()`, `PHYSICS_FX`): `bounce-in` (spring overshoot), `rubber-band`, `elastic-hover` (springy lift, persistent), `drop-bounce` (gravity + restitution), `gravity-text` (per-character drop, keeps `aria-label`), `spring-follow` (element springs toward the pointer), `bell-swing` (damped swing from the top).
+- Physics helpers: `solveSpring({ stiffness, damping, mass, steps })` → progress samples + settle time, `springKeyframes(map, spring)`, `bounceKeyframes(restitution, steps)` — physical motion that still runs on the Web Animations API.
+- Showcase: **Bounce & physics**, **Gravity text** and **Elastic hover & spring follow** cards.
+
+### Accessibility
+- Under reduced motion `bounce-in` / `drop-bounce` become a short fade; `rubber-band`, `bell-swing`, `gravity-text`, `elastic-hover` and `spring-follow` don’t move.
+
 ## [5.1.0] - 2026-10-08
 
 ### Added
