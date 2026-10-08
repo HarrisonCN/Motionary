@@ -19,8 +19,13 @@ import { defineStory } from './story';
 import { GENERATIVE_FX } from './generative';
 import { AUDIO_FX, defineAudio } from './audio';
 import { CURSOR_FX, defineGestureFx } from './cursor';
+import { MICRO_FX } from './micro';
+import { THEME_FX, defineTheme } from './themes';
 
-export { CARD_FX, CLICK_FX, PHYSICS_FX, PAGE_FX, GENERATIVE_FX, AUDIO_FX, CURSOR_FX };
+export { CARD_FX, CLICK_FX, PHYSICS_FX, PAGE_FX, GENERATIVE_FX, AUDIO_FX, CURSOR_FX, MICRO_FX, THEME_FX };
+export { togglePressed, swapLabel, bumpCount } from './micro';
+export { THEMES, THEME_NAMES, THEME_ROLES, themeVars, themeCss, applyTheme, themePreset, playThemeEffect, defineTheme } from './themes';
+export type { ThemePack, ThemeRole, UsaThemeElement } from './themes';
 export { bindGesture, flingVelocity, angleDelta, GESTURES, defineGestureFx } from './cursor';
 export type { GestureName, GestureFxOptions, GestureDetail, UsaGestureFxElement } from './cursor';
 export { enableAudio, disableAudio, getAudio, createBeatDetector, onBeat, bindBeat, defineAudio } from './audio';
@@ -41,6 +46,8 @@ export const EFFECT_PACKS: Record<string, EffectDefinition[]> = {
   generative: GENERATIVE_FX,
   audio: AUDIO_FX,
   cursor: CURSOR_FX,
+  micro: MICRO_FX,
+  themes: THEME_FX,
 };
 
 /** 5.1: card & click effects 2.0. */
@@ -73,11 +80,18 @@ export function registerCursorEffects(): void {
   registerEffects(EFFECT_PACKS.cursor);
 }
 
+/** 5.8: micro-interactions + theme-pack effects. */
+export function registerMicroEffects(): void {
+  registerEffects(EFFECT_PACKS.micro);
+  registerEffects(EFFECT_PACKS.themes);
+}
+
 /** Define the 5.x elements of this entry (`<usa-story>`, …) under their default tags. */
 export function defineEffectElements(): void {
   defineStory();
   defineAudio();
   defineGestureFx();
+  defineTheme();
 }
 
 /** Register the built-ins and every pack (idempotent). */

@@ -12,6 +12,8 @@ const PK = (id, en, zh, descEn, descZh, tags, usage, demo, controls) => FX(id, e
 const AU = (id, en, zh, descEn, descZh, tags, usage, demo, controls) => C('usa-audio', 'fx', en, zh, descEn, descZh, tags, usage, demo, { id, define: 'defineAudio', entry: 'effects', pack: true, controls });
 /** A 5.7 <usa-gesture-fx> card. */
 const GX = (id, en, zh, descEn, descZh, tags, usage, demo, controls) => C('usa-gesture-fx', 'fx', en, zh, descEn, descZh, tags, usage, demo, { id, define: 'defineGestureFx', entry: 'effects', pack: true, controls });
+/** A 5.8 <usa-theme> card. */
+const TH = (id, en, zh, descEn, descZh, tags, usage, demo, controls) => C('usa-theme', 'fx', en, zh, descEn, descZh, tags, usage, demo, { id, define: 'defineTheme', entry: 'effects', pack: true, controls });
 const SC = (id, en, zh, descEn, descZh, tags, usage, demo, controls) => C('usa-story', 'fx', en, zh, descEn, descZh, tags, usage, demo, { id, define: 'defineStory', entry: 'effects', pack: true, controls });
 
 export const components = [
@@ -136,6 +138,20 @@ export const components = [
     '<usa-gesture-fx gesture="long-press" effect="tada">\n  <button>Hold me</button>\n</usa-gesture-fx>',
     '<usa-gesture-fx gesture="long-press" effect="tada"><button type="button" class="demo-btn demo-charge">Hold me</button></usa-gesture-fx>',
     [{ key: 'gesture', values: ['long-press', 'fling', 'twist'] }]),
+  PK('fx-micro', 'Micro-interactions', '微交互',
+    '5.8: 23 small interactions that also do the UI work — like / favourite / bookmark toggles (aria-pressed), copy to clipboard with "Copied ✓", password show / hide, download & submit progress (aria-busy), counters, upvote, clap, emoji reactions, refresh spin, trash, input shake (aria-invalid)…',
+    '5.8：23 个同时完成界面状态的微交互 —— 点赞 / 收藏 / 书签切换（aria-pressed）、复制并显示“已复制 ✓”、密码显隐、下载与提交进度（aria-busy）、计数器、顶、鼓掌、表情回应、刷新旋转、删除、输入抖动（aria-invalid）……',
+    ['micro-interaction', 'like', 'favorite', 'copy', 'password', 'download', 'progress', 'counter', 'toggle', 'shake'],
+    '<usa-fx effect="like-heart" trigger="click">\n  <button aria-pressed="false">♥ <span data-count="12">12</span></button>\n</usa-fx>',
+    '<usa-fx effect="like-heart" trigger="click"><button type="button" class="demo-btn" data-copy="npm i use-scroll-animate">♥ <span data-count="12">12</span></button></usa-fx>',
+    [{ key: 'effect', values: ['like-heart', 'favorite-star', 'bookmark-flip', 'toggle-morph', 'copy-success', 'download-progress', 'submit-loading', 'send-plane', 'add-to-cart', 'counter-bump', 'upvote', 'clap', 'emoji-react', 'refresh-spin', 'check-toggle', 'input-shake', 'error-flash', 'success-check', 'nudge-hint', 'focus-pulse', 'notify-badge'] }]),
+  TH('fx-theme', 'Theme packs', '主题包',
+    '5.8: <usa-theme name> applies a theme pack — design tokens (--usa-theme-*), motion tokens and effect presets per role (enter / hover / click / attention / background). Neon, paper, glass, retro and brutalist; applyTheme() for the whole page.',
+    '5.8：<usa-theme name> 应用主题包 —— 设计令牌（--usa-theme-*）、动效令牌与各角色的效果预设（入场 / 悬停 / 点击 / 吸引注意 / 背景）。霓虹、纸张、玻璃、复古、粗野主义；applyTheme() 作用于整页。',
+    ['theme', 'tokens', 'neon', 'paper', 'glass', 'retro', 'brutalist', 'design system'],
+    '<usa-theme name="neon">\n  <div class="usa-surface">\n    <button data-theme-fx="click">Tap</button>\n  </div>\n</usa-theme>',
+    '<usa-theme name="neon" class="demo-theme"><div class="usa-surface demo-theme-card"><b class="usa-accent">Aa</b> <button type="button" class="demo-btn" data-theme-fx="click">Tap</button></div></usa-theme>',
+    [{ key: 'name', values: ['neon', 'paper', 'glass', 'retro', 'brutalist'] }]),
   AU('fx-audio-beat', 'Beat-triggered effects', '节拍触发特效',
     '5.6: <usa-audio> renders a toggle (a user gesture starts Web Audio), detects beats and plays any registered effect on children with data-usa-beat="effect". JS: bindBeat(el, "pop"). Beats play nothing under reduced motion.',
     '5.6：<usa-audio> 渲染一个开关按钮（由用户手势启动 Web Audio），检测节拍并在带 data-usa-beat="效果名" 的子元素上播放任意已注册效果。JS：bindBeat(el, "pop")。减少动态效果时节拍不触发动画。',

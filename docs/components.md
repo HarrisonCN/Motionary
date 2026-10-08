@@ -453,6 +453,26 @@ bindGesture(dial, 'twist', ({ direction }) => step(direction === 'cw' ? 1 : -1))
 ```
 `--usa-charge` (0–1) lets CSS show long-press progress. Reduced motion: cursor effects off.
 
+### v5.8 Theme packs & micro-interactions (`components/effects`)
+
+```html
+<usa-theme name="glass">
+  <div class="usa-surface">
+    <button data-theme-fx="click">Tap</button>
+    <usa-fx effect="like-heart" trigger="click"><button aria-pressed="false">♥ <span data-count="12">12</span></button></usa-fx>
+    <usa-fx effect="copy-success" trigger="click"><button data-copy="npm i use-scroll-animate">Copy</button></usa-fx>
+  </div>
+</usa-theme>
+```
+```js
+import { applyTheme, themeCss, playEffect, registerAllEffects } from 'use-scroll-animate/components/effects';
+registerAllEffects();
+const undo = applyTheme('neon');          // whole page: design + motion tokens + data-usa-theme
+const css = themeCss('paper', ':root');   // static CSS for SSR
+playEffect(passwordToggle, 'password-reveal');
+```
+Themes: `neon` · `paper` · `glass` · `retro` · `brutalist`. Micro effects keep working (state, labels, counts) under reduced motion.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

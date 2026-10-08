@@ -244,3 +244,4 @@ usa-toggle { --usa-toggle-on: var(--accent); }
 .demo-fan{justify-content:center}
 .demo-gen{min-height:140px;display:grid;place-items:center;color:#fff;font-weight:700;border-radius:14px;background:transparent}
 .demo-charge{background:linear-gradient(90deg,#7c5cff calc(var(--usa-charge,0)*100%),#2a2f3a 0)}
+.demo-theme{padding:14px;border-radius:12px}.demo-theme-card{display:flex;gap:12px;align-items:center;padding:12px 16px}
