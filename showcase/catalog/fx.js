@@ -70,6 +70,20 @@ export const components = [
     '<usa-fx effect="spring-follow" trigger="load">\n  <span class="dot"></span>\n</usa-fx>',
     '<usa-fx effect="elastic-hover" trigger="load"><div class="demo-tile">Hover me</div></usa-fx>',
     [{ key: 'effect', values: ['elastic-hover', 'spring-follow'] }]),
+  PK('fx-page-transitions', 'Page transitions', '页面转场',
+    '5.3: curtain, iris (closes on the click point), pixel dissolve and venetian blinds — cover the page, call onCovered() (swap your route there), then reveal. Reduced motion: a quick cross-fade.',
+    '5.3：幕布、光圈（向点击处收拢）、像素溶解、百叶窗 —— 覆盖页面后调用 onCovered()（在此切换路由），再揭开。减少动态效果时为快速淡入淡出。',
+    ['page', 'transition', 'curtain', 'iris', 'pixel', 'blinds'],
+    "<usa-fx effect=\"iris\">\n  <a href=\"/next\">Next page</a>\n</usa-fx>\n\n<script type=\"module\">\n  playEffect(document.body, 'curtain', { onCovered: () => router.go('/next') });\n</script>",
+    '<usa-fx effect="iris"><button type="button" class="demo-btn">Play transition</button></usa-fx>',
+    [{ key: 'effect', values: ['iris', 'curtain', 'pixel-dissolve', 'blinds'] }]),
+  PK('fx-page-scroll', 'Velocity skew & edge glow', '滚动速度倾斜与边缘光晕',
+    '5.3: velocity-skew leans the element with scroll speed; edge-glow lights the viewport edge you scroll toward; spotlight dims everything but a circle at the pointer (all persistent, trigger="load") — scroll the page.',
+    '5.3：velocity-skew 随滚动速度倾斜元素；edge-glow 点亮滚动方向的视口边缘；spotlight 让页面变暗、仅指针处一圈明亮（均为常驻，trigger="load"）—— 滚动页面试试。',
+    ['page', 'scroll', 'velocity', 'skew', 'glow', 'spotlight'],
+    '<usa-fx effect="velocity-skew" trigger="load">\n  <section class="gallery">…</section>\n</usa-fx>',
+    '<usa-fx effect="velocity-skew" trigger="load"><div class="demo-tile">Scroll the page ↕</div></usa-fx>',
+    [{ key: 'effect', values: ['velocity-skew', 'edge-glow'] }]),
 ];
 
 export const helpers = [
