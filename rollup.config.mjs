@@ -71,8 +71,21 @@ const entries = {
   element: 'src/element.ts',
   components: 'src/components/index.ts',
   ...Object.fromEntries(CATEGORIES.map((c) => [`components/${c}`, `src/components/${c}/index.ts`])),
-  ...Object.fromEntries(Object.entries(COMPONENT_ENTRIES).map(([n, src]) => [`components/${n}`, `src/components/${src}.ts`])),
+  ...Object.fromEntries(Object.entries(COMPONENT_ENTRIES).filter(([n]) => n !== 'lite').map(([n, src]) => [`components/${n}`, `src/components/${src}.ts`])),
 };
+
+// `?raw` imports of light-DOM CSS become '' (the lite build loads dist/components/<cat>.css
+// on demand instead); shadow-DOM styles stay inlined.
+const cssEmpty = () => ({
+  name: 'css-empty',
+  async resolveId(source, importer) {
+    if (!source.endsWith('.css?raw') || source.endsWith('.shadow.css?raw')) return null;
+    return '\0empty-css:' + source;
+  },
+  load(id) {
+    return id.startsWith('\0empty-css:') ? 'export default "";' : null;
+  },
+});
 
 const ts = () => typescript({ tsconfig: './tsconfig.json', declaration: false, declarationDir: undefined });
 
@@ -105,6 +118,32 @@ export default [
     input: 'src/components/auto.ts',
     output: { dir: 'dist', entryFileNames: 'components.umd.js', format: 'umd', name: 'UsaComponents', exports: 'named', sourcemap: true, plugins: [terser()] },
     plugins: [cssRaw(), resolve(), ts(), componentsCss()],
+  },
+  // components/lite: everything, CSS loaded on demand (self-contained file, 4.5).
+  {
+    input: 'src/components/lite.ts',
+    external,
+    output: [
+      { file: 'dist/components/lite.js', format: 'es', inlineDynamicImports: true, sourcemap: true },
+      { file: 'dist/components/lite.cjs', format: 'cjs', exports: 'named', inlineDynamicImports: true, sourcemap: true },
+    ],
+    plugins: [
+      cssEmpty(),
+      cssRaw(),
+      resolve(),
+      ts(),
+      {
+        // Declarations: the same API as components (+ perf), no second dts bundle.
+        name: 'lite-dts',
+        generateBundle(opts) {
+          if (opts.format !== 'es') return;
+          for (const ext of ['d.ts', 'd.cts']) {
+            const from = ext === 'd.ts' ? '.js' : '.cjs';
+            this.emitFile({ type: 'asset', fileName: `lite.${ext}`, source: `export * from '../components${from}';\nexport * from './perf${from}';\n/** The dist/ folder this module was loaded from. */\nexport declare const STYLE_BASE: string;\n` });
+          }
+        },
+      },
+    ],
   },
   // Bundled declarations: .d.ts next to the ESM .js, .d.cts next to the .cjs
   ...Object.entries(entries).map(([name, input]) => ({

@@ -59,6 +59,7 @@ export * from './layout/index';
 export * from './packs/index';
 export * from './tokens/index';
 export * from './a11y/index';
+export * from './perf/index';
 
 export { COMPONENT_CATEGORIES } from './index-tags';
 export type { ComponentCategory } from './index-tags';

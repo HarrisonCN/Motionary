@@ -1,7 +1,7 @@
-import { k as defineElement } from '../chunks/base-BtJDNCB6.js';
-export { d as configureComponents, p as prefersReducedMotion } from '../chunks/base-BtJDNCB6.js';
-import { t as timeline, T as TIMELINE_PRESETS } from '../chunks/core-DS1nrx5L.js';
-export { r as resolvePosition, s as supportsNativeScrub } from '../chunks/core-DS1nrx5L.js';
+import { u as defineElement } from '../chunks/base-CZiIAMBc.js';
+export { f as configureComponents, p as prefersReducedMotion } from '../chunks/base-CZiIAMBc.js';
+import { t as timeline, T as TIMELINE_PRESETS } from '../chunks/core-CJHJeMI_.js';
+export { r as resolvePosition, s as supportsNativeScrub } from '../chunks/core-CJHJeMI_.js';
 import './tokens.js';
 
 var css = "usa-timeline{display:block}usa-timeline[scrub]{position:relative}@media (prefers-reduced-motion:reduce){usa-timeline [data-tl]{opacity:1 !important;transform:none !important;filter:none !important;clip-path:none !important}}";

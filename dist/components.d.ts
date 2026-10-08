@@ -64,6 +64,22 @@ interface UsaElement extends HTMLElement {
     /** `true` while reduced motion applies to this element. */
     readonly reduced: boolean;
 }
+/** Run `fn(time, dt)` every frame on the shared scheduler until the returned function is called. */
+declare function onFrame(fn: (t: number, dt: number) => void): () => void;
+/** Scheduler counters: frames flushed, callbacks run, peak callbacks in one frame, pending now. */
+declare function schedulerStats(): {
+    frames: number;
+    callbacks: number;
+    peak: number;
+    pending: number;
+    loops: number;
+};
+/** Number of component animations running right now. */
+declare const activeAnimations: () => number;
+/** Cap concurrent component animations; extra ones jump to their final frame (`Infinity` = no cap). */
+declare function setAnimationBudget(max: number): void;
+/** The current cap. */
+declare const animationBudget: () => number;
 
 /** Entrance effects shared by `<usa-reveal>` and `<usa-stagger>` (transform / opacity / filter only). */
 declare const REVEAL_EFFECTS: readonly ["fade", "fade-up", "fade-down", "fade-left", "fade-right", "zoom-in", "zoom-out", "blur", "blur-up", "flip-up", "flip-left", "rise"];
@@ -2678,10 +2694,65 @@ declare function auditMotionA11y(root: Element | Document): {
 declare const ALL_TAGS: string[];
 
 /**
+ * use-scroll-animate/components/perf — performance toolkit (4.5).
+ *
+ * - One shared rAF scheduler for every component loop (`onFrame()`, `schedulerStats()`).
+ * - Animation budget: `setAnimationBudget(n)` caps concurrent component
+ *   animations; extra ones land on their final frame.
+ * - `autoDegrade()`: watches frame rate and animation count and steps motion
+ *   down (`low`, then a tighter budget) while the device struggles, restoring
+ *   it when frames recover.
+ * - On-demand CSS: `loadCategoryStyles()` / `onDemandStyles()` — used by
+ *   `use-scroll-animate/components/lite`, the build without inlined CSS.
+ */
+
+interface AutoDegradeOptions {
+    /** Frame rate below which motion is degraded (default 45). */
+    minFps?: number;
+    /** Concurrent animations above which motion is degraded (default 40). */
+    maxActive?: number;
+    /** Sample window in ms (default 1000). */
+    sample?: number;
+    /** Bad samples in a row before degrading (default 2). */
+    patience?: number;
+    /** Good samples in a row before restoring (default 3). */
+    recovery?: number;
+    /** Called on every change. */
+    onChange?: (state: DegradeState) => void;
+}
+interface DegradeState {
+    degraded: boolean;
+    fps: number;
+    active: number;
+    reason: '' | 'fps' | 'count';
+}
+/**
+ * Watch frame rate and animation count; while the device struggles, set
+ * motion intensity to `low` and cap concurrent animations at `maxActive / 2`,
+ * then restore the previous settings once frames recover. Dispatches
+ * `usa:degrade` on `document`. Returns a stop function (restores settings).
+ */
+declare function autoDegrade(options?: AutoDegradeOptions): () => void;
+/** The category of a default `<usa-*>` tag. */
+declare const categoryOf: (tag: string) => ComponentCategory | undefined;
+/**
+ * Add `<link rel="stylesheet" href="{base}components/{category}.css">` once.
+ * `base` is the URL of the package's `dist/` folder.
+ */
+declare function loadCategoryStyles(category: ComponentCategory | 'all', base: string): HTMLLinkElement | null;
+/**
+ * Load each category's CSS the first time one of its elements connects
+ * (custom tags fall back to the full stylesheet). Returns an undo.
+ */
+declare function onDemandStyles(base: string): () => void;
+/** Categories whose CSS has been requested so far. */
+declare const loadedStyles: () => string[];
+
+/**
  * Register every `<usa-*>` component (or only the given categories).
  * Safe to call more than once and on the server (no-op without DOM).
  */
 declare function defineComponents(categories?: ComponentCategory[]): void;
 
-export { ALL_TAGS, AMBIENT_EFFECTS, ANIM_ICONS, BUTTON_DEFORMS, CARD_EFFECTS, CLICK_EFFECTS, COMPONENT_CATEGORIES, CURSOR_MODES, JOINING_SCRIPT, LIVE_REGION_IDS, MASK_SHAPES, MORPH_ICONS, MOTION_SCALE, MOTION_SENSITIVITY, MOTION_SENSITIVITY_LEVELS, MOTION_TOKENS, PACKS, PACK_PRIMITIVES, PAGE_EFFECTS, REVEAL_EFFECTS, SENSITIVITY_CSS, SHADERS, SPINNER_VARIANTS, SPRING_EFFECTS, SPRING_PRESETS, STATIC_ALTERNATIVES, TIMELINE_PRESETS, VARIANTS, adaptKeyframes, adoptVariants, announce, applyMotionTokens, applyPack, auditMotionA11y, autoAnimate, burst, confetti, configureComponents, countUp, createSpring, defineAccordion, defineAcrylic, defineAmbient, defineAnimIcon, defineAurora, defineAutoAnimate, defineAutoSkeleton, defineAvatarStack, defineBackToTop, defineBackgroundComponents, defineBadge, defineBlobs, defineBottomSheet, defineButton, defineCard, defineCardComponents, defineCardStack, defineCarousel3d, defineCheck, defineCheckbox, defineClick, defineClickComponents, defineComponents, defineCounter, defineCube, defineCursor, defineDepth, defineDepthComponents, defineDialog, defineDistort, defineDotNetwork, defineDoubleTap, defineDraggable, defineDraw, defineDrawer, defineFab, defineFeedbackComponents, defineFullpage, defineGestureComponents, defineGlitch, defineGradientText, defineGrain, defineGridGlow, defineHandwriting, defineHold, defineIconMorph, defineInteractionComponents, defineLayoutComponents, defineLike, defineLiquid, defineLoadingBar, defineMagnetic, defineMarquee, defineMaskReveal, defineMasonry, defineMorph, defineMotionSwitch, defineNavbar, defineOverscroll, definePack, definePacksComponents, definePageComponents, defineParticles, definePhysicsComponents, definePinchZoom, definePopover, definePress, defineProgress, definePullRefresh, defineRating, defineReveal, defineRevealComponents, defineRipple, defineScramble, defineScrollHighlight, defineScrollProgress, defineScrolly, defineShader, defineShimmerText, defineSkeleton, defineSlider, defineSpinner, defineSplash, defineSplitText, defineSpotlight, defineSpring, defineStagger, defineStickyStack, defineSvgComponents, defineSwipeable, defineTabs, defineTextComponents, defineTextRotate, defineTilt, defineTimeline, defineTimelineComponents, defineToaster, defineToggle, defineTooltip, defineTransitionComponents, defineTypewriter, defineUiComponents, defineViewSwitch, defineWaterRipple, defineWaveText, defineWebglComponents, deviceTilt, drawLines, easeOutExpo, enableMpaTransitions, flip, flipFrames, fluentPreset, flyToCart, fragmentSource, gesture, getMotionIntensity, getMotionSensitivity, getMotionTokens, glQuad, graphemes, haptic, importMotionTokens, interpolatePath, linearEasing, liveRegion, loadingBar, masonryLayout, mergeMotionTokens, morphPath, morphTo, motionAllowed, motionToken, motionTokensToCss, motionTokensToJSON, motionTokensToVars, motionVar, orientationToTilt, pageTransition, parseDuration, parseEasing, pathsCompatible, pinchScale, prefersReducedMotion, projectInertia, readScrollProgress, requestOrientationPermission, resolveDurationToken, resolveEasingToken, resolvePosition, resolveSpring, restoreMotionIntensity, restoreMotionSensitivity, revealKeyframes, rubberBand, scrambleFrame, scrollToTarget, setMotionIntensity, setMotionSensitivity, setVariant, shake, sharedTransition, smoothScroll, snapTo, splitOrder, splitText, splitTimeline, words as splitWords, spring, springEasing, springEffectKeyframes, springSamples, staticAlternative, stepSpring, supportsLinearEasing, supportsNativeScrub, supportsOrientation, supportsViewTransitions, supportsWebGL, swipeDirection, themeTransition, timeline, toast, viewTransition };
-export type { A11yIssue, AmbientEffect, AutoAnimateOptions, BurstOptions, ButtonDeform, ButtonShape, ButtonState, CardEffect, ClickEffect, ComponentCategory, ComponentsConfig, ConfettiOptions, CursorMode, DeepPartialTokens, DialogVariant, FlipOptions, FluentPresetOptions, GLQuad, GestureHandlers, GestureOptions, MorphOptions, MotionIntensity, MotionSensitivity, MotionTokenGroup, MotionTokens, PackContext, PackName, PageEffect, PageTransitionOptions, PanState, PinchState, Placement, Politeness, PressState, RevealEffect, ScrubHandle, ScrubOptions, SharedOptions, SmoothScrollOptions, SpinnerVariant, SplitBy, SplitFrom, SplitResult, SplitTextOptions, SplitTimelineOptions, SpringConfig, SpringEffect, SpringInput, SpringPreset, SpringToken, SpringValue, SpringValueOptions, SwipeDirection, SwipeState, TiltReading, Timeline, TimelineOptions, TimelinePosition, TimelineStepOptions, ToastHandle, ToastOptions, ToastType, UsaAccordionElement, UsaAcrylicElement, UsaAmbientElement, UsaAnimIconElement, UsaAuroraElement, UsaAutoAnimateElement, UsaAutoSkeletonElement, UsaAvatarStackElement, UsaBackToTopElement, UsaBadgeElement, UsaBlobsElement, UsaBottomSheetElement, UsaButtonElement, UsaCardElement, UsaCardStackElement, UsaCarousel3dElement, UsaCheckElement, UsaCheckboxElement, UsaClickElement, UsaCounterElement, UsaCubeElement, UsaCursorElement, UsaDepthElement, UsaDialogElement, UsaDotNetworkElement, UsaDoubleTapElement, UsaDraggableElement, UsaDrawElement, UsaDrawerElement, UsaElement, UsaFabElement, UsaFullpageElement, UsaGLElement, UsaGlitchElement, UsaGradientTextElement, UsaGrainElement, UsaGridGlowElement, UsaHandwritingElement, UsaHoldElement, UsaIconMorphElement, UsaLikeElement, UsaLoadingBarElement, UsaMagneticElement, UsaMarqueeElement, UsaMaskRevealElement, UsaMasonryElement, UsaMorphElement, UsaMotionSwitchElement, UsaNavbarElement, UsaOverscrollElement, UsaPackElement, UsaParticlesElement, UsaPinchZoomElement, UsaPopoverElement, UsaPressElement, UsaProgressElement, UsaPullRefreshElement, UsaRatingElement, UsaRevealElement, UsaRippleElement, UsaScrambleElement, UsaScrollHighlightElement, UsaScrollProgressElement, UsaScrollyElement, UsaShimmerTextElement, UsaSkeletonElement, UsaSliderElement, UsaSpinnerElement, UsaSplashElement, UsaSplitTextElement, UsaSpotlightElement, UsaSpringElement, UsaStaggerElement, UsaStickyStackElement, UsaSwipeableElement, UsaTabsElement, UsaTextRotateElement, UsaTiltElement, UsaTimelineElement, UsaToasterElement, UsaToggleElement, UsaTooltipElement, UsaTypewriterElement, UsaViewSwitchElement, UsaWaterRippleElement, UsaWaveTextElement, Variant, ViewTransitionOptions };
+export { ALL_TAGS, AMBIENT_EFFECTS, ANIM_ICONS, BUTTON_DEFORMS, CARD_EFFECTS, CLICK_EFFECTS, COMPONENT_CATEGORIES, CURSOR_MODES, JOINING_SCRIPT, LIVE_REGION_IDS, MASK_SHAPES, MORPH_ICONS, MOTION_SCALE, MOTION_SENSITIVITY, MOTION_SENSITIVITY_LEVELS, MOTION_TOKENS, PACKS, PACK_PRIMITIVES, PAGE_EFFECTS, REVEAL_EFFECTS, SENSITIVITY_CSS, SHADERS, SPINNER_VARIANTS, SPRING_EFFECTS, SPRING_PRESETS, STATIC_ALTERNATIVES, TIMELINE_PRESETS, VARIANTS, activeAnimations, adaptKeyframes, adoptVariants, animationBudget, announce, applyMotionTokens, applyPack, auditMotionA11y, autoAnimate, autoDegrade, burst, categoryOf, confetti, configureComponents, countUp, createSpring, defineAccordion, defineAcrylic, defineAmbient, defineAnimIcon, defineAurora, defineAutoAnimate, defineAutoSkeleton, defineAvatarStack, defineBackToTop, defineBackgroundComponents, defineBadge, defineBlobs, defineBottomSheet, defineButton, defineCard, defineCardComponents, defineCardStack, defineCarousel3d, defineCheck, defineCheckbox, defineClick, defineClickComponents, defineComponents, defineCounter, defineCube, defineCursor, defineDepth, defineDepthComponents, defineDialog, defineDistort, defineDotNetwork, defineDoubleTap, defineDraggable, defineDraw, defineDrawer, defineFab, defineFeedbackComponents, defineFullpage, defineGestureComponents, defineGlitch, defineGradientText, defineGrain, defineGridGlow, defineHandwriting, defineHold, defineIconMorph, defineInteractionComponents, defineLayoutComponents, defineLike, defineLiquid, defineLoadingBar, defineMagnetic, defineMarquee, defineMaskReveal, defineMasonry, defineMorph, defineMotionSwitch, defineNavbar, defineOverscroll, definePack, definePacksComponents, definePageComponents, defineParticles, definePhysicsComponents, definePinchZoom, definePopover, definePress, defineProgress, definePullRefresh, defineRating, defineReveal, defineRevealComponents, defineRipple, defineScramble, defineScrollHighlight, defineScrollProgress, defineScrolly, defineShader, defineShimmerText, defineSkeleton, defineSlider, defineSpinner, defineSplash, defineSplitText, defineSpotlight, defineSpring, defineStagger, defineStickyStack, defineSvgComponents, defineSwipeable, defineTabs, defineTextComponents, defineTextRotate, defineTilt, defineTimeline, defineTimelineComponents, defineToaster, defineToggle, defineTooltip, defineTransitionComponents, defineTypewriter, defineUiComponents, defineViewSwitch, defineWaterRipple, defineWaveText, defineWebglComponents, deviceTilt, drawLines, easeOutExpo, enableMpaTransitions, flip, flipFrames, fluentPreset, flyToCart, fragmentSource, gesture, getMotionIntensity, getMotionSensitivity, getMotionTokens, glQuad, graphemes, haptic, importMotionTokens, interpolatePath, linearEasing, liveRegion, loadCategoryStyles, loadedStyles, loadingBar, masonryLayout, mergeMotionTokens, morphPath, morphTo, motionAllowed, motionToken, motionTokensToCss, motionTokensToJSON, motionTokensToVars, motionVar, onDemandStyles, onFrame, orientationToTilt, pageTransition, parseDuration, parseEasing, pathsCompatible, pinchScale, prefersReducedMotion, projectInertia, readScrollProgress, requestOrientationPermission, resolveDurationToken, resolveEasingToken, resolvePosition, resolveSpring, restoreMotionIntensity, restoreMotionSensitivity, revealKeyframes, rubberBand, schedulerStats, scrambleFrame, scrollToTarget, setAnimationBudget, setMotionIntensity, setMotionSensitivity, setVariant, shake, sharedTransition, smoothScroll, snapTo, splitOrder, splitText, splitTimeline, words as splitWords, spring, springEasing, springEffectKeyframes, springSamples, staticAlternative, stepSpring, supportsLinearEasing, supportsNativeScrub, supportsOrientation, supportsViewTransitions, supportsWebGL, swipeDirection, themeTransition, timeline, toast, viewTransition };
+export type { A11yIssue, AmbientEffect, AutoAnimateOptions, AutoDegradeOptions, BurstOptions, ButtonDeform, ButtonShape, ButtonState, CardEffect, ClickEffect, ComponentCategory, ComponentsConfig, ConfettiOptions, CursorMode, DeepPartialTokens, DegradeState, DialogVariant, FlipOptions, FluentPresetOptions, GLQuad, GestureHandlers, GestureOptions, MorphOptions, MotionIntensity, MotionSensitivity, MotionTokenGroup, MotionTokens, PackContext, PackName, PageEffect, PageTransitionOptions, PanState, PinchState, Placement, Politeness, PressState, RevealEffect, ScrubHandle, ScrubOptions, SharedOptions, SmoothScrollOptions, SpinnerVariant, SplitBy, SplitFrom, SplitResult, SplitTextOptions, SplitTimelineOptions, SpringConfig, SpringEffect, SpringInput, SpringPreset, SpringToken, SpringValue, SpringValueOptions, SwipeDirection, SwipeState, TiltReading, Timeline, TimelineOptions, TimelinePosition, TimelineStepOptions, ToastHandle, ToastOptions, ToastType, UsaAccordionElement, UsaAcrylicElement, UsaAmbientElement, UsaAnimIconElement, UsaAuroraElement, UsaAutoAnimateElement, UsaAutoSkeletonElement, UsaAvatarStackElement, UsaBackToTopElement, UsaBadgeElement, UsaBlobsElement, UsaBottomSheetElement, UsaButtonElement, UsaCardElement, UsaCardStackElement, UsaCarousel3dElement, UsaCheckElement, UsaCheckboxElement, UsaClickElement, UsaCounterElement, UsaCubeElement, UsaCursorElement, UsaDepthElement, UsaDialogElement, UsaDotNetworkElement, UsaDoubleTapElement, UsaDraggableElement, UsaDrawElement, UsaDrawerElement, UsaElement, UsaFabElement, UsaFullpageElement, UsaGLElement, UsaGlitchElement, UsaGradientTextElement, UsaGrainElement, UsaGridGlowElement, UsaHandwritingElement, UsaHoldElement, UsaIconMorphElement, UsaLikeElement, UsaLoadingBarElement, UsaMagneticElement, UsaMarqueeElement, UsaMaskRevealElement, UsaMasonryElement, UsaMorphElement, UsaMotionSwitchElement, UsaNavbarElement, UsaOverscrollElement, UsaPackElement, UsaParticlesElement, UsaPinchZoomElement, UsaPopoverElement, UsaPressElement, UsaProgressElement, UsaPullRefreshElement, UsaRatingElement, UsaRevealElement, UsaRippleElement, UsaScrambleElement, UsaScrollHighlightElement, UsaScrollProgressElement, UsaScrollyElement, UsaShimmerTextElement, UsaSkeletonElement, UsaSliderElement, UsaSpinnerElement, UsaSplashElement, UsaSplitTextElement, UsaSpotlightElement, UsaSpringElement, UsaStaggerElement, UsaStickyStackElement, UsaSwipeableElement, UsaTabsElement, UsaTextRotateElement, UsaTiltElement, UsaTimelineElement, UsaToasterElement, UsaToggleElement, UsaTooltipElement, UsaTypewriterElement, UsaViewSwitchElement, UsaWaterRippleElement, UsaWaveTextElement, Variant, ViewTransitionOptions };

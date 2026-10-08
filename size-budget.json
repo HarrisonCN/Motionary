@@ -92,7 +92,7 @@
   {
     "name": "import 'use-scroll-animate/components/interaction'",
     "import": "export * from 'pkg/components/interaction';",
-    "limit": 5632
+    "limit": 6400
   },
   {
     "name": "import 'use-scroll-animate/components/feedback'",
@@ -122,7 +122,7 @@
   {
     "name": "import { defineReveal } from '…/components/reveal'",
     "import": "export { defineReveal } from 'pkg/components/reveal';",
-    "limit": 2304
+    "limit": 2560
   },
   {
     "name": "import { defineRipple } from '…/components/interaction'",
@@ -142,7 +142,7 @@
   {
     "name": "import 'use-scroll-animate/components/physics'",
     "import": "export * from 'pkg/components/physics';",
-    "limit": 6400
+    "limit": 7168
   },
   {
     "name": "import { defineSpring } from '…/components/physics'",
@@ -157,7 +157,7 @@
   {
     "name": "import { defineCard } from '…/components/cards'",
     "import": "export { defineCard } from 'pkg/components/cards';",
-    "limit": 5632
+    "limit": 6144
   },
   {
     "name": "import 'use-scroll-animate/components/click'",
@@ -207,27 +207,27 @@
   {
     "name": "import 'use-scroll-animate/components/timeline'",
     "import": "export * from 'pkg/components/timeline';",
-    "limit": 5120
+    "limit": 5632
   },
   {
     "name": "import { defineTimelineComponents } from '…/components/timeline'",
     "import": "export { defineTimelineComponents } from 'pkg/components/timeline';",
-    "limit": 4864
+    "limit": 5376
   },
   {
     "name": "import 'use-scroll-animate/components/gesture'",
     "import": "export * from 'pkg/components/gesture';",
-    "limit": 5376
+    "limit": 6144
   },
   {
     "name": "import { defineGestureComponents } from '…/components/gesture'",
     "import": "export { defineGestureComponents } from 'pkg/components/gesture';",
-    "limit": 5120
+    "limit": 5632
   },
   {
     "name": "import 'use-scroll-animate/components/svg'",
     "import": "export * from 'pkg/components/svg';",
-    "limit": 5376
+    "limit": 5888
   },
   {
     "name": "import { defineSvgComponents } from '…/components/svg'",
@@ -237,17 +237,17 @@
   {
     "name": "import 'use-scroll-animate/components/webgl'",
     "import": "export * from 'pkg/components/webgl';",
-    "limit": 5376
+    "limit": 5888
   },
   {
     "name": "import { defineWebglComponents } from '…/components/webgl'",
     "import": "export { defineWebglComponents } from 'pkg/components/webgl';",
-    "limit": 4864
+    "limit": 5376
   },
   {
     "name": "import 'use-scroll-animate/components/depth'",
     "import": "export * from 'pkg/components/depth';",
-    "limit": 6144
+    "limit": 6656
   },
   {
     "name": "import { defineDepthComponents } from '…/components/depth'",
@@ -282,12 +282,12 @@
   {
     "name": "import 'use-scroll-animate/components/packs'",
     "import": "export * from 'pkg/components/packs';",
-    "limit": 3840
+    "limit": 4352
   },
   {
     "name": "import { definePacksComponents } from '…/components/packs'",
     "import": "export { definePacksComponents } from 'pkg/components/packs';",
-    "limit": 3584
+    "limit": 4096
   },
   {
     "name": "import 'use-scroll-animate/components/tokens'",
@@ -298,5 +298,15 @@
     "name": "import 'use-scroll-animate/components/a11y'",
     "import": "export * from 'pkg/components/a11y';",
     "limit": 4352
+  },
+  {
+    "name": "import 'use-scroll-animate/components/lite'",
+    "import": "export * from 'pkg/components/lite';",
+    "limit": 71680
+  },
+  {
+    "name": "import 'use-scroll-animate/components/perf'",
+    "import": "export * from 'pkg/components/perf';",
+    "limit": 2304
   }
 ]

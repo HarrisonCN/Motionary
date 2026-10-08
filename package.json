@@ -1,6 +1,6 @@
 {
   "name": "use-scroll-animate",
-  "version": "4.4.0",
+  "version": "4.5.0",
   "description": "A lightweight, high-performance, dependency-free scroll animation library and animated UI components (Web Components) for the web and Windows web-view apps.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -346,6 +346,26 @@
       "require": {
         "types": "./dist/components/a11y.d.cts",
         "default": "./dist/components/a11y.cjs"
+      }
+    },
+    "./components/perf": {
+      "import": {
+        "types": "./dist/components/perf.d.ts",
+        "default": "./dist/components/perf.js"
+      },
+      "require": {
+        "types": "./dist/components/perf.d.cts",
+        "default": "./dist/components/perf.cjs"
+      }
+    },
+    "./components/lite": {
+      "import": {
+        "types": "./dist/components/lite.d.ts",
+        "default": "./dist/components/lite.js"
+      },
+      "require": {
+        "types": "./dist/components/lite.d.cts",
+        "default": "./dist/components/lite.cjs"
       }
     },
     "./components.css": "./dist/components.css",

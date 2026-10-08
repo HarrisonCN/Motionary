@@ -194,6 +194,7 @@ export function getBase(): BaseCtor {
     connectedCallback(): void {
       if (this._connected) return;
       this._connected = true;
+      styleLoader?.(this.localName);
       // Upgraded while the parser is still inside us (a <script> in <head>
       // defined the element): children/text are not there yet, so wait.
       if (typeof document !== 'undefined' && document.readyState === 'loading' && !this.nextSibling && !this.childNodes.length) {
@@ -282,9 +283,25 @@ export function getBase(): BaseCtor {
         return null;
       }
       keyframes = adaptKeyframes(keyframes);
+      if (active >= maxActive) {
+        applyFrame(el as HTMLElement, keyframes[keyframes.length - 1]);
+        return null;
+      }
       const k = motionScale();
       if (k !== 1 && k > 0 && typeof options.duration === 'number') options = { ...options, duration: options.duration * k, delay: (options.delay || 0) * k };
-      return (el as HTMLElement).animate(keyframes, options);
+      const a = (el as HTMLElement).animate(keyframes, options);
+      if (options.iterations !== Infinity) {
+        active++;
+        let done = false;
+        const end = () => {
+          if (!done) {
+            done = true;
+            active--;
+          }
+        };
+        a?.finished?.then(end, end);
+      }
+      return a;
     }
 
     emit(type: string, detail?: unknown): boolean {
@@ -333,17 +350,91 @@ export function srText(text: string): HTMLSpanElement {
   return s;
 }
 
-/** requestAnimationFrame with a timeout fallback (jsdom / hidden documents). */
-export const raf = (cb: FrameRequestCallback): number =>
-  typeof requestAnimationFrame === 'function' ? requestAnimationFrame(cb) : (setTimeout(() => cb(Date.now()), 16) as unknown as number);
+// --- shared rAF scheduler (4.5) ----------------------------------------------
+// Every component loop goes through one requestAnimationFrame per frame
+// instead of one per element: callbacks are batched, run in order, and a
+// throwing callback no longer starves the others (the first error is rethrown).
+const frameQueue = new Map<number, FrameRequestCallback>();
+let frameSeq = 1;
+let frameHandle: number | ReturnType<typeof setTimeout> | 0 = 0;
+let frameVia: unknown = null;
+const frameStats = { frames: 0, callbacks: 0, peak: 0, last: 0 };
+const frameListeners = new Set<(t: number, dt: number) => void>();
+
+function flushFrame(t: number): void {
+  frameHandle = 0;
+  const dt = frameStats.last && t > frameStats.last ? t - frameStats.last : 16.7;
+  frameStats.last = t;
+  frameStats.frames++;
+  const cbs = Array.from(frameQueue.values());
+  frameQueue.clear();
+  frameStats.callbacks += cbs.length;
+  frameStats.peak = Math.max(frameStats.peak, cbs.length);
+  let error: unknown = null;
+  for (const cb of cbs) {
+    try {
+      cb(t);
+    } catch (e) {
+      error ??= e;
+    }
+  }
+  frameListeners.forEach((fn) => fn(t, dt));
+  if (frameListeners.size) requestFlush();
+  if (error) throw error;
+}
+
+function requestFlush(): void {
+  const native = typeof requestAnimationFrame === 'function' ? requestAnimationFrame : null;
+  // A stale handle from a replaced requestAnimationFrame (tests, iframes) is dropped.
+  if (frameHandle && frameVia === native) return;
+  frameVia = native;
+  frameHandle = native ? native(flushFrame) : setTimeout(() => flushFrame(now()), 16);
+}
+
+/** requestAnimationFrame through the shared scheduler (timeout fallback in jsdom / hidden documents). */
+export const raf = (cb: FrameRequestCallback): number => {
+  const id = frameSeq++;
+  frameQueue.set(id, cb);
+  requestFlush();
+  return id;
+};
 /** Monotonic time in ms (rAF callback timestamps differ between environments, so loops use this). */
 export const now = (): number => (typeof performance !== 'undefined' ? performance.now() : Date.now());
 export const caf = (id: number): void => {
-  if (typeof cancelAnimationFrame === 'function') cancelAnimationFrame(id);
-  else clearTimeout(id);
+  frameQueue.delete(id);
 };
 
-/** Spring-ish easing used across the components. */
+/** Run `fn(time, dt)` every frame on the shared scheduler until the returned function is called. */
+export function onFrame(fn: (t: number, dt: number) => void): () => void {
+  frameListeners.add(fn);
+  requestFlush();
+  return () => frameListeners.delete(fn);
+}
+
+/** Scheduler counters: frames flushed, callbacks run, peak callbacks in one frame, pending now. */
+export function schedulerStats(): { frames: number; callbacks: number; peak: number; pending: number; loops: number } {
+  return { frames: frameStats.frames, callbacks: frameStats.callbacks, peak: frameStats.peak, pending: frameQueue.size, loops: frameListeners.size };
+}
+
+// --- active animation budget (4.5) ---------------------------------------------
+let active = 0;
+let maxActive = Infinity;
+/** Number of component animations running right now. */
+export const activeAnimations = (): number => active;
+/** Cap concurrent component animations; extra ones jump to their final frame (`Infinity` = no cap). */
+export function setAnimationBudget(max: number): void {
+  maxActive = max > 0 ? max : Infinity;
+}
+/** The current cap. */
+export const animationBudget = (): number => maxActive;
+
+// --- on-demand styles (4.5) -----------------------------------------------------
+let styleLoader: ((tag: string) => void) | null = null;
+/** Called with each element's tag the first time one connects (used by the `lite` build to load CSS on demand). */
+export function setStyleLoader(fn: ((tag: string) => void) | null): void {
+  styleLoader = fn;
+}
+
 export const EASE_OUT = 'cubic-bezier(0.22, 1, 0.36, 1)';
 export const EASE_SPRING = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
 /** Windows Fluent "decelerate" / "point-to-point" curves. */

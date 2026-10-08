@@ -1,7 +1,7 @@
 'use strict';
 
-var base = require('../chunks/base-DE2yzxE7.cjs');
-var spring = require('../chunks/spring-hsmgd7ml.cjs');
+var base = require('../chunks/base-CxYU2NK_.cjs');
+var spring = require('../chunks/spring-Dkpygsuj.cjs');
 
 /**
  * Click-effect helpers (v2.5): `burst()`, `confetti()`, `shake()`, `haptic()`.

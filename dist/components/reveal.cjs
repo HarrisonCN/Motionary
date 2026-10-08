@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-DE2yzxE7.cjs');
+var base = require('../chunks/base-CxYU2NK_.cjs');
 
 /** Entrance effects shared by `<usa-reveal>` and `<usa-stagger>` (transform / opacity / filter only). */
 const REVEAL_EFFECTS = [

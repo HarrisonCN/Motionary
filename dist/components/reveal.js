@@ -1,5 +1,5 @@
-import { k as defineElement, l as EASE_OUT, f as clamp, h as caf, r as raf } from '../chunks/base-BtJDNCB6.js';
-export { d as configureComponents, p as prefersReducedMotion } from '../chunks/base-BtJDNCB6.js';
+import { u as defineElement, v as EASE_OUT, j as clamp, k as caf, r as raf } from '../chunks/base-CZiIAMBc.js';
+export { f as configureComponents, p as prefersReducedMotion } from '../chunks/base-CZiIAMBc.js';
 
 /** Entrance effects shared by `<usa-reveal>` and `<usa-stagger>` (transform / opacity / filter only). */
 const REVEAL_EFFECTS = [

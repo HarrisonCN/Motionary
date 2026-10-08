@@ -237,3 +237,5 @@ usa-toggle { --usa-toggle-on: var(--accent); }
 /* 4.3: splitText() demo */
 .demo-split { display: grid; gap: 4px; text-align: center; }
 .demo-split-line { margin: 0; font-weight: 800; font-size: 1.15rem; }
+
+.demo-dot{display:inline-block;width:6px;height:6px;margin:1px;border-radius:50%;background:currentColor;opacity:.7}

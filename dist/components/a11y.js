@@ -1,5 +1,5 @@
-import { e as getMotionSensitivity, a as MOTION_SENSITIVITY_LEVELS, d as configureComponents, j as adoptStyles } from '../chunks/base-BtJDNCB6.js';
-export { b as adaptKeyframes } from '../chunks/base-BtJDNCB6.js';
+import { h as getMotionSensitivity, a as MOTION_SENSITIVITY_LEVELS, f as configureComponents, q as adoptStyles } from '../chunks/base-CZiIAMBc.js';
+export { d as adaptKeyframes } from '../chunks/base-CZiIAMBc.js';
 import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-43Xtd01A.js';
 
 /**

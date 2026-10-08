@@ -56,6 +56,12 @@ export const components = [
 ];
 
 export const helpers = [
+  H('auto-degrade', 'page', 'autoDegrade',
+    'Performance toolkit (4.5): every component loop shares one requestAnimationFrame (onFrame, schedulerStats), setAnimationBudget() caps concurrent animations, autoDegrade() steps motion down while fps drops and restores it, and components/lite loads each category’s CSS on demand (≈62 KB gzip for everything).',
+    '性能工具（4.5）：所有组件循环共享一个 requestAnimationFrame（onFrame、schedulerStats），setAnimationBudget() 限制并发动画数，autoDegrade() 在帧率下降时自动降级并在恢复后还原，components/lite 按需加载各分类 CSS（全部组件约 62 KB gzip）。',
+    ['performance', 'rAF', 'fps', 'lazy CSS', 'budget'],
+    "import { defineComponents, autoDegrade } from 'use-scroll-animate/components/lite';\n\ndefineComponents();                 // CSS per category, loaded when first used\nautoDegrade({ minFps: 45, maxActive: 40 });\ndocument.addEventListener('usa:degrade', (e) => console.log(e.detail));",
+    '<div class="demo-row" data-perf-row></div><div class="demo-row"><button type="button" class="demo-link" data-perf-go>Stress: 120 animations</button><label class="demo-note"><input type="checkbox" data-perf-cap> budget 24</label></div><p class="demo-note" data-perf-out>—</p>'),
   H('motion-sensitivity', 'page', 'setMotionSensitivity',
     'Accessibility toolkit (4.4): motion-sensitivity levels (full · gentle — no spins / zooms / parallax · minimal — fades only · static), static alternatives for every component, shared aria-live regions with announce(), and auditMotionA11y() — the rules the automated regression tests run over every element.',
     '无障碍工具（4.4）：运动敏感度分级（全部 · 温和——无旋转/缩放/视差 · 最少——仅淡入淡出 · 静态），每个组件的静态替代，共享 aria-live 区域与 announce()，以及 auditMotionA11y() —— 自动化回归测试对每个元素运行的同一套规则。',
@@ -83,6 +89,30 @@ export const helpers = [
 ];
 
 export const wire = {
+  'auto-degrade': (stage, lib) => {
+    const row = stage.querySelector('[data-perf-row]');
+    const out = stage.querySelector('[data-perf-out]');
+    row.innerHTML = Array.from({ length: 120 }, () => '<i class="demo-dot"></i>').join('');
+    let stop = null;
+    const show = () => {
+      const s = lib.schedulerStats();
+      out.textContent = `frames ${s.frames} · peak callbacks/frame ${s.peak} · active ${lib.activeAnimations()} · budget ${lib.animationBudget()}`;
+    };
+    stage.querySelector('[data-perf-cap]').addEventListener('change', (e) => lib.setAnimationBudget(e.target.checked ? 24 : Infinity));
+    stage.querySelector('[data-perf-go]').addEventListener('click', () => {
+      stop?.();
+      let n = 0;
+      stop = lib.onFrame(() => {
+        if (++n % 10 === 0) show();
+        if (n > 240) stop();
+      });
+      const host = document.createElement('usa-reveal');
+      stage.append(host);
+      row.querySelectorAll('.demo-dot').forEach((d, i) => host.motion(d, [{ transform: 'translateY(0)' }, { transform: 'translateY(-14px)' }, { transform: 'translateY(0)' }], { duration: 900, delay: i * 6 }));
+      host.remove();
+      show();
+    });
+  },
   'motion-sensitivity': (stage, lib) => {
     const out = stage.querySelector('[data-sens-out]');
     const frames = [{ opacity: 0, transform: 'translateY(16px) scale(0.4) rotate(-180deg)' }, { opacity: 1, transform: 'none' }];
