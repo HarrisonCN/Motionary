@@ -236,6 +236,77 @@ interface UsaAudioElement extends UsaElement {
 declare function defineAudio(tag?: string): CustomElementConstructor | undefined;
 
 /**
+ * 5.7 — cursor & gesture packs.
+ *
+ * Cursor effects (kind `cursor`, persistent, scoped to the element they are
+ * bound to; skipped under reduced motion and — unless `touch: true` — for
+ * touch pointers): `comet-trail`, `sparkle-trail`, `ribbon-trail`,
+ * `magnetic-dots`, `spotlight-cursor`.
+ *
+ * Gestures → effects: `bindGesture(el, 'fling' | 'twist' | 'long-press',
+ * effectOrCallback, options)` and `<usa-gesture-fx gesture effect>`. A fling
+ * is a fast release, a twist a two-finger rotation past `angle` degrees, a
+ * long press "charges" `--usa-charge` 0 → 1 and fires when full. Every fire
+ * dispatches `usa-gesture` (`detail: { gesture, … }`). The effect itself goes
+ * through `playEffect()`, so reduced motion is honoured there.
+ */
+
+type Pt = {
+    x: number;
+    y: number;
+    t: number;
+};
+declare const CURSOR_FX: EffectDefinition[];
+declare const GESTURES: readonly ["fling", "twist", "long-press"];
+type GestureName = (typeof GESTURES)[number];
+interface GestureFxOptions {
+    /** fling: minimum release speed in px/ms (default 0.8). */
+    velocity?: number;
+    /** twist: degrees of rotation that fire (default 30). */
+    angle?: number;
+    /** long-press: ms to fully charge (default 650). */
+    duration?: number;
+    /** long-press: px the pointer may move before the press is cancelled (default 10). */
+    tolerance?: number;
+    /** Options passed to the effect. */
+    effectOptions?: Record<string, unknown>;
+}
+interface GestureDetail {
+    gesture: GestureName;
+    /** fling */
+    vx?: number;
+    vy?: number;
+    speed?: number;
+    direction?: 'left' | 'right' | 'up' | 'down' | 'cw' | 'ccw';
+    /** twist: signed degrees since the last fire. */
+    angle?: number;
+    /** long-press: 1 when fired. */
+    charge?: number;
+}
+/** Release velocity (px/ms) from recent pointer samples: uses the last `window` ms (pure). */
+declare function flingVelocity(pts: Pt[], window?: number): {
+    vx: number;
+    vy: number;
+    speed: number;
+};
+/** Signed smallest difference between two angles in degrees, in (-180, 180] (pure). */
+declare function angleDelta(a: number, b: number): number;
+/**
+ * Fire `effect` (a registered effect name, or a callback) when `gesture`
+ * happens on `el`. Returns an unbind.
+ */
+declare function bindGesture(el: HTMLElement, gesture: GestureName, effect: string | ((d: GestureDetail, e: Event) => void), o?: GestureFxOptions): () => void;
+interface UsaGestureFxElement extends UsaElement {
+    readonly gesture: GestureName;
+}
+/**
+ * `<usa-gesture-fx gesture="fling | twist | long-press" effect="tada"
+ * options='{"…"}' velocity angle duration>` — plays `effect` on its first
+ * child (or itself with `self`) when the gesture happens.
+ */
+declare function defineGestureFx(tag?: string): CustomElementConstructor | undefined;
+
+/**
  * 5.4 — `<usa-story template="…">` scroll-storytelling templates.
  *
  * - `pin` — a sticky `[data-stage]` while `[data-step]` sections scroll past; the
@@ -289,10 +360,12 @@ declare function registerPageEffects(): void;
 declare function registerGenerativeEffects(): void;
 /** 5.6: sound-reactive (Web Audio) backgrounds. */
 declare function registerAudioEffects(): void;
+/** 5.7: cursor trails, magnetic dots, spotlight cursor. */
+declare function registerCursorEffects(): void;
 /** Define the 5.x elements of this entry (`<usa-story>`, …) under their default tags. */
 declare function defineEffectElements(): void;
 /** Register the built-ins and every pack (idempotent). */
 declare function registerAllEffects(): void;
 
-export { AUDIO_FX, CARD_FX, CLICK_FX, EFFECT_PACKS, GENERATIVE_FX, PAGE_FX, PHYSICS_FX, STORY_TEMPLATES, bindBeat, bounceKeyframes, canvasBackground, createBeatDetector, defineAudio, defineEffectElements, defineStory, disableAudio, enableAudio, formatCount, fxLayer, getAudio, hexRgb, noise2, onBeat, registerAllEffects, registerAudioEffects, registerCardClickEffects, registerGenerativeEffects, registerPageEffects, registerPhysicsEffects, solveSpring, springKeyframes, storyProgress };
-export type { AudioInput, AudioReactive, AudioSample, BeatOptions, GenFrame, GenerativeSpec, SpringOptions, StoryTemplate, UsaAudioElement, UsaStoryElement };
+export { AUDIO_FX, CARD_FX, CLICK_FX, CURSOR_FX, EFFECT_PACKS, GENERATIVE_FX, GESTURES, PAGE_FX, PHYSICS_FX, STORY_TEMPLATES, angleDelta, bindBeat, bindGesture, bounceKeyframes, canvasBackground, createBeatDetector, defineAudio, defineEffectElements, defineGestureFx, defineStory, disableAudio, enableAudio, flingVelocity, formatCount, fxLayer, getAudio, hexRgb, noise2, onBeat, registerAllEffects, registerAudioEffects, registerCardClickEffects, registerCursorEffects, registerGenerativeEffects, registerPageEffects, registerPhysicsEffects, solveSpring, springKeyframes, storyProgress };
+export type { AudioInput, AudioReactive, AudioSample, BeatOptions, GenFrame, GenerativeSpec, GestureDetail, GestureFxOptions, GestureName, SpringOptions, StoryTemplate, UsaAudioElement, UsaGestureFxElement, UsaStoryElement };
