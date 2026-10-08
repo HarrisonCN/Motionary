@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.7.0] - 2026-10-08
+
+### Added
+- **Cursor pack** (`use-scroll-animate/components/effects`, `registerCursorEffects()`, `CURSOR_FX`, kind `cursor`, persistent, scoped to the bound element): `comet-trail` (`color`, `width`, `life`), `ribbon-trail` (rainbow, `width`, `life`), `sparkle-trail` (`colors`, `spacing`, `size`), `magnetic-dots` (dot grid behind the content leaning toward the pointer; `gap`, `radius`, `color`), `spotlight-cursor` (eased soft light; `color`, `size`, `ease`). Trails draw on one fixed, pointer-transparent overlay canvas that only animates while a tail is fading. Mouse / pen only by default — `touch: true` opts touch in.
+- **Gestures → effects**: `bindGesture(el, 'fling' | 'twist' | 'long-press', effectNameOrCallback, { velocity, angle, duration, tolerance, effectOptions })` — fling = fast release (px/ms, with direction), twist = two-finger rotation past `angle`° (`cw` / `ccw`), long press charges `--usa-charge` 0 → 1 (`data-charging` while charging) and fires when full; moving cancels. Every fire dispatches `usa-gesture`. Pure helpers `flingVelocity()`, `angleDelta()`.
+- `<usa-gesture-fx gesture effect options velocity angle duration [self]>` — plays the effect on its first child.
+- Showcase: **Cursor trails** and **Gesture triggers** cards.
+
+### Accessibility
+- Cursor effects are skipped under reduced motion; gesture-fired effects go through `playEffect()`, which applies reduced motion. Gestures only add effects — they never replace a click / keyboard action.
+
 ## [5.6.0] - 2026-10-08
 
 ### Added

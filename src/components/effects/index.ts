@@ -18,8 +18,11 @@ import { PAGE_FX } from './page';
 import { defineStory } from './story';
 import { GENERATIVE_FX } from './generative';
 import { AUDIO_FX, defineAudio } from './audio';
+import { CURSOR_FX, defineGestureFx } from './cursor';
 
-export { CARD_FX, CLICK_FX, PHYSICS_FX, PAGE_FX, GENERATIVE_FX, AUDIO_FX };
+export { CARD_FX, CLICK_FX, PHYSICS_FX, PAGE_FX, GENERATIVE_FX, AUDIO_FX, CURSOR_FX };
+export { bindGesture, flingVelocity, angleDelta, GESTURES, defineGestureFx } from './cursor';
+export type { GestureName, GestureFxOptions, GestureDetail, UsaGestureFxElement } from './cursor';
 export { enableAudio, disableAudio, getAudio, createBeatDetector, onBeat, bindBeat, defineAudio } from './audio';
 export type { AudioInput, AudioSample, AudioReactive, BeatOptions, UsaAudioElement } from './audio';
 export { canvasBackground, noise2, hexRgb } from './generative';
@@ -37,6 +40,7 @@ export const EFFECT_PACKS: Record<string, EffectDefinition[]> = {
   page: PAGE_FX,
   generative: GENERATIVE_FX,
   audio: AUDIO_FX,
+  cursor: CURSOR_FX,
 };
 
 /** 5.1: card & click effects 2.0. */
@@ -64,10 +68,16 @@ export function registerAudioEffects(): void {
   registerEffects(EFFECT_PACKS.audio);
 }
 
+/** 5.7: cursor trails, magnetic dots, spotlight cursor. */
+export function registerCursorEffects(): void {
+  registerEffects(EFFECT_PACKS.cursor);
+}
+
 /** Define the 5.x elements of this entry (`<usa-story>`, …) under their default tags. */
 export function defineEffectElements(): void {
   defineStory();
   defineAudio();
+  defineGestureFx();
 }
 
 /** Register the built-ins and every pack (idempotent). */
