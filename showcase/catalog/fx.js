@@ -10,6 +10,8 @@ const PK = (id, en, zh, descEn, descZh, tags, usage, demo, controls) => FX(id, e
 /** A 5.4 <usa-story> card (defineStory from use-scroll-animate/components/effects). */
 /** A 5.6 <usa-audio> card (defineAudio from use-scroll-animate/components/effects). */
 const AU = (id, en, zh, descEn, descZh, tags, usage, demo, controls) => C('usa-audio', 'fx', en, zh, descEn, descZh, tags, usage, demo, { id, define: 'defineAudio', entry: 'effects', pack: true, controls });
+/** A 5.7 <usa-gesture-fx> card. */
+const GX = (id, en, zh, descEn, descZh, tags, usage, demo, controls) => C('usa-gesture-fx', 'fx', en, zh, descEn, descZh, tags, usage, demo, { id, define: 'defineGestureFx', entry: 'effects', pack: true, controls });
 const SC = (id, en, zh, descEn, descZh, tags, usage, demo, controls) => C('usa-story', 'fx', en, zh, descEn, descZh, tags, usage, demo, { id, define: 'defineStory', entry: 'effects', pack: true, controls });
 
 export const components = [
@@ -120,6 +122,20 @@ export const components = [
     '<usa-fx effect="spectrum-bars" trigger="load" self options=\'{"mirror":true}\'>\n  <h2>Now playing</h2>\n</usa-fx>',
     '<usa-fx effect="spectrum-bars" trigger="load"><div class="demo-tile demo-gen">Sound</div></usa-fx>',
     [{ key: 'effect', values: ['spectrum-bars', 'pulse-ring', 'wave-ring'] }]),
+  PK('fx-cursor', 'Cursor trails', '光标拖尾',
+    '5.7: comet trail, rainbow ribbon, sparkle stars, magnetic dot grid and an easing spotlight — scoped to the element, mouse / pen only by default (touch: true to opt in), off under reduced motion.',
+    '5.7：彗星拖尾、彩虹丝带、星光、磁吸点阵与缓动聚光光标 —— 仅作用于绑定元素，默认只响应鼠标 / 触控笔（touch: true 可启用触摸），减少动态效果时关闭。',
+    ['cursor', 'trail', 'comet', 'sparkle', 'ribbon', 'magnetic', 'spotlight', 'pointer'],
+    '<usa-fx effect="comet-trail" trigger="load" self>\n  <section class="hero">…</section>\n</usa-fx>',
+    '<usa-fx effect="comet-trail" trigger="load"><div class="demo-tile demo-gen" style="background:#0b0d12">Move here</div></usa-fx>',
+    [{ key: 'effect', values: ['comet-trail', 'ribbon-trail', 'sparkle-trail', 'magnetic-dots', 'spotlight-cursor'] }]),
+  GX('fx-gesture', 'Gesture triggers', '手势触发',
+    '5.7: <usa-gesture-fx> plays any registered effect on a fling (fast release), a two-finger twist or a long press that charges --usa-charge 0 → 1. JS: bindGesture(el, "fling", "tada").',
+    '5.7：<usa-gesture-fx> 在甩动（快速松手）、双指旋转或长按蓄力（--usa-charge 0 → 1）时播放任意已注册效果。JS：bindGesture(el, "fling", "tada")。',
+    ['gesture', 'fling', 'twist', 'rotate', 'long press', 'charge', 'touch'],
+    '<usa-gesture-fx gesture="long-press" effect="tada">\n  <button>Hold me</button>\n</usa-gesture-fx>',
+    '<usa-gesture-fx gesture="long-press" effect="tada"><button type="button" class="demo-btn demo-charge">Hold me</button></usa-gesture-fx>',
+    [{ key: 'gesture', values: ['long-press', 'fling', 'twist'] }]),
   AU('fx-audio-beat', 'Beat-triggered effects', '节拍触发特效',
     '5.6: <usa-audio> renders a toggle (a user gesture starts Web Audio), detects beats and plays any registered effect on children with data-usa-beat="effect". JS: bindBeat(el, "pop"). Beats play nothing under reduced motion.',
     '5.6：<usa-audio> 渲染一个开关按钮（由用户手势启动 Web Audio），检测节拍并在带 data-usa-beat="效果名" 的子元素上播放任意已注册效果。JS：bindBeat(el, "pop")。减少动态效果时节拍不触发动画。',

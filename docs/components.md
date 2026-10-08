@@ -437,6 +437,22 @@ button.addEventListener('click', async () => {
 ```
 Reduced motion: visuals skipped, beats trigger nothing; audio keeps playing.
 
+### v5.7 Cursor & gesture packs (`components/effects`)
+
+Cursor effects (`comet-trail` · `ribbon-trail` · `sparkle-trail` · `magnetic-dots` · `spotlight-cursor`, kind `cursor`) are persistent and scoped to the element; gestures (`fling`, `twist`, `long-press`) fire any registered effect.
+
+```html
+<usa-fx effect="comet-trail" trigger="load" self options='{"color":"#22d3ee"}'><section class="hero">…</section></usa-fx>
+<usa-gesture-fx gesture="long-press" effect="tada"><button>Hold me</button></usa-gesture-fx>
+```
+```js
+import { bindGesture, registerAllEffects } from 'use-scroll-animate/components/effects';
+registerAllEffects();
+bindGesture(card, 'fling', 'confetti', { velocity: 1 });
+bindGesture(dial, 'twist', ({ direction }) => step(direction === 'cw' ? 1 : -1));
+```
+`--usa-charge` (0–1) lets CSS show long-press progress. Reduced motion: cursor effects off.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.
