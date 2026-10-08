@@ -1,14 +1,15 @@
-import { defineElement, raf, caf, deprecate, type UsaElement } from '../base';
+import { defineElement, raf, caf, type UsaElement } from '../base';
 import css from './cursor.css?raw';
 
-export const CURSOR_MODES = ['dot', 'trail', 'magnetic', 'glow'] as const;
+export const CURSOR_MODES = ['dot', 'magnetic', 'glow'] as const;
 export type CursorMode = (typeof CURSOR_MODES)[number];
 
 /**
- * `<usa-cursor mode="dot | trail | magnetic | glow">` — a custom cursor for
+ * `<usa-cursor mode="dot | magnetic | glow">` — a custom cursor for
  * the page (place it once, e.g. at the end of `<body>`).
  * - `dot` — a ring that follows with spring lag around the real pointer;
- * - `trail` — a comet tail of dots;
+ * (6.0: `mode="trail"` was removed — use the registered `comet-trail` effect;
+ * unknown modes render as `dot`.)
  * - `magnetic` — the ring snaps onto and wraps hovered targets (`a`,
  *   `button`, `[data-cursor]`);
  * - `glow` — a large soft light following the pointer (great on dark UIs).
@@ -41,9 +42,9 @@ export function defineCursor(tag = 'usa-cursor'): CustomElementConstructor | und
             this.replaceChildren();
             return;
           }
-          const mode = this.str('mode', 'dot');
-          if (mode === 'trail') deprecate('usa-cursor-trail', '<usa-cursor mode="trail"> is deprecated and removed in 6.0 — use the registered comet-trail effect: <usa-fx effect="comet-trail" trigger="load" self> around the page content (see docs/upgrading-6.md).');
-          const n = mode === 'trail' ? 8 : 1;
+          const m = this.str('mode', 'dot') as CursorMode;
+          const mode: CursorMode = CURSOR_MODES.includes(m) ? m : 'dot';
+          const n = 1;
           this.innerHTML = Array.from({ length: n }, (_, i) => `<span class="usa-cursor-${mode === 'glow' ? 'glow' : 'ring'}" style="--i:${i}"></span>`).join('') + (mode === 'glow' ? '' : '<span class="usa-cursor-dot"></span>');
           if (this.str('color')) this.style.setProperty('--usa-cursor-color', this.str('color'));
           this.style.setProperty('--usa-cursor-size', `${this.num('size', 28)}px`);
@@ -61,7 +62,7 @@ export function defineCursor(tag = 'usa-cursor'): CustomElementConstructor | und
             let tx = mx;
             let ty = my;
             pts.forEach((p, i) => {
-              const k = mode === 'trail' ? 0.35 - i * 0.03 : mode === 'glow' ? 0.12 : 0.22;
+              const k = mode === 'glow' ? 0.12 : 0.22;
               const goalX = snap && i === 0 ? snap.left + snap.width / 2 : tx;
               const goalY = snap && i === 0 ? snap.top + snap.height / 2 : ty;
               p.x += (goalX - p.x) * k;

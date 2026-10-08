@@ -15,8 +15,8 @@ export const TABS = [
 ];
 
 export const PKG = 'use-scroll-animate';
-export const CDN_UMD = 'https://unpkg.com/use-scroll-animate@5/dist/index.umd.js';
-export const CDN_ELEMENT = 'https://unpkg.com/use-scroll-animate@5/dist/element.umd.js';
+export const CDN_UMD = 'https://unpkg.com/use-scroll-animate@6/dist/index.umd.js';
+export const CDN_ELEMENT = 'https://unpkg.com/use-scroll-animate@6/dist/element.umd.js';
 
 export const INSTALL = {
   npm: `npm i ${PKG}`,

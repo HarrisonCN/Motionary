@@ -1,6 +1,8 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { installComponentMocks, anims, finishAll, mount, tick } from './components-setup';
-import { defineClickComponents, burst, confetti, shake, haptic, morphPath, MORPH_ICONS, BUTTON_DEFORMS } from '../src/components/click';
+import { defineClickComponents, haptic, morphPath, MORPH_ICONS, BUTTON_DEFORMS } from '../src/components/click';
+// 6.0: the engine functions are internal (public API: playEffect(el, 'burst' | 'confetti' | 'shake'))
+import { burst, confetti, shake } from '../src/components/click/fx';
 import { configureComponents } from '../src/components/base';
 
 beforeEach(() => {

@@ -1,6 +1,6 @@
 # Upgrading to 6.0
 
-5.9 **warns once in the console** for everything below, and a codemod rewrites most of it:
+6.0.0 is released. 5.9 **warned once in the console** for everything below, and a codemod rewrites most of it:
 
 ```sh
 npx usa-codemod-6 src            # dry run: lists every change (and what needs a manual edit)

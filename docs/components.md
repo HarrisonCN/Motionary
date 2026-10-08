@@ -40,7 +40,7 @@ defineTypewriter();
 No build step (registers every `<usa-*>` and exposes the API as `window.UsaComponents`):
 
 ```html
-<script src="https://unpkg.com/use-scroll-animate@5/dist/components.umd.js"></script>
+<script src="https://unpkg.com/use-scroll-animate@6/dist/components.umd.js"></script>
 <usa-typewriter words="Hello, Windows.|Hello, web."></usa-typewriter>
 <script>UsaComponents.toast('Ready', { type: 'success' });</script>
 ```
@@ -151,7 +151,7 @@ Presets (`SPRING_PRESETS`): `default` (170/26), `gentle` (120/14), `wobbly` (180
 | `<usa-hold>` | Hold-to-confirm ring | `duration` (1200), `label`, `color`, `haptic` | `progress`, `cancel()`; `usa:progress`, `usa:confirm`, `usa:cancel`; `--usa-hold` |
 | `<usa-double-tap>` | Double tap → heart at the point | `icon` (♥), `color`, `delay` (300), `haptic` | `pop(x?, y?)`; `usa:double-tap` |
 | `<usa-checkbox>` | Animated form-associated checkbox | `checked`, `indeterminate`, `name`, `value`, `label`, `shape` (`circle`) | `checked`, `toggle()`; `change`, `usa:change` |
-| `burst()` · `confetti()` · `shake()` · `haptic()` | The click-effect engine as functions | — | particles skip under reduced motion |
+| `haptic()` · `playEffect(el, 'burst' \| 'confetti' \| 'shake', …)` | Haptics; the click effects from code go through the effect registry (6.0 removed `burst()` / `confetti()` / `shake()`) | — | particles skip under reduced motion |
 
 ### 10. UI components & variants — `components/ui`
 
@@ -180,7 +180,7 @@ Presets (`SPRING_PRESETS`): `default` (170/26), `gentle` (120/14), `wobbly` (180
 | `pageTransition(update, opts)` | SPA page transition (View Transitions) | `effect` (`fade` · `slide` · `slide-left` · `slide-right` · `slide-up` · `circle` · `blinds` · `pixel` · `zoom`), `x`, `y`, `duration`, `fallback` | Promise |
 | `enableMpaTransitions(effect)` | Cross-document (MPA) transitions | effect, duration | — |
 | `themeTransition(apply, { x, y })` | Circle-reveal theme switch | — | Promise |
-| `<usa-cursor>` | Custom cursor | `mode` (`dot` · `trail` · `magnetic` · `glow`), `color`, `size`, `hide-native`, `targets` | `active` |
+| `<usa-cursor>` | Custom cursor | `mode` (`dot` · `magnetic` · `glow`; 6.0 removed `trail` → `comet-trail` effect), `color`, `size`, `hide-native`, `targets` | `active` |
 | `smoothScroll(opts)` · `scrollToTarget(to, opts)` | Wheel smoothing · spring scroll-to | `target`, `lerp` (0.12), `wheelMultiplier` · `offset`, `preset` | returns stop fn · Promise |
 | `<usa-fullpage>` | Full-screen snapping sections | `dots`, `axis` (`y` · `x`) | `index`, `go(i)`, `next()`, `prev()`; `usa:section` |
 | `<usa-loading-bar>` · `loadingBar` | Top loading bar | `color`, `height` (3), `position` | `start()`, `set(p)`, `done()`, `track(promise)` |

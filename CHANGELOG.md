@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.0.0] - 2026-10-08
+
+### ⚠ BREAKING CHANGES
+- **Removed `burst()`, `confetti()`, `shake()`** from `use-scroll-animate/components`, `/components/click` and the UMD global (deprecated in 5.9). Play the registered effects instead: `playEffect(document.body, 'burst', { x, y, …options })`, `playEffect(el, 'confetti', options)`, `playEffect(el, 'shake', { intensity, duration })` (`use-scroll-animate/components/fx`). `haptic()` stays.
+- **Removed `<usa-cursor mode="trail">`** (deprecated in 5.9): `CURSOR_MODES` is now `dot` · `magnetic` · `glow`, and an unknown mode renders as `dot`. Use the 5.7 `comet-trail` effect: `<usa-fx effect="comet-trail" trigger="load" self>…</usa-fx>`.
+- Every effect now goes through the 5.0 registry (`registerEffect()` / `playEffect()` / `bindEffect()` / `<usa-fx>`); the 5.1–5.9 packs live in `use-scroll-animate/components/effects`.
+
+### Migration
+- `npx usa-codemod-6 --write src` rewrites the helper calls and imports (aliases and the `UsaComponents` global included) and lists `<usa-cursor mode="trail">` for a manual edit. Guide: `docs/upgrading-6.md`.
+- CDN URLs move to the `@6` range: `https://unpkg.com/use-scroll-animate@6/dist/components.umd.js`.
+
+### Docs
+- README (EN / 中文 / 日本語): new **Effect packs** (`/components/effects`) row.
+- `docs/ROADMAP.md`: post-6.0 roadmap (v6.1 → v7.0).
+
 ## [5.9.0] - 2026-10-08
 
 ### Added

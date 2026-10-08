@@ -53,6 +53,7 @@ defineComponents(); // カテゴリ単位: import { defineTextComponents } from 
 | **レイアウト** (`/components/layout`) | `<usa-auto-animate>` / `autoAnimate()` · `<usa-masonry>` · `sharedTransition()`（共有要素） |
 | **エフェクトパック** (`/components/packs`) | `<usa-pack>` (`name="ecommerce \| portfolio \| dashboard \| game \| landing"`) · `applyPack()` · `flyToCart()` |
 | **エフェクト API** (`/components/fx`) | `<usa-fx>` · `registerEffect()` · `playEffect()` · `bindEffect()` · 内蔵: タイムライン入場、pulse · pop · jelly · wiggle · bounce · tada · shake、burst · confetti · ripple |
+| **エフェクトパック** (`/components/effects`) | `registerAllEffects()` · カード & クリック 2.0 · 物理 · ページ全体 · `<usa-story>` スクロールストーリー · ジェネレーティブ背景 · サウンド連動（`<usa-audio>`）· カーソル & ジェスチャー（`<usa-gesture-fx>`）· テーマパック（`<usa-theme>`）· マイクロインタラクション 23 種 · `<usa-player>` JSON アニメーション |
 
 ## ドキュメント
 
