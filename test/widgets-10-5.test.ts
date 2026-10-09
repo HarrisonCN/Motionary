@@ -202,9 +202,9 @@ describe('10.5 widgets', () => {
   });
   it('cards, Store badge, snippets and docs carry the gl prerequisites (+ loaders)', () => {
     const card: any = COMPONENTS.find((c: any) => c.tag === 'usa-gl-scene');
-    expect(card.requires).toEqual(['gl', 'format-gltf', 'format-obj']);
+    expect(card.requires).toEqual(['gl', 'format-gltf', 'format-obj', 'gltf-anim']); // 10.8: + gltf-anim for animation
     expect(COMPONENT_ITEMS.find((i: any) => i.gallery === 'gl-scene').requiresBadge).toContain('Requires: motionary/runtime/gl');
-    expect(componentSnippets(card).esm).toMatch(/use\(gl, formatGltf, formatObj\);/);
+    expect(componentSnippets(card).esm).toMatch(/use\(gl, formatGltf, formatObj, gltfAnim\);/);
     for (const id of ['gl', 'format-gltf', 'format-obj']) expect(readFileSync(`docs/runtime/${id}.md`, 'utf8')).toMatch(/## Compatibility[\s\S]*✅ yes/);
     expect(readFileSync('test/fixtures/formats/CREDITS.md', 'utf8')).toMatch(/khronos-box\.glb[\s\S]*CC-BY 4\.0/);
   });

@@ -1387,7 +1387,7 @@ Full-screen sections that snap one at a time, with keyboard paging, dot navigati
 
 ### <usa-gl-scene> — 3D scene (glTF / OBJ)
 
-10.5: a WebGL2 3D viewer on Motionary’s own renderer — glTF 2.0 / GLB and OBJ / MTL models or built-in shapes, PBR-style materials, orbit controls (drag, wheel, pinch, arrow keys), auto-rotate and video textures. Requires motionary/runtime/gl (+ format-gltf for .gltf / .glb, format-obj for .obj) — npm i motionary, then use(gl, formatGltf, formatObj) before it mounts. Alias: <usa-three-scene>.
+10.5: a WebGL2 3D viewer on Motionary’s own renderer — glTF 2.0 / GLB and OBJ / MTL models or built-in shapes, PBR-style materials, orbit controls (drag, wheel, pinch, arrow keys), auto-rotate and video textures. Requires motionary/runtime/gl (+ format-gltf for .gltf / .glb, format-obj for .obj, gltf-anim for glTF animation — 10.8) — npm i motionary, then use(gl, formatGltf, formatObj, gltfAnim) before it mounts. Alias: <usa-three-scene>.
 
 - Import: `import { defineGlScene } from 'motionary/components/widgets'; defineGlScene();`
 - CDN: https://unpkg.com/motionary@10/dist/widgets.umd.js

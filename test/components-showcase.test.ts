@@ -8,7 +8,8 @@ import * as components from '../src/components';
 import * as effects0 from '../src/components/effects';
 import * as widgets from '../src/components/widgets';
 import * as fx2 from '../src/components/fx2';
-const effects = { ...effects0, ...widgets, ...fx2 }; // 5.4+ effects entry, 6.2+ widgets + 6.x packs
+import * as snapCarousel from '../src/components/widgets/snap-carousel'; // 10.8+: own entry points
+const effects = { ...effects0, ...widgets, ...fx2, ...snapCarousel }; // 5.4+ effects entry, 6.2+ widgets + 6.x packs
 // Plain ESM modules of the no-build component gallery
 // @ts-ignore - untyped .js
 import { COMPONENT_CATEGORIES, COMPONENTS, HELPERS, GALLERY, CODE_TABS, componentSnippets, matchesComponent, findComponent, toJsx } from '../showcase/components-catalog.js';

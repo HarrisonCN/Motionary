@@ -4092,7 +4092,7 @@
       "id": "gl-scene",
       "tag": "usa-gl-scene",
       "title": "3D scene (glTF / OBJ)",
-      "description": "10.5: a WebGL2 3D viewer on Motionary’s own renderer — glTF 2.0 / GLB and OBJ / MTL models or built-in shapes, PBR-style materials, orbit controls (drag, wheel, pinch, arrow keys), auto-rotate and video textures. Requires motionary/runtime/gl (+ format-gltf for .gltf / .glb, format-obj for .obj) — npm i motionary, then use(gl, formatGltf, formatObj) before it mounts. Alias: <usa-three-scene>.",
+      "description": "10.5: a WebGL2 3D viewer on Motionary’s own renderer — glTF 2.0 / GLB and OBJ / MTL models or built-in shapes, PBR-style materials, orbit controls (drag, wheel, pinch, arrow keys), auto-rotate and video textures. Requires motionary/runtime/gl (+ format-gltf for .gltf / .glb, format-obj for .obj, gltf-anim for glTF animation — 10.8) — npm i motionary, then use(gl, formatGltf, formatObj, gltfAnim) before it mounts. Alias: <usa-three-scene>.",
       "category": "ui",
       "since": "10.5",
       "keywords": [
@@ -4136,7 +4136,7 @@
         "reload"
       ],
       "example": "<usa-gl-scene src=\"/models/chair.glb\" controls auto-rotate=\"20\" label=\"Chair\"></usa-gl-scene>",
-      "esm": "import { use } from 'motionary/runtime';\nimport { gl } from 'motionary/runtime/gl';\nimport { formatGltf } from 'motionary/runtime/format-gltf';\nimport { formatObj } from 'motionary/runtime/format-obj';\n\nuse(gl, formatGltf, formatObj);\nimport { defineGlScene } from 'motionary/components/widgets';\n\ndefineGlScene(); // registers <usa-gl-scene>\n\n/* then use it in your HTML:\n<usa-gl-scene src=\"/models/chair.glb\" controls auto-rotate=\"20\" label=\"Chair\"></usa-gl-scene>\n*/",
+      "esm": "import { use } from 'motionary/runtime';\nimport { gl } from 'motionary/runtime/gl';\nimport { formatGltf } from 'motionary/runtime/format-gltf';\nimport { formatObj } from 'motionary/runtime/format-obj';\nimport { gltfAnim } from 'motionary/runtime/gltf-anim';\n\nuse(gl, formatGltf, formatObj, gltfAnim);\nimport { defineGlScene } from 'motionary/components/widgets';\n\ndefineGlScene(); // registers <usa-gl-scene>\n\n/* then use it in your HTML:\n<usa-gl-scene src=\"/models/chair.glb\" controls auto-rotate=\"20\" label=\"Chair\"></usa-gl-scene>\n*/",
       "requires": [
         "gl",
         "format-gltf",
@@ -4168,13 +4168,13 @@
         {
           "id": "gl-scene",
           "title": "3D scene (glTF / OBJ)",
-          "description": "10.5: a WebGL2 3D viewer on Motionary’s own renderer — glTF 2.0 / GLB and OBJ / MTL models or built-in shapes, PBR-style materials, orbit controls (drag, wheel, pinch, arrow keys), auto-rotate and video textures. Requires motionary/runtime/gl (+ format-gltf for .gltf / .glb, format-obj for .obj) — npm i motionary, then use(gl, formatGltf, formatObj) before it mounts. Alias: <usa-three-scene>.",
+          "description": "10.5: a WebGL2 3D viewer on Motionary’s own renderer — glTF 2.0 / GLB and OBJ / MTL models or built-in shapes, PBR-style materials, orbit controls (drag, wheel, pinch, arrow keys), auto-rotate and video textures. Requires motionary/runtime/gl (+ format-gltf for .gltf / .glb, format-obj for .obj, gltf-anim for glTF animation — 10.8) — npm i motionary, then use(gl, formatGltf, formatObj, gltfAnim) before it mounts. Alias: <usa-three-scene>.",
           "example": "<usa-gl-scene src=\"/models/chair.glb\" controls auto-rotate=\"20\" label=\"Chair\"></usa-gl-scene>"
         },
         {
           "id": "gl-skinned",
           "title": "3D animation (glTF skin + morph)",
-          "description": "10.8: <usa-gl-scene animation> plays glTF animations — skeletal skinning (4 joints per vertex), morph targets and LINEAR / STEP / CUBICSPLINE channels — on Motionary’s own WebGL2 renderer. Pick a clip by name or index, set animation-speed; reduced motion shows the first pose. Requires motionary/runtime/gl + motionary/runtime/format-gltf + motionary/runtime/gltf-anim — npm i motionary, then use(gl, formatGltf, gltfAnim).",
+          "description": "10.8: <usa-gl-scene animation> plays glTF animations — skeletal skinning (4 joints per vertex), morph targets and LINEAR / STEP / CUBICSPLINE channels — on Motionary’s own WebGL2 renderer. Pick a clip by name or index, set animation-speed; reduced motion shows the first pose. Requires motionary/runtime/gl + motionary/runtime/format-gltf + motionary/runtime/gltf-anim (+ format-obj for .obj models) — npm i motionary, then use(gl, formatGltf, formatObj, gltfAnim).",
           "example": "<usa-gl-scene src=\"/models/robot.glb\" animation=\"walk\" controls label=\"Walking robot\"></usa-gl-scene>"
         }
       ]
