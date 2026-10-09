@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { GAME_FX } from '../../components/fx2/game';
 
 /** The effect definition. */
-export const effect: EffectDefinition = GAME_FX.find((d) => d.name === 'achievement-unlock')!;
+export const effect: EffectDefinition = /*#__PURE__*/ GAME_FX.find((d) => d.name === 'achievement-unlock')!;
 /** Register only this effect (idempotent). */
 export function registerAchievementUnlock(): void {
   registerEffects([effect]);

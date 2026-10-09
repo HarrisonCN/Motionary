@@ -59,7 +59,7 @@ export function describeComponent(el: Element): ExportedNode {
 }
 
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
-const VOID = new Set(['img', 'br', 'hr', 'input', 'source', 'meta', 'link', 'wbr', 'area', 'col', 'embed', 'track']);
+const VOID = /*#__PURE__*/ new Set(['img', 'br', 'hr', 'input', 'source', 'meta', 'link', 'wbr', 'area', 'col', 'embed', 'track']);
 function markup(n: ExportedNode | string, jsx: boolean, ind: string): string {
   if (typeof n === 'string') return ind + (jsx ? n.replace(/[{}<>]/g, (c) => `{'${c}'}`) : esc(n));
   const at = Object.entries(n.attrs)

@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { CYBER_FX } from '../../components/fx2/cyber';
 
 /** The effect definition. */
-export const effect: EffectDefinition = CYBER_FX.find((d) => d.name === 'hologram')!;
+export const effect: EffectDefinition = /*#__PURE__*/ CYBER_FX.find((d) => d.name === 'hologram')!;
 /** Register only this effect (idempotent). */
 export function registerHologram(): void {
   registerEffects([effect]);

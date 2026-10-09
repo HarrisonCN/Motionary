@@ -52,7 +52,7 @@ export interface ScrollToOptions2 {
 }
 
 const clamp = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v));
-const instances = new Set<SmoothScroll>();
+const instances = /*#__PURE__*/ new Set<SmoothScroll>();
 
 export class SmoothScroll {
   /** Current (animated) scroll position, px. */

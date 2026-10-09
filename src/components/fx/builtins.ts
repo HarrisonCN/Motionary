@@ -7,7 +7,7 @@ import { TIMELINE_PRESETS } from '../timeline/core';
 import { burst, confetti, shake } from '../click/fx';
 import type { EffectDefinition } from './registry';
 
-const enter: EffectDefinition[] = Object.entries(TIMELINE_PRESETS).map(([name, frames]) => ({
+const enter: EffectDefinition[] = /*#__PURE__*/ Object.entries(TIMELINE_PRESETS).map(([name, frames]) => ({
   name,
   kind: 'enter' as const,
   description: `Entrance: ${name} (same keyframes as the timeline preset).`,

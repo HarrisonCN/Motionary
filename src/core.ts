@@ -266,9 +266,9 @@ export function getScrollProgress(el: Element, root?: Element | null): number {
 /* ------------------------------------------------------------------ */
 
 /** The animation currently running on an element, so it can be cancelled/replaced. */
-const running = new WeakMap<Element, Animation>();
+const running = /*#__PURE__*/ new WeakMap<Element, Animation>();
 /** Native engine: the scroll-linked exit animation, next to the entrance in `running`. */
-const exits = new WeakMap<Element, Animation>();
+const exits = /*#__PURE__*/ new WeakMap<Element, Animation>();
 const timers = new WeakMap<Element, ReturnType<typeof setTimeout>>();
 
 function cancelRunning(el: Element): void {

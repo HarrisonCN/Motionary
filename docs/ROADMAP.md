@@ -96,7 +96,7 @@ Store 卡片显示 **「Requires: motionary/runtime/<module>」** 徽章（官�
 
 ### 11.x — 轻量、可摇树、可度量
 
-- **v11.1 — 核心无副作用、可 tree-shake**：`package.json` 精确的 `sideEffects` 字段（只列出真正有副作用的 CSS / IIFE / 自动注册入口）、模块顶层 `/*#__PURE__*/` 标注、导入时不执行注册；新增 tree-shake 测试（只导入一个导出，打包结果中不得出现其他模块的代码）。（层：Motion Core · Components）
+- ✅ **v11.1 — 核心无副作用、可 tree-shake**：`package.json` 精确的 `sideEffects` 字段（只列出真正有副作用的 CSS / IIFE / 自动注册入口）、模块顶层 `/*#__PURE__*/` 标注、导入时不执行注册；新增 tree-shake 测试（只导入一个导出，打包结果中不得出现其他模块的代码）。（层：Motion Core · Components）
 - **v11.2 — Source map 策略**：调试用的 `.map` 继续生成，但评估不再全部随 npm 发布 —— 实测 `npm pack` 体积（含 / 不含 `.map`），可选方案：source map 作为 GitHub Release 附件或独立包 `motionary-sourcemaps`；结论与数字写入文档并在 CI 中检查 pack 体积。（层：Tooling）
 - **v11.3 — 真正有意义的性能指标进 CI**：按需加载后的首屏传输量、解析 / 执行时间、GPU 资源占用（纹理 / 缓冲区 / 上下文数量）、帧稳定性（掉帧率、长帧 p95）；Headless Chromium 实测，设预算，回归即失败。（层：Tooling）
 - **v11.4 — Runtime 分级**：明确 **basic / standard / advanced** 三级 —— basic：ticker、tween、timeline、scroll、text、CSS / WAAPI 关键帧；standard：smooth、drag-snap、SVG、精灵图、GIF / APNG / WebP、Lottie；advanced：WebGL（gl）、3D 文件解析（glTF / OBJ / 解码器）、物理。普通网站只用 basic 永远不会为 WebGL、3D 解析或高级物理付费；清单、文档页与 Requires 徽章标明级别，体积预算按级别分组。（层：Runtime）

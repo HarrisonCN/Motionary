@@ -30,7 +30,7 @@ export interface ExprContext {
   seed: Num;
 }
 
-const ALLOWED = new Set(['time', 'value', 'thisComp', 'thisLayer', 'thisProperty', 'Math', 'wiggle', 'loopOut', 'loopIn', 'loopOutDuration', 'loopInDuration', 'linear', 'ease', 'easeIn', 'easeOut', 'clamp', 'valueAtTime', 'framesToTime', 'timeToFrames', 'degreesToRadians', 'radiansToDegrees', 'add', 'sub', 'mul', 'div', 'length', 'true', 'false', '$bm_rt', 'index']);
+const ALLOWED = /*#__PURE__*/ new Set(['time', 'value', 'thisComp', 'thisLayer', 'thisProperty', 'Math', 'wiggle', 'loopOut', 'loopIn', 'loopOutDuration', 'loopInDuration', 'linear', 'ease', 'easeIn', 'easeOut', 'clamp', 'valueAtTime', 'framesToTime', 'timeToFrames', 'degreesToRadians', 'radiansToDegrees', 'add', 'sub', 'mul', 'div', 'length', 'true', 'false', '$bm_rt', 'index']);
 
 function lex(src: string): string[] {
   const t: string[] = [];
@@ -295,7 +295,7 @@ export function runExpression(ast: Node, c: ExprContext): V {
   return ev(ast);
 }
 
-const cache = new Map<string, Node | null>();
+const cache = /*#__PURE__*/ new Map<string, Node | null>();
 /** Compile (cached); null when outside the subset. */
 export function expression(src: string): Node | null {
   if (!cache.has(src)) {

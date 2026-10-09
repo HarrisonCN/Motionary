@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { CINEMA_FX } from '../../components/fx2/cinema';
 
 /** The effect definition. */
-export const effect: EffectDefinition = CINEMA_FX.find((d) => d.name === 'letterbox')!;
+export const effect: EffectDefinition = /*#__PURE__*/ CINEMA_FX.find((d) => d.name === 'letterbox')!;
 /** Register only this effect (idempotent). */
 export function registerLetterbox(): void {
   registerEffects([effect]);

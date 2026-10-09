@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { GENART_FX } from '../../components/fx2/genart';
 
 /** The effect definition. */
-export const effect: EffectDefinition = GENART_FX.find((d) => d.name === 'mesh-drift')!;
+export const effect: EffectDefinition = /*#__PURE__*/ GENART_FX.find((d) => d.name === 'mesh-drift')!;
 /** Register only this effect (idempotent). */
 export function registerMeshDrift(): void {
   registerEffects([effect]);

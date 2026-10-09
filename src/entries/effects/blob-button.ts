@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { MORPH2_FX } from '../../components/fx2/morph2';
 
 /** The effect definition. */
-export const effect: EffectDefinition = MORPH2_FX.find((d) => d.name === 'blob-button')!;
+export const effect: EffectDefinition = /*#__PURE__*/ MORPH2_FX.find((d) => d.name === 'blob-button')!;
 /** Register only this effect (idempotent). */
 export function registerBlobButton(): void {
   registerEffects([effect]);

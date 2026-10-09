@@ -15,7 +15,7 @@
 import type { EffectContext, EffectDefinition } from '../fx/registry';
 import { origin, spawn, overlay, rand, all } from './shared';
 
-const saved = new WeakMap<HTMLElement, string>();
+const saved = /*#__PURE__*/ new WeakMap<HTMLElement, string>();
 
 /** Toggle `aria-pressed` (or set it) and return the new state. */
 export function togglePressed(el: HTMLElement, force?: boolean): boolean {

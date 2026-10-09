@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { FESTIVAL_FX } from '../../components/fx2/festival';
 
 /** The effect definition. */
-export const effect: EffectDefinition = FESTIVAL_FX.find((d) => d.name === 'spooky-float')!;
+export const effect: EffectDefinition = /*#__PURE__*/ FESTIVAL_FX.find((d) => d.name === 'spooky-float')!;
 /** Register only this effect (idempotent). */
 export function registerSpookyFloat(): void {
   registerEffects([effect]);

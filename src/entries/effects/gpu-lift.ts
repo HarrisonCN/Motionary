@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { PERF3_FX } from '../../components/fx2/perf3';
 
 /** The effect definition. */
-export const effect: EffectDefinition = PERF3_FX.find((d) => d.name === 'gpu-lift')!;
+export const effect: EffectDefinition = /*#__PURE__*/ PERF3_FX.find((d) => d.name === 'gpu-lift')!;
 /** Register only this effect (idempotent). */
 export function registerGpuLift(): void {
   registerEffects([effect]);

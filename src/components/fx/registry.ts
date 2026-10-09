@@ -46,30 +46,31 @@ export interface EffectDefinition<O extends Record<string, unknown> = Record<str
 
 // 6.2: one table per page (Symbol.for), shared by every bundle that registers effects —
 // e.g. dist/components.umd.js and dist/widgets.umd.js on the same page.
-const REG_KEY = Symbol.for('use-scroll-animate.effects');
-const registry: Map<string, EffectDefinition> = ((globalThis as any)[REG_KEY] ||= new Map<string, EffectDefinition>());
+const REG_KEY = /*#__PURE__*/ Symbol.for('use-scroll-animate.effects');
+// 11.1: created on first use, so importing this module writes nothing to globalThis.
+const fxTable = (): Map<string, EffectDefinition> => ((globalThis as any)[REG_KEY] ||= new Map<string, EffectDefinition>());
 
 /** Register an effect (throws on a duplicate name unless `override`). Returns an unregister function. */
 export function registerEffect<O extends Record<string, unknown>>(def: EffectDefinition<O>, opts: { override?: boolean } = {}): () => void {
   if (!/^[a-z][a-z0-9-]*$/.test(def.name)) throw new Error(`[motionary] invalid effect name "${def.name}"`);
   if (!EFFECT_KINDS.includes(def.kind)) throw new Error(`[motionary] unknown effect kind "${def.kind}"`);
-  if (registry.has(def.name) && !opts.override) throw new Error(`[motionary] effect "${def.name}" is already registered`);
-  registry.set(def.name, def as unknown as EffectDefinition);
+  if (fxTable().has(def.name) && !opts.override) throw new Error(`[motionary] effect "${def.name}" is already registered`);
+  fxTable().set(def.name, def as unknown as EffectDefinition);
   return () => {
-    if (registry.get(def.name) === (def as unknown)) registry.delete(def.name);
+    if (fxTable().get(def.name) === (def as unknown)) fxTable().delete(def.name);
   };
 }
 
 /** Register several effects at once (already-registered names are skipped). */
 export function registerEffects(defs: EffectDefinition<any>[]): void {
-  for (const d of defs) if (!registry.has(d.name)) registerEffect(d);
+  for (const d of defs) if (!fxTable().has(d.name)) registerEffect(d);
 }
 
-export const getEffect = (name: string): EffectDefinition | undefined => registry.get(name);
-export const hasEffect = (name: string): boolean => registry.has(name);
+export const getEffect = (name: string): EffectDefinition | undefined => fxTable().get(name);
+export const hasEffect = (name: string): boolean => fxTable().has(name);
 /** Registered effects (optionally of one kind), sorted by name. */
 export function listEffects(kind?: EffectKind): EffectDefinition[] {
-  return Array.from(registry.values())
+  return Array.from(fxTable().values())
     .filter((d) => !kind || d.kind === kind)
     .sort((a, b) => a.name.localeCompare(b.name));
 }
@@ -93,8 +94,8 @@ function context(event?: Event): EffectContext & { cleanups: Cleanup[] } {
  * immediately for fire-and-forget effects). Unknown names reject.
  */
 export async function playEffect(el: HTMLElement, name: string, options: Record<string, unknown> = {}, event?: Event): Promise<void> {
-  const def = registry.get(name);
-  if (!def) throw new Error(`[motionary] unknown effect "${name}" — registered: ${Array.from(registry.keys()).join(', ')}`);
+  const def = fxTable().get(name);
+  if (!def) throw new Error(`[motionary] unknown effect "${name}" — registered: ${Array.from(fxTable().keys()).join(', ')}`);
   const ctx = context(event);
   if (ctx.reduced && (def.reduced ?? (SKIP_BY_DEFAULT.includes(def.kind) ? 'skip' : 'run')) === 'skip') return;
   const out = def.run(el, { ...(def.defaults || {}), ...options }, ctx);
@@ -109,7 +110,7 @@ export async function playEffect(el: HTMLElement, name: string, options: Record<
  */
 export function bindEffect(el: HTMLElement, name: string, options: Record<string, unknown> & { trigger?: EffectTrigger; once?: boolean } = {}): Cleanup {
   const { trigger = 'click', once, ...opts } = options;
-  const def = registry.get(name);
+  const def = fxTable().get(name);
   if (!def) throw new Error(`[motionary] unknown effect "${name}"`);
   const offs: Cleanup[] = [];
   let current: Cleanup | null = null;

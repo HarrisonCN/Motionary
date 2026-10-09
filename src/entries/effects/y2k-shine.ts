@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { RETRO_FX } from '../../components/fx2/retro2';
 
 /** The effect definition. */
-export const effect: EffectDefinition = RETRO_FX.find((d) => d.name === 'y2k-shine')!;
+export const effect: EffectDefinition = /*#__PURE__*/ RETRO_FX.find((d) => d.name === 'y2k-shine')!;
 /** Register only this effect (idempotent). */
 export function registerY2kShine(): void {
   registerEffects([effect]);

@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { LOTTIE_FX } from '../../components/fx2/lottie';
 
 /** The effect definition. */
-export const effect: EffectDefinition = LOTTIE_FX.find((d) => d.name === 'icon-pop')!;
+export const effect: EffectDefinition = /*#__PURE__*/ LOTTIE_FX.find((d) => d.name === 'icon-pop')!;
 /** Register only this effect (idempotent). */
 export function registerIconPop(): void {
   registerEffects([effect]);

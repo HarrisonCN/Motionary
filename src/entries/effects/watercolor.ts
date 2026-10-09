@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { PAPER_FX } from '../../components/fx2/paper';
 
 /** The effect definition. */
-export const effect: EffectDefinition = PAPER_FX.find((d) => d.name === 'watercolor')!;
+export const effect: EffectDefinition = /*#__PURE__*/ PAPER_FX.find((d) => d.name === 'watercolor')!;
 /** Register only this effect (idempotent). */
 export function registerWatercolor(): void {
   registerEffects([effect]);

@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { MUSIC_FX } from '../../components/fx2/music';
 
 /** The effect definition. */
-export const effect: EffectDefinition = MUSIC_FX.find((d) => d.name === 'waveform-scope')!;
+export const effect: EffectDefinition = /*#__PURE__*/ MUSIC_FX.find((d) => d.name === 'waveform-scope')!;
 /** Register only this effect (idempotent). */
 export function registerWaveformScope(): void {
   registerEffects([effect]);

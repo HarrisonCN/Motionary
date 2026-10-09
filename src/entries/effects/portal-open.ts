@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { SPATIAL_FX } from '../../components/fx2/spatial';
 
 /** The effect definition. */
-export const effect: EffectDefinition = SPATIAL_FX.find((d) => d.name === 'portal-open')!;
+export const effect: EffectDefinition = /*#__PURE__*/ SPATIAL_FX.find((d) => d.name === 'portal-open')!;
 /** Register only this effect (idempotent). */
 export function registerPortalOpen(): void {
   registerEffects([effect]);

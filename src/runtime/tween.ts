@@ -38,7 +38,7 @@ export interface TweenOptions extends PlayOptions {
 const TRANSFORM = ['x', 'y', 'rotate', 'scale', 'scaleX', 'scaleY', 'skewX', 'skewY'];
 const DEFAULT_UNIT: Record<string, string> = { x: 'px', y: 'px', rotate: 'deg', skewX: 'deg', skewY: 'deg', scale: '', scaleX: '', scaleY: '' };
 type TState = Record<string, { v: number; u: string }>;
-const tstate = new WeakMap<Element, TState>();
+const tstate = /*#__PURE__*/ new WeakMap<Element, TState>();
 
 const isEl = (t: unknown): t is HTMLElement => typeof Element !== 'undefined' && t instanceof Element;
 

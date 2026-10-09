@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { CHART_FX } from '../../components/fx2/chart';
 
 /** The effect definition. */
-export const effect: EffectDefinition = CHART_FX.find((d) => d.name === 'number-roll')!;
+export const effect: EffectDefinition = /*#__PURE__*/ CHART_FX.find((d) => d.name === 'number-roll')!;
 /** Register only this effect (idempotent). */
 export function registerNumberRoll(): void {
   registerEffects([effect]);

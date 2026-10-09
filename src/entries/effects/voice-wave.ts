@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { AI_FX } from '../../components/fx2/ai';
 
 /** The effect definition. */
-export const effect: EffectDefinition = AI_FX.find((d) => d.name === 'voice-wave')!;
+export const effect: EffectDefinition = /*#__PURE__*/ AI_FX.find((d) => d.name === 'voice-wave')!;
 /** Register only this effect (idempotent). */
 export function registerVoiceWave(): void {
   registerEffects([effect]);

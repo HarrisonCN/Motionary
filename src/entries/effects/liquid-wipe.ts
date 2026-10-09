@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { TRANSITIONS2_FX } from '../../components/fx2/transitions2';
 
 /** The effect definition. */
-export const effect: EffectDefinition = TRANSITIONS2_FX.find((d) => d.name === 'liquid-wipe')!;
+export const effect: EffectDefinition = /*#__PURE__*/ TRANSITIONS2_FX.find((d) => d.name === 'liquid-wipe')!;
 /** Register only this effect (idempotent). */
 export function registerLiquidWipe(): void {
   registerEffects([effect]);

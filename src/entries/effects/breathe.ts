@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { ORGANIC_FX } from '../../components/fx2/organic';
 
 /** The effect definition. */
-export const effect: EffectDefinition = ORGANIC_FX.find((d) => d.name === 'breathe')!;
+export const effect: EffectDefinition = /*#__PURE__*/ ORGANIC_FX.find((d) => d.name === 'breathe')!;
 /** Register only this effect (idempotent). */
 export function registerBreathe(): void {
   registerEffects([effect]);

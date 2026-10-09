@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { FOCUS_FX } from '../../components/fx2/focus';
 
 /** The effect definition. */
-export const effect: EffectDefinition = FOCUS_FX.find((d) => d.name === 'success-check')!;
+export const effect: EffectDefinition = /*#__PURE__*/ FOCUS_FX.find((d) => d.name === 'success-check')!;
 /** Register only this effect (idempotent). */
 export function registerSuccessCheck(): void {
   registerEffects([effect]);

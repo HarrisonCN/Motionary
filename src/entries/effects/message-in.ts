@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { SOCIAL_FX } from '../../components/fx2/social';
 
 /** The effect definition. */
-export const effect: EffectDefinition = SOCIAL_FX.find((d) => d.name === 'message-in')!;
+export const effect: EffectDefinition = /*#__PURE__*/ SOCIAL_FX.find((d) => d.name === 'message-in')!;
 /** Register only this effect (idempotent). */
 export function registerMessageIn(): void {
   registerEffects([effect]);

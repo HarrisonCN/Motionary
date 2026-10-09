@@ -6,7 +6,7 @@ export const SPRING_EFFECTS = ['bounce-in', 'pop', 'drop', 'jelly', 'rubber-band
 export type SpringEffect = (typeof SPRING_EFFECTS)[number];
 
 /** Entrance effects start hidden; attention effects (jelly, rubber-band) play on visible content. */
-const ENTRANCE = new Set<string>(['bounce-in', 'pop', 'drop']);
+const ENTRANCE = /*#__PURE__*/ new Set<string>(['bounce-in', 'pop', 'drop']);
 
 /** Keyframes of a spring effect (entrances use spring timing, attention effects fixed frames). */
 export function springEffectKeyframes(effect: string, reduced = false): Keyframe[] {

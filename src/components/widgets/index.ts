@@ -300,7 +300,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
 };
 
 /** Every widget tag, in release order. */
-export const WIDGET_TAGS: string[] = Object.values(WIDGETS).flatMap((g) => Object.keys(g));
+export const WIDGET_TAGS: string[] = /*#__PURE__*/ Object.values(WIDGETS).flatMap((g) => Object.keys(g));
 
 /** Register every widget (or only those of one release, e.g. `'6.2'`) under its default tag. */
 export function defineWidgets(release?: string): void {
