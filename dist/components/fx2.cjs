@@ -1,6 +1,6 @@
 'use strict';
 
-var components_marketplace = require('./marketplace.cjs');
+var manifest = require('../chunks/manifest-B08-vo9G.cjs');
 var components_fxGpu = require('../chunks/gpu-CcdA2D2i.cjs');
 var components_fxText = require('./fx-text.cjs');
 var components_fxLight = require('./fx-light.cjs');
@@ -89,10 +89,10 @@ function registerEffectPacks() {
     components_fxSpatial.registerSpatialPack();
 }
 
-exports.EFFECT_PACK_FORMAT = components_marketplace.EFFECT_PACK_FORMAT;
-exports.loadEffectPack = components_marketplace.loadEffectPack;
-exports.packManifest = components_marketplace.packManifest;
-exports.validateManifest = components_marketplace.validateManifest;
+exports.EFFECT_PACK_FORMAT = manifest.EFFECT_PACK_FORMAT;
+exports.loadEffectPack = manifest.loadEffectPack;
+exports.packManifest = manifest.packManifest;
+exports.validateManifest = manifest.validateManifest;
 exports.GLSL_HEAD = components_fxGpu.GLSL_HEAD;
 exports.GPU_FX = components_fxGpu.GPU_FX;
 exports.WGSL_HEAD = components_fxGpu.WGSL_HEAD;

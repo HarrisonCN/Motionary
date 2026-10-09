@@ -1,6 +1,6 @@
 {
   "name": "motionary",
-  "version": "8.9.0",
+  "version": "9.0.0",
   "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 94 animated Web Components — 214 scroll-reveal presets, card/click/button morphs, physics, page transitions, generative & sound-reactive backgrounds, cursor/gesture effects, themes, micro-interactions, <usa-player>, WebGL. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -96,6 +96,26 @@
       "require": {
         "types": "./dist/components/engine.d.cts",
         "default": "./dist/components/engine.cjs"
+      }
+    },
+    "./dsl": {
+      "import": {
+        "types": "./dist/components/dsl.d.ts",
+        "default": "./dist/components/dsl.js"
+      },
+      "require": {
+        "types": "./dist/components/dsl.d.cts",
+        "default": "./dist/components/dsl.cjs"
+      }
+    },
+    "./marketplace": {
+      "import": {
+        "types": "./dist/components/marketplace.d.ts",
+        "default": "./dist/components/marketplace.js"
+      },
+      "require": {
+        "types": "./dist/components/marketplace.d.cts",
+        "default": "./dist/components/marketplace.cjs"
       }
     },
     "./fx": {
@@ -966,6 +986,16 @@
       "require": {
         "types": "./dist/components/fx-spatial.d.cts",
         "default": "./dist/components/fx-spatial.cjs"
+      }
+    },
+    "./components/dsl": {
+      "import": {
+        "types": "./dist/components/dsl.d.ts",
+        "default": "./dist/components/dsl.js"
+      },
+      "require": {
+        "types": "./dist/components/dsl.d.cts",
+        "default": "./dist/components/dsl.cjs"
       }
     },
     "./components/lite": {

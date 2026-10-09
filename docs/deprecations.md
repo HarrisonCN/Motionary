@@ -1,6 +1,6 @@
 # Deprecations
 
-## Deprecated in 8.9, removed in 9.0
+## Deprecated in 8.9, removed in 9.0 (released)
 
 See [upgrading-9.md](./upgrading-9.md) — the 5.8 motion-theme names `applyTheme()`, `THEMES`, `THEME_NAMES`, `<usa-theme>` / `defineTheme()` (use `applyMotionTheme()`, `MOTION_THEMES`, `MOTION_THEME_NAMES`, `<usa-motion-theme>` / `defineMotionTheme()`; same behaviour). Run `npx usa-codemod-9 --write src`.
 

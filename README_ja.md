@@ -132,7 +132,7 @@ export class Hero {}
 | **ジェネラティブ背景** | キャンバス背景 6 種（flow-field・voronoi・mesh-gradient・starfield・metaballs・contours）+ 背景要素 9 種（オーロラ・パーティクル・グレイン・Acrylic / Mica など） |
 | **サウンド連動** | `<usa-audio>` と Web Audio のビート検出（`createBeatDetector()`・`onBeat()`）、オーディオビジュアライザー 3 種、任意のエフェクトをビートで発火 |
 | **カーソル・ジェスチャー** | カーソルエフェクト 5 種 + `<usa-cursor>`、fling · twist · long-press でエフェクト（`<usa-gesture-fx>`）、`<usa-swipeable>`・`<usa-pinch-zoom>` |
-| **テーマ** | テーマ 5 種（neon · paper · glass · retro · brutalist）を `<usa-theme>` / `applyTheme()` で、各テーマに専用エフェクト。モーショントークン（`/components/tokens`） |
+| **テーマ** | テーマ 5 種（neon · paper · glass · retro · brutalist）を `<usa-motion-theme>` / `applyMotionTheme()` で、各テーマに専用エフェクト。モーショントークン（`/components/tokens`） |
 | **マイクロインタラクション** | 既製の UI 演出 23 種：copy-success・like-heart・add-to-cart・send-plane・upvote・trash-shake など |
 | **`<usa-player>` とストーリー** | `<usa-player>` は Playground から書き出した JSON アニメーションを再生（キーフレーム・プリセット・エフェクト、load / view / scroll / click トリガー）。`<usa-story>` のストーリーテンプレート 6 種 |
 | **WebGL** | `<usa-shader>`・`<usa-distort>`・`<usa-liquid>`・`<usa-post-fx>` — パーティクル 5 種、ポストエフェクト 9 種（CSS フォールバックと省電力制御付き） |
@@ -164,7 +164,7 @@ export class Hero {}
 | **レイアウト** (`/components/layout`) | `<usa-auto-animate>` · `<usa-masonry>` |
 | **パック** (`/components/packs`) | `<usa-pack>` |
 | **エフェクト登録** (`/components/fx`) | `<usa-fx>` |
-| **エフェクトパック** (`/components/effects`) | `<usa-player>` · `<usa-story>` · `<usa-audio>` · `<usa-theme>` · `<usa-gesture-fx>` |
+| **エフェクトパック** (`/components/effects`) | `<usa-player>` · `<usa-story>` · `<usa-audio>` · `<usa-motion-theme>` · `<usa-gesture-fx>` |
 
 ## アクセシビリティと reduced motion
 

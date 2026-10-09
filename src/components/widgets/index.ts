@@ -90,6 +90,8 @@ import { definePanorama, type UsaPanoramaElement } from './panorama';
 import { defineSpatialCard, type UsaSpatialCardElement } from './spatial-card';
 import { defineCodeExport, exportComponent, describeComponent, type UsaCodeExportElement, type ExportFormat, type ExportedNode } from './code-export';
 import { definePropPanel, parseProps, type UsaPropPanelElement, type PropSpec } from './prop-panel';
+import { defineMotion, type UsaMotionElement } from './motion';
+import { definePluginStore, type UsaPluginStoreElement } from './plugin-store';
 
 export { defineCarousel, defineTabBar, defineDisclosure, defineStories, CAROUSEL_EFFECTS, TAB_INDICATORS };
 export type { UsaCarouselElement, UsaTabBarElement, UsaDisclosureElement, UsaStoriesElement };
@@ -171,6 +173,9 @@ export type { UsaPanoramaElement, UsaSpatialCardElement };
 export { defineCodeExport, exportComponent, describeComponent, definePropPanel, parseProps };
 export type { UsaCodeExportElement, ExportFormat, ExportedNode, UsaPropPanelElement, PropSpec };
 
+export { defineMotion, definePluginStore };
+export type { UsaMotionElement, UsaPluginStoreElement };
+
 /** The widgets by release (tag → define function). */
 export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElementConstructor | undefined>> = {
   '6.2': { 'usa-carousel': defineCarousel, 'usa-tab-bar': defineTabBar, 'usa-disclosure': defineDisclosure, 'usa-stories': defineStories },
@@ -200,6 +205,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '8.7': { 'usa-gyro-card': defineGyroCard, 'usa-gesture-sticker': defineGestureSticker },
   '8.8': { 'usa-panorama': definePanorama, 'usa-spatial-card': defineSpatialCard },
   '8.9': { 'usa-code-export': defineCodeExport, 'usa-prop-panel': definePropPanel },
+  '9.0': { 'usa-motion': defineMotion, 'usa-plugin-store': definePluginStore },
 };
 
 /** Every widget tag, in release order. */
@@ -294,5 +300,7 @@ declare global {
     'usa-spatial-card': UsaSpatialCardElement;
     'usa-code-export': UsaCodeExportElement;
     'usa-prop-panel': UsaPropPanelElement;
+    'usa-motion': UsaMotionElement;
+    'usa-plugin-store': UsaPluginStoreElement;
   }
 }

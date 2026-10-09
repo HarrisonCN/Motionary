@@ -8,7 +8,8 @@ import { COMPONENTS, componentSnippets } from '../showcase/components-catalog.js
 import { COMPONENT_ENTRIES } from '../scripts/categories.mjs';
 import { readFileSync } from 'node:fs';
 import { transform as codemod9 } from '../bin/usa-codemod-9.mjs';
-import { applyTheme, applyMotionTheme, MOTION_THEMES, THEMES, defineMotionTheme } from '../src/components/effects';
+import * as effects9 from '../src/components/effects';
+import { applyMotionTheme, MOTION_THEMES, defineMotionTheme } from '../src/components/effects';
 
 beforeEach(() => {
   installComponentMocks();
@@ -113,27 +114,23 @@ describe('8.9 low-code export + 9.0 deprecations', () => {
     expect(t.hasAttribute('flag')).toBe(false);
     expect(p.querySelector('[data-p=rings]').value).toBe('3');
   });
-  it('9.0 deprecations: motion-theme renames warn once; codemod-9; docs + bin', () => {
-    expect(MOTION_THEMES).toBe(THEMES);
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+  it('9.0: old motion-theme names removed; Motion names work; codemod-9 stays', () => {
+    const e: any = effects9;
+    expect(e.applyTheme).toBeUndefined();
+    expect(e.THEMES).toBeUndefined();
+    expect(e.THEME_NAMES).toBeUndefined();
+    expect(e.defineTheme).toBeUndefined();
+    expect(Object.keys(MOTION_THEMES)).toEqual(['neon', 'paper', 'glass', 'retro', 'brutalist']);
     const box = document.createElement('div');
     document.body.append(box);
     applyMotionTheme('retro', box)();
-    expect(warn).not.toHaveBeenCalled();
-    applyTheme('retro', box)();
-    applyTheme('neon', box)();
-    expect(warn.mock.calls.filter((c: any) => String(c[0]).includes('applyMotionTheme')).length).toBe(1);
     defineMotionTheme();
     expect(customElements.get('usa-motion-theme')).toBeTruthy();
-    const r = codemod9('import { applyTheme, THEMES, THEME_NAMES, SURFACE_THEMES, applySurfaceTheme } from "motionary/components/effects";\n<usa-theme name="neon"><usa-theme-switcher></usa-theme-switcher></usa-theme>\nx.applyTheme;');
-    expect(r.code).toContain('import { applyMotionTheme, MOTION_THEMES, MOTION_THEME_NAMES, SURFACE_THEMES, applySurfaceTheme }');
-    expect(r.code).toContain('<usa-motion-theme name="neon"><usa-theme-switcher></usa-theme-switcher></usa-motion-theme>');
-    expect(r.code).toContain('x.applyTheme;');
-    expect(codemod9(r.code).changes).toEqual([]);
-    expect(codemod9("document.createElement('usa-theme')").manual.length).toBe(1);
-    const pkg = JSON.parse(readFileSync('package.json', 'utf8'));
-    expect(pkg.bin['usa-codemod-9']).toBe('./bin/usa-codemod-9.mjs');
-    expect(readFileSync('docs/upgrading-9.md', 'utf8')).toContain('usa-codemod-9');
-    expect(readFileSync('docs/deprecations.md', 'utf8')).toContain('Deprecated in 8.9, removed in 9.0');
+    expect(customElements.get('usa-theme')).toBeUndefined();
+    const r = codemod9('<usa-theme name="neon"></usa-theme> applyTheme(THEMES.neon)');
+    expect(r.code).toBe('<usa-motion-theme name="neon"></usa-motion-theme> applyMotionTheme(MOTION_THEMES.neon)');
+    expect(readFileSync('docs/upgrading-9.md', 'utf8')).toContain('9.0.0 is released');
+    expect(readFileSync('docs/deprecations.md', 'utf8')).toContain('Deprecated in 8.9, removed in 9.0 (released)');
   });
+
 });

@@ -104,5 +104,36 @@ declare function loadEffectPack(src: string | {
     override?: boolean;
 }): Promise<string[]>;
 
-export { EFFECT_PACK_FORMAT, loadEffectPack, packManifest, validateManifest };
-export type { EffectPackManifest };
+declare const MARKETPLACE_FORMAT = "motionary/marketplace";
+interface PluginListing {
+    name: string;
+    title: string;
+    description: string;
+    entry: string;
+    register: string;
+    effects: string[];
+    tags: string[];
+    since: string;
+    author?: string;
+    official?: boolean;
+}
+/** The first-party catalogue (9.0). */
+declare const MARKETPLACE: PluginListing[];
+/** Ranked search over listings (name / title / tags / effects / description) (9.0). */
+declare function searchPlugins(query: string, list?: PluginListing[]): PluginListing[];
+/** Names of installed plugins → their registered effects (9.0). */
+declare function installedPlugins(): Record<string, string[]>;
+/**
+ * Install a plugin: `load(entry)` imports the module (default: dynamic `import()`), then its
+ * `register*` function runs (first-party listing) or its `effects` are validated and registered
+ * through `loadEffectPack` (third-party pack). Returns the registered effect names (9.0).
+ */
+declare function installPlugin(p: PluginListing | string, opts?: {
+    load?: (entry: string) => Promise<any>;
+    override?: boolean;
+}): Promise<string[]>;
+/** Read a marketplace index (`{ format: "motionary/marketplace", version: 1, plugins }`) (9.0). */
+declare function fetchMarketplace(url: string, fetcher?: typeof fetch): Promise<PluginListing[]>;
+
+export { EFFECT_PACK_FORMAT, MARKETPLACE, MARKETPLACE_FORMAT, fetchMarketplace, installPlugin, installedPlugins, loadEffectPack, packManifest, searchPlugins, validateManifest };
+export type { EffectPackManifest, PluginListing };

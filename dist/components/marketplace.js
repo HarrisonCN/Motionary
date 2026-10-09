@@ -1,77 +1,82 @@
-import { hasEffect, registerEffect, EFFECT_KINDS } from '../chunks/registry-CnO7ZVPK.js';
+import { l as loadEffectPack } from '../chunks/manifest-PJ0h8RS_.js';
+export { E as EFFECT_PACK_FORMAT, p as packManifest, v as validateManifest } from '../chunks/manifest-PJ0h8RS_.js';
+import '../chunks/registry-CnO7ZVPK.js';
 import '../chunks/base-CLuqlLfG.js';
 
-const EFFECT_PACK_FORMAT = 'motionary/effect-pack';
-const SEMVER = /^\d+\.\d+\.\d+(?:-[\w.]+)?$/;
-const PKG = /^(?:@[a-z0-9-~][a-z0-9-._~]*\/)?[a-z0-9-~][a-z0-9-._~]*$/;
-/** Build a manifest from an effect pack. */
-function packManifest(name, packVersion, effects, extra = {}) {
-    return {
-        format: EFFECT_PACK_FORMAT,
-        version: 1,
-        name,
-        packVersion,
-        ...extra,
-        effects: effects.map((e) => ({ name: e.name, kind: e.kind, ...(e.description ? { description: e.description } : {}), ...(e.defaults ? { defaults: JSON.parse(JSON.stringify(e.defaults)) } : {}) })),
-    };
+const MARKETPLACE_FORMAT = 'motionary/marketplace';
+const L = (name, title, description, entry, register, effects, tags, since) => ({ name, title, description, entry, register, effects: effects.split(' '), tags: tags.split(' '), since, author: 'Motionary', official: true });
+/** The first-party catalogue (9.0). */
+const MARKETPLACE = [
+    L('motionary/fx/festival', 'Festival', 'Fireworks, lanterns, Christmas snow and spooky floats.', 'motionary/fx/festival', 'registerFestivalPack', 'firework-burst lantern-rise xmas-snow spooky-float', 'holiday celebration seasonal', '8.1'),
+    L('motionary/fx/retro', 'Retro', 'Pixel, CRT, VHS and Y2K looks.', 'motionary/fx/retro', 'registerRetroPack', 'pixelate-in crt-power vhs-glitch y2k-shine', 'pixel 8-bit vintage', '8.2'),
+    L('motionary/fx/organic', 'Organic', 'Vines, blooms, water drops and breathing blobs.', 'motionary/fx/organic', 'registerOrganicPack', 'vine-grow bloom water-drop breathe', 'nature blob liquid', '8.3'),
+    L('motionary/fx/cyber', 'Cyber', 'HUD lock-on, scanlines, holograms and data decode.', 'motionary/fx/cyber', 'registerCyberPack', 'hud-frame scanline-sweep hologram data-decode', 'sci-fi hud glitch', '8.4'),
+    L('motionary/fx/paper', 'Paper & hand-drawn', 'Paper unfold, pencil sketch, watercolor and crumple.', 'motionary/fx/paper', 'registerPaperPack', 'paper-unfold pencil-sketch watercolor crumple', 'sketch paper drawing', '8.5'),
+    L('motionary/fx/surface', 'Surface themes', 'Neon ignite and pulse, glass frost, neumorphic press.', 'motionary/fx/surface', 'registerSurfacePack', 'neon-ignite neon-pulse glass-frost neu-press', 'neon glassmorphism neumorphism theme', '8.6'),
+    L('motionary/fx/gesture', 'Gestures 3.0', 'Swipe and pinch hints, tilt wobble, depth-in.', 'motionary/fx/gesture', 'registerGesture3Pack', 'swipe-hint pinch-hint tilt-wobble depth-in', 'touch onboarding 3d', '8.7'),
+    L('motionary/fx/spatial', 'XR / spatial', 'Portal open, orbit-in, spatial float and depth pop.', 'motionary/fx/spatial', 'registerSpatialPack', 'portal-open orbit-in spatial-float depth-pop', 'xr vr visionos 3d', '8.8'),
+];
+/** Ranked search over listings (name / title / tags / effects / description) (9.0). */
+function searchPlugins(query, list = MARKETPLACE) {
+    const q = query.toLowerCase().trim().split(/\s+/).filter(Boolean);
+    if (!q.length)
+        return list.slice();
+    const score = (p) => q.reduce((s, w) => {
+        let n = 0;
+        if (p.title.toLowerCase().includes(w))
+            n += 5;
+        if (p.tags.some((t) => t.includes(w)))
+            n += 4;
+        if (p.effects.some((e) => e.includes(w)))
+            n += 3;
+        if (p.name.toLowerCase().includes(w))
+            n += 2;
+        if (p.description.toLowerCase().includes(w))
+            n += 1;
+        return n ? s + n : -1e9;
+    }, 0);
+    return list
+        .map((p) => [p, score(p)])
+        .filter(([, s]) => s > 0)
+        .sort((a, b) => b[1] - a[1])
+        .map(([p]) => p);
 }
-/** Check a manifest (and optionally the module's effects against it). */
-function validateManifest(m, effects) {
-    const errors = [];
-    const x = m;
-    if (!x || typeof x !== 'object')
-        return { ok: false, errors: ['manifest must be an object'] };
-    if (x.format !== EFFECT_PACK_FORMAT)
-        errors.push(`format must be "${EFFECT_PACK_FORMAT}"`);
-    if (x.version !== 1)
-        errors.push('version must be 1');
-    if (!x.name || !PKG.test(x.name))
-        errors.push('name must be an npm package name');
-    if (!x.packVersion || !SEMVER.test(x.packVersion))
-        errors.push('packVersion must be semver (x.y.z)');
-    if (!Array.isArray(x.effects) || !x.effects.length)
-        errors.push('effects must be a non-empty array');
-    const seen = new Set();
-    for (const e of x.effects || []) {
-        if (!e || !/^[a-z][a-z0-9-]*$/.test(e.name || ''))
-            errors.push(`invalid effect name "${e?.name}"`);
-        else if (seen.has(e.name))
-            errors.push(`duplicate effect "${e.name}"`);
-        else
-            seen.add(e.name);
-        if (!e || !EFFECT_KINDS.includes(e.kind))
-            errors.push(`effect "${e?.name}": unknown kind "${e?.kind}"`);
-    }
-    if (effects) {
-        const names = new Set(effects.map((e) => e.name));
-        for (const n of seen)
-            if (!names.has(n))
-                errors.push(`effect "${n}" is in the manifest but not exported`);
-        for (const n of names)
-            if (!seen.has(n))
-                errors.push(`effect "${n}" is exported but missing from the manifest`);
-    }
-    return { ok: !errors.length, errors };
+const installed = new Map();
+/** Names of installed plugins → their registered effects (9.0). */
+function installedPlugins() {
+    return Object.fromEntries(installed);
 }
 /**
- * Import an effect pack (a URL / specifier, or an already imported module
- * with `effects` / `default` and `manifest`), validate and register it.
- * Returns the registered effect names.
+ * Install a plugin: `load(entry)` imports the module (default: dynamic `import()`), then its
+ * `register*` function runs (first-party listing) or its `effects` are validated and registered
+ * through `loadEffectPack` (third-party pack). Returns the registered effect names (9.0).
  */
-async function loadEffectPack(src, opts = {}) {
-    const mod = typeof src === 'string' ? await import(/* @vite-ignore */ src) : src;
-    const effects = mod.effects || mod.default || [];
-    const manifest = opts.manifest || mod.manifest;
-    const v = validateManifest(manifest, effects);
-    if (!v.ok)
-        throw new Error(`[motionary] invalid effect pack: ${v.errors.join('; ')}`);
-    const clash = effects.filter((e) => hasEffect(e.name));
-    if (clash.length && !opts.override)
-        throw new Error(`[motionary] effect pack "${manifest.name}" would replace ${clash.map((e) => e.name).join(', ')} (pass { override: true })`);
-    for (const e of effects)
-        registerEffect(e, { override: !!opts.override });
-    return effects.map((e) => e.name);
+async function installPlugin(p, opts = {}) {
+    const listing = typeof p === 'string' ? null : p;
+    const entry = listing ? listing.entry : p;
+    const key = listing ? listing.name : entry;
+    if (installed.has(key))
+        return installed.get(key);
+    const load = opts.load || ((u) => import(/* @vite-ignore */ u));
+    const mod = await load(entry);
+    let names;
+    if (listing && typeof mod?.[listing.register] === 'function') {
+        mod[listing.register]();
+        names = listing.effects.slice();
+    }
+    else
+        names = await loadEffectPack(mod, { override: opts.override, manifest: mod?.manifest });
+    installed.set(key, names);
+    return names;
+}
+/** Read a marketplace index (`{ format: "motionary/marketplace", version: 1, plugins }`) (9.0). */
+async function fetchMarketplace(url, fetcher = fetch) {
+    const r = await fetcher(url);
+    const j = await r.json();
+    if (j?.format !== MARKETPLACE_FORMAT || j?.version !== 1 || !Array.isArray(j.plugins))
+        throw new Error(`[motionary] ${url} is not a ${MARKETPLACE_FORMAT} v1 index`);
+    return j.plugins.filter((p) => p && typeof p.name === 'string' && typeof p.entry === 'string').map((p) => ({ title: p.name, description: '', register: '', effects: [], tags: [], since: '', ...p }));
 }
 
-export { EFFECT_PACK_FORMAT, loadEffectPack, packManifest, validateManifest };
+export { MARKETPLACE, MARKETPLACE_FORMAT, fetchMarketplace, installPlugin, installedPlugins, loadEffectPack, searchPlugins };
 //# sourceMappingURL=marketplace.js.map

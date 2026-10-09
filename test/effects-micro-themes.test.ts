@@ -9,15 +9,15 @@ import {
   MICRO_FX,
   THEME_FX,
   EFFECT_PACKS,
-  THEMES,
-  THEME_NAMES,
+  MOTION_THEMES,
+  MOTION_THEME_NAMES,
   THEME_ROLES,
   themeVars,
   themeCss,
-  applyTheme,
+  applyMotionTheme,
   themePreset,
   playThemeEffect,
-  defineTheme,
+  defineMotionTheme,
   togglePressed,
   swapLabel,
   bumpCount,
@@ -170,9 +170,9 @@ describe('5.8 micro-interactions', () => {
 
 describe('5.8 theme packs', () => {
   it('ships five themes with full tokens and presets that point at registered effects', () => {
-    expect(THEME_NAMES).toEqual(['neon', 'paper', 'glass', 'retro', 'brutalist']);
-    for (const n of THEME_NAMES) {
-      const t = THEMES[n];
+    expect(MOTION_THEME_NAMES).toEqual(['neon', 'paper', 'glass', 'retro', 'brutalist']);
+    for (const n of MOTION_THEME_NAMES) {
+      const t = MOTION_THEMES[n];
       for (const k of ['bg', 'fg', 'accent', 'accent-2', 'surface', 'border', 'radius', 'shadow', 'font']) expect((t.vars as any)[k], `${n}.${k}`).toBeTruthy();
       for (const r of THEME_ROLES) expect(getEffect(themePreset(n, r).effect), `${n}.${r}`).toBeTruthy();
     }
@@ -189,9 +189,9 @@ describe('5.8 theme packs', () => {
     expect(() => themeVars('nope')).toThrow(/unknown theme/);
   });
 
-  it('applyTheme on <html> activates motion tokens; undo restores everything', () => {
+  it('applyMotionTheme on <html> activates motion tokens; undo restores everything', () => {
     const before = getMotionTokens().duration.normal;
-    const undo = applyTheme('brutalist');
+    const undo = applyMotionTheme('brutalist');
     const html = document.documentElement;
     expect(html.getAttribute('data-usa-theme')).toBe('brutalist');
     expect(html.style.getPropertyValue('--usa-theme-shadow')).toBe('6px 6px 0 #000000');
@@ -202,10 +202,10 @@ describe('5.8 theme packs', () => {
     expect(getMotionTokens().duration.normal).toBe(before);
   });
 
-  it('applyTheme on an element scopes variables without touching the global motion tokens', () => {
+  it('applyMotionTheme on an element scopes variables without touching the global motion tokens', () => {
     const before = getMotionTokens().easing.standard;
     const box = mount<HTMLElement>('<div></div>');
-    const undo = applyTheme('retro', box);
+    const undo = applyMotionTheme('retro', box);
     expect(box.style.getPropertyValue('--usa-easing-standard')).toBe('steps(6, end)');
     expect(getMotionTokens().easing.standard).toBe(before);
     undo();
@@ -218,9 +218,9 @@ describe('5.8 theme packs', () => {
     expect(anims.at(-1)!.keyframes[1].transform).toBe('translate(6px,6px)');
   });
 
-  it('<usa-theme> themes its subtree and binds data-theme-fx presets', () => {
-    defineTheme();
-    const host = mount<HTMLElement>('<usa-theme name="neon"><button data-theme-fx="click">Tap</button><p data-theme-fx="bogus">x</p></usa-theme>');
+  it('<usa-motion-theme> themes its subtree and binds data-theme-fx presets', () => {
+    defineMotionTheme();
+    const host = mount<HTMLElement>('<usa-motion-theme name="neon"><button data-theme-fx="click">Tap</button><p data-theme-fx="bogus">x</p></usa-motion-theme>');
     expect(host.getAttribute('data-usa-theme')).toBe('neon');
     expect(host.style.getPropertyValue('--usa-theme-accent')).toBe('#22d3ee');
     const n = anims.length;
