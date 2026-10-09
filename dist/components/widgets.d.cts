@@ -983,6 +983,55 @@ declare function wheelAngle(index: number, count: number, turns?: number): numbe
 declare function definePrizeWheel(tag?: string): CustomElementConstructor | undefined;
 
 /**
+ * `<usa-globe>` (7.6) — a spinning SVG globe (orthographic projection, no
+ * WebGL, no map tiles): graticule, an optional `markers` list
+ * ("Shanghai:31.2,121.5; London:51.5,-0.1") with pulsing dots, `speed`
+ * (degrees per second, default 12; 0 = still), `tilt` (default 18°) and `lon`
+ * (start longitude). Spins only while on screen; drag to turn it. `flyTo(name)`
+ * rotates a marker to the front (`usa:focus`). The globe is `role="img"`
+ * labelled with the marker names; reduced motion: no spin, flyTo jumps.
+ */
+interface GlobeMarker {
+    name: string;
+    lat: number;
+    lon: number;
+}
+interface UsaGlobeElement extends UsaElement {
+    readonly markers: GlobeMarker[];
+    lon: number;
+    flyTo(name: string): Promise<void>;
+}
+/** Orthographic projection on a unit sphere seen from longitude `lon0`, tilted by `tilt` degrees (7.6). */
+declare function project(lat: number, lon: number, lon0?: number, tilt?: number): {
+    x: number;
+    y: number;
+    visible: boolean;
+};
+/** Parse "Name:lat,lon; Name2:lat,lon" (7.6). */
+declare function parseMarkers(s: string): GlobeMarker[];
+declare function defineGlobe(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-location-card>` (7.6) — a place card with a stylised mini map (SVG
+ * streets, no tiles, no network): `name`, `address`, `lat`/`lon`, an optional
+ * origin `from-lat`/`from-lon` (the distance is computed with the haversine
+ * formula, or set it with `distance`), `href` for a “Directions” link and
+ * `unit` (`km` | `mi`). When it scrolls into view the pin drops in with a
+ * bounce and a ring pulses under it; with an origin, the route from it draws
+ * itself. `usa:arrive` fires when the pin lands. An `<article>` with a heading;
+ * reduced motion: pin and route are shown at once.
+ */
+interface UsaLocationCardElement extends UsaElement {
+    readonly km: number | null;
+    replay(): void;
+}
+/** Great-circle distance in km between two lat/lon points (7.6). */
+declare function haversine(lat1: number, lon1: number, lat2: number, lon2: number): number;
+/** "850 m", "4.2 km", "12 km" — or miles with `unit = 'mi'` (7.6). */
+declare function formatDistance(km: number, unit?: 'km' | 'mi'): string;
+declare function defineLocationCard(tag?: string): CustomElementConstructor | undefined;
+
+/**
  * motionary/components/widgets — the 6.x animated UI widgets, in their own
  * entry so `motionary/components` and `components/lite` keep their size
  * budgets. Every widget is reduced-motion safe and keyboard accessible.
@@ -1055,8 +1104,10 @@ declare global {
         'usa-xp-bar': UsaXpBarElement;
         'usa-badge-wall': UsaBadgeWallElement;
         'usa-prize-wheel': UsaPrizeWheelElement;
+        'usa-globe': UsaGlobeElement;
+        'usa-location-card': UsaLocationCardElement;
     }
 }
 
-export { CAROUSEL_EFFECTS, EQ_PRESETS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PRESENCE_STATES, PROGRESS_VARIANTS, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SPARK_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, badgeProgress, cartTotal, defineAddToCart, defineBadgeWall, defineBarChart, defineCarousel, defineCartDrawer, defineColorPicker, defineCompare, defineCountdown, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineFileDrop, defineGauge, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMessageList, defineMilestones, defineModal, defineMusicPlayer, defineNavMorph, defineNotificationBell, defineOdometer, definePagination, definePresence, definePrizeWheel, defineProductGallery, defineProgressRing, definePullCord, defineReactions, defineSegmented, defineSheet, defineSkeletonReveal, defineSparkline, defineStarRating, defineStepper, defineStories, defineSwipeDeck, defineSwitch, defineTabBar, defineTip, defineToastStack, defineVolumeKnob, defineWeatherCard, defineWidgets, defineXpBar, hexToHsv, hsvToHex, initials, levelFor, monthGrid, pageWindow, parseISODate, parseLRC, parseReactions, rankRows, sparkPoints, splitTime, stackToast, wheelAngle, wrapIndex };
-export type { BellNotice, CartItem, ChatMessage, LeaderRow, PresenceState, StackToastOptions, UsaAddToCartElement, UsaBadgeWallElement, UsaBarChartElement, UsaCarouselElement, UsaCartDrawerElement, UsaColorPickerElement, UsaCompareElement, UsaCountdownElement, UsaCubeGalleryElement, UsaDatePickerElement, UsaDisclosureElement, UsaDockElement, UsaEqualizerElement, UsaFileDropElement, UsaGaugeElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaKpiElement, UsaLeaderboardElement, UsaLyricsElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMessageListElement, UsaMilestonesElement, UsaModalElement, UsaMusicPlayerElement, UsaNavMorphElement, UsaNotificationBellElement, UsaOdometerElement, UsaPaginationElement, UsaPresenceElement, UsaPrizeWheelElement, UsaProductGalleryElement, UsaProgressRingElement, UsaPullCordElement, UsaReactionsElement, UsaSegmentedElement, UsaSheetElement, UsaSkeletonRevealElement, UsaSparklineElement, UsaStarRatingElement, UsaStepperElement, UsaStoriesElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTipElement, UsaToastStackElement, UsaVolumeKnobElement, UsaWeatherCardElement, UsaXpBarElement, WallBadge };
+export { CAROUSEL_EFFECTS, EQ_PRESETS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PRESENCE_STATES, PROGRESS_VARIANTS, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SPARK_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, badgeProgress, cartTotal, defineAddToCart, defineBadgeWall, defineBarChart, defineCarousel, defineCartDrawer, defineColorPicker, defineCompare, defineCountdown, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineFileDrop, defineGauge, defineGlobe, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLocationCard, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMessageList, defineMilestones, defineModal, defineMusicPlayer, defineNavMorph, defineNotificationBell, defineOdometer, definePagination, definePresence, definePrizeWheel, defineProductGallery, defineProgressRing, definePullCord, defineReactions, defineSegmented, defineSheet, defineSkeletonReveal, defineSparkline, defineStarRating, defineStepper, defineStories, defineSwipeDeck, defineSwitch, defineTabBar, defineTip, defineToastStack, defineVolumeKnob, defineWeatherCard, defineWidgets, defineXpBar, formatDistance, haversine, hexToHsv, hsvToHex, initials, levelFor, monthGrid, pageWindow, parseISODate, parseLRC, parseMarkers, parseReactions, project, rankRows, sparkPoints, splitTime, stackToast, wheelAngle, wrapIndex };
+export type { BellNotice, CartItem, ChatMessage, GlobeMarker, LeaderRow, PresenceState, StackToastOptions, UsaAddToCartElement, UsaBadgeWallElement, UsaBarChartElement, UsaCarouselElement, UsaCartDrawerElement, UsaColorPickerElement, UsaCompareElement, UsaCountdownElement, UsaCubeGalleryElement, UsaDatePickerElement, UsaDisclosureElement, UsaDockElement, UsaEqualizerElement, UsaFileDropElement, UsaGaugeElement, UsaGlobeElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaKpiElement, UsaLeaderboardElement, UsaLocationCardElement, UsaLyricsElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMessageListElement, UsaMilestonesElement, UsaModalElement, UsaMusicPlayerElement, UsaNavMorphElement, UsaNotificationBellElement, UsaOdometerElement, UsaPaginationElement, UsaPresenceElement, UsaPrizeWheelElement, UsaProductGalleryElement, UsaProgressRingElement, UsaPullCordElement, UsaReactionsElement, UsaSegmentedElement, UsaSheetElement, UsaSkeletonRevealElement, UsaSparklineElement, UsaStarRatingElement, UsaStepperElement, UsaStoriesElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTipElement, UsaToastStackElement, UsaVolumeKnobElement, UsaWeatherCardElement, UsaXpBarElement, WallBadge };

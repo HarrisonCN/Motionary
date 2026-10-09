@@ -648,6 +648,35 @@ export const components = [
     '<usa-fx effect="chest-open" trigger="click"><div class="chest"><span data-lid>🟫</span>📦</div></usa-fx>\n<usa-fx effect="coin-burst" trigger="click"><button>Claim</button></usa-fx>',
     '<div class="demo-row"><usa-fx effect="chest-open" trigger="click"><button type="button" class="demo-chest" aria-label="Open chest"><span data-lid>🟫</span>🧰</button></usa-fx><usa-fx effect="coin-burst" trigger="click"><button type="button" class="demo-btn">🪙 Claim</button></usa-fx></div>',
     [{ key: 'effect', values: ['chest-open', 'coin-burst'] }], '7.5'),
+  // ---- 7.6 -------------------------------------------------------------
+  W('usa-globe', 'ui', 'Spinning globe', '旋转地球',
+    '7.6: an SVG globe in orthographic projection — graticule, pulsing markers, spins while on screen, drag to turn it, flyTo(name) brings a city round to the front. No WebGL, no tiles.',
+    '7.6：正射投影的 SVG 地球 —— 经纬网、脉冲标记点，在视口内自转，可拖拽旋转，flyTo(name) 把城市转到正面。无需 WebGL 与地图瓦片。',
+    ['globe', 'map', 'geo', 'earth', 'markers'],
+    '<usa-globe markers="Shanghai:31.2,121.5; London:51.5,-0.1; New York:40.7,-74"></usa-globe>\n<script>globe.flyTo(\'London\');</script>',
+    '<div class="demo-col"><usa-globe class="demo-globe" markers="Shanghai:31.2,121.5; London:51.5,-0.1; New York:40.7,-74; Sydney:-33.9,151.2" speed="20"></usa-globe><button type="button" class="demo-btn" data-gl>Fly to next city</button></div>',
+    undefined, { since: '7.6' }),
+  W('usa-location-card', 'ui', 'Location card', '位置卡片',
+    '7.6: a place card with a stylised mini map — the route from the origin draws itself, the pin drops in with a bounce and a ring pulses; distance computed with haversine (km or mi).',
+    '7.6：带风格化迷你地图的位置卡片 —— 从起点出发的路线自动绘制，图钉弹跳落下并伴随脉冲光环；距离按 haversine 公式计算（公里或英里）。',
+    ['location', 'map', 'pin', 'distance', 'card'],
+    '<usa-location-card name="Blue Bottle" address="66 Mint St, San Francisco"\n  lat="37.782" lon="-122.407" from-lat="37.776" from-lon="-122.394" href="https://maps.example/…"></usa-location-card>',
+    '<div class="demo-col"><usa-location-card class="demo-lc" name="Blue Bottle Coffee" address="66 Mint St, San Francisco" lat="37.782" lon="-122.407" from-lat="37.776" from-lon="-122.394"></usa-location-card><button type="button" class="demo-btn" data-lc>Replay</button></div>',
+    undefined, { since: '7.6' }),
+  X('fx-route', ['fx-geo', 'registerGeoPack'], 'Route draw & globe spin', '路线绘制与地球旋转',
+    '7.6: route-draw draws every SVG path / polyline (or [data-route]) along its length, one after another; globe-spin turns the element in like a globe coming round.',
+    '7.6：route-draw 让每条 SVG 路径 / 折线（或 [data-route]）依次沿长度绘制；globe-spin 让元素像地球转过来一样旋入。',
+    ['route', 'path', 'draw', 'svg', 'globe'],
+    '<usa-fx effect="route-draw" trigger="enter">\n  <svg viewBox="0 0 200 80"><path d="M10 70 C60 10 120 90 190 20"/></svg>\n</usa-fx>',
+    '<usa-fx effect="route-draw" trigger="enter" class="demo-route"><svg viewBox="0 0 200 90" width="220" height="100"><path d="M12 78 C52 20 92 88 132 40 S180 18 190 14" fill="none" stroke="#2563eb" stroke-width="5" stroke-linecap="round"/><circle cx="12" cy="78" r="6" fill="#2563eb"/><circle cx="190" cy="14" r="6" fill="#ef4444"/></svg></usa-fx>',
+    [{ key: 'effect', values: ['route-draw', 'globe-spin'] }], '7.6'),
+  X('fx-pin', ['fx-geo', 'registerGeoPack'], 'Pin drop & marker pulse', '图钉落下与标记脉冲',
+    '7.6: pin-drop lands the element on its spot with a squash and a shadow; marker-pulse sends beacon rings out of it.',
+    '7.6：pin-drop 让元素带着挤压与阴影落到位置上；marker-pulse 从元素发出信标般的扩散光环。',
+    ['pin', 'marker', 'pulse', 'beacon', 'map'],
+    '<usa-fx effect="pin-drop" trigger="enter"><span class="pin">📍</span></usa-fx>\n<usa-fx effect="marker-pulse" trigger="hover"><span class="dot"></span></usa-fx>',
+    '<div class="demo-row"><usa-fx effect="pin-drop" trigger="click"><button type="button" class="demo-pin" aria-label="Drop pin">📍</button></usa-fx><usa-fx effect="marker-pulse" trigger="click"><button type="button" class="demo-dot" aria-label="Pulse marker"></button></usa-fx></div>',
+    [{ key: 'effect', values: ['pin-drop', 'marker-pulse'] }], '7.6'),
 ];
 
 /** item id → live-demo wiring. */
@@ -752,5 +781,13 @@ export const wire = {
       if (n) w.unlock(n.name);
       else { const c = w.cloneNode(false); c.innerHTML = SEED; w.replaceWith(c); }
     });
+  },
+  globe: (stage) => {
+    const g = stage.querySelector('usa-globe');
+    let i = 0;
+    stage.querySelector('[data-gl]')?.addEventListener('click', () => { const ms = g.markers; i = (i + 1) % ms.length; g.flyTo(ms[i].name); });
+  },
+  'location-card': (stage) => {
+    stage.querySelector('[data-lc]')?.addEventListener('click', () => stage.querySelector('usa-location-card').replay());
   },
 };
