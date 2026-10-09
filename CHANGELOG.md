@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [10.7.0] - 2026-10-09
+
+### Added
+- **AI-assisted motion — `motionary/components/ai`**: `describeMotion(text)` turns a short description in English or Chinese ("fade the cards up slowly when they scroll into view, one after another" / "卡片从下往上依次淡入") into a motion spec — effect, direction, distance, duration, delay, easing, trigger, repeat, stagger, Web Animations keyframes + options, a CSS rule with a `prefers-reduced-motion` guard, and the Motionary components that implement it; `motionSnippet(intent, 'waapi' | 'css' | 'component')` gives ready code. A small deterministic parser — **no model, no network**, pure (SSR / workers). Pinned by an **evaluation set** of 30 English + Chinese prompts (`test/fixtures/ai-eval.json`) that CI runs (≥ 90 % must be fully right; 30 / 30 at release).
+- **`motionary-mcp` 2.0** (`npx -y -p motionary motionary-mcp`): new read-only tools **`suggest_motion`** (the parser above, with prerequisite-aware component suggestions) and **`validate_snippet`** (static analysis of HTML / ESM / JSX / Vue / Svelte: unknown components with "did you mean" suggestions, unknown attributes, missing or mis-ordered prerequisites, a runtime module imported but never `use()`d, components never defined, hand-written animation without a reduced-motion path). Verified with the official MCP SDK client over stdio.
+- **`motionary/runtime/physics`** — a 2D rigid-body engine written for Motionary (own implementation and API; no Matter.js / Box2D code): circles, boxes and convex polygons; static / dynamic / kinematic bodies; mass from density, restitution, Coulomb friction, sensors, collision categories / masks, sleeping; sort-and-sweep broad phase + SAT narrow phase with clipped 2-point manifolds and warm-started accumulated impulses; distance / spring / pin constraints and a pointer-drag constraint; fixed time step with an accumulator (same result at any frame rate), `world.run()` on the shared ticker. CDN `dist/runtime/physics.iife.js`; fixed gzip budget.
+- **`motionary/runtime/format-scene`** — the versioned **`motionary-scene@1`** JSON format (world, named materials, bodies, constraints, per-body style): `validateScene()` (lists every problem, never throws), `migrateScene()` (unversioned / `@0` drafts → `@1`, with a change list), `parseScene()`, `sceneToWorld()`, `worldToScene()`. Fixed gzip budget.
+- **New components (10.7)** in `motionary/components/widgets`: `<usa-physics-playground>` — presets (balls, pyramid, pendulum, dominoes), `src` or an inline `<script type="application/json">` scene, `gravity`, `spawn`, `paused`; drag bodies, tap to spawn, arrow keys nudge; `world`, `bodies`, `toScene()`, `reset()`, `play()` / `pause()`, `usa:collision` (**Requires: motionary/runtime/physics + motionary/runtime/format-scene**); `<usa-motion-prompt>` — type a description, get a live preview and WAAPI / CSS / component code with a copy button (`value`, `format`, `placeholder`, `label`; `usa:suggest`, `usa:copy`).
+- Prerequisites for both runtime modules appear in all five places (gallery card, Store detail with the **Requires:** badge, `docs/runtime/physics.md` + `docs/runtime/format-scene.md` with compatibility tables, README, AI manifest).
+
+### Fixed
+- `motionary-mcp` listed `<usa-rive>`'s prerequisite (10.6, an official runtime) as `motionary/runtime/rive` and `scaffold_snippet` emitted an import of that non-existent module. Prerequisites are now peer-aware: `@rive-app/canvas`, its install command and the `provideRiveRuntime(() => import('@rive-app/canvas'))` line.
+
+### Accessibility
+- `<usa-physics-playground>` is a labelled, focusable canvas (arrow keys nudge the last body touched); under reduced motion the scene is settled off-screen and drawn once, and dragging advances it only while you move. `<usa-motion-prompt>` uses a labelled input, announces suggestions in a polite live region, shows the end state instead of animating under reduced motion, and every code sample it generates carries a `prefers-reduced-motion` guard.
+
 ## [10.6.0] - 2026-10-09
 
 ### Added

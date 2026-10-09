@@ -326,7 +326,7 @@ describe('10.4 motionary-mcp (read-only MCP server)', () => {
     await client.connect(new StdioClientTransport({ command: process.execPath, args: ['bin/motionary-mcp.mjs'], env: { ...process.env, MOTIONARY_MANIFEST: manifest } as Record<string, string> }));
     expect(client.getServerVersion()?.name).toBe('motionary-mcp');
     const { tools } = await client.listTools();
-    expect(tools.map((t) => t.name)).toEqual(['list_components', 'search_components', 'get_component', 'get_example', 'scaffold_snippet']);
+    expect(tools.map((t) => t.name).slice(0, 5)).toEqual(['list_components', 'search_components', 'get_component', 'get_example', 'scaffold_snippet']);
     expect(tools.every((t) => t.annotations?.readOnlyHint === true)).toBe(true);
     const s: any = await client.callTool({ name: 'search_components', arguments: { query: 'smooth scroll' } });
     expect(s.structuredContent.results[0].tag).toBe('usa-smooth-scroll');

@@ -633,5 +633,25 @@
     "name": "dist/runtime/vector.iife.js (CDN module, fixed 12.0 KB)",
     "file": "dist/runtime/vector.iife.js",
     "limit": 12288
+  },
+  {
+    "name": "import 'motionary/runtime/physics' (fixed 10.0 KB incl. the core parts it uses)",
+    "import": "export * from 'pkg/runtime/physics';",
+    "limit": 10240
+  },
+  {
+    "name": "dist/runtime/physics.iife.js (CDN module, fixed 9.0 KB)",
+    "file": "dist/runtime/physics.iife.js",
+    "limit": 9216
+  },
+  {
+    "name": "import 'motionary/runtime/format-scene' (fixed 4.0 KB incl. the core parts it uses)",
+    "import": "export * from 'pkg/runtime/format-scene';",
+    "limit": 4096
+  },
+  {
+    "name": "dist/runtime/format-scene.iife.js (CDN module, fixed 3.5 KB)",
+    "file": "dist/runtime/format-scene.iife.js",
+    "limit": 3584
   }
 ]

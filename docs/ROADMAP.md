@@ -69,7 +69,7 @@ Store 卡片显示 **「Requires: motionary/runtime/<module>」** 徽章（官�
   - 主线 B：**vector 模块** —— 矢量动画播放器，支持文档列出的 Lottie JSON 子集（形状、变换、修剪路径、基础遮罩、预合成、渐变；文档列出不支持的特性）+ dotLottie。
   - 官方运行时：`<usa-rive>`（Requires: @rive-app/canvas，可选 peer，懒加载）。
   - 新组件：令牌编辑器、`<usa-lottie-player>`、`<usa-rive>`。
-- **v10.7** — AI 辅助动效：自然语言 → 动效描述、动效建议。
+- ✅ **v10.7** — AI 辅助动效：自然语言 → 动效描述、动效建议。
   - 主线 A：MCP 2.0 —— `suggest_motion`、`validate_snippet`；AI 使用评测集（运行 AI 写的片段检验能否直接工作）。
   - 主线 B：**physics 模块** —— 2D 刚体（圆 / 盒 / 多边形）、约束；场景 JSON `motionary-scene@1`。
   - 新组件：动效提示输入框、`<usa-physics-playground>`。

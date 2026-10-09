@@ -63,3 +63,5 @@ Declarative motion without components (10.2):
 ## MCP server
 
 If your client speaks MCP, add `motionary-mcp` (read-only, ships with the package): `{ "command": "npx", "args": ["-y", "-p", "motionary", "motionary-mcp"] }`. Use `search_components` → `get_component` → `scaffold_snippet` (prerequisites are already in the snippet, in order). See docs/mcp.md.
+
+motionary-mcp 2.0 (10.7): `suggest_motion` turns a description (English or Chinese) into motion code and component suggestions; run `validate_snippet` on any code you write with `<usa-*>` components before handing it over — it catches unknown tags / attributes and missing or mis-ordered prerequisites.

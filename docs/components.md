@@ -1559,6 +1559,38 @@ defineRive(); // registers <usa-rive> — after the prerequisites
 <usa-rive src="/anim/icon.riv" state-machine="State Machine 1" autoplay label="Icon"></usa-rive>
 ```
 
+### `<usa-physics-playground>` — Requires: motionary/runtime/physics + motionary/runtime/format-scene
+
+- **Install:** `npm i motionary`
+- **Import order & registration:** Register the core first, then the module: use(physics) also registers the core. CDN: load runtime.iife.js, then runtime/physics.iife.js (it registers itself). Register the core first, then the module: use(formatScene) also registers the core. CDN: load runtime.iife.js, then runtime/format-scene.iife.js (it registers itself).
+
+```js
+import { use } from 'motionary/runtime';
+import { physics } from 'motionary/runtime/physics';
+import { formatScene } from 'motionary/runtime/format-scene';
+import { definePhysicsPlayground } from 'motionary/components/widgets';
+
+use(physics, formatScene);
+definePhysicsPlayground(); // registers <usa-physics-playground> — after the prerequisites
+```
+
+- **CDN:**
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/physics.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-scene.iife.js"></script>
+<!-- then the component bundles -->
+<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>
+```
+
+- **Minimal example:**
+
+```html
+<usa-physics-playground preset="pyramid" spawn label="Knock the pyramid over"></usa-physics-playground>
+```
+
 <!-- prereqs:end -->
 
 ### v10.2 Scroll scenes (`motionary/runtime/scroll`) + SVG loader + `data-motion` in core: `<usa-scroll-scene>`, `<usa-motion-inspector>` (`components/widgets`)
@@ -1639,6 +1671,18 @@ MCP: `npx -y -p motionary motionary-mcp` — see [docs/mcp.md](docs/mcp.md).
 | `<usa-lottie-player>` (Requires: motionary/runtime/vector) | `src` (.json, .lottie), `animation`, `autoplay`, `loop`, `speed`, `mode` (normal, bounce), `segment`, `hover`, `scrub`, `fit` (contain, cover, fill), `background`, `label` | `play()`, `pause()`, `stop()`, `seek(frame)`, `player`, `animationData`, `unsupported`; `usa:load`, `usa:complete`, `usa:error`, `usa:runtime-missing` |
 | `<usa-rive>` (Requires: @rive-app/canvas — official runtime, optional peer) | `src`, `artboard`, `animation`, `state-machine`, `autoplay`, `fit` (contain, cover, fill, fitWidth, fitHeight, none), `runtime-src`, `label` | `rive`, `play()`, `pause()`, `input(name)`; `usa:load`, `usa:error`, `usa:runtime-missing`; `provideRiveRuntime(loader)` |
 | `<usa-token-editor>` | `apply`, `format` (2025.10, draft), `groups` (duration, easing), `label` | `tokens`, `exportJSON()`, `importJSON(json)`; `usa:change`, `usa:export`, `usa:import` |
+
+### v10.7 AI-assisted motion and physics: `<usa-physics-playground>`, `<usa-motion-prompt>` (`components/widgets`), `motionary/components/ai`, `motionary/runtime/physics` + `format-scene`
+
+```html
+<usa-physics-playground preset="pyramid" spawn label="Knock the pyramid over"></usa-physics-playground>
+<usa-motion-prompt value="fade the cards up slowly, one after another"></usa-motion-prompt>
+```
+
+| Element | Attributes | Methods / events |
+|---|---|---|
+| `<usa-physics-playground>` (Requires: motionary/runtime/physics + motionary/runtime/format-scene) | `preset` (balls, pyramid, pendulum, dominoes), `src` (scene JSON) or inline `<script type="application/json">`, `gravity`, `spawn`, `paused`, `label` | `world`, `bodies`, `scene`, `toScene()`, `reset()`, `play()`, `pause()`; `usa:load`, `usa:collision`, `usa:error`, `usa:runtime-missing` |
+| `<usa-motion-prompt>` | `value`, `format` (waapi, css, component), `placeholder`, `label` | `intent`, `suggest(text)`; `usa:suggest`, `usa:copy` |
 
 ## Frameworks
 

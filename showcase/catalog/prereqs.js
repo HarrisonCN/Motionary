@@ -281,6 +281,31 @@ export const PREREQS = {
       ['SSR', 'yes', 'nothing loads until the element mounts in a browser'],
     ],
     "// npm i @rive-app/canvas\nimport { defineRive } from 'motionary/components/widgets';\ndefineRive();\n// <usa-rive src=\"/anim/icon.riv\" state-machine=\"State Machine 1\" autoplay></usa-rive>"),
+  physics: R('physics', '2D rigid-body physics', 'A small 2D rigid-body engine written for Motionary (own implementation and API — no Matter.js / Box2D code): circles, boxes and convex polygons, mass from density, restitution, friction, sensors, collision groups, sleeping, distance / spring / pin constraints, pointer drag, a fixed time step on the shared ticker.', 10240,
+    ['physics', 'createWorld', 'World', 'Body', 'Constraint', 'collide', 'dragConstraint'],
+    [
+      ['bodies: circle, box, convex polygon (any winding, made convex)', 'yes', 'concave shapes: split them into convex parts'],
+      ['static, dynamic and kinematic bodies; density / mass, inertia, fixed rotation', 'yes', ''],
+      ['collisions: sort-and-sweep broad phase, SAT narrow phase, up to 2 contact points', 'yes', 'no continuous collision detection: very fast small bodies can tunnel'],
+      ['restitution, Coulomb friction, warm-started accumulated impulses', 'yes', ''],
+      ['constraints: distance (rigid or spring with stiffness / damping), pin, pointer drag', 'yes', 'no revolute motors / joint limits'],
+      ['sensors, collision categories / masks, collision events, sleeping', 'yes', ''],
+      ['fixed time step + accumulator (same result at any frame rate)', 'yes', ''],
+      ['SSR / workers', 'yes', 'pure maths; world.run() needs the runtime ticker'],
+    ],
+    "import { use } from 'motionary/runtime';\nimport { physics, createWorld } from 'motionary/runtime/physics';\nuse(physics);\nconst world = createWorld({ gravity: [0, 980] });\nworld.bounds(600, 400);\nconst ball = world.body({ shape: 'circle', x: 300, y: 40, radius: 20, restitution: 0.7 });\nworld.run(); // steps on the shared ticker"),
+  'format-scene': R('format-scene', 'Scene JSON (motionary-scene@1)', 'The versioned motionary-scene@1 format: a JSON description of a 2D physics scene (world, named materials, bodies, constraints, per-body style) — validate, migrate older drafts, load into a physics world and save one back.', 3072,
+    ['formatScene', 'SCENE_FORMAT', 'migrateScene', 'validateScene', 'parseScene', 'sceneToWorld', 'worldToScene'],
+    [
+      ['world: size, gravity, walls (with or without a top), solver iterations', 'yes', ''],
+      ['named materials (restitution, friction, density), per-body overrides', 'yes', ''],
+      ['bodies: circle / box / polygon, static / kinematic, velocity, angle, sensor, style', 'yes', ''],
+      ['constraints: distance / spring / pin between bodies or to a world point', 'yes', ''],
+      ['validation (lists every problem, never throws) + parseScene (throws one error)', 'yes', ''],
+      ['migration: unversioned scenes and the motionary-scene@0 draft → @1, with a change list', 'yes', ''],
+      ['save: worldToScene() (walls made by bounds() are left out)', 'yes', ''],
+    ],
+    "import { use } from 'motionary/runtime';\nimport { physics } from 'motionary/runtime/physics';\nimport { formatScene, sceneToWorld } from 'motionary/runtime/format-scene';\nuse(physics, formatScene);\nconst { world, bodies } = sceneToWorld(await (await fetch('/scenes/stack.json')).json());\nworld.run();"),
 };
 
 /** `Requires: motionary/runtime + …` */

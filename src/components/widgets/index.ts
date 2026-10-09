@@ -121,6 +121,8 @@ import { defineShaderBackdrop, BACKDROP_PRESETS, POST_PASSES, type UsaShaderBack
 import { defineLottiePlayer, type UsaLottiePlayerElement } from './lottie-player';
 import { defineRive, RIVE_PEER, RIVE_CDN, loadRiveRuntime, provideRiveRuntime, type UsaRiveElement } from './rive';
 import { defineTokenEditor, type UsaTokenEditorElement } from './token-editor';
+import { definePhysicsPlayground, PHYSICS_PRESETS, type UsaPhysicsPlaygroundElement } from './physics-playground';
+import { defineMotionPrompt, type UsaMotionPromptElement } from './motion-prompt';
 
 export { defineCarousel, defineTabBar, defineDisclosure, defineStories, CAROUSEL_EFFECTS, TAB_INDICATORS };
 export type { UsaCarouselElement, UsaTabBarElement, UsaDisclosureElement, UsaStoriesElement };
@@ -247,6 +249,9 @@ export type { UsaGlSceneElement, UsaGpuParticlesElement, UsaShaderBackdropElemen
 export { defineLottiePlayer, defineRive, RIVE_PEER, RIVE_CDN, loadRiveRuntime, provideRiveRuntime, defineTokenEditor };
 export type { UsaLottiePlayerElement, UsaRiveElement, UsaTokenEditorElement };
 
+export { definePhysicsPlayground, PHYSICS_PRESETS, defineMotionPrompt };
+export type { UsaPhysicsPlaygroundElement, UsaMotionPromptElement };
+
 /** The widgets by release (tag → define function). */
 export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElementConstructor | undefined>> = {
   '6.2': { 'usa-carousel': defineCarousel, 'usa-tab-bar': defineTabBar, 'usa-disclosure': defineDisclosure, 'usa-stories': defineStories },
@@ -291,6 +296,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '10.4': { 'usa-scroll-ring': defineScrollRing, 'usa-parallax-layers': defineParallaxLayers, 'usa-smooth-scroll': defineSmoothScroll },
   '10.5': { 'usa-gl-scene': defineGlScene, 'usa-three-scene': defineThreeScene, 'usa-gpu-particles': defineGpuParticles, 'usa-shader-backdrop': defineShaderBackdrop },
   '10.6': { 'usa-lottie-player': defineLottiePlayer, 'usa-rive': defineRive, 'usa-token-editor': defineTokenEditor },
+  '10.7': { 'usa-physics-playground': definePhysicsPlayground, 'usa-motion-prompt': defineMotionPrompt },
 };
 
 /** Every widget tag, in release order. */
@@ -417,5 +423,7 @@ declare global {
     'usa-lottie-player': UsaLottiePlayerElement;
     'usa-rive': UsaRiveElement;
     'usa-token-editor': UsaTokenEditorElement;
+    'usa-physics-playground': UsaPhysicsPlaygroundElement;
+    'usa-motion-prompt': UsaMotionPromptElement;
   }
 }

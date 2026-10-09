@@ -1,4 +1,4 @@
-# Motionary components (205)
+# Motionary components (207)
 
 One page per `<usa-*>` element, generated from the source. Machine-readable: `motionary/manifest.json` · Pages `/components.json` · `/llms.txt` · `/llms-full.txt`. How to use these with an AI assistant: [AGENTS.md](../../AGENTS.md) and [the prompt guide](../ai-prompt-guide.md).
 
@@ -71,6 +71,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<usa-motion>`](usa-motion.md) — Motion DSL
 - [`<usa-motion-inspector>`](usa-motion-inspector.md) — Motion inspector
 - [`<usa-motion-prefs>`](usa-motion-prefs.md) — Motion preference panel
+- [`<usa-motion-prompt>`](usa-motion-prompt.md) — Motion prompt (text → motion)
 - [`<usa-motion-spec>`](usa-motion-spec.md) — Motion spec sheet
 - [`<usa-music-player>`](usa-music-player.md) — Music player
 - [`<usa-native-preview>`](usa-native-preview.md) — Native preview
@@ -83,6 +84,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<usa-panorama>`](usa-panorama.md) — 360° panorama viewer
 - [`<usa-pause-all>`](usa-pause-all.md) — Pause all motion
 - [`<usa-perf-monitor>`](usa-perf-monitor.md) — Perf monitor
+- [`<usa-physics-playground>`](usa-physics-playground.md) — Physics playground · Requires: motionary/runtime/physics + motionary/runtime/format-scene
 - [`<usa-plugin-card>`](usa-plugin-card.md) — Plugin detail card · Requires: motionary/runtime
 - [`<usa-plugin-store>`](usa-plugin-store.md) — Plugin marketplace
 - [`<usa-popover>`](usa-popover.md) — Popover

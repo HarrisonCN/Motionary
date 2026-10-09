@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// motionary-mcp (10.4) — a read-only Model Context Protocol server for the
+// motionary-mcp 2.0 (10.7; 1.0 in 10.4) — a read-only Model Context Protocol server for the
 // Motionary component catalog. Zero dependencies: speaks MCP (JSON-RPC 2.0,
 // newline-delimited) over stdio and answers from the AI manifest that ships
 // in the package (dist/manifest.json, the same data as components.json /
@@ -9,15 +9,20 @@
 //   MOTIONARY_MANIFEST=/path/manifest.json motionary-mcp   (use another manifest)
 //
 // Tools: list_components, search_components, get_component, get_example,
-// scaffold_snippet (prerequisites included automatically).
+// scaffold_snippet (prerequisites included automatically); 2.0 (10.7) adds
+// suggest_motion (natural language → motion spec + code, the deterministic
+// parser from motionary/components/ai — no model, no network) and
+// validate_snippet (unknown tags / attributes, missing or mis-ordered
+// prerequisites, unregistered components, reduced-motion handling).
 // Resources: motionary://manifest, motionary://llms.txt, motionary://component/<tag>.
 import { readFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { createInterface } from 'node:readline';
+import { pathToFileURL } from 'node:url';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
-const SERVER = { name: 'motionary-mcp', version: '0.1.0' };
+const SERVER = { name: 'motionary-mcp', version: '2.0.0' };
 const PROTOCOLS = ['2025-06-18', '2025-03-26', '2024-11-05'];
 
 export function loadManifest(path = process.env.MOTIONARY_MANIFEST || join(HERE, '../dist/manifest.json')) {
@@ -31,15 +36,24 @@ const tagOf = (s) => {
   const t = norm(s).trim().replace(/^<|\/?>$/g, '');
   return t.startsWith('usa-') ? t : `usa-${t}`;
 };
-const brief = (c) => ({ tag: c.tag, title: c.title, category: c.category, import: c.import.path, requires: c.requires.map((r) => (r === 'core' ? 'motionary/runtime' : r.includes('/') || r.startsWith('@') ? r : `motionary/runtime/${r}`)), since: c.since, description: c.description.slice(0, 200) });
+// 2.0: a requirement id is a motionary/runtime module or (10.6+) an official runtime (kind 'peer', e.g. rive → @rive-app/canvas)
+let MOD = new Map();
+const indexModules = (m) => {
+  if (MOD.m !== m) (MOD = new Map((m.runtimeModules || []).map((x) => [x.id, x]))), (MOD.m = m);
+};
+const isPeer = (r) => r.startsWith('@') || MOD.get(r)?.kind === 'peer';
+const reqLabel = (r) => (r === 'core' ? 'motionary/runtime' : MOD.get(r)?.kind === 'peer' ? MOD.get(r).label : r.includes('/') || r.startsWith('@') ? r : `motionary/runtime/${r}`);
+const brief = (c) => ({ tag: c.tag, title: c.title, category: c.category, import: c.import.path, requires: c.requires.map(reqLabel), since: c.since, description: c.description.slice(0, 200) });
 
 export function findComponent(m, tag) {
+  indexModules(m);
   const t = tagOf(tag);
   return m.components.find((c) => c.tag === t) || m.components.find((c) => c.id === norm(tag));
 }
 
 /** Rank components for a free-text query (tag, title, keywords, description, category). */
 export function searchComponents(m, query, limit = 10) {
+  indexModules(m);
   const words = norm(query).split(/[^a-z0-9\u00c0-\uffff-]+/).filter(Boolean);
   if (!words.length) return [];
   const scored = m.components.map((c) => {
@@ -72,14 +86,17 @@ const runtimeImports = (ids) => {
 
 /** A ready-to-paste snippet for one or more components, prerequisites first. */
 export function scaffold(m, tags, framework = 'esm') {
+  indexModules(m);
   if (!FRAMEWORKS.includes(framework)) throw new Error(`framework must be one of ${FRAMEWORKS.join(', ')}`);
   const comps = tags.map((t) => {
     const c = findComponent(m, t);
     if (!c) throw new Error(`unknown component ${t} — use search_components first`);
     return c;
   });
-  const req = [...new Set(comps.flatMap((c) => c.requires))].filter((r) => !r.startsWith('@'));
-  const peers = [...new Set(comps.flatMap((c) => c.requires))].filter((r) => r.startsWith('@'));
+  const req = [...new Set(comps.flatMap((c) => c.requires))].filter((r) => !isPeer(r));
+  const peerIds = [...new Set(comps.flatMap((c) => c.requires))].filter(isPeer);
+  const peers = peerIds.map(reqLabel);
+  const peerSetup = peerIds.map((r) => MOD.get(r)).filter(Boolean);
   const needsWidgets = comps.some((c) => /widgets\.umd/.test(c.cdn));
   const markup = comps.map((c) => c.example).join('\n');
   const byPath = new Map();
@@ -88,25 +105,147 @@ export function scaffold(m, tags, framework = 'esm') {
   const defCalls = [...new Set(comps.map((c) => c.import.register))];
   const install = ['npm i motionary', ...peers.map((p) => `npm i ${p}`)].join(' && ');
   const rt = req.length ? runtimeImports(req) : null;
-  const prereqNote = req.length ? `Prerequisites: ${req.map((r) => (r === 'core' ? 'motionary/runtime' : `motionary/runtime/${r}`)).join(', ')} — register them before the components mount.` : 'No prerequisites.';
+  const prereqNote = req.length || peers.length ? `Prerequisites: ${[...req.map(reqLabel), ...peers].join(', ')} — register them before the components mount.` : 'No prerequisites.';
   let code;
   if (framework === 'html') {
     code = [
       '<!-- ' + prereqNote + ' -->',
       ...(req.length ? runtimeCdn(m, req) : []),
+      ...peerSetup.map((p) => `<!-- ${p.label} (official runtime, lazy): -->\n${p.cdn}`),
       `<script src="${m.cdn.components}"></script>`,
       ...(needsWidgets ? [`<script src="${m.cdn.widgets}"></script>`] : []),
       '',
       markup,
     ].join('\n');
   } else {
-    const setup = [...(rt ? [...rt.lines] : []), ...defImports, '', ...(rt ? [rt.register + ' // prerequisites first'] : []), ...defCalls].join('\n');
+    const setup = [...(rt ? [...rt.lines] : []), ...peerSetup.map((p) => p.import).filter((l) => !defImports.includes(l)), ...defImports, '', ...(rt ? [rt.register + ' // prerequisites first'] : []), ...peerSetup.map((p) => p.register), ...defCalls].join('\n');
     if (framework === 'esm') code = `// ${install}\n${setup}\n\n/* HTML:\n${markup}\n*/`;
     else if (framework === 'react') code = `// ${install}\n${setup}\n\nexport function Demo() {\n  return (\n    <>\n${markup.split('\n').map((l) => '      ' + l.replace(/\bclass=/g, 'className=')).join('\n')}\n    </>\n  );\n}`;
     else if (framework === 'vue') code = `<!-- ${install} -->\n<script setup>\n${setup}\n</script>\n\n<template>\n${markup.split('\n').map((l) => '  ' + l).join('\n')}\n</template>\n<!-- vite.config: vue({ template: { compilerOptions: { isCustomElement: (t) => t.startsWith('usa-') } } }) -->`;
     else code = `<!-- ${install} -->\n<script>\n${setup}\n</script>\n\n${markup}`;
   }
-  return { framework, components: comps.map((c) => c.tag), install, prerequisites: req.map((r) => (r === 'core' ? 'motionary/runtime' : `motionary/runtime/${r}`)).concat(peers), code };
+  return { framework, components: comps.map((c) => c.tag), install, prerequisites: req.map(reqLabel).concat(peers), code };
+}
+
+// ---------------------------------------------------------------- 2.0: suggest_motion + validate_snippet
+let AI = null;
+/** Load the natural-language parser (motionary/components/ai) — from the package build, or MOTIONARY_AI. */
+export async function loadAi(path = process.env.MOTIONARY_AI || join(HERE, '../dist/components/ai.js')) {
+  // a Function-wrapped import keeps bundlers / vite from rewriting this optional, path-based import
+  if (!AI && existsSync(path)) AI = await new Function('u', 'return import(u)')(pathToFileURL(path).href);
+  return AI;
+}
+export function setAi(mod) {
+  AI = mod;
+}
+
+/** Natural language → motion spec, code in three styles, and the catalog components that implement it. */
+export function suggestMotion(m, text, format = 'waapi') {
+  if (!AI) throw new Error('suggest_motion needs motionary/components/ai (dist/components/ai.js) — run from an installed motionary package or set MOTIONARY_AI');
+  const i = AI.describeMotion(String(text || ''));
+  const comps = i.components.map((c) => {
+    const k = findComponent(m, c.tag);
+    return { ...c, requires: k ? brief(k).requires : [], import: k?.import?.path };
+  });
+  const code = { waapi: AI.motionSnippet(i, 'waapi'), css: AI.motionSnippet(i, 'css'), component: AI.motionSnippet(i, 'component') };
+  return {
+    text: i.text,
+    effect: i.effect,
+    also: i.also,
+    direction: i.direction,
+    amount: i.amount,
+    duration: i.duration,
+    delay: i.delay,
+    easing: i.easing,
+    easingName: i.easingName,
+    trigger: i.trigger,
+    iterations: i.iterations === Infinity ? 'infinite' : i.iterations,
+    alternate: i.alternate,
+    stagger: i.stagger,
+    reducedMotion: i.reducedMotion,
+    keyframes: i.keyframes,
+    options: { ...i.options, iterations: i.options.iterations === Infinity ? 'infinite' : i.options.iterations },
+    confidence: i.confidence,
+    matched: i.matched,
+    components: comps,
+    code: code[format] ? code[format] : code.waapi,
+    allCode: code,
+    note: i.confidence < 0.5 ? 'Low confidence: describe the motion with an effect (fade, slide, zoom …), a direction and a trigger (on scroll, on hover …).' : undefined,
+  };
+}
+
+const GLOBAL_ATTRS = new Set(['class', 'id', 'style', 'role', 'slot', 'hidden', 'tabindex', 'title', 'lang', 'dir', 'part', 'is', 'inert', 'nonce', 'popover', 'translate', 'draggable', 'contenteditable', 'autofocus', 'enterkeyhint', 'inputmode', 'key', 'ref', 'classname', 'v-if', 'v-for', 'v-show']);
+const dist = (a, b) => {
+  const d = Array.from({ length: b.length + 1 }, (_, j) => j);
+  for (let i = 1; i <= a.length; i++) {
+    let prev = d[0];
+    d[0] = i;
+    for (let j = 1; j <= b.length; j++) {
+      const t = d[j];
+      d[j] = Math.min(d[j] + 1, d[j - 1] + 1, prev + (a[i - 1] === b[j - 1] ? 0 : 1));
+      prev = t;
+    }
+  }
+  return d[b.length];
+};
+const camelId = (id) => id.replace(/-(\w)/g, (_, c) => c.toUpperCase());
+
+/** Check a snippet (HTML, ESM, JSX, Vue or Svelte) against the catalog. Never runs it. */
+export function validateSnippet(m, code) {
+  indexModules(m);
+  const src = String(code || '');
+  const errors = [], warnings = [];
+  const tags = [...src.matchAll(/<(usa-[a-z0-9-]+)([^>]*)>/gi)];
+  const used = new Map();
+  for (const [, rawTag, rawAttrs] of tags) {
+    const tag = rawTag.toLowerCase();
+    const c = findComponent(m, tag);
+    if (!c) {
+      const close = m.components.map((k) => [k.tag, dist(tag, k.tag)]).filter(([, d]) => d <= 3).sort((a, b) => a[1] - b[1]).map(([t]) => t);
+      const near = [...new Set([...close, ...searchComponents(m, tag.replace(/^usa-/, '').replace(/-/g, ' '), 3).map((x) => x.tag)])].slice(0, 3);
+      if (!used.has(tag)) errors.push(`unknown component <${tag}>${near.length ? ` — did you mean ${near.map((t) => `<${t}>`).join(', ')}?` : ''}`);
+      used.set(tag, null);
+      continue;
+    }
+    used.set(tag, c);
+    if (!(c.attributes || []).length) continue;
+    const attrs = [...rawAttrs.matchAll(/(?:^|\s)([:@]?[a-zA-Z_][\w:.-]*)(?=\s*=|\s|\/?$)/g)].map((x) => x[1].replace(/^[:@]/, '').replace(/^(?:v-bind|bind):/, '').toLowerCase());
+    for (const a of attrs) {
+      if (GLOBAL_ATTRS.has(a) || a.startsWith('data-') || a.startsWith('aria-') || a.startsWith('on') || a.startsWith('v-') || a.includes(':')) continue;
+      if (!c.attributes.includes(a)) warnings.push(`<${tag}> has no attribute "${a}" (attributes: ${c.attributes.join(', ')})`);
+    }
+  }
+  const comps = [...used.values()].filter(Boolean);
+  const hasScript = /<script\b|\bimport\s|\brequire\(/.test(src);
+  // prerequisites (runtime modules + official runtimes) and their order
+  const modules = [...new Set(comps.flatMap((c) => c.requires))];
+  const firstDefine = Math.min(...comps.map((c) => { const i = src.indexOf(c.import.define + '('); return i < 0 ? Infinity : i; }), ...['components.umd.js', 'widgets.umd.js', 'motionary/components'].map((k) => { const i = src.indexOf(k); return i < 0 ? Infinity : i; }));
+  for (const r of modules) {
+    const who = comps.filter((c) => c.requires.includes(r)).map((c) => `<${c.tag}>`).join(', ');
+    if (isPeer(r)) {
+      const pk = reqLabel(r);
+      const has = src.includes(pk) || /runtime-src=/.test(src) || /provideRiveRuntime\(/.test(src);
+      if (!has) (hasScript ? errors : warnings).push(`${who} needs the official runtime ${pk} (optional peer): npm i ${pk}, or a runtime-src / provideRiveRuntime() — it is lazy-loaded on mount`);
+      continue;
+    }
+    const names = r === 'core' ? ["motionary/runtime'", 'motionary/runtime"', 'runtime.iife.js'] : [`motionary/runtime/${r}`, `runtime/${r}.iife.js`];
+    const at = Math.min(...names.map((n) => { const i = src.indexOf(n); return i < 0 ? Infinity : i; }));
+    const path = r === 'core' ? 'motionary/runtime' : `motionary/runtime/${r}`;
+    if (at === Infinity) {
+      (hasScript ? errors : warnings).push(`${who} requires ${path}: ${r === 'core' ? "import { use } from 'motionary/runtime'" : `import { ${camelId(r)} } from '${path}'; use(${camelId(r)});`} before the component mounts (CDN: runtime.iife.js${r === 'core' ? '' : `, then runtime/${r}.iife.js`}, before the component bundles)`);
+      continue;
+    }
+    if (r !== 'core' && /\bimport\s/.test(src) && !new RegExp(`use\\([^)]*\\b${camelId(r)}\\b`).test(src)) errors.push(`${path} is imported but never registered: call use(${camelId(r)}) before the components mount`);
+    if (at > firstDefine) errors.push(`${path} is loaded after the components — register prerequisites first`);
+    const useAt = src.search(new RegExp(`use\\([^)]*\\b${camelId(r)}\\b`));
+    const defAt = Math.min(...comps.filter((c) => c.requires.includes(r)).map((c) => { const i = src.indexOf(c.import.define + '('); return i < 0 ? Infinity : i; }));
+    if (useAt > -1 && defAt !== Infinity && useAt > defAt) errors.push(`use(${camelId(r)}) runs after ${who} are defined — call it first`);
+  }
+  // components imported in ESM but never defined
+  if (/\bimport\s/.test(src)) for (const c of comps) if (!src.includes(c.import.define + '(') && !/defineAll\w*\(|defineWidgets\(|auto(?:\.js)?['"]/.test(src)) warnings.push(`<${c.tag}> is used but ${c.import.define}() is never called (import it from '${c.import.path}')`);
+  // hand-written animations without a reduced-motion path
+  if (/\.animate\(|@keyframes|animation\s*:/.test(src) && !/prefers-reduced-motion|reducedMotion|prefersReducedMotion/.test(src)) warnings.push('hand-written animation without a prefers-reduced-motion check — guard it (Motionary components already respect reduced motion)');
+  return { valid: errors.length === 0, errors, warnings, components: comps.map((c) => c.tag), prerequisites: modules.map(reqLabel) };
 }
 
 // ---------------------------------------------------------------- MCP surface
@@ -117,11 +256,14 @@ export const TOOLS = [
   { name: 'get_component', title: 'Get a component', description: 'Everything about one component: attributes, events, slots, methods, import / define, CDN, prerequisites (install, import + register order, CDN script order), minimal example, variants.', inputSchema: { type: 'object', properties: { tag: { type: 'string', description: "'usa-tilt', 'tilt' or '<usa-tilt>'" } }, required: ['tag'], additionalProperties: false }, annotations: { title: 'Get component', ...RO } },
   { name: 'get_example', title: 'Get an example', description: "A working example for one component in the requested style ('html' = CDN, 'esm' = npm + bundler, or a variant id).", inputSchema: { type: 'object', properties: { tag: { type: 'string' }, variant: { type: 'string', description: "'html' (default), 'esm', or a variant id from get_component" } }, required: ['tag'], additionalProperties: false }, annotations: { title: 'Get example', ...RO } },
   { name: 'scaffold_snippet', title: 'Scaffold a snippet', description: 'A ready-to-paste snippet using one or more components, with every prerequisite installed, imported and registered in the right order before the components mount.', inputSchema: { type: 'object', properties: { tags: { type: 'array', items: { type: 'string' }, minItems: 1 }, framework: { type: 'string', enum: FRAMEWORKS, default: 'esm' } }, required: ['tags'], additionalProperties: false }, annotations: { title: 'Scaffold snippet', ...RO } },
+  { name: 'suggest_motion', title: 'Suggest a motion', description: 'Natural language (English or Chinese) → a motion spec: effect, direction, duration, easing, trigger, stagger, Web Animations keyframes + options, CSS, and the Motionary components that implement it, with prerequisite-aware code. Deterministic parser, no model, no network.', inputSchema: { type: 'object', properties: { text: { type: 'string', description: "e.g. 'fade the cards up slowly when they scroll into view, one after another'" }, format: { type: 'string', enum: ['waapi', 'css', 'component'], default: 'waapi' } }, required: ['text'], additionalProperties: false }, annotations: { title: 'Suggest motion', ...RO } },
+  { name: 'validate_snippet', title: 'Validate a snippet', description: 'Check HTML / ESM / JSX / Vue / Svelte code that uses <usa-*> components: unknown tags (with suggestions) and attributes, missing or mis-ordered prerequisites (motionary/runtime modules, official runtimes), components never defined, hand-written animation without a reduced-motion path. Static analysis only — never runs the code.', inputSchema: { type: 'object', properties: { code: { type: 'string' } }, required: ['code'], additionalProperties: false }, annotations: { title: 'Validate snippet', ...RO } },
 ];
 
 const text = (obj) => ({ content: [{ type: 'text', text: typeof obj === 'string' ? obj : JSON.stringify(obj, null, 2) }], ...(typeof obj === 'object' ? { structuredContent: Array.isArray(obj) ? { items: obj } : obj } : {}) });
 
 export function callTool(m, name, a = {}) {
+  indexModules(m);
   switch (name) {
     case 'list_components': {
       let list = m.components;
@@ -159,6 +301,12 @@ export function callTool(m, name, a = {}) {
     case 'scaffold_snippet':
       if (!Array.isArray(a.tags) || !a.tags.length) throw new Error('tags must be a non-empty array');
       return text(scaffold(m, a.tags, a.framework || 'esm'));
+    case 'suggest_motion':
+      if (!a.text) throw new Error('text is required');
+      return text(suggestMotion(m, a.text, a.format || 'waapi'));
+    case 'validate_snippet':
+      if (typeof a.code !== 'string') throw new Error('code is required');
+      return text(validateSnippet(m, a.code));
     default:
       throw Object.assign(new Error(`unknown tool ${name}`), { code: -32602 });
   }
@@ -198,7 +346,7 @@ export function handle(m, msg, state = {}) {
       case 'initialize': {
         const v = PROTOCOLS.includes(params.protocolVersion) ? params.protocolVersion : PROTOCOLS[0];
         state.initialized = true;
-        return ok({ protocolVersion: v, capabilities: { tools: { listChanged: false }, resources: { listChanged: false, subscribe: false }, prompts: { listChanged: false }, logging: {} }, serverInfo: { ...SERVER, title: 'Motionary component catalog' }, instructions: `Read-only catalog of Motionary ${m.version} (${m.components.length} <usa-*> Web Components + motionary/runtime modules). Search or list to pick a component, get_component for its API, scaffold_snippet for code that already registers every prerequisite in the right order.` });
+        return ok({ protocolVersion: v, capabilities: { tools: { listChanged: false }, resources: { listChanged: false, subscribe: false }, prompts: { listChanged: false }, logging: {} }, serverInfo: { ...SERVER, title: 'Motionary component catalog' }, instructions: `Read-only catalog of Motionary ${m.version} (${m.components.length} <usa-*> Web Components + motionary/runtime modules). Search or list to pick a component, get_component for its API, scaffold_snippet for code that already registers every prerequisite in the right order, suggest_motion to turn a description into motion code, validate_snippet to check code before you hand it over.` });
       }
       case 'ping':
         return ok({});
@@ -252,10 +400,11 @@ export function serve(input = process.stdin, output = process.stdout, manifest) 
 const invoked = process.argv[1] && fileURLToPath(import.meta.url) === (await import('node:fs')).realpathSync(process.argv[1]);
 if (invoked) {
   if (process.argv.includes('--help') || process.argv.includes('-h')) {
-    console.log('motionary-mcp — read-only MCP server (stdio) for the Motionary component catalog.\nConfigure your MCP client with: { "command": "npx", "args": ["-y", "-p", "motionary", "motionary-mcp"] }\nTools: ' + TOOLS.map((t) => t.name).join(', '));
+    console.log('motionary-mcp 2.0 — read-only MCP server (stdio) for the Motionary component catalog.\nConfigure your MCP client with: { "command": "npx", "args": ["-y", "-p", "motionary", "motionary-mcp"] }\nTools: ' + TOOLS.map((t) => t.name).join(', '));
   } else if (process.argv.includes('--version')) console.log(SERVER.version);
   else {
     try {
+      await loadAi();
       serve();
     } catch (e) {
       console.error(String(e.message || e));
