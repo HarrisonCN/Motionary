@@ -31,6 +31,7 @@ import { PAPER_FX, registerPaperPack, roughLine, paperRandom } from './paper';
 import { SURFACE_FX, registerSurfacePack, SURFACE_THEMES, applySurfaceTheme } from './themefx';
 import { GESTURE3_FX, registerGesture3Pack, pinchScale, pinchAngle, orientationToTilt } from './gesture3';
 import { SPATIAL_FX, registerSpatialPack, yawToOffset, xrSupport } from './spatial';
+import { CINEMA_FX, registerCinemaPack, cameraFrame, CAMERA_MOVES } from './cinema';
 
 export { GPU_FX, registerGpuPack, TEXT3_FX, registerTextPack, splitChars };
 export { shaderBackground, supportsWebGL2, fieldFallback, GLSL_HEAD } from './gl';
@@ -83,6 +84,8 @@ export { GESTURE3_FX, registerGesture3Pack, pinchScale, pinchAngle, orientationT
 
 export { SPATIAL_FX, registerSpatialPack, yawToOffset, xrSupport };
 
+export { CINEMA_FX, registerCinemaPack, cameraFrame, CAMERA_MOVES };
+
 /** The 6.x effect packs by name. */
 export const EFFECT_PACKS: Record<string, EffectDefinition[]> = {
   gpu: GPU_FX,
@@ -110,6 +113,7 @@ export const EFFECT_PACKS: Record<string, EffectDefinition[]> = {
   surface: SURFACE_FX,
   gesture3: GESTURE3_FX,
   spatial: SPATIAL_FX,
+  cinema: CINEMA_FX,
 };
 
 /** Register every 6.x effect pack (idempotent). */
@@ -139,6 +143,7 @@ export function registerEffectPacks(): void {
   registerSurfacePack();
   registerGesture3Pack();
   registerSpatialPack();
+  registerCinemaPack();
 }
 
 
