@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [11.2.0] - 2026-10-09
+
+### Source maps (Tooling)
+- **Source maps are no longer published to npm** (`files` excludes `dist/**/*.map`). Measured on 11.0.0: the tarball drops from 6.33 MB to 3.28 MB (−48 %), unpacked from 27.08 MB to 12.02 MB (−56 %), 914 fewer files.
+- Maps are still built and committed with every release. The last build step (`scripts/sourcemap-urls.mjs`) rewrites each file's `sourceMappingURL` to the map's permanent URL in the release tag — `https://raw.githubusercontent.com/HarrisonCN/Motionary/v<version>/dist/…` — so DevTools resolves it on demand, whether the file came from npm, a CDN or your bundle.
+- New [docs/source-maps.md](./docs/source-maps.md) (measurements, where the maps are, alternatives considered); README note.
+
+### Checks
+- New `npm run check:pack` (`scripts/check-pack.mjs`, CI on Node 22): the dry-run package contains no `.map` file and stays within fixed limits (4.0 MB packed, 14 MB unpacked, 2300 files).
+- New `test/widgets-11-2.test.ts`: `files` / build / CI wiring, URL rewriting (relative → tag URL; idempotent; absolute and data URLs untouched).
+
 ## [11.1.0] - 2026-10-09
 
 ### Tree-shaking (Motion Core · Components)
