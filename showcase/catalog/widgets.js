@@ -1121,6 +1121,28 @@ export const components = [
     '<usa-fx effect="mesh-drift" trigger="loop" seed="4" palette="ocean"><section class="hero">…</section></usa-fx>',
     '<div class="demo-row"><usa-fx effect="mesh-drift" trigger="loop" seed="4" palette="candy"><span class="demo-mesh">Mesh drift</span></usa-fx><usa-fx effect="grain-flicker" trigger="loop"><span class="demo-mesh demo-grain">Grain</span></usa-fx></div>',
     [{ key: 'effect', values: ['mesh-drift', 'grain-flicker'] }], '9.3'),
+  // ---- 9.4 -------------------------------------------------------------
+  W('usa-video-card', 'ui', 'Video card', '视频卡片',
+    '9.4: a video thumbnail card — hover or focus plays a muted preview with a progress line, a play badge and a duration chip; without a video the poster drifts (Ken Burns).',
+    '9.4：视频缩略卡片 —— 悬停或聚焦时静音预览播放，带进度线、播放徽标与时长标签；没有视频时海报缓慢推移（Ken Burns）。',
+    ['video', 'card', 'preview', 'thumbnail', 'hover'],
+    '<usa-video-card duration="2:41">\n  <img src="poster.jpg" alt="">\n  <video src="preview.mp4" muted playsinline></video>\n  <h3>Making of Motionary</h3>\n</usa-video-card>',
+    '<usa-video-card class="demo-vcard" duration="2:41"><div data-poster class="demo-vposter"></div><h3>Making of Motionary</h3></usa-video-card>',
+    undefined, { since: '9.4' }),
+  W('usa-hero-video', 'ui', 'Hero video', '英雄视频',
+    '9.4: a full-bleed hero with a background video — poster first, cross-fade to the video, a readable scrim, an always-there pause button and an optional scroll-scrubbed mode.',
+    '9.4：带背景视频的全幅首屏 —— 先显示海报再淡入视频，保证文字可读的遮罩、始终可用的暂停按钮，可选随滚动推进的模式。',
+    ['hero', 'video', 'background', 'scroll', 'banner'],
+    '<usa-hero-video label="Welcome" poster="poster.jpg">\n  <video src="hero.mp4" autoplay muted loop playsinline></video>\n  <h1>Motion, declared.</h1>\n</usa-hero-video>',
+    '<usa-hero-video class="demo-hero" label="Welcome"><h2>Motion, declared.</h2><p>Poster mode — add a &lt;video&gt; for the real thing.</p></usa-hero-video>',
+    undefined, { since: '9.4' }),
+  X('fx-film', ['fx-video', 'registerVideoPack'], 'Film burn & jump cut', '胶片灼烧与跳切',
+    '9.4: film-burn burns a warm light leak across an element as it appears; jump-cut snaps it through two hard edits (zoom, reframe) and back.',
+    '9.4：film-burn 在元素出现时掠过一道温暖的漏光；jump-cut 让元素经历两次硬切（推近、重新构图）后复原。',
+    ['film', 'light leak', 'video', 'cut', 'edit'],
+    '<usa-fx effect="film-burn" trigger="enter"><img src="still.jpg" alt=""></usa-fx>\n<usa-fx effect="jump-cut" trigger="click"><figure>…</figure></usa-fx>',
+    '<div class="demo-row"><usa-fx effect="film-burn" trigger="click"><button type="button" class="demo-burn">Film burn</button></usa-fx><usa-fx effect="jump-cut" trigger="click"><button type="button" class="demo-burn">Jump cut</button></usa-fx></div>',
+    [{ key: 'effect', values: ['film-burn', 'jump-cut'] }], '9.4'),
 ];
 
 /** item id → live-demo wiring. */

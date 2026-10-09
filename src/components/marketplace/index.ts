@@ -48,6 +48,7 @@ export const MARKETPLACE: PluginListing[] = [
   L('motionary/fx/cinema', 'Cinematic', 'Dolly-in, pan reveal, letterbox and rack focus.', 'motionary/fx/cinema', 'registerCinemaPack', 'dolly-in pan-reveal letterbox rack-focus', 'film camera story', '9.1'),
   L('motionary/fx/lottie', 'Lottie & Rive', 'Lottie import (keyframes + SVG), Rive state-machine inputs, icon pop.', 'motionary/fx/lottie', 'registerLottiePack', 'lottie-play icon-pop', 'lottie rive after-effects icons', '9.2'),
   L('motionary/fx/genart', 'Generative art 2.0', 'Halftone print-in, drifting mesh gradients, kaleidoscope and film grain.', 'motionary/fx/genart', 'registerGenArtPack', 'halftone-in mesh-drift kaleido grain-flicker', 'generative gradient grain art', '9.3'),
+  L('motionary/fx/video', 'Video motion', 'Scroll-driven video and frame sequences, film burn, jump cut.', 'motionary/fx/video', 'registerVideoPack', 'film-burn jump-cut', 'video scroll film', '9.4'),
 ];
 
 /** Ranked search over listings (name / title / tags / effects / description) (9.0). */
