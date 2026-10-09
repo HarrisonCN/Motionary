@@ -18,6 +18,8 @@
  * 'reduce'`): entrances fade, loops / backgrounds / cursors are skipped.
  */
 export const VERSION = '10.0.0';
+export { applyMotionAttributes, parseMotionAttr } from './attributes';
+export type { MotionAttrRule } from './attributes';
 
 export type CoreEffectKind = 'enter' | 'exit' | 'attention' | 'hover' | 'click' | 'loop' | 'background' | 'cursor' | 'text' | 'scroll' | (string & {});
 export interface CoreEffectContext {

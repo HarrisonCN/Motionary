@@ -378,3 +378,6 @@ usa-carousel[data-effect="cards"].demo-carousel .demo-slide{margin:0 18%}
 .ccard-prereq dt{margin-top:6px;font-weight:600}
 .ccard-prereq dd{margin:2px 0 0}
 .ccard-prereq pre{margin:0;padding:6px 8px;max-width:100%;overflow:auto;border-radius:6px;background:#0f172a;color:#e2e8f0;font:11px/1.45 ui-monospace,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.demo-scroll-scene{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:8px}.demo-ss-card{padding:16px 14px;border-radius:12px;background:linear-gradient(135deg,#6366f1,#ec4899);color:#fff;font:800 15px/1 system-ui,sans-serif;box-shadow:0 8px 18px -10px rgba(79,70,229,.8)}
+.demo-mi-wrap{width:min(320px,100%);display:grid;gap:8px}.demo-mi-row{display:flex;gap:10px;align-items:center;justify-content:center}.demo-mi-dot{width:18px;height:18px;border-radius:50%;background:#6366f1;animation:demo-mi-bounce 1.2s ease-in-out infinite alternate}.demo-mi-dot2{background:#ec4899;animation-duration:.8s}.demo-mi-bar{width:80px;height:8px;border-radius:4px;background:#22c55e;transform-origin:left;animation:demo-mi-grow 2s linear infinite}
+@keyframes demo-mi-bounce{to{transform:translateY(-10px)}}@keyframes demo-mi-grow{from{transform:scaleX(.1)}to{transform:scaleX(1)}}

@@ -26,6 +26,13 @@ try {
   fail('docs', String(e.stderr || e.message).trim());
 }
 
+// 0b. per-component Markdown pages are current (10.2)
+try {
+  execFileSync(process.execPath, [join(ROOT, 'scripts/gen-component-docs.mjs'), '--check'], { stdio: 'pipe' });
+} catch (e) {
+  fail('docs/components', String(e.stderr || e.message).trim());
+}
+
 // 1. runtime modules: docs page, compat table, budget, size-budget.json entry
 const budgets = JSON.parse(read('size-budget.json'));
 for (const p of Object.values(PREREQS)) {

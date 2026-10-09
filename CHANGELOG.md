@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [10.2.0] - 2026-10-09
+
+### Added
+- **`motionary/runtime/scroll`** — scroll-linked scenes (original implementation, own API): `scrollScene({ trigger, start, end, scrub, pin, markers, actions, toggleClass, once, horizontal, scroller, onEnter, onLeave, onEnterBack, onLeaveBack, onUpdate, onToggle, animation })`. Rules like `"top 80%"`, `"center center+=100"`, end `"+=600"`; scrub direct (`true`) or smoothed (ms) on the shared ticker; pinning with a layout-preserving spacer (fixed in the window, transform inside scroll containers); start / end / viewport markers; per-edge actions (`play pause resume reverse restart reset complete none`); `refreshScenes()`, `killScenes()`, `allScenes()`, `parseEdge()`, `resolveRule()`. CDN `dist/runtime/scroll.iife.js`; fixed gzip budget.
+- **`motionary/runtime/format-svg`** — SVG loader: SMIL playback on the runtime timeline (`<animate>` from / to / by / values, `keyTimes`, `calcMode` linear / discrete / spline + `keySplines`; `<set>`; `<animateTransform>` translate / scale / rotate / skewX / skewY; `<animateMotion>` path / `<mpath>`, `rotate="auto"`; `dur`, numeric `begin`, `repeatCount` incl. `indefinite`, `repeatDur`, `fill="freeze"`), `playSmil()` (seek / scrub / reverse / timeScale, `restore()`), `readSmil()`; path geometry without the DOM — `parsePath()` (all commands incl. arcs and S/T reflections), `flattenPath()`, `pathLength()`, `pointAtLength()`, `samplePath()` — and **path morphing** between any two paths (`morphPath()`, also used for `attributeName="d"`). Compatibility table in `docs/runtime/format-svg.md`.
+- **`data-motion` in `motionary/core`** — `applyMotionAttributes(motion, root?, { observe })` wires `data-motion="enter: fade-up 600ms stagger 80ms; click: pop"` (triggers `enter`, `load`, `click`, `hover`, `loop`; duration, `delay`, `stagger`, `ease`, `once`) without the DSL package; `parseMotionAttr()`. Core stays far under its 10 KB budget.
+- **Per-component Markdown docs** — `docs/components/<tag>.md` for every element (attributes, events, slots, methods, import, CDN, prerequisites, minimal example, variants) + index, generated from the same data as `components.json` / `llms-full.txt` (`npm run docs:components`; `check:peer-docs` fails when they are stale).
+- **`AGENTS.md`** (repo root, also in the npm package) and **`docs/ai-prompt-guide.md`** — how AI assistants should pick components, start from the manifest example, and handle prerequisites; review checklist and common misuses.
+- **New components (10.2)** in `motionary/components/widgets`: `<usa-scroll-scene>` — scroll-scrubbed scene for `[data-scrub="prop: from -> to"]` children with `scrub`, `pin`, `markers`, `stagger`, `toggle-class`, `preview` (**Requires: motionary/runtime/scroll**); `<usa-motion-inspector>` — live list of running animations (CSS, WAAPI, components) with pause / play all, 0.25× slow motion, per-row scrub and the runtime ticker's fps.
+- Showcase: new gallery cards with copyable code (prerequisites first), live demos and live Store thumbnails.
+
+### Accessibility
+- `<usa-scroll-scene>` is user-driven (it only moves when the reader scrolls); under reduced motion the scrub is linear and the preview loop does not run. `<usa-motion-inspector>` controls are a labelled `toolbar`, rows have labelled scrub sliders, and its slow-motion switch helps people check motion for vestibular safety.
+
 ## [10.1.0] - 2026-10-09
 
 ### Added

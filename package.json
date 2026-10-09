@@ -1,6 +1,6 @@
 {
   "name": "motionary",
-  "version": "10.1.0",
+  "version": "10.2.0",
   "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 94 animated Web Components — 214 scroll-reveal presets, card/click/button morphs, physics, page transitions, generative & sound-reactive backgrounds, cursor/gesture effects, themes, micro-interactions, <usa-player>, WebGL. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -1238,6 +1238,26 @@
         "default": "./dist/runtime/format-motion.cjs"
       }
     },
+    "./runtime/scroll": {
+      "import": {
+        "types": "./dist/runtime/scroll.d.ts",
+        "default": "./dist/runtime/scroll.js"
+      },
+      "require": {
+        "types": "./dist/runtime/scroll.d.cts",
+        "default": "./dist/runtime/scroll.cjs"
+      }
+    },
+    "./runtime/format-svg": {
+      "import": {
+        "types": "./dist/runtime/format-svg.d.ts",
+        "default": "./dist/runtime/format-svg.js"
+      },
+      "require": {
+        "types": "./dist/runtime/format-svg.d.cts",
+        "default": "./dist/runtime/format-svg.cjs"
+      }
+    },
     "./manifest.json": "./dist/manifest.json",
     "./manifest.schema.json": "./dist/manifest.schema.json",
     "./components.css": "./dist/components.css",
@@ -1271,7 +1291,8 @@
     "README_ja.md",
     "LICENSE",
     "CHANGELOG.md",
-    "figma-plugin"
+    "figma-plugin",
+    "AGENTS.md"
   ],
   "sideEffects": [
     "*.css",
@@ -1294,7 +1315,8 @@
     "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\"",
     "manifest": "node scripts/gen-manifest.mjs",
     "docs:runtime": "node scripts/gen-runtime-docs.mjs",
-    "check:peer-docs": "node scripts/check-peer-docs.mjs"
+    "check:peer-docs": "node scripts/check-peer-docs.mjs",
+    "docs:components": "node scripts/gen-component-docs.mjs"
   },
   "keywords": [
     "motionary",

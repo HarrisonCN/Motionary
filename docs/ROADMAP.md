@@ -47,7 +47,7 @@ Store 卡片显示 **「Requires: motionary/runtime/<module>」** 徽章（官�
   - 主线 B：**runtime 核心** —— 共享 ticker / RAF 调度器、tween + timeline 引擎与缓动、`use()` / `requireModule()` 注册 API 与清晰错误、「Requires: motionary/runtime/…」徽章、前置条件模板、`check:peer-docs`（检查 runtime 模块文档与 5 处前置条件）、清单列出 runtime 模块。
   - 格式：CSS `@keyframes` + WAAPI 关键帧（`motionary/runtime/format-css`）、Motion / Framer 关键帧 JSON（`motionary/runtime/format-motion`）。
   - 新组件：插件详情卡 `<usa-plugin-card>`（Requires: motionary/runtime）、安装按钮 `<usa-install-button>`。
-- **v10.2** — 核心 DSL 化：`motionary/core` 直接支持 `data-motion` 声明式语法。
+- ✅ **v10.2** — 核心 DSL 化：`motionary/core` 直接支持 `data-motion` 声明式语法。
   - 主线 A：逐组件 Markdown 文档（`/docs/components/<tag>.md`，由清单生成）；仓库根目录新增 `AGENTS.md` 与提示指南。
   - 主线 B：**scroll 模块**（`motionary/runtime/scroll`）—— pin、scrub、markers、start / end 规则（自研，功能对标 ScrollTrigger，但不复制其代码或 API）。
   - 格式：SVG SMIL 回放、路径变形、CSS 动画 SVG（`motionary/runtime/format-svg`）。

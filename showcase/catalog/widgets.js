@@ -1218,6 +1218,21 @@ export const components = [
     '<usa-install-button package="motionary" managers="npm pnpm yarn bun cdn" cdn="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></usa-install-button>',
     '<usa-install-button class="demo-install" package="motionary" managers="npm pnpm yarn cdn" cdn="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></usa-install-button>',
     [{ key: 'manager', values: ['npm', 'pnpm', 'yarn', 'cdn'] }], { since: '10.1' }),
+  // ---- 10.2 ------------------------------------------------------------
+  W('usa-scroll-scene', 'reveal', 'Scroll scene', '滚动场景',
+    '10.2: a scroll-linked scene — children with data-scrub="opacity: 0 -> 1; x: -80 -> 0" are tweened as you scroll, scrubbed directly or smoothed (scrub="120"), with optional pin, markers and stagger. Requires motionary/runtime/scroll — npm i motionary, then use(scroll) before the scene mounts.',
+    '10.2：滚动联动场景 —— 带 data-scrub="opacity: 0 -> 1; x: -80 -> 0" 的子元素随滚动补间，可直接跟随或平滑（scrub="120"），可选固定（pin）、标记（markers）与错开（stagger）。需要 motionary/runtime/scroll —— npm i motionary，并在场景挂载前 use(scroll)。',
+    ['scroll', 'scrub', 'pin', 'parallax', 'runtime'],
+    '<usa-scroll-scene start="top 80%" end="bottom 20%" scrub="120" stagger="120">\n  <h2 data-scrub="x: -80 -> 0; opacity: 0 -> 1">Scroll</h2>\n  <p data-scrub="y: 40 -> 0; opacity: 0 -> 1">and it follows.</p>\n</usa-scroll-scene>',
+    '<usa-scroll-scene class="demo-scroll-scene" preview scrub="140" start="top 95%" end="bottom 5%" stagger="120"><div class="demo-ss-card" data-scrub="x: -70 -> 0; opacity: 0.2 -> 1; rotate: -8deg -> 0deg">Scroll</div><div class="demo-ss-card" data-scrub="x: 70 -> 0; opacity: 0.2 -> 1; rotate: 8deg -> 0deg">scrubs</div><div class="demo-ss-card" data-scrub="y: 30 -> 0; scale: 0.7 -> 1; opacity: 0.2 -> 1">me</div></usa-scroll-scene>',
+    undefined, { since: '10.2', requires: ['scroll'] }),
+  W('usa-motion-inspector', 'ui', 'Motion inspector', '动效检查器',
+    '10.2: a live panel listing the running animations in a scope (CSS animations, transitions, element.animate(), components) with state and progress, plus the motionary/runtime ticker when present — pause / play all, 0.25× slow motion and per-row scrub.',
+    '10.2：实时面板，列出范围内正在运行的动画（CSS 动画、过渡、element.animate()、组件）及其状态与进度，页面有 motionary/runtime 时显示其 ticker —— 全部暂停 / 播放、0.25× 慢放与逐行拖动。',
+    ['devtools', 'debug', 'inspector', 'animations', 'slow motion'],
+    '<usa-motion-inspector scope="#app" interval="500"></usa-motion-inspector>',
+    '<div class="demo-mi-wrap"><div class="demo-mi-row"><span class="demo-mi-dot"></span><span class="demo-mi-dot demo-mi-dot2"></span><span class="demo-mi-bar"></span></div><usa-motion-inspector scope=".demo-mi-wrap" interval="400"></usa-motion-inspector></div>',
+    undefined, { since: '10.2' }),
 ];
 
 /** item id → live-demo wiring. */

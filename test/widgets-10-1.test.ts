@@ -376,7 +376,7 @@ describe('10.1 prerequisites in the gallery, Store, docs, README and AI manifest
     const m = buildManifest();
     const schema = JSON.parse(readFileSync('scripts/manifest.schema.json', 'utf8'));
     for (const k of schema.required) expect(m, k).toHaveProperty(k);
-    expect(m.runtimeModules.map((r: any) => r.id)).toEqual(['core', 'format-css', 'format-motion']);
+    expect(m.runtimeModules.map((r: any) => r.id)).toEqual(expect.arrayContaining(['core', 'format-css', 'format-motion']));
     const tags = m.components.map((c: any) => c.tag);
     expect(new Set(tags).size).toBe(tags.length);
     for (const c of m.components) for (const k of schema.$defs.component.required) expect(c, `${c.tag}.${k}`).toHaveProperty(k);
