@@ -308,4 +308,4 @@ function motionSnippet(i, style = 'waapi') {
 }
 
 export { describeMotion, motionSnippet };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/components/ai.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/components/ai.js.map

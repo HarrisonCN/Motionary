@@ -114,4 +114,4 @@ exports.easingPoints = easingPoints;
 exports.figmaToMotion = figmaToMotion;
 exports.framerComponent = framerComponent;
 exports.motionToCss = motionToCss;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/components/design.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/components/design.cjs.map

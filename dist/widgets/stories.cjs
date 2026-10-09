@@ -140,4 +140,4 @@ function defineStories(tag = 'usa-stories') {
 }
 
 exports.defineStories = defineStories;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/widgets/stories.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/widgets/stories.cjs.map
