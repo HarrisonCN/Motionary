@@ -1089,6 +1089,25 @@ switcher.addEventListener('usa:change', (e) => console.log(e.detail.theme));
 - `<usa-theme-surface theme>`: `theme` (resolved); `usa:theme` { theme }.
 - Surface: `neon-ignite` · `neon-pulse` (`color`) · `glass-frost` · `neu-press`; `SURFACE_THEMES`, `applySurfaceTheme(name, target?)`.
 
+### v8.7 Gestures 3.0: gyro 3D card, multi-touch sticker (`components/widgets`) + gesture pack (`motionary/fx/gesture`)
+
+```html
+<usa-gyro-card max="15"><h3 data-depth="2">Gyro</h3><p data-depth="1">Tilt your phone</p></usa-gyro-card>
+<usa-gesture-sticker label="Star" max="3"><img src="star.png" alt="Star" width="120"></usa-gesture-sticker>
+
+<usa-fx effect="swipe-hint" trigger="enter" direction="left"><div class="card">…</div></usa-fx>
+<usa-fx effect="depth-in" trigger="enter"><div data-depth="3">Back</div><div data-depth="1">Front</div></usa-fx>
+```
+```js
+import { defineWidgets } from 'motionary/components/widgets';
+import { registerGesture3Pack, pinchScale, pinchAngle } from 'motionary/fx/gesture';
+defineWidgets(); registerGesture3Pack();
+sticker.addEventListener('usa:transform', (e) => save(e.detail)); // { x, y, scale, angle }
+```
+- `<usa-gyro-card max glare>`: `tilt(rx, ry, source?)`, `source`; `usa:tilt`.
+- `<usa-gesture-sticker min max label>`: `x`, `y`, `scale`, `angle`, `transformTo(state)`, `reset()`; `usa:transform`.
+- Gesture: `swipe-hint` (`direction`) · `pinch-hint` · `tilt-wobble` · `depth-in` (`stagger`, `data-depth`); `pinchScale`, `pinchAngle`, `orientationToTilt(beta, gamma, max?, rest?)`.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.
