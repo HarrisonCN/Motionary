@@ -1,6 +1,7 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-jF8VIA_9.js';
-import { f as framesToTimeline, d as distributeOffsets, c as camelProp } from '../chunks/keyframes-CyH_abhI.js';
-import '../chunks/tween-DDObu9iA.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-BIEjKngP.js';
+import { f as framesToTimeline, d as distributeOffsets, c as camelProp } from '../chunks/keyframes-W-474DMc.js';
+import '../chunks/tween-CqX1JBuj.js';
+import '../chunks/ticker-CM_56oVy.js';
 
 /**
  * `motionary/runtime/format-css` (10.1) — import CSS `@keyframes` and Web

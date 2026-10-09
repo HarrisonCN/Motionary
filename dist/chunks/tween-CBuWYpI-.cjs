@@ -1,70 +1,6 @@
-import { f as registry } from './registry-jF8VIA_9.js';
+'use strict';
 
-/**
- * The shared ticker: one requestAnimationFrame loop per page (or worker) for
- * every runtime animation, with lag smoothing and a frame budget readout.
- * Falls back to a 16 ms timer where rAF is missing (Node, some workers).
- * Nothing runs until the first listener is added (SSR-safe).
- */
-function createTicker() {
-    const fns = new Set();
-    let time = 0, last = -1, fps = 60, maxDelta = 100, handle = null;
-    const g = globalThis;
-    const now = () => (g.performance?.now ? g.performance.now() : Date.now());
-    const raf = (cb) => (typeof g.requestAnimationFrame === 'function' ? g.requestAnimationFrame(cb) : setTimeout(() => cb(now()), 16));
-    const caf = (h) => (typeof g.cancelAnimationFrame === 'function' ? g.cancelAnimationFrame(h) : clearTimeout(h));
-    const run = (dt, cap = true) => {
-        const d = (cap ? Math.min(dt, maxDelta) : dt) * t.timeScale;
-        time += d;
-        for (const fn of Array.from(fns))
-            fn(time, d);
-    };
-    const frame = (ts) => {
-        handle = null;
-        if (!fns.size)
-            return;
-        const n = typeof ts === 'number' && ts > 0 ? ts : now();
-        const dt = last < 0 ? 0 : n - last;
-        last = n;
-        if (dt > 0)
-            fps = fps * 0.9 + (1000 / dt) * 0.1;
-        run(dt);
-        if (fns.size)
-            handle = raf(frame);
-    };
-    const wake = () => {
-        if (handle === null && fns.size) {
-            last = -1;
-            handle = raf(frame);
-        }
-    };
-    const t = {
-        add(fn) {
-            fns.add(fn);
-            wake();
-            return () => t.remove(fn);
-        },
-        remove(fn) {
-            fns.delete(fn);
-            if (!fns.size && handle !== null) {
-                caf(handle);
-                handle = null;
-            }
-        },
-        get time() { return time; },
-        get fps() { return Math.round(fps); },
-        get size() { return fns.size; },
-        lagSmoothing(ms) { maxDelta = ms > 0 ? ms : Infinity; },
-        timeScale: 1,
-        step(ms) { run(ms, false); },
-    };
-    return t;
-}
-/** The page-wide ticker (shared across every copy of the runtime). */
-function getTicker() {
-    const s = registry().slots;
-    return (s.ticker || (s.ticker = createTicker()));
-}
+var ticker = require('./ticker-D4o6enH0.cjs');
 
 const out = (f) => (t) => 1 - f(1 - t);
 const inOut = (f) => (t) => (t < 0.5 ? f(t * 2) / 2 : 1 - f((1 - t) * 2) / 2);
@@ -295,8 +231,8 @@ class Playable {
         else if (!d)
             this.renderLocal(0, true);
         else {
-            let it = Math.floor(t / d);
-            let local = t - it * d;
+            let it = d === Infinity ? 0 : Math.floor(t / d);
+            let local = d === Infinity ? t : t - it * d;
             if (t >= td - this.delay && td !== Infinity) {
                 it = this.repeat;
                 local = d;
@@ -343,7 +279,7 @@ class Playable {
         if (this.parent || this._off)
             return this;
         this._done = false;
-        this._off = getTicker().add((_, dt) => this.advance(dt));
+        this._off = ticker.getTicker().add((_, dt) => this.advance(dt));
         return this;
     }
     advance(dt) {
@@ -538,5 +474,14 @@ function timeline(o = {}) {
     return tl;
 }
 
-export { EASES as E, Playable as P, Timeline as T, Tween as a, tween as b, cubicBezier as c, parseValue as d, getTicker as g, parseEase as p, steps as s, timeline as t };
-//# sourceMappingURL=tween-DDObu9iA.js.map
+exports.EASES = EASES;
+exports.Playable = Playable;
+exports.Timeline = Timeline;
+exports.Tween = Tween;
+exports.cubicBezier = cubicBezier;
+exports.parseEase = parseEase;
+exports.parseValue = parseValue;
+exports.steps = steps;
+exports.timeline = timeline;
+exports.tween = tween;
+//# sourceMappingURL=tween-CBuWYpI-.cjs.map

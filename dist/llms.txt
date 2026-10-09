@@ -1,6 +1,6 @@
-# Motionary 10.1.0
+# Motionary 10.2.0
 
-> Motionary is a zero-dependency motion library: scroll animations, 200+ presets and 191 animated Web Components (<usa-*>) that work in plain HTML and every framework, plus motionary/runtime — its own tween/timeline engine and format loaders.
+> Motionary is a zero-dependency motion library: scroll animations, 200+ presets and 193 animated Web Components (<usa-*>) that work in plain HTML and every framework, plus motionary/runtime — its own tween/timeline engine and format loaders.
 
 Install: `npm i motionary` · CDN: https://unpkg.com/motionary@10/dist/components.umd.js (+ https://unpkg.com/motionary@10/dist/widgets.umd.js for 6.x+ widgets) · Manifest: https://harrisoncn.github.io/Motionary/components.json · Full text: https://harrisoncn.github.io/Motionary/llms-full.txt
 
@@ -11,6 +11,8 @@ Rules for using a component: (1) import its define function from `import.path` a
 - [motionary/runtime](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/core.md): Shared ticker (one rAF loop), tween + timeline engine with easing, module registry with clear errors.
 - [motionary/runtime/format-css](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/format-css.md): Import CSS @keyframes text or live CSSKeyframesRule objects and Web Animations API keyframes (array or property-indexed) into a runtime timeline.
 - [motionary/runtime/format-motion](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/format-motion.md): Play Motion / Framer-style { initial, animate, transition } JSON (arrays as keyframes, times, repeatType, springs) with the runtime.
+- [motionary/runtime/scroll](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/scroll.md): Scroll-linked scenes: start / end rules, scrub (direct or smoothed), pin, markers, enter / leave callbacks and per-edge actions for a runtime tween or timeline.
+- [motionary/runtime/format-svg](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/format-svg.md): Replay SVG SMIL animations (animate, set, animateTransform, animateMotion) on the runtime timeline, morph between any two paths, and measure paths without the DOM.
 
 ## Components
 
@@ -111,6 +113,7 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<usa-modal>` (motionary/components/widgets): 6.3: native <dialog> (top layer, focus trap, Esc) with animated open / close and a blurred backdrop — scale, slide-up, flip, or origin: it grows out of the butt
 - `<usa-morph>` (motionary/components/svg): Morph an SVG path through a list of shapes (paths="A | B | C") on click, hover, in view or automatically. Same-structure paths morph point by point.
 - `<usa-motion>` (motionary/components/widgets): 9.0: the declarative motion DSL — describe motion as one readable string (“enter: fade-up 600ms stagger 80ms; hover: pop”) on <usa-motion> or any element’s data
+- `<usa-motion-inspector>` (motionary/components/widgets): 10.2: a live panel listing the running animations in a scope (CSS animations, transitions, element.animate(), components) with state and progress, plus the moti
 - `<usa-motion-prefs>` (motionary/components/widgets): 9.5: a motion settings panel for your users — motion level (full, gentle, minimal, none), animation speed, pause autoplaying video, no parallax — applied instan
 - `<usa-motion-spec>` (motionary/components/widgets): 9.7: a motion spec sheet for design hand-off — each rule of a motion string with its trigger, a duration bar on a shared timeline and the easing curve, a Play p
 - `<usa-motion-switch>` (motionary/components/page): Let users pick Off · Low · Normal · High for the whole app; scales every component, persists, and Off equals reduced motion.
@@ -155,6 +158,7 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<usa-scramble>` (motionary/components/text): Decodes text out of random glyphs, left to right. Trigger on view, hover/focus or manually.
 - `<usa-scroll-highlight>` (motionary/components/text): Words light up one by one as you read down the page, or a highlighter marker sweeps behind the text.
 - `<usa-scroll-progress>` (motionary/components/reveal): Reading progress of the page or of one article. Compositor-only scaleX, role="progressbar".
+- `<usa-scroll-scene>` (motionary/components/widgets; requires motionary/runtime/scroll): 10.2: a scroll-linked scene — children with data-scrub="opacity: 0 -> 1; x: -80 -> 0" are tweened as you scroll, scrubbed directly or smoothed (scrub="120"), wi
 - `<usa-scrolly>` (motionary/components/reveal): A pinned graphic while [data-step] blocks scroll past; the active step drives the graphic via attributes, a CSS variable and events.
 - `<usa-segmented>` (motionary/components/widgets): 6.7: an iOS-style thumb slides under the chosen segment with a spring and stretches while it travels. A real radio group: arrow keys, Home / End. iOS, pill or o
 - `<usa-shader>` (motionary/components/webgl): A GPU shader behind your content: gradient, plasma, waves or aurora presets — or your own fragment shader in a <script type="x-shader/x-fragment">. Falls back t

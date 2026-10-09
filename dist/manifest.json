@@ -3,7 +3,7 @@
   "format": "motionary/components",
   "schemaVersion": 1,
   "package": "motionary",
-  "version": "10.1.0",
+  "version": "10.2.0",
   "homepage": "https://harrisoncn.github.io/Motionary/",
   "llms": "https://harrisoncn.github.io/Motionary/llms.txt",
   "cdn": {
@@ -203,6 +203,161 @@
         ]
       ],
       "example": "import { use } from 'motionary/runtime';\nimport { formatMotion, playMotion } from 'motionary/runtime/format-motion';\nuse(formatMotion);\nplayMotion(document.querySelector('.card'), { initial: { opacity: 0, y: 40 }, animate: { opacity: 1, y: 0 }, transition: { type: 'spring', stiffness: 180, damping: 14 } });"
+    },
+    {
+      "kind": "runtime",
+      "id": "scroll",
+      "label": "motionary/runtime/scroll",
+      "title": "Scroll scenes",
+      "summary": "Scroll-linked scenes: start / end rules, scrub (direct or smoothed), pin, markers, enter / leave callbacks and per-edge actions for a runtime tween or timeline.",
+      "install": "npm i motionary",
+      "importPath": "motionary/runtime/scroll",
+      "import": "import { use } from 'motionary/runtime';\nimport { scroll } from 'motionary/runtime/scroll';",
+      "register": "use(scroll);",
+      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/scroll.iife.js\"></script>",
+      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/scroll.js",
+      "order": "Register the core first, then the module: use(scroll) also registers the core. CDN: load runtime.iife.js, then runtime/scroll.iife.js (it registers itself).",
+      "docs": "docs/runtime/scroll.md",
+      "budget": 4608,
+      "exports": [
+        "scroll",
+        "scrollScene",
+        "ScrollScene",
+        "refreshScenes",
+        "killScenes",
+        "allScenes",
+        "parseEdge",
+        "resolveRule"
+      ],
+      "compat": [
+        [
+          "start / end rules (\"top 80%\", \"center center\", \"top top+=80\", end \"+=600\")",
+          "yes",
+          "keywords, %, px, +=/-= offsets"
+        ],
+        [
+          "scrub: direct (true) or smoothed (ms)",
+          "yes",
+          "drives any runtime tween / timeline"
+        ],
+        [
+          "pin (fixed in the window, transform inside a scroll container)",
+          "yes",
+          "spacer keeps the layout"
+        ],
+        [
+          "markers",
+          "yes",
+          "start / end + viewport lines"
+        ],
+        [
+          "onEnter / onLeave / onEnterBack / onLeaveBack / onUpdate / onToggle",
+          "yes",
+          ""
+        ],
+        [
+          "actions per edge (play pause resume reverse restart reset complete none)",
+          "yes",
+          "default \"play none none reverse\""
+        ],
+        [
+          "horizontal scenes, custom scroll containers",
+          "yes",
+          ""
+        ],
+        [
+          "snap, nested pins, pinned scroll containers",
+          "no",
+          "planned with the smooth module (10.4)"
+        ],
+        [
+          "SSR",
+          "yes",
+          "safe to import; scenes need a window"
+        ],
+        [
+          "Web Workers",
+          "no",
+          "needs the DOM"
+        ]
+      ],
+      "example": "import { use, timeline } from 'motionary/runtime';\nimport { scroll, scrollScene } from 'motionary/runtime/scroll';\nuse(scroll);\nconst tl = timeline({ paused: true }).to('.card', { to: { x: 200, rotate: 8 } });\nscrollScene({ trigger: '.section', start: 'top 80%', end: 'bottom 20%', scrub: 120, pin: true, markers: true, animation: tl });"
+    },
+    {
+      "kind": "runtime",
+      "id": "format-svg",
+      "label": "motionary/runtime/format-svg",
+      "title": "SVG loader: SMIL playback + path morphing",
+      "summary": "Replay SVG SMIL animations (animate, set, animateTransform, animateMotion) on the runtime timeline, morph between any two paths, and measure paths without the DOM.",
+      "install": "npm i motionary",
+      "importPath": "motionary/runtime/format-svg",
+      "import": "import { use } from 'motionary/runtime';\nimport { formatSvg } from 'motionary/runtime/format-svg';",
+      "register": "use(formatSvg);",
+      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-svg.iife.js\"></script>",
+      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-svg.js",
+      "order": "Register the core first, then the module: use(formatSvg) also registers the core. CDN: load runtime.iife.js, then runtime/format-svg.iife.js (it registers itself).",
+      "docs": "docs/runtime/format-svg.md",
+      "budget": 5120,
+      "exports": [
+        "formatSvg",
+        "playSmil",
+        "readSmil",
+        "morphPath",
+        "parsePath",
+        "flattenPath",
+        "pathLength",
+        "pointAtLength",
+        "samplePath",
+        "smilTime"
+      ],
+      "compat": [
+        [
+          "<animate> from / to / by / values, keyTimes, calcMode linear / discrete / spline + keySplines",
+          "yes",
+          ""
+        ],
+        [
+          "<set>",
+          "yes",
+          ""
+        ],
+        [
+          "<animateTransform> translate / scale / rotate / skewX / skewY",
+          "yes",
+          ""
+        ],
+        [
+          "<animateMotion> path / <mpath>, rotate auto / auto-reverse / angle",
+          "yes",
+          "paced along the path"
+        ],
+        [
+          "dur, numeric begin offsets, repeatCount (incl. indefinite), repeatDur, fill freeze",
+          "yes",
+          ""
+        ],
+        [
+          "path morphing between any two paths (d attribute or morphPath())",
+          "yes",
+          "resampled to N points, start points aligned"
+        ],
+        [
+          "path parsing incl. relative commands, S/T reflections, arcs",
+          "yes",
+          "no DOM needed (SSR / workers)"
+        ],
+        [
+          "event / syncbase begin (click, a.end), accumulate, additive=\"sum\"",
+          "no",
+          "documented gap"
+        ],
+        [
+          "CSS-animated SVG",
+          "yes",
+          "via motionary/runtime/format-css"
+        ]
+      ],
+      "example": "import { use } from 'motionary/runtime';\nimport { formatSvg, playSmil, morphPath } from 'motionary/runtime/format-svg';\nuse(formatSvg);\nconst player = playSmil(document.querySelector('svg'));\nplayer.timeline.timeScale = 0.5;   // scrub / slow down / reverse like any runtime timeline\nconst f = morphPath('M0 0 L100 0 L50 80 Z', 'M50 0 A40 40 0 1 1 49.9 0 Z');\npath.setAttribute('d', f(0.5));"
     }
   ],
   "components": [
@@ -4174,6 +4329,47 @@
       "source": "src/components/widgets/motion.ts"
     },
     {
+      "id": "motion-inspector",
+      "tag": "usa-motion-inspector",
+      "title": "Motion inspector",
+      "description": "10.2: a live panel listing the running animations in a scope (CSS animations, transitions, element.animate(), components) with state and progress, plus the motionary/runtime ticker when present — pause / play all, 0.25× slow motion and per-row scrub.",
+      "category": "ui",
+      "since": "10.2",
+      "keywords": [
+        "devtools",
+        "debug",
+        "inspector",
+        "animations",
+        "slow motion"
+      ],
+      "import": {
+        "path": "motionary/components/widgets",
+        "define": "defineMotionInspector",
+        "register": "defineMotionInspector();"
+      },
+      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "attributes": [
+        "scope",
+        "interval"
+      ],
+      "events": [
+        "usa:change"
+      ],
+      "slots": [],
+      "methods": [
+        "refresh",
+        "pauseAll",
+        "playAll",
+        "setRate",
+        "animations"
+      ],
+      "example": "<usa-motion-inspector scope=\"#app\" interval=\"500\"></usa-motion-inspector>",
+      "esm": "import { defineMotionInspector } from 'motionary/components/widgets';\n\ndefineMotionInspector(); // registers <usa-motion-inspector>\n\n/* then use it in your HTML:\n<usa-motion-inspector scope=\"#app\" interval=\"500\"></usa-motion-inspector>\n*/",
+      "requires": [],
+      "prerequisites": null,
+      "source": "src/components/widgets/motion-inspector.ts"
+    },
+    {
       "id": "motion-prefs",
       "tag": "usa-motion-prefs",
       "title": "Motion preference panel",
@@ -5768,6 +5964,68 @@
       "requires": [],
       "prerequisites": null,
       "source": "src/components/reveal/scroll-progress.ts"
+    },
+    {
+      "id": "scroll-scene",
+      "tag": "usa-scroll-scene",
+      "title": "Scroll scene",
+      "description": "10.2: a scroll-linked scene — children with data-scrub=\"opacity: 0 -> 1; x: -80 -> 0\" are tweened as you scroll, scrubbed directly or smoothed (scrub=\"120\"), with optional pin, markers and stagger. Requires motionary/runtime/scroll — npm i motionary, then use(scroll) before the scene mounts.",
+      "category": "reveal",
+      "since": "10.2",
+      "keywords": [
+        "scroll",
+        "scrub",
+        "pin",
+        "parallax",
+        "runtime"
+      ],
+      "import": {
+        "path": "motionary/components/widgets",
+        "define": "defineScrollScene",
+        "register": "defineScrollScene();"
+      },
+      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "attributes": [
+        "start",
+        "end",
+        "scrub",
+        "pin",
+        "markers",
+        "stagger",
+        "toggle-class",
+        "preview"
+      ],
+      "events": [
+        "usa:enter",
+        "usa:leave",
+        "usa:progress",
+        "usa:runtime-missing"
+      ],
+      "slots": [],
+      "methods": [
+        "refresh",
+        "timeline"
+      ],
+      "example": "<usa-scroll-scene start=\"top 80%\" end=\"bottom 20%\" scrub=\"120\" stagger=\"120\">\n  <h2 data-scrub=\"x: -80 -> 0; opacity: 0 -> 1\">Scroll</h2>\n  <p data-scrub=\"y: 40 -> 0; opacity: 0 -> 1\">and it follows.</p>\n</usa-scroll-scene>",
+      "esm": "import { use } from 'motionary/runtime';\nimport { scroll } from 'motionary/runtime/scroll';\n\nuse(scroll);\nimport { defineScrollScene } from 'motionary/components/widgets';\n\ndefineScrollScene(); // registers <usa-scroll-scene>\n\n/* then use it in your HTML:\n<usa-scroll-scene start=\"top 80%\" end=\"bottom 20%\" scrub=\"120\" stagger=\"120\">\n  <h2 data-scrub=\"x: -80 -> 0; opacity: 0 -> 1\">Scroll</h2>\n  <p data-scrub=\"y: 40 -> 0; opacity: 0 -> 1\">and it follows.</p>\n</usa-scroll-scene>\n*/",
+      "requires": [
+        "scroll"
+      ],
+      "prerequisites": {
+        "badge": "Requires: motionary/runtime/scroll",
+        "modules": [
+          "motionary/runtime/scroll"
+        ],
+        "install": "npm i motionary",
+        "importAndRegister": "import { use } from 'motionary/runtime';\nimport { scroll } from 'motionary/runtime/scroll';\nimport { defineScrollScene } from 'motionary/components/widgets';\n\nuse(scroll);\ndefineScrollScene(); // registers <usa-scroll-scene> — after the prerequisites",
+        "order": "Register the core first, then the module: use(scroll) also registers the core. CDN: load runtime.iife.js, then runtime/scroll.iife.js (it registers itself).",
+        "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/scroll.iife.js\"></script>\n<!-- then the component bundles -->\n<script src=\"https://unpkg.com/motionary@10/dist/components.umd.js\"></script>\n<script src=\"https://unpkg.com/motionary@10/dist/widgets.umd.js\"></script>",
+        "example": "<usa-scroll-scene start=\"top 80%\" end=\"bottom 20%\" scrub=\"120\" stagger=\"120\">\n  <h2 data-scrub=\"x: -80 -> 0; opacity: 0 -> 1\">Scroll</h2>\n  <p data-scrub=\"y: 40 -> 0; opacity: 0 -> 1\">and it follows.</p>\n</usa-scroll-scene>",
+        "docs": [
+          "https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/scroll.md"
+        ]
+      },
+      "source": "src/components/widgets/scroll-scene.ts"
     },
     {
       "id": "scrolly",

@@ -2015,6 +2015,148 @@ interface UsaInstallButtonElement extends UsaElement {
 }
 declare function defineInstallButton(tag?: string): CustomElementConstructor | undefined;
 
+/** Easing functions (t ∈ [0, 1] → progress). Original implementations of the standard Penner-style curves. */
+type Ease = (t: number) => number;
+
+type Target = object | Element;
+type Props = Record<string, number | string>;
+interface PlayOptions {
+    /** Delay before the first iteration, ms. */
+    delay?: number;
+    /** Extra iterations (-1 = forever). */
+    repeat?: number;
+    /** Alternate direction on every other iteration. */
+    yoyo?: boolean;
+    /** Start paused (`play()` to start). */
+    paused?: boolean;
+    onUpdate?: (progress: number) => void;
+    onComplete?: () => void;
+}
+interface TweenOptions extends PlayOptions {
+    to?: Props;
+    from?: Props;
+    /** ms (default 600). */
+    duration?: number;
+    ease?: string | Ease;
+    /** Delay added per target index (ms) when several targets are given. */
+    stagger?: number;
+}
+/** Common playback: delay, repeat, yoyo, direction, ticker attachment, promise. */
+declare abstract class Playable {
+    delay: number;
+    repeat: number;
+    yoyo: boolean;
+    /** Playback rate multiplier. */
+    timeScale: number;
+    onUpdate?: (progress: number) => void;
+    onComplete?: () => void;
+    protected _t: number;
+    private _dir;
+    private _off;
+    private _done;
+    private _resolve;
+    /** Resolves on completion (forward end, or start when reversed). */
+    finished: Promise<void>;
+    /** Set when owned by a timeline (then the ticker never drives it). */
+    parent: Timeline | null;
+    constructor(o: PlayOptions);
+    /** One iteration, ms. */
+    abstract get duration(): number;
+    /** Render at `ms` into one iteration. */
+    protected abstract renderLocal(ms: number, iterationEnded: boolean): void;
+    get totalDuration(): number;
+    get time(): number;
+    get progress(): number;
+    set progress(p: number);
+    get isActive(): boolean;
+    get reversed(): boolean;
+    /** Jump to `ms` (total time, including the delay) and render. */
+    seek(ms: number): this;
+    play(): this;
+    pause(): this;
+    /** Play backwards from the current time. */
+    reverse(): this;
+    restart(): this;
+    /** Stop and detach for good. */
+    kill(): void;
+    /** Promise-like: `await tween(...)`. */
+    then<R>(ok?: (v: void) => R, err?: (e: unknown) => R): Promise<R>;
+    private attach;
+    private advance;
+    protected complete(): void;
+}
+/** Position: ms number, '<' (start of previous), '>' (end of previous, default), '+=200' / '-=200' (relative to the end), 'label', 'label+=100', '<+=100'. */
+type Position = number | string;
+interface TimelineOptions extends PlayOptions {
+    /** Defaults merged into every `.to()`. */
+    defaults?: Omit<TweenOptions, 'to' | 'from'>;
+}
+/** A sequence of tweens, nested timelines and callbacks. */
+declare class Timeline extends Playable {
+    private children;
+    private labels;
+    private prevStart;
+    private prevEnd;
+    private defaults;
+    private lastLocal;
+    constructor(o?: TimelineOptions);
+    get duration(): number;
+    private resolve;
+    /** Add a tween, timeline or callback at a position. */
+    add(item: Playable | (() => void), position?: Position): this;
+    /** `tween(target, vars)` placed at `position` (stagger across several targets). */
+    to(target: Target | Target[] | ArrayLike<Target>, vars: TweenOptions, position?: Position): this;
+    call(fn: () => void, position?: Position): this;
+    label(name: string, position?: Position): this;
+    /** Time of a label, ms. */
+    labelTime(name: string): number | undefined;
+    remove(item: Playable): void;
+    /** Children in start order (callbacks excluded). */
+    getChildren(): Playable[];
+    protected renderLocal(ms: number): void;
+}
+
+/**
+ * `<usa-scroll-scene start="top 80%" end="bottom 20%" scrub="120" pin markers>`
+ * (10.2) — a scroll-linked scene powered by **`motionary/runtime/scroll`**
+ * (requires `use(scroll)` first). Each child with `data-scrub="opacity: 0 -> 1;
+ * x: -80 -> 0; rotate: -8deg -> 0deg"` is tweened across the scene; `stagger`
+ * (ms of the scene's 1000 ms timeline) offsets the children. `scrub` = `true`
+ * (direct) or a smoothing time in ms; without `scrub` the timeline plays on
+ * enter and reverses on leave-back. `pin`, `markers`, `toggle-class`.
+ * When the page cannot scroll (e.g. a thumbnail), `preview` loops the scene.
+ * `progress` (read-only), `refresh()`, `timeline()`; `usa:progress`, `usa:enter`, `usa:leave`.
+ */
+interface UsaScrollSceneElement extends UsaElement {
+    readonly progress: number;
+    refresh(): void;
+    timeline(): Timeline | null;
+}
+/** 'opacity: 0 -> 1; x: -80 -> 0' → [{ from: { opacity: '0', x: '-80' }, to: {...} }] */
+declare function parseScrub(spec: string): {
+    from: Record<string, string>;
+    to: Record<string, string>;
+};
+declare function defineScrollScene(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-motion-inspector scope="#app" interval="500">` (10.2) — a live panel
+ * listing the running animations under `scope` (Web Animations: CSS
+ * animations / transitions, `element.animate()`, Motionary components) with
+ * their target, state and progress, plus the `motionary/runtime` ticker
+ * (fps, listeners) when the runtime is on the page. Pause / play all,
+ * slow motion (0.25×) and per-row scrub. `refresh()`, `pauseAll()`,
+ * `playAll()`, `setRate(rate)`, `animations()`; `usa:change`.
+ */
+interface UsaMotionInspectorElement extends UsaElement {
+    refresh(): void;
+    pauseAll(): void;
+    playAll(): void;
+    setRate(rate: number): void;
+    animations(): Animation[];
+}
+declare function defineMotionInspector(tag?: string): CustomElementConstructor | undefined;
+
 /**
  * motionary/components/widgets — the 6.x animated UI widgets, in their own
  * entry so `motionary/components` and `components/lite` keep their size
@@ -2136,8 +2278,10 @@ declare global {
         'usa-native-preview': UsaNativePreviewElement;
         'usa-plugin-card': UsaPluginCardElement;
         'usa-install-button': UsaInstallButtonElement;
+        'usa-scroll-scene': UsaScrollSceneElement;
+        'usa-motion-inspector': UsaMotionInspectorElement;
     }
 }
 
-export { CAROUSEL_EFFECTS, EQ_PRESETS, FESTIVAL_THEMES, LOTTIE_ICONS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PRESENCE_STATES, PROGRESS_VARIANTS, RETRO_VARIANTS, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SPARK_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, WORKER_SCENES, backgroundCss, badgeProgress, cartTotal, defineAddToCart, defineBadgeWall, defineBarChart, defineBgGenerator, defineCarousel, defineCartDrawer, defineChapterNav, defineChatComposer, defineClockControl, defineCodeExport, defineColorPicker, defineCommandPalette, defineCompare, defineCountdown, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineFestivalBanner, defineField, defineFileDrop, defineGauge, defineGenArt, defineGestureSticker, defineGlobe, defineGyroCard, defineHeroVideo, defineHudPanel, defineHydrate, defineInstallButton, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLiquidNav, defineLocationCard, defineLottie, defineLottieIcon, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMessageList, defineMilestones, defineModal, defineMotion, defineMotionPrefs, defineMotionSpec, defineMusicPlayer, defineNativePreview, defineNavMorph, defineNotificationBell, defineOdometer, defineOrganicCard, defineOtp, definePagination, definePanorama, definePauseAll, definePerfMonitor, definePluginCard, definePluginStore, definePresence, definePrizeWheel, defineProductGallery, defineProgressRing, definePropPanel, definePullCord, defineRadar, defineReactions, defineRedEnvelope, defineRetroButton, defineScene, defineSegmented, defineSheet, defineShortcut, defineSkeletonReveal, defineSketchChart, defineSparkline, defineSpatialCard, defineStarRating, defineStepper, defineStickyWall, defineStories, defineSuggestionChips, defineSwipeDeck, defineSwitch, defineTabBar, defineTerminal, defineThemeSurface, defineThemeSwitcher, defineTip, defineToastStack, defineUploadProgress, defineVideoCard, defineVoiceButton, defineVolumeKnob, defineWeatherCard, defineWidgets, defineWorkerCanvas, defineXpBar, describeComponent, exportComponent, formatBytes, formatDistance, fuzzyMatch, haversine, hexToHsv, hsvToHex, initials, keyLabels, levelFor, matchesKeys, monthGrid, pageWindow, parseChips, parseISODate, parseLRC, parseMarkers, parseProps, parseReactions, parseTargets, passwordStrength, project, rankRows, sanitizeCode, sparkPoints, splitTime, stackToast, waveBars, wheelAngle, wrapIndex };
-export type { BellNotice, CartItem, ChatMessage, ExportFormat, ExportedNode, GlobeMarker, LeaderRow, PaletteCommand, PerfStats, PresenceState, PropSpec, RadarTarget, StackToastOptions, StickerState, UsaAddToCartElement, UsaBadgeWallElement, UsaBarChartElement, UsaBgGeneratorElement, UsaCarouselElement, UsaCartDrawerElement, UsaChapterNavElement, UsaChatComposerElement, UsaClockControlElement, UsaCodeExportElement, UsaColorPickerElement, UsaCommandPaletteElement, UsaCompareElement, UsaCountdownElement, UsaCubeGalleryElement, UsaDatePickerElement, UsaDisclosureElement, UsaDockElement, UsaEqualizerElement, UsaFestivalBannerElement, UsaFieldElement, UsaFileDropElement, UsaGaugeElement, UsaGenArtElement, UsaGestureStickerElement, UsaGlobeElement, UsaGyroCardElement, UsaHeroVideoElement, UsaHudPanelElement, UsaHydrateElement, UsaInstallButtonElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaKpiElement, UsaLeaderboardElement, UsaLiquidNavElement, UsaLocationCardElement, UsaLottieElement, UsaLottieIconElement, UsaLyricsElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMessageListElement, UsaMilestonesElement, UsaModalElement, UsaMotionElement, UsaMotionPrefsElement, UsaMotionSpecElement, UsaMusicPlayerElement, UsaNativePreviewElement, UsaNavMorphElement, UsaNotificationBellElement, UsaOdometerElement, UsaOrganicCardElement, UsaOtpElement, UsaPaginationElement, UsaPanoramaElement, UsaPauseAllElement, UsaPerfMonitorElement, UsaPluginCardElement, UsaPluginStoreElement, UsaPresenceElement, UsaPrizeWheelElement, UsaProductGalleryElement, UsaProgressRingElement, UsaPropPanelElement, UsaPullCordElement, UsaRadarElement, UsaReactionsElement, UsaRedEnvelopeElement, UsaRetroButtonElement, UsaSceneElement, UsaSegmentedElement, UsaSheetElement, UsaShortcutElement, UsaSkeletonRevealElement, UsaSketchChartElement, UsaSparklineElement, UsaSpatialCardElement, UsaStarRatingElement, UsaStepperElement, UsaStickyWallElement, UsaStoriesElement, UsaSuggestionChipsElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTerminalElement, UsaThemeSurfaceElement, UsaThemeSwitcherElement, UsaTipElement, UsaToastStackElement, UsaUploadProgressElement, UsaVideoCardElement, UsaVoiceButtonElement, UsaVolumeKnobElement, UsaWeatherCardElement, UsaWorkerCanvasElement, UsaXpBarElement, WallBadge };
+export { CAROUSEL_EFFECTS, EQ_PRESETS, FESTIVAL_THEMES, LOTTIE_ICONS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PRESENCE_STATES, PROGRESS_VARIANTS, RETRO_VARIANTS, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SPARK_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, WORKER_SCENES, backgroundCss, badgeProgress, cartTotal, defineAddToCart, defineBadgeWall, defineBarChart, defineBgGenerator, defineCarousel, defineCartDrawer, defineChapterNav, defineChatComposer, defineClockControl, defineCodeExport, defineColorPicker, defineCommandPalette, defineCompare, defineCountdown, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineFestivalBanner, defineField, defineFileDrop, defineGauge, defineGenArt, defineGestureSticker, defineGlobe, defineGyroCard, defineHeroVideo, defineHudPanel, defineHydrate, defineInstallButton, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLiquidNav, defineLocationCard, defineLottie, defineLottieIcon, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMessageList, defineMilestones, defineModal, defineMotion, defineMotionInspector, defineMotionPrefs, defineMotionSpec, defineMusicPlayer, defineNativePreview, defineNavMorph, defineNotificationBell, defineOdometer, defineOrganicCard, defineOtp, definePagination, definePanorama, definePauseAll, definePerfMonitor, definePluginCard, definePluginStore, definePresence, definePrizeWheel, defineProductGallery, defineProgressRing, definePropPanel, definePullCord, defineRadar, defineReactions, defineRedEnvelope, defineRetroButton, defineScene, defineScrollScene, defineSegmented, defineSheet, defineShortcut, defineSkeletonReveal, defineSketchChart, defineSparkline, defineSpatialCard, defineStarRating, defineStepper, defineStickyWall, defineStories, defineSuggestionChips, defineSwipeDeck, defineSwitch, defineTabBar, defineTerminal, defineThemeSurface, defineThemeSwitcher, defineTip, defineToastStack, defineUploadProgress, defineVideoCard, defineVoiceButton, defineVolumeKnob, defineWeatherCard, defineWidgets, defineWorkerCanvas, defineXpBar, describeComponent, exportComponent, formatBytes, formatDistance, fuzzyMatch, haversine, hexToHsv, hsvToHex, initials, keyLabels, levelFor, matchesKeys, monthGrid, pageWindow, parseChips, parseISODate, parseLRC, parseMarkers, parseProps, parseReactions, parseScrub, parseTargets, passwordStrength, project, rankRows, sanitizeCode, sparkPoints, splitTime, stackToast, waveBars, wheelAngle, wrapIndex };
+export type { BellNotice, CartItem, ChatMessage, ExportFormat, ExportedNode, GlobeMarker, LeaderRow, PaletteCommand, PerfStats, PresenceState, PropSpec, RadarTarget, StackToastOptions, StickerState, UsaAddToCartElement, UsaBadgeWallElement, UsaBarChartElement, UsaBgGeneratorElement, UsaCarouselElement, UsaCartDrawerElement, UsaChapterNavElement, UsaChatComposerElement, UsaClockControlElement, UsaCodeExportElement, UsaColorPickerElement, UsaCommandPaletteElement, UsaCompareElement, UsaCountdownElement, UsaCubeGalleryElement, UsaDatePickerElement, UsaDisclosureElement, UsaDockElement, UsaEqualizerElement, UsaFestivalBannerElement, UsaFieldElement, UsaFileDropElement, UsaGaugeElement, UsaGenArtElement, UsaGestureStickerElement, UsaGlobeElement, UsaGyroCardElement, UsaHeroVideoElement, UsaHudPanelElement, UsaHydrateElement, UsaInstallButtonElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaKpiElement, UsaLeaderboardElement, UsaLiquidNavElement, UsaLocationCardElement, UsaLottieElement, UsaLottieIconElement, UsaLyricsElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMessageListElement, UsaMilestonesElement, UsaModalElement, UsaMotionElement, UsaMotionInspectorElement, UsaMotionPrefsElement, UsaMotionSpecElement, UsaMusicPlayerElement, UsaNativePreviewElement, UsaNavMorphElement, UsaNotificationBellElement, UsaOdometerElement, UsaOrganicCardElement, UsaOtpElement, UsaPaginationElement, UsaPanoramaElement, UsaPauseAllElement, UsaPerfMonitorElement, UsaPluginCardElement, UsaPluginStoreElement, UsaPresenceElement, UsaPrizeWheelElement, UsaProductGalleryElement, UsaProgressRingElement, UsaPropPanelElement, UsaPullCordElement, UsaRadarElement, UsaReactionsElement, UsaRedEnvelopeElement, UsaRetroButtonElement, UsaSceneElement, UsaScrollSceneElement, UsaSegmentedElement, UsaSheetElement, UsaShortcutElement, UsaSkeletonRevealElement, UsaSketchChartElement, UsaSparklineElement, UsaSpatialCardElement, UsaStarRatingElement, UsaStepperElement, UsaStickyWallElement, UsaStoriesElement, UsaSuggestionChipsElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTerminalElement, UsaThemeSurfaceElement, UsaThemeSwitcherElement, UsaTipElement, UsaToastStackElement, UsaUploadProgressElement, UsaVideoCardElement, UsaVoiceButtonElement, UsaVolumeKnobElement, UsaWeatherCardElement, UsaWorkerCanvasElement, UsaXpBarElement, WallBadge };
