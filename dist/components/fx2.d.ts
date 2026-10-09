@@ -677,6 +677,30 @@ declare const CYBER_FX: EffectDefinition[];
 declare function registerCyberPack(): void;
 
 /**
+ * 8.5 — Paper & hand-drawn pack (`motionary/fx/paper`, also `motionary/components/fx-paper`):
+ *
+ * - `paper-unfold` (enter) — the element unfolds like a folded sheet of paper,
+ *   top flap first, with a soft crease shadow (`folds`).
+ * - `pencil-sketch` (enter) — SVG strokes inside are sketched in with a
+ *   slightly wobbly pencil, one after another (`duration`, `stagger`).
+ * - `watercolor` (enter) — the element bleeds in like wet watercolour:
+ *   blurred, saturated, spreading from the middle, then dries (`duration`).
+ * - `crumple` (attention) — the element scrunches like crumpled paper and
+ *   springs back flat.
+ *
+ * Reduced motion: paper-unfold / watercolor fade in, pencil-sketch shows the
+ * drawing, crumple does nothing.
+ */
+
+/** A deterministic PRNG in [0, 1) from a seed (8.5). */
+declare function paperRandom(seed: number): () => number;
+/** A hand-drawn SVG path from (x1,y1) to (x2,y2): a slightly bowed, wobbly line (8.5). */
+declare function roughLine(x1: number, y1: number, x2: number, y2: number, seed?: number, amp?: number): string;
+declare const PAPER_FX: EffectDefinition[];
+/** Register paper-unfold, pencil-sketch, watercolor and crumple (8.5). */
+declare function registerPaperPack(): void;
+
+/**
  * 5.5 — generative backgrounds on Canvas 2D, registered through
  * `registerEffect()` (kind `background`): `flow-field`, `voronoi`,
  * `mesh-gradient`, `starfield`, `metaballs`, `contours`.
@@ -785,5 +809,5 @@ declare const EFFECT_PACKS: Record<string, EffectDefinition[]>;
 /** Register every 6.x effect pack (idempotent). */
 declare function registerEffectPacks(): void;
 
-export { AI_FX, CHART_FX, CYBER_FX, DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GEO_FX, GLSL_HEAD, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, ORGANIC_FX, PHYSICS2_FX, RETRO_FX, SHOP_FX, SOCIAL_FX, TEXT3_FX, TRANSITIONS2_FX, VerletWorld, WEATHER_FX, WGSL_HEAD, arcPath, blobRadius, crossDocumentTransitions, decodeFrame, fanAngles, fieldFallback, glslToWgsl, loadEffectPack, musicSample, packManifest, pageTransition, parseFigure, pixelSteps, pointsToPath, register3dPack, registerAiPack, registerChartPack, registerCyberPack, registerEffectPacks, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGeoPack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerOrganicPack, registerPhysicsPack, registerRetroPack, registerShopPack, registerSocialPack, registerTextPack, registerTransitionsPack, registerWeatherPack, routeLength, samplePath, shaderBackground, shakeFrames, skyAt, sparkVectors, splitChars, splitWords, supportsWebGL2, supportsWebGPU, syntheticSample, throwPath, trackPointer, validateManifest, webgpuBackground, wgslModule };
+export { AI_FX, CHART_FX, CYBER_FX, DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GEO_FX, GLSL_HEAD, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, ORGANIC_FX, PAPER_FX, PHYSICS2_FX, RETRO_FX, SHOP_FX, SOCIAL_FX, TEXT3_FX, TRANSITIONS2_FX, VerletWorld, WEATHER_FX, WGSL_HEAD, arcPath, blobRadius, crossDocumentTransitions, decodeFrame, fanAngles, fieldFallback, glslToWgsl, loadEffectPack, musicSample, packManifest, pageTransition, paperRandom, parseFigure, pixelSteps, pointsToPath, register3dPack, registerAiPack, registerChartPack, registerCyberPack, registerEffectPacks, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGeoPack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerOrganicPack, registerPaperPack, registerPhysicsPack, registerRetroPack, registerShopPack, registerSocialPack, registerTextPack, registerTransitionsPack, registerWeatherPack, roughLine, routeLength, samplePath, shaderBackground, shakeFrames, skyAt, sparkVectors, splitChars, splitWords, supportsWebGL2, supportsWebGPU, syntheticSample, throwPath, trackPointer, validateManifest, webgpuBackground, wgslModule };
 export type { EffectPackManifest, ShaderSpec };

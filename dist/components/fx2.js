@@ -39,6 +39,8 @@ import { ORGANIC_FX, registerOrganicPack } from './fx-organic.js';
 export { blobRadius } from './fx-organic.js';
 import { CYBER_FX, registerCyberPack } from './fx-cyber.js';
 export { decodeFrame } from './fx-cyber.js';
+import { PAPER_FX, registerPaperPack } from './fx-paper.js';
+export { paperRandom, roughLine } from './fx-paper.js';
 import '../chunks/registry-CnO7ZVPK.js';
 import '../chunks/base-CLuqlLfG.js';
 import '../chunks/generative-2LhxG5BJ.js';
@@ -68,6 +70,7 @@ const EFFECT_PACKS = {
     retro: RETRO_FX,
     organic: ORGANIC_FX,
     cyber: CYBER_FX,
+    paper: PAPER_FX,
 };
 /** Register every 6.x effect pack (idempotent). */
 function registerEffectPacks() {
@@ -92,7 +95,8 @@ function registerEffectPacks() {
     registerRetroPack();
     registerOrganicPack();
     registerCyberPack();
+    registerPaperPack();
 }
 
-export { AI_FX, CHART_FX, CYBER_FX, DEPTH3_FX, EFFECT_PACKS, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GEO_FX, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, ORGANIC_FX, PHYSICS2_FX, RETRO_FX, SHOP_FX, SOCIAL_FX, TEXT3_FX, TRANSITIONS2_FX, WEATHER_FX, register3dPack, registerAiPack, registerChartPack, registerCyberPack, registerEffectPacks, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGeoPack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerOrganicPack, registerPhysicsPack, registerRetroPack, registerShopPack, registerSocialPack, registerTextPack, registerTransitionsPack, registerWeatherPack };
+export { AI_FX, CHART_FX, CYBER_FX, DEPTH3_FX, EFFECT_PACKS, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GEO_FX, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, ORGANIC_FX, PAPER_FX, PHYSICS2_FX, RETRO_FX, SHOP_FX, SOCIAL_FX, TEXT3_FX, TRANSITIONS2_FX, WEATHER_FX, register3dPack, registerAiPack, registerChartPack, registerCyberPack, registerEffectPacks, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGeoPack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerOrganicPack, registerPaperPack, registerPhysicsPack, registerRetroPack, registerShopPack, registerSocialPack, registerTextPack, registerTransitionsPack, registerWeatherPack };
 //# sourceMappingURL=fx2.js.map

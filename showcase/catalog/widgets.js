@@ -895,6 +895,35 @@ export const components = [
     '<usa-fx effect="hologram" trigger="loop"><div class="badge">HOLO</div></usa-fx>\n<usa-fx effect="data-decode" trigger="enter"><h2>ACCESS GRANTED</h2></usa-fx>',
     '<div class="demo-row"><usa-fx effect="hologram" trigger="loop"><span class="demo-holo">HOLO</span></usa-fx><usa-fx effect="data-decode" trigger="click"><button type="button" class="demo-cy">ACCESS GRANTED</button></usa-fx></div>',
     [{ key: 'effect', values: ['hologram', 'data-decode'] }], '8.4'),
+  // ---- 8.5 -------------------------------------------------------------
+  W('usa-sticky-wall', 'ui', 'Sticky-note wall', '便利贴墙',
+    '8.5: a wall of sticky notes — each child becomes a pinned paper note with a slight tilt, the notes drop onto the wall one by one, and a tap lifts a note to the front.',
+    '8.5：便利贴墙 —— 每个子元素变成带图钉、略微倾斜的纸质便签，依次落到墙上，点击可将便签提到最前。',
+    ['sticky notes', 'paper', 'board', 'hand-drawn', 'notes'],
+    '<usa-sticky-wall label="Ideas">\n  <p>Ship 8.5 ✏️</p>\n  <p data-color="pink">Call Mia</p>\n  <p data-color="blue">Buy paper</p>\n</usa-sticky-wall>',
+    '<div class="demo-col demo-stickyw"><usa-sticky-wall class="demo-sticky" label="Ideas"><p>Ship 8.5 ✏️</p><p>Sketch the onboarding</p><p>Water the plants</p></usa-sticky-wall><button type="button" class="demo-skbtn" data-sticky-pick>Pick a note</button></div>',
+    undefined, { since: '8.5' }),
+  W('usa-sketch-chart', 'ui', 'Sketch chart', '手绘图表',
+    '8.5: a hand-drawn chart — wobbly pencil axes with hatched bars or a sketchy line, sketched in stroke by stroke when it scrolls into view.',
+    '8.5：手绘风图表 —— 铅笔质感的抖动坐标轴，配合排线柱状图或手绘折线，进入视口时一笔一笔画出来。',
+    ['chart', 'sketch', 'hand-drawn', 'bar chart', 'pencil'],
+    '<usa-sketch-chart values="3,7,5,9" labels="Q1,Q2,Q3,Q4" label="Revenue"></usa-sketch-chart>',
+    '<div class="demo-col demo-skw"><div class="demo-row demo-sks"><usa-sketch-chart values="3,7,5,9" labels="Q1,Q2,Q3,Q4"></usa-sketch-chart><usa-sketch-chart type="line" color="#e11d48" values="2,5,4,8,6" labels="M,T,W,T,F"></usa-sketch-chart></div><button type="button" class="demo-skbtn" data-sketch-new>New data</button></div>',
+    undefined, { since: '8.5' }),
+  X('fx-paper', ['fx-paper', 'registerPaperPack'], 'Paper fold & crumple', '纸张折叠与揉皱',
+    '8.5: paper-unfold unfolds an element like a folded sheet of paper with a soft crease shadow; crumple scrunches it up like paper and springs it back flat.',
+    '8.5：paper-unfold 让元素像折叠的纸张一样带着折痕阴影展开；crumple 让元素像纸团一样揉皱再弹回平整。',
+    ['paper', 'fold', 'origami', 'crumple', 'unfold'],
+    '<usa-fx effect="paper-unfold" trigger="enter"><div class="letter">Dear reader…</div></usa-fx>\n<usa-fx effect="crumple" trigger="click"><button>Crumple</button></usa-fx>',
+    '<div class="demo-row"><usa-fx effect="paper-unfold" trigger="click"><button type="button" class="demo-paper">✉ Unfold</button></usa-fx><usa-fx effect="crumple" trigger="click"><button type="button" class="demo-paper">Crumple</button></usa-fx></div>',
+    [{ key: 'effect', values: ['paper-unfold', 'crumple'] }], '8.5'),
+  X('fx-sketch', ['fx-paper', 'registerPaperPack'], 'Pencil sketch & watercolor', '铅笔素描与水彩晕染',
+    '8.5: pencil-sketch draws the SVG strokes inside in with a slightly wobbly pencil, one after another; watercolor bleeds an element in like wet paint spreading from the middle, then dries.',
+    '8.5：pencil-sketch 用略带抖动的铅笔依次画出内部的 SVG 笔画；watercolor 让元素像湿水彩一样从中心晕开再慢慢变干。',
+    ['pencil', 'sketch', 'watercolor', 'draw', 'hand-drawn'],
+    '<usa-fx effect="pencil-sketch" trigger="enter"><svg viewBox="0 0 100 60"><path d="M5 55 L50 5 L95 55 Z"/></svg></usa-fx>\n<usa-fx effect="watercolor" trigger="enter"><img src="flower.jpg" alt=""></usa-fx>',
+    '<div class="demo-row"><usa-fx effect="pencil-sketch" trigger="click"><button type="button" class="demo-pencil" aria-label="Sketch the house"><svg viewBox="0 0 120 90" width="120" height="90" fill="none" stroke="#334155" stroke-width="2.5" stroke-linecap="round"><path d="M15 45 L60 10 L105 45"/><path d="M25 40 V82 H95 V40"/><path d="M50 82 V58 H70 V82"/></svg></button></usa-fx><usa-fx effect="watercolor" trigger="click"><button type="button" class="demo-wc">Watercolor</button></usa-fx></div>',
+    [{ key: 'effect', values: ['pencil-sketch', 'watercolor'] }], '8.5'),
 ];
 
 /** item id → live-demo wiring. */
@@ -1082,5 +1111,17 @@ export const wire = {
     const text = { lunar: 'Happy Lunar New Year 🧧', xmas: 'Merry Christmas 🎄', halloween: 'Happy Halloween 🎃', fireworks: 'Happy New Year 🎆' };
     let i = 0;
     stage.querySelector('[data-fb]')?.addEventListener('click', () => { i = (i + 1) % themes.length; b.lastChild.textContent = text[themes[i]]; b.theme = themes[i]; });
+  },
+  'sticky-wall': (stage) => {
+    const w = stage.querySelector('usa-sticky-wall');
+    let i = 0;
+    stage.querySelector('[data-sticky-pick]')?.addEventListener('click', () => w?.pick(i++ % (w.notes.length || 1)));
+  },
+  'sketch-chart': (stage) => {
+    stage.querySelector('[data-sketch-new]')?.addEventListener('click', () =>
+      stage.querySelectorAll('usa-sketch-chart').forEach((c) => {
+        c.setValues(c.values.map(() => 1 + Math.round(Math.random() * 9)));
+        c.redraw();
+      }));
   },
 };
