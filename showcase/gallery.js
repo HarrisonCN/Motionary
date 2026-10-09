@@ -4,6 +4,7 @@
  * ESM build), falling back to the CDN. Every preview is a real element.
  */
 import { COMPONENT_CATEGORIES, COMPONENTS, GALLERY, CODE_TABS, componentSnippets, matchesComponent, findComponent } from './components-catalog.js';
+import { PREREQS, prereqFor } from './catalog/prereqs.js';
 import { highlight } from './codegen.js';
 import { GSTRINGS } from './gallery-i18n.js';
 import { WIRES } from './catalog/index.js';
@@ -39,6 +40,14 @@ const T = (k) => (GSTRINGS[ui.lang] || GSTRINGS.en)[k] ?? GSTRINGS.en[k] ?? k;
 const L = (o) => (o ? o[ui.lang] || o.en : '');
 let lib = null;
 
+// 10.1: motionary/runtime + its modules (the prerequisites of runtime-powered components)
+async function loadRuntime(base) {
+  const ids = Object.values(PREREQS).filter((p) => p.kind === 'runtime' && p.id !== 'core').map((p) => p.id);
+  const [core, ...mods] = await Promise.all([import(base + 'runtime.js'), ...ids.map((id) => import(base + 'runtime/' + id + '.js'))]);
+  core.use(...mods.map((m, i) => m[ids[i].replace(/-(\w)/g, (_, c) => c.toUpperCase())]));
+  return core;
+}
+
 function h(tag, attrs = {}, children = []) {
   const el = document.createElement(tag);
   for (const [k, v] of Object.entries(attrs)) {
@@ -55,8 +64,10 @@ function h(tag, attrs = {}, children = []) {
 
 async function loadLibrary() {
   try {
+    await loadRuntime(LOCAL);
     lib = { ...(await import(LOCAL + 'components.js')), ...(await import(LOCAL + 'components/effects.js')), ...(await import(LOCAL + 'components/widgets.js')), ...(await import(LOCAL + 'components/fx2.js')) };
   } catch {
+    await loadRuntime(LOCAL).catch(() => null);
     lib = { ...(await import(CDN + 'components.js')), ...(await import(CDN + 'components/effects.js')), ...(await import(CDN + 'components/widgets.js')), ...(await import(CDN + 'components/fx2.js')) };
   }
   lib.defineWidgets?.(); // 6.2+: motionary/components/widgets
@@ -104,12 +115,24 @@ function card(item) {
       title,
       h('p', { class: 'ccard-desc', 'data-l': 'desc', text: L(item.desc) }),
       h('ul', { class: 'tags' }, (item.tags || []).map((t) => h('li', { class: 'tag', text: t }))),
+      prereqBlock(item),
       controls,
       h('div', { class: 'ccard-code', id: `${id}-code`, hidden: true }),
     ]),
   ]);
   wire(item, stage);
   return el;
+}
+
+/** 10.1: 'Requires: …' + install / import & register / CDN / example, from showcase/catalog/prereqs.js. */
+function prereqBlock(item) {
+  const p = item.requires?.length ? prereqFor(item) : null;
+  if (!p) return null;
+  const row = (k, v) => [h('dt', { text: k }), h('dd', {}, [h('pre', { text: v })])];
+  return h('details', { class: 'ccard-prereq' }, [
+    h('summary', { text: p.badge }),
+    h('dl', {}, [...row('Install', p.install), ...row('Import & register (in this order)', p.importAndRegister), ...row('CDN', p.cdn), ...row('Minimal example', p.example)]),
+  ]);
 }
 
 function replay(item, stage) {

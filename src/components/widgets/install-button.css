@@ -1,0 +1,8 @@
+usa-install-button{display:inline-flex;flex-direction:column;gap:6px;max-width:100%;box-sizing:border-box;font:12px/1.4 system-ui,sans-serif}
+usa-install-button [role=tablist]{display:flex;flex-wrap:wrap;gap:4px}
+usa-install-button [role=tab]{padding:4px 9px;border:1px solid #cbd5e1;border-radius:999px;background:#fff;color:#334155;font:600 11px/1 system-ui,sans-serif;cursor:pointer}
+usa-install-button [role=tab][aria-selected=true]{background:#0f172a;border-color:#0f172a;color:#fff}
+usa-install-button .usa-ib-row{display:flex;align-items:stretch;min-width:0;border-radius:10px;background:#0f172a;color:#e2e8f0;overflow:hidden}
+usa-install-button code{flex:1;min-width:0;padding:9px 10px;font:12px/1.4 ui-monospace,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+usa-install-button .usa-ib-copy{flex:none;position:relative;min-width:74px;padding:0 12px;border:0;background:#4f46e5;color:#fff;font:700 12px/1 system-ui,sans-serif;cursor:pointer}
+usa-install-button .usa-ib-copy[data-copied]{background:#16a34a}

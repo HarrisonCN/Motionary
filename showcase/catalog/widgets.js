@@ -1203,6 +1203,21 @@ export const components = [
     '<usa-native-preview platform="ios" rules="enter: fade-up 500ms smooth stagger 80ms; click: pop">\n  <div class="row">Inbox</div><div class="row">Starred</div>\n</usa-native-preview>',
     '<usa-native-preview class="demo-native" platform="ios" rules="enter: fade-up 500ms smooth stagger 80ms; click: pop"><div class="demo-nrow">Inbox</div><div class="demo-nrow">Starred</div><div class="demo-nrow">Sent</div></usa-native-preview>',
     undefined, { since: '9.8' }),
+  // ---- 10.1 ------------------------------------------------------------
+  W('usa-plugin-card', 'ui', 'Plugin detail card', '插件详情卡',
+    '10.1: a plugin’s name, version and author with a Motionary compatibility badge (semver `engine` range), a signature badge (SHA-256 integrity checked with Web Crypto), an animated download counter and expandable details. Requires motionary/runtime — npm i motionary, then use() before the card mounts.',
+    '10.1：展示插件名称、版本与作者，带 Motionary 兼容性徽章（semver `engine` 范围）、签名徽章（用 Web Crypto 校验 SHA-256 完整性）、动画下载计数与可展开详情。需要 motionary/runtime —— npm i motionary，并在卡片挂载前调用 use()。',
+    ['plugin', 'marketplace', 'semver', 'integrity', 'runtime'],
+    '<usa-plugin-card name="retro" title="Retro" version="1.2.0" author="Motionary" engine="^10.0.0" downloads="12400">\n  <p>Pixel, CRT, VHS and Y2K effects.</p>\n</usa-plugin-card>',
+    '<usa-plugin-card class="demo-plugin-card" name="retro" title="Retro pack" version="1.2.0" author="Motionary" engine="^10.0.0" downloads="12400" integrity="sha256-demo"><p>Pixel, CRT, VHS and Y2K effects for <code>createMotion().use()</code>.</p></usa-plugin-card>',
+    [{ key: 'engine', values: ['^10.0.0', '>=11.0.0'] }], { since: '10.1', requires: ['core'] }),
+  W('usa-install-button', 'ui', 'Install button', '安装按钮',
+    '10.1: one-click install snippet with npm / pnpm / yarn / bun / CDN tabs and a copy button that confirms with a check; `cdn` sets the URL of the CDN tab.',
+    '10.1：一键复制安装命令，带 npm / pnpm / yarn / bun / CDN 标签与复制按钮（复制成功显示对勾）；`cdn` 指定 CDN 标签的地址。',
+    ['install', 'npm', 'cdn', 'copy', 'snippet'],
+    '<usa-install-button package="motionary" managers="npm pnpm yarn bun cdn" cdn="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></usa-install-button>',
+    '<usa-install-button class="demo-install" package="motionary" managers="npm pnpm yarn cdn" cdn="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></usa-install-button>',
+    [{ key: 'manager', values: ['npm', 'pnpm', 'yarn', 'cdn'] }], { since: '10.1' }),
 ];
 
 /** item id → live-demo wiring. */

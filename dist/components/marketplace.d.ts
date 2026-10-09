@@ -104,6 +104,37 @@ declare function loadEffectPack(src: string | {
     override?: boolean;
 }): Promise<string[]>;
 
+/**
+ * 10.1: plugin signature (integrity) checks and version compatibility.
+ *
+ * - `pluginIntegrity(code)` → `'sha256-<base64>'` (Subresource-Integrity style).
+ * - `verifyPlugin(code, integrity)` → `true` when the code matches (sha256 / sha384 / sha512).
+ * - `satisfies(version, range)` — semver ranges: `*`, `x`, `1.2.3`, `=`, `>`, `>=`, `<`, `<=`,
+ *   `^`, `~`, `1.x`, hyphen ranges `1.0.0 - 2.0.0`, AND (space) and OR (`||`).
+ * - `checkCompat(manifest, version)` — reads `engines.motionary` (or `motionary`) from a plugin manifest.
+ */
+type Algo = 'sha256' | 'sha384' | 'sha512';
+/** SRI-style integrity string of plugin code. Needs Web Crypto (browsers, Node ≥ 18, workers). */
+declare function pluginIntegrity(code: string | ArrayBuffer | Uint8Array, algo?: Algo): Promise<string>;
+/** Does the code match the integrity string (any of several, space-separated)? */
+declare function verifyPlugin(code: string | ArrayBuffer | Uint8Array, integrity: string): Promise<boolean>;
+/** Does `version` satisfy the semver `range`? */
+declare function satisfies(version: string, range: string): boolean;
+interface CompatResult {
+    ok: boolean;
+    range: string;
+    version: string;
+    message: string;
+}
+/** Check a plugin manifest's `engines.motionary` (or `motionary`) range against the running version. */
+declare function checkCompat(manifest: {
+    engines?: {
+        motionary?: string;
+    };
+    motionary?: string;
+    name?: string;
+}, version: string): CompatResult;
+
 declare const MARKETPLACE_FORMAT = "motionary/marketplace";
 interface PluginListing {
     name: string;
@@ -135,5 +166,5 @@ declare function installPlugin(p: PluginListing | string, opts?: {
 /** Read a marketplace index (`{ format: "motionary/marketplace", version: 1, plugins }`) (9.0). */
 declare function fetchMarketplace(url: string, fetcher?: typeof fetch): Promise<PluginListing[]>;
 
-export { EFFECT_PACK_FORMAT, MARKETPLACE, MARKETPLACE_FORMAT, fetchMarketplace, installPlugin, installedPlugins, loadEffectPack, packManifest, searchPlugins, validateManifest };
-export type { EffectPackManifest, PluginListing };
+export { EFFECT_PACK_FORMAT, MARKETPLACE, MARKETPLACE_FORMAT, checkCompat, fetchMarketplace, installPlugin, installedPlugins, loadEffectPack, packManifest, pluginIntegrity, satisfies, searchPlugins, validateManifest, verifyPlugin };
+export type { CompatResult, EffectPackManifest, PluginListing };

@@ -66,7 +66,7 @@ describe('component gallery catalog', () => {
       const out = componentSnippets(item);
       CODE_TABS.forEach((t: any) => expect(out[t.id], `${item.id}/${t.id}`).toMatch(/\S/));
       Object.values(out).forEach((code: any) => {
-        for (const m of code.matchAll(/from '([^']+)'/g)) expect(allowed.has(m[1]), `${item.id}: ${m[1]}`).toBe(true);
+        for (const m of code.matchAll(/from '([^']+)'/g)) expect(allowed.has(m[1]) || /^motionary\/runtime(\/[a-z0-9-]+)?$/.test(m[1]), `${item.id}: ${m[1]}`).toBe(true);
         for (const m of code.matchAll(/import '([^']+)'/g)) expect(m[1]).toMatch(/^motionary\/components(\/[a-z]+)?\.css$/);
       });
     });

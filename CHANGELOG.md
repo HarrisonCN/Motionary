@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [10.1.0] - 2026-10-09
+
+### Added
+- **`motionary/runtime` — Motionary's own zero-dependency animation runtime** (original implementation; no third-party code). Shared ticker (`getTicker()`: one rAF loop, lag smoothing, `timeScale`, `step()` for tests / workers), tween + timeline engine (`tween()`, `timeline()`, `Tween`, `Timeline`: plain objects and elements — CSS lengths, colours, custom properties, transform shorthands `x y rotate scale scaleX scaleY skewX skewY`; positions `<`, `>`, `+=`, `-=`, labels; `repeat`, `yoyo`, `reverse()`, `seek()`, `await`), easing (`EASES`, `cubicBezier()`, `steps()`, `parseEase()`), and the module registry (`use()`, `requireModule()`, `hasModule()`, `RuntimeModuleError` with install / import / CDN instructions). SSR-safe (no `window` at import), works in Web Workers, TypeScript types. CDN: `dist/runtime.iife.js` (`window.MotionaryRuntime`, registers itself) and per-module `dist/runtime/<module>.iife.js`; ESM at `dist/runtime.js` / `dist/runtime/<module>.js`.
+- **Format loaders** (each its own tree-shakable module with a fixed gzip budget): `motionary/runtime/format-css` — CSS `@keyframes` (prefixed rules, selector lists, per-frame `animation-timing-function`, transforms as shorthands) and Web Animations API keyframes (array + property-indexed, offsets distributed like the WAAPI) → runtime timeline (`parseKeyframes`, `fromCssRule`, `fromWaapi`, `toWaapi`, `playKeyframes`); `motionary/runtime/format-motion` — Motion / Framer-style `{ initial, animate, transition }` JSON (array keyframes, `times`, ease names / cubic arrays, `repeat` + `repeatType`, per-property transitions, `type: "spring"` simulated into an easing) (`fromMotion`, `playMotion`, `springEase`, `motionEase`). Compatibility tables in `docs/runtime/format-css.md` and `docs/runtime/format-motion.md`.
+- **Prerequisites system**: `showcase/catalog/prereqs.js` is the single source for every component prerequisite (runtime modules now; official third-party runtimes for formats we cannot implement, from 10.6). Gallery cards get a **Requires** block (install, import & register order, CDN, minimal example), Store cards a **"Requires: motionary/runtime/…"** badge and a Prerequisites section in the detail; code snippets include the prerequisites; `scripts/gen-runtime-docs.mjs` writes `docs/runtime/<module>.md` and the README / `docs/components.md` prerequisite blocks.
+- **`npm run check:peer-docs`** (in CI): every runtime-powered component documents its prerequisites in all five places (gallery card, Store detail, docs page, README, AI manifest); every `runtimeModule()` call is declared on its card; every module has a docs page, a compatibility table and a size budget; generated docs are current.
+- **AI-readable components**: `dist/manifest.json` (npm `motionary/manifest.json`, Pages `/components.json`) with JSON Schema (`motionary/manifest.schema.json`, Pages `/components.schema.json`) — every component's tag, attributes, events, slots, methods, import path, define function, CDN URL, minimal example and prerequisites, plus the runtime modules; `llms.txt` (index) and `llms-full.txt` (full reference) at the Pages root. All generated from the source at build time.
+- **Plugin ecosystem**: `create-motionary-plugin` scaffold (`npx -p motionary create-motionary-plugin my-plugin`: EffectPlugin, node:test test, README, `scripts/sign.mjs` writing the SHA-256 integrity into `motionary-plugin.json`); `motionary/marketplace` adds `pluginIntegrity()`, `verifyPlugin()` (SRI-style sha256/384/512 via Web Crypto), `satisfies()` (semver ranges) and `checkCompat()` (`engines.motionary`).
+- **New components (10.1)** in `motionary/components/widgets`: `<usa-plugin-card>` — plugin detail card with compatibility + signature badges, animated download counter and expandable details (**Requires: motionary/runtime**); `<usa-install-button>` — npm / pnpm / yarn / bun / CDN tabs with copy-to-clipboard.
+- Showcase: new gallery cards with copyable code, live demos and live Store thumbnails; the gallery and thumbnails register the runtime modules.
+
+### Changed
+- ROADMAP (track B): no third-party peer libraries and no umbrella bundle — each planned component is powered by a `motionary/runtime` module (scroll, text, smooth, gl, vector, physics, drag-snap) plus a format loader per version; official third-party runtimes only where a format cannot reasonably be implemented (Rive `.riv`, optional Lottie full-fidelity, Draco / KTX2), listed with reasons. `<usa-split-text>` and `<usa-carousel>` already exist, so the planned runtime components are `<usa-text-splitter>` and `<usa-snap-carousel>`.
+
+### Accessibility
+- `<usa-plugin-card>` counts and expands without animation under reduced motion; its details button exposes `aria-expanded`. `<usa-install-button>` tabs are a labelled `tablist`; the copy confirmation is announced (`aria-live`). A missing runtime module renders a visible `role="alert"` message instead of failing silently.
+
+### Fixed
+- The showcase snippet tests now accept the documented `motionary/runtime` and `motionary/runtime/<module>` entry points used by runtime-powered components' code tabs.
+- `<usa-install-button>`: switching package-manager tabs now animates the command in (it changed abruptly); skipped under reduced motion.
+
 ## [10.0.0] - 2026-10-09
 
 ### ⚠️ Breaking

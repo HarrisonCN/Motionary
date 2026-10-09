@@ -631,6 +631,7 @@ function buildCard(item) {
     h('span', { class: 'badge', text: kindLabel(item) }),
     h('div', { class: 'card-body' }, [
       h('h3', { class: 'card-title' }, [h('span', { class: 'ttl', text: L(item.title) }), h('code', { text: item.id })]),
+      item.requiresBadge ? h('span', { class: 'req-badge', title: item.prereq?.install, text: item.requiresBadge }) : null,
       h('p', { class: 'card-desc', text: L(item.desc) }),
       h('ul', { class: 'tags' }, (item.tags || []).slice(0, 3).map((tg) => h('li', { class: 'tag', text: tg }))),
       h('div', { class: 'card-foot' }, [h('span', { class: 'price', text: T('card.free') }), h('span', { class: 'get', html: `<span>${T('card.get')}</span>${ICON.arrow}` })]),
@@ -1044,6 +1045,12 @@ function renderDetail(item, keepState) {
       h('ul', { class: 'tags', style: 'margin-top:10px' }, [item.id, ...(item.tags || [])].map((tg) => h('li', { class: 'tag', text: tg }))),
     ])
   );
+  // 10.1: prerequisites of runtime-powered components (install, import & register order, CDN, minimal example)
+  if (item.prereq) {
+    const p = item.prereq;
+    const row = (k, v) => [h('dt', { text: k }), h('dd', {}, [h('pre', { text: v })])];
+    right.append(h('section', { class: 'prereq', id: 'prereq' }, [h('h3', { class: 'section-title', text: p.badge }), h('dl', {}, [...row('Install', p.install), ...row('Import & register (in this order)', p.importAndRegister), ...row('Order', p.order), ...row('CDN', p.cdn), ...row('Minimal example', p.example)])]));
+  }
   if (isReveal || item.recipe === 'stagger' || isEngine(item)) {
     right.append(
       h('section', { id: 'keyframes' }, [

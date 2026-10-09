@@ -166,6 +166,51 @@ Import one category (`motionary/components/cards`), everything (`motionary/compo
 | **Effect registry** (`/components/fx`) | `<usa-fx>` |
 | **Effect packs** (`/components/effects`) | `<usa-player>` · `<usa-story>` · `<usa-audio>` · `<usa-motion-theme>` · `<usa-gesture-fx>` |
 
+<!-- runtime:start -->
+## Runtime (`motionary/runtime`) & prerequisites
+
+Motionary ships its own zero-dependency animation runtime — shared ticker, tween + timeline engine, and one tree-shakable module per feature / format (`motionary/runtime/<module>`). `npm i motionary` installs all of it; you pay only for the modules you import. Components that need a module say so with a **Requires:** badge in the gallery and the Store, and throw a clear error (install / import / CDN) when it is missing.
+
+| Module | Import | CDN (IIFE) | Register | gzip budget |
+|---|---|---|---|---|
+| [Runtime core](docs/runtime/core.md) | `motionary/runtime` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js` | `use();` | 5.5 KB |
+| [CSS @keyframes & WAAPI keyframes loader](docs/runtime/format-css.md) | `motionary/runtime/format-css` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-css.iife.js` | `use(formatCss);` | 2.5 KB |
+| [Motion / Framer keyframe JSON loader](docs/runtime/format-motion.md) | `motionary/runtime/format-motion` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-motion.iife.js` | `use(formatMotion);` | 2.5 KB |
+
+Install once: `npm i motionary`. Plain HTML: load `runtime.iife.js` first, then the module files (each registers itself).
+
+#### `<usa-plugin-card>` — Requires: motionary/runtime
+
+- **Install:** `npm i motionary`
+- **Import order & registration:** Import motionary/runtime and call use() once at start-up, before any runtime-powered component mounts. CDN: the IIFE registers itself (window.MotionaryRuntime).
+
+```js
+import { use } from 'motionary/runtime';
+import { definePluginCard } from 'motionary/components/widgets';
+
+use();
+definePluginCard(); // registers <usa-plugin-card> — after the prerequisites
+```
+
+- **CDN:**
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></script>
+<!-- then the component bundles -->
+<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>
+```
+
+- **Minimal example:**
+
+```html
+<usa-plugin-card name="retro" title="Retro" version="1.2.0" author="Motionary" engine="^10.0.0" downloads="12400">
+  <p>Pixel, CRT, VHS and Y2K effects.</p>
+</usa-plugin-card>
+```
+
+<!-- runtime:end -->
+
 ## Accessibility & reduced motion
 
 - With `prefers-reduced-motion: reduce`, scroll reveals show content immediately (no entrance, parallax or scrub motion), and components fall back to calm states (`staticAlternative()` / `adaptKeyframes()`).

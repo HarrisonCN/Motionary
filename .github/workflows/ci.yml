@@ -32,6 +32,8 @@ jobs:
       - run: npm test
       - run: npm run build
       - run: npm run check:exports
+      - name: Prerequisite docs in all five places (check:peer-docs)
+        run: npm run check:peer-docs
       - name: Package lint (publint + are-the-types-wrong)
         if: matrix.node == 22
         run: npm run lint:package

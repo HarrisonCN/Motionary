@@ -6,6 +6,7 @@
  * `mode=card` makes it non-interactive and scales it to fit the card stage.
  */
 import { findComponent } from './components-catalog.js';
+import { PREREQS } from './catalog/prereqs.js';
 import { GSTRINGS } from './gallery-i18n.js';
 import { WIRES } from './catalog/index.js';
 
@@ -23,10 +24,19 @@ const H = 240;
 
 document.documentElement.classList.add(mode === 'card' ? 'is-card' : 'is-detail');
 
+// 10.1: motionary/runtime + its modules (the prerequisites of runtime-powered components)
+async function loadRuntime(base) {
+  const ids = Object.values(PREREQS).filter((p) => p.kind === 'runtime' && p.id !== 'core').map((p) => p.id);
+  const [core, ...mods] = await Promise.all([import(base + 'runtime.js'), ...ids.map((id) => import(base + 'runtime/' + id + '.js'))]);
+  core.use(...mods.map((m, i) => m[ids[i].replace(/-(\w)/g, (_, c) => c.toUpperCase())]));
+  return core;
+}
+
 async function loadLibrary() {
   const load = (base) => Promise.all(['components.js', 'components/effects.js', 'components/widgets.js', 'components/fx2.js'].map((f) => import(base + f)));
   let mods;
   try {
+    await loadRuntime(LOCAL);
     mods = await load(LOCAL);
   } catch {
     mods = await load(CDN);

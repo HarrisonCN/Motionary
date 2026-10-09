@@ -352,7 +352,7 @@
   {
     "name": "dist/widgets.umd.js (minified, 6.x widgets + 6.x effect packs)",
     "file": "dist/widgets.umd.js",
-    "limit": 179712
+    "limit": 192512
   },
   {
     "name": "import 'motionary/components/widgets'",
@@ -412,7 +412,7 @@
   {
     "name": "import 'motionary/components/marketplace'",
     "import": "export * from 'pkg/components/marketplace';",
-    "limit": 3584
+    "limit": 4608
   },
   {
     "name": "import 'motionary/components/fx-music'",
@@ -482,6 +482,36 @@
   {
     "name": "import { registerFestivalPack } from '…/components/fx-festival'",
     "import": "export { registerFestivalPack } from 'pkg/components/fx-festival';",
+    "limit": 2560
+  },
+  {
+    "name": "import 'motionary/runtime' (runtime core, fixed 5.5 KB)",
+    "import": "export * from 'pkg/runtime';",
+    "limit": 5632
+  },
+  {
+    "name": "import 'motionary/runtime/format-css' (fixed 2.5 KB + core)",
+    "import": "export * from 'pkg/runtime/format-css';",
+    "limit": 8192
+  },
+  {
+    "name": "import 'motionary/runtime/format-motion' (fixed 2.5 KB + core)",
+    "import": "export * from 'pkg/runtime/format-motion';",
+    "limit": 8192
+  },
+  {
+    "name": "dist/runtime.iife.js (CDN core, fixed 5.5 KB)",
+    "file": "dist/runtime.iife.js",
+    "limit": 5632
+  },
+  {
+    "name": "dist/runtime/format-css.iife.js (CDN module, fixed 2.5 KB)",
+    "file": "dist/runtime/format-css.iife.js",
+    "limit": 2560
+  },
+  {
+    "name": "dist/runtime/format-motion.iife.js (CDN module, fixed 2.5 KB)",
+    "file": "dist/runtime/format-motion.iife.js",
     "limit": 2560
   }
 ]
