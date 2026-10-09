@@ -1,4 +1,6 @@
-import { r as registry } from './registry-D8LAoXI-.js';
+'use strict';
+
+var registry = require('./registry-DhKZCitb.cjs');
 
 /**
  * The shared ticker: one requestAnimationFrame loop per page (or worker) for
@@ -62,9 +64,9 @@ function createTicker() {
 }
 /** The page-wide ticker (shared across every copy of the runtime). */
 function getTicker() {
-    const s = registry().slots;
+    const s = registry.registry().slots;
     return (s.ticker || (s.ticker = createTicker()));
 }
 
-export { getTicker as g };
-//# sourceMappingURL=ticker-Do9bGsaV.js.map
+exports.getTicker = getTicker;
+//# sourceMappingURL=ticker-jD9_A9Rh.cjs.map

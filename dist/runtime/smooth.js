@@ -1,4 +1,4 @@
-import { R as RUNTIME_VERSION, g as requireModule } from '../chunks/registry-D8LAoXI-.js';
+import { R as RUNTIME_VERSION, a as requireModule } from '../chunks/registry-D87dP_aR.js';
 import { p as parseEase } from '../chunks/ease-XN8_0sXu.js';
 
 /**

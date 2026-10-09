@@ -1,5 +1,7 @@
-import { g as getTicker } from './ticker-Do9bGsaV.js';
-import { p as parseEase } from './ease-XN8_0sXu.js';
+'use strict';
+
+var ticker = require('./ticker-jD9_A9Rh.cjs');
+var ease = require('./ease-HwYZnZat.cjs');
 
 /**
  * Tween + timeline engine (original implementation). Times are in
@@ -201,7 +203,7 @@ class Playable {
         if (this.parent || this._off)
             return this;
         this._done = false;
-        this._off = getTicker().add((_, dt) => this.advance(dt));
+        this._off = ticker.getTicker().add((_, dt) => this.advance(dt));
         return this;
     }
     advance(dt) {
@@ -226,7 +228,7 @@ class Tween extends Playable {
         this.tracks = null;
         this.target = target;
         this._dur = o.duration ?? 600;
-        this.ease = parseEase(o.ease);
+        this.ease = ease.parseEase(o.ease);
         this.toProps = o.to || {};
         this.fromProps = o.from || {};
     }
@@ -396,5 +398,10 @@ function timeline(o = {}) {
     return tl;
 }
 
-export { Playable as P, Timeline as T, Tween as a, tween as b, parseValue as p, timeline as t };
-//# sourceMappingURL=tween-BzCGq_Ba.js.map
+exports.Playable = Playable;
+exports.Timeline = Timeline;
+exports.Tween = Tween;
+exports.parseValue = parseValue;
+exports.timeline = timeline;
+exports.tween = tween;
+//# sourceMappingURL=tween-Dk0QmNe9.cjs.map

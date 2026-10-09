@@ -1,4 +1,6 @@
-import { P as Playable } from './tween-BzCGq_Ba.js';
+'use strict';
+
+var tween = require('./tween-Dk0QmNe9.cjs');
 
 /**
  * Shared internals of the animated-image loaders (`format-gif`, `format-apng`,
@@ -81,7 +83,7 @@ async function bytesOf(src) {
         return new Uint8Array(src.buffer, src.byteOffset, src.byteLength);
     return new Uint8Array(await src.arrayBuffer());
 }
-class AnimImagePlayer extends Playable {
+class AnimImagePlayer extends tween.Playable {
     constructor(canvas, anim, o) {
         super({ repeat: o.repeat ?? (anim.plays === 0 ? -1 : Math.max(0, anim.plays - 1)), yoyo: o.yoyo });
         this.canvas = canvas;
@@ -162,5 +164,11 @@ function crc32(bytes, start = 0, end = bytes.length) {
     return (c ^ 0xffffffff) >>> 0;
 }
 
-export { animatedImagePlayer as a, browserDecode as b, composeFrames as c, bytesOf as d, crc32 as e, fixDelay as f, u8 as u };
-//# sourceMappingURL=anim-image-DNghy017.js.map
+exports.animatedImagePlayer = animatedImagePlayer;
+exports.browserDecode = browserDecode;
+exports.bytesOf = bytesOf;
+exports.composeFrames = composeFrames;
+exports.crc32 = crc32;
+exports.fixDelay = fixDelay;
+exports.u8 = u8;
+//# sourceMappingURL=anim-image-CFGpUX7t.cjs.map
