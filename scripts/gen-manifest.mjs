@@ -57,7 +57,7 @@ export function scanSource() {
 const strip = (s) => (s || '').replace(/\s+/g, ' ').trim();
 
 // schema v2: components deprecated for the next major (tag → { since, removedIn, use })
-const PER_ENTRY = JSON.parse(readFileSync(new URL('./entries.json', import.meta.url), 'utf8'));
+const PER_ENTRY = JSON.parse(readFileSync(join(ROOT, 'scripts/entries.json'), 'utf8')) // ROOT, not import.meta.url: the tests import this file under jsdom (non-file URL);
 const ENTRY_BY_TAG = Object.fromEntries(PER_ENTRY.filter((e) => e.kind === 'widget').map((e) => [e.tag, e.entry]));
 export const DEPRECATED = { 'usa-three-scene': { since: '10.9', removedIn: '11.0', use: 'usa-gl-scene' } };
 
