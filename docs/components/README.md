@@ -1,4 +1,4 @@
-# Motionary components (198)
+# Motionary components (202)
 
 One page per `<usa-*>` element, generated from the source. Machine-readable: `motionary/manifest.json` · Pages `/components.json` · `/llms.txt` · `/llms-full.txt`. How to use these with an AI assistant: [AGENTS.md](../../AGENTS.md) and [the prompt guide](../ai-prompt-guide.md).
 
@@ -51,7 +51,9 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<usa-gauge>`](usa-gauge.md) — Spring gauge
 - [`<usa-gen-art>`](usa-gen-art.md) — Generative artwork
 - [`<usa-gesture-sticker>`](usa-gesture-sticker.md) — Multi-touch sticker
+- [`<usa-gl-scene>`](usa-gl-scene.md) — 3D scene (glTF / OBJ) · Requires: motionary/runtime/gl + motionary/runtime/format-gltf + motionary/runtime/format-obj
 - [`<usa-globe>`](usa-globe.md) — Spinning globe
+- [`<usa-gpu-particles>`](usa-gpu-particles.md) — GPU particle canvas
 - [`<usa-gyro-card>`](usa-gyro-card.md) — Gyro 3D card
 - [`<usa-hero-video>`](usa-hero-video.md) — Hero video
 - [`<usa-hud-panel>`](usa-hud-panel.md) — HUD panel
@@ -94,6 +96,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<usa-retro-button>`](usa-retro-button.md) — Retro buttons
 - [`<usa-scene>`](usa-scene.md) — Cinematic scene
 - [`<usa-segmented>`](usa-segmented.md) — Segmented control
+- [`<usa-shader-backdrop>`](usa-shader-backdrop.md) — Shader backdrop + post chain
 - [`<usa-shortcut>`](usa-shortcut.md) — Shortcut hint
 - [`<usa-sketch-chart>`](usa-sketch-chart.md) — Sketch chart
 - [`<usa-slider>`](usa-slider.md) — Slider
@@ -256,3 +259,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<usa-pinch-zoom>`](usa-pinch-zoom.md) — Pinch zoom
 - [`<usa-swipe-deck>`](usa-swipe-deck.md) — Swipe cards deck
 - [`<usa-swipeable>`](usa-swipeable.md) — Swipeable
+
+## widgets
+
+- [`<usa-three-scene>`](usa-three-scene.md) — <usa-three-scene>

@@ -1,4 +1,4 @@
-# Motionary 10.4.0 — full component reference
+# Motionary 10.5.0 — full component reference
 
 Generated from the source. Machine-readable version: https://harrisoncn.github.io/Motionary/components.json (schema https://harrisoncn.github.io/Motionary/components.schema.json).
 
@@ -245,6 +245,78 @@ import { formatWebp, loadWebp, animatedImagePlayer } from 'motionary/runtime/for
 use(formatWebp);
 const anim = await loadWebp('/hero.webp');
 const p = animatedImagePlayer(document.querySelector('canvas'), anim, { speed: 0.5 });
+```
+
+### motionary/runtime/gl — WebGL2 scene renderer
+
+A small WebGL2 renderer with its own API: scene graph, camera, lights, box / plane / sphere / torus, PBR-style materials, shader materials, image and video textures, orbit controls — not a Three.js clone.
+
+- Install: `npm i motionary`
+- Import: `motionary/runtime/gl`
+- Register: `use(gl);` — Register the core first, then the module: use(gl) also registers the core. CDN: load runtime.iife.js, then runtime/gl.iife.js (it registers itself).
+- CDN:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gl.iife.js"></script>
+```
+
+```js
+import { use } from 'motionary/runtime';
+import { gl, createRenderer, Scene, Camera, GlNode, torus, standardMaterial } from 'motionary/runtime/gl';
+use(gl);
+const r = createRenderer(canvas);
+const scene = new Scene();
+scene.add(new GlNode('donut', { geometry: torus(), material: standardMaterial({ color: [0.5, 0.55, 1, 1] }) }));
+r.resize(); r.render(scene, new Camera({ position: [0, 0.5, 3] }));
+```
+
+### motionary/runtime/format-gltf — glTF 2.0 / GLB loader
+
+Load glTF 2.0 (.gltf with external or data: buffers, .glb) into motionary/runtime/gl nodes: node hierarchy, meshes, PBR metallic-roughness materials, embedded / external images.
+
+- Install: `npm i motionary`
+- Import: `motionary/runtime/format-gltf`
+- Register: `use(formatGltf);` — Register the core first, then the module: use(formatGltf) also registers the core. CDN: load runtime.iife.js, then runtime/format-gltf.iife.js (it registers itself).
+- CDN:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-gltf.iife.js"></script>
+```
+
+```js
+import { use } from 'motionary/runtime';
+import { gl, createRenderer, Scene, Camera, frameNode } from 'motionary/runtime/gl';
+import { formatGltf, loadGltf } from 'motionary/runtime/format-gltf';
+use(gl, formatGltf);
+const model = await loadGltf('/models/chair.glb');
+const scene = new Scene().add(model), cam = new Camera();
+frameNode(cam, model);
+const r = createRenderer(canvas); r.resize(); r.render(scene, cam);
+```
+
+### motionary/runtime/format-obj — OBJ / MTL loader
+
+Load Wavefront OBJ (+ MTL materials and diffuse textures) into motionary/runtime/gl nodes: polygons triangulated, groups, per-material meshes.
+
+- Install: `npm i motionary`
+- Import: `motionary/runtime/format-obj`
+- Register: `use(formatObj);` — Register the core first, then the module: use(formatObj) also registers the core. CDN: load runtime.iife.js, then runtime/format-obj.iife.js (it registers itself).
+- CDN:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-obj.iife.js"></script>
+```
+
+```js
+import { use } from 'motionary/runtime';
+import { gl, Scene } from 'motionary/runtime/gl';
+import { formatObj, loadObj } from 'motionary/runtime/format-obj';
+use(gl, formatObj);
+const cube = await loadObj('/models/cube.obj'); // + cube.mtl + textures next to it
+new Scene().add(cube);
 ```
 
 ## Components
@@ -1175,6 +1247,44 @@ Full-screen sections that snap one at a time, with keyboard paging, dot navigati
 </usa-gesture-sticker>
 ```
 
+### <usa-gl-scene> — 3D scene (glTF / OBJ)
+
+10.5: a WebGL2 3D viewer on Motionary’s own renderer — glTF 2.0 / GLB and OBJ / MTL models or built-in shapes, PBR-style materials, orbit controls (drag, wheel, pinch, arrow keys), auto-rotate and video textures. Requires motionary/runtime/gl (+ format-gltf for .gltf / .glb, format-obj for .obj) — npm i motionary, then use(gl, formatGltf, formatObj) before it mounts. Alias: <usa-three-scene>.
+
+- Import: `import { defineGlScene } from 'motionary/components/widgets'; defineGlScene();`
+- CDN: https://unpkg.com/motionary@10/dist/widgets.umd.js
+- Attributes: `src`, `shape`, `color`, `metallic`, `roughness`, `background`, `exposure`, `controls`, `auto-rotate`, `video`, `video-scrub`, `label`
+- Events: `usa:error`, `usa:load`, `usa:runtime-missing`
+- Methods: `reload()`
+- Requires: motionary/runtime/gl + motionary/runtime/format-gltf + motionary/runtime/format-obj
+  - Install: `npm i motionary`
+  - Order: Register the core first, then the module: use(gl) also registers the core. CDN: load runtime.iife.js, then runtime/gl.iife.js (it registers itself). Register the core first, then the module: use(formatGltf) also registers the core. CDN: load runtime.iife.js, then runtime/format-gltf.iife.js (it registers itself). Register the core first, then the module: use(formatObj) also registers the core. CDN: load runtime.iife.js, then runtime/format-obj.iife.js (it registers itself).
+
+```js
+import { use } from 'motionary/runtime';
+import { gl } from 'motionary/runtime/gl';
+import { formatGltf } from 'motionary/runtime/format-gltf';
+import { formatObj } from 'motionary/runtime/format-obj';
+import { defineGlScene } from 'motionary/components/widgets';
+
+use(gl, formatGltf, formatObj);
+defineGlScene(); // registers <usa-gl-scene> — after the prerequisites
+```
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gl.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-gltf.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-obj.iife.js"></script>
+<!-- then the component bundles -->
+<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>
+```
+
+```html
+<usa-gl-scene src="/models/chair.glb" controls auto-rotate="20" label="Chair"></usa-gl-scene>
+```
+
 ### <usa-glitch> — Glitch text
 
 An RGB-split, sliced glitch — always on or on hover.
@@ -1201,6 +1311,19 @@ An RGB-split, sliced glitch — always on or on hover.
 ```html
 <usa-globe markers="Shanghai:31.2,121.5; London:51.5,-0.1; New York:40.7,-74"></usa-globe>
 <script>globe.flyTo('London');</script>
+```
+
+### <usa-gpu-particles> — GPU particle canvas
+
+10.5 (WebGPU effects 2.0): tens of thousands of particles simulated by a WebGPU compute shader and drawn as instanced quads — swirl, galaxy or fountain, pointer repulsion, trails; Canvas 2D fallback where WebGPU is missing.
+
+- Import: `import { defineGpuParticles } from 'motionary/components/widgets'; defineGpuParticles();`
+- CDN: https://unpkg.com/motionary@10/dist/widgets.umd.js
+- Attributes: `count`, `mode`, `colors`, `size`, `speed`, `trail`, `pointer`, `label`
+- Events: `usa:backend`
+
+```html
+<usa-gpu-particles count="30000" mode="galaxy" colors="#818cf8,#f472b6" pointer></usa-gpu-particles>
 ```
 
 ### <usa-gradient-text> — Gradient flow
@@ -2565,6 +2688,21 @@ A GPU shader behind your content: gradient, plasma, waves or aurora presets — 
 </usa-shader>
 ```
 
+### <usa-shader-backdrop> — Shader backdrop + post chain
+
+10.5 (WebGPU effects 2.0): an animated shader background (aurora, plasma, waves, nebula or your own GLSL) run through a post-processing chain — bloom, vignette, grain, chromatic aberration, pixelate, scanlines — in any order; CSS gradient fallback.
+
+- Import: `import { defineShaderBackdrop } from 'motionary/components/widgets'; defineShaderBackdrop();`
+- CDN: https://unpkg.com/motionary@10/dist/widgets.umd.js
+- Attributes: `preset`, `post`, `colors`, `speed`, `intensity`, `label`
+- Events: `usa:backend`
+
+```html
+<usa-shader-backdrop preset="aurora" post="bloom,vignette,grain">
+  <h1>Hello</h1>
+</usa-shader-backdrop>
+```
+
 ### <usa-sheet> — Drawer / bottom sheet
 
 6.3: a side sheet from the right, left, top or bottom with a blurred backdrop; the bottom sheet can be dragged down to dismiss and springs back otherwise. Native <dialog> underneath.
@@ -3119,6 +3257,17 @@ defineTextSplitter(); // registers <usa-text-splitter> — after the prerequisit
 
 ```html
 <usa-theme-switcher themes="light,dark,neon,glass,neu" persist></usa-theme-switcher>
+```
+
+### <usa-three-scene> — <usa-three-scene>
+
+`<usa-three-scene>` — alias of `<usa-gl-scene>` (same attributes, events and methods; no Three.js involved).
+
+- Import: `import { defineThreeScene } from 'motionary/components/widgets'; defineThreeScene();`
+- CDN: https://unpkg.com/motionary@10/dist/widgets.umd.js
+
+```html
+<usa-three-scene></usa-three-scene>
 ```
 
 ### <usa-tilt> — 3D tilt card

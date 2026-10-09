@@ -1270,6 +1270,28 @@ export const components = [
     '<usa-smooth-scroll lerp="0.1" offset="64"></usa-smooth-scroll>',
     '<usa-smooth-scroll class="demo-smooth" wrapper preview lerp="0.08"><div class="demo-smooth-bar"></div><h4>Smooth scroll</h4><p>Scroll-driven animations run on the compositor where the browser supports them.</p><p>Where it does not, a small passive loop takes over — same look, same API.</p><p>Keyboard, scrollbar and screen-reader scrolling stay native.</p><p>Keep going…</p><p>Almost there.</p><p>Done — 100 %.</p></usa-smooth-scroll>',
     [], { since: '10.4', requires: ['smooth'], id: 'smooth-scroller' }), // id: 'smooth-scroll' is the 5.x smoothScroll() helper card
+  // ---- 10.5 ------------------------------------------------------------
+  W('usa-gl-scene', 'ui', '3D scene (glTF / OBJ)', '3D 场景（glTF / OBJ）',
+    '10.5: a WebGL2 3D viewer on Motionary’s own renderer — glTF 2.0 / GLB and OBJ / MTL models or built-in shapes, PBR-style materials, orbit controls (drag, wheel, pinch, arrow keys), auto-rotate and video textures. Requires motionary/runtime/gl (+ format-gltf for .gltf / .glb, format-obj for .obj) — npm i motionary, then use(gl, formatGltf, formatObj) before it mounts. Alias: <usa-three-scene>.',
+    '10.5：基于 Motionary 自研渲染器的 WebGL2 3D 查看器 —— glTF 2.0 / GLB 与 OBJ / MTL 模型或内置几何体、PBR 风格材质、轨道控制（拖拽、滚轮、双指、方向键）、自动旋转与视频纹理。需要 motionary/runtime/gl（.gltf / .glb 另需 format-gltf，.obj 另需 format-obj）—— npm i motionary，并在挂载前 use(gl, formatGltf, formatObj)。别名：<usa-three-scene>。',
+    ['3d', 'webgl', 'gltf', 'glb', 'obj', 'model viewer', 'runtime'],
+    '<usa-gl-scene src="/models/chair.glb" controls auto-rotate="20" label="Chair"></usa-gl-scene>',
+    '<usa-gl-scene class="demo-gl" shape="torus" color="#818cf8" metallic="0.4" roughness="0.3" controls auto-rotate="35" label="Rotating torus"></usa-gl-scene>',
+    [{ key: 'shape', values: ['torus', 'box', 'sphere'] }], { since: '10.5', requires: ['gl', 'format-gltf', 'format-obj'] }),
+  W('usa-gpu-particles', 'ui', 'GPU particle canvas', 'GPU 粒子画布',
+    '10.5 (WebGPU effects 2.0): tens of thousands of particles simulated by a WebGPU compute shader and drawn as instanced quads — swirl, galaxy or fountain, pointer repulsion, trails; Canvas 2D fallback where WebGPU is missing.',
+    '10.5（WebGPU 特效 2.0）：由 WebGPU 计算着色器模拟、以实例化四边形绘制的数万粒子 —— 漩涡、星系或喷泉，指针排斥、拖尾；不支持 WebGPU 时回退为 Canvas 2D。',
+    ['webgpu', 'compute shader', 'particles', 'gpu', 'canvas'],
+    '<usa-gpu-particles count="30000" mode="galaxy" colors="#818cf8,#f472b6" pointer></usa-gpu-particles>',
+    '<usa-gpu-particles class="demo-gpu" count="20000" mode="swirl" colors="#818cf8,#f472b6" trail="0.6" pointer label="Swirling particles"></usa-gpu-particles>',
+    [{ key: 'mode', values: ['swirl', 'galaxy', 'fountain'] }], { since: '10.5' }),
+  W('usa-shader-backdrop', 'ui', 'Shader backdrop + post chain', '着色器背景 + 后处理链',
+    '10.5 (WebGPU effects 2.0): an animated shader background (aurora, plasma, waves, nebula or your own GLSL) run through a post-processing chain — bloom, vignette, grain, chromatic aberration, pixelate, scanlines — in any order; CSS gradient fallback.',
+    '10.5（WebGPU 特效 2.0）：动态着色器背景（极光、等离子、波浪、星云或自定义 GLSL），再经过后处理链 —— 泛光、暗角、颗粒、色差、像素化、扫描线 —— 顺序任意；无 WebGL2 时回退为 CSS 渐变。',
+    ['shader', 'background', 'post-processing', 'bloom', 'glsl'],
+    '<usa-shader-backdrop preset="aurora" post="bloom,vignette,grain">\n  <h1>Hello</h1>\n</usa-shader-backdrop>',
+    '<usa-shader-backdrop class="demo-sb" preset="aurora" post="bloom,vignette,grain" label="Aurora backdrop"><h4>Post chain</h4><p>bloom → vignette → grain</p></usa-shader-backdrop>',
+    [{ key: 'preset', values: ['aurora', 'plasma', 'waves', 'nebula'] }], { since: '10.5' }),
 ];
 
 /** item id → live-demo wiring. */

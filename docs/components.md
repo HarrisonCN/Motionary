@@ -1467,6 +1467,40 @@ defineSmoothScroll(); // registers <usa-smooth-scroll> — after the prerequisit
 <usa-smooth-scroll lerp="0.1" offset="64"></usa-smooth-scroll>
 ```
 
+### `<usa-gl-scene>` — Requires: motionary/runtime/gl + motionary/runtime/format-gltf + motionary/runtime/format-obj
+
+- **Install:** `npm i motionary`
+- **Import order & registration:** Register the core first, then the module: use(gl) also registers the core. CDN: load runtime.iife.js, then runtime/gl.iife.js (it registers itself). Register the core first, then the module: use(formatGltf) also registers the core. CDN: load runtime.iife.js, then runtime/format-gltf.iife.js (it registers itself). Register the core first, then the module: use(formatObj) also registers the core. CDN: load runtime.iife.js, then runtime/format-obj.iife.js (it registers itself).
+
+```js
+import { use } from 'motionary/runtime';
+import { gl } from 'motionary/runtime/gl';
+import { formatGltf } from 'motionary/runtime/format-gltf';
+import { formatObj } from 'motionary/runtime/format-obj';
+import { defineGlScene } from 'motionary/components/widgets';
+
+use(gl, formatGltf, formatObj);
+defineGlScene(); // registers <usa-gl-scene> — after the prerequisites
+```
+
+- **CDN:**
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gl.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-gltf.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-obj.iife.js"></script>
+<!-- then the component bundles -->
+<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>
+```
+
+- **Minimal example:**
+
+```html
+<usa-gl-scene src="/models/chair.glb" controls auto-rotate="20" label="Chair"></usa-gl-scene>
+```
+
 <!-- prereqs:end -->
 
 ### v10.2 Scroll scenes (`motionary/runtime/scroll`) + SVG loader + `data-motion` in core: `<usa-scroll-scene>`, `<usa-motion-inspector>` (`components/widgets`)
@@ -1519,6 +1553,20 @@ Declarative motion with just the core: `applyMotionAttributes(createMotion())` +
 | `<usa-smooth-scroll>` (Requires: motionary/runtime/smooth) | `wrapper`, `lerp`, `duration`, `ease`, `wheel-multiplier`, `horizontal`, `touch`, `anchors`, `offset`, `preview` | `glideTo(target)`, `stop()`, `resume()`, `instance`; `usa:ready`, `usa:scroll`, `usa:runtime-missing` |
 
 MCP: `npx -y -p motionary motionary-mcp` — see [docs/mcp.md](docs/mcp.md).
+
+### v10.5 3D (`motionary/runtime/gl` + glTF / OBJ loaders) + WebGPU effects 2.0: `<usa-gl-scene>` / `<usa-three-scene>`, `<usa-gpu-particles>`, `<usa-shader-backdrop>` (`components/widgets`)
+
+```html
+<usa-gl-scene src="/models/chair.glb" controls auto-rotate="20" label="Chair"></usa-gl-scene>
+<usa-gpu-particles count="30000" mode="galaxy" pointer></usa-gpu-particles>
+<usa-shader-backdrop preset="aurora" post="bloom,vignette,grain"><h1>Hello</h1></usa-shader-backdrop>
+```
+
+| Element | Attributes | Methods / events |
+|---|---|---|
+| `<usa-gl-scene>` / `<usa-three-scene>` (Requires: motionary/runtime/gl; + format-gltf / format-obj for models) | `src` (.gltf, .glb, .obj), `shape` (torus, box, sphere, plane), `color`, `metallic`, `roughness`, `background`, `exposure`, `controls`, `auto-rotate`, `video`, `video-scrub`, `label` | `scene`, `camera`, `root`, `reload()`; `usa:load`, `usa:error`, `usa:runtime-missing` |
+| `<usa-gpu-particles>` | `count`, `mode` (swirl, galaxy, fountain), `colors`, `size`, `speed`, `trail`, `pointer`, `label` | `backend`; `usa:backend` |
+| `<usa-shader-backdrop>` | `preset` (aurora, plasma, waves, nebula), `post` (bloom, vignette, grain, chromatic, pixelate, scanlines), `colors`, `speed`, `intensity`, `label`; child `<script type="x-shader/x-fragment">` | `passes`; `usa:backend` |
 
 ## Frameworks
 

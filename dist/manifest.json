@@ -3,7 +3,7 @@
   "format": "motionary/components",
   "schemaVersion": 1,
   "package": "motionary",
-  "version": "10.4.0",
+  "version": "10.5.0",
   "homepage": "https://harrisoncn.github.io/Motionary/",
   "llms": "https://harrisoncn.github.io/Motionary/llms.txt",
   "cdn": {
@@ -757,6 +757,226 @@
         ]
       ],
       "example": "import { use } from 'motionary/runtime';\nimport { formatWebp, loadWebp, animatedImagePlayer } from 'motionary/runtime/format-webp';\nuse(formatWebp);\nconst anim = await loadWebp('/hero.webp');\nconst p = animatedImagePlayer(document.querySelector('canvas'), anim, { speed: 0.5 });"
+    },
+    {
+      "kind": "runtime",
+      "id": "gl",
+      "label": "motionary/runtime/gl",
+      "title": "WebGL2 scene renderer",
+      "summary": "A small WebGL2 renderer with its own API: scene graph, camera, lights, box / plane / sphere / torus, PBR-style materials, shader materials, image and video textures, orbit controls — not a Three.js clone.",
+      "install": "npm i motionary",
+      "importPath": "motionary/runtime/gl",
+      "import": "import { use } from 'motionary/runtime';\nimport { gl } from 'motionary/runtime/gl';",
+      "register": "use(gl);",
+      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gl.iife.js\"></script>",
+      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gl.js",
+      "order": "Register the core first, then the module: use(gl) also registers the core. CDN: load runtime.iife.js, then runtime/gl.iife.js (it registers itself).",
+      "docs": "docs/runtime/gl.md",
+      "budget": 9216,
+      "exports": [
+        "gl",
+        "createRenderer",
+        "Scene",
+        "Camera",
+        "GlNode",
+        "box",
+        "plane",
+        "sphere",
+        "torus",
+        "standardMaterial",
+        "unlitMaterial",
+        "shaderMaterial",
+        "texture",
+        "orbitControls",
+        "frameNode",
+        "bounds",
+        "scrubVideo",
+        "mat4",
+        "quatFromEuler",
+        "quatSlerp"
+      ],
+      "compat": [
+        [
+          "scene graph: nodes, TRS / matrix, hierarchy, bounds, frameNode()",
+          "yes",
+          ""
+        ],
+        [
+          "perspective camera, orbit controls (drag / wheel / pinch / arrow keys)",
+          "yes",
+          "auto-rotate off under reduced motion"
+        ],
+        [
+          "ambient + up to 4 directional / point lights",
+          "yes",
+          ""
+        ],
+        [
+          "standard material (metallic-roughness approximation), unlit, shader",
+          "yes",
+          "sRGB in/out, Reinhard tone mapping"
+        ],
+        [
+          "image / canvas / ImageBitmap / raw RGBA textures, mipmaps (power of two)",
+          "yes",
+          ""
+        ],
+        [
+          "video textures (MP4 / WebM), scroll-scrubbed video (scrubVideo)",
+          "yes",
+          "requestVideoFrameCallback; codecs depend on the browser"
+        ],
+        [
+          "shadows, normal / occlusion / metallic-roughness maps, IBL",
+          "no",
+          "planned work beyond 11.0"
+        ],
+        [
+          "WebGL1 / no WebGL2",
+          "no",
+          "createRenderer() throws a clear error"
+        ],
+        [
+          "SSR / workers",
+          "partial",
+          "math / geometry / scene graph are pure; rendering needs WebGL2 (OffscreenCanvas works)"
+        ]
+      ],
+      "example": "import { use } from 'motionary/runtime';\nimport { gl, createRenderer, Scene, Camera, GlNode, torus, standardMaterial } from 'motionary/runtime/gl';\nuse(gl);\nconst r = createRenderer(canvas);\nconst scene = new Scene();\nscene.add(new GlNode('donut', { geometry: torus(), material: standardMaterial({ color: [0.5, 0.55, 1, 1] }) }));\nr.resize(); r.render(scene, new Camera({ position: [0, 0.5, 3] }));"
+    },
+    {
+      "kind": "runtime",
+      "id": "format-gltf",
+      "label": "motionary/runtime/format-gltf",
+      "title": "glTF 2.0 / GLB loader",
+      "summary": "Load glTF 2.0 (.gltf with external or data: buffers, .glb) into motionary/runtime/gl nodes: node hierarchy, meshes, PBR metallic-roughness materials, embedded / external images.",
+      "install": "npm i motionary",
+      "importPath": "motionary/runtime/format-gltf",
+      "import": "import { use } from 'motionary/runtime';\nimport { formatGltf } from 'motionary/runtime/format-gltf';",
+      "register": "use(formatGltf);",
+      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-gltf.iife.js\"></script>",
+      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-gltf.js",
+      "order": "Register the core first, then the module: use(formatGltf) also registers the core. CDN: load runtime.iife.js, then runtime/format-gltf.iife.js (it registers itself).",
+      "docs": "docs/runtime/format-gltf.md",
+      "budget": 6144,
+      "exports": [
+        "formatGltf",
+        "loadGltf",
+        "parseGlb",
+        "gltfToNode",
+        "readAccessor",
+        "SUPPORTED_EXTENSIONS"
+      ],
+      "compat": [
+        [
+          ".gltf (external + data: URI buffers / images) and .glb",
+          "yes",
+          ""
+        ],
+        [
+          "scenes, node hierarchy, TRS and matrix transforms",
+          "yes",
+          ""
+        ],
+        [
+          "POSITION / NORMAL / TEXCOORD_0, indices, all component types, normalised ints, byteStride",
+          "yes",
+          "missing normals computed (flat)"
+        ],
+        [
+          "primitive modes points / lines / triangles / strips / fans",
+          "yes",
+          "strips and fans converted to triangles"
+        ],
+        [
+          "PBR metallic-roughness factors, base colour texture, emissive, alpha blend, double-sided",
+          "yes",
+          "KHR_materials_emissive_strength, KHR_materials_unlit"
+        ],
+        [
+          "skins, morph targets, animations",
+          "no",
+          "arrive in 10.8"
+        ],
+        [
+          "Draco / meshopt / KTX2 (Basis) compression",
+          "no",
+          "files that require them fail with a clear error; decoder hooks planned for 10.9"
+        ],
+        [
+          "sparse accessors, cameras, KHR_lights_punctual, texture transforms",
+          "no",
+          "ignored"
+        ],
+        [
+          "SSR / workers",
+          "partial",
+          "parseGlb / gltfToNode are pure; loadGltf decodes images with createImageBitmap"
+        ]
+      ],
+      "example": "import { use } from 'motionary/runtime';\nimport { gl, createRenderer, Scene, Camera, frameNode } from 'motionary/runtime/gl';\nimport { formatGltf, loadGltf } from 'motionary/runtime/format-gltf';\nuse(gl, formatGltf);\nconst model = await loadGltf('/models/chair.glb');\nconst scene = new Scene().add(model), cam = new Camera();\nframeNode(cam, model);\nconst r = createRenderer(canvas); r.resize(); r.render(scene, cam);"
+    },
+    {
+      "kind": "runtime",
+      "id": "format-obj",
+      "label": "motionary/runtime/format-obj",
+      "title": "OBJ / MTL loader",
+      "summary": "Load Wavefront OBJ (+ MTL materials and diffuse textures) into motionary/runtime/gl nodes: polygons triangulated, groups, per-material meshes.",
+      "install": "npm i motionary",
+      "importPath": "motionary/runtime/format-obj",
+      "import": "import { use } from 'motionary/runtime';\nimport { formatObj } from 'motionary/runtime/format-obj';",
+      "register": "use(formatObj);",
+      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-obj.iife.js\"></script>",
+      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-obj.js",
+      "order": "Register the core first, then the module: use(formatObj) also registers the core. CDN: load runtime.iife.js, then runtime/format-obj.iife.js (it registers itself).",
+      "docs": "docs/runtime/format-obj.md",
+      "budget": 3072,
+      "exports": [
+        "formatObj",
+        "loadObj",
+        "parseObj",
+        "parseMtl",
+        "objToNode",
+        "objMaterial"
+      ],
+      "compat": [
+        [
+          "v / vt / vn, faces with any vertex count (fan-triangulated), negative indices",
+          "yes",
+          ""
+        ],
+        [
+          "o / g groups, usemtl (one mesh per material), mtllib",
+          "yes",
+          ""
+        ],
+        [
+          "MTL Kd, Ks + Ns (→ roughness), Ke, d / Tr, map_Kd (options stripped)",
+          "yes",
+          ""
+        ],
+        [
+          "missing normals",
+          "yes",
+          "computed (flat)"
+        ],
+        [
+          "smoothing groups (s), lines (l), free-form curves / surfaces",
+          "no",
+          "ignored"
+        ],
+        [
+          "bump / normal / specular maps, PBR MTL extensions",
+          "no",
+          "ignored"
+        ],
+        [
+          "SSR / workers",
+          "partial",
+          "parsing is pure; loadObj fetches files and decodes textures with createImageBitmap"
+        ]
+      ],
+      "example": "import { use } from 'motionary/runtime';\nimport { gl, Scene } from 'motionary/runtime/gl';\nimport { formatObj, loadObj } from 'motionary/runtime/format-obj';\nuse(gl, formatObj);\nconst cube = await loadObj('/models/cube.obj'); // + cube.mtl + textures next to it\nnew Scene().add(cube);"
     }
   ],
   "components": [
@@ -3423,6 +3643,78 @@
       "source": "src/components/widgets/gesture-sticker.ts"
     },
     {
+      "id": "gl-scene",
+      "tag": "usa-gl-scene",
+      "title": "3D scene (glTF / OBJ)",
+      "description": "10.5: a WebGL2 3D viewer on Motionary’s own renderer — glTF 2.0 / GLB and OBJ / MTL models or built-in shapes, PBR-style materials, orbit controls (drag, wheel, pinch, arrow keys), auto-rotate and video textures. Requires motionary/runtime/gl (+ format-gltf for .gltf / .glb, format-obj for .obj) — npm i motionary, then use(gl, formatGltf, formatObj) before it mounts. Alias: <usa-three-scene>.",
+      "category": "ui",
+      "since": "10.5",
+      "keywords": [
+        "3d",
+        "webgl",
+        "gltf",
+        "glb",
+        "obj",
+        "model viewer",
+        "runtime"
+      ],
+      "import": {
+        "path": "motionary/components/widgets",
+        "define": "defineGlScene",
+        "register": "defineGlScene();"
+      },
+      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "attributes": [
+        "src",
+        "shape",
+        "color",
+        "metallic",
+        "roughness",
+        "background",
+        "exposure",
+        "controls",
+        "auto-rotate",
+        "video",
+        "video-scrub",
+        "label"
+      ],
+      "events": [
+        "usa:error",
+        "usa:load",
+        "usa:runtime-missing"
+      ],
+      "slots": [],
+      "methods": [
+        "reload"
+      ],
+      "example": "<usa-gl-scene src=\"/models/chair.glb\" controls auto-rotate=\"20\" label=\"Chair\"></usa-gl-scene>",
+      "esm": "import { use } from 'motionary/runtime';\nimport { gl } from 'motionary/runtime/gl';\nimport { formatGltf } from 'motionary/runtime/format-gltf';\nimport { formatObj } from 'motionary/runtime/format-obj';\n\nuse(gl, formatGltf, formatObj);\nimport { defineGlScene } from 'motionary/components/widgets';\n\ndefineGlScene(); // registers <usa-gl-scene>\n\n/* then use it in your HTML:\n<usa-gl-scene src=\"/models/chair.glb\" controls auto-rotate=\"20\" label=\"Chair\"></usa-gl-scene>\n*/",
+      "requires": [
+        "gl",
+        "format-gltf",
+        "format-obj"
+      ],
+      "prerequisites": {
+        "badge": "Requires: motionary/runtime/gl + motionary/runtime/format-gltf + motionary/runtime/format-obj",
+        "modules": [
+          "motionary/runtime/gl",
+          "motionary/runtime/format-gltf",
+          "motionary/runtime/format-obj"
+        ],
+        "install": "npm i motionary",
+        "importAndRegister": "import { use } from 'motionary/runtime';\nimport { gl } from 'motionary/runtime/gl';\nimport { formatGltf } from 'motionary/runtime/format-gltf';\nimport { formatObj } from 'motionary/runtime/format-obj';\nimport { defineGlScene } from 'motionary/components/widgets';\n\nuse(gl, formatGltf, formatObj);\ndefineGlScene(); // registers <usa-gl-scene> — after the prerequisites",
+        "order": "Register the core first, then the module: use(gl) also registers the core. CDN: load runtime.iife.js, then runtime/gl.iife.js (it registers itself). Register the core first, then the module: use(formatGltf) also registers the core. CDN: load runtime.iife.js, then runtime/format-gltf.iife.js (it registers itself). Register the core first, then the module: use(formatObj) also registers the core. CDN: load runtime.iife.js, then runtime/format-obj.iife.js (it registers itself).",
+        "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gl.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-gltf.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-obj.iife.js\"></script>\n<!-- then the component bundles -->\n<script src=\"https://unpkg.com/motionary@10/dist/components.umd.js\"></script>\n<script src=\"https://unpkg.com/motionary@10/dist/widgets.umd.js\"></script>",
+        "example": "<usa-gl-scene src=\"/models/chair.glb\" controls auto-rotate=\"20\" label=\"Chair\"></usa-gl-scene>",
+        "docs": [
+          "https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/gl.md",
+          "https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/format-gltf.md",
+          "https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/format-obj.md"
+        ]
+      },
+      "source": "src/components/widgets/gl-scene.ts"
+    },
+    {
       "id": "glitch",
       "tag": "usa-glitch",
       "title": "Glitch text",
@@ -3491,6 +3783,47 @@
       "requires": [],
       "prerequisites": null,
       "source": "src/components/widgets/globe.ts"
+    },
+    {
+      "id": "gpu-particles",
+      "tag": "usa-gpu-particles",
+      "title": "GPU particle canvas",
+      "description": "10.5 (WebGPU effects 2.0): tens of thousands of particles simulated by a WebGPU compute shader and drawn as instanced quads — swirl, galaxy or fountain, pointer repulsion, trails; Canvas 2D fallback where WebGPU is missing.",
+      "category": "ui",
+      "since": "10.5",
+      "keywords": [
+        "webgpu",
+        "compute shader",
+        "particles",
+        "gpu",
+        "canvas"
+      ],
+      "import": {
+        "path": "motionary/components/widgets",
+        "define": "defineGpuParticles",
+        "register": "defineGpuParticles();"
+      },
+      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "attributes": [
+        "count",
+        "mode",
+        "colors",
+        "size",
+        "speed",
+        "trail",
+        "pointer",
+        "label"
+      ],
+      "events": [
+        "usa:backend"
+      ],
+      "slots": [],
+      "methods": [],
+      "example": "<usa-gpu-particles count=\"30000\" mode=\"galaxy\" colors=\"#818cf8,#f472b6\" pointer></usa-gpu-particles>",
+      "esm": "import { defineGpuParticles } from 'motionary/components/widgets';\n\ndefineGpuParticles(); // registers <usa-gpu-particles>\n\n/* then use it in your HTML:\n<usa-gpu-particles count=\"30000\" mode=\"galaxy\" colors=\"#818cf8,#f472b6\" pointer></usa-gpu-particles>\n*/",
+      "requires": [],
+      "prerequisites": null,
+      "source": "src/components/widgets/gpu-particles.ts"
     },
     {
       "id": "gradient-text",
@@ -6657,6 +6990,45 @@
       ]
     },
     {
+      "id": "shader-backdrop",
+      "tag": "usa-shader-backdrop",
+      "title": "Shader backdrop + post chain",
+      "description": "10.5 (WebGPU effects 2.0): an animated shader background (aurora, plasma, waves, nebula or your own GLSL) run through a post-processing chain — bloom, vignette, grain, chromatic aberration, pixelate, scanlines — in any order; CSS gradient fallback.",
+      "category": "ui",
+      "since": "10.5",
+      "keywords": [
+        "shader",
+        "background",
+        "post-processing",
+        "bloom",
+        "glsl"
+      ],
+      "import": {
+        "path": "motionary/components/widgets",
+        "define": "defineShaderBackdrop",
+        "register": "defineShaderBackdrop();"
+      },
+      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "attributes": [
+        "preset",
+        "post",
+        "colors",
+        "speed",
+        "intensity",
+        "label"
+      ],
+      "events": [
+        "usa:backend"
+      ],
+      "slots": [],
+      "methods": [],
+      "example": "<usa-shader-backdrop preset=\"aurora\" post=\"bloom,vignette,grain\">\n  <h1>Hello</h1>\n</usa-shader-backdrop>",
+      "esm": "import { defineShaderBackdrop } from 'motionary/components/widgets';\n\ndefineShaderBackdrop(); // registers <usa-shader-backdrop>\n\n/* then use it in your HTML:\n<usa-shader-backdrop preset=\"aurora\" post=\"bloom,vignette,grain\">\n  <h1>Hello</h1>\n</usa-shader-backdrop>\n*/",
+      "requires": [],
+      "prerequisites": null,
+      "source": "src/components/widgets/shader-backdrop.ts"
+    },
+    {
       "id": "sheet",
       "tag": "usa-sheet",
       "title": "Drawer / bottom sheet",
@@ -7891,6 +8263,27 @@
       "requires": [],
       "prerequisites": null,
       "source": "src/components/widgets/theme-switcher.ts"
+    },
+    {
+      "id": "three-scene",
+      "tag": "usa-three-scene",
+      "title": "<usa-three-scene>",
+      "description": "`<usa-three-scene>` — alias of `<usa-gl-scene>` (same attributes, events and methods; no Three.js involved).",
+      "category": "widgets",
+      "import": {
+        "path": "motionary/components/widgets",
+        "define": "defineThreeScene",
+        "register": "defineThreeScene();"
+      },
+      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "attributes": [],
+      "events": [],
+      "slots": [],
+      "methods": [],
+      "example": "<usa-three-scene></usa-three-scene>",
+      "requires": [],
+      "prerequisites": null,
+      "source": "src/components/widgets/gl-scene.ts"
     },
     {
       "id": "tilt",

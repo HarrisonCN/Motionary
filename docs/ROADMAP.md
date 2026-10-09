@@ -61,7 +61,7 @@ Store 卡片显示 **「Requires: motionary/runtime/<module>」** 徽章（官�
   - 主线 B：**smooth 模块** —— 平滑滚动（减少动态效果时停用）。
   - 格式：GIF（自研 LZW）、APNG、动画 WebP 拆帧到 canvas。
   - 新组件：滚动进度环、视差分层容器、`<usa-smooth-scroll>`。
-- **v10.5** — WebGPU 特效 2.0：计算着色器粒子、后处理链。
+- ✅ **v10.5** — WebGPU 特效 2.0：计算着色器粒子、后处理链。
   - 主线 B：**gl 模块** —— 迷你 WebGL2 场景（网格 / 基础几何体、相机、灯光、着色器材质；不是 Three.js 克隆）。
   - 格式：OBJ / MTL、glTF 2.0 / GLB 基础、视频纹理。
   - 新组件：粒子画布、着色器背景、`<usa-gl-scene>`（保留别名 `<usa-three-scene>`）。

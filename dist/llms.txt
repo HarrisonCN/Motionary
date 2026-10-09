@@ -1,6 +1,6 @@
-# Motionary 10.4.0
+# Motionary 10.5.0
 
-> Motionary is a zero-dependency motion library: scroll animations, 200+ presets and 198 animated Web Components (<usa-*>) that work in plain HTML and every framework, plus motionary/runtime — its own tween/timeline engine and format loaders.
+> Motionary is a zero-dependency motion library: scroll animations, 200+ presets and 202 animated Web Components (<usa-*>) that work in plain HTML and every framework, plus motionary/runtime — its own tween/timeline engine and format loaders.
 
 Install: `npm i motionary` · CDN: https://unpkg.com/motionary@10/dist/components.umd.js (+ https://unpkg.com/motionary@10/dist/widgets.umd.js for 6.x+ widgets) · Manifest: https://harrisoncn.github.io/Motionary/components.json · Full text: https://harrisoncn.github.io/Motionary/llms-full.txt
 
@@ -19,6 +19,9 @@ Rules for using a component: (1) import its define function from `import.path` a
 - [motionary/runtime/format-gif](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/format-gif.md): Decode animated GIFs (own LZW decoder, no DOM) into composited RGBA frames and play / scrub / reverse them on a canvas as a runtime timeline.
 - [motionary/runtime/format-apng](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/format-apng.md): Split animated PNGs into standalone frame PNGs (decoded by the browser), composite them (dispose / blend) and play them on a canvas as a runtime timeline.
 - [motionary/runtime/format-webp](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/format-webp.md): Split animated WebP files (ANIM / ANMF) into standalone frames (decoded by the browser), composite them (blend / dispose) and play them on a canvas as a runtime timeline.
+- [motionary/runtime/gl](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/gl.md): A small WebGL2 renderer with its own API: scene graph, camera, lights, box / plane / sphere / torus, PBR-style materials, shader materials, image and video textures, orbit controls — not a Three.js clone.
+- [motionary/runtime/format-gltf](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/format-gltf.md): Load glTF 2.0 (.gltf with external or data: buffers, .glb) into motionary/runtime/gl nodes: node hierarchy, meshes, PBR metallic-roughness materials, embedded / external images.
+- [motionary/runtime/format-obj](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/format-obj.md): Load Wavefront OBJ (+ MTL materials and diffuse textures) into motionary/runtime/gl nodes: polygons triangulated, groups, per-material meshes.
 
 ## Components
 
@@ -82,8 +85,10 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<usa-gen-art>` (motionary/components/widgets): 9.3: seeded generative art on a canvas — flow fields, circle packing, Truchet tiles or layered waves in curated palettes; it draws itself in on screen and a tap
 - `<usa-gesture-fx>` (motionary/components/effects): 5.7: <usa-gesture-fx> plays any registered effect on a fling (fast release), a two-finger twist or a long press that charges --usa-charge 0 → 1. JS: bindGesture
 - `<usa-gesture-sticker>` (motionary/components/widgets): 8.7: a multi-touch sticker — drag with one finger, pinch with two to scale and twist to rotate, all at once, with a lifted shadow while held (wheel / Shift + wh
+- `<usa-gl-scene>` (motionary/components/widgets; requires motionary/runtime/gl + motionary/runtime/format-gltf + motionary/runtime/format-obj): 10.5: a WebGL2 3D viewer on Motionary’s own renderer — glTF 2.0 / GLB and OBJ / MTL models or built-in shapes, PBR-style materials, orbit controls (drag, wheel,
 - `<usa-glitch>` (motionary/components/text): An RGB-split, sliced glitch — always on or on hover.
 - `<usa-globe>` (motionary/components/widgets): 7.6: an SVG globe in orthographic projection — graticule, pulsing markers, spins while on screen, drag to turn it, flyTo(name) brings a city round to the front.
+- `<usa-gpu-particles>` (motionary/components/widgets): 10.5 (WebGPU effects 2.0): tens of thousands of particles simulated by a WebGPU compute shader and drawn as instanced quads — swirl, galaxy or fountain, pointer
 - `<usa-gradient-text>` (motionary/components/text): Text filled with a multi-colour gradient that keeps flowing.
 - `<usa-grain>` (motionary/components/background): An SVG-noise grain overlay — no image to ship. animated makes it jitter like film.
 - `<usa-grid-glow>` (motionary/components/background): A line grid behind the content that lights up around the pointer.
@@ -171,6 +176,7 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<usa-scrolly>` (motionary/components/reveal): A pinned graphic while [data-step] blocks scroll past; the active step drives the graphic via attributes, a CSS variable and events.
 - `<usa-segmented>` (motionary/components/widgets): 6.7: an iOS-style thumb slides under the chosen segment with a spring and stretches while it travels. A real radio group: arrow keys, Home / End. iOS, pill or o
 - `<usa-shader>` (motionary/components/webgl): A GPU shader behind your content: gradient, plasma, waves or aurora presets — or your own fragment shader in a <script type="x-shader/x-fragment">. Falls back t
+- `<usa-shader-backdrop>` (motionary/components/widgets): 10.5 (WebGPU effects 2.0): an animated shader background (aurora, plasma, waves, nebula or your own GLSL) run through a post-processing chain — bloom, vignette,
 - `<usa-sheet>` (motionary/components/widgets): 6.3: a side sheet from the right, left, top or bottom with a blurred backdrop; the bottom sheet can be dragged down to dismiss and springs back otherwise. Nativ
 - `<usa-shimmer-text>` (motionary/components/text): A light sweep across gradient-filled text. CSS only; colours and speed via attributes or custom properties.
 - `<usa-shortcut>` (motionary/components/widgets): 7.9: keyboard-shortcut hints as keycaps (⌘ on Apple, Ctrl elsewhere); press the combination anywhere and the caps press down one after another and usa:trigger f
@@ -204,6 +210,7 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<usa-text-splitter>` (motionary/components/widgets; requires motionary/runtime/text): 10.3: splits its text into characters, words or lines and animates them in with a stagger (rise, fade, blur, flip, wave) when it scrolls into view — accessible,
 - `<usa-theme-surface>` (motionary/components/widgets): 8.6: a themeable card that follows the nearest theme — light, dark, neon (pulsing glow edge), glass (frosted backdrop with a sheen) or soft neumorphic relief — 
 - `<usa-theme-switcher>` (motionary/components/widgets): 8.6: a segmented switcher for the 8.6 theme system — light, dark, neon, glass and soft (neumorphism); a pill slides under the active option and the page change 
+- `<usa-three-scene>` (motionary/components/widgets): `<usa-three-scene>` — alias of `<usa-gl-scene>` (same attributes, events and methods; no Three.js involved).
 - `<usa-tilt>` (motionary/components/interaction): Tilts toward the pointer in 3D with an optional glare; exposes --usa-tilt-x/y for parallax layers inside.
 - `<usa-timeline>` (motionary/components/timeline): Every data-tl child becomes a step in document order. data-at ('-=200', '<', 'label+=100') overlaps or aligns steps; scrub ties progress to scroll; trigger view
 - `<usa-tip>` (motionary/components/widgets): 6.6: springs out of its trigger with an arrow, flips to stay inside the viewport and shifts along the edge; hover + keyboard focus (Esc closes) or click popover

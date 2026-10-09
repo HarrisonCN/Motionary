@@ -1,0 +1,11 @@
+# Motionary test materials (MIT)
+newmtl Checker
+Kd 1 1 1
+Ks 0.5 0.5 0.5
+Ns 250
+map_Kd -s 1 1 1 sample-checker.png
+newmtl Coral
+Kd 0.98 0.45 0.35
+Ks 0 0 0
+Ns 10
+d 0.9
