@@ -1,6 +1,6 @@
 {
   "name": "motionary",
-  "version": "10.8.0",
+  "version": "10.9.0",
   "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 94 animated Web Components — 214 scroll-reveal presets, card/click/button morphs, physics, page transitions, generative & sound-reactive backgrounds, cursor/gesture effects, themes, micro-interactions, <usa-player>, WebGL. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -1218,6 +1218,26 @@
         "default": "./dist/components/snap-carousel.cjs"
       }
     },
+    "./components/gl-model": {
+      "import": {
+        "types": "./dist/components/gl-model.d.ts",
+        "default": "./dist/components/gl-model.js"
+      },
+      "require": {
+        "types": "./dist/components/gl-model.d.cts",
+        "default": "./dist/components/gl-model.cjs"
+      }
+    },
+    "./components/dotlottie": {
+      "import": {
+        "types": "./dist/components/dotlottie.d.ts",
+        "default": "./dist/components/dotlottie.js"
+      },
+      "require": {
+        "types": "./dist/components/dotlottie.d.cts",
+        "default": "./dist/components/dotlottie.cjs"
+      }
+    },
     "./components/lite": {
       "import": {
         "types": "./dist/components/lite.d.ts",
@@ -1418,6 +1438,2626 @@
         "default": "./dist/runtime/gltf-anim.cjs"
       }
     },
+    "./runtime/lottie-state": {
+      "import": {
+        "types": "./dist/runtime/lottie-state.d.ts",
+        "default": "./dist/runtime/lottie-state.js"
+      },
+      "require": {
+        "types": "./dist/runtime/lottie-state.d.cts",
+        "default": "./dist/runtime/lottie-state.cjs"
+      }
+    },
+    "./runtime/gltf-decoders": {
+      "import": {
+        "types": "./dist/runtime/gltf-decoders.d.ts",
+        "default": "./dist/runtime/gltf-decoders.js"
+      },
+      "require": {
+        "types": "./dist/runtime/gltf-decoders.d.cts",
+        "default": "./dist/runtime/gltf-decoders.cjs"
+      }
+    },
+    "./widgets/carousel": {
+      "import": {
+        "types": "./dist/widgets/carousel.d.ts",
+        "default": "./dist/widgets/carousel.js"
+      },
+      "require": {
+        "types": "./dist/widgets/carousel.d.cts",
+        "default": "./dist/widgets/carousel.cjs"
+      }
+    },
+    "./widgets/tab-bar": {
+      "import": {
+        "types": "./dist/widgets/tab-bar.d.ts",
+        "default": "./dist/widgets/tab-bar.js"
+      },
+      "require": {
+        "types": "./dist/widgets/tab-bar.d.cts",
+        "default": "./dist/widgets/tab-bar.cjs"
+      }
+    },
+    "./widgets/disclosure": {
+      "import": {
+        "types": "./dist/widgets/disclosure.d.ts",
+        "default": "./dist/widgets/disclosure.js"
+      },
+      "require": {
+        "types": "./dist/widgets/disclosure.d.cts",
+        "default": "./dist/widgets/disclosure.cjs"
+      }
+    },
+    "./widgets/stories": {
+      "import": {
+        "types": "./dist/widgets/stories.d.ts",
+        "default": "./dist/widgets/stories.js"
+      },
+      "require": {
+        "types": "./dist/widgets/stories.d.cts",
+        "default": "./dist/widgets/stories.cjs"
+      }
+    },
+    "./widgets/toast-stack": {
+      "import": {
+        "types": "./dist/widgets/toast-stack.d.ts",
+        "default": "./dist/widgets/toast-stack.js"
+      },
+      "require": {
+        "types": "./dist/widgets/toast-stack.d.cts",
+        "default": "./dist/widgets/toast-stack.cjs"
+      }
+    },
+    "./widgets/modal": {
+      "import": {
+        "types": "./dist/widgets/modal.d.ts",
+        "default": "./dist/widgets/modal.js"
+      },
+      "require": {
+        "types": "./dist/widgets/modal.d.cts",
+        "default": "./dist/widgets/modal.cjs"
+      }
+    },
+    "./widgets/sheet": {
+      "import": {
+        "types": "./dist/widgets/sheet.d.ts",
+        "default": "./dist/widgets/sheet.js"
+      },
+      "require": {
+        "types": "./dist/widgets/sheet.d.cts",
+        "default": "./dist/widgets/sheet.cjs"
+      }
+    },
+    "./widgets/menu": {
+      "import": {
+        "types": "./dist/widgets/menu.d.ts",
+        "default": "./dist/widgets/menu.js"
+      },
+      "require": {
+        "types": "./dist/widgets/menu.d.cts",
+        "default": "./dist/widgets/menu.cjs"
+      }
+    },
+    "./widgets/progress-ring": {
+      "import": {
+        "types": "./dist/widgets/progress-ring.d.ts",
+        "default": "./dist/widgets/progress-ring.js"
+      },
+      "require": {
+        "types": "./dist/widgets/progress-ring.d.cts",
+        "default": "./dist/widgets/progress-ring.cjs"
+      }
+    },
+    "./widgets/odometer": {
+      "import": {
+        "types": "./dist/widgets/odometer.d.ts",
+        "default": "./dist/widgets/odometer.js"
+      },
+      "require": {
+        "types": "./dist/widgets/odometer.d.cts",
+        "default": "./dist/widgets/odometer.cjs"
+      }
+    },
+    "./widgets/skeleton-reveal": {
+      "import": {
+        "types": "./dist/widgets/skeleton-reveal.d.ts",
+        "default": "./dist/widgets/skeleton-reveal.js"
+      },
+      "require": {
+        "types": "./dist/widgets/skeleton-reveal.d.cts",
+        "default": "./dist/widgets/skeleton-reveal.cjs"
+      }
+    },
+    "./widgets/star-rating": {
+      "import": {
+        "types": "./dist/widgets/star-rating.d.ts",
+        "default": "./dist/widgets/star-rating.js"
+      },
+      "require": {
+        "types": "./dist/widgets/star-rating.d.cts",
+        "default": "./dist/widgets/star-rating.cjs"
+      }
+    },
+    "./widgets/milestones": {
+      "import": {
+        "types": "./dist/widgets/milestones.d.ts",
+        "default": "./dist/widgets/milestones.js"
+      },
+      "require": {
+        "types": "./dist/widgets/milestones.d.cts",
+        "default": "./dist/widgets/milestones.cjs"
+      }
+    },
+    "./widgets/masonry-flow": {
+      "import": {
+        "types": "./dist/widgets/masonry-flow.d.ts",
+        "default": "./dist/widgets/masonry-flow.js"
+      },
+      "require": {
+        "types": "./dist/widgets/masonry-flow.d.cts",
+        "default": "./dist/widgets/masonry-flow.cjs"
+      }
+    },
+    "./widgets/compare": {
+      "import": {
+        "types": "./dist/widgets/compare.d.ts",
+        "default": "./dist/widgets/compare.js"
+      },
+      "require": {
+        "types": "./dist/widgets/compare.d.cts",
+        "default": "./dist/widgets/compare.cjs"
+      }
+    },
+    "./widgets/cube-gallery": {
+      "import": {
+        "types": "./dist/widgets/cube-gallery.d.ts",
+        "default": "./dist/widgets/cube-gallery.js"
+      },
+      "require": {
+        "types": "./dist/widgets/cube-gallery.d.cts",
+        "default": "./dist/widgets/cube-gallery.cjs"
+      }
+    },
+    "./widgets/dock": {
+      "import": {
+        "types": "./dist/widgets/dock.d.ts",
+        "default": "./dist/widgets/dock.js"
+      },
+      "require": {
+        "types": "./dist/widgets/dock.d.cts",
+        "default": "./dist/widgets/dock.cjs"
+      }
+    },
+    "./widgets/nav-morph": {
+      "import": {
+        "types": "./dist/widgets/nav-morph.d.ts",
+        "default": "./dist/widgets/nav-morph.js"
+      },
+      "require": {
+        "types": "./dist/widgets/nav-morph.d.cts",
+        "default": "./dist/widgets/nav-morph.cjs"
+      }
+    },
+    "./widgets/menu-toggle": {
+      "import": {
+        "types": "./dist/widgets/menu-toggle.d.ts",
+        "default": "./dist/widgets/menu-toggle.js"
+      },
+      "require": {
+        "types": "./dist/widgets/menu-toggle.d.cts",
+        "default": "./dist/widgets/menu-toggle.cjs"
+      }
+    },
+    "./widgets/tip": {
+      "import": {
+        "types": "./dist/widgets/tip.d.ts",
+        "default": "./dist/widgets/tip.js"
+      },
+      "require": {
+        "types": "./dist/widgets/tip.d.cts",
+        "default": "./dist/widgets/tip.cjs"
+      }
+    },
+    "./widgets/stepper": {
+      "import": {
+        "types": "./dist/widgets/stepper.d.ts",
+        "default": "./dist/widgets/stepper.js"
+      },
+      "require": {
+        "types": "./dist/widgets/stepper.d.cts",
+        "default": "./dist/widgets/stepper.cjs"
+      }
+    },
+    "./widgets/pagination": {
+      "import": {
+        "types": "./dist/widgets/pagination.d.ts",
+        "default": "./dist/widgets/pagination.js"
+      },
+      "require": {
+        "types": "./dist/widgets/pagination.d.cts",
+        "default": "./dist/widgets/pagination.cjs"
+      }
+    },
+    "./widgets/segmented": {
+      "import": {
+        "types": "./dist/widgets/segmented.d.ts",
+        "default": "./dist/widgets/segmented.js"
+      },
+      "require": {
+        "types": "./dist/widgets/segmented.d.cts",
+        "default": "./dist/widgets/segmented.cjs"
+      }
+    },
+    "./widgets/switch": {
+      "import": {
+        "types": "./dist/widgets/switch.d.ts",
+        "default": "./dist/widgets/switch.js"
+      },
+      "require": {
+        "types": "./dist/widgets/switch.d.cts",
+        "default": "./dist/widgets/switch.cjs"
+      }
+    },
+    "./widgets/kanban": {
+      "import": {
+        "types": "./dist/widgets/kanban.d.ts",
+        "default": "./dist/widgets/kanban.js"
+      },
+      "require": {
+        "types": "./dist/widgets/kanban.d.cts",
+        "default": "./dist/widgets/kanban.cjs"
+      }
+    },
+    "./widgets/swipe-deck": {
+      "import": {
+        "types": "./dist/widgets/swipe-deck.d.ts",
+        "default": "./dist/widgets/swipe-deck.js"
+      },
+      "require": {
+        "types": "./dist/widgets/swipe-deck.d.cts",
+        "default": "./dist/widgets/swipe-deck.cjs"
+      }
+    },
+    "./widgets/weather-card": {
+      "import": {
+        "types": "./dist/widgets/weather-card.d.ts",
+        "default": "./dist/widgets/weather-card.js"
+      },
+      "require": {
+        "types": "./dist/widgets/weather-card.d.cts",
+        "default": "./dist/widgets/weather-card.cjs"
+      }
+    },
+    "./widgets/pull-cord": {
+      "import": {
+        "types": "./dist/widgets/pull-cord.d.ts",
+        "default": "./dist/widgets/pull-cord.js"
+      },
+      "require": {
+        "types": "./dist/widgets/pull-cord.d.cts",
+        "default": "./dist/widgets/pull-cord.cjs"
+      }
+    },
+    "./widgets/date-picker": {
+      "import": {
+        "types": "./dist/widgets/date-picker.d.ts",
+        "default": "./dist/widgets/date-picker.js"
+      },
+      "require": {
+        "types": "./dist/widgets/date-picker.d.cts",
+        "default": "./dist/widgets/date-picker.cjs"
+      }
+    },
+    "./widgets/color-picker": {
+      "import": {
+        "types": "./dist/widgets/color-picker.d.ts",
+        "default": "./dist/widgets/color-picker.js"
+      },
+      "require": {
+        "types": "./dist/widgets/color-picker.d.cts",
+        "default": "./dist/widgets/color-picker.cjs"
+      }
+    },
+    "./widgets/file-drop": {
+      "import": {
+        "types": "./dist/widgets/file-drop.d.ts",
+        "default": "./dist/widgets/file-drop.js"
+      },
+      "require": {
+        "types": "./dist/widgets/file-drop.d.cts",
+        "default": "./dist/widgets/file-drop.cjs"
+      }
+    },
+    "./widgets/keyframe-editor": {
+      "import": {
+        "types": "./dist/widgets/keyframe-editor.d.ts",
+        "default": "./dist/widgets/keyframe-editor.js"
+      },
+      "require": {
+        "types": "./dist/widgets/keyframe-editor.d.cts",
+        "default": "./dist/widgets/keyframe-editor.cjs"
+      }
+    },
+    "./widgets/music-player": {
+      "import": {
+        "types": "./dist/widgets/music-player.d.ts",
+        "default": "./dist/widgets/music-player.js"
+      },
+      "require": {
+        "types": "./dist/widgets/music-player.d.cts",
+        "default": "./dist/widgets/music-player.cjs"
+      }
+    },
+    "./widgets/volume-knob": {
+      "import": {
+        "types": "./dist/widgets/volume-knob.d.ts",
+        "default": "./dist/widgets/volume-knob.js"
+      },
+      "require": {
+        "types": "./dist/widgets/volume-knob.d.cts",
+        "default": "./dist/widgets/volume-knob.cjs"
+      }
+    },
+    "./widgets/equalizer": {
+      "import": {
+        "types": "./dist/widgets/equalizer.d.ts",
+        "default": "./dist/widgets/equalizer.js"
+      },
+      "require": {
+        "types": "./dist/widgets/equalizer.d.cts",
+        "default": "./dist/widgets/equalizer.cjs"
+      }
+    },
+    "./widgets/lyrics": {
+      "import": {
+        "types": "./dist/widgets/lyrics.d.ts",
+        "default": "./dist/widgets/lyrics.js"
+      },
+      "require": {
+        "types": "./dist/widgets/lyrics.d.cts",
+        "default": "./dist/widgets/lyrics.cjs"
+      }
+    },
+    "./widgets/bar-chart": {
+      "import": {
+        "types": "./dist/widgets/bar-chart.d.ts",
+        "default": "./dist/widgets/bar-chart.js"
+      },
+      "require": {
+        "types": "./dist/widgets/bar-chart.d.cts",
+        "default": "./dist/widgets/bar-chart.cjs"
+      }
+    },
+    "./widgets/gauge": {
+      "import": {
+        "types": "./dist/widgets/gauge.d.ts",
+        "default": "./dist/widgets/gauge.js"
+      },
+      "require": {
+        "types": "./dist/widgets/gauge.d.cts",
+        "default": "./dist/widgets/gauge.cjs"
+      }
+    },
+    "./widgets/sparkline": {
+      "import": {
+        "types": "./dist/widgets/sparkline.d.ts",
+        "default": "./dist/widgets/sparkline.js"
+      },
+      "require": {
+        "types": "./dist/widgets/sparkline.d.cts",
+        "default": "./dist/widgets/sparkline.cjs"
+      }
+    },
+    "./widgets/kpi": {
+      "import": {
+        "types": "./dist/widgets/kpi.d.ts",
+        "default": "./dist/widgets/kpi.js"
+      },
+      "require": {
+        "types": "./dist/widgets/kpi.d.cts",
+        "default": "./dist/widgets/kpi.cjs"
+      }
+    },
+    "./widgets/add-to-cart": {
+      "import": {
+        "types": "./dist/widgets/add-to-cart.d.ts",
+        "default": "./dist/widgets/add-to-cart.js"
+      },
+      "require": {
+        "types": "./dist/widgets/add-to-cart.d.cts",
+        "default": "./dist/widgets/add-to-cart.cjs"
+      }
+    },
+    "./widgets/cart-drawer": {
+      "import": {
+        "types": "./dist/widgets/cart-drawer.d.ts",
+        "default": "./dist/widgets/cart-drawer.js"
+      },
+      "require": {
+        "types": "./dist/widgets/cart-drawer.d.cts",
+        "default": "./dist/widgets/cart-drawer.cjs"
+      }
+    },
+    "./widgets/product-gallery": {
+      "import": {
+        "types": "./dist/widgets/product-gallery.d.ts",
+        "default": "./dist/widgets/product-gallery.js"
+      },
+      "require": {
+        "types": "./dist/widgets/product-gallery.d.cts",
+        "default": "./dist/widgets/product-gallery.cjs"
+      }
+    },
+    "./widgets/countdown": {
+      "import": {
+        "types": "./dist/widgets/countdown.d.ts",
+        "default": "./dist/widgets/countdown.js"
+      },
+      "require": {
+        "types": "./dist/widgets/countdown.d.cts",
+        "default": "./dist/widgets/countdown.cjs"
+      }
+    },
+    "./widgets/message-list": {
+      "import": {
+        "types": "./dist/widgets/message-list.d.ts",
+        "default": "./dist/widgets/message-list.js"
+      },
+      "require": {
+        "types": "./dist/widgets/message-list.d.cts",
+        "default": "./dist/widgets/message-list.cjs"
+      }
+    },
+    "./widgets/reactions": {
+      "import": {
+        "types": "./dist/widgets/reactions.d.ts",
+        "default": "./dist/widgets/reactions.js"
+      },
+      "require": {
+        "types": "./dist/widgets/reactions.d.cts",
+        "default": "./dist/widgets/reactions.cjs"
+      }
+    },
+    "./widgets/notification-bell": {
+      "import": {
+        "types": "./dist/widgets/notification-bell.d.ts",
+        "default": "./dist/widgets/notification-bell.js"
+      },
+      "require": {
+        "types": "./dist/widgets/notification-bell.d.cts",
+        "default": "./dist/widgets/notification-bell.cjs"
+      }
+    },
+    "./widgets/presence": {
+      "import": {
+        "types": "./dist/widgets/presence.d.ts",
+        "default": "./dist/widgets/presence.js"
+      },
+      "require": {
+        "types": "./dist/widgets/presence.d.cts",
+        "default": "./dist/widgets/presence.cjs"
+      }
+    },
+    "./widgets/leaderboard": {
+      "import": {
+        "types": "./dist/widgets/leaderboard.d.ts",
+        "default": "./dist/widgets/leaderboard.js"
+      },
+      "require": {
+        "types": "./dist/widgets/leaderboard.d.cts",
+        "default": "./dist/widgets/leaderboard.cjs"
+      }
+    },
+    "./widgets/xp-bar": {
+      "import": {
+        "types": "./dist/widgets/xp-bar.d.ts",
+        "default": "./dist/widgets/xp-bar.js"
+      },
+      "require": {
+        "types": "./dist/widgets/xp-bar.d.cts",
+        "default": "./dist/widgets/xp-bar.cjs"
+      }
+    },
+    "./widgets/badge-wall": {
+      "import": {
+        "types": "./dist/widgets/badge-wall.d.ts",
+        "default": "./dist/widgets/badge-wall.js"
+      },
+      "require": {
+        "types": "./dist/widgets/badge-wall.d.cts",
+        "default": "./dist/widgets/badge-wall.cjs"
+      }
+    },
+    "./widgets/prize-wheel": {
+      "import": {
+        "types": "./dist/widgets/prize-wheel.d.ts",
+        "default": "./dist/widgets/prize-wheel.js"
+      },
+      "require": {
+        "types": "./dist/widgets/prize-wheel.d.cts",
+        "default": "./dist/widgets/prize-wheel.cjs"
+      }
+    },
+    "./widgets/globe": {
+      "import": {
+        "types": "./dist/widgets/globe.d.ts",
+        "default": "./dist/widgets/globe.js"
+      },
+      "require": {
+        "types": "./dist/widgets/globe.d.cts",
+        "default": "./dist/widgets/globe.cjs"
+      }
+    },
+    "./widgets/location-card": {
+      "import": {
+        "types": "./dist/widgets/location-card.d.ts",
+        "default": "./dist/widgets/location-card.js"
+      },
+      "require": {
+        "types": "./dist/widgets/location-card.d.cts",
+        "default": "./dist/widgets/location-card.cjs"
+      }
+    },
+    "./widgets/field": {
+      "import": {
+        "types": "./dist/widgets/field.d.ts",
+        "default": "./dist/widgets/field.js"
+      },
+      "require": {
+        "types": "./dist/widgets/field.d.cts",
+        "default": "./dist/widgets/field.cjs"
+      }
+    },
+    "./widgets/otp": {
+      "import": {
+        "types": "./dist/widgets/otp.d.ts",
+        "default": "./dist/widgets/otp.js"
+      },
+      "require": {
+        "types": "./dist/widgets/otp.d.cts",
+        "default": "./dist/widgets/otp.cjs"
+      }
+    },
+    "./widgets/upload-progress": {
+      "import": {
+        "types": "./dist/widgets/upload-progress.d.ts",
+        "default": "./dist/widgets/upload-progress.js"
+      },
+      "require": {
+        "types": "./dist/widgets/upload-progress.d.cts",
+        "default": "./dist/widgets/upload-progress.cjs"
+      }
+    },
+    "./widgets/chat-composer": {
+      "import": {
+        "types": "./dist/widgets/chat-composer.d.ts",
+        "default": "./dist/widgets/chat-composer.js"
+      },
+      "require": {
+        "types": "./dist/widgets/chat-composer.d.cts",
+        "default": "./dist/widgets/chat-composer.cjs"
+      }
+    },
+    "./widgets/suggestion-chips": {
+      "import": {
+        "types": "./dist/widgets/suggestion-chips.d.ts",
+        "default": "./dist/widgets/suggestion-chips.js"
+      },
+      "require": {
+        "types": "./dist/widgets/suggestion-chips.d.cts",
+        "default": "./dist/widgets/suggestion-chips.cjs"
+      }
+    },
+    "./widgets/voice-button": {
+      "import": {
+        "types": "./dist/widgets/voice-button.d.ts",
+        "default": "./dist/widgets/voice-button.js"
+      },
+      "require": {
+        "types": "./dist/widgets/voice-button.d.cts",
+        "default": "./dist/widgets/voice-button.cjs"
+      }
+    },
+    "./widgets/command-palette": {
+      "import": {
+        "types": "./dist/widgets/command-palette.d.ts",
+        "default": "./dist/widgets/command-palette.js"
+      },
+      "require": {
+        "types": "./dist/widgets/command-palette.d.cts",
+        "default": "./dist/widgets/command-palette.cjs"
+      }
+    },
+    "./widgets/shortcut": {
+      "import": {
+        "types": "./dist/widgets/shortcut.d.ts",
+        "default": "./dist/widgets/shortcut.js"
+      },
+      "require": {
+        "types": "./dist/widgets/shortcut.d.cts",
+        "default": "./dist/widgets/shortcut.cjs"
+      }
+    },
+    "./widgets/clock-control": {
+      "import": {
+        "types": "./dist/widgets/clock-control.d.ts",
+        "default": "./dist/widgets/clock-control.js"
+      },
+      "require": {
+        "types": "./dist/widgets/clock-control.d.cts",
+        "default": "./dist/widgets/clock-control.cjs"
+      }
+    },
+    "./widgets/hydrate": {
+      "import": {
+        "types": "./dist/widgets/hydrate.d.ts",
+        "default": "./dist/widgets/hydrate.js"
+      },
+      "require": {
+        "types": "./dist/widgets/hydrate.d.cts",
+        "default": "./dist/widgets/hydrate.cjs"
+      }
+    },
+    "./widgets/red-envelope": {
+      "import": {
+        "types": "./dist/widgets/red-envelope.d.ts",
+        "default": "./dist/widgets/red-envelope.js"
+      },
+      "require": {
+        "types": "./dist/widgets/red-envelope.d.cts",
+        "default": "./dist/widgets/red-envelope.cjs"
+      }
+    },
+    "./widgets/festival-banner": {
+      "import": {
+        "types": "./dist/widgets/festival-banner.d.ts",
+        "default": "./dist/widgets/festival-banner.js"
+      },
+      "require": {
+        "types": "./dist/widgets/festival-banner.d.cts",
+        "default": "./dist/widgets/festival-banner.cjs"
+      }
+    },
+    "./widgets/terminal": {
+      "import": {
+        "types": "./dist/widgets/terminal.d.ts",
+        "default": "./dist/widgets/terminal.js"
+      },
+      "require": {
+        "types": "./dist/widgets/terminal.d.cts",
+        "default": "./dist/widgets/terminal.cjs"
+      }
+    },
+    "./widgets/retro-button": {
+      "import": {
+        "types": "./dist/widgets/retro-button.d.ts",
+        "default": "./dist/widgets/retro-button.js"
+      },
+      "require": {
+        "types": "./dist/widgets/retro-button.d.cts",
+        "default": "./dist/widgets/retro-button.cjs"
+      }
+    },
+    "./widgets/organic-card": {
+      "import": {
+        "types": "./dist/widgets/organic-card.d.ts",
+        "default": "./dist/widgets/organic-card.js"
+      },
+      "require": {
+        "types": "./dist/widgets/organic-card.d.cts",
+        "default": "./dist/widgets/organic-card.cjs"
+      }
+    },
+    "./widgets/liquid-nav": {
+      "import": {
+        "types": "./dist/widgets/liquid-nav.d.ts",
+        "default": "./dist/widgets/liquid-nav.js"
+      },
+      "require": {
+        "types": "./dist/widgets/liquid-nav.d.cts",
+        "default": "./dist/widgets/liquid-nav.cjs"
+      }
+    },
+    "./widgets/hud-panel": {
+      "import": {
+        "types": "./dist/widgets/hud-panel.d.ts",
+        "default": "./dist/widgets/hud-panel.js"
+      },
+      "require": {
+        "types": "./dist/widgets/hud-panel.d.cts",
+        "default": "./dist/widgets/hud-panel.cjs"
+      }
+    },
+    "./widgets/radar": {
+      "import": {
+        "types": "./dist/widgets/radar.d.ts",
+        "default": "./dist/widgets/radar.js"
+      },
+      "require": {
+        "types": "./dist/widgets/radar.d.cts",
+        "default": "./dist/widgets/radar.cjs"
+      }
+    },
+    "./widgets/sticky-wall": {
+      "import": {
+        "types": "./dist/widgets/sticky-wall.d.ts",
+        "default": "./dist/widgets/sticky-wall.js"
+      },
+      "require": {
+        "types": "./dist/widgets/sticky-wall.d.cts",
+        "default": "./dist/widgets/sticky-wall.cjs"
+      }
+    },
+    "./widgets/sketch-chart": {
+      "import": {
+        "types": "./dist/widgets/sketch-chart.d.ts",
+        "default": "./dist/widgets/sketch-chart.js"
+      },
+      "require": {
+        "types": "./dist/widgets/sketch-chart.d.cts",
+        "default": "./dist/widgets/sketch-chart.cjs"
+      }
+    },
+    "./widgets/theme-switcher": {
+      "import": {
+        "types": "./dist/widgets/theme-switcher.d.ts",
+        "default": "./dist/widgets/theme-switcher.js"
+      },
+      "require": {
+        "types": "./dist/widgets/theme-switcher.d.cts",
+        "default": "./dist/widgets/theme-switcher.cjs"
+      }
+    },
+    "./widgets/theme-surface": {
+      "import": {
+        "types": "./dist/widgets/theme-surface.d.ts",
+        "default": "./dist/widgets/theme-surface.js"
+      },
+      "require": {
+        "types": "./dist/widgets/theme-surface.d.cts",
+        "default": "./dist/widgets/theme-surface.cjs"
+      }
+    },
+    "./widgets/gyro-card": {
+      "import": {
+        "types": "./dist/widgets/gyro-card.d.ts",
+        "default": "./dist/widgets/gyro-card.js"
+      },
+      "require": {
+        "types": "./dist/widgets/gyro-card.d.cts",
+        "default": "./dist/widgets/gyro-card.cjs"
+      }
+    },
+    "./widgets/gesture-sticker": {
+      "import": {
+        "types": "./dist/widgets/gesture-sticker.d.ts",
+        "default": "./dist/widgets/gesture-sticker.js"
+      },
+      "require": {
+        "types": "./dist/widgets/gesture-sticker.d.cts",
+        "default": "./dist/widgets/gesture-sticker.cjs"
+      }
+    },
+    "./widgets/panorama": {
+      "import": {
+        "types": "./dist/widgets/panorama.d.ts",
+        "default": "./dist/widgets/panorama.js"
+      },
+      "require": {
+        "types": "./dist/widgets/panorama.d.cts",
+        "default": "./dist/widgets/panorama.cjs"
+      }
+    },
+    "./widgets/spatial-card": {
+      "import": {
+        "types": "./dist/widgets/spatial-card.d.ts",
+        "default": "./dist/widgets/spatial-card.js"
+      },
+      "require": {
+        "types": "./dist/widgets/spatial-card.d.cts",
+        "default": "./dist/widgets/spatial-card.cjs"
+      }
+    },
+    "./widgets/code-export": {
+      "import": {
+        "types": "./dist/widgets/code-export.d.ts",
+        "default": "./dist/widgets/code-export.js"
+      },
+      "require": {
+        "types": "./dist/widgets/code-export.d.cts",
+        "default": "./dist/widgets/code-export.cjs"
+      }
+    },
+    "./widgets/prop-panel": {
+      "import": {
+        "types": "./dist/widgets/prop-panel.d.ts",
+        "default": "./dist/widgets/prop-panel.js"
+      },
+      "require": {
+        "types": "./dist/widgets/prop-panel.d.cts",
+        "default": "./dist/widgets/prop-panel.cjs"
+      }
+    },
+    "./widgets/motion": {
+      "import": {
+        "types": "./dist/widgets/motion.d.ts",
+        "default": "./dist/widgets/motion.js"
+      },
+      "require": {
+        "types": "./dist/widgets/motion.d.cts",
+        "default": "./dist/widgets/motion.cjs"
+      }
+    },
+    "./widgets/plugin-store": {
+      "import": {
+        "types": "./dist/widgets/plugin-store.d.ts",
+        "default": "./dist/widgets/plugin-store.js"
+      },
+      "require": {
+        "types": "./dist/widgets/plugin-store.d.cts",
+        "default": "./dist/widgets/plugin-store.cjs"
+      }
+    },
+    "./widgets/chapter-nav": {
+      "import": {
+        "types": "./dist/widgets/chapter-nav.d.ts",
+        "default": "./dist/widgets/chapter-nav.js"
+      },
+      "require": {
+        "types": "./dist/widgets/chapter-nav.d.cts",
+        "default": "./dist/widgets/chapter-nav.cjs"
+      }
+    },
+    "./widgets/scene": {
+      "import": {
+        "types": "./dist/widgets/scene.d.ts",
+        "default": "./dist/widgets/scene.js"
+      },
+      "require": {
+        "types": "./dist/widgets/scene.d.cts",
+        "default": "./dist/widgets/scene.cjs"
+      }
+    },
+    "./widgets/lottie": {
+      "import": {
+        "types": "./dist/widgets/lottie.d.ts",
+        "default": "./dist/widgets/lottie.js"
+      },
+      "require": {
+        "types": "./dist/widgets/lottie.d.cts",
+        "default": "./dist/widgets/lottie.cjs"
+      }
+    },
+    "./widgets/lottie-icon": {
+      "import": {
+        "types": "./dist/widgets/lottie-icon.d.ts",
+        "default": "./dist/widgets/lottie-icon.js"
+      },
+      "require": {
+        "types": "./dist/widgets/lottie-icon.d.cts",
+        "default": "./dist/widgets/lottie-icon.cjs"
+      }
+    },
+    "./widgets/gen-art": {
+      "import": {
+        "types": "./dist/widgets/gen-art.d.ts",
+        "default": "./dist/widgets/gen-art.js"
+      },
+      "require": {
+        "types": "./dist/widgets/gen-art.d.cts",
+        "default": "./dist/widgets/gen-art.cjs"
+      }
+    },
+    "./widgets/bg-generator": {
+      "import": {
+        "types": "./dist/widgets/bg-generator.d.ts",
+        "default": "./dist/widgets/bg-generator.js"
+      },
+      "require": {
+        "types": "./dist/widgets/bg-generator.d.cts",
+        "default": "./dist/widgets/bg-generator.cjs"
+      }
+    },
+    "./widgets/video-card": {
+      "import": {
+        "types": "./dist/widgets/video-card.d.ts",
+        "default": "./dist/widgets/video-card.js"
+      },
+      "require": {
+        "types": "./dist/widgets/video-card.d.cts",
+        "default": "./dist/widgets/video-card.cjs"
+      }
+    },
+    "./widgets/hero-video": {
+      "import": {
+        "types": "./dist/widgets/hero-video.d.ts",
+        "default": "./dist/widgets/hero-video.js"
+      },
+      "require": {
+        "types": "./dist/widgets/hero-video.d.cts",
+        "default": "./dist/widgets/hero-video.cjs"
+      }
+    },
+    "./widgets/motion-prefs": {
+      "import": {
+        "types": "./dist/widgets/motion-prefs.d.ts",
+        "default": "./dist/widgets/motion-prefs.js"
+      },
+      "require": {
+        "types": "./dist/widgets/motion-prefs.d.cts",
+        "default": "./dist/widgets/motion-prefs.cjs"
+      }
+    },
+    "./widgets/pause-all": {
+      "import": {
+        "types": "./dist/widgets/pause-all.d.ts",
+        "default": "./dist/widgets/pause-all.js"
+      },
+      "require": {
+        "types": "./dist/widgets/pause-all.d.cts",
+        "default": "./dist/widgets/pause-all.cjs"
+      }
+    },
+    "./widgets/perf-monitor": {
+      "import": {
+        "types": "./dist/widgets/perf-monitor.d.ts",
+        "default": "./dist/widgets/perf-monitor.js"
+      },
+      "require": {
+        "types": "./dist/widgets/perf-monitor.d.cts",
+        "default": "./dist/widgets/perf-monitor.cjs"
+      }
+    },
+    "./widgets/worker-canvas": {
+      "import": {
+        "types": "./dist/widgets/worker-canvas.d.ts",
+        "default": "./dist/widgets/worker-canvas.js"
+      },
+      "require": {
+        "types": "./dist/widgets/worker-canvas.d.cts",
+        "default": "./dist/widgets/worker-canvas.cjs"
+      }
+    },
+    "./widgets/motion-spec": {
+      "import": {
+        "types": "./dist/widgets/motion-spec.d.ts",
+        "default": "./dist/widgets/motion-spec.js"
+      },
+      "require": {
+        "types": "./dist/widgets/motion-spec.d.cts",
+        "default": "./dist/widgets/motion-spec.cjs"
+      }
+    },
+    "./widgets/native-preview": {
+      "import": {
+        "types": "./dist/widgets/native-preview.d.ts",
+        "default": "./dist/widgets/native-preview.js"
+      },
+      "require": {
+        "types": "./dist/widgets/native-preview.d.cts",
+        "default": "./dist/widgets/native-preview.cjs"
+      }
+    },
+    "./widgets/plugin-card": {
+      "import": {
+        "types": "./dist/widgets/plugin-card.d.ts",
+        "default": "./dist/widgets/plugin-card.js"
+      },
+      "require": {
+        "types": "./dist/widgets/plugin-card.d.cts",
+        "default": "./dist/widgets/plugin-card.cjs"
+      }
+    },
+    "./widgets/install-button": {
+      "import": {
+        "types": "./dist/widgets/install-button.d.ts",
+        "default": "./dist/widgets/install-button.js"
+      },
+      "require": {
+        "types": "./dist/widgets/install-button.d.cts",
+        "default": "./dist/widgets/install-button.cjs"
+      }
+    },
+    "./widgets/scroll-scene": {
+      "import": {
+        "types": "./dist/widgets/scroll-scene.d.ts",
+        "default": "./dist/widgets/scroll-scene.js"
+      },
+      "require": {
+        "types": "./dist/widgets/scroll-scene.d.cts",
+        "default": "./dist/widgets/scroll-scene.cjs"
+      }
+    },
+    "./widgets/motion-inspector": {
+      "import": {
+        "types": "./dist/widgets/motion-inspector.d.ts",
+        "default": "./dist/widgets/motion-inspector.js"
+      },
+      "require": {
+        "types": "./dist/widgets/motion-inspector.d.cts",
+        "default": "./dist/widgets/motion-inspector.cjs"
+      }
+    },
+    "./widgets/route-transition": {
+      "import": {
+        "types": "./dist/widgets/route-transition.d.ts",
+        "default": "./dist/widgets/route-transition.js"
+      },
+      "require": {
+        "types": "./dist/widgets/route-transition.d.cts",
+        "default": "./dist/widgets/route-transition.cjs"
+      }
+    },
+    "./widgets/text-splitter": {
+      "import": {
+        "types": "./dist/widgets/text-splitter.d.ts",
+        "default": "./dist/widgets/text-splitter.js"
+      },
+      "require": {
+        "types": "./dist/widgets/text-splitter.d.cts",
+        "default": "./dist/widgets/text-splitter.cjs"
+      }
+    },
+    "./widgets/scroll-ring": {
+      "import": {
+        "types": "./dist/widgets/scroll-ring.d.ts",
+        "default": "./dist/widgets/scroll-ring.js"
+      },
+      "require": {
+        "types": "./dist/widgets/scroll-ring.d.cts",
+        "default": "./dist/widgets/scroll-ring.cjs"
+      }
+    },
+    "./widgets/parallax-layers": {
+      "import": {
+        "types": "./dist/widgets/parallax-layers.d.ts",
+        "default": "./dist/widgets/parallax-layers.js"
+      },
+      "require": {
+        "types": "./dist/widgets/parallax-layers.d.cts",
+        "default": "./dist/widgets/parallax-layers.cjs"
+      }
+    },
+    "./widgets/smooth-scroll": {
+      "import": {
+        "types": "./dist/widgets/smooth-scroll.d.ts",
+        "default": "./dist/widgets/smooth-scroll.js"
+      },
+      "require": {
+        "types": "./dist/widgets/smooth-scroll.d.cts",
+        "default": "./dist/widgets/smooth-scroll.cjs"
+      }
+    },
+    "./widgets/gl-scene": {
+      "import": {
+        "types": "./dist/widgets/gl-scene.d.ts",
+        "default": "./dist/widgets/gl-scene.js"
+      },
+      "require": {
+        "types": "./dist/widgets/gl-scene.d.cts",
+        "default": "./dist/widgets/gl-scene.cjs"
+      }
+    },
+    "./widgets/three-scene": {
+      "import": {
+        "types": "./dist/widgets/three-scene.d.ts",
+        "default": "./dist/widgets/three-scene.js"
+      },
+      "require": {
+        "types": "./dist/widgets/three-scene.d.cts",
+        "default": "./dist/widgets/three-scene.cjs"
+      }
+    },
+    "./widgets/gpu-particles": {
+      "import": {
+        "types": "./dist/widgets/gpu-particles.d.ts",
+        "default": "./dist/widgets/gpu-particles.js"
+      },
+      "require": {
+        "types": "./dist/widgets/gpu-particles.d.cts",
+        "default": "./dist/widgets/gpu-particles.cjs"
+      }
+    },
+    "./widgets/shader-backdrop": {
+      "import": {
+        "types": "./dist/widgets/shader-backdrop.d.ts",
+        "default": "./dist/widgets/shader-backdrop.js"
+      },
+      "require": {
+        "types": "./dist/widgets/shader-backdrop.d.cts",
+        "default": "./dist/widgets/shader-backdrop.cjs"
+      }
+    },
+    "./widgets/lottie-player": {
+      "import": {
+        "types": "./dist/widgets/lottie-player.d.ts",
+        "default": "./dist/widgets/lottie-player.js"
+      },
+      "require": {
+        "types": "./dist/widgets/lottie-player.d.cts",
+        "default": "./dist/widgets/lottie-player.cjs"
+      }
+    },
+    "./widgets/rive": {
+      "import": {
+        "types": "./dist/widgets/rive.d.ts",
+        "default": "./dist/widgets/rive.js"
+      },
+      "require": {
+        "types": "./dist/widgets/rive.d.cts",
+        "default": "./dist/widgets/rive.cjs"
+      }
+    },
+    "./widgets/token-editor": {
+      "import": {
+        "types": "./dist/widgets/token-editor.d.ts",
+        "default": "./dist/widgets/token-editor.js"
+      },
+      "require": {
+        "types": "./dist/widgets/token-editor.d.cts",
+        "default": "./dist/widgets/token-editor.cjs"
+      }
+    },
+    "./widgets/physics-playground": {
+      "import": {
+        "types": "./dist/widgets/physics-playground.d.ts",
+        "default": "./dist/widgets/physics-playground.js"
+      },
+      "require": {
+        "types": "./dist/widgets/physics-playground.d.cts",
+        "default": "./dist/widgets/physics-playground.cjs"
+      }
+    },
+    "./widgets/motion-prompt": {
+      "import": {
+        "types": "./dist/widgets/motion-prompt.d.ts",
+        "default": "./dist/widgets/motion-prompt.js"
+      },
+      "require": {
+        "types": "./dist/widgets/motion-prompt.d.cts",
+        "default": "./dist/widgets/motion-prompt.cjs"
+      }
+    },
+    "./widgets/snap-carousel": {
+      "import": {
+        "types": "./dist/widgets/snap-carousel.d.ts",
+        "default": "./dist/widgets/snap-carousel.js"
+      },
+      "require": {
+        "types": "./dist/widgets/snap-carousel.d.cts",
+        "default": "./dist/widgets/snap-carousel.cjs"
+      }
+    },
+    "./widgets/gl-model": {
+      "import": {
+        "types": "./dist/widgets/gl-model.d.ts",
+        "default": "./dist/widgets/gl-model.js"
+      },
+      "require": {
+        "types": "./dist/widgets/gl-model.d.cts",
+        "default": "./dist/widgets/gl-model.cjs"
+      }
+    },
+    "./widgets/dotlottie": {
+      "import": {
+        "types": "./dist/widgets/dotlottie.d.ts",
+        "default": "./dist/widgets/dotlottie.js"
+      },
+      "require": {
+        "types": "./dist/widgets/dotlottie.d.cts",
+        "default": "./dist/widgets/dotlottie.cjs"
+      }
+    },
+    "./effects/fluid": {
+      "import": {
+        "types": "./dist/effects/fluid.d.ts",
+        "default": "./dist/effects/fluid.js"
+      },
+      "require": {
+        "types": "./dist/effects/fluid.d.cts",
+        "default": "./dist/effects/fluid.cjs"
+      }
+    },
+    "./effects/smoke": {
+      "import": {
+        "types": "./dist/effects/smoke.d.ts",
+        "default": "./dist/effects/smoke.js"
+      },
+      "require": {
+        "types": "./dist/effects/smoke.d.cts",
+        "default": "./dist/effects/smoke.cjs"
+      }
+    },
+    "./effects/fire": {
+      "import": {
+        "types": "./dist/effects/fire.d.ts",
+        "default": "./dist/effects/fire.js"
+      },
+      "require": {
+        "types": "./dist/effects/fire.d.cts",
+        "default": "./dist/effects/fire.cjs"
+      }
+    },
+    "./effects/ink": {
+      "import": {
+        "types": "./dist/effects/ink.d.ts",
+        "default": "./dist/effects/ink.js"
+      },
+      "require": {
+        "types": "./dist/effects/ink.d.cts",
+        "default": "./dist/effects/ink.cjs"
+      }
+    },
+    "./effects/fireflies": {
+      "import": {
+        "types": "./dist/effects/fireflies.d.ts",
+        "default": "./dist/effects/fireflies.js"
+      },
+      "require": {
+        "types": "./dist/effects/fireflies.d.cts",
+        "default": "./dist/effects/fireflies.cjs"
+      }
+    },
+    "./effects/sakura": {
+      "import": {
+        "types": "./dist/effects/sakura.d.ts",
+        "default": "./dist/effects/sakura.js"
+      },
+      "require": {
+        "types": "./dist/effects/sakura.d.cts",
+        "default": "./dist/effects/sakura.cjs"
+      }
+    },
+    "./effects/leaves": {
+      "import": {
+        "types": "./dist/effects/leaves.d.ts",
+        "default": "./dist/effects/leaves.js"
+      },
+      "require": {
+        "types": "./dist/effects/leaves.d.cts",
+        "default": "./dist/effects/leaves.cjs"
+      }
+    },
+    "./effects/splash": {
+      "import": {
+        "types": "./dist/effects/splash.d.ts",
+        "default": "./dist/effects/splash.js"
+      },
+      "require": {
+        "types": "./dist/effects/splash.d.cts",
+        "default": "./dist/effects/splash.cjs"
+      }
+    },
+    "./effects/liquid-text": {
+      "import": {
+        "types": "./dist/effects/liquid-text.d.ts",
+        "default": "./dist/effects/liquid-text.js"
+      },
+      "require": {
+        "types": "./dist/effects/liquid-text.d.cts",
+        "default": "./dist/effects/liquid-text.cjs"
+      }
+    },
+    "./effects/neon-write": {
+      "import": {
+        "types": "./dist/effects/neon-write.d.ts",
+        "default": "./dist/effects/neon-write.js"
+      },
+      "require": {
+        "types": "./dist/effects/neon-write.d.cts",
+        "default": "./dist/effects/neon-write.cjs"
+      }
+    },
+    "./effects/particle-text": {
+      "import": {
+        "types": "./dist/effects/particle-text.d.ts",
+        "default": "./dist/effects/particle-text.js"
+      },
+      "require": {
+        "types": "./dist/effects/particle-text.d.cts",
+        "default": "./dist/effects/particle-text.cjs"
+      }
+    },
+    "./effects/glitch-text": {
+      "import": {
+        "types": "./dist/effects/glitch-text.d.ts",
+        "default": "./dist/effects/glitch-text.js"
+      },
+      "require": {
+        "types": "./dist/effects/glitch-text.d.cts",
+        "default": "./dist/effects/glitch-text.cjs"
+      }
+    },
+    "./effects/text-trail": {
+      "import": {
+        "types": "./dist/effects/text-trail.d.ts",
+        "default": "./dist/effects/text-trail.js"
+      },
+      "require": {
+        "types": "./dist/effects/text-trail.d.cts",
+        "default": "./dist/effects/text-trail.cjs"
+      }
+    },
+    "./effects/font-breathe": {
+      "import": {
+        "types": "./dist/effects/font-breathe.d.ts",
+        "default": "./dist/effects/font-breathe.js"
+      },
+      "require": {
+        "types": "./dist/effects/font-breathe.d.cts",
+        "default": "./dist/effects/font-breathe.cjs"
+      }
+    },
+    "./effects/flip-chars": {
+      "import": {
+        "types": "./dist/effects/flip-chars.d.ts",
+        "default": "./dist/effects/flip-chars.js"
+      },
+      "require": {
+        "types": "./dist/effects/flip-chars.d.cts",
+        "default": "./dist/effects/flip-chars.cjs"
+      }
+    },
+    "./effects/light-follow": {
+      "import": {
+        "types": "./dist/effects/light-follow.d.ts",
+        "default": "./dist/effects/light-follow.js"
+      },
+      "require": {
+        "types": "./dist/effects/light-follow.d.cts",
+        "default": "./dist/effects/light-follow.cjs"
+      }
+    },
+    "./effects/refraction": {
+      "import": {
+        "types": "./dist/effects/refraction.d.ts",
+        "default": "./dist/effects/refraction.js"
+      },
+      "require": {
+        "types": "./dist/effects/refraction.d.cts",
+        "default": "./dist/effects/refraction.cjs"
+      }
+    },
+    "./effects/brushed-metal": {
+      "import": {
+        "types": "./dist/effects/brushed-metal.d.ts",
+        "default": "./dist/effects/brushed-metal.js"
+      },
+      "require": {
+        "types": "./dist/effects/brushed-metal.d.cts",
+        "default": "./dist/effects/brushed-metal.cjs"
+      }
+    },
+    "./effects/pearlescent": {
+      "import": {
+        "types": "./dist/effects/pearlescent.d.ts",
+        "default": "./dist/effects/pearlescent.js"
+      },
+      "require": {
+        "types": "./dist/effects/pearlescent.d.cts",
+        "default": "./dist/effects/pearlescent.cjs"
+      }
+    },
+    "./effects/god-rays": {
+      "import": {
+        "types": "./dist/effects/god-rays.d.ts",
+        "default": "./dist/effects/god-rays.js"
+      },
+      "require": {
+        "types": "./dist/effects/god-rays.d.cts",
+        "default": "./dist/effects/god-rays.cjs"
+      }
+    },
+    "./effects/pointer-shadow": {
+      "import": {
+        "types": "./dist/effects/pointer-shadow.d.ts",
+        "default": "./dist/effects/pointer-shadow.js"
+      },
+      "require": {
+        "types": "./dist/effects/pointer-shadow.d.cts",
+        "default": "./dist/effects/pointer-shadow.cjs"
+      }
+    },
+    "./effects/depth-stack": {
+      "import": {
+        "types": "./dist/effects/depth-stack.d.ts",
+        "default": "./dist/effects/depth-stack.js"
+      },
+      "require": {
+        "types": "./dist/effects/depth-stack.d.cts",
+        "default": "./dist/effects/depth-stack.cjs"
+      }
+    },
+    "./effects/product-spin": {
+      "import": {
+        "types": "./dist/effects/product-spin.d.ts",
+        "default": "./dist/effects/product-spin.js"
+      },
+      "require": {
+        "types": "./dist/effects/product-spin.d.cts",
+        "default": "./dist/effects/product-spin.cjs"
+      }
+    },
+    "./effects/card-flip-3d": {
+      "import": {
+        "types": "./dist/effects/card-flip-3d.d.ts",
+        "default": "./dist/effects/card-flip-3d.js"
+      },
+      "require": {
+        "types": "./dist/effects/card-flip-3d.d.cts",
+        "default": "./dist/effects/card-flip-3d.cjs"
+      }
+    },
+    "./effects/origami": {
+      "import": {
+        "types": "./dist/effects/origami.d.ts",
+        "default": "./dist/effects/origami.js"
+      },
+      "require": {
+        "types": "./dist/effects/origami.d.cts",
+        "default": "./dist/effects/origami.cjs"
+      }
+    },
+    "./effects/orbit-camera": {
+      "import": {
+        "types": "./dist/effects/orbit-camera.d.ts",
+        "default": "./dist/effects/orbit-camera.js"
+      },
+      "require": {
+        "types": "./dist/effects/orbit-camera.d.cts",
+        "default": "./dist/effects/orbit-camera.cjs"
+      }
+    },
+    "./effects/path-morph": {
+      "import": {
+        "types": "./dist/effects/path-morph.d.ts",
+        "default": "./dist/effects/path-morph.js"
+      },
+      "require": {
+        "types": "./dist/effects/path-morph.d.cts",
+        "default": "./dist/effects/path-morph.cjs"
+      }
+    },
+    "./effects/blob-button": {
+      "import": {
+        "types": "./dist/effects/blob-button.d.ts",
+        "default": "./dist/effects/blob-button.js"
+      },
+      "require": {
+        "types": "./dist/effects/blob-button.d.cts",
+        "default": "./dist/effects/blob-button.cjs"
+      }
+    },
+    "./effects/stroke-draw": {
+      "import": {
+        "types": "./dist/effects/stroke-draw.d.ts",
+        "default": "./dist/effects/stroke-draw.js"
+      },
+      "require": {
+        "types": "./dist/effects/stroke-draw.d.cts",
+        "default": "./dist/effects/stroke-draw.cjs"
+      }
+    },
+    "./effects/noise-reveal": {
+      "import": {
+        "types": "./dist/effects/noise-reveal.d.ts",
+        "default": "./dist/effects/noise-reveal.js"
+      },
+      "require": {
+        "types": "./dist/effects/noise-reveal.d.cts",
+        "default": "./dist/effects/noise-reveal.cjs"
+      }
+    },
+    "./effects/icon-swap": {
+      "import": {
+        "types": "./dist/effects/icon-swap.d.ts",
+        "default": "./dist/effects/icon-swap.js"
+      },
+      "require": {
+        "types": "./dist/effects/icon-swap.d.cts",
+        "default": "./dist/effects/icon-swap.cjs"
+      }
+    },
+    "./effects/ripple-dissolve": {
+      "import": {
+        "types": "./dist/effects/ripple-dissolve.d.ts",
+        "default": "./dist/effects/ripple-dissolve.js"
+      },
+      "require": {
+        "types": "./dist/effects/ripple-dissolve.d.cts",
+        "default": "./dist/effects/ripple-dissolve.cjs"
+      }
+    },
+    "./effects/shatter": {
+      "import": {
+        "types": "./dist/effects/shatter.d.ts",
+        "default": "./dist/effects/shatter.js"
+      },
+      "require": {
+        "types": "./dist/effects/shatter.d.cts",
+        "default": "./dist/effects/shatter.cjs"
+      }
+    },
+    "./effects/mosaic-flip": {
+      "import": {
+        "types": "./dist/effects/mosaic-flip.d.ts",
+        "default": "./dist/effects/mosaic-flip.js"
+      },
+      "require": {
+        "types": "./dist/effects/mosaic-flip.d.cts",
+        "default": "./dist/effects/mosaic-flip.cjs"
+      }
+    },
+    "./effects/liquid-wipe": {
+      "import": {
+        "types": "./dist/effects/liquid-wipe.d.ts",
+        "default": "./dist/effects/liquid-wipe.js"
+      },
+      "require": {
+        "types": "./dist/effects/liquid-wipe.d.cts",
+        "default": "./dist/effects/liquid-wipe.cjs"
+      }
+    },
+    "./effects/page-curl": {
+      "import": {
+        "types": "./dist/effects/page-curl.d.ts",
+        "default": "./dist/effects/page-curl.js"
+      },
+      "require": {
+        "types": "./dist/effects/page-curl.d.cts",
+        "default": "./dist/effects/page-curl.cjs"
+      }
+    },
+    "./effects/camera-dolly": {
+      "import": {
+        "types": "./dist/effects/camera-dolly.d.ts",
+        "default": "./dist/effects/camera-dolly.js"
+      },
+      "require": {
+        "types": "./dist/effects/camera-dolly.d.cts",
+        "default": "./dist/effects/camera-dolly.cjs"
+      }
+    },
+    "./effects/rain-glass": {
+      "import": {
+        "types": "./dist/effects/rain-glass.d.ts",
+        "default": "./dist/effects/rain-glass.js"
+      },
+      "require": {
+        "types": "./dist/effects/rain-glass.d.cts",
+        "default": "./dist/effects/rain-glass.cjs"
+      }
+    },
+    "./effects/snowfall": {
+      "import": {
+        "types": "./dist/effects/snowfall.d.ts",
+        "default": "./dist/effects/snowfall.js"
+      },
+      "require": {
+        "types": "./dist/effects/snowfall.d.cts",
+        "default": "./dist/effects/snowfall.cjs"
+      }
+    },
+    "./effects/lightning": {
+      "import": {
+        "types": "./dist/effects/lightning.d.ts",
+        "default": "./dist/effects/lightning.js"
+      },
+      "require": {
+        "types": "./dist/effects/lightning.d.cts",
+        "default": "./dist/effects/lightning.cjs"
+      }
+    },
+    "./effects/fog": {
+      "import": {
+        "types": "./dist/effects/fog.d.ts",
+        "default": "./dist/effects/fog.js"
+      },
+      "require": {
+        "types": "./dist/effects/fog.d.cts",
+        "default": "./dist/effects/fog.cjs"
+      }
+    },
+    "./effects/aurora-veil": {
+      "import": {
+        "types": "./dist/effects/aurora-veil.d.ts",
+        "default": "./dist/effects/aurora-veil.js"
+      },
+      "require": {
+        "types": "./dist/effects/aurora-veil.d.cts",
+        "default": "./dist/effects/aurora-veil.cjs"
+      }
+    },
+    "./effects/day-cycle": {
+      "import": {
+        "types": "./dist/effects/day-cycle.d.ts",
+        "default": "./dist/effects/day-cycle.js"
+      },
+      "require": {
+        "types": "./dist/effects/day-cycle.d.cts",
+        "default": "./dist/effects/day-cycle.cjs"
+      }
+    },
+    "./effects/soft-body": {
+      "import": {
+        "types": "./dist/effects/soft-body.d.ts",
+        "default": "./dist/effects/soft-body.js"
+      },
+      "require": {
+        "types": "./dist/effects/soft-body.d.cts",
+        "default": "./dist/effects/soft-body.cjs"
+      }
+    },
+    "./effects/magnet": {
+      "import": {
+        "types": "./dist/effects/magnet.d.ts",
+        "default": "./dist/effects/magnet.js"
+      },
+      "require": {
+        "types": "./dist/effects/magnet.d.cts",
+        "default": "./dist/effects/magnet.cjs"
+      }
+    },
+    "./effects/cloth": {
+      "import": {
+        "types": "./dist/effects/cloth.d.ts",
+        "default": "./dist/effects/cloth.js"
+      },
+      "require": {
+        "types": "./dist/effects/cloth.d.cts",
+        "default": "./dist/effects/cloth.cjs"
+      }
+    },
+    "./effects/rope": {
+      "import": {
+        "types": "./dist/effects/rope.d.ts",
+        "default": "./dist/effects/rope.js"
+      },
+      "require": {
+        "types": "./dist/effects/rope.d.cts",
+        "default": "./dist/effects/rope.cjs"
+      }
+    },
+    "./effects/pinball": {
+      "import": {
+        "types": "./dist/effects/pinball.d.ts",
+        "default": "./dist/effects/pinball.js"
+      },
+      "require": {
+        "types": "./dist/effects/pinball.d.cts",
+        "default": "./dist/effects/pinball.cjs"
+      }
+    },
+    "./effects/focus-draw": {
+      "import": {
+        "types": "./dist/effects/focus-draw.d.ts",
+        "default": "./dist/effects/focus-draw.js"
+      },
+      "require": {
+        "types": "./dist/effects/focus-draw.d.cts",
+        "default": "./dist/effects/focus-draw.cjs"
+      }
+    },
+    "./effects/marching-ants": {
+      "import": {
+        "types": "./dist/effects/marching-ants.d.ts",
+        "default": "./dist/effects/marching-ants.js"
+      },
+      "require": {
+        "types": "./dist/effects/marching-ants.d.cts",
+        "default": "./dist/effects/marching-ants.cjs"
+      }
+    },
+    "./effects/success-check": {
+      "import": {
+        "types": "./dist/effects/success-check.d.ts",
+        "default": "./dist/effects/success-check.js"
+      },
+      "require": {
+        "types": "./dist/effects/success-check.d.cts",
+        "default": "./dist/effects/success-check.cjs"
+      }
+    },
+    "./effects/highlight-sweep": {
+      "import": {
+        "types": "./dist/effects/highlight-sweep.d.ts",
+        "default": "./dist/effects/highlight-sweep.js"
+      },
+      "require": {
+        "types": "./dist/effects/highlight-sweep.d.cts",
+        "default": "./dist/effects/highlight-sweep.cjs"
+      }
+    },
+    "./effects/waveform-scope": {
+      "import": {
+        "types": "./dist/effects/waveform-scope.d.ts",
+        "default": "./dist/effects/waveform-scope.js"
+      },
+      "require": {
+        "types": "./dist/effects/waveform-scope.d.cts",
+        "default": "./dist/effects/waveform-scope.cjs"
+      }
+    },
+    "./effects/radial-spectrum": {
+      "import": {
+        "types": "./dist/effects/radial-spectrum.d.ts",
+        "default": "./dist/effects/radial-spectrum.js"
+      },
+      "require": {
+        "types": "./dist/effects/radial-spectrum.d.cts",
+        "default": "./dist/effects/radial-spectrum.cjs"
+      }
+    },
+    "./effects/spectrum-mirror": {
+      "import": {
+        "types": "./dist/effects/spectrum-mirror.d.ts",
+        "default": "./dist/effects/spectrum-mirror.js"
+      },
+      "require": {
+        "types": "./dist/effects/spectrum-mirror.d.cts",
+        "default": "./dist/effects/spectrum-mirror.cjs"
+      }
+    },
+    "./effects/sound-particles": {
+      "import": {
+        "types": "./dist/effects/sound-particles.d.ts",
+        "default": "./dist/effects/sound-particles.js"
+      },
+      "require": {
+        "types": "./dist/effects/sound-particles.d.cts",
+        "default": "./dist/effects/sound-particles.cjs"
+      }
+    },
+    "./effects/beat-bounce": {
+      "import": {
+        "types": "./dist/effects/beat-bounce.d.ts",
+        "default": "./dist/effects/beat-bounce.js"
+      },
+      "require": {
+        "types": "./dist/effects/beat-bounce.d.cts",
+        "default": "./dist/effects/beat-bounce.cjs"
+      }
+    },
+    "./effects/vinyl-spin": {
+      "import": {
+        "types": "./dist/effects/vinyl-spin.d.ts",
+        "default": "./dist/effects/vinyl-spin.js"
+      },
+      "require": {
+        "types": "./dist/effects/vinyl-spin.d.cts",
+        "default": "./dist/effects/vinyl-spin.cjs"
+      }
+    },
+    "./effects/bars-grow": {
+      "import": {
+        "types": "./dist/effects/bars-grow.d.ts",
+        "default": "./dist/effects/bars-grow.js"
+      },
+      "require": {
+        "types": "./dist/effects/bars-grow.d.cts",
+        "default": "./dist/effects/bars-grow.cjs"
+      }
+    },
+    "./effects/line-draw": {
+      "import": {
+        "types": "./dist/effects/line-draw.d.ts",
+        "default": "./dist/effects/line-draw.js"
+      },
+      "require": {
+        "types": "./dist/effects/line-draw.d.cts",
+        "default": "./dist/effects/line-draw.cjs"
+      }
+    },
+    "./effects/ring-sweep": {
+      "import": {
+        "types": "./dist/effects/ring-sweep.d.ts",
+        "default": "./dist/effects/ring-sweep.js"
+      },
+      "require": {
+        "types": "./dist/effects/ring-sweep.d.cts",
+        "default": "./dist/effects/ring-sweep.cjs"
+      }
+    },
+    "./effects/sankey-flow": {
+      "import": {
+        "types": "./dist/effects/sankey-flow.d.ts",
+        "default": "./dist/effects/sankey-flow.js"
+      },
+      "require": {
+        "types": "./dist/effects/sankey-flow.d.cts",
+        "default": "./dist/effects/sankey-flow.cjs"
+      }
+    },
+    "./effects/number-roll": {
+      "import": {
+        "types": "./dist/effects/number-roll.d.ts",
+        "default": "./dist/effects/number-roll.js"
+      },
+      "require": {
+        "types": "./dist/effects/number-roll.d.cts",
+        "default": "./dist/effects/number-roll.cjs"
+      }
+    },
+    "./effects/dots-pop": {
+      "import": {
+        "types": "./dist/effects/dots-pop.d.ts",
+        "default": "./dist/effects/dots-pop.js"
+      },
+      "require": {
+        "types": "./dist/effects/dots-pop.d.cts",
+        "default": "./dist/effects/dots-pop.cjs"
+      }
+    },
+    "./effects/fly-to-cart": {
+      "import": {
+        "types": "./dist/effects/fly-to-cart.d.ts",
+        "default": "./dist/effects/fly-to-cart.js"
+      },
+      "require": {
+        "types": "./dist/effects/fly-to-cart.d.cts",
+        "default": "./dist/effects/fly-to-cart.cjs"
+      }
+    },
+    "./effects/price-flip": {
+      "import": {
+        "types": "./dist/effects/price-flip.d.ts",
+        "default": "./dist/effects/price-flip.js"
+      },
+      "require": {
+        "types": "./dist/effects/price-flip.d.cts",
+        "default": "./dist/effects/price-flip.cjs"
+      }
+    },
+    "./effects/stock-pulse": {
+      "import": {
+        "types": "./dist/effects/stock-pulse.d.ts",
+        "default": "./dist/effects/stock-pulse.js"
+      },
+      "require": {
+        "types": "./dist/effects/stock-pulse.d.cts",
+        "default": "./dist/effects/stock-pulse.cjs"
+      }
+    },
+    "./effects/sale-shine": {
+      "import": {
+        "types": "./dist/effects/sale-shine.d.ts",
+        "default": "./dist/effects/sale-shine.js"
+      },
+      "require": {
+        "types": "./dist/effects/sale-shine.d.cts",
+        "default": "./dist/effects/sale-shine.cjs"
+      }
+    },
+    "./effects/badge-pop": {
+      "import": {
+        "types": "./dist/effects/badge-pop.d.ts",
+        "default": "./dist/effects/badge-pop.js"
+      },
+      "require": {
+        "types": "./dist/effects/badge-pop.d.cts",
+        "default": "./dist/effects/badge-pop.cjs"
+      }
+    },
+    "./effects/typing-dots": {
+      "import": {
+        "types": "./dist/effects/typing-dots.d.ts",
+        "default": "./dist/effects/typing-dots.js"
+      },
+      "require": {
+        "types": "./dist/effects/typing-dots.d.cts",
+        "default": "./dist/effects/typing-dots.cjs"
+      }
+    },
+    "./effects/message-in": {
+      "import": {
+        "types": "./dist/effects/message-in.d.ts",
+        "default": "./dist/effects/message-in.js"
+      },
+      "require": {
+        "types": "./dist/effects/message-in.d.cts",
+        "default": "./dist/effects/message-in.cjs"
+      }
+    },
+    "./effects/reaction-burst": {
+      "import": {
+        "types": "./dist/effects/reaction-burst.d.ts",
+        "default": "./dist/effects/reaction-burst.js"
+      },
+      "require": {
+        "types": "./dist/effects/reaction-burst.d.cts",
+        "default": "./dist/effects/reaction-burst.cjs"
+      }
+    },
+    "./effects/read-receipt": {
+      "import": {
+        "types": "./dist/effects/read-receipt.d.ts",
+        "default": "./dist/effects/read-receipt.js"
+      },
+      "require": {
+        "types": "./dist/effects/read-receipt.d.cts",
+        "default": "./dist/effects/read-receipt.cjs"
+      }
+    },
+    "./effects/mention-glow": {
+      "import": {
+        "types": "./dist/effects/mention-glow.d.ts",
+        "default": "./dist/effects/mention-glow.js"
+      },
+      "require": {
+        "types": "./dist/effects/mention-glow.d.cts",
+        "default": "./dist/effects/mention-glow.cjs"
+      }
+    },
+    "./effects/achievement-unlock": {
+      "import": {
+        "types": "./dist/effects/achievement-unlock.d.ts",
+        "default": "./dist/effects/achievement-unlock.js"
+      },
+      "require": {
+        "types": "./dist/effects/achievement-unlock.d.cts",
+        "default": "./dist/effects/achievement-unlock.cjs"
+      }
+    },
+    "./effects/level-up": {
+      "import": {
+        "types": "./dist/effects/level-up.d.ts",
+        "default": "./dist/effects/level-up.js"
+      },
+      "require": {
+        "types": "./dist/effects/level-up.d.cts",
+        "default": "./dist/effects/level-up.cjs"
+      }
+    },
+    "./effects/chest-open": {
+      "import": {
+        "types": "./dist/effects/chest-open.d.ts",
+        "default": "./dist/effects/chest-open.js"
+      },
+      "require": {
+        "types": "./dist/effects/chest-open.d.cts",
+        "default": "./dist/effects/chest-open.cjs"
+      }
+    },
+    "./effects/coin-burst": {
+      "import": {
+        "types": "./dist/effects/coin-burst.d.ts",
+        "default": "./dist/effects/coin-burst.js"
+      },
+      "require": {
+        "types": "./dist/effects/coin-burst.d.cts",
+        "default": "./dist/effects/coin-burst.cjs"
+      }
+    },
+    "./effects/xp-gain": {
+      "import": {
+        "types": "./dist/effects/xp-gain.d.ts",
+        "default": "./dist/effects/xp-gain.js"
+      },
+      "require": {
+        "types": "./dist/effects/xp-gain.d.cts",
+        "default": "./dist/effects/xp-gain.cjs"
+      }
+    },
+    "./effects/route-draw": {
+      "import": {
+        "types": "./dist/effects/route-draw.d.ts",
+        "default": "./dist/effects/route-draw.js"
+      },
+      "require": {
+        "types": "./dist/effects/route-draw.d.cts",
+        "default": "./dist/effects/route-draw.cjs"
+      }
+    },
+    "./effects/marker-pulse": {
+      "import": {
+        "types": "./dist/effects/marker-pulse.d.ts",
+        "default": "./dist/effects/marker-pulse.js"
+      },
+      "require": {
+        "types": "./dist/effects/marker-pulse.d.cts",
+        "default": "./dist/effects/marker-pulse.cjs"
+      }
+    },
+    "./effects/pin-drop": {
+      "import": {
+        "types": "./dist/effects/pin-drop.d.ts",
+        "default": "./dist/effects/pin-drop.js"
+      },
+      "require": {
+        "types": "./dist/effects/pin-drop.d.cts",
+        "default": "./dist/effects/pin-drop.cjs"
+      }
+    },
+    "./effects/globe-spin": {
+      "import": {
+        "types": "./dist/effects/globe-spin.d.ts",
+        "default": "./dist/effects/globe-spin.js"
+      },
+      "require": {
+        "types": "./dist/effects/globe-spin.d.cts",
+        "default": "./dist/effects/globe-spin.cjs"
+      }
+    },
+    "./effects/field-shake": {
+      "import": {
+        "types": "./dist/effects/field-shake.d.ts",
+        "default": "./dist/effects/field-shake.js"
+      },
+      "require": {
+        "types": "./dist/effects/field-shake.d.cts",
+        "default": "./dist/effects/field-shake.cjs"
+      }
+    },
+    "./effects/field-success": {
+      "import": {
+        "types": "./dist/effects/field-success.d.ts",
+        "default": "./dist/effects/field-success.js"
+      },
+      "require": {
+        "types": "./dist/effects/field-success.d.cts",
+        "default": "./dist/effects/field-success.cjs"
+      }
+    },
+    "./effects/label-float": {
+      "import": {
+        "types": "./dist/effects/label-float.d.ts",
+        "default": "./dist/effects/label-float.js"
+      },
+      "require": {
+        "types": "./dist/effects/label-float.d.cts",
+        "default": "./dist/effects/label-float.cjs"
+      }
+    },
+    "./effects/form-cascade": {
+      "import": {
+        "types": "./dist/effects/form-cascade.d.ts",
+        "default": "./dist/effects/form-cascade.js"
+      },
+      "require": {
+        "types": "./dist/effects/form-cascade.d.cts",
+        "default": "./dist/effects/form-cascade.cjs"
+      }
+    },
+    "./effects/stream-text": {
+      "import": {
+        "types": "./dist/effects/stream-text.d.ts",
+        "default": "./dist/effects/stream-text.js"
+      },
+      "require": {
+        "types": "./dist/effects/stream-text.d.cts",
+        "default": "./dist/effects/stream-text.cjs"
+      }
+    },
+    "./effects/thinking-glow": {
+      "import": {
+        "types": "./dist/effects/thinking-glow.d.ts",
+        "default": "./dist/effects/thinking-glow.js"
+      },
+      "require": {
+        "types": "./dist/effects/thinking-glow.d.cts",
+        "default": "./dist/effects/thinking-glow.cjs"
+      }
+    },
+    "./effects/voice-wave": {
+      "import": {
+        "types": "./dist/effects/voice-wave.d.ts",
+        "default": "./dist/effects/voice-wave.js"
+      },
+      "require": {
+        "types": "./dist/effects/voice-wave.d.cts",
+        "default": "./dist/effects/voice-wave.cjs"
+      }
+    },
+    "./effects/gen-skeleton": {
+      "import": {
+        "types": "./dist/effects/gen-skeleton.d.ts",
+        "default": "./dist/effects/gen-skeleton.js"
+      },
+      "require": {
+        "types": "./dist/effects/gen-skeleton.d.cts",
+        "default": "./dist/effects/gen-skeleton.cjs"
+      }
+    },
+    "./effects/firework-burst": {
+      "import": {
+        "types": "./dist/effects/firework-burst.d.ts",
+        "default": "./dist/effects/firework-burst.js"
+      },
+      "require": {
+        "types": "./dist/effects/firework-burst.d.cts",
+        "default": "./dist/effects/firework-burst.cjs"
+      }
+    },
+    "./effects/lantern-rise": {
+      "import": {
+        "types": "./dist/effects/lantern-rise.d.ts",
+        "default": "./dist/effects/lantern-rise.js"
+      },
+      "require": {
+        "types": "./dist/effects/lantern-rise.d.cts",
+        "default": "./dist/effects/lantern-rise.cjs"
+      }
+    },
+    "./effects/xmas-snow": {
+      "import": {
+        "types": "./dist/effects/xmas-snow.d.ts",
+        "default": "./dist/effects/xmas-snow.js"
+      },
+      "require": {
+        "types": "./dist/effects/xmas-snow.d.cts",
+        "default": "./dist/effects/xmas-snow.cjs"
+      }
+    },
+    "./effects/spooky-float": {
+      "import": {
+        "types": "./dist/effects/spooky-float.d.ts",
+        "default": "./dist/effects/spooky-float.js"
+      },
+      "require": {
+        "types": "./dist/effects/spooky-float.d.cts",
+        "default": "./dist/effects/spooky-float.cjs"
+      }
+    },
+    "./effects/pixelate-in": {
+      "import": {
+        "types": "./dist/effects/pixelate-in.d.ts",
+        "default": "./dist/effects/pixelate-in.js"
+      },
+      "require": {
+        "types": "./dist/effects/pixelate-in.d.cts",
+        "default": "./dist/effects/pixelate-in.cjs"
+      }
+    },
+    "./effects/crt-power": {
+      "import": {
+        "types": "./dist/effects/crt-power.d.ts",
+        "default": "./dist/effects/crt-power.js"
+      },
+      "require": {
+        "types": "./dist/effects/crt-power.d.cts",
+        "default": "./dist/effects/crt-power.cjs"
+      }
+    },
+    "./effects/vhs-glitch": {
+      "import": {
+        "types": "./dist/effects/vhs-glitch.d.ts",
+        "default": "./dist/effects/vhs-glitch.js"
+      },
+      "require": {
+        "types": "./dist/effects/vhs-glitch.d.cts",
+        "default": "./dist/effects/vhs-glitch.cjs"
+      }
+    },
+    "./effects/y2k-shine": {
+      "import": {
+        "types": "./dist/effects/y2k-shine.d.ts",
+        "default": "./dist/effects/y2k-shine.js"
+      },
+      "require": {
+        "types": "./dist/effects/y2k-shine.d.cts",
+        "default": "./dist/effects/y2k-shine.cjs"
+      }
+    },
+    "./effects/vine-grow": {
+      "import": {
+        "types": "./dist/effects/vine-grow.d.ts",
+        "default": "./dist/effects/vine-grow.js"
+      },
+      "require": {
+        "types": "./dist/effects/vine-grow.d.cts",
+        "default": "./dist/effects/vine-grow.cjs"
+      }
+    },
+    "./effects/bloom": {
+      "import": {
+        "types": "./dist/effects/bloom.d.ts",
+        "default": "./dist/effects/bloom.js"
+      },
+      "require": {
+        "types": "./dist/effects/bloom.d.cts",
+        "default": "./dist/effects/bloom.cjs"
+      }
+    },
+    "./effects/water-drop": {
+      "import": {
+        "types": "./dist/effects/water-drop.d.ts",
+        "default": "./dist/effects/water-drop.js"
+      },
+      "require": {
+        "types": "./dist/effects/water-drop.d.cts",
+        "default": "./dist/effects/water-drop.cjs"
+      }
+    },
+    "./effects/breathe": {
+      "import": {
+        "types": "./dist/effects/breathe.d.ts",
+        "default": "./dist/effects/breathe.js"
+      },
+      "require": {
+        "types": "./dist/effects/breathe.d.cts",
+        "default": "./dist/effects/breathe.cjs"
+      }
+    },
+    "./effects/hud-frame": {
+      "import": {
+        "types": "./dist/effects/hud-frame.d.ts",
+        "default": "./dist/effects/hud-frame.js"
+      },
+      "require": {
+        "types": "./dist/effects/hud-frame.d.cts",
+        "default": "./dist/effects/hud-frame.cjs"
+      }
+    },
+    "./effects/scanline-sweep": {
+      "import": {
+        "types": "./dist/effects/scanline-sweep.d.ts",
+        "default": "./dist/effects/scanline-sweep.js"
+      },
+      "require": {
+        "types": "./dist/effects/scanline-sweep.d.cts",
+        "default": "./dist/effects/scanline-sweep.cjs"
+      }
+    },
+    "./effects/hologram": {
+      "import": {
+        "types": "./dist/effects/hologram.d.ts",
+        "default": "./dist/effects/hologram.js"
+      },
+      "require": {
+        "types": "./dist/effects/hologram.d.cts",
+        "default": "./dist/effects/hologram.cjs"
+      }
+    },
+    "./effects/data-decode": {
+      "import": {
+        "types": "./dist/effects/data-decode.d.ts",
+        "default": "./dist/effects/data-decode.js"
+      },
+      "require": {
+        "types": "./dist/effects/data-decode.d.cts",
+        "default": "./dist/effects/data-decode.cjs"
+      }
+    },
+    "./effects/paper-unfold": {
+      "import": {
+        "types": "./dist/effects/paper-unfold.d.ts",
+        "default": "./dist/effects/paper-unfold.js"
+      },
+      "require": {
+        "types": "./dist/effects/paper-unfold.d.cts",
+        "default": "./dist/effects/paper-unfold.cjs"
+      }
+    },
+    "./effects/pencil-sketch": {
+      "import": {
+        "types": "./dist/effects/pencil-sketch.d.ts",
+        "default": "./dist/effects/pencil-sketch.js"
+      },
+      "require": {
+        "types": "./dist/effects/pencil-sketch.d.cts",
+        "default": "./dist/effects/pencil-sketch.cjs"
+      }
+    },
+    "./effects/watercolor": {
+      "import": {
+        "types": "./dist/effects/watercolor.d.ts",
+        "default": "./dist/effects/watercolor.js"
+      },
+      "require": {
+        "types": "./dist/effects/watercolor.d.cts",
+        "default": "./dist/effects/watercolor.cjs"
+      }
+    },
+    "./effects/crumple": {
+      "import": {
+        "types": "./dist/effects/crumple.d.ts",
+        "default": "./dist/effects/crumple.js"
+      },
+      "require": {
+        "types": "./dist/effects/crumple.d.cts",
+        "default": "./dist/effects/crumple.cjs"
+      }
+    },
+    "./effects/neon-ignite": {
+      "import": {
+        "types": "./dist/effects/neon-ignite.d.ts",
+        "default": "./dist/effects/neon-ignite.js"
+      },
+      "require": {
+        "types": "./dist/effects/neon-ignite.d.cts",
+        "default": "./dist/effects/neon-ignite.cjs"
+      }
+    },
+    "./effects/neon-pulse": {
+      "import": {
+        "types": "./dist/effects/neon-pulse.d.ts",
+        "default": "./dist/effects/neon-pulse.js"
+      },
+      "require": {
+        "types": "./dist/effects/neon-pulse.d.cts",
+        "default": "./dist/effects/neon-pulse.cjs"
+      }
+    },
+    "./effects/glass-frost": {
+      "import": {
+        "types": "./dist/effects/glass-frost.d.ts",
+        "default": "./dist/effects/glass-frost.js"
+      },
+      "require": {
+        "types": "./dist/effects/glass-frost.d.cts",
+        "default": "./dist/effects/glass-frost.cjs"
+      }
+    },
+    "./effects/neu-press": {
+      "import": {
+        "types": "./dist/effects/neu-press.d.ts",
+        "default": "./dist/effects/neu-press.js"
+      },
+      "require": {
+        "types": "./dist/effects/neu-press.d.cts",
+        "default": "./dist/effects/neu-press.cjs"
+      }
+    },
+    "./effects/swipe-hint": {
+      "import": {
+        "types": "./dist/effects/swipe-hint.d.ts",
+        "default": "./dist/effects/swipe-hint.js"
+      },
+      "require": {
+        "types": "./dist/effects/swipe-hint.d.cts",
+        "default": "./dist/effects/swipe-hint.cjs"
+      }
+    },
+    "./effects/pinch-hint": {
+      "import": {
+        "types": "./dist/effects/pinch-hint.d.ts",
+        "default": "./dist/effects/pinch-hint.js"
+      },
+      "require": {
+        "types": "./dist/effects/pinch-hint.d.cts",
+        "default": "./dist/effects/pinch-hint.cjs"
+      }
+    },
+    "./effects/tilt-wobble": {
+      "import": {
+        "types": "./dist/effects/tilt-wobble.d.ts",
+        "default": "./dist/effects/tilt-wobble.js"
+      },
+      "require": {
+        "types": "./dist/effects/tilt-wobble.d.cts",
+        "default": "./dist/effects/tilt-wobble.cjs"
+      }
+    },
+    "./effects/depth-in": {
+      "import": {
+        "types": "./dist/effects/depth-in.d.ts",
+        "default": "./dist/effects/depth-in.js"
+      },
+      "require": {
+        "types": "./dist/effects/depth-in.d.cts",
+        "default": "./dist/effects/depth-in.cjs"
+      }
+    },
+    "./effects/portal-open": {
+      "import": {
+        "types": "./dist/effects/portal-open.d.ts",
+        "default": "./dist/effects/portal-open.js"
+      },
+      "require": {
+        "types": "./dist/effects/portal-open.d.cts",
+        "default": "./dist/effects/portal-open.cjs"
+      }
+    },
+    "./effects/orbit-in": {
+      "import": {
+        "types": "./dist/effects/orbit-in.d.ts",
+        "default": "./dist/effects/orbit-in.js"
+      },
+      "require": {
+        "types": "./dist/effects/orbit-in.d.cts",
+        "default": "./dist/effects/orbit-in.cjs"
+      }
+    },
+    "./effects/spatial-float": {
+      "import": {
+        "types": "./dist/effects/spatial-float.d.ts",
+        "default": "./dist/effects/spatial-float.js"
+      },
+      "require": {
+        "types": "./dist/effects/spatial-float.d.cts",
+        "default": "./dist/effects/spatial-float.cjs"
+      }
+    },
+    "./effects/depth-pop": {
+      "import": {
+        "types": "./dist/effects/depth-pop.d.ts",
+        "default": "./dist/effects/depth-pop.js"
+      },
+      "require": {
+        "types": "./dist/effects/depth-pop.d.cts",
+        "default": "./dist/effects/depth-pop.cjs"
+      }
+    },
+    "./effects/dolly-in": {
+      "import": {
+        "types": "./dist/effects/dolly-in.d.ts",
+        "default": "./dist/effects/dolly-in.js"
+      },
+      "require": {
+        "types": "./dist/effects/dolly-in.d.cts",
+        "default": "./dist/effects/dolly-in.cjs"
+      }
+    },
+    "./effects/pan-reveal": {
+      "import": {
+        "types": "./dist/effects/pan-reveal.d.ts",
+        "default": "./dist/effects/pan-reveal.js"
+      },
+      "require": {
+        "types": "./dist/effects/pan-reveal.d.cts",
+        "default": "./dist/effects/pan-reveal.cjs"
+      }
+    },
+    "./effects/letterbox": {
+      "import": {
+        "types": "./dist/effects/letterbox.d.ts",
+        "default": "./dist/effects/letterbox.js"
+      },
+      "require": {
+        "types": "./dist/effects/letterbox.d.cts",
+        "default": "./dist/effects/letterbox.cjs"
+      }
+    },
+    "./effects/rack-focus": {
+      "import": {
+        "types": "./dist/effects/rack-focus.d.ts",
+        "default": "./dist/effects/rack-focus.js"
+      },
+      "require": {
+        "types": "./dist/effects/rack-focus.d.cts",
+        "default": "./dist/effects/rack-focus.cjs"
+      }
+    },
+    "./effects/lottie-play": {
+      "import": {
+        "types": "./dist/effects/lottie-play.d.ts",
+        "default": "./dist/effects/lottie-play.js"
+      },
+      "require": {
+        "types": "./dist/effects/lottie-play.d.cts",
+        "default": "./dist/effects/lottie-play.cjs"
+      }
+    },
+    "./effects/icon-pop": {
+      "import": {
+        "types": "./dist/effects/icon-pop.d.ts",
+        "default": "./dist/effects/icon-pop.js"
+      },
+      "require": {
+        "types": "./dist/effects/icon-pop.d.cts",
+        "default": "./dist/effects/icon-pop.cjs"
+      }
+    },
+    "./effects/halftone-in": {
+      "import": {
+        "types": "./dist/effects/halftone-in.d.ts",
+        "default": "./dist/effects/halftone-in.js"
+      },
+      "require": {
+        "types": "./dist/effects/halftone-in.d.cts",
+        "default": "./dist/effects/halftone-in.cjs"
+      }
+    },
+    "./effects/mesh-drift": {
+      "import": {
+        "types": "./dist/effects/mesh-drift.d.ts",
+        "default": "./dist/effects/mesh-drift.js"
+      },
+      "require": {
+        "types": "./dist/effects/mesh-drift.d.cts",
+        "default": "./dist/effects/mesh-drift.cjs"
+      }
+    },
+    "./effects/kaleido": {
+      "import": {
+        "types": "./dist/effects/kaleido.d.ts",
+        "default": "./dist/effects/kaleido.js"
+      },
+      "require": {
+        "types": "./dist/effects/kaleido.d.cts",
+        "default": "./dist/effects/kaleido.cjs"
+      }
+    },
+    "./effects/grain-flicker": {
+      "import": {
+        "types": "./dist/effects/grain-flicker.d.ts",
+        "default": "./dist/effects/grain-flicker.js"
+      },
+      "require": {
+        "types": "./dist/effects/grain-flicker.d.cts",
+        "default": "./dist/effects/grain-flicker.cjs"
+      }
+    },
+    "./effects/film-burn": {
+      "import": {
+        "types": "./dist/effects/film-burn.d.ts",
+        "default": "./dist/effects/film-burn.js"
+      },
+      "require": {
+        "types": "./dist/effects/film-burn.d.cts",
+        "default": "./dist/effects/film-burn.cjs"
+      }
+    },
+    "./effects/jump-cut": {
+      "import": {
+        "types": "./dist/effects/jump-cut.d.ts",
+        "default": "./dist/effects/jump-cut.js"
+      },
+      "require": {
+        "types": "./dist/effects/jump-cut.d.cts",
+        "default": "./dist/effects/jump-cut.cjs"
+      }
+    },
+    "./effects/safe-fade": {
+      "import": {
+        "types": "./dist/effects/safe-fade.d.ts",
+        "default": "./dist/effects/safe-fade.js"
+      },
+      "require": {
+        "types": "./dist/effects/safe-fade.d.cts",
+        "default": "./dist/effects/safe-fade.cjs"
+      }
+    },
+    "./effects/focus-glow": {
+      "import": {
+        "types": "./dist/effects/focus-glow.d.ts",
+        "default": "./dist/effects/focus-glow.js"
+      },
+      "require": {
+        "types": "./dist/effects/focus-glow.d.cts",
+        "default": "./dist/effects/focus-glow.cjs"
+      }
+    },
+    "./effects/color-pulse": {
+      "import": {
+        "types": "./dist/effects/color-pulse.d.ts",
+        "default": "./dist/effects/color-pulse.js"
+      },
+      "require": {
+        "types": "./dist/effects/color-pulse.d.cts",
+        "default": "./dist/effects/color-pulse.cjs"
+      }
+    },
+    "./effects/underline-sweep": {
+      "import": {
+        "types": "./dist/effects/underline-sweep.d.ts",
+        "default": "./dist/effects/underline-sweep.js"
+      },
+      "require": {
+        "types": "./dist/effects/underline-sweep.d.cts",
+        "default": "./dist/effects/underline-sweep.cjs"
+      }
+    },
+    "./effects/idle-reveal": {
+      "import": {
+        "types": "./dist/effects/idle-reveal.d.ts",
+        "default": "./dist/effects/idle-reveal.js"
+      },
+      "require": {
+        "types": "./dist/effects/idle-reveal.d.cts",
+        "default": "./dist/effects/idle-reveal.cjs"
+      }
+    },
+    "./effects/gpu-lift": {
+      "import": {
+        "types": "./dist/effects/gpu-lift.d.ts",
+        "default": "./dist/effects/gpu-lift.js"
+      },
+      "require": {
+        "types": "./dist/effects/gpu-lift.d.cts",
+        "default": "./dist/effects/gpu-lift.cjs"
+      }
+    },
     "./manifest.json": "./dist/manifest.json",
     "./manifest.schema.json": "./dist/manifest.schema.json",
     "./components.css": "./dist/components.css",
@@ -1535,12 +4175,14 @@
     "solid-js": "^1.9.16",
     "tslib": "^2.8.1",
     "typescript": "^6.0.2",
-    "vitest": "^3.2.7"
+    "vitest": "^3.2.7",
+    "draco3d": "1.5.7"
   },
   "peerDependencies": {
     "solid-js": ">=1.6.0",
     "svelte": ">=3.0.0",
-    "@rive-app/canvas": ">=2.20.0"
+    "@rive-app/canvas": ">=2.20.0",
+    "draco3d": ">=1.5.0"
   },
   "peerDependenciesMeta": {
     "solid-js": {
@@ -1550,6 +4192,9 @@
       "optional": true
     },
     "@rive-app/canvas": {
+      "optional": true
+    },
+    "draco3d": {
       "optional": true
     }
   },
@@ -1564,6 +4209,7 @@
     "usa-codemod-9": "./bin/usa-codemod-9.mjs",
     "usa-codemod-10": "./bin/usa-codemod-10.mjs",
     "create-motionary-plugin": "./bin/create-motionary-plugin.mjs",
-    "motionary-mcp": "./bin/motionary-mcp.mjs"
+    "motionary-mcp": "./bin/motionary-mcp.mjs",
+    "usa-codemod-11": "./bin/usa-codemod-11.mjs"
   }
 }

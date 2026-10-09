@@ -1,0 +1,2816 @@
+[
+ {
+  "kind": "widget",
+  "name": "carousel",
+  "entry": "motionary/widgets/carousel",
+  "src": "src/entries/widgets/carousel.ts",
+  "tag": "usa-carousel",
+  "define": "defineCarousel",
+  "types": [
+   "UsaCarouselElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/carousel"
+ },
+ {
+  "kind": "widget",
+  "name": "tab-bar",
+  "entry": "motionary/widgets/tab-bar",
+  "src": "src/entries/widgets/tab-bar.ts",
+  "tag": "usa-tab-bar",
+  "define": "defineTabBar",
+  "types": [
+   "UsaTabBarElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/tab-bar"
+ },
+ {
+  "kind": "widget",
+  "name": "disclosure",
+  "entry": "motionary/widgets/disclosure",
+  "src": "src/entries/widgets/disclosure.ts",
+  "tag": "usa-disclosure",
+  "define": "defineDisclosure",
+  "types": [
+   "UsaDisclosureElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/disclosure"
+ },
+ {
+  "kind": "widget",
+  "name": "stories",
+  "entry": "motionary/widgets/stories",
+  "src": "src/entries/widgets/stories.ts",
+  "tag": "usa-stories",
+  "define": "defineStories",
+  "types": [
+   "UsaStoriesElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/stories"
+ },
+ {
+  "kind": "widget",
+  "name": "toast-stack",
+  "entry": "motionary/widgets/toast-stack",
+  "src": "src/entries/widgets/toast-stack.ts",
+  "tag": "usa-toast-stack",
+  "define": "defineToastStack",
+  "types": [
+   "UsaToastStackElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/toast"
+ },
+ {
+  "kind": "widget",
+  "name": "modal",
+  "entry": "motionary/widgets/modal",
+  "src": "src/entries/widgets/modal.ts",
+  "tag": "usa-modal",
+  "define": "defineModal",
+  "types": [
+   "UsaModalElement",
+   "UsaSheetElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/overlay"
+ },
+ {
+  "kind": "widget",
+  "name": "sheet",
+  "entry": "motionary/widgets/sheet",
+  "src": "src/entries/widgets/sheet.ts",
+  "tag": "usa-sheet",
+  "define": "defineSheet",
+  "types": [
+   "UsaModalElement",
+   "UsaSheetElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/overlay"
+ },
+ {
+  "kind": "widget",
+  "name": "menu",
+  "entry": "motionary/widgets/menu",
+  "src": "src/entries/widgets/menu.ts",
+  "tag": "usa-menu",
+  "define": "defineMenu",
+  "types": [
+   "UsaMenuElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/menu"
+ },
+ {
+  "kind": "widget",
+  "name": "progress-ring",
+  "entry": "motionary/widgets/progress-ring",
+  "src": "src/entries/widgets/progress-ring.ts",
+  "tag": "usa-progress-ring",
+  "define": "defineProgressRing",
+  "types": [
+   "UsaProgressRingElement",
+   "UsaOdometerElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/meters"
+ },
+ {
+  "kind": "widget",
+  "name": "odometer",
+  "entry": "motionary/widgets/odometer",
+  "src": "src/entries/widgets/odometer.ts",
+  "tag": "usa-odometer",
+  "define": "defineOdometer",
+  "types": [
+   "UsaProgressRingElement",
+   "UsaOdometerElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/meters"
+ },
+ {
+  "kind": "widget",
+  "name": "skeleton-reveal",
+  "entry": "motionary/widgets/skeleton-reveal",
+  "src": "src/entries/widgets/skeleton-reveal.ts",
+  "tag": "usa-skeleton-reveal",
+  "define": "defineSkeletonReveal",
+  "types": [
+   "UsaSkeletonRevealElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/skeleton-reveal"
+ },
+ {
+  "kind": "widget",
+  "name": "star-rating",
+  "entry": "motionary/widgets/star-rating",
+  "src": "src/entries/widgets/star-rating.ts",
+  "tag": "usa-star-rating",
+  "define": "defineStarRating",
+  "types": [
+   "UsaStarRatingElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/star-rating"
+ },
+ {
+  "kind": "widget",
+  "name": "milestones",
+  "entry": "motionary/widgets/milestones",
+  "src": "src/entries/widgets/milestones.ts",
+  "tag": "usa-milestones",
+  "define": "defineMilestones",
+  "types": [
+   "UsaMilestonesElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/milestones"
+ },
+ {
+  "kind": "widget",
+  "name": "masonry-flow",
+  "entry": "motionary/widgets/masonry-flow",
+  "src": "src/entries/widgets/masonry-flow.ts",
+  "tag": "usa-masonry-flow",
+  "define": "defineMasonryFlow",
+  "types": [
+   "UsaMasonryFlowElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/masonry-flow"
+ },
+ {
+  "kind": "widget",
+  "name": "compare",
+  "entry": "motionary/widgets/compare",
+  "src": "src/entries/widgets/compare.ts",
+  "tag": "usa-compare",
+  "define": "defineCompare",
+  "types": [
+   "UsaCompareElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/compare"
+ },
+ {
+  "kind": "widget",
+  "name": "cube-gallery",
+  "entry": "motionary/widgets/cube-gallery",
+  "src": "src/entries/widgets/cube-gallery.ts",
+  "tag": "usa-cube-gallery",
+  "define": "defineCubeGallery",
+  "types": [
+   "UsaCubeGalleryElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/cube-gallery"
+ },
+ {
+  "kind": "widget",
+  "name": "dock",
+  "entry": "motionary/widgets/dock",
+  "src": "src/entries/widgets/dock.ts",
+  "tag": "usa-dock",
+  "define": "defineDock",
+  "types": [
+   "UsaDockElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/dock"
+ },
+ {
+  "kind": "widget",
+  "name": "nav-morph",
+  "entry": "motionary/widgets/nav-morph",
+  "src": "src/entries/widgets/nav-morph.ts",
+  "tag": "usa-nav-morph",
+  "define": "defineNavMorph",
+  "types": [
+   "UsaNavMorphElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/nav-morph"
+ },
+ {
+  "kind": "widget",
+  "name": "menu-toggle",
+  "entry": "motionary/widgets/menu-toggle",
+  "src": "src/entries/widgets/menu-toggle.ts",
+  "tag": "usa-menu-toggle",
+  "define": "defineMenuToggle",
+  "types": [
+   "UsaMenuToggleElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/menu-toggle"
+ },
+ {
+  "kind": "widget",
+  "name": "tip",
+  "entry": "motionary/widgets/tip",
+  "src": "src/entries/widgets/tip.ts",
+  "tag": "usa-tip",
+  "define": "defineTip",
+  "types": [
+   "UsaTipElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/tip"
+ },
+ {
+  "kind": "widget",
+  "name": "stepper",
+  "entry": "motionary/widgets/stepper",
+  "src": "src/entries/widgets/stepper.ts",
+  "tag": "usa-stepper",
+  "define": "defineStepper",
+  "types": [
+   "UsaStepperElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/stepper"
+ },
+ {
+  "kind": "widget",
+  "name": "pagination",
+  "entry": "motionary/widgets/pagination",
+  "src": "src/entries/widgets/pagination.ts",
+  "tag": "usa-pagination",
+  "define": "definePagination",
+  "types": [
+   "UsaPaginationElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/pagination"
+ },
+ {
+  "kind": "widget",
+  "name": "segmented",
+  "entry": "motionary/widgets/segmented",
+  "src": "src/entries/widgets/segmented.ts",
+  "tag": "usa-segmented",
+  "define": "defineSegmented",
+  "types": [
+   "UsaSegmentedElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/segmented"
+ },
+ {
+  "kind": "widget",
+  "name": "switch",
+  "entry": "motionary/widgets/switch",
+  "src": "src/entries/widgets/switch.ts",
+  "tag": "usa-switch",
+  "define": "defineSwitch",
+  "types": [
+   "UsaSwitchElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/switch"
+ },
+ {
+  "kind": "widget",
+  "name": "kanban",
+  "entry": "motionary/widgets/kanban",
+  "src": "src/entries/widgets/kanban.ts",
+  "tag": "usa-kanban",
+  "define": "defineKanban",
+  "types": [
+   "UsaKanbanElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/kanban"
+ },
+ {
+  "kind": "widget",
+  "name": "swipe-deck",
+  "entry": "motionary/widgets/swipe-deck",
+  "src": "src/entries/widgets/swipe-deck.ts",
+  "tag": "usa-swipe-deck",
+  "define": "defineSwipeDeck",
+  "types": [
+   "UsaSwipeDeckElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/swipe-deck"
+ },
+ {
+  "kind": "widget",
+  "name": "weather-card",
+  "entry": "motionary/widgets/weather-card",
+  "src": "src/entries/widgets/weather-card.ts",
+  "tag": "usa-weather-card",
+  "define": "defineWeatherCard",
+  "types": [
+   "UsaWeatherCardElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/weather-card"
+ },
+ {
+  "kind": "widget",
+  "name": "pull-cord",
+  "entry": "motionary/widgets/pull-cord",
+  "src": "src/entries/widgets/pull-cord.ts",
+  "tag": "usa-pull-cord",
+  "define": "definePullCord",
+  "types": [
+   "UsaPullCordElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/pull-cord"
+ },
+ {
+  "kind": "widget",
+  "name": "date-picker",
+  "entry": "motionary/widgets/date-picker",
+  "src": "src/entries/widgets/date-picker.ts",
+  "tag": "usa-date-picker",
+  "define": "defineDatePicker",
+  "types": [
+   "UsaDatePickerElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/date-picker"
+ },
+ {
+  "kind": "widget",
+  "name": "color-picker",
+  "entry": "motionary/widgets/color-picker",
+  "src": "src/entries/widgets/color-picker.ts",
+  "tag": "usa-color-picker",
+  "define": "defineColorPicker",
+  "types": [
+   "UsaColorPickerElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/color-picker"
+ },
+ {
+  "kind": "widget",
+  "name": "file-drop",
+  "entry": "motionary/widgets/file-drop",
+  "src": "src/entries/widgets/file-drop.ts",
+  "tag": "usa-file-drop",
+  "define": "defineFileDrop",
+  "types": [
+   "UsaFileDropElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/file-drop"
+ },
+ {
+  "kind": "widget",
+  "name": "keyframe-editor",
+  "entry": "motionary/widgets/keyframe-editor",
+  "src": "src/entries/widgets/keyframe-editor.ts",
+  "tag": "usa-keyframe-editor",
+  "define": "defineKeyframeEditor",
+  "types": [
+   "UsaKeyframeEditorElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/keyframe-editor"
+ },
+ {
+  "kind": "widget",
+  "name": "music-player",
+  "entry": "motionary/widgets/music-player",
+  "src": "src/entries/widgets/music-player.ts",
+  "tag": "usa-music-player",
+  "define": "defineMusicPlayer",
+  "types": [
+   "UsaMusicPlayerElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/music-player"
+ },
+ {
+  "kind": "widget",
+  "name": "volume-knob",
+  "entry": "motionary/widgets/volume-knob",
+  "src": "src/entries/widgets/volume-knob.ts",
+  "tag": "usa-volume-knob",
+  "define": "defineVolumeKnob",
+  "types": [
+   "UsaVolumeKnobElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/volume-knob"
+ },
+ {
+  "kind": "widget",
+  "name": "equalizer",
+  "entry": "motionary/widgets/equalizer",
+  "src": "src/entries/widgets/equalizer.ts",
+  "tag": "usa-equalizer",
+  "define": "defineEqualizer",
+  "types": [
+   "UsaEqualizerElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/equalizer"
+ },
+ {
+  "kind": "widget",
+  "name": "lyrics",
+  "entry": "motionary/widgets/lyrics",
+  "src": "src/entries/widgets/lyrics.ts",
+  "tag": "usa-lyrics",
+  "define": "defineLyrics",
+  "types": [
+   "UsaLyricsElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/lyrics"
+ },
+ {
+  "kind": "widget",
+  "name": "bar-chart",
+  "entry": "motionary/widgets/bar-chart",
+  "src": "src/entries/widgets/bar-chart.ts",
+  "tag": "usa-bar-chart",
+  "define": "defineBarChart",
+  "types": [
+   "UsaBarChartElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/bar-chart"
+ },
+ {
+  "kind": "widget",
+  "name": "gauge",
+  "entry": "motionary/widgets/gauge",
+  "src": "src/entries/widgets/gauge.ts",
+  "tag": "usa-gauge",
+  "define": "defineGauge",
+  "types": [
+   "UsaGaugeElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/gauge"
+ },
+ {
+  "kind": "widget",
+  "name": "sparkline",
+  "entry": "motionary/widgets/sparkline",
+  "src": "src/entries/widgets/sparkline.ts",
+  "tag": "usa-sparkline",
+  "define": "defineSparkline",
+  "types": [
+   "UsaSparklineElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/sparkline"
+ },
+ {
+  "kind": "widget",
+  "name": "kpi",
+  "entry": "motionary/widgets/kpi",
+  "src": "src/entries/widgets/kpi.ts",
+  "tag": "usa-kpi",
+  "define": "defineKpi",
+  "types": [
+   "UsaKpiElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/kpi"
+ },
+ {
+  "kind": "widget",
+  "name": "add-to-cart",
+  "entry": "motionary/widgets/add-to-cart",
+  "src": "src/entries/widgets/add-to-cart.ts",
+  "tag": "usa-add-to-cart",
+  "define": "defineAddToCart",
+  "types": [
+   "UsaAddToCartElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/add-to-cart"
+ },
+ {
+  "kind": "widget",
+  "name": "cart-drawer",
+  "entry": "motionary/widgets/cart-drawer",
+  "src": "src/entries/widgets/cart-drawer.ts",
+  "tag": "usa-cart-drawer",
+  "define": "defineCartDrawer",
+  "types": [
+   "UsaCartDrawerElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/cart-drawer"
+ },
+ {
+  "kind": "widget",
+  "name": "product-gallery",
+  "entry": "motionary/widgets/product-gallery",
+  "src": "src/entries/widgets/product-gallery.ts",
+  "tag": "usa-product-gallery",
+  "define": "defineProductGallery",
+  "types": [
+   "UsaProductGalleryElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/product-gallery"
+ },
+ {
+  "kind": "widget",
+  "name": "countdown",
+  "entry": "motionary/widgets/countdown",
+  "src": "src/entries/widgets/countdown.ts",
+  "tag": "usa-countdown",
+  "define": "defineCountdown",
+  "types": [
+   "UsaCountdownElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/countdown"
+ },
+ {
+  "kind": "widget",
+  "name": "message-list",
+  "entry": "motionary/widgets/message-list",
+  "src": "src/entries/widgets/message-list.ts",
+  "tag": "usa-message-list",
+  "define": "defineMessageList",
+  "types": [
+   "UsaMessageListElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/message-list"
+ },
+ {
+  "kind": "widget",
+  "name": "reactions",
+  "entry": "motionary/widgets/reactions",
+  "src": "src/entries/widgets/reactions.ts",
+  "tag": "usa-reactions",
+  "define": "defineReactions",
+  "types": [
+   "UsaReactionsElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/reactions"
+ },
+ {
+  "kind": "widget",
+  "name": "notification-bell",
+  "entry": "motionary/widgets/notification-bell",
+  "src": "src/entries/widgets/notification-bell.ts",
+  "tag": "usa-notification-bell",
+  "define": "defineNotificationBell",
+  "types": [
+   "UsaNotificationBellElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/notification-bell"
+ },
+ {
+  "kind": "widget",
+  "name": "presence",
+  "entry": "motionary/widgets/presence",
+  "src": "src/entries/widgets/presence.ts",
+  "tag": "usa-presence",
+  "define": "definePresence",
+  "types": [
+   "UsaPresenceElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/presence"
+ },
+ {
+  "kind": "widget",
+  "name": "leaderboard",
+  "entry": "motionary/widgets/leaderboard",
+  "src": "src/entries/widgets/leaderboard.ts",
+  "tag": "usa-leaderboard",
+  "define": "defineLeaderboard",
+  "types": [
+   "UsaLeaderboardElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/leaderboard"
+ },
+ {
+  "kind": "widget",
+  "name": "xp-bar",
+  "entry": "motionary/widgets/xp-bar",
+  "src": "src/entries/widgets/xp-bar.ts",
+  "tag": "usa-xp-bar",
+  "define": "defineXpBar",
+  "types": [
+   "UsaXpBarElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/xp-bar"
+ },
+ {
+  "kind": "widget",
+  "name": "badge-wall",
+  "entry": "motionary/widgets/badge-wall",
+  "src": "src/entries/widgets/badge-wall.ts",
+  "tag": "usa-badge-wall",
+  "define": "defineBadgeWall",
+  "types": [
+   "UsaBadgeWallElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/badge-wall"
+ },
+ {
+  "kind": "widget",
+  "name": "prize-wheel",
+  "entry": "motionary/widgets/prize-wheel",
+  "src": "src/entries/widgets/prize-wheel.ts",
+  "tag": "usa-prize-wheel",
+  "define": "definePrizeWheel",
+  "types": [
+   "UsaPrizeWheelElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/prize-wheel"
+ },
+ {
+  "kind": "widget",
+  "name": "globe",
+  "entry": "motionary/widgets/globe",
+  "src": "src/entries/widgets/globe.ts",
+  "tag": "usa-globe",
+  "define": "defineGlobe",
+  "types": [
+   "UsaGlobeElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/globe"
+ },
+ {
+  "kind": "widget",
+  "name": "location-card",
+  "entry": "motionary/widgets/location-card",
+  "src": "src/entries/widgets/location-card.ts",
+  "tag": "usa-location-card",
+  "define": "defineLocationCard",
+  "types": [
+   "UsaLocationCardElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/location-card"
+ },
+ {
+  "kind": "widget",
+  "name": "field",
+  "entry": "motionary/widgets/field",
+  "src": "src/entries/widgets/field.ts",
+  "tag": "usa-field",
+  "define": "defineField",
+  "types": [
+   "UsaFieldElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/field"
+ },
+ {
+  "kind": "widget",
+  "name": "otp",
+  "entry": "motionary/widgets/otp",
+  "src": "src/entries/widgets/otp.ts",
+  "tag": "usa-otp",
+  "define": "defineOtp",
+  "types": [
+   "UsaOtpElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/otp"
+ },
+ {
+  "kind": "widget",
+  "name": "upload-progress",
+  "entry": "motionary/widgets/upload-progress",
+  "src": "src/entries/widgets/upload-progress.ts",
+  "tag": "usa-upload-progress",
+  "define": "defineUploadProgress",
+  "types": [
+   "UsaUploadProgressElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/upload-progress"
+ },
+ {
+  "kind": "widget",
+  "name": "chat-composer",
+  "entry": "motionary/widgets/chat-composer",
+  "src": "src/entries/widgets/chat-composer.ts",
+  "tag": "usa-chat-composer",
+  "define": "defineChatComposer",
+  "types": [
+   "UsaChatComposerElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/chat-composer"
+ },
+ {
+  "kind": "widget",
+  "name": "suggestion-chips",
+  "entry": "motionary/widgets/suggestion-chips",
+  "src": "src/entries/widgets/suggestion-chips.ts",
+  "tag": "usa-suggestion-chips",
+  "define": "defineSuggestionChips",
+  "types": [
+   "UsaSuggestionChipsElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/suggestion-chips"
+ },
+ {
+  "kind": "widget",
+  "name": "voice-button",
+  "entry": "motionary/widgets/voice-button",
+  "src": "src/entries/widgets/voice-button.ts",
+  "tag": "usa-voice-button",
+  "define": "defineVoiceButton",
+  "types": [
+   "UsaVoiceButtonElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/voice-button"
+ },
+ {
+  "kind": "widget",
+  "name": "command-palette",
+  "entry": "motionary/widgets/command-palette",
+  "src": "src/entries/widgets/command-palette.ts",
+  "tag": "usa-command-palette",
+  "define": "defineCommandPalette",
+  "types": [
+   "UsaCommandPaletteElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/command-palette"
+ },
+ {
+  "kind": "widget",
+  "name": "shortcut",
+  "entry": "motionary/widgets/shortcut",
+  "src": "src/entries/widgets/shortcut.ts",
+  "tag": "usa-shortcut",
+  "define": "defineShortcut",
+  "types": [
+   "UsaShortcutElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/shortcut"
+ },
+ {
+  "kind": "widget",
+  "name": "clock-control",
+  "entry": "motionary/widgets/clock-control",
+  "src": "src/entries/widgets/clock-control.ts",
+  "tag": "usa-clock-control",
+  "define": "defineClockControl",
+  "types": [
+   "UsaClockControlElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/clock-control"
+ },
+ {
+  "kind": "widget",
+  "name": "hydrate",
+  "entry": "motionary/widgets/hydrate",
+  "src": "src/entries/widgets/hydrate.ts",
+  "tag": "usa-hydrate",
+  "define": "defineHydrate",
+  "types": [
+   "UsaHydrateElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/hydrate"
+ },
+ {
+  "kind": "widget",
+  "name": "red-envelope",
+  "entry": "motionary/widgets/red-envelope",
+  "src": "src/entries/widgets/red-envelope.ts",
+  "tag": "usa-red-envelope",
+  "define": "defineRedEnvelope",
+  "types": [
+   "UsaRedEnvelopeElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/red-envelope"
+ },
+ {
+  "kind": "widget",
+  "name": "festival-banner",
+  "entry": "motionary/widgets/festival-banner",
+  "src": "src/entries/widgets/festival-banner.ts",
+  "tag": "usa-festival-banner",
+  "define": "defineFestivalBanner",
+  "types": [
+   "UsaFestivalBannerElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/festival-banner"
+ },
+ {
+  "kind": "widget",
+  "name": "terminal",
+  "entry": "motionary/widgets/terminal",
+  "src": "src/entries/widgets/terminal.ts",
+  "tag": "usa-terminal",
+  "define": "defineTerminal",
+  "types": [
+   "UsaTerminalElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/terminal"
+ },
+ {
+  "kind": "widget",
+  "name": "retro-button",
+  "entry": "motionary/widgets/retro-button",
+  "src": "src/entries/widgets/retro-button.ts",
+  "tag": "usa-retro-button",
+  "define": "defineRetroButton",
+  "types": [
+   "UsaRetroButtonElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/retro-button"
+ },
+ {
+  "kind": "widget",
+  "name": "organic-card",
+  "entry": "motionary/widgets/organic-card",
+  "src": "src/entries/widgets/organic-card.ts",
+  "tag": "usa-organic-card",
+  "define": "defineOrganicCard",
+  "types": [
+   "UsaOrganicCardElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/organic-card"
+ },
+ {
+  "kind": "widget",
+  "name": "liquid-nav",
+  "entry": "motionary/widgets/liquid-nav",
+  "src": "src/entries/widgets/liquid-nav.ts",
+  "tag": "usa-liquid-nav",
+  "define": "defineLiquidNav",
+  "types": [
+   "UsaLiquidNavElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/liquid-nav"
+ },
+ {
+  "kind": "widget",
+  "name": "hud-panel",
+  "entry": "motionary/widgets/hud-panel",
+  "src": "src/entries/widgets/hud-panel.ts",
+  "tag": "usa-hud-panel",
+  "define": "defineHudPanel",
+  "types": [
+   "UsaHudPanelElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/hud-panel"
+ },
+ {
+  "kind": "widget",
+  "name": "radar",
+  "entry": "motionary/widgets/radar",
+  "src": "src/entries/widgets/radar.ts",
+  "tag": "usa-radar",
+  "define": "defineRadar",
+  "types": [
+   "UsaRadarElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/radar"
+ },
+ {
+  "kind": "widget",
+  "name": "sticky-wall",
+  "entry": "motionary/widgets/sticky-wall",
+  "src": "src/entries/widgets/sticky-wall.ts",
+  "tag": "usa-sticky-wall",
+  "define": "defineStickyWall",
+  "types": [
+   "UsaStickyWallElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/sticky-wall"
+ },
+ {
+  "kind": "widget",
+  "name": "sketch-chart",
+  "entry": "motionary/widgets/sketch-chart",
+  "src": "src/entries/widgets/sketch-chart.ts",
+  "tag": "usa-sketch-chart",
+  "define": "defineSketchChart",
+  "types": [
+   "UsaSketchChartElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/sketch-chart"
+ },
+ {
+  "kind": "widget",
+  "name": "theme-switcher",
+  "entry": "motionary/widgets/theme-switcher",
+  "src": "src/entries/widgets/theme-switcher.ts",
+  "tag": "usa-theme-switcher",
+  "define": "defineThemeSwitcher",
+  "types": [
+   "UsaThemeSwitcherElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/theme-switcher"
+ },
+ {
+  "kind": "widget",
+  "name": "theme-surface",
+  "entry": "motionary/widgets/theme-surface",
+  "src": "src/entries/widgets/theme-surface.ts",
+  "tag": "usa-theme-surface",
+  "define": "defineThemeSurface",
+  "types": [
+   "UsaThemeSurfaceElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/theme-surface"
+ },
+ {
+  "kind": "widget",
+  "name": "gyro-card",
+  "entry": "motionary/widgets/gyro-card",
+  "src": "src/entries/widgets/gyro-card.ts",
+  "tag": "usa-gyro-card",
+  "define": "defineGyroCard",
+  "types": [
+   "UsaGyroCardElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/gyro-card"
+ },
+ {
+  "kind": "widget",
+  "name": "gesture-sticker",
+  "entry": "motionary/widgets/gesture-sticker",
+  "src": "src/entries/widgets/gesture-sticker.ts",
+  "tag": "usa-gesture-sticker",
+  "define": "defineGestureSticker",
+  "types": [
+   "UsaGestureStickerElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/gesture-sticker"
+ },
+ {
+  "kind": "widget",
+  "name": "panorama",
+  "entry": "motionary/widgets/panorama",
+  "src": "src/entries/widgets/panorama.ts",
+  "tag": "usa-panorama",
+  "define": "definePanorama",
+  "types": [
+   "UsaPanoramaElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/panorama"
+ },
+ {
+  "kind": "widget",
+  "name": "spatial-card",
+  "entry": "motionary/widgets/spatial-card",
+  "src": "src/entries/widgets/spatial-card.ts",
+  "tag": "usa-spatial-card",
+  "define": "defineSpatialCard",
+  "types": [
+   "UsaSpatialCardElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/spatial-card"
+ },
+ {
+  "kind": "widget",
+  "name": "code-export",
+  "entry": "motionary/widgets/code-export",
+  "src": "src/entries/widgets/code-export.ts",
+  "tag": "usa-code-export",
+  "define": "defineCodeExport",
+  "types": [
+   "UsaCodeExportElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/code-export"
+ },
+ {
+  "kind": "widget",
+  "name": "prop-panel",
+  "entry": "motionary/widgets/prop-panel",
+  "src": "src/entries/widgets/prop-panel.ts",
+  "tag": "usa-prop-panel",
+  "define": "definePropPanel",
+  "types": [
+   "UsaPropPanelElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/prop-panel"
+ },
+ {
+  "kind": "widget",
+  "name": "motion",
+  "entry": "motionary/widgets/motion",
+  "src": "src/entries/widgets/motion.ts",
+  "tag": "usa-motion",
+  "define": "defineMotion",
+  "types": [
+   "UsaMotionElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/motion"
+ },
+ {
+  "kind": "widget",
+  "name": "plugin-store",
+  "entry": "motionary/widgets/plugin-store",
+  "src": "src/entries/widgets/plugin-store.ts",
+  "tag": "usa-plugin-store",
+  "define": "definePluginStore",
+  "types": [
+   "UsaPluginStoreElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/plugin-store"
+ },
+ {
+  "kind": "widget",
+  "name": "chapter-nav",
+  "entry": "motionary/widgets/chapter-nav",
+  "src": "src/entries/widgets/chapter-nav.ts",
+  "tag": "usa-chapter-nav",
+  "define": "defineChapterNav",
+  "types": [
+   "UsaChapterNavElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/chapter-nav"
+ },
+ {
+  "kind": "widget",
+  "name": "scene",
+  "entry": "motionary/widgets/scene",
+  "src": "src/entries/widgets/scene.ts",
+  "tag": "usa-scene",
+  "define": "defineScene",
+  "types": [
+   "UsaSceneElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/scene"
+ },
+ {
+  "kind": "widget",
+  "name": "lottie",
+  "entry": "motionary/widgets/lottie",
+  "src": "src/entries/widgets/lottie.ts",
+  "tag": "usa-lottie",
+  "define": "defineLottie",
+  "types": [
+   "UsaLottieElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/lottie"
+ },
+ {
+  "kind": "widget",
+  "name": "lottie-icon",
+  "entry": "motionary/widgets/lottie-icon",
+  "src": "src/entries/widgets/lottie-icon.ts",
+  "tag": "usa-lottie-icon",
+  "define": "defineLottieIcon",
+  "types": [
+   "UsaLottieIconElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/lottie-icon"
+ },
+ {
+  "kind": "widget",
+  "name": "gen-art",
+  "entry": "motionary/widgets/gen-art",
+  "src": "src/entries/widgets/gen-art.ts",
+  "tag": "usa-gen-art",
+  "define": "defineGenArt",
+  "types": [
+   "UsaGenArtElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/gen-art"
+ },
+ {
+  "kind": "widget",
+  "name": "bg-generator",
+  "entry": "motionary/widgets/bg-generator",
+  "src": "src/entries/widgets/bg-generator.ts",
+  "tag": "usa-bg-generator",
+  "define": "defineBgGenerator",
+  "types": [
+   "UsaBgGeneratorElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/bg-generator"
+ },
+ {
+  "kind": "widget",
+  "name": "video-card",
+  "entry": "motionary/widgets/video-card",
+  "src": "src/entries/widgets/video-card.ts",
+  "tag": "usa-video-card",
+  "define": "defineVideoCard",
+  "types": [
+   "UsaVideoCardElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/video-card"
+ },
+ {
+  "kind": "widget",
+  "name": "hero-video",
+  "entry": "motionary/widgets/hero-video",
+  "src": "src/entries/widgets/hero-video.ts",
+  "tag": "usa-hero-video",
+  "define": "defineHeroVideo",
+  "types": [
+   "UsaHeroVideoElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/hero-video"
+ },
+ {
+  "kind": "widget",
+  "name": "motion-prefs",
+  "entry": "motionary/widgets/motion-prefs",
+  "src": "src/entries/widgets/motion-prefs.ts",
+  "tag": "usa-motion-prefs",
+  "define": "defineMotionPrefs",
+  "types": [
+   "UsaMotionPrefsElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/motion-prefs"
+ },
+ {
+  "kind": "widget",
+  "name": "pause-all",
+  "entry": "motionary/widgets/pause-all",
+  "src": "src/entries/widgets/pause-all.ts",
+  "tag": "usa-pause-all",
+  "define": "definePauseAll",
+  "types": [
+   "UsaPauseAllElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/pause-all"
+ },
+ {
+  "kind": "widget",
+  "name": "perf-monitor",
+  "entry": "motionary/widgets/perf-monitor",
+  "src": "src/entries/widgets/perf-monitor.ts",
+  "tag": "usa-perf-monitor",
+  "define": "definePerfMonitor",
+  "types": [
+   "UsaPerfMonitorElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/perf-monitor"
+ },
+ {
+  "kind": "widget",
+  "name": "worker-canvas",
+  "entry": "motionary/widgets/worker-canvas",
+  "src": "src/entries/widgets/worker-canvas.ts",
+  "tag": "usa-worker-canvas",
+  "define": "defineWorkerCanvas",
+  "types": [
+   "UsaWorkerCanvasElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/worker-canvas"
+ },
+ {
+  "kind": "widget",
+  "name": "motion-spec",
+  "entry": "motionary/widgets/motion-spec",
+  "src": "src/entries/widgets/motion-spec.ts",
+  "tag": "usa-motion-spec",
+  "define": "defineMotionSpec",
+  "types": [
+   "UsaMotionSpecElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/motion-spec"
+ },
+ {
+  "kind": "widget",
+  "name": "native-preview",
+  "entry": "motionary/widgets/native-preview",
+  "src": "src/entries/widgets/native-preview.ts",
+  "tag": "usa-native-preview",
+  "define": "defineNativePreview",
+  "types": [
+   "UsaNativePreviewElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/native-preview"
+ },
+ {
+  "kind": "widget",
+  "name": "plugin-card",
+  "entry": "motionary/widgets/plugin-card",
+  "src": "src/entries/widgets/plugin-card.ts",
+  "tag": "usa-plugin-card",
+  "define": "definePluginCard",
+  "types": [
+   "UsaPluginCardElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/plugin-card"
+ },
+ {
+  "kind": "widget",
+  "name": "install-button",
+  "entry": "motionary/widgets/install-button",
+  "src": "src/entries/widgets/install-button.ts",
+  "tag": "usa-install-button",
+  "define": "defineInstallButton",
+  "types": [
+   "UsaInstallButtonElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/install-button"
+ },
+ {
+  "kind": "widget",
+  "name": "scroll-scene",
+  "entry": "motionary/widgets/scroll-scene",
+  "src": "src/entries/widgets/scroll-scene.ts",
+  "tag": "usa-scroll-scene",
+  "define": "defineScrollScene",
+  "types": [
+   "UsaScrollSceneElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/scroll-scene"
+ },
+ {
+  "kind": "widget",
+  "name": "motion-inspector",
+  "entry": "motionary/widgets/motion-inspector",
+  "src": "src/entries/widgets/motion-inspector.ts",
+  "tag": "usa-motion-inspector",
+  "define": "defineMotionInspector",
+  "types": [
+   "UsaMotionInspectorElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/motion-inspector"
+ },
+ {
+  "kind": "widget",
+  "name": "route-transition",
+  "entry": "motionary/widgets/route-transition",
+  "src": "src/entries/widgets/route-transition.ts",
+  "tag": "usa-route-transition",
+  "define": "defineRouteTransition",
+  "types": [
+   "UsaRouteTransitionElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/route-transition"
+ },
+ {
+  "kind": "widget",
+  "name": "text-splitter",
+  "entry": "motionary/widgets/text-splitter",
+  "src": "src/entries/widgets/text-splitter.ts",
+  "tag": "usa-text-splitter",
+  "define": "defineTextSplitter",
+  "types": [
+   "UsaTextSplitterElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/text-splitter"
+ },
+ {
+  "kind": "widget",
+  "name": "scroll-ring",
+  "entry": "motionary/widgets/scroll-ring",
+  "src": "src/entries/widgets/scroll-ring.ts",
+  "tag": "usa-scroll-ring",
+  "define": "defineScrollRing",
+  "types": [
+   "UsaScrollRingElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/scroll-ring"
+ },
+ {
+  "kind": "widget",
+  "name": "parallax-layers",
+  "entry": "motionary/widgets/parallax-layers",
+  "src": "src/entries/widgets/parallax-layers.ts",
+  "tag": "usa-parallax-layers",
+  "define": "defineParallaxLayers",
+  "types": [
+   "UsaParallaxLayersElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/parallax-layers"
+ },
+ {
+  "kind": "widget",
+  "name": "smooth-scroll",
+  "entry": "motionary/widgets/smooth-scroll",
+  "src": "src/entries/widgets/smooth-scroll.ts",
+  "tag": "usa-smooth-scroll",
+  "define": "defineSmoothScroll",
+  "types": [
+   "UsaSmoothScrollElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/smooth-scroll"
+ },
+ {
+  "kind": "widget",
+  "name": "gl-scene",
+  "entry": "motionary/widgets/gl-scene",
+  "src": "src/entries/widgets/gl-scene.ts",
+  "tag": "usa-gl-scene",
+  "define": "defineGlScene",
+  "types": [
+   "UsaGlSceneElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/gl-scene"
+ },
+ {
+  "kind": "widget",
+  "name": "three-scene",
+  "entry": "motionary/widgets/three-scene",
+  "src": "src/entries/widgets/three-scene.ts",
+  "tag": "usa-three-scene",
+  "define": "defineThreeScene",
+  "types": [
+   "UsaGlSceneElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/gl-scene"
+ },
+ {
+  "kind": "widget",
+  "name": "gpu-particles",
+  "entry": "motionary/widgets/gpu-particles",
+  "src": "src/entries/widgets/gpu-particles.ts",
+  "tag": "usa-gpu-particles",
+  "define": "defineGpuParticles",
+  "types": [
+   "UsaGpuParticlesElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/gpu-particles"
+ },
+ {
+  "kind": "widget",
+  "name": "shader-backdrop",
+  "entry": "motionary/widgets/shader-backdrop",
+  "src": "src/entries/widgets/shader-backdrop.ts",
+  "tag": "usa-shader-backdrop",
+  "define": "defineShaderBackdrop",
+  "types": [
+   "UsaShaderBackdropElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/shader-backdrop"
+ },
+ {
+  "kind": "widget",
+  "name": "lottie-player",
+  "entry": "motionary/widgets/lottie-player",
+  "src": "src/entries/widgets/lottie-player.ts",
+  "tag": "usa-lottie-player",
+  "define": "defineLottiePlayer",
+  "types": [
+   "UsaLottiePlayerElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/lottie-player"
+ },
+ {
+  "kind": "widget",
+  "name": "rive",
+  "entry": "motionary/widgets/rive",
+  "src": "src/entries/widgets/rive.ts",
+  "tag": "usa-rive",
+  "define": "defineRive",
+  "types": [
+   "UsaRiveElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/rive"
+ },
+ {
+  "kind": "widget",
+  "name": "token-editor",
+  "entry": "motionary/widgets/token-editor",
+  "src": "src/entries/widgets/token-editor.ts",
+  "tag": "usa-token-editor",
+  "define": "defineTokenEditor",
+  "types": [
+   "UsaTokenEditorElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/token-editor"
+ },
+ {
+  "kind": "widget",
+  "name": "physics-playground",
+  "entry": "motionary/widgets/physics-playground",
+  "src": "src/entries/widgets/physics-playground.ts",
+  "tag": "usa-physics-playground",
+  "define": "definePhysicsPlayground",
+  "types": [
+   "UsaPhysicsPlaygroundElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/physics-playground"
+ },
+ {
+  "kind": "widget",
+  "name": "motion-prompt",
+  "entry": "motionary/widgets/motion-prompt",
+  "src": "src/entries/widgets/motion-prompt.ts",
+  "tag": "usa-motion-prompt",
+  "define": "defineMotionPrompt",
+  "types": [
+   "UsaMotionPromptElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/motion-prompt"
+ },
+ {
+  "kind": "widget",
+  "name": "snap-carousel",
+  "entry": "motionary/widgets/snap-carousel",
+  "src": "src/entries/widgets/snap-carousel.ts",
+  "tag": "usa-snap-carousel",
+  "define": "defineSnapCarousel",
+  "types": [],
+  "dts": "../components/snap-carousel",
+  "module": "components/widgets/snap-carousel"
+ },
+ {
+  "kind": "widget",
+  "name": "gl-model",
+  "entry": "motionary/widgets/gl-model",
+  "src": "src/entries/widgets/gl-model.ts",
+  "tag": "usa-gl-model",
+  "define": "defineGlModel",
+  "types": [],
+  "dts": "../components/gl-model",
+  "module": "components/widgets/gl-model"
+ },
+ {
+  "kind": "widget",
+  "name": "dotlottie",
+  "entry": "motionary/widgets/dotlottie",
+  "src": "src/entries/widgets/dotlottie.ts",
+  "tag": "usa-dotlottie",
+  "define": "defineDotLottie",
+  "types": [],
+  "dts": "../components/dotlottie",
+  "module": "components/widgets/dotlottie"
+ },
+ {
+  "kind": "effect",
+  "name": "fluid",
+  "entry": "motionary/effects/fluid",
+  "src": "src/entries/effects/fluid.ts",
+  "pack": "gpu",
+  "register": "registerFluid",
+  "module": "components/fx2/gpu"
+ },
+ {
+  "kind": "effect",
+  "name": "smoke",
+  "entry": "motionary/effects/smoke",
+  "src": "src/entries/effects/smoke.ts",
+  "pack": "gpu",
+  "register": "registerSmoke",
+  "module": "components/fx2/gpu"
+ },
+ {
+  "kind": "effect",
+  "name": "fire",
+  "entry": "motionary/effects/fire",
+  "src": "src/entries/effects/fire.ts",
+  "pack": "gpu",
+  "register": "registerFire",
+  "module": "components/fx2/gpu"
+ },
+ {
+  "kind": "effect",
+  "name": "ink",
+  "entry": "motionary/effects/ink",
+  "src": "src/entries/effects/ink.ts",
+  "pack": "gpu",
+  "register": "registerInk",
+  "module": "components/fx2/gpu"
+ },
+ {
+  "kind": "effect",
+  "name": "fireflies",
+  "entry": "motionary/effects/fireflies",
+  "src": "src/entries/effects/fireflies.ts",
+  "pack": "gpu",
+  "register": "registerFireflies",
+  "module": "components/fx2/gpu"
+ },
+ {
+  "kind": "effect",
+  "name": "sakura",
+  "entry": "motionary/effects/sakura",
+  "src": "src/entries/effects/sakura.ts",
+  "pack": "gpu",
+  "register": "registerSakura",
+  "module": "components/fx2/gpu"
+ },
+ {
+  "kind": "effect",
+  "name": "leaves",
+  "entry": "motionary/effects/leaves",
+  "src": "src/entries/effects/leaves.ts",
+  "pack": "gpu",
+  "register": "registerLeaves",
+  "module": "components/fx2/gpu"
+ },
+ {
+  "kind": "effect",
+  "name": "splash",
+  "entry": "motionary/effects/splash",
+  "src": "src/entries/effects/splash.ts",
+  "pack": "gpu",
+  "register": "registerSplash",
+  "module": "components/fx2/gpu"
+ },
+ {
+  "kind": "effect",
+  "name": "liquid-text",
+  "entry": "motionary/effects/liquid-text",
+  "src": "src/entries/effects/liquid-text.ts",
+  "pack": "text",
+  "register": "registerLiquidText",
+  "module": "components/fx2/text3"
+ },
+ {
+  "kind": "effect",
+  "name": "neon-write",
+  "entry": "motionary/effects/neon-write",
+  "src": "src/entries/effects/neon-write.ts",
+  "pack": "text",
+  "register": "registerNeonWrite",
+  "module": "components/fx2/text3"
+ },
+ {
+  "kind": "effect",
+  "name": "particle-text",
+  "entry": "motionary/effects/particle-text",
+  "src": "src/entries/effects/particle-text.ts",
+  "pack": "text",
+  "register": "registerParticleText",
+  "module": "components/fx2/text3"
+ },
+ {
+  "kind": "effect",
+  "name": "glitch-text",
+  "entry": "motionary/effects/glitch-text",
+  "src": "src/entries/effects/glitch-text.ts",
+  "pack": "text",
+  "register": "registerGlitchText",
+  "module": "components/fx2/text3"
+ },
+ {
+  "kind": "effect",
+  "name": "text-trail",
+  "entry": "motionary/effects/text-trail",
+  "src": "src/entries/effects/text-trail.ts",
+  "pack": "text",
+  "register": "registerTextTrail",
+  "module": "components/fx2/text3"
+ },
+ {
+  "kind": "effect",
+  "name": "font-breathe",
+  "entry": "motionary/effects/font-breathe",
+  "src": "src/entries/effects/font-breathe.ts",
+  "pack": "text",
+  "register": "registerFontBreathe",
+  "module": "components/fx2/text3"
+ },
+ {
+  "kind": "effect",
+  "name": "flip-chars",
+  "entry": "motionary/effects/flip-chars",
+  "src": "src/entries/effects/flip-chars.ts",
+  "pack": "text",
+  "register": "registerFlipChars",
+  "module": "components/fx2/text3"
+ },
+ {
+  "kind": "effect",
+  "name": "light-follow",
+  "entry": "motionary/effects/light-follow",
+  "src": "src/entries/effects/light-follow.ts",
+  "pack": "light",
+  "register": "registerLightFollow",
+  "module": "components/fx2/light"
+ },
+ {
+  "kind": "effect",
+  "name": "refraction",
+  "entry": "motionary/effects/refraction",
+  "src": "src/entries/effects/refraction.ts",
+  "pack": "light",
+  "register": "registerRefraction",
+  "module": "components/fx2/light"
+ },
+ {
+  "kind": "effect",
+  "name": "brushed-metal",
+  "entry": "motionary/effects/brushed-metal",
+  "src": "src/entries/effects/brushed-metal.ts",
+  "pack": "light",
+  "register": "registerBrushedMetal",
+  "module": "components/fx2/light"
+ },
+ {
+  "kind": "effect",
+  "name": "pearlescent",
+  "entry": "motionary/effects/pearlescent",
+  "src": "src/entries/effects/pearlescent.ts",
+  "pack": "light",
+  "register": "registerPearlescent",
+  "module": "components/fx2/light"
+ },
+ {
+  "kind": "effect",
+  "name": "god-rays",
+  "entry": "motionary/effects/god-rays",
+  "src": "src/entries/effects/god-rays.ts",
+  "pack": "light",
+  "register": "registerGodRays",
+  "module": "components/fx2/light"
+ },
+ {
+  "kind": "effect",
+  "name": "pointer-shadow",
+  "entry": "motionary/effects/pointer-shadow",
+  "src": "src/entries/effects/pointer-shadow.ts",
+  "pack": "light",
+  "register": "registerPointerShadow",
+  "module": "components/fx2/light"
+ },
+ {
+  "kind": "effect",
+  "name": "depth-stack",
+  "entry": "motionary/effects/depth-stack",
+  "src": "src/entries/effects/depth-stack.ts",
+  "pack": "depth",
+  "register": "registerDepthStack",
+  "module": "components/fx2/depth3"
+ },
+ {
+  "kind": "effect",
+  "name": "product-spin",
+  "entry": "motionary/effects/product-spin",
+  "src": "src/entries/effects/product-spin.ts",
+  "pack": "depth",
+  "register": "registerProductSpin",
+  "module": "components/fx2/depth3"
+ },
+ {
+  "kind": "effect",
+  "name": "card-flip-3d",
+  "entry": "motionary/effects/card-flip-3d",
+  "src": "src/entries/effects/card-flip-3d.ts",
+  "pack": "depth",
+  "register": "registerCardFlip3d",
+  "module": "components/fx2/depth3"
+ },
+ {
+  "kind": "effect",
+  "name": "origami",
+  "entry": "motionary/effects/origami",
+  "src": "src/entries/effects/origami.ts",
+  "pack": "depth",
+  "register": "registerOrigami",
+  "module": "components/fx2/depth3"
+ },
+ {
+  "kind": "effect",
+  "name": "orbit-camera",
+  "entry": "motionary/effects/orbit-camera",
+  "src": "src/entries/effects/orbit-camera.ts",
+  "pack": "depth",
+  "register": "registerOrbitCamera",
+  "module": "components/fx2/depth3"
+ },
+ {
+  "kind": "effect",
+  "name": "path-morph",
+  "entry": "motionary/effects/path-morph",
+  "src": "src/entries/effects/path-morph.ts",
+  "pack": "morph",
+  "register": "registerPathMorph",
+  "module": "components/fx2/morph2"
+ },
+ {
+  "kind": "effect",
+  "name": "blob-button",
+  "entry": "motionary/effects/blob-button",
+  "src": "src/entries/effects/blob-button.ts",
+  "pack": "morph",
+  "register": "registerBlobButton",
+  "module": "components/fx2/morph2"
+ },
+ {
+  "kind": "effect",
+  "name": "stroke-draw",
+  "entry": "motionary/effects/stroke-draw",
+  "src": "src/entries/effects/stroke-draw.ts",
+  "pack": "morph",
+  "register": "registerStrokeDraw",
+  "module": "components/fx2/morph2"
+ },
+ {
+  "kind": "effect",
+  "name": "noise-reveal",
+  "entry": "motionary/effects/noise-reveal",
+  "src": "src/entries/effects/noise-reveal.ts",
+  "pack": "morph",
+  "register": "registerNoiseReveal",
+  "module": "components/fx2/morph2"
+ },
+ {
+  "kind": "effect",
+  "name": "icon-swap",
+  "entry": "motionary/effects/icon-swap",
+  "src": "src/entries/effects/icon-swap.ts",
+  "pack": "morph",
+  "register": "registerIconSwap",
+  "module": "components/fx2/morph2"
+ },
+ {
+  "kind": "effect",
+  "name": "ripple-dissolve",
+  "entry": "motionary/effects/ripple-dissolve",
+  "src": "src/entries/effects/ripple-dissolve.ts",
+  "pack": "transitions",
+  "register": "registerRippleDissolve",
+  "module": "components/fx2/transitions2"
+ },
+ {
+  "kind": "effect",
+  "name": "shatter",
+  "entry": "motionary/effects/shatter",
+  "src": "src/entries/effects/shatter.ts",
+  "pack": "transitions",
+  "register": "registerShatter",
+  "module": "components/fx2/transitions2"
+ },
+ {
+  "kind": "effect",
+  "name": "mosaic-flip",
+  "entry": "motionary/effects/mosaic-flip",
+  "src": "src/entries/effects/mosaic-flip.ts",
+  "pack": "transitions",
+  "register": "registerMosaicFlip",
+  "module": "components/fx2/transitions2"
+ },
+ {
+  "kind": "effect",
+  "name": "liquid-wipe",
+  "entry": "motionary/effects/liquid-wipe",
+  "src": "src/entries/effects/liquid-wipe.ts",
+  "pack": "transitions",
+  "register": "registerLiquidWipe",
+  "module": "components/fx2/transitions2"
+ },
+ {
+  "kind": "effect",
+  "name": "page-curl",
+  "entry": "motionary/effects/page-curl",
+  "src": "src/entries/effects/page-curl.ts",
+  "pack": "transitions",
+  "register": "registerPageCurl",
+  "module": "components/fx2/transitions2"
+ },
+ {
+  "kind": "effect",
+  "name": "camera-dolly",
+  "entry": "motionary/effects/camera-dolly",
+  "src": "src/entries/effects/camera-dolly.ts",
+  "pack": "transitions",
+  "register": "registerCameraDolly",
+  "module": "components/fx2/transitions2"
+ },
+ {
+  "kind": "effect",
+  "name": "rain-glass",
+  "entry": "motionary/effects/rain-glass",
+  "src": "src/entries/effects/rain-glass.ts",
+  "pack": "weather",
+  "register": "registerRainGlass",
+  "module": "components/fx2/weather"
+ },
+ {
+  "kind": "effect",
+  "name": "snowfall",
+  "entry": "motionary/effects/snowfall",
+  "src": "src/entries/effects/snowfall.ts",
+  "pack": "weather",
+  "register": "registerSnowfall",
+  "module": "components/fx2/weather"
+ },
+ {
+  "kind": "effect",
+  "name": "lightning",
+  "entry": "motionary/effects/lightning",
+  "src": "src/entries/effects/lightning.ts",
+  "pack": "weather",
+  "register": "registerLightning",
+  "module": "components/fx2/weather"
+ },
+ {
+  "kind": "effect",
+  "name": "fog",
+  "entry": "motionary/effects/fog",
+  "src": "src/entries/effects/fog.ts",
+  "pack": "weather",
+  "register": "registerFog",
+  "module": "components/fx2/weather"
+ },
+ {
+  "kind": "effect",
+  "name": "aurora-veil",
+  "entry": "motionary/effects/aurora-veil",
+  "src": "src/entries/effects/aurora-veil.ts",
+  "pack": "weather",
+  "register": "registerAuroraVeil",
+  "module": "components/fx2/weather"
+ },
+ {
+  "kind": "effect",
+  "name": "day-cycle",
+  "entry": "motionary/effects/day-cycle",
+  "src": "src/entries/effects/day-cycle.ts",
+  "pack": "weather",
+  "register": "registerDayCycle",
+  "module": "components/fx2/weather"
+ },
+ {
+  "kind": "effect",
+  "name": "soft-body",
+  "entry": "motionary/effects/soft-body",
+  "src": "src/entries/effects/soft-body.ts",
+  "pack": "physics",
+  "register": "registerSoftBody",
+  "module": "components/fx2/physics2"
+ },
+ {
+  "kind": "effect",
+  "name": "magnet",
+  "entry": "motionary/effects/magnet",
+  "src": "src/entries/effects/magnet.ts",
+  "pack": "physics",
+  "register": "registerMagnet",
+  "module": "components/fx2/physics2"
+ },
+ {
+  "kind": "effect",
+  "name": "cloth",
+  "entry": "motionary/effects/cloth",
+  "src": "src/entries/effects/cloth.ts",
+  "pack": "physics",
+  "register": "registerCloth",
+  "module": "components/fx2/physics2"
+ },
+ {
+  "kind": "effect",
+  "name": "rope",
+  "entry": "motionary/effects/rope",
+  "src": "src/entries/effects/rope.ts",
+  "pack": "physics",
+  "register": "registerRope",
+  "module": "components/fx2/physics2"
+ },
+ {
+  "kind": "effect",
+  "name": "pinball",
+  "entry": "motionary/effects/pinball",
+  "src": "src/entries/effects/pinball.ts",
+  "pack": "physics",
+  "register": "registerPinball",
+  "module": "components/fx2/physics2"
+ },
+ {
+  "kind": "effect",
+  "name": "focus-draw",
+  "entry": "motionary/effects/focus-draw",
+  "src": "src/entries/effects/focus-draw.ts",
+  "pack": "focus",
+  "register": "registerFocusDraw",
+  "module": "components/fx2/focus"
+ },
+ {
+  "kind": "effect",
+  "name": "marching-ants",
+  "entry": "motionary/effects/marching-ants",
+  "src": "src/entries/effects/marching-ants.ts",
+  "pack": "focus",
+  "register": "registerMarchingAnts",
+  "module": "components/fx2/focus"
+ },
+ {
+  "kind": "effect",
+  "name": "success-check",
+  "entry": "motionary/effects/success-check",
+  "src": "src/entries/effects/success-check.ts",
+  "pack": "focus",
+  "register": "registerSuccessCheck",
+  "module": "components/fx2/focus"
+ },
+ {
+  "kind": "effect",
+  "name": "highlight-sweep",
+  "entry": "motionary/effects/highlight-sweep",
+  "src": "src/entries/effects/highlight-sweep.ts",
+  "pack": "focus",
+  "register": "registerHighlightSweep",
+  "module": "components/fx2/focus"
+ },
+ {
+  "kind": "effect",
+  "name": "waveform-scope",
+  "entry": "motionary/effects/waveform-scope",
+  "src": "src/entries/effects/waveform-scope.ts",
+  "pack": "music",
+  "register": "registerWaveformScope",
+  "module": "components/fx2/music"
+ },
+ {
+  "kind": "effect",
+  "name": "radial-spectrum",
+  "entry": "motionary/effects/radial-spectrum",
+  "src": "src/entries/effects/radial-spectrum.ts",
+  "pack": "music",
+  "register": "registerRadialSpectrum",
+  "module": "components/fx2/music"
+ },
+ {
+  "kind": "effect",
+  "name": "spectrum-mirror",
+  "entry": "motionary/effects/spectrum-mirror",
+  "src": "src/entries/effects/spectrum-mirror.ts",
+  "pack": "music",
+  "register": "registerSpectrumMirror",
+  "module": "components/fx2/music"
+ },
+ {
+  "kind": "effect",
+  "name": "sound-particles",
+  "entry": "motionary/effects/sound-particles",
+  "src": "src/entries/effects/sound-particles.ts",
+  "pack": "music",
+  "register": "registerSoundParticles",
+  "module": "components/fx2/music"
+ },
+ {
+  "kind": "effect",
+  "name": "beat-bounce",
+  "entry": "motionary/effects/beat-bounce",
+  "src": "src/entries/effects/beat-bounce.ts",
+  "pack": "music",
+  "register": "registerBeatBounce",
+  "module": "components/fx2/music"
+ },
+ {
+  "kind": "effect",
+  "name": "vinyl-spin",
+  "entry": "motionary/effects/vinyl-spin",
+  "src": "src/entries/effects/vinyl-spin.ts",
+  "pack": "music",
+  "register": "registerVinylSpin",
+  "module": "components/fx2/music"
+ },
+ {
+  "kind": "effect",
+  "name": "bars-grow",
+  "entry": "motionary/effects/bars-grow",
+  "src": "src/entries/effects/bars-grow.ts",
+  "pack": "chart",
+  "register": "registerBarsGrow",
+  "module": "components/fx2/chart"
+ },
+ {
+  "kind": "effect",
+  "name": "line-draw",
+  "entry": "motionary/effects/line-draw",
+  "src": "src/entries/effects/line-draw.ts",
+  "pack": "chart",
+  "register": "registerLineDraw",
+  "module": "components/fx2/chart"
+ },
+ {
+  "kind": "effect",
+  "name": "ring-sweep",
+  "entry": "motionary/effects/ring-sweep",
+  "src": "src/entries/effects/ring-sweep.ts",
+  "pack": "chart",
+  "register": "registerRingSweep",
+  "module": "components/fx2/chart"
+ },
+ {
+  "kind": "effect",
+  "name": "sankey-flow",
+  "entry": "motionary/effects/sankey-flow",
+  "src": "src/entries/effects/sankey-flow.ts",
+  "pack": "chart",
+  "register": "registerSankeyFlow",
+  "module": "components/fx2/chart"
+ },
+ {
+  "kind": "effect",
+  "name": "number-roll",
+  "entry": "motionary/effects/number-roll",
+  "src": "src/entries/effects/number-roll.ts",
+  "pack": "chart",
+  "register": "registerNumberRoll",
+  "module": "components/fx2/chart"
+ },
+ {
+  "kind": "effect",
+  "name": "dots-pop",
+  "entry": "motionary/effects/dots-pop",
+  "src": "src/entries/effects/dots-pop.ts",
+  "pack": "chart",
+  "register": "registerDotsPop",
+  "module": "components/fx2/chart"
+ },
+ {
+  "kind": "effect",
+  "name": "fly-to-cart",
+  "entry": "motionary/effects/fly-to-cart",
+  "src": "src/entries/effects/fly-to-cart.ts",
+  "pack": "shop",
+  "register": "registerFlyToCart",
+  "module": "components/fx2/shop"
+ },
+ {
+  "kind": "effect",
+  "name": "price-flip",
+  "entry": "motionary/effects/price-flip",
+  "src": "src/entries/effects/price-flip.ts",
+  "pack": "shop",
+  "register": "registerPriceFlip",
+  "module": "components/fx2/shop"
+ },
+ {
+  "kind": "effect",
+  "name": "stock-pulse",
+  "entry": "motionary/effects/stock-pulse",
+  "src": "src/entries/effects/stock-pulse.ts",
+  "pack": "shop",
+  "register": "registerStockPulse",
+  "module": "components/fx2/shop"
+ },
+ {
+  "kind": "effect",
+  "name": "sale-shine",
+  "entry": "motionary/effects/sale-shine",
+  "src": "src/entries/effects/sale-shine.ts",
+  "pack": "shop",
+  "register": "registerSaleShine",
+  "module": "components/fx2/shop"
+ },
+ {
+  "kind": "effect",
+  "name": "badge-pop",
+  "entry": "motionary/effects/badge-pop",
+  "src": "src/entries/effects/badge-pop.ts",
+  "pack": "shop",
+  "register": "registerBadgePop",
+  "module": "components/fx2/shop"
+ },
+ {
+  "kind": "effect",
+  "name": "typing-dots",
+  "entry": "motionary/effects/typing-dots",
+  "src": "src/entries/effects/typing-dots.ts",
+  "pack": "social",
+  "register": "registerTypingDots",
+  "module": "components/fx2/social"
+ },
+ {
+  "kind": "effect",
+  "name": "message-in",
+  "entry": "motionary/effects/message-in",
+  "src": "src/entries/effects/message-in.ts",
+  "pack": "social",
+  "register": "registerMessageIn",
+  "module": "components/fx2/social"
+ },
+ {
+  "kind": "effect",
+  "name": "reaction-burst",
+  "entry": "motionary/effects/reaction-burst",
+  "src": "src/entries/effects/reaction-burst.ts",
+  "pack": "social",
+  "register": "registerReactionBurst",
+  "module": "components/fx2/social"
+ },
+ {
+  "kind": "effect",
+  "name": "read-receipt",
+  "entry": "motionary/effects/read-receipt",
+  "src": "src/entries/effects/read-receipt.ts",
+  "pack": "social",
+  "register": "registerReadReceipt",
+  "module": "components/fx2/social"
+ },
+ {
+  "kind": "effect",
+  "name": "mention-glow",
+  "entry": "motionary/effects/mention-glow",
+  "src": "src/entries/effects/mention-glow.ts",
+  "pack": "social",
+  "register": "registerMentionGlow",
+  "module": "components/fx2/social"
+ },
+ {
+  "kind": "effect",
+  "name": "achievement-unlock",
+  "entry": "motionary/effects/achievement-unlock",
+  "src": "src/entries/effects/achievement-unlock.ts",
+  "pack": "game",
+  "register": "registerAchievementUnlock",
+  "module": "components/fx2/game"
+ },
+ {
+  "kind": "effect",
+  "name": "level-up",
+  "entry": "motionary/effects/level-up",
+  "src": "src/entries/effects/level-up.ts",
+  "pack": "game",
+  "register": "registerLevelUp",
+  "module": "components/fx2/game"
+ },
+ {
+  "kind": "effect",
+  "name": "chest-open",
+  "entry": "motionary/effects/chest-open",
+  "src": "src/entries/effects/chest-open.ts",
+  "pack": "game",
+  "register": "registerChestOpen",
+  "module": "components/fx2/game"
+ },
+ {
+  "kind": "effect",
+  "name": "coin-burst",
+  "entry": "motionary/effects/coin-burst",
+  "src": "src/entries/effects/coin-burst.ts",
+  "pack": "game",
+  "register": "registerCoinBurst",
+  "module": "components/fx2/game"
+ },
+ {
+  "kind": "effect",
+  "name": "xp-gain",
+  "entry": "motionary/effects/xp-gain",
+  "src": "src/entries/effects/xp-gain.ts",
+  "pack": "game",
+  "register": "registerXpGain",
+  "module": "components/fx2/game"
+ },
+ {
+  "kind": "effect",
+  "name": "route-draw",
+  "entry": "motionary/effects/route-draw",
+  "src": "src/entries/effects/route-draw.ts",
+  "pack": "geo",
+  "register": "registerRouteDraw",
+  "module": "components/fx2/geo"
+ },
+ {
+  "kind": "effect",
+  "name": "marker-pulse",
+  "entry": "motionary/effects/marker-pulse",
+  "src": "src/entries/effects/marker-pulse.ts",
+  "pack": "geo",
+  "register": "registerMarkerPulse",
+  "module": "components/fx2/geo"
+ },
+ {
+  "kind": "effect",
+  "name": "pin-drop",
+  "entry": "motionary/effects/pin-drop",
+  "src": "src/entries/effects/pin-drop.ts",
+  "pack": "geo",
+  "register": "registerPinDrop",
+  "module": "components/fx2/geo"
+ },
+ {
+  "kind": "effect",
+  "name": "globe-spin",
+  "entry": "motionary/effects/globe-spin",
+  "src": "src/entries/effects/globe-spin.ts",
+  "pack": "geo",
+  "register": "registerGlobeSpin",
+  "module": "components/fx2/geo"
+ },
+ {
+  "kind": "effect",
+  "name": "field-shake",
+  "entry": "motionary/effects/field-shake",
+  "src": "src/entries/effects/field-shake.ts",
+  "pack": "form",
+  "register": "registerFieldShake",
+  "module": "components/fx2/form"
+ },
+ {
+  "kind": "effect",
+  "name": "field-success",
+  "entry": "motionary/effects/field-success",
+  "src": "src/entries/effects/field-success.ts",
+  "pack": "form",
+  "register": "registerFieldSuccess",
+  "module": "components/fx2/form"
+ },
+ {
+  "kind": "effect",
+  "name": "label-float",
+  "entry": "motionary/effects/label-float",
+  "src": "src/entries/effects/label-float.ts",
+  "pack": "form",
+  "register": "registerLabelFloat",
+  "module": "components/fx2/form"
+ },
+ {
+  "kind": "effect",
+  "name": "form-cascade",
+  "entry": "motionary/effects/form-cascade",
+  "src": "src/entries/effects/form-cascade.ts",
+  "pack": "form",
+  "register": "registerFormCascade",
+  "module": "components/fx2/form"
+ },
+ {
+  "kind": "effect",
+  "name": "stream-text",
+  "entry": "motionary/effects/stream-text",
+  "src": "src/entries/effects/stream-text.ts",
+  "pack": "ai",
+  "register": "registerStreamText",
+  "module": "components/fx2/ai"
+ },
+ {
+  "kind": "effect",
+  "name": "thinking-glow",
+  "entry": "motionary/effects/thinking-glow",
+  "src": "src/entries/effects/thinking-glow.ts",
+  "pack": "ai",
+  "register": "registerThinkingGlow",
+  "module": "components/fx2/ai"
+ },
+ {
+  "kind": "effect",
+  "name": "voice-wave",
+  "entry": "motionary/effects/voice-wave",
+  "src": "src/entries/effects/voice-wave.ts",
+  "pack": "ai",
+  "register": "registerVoiceWave",
+  "module": "components/fx2/ai"
+ },
+ {
+  "kind": "effect",
+  "name": "gen-skeleton",
+  "entry": "motionary/effects/gen-skeleton",
+  "src": "src/entries/effects/gen-skeleton.ts",
+  "pack": "ai",
+  "register": "registerGenSkeleton",
+  "module": "components/fx2/ai"
+ },
+ {
+  "kind": "effect",
+  "name": "firework-burst",
+  "entry": "motionary/effects/firework-burst",
+  "src": "src/entries/effects/firework-burst.ts",
+  "pack": "festival",
+  "register": "registerFireworkBurst",
+  "module": "components/fx2/festival"
+ },
+ {
+  "kind": "effect",
+  "name": "lantern-rise",
+  "entry": "motionary/effects/lantern-rise",
+  "src": "src/entries/effects/lantern-rise.ts",
+  "pack": "festival",
+  "register": "registerLanternRise",
+  "module": "components/fx2/festival"
+ },
+ {
+  "kind": "effect",
+  "name": "xmas-snow",
+  "entry": "motionary/effects/xmas-snow",
+  "src": "src/entries/effects/xmas-snow.ts",
+  "pack": "festival",
+  "register": "registerXmasSnow",
+  "module": "components/fx2/festival"
+ },
+ {
+  "kind": "effect",
+  "name": "spooky-float",
+  "entry": "motionary/effects/spooky-float",
+  "src": "src/entries/effects/spooky-float.ts",
+  "pack": "festival",
+  "register": "registerSpookyFloat",
+  "module": "components/fx2/festival"
+ },
+ {
+  "kind": "effect",
+  "name": "pixelate-in",
+  "entry": "motionary/effects/pixelate-in",
+  "src": "src/entries/effects/pixelate-in.ts",
+  "pack": "retro",
+  "register": "registerPixelateIn",
+  "module": "components/fx2/retro2"
+ },
+ {
+  "kind": "effect",
+  "name": "crt-power",
+  "entry": "motionary/effects/crt-power",
+  "src": "src/entries/effects/crt-power.ts",
+  "pack": "retro",
+  "register": "registerCrtPower",
+  "module": "components/fx2/retro2"
+ },
+ {
+  "kind": "effect",
+  "name": "vhs-glitch",
+  "entry": "motionary/effects/vhs-glitch",
+  "src": "src/entries/effects/vhs-glitch.ts",
+  "pack": "retro",
+  "register": "registerVhsGlitch",
+  "module": "components/fx2/retro2"
+ },
+ {
+  "kind": "effect",
+  "name": "y2k-shine",
+  "entry": "motionary/effects/y2k-shine",
+  "src": "src/entries/effects/y2k-shine.ts",
+  "pack": "retro",
+  "register": "registerY2kShine",
+  "module": "components/fx2/retro2"
+ },
+ {
+  "kind": "effect",
+  "name": "vine-grow",
+  "entry": "motionary/effects/vine-grow",
+  "src": "src/entries/effects/vine-grow.ts",
+  "pack": "organic",
+  "register": "registerVineGrow",
+  "module": "components/fx2/organic"
+ },
+ {
+  "kind": "effect",
+  "name": "bloom",
+  "entry": "motionary/effects/bloom",
+  "src": "src/entries/effects/bloom.ts",
+  "pack": "organic",
+  "register": "registerBloom",
+  "module": "components/fx2/organic"
+ },
+ {
+  "kind": "effect",
+  "name": "water-drop",
+  "entry": "motionary/effects/water-drop",
+  "src": "src/entries/effects/water-drop.ts",
+  "pack": "organic",
+  "register": "registerWaterDrop",
+  "module": "components/fx2/organic"
+ },
+ {
+  "kind": "effect",
+  "name": "breathe",
+  "entry": "motionary/effects/breathe",
+  "src": "src/entries/effects/breathe.ts",
+  "pack": "organic",
+  "register": "registerBreathe",
+  "module": "components/fx2/organic"
+ },
+ {
+  "kind": "effect",
+  "name": "hud-frame",
+  "entry": "motionary/effects/hud-frame",
+  "src": "src/entries/effects/hud-frame.ts",
+  "pack": "cyber",
+  "register": "registerHudFrame",
+  "module": "components/fx2/cyber"
+ },
+ {
+  "kind": "effect",
+  "name": "scanline-sweep",
+  "entry": "motionary/effects/scanline-sweep",
+  "src": "src/entries/effects/scanline-sweep.ts",
+  "pack": "cyber",
+  "register": "registerScanlineSweep",
+  "module": "components/fx2/cyber"
+ },
+ {
+  "kind": "effect",
+  "name": "hologram",
+  "entry": "motionary/effects/hologram",
+  "src": "src/entries/effects/hologram.ts",
+  "pack": "cyber",
+  "register": "registerHologram",
+  "module": "components/fx2/cyber"
+ },
+ {
+  "kind": "effect",
+  "name": "data-decode",
+  "entry": "motionary/effects/data-decode",
+  "src": "src/entries/effects/data-decode.ts",
+  "pack": "cyber",
+  "register": "registerDataDecode",
+  "module": "components/fx2/cyber"
+ },
+ {
+  "kind": "effect",
+  "name": "paper-unfold",
+  "entry": "motionary/effects/paper-unfold",
+  "src": "src/entries/effects/paper-unfold.ts",
+  "pack": "paper",
+  "register": "registerPaperUnfold",
+  "module": "components/fx2/paper"
+ },
+ {
+  "kind": "effect",
+  "name": "pencil-sketch",
+  "entry": "motionary/effects/pencil-sketch",
+  "src": "src/entries/effects/pencil-sketch.ts",
+  "pack": "paper",
+  "register": "registerPencilSketch",
+  "module": "components/fx2/paper"
+ },
+ {
+  "kind": "effect",
+  "name": "watercolor",
+  "entry": "motionary/effects/watercolor",
+  "src": "src/entries/effects/watercolor.ts",
+  "pack": "paper",
+  "register": "registerWatercolor",
+  "module": "components/fx2/paper"
+ },
+ {
+  "kind": "effect",
+  "name": "crumple",
+  "entry": "motionary/effects/crumple",
+  "src": "src/entries/effects/crumple.ts",
+  "pack": "paper",
+  "register": "registerCrumple",
+  "module": "components/fx2/paper"
+ },
+ {
+  "kind": "effect",
+  "name": "neon-ignite",
+  "entry": "motionary/effects/neon-ignite",
+  "src": "src/entries/effects/neon-ignite.ts",
+  "pack": "surface",
+  "register": "registerNeonIgnite",
+  "module": "components/fx2/themefx"
+ },
+ {
+  "kind": "effect",
+  "name": "neon-pulse",
+  "entry": "motionary/effects/neon-pulse",
+  "src": "src/entries/effects/neon-pulse.ts",
+  "pack": "surface",
+  "register": "registerNeonPulse",
+  "module": "components/fx2/themefx"
+ },
+ {
+  "kind": "effect",
+  "name": "glass-frost",
+  "entry": "motionary/effects/glass-frost",
+  "src": "src/entries/effects/glass-frost.ts",
+  "pack": "surface",
+  "register": "registerGlassFrost",
+  "module": "components/fx2/themefx"
+ },
+ {
+  "kind": "effect",
+  "name": "neu-press",
+  "entry": "motionary/effects/neu-press",
+  "src": "src/entries/effects/neu-press.ts",
+  "pack": "surface",
+  "register": "registerNeuPress",
+  "module": "components/fx2/themefx"
+ },
+ {
+  "kind": "effect",
+  "name": "swipe-hint",
+  "entry": "motionary/effects/swipe-hint",
+  "src": "src/entries/effects/swipe-hint.ts",
+  "pack": "gesture3",
+  "register": "registerSwipeHint",
+  "module": "components/fx2/gesture3"
+ },
+ {
+  "kind": "effect",
+  "name": "pinch-hint",
+  "entry": "motionary/effects/pinch-hint",
+  "src": "src/entries/effects/pinch-hint.ts",
+  "pack": "gesture3",
+  "register": "registerPinchHint",
+  "module": "components/fx2/gesture3"
+ },
+ {
+  "kind": "effect",
+  "name": "tilt-wobble",
+  "entry": "motionary/effects/tilt-wobble",
+  "src": "src/entries/effects/tilt-wobble.ts",
+  "pack": "gesture3",
+  "register": "registerTiltWobble",
+  "module": "components/fx2/gesture3"
+ },
+ {
+  "kind": "effect",
+  "name": "depth-in",
+  "entry": "motionary/effects/depth-in",
+  "src": "src/entries/effects/depth-in.ts",
+  "pack": "gesture3",
+  "register": "registerDepthIn",
+  "module": "components/fx2/gesture3"
+ },
+ {
+  "kind": "effect",
+  "name": "portal-open",
+  "entry": "motionary/effects/portal-open",
+  "src": "src/entries/effects/portal-open.ts",
+  "pack": "spatial",
+  "register": "registerPortalOpen",
+  "module": "components/fx2/spatial"
+ },
+ {
+  "kind": "effect",
+  "name": "orbit-in",
+  "entry": "motionary/effects/orbit-in",
+  "src": "src/entries/effects/orbit-in.ts",
+  "pack": "spatial",
+  "register": "registerOrbitIn",
+  "module": "components/fx2/spatial"
+ },
+ {
+  "kind": "effect",
+  "name": "spatial-float",
+  "entry": "motionary/effects/spatial-float",
+  "src": "src/entries/effects/spatial-float.ts",
+  "pack": "spatial",
+  "register": "registerSpatialFloat",
+  "module": "components/fx2/spatial"
+ },
+ {
+  "kind": "effect",
+  "name": "depth-pop",
+  "entry": "motionary/effects/depth-pop",
+  "src": "src/entries/effects/depth-pop.ts",
+  "pack": "spatial",
+  "register": "registerDepthPop",
+  "module": "components/fx2/spatial"
+ },
+ {
+  "kind": "effect",
+  "name": "dolly-in",
+  "entry": "motionary/effects/dolly-in",
+  "src": "src/entries/effects/dolly-in.ts",
+  "pack": "cinema",
+  "register": "registerDollyIn",
+  "module": "components/fx2/cinema"
+ },
+ {
+  "kind": "effect",
+  "name": "pan-reveal",
+  "entry": "motionary/effects/pan-reveal",
+  "src": "src/entries/effects/pan-reveal.ts",
+  "pack": "cinema",
+  "register": "registerPanReveal",
+  "module": "components/fx2/cinema"
+ },
+ {
+  "kind": "effect",
+  "name": "letterbox",
+  "entry": "motionary/effects/letterbox",
+  "src": "src/entries/effects/letterbox.ts",
+  "pack": "cinema",
+  "register": "registerLetterbox",
+  "module": "components/fx2/cinema"
+ },
+ {
+  "kind": "effect",
+  "name": "rack-focus",
+  "entry": "motionary/effects/rack-focus",
+  "src": "src/entries/effects/rack-focus.ts",
+  "pack": "cinema",
+  "register": "registerRackFocus",
+  "module": "components/fx2/cinema"
+ },
+ {
+  "kind": "effect",
+  "name": "lottie-play",
+  "entry": "motionary/effects/lottie-play",
+  "src": "src/entries/effects/lottie-play.ts",
+  "pack": "lottie",
+  "register": "registerLottiePlay",
+  "module": "components/fx2/lottie"
+ },
+ {
+  "kind": "effect",
+  "name": "icon-pop",
+  "entry": "motionary/effects/icon-pop",
+  "src": "src/entries/effects/icon-pop.ts",
+  "pack": "lottie",
+  "register": "registerIconPop",
+  "module": "components/fx2/lottie"
+ },
+ {
+  "kind": "effect",
+  "name": "halftone-in",
+  "entry": "motionary/effects/halftone-in",
+  "src": "src/entries/effects/halftone-in.ts",
+  "pack": "genart",
+  "register": "registerHalftoneIn",
+  "module": "components/fx2/genart"
+ },
+ {
+  "kind": "effect",
+  "name": "mesh-drift",
+  "entry": "motionary/effects/mesh-drift",
+  "src": "src/entries/effects/mesh-drift.ts",
+  "pack": "genart",
+  "register": "registerMeshDrift",
+  "module": "components/fx2/genart"
+ },
+ {
+  "kind": "effect",
+  "name": "kaleido",
+  "entry": "motionary/effects/kaleido",
+  "src": "src/entries/effects/kaleido.ts",
+  "pack": "genart",
+  "register": "registerKaleido",
+  "module": "components/fx2/genart"
+ },
+ {
+  "kind": "effect",
+  "name": "grain-flicker",
+  "entry": "motionary/effects/grain-flicker",
+  "src": "src/entries/effects/grain-flicker.ts",
+  "pack": "genart",
+  "register": "registerGrainFlicker",
+  "module": "components/fx2/genart"
+ },
+ {
+  "kind": "effect",
+  "name": "film-burn",
+  "entry": "motionary/effects/film-burn",
+  "src": "src/entries/effects/film-burn.ts",
+  "pack": "video",
+  "register": "registerFilmBurn",
+  "module": "components/fx2/video"
+ },
+ {
+  "kind": "effect",
+  "name": "jump-cut",
+  "entry": "motionary/effects/jump-cut",
+  "src": "src/entries/effects/jump-cut.ts",
+  "pack": "video",
+  "register": "registerJumpCut",
+  "module": "components/fx2/video"
+ },
+ {
+  "kind": "effect",
+  "name": "safe-fade",
+  "entry": "motionary/effects/safe-fade",
+  "src": "src/entries/effects/safe-fade.ts",
+  "pack": "safe",
+  "register": "registerSafeFade",
+  "module": "components/fx2/safemotion"
+ },
+ {
+  "kind": "effect",
+  "name": "focus-glow",
+  "entry": "motionary/effects/focus-glow",
+  "src": "src/entries/effects/focus-glow.ts",
+  "pack": "safe",
+  "register": "registerFocusGlow",
+  "module": "components/fx2/safemotion"
+ },
+ {
+  "kind": "effect",
+  "name": "color-pulse",
+  "entry": "motionary/effects/color-pulse",
+  "src": "src/entries/effects/color-pulse.ts",
+  "pack": "safe",
+  "register": "registerColorPulse",
+  "module": "components/fx2/safemotion"
+ },
+ {
+  "kind": "effect",
+  "name": "underline-sweep",
+  "entry": "motionary/effects/underline-sweep",
+  "src": "src/entries/effects/underline-sweep.ts",
+  "pack": "safe",
+  "register": "registerUnderlineSweep",
+  "module": "components/fx2/safemotion"
+ },
+ {
+  "kind": "effect",
+  "name": "idle-reveal",
+  "entry": "motionary/effects/idle-reveal",
+  "src": "src/entries/effects/idle-reveal.ts",
+  "pack": "perf3",
+  "register": "registerIdleReveal",
+  "module": "components/fx2/perf3"
+ },
+ {
+  "kind": "effect",
+  "name": "gpu-lift",
+  "entry": "motionary/effects/gpu-lift",
+  "src": "src/entries/effects/gpu-lift.ts",
+  "pack": "perf3",
+  "register": "registerGpuLift",
+  "module": "components/fx2/perf3"
+ }
+]

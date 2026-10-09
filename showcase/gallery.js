@@ -65,13 +65,15 @@ function h(tag, attrs = {}, children = []) {
 async function loadLibrary() {
   try {
     await loadRuntime(LOCAL);
-    lib = { ...(await import(LOCAL + 'components.js')), ...(await import(LOCAL + 'components/effects.js')), ...(await import(LOCAL + 'components/widgets.js')), ...(await import(LOCAL + 'components/fx2.js')), ...(await import(LOCAL + 'components/snap-carousel.js')) };
+    lib = { ...(await import(LOCAL + 'components.js')), ...(await import(LOCAL + 'components/effects.js')), ...(await import(LOCAL + 'components/widgets.js')), ...(await import(LOCAL + 'components/fx2.js')), ...(await import(LOCAL + 'components/snap-carousel.js')), ...(await import(LOCAL + 'components/gl-model.js')), ...(await import(LOCAL + 'components/dotlottie.js')) };
   } catch {
     await loadRuntime(LOCAL).catch(() => null);
     lib = { ...(await import(CDN + 'components.js')), ...(await import(CDN + 'components/effects.js')), ...(await import(CDN + 'components/widgets.js')), ...(await import(CDN + 'components/fx2.js')) };
   }
   lib.defineWidgets?.(); // 6.2+: motionary/components/widgets
   lib.defineSnapCarousel?.(); // 10.8+: components ship as their own entry points
+  lib.defineGlModel?.();
+  lib.defineDotLottie?.();
   lib.registerAllPlugins?.(); // 6.2+: the 6.x effect packs
   lib.defineComponents();
   lib.registerAllEffects(); // 5.x effect packs (motionary/components/effects)

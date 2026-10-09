@@ -1,0 +1,194 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://harrisoncn.github.io/Motionary/schemas/motionary-scene-1.schema.json",
+  "title": "motionary-scene@1",
+  "description": "A 2D physics scene for motionary/runtime/format-scene (10.7). Frozen in 11.0.",
+  "type": "object",
+  "required": [
+    "format",
+    "world",
+    "bodies"
+  ],
+  "properties": {
+    "format": {
+      "const": "motionary-scene@1"
+    },
+    "world": {
+      "type": "object",
+      "required": [
+        "width",
+        "height"
+      ],
+      "properties": {
+        "width": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "height": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "gravity": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "walls": {
+          "type": [
+            "boolean",
+            "object"
+          ]
+        },
+        "iterations": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "materials": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "restitution": {
+            "type": "number"
+          },
+          "friction": {
+            "type": "number"
+          },
+          "density": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "bodies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "shape",
+          "position"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "shape": {
+            "enum": [
+              "circle",
+              "box",
+              "polygon"
+            ]
+          },
+          "position": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "radius": {
+            "type": "number"
+          },
+          "size": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "vertices": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "minItems": 2,
+              "maxItems": 2
+            }
+          },
+          "angle": {
+            "type": "number"
+          },
+          "velocity": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "static": {
+            "type": "boolean"
+          },
+          "kinematic": {
+            "type": "boolean"
+          },
+          "sensor": {
+            "type": "boolean"
+          },
+          "material": {
+            "type": "string"
+          },
+          "restitution": {
+            "type": "number"
+          },
+          "friction": {
+            "type": "number"
+          },
+          "density": {
+            "type": "number"
+          },
+          "style": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "enum": [
+              "distance",
+              "spring",
+              "pin"
+            ]
+          },
+          "a": {
+            "type": "string"
+          },
+          "b": {
+            "type": "string"
+          },
+          "point": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "length": {
+            "type": "number"
+          },
+          "stiffness": {
+            "type": "number"
+          },
+          "damping": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  }
+}

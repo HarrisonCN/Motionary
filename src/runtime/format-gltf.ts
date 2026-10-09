@@ -116,7 +116,7 @@ export interface GltfImages {
 export function gltfToNode(json: GltfJson, buffers: Uint8Array[], images: GltfImages = {}, sceneIndex?: number): GlNode {
   if (!json.asset || !/^2\./.test(json.asset.version)) throw new Error('[motionary] format-gltf: only glTF 2.0 is supported');
   const missing = (json.extensionsRequired || []).filter((e) => !SUPPORTED_EXTENSIONS.includes(e));
-  if (missing.length) throw new Error(`[motionary] format-gltf: this file requires ${missing.join(', ')}, which motionary/runtime/format-gltf does not implement${missing.some((e) => /draco|KHR_texture_basisu|meshopt/i.test(e)) ? ' (compressed geometry / textures need the official decoders — re-export the model without compression, or use the decoder hooks planned for 10.9)' : ''}`);
+  if (missing.length) throw new Error(`[motionary] format-gltf: this file requires ${missing.join(', ')}, which motionary/runtime/format-gltf does not implement${missing.some((e) => /draco|KHR_texture_basisu|meshopt/i.test(e)) ? ' (compressed geometry / textures need the official decoders — use <usa-gl-model> / motionary/runtime/gltf-decoders with the official decoders (draco3d, Basis Universal), or re-export the model without compression)' : ''}`);
   const mats: Material[] = (json.materials || []).map((m) => {
     const pbr = m.pbrMetallicRoughness || {};
     const cf = pbr.baseColorFactor || [1, 1, 1, 1];
@@ -182,7 +182,7 @@ const dataUri = (u: string): Uint8Array => {
 };
 
 /** Load a `.gltf` / `.glb` (URL or bytes) with its buffers and images and build a node tree. */
-export async function loadGltf(src: string | ArrayBuffer | Uint8Array, o: { baseUrl?: string; scene?: number } = {}): Promise<GlNode> {
+export async function loadGltf(src: string | ArrayBuffer | Uint8Array, o: { baseUrl?: string; scene?: number; prepare?: (json: GltfJson, buffers: Uint8Array[]) => Promise<{ json: GltfJson; buffers: Uint8Array[]; images: GltfImages }> } = {}): Promise<GlNode> {
   const base = o.baseUrl || (typeof src === 'string' ? new URL(src, typeof location !== 'undefined' ? location.href : 'file:///').href : typeof location !== 'undefined' ? location.href : 'file:///');
   const get = async (u: string) => {
     if (u.startsWith('data:')) return dataUri(u);
@@ -194,9 +194,11 @@ export async function loadGltf(src: string | ArrayBuffer | Uint8Array, o: { base
   let json: GltfJson, bin: Uint8Array | null = null;
   if (bytes[0] === 0x67 && bytes[1] === 0x6c && bytes[2] === 0x54 && bytes[3] === 0x46) ({ json, bin } = parseGlb(bytes));
   else json = JSON.parse(new TextDecoder().decode(bytes));
-  const buffers = await Promise.all((json.buffers || []).map((b, i) => (b.uri ? get(b.uri) : i === 0 && bin ? Promise.resolve(bin) : Promise.reject(new Error('[motionary] format-gltf: buffer without data')))));
-  const images: GltfImages = {};
+  let buffers = await Promise.all((json.buffers || []).map((b, i) => (b.uri ? get(b.uri) : i === 0 && bin ? Promise.resolve(bin) : Promise.reject(new Error('[motionary] format-gltf: buffer without data')))));
+  let images: GltfImages = {};
+  if (o.prepare) ({ json, buffers, images } = await o.prepare(json, buffers)); // 10.9: official decoders (motionary/runtime/gltf-decoders)
   await Promise.all((json.images || []).map(async (im, i) => {
+    if (images[i]) return;
     let data: Uint8Array;
     if (im.bufferView !== undefined) {
       const bv = json.bufferViews![im.bufferView];

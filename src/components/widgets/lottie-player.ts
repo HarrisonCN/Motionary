@@ -81,8 +81,11 @@ export function defineLottiePlayer(tag = 'usa-lottie-player'): CustomElementCons
             this.p = null;
           });
           V.loadLottie(new URL(src, location.href).href, { animation: this.str('animation') || undefined })
-            .then(({ animation, images }) => {
+            .then(({ animation: source, images, dotLottie }) => {
               if (!alive) return;
+              const animationId = this.str('animation') || dotLottie?.manifest?.activeAnimationId || dotLottie?.manifest?.animations?.[0]?.id;
+              // 10.9: subclasses (<usa-dotlottie>) may theme the animation before it plays
+              const animation = (this as any).prepareAnimation ? (this as any).prepareAnimation(source, dotLottie, animationId) : source;
               this.data = animation;
               this.skipped = V.inspectLottie(animation).unsupported;
               const dpr = Math.min(2, devicePixelRatio || 1);
@@ -91,7 +94,7 @@ export function defineLottiePlayer(tag = 'usa-lottie-player'): CustomElementCons
               canvas.height = Math.round((w * animation.h) / animation.w);
               const seg = this.str('segment');
               const loopAttr = this.getAttribute('loop');
-              const p = V.lottiePlayer(canvas, animation, {
+              const opts = {
                 images,
                 autoplay: false,
                 loop: loopAttr === null ? false : loopAttr === '' || loopAttr === 'true' ? true : Math.max(0, Number(loopAttr) - 1) || true,
@@ -100,10 +103,21 @@ export function defineLottiePlayer(tag = 'usa-lottie-player'): CustomElementCons
                 fit: (this.str('fit', 'contain') as any) || 'contain',
                 background: this.str('background') || undefined,
                 segment: seg ? (/^\d/.test(seg) ? (seg.split(/[\s,]+/).map(Number) as [number, number]) : seg) : undefined,
-              });
-              p.onComplete = () => this.emit('complete');
-              this.p = p;
+              };
+              const build = (a: LottieAnimation): LottiePlayer => {
+                this.p?.kill();
+                const np = V.lottiePlayer(canvas, a, opts);
+                np.onComplete = () => {
+                  this.emit('complete');
+                  (this as any).completed?.();
+                };
+                this.p = np;
+                this.data = a;
+                return np;
+              };
+              const p = build(animation);
               this.emit('load', { frames: animation.op - animation.ip, fr: animation.fr, w: animation.w, h: animation.h, unsupported: this.skipped });
+              if ((this as any).playerReady?.({ player: p, animation, dotLottie, canvas, rebuild: build, source, animationId })) return;
               if (this.reduced) return;
               if (this.flag('scrub')) {
                 const upd = () => {

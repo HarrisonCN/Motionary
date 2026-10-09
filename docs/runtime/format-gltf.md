@@ -55,10 +55,12 @@ const r = createRenderer(canvas); r.resize(); r.render(scene, cam);
 | PBR metallic-roughness factors, base colour texture, emissive, alpha blend, double-sided | ✅ yes | KHR_materials_emissive_strength, KHR_materials_unlit |
 | skins, morph targets, animations | ✅ yes | data kept on the nodes / geometry; played by motionary/runtime/gltf-anim (10.8) |
 | sparse accessors | ✅ yes | 10.8 |
-| Draco / meshopt / KTX2 (Basis) compression | ✕ no | files that require them fail with a clear error; decoder hooks planned for 10.9 |
+| Draco / KTX2 (Basis) compression | ✅ yes | 10.9: through the official decoders (draco3d, Basis Universal transcoder) — motionary/runtime/gltf-decoders + <usa-gl-model> |
+| meshopt compression (EXT_meshopt_compression) | ✕ no | files that require it fail with a clear error |
 | cameras, KHR_lights_punctual, texture transforms | ✕ no | ignored |
 | SSR / workers | ◐ partial | parseGlb / gltfToNode are pure; loadGltf decodes images with createImageBitmap |
 
 ## Components that need it
 
 - `<usa-gl-scene>` — 3D scene (glTF / OBJ)
+- `<usa-gl-model>` — Compressed 3D model (Draco / KTX2)

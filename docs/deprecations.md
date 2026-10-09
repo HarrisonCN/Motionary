@@ -1,5 +1,9 @@
 # Deprecations
 
+## Deprecated in 10.9, removed in 11.0
+
+See [upgrading-11.md](./upgrading-11.md) — `<usa-three-scene>` / `defineThreeScene()` (use `<usa-gl-scene>` / `defineGlScene()`, same API), string programs for `offscreenRender()` / `<usa-worker-canvas>` that fall back to the main thread (pass a function). Run `npx usa-codemod-11 --write src`.
+
 ## Deprecated in 9.9, removed in 10.0 (released)
 
 See [upgrading-10.md](./upgrading-10.md) — `registerEffectPacks()` (use `registerAllPlugins()` or `usePlugins(...)`). Run `npx usa-codemod-10 --write src`.

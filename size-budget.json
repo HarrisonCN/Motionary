@@ -678,5 +678,1335 @@
     "name": "import 'motionary/components/snap-carousel' (own entry incl. the shared element base, fixed 5.5 KB; not in widgets / lite)",
     "import": "export * from 'pkg/components/snap-carousel';",
     "limit": 5632
+  },
+  {
+    "name": "import 'motionary/runtime/lottie-state' (fixed 3.5 KB incl. the core parts it uses)",
+    "import": "export * from 'pkg/runtime/lottie-state';",
+    "limit": 3584
+  },
+  {
+    "name": "dist/runtime/lottie-state.iife.js (CDN module, fixed 3.0 KB)",
+    "file": "dist/runtime/lottie-state.iife.js",
+    "limit": 3072
+  },
+  {
+    "name": "import 'motionary/runtime/gltf-decoders' (fixed 3.0 KB incl. the core parts it uses)",
+    "import": "export * from 'pkg/runtime/gltf-decoders';",
+    "limit": 3072
+  },
+  {
+    "name": "dist/runtime/gltf-decoders.iife.js (CDN module, fixed 2.5 KB)",
+    "file": "dist/runtime/gltf-decoders.iife.js",
+    "limit": 2560
+  },
+  {
+    "name": "import 'motionary/components/gl-model' (own entry incl. the element it extends, fixed 14.0 KB; not in widgets / lite)",
+    "import": "export * from 'pkg/components/gl-model';",
+    "limit": 14336
+  },
+  {
+    "name": "import 'motionary/components/dotlottie' (own entry incl. the element it extends, fixed 9.0 KB; not in widgets / lite)",
+    "import": "export * from 'pkg/components/dotlottie';",
+    "limit": 9216
+  },
+  {
+    "name": "import 'motionary/widgets/carousel' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/carousel';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/tab-bar' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/tab-bar';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/disclosure' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/disclosure';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/stories' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/stories';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/toast-stack' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/toast-stack';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/modal' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/modal';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/sheet' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/sheet';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/menu' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/menu';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/progress-ring' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/progress-ring';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/odometer' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/odometer';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/skeleton-reveal' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/skeleton-reveal';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/star-rating' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/star-rating';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/milestones' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/milestones';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/masonry-flow' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/masonry-flow';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/compare' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/compare';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/cube-gallery' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/cube-gallery';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/dock' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/dock';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/nav-morph' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/nav-morph';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/menu-toggle' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/menu-toggle';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/tip' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/tip';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/stepper' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/stepper';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/pagination' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/pagination';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/segmented' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/segmented';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/switch' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/switch';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/kanban' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/kanban';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/swipe-deck' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/swipe-deck';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/weather-card' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/weather-card';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/pull-cord' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/pull-cord';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/date-picker' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/date-picker';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/color-picker' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/color-picker';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/file-drop' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/file-drop';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/keyframe-editor' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/keyframe-editor';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/music-player' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/music-player';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/volume-knob' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/volume-knob';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/equalizer' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/equalizer';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/lyrics' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/lyrics';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/bar-chart' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/bar-chart';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/gauge' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/gauge';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/sparkline' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/sparkline';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/kpi' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/kpi';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/add-to-cart' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/add-to-cart';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/cart-drawer' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/cart-drawer';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/product-gallery' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/product-gallery';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/countdown' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/countdown';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/message-list' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/message-list';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/reactions' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/reactions';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/notification-bell' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/notification-bell';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/presence' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/presence';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/leaderboard' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/leaderboard';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/xp-bar' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/xp-bar';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/badge-wall' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/badge-wall';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/prize-wheel' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/prize-wheel';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/globe' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/globe';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/location-card' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/location-card';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/field' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/field';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/otp' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/otp';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/upload-progress' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/upload-progress';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/chat-composer' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/chat-composer';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/suggestion-chips' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/suggestion-chips';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/voice-button' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/voice-button';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/command-palette' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/command-palette';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/shortcut' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/shortcut';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/clock-control' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/clock-control';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/hydrate' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/hydrate';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/red-envelope' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/red-envelope';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/festival-banner' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/festival-banner';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/terminal' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/terminal';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/retro-button' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/retro-button';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/organic-card' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/organic-card';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/liquid-nav' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/liquid-nav';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/hud-panel' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/hud-panel';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/radar' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/radar';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/sticky-wall' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/sticky-wall';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/sketch-chart' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/sketch-chart';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/theme-switcher' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/theme-switcher';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/theme-surface' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/theme-surface';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/gyro-card' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/gyro-card';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/gesture-sticker' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/gesture-sticker';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/panorama' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/panorama';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/spatial-card' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/spatial-card';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/code-export' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/code-export';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/prop-panel' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/prop-panel';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/motion' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/motion';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/plugin-store' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/plugin-store';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/chapter-nav' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/chapter-nav';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/scene' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/scene';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/lottie' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/lottie';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/lottie-icon' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/lottie-icon';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/gen-art' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/gen-art';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/bg-generator' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/bg-generator';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/video-card' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/video-card';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/hero-video' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/hero-video';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/motion-prefs' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/motion-prefs';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/pause-all' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/pause-all';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/perf-monitor' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/perf-monitor';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/worker-canvas' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/worker-canvas';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/motion-spec' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/motion-spec';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/native-preview' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/native-preview';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/plugin-card' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/plugin-card';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/install-button' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/install-button';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/scroll-scene' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/scroll-scene';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/motion-inspector' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/motion-inspector';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/route-transition' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/route-transition';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/text-splitter' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/text-splitter';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/scroll-ring' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/scroll-ring';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/parallax-layers' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/parallax-layers';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/smooth-scroll' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/smooth-scroll';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/gl-scene' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/gl-scene';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/three-scene' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/three-scene';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/gpu-particles' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/gpu-particles';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/shader-backdrop' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/shader-backdrop';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/lottie-player' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/lottie-player';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/rive' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/rive';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/token-editor' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/token-editor';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/physics-playground' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/physics-playground';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/motion-prompt' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/motion-prompt';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/snap-carousel' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/snap-carousel';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/gl-model' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/gl-model';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/widgets/dotlottie' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/dotlottie';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/fluid' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/fluid';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/smoke' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/smoke';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/fire' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/fire';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/ink' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/ink';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/fireflies' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/fireflies';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/sakura' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/sakura';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/leaves' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/leaves';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/splash' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/splash';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/liquid-text' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/liquid-text';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/neon-write' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/neon-write';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/particle-text' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/particle-text';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/glitch-text' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/glitch-text';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/text-trail' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/text-trail';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/font-breathe' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/font-breathe';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/flip-chars' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/flip-chars';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/light-follow' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/light-follow';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/refraction' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/refraction';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/brushed-metal' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/brushed-metal';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/pearlescent' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/pearlescent';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/god-rays' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/god-rays';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/pointer-shadow' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/pointer-shadow';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/depth-stack' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/depth-stack';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/product-spin' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/product-spin';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/card-flip-3d' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/card-flip-3d';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/origami' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/origami';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/orbit-camera' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/orbit-camera';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/path-morph' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/path-morph';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/blob-button' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/blob-button';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/stroke-draw' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/stroke-draw';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/noise-reveal' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/noise-reveal';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/icon-swap' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/icon-swap';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/ripple-dissolve' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/ripple-dissolve';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/shatter' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/shatter';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/mosaic-flip' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/mosaic-flip';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/liquid-wipe' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/liquid-wipe';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/page-curl' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/page-curl';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/camera-dolly' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/camera-dolly';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/rain-glass' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/rain-glass';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/snowfall' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/snowfall';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/lightning' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/lightning';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/fog' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/fog';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/aurora-veil' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/aurora-veil';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/day-cycle' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/day-cycle';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/soft-body' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/soft-body';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/magnet' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/magnet';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/cloth' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/cloth';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/rope' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/rope';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/pinball' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/pinball';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/focus-draw' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/focus-draw';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/marching-ants' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/marching-ants';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/success-check' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/success-check';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/highlight-sweep' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/highlight-sweep';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/waveform-scope' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/waveform-scope';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/radial-spectrum' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/radial-spectrum';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/spectrum-mirror' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/spectrum-mirror';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/sound-particles' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/sound-particles';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/beat-bounce' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/beat-bounce';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/vinyl-spin' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/vinyl-spin';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/bars-grow' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/bars-grow';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/line-draw' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/line-draw';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/ring-sweep' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/ring-sweep';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/sankey-flow' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/sankey-flow';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/number-roll' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/number-roll';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/dots-pop' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/dots-pop';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/fly-to-cart' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/fly-to-cart';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/price-flip' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/price-flip';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/stock-pulse' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/stock-pulse';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/sale-shine' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/sale-shine';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/badge-pop' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/badge-pop';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/typing-dots' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/typing-dots';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/message-in' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/message-in';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/reaction-burst' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/reaction-burst';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/read-receipt' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/read-receipt';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/mention-glow' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/mention-glow';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/achievement-unlock' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/achievement-unlock';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/level-up' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/level-up';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/chest-open' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/chest-open';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/coin-burst' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/coin-burst';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/xp-gain' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/xp-gain';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/route-draw' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/route-draw';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/marker-pulse' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/marker-pulse';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/pin-drop' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/pin-drop';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/globe-spin' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/globe-spin';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/field-shake' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/field-shake';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/field-success' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/field-success';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/label-float' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/label-float';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/form-cascade' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/form-cascade';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/stream-text' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/stream-text';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/thinking-glow' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/thinking-glow';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/voice-wave' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/voice-wave';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/gen-skeleton' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/gen-skeleton';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/firework-burst' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/firework-burst';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/lantern-rise' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/lantern-rise';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/xmas-snow' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/xmas-snow';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/spooky-float' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/spooky-float';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/pixelate-in' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/pixelate-in';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/crt-power' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/crt-power';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/vhs-glitch' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/vhs-glitch';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/y2k-shine' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/y2k-shine';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/vine-grow' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/vine-grow';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/bloom' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/bloom';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/water-drop' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/water-drop';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/breathe' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/breathe';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/hud-frame' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/hud-frame';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/scanline-sweep' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/scanline-sweep';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/hologram' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/hologram';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/data-decode' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/data-decode';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/paper-unfold' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/paper-unfold';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/pencil-sketch' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/pencil-sketch';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/watercolor' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/watercolor';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/crumple' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/crumple';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/neon-ignite' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/neon-ignite';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/neon-pulse' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/neon-pulse';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/glass-frost' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/glass-frost';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/neu-press' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/neu-press';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/swipe-hint' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/swipe-hint';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/pinch-hint' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/pinch-hint';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/tilt-wobble' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/tilt-wobble';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/depth-in' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/depth-in';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/portal-open' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/portal-open';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/orbit-in' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/orbit-in';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/spatial-float' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/spatial-float';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/depth-pop' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/depth-pop';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/dolly-in' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/dolly-in';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/pan-reveal' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/pan-reveal';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/letterbox' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/letterbox';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/rack-focus' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/rack-focus';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/lottie-play' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/lottie-play';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/icon-pop' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/icon-pop';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/halftone-in' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/halftone-in';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/mesh-drift' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/mesh-drift';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/kaleido' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/kaleido';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/grain-flicker' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/grain-flicker';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/film-burn' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/film-burn';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/jump-cut' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/jump-cut';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/safe-fade' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/safe-fade';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/focus-glow' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/focus-glow';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/color-pulse' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/color-pulse';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/underline-sweep' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/underline-sweep';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/idle-reveal' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/idle-reveal';",
+    "limit": 1
+  },
+  {
+    "name": "import 'motionary/effects/gpu-lift' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/gpu-lift';",
+    "limit": 1
   }
 ]

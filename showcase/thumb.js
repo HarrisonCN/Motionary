@@ -33,7 +33,7 @@ async function loadRuntime(base) {
 }
 
 async function loadLibrary() {
-  const load = (base) => Promise.all(['components.js', 'components/effects.js', 'components/widgets.js', 'components/fx2.js', 'components/snap-carousel.js'].map((f) => import(base + f).catch((e) => (f.includes('snap-carousel') ? {} : Promise.reject(e)))));
+  const load = (base) => Promise.all(['components.js', 'components/effects.js', 'components/widgets.js', 'components/fx2.js', 'components/snap-carousel.js', 'components/gl-model.js', 'components/dotlottie.js'].map((f) => import(base + f).catch((e) => (/snap-carousel|gl-model|dotlottie/.test(f) ? {} : Promise.reject(e)))));
   let mods;
   try {
     await loadRuntime(LOCAL);
@@ -44,6 +44,8 @@ async function loadLibrary() {
   const lib = Object.assign({}, ...mods);
   lib.defineWidgets?.();
   lib.defineSnapCarousel?.();
+  lib.defineGlModel?.();
+  lib.defineDotLottie?.();
   lib.registerAllPlugins?.();
   lib.defineComponents?.();
   lib.registerAllEffects?.();

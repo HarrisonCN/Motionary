@@ -1627,6 +1627,77 @@ defineSnapCarousel(); // registers <usa-snap-carousel> — after the prerequisit
 </usa-snap-carousel>
 ```
 
+### `<usa-dotlottie>` — Requires: motionary/runtime/vector + motionary/runtime/lottie-state
+
+- **Install:** `npm i motionary`
+- **Import order & registration:** Register the core first, then the module: use(vector) also registers the core. CDN: load runtime.iife.js, then runtime/vector.iife.js (it registers itself). Register the core first, then the module: use(lottieState) also registers the core. CDN: load runtime.iife.js, then runtime/lottie-state.iife.js (it registers itself).
+
+```js
+import { use } from 'motionary/runtime';
+import { vector } from 'motionary/runtime/vector';
+import { lottieState } from 'motionary/runtime/lottie-state';
+import { defineDotLottie } from 'motionary/components/dotlottie';
+
+use(vector, lottieState);
+defineDotLottie(); // registers <usa-dotlottie> — after the prerequisites
+```
+
+- **CDN:**
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/vector.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/lottie-state.iife.js"></script>
+<!-- then the component bundles -->
+<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>
+```
+
+- **Minimal example:**
+
+```html
+<usa-dotlottie src="/anim/button.lottie" state-machine="toggle" theme="dark" label="Like button"></usa-dotlottie>
+```
+
+### `<usa-gl-model>` — Requires: motionary/runtime/gl + motionary/runtime/format-gltf + motionary/runtime/gltf-decoders + draco3d + basis_transcoder.js
+
+- **Install:** `npm i motionary && npm i draco3d && curl -LO https://cdn.jsdelivr.net/gh/BinomialLLC/basis_universal@1.16.4/webgl/transcoder/build/basis_transcoder.js -LO https://cdn.jsdelivr.net/gh/BinomialLLC/basis_universal@1.16.4/webgl/transcoder/build/basis_transcoder.wasm`
+- **Import order & registration:** Register the core first, then the module: use(gl) also registers the core. CDN: load runtime.iife.js, then runtime/gl.iife.js (it registers itself). Register the core first, then the module: use(formatGltf) also registers the core. CDN: load runtime.iife.js, then runtime/format-gltf.iife.js (it registers itself). Register the core first, then the module: use(gltfDecoders) also registers the core. CDN: load runtime.iife.js, then runtime/gltf-decoders.iife.js (it registers itself). Install draco3d next to motionary, then register the lazy loader with provideGltfDecoder('draco', () => import('draco3d')) before a compressed model loads. Without a bundler: load Google’s draco_decoder.js from gstatic (window.DracoDecoderModule) and provideGltfDecoder('draco', () => window.DracoDecoderModule). Missing → a clear error naming the extension and this line. The transcoder is not published on npm by Binomial: copy basis_transcoder.js + basis_transcoder.wasm (same folder) into your static files, then provideGltfDecoder('ktx2', …) before a KTX2 model loads; or load it from the CDN (window.BASIS) and provideGltfDecoder('ktx2', () => window.BASIS). Missing → a clear error naming the extension and this line.
+
+```js
+import { use } from 'motionary/runtime';
+import { gl } from 'motionary/runtime/gl';
+import { formatGltf } from 'motionary/runtime/format-gltf';
+import { gltfDecoders } from 'motionary/runtime/gltf-decoders';
+import { provideGltfDecoder } from 'motionary/runtime/gltf-decoders';
+import { defineGlModel } from 'motionary/components/gl-model';
+
+use(gl, formatGltf, gltfDecoders);
+provideGltfDecoder('draco', () => import('draco3d')); // lazy: fetched when the first Draco-compressed model loads
+provideGltfDecoder('ktx2', () => import('/vendor/basis_transcoder.js').then((m) => m.default || window.BASIS)); // lazy: fetched with the first KTX2 texture
+defineGlModel(); // registers <usa-gl-model> — after the prerequisites
+```
+
+- **CDN:**
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gl.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-gltf.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gltf-decoders.iife.js"></script>
+<script src="https://www.gstatic.com/draco/versioned/decoders/1.5.7/draco_decoder.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/BinomialLLC/basis_universal@1.16.4/webgl/transcoder/build/basis_transcoder.js"></script>
+<!-- then the component bundles -->
+<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>
+```
+
+- **Minimal example:**
+
+```html
+<usa-gl-model src="/models/robot-draco.glb" controls label="Robot"></usa-gl-model>
+```
+
 <!-- prereqs:end -->
 
 ### v10.2 Scroll scenes (`motionary/runtime/scroll`) + SVG loader + `data-motion` in core: `<usa-scroll-scene>`, `<usa-motion-inspector>` (`components/widgets`)
@@ -1731,6 +1802,18 @@ MCP: `npx -y -p motionary motionary-mcp` — see [docs/mcp.md](docs/mcp.md).
 |---|---|---|
 | `<usa-snap-carousel>` (`motionary/components/snap-carousel`; Requires: motionary/runtime/drag-snap) | `align` (center, start), `gap`, `index`, `autoplay`, `no-controls`, `no-dots`, `label` | `index`, `length`, `controller`, `next()`, `prev()`, `goTo(i, animate)`; `usa:change`, `usa:runtime-missing` |
 | `<usa-gl-scene>` (10.8 additions; animation Requires: motionary/runtime/gltf-anim) | `animation` (clip name / index), `animation-speed` | `animator`; `usa:load` { animations } |
+
+### v10.9 per-component entry points, `<usa-dotlottie>` (themes + state machines), `<usa-gl-model>` (Draco / KTX2 via official decoders)
+
+```js
+import { defineDock } from 'motionary/widgets/dock'; defineDock();               // registers <usa-dock> only
+import { registerPearlescent } from 'motionary/effects/pearlescent'; registerPearlescent();
+```
+
+| Element | Attributes | Methods / events |
+|---|---|---|
+| `<usa-dotlottie>` (`motionary/components/dotlottie`; Requires: motionary/runtime/vector + motionary/runtime/lottie-state) | `<usa-lottie-player>` attributes + `theme`, `state-machine` | `stateMachine`, `state`, `fire()`, `setInput()`, `setTheme()`; `usa:state`, `usa:custom` |
+| `<usa-gl-model>` (`motionary/components/gl-model`; Requires: gl + format-gltf + gltf-decoders + draco3d + basis_transcoder.js) | `<usa-gl-scene>` attributes | `<usa-gl-scene>` API |
 
 ## Frameworks
 
