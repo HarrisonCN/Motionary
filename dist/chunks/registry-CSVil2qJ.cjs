@@ -9,7 +9,7 @@
  * inside Web Workers.
  */
 /** Runtime version (kept in sync with the package version by the release script). */
-const RUNTIME_VERSION = '10.2.0';
+const RUNTIME_VERSION = '10.3.0';
 /** Where the CDN builds live (major-pinned). */
 const RUNTIME_CDN = 'https://cdn.jsdelivr.net/npm/motionary@10/dist/';
 const KEY = Symbol.for('motionary.runtime');
@@ -78,4 +78,4 @@ exports.register = register;
 exports.registeredModules = registeredModules;
 exports.registry = registry;
 exports.requireModule = requireModule;
-//# sourceMappingURL=registry-eJgpFAzI.cjs.map
+//# sourceMappingURL=registry-CSVil2qJ.cjs.map

@@ -1,4 +1,4 @@
-import { T as Timeline, a as Tween, p as parseEase, d as parseValue } from './tween-CqX1JBuj.js';
+import { T as Timeline, a as Tween, p as parseEase, d as parseValue } from './tween-CGyolmzB.js';
 
 /**
  * Normalised keyframes shared by the format loaders: a list of frames with
@@ -180,4 +180,4 @@ function framesToTimeline(target, frames, o = {}) {
 }
 
 export { camelProp as c, distributeOffsets as d, framesToTimeline as f };
-//# sourceMappingURL=keyframes-W-474DMc.js.map
+//# sourceMappingURL=keyframes-DVAC5sQI.js.map

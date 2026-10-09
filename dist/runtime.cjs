@@ -1,8 +1,8 @@
 'use strict';
 
-var registry = require('./chunks/registry-eJgpFAzI.cjs');
-var ticker = require('./chunks/ticker-D4o6enH0.cjs');
-var tween$1 = require('./chunks/tween-CBuWYpI-.cjs');
+var registry = require('./chunks/registry-CSVil2qJ.cjs');
+var ticker = require('./chunks/ticker-gHv6pNfx.cjs');
+var tween$1 = require('./chunks/tween-CFN0WcOb.cjs');
 
 /**
  * `motionary/runtime` (10.1) — Motionary's own zero-dependency animation

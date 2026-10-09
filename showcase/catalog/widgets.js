@@ -1233,6 +1233,21 @@ export const components = [
     '<usa-motion-inspector scope="#app" interval="500"></usa-motion-inspector>',
     '<div class="demo-mi-wrap"><div class="demo-mi-row"><span class="demo-mi-dot"></span><span class="demo-mi-dot demo-mi-dot2"></span><span class="demo-mi-bar"></span></div><usa-motion-inspector scope=".demo-mi-wrap" interval="400"></usa-motion-inspector></div>',
     undefined, { since: '10.2' }),
+  // ---- 10.3 ------------------------------------------------------------
+  W('usa-route-transition', 'transitions', 'Route transition container', '路由转场容器',
+    '10.3: View Transitions 2.0 — link clicks swap the container’s content with the target page (fetched) or an inline <template data-route>, animated with the View Transitions API (Web Animations fallback); data-shared elements morph between routes; cross-document enables native MPA transitions.',
+    '10.3：View Transitions 2.0 —— 点击链接时用目标页面（fetch 获取）或内联 <template data-route> 替换容器内容，使用 View Transitions API 动画（回退为 Web Animations）；带 data-shared 的元素在路由间形变；cross-document 开启原生跨文档转场。',
+    ['view transitions', 'router', 'mpa', 'shared element', 'page transition'],
+    '<usa-route-transition id="app" effect="slide" cross-document>\n  <nav><a href="/">Home</a> <a href="/about">About</a></nav>\n  <h1 data-shared="title">Home</h1>\n</usa-route-transition>',
+    '<usa-route-transition class="demo-route" effect="slide" engine="waapi" history="off"><div class="demo-route-nav"><button data-to="home">Home</button><button data-to="work">Work</button><button data-to="about">About</button></div><div class="demo-route-page"><h4 data-shared="t">Home</h4><p>Welcome — pick a route.</p></div><template data-route="home"><div class="demo-route-nav"><button data-to="home">Home</button><button data-to="work">Work</button><button data-to="about">About</button></div><div class="demo-route-page"><h4 data-shared="t">Home</h4><p>Welcome — pick a route.</p></div></template><template data-route="work"><div class="demo-route-nav"><button data-to="home">Home</button><button data-to="work">Work</button><button data-to="about">About</button></div><div class="demo-route-page demo-route-b"><h4 data-shared="t">Work</h4><p>Selected projects, 2026.</p></div></template><template data-route="about"><div class="demo-route-nav"><button data-to="home">Home</button><button data-to="work">Work</button><button data-to="about">About</button></div><div class="demo-route-page demo-route-c"><h4 data-shared="t">About</h4><p>Motion, made simple.</p></div></template></usa-route-transition>',
+    [{ key: 'effect', values: ['slide', 'fade', 'zoom'] }], { since: '10.3' }),
+  W('usa-text-splitter', 'text', 'Text splitter', '文字拆分器',
+    '10.3: splits its text into characters, words or lines and animates them in with a stagger (rise, fade, blur, flip, wave) when it scrolls into view — accessible, grapheme-aware. Requires motionary/runtime/text — npm i motionary, then use(text) before it mounts.',
+    '10.3：把文字拆成字符、单词或行，滚动进入视口时逐个错开入场（rise、fade、blur、flip、wave）—— 无障碍、按字素拆分。需要 motionary/runtime/text —— npm i motionary，并在挂载前 use(text)。',
+    ['split text', 'letters', 'words', 'lines', 'stagger', 'runtime'],
+    '<usa-text-splitter split="chars" effect="rise" stagger="30">Motion, made simple.</usa-text-splitter>',
+    '<usa-text-splitter class="demo-splitter" split="chars" effect="rise" stagger="35" loop>Motion, made simple ✨</usa-text-splitter>',
+    [{ key: 'effect', values: ['rise', 'fade', 'blur', 'flip', 'wave'] }, { key: 'split', values: ['chars', 'words', 'lines'] }], { since: '10.3', requires: ['text'] }),
 ];
 
 /** item id → live-demo wiring. */

@@ -40,7 +40,14 @@ interface Col {
     kind: 'col';
     c: number[];
 }
-type Val = Num | Col;
+/** Any other string: its numbers are interpolated when both ends share the same text around them. */
+interface Str {
+    kind: 'str';
+    s: string;
+    parts: string[];
+    nums: number[];
+}
+type Val = Num | Col | Str;
 /** Parse '12px', '-3.5', '50%', '#0af', 'rgb(1 2 3 / .5)', 'rgba(…)'. */
 declare function parseValue(v: number | string): Val;
 /** Common playback: delay, repeat, yoyo, direction, ticker attachment, promise. */
@@ -143,7 +150,7 @@ declare function timeline(o?: TimelineOptions): Timeline;
  * inside Web Workers.
  */
 /** Runtime version (kept in sync with the package version by the release script). */
-declare const RUNTIME_VERSION = "10.2.0";
+declare const RUNTIME_VERSION = "10.3.0";
 /** Where the CDN builds live (major-pinned). */
 declare const RUNTIME_CDN = "https://cdn.jsdelivr.net/npm/motionary@10/dist/";
 /** A runtime module: `{ id, version, api }`, registered with `use()`. */

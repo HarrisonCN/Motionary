@@ -1,4 +1,4 @@
-# Motionary components (193)
+# Motionary components (195)
 
 One page per `<usa-*>` element, generated from the source. Machine-readable: `motionary/manifest.json` · Pages `/components.json` · `/llms.txt` · `/llms-full.txt`. How to use these with an AI assistant: [AGENTS.md](../../AGENTS.md) and [the prompt guide](../ai-prompt-guide.md).
 
@@ -8,6 +8,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<usa-dialog>`](usa-dialog.md) — Modal & drawer
 - [`<usa-disclosure>`](usa-disclosure.md) — Accordion 2.0
 - [`<usa-modal>`](usa-modal.md) — Modal dialog
+- [`<usa-route-transition>`](usa-route-transition.md) — Route transition container
 - [`<usa-sheet>`](usa-sheet.md) — Drawer / bottom sheet
 - [`<usa-view-switch>`](usa-view-switch.md) — View switch
 
@@ -207,6 +208,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<usa-shimmer-text>`](usa-shimmer-text.md) — Shimmer text
 - [`<usa-split-text>`](usa-split-text.md) — Split-text reveal
 - [`<usa-text-rotate>`](usa-text-rotate.md) — Rotating words
+- [`<usa-text-splitter>`](usa-text-splitter.md) — Text splitter · Requires: motionary/runtime/text
 - [`<usa-typewriter>`](usa-typewriter.md) — Typewriter
 - [`<usa-wave-text>`](usa-wave-text.md) — Wave text
 

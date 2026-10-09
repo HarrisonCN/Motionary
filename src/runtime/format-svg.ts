@@ -198,7 +198,7 @@ const lerpNumbers: Interp = (a, b, p) => {
 const lerpAny: Interp = (a, b, p) => {
   try {
     const x = parseValue(a), y = parseValue(b);
-    if ((x as { kind: string }).kind === 'str' || (y as { kind: string }).kind === 'str') throw 0; // number lists / keywords: handled below
+    if (x.kind === 'str' || y.kind === 'str') throw 0; // number lists / keywords: handled below
     if (x.kind === 'col' || y.kind === 'col') {
       const ca = x.kind === 'col' ? x.c : [0, 0, 0, 1], cb = y.kind === 'col' ? y.c : [0, 0, 0, 1];
       const c = ca.map((v, i) => v + (cb[i] - v) * p);

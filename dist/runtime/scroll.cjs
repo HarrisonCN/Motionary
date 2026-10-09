@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-eJgpFAzI.cjs');
-var ticker = require('../chunks/ticker-D4o6enH0.cjs');
+var registry = require('../chunks/registry-CSVil2qJ.cjs');
+var ticker = require('../chunks/ticker-gHv6pNfx.cjs');
 
 /**
  * `motionary/runtime/scroll` (10.2) — scroll-linked scenes, an original

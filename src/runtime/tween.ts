@@ -44,7 +44,10 @@ const isEl = (t: unknown): t is HTMLElement => typeof Element !== 'undefined' &&
 
 interface Num { kind: 'num'; v: number; u: string }
 interface Col { kind: 'col'; c: number[] }
-type Val = Num | Col;
+/** Any other string: its numbers are interpolated when both ends share the same text around them. */
+interface Str { kind: 'str'; s: string; parts: string[]; nums: number[] }
+type Val = Num | Col | Str;
+const NUM_RE = /-?(?:\d+\.?\d*|\.\d+)(?:e-?\d+)?/gi;
 
 /** Parse '12px', '-3.5', '50%', '#0af', 'rgb(1 2 3 / .5)', 'rgba(…)'. */
 export function parseValue(v: number | string): Val {
@@ -65,10 +68,17 @@ export function parseValue(v: number | string): Val {
   if (s === 'transparent') return { kind: 'col', c: [0, 0, 0, 0] };
   m = /^(-?[\d.]+(?:e-?\d+)?)([a-z%]*)$/i.exec(s);
   if (m) return { kind: 'num', v: parseFloat(m[1]), u: m[2] };
-  throw new Error(`[motionary] cannot tween value "${s}"`);
+  return { kind: 'str', s, parts: s.split(NUM_RE), nums: (s.match(NUM_RE) || []).map(Number) };
 }
 
 const lerpVal = (a: Val, b: Val, p: number): string | number => {
+  if (a.kind === 'str' || b.kind === 'str') {
+    if (a.kind === 'str' && b.kind === 'str' && a.parts.join('\u0000') === b.parts.join('\u0000') && a.nums.length === b.nums.length) {
+      return a.parts.map((t, i) => t + (i < a.nums.length ? +(a.nums[i] + (b.nums[i] - a.nums[i]) * p).toFixed(4) : '')).join('');
+    }
+    const src = p < 0.5 ? a : b;
+    return src.kind === 'str' ? src.s : src.kind === 'num' ? (src.u ? src.v + src.u : src.v) : `rgba(${src.c.join(', ')})`;
+  }
   if (a.kind === 'col' || b.kind === 'col') {
     const ca = a.kind === 'col' ? a.c : [0, 0, 0, 0], cb = b.kind === 'col' ? b.c : [0, 0, 0, 0];
     const c = ca.map((x, i) => x + (cb[i] - x) * p);
@@ -114,6 +124,7 @@ function writeProp(t: Target, k: string, v: string | number): void {
   }
   if (TRANSFORM.includes(k)) {
     const p = parseValue(v) as Num;
+    if (p.kind !== 'num') throw new Error(`[motionary] ${k} needs a number (got "${v}")`);
     const s = tstate.get(t) || {};
     s[k] = { v: p.v, u: p.u };
     tstate.set(t, s);

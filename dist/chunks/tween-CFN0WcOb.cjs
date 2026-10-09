@@ -1,6 +1,6 @@
 'use strict';
 
-var ticker = require('./ticker-D4o6enH0.cjs');
+var ticker = require('./ticker-gHv6pNfx.cjs');
 
 const out = (f) => (t) => 1 - f(1 - t);
 const inOut = (f) => (t) => (t < 0.5 ? f(t * 2) / 2 : 1 - f((1 - t) * 2) / 2);
@@ -101,6 +101,7 @@ const TRANSFORM = ['x', 'y', 'rotate', 'scale', 'scaleX', 'scaleY', 'skewX', 'sk
 const DEFAULT_UNIT = { x: 'px', y: 'px', rotate: 'deg', skewX: 'deg', skewY: 'deg', scale: '', scaleX: '', scaleY: '' };
 const tstate = new WeakMap();
 const isEl = (t) => typeof Element !== 'undefined' && t instanceof Element;
+const NUM_RE = /-?(?:\d+\.?\d*|\.\d+)(?:e-?\d+)?/gi;
 /** Parse '12px', '-3.5', '50%', '#0af', 'rgb(1 2 3 / .5)', 'rgba(…)'. */
 function parseValue(v) {
     if (typeof v === 'number')
@@ -124,9 +125,16 @@ function parseValue(v) {
     m = /^(-?[\d.]+(?:e-?\d+)?)([a-z%]*)$/i.exec(s);
     if (m)
         return { kind: 'num', v: parseFloat(m[1]), u: m[2] };
-    throw new Error(`[motionary] cannot tween value "${s}"`);
+    return { kind: 'str', s, parts: s.split(NUM_RE), nums: (s.match(NUM_RE) || []).map(Number) };
 }
 const lerpVal = (a, b, p) => {
+    if (a.kind === 'str' || b.kind === 'str') {
+        if (a.kind === 'str' && b.kind === 'str' && a.parts.join('\u0000') === b.parts.join('\u0000') && a.nums.length === b.nums.length) {
+            return a.parts.map((t, i) => t + (i < a.nums.length ? +(a.nums[i] + (b.nums[i] - a.nums[i]) * p).toFixed(4) : '')).join('');
+        }
+        const src = p < 0.5 ? a : b;
+        return src.kind === 'str' ? src.s : src.kind === 'num' ? (src.u ? src.v + src.u : src.v) : `rgba(${src.c.join(', ')})`;
+    }
     if (a.kind === 'col' || b.kind === 'col') {
         const ca = a.kind === 'col' ? a.c : [0, 0, 0, 0], cb = b.kind === 'col' ? b.c : [0, 0, 0, 0];
         const c = ca.map((x, i) => x + (cb[i] - x) * p);
@@ -176,6 +184,8 @@ function writeProp(t, k, v) {
     }
     if (TRANSFORM.includes(k)) {
         const p = parseValue(v);
+        if (p.kind !== 'num')
+            throw new Error(`[motionary] ${k} needs a number (got "${v}")`);
         const s = tstate.get(t) || {};
         s[k] = { v: p.v, u: p.u };
         tstate.set(t, s);
@@ -484,4 +494,4 @@ exports.parseValue = parseValue;
 exports.steps = steps;
 exports.timeline = timeline;
 exports.tween = tween;
-//# sourceMappingURL=tween-CBuWYpI-.cjs.map
+//# sourceMappingURL=tween-CFN0WcOb.cjs.map
