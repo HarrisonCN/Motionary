@@ -1053,7 +1053,7 @@ function renderDetail(item, keepState) {
     );
   }
   right.append(
-    h('section', {}, [h('h3', { class: 'section-title', text: T('detail.options') }), h('div', { class: 'controls', id: 'controls' })]),
+    h('section', { hidden: item.kind === 'component' }, [h('h3', { class: 'section-title', text: T('detail.options') }), h('div', { class: 'controls', id: 'controls' })]),
     h('section', {}, [
       h('h3', { class: 'section-title', text: T('detail.install') }),
       h('div', { class: 'install' }, [
