@@ -1,8 +1,8 @@
 'use strict';
 
-var base = require('../chunks/base-DoRUZBy-.cjs');
-var spring = require('../chunks/spring-uQMVJTj9.cjs');
-var variants = require('../chunks/variants-DagykrKH.cjs');
+var base = require('../chunks/base-DBheNxJu.cjs');
+var spring = require('../chunks/spring-BlTQD2AV.cjs');
+var variants = require('../chunks/variants-CrDDJoYK.cjs');
 
 /** Position a fixed `floating` element next to `anchor`, flipping when it would leave the viewport. */
 function place(floating, anchor, placement = 'top', gap = 8) {

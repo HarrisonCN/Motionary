@@ -1,4 +1,4 @@
-import { p as prefersReducedMotion, q as now, m as motionScale, r as raf, D as EASE_OUT, k as clamp, E as EASE_SPRING, u as defineElement } from '../chunks/base-CLuqlLfG.js';
+import { p as prefersReducedMotion, q as now, m as motionScale, r as raf, D as EASE_OUT, k as clamp, E as EASE_SPRING, u as defineElement } from '../chunks/base-BnRyfuyM.js';
 
 const anim = (el, frames, o) => {
     if (typeof el.animate !== 'function')

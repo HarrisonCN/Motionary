@@ -1,8 +1,8 @@
 'use strict';
 
-var registry = require('../chunks/registry-BVklOepd.cjs');
+var registry = require('../chunks/registry-xQZnSqqV.cjs');
 var shared = require('../chunks/shared-jkgRH-Hx.cjs');
-require('../chunks/base-DoRUZBy-.cjs');
+require('../chunks/base-DBheNxJu.cjs');
 
 const NS = 'http://www.w3.org/2000/svg';
 const raf = (f) => (typeof requestAnimationFrame === 'function' ? requestAnimationFrame(f) : 0);

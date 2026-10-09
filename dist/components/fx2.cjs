@@ -1,7 +1,7 @@
 'use strict';
 
-var manifest = require('../chunks/manifest-B08-vo9G.cjs');
-var components_fxGpu = require('../chunks/gpu-CcdA2D2i.cjs');
+var manifest = require('../chunks/manifest-PaF9B8Vt.cjs');
+var components_fxGpu = require('../chunks/gpu-cUixt7kT.cjs');
 var components_fxText = require('./fx-text.cjs');
 var components_fxLight = require('./fx-light.cjs');
 var components_fx3d = require('./fx-3d.cjs');
@@ -32,11 +32,11 @@ var components_fxGenart = require('./fx-genart.cjs');
 var components_fxVideo = require('./fx-video.cjs');
 var components_fxSafe = require('./fx-safe.cjs');
 var components_fxPerf = require('./fx-perf.cjs');
-require('../chunks/registry-BVklOepd.cjs');
-require('../chunks/base-DoRUZBy-.cjs');
+require('../chunks/registry-xQZnSqqV.cjs');
+require('../chunks/base-DBheNxJu.cjs');
 require('../chunks/generative-BHIj-NU0.cjs');
 require('../chunks/shared-jkgRH-Hx.cjs');
-require('../chunks/audio-cgWbDkoY.cjs');
+require('../chunks/audio-BpU-A1m1.cjs');
 
 /** The 6.x effect packs by name. */
 const EFFECT_PACKS = {
