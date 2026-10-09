@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - The showcase snippet tests now accept the documented `motionary/runtime` and `motionary/runtime/<module>` entry points used by runtime-powered components' code tabs.
+- `<usa-install-button>`: switching package-manager tabs now animates the command in (it changed abruptly); skipped under reduced motion.
 
 ## [10.0.0] - 2026-10-09
 

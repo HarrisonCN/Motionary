@@ -47,16 +47,18 @@ export function defineInstallButton(tag = 'usa-install-button'): CustomElementCo
           const list = this.list();
           this.cur = list.includes(this.str('manager')) ? this.str('manager') : list[0];
           this.innerHTML = `<div role="tablist" aria-label="Package manager">${list.map((m) => `<button type="button" role="tab" data-m="${m}">${m === 'cdn' ? 'CDN' : m}</button>`).join('')}</div><div class="usa-ib-row"><code></code><button type="button" class="usa-ib-copy" aria-live="polite">Copy</button></div>`;
-          const show = () => {
+          const show = (animate = false) => {
             this.querySelectorAll<HTMLElement>('[role=tab]').forEach((t) => t.setAttribute('aria-selected', String(t.dataset.m === this.cur)));
-            (this.querySelector('code') as HTMLElement).textContent = this.command();
+            const code = this.querySelector('code') as HTMLElement;
+            code.textContent = this.command();
+            if (animate && !this.reduced) this.motion(code, [{ opacity: 0.25, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], { duration: 220, easing: 'cubic-bezier(.22,1,.36,1)' });
           };
           this.listen(this, 'click', (e: Event) => {
             const t = e.target as HTMLElement;
             const tab = t.closest?.('[data-m]') as HTMLElement | null;
             if (tab) {
               this.cur = tab.dataset.m!;
-              show();
+              show(true);
             }
             if (t.closest?.('.usa-ib-copy')) this.copy();
           });
