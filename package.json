@@ -1,6 +1,6 @@
 {
   "name": "motionary",
-  "version": "8.5.0",
+  "version": "8.6.0",
   "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 94 animated Web Components — 214 scroll-reveal presets, card/click/button morphs, physics, page transitions, generative & sound-reactive backgrounds, cursor/gesture effects, themes, micro-interactions, <usa-player>, WebGL. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -336,6 +336,16 @@
       "require": {
         "types": "./dist/components/fx-paper.d.cts",
         "default": "./dist/components/fx-paper.cjs"
+      }
+    },
+    "./fx/surface": {
+      "import": {
+        "types": "./dist/components/fx-surface.d.ts",
+        "default": "./dist/components/fx-surface.js"
+      },
+      "require": {
+        "types": "./dist/components/fx-surface.d.cts",
+        "default": "./dist/components/fx-surface.cjs"
       }
     },
     "./components/reveal": {
@@ -906,6 +916,16 @@
       "require": {
         "types": "./dist/components/fx-paper.d.cts",
         "default": "./dist/components/fx-paper.cjs"
+      }
+    },
+    "./components/fx-surface": {
+      "import": {
+        "types": "./dist/components/fx-surface.d.ts",
+        "default": "./dist/components/fx-surface.js"
+      },
+      "require": {
+        "types": "./dist/components/fx-surface.d.cts",
+        "default": "./dist/components/fx-surface.cjs"
       }
     },
     "./components/lite": {

@@ -1068,6 +1068,27 @@ wall.addEventListener('usa:pick', (e) => console.log(e.detail.index));
 - `<usa-sketch-chart values labels type color label>`: `values`, `setValues(list)`; `usa:drawn`.
 - Paper: `paper-unfold` (`folds`) · `pencil-sketch` (`stagger`) · `watercolor` · `crumple`; `roughLine(x1, y1, x2, y2, seed, amp)`, `paperRandom(seed)`.
 
+### v8.6 Theme system: theme switcher, theme surface (`components/widgets`) + surface pack (`motionary/fx/surface`)
+
+```html
+<usa-theme-switcher themes="light,dark,neon,glass,neu" persist></usa-theme-switcher>
+<usa-theme-surface><h3>Follows the page theme</h3></usa-theme-surface>
+<usa-theme-surface theme="glass"><h3>Always glass</h3></usa-theme-surface>
+
+<usa-fx effect="neon-ignite" trigger="enter" color="#f0abfc"><h2>OPEN</h2></usa-fx>
+<usa-fx effect="neu-press" trigger="click"><button class="neu">Press</button></usa-fx>
+```
+```js
+import { defineWidgets } from 'motionary/components/widgets';
+import { registerSurfacePack, applySurfaceTheme } from 'motionary/fx/surface';
+defineWidgets(); registerSurfacePack();
+applySurfaceTheme('neon');                       // <html data-usa-surface="neon">
+switcher.addEventListener('usa:change', (e) => console.log(e.detail.theme));
+```
+- `<usa-theme-switcher themes target value persist label>`: `value`; `usa:change` { theme }.
+- `<usa-theme-surface theme>`: `theme` (resolved); `usa:theme` { theme }.
+- Surface: `neon-ignite` · `neon-pulse` (`color`) · `glass-frost` · `neu-press`; `SURFACE_THEMES`, `applySurfaceTheme(name, target?)`.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

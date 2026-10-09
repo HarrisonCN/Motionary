@@ -82,6 +82,8 @@ import { defineHudPanel, type UsaHudPanelElement } from './hud-panel';
 import { defineRadar, parseTargets, type UsaRadarElement, type RadarTarget } from './radar';
 import { defineStickyWall, type UsaStickyWallElement } from './sticky-wall';
 import { defineSketchChart, type UsaSketchChartElement } from './sketch-chart';
+import { defineThemeSwitcher, type UsaThemeSwitcherElement } from './theme-switcher';
+import { defineThemeSurface, type UsaThemeSurfaceElement } from './theme-surface';
 
 export { defineCarousel, defineTabBar, defineDisclosure, defineStories, CAROUSEL_EFFECTS, TAB_INDICATORS };
 export type { UsaCarouselElement, UsaTabBarElement, UsaDisclosureElement, UsaStoriesElement };
@@ -151,6 +153,9 @@ export type { UsaHudPanelElement, UsaRadarElement, RadarTarget };
 export { defineStickyWall, defineSketchChart };
 export type { UsaStickyWallElement, UsaSketchChartElement };
 
+export { defineThemeSwitcher, defineThemeSurface };
+export type { UsaThemeSwitcherElement, UsaThemeSurfaceElement };
+
 /** The widgets by release (tag → define function). */
 export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElementConstructor | undefined>> = {
   '6.2': { 'usa-carousel': defineCarousel, 'usa-tab-bar': defineTabBar, 'usa-disclosure': defineDisclosure, 'usa-stories': defineStories },
@@ -176,6 +181,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '8.3': { 'usa-organic-card': defineOrganicCard, 'usa-liquid-nav': defineLiquidNav },
   '8.4': { 'usa-hud-panel': defineHudPanel, 'usa-radar': defineRadar },
   '8.5': { 'usa-sticky-wall': defineStickyWall, 'usa-sketch-chart': defineSketchChart },
+  '8.6': { 'usa-theme-switcher': defineThemeSwitcher, 'usa-theme-surface': defineThemeSurface },
 };
 
 /** Every widget tag, in release order. */
@@ -262,5 +268,7 @@ declare global {
     'usa-radar': UsaRadarElement;
     'usa-sticky-wall': UsaStickyWallElement;
     'usa-sketch-chart': UsaSketchChartElement;
+    'usa-theme-switcher': UsaThemeSwitcherElement;
+    'usa-theme-surface': UsaThemeSurfaceElement;
   }
 }
