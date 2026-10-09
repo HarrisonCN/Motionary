@@ -369,12 +369,12 @@ type DeepPartialTokens = {
  * ship with them: `neon-flicker`, `paper-fold`, `glass-shine`,
  * `retro-scanlines`, `brutal-shift`.
  *
- * - `applyTheme(name, root?)` — on `<html>` (default) it also makes the motion
+ * - `applyMotionTheme(name, root?)` — on `<html>` (default) it also makes the motion
  *   tokens active for `motionToken()`; on any other element the tokens are
  *   only written as variables there. Returns an undo.
  * - `themePreset(name, role)`, `playThemeEffect(el, role)` (theme of the
  *   closest `[data-usa-theme]`).
- * - `<usa-theme name="neon">` — scopes a theme to its subtree and binds the
+ * - `<usa-motion-theme name="neon">` — scopes a theme to its subtree and binds the
  *   presets to children with `data-theme-fx="click | hover | enter | attention"`.
  */
 
@@ -392,21 +392,12 @@ interface ThemePack {
         options?: Record<string, unknown>;
     }>;
 }
-declare const THEMES: Record<string, ThemePack>;
-declare const THEME_NAMES: string[];
-/** The 5.8 motion theme packs (8.9 name of `THEMES`). */
 declare const MOTION_THEMES: Record<string, ThemePack>;
-/** Names of the 5.8 motion theme packs (8.9 name of `THEME_NAMES`). */
 declare const MOTION_THEME_NAMES: string[];
 /** The CSS custom properties of a theme (design + motion tokens). */
 declare function themeVars(t: string | ThemePack): Record<string, string>;
 /** A theme as a CSS rule (`selector` default `[data-usa-theme=<name>]`) — for SSR / static CSS. */
 declare function themeCss(t: string | ThemePack, selector?: string): string;
-/**
- * Apply a motion theme to `root` (default `<html>`). Returns an undo.
- * @deprecated 8.9 — removed in 9.0. Use `applyMotionTheme()` (same signature); `npx usa-codemod-9 --write src`.
- */
-declare function applyTheme(t: string | ThemePack, root?: HTMLElement): () => void;
 /** Apply a 5.8 motion theme to `root` (default `<html>`). Returns an undo (8.9). */
 declare function applyMotionTheme(t: string | ThemePack, root?: HTMLElement): () => void;
 /** The effect preset of a theme for a role. */
@@ -421,8 +412,6 @@ interface UsaThemeElement extends UsaElement {
     readonly theme: string;
 }
 /** `<usa-theme name="neon | paper | glass | retro | brutalist">` — a themed subtree. */
-declare function defineTheme(tag?: string): CustomElementConstructor | undefined;
-/** `<usa-motion-theme name="neon">` — the 8.9 name of `<usa-theme>` (removed in 9.0). */
 declare function defineMotionTheme(tag?: string): CustomElementConstructor | undefined;
 
 interface AnimationTrack {
@@ -552,5 +541,5 @@ declare function defineEffectElements(): void;
 /** Register the built-ins and every pack (idempotent). */
 declare function registerAllEffects(): void;
 
-export { ANIMATION_FORMAT, AUDIO_FX, CARD_FX, CLICK_FX, CURSOR_FX, EFFECT_PACKS, GENERATIVE_FX, GESTURES, MICRO_FX, MOTION_THEMES, MOTION_THEME_NAMES, PAGE_FX, PHYSICS_FX, STORY_TEMPLATES, THEMES, THEME_FX, THEME_NAMES, THEME_ROLES, angleDelta, applyMotionTheme, applyTheme, bindBeat, bindGesture, bounceKeyframes, bumpCount, canvasBackground, createBeatDetector, createPlayer, defineAudio, defineEffectElements, defineGestureFx, defineMotionTheme, definePlayer, defineStory, defineTheme, disableAudio, enableAudio, flingVelocity, formatCount, fxLayer, getAudio, hexRgb, noise2, normalizeAnimation, onBeat, playThemeEffect, registerAllEffects, registerAudioEffects, registerCardClickEffects, registerCursorEffects, registerGenerativeEffects, registerMicroEffects, registerPageEffects, registerPhysicsEffects, solveSpring, springKeyframes, storyProgress, swapLabel, themeCss, themePreset, themeVars, togglePressed };
+export { ANIMATION_FORMAT, AUDIO_FX, CARD_FX, CLICK_FX, CURSOR_FX, EFFECT_PACKS, GENERATIVE_FX, GESTURES, MICRO_FX, MOTION_THEMES, MOTION_THEME_NAMES, PAGE_FX, PHYSICS_FX, STORY_TEMPLATES, THEME_FX, THEME_ROLES, angleDelta, applyMotionTheme, bindBeat, bindGesture, bounceKeyframes, bumpCount, canvasBackground, createBeatDetector, createPlayer, defineAudio, defineEffectElements, defineGestureFx, defineMotionTheme, definePlayer, defineStory, disableAudio, enableAudio, flingVelocity, formatCount, fxLayer, getAudio, hexRgb, noise2, normalizeAnimation, onBeat, playThemeEffect, registerAllEffects, registerAudioEffects, registerCardClickEffects, registerCursorEffects, registerGenerativeEffects, registerMicroEffects, registerPageEffects, registerPhysicsEffects, solveSpring, springKeyframes, storyProgress, swapLabel, themeCss, themePreset, themeVars, togglePressed };
 export type { AnimationJSON, AnimationTrack, AudioInput, AudioReactive, AudioSample, BeatOptions, GenFrame, GenerativeSpec, GestureDetail, GestureFxOptions, GestureName, Player, SpringOptions, StoryTemplate, ThemePack, ThemeRole, UsaAudioElement, UsaGestureFxElement, UsaPlayerElement, UsaStoryElement, UsaThemeElement };

@@ -13,7 +13,7 @@ const AU = (id, en, zh, descEn, descZh, tags, usage, demo, controls) => C('usa-a
 /** A 5.7 <usa-gesture-fx> card. */
 const GX = (id, en, zh, descEn, descZh, tags, usage, demo, controls) => C('usa-gesture-fx', 'fx', en, zh, descEn, descZh, tags, usage, demo, { id, define: 'defineGestureFx', entry: 'effects', pack: true, controls });
 /** A 5.8 <usa-motion-theme> card. */
-const TH = (id, en, zh, descEn, descZh, tags, usage, demo, controls) => C('usa-motion-theme', 'fx', en, zh, descEn, descZh, tags, usage, demo, { id, define: 'defineTheme', entry: 'effects', pack: true, controls });
+const TH = (id, en, zh, descEn, descZh, tags, usage, demo, controls) => C('usa-motion-theme', 'fx', en, zh, descEn, descZh, tags, usage, demo, { id, define: 'defineMotionTheme', entry: 'effects', pack: true, controls });
 /** A 5.9 <usa-player> card. */
 const PL = (id, en, zh, descEn, descZh, tags, usage, demo, controls) => C('usa-player', 'fx', en, zh, descEn, descZh, tags, usage, demo, { id, define: 'definePlayer', entry: 'effects', pack: true, controls });
 const SC = (id, en, zh, descEn, descZh, tags, usage, demo, controls) => C('usa-story', 'fx', en, zh, descEn, descZh, tags, usage, demo, { id, define: 'defineStory', entry: 'effects', pack: true, controls });

@@ -116,7 +116,7 @@ describe('focus pack + marketplace', () => {
     for (const d of FOCUS_FX) expect(getEffect(d.name)).toBe(d);
     expect(EFFECT_PACKS.focus).toBe(FOCUS_FX);
     expect(COMPONENT_ENTRIES['fx-focus']).toBe('fx2/focus');
-    expect(COMPONENT_ENTRIES.marketplace).toBe('fx2/manifest');
+    expect(COMPONENT_ENTRIES.marketplace).toBe('marketplace/index'); // 9.0: own entry
   });
   it('focus effects add aria-hidden overlays and remove them', async () => {
     registerFocusPack();

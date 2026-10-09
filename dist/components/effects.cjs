@@ -1124,7 +1124,7 @@ const P = (enter, hover, click, attention, background) => ({
     attention: { effect: attention },
     background: { effect: background },
 });
-const THEMES = {
+const MOTION_THEMES = {
     neon: {
         name: 'neon',
         vars: { bg: '#07070c', fg: '#e8e8ff', accent: '#22d3ee', 'accent-2': '#ff2bd6', surface: '#11111c', border: '1px solid #22d3ee', radius: '10px', shadow: '0 0 18px #22d3ee66, inset 0 0 12px #ff2bd622', font: 'ui-monospace, SFMono-Regular, Menlo, monospace' },
@@ -1156,19 +1156,15 @@ const THEMES = {
         presets: P('drop-bounce', 'jelly', 'brutal-shift', 'shake', 'voronoi'),
     },
 };
-const THEME_NAMES = Object.keys(THEMES);
-/** The 5.8 motion theme packs (8.9 name of `THEMES`). */
-const MOTION_THEMES = THEMES;
-/** Names of the 5.8 motion theme packs (8.9 name of `THEME_NAMES`). */
-const MOTION_THEME_NAMES = THEME_NAMES;
+const MOTION_THEME_NAMES = Object.keys(MOTION_THEMES);
 const BASE_CSS = `[data-usa-theme]{background:var(--usa-theme-bg);color:var(--usa-theme-fg);font-family:var(--usa-theme-font)}
 [data-usa-theme] .usa-surface{background:var(--usa-theme-surface);border:var(--usa-theme-border);border-radius:var(--usa-theme-radius);box-shadow:var(--usa-theme-shadow)}
 [data-usa-theme] .usa-accent{color:var(--usa-theme-accent)}
 [data-usa-theme=glass] .usa-surface{-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}`;
 const pack = (t) => {
-    const p = typeof t === 'string' ? THEMES[t] : t;
+    const p = typeof t === 'string' ? MOTION_THEMES[t] : t;
     if (!p)
-        throw new Error(`[motionary] unknown theme "${String(t)}" — ${THEME_NAMES.join(', ')}`);
+        throw new Error(`[motionary] unknown theme "${String(t)}" — ${MOTION_THEME_NAMES.join(', ')}`);
     return p;
 };
 /** The CSS custom properties of a theme (design + motion tokens). */
@@ -1183,14 +1179,6 @@ function themeVars(t) {
 function themeCss(t, selector) {
     const p = pack(t);
     return `${selector || `[data-usa-theme=${p.name}]`}{${Object.entries(themeVars(p)).map(([k, v]) => `${k}:${v}`).join(';')}}`;
-}
-/**
- * Apply a motion theme to `root` (default `<html>`). Returns an undo.
- * @deprecated 8.9 — removed in 9.0. Use `applyMotionTheme()` (same signature); `npx usa-codemod-9 --write src`.
- */
-function applyTheme(t, root) {
-    base.deprecate('applyTheme', 'applyTheme() is deprecated and removed in 9.0 — use applyMotionTheme() (same signature). Run `npx usa-codemod-9 --write src`.');
-    return applyMotionTheme(t, root);
 }
 /** Apply a 5.8 motion theme to `root` (default `<html>`). Returns an undo (8.9). */
 function applyMotionTheme(t, root) {
@@ -1282,18 +1270,16 @@ const THEME_FX = [
     },
 ];
 /** `<usa-theme name="neon | paper | glass | retro | brutalist">` — a themed subtree. */
-function defineTheme(tag = 'usa-theme') {
+function defineMotionTheme(tag = 'usa-motion-theme') {
     return base.defineElement(tag, (Base) => class UsaTheme extends Base {
         static get observedAttributes() {
             return ['name'];
         }
         get theme() {
             const n = this.str('name', 'neon');
-            return THEMES[n] ? n : 'neon';
+            return MOTION_THEMES[n] ? n : 'neon';
         }
         mount() {
-            if (this.localName === 'usa-theme')
-                base.deprecate('usa-theme', '<usa-theme> is deprecated and removed in 9.0 — use <usa-motion-theme> (same name / data-theme-fx). Run `npx usa-codemod-9 --write src`.');
             this.onCleanup(applyMotionTheme(this.theme, this));
             this.querySelectorAll('[data-theme-fx]').forEach((el) => {
                 const role = (el.dataset.themeFx || 'click');
@@ -1310,10 +1296,6 @@ function defineTheme(tag = 'usa-theme') {
             });
         }
     }, { id: 'usa-theme-el', text: 'usa-theme{display:block}' });
-}
-/** `<usa-motion-theme name="neon">` — the 8.9 name of `<usa-theme>` (removed in 9.0). */
-function defineMotionTheme(tag = 'usa-motion-theme') {
-    return defineTheme(tag);
 }
 
 /**
@@ -1373,7 +1355,6 @@ function defineEffectElements() {
     player.defineStory();
     audio.defineAudio();
     defineGestureFx();
-    defineTheme();
     defineMotionTheme();
     player.definePlayer();
 }
@@ -1415,20 +1396,16 @@ exports.MOTION_THEMES = MOTION_THEMES;
 exports.MOTION_THEME_NAMES = MOTION_THEME_NAMES;
 exports.PAGE_FX = PAGE_FX;
 exports.PHYSICS_FX = PHYSICS_FX;
-exports.THEMES = THEMES;
 exports.THEME_FX = THEME_FX;
-exports.THEME_NAMES = THEME_NAMES;
 exports.THEME_ROLES = THEME_ROLES;
 exports.angleDelta = angleDelta;
 exports.applyMotionTheme = applyMotionTheme;
-exports.applyTheme = applyTheme;
 exports.bindGesture = bindGesture;
 exports.bounceKeyframes = bounceKeyframes;
 exports.bumpCount = bumpCount;
 exports.defineEffectElements = defineEffectElements;
 exports.defineGestureFx = defineGestureFx;
 exports.defineMotionTheme = defineMotionTheme;
-exports.defineTheme = defineTheme;
 exports.flingVelocity = flingVelocity;
 exports.playThemeEffect = playThemeEffect;
 exports.registerAllEffects = registerAllEffects;

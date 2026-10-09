@@ -1,4 +1,4 @@
-export { EFFECT_PACK_FORMAT, loadEffectPack, packManifest, validateManifest } from './marketplace.js';
+export { E as EFFECT_PACK_FORMAT, l as loadEffectPack, p as packManifest, v as validateManifest } from '../chunks/manifest-PJ0h8RS_.js';
 import { G as GPU_FX, r as registerGpuPack } from '../chunks/gpu-CB8frFOD.js';
 export { a as GLSL_HEAD, W as WGSL_HEAD, f as fieldFallback, g as glslToWgsl, s as shaderBackground, b as supportsWebGL2, c as supportsWebGPU, w as webgpuBackground, d as wgslModule } from '../chunks/gpu-CB8frFOD.js';
 import { TEXT3_FX, registerTextPack } from './fx-text.js';
