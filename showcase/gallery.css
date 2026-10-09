@@ -361,3 +361,7 @@ usa-carousel[data-effect="cards"].demo-carousel .demo-slide{margin:0 18%}
 .demo-vcard{width:min(260px,100%)}.demo-vposter{background:linear-gradient(135deg,#0ea5e9,#6366f1 55%,#ec4899)}.demo-vcard h3{margin:0}
 .demo-hero{width:min(340px,100%);min-height:170px;padding:16px}.demo-hero h2{margin:0;font:800 20px/1.1 system-ui,sans-serif}.demo-hero p{margin:4px 0 0;font-size:12px;opacity:.85}
 .demo-burn{padding:16px 20px;border:0;border-radius:10px;background:#292524;color:#fde68a;font:700 14px/1 Georgia,serif;cursor:pointer}
+.demo-mprefs{width:min(340px,100%)}
+.demo-pa{gap:14px;align-items:center}.demo-pa-spin{display:inline-block;width:28px;height:28px;border-radius:8px;background:#6366f1;animation:demo-pa-spin 1.6s linear infinite}.demo-pa-b{background:#f472b6;border-radius:50%;animation-duration:2.4s}
+@keyframes demo-pa-spin{to{transform:rotate(360deg)}}
+.demo-safe{padding:10px 14px;border:1px solid #cbd5e1;border-radius:10px;background:#fff;color:#0f172a;font:600 13px/1 system-ui,sans-serif;cursor:pointer}.demo-safe-link{color:#4f46e5;font:600 14px/1.6 system-ui,sans-serif;text-decoration:none}

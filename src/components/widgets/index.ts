@@ -100,6 +100,8 @@ import { defineGenArt, type UsaGenArtElement } from './gen-art';
 import { defineBgGenerator, backgroundCss, type UsaBgGeneratorElement } from './bg-generator';
 import { defineVideoCard, type UsaVideoCardElement } from './video-card';
 import { defineHeroVideo, type UsaHeroVideoElement } from './hero-video';
+import { defineMotionPrefs, type UsaMotionPrefsElement } from './motion-prefs';
+import { definePauseAll, type UsaPauseAllElement } from './pause-all';
 
 export { defineCarousel, defineTabBar, defineDisclosure, defineStories, CAROUSEL_EFFECTS, TAB_INDICATORS };
 export type { UsaCarouselElement, UsaTabBarElement, UsaDisclosureElement, UsaStoriesElement };
@@ -196,6 +198,9 @@ export type { UsaGenArtElement, UsaBgGeneratorElement };
 export { defineVideoCard, defineHeroVideo };
 export type { UsaVideoCardElement, UsaHeroVideoElement };
 
+export { defineMotionPrefs, definePauseAll };
+export type { UsaMotionPrefsElement, UsaPauseAllElement };
+
 /** The widgets by release (tag → define function). */
 export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElementConstructor | undefined>> = {
   '6.2': { 'usa-carousel': defineCarousel, 'usa-tab-bar': defineTabBar, 'usa-disclosure': defineDisclosure, 'usa-stories': defineStories },
@@ -230,6 +235,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '9.2': { 'usa-lottie': defineLottie, 'usa-lottie-icon': defineLottieIcon },
   '9.3': { 'usa-gen-art': defineGenArt, 'usa-bg-generator': defineBgGenerator },
   '9.4': { 'usa-video-card': defineVideoCard, 'usa-hero-video': defineHeroVideo },
+  '9.5': { 'usa-motion-prefs': defineMotionPrefs, 'usa-pause-all': definePauseAll },
 };
 
 /** Every widget tag, in release order. */
@@ -334,5 +340,7 @@ declare global {
     'usa-bg-generator': UsaBgGeneratorElement;
     'usa-video-card': UsaVideoCardElement;
     'usa-hero-video': UsaHeroVideoElement;
+    'usa-motion-prefs': UsaMotionPrefsElement;
+    'usa-pause-all': UsaPauseAllElement;
   }
 }

@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [9.5.0] - 2026-10-09
+
+### Added
+- **Accessible motion 2.0 — `motionary/fx/safe`** (= `motionary/components/fx-safe`, `registerSafePack()`, also in `registerEffectPacks()` and the marketplace): `vestibularSafe(keyframes)` (strip movement, keep opacity / colour), `flashCount()` / `isFlashSafe(keyframes, duration, iterations)` (WCAG 2.3.1 three-flashes check), `applyMotionPreferences(prefs)` / `loadMotionPreferences()` (sensitivity level, shared clock speed, `data-usa-pause-autoplay` / `data-usa-no-parallax` on `<html>`, persisted). Effects that never move: `safe-fade` (enter), `focus-glow` (attention), `color-pulse` (attention), `underline-sweep` (hover) — they run under reduced motion too.
+- **2 new components (9.5)** in `motionary/components/widgets`:
+  - `<usa-motion-prefs>` — motion preference panel: level (Full · Gentle · Minimal · None), speed 0.25–2×, pause autoplaying video, no parallax, live sample, Reset; applies instantly and persists; `prefs`, `reset()`; `usa:change` { prefs }.
+  - `<usa-pause-all>` — one button that pauses / resumes all motion (shared clock, CSS / Web animations, autoplaying media; WCAG 2.2.2), `aria-pressed`, synced with `motionClock`; `scope` limits it to a subtree; `paused`, `toggle()`; `usa:pause-all` { paused }.
+- Showcase: 3 new gallery cards with copyable code, live demos and live Store thumbnails.
+
+### Accessibility
+- The preference panel is a labelled `form` with a `fieldset` / `legend` of radio buttons, a labelled range with an `<output>`, and checkboxes; its sample is `aria-hidden`. The pause button is a real `button` with `aria-pressed` and a text label.
+
+### Fixed
+
+- Build: Rollup ran out of heap at the 4 GB cap (`npm run build` aborted with "JavaScript heap out of memory") once the 9.5 entries were added; the build script's `--max-old-space-size` is raised to 6144.
+
 ## [9.4.0] - 2026-10-09
 
 ### Added

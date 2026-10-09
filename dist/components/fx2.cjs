@@ -30,6 +30,7 @@ var components_fxCinema = require('./fx-cinema.cjs');
 var components_fxLottie = require('./fx-lottie.cjs');
 var components_fxGenart = require('./fx-genart.cjs');
 var components_fxVideo = require('./fx-video.cjs');
+var components_fxSafe = require('./fx-safe.cjs');
 require('../chunks/registry-BVklOepd.cjs');
 require('../chunks/base-DoRUZBy-.cjs');
 require('../chunks/generative-BHIj-NU0.cjs');
@@ -67,6 +68,7 @@ const EFFECT_PACKS = {
     lottie: components_fxLottie.LOTTIE_FX,
     genart: components_fxGenart.GENART_FX,
     video: components_fxVideo.VIDEO_FX,
+    safe: components_fxSafe.SAFE_FX,
 };
 /** Register every 6.x effect pack (idempotent). */
 function registerEffectPacks() {
@@ -99,6 +101,7 @@ function registerEffectPacks() {
     components_fxLottie.registerLottiePack();
     components_fxGenart.registerGenArtPack();
     components_fxVideo.registerVideoPack();
+    components_fxSafe.registerSafePack();
 }
 
 exports.EFFECT_PACK_FORMAT = manifest.EFFECT_PACK_FORMAT;
@@ -213,6 +216,15 @@ exports.frameSequence = components_fxVideo.frameSequence;
 exports.registerVideoPack = components_fxVideo.registerVideoPack;
 exports.scrollProgress = components_fxVideo.scrollProgress;
 exports.scrubVideo = components_fxVideo.scrubVideo;
+exports.DEFAULT_MOTION_PREFS = components_fxSafe.DEFAULT_MOTION_PREFS;
+exports.MOTION_PREFS_KEY = components_fxSafe.MOTION_PREFS_KEY;
+exports.SAFE_FX = components_fxSafe.SAFE_FX;
+exports.applyMotionPreferences = components_fxSafe.applyMotionPreferences;
+exports.flashCount = components_fxSafe.flashCount;
+exports.isFlashSafe = components_fxSafe.isFlashSafe;
+exports.loadMotionPreferences = components_fxSafe.loadMotionPreferences;
+exports.registerSafePack = components_fxSafe.registerSafePack;
+exports.vestibularSafe = components_fxSafe.vestibularSafe;
 exports.EFFECT_PACKS = EFFECT_PACKS;
 exports.registerEffectPacks = registerEffectPacks;
 //# sourceMappingURL=fx2.cjs.map

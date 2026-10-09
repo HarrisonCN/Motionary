@@ -347,7 +347,7 @@
   {
     "name": "dist/widgets.umd.js (minified, 6.x widgets + 6.x effect packs)",
     "file": "dist/widgets.umd.js",
-    "limit": 165120
+    "limit": 179712
   },
   {
     "name": "import 'motionary/components/widgets'",
@@ -362,7 +362,7 @@
   {
     "name": "import 'motionary/components/fx2' (every 6.x effect pack)",
     "import": "export * from 'pkg/components/fx2';",
-    "limit": 51200
+    "limit": 55552
   },
   {
     "name": "import 'motionary/components/fx-text'",
