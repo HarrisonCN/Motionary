@@ -1501,6 +1501,64 @@ defineGlScene(); // registers <usa-gl-scene> — after the prerequisites
 <usa-gl-scene src="/models/chair.glb" controls auto-rotate="20" label="Chair"></usa-gl-scene>
 ```
 
+### `<usa-lottie-player>` — Requires: motionary/runtime/vector
+
+- **Install:** `npm i motionary`
+- **Import order & registration:** Register the core first, then the module: use(vector) also registers the core. CDN: load runtime.iife.js, then runtime/vector.iife.js (it registers itself).
+
+```js
+import { use } from 'motionary/runtime';
+import { vector } from 'motionary/runtime/vector';
+import { defineLottiePlayer } from 'motionary/components/widgets';
+
+use(vector);
+defineLottiePlayer(); // registers <usa-lottie-player> — after the prerequisites
+```
+
+- **CDN:**
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/vector.iife.js"></script>
+<!-- then the component bundles -->
+<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>
+```
+
+- **Minimal example:**
+
+```html
+<usa-lottie-player src="/anim/hero.lottie" autoplay loop label="Hero animation"></usa-lottie-player>
+```
+
+### `<usa-rive>` — Requires: @rive-app/canvas
+
+- **Install:** `npm i @rive-app/canvas`
+- **Import order & registration:** Install the official runtime next to motionary, then hand <usa-rive> a lazy loader with provideRiveRuntime(() => import('@rive-app/canvas')) before the element mounts — your bundler splits the runtime into its own chunk, fetched only when the first <usa-rive> appears. Without a bundler: load the official rive.js from a CDN before the component bundles (window.rive), use an import map, or set runtime-src on the element. Missing → a clear message in place + usa:runtime-missing.
+
+```js
+import { provideRiveRuntime } from 'motionary/components/widgets';
+import { defineRive } from 'motionary/components/widgets';
+
+provideRiveRuntime(() => import('@rive-app/canvas')); // lazy: fetched when the first <usa-rive> mounts
+defineRive(); // registers <usa-rive> — after the prerequisites
+```
+
+- **CDN:**
+
+```html
+<script src="https://unpkg.com/@rive-app/canvas@2.44.1/rive.js"></script>
+<!-- then the component bundles -->
+<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>
+```
+
+- **Minimal example:**
+
+```html
+<usa-rive src="/anim/icon.riv" state-machine="State Machine 1" autoplay label="Icon"></usa-rive>
+```
+
 <!-- prereqs:end -->
 
 ### v10.2 Scroll scenes (`motionary/runtime/scroll`) + SVG loader + `data-motion` in core: `<usa-scroll-scene>`, `<usa-motion-inspector>` (`components/widgets`)
@@ -1567,6 +1625,20 @@ MCP: `npx -y -p motionary motionary-mcp` — see [docs/mcp.md](docs/mcp.md).
 | `<usa-gl-scene>` / `<usa-three-scene>` (Requires: motionary/runtime/gl; + format-gltf / format-obj for models) | `src` (.gltf, .glb, .obj), `shape` (torus, box, sphere, plane), `color`, `metallic`, `roughness`, `background`, `exposure`, `controls`, `auto-rotate`, `video`, `video-scrub`, `label` | `scene`, `camera`, `root`, `reload()`; `usa:load`, `usa:error`, `usa:runtime-missing` |
 | `<usa-gpu-particles>` | `count`, `mode` (swirl, galaxy, fountain), `colors`, `size`, `speed`, `trail`, `pointer`, `label` | `backend`; `usa:backend` |
 | `<usa-shader-backdrop>` | `preset` (aurora, plasma, waves, nebula), `post` (bloom, vignette, grain, chromatic, pixelate, scanlines), `colors`, `speed`, `intensity`, `label`; child `<script type="x-shader/x-fragment">` | `passes`; `usa:backend` |
+
+### v10.6 Lottie / dotLottie (`motionary/runtime/vector`), Rive (official runtime, optional peer) and W3C motion tokens: `<usa-lottie-player>`, `<usa-rive>`, `<usa-token-editor>` (`components/widgets`)
+
+```html
+<usa-lottie-player src="/anim/hero.lottie" autoplay loop label="Hero animation"></usa-lottie-player>
+<usa-rive src="/anim/icon.riv" state-machine="State Machine 1" autoplay label="Icon"></usa-rive>
+<usa-token-editor apply format="2025.10"></usa-token-editor>
+```
+
+| Element | Attributes | Methods / events |
+|---|---|---|
+| `<usa-lottie-player>` (Requires: motionary/runtime/vector) | `src` (.json, .lottie), `animation`, `autoplay`, `loop`, `speed`, `mode` (normal, bounce), `segment`, `hover`, `scrub`, `fit` (contain, cover, fill), `background`, `label` | `play()`, `pause()`, `stop()`, `seek(frame)`, `player`, `animationData`, `unsupported`; `usa:load`, `usa:complete`, `usa:error`, `usa:runtime-missing` |
+| `<usa-rive>` (Requires: @rive-app/canvas — official runtime, optional peer) | `src`, `artboard`, `animation`, `state-machine`, `autoplay`, `fit` (contain, cover, fill, fitWidth, fitHeight, none), `runtime-src`, `label` | `rive`, `play()`, `pause()`, `input(name)`; `usa:load`, `usa:error`, `usa:runtime-missing`; `provideRiveRuntime(loader)` |
+| `<usa-token-editor>` | `apply`, `format` (2025.10, draft), `groups` (duration, easing), `label` | `tokens`, `exportJSON()`, `importJSON(json)`; `usa:change`, `usa:export`, `usa:import` |
 
 ## Frameworks
 

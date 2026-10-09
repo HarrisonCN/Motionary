@@ -389,3 +389,6 @@ usa-carousel[data-effect="cards"].demo-carousel .demo-slide{margin:0 18%}
 .demo-gl{width:min(300px,100%);height:180px;aspect-ratio:auto;border-radius:14px;background:radial-gradient(circle at 50% 35%,#312e81,#0f172a)}
 .demo-gpu{width:min(300px,100%);height:180px;aspect-ratio:auto}
 .demo-sb{width:min(300px,100%);height:170px;border-radius:14px;display:grid;place-content:center;text-align:center;color:#fff}.demo-sb h4{margin:0;font:800 20px/1.1 system-ui,sans-serif;text-shadow:0 2px 12px rgba(0,0,0,.45)}.demo-sb p{margin:4px 0 0;font:12px/1.3 ui-monospace,monospace;opacity:.85}
+.demo-lottie{width:min(200px,100%)}
+.demo-rive{width:min(200px,100%);height:160px}
+.demo-te{width:min(320px,100%);--usa-te-max:170px}

@@ -219,3 +219,6 @@ export function resolveEasingToken(v: string | undefined, fallback: string): str
   if (!v) return fallback;
   return active.easing[v] ?? v;
 }
+
+// 10.6: motion design tokens 2.0 — W3C Design Tokens (DTCG 2025.10) import / export
+export { resolveTokenAliases, validateDesignTokens, importDesignTokens, exportDesignTokens } from './dtcg';

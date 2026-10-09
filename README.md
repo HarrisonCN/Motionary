@@ -187,6 +187,8 @@ Motionary ships its own zero-dependency animation runtime — shared ticker, twe
 | [WebGL2 scene renderer](docs/runtime/gl.md) | `motionary/runtime/gl` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gl.iife.js` | `use(gl);` | 9.0 KB |
 | [glTF 2.0 / GLB loader](docs/runtime/format-gltf.md) | `motionary/runtime/format-gltf` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-gltf.iife.js` | `use(formatGltf);` | 6.0 KB |
 | [OBJ / MTL loader](docs/runtime/format-obj.md) | `motionary/runtime/format-obj` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-obj.iife.js` | `use(formatObj);` | 3.0 KB |
+| [Lottie + dotLottie player](docs/runtime/vector.md) | `motionary/runtime/vector` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/vector.iife.js` | `use(vector);` | 12.0 KB |
+| [Official Rive runtime](docs/runtime/rive.md) | `@rive-app/canvas` | `https://unpkg.com/@rive-app/canvas@2.44.1/rive.js` | `provideRiveRuntime(() => import('@rive-app/canvas')); // lazy: fetched when the first <usa-rive> mounts` | official runtime (not bundled) |
 
 Install once: `npm i motionary`. Plain HTML: load `runtime.iife.js` first, then the module files (each registers itself).
 
@@ -345,6 +347,64 @@ defineGlScene(); // registers <usa-gl-scene> — after the prerequisites
 
 ```html
 <usa-gl-scene src="/models/chair.glb" controls auto-rotate="20" label="Chair"></usa-gl-scene>
+```
+
+#### `<usa-lottie-player>` — Requires: motionary/runtime/vector
+
+- **Install:** `npm i motionary`
+- **Import order & registration:** Register the core first, then the module: use(vector) also registers the core. CDN: load runtime.iife.js, then runtime/vector.iife.js (it registers itself).
+
+```js
+import { use } from 'motionary/runtime';
+import { vector } from 'motionary/runtime/vector';
+import { defineLottiePlayer } from 'motionary/components/widgets';
+
+use(vector);
+defineLottiePlayer(); // registers <usa-lottie-player> — after the prerequisites
+```
+
+- **CDN:**
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/vector.iife.js"></script>
+<!-- then the component bundles -->
+<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>
+```
+
+- **Minimal example:**
+
+```html
+<usa-lottie-player src="/anim/hero.lottie" autoplay loop label="Hero animation"></usa-lottie-player>
+```
+
+#### `<usa-rive>` — Requires: @rive-app/canvas
+
+- **Install:** `npm i @rive-app/canvas`
+- **Import order & registration:** Install the official runtime next to motionary, then hand <usa-rive> a lazy loader with provideRiveRuntime(() => import('@rive-app/canvas')) before the element mounts — your bundler splits the runtime into its own chunk, fetched only when the first <usa-rive> appears. Without a bundler: load the official rive.js from a CDN before the component bundles (window.rive), use an import map, or set runtime-src on the element. Missing → a clear message in place + usa:runtime-missing.
+
+```js
+import { provideRiveRuntime } from 'motionary/components/widgets';
+import { defineRive } from 'motionary/components/widgets';
+
+provideRiveRuntime(() => import('@rive-app/canvas')); // lazy: fetched when the first <usa-rive> mounts
+defineRive(); // registers <usa-rive> — after the prerequisites
+```
+
+- **CDN:**
+
+```html
+<script src="https://unpkg.com/@rive-app/canvas@2.44.1/rive.js"></script>
+<!-- then the component bundles -->
+<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>
+```
+
+- **Minimal example:**
+
+```html
+<usa-rive src="/anim/icon.riv" state-machine="State Machine 1" autoplay label="Icon"></usa-rive>
 ```
 
 <!-- runtime:end -->

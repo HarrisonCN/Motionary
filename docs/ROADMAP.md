@@ -65,7 +65,7 @@ Store 卡片显示 **「Requires: motionary/runtime/<module>」** 徽章（官�
   - 主线 B：**gl 模块** —— 迷你 WebGL2 场景（网格 / 基础几何体、相机、灯光、着色器材质；不是 Three.js 克隆）。
   - 格式：OBJ / MTL、glTF 2.0 / GLB 基础、视频纹理。
   - 新组件：粒子画布、着色器背景、`<usa-gl-scene>`（保留别名 `<usa-three-scene>`）。
-- **v10.6** — 动效设计令牌 2.0：W3C Design Tokens 格式导入导出。
+- ✅ **v10.6** — 动效设计令牌 2.0：W3C Design Tokens 格式导入导出。
   - 主线 B：**vector 模块** —— 矢量动画播放器，支持文档列出的 Lottie JSON 子集（形状、变换、修剪路径、基础遮罩、预合成、渐变；文档列出不支持的特性）+ dotLottie。
   - 官方运行时：`<usa-rive>`（Requires: @rive-app/canvas，可选 peer，懒加载）。
   - 新组件：令牌编辑器、`<usa-lottie-player>`、`<usa-rive>`。
