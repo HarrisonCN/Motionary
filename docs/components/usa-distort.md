@@ -6,7 +6,7 @@ The image bulges and splits into RGB around the pointer. Without WebGL (or a cro
 
 - **Category:** webgl
 - **Import:** `import { defineDistort } from 'motionary/components/webgl'` then `defineDistort();`
-- **CDN:** `<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
 - **Attributes:** —
 - **Events:** —
 - **Slots:** —

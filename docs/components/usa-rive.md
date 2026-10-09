@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 10.6
 - **Import:** `import { defineRive } from 'motionary/components/widgets'` then `defineRive();`
-- **CDN:** `<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
 - **Attributes:** `src`, `artboard`, `animation`, `state-machine`, `autoplay`, `fit`, `label`, `runtime-src`
 - **Events:** `usa:load`, `usa:error`, `usa:runtime-missing`
 - **Slots:** —
@@ -31,8 +31,8 @@ defineRive(); // registers <usa-rive> — after the prerequisites
 ```html
 <script src="https://unpkg.com/@rive-app/canvas@2.44.1/rive.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>
 ```
 
 ## Minimal example

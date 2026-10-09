@@ -60,7 +60,7 @@ for (const file of walk(join(ROOT, 'src/components'))) {
   const tags = [...s.matchAll(/export function define\w+\(tag = '([\w-]+)'/g)].map((m) => m[1]);
   const mods = [...new Set([...s.matchAll(/(?:runtimeModule<[^>]*>|runtimeModule|requireModule<[^>]*>|requireModule|requirePeer<[^>]*>|requirePeer)\(\s*this\s*,\s*'([\w@/.-]+)'/g)].map((m) => m[1]))];
   for (const tag of tags) for (const id of mods) {
-    // an alias tag defined in the same file as a carded element (e.g. <usa-three-scene> → <usa-gl-scene>) shares that card
+    // an alias tag defined in the same file as a carded element (e.g. a renamed tag kept for compatibility) shares that card
     const card = COMPONENTS.find((c) => c.tag === tag) || COMPONENTS.find((c) => tags.includes(c.tag) && c.tag !== tag);
     if (!card) fail(`<${tag}>`, `uses ${id} but has no gallery card`);
     else if (!card.requires?.includes(id)) fail(`<${tag}>`, `uses ${id} but its card does not declare requires: ['${id}']`);

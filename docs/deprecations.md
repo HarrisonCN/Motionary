@@ -2,6 +2,8 @@
 
 ## Deprecated in 10.9, removed in 11.0
 
+**Removed in 11.0.0.** `<usa-three-scene>` / `defineThreeScene()` / `motionary/widgets/three-scene` no longer exist, and a string program that cannot run in a worker is refused (no `new Function` on the main thread).
+
 See [upgrading-11.md](./upgrading-11.md) — `<usa-three-scene>` / `defineThreeScene()` (use `<usa-gl-scene>` / `defineGlScene()`, same API), string programs for `offscreenRender()` / `<usa-worker-canvas>` that fall back to the main thread (pass a function). Run `npx usa-codemod-11 --write src`.
 
 ## Deprecated in 9.9, removed in 10.0 (released)

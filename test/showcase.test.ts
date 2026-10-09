@@ -140,7 +140,7 @@ describe('showcase site', () => {
     expect(app).toContain("new URL('../dist/', import.meta.url)");
     expect(app).toContain("'element.js'");
     expect(app).toContain("'svelte.js'");
-    expect(app).toContain('https://unpkg.com/motionary@6/dist/');
+    expect(app).toContain('https://unpkg.com/motionary@11/dist/');
   });
 
   it('supports deep links, view transitions with a FLIP fallback and reduced motion', () => {

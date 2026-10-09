@@ -6,7 +6,7 @@
 
 - **Category:** text · **since** 10.3
 - **Import:** `import { defineTextSplitter } from 'motionary/components/widgets'` then `defineTextSplitter();`
-- **CDN:** `<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
 - **Attributes:** `split`, `effect`, `stagger`, `duration`, `loop`, `trigger`
 - **Events:** `usa:split`, `usa:done`, `usa:runtime-missing`
 - **Slots:** —
@@ -30,11 +30,11 @@ defineTextSplitter(); // registers <usa-text-splitter> — after the prerequisit
 3. **CDN:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/text.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/text.iife.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>
 ```
 
 ## Minimal example

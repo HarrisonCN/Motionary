@@ -1,4 +1,4 @@
-import { defineElement, deprecate, type UsaElement } from '../base';
+import { defineElement, type UsaElement } from '../base';
 import { runtimeModule } from './runtime-link';
 import type { GlApi, Scene, Camera, Renderer, GlNode } from '../../runtime/gl';
 import type { FormatGltfApi } from '../../runtime/format-gltf';
@@ -21,7 +21,7 @@ import css from './gl-scene.css?raw';
  * `motionary/runtime/gltf-anim`), `animation-speed`; reduced motion shows
  * the first pose. Renders only while visible. `scene`, `camera`, `root`,
  * `animator`, `reload()`; `usa:load` { meshes, animations }, `usa:error`.
- * `<usa-three-scene>` is an alias with the same API.
+ * (The 10.5 alias `<usa-three-scene>` was removed in 11.0.)
  */
 export interface UsaGlSceneElement extends UsaElement {
   readonly scene: Scene | null;
@@ -63,7 +63,6 @@ export function defineGlScene(tag = 'usa-gl-scene'): CustomElementConstructor | 
         mount(): void {
           const G = runtimeModule<GlApi>(this, 'gl');
           if (!G) return;
-          if (this.localName === 'usa-three-scene') deprecate('three-scene', '<usa-three-scene> / defineThreeScene() are deprecated (10.9) and removed in 11.0 — use <usa-gl-scene> / defineGlScene() (same API). Run npx usa-codemod-11 --write src.');
           const canvas = document.createElement('canvas');
           canvas.setAttribute('role', 'img');
           canvas.setAttribute('aria-label', this.str('label', '3D scene'));
@@ -188,9 +187,4 @@ export function defineGlScene(tag = 'usa-gl-scene'): CustomElementConstructor | 
     },
     { id: 'gl-scene', text: css }
   );
-}
-
-/** `<usa-three-scene>` — alias of `<usa-gl-scene>`. @deprecated 10.9, removed in 11.0: use `<usa-gl-scene>` / `defineGlScene()`. */
-export function defineThreeScene(tag = 'usa-three-scene'): CustomElementConstructor | undefined {
-  return defineGlScene(tag);
 }

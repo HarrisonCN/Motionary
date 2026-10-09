@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 10.6
 - **Import:** `import { defineLottiePlayer } from 'motionary/components/widgets'` then `defineLottiePlayer();`
-- **CDN:** `<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
 - **Attributes:** `src`, `animation`, `autoplay`, `loop`, `speed`, `mode`, `segment`, `hover`, `scrub`, `fit`, `background`, `label`
 - **Events:** `usa:complete`, `usa:load`, `usa:error`, `usa:runtime-missing`
 - **Slots:** —
@@ -30,11 +30,11 @@ defineLottiePlayer(); // registers <usa-lottie-player> — after the prerequisit
 3. **CDN:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/vector.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/vector.iife.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>
 ```
 
 ## Minimal example

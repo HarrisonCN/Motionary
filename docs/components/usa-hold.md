@@ -6,7 +6,7 @@ Press and hold (pointer, Space or Enter) while a ring fills; releasing early rew
 
 - **Category:** click
 - **Import:** `import { defineHold } from 'motionary/components/click'` then `defineHold();`
-- **CDN:** `<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
 - **Attributes:** `duration`, `disabled`
 - **Events:** `usa:progress`, `usa:confirm`, `usa:cancel`
 - **Slots:** —

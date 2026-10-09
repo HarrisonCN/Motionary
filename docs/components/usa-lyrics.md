@@ -6,7 +6,7 @@
 
 - **Category:** text · **since** 7.1
 - **Import:** `import { defineLyrics } from 'motionary/components/widgets'` then `defineLyrics();`
-- **CDN:** `<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
 - **Attributes:** —
 - **Events:** `usa:seek`
 - **Slots:** —

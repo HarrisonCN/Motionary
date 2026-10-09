@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 6.6
 - **Import:** `import { defineTip } from 'motionary/components/widgets'` then `defineTip();`
-- **CDN:** `<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
 - **Attributes:** `text`, `placement`, `trigger`
 - **Events:** `usa:open`, `usa:close`
 - **Slots:** —

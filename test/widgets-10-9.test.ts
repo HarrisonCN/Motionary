@@ -207,18 +207,19 @@ describe('10.9 components (own entry points)', () => {
 });
 
 describe('10.9 deprecations for 11.0 + usa-codemod-11', () => {
-  it('<usa-three-scene> and string main-thread programs warn once', () => {
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-    vi.spyOn(console, 'error').mockImplementation(() => {});
+  it('11.0 removed what 10.9 deprecated: no <usa-three-scene>, string programs refused on the main thread', () => {
+    const err = vi.spyOn(console, 'error').mockImplementation(() => {});
+    vi.spyOn(console, 'warn').mockImplementation(() => {});
     rt.use(GL.gl);
-    document.body.innerHTML = '<usa-three-scene></usa-three-scene><usa-three-scene></usa-three-scene>';
-    expect(warn.mock.calls.filter((c) => /usa-three-scene.*deprecated/.test(String(c[0]))).length).toBe(1);
+    expect(customElements.get('usa-three-scene')).toBeUndefined();
     const c = document.createElement('canvas');
     const ctx2: any = { clearRect() {}, fillRect() {} };
     vi.spyOn(HTMLCanvasElement.prototype, 'getContext').mockReturnValue(ctx2);
     const r = offscreenRender(c, '(ctx) => ctx.clearRect(0, 0, 1, 1)', { worker: false, paused: true });
-    expect(r.backend).toBe('main');
-    expect(warn.mock.calls.some((x) => /string program.*Deprecated in 10\.9/.test(String(x[0])))).toBe(true);
+    expect(r.backend).toBe('none');
+    expect(err.mock.calls.some((x) => /string program.*11\.0/.test(String(x[0])))).toBe(true);
+    const f = offscreenRender(c, (ctx) => ctx.clearRect(0, 0, 1, 1), { worker: false, paused: true });
+    expect(f.backend).toBe('main');
   });
   it('codemod-11 rewrites the alias and flags string programs', async () => {
     const mod: any = await import('../bin/usa-codemod-11.mjs');
@@ -238,8 +239,8 @@ describe('10.9 manifest schema v2 + scene schema', () => {
   it('the generated manifest is schema v2 and validates against its JSON Schema', async () => {
     const m = JSON.parse(execFileSync(process.execPath, ['scripts/gen-manifest.mjs', '--stdout'], { maxBuffer: 64 << 20 }).toString());
     expect(m.schemaVersion).toBe(2);
-    expect(m.stability).toBe('release-candidate');
-    expect(m.components.find((c: any) => c.tag === 'usa-three-scene').deprecated).toEqual({ since: '10.9', removedIn: '11.0', use: 'usa-gl-scene' });
+    expect(m.stability).toBe('stable'); // 11.0: schema v2 frozen
+    expect(m.components.find((c: any) => c.tag === 'usa-three-scene')).toBeUndefined(); // removed in 11.0
     expect(m.components.find((c: any) => c.tag === 'usa-gl-scene').stability).toBe('stable');
     expect(m.runtimeModules.find((p: any) => p.id === 'draco3d')).toMatchObject({ kind: 'peer', optional: true });
     expect(m.runtimeModules.find((p: any) => p.id === 'lottie-state')).toMatchObject({ kind: 'runtime', optional: false });

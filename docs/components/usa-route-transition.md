@@ -6,7 +6,7 @@
 
 - **Category:** transitions · **since** 10.3
 - **Import:** `import { defineRouteTransition } from 'motionary/components/widgets'` then `defineRouteTransition();`
-- **CDN:** `<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
 - **Attributes:** `effect`, `engine`, `cross-document`
 - **Events:** `usa:navigate`, `usa:navigated`
 - **Slots:** —

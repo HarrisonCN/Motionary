@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 7.6
 - **Import:** `import { defineGlobe } from 'motionary/components/widgets'` then `defineGlobe();`
-- **CDN:** `<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
 - **Attributes:** `markers`, `speed`, `tilt`
 - **Events:** `usa:focus`
 - **Slots:** —

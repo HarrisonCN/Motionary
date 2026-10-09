@@ -324,13 +324,13 @@ describe('10.1 widgets', () => {
   it('<usa-install-button>: manager tabs, commands, copy + usa:copy', async () => {
     const write = vi.fn(async () => {});
     vi.stubGlobal('navigator', { ...navigator, clipboard: { writeText: write } });
-    document.body.innerHTML = '<usa-install-button package="motionary" managers="npm pnpm yarn bun cdn" cdn="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></usa-install-button>';
+    document.body.innerHTML = '<usa-install-button package="motionary" managers="npm pnpm yarn bun cdn" cdn="https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js"></usa-install-button>';
     const el = document.querySelector('usa-install-button') as any;
     expect(el.querySelectorAll('[role=tab]')).toHaveLength(5);
     expect(el.command('npm')).toBe('npm i motionary');
     expect(el.command('pnpm')).toBe('pnpm add motionary');
     expect(el.command('bun')).toBe('bun add motionary');
-    expect(el.command('cdn')).toBe('<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></script>');
+    expect(el.command('cdn')).toBe('<script src="https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js"></script>');
     (el.querySelector('[data-m=yarn]') as HTMLElement).click();
     expect(el.querySelector('code').textContent).toBe('yarn add motionary');
     const got: any[] = [];

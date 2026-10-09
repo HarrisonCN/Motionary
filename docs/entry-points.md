@@ -12,7 +12,7 @@ registerPearlescent(); defineFx(); // <usa-fx effect="pearlescent">
 
 Notes: an effect entry imports its pack file (the effects of a pack share helpers), so its size is the pack’s, not the whole 6.x set. Runtime-powered widgets still need their prerequisites (`use(…)`, see the Requires badge). The group entries (`motionary/components/widgets`, `/fx2`, `/lite`) are unchanged.
 
-## Widgets (119)
+## Widgets (118)
 
 | Tag | Import | Define |
 |---|---|---|
@@ -124,7 +124,6 @@ Notes: an effect entry imports its pack file (the effects of a pack share helper
 | `<usa-parallax-layers>` | `motionary/widgets/parallax-layers` | `defineParallaxLayers()` |
 | `<usa-smooth-scroll>` | `motionary/widgets/smooth-scroll` | `defineSmoothScroll()` |
 | `<usa-gl-scene>` | `motionary/widgets/gl-scene` | `defineGlScene()` |
-| `<usa-three-scene>` | `motionary/widgets/three-scene` | `defineThreeScene()` |
 | `<usa-gpu-particles>` | `motionary/widgets/gpu-particles` | `defineGpuParticles()` |
 | `<usa-shader-backdrop>` | `motionary/widgets/shader-backdrop` | `defineShaderBackdrop()` |
 | `<usa-lottie-player>` | `motionary/widgets/lottie-player` | `defineLottiePlayer()` |

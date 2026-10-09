@@ -6,7 +6,7 @@ Form-associated checkbox: the box springs and the check draws itself; indetermin
 
 - **Category:** click
 - **Import:** `import { defineCheckbox } from 'motionary/components/click'` then `defineCheckbox();`
-- **CDN:** `<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
 - **Attributes:** `checked`, `indeterminate`, `disabled`, `label`
 - **Events:** `usa:change`
 - **Slots:** —

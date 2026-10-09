@@ -13,11 +13,11 @@ Part of Motionary's own zero-dependency runtime. Size budget: **12.0 KB gzip** (
 3. **CDN:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/vector.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/vector.iife.js"></script>
 ```
 
-   ESM from a CDN: `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/vector.js`
+   ESM from a CDN: `https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/vector.js`
 
 4. **Import order & registration:** Register the core first, then the module: use(vector) also registers the core. CDN: load runtime.iife.js, then runtime/vector.iife.js (it registers itself).
 

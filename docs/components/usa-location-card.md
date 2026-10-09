@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 7.6
 - **Import:** `import { defineLocationCard } from 'motionary/components/widgets'` then `defineLocationCard();`
-- **CDN:** `<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
 - **Attributes:** `name`, `address`, `lat`, `lon`, `from-lat`, `from-lon`, `distance`, `href`, `unit`
 - **Events:** `usa:arrive`
 - **Slots:** —

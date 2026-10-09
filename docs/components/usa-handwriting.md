@@ -6,7 +6,7 @@ The text draws itself stroke by stroke, then fills in — signatures, hero words
 
 - **Category:** text
 - **Import:** `import { defineHandwriting } from 'motionary/components/text'` then `defineHandwriting();`
-- **CDN:** `<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
 - **Attributes:** `text`, `size`, `font`
 - **Events:** `usa:complete`
 - **Slots:** —

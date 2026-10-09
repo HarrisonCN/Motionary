@@ -12,7 +12,7 @@ import { EXTENSIONS } from './catalog/index.js';
 
 import { prereqFor } from './catalog/prereqs.js';
 
-export const VERSION_RANGE = '6';
+export const VERSION_RANGE = '11';
 
 /** Component categories, in display order (ids match the subpath exports). */
 export const COMPONENT_CATEGORIES = [

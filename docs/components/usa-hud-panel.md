@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 8.4
 - **Import:** `import { defineHudPanel } from 'motionary/components/widgets'` then `defineHudPanel();`
-- **CDN:** `<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
 - **Attributes:** `title`, `status`, `color`
 - **Events:** `usa:boot`
 - **Slots:** —

@@ -6,7 +6,7 @@ Set loading and every heading, paragraph, image and button inside becomes a shim
 
 - **Category:** page
 - **Import:** `import { defineAutoSkeleton } from 'motionary/components/page'` then `defineAutoSkeleton();`
-- **CDN:** `<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
 - **Attributes:** `loading`
 - **Events:** —
 - **Slots:** —

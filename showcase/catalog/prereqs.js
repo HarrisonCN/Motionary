@@ -6,7 +6,7 @@
  * pages + README section), scripts/gen-manifest.mjs (AI manifest) and
  * scripts/check-peer-docs.mjs (CI: all five places must carry every item).
  */
-export const RUNTIME_CDN = 'https://cdn.jsdelivr.net/npm/motionary@10/dist/';
+export const RUNTIME_CDN = 'https://cdn.jsdelivr.net/npm/motionary@11/dist/';
 export const DOCS_BASE = 'https://github.com/HarrisonCN/Motionary/blob/main/';
 
 const iife = (id) => (id === 'core' ? `${RUNTIME_CDN}runtime.iife.js` : `${RUNTIME_CDN}runtime/${id}.iife.js`);
@@ -416,7 +416,7 @@ export function prereqFor(item) {
     install,
     importAndRegister: code,
     order: mods.map((m) => m.order).join(' '),
-    cdn: [...cdnLines, '<!-- then the component bundles -->', `<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>`, `<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>`].join('\n'),
+    cdn: [...cdnLines, '<!-- then the component bundles -->', `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`, `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`].join('\n'),
     example: item.usage,
     docs: mods.map((m) => DOCS_BASE + m.docs),
   };

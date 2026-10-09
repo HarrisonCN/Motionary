@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 7.5
 - **Import:** `import { defineBadgeWall } from 'motionary/components/widgets'` then `defineBadgeWall();`
-- **CDN:** `<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
 - **Attributes:** —
 - **Events:** `usa:unlock`
 - **Slots:** —

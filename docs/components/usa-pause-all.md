@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 9.5
 - **Import:** `import { definePauseAll } from 'motionary/components/widgets'` then `definePauseAll();`
-- **CDN:** `<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
 - **Attributes:** `label`, `scope`, `resume-label`
 - **Events:** `usa:pause-all`
 - **Slots:** —

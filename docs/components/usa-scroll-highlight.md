@@ -6,7 +6,7 @@ Words light up one by one as you read down the page, or a highlighter marker swe
 
 - **Category:** text
 - **Import:** `import { defineScrollHighlight } from 'motionary/components/text'` then `defineScrollHighlight();`
-- **CDN:** `<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
 - **Attributes:** `mode`, `text`
 - **Events:** —
 - **Slots:** —

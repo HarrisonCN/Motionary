@@ -6,7 +6,7 @@ Determinate bars glide between values; without a value it shows the Fluent indet
 
 - **Category:** feedback
 - **Import:** `import { defineProgress } from 'motionary/components/feedback'` then `defineProgress();`
-- **CDN:** `<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
 - **Attributes:** `value`, `max`, `indeterminate`, `label`
 - **Events:** `usa:complete`
 - **Slots:** —

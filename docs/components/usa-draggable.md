@@ -6,7 +6,7 @@ Drag with mouse, touch, pen or arrow keys. spring-back returns home with a wobbl
 
 - **Category:** physics
 - **Import:** `import { defineDraggable } from 'motionary/components/physics'` then `defineDraggable();`
-- **CDN:** `<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
 - **Attributes:** `axis`, `disabled`, `preset`
 - **Events:** `usa:settle`, `usa:drag-start`, `usa:drag`, `usa:drag-end`
 - **Slots:** —
