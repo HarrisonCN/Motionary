@@ -1467,19 +1467,20 @@ defineSmoothScroll(); // registers <usa-smooth-scroll> — after the prerequisit
 <usa-smooth-scroll lerp="0.1" offset="64"></usa-smooth-scroll>
 ```
 
-### `<usa-gl-scene>` — Requires: motionary/runtime/gl + motionary/runtime/format-gltf + motionary/runtime/format-obj
+### `<usa-gl-scene>` — Requires: motionary/runtime/gl + motionary/runtime/format-gltf + motionary/runtime/format-obj + motionary/runtime/gltf-anim
 
 - **Install:** `npm i motionary`
-- **Import order & registration:** Register the core first, then the module: use(gl) also registers the core. CDN: load runtime.iife.js, then runtime/gl.iife.js (it registers itself). Register the core first, then the module: use(formatGltf) also registers the core. CDN: load runtime.iife.js, then runtime/format-gltf.iife.js (it registers itself). Register the core first, then the module: use(formatObj) also registers the core. CDN: load runtime.iife.js, then runtime/format-obj.iife.js (it registers itself).
+- **Import order & registration:** Register the core first, then the module: use(gl) also registers the core. CDN: load runtime.iife.js, then runtime/gl.iife.js (it registers itself). Register the core first, then the module: use(formatGltf) also registers the core. CDN: load runtime.iife.js, then runtime/format-gltf.iife.js (it registers itself). Register the core first, then the module: use(formatObj) also registers the core. CDN: load runtime.iife.js, then runtime/format-obj.iife.js (it registers itself). Register the core first, then the module: use(gltfAnim) also registers the core. CDN: load runtime.iife.js, then runtime/gltf-anim.iife.js (it registers itself).
 
 ```js
 import { use } from 'motionary/runtime';
 import { gl } from 'motionary/runtime/gl';
 import { formatGltf } from 'motionary/runtime/format-gltf';
 import { formatObj } from 'motionary/runtime/format-obj';
+import { gltfAnim } from 'motionary/runtime/gltf-anim';
 import { defineGlScene } from 'motionary/components/widgets';
 
-use(gl, formatGltf, formatObj);
+use(gl, formatGltf, formatObj, gltfAnim);
 defineGlScene(); // registers <usa-gl-scene> — after the prerequisites
 ```
 
@@ -1490,6 +1491,7 @@ defineGlScene(); // registers <usa-gl-scene> — after the prerequisites
 <script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gl.iife.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-gltf.iife.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-obj.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gltf-anim.iife.js"></script>
 <!-- then the component bundles -->
 <script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>
 <script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>

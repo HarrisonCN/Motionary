@@ -1,9 +1,320 @@
 'use strict';
 
-var registry = require('../chunks/registry-DhKZCitb.cjs');
-var tween = require('../chunks/tween-Dk0QmNe9.cjs');
-require('../chunks/ticker-jD9_A9Rh.cjs');
+var registry = require('../chunks/registry-BZxDVL3h.cjs');
+var tween = require('../chunks/tween--MD-39y0.cjs');
+require('../chunks/ticker-BfxAECfO.cjs');
 require('../chunks/ease-HwYZnZat.cjs');
+
+const ALLOWED = new Set(['time', 'value', 'thisComp', 'thisLayer', 'thisProperty', 'Math', 'wiggle', 'loopOut', 'loopIn', 'loopOutDuration', 'loopInDuration', 'linear', 'ease', 'easeIn', 'easeOut', 'clamp', 'valueAtTime', 'framesToTime', 'timeToFrames', 'degreesToRadians', 'radiansToDegrees', 'add', 'sub', 'mul', 'div', 'length', 'true', 'false', '$bm_rt', 'index']);
+function lex(src) {
+    const t = [];
+    const re = /\s*(?:(\/\/[^\n]*|\/\*[\s\S]*?\*\/)|(\d+\.?\d*(?:e[+-]?\d+)?|\.\d+)|("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')|([A-Za-z_$][\w$]*)|(===|!==|==|!=|<=|>=|&&|\|\||[-+*/%()[\],.;=<>!?:{}]))/gy;
+    let m, at = 0;
+    while (at < src.length) {
+        re.lastIndex = at;
+        if (!(m = re.exec(src)))
+            break;
+        at = re.lastIndex;
+        if (m[1])
+            continue;
+        const tok = m[2] || m[3] || m[4] || m[5];
+        if (tok)
+            t.push(m[2] ? '#' + tok : m[3] ? '"' + m[3].slice(1, -1) : tok);
+    }
+    if (src.slice(at).trim())
+        throw new Error('expr: unexpected ' + src.slice(at, at + 10));
+    return t;
+}
+/** Compile an expression to an AST (throws on anything outside the subset). */
+function compileExpression(src) {
+    const T = lex(src);
+    let i = 0;
+    const peek = () => T[i], next = () => T[i++];
+    const eat = (s) => {
+        if (T[i] !== s)
+            throw new Error(`expr: expected ${s} got ${T[i]}`);
+        i++;
+    };
+    const declared = new Set();
+    const prim = () => {
+        const k = next();
+        if (k === undefined)
+            throw new Error('expr: unexpected end');
+        if (k[0] === '#')
+            return ['n', +k.slice(1)];
+        if (k[0] === '"')
+            return ['s', k.slice(1)];
+        if (k === '(') {
+            const e = expr();
+            eat(')');
+            return e;
+        }
+        if (k === '[') {
+            const a = [];
+            while (peek() !== ']') {
+                a.push(expr());
+                if (peek() === ',')
+                    next();
+            }
+            eat(']');
+            return ['arr', a];
+        }
+        if (/^[A-Za-z_$]/.test(k)) {
+            if (!ALLOWED.has(k) && !declared.has(k))
+                throw new Error('expr: unsupported ' + k);
+            return ['id', k];
+        }
+        throw new Error('expr: unexpected ' + k);
+    };
+    const post = () => {
+        let e = prim();
+        for (;;) {
+            if (peek() === '.') {
+                next();
+                e = ['get', e, ['s', next()]];
+            }
+            else if (peek() === '[') {
+                next();
+                e = ['get', e, expr()];
+                eat(']');
+            }
+            else if (peek() === '(') {
+                next();
+                const a = [];
+                while (peek() !== ')') {
+                    a.push(expr());
+                    if (peek() === ',')
+                        next();
+                }
+                eat(')');
+                e = ['call', e, a];
+            }
+            else
+                return e;
+        }
+    };
+    const un = () => (peek() === '-' || peek() === '+' || peek() === '!' ? ['un', next(), un()] : post());
+    const bin = (ops, sub) => () => {
+        let e = sub();
+        while (ops.includes(peek()))
+            e = ['bin', next(), e, sub()];
+        return e;
+    };
+    const mul = bin(['*', '/', '%'], un), add = bin(['+', '-'], mul), cmp = bin(['<', '>', '<=', '>='], add), eq = bin(['==', '!=', '===', '!=='], cmp), and = bin(['&&'], eq), or = bin(['||'], and);
+    const expr = () => {
+        const c = or();
+        if (peek() !== '?')
+            return c;
+        next();
+        const a = expr();
+        eat(':');
+        return ['if', c, a, expr()];
+    };
+    const stmts = [];
+    while (i < T.length) {
+        if (peek() === ';') {
+            next();
+            continue;
+        }
+        if (['var', 'let', 'const'].includes(peek())) {
+            next();
+            const name = next();
+            declared.add(name);
+            eat('=');
+            stmts.push(['set', name, expr()]);
+        }
+        else if (/^[A-Za-z_$]/.test(peek() || '') && T[i + 1] === '=') {
+            const name = next();
+            next();
+            declared.add(name);
+            stmts.push(['set', name, expr()]);
+        }
+        else
+            stmts.push(expr());
+    }
+    if (!stmts.length)
+        throw new Error('expr: empty');
+    return ['prog', stmts];
+}
+// ------------------------------------------------------------------ values
+const isA = Array.isArray;
+const zip = (a, b, f) => (isA(a) && isA(b) ? Array.from({ length: Math.max(a.length, b.length) }, (_, i) => f(a[i] ?? 0, b[i] ?? 0)) : isA(a) ? a.map((x) => f(x, b)) : isA(b) ? b.map((y) => f(a, y)) : f(a, b));
+const vadd = (a, b) => (typeof a === 'string' || typeof b === 'string' ? String(a) + String(b) : zip(a, b, (x, y) => x + y));
+const vsub = (a, b) => zip(a, b, (x, y) => x - y);
+const vmul = (a, b) => zip(a, b, (x, y) => x * y);
+const vdiv = (a, b) => zip(a, b, (x, y) => x / y);
+const lerpV = (a, b, p) => vadd(a, vmul(vsub(b, a), p));
+// smooth 1D value noise in [-1, 1]
+const hash = (n) => {
+    const s = Math.sin(n * 127.1 + 311.7) * 43758.5453;
+    return (s - Math.floor(s)) * 2 - 1;
+};
+const noise = (x) => {
+    const i = Math.floor(x), f = x - i, u = f * f * (3 - 2 * f);
+    return hash(i) * (1 - u) + hash(i + 1) * u;
+};
+function remap(ease, args) {
+    const [t, a, b, c, d] = args;
+    let tMin = 0, tMax = 1, v1, v2;
+    if (args.length >= 5)
+        (tMin = a), (tMax = b), (v1 = c), (v2 = d);
+    else
+        (v1 = a), (v2 = b);
+    const p = tMax === tMin ? (t >= tMax ? 1 : 0) : Math.min(1, Math.max(0, (t - tMin) / (tMax - tMin)));
+    return lerpV(v1, v2, ease(tMax < tMin ? 1 - p : p));
+}
+function loop(c, out, type = 'cycle', n = 0, dur = 0) {
+    const K = c.keys, f = c.time * c.fr;
+    if (K.length < 2)
+        return c.value;
+    const first = K[0], last = K[K.length - 1];
+    let a = out ? (n > 0 ? K[Math.max(0, K.length - 1 - n)] : first) : first;
+    let b = out ? last : n > 0 ? K[Math.min(K.length - 1, n)] : last;
+    if (dur > 0)
+        out ? (a = last - dur * c.fr) : (b = first + dur * c.fr);
+    if (out ? f <= b : f >= a)
+        return c.value;
+    const d = b - a || 1;
+    if (type === 'continue') {
+        const e = out ? b : a, v = c.at(e), slope = out ? vsub(v, c.at(e - 1)) : vsub(c.at(e + 1), v);
+        return vadd(v, vmul(slope, f - e));
+    }
+    const over = out ? f - b : a - f, k = Math.floor(over / d), r = over - k * d;
+    if (type === 'pingpong')
+        return c.at(out ? (k % 2 ? a + r : b - r) : k % 2 ? b - r : a + r);
+    const base = c.at(out ? a + r : b - r);
+    if (type === 'offset')
+        return vadd(base, vmul(vsub(c.at(b), c.at(a)), out ? k + 1 : -(k + 1)));
+    return base; // cycle
+}
+/** Evaluate a compiled expression. */
+function runExpression(ast, c) {
+    const vars = {};
+    const fr = c.fr;
+    const lib = {
+        Math,
+        thisComp: { frameDuration: 1 / fr },
+        thisLayer: {},
+        thisProperty: { value: c.value },
+        index: 1,
+        true: true,
+        false: false,
+        wiggle: (freq, amp, oct = 1, mult = 0.5, t = c.time) => {
+            const w = (d) => {
+                let s = 0, a = 1, fq = freq, tot = 0;
+                for (let o = 0; o < Math.max(1, oct); o++)
+                    (s += a * noise(t * fq + c.seed * 13.7 + d * 101.3)), (tot += a), (a *= mult), (fq *= 2);
+                return s / tot;
+            };
+            return isA(c.value) ? c.value.map((v, d) => v + (isA(amp) ? amp[d] ?? 0 : amp) * w(d)) : c.value + amp * w(0);
+        },
+        loopOut: (t, n) => loop(c, true, t, n),
+        loopIn: (t, n) => loop(c, false, t, n),
+        loopOutDuration: (t, d) => loop(c, true, t, 0, d),
+        loopInDuration: (t, d) => loop(c, false, t, 0, d),
+        linear: (...a) => remap((p) => p, a),
+        ease: (...a) => remap((p) => p * p * (3 - 2 * p), a),
+        easeIn: (...a) => remap((p) => p * p, a),
+        easeOut: (...a) => remap((p) => 1 - (1 - p) * (1 - p), a),
+        clamp: (v, lo, hi) => zip(zip(v, lo, Math.max), hi, Math.min),
+        valueAtTime: (t) => c.at(t * fr),
+        framesToTime: (f) => f / fr,
+        timeToFrames: (t = c.time) => t * fr,
+        degreesToRadians: (d) => (d * Math.PI) / 180,
+        radiansToDegrees: (r) => (r * 180) / Math.PI,
+        add: vadd,
+        sub: vsub,
+        mul: vmul,
+        div: vdiv,
+        length: (a, b) => {
+            const d = b === undefined ? a : vsub(a, b);
+            return isA(d) ? Math.hypot(...d) : Math.abs(d);
+        },
+    };
+    const ev = (n) => {
+        switch (n[0]) {
+            case 'n':
+            case 's':
+                return n[1];
+            case 'arr':
+                return n[1].map(ev);
+            case 'id': {
+                const k = n[1];
+                if (k in vars)
+                    return vars[k];
+                if (k === 'time')
+                    return c.time;
+                if (k === 'value')
+                    return c.value;
+                return lib[k];
+            }
+            case 'get': {
+                const o = ev(n[1]), k = ev(n[2]);
+                if (o === null || o === undefined || (typeof k === 'string' && /^(__proto__|constructor|prototype)$/.test(k)))
+                    throw new Error('expr: bad member');
+                if (o === Math && typeof k === 'string' && !(k in Math))
+                    throw new Error('expr: Math.' + k);
+                return o[k];
+            }
+            case 'call': {
+                const f = ev(n[1]);
+                if (typeof f !== 'function')
+                    throw new Error('expr: not a function');
+                return f(...n[2].map(ev));
+            }
+            case 'un': {
+                const v = ev(n[2]);
+                return n[1] === '-' ? vmul(v, -1) : n[1] === '!' ? !v : v;
+            }
+            case 'bin': {
+                const a = ev(n[2]), b = ev(n[3]);
+                switch (n[1]) {
+                    case '+': return vadd(a, b);
+                    case '-': return vsub(a, b);
+                    case '*': return vmul(a, b);
+                    case '/': return vdiv(a, b);
+                    case '%': return zip(a, b, (x, y) => x % y);
+                    case '<': return a < b;
+                    case '>': return a > b;
+                    case '<=': return a <= b;
+                    case '>=': return a >= b;
+                    case '==':
+                    case '===': return a === b;
+                    case '!=':
+                    case '!==': return a !== b;
+                    case '&&': return a && b;
+                    default: return a || b;
+                }
+            }
+            case 'if':
+                return ev(n[1]) ? ev(n[2]) : ev(n[3]);
+            case 'set':
+                return (vars[n[1]] = ev(n[2]));
+            default: {
+                let r;
+                for (const s of n[1])
+                    r = ev(s);
+                return '$bm_rt' in vars ? vars.$bm_rt : r;
+            }
+        }
+    };
+    return ev(ast);
+}
+const cache = new Map();
+/** Compile (cached); null when outside the subset. */
+function expression(src) {
+    if (!cache.has(src)) {
+        let ast = null;
+        try {
+            ast = compileExpression(src);
+        }
+        catch {
+            ast = null;
+        }
+        cache.set(src, ast);
+    }
+    return cache.get(src);
+}
 
 /**
  * `motionary/runtime/vector` (10.6) — a Lottie (bodymovin JSON) + dotLottie
@@ -27,8 +338,12 @@ require('../chunks/ease-HwYZnZat.cjs');
  *   `DecompressionStream`), `manifest.json` v1 / v2, several animations,
  *   embedded images.
  *
- * Not supported (documented): 3D layers, effects, text layers (10.8),
- * expressions (10.8 subset), merge paths, repeaters. `lottiePlayer()` is a
+ * 10.8: **text layers** (system / web fonts by family + style, justification,
+ * tracking, line height, fill + stroke, box text with wrapping, source-text
+ * keyframes and expressions) and an **expression subset** (see
+ * `lottie-expr.ts`: time, value, wiggle, loopOut / loopIn, linear / ease,
+ * Math…; no eval). Not supported (documented): 3D layers, effects, text
+ * animators, glyph outlines (`chars`), merge paths, repeaters. `lottiePlayer()` is a
  * runtime timeline (seek, reverse, scrub with `progress`, markers → labels).
  */
 // ------------------------------------------------------------------ keyframes
@@ -60,10 +375,29 @@ const lerpAny = (a, b, p) => {
         return { c: a.c, v: lerpAny(a.v, b.v, p), i: lerpAny(a.i, b.i, p), o: lerpAny(a.o, b.o, p) };
     return a;
 };
-/** Value of an (animated or static) property at frame `f`. */
+let FR = 30; // frame rate of the composition being rendered (expressions)
+const seedOf = (s) => Array.from(s).reduce((h, c) => (h * 31 + c.charCodeAt(0)) % 9973, 7);
+const isKeyed = (p) => !!(p.a || (Array.isArray(p.k) && p.k.length && typeof p.k[0] === 'object' && 't' in p.k[0]));
+/** Run a property's expression (10.8 subset) on its keyframed value; the value itself when there is none or it is unsupported. */
+function withExpr(p, f, v) {
+    const ast = typeof p.x === 'string' ? expression(p.x) : null;
+    if (!ast)
+        return v;
+    try {
+        const r = runExpression(ast, { time: f / FR, value: v, fr: FR, at: (g) => keyValue(p, g), keys: isKeyed(p) ? p.k.map((k) => k.t) : [], seed: seedOf(p.x) });
+        return r === undefined || (typeof r === 'number' && !isFinite(r)) ? v : r;
+    }
+    catch {
+        return v;
+    }
+}
+/** Value of an (animated or static) property at frame `f` (10.8: with its expression applied). */
 function propValue(p, f, fallback) {
     if (!p)
         return fallback;
+    return withExpr(p, f, keyValue(p, f));
+}
+function keyValue(p, f) {
     if (!p.a && !(Array.isArray(p.k) && p.k.length && typeof p.k[0] === 'object' && 't' in p.k[0]))
         return p.k;
     const ks = p.k;
@@ -432,6 +766,9 @@ function drawLayers(ctx, anim, layers, f, o, base, w, h, depth = 0) {
             for (const p of ops)
                 paint(x, p, lf);
         }
+        else if (L.ty === 5) {
+            drawText(x, anim, L, lf, m);
+        }
         else if (L.ty === 1) {
             x.transform(m[0], m[1], m[2], m[3], m[4], m[5]);
             x.fillStyle = L.sc || '#000';
@@ -483,9 +820,66 @@ function drawLayers(ctx, anim, layers, f, o, base, w, h, depth = 0) {
         }
     }
 }
+// ------------------------------------------------------------------ text layers (10.8)
+function textDoc(L, f) {
+    const d = L.t?.d;
+    let s = d?.k?.[0]?.s;
+    for (const k of d?.k || [])
+        if (k.t <= f)
+            s = k.s;
+    if (s && typeof d.x === 'string')
+        s = { ...s, t: String(withExpr({ k: s.t, x: d.x }, f, s.t)) };
+    return s;
+}
+function drawText(x, anim, L, f, m) {
+    const d = textDoc(L, f);
+    if (!d)
+        return;
+    x.transform(m[0], m[1], m[2], m[3], m[4], m[5]);
+    const font = anim.fonts?.list?.find((q) => q.fName === d.f);
+    const st = (font?.fStyle || d.f || '').toLowerCase();
+    const wt = /black|heavy/.test(st) ? 900 : /extra ?bold/.test(st) ? 800 : /semi ?bold|demi/.test(st) ? 600 : /bold/.test(st) ? 700 : /medium/.test(st) ? 500 : /light/.test(st) ? 300 : /thin/.test(st) ? 100 : 400;
+    x.font = `${/italic|oblique/.test(st) ? 'italic ' : ''}${wt} ${d.s}px ${font?.fFamily ? `"${font.fFamily}", ` : ''}sans-serif`;
+    x.textAlign = d.j === 1 ? 'right' : d.j === 2 ? 'center' : 'left';
+    x.textBaseline = 'alphabetic';
+    if ('letterSpacing' in x)
+        x.letterSpacing = `${((d.tr || 0) * d.s) / 1000}px`;
+    const lh = d.lh || d.s * 1.2;
+    let lines = String(d.t ?? '').split(/\r\n|\r|\n|\u0003/);
+    let ox = 0, oy = 0;
+    if (d.sz) {
+        // box text: wrap to the box width; `ps` is the box's top-left
+        const bw = d.sz[0], [px, py] = d.ps || [0, 0];
+        lines = lines.flatMap((ln) => {
+            const out = [];
+            let cur = '';
+            for (const w of ln.split(' ')) {
+                const t = cur ? cur + ' ' + w : w;
+                if (cur && x.measureText(t).width > bw)
+                    out.push(cur), (cur = w);
+                else
+                    cur = t;
+            }
+            return out.concat(cur);
+        });
+        ox = px + (d.j === 1 ? bw : d.j === 2 ? bw / 2 : 0);
+        oy = py + d.s;
+    }
+    const fill = d.fc ? col(d.fc) : null, stroke = d.sc && d.sw ? col(d.sc) : null;
+    lines.forEach((ln, i) => {
+        const y = oy + i * lh;
+        const F = () => fill && ((x.fillStyle = fill), x.fillText(ln, ox, y));
+        const S = () => stroke && ((x.strokeStyle = stroke), (x.lineWidth = d.sw), (x.lineJoin = 'round'), x.strokeText(ln, ox, y));
+        if (d.of)
+            F(), S();
+        else
+            S(), F();
+    });
+}
 /** Render one frame onto a 2D context sized `width × height` (the animation is fitted with `fit`). */
 function renderLottieFrame(ctx, anim, frame, o = {}) {
     const W = o.width ?? ctx.canvas.width, H = o.height ?? ctx.canvas.height;
+    FR = anim.fr || 30;
     ctx.save();
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.clearRect(0, 0, W, H);
@@ -527,16 +921,21 @@ function inspectLottie(anim) {
             u.add('3D layers');
         if (l.ef?.length)
             u.add('effects');
-        if (l.ty === 5)
-            u.add('text layers');
+        if (l.ty === 5 && l.t?.a?.length)
+            u.add('text animators (range selectors)');
         if (l.tt === 3 || l.tt === 4)
             u.add('luma mattes (approximated by alpha)');
-        if (JSON.stringify(l.ks).includes('"x":"'))
-            u.add('expressions');
+        JSON.stringify([l.ks, l.t, l.shapes], (k, v) => {
+            if (k === 'x' && typeof v === 'string' && !expression(v))
+                u.add('expressions outside the supported subset');
+            return v;
+        });
         walkShapes(l.shapes || []);
     });
     walk(anim.layers);
     anim.assets?.forEach((a) => a.layers && walk(a.layers));
+    if (anim.chars?.length)
+        u.add('glyph outlines (chars): drawn with system fonts');
     return { layers: anim.layers.length, unsupported: [...u] };
 }
 /** Read a zip archive's entries (central directory; stored + deflate). Pure; inflating uses `DecompressionStream`. */
@@ -687,9 +1086,20 @@ class LPlayer extends tween.Playable {
 function lottiePlayer(canvas, animation, o = {}) {
     return new LPlayer(canvas, animation, o);
 }
+/** Evaluate a Lottie expression (10.8 subset) on a value at `time` seconds — `undefined` when it is outside the subset. */
+function evalExpression(src, value, time = 0, fr = 30) {
+    const ast = expression(src);
+    try {
+        return ast ? runExpression(ast, { time, value, fr, at: () => value, keys: [], seed: seedOf(src) }) : undefined;
+    }
+    catch {
+        return undefined;
+    }
+}
 /** The module object for `use(vector)`. */
-const vector = { id: 'vector', version: registry.RUNTIME_VERSION, requires: ['core'], api: { loadLottie, parseDotLottie, unzipEntries, lottiePlayer, renderLottieFrame, inspectLottie, propValue, transformAt, trimContours, loadLottieImages } };
+const vector = { id: 'vector', version: registry.RUNTIME_VERSION, requires: ['core'], api: { evalExpression, loadLottie, parseDotLottie, unzipEntries, lottiePlayer, renderLottieFrame, inspectLottie, propValue, transformAt, trimContours, loadLottieImages } };
 
+exports.evalExpression = evalExpression;
 exports.inspectLottie = inspectLottie;
 exports.loadLottie = loadLottie;
 exports.loadLottieImages = loadLottieImages;

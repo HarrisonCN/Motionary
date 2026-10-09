@@ -1,4 +1,4 @@
-import { g as getTicker } from './ticker-CJYI5Pxc.js';
+import { g as getTicker } from './ticker-ZtweD3U4.js';
 import { p as parseEase } from './ease-XN8_0sXu.js';
 
 /**
@@ -397,4 +397,4 @@ function timeline(o = {}) {
 }
 
 export { Playable as P, Timeline as T, Tween as a, tween as b, parseValue as p, timeline as t };
-//# sourceMappingURL=tween-_Lld1MsF.js.map
+//# sourceMappingURL=tween-DACdkLyO.js.map

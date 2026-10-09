@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-DhKZCitb.cjs');
+var registry = require('../chunks/registry-BZxDVL3h.cjs');
 
 /**
  * `motionary/runtime/gl` (10.5) — a small WebGL2 scene renderer written for
@@ -456,8 +456,20 @@ function createRenderer(canvas, o = {}) {
         return pr.u.get(n);
     };
     const uploadGeo = (g) => {
-        if (g._gpu)
-            return g._gpu;
+        const c = g._gpu;
+        if (c) {
+            if (c.v !== g.version) {
+                c.v = g.version;
+                [g.positions, g.normals].forEach((d, i) => {
+                    if (d && c.b[i]) {
+                        gl.bindBuffer(gl.ARRAY_BUFFER, c.b[i]);
+                        gl.bufferData(gl.ARRAY_BUFFER, d, gl.DYNAMIC_DRAW);
+                    }
+                });
+            }
+            return c;
+        }
+        const bufs = [];
         const vao = gl.createVertexArray();
         gl.bindVertexArray(vao);
         const attr = (i, data, size, fallback) => {
@@ -471,6 +483,7 @@ function createRenderer(canvas, o = {}) {
             }
             const b = gl.createBuffer();
             owned.push({ del: () => gl.deleteBuffer(b) });
+            bufs[i] = b;
             gl.bindBuffer(gl.ARRAY_BUFFER, b);
             gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW);
             gl.enableVertexAttribArray(i);
@@ -490,7 +503,7 @@ function createRenderer(canvas, o = {}) {
         }
         gl.bindVertexArray(null);
         owned.push({ del: () => gl.deleteVertexArray(vao) });
-        return (g._gpu = { vao, count, type, indexed: !!g.indices });
+        return (g._gpu = { vao, count, type, indexed: !!g.indices, v: g.version, b: bufs });
     };
     const uploadTex = (t, unit) => {
         let tex = t._gpu;

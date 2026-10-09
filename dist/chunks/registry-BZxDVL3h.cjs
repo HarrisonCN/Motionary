@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Module registry shared by every copy of `motionary/runtime` on the page
  * (ESM, CJS and the CDN IIFE builds all read the same `globalThis` slot),
@@ -7,7 +9,7 @@
  * inside Web Workers.
  */
 /** Runtime version (kept in sync with the package version by the release script). */
-const RUNTIME_VERSION = '10.7.0';
+const RUNTIME_VERSION = '10.8.0';
 /** Where the CDN builds live (major-pinned). */
 const RUNTIME_CDN = 'https://cdn.jsdelivr.net/npm/motionary@10/dist/';
 const KEY = Symbol.for('motionary.runtime');
@@ -65,5 +67,15 @@ function requireModule(id, who) {
 /** Ids of the registered modules. */
 const registeredModules = () => Array.from(registry().modules.keys());
 
-export { RUNTIME_VERSION as R, requireModule as a, register as b, RUNTIME_CDN as c, RuntimeModuleError as d, moduleCdn as e, modulePath as f, registeredModules as g, hasModule as h, missingMessage as m, registry as r };
-//# sourceMappingURL=registry-D87dP_aR.js.map
+exports.RUNTIME_CDN = RUNTIME_CDN;
+exports.RUNTIME_VERSION = RUNTIME_VERSION;
+exports.RuntimeModuleError = RuntimeModuleError;
+exports.hasModule = hasModule;
+exports.missingMessage = missingMessage;
+exports.moduleCdn = moduleCdn;
+exports.modulePath = modulePath;
+exports.register = register;
+exports.registeredModules = registeredModules;
+exports.registry = registry;
+exports.requireModule = requireModule;
+//# sourceMappingURL=registry-BZxDVL3h.cjs.map

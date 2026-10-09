@@ -1,6 +1,6 @@
-# Motionary 10.7.0
+# Motionary 10.8.0
 
-> Motionary is a zero-dependency motion library: scroll animations, 200+ presets and 207 animated Web Components (<usa-*>) that work in plain HTML and every framework, plus motionary/runtime — its own tween/timeline engine and format loaders.
+> Motionary is a zero-dependency motion library: scroll animations, 200+ presets and 208 animated Web Components (<usa-*>) that work in plain HTML and every framework, plus motionary/runtime — its own tween/timeline engine and format loaders.
 
 Install: `npm i motionary` · CDN: https://unpkg.com/motionary@10/dist/components.umd.js (+ https://unpkg.com/motionary@10/dist/widgets.umd.js for 6.x+ widgets) · Manifest: https://harrisoncn.github.io/Motionary/components.json · Full text: https://harrisoncn.github.io/Motionary/llms-full.txt
 
@@ -26,6 +26,8 @@ Rules for using a component: (1) import its define function from `import.path` a
 - [@rive-app/canvas](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/rive.md): The official MIT-licensed Rive runtime, used by <usa-rive> to play .riv files (artboards, animations, state machines with inputs). Optional peer dependency: lazy-loaded on first use, never bundled into Motionary.
 - [motionary/runtime/physics](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/physics.md): A small 2D rigid-body engine written for Motionary (own implementation and API — no Matter.js / Box2D code): circles, boxes and convex polygons, mass from density, restitution, friction, sensors, collision groups, sleeping, distance / spring / pin constraints, pointer drag, a fixed time step on the shared ticker.
 - [motionary/runtime/format-scene](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/format-scene.md): The versioned motionary-scene@1 format: a JSON description of a 2D physics scene (world, named materials, bodies, constraints, per-body style) — validate, migrate older drafts, load into a physics world and save one back.
+- [motionary/runtime/drag-snap](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/drag-snap.md): Pointer drag along one axis with velocity tracking, inertial throws, rubber-band edges and spring-animated snap points on the shared ticker — the engine of <usa-snap-carousel>, usable for sheets, sliders and pickers (own implementation).
+- [motionary/runtime/gltf-anim](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/gltf-anim.md): Plays glTF 2.0 animations on models loaded by motionary/runtime/format-gltf: translation / rotation / scale / weights channels with LINEAR, STEP and CUBICSPLINE samplers, skins (4 joints per vertex) and morph targets, deformed on the CPU and re-uploaded to motionary/runtime/gl (own implementation).
 
 ## Components
 
@@ -89,7 +91,7 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<usa-gen-art>` (motionary/components/widgets): 9.3: seeded generative art on a canvas — flow fields, circle packing, Truchet tiles or layered waves in curated palettes; it draws itself in on screen and a tap
 - `<usa-gesture-fx>` (motionary/components/effects): 5.7: <usa-gesture-fx> plays any registered effect on a fling (fast release), a two-finger twist or a long press that charges --usa-charge 0 → 1. JS: bindGesture
 - `<usa-gesture-sticker>` (motionary/components/widgets): 8.7: a multi-touch sticker — drag with one finger, pinch with two to scale and twist to rotate, all at once, with a lifted shadow while held (wheel / Shift + wh
-- `<usa-gl-scene>` (motionary/components/widgets; requires motionary/runtime/gl + motionary/runtime/format-gltf + motionary/runtime/format-obj): 10.5: a WebGL2 3D viewer on Motionary’s own renderer — glTF 2.0 / GLB and OBJ / MTL models or built-in shapes, PBR-style materials, orbit controls (drag, wheel,
+- `<usa-gl-scene>` (motionary/components/widgets; requires motionary/runtime/gl + motionary/runtime/format-gltf + motionary/runtime/format-obj + motionary/runtime/gltf-anim): 10.5: a WebGL2 3D viewer on Motionary’s own renderer — glTF 2.0 / GLB and OBJ / MTL models or built-in shapes, PBR-style materials, orbit controls (drag, wheel,
 - `<usa-glitch>` (motionary/components/text): An RGB-split, sliced glitch — always on or on hover.
 - `<usa-globe>` (motionary/components/widgets): 7.6: an SVG globe in orthographic projection — graticule, pulsing markers, spins while on screen, drag to turn it, flyTo(name) brings a city round to the front.
 - `<usa-gpu-particles>` (motionary/components/widgets): 10.5 (WebGPU effects 2.0): tens of thousands of particles simulated by a WebGPU compute shader and drawn as instanced quads — swirl, galaxy or fountain, pointer
@@ -193,6 +195,7 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<usa-sketch-chart>` (motionary/components/widgets): 8.5: a hand-drawn chart — wobbly pencil axes with hatched bars or a sketchy line, sketched in stroke by stroke when it scrolls into view.
 - `<usa-slider>` (motionary/components/ui): A form-associated range slider: spring-following thumb, value bubble, full keyboard support (arrows, Page Up/Down, Home/End).
 - `<usa-smooth-scroll>` (motionary/components/widgets; requires motionary/runtime/smooth): 10.4: smooth, inertial wheel scrolling for the page or a container (wrapper), anchor links glide (with offset for sticky headers); keyboard / scrollbar / touch 
+- `<usa-snap-carousel>` (motionary/components/snap-carousel; requires motionary/runtime/drag-snap): 10.8: drag or swipe with real inertia — a throw keeps gliding, then springs to the nearest slide (a quick flick always moves one); rubber-band edges, arrows, do
 - `<usa-sparkline>` (motionary/components/widgets): 7.2: a tiny inline trend — draws itself on first view, a soft area fades in, the last point pulses and new data morphs the line point by point. line | area | ba
 - `<usa-spatial-card>` (motionary/components/widgets): 8.8: a spatial-computing window — frosted glass floating in depth, a soft gaze highlight that follows the pointer, layered content and an ornament bar; it eases
 - `<usa-spinner>` (motionary/components/feedback): Six indeterminate indicators: the WinUI progress ring, the Windows 10 orbiting dots, ring, typing dots, pulse and bars.

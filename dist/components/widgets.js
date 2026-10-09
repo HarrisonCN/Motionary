@@ -20,7 +20,8 @@ import { loadMotionPreferences, applyMotionPreferences } from './fx-safe.js';
 import { fpsMeter, offscreenRender } from './fx-perf.js';
 import { motionToCss, easingPoints } from './design.js';
 import { toFlutter, toReactNative, entranceFrom } from './native.js';
-import { a as requireModule, m as missingMessage, R as RUNTIME_VERSION, h as hasModule } from '../chunks/registry-D87dP_aR.js';
+import { R as RUNTIME_VERSION, r as requireModule, h as hasModule } from '../chunks/registry-Bkt3-3ET.js';
+import { r as runtimeModule } from '../chunks/runtime-link-c13gskBZ.js';
 import { getMotionTokens, exportDesignTokens, validateDesignTokens, importDesignTokens, applyMotionTokens } from './tokens.js';
 import { describeMotion, motionSnippet } from './ai.js';
 import '../chunks/core-BviA7nFa.js';
@@ -10180,38 +10181,6 @@ function defineNativePreview(tag = 'usa-native-preview') {
     }, { id: 'native-preview', text: css$h });
 }
 
-/**
- * 10.1: how runtime-powered components reach `motionary/runtime` without
- * importing it — they read the page-wide module registry (only the tiny
- * registry file is bundled with the component) and, when a module is
- * missing, show the clear install / import / CDN message in place, log it
- * once and dispatch `usa:runtime-missing`.
- */
-const logged = new Set();
-/** The module API, or null after rendering the "missing module" notice into `host`. */
-function runtimeModule(host, id) {
-    const who = `<${host.localName}>`;
-    try {
-        return requireModule(id, who);
-    }
-    catch {
-        const msg = missingMessage(id, who);
-        if (!logged.has(id + who)) {
-            logged.add(id + who);
-            console.error(msg);
-        }
-        if (!host.querySelector(':scope > .usa-rt-missing')) {
-            const p = document.createElement('p');
-            p.className = 'usa-rt-missing';
-            p.setAttribute('role', 'alert');
-            p.textContent = msg;
-            host.prepend(p);
-        }
-        host.dispatchEvent(new CustomEvent('usa:runtime-missing', { detail: { module: id, message: msg }, bubbles: true }));
-        return null;
-    }
-}
-
 var css$g = "usa-plugin-card{display:block;max-width:100%;box-sizing:border-box;padding:14px;border-radius:16px;background:#fff;border:1px solid #e2e8f0;box-shadow:0 10px 26px -18px rgba(15,23,42,.55);color:#0f172a;font:13px/1.45 system-ui,sans-serif}usa-plugin-card .usa-pc-head{display:flex;align-items:center;gap:10px;min-width:0}usa-plugin-card .usa-pc-logo{flex:none;display:grid;place-items:center;width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,#6366f1,#ec4899);color:#fff;font:800 17px/1 system-ui,sans-serif}usa-plugin-card .usa-pc-meta{display:flex;flex-direction:column;min-width:0;flex:1}usa-plugin-card .usa-pc-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px}usa-plugin-card .usa-pc-sub{color:#64748b;font-size:11.5px}usa-plugin-card .usa-pc-dl{flex:none;color:#475569;font:600 12px/1 ui-monospace,monospace}usa-plugin-card .usa-pc-badges{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 8px}usa-plugin-card .usa-pc-badge{padding:3px 8px;border-radius:999px;background:#f1f5f9;color:#334155;font:600 11px/1.3 system-ui,sans-serif}usa-plugin-card .usa-pc-compat[data-ok=true],usa-plugin-card .usa-pc-sig[data-state=ok]{background:#dcfce7;color:#166534}usa-plugin-card .usa-pc-compat[data-ok=false],usa-plugin-card .usa-pc-sig[data-state=bad]{background:#fee2e2;color:#991b1b}usa-plugin-card .usa-pc-more{padding:5px 10px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;font:600 12px/1 system-ui,sans-serif;cursor:pointer}usa-plugin-card .usa-pc-details{margin-top:8px;color:#334155}usa-plugin-card .usa-rt-missing{margin:0 0 8px;padding:8px;border-radius:8px;background:#fef2f2;color:#991b1b;font:11px/1.4 ui-monospace,monospace;overflow-wrap:anywhere}";
 
 const fmt = (n) => (n >= 1e6 ? (n / 1e6).toFixed(1) + 'M' : n >= 1e3 ? (n / 1e3).toFixed(1) + 'k' : String(Math.round(n)));
@@ -11154,9 +11123,13 @@ function defineGlScene(tag = 'usa-gl-scene') {
                 this.cam = null;
                 this.node = null;
                 this.r = null;
+                this.an = null;
             }
             static get observedAttributes() {
-                return ['src', 'shape', 'color', 'metallic', 'roughness', 'background', 'exposure', 'controls', 'auto-rotate', 'video', 'video-scrub', 'label'];
+                return ['src', 'shape', 'color', 'metallic', 'roughness', 'background', 'exposure', 'controls', 'auto-rotate', 'video', 'video-scrub', 'label', 'animation', 'animation-speed'];
+            }
+            get animator() {
+                return this.an;
             }
             get scene() {
                 return this.s;
@@ -11230,7 +11203,16 @@ function defineGlScene(tag = 'usa-gl-scene') {
                     G.frameNode(cam, n, 1.15);
                     let meshes = 0;
                     n.traverse((x) => (meshes += x.mesh ? (Array.isArray(x.mesh) ? x.mesh.length : 1) : 0));
-                    this.emit('load', { meshes });
+                    const clip = this.getAttribute('animation');
+                    if (clip !== null && clip !== 'none' && n.extras.gltf) {
+                        const A = runtimeModule(this, 'gltf-anim');
+                        if (A) {
+                            const an = (this.an = A.gltfAnimator(n, { clip: clip === '' ? 0 : /^\d+$/.test(clip) ? +clip : clip, speed: this.num('animation-speed', 1) }));
+                            if (!an.clip && an.clips.length)
+                                this.emit('error', { error: `no animation "${clip}" (have: ${an.clips.map((c) => c.name).join(', ')})` });
+                        }
+                    }
+                    this.emit('load', { meshes, animations: this.an ? this.an.clips.map((c) => c.name) : [] });
                     this.dataset.loaded = '';
                 };
                 const src = this.str('src');
@@ -11254,6 +11236,7 @@ function defineGlScene(tag = 'usa-gl-scene') {
                     ctl?.dispose();
                     r.dispose();
                     this.r = null;
+                    this.an = null;
                 });
                 let visible = false, raf = 0, last = 0, t = 0;
                 const frame = (now) => {
@@ -11269,8 +11252,11 @@ function defineGlScene(tag = 'usa-gl-scene') {
                         const rc = this.getBoundingClientRect();
                         G.scrubVideo(video, Math.min(1, Math.max(0, (innerHeight - rc.top) / (innerHeight + rc.height))));
                     }
+                    const play = !!this.an?.clip && !this.reduced;
+                    if (play)
+                        this.an.update(dt / 1000);
                     r.render(scene, cam, t);
-                    if (visible && (spin || ctl || video || !this.dataset.loaded))
+                    if (visible && (spin || ctl || video || play || !this.dataset.loaded))
                         raf = requestAnimationFrame(frame);
                 };
                 const kick = () => {

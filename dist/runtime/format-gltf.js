@@ -1,4 +1,4 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-D87dP_aR.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-Bkt3-3ET.js';
 import { standardMaterial, texture, computeNormals, GlNode } from './gl.js';
 
 /**
@@ -17,7 +17,9 @@ import { standardMaterial, texture, computeNormals, GlNode } from './gl.js';
  * - files that *require* an extension we do not implement (e.g. Draco /
  *   KTX2 compression) fail with a clear error naming it.
  *
- * Skins, morph targets and animations arrive in 10.8. `parseGlb()` /
+ * 10.8: sparse accessors; skin (JOINTS_0 / WEIGHTS_0) and morph-target data
+ * is kept on each geometry (`geometry.deform`) and played by
+ * `motionary/runtime/gltf-anim` (animations, skinning, morph weights). `parseGlb()` /
  * `gltfToNode()` with an `images` override are pure (SSR / workers).
  */
 /** Extensions this loader understands (others that a file *requires* make it fail clearly). */
@@ -60,21 +62,30 @@ function readAccessor(json, buffers, index, asFloat = true) {
     const n = SIZE[a.type], count = a.count * n;
     const isFloat = Ctor === Float32Array;
     const out = asFloat || isFloat ? new Float32Array(count) : new Ctor(count);
-    if (a.bufferView === undefined)
-        return out; // all zeros (sparse-only accessors)
-    const bv = json.bufferViews[a.bufferView];
-    const buf = buffers[bv.buffer];
-    const base = (bv.byteOffset || 0) + (a.byteOffset || 0);
-    const stride = bv.byteStride || bytes * n;
-    const dv = new DataView(buf.buffer, buf.byteOffset, buf.byteLength);
-    const get = (o) => (bytes === 4 ? (isFloat ? dv.getFloat32(o, true) : dv.getUint32(o, true)) : bytes === 2 ? (Ctor === Int16Array ? dv.getInt16(o, true) : dv.getUint16(o, true)) : Ctor === Int8Array ? dv.getInt8(o) : dv.getUint8(o));
-    for (let i = 0; i < a.count; i++)
-        for (let k = 0; k < n; k++) {
-            let x = get(base + i * stride + k * bytes);
-            if (a.normalized && max)
-                x = Math.max(x / max, -1);
-            out[i * n + k] = x;
+    const view = (v, off = 0) => {
+        const bv = json.bufferViews[v], buf = buffers[bv.buffer];
+        return { dv: new DataView(buf.buffer, buf.byteOffset, buf.byteLength), base: (bv.byteOffset || 0) + off, stride: bv.byteStride };
+    };
+    const getter = (dv, b, C) => (o) => (b === 4 ? (C === Float32Array ? dv.getFloat32(o, true) : dv.getUint32(o, true)) : b === 2 ? (C === Int16Array ? dv.getInt16(o, true) : dv.getUint16(o, true)) : C === Int8Array ? dv.getInt8(o) : dv.getUint8(o));
+    const put = (i, k, x) => (out[i * n + k] = a.normalized && max ? Math.max(x / max, -1) : x);
+    if (a.bufferView !== undefined) {
+        const { dv, base, stride = bytes * n } = view(a.bufferView, a.byteOffset);
+        const get = getter(dv, bytes, Ctor);
+        for (let i = 0; i < a.count; i++)
+            for (let k = 0; k < n; k++)
+                put(i, k, get(base + i * stride + k * bytes));
+    }
+    const sp = a.sparse; // 10.8: sparse substitution (morph targets exported by Blender & co.)
+    if (sp) {
+        const [ib, IC] = COMP[sp.indices.componentType];
+        const I = view(sp.indices.bufferView, sp.indices.byteOffset), Vv = view(sp.values.bufferView, sp.values.byteOffset);
+        const gi = getter(I.dv, ib, IC), gv = getter(Vv.dv, bytes, Ctor);
+        for (let s = 0; s < sp.count; s++) {
+            const i = gi(I.base + s * ib);
+            for (let k = 0; k < n; k++)
+                put(i, k, gv(Vv.base + (s * n + k) * bytes));
         }
+    }
     return out;
 }
 function toTriangles(idx, mode) {
@@ -125,7 +136,10 @@ function gltfToNode(json, buffers, images = {}, sceneIndex) {
         }
         else if (mode === 5 || mode === 6)
             g.indices = toTriangles(Uint32Array.from({ length: g.positions.length / 3 }, (_, i) => i), mode);
-        if (!g.normals && g.mode === 'triangles')
+        const at = p.attributes, tg = p.targets || [], rd = (i) => (i === undefined ? undefined : readAccessor(json, buffers, i));
+        if (at.JOINTS_0 !== undefined || tg.length)
+            g.deform = { positions: g.positions, normals: g.normals, joints: rd(at.JOINTS_0), weights: rd(at.WEIGHTS_0), targets: tg.map((t) => ({ positions: rd(t.POSITION), normals: rd(t.NORMAL) })) };
+        else if (!g.normals && g.mode === 'triangles')
             g = computeNormals(g);
         return { geometry: g, material: p.material !== undefined ? mats[p.material] : standardMaterial({ metallic: 0, roughness: 0.6 }) };
     }));
@@ -140,6 +154,11 @@ function gltfToNode(json, buffers, images = {}, sceneIndex) {
         if (n.scale)
             node.scale = n.scale.slice(0, 3);
         node.extras.gltfIndex = i;
+        if (n.skin !== undefined)
+            node.extras.skin = n.skin;
+        const w = n.weights || (n.mesh !== undefined ? json.meshes?.[n.mesh]?.weights : undefined);
+        if (w)
+            node.extras.weights = w.slice();
         return node;
     });
     (json.nodes || []).forEach((n, i) => (n.children || []).forEach((c) => nodes[i].add(nodes[c])));
@@ -147,7 +166,7 @@ function gltfToNode(json, buffers, images = {}, sceneIndex) {
     const sc = json.scenes?.[sceneIndex ?? json.scene ?? 0];
     const tops = sc?.nodes ?? nodes.map((_, i) => i).filter((i) => !nodes[i].parent);
     tops.forEach((i) => root.add(nodes[i]));
-    root.extras = { gltf: json, nodes };
+    root.extras = { gltf: json, nodes, read: (i) => readAccessor(json, buffers, i) };
     return root;
 }
 const dataUri = (u) => {

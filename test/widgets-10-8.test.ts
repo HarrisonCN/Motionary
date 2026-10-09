@@ -296,7 +296,7 @@ describe('10.8 prerequisites in all five places; bundles unchanged', () => {
     expect(componentSnippets(sc).esm).toContain("from 'motionary/components/snap-carousel'");
     expect(prereqFor(sc)!.badge).toBe('Requires: motionary/runtime/drag-snap');
     const gl: any = COMPONENTS.find((c: any) => c.id === 'gl-skinned');
-    expect(prereqFor(gl)!.badge).toBe('Requires: motionary/runtime/gl + motionary/runtime/format-gltf + motionary/runtime/gltf-anim');
+    expect(prereqFor(gl)!.badge).toBe('Requires: motionary/runtime/gl + motionary/runtime/format-gltf + motionary/runtime/format-obj + motionary/runtime/gltf-anim');
     expect(COMPONENT_ITEMS.find((i: any) => i.gallery === 'lottie-text').requiresBadge).toMatch(/motionary\/runtime\/vector/);
     expect(PREREQS['drag-snap'].kind).toBe('runtime');
     expect(PREREQS['gltf-anim'].kind).toBe('runtime');

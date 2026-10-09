@@ -1,4 +1,4 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-D87dP_aR.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-Bkt3-3ET.js';
 
 /**
  * `motionary/runtime/text` (10.3) — split text into characters, words and

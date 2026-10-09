@@ -1,6 +1,6 @@
 'use strict';
 
-var ticker = require('./ticker-jD9_A9Rh.cjs');
+var ticker = require('./ticker-BfxAECfO.cjs');
 var ease = require('./ease-HwYZnZat.cjs');
 
 /**
@@ -404,4 +404,4 @@ exports.Tween = Tween;
 exports.parseValue = parseValue;
 exports.timeline = timeline;
 exports.tween = tween;
-//# sourceMappingURL=tween-Dk0QmNe9.cjs.map
+//# sourceMappingURL=tween--MD-39y0.cjs.map

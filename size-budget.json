@@ -675,8 +675,8 @@
     "limit": 4096
   },
   {
-    "name": "import 'motionary/components/snap-carousel' (own entry, fixed 4.0 KB; not in widgets / lite)",
+    "name": "import 'motionary/components/snap-carousel' (own entry incl. the shared element base, fixed 5.5 KB; not in widgets / lite)",
     "import": "export * from 'pkg/components/snap-carousel';",
-    "limit": 4096
+    "limit": 5632
   }
 ]

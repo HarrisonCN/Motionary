@@ -70,6 +70,8 @@ interface Geometry {
     indices?: Uint16Array | Uint32Array;
     /** 'triangles' (default), 'lines', 'points'. */
     mode?: 'triangles' | 'lines' | 'points';
+    /** Bump after changing positions / normals in place (10.8: skinning, morph targets) — the renderer re-uploads them. */
+    version?: number;
     /** Renderer cache. */
     _gpu?: unknown;
 }

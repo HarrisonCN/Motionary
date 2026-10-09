@@ -3,7 +3,7 @@
   "format": "motionary/components",
   "schemaVersion": 1,
   "package": "motionary",
-  "version": "10.7.0",
+  "version": "10.8.0",
   "homepage": "https://harrisoncn.github.io/Motionary/",
   "llms": "https://harrisoncn.github.io/Motionary/llms.txt",
   "cdn": {
@@ -895,8 +895,13 @@
         ],
         [
           "skins, morph targets, animations",
-          "no",
-          "arrive in 10.8"
+          "yes",
+          "data kept on the nodes / geometry; played by motionary/runtime/gltf-anim (10.8)"
+        ],
+        [
+          "sparse accessors",
+          "yes",
+          "10.8"
         ],
         [
           "Draco / meshopt / KTX2 (Basis) compression",
@@ -904,7 +909,7 @@
           "files that require them fail with a clear error; decoder hooks planned for 10.9"
         ],
         [
-          "sparse accessors, cameras, KHR_lights_punctual, texture transforms",
+          "cameras, KHR_lights_punctual, texture transforms",
           "no",
           "ignored"
         ],
@@ -995,6 +1000,7 @@
       "budget": 12288,
       "exports": [
         "vector",
+        "evalExpression",
         "loadLottie",
         "parseDotLottie",
         "unzipEntries",
@@ -1063,9 +1069,14 @@
           ""
         ],
         [
-          "text layers, expressions",
-          "no",
-          "planned for 10.8 (subset)"
+          "text layers: fonts by family + style, justification, tracking, line height, fill / stroke, box text (wrapping), source-text keyframes",
+          "yes",
+          "10.8; system / page fonts (glyph outlines in chars are not used); text animators not supported"
+        ],
+        [
+          "expressions: time, value, wiggle, loopOut / loopIn (cycle, pingpong, offset, continue), linear / ease, valueAtTime, Math, arithmetic, var / $bm_rt",
+          "yes",
+          "10.8 subset, own interpreter (no eval; CSP-safe); other expressions keep the keyframed value and are listed by inspectLottie()"
         ],
         [
           "3D layers, layer effects, merge paths, repeaters",
@@ -1276,6 +1287,142 @@
         ]
       ],
       "example": "import { use } from 'motionary/runtime';\nimport { physics } from 'motionary/runtime/physics';\nimport { formatScene, sceneToWorld } from 'motionary/runtime/format-scene';\nuse(physics, formatScene);\nconst { world, bodies } = sceneToWorld(await (await fetch('/scenes/stack.json')).json());\nworld.run();"
+    },
+    {
+      "kind": "runtime",
+      "id": "drag-snap",
+      "label": "motionary/runtime/drag-snap",
+      "title": "Drag, inertia and snap points",
+      "summary": "Pointer drag along one axis with velocity tracking, inertial throws, rubber-band edges and spring-animated snap points on the shared ticker — the engine of <usa-snap-carousel>, usable for sheets, sliders and pickers (own implementation).",
+      "install": "npm i motionary",
+      "importPath": "motionary/runtime/drag-snap",
+      "import": "import { use } from 'motionary/runtime';\nimport { dragSnap } from 'motionary/runtime/drag-snap';",
+      "register": "use(dragSnap);",
+      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/drag-snap.iife.js\"></script>",
+      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/drag-snap.js",
+      "order": "Register the core first, then the module: use(dragSnap) also registers the core. CDN: load runtime.iife.js, then runtime/drag-snap.iife.js (it registers itself).",
+      "docs": "docs/runtime/drag-snap.md",
+      "budget": 4096,
+      "exports": [
+        "dragSnap",
+        "createDragSnap",
+        "projectThrow",
+        "nearestSnap",
+        "rubberband",
+        "springStep",
+        "velocityTracker"
+      ],
+      "compat": [
+        [
+          "pointer, touch and pen (Pointer Events), drag threshold, pointer capture, touch-action for the other axis",
+          "yes",
+          "one axis per controller (x or y)"
+        ],
+        [
+          "velocity from the last 100 ms, inertial throw with constant deceleration",
+          "yes",
+          "off under reduced motion"
+        ],
+        [
+          "snap points: nearest to the projected throw, a fast flick moves at least one point",
+          "yes",
+          ""
+        ],
+        [
+          "critically damped spring to the snap point (shared ticker)",
+          "yes",
+          "instant under reduced motion"
+        ],
+        [
+          "bounds with rubber-band resistance",
+          "yes",
+          ""
+        ],
+        [
+          "clicks inside are kept; the click that ends a drag is swallowed",
+          "yes",
+          ""
+        ],
+        [
+          "free 2D dragging, scroll-linked snapping (CSS scroll-snap)",
+          "no",
+          "use two controllers / native scroll-snap"
+        ],
+        [
+          "SSR / workers",
+          "partial",
+          "the maths (projectThrow, nearestSnap, rubberband, springStep, velocityTracker) is pure"
+        ]
+      ],
+      "example": "import { use } from 'motionary/runtime';\nimport { dragSnap, createDragSnap } from 'motionary/runtime/drag-snap';\nuse(dragSnap);\nconst track = document.querySelector('.track');\nconst ds = createDragSnap(track, { axis: 'x', snap: [0, -320, -640], onUpdate: (x) => (track.style.transform = `translateX(${x}px)`) });\nds.snapTo(1);"
+    },
+    {
+      "kind": "runtime",
+      "id": "gltf-anim",
+      "label": "motionary/runtime/gltf-anim",
+      "title": "glTF animation, skinning and morph targets",
+      "summary": "Plays glTF 2.0 animations on models loaded by motionary/runtime/format-gltf: translation / rotation / scale / weights channels with LINEAR, STEP and CUBICSPLINE samplers, skins (4 joints per vertex) and morph targets, deformed on the CPU and re-uploaded to motionary/runtime/gl (own implementation).",
+      "install": "npm i motionary",
+      "importPath": "motionary/runtime/gltf-anim",
+      "import": "import { use } from 'motionary/runtime';\nimport { gltfAnim } from 'motionary/runtime/gltf-anim';",
+      "register": "use(gltfAnim);",
+      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gltf-anim.iife.js\"></script>",
+      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gltf-anim.js",
+      "order": "Register the core first, then the module: use(gltfAnim) also registers the core. CDN: load runtime.iife.js, then runtime/gltf-anim.iife.js (it registers itself).",
+      "docs": "docs/runtime/gltf-anim.md",
+      "budget": 4608,
+      "exports": [
+        "gltfAnim",
+        "gltfAnimator",
+        "gltfClips",
+        "sampleChannel",
+        "applyClip",
+        "deformModel",
+        "deformGeometry"
+      ],
+      "compat": [
+        [
+          "animation channels: translation, rotation, scale, weights",
+          "yes",
+          "KHR_animation_pointer is ignored"
+        ],
+        [
+          "samplers: LINEAR (quaternions slerped), STEP, CUBICSPLINE (Hermite, in / out tangents)",
+          "yes",
+          ""
+        ],
+        [
+          "skins: joint hierarchy, inverse bind matrices, JOINTS_0 / WEIGHTS_0 (4 influences)",
+          "yes",
+          "CPU skinning; JOINTS_1 / WEIGHTS_1 (8 influences) not used"
+        ],
+        [
+          "morph targets: POSITION + NORMAL deltas, mesh / node default weights, animated weights",
+          "yes",
+          "TANGENT / TEXCOORD / COLOR targets ignored"
+        ],
+        [
+          "sparse accessors (common for morph targets)",
+          "yes",
+          "read by format-gltf"
+        ],
+        [
+          "clip player: by name or index, loop, speed, seek, update(dt) or the shared ticker",
+          "yes",
+          "one clip at a time (no blending)"
+        ],
+        [
+          "GPU skinning, animation blending / cross-fades, a mesh shared by several skinned nodes",
+          "no",
+          "planned work beyond 11.0"
+        ],
+        [
+          "SSR / workers",
+          "yes",
+          "sampling and deformation are pure; play() needs the runtime ticker"
+        ]
+      ],
+      "example": "import { use } from 'motionary/runtime';\nimport { gl } from 'motionary/runtime/gl';\nimport { formatGltf, loadGltf } from 'motionary/runtime/format-gltf';\nimport { gltfAnim, gltfAnimator } from 'motionary/runtime/gltf-anim';\nuse(gl, formatGltf, gltfAnim);\nconst model = await loadGltf('/models/robot.glb');\nconst anim = gltfAnimator(model, { clip: 'walk' });\nanim.play(); // or anim.update(dt) in your own loop"
     }
   ],
   "components": [
@@ -3975,7 +4122,9 @@
         "auto-rotate",
         "video",
         "video-scrub",
-        "label"
+        "label",
+        "animation",
+        "animation-speed"
       ],
       "events": [
         "usa:error",
@@ -3991,27 +4140,44 @@
       "requires": [
         "gl",
         "format-gltf",
-        "format-obj"
+        "format-obj",
+        "gltf-anim"
       ],
       "prerequisites": {
-        "badge": "Requires: motionary/runtime/gl + motionary/runtime/format-gltf + motionary/runtime/format-obj",
+        "badge": "Requires: motionary/runtime/gl + motionary/runtime/format-gltf + motionary/runtime/format-obj + motionary/runtime/gltf-anim",
         "modules": [
           "motionary/runtime/gl",
           "motionary/runtime/format-gltf",
-          "motionary/runtime/format-obj"
+          "motionary/runtime/format-obj",
+          "motionary/runtime/gltf-anim"
         ],
         "install": "npm i motionary",
-        "importAndRegister": "import { use } from 'motionary/runtime';\nimport { gl } from 'motionary/runtime/gl';\nimport { formatGltf } from 'motionary/runtime/format-gltf';\nimport { formatObj } from 'motionary/runtime/format-obj';\nimport { defineGlScene } from 'motionary/components/widgets';\n\nuse(gl, formatGltf, formatObj);\ndefineGlScene(); // registers <usa-gl-scene> — after the prerequisites",
-        "order": "Register the core first, then the module: use(gl) also registers the core. CDN: load runtime.iife.js, then runtime/gl.iife.js (it registers itself). Register the core first, then the module: use(formatGltf) also registers the core. CDN: load runtime.iife.js, then runtime/format-gltf.iife.js (it registers itself). Register the core first, then the module: use(formatObj) also registers the core. CDN: load runtime.iife.js, then runtime/format-obj.iife.js (it registers itself).",
-        "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gl.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-gltf.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-obj.iife.js\"></script>\n<!-- then the component bundles -->\n<script src=\"https://unpkg.com/motionary@10/dist/components.umd.js\"></script>\n<script src=\"https://unpkg.com/motionary@10/dist/widgets.umd.js\"></script>",
+        "importAndRegister": "import { use } from 'motionary/runtime';\nimport { gl } from 'motionary/runtime/gl';\nimport { formatGltf } from 'motionary/runtime/format-gltf';\nimport { formatObj } from 'motionary/runtime/format-obj';\nimport { gltfAnim } from 'motionary/runtime/gltf-anim';\nimport { defineGlScene } from 'motionary/components/widgets';\n\nuse(gl, formatGltf, formatObj, gltfAnim);\ndefineGlScene(); // registers <usa-gl-scene> — after the prerequisites",
+        "order": "Register the core first, then the module: use(gl) also registers the core. CDN: load runtime.iife.js, then runtime/gl.iife.js (it registers itself). Register the core first, then the module: use(formatGltf) also registers the core. CDN: load runtime.iife.js, then runtime/format-gltf.iife.js (it registers itself). Register the core first, then the module: use(formatObj) also registers the core. CDN: load runtime.iife.js, then runtime/format-obj.iife.js (it registers itself). Register the core first, then the module: use(gltfAnim) also registers the core. CDN: load runtime.iife.js, then runtime/gltf-anim.iife.js (it registers itself).",
+        "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gl.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-gltf.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-obj.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gltf-anim.iife.js\"></script>\n<!-- then the component bundles -->\n<script src=\"https://unpkg.com/motionary@10/dist/components.umd.js\"></script>\n<script src=\"https://unpkg.com/motionary@10/dist/widgets.umd.js\"></script>",
         "example": "<usa-gl-scene src=\"/models/chair.glb\" controls auto-rotate=\"20\" label=\"Chair\"></usa-gl-scene>",
         "docs": [
           "https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/gl.md",
           "https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/format-gltf.md",
-          "https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/format-obj.md"
+          "https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/format-obj.md",
+          "https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/gltf-anim.md"
         ]
       },
-      "source": "src/components/widgets/gl-scene.ts"
+      "source": "src/components/widgets/gl-scene.ts",
+      "variants": [
+        {
+          "id": "gl-scene",
+          "title": "3D scene (glTF / OBJ)",
+          "description": "10.5: a WebGL2 3D viewer on Motionary’s own renderer — glTF 2.0 / GLB and OBJ / MTL models or built-in shapes, PBR-style materials, orbit controls (drag, wheel, pinch, arrow keys), auto-rotate and video textures. Requires motionary/runtime/gl (+ format-gltf for .gltf / .glb, format-obj for .obj) — npm i motionary, then use(gl, formatGltf, formatObj) before it mounts. Alias: <usa-three-scene>.",
+          "example": "<usa-gl-scene src=\"/models/chair.glb\" controls auto-rotate=\"20\" label=\"Chair\"></usa-gl-scene>"
+        },
+        {
+          "id": "gl-skinned",
+          "title": "3D animation (glTF skin + morph)",
+          "description": "10.8: <usa-gl-scene animation> plays glTF animations — skeletal skinning (4 joints per vertex), morph targets and LINEAR / STEP / CUBICSPLINE channels — on Motionary’s own WebGL2 renderer. Pick a clip by name or index, set animation-speed; reduced motion shows the first pose. Requires motionary/runtime/gl + motionary/runtime/format-gltf + motionary/runtime/gltf-anim — npm i motionary, then use(gl, formatGltf, gltfAnim).",
+          "example": "<usa-gl-scene src=\"/models/robot.glb\" animation=\"walk\" controls label=\"Walking robot\"></usa-gl-scene>"
+        }
+      ]
     },
     {
       "id": "glitch",
@@ -4978,7 +5144,21 @@
           "https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/vector.md"
         ]
       },
-      "source": "src/components/widgets/lottie-player.ts"
+      "source": "src/components/widgets/lottie-player.ts",
+      "variants": [
+        {
+          "id": "lottie-player",
+          "title": "Lottie player (JSON + dotLottie)",
+          "description": "10.6: plays Lottie JSON and dotLottie (.lottie) files with Motionary’s own Canvas 2D renderer — shapes, gradients, trim paths, masks, track mattes, precomps and images; autoplay, loop, bounce, segments / markers, play on hover or scrub with scroll. Requires motionary/runtime/vector — npm i motionary, then use(vector) before it mounts.",
+          "example": "<usa-lottie-player src=\"/anim/hero.lottie\" autoplay loop label=\"Hero animation\"></usa-lottie-player>"
+        },
+        {
+          "id": "lottie-text",
+          "title": "Lottie text + expressions",
+          "description": "10.8: the Lottie player now draws text layers (fonts by family and style, justification, tracking, line height, fill and stroke, wrapping box text, source-text keyframes) and runs an expression subset — time, value, wiggle, loopOut / loopIn, linear / ease, Math — with its own interpreter (no eval, CSP-safe). Requires motionary/runtime/vector — npm i motionary, then use(vector).",
+          "example": "<usa-lottie-player src=\"/anim/title.json\" autoplay loop label=\"Animated title\"></usa-lottie-player>"
+        }
+      ]
     },
     {
       "id": "lyrics",
@@ -7876,6 +8056,67 @@
         ]
       },
       "source": "src/components/widgets/smooth-scroll.ts"
+    },
+    {
+      "id": "snap-carousel",
+      "tag": "usa-snap-carousel",
+      "title": "Snap carousel (drag · inertia · snap)",
+      "description": "10.8: drag or swipe with real inertia — a throw keeps gliding, then springs to the nearest slide (a quick flick always moves one); rubber-band edges, arrows, dots, ←/→ / Home / End, optional autoplay that pauses on hover, focus and off screen. Slides keep their own width so the next one peeks in. Requires motionary/runtime/drag-snap — npm i motionary, then use(dragSnap) before it mounts. Its own entry point: motionary/components/snap-carousel (not in the widgets / lite bundles).",
+      "category": "ui",
+      "since": "10.8",
+      "keywords": [
+        "carousel",
+        "slider",
+        "drag",
+        "inertia",
+        "snap",
+        "swipe",
+        "runtime"
+      ],
+      "import": {
+        "path": "motionary/components/snap-carousel",
+        "define": "defineSnapCarousel",
+        "register": "defineSnapCarousel();"
+      },
+      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "attributes": [
+        "align",
+        "gap",
+        "autoplay",
+        "no-controls",
+        "no-dots",
+        "label"
+      ],
+      "events": [
+        "usa:change",
+        "usa:runtime-missing"
+      ],
+      "slots": [],
+      "methods": [
+        "next",
+        "prev",
+        "goTo"
+      ],
+      "example": "<usa-snap-carousel align=\"center\" gap=\"16\" label=\"Featured\">\n  <article>…</article>\n  <article>…</article>\n  <article>…</article>\n</usa-snap-carousel>",
+      "esm": "import { use } from 'motionary/runtime';\nimport { dragSnap } from 'motionary/runtime/drag-snap';\n\nuse(dragSnap);\nimport { defineSnapCarousel } from 'motionary/components/snap-carousel';\n\ndefineSnapCarousel(); // registers <usa-snap-carousel>\n\n/* then use it in your HTML:\n<usa-snap-carousel align=\"center\" gap=\"16\" label=\"Featured\">\n  <article>…</article>\n  <article>…</article>\n  <article>…</article>\n</usa-snap-carousel>\n*/",
+      "requires": [
+        "drag-snap"
+      ],
+      "prerequisites": {
+        "badge": "Requires: motionary/runtime/drag-snap",
+        "modules": [
+          "motionary/runtime/drag-snap"
+        ],
+        "install": "npm i motionary",
+        "importAndRegister": "import { use } from 'motionary/runtime';\nimport { dragSnap } from 'motionary/runtime/drag-snap';\nimport { defineSnapCarousel } from 'motionary/components/snap-carousel';\n\nuse(dragSnap);\ndefineSnapCarousel(); // registers <usa-snap-carousel> — after the prerequisites",
+        "order": "Register the core first, then the module: use(dragSnap) also registers the core. CDN: load runtime.iife.js, then runtime/drag-snap.iife.js (it registers itself).",
+        "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/drag-snap.iife.js\"></script>\n<!-- then the component bundles -->\n<script src=\"https://unpkg.com/motionary@10/dist/components.umd.js\"></script>\n<script src=\"https://unpkg.com/motionary@10/dist/widgets.umd.js\"></script>",
+        "example": "<usa-snap-carousel align=\"center\" gap=\"16\" label=\"Featured\">\n  <article>…</article>\n  <article>…</article>\n  <article>…</article>\n</usa-snap-carousel>",
+        "docs": [
+          "https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/drag-snap.md"
+        ]
+      },
+      "source": "src/components/widgets/snap-carousel.ts"
     },
     {
       "id": "sparkline",

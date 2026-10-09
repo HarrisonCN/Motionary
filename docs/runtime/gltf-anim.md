@@ -59,4 +59,4 @@ anim.play(); // or anim.update(dt) in your own loop
 
 ## Components that need it
 
-_None yet._
+- `<usa-gl-scene>` — 3D scene (glTF / OBJ)
