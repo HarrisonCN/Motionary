@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `<usa-red-envelope>` — Lunar New Year red envelope (红包): tap / Enter / Space → the flap swings open, the card slides out with `amount` counting up (`currency`, default ¥) and gold coins pop out; `message` (恭喜发财), `from`, `opened`; `open()`, `close()`, `opened`; `usa:open` { amount }.
   - `<usa-festival-banner theme="lunar | xmas | halloween | fireworks">` — announcement banner with an ambient festive scene behind its text (lanterns + sparkles, lights + snow, bats + moon, rockets), animating only while on screen; `dismissible` → close button (`usa:dismiss`), `label`; `FESTIVAL_THEMES`.
 - **Festival packs — `motionary/fx/festival`** (= `motionary/components/fx-festival`, `registerFestivalPack()`, also in `registerEffectPacks()`): `firework-burst` (attention), `lantern-rise` (enter), `xmas-snow` (loop), `spooky-float` (attention). `sparkVectors()`.
-- Showcase: 4 new gallery cards with copyable code, live demos and live Store thumbnails; Animation Store 334 → 338 items.
+- Showcase: 4 new gallery cards with copyable code, live demos and live Store thumbnails; Animation Store 335 → 339 items.
 
 ### Fixed
 - Store live thumbnails (`showcase/thumb.js`): the CDN fallback still pointed at `motionary@7` after 8.0 → `motionary@8`.

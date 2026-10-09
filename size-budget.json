@@ -362,7 +362,7 @@
   {
     "name": "import 'motionary/components/fx2' (every 6.x effect pack)",
     "import": "export * from 'pkg/components/fx2';",
-    "limit": 39168
+    "limit": 42496
   },
   {
     "name": "import 'motionary/components/fx-text'",
@@ -468,5 +468,15 @@
     "name": "import 'motionary/components/engine'",
     "import": "export * from 'pkg/components/engine';",
     "limit": 3328
+  },
+  {
+    "name": "import 'motionary/components/fx-festival'",
+    "import": "export * from 'pkg/components/fx-festival';",
+    "limit": 2560
+  },
+  {
+    "name": "import { registerFestivalPack } from '…/components/fx-festival'",
+    "import": "export { registerFestivalPack } from 'pkg/components/fx-festival';",
+    "limit": 2560
   }
 ]
