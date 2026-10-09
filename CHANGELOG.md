@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **SSR hydration animations** — `ssrHead(nonce?)` (`<style>` + one-line `<script>` for the server-rendered head), `HYDRATION_CSS`, `hydrateMotion(root, { stagger, duration, preset, easing })` animates `[data-usa-hydrate="fade | fade-up | fade-down | scale | blur | slide-left"]` (per-element `data-usa-delay`) and emits `usa:hydrated`; `HYDRATE_PRESETS`. No-JS: content visible; JS that never runs: 3 s CSS fallback.
 - **2 new components (8.0)** in `motionary/components/widgets`: `<usa-clock-control>` (pause / speed bar for the motion clock, `speeds`, `usa:change`) and `<usa-hydrate effect stagger duration>` (SSR hydration wrapper for its children, `replay()`, `timeline`, `usa:hydrated`).
 - Chinese roadmap v8.1 → v9.0 in [docs/ROADMAP.md](./docs/ROADMAP.md).
-- Showcase: 2 new gallery cards with copyable code, live demos and live Store thumbnails; the legacy Rating card is gone (Animation Store 333 → 334 items).
+- Showcase: 2 new gallery cards with copyable code, live demos and live Store thumbnails; the legacy Rating gallery card is gone (Animation Store 333 → 335 items).
 - npm: `motionary` and the `use-scroll-animate` alias are published with the `latest` tag.
 
 ### Accessibility

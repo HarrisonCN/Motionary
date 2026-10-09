@@ -1,6 +1,6 @@
-import { o as onFrame, t as setStyleLoader, f as animationBudget, h as getMotionIntensity, g as configureComponents, j as setAnimationBudget, b as activeAnimations } from '../chunks/base-2-yYc93C.js';
-export { s as schedulerStats } from '../chunks/base-2-yYc93C.js';
-import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-C04JP8g4.js';
+import { o as onFrame, t as setStyleLoader, f as animationBudget, h as getMotionIntensity, g as configureComponents, j as setAnimationBudget, b as activeAnimations } from '../chunks/base-CLuqlLfG.js';
+export { s as schedulerStats } from '../chunks/base-CLuqlLfG.js';
+import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-B-JBecYg.js';
 
 /**
  * motionary/components/perf — performance toolkit (4.5).

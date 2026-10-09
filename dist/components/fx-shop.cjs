@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-DehBVRDV.cjs');
-require('../chunks/base-BaQV-2ha.cjs');
+var registry = require('../chunks/registry-BVklOepd.cjs');
+require('../chunks/base-DoRUZBy-.cjs');
 
 /** Quadratic-bezier arc points from a to b, lifted by `lift` px (7.3). */
 function arcPath(ax, ay, bx, by, lift = 120, steps = 8) {

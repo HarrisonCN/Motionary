@@ -1202,6 +1202,77 @@ interface UsaShortcutElement extends UsaElement {
 declare function defineShortcut(tag?: string): CustomElementConstructor | undefined;
 
 /**
+ * `<usa-clock-control>` (8.0) — a small control bar for the unified motion
+ * clock: play / pause every Motionary animation on the page and switch the
+ * speed (`speeds="0.25,0.5,1,2"`). It reflects changes made elsewhere
+ * (`motionClock.rate = …`). Handy for demos, debugging and as a user-facing
+ * "pause animations" control. A labelled `group` with a toggle button
+ * (`aria-pressed`) and a radio group of speeds; `usa:change` { rate, paused }.
+ */
+interface UsaClockControlElement extends UsaElement {
+    readonly rate: number;
+    readonly paused: boolean;
+}
+declare function defineClockControl(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `motionary/engine` (= `motionary/components/engine`, 8.0) — the unified
+ * timeline engine and SSR hydration animations.
+ *
+ * - **`motionClock`** — the one clock every component, effect and frame loop
+ *   runs on: `rate` (slow-mo / fast-forward), `pause()` / `resume()` /
+ *   `toggle()`, `time`, `onChange()`. Pausing it freezes every animation
+ *   started by Motionary on the page.
+ * - **`createTimeline()`** — sequence animations on that clock:
+ *   `add(target, keyframes, options, position)` with positions `1200`
+ *   (ms), `'+=200'` / `'-=100'` (after / overlapping the previous end) or
+ *   `'<'` / `'<+=80'` (with the previous start); `play()`, `pause()`,
+ *   `seek(ms)`, `progress` (0–1, settable), `duration`, `finished`.
+ * - **`hydrateMotion()`** — animate server-rendered `[data-usa-hydrate]`
+ *   markup in on hydration without a flash: `ssrHead()` gives the `<style>`
+ *   + one-line `<script>` for the document head (content stays visible
+ *   without JS, and a CSS fallback reveals it after 3 s if JS never runs).
+ */
+
+type TimelinePosition = number | string;
+interface TimelineEntry {
+    target: Element;
+    keyframes: Keyframe[];
+    options: KeyframeAnimationOptions;
+    start: number;
+    end: number;
+}
+interface MotionTimeline {
+    readonly entries: readonly TimelineEntry[];
+    readonly duration: number;
+    readonly playing: boolean;
+    progress: number;
+    readonly finished: Promise<void>;
+    add(target: Element | Element[] | NodeListOf<Element> | null, keyframes: Keyframe[], options?: number | KeyframeAnimationOptions, position?: TimelinePosition): MotionTimeline;
+    play(): MotionTimeline;
+    pause(): MotionTimeline;
+    seek(ms: number): MotionTimeline;
+    restart(): MotionTimeline;
+    cancel(): void;
+}
+
+/**
+ * `<usa-hydrate effect="fade-up" stagger="60">` (8.0) — SSR hydration
+ * animation for its children: server-rendered content stays hidden only
+ * while JS is on and the element has not upgraded yet (with `ssrHead()` in
+ * the document head; a 3 s CSS fallback reveals it anyway), then the
+ * children animate in one after another on the unified clock and the
+ * element gets `data-usa-hydrated` (`usa:hydrated`). `effect`: fade ·
+ * fade-up · fade-down · scale · blur · slide-left; `duration`; `replay()`;
+ * `timeline`. Reduced motion: shown at once.
+ */
+interface UsaHydrateElement extends UsaElement {
+    readonly timeline: MotionTimeline | null;
+    replay(): void;
+}
+declare function defineHydrate(tag?: string): CustomElementConstructor | undefined;
+
+/**
  * motionary/components/widgets — the 6.x animated UI widgets, in their own
  * entry so `motionary/components` and `components/lite` keep their size
  * budgets. Every widget is reduced-motion safe and keyboard accessible.
@@ -1284,8 +1355,10 @@ declare global {
         'usa-voice-button': UsaVoiceButtonElement;
         'usa-command-palette': UsaCommandPaletteElement;
         'usa-shortcut': UsaShortcutElement;
+        'usa-clock-control': UsaClockControlElement;
+        'usa-hydrate': UsaHydrateElement;
     }
 }
 
-export { CAROUSEL_EFFECTS, EQ_PRESETS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PRESENCE_STATES, PROGRESS_VARIANTS, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SPARK_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, badgeProgress, cartTotal, defineAddToCart, defineBadgeWall, defineBarChart, defineCarousel, defineCartDrawer, defineChatComposer, defineColorPicker, defineCommandPalette, defineCompare, defineCountdown, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineField, defineFileDrop, defineGauge, defineGlobe, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLocationCard, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMessageList, defineMilestones, defineModal, defineMusicPlayer, defineNavMorph, defineNotificationBell, defineOdometer, defineOtp, definePagination, definePresence, definePrizeWheel, defineProductGallery, defineProgressRing, definePullCord, defineReactions, defineSegmented, defineSheet, defineShortcut, defineSkeletonReveal, defineSparkline, defineStarRating, defineStepper, defineStories, defineSuggestionChips, defineSwipeDeck, defineSwitch, defineTabBar, defineTip, defineToastStack, defineUploadProgress, defineVoiceButton, defineVolumeKnob, defineWeatherCard, defineWidgets, defineXpBar, formatBytes, formatDistance, fuzzyMatch, haversine, hexToHsv, hsvToHex, initials, keyLabels, levelFor, matchesKeys, monthGrid, pageWindow, parseChips, parseISODate, parseLRC, parseMarkers, parseReactions, passwordStrength, project, rankRows, sanitizeCode, sparkPoints, splitTime, stackToast, waveBars, wheelAngle, wrapIndex };
-export type { BellNotice, CartItem, ChatMessage, GlobeMarker, LeaderRow, PaletteCommand, PresenceState, StackToastOptions, UsaAddToCartElement, UsaBadgeWallElement, UsaBarChartElement, UsaCarouselElement, UsaCartDrawerElement, UsaChatComposerElement, UsaColorPickerElement, UsaCommandPaletteElement, UsaCompareElement, UsaCountdownElement, UsaCubeGalleryElement, UsaDatePickerElement, UsaDisclosureElement, UsaDockElement, UsaEqualizerElement, UsaFieldElement, UsaFileDropElement, UsaGaugeElement, UsaGlobeElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaKpiElement, UsaLeaderboardElement, UsaLocationCardElement, UsaLyricsElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMessageListElement, UsaMilestonesElement, UsaModalElement, UsaMusicPlayerElement, UsaNavMorphElement, UsaNotificationBellElement, UsaOdometerElement, UsaOtpElement, UsaPaginationElement, UsaPresenceElement, UsaPrizeWheelElement, UsaProductGalleryElement, UsaProgressRingElement, UsaPullCordElement, UsaReactionsElement, UsaSegmentedElement, UsaSheetElement, UsaShortcutElement, UsaSkeletonRevealElement, UsaSparklineElement, UsaStarRatingElement, UsaStepperElement, UsaStoriesElement, UsaSuggestionChipsElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTipElement, UsaToastStackElement, UsaUploadProgressElement, UsaVoiceButtonElement, UsaVolumeKnobElement, UsaWeatherCardElement, UsaXpBarElement, WallBadge };
+export { CAROUSEL_EFFECTS, EQ_PRESETS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PRESENCE_STATES, PROGRESS_VARIANTS, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SPARK_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, badgeProgress, cartTotal, defineAddToCart, defineBadgeWall, defineBarChart, defineCarousel, defineCartDrawer, defineChatComposer, defineClockControl, defineColorPicker, defineCommandPalette, defineCompare, defineCountdown, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineField, defineFileDrop, defineGauge, defineGlobe, defineHydrate, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLocationCard, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMessageList, defineMilestones, defineModal, defineMusicPlayer, defineNavMorph, defineNotificationBell, defineOdometer, defineOtp, definePagination, definePresence, definePrizeWheel, defineProductGallery, defineProgressRing, definePullCord, defineReactions, defineSegmented, defineSheet, defineShortcut, defineSkeletonReveal, defineSparkline, defineStarRating, defineStepper, defineStories, defineSuggestionChips, defineSwipeDeck, defineSwitch, defineTabBar, defineTip, defineToastStack, defineUploadProgress, defineVoiceButton, defineVolumeKnob, defineWeatherCard, defineWidgets, defineXpBar, formatBytes, formatDistance, fuzzyMatch, haversine, hexToHsv, hsvToHex, initials, keyLabels, levelFor, matchesKeys, monthGrid, pageWindow, parseChips, parseISODate, parseLRC, parseMarkers, parseReactions, passwordStrength, project, rankRows, sanitizeCode, sparkPoints, splitTime, stackToast, waveBars, wheelAngle, wrapIndex };
+export type { BellNotice, CartItem, ChatMessage, GlobeMarker, LeaderRow, PaletteCommand, PresenceState, StackToastOptions, UsaAddToCartElement, UsaBadgeWallElement, UsaBarChartElement, UsaCarouselElement, UsaCartDrawerElement, UsaChatComposerElement, UsaClockControlElement, UsaColorPickerElement, UsaCommandPaletteElement, UsaCompareElement, UsaCountdownElement, UsaCubeGalleryElement, UsaDatePickerElement, UsaDisclosureElement, UsaDockElement, UsaEqualizerElement, UsaFieldElement, UsaFileDropElement, UsaGaugeElement, UsaGlobeElement, UsaHydrateElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaKpiElement, UsaLeaderboardElement, UsaLocationCardElement, UsaLyricsElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMessageListElement, UsaMilestonesElement, UsaModalElement, UsaMusicPlayerElement, UsaNavMorphElement, UsaNotificationBellElement, UsaOdometerElement, UsaOtpElement, UsaPaginationElement, UsaPresenceElement, UsaPrizeWheelElement, UsaProductGalleryElement, UsaProgressRingElement, UsaPullCordElement, UsaReactionsElement, UsaSegmentedElement, UsaSheetElement, UsaShortcutElement, UsaSkeletonRevealElement, UsaSparklineElement, UsaStarRatingElement, UsaStepperElement, UsaStoriesElement, UsaSuggestionChipsElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTipElement, UsaToastStackElement, UsaUploadProgressElement, UsaVoiceButtonElement, UsaVolumeKnobElement, UsaWeatherCardElement, UsaXpBarElement, WallBadge };

@@ -1,5 +1,5 @@
-import { registerEffects } from '../chunks/registry-CyKExAmE.js';
-import '../chunks/base-2-yYc93C.js';
+import { registerEffects } from '../chunks/registry-CnO7ZVPK.js';
+import '../chunks/base-CLuqlLfG.js';
 
 /** Quadratic-bezier arc points from a to b, lifted by `lift` px (7.3). */
 function arcPath(ax, ay, bx, by, lift = 120, steps = 8) {

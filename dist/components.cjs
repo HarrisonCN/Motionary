@@ -19,19 +19,19 @@ var components_depth = require('./components/depth.cjs');
 var components_layout = require('./components/layout.cjs');
 var components_packs = require('./components/packs.cjs');
 var components_fx = require('./components/fx.cjs');
-var variants = require('./chunks/variants-BhjyddG8.cjs');
-var base = require('./chunks/base-BaQV-2ha.cjs');
+var variants = require('./chunks/variants-DagykrKH.cjs');
+var base = require('./chunks/base-DoRUZBy-.cjs');
 var components_tokens = require('./components/tokens.cjs');
 var components_a11y = require('./components/a11y.cjs');
 var components_perf = require('./components/perf.cjs');
 var components_bridge = require('./components/bridge.cjs');
-var indexTags = require('./chunks/index-tags-BTMwrfgV.cjs');
-var builtins = require('./chunks/builtins-xalxV2d5.cjs');
-var registry = require('./chunks/registry-DehBVRDV.cjs');
-var spring = require('./chunks/spring-Dgx187Vh.cjs');
-var core = require('./chunks/core-BGAyaY6L.cjs');
-var core$1 = require('./chunks/core-zq17EeCI.cjs');
-var fx = require('./chunks/fx-lBGVtQO1.cjs');
+var indexTags = require('./chunks/index-tags-hLIF2Clq.cjs');
+var builtins = require('./chunks/builtins-ClXshqj-.cjs');
+var registry = require('./chunks/registry-BVklOepd.cjs');
+var spring = require('./chunks/spring-uQMVJTj9.cjs');
+var core = require('./chunks/core-CwO835Wm.cjs');
+var core$1 = require('./chunks/core-O4grKHSa.cjs');
+var fx = require('./chunks/fx-C-XjLOTc.cjs');
 
 /**
  * motionary/components
@@ -175,7 +175,6 @@ exports.defineFab = components_ui.defineFab;
 exports.defineNavbar = components_ui.defineNavbar;
 exports.definePopover = components_ui.definePopover;
 exports.definePullRefresh = components_ui.definePullRefresh;
-exports.defineRating = components_ui.defineRating;
 exports.defineSlider = components_ui.defineSlider;
 exports.defineTabs = components_ui.defineTabs;
 exports.defineUiComponents = components_ui.defineUiComponents;

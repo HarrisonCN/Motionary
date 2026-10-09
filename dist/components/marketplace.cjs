@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-DehBVRDV.cjs');
-require('../chunks/base-BaQV-2ha.cjs');
+var registry = require('../chunks/registry-BVklOepd.cjs');
+require('../chunks/base-DoRUZBy-.cjs');
 
 const EFFECT_PACK_FORMAT = 'motionary/effect-pack';
 const SEMVER = /^\d+\.\d+\.\d+(?:-[\w.]+)?$/;

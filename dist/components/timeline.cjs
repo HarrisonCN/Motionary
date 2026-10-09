@@ -1,7 +1,7 @@
 'use strict';
 
-var base = require('../chunks/base-BaQV-2ha.cjs');
-var core = require('../chunks/core-BGAyaY6L.cjs');
+var base = require('../chunks/base-DoRUZBy-.cjs');
+var core = require('../chunks/core-CwO835Wm.cjs');
 require('./tokens.cjs');
 
 var css = "usa-timeline{display:block}usa-timeline[scrub]{position:relative}@media (prefers-reduced-motion:reduce){usa-timeline [data-tl]{opacity:1 !important;transform:none !important;filter:none !important;clip-path:none !important}}";

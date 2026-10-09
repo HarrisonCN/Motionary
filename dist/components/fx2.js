@@ -1,6 +1,6 @@
 export { EFFECT_PACK_FORMAT, loadEffectPack, packManifest, validateManifest } from './marketplace.js';
-import { G as GPU_FX, r as registerGpuPack } from '../chunks/gpu-DLPghVWr.js';
-export { a as GLSL_HEAD, W as WGSL_HEAD, f as fieldFallback, g as glslToWgsl, s as shaderBackground, b as supportsWebGL2, c as supportsWebGPU, w as webgpuBackground, d as wgslModule } from '../chunks/gpu-DLPghVWr.js';
+import { G as GPU_FX, r as registerGpuPack } from '../chunks/gpu-CB8frFOD.js';
+export { a as GLSL_HEAD, W as WGSL_HEAD, f as fieldFallback, g as glslToWgsl, s as shaderBackground, b as supportsWebGL2, c as supportsWebGPU, w as webgpuBackground, d as wgslModule } from '../chunks/gpu-CB8frFOD.js';
 import { TEXT3_FX, registerTextPack } from './fx-text.js';
 export { splitChars } from './fx-text.js';
 import { LIGHT_FX, registerLightPack } from './fx-light.js';
@@ -31,11 +31,11 @@ import { FORM_FX, registerFormPack } from './fx-form.js';
 export { shakeFrames } from './fx-form.js';
 import { AI_FX, registerAiPack } from './fx-ai.js';
 export { splitWords } from './fx-ai.js';
-import '../chunks/registry-CyKExAmE.js';
-import '../chunks/base-2-yYc93C.js';
+import '../chunks/registry-CnO7ZVPK.js';
+import '../chunks/base-CLuqlLfG.js';
 import '../chunks/generative-2LhxG5BJ.js';
 import '../chunks/shared-CkKHWrtJ.js';
-import '../chunks/audio-DcPvT2Kh.js';
+import '../chunks/audio-CynhhWDi.js';
 
 /** The 6.x effect packs by name. */
 const EFFECT_PACKS = {

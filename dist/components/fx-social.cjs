@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-DehBVRDV.cjs');
-require('../chunks/base-BaQV-2ha.cjs');
+var registry = require('../chunks/registry-BVklOepd.cjs');
+require('../chunks/base-DoRUZBy-.cjs');
 
 /** Fan-out angles (deg) for `n` floating emoji, centred on straight up (7.4). */
 function fanAngles(n, spread = 60) {

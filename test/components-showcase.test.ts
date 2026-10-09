@@ -61,7 +61,7 @@ describe('component gallery catalog', () => {
   });
 
   it('generates every code tab and imports only documented entry points', () => {
-    const allowed = new Set(['motionary/components', ...Object.keys(COMPONENT_ENTRIES).filter((e) => !/react|vue|svelte|solid|angular|jsx/.test(e)).map((e) => `motionary/components/${e}`), ...Object.keys(SRC_CATEGORIES).map((c) => `motionary/components/${c}`)]);
+    const allowed = new Set(['motionary/components', 'motionary/engine', ...Object.keys(COMPONENT_ENTRIES).filter((e) => !/react|vue|svelte|solid|angular|jsx/.test(e)).map((e) => `motionary/components/${e}`), ...Object.keys(SRC_CATEGORIES).map((c) => `motionary/components/${c}`)]);
     GALLERY.forEach((item: any) => {
       const out = componentSnippets(item);
       CODE_TABS.forEach((t: any) => expect(out[t.id], `${item.id}/${t.id}`).toMatch(/\S/));
