@@ -184,6 +184,9 @@ Motionary ships its own zero-dependency animation runtime — shared ticker, twe
 | [GIF decoder](docs/runtime/format-gif.md) | `motionary/runtime/format-gif` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-gif.iife.js` | `use(formatGif);` | 3.0 KB |
 | [APNG loader](docs/runtime/format-apng.md) | `motionary/runtime/format-apng` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-apng.iife.js` | `use(formatApng);` | 3.0 KB |
 | [Animated WebP loader](docs/runtime/format-webp.md) | `motionary/runtime/format-webp` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-webp.iife.js` | `use(formatWebp);` | 3.0 KB |
+| [WebGL2 scene renderer](docs/runtime/gl.md) | `motionary/runtime/gl` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gl.iife.js` | `use(gl);` | 9.0 KB |
+| [glTF 2.0 / GLB loader](docs/runtime/format-gltf.md) | `motionary/runtime/format-gltf` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-gltf.iife.js` | `use(formatGltf);` | 6.0 KB |
+| [OBJ / MTL loader](docs/runtime/format-obj.md) | `motionary/runtime/format-obj` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-obj.iife.js` | `use(formatObj);` | 3.0 KB |
 
 Install once: `npm i motionary`. Plain HTML: load `runtime.iife.js` first, then the module files (each registers itself).
 
@@ -308,6 +311,40 @@ defineSmoothScroll(); // registers <usa-smooth-scroll> — after the prerequisit
 
 ```html
 <usa-smooth-scroll lerp="0.1" offset="64"></usa-smooth-scroll>
+```
+
+#### `<usa-gl-scene>` — Requires: motionary/runtime/gl + motionary/runtime/format-gltf + motionary/runtime/format-obj
+
+- **Install:** `npm i motionary`
+- **Import order & registration:** Register the core first, then the module: use(gl) also registers the core. CDN: load runtime.iife.js, then runtime/gl.iife.js (it registers itself). Register the core first, then the module: use(formatGltf) also registers the core. CDN: load runtime.iife.js, then runtime/format-gltf.iife.js (it registers itself). Register the core first, then the module: use(formatObj) also registers the core. CDN: load runtime.iife.js, then runtime/format-obj.iife.js (it registers itself).
+
+```js
+import { use } from 'motionary/runtime';
+import { gl } from 'motionary/runtime/gl';
+import { formatGltf } from 'motionary/runtime/format-gltf';
+import { formatObj } from 'motionary/runtime/format-obj';
+import { defineGlScene } from 'motionary/components/widgets';
+
+use(gl, formatGltf, formatObj);
+defineGlScene(); // registers <usa-gl-scene> — after the prerequisites
+```
+
+- **CDN:**
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gl.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-gltf.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-obj.iife.js"></script>
+<!-- then the component bundles -->
+<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>
+```
+
+- **Minimal example:**
+
+```html
+<usa-gl-scene src="/models/chair.glb" controls auto-rotate="20" label="Chair"></usa-gl-scene>
 ```
 
 <!-- runtime:end -->

@@ -115,6 +115,9 @@ import { defineTextSplitter, type UsaTextSplitterElement } from './text-splitter
 import { defineScrollRing, type UsaScrollRingElement } from './scroll-ring';
 import { defineParallaxLayers, type UsaParallaxLayersElement } from './parallax-layers';
 import { defineSmoothScroll, type UsaSmoothScrollElement } from './smooth-scroll';
+import { defineGlScene, defineThreeScene, type UsaGlSceneElement } from './gl-scene';
+import { defineGpuParticles, PARTICLE_SIM_WGSL, PARTICLE_DRAW_WGSL, type UsaGpuParticlesElement } from './gpu-particles';
+import { defineShaderBackdrop, BACKDROP_PRESETS, POST_PASSES, type UsaShaderBackdropElement } from './shader-backdrop';
 
 export { defineCarousel, defineTabBar, defineDisclosure, defineStories, CAROUSEL_EFFECTS, TAB_INDICATORS };
 export type { UsaCarouselElement, UsaTabBarElement, UsaDisclosureElement, UsaStoriesElement };
@@ -235,6 +238,9 @@ export type { UsaRouteTransitionElement, UsaTextSplitterElement };
 export { defineScrollRing, defineParallaxLayers, defineSmoothScroll };
 export type { UsaScrollRingElement, UsaParallaxLayersElement, UsaSmoothScrollElement };
 
+export { defineGlScene, defineThreeScene, defineGpuParticles, PARTICLE_SIM_WGSL, PARTICLE_DRAW_WGSL, defineShaderBackdrop, BACKDROP_PRESETS, POST_PASSES };
+export type { UsaGlSceneElement, UsaGpuParticlesElement, UsaShaderBackdropElement };
+
 /** The widgets by release (tag → define function). */
 export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElementConstructor | undefined>> = {
   '6.2': { 'usa-carousel': defineCarousel, 'usa-tab-bar': defineTabBar, 'usa-disclosure': defineDisclosure, 'usa-stories': defineStories },
@@ -277,6 +283,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '10.2': { 'usa-scroll-scene': defineScrollScene, 'usa-motion-inspector': defineMotionInspector },
   '10.3': { 'usa-route-transition': defineRouteTransition, 'usa-text-splitter': defineTextSplitter },
   '10.4': { 'usa-scroll-ring': defineScrollRing, 'usa-parallax-layers': defineParallaxLayers, 'usa-smooth-scroll': defineSmoothScroll },
+  '10.5': { 'usa-gl-scene': defineGlScene, 'usa-three-scene': defineThreeScene, 'usa-gpu-particles': defineGpuParticles, 'usa-shader-backdrop': defineShaderBackdrop },
 };
 
 /** Every widget tag, in release order. */
@@ -396,5 +403,9 @@ declare global {
     'usa-scroll-ring': UsaScrollRingElement;
     'usa-parallax-layers': UsaParallaxLayersElement;
     'usa-smooth-scroll': UsaSmoothScrollElement;
+    'usa-gl-scene': UsaGlSceneElement;
+    'usa-three-scene': UsaGlSceneElement;
+    'usa-gpu-particles': UsaGpuParticlesElement;
+    'usa-shader-backdrop': UsaShaderBackdropElement;
   }
 }

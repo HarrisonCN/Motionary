@@ -593,5 +593,35 @@
     "name": "dist/runtime/format-webp.iife.js (CDN module, fixed 3.5 KB)",
     "file": "dist/runtime/format-webp.iife.js",
     "limit": 3584
+  },
+  {
+    "name": "import 'motionary/runtime/gl' (fixed 10.0 KB incl. the core parts it uses)",
+    "import": "export * from 'pkg/runtime/gl';",
+    "limit": 10240
+  },
+  {
+    "name": "dist/runtime/gl.iife.js (CDN module, fixed 9.0 KB)",
+    "file": "dist/runtime/gl.iife.js",
+    "limit": 9216
+  },
+  {
+    "name": "import 'motionary/runtime/format-gltf' (fixed 7.0 KB incl. the core parts it uses)",
+    "import": "export * from 'pkg/runtime/format-gltf';",
+    "limit": 7168
+  },
+  {
+    "name": "dist/runtime/format-gltf.iife.js (CDN module, fixed 6.0 KB)",
+    "file": "dist/runtime/format-gltf.iife.js",
+    "limit": 6144
+  },
+  {
+    "name": "import 'motionary/runtime/format-obj' (fixed 5.0 KB incl. the core parts it uses)",
+    "import": "export * from 'pkg/runtime/format-obj';",
+    "limit": 5120
+  },
+  {
+    "name": "dist/runtime/format-obj.iife.js (CDN module, fixed 4.0 KB)",
+    "file": "dist/runtime/format-obj.iife.js",
+    "limit": 4096
   }
 ]

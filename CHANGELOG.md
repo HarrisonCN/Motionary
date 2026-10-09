@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [10.5.0] - 2026-10-09
+
+### Added
+- **`motionary/runtime/gl`** — a small WebGL2 scene renderer written for Motionary (own API and shaders, not a Three.js clone): scene graph (`GlNode` with position / quaternion / scale or a fixed matrix, hierarchy, `traverse`, `find`), `Camera` + `frameNode()` / `bounds()`, ambient + up to 4 directional / point lights, geometry builders (`box`, `plane`, `sphere`, `torus`, `computeNormals`), materials (`standardMaterial` metallic-roughness approximation with sRGB handling and tone mapping, `unlitMaterial`, `shaderMaterial` with your GLSL ES 3.00 `shade()`), image / canvas / bitmap / raw RGBA textures and **video textures** (MP4 / WebM, updated per decoded frame via `requestVideoFrameCallback`; `scrubVideo()` for scroll-scrubbed video), `orbitControls()` (drag, wheel, pinch, arrow keys; auto-rotate off under reduced motion). Math, geometry and the scene graph are pure (SSR / workers). CDN `dist/runtime/gl.iife.js`; fixed gzip budget.
+- **`motionary/runtime/format-gltf`** — glTF 2.0 loader: `.gltf` (external or `data:` buffers / images) and `.glb`; scenes, node hierarchy (TRS / matrix), meshes with several primitives (all component types, normalised integers, interleaved strides; points / lines / triangles / strips / fans), PBR metallic-roughness materials (base colour factor + texture, emissive incl. `KHR_materials_emissive_strength`, `KHR_materials_unlit`, alpha blend, double-sided). Files that *require* unimplemented extensions (Draco, meshopt, KTX2) fail with a clear error. Skins, morph targets and animations follow in 10.8.
+- **`motionary/runtime/format-obj`** — Wavefront OBJ + MTL loader: any polygon (fan-triangulated), negative indices, `o` / `g` groups, one mesh per `usemtl`, `Kd` / `Ks` + `Ns` / `Ke` / `d` / `Tr` / `map_Kd`, flat normals when missing.
+- **WebGPU effects 2.0**: `<usa-gpu-particles>` — up to 200 000 particles integrated by a **WebGPU compute shader** (storage buffer, `@workgroup_size(64)`) and drawn as instanced soft quads (swirl · galaxy · fountain, pointer repulsion, trails), Canvas 2D fallback; `<usa-shader-backdrop>` — animated shader background (aurora · plasma · waves · nebula or your own GLSL) through a **post-processing chain** (`bloom`, `vignette`, `grain`, `chromatic`, `pixelate`, `scanlines`, any order, ping-pong framebuffers), CSS gradient fallback.
+- **New components (10.5)** in `motionary/components/widgets`: `<usa-gl-scene>` (alias `<usa-three-scene>`) — glTF / GLB / OBJ model or built-in shape, `controls`, `auto-rotate`, `color` / `metallic` / `roughness`, `background`, `exposure`, `video` texture with optional `video-scrub` (**Requires: motionary/runtime/gl**, + `format-gltf` / `format-obj` for models); `<usa-gpu-particles>`; `<usa-shader-backdrop>`.
+- Test fixtures: self-made GLB / glTF (interleaved, strips, normalised UVs, matrix node, two scenes), OBJ / MTL + texture, WebM / MP4 clips, and the Khronos sample "Box" (CC-BY 4.0, Cesium) — sources and licences in `test/fixtures/formats/CREDITS.md`.
+
+### Accessibility
+- `<usa-gl-scene>`'s canvas is a labelled `img` (`label`), keyboard-orbitable when `controls` is set (focusable; arrow keys, + / −); auto-rotate and the particle / shader animations stop under reduced motion (one still frame). Everything renders only while on screen.
+
 ## [10.4.0] - 2026-10-09
 
 ### Added
