@@ -86,6 +86,13 @@ describe('7.9 widgets behave', () => {
     p.setCommands([{ id: 'x', label: 'X <y>', keys: 'mod+x' }]);
     expect(p.querySelector('.usa-cp-label').textContent).toBe('X <y>');
     expect(p.querySelectorAll('kbd').length).toBe(2);
+    const inl = mount<any>('<usa-command-palette inline hotkey="none"><option value="a">Alpha</option></usa-command-palette>');
+    expect(inl.opened).toBe(true);
+    const r2 = vi.fn();
+    inl.addEventListener('usa:run', r2);
+    inl.querySelector('.usa-cp-q').dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
+    expect(r2.mock.calls[0][0].detail.id).toBe('a');
+    expect(inl.opened).toBe(true);
   });
   it('shortcut: keycaps, spoken label, hotkey press → usa:trigger + for', () => {
     configureComponents({ reducedMotion: 'reduce' });

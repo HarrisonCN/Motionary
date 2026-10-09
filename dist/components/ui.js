@@ -1,4 +1,4 @@
-import { u as defineElement, k as clamp, l as caf, r as raf } from '../chunks/base-2-yYc93C.js';
+import { u as defineElement, k as clamp, l as caf, r as raf, y as deprecate } from '../chunks/base-2-yYc93C.js';
 import { d as springEasing, c as createSpring, p as projectInertia, s as snapTo, a as rubberBand } from '../chunks/spring-BK8DiezC.js';
 import { a as adoptVariants } from '../chunks/variants-BQ6bhzn4.js';
 export { V as VARIANTS, s as setVariant } from '../chunks/variants-BQ6bhzn4.js';
@@ -742,6 +742,7 @@ function defineRating(tag = 'usa-rating') {
                 this.sync();
             }
             mount() {
+                deprecate('usa-rating', '<usa-rating> is deprecated and removed in 8.0 — use <usa-star-rating> (same value / max / readonly / label / name; icon="heart"). Run `npx usa-codemod-8 --write src`.');
                 const max = this.num('max', 5);
                 this.innerHTML = Array.from({ length: max }, (_, i) => `<span class="usa-rating-star" data-i="${i + 1}" aria-hidden="true">${this.str('icon', '★')}</span>`).join('');
                 this.setAttribute('role', 'slider');

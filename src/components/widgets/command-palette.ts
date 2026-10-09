@@ -8,7 +8,8 @@ import css from './command-palette.css?raw';
  * stagger in, a highlight glides to the active row (↑ / ↓, Enter runs it).
  * Commands come from child `<option value="id" data-group="Navigation"
  * data-keys="mod+n">Label</option>` elements or `setCommands([{ id, label,
- * group?, keys? }])`. `hotkey` (default `mod+k`; `none` to disable) opens it
+ * group?, keys? }])`. `inline` renders it open in the page (no dialog,
+ * e.g. for docs). `hotkey` (default `mod+k`; `none` to disable) opens it
  * from anywhere; `placeholder`, `label`. `show()`, `close()`, `toggle()`,
  * `opened`; `usa:run` { id, label }, `usa:open`, `usa:close`. A `combobox` +
  * `listbox`; reduced motion: no scale, stagger or glide.
@@ -90,7 +91,7 @@ export function defineCommandPalette(tag = 'usa-command-palette'): CustomElement
     (Base) => {
       class UsaCommandPalette extends Base {
         static get observedAttributes(): string[] {
-          return ['placeholder', 'label', 'hotkey'];
+          return ['placeholder', 'label', 'hotkey', 'inline'];
         }
         private _cmds: PaletteCommand[] | null = null;
         private _id = `usa-cp-${++uid}`;
@@ -149,6 +150,7 @@ export function defineCommandPalette(tag = 'usa-command-palette'): CustomElement
               }
             });
           this.render();
+          if (this.flag('inline')) dlg.setAttribute('open', '');
         }
         private render(typed = false): void {
           const list = this.querySelector('.usa-cp-list');
@@ -217,6 +219,7 @@ export function defineCommandPalette(tag = 'usa-command-palette'): CustomElement
         }
         show(): void {
           const dlg = this.dlg;
+          if (dlg && this.flag('inline')) return (this.querySelector('.usa-cp-q') as HTMLInputElement).focus();
           if (!dlg || this.opened) return;
           this._opener = document.activeElement;
           const q = this.querySelector('.usa-cp-q') as HTMLInputElement;
@@ -236,6 +239,10 @@ export function defineCommandPalette(tag = 'usa-command-palette'): CustomElement
         }
         close(): void {
           const dlg = this.dlg;
+          if (dlg && this.flag('inline')) {
+            (this.querySelector('.usa-cp-q') as HTMLInputElement).value = '';
+            return this.render();
+          }
           if (!dlg || !this.opened) return;
           const done = () => {
             if (typeof dlg.close === 'function' && dlg.open) dlg.close();
