@@ -352,7 +352,7 @@
   {
     "name": "import 'motionary/components/widgets'",
     "import": "export * from 'pkg/components/widgets';",
-    "limit": 115968
+    "limit": 124672
   },
   {
     "name": "import 'motionary/components/fx-gpu'",
@@ -407,7 +407,7 @@
   {
     "name": "import 'motionary/components/marketplace'",
     "import": "export * from 'pkg/components/marketplace';",
-    "limit": 2816
+    "limit": 3072
   },
   {
     "name": "import 'motionary/components/fx-music'",
