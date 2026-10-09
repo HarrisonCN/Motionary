@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [9.1.0] - 2026-10-09
+
+### Added
+- **2 new components (9.1)** in `motionary/components/widgets` (also in `dist/widgets.umd.js`):
+  - `<usa-chapter-nav>` — chapter navigation for long-form stories: one entry per `[data-chapter]` section in `for` (title from `data-chapter` or its first heading), per-chapter reading-progress bars, `aria-current="step"` on the current chapter, click to glide there; `orientation`, `label`; `current`, `goTo(i)`; `usa:chapter` { index, title }.
+  - `<usa-scene>` — scroll-scrubbed cinematic shot: its media (`img` / `video` / `[data-shot]`) follows a `camera` move (`dolly-in` · `dolly-out` · `pan-left` · `pan-right` · `tilt-up` · `tilt-down` · `zoom-in` · `zoom-out` · `orbit`, `strength`) as the scene crosses the viewport; `[data-caption][data-at]` captions fade in on cue; `autoplay` plays the move on its own (back and forth) instead of following the scroll; `progress`, `setProgress(p)`; `usa:shot`.
+- **Cinematic pack — `motionary/fx/cinema`** (= `motionary/components/fx-cinema`, `registerCinemaPack()`, also in `registerEffectPacks()`): `dolly-in` (enter), `pan-reveal` (enter), `letterbox` (enter), `rack-focus` (attention). `cameraFrame(move, p, strength)`, `CAMERA_MOVES`. Listed in the `motionary/marketplace` catalogue.
+- Showcase: 4 new gallery cards with copyable code, live demos and live Store thumbnails.
+
+### Accessibility
+- Chapter nav is a labelled `navigation` with an ordered list of real buttons; the current one has `aria-current="step"`; bars are `aria-hidden`. Scene captions are real text in reading order. Reduced motion: the scene is a still frame with captions shown, chapter jumps are instant, entrances fade, `rack-focus` does nothing.
+
 ## [9.0.0] - 2026-10-09
 
 ### ⚠ Breaking

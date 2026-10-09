@@ -1167,6 +1167,29 @@ await installPlugin(searchPlugins('retro')[0], { load: () => import('motionary/f
 - `<usa-motion rules>`: `parsed`, `errors`; `usa:motion-error` { message }.
 - `<usa-plugin-store query label>`: `plugins`, `loader`, `search(q)`, `install(name)`; `usa:install` { name, effects }, `usa:install-error`.
 
+### v9.1 Storytelling 2.0: chapter nav, cinematic scene (`components/widgets`) + cinema pack (`motionary/fx/cinema`)
+
+```html
+<usa-chapter-nav for="#story"></usa-chapter-nav>
+<article id="story">
+  <section data-chapter="Prologue">…</section>
+  <usa-scene camera="dolly-in" data-chapter="The harbor">
+    <img src="harbor.jpg" alt="Harbor at dawn"><p data-caption data-at="0.4">Dawn, 1912.</p>
+  </usa-scene>
+</article>
+
+<usa-fx effect="letterbox" trigger="enter"><img src="scene.jpg" alt=""></usa-fx>
+```
+```js
+import { defineWidgets } from 'motionary/components/widgets';
+import { registerCinemaPack, cameraFrame } from 'motionary/fx/cinema';
+defineWidgets(); registerCinemaPack();
+nav.addEventListener('usa:chapter', (e) => console.log(e.detail.title));
+```
+- `<usa-chapter-nav for orientation label>`: `current`, `goTo(i)`; `usa:chapter` { index, title }.
+- `<usa-scene camera strength>`: `progress`, `setProgress(p)`; `usa:shot` { progress }.
+- Cinema: `dolly-in` · `pan-reveal` (`from`) · `letterbox` (`hold`) · `rack-focus`; `cameraFrame(move, p, strength?)`, `CAMERA_MOVES`.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

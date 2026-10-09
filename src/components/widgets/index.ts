@@ -92,6 +92,8 @@ import { defineCodeExport, exportComponent, describeComponent, type UsaCodeExpor
 import { definePropPanel, parseProps, type UsaPropPanelElement, type PropSpec } from './prop-panel';
 import { defineMotion, type UsaMotionElement } from './motion';
 import { definePluginStore, type UsaPluginStoreElement } from './plugin-store';
+import { defineChapterNav, type UsaChapterNavElement } from './chapter-nav';
+import { defineScene, type UsaSceneElement } from './scene';
 
 export { defineCarousel, defineTabBar, defineDisclosure, defineStories, CAROUSEL_EFFECTS, TAB_INDICATORS };
 export type { UsaCarouselElement, UsaTabBarElement, UsaDisclosureElement, UsaStoriesElement };
@@ -176,6 +178,9 @@ export type { UsaCodeExportElement, ExportFormat, ExportedNode, UsaPropPanelElem
 export { defineMotion, definePluginStore };
 export type { UsaMotionElement, UsaPluginStoreElement };
 
+export { defineChapterNav, defineScene };
+export type { UsaChapterNavElement, UsaSceneElement };
+
 /** The widgets by release (tag → define function). */
 export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElementConstructor | undefined>> = {
   '6.2': { 'usa-carousel': defineCarousel, 'usa-tab-bar': defineTabBar, 'usa-disclosure': defineDisclosure, 'usa-stories': defineStories },
@@ -206,6 +211,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '8.8': { 'usa-panorama': definePanorama, 'usa-spatial-card': defineSpatialCard },
   '8.9': { 'usa-code-export': defineCodeExport, 'usa-prop-panel': definePropPanel },
   '9.0': { 'usa-motion': defineMotion, 'usa-plugin-store': definePluginStore },
+  '9.1': { 'usa-chapter-nav': defineChapterNav, 'usa-scene': defineScene },
 };
 
 /** Every widget tag, in release order. */
@@ -302,5 +308,7 @@ declare global {
     'usa-prop-panel': UsaPropPanelElement;
     'usa-motion': UsaMotionElement;
     'usa-plugin-store': UsaPluginStoreElement;
+    'usa-chapter-nav': UsaChapterNavElement;
+    'usa-scene': UsaSceneElement;
   }
 }
