@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [11.3.0] - 2026-10-09
+
+### Performance metrics in CI (Tooling)
+- New `npm run perf` (`scripts/perf-ci.mjs`): runs three fixture pages (`perf/`) in headless Chrome over the DevTools Protocol — no Puppeteer / Playwright dependency (Node ≥ 22) — and fails on any metric above its fixed budget in `perf/budgets.json`:
+  - **first screen** — four components through `motionary/components/lazy`: gzip bytes of every JS / CSS file downloaded (45.7 KB, 10 files; budget 56 KB), script parse / compile / execute time (`ScriptDuration`), time to defined + painted, console errors;
+  - **GPU resources** — `<usa-gl-scene>`: WebGL contexts, live textures / buffers / programs while running, and leaks after the element is removed (0 / 0);
+  - **frame stability** — 300 elements tweened for 2 s: dropped frames and p95 frame time relative to the browser's own idle interval, longest frame, JS time per frame in `requestAnimationFrame` callbacks (3.8 ms; budget 8 ms), long tasks.
+- CI (Node 22) runs it after the build and writes the table to the job summary. Budgets are never raised automatically.
+- New [docs/perf-ci.md](./docs/perf-ci.md) (linked from docs/performance.md); README note.
+
+### Checks
+- New `test/widgets-11-3.test.ts`: CI wiring, fixtures, fixed budgets, metric helpers (`percentile`, `frameStats`, `overBudget`).
+
 ## [11.2.0] - 2026-10-09
 
 ### Source maps (Tooling)

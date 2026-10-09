@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Motionary perf — first screen</title></head>
+<body>
+  <!-- 11.3 perf fixture: a typical first screen — four components from three categories, loaded on demand -->
+  <usa-reveal effect="fade-up"><h1>Hello</h1></usa-reveal>
+  <usa-typewriter text="Motion for the web"></usa-typewriter>
+  <usa-counter to="1200"></usa-counter>
+  <usa-button>Get started</usa-button>
+  <script type="module">
+    const t0 = performance.now();
+    const { lazyDefine } = await import('../dist/components/lazy.js');
+    lazyDefine();
+    const tags = [...new Set([...document.querySelectorAll('*')].map((e) => e.localName).filter((n) => n.startsWith('usa-')))];
+    await Promise.all(tags.map((t) => customElements.whenDefined(t)));
+    await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+    window.__perf = { readyMs: performance.now() - t0, tags };
+  </script>
+</body>
+</html>

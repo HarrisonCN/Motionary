@@ -1,6 +1,6 @@
 {
   "name": "motionary",
-  "version": "11.2.0",
+  "version": "11.3.0",
   "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 94 animated Web Components — 214 scroll-reveal presets, card/click/button morphs, physics, page transitions, generative & sound-reactive backgrounds, cursor/gesture effects, themes, micro-interactions, <usa-player>, WebGL. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -4120,7 +4120,8 @@
     "check:peer-docs": "node scripts/check-peer-docs.mjs",
     "docs:components": "node scripts/gen-component-docs.mjs",
     "check:treeshake": "node scripts/check-treeshake.mjs",
-    "check:pack": "node scripts/check-pack.mjs"
+    "check:pack": "node scripts/check-pack.mjs",
+    "perf": "node scripts/perf-ci.mjs"
   },
   "keywords": [
     "motionary",

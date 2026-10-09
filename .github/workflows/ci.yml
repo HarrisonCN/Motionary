@@ -48,3 +48,6 @@ jobs:
       - name: Bundle size budget
         if: matrix.node == 22
         run: npm run size:check | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Performance metrics in headless Chrome — first-screen transfer, script time, GPU resources, frame stability (perf/budgets.json)
+        if: matrix.node == 22
+        run: npm run perf | tee -a "$GITHUB_STEP_SUMMARY"

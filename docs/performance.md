@@ -1,5 +1,7 @@
 # Performance (4.5)
 
+> 11.3: what a page pays (first-screen transfer, script time, GPU resources, frame stability) is measured in CI against fixed budgets — see [perf-ci.md](./perf-ci.md).
+
 ## One frame loop
 Every `<usa-*>` loop (cursors, particles, springs, marquees, WebGL, scroll effects…) schedules work through **one shared `requestAnimationFrame`**: callbacks registered during a frame run together, in order, and a throwing callback no longer starves the rest. Use it for your own loops:
 
