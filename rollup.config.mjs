@@ -105,7 +105,13 @@ const cssEmpty = () => ({
 
 const ts = () => typescript({ tsconfig: './tsconfig.json', declaration: false, declarationDir: undefined });
 
-export default [
+// 10.5: the build runs in several processes so the sandbox / CI never needs one huge heap
+// (PART=code → JS bundles; PART=dts SLICE=i/n → the i-th of n slices of the declaration bundles; unset → everything).
+const PART = process.env.PART || 'all';
+const SLICE = (process.env.SLICE || '0/1').split('/').map(Number);
+const pick = (code, decls) => [...(PART === 'dts' ? [] : code), ...(PART === 'code' ? [] : decls.filter((_, i) => i % SLICE[1] === SLICE[0]))];
+
+export default pick([
   ...runtimeIife(),
   // ESM first ("type": "module": .js = ESM), plus CommonJS (.cjs) for require()
   {
@@ -174,8 +180,8 @@ export default [
       },
     ],
   },
-  // Bundled declarations: .d.ts next to the ESM .js, .d.cts next to the .cjs
-  ...Object.entries(entries).map(([name, input]) => ({
+], // Bundled declarations: .d.ts next to the ESM .js, .d.cts next to the .cjs
+  Object.entries(entries).map(([name, input]) => ({
     input,
     external,
     output: [
@@ -184,4 +190,4 @@ export default [
     ],
     plugins: [cssRaw(), dts()],
   })),
-];
+);
