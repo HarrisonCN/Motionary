@@ -1269,7 +1269,7 @@ export const components = [
     ['smooth scroll', 'inertia', 'lerp', 'anchors', 'runtime'],
     '<usa-smooth-scroll lerp="0.1" offset="64"></usa-smooth-scroll>',
     '<usa-smooth-scroll class="demo-smooth" wrapper preview lerp="0.08"><div class="demo-smooth-bar"></div><h4>Smooth scroll</h4><p>Scroll-driven animations run on the compositor where the browser supports them.</p><p>Where it does not, a small passive loop takes over — same look, same API.</p><p>Keyboard, scrollbar and screen-reader scrolling stay native.</p><p>Keep going…</p><p>Almost there.</p><p>Done — 100 %.</p></usa-smooth-scroll>',
-    [], { since: '10.4', requires: ['smooth'] }),
+    [], { since: '10.4', requires: ['smooth'], id: 'smooth-scroller' }), // id: 'smooth-scroll' is the 5.x smoothScroll() helper card
 ];
 
 /** item id → live-demo wiring. */

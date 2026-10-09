@@ -308,7 +308,7 @@ describe('10.4 widgets: scroll ring, parallax layers, smooth scroll', () => {
   it('cards, Store badge, snippets and docs carry the smooth prerequisite; format docs list the compatibility', () => {
     const card: any = COMPONENTS.find((c: any) => c.tag === 'usa-smooth-scroll');
     expect(card.requires).toEqual(['smooth']);
-    expect(COMPONENT_ITEMS.find((i: any) => i.gallery === 'smooth-scroll').requiresBadge).toBe('Requires: motionary/runtime/smooth');
+    expect(COMPONENT_ITEMS.find((i: any) => i.gallery === 'smooth-scroller').requiresBadge).toBe('Requires: motionary/runtime/smooth');
     expect(componentSnippets(card).esm).toContain('use(smooth);');
     for (const id of ['smooth', 'format-gif', 'format-apng', 'format-webp']) expect(readFileSync(`docs/runtime/${id}.md`, 'utf8')).toMatch(/## Compatibility[\s\S]*✅ yes/);
     expect(readFileSync('test/fixtures/formats/CREDITS.md', 'utf8')).toContain('sample-plasma.gif');
