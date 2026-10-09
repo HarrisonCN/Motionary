@@ -1301,6 +1301,15 @@ fs.writeFileSync('motion-tokens.json', JSON.stringify(nativeTokens(), null, 2));
 ```
 - `<usa-native-preview rules platform name>`: `replay()`, `code('react-native' | 'flutter')`; `usa:replay`.
 
+### v9.9 Plugins API (`motionary/fx2`) — 10.0 preparation
+
+```js
+import { usePlugins, effectPlugins, definePlugin, registerAllPlugins } from 'motionary/fx2';
+usePlugins(...effectPlugins().filter((p) => /retro|cinema/.test(p.name)));   // only what you use
+usePlugins(definePlugin('acme/sparkle', [sparkleEffect]));
+```
+- `registerEffectPacks()` is deprecated (removed in 10.0) → `registerAllPlugins()`; `npx usa-codemod-10 --write src`. See docs/upgrading-10.md.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

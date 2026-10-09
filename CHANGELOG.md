@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [9.9.0] - 2026-10-09
+
+### Added
+- **Plugins API (9.9)** in `motionary/fx2` — every effect pack is a plugin: `definePlugin(name, effects, install?)`, `usePlugins(...plugins)` (registers each plugin once, returns its effect names), `effectPlugins()` (all built-in packs as `{ name: '<pack>', effects }`), `registerAllPlugins()`.
+- `usa-codemod-10` (`npx usa-codemod-10 --write src`) and [docs/upgrading-10.md](docs/upgrading-10.md) — the 10.0 plan: zero-dependency core under 10 KB, effects only as plugins, WebGPU by default.
+
+### Deprecated (removed in 10.0)
+- `registerEffectPacks()` → `registerAllPlugins()` (same behaviour; warns once) — the codemod rewrites it. The showcase, `motionary/components/widgets/auto` and the internals already use the new names.
+
 ## [9.8.0] - 2026-10-09
 
 ### Added

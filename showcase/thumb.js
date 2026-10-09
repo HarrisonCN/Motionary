@@ -33,7 +33,7 @@ async function loadLibrary() {
   }
   const lib = Object.assign({}, ...mods);
   lib.defineWidgets?.();
-  (lib.registerEffectPacks || lib.registerFx2)?.();
+  (lib.registerAllPlugins || lib.registerEffectPacks)?.();
   lib.defineComponents?.();
   lib.registerAllEffects?.();
   lib.defineEffectElements?.();
