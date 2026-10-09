@@ -78,6 +78,8 @@ import { defineTerminal, type UsaTerminalElement } from './terminal';
 import { defineRetroButton, RETRO_VARIANTS, type UsaRetroButtonElement } from './retro-button';
 import { defineOrganicCard, type UsaOrganicCardElement } from './organic-card';
 import { defineLiquidNav, type UsaLiquidNavElement } from './liquid-nav';
+import { defineHudPanel, type UsaHudPanelElement } from './hud-panel';
+import { defineRadar, parseTargets, type UsaRadarElement, type RadarTarget } from './radar';
 
 export { defineCarousel, defineTabBar, defineDisclosure, defineStories, CAROUSEL_EFFECTS, TAB_INDICATORS };
 export type { UsaCarouselElement, UsaTabBarElement, UsaDisclosureElement, UsaStoriesElement };
@@ -141,6 +143,9 @@ export type { UsaTerminalElement, UsaRetroButtonElement };
 export { defineOrganicCard, defineLiquidNav };
 export type { UsaOrganicCardElement, UsaLiquidNavElement };
 
+export { defineHudPanel, defineRadar, parseTargets };
+export type { UsaHudPanelElement, UsaRadarElement, RadarTarget };
+
 /** The widgets by release (tag → define function). */
 export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElementConstructor | undefined>> = {
   '6.2': { 'usa-carousel': defineCarousel, 'usa-tab-bar': defineTabBar, 'usa-disclosure': defineDisclosure, 'usa-stories': defineStories },
@@ -164,6 +169,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '8.1': { 'usa-red-envelope': defineRedEnvelope, 'usa-festival-banner': defineFestivalBanner },
   '8.2': { 'usa-terminal': defineTerminal, 'usa-retro-button': defineRetroButton },
   '8.3': { 'usa-organic-card': defineOrganicCard, 'usa-liquid-nav': defineLiquidNav },
+  '8.4': { 'usa-hud-panel': defineHudPanel, 'usa-radar': defineRadar },
 };
 
 /** Every widget tag, in release order. */
@@ -246,5 +252,7 @@ declare global {
     'usa-retro-button': UsaRetroButtonElement;
     'usa-organic-card': UsaOrganicCardElement;
     'usa-liquid-nav': UsaLiquidNavElement;
+    'usa-hud-panel': UsaHudPanelElement;
+    'usa-radar': UsaRadarElement;
   }
 }

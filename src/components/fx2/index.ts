@@ -26,6 +26,7 @@ import { AI_FX, registerAiPack, splitWords } from './ai';
 import { FESTIVAL_FX, registerFestivalPack, sparkVectors } from './festival';
 import { RETRO_FX, registerRetroPack, pixelSteps } from './retro2';
 import { ORGANIC_FX, registerOrganicPack, blobRadius } from './organic';
+import { CYBER_FX, registerCyberPack, decodeFrame } from './cyber';
 
 export { GPU_FX, registerGpuPack, TEXT3_FX, registerTextPack, splitChars };
 export { shaderBackground, supportsWebGL2, fieldFallback, GLSL_HEAD } from './gl';
@@ -68,6 +69,8 @@ export { RETRO_FX, registerRetroPack, pixelSteps };
 
 export { ORGANIC_FX, registerOrganicPack, blobRadius };
 
+export { CYBER_FX, registerCyberPack, decodeFrame };
+
 /** The 6.x effect packs by name. */
 export const EFFECT_PACKS: Record<string, EffectDefinition[]> = {
   gpu: GPU_FX,
@@ -90,6 +93,7 @@ export const EFFECT_PACKS: Record<string, EffectDefinition[]> = {
   festival: FESTIVAL_FX,
   retro: RETRO_FX,
   organic: ORGANIC_FX,
+  cyber: CYBER_FX,
 };
 
 /** Register every 6.x effect pack (idempotent). */
@@ -114,6 +118,7 @@ export function registerEffectPacks(): void {
   registerFestivalPack();
   registerRetroPack();
   registerOrganicPack();
+  registerCyberPack();
 }
 
 

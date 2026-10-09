@@ -1024,6 +1024,28 @@ nav.addEventListener('usa:change', (e) => route(e.detail.index));
 - `<usa-liquid-nav label value>`: `value`; `usa:change` { index, item }.
 - Organic: `vine-grow` · `bloom` (`stagger`) · `water-drop` (`rings`, `color`) · `breathe`; `blobRadius(seed)`.
 
+### v8.4 Widgets: HUD panel, radar (`components/widgets`) + cyber pack (`motionary/fx/cyber`)
+
+```html
+<usa-hud-panel title="SHIP STATUS" status="ONLINE">
+  <p data-value="82">Shields</p><p data-value="47">Fuel</p>
+</usa-hud-panel>
+<usa-radar targets="Alpha:40,0.6; Bravo:200,0.35" speed="4"></usa-radar>
+
+<usa-fx effect="hud-frame" trigger="enter"><div class="card">Target</div></usa-fx>
+<usa-fx effect="data-decode" trigger="enter"><h2>ACCESS GRANTED</h2></usa-fx>
+```
+```js
+import { defineWidgets } from 'motionary/components/widgets';
+import { registerCyberPack } from 'motionary/fx/cyber';
+defineWidgets(); registerCyberPack();
+radar.setTargets([{ name: 'Delta', bearing: 90, distance: 0.5 }]);
+radar.addEventListener('usa:ping', (e) => console.log(e.detail.name));
+```
+- `<usa-hud-panel title status color>`: `boot()`; `usa:boot`.
+- `<usa-radar targets rings speed label>`: `targets`, `setTargets(list)`; `usa:ping` { name }; `parseTargets(str)`.
+- Cyber: `hud-frame` (`color`) · `scanline-sweep` (`color`, `passes`) · `hologram` (`color`) · `data-decode` (`speed`, `frames`); `decodeFrame(text, k, n)`.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.
