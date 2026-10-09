@@ -677,6 +677,42 @@ export const components = [
     '<usa-fx effect="pin-drop" trigger="enter"><span class="pin">📍</span></usa-fx>\n<usa-fx effect="marker-pulse" trigger="hover"><span class="dot"></span></usa-fx>',
     '<div class="demo-row"><usa-fx effect="pin-drop" trigger="click"><button type="button" class="demo-pin" aria-label="Drop pin">📍</button></usa-fx><usa-fx effect="marker-pulse" trigger="click"><button type="button" class="demo-dot" aria-label="Pulse marker"></button></usa-fx></div>',
     [{ key: 'effect', values: ['pin-drop', 'marker-pulse'] }], '7.6'),
+  // ---- 7.7 -------------------------------------------------------------
+  W('usa-field', 'ui', 'Animated field', '动效输入框',
+    '7.7: a text input whose label floats up on focus, with a growing underline; validates on blur — invalid shakes and slides the message in, valid draws a check. strength adds a 4-step password meter.',
+    '7.7：聚焦时标签上浮、下划线展开的输入框；失焦时校验 —— 不通过则抖动并滑入提示，通过则绘制对勾。加 strength 属性显示四段密码强度条。',
+    ['input', 'form', 'floating label', 'validation', 'password'],
+    '<usa-field label="Email" type="email" name="email" required></usa-field>\n<usa-field label="Password" type="password" name="pw" minlength="8" strength></usa-field>',
+    '<div class="demo-col demo-form"><usa-field class="demo-fld" label="Email" type="email" required hint="We never share it"></usa-field><usa-field class="demo-fld" label="Password" type="password" minlength="8" strength value="Motion!2026"></usa-field><button type="button" class="demo-btn" data-fld>Validate</button></div>',
+    undefined, { since: '7.7' }),
+  W('usa-otp', 'ui', 'OTP code input', '验证码输入',
+    '7.7: one-time-code boxes that auto-advance, step back on Backspace and take a pasted code; digits pop in, error() shakes the row red, success() sends a green wave across it.',
+    '7.7：自动跳格的验证码输入框，退格回退、支持整段粘贴；数字弹入，error() 让整行变红抖动，success() 让绿色波浪掠过。',
+    ['otp', 'verification', 'code', 'pin', '2fa'],
+    '<usa-otp length="6"></usa-otp>\n<script>otp.addEventListener(\'usa:complete\', (e) => check(e.detail.code) ? otp.success() : otp.error());</script>',
+    '<div class="demo-col"><usa-otp class="demo-otp" length="6" value="4829"></usa-otp><div class="demo-row"><button type="button" class="demo-btn" data-otp="ok">Autofill</button><button type="button" class="demo-btn" data-otp="bad">Wrong code</button></div></div>',
+    undefined, { since: '7.7' }),
+  W('usa-upload-progress', 'ui', 'Upload progress', '上传进度',
+    '7.7: a file row whose bar eases to value with a running shine; at 100 it turns into a check that draws itself, on error it shakes and offers Retry.',
+    '7.7：文件上传行，进度条平滑过渡到 value 并带流光；到 100 时变成自绘对勾，失败时抖动并提供“重试”。',
+    ['upload', 'progress', 'file', 'form', 'status'],
+    '<usa-upload-progress name="report.pdf" size="2400000" value="40"></usa-upload-progress>\n<script>row.value = 75; row.status = \'error\';</script>',
+    '<div class="demo-col demo-ups"><usa-upload-progress class="demo-up" name="holiday-photos.zip" size="48500000" value="10"></usa-upload-progress><usa-upload-progress class="demo-up" name="report.pdf" size="2400000" value="100"></usa-upload-progress><usa-upload-progress class="demo-up" name="video.mov" size="912000000" value="62" status="error" message="Network lost"></usa-upload-progress></div>',
+    undefined, { since: '7.7' }),
+  X('fx-field', ['fx-form', 'registerFormPack'], 'Field shake & success', '输入抖动与成功',
+    '7.7: field-shake shakes an element with a red outline flash (the invalid cue); field-success pulses a green glow and pops a check badge on its corner.',
+    '7.7：field-shake 让元素带红色描边闪烁左右抖动（校验失败提示）；field-success 绿色光晕脉冲并在角上弹出对勾徽章。',
+    ['shake', 'invalid', 'success', 'form', 'validation'],
+    '<usa-fx effect="field-shake" trigger="click"><input placeholder="Wrong!"></usa-fx>\n<usa-fx effect="field-success" trigger="click"><input value="All good"></usa-fx>',
+    '<div class="demo-col"><usa-fx effect="field-shake" trigger="click"><button type="button" class="demo-input">Invalid ✕</button></usa-fx><usa-fx effect="field-success" trigger="click"><button type="button" class="demo-input">Valid ✓</button></usa-fx></div>',
+    [{ key: 'effect', values: ['field-shake', 'field-success'] }], '7.7'),
+  X('fx-form-in', ['fx-form', 'registerFormPack'], 'Form cascade & floating labels', '表单级联与浮动标签',
+    '7.7: form-cascade slides a form\'s fields and buttons in one after another; label-float raises every label inside and settles it, like floating labels.',
+    '7.7：form-cascade 让表单的字段与按钮依次滑入；label-float 让内部每个标签上浮再落定，模拟浮动标签。',
+    ['form', 'cascade', 'stagger', 'label', 'enter'],
+    '<usa-fx effect="form-cascade" trigger="enter">\n  <form>…fields…</form>\n</usa-fx>',
+    '<usa-fx effect="form-cascade" trigger="click"><div class="demo-formfx"><div class="demo-mini-field"><label>Name</label><span></span></div><div class="demo-mini-field"><label>Email</label><span></span></div><button type="button" class="demo-btn">Sign up — click to replay</button></div></usa-fx>',
+    [{ key: 'effect', values: ['form-cascade', 'label-float'] }], '7.7'),
 ];
 
 /** item id → live-demo wiring. */
@@ -789,5 +825,26 @@ export const wire = {
   },
   'location-card': (stage) => {
     stage.querySelector('[data-lc]')?.addEventListener('click', () => stage.querySelector('usa-location-card').replay());
+  },
+  field: (stage) => {
+    stage.querySelector('[data-fld]')?.addEventListener('click', () => stage.querySelectorAll('usa-field').forEach((f) => f.validate()));
+  },
+  otp: (stage) => {
+    const o = stage.querySelector('usa-otp');
+    o.addEventListener('usa:complete', (e) => setTimeout(() => (e.detail.code === '000000' ? o.error() : o.success()), 250));
+    stage.querySelector('[data-otp="ok"]')?.addEventListener('click', () => o.fillCode('482913'));
+    stage.querySelector('[data-otp="bad"]')?.addEventListener('click', () => o.fillCode('000000'));
+  },
+  'upload-progress': (stage) => {
+    const row = stage.querySelector('usa-upload-progress');
+    let v = 10;
+    const tick = () => {
+      if (!row.isConnected) return;
+      v = v >= 100 ? 0 : Math.min(100, v + 6 + Math.round(Math.random() * 8));
+      row.setAttribute('status', 'uploading');
+      row.value = v;
+      setTimeout(tick, v >= 100 ? 1800 : 600);
+    };
+    setTimeout(tick, 600);
   },
 };

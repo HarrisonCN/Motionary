@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.7.0] - 2026-10-08
+
+### Added
+- **3 new components (7.7)** in `motionary/components/widgets` (also in `dist/widgets.umd.js`):
+  - `<usa-field>` — animated text input: the `label` floats up on focus / when filled, the underline grows, native validation on blur (`type`, `required`, `pattern`, `minlength`, `maxlength`) — invalid shakes and slides the message in (`usa:invalid`, custom text via `error`), valid draws a check (`usa:valid`); `hint`; `strength` adds a 4-step password meter. The `<input>` is in the light DOM, so forms submit it by `name`. `value`, `validate()`, `input`; `passwordStrength()`.
+  - `<usa-otp>` — one-time-code input: `length` boxes (3–10, default 6), auto-advance, Backspace / arrow keys, paste a whole code, `autocomplete="one-time-code"`, `mode="alnum"`, initial `value`; digits pop in; `usa:complete` { code }; `error(message)` shakes red and clears, `success()` green wave, `fillCode(code)`, `clear()`. `sanitizeCode()`.
+  - `<usa-upload-progress>` — file row: `name`, `size` (bytes), `value` 0–100 (bar eases, shine while uploading), `status` uploading | done | error, `message`; done draws a check (`usa:done`), error shakes + Retry (`usa:error`, `usa:retry`). `formatBytes()`.
+- **Form motion — `motionary/fx/form`** (= `motionary/components/fx-form`, `registerFormPack()`, also in `registerEffectPacks()`): `field-shake` (attention), `field-success` (attention), `label-float` (enter), `form-cascade` (enter). `shakeFrames()`.
+- Showcase: 5 new gallery cards with copyable code, live demos and live Store thumbnails; Animation Store 321 → 326 items.
+- Note: the plan's "success check" ships as `field-success` (the existing `success-check` effect is unchanged).
+
+### Accessibility
+- Field: real `<label for>`, `aria-invalid`, message in an `aria-live` region linked with `aria-describedby`. OTP: labelled `role="group"`, each box labelled "Digit n of N". Upload: `role="progressbar"` with `aria-valuenow` / `aria-valuetext`, a real Retry button. Reduced motion: no shake, pop, wave, shine or easing — states switch at once; `field-shake` / `field-success` only flash the outline, `label-float` / `form-cascade` fade in.
+
 ## [7.6.0] - 2026-10-08
 
 ### Added

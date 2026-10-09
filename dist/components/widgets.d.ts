@@ -1032,6 +1032,66 @@ declare function formatDistance(km: number, unit?: 'km' | 'mi'): string;
 declare function defineLocationCard(tag?: string): CustomElementConstructor | undefined;
 
 /**
+ * `<usa-field>` (7.7) — an animated text input: the `label` floats up when
+ * the field is focused or filled, the underline grows from the caret, and the
+ * field validates on blur (native constraint validation: `type`, `required`,
+ * `pattern`, `minlength`, `maxlength`). Invalid → the field shakes and the
+ * message slides in (`usa:invalid`); valid → a check draws itself
+ * (`usa:valid`). With `strength` (on `type="password"`) a 4-step strength
+ * meter fills as you type (`passwordStrength()`). The `<input>` lives in the
+ * light DOM, so a surrounding `<form>` submits it by its `name`. Reduced
+ * motion: no shake, no slide — states switch at once.
+ */
+interface UsaFieldElement extends UsaElement {
+    value: string;
+    readonly input: HTMLInputElement | null;
+    validate(): boolean;
+}
+/** 0–4 password strength score with a label (7.7). */
+declare function passwordStrength(pw: string): {
+    score: 0 | 1 | 2 | 3 | 4;
+    label: string;
+};
+declare function defineField(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-otp>` (7.7) — a one-time-code input: `length` boxes (default 6; an initial `value` is typed in) that
+ * auto-advance as you type, step back on Backspace, move with the arrow keys
+ * and take a pasted code in one go (`autocomplete="one-time-code"` on the
+ * first box for SMS autofill). Each digit pops in; when all boxes are filled
+ * `usa:complete` fires with the code. `error()` shakes the row red and clears
+ * it, `success()` turns it green with a wave; `fillCode(code)`, `clear()`. `mode="alnum"` allows
+ * letters. A labelled `role="group"`; reduced motion: no pop, shake or wave.
+ */
+interface UsaOtpElement extends UsaElement {
+    readonly value: string;
+    fillCode(code: string): void;
+    clear(): void;
+    error(message?: string): void;
+    success(): void;
+}
+/** Keep only the characters an OTP accepts (7.7). */
+declare function sanitizeCode(s: string, mode?: 'numeric' | 'alnum'): string;
+declare function defineOtp(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-upload-progress>` (7.7) — a file row with an animated progress bar:
+ * `name`, `size` (bytes → "2.4 MB"), `value` 0–100 (the bar eases to it and a
+ * shine runs over it while uploading), `status` (`uploading` | `done` |
+ * `error`; reaching 100 sets `done`). Done → the bar turns into a check that
+ * draws itself (`usa:done`); error → the row shakes and shows `message`
+ * (`usa:error`) with a Retry button (`usa:retry`). A `role="progressbar"` with
+ * value text; reduced motion: no shine, no easing, no shake.
+ */
+interface UsaUploadProgressElement extends UsaElement {
+    value: number;
+    status: 'uploading' | 'done' | 'error';
+}
+/** 1536 → "1.5 KB", 2_400_000 → "2.3 MB" (7.7). */
+declare function formatBytes(n: number): string;
+declare function defineUploadProgress(tag?: string): CustomElementConstructor | undefined;
+
+/**
  * motionary/components/widgets — the 6.x animated UI widgets, in their own
  * entry so `motionary/components` and `components/lite` keep their size
  * budgets. Every widget is reduced-motion safe and keyboard accessible.
@@ -1106,8 +1166,11 @@ declare global {
         'usa-prize-wheel': UsaPrizeWheelElement;
         'usa-globe': UsaGlobeElement;
         'usa-location-card': UsaLocationCardElement;
+        'usa-field': UsaFieldElement;
+        'usa-otp': UsaOtpElement;
+        'usa-upload-progress': UsaUploadProgressElement;
     }
 }
 
-export { CAROUSEL_EFFECTS, EQ_PRESETS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PRESENCE_STATES, PROGRESS_VARIANTS, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SPARK_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, badgeProgress, cartTotal, defineAddToCart, defineBadgeWall, defineBarChart, defineCarousel, defineCartDrawer, defineColorPicker, defineCompare, defineCountdown, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineFileDrop, defineGauge, defineGlobe, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLocationCard, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMessageList, defineMilestones, defineModal, defineMusicPlayer, defineNavMorph, defineNotificationBell, defineOdometer, definePagination, definePresence, definePrizeWheel, defineProductGallery, defineProgressRing, definePullCord, defineReactions, defineSegmented, defineSheet, defineSkeletonReveal, defineSparkline, defineStarRating, defineStepper, defineStories, defineSwipeDeck, defineSwitch, defineTabBar, defineTip, defineToastStack, defineVolumeKnob, defineWeatherCard, defineWidgets, defineXpBar, formatDistance, haversine, hexToHsv, hsvToHex, initials, levelFor, monthGrid, pageWindow, parseISODate, parseLRC, parseMarkers, parseReactions, project, rankRows, sparkPoints, splitTime, stackToast, wheelAngle, wrapIndex };
-export type { BellNotice, CartItem, ChatMessage, GlobeMarker, LeaderRow, PresenceState, StackToastOptions, UsaAddToCartElement, UsaBadgeWallElement, UsaBarChartElement, UsaCarouselElement, UsaCartDrawerElement, UsaColorPickerElement, UsaCompareElement, UsaCountdownElement, UsaCubeGalleryElement, UsaDatePickerElement, UsaDisclosureElement, UsaDockElement, UsaEqualizerElement, UsaFileDropElement, UsaGaugeElement, UsaGlobeElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaKpiElement, UsaLeaderboardElement, UsaLocationCardElement, UsaLyricsElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMessageListElement, UsaMilestonesElement, UsaModalElement, UsaMusicPlayerElement, UsaNavMorphElement, UsaNotificationBellElement, UsaOdometerElement, UsaPaginationElement, UsaPresenceElement, UsaPrizeWheelElement, UsaProductGalleryElement, UsaProgressRingElement, UsaPullCordElement, UsaReactionsElement, UsaSegmentedElement, UsaSheetElement, UsaSkeletonRevealElement, UsaSparklineElement, UsaStarRatingElement, UsaStepperElement, UsaStoriesElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTipElement, UsaToastStackElement, UsaVolumeKnobElement, UsaWeatherCardElement, UsaXpBarElement, WallBadge };
+export { CAROUSEL_EFFECTS, EQ_PRESETS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PRESENCE_STATES, PROGRESS_VARIANTS, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SPARK_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, badgeProgress, cartTotal, defineAddToCart, defineBadgeWall, defineBarChart, defineCarousel, defineCartDrawer, defineColorPicker, defineCompare, defineCountdown, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineField, defineFileDrop, defineGauge, defineGlobe, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLocationCard, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMessageList, defineMilestones, defineModal, defineMusicPlayer, defineNavMorph, defineNotificationBell, defineOdometer, defineOtp, definePagination, definePresence, definePrizeWheel, defineProductGallery, defineProgressRing, definePullCord, defineReactions, defineSegmented, defineSheet, defineSkeletonReveal, defineSparkline, defineStarRating, defineStepper, defineStories, defineSwipeDeck, defineSwitch, defineTabBar, defineTip, defineToastStack, defineUploadProgress, defineVolumeKnob, defineWeatherCard, defineWidgets, defineXpBar, formatBytes, formatDistance, haversine, hexToHsv, hsvToHex, initials, levelFor, monthGrid, pageWindow, parseISODate, parseLRC, parseMarkers, parseReactions, passwordStrength, project, rankRows, sanitizeCode, sparkPoints, splitTime, stackToast, wheelAngle, wrapIndex };
+export type { BellNotice, CartItem, ChatMessage, GlobeMarker, LeaderRow, PresenceState, StackToastOptions, UsaAddToCartElement, UsaBadgeWallElement, UsaBarChartElement, UsaCarouselElement, UsaCartDrawerElement, UsaColorPickerElement, UsaCompareElement, UsaCountdownElement, UsaCubeGalleryElement, UsaDatePickerElement, UsaDisclosureElement, UsaDockElement, UsaEqualizerElement, UsaFieldElement, UsaFileDropElement, UsaGaugeElement, UsaGlobeElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaKpiElement, UsaLeaderboardElement, UsaLocationCardElement, UsaLyricsElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMessageListElement, UsaMilestonesElement, UsaModalElement, UsaMusicPlayerElement, UsaNavMorphElement, UsaNotificationBellElement, UsaOdometerElement, UsaOtpElement, UsaPaginationElement, UsaPresenceElement, UsaPrizeWheelElement, UsaProductGalleryElement, UsaProgressRingElement, UsaPullCordElement, UsaReactionsElement, UsaSegmentedElement, UsaSheetElement, UsaSkeletonRevealElement, UsaSparklineElement, UsaStarRatingElement, UsaStepperElement, UsaStoriesElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTipElement, UsaToastStackElement, UsaUploadProgressElement, UsaVolumeKnobElement, UsaWeatherCardElement, UsaXpBarElement, WallBadge };

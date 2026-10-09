@@ -1,0 +1,22 @@
+usa-field{display:block;width:var(--usa-fld-w,280px);max-width:100%;font:500 14px/1.3 system-ui,sans-serif;--usa-fld-accent:#6366f1;--usa-fld-bad:#e11d48;--usa-fld-good:#16a34a}
+.usa-fld{position:relative;padding-top:18px}
+.usa-fld-input{display:block;box-sizing:border-box;width:100%;padding:8px 30px 8px 2px;border:0;border-bottom:2px solid var(--usa-fld-rule,rgba(100,116,139,.45));background:transparent;color:inherit;font:inherit;outline:none;border-radius:0}
+.usa-fld-label{position:absolute;left:2px;top:26px;color:var(--usa-fld-muted,#64748b);pointer-events:none;transform-origin:0 0;transition:transform .22s cubic-bezier(.2,.8,.2,1),color .2s}
+usa-field[data-focus] .usa-fld-label,usa-field[data-filled] .usa-fld-label,.usa-fld-input:not(:placeholder-shown)+.usa-fld-label{transform:translateY(-24px) scale(.8)}
+usa-field[data-focus] .usa-fld-label{color:var(--usa-fld-accent)}
+.usa-fld-line{position:absolute;left:0;right:0;top:calc(18px + 2.3em - 1px);height:2px;background:var(--usa-fld-accent);transform:scaleX(0);transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+usa-field[data-focus] .usa-fld-line{transform:scaleX(1)}
+usa-field[data-invalid] .usa-fld-line{transform:scaleX(1);background:var(--usa-fld-bad)}
+usa-field[data-invalid] .usa-fld-label{color:var(--usa-fld-bad)}
+.usa-fld-ok{position:absolute;right:2px;top:24px;width:20px;height:20px;fill:none;stroke:var(--usa-fld-good);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.usa-fld-ok path{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .35s ease-out}
+usa-field[data-valid] .usa-fld-ok path{stroke-dashoffset:0}
+.usa-fld-meter{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:6px}
+.usa-fld-meter i{height:4px;border-radius:2px;background:rgba(100,116,139,.25);transform-origin:0 50%;transition:background .25s}
+.usa-fld-meter[data-score="1"] i:nth-child(-n+1){background:#ef4444}
+.usa-fld-meter[data-score="2"] i:nth-child(-n+2){background:#f59e0b}
+.usa-fld-meter[data-score="3"] i:nth-child(-n+3){background:#84cc16}
+.usa-fld-meter[data-score="4"] i{background:#16a34a}
+.usa-fld-msg{margin:4px 0 0;min-height:1.3em;font-size:12px;color:var(--usa-fld-muted,#64748b)}
+usa-field[data-invalid] .usa-fld-msg{color:var(--usa-fld-bad)}
+@media (prefers-reduced-motion:reduce){.usa-fld-label,.usa-fld-line,.usa-fld-ok path,.usa-fld-meter i{transition:none}}

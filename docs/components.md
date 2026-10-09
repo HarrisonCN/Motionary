@@ -872,6 +872,29 @@ card.replay();
 - `<usa-location-card name address lat lon from-lat from-lon distance href unit>`: `km`, `replay()`; `usa:arrive`; `haversine()`, `formatDistance(km, unit)`.
 - Geo: `route-draw` (`duration`, `stagger`) · `marker-pulse` (`color`, `rings`) · `pin-drop` (`height`) · `globe-spin` (`turns`); `routeLength(points)`.
 
+### v7.7 Widgets: field, OTP, upload progress (`components/widgets`) + form motion (`motionary/fx/form`)
+
+```html
+<usa-field label="Email" type="email" name="email" required hint="We never share it"></usa-field>
+<usa-field label="Password" type="password" name="pw" minlength="8" strength></usa-field>
+<usa-otp length="6"></usa-otp>
+<usa-upload-progress name="report.pdf" size="2400000" value="40"></usa-upload-progress>
+
+<usa-fx effect="field-shake" trigger="click"><input></usa-fx>
+<usa-fx effect="form-cascade" trigger="enter"><form>…</form></usa-fx>
+```
+```js
+import { defineWidgets, passwordStrength } from 'motionary/components/widgets';
+import { registerFormPack } from 'motionary/fx/form';
+defineWidgets(); registerFormPack();
+otp.addEventListener('usa:complete', (e) => (e.detail.code === '482913' ? otp.success() : otp.error('Wrong code')));
+row.value = 75; row.status = 'done';
+```
+- `<usa-field label hint error strength type name required pattern minlength maxlength autocomplete inputmode placeholder value>`: `value`, `input`, `validate()`; `usa:valid`, `usa:invalid`; `passwordStrength(pw)` → `{ score 0–4, label }`.
+- `<usa-otp length mode label value>`: `value`, `fillCode(code)`, `clear()`, `error(message)`, `success()`; `usa:complete`; `sanitizeCode(s, mode)`.
+- `<usa-upload-progress name size value status message>`: `value`, `status`; `usa:done`, `usa:error`, `usa:retry`; `formatBytes(n)`.
+- Form: `field-shake` (`distance`, `color`) · `field-success` (`color`) · `label-float` (`stagger`) · `form-cascade` (`stagger`, `distance`); `shakeFrames(distance, steps)`.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.
