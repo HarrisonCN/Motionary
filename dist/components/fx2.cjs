@@ -21,6 +21,7 @@ var components_fxAi = require('./fx-ai.cjs');
 var components_fxFestival = require('./fx-festival.cjs');
 var components_fxRetro = require('./fx-retro.cjs');
 var components_fxOrganic = require('./fx-organic.cjs');
+var components_fxCyber = require('./fx-cyber.cjs');
 require('../chunks/registry-BVklOepd.cjs');
 require('../chunks/base-DoRUZBy-.cjs');
 require('../chunks/generative-BHIj-NU0.cjs');
@@ -49,6 +50,7 @@ const EFFECT_PACKS = {
     festival: components_fxFestival.FESTIVAL_FX,
     retro: components_fxRetro.RETRO_FX,
     organic: components_fxOrganic.ORGANIC_FX,
+    cyber: components_fxCyber.CYBER_FX,
 };
 /** Register every 6.x effect pack (idempotent). */
 function registerEffectPacks() {
@@ -72,6 +74,7 @@ function registerEffectPacks() {
     components_fxFestival.registerFestivalPack();
     components_fxRetro.registerRetroPack();
     components_fxOrganic.registerOrganicPack();
+    components_fxCyber.registerCyberPack();
 }
 
 exports.EFFECT_PACK_FORMAT = components_marketplace.EFFECT_PACK_FORMAT;
@@ -147,6 +150,9 @@ exports.registerRetroPack = components_fxRetro.registerRetroPack;
 exports.ORGANIC_FX = components_fxOrganic.ORGANIC_FX;
 exports.blobRadius = components_fxOrganic.blobRadius;
 exports.registerOrganicPack = components_fxOrganic.registerOrganicPack;
+exports.CYBER_FX = components_fxCyber.CYBER_FX;
+exports.decodeFrame = components_fxCyber.decodeFrame;
+exports.registerCyberPack = components_fxCyber.registerCyberPack;
 exports.EFFECT_PACKS = EFFECT_PACKS;
 exports.registerEffectPacks = registerEffectPacks;
 //# sourceMappingURL=fx2.cjs.map

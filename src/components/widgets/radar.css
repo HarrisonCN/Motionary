@@ -1,0 +1,11 @@
+usa-radar{display:block;width:var(--usa-rd-size,200px);max-width:100%;aspect-ratio:1;--usa-rd-c:#22d3ee}
+.usa-rd{position:relative;width:100%;height:100%;border-radius:50%;background:radial-gradient(circle,#082f49 0,#020617 75%);box-shadow:0 0 0 2px color-mix(in srgb,var(--usa-rd-c) 45%,transparent),0 0 24px -4px var(--usa-rd-c);overflow:hidden}
+.usa-rd-ring{position:absolute;left:50%;top:50%;width:var(--r);height:var(--r);border:1px solid color-mix(in srgb,var(--usa-rd-c) 30%,transparent);border-radius:50%;transform:translate(-50%,-50%)}
+.usa-rd-cross{position:absolute;inset:0;background:linear-gradient(color-mix(in srgb,var(--usa-rd-c) 25%,transparent),color-mix(in srgb,var(--usa-rd-c) 25%,transparent)) 50% 0/1px 100% no-repeat,linear-gradient(color-mix(in srgb,var(--usa-rd-c) 25%,transparent),color-mix(in srgb,var(--usa-rd-c) 25%,transparent)) 0 50%/100% 1px no-repeat}
+.usa-rd-sweep{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,transparent 0 300deg,color-mix(in srgb,var(--usa-rd-c) 15%,transparent) 330deg,color-mix(in srgb,var(--usa-rd-c) 70%,transparent) 360deg);animation:usa-rd-turn var(--usa-rd-period,4s) linear infinite;animation-play-state:paused}
+usa-radar[data-live] .usa-rd-sweep{animation-play-state:running}
+@keyframes usa-rd-turn{to{transform:rotate(360deg)}}
+.usa-rd-dot{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--usa-rd-c);box-shadow:0 0 8px 2px var(--usa-rd-c);transform:translate(-50%,-50%);opacity:.15}
+.usa-rd-dot[data-lit]{opacity:1}
+.usa-rd-dot em{position:absolute;left:10px;top:-5px;font:600 9px/1 ui-monospace,Menlo,monospace;font-style:normal;color:var(--usa-rd-c);white-space:nowrap}
+@media (prefers-reduced-motion:reduce){.usa-rd-sweep{animation:none;transform:rotate(45deg)}}

@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.4.0] - 2026-10-09
+
+### Added
+- **2 new components (8.4)** in `motionary/components/widgets` (also in `dist/widgets.umd.js`):
+  - `<usa-hud-panel>` — sci-fi HUD panel: angled corners, a glowing frame that draws itself in on first view, header with blinking status light (`title`, `status`, `color`), `<p data-value="72">` rows become animated bar readouts; `boot()` replays the intro, `usa:boot`.
+  - `<usa-radar>` — radar scope: a conic beam sweeps round (`speed` s per turn, `rings`) and targets (`targets="Name:bearing,distance; …"`) light up as the beam passes; `targets` / `setTargets()`, `usa:ping` { name }; `parseTargets()`.
+- **Cyber pack — `motionary/fx/cyber`** (= `motionary/components/fx-cyber`, `registerCyberPack()`, also in `registerEffectPacks()`): `hud-frame` (enter), `scanline-sweep` (attention), `hologram` (loop), `data-decode` (enter). `decodeFrame()`.
+- Showcase: 4 new gallery cards with copyable code, live demos and live Store thumbnails.
+
+### Accessibility
+- HUD panel is a labelled `region` (its `title`); the frame and bars are `aria-hidden`, the percentage is real text. Radar is an `img` whose label lists every target with its bearing; the sweep only runs on screen. `data-decode` keeps the real text as `aria-label` while it scrambles. Reduced motion: the panel shows at once, the radar is a still scope with all targets lit, `hud-frame` / `data-decode` just show, `scanline-sweep` does nothing, `hologram` is skipped.
+
+### Fixed
+- the 8.4 hologram gallery card id `fx-holo` collided with the 5.x "Holographic card" card (catalog ids must be unique — caught by the showcase catalog test) → renamed `fx-hologram`; a duplicate-id check now runs at staging.
+
+
 ## [8.3.0] - 2026-10-09
 
 ### Added
