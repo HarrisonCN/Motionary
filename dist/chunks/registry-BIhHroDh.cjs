@@ -78,4 +78,4 @@ exports.register = register;
 exports.registeredModules = registeredModules;
 exports.registry = registry;
 exports.requireModule = requireModule;
-//# sourceMappingURL=registry-BIhHroDh.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/chunks/registry-BIhHroDh.cjs.map

@@ -258,4 +258,4 @@ function createDragSnap(el, o = {}) {
 const dragSnap = { id: 'drag-snap', version: RUNTIME_VERSION, requires: ['core'], api: { createDragSnap, projectThrow, nearestSnap, rubberband, springStep, velocityTracker } };
 
 export { createDragSnap, dragSnap, nearestSnap, projectThrow, rubberband, springStep, velocityTracker };
-//# sourceMappingURL=drag-snap.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/runtime/drag-snap.js.map

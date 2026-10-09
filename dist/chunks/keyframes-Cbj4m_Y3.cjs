@@ -185,4 +185,4 @@ function framesToTimeline(target, frames, o = {}) {
 exports.camelProp = camelProp;
 exports.distributeOffsets = distributeOffsets;
 exports.framesToTimeline = framesToTimeline;
-//# sourceMappingURL=keyframes-Cbj4m_Y3.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/chunks/keyframes-Cbj4m_Y3.cjs.map

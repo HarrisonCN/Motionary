@@ -16,4 +16,4 @@ function registerFireworkBurst() {
 exports.effect = effect;
 exports.register = registerFireworkBurst;
 exports.registerFireworkBurst = registerFireworkBurst;
-//# sourceMappingURL=firework-burst.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/effects/firework-burst.cjs.map

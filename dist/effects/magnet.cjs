@@ -18,4 +18,4 @@ function registerMagnet() {
 exports.effect = effect;
 exports.register = registerMagnet;
 exports.registerMagnet = registerMagnet;
-//# sourceMappingURL=magnet.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/effects/magnet.cjs.map

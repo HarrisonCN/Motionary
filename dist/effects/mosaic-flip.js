@@ -13,4 +13,4 @@ function registerMosaicFlip() {
 }
 
 export { effect, registerMosaicFlip as register, registerMosaicFlip };
-//# sourceMappingURL=mosaic-flip.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/effects/mosaic-flip.js.map

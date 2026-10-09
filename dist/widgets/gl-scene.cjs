@@ -8,4 +8,4 @@ require('../chunks/registry-BIhHroDh.cjs');
 
 
 exports.defineGlScene = widgets_glScene.defineGlScene;
-//# sourceMappingURL=gl-scene.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/widgets/gl-scene.cjs.map

@@ -8,4 +8,4 @@ require('../chunks/registry-BIhHroDh.cjs');
 
 
 exports.defineLottiePlayer = widgets_lottiePlayer.defineLottiePlayer;
-//# sourceMappingURL=lottie-player.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/widgets/lottie-player.cjs.map

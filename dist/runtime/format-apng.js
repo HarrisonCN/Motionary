@@ -120,4 +120,4 @@ async function loadApng(src, o = {}) {
 const formatApng = { id: 'format-apng', version: RUNTIME_VERSION, requires: ['core'], api: { parseApng, apngFramePngs, decodeApng, loadApng, animatedImagePlayer } };
 
 export { animatedImagePlayer, apngFramePngs, decodeApng, formatApng, loadApng, parseApng, pngChunks };
-//# sourceMappingURL=format-apng.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/runtime/format-apng.js.map

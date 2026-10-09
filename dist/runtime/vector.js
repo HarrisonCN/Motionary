@@ -1145,4 +1145,4 @@ function evalExpression(src, value, time = 0, fr = 30) {
 const vector = { id: 'vector', version: RUNTIME_VERSION, requires: ['core'], api: { evalExpression, loadLottie, parseDotLottie, unzipEntries, lottiePlayer, renderLottieFrame, inspectLottie, propValue, transformAt, trimContours, loadLottieImages } };
 
 export { ZIP_LIMITS, evalExpression, inflateEntry, inspectLottie, loadLottie, loadLottieImages, lottiePlayer, parseDotLottie, propValue, renderLottieFrame, transformAt, trimContours, unzipEntries, vector };
-//# sourceMappingURL=vector.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/runtime/vector.js.map

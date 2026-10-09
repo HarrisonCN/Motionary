@@ -146,4 +146,4 @@ function defineTokenEditor(tag = 'usa-token-editor') {
 }
 
 exports.defineTokenEditor = defineTokenEditor;
-//# sourceMappingURL=token-editor.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/widgets/token-editor.cjs.map

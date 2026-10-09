@@ -444,4 +444,4 @@ function playSmil(svg, o = {}) {
 const formatSvg = { id: 'format-svg', version: RUNTIME_VERSION, requires: ['core'], api: { parsePath, flattenPath, pathLength, pointAtLength, samplePath, morphPath, readSmil, playSmil, smilTime } };
 
 export { flattenPath, formatSvg, morphPath, parsePath, pathLength, playSmil, pointAtLength, readSmil, samplePath, smilTime };
-//# sourceMappingURL=format-svg.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/runtime/format-svg.js.map

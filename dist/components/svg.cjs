@@ -356,4 +356,4 @@ exports.drawLines = drawLines;
 exports.interpolatePath = interpolatePath;
 exports.morphTo = morphTo;
 exports.pathsCompatible = pathsCompatible;
-//# sourceMappingURL=svg.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/components/svg.cjs.map

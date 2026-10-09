@@ -1,3 +1,3 @@
 export { d as defineGpuParticles } from '../chunks/gpu-particles-BafFhVwB.js';
 import '../chunks/base-zSGb8ujt.js';
-//# sourceMappingURL=gpu-particles.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/widgets/gpu-particles.js.map

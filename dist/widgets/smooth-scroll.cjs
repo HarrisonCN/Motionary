@@ -81,4 +81,4 @@ function defineSmoothScroll(tag = 'usa-smooth-scroll') {
 }
 
 exports.defineSmoothScroll = defineSmoothScroll;
-//# sourceMappingURL=smooth-scroll.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/widgets/smooth-scroll.cjs.map

@@ -266,4 +266,4 @@ exports.projectThrow = projectThrow;
 exports.rubberband = rubberband;
 exports.springStep = springStep;
 exports.velocityTracker = velocityTracker;
-//# sourceMappingURL=drag-snap.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/runtime/drag-snap.cjs.map

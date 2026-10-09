@@ -917,4 +917,4 @@ exports.resolveTargets = resolveTargets;
 exports.stopAnimation = stopAnimation;
 exports.supportsObserver = supportsObserver;
 exports.supportsScrollTimeline = supportsScrollTimeline;
-//# sourceMappingURL=core-BjcOCpJt.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/chunks/core-BjcOCpJt.cjs.map

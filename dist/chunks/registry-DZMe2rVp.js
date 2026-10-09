@@ -66,4 +66,4 @@ function requireModule(id, who) {
 const registeredModules = () => Array.from(registry().modules.keys());
 
 export { RUNTIME_VERSION as R, registry as a, register as b, RUNTIME_CDN as c, RuntimeModuleError as d, moduleCdn as e, modulePath as f, registeredModules as g, hasModule as h, missingMessage as m, requireModule as r };
-//# sourceMappingURL=registry-DZMe2rVp.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/chunks/registry-DZMe2rVp.js.map

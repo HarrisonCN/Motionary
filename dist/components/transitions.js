@@ -420,4 +420,4 @@ function defineTransitionComponents() {
 }
 
 export { defineAccordion, defineDialog, defineTransitionComponents, defineViewSwitch, flip, viewTransition };
-//# sourceMappingURL=transitions.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/components/transitions.js.map

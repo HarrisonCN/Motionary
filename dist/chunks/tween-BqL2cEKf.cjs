@@ -404,4 +404,4 @@ exports.Tween = Tween;
 exports.parseValue = parseValue;
 exports.timeline = timeline;
 exports.tween = tween;
-//# sourceMappingURL=tween-BqL2cEKf.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/chunks/tween-BqL2cEKf.cjs.map

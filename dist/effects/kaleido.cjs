@@ -16,4 +16,4 @@ function registerKaleido() {
 exports.effect = effect;
 exports.register = registerKaleido;
 exports.registerKaleido = registerKaleido;
-//# sourceMappingURL=kaleido.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/effects/kaleido.cjs.map

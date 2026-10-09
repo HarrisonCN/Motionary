@@ -6,4 +6,4 @@ require('../chunks/base-B3me2y0o.cjs');
 
 
 exports.defineGpuParticles = widgets_gpuParticles.defineGpuParticles;
-//# sourceMappingURL=gpu-particles.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/widgets/gpu-particles.cjs.map

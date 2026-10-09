@@ -8,4 +8,4 @@ require('../chunks/registry-BIhHroDh.cjs');
 
 
 exports.definePhysicsPlayground = widgets_physicsPlayground.definePhysicsPlayground;
-//# sourceMappingURL=physics-playground.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/widgets/physics-playground.cjs.map

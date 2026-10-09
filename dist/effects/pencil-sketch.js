@@ -12,4 +12,4 @@ function registerPencilSketch() {
 }
 
 export { effect, registerPencilSketch as register, registerPencilSketch };
-//# sourceMappingURL=pencil-sketch.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/effects/pencil-sketch.js.map

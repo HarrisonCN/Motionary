@@ -2,4 +2,4 @@ export { d as definePhysicsPlayground } from '../chunks/physics-playground-mjFAe
 import '../chunks/base-zSGb8ujt.js';
 import '../chunks/runtime-link-BiyHzDSA.js';
 import '../chunks/registry-DZMe2rVp.js';
-//# sourceMappingURL=physics-playground.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/widgets/physics-playground.js.map

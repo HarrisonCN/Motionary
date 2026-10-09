@@ -16,4 +16,4 @@ function registerNeuPress() {
 exports.effect = effect;
 exports.register = registerNeuPress;
 exports.registerNeuPress = registerNeuPress;
-//# sourceMappingURL=neu-press.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/effects/neu-press.cjs.map

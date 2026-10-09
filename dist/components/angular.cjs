@@ -74,4 +74,4 @@ exports.usaEventName = bind.usaEventName;
 exports.defineUsa = defineUsa;
 exports.usaDetail = usaDetail;
 exports.usaInitializer = usaInitializer;
-//# sourceMappingURL=angular.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/components/angular.cjs.map

@@ -272,4 +272,4 @@ function definePhysicsPlayground(tag = 'usa-physics-playground') {
 }
 
 export { PHYSICS_PRESETS as P, definePhysicsPlayground as d };
-//# sourceMappingURL=physics-playground-mjFAeNWn.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/chunks/physics-playground-mjFAeNWn.js.map
