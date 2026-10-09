@@ -20,6 +20,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Accessibility
 - `<usa-gl-scene>`'s canvas is a labelled `img` (`label`), keyboard-orbitable when `controls` is set (focusable; arrow keys, + / −); auto-rotate and the particle / shader animations stop under reduced motion (one still frame). Everything renders only while on screen.
 
+### Fixed
+- Build: `npm run build` runs Rollup in four smaller processes (JS bundles, then the declaration bundles in three slices) instead of one 6 GB process, which the out-of-memory killer stopped on 8 GB machines; the output is unchanged.
+- Tests: the orbit-controls test no longer needs `PointerEvent` (missing in jsdom).
+- `check:peer-docs` now accepts the combined registration `use(gl, formatGltf, formatObj);` for components that need several runtime modules (it used to demand one `use()` per module), and treats an alias tag defined next to a carded element (`<usa-three-scene>`) as covered by that card.
+
 ## [10.4.0] - 2026-10-09
 
 ### Added

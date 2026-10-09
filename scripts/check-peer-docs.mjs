@@ -60,7 +60,8 @@ for (const file of walk(join(ROOT, 'src/components'))) {
   const tags = [...s.matchAll(/export function define\w+\(tag = '([\w-]+)'/g)].map((m) => m[1]);
   const mods = [...new Set([...s.matchAll(/(?:runtimeModule<[^>]*>|runtimeModule|requireModule<[^>]*>|requireModule|requirePeer<[^>]*>|requirePeer)\(\s*this\s*,\s*'([\w@/.-]+)'/g)].map((m) => m[1]))];
   for (const tag of tags) for (const id of mods) {
-    const card = COMPONENTS.find((c) => c.tag === tag);
+    // an alias tag defined in the same file as a carded element (e.g. <usa-three-scene> → <usa-gl-scene>) shares that card
+    const card = COMPONENTS.find((c) => c.tag === tag) || COMPONENTS.find((c) => tags.includes(c.tag) && c.tag !== tag);
     if (!card) fail(`<${tag}>`, `uses ${id} but has no gallery card`);
     else if (!card.requires?.includes(id)) fail(`<${tag}>`, `uses ${id} but its card does not declare requires: ['${id}']`);
   }
@@ -80,7 +81,10 @@ for (const c of COMPONENTS) {
   const where = `<${c.tag}>`;
   for (const id of c.requires) if (!PREREQS[id]) fail(where, `unknown prerequisite "${id}"`);
   const p = prereqFor(c);
-  const need = [p.install, ...c.requires.map((id) => PREREQS[id].importPath), ...c.requires.map((id) => PREREQS[id].register), PREREQS[c.requires[c.requires.length - 1]].cdn.split('\n').pop()];
+  // registration: runtime modules are registered together — use(a, b, c); — official runtimes each by their own line (10.5)
+  const rtIds = c.requires.filter((id) => PREREQS[id]?.kind === 'runtime' && id !== 'core');
+  const regs = [...(rtIds.length ? [`use(${rtIds.map((id) => id.replace(/-(\w)/g, (_, x) => x.toUpperCase())).join(', ')});`] : []), ...c.requires.filter((id) => PREREQS[id]?.kind === 'peer').map((id) => PREREQS[id].register)];
+  const need = [p.install, ...c.requires.map((id) => PREREQS[id].importPath), ...regs, PREREQS[c.requires[c.requires.length - 1]].cdn.split('\n').pop()];
   const has = (text, place) => {
     for (const s of need) if (!text.includes(s)) fail(where, `${place} is missing ${JSON.stringify(s)}`);
     if (!text.includes(`<${c.tag}`)) fail(where, `${place} has no minimal example`);
