@@ -7,17 +7,17 @@
  * ship with them: `neon-flicker`, `paper-fold`, `glass-shine`,
  * `retro-scanlines`, `brutal-shift`.
  *
- * - `applyTheme(name, root?)` — on `<html>` (default) it also makes the motion
+ * - `applyMotionTheme(name, root?)` — on `<html>` (default) it also makes the motion
  *   tokens active for `motionToken()`; on any other element the tokens are
  *   only written as variables there. Returns an undo.
  * - `themePreset(name, role)`, `playThemeEffect(el, role)` (theme of the
  *   closest `[data-usa-theme]`).
- * - `<usa-theme name="neon">` — scopes a theme to its subtree and binds the
+ * - `<usa-motion-theme name="neon">` — scopes a theme to its subtree and binds the
  *   presets to children with `data-theme-fx="click | hover | enter | attention"`.
  */
 import type { EffectDefinition, EffectTrigger } from '../fx/registry';
 import { bindEffect, playEffect } from '../fx/registry';
-import { adoptStyles, defineElement, deprecate, type UsaElement } from '../base';
+import { adoptStyles, defineElement, type UsaElement } from '../base';
 import { applyMotionTokens, mergeMotionTokens, motionTokensToVars, type DeepPartialTokens } from '../tokens/index';
 import { overlay } from './shared';
 
@@ -42,7 +42,7 @@ const P = (enter: string, hover: string, click: string, attention: string, backg
   background: { effect: background },
 });
 
-export const THEMES: Record<string, ThemePack> = {
+export const MOTION_THEMES: Record<string, ThemePack> = {
   neon: {
     name: 'neon',
     vars: { bg: '#07070c', fg: '#e8e8ff', accent: '#22d3ee', 'accent-2': '#ff2bd6', surface: '#11111c', border: '1px solid #22d3ee', radius: '10px', shadow: '0 0 18px #22d3ee66, inset 0 0 12px #ff2bd622', font: 'ui-monospace, SFMono-Regular, Menlo, monospace' },
@@ -75,11 +75,7 @@ export const THEMES: Record<string, ThemePack> = {
   },
 };
 
-export const THEME_NAMES = Object.keys(THEMES);
-/** The 5.8 motion theme packs (8.9 name of `THEMES`). */
-export const MOTION_THEMES = THEMES;
-/** Names of the 5.8 motion theme packs (8.9 name of `THEME_NAMES`). */
-export const MOTION_THEME_NAMES = THEME_NAMES;
+export const MOTION_THEME_NAMES = Object.keys(MOTION_THEMES);
 
 const BASE_CSS = `[data-usa-theme]{background:var(--usa-theme-bg);color:var(--usa-theme-fg);font-family:var(--usa-theme-font)}
 [data-usa-theme] .usa-surface{background:var(--usa-theme-surface);border:var(--usa-theme-border);border-radius:var(--usa-theme-radius);box-shadow:var(--usa-theme-shadow)}
@@ -87,8 +83,8 @@ const BASE_CSS = `[data-usa-theme]{background:var(--usa-theme-bg);color:var(--us
 [data-usa-theme=glass] .usa-surface{-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}`;
 
 const pack = (t: string | ThemePack): ThemePack => {
-  const p = typeof t === 'string' ? THEMES[t] : t;
-  if (!p) throw new Error(`[motionary] unknown theme "${String(t)}" — ${THEME_NAMES.join(', ')}`);
+  const p = typeof t === 'string' ? MOTION_THEMES[t] : t;
+  if (!p) throw new Error(`[motionary] unknown theme "${String(t)}" — ${MOTION_THEME_NAMES.join(', ')}`);
   return p;
 };
 
@@ -104,15 +100,6 @@ export function themeVars(t: string | ThemePack): Record<string, string> {
 export function themeCss(t: string | ThemePack, selector?: string): string {
   const p = pack(t);
   return `${selector || `[data-usa-theme=${p.name}]`}{${Object.entries(themeVars(p)).map(([k, v]) => `${k}:${v}`).join(';')}}`;
-}
-
-/**
- * Apply a motion theme to `root` (default `<html>`). Returns an undo.
- * @deprecated 8.9 — removed in 9.0. Use `applyMotionTheme()` (same signature); `npx usa-codemod-9 --write src`.
- */
-export function applyTheme(t: string | ThemePack, root?: HTMLElement): () => void {
-  deprecate('applyTheme', 'applyTheme() is deprecated and removed in 9.0 — use applyMotionTheme() (same signature). Run `npx usa-codemod-9 --write src`.');
-  return applyMotionTheme(t, root);
 }
 
 /** Apply a 5.8 motion theme to `root` (default `<html>`). Returns an undo (8.9). */
@@ -211,7 +198,7 @@ export interface UsaThemeElement extends UsaElement {
 }
 
 /** `<usa-theme name="neon | paper | glass | retro | brutalist">` — a themed subtree. */
-export function defineTheme(tag = 'usa-theme'): CustomElementConstructor | undefined {
+export function defineMotionTheme(tag = 'usa-motion-theme'): CustomElementConstructor | undefined {
   return defineElement(
     tag,
     (Base) =>
@@ -221,10 +208,9 @@ export function defineTheme(tag = 'usa-theme'): CustomElementConstructor | undef
         }
         get theme(): string {
           const n = this.str('name', 'neon');
-          return THEMES[n] ? n : 'neon';
+          return MOTION_THEMES[n] ? n : 'neon';
         }
         mount(): void {
-          if (this.localName === 'usa-theme') deprecate('usa-theme', '<usa-theme> is deprecated and removed in 9.0 — use <usa-motion-theme> (same name / data-theme-fx). Run `npx usa-codemod-9 --write src`.');
           this.onCleanup(applyMotionTheme(this.theme, this));
           this.querySelectorAll<HTMLElement>('[data-theme-fx]').forEach((el) => {
             const role = (el.dataset.themeFx || 'click') as ThemeRole;
@@ -243,7 +229,3 @@ export function defineTheme(tag = 'usa-theme'): CustomElementConstructor | undef
   );
 }
 
-/** `<usa-motion-theme name="neon">` — the 8.9 name of `<usa-theme>` (removed in 9.0). */
-export function defineMotionTheme(tag = 'usa-motion-theme'): CustomElementConstructor | undefined {
-  return defineTheme(tag);
-}

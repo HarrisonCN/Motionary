@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [9.0.0] - 2026-10-09
+
+### ⚠ Breaking
+- Removed the 8.9 deprecations: `applyTheme()`, `THEMES`, `THEME_NAMES`, `<usa-theme>` / `defineTheme()` (`motionary/components/effects`). Use `applyMotionTheme()`, `MOTION_THEMES`, `MOTION_THEME_NAMES`, `<usa-motion-theme>` / `defineMotionTheme()` — same behaviour. `npx usa-codemod-9 --write src` rewrites identifiers and tags; see [docs/upgrading-9.md](docs/upgrading-9.md).
+
+### Added
+- **Declarative motion DSL — `motionary/dsl`** (= `motionary/components/dsl`): one readable string per element — `data-motion="enter: fade-up 600ms ease-out stagger 80ms; hover: pop; click: confetti count=40"`. Triggers `enter` · `click` · `hover` · `load` · `loop` · `manual`; modifiers: duration (`600ms` / `0.6s`), `delay`, `stagger` (children in turn — `delay` / `stagger` are passed as the effect's `delay` option, honoured by the entrance presets and every effect that takes one), easing (`ease-out`, `spring`, `smooth`, `cubic-bezier(…)`, `steps(…)`), `once`, `key=value` effect options. `applyMotion(root, { observe })`, `bindMotion(el, rules)`, `parseMotion()` (rules + readable errors), `serializeMotion()`, `motion` tagged template, `createComponent(json)` (builds live markup from the 8.9 `describeComponent()` JSON).
+- **Plugin marketplace GA — `motionary/marketplace`** (`motionary/components/marketplace` now re-exports it and keeps the 6.9 manifest API): `MARKETPLACE` (first-party catalogue of the 8.x effect packs), `searchPlugins(query)`, `installPlugin(listing | url, { load })` (first-party registrar or validated third-party pack), `installedPlugins()`, `fetchMarketplace(url)` (`motionary/marketplace` v1 index).
+- **2 new components (9.0)** in `motionary/components/widgets`: `<usa-motion rules="…">` (the DSL as an element; `parsed`, `errors`, `usa:motion-error`) and `<usa-plugin-store>` (search + one-click install with staggered result cards; `plugins`, `loader`, `search()`, `install()`; `usa:install` / `usa:install-error`).
+- Chinese roadmap 9.1 → 10.0 (`docs/ROADMAP.md`). `motionary` and `use-scroll-animate` are published with the npm `latest` tag.
+
+### Accessibility
+- `<usa-plugin-store>` is a labelled `search` region with a labelled search field, a live result count and real buttons whose text reports the install state. `<usa-motion>` adds no semantics; effects bound by the DSL honour reduced motion like every other effect.
+
+### Fixed
+- `<usa-plugin-store>` called `CSS.escape` without checking that the `CSS` global exists (throws in jsdom / some SSR shims) — now guarded with a fallback.
+- the 9.0 removal check treated the internal style-sheet id and the theme switcher's `localStorage` key `'usa-theme'` as leftovers of `<usa-theme>`; they are kept (saved theme choices survive the upgrade).
+
 ## [8.9.0] - 2026-10-09
 
 ### Added

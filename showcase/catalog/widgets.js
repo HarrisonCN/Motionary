@@ -1026,6 +1026,21 @@ export const components = [
     '<usa-star-rating id="r" value="3"></usa-star-rating>\n<usa-prop-panel for="#r" props="value:number:0:5, icon:select:star|heart, readonly:boolean"></usa-prop-panel>',
     '<div class="demo-col demo-pp"><usa-progress-ring value="40" label="Progress"></usa-progress-ring><usa-prop-panel for="previous" props="value:number:0:100, label:text"></usa-prop-panel></div>',
     undefined, { since: '8.9' }),
+  // ---- 9.0 -------------------------------------------------------------
+  W('usa-motion', 'ui', 'Motion DSL', '动效 DSL',
+    '9.0: the declarative motion DSL — describe motion as one readable string (“enter: fade-up 600ms stagger 80ms; hover: pop”) on <usa-motion> or any element’s data-motion, no JavaScript per element.',
+    '9.0：声明式动效 DSL —— 用一行可读字符串描述动效（“enter: fade-up 600ms stagger 80ms; hover: pop”），写在 <usa-motion> 或任意元素的 data-motion 上，无需逐个写 JS。',
+    ['dsl', 'declarative', 'data-motion', 'stagger', 'no-code'],
+    '<usa-motion rules="enter: fade-up 600ms ease-out stagger 80ms; hover: pop">\n  <div class="card">One</div><div class="card">Two</div><div class="card">Three</div>\n</usa-motion>\n\n<!-- or on any element, with applyMotion() from motionary/dsl -->\n<section data-motion="enter: fade-up 500ms; click: confetti count=40">…</section>',
+    '<usa-motion class="demo-motion" rules="enter: fade-up 600ms stagger 120ms; hover: pop"><span>enter:</span><span>fade-up</span><span>600ms</span><span>stagger</span></usa-motion>',
+    undefined, { since: '9.0' }),
+  W('usa-plugin-store', 'ui', 'Plugin marketplace', '插件市场',
+    '9.0: the plugin marketplace as a component — search the catalogue of effect packs, see each plugin’s effects and install it with one click (imports and registers the pack).',
+    '9.0：组件化的插件市场 —— 搜索效果包目录，查看每个插件包含的效果，一键安装（导入并注册效果包）。',
+    ['marketplace', 'plugins', 'install', 'effect packs', 'store'],
+    '<usa-plugin-store query="neon"></usa-plugin-store>\n<script type="module">\n  const store = document.querySelector(\'usa-plugin-store\');\n  store.loader = (entry) => import(entry); // or map to your bundler imports\n</script>',
+    '<usa-plugin-store class="demo-pstore" query="glitch"></usa-plugin-store>',
+    undefined, { since: '9.0' }),
 ];
 
 /** item id → live-demo wiring. */
@@ -1233,5 +1248,10 @@ export const wire = {
   'gyro-card': (stage) => {
     const c = stage.querySelector('usa-gyro-card');
     stage.querySelector('[data-gyro-wobble]')?.addEventListener('click', () => c?.wobble());
+  },
+  'plugin-store': (stage) => {
+    const s = stage.querySelector('usa-plugin-store');
+    // showcase: every pack is already registered — a loader that "downloads" for 0.5 s and returns no-op registrars
+    if (s) s.loader = () => new Promise((r) => setTimeout(() => r(new Proxy({}, { get: (_, k) => (k === 'then' ? undefined : () => {}) })), 500));
   },
 };

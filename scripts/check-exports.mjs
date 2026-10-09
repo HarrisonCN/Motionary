@@ -22,6 +22,8 @@ const entries = {
   'motionary/components/cards': ['defineCardComponents', 'defineCard', 'defineCardStack', 'defineStickyStack', 'defineCarousel3d', 'CARD_EFFECTS'],
   'motionary/components/click': ['defineClickComponents', 'defineClick', 'defineButton', 'defineIconMorph', 'defineLike', 'defineHold', 'defineDoubleTap', 'defineCheckbox', 'haptic', 'morphPath', 'BUTTON_DEFORMS'],
   'motionary/engine': ['motionClock', 'createTimeline', 'resolvePosition', 'hydrateMotion', 'ssrHead', 'HYDRATION_CSS', 'HYDRATE_PRESETS', 'setClock', 'getClock'],
+  'motionary/dsl': ['parseMotion', 'serializeMotion', 'motion', 'bindMotion', 'applyMotion', 'createComponent'],
+  'motionary/marketplace': ['MARKETPLACE', 'MARKETPLACE_FORMAT', 'searchPlugins', 'installPlugin', 'installedPlugins', 'fetchMarketplace', 'packManifest', 'validateManifest', 'loadEffectPack', 'EFFECT_PACK_FORMAT'],
   'motionary/components/ui': ['defineUiComponents', 'defineTabs', 'defineDrawer', 'defineBottomSheet', 'definePullRefresh', 'defineFab', 'defineNavbar', 'defineSlider', 'definePopover', 'defineBadge', 'defineAvatarStack', 'VARIANTS', 'setVariant'],
   'motionary/components/page': ['definePageComponents', 'defineCursor', 'defineFullpage', 'defineLoadingBar', 'defineBackToTop', 'defineAmbient', 'defineSplash', 'defineAutoSkeleton', 'defineMotionSwitch', 'pageTransition', 'enableMpaTransitions', 'themeTransition', 'smoothScroll', 'scrollToTarget', 'loadingBar', 'setMotionIntensity'],
   'motionary/components/react': ['createUsaComponents', 'USA_TAGS', 'eventName'],

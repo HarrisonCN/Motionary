@@ -132,7 +132,7 @@ export class Hero {}
 | **生成式背景** | 6 种画布背景（flow-field、voronoi、mesh-gradient、starfield、metaballs、contours）+ 9 个背景元素（极光、粒子、胶片颗粒、流体色块、水波、亚克力 / 云母……） |
 | **声音响应** | `<usa-audio>` + Web Audio 节拍检测（`createBeatDetector()`、`onBeat()`）；3 种音频可视化（spectrum-bars、pulse-ring、wave-ring）；任意效果都可随节拍触发 |
 | **光标与手势** | 5 种光标效果（彗星 / 丝带 / 星光拖尾、磁性圆点、聚光灯）+ `<usa-cursor>`；甩动 · 旋转 · 长按触发效果（`<usa-gesture-fx>`）；`<usa-swipeable>`、`<usa-pinch-zoom>` |
-| **主题** | 5 套主题（neon · paper · glass · retro · brutalist），通过 `<usa-theme>` / `applyTheme()` 使用，各带一个标志性效果；动效令牌（`/components/tokens`） |
+| **主题** | 5 套主题（neon · paper · glass · retro · brutalist），通过 `<usa-motion-theme>` / `applyMotionTheme()` 使用，各带一个标志性效果；动效令牌（`/components/tokens`） |
 | **微交互** | 23 个现成的界面瞬间：copy-success、like-heart、add-to-cart、send-plane、upvote、trash-shake、input-shake、success-check、notify-badge…… |
 | **`<usa-player>` 与滚动叙事** | `<usa-player>` 播放 JSON 动画（关键帧轨道、预设、效果；load / view / scroll / click 触发），可从 Playground 导出；`<usa-story>` 含 6 个滚动叙事模板 |
 | **WebGL** | `<usa-shader>`、`<usa-distort>`、`<usa-liquid>`、`<usa-post-fx>` —— 5 个粒子预设、9 种后期效果（bloom、CRT、色散、故障……），带 CSS 降级与省电调速 |
@@ -164,7 +164,7 @@ export class Hero {}
 | **布局** (`/components/layout`) | `<usa-auto-animate>` · `<usa-masonry>` |
 | **效果包** (`/components/packs`) | `<usa-pack>` |
 | **效果注册表** (`/components/fx`) | `<usa-fx>` |
-| **效果包** (`/components/effects`) | `<usa-player>` · `<usa-story>` · `<usa-audio>` · `<usa-theme>` · `<usa-gesture-fx>` |
+| **效果包** (`/components/effects`) | `<usa-player>` · `<usa-story>` · `<usa-audio>` · `<usa-motion-theme>` · `<usa-gesture-fx>` |
 
 ## 无障碍与减少动态效果
 

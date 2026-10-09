@@ -132,7 +132,7 @@ Animated components need no framework at all:
 | **Generative backgrounds** | 6 canvas backgrounds (flow-field, voronoi, mesh-gradient, starfield, metaballs, contours) + 9 background elements (aurora, particles, grain, blobs, water ripple, Acrylic / Mica, …) |
 | **Sound-reactive** | `<usa-audio>` + Web Audio beat detection (`createBeatDetector()`, `onBeat()`); 3 audio visualisers (spectrum-bars, pulse-ring, wave-ring); any effect can fire on the beat |
 | **Cursor & gestures** | 5 cursor effects (comet / ribbon / sparkle trails, magnetic dots, spotlight) + `<usa-cursor>`; fling · twist · long-press → effects with `<usa-gesture-fx>`; `<usa-swipeable>`, `<usa-pinch-zoom>` |
-| **Themes** | 5 theme packs (neon · paper · glass · retro · brutalist) via `<usa-theme>` / `applyTheme()`, each with a signature effect; motion tokens (`/components/tokens`) |
+| **Themes** | 5 theme packs (neon · paper · glass · retro · brutalist) via `<usa-motion-theme>` / `applyMotionTheme()`, each with a signature effect; motion tokens (`/components/tokens`) |
 | **Micro-interactions** | 23 ready-made UI moments: copy-success, like-heart, add-to-cart, send-plane, upvote, trash-shake, input-shake, success-check, notify-badge, … |
 | **`<usa-player>` & stories** | `<usa-player>` plays JSON animations (keyframe tracks, presets, effects; load / view / scroll / click triggers) exported from the Playground; `<usa-story>` with 6 scroll-story templates |
 | **WebGL** | `<usa-shader>`, `<usa-distort>`, `<usa-liquid>`, `<usa-post-fx>` — 5 particle presets, 9 post effects (bloom, CRT, chromatic, glitch, …) with CSS fallbacks and a power-saving governor |
@@ -164,7 +164,7 @@ Import one category (`motionary/components/cards`), everything (`motionary/compo
 | **Layout** (`/components/layout`) | `<usa-auto-animate>` · `<usa-masonry>` |
 | **Packs** (`/components/packs`) | `<usa-pack>` |
 | **Effect registry** (`/components/fx`) | `<usa-fx>` |
-| **Effect packs** (`/components/effects`) | `<usa-player>` · `<usa-story>` · `<usa-audio>` · `<usa-theme>` · `<usa-gesture-fx>` |
+| **Effect packs** (`/components/effects`) | `<usa-player>` · `<usa-story>` · `<usa-audio>` · `<usa-motion-theme>` · `<usa-gesture-fx>` |
 
 ## Accessibility & reduced motion
 

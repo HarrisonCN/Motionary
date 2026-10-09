@@ -453,18 +453,18 @@ bindGesture(dial, 'twist', ({ direction }) => step(direction === 'cw' ? 1 : -1))
 ### v5.8 Theme packs & micro-interactions (`components/effects`)
 
 ```html
-<usa-theme name="glass">
+<usa-motion-theme name="glass">
   <div class="usa-surface">
     <button data-theme-fx="click">Tap</button>
     <usa-fx effect="like-heart" trigger="click"><button aria-pressed="false">♥ <span data-count="12">12</span></button></usa-fx>
     <usa-fx effect="copy-success" trigger="click"><button data-copy="npm i motionary">Copy</button></usa-fx>
   </div>
-</usa-theme>
+</usa-motion-theme>
 ```
 ```js
-import { applyTheme, themeCss, playEffect, registerAllEffects } from 'motionary/components/effects';
+import { applyMotionTheme, themeCss, playEffect, registerAllEffects } from 'motionary/components/effects';
 registerAllEffects();
-const undo = applyTheme('neon');          // whole page: design + motion tokens + data-usa-theme
+const undo = applyMotionTheme('neon');          // whole page: design + motion tokens + data-usa-theme
 const css = themeCss('paper', ':root');   // static CSS for SSR
 playEffect(passwordToggle, 'password-reveal');
 ```
@@ -1145,7 +1145,27 @@ console.log(exportComponent(document.querySelector('#r'), 'react'));
 ```
 - `<usa-code-export for formats>`: `format`, `code`, `copy()`; `usa:copy` { format, ok }.
 - `<usa-prop-panel for props label>`: `props`, `reset()`; `usa:prop` { name, value }; `parseProps(str)`.
-- 9.0 prep: `applyTheme` / `THEMES` / `THEME_NAMES` / `<usa-theme>` are deprecated → `applyMotionTheme` / `MOTION_THEMES` / `MOTION_THEME_NAMES` / `<usa-motion-theme>` (`npx usa-codemod-9 --write src`, see docs/upgrading-9.md).
+- 9.0 prep: `applyMotionTheme` / `MOTION_THEMES` / `MOTION_THEME_NAMES` / `<usa-motion-theme>` are deprecated → `applyMotionTheme` / `MOTION_THEMES` / `MOTION_THEME_NAMES` / `<usa-motion-theme>` (`npx usa-codemod-9 --write src`, see docs/upgrading-9.md).
+
+### v9.0 Declarative motion DSL (`motionary/dsl`) + plugin marketplace (`motionary/marketplace`): `<usa-motion>`, `<usa-plugin-store>`
+
+```html
+<section data-motion="enter: fade-up 600ms ease-out stagger 80ms; hover: pop">
+  <div class="card">One</div><div class="card">Two</div>
+</section>
+<usa-motion rules="click: confetti count=40"><button>Celebrate</button></usa-motion>
+
+<usa-plugin-store query="neon"></usa-plugin-store>
+```
+```js
+import { applyMotion, parseMotion } from 'motionary/dsl';
+import { searchPlugins, installPlugin } from 'motionary/marketplace';
+const { errors } = applyMotion(document, { observe: true });
+await installPlugin(searchPlugins('retro')[0], { load: () => import('motionary/fx/retro') });
+```
+- DSL: `trigger: effect [600ms] [ease-out] [delay 100ms] [stagger 80ms] [once] [key=value…]`, rules separated by `;`.
+- `<usa-motion rules>`: `parsed`, `errors`; `usa:motion-error` { message }.
+- `<usa-plugin-store query label>`: `plugins`, `loader`, `search(q)`, `install(name)`; `usa:install` { name, effects }, `usa:install-error`.
 
 ## Frameworks
 
