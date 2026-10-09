@@ -1,6 +1,6 @@
-# Motionary 10.5.0
+# Motionary 10.6.0
 
-> Motionary is a zero-dependency motion library: scroll animations, 200+ presets and 202 animated Web Components (<usa-*>) that work in plain HTML and every framework, plus motionary/runtime — its own tween/timeline engine and format loaders.
+> Motionary is a zero-dependency motion library: scroll animations, 200+ presets and 205 animated Web Components (<usa-*>) that work in plain HTML and every framework, plus motionary/runtime — its own tween/timeline engine and format loaders.
 
 Install: `npm i motionary` · CDN: https://unpkg.com/motionary@10/dist/components.umd.js (+ https://unpkg.com/motionary@10/dist/widgets.umd.js for 6.x+ widgets) · Manifest: https://harrisoncn.github.io/Motionary/components.json · Full text: https://harrisoncn.github.io/Motionary/llms-full.txt
 
@@ -22,6 +22,8 @@ Rules for using a component: (1) import its define function from `import.path` a
 - [motionary/runtime/gl](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/gl.md): A small WebGL2 renderer with its own API: scene graph, camera, lights, box / plane / sphere / torus, PBR-style materials, shader materials, image and video textures, orbit controls — not a Three.js clone.
 - [motionary/runtime/format-gltf](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/format-gltf.md): Load glTF 2.0 (.gltf with external or data: buffers, .glb) into motionary/runtime/gl nodes: node hierarchy, meshes, PBR metallic-roughness materials, embedded / external images.
 - [motionary/runtime/format-obj](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/format-obj.md): Load Wavefront OBJ (+ MTL materials and diffuse textures) into motionary/runtime/gl nodes: polygons triangulated, groups, per-material meshes.
+- [motionary/runtime/vector](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/vector.md): Plays Lottie (bodymovin JSON) and dotLottie (.lottie) files on Canvas 2D with Motionary’s own renderer (no lottie-web code): shapes, gradients, trim paths, masks, track mattes, precomps, images; a runtime timeline you can seek, reverse and scrub.
+- [@rive-app/canvas](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/rive.md): The official MIT-licensed Rive runtime, used by <usa-rive> to play .riv files (artboards, animations, state machines with inputs). Optional peer dependency: lazy-loaded on first use, never bundled into Motionary.
 
 ## Components
 
@@ -111,6 +113,7 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<usa-location-card>` (motionary/components/widgets): 7.6: a place card with a stylised mini map — the route from the origin draws itself, the pin drops in with a bounce and a ring pulses; distance computed with ha
 - `<usa-lottie>` (motionary/components/widgets): 9.2: plays Lottie (After Effects / bodymovin) files without lottie-web — vector layers render as SVG and their keyframes run as native animations on Motionary’s
 - `<usa-lottie-icon>` (motionary/components/widgets): 9.2: an animated icon set shipped as tiny Lottie files — heart beat, bell swing, check draw-in, spinner, star twinkle, bolt zap — on click, hover, enter or loop
+- `<usa-lottie-player>` (motionary/components/widgets; requires motionary/runtime/vector): 10.6: plays Lottie JSON and dotLottie (.lottie) files with Motionary’s own Canvas 2D renderer — shapes, gradients, trim paths, masks, track mattes, precomps and
 - `<usa-lyrics>` (motionary/components/widgets): 7.1: LRC or [data-t] lines; the active line glows, scrolls to the centre and a highlight sweeps across it while past lines dim. Follows an <audio>, <video> or <
 - `<usa-magnetic>` (motionary/components/interaction): Content leans toward the pointer when it comes near and springs back. Fine pointers only; off under reduced motion.
 - `<usa-marquee>` (motionary/components/background): A seamless infinite ticker with constant speed, pause on hover, soft edges and vertical mode. Clones are hidden from AT.
@@ -166,6 +169,7 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<usa-retro-button>` (motionary/components/widgets): 8.2: buttons in four eras with matching press motion — 8-bit pixel (stepped press), CRT phosphor (flicker), Y2K chrome pill (bounce) and Windows 95 bevel (sink)
 - `<usa-reveal>` (motionary/components/reveal): Fade, slide, zoom, blur or flip content in as it enters the viewport. 12 effects, replay on re-entry with repeat.
 - `<usa-ripple>` (motionary/components/interaction): Ink ripple from the pointer — or from the centre for Space/Enter — on any button, list item or card.
+- `<usa-rive>` (motionary/components/widgets; requires @rive-app/canvas): 10.6: plays Rive (.riv) files — artboards, animations and state machines with inputs — through the official Rive runtime @rive-app/canvas, an optional peer depe
 - `<usa-route-transition>` (motionary/components/widgets): 10.3: View Transitions 2.0 — link clicks swap the container’s content with the target page (fetched) or an inline <template data-route>, animated with the View 
 - `<usa-scene>` (motionary/components/widgets): 9.1: a scroll-scrubbed cinematic shot — while the scene crosses the screen its image follows a camera move (dolly, pan, tilt, zoom, orbit) and captions fade in 
 - `<usa-scramble>` (motionary/components/text): Decodes text out of random glyphs, left to right. Trigger on view, hover/focus or manually.
@@ -216,6 +220,7 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<usa-tip>` (motionary/components/widgets): 6.6: springs out of its trigger with an arrow, flips to stay inside the viewport and shifts along the edge; hover + keyboard focus (Esc closes) or click popover
 - `<usa-toast-stack>` (motionary/components/widgets): 6.3: toasts pile up into a collapsed stack (newest in front, older ones peeking behind), fan out on hover or focus, auto-dismiss (paused while hovered) and swip
 - `<usa-toaster>` (motionary/components/feedback): toast("Saved") slides a notification in; it pauses on hover, stacks with FLIP and announces politely (errors assertively).
+- `<usa-token-editor>` (motionary/components/widgets): 10.6 (motion design tokens 2.0): edit duration and cubic-bézier easing tokens with a live preview per token, then export W3C Design Tokens (DTCG 2025.10 or the 
 - `<usa-typewriter>` (motionary/components/text): Types text, or cycles through phrases with delete and pause. Full text stays available to screen readers.
 - `<usa-upload-progress>` (motionary/components/widgets): 7.7: a file row whose bar eases to value with a running shine; at 100 it turns into a check that draws itself, on error it shakes and offers Retry.
 - `<usa-video-card>` (motionary/components/widgets): 9.4: a video thumbnail card — hover or focus plays a muted preview with a progress line, a play badge and a duration chip; without a video the poster drifts (Ke

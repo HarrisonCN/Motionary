@@ -1,8 +1,8 @@
 'use strict';
 
-var registry = require('../chunks/registry-VhfPSI0v.cjs');
-var tween = require('../chunks/tween-_BGIl6hK.cjs');
-require('../chunks/ticker-DvmC6WLS.cjs');
+var registry = require('../chunks/registry-dr1CPTk1.cjs');
+var tween = require('../chunks/tween-CmkdSyaC.cjs');
+require('../chunks/ticker-DaAlEyOd.cjs');
 require('../chunks/ease-HwYZnZat.cjs');
 
 /**

@@ -59,7 +59,7 @@ const componentsCss = () => ({
 });
 
 // Peer dependencies are never bundled.
-const external = ['solid-js'];
+const external = ['solid-js', '@rive-app/canvas', '@rive-app/webgl2'];
 
 // Every entry (`motionary` and `motionary/<name>`) shares
 // code through dist/chunks/, so importing several never loads the core twice.

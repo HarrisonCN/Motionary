@@ -1,4 +1,39 @@
 /**
+ * Motion design tokens 2.0 (10.6): the W3C Design Tokens Community Group
+ * format (DTCG, stable 2025.10) — import with alias resolution and
+ * validation, export in the stable or the earlier draft shape.
+ *
+ * - `resolveTokenAliases(json)` — replaces `{group.token}` references
+ *   (whole values and inside composite values), detects cycles and
+ *   unknown references;
+ * - `validateDesignTokens(json)` — problems (unknown `$type`, malformed
+ *   durations / cubic béziers, broken aliases) without throwing;
+ * - `importDesignTokens(json)` — resolve + import into `MotionTokens`
+ *   (durations, easings, `transition` composites, springs from
+ *   `$extensions["org.motionary"]`);
+ * - `exportDesignTokens(tokens, { format })` — `2025.10` writes durations
+ *   as `{ value, unit: "ms" }`, `draft` as `"150ms"`; springs travel in
+ *   `$extensions["org.motionary"].spring` (springs are not a DTCG type).
+ */
+
+/** Inherit `$type` from parent groups (DTCG) and resolve `{a.b}` aliases. Throws on cycles / missing targets. */
+declare function resolveTokenAliases<T = any>(json: T): T;
+/** Problems in a DTCG file (empty array = valid for motion purposes). */
+declare function validateDesignTokens(json: unknown): string[];
+/** Resolve aliases, then import (merged over `base`). Springs come from `$extensions["org.motionary"].spring`. */
+declare function importDesignTokens(json: unknown, base?: MotionTokens): MotionTokens;
+interface ExportOptions {
+    /** '2025.10' (stable: durations as { value, unit }) or 'draft' ("150ms"). Default '2025.10'. */
+    format?: '2025.10' | 'draft';
+    /** Top-level group name (default 'motion'). */
+    group?: string;
+    /** Add `transition` composite tokens for these [name, durationToken, easingToken] triples. */
+    transitions?: [string, string, string][];
+}
+/** Export motion tokens as a DTCG document. */
+declare function exportDesignTokens(tokens?: MotionTokens, o?: ExportOptions): Record<string, unknown>;
+
+/**
  * motionary/components/tokens — motion design tokens (4.2).
  *
  * One source of truth for durations, easings and springs: as CSS custom
@@ -70,5 +105,5 @@ declare function resolveDurationToken(v: number | string | undefined, fallback: 
 /** Resolve an easing that may be a token name (`'emphasized'`) or CSS. */
 declare function resolveEasingToken(v: string | undefined, fallback: string): string;
 
-export { MOTION_TOKENS, applyMotionTokens, getMotionTokens, importMotionTokens, mergeMotionTokens, motionToken, motionTokensToCss, motionTokensToJSON, motionTokensToVars, motionVar, parseDuration, parseEasing, resolveDurationToken, resolveEasingToken };
+export { MOTION_TOKENS, applyMotionTokens, exportDesignTokens, getMotionTokens, importDesignTokens, importMotionTokens, mergeMotionTokens, motionToken, motionTokensToCss, motionTokensToJSON, motionTokensToVars, motionVar, parseDuration, parseEasing, resolveDurationToken, resolveEasingToken, resolveTokenAliases, validateDesignTokens };
 export type { DeepPartialTokens, MotionTokenGroup, MotionTokens, SpringToken };

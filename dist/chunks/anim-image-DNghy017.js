@@ -1,4 +1,4 @@
-import { P as Playable } from './tween-CPtm-EdT.js';
+import { P as Playable } from './tween-BzCGq_Ba.js';
 
 /**
  * Shared internals of the animated-image loaders (`format-gif`, `format-apng`,
@@ -163,4 +163,4 @@ function crc32(bytes, start = 0, end = bytes.length) {
 }
 
 export { animatedImagePlayer as a, browserDecode as b, composeFrames as c, bytesOf as d, crc32 as e, fixDelay as f, u8 as u };
-//# sourceMappingURL=anim-image-BlNPv4JG.js.map
+//# sourceMappingURL=anim-image-DNghy017.js.map

@@ -1,9 +1,9 @@
 'use strict';
 
-var registry = require('../chunks/registry-VhfPSI0v.cjs');
-var tween = require('../chunks/tween-_BGIl6hK.cjs');
+var registry = require('../chunks/registry-dr1CPTk1.cjs');
+var tween = require('../chunks/tween-CmkdSyaC.cjs');
 var ease = require('../chunks/ease-HwYZnZat.cjs');
-require('../chunks/ticker-DvmC6WLS.cjs');
+require('../chunks/ticker-DaAlEyOd.cjs');
 
 /**
  * `motionary/runtime/format-svg` (10.2) — SVG animation with the runtime

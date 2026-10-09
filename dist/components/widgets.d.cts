@@ -2554,6 +2554,202 @@ declare const POST_PASSES: Record<string, string>;
 declare function defineShaderBackdrop(tag?: string): CustomElementConstructor | undefined;
 
 /**
+ * `motionary/runtime/vector` (10.6) — a Lottie (bodymovin JSON) + dotLottie
+ * player written for Motionary (own renderer on Canvas 2D; no lottie-web
+ * code). Supported subset — see the compatibility table in
+ * `docs/runtime/vector.md`:
+ *
+ * - layers: shape, solid, null, image, precomp (with time stretch / time
+ *   remap), parenting, in / out points, hidden layers;
+ * - transforms: anchor, position (incl. split X / Y and spatial bezier
+ *   paths), scale, rotation, skew, opacity;
+ * - shapes: groups, paths, rectangles (rounded), ellipses, stars / polygons;
+ *   fills (non-zero / even-odd), strokes (caps, joins, dashes), linear and
+ *   radial gradient fills / strokes, **trim paths** (individually /
+ *   simultaneously);
+ * - **masks** (add, subtract, intersect, inverted, opacity) and **track
+ *   mattes** (alpha, alpha inverted; luma approximated by alpha);
+ * - keyframes: bezier easing per dimension, hold keyframes, v4 (`e`) and v5+
+ *   (`s` only) files;
+ * - **dotLottie** (`.lottie`): zip (stored + deflate via the native
+ *   `DecompressionStream`), `manifest.json` v1 / v2, several animations,
+ *   embedded images.
+ *
+ * Not supported (documented): 3D layers, effects, text layers (10.8),
+ * expressions (10.8 subset), merge paths, repeaters. `lottiePlayer()` is a
+ * runtime timeline (seek, reverse, scrub with `progress`, markers → labels).
+ */
+
+type Num = number;
+interface LottieProp {
+    a?: Num;
+    k: any;
+    x?: string;
+    s?: boolean;
+}
+interface LottieLayer {
+    ty: Num;
+    ind?: Num;
+    parent?: Num;
+    ip: Num;
+    op: Num;
+    st?: Num;
+    sr?: Num;
+    ks: any;
+    shapes?: any[];
+    hd?: boolean;
+    tt?: Num;
+    td?: Num;
+    masksProperties?: any[];
+    refId?: string;
+    w?: Num;
+    h?: Num;
+    sw?: Num;
+    sh?: Num;
+    sc?: string;
+    tm?: LottieProp;
+    nm?: string;
+    ddd?: Num;
+    ef?: unknown[];
+}
+interface LottieAnimation {
+    v?: string;
+    fr: Num;
+    ip: Num;
+    op: Num;
+    w: Num;
+    h: Num;
+    nm?: string;
+    layers: LottieLayer[];
+    assets?: {
+        id: string;
+        layers?: LottieLayer[];
+        p?: string;
+        u?: string;
+        w?: Num;
+        h?: Num;
+        e?: Num;
+    }[];
+    markers?: {
+        cm: string;
+        tm: Num;
+        dr: Num;
+    }[];
+}
+type LottiePlayer = Playable & {
+    readonly frame: Num;
+    readonly totalFrames: Num;
+    readonly animation: LottieAnimation;
+    goToFrame(f: Num): void;
+    setSegment(seg: [Num, Num] | string | null): void;
+    markers: Record<string, [Num, Num]>;
+};
+
+/**
+ * `<usa-lottie-player src="hero.lottie" autoplay loop></usa-lottie-player>`
+ * (10.6) — plays Lottie JSON and dotLottie (`.lottie`) files with
+ * **`motionary/runtime/vector`** (requires `use(vector)`): Motionary's own
+ * Canvas 2D renderer for the documented subset (shapes, gradients, trim
+ * paths, masks, track mattes, precomps, images). `animation` (id inside a
+ * dotLottie), `autoplay`, `loop` (or a count), `speed`, `mode` (normal ·
+ * bounce), `segment` ("0,30" or a marker name), `hover` (play on hover),
+ * `scrub` (progress follows the element's scroll position), `fit` (contain ·
+ * cover · fill), `background`, `label`. Methods `play()`, `pause()`,
+ * `stop()`, `seek(frame)`, `player`, `animationData`, `unsupported`
+ * (features in the file this renderer skips); `usa:load`, `usa:complete`,
+ * `usa:error`. Reduced motion: first frame, no autoplay. Renders only while
+ * visible.
+ */
+interface UsaLottiePlayerElement extends UsaElement {
+    play(): void;
+    pause(): void;
+    stop(): void;
+    seek(frame: number): void;
+    readonly player: LottiePlayer | null;
+    readonly animationData: LottieAnimation | null;
+    readonly unsupported: string[];
+}
+declare function defineLottiePlayer(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-rive src="vehicles.riv" state-machine="bumpy" autoplay></usa-rive>`
+ * (10.6) — plays Rive (`.riv`) files with the **official Rive runtime**
+ * `@rive-app/canvas` (an optional peer dependency; `.riv` is Rive's
+ * proprietary binary format, so Motionary does not reimplement it). The
+ * runtime is loaded lazily on first use: from `provideRiveRuntime(() =>
+ * import('@rive-app/canvas'))` (bundlers, after `npm i @rive-app/canvas`),
+ * from `window.rive` (the official CDN script), an import map, or from
+ * `runtime-src` (a URL to the official ESM / UMD build). Missing →
+ * a clear message in place + `usa:runtime-missing`. `artboard`,
+ * `animation`, `state-machine`, `autoplay`, `fit` (contain · cover · fill ·
+ * fitWidth · fitHeight · none), `label`. `rive` (the official instance),
+ * `play()`, `pause()`, `input(name)` (state-machine input); `usa:load`,
+ * `usa:error`. Reduced motion: paused on the first frame.
+ */
+interface UsaRiveElement extends UsaElement {
+    readonly rive: any;
+    play(): void;
+    pause(): void;
+    input(name: string): any;
+}
+declare const RIVE_PEER = "@rive-app/canvas";
+declare const RIVE_CDN = "https://unpkg.com/@rive-app/canvas@2.44.1/rive.js";
+/**
+ * Hand `<usa-rive>` the official runtime yourself — the module, or (better) a
+ * lazy loader such as `() => import('@rive-app/canvas')` for bundlers that do
+ * not follow the element's own optional import. Call before the element mounts.
+ */
+declare function provideRiveRuntime(runtime: unknown | (() => unknown)): void;
+/** Load the official runtime: window.rive → import('@rive-app/canvas') → `runtimeSrc` script. */
+declare function loadRiveRuntime(runtimeSrc?: string): Promise<any>;
+declare function defineRive(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * motionary/components/tokens — motion design tokens (4.2).
+ *
+ * One source of truth for durations, easings and springs: as CSS custom
+ * properties (`--usa-duration-fast`, `--usa-easing-emphasized`,
+ * `--usa-spring-bouncy-stiffness`…), as W3C Design Tokens JSON, and importable
+ * from Figma Tokens (Tokens Studio) or Style Dictionary exports.
+ *
+ * ```ts
+ * import { applyMotionTokens, importMotionTokens, motionToken } from 'motionary/components/tokens';
+ * applyMotionTokens(importMotionTokens(await (await fetch('/tokens.json')).json()));
+ * el.animate(frames, { duration: motionToken('duration', 'slow'), easing: motionToken('easing', 'emphasized') });
+ * ```
+ */
+interface SpringToken {
+    stiffness: number;
+    damping: number;
+    mass: number;
+}
+interface MotionTokens {
+    /** Durations in ms. */
+    duration: Record<string, number>;
+    /** CSS easing strings. */
+    easing: Record<string, string>;
+    /** Spring physics parameters. */
+    spring: Record<string, SpringToken>;
+}
+
+/**
+ * `<usa-token-editor apply></usa-token-editor>` (10.6, motion design tokens
+ * 2.0) — edit motion tokens (durations and cubic-bézier easings) with a live
+ * preview per token, then export them as W3C Design Tokens (DTCG 2025.10 or
+ * the earlier draft) or import a DTCG file (aliases resolved, problems
+ * listed). `apply` writes the tokens to `:root` custom properties as you
+ * edit; `format` (2025.10 · draft); `groups` (duration,easing). `tokens`,
+ * `exportJSON()`, `importJSON(json)`; `usa:change` { tokens },
+ * `usa:export` { json }, `usa:import` { problems }.
+ */
+interface UsaTokenEditorElement extends UsaElement {
+    tokens: MotionTokens;
+    exportJSON(): Record<string, unknown>;
+    importJSON(json: unknown): string[];
+}
+declare function defineTokenEditor(tag?: string): CustomElementConstructor | undefined;
+
+/**
  * motionary/components/widgets — the 6.x animated UI widgets, in their own
  * entry so `motionary/components` and `components/lite` keep their size
  * budgets. Every widget is reduced-motion safe and keyboard accessible.
@@ -2685,8 +2881,11 @@ declare global {
         'usa-three-scene': UsaGlSceneElement;
         'usa-gpu-particles': UsaGpuParticlesElement;
         'usa-shader-backdrop': UsaShaderBackdropElement;
+        'usa-lottie-player': UsaLottiePlayerElement;
+        'usa-rive': UsaRiveElement;
+        'usa-token-editor': UsaTokenEditorElement;
     }
 }
 
-export { BACKDROP_PRESETS, CAROUSEL_EFFECTS, EQ_PRESETS, FESTIVAL_THEMES, LOTTIE_ICONS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PARTICLE_DRAW_WGSL, PARTICLE_SIM_WGSL, POST_PASSES, PRESENCE_STATES, PROGRESS_VARIANTS, RETRO_VARIANTS, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SPARK_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, WORKER_SCENES, backgroundCss, badgeProgress, cartTotal, defineAddToCart, defineBadgeWall, defineBarChart, defineBgGenerator, defineCarousel, defineCartDrawer, defineChapterNav, defineChatComposer, defineClockControl, defineCodeExport, defineColorPicker, defineCommandPalette, defineCompare, defineCountdown, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineFestivalBanner, defineField, defineFileDrop, defineGauge, defineGenArt, defineGestureSticker, defineGlScene, defineGlobe, defineGpuParticles, defineGyroCard, defineHeroVideo, defineHudPanel, defineHydrate, defineInstallButton, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLiquidNav, defineLocationCard, defineLottie, defineLottieIcon, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMessageList, defineMilestones, defineModal, defineMotion, defineMotionInspector, defineMotionPrefs, defineMotionSpec, defineMusicPlayer, defineNativePreview, defineNavMorph, defineNotificationBell, defineOdometer, defineOrganicCard, defineOtp, definePagination, definePanorama, defineParallaxLayers, definePauseAll, definePerfMonitor, definePluginCard, definePluginStore, definePresence, definePrizeWheel, defineProductGallery, defineProgressRing, definePropPanel, definePullCord, defineRadar, defineReactions, defineRedEnvelope, defineRetroButton, defineRouteTransition, defineScene, defineScrollRing, defineScrollScene, defineSegmented, defineShaderBackdrop, defineSheet, defineShortcut, defineSkeletonReveal, defineSketchChart, defineSmoothScroll, defineSparkline, defineSpatialCard, defineStarRating, defineStepper, defineStickyWall, defineStories, defineSuggestionChips, defineSwipeDeck, defineSwitch, defineTabBar, defineTerminal, defineTextSplitter, defineThemeSurface, defineThemeSwitcher, defineThreeScene, defineTip, defineToastStack, defineUploadProgress, defineVideoCard, defineVoiceButton, defineVolumeKnob, defineWeatherCard, defineWidgets, defineWorkerCanvas, defineXpBar, describeComponent, exportComponent, formatBytes, formatDistance, fuzzyMatch, haversine, hexToHsv, hsvToHex, initials, keyLabels, levelFor, matchesKeys, monthGrid, pageWindow, parseChips, parseISODate, parseLRC, parseMarkers, parseProps, parseReactions, parseScrub, parseTargets, passwordStrength, project, rankRows, sanitizeCode, sparkPoints, splitTime, stackToast, waveBars, wheelAngle, wrapIndex };
-export type { BellNotice, CartItem, ChatMessage, ExportFormat, ExportedNode, GlobeMarker, LeaderRow, PaletteCommand, PerfStats, PresenceState, PropSpec, RadarTarget, StackToastOptions, StickerState, UsaAddToCartElement, UsaBadgeWallElement, UsaBarChartElement, UsaBgGeneratorElement, UsaCarouselElement, UsaCartDrawerElement, UsaChapterNavElement, UsaChatComposerElement, UsaClockControlElement, UsaCodeExportElement, UsaColorPickerElement, UsaCommandPaletteElement, UsaCompareElement, UsaCountdownElement, UsaCubeGalleryElement, UsaDatePickerElement, UsaDisclosureElement, UsaDockElement, UsaEqualizerElement, UsaFestivalBannerElement, UsaFieldElement, UsaFileDropElement, UsaGaugeElement, UsaGenArtElement, UsaGestureStickerElement, UsaGlSceneElement, UsaGlobeElement, UsaGpuParticlesElement, UsaGyroCardElement, UsaHeroVideoElement, UsaHudPanelElement, UsaHydrateElement, UsaInstallButtonElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaKpiElement, UsaLeaderboardElement, UsaLiquidNavElement, UsaLocationCardElement, UsaLottieElement, UsaLottieIconElement, UsaLyricsElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMessageListElement, UsaMilestonesElement, UsaModalElement, UsaMotionElement, UsaMotionInspectorElement, UsaMotionPrefsElement, UsaMotionSpecElement, UsaMusicPlayerElement, UsaNativePreviewElement, UsaNavMorphElement, UsaNotificationBellElement, UsaOdometerElement, UsaOrganicCardElement, UsaOtpElement, UsaPaginationElement, UsaPanoramaElement, UsaParallaxLayersElement, UsaPauseAllElement, UsaPerfMonitorElement, UsaPluginCardElement, UsaPluginStoreElement, UsaPresenceElement, UsaPrizeWheelElement, UsaProductGalleryElement, UsaProgressRingElement, UsaPropPanelElement, UsaPullCordElement, UsaRadarElement, UsaReactionsElement, UsaRedEnvelopeElement, UsaRetroButtonElement, UsaRouteTransitionElement, UsaSceneElement, UsaScrollRingElement, UsaScrollSceneElement, UsaSegmentedElement, UsaShaderBackdropElement, UsaSheetElement, UsaShortcutElement, UsaSkeletonRevealElement, UsaSketchChartElement, UsaSmoothScrollElement, UsaSparklineElement, UsaSpatialCardElement, UsaStarRatingElement, UsaStepperElement, UsaStickyWallElement, UsaStoriesElement, UsaSuggestionChipsElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTerminalElement, UsaTextSplitterElement, UsaThemeSurfaceElement, UsaThemeSwitcherElement, UsaTipElement, UsaToastStackElement, UsaUploadProgressElement, UsaVideoCardElement, UsaVoiceButtonElement, UsaVolumeKnobElement, UsaWeatherCardElement, UsaWorkerCanvasElement, UsaXpBarElement, WallBadge };
+export { BACKDROP_PRESETS, CAROUSEL_EFFECTS, EQ_PRESETS, FESTIVAL_THEMES, LOTTIE_ICONS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PARTICLE_DRAW_WGSL, PARTICLE_SIM_WGSL, POST_PASSES, PRESENCE_STATES, PROGRESS_VARIANTS, RETRO_VARIANTS, RIVE_CDN, RIVE_PEER, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SPARK_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, WORKER_SCENES, backgroundCss, badgeProgress, cartTotal, defineAddToCart, defineBadgeWall, defineBarChart, defineBgGenerator, defineCarousel, defineCartDrawer, defineChapterNav, defineChatComposer, defineClockControl, defineCodeExport, defineColorPicker, defineCommandPalette, defineCompare, defineCountdown, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineFestivalBanner, defineField, defineFileDrop, defineGauge, defineGenArt, defineGestureSticker, defineGlScene, defineGlobe, defineGpuParticles, defineGyroCard, defineHeroVideo, defineHudPanel, defineHydrate, defineInstallButton, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLiquidNav, defineLocationCard, defineLottie, defineLottieIcon, defineLottiePlayer, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMessageList, defineMilestones, defineModal, defineMotion, defineMotionInspector, defineMotionPrefs, defineMotionSpec, defineMusicPlayer, defineNativePreview, defineNavMorph, defineNotificationBell, defineOdometer, defineOrganicCard, defineOtp, definePagination, definePanorama, defineParallaxLayers, definePauseAll, definePerfMonitor, definePluginCard, definePluginStore, definePresence, definePrizeWheel, defineProductGallery, defineProgressRing, definePropPanel, definePullCord, defineRadar, defineReactions, defineRedEnvelope, defineRetroButton, defineRive, defineRouteTransition, defineScene, defineScrollRing, defineScrollScene, defineSegmented, defineShaderBackdrop, defineSheet, defineShortcut, defineSkeletonReveal, defineSketchChart, defineSmoothScroll, defineSparkline, defineSpatialCard, defineStarRating, defineStepper, defineStickyWall, defineStories, defineSuggestionChips, defineSwipeDeck, defineSwitch, defineTabBar, defineTerminal, defineTextSplitter, defineThemeSurface, defineThemeSwitcher, defineThreeScene, defineTip, defineToastStack, defineTokenEditor, defineUploadProgress, defineVideoCard, defineVoiceButton, defineVolumeKnob, defineWeatherCard, defineWidgets, defineWorkerCanvas, defineXpBar, describeComponent, exportComponent, formatBytes, formatDistance, fuzzyMatch, haversine, hexToHsv, hsvToHex, initials, keyLabels, levelFor, loadRiveRuntime, matchesKeys, monthGrid, pageWindow, parseChips, parseISODate, parseLRC, parseMarkers, parseProps, parseReactions, parseScrub, parseTargets, passwordStrength, project, provideRiveRuntime, rankRows, sanitizeCode, sparkPoints, splitTime, stackToast, waveBars, wheelAngle, wrapIndex };
+export type { BellNotice, CartItem, ChatMessage, ExportFormat, ExportedNode, GlobeMarker, LeaderRow, PaletteCommand, PerfStats, PresenceState, PropSpec, RadarTarget, StackToastOptions, StickerState, UsaAddToCartElement, UsaBadgeWallElement, UsaBarChartElement, UsaBgGeneratorElement, UsaCarouselElement, UsaCartDrawerElement, UsaChapterNavElement, UsaChatComposerElement, UsaClockControlElement, UsaCodeExportElement, UsaColorPickerElement, UsaCommandPaletteElement, UsaCompareElement, UsaCountdownElement, UsaCubeGalleryElement, UsaDatePickerElement, UsaDisclosureElement, UsaDockElement, UsaEqualizerElement, UsaFestivalBannerElement, UsaFieldElement, UsaFileDropElement, UsaGaugeElement, UsaGenArtElement, UsaGestureStickerElement, UsaGlSceneElement, UsaGlobeElement, UsaGpuParticlesElement, UsaGyroCardElement, UsaHeroVideoElement, UsaHudPanelElement, UsaHydrateElement, UsaInstallButtonElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaKpiElement, UsaLeaderboardElement, UsaLiquidNavElement, UsaLocationCardElement, UsaLottieElement, UsaLottieIconElement, UsaLottiePlayerElement, UsaLyricsElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMessageListElement, UsaMilestonesElement, UsaModalElement, UsaMotionElement, UsaMotionInspectorElement, UsaMotionPrefsElement, UsaMotionSpecElement, UsaMusicPlayerElement, UsaNativePreviewElement, UsaNavMorphElement, UsaNotificationBellElement, UsaOdometerElement, UsaOrganicCardElement, UsaOtpElement, UsaPaginationElement, UsaPanoramaElement, UsaParallaxLayersElement, UsaPauseAllElement, UsaPerfMonitorElement, UsaPluginCardElement, UsaPluginStoreElement, UsaPresenceElement, UsaPrizeWheelElement, UsaProductGalleryElement, UsaProgressRingElement, UsaPropPanelElement, UsaPullCordElement, UsaRadarElement, UsaReactionsElement, UsaRedEnvelopeElement, UsaRetroButtonElement, UsaRiveElement, UsaRouteTransitionElement, UsaSceneElement, UsaScrollRingElement, UsaScrollSceneElement, UsaSegmentedElement, UsaShaderBackdropElement, UsaSheetElement, UsaShortcutElement, UsaSkeletonRevealElement, UsaSketchChartElement, UsaSmoothScrollElement, UsaSparklineElement, UsaSpatialCardElement, UsaStarRatingElement, UsaStepperElement, UsaStickyWallElement, UsaStoriesElement, UsaSuggestionChipsElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTerminalElement, UsaTextSplitterElement, UsaThemeSurfaceElement, UsaThemeSwitcherElement, UsaTipElement, UsaToastStackElement, UsaTokenEditorElement, UsaUploadProgressElement, UsaVideoCardElement, UsaVoiceButtonElement, UsaVolumeKnobElement, UsaWeatherCardElement, UsaWorkerCanvasElement, UsaXpBarElement, WallBadge };

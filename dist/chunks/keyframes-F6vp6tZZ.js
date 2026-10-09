@@ -1,7 +1,5 @@
-'use strict';
-
-var tween = require('./tween-_BGIl6hK.cjs');
-var ease = require('./ease-HwYZnZat.cjs');
+import { T as Timeline, a as Tween, p as parseValue } from './tween-BzCGq_Ba.js';
+import { p as parseEase } from './ease-XN8_0sXu.js';
 
 /**
  * Normalised keyframes shared by the format loaders: a list of frames with
@@ -119,7 +117,7 @@ function expandProps(props) {
 }
 const tweenable = (v) => {
     try {
-        tween.parseValue(v);
+        parseValue(v);
         return true;
     }
     catch {
@@ -134,7 +132,7 @@ const tweenable = (v) => {
 function framesToTimeline(target, frames, o = {}) {
     const dur = o.duration ?? 1000;
     const fs = [...frames].sort((a, b) => a.offset - b.offset).map((f) => ({ ...f, props: expandProps(f.props) }));
-    const tl = new tween.Timeline({ repeat: o.repeat, yoyo: o.yoyo, delay: o.delay, onUpdate: o.onUpdate, onComplete: o.onComplete });
+    const tl = new Timeline({ repeat: o.repeat, yoyo: o.yoyo, delay: o.delay, onUpdate: o.onUpdate, onComplete: o.onComplete });
     const keys = Array.from(new Set(fs.flatMap((f) => Object.keys(f.props))));
     // carry values forward / backward so every frame has every key
     const filled = fs.map((f) => ({ ...f, props: { ...f.props } }));
@@ -170,7 +168,7 @@ function framesToTimeline(target, frames, o = {}) {
             else
                 discrete.push([k, b.props[k]]);
         }
-        tl.add(new tween.Tween(target, { from, to, duration: segDur, ease: a.easing ? ease.parseEase(a.easing) : def, paused: true }), a.offset * dur);
+        tl.add(new Tween(target, { from, to, duration: segDur, ease: a.easing ? parseEase(a.easing) : def, paused: true }), a.offset * dur);
         for (const [k, v] of discrete)
             tl.call(() => { if (target.style)
                 target.style.setProperty(k.replace(/[A-Z]/g, (c) => '-' + c.toLowerCase()), String(v));
@@ -182,7 +180,5 @@ function framesToTimeline(target, frames, o = {}) {
     return tl;
 }
 
-exports.camelProp = camelProp;
-exports.distributeOffsets = distributeOffsets;
-exports.framesToTimeline = framesToTimeline;
-//# sourceMappingURL=keyframes-Ce1s05n3.cjs.map
+export { camelProp as c, distributeOffsets as d, framesToTimeline as f };
+//# sourceMappingURL=keyframes-F6vp6tZZ.js.map

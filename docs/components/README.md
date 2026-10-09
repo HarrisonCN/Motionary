@@ -1,4 +1,4 @@
-# Motionary components (202)
+# Motionary components (205)
 
 One page per `<usa-*>` element, generated from the source. Machine-readable: `motionary/manifest.json` · Pages `/components.json` · `/llms.txt` · `/llms-full.txt`. How to use these with an AI assistant: [AGENTS.md](../../AGENTS.md) and [the prompt guide](../ai-prompt-guide.md).
 
@@ -65,6 +65,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<usa-location-card>`](usa-location-card.md) — Location card
 - [`<usa-lottie>`](usa-lottie.md) — Lottie player
 - [`<usa-lottie-icon>`](usa-lottie-icon.md) — Animated icon set
+- [`<usa-lottie-player>`](usa-lottie-player.md) — Lottie player (JSON + dotLottie) · Requires: motionary/runtime/vector
 - [`<usa-menu>`](usa-menu.md) — Dropdown menu
 - [`<usa-message-list>`](usa-message-list.md) — Chat thread
 - [`<usa-motion>`](usa-motion.md) — Motion DSL
@@ -94,6 +95,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<usa-reactions>`](usa-reactions.md) — Emoji reactions
 - [`<usa-red-envelope>`](usa-red-envelope.md) — Red envelope (红包)
 - [`<usa-retro-button>`](usa-retro-button.md) — Retro buttons
+- [`<usa-rive>`](usa-rive.md) — Rive player (official runtime) · Requires: @rive-app/canvas
 - [`<usa-scene>`](usa-scene.md) — Cinematic scene
 - [`<usa-segmented>`](usa-segmented.md) — Segmented control
 - [`<usa-shader-backdrop>`](usa-shader-backdrop.md) — Shader backdrop + post chain
@@ -112,6 +114,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<usa-theme-surface>`](usa-theme-surface.md) — Theme surface
 - [`<usa-theme-switcher>`](usa-theme-switcher.md) — Theme switcher
 - [`<usa-tip>`](usa-tip.md) — Tooltip / popover 2.0
+- [`<usa-token-editor>`](usa-token-editor.md) — Motion token editor (W3C DTCG)
 - [`<usa-upload-progress>`](usa-upload-progress.md) — Upload progress
 - [`<usa-video-card>`](usa-video-card.md) — Video card
 - [`<usa-voice-button>`](usa-voice-button.md) — Voice button

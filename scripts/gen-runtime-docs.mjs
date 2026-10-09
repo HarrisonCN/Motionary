@@ -96,7 +96,7 @@ export function readmeSection() {
     '',
     '| Module | Import | CDN (IIFE) | Register | gzip budget |',
     '|---|---|---|---|---|',
-    ...mods.map((p) => `| [${p.title}](${p.docs}) | \`${p.importPath}\` | \`${p.cdn.split('\n').pop().replace(/<script src="|"><\/script>/g, '')}\` | \`${p.register}\` | ${(p.budget / 1024).toFixed(1)} KB |`),
+    ...mods.map((p) => `| [${p.title}](${p.docs}) | \`${p.importPath}\` | \`${p.cdn.split('\n').pop().replace(/<script src="|"><\/script>/g, '')}\` | \`${p.register}\` | ${p.kind === 'peer' ? 'official runtime (not bundled)' : (p.budget / 1024).toFixed(1) + ' KB'} |`),
     '',
     'Install once: `npm i motionary`. Plain HTML: load `runtime.iife.js` first, then the module files (each registers itself).',
     '',

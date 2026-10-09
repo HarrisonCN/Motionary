@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-VhfPSI0v.cjs');
+var registry = require('../chunks/registry-dr1CPTk1.cjs');
 var runtime_gl = require('./gl.cjs');
 
 /**

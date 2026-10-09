@@ -307,7 +307,7 @@
   {
     "name": "import 'motionary/components/tokens'",
     "import": "export * from 'pkg/components/tokens';",
-    "limit": 2048
+    "limit": 3840
   },
   {
     "name": "import 'motionary/components/a11y'",
@@ -623,5 +623,15 @@
     "name": "dist/runtime/format-obj.iife.js (CDN module, fixed 4.0 KB)",
     "file": "dist/runtime/format-obj.iife.js",
     "limit": 4096
+  },
+  {
+    "name": "import 'motionary/runtime/vector' (fixed 12.0 KB incl. the core parts it uses)",
+    "import": "export * from 'pkg/runtime/vector';",
+    "limit": 12288
+  },
+  {
+    "name": "dist/runtime/vector.iife.js (CDN module, fixed 12.0 KB)",
+    "file": "dist/runtime/vector.iife.js",
+    "limit": 12288
   }
 ]

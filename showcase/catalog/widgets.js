@@ -1292,6 +1292,28 @@ export const components = [
     '<usa-shader-backdrop preset="aurora" post="bloom,vignette,grain">\n  <h1>Hello</h1>\n</usa-shader-backdrop>',
     '<usa-shader-backdrop class="demo-sb" preset="aurora" post="bloom,vignette,grain" label="Aurora backdrop"><h4>Post chain</h4><p>bloom → vignette → grain</p></usa-shader-backdrop>',
     [{ key: 'preset', values: ['aurora', 'plasma', 'waves', 'nebula'] }], { since: '10.5' }),
+  // ---- 10.6 ------------------------------------------------------------
+  W('usa-lottie-player', 'ui', 'Lottie player (JSON + dotLottie)', 'Lottie 播放器（JSON + dotLottie）',
+    '10.6: plays Lottie JSON and dotLottie (.lottie) files with Motionary’s own Canvas 2D renderer — shapes, gradients, trim paths, masks, track mattes, precomps and images; autoplay, loop, bounce, segments / markers, play on hover or scrub with scroll. Requires motionary/runtime/vector — npm i motionary, then use(vector) before it mounts.',
+    '10.6：使用 Motionary 自研 Canvas 2D 渲染器播放 Lottie JSON 与 dotLottie（.lottie）文件 —— 形状、渐变、修剪路径、遮罩、轨道遮罩、预合成与图片；自动播放、循环、往返、片段 / 标记、悬停播放或随滚动拖动。需要 motionary/runtime/vector —— npm i motionary，并在挂载前 use(vector)。',
+    ['lottie', 'dotlottie', 'bodymovin', 'vector animation', 'player', 'runtime'],
+    '<usa-lottie-player src="/anim/hero.lottie" autoplay loop label="Hero animation"></usa-lottie-player>',
+    '<usa-lottie-player class="demo-lottie" src="assets/motionary-vector.lottie" autoplay loop label="Motionary vector sample"></usa-lottie-player>',
+    [{ key: 'mode', values: ['normal', 'bounce'] }], { since: '10.6', requires: ['vector'] }),
+  W('usa-rive', 'ui', 'Rive player (official runtime)', 'Rive 播放器（官方运行时）',
+    '10.6: plays Rive (.riv) files — artboards, animations and state machines with inputs — through the official Rive runtime @rive-app/canvas, an optional peer dependency that is lazy-loaded on first use (Motionary does not reimplement the proprietary .riv format). Requires @rive-app/canvas — npm i @rive-app/canvas, or load its CDN script first; missing → a clear message in place.',
+    '10.6：播放 Rive（.riv）文件 —— 画板、动画与带输入的状态机 —— 通过官方 Rive 运行时 @rive-app/canvas（可选 peerDependency，首次使用时懒加载；Motionary 不自研 .riv 专有格式）。需要 @rive-app/canvas —— npm i @rive-app/canvas，或先加载其 CDN 脚本；缺失时在原位显示清晰提示。',
+    ['rive', 'riv', 'state machine', 'interactive animation', 'official runtime', 'peer'],
+    '<usa-rive src="/anim/icon.riv" state-machine="State Machine 1" autoplay label="Icon"></usa-rive>',
+    '<usa-rive class="demo-rive" src="assets/rive-message-icon.riv" runtime-src="https://unpkg.com/@rive-app/canvas@2.44.1/rive.js" autoplay label="Rive message icon (Rive sample, MIT)"></usa-rive>',
+    [{ key: 'fit', values: ['contain', 'cover', 'fill'] }], { since: '10.6', requires: ['rive'] }),
+  W('usa-token-editor', 'ui', 'Motion token editor (W3C DTCG)', '动效令牌编辑器（W3C DTCG）',
+    '10.6 (motion design tokens 2.0): edit duration and cubic-bézier easing tokens with a live preview per token, then export W3C Design Tokens (DTCG 2025.10 or the earlier draft) or import a DTCG file — aliases resolved, problems listed; apply writes the tokens to :root custom properties as you edit.',
+    '10.6（动效设计令牌 2.0）：编辑时长与 cubic-bézier 缓动令牌，每个令牌带实时预览；可导出 W3C Design Tokens（DTCG 2025.10 或早期草案格式），或导入 DTCG 文件 —— 解析别名并列出问题；apply 会在编辑时把令牌写入 :root 自定义属性。',
+    ['design tokens', 'dtcg', 'w3c', 'motion tokens', 'easing', 'duration'],
+    '<usa-token-editor apply format="2025.10"></usa-token-editor>',
+    '<usa-token-editor class="demo-te" groups="duration,easing" label="Motion tokens"></usa-token-editor>',
+    [{ key: 'format', values: ['2025.10', 'draft'] }], { since: '10.6' }),
 ];
 
 /** item id → live-demo wiring. */
