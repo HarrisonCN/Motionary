@@ -1,0 +1,6 @@
+{
+  "$comment": "11.3 fixed performance budgets for npm run perf (scripts/perf-ci.mjs). Not raised automatically. Frame-timing limits are coarse on purpose (CI renders with SwiftShader on shared runners); scriptMsPerFrame is the library's own per-frame cost.",
+  "first-screen": { "transferKB": 56, "requests": 14, "scriptMs": 150, "readyMs": 5000, "errors": 0 },
+  "gpu": { "contexts": 1, "textures": 4, "buffers": 8, "programs": 2, "leakedTextures": 0, "leakedBuffers": 0, "errors": 0 },
+  "frames": { "scriptMsPerFrame": 8, "longTasks": 5, "droppedPct": 75, "p95OverBaselineMs": 100, "errors": 0 }
+}

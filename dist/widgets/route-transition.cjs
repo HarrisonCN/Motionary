@@ -122,4 +122,4 @@ function defineRouteTransition(tag = 'usa-route-transition') {
 }
 
 exports.defineRouteTransition = defineRouteTransition;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/widgets/route-transition.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/widgets/route-transition.cjs.map

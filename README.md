@@ -655,6 +655,8 @@ Four logical layers — Public API (HTML · React · Vue · Svelte · Solid · A
 
 **Source maps (11.2):** not shipped to npm (the package is about half the size); every built file still links its map in the release tag on GitHub, so DevTools resolves it on demand — see [docs/source-maps.md](./docs/source-maps.md).
 
+**Performance in CI (11.3):** every PR measures, in headless Chrome, the first-screen transfer with on-demand loading, script parse / execute time, WebGL resources (and leaks after removal) and frame stability, against fixed budgets — see [docs/perf-ci.md](./docs/perf-ci.md).
+
 ## Roadmap
 
 One version per PR towards 7.0 — particles & fluids, text effects, light & materials, 3D scenes, morphing, transitions, weather, interactive physics: [docs/ROADMAP.md](./docs/ROADMAP.md).

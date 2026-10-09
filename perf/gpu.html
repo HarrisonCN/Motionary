@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Motionary perf — GPU resources</title>
+<style>usa-gl-scene { display: block; width: 640px; height: 400px; }</style></head>
+<body>
+  <!-- 11.3 perf fixture: GPU resources of <usa-gl-scene> while it runs, and after it is removed -->
+  <script type="module">
+    import { use } from '../dist/runtime.js';
+    import { gl } from '../dist/runtime/gl.js';
+    import { defineGlScene } from '../dist/widgets/gl-scene.js';
+    use(gl);
+    defineGlScene();
+    const el = document.createElement('usa-gl-scene');
+    el.setAttribute('shape', 'torus');
+    el.setAttribute('auto-rotate', '30');
+    document.body.append(el);
+    const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+    for (let i = 0; i < 60 && !el.scene; i++) await wait(50);
+    await wait(1000);
+    const snap = () => JSON.parse(JSON.stringify(window.__gl));
+    const during = snap();
+    const rendered = !!el.scene;
+    el.remove();
+    await wait(500);
+    window.__perf = { during, after: snap(), rendered };
+  </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Motionary perf — frame stability</title>
+<style>.b { display: inline-block; width: 20px; height: 20px; margin: 2px; background: #6c5ce7; border-radius: 4px; }</style></head>
+<body>
+  <!-- 11.3 perf fixture: 300 elements tweened by motionary/runtime for 2 s; rAF deltas + long tasks -->
+  <div id="grid"></div>
+  <script>
+    // time spent inside requestAnimationFrame callbacks (the runtime ticker's work per frame)
+    window.__raf = { ms: 0, calls: 0, on: false };
+    const raf = window.requestAnimationFrame.bind(window);
+    window.requestAnimationFrame = (cb) => raf((t) => { const s = performance.now(); cb(t); if (window.__raf.on) { window.__raf.ms += performance.now() - s; window.__raf.calls++; } });
+  </script>
+  <script type="module">
+    import { tween } from '../dist/runtime.js';
+    const grid = document.getElementById('grid');
+    for (let i = 0; i < 300; i++) { const d = document.createElement('div'); d.className = 'b'; grid.append(d); }
+    let longTasks = 0;
+    try { new PerformanceObserver((l) => { longTasks += l.getEntries().length; }).observe({ type: 'longtask', buffered: false }); } catch {}
+    await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+    // rAF deltas for `ms` milliseconds
+    const record = (ms) => new Promise((done) => {
+      const deltas = []; let last = 0; const end = performance.now() + ms;
+      const loop = (t) => { if (last) deltas.push(t - last); last = t; if (t < end) requestAnimationFrame(loop); else done(deltas); };
+      requestAnimationFrame(loop);
+    });
+    // 1. baseline: this browser's own frame interval with nothing animating (headless often runs at 30 fps)
+    const baseline = await record(1000);
+    // 2. the same while motionary/runtime tweens 300 elements
+    window.__raf.on = true;
+    tween(grid.children, { to: { x: 40, rotate: 180, scale: 1.2 }, duration: 1000, stagger: 2, repeat: 1, yoyo: true });
+    const deltas = await record(2000);
+    window.__raf.on = false;
+    window.__perf = { baseline, deltas, longTasks, rafMs: window.__raf.ms, frames: deltas.length };
+  </script>
+</body>
+</html>

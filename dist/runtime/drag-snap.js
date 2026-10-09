@@ -1,4 +1,4 @@
-import { R as RUNTIME_VERSION, r as requireModule } from '../chunks/registry-DZMe2rVp.js';
+import { R as RUNTIME_VERSION, r as requireModule } from '../chunks/registry-xlsVOzSM.js';
 
 /**
  * `motionary/runtime/drag-snap` (10.8) — pointer drag with inertia and snap
@@ -258,4 +258,4 @@ function createDragSnap(el, o = {}) {
 const dragSnap = { id: 'drag-snap', version: RUNTIME_VERSION, requires: ['core'], api: { createDragSnap, projectThrow, nearestSnap, rubberband, springStep, velocityTracker } };
 
 export { createDragSnap, dragSnap, nearestSnap, projectThrow, rubberband, springStep, velocityTracker };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/runtime/drag-snap.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/runtime/drag-snap.js.map

@@ -108,4 +108,4 @@ function defineThemeSwitcher(tag = 'usa-theme-switcher') {
 }
 
 export { defineThemeSwitcher };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/widgets/theme-switcher.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/widgets/theme-switcher.js.map

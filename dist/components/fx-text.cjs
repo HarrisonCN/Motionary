@@ -264,4 +264,4 @@ function registerTextPack() {
 exports.TEXT3_FX = TEXT3_FX;
 exports.registerTextPack = registerTextPack;
 exports.splitChars = splitChars;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/components/fx-text.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/components/fx-text.cjs.map
