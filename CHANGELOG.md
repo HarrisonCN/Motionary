@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.8.0] - 2026-10-09
+
+### Added
+- **2 new components (8.8)** in `motionary/components/widgets` (also in `dist/widgets.umd.js`):
+  - `<usa-panorama>` — 360° panorama viewer: drag / swipe to look around with inertia, slow `autorotate` (°/s, `0` off, pauses on hover / focus), ← / → keys, compass, built-in procedural landscape when no `src`; "View in XR" badge when WebXR immersive sessions are offered (`usa:xr` { mode }, `usa:xr-request`); `yaw`, `lookAt(deg)`; `usa:look` { yaw }.
+  - `<usa-spatial-card>` — spatial-computing window: frosted glass floating in depth, gaze highlight following the pointer, `[data-depth]` layers, `[slot=ornament]` bar below the window; eases forward on hover / focus, sinks on press; `active`; `usa:focus-depth` { active }.
+- **XR / spatial pack — `motionary/fx/spatial`** (= `motionary/components/fx-spatial`, `registerSpatialPack()`, also in `registerEffectPacks()`): `portal-open` (enter), `orbit-in` (enter), `spatial-float` (loop), `depth-pop` (attention). `yawToOffset()`, `xrSupport()` (WebXR session detection).
+- Showcase: 4 new gallery cards with copyable code, live demos and live Store thumbnails.
+
+### Accessibility
+- The panorama is a focusable `img` (roledescription "panorama") with your `label`; ← / → look around; auto-rotate pauses while hovered or focused. The spatial card keeps its content in reading order, the gaze layer is `aria-hidden`. Reduced motion: no auto-rotate, inertia or depth transitions; `portal-open` / `orbit-in` just show, `spatial-float` is skipped, `depth-pop` does nothing.
+
 ## [8.7.0] - 2026-10-09
 
 ### Added
