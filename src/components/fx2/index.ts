@@ -37,6 +37,8 @@ import { GENART_FX, registerGenArtPack, PALETTES, seededRandom, meshGradient } f
 import { VIDEO_FX, registerVideoPack, scrollProgress, scrubVideo, frameSequence } from './video';
 import { SAFE_FX, registerSafePack, vestibularSafe, flashCount, isFlashSafe, applyMotionPreferences, loadMotionPreferences, MOTION_PREFS_KEY, DEFAULT_MOTION_PREFS } from './safemotion';
 import { PERF3_FX, registerPerf3Pack, runInWorker, offscreenRender, fpsMeter } from './perf3';
+import { deprecate } from '../base';
+import { registerEffects } from '../fx/registry';
 
 export { GPU_FX, registerGpuPack, TEXT3_FX, registerTextPack, splitChars };
 export { shaderBackground, supportsWebGL2, fieldFallback, GLSL_HEAD } from './gl';
@@ -136,8 +138,8 @@ export const EFFECT_PACKS: Record<string, EffectDefinition[]> = {
   perf3: PERF3_FX,
 };
 
-/** Register every 6.x effect pack (idempotent). */
-export function registerEffectPacks(): void {
+/** Register every built-in effect pack — each one is a plugin (9.9; idempotent). */
+export function registerAllPlugins(): void {
   registerGpuPack();
   registerTextPack();
   registerLightPack();
@@ -171,4 +173,42 @@ export function registerEffectPacks(): void {
   registerPerf3Pack();
 }
 
+const PACK_SOURCES = EFFECT_PACKS;
 
+/** A Motionary plugin: a named set of effects, plus an optional install step (9.9). */
+export interface MotionPlugin {
+  name: string;
+  effects: EffectDefinition[];
+  install?: () => void;
+}
+/** Make a plugin object (9.9). */
+export function definePlugin(name: string, effects: EffectDefinition[], install?: () => void): MotionPlugin {
+  return { name, effects, install };
+}
+/** Every built-in effect pack as a plugin: `{ name: '<pack key>', effects }` — e.g. `retro`, `cinema` (9.9). */
+export function effectPlugins(): MotionPlugin[] {
+  return Object.entries(PACK_SOURCES).map(([k, effects]) => ({ name: k, effects }));
+}
+const usedPlugins = new Set<string>();
+/** Register plugins (each once); returns the names of their effects (9.9). */
+export function usePlugins(...plugins: MotionPlugin[]): string[] {
+  const names: string[] = [];
+  for (const p of plugins) {
+    if (!p || !Array.isArray(p.effects)) continue;
+    if (!usedPlugins.has(p.name)) {
+      registerEffects(p.effects);
+      p.install?.();
+      usedPlugins.add(p.name);
+    }
+    names.push(...p.effects.map((e) => e.name));
+  }
+  return names;
+}
+/**
+ * Register every 6.x–9.x effect pack.
+ * @deprecated 9.9 — removed in 10.0. Use `registerAllPlugins()` (same behaviour) or `usePlugins(...)`.
+ */
+export function registerEffectPacks(): void {
+  deprecate('registerEffectPacks', 'registerEffectPacks() is deprecated and removed in 10.0 — use registerAllPlugins() (same behaviour) or usePlugins(...). Run `npx usa-codemod-10 --write src`.');
+  registerAllPlugins();
+}

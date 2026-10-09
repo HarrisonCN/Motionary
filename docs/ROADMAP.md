@@ -10,5 +10,5 @@
 - ✅ **v9.6** — 性能 3.0：OffscreenCanvas、Worker 渲染；新组件 性能监视器。
 - ✅ **v9.7** — 设计工具集成：Figma 插件脚手架、Framer 导出。
 - ✅ **v9.8** — 原生 2.0：React Native / Flutter 组件示例。
-- **v9.9** — 10.0 预备：10.0 弃用警告、`upgrading-10.md` 与 `usa-codemod-10`。
+- ✅ **v9.9** — 10.0 预备：10.0 弃用警告、`upgrading-10.md` 与 `usa-codemod-10`。
 - **v10.0** — 全新架构：零依赖核心 < 10 KB、所有特效插件化、默认 WebGPU；npm `latest`。

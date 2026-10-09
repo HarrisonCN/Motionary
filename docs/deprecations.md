@@ -1,5 +1,9 @@
 # Deprecations
 
+## Deprecated in 9.9, removed in 10.0
+
+See [upgrading-10.md](./upgrading-10.md) — `registerEffectPacks()` (use `registerAllPlugins()` or `usePlugins(...)`). Run `npx usa-codemod-10 --write src`.
+
 ## Deprecated in 8.9, removed in 9.0 (released)
 
 See [upgrading-9.md](./upgrading-9.md) — the 5.8 motion-theme names `applyTheme()`, `THEMES`, `THEME_NAMES`, `<usa-theme>` / `defineTheme()` (use `applyMotionTheme()`, `MOTION_THEMES`, `MOTION_THEME_NAMES`, `<usa-motion-theme>` / `defineMotionTheme()`; same behaviour). Run `npx usa-codemod-9 --write src`.

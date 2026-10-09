@@ -1,5 +1,5 @@
-import { playEffect } from './registry-gFJRpPES.js';
-import { u as defineElement, p as prefersReducedMotion } from './base-BnRyfuyM.js';
+import { playEffect } from './registry-BRM2BRRY.js';
+import { u as defineElement, p as prefersReducedMotion } from './base-DWYNLg6P.js';
 import { c as canvasBackground, h as hexRgb } from './generative-2LhxG5BJ.js';
 import { P as PALETTE } from './shared-CkKHWrtJ.js';
 
@@ -330,4 +330,4 @@ function defineAudio(tag = 'usa-audio') {
 }
 
 export { AUDIO_FX as A, disableAudio as a, bindBeat as b, createBeatDetector as c, defineAudio as d, enableAudio as e, getAudio as g, onBeat as o };
-//# sourceMappingURL=audio-D95jwlOh.js.map
+//# sourceMappingURL=audio-C1uFaOKQ.js.map

@@ -1,5 +1,5 @@
-import { registerEffects } from '../chunks/registry-gFJRpPES.js';
-import { g as configureComponents, x as setClock } from '../chunks/base-BnRyfuyM.js';
+import { registerEffects } from '../chunks/registry-BRM2BRRY.js';
+import { g as configureComponents, x as setClock } from '../chunks/base-DWYNLg6P.js';
 
 const MOVE = /^(transform|translate|scale|rotate|offset|offsetPath|offsetDistance|clipPath|top|left|right|bottom|margin.*|perspective)$/;
 /** Keyframes with all movement removed (opacity / colour / shadow kept; blur removed from filters) (9.5). */
