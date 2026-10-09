@@ -448,7 +448,7 @@ code, kbd, pre { font-family: var(--mono); }
 .psec .pnum { position: relative; top: auto; margin: 0; }
 
 /* 10.1: Requires badge + prerequisites section */
-.req-badge{position:absolute;left:10px;bottom:auto;top:40px;z-index:2;max-width:calc(100% - 20px);padding:3px 8px;border-radius:999px;background:#eef2ff;color:#3730a3;font:700 10.5px/1.3 system-ui,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none}
+.req-badge{display:inline-block;margin:2px 0 6px;max-width:100%;box-sizing:border-box;padding:3px 8px;border-radius:999px;background:#eef2ff;color:#3730a3;font:700 10.5px/1.3 system-ui,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none}
 .prereq dl{margin:0}
 .prereq dt{margin-top:8px;font-weight:600;font-size:.85rem}
 .prereq dd{margin:3px 0 0}
