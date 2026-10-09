@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.8.0] - 2026-10-08
+
+### Added
+- **3 new components (7.8)** in `motionary/components/widgets` (also in `dist/widgets.umd.js`):
+  - `<usa-chat-composer>` — AI chat input: the textarea grows with its text (up to `rows`, default 6), Enter sends / Shift+Enter new line, the send button pops when there is text and morphs into Stop while `busy`, when a conic "thinking" glow runs round the composer. `usa:send` { text } (cancelable), `usa:stop`; `placeholder`, `label`, `value`, `busy`, `send()`, `clear()`.
+  - `<usa-suggestion-chips>` — follow-up prompt chips from `items="a|b|c"` (or child elements): slide in one after another, picking pulses the chip and emits `usa:pick` { text, index }; `dismiss` fades the others; `setItems()` / `items`; arrow keys. `parseChips()`.
+  - `<usa-voice-button>` — push-to-talk mic: toggles `listening` (`usa:start` / `usa:stop`), a halo breathes and `bars` (3–9) wave; set `level` (0–1) from an analyser / speech API and both follow it. `toggle()`; `waveBars()`.
+- **AI UI motion — `motionary/fx/ai`** (= `motionary/components/fx-ai`, `registerAiPack()`, also in `registerEffectPacks()`): `stream-text` (enter), `thinking-glow` (loop), `voice-wave` (attention), `gen-skeleton` (enter). `splitWords()`.
+- Showcase: 5 new gallery cards with copyable code, live demos and live Store thumbnails; Animation Store 326 → 331 items.
+
+### Accessibility
+- Composer: labelled textarea, the button's `aria-label` switches Send ↔ Stop generating. Chips: labelled list of real buttons, arrow-key navigation, dismissed chips are disabled. Voice button: a real `<button aria-pressed>`. `stream-text` restores the original text nodes when it finishes (screen readers read the full text). Reduced motion: no glow, pop, slide, halo or wave; `stream-text` shows the text at once, `thinking-glow` is skipped, `voice-wave` does nothing, `gen-skeleton` fades in.
+
 ## [7.7.0] - 2026-10-08
 
 ### Added

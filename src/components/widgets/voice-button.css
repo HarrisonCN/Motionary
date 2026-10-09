@@ -1,0 +1,18 @@
+usa-voice-button{display:inline-block;--usa-vb-accent:#6366f1;--usa-vb-size:52px}
+.usa-vb{display:flex;align-items:center;gap:12px}
+.usa-vb-btn{position:relative;display:grid;place-items:center;width:var(--usa-vb-size);height:var(--usa-vb-size);border-radius:50%;border:0;background:var(--usa-vb-idle,#e2e8f0);color:#334155;cursor:pointer;transition:background .2s,color .2s}
+.usa-vb-btn:focus-visible{outline:2px solid var(--usa-vb-accent);outline-offset:3px}
+.usa-vb-btn svg{position:relative;width:46%;height:46%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+.usa-vb-btn svg rect{fill:currentColor;stroke:none}
+.usa-vb-halo{position:absolute;inset:0;border-radius:50%;background:var(--usa-vb-accent);opacity:0;transition:transform .12s linear}
+usa-voice-button[listening] .usa-vb-btn{background:var(--usa-vb-accent);color:#fff}
+usa-voice-button[listening] .usa-vb-halo{opacity:.25;animation:usa-vb-breathe 1.6s ease-in-out infinite}
+usa-voice-button[data-live] .usa-vb-halo{animation:none}
+@keyframes usa-vb-breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.35)}}
+.usa-vb-bars{display:flex;align-items:center;gap:3px;height:calc(var(--usa-vb-size)*.6);opacity:.25;transition:opacity .2s}
+.usa-vb-bars i{display:block;width:4px;height:100%;border-radius:2px;background:var(--usa-vb-accent);transform:scaleY(.15);transition:transform .1s linear}
+usa-voice-button[listening] .usa-vb-bars{opacity:1}
+usa-voice-button[listening]:not([data-live]) .usa-vb-bars i{animation:usa-vb-wave 1s ease-in-out infinite}
+.usa-vb-bars i:nth-child(2){animation-delay:-.15s!important}.usa-vb-bars i:nth-child(3){animation-delay:-.3s!important}.usa-vb-bars i:nth-child(4){animation-delay:-.45s!important}.usa-vb-bars i:nth-child(5){animation-delay:-.6s!important}.usa-vb-bars i:nth-child(6){animation-delay:-.75s!important}.usa-vb-bars i:nth-child(7){animation-delay:-.9s!important}
+@keyframes usa-vb-wave{0%,100%{transform:scaleY(.2)}50%{transform:scaleY(.9)}}
+@media (prefers-reduced-motion:reduce){usa-voice-button[listening] .usa-vb-halo,usa-voice-button[listening] .usa-vb-bars i{animation:none!important}.usa-vb-bars i{transition:none}}

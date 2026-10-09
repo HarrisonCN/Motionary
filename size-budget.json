@@ -352,7 +352,7 @@
   {
     "name": "import 'motionary/components/widgets'",
     "import": "export * from 'pkg/components/widgets';",
-    "limit": 77312
+    "limit": 84480
   },
   {
     "name": "import 'motionary/components/fx-gpu'",
@@ -453,5 +453,15 @@
     "name": "import { registerFormPack } from '…/components/fx-form'",
     "import": "export { registerFormPack } from 'pkg/components/fx-form';",
     "limit": 2048
+  },
+  {
+    "name": "import 'motionary/components/fx-ai'",
+    "import": "export * from 'pkg/components/fx-ai';",
+    "limit": 2304
+  },
+  {
+    "name": "import { registerAiPack } from '…/components/fx-ai'",
+    "import": "export { registerAiPack } from 'pkg/components/fx-ai';",
+    "limit": 2304
   }
 ]

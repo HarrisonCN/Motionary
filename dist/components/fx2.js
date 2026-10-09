@@ -29,6 +29,8 @@ import { GEO_FX, registerGeoPack } from './fx-geo.js';
 export { routeLength } from './fx-geo.js';
 import { FORM_FX, registerFormPack } from './fx-form.js';
 export { shakeFrames } from './fx-form.js';
+import { AI_FX, registerAiPack } from './fx-ai.js';
+export { splitWords } from './fx-ai.js';
 import '../chunks/registry-CyKExAmE.js';
 import '../chunks/base-2-yYc93C.js';
 import '../chunks/generative-2LhxG5BJ.js';
@@ -53,6 +55,7 @@ const EFFECT_PACKS = {
     game: GAME_FX,
     geo: GEO_FX,
     form: FORM_FX,
+    ai: AI_FX,
 };
 /** Register every 6.x effect pack (idempotent). */
 function registerEffectPacks() {
@@ -72,7 +75,8 @@ function registerEffectPacks() {
     registerGamePack();
     registerGeoPack();
     registerFormPack();
+    registerAiPack();
 }
 
-export { CHART_FX, DEPTH3_FX, EFFECT_PACKS, FOCUS_FX, FORM_FX, GAME_FX, GEO_FX, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, PHYSICS2_FX, SHOP_FX, SOCIAL_FX, TEXT3_FX, TRANSITIONS2_FX, WEATHER_FX, register3dPack, registerChartPack, registerEffectPacks, registerFocusPack, registerFormPack, registerGamePack, registerGeoPack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerPhysicsPack, registerShopPack, registerSocialPack, registerTextPack, registerTransitionsPack, registerWeatherPack };
+export { AI_FX, CHART_FX, DEPTH3_FX, EFFECT_PACKS, FOCUS_FX, FORM_FX, GAME_FX, GEO_FX, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, PHYSICS2_FX, SHOP_FX, SOCIAL_FX, TEXT3_FX, TRANSITIONS2_FX, WEATHER_FX, register3dPack, registerAiPack, registerChartPack, registerEffectPacks, registerFocusPack, registerFormPack, registerGamePack, registerGeoPack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerPhysicsPack, registerShopPack, registerSocialPack, registerTextPack, registerTransitionsPack, registerWeatherPack };
 //# sourceMappingURL=fx2.js.map
