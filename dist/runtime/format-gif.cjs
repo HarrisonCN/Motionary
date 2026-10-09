@@ -1,9 +1,9 @@
 'use strict';
 
-var registry = require('../chunks/registry-D_iQfO4b.cjs');
-var animImage = require('../chunks/anim-image-Cz9T5ZiX.cjs');
-require('../chunks/tween-CtquqexF.cjs');
-require('../chunks/ticker-DYsDZNuj.cjs');
+var registry = require('../chunks/registry-VITvgTNc.cjs');
+var animImage = require('../chunks/anim-image-Bjmc17ZU.cjs');
+require('../chunks/tween-ookpV7jR.cjs');
+require('../chunks/ticker-DwRa5hIu.cjs');
 require('../chunks/ease-HwYZnZat.cjs');
 
 /**
@@ -195,7 +195,7 @@ async function loadGif(src) {
     return decodeGif(await animImage.bytesOf(src));
 }
 /** The module object for `use(formatGif)`. */
-const formatGif = { id: 'format-gif', version: registry.RUNTIME_VERSION, requires: ['core'], api: { decodeGif, loadGif, lzwDecode, animatedImagePlayer: animImage.animatedImagePlayer } };
+const formatGif = { id: 'format-gif', version: registry.RUNTIME_VERSION, tier: 'standard', requires: ['core'], api: { decodeGif, loadGif, lzwDecode, animatedImagePlayer: animImage.animatedImagePlayer } };
 
 exports.animatedImagePlayer = animImage.animatedImagePlayer;
 exports.composeFrames = animImage.composeFrames;
@@ -203,4 +203,4 @@ exports.decodeGif = decodeGif;
 exports.formatGif = formatGif;
 exports.loadGif = loadGif;
 exports.lzwDecode = lzwDecode;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/runtime/format-gif.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/runtime/format-gif.cjs.map

@@ -143,4 +143,4 @@ export interface FormatMotionApi {
 }
 
 /** The module object for `use(formatMotion)`. */
-export const formatMotion: RuntimeModule<FormatMotionApi> = { id: 'format-motion', version: RUNTIME_VERSION, requires: ['core'], api: { fromMotion, playMotion, springEase, motionEase } };
+export const formatMotion: RuntimeModule<FormatMotionApi> = { id: 'format-motion', version: RUNTIME_VERSION, tier: 'basic', requires: ['core'], api: { fromMotion, playMotion, springEase, motionEase } };

@@ -4,6 +4,8 @@
 
 The versioned motionary-scene@1 format: a JSON description of a 2D physics scene (world, named materials, bodies, constraints, per-body style) — validate, migrate older drafts, load into a physics world and save one back.
 
+**Runtime tier:** advanced — see [runtime tiers](../runtime-tiers.md).
+
 Part of Motionary's own zero-dependency runtime. Size budget: **3.0 KB gzip** (enforced in CI).
 
 ## Prerequisites

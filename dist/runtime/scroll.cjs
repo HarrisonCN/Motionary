@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-D_iQfO4b.cjs');
-var ticker = require('../chunks/ticker-DYsDZNuj.cjs');
+var registry = require('../chunks/registry-VITvgTNc.cjs');
+var ticker = require('../chunks/ticker-DwRa5hIu.cjs');
 
 /**
  * `motionary/runtime/scroll` (10.2) — scroll-linked scenes, an original
@@ -288,7 +288,7 @@ function killScenes() {
 /** The live scenes. */
 const allScenes = () => Array.from(scenes);
 /** The module object for `use(scroll)`. */
-const scroll = { id: 'scroll', version: registry.RUNTIME_VERSION, requires: ['core'], api: { scrollScene, refreshScenes, killScenes, allScenes, parseEdge, resolveRule, ScrollScene } };
+const scroll = { id: 'scroll', version: registry.RUNTIME_VERSION, tier: 'basic', requires: ['core'], api: { scrollScene, refreshScenes, killScenes, allScenes, parseEdge, resolveRule, ScrollScene } };
 
 exports.ScrollScene = ScrollScene;
 exports.allScenes = allScenes;
@@ -298,4 +298,4 @@ exports.refreshScenes = refreshScenes;
 exports.resolveRule = resolveRule;
 exports.scroll = scroll;
 exports.scrollScene = scrollScene;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/runtime/scroll.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/runtime/scroll.cjs.map

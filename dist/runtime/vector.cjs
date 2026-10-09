@@ -1,8 +1,8 @@
 'use strict';
 
-var registry = require('../chunks/registry-D_iQfO4b.cjs');
-var tween = require('../chunks/tween-CtquqexF.cjs');
-require('../chunks/ticker-DYsDZNuj.cjs');
+var registry = require('../chunks/registry-VITvgTNc.cjs');
+var tween = require('../chunks/tween-ookpV7jR.cjs');
+require('../chunks/ticker-DwRa5hIu.cjs');
 require('../chunks/ease-HwYZnZat.cjs');
 
 const ALLOWED = /*#__PURE__*/ new Set(['time', 'value', 'thisComp', 'thisLayer', 'thisProperty', 'Math', 'wiggle', 'loopOut', 'loopIn', 'loopOutDuration', 'loopInDuration', 'linear', 'ease', 'easeIn', 'easeOut', 'clamp', 'valueAtTime', 'framesToTime', 'timeToFrames', 'degreesToRadians', 'radiansToDegrees', 'add', 'sub', 'mul', 'div', 'length', 'true', 'false', '$bm_rt', 'index']);
@@ -1144,7 +1144,7 @@ function evalExpression(src, value, time = 0, fr = 30) {
     }
 }
 /** The module object for `use(vector)`. */
-const vector = { id: 'vector', version: registry.RUNTIME_VERSION, requires: ['core'], api: { evalExpression, loadLottie, parseDotLottie, unzipEntries, lottiePlayer, renderLottieFrame, inspectLottie, propValue, transformAt, trimContours, loadLottieImages } };
+const vector = { id: 'vector', version: registry.RUNTIME_VERSION, tier: 'standard', requires: ['core'], api: { evalExpression, loadLottie, parseDotLottie, unzipEntries, lottiePlayer, renderLottieFrame, inspectLottie, propValue, transformAt, trimContours, loadLottieImages } };
 
 exports.ZIP_LIMITS = ZIP_LIMITS;
 exports.evalExpression = evalExpression;
@@ -1160,4 +1160,4 @@ exports.transformAt = transformAt;
 exports.trimContours = trimContours;
 exports.unzipEntries = unzipEntries;
 exports.vector = vector;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/runtime/vector.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/runtime/vector.cjs.map

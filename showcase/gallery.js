@@ -4,7 +4,7 @@
  * ESM build), falling back to the CDN. Every preview is a real element.
  */
 import { COMPONENT_CATEGORIES, COMPONENTS, GALLERY, CODE_TABS, componentSnippets, matchesComponent, findComponent } from './components-catalog.js';
-import { PREREQS, prereqFor } from './catalog/prereqs.js';
+import { PREREQS, prereqFor, tierFor } from './catalog/prereqs.js';
 import { highlight } from './codegen.js';
 import { GSTRINGS } from './gallery-i18n.js';
 import { WIRES } from './catalog/index.js';
@@ -133,7 +133,7 @@ function prereqBlock(item) {
   if (!p) return null;
   const row = (k, v) => [h('dt', { text: k }), h('dd', {}, [h('pre', { text: v })])];
   return h('details', { class: 'ccard-prereq' }, [
-    h('summary', { text: p.badge }),
+    h('summary', { text: `${p.badge} · ${tierFor(item.requires)} tier` }),
     h('dl', {}, [...row('Install', p.install), ...row('Import & register (in this order)', p.importAndRegister), ...row('CDN', p.cdn), ...row('Minimal example', p.example)]),
   ]);
 }

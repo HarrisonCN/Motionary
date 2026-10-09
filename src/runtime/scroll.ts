@@ -311,4 +311,4 @@ export interface ScrollApi {
 }
 
 /** The module object for `use(scroll)`. */
-export const scroll: RuntimeModule<ScrollApi> = { id: 'scroll', version: RUNTIME_VERSION, requires: ['core'], api: { scrollScene, refreshScenes, killScenes, allScenes, parseEdge, resolveRule, ScrollScene } };
+export const scroll: RuntimeModule<ScrollApi> = { id: 'scroll', version: RUNTIME_VERSION, tier: 'basic', requires: ['core'], api: { scrollScene, refreshScenes, killScenes, allScenes, parseEdge, resolveRule, ScrollScene } };

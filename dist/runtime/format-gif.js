@@ -1,7 +1,7 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-xlsVOzSM.js';
-import { a as animatedImagePlayer, u as u8, c as composeFrames, d as bytesOf, f as fixDelay } from '../chunks/anim-image-D5Yboz1O.js';
-import '../chunks/tween-GiD1mhGX.js';
-import '../chunks/ticker-BJA5lDMi.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-CorBCE7b.js';
+import { a as animatedImagePlayer, u as u8, c as composeFrames, d as bytesOf, f as fixDelay } from '../chunks/anim-image-CSrYZ3ZY.js';
+import '../chunks/tween-BHDOFhXX.js';
+import '../chunks/ticker-CZisW9Nb.js';
 import '../chunks/ease-XN8_0sXu.js';
 
 /**
@@ -193,7 +193,7 @@ async function loadGif(src) {
     return decodeGif(await bytesOf(src));
 }
 /** The module object for `use(formatGif)`. */
-const formatGif = { id: 'format-gif', version: RUNTIME_VERSION, requires: ['core'], api: { decodeGif, loadGif, lzwDecode, animatedImagePlayer } };
+const formatGif = { id: 'format-gif', version: RUNTIME_VERSION, tier: 'standard', requires: ['core'], api: { decodeGif, loadGif, lzwDecode, animatedImagePlayer } };
 
 export { animatedImagePlayer, composeFrames, decodeGif, formatGif, loadGif, lzwDecode };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/runtime/format-gif.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/runtime/format-gif.js.map

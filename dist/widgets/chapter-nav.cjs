@@ -80,4 +80,4 @@ function defineChapterNav(tag = 'usa-chapter-nav') {
 }
 
 exports.defineChapterNav = defineChapterNav;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/widgets/chapter-nav.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/widgets/chapter-nav.cjs.map

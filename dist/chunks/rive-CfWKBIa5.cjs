@@ -142,4 +142,4 @@ exports.RIVE_PEER = RIVE_PEER;
 exports.defineRive = defineRive;
 exports.loadRiveRuntime = loadRiveRuntime;
 exports.provideRiveRuntime = provideRiveRuntime;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/chunks/rive-CfWKBIa5.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/chunks/rive-CfWKBIa5.cjs.map

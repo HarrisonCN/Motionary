@@ -4,6 +4,8 @@
 
 Plays glTF 2.0 animations on models loaded by motionary/runtime/format-gltf: translation / rotation / scale / weights channels with LINEAR, STEP and CUBICSPLINE samplers, skins (4 joints per vertex) and morph targets, deformed on the CPU and re-uploaded to motionary/runtime/gl (own implementation).
 
+**Runtime tier:** advanced — see [runtime tiers](../runtime-tiers.md).
+
 Part of Motionary's own zero-dependency runtime. Size budget: **4.5 KB gzip** (enforced in CI).
 
 ## Prerequisites

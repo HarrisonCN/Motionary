@@ -810,6 +810,7 @@ export interface GlApi {
 export const gl: RuntimeModule<GlApi> = {
   id: 'gl',
   version: RUNTIME_VERSION,
+  tier: 'advanced',
   requires: ['core'],
   api: { mat4, quatFromEuler, quatMultiply, quatSlerp, box, plane, sphere, torus, computeNormals, standardMaterial, unlitMaterial, shaderMaterial, color, texture, GlNode, Camera, Scene, bounds, frameNode, scrubVideo, createRenderer, orbitControls },
 };

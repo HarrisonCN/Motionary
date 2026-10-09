@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-D_iQfO4b.cjs');
+var registry = require('../chunks/registry-VITvgTNc.cjs');
 
 /**
  * `motionary/runtime/physics` (10.7) — a small 2D rigid-body engine written
@@ -727,7 +727,7 @@ function dragConstraint(world, body, x, y, stiffness = 0.6) {
     };
 }
 /** The module object for `use(physics)`. */
-const physics = { id: 'physics', version: registry.RUNTIME_VERSION, requires: ['core'], api: { createWorld, World, Body, Constraint, collide, dragConstraint } };
+const physics = { id: 'physics', version: registry.RUNTIME_VERSION, tier: 'advanced', requires: ['core'], api: { createWorld, World, Body, Constraint, collide, dragConstraint } };
 
 exports.Body = Body;
 exports.Constraint = Constraint;
@@ -736,4 +736,4 @@ exports.collide = collide;
 exports.createWorld = createWorld;
 exports.dragConstraint = dragConstraint;
 exports.physics = physics;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/runtime/physics.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/runtime/physics.cjs.map

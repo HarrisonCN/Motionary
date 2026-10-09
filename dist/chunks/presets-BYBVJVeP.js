@@ -223,4 +223,4 @@ function resolveEasing(easing) {
 }
 
 export { EASING_MAP as E, PRESETS as P, resolveEasing as a, reversePreset as b, registerPresets as c, resolvePreset as r };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/chunks/presets-BYBVJVeP.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/chunks/presets-BYBVJVeP.js.map

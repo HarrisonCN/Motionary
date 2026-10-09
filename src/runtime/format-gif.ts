@@ -187,4 +187,4 @@ export interface FormatGifApi {
 }
 
 /** The module object for `use(formatGif)`. */
-export const formatGif: RuntimeModule<FormatGifApi> = { id: 'format-gif', version: RUNTIME_VERSION, requires: ['core'], api: { decodeGif, loadGif, lzwDecode, animatedImagePlayer } };
+export const formatGif: RuntimeModule<FormatGifApi> = { id: 'format-gif', version: RUNTIME_VERSION, tier: 'standard', requires: ['core'], api: { decodeGif, loadGif, lzwDecode, animatedImagePlayer } };

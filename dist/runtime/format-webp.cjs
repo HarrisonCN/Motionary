@@ -1,9 +1,9 @@
 'use strict';
 
-var registry = require('../chunks/registry-D_iQfO4b.cjs');
-var animImage = require('../chunks/anim-image-Cz9T5ZiX.cjs');
-require('../chunks/tween-CtquqexF.cjs');
-require('../chunks/ticker-DYsDZNuj.cjs');
+var registry = require('../chunks/registry-VITvgTNc.cjs');
+var animImage = require('../chunks/anim-image-Bjmc17ZU.cjs');
+require('../chunks/tween-ookpV7jR.cjs');
+require('../chunks/ticker-DwRa5hIu.cjs');
 require('../chunks/ease-HwYZnZat.cjs');
 
 /**
@@ -111,7 +111,7 @@ async function loadWebp(src, o = {}) {
     return decodeWebp(await animImage.bytesOf(src), o);
 }
 /** The module object for `use(formatWebp)`. */
-const formatWebp = { id: 'format-webp', version: registry.RUNTIME_VERSION, requires: ['core'], api: { parseWebp, webpFrameFiles, decodeWebp, loadWebp, animatedImagePlayer: animImage.animatedImagePlayer } };
+const formatWebp = { id: 'format-webp', version: registry.RUNTIME_VERSION, tier: 'standard', requires: ['core'], api: { parseWebp, webpFrameFiles, decodeWebp, loadWebp, animatedImagePlayer: animImage.animatedImagePlayer } };
 
 exports.animatedImagePlayer = animImage.animatedImagePlayer;
 exports.decodeWebp = decodeWebp;
@@ -120,4 +120,4 @@ exports.loadWebp = loadWebp;
 exports.parseWebp = parseWebp;
 exports.riffChunks = riffChunks;
 exports.webpFrameFiles = webpFrameFiles;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/runtime/format-webp.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/runtime/format-webp.cjs.map

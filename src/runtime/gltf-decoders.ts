@@ -152,4 +152,4 @@ export interface GltfDecodersApi {
   DECODER_EXTENSIONS: typeof DECODER_EXTENSIONS;
 }
 
-export const gltfDecoders: RuntimeModule<GltfDecodersApi> = { id: 'gltf-decoders', version: RUNTIME_VERSION, requires: ['core', 'gl', 'format-gltf'], api: { provideGltfDecoder, providedDecoders, prepareGltf, decodeDraco, transcodeKtx2, DECODER_EXTENSIONS } };
+export const gltfDecoders: RuntimeModule<GltfDecodersApi> = { id: 'gltf-decoders', version: RUNTIME_VERSION, tier: 'advanced', requires: ['core', 'gl', 'format-gltf'], api: { provideGltfDecoder, providedDecoders, prepareGltf, decodeDraco, transcodeKtx2, DECODER_EXTENSIONS } };

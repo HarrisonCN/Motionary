@@ -9,7 +9,7 @@ import { existsSync, readFileSync, writeFileSync, readdirSync, statSync, mkdirSy
 import { fileURLToPath } from 'node:url';
 import { join, relative } from 'node:path';
 import { COMPONENTS, componentSnippets } from '../showcase/components-catalog.js';
-import { PREREQS, prereqFor, RUNTIME_CDN } from '../showcase/catalog/prereqs.js';
+import { PREREQS, prereqFor, RUNTIME_CDN, tierFor } from '../showcase/catalog/prereqs.js';
 
 const HERE = (() => { try { return fileURLToPath(new URL('..', import.meta.url)); } catch { return ''; } })();
 const ROOT = HERE && existsSync(join(HERE, 'package.json')) ? HERE : process.cwd();
@@ -93,6 +93,7 @@ export function buildManifest() {
       example: c.usage,
       esm: sn.esm,
       requires,
+      tier: tierFor(requires), // 11.4
       prerequisites: requires.length ? prereqFor({ ...c, requires }) : null,
       // schema v2 (10.9): stability, deprecation, own entry
       entry: ENTRY_BY_TAG[tag] || null,
@@ -120,6 +121,7 @@ export function buildManifest() {
       methods: s.methods,
       example: `<${tag}></${tag}>`,
       requires: [],
+      tier: 'basic', // 11.4
       prerequisites: null,
       entry: ENTRY_BY_TAG[tag] || null,
       stability: DEPRECATED[tag] ? 'deprecated' : 'stable',

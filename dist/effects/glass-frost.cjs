@@ -16,4 +16,4 @@ function registerGlassFrost() {
 exports.effect = effect;
 exports.register = registerGlassFrost;
 exports.registerGlassFrost = registerGlassFrost;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/effects/glass-frost.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/effects/glass-frost.cjs.map

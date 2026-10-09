@@ -4,6 +4,8 @@
 
 Binomial’s official Basis Universal transcoder (Apache-2.0, basis_transcoder.js + .wasm from the basis_universal repository), used by motionary/runtime/gltf-decoders for KHR_texture_basisu (KTX2) textures. Optional: lazy-loaded when the first KTX2 texture is decoded, never bundled into Motionary.
 
+**Runtime tier:** advanced — see [runtime tiers](../runtime-tiers.md).
+
 **Official third-party runtime** (optional peer dependency, lazy-loaded). Why not our own: KTX2 / Basis Universal is a supercompressed GPU texture format with a complex reference transcoder; the official transcoder is the only safe implementation, so Motionary does not reimplement it.
 
 ## Prerequisites

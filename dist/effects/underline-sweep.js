@@ -12,4 +12,4 @@ function registerUnderlineSweep() {
 }
 
 export { effect, registerUnderlineSweep as register, registerUnderlineSweep };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/effects/underline-sweep.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/effects/underline-sweep.js.map

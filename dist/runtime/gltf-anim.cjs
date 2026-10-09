@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-D_iQfO4b.cjs');
+var registry = require('../chunks/registry-VITvgTNc.cjs');
 var runtime_gl = require('./gl.cjs');
 
 /**
@@ -239,7 +239,7 @@ function gltfAnimator(root, o = {}) {
     pose();
     return a;
 }
-const gltfAnim = { id: 'gltf-anim', version: registry.RUNTIME_VERSION, requires: ['core', 'gl', 'format-gltf'], api: { gltfClips, sampleChannel, applyClip, deformModel, deformGeometry, gltfAnimator } };
+const gltfAnim = { id: 'gltf-anim', version: registry.RUNTIME_VERSION, tier: 'advanced', requires: ['core', 'gl', 'format-gltf'], api: { gltfClips, sampleChannel, applyClip, deformModel, deformGeometry, gltfAnimator } };
 
 exports.applyClip = applyClip;
 exports.deformGeometry = deformGeometry;
@@ -248,4 +248,4 @@ exports.gltfAnim = gltfAnim;
 exports.gltfAnimator = gltfAnimator;
 exports.gltfClips = gltfClips;
 exports.sampleChannel = sampleChannel;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/runtime/gltf-anim.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/runtime/gltf-anim.cjs.map

@@ -4,6 +4,8 @@
 
 Resolves Lottie slots with dotLottie themes (Color / Scalar / Vector / Text rules, static or keyframed) and runs a subset of dotLottie state machines (playback states, Event / Numeric / String / Boolean guards, pointer + completion interactions, input / theme / frame actions) for motionary/runtime/vector — own implementation, used by <usa-dotlottie>.
 
+**Runtime tier:** standard — see [runtime tiers](../runtime-tiers.md).
+
 Part of Motionary's own zero-dependency runtime. Size budget: **3.5 KB gzip** (enforced in CI).
 
 ## Prerequisites

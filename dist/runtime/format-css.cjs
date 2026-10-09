@@ -1,9 +1,9 @@
 'use strict';
 
-var registry = require('../chunks/registry-D_iQfO4b.cjs');
-var keyframes = require('../chunks/keyframes-Cl8Qc-Tq.cjs');
-require('../chunks/tween-CtquqexF.cjs');
-require('../chunks/ticker-DYsDZNuj.cjs');
+var registry = require('../chunks/registry-VITvgTNc.cjs');
+var keyframes = require('../chunks/keyframes-CA4ON22i.cjs');
+require('../chunks/tween-ookpV7jR.cjs');
+require('../chunks/ticker-DwRa5hIu.cjs');
 require('../chunks/ease-HwYZnZat.cjs');
 
 /**
@@ -174,7 +174,7 @@ function playKeyframes(target, frames, o = {}) {
     return keyframes.framesToTimeline(target, Array.isArray(frames) ? frames : frames.frames, { ...o, paused: o.paused ?? false });
 }
 /** The module object for `use(formatCss)`. */
-const formatCss = { id: 'format-css', version: registry.RUNTIME_VERSION, requires: ['core'], api: { parseKeyframes, fromCssRule, fromWaapi, toWaapi, playKeyframes } };
+const formatCss = { id: 'format-css', version: registry.RUNTIME_VERSION, tier: 'basic', requires: ['core'], api: { parseKeyframes, fromCssRule, fromWaapi, toWaapi, playKeyframes } };
 
 exports.formatCss = formatCss;
 exports.fromCssRule = fromCssRule;
@@ -183,4 +183,4 @@ exports.parseKeyframes = parseKeyframes;
 exports.parseKeyframesBody = parseKeyframesBody;
 exports.playKeyframes = playKeyframes;
 exports.toWaapi = toWaapi;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/runtime/format-css.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/runtime/format-css.cjs.map

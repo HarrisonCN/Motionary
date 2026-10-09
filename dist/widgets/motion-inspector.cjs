@@ -1,7 +1,7 @@
 'use strict';
 
 var base = require('../chunks/base-B3me2y0o.cjs');
-var registry = require('../chunks/registry-D_iQfO4b.cjs');
+var registry = require('../chunks/registry-VITvgTNc.cjs');
 
 var css = "usa-motion-inspector{display:block;max-width:100%;box-sizing:border-box;padding:10px;border-radius:14px;background:#0f172a;color:#e2e8f0;font:12px/1.4 system-ui,sans-serif}usa-motion-inspector .usa-mi-bar{display:flex;justify-content:space-between;gap:8px;align-items:baseline;flex-wrap:wrap}usa-motion-inspector .usa-mi-rt{color:#94a3b8;font:11px/1.2 ui-monospace,monospace}usa-motion-inspector .usa-mi-tools{display:flex;flex-wrap:wrap;gap:4px;margin:8px 0}usa-motion-inspector button{padding:4px 8px;border:1px solid #334155;border-radius:7px;background:#1e293b;color:#e2e8f0;font:600 11px/1 system-ui,sans-serif;cursor:pointer}usa-motion-inspector button[aria-pressed=true]{background:#6366f1;border-color:#6366f1}usa-motion-inspector .usa-mi-list{margin:0;padding:0;list-style:none;display:grid;gap:4px;max-height:180px;overflow:auto}usa-motion-inspector .usa-mi-list li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 8px;padding:5px 6px;border-radius:7px;background:#1e293b}usa-motion-inspector .usa-mi-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:11px/1.3 ui-monospace,monospace}usa-motion-inspector .usa-mi-state{color:#a5b4fc;font-size:10.5px}usa-motion-inspector li[data-state=paused] .usa-mi-state{color:#fbbf24}usa-motion-inspector input[type=range]{grid-column:1/-1;width:100%;margin:0;accent-color:#818cf8}usa-motion-inspector .usa-mi-empty{display:block!important;color:#94a3b8}";
 
@@ -116,4 +116,4 @@ function defineMotionInspector(tag = 'usa-motion-inspector') {
 }
 
 exports.defineMotionInspector = defineMotionInspector;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/widgets/motion-inspector.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/widgets/motion-inspector.cjs.map

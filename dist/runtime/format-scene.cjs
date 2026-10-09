@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-D_iQfO4b.cjs');
+var registry = require('../chunks/registry-VITvgTNc.cjs');
 
 /**
  * `motionary/runtime/format-scene` (10.7) — the versioned scene format
@@ -229,7 +229,7 @@ function worldToScene(world, o = { width: 600, height: 400 }) {
     return { format: SCENE_FORMAT, ...(o.name ? { name: o.name } : {}), world: { width: o.width, height: o.height, gravity: [world.gravity.x, world.gravity.y], walls: o.walls ?? world.bodies.some((b) => wallLabels.has(b.label)) }, bodies, constraints };
 }
 /** The module object for `use(formatScene)` (needs `physics`). */
-const formatScene = { id: 'format-scene', version: registry.RUNTIME_VERSION, requires: ['core', 'physics'], api: { SCENE_FORMAT, migrateScene, validateScene, parseScene, sceneToWorld, worldToScene } };
+const formatScene = { id: 'format-scene', version: registry.RUNTIME_VERSION, tier: 'advanced', requires: ['core', 'physics'], api: { SCENE_FORMAT, migrateScene, validateScene, parseScene, sceneToWorld, worldToScene } };
 
 exports.SCENE_FORMAT = SCENE_FORMAT;
 exports.formatScene = formatScene;
@@ -238,4 +238,4 @@ exports.parseScene = parseScene;
 exports.sceneToWorld = sceneToWorld;
 exports.validateScene = validateScene;
 exports.worldToScene = worldToScene;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/runtime/format-scene.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/runtime/format-scene.cjs.map

@@ -178,4 +178,4 @@ export interface FormatObjApi {
 }
 
 /** The module object for `use(formatObj)` (needs `gl`). */
-export const formatObj: RuntimeModule<FormatObjApi> = { id: 'format-obj', version: RUNTIME_VERSION, requires: ['core', 'gl'], api: { parseObj, parseMtl, objMaterial, objToNode, loadObj } };
+export const formatObj: RuntimeModule<FormatObjApi> = { id: 'format-obj', version: RUNTIME_VERSION, tier: 'advanced', requires: ['core', 'gl'], api: { parseObj, parseMtl, objMaterial, objToNode, loadObj } };

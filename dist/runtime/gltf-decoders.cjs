@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-D_iQfO4b.cjs');
+var registry = require('../chunks/registry-VITvgTNc.cjs');
 
 /**
  * `motionary/runtime/gltf-decoders` (10.9) — hooks that let
@@ -146,7 +146,7 @@ async function prepareGltf(json, buffers) {
     j.extensionsUsed = strip(j.extensionsUsed);
     return { json: j, buffers: bufs, images };
 }
-const gltfDecoders = { id: 'gltf-decoders', version: registry.RUNTIME_VERSION, requires: ['core', 'gl', 'format-gltf'], api: { provideGltfDecoder, providedDecoders, prepareGltf, decodeDraco, transcodeKtx2, DECODER_EXTENSIONS } };
+const gltfDecoders = { id: 'gltf-decoders', version: registry.RUNTIME_VERSION, tier: 'advanced', requires: ['core', 'gl', 'format-gltf'], api: { provideGltfDecoder, providedDecoders, prepareGltf, decodeDraco, transcodeKtx2, DECODER_EXTENSIONS } };
 
 exports.DECODER_EXTENSIONS = DECODER_EXTENSIONS;
 exports.DECODER_HELP = DECODER_HELP;
@@ -156,4 +156,4 @@ exports.prepareGltf = prepareGltf;
 exports.provideGltfDecoder = provideGltfDecoder;
 exports.providedDecoders = providedDecoders;
 exports.transcodeKtx2 = transcodeKtx2;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/runtime/gltf-decoders.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/runtime/gltf-decoders.cjs.map

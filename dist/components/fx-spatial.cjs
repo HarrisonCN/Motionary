@@ -97,4 +97,4 @@ exports.SPATIAL_FX = SPATIAL_FX;
 exports.registerSpatialPack = registerSpatialPack;
 exports.xrSupport = xrSupport;
 exports.yawToOffset = yawToOffset;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/components/fx-spatial.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/components/fx-spatial.cjs.map

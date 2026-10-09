@@ -4,6 +4,8 @@
 
 The official MIT-licensed Rive runtime, used by <usa-rive> to play .riv files (artboards, animations, state machines with inputs). Optional peer dependency: lazy-loaded on first use, never bundled into Motionary.
 
+**Runtime tier:** standard — see [runtime tiers](../runtime-tiers.md).
+
 **Official third-party runtime** (optional peer dependency, lazy-loaded). Why not our own: .riv is Rive’s proprietary binary format with a state-machine runtime; the official runtime is the only faithful player, so Motionary does not reimplement it.
 
 ## Prerequisites

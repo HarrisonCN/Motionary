@@ -4,6 +4,8 @@
 
 Import CSS @keyframes text or live CSSKeyframesRule objects and Web Animations API keyframes (array or property-indexed) into a runtime timeline.
 
+**Runtime tier:** basic — see [runtime tiers](../runtime-tiers.md).
+
 Part of Motionary's own zero-dependency runtime. Size budget: **2.5 KB gzip** (enforced in CI).
 
 ## Prerequisites

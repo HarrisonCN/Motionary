@@ -1,10 +1,10 @@
 'use strict';
 
-var registry = require('../chunks/registry-D_iQfO4b.cjs');
-var tween = require('../chunks/tween-CtquqexF.cjs');
+var registry = require('../chunks/registry-VITvgTNc.cjs');
+var tween = require('../chunks/tween-ookpV7jR.cjs');
 var ease = require('../chunks/ease-HwYZnZat.cjs');
-var keyframes = require('../chunks/keyframes-Cl8Qc-Tq.cjs');
-require('../chunks/ticker-DYsDZNuj.cjs');
+var keyframes = require('../chunks/keyframes-CA4ON22i.cjs');
+require('../chunks/ticker-DwRa5hIu.cjs');
 
 /**
  * `motionary/runtime/format-motion` (10.1) — play Motion / Framer-style
@@ -130,11 +130,11 @@ function playMotion(target, def, o = {}) {
     return tl;
 }
 /** The module object for `use(formatMotion)`. */
-const formatMotion = { id: 'format-motion', version: registry.RUNTIME_VERSION, requires: ['core'], api: { fromMotion, playMotion, springEase, motionEase } };
+const formatMotion = { id: 'format-motion', version: registry.RUNTIME_VERSION, tier: 'basic', requires: ['core'], api: { fromMotion, playMotion, springEase, motionEase } };
 
 exports.formatMotion = formatMotion;
 exports.fromMotion = fromMotion;
 exports.motionEase = motionEase;
 exports.playMotion = playMotion;
 exports.springEase = springEase;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/runtime/format-motion.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/runtime/format-motion.cjs.map

@@ -5,7 +5,7 @@
  */
 import { components as SIX } from './catalog/widgets.js';
 import { componentSnippets } from './components-catalog.js';
-import { prereqFor, requiresLabel } from './catalog/prereqs.js';
+import { prereqFor, requiresLabel, tierFor } from './catalog/prereqs.js';
 
 export const COMPONENT_CATEGORY = { id: 'components', en: 'Components 6.x–7.x', zh: '组件 6.x–7.x' };
 
@@ -30,6 +30,7 @@ export const COMPONENT_ITEMS = SIX.map((c) => {
     tags: [c.tag === 'usa-fx' ? `effect pack ${c.since}` : `<${c.tag}>`, ...c.tags.slice(0, 3)],
     requires: c.requires || [],
     requiresBadge: requiresLabel(c.requires), // 10.1: 'Requires: motionary/runtime/…' badge on the Store card
+    tier: c.requires?.length ? tierFor(c.requires) : null, // 11.4: runtime tier badge next to it
     prereq: c.requires?.length ? prereqFor(c) : null, // 10.1: Store detail → Prerequisites
     snippets: { vanilla: s.esm, react: s.react, vue: s.vue, svelte: svelte(s.esm, html), solid: s.react.replace("export function Demo", "export default function Demo"), element: s.html, cdn: s.html },
   };

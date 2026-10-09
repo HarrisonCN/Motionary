@@ -241,4 +241,4 @@ export interface FormatSpriteApi {
 }
 
 /** The module object for `use(formatSprite)`. */
-export const formatSprite: RuntimeModule<FormatSpriteApi> = { id: 'format-sprite', version: RUNTIME_VERSION, requires: ['core'], api: { parseSpriteSheet, gridSheet, frameOrder, drawFrame, spritePlayer, imageSequence, preloadImages, sequencePlayer } };
+export const formatSprite: RuntimeModule<FormatSpriteApi> = { id: 'format-sprite', version: RUNTIME_VERSION, tier: 'standard', requires: ['core'], api: { parseSpriteSheet, gridSheet, frameOrder, drawFrame, spritePlayer, imageSequence, preloadImages, sequencePlayer } };

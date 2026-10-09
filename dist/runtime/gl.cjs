@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-D_iQfO4b.cjs');
+var registry = require('../chunks/registry-VITvgTNc.cjs');
 
 /**
  * `motionary/runtime/gl` (10.5) — a small WebGL2 scene renderer written for
@@ -746,6 +746,7 @@ function orbitControls(camera, el, o = {}) {
 const gl = {
     id: 'gl',
     version: registry.RUNTIME_VERSION,
+    tier: 'advanced',
     requires: ['core'],
     api: { mat4, quatFromEuler, quatMultiply, quatSlerp, box, plane, sphere, torus, computeNormals, standardMaterial, unlitMaterial, shaderMaterial, color, texture, GlNode, Camera, Scene, bounds, frameNode, scrubVideo, createRenderer, orbitControls },
 };
@@ -773,4 +774,4 @@ exports.standardMaterial = standardMaterial;
 exports.texture = texture;
 exports.torus = torus;
 exports.unlitMaterial = unlitMaterial;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/runtime/gl.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/runtime/gl.cjs.map

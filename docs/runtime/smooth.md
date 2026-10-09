@@ -4,6 +4,8 @@
 
 Smooth, inertial wheel scrolling (lerp or fixed-duration glide) for the window or any scroll container, anchor links that glide, off under prefers-reduced-motion; real scroll events keep scroll scenes and observers working.
 
+**Runtime tier:** standard — see [runtime tiers](../runtime-tiers.md).
+
 Part of Motionary's own zero-dependency runtime. Size budget: **3.5 KB gzip** (enforced in CI).
 
 ## Prerequisites

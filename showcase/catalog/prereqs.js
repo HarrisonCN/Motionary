@@ -14,9 +14,16 @@ const esm = (id) => (id === 'core' ? `${RUNTIME_CDN}runtime.js` : `${RUNTIME_CDN
 const camel = (id) => id.replace(/-(\w)/g, (_, c) => c.toUpperCase());
 
 /** A `motionary/runtime/<id>` module entry. */
+/** 11.4: runtime tier of every prerequisite (same table as RUNTIME_TIERS in src/runtime/registry.ts; a test keeps them equal). */
+export const PREREQ_TIERS = { 'core': 'basic', 'scroll': 'basic', 'text': 'basic', 'format-css': 'basic', 'format-motion': 'basic', 'smooth': 'standard', 'drag-snap': 'standard', 'format-svg': 'standard', 'format-sprite': 'standard', 'format-gif': 'standard', 'format-apng': 'standard', 'format-webp': 'standard', 'vector': 'standard', 'lottie-state': 'standard', 'rive': 'standard', 'gl': 'advanced', 'format-gltf': 'advanced', 'format-obj': 'advanced', 'gltf-anim': 'advanced', 'gltf-decoders': 'advanced', 'basis-transcoder': 'advanced', 'draco3d': 'advanced', 'physics': 'advanced', 'format-scene': 'advanced' };
+const TIER_ORDER = ['basic', 'standard', 'advanced'];
+/** The tier a component pays for: the highest tier among its prerequisites (basic for none). */
+export const tierFor = (ids = []) => TIER_ORDER[Math.max(0, ...ids.map((id) => TIER_ORDER.indexOf(PREREQ_TIERS[id] || 'basic')))];
+
 const R = (id, title, summary, budget, exports, compat, example) => ({
   kind: 'runtime',
   id,
+  tier: PREREQ_TIERS[id],
   label: id === 'core' ? 'motionary/runtime' : `motionary/runtime/${id}`,
   title,
   summary,
@@ -38,6 +45,7 @@ const R = (id, title, summary, budget, exports, compat, example) => ({
 
 /** An official third-party runtime (optional peer dependency, lazy-loaded) — only for formats we cannot implement ourselves (10.6+). */
 const P = (id, label, title, summary, install, imp, register, cdn, cdnEsm, order, why, exports, compat, example) => ({
+  tier: PREREQ_TIERS[id],
   kind: 'peer',
   id,
   label,

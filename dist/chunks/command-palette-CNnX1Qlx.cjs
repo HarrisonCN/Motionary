@@ -268,4 +268,4 @@ exports.defineCommandPalette = defineCommandPalette;
 exports.fuzzyMatch = fuzzyMatch;
 exports.keyLabels = keyLabels;
 exports.matchesKeys = matchesKeys;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/chunks/command-palette-CNnX1Qlx.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/chunks/command-palette-CNnX1Qlx.cjs.map

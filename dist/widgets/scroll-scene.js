@@ -1,5 +1,5 @@
-export { d as defineScrollScene } from '../chunks/scroll-scene-CHqUJZRm.js';
+export { d as defineScrollScene } from '../chunks/scroll-scene-C6cUC6eR.js';
 import '../chunks/base-zSGb8ujt.js';
-import '../chunks/runtime-link-d33GAHqB.js';
-import '../chunks/registry-xlsVOzSM.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/widgets/scroll-scene.js.map
+import '../chunks/runtime-link-LolrEAJv.js';
+import '../chunks/registry-CorBCE7b.js';
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/widgets/scroll-scene.js.map

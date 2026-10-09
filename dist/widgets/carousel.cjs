@@ -7,4 +7,4 @@ require('../chunks/shared-BxK1D7EZ.cjs');
 
 
 exports.defineCarousel = widgets_carousel.defineCarousel;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/widgets/carousel.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/widgets/carousel.cjs.map

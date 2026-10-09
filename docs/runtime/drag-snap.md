@@ -4,6 +4,8 @@
 
 Pointer drag along one axis with velocity tracking, inertial throws, rubber-band edges and spring-animated snap points on the shared ticker — the engine of <usa-snap-carousel>, usable for sheets, sliders and pickers (own implementation).
 
+**Runtime tier:** standard — see [runtime tiers](../runtime-tiers.md).
+
 Part of Motionary's own zero-dependency runtime. Size budget: **4.0 KB gzip** (enforced in CI).
 
 ## Prerequisites

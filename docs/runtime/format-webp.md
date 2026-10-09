@@ -4,6 +4,8 @@
 
 Split animated WebP files (ANIM / ANMF) into standalone frames (decoded by the browser), composite them (blend / dispose) and play them on a canvas as a runtime timeline.
 
+**Runtime tier:** standard — see [runtime tiers](../runtime-tiers.md).
+
 Part of Motionary's own zero-dependency runtime. Size budget: **3.0 KB gzip** (enforced in CI).
 
 ## Prerequisites

@@ -6,4 +6,4 @@ require('../chunks/base-B3me2y0o.cjs');
 
 
 exports.defineWeatherCard = widgets_weatherCard.defineWeatherCard;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/widgets/weather-card.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/widgets/weather-card.cjs.map

@@ -4,6 +4,8 @@
 
 Load Wavefront OBJ (+ MTL materials and diffuse textures) into motionary/runtime/gl nodes: polygons triangulated, groups, per-material meshes.
 
+**Runtime tier:** advanced — see [runtime tiers](../runtime-tiers.md).
+
 Part of Motionary's own zero-dependency runtime. Size budget: **3.0 KB gzip** (enforced in CI).
 
 ## Prerequisites

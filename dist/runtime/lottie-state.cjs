@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-D_iQfO4b.cjs');
+var registry = require('../chunks/registry-VITvgTNc.cjs');
 
 /**
  * `motionary/runtime/lottie-state` (10.9) — dotLottie **themes** (slots) and a
@@ -235,7 +235,7 @@ function createStateMachine(def, hooks = {}) {
     run(cur.entryActions);
     return sm;
 }
-const lottieState = { id: 'lottie-state', version: registry.RUNTIME_VERSION, requires: ['core', 'vector'], api: { applyTheme, ruleProp, createStateMachine, inspectStateMachine, compare } };
+const lottieState = { id: 'lottie-state', version: registry.RUNTIME_VERSION, tier: 'standard', requires: ['core', 'vector'], api: { applyTheme, ruleProp, createStateMachine, inspectStateMachine, compare } };
 
 exports.applyTheme = applyTheme;
 exports.compare = compare;
@@ -243,4 +243,4 @@ exports.createStateMachine = createStateMachine;
 exports.inspectStateMachine = inspectStateMachine;
 exports.lottieState = lottieState;
 exports.ruleProp = ruleProp;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/runtime/lottie-state.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/runtime/lottie-state.cjs.map

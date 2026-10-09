@@ -4,6 +4,8 @@
 
 Replay SVG SMIL animations (animate, set, animateTransform, animateMotion) on the runtime timeline, morph between any two paths, and measure paths without the DOM.
 
+**Runtime tier:** standard — see [runtime tiers](../runtime-tiers.md).
+
 Part of Motionary's own zero-dependency runtime. Size budget: **5.0 KB gzip** (enforced in CI).
 
 ## Prerequisites

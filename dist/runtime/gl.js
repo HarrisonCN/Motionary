@@ -1,4 +1,4 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-xlsVOzSM.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-CorBCE7b.js';
 
 /**
  * `motionary/runtime/gl` (10.5) — a small WebGL2 scene renderer written for
@@ -744,9 +744,10 @@ function orbitControls(camera, el, o = {}) {
 const gl = {
     id: 'gl',
     version: RUNTIME_VERSION,
+    tier: 'advanced',
     requires: ['core'],
     api: { mat4, quatFromEuler, quatMultiply, quatSlerp, box, plane, sphere, torus, computeNormals, standardMaterial, unlitMaterial, shaderMaterial, color, texture, GlNode, Camera, Scene, bounds, frameNode, scrubVideo, createRenderer, orbitControls },
 };
 
 export { Camera, GlNode, Scene, bounds, box, color, computeNormals, createRenderer, frameNode, gl, mat4, orbitControls, plane, quatFromEuler, quatMultiply, quatSlerp, scrubVideo, shaderMaterial, sphere, standardMaterial, texture, torus, unlitMaterial };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/runtime/gl.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/runtime/gl.js.map

@@ -219,4 +219,4 @@ export interface FormatGltfApi {
 }
 
 /** The module object for `use(formatGltf)` (needs `gl`). */
-export const formatGltf: RuntimeModule<FormatGltfApi> = { id: 'format-gltf', version: RUNTIME_VERSION, requires: ['core', 'gl'], api: { parseGlb, readAccessor, gltfToNode, loadGltf, SUPPORTED_EXTENSIONS } };
+export const formatGltf: RuntimeModule<FormatGltfApi> = { id: 'format-gltf', version: RUNTIME_VERSION, tier: 'advanced', requires: ['core', 'gl'], api: { parseGlb, readAccessor, gltfToNode, loadGltf, SUPPORTED_EXTENSIONS } };

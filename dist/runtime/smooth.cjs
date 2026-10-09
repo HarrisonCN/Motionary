@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-D_iQfO4b.cjs');
+var registry = require('../chunks/registry-VITvgTNc.cjs');
 var ease = require('../chunks/ease-HwYZnZat.cjs');
 
 /**
@@ -275,10 +275,10 @@ function smoothScroll(o = {}) {
 /** Every live instance. */
 const allSmooth = () => Array.from(instances);
 /** The module object for `use(smooth)`. */
-const smooth = { id: 'smooth', version: registry.RUNTIME_VERSION, requires: ['core'], api: { smoothScroll, allSmooth, SmoothScroll } };
+const smooth = { id: 'smooth', version: registry.RUNTIME_VERSION, tier: 'standard', requires: ['core'], api: { smoothScroll, allSmooth, SmoothScroll } };
 
 exports.SmoothScroll = SmoothScroll;
 exports.allSmooth = allSmooth;
 exports.smooth = smooth;
 exports.smoothScroll = smoothScroll;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/runtime/smooth.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/runtime/smooth.cjs.map
