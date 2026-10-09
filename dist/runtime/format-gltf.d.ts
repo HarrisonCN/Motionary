@@ -252,6 +252,11 @@ declare function gltfToNode(json: GltfJson, buffers: Uint8Array[], images?: Gltf
 declare function loadGltf(src: string | ArrayBuffer | Uint8Array, o?: {
     baseUrl?: string;
     scene?: number;
+    prepare?: (json: GltfJson, buffers: Uint8Array[]) => Promise<{
+        json: GltfJson;
+        buffers: Uint8Array[];
+        images: GltfImages;
+    }>;
 }): Promise<GlNode>;
 interface FormatGltfApi {
     parseGlb: typeof parseGlb;

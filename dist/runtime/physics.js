@@ -1,4 +1,4 @@
-import { R as RUNTIME_VERSION, r as requireModule } from '../chunks/registry-Bkt3-3ET.js';
+import { R as RUNTIME_VERSION, r as requireModule } from '../chunks/registry-RJYrdUTF.js';
 
 /**
  * `motionary/runtime/physics` (10.7) — a small 2D rigid-body engine written

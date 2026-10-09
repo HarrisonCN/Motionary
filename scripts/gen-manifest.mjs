@@ -33,7 +33,7 @@ export function scanSource() {
     const hits = [...s.matchAll(re)];
     hits.forEach((m, i) => {
       const body = s.slice(m.index, hits[i + 1]?.index ?? s.length);
-      const attrs = /observedAttributes\(\)[^{]*\{\s*return \[([^\]]*)\]/.exec(body);
+      const attrs = /observedAttributes\(\)[^{]*\{\s*return \[([\s\S]*?)\];/.exec(body); // [\s\S]*?\]; — a spread like `...(X.observedAttributes || [])` must not end the list early
       const attributes = attrs ? [...attrs[1].matchAll(/'([^']+)'/g)].map((x) => x[1]) : [];
       const events = [...new Set([...body.matchAll(/\.emit\(\s*'([\w:-]+)'/g)].map((x) => 'usa:' + x[1]))];
       if (/usa:runtime-missing|runtimeModule</.test(body)) events.push('usa:runtime-missing');

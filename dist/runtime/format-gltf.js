@@ -1,4 +1,4 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-Bkt3-3ET.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-RJYrdUTF.js';
 import { standardMaterial, texture, computeNormals, GlNode } from './gl.js';
 
 /**
@@ -104,7 +104,7 @@ function gltfToNode(json, buffers, images = {}, sceneIndex) {
         throw new Error('[motionary] format-gltf: only glTF 2.0 is supported');
     const missing = (json.extensionsRequired || []).filter((e) => !SUPPORTED_EXTENSIONS.includes(e));
     if (missing.length)
-        throw new Error(`[motionary] format-gltf: this file requires ${missing.join(', ')}, which motionary/runtime/format-gltf does not implement${missing.some((e) => /draco|KHR_texture_basisu|meshopt/i.test(e)) ? ' (compressed geometry / textures need the official decoders — re-export the model without compression, or use the decoder hooks planned for 10.9)' : ''}`);
+        throw new Error(`[motionary] format-gltf: this file requires ${missing.join(', ')}, which motionary/runtime/format-gltf does not implement${missing.some((e) => /draco|KHR_texture_basisu|meshopt/i.test(e)) ? ' (compressed geometry / textures need the official decoders — use <usa-gl-model> / motionary/runtime/gltf-decoders with the official decoders (draco3d, Basis Universal), or re-export the model without compression)' : ''}`);
     const mats = (json.materials || []).map((m) => {
         const pbr = m.pbrMetallicRoughness || {};
         const cf = pbr.baseColorFactor || [1, 1, 1, 1];
@@ -196,9 +196,13 @@ async function loadGltf(src, o = {}) {
         ({ json, bin } = parseGlb(bytes));
     else
         json = JSON.parse(new TextDecoder().decode(bytes));
-    const buffers = await Promise.all((json.buffers || []).map((b, i) => (b.uri ? get(b.uri) : i === 0 && bin ? Promise.resolve(bin) : Promise.reject(new Error('[motionary] format-gltf: buffer without data')))));
-    const images = {};
+    let buffers = await Promise.all((json.buffers || []).map((b, i) => (b.uri ? get(b.uri) : i === 0 && bin ? Promise.resolve(bin) : Promise.reject(new Error('[motionary] format-gltf: buffer without data')))));
+    let images = {};
+    if (o.prepare)
+        ({ json, buffers, images } = await o.prepare(json, buffers)); // 10.9: official decoders (motionary/runtime/gltf-decoders)
     await Promise.all((json.images || []).map(async (im, i) => {
+        if (images[i])
+            return;
         let data;
         if (im.bufferView !== undefined) {
             const bv = json.bufferViews[im.bufferView];

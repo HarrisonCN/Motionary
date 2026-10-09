@@ -66,6 +66,8 @@ function offscreenRender(canvas, program, opts = {}) {
     const ctx = canvas.getContext?.('2d');
     if (!ctx)
         return { backend: 'none', stop: () => undefined, resize: () => undefined };
+    if (typeof program === 'string')
+        base.deprecate('worker-canvas-string', 'offscreenRender() / <usa-worker-canvas> with a string program fell back to the main thread, where it is evaluated with new Function (blocked by a strict CSP). Deprecated in 10.9; 11.0 refuses string programs on the main thread — pass a function. See docs/upgrading-11.md.');
     // eslint-disable-next-line no-new-func
     const draw = typeof program === 'function' ? program : new Function(`return (${code})`)();
     const st = {};
