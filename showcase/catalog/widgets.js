@@ -953,6 +953,35 @@ export const components = [
     '<usa-fx effect="glass-frost" trigger="enter"><div class="glass-card">…</div></usa-fx>\n<usa-fx effect="neu-press" trigger="click"><button class="neu">Press</button></usa-fx>',
     '<div class="demo-row demo-glassbg"><usa-fx effect="glass-frost" trigger="click"><button type="button" class="demo-glass">Frost</button></usa-fx><usa-fx effect="neu-press" trigger="click"><button type="button" class="demo-neu">Press</button></usa-fx></div>',
     [{ key: 'effect', values: ['glass-frost', 'neu-press'] }], '8.6'),
+  // ---- 8.7 -------------------------------------------------------------
+  W('usa-gyro-card', 'ui', 'Gyro 3D card', '陀螺仪 3D 卡片',
+    '8.7: a 3D card that tilts with the phone’s gyroscope (and with the pointer on desktop), with a moving glare and layers that float at different depths.',
+    '8.7：随手机陀螺仪倾斜的 3D 卡片（桌面端跟随指针），带移动的高光和不同景深漂浮的图层。',
+    ['gyroscope', 'tilt', '3d card', 'device orientation', 'parallax'],
+    '<usa-gyro-card max="15">\n  <h3 data-depth="2">Gyro</h3>\n  <p data-depth="1">Tilt your phone</p>\n</usa-gyro-card>',
+    '<div class="demo-col demo-gyrow"><usa-gyro-card class="demo-gyro"><b data-depth="2">Gyro card</b><small data-depth="1">tilt your phone · move the mouse</small></usa-gyro-card><button type="button" class="demo-skbtn" data-gyro-wobble>Wobble</button></div>',
+    undefined, { since: '8.7' }),
+  W('usa-gesture-sticker', 'ui', 'Multi-touch sticker', '多点触控贴纸',
+    '8.7: a multi-touch sticker — drag with one finger, pinch with two to scale and twist to rotate, all at once, with a lifted shadow while held (wheel / Shift + wheel and keyboard on desktop).',
+    '8.7：多点触控贴纸 —— 单指拖动，双指捏合缩放、旋转同时进行，按住时阴影抬起（桌面端支持滚轮 / Shift + 滚轮与键盘）。',
+    ['multi-touch', 'pinch', 'rotate', 'drag', 'sticker'],
+    '<usa-gesture-sticker label="Star sticker" max="3">\n  <img src="star.png" alt="Star" width="120">\n</usa-gesture-sticker>',
+    '<div class="demo-stickers"><usa-gesture-sticker label="Star"><span class="demo-stk">⭐ Drag · pinch · twist</span></usa-gesture-sticker><button type="button" class="demo-gest demo-stk-spin" data-stk-spin>Spin</button></div>',
+    undefined, { since: '8.7' }),
+  X('fx-gesture-hint', ['fx-gesture', 'registerGesture3Pack'], 'Swipe & pinch hints', '滑动与捏合手势提示',
+    '8.7: swipe-hint sends a ghost fingertip across an element that nudges along, teaching “swipe me”; pinch-hint pinches two ghost fingertips out while the element zooms.',
+    '8.7：swipe-hint 让虚拟指尖划过元素并带动它轻移，提示“可以滑动”；pinch-hint 让两个虚拟指尖张开、元素随之放大，提示“双指缩放”。',
+    ['gesture', 'hint', 'swipe', 'pinch', 'onboarding'],
+    '<usa-fx effect="swipe-hint" trigger="enter" direction="left"><div class="card">…</div></usa-fx>\n<usa-fx effect="pinch-hint" trigger="enter"><img src="map.png" alt=""></usa-fx>',
+    '<div class="demo-row"><usa-fx effect="swipe-hint" trigger="click"><button type="button" class="demo-gest">Swipe hint</button></usa-fx><usa-fx effect="pinch-hint" trigger="click"><button type="button" class="demo-gest">Pinch hint</button></usa-fx></div>',
+    [{ key: 'effect', values: ['swipe-hint', 'pinch-hint'] }], '8.7'),
+  X('fx-depth-in', ['fx-gesture', 'registerGesture3Pack'], 'Depth-in & tilt wobble', '景深入场与倾斜摇摆',
+    '8.7: depth-in flies an element’s children in from different depths like parallax layers settling; tilt-wobble gives it a 3D wobble as if the phone was tilted.',
+    '8.7：depth-in 让子元素从不同景深飞入，像视差图层落定；tilt-wobble 让元素像手机被倾斜一样做 3D 摇摆。',
+    ['depth', 'parallax', '3d', 'wobble', 'tilt'],
+    '<usa-fx effect="depth-in" trigger="enter"><div data-depth="3">Back</div><div data-depth="1">Front</div></usa-fx>\n<usa-fx effect="tilt-wobble" trigger="click"><button>Wobble</button></usa-fx>',
+    '<div class="demo-row"><usa-fx effect="depth-in" trigger="click"><button type="button" class="demo-layers" aria-label="Replay depth-in"><i data-depth="3"></i><i data-depth="2"></i><i data-depth="1"></i></button></usa-fx><usa-fx effect="tilt-wobble" trigger="click"><button type="button" class="demo-gest">Wobble</button></usa-fx></div>',
+    [{ key: 'effect', values: ['depth-in', 'tilt-wobble'] }], '8.7'),
 ];
 
 /** item id → live-demo wiring. */
@@ -1152,5 +1181,13 @@ export const wire = {
         c.setValues(c.values.map(() => 1 + Math.round(Math.random() * 9)));
         c.redraw();
       }));
+  },
+  'gesture-sticker': (stage) => {
+    const s = stage.querySelector('usa-gesture-sticker');
+    stage.querySelector('[data-stk-spin]')?.addEventListener('click', () => s?.transformTo({ angle: (s.angle || 0) + 45, scale: s.scale > 1.2 ? 1 : 1.3 }));
+  },
+  'gyro-card': (stage) => {
+    const c = stage.querySelector('usa-gyro-card');
+    stage.querySelector('[data-gyro-wobble]')?.addEventListener('click', () => c?.wobble());
   },
 };

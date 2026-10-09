@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.7.0] - 2026-10-09
+
+### Added
+- **2 new components (8.7)** in `motionary/components/widgets` (also in `dist/widgets.umd.js`):
+  - `<usa-gyro-card>` — 3D card that tilts with the phone's gyroscope (`deviceorientation`, iOS permission asked on first tap) and with the pointer on desktop; moving glare, `[data-depth]` layers float at different depths; `max`, `glare`; `tilt(rx, ry)`, `wobble()`, `source`; `usa:tilt` { rx, ry, source }.
+  - `<usa-gesture-sticker>` — multi-touch sticker: one finger drags, two fingers pinch-scale and twist-rotate simultaneously, lifted shadow while held, springy settle; wheel / Shift + wheel; arrows, + / −, [ / ], 0; `min`, `max`; `x`, `y`, `scale`, `angle`, `transformTo()`, `reset()`; `usa:transform`.
+- **Gestures 3.0 pack — `motionary/fx/gesture`** (= `motionary/components/fx-gesture`, `registerGesture3Pack()`, also in `registerEffectPacks()`): `swipe-hint` (attention), `pinch-hint` (attention), `tilt-wobble` (attention), `depth-in` (enter). `pinchScale()`, `pinchAngle()`, `orientationToTilt()`.
+- Showcase: 4 new gallery cards with copyable code, live demos and live Store thumbnails.
+
+### Accessibility
+- The sticker is a focusable `group` (roledescription "sticker") whose label explains the gestures; every gesture has a keyboard equivalent. The gyro card keeps your content readable and the glare is `aria-hidden`. Reduced motion: the gyro card stays flat, the sticker moves without spring, the hints and wobble do nothing, `depth-in` just shows.
+
+### Fixed
+- the gallery id `fx-depth` is taken by the 6.5 depth card → the 8.7 card is `fx-depth-in`.
+- `orientationToTilt()` returned `-0` for a device at rest (beta = rest angle) — the tilt is now normalised to `0` (no `-0` in `usa:tilt` details / CSS vars).
+- the gyro card only moved with a real gyroscope or a mouse over it, so its gallery card and Store thumbnail sat still — added `wobble()` (a short tilt sweep, skipped under reduced motion) and a "Wobble" button in the gallery / Store demo.
+
 ## [8.6.0] - 2026-10-09
 
 ### Added

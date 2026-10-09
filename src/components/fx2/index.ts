@@ -29,6 +29,7 @@ import { ORGANIC_FX, registerOrganicPack, blobRadius } from './organic';
 import { CYBER_FX, registerCyberPack, decodeFrame } from './cyber';
 import { PAPER_FX, registerPaperPack, roughLine, paperRandom } from './paper';
 import { SURFACE_FX, registerSurfacePack, SURFACE_THEMES, applySurfaceTheme } from './themefx';
+import { GESTURE3_FX, registerGesture3Pack, pinchScale, pinchAngle, orientationToTilt } from './gesture3';
 
 export { GPU_FX, registerGpuPack, TEXT3_FX, registerTextPack, splitChars };
 export { shaderBackground, supportsWebGL2, fieldFallback, GLSL_HEAD } from './gl';
@@ -77,6 +78,8 @@ export { PAPER_FX, registerPaperPack, roughLine, paperRandom };
 
 export { SURFACE_FX, registerSurfacePack, SURFACE_THEMES, applySurfaceTheme };
 
+export { GESTURE3_FX, registerGesture3Pack, pinchScale, pinchAngle, orientationToTilt };
+
 /** The 6.x effect packs by name. */
 export const EFFECT_PACKS: Record<string, EffectDefinition[]> = {
   gpu: GPU_FX,
@@ -102,6 +105,7 @@ export const EFFECT_PACKS: Record<string, EffectDefinition[]> = {
   cyber: CYBER_FX,
   paper: PAPER_FX,
   surface: SURFACE_FX,
+  gesture3: GESTURE3_FX,
 };
 
 /** Register every 6.x effect pack (idempotent). */
@@ -129,6 +133,7 @@ export function registerEffectPacks(): void {
   registerCyberPack();
   registerPaperPack();
   registerSurfacePack();
+  registerGesture3Pack();
 }
 
 

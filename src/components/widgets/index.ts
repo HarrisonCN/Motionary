@@ -84,6 +84,8 @@ import { defineStickyWall, type UsaStickyWallElement } from './sticky-wall';
 import { defineSketchChart, type UsaSketchChartElement } from './sketch-chart';
 import { defineThemeSwitcher, type UsaThemeSwitcherElement } from './theme-switcher';
 import { defineThemeSurface, type UsaThemeSurfaceElement } from './theme-surface';
+import { defineGyroCard, type UsaGyroCardElement } from './gyro-card';
+import { defineGestureSticker, type UsaGestureStickerElement, type StickerState } from './gesture-sticker';
 
 export { defineCarousel, defineTabBar, defineDisclosure, defineStories, CAROUSEL_EFFECTS, TAB_INDICATORS };
 export type { UsaCarouselElement, UsaTabBarElement, UsaDisclosureElement, UsaStoriesElement };
@@ -156,6 +158,9 @@ export type { UsaStickyWallElement, UsaSketchChartElement };
 export { defineThemeSwitcher, defineThemeSurface };
 export type { UsaThemeSwitcherElement, UsaThemeSurfaceElement };
 
+export { defineGyroCard, defineGestureSticker };
+export type { UsaGyroCardElement, UsaGestureStickerElement, StickerState };
+
 /** The widgets by release (tag → define function). */
 export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElementConstructor | undefined>> = {
   '6.2': { 'usa-carousel': defineCarousel, 'usa-tab-bar': defineTabBar, 'usa-disclosure': defineDisclosure, 'usa-stories': defineStories },
@@ -182,6 +187,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '8.4': { 'usa-hud-panel': defineHudPanel, 'usa-radar': defineRadar },
   '8.5': { 'usa-sticky-wall': defineStickyWall, 'usa-sketch-chart': defineSketchChart },
   '8.6': { 'usa-theme-switcher': defineThemeSwitcher, 'usa-theme-surface': defineThemeSurface },
+  '8.7': { 'usa-gyro-card': defineGyroCard, 'usa-gesture-sticker': defineGestureSticker },
 };
 
 /** Every widget tag, in release order. */
@@ -270,5 +276,7 @@ declare global {
     'usa-sketch-chart': UsaSketchChartElement;
     'usa-theme-switcher': UsaThemeSwitcherElement;
     'usa-theme-surface': UsaThemeSurfaceElement;
+    'usa-gyro-card': UsaGyroCardElement;
+    'usa-gesture-sticker': UsaGestureStickerElement;
   }
 }
