@@ -1,5 +1,5 @@
-import { v as onClockChange, x as setClock, y as getClock, p as prefersReducedMotion, e as animateWithMotion } from '../chunks/base-DWYNLg6P.js';
-export { z as trackAnimation } from '../chunks/base-DWYNLg6P.js';
+import { v as onClockChange, x as setClock, y as getClock, p as prefersReducedMotion, e as animateWithMotion } from '../chunks/base-BnRyfuyM.js';
+export { z as trackAnimation } from '../chunks/base-BnRyfuyM.js';
 
 /**
  * `motionary/engine` (= `motionary/components/engine`, 8.0) — the unified

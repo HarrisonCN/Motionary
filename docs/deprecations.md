@@ -1,6 +1,6 @@
 # Deprecations
 
-## Deprecated in 9.9, removed in 10.0
+## Deprecated in 9.9, removed in 10.0 (released)
 
 See [upgrading-10.md](./upgrading-10.md) — `registerEffectPacks()` (use `registerAllPlugins()` or `usePlugins(...)`). Run `npx usa-codemod-10 --write src`.
 

@@ -1,7 +1,7 @@
-import { registerEffects } from '../chunks/registry-BRM2BRRY.js';
+import { registerEffects } from '../chunks/registry-gFJRpPES.js';
 import { c as canvasBackground } from '../chunks/generative-2LhxG5BJ.js';
-import { g as getAudio } from '../chunks/audio-C1uFaOKQ.js';
-import '../chunks/base-DWYNLg6P.js';
+import { g as getAudio } from '../chunks/audio-D95jwlOh.js';
+import '../chunks/base-BnRyfuyM.js';
 import '../chunks/shared-CkKHWrtJ.js';
 
 /** A smooth, deterministic fake analyser frame at time `t` (s). */

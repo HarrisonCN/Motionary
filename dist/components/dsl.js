@@ -1,5 +1,5 @@
-import { hasEffect, bindEffect, EFFECT_TRIGGERS } from '../chunks/registry-BRM2BRRY.js';
-import '../chunks/base-DWYNLg6P.js';
+import { hasEffect, bindEffect, EFFECT_TRIGGERS } from '../chunks/registry-gFJRpPES.js';
+import '../chunks/base-BnRyfuyM.js';
 
 /**
  * `motionary/dsl` (= `motionary/components/dsl`, 9.0) — the declarative

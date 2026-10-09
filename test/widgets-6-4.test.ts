@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { installComponentMocks, mount, anims } from './components-setup';
 import { configureComponents } from '../src/components/base';
 import { defineWidgets, WIDGETS, PROGRESS_VARIANTS, SKELETON_VARIANTS } from '../src/components/widgets';
-import { LIGHT_FX, registerLightPack, registerEffectPacks, EFFECT_PACKS, trackPointer } from '../src/components/fx2';
+import { LIGHT_FX, registerLightPack, registerAllPlugins, EFFECT_PACKS, trackPointer } from '../src/components/fx2';
 import { getEffect, playEffect } from '../src/components/fx';
 import { COMPONENT_ITEMS } from '../showcase/catalog-components.js';
 import { COMPONENTS, componentSnippets } from '../showcase/components-catalog.js';
@@ -146,7 +146,7 @@ describe('<usa-star-rating>', () => {
 describe('6.4 light & materials', () => {
   it('registers 6 effects in motionary/components/fx-light', () => {
     registerLightPack();
-    registerEffectPacks();
+    registerAllPlugins();
     expect(LIGHT_FX.map((d) => d.name)).toEqual(['light-follow', 'refraction', 'brushed-metal', 'pearlescent', 'god-rays', 'pointer-shadow']);
     for (const d of LIGHT_FX) expect(getEffect(d.name)).toBe(d);
     expect(EFFECT_PACKS.light).toBe(LIGHT_FX);

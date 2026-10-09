@@ -1,9 +1,6 @@
 import { describe, it, expect, afterEach } from 'vitest';
 import { readFileSync } from 'node:fs';
-import {
-  MOTION_TOKENS, motionTokensToCss, motionTokensToVars, motionTokensToJSON, importMotionTokens, applyMotionTokens,
-  motionToken, motionVar, parseDuration, parseEasing, mergeMotionTokens,
-} from '../src/components/tokens';
+import { MOTION_TOKENS, motionTokensToCss, motionTokensToVars, motionTokensToJSON, importMotionTokens, applyMotionTokens, motionToken, motionVar, parseDuration, parseEasing, mergeMotionTokens } from '../src/components/tokens';
 import { timeline } from '../src/components/timeline';
 import { COMPONENT_ENTRIES } from '../scripts/categories.mjs';
 

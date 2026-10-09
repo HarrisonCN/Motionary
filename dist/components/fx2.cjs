@@ -32,10 +32,10 @@ var components_fxGenart = require('./fx-genart.cjs');
 var components_fxVideo = require('./fx-video.cjs');
 var components_fxSafe = require('./fx-safe.cjs');
 var components_fxPerf = require('./fx-perf.cjs');
-var base = require('../chunks/base-DBheNxJu.cjs');
 var registry = require('../chunks/registry-xQZnSqqV.cjs');
 require('../chunks/generative-BHIj-NU0.cjs');
 require('../chunks/shared-jkgRH-Hx.cjs');
+require('../chunks/base-DBheNxJu.cjs');
 require('../chunks/audio-BpU-A1m1.cjs');
 
 /** The 6.x effect packs by name. */
@@ -130,14 +130,6 @@ function usePlugins(...plugins) {
         names.push(...p.effects.map((e) => e.name));
     }
     return names;
-}
-/**
- * Register every 6.x–9.x effect pack.
- * @deprecated 9.9 — removed in 10.0. Use `registerAllPlugins()` (same behaviour) or `usePlugins(...)`.
- */
-function registerEffectPacks() {
-    base.deprecate('registerEffectPacks', 'registerEffectPacks() is deprecated and removed in 10.0 — use registerAllPlugins() (same behaviour) or usePlugins(...). Run `npx usa-codemod-10 --write src`.');
-    registerAllPlugins();
 }
 
 exports.EFFECT_PACK_FORMAT = manifest.EFFECT_PACK_FORMAT;
@@ -270,6 +262,5 @@ exports.EFFECT_PACKS = EFFECT_PACKS;
 exports.definePlugin = definePlugin;
 exports.effectPlugins = effectPlugins;
 exports.registerAllPlugins = registerAllPlugins;
-exports.registerEffectPacks = registerEffectPacks;
 exports.usePlugins = usePlugins;
 //# sourceMappingURL=fx2.cjs.map

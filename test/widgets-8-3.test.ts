@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { installComponentMocks, mount, anims, tick } from './components-setup';
 import { configureComponents } from '../src/components/base';
 import { defineWidgets, WIDGETS } from '../src/components/widgets';
-import { registerEffectPacks, EFFECT_PACKS, ORGANIC_FX, registerOrganicPack } from '../src/components/fx2';
+import { registerAllPlugins, EFFECT_PACKS, ORGANIC_FX, registerOrganicPack } from '../src/components/fx2';
 import { getEffect, playEffect } from '../src/components/fx';
 import { COMPONENT_ITEMS } from '../showcase/catalog-components.js';
 import { COMPONENTS, componentSnippets } from '../showcase/components-catalog.js';
@@ -29,9 +29,9 @@ describe('8.3 release', () => {
     expect(Object.keys(WIDGETS['8.3'])).toEqual(["usa-organic-card", "usa-liquid-nav"]);
     for (const t of Object.keys(WIDGETS['8.3'])) expect(customElements.get(t)).toBeTruthy();
   });
-  it('registers its effect packs (also via registerEffectPacks) as their own entries', () => {
+  it('registers its effect packs (also via registerAllPlugins) as their own entries', () => {
     registerOrganicPack();
-    registerEffectPacks();
+    registerAllPlugins();
     const pkg = JSON.parse(readFileSync('package.json', 'utf8'));
     for (const def of ORGANIC_FX) expect(getEffect(def.name)).toBe(def);
     expect(EFFECT_PACKS['organic']).toBe(ORGANIC_FX);

@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { installComponentMocks, mount, anims, tick } from './components-setup';
 import { configureComponents } from '../src/components/base';
 import { defineWidgets, WIDGETS, formatDistance, haversine, parseMarkers, project } from '../src/components/widgets';
-import { registerEffectPacks, EFFECT_PACKS, GEO_FX, registerGeoPack } from '../src/components/fx2';
+import { registerAllPlugins, EFFECT_PACKS, GEO_FX, registerGeoPack } from '../src/components/fx2';
 import { getEffect, playEffect } from '../src/components/fx';
 import { COMPONENT_ITEMS } from '../showcase/catalog-components.js';
 import { COMPONENTS, componentSnippets } from '../showcase/components-catalog.js';
@@ -30,9 +30,9 @@ describe('7.6 release', () => {
     expect(Object.keys(WIDGETS['7.6'])).toEqual(["usa-globe", "usa-location-card"]);
     for (const t of Object.keys(WIDGETS['7.6'])) expect(customElements.get(t)).toBeTruthy();
   });
-  it('registers its effect packs (also via registerEffectPacks) as their own entries', () => {
+  it('registers its effect packs (also via registerAllPlugins) as their own entries', () => {
     registerGeoPack();
-    registerEffectPacks();
+    registerAllPlugins();
     const pkg = JSON.parse(readFileSync('package.json', 'utf8'));
     for (const def of GEO_FX) expect(getEffect(def.name)).toBe(def);
     expect(EFFECT_PACKS['geo']).toBe(GEO_FX);

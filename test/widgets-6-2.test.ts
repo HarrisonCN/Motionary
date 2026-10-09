@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { installComponentMocks, mount, anims, finishAll } from './components-setup';
 import { configureComponents } from '../src/components/base';
 import { defineWidgets, WIDGETS, WIDGET_TAGS, CAROUSEL_EFFECTS, TAB_INDICATORS } from '../src/components/widgets';
-import { GPU_FX, registerGpuPack, registerEffectPacks, EFFECT_PACKS, supportsWebGL2, fieldFallback } from '../src/components/fx2';
+import { GPU_FX, registerGpuPack, registerAllPlugins, EFFECT_PACKS, supportsWebGL2, fieldFallback } from '../src/components/fx2';
 import { getEffect, playEffect, registerEffect } from '../src/components/fx';
 import { COMPONENT_ITEMS } from '../showcase/catalog-components.js';
 import { ITEMS, CATEGORIES } from '../showcase/catalog.js';
@@ -183,7 +183,7 @@ describe('<usa-stories>', () => {
 describe('6.2 GPU effect pack', () => {
   it('registers 8 effects: 5 shaders, 2 particle backgrounds, 1 click', () => {
     registerGpuPack();
-    registerEffectPacks();
+    registerAllPlugins();
     expect(GPU_FX.map((d) => d.name)).toEqual(['fluid', 'smoke', 'fire', 'ink', 'fireflies', 'sakura', 'leaves', 'splash']);
     for (const d of GPU_FX) expect(getEffect(d.name)).toBe(d);
     expect(GPU_FX.filter((d) => d.kind === 'background')).toHaveLength(7);

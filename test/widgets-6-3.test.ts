@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { installComponentMocks, mount, anims } from './components-setup';
 import { configureComponents } from '../src/components/base';
 import { defineWidgets, WIDGETS, stackToast, TOAST_POSITIONS, MODAL_EFFECTS, SHEET_SIDES, MENU_EFFECTS } from '../src/components/widgets';
-import { TEXT3_FX, registerTextPack, registerEffectPacks, EFFECT_PACKS, splitChars } from '../src/components/fx2';
+import { TEXT3_FX, registerTextPack, registerAllPlugins, EFFECT_PACKS, splitChars } from '../src/components/fx2';
 import { getEffect, playEffect } from '../src/components/fx';
 import { COMPONENT_ITEMS } from '../showcase/catalog-components.js';
 import { COMPONENTS, componentSnippets } from '../showcase/components-catalog.js';
@@ -172,7 +172,7 @@ describe('<usa-menu>', () => {
 describe('6.3 text effects 3.0', () => {
   it('registers 7 effects in motionary/components/fx-text', () => {
     registerTextPack();
-    registerEffectPacks();
+    registerAllPlugins();
     expect(TEXT3_FX.map((d) => d.name)).toEqual(['liquid-text', 'neon-write', 'particle-text', 'glitch-text', 'text-trail', 'font-breathe', 'flip-chars']);
     for (const d of TEXT3_FX) expect(getEffect(d.name)).toBe(d);
     expect(EFFECT_PACKS.text).toBe(TEXT3_FX);

@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { installComponentMocks, mount, anims } from './components-setup';
 import { configureComponents } from '../src/components/base';
 import { defineWidgets, WIDGETS, NAV_INDICATORS, TOGGLE_VARIANTS, TIP_PLACEMENTS } from '../src/components/widgets';
-import { MORPH2_FX, registerMorphPack, registerEffectPacks, EFFECT_PACKS, pointsToPath, samplePath } from '../src/components/fx2';
+import { MORPH2_FX, registerMorphPack, registerAllPlugins, EFFECT_PACKS, pointsToPath, samplePath } from '../src/components/fx2';
 import { getEffect, playEffect } from '../src/components/fx';
 import { COMPONENT_ITEMS } from '../showcase/catalog-components.js';
 import { COMPONENTS, componentSnippets } from '../showcase/components-catalog.js';
@@ -141,7 +141,7 @@ describe('<usa-tip>', () => {
 describe('6.6 morph & SVG effects', () => {
   it('registers 5 effects in motionary/components/fx-morph', () => {
     registerMorphPack();
-    registerEffectPacks();
+    registerAllPlugins();
     expect(MORPH2_FX.map((d) => d.name)).toEqual(['path-morph', 'blob-button', 'stroke-draw', 'noise-reveal', 'icon-swap']);
     for (const d of MORPH2_FX) expect(getEffect(d.name)).toBe(d);
     expect(EFFECT_PACKS.morph).toBe(MORPH2_FX);

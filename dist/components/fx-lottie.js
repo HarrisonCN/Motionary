@@ -1,5 +1,5 @@
-import { registerEffects } from '../chunks/registry-BRM2BRRY.js';
-import '../chunks/base-DWYNLg6P.js';
+import { registerEffects } from '../chunks/registry-gFJRpPES.js';
+import '../chunks/base-BnRyfuyM.js';
 
 const arr = (v) => (Array.isArray(v) ? v.map(Number) : [Number(v)]);
 /** Frames (t) → values for one transform property (static props give one key at t = ip) (9.2). */

@@ -3,25 +3,7 @@ import { installComponentMocks, mount, anims, finishAll } from './components-set
 import { configureComponents } from '../src/components/base';
 import { defineFxComponents, playEffect, getEffect, listEffects } from '../src/components/fx';
 import { getMotionTokens } from '../src/components/tokens';
-import {
-  registerAllEffects,
-  registerMicroEffects,
-  MICRO_FX,
-  THEME_FX,
-  EFFECT_PACKS,
-  MOTION_THEMES,
-  MOTION_THEME_NAMES,
-  THEME_ROLES,
-  themeVars,
-  themeCss,
-  applyMotionTheme,
-  themePreset,
-  playThemeEffect,
-  defineMotionTheme,
-  togglePressed,
-  swapLabel,
-  bumpCount,
-} from '../src/components/effects';
+import { registerAllEffects, registerMicroEffects, MICRO_FX, THEME_FX, EFFECT_PACKS, MOTION_THEMES, MOTION_THEME_NAMES, THEME_ROLES, themeVars, themeCss, applyMotionTheme, themePreset, playThemeEffect, defineMotionTheme, togglePressed, swapLabel, bumpCount } from '../src/components/effects';
 
 beforeEach(() => {
   installComponentMocks();

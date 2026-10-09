@@ -2,19 +2,7 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { installComponentMocks, mount } from './components-setup';
 import { configureComponents } from '../src/components/base';
 import { defineFxComponents, bindEffect, getEffect, registerEffect } from '../src/components/fx';
-import {
-  registerAllEffects,
-  registerAudioEffects,
-  AUDIO_FX,
-  EFFECT_PACKS,
-  createBeatDetector,
-  enableAudio,
-  disableAudio,
-  getAudio,
-  onBeat,
-  bindBeat,
-  defineAudio,
-} from '../src/components/effects';
+import { registerAllEffects, registerAudioEffects, AUDIO_FX, EFFECT_PACKS, createBeatDetector, enableAudio, disableAudio, getAudio, onBeat, bindBeat, defineAudio } from '../src/components/effects';
 
 /** A recording 2D-context stub (jsdom has no canvas). */
 function stubCanvas() {

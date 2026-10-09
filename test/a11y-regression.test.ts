@@ -2,20 +2,7 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { installComponentMocks, mount, tick } from './components-setup';
 import { defineComponents } from '../src/components';
 import { configureComponents, adaptKeyframes, prefersReducedMotion } from '../src/components/base';
-import {
-  ALL_TAGS,
-  auditMotionA11y,
-  announce,
-  liveRegion,
-  LIVE_REGION_IDS,
-  setMotionSensitivity,
-  restoreMotionSensitivity,
-  getMotionSensitivity,
-  motionAllowed,
-  staticAlternative,
-  STATIC_ALTERNATIVES,
-  MOTION_SENSITIVITY,
-} from '../src/components/a11y';
+import { ALL_TAGS, auditMotionA11y, announce, liveRegion, LIVE_REGION_IDS, setMotionSensitivity, restoreMotionSensitivity, getMotionSensitivity, motionAllowed, staticAlternative, STATIC_ALTERNATIVES, MOTION_SENSITIVITY } from '../src/components/a11y';
 import { COMPONENT_CATEGORIES } from '../src/components/index-tags';
 
 /** Representative markup per tag: a label and some content, like real use. */

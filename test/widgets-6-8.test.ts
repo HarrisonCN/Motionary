@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { installComponentMocks, mount, anims } from './components-setup';
 import { configureComponents } from '../src/components/base';
 import { defineWidgets, WIDGETS, WEATHER_CONDITIONS } from '../src/components/widgets';
-import { WEATHER_FX, PHYSICS2_FX, registerWeatherPack, registerPhysicsPack, registerEffectPacks, EFFECT_PACKS, VerletWorld, skyAt } from '../src/components/fx2';
+import { WEATHER_FX, PHYSICS2_FX, registerWeatherPack, registerPhysicsPack, registerAllPlugins, EFFECT_PACKS, VerletWorld, skyAt } from '../src/components/fx2';
 import { getEffect } from '../src/components/fx';
 import { COMPONENT_ITEMS } from '../showcase/catalog-components.js';
 import { COMPONENTS, componentSnippets } from '../showcase/components-catalog.js';
@@ -95,10 +95,10 @@ describe('6.8 widgets', () => {
 });
 
 describe('weather & physics packs', () => {
-  it('register (also via registerEffectPacks) as their own entries', () => {
+  it('register (also via registerAllPlugins) as their own entries', () => {
     registerWeatherPack();
     registerPhysicsPack();
-    registerEffectPacks();
+    registerAllPlugins();
     expect(WEATHER_FX.map((d) => d.name)).toEqual(['rain-glass', 'snowfall', 'lightning', 'fog', 'aurora-veil', 'day-cycle']);
     expect(PHYSICS2_FX.map((d) => d.name)).toEqual(['soft-body', 'magnet', 'cloth', 'rope', 'pinball']);
     for (const d of [...WEATHER_FX, ...PHYSICS2_FX]) expect(getEffect(d.name)).toBe(d);
