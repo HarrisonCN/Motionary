@@ -1,6 +1,6 @@
-export { E as EFFECT_PACK_FORMAT, l as loadEffectPack, p as packManifest, v as validateManifest } from '../chunks/manifest-D58HXVY-.js';
-import { G as GPU_FX, r as registerGpuPack } from '../chunks/gpu-CDcXiNA8.js';
-export { a as GLSL_HEAD, W as WGSL_HEAD, f as fieldFallback, g as glslToWgsl, s as shaderBackground, b as supportsWebGL2, c as supportsWebGPU, w as webgpuBackground, d as wgslModule } from '../chunks/gpu-CDcXiNA8.js';
+export { E as EFFECT_PACK_FORMAT, l as loadEffectPack, p as packManifest, v as validateManifest } from '../chunks/manifest-BDpbuI-9.js';
+import { G as GPU_FX, r as registerGpuPack } from '../chunks/gpu-DvLHwLxy.js';
+export { a as GLSL_HEAD, W as WGSL_HEAD, f as fieldFallback, g as glslToWgsl, s as shaderBackground, b as supportsWebGL2, c as supportsWebGPU, w as webgpuBackground, d as wgslModule } from '../chunks/gpu-DvLHwLxy.js';
 import { TEXT3_FX, registerTextPack } from './fx-text.js';
 export { splitChars } from './fx-text.js';
 import { LIGHT_FX, registerLightPack } from './fx-light.js';
@@ -59,11 +59,11 @@ import { SAFE_FX, registerSafePack } from './fx-safe.js';
 export { DEFAULT_MOTION_PREFS, MOTION_PREFS_KEY, applyMotionPreferences, flashCount, isFlashSafe, loadMotionPreferences, vestibularSafe } from './fx-safe.js';
 import { PERF3_FX, registerPerf3Pack } from './fx-perf.js';
 export { fpsMeter, offscreenRender, runInWorker } from './fx-perf.js';
-import '../chunks/registry-gFJRpPES.js';
-import '../chunks/base-BnRyfuyM.js';
+import { A as deprecate } from '../chunks/base-DWYNLg6P.js';
+import { registerEffects } from '../chunks/registry-BRM2BRRY.js';
 import '../chunks/generative-2LhxG5BJ.js';
 import '../chunks/shared-CkKHWrtJ.js';
-import '../chunks/audio-D95jwlOh.js';
+import '../chunks/audio-C1uFaOKQ.js';
 
 /** The 6.x effect packs by name. */
 const EFFECT_PACKS = {
@@ -99,8 +99,8 @@ const EFFECT_PACKS = {
     safe: SAFE_FX,
     perf3: PERF3_FX,
 };
-/** Register every 6.x effect pack (idempotent). */
-function registerEffectPacks() {
+/** Register every built-in effect pack — each one is a plugin (9.9; idempotent). */
+function registerAllPlugins() {
     registerGpuPack();
     registerTextPack();
     registerLightPack();
@@ -133,6 +133,39 @@ function registerEffectPacks() {
     registerSafePack();
     registerPerf3Pack();
 }
+const PACK_SOURCES = EFFECT_PACKS;
+/** Make a plugin object (9.9). */
+function definePlugin(name, effects, install) {
+    return { name, effects, install };
+}
+/** Every built-in effect pack as a plugin: `{ name: '<pack key>', effects }` — e.g. `retro`, `cinema` (9.9). */
+function effectPlugins() {
+    return Object.entries(PACK_SOURCES).map(([k, effects]) => ({ name: k, effects }));
+}
+const usedPlugins = new Set();
+/** Register plugins (each once); returns the names of their effects (9.9). */
+function usePlugins(...plugins) {
+    const names = [];
+    for (const p of plugins) {
+        if (!p || !Array.isArray(p.effects))
+            continue;
+        if (!usedPlugins.has(p.name)) {
+            registerEffects(p.effects);
+            p.install?.();
+            usedPlugins.add(p.name);
+        }
+        names.push(...p.effects.map((e) => e.name));
+    }
+    return names;
+}
+/**
+ * Register every 6.x–9.x effect pack.
+ * @deprecated 9.9 — removed in 10.0. Use `registerAllPlugins()` (same behaviour) or `usePlugins(...)`.
+ */
+function registerEffectPacks() {
+    deprecate('registerEffectPacks', 'registerEffectPacks() is deprecated and removed in 10.0 — use registerAllPlugins() (same behaviour) or usePlugins(...). Run `npx usa-codemod-10 --write src`.');
+    registerAllPlugins();
+}
 
-export { AI_FX, CHART_FX, CINEMA_FX, CYBER_FX, DEPTH3_FX, EFFECT_PACKS, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GENART_FX, GEO_FX, GESTURE3_FX, GPU_FX, LIGHT_FX, LOTTIE_FX, MORPH2_FX, MUSIC_FX, ORGANIC_FX, PAPER_FX, PERF3_FX, PHYSICS2_FX, RETRO_FX, SAFE_FX, SHOP_FX, SOCIAL_FX, SPATIAL_FX, SURFACE_FX, TEXT3_FX, TRANSITIONS2_FX, VIDEO_FX, WEATHER_FX, register3dPack, registerAiPack, registerChartPack, registerCinemaPack, registerCyberPack, registerEffectPacks, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGenArtPack, registerGeoPack, registerGesture3Pack, registerGpuPack, registerLightPack, registerLottiePack, registerMorphPack, registerMusicPack, registerOrganicPack, registerPaperPack, registerPerf3Pack, registerPhysicsPack, registerRetroPack, registerSafePack, registerShopPack, registerSocialPack, registerSpatialPack, registerSurfacePack, registerTextPack, registerTransitionsPack, registerVideoPack, registerWeatherPack };
+export { AI_FX, CHART_FX, CINEMA_FX, CYBER_FX, DEPTH3_FX, EFFECT_PACKS, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GENART_FX, GEO_FX, GESTURE3_FX, GPU_FX, LIGHT_FX, LOTTIE_FX, MORPH2_FX, MUSIC_FX, ORGANIC_FX, PAPER_FX, PERF3_FX, PHYSICS2_FX, RETRO_FX, SAFE_FX, SHOP_FX, SOCIAL_FX, SPATIAL_FX, SURFACE_FX, TEXT3_FX, TRANSITIONS2_FX, VIDEO_FX, WEATHER_FX, definePlugin, effectPlugins, register3dPack, registerAiPack, registerAllPlugins, registerChartPack, registerCinemaPack, registerCyberPack, registerEffectPacks, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGenArtPack, registerGeoPack, registerGesture3Pack, registerGpuPack, registerLightPack, registerLottiePack, registerMorphPack, registerMusicPack, registerOrganicPack, registerPaperPack, registerPerf3Pack, registerPhysicsPack, registerRetroPack, registerSafePack, registerShopPack, registerSocialPack, registerSpatialPack, registerSurfacePack, registerTextPack, registerTransitionsPack, registerVideoPack, registerWeatherPack, usePlugins };
 //# sourceMappingURL=fx2.js.map

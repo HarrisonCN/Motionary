@@ -1,5 +1,5 @@
-import { u as defineElement, A as srText, l as caf, q as now, r as raf, D as EASE_OUT, E as EASE_SPRING, k as clamp } from '../chunks/base-BnRyfuyM.js';
-import { t as timeline } from '../chunks/core-DsGoL9EY.js';
+import { u as defineElement, B as srText, l as caf, q as now, r as raf, D as EASE_OUT, E as EASE_SPRING, k as clamp } from '../chunks/base-DWYNLg6P.js';
+import { t as timeline } from '../chunks/core-DoR4w-E4.js';
 import './tokens.js';
 
 var css$5 = "usa-typewriter{white-space:pre-wrap}usa-typewriter .usa-tw-caret{display:inline-block;width:var(--usa-caret-width,0.08em);height:1.05em;margin-left:0.06em;vertical-align:-0.12em;background:var(--usa-caret-color,currentColor);animation:usa-caret 1.06s steps(1) infinite}usa-typewriter[data-typing] .usa-tw-caret{animation:none}usa-typewriter[data-no-cursor] .usa-tw-caret{display:none}@keyframes usa-caret{50%{opacity:0}}@media (prefers-reduced-motion:reduce){usa-typewriter .usa-tw-caret,usa-shimmer-text{animation:none}}";

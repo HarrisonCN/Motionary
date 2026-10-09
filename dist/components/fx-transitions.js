@@ -1,5 +1,5 @@
-import { getEffect, registerEffects } from '../chunks/registry-gFJRpPES.js';
-import { p as prefersReducedMotion } from '../chunks/base-BnRyfuyM.js';
+import { getEffect, registerEffects } from '../chunks/registry-BRM2BRRY.js';
+import { p as prefersReducedMotion } from '../chunks/base-DWYNLg6P.js';
 import { b as origin, a as all } from '../chunks/shared-CkKHWrtJ.js';
 
 const fade = (el, ctx, out) => ctx.animate(el, out ? [{ opacity: 1 }, { opacity: 0 }] : [{ opacity: 0 }, { opacity: 1 }], { duration: 200, fill: out ? 'forwards' : 'none' });
@@ -222,7 +222,7 @@ async function pageTransition(update, effect = 'ripple-dissolve', options = {}, 
     await update();
     const el = target || document.body.firstElementChild;
     if (el && def) {
-        const { playEffect } = await import('../chunks/registry-gFJRpPES.js');
+        const { playEffect } = await import('../chunks/registry-BRM2BRRY.js');
         await playEffect(el, effect, { ...options, mode: 'in' });
     }
 }
