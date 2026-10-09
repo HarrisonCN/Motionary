@@ -25,6 +25,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Accessibility
 - `<usa-plugin-card>` counts and expands without animation under reduced motion; its details button exposes `aria-expanded`. `<usa-install-button>` tabs are a labelled `tablist`; the copy confirmation is announced (`aria-live`). A missing runtime module renders a visible `role="alert"` message instead of failing silently.
 
+### Fixed
+- The showcase snippet tests now accept the documented `motionary/runtime` and `motionary/runtime/<module>` entry points used by runtime-powered components' code tabs.
+
 ## [10.0.0] - 2026-10-09
 
 ### ⚠️ Breaking

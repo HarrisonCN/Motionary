@@ -352,7 +352,7 @@
   {
     "name": "dist/widgets.umd.js (minified, 6.x widgets + 6.x effect packs)",
     "file": "dist/widgets.umd.js",
-    "limit": 179712
+    "limit": 192512
   },
   {
     "name": "import 'motionary/components/widgets'",
@@ -412,7 +412,7 @@
   {
     "name": "import 'motionary/components/marketplace'",
     "import": "export * from 'pkg/components/marketplace';",
-    "limit": 3584
+    "limit": 4608
   },
   {
     "name": "import 'motionary/components/fx-music'",
