@@ -1,5 +1,5 @@
-import { registerEffects } from '../chunks/registry-CnO7ZVPK.js';
-import '../chunks/base-CLuqlLfG.js';
+import { registerEffects } from '../chunks/registry-gFJRpPES.js';
+import '../chunks/base-BnRyfuyM.js';
 
 /** A deterministic PRNG in [0, 1) from a seed (8.5). */
 function paperRandom(seed) {

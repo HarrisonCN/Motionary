@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-BVklOepd.cjs');
-require('../chunks/base-DoRUZBy-.cjs');
+var registry = require('../chunks/registry-xQZnSqqV.cjs');
+require('../chunks/base-DBheNxJu.cjs');
 
 const PALETTES = {
     sunset: ['#ff6b6b', '#feca57', '#ff9ff3', '#5f27cd', '#1dd1a1'],

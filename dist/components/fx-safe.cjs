@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-BVklOepd.cjs');
-var base = require('../chunks/base-DoRUZBy-.cjs');
+var registry = require('../chunks/registry-xQZnSqqV.cjs');
+var base = require('../chunks/base-DBheNxJu.cjs');
 
 const MOVE = /^(transform|translate|scale|rotate|offset|offsetPath|offsetDistance|clipPath|top|left|right|bottom|margin.*|perspective)$/;
 /** Keyframes with all movement removed (opacity / colour / shadow kept; blur removed from filters) (9.5). */

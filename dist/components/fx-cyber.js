@@ -1,5 +1,5 @@
-import { registerEffects } from '../chunks/registry-CnO7ZVPK.js';
-import '../chunks/base-CLuqlLfG.js';
+import { registerEffects } from '../chunks/registry-gFJRpPES.js';
+import '../chunks/base-BnRyfuyM.js';
 
 const GLYPHS = '01<>/\\[]{}#$%&*+=ABCDEFXYZ';
 /** The `k`-th frame of decoding `text` over `n` frames: resolved prefix + random glyphs (8.4). */

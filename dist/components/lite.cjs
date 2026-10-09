@@ -88,7 +88,7 @@ function prefersReducedMotion() {
         return true;
     if (config.reducedMotion === 'reduce')
         return true;
-    return typeof matchMedia === 'function' && !!matchMedia('(prefers-reduced-motion: reduce)').matches;
+    return typeof matchMedia === 'function' && !!matchMedia('(prefers-reduced-motion: reduce)')?.matches;
 }
 const injected = new Set();
 /** Add a component's stylesheet to the document once. */

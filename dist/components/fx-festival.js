@@ -1,5 +1,5 @@
-import { registerEffects } from '../chunks/registry-CnO7ZVPK.js';
-import '../chunks/base-CLuqlLfG.js';
+import { registerEffects } from '../chunks/registry-gFJRpPES.js';
+import '../chunks/base-BnRyfuyM.js';
 
 /** Evenly spread spark directions with a little jitter (8.1). */
 function sparkVectors(n, radius, seed = 1) {

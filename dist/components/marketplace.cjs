@@ -1,8 +1,8 @@
 'use strict';
 
-var manifest = require('../chunks/manifest-B08-vo9G.cjs');
-require('../chunks/registry-BVklOepd.cjs');
-require('../chunks/base-DoRUZBy-.cjs');
+var manifest = require('../chunks/manifest-PaF9B8Vt.cjs');
+require('../chunks/registry-xQZnSqqV.cjs');
+require('../chunks/base-DBheNxJu.cjs');
 
 const MARKETPLACE_FORMAT = 'motionary/marketplace';
 const L = (name, title, description, entry, register, effects, tags, since) => ({ name, title, description, entry, register, effects: effects.split(' '), tags: tags.split(' '), since, author: 'Motionary', official: true });

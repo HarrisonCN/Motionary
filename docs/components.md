@@ -1286,6 +1286,21 @@ const css = motionToCss('enter: fade-up 600ms stagger 80ms', '.cards');
 - Figma: import `figma-plugin/manifest.json` (Plugins → Development) and run **Motionary export** on layers with prototype interactions.
 - `<usa-motion-spec rules label>`: `parsed`, `css`, `play()`; `usa:copy` { ok }.
 
+### v9.8 Native 2.0 (`motionary/native`) + `<usa-native-preview>`
+
+```html
+<usa-native-preview platform="android" rules="enter: fade-up 500ms smooth stagger 80ms; click: pop">
+  <div class="row">Inbox</div><div class="row">Starred</div>
+</usa-native-preview>
+```
+```js
+import { toReactNative, toFlutter, nativeTokens } from 'motionary/native';
+fs.writeFileSync('MotionView.tsx', toReactNative('enter: fade-up 500ms smooth stagger 80ms; click: pop'));
+fs.writeFileSync('lib/motion_view.dart', toFlutter('enter: fade-up 500ms smooth'));
+fs.writeFileSync('motion-tokens.json', JSON.stringify(nativeTokens(), null, 2));
+```
+- `<usa-native-preview rules platform name>`: `replay()`, `code('react-native' | 'flutter')`; `usa:replay`.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

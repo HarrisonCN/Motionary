@@ -1,5 +1,5 @@
-import { registerEffects } from '../chunks/registry-CnO7ZVPK.js';
-import '../chunks/base-CLuqlLfG.js';
+import { registerEffects } from '../chunks/registry-gFJRpPES.js';
+import '../chunks/base-BnRyfuyM.js';
 
 const CAMERA_MOVES = ['dolly-in', 'dolly-out', 'pan-left', 'pan-right', 'tilt-up', 'tilt-down', 'zoom-in', 'zoom-out', 'orbit'];
 /** Transform of camera `move` at progress `p` (0–1, clamped), `strength` 0–2 (9.1). */

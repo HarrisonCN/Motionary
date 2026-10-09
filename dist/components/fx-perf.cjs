@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-BVklOepd.cjs');
-var base = require('../chunks/base-DoRUZBy-.cjs');
+var registry = require('../chunks/registry-xQZnSqqV.cjs');
+var base = require('../chunks/base-DBheNxJu.cjs');
 
 /** Run a pure function in a Web Worker; resolves with its (structured-cloneable) result (9.6). */
 function runInWorker(fn, ...args) {

@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-DoRUZBy-.cjs');
+var base = require('../chunks/base-DBheNxJu.cjs');
 
 /**
  * motionary/components/bridge — native shell bridges (4.7).

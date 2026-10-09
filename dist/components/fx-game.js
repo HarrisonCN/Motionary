@@ -1,5 +1,5 @@
-import { registerEffects } from '../chunks/registry-CnO7ZVPK.js';
-import '../chunks/base-CLuqlLfG.js';
+import { registerEffects } from '../chunks/registry-gFJRpPES.js';
+import '../chunks/base-BnRyfuyM.js';
 
 /** Ballistic keyframe points for a coin thrown at `deg` with `power` (7.5). */
 function throwPath(deg, power = 120, steps = 6, g = 2.2) {

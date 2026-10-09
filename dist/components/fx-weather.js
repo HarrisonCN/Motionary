@@ -1,7 +1,7 @@
-import { registerEffects } from '../chunks/registry-CnO7ZVPK.js';
+import { registerEffects } from '../chunks/registry-gFJRpPES.js';
 import { c as canvasBackground } from '../chunks/generative-2LhxG5BJ.js';
 import { r as rand } from '../chunks/shared-CkKHWrtJ.js';
-import '../chunks/base-CLuqlLfG.js';
+import '../chunks/base-BnRyfuyM.js';
 
 const bg = (name, description, defaults, spec) => ({
     name,

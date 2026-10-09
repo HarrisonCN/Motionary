@@ -1,7 +1,7 @@
-import { registerEffects } from '../chunks/registry-CnO7ZVPK.js';
+import { registerEffects } from '../chunks/registry-gFJRpPES.js';
 import { a as all } from '../chunks/shared-CkKHWrtJ.js';
 import { trackPointer } from './fx-light.js';
-import '../chunks/base-CLuqlLfG.js';
+import '../chunks/base-BnRyfuyM.js';
 import '../chunks/generative-2LhxG5BJ.js';
 
 const layers = (el) => {

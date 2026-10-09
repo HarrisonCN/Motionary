@@ -1,6 +1,6 @@
-export { E as EFFECT_PACK_FORMAT, l as loadEffectPack, p as packManifest, v as validateManifest } from '../chunks/manifest-PJ0h8RS_.js';
-import { G as GPU_FX, r as registerGpuPack } from '../chunks/gpu-CB8frFOD.js';
-export { a as GLSL_HEAD, W as WGSL_HEAD, f as fieldFallback, g as glslToWgsl, s as shaderBackground, b as supportsWebGL2, c as supportsWebGPU, w as webgpuBackground, d as wgslModule } from '../chunks/gpu-CB8frFOD.js';
+export { E as EFFECT_PACK_FORMAT, l as loadEffectPack, p as packManifest, v as validateManifest } from '../chunks/manifest-D58HXVY-.js';
+import { G as GPU_FX, r as registerGpuPack } from '../chunks/gpu-CDcXiNA8.js';
+export { a as GLSL_HEAD, W as WGSL_HEAD, f as fieldFallback, g as glslToWgsl, s as shaderBackground, b as supportsWebGL2, c as supportsWebGPU, w as webgpuBackground, d as wgslModule } from '../chunks/gpu-CDcXiNA8.js';
 import { TEXT3_FX, registerTextPack } from './fx-text.js';
 export { splitChars } from './fx-text.js';
 import { LIGHT_FX, registerLightPack } from './fx-light.js';
@@ -59,11 +59,11 @@ import { SAFE_FX, registerSafePack } from './fx-safe.js';
 export { DEFAULT_MOTION_PREFS, MOTION_PREFS_KEY, applyMotionPreferences, flashCount, isFlashSafe, loadMotionPreferences, vestibularSafe } from './fx-safe.js';
 import { PERF3_FX, registerPerf3Pack } from './fx-perf.js';
 export { fpsMeter, offscreenRender, runInWorker } from './fx-perf.js';
-import '../chunks/registry-CnO7ZVPK.js';
-import '../chunks/base-CLuqlLfG.js';
+import '../chunks/registry-gFJRpPES.js';
+import '../chunks/base-BnRyfuyM.js';
 import '../chunks/generative-2LhxG5BJ.js';
 import '../chunks/shared-CkKHWrtJ.js';
-import '../chunks/audio-CynhhWDi.js';
+import '../chunks/audio-D95jwlOh.js';
 
 /** The 6.x effect packs by name. */
 const EFFECT_PACKS = {

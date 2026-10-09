@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-BVklOepd.cjs');
-require('../chunks/base-DoRUZBy-.cjs');
+var registry = require('../chunks/registry-xQZnSqqV.cjs');
+require('../chunks/base-DBheNxJu.cjs');
 
 /** Split text into words, keeping the whitespace after each (7.8). */
 function splitWords(text) {

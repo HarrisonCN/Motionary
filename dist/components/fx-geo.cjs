@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-BVklOepd.cjs');
-require('../chunks/base-DoRUZBy-.cjs');
+var registry = require('../chunks/registry-xQZnSqqV.cjs');
+require('../chunks/base-DBheNxJu.cjs');
 
 /** Length of a polyline through `points` (7.6). */
 function routeLength(points) {

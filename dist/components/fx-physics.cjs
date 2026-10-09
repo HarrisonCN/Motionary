@@ -1,8 +1,8 @@
 'use strict';
 
-var registry = require('../chunks/registry-BVklOepd.cjs');
+var registry = require('../chunks/registry-xQZnSqqV.cjs');
 var generative = require('../chunks/generative-BHIj-NU0.cjs');
-require('../chunks/base-DoRUZBy-.cjs');
+require('../chunks/base-DBheNxJu.cjs');
 require('../chunks/shared-jkgRH-Hx.cjs');
 
 /** A minimal Verlet world: points, distance sticks, gravity, damping. */
