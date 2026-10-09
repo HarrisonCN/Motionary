@@ -16,6 +16,7 @@ const MARKETPLACE = [
     L('motionary/fx/surface', 'Surface themes', 'Neon ignite and pulse, glass frost, neumorphic press.', 'motionary/fx/surface', 'registerSurfacePack', 'neon-ignite neon-pulse glass-frost neu-press', 'neon glassmorphism neumorphism theme', '8.6'),
     L('motionary/fx/gesture', 'Gestures 3.0', 'Swipe and pinch hints, tilt wobble, depth-in.', 'motionary/fx/gesture', 'registerGesture3Pack', 'swipe-hint pinch-hint tilt-wobble depth-in', 'touch onboarding 3d', '8.7'),
     L('motionary/fx/spatial', 'XR / spatial', 'Portal open, orbit-in, spatial float and depth pop.', 'motionary/fx/spatial', 'registerSpatialPack', 'portal-open orbit-in spatial-float depth-pop', 'xr vr visionos 3d', '8.8'),
+    L('motionary/fx/cinema', 'Cinematic', 'Dolly-in, pan reveal, letterbox and rack focus.', 'motionary/fx/cinema', 'registerCinemaPack', 'dolly-in pan-reveal letterbox rack-focus', 'film camera story', '9.1'),
 ];
 /** Ranked search over listings (name / title / tags / effects / description) (9.0). */
 function searchPlugins(query, list = MARKETPLACE) {

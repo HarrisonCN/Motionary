@@ -26,6 +26,7 @@ var components_fxPaper = require('./fx-paper.cjs');
 var components_fxSurface = require('./fx-surface.cjs');
 var components_fxGesture = require('./fx-gesture.cjs');
 var components_fxSpatial = require('./fx-spatial.cjs');
+var components_fxCinema = require('./fx-cinema.cjs');
 require('../chunks/registry-BVklOepd.cjs');
 require('../chunks/base-DoRUZBy-.cjs');
 require('../chunks/generative-BHIj-NU0.cjs');
@@ -59,6 +60,7 @@ const EFFECT_PACKS = {
     surface: components_fxSurface.SURFACE_FX,
     gesture3: components_fxGesture.GESTURE3_FX,
     spatial: components_fxSpatial.SPATIAL_FX,
+    cinema: components_fxCinema.CINEMA_FX,
 };
 /** Register every 6.x effect pack (idempotent). */
 function registerEffectPacks() {
@@ -87,6 +89,7 @@ function registerEffectPacks() {
     components_fxSurface.registerSurfacePack();
     components_fxGesture.registerGesture3Pack();
     components_fxSpatial.registerSpatialPack();
+    components_fxCinema.registerCinemaPack();
 }
 
 exports.EFFECT_PACK_FORMAT = manifest.EFFECT_PACK_FORMAT;
@@ -182,6 +185,10 @@ exports.SPATIAL_FX = components_fxSpatial.SPATIAL_FX;
 exports.registerSpatialPack = components_fxSpatial.registerSpatialPack;
 exports.xrSupport = components_fxSpatial.xrSupport;
 exports.yawToOffset = components_fxSpatial.yawToOffset;
+exports.CAMERA_MOVES = components_fxCinema.CAMERA_MOVES;
+exports.CINEMA_FX = components_fxCinema.CINEMA_FX;
+exports.cameraFrame = components_fxCinema.cameraFrame;
+exports.registerCinemaPack = components_fxCinema.registerCinemaPack;
 exports.EFFECT_PACKS = EFFECT_PACKS;
 exports.registerEffectPacks = registerEffectPacks;
 //# sourceMappingURL=fx2.cjs.map
