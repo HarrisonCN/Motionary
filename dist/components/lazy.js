@@ -34,7 +34,7 @@ const LOADERS = {
     packs: () => import('./packs.js'),
     fx: () => import('./fx.js'),
 };
-const TAG_TO_CAT = new Map();
+const TAG_TO_CAT = /*#__PURE__*/ new Map();
 for (const [cat, tags] of Object.entries(COMPONENT_CATEGORIES))
     for (const t of tags)
         TAG_TO_CAT.set(t, cat);

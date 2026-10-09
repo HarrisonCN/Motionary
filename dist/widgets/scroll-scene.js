@@ -1,5 +1,5 @@
-export { d as defineScrollScene } from '../chunks/scroll-scene-eHhGcoDQ.js';
-import '../chunks/base-BTev8qxg.js';
-import '../chunks/runtime-link-CP3qaRja.js';
-import '../chunks/registry-W7pXOwju.js';
+export { d as defineScrollScene } from '../chunks/scroll-scene-DIbKNa6H.js';
+import '../chunks/base-zSGb8ujt.js';
+import '../chunks/runtime-link-GgTrq8pt.js';
+import '../chunks/registry-DUAt7GXU.js';
 //# sourceMappingURL=scroll-scene.js.map

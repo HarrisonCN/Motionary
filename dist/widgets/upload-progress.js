@@ -1,3 +1,3 @@
-export { d as defineUploadProgress } from '../chunks/upload-progress-EAVPHC3K.js';
-import '../chunks/base-BTev8qxg.js';
+export { d as defineUploadProgress } from '../chunks/upload-progress-CkfDSMr-.js';
+import '../chunks/base-zSGb8ujt.js';
 //# sourceMappingURL=upload-progress.js.map

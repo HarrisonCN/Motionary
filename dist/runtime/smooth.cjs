@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-uaO8pDKn.cjs');
+var registry = require('../chunks/registry-DrMvKcV3.cjs');
 var ease = require('../chunks/ease-HwYZnZat.cjs');
 
 /**
@@ -23,7 +23,7 @@ var ease = require('../chunks/ease-HwYZnZat.cjs');
  * SSR-safe: nothing touches `window` until `smoothScroll()` is called.
  */
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
-const instances = new Set();
+const instances = /*#__PURE__*/ new Set();
 class SmoothScroll {
     constructor(o = {}) {
         /** Current (animated) scroll position, px. */

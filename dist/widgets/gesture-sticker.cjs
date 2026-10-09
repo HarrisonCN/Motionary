@@ -1,8 +1,8 @@
 'use strict';
 
-var base = require('../chunks/base-DBheNxJu.cjs');
+var base = require('../chunks/base-B3me2y0o.cjs');
 var components_fxGesture = require('../components/fx-gesture.cjs');
-require('../chunks/registry-xQZnSqqV.cjs');
+require('../chunks/registry-BB1oO-lR.cjs');
 
 var css = "usa-gesture-sticker{display:inline-block;touch-action:none;cursor:grab;outline:none;-webkit-user-select:none;user-select:none;transform-origin:50% 50%;filter:drop-shadow(0 6px 8px rgba(15,23,42,.25));will-change:transform}usa-gesture-sticker[data-held]{cursor:grabbing;filter:drop-shadow(0 16px 18px rgba(15,23,42,.35))}usa-gesture-sticker:focus-visible{outline:2px dashed #6366f1;outline-offset:4px}usa-gesture-sticker img{display:block;-webkit-user-drag:none;pointer-events:none}";
 

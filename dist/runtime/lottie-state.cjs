@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-uaO8pDKn.cjs');
+var registry = require('../chunks/registry-DrMvKcV3.cjs');
 
 /**
  * `motionary/runtime/lottie-state` (10.9) — dotLottie **themes** (slots) and a

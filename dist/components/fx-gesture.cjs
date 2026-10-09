@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-xQZnSqqV.cjs');
-require('../chunks/base-DBheNxJu.cjs');
+var registry = require('../chunks/registry-BB1oO-lR.cjs');
+require('../chunks/base-B3me2y0o.cjs');
 
 /** Scale factor of a two-finger pinch from start points (a1, a2) to current points (b1, b2) (8.7). */
 function pinchScale(a1, a2, b1, b2) {

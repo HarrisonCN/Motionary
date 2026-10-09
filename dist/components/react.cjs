@@ -32,9 +32,9 @@ function eventName(prop) {
     return kebab.startsWith('usa-') ? `usa:${kebab.slice(4)}` : kebab;
 }
 /** Props written as DOM properties (not attributes) when given non-string values. */
-const PROPS = new Set(['checked', 'value', 'state', 'open', 'liked', 'count', 'loading', 'flipped', 'selected', 'index', 'indeterminate']);
+const PROPS = /*#__PURE__*/ new Set(['checked', 'value', 'state', 'open', 'liked', 'count', 'loading', 'flipped', 'selected', 'index', 'indeterminate']);
 /** All `<usa-*>` tags shipped by the package. */
-const USA_TAGS = Object.values(indexTags.COMPONENT_CATEGORIES).flat();
+const USA_TAGS = /*#__PURE__*/ Object.values(indexTags.COMPONENT_CATEGORIES).flat();
 function createUsaComponents(React) {
     const useIso = React.useLayoutEffect || React.useEffect;
     const make = (tag) => {

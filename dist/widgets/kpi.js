@@ -1,4 +1,4 @@
-import { f as defineElement } from '../chunks/base-BTev8qxg.js';
+import { f as defineElement } from '../chunks/base-zSGb8ujt.js';
 
 /** Parse a figure like "$12.4k" / "−3.5%" / "1,204" → number + prefix / suffix / decimals (7.2). */
 function parseFigureText(s) {

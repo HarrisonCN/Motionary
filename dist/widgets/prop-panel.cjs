@@ -1,7 +1,7 @@
 'use strict';
 
-var widgets_propPanel = require('../chunks/prop-panel-Ca9NKyGR.cjs');
-require('../chunks/base-DBheNxJu.cjs');
+var widgets_propPanel = require('../chunks/prop-panel-B4SaLelu.cjs');
+require('../chunks/base-B3me2y0o.cjs');
 
 
 

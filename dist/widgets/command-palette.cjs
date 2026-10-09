@@ -1,7 +1,7 @@
 'use strict';
 
-var widgets_commandPalette = require('../chunks/command-palette-BYbRvPvv.cjs');
-require('../chunks/base-DBheNxJu.cjs');
+var widgets_commandPalette = require('../chunks/command-palette-CNnX1Qlx.cjs');
+require('../chunks/base-B3me2y0o.cjs');
 
 
 

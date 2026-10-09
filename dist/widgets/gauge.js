@@ -1,4 +1,4 @@
-import { f as defineElement } from '../chunks/base-BTev8qxg.js';
+import { f as defineElement } from '../chunks/base-zSGb8ujt.js';
 import { c as clampN } from '../chunks/shared-C8Pi6tuh.js';
 
 var css = "usa-gauge{--usa-gg-c:#7c5cff;--usa-gg-k:0;position:relative;display:inline-block;width:var(--usa-gg-w,220px);max-width:100%;font:600 12px/1.2 system-ui,sans-serif;text-align:center}.usa-gg-svg{display:block;width:100%;height:auto;overflow:visible}.usa-gg-track,.usa-gg-arc{fill:none;stroke-width:16;stroke-linecap:round}.usa-gg-track{stroke:rgba(127,127,127,.2)}.usa-gg-arc{stroke:var(--usa-gg-c);stroke-dasharray:calc(max(var(--usa-gg-k),0) * 100) 100;transition:stroke .3s}.usa-gg-needle{transform-origin:100px 100px;transform:rotate(var(--usa-gg-angle,-90deg));fill:currentColor}.usa-gg-read{position:absolute;left:0;right:0;bottom:2px;display:flex;flex-direction:column;align-items:center;pointer-events:none}.usa-gg-num{font:800 22px/1 system-ui,sans-serif;font-variant-numeric:tabular-nums;transform:translateY(-34px)}.usa-gg-label{opacity:.65;transform:translateY(-34px)}";

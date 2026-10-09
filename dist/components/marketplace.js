@@ -1,8 +1,8 @@
-import { l as loadEffectPack } from '../chunks/manifest-BHx5yPN6.js';
-export { E as EFFECT_PACK_FORMAT, p as packManifest, v as validateManifest } from '../chunks/manifest-BHx5yPN6.js';
+import { l as loadEffectPack } from '../chunks/manifest-pFJWahGJ.js';
+export { E as EFFECT_PACK_FORMAT, p as packManifest, v as validateManifest } from '../chunks/manifest-pFJWahGJ.js';
 export { c as checkCompat, p as pluginIntegrity, s as satisfies, v as verifyPlugin } from '../chunks/sign-DvZ1jHxE.js';
-import '../chunks/registry-BKzyg1JV.js';
-import '../chunks/base-BTev8qxg.js';
+import '../chunks/registry-CYojuxi5.js';
+import '../chunks/base-zSGb8ujt.js';
 
 const MARKETPLACE_FORMAT = 'motionary/marketplace';
 const L = (name, title, description, entry, register, effects, tags, since) => ({ name, title, description, entry, register, effects: effects.split(' '), tags: tags.split(' '), since, author: 'Motionary', official: true });
@@ -48,7 +48,7 @@ function searchPlugins(query, list = MARKETPLACE) {
         .sort((a, b) => b[1] - a[1])
         .map(([p]) => p);
 }
-const installed = new Map();
+const installed = /*#__PURE__*/ new Map();
 /** Names of installed plugins → their registered effects (9.0). */
 function installedPlugins() {
     return Object.fromEntries(installed);

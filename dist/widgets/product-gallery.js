@@ -1,3 +1,3 @@
-export { d as defineProductGallery } from '../chunks/product-gallery-Bg69Z2jZ.js';
-import '../chunks/base-BTev8qxg.js';
+export { d as defineProductGallery } from '../chunks/product-gallery-DuUVpQGx.js';
+import '../chunks/base-zSGb8ujt.js';
 //# sourceMappingURL=product-gallery.js.map

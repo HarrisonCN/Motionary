@@ -1,4 +1,4 @@
-import { G as GPU_FX } from '../chunks/gpu-BWfgYWMY.js';
+import { G as GPU_FX } from '../chunks/gpu-ML0i9eNv.js';
 import { TEXT3_FX } from './fx-text.js';
 import { LIGHT_FX } from './fx-light.js';
 import { DEPTH3_FX } from './fx-3d.js';
@@ -29,75 +29,75 @@ import { GENART_FX } from './fx-genart.js';
 import { VIDEO_FX } from './fx-video.js';
 import { SAFE_FX } from './fx-safe.js';
 import { PERF3_FX } from './fx-perf.js';
-import '../chunks/registry-BKzyg1JV.js';
-import '../chunks/base-BTev8qxg.js';
+import '../chunks/registry-CYojuxi5.js';
+import '../chunks/base-zSGb8ujt.js';
 import '../chunks/generative-2LhxG5BJ.js';
 import '../chunks/shared-CkKHWrtJ.js';
-import '../chunks/audio-CWt1xdZB.js';
+import '../chunks/audio-Ds5ppQVV.js';
 
 const P = (name, effects) => ({ name, effects });
 /** The `gpu` pack. */
-const gpu = P('gpu', GPU_FX);
+const gpu = /*#__PURE__*/ P('gpu', GPU_FX);
 /** The `text` pack. */
-const text = P('text', TEXT3_FX);
+const text = /*#__PURE__*/ P('text', TEXT3_FX);
 /** The `light` pack. */
-const light = P('light', LIGHT_FX);
+const light = /*#__PURE__*/ P('light', LIGHT_FX);
 /** The `depth` pack. */
-const depth = P('depth', DEPTH3_FX);
+const depth = /*#__PURE__*/ P('depth', DEPTH3_FX);
 /** The `morph` pack. */
-const morph = P('morph', MORPH2_FX);
+const morph = /*#__PURE__*/ P('morph', MORPH2_FX);
 /** The `transitions` pack. */
-const transitions = P('transitions', TRANSITIONS2_FX);
+const transitions = /*#__PURE__*/ P('transitions', TRANSITIONS2_FX);
 /** The `weather` pack. */
-const weather = P('weather', WEATHER_FX);
+const weather = /*#__PURE__*/ P('weather', WEATHER_FX);
 /** The `physics` pack. */
-const physics = P('physics', PHYSICS2_FX);
+const physics = /*#__PURE__*/ P('physics', PHYSICS2_FX);
 /** The `focus` pack. */
-const focus = P('focus', FOCUS_FX);
+const focus = /*#__PURE__*/ P('focus', FOCUS_FX);
 /** The `music` pack. */
-const music = P('music', MUSIC_FX);
+const music = /*#__PURE__*/ P('music', MUSIC_FX);
 /** The `chart` pack. */
-const chart = P('chart', CHART_FX);
+const chart = /*#__PURE__*/ P('chart', CHART_FX);
 /** The `shop` pack. */
-const shop = P('shop', SHOP_FX);
+const shop = /*#__PURE__*/ P('shop', SHOP_FX);
 /** The `social` pack. */
-const social = P('social', SOCIAL_FX);
+const social = /*#__PURE__*/ P('social', SOCIAL_FX);
 /** The `game` pack. */
-const game = P('game', GAME_FX);
+const game = /*#__PURE__*/ P('game', GAME_FX);
 /** The `geo` pack. */
-const geo = P('geo', GEO_FX);
+const geo = /*#__PURE__*/ P('geo', GEO_FX);
 /** The `form` pack. */
-const form = P('form', FORM_FX);
+const form = /*#__PURE__*/ P('form', FORM_FX);
 /** The `ai` pack. */
-const ai = P('ai', AI_FX);
+const ai = /*#__PURE__*/ P('ai', AI_FX);
 /** The `festival` pack. */
-const festival = P('festival', FESTIVAL_FX);
+const festival = /*#__PURE__*/ P('festival', FESTIVAL_FX);
 /** The `retro` pack. */
-const retro = P('retro', RETRO_FX);
+const retro = /*#__PURE__*/ P('retro', RETRO_FX);
 /** The `organic` pack. */
-const organic = P('organic', ORGANIC_FX);
+const organic = /*#__PURE__*/ P('organic', ORGANIC_FX);
 /** The `cyber` pack. */
-const cyber = P('cyber', CYBER_FX);
+const cyber = /*#__PURE__*/ P('cyber', CYBER_FX);
 /** The `paper` pack. */
-const paper = P('paper', PAPER_FX);
+const paper = /*#__PURE__*/ P('paper', PAPER_FX);
 /** The `surface` pack. */
-const surface = P('surface', SURFACE_FX);
+const surface = /*#__PURE__*/ P('surface', SURFACE_FX);
 /** The `gesture3` pack. */
-const gesture3 = P('gesture3', GESTURE3_FX);
+const gesture3 = /*#__PURE__*/ P('gesture3', GESTURE3_FX);
 /** The `spatial` pack. */
-const spatial = P('spatial', SPATIAL_FX);
+const spatial = /*#__PURE__*/ P('spatial', SPATIAL_FX);
 /** The `cinema` pack. */
-const cinema = P('cinema', CINEMA_FX);
+const cinema = /*#__PURE__*/ P('cinema', CINEMA_FX);
 /** The `lottie` pack. */
-const lottie = P('lottie', LOTTIE_FX);
+const lottie = /*#__PURE__*/ P('lottie', LOTTIE_FX);
 /** The `genart` pack. */
-const genart = P('genart', GENART_FX);
+const genart = /*#__PURE__*/ P('genart', GENART_FX);
 /** The `video` pack. */
-const video = P('video', VIDEO_FX);
+const video = /*#__PURE__*/ P('video', VIDEO_FX);
 /** The `safe` pack. */
-const safe = P('safe', SAFE_FX);
+const safe = /*#__PURE__*/ P('safe', SAFE_FX);
 /** The `perf3` pack. */
-const perf3 = P('perf3', PERF3_FX);
+const perf3 = /*#__PURE__*/ P('perf3', PERF3_FX);
 /** Every built-in plugin. */
 const ALL_PLUGINS = [gpu, text, light, depth, morph, transitions, weather, physics, focus, music, chart, shop, social, game, geo, form, ai, festival, retro, organic, cyber, paper, surface, gesture3, spatial, cinema, lottie, genart, video, safe, perf3];
 

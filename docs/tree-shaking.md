@@ -25,7 +25,7 @@ Importing one export pulls in only its own code. Measured with esbuild (minified
 | Import | 11.0 | 11.1 |
 |---|---|---|
 | `import { defineAddToCart } from 'motionary/components/widgets'` | every widget (≈ 156 KB) | ≈ 5 KB |
-| `import { gpu } from 'motionary/plugins'` | every effect pack (≈ 44 KB) | the GPU pack only |
+| `import { gpu } from 'motionary/plugins'` | every effect pack (≈ 44 KB) | the GPU pack only (≈ 9 KB) |
 | `import 'motionary/components'` (nothing used) | — | 0 bytes |
 
 The per-component entries (`motionary/widgets/<name>`, `motionary/effects/<name>`) stay the smallest way in, with

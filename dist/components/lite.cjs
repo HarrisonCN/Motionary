@@ -9,7 +9,6 @@ var _documentCurrentScript = typeof document !== 'undefined' ? document.currentS
  * imported during SSR (Next, Nuxt, Astro…) and in Electron/Tauri preload
  * scripts. Classes are created the first time a `define*()` function runs.
  */
-var _a$1;
 const MOTION_SENSITIVITY_LEVELS = ['full', 'gentle', 'minimal', 'static'];
 const MOTION_SCALE = { low: 0.6, normal: 1, high: 1.25 };
 const config = { injectStyles: true, reducedMotion: 'user', motionIntensity: 'normal', motionSensitivity: 'full' };
@@ -90,7 +89,7 @@ function prefersReducedMotion() {
         return true;
     return typeof matchMedia === 'function' && !!matchMedia('(prefers-reduced-motion: reduce)')?.matches;
 }
-const injected = new Set();
+const injected = /*#__PURE__*/ new Set();
 /** Add a component's stylesheet to the document once. */
 function adoptStyles(id, css) {
     if (!config.injectStyles || !css || injected.has(id) || typeof document === 'undefined')
@@ -305,7 +304,7 @@ function srText(text) {
 // Every component loop goes through one requestAnimationFrame per frame
 // instead of one per element: callbacks are batched, run in order, and a
 // throwing callback no longer starves the others (the first error is rethrown).
-const frameQueue = new Map();
+const frameQueue = /*#__PURE__*/ new Map();
 let frameSeq = 1;
 let frameHandle = 0;
 let frameVia = null;
@@ -330,9 +329,9 @@ function flushFrame(t) {
         }
     }
     // 8.0: loops run on the unified motion clock — dt scaled by its rate, frozen while paused
-    if (!clockState.paused) {
-        const cdt = dt * clockState.rate;
-        clockState.time += cdt;
+    if (!clk().paused) {
+        const cdt = dt * clk().rate;
+        clk().time += cdt;
         frameListeners.forEach((fn) => fn(t, cdt));
         if (frameListeners.size)
             requestFlush();
@@ -363,7 +362,7 @@ const caf = (id) => {
 /** Run `fn(time, dt)` every frame on the shared scheduler until the returned function is called. */
 function onFrame(fn) {
     frameListeners.add(fn);
-    if (!clockState.paused)
+    if (!clk().paused)
         requestFlush();
     return () => frameListeners.delete(fn);
 }
@@ -371,19 +370,20 @@ function onFrame(fn) {
 function schedulerStats() {
     return { frames: frameStats.frames, callbacks: frameStats.callbacks, peak: frameStats.peak, pending: frameQueue.size, loops: frameListeners.size };
 }
-const CLOCK_KEY = Symbol.for('motionary.clock');
-const clockState = ((_a$1 = globalThis)[CLOCK_KEY] || (_a$1[CLOCK_KEY] = { rate: 1, paused: false, time: 0, anims: new Set(), subs: new Set() }));
+const CLOCK_KEY = /*#__PURE__*/ Symbol.for('motionary.clock');
+// 11.1: created on first use, so importing this module writes nothing to globalThis.
+const clk = () => { var _a; return ((_a = globalThis)[CLOCK_KEY] || (_a[CLOCK_KEY] = { rate: 1, paused: false, time: 0, anims: new Set(), subs: new Set() })); };
 function applyClock(a) {
     try {
         if (typeof a.updatePlaybackRate === 'function')
-            a.updatePlaybackRate(clockState.rate);
-        else if (clockState.rate !== 1 || a.playbackRate !== undefined)
-            a.playbackRate = clockState.rate;
-        if (clockState.paused)
+            a.updatePlaybackRate(clk().rate);
+        else if (clk().rate !== 1 || a.playbackRate !== undefined)
+            a.playbackRate = clk().rate;
+        if (clk().paused)
             a.pause?.();
         else if (a.playState === 'paused' && a._usaClockPaused)
             a.play?.();
-        a._usaClockPaused = clockState.paused;
+        a._usaClockPaused = clk().paused;
     }
     catch {
         /* finished / detached animation */
@@ -393,10 +393,10 @@ function applyClock(a) {
 function trackAnimation(a) {
     if (!a)
         return;
-    if (clockState.rate !== 1 || clockState.paused)
+    if (clk().rate !== 1 || clk().paused)
         applyClock(a);
-    clockState.anims.add(a);
-    const drop = () => clockState.anims.delete(a);
+    clk().anims.add(a);
+    const drop = () => clk().anims.delete(a);
     a.finished?.then(drop, drop);
 }
 // --- active animation budget (4.5) ---------------------------------------------
@@ -420,7 +420,7 @@ const EASE_OUT = 'cubic-bezier(0.22, 1, 0.36, 1)';
 const EASE_SPRING = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
 /** Windows Fluent "decelerate" / "point-to-point" curves. */
 const FLUENT_DECELERATE = 'cubic-bezier(0.1, 0.9, 0.2, 1)';
-const warned = new Set();
+const warned = /*#__PURE__*/ new Set();
 /** Log a deprecation once per key (console.warn). */
 function deprecate(key, message) {
     if (warned.has(key))
@@ -540,7 +540,7 @@ for (const [cat, tags] of Object.entries(COMPONENT_CATEGORIES))
         TAG_CATEGORY[t] = cat;
 /** The category of a default `<usa-*>` tag. */
 const categoryOf = (tag) => TAG_CATEGORY[tag];
-const loaded = new Set();
+const loaded = /*#__PURE__*/ new Set();
 /**
  * Add `<link rel="stylesheet" href="{base}components/{category}.css">` once.
  * `base` is the URL of the package's `dist/` folder.
@@ -1244,7 +1244,7 @@ const MOTION_TOKENS = {
         stiff: { stiffness: 500, damping: 40, mass: 1 },
     },
 };
-let active = clone(MOTION_TOKENS);
+let active = /*#__PURE__*/ clone(MOTION_TOKENS);
 function clone(t) {
     return { duration: { ...t.duration }, easing: { ...t.easing }, spring: Object.fromEntries(Object.entries(t.spring).map(([k, v]) => [k, { ...v }])) };
 }
@@ -4375,7 +4375,7 @@ function stepSpring(cfg, x, v, to, dt) {
     const nv = v + a * dt;
     return [x + nv * dt, nv];
 }
-const cache = new Map();
+const cache = /*#__PURE__*/ new Map();
 /**
  * Sample the spring from 0 to 1 at `fps` (default 60). `values` may exceed 1
  * (overshoot); `duration` is the time to rest, in ms (max 10 s).
@@ -4566,7 +4566,7 @@ var css$B = "";
 
 const SPRING_EFFECTS = ['bounce-in', 'pop', 'drop', 'jelly', 'rubber-band'];
 /** Entrance effects start hidden; attention effects (jelly, rubber-band) play on visible content. */
-const ENTRANCE = new Set(['bounce-in', 'pop', 'drop']);
+const ENTRANCE = /*#__PURE__*/ new Set(['bounce-in', 'pop', 'drop']);
 /** Keyframes of a spring effect (entrances use spring timing, attention effects fixed frames). */
 function springEffectKeyframes(effect, reduced = false) {
     if (reduced)
@@ -4990,7 +4990,7 @@ var css$y = "";
 
 const CARD_EFFECTS = ['flip', 'holo', 'glass', 'border-glow', 'conic-border', 'lift', 'spotlight', 'sheen', 'parallax-layers', 'expand'];
 /** Effects that follow the pointer (they share one rAF-throttled tracker). */
-const TRACKING = new Set(['holo', 'border-glow', 'spotlight', 'parallax-layers', 'lift']);
+const TRACKING = /*#__PURE__*/ new Set(['holo', 'border-glow', 'spotlight', 'parallax-layers', 'lift']);
 function defineCard(tag = 'usa-card') {
     return defineElement(tag, (Base) => class UsaCard extends Base {
         constructor() {
@@ -10052,7 +10052,7 @@ function applyPack(name, root = document) {
     return () => cleanups.splice(0).forEach((c) => c());
 }
 /** Primitive names a pack uses (for docs / tooling). */
-const PACK_PRIMITIVES = Object.keys(PRIMITIVES);
+const PACK_PRIMITIVES = /*#__PURE__*/ Object.keys(PRIMITIVES);
 
 function definePack(tag = 'usa-pack') {
     return defineElement(tag, (Base) => class UsaPack extends Base {
@@ -10082,38 +10082,46 @@ function definePacksComponents() {
     definePack();
 }
 
-var _a;
+/**
+ * 5.0 — unified plugin-style effect registration. Every effect (built-in or
+ * yours) is a plain object registered once and played the same way:
+ * `playEffect(el, name)`, `bindEffect(el, name, { trigger })` or
+ * `<usa-fx effect="name" trigger="click">`. Effects get a context that
+ * already applies reduced motion, motion sensitivity, intensity and the
+ * animation budget.
+ */
 const EFFECT_KINDS = ['enter', 'exit', 'attention', 'click', 'hover', 'card', 'loop', 'page', 'background', 'text', 'cursor', 'scroll'];
 const EFFECT_TRIGGERS = ['click', 'hover', 'enter', 'load', 'loop', 'manual'];
 // 6.2: one table per page (Symbol.for), shared by every bundle that registers effects —
 // e.g. dist/components.umd.js and dist/widgets.umd.js on the same page.
-const REG_KEY = Symbol.for('use-scroll-animate.effects');
-const registry = ((_a = globalThis)[REG_KEY] || (_a[REG_KEY] = new Map()));
+const REG_KEY = /*#__PURE__*/ Symbol.for('use-scroll-animate.effects');
+// 11.1: created on first use, so importing this module writes nothing to globalThis.
+const fxTable = () => { var _a; return ((_a = globalThis)[REG_KEY] || (_a[REG_KEY] = new Map())); };
 /** Register an effect (throws on a duplicate name unless `override`). Returns an unregister function. */
 function registerEffect(def, opts = {}) {
     if (!/^[a-z][a-z0-9-]*$/.test(def.name))
         throw new Error(`[motionary] invalid effect name "${def.name}"`);
     if (!EFFECT_KINDS.includes(def.kind))
         throw new Error(`[motionary] unknown effect kind "${def.kind}"`);
-    if (registry.has(def.name) && !opts.override)
+    if (fxTable().has(def.name) && !opts.override)
         throw new Error(`[motionary] effect "${def.name}" is already registered`);
-    registry.set(def.name, def);
+    fxTable().set(def.name, def);
     return () => {
-        if (registry.get(def.name) === def)
-            registry.delete(def.name);
+        if (fxTable().get(def.name) === def)
+            fxTable().delete(def.name);
     };
 }
 /** Register several effects at once (already-registered names are skipped). */
 function registerEffects(defs) {
     for (const d of defs)
-        if (!registry.has(d.name))
+        if (!fxTable().has(d.name))
             registerEffect(d);
 }
-const getEffect = (name) => registry.get(name);
-const hasEffect = (name) => registry.has(name);
+const getEffect = (name) => fxTable().get(name);
+const hasEffect = (name) => fxTable().has(name);
 /** Registered effects (optionally of one kind), sorted by name. */
 function listEffects(kind) {
-    return Array.from(registry.values())
+    return Array.from(fxTable().values())
         .filter((d) => !kind || d.kind === kind)
         .sort((a, b) => a.name.localeCompare(b.name));
 }
@@ -10134,9 +10142,9 @@ function context(event) {
  * immediately for fire-and-forget effects). Unknown names reject.
  */
 async function playEffect(el, name, options = {}, event) {
-    const def = registry.get(name);
+    const def = fxTable().get(name);
     if (!def)
-        throw new Error(`[motionary] unknown effect "${name}" — registered: ${Array.from(registry.keys()).join(', ')}`);
+        throw new Error(`[motionary] unknown effect "${name}" — registered: ${Array.from(fxTable().keys()).join(', ')}`);
     const ctx = context(event);
     if (ctx.reduced && (def.reduced ?? (SKIP_BY_DEFAULT.includes(def.kind) ? 'skip' : 'run')) === 'skip')
         return;
@@ -10153,7 +10161,7 @@ async function playEffect(el, name, options = {}, event) {
  */
 function bindEffect(el, name, options = {}) {
     const { trigger = 'click', once, ...opts } = options;
-    const def = registry.get(name);
+    const def = fxTable().get(name);
     if (!def)
         throw new Error(`[motionary] unknown effect "${name}"`);
     const offs = [];
@@ -10239,7 +10247,7 @@ function defineFx(tag = 'usa-fx') {
  * every timeline preset as an `enter` effect, attention seekers, and the
  * click effects (burst, confetti, shake, ripple).
  */
-const enter = Object.entries(TIMELINE_PRESETS).map(([name, frames]) => ({
+const enter = /*#__PURE__*/ Object.entries(TIMELINE_PRESETS).map(([name, frames]) => ({
     name,
     kind: 'enter',
     description: `Entrance: ${name} (same keyframes as the timeline preset).`,

@@ -1,9 +1,9 @@
 'use strict';
 
-var base = require('../chunks/base-DBheNxJu.cjs');
-var runtimeLink = require('../chunks/runtime-link-Bz3rGMsh.cjs');
-var widgets_lottiePlayer = require('../chunks/lottie-player-DD1pnLN2.cjs');
-require('../chunks/registry-uaO8pDKn.cjs');
+var base = require('../chunks/base-B3me2y0o.cjs');
+var runtimeLink = require('../chunks/runtime-link-BGOVYbEP.cjs');
+var widgets_lottiePlayer = require('../chunks/lottie-player-BVjcHR-T.cjs');
+require('../chunks/registry-DrMvKcV3.cjs');
 
 function defineDotLottie(tag = 'usa-dotlottie') {
     return base.defineElement(tag, () => {

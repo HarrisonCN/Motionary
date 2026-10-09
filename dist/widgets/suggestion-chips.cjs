@@ -1,7 +1,7 @@
 'use strict';
 
-var widgets_suggestionChips = require('../chunks/suggestion-chips-BzVcyOqj.cjs');
-require('../chunks/base-DBheNxJu.cjs');
+var widgets_suggestionChips = require('../chunks/suggestion-chips-BVt6aSMC.cjs');
+require('../chunks/base-B3me2y0o.cjs');
 
 
 

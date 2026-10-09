@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-uaO8pDKn.cjs');
+var registry = require('../chunks/registry-DrMvKcV3.cjs');
 
 /**
  * `motionary/runtime/drag-snap` (10.8) — pointer drag with inertia and snap

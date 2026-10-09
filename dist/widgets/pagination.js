@@ -1,4 +1,4 @@
-export { d as definePagination } from '../chunks/pagination-DJpiF_Zu.js';
-import '../chunks/base-BTev8qxg.js';
+export { d as definePagination } from '../chunks/pagination-6QHulvKI.js';
+import '../chunks/base-zSGb8ujt.js';
 import '../chunks/shared-C8Pi6tuh.js';
 //# sourceMappingURL=pagination.js.map

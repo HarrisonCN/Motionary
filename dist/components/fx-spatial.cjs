@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-xQZnSqqV.cjs');
-require('../chunks/base-DBheNxJu.cjs');
+var registry = require('../chunks/registry-BB1oO-lR.cjs');
+require('../chunks/base-B3me2y0o.cjs');
 
 /** Horizontal background offset (px) of a 360° panorama `width` px wide for a `yaw` in degrees (wraps) (8.8). */
 function yawToOffset(yaw, width) {

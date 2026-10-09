@@ -1,7 +1,7 @@
 'use strict';
 
-var widgets_countdown = require('../chunks/countdown-D77hzPiX.cjs');
-require('../chunks/base-DBheNxJu.cjs');
+var widgets_countdown = require('../chunks/countdown-COaDvsTK.cjs');
+require('../chunks/base-B3me2y0o.cjs');
 
 
 

@@ -1,9 +1,9 @@
 'use strict';
 
-var widgets_workerCanvas = require('../chunks/worker-canvas-DW3VgtxO.cjs');
-require('../chunks/base-DBheNxJu.cjs');
+var widgets_workerCanvas = require('../chunks/worker-canvas-CDc2aIKC.cjs');
+require('../chunks/base-B3me2y0o.cjs');
 require('../components/fx-perf.cjs');
-require('../chunks/registry-xQZnSqqV.cjs');
+require('../chunks/registry-BB1oO-lR.cjs');
 
 
 

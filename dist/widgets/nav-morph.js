@@ -1,4 +1,4 @@
-export { d as defineNavMorph } from '../chunks/nav-morph-Bd3URdbR.js';
-import '../chunks/base-BTev8qxg.js';
+export { d as defineNavMorph } from '../chunks/nav-morph-Cn8rkJgZ.js';
+import '../chunks/base-zSGb8ujt.js';
 import '../chunks/shared-C8Pi6tuh.js';
 //# sourceMappingURL=nav-morph.js.map

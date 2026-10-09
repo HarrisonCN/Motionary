@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-uaO8pDKn.cjs');
-var ticker = require('../chunks/ticker-nshSbZ-Q.cjs');
+var registry = require('../chunks/registry-DrMvKcV3.cjs');
+var ticker = require('../chunks/ticker-Dr5fi6vJ.cjs');
 
 /**
  * `motionary/runtime/scroll` (10.2) — scroll-linked scenes, an original
@@ -51,7 +51,7 @@ function resolveRule(rule, triggerStart, triggerSize, viewport) {
     const s = parts[1] ?? 'bottom';
     return triggerStart + parseEdge(t, triggerSize) - parseEdge(s, viewport);
 }
-const scenes = new Set();
+const scenes = /*#__PURE__*/ new Set();
 const q = (x) => {
     const el = typeof x === 'string' ? document.querySelector(x) : x;
     if (!el)

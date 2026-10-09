@@ -1,7 +1,7 @@
 'use strict';
 
-var widgets_prizeWheel = require('../chunks/prize-wheel-Dxpu_k1l.cjs');
-require('../chunks/base-DBheNxJu.cjs');
+var widgets_prizeWheel = require('../chunks/prize-wheel-DuS1Ud_o.cjs');
+require('../chunks/base-B3me2y0o.cjs');
 
 
 

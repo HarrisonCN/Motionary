@@ -1,8 +1,8 @@
 'use strict';
 
-var base = require('../chunks/base-DBheNxJu.cjs');
+var base = require('../chunks/base-B3me2y0o.cjs');
 var components_fxCinema = require('../components/fx-cinema.cjs');
-require('../chunks/registry-xQZnSqqV.cjs');
+require('../chunks/registry-BB1oO-lR.cjs');
 
 var css = "usa-scene{position:relative;display:block;overflow:hidden;border-radius:14px;background:#000;color:#fff;isolation:isolate}usa-scene>.usa-scene-media{display:block;width:100%;height:100%;object-fit:cover;transform-origin:50% 50%;will-change:transform}usa-scene>[data-caption]{position:absolute;left:5%;right:5%;bottom:8%;margin:0;font:700 clamp(15px,2.4vw,24px)/1.25 system-ui,sans-serif;text-shadow:0 2px 12px rgba(0,0,0,.7);opacity:0;transform:translateY(10px);transition:opacity .6s,transform .6s}usa-scene>[data-caption][data-shown]{opacity:1;transform:none}@media (prefers-reduced-motion:reduce){usa-scene>[data-caption]{transition:none}}";
 

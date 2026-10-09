@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-xQZnSqqV.cjs');
-require('../chunks/base-DBheNxJu.cjs');
+var registry = require('../chunks/registry-BB1oO-lR.cjs');
+require('../chunks/base-B3me2y0o.cjs');
 
 const GLYPHS = '01<>/\\[]{}#$%&*+=ABCDEFXYZ';
 /** The `k`-th frame of decoding `text` over `n` frames: resolved prefix + random glyphs (8.4). */

@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-DBheNxJu.cjs');
+var base = require('../chunks/base-B3me2y0o.cjs');
 
 const anim = (el, frames, o) => {
     if (typeof el.animate !== 'function')
@@ -152,7 +152,7 @@ function applyPack(name, root = document) {
     return () => cleanups.splice(0).forEach((c) => c());
 }
 /** Primitive names a pack uses (for docs / tooling). */
-const PACK_PRIMITIVES = Object.keys(PRIMITIVES);
+const PACK_PRIMITIVES = /*#__PURE__*/ Object.keys(PRIMITIVES);
 
 function definePack(tag = 'usa-pack') {
     return base.defineElement(tag, (Base) => class UsaPack extends Base {

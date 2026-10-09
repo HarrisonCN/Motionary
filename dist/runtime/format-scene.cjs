@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-uaO8pDKn.cjs');
+var registry = require('../chunks/registry-DrMvKcV3.cjs');
 
 /**
  * `motionary/runtime/format-scene` (10.7) — the versioned scene format

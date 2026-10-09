@@ -1,9 +1,9 @@
 'use strict';
 
-var base = require('../chunks/base-DBheNxJu.cjs');
-var runtimeLink = require('../chunks/runtime-link-Bz3rGMsh.cjs');
-var widgets_glScene = require('../chunks/gl-scene-SO5UU93S.cjs');
-require('../chunks/registry-uaO8pDKn.cjs');
+var base = require('../chunks/base-B3me2y0o.cjs');
+var runtimeLink = require('../chunks/runtime-link-BGOVYbEP.cjs');
+var widgets_glScene = require('../chunks/gl-scene-BFCzaO_8.cjs');
+require('../chunks/registry-DrMvKcV3.cjs');
 
 function defineGlModel(tag = 'usa-gl-model') {
     return base.defineElement(tag, () => {

@@ -1,7 +1,7 @@
 'use strict';
 
-var widgets_colorPicker = require('../chunks/color-picker-D7sWAjxR.cjs');
-require('../chunks/base-DBheNxJu.cjs');
+var widgets_colorPicker = require('../chunks/color-picker-Dmr2b2J4.cjs');
+require('../chunks/base-B3me2y0o.cjs');
 require('../chunks/shared-BxK1D7EZ.cjs');
 
 

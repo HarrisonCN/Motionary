@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-xQZnSqqV.cjs');
-var base = require('../chunks/base-DBheNxJu.cjs');
+var registry = require('../chunks/registry-BB1oO-lR.cjs');
+var base = require('../chunks/base-B3me2y0o.cjs');
 var shared = require('../chunks/shared-jkgRH-Hx.cjs');
 
 /** Split `el`'s text into `aria-hidden` inline-block characters (idempotent). Returns them. */

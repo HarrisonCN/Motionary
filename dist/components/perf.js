@@ -1,5 +1,5 @@
-import { v as onFrame, z as setStyleLoader, q as animationBudget, u as getMotionIntensity, c as configureComponents, x as setAnimationBudget, k as activeAnimations } from '../chunks/base-BTev8qxg.js';
-export { w as schedulerStats } from '../chunks/base-BTev8qxg.js';
+import { v as onFrame, z as setStyleLoader, q as animationBudget, u as getMotionIntensity, c as configureComponents, x as setAnimationBudget, k as activeAnimations } from '../chunks/base-zSGb8ujt.js';
+export { w as schedulerStats } from '../chunks/base-zSGb8ujt.js';
 import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-B-JBecYg.js';
 
 /**
@@ -79,7 +79,7 @@ for (const [cat, tags] of Object.entries(COMPONENT_CATEGORIES))
         TAG_CATEGORY[t] = cat;
 /** The category of a default `<usa-*>` tag. */
 const categoryOf = (tag) => TAG_CATEGORY[tag];
-const loaded = new Set();
+const loaded = /*#__PURE__*/ new Set();
 /**
  * Add `<link rel="stylesheet" href="{base}components/{category}.css">` once.
  * `base` is the URL of the package's `dist/` folder.

@@ -1,3 +1,3 @@
-export { d as definePropPanel } from '../chunks/prop-panel-DlfQlKxj.js';
-import '../chunks/base-BTev8qxg.js';
+export { d as definePropPanel } from '../chunks/prop-panel-CYTkWP9Y.js';
+import '../chunks/base-zSGb8ujt.js';
 //# sourceMappingURL=prop-panel.js.map

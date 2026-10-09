@@ -1,9 +1,9 @@
 'use strict';
 
-var base = require('../chunks/base-DBheNxJu.cjs');
-var player = require('../chunks/player-C4y4jXSv.cjs');
-require('../chunks/registry-xQZnSqqV.cjs');
-require('../chunks/core-MQlXZKUG.cjs');
+var base = require('../chunks/base-B3me2y0o.cjs');
+var player = require('../chunks/player-DZe-cHvD.cjs');
+require('../chunks/registry-BB1oO-lR.cjs');
+require('../chunks/core-KIvPGg0c.cjs');
 require('../components/tokens.cjs');
 
 var css = "usa-keyframe-editor{--usa-ke-c:#7c5cff;--usa-ke-head:100%;display:flex;flex-direction:column;gap:8px;width:var(--usa-ke-w,100%);max-width:100%;padding:10px;border-radius:14px;background:var(--usa-ke-bg,#0f172a);color:#e2e8f0;font:500 12px/1.2 system-ui,sans-serif}.usa-ke-bar{display:flex;align-items:center;gap:8px}.usa-ke-play{width:30px;height:30px;border:0;border-radius:50%;background:var(--usa-ke-c);color:#fff;cursor:pointer}.usa-ke-scrub{flex:1;min-width:0;accent-color:var(--usa-ke-c)}.usa-ke-time{min-width:58px;text-align:right;font-variant-numeric:tabular-nums;opacity:.8}.usa-ke-tracks{position:relative;display:flex;flex-direction:column;gap:4px}.usa-ke-tracks::after{content:\"\";position:absolute;top:0;bottom:0;left:calc(64px + (100% - 64px) * var(--usa-ke-head) / 100%);width:2px;background:#f43f5e;pointer-events:none}.usa-ke-row{display:grid;grid-template-columns:64px 1fr;align-items:center}.usa-ke-label{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:6px;opacity:.85}.usa-ke-lane{position:relative;height:22px;border-radius:6px;background:rgba(148,163,184,.14)}.usa-ke-clip{position:absolute;top:2px;bottom:2px;border-radius:5px;background:linear-gradient(90deg,var(--usa-ke-c),#22d3ee);cursor:grab;touch-action:none;outline-offset:2px;transition:left .2s,width .2s}.usa-ke-clip[data-drag]{cursor:grabbing;transition:none;box-shadow:0 4px 12px rgba(0,0,0,.4)}.usa-ke-clip:focus-visible{outline:2px solid #fff}.usa-ke-grip{position:absolute;right:0;top:0;bottom:0;width:8px;border-radius:0 5px 5px 0;background:rgba(255,255,255,.35);cursor:ew-resize}@media (prefers-reduced-motion:reduce){.usa-ke-clip{transition:none}}";

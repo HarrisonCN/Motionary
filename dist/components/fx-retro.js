@@ -1,5 +1,5 @@
-import { registerEffects } from '../chunks/registry-BKzyg1JV.js';
-import '../chunks/base-BTev8qxg.js';
+import { registerEffects } from '../chunks/registry-CYojuxi5.js';
+import '../chunks/base-zSGb8ujt.js';
 
 /** Keyframes stepping a CSS blur/contrast "pixel" filter from coarse to sharp (8.2). */
 function pixelSteps(steps = 6) {

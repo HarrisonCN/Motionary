@@ -1,3 +1,3 @@
-export { d as defineRive } from '../chunks/rive-B_yxYGBn.js';
-import '../chunks/base-BTev8qxg.js';
+export { d as defineRive } from '../chunks/rive-CtYlVrH0.js';
+import '../chunks/base-zSGb8ujt.js';
 //# sourceMappingURL=rive.js.map

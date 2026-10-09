@@ -1,7 +1,7 @@
 'use strict';
 
-var widgets_skeletonReveal = require('../chunks/skeleton-reveal-BTviZBoF.cjs');
-require('../chunks/base-DBheNxJu.cjs');
+var widgets_skeletonReveal = require('../chunks/skeleton-reveal-n4L3iur-.cjs');
+require('../chunks/base-B3me2y0o.cjs');
 require('../chunks/shared-BxK1D7EZ.cjs');
 
 

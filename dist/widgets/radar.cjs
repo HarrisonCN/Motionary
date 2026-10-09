@@ -1,7 +1,7 @@
 'use strict';
 
-var widgets_radar = require('../chunks/radar-bqiGfPOA.cjs');
-require('../chunks/base-DBheNxJu.cjs');
+var widgets_radar = require('../chunks/radar-BWjX0-2G.cjs');
+require('../chunks/base-B3me2y0o.cjs');
 
 
 

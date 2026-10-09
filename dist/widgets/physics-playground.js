@@ -1,5 +1,5 @@
-export { d as definePhysicsPlayground } from '../chunks/physics-playground-CluT_Nj9.js';
-import '../chunks/base-BTev8qxg.js';
-import '../chunks/runtime-link-CP3qaRja.js';
-import '../chunks/registry-W7pXOwju.js';
+export { d as definePhysicsPlayground } from '../chunks/physics-playground-CxBmz4_q.js';
+import '../chunks/base-zSGb8ujt.js';
+import '../chunks/runtime-link-GgTrq8pt.js';
+import '../chunks/registry-DUAt7GXU.js';
 //# sourceMappingURL=physics-playground.js.map

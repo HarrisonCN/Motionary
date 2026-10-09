@@ -209,7 +209,7 @@ const MOTION_TOKENS = {
         stiff: { stiffness: 500, damping: 40, mass: 1 },
     },
 };
-let active = clone(MOTION_TOKENS);
+let active = /*#__PURE__*/ clone(MOTION_TOKENS);
 function clone(t) {
     return { duration: { ...t.duration }, easing: { ...t.easing }, spring: Object.fromEntries(Object.entries(t.spring).map(([k, v]) => [k, { ...v }])) };
 }

@@ -1,7 +1,7 @@
 'use strict';
 
-var widgets_carousel = require('../chunks/carousel-DMn_2Pxg.cjs');
-require('../chunks/base-DBheNxJu.cjs');
+var widgets_carousel = require('../chunks/carousel-CUEAF4k3.cjs');
+require('../chunks/base-B3me2y0o.cjs');
 require('../chunks/shared-BxK1D7EZ.cjs');
 
 

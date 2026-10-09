@@ -1,7 +1,7 @@
 'use strict';
 
-var manifest = require('../chunks/manifest-PaF9B8Vt.cjs');
-var components_fxGpu = require('../chunks/gpu-cUixt7kT.cjs');
+var manifest = require('../chunks/manifest-Bcz6rQ20.cjs');
+var components_fxGpu = require('../chunks/gpu-Dw1udOJW.cjs');
 var components_fxText = require('./fx-text.cjs');
 var components_fxLight = require('./fx-light.cjs');
 var components_fx3d = require('./fx-3d.cjs');
@@ -32,11 +32,11 @@ var components_fxGenart = require('./fx-genart.cjs');
 var components_fxVideo = require('./fx-video.cjs');
 var components_fxSafe = require('./fx-safe.cjs');
 var components_fxPerf = require('./fx-perf.cjs');
-var registry = require('../chunks/registry-xQZnSqqV.cjs');
+var registry = require('../chunks/registry-BB1oO-lR.cjs');
 require('../chunks/generative-BHIj-NU0.cjs');
 require('../chunks/shared-jkgRH-Hx.cjs');
-require('../chunks/base-DBheNxJu.cjs');
-require('../chunks/audio-BpU-A1m1.cjs');
+require('../chunks/base-B3me2y0o.cjs');
+require('../chunks/audio-Dc4JT_0D.cjs');
 
 /** The 6.x effect packs by name. */
 const EFFECT_PACKS = {
@@ -115,7 +115,7 @@ function definePlugin(name, effects, install) {
 function effectPlugins() {
     return Object.entries(PACK_SOURCES).map(([k, effects]) => ({ name: k, effects }));
 }
-const usedPlugins = new Set();
+const usedPlugins = /*#__PURE__*/ new Set();
 /** Register plugins (each once); returns the names of their effects (9.9). */
 function usePlugins(...plugins) {
     const names = [];

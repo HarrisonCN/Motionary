@@ -1,3 +1,3 @@
-export { d as defineXpBar } from '../chunks/xp-bar-sM0Rpp9g.js';
-import '../chunks/base-BTev8qxg.js';
+export { d as defineXpBar } from '../chunks/xp-bar-j1FsL32r.js';
+import '../chunks/base-zSGb8ujt.js';
 //# sourceMappingURL=xp-bar.js.map

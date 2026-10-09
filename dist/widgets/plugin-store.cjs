@@ -1,9 +1,9 @@
 'use strict';
 
-var base = require('../chunks/base-DBheNxJu.cjs');
+var base = require('../chunks/base-B3me2y0o.cjs');
 var components_marketplace = require('../components/marketplace.cjs');
-require('../chunks/manifest-PaF9B8Vt.cjs');
-require('../chunks/registry-xQZnSqqV.cjs');
+require('../chunks/manifest-Bcz6rQ20.cjs');
+require('../chunks/registry-BB1oO-lR.cjs');
 require('../chunks/sign-RAkQIWrM.cjs');
 
 var css = "usa-plugin-store{display:block;max-width:100%;font:14px/1.4 system-ui,sans-serif;color:#0f172a}usa-plugin-store .usa-ps-q{width:100%;box-sizing:border-box;padding:9px 12px;border:1px solid #cbd5e1;border-radius:10px;font:inherit}usa-plugin-store .usa-ps-q:focus-visible{outline:2px solid #6366f1;outline-offset:1px}usa-plugin-store .usa-ps-count{margin:6px 2px;font-size:12px;color:#64748b}usa-plugin-store .usa-ps-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(220px,100%),1fr));gap:10px;margin:0;padding:0;list-style:none}usa-plugin-store .usa-ps-card{display:flex;flex-direction:column;gap:6px;padding:12px;border:1px solid rgba(15,23,42,.1);border-radius:12px;background:#fff;box-shadow:0 6px 16px -12px rgba(15,23,42,.4);min-width:0}usa-plugin-store .usa-ps-head{display:flex;align-items:center;gap:6px;flex-wrap:wrap}usa-plugin-store .usa-ps-head small{margin-left:auto;color:#94a3b8;font-size:11px}usa-plugin-store .usa-ps-badge{padding:1px 6px;border-radius:999px;background:#eef2ff;color:#4338ca;font-size:11px;font-weight:600}usa-plugin-store .usa-ps-card p{margin:0;color:#475569;font-size:13px}usa-plugin-store .usa-ps-fx{display:flex;flex-wrap:wrap;gap:4px}usa-plugin-store .usa-ps-fx code{padding:1px 6px;border-radius:6px;background:#f1f5f9;font-size:11px}usa-plugin-store .usa-ps-install{transition:opacity .3s,background-color .3s;align-self:flex-start;padding:6px 12px;border:0;border-radius:8px;background:#4f46e5;color:#fff;font:600 12px/1 system-ui,sans-serif;cursor:pointer}usa-plugin-store .usa-ps-install[data-done]{background:#16a34a;cursor:default}usa-plugin-store .usa-ps-install[data-busy]{opacity:.7}usa-plugin-store .usa-ps-install:focus-visible{outline:2px solid #6366f1;outline-offset:2px}";

@@ -1,4 +1,4 @@
-import { f as defineElement } from '../chunks/base-BTev8qxg.js';
+import { f as defineElement } from '../chunks/base-zSGb8ujt.js';
 
 var css = "usa-route-transition{display:block;max-width:100%;box-sizing:border-box}usa-route-transition template{display:none}::view-transition-old(root),::view-transition-new(root){animation-duration:.28s}";
 

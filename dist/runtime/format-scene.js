@@ -1,4 +1,4 @@
-import { R as RUNTIME_VERSION, r as requireModule } from '../chunks/registry-W7pXOwju.js';
+import { R as RUNTIME_VERSION, r as requireModule } from '../chunks/registry-DUAt7GXU.js';
 
 /**
  * `motionary/runtime/format-scene` (10.7) — the versioned scene format

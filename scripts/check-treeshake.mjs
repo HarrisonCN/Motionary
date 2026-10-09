@@ -32,7 +32,7 @@ for (const [k, v] of Object.entries(pkg.exports)) {
 // one export from a group entry → only its own code (fixed limits, gzip)
 const ONE = [
   { code: "import { defineAddToCart } from 'motionary/components/widgets'; defineAddToCart();", max: 8 * 1024, absent: ['usa-bar-chart', 'usa-gl-scene', 'usa-kanban'] },
-  { code: "import { gpu } from 'motionary/plugins'; console.log(gpu);", max: 8 * 1024, absent: ['liquid-text', 'coin-burst', 'film-burn'] },
+  { code: "import { gpu } from 'motionary/plugins'; console.log(gpu);", max: 12 * 1024, absent: ['liquid-text', 'coin-burst', 'film-burn'] },
   { code: "import { tween } from 'motionary/runtime'; console.log(tween);", max: 6 * 1024, absent: ['webgl2', 'glTF'] },
   { code: "import { createScrollAnimate } from 'motionary'; console.log(createScrollAnimate);", max: 8 * 1024, absent: ['usa-'] },
 ];

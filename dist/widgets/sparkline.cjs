@@ -1,7 +1,7 @@
 'use strict';
 
-var widgets_sparkline = require('../chunks/sparkline-CdC8_uLp.cjs');
-require('../chunks/base-DBheNxJu.cjs');
+var widgets_sparkline = require('../chunks/sparkline-CEF92PsW.cjs');
+require('../chunks/base-B3me2y0o.cjs');
 
 
 

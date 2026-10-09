@@ -1,7 +1,7 @@
 'use strict';
 
-var widgets_presence = require('../chunks/presence-Cms6yMRX.cjs');
-require('../chunks/base-DBheNxJu.cjs');
+var widgets_presence = require('../chunks/presence-230b12uw.cjs');
+require('../chunks/base-B3me2y0o.cjs');
 
 
 

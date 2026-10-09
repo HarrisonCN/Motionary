@@ -1,6 +1,6 @@
-import { f as defineElement } from '../chunks/base-BTev8qxg.js';
+import { f as defineElement } from '../chunks/base-zSGb8ujt.js';
 import { parseMotion, bindMotion } from '../components/dsl.js';
-import '../chunks/registry-BKzyg1JV.js';
+import '../chunks/registry-CYojuxi5.js';
 
 var css = "usa-motion{display:block}";
 

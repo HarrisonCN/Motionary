@@ -1,7 +1,7 @@
 'use strict';
 
-var widgets_weatherCard = require('../chunks/weather-card-slgERYIJ.cjs');
-require('../chunks/base-DBheNxJu.cjs');
+var widgets_weatherCard = require('../chunks/weather-card-DCzxr5T4.cjs');
+require('../chunks/base-B3me2y0o.cjs');
 
 
 

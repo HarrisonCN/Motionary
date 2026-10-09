@@ -1,11 +1,11 @@
 'use strict';
 
-var registry = require('../chunks/registry-uaO8pDKn.cjs');
-var tween = require('../chunks/tween-Df87h-1G.cjs');
-require('../chunks/ticker-nshSbZ-Q.cjs');
+var registry = require('../chunks/registry-DrMvKcV3.cjs');
+var tween = require('../chunks/tween-CTo0OifR.cjs');
+require('../chunks/ticker-Dr5fi6vJ.cjs');
 require('../chunks/ease-HwYZnZat.cjs');
 
-const ALLOWED = new Set(['time', 'value', 'thisComp', 'thisLayer', 'thisProperty', 'Math', 'wiggle', 'loopOut', 'loopIn', 'loopOutDuration', 'loopInDuration', 'linear', 'ease', 'easeIn', 'easeOut', 'clamp', 'valueAtTime', 'framesToTime', 'timeToFrames', 'degreesToRadians', 'radiansToDegrees', 'add', 'sub', 'mul', 'div', 'length', 'true', 'false', '$bm_rt', 'index']);
+const ALLOWED = /*#__PURE__*/ new Set(['time', 'value', 'thisComp', 'thisLayer', 'thisProperty', 'Math', 'wiggle', 'loopOut', 'loopIn', 'loopOutDuration', 'loopInDuration', 'linear', 'ease', 'easeIn', 'easeOut', 'clamp', 'valueAtTime', 'framesToTime', 'timeToFrames', 'degreesToRadians', 'radiansToDegrees', 'add', 'sub', 'mul', 'div', 'length', 'true', 'false', '$bm_rt', 'index']);
 function lex(src) {
     const t = [];
     const re = /\s*(?:(\/\/[^\n]*|\/\*[\s\S]*?\*\/)|(\d+\.?\d*(?:e[+-]?\d+)?|\.\d+)|("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')|([A-Za-z_$][\w$]*)|(===|!==|==|!=|<=|>=|&&|\|\||[-+*/%()[\],.;=<>!?:{}]))/gy;
@@ -300,7 +300,7 @@ function runExpression(ast, c) {
     };
     return ev(ast);
 }
-const cache = new Map();
+const cache = /*#__PURE__*/ new Map();
 /** Compile (cached); null when outside the subset. */
 function expression(src) {
     if (!cache.has(src)) {

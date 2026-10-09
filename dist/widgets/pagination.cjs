@@ -1,7 +1,7 @@
 'use strict';
 
-var widgets_pagination = require('../chunks/pagination-D0JThbPP.cjs');
-require('../chunks/base-DBheNxJu.cjs');
+var widgets_pagination = require('../chunks/pagination-DD2oqXhh.cjs');
+require('../chunks/base-B3me2y0o.cjs');
 require('../chunks/shared-BxK1D7EZ.cjs');
 
 

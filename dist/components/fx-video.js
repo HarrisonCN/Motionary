@@ -1,5 +1,5 @@
-import { registerEffects } from '../chunks/registry-BKzyg1JV.js';
-import { p as prefersReducedMotion, v as onFrame } from '../chunks/base-BTev8qxg.js';
+import { registerEffects } from '../chunks/registry-CYojuxi5.js';
+import { p as prefersReducedMotion, v as onFrame } from '../chunks/base-zSGb8ujt.js';
 
 /** Scroll progress of `el` through the viewport: 0 entering at the bottom → 1 leaving at the top (9.4). */
 function scrollProgress(el) {
