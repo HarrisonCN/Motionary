@@ -827,6 +827,30 @@ bell.notify({ text: 'New follower', time: 'now' }); avatar.status = 'away';
 - `<usa-presence name src status speaking story>`: `status`; `PRESENCE_STATES`, `initials()`.
 - Social: `typing-dots` (`color`, `period`) · `message-in` (`side`, `duration`) · `reaction-burst` (`emoji`, `count`, `spread`) · `read-receipt` (`color`) · `mention-glow` (`color`); `fanAngles(n, spread)`.
 
+### v7.5 Widgets: leaderboard, XP bar, badge wall, prize wheel (`components/widgets`) + gamification motion (`motionary/fx/game`)
+
+```html
+<usa-leaderboard me="Ada"><li data-score="980">Ada</li><li data-score="870">Alan</li></usa-leaderboard>
+<usa-xp-bar level="3" xp="40" per="100"></usa-xp-bar>
+<usa-badge-wall><li data-icon="🏆">First win</li><li data-icon="🔥" data-locked>7-day streak</li></usa-badge-wall>
+<usa-prize-wheel segments="10% off,Free ship,Try again,🎁 Gift"></usa-prize-wheel>
+
+<usa-fx effect="achievement-unlock" trigger="enter"><div class="toast"><span data-icon>🏆</span> First win!</div></usa-fx>
+<usa-fx effect="coin-burst" trigger="click"><button>Claim</button></usa-fx>
+```
+```js
+import { defineWidgets } from 'motionary/components/widgets';
+import { registerGamePack } from 'motionary/fx/game';
+defineWidgets(); registerGamePack();
+board.setScore('Grace', 1000); bar.add(75); wall.unlock('7-day streak');
+const i = await wheel.spin(); // usa:result { index, label }
+```
+- `<usa-leaderboard label limit me>`: `rows`, `setScore(name, score)`; `usa:rank`; `rankRows()`.
+- `<usa-xp-bar level xp per>`: `level`, `xp`, `add(n)`; `usa:xp`, `usa:levelup`; `levelFor(level, xp, gain, per)`.
+- `<usa-badge-wall label>`: `badges`, `unlock(name)`; `usa:unlock`; `badgeProgress()`.
+- `<usa-prize-wheel segments duration turns label>`: `segments`, `result`, `spinning`, `spin(index?)`; `usa:result`; `wheelAngle(index, count, turns)`.
+- Game: `achievement-unlock` (`duration`) · `level-up` (`color`) · `chest-open` (`spark`, `count`) · `coin-burst` (`coin`, `count`, `power`) · `xp-gain` (`text`, `color`); `throwPath(deg, power)`.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

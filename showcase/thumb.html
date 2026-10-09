@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Motionary — live component preview</title>
+  <script>
+    (function () {
+      try {
+        var d = document.documentElement;
+        var q = new URLSearchParams(location.search);
+        var theme = q.get('theme') || localStorage.getItem('usa-showcase:theme') || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        d.setAttribute('data-theme', theme);
+        var lang = localStorage.getItem('usa-showcase:lang') || ((navigator.language || '').toLowerCase().indexOf('zh') === 0 ? 'zh' : 'en');
+        d.setAttribute('lang', lang === 'zh' ? 'zh-CN' : 'en');
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./gallery.css" />
+  <style>
+    /* 7.5: live mini-demo page embedded (iframe) by the Animation Store cards */
+    html, body { margin: 0; height: 100%; overflow: hidden; background: var(--stage); }
+    body { display: grid; place-items: center; }
+    body::before, body::after { display: none !important; }
+    .thumb-fit { position: absolute; left: 50%; top: 50%; width: var(--tw, 340px); transform-origin: 50% 50%; transform: translate(-50%, -50%) scale(var(--ts, 1)); }
+    .thumb-fit .ccard-stage { border: 0; background: transparent; min-height: var(--th, 240px); box-sizing: border-box; }
+    html.is-card .thumb-fit { pointer-events: none; }
+    .thumb-err { color: var(--muted); font: 600 13px/1.4 var(--font); padding: 12px; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="thumb-fit"><div class="ccard-stage" id="thumb-stage"></div></div>
+  <usa-toaster position="bottom-right"></usa-toaster>
+  <script type="module" src="./thumb.js"></script>
+</body>
+</html>

@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.5.0] - 2026-10-08
+
+### Added
+- **4 new components (7.5)** in `motionary/components/widgets` (also in `dist/widgets.umd.js`):
+  - `<usa-leaderboard>` — ranked list from `<li data-score>` children or `rows`: on score changes rows glide to their new rank (FLIP), climbers flash green with ▲n, fallers red with ▼n, scores roll; 🥇🥈🥉 for the top three; `limit`, `me`; `setScore()`; `usa:rank`. `rankRows()`.
+  - `<usa-xp-bar>` — experience bar (`level`, `xp`, `per`): `add(n)` fills smoothly; overflow fills to the end, the level badge pops and the bar restarts with the remainder (multi-level); `usa:xp`, `usa:levelup`. `levelFor()`.
+  - `<usa-badge-wall>` — achievement grid from `<li data-icon data-locked>`: locked badges are grey with 🔒; `unlock(name)` flips the badge to colour with a shine and updates the “n / m unlocked” counter; `badges`, `usa:unlock`. `badgeProgress()`.
+  - `<usa-prize-wheel>` — lottery wheel from `segments`: Spin whirls it, it eases out on a random result (or `spin(index)`), the pointer ticks, the wheel glows; `duration`, `turns`, `result`, `spinning`; `usa:result`. `wheelAngle()`.
+- **Gamification motion — `motionary/fx/game`** (= `motionary/components/fx-game`, `registerGamePack()`, also in `registerEffectPacks()`): `achievement-unlock` (attention), `level-up` (attention), `chest-open` (click), `coin-burst` (click), `xp-gain` (enter). `throwPath()`.
+- Showcase: 6 new gallery cards with copyable code and live demos; Animation Store 311 → 317 items.
+- Note: the plan's “lottery” ships as `<usa-prize-wheel>` (wheel + lottery in one component).
+
+### Accessibility
+- Leaderboard = labelled ordered list ("1. Ada, 980 points"), rank changes announced politely; XP bar = `progressbar` labelled "Level 3, 40 of 100 XP", level-ups announced; badge wall = labelled list, each badge "First win, locked/unlocked", unlocks announced; prize wheel = real button (disabled while spinning), result announced. Reduced motion: rows jump, no flash or roll; bar and level change at once; badges change without flip or shine; the wheel jumps to the result; `achievement-unlock` / `level-up` fade, `chest-open` sets the lid open, `coin-burst` / `xp-gain` do nothing.
+
+### Fixed
+- **Store thumbnails are live demos (user report, mobile ~390px).** Cards in “组件 6.x” (now “Components 6.x–7.x”, 90 items incl. every 7.x widget/effect pack) and “框架 / Frameworks” (5) showed only a generic purple tile with a bouncing emoji or letter. Every component card now renders the real `<usa-*>` element with its gallery demo markup + wiring in a lazily mounted frame (`showcase/thumb.html`, mounted by IntersectionObserver near the viewport, dropped 4 s after leaving it, scaled to fit with no overflow, inert on cards, interactive in the detail view and its “related” minis). Framework cards show a live scroll-reveal demo driven through the real adapter (React hooks / Vue composables via minimal hook stand-ins, the Svelte action, `<scroll-animate>`; Solid via the core) next to its code snippet. Reduced motion: the demos are still, the components follow their own reduced-motion paths. Audit: no Store item (all 317) uses the placeholder any more.
+- Showcase: the global icon rule `svg:not([width]) { width: 1.25em }` in `showcase/styles.css` shrank the SVGs inside live demos — `<usa-gauge>` and `<usa-sparkline>` (and the KPI trend) rendered as a 15 px speck in the component gallery. Scoped to UI icons with `:where(…)`.
+- Store detail for components: dropped the meaningless duration/easing controls, keyframes and scroll-test mode; Replay remounts the live demo; the note no longer says “preview only”.
+
 ## [7.4.0] - 2026-10-08
 
 ### Added

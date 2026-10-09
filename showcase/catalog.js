@@ -177,7 +177,7 @@ export const FRAMEWORK_ITEMS = [
     recipe: 'reveal',
     category: 'framework',
     framework: 'react',
-    glyph: 'R',
+    thumbCode: "import { createReactHooks } from 'motionary/react';\nconst { useScrollAnimate } = createReactHooks(React);\n\nfunction Card() {\n  const ref = useScrollAnimate({ animation: 'fade-in-up' });\n  return <div ref={ref}>Hi</div>;\n}", // 7.5: shown on the card next to the live demo
     title: { en: 'React hooks', zh: 'React Hooks' },
     tags: ['/react', 'useScrollAnimate', 'useScrollStagger'],
     desc: {
@@ -191,7 +191,7 @@ export const FRAMEWORK_ITEMS = [
     recipe: 'reveal',
     category: 'framework',
     framework: 'vue',
-    glyph: 'V',
+    thumbCode: "import { ref, onMounted, onUnmounted } from 'vue';\nimport { createVueComposables } from 'motionary/vue';\nconst { useScrollAnimate } =\n  createVueComposables({ ref, onMounted, onUnmounted });\n\nconst { animateRef } =\n  useScrollAnimate({ animation: 'fade-in-up' });\n// <div ref=\"animateRef\">Hi</div>", // 7.5: shown on the card next to the live demo
     title: { en: 'Vue composables', zh: 'Vue 组合式函数' },
     tags: ['/vue', 'composables', 'Vue 3'],
     desc: {
@@ -205,7 +205,7 @@ export const FRAMEWORK_ITEMS = [
     recipe: 'reveal',
     category: 'framework',
     framework: 'svelte',
-    glyph: 'S',
+    thumbCode: "<script>\n  import { scrollAnimate } from 'motionary/svelte';\n</script>\n\n<div use:scrollAnimate={{ animation: 'fade-in-up' }}>\n  Hi\n</div>", // 7.5: shown on the card next to the live demo
     title: { en: 'Svelte actions', zh: 'Svelte Actions' },
     tags: ['/svelte', 'use:', 'Svelte 3–5'],
     desc: {
@@ -219,7 +219,7 @@ export const FRAMEWORK_ITEMS = [
     recipe: 'reveal',
     category: 'framework',
     framework: 'solid',
-    glyph: 'So',
+    thumbCode: "import { scrollAnimate } from 'motionary/solid';\nscrollAnimate; // keep the directive\n\n<div use:scrollAnimate={{ animation: 'fade-in-up' }}>\n  Hi\n</div>", // 7.5: shown on the card next to the live demo
     title: { en: 'Solid directives', zh: 'Solid 指令' },
     tags: ['/solid', 'use:', 'ref'],
     desc: {
@@ -233,7 +233,7 @@ export const FRAMEWORK_ITEMS = [
     recipe: 'reveal',
     category: 'framework',
     framework: 'element',
-    glyph: '</>',
+    thumbCode: "<script type=\"module\" src=\n  \"https://unpkg.com/motionary/dist/element.js\">\n</script>\n\n<scroll-animate animation=\"fade-in-up\" repeat>\n  <div>Hi</div>\n</scroll-animate>", // 7.5: shown on the card next to the live demo
     title: { en: '<scroll-animate> element', zh: '<scroll-animate> 组件' },
     tags: ['/element', 'Web Component', 'no build'],
     desc: {

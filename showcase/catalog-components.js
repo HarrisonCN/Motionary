@@ -6,9 +6,9 @@
 import { components as SIX } from './catalog/widgets.js';
 import { componentSnippets } from './components-catalog.js';
 
-export const COMPONENT_CATEGORY = { id: 'components', en: 'Components 6.x', zh: '组件 6.x' };
+export const COMPONENT_CATEGORY = { id: 'components', en: 'Components 6.x–7.x', zh: '组件 6.x–7.x' };
 
-const GLYPHS = { carousel: '🎠', 'tab-bar': '⇆', disclosure: '▾', stories: '◔', 'fx-gpu': '🔥', 'fx-nature': '🌸', 'fx-splash': '💧', 'toast-stack': '🔔', modal: '🗔', sheet: '⇥', menu: '☰', 'fx-text': '🅰', 'fx-text-loop': '〰', 'fx-text-trail': '✍', 'progress-ring': '◔', odometer: '🔢', 'skeleton-reveal': '▤', 'star-rating': '★', 'fx-light': '💡', 'fx-materials': '🪙', 'fx-god-rays': '🌅', milestones: '⟟', 'masonry-flow': '▦', compare: '◧', 'cube-gallery': '🧊', 'fx-depth': '🧩', 'fx-depth-flip': '🂠', 'fx-origami': '🗞', dock: '⌂', 'nav-morph': '⎯', 'menu-toggle': '≡', tip: '💬', 'fx-morph': '✳', 'fx-blob': '🫧', 'fx-noise': '░', 'stepper': '①', 'pagination': '⋯', 'segmented': '▭', 'switch': '⏻', 'fx-ripple-wipe': '🌊', 'fx-shatter': '💥', 'fx-curl': '📖', 'kanban': '🗂', 'swipe-deck': '🃏', 'weather-card': '⛅', 'pull-cord': '💡', 'fx-weather': '🌧', 'fx-storm': '⛈', 'fx-sky': '🌌', 'fx-cloth': '🧣', 'fx-jelly': '🍮', 'fx-pinball': '🎯', 'date-picker': '📅', 'color-picker': '🎨', 'file-drop': '📥', 'keyframe-editor': '🎞', 'fx-focus': '◌', 'fx-success': '✅', 'music-player': '🎵', 'volume-knob': '🎛', 'equalizer': '🎚', 'lyrics': '🎤', 'fx-scope': '〰', 'fx-spectrum': '📊', 'fx-vinyl': '💿', 'bar-chart': '📊', 'gauge': '⏲', 'sparkline': '📈', 'kpi': '💹', 'fx-bars': '📶', 'fx-line': '〽', 'fx-flow': '🔀', 'add-to-cart': '🛍', 'cart-drawer': '🛒', 'product-gallery': '🖼', 'countdown': '⏳', 'fx-cart': '🛒', 'fx-price': '🏷', 'message-list': '💬', 'reactions': '😀', 'notification-bell': '🔔', 'presence': '🟢', 'fx-chat': '💭', 'fx-react': '❤' };
+const GLYPHS = { carousel: '🎠', 'tab-bar': '⇆', disclosure: '▾', stories: '◔', 'fx-gpu': '🔥', 'fx-nature': '🌸', 'fx-splash': '💧', 'toast-stack': '🔔', modal: '🗔', sheet: '⇥', menu: '☰', 'fx-text': '🅰', 'fx-text-loop': '〰', 'fx-text-trail': '✍', 'progress-ring': '◔', odometer: '🔢', 'skeleton-reveal': '▤', 'star-rating': '★', 'fx-light': '💡', 'fx-materials': '🪙', 'fx-god-rays': '🌅', milestones: '⟟', 'masonry-flow': '▦', compare: '◧', 'cube-gallery': '🧊', 'fx-depth': '🧩', 'fx-depth-flip': '🂠', 'fx-origami': '🗞', dock: '⌂', 'nav-morph': '⎯', 'menu-toggle': '≡', tip: '💬', 'fx-morph': '✳', 'fx-blob': '🫧', 'fx-noise': '░', 'stepper': '①', 'pagination': '⋯', 'segmented': '▭', 'switch': '⏻', 'fx-ripple-wipe': '🌊', 'fx-shatter': '💥', 'fx-curl': '📖', 'kanban': '🗂', 'swipe-deck': '🃏', 'weather-card': '⛅', 'pull-cord': '💡', 'fx-weather': '🌧', 'fx-storm': '⛈', 'fx-sky': '🌌', 'fx-cloth': '🧣', 'fx-jelly': '🍮', 'fx-pinball': '🎯', 'date-picker': '📅', 'color-picker': '🎨', 'file-drop': '📥', 'keyframe-editor': '🎞', 'fx-focus': '◌', 'fx-success': '✅', 'music-player': '🎵', 'volume-knob': '🎛', 'equalizer': '🎚', 'lyrics': '🎤', 'fx-scope': '〰', 'fx-spectrum': '📊', 'fx-vinyl': '💿', 'bar-chart': '📊', 'gauge': '⏲', 'sparkline': '📈', 'kpi': '💹', 'fx-bars': '📶', 'fx-line': '〽', 'fx-flow': '🔀', 'add-to-cart': '🛍', 'cart-drawer': '🛒', 'product-gallery': '🖼', 'countdown': '⏳', 'fx-cart': '🛒', 'fx-price': '🏷', 'message-list': '💬', 'reactions': '😀', 'notification-bell': '🔔', 'presence': '🟢', 'fx-chat': '💭', 'fx-react': '❤', 'leaderboard': '🏅', 'xp-bar': '⭐', 'badge-wall': '🏆', 'prize-wheel': '🎡', 'fx-unlock': '🔓', 'fx-loot': '🪙' };
 
 const svelte = (esm, html) => `<script>\n  ${esm.split('\n/*')[0].trim().replace(/\n/g, '\n  ')}\n</script>\n\n${html}`;
 
@@ -23,7 +23,7 @@ export const COMPONENT_ITEMS = SIX.map((c) => {
     category: 'components',
     gallery: c.id,
     since: c.since,
-    glyph: GLYPHS[c.id] || '✦',
+    icon: GLYPHS[c.id] || '✦', // metadata only — 7.5+: the card thumbnail is the live component (thumb.html)
     title: c.title,
     desc: c.desc,
     tags: [c.tag === 'usa-fx' ? `effect pack ${c.since}` : `<${c.tag}>`, ...c.tags.slice(0, 3)],

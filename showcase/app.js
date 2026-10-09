@@ -212,11 +212,161 @@ function autoScroll(scroller, axis = 'y', period = 4200) {
 }
 
 /**
+ * 7.5: live thumbnail of a 6.x/7.x component — thumb.html renders the component
+ * gallery's demo markup + wiring with the real <usa-*> element from dist/.
+ * Cards mount it lazily (IntersectionObserver) and drop it again once it has been
+ * off screen for a while, so only the cards near the viewport cost anything.
+ */
+function liveComponent(item, host, { interactive, cleanups }) {
+  host.classList.add('has-live');
+  let frame = null;
+  let dropTimer = 0;
+  const src = () => `thumb.html?id=${encodeURIComponent(item.gallery)}&mode=${interactive ? 'detail' : 'card'}`;
+  const mount = () => {
+    clearTimeout(dropTimer);
+    if (frame) return;
+    frame = h('iframe', {
+      class: 'live-thumb',
+      src: src(),
+      title: `${L(item.title)} — live preview`,
+      loading: 'lazy',
+      tabindex: interactive ? null : '-1',
+      'aria-hidden': interactive ? null : 'true',
+    });
+    frame.addEventListener('load', () => host.classList.add('is-live'), { once: true });
+    host.append(frame);
+  };
+  const drop = () => {
+    clearTimeout(dropTimer);
+    dropTimer = setTimeout(() => {
+      frame?.remove();
+      frame = null;
+      host.classList.remove('is-live');
+    }, 4000);
+  };
+  if (interactive) mount();
+  else {
+    const io = new IntersectionObserver(([e]) => (e.isIntersecting ? mount() : frame && drop()), { rootMargin: '160px 0px' });
+    io.observe(host);
+    cleanups.push(() => io.disconnect());
+  }
+  cleanups.push(() => {
+    clearTimeout(dropTimer);
+    frame?.remove();
+    frame = null;
+  });
+  return {
+    play() {
+      // Replay = remount the live demo from scratch
+      if (frame) frame.src = src();
+      else mount();
+    },
+    cycle: () => 4000,
+    targets: [],
+    live: true,
+  };
+}
+
+const adapterCache = {};
+/** dist/react.js, dist/vue.js … loaded on first use (null when unavailable). */
+const adapterModule = (name) => (adapterCache[name] ||= import(base + name + '.js').catch(() => null));
+
+/** 7.5: framework cards — tiles revealed by the adapter inside an auto-scrolling box, plus the adapter code. */
+function frameworkDemo(item, host, getState, cleanups) {
+  const box = h('div', { class: 'fw-demo' });
+  const scroller = h('div', { class: 'fw-scroller', tabindex: '-1', 'aria-hidden': 'true' });
+  const track = h('div', { class: 'fw-track' });
+  scroller.append(track);
+  const pre = h('pre', { class: 'fw-snip', 'aria-label': `${L(item.title)} code`, html: highlight(item.thumbCode || '') });
+  box.append(pre, scroller);
+  host.append(box);
+  let stops = [];
+  let inner = null;
+  let generation = 0;
+  const build = () => {
+    generation++;
+    stops.forEach((fn) => fn());
+    stops = [];
+    inner?.destroy();
+    inner = null;
+    track.textContent = '';
+    const st = getState();
+    const { exit, repeat, delay, ...timed } = revealOptions(lib.PRESETS, st);
+    const opts = { ...timed, repeat: true };
+    const tiles = [];
+    for (let i = 0; i < 7; i++) {
+      const useEl = item.framework === 'element' && customElements.get('scroll-animate');
+      const tile = h(useEl ? 'scroll-animate' : 'div', { class: `fw-tile fw-tile-${i % 4}` }, [h('span'), h('i')]);
+      if (useEl) {
+        tile.setAttribute('animation', typeof opts.animation === 'string' ? opts.animation : 'fade-in-up');
+        tile.setAttribute('duration', String(opts.duration));
+        if (typeof opts.easing === 'string') tile.setAttribute('easing', opts.easing);
+        tile.setAttribute('repeat', '');
+      }
+      track.append(tile);
+      tiles.push(tile);
+    }
+    if (item.framework === 'element' && customElements.get('scroll-animate')) return; // the element animates itself
+    const gen = ++generation;
+    const viaCore = () => {
+      inner = lib.createScrollAnimate({ root: scroller });
+      inner.observe(tiles, opts);
+    };
+    if (!['react', 'vue', 'svelte'].includes(item.framework)) return viaCore();
+    // Attach once the card is in the document (like a framework mounting it)
+    const ready = item.framework === 'svelte' ? Promise.resolve(svelteMod) : adapterModule(item.framework);
+    ready.then((mod) => {
+      if (gen !== generation) return;
+      if (!mod) return viaCore();
+      // The real adapter, driven by a minimal stand-in for the framework's hook / lifecycle API
+      tiles.forEach((tile) => {
+        const effects = [];
+        if (item.framework === 'svelte') {
+          const a = mod.scrollAnimate(tile, opts); // the real Svelte action, no Svelte runtime needed
+          stops.push(() => a && a.destroy && a.destroy());
+        } else if (item.framework === 'react') {
+          const React = { useRef: (v) => ({ current: v }), useEffect: (fn) => effects.push(fn) };
+          const ref = mod.createReactHooks(React).useScrollAnimate(opts);
+          ref.current = tile;
+          effects.forEach((fn) => {
+            const undo = fn();
+            if (typeof undo === 'function') stops.push(undo);
+          });
+        } else {
+          const Vue = { ref: (v) => ({ value: v }), onMounted: (fn) => effects.push(fn), onUnmounted: (fn) => stops.push(fn) };
+          const { animateRef } = mod.createVueComposables(Vue).useScrollAnimate(opts);
+          animateRef.value = tile;
+          effects.forEach((fn) => fn());
+        }
+      });
+    });
+  };
+  build();
+  const scroll = autoScroll(scroller, 'y', 5200);
+  cleanups.push(() => {
+    scroll.stop();
+    stops.forEach((fn) => fn());
+    inner?.destroy();
+  });
+  return {
+    play() {
+      scroll.start();
+    },
+    rebuild: build,
+    cycle: () => 0,
+    targets: [],
+    scroller: () => scroller,
+    scrollLinked: true,
+    stopScroll: () => scroll.stop(),
+  };
+}
+
+/**
  * Build a demo for `item` inside `host`.
  * Returns { play(), startLoop(), stopLoop(), update(state), destroy(), cycle() }.
  * `firstReveal`: let the library reveal it the first time it scrolls into view.
  */
-function createDemo(item, host, state, { firstReveal = false } = {}) {
+function createDemo(item, host, state, { firstReveal = false, mini = false } = {}) {
   let st = { ...state };
   let loopTimer = 0;
   let looping = false;
@@ -228,12 +378,17 @@ function createDemo(item, host, state, { firstReveal = false } = {}) {
   };
   let api;
 
-  if (item.recipe === 'reveal') {
+  if (item.kind === 'component' && item.gallery) {
+    // 7.5: the real component, live — its gallery demo in a lazily mounted, sandboxed frame
+    api = liveComponent(item, host, { interactive: !firstReveal && !mini, cleanups });
+  } else if (item.kind === 'framework') {
+    // 7.5: a live scroll-animation demo driven through the adapter, next to its code
+    api = frameworkDemo(item, host, () => st, cleanups);
+  } else if (item.recipe === 'reveal') {
     const isElement = item.framework === 'element';
     // The real <scroll-animate> element on cards; a plain div in the detail stage (driven by animate())
     const el = isElement && firstReveal && customElements.get('scroll-animate') ? h('scroll-animate') : h('div');
-    el.className = 'obj' + (item.glyph ? ' glyph' : '');
-    if (item.glyph) el.textContent = item.glyph;
+    el.className = 'obj';
     host.append(el);
     const opts = () => revealOptions(lib.PRESETS, st);
     if (firstReveal) {
@@ -397,13 +552,14 @@ function createDemo(item, host, state, { firstReveal = false } = {}) {
       return looping;
     },
     startLoop(offset = 0) {
-      if (looping || reduced()) return;
+      if (api.live || looping || reduced()) return;
       looping = true;
       if (api.scrollLinked) api.play();
       else if (offset) loopTimer = setTimeout(loop, offset);
       else loop();
     },
     stopLoop() {
+      if (api.live) return;
       looping = false;
       clearTimeout(loopTimer);
       if (api.scrollLinked) api.stopScroll();
@@ -603,6 +759,7 @@ const detail = {
   pushed: false,
   lastFocus: null,
   replayTimer: 0,
+  minis: [],
 };
 const detailOpen = () => !!detail.id;
 
@@ -629,7 +786,7 @@ function controlDefs() {
 }
 
 function controlsFor(item) {
-  if (item.kind === 'component') return ['duration', 'easing'];
+  if (item.kind === 'component') return []; // 7.5: a live widget — its own options live in the gallery card
   switch (item.recipe) {
     case 'stagger':
       return ['animation', 'stagger', 'duration', 'easing'];
@@ -826,7 +983,7 @@ function updateLoopButton() {
 }
 
 function liveNote(item) {
-  if (item.kind === 'component') return ui.lang === 'zh' ? '卡片仅为预览；真实组件的在线演示见组件库。' : 'Preview only — the live component runs in the components gallery.';
+  if (item.kind === 'component') return ui.lang === 'zh' ? '这是真实组件的在线演示（来自 dist/），可直接操作；更多参数见组件库。' : 'This is the real component running live from dist/ — try it. More options in the components gallery.';
   if (item.framework === 'element') return T('detail.live', { what: '<scroll-animate> (dist/element.js)' });
   if (item.framework === 'svelte') return T('detail.live', { what: 'scrollAnimate action (dist/svelte.js)' }) + ' ' + T('detail.demoNote');
   if (item.framework) return T('detail.demoNote');
@@ -847,6 +1004,8 @@ function renderDetail(item, keepState) {
   detail.id = item.id;
   if (detail.demo) detail.demo.destroy();
   if (detail.scrollTest) detail.scrollTest.destroy();
+  detail.minis.forEach((m) => m.destroy());
+  detail.minis = [];
   detail.demo = null;
   detail.scrollTest = null;
   sheet.textContent = '';
@@ -859,13 +1018,13 @@ function renderDetail(item, keepState) {
     fav,
   ]);
   const stage = h('div', { class: 'big-stage', id: 'big-stage' });
-  const isReveal = item.recipe === 'reveal';
+  const isReveal = item.recipe === 'reveal' && item.kind !== 'component';
   const bar = h('div', { class: 'stage-bar' });
   if (item.recipe === 'parallax' || item.recipe === 'progress' || isEngine(item)) {
     bar.append(h('button', { class: 'pill-btn primary', type: 'button', 'data-loop': true }));
   } else {
     bar.append(h('button', { class: 'pill-btn primary', type: 'button', 'data-replay': true, html: `${ICON.replay}<span>${T('detail.replay')}</span>` }));
-    bar.append(h('button', { class: 'pill-btn', type: 'button', 'data-loop': true }));
+    if (item.kind !== 'component') bar.append(h('button', { class: 'pill-btn', type: 'button', 'data-loop': true }));
   }
   if (isReveal) {
     bar.append(
@@ -894,7 +1053,7 @@ function renderDetail(item, keepState) {
     );
   }
   right.append(
-    h('section', {}, [h('h3', { class: 'section-title', text: T('detail.options') }), h('div', { class: 'controls', id: 'controls' })]),
+    h('section', { hidden: item.kind === 'component' }, [h('h3', { class: 'section-title', text: T('detail.options') }), h('div', { class: 'controls', id: 'controls' })]),
     h('section', {}, [
       h('h3', { class: 'section-title', text: T('detail.install') }),
       h('div', { class: 'install' }, [
@@ -926,7 +1085,7 @@ function renderDetail(item, keepState) {
           { class: 'related' },
           related.map((r) =>
             h('a', { class: 'mini', href: `#${r.id}`, 'data-related': r.id }, [
-              h('div', { class: 'mini-stage', 'data-cat': r.category, 'data-fw': r.framework }, [h('div', { class: 'obj' + (r.glyph ? ' glyph' : ''), text: r.glyph || '' })]),
+              miniStage(r),
               h('span', { text: L(r.title) }),
             ])
           )
@@ -948,6 +1107,16 @@ function renderDetail(item, keepState) {
   selectTab(detail.tab);
   updateLoopButton();
   if (detail.mode === 'scroll') setMode('scroll');
+}
+
+/** Related-item thumbnail: the live demo for components / frameworks, the preset's tile otherwise. */
+function miniStage(r) {
+  const stage = h('div', { class: 'mini-stage', 'data-cat': r.category, 'data-fw': r.framework });
+  if (r.kind === 'component' || r.kind === 'framework') {
+    const demo = createDemo(r, stage, defaultState(r), { firstReveal: true, mini: true });
+    detail.minis.push(demo);
+  } else stage.append(h('div', { class: 'obj' }));
+  return stage;
 }
 
 function startDetailMotion() {
@@ -1068,6 +1237,8 @@ function closeDetail() {
   const hide = () => {
     if (detail.demo) detail.demo.destroy();
     if (detail.scrollTest) detail.scrollTest.destroy();
+    detail.minis.forEach((m) => m.destroy());
+    detail.minis = [];
     detail.demo = detail.scrollTest = null;
     if (!detail.id) detail.item = null;
     root.hidden = true;
@@ -1180,6 +1351,14 @@ function setTheme(theme) {
     /* ignore */
   }
   $('meta[name="theme-color"]').setAttribute('content', theme === 'light' ? '#f6f7fb' : '#0b0d12');
+  // 7.5: live component thumbnails follow the theme
+  $$('iframe.live-thumb').forEach((f) => {
+    try {
+      f.contentDocument?.documentElement.setAttribute('data-theme', theme);
+    } catch {
+      /* cross-origin (never: same-origin thumb.html) */
+    }
+  });
 }
 
 /* ------------------------------------------------------------------ */

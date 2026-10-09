@@ -347,7 +347,7 @@
   {
     "name": "dist/widgets.umd.js (minified, 6.x widgets + 6.x effect packs)",
     "file": "dist/widgets.umd.js",
-    "limit": 98560
+    "limit": 110080
   },
   {
     "name": "import 'motionary/components/widgets'",

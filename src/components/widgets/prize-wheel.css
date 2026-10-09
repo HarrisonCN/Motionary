@@ -1,0 +1,9 @@
+usa-prize-wheel{display:inline-block;--s:var(--usa-pw-size,200px);font:700 11px/1 system-ui,sans-serif}
+.usa-pw-box{position:relative;display:grid;place-items:center;width:var(--s);height:var(--s)}
+.usa-pw-wheel{position:absolute;inset:0;border-radius:50%;box-shadow:0 0 0 4px #fff,0 0 0 6px rgba(15,23,42,.15),0 8px 24px rgba(15,23,42,.2);will-change:transform}
+.usa-pw-label{position:absolute;left:50%;top:0;width:0;height:50%;display:flex;justify-content:center;padding-top:10px;transform-origin:0 100%;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.35);white-space:nowrap}
+.usa-pw-pointer{position:absolute;top:-10px;left:50%;margin-left:-9px;width:0;height:0;border:9px solid transparent;border-top:16px solid var(--usa-pw-pointer,#0f172a);border-bottom:0;z-index:2;transform-origin:50% 0}
+.usa-pw-btn{position:relative;z-index:1;width:30%;aspect-ratio:1;border:0;border-radius:50%;background:#fff;color:#0f172a;font:800 13px/1 system-ui,sans-serif;box-shadow:0 2px 8px rgba(15,23,42,.25);cursor:pointer}
+.usa-pw-btn:disabled{cursor:progress;opacity:.85}
+usa-prize-wheel[data-done] .usa-pw-wheel{box-shadow:0 0 0 4px #fff,0 0 0 6px #facc15,0 0 28px rgba(250,204,21,.6)}
+.usa-pw-live{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}

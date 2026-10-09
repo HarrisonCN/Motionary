@@ -68,8 +68,9 @@ body {
 a { color: inherit; }
 button, input, select { font: inherit; color: inherit; }
 button { cursor: pointer; }
-svg:not([width]) { width: 1.25em; height: 1.25em; }
-svg { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+/* UI icons only — 7.5: never the SVGs inside live component demos (gauge, sparkline … were shrunk to 1.25em) */
+:where(svg:not([width]):not(.ccard-stage svg, .card-stage svg, .big-stage svg, .mini-stage svg, #thumb-stage svg)) { width: 1.25em; height: 1.25em; }
+:where(svg:not(.ccard-stage svg, .card-stage svg, .big-stage svg, .mini-stage svg, #thumb-stage svg)) { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 svg.i-fill { fill: currentColor; stroke: none; }
 code, kbd, pre { font-family: var(--mono); }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
@@ -408,6 +409,29 @@ code, kbd, pre { font-family: var(--mono); }
 @media (max-width: 360px) {
   .grid { grid-template-columns: 1fr; }
 }
+
+/* ---------------- 7.5: live thumbnails ---------------- */
+/* Components 6.x–7.x: the real component (thumb.html) in a lazily mounted frame */
+.has-live { container-type: size; }
+.has-live::before { display: none; }
+.live-thumb { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: transparent; opacity: 0; transition: opacity 0.35s var(--ease-out); color-scheme: normal; }
+.card-stage .live-thumb, .mini-stage .live-thumb { pointer-events: none; }
+.is-live .live-thumb { opacity: 1; }
+.mini-stage.has-live { position: relative; }
+/* Frameworks: tiles revealed by the adapter in an auto-scrolling box + the adapter code */
+.card-stage:has(.fw-demo), .big-stage:has(.fw-demo), .mini-stage:has(.fw-demo) { container-type: size; }
+.fw-demo { position: absolute; inset: 0; display: grid; grid-template-columns: 1fr 36%; gap: 3cqw; padding: 13cqw 4cqw 5cqw; box-sizing: border-box; }
+.fw-scroller { position: relative; overflow: hidden auto; scrollbar-width: none; border-radius: 3cqw; background: color-mix(in srgb, var(--surface) 70%, transparent); border: 1px solid var(--line); overscroll-behavior: contain; }
+.fw-scroller::-webkit-scrollbar { display: none; }
+.fw-track { display: grid; gap: 4cqw; padding: 10cqh 3.5cqw 40cqh; }
+.fw-tile { display: grid; gap: 1.6cqw; padding: 3cqw; border-radius: 2.6cqw; background: linear-gradient(135deg, var(--g1, var(--accent)), var(--g2, #b59cff)); }
+.fw-tile span, .fw-tile i { display: block; height: 2.4cqw; border-radius: 99px; background: rgb(255 255 255 / 0.75); }
+.fw-tile i { width: 60%; background: rgb(255 255 255 / 0.45); }
+.fw-tile-1 { --g1: #22d3ee; --g2: #6ee7b7; }
+.fw-tile-2 { --g1: #ff7ab6; --g2: #ffb86b; }
+.fw-tile-3 { --g1: #3b82f6; --g2: #22d3ee; }
+.fw-snip { margin: 0; overflow: hidden; white-space: pre; font: 500 clamp(5px, 3.1cqw, 12.5px)/1.45 var(--mono); color: var(--text); background: var(--code-bg); border: 1px solid var(--line); border-radius: 3cqw; padding: 3cqw; text-align: left; mask-image: linear-gradient(90deg, #000 85%, transparent); }
+.big-stage .fw-demo { padding: 4cqw; }
 
 /* The UI's own motion is opt-in (the library handles the demos itself) */
 @media (prefers-reduced-motion: reduce) {

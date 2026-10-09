@@ -23,6 +23,8 @@ import { SHOP_FX, registerShopPack } from './fx-shop.js';
 export { arcPath } from './fx-shop.js';
 import { SOCIAL_FX, registerSocialPack } from './fx-social.js';
 export { fanAngles } from './fx-social.js';
+import { GAME_FX, registerGamePack } from './fx-game.js';
+export { throwPath } from './fx-game.js';
 import '../chunks/registry-CyKExAmE.js';
 import '../chunks/base-2-yYc93C.js';
 import '../chunks/generative-2LhxG5BJ.js';
@@ -44,6 +46,7 @@ const EFFECT_PACKS = {
     chart: CHART_FX,
     shop: SHOP_FX,
     social: SOCIAL_FX,
+    game: GAME_FX,
 };
 /** Register every 6.x effect pack (idempotent). */
 function registerEffectPacks() {
@@ -60,7 +63,8 @@ function registerEffectPacks() {
     registerChartPack();
     registerShopPack();
     registerSocialPack();
+    registerGamePack();
 }
 
-export { CHART_FX, DEPTH3_FX, EFFECT_PACKS, FOCUS_FX, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, PHYSICS2_FX, SHOP_FX, SOCIAL_FX, TEXT3_FX, TRANSITIONS2_FX, WEATHER_FX, register3dPack, registerChartPack, registerEffectPacks, registerFocusPack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerPhysicsPack, registerShopPack, registerSocialPack, registerTextPack, registerTransitionsPack, registerWeatherPack };
+export { CHART_FX, DEPTH3_FX, EFFECT_PACKS, FOCUS_FX, GAME_FX, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, PHYSICS2_FX, SHOP_FX, SOCIAL_FX, TEXT3_FX, TRANSITIONS2_FX, WEATHER_FX, register3dPack, registerChartPack, registerEffectPacks, registerFocusPack, registerGamePack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerPhysicsPack, registerShopPack, registerSocialPack, registerTextPack, registerTransitionsPack, registerWeatherPack };
 //# sourceMappingURL=fx2.js.map
