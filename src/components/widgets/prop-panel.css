@@ -1,0 +1,11 @@
+usa-prop-panel{display:block;max-width:100%;font:13px/1.4 system-ui,sans-serif;color:#0f172a}
+usa-prop-panel .usa-pp{display:grid;gap:8px;margin:0;padding:12px;border:1px solid rgba(15,23,42,.12);border-radius:12px;background:#fff}
+usa-prop-panel .usa-pp-row{display:grid;grid-template-columns:minmax(64px,auto) 1fr auto;align-items:center;gap:8px}
+usa-prop-panel label{font-weight:600;color:#334155;font-family:ui-monospace,monospace;font-size:12px}
+usa-prop-panel input[type=text],usa-prop-panel input[type=number],usa-prop-panel select{min-width:0;width:100%;box-sizing:border-box;padding:5px 8px;border:1px solid #cbd5e1;border-radius:6px;font:inherit}
+usa-prop-panel input[type=range]{width:100%;min-width:0;accent-color:#4f46e5}
+usa-prop-panel input[type=checkbox]{grid-column:2;justify-self:start;width:16px;height:16px;accent-color:#4f46e5}
+usa-prop-panel output{min-width:2.5em;text-align:right;font:12px ui-monospace,monospace;color:#64748b}
+usa-prop-panel .usa-pp-empty{margin:0;color:#64748b}
+usa-prop-panel .usa-pp-row{border-radius:6px}
+usa-prop-panel .usa-pp-reset{justify-self:start;padding:5px 12px;border:1px solid #cbd5e1;border-radius:7px;background:#fff;font:inherit;cursor:pointer}

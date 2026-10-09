@@ -17,7 +17,7 @@
  */
 import type { EffectDefinition, EffectTrigger } from '../fx/registry';
 import { bindEffect, playEffect } from '../fx/registry';
-import { adoptStyles, defineElement, type UsaElement } from '../base';
+import { adoptStyles, defineElement, deprecate, type UsaElement } from '../base';
 import { applyMotionTokens, mergeMotionTokens, motionTokensToVars, type DeepPartialTokens } from '../tokens/index';
 import { overlay } from './shared';
 
@@ -76,6 +76,10 @@ export const THEMES: Record<string, ThemePack> = {
 };
 
 export const THEME_NAMES = Object.keys(THEMES);
+/** The 5.8 motion theme packs (8.9 name of `THEMES`). */
+export const MOTION_THEMES = THEMES;
+/** Names of the 5.8 motion theme packs (8.9 name of `THEME_NAMES`). */
+export const MOTION_THEME_NAMES = THEME_NAMES;
 
 const BASE_CSS = `[data-usa-theme]{background:var(--usa-theme-bg);color:var(--usa-theme-fg);font-family:var(--usa-theme-font)}
 [data-usa-theme] .usa-surface{background:var(--usa-theme-surface);border:var(--usa-theme-border);border-radius:var(--usa-theme-radius);box-shadow:var(--usa-theme-shadow)}
@@ -102,8 +106,17 @@ export function themeCss(t: string | ThemePack, selector?: string): string {
   return `${selector || `[data-usa-theme=${p.name}]`}{${Object.entries(themeVars(p)).map(([k, v]) => `${k}:${v}`).join(';')}}`;
 }
 
-/** Apply a theme to `root` (default `<html>`). Returns an undo. */
+/**
+ * Apply a motion theme to `root` (default `<html>`). Returns an undo.
+ * @deprecated 8.9 — removed in 9.0. Use `applyMotionTheme()` (same signature); `npx usa-codemod-9 --write src`.
+ */
 export function applyTheme(t: string | ThemePack, root?: HTMLElement): () => void {
+  deprecate('applyTheme', 'applyTheme() is deprecated and removed in 9.0 — use applyMotionTheme() (same signature). Run `npx usa-codemod-9 --write src`.');
+  return applyMotionTheme(t, root);
+}
+
+/** Apply a 5.8 motion theme to `root` (default `<html>`). Returns an undo (8.9). */
+export function applyMotionTheme(t: string | ThemePack, root?: HTMLElement): () => void {
   const p = pack(t);
   const el = root || document.documentElement;
   adoptStyles('usa-theme', BASE_CSS);
@@ -211,7 +224,8 @@ export function defineTheme(tag = 'usa-theme'): CustomElementConstructor | undef
           return THEMES[n] ? n : 'neon';
         }
         mount(): void {
-          this.onCleanup(applyTheme(this.theme, this));
+          if (this.localName === 'usa-theme') deprecate('usa-theme', '<usa-theme> is deprecated and removed in 9.0 — use <usa-motion-theme> (same name / data-theme-fx). Run `npx usa-codemod-9 --write src`.');
+          this.onCleanup(applyMotionTheme(this.theme, this));
           this.querySelectorAll<HTMLElement>('[data-theme-fx]').forEach((el) => {
             const role = (el.dataset.themeFx || 'click') as ThemeRole;
             if (!THEME_ROLES.includes(role)) return;
@@ -227,4 +241,9 @@ export function defineTheme(tag = 'usa-theme'): CustomElementConstructor | undef
       },
     { id: 'usa-theme-el', text: 'usa-theme{display:block}' }
   );
+}
+
+/** `<usa-motion-theme name="neon">` — the 8.9 name of `<usa-theme>` (removed in 9.0). */
+export function defineMotionTheme(tag = 'usa-motion-theme'): CustomElementConstructor | undefined {
+  return defineTheme(tag);
 }

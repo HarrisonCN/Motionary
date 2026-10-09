@@ -1,5 +1,9 @@
 # Deprecations
 
+## Deprecated in 8.9, removed in 9.0
+
+See [upgrading-9.md](./upgrading-9.md) — the 5.8 motion-theme names `applyTheme()`, `THEMES`, `THEME_NAMES`, `<usa-theme>` / `defineTheme()` (use `applyMotionTheme()`, `MOTION_THEMES`, `MOTION_THEME_NAMES`, `<usa-motion-theme>` / `defineMotionTheme()`; same behaviour). Run `npx usa-codemod-9 --write src`.
+
 ## Deprecated in 7.9, removed in 8.0 (released)
 
 See [upgrading-8.md](./upgrading-8.md) — `<usa-rating>` / `defineRating()` (use `<usa-star-rating>` / `defineStarRating()`; same `value`, `max`, `readonly`, `label`, `name`; `icon="♥"` → `icon="heart"`). Run `npx usa-codemod-8 --write src`.
