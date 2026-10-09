@@ -52,6 +52,8 @@ interface Geometry {
     indices?: Uint16Array | Uint32Array;
     /** 'triangles' (default), 'lines', 'points'. */
     mode?: 'triangles' | 'lines' | 'points';
+    /** Bump after changing positions / normals in place (10.8: skinning, morph targets) — the renderer re-uploads them. */
+    version?: number;
     /** Renderer cache. */
     _gpu?: unknown;
 }
@@ -131,7 +133,9 @@ declare class GlNode {
  * - files that *require* an extension we do not implement (e.g. Draco /
  *   KTX2 compression) fail with a clear error naming it.
  *
- * Skins, morph targets and animations arrive in 10.8. `parseGlb()` /
+ * 10.8: sparse accessors; skin (JOINTS_0 / WEIGHTS_0) and morph-target data
+ * is kept on each geometry (`geometry.deform`) and played by
+ * `motionary/runtime/gltf-anim` (animations, skinning, morph weights). `parseGlb()` /
  * `gltfToNode()` with an `images` override are pure (SSR / workers).
  */
 
@@ -155,6 +159,7 @@ interface GltfJson {
         scale?: number[];
         skin?: number;
         camera?: number;
+        weights?: number[];
     }[];
     meshes?: {
         name?: string;
@@ -176,7 +181,18 @@ interface GltfJson {
         type: string;
         min?: number[];
         max?: number[];
-        sparse?: unknown;
+        sparse?: {
+            count: number;
+            indices: {
+                bufferView: number;
+                byteOffset?: number;
+                componentType: number;
+            };
+            values: {
+                bufferView: number;
+                byteOffset?: number;
+            };
+        };
     }[];
     bufferViews?: {
         buffer: number;

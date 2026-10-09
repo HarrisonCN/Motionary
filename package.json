@@ -1,6 +1,6 @@
 {
   "name": "motionary",
-  "version": "10.7.0",
+  "version": "10.8.0",
   "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 94 animated Web Components — 214 scroll-reveal presets, card/click/button morphs, physics, page transitions, generative & sound-reactive backgrounds, cursor/gesture effects, themes, micro-interactions, <usa-player>, WebGL. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -1208,6 +1208,16 @@
         "default": "./dist/components/ai.cjs"
       }
     },
+    "./components/snap-carousel": {
+      "import": {
+        "types": "./dist/components/snap-carousel.d.ts",
+        "default": "./dist/components/snap-carousel.js"
+      },
+      "require": {
+        "types": "./dist/components/snap-carousel.d.cts",
+        "default": "./dist/components/snap-carousel.cjs"
+      }
+    },
     "./components/lite": {
       "import": {
         "types": "./dist/components/lite.d.ts",
@@ -1386,6 +1396,26 @@
       "require": {
         "types": "./dist/runtime/format-scene.d.cts",
         "default": "./dist/runtime/format-scene.cjs"
+      }
+    },
+    "./runtime/drag-snap": {
+      "import": {
+        "types": "./dist/runtime/drag-snap.d.ts",
+        "default": "./dist/runtime/drag-snap.js"
+      },
+      "require": {
+        "types": "./dist/runtime/drag-snap.d.cts",
+        "default": "./dist/runtime/drag-snap.cjs"
+      }
+    },
+    "./runtime/gltf-anim": {
+      "import": {
+        "types": "./dist/runtime/gltf-anim.d.ts",
+        "default": "./dist/runtime/gltf-anim.js"
+      },
+      "require": {
+        "types": "./dist/runtime/gltf-anim.d.cts",
+        "default": "./dist/runtime/gltf-anim.cjs"
       }
     },
     "./manifest.json": "./dist/manifest.json",

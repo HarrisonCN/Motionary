@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [10.8.0] - 2026-10-09
+
+### Added
+- **`motionary/runtime/drag-snap`** — pointer drag along one axis with velocity tracking (last 100 ms), inertial throws (constant deceleration), snap points (nearest to the projected throw; a fast flick always moves one point), rubber-band edges and a critically damped spring on the shared ticker; the click that ends a drag is swallowed, clicks inside still work. `createDragSnap(el, { snap, onUpdate, onSnap, … })` → `snapTo()`, `setPosition()`, `setSnapPoints()`; pure helpers `projectThrow`, `nearestSnap`, `rubberband`, `springStep`, `velocityTracker`. Reduced motion: no inertia, no spring. CDN `dist/runtime/drag-snap.iife.js`; fixed gzip budget.
+- **`<usa-snap-carousel>`** (**Requires: motionary/runtime/drag-snap**) — drag / swipe carousel with real inertia and snapping, slides that keep their own width (peek), `align` (center · start), `gap`, `index`, `autoplay` (pauses on hover, focus, off screen; never under reduced motion), prev / next buttons, dots, ←/→ / Home / End; `next()`, `prev()`, `goTo()`, `controller`, `usa:change`. Without the runtime module it stays a native CSS scroll-snap strip (plus the clear notice). **Shipped as its own entry point `motionary/components/snap-carousel`** — from 10.8 new components are not added to `motionary/components/widgets` or the all-components `motionary/components/lite` bundle, whose fixed 70 KB gzip budget stays as it is.
+- **`motionary/runtime/gltf-anim`** — glTF 2.0 **animation** (translation / rotation / scale / weights channels; `LINEAR` with quaternion slerp, `STEP`, `CUBICSPLINE` Hermite with in / out tangents), **skinning** (joint hierarchy, inverse bind matrices, 4 influences per vertex) and **morph targets** (POSITION + NORMAL deltas; mesh, node and animated weights) for models loaded by `motionary/runtime/format-gltf`, deformed on the CPU so every runtime/gl material works. `gltfAnimator(model, { clip, loop, speed })` → `seek()`, `update(dt)`, `play()` on the shared ticker; `gltfClips`, `sampleChannel`, `applyClip`, `deformModel`, `deformGeometry` are pure. Fixed gzip budget.
+- `motionary/runtime/format-gltf`: **sparse accessors**; skin and morph data are kept on each geometry (`geometry.deform`) and node (`extras.skin`, `extras.weights`). `motionary/runtime/gl`: `geometry.version` — bump it after changing positions / normals and the renderer re-uploads them.
+- **`<usa-gl-scene animation>`** plays a clip (name or index; empty = the first) with `animation-speed`; reduced motion shows the first pose; `animator` property; `usa:load` lists the clips. Animation needs `motionary/runtime/gltf-anim` (all five prerequisite places list it for the new "3D animation" card).
+- **Lottie text layers** in `motionary/runtime/vector`: fonts by family + style (weight / italic), justification, tracking, line height, fill + stroke (stroke over fill), box text with word wrapping, source-text keyframes and source-text expressions.
+- **Lottie expression subset** with Motionary's own interpreter — **no `eval` / `new Function`** (works under a strict CSP; an expression can only call the listed helpers): `time`, `value`, `wiggle()`, `loopOut()` / `loopIn()` (cycle · pingpong · offset · continue, + `…Duration`), `linear()`, `ease()`, `easeIn()`, `easeOut()`, `clamp()`, `valueAtTime()`, `framesToTime()`, `timeToFrames()`, `degreesToRadians()`, `radiansToDegrees()`, `add` / `sub` / `mul` / `div` / `length`, `Math.*`, arithmetic on numbers and arrays, `var` / `$bm_rt =`, comparisons and `?:`. Anything else keeps the keyframed value and `inspectLottie()` lists "expressions outside the supported subset". `evalExpression(src, value, time, fr)` is exported.
+- New gallery / Store cards: snap carousel, 3D animation (a self-made skinned tentacle with two clips), Lottie text + expressions. Self-made, MIT test fixtures: `sample-skin.gltf`, `sample-morph.gltf` (one sparse target), `motionary-tentacle.glb`, `sample-text.json` (credits in `test/fixtures/formats/CREDITS.md`).
+- Prerequisites for both new runtime modules appear in all five places (gallery card, Store detail with the **Requires:** badge, `docs/runtime/drag-snap.md` + `docs/runtime/gltf-anim.md` with compatibility tables, README, AI manifest); the format-gltf and vector compatibility tables are updated.
+
+### Accessibility
+- `<usa-snap-carousel>` is a labelled `region` (`aria-roledescription="carousel"`), slides are `group`s labelled "n of N", the viewport is focusable with ←/→ / Home / End, prev / next are real buttons (disabled at the ends), dots are labelled buttons with `aria-current`, slide changes made with keys or buttons are announced politely; autoplay pauses on hover / focus and is off under reduced motion, where moves are instant.
+- `<usa-gl-scene animation>`: reduced motion shows the first pose instead of playing.
+
+### Deferred (from the 10.8 plan)
+- Cross-platform 3.0 (mini-program / HarmonyOS ArkTS samples, cross-platform previewer) and "manifest covers all effects" are not in this release; they stay on the roadmap after 11.0.
+
 ## [10.7.0] - 2026-10-09
 
 ### Added

@@ -40,7 +40,7 @@ player.play();
 
 ## Exports
 
-`vector` · `loadLottie` · `parseDotLottie` · `unzipEntries` · `lottiePlayer` · `renderLottieFrame` · `inspectLottie` · `propValue` · `transformAt` · `trimContours` · `loadLottieImages`
+`vector` · `evalExpression` · `loadLottie` · `parseDotLottie` · `unzipEntries` · `lottiePlayer` · `renderLottieFrame` · `inspectLottie` · `propValue` · `transformAt` · `trimContours` · `loadLottieImages`
 
 ## Compatibility
 
@@ -57,7 +57,8 @@ player.play();
 | keyframes: per-dimension bezier easing, hold keyframes, v4 + v5 files | ✅ yes |  |
 | dotLottie (.lottie): stored + deflate entries, manifest v1 / v2, several animations, embedded images | ✅ yes | deflate needs the native DecompressionStream |
 | markers → named segments | ✅ yes |  |
-| text layers, expressions | ✕ no | planned for 10.8 (subset) |
+| text layers: fonts by family + style, justification, tracking, line height, fill / stroke, box text (wrapping), source-text keyframes | ✅ yes | 10.8; system / page fonts (glyph outlines in chars are not used); text animators not supported |
+| expressions: time, value, wiggle, loopOut / loopIn (cycle, pingpong, offset, continue), linear / ease, valueAtTime, Math, arithmetic, var / $bm_rt | ✅ yes | 10.8 subset, own interpreter (no eval; CSP-safe); other expressions keep the keyframed value and are listed by inspectLottie() |
 | 3D layers, layer effects, merge paths, repeaters | ✕ no | listed by inspectLottie() / el.unsupported |
 | dotLottie themes / state machines | ✕ no | planned for 10.9 (subset) |
 | SSR / workers | ◐ partial | parsing + unzip are pure; rendering needs a 2D canvas (OffscreenCanvas works) |

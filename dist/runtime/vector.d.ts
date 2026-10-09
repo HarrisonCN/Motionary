@@ -140,8 +140,12 @@ declare class Timeline extends Playable {
  *   `DecompressionStream`), `manifest.json` v1 / v2, several animations,
  *   embedded images.
  *
- * Not supported (documented): 3D layers, effects, text layers (10.8),
- * expressions (10.8 subset), merge paths, repeaters. `lottiePlayer()` is a
+ * 10.8: **text layers** (system / web fonts by family + style, justification,
+ * tracking, line height, fill + stroke, box text with wrapping, source-text
+ * keyframes and expressions) and an **expression subset** (see
+ * `lottie-expr.ts`: time, value, wiggle, loopOut / loopIn, linear / ease,
+ * Math…; no eval). Not supported (documented): 3D layers, effects, text
+ * animators, glyph outlines (`chars`), merge paths, repeaters. `lottiePlayer()` is a
  * runtime timeline (seek, reverse, scrub with `progress`, markers → labels).
  */
 
@@ -153,6 +157,7 @@ interface LottieProp {
     s?: boolean;
 }
 interface LottieLayer {
+    t?: any;
     ty: Num;
     ind?: Num;
     parent?: Num;
@@ -200,13 +205,21 @@ interface LottieAnimation {
         tm: Num;
         dr: Num;
     }[];
+    fonts?: {
+        list?: {
+            fName: string;
+            fFamily?: string;
+            fStyle?: string;
+        }[];
+    };
+    chars?: unknown[];
 }
 /** What the renderer skipped in a file (shown by `inspectLottie()`). */
 interface LottieReport {
     layers: Num;
     unsupported: string[];
 }
-/** Value of an (animated or static) property at frame `f`. */
+/** Value of an (animated or static) property at frame `f` (10.8: with its expression applied). */
 declare function propValue(p: LottieProp | undefined, f: Num, fallback?: any): any;
 type M = [Num, Num, Num, Num, Num, Num];
 /** Transform matrix + opacity (0–1) of a `ks` / `tr` block at frame f. */
@@ -287,7 +300,10 @@ type LottiePlayer = Playable & {
 };
 /** Play a Lottie animation on a canvas as a runtime timeline. */
 declare function lottiePlayer(canvas: HTMLCanvasElement | OffscreenCanvas, animation: LottieAnimation, o?: LottiePlayerOptions): LottiePlayer;
+/** Evaluate a Lottie expression (10.8 subset) on a value at `time` seconds — `undefined` when it is outside the subset. */
+declare function evalExpression(src: string, value: any, time?: number, fr?: number): any;
 interface VectorApi {
+    evalExpression: typeof evalExpression;
     loadLottie: typeof loadLottie;
     parseDotLottie: typeof parseDotLottie;
     unzipEntries: typeof unzipEntries;
@@ -302,5 +318,5 @@ interface VectorApi {
 /** The module object for `use(vector)`. */
 declare const vector: RuntimeModule<VectorApi>;
 
-export { inspectLottie, loadLottie, loadLottieImages, lottiePlayer, parseDotLottie, propValue, renderLottieFrame, transformAt, trimContours, unzipEntries, vector };
+export { evalExpression, inspectLottie, loadLottie, loadLottieImages, lottiePlayer, parseDotLottie, propValue, renderLottieFrame, transformAt, trimContours, unzipEntries, vector };
 export type { DotLottie, LottieAnimation, LottieLayer, LottiePlayer, LottiePlayerOptions, LottieProp, LottieReport, RenderOptions, VectorApi, ZipEntry };

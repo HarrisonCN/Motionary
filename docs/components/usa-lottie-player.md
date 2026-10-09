@@ -58,3 +58,21 @@ defineLottiePlayer(); // registers <usa-lottie-player>
 <usa-lottie-player src="/anim/hero.lottie" autoplay loop label="Hero animation"></usa-lottie-player>
 */
 ```
+
+## Variants
+
+### Lottie player (JSON + dotLottie)
+
+10.6: plays Lottie JSON and dotLottie (.lottie) files with Motionary’s own Canvas 2D renderer — shapes, gradients, trim paths, masks, track mattes, precomps and images; autoplay, loop, bounce, segments / markers, play on hover or scrub with scroll. Requires motionary/runtime/vector — npm i motionary, then use(vector) before it mounts.
+
+```html
+<usa-lottie-player src="/anim/hero.lottie" autoplay loop label="Hero animation"></usa-lottie-player>
+```
+
+### Lottie text + expressions
+
+10.8: the Lottie player now draws text layers (fonts by family and style, justification, tracking, line height, fill and stroke, wrapping box text, source-text keyframes) and runs an expression subset — time, value, wiggle, loopOut / loopIn, linear / ease, Math — with its own interpreter (no eval, CSP-safe). Requires motionary/runtime/vector — npm i motionary, then use(vector).
+
+```html
+<usa-lottie-player src="/anim/title.json" autoplay loop label="Animated title"></usa-lottie-player>
+```

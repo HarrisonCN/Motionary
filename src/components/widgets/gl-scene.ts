@@ -3,6 +3,7 @@ import { runtimeModule } from './runtime-link';
 import type { GlApi, Scene, Camera, Renderer, GlNode } from '../../runtime/gl';
 import type { FormatGltfApi } from '../../runtime/format-gltf';
 import type { FormatObjApi } from '../../runtime/format-obj';
+import type { GltfAnimApi, GltfAnimator } from '../../runtime/gltf-anim';
 import css from './gl-scene.css?raw';
 
 /**
@@ -15,14 +16,18 @@ import css from './gl-scene.css?raw';
  * `auto-rotate` (deg/s; off under reduced motion), `video` (a video URL
  * mapped onto the shape as a texture; `video-scrub` ties its time to the
  * element's scroll position instead of playing), `label` (accessible name).
- * Renders only while visible. `scene`, `camera`, `root`, `reload()`;
- * `usa:load` { nodes, meshes }, `usa:error`.
+ * 10.8: `animation` (clip name or index; empty = the first) plays a glTF
+ * animation with skinning and morph targets (requires
+ * `motionary/runtime/gltf-anim`), `animation-speed`; reduced motion shows
+ * the first pose. Renders only while visible. `scene`, `camera`, `root`,
+ * `animator`, `reload()`; `usa:load` { meshes, animations }, `usa:error`.
  * `<usa-three-scene>` is an alias with the same API.
  */
 export interface UsaGlSceneElement extends UsaElement {
   readonly scene: Scene | null;
   readonly camera: Camera | null;
   readonly root: GlNode | null;
+  readonly animator: GltfAnimator | null;
   reload(): Promise<void>;
 }
 
@@ -32,12 +37,16 @@ export function defineGlScene(tag = 'usa-gl-scene'): CustomElementConstructor | 
     (Base) => {
       class UsaGlScene extends Base {
         static get observedAttributes(): string[] {
-          return ['src', 'shape', 'color', 'metallic', 'roughness', 'background', 'exposure', 'controls', 'auto-rotate', 'video', 'video-scrub', 'label'];
+          return ['src', 'shape', 'color', 'metallic', 'roughness', 'background', 'exposure', 'controls', 'auto-rotate', 'video', 'video-scrub', 'label', 'animation', 'animation-speed'];
         }
         private s: Scene | null = null;
         private cam: Camera | null = null;
         private node: GlNode | null = null;
         private r: Renderer | null = null;
+        private an: GltfAnimator | null = null;
+        get animator(): GltfAnimator | null {
+          return this.an;
+        }
         get scene(): Scene | null {
           return this.s;
         }
@@ -106,7 +115,15 @@ export function defineGlScene(tag = 'usa-gl-scene'): CustomElementConstructor | 
             G.frameNode(cam, n, 1.15);
             let meshes = 0;
             n.traverse((x) => (meshes += x.mesh ? (Array.isArray(x.mesh) ? x.mesh.length : 1) : 0));
-            this.emit('load', { meshes });
+            const clip = this.getAttribute('animation');
+            if (clip !== null && clip !== 'none' && (n.extras as any).gltf) {
+              const A = runtimeModule<GltfAnimApi>(this, 'gltf-anim');
+              if (A) {
+                const an = (this.an = A.gltfAnimator(n, { clip: clip === '' ? 0 : /^\d+$/.test(clip) ? +clip : clip, speed: this.num('animation-speed', 1) }));
+                if (!an.clip && an.clips.length) this.emit('error', { error: `no animation "${clip}" (have: ${an.clips.map((c) => c.name).join(', ')})` });
+              }
+            }
+            this.emit('load', { meshes, animations: this.an ? this.an.clips.map((c) => c.name) : [] });
             this.dataset.loaded = '';
           };
           const src = this.str('src');
@@ -127,6 +144,7 @@ export function defineGlScene(tag = 'usa-gl-scene'): CustomElementConstructor | 
             ctl?.dispose();
             r.dispose();
             this.r = null;
+            this.an = null;
           });
           let visible = false, raf = 0, last = 0, t = 0;
           const frame = (now: number) => {
@@ -141,8 +159,10 @@ export function defineGlScene(tag = 'usa-gl-scene'): CustomElementConstructor | 
               const rc = this.getBoundingClientRect();
               G.scrubVideo(video, Math.min(1, Math.max(0, (innerHeight - rc.top) / (innerHeight + rc.height))));
             }
+            const play = !!this.an?.clip && !this.reduced;
+            if (play) this.an!.update(dt / 1000);
             r.render(scene, cam, t);
-            if (visible && (spin || ctl || video || !this.dataset.loaded)) raf = requestAnimationFrame(frame);
+            if (visible && (spin || ctl || video || play || !this.dataset.loaded)) raf = requestAnimationFrame(frame);
           };
           const kick = () => {
             if (!raf) raf = requestAnimationFrame(frame);

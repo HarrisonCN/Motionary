@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-DhKZCitb.cjs');
+var registry = require('../chunks/registry-BZxDVL3h.cjs');
 var ease = require('../chunks/ease-HwYZnZat.cjs');
 
 /**

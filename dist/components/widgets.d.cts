@@ -2392,6 +2392,8 @@ interface Geometry {
     indices?: Uint16Array | Uint32Array;
     /** 'triangles' (default), 'lines', 'points'. */
     mode?: 'triangles' | 'lines' | 'points';
+    /** Bump after changing positions / normals in place (10.8: skinning, morph targets) — the renderer re-uploads them. */
+    version?: number;
     /** Renderer cache. */
     _gpu?: unknown;
 }
@@ -2489,6 +2491,60 @@ declare class Scene$1 {
 }
 
 /**
+ * `motionary/runtime/gltf-anim` (10.8) — glTF 2.0 animation, skinning and
+ * morph targets for models loaded by `motionary/runtime/format-gltf`
+ * (own implementation; requires `use(gl, formatGltf, gltfAnim)`).
+ *
+ * - animation channels on node `translation` / `rotation` / `scale` /
+ *   `weights` with `LINEAR` (quaternions slerped), `STEP` and
+ *   `CUBICSPLINE` (Hermite with in / out tangents) samplers;
+ * - morph targets (POSITION + NORMAL deltas) with mesh default weights,
+ *   node weights and animated weights;
+ * - skins: joint hierarchy, inverse bind matrices, 4 joints / vertex
+ *   (JOINTS_0 / WEIGHTS_0), skinned on the CPU and re-uploaded each frame
+ *   (`geometry.version`), so it works with every runtime/gl material;
+ * - `gltfAnimator(model)` plays a clip (by name or index) with loop / speed
+ *   / seek, `update(dt)` from your loop or `play()` on the shared ticker.
+ *
+ * Sampling and deformation are pure (SSR / workers / tests).
+ */
+
+type Num$3 = number;
+type ChannelPath = 'translation' | 'rotation' | 'scale' | 'weights';
+type Interpolation = 'LINEAR' | 'STEP' | 'CUBICSPLINE';
+interface GltfChannel {
+    node: GlNode;
+    path: ChannelPath;
+    interpolation: Interpolation;
+    times: Float32Array;
+    values: Float32Array;
+    /** Components per key (3, 4 or the morph target count). */
+    size: Num$3;
+}
+interface GltfClip {
+    name: string;
+    duration: Num$3;
+    channels: GltfChannel[];
+}
+interface GltfAnimator {
+    readonly clips: GltfClip[];
+    readonly clip: GltfClip | null;
+    time: Num$3;
+    speed: Num$3;
+    loop: boolean;
+    readonly playing: boolean;
+    /** Switch clip (name or index); keeps playing state. */
+    use(clip: string | Num$3): void;
+    seek(t: Num$3): void;
+    /** Advance by `dt` seconds and pose + deform. */
+    update(dt: Num$3): void;
+    /** Run on the shared ticker. */
+    play(): void;
+    pause(): void;
+    dispose(): void;
+}
+
+/**
  * `<usa-gl-scene src="model.glb" controls auto-rotate></usa-gl-scene>` (10.5)
  * — a WebGL2 3D viewer on **`motionary/runtime/gl`** (requires `use(gl)`;
  * `.gltf` / `.glb` models also need `motionary/runtime/format-gltf`, `.obj`
@@ -2498,14 +2554,18 @@ declare class Scene$1 {
  * `auto-rotate` (deg/s; off under reduced motion), `video` (a video URL
  * mapped onto the shape as a texture; `video-scrub` ties its time to the
  * element's scroll position instead of playing), `label` (accessible name).
- * Renders only while visible. `scene`, `camera`, `root`, `reload()`;
- * `usa:load` { nodes, meshes }, `usa:error`.
+ * 10.8: `animation` (clip name or index; empty = the first) plays a glTF
+ * animation with skinning and morph targets (requires
+ * `motionary/runtime/gltf-anim`), `animation-speed`; reduced motion shows
+ * the first pose. Renders only while visible. `scene`, `camera`, `root`,
+ * `animator`, `reload()`; `usa:load` { meshes, animations }, `usa:error`.
  * `<usa-three-scene>` is an alias with the same API.
  */
 interface UsaGlSceneElement extends UsaElement {
     readonly scene: Scene$1 | null;
     readonly camera: Camera | null;
     readonly root: GlNode | null;
+    readonly animator: GltfAnimator | null;
     reload(): Promise<void>;
 }
 declare function defineGlScene(tag?: string): CustomElementConstructor | undefined;
@@ -2575,8 +2635,12 @@ declare function defineShaderBackdrop(tag?: string): CustomElementConstructor | 
  *   `DecompressionStream`), `manifest.json` v1 / v2, several animations,
  *   embedded images.
  *
- * Not supported (documented): 3D layers, effects, text layers (10.8),
- * expressions (10.8 subset), merge paths, repeaters. `lottiePlayer()` is a
+ * 10.8: **text layers** (system / web fonts by family + style, justification,
+ * tracking, line height, fill + stroke, box text with wrapping, source-text
+ * keyframes and expressions) and an **expression subset** (see
+ * `lottie-expr.ts`: time, value, wiggle, loopOut / loopIn, linear / ease,
+ * Math…; no eval). Not supported (documented): 3D layers, effects, text
+ * animators, glyph outlines (`chars`), merge paths, repeaters. `lottiePlayer()` is a
  * runtime timeline (seek, reverse, scrub with `progress`, markers → labels).
  */
 
@@ -2588,6 +2652,7 @@ interface LottieProp {
     s?: boolean;
 }
 interface LottieLayer {
+    t?: any;
     ty: Num$2;
     ind?: Num$2;
     parent?: Num$2;
@@ -2635,6 +2700,14 @@ interface LottieAnimation {
         tm: Num$2;
         dr: Num$2;
     }[];
+    fonts?: {
+        list?: {
+            fName: string;
+            fFamily?: string;
+            fStyle?: string;
+        }[];
+    };
+    chars?: unknown[];
 }
 type LottiePlayer = Playable & {
     readonly frame: Num$2;

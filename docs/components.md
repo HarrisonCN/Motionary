@@ -1467,19 +1467,20 @@ defineSmoothScroll(); // registers <usa-smooth-scroll> — after the prerequisit
 <usa-smooth-scroll lerp="0.1" offset="64"></usa-smooth-scroll>
 ```
 
-### `<usa-gl-scene>` — Requires: motionary/runtime/gl + motionary/runtime/format-gltf + motionary/runtime/format-obj
+### `<usa-gl-scene>` — Requires: motionary/runtime/gl + motionary/runtime/format-gltf + motionary/runtime/format-obj + motionary/runtime/gltf-anim
 
 - **Install:** `npm i motionary`
-- **Import order & registration:** Register the core first, then the module: use(gl) also registers the core. CDN: load runtime.iife.js, then runtime/gl.iife.js (it registers itself). Register the core first, then the module: use(formatGltf) also registers the core. CDN: load runtime.iife.js, then runtime/format-gltf.iife.js (it registers itself). Register the core first, then the module: use(formatObj) also registers the core. CDN: load runtime.iife.js, then runtime/format-obj.iife.js (it registers itself).
+- **Import order & registration:** Register the core first, then the module: use(gl) also registers the core. CDN: load runtime.iife.js, then runtime/gl.iife.js (it registers itself). Register the core first, then the module: use(formatGltf) also registers the core. CDN: load runtime.iife.js, then runtime/format-gltf.iife.js (it registers itself). Register the core first, then the module: use(formatObj) also registers the core. CDN: load runtime.iife.js, then runtime/format-obj.iife.js (it registers itself). Register the core first, then the module: use(gltfAnim) also registers the core. CDN: load runtime.iife.js, then runtime/gltf-anim.iife.js (it registers itself).
 
 ```js
 import { use } from 'motionary/runtime';
 import { gl } from 'motionary/runtime/gl';
 import { formatGltf } from 'motionary/runtime/format-gltf';
 import { formatObj } from 'motionary/runtime/format-obj';
+import { gltfAnim } from 'motionary/runtime/gltf-anim';
 import { defineGlScene } from 'motionary/components/widgets';
 
-use(gl, formatGltf, formatObj);
+use(gl, formatGltf, formatObj, gltfAnim);
 defineGlScene(); // registers <usa-gl-scene> — after the prerequisites
 ```
 
@@ -1490,6 +1491,7 @@ defineGlScene(); // registers <usa-gl-scene> — after the prerequisites
 <script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gl.iife.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-gltf.iife.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-obj.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gltf-anim.iife.js"></script>
 <!-- then the component bundles -->
 <script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>
 <script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>
@@ -1591,6 +1593,40 @@ definePhysicsPlayground(); // registers <usa-physics-playground> — after the p
 <usa-physics-playground preset="pyramid" spawn label="Knock the pyramid over"></usa-physics-playground>
 ```
 
+### `<usa-snap-carousel>` — Requires: motionary/runtime/drag-snap
+
+- **Install:** `npm i motionary`
+- **Import order & registration:** Register the core first, then the module: use(dragSnap) also registers the core. CDN: load runtime.iife.js, then runtime/drag-snap.iife.js (it registers itself).
+
+```js
+import { use } from 'motionary/runtime';
+import { dragSnap } from 'motionary/runtime/drag-snap';
+import { defineSnapCarousel } from 'motionary/components/snap-carousel';
+
+use(dragSnap);
+defineSnapCarousel(); // registers <usa-snap-carousel> — after the prerequisites
+```
+
+- **CDN:**
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/drag-snap.iife.js"></script>
+<!-- then the component bundles -->
+<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>
+```
+
+- **Minimal example:**
+
+```html
+<usa-snap-carousel align="center" gap="16" label="Featured">
+  <article>…</article>
+  <article>…</article>
+  <article>…</article>
+</usa-snap-carousel>
+```
+
 <!-- prereqs:end -->
 
 ### v10.2 Scroll scenes (`motionary/runtime/scroll`) + SVG loader + `data-motion` in core: `<usa-scroll-scene>`, `<usa-motion-inspector>` (`components/widgets`)
@@ -1683,6 +1719,18 @@ MCP: `npx -y -p motionary motionary-mcp` — see [docs/mcp.md](docs/mcp.md).
 |---|---|---|
 | `<usa-physics-playground>` (Requires: motionary/runtime/physics + motionary/runtime/format-scene) | `preset` (balls, pyramid, pendulum, dominoes), `src` (scene JSON) or inline `<script type="application/json">`, `gravity`, `spawn`, `paused`, `label` | `world`, `bodies`, `scene`, `toScene()`, `reset()`, `play()`, `pause()`; `usa:load`, `usa:collision`, `usa:error`, `usa:runtime-missing` |
 | `<usa-motion-prompt>` | `value`, `format` (waapi, css, component), `placeholder`, `label` | `intent`, `suggest(text)`; `usa:suggest`, `usa:copy` |
+
+### v10.8 drag-snap + `<usa-snap-carousel>`, glTF animation (`motionary/runtime/gltf-anim`), Lottie text + expressions
+
+```html
+<usa-snap-carousel align="center" label="Featured"><article>…</article><article>…</article></usa-snap-carousel>
+<usa-gl-scene src="/models/robot.glb" animation="walk" controls label="Walking robot"></usa-gl-scene>
+```
+
+| Element | Attributes | Methods / events |
+|---|---|---|
+| `<usa-snap-carousel>` (`motionary/components/snap-carousel`; Requires: motionary/runtime/drag-snap) | `align` (center, start), `gap`, `index`, `autoplay`, `no-controls`, `no-dots`, `label` | `index`, `length`, `controller`, `next()`, `prev()`, `goTo(i, animate)`; `usa:change`, `usa:runtime-missing` |
+| `<usa-gl-scene>` (10.8 additions; animation Requires: motionary/runtime/gltf-anim) | `animation` (clip name / index), `animation-speed` | `animator`; `usa:load` { animations } |
 
 ## Frameworks
 
