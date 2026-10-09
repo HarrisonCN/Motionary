@@ -726,6 +726,37 @@ declare const SURFACE_FX: EffectDefinition[];
 declare function registerSurfacePack(): void;
 
 /**
+ * 8.7 — Gestures 3.0 pack (`motionary/fx/gesture`, also `motionary/components/fx-gesture`):
+ *
+ * - `swipe-hint` (attention) — a ghost fingertip swipes across the element
+ *   and the element nudges along, teaching "swipe me" (`direction` left|right).
+ * - `pinch-hint` (attention) — two ghost fingertips pinch out and the
+ *   element zooms with them, teaching "pinch to zoom".
+ * - `tilt-wobble` (attention) — a 3D wobble as if the phone was tilted.
+ * - `depth-in` (enter) — children fly in from different depths (by
+ *   `data-depth`, default their order), like parallax layers settling.
+ *
+ * Reduced motion: depth-in just shows, the hints and wobble do nothing.
+ */
+
+type Pt = {
+    x: number;
+    y: number;
+};
+/** Scale factor of a two-finger pinch from start points (a1, a2) to current points (b1, b2) (8.7). */
+declare function pinchScale(a1: Pt, a2: Pt, b1: Pt, b2: Pt): number;
+/** Rotation in degrees of a two-finger twist from (a1, a2) to (b1, b2) (8.7). */
+declare function pinchAngle(a1: Pt, a2: Pt, b1: Pt, b2: Pt): number;
+/** Device orientation (beta front/back, gamma left/right, in degrees) → card tilt { rx, ry } clamped to ±max (8.7). */
+declare function orientationToTilt(beta: number, gamma: number, max?: number, rest?: number): {
+    rx: number;
+    ry: number;
+};
+declare const GESTURE3_FX: EffectDefinition[];
+/** Register swipe-hint, pinch-hint, tilt-wobble and depth-in (8.7). */
+declare function registerGesture3Pack(): void;
+
+/**
  * 5.5 — generative backgrounds on Canvas 2D, registered through
  * `registerEffect()` (kind `background`): `flow-field`, `voronoi`,
  * `mesh-gradient`, `starfield`, `metaballs`, `contours`.
@@ -834,5 +865,5 @@ declare const EFFECT_PACKS: Record<string, EffectDefinition[]>;
 /** Register every 6.x effect pack (idempotent). */
 declare function registerEffectPacks(): void;
 
-export { AI_FX, CHART_FX, CYBER_FX, DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GEO_FX, GLSL_HEAD, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, ORGANIC_FX, PAPER_FX, PHYSICS2_FX, RETRO_FX, SHOP_FX, SOCIAL_FX, SURFACE_FX, SURFACE_THEMES, TEXT3_FX, TRANSITIONS2_FX, VerletWorld, WEATHER_FX, WGSL_HEAD, applySurfaceTheme, arcPath, blobRadius, crossDocumentTransitions, decodeFrame, fanAngles, fieldFallback, glslToWgsl, loadEffectPack, musicSample, packManifest, pageTransition, paperRandom, parseFigure, pixelSteps, pointsToPath, register3dPack, registerAiPack, registerChartPack, registerCyberPack, registerEffectPacks, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGeoPack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerOrganicPack, registerPaperPack, registerPhysicsPack, registerRetroPack, registerShopPack, registerSocialPack, registerSurfacePack, registerTextPack, registerTransitionsPack, registerWeatherPack, roughLine, routeLength, samplePath, shaderBackground, shakeFrames, skyAt, sparkVectors, splitChars, splitWords, supportsWebGL2, supportsWebGPU, syntheticSample, throwPath, trackPointer, validateManifest, webgpuBackground, wgslModule };
+export { AI_FX, CHART_FX, CYBER_FX, DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GEO_FX, GESTURE3_FX, GLSL_HEAD, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, ORGANIC_FX, PAPER_FX, PHYSICS2_FX, RETRO_FX, SHOP_FX, SOCIAL_FX, SURFACE_FX, SURFACE_THEMES, TEXT3_FX, TRANSITIONS2_FX, VerletWorld, WEATHER_FX, WGSL_HEAD, applySurfaceTheme, arcPath, blobRadius, crossDocumentTransitions, decodeFrame, fanAngles, fieldFallback, glslToWgsl, loadEffectPack, musicSample, orientationToTilt, packManifest, pageTransition, paperRandom, parseFigure, pinchAngle, pinchScale, pixelSteps, pointsToPath, register3dPack, registerAiPack, registerChartPack, registerCyberPack, registerEffectPacks, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGeoPack, registerGesture3Pack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerOrganicPack, registerPaperPack, registerPhysicsPack, registerRetroPack, registerShopPack, registerSocialPack, registerSurfacePack, registerTextPack, registerTransitionsPack, registerWeatherPack, roughLine, routeLength, samplePath, shaderBackground, shakeFrames, skyAt, sparkVectors, splitChars, splitWords, supportsWebGL2, supportsWebGPU, syntheticSample, throwPath, trackPointer, validateManifest, webgpuBackground, wgslModule };
 export type { EffectPackManifest, ShaderSpec };

@@ -1457,6 +1457,43 @@ interface UsaThemeSurfaceElement extends UsaElement {
 declare function defineThemeSurface(tag?: string): CustomElementConstructor | undefined;
 
 /**
+ * `<usa-gyro-card>` (8.7) — a 3D card that tilts with the phone's gyroscope
+ * (`deviceorientation`) and with the pointer on desktop, with a moving glare
+ * and `[data-depth]` children that float at different depths. On iOS the
+ * motion permission is requested on the first tap. `max` (degrees, default
+ * 15), `glare` (default on); `tilt(rx, ry)` sets it by hand; `usa:tilt`
+ * { rx, ry, source }. Reduced motion: flat, no tilt.
+ */
+interface UsaGyroCardElement extends UsaElement {
+    readonly source: 'gyro' | 'pointer' | 'none';
+    tilt(rx: number, ry: number, source?: string): void;
+    /** Play a short tilt wobble (a demo / attention cue); `null` under reduced motion. */
+    wobble(): Animation | null;
+}
+declare function defineGyroCard(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-gesture-sticker>` (8.7) — a multi-touch sticker: drag it with one
+ * finger, pinch with two to scale and twist to rotate (all at once), with a
+ * springy settle and a lifted shadow while held. Mouse: drag, wheel scales,
+ * Shift + wheel rotates. Keyboard: arrows move, + / − scale, [ / ] rotate,
+ * 0 resets. `min` / `max` scale; `x`, `y`, `scale`, `angle`;
+ * `transformTo({ x, y, scale, angle })`, `reset()`; `usa:transform`.
+ * A focusable `img`-like `group`; reduced motion: no spring.
+ */
+interface StickerState {
+    x: number;
+    y: number;
+    scale: number;
+    angle: number;
+}
+interface UsaGestureStickerElement extends UsaElement, StickerState {
+    transformTo(s: Partial<StickerState>): void;
+    reset(): void;
+}
+declare function defineGestureSticker(tag?: string): CustomElementConstructor | undefined;
+
+/**
  * motionary/components/widgets — the 6.x animated UI widgets, in their own
  * entry so `motionary/components` and `components/lite` keep their size
  * budgets. Every widget is reduced-motion safe and keyboard accessible.
@@ -1553,8 +1590,10 @@ declare global {
         'usa-sketch-chart': UsaSketchChartElement;
         'usa-theme-switcher': UsaThemeSwitcherElement;
         'usa-theme-surface': UsaThemeSurfaceElement;
+        'usa-gyro-card': UsaGyroCardElement;
+        'usa-gesture-sticker': UsaGestureStickerElement;
     }
 }
 
-export { CAROUSEL_EFFECTS, EQ_PRESETS, FESTIVAL_THEMES, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PRESENCE_STATES, PROGRESS_VARIANTS, RETRO_VARIANTS, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SPARK_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, badgeProgress, cartTotal, defineAddToCart, defineBadgeWall, defineBarChart, defineCarousel, defineCartDrawer, defineChatComposer, defineClockControl, defineColorPicker, defineCommandPalette, defineCompare, defineCountdown, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineFestivalBanner, defineField, defineFileDrop, defineGauge, defineGlobe, defineHudPanel, defineHydrate, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLiquidNav, defineLocationCard, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMessageList, defineMilestones, defineModal, defineMusicPlayer, defineNavMorph, defineNotificationBell, defineOdometer, defineOrganicCard, defineOtp, definePagination, definePresence, definePrizeWheel, defineProductGallery, defineProgressRing, definePullCord, defineRadar, defineReactions, defineRedEnvelope, defineRetroButton, defineSegmented, defineSheet, defineShortcut, defineSkeletonReveal, defineSketchChart, defineSparkline, defineStarRating, defineStepper, defineStickyWall, defineStories, defineSuggestionChips, defineSwipeDeck, defineSwitch, defineTabBar, defineTerminal, defineThemeSurface, defineThemeSwitcher, defineTip, defineToastStack, defineUploadProgress, defineVoiceButton, defineVolumeKnob, defineWeatherCard, defineWidgets, defineXpBar, formatBytes, formatDistance, fuzzyMatch, haversine, hexToHsv, hsvToHex, initials, keyLabels, levelFor, matchesKeys, monthGrid, pageWindow, parseChips, parseISODate, parseLRC, parseMarkers, parseReactions, parseTargets, passwordStrength, project, rankRows, sanitizeCode, sparkPoints, splitTime, stackToast, waveBars, wheelAngle, wrapIndex };
-export type { BellNotice, CartItem, ChatMessage, GlobeMarker, LeaderRow, PaletteCommand, PresenceState, RadarTarget, StackToastOptions, UsaAddToCartElement, UsaBadgeWallElement, UsaBarChartElement, UsaCarouselElement, UsaCartDrawerElement, UsaChatComposerElement, UsaClockControlElement, UsaColorPickerElement, UsaCommandPaletteElement, UsaCompareElement, UsaCountdownElement, UsaCubeGalleryElement, UsaDatePickerElement, UsaDisclosureElement, UsaDockElement, UsaEqualizerElement, UsaFestivalBannerElement, UsaFieldElement, UsaFileDropElement, UsaGaugeElement, UsaGlobeElement, UsaHudPanelElement, UsaHydrateElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaKpiElement, UsaLeaderboardElement, UsaLiquidNavElement, UsaLocationCardElement, UsaLyricsElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMessageListElement, UsaMilestonesElement, UsaModalElement, UsaMusicPlayerElement, UsaNavMorphElement, UsaNotificationBellElement, UsaOdometerElement, UsaOrganicCardElement, UsaOtpElement, UsaPaginationElement, UsaPresenceElement, UsaPrizeWheelElement, UsaProductGalleryElement, UsaProgressRingElement, UsaPullCordElement, UsaRadarElement, UsaReactionsElement, UsaRedEnvelopeElement, UsaRetroButtonElement, UsaSegmentedElement, UsaSheetElement, UsaShortcutElement, UsaSkeletonRevealElement, UsaSketchChartElement, UsaSparklineElement, UsaStarRatingElement, UsaStepperElement, UsaStickyWallElement, UsaStoriesElement, UsaSuggestionChipsElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTerminalElement, UsaThemeSurfaceElement, UsaThemeSwitcherElement, UsaTipElement, UsaToastStackElement, UsaUploadProgressElement, UsaVoiceButtonElement, UsaVolumeKnobElement, UsaWeatherCardElement, UsaXpBarElement, WallBadge };
+export { CAROUSEL_EFFECTS, EQ_PRESETS, FESTIVAL_THEMES, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PRESENCE_STATES, PROGRESS_VARIANTS, RETRO_VARIANTS, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SPARK_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, badgeProgress, cartTotal, defineAddToCart, defineBadgeWall, defineBarChart, defineCarousel, defineCartDrawer, defineChatComposer, defineClockControl, defineColorPicker, defineCommandPalette, defineCompare, defineCountdown, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineFestivalBanner, defineField, defineFileDrop, defineGauge, defineGestureSticker, defineGlobe, defineGyroCard, defineHudPanel, defineHydrate, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLiquidNav, defineLocationCard, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMessageList, defineMilestones, defineModal, defineMusicPlayer, defineNavMorph, defineNotificationBell, defineOdometer, defineOrganicCard, defineOtp, definePagination, definePresence, definePrizeWheel, defineProductGallery, defineProgressRing, definePullCord, defineRadar, defineReactions, defineRedEnvelope, defineRetroButton, defineSegmented, defineSheet, defineShortcut, defineSkeletonReveal, defineSketchChart, defineSparkline, defineStarRating, defineStepper, defineStickyWall, defineStories, defineSuggestionChips, defineSwipeDeck, defineSwitch, defineTabBar, defineTerminal, defineThemeSurface, defineThemeSwitcher, defineTip, defineToastStack, defineUploadProgress, defineVoiceButton, defineVolumeKnob, defineWeatherCard, defineWidgets, defineXpBar, formatBytes, formatDistance, fuzzyMatch, haversine, hexToHsv, hsvToHex, initials, keyLabels, levelFor, matchesKeys, monthGrid, pageWindow, parseChips, parseISODate, parseLRC, parseMarkers, parseReactions, parseTargets, passwordStrength, project, rankRows, sanitizeCode, sparkPoints, splitTime, stackToast, waveBars, wheelAngle, wrapIndex };
+export type { BellNotice, CartItem, ChatMessage, GlobeMarker, LeaderRow, PaletteCommand, PresenceState, RadarTarget, StackToastOptions, StickerState, UsaAddToCartElement, UsaBadgeWallElement, UsaBarChartElement, UsaCarouselElement, UsaCartDrawerElement, UsaChatComposerElement, UsaClockControlElement, UsaColorPickerElement, UsaCommandPaletteElement, UsaCompareElement, UsaCountdownElement, UsaCubeGalleryElement, UsaDatePickerElement, UsaDisclosureElement, UsaDockElement, UsaEqualizerElement, UsaFestivalBannerElement, UsaFieldElement, UsaFileDropElement, UsaGaugeElement, UsaGestureStickerElement, UsaGlobeElement, UsaGyroCardElement, UsaHudPanelElement, UsaHydrateElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaKpiElement, UsaLeaderboardElement, UsaLiquidNavElement, UsaLocationCardElement, UsaLyricsElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMessageListElement, UsaMilestonesElement, UsaModalElement, UsaMusicPlayerElement, UsaNavMorphElement, UsaNotificationBellElement, UsaOdometerElement, UsaOrganicCardElement, UsaOtpElement, UsaPaginationElement, UsaPresenceElement, UsaPrizeWheelElement, UsaProductGalleryElement, UsaProgressRingElement, UsaPullCordElement, UsaRadarElement, UsaReactionsElement, UsaRedEnvelopeElement, UsaRetroButtonElement, UsaSegmentedElement, UsaSheetElement, UsaShortcutElement, UsaSkeletonRevealElement, UsaSketchChartElement, UsaSparklineElement, UsaStarRatingElement, UsaStepperElement, UsaStickyWallElement, UsaStoriesElement, UsaSuggestionChipsElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTerminalElement, UsaThemeSurfaceElement, UsaThemeSwitcherElement, UsaTipElement, UsaToastStackElement, UsaUploadProgressElement, UsaVoiceButtonElement, UsaVolumeKnobElement, UsaWeatherCardElement, UsaXpBarElement, WallBadge };
