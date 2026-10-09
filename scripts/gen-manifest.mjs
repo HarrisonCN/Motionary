@@ -33,7 +33,7 @@ export function scanSource() {
     const hits = [...s.matchAll(re)];
     hits.forEach((m, i) => {
       const body = s.slice(m.index, hits[i + 1]?.index ?? s.length);
-      const attrs = /observedAttributes\(\)[^{]*\{\s*return \[([^\]]*)\]/.exec(body);
+      const attrs = /observedAttributes\(\)[^{]*\{\s*return \[([\s\S]*?)\];/.exec(body); // [\s\S]*?\]; — a spread like `...(X.observedAttributes || [])` must not end the list early
       const attributes = attrs ? [...attrs[1].matchAll(/'([^']+)'/g)].map((x) => x[1]) : [];
       const events = [...new Set([...body.matchAll(/\.emit\(\s*'([\w:-]+)'/g)].map((x) => 'usa:' + x[1]))];
       if (/usa:runtime-missing|runtimeModule</.test(body)) events.push('usa:runtime-missing');
@@ -55,6 +55,11 @@ export function scanSource() {
 }
 
 const strip = (s) => (s || '').replace(/\s+/g, ' ').trim();
+
+// schema v2: components deprecated for the next major (tag → { since, removedIn, use })
+const PER_ENTRY = JSON.parse(readFileSync(join(ROOT, 'scripts/entries.json'), 'utf8')) // ROOT, not import.meta.url: the tests import this file under jsdom (non-file URL);
+const ENTRY_BY_TAG = Object.fromEntries(PER_ENTRY.filter((e) => e.kind === 'widget').map((e) => [e.tag, e.entry]));
+export const DEPRECATED = { 'usa-three-scene': { since: '10.9', removedIn: '11.0', use: 'usa-gl-scene' } };
 
 export function buildManifest() {
   const src = scanSource();
@@ -88,6 +93,10 @@ export function buildManifest() {
       esm: sn.esm,
       requires,
       prerequisites: requires.length ? prereqFor({ ...c, requires }) : null,
+      // schema v2 (10.9): stability, deprecation, own entry
+      entry: ENTRY_BY_TAG[tag] || null,
+      stability: DEPRECATED[tag] ? 'deprecated' : 'stable',
+      deprecated: DEPRECATED[tag] || null,
       source: s.file,
     };
     if (cards.length > 1) entry.variants = cards.map((x) => ({ id: x.id, title: x.title.en, description: strip(x.desc.en), example: x.usage }));
@@ -111,6 +120,9 @@ export function buildManifest() {
       example: `<${tag}></${tag}>`,
       requires: [],
       prerequisites: null,
+      entry: ENTRY_BY_TAG[tag] || null,
+      stability: DEPRECATED[tag] ? 'deprecated' : 'stable',
+      deprecated: DEPRECATED[tag] || null,
       source: s.file,
     });
   }
@@ -118,14 +130,16 @@ export function buildManifest() {
   return {
     $schema: `${PAGES}components.schema.json`,
     format: 'motionary/components',
-    schemaVersion: 1,
+    schemaVersion: 2,
+    stability: MAJOR >= 11 ? 'stable' : 'release-candidate',
     package: pkg.name,
     version: pkg.version,
     homepage: PAGES,
     llms: `${PAGES}llms.txt`,
     cdn: { components: `https://unpkg.com/motionary@${MAJOR}/dist/components.umd.js`, widgets: `https://unpkg.com/motionary@${MAJOR}/dist/widgets.umd.js`, runtime: `${RUNTIME_CDN}runtime.iife.js` },
-    runtimeModules: Object.values(PREREQS),
+    runtimeModules: Object.values(PREREQS).map((p) => ({ ...p, optional: p.kind === 'peer', stability: 'stable' })),
     components,
+    effects: PER_ENTRY.filter((e) => e.kind === 'effect').map((e) => ({ name: e.name, pack: e.pack, entry: e.entry, register: `${e.register}();` })),
   };
 }
 

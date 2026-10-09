@@ -1,4 +1,4 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-Bkt3-3ET.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-RJYrdUTF.js';
 
 /**
  * `motionary/runtime/gl` (10.5) — a small WebGL2 scene renderer written for

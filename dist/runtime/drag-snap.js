@@ -1,4 +1,4 @@
-import { R as RUNTIME_VERSION, r as requireModule } from '../chunks/registry-Bkt3-3ET.js';
+import { R as RUNTIME_VERSION, r as requireModule } from '../chunks/registry-RJYrdUTF.js';
 
 /**
  * `motionary/runtime/drag-snap` (10.8) — pointer drag with inertia and snap

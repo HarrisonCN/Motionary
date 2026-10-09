@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [10.9.0] - 2026-10-09
+
+### Added
+- **Per-component entry points** (requested by the blog integration, which had to load the whole ~150 KB gzip widgets group): every `<usa-*>` widget has its own subpath **`motionary/widgets/<name>`** (the tag without `usa-`, e.g. `motionary/widgets/toast-stack`, `motionary/widgets/dock`, `motionary/widgets/snap-carousel`) and every 6.x+ effect has **`motionary/effects/<name>`** (e.g. `motionary/effects/pearlescent`, `motionary/effects/spectrum-mirror`, exporting `register<Name>()` + `effect`). Each entry registers **only its own tag / effect** — CI loads every entry into a fresh module graph and custom-element registry and checks it — and has its own fixed gzip budget in `size-budget.json` (set from the first measurement, never raised). Listed in `components.json` (`components[].entry`, top-level `effects[]`), the README and `docs/entry-points.md`. The group entries (`motionary/components/widgets`, `/fx2`, `/lite`) are unchanged. Note: an effect entry carries its pack file (the effects of a pack share helpers).
+- **`motionary/runtime/lottie-state`** — dotLottie **themes** (Lottie slots + theme rules: Color, Scalar, Vector, Text; static or keyframed; per-animation) and a **state machine subset** (playback states, GlobalState transitions, Event / Numeric / String / Boolean guards, PointerDown / Up / Enter / Exit, Click, OnComplete interactions, Fire / Set* / Toggle / Increment / Decrement / Reset / SetTheme / SetFrame / SetProgress / FireCustomEvent actions; **OpenUrl is refused** on purpose). `applyTheme()`, `createStateMachine()`, `inspectStateMachine()`. Fixed gzip budget.
+- **`<usa-dotlottie>`** (**Requires: motionary/runtime/vector + motionary/runtime/lottie-state**; own entry `motionary/components/dotlottie`) — `<usa-lottie-player>` with `theme` and `state-machine`; pointer and keyboard (Enter / Space) interactions; `stateMachine`, `state`, `fire()`, `setInput()`, `setTheme()`; `usa:state`, `usa:custom`.
+- **`motionary/runtime/gltf-decoders`** — hooks for the **official decoders**, as optional peers: Google **`draco3d`** for `KHR_draco_mesh_compression` and Binomial's **Basis Universal transcoder** for `KHR_texture_basisu` (KTX2). `provideGltfDecoder(kind, loader)` registers a lazy loader (fetched only when a file needs it); `prepareGltf()` rewrites the file for `loadGltf(src, { prepare })`. Missing decoder → a clear error naming the package and the provide line. `draco3d` is an optional `peerDependency` (never bundled).
+- **`<usa-gl-model>`** (**Requires: motionary/runtime/gl + format-gltf + gltf-decoders + draco3d + basis_transcoder.js**; own entry `motionary/components/gl-model`) — `<usa-gl-scene>` for compressed glTF. Prerequisites (runtime modules and both official decoders) appear in all five places.
+- **AI manifest schema v2** (additive over v1): `stability`, `deprecated` { since, removedIn, use }, `entry`, top-level `effects[]`, `optional` on official-runtime prerequisites; validated against `scripts/manifest.schema.json` in CI. The `motionary-scene@1` format is unchanged and now has a published JSON Schema (`docs/schemas/motionary-scene-1.schema.json`); every preset is validated against it.
+- **`docs/audit-10.9.md`** — accessibility, performance (per-module gzip budget review: all kept), security, API consistency and manifest audit before 11.0.
+- **`docs/upgrading-11.md`** + **`npx usa-codemod-11`**.
+
+### Deprecated (removed in 11.0)
+- `<usa-three-scene>` / `defineThreeScene()` — use `<usa-gl-scene>` / `defineGlScene()` (same API); warns once. The codemod rewrites it.
+- String programs for `offscreenRender()` / `<usa-worker-canvas>` that fall back to the main thread, where they were evaluated with `new Function` (CSP / injection risk, found by the audit) — pass a function; warns once. The codemod flags it.
+
+### Fixed
+- `format-gltf`: the error for a Draco / KTX2 file pointed at "decoder hooks planned for 10.9"; it now names `<usa-gl-model>` / `motionary/runtime/gltf-decoders`.
+
+### Accessibility
+- `<usa-dotlottie>` is a labelled, focusable `img` canvas; Enter / Space feed the state machine like a tap; under reduced motion each state shows its first frame instead of playing. `<usa-gl-model>` behaves like `<usa-gl-scene>` (labelled canvas, keyboard orbit controls, no auto-rotate / animation under reduced motion).
+
 ## [10.8.0] - 2026-10-09
 
 ### Added

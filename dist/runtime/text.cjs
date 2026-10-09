@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-BZxDVL3h.cjs');
+var registry = require('../chunks/registry-xGDPpmX2.cjs');
 
 /**
  * `motionary/runtime/text` (10.3) — split text into characters, words and

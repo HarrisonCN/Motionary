@@ -193,6 +193,10 @@ Motionary ships its own zero-dependency animation runtime — shared ticker, twe
 | [Scene JSON (motionary-scene@1)](docs/runtime/format-scene.md) | `motionary/runtime/format-scene` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-scene.iife.js` | `use(formatScene);` | 3.0 KB |
 | [Drag, inertia and snap points](docs/runtime/drag-snap.md) | `motionary/runtime/drag-snap` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/drag-snap.iife.js` | `use(dragSnap);` | 4.0 KB |
 | [glTF animation, skinning and morph targets](docs/runtime/gltf-anim.md) | `motionary/runtime/gltf-anim` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gltf-anim.iife.js` | `use(gltfAnim);` | 4.5 KB |
+| [dotLottie themes + state machines](docs/runtime/lottie-state.md) | `motionary/runtime/lottie-state` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/lottie-state.iife.js` | `use(lottieState);` | 3.5 KB |
+| [glTF decoder hooks (Draco, KTX2)](docs/runtime/gltf-decoders.md) | `motionary/runtime/gltf-decoders` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gltf-decoders.iife.js` | `use(gltfDecoders);` | 3.0 KB |
+| [Official Draco decoder (Google)](docs/runtime/draco3d.md) | `draco3d` | `https://www.gstatic.com/draco/versioned/decoders/1.5.7/draco_decoder.js` | `provideGltfDecoder('draco', () => import('draco3d')); // lazy: fetched when the first Draco-compressed model loads` | official runtime (not bundled) |
+| [Official Basis Universal transcoder (Binomial)](docs/runtime/basis-transcoder.md) | `basis_transcoder.js` | `https://cdn.jsdelivr.net/gh/BinomialLLC/basis_universal@1.16.4/webgl/transcoder/build/basis_transcoder.js` | `provideGltfDecoder('ktx2', () => import('/vendor/basis_transcoder.js').then((m) => m.default || window.BASIS)); // lazy: fetched with the first KTX2 texture` | official runtime (not bundled) |
 
 Install once: `npm i motionary`. Plain HTML: load `runtime.iife.js` first, then the module files (each registers itself).
 
@@ -479,6 +483,77 @@ defineSnapCarousel(); // registers <usa-snap-carousel> — after the prerequisit
 </usa-snap-carousel>
 ```
 
+#### `<usa-dotlottie>` — Requires: motionary/runtime/vector + motionary/runtime/lottie-state
+
+- **Install:** `npm i motionary`
+- **Import order & registration:** Register the core first, then the module: use(vector) also registers the core. CDN: load runtime.iife.js, then runtime/vector.iife.js (it registers itself). Register the core first, then the module: use(lottieState) also registers the core. CDN: load runtime.iife.js, then runtime/lottie-state.iife.js (it registers itself).
+
+```js
+import { use } from 'motionary/runtime';
+import { vector } from 'motionary/runtime/vector';
+import { lottieState } from 'motionary/runtime/lottie-state';
+import { defineDotLottie } from 'motionary/components/dotlottie';
+
+use(vector, lottieState);
+defineDotLottie(); // registers <usa-dotlottie> — after the prerequisites
+```
+
+- **CDN:**
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/vector.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/lottie-state.iife.js"></script>
+<!-- then the component bundles -->
+<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>
+```
+
+- **Minimal example:**
+
+```html
+<usa-dotlottie src="/anim/button.lottie" state-machine="toggle" theme="dark" label="Like button"></usa-dotlottie>
+```
+
+#### `<usa-gl-model>` — Requires: motionary/runtime/gl + motionary/runtime/format-gltf + motionary/runtime/gltf-decoders + draco3d + basis_transcoder.js
+
+- **Install:** `npm i motionary && npm i draco3d && curl -LO https://cdn.jsdelivr.net/gh/BinomialLLC/basis_universal@1.16.4/webgl/transcoder/build/basis_transcoder.js -LO https://cdn.jsdelivr.net/gh/BinomialLLC/basis_universal@1.16.4/webgl/transcoder/build/basis_transcoder.wasm`
+- **Import order & registration:** Register the core first, then the module: use(gl) also registers the core. CDN: load runtime.iife.js, then runtime/gl.iife.js (it registers itself). Register the core first, then the module: use(formatGltf) also registers the core. CDN: load runtime.iife.js, then runtime/format-gltf.iife.js (it registers itself). Register the core first, then the module: use(gltfDecoders) also registers the core. CDN: load runtime.iife.js, then runtime/gltf-decoders.iife.js (it registers itself). Install draco3d next to motionary, then register the lazy loader with provideGltfDecoder('draco', () => import('draco3d')) before a compressed model loads. Without a bundler: load Google’s draco_decoder.js from gstatic (window.DracoDecoderModule) and provideGltfDecoder('draco', () => window.DracoDecoderModule). Missing → a clear error naming the extension and this line. The transcoder is not published on npm by Binomial: copy basis_transcoder.js + basis_transcoder.wasm (same folder) into your static files, then provideGltfDecoder('ktx2', …) before a KTX2 model loads; or load it from the CDN (window.BASIS) and provideGltfDecoder('ktx2', () => window.BASIS). Missing → a clear error naming the extension and this line.
+
+```js
+import { use } from 'motionary/runtime';
+import { gl } from 'motionary/runtime/gl';
+import { formatGltf } from 'motionary/runtime/format-gltf';
+import { gltfDecoders } from 'motionary/runtime/gltf-decoders';
+import { provideGltfDecoder } from 'motionary/runtime/gltf-decoders';
+import { defineGlModel } from 'motionary/components/gl-model';
+
+use(gl, formatGltf, gltfDecoders);
+provideGltfDecoder('draco', () => import('draco3d')); // lazy: fetched when the first Draco-compressed model loads
+provideGltfDecoder('ktx2', () => import('/vendor/basis_transcoder.js').then((m) => m.default || window.BASIS)); // lazy: fetched with the first KTX2 texture
+defineGlModel(); // registers <usa-gl-model> — after the prerequisites
+```
+
+- **CDN:**
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gl.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-gltf.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gltf-decoders.iife.js"></script>
+<script src="https://www.gstatic.com/draco/versioned/decoders/1.5.7/draco_decoder.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/BinomialLLC/basis_universal@1.16.4/webgl/transcoder/build/basis_transcoder.js"></script>
+<!-- then the component bundles -->
+<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>
+```
+
+- **Minimal example:**
+
+```html
+<usa-gl-model src="/models/robot-draco.glb" controls label="Robot"></usa-gl-model>
+```
+
 <!-- runtime:end -->
 
 ## Accessibility & reduced motion
@@ -512,7 +587,9 @@ Evergreen browsers since 2023: Chrome / Edge ≥ 111, Safari ≥ 16.4, Firefox �
 
 ## Documentation
 
-- **Individual entry points (10.8+):** new components ship as their own entry (`motionary/components/snap-carousel`) and are not added to `motionary/components/widgets` or the all-components `motionary/components/lite` bundle (its 70 KB gzip budget is fixed).
+- **Individual entry points (10.8+):** new components ship as their own entry (`motionary/components/snap-carousel`, `motionary/components/gl-model`, `motionary/components/dotlottie`) and are not added to `motionary/components/widgets` or the all-components `motionary/components/lite` bundle (its 70 KB gzip budget is fixed).
+- **Per-component entry points (10.9):** every widget has `motionary/widgets/<name>` (tag without `usa-`, e.g. `motionary/widgets/toast-stack`, `motionary/widgets/dock`) and every 6.x+ effect has `motionary/effects/<name>` (e.g. `motionary/effects/pearlescent`, `motionary/effects/spectrum-mirror`); each registers only its own tag / effect, has a fixed gzip budget, and is listed in `components.json` (`entry`, `effects`). Full list: [docs/entry-points.md](docs/entry-points.md).
+- **Upgrading to 11:** [docs/upgrading-11.md](docs/upgrading-11.md) (`npx usa-codemod-11 --write src`); 10.9 audit: [docs/audit-10.9.md](docs/audit-10.9.md).
 - **MCP server:** `npx -y -p motionary motionary-mcp` — read-only component catalog for MCP clients (search, API, prerequisite-aware snippets; 2.0 adds `suggest_motion` and `validate_snippet`): [docs/mcp.md](docs/mcp.md).
 - **AI assistants:** [AGENTS.md](AGENTS.md) · [prompt guide](docs/ai-prompt-guide.md) · one page per component in [docs/components/](docs/components/README.md) · `components.json` / `llms.txt` / `llms-full.txt` on the site root.
 

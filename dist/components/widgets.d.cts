@@ -2569,7 +2569,7 @@ interface UsaGlSceneElement extends UsaElement {
     reload(): Promise<void>;
 }
 declare function defineGlScene(tag?: string): CustomElementConstructor | undefined;
-/** `<usa-three-scene>` — alias of `<usa-gl-scene>` (same attributes, events and methods; no Three.js involved). */
+/** `<usa-three-scene>` — alias of `<usa-gl-scene>`. @deprecated 10.9, removed in 11.0: use `<usa-gl-scene>` / `defineGlScene()`. */
 declare function defineThreeScene(tag?: string): CustomElementConstructor | undefined;
 
 /**

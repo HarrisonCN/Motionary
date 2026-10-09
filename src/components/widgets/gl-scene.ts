@@ -1,4 +1,4 @@
-import { defineElement, type UsaElement } from '../base';
+import { defineElement, deprecate, type UsaElement } from '../base';
 import { runtimeModule } from './runtime-link';
 import type { GlApi, Scene, Camera, Renderer, GlNode } from '../../runtime/gl';
 import type { FormatGltfApi } from '../../runtime/format-gltf';
@@ -63,6 +63,7 @@ export function defineGlScene(tag = 'usa-gl-scene'): CustomElementConstructor | 
         mount(): void {
           const G = runtimeModule<GlApi>(this, 'gl');
           if (!G) return;
+          if (this.localName === 'usa-three-scene') deprecate('three-scene', '<usa-three-scene> / defineThreeScene() are deprecated (10.9) and removed in 11.0 — use <usa-gl-scene> / defineGlScene() (same API). Run npx usa-codemod-11 --write src.');
           const canvas = document.createElement('canvas');
           canvas.setAttribute('role', 'img');
           canvas.setAttribute('aria-label', this.str('label', '3D scene'));
@@ -131,7 +132,7 @@ export function defineGlScene(tag = 'usa-gl-scene'): CustomElementConstructor | 
             const isObj = /\.obj(\?|#|$)/i.test(src);
             const loader = isObj ? runtimeModule<FormatObjApi>(this, 'format-obj') : runtimeModule<FormatGltfApi>(this, 'format-gltf');
             if (!loader) return;
-            (isObj ? (loader as FormatObjApi).loadObj(new URL(src, location.href).href) : (loader as FormatGltfApi).loadGltf(new URL(src, location.href).href))
+            (isObj ? (loader as FormatObjApi).loadObj(new URL(src, location.href).href) : (loader as FormatGltfApi).loadGltf(new URL(src, location.href).href, ((this as any).gltfOptions?.() ?? {}) as any))
               .then((n) => this.isConnected && done(n))
               .catch((e) => {
                 this.emit('error', { error: String(e.message || e) });
@@ -189,7 +190,7 @@ export function defineGlScene(tag = 'usa-gl-scene'): CustomElementConstructor | 
   );
 }
 
-/** `<usa-three-scene>` — alias of `<usa-gl-scene>` (same attributes, events and methods; no Three.js involved). */
+/** `<usa-three-scene>` — alias of `<usa-gl-scene>`. @deprecated 10.9, removed in 11.0: use `<usa-gl-scene>` / `defineGlScene()`. */
 export function defineThreeScene(tag = 'usa-three-scene'): CustomElementConstructor | undefined {
   return defineGlScene(tag);
 }

@@ -11,12 +11,14 @@ const entry = (name) => ({
 });
 const out = {};
 for (const [k, v] of Object.entries(pkg.exports)) {
-  if (k.startsWith('./components/') || k.startsWith('./runtime') || k.startsWith('./manifest') || k === './components.css' || k === './package.json') continue;
+  if (k.startsWith('./components/') || k.startsWith('./widgets/') || k.startsWith('./effects/') || k.startsWith('./runtime') || k.startsWith('./manifest') || k === './components.css' || k === './package.json') continue;
   out[k] = v;
 }
 for (const c of CATEGORIES) out[`./components/${c}`] = entry(`components/${c}`);
 for (const n of Object.keys(COMPONENT_ENTRIES)) out[`./components/${n}`] = entry(`components/${n}`);
 for (const n of Object.keys(RUNTIME_ENTRIES)) out[`./${n}`] = entry(n);
+// 10.9: per-component entries
+for (const e of JSON.parse(readFileSync(new URL('./entries.json', import.meta.url), 'utf8'))) { const n = `${e.kind === 'widget' ? 'widgets' : 'effects'}/${e.name}`; out[`./${n}`] = entry(n); }
 out['./manifest.json'] = './dist/manifest.json';
 out['./manifest.schema.json'] = './dist/manifest.schema.json';
 out['./components.css'] = './dist/components.css';

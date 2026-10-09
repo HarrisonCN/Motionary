@@ -1,6 +1,6 @@
-# Motionary 10.8.0
+# Motionary 10.9.0
 
-> Motionary is a zero-dependency motion library: scroll animations, 200+ presets and 208 animated Web Components (<usa-*>) that work in plain HTML and every framework, plus motionary/runtime — its own tween/timeline engine and format loaders.
+> Motionary is a zero-dependency motion library: scroll animations, 200+ presets and 210 animated Web Components (<usa-*>) that work in plain HTML and every framework, plus motionary/runtime — its own tween/timeline engine and format loaders.
 
 Install: `npm i motionary` · CDN: https://unpkg.com/motionary@10/dist/components.umd.js (+ https://unpkg.com/motionary@10/dist/widgets.umd.js for 6.x+ widgets) · Manifest: https://harrisoncn.github.io/Motionary/components.json · Full text: https://harrisoncn.github.io/Motionary/llms-full.txt
 
@@ -28,6 +28,10 @@ Rules for using a component: (1) import its define function from `import.path` a
 - [motionary/runtime/format-scene](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/format-scene.md): The versioned motionary-scene@1 format: a JSON description of a 2D physics scene (world, named materials, bodies, constraints, per-body style) — validate, migrate older drafts, load into a physics world and save one back.
 - [motionary/runtime/drag-snap](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/drag-snap.md): Pointer drag along one axis with velocity tracking, inertial throws, rubber-band edges and spring-animated snap points on the shared ticker — the engine of <usa-snap-carousel>, usable for sheets, sliders and pickers (own implementation).
 - [motionary/runtime/gltf-anim](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/gltf-anim.md): Plays glTF 2.0 animations on models loaded by motionary/runtime/format-gltf: translation / rotation / scale / weights channels with LINEAR, STEP and CUBICSPLINE samplers, skins (4 joints per vertex) and morph targets, deformed on the CPU and re-uploaded to motionary/runtime/gl (own implementation).
+- [motionary/runtime/lottie-state](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/lottie-state.md): Resolves Lottie slots with dotLottie themes (Color / Scalar / Vector / Text rules, static or keyframed) and runs a subset of dotLottie state machines (playback states, Event / Numeric / String / Boolean guards, pointer + completion interactions, input / theme / frame actions) for motionary/runtime/vector — own implementation, used by <usa-dotlottie>.
+- [motionary/runtime/gltf-decoders](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/gltf-decoders.md): Lets motionary/runtime/format-gltf load KHR_draco_mesh_compression meshes and KHR_texture_basisu (KTX2) textures through the official decoders — Google draco3d and the Basis Universal transcoder — registered as lazy loaders; Motionary does not reimplement them.
+- [draco3d](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/draco3d.md): Google’s official Draco geometry decoder (Apache-2.0, WASM / JS), used by motionary/runtime/gltf-decoders for KHR_draco_mesh_compression meshes. Optional peer dependency: lazy-loaded when the first Draco file is opened, never bundled into Motionary.
+- [basis_transcoder.js](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/basis-transcoder.md): Binomial’s official Basis Universal transcoder (Apache-2.0, basis_transcoder.js + .wasm from the basis_universal repository), used by motionary/runtime/gltf-decoders for KHR_texture_basisu (KTX2) textures. Optional: lazy-loaded when the first KTX2 texture is decoded, never bundled into Motionary.
 
 ## Components
 
@@ -76,6 +80,7 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<usa-distort>` (motionary/components/webgl): The image bulges and splits into RGB around the pointer. Without WebGL (or a cross-origin image without CORS) it falls back to a gentle CSS zoom.
 - `<usa-dock>` (motionary/components/widgets): 6.6: items magnify with a smooth cosine falloff as the pointer moves along the dock, neighbours make room, labels pop above the hovered item and a click bounces
 - `<usa-dot-network>` (motionary/components/background): A dot grid that swells and links up with lines around the pointer.
+- `<usa-dotlottie>` (motionary/components/dotlottie; requires motionary/runtime/vector + motionary/runtime/lottie-state): 10.9: plays .lottie files with their themes (slots recoloured by a theme from the file) and state machines — playback states, event / numeric / boolean guards, 
 - `<usa-double-tap>` (motionary/components/click): Double tap or double click a photo to pop a heart (or any emoji) at the tap point. L for keyboard users.
 - `<usa-draggable>` (motionary/components/physics): Drag with mouse, touch, pen or arrow keys. spring-back returns home with a wobble; inertia glides after a flick; snap to a grid or points; rubber-band bounds.
 - `<usa-draw>` (motionary/components/svg): Every stroke of the SVG inside draws itself — on view, hover, click or scrubbed with scroll — staggered between shapes, optional fill afterwards. No getTotalLen
@@ -91,6 +96,7 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<usa-gen-art>` (motionary/components/widgets): 9.3: seeded generative art on a canvas — flow fields, circle packing, Truchet tiles or layered waves in curated palettes; it draws itself in on screen and a tap
 - `<usa-gesture-fx>` (motionary/components/effects): 5.7: <usa-gesture-fx> plays any registered effect on a fling (fast release), a two-finger twist or a long press that charges --usa-charge 0 → 1. JS: bindGesture
 - `<usa-gesture-sticker>` (motionary/components/widgets): 8.7: a multi-touch sticker — drag with one finger, pinch with two to scale and twist to rotate, all at once, with a lifted shadow while held (wheel / Shift + wh
+- `<usa-gl-model>` (motionary/components/gl-model; requires motionary/runtime/gl + motionary/runtime/format-gltf + motionary/runtime/gltf-decoders + draco3d + basis_transcoder.js): 10.9: <usa-gl-scene> for compressed glTF — Draco meshes and KTX2 (Basis Universal) textures decoded by the official decoders (Google draco3d, Binomial’s Basis U
 - `<usa-gl-scene>` (motionary/components/widgets; requires motionary/runtime/gl + motionary/runtime/format-gltf + motionary/runtime/format-obj + motionary/runtime/gltf-anim): 10.5: a WebGL2 3D viewer on Motionary’s own renderer — glTF 2.0 / GLB and OBJ / MTL models or built-in shapes, PBR-style materials, orbit controls (drag, wheel,
 - `<usa-glitch>` (motionary/components/text): An RGB-split, sliced glitch — always on or on hover.
 - `<usa-globe>` (motionary/components/widgets): 7.6: an SVG globe in orthographic projection — graticule, pulsing markers, spins while on screen, drag to turn it, flyTo(name) brings a city round to the front.
@@ -221,7 +227,7 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<usa-text-splitter>` (motionary/components/widgets; requires motionary/runtime/text): 10.3: splits its text into characters, words or lines and animates them in with a stagger (rise, fade, blur, flip, wave) when it scrolls into view — accessible,
 - `<usa-theme-surface>` (motionary/components/widgets): 8.6: a themeable card that follows the nearest theme — light, dark, neon (pulsing glow edge), glass (frosted backdrop with a sheen) or soft neumorphic relief — 
 - `<usa-theme-switcher>` (motionary/components/widgets): 8.6: a segmented switcher for the 8.6 theme system — light, dark, neon, glass and soft (neumorphism); a pill slides under the active option and the page change 
-- `<usa-three-scene>` (motionary/components/widgets): `<usa-three-scene>` — alias of `<usa-gl-scene>` (same attributes, events and methods; no Three.js involved).
+- `<usa-three-scene>` (motionary/components/widgets): `<usa-three-scene>` — alias of `<usa-gl-scene>`. @deprecated 10.9, removed in 11.0: use `<usa-gl-scene>` / `defineGlScene()`.
 - `<usa-tilt>` (motionary/components/interaction): Tilts toward the pointer in 3D with an optional glare; exposes --usa-tilt-x/y for parallax layers inside.
 - `<usa-timeline>` (motionary/components/timeline): Every data-tl child becomes a step in document order. data-at ('-=200', '<', 'label+=100') overlaps or aligns steps; scrub ties progress to scroll; trigger view
 - `<usa-tip>` (motionary/components/widgets): 6.6: springs out of its trigger with an arrow, flips to stay inside the viewport and shifts along the edge; hover + keyboard focus (Esc closes) or click popover

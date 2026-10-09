@@ -2,7 +2,7 @@
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
-`<usa-three-scene>` — alias of `<usa-gl-scene>` (same attributes, events and methods; no Three.js involved).
+`<usa-three-scene>` — alias of `<usa-gl-scene>`. @deprecated 10.9, removed in 11.0: use `<usa-gl-scene>` / `defineGlScene()`.
 
 - **Category:** widgets
 - **Import:** `import { defineThreeScene } from 'motionary/components/widgets'` then `defineThreeScene();`

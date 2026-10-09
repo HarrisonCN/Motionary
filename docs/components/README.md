@@ -1,4 +1,4 @@
-# Motionary components (208)
+# Motionary components (210)
 
 One page per `<usa-*>` element, generated from the source. Machine-readable: `motionary/manifest.json` · Pages `/components.json` · `/llms.txt` · `/llms-full.txt`. How to use these with an AI assistant: [AGENTS.md](../../AGENTS.md) and [the prompt guide](../ai-prompt-guide.md).
 
@@ -44,6 +44,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<usa-countdown>`](usa-countdown.md) — Flip countdown
 - [`<usa-date-picker>`](usa-date-picker.md) — Date picker
 - [`<usa-dock>`](usa-dock.md) — macOS-style dock
+- [`<usa-dotlottie>`](usa-dotlottie.md) — Interactive dotLottie (themes + state machine) · Requires: motionary/runtime/vector + motionary/runtime/lottie-state
 - [`<usa-drawer>`](usa-drawer.md) — Drawer
 - [`<usa-fab>`](usa-fab.md) — FAB speed dial
 - [`<usa-festival-banner>`](usa-festival-banner.md) — Festival banner
@@ -51,6 +52,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<usa-gauge>`](usa-gauge.md) — Spring gauge
 - [`<usa-gen-art>`](usa-gen-art.md) — Generative artwork
 - [`<usa-gesture-sticker>`](usa-gesture-sticker.md) — Multi-touch sticker
+- [`<usa-gl-model>`](usa-gl-model.md) — Compressed 3D model (Draco / KTX2) · Requires: motionary/runtime/gl + motionary/runtime/format-gltf + motionary/runtime/gltf-decoders + draco3d + basis_transcoder.js
 - [`<usa-gl-scene>`](usa-gl-scene.md) — 3D scene (glTF / OBJ) · Requires: motionary/runtime/gl + motionary/runtime/format-gltf + motionary/runtime/format-obj + motionary/runtime/gltf-anim
 - [`<usa-globe>`](usa-globe.md) — Spinning globe
 - [`<usa-gpu-particles>`](usa-gpu-particles.md) — GPU particle canvas

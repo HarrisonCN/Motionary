@@ -1,4 +1,4 @@
-# Motionary 10.8.0 — full component reference
+# Motionary 10.9.0 — full component reference
 
 Generated from the source. Machine-readable version: https://harrisoncn.github.io/Motionary/components.json (schema https://harrisoncn.github.io/Motionary/components.schema.json).
 
@@ -455,6 +455,91 @@ use(gl, formatGltf, gltfAnim);
 const model = await loadGltf('/models/robot.glb');
 const anim = gltfAnimator(model, { clip: 'walk' });
 anim.play(); // or anim.update(dt) in your own loop
+```
+
+### motionary/runtime/lottie-state — dotLottie themes + state machines
+
+Resolves Lottie slots with dotLottie themes (Color / Scalar / Vector / Text rules, static or keyframed) and runs a subset of dotLottie state machines (playback states, Event / Numeric / String / Boolean guards, pointer + completion interactions, input / theme / frame actions) for motionary/runtime/vector — own implementation, used by <usa-dotlottie>.
+
+- Install: `npm i motionary`
+- Import: `motionary/runtime/lottie-state`
+- Register: `use(lottieState);` — Register the core first, then the module: use(lottieState) also registers the core. CDN: load runtime.iife.js, then runtime/lottie-state.iife.js (it registers itself).
+- CDN:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/lottie-state.iife.js"></script>
+```
+
+```js
+import { use } from 'motionary/runtime';
+import { vector, loadLottie } from 'motionary/runtime/vector';
+import { lottieState, applyTheme, createStateMachine } from 'motionary/runtime/lottie-state';
+use(vector, lottieState);
+const { animation, dotLottie } = await loadLottie('/anim/button.lottie');
+const themed = applyTheme(animation, dotLottie.themes.dark);
+const sm = createStateMachine(dotLottie.stateMachines.toggle, { onState: (s) => console.log(s.name) });
+sm.fire('tap');
+```
+
+### motionary/runtime/gltf-decoders — glTF decoder hooks (Draco, KTX2)
+
+Lets motionary/runtime/format-gltf load KHR_draco_mesh_compression meshes and KHR_texture_basisu (KTX2) textures through the official decoders — Google draco3d and the Basis Universal transcoder — registered as lazy loaders; Motionary does not reimplement them.
+
+- Install: `npm i motionary`
+- Import: `motionary/runtime/gltf-decoders`
+- Register: `use(gltfDecoders);` — Register the core first, then the module: use(gltfDecoders) also registers the core. CDN: load runtime.iife.js, then runtime/gltf-decoders.iife.js (it registers itself).
+- CDN:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gltf-decoders.iife.js"></script>
+```
+
+```js
+import { use } from 'motionary/runtime';
+import { gl } from 'motionary/runtime/gl';
+import { formatGltf, loadGltf } from 'motionary/runtime/format-gltf';
+import { gltfDecoders, provideGltfDecoder, prepareGltf } from 'motionary/runtime/gltf-decoders';
+use(gl, formatGltf, gltfDecoders);
+provideGltfDecoder('draco', () => import('draco3d'));
+const model = await loadGltf('/models/robot-draco.glb', { prepare: prepareGltf });
+```
+
+### draco3d — Official Draco decoder (Google)
+
+Google’s official Draco geometry decoder (Apache-2.0, WASM / JS), used by motionary/runtime/gltf-decoders for KHR_draco_mesh_compression meshes. Optional peer dependency: lazy-loaded when the first Draco file is opened, never bundled into Motionary.
+
+- Install: `npm i draco3d`
+- Import: `draco3d`
+- Register: `provideGltfDecoder('draco', () => import('draco3d')); // lazy: fetched when the first Draco-compressed model loads` — Install draco3d next to motionary, then register the lazy loader with provideGltfDecoder('draco', () => import('draco3d')) before a compressed model loads. Without a bundler: load Google’s draco_decoder.js from gstatic (window.DracoDecoderModule) and provideGltfDecoder('draco', () => window.DracoDecoderModule). Missing → a clear error naming the extension and this line.
+- CDN:
+
+```html
+<script src="https://www.gstatic.com/draco/versioned/decoders/1.5.7/draco_decoder.js"></script>
+```
+
+```js
+import { provideGltfDecoder } from 'motionary/runtime/gltf-decoders';
+provideGltfDecoder('draco', () => import('draco3d'));
+```
+
+### basis_transcoder.js — Official Basis Universal transcoder (Binomial)
+
+Binomial’s official Basis Universal transcoder (Apache-2.0, basis_transcoder.js + .wasm from the basis_universal repository), used by motionary/runtime/gltf-decoders for KHR_texture_basisu (KTX2) textures. Optional: lazy-loaded when the first KTX2 texture is decoded, never bundled into Motionary.
+
+- Install: `curl -LO https://cdn.jsdelivr.net/gh/BinomialLLC/basis_universal@1.16.4/webgl/transcoder/build/basis_transcoder.js -LO https://cdn.jsdelivr.net/gh/BinomialLLC/basis_universal@1.16.4/webgl/transcoder/build/basis_transcoder.wasm`
+- Import: `basis_transcoder.js`
+- Register: `provideGltfDecoder('ktx2', () => import('/vendor/basis_transcoder.js').then((m) => m.default || window.BASIS)); // lazy: fetched with the first KTX2 texture` — The transcoder is not published on npm by Binomial: copy basis_transcoder.js + basis_transcoder.wasm (same folder) into your static files, then provideGltfDecoder('ktx2', …) before a KTX2 model loads; or load it from the CDN (window.BASIS) and provideGltfDecoder('ktx2', () => window.BASIS). Missing → a clear error naming the extension and this line.
+- CDN:
+
+```html
+<script src="https://cdn.jsdelivr.net/gh/BinomialLLC/basis_universal@1.16.4/webgl/transcoder/build/basis_transcoder.js"></script>
+```
+
+```js
+import { provideGltfDecoder } from 'motionary/runtime/gltf-decoders';
+provideGltfDecoder('ktx2', () => window.BASIS);
 ```
 
 ## Components
@@ -1160,6 +1245,42 @@ A dot grid that swells and links up with lines around the pointer.
 <usa-dot-network gap="28">…</usa-dot-network>
 ```
 
+### <usa-dotlottie> — Interactive dotLottie (themes + state machine)
+
+10.9: plays .lottie files with their themes (slots recoloured by a theme from the file) and state machines — playback states, event / numeric / boolean guards, pointer and completion interactions, input and theme actions (OpenUrl is refused). Tap the dot: it starts pulsing, three taps switch it to the dark theme. Requires motionary/runtime/vector + motionary/runtime/lottie-state — npm i motionary, then use(vector, lottieState). Its own entry point: motionary/components/dotlottie.
+
+- Import: `import { defineDotLottie } from 'motionary/components/dotlottie'; defineDotLottie();`
+- CDN: https://unpkg.com/motionary@10/dist/components.umd.js
+- Attributes: `theme`, `state-machine`
+- Events: `usa:error`, `usa:state`, `usa:custom`, `usa:runtime-missing`
+- Methods: `fire()`, `setInput()`, `setTheme()`
+- Requires: motionary/runtime/vector + motionary/runtime/lottie-state
+  - Install: `npm i motionary`
+  - Order: Register the core first, then the module: use(vector) also registers the core. CDN: load runtime.iife.js, then runtime/vector.iife.js (it registers itself). Register the core first, then the module: use(lottieState) also registers the core. CDN: load runtime.iife.js, then runtime/lottie-state.iife.js (it registers itself).
+
+```js
+import { use } from 'motionary/runtime';
+import { vector } from 'motionary/runtime/vector';
+import { lottieState } from 'motionary/runtime/lottie-state';
+import { defineDotLottie } from 'motionary/components/dotlottie';
+
+use(vector, lottieState);
+defineDotLottie(); // registers <usa-dotlottie> — after the prerequisites
+```
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/vector.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/lottie-state.iife.js"></script>
+<!-- then the component bundles -->
+<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>
+```
+
+```html
+<usa-dotlottie src="/anim/button.lottie" state-machine="toggle" theme="dark" label="Like button"></usa-dotlottie>
+```
+
 ### <usa-double-tap> — Double tap
 
 Double tap or double click a photo to pop a heart (or any emoji) at the tap point. L for keyboard users.
@@ -1383,6 +1504,47 @@ Full-screen sections that snap one at a time, with keyboard paging, dot navigati
 <usa-gesture-sticker label="Star sticker" max="3">
   <img src="star.png" alt="Star" width="120">
 </usa-gesture-sticker>
+```
+
+### <usa-gl-model> — Compressed 3D model (Draco / KTX2)
+
+10.9: <usa-gl-scene> for compressed glTF — Draco meshes and KTX2 (Basis Universal) textures decoded by the official decoders (Google draco3d, Binomial’s Basis Universal transcoder), lazy-loaded optional peers: only the decoder a file needs is fetched. Requires motionary/runtime/gl + format-gltf + gltf-decoders and draco3d (+ the Basis transcoder for KTX2 textures). Its own entry point: motionary/components/gl-model.
+
+- Import: `import { defineGlModel } from 'motionary/components/gl-model'; defineGlModel();`
+- CDN: https://unpkg.com/motionary@10/dist/components.umd.js
+- Events: `usa:runtime-missing`
+- Requires: motionary/runtime/gl + motionary/runtime/format-gltf + motionary/runtime/gltf-decoders + draco3d + basis_transcoder.js
+  - Install: `npm i motionary && npm i draco3d && curl -LO https://cdn.jsdelivr.net/gh/BinomialLLC/basis_universal@1.16.4/webgl/transcoder/build/basis_transcoder.js -LO https://cdn.jsdelivr.net/gh/BinomialLLC/basis_universal@1.16.4/webgl/transcoder/build/basis_transcoder.wasm`
+  - Order: Register the core first, then the module: use(gl) also registers the core. CDN: load runtime.iife.js, then runtime/gl.iife.js (it registers itself). Register the core first, then the module: use(formatGltf) also registers the core. CDN: load runtime.iife.js, then runtime/format-gltf.iife.js (it registers itself). Register the core first, then the module: use(gltfDecoders) also registers the core. CDN: load runtime.iife.js, then runtime/gltf-decoders.iife.js (it registers itself). Install draco3d next to motionary, then register the lazy loader with provideGltfDecoder('draco', () => import('draco3d')) before a compressed model loads. Without a bundler: load Google’s draco_decoder.js from gstatic (window.DracoDecoderModule) and provideGltfDecoder('draco', () => window.DracoDecoderModule). Missing → a clear error naming the extension and this line. The transcoder is not published on npm by Binomial: copy basis_transcoder.js + basis_transcoder.wasm (same folder) into your static files, then provideGltfDecoder('ktx2', …) before a KTX2 model loads; or load it from the CDN (window.BASIS) and provideGltfDecoder('ktx2', () => window.BASIS). Missing → a clear error naming the extension and this line.
+
+```js
+import { use } from 'motionary/runtime';
+import { gl } from 'motionary/runtime/gl';
+import { formatGltf } from 'motionary/runtime/format-gltf';
+import { gltfDecoders } from 'motionary/runtime/gltf-decoders';
+import { provideGltfDecoder } from 'motionary/runtime/gltf-decoders';
+import { defineGlModel } from 'motionary/components/gl-model';
+
+use(gl, formatGltf, gltfDecoders);
+provideGltfDecoder('draco', () => import('draco3d')); // lazy: fetched when the first Draco-compressed model loads
+provideGltfDecoder('ktx2', () => import('/vendor/basis_transcoder.js').then((m) => m.default || window.BASIS)); // lazy: fetched with the first KTX2 texture
+defineGlModel(); // registers <usa-gl-model> — after the prerequisites
+```
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gl.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-gltf.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gltf-decoders.iife.js"></script>
+<script src="https://www.gstatic.com/draco/versioned/decoders/1.5.7/draco_decoder.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/BinomialLLC/basis_universal@1.16.4/webgl/transcoder/build/basis_transcoder.js"></script>
+<!-- then the component bundles -->
+<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>
+```
+
+```html
+<usa-gl-model src="/models/robot-draco.glb" controls label="Robot"></usa-gl-model>
 ```
 
 ### <usa-gl-scene> — 3D scene (glTF / OBJ)
@@ -3555,7 +3717,7 @@ defineTextSplitter(); // registers <usa-text-splitter> — after the prerequisit
 
 ### <usa-three-scene> — <usa-three-scene>
 
-`<usa-three-scene>` — alias of `<usa-gl-scene>` (same attributes, events and methods; no Three.js involved).
+`<usa-three-scene>` — alias of `<usa-gl-scene>`. @deprecated 10.9, removed in 11.0: use `<usa-gl-scene>` / `defineGlScene()`.
 
 - Import: `import { defineThreeScene } from 'motionary/components/widgets'; defineThreeScene();`
 - CDN: https://unpkg.com/motionary@10/dist/widgets.umd.js

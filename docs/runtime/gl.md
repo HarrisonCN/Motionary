@@ -60,3 +60,4 @@ r.resize(); r.render(scene, new Camera({ position: [0, 0.5, 3] }));
 ## Components that need it
 
 - `<usa-gl-scene>` — 3D scene (glTF / OBJ)
+- `<usa-gl-model>` — Compressed 3D model (Draco / KTX2)

@@ -56,7 +56,7 @@ describe('showcase code generator', () => {
   });
 
   it('imports from the documented entry points only', () => {
-    const allowed = new Set(['motionary', 'motionary/react', 'motionary/vue', 'motionary/svelte', 'motionary/solid', 'motionary/element', 'motionary/components/timeline', 'motionary/components/widgets', 'motionary/components/snap-carousel', 'motionary/engine', 'motionary/components/fx', 'react', 'vue', 'svelte', 'solid-js']);
+    const allowed = new Set(['motionary', 'motionary/react', 'motionary/vue', 'motionary/svelte', 'motionary/solid', 'motionary/element', 'motionary/components/timeline', 'motionary/components/widgets', 'motionary/components/snap-carousel', 'motionary/components/gl-model', 'motionary/components/dotlottie', 'motionary/engine', 'motionary/components/fx', 'react', 'vue', 'svelte', 'solid-js']);
     ITEMS.forEach((item: any) => {
       const out = generate(item, defaultState(item), PRESETS);
       Object.values(out).forEach((code: any) => {

@@ -1351,6 +1351,21 @@ export const components = [
     '<usa-lottie-player src="/anim/title.json" autoplay loop label="Animated title"></usa-lottie-player>',
     '<usa-lottie-player class="demo-lottie" src="assets/motionary-text.json" autoplay loop label="Lottie text and expressions sample"></usa-lottie-player>',
     [{ key: 'mode', values: ['normal', 'bounce'] }], { since: '10.8', requires: ['vector'], id: 'lottie-text' }),
+  // ---- 10.9 ------------------------------------------------------------
+  W('usa-dotlottie', 'ui', 'Interactive dotLottie (themes + state machine)', '交互式 dotLottie（主题 + 状态机）',
+    '10.9: plays .lottie files with their themes (slots recoloured by a theme from the file) and state machines — playback states, event / numeric / boolean guards, pointer and completion interactions, input and theme actions (OpenUrl is refused). Tap the dot: it starts pulsing, three taps switch it to the dark theme. Requires motionary/runtime/vector + motionary/runtime/lottie-state — npm i motionary, then use(vector, lottieState). Its own entry point: motionary/components/dotlottie.',
+    '10.9：播放 .lottie 文件及其主题（用文件内的主题为插槽重新着色）与状态机 —— 播放状态、事件 / 数值 / 布尔守卫、指针与完成交互、输入与主题动作（拒绝 OpenUrl）。点按圆点：开始脉动，点三次切换为深色主题。需要 motionary/runtime/vector + motionary/runtime/lottie-state —— npm i motionary，并 use(vector, lottieState)。独立入口：motionary/components/dotlottie。',
+    ['lottie', 'dotlottie', 'state machine', 'theme', 'interactive', 'runtime'],
+    '<usa-dotlottie src="/anim/button.lottie" state-machine="toggle" theme="dark" label="Like button"></usa-dotlottie>',
+    '<usa-dotlottie class="demo-lottie" src="assets/motionary-states.lottie" state-machine="toggle" label="Tap the dot"></usa-dotlottie>',
+    [{ key: 'theme', values: ['', 'dark'] }], { since: '10.9', requires: ['vector', 'lottie-state'], entry: 'dotlottie', define: 'defineDotLottie' }),
+  W('usa-gl-model', 'ui', 'Compressed 3D model (Draco / KTX2)', '压缩 3D 模型（Draco / KTX2）',
+    '10.9: <usa-gl-scene> for compressed glTF — Draco meshes and KTX2 (Basis Universal) textures decoded by the official decoders (Google draco3d, Binomial’s Basis Universal transcoder), lazy-loaded optional peers: only the decoder a file needs is fetched. Requires motionary/runtime/gl + format-gltf + gltf-decoders and draco3d (+ the Basis transcoder for KTX2 textures). Its own entry point: motionary/components/gl-model.',
+    '10.9：用于压缩 glTF 的 <usa-gl-scene> —— Draco 网格与 KTX2（Basis Universal）纹理由官方解码器（Google draco3d、Binomial Basis Universal 转码器）解码，作为可选 peer 懒加载：只加载文件需要的解码器。需要 motionary/runtime/gl + format-gltf + gltf-decoders 与 draco3d（KTX2 纹理另需 Basis 转码器）。独立入口：motionary/components/gl-model。',
+    ['3d', 'gltf', 'draco', 'ktx2', 'basis', 'compression', 'webgl'],
+    '<usa-gl-model src="/models/robot-draco.glb" controls label="Robot"></usa-gl-model>',
+    '<usa-gl-model class="demo-gl" src="assets/motionary-draco.glb" controls auto-rotate="30" label="Draco-compressed cube"></usa-gl-model>',
+    [], { since: '10.9', requires: ['gl', 'format-gltf', 'gltf-decoders', 'draco3d', 'basis-transcoder'], entry: 'gl-model', define: 'defineGlModel' }),
 ];
 
 /** item id → live-demo wiring. */

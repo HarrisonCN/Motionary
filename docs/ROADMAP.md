@@ -77,7 +77,7 @@ Store 卡片显示 **「Requires: motionary/runtime/<module>」** 徽章（官�
   - 主线 B：**drag-snap 模块** —— 拖拽吸附 / 惯性轮播。
   - 格式：glTF 蒙皮 / 变形目标 / 动画；Lottie 文本层 + 表达式子集。
   - 新组件：跨端预览器、`<usa-snap-carousel>`（`<usa-carousel>` 已被 6.2 轮播占用）。
-- **v10.9** — 11.0 预备：11.0 弃用警告、`upgrading-11.md` 与 `usa-codemod-11`。
+- ✅ **v10.9** — 11.0 预备：11.0 弃用警告、`upgrading-11.md` 与 `usa-codemod-11`。
   - 主线 A：清单 Schema v2 定稿（11.0 起冻结）。
   - 主线 B：全部 runtime 模块审计、逐模块体积预算复核；dotLottie 主题 / 状态机子集；Draco / KTX2 官方解码器挂钩。
 - **v11.0** — 下一代：核心继续瘦身（目标 < 5 KB）、移除 10.9 弃用项；清单 Schema v2 与 `motionary-mcp` 1.0 稳定版；`motionary/runtime/*` 转为稳定 API；npm `latest`。

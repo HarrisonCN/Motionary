@@ -19,6 +19,7 @@
 import type { EffectContext, EffectDefinition } from '../fx/registry';
 import { registerEffects } from '../fx/registry';
 import { onFrame } from '../base';
+import { deprecate } from '../base';
 
 /** Run a pure function in a Web Worker; resolves with its (structured-cloneable) result (9.6). */
 export function runInWorker<A extends unknown[], R>(fn: (...args: A) => R | Promise<R>, ...args: A): Promise<R> {
@@ -78,6 +79,7 @@ export function offscreenRender(canvas: HTMLCanvasElement, program: DrawProgram,
   }
   const ctx = canvas.getContext?.('2d');
   if (!ctx) return { backend: 'none', stop: () => undefined, resize: () => undefined };
+  if (typeof program === 'string') deprecate('worker-canvas-string', 'offscreenRender() / <usa-worker-canvas> with a string program fell back to the main thread, where it is evaluated with new Function (blocked by a strict CSP). Deprecated in 10.9; 11.0 refuses string programs on the main thread — pass a function. See docs/upgrading-11.md.');
   // eslint-disable-next-line no-new-func
   const draw = typeof program === 'function' ? program : (new Function(`return (${code})`)() as Exclude<DrawProgram, string>);
   const st: Record<string, unknown> = {};

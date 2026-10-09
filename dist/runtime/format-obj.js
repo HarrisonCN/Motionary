@@ -1,4 +1,4 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-Bkt3-3ET.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-RJYrdUTF.js';
 import { GlNode, texture, standardMaterial, computeNormals } from './gl.js';
 
 /**
