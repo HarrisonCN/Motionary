@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - `toReactNative()` imported `Pressable` even when the motion string had no press / hover rule (unused import in the generated component); it is now imported only when the press wrapper is emitted.
+- `prefersReducedMotion()` threw `Cannot read properties of undefined (reading 'matches')` when `matchMedia()` returned nothing (stubbed / partial environments), e.g. from a `<usa-splash>` timer firing after a test's teardown; it now treats a missing result as "no preference".
 
 ## [9.7.0] - 2026-10-09
 
