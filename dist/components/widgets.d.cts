@@ -2358,6 +2358,202 @@ interface UsaSmoothScrollElement extends UsaElement {
 declare function defineSmoothScroll(tag?: string): CustomElementConstructor | undefined;
 
 /**
+ * `motionary/runtime/gl` (10.5) — a small WebGL2 scene renderer written for
+ * Motionary (not a Three.js clone; own API, own shaders):
+ *
+ * - **math** (`mat4`, quaternions — column-major `Float32Array`s), pure;
+ * - **scene graph**: `GlNode` (position / rotation quaternion / scale,
+ *   children, optional mesh), `Camera` (perspective, `lookAt`), lights
+ *   (`ambient`, up to 4 directional / point), `bounds()` + `frameNode()`;
+ * - **geometry** builders (`box`, `plane`, `sphere`, `torus`) and custom
+ *   geometry from typed arrays (indexed 16 / 32-bit or not);
+ * - **materials**: `standard` (metallic-roughness PBR approximation, base
+ *   colour texture, emissive, ACES-free Reinhard tone mapping, sRGB),
+ *   `unlit`, and `shader` (your GLSL ES 3.00 fragment with the standard
+ *   varyings + your uniforms);
+ * - **textures** from images, canvases, bitmaps and **videos** (updated per
+ *   decoded frame with `requestVideoFrameCallback`; `scrubVideo()` seeks a
+ *   video from a 0–1 progress, e.g. a scroll scene);
+ * - `orbitControls()` — drag / wheel / pinch / arrow keys, damping, optional
+ *   auto-rotate (off under reduced motion).
+ *
+ * Math, geometry and the scene graph are pure (SSR / workers); rendering
+ * needs WebGL2 (`createRenderer()` throws a clear error without it). Model
+ * loaders live in `motionary/runtime/format-gltf` and `format-obj`.
+ */
+
+type Vec3 = [number, number, number];
+type Quat = [number, number, number, number];
+type Mat4 = Float32Array;
+interface Geometry {
+    positions: Float32Array;
+    normals?: Float32Array;
+    uvs?: Float32Array;
+    indices?: Uint16Array | Uint32Array;
+    /** 'triangles' (default), 'lines', 'points'. */
+    mode?: 'triangles' | 'lines' | 'points';
+    /** Renderer cache. */
+    _gpu?: unknown;
+}
+interface GlTexture {
+    source: TexImageSource | {
+        width: number;
+        height: number;
+        data: Uint8Array | Uint8ClampedArray;
+    };
+    /** sRGB colour data (default true for colour maps). */
+    srgb?: boolean;
+    repeat?: boolean;
+    flipY?: boolean;
+    /** Re-upload every frame a new video frame is ready. */
+    video?: boolean;
+    needsUpdate?: boolean;
+    _gpu?: unknown;
+}
+interface Material {
+    type: 'standard' | 'unlit' | 'shader';
+    /** Linear RGBA multiplier (sRGB input converted by the shader). */
+    color: [number, number, number, number];
+    map?: GlTexture | null;
+    metallic: number;
+    roughness: number;
+    emissive: Vec3;
+    doubleSided?: boolean;
+    transparent?: boolean;
+    wireframe?: boolean;
+    /** 'shader' materials: GLSL ES 3.00 fragment body + uniforms. */
+    fragment?: string;
+    uniforms?: Record<string, number | number[] | Float32Array | GlTexture>;
+    _gpu?: unknown;
+}
+interface Mesh {
+    geometry: Geometry;
+    material: Material;
+}
+declare class GlNode {
+    name: string;
+    position: Vec3;
+    rotation: Quat;
+    scale: Vec3;
+    /** Set to use a fixed local matrix instead of position / rotation / scale (glTF `matrix`). */
+    matrix: Mat4 | null;
+    children: GlNode[];
+    parent: GlNode | null;
+    mesh: Mesh | Mesh[] | null;
+    visible: boolean;
+    /** Free-form data (loaders put source info here). */
+    extras: Record<string, unknown>;
+    readonly world: Mat4;
+    constructor(name?: string, mesh?: Mesh | Mesh[] | null);
+    add(...nodes: GlNode[]): this;
+    remove(n: GlNode): void;
+    setEuler(x: number, y: number, z: number): this;
+    local(): Mat4;
+    /** Recompute world matrices of this subtree. */
+    updateWorld(parent?: Mat4): void;
+    traverse(fn: (n: GlNode) => void): void;
+    find(name: string): GlNode | null;
+}
+declare class Camera extends GlNode {
+    fov: number;
+    near: number;
+    far: number;
+    aspect: number;
+    target: Vec3;
+    up: Vec3;
+    constructor(o?: {
+        fov?: number;
+        near?: number;
+        far?: number;
+        position?: Vec3;
+        target?: Vec3;
+    });
+    view(): Mat4;
+    projection(): Mat4;
+}
+interface Light {
+    type: 'directional' | 'point';
+    /** Direction the light travels (directional) or position (point). */
+    vector: Vec3;
+    color: Vec3;
+    intensity: number;
+}
+declare class Scene {
+    root: GlNode;
+    ambient: Vec3;
+    lights: Light[];
+    /** Clear colour (sRGB, 0–1) or null for transparent. */
+    background: [number, number, number, number] | null;
+    exposure: number;
+    add(...n: GlNode[]): this;
+}
+
+/**
+ * `<usa-gl-scene src="model.glb" controls auto-rotate></usa-gl-scene>` (10.5)
+ * — a WebGL2 3D viewer on **`motionary/runtime/gl`** (requires `use(gl)`;
+ * `.gltf` / `.glb` models also need `motionary/runtime/format-gltf`, `.obj`
+ * needs `motionary/runtime/format-obj`). Without `src` it shows a built-in
+ * `shape` (torus · box · sphere · plane). `color`, `metallic`, `roughness`,
+ * `background`, `exposure`, `controls` (drag / wheel / pinch / arrow keys),
+ * `auto-rotate` (deg/s; off under reduced motion), `video` (a video URL
+ * mapped onto the shape as a texture; `video-scrub` ties its time to the
+ * element's scroll position instead of playing), `label` (accessible name).
+ * Renders only while visible. `scene`, `camera`, `root`, `reload()`;
+ * `usa:load` { nodes, meshes }, `usa:error`.
+ * `<usa-three-scene>` is an alias with the same API.
+ */
+interface UsaGlSceneElement extends UsaElement {
+    readonly scene: Scene | null;
+    readonly camera: Camera | null;
+    readonly root: GlNode | null;
+    reload(): Promise<void>;
+}
+declare function defineGlScene(tag?: string): CustomElementConstructor | undefined;
+/** `<usa-three-scene>` — alias of `<usa-gl-scene>` (same attributes, events and methods; no Three.js involved). */
+declare function defineThreeScene(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-gpu-particles count="20000" mode="swirl"></usa-gpu-particles>` (10.5,
+ * WebGPU effects 2.0) — a particle canvas simulated by a **WebGPU compute
+ * shader** (positions + velocities in a storage buffer, drawn as instanced
+ * quads), falling back to a CPU simulation on Canvas 2D (fewer particles)
+ * where WebGPU is missing or refused. `mode` (swirl · galaxy · fountain),
+ * `count`, `colors` (comma list), `size`, `speed`, `trail` (0–1 frame fade,
+ * a one-pass post effect), `pointer` (particles flee the pointer), `label`.
+ * Only simulates while visible; one still frame under reduced motion.
+ * `data-usa-backend` = webgpu | canvas2d; `backend`; `usa:backend`.
+ */
+interface UsaGpuParticlesElement extends UsaElement {
+    readonly backend: string;
+}
+/** WGSL compute pass: integrates every particle (flow field / orbit / fountain + pointer repulsion). */
+declare const PARTICLE_SIM_WGSL = "struct P{pos:vec2f,vel:vec2f};struct U{t:f32,dt:f32,mode:f32,speed:f32,ptr:vec2f,aspect:f32,size:f32,c0:vec4f,c1:vec4f};\n@group(0) @binding(1) var<uniform> u:U;@group(0) @binding(0) var<storage,read_write> ps:array<P>;\nfn h(n:f32)->f32{return fract(sin(n)*43758.5453);}\n@compute @workgroup_size(64) fn sim(@builtin(global_invocation_id) id:vec3u){let i=id.x;if(i>=arrayLength(&ps)){return;}var p=ps[i];let fi=f32(i);\nvar acc=vec2f(0.0);let r=length(p.pos)+1e-3;\nif(u.mode<0.5){acc=vec2f(-p.pos.y,p.pos.x)*0.9/r+vec2f(sin(p.pos.y*3.0+u.t),cos(p.pos.x*3.0-u.t))*0.35-p.pos*0.15;}\nelse if(u.mode<1.5){acc=vec2f(-p.pos.y,p.pos.x)/(r*r*4.0+0.2)-p.pos*0.08/r;}\nelse{acc=vec2f(0.0,-1.4);if(p.pos.y<-1.1){p.pos=vec2f((h(fi+u.t)-0.5)*0.1,-1.0);p.vel=vec2f((h(fi*1.7+u.t)-0.5)*0.9,1.6+h(fi*3.1)*0.8);}}\nlet d=p.pos-u.ptr;let dl=length(d);if(dl<0.35&&u.ptr.x>-5.0){acc+=d/(dl*dl+0.02)*0.12;}\np.vel=(p.vel+acc*u.dt*u.speed)*pow(0.985,u.dt*60.0);p.pos+=p.vel*u.dt*u.speed;\nif(abs(p.pos.x)>1.6||abs(p.pos.y)>1.6){p.pos=vec2f(h(fi)-0.5,h(fi*7.3)-0.5)*1.6;p.vel=vec2f(0.0);}ps[i]=p;}";
+/** WGSL render pass: instanced soft round quads, additive. */
+declare const PARTICLE_DRAW_WGSL = "struct P{pos:vec2f,vel:vec2f};struct U{t:f32,dt:f32,mode:f32,speed:f32,ptr:vec2f,aspect:f32,size:f32,c0:vec4f,c1:vec4f};\n@group(0) @binding(1) var<uniform> u:U;@group(0) @binding(0) var<storage,read> ps:array<P>;\nstruct V{@builtin(position) pos:vec4f,@location(0) q:vec2f,@location(1) c:vec4f};\n@vertex fn vs(@builtin(vertex_index) vi:u32,@builtin(instance_index) ii:u32)->V{var c=array<vec2f,6>(vec2f(-1.0,-1.0),vec2f(1.0,-1.0),vec2f(-1.0,1.0),vec2f(-1.0,1.0),vec2f(1.0,-1.0),vec2f(1.0,1.0));let p=ps[ii];let q=c[vi];var o:V;\no.pos=vec4f(p.pos.x/u.aspect+q.x*u.size/u.aspect,p.pos.y+q.y*u.size,0.0,1.0);o.q=q;o.c=mix(u.c0,u.c1,clamp(length(p.vel)*0.8,0.0,1.0));return o;}\n@fragment fn fs(v:V)->@location(0) vec4f{let a=smoothstep(1.0,0.0,length(v.q));return vec4f(v.c.rgb*a,a*v.c.a);}";
+declare function defineGpuParticles(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-shader-backdrop preset="aurora" post="bloom,vignette,grain"></usa-shader-backdrop>`
+ * (10.5, WebGPU effects 2.0 — post-processing chain) — an animated shader
+ * background (WebGL2) rendered into a framebuffer and run through a chain
+ * of post passes in order: `bloom`, `vignette`, `grain`, `chromatic`
+ * (aberration), `pixelate`, `scanlines`. `preset` (aurora · plasma · waves ·
+ * nebula) or your own GLSL `vec3 scene(vec2 uv, float t)` in a child
+ * `<script type="x-shader/x-fragment">`; `colors` (3), `speed`,
+ * `intensity` (post strength 0–1), `label`. Content inside sits on top.
+ * Renders only while visible; one still frame under reduced motion; a CSS
+ * gradient without WebGL2. `passes` (the post chain in use); `usa:backend`.
+ */
+interface UsaShaderBackdropElement extends UsaElement {
+    readonly passes: string[];
+}
+/** Built-in scenes: GLSL bodies of `vec3 scene(vec2 uv, float t)`. */
+declare const BACKDROP_PRESETS: Record<string, string>;
+/** Post passes (GLSL bodies reading `u_src`). */
+declare const POST_PASSES: Record<string, string>;
+declare function defineShaderBackdrop(tag?: string): CustomElementConstructor | undefined;
+
+/**
  * motionary/components/widgets — the 6.x animated UI widgets, in their own
  * entry so `motionary/components` and `components/lite` keep their size
  * budgets. Every widget is reduced-motion safe and keyboard accessible.
@@ -2485,8 +2681,12 @@ declare global {
         'usa-scroll-ring': UsaScrollRingElement;
         'usa-parallax-layers': UsaParallaxLayersElement;
         'usa-smooth-scroll': UsaSmoothScrollElement;
+        'usa-gl-scene': UsaGlSceneElement;
+        'usa-three-scene': UsaGlSceneElement;
+        'usa-gpu-particles': UsaGpuParticlesElement;
+        'usa-shader-backdrop': UsaShaderBackdropElement;
     }
 }
 
-export { CAROUSEL_EFFECTS, EQ_PRESETS, FESTIVAL_THEMES, LOTTIE_ICONS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PRESENCE_STATES, PROGRESS_VARIANTS, RETRO_VARIANTS, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SPARK_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, WORKER_SCENES, backgroundCss, badgeProgress, cartTotal, defineAddToCart, defineBadgeWall, defineBarChart, defineBgGenerator, defineCarousel, defineCartDrawer, defineChapterNav, defineChatComposer, defineClockControl, defineCodeExport, defineColorPicker, defineCommandPalette, defineCompare, defineCountdown, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineFestivalBanner, defineField, defineFileDrop, defineGauge, defineGenArt, defineGestureSticker, defineGlobe, defineGyroCard, defineHeroVideo, defineHudPanel, defineHydrate, defineInstallButton, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLiquidNav, defineLocationCard, defineLottie, defineLottieIcon, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMessageList, defineMilestones, defineModal, defineMotion, defineMotionInspector, defineMotionPrefs, defineMotionSpec, defineMusicPlayer, defineNativePreview, defineNavMorph, defineNotificationBell, defineOdometer, defineOrganicCard, defineOtp, definePagination, definePanorama, defineParallaxLayers, definePauseAll, definePerfMonitor, definePluginCard, definePluginStore, definePresence, definePrizeWheel, defineProductGallery, defineProgressRing, definePropPanel, definePullCord, defineRadar, defineReactions, defineRedEnvelope, defineRetroButton, defineRouteTransition, defineScene, defineScrollRing, defineScrollScene, defineSegmented, defineSheet, defineShortcut, defineSkeletonReveal, defineSketchChart, defineSmoothScroll, defineSparkline, defineSpatialCard, defineStarRating, defineStepper, defineStickyWall, defineStories, defineSuggestionChips, defineSwipeDeck, defineSwitch, defineTabBar, defineTerminal, defineTextSplitter, defineThemeSurface, defineThemeSwitcher, defineTip, defineToastStack, defineUploadProgress, defineVideoCard, defineVoiceButton, defineVolumeKnob, defineWeatherCard, defineWidgets, defineWorkerCanvas, defineXpBar, describeComponent, exportComponent, formatBytes, formatDistance, fuzzyMatch, haversine, hexToHsv, hsvToHex, initials, keyLabels, levelFor, matchesKeys, monthGrid, pageWindow, parseChips, parseISODate, parseLRC, parseMarkers, parseProps, parseReactions, parseScrub, parseTargets, passwordStrength, project, rankRows, sanitizeCode, sparkPoints, splitTime, stackToast, waveBars, wheelAngle, wrapIndex };
-export type { BellNotice, CartItem, ChatMessage, ExportFormat, ExportedNode, GlobeMarker, LeaderRow, PaletteCommand, PerfStats, PresenceState, PropSpec, RadarTarget, StackToastOptions, StickerState, UsaAddToCartElement, UsaBadgeWallElement, UsaBarChartElement, UsaBgGeneratorElement, UsaCarouselElement, UsaCartDrawerElement, UsaChapterNavElement, UsaChatComposerElement, UsaClockControlElement, UsaCodeExportElement, UsaColorPickerElement, UsaCommandPaletteElement, UsaCompareElement, UsaCountdownElement, UsaCubeGalleryElement, UsaDatePickerElement, UsaDisclosureElement, UsaDockElement, UsaEqualizerElement, UsaFestivalBannerElement, UsaFieldElement, UsaFileDropElement, UsaGaugeElement, UsaGenArtElement, UsaGestureStickerElement, UsaGlobeElement, UsaGyroCardElement, UsaHeroVideoElement, UsaHudPanelElement, UsaHydrateElement, UsaInstallButtonElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaKpiElement, UsaLeaderboardElement, UsaLiquidNavElement, UsaLocationCardElement, UsaLottieElement, UsaLottieIconElement, UsaLyricsElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMessageListElement, UsaMilestonesElement, UsaModalElement, UsaMotionElement, UsaMotionInspectorElement, UsaMotionPrefsElement, UsaMotionSpecElement, UsaMusicPlayerElement, UsaNativePreviewElement, UsaNavMorphElement, UsaNotificationBellElement, UsaOdometerElement, UsaOrganicCardElement, UsaOtpElement, UsaPaginationElement, UsaPanoramaElement, UsaParallaxLayersElement, UsaPauseAllElement, UsaPerfMonitorElement, UsaPluginCardElement, UsaPluginStoreElement, UsaPresenceElement, UsaPrizeWheelElement, UsaProductGalleryElement, UsaProgressRingElement, UsaPropPanelElement, UsaPullCordElement, UsaRadarElement, UsaReactionsElement, UsaRedEnvelopeElement, UsaRetroButtonElement, UsaRouteTransitionElement, UsaSceneElement, UsaScrollRingElement, UsaScrollSceneElement, UsaSegmentedElement, UsaSheetElement, UsaShortcutElement, UsaSkeletonRevealElement, UsaSketchChartElement, UsaSmoothScrollElement, UsaSparklineElement, UsaSpatialCardElement, UsaStarRatingElement, UsaStepperElement, UsaStickyWallElement, UsaStoriesElement, UsaSuggestionChipsElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTerminalElement, UsaTextSplitterElement, UsaThemeSurfaceElement, UsaThemeSwitcherElement, UsaTipElement, UsaToastStackElement, UsaUploadProgressElement, UsaVideoCardElement, UsaVoiceButtonElement, UsaVolumeKnobElement, UsaWeatherCardElement, UsaWorkerCanvasElement, UsaXpBarElement, WallBadge };
+export { BACKDROP_PRESETS, CAROUSEL_EFFECTS, EQ_PRESETS, FESTIVAL_THEMES, LOTTIE_ICONS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PARTICLE_DRAW_WGSL, PARTICLE_SIM_WGSL, POST_PASSES, PRESENCE_STATES, PROGRESS_VARIANTS, RETRO_VARIANTS, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SPARK_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, WORKER_SCENES, backgroundCss, badgeProgress, cartTotal, defineAddToCart, defineBadgeWall, defineBarChart, defineBgGenerator, defineCarousel, defineCartDrawer, defineChapterNav, defineChatComposer, defineClockControl, defineCodeExport, defineColorPicker, defineCommandPalette, defineCompare, defineCountdown, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineFestivalBanner, defineField, defineFileDrop, defineGauge, defineGenArt, defineGestureSticker, defineGlScene, defineGlobe, defineGpuParticles, defineGyroCard, defineHeroVideo, defineHudPanel, defineHydrate, defineInstallButton, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLiquidNav, defineLocationCard, defineLottie, defineLottieIcon, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMessageList, defineMilestones, defineModal, defineMotion, defineMotionInspector, defineMotionPrefs, defineMotionSpec, defineMusicPlayer, defineNativePreview, defineNavMorph, defineNotificationBell, defineOdometer, defineOrganicCard, defineOtp, definePagination, definePanorama, defineParallaxLayers, definePauseAll, definePerfMonitor, definePluginCard, definePluginStore, definePresence, definePrizeWheel, defineProductGallery, defineProgressRing, definePropPanel, definePullCord, defineRadar, defineReactions, defineRedEnvelope, defineRetroButton, defineRouteTransition, defineScene, defineScrollRing, defineScrollScene, defineSegmented, defineShaderBackdrop, defineSheet, defineShortcut, defineSkeletonReveal, defineSketchChart, defineSmoothScroll, defineSparkline, defineSpatialCard, defineStarRating, defineStepper, defineStickyWall, defineStories, defineSuggestionChips, defineSwipeDeck, defineSwitch, defineTabBar, defineTerminal, defineTextSplitter, defineThemeSurface, defineThemeSwitcher, defineThreeScene, defineTip, defineToastStack, defineUploadProgress, defineVideoCard, defineVoiceButton, defineVolumeKnob, defineWeatherCard, defineWidgets, defineWorkerCanvas, defineXpBar, describeComponent, exportComponent, formatBytes, formatDistance, fuzzyMatch, haversine, hexToHsv, hsvToHex, initials, keyLabels, levelFor, matchesKeys, monthGrid, pageWindow, parseChips, parseISODate, parseLRC, parseMarkers, parseProps, parseReactions, parseScrub, parseTargets, passwordStrength, project, rankRows, sanitizeCode, sparkPoints, splitTime, stackToast, waveBars, wheelAngle, wrapIndex };
+export type { BellNotice, CartItem, ChatMessage, ExportFormat, ExportedNode, GlobeMarker, LeaderRow, PaletteCommand, PerfStats, PresenceState, PropSpec, RadarTarget, StackToastOptions, StickerState, UsaAddToCartElement, UsaBadgeWallElement, UsaBarChartElement, UsaBgGeneratorElement, UsaCarouselElement, UsaCartDrawerElement, UsaChapterNavElement, UsaChatComposerElement, UsaClockControlElement, UsaCodeExportElement, UsaColorPickerElement, UsaCommandPaletteElement, UsaCompareElement, UsaCountdownElement, UsaCubeGalleryElement, UsaDatePickerElement, UsaDisclosureElement, UsaDockElement, UsaEqualizerElement, UsaFestivalBannerElement, UsaFieldElement, UsaFileDropElement, UsaGaugeElement, UsaGenArtElement, UsaGestureStickerElement, UsaGlSceneElement, UsaGlobeElement, UsaGpuParticlesElement, UsaGyroCardElement, UsaHeroVideoElement, UsaHudPanelElement, UsaHydrateElement, UsaInstallButtonElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaKpiElement, UsaLeaderboardElement, UsaLiquidNavElement, UsaLocationCardElement, UsaLottieElement, UsaLottieIconElement, UsaLyricsElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMessageListElement, UsaMilestonesElement, UsaModalElement, UsaMotionElement, UsaMotionInspectorElement, UsaMotionPrefsElement, UsaMotionSpecElement, UsaMusicPlayerElement, UsaNativePreviewElement, UsaNavMorphElement, UsaNotificationBellElement, UsaOdometerElement, UsaOrganicCardElement, UsaOtpElement, UsaPaginationElement, UsaPanoramaElement, UsaParallaxLayersElement, UsaPauseAllElement, UsaPerfMonitorElement, UsaPluginCardElement, UsaPluginStoreElement, UsaPresenceElement, UsaPrizeWheelElement, UsaProductGalleryElement, UsaProgressRingElement, UsaPropPanelElement, UsaPullCordElement, UsaRadarElement, UsaReactionsElement, UsaRedEnvelopeElement, UsaRetroButtonElement, UsaRouteTransitionElement, UsaSceneElement, UsaScrollRingElement, UsaScrollSceneElement, UsaSegmentedElement, UsaShaderBackdropElement, UsaSheetElement, UsaShortcutElement, UsaSkeletonRevealElement, UsaSketchChartElement, UsaSmoothScrollElement, UsaSparklineElement, UsaSpatialCardElement, UsaStarRatingElement, UsaStepperElement, UsaStickyWallElement, UsaStoriesElement, UsaSuggestionChipsElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTerminalElement, UsaTextSplitterElement, UsaThemeSurfaceElement, UsaThemeSwitcherElement, UsaTipElement, UsaToastStackElement, UsaUploadProgressElement, UsaVideoCardElement, UsaVoiceButtonElement, UsaVolumeKnobElement, UsaWeatherCardElement, UsaWorkerCanvasElement, UsaXpBarElement, WallBadge };

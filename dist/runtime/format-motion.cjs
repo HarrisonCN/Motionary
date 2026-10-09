@@ -1,10 +1,10 @@
 'use strict';
 
-var registry = require('../chunks/registry-tzwKkldE.cjs');
-var tween = require('../chunks/tween-CwLLC3Ko.cjs');
+var registry = require('../chunks/registry-VhfPSI0v.cjs');
+var tween = require('../chunks/tween-_BGIl6hK.cjs');
 var ease = require('../chunks/ease-HwYZnZat.cjs');
-var keyframes = require('../chunks/keyframes-tC3I7anQ.cjs');
-require('../chunks/ticker-Un0bvTWR.cjs');
+var keyframes = require('../chunks/keyframes-Ce1s05n3.cjs');
+require('../chunks/ticker-DvmC6WLS.cjs');
 
 /**
  * `motionary/runtime/format-motion` (10.1) — play Motion / Framer-style
