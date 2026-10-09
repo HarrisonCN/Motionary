@@ -8,7 +8,9 @@ import css from './star-rating.css?raw';
  * pops the chosen star and throws a small sparkle burst, the other stars
  * ripple in sequence. `max`, `step` (`1` · `0.5`), `readonly`, `label`,
  * `icon` (`star` · `heart`). Keyboard: it is a `role="slider"` — arrows,
- * Home / End. Event `usa:change` (`{ value }`). Reduced motion: no pop,
+ * Home / End. Events `change`, `usa:change` (`{ value }`). Form-associated
+ * (7.9): with `name` the value is submitted like `<usa-rating>`'s, which it
+ * replaces in 8.0. Reduced motion: no pop,
  * burst or ripple.
  */
 export interface UsaStarRatingElement extends UsaElement {
@@ -20,13 +22,26 @@ const PATHS: Record<string, string> = {
   heart: 'M12 21s-7.5-4.6-9.6-9.2C.9 8.4 2.9 4.5 6.6 4.5c2.1 0 3.6 1.2 5.4 3.1 1.8-1.9 3.3-3.1 5.4-3.1 3.7 0 5.7 3.9 4.2 7.3C19.5 16.4 12 21 12 21z',
 };
 
+/** <usa-rating> icon characters accepted by `icon` (7.9). */
+const ICON_ALIASES: Record<string, string> = { '★': 'star', '☆': 'star', '♥': 'heart', '❤': 'heart', '❤️': 'heart' };
+
 export function defineStarRating(tag = 'usa-star-rating'): CustomElementConstructor | undefined {
   return defineElement(
     tag,
     (Base) => {
       class UsaStarRating extends Base {
+        static formAssociated = true;
         static get observedAttributes(): string[] {
           return ['max', 'icon', 'readonly', 'step'];
+        }
+        private _internals: ElementInternals | null = null;
+        constructor() {
+          super();
+          try {
+            this._internals = (this as any).attachInternals?.() ?? null;
+          } catch {
+            this._internals = null;
+          }
         }
         private _v = 0;
         private _stars: HTMLElement[] = [];
@@ -47,7 +62,7 @@ export function defineStarRating(tag = 'usa-star-rating'): CustomElementConstruc
 
         mount(): void {
           this.querySelectorAll(':scope > [data-usa-part]').forEach((n) => n.remove());
-          const icon = PATHS[this.str('icon', 'star')] || PATHS.star;
+          const icon = PATHS[ICON_ALIASES[this.str('icon', 'star')] || this.str('icon', 'star')] || PATHS.star;
           this._stars = [];
           for (let i = 0; i < this.max; i++) {
             const s = part('span', 'usa-star', { 'aria-hidden': 'true' }, `<svg viewBox="0 0 24 24" width="100%" height="100%"><path class="usa-star-bg" d="${icon}"/></svg><span class="usa-star-fg"><svg viewBox="0 0 24 24" width="24" height="24"><path d="${icon}"/></svg></span>`);
@@ -98,6 +113,7 @@ export function defineStarRating(tag = 'usa-star-rating'): CustomElementConstruc
         private sync(): void {
           this.setAttribute('aria-valuenow', String(this._v));
           this.setAttribute('aria-valuetext', `${this._v} of ${this.max}`);
+          this._internals?.setFormValue?.(String(this._v));
           if (this.flag('readonly')) this.setAttribute('aria-label', `${this.str('label', 'Rating')}: ${this._v} of ${this.max}`);
         }
 
@@ -127,7 +143,10 @@ export function defineStarRating(tag = 'usa-star-rating'): CustomElementConstruc
               else rm();
             }
           }
-          if (changed) this.emit('change', { value: nv });
+          if (changed) {
+            this.dispatchEvent(new Event('change', { bubbles: true }));
+            this.emit('change', { value: nv });
+          }
         }
       }
       return UsaStarRating as unknown as CustomElementConstructor;

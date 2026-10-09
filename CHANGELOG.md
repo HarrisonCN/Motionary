@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.9.0] - 2026-10-08
+
+### Added
+- **2 new components (7.9)** in `motionary/components/widgets` (also in `dist/widgets.umd.js`):
+  - `<usa-command-palette>` — ⌘K command palette on the native `<dialog>` (top layer, Esc, focus returns): scales in, fuzzy filtering with highlighted letters, results stagger in, a highlight glides between rows (↑ / ↓ / Enter, hover, click), groups. Commands from child `<option value data-group data-keys>` or `setCommands([{ id, label, group, keys }])`; `hotkey` (default `mod+k`, `none`), `inline` (rendered open in the page, no dialog), `placeholder`, `label`; `show()`, `close()`, `toggle()`, `opened`; `usa:run` { id, label }, `usa:open`, `usa:close`. Helpers `fuzzyMatch()`, `keyLabels()`, `matchesKeys()`.
+  - `<usa-shortcut keys="mod+k">` — keyboard-shortcut hint as keycaps (⌘ / ⇧ / ⌥ on Apple platforms, Ctrl / Shift / Alt elsewhere) with an optional `label`; pressing the combination anywhere presses the caps one after another and fires `usa:trigger` (`for="id"` clicks that element, `listen="false"` only displays); `press()`.
+- **`npx usa-codemod-8`** (new bin) and **[docs/upgrading-8.md](./docs/upgrading-8.md)**.
+- `<usa-star-rating>` is now form-associated (`name` submits the value) and also fires a native `change`; `icon` accepts the old `<usa-rating>` characters (★ ♥).
+- Showcase: 2 new gallery cards with copyable code, live demos and live Store thumbnails; Animation Store 331 → 333 items.
+
+### Deprecated (removed in 8.0 — warns once in the console)
+- `<usa-rating>` / `defineRating()` → `<usa-star-rating>` / `defineStarRating()` (same `value`, `max`, `readonly`, `label`, `name`; `icon="♥"` → `icon="heart"`; `--usa-rating-on` → `--usa-star-on`). `npx usa-codemod-8 --write src` rewrites tags, icons and the CSS variable (manual report for `defineRating`, `createElement` and CSS selectors).
+
+### Accessibility
+- Palette: `combobox` input with `aria-activedescendant` over a `listbox` of `option`s (`aria-selected`), group headings are presentational, "No results" is shown as text. Shortcut: keycaps are one `role="img"` with a spoken label ("Command K" / "Control K"). Reduced motion: no scale, stagger, glide or key press.
+
 ## [7.8.0] - 2026-10-08
 
 ### Added

@@ -223,7 +223,9 @@ declare function defineSkeletonReveal(tag?: string): CustomElementConstructor | 
  * pops the chosen star and throws a small sparkle burst, the other stars
  * ripple in sequence. `max`, `step` (`1` · `0.5`), `readonly`, `label`,
  * `icon` (`star` · `heart`). Keyboard: it is a `role="slider"` — arrows,
- * Home / End. Event `usa:change` (`{ value }`). Reduced motion: no pop,
+ * Home / End. Events `change`, `usa:change` (`{ value }`). Form-associated
+ * (7.9): with `name` the value is submitted like `<usa-rating>`'s, which it
+ * replaces in 8.0. Reduced motion: no pop,
  * burst or ripple.
  */
 interface UsaStarRatingElement extends UsaElement {
@@ -1144,6 +1146,62 @@ declare function waveBars(level: number, n?: number, phase?: number): number[];
 declare function defineVoiceButton(tag?: string): CustomElementConstructor | undefined;
 
 /**
+ * `<usa-command-palette>` (7.9) — a ⌘K command palette on the native
+ * `<dialog>` (top layer, Esc, focus returns to the opener): it scales in,
+ * the results filter as you type (fuzzy, matched letters highlighted) and
+ * stagger in, a highlight glides to the active row (↑ / ↓, Enter runs it).
+ * Commands come from child `<option value="id" data-group="Navigation"
+ * data-keys="mod+n">Label</option>` elements or `setCommands([{ id, label,
+ * group?, keys? }])`. `inline` renders it open in the page (no dialog,
+ * e.g. for docs). `hotkey` (default `mod+k`; `none` to disable) opens it
+ * from anywhere; `placeholder`, `label`. `show()`, `close()`, `toggle()`,
+ * `opened`; `usa:run` { id, label }, `usa:open`, `usa:close`. A `combobox` +
+ * `listbox`; reduced motion: no scale, stagger or glide.
+ */
+interface PaletteCommand {
+    id: string;
+    label: string;
+    group?: string;
+    keys?: string;
+}
+interface UsaCommandPaletteElement extends UsaElement {
+    readonly opened: boolean;
+    commands: PaletteCommand[];
+    setCommands(list: PaletteCommand[]): void;
+    show(): void;
+    close(): void;
+    toggle(): void;
+}
+/**
+ * Fuzzy match: every query letter in order. Returns a score (higher is
+ * better; -1 = no match) and the matched indexes (7.9).
+ */
+declare function fuzzyMatch(query: string, text: string): {
+    score: number;
+    hits: number[];
+};
+/** "mod+shift+k" → ["⌘", "⇧", "K"] on Apple platforms, ["Ctrl", "Shift", "K"] elsewhere (7.9). */
+declare function keyLabels(keys: string, apple?: boolean): string[];
+/** Does a KeyboardEvent match "mod+k"-style keys? (7.9) */
+declare function matchesKeys(e: KeyboardEvent, keys: string, apple?: boolean): boolean;
+declare function defineCommandPalette(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-shortcut keys="mod+k">` (7.9) — a keyboard-shortcut hint rendered
+ * as keycaps (⌘ on Apple platforms, Ctrl elsewhere). When the user presses
+ * the combination anywhere on the page the caps press down one after another
+ * and `usa:trigger` fires (`listen="false"` to only display it; `for="id"`
+ * clicks that element). Optional `label` text after the caps. The caps are
+ * `<kbd>` with an accessible text like "Control K"; reduced motion: no
+ * press animation.
+ */
+interface UsaShortcutElement extends UsaElement {
+    readonly labels: string[];
+    press(): void;
+}
+declare function defineShortcut(tag?: string): CustomElementConstructor | undefined;
+
+/**
  * motionary/components/widgets — the 6.x animated UI widgets, in their own
  * entry so `motionary/components` and `components/lite` keep their size
  * budgets. Every widget is reduced-motion safe and keyboard accessible.
@@ -1224,8 +1282,10 @@ declare global {
         'usa-chat-composer': UsaChatComposerElement;
         'usa-suggestion-chips': UsaSuggestionChipsElement;
         'usa-voice-button': UsaVoiceButtonElement;
+        'usa-command-palette': UsaCommandPaletteElement;
+        'usa-shortcut': UsaShortcutElement;
     }
 }
 
-export { CAROUSEL_EFFECTS, EQ_PRESETS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PRESENCE_STATES, PROGRESS_VARIANTS, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SPARK_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, badgeProgress, cartTotal, defineAddToCart, defineBadgeWall, defineBarChart, defineCarousel, defineCartDrawer, defineChatComposer, defineColorPicker, defineCompare, defineCountdown, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineField, defineFileDrop, defineGauge, defineGlobe, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLocationCard, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMessageList, defineMilestones, defineModal, defineMusicPlayer, defineNavMorph, defineNotificationBell, defineOdometer, defineOtp, definePagination, definePresence, definePrizeWheel, defineProductGallery, defineProgressRing, definePullCord, defineReactions, defineSegmented, defineSheet, defineSkeletonReveal, defineSparkline, defineStarRating, defineStepper, defineStories, defineSuggestionChips, defineSwipeDeck, defineSwitch, defineTabBar, defineTip, defineToastStack, defineUploadProgress, defineVoiceButton, defineVolumeKnob, defineWeatherCard, defineWidgets, defineXpBar, formatBytes, formatDistance, haversine, hexToHsv, hsvToHex, initials, levelFor, monthGrid, pageWindow, parseChips, parseISODate, parseLRC, parseMarkers, parseReactions, passwordStrength, project, rankRows, sanitizeCode, sparkPoints, splitTime, stackToast, waveBars, wheelAngle, wrapIndex };
-export type { BellNotice, CartItem, ChatMessage, GlobeMarker, LeaderRow, PresenceState, StackToastOptions, UsaAddToCartElement, UsaBadgeWallElement, UsaBarChartElement, UsaCarouselElement, UsaCartDrawerElement, UsaChatComposerElement, UsaColorPickerElement, UsaCompareElement, UsaCountdownElement, UsaCubeGalleryElement, UsaDatePickerElement, UsaDisclosureElement, UsaDockElement, UsaEqualizerElement, UsaFieldElement, UsaFileDropElement, UsaGaugeElement, UsaGlobeElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaKpiElement, UsaLeaderboardElement, UsaLocationCardElement, UsaLyricsElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMessageListElement, UsaMilestonesElement, UsaModalElement, UsaMusicPlayerElement, UsaNavMorphElement, UsaNotificationBellElement, UsaOdometerElement, UsaOtpElement, UsaPaginationElement, UsaPresenceElement, UsaPrizeWheelElement, UsaProductGalleryElement, UsaProgressRingElement, UsaPullCordElement, UsaReactionsElement, UsaSegmentedElement, UsaSheetElement, UsaSkeletonRevealElement, UsaSparklineElement, UsaStarRatingElement, UsaStepperElement, UsaStoriesElement, UsaSuggestionChipsElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTipElement, UsaToastStackElement, UsaUploadProgressElement, UsaVoiceButtonElement, UsaVolumeKnobElement, UsaWeatherCardElement, UsaXpBarElement, WallBadge };
+export { CAROUSEL_EFFECTS, EQ_PRESETS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PRESENCE_STATES, PROGRESS_VARIANTS, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SPARK_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, badgeProgress, cartTotal, defineAddToCart, defineBadgeWall, defineBarChart, defineCarousel, defineCartDrawer, defineChatComposer, defineColorPicker, defineCommandPalette, defineCompare, defineCountdown, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineField, defineFileDrop, defineGauge, defineGlobe, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLocationCard, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMessageList, defineMilestones, defineModal, defineMusicPlayer, defineNavMorph, defineNotificationBell, defineOdometer, defineOtp, definePagination, definePresence, definePrizeWheel, defineProductGallery, defineProgressRing, definePullCord, defineReactions, defineSegmented, defineSheet, defineShortcut, defineSkeletonReveal, defineSparkline, defineStarRating, defineStepper, defineStories, defineSuggestionChips, defineSwipeDeck, defineSwitch, defineTabBar, defineTip, defineToastStack, defineUploadProgress, defineVoiceButton, defineVolumeKnob, defineWeatherCard, defineWidgets, defineXpBar, formatBytes, formatDistance, fuzzyMatch, haversine, hexToHsv, hsvToHex, initials, keyLabels, levelFor, matchesKeys, monthGrid, pageWindow, parseChips, parseISODate, parseLRC, parseMarkers, parseReactions, passwordStrength, project, rankRows, sanitizeCode, sparkPoints, splitTime, stackToast, waveBars, wheelAngle, wrapIndex };
+export type { BellNotice, CartItem, ChatMessage, GlobeMarker, LeaderRow, PaletteCommand, PresenceState, StackToastOptions, UsaAddToCartElement, UsaBadgeWallElement, UsaBarChartElement, UsaCarouselElement, UsaCartDrawerElement, UsaChatComposerElement, UsaColorPickerElement, UsaCommandPaletteElement, UsaCompareElement, UsaCountdownElement, UsaCubeGalleryElement, UsaDatePickerElement, UsaDisclosureElement, UsaDockElement, UsaEqualizerElement, UsaFieldElement, UsaFileDropElement, UsaGaugeElement, UsaGlobeElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaKpiElement, UsaLeaderboardElement, UsaLocationCardElement, UsaLyricsElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMessageListElement, UsaMilestonesElement, UsaModalElement, UsaMusicPlayerElement, UsaNavMorphElement, UsaNotificationBellElement, UsaOdometerElement, UsaOtpElement, UsaPaginationElement, UsaPresenceElement, UsaPrizeWheelElement, UsaProductGalleryElement, UsaProgressRingElement, UsaPullCordElement, UsaReactionsElement, UsaSegmentedElement, UsaSheetElement, UsaShortcutElement, UsaSkeletonRevealElement, UsaSparklineElement, UsaStarRatingElement, UsaStepperElement, UsaStoriesElement, UsaSuggestionChipsElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTipElement, UsaToastStackElement, UsaUploadProgressElement, UsaVoiceButtonElement, UsaVolumeKnobElement, UsaWeatherCardElement, UsaXpBarElement, WallBadge };

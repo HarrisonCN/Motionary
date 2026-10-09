@@ -749,6 +749,21 @@ export const components = [
     '<usa-fx effect="voice-wave" trigger="click"><div class="bars"><i></i><i></i><i></i></div></usa-fx>\n<usa-fx effect="gen-skeleton" trigger="enter"><img src="generated.png" alt=""></usa-fx>',
     '<div class="demo-row"><usa-fx effect="voice-wave" trigger="click"><button type="button" class="demo-vbars" aria-label="Play voice wave"><i></i><i></i><i></i><i></i><i></i></button></usa-fx><usa-fx effect="gen-skeleton" trigger="click"><button type="button" class="demo-gencard">Generated image<br><small>tap to regenerate</small></button></usa-fx></div>',
     [{ key: 'effect', values: ['voice-wave', 'gen-skeleton'] }], '7.8'),
+  // ---- 7.9 -------------------------------------------------------------
+  W('usa-command-palette', 'ui', 'Command palette (⌘K)', '命令面板（⌘K）',
+    '7.9: a ⌘K command palette on the native <dialog> — scales in, filters as you type with fuzzy matching and highlighted letters, results stagger in and a highlight glides between rows (↑ ↓ Enter).',
+    '7.9：基于原生 <dialog> 的 ⌘K 命令面板 —— 缩放弹出，输入即模糊过滤并高亮匹配字母，结果依次入场，高亮条在行间滑动（↑ ↓ 回车）。',
+    ['command palette', 'cmdk', 'search', 'keyboard', 'launcher'],
+    '<usa-command-palette>\n  <option value="new" data-group="File" data-keys="mod+n">New file</option>\n  <option value="theme" data-group="View">Toggle theme</option>\n</usa-command-palette>\n<script>palette.addEventListener(\'usa:run\', (e) => run(e.detail.id));</script>',
+    '<div class="demo-col demo-cpw"><usa-command-palette inline hotkey="none" placeholder="Type a command…"><option value="new" data-group="File" data-keys="mod+n">New file</option><option value="save" data-group="File" data-keys="mod+s">Save</option><option value="theme" data-group="View" data-keys="mod+shift+l">Toggle dark theme</option><option value="docs" data-group="Help">Open documentation</option></usa-command-palette><p class="demo-hint" data-cp-out>Type “th”, use ↑ ↓ and Enter</p></div>',
+    undefined, { since: '7.9' }),
+  W('usa-shortcut', 'ui', 'Shortcut hint', '快捷键提示',
+    '7.9: keyboard-shortcut hints as keycaps (⌘ on Apple, Ctrl elsewhere); press the combination anywhere and the caps press down one after another and usa:trigger fires.',
+    '7.9：以键帽形式显示的快捷键提示（Apple 设备显示 ⌘，其他显示 Ctrl）；在页面任意处按下组合键，键帽依次按下并触发 usa:trigger。',
+    ['shortcut', 'keyboard', 'kbd', 'hotkey', 'hint'],
+    '<usa-shortcut keys="mod+k" label="Search"></usa-shortcut>\n<usa-shortcut keys="mod+shift+p" for="palette-button"></usa-shortcut>',
+    '<div class="demo-col demo-sks"><usa-shortcut keys="mod+k" label="Search" listen="false"></usa-shortcut><usa-shortcut keys="mod+shift+p" label="Commands" listen="false"></usa-shortcut><usa-shortcut keys="alt+enter" label="Send" listen="false"></usa-shortcut><button type="button" class="demo-btn" data-sk>Press them</button></div>',
+    undefined, { since: '7.9' }),
 ];
 
 /** item id → live-demo wiring. */
@@ -908,5 +923,18 @@ export const wire = {
       setTimeout(tick, 90);
     };
     tick();
+  },
+  'command-palette': (stage) => {
+    const p = stage.querySelector('usa-command-palette');
+    const out = stage.querySelector('[data-cp-out]');
+    p.addEventListener('usa:run', (e) => (out.textContent = `Ran: ${e.detail.label}`));
+  },
+
+  shortcut: (stage) => {
+    const all = [...stage.querySelectorAll('usa-shortcut')];
+    stage.querySelector('[data-sk]')?.addEventListener('click', () => all.forEach((s, i) => setTimeout(() => s.press(), i * 260)));
+    let i = 0;
+    const tick = () => { if (!stage.isConnected) return; all[i % all.length].press(); i++; setTimeout(tick, 1400); };
+    setTimeout(tick, 800);
   },
 };

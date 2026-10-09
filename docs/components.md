@@ -918,6 +918,25 @@ vb.level = analyserLevel; // 0–1
 - `<usa-voice-button label bars listening>`: `listening`, `level`, `toggle(force?)`; `usa:start`, `usa:stop`; `waveBars(level, n, phase)`.
 - AI: `stream-text` (`speed`) · `thinking-glow` (`colors`) · `voice-wave` (`cycles`) · `gen-skeleton` (`hold`); `splitWords(text)`.
 
+### v7.9 Widgets: command palette, shortcut hints (`components/widgets`)
+
+```html
+<usa-command-palette placeholder="Type a command…">
+  <option value="new" data-group="File" data-keys="mod+n">New file</option>
+  <option value="theme" data-group="View" data-keys="mod+shift+l">Toggle dark theme</option>
+</usa-command-palette>
+<usa-shortcut keys="mod+k" label="Search"></usa-shortcut>
+```
+```js
+import { defineWidgets, fuzzyMatch, keyLabels } from 'motionary/components/widgets';
+defineWidgets();
+palette.addEventListener('usa:run', (e) => commands[e.detail.id]());
+palette.setCommands([{ id: 'zen', label: 'Zen mode', group: 'View', keys: 'mod+.' }]);
+```
+- `<usa-command-palette hotkey placeholder label>`: `commands`, `setCommands(list)`, `show()`, `close()`, `toggle()`, `opened`; `usa:run` { id, label }, `usa:open`, `usa:close`; `fuzzyMatch(query, text)`, `keyLabels(keys)`, `matchesKeys(event, keys)`.
+- `<usa-shortcut keys label for listen>`: `labels`, `press()`; `usa:trigger` { keys }.
+- Deprecated in 7.9 (removed in 8.0): `<usa-rating>` → `<usa-star-rating>` — see [upgrading-8.md](./upgrading-8.md) and `npx usa-codemod-8`.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

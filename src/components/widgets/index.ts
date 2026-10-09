@@ -68,6 +68,8 @@ import { defineUploadProgress, formatBytes, type UsaUploadProgressElement } from
 import { defineChatComposer, type UsaChatComposerElement } from './chat-composer';
 import { defineSuggestionChips, parseChips, type UsaSuggestionChipsElement } from './suggestion-chips';
 import { defineVoiceButton, waveBars, type UsaVoiceButtonElement } from './voice-button';
+import { defineCommandPalette, fuzzyMatch, keyLabels, matchesKeys, type UsaCommandPaletteElement, type PaletteCommand } from './command-palette';
+import { defineShortcut, type UsaShortcutElement } from './shortcut';
 
 export { defineCarousel, defineTabBar, defineDisclosure, defineStories, CAROUSEL_EFFECTS, TAB_INDICATORS };
 export type { UsaCarouselElement, UsaTabBarElement, UsaDisclosureElement, UsaStoriesElement };
@@ -116,6 +118,9 @@ export type { UsaFieldElement, UsaOtpElement, UsaUploadProgressElement };
 export { defineChatComposer, defineSuggestionChips, parseChips, defineVoiceButton, waveBars };
 export type { UsaChatComposerElement, UsaSuggestionChipsElement, UsaVoiceButtonElement };
 
+export { defineCommandPalette, fuzzyMatch, keyLabels, matchesKeys, defineShortcut };
+export type { UsaCommandPaletteElement, PaletteCommand, UsaShortcutElement };
+
 /** The widgets by release (tag → define function). */
 export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElementConstructor | undefined>> = {
   '6.2': { 'usa-carousel': defineCarousel, 'usa-tab-bar': defineTabBar, 'usa-disclosure': defineDisclosure, 'usa-stories': defineStories },
@@ -134,6 +139,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '7.6': { 'usa-globe': defineGlobe, 'usa-location-card': defineLocationCard },
   '7.7': { 'usa-field': defineField, 'usa-otp': defineOtp, 'usa-upload-progress': defineUploadProgress },
   '7.8': { 'usa-chat-composer': defineChatComposer, 'usa-suggestion-chips': defineSuggestionChips, 'usa-voice-button': defineVoiceButton },
+  '7.9': { 'usa-command-palette': defineCommandPalette, 'usa-shortcut': defineShortcut },
 };
 
 /** Every widget tag, in release order. */
@@ -206,5 +212,7 @@ declare global {
     'usa-chat-composer': UsaChatComposerElement;
     'usa-suggestion-chips': UsaSuggestionChipsElement;
     'usa-voice-button': UsaVoiceButtonElement;
+    'usa-command-palette': UsaCommandPaletteElement;
+    'usa-shortcut': UsaShortcutElement;
   }
 }

@@ -1622,6 +1622,10 @@ declare function defineSlider(tag?: string): CustomElementConstructor | undefine
  * Attributes: `value` (0), `max` (5), `icon` (★), `readonly`, `label`
  * ("Rating"), `name` (form value), `variant`. Events: `change`, `usa:change` (`{ value }`).
  * Reduced motion: no pop.
+ *
+ * @deprecated 7.9 — removed in 8.0. Use `<usa-star-rating>` (6.4; same
+ * `value` / `max` / `readonly` / `label` / `name`, `icon="heart"` for ♥).
+ * `npx usa-codemod-8 --write src` rewrites the tags.
  */
 interface UsaRatingElement extends UsaElement {
     value: number;
