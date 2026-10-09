@@ -62,6 +62,9 @@ import { defineBadgeWall, badgeProgress, type UsaBadgeWallElement, type WallBadg
 import { definePrizeWheel, wheelAngle, type UsaPrizeWheelElement } from './prize-wheel';
 import { defineGlobe, project, parseMarkers, type UsaGlobeElement, type GlobeMarker } from './globe';
 import { defineLocationCard, haversine, formatDistance, type UsaLocationCardElement } from './location-card';
+import { defineField, passwordStrength, type UsaFieldElement } from './field';
+import { defineOtp, sanitizeCode, type UsaOtpElement } from './otp';
+import { defineUploadProgress, formatBytes, type UsaUploadProgressElement } from './upload-progress';
 
 export { defineCarousel, defineTabBar, defineDisclosure, defineStories, CAROUSEL_EFFECTS, TAB_INDICATORS };
 export type { UsaCarouselElement, UsaTabBarElement, UsaDisclosureElement, UsaStoriesElement };
@@ -104,6 +107,9 @@ export type { UsaLeaderboardElement, LeaderRow, UsaXpBarElement, UsaBadgeWallEle
 export { defineGlobe, project, parseMarkers, defineLocationCard, haversine, formatDistance };
 export type { UsaGlobeElement, GlobeMarker, UsaLocationCardElement };
 
+export { defineField, passwordStrength, defineOtp, sanitizeCode, defineUploadProgress, formatBytes };
+export type { UsaFieldElement, UsaOtpElement, UsaUploadProgressElement };
+
 /** The widgets by release (tag → define function). */
 export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElementConstructor | undefined>> = {
   '6.2': { 'usa-carousel': defineCarousel, 'usa-tab-bar': defineTabBar, 'usa-disclosure': defineDisclosure, 'usa-stories': defineStories },
@@ -120,6 +126,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '7.4': { 'usa-message-list': defineMessageList, 'usa-reactions': defineReactions, 'usa-notification-bell': defineNotificationBell, 'usa-presence': definePresence },
   '7.5': { 'usa-leaderboard': defineLeaderboard, 'usa-xp-bar': defineXpBar, 'usa-badge-wall': defineBadgeWall, 'usa-prize-wheel': definePrizeWheel },
   '7.6': { 'usa-globe': defineGlobe, 'usa-location-card': defineLocationCard },
+  '7.7': { 'usa-field': defineField, 'usa-otp': defineOtp, 'usa-upload-progress': defineUploadProgress },
 };
 
 /** Every widget tag, in release order. */
@@ -186,5 +193,8 @@ declare global {
     'usa-prize-wheel': UsaPrizeWheelElement;
     'usa-globe': UsaGlobeElement;
     'usa-location-card': UsaLocationCardElement;
+    'usa-field': UsaFieldElement;
+    'usa-otp': UsaOtpElement;
+    'usa-upload-progress': UsaUploadProgressElement;
   }
 }
