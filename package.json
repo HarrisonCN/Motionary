@@ -1,6 +1,6 @@
 {
   "name": "motionary",
-  "version": "9.7.0",
+  "version": "9.8.0",
   "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 94 animated Web Components — 214 scroll-reveal presets, card/click/button morphs, physics, page transitions, generative & sound-reactive backgrounds, cursor/gesture effects, themes, micro-interactions, <usa-player>, WebGL. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -126,6 +126,16 @@
       "require": {
         "types": "./dist/components/design.d.cts",
         "default": "./dist/components/design.cjs"
+      }
+    },
+    "./native": {
+      "import": {
+        "types": "./dist/components/native.d.ts",
+        "default": "./dist/components/native.js"
+      },
+      "require": {
+        "types": "./dist/components/native.d.cts",
+        "default": "./dist/components/native.cjs"
       }
     },
     "./fx": {
@@ -1136,6 +1146,16 @@
       "require": {
         "types": "./dist/components/design.d.cts",
         "default": "./dist/components/design.cjs"
+      }
+    },
+    "./components/native": {
+      "import": {
+        "types": "./dist/components/native.d.ts",
+        "default": "./dist/components/native.js"
+      },
+      "require": {
+        "types": "./dist/components/native.d.cts",
+        "default": "./dist/components/native.cjs"
       }
     },
     "./components/lite": {

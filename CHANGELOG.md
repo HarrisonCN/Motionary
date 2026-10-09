@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [9.8.0] - 2026-10-09
+
+### Added
+- **Native 2.0 — `motionary/native`** (= `motionary/components/native`): `toReactNative(rules, { name })` (React Native component: `Animated` with the native driver, `Easing.bezier` from the rule's easing, token springs for presses, stagger via `index`, `AccessibilityInfo.isReduceMotionEnabled()`), `toFlutter(rules, { name })` (Flutter widget: `AnimationController` + `Cubic` curve, press `AnimatedScale`, `MediaQuery.disableAnimations`), `nativeEasing(easing, platform)`, `nativeTokens()` (durations, bezier arrays, springs as JSON), `entranceFrom(effect)`.
+- Samples generated with them: `examples/native/react-native/` (`MotionView.tsx` + `App.tsx`) and `examples/native/flutter/lib/motion_view.dart`.
+- **New component (9.8)** `<usa-native-preview>` in `motionary/components/widgets` — iOS / Android device frame that replays the entrance with the rule's curve and springs on press, with React Native / Flutter code tabs; `platform`, `rules`, `name`; `replay()`, `code(platform)`; `usa:replay`.
+- Showcase: a new gallery card with copyable code, live demo and live Store thumbnail.
+
+### Accessibility
+- The generated native code honours the platform's reduce-motion setting (React Native `isReduceMotionEnabled`, Flutter `disableAnimations`). The preview's code tabs are a labelled `tablist`; the code panel is focusable.
+
+### Fixed
+
+- `toReactNative()` imported `Pressable` even when the motion string had no press / hover rule (unused import in the generated component); it is now imported only when the press wrapper is emitted.
+
 ## [9.7.0] - 2026-10-09
 
 ### Added

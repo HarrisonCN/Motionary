@@ -1195,6 +1195,14 @@ export const components = [
     '<usa-motion-spec label="Card entrance" rules="enter: fade-up 600ms ease-out stagger 80ms; hover: pop 300ms spring"></usa-motion-spec>',
     '<usa-motion-spec class="demo-mspec" label="Card entrance" rules="enter: fade-up 600ms ease-out stagger 80ms; hover: pop 300ms spring; click: confetti delay 120ms"></usa-motion-spec>',
     undefined, { since: '9.7' }),
+  // ---- 9.8 -------------------------------------------------------------
+  W('usa-native-preview', 'ui', 'Native preview', '原生预览',
+    '9.8: preview web motion as it will feel on a phone — an iOS / Android device frame replays the entrance with the rule’s curve and presses with a spring — and copy the generated React Native and Flutter code.',
+    '9.8：在手机外框中预览动效在原生端的手感 —— iOS / Android 设备框按规则曲线重放入场、按下时弹簧回弹 —— 并复制自动生成的 React Native 与 Flutter 代码。',
+    ['react native', 'flutter', 'native', 'mobile', 'code generation'],
+    '<usa-native-preview platform="ios" rules="enter: fade-up 500ms smooth stagger 80ms; click: pop">\n  <div class="row">Inbox</div><div class="row">Starred</div>\n</usa-native-preview>',
+    '<usa-native-preview class="demo-native" platform="ios" rules="enter: fade-up 500ms smooth stagger 80ms; click: pop"><div class="demo-nrow">Inbox</div><div class="demo-nrow">Starred</div><div class="demo-nrow">Sent</div></usa-native-preview>',
+    undefined, { since: '9.8' }),
 ];
 
 /** item id → live-demo wiring. */
