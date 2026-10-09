@@ -851,6 +851,27 @@ const i = await wheel.spin(); // usa:result { index, label }
 - `<usa-prize-wheel segments duration turns label>`: `segments`, `result`, `spinning`, `spin(index?)`; `usa:result`; `wheelAngle(index, count, turns)`.
 - Game: `achievement-unlock` (`duration`) · `level-up` (`color`) · `chest-open` (`spark`, `count`) · `coin-burst` (`coin`, `count`, `power`) · `xp-gain` (`text`, `color`); `throwPath(deg, power)`.
 
+### v7.6 Widgets: globe, location card (`components/widgets`) + maps & geo motion (`motionary/fx/geo`)
+
+```html
+<usa-globe markers="Shanghai:31.2,121.5; London:51.5,-0.1" speed="12" tilt="18"></usa-globe>
+<usa-location-card name="Blue Bottle" address="66 Mint St" lat="37.782" lon="-122.407"
+  from-lat="37.776" from-lon="-122.394" href="https://maps.example/…"></usa-location-card>
+
+<usa-fx effect="route-draw" trigger="enter"><svg viewBox="0 0 200 80"><path d="M10 70 C60 10 120 90 190 20"/></svg></usa-fx>
+<usa-fx effect="pin-drop" trigger="enter"><span>📍</span></usa-fx>
+```
+```js
+import { defineWidgets } from 'motionary/components/widgets';
+import { registerGeoPack } from 'motionary/fx/geo';
+defineWidgets(); registerGeoPack();
+await globe.flyTo('London'); // usa:focus { name, lat, lon }
+card.replay();
+```
+- `<usa-globe markers speed tilt lon>`: `markers`, `lon`, `flyTo(name)`; `usa:focus`; `project(lat, lon, lon0, tilt)`, `parseMarkers()`.
+- `<usa-location-card name address lat lon from-lat from-lon distance href unit>`: `km`, `replay()`; `usa:arrive`; `haversine()`, `formatDistance(km, unit)`.
+- Geo: `route-draw` (`duration`, `stagger`) · `marker-pulse` (`color`, `rings`) · `pin-drop` (`height`) · `globe-spin` (`turns`); `routeLength(points)`.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

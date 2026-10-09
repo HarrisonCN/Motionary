@@ -1,0 +1,11 @@
+usa-globe{display:inline-block;width:var(--usa-gl-size,200px);max-width:100%;aspect-ratio:1;touch-action:pan-y;cursor:grab;user-select:none}
+usa-globe:active{cursor:grabbing}
+.usa-gl-svg{display:block;width:100%;height:100%;overflow:visible}
+.usa-gl-sea{fill:var(--usa-gl-sea,#1e3a8a)}
+.usa-gl-grid{fill:none;stroke:var(--usa-gl-grid,rgba(255,255,255,.35));stroke-width:.7}
+.usa-gl-dot{fill:var(--usa-gl-accent,#f59e0b);stroke:#fff;stroke-width:1}
+.usa-gl-ring{fill:none;stroke:var(--usa-gl-accent,#f59e0b);stroke-width:1.5;transform-box:fill-box;transform-origin:center;opacity:0}
+.usa-gl-mark[data-hidden]{display:none}
+.usa-gl-mark[data-active] .usa-gl-dot{fill:#ef4444}
+@media (prefers-reduced-motion:no-preference){.usa-gl-ring{animation:usa-gl-pulse 1.8s ease-out infinite}}
+@keyframes usa-gl-pulse{0%{transform:scale(.6);opacity:.9}100%{transform:scale(3.2);opacity:0}}

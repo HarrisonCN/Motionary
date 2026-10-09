@@ -20,6 +20,7 @@ import { CHART_FX, registerChartPack, parseFigure } from './chart';
 import { SHOP_FX, registerShopPack, arcPath } from './shop';
 import { SOCIAL_FX, registerSocialPack, fanAngles } from './social';
 import { GAME_FX, registerGamePack, throwPath } from './game';
+import { GEO_FX, registerGeoPack, routeLength } from './geo';
 
 export { GPU_FX, registerGpuPack, TEXT3_FX, registerTextPack, splitChars };
 export { shaderBackground, supportsWebGL2, fieldFallback, GLSL_HEAD } from './gl';
@@ -50,6 +51,8 @@ export { SOCIAL_FX, registerSocialPack, fanAngles };
 
 export { GAME_FX, registerGamePack, throwPath };
 
+export { GEO_FX, registerGeoPack, routeLength };
+
 /** The 6.x effect packs by name. */
 export const EFFECT_PACKS: Record<string, EffectDefinition[]> = {
   gpu: GPU_FX,
@@ -66,6 +69,7 @@ export const EFFECT_PACKS: Record<string, EffectDefinition[]> = {
   shop: SHOP_FX,
   social: SOCIAL_FX,
   game: GAME_FX,
+  geo: GEO_FX,
 };
 
 /** Register every 6.x effect pack (idempotent). */
@@ -84,6 +88,7 @@ export function registerEffectPacks(): void {
   registerShopPack();
   registerSocialPack();
   registerGamePack();
+  registerGeoPack();
 }
 
 

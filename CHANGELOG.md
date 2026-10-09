@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.6.0] - 2026-10-08
+
+### Added
+- **2 new components (7.6)** in `motionary/components/widgets` (also in `dist/widgets.umd.js`):
+  - `<usa-globe>` — SVG globe in orthographic projection (no WebGL, no tiles): graticule, pulsing `markers` ("Shanghai:31.2,121.5; London:51.5,-0.1"), `speed` (°/s, 0 = still), `tilt`, `lon`; spins only while on screen, drag to turn; `flyTo(name)` eases a marker round to the front (`usa:focus`). `project()`, `parseMarkers()`.
+  - `<usa-location-card>` — place card with a stylised mini map: `name`, `address`, `lat`/`lon`, origin `from-lat`/`from-lon` (distance by haversine, `unit` km | mi, or `distance`), `href` → “Directions”. On first view the route draws itself, the pin drops with a bounce and a ring pulses; `replay()`; `usa:arrive`. `haversine()`, `formatDistance()`.
+- **Maps & geo motion — `motionary/fx/geo`** (= `motionary/components/fx-geo`, `registerGeoPack()`, also in `registerEffectPacks()`): `route-draw` (enter), `marker-pulse` (attention), `pin-drop` (enter), `globe-spin` (enter). `routeLength()`.
+- Showcase: 4 new gallery cards with copyable code and live demos (and live Store thumbnails); Animation Store 317 → 321 items.
+- Note: the plan's “flight lines” (飞线) ship as `route-draw` over any SVG path.
+
+### Accessibility
+- Globe = `role="img"` labelled with its marker names; location card = labelled `<article>` with a heading and a real link. Reduced motion: the globe does not spin and `flyTo()` jumps; pin and route appear at once; `route-draw` shows the routes, `marker-pulse` does nothing, `pin-drop` / `globe-spin` fade in.
+
 ## [7.5.0] - 2026-10-08
 
 ### Added

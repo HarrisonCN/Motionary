@@ -1,6 +1,6 @@
 {
   "name": "motionary",
-  "version": "7.5.0",
+  "version": "7.6.0",
   "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 94 animated Web Components — 214 scroll-reveal presets, card/click/button morphs, physics, page transitions, generative & sound-reactive backgrounds, cursor/gesture effects, themes, micro-interactions, <usa-player>, WebGL. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -246,6 +246,16 @@
       "require": {
         "types": "./dist/components/fx-game.d.cts",
         "default": "./dist/components/fx-game.cjs"
+      }
+    },
+    "./fx/geo": {
+      "import": {
+        "types": "./dist/components/fx-geo.d.ts",
+        "default": "./dist/components/fx-geo.js"
+      },
+      "require": {
+        "types": "./dist/components/fx-geo.d.cts",
+        "default": "./dist/components/fx-geo.cjs"
       }
     },
     "./components/reveal": {
@@ -726,6 +736,16 @@
       "require": {
         "types": "./dist/components/fx-game.d.cts",
         "default": "./dist/components/fx-game.cjs"
+      }
+    },
+    "./components/fx-geo": {
+      "import": {
+        "types": "./dist/components/fx-geo.d.ts",
+        "default": "./dist/components/fx-geo.js"
+      },
+      "require": {
+        "types": "./dist/components/fx-geo.d.cts",
+        "default": "./dist/components/fx-geo.cjs"
       }
     },
     "./components/lite": {
