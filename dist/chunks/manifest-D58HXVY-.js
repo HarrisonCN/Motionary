@@ -1,4 +1,4 @@
-import { hasEffect, registerEffect, EFFECT_KINDS } from './registry-BRM2BRRY.js';
+import { hasEffect, registerEffect, EFFECT_KINDS } from './registry-gFJRpPES.js';
 
 const EFFECT_PACK_FORMAT = 'motionary/effect-pack';
 const SEMVER = /^\d+\.\d+\.\d+(?:-[\w.]+)?$/;
@@ -73,4 +73,4 @@ async function loadEffectPack(src, opts = {}) {
 }
 
 export { EFFECT_PACK_FORMAT as E, loadEffectPack as l, packManifest as p, validateManifest as v };
-//# sourceMappingURL=manifest-BDpbuI-9.js.map
+//# sourceMappingURL=manifest-D58HXVY-.js.map

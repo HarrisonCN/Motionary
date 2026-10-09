@@ -1,5 +1,5 @@
-import { registerEffects } from '../chunks/registry-BRM2BRRY.js';
-import '../chunks/base-DWYNLg6P.js';
+import { registerEffects } from '../chunks/registry-gFJRpPES.js';
+import '../chunks/base-BnRyfuyM.js';
 
 /** Decaying sideways shake keyframes (7.7). */
 function shakeFrames(distance = 8, steps = 5) {

@@ -1,5 +1,5 @@
-import { registerEffects } from '../chunks/registry-BRM2BRRY.js';
-import { o as onFrame } from '../chunks/base-DWYNLg6P.js';
+import { registerEffects } from '../chunks/registry-gFJRpPES.js';
+import { o as onFrame } from '../chunks/base-BnRyfuyM.js';
 
 /** Run a pure function in a Web Worker; resolves with its (structured-cloneable) result (9.6). */
 function runInWorker(fn, ...args) {

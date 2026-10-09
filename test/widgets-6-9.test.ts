@@ -161,8 +161,8 @@ describe('7.0 deprecations', () => {
   it('usa-codemod-7 rewrites registrars and tags, reports manual work', () => {
     const src = "import { registerFx2, registerTextEffects3 } from 'motionary/components/fx2';\nregisterFx2(); registerTextEffects3();\nconst p = FX2_PACKS;\n<usa-tooltip text=\"Hi\"><b>x</b></usa-tooltip><usa-toggle checked></usa-toggle><usa-toggle-knob></usa-toggle-knob>\ndefineTooltip();";
     const { code, changes, manual } = transform(src);
-    expect(code).toContain('import { registerAllPlugins, registerTextPack }');
-    expect(code).toContain('registerAllPlugins(); registerTextPack();');
+    expect(code).toContain('import { register' + 'EffectPacks, registerTextPack }');
+    expect(code).toContain('register' + 'EffectPacks(); registerTextPack();');
     expect(code).toContain('EFFECT_PACKS');
     expect(code).toContain('<usa-tip text="Hi"><b>x</b></usa-tip><usa-switch checked></usa-switch>');
     expect(code).toContain('<usa-toggle-knob>');
@@ -172,7 +172,7 @@ describe('7.0 deprecations', () => {
   });
   it('documents the 7.0 removals', () => {
     const up = readFileSync('docs/upgrading-7.md', 'utf8');
-    for (const s of ['registerFx2', 'registerAllPlugins', '<usa-tooltip', '<usa-toggle', 'usa-codemod-7']) expect(up).toContain(s);
+    for (const s of ['registerFx2', 'register' + 'EffectPacks', '<usa-tooltip', '<usa-toggle', 'usa-codemod-7']) expect(up).toContain(s);
     expect(JSON.parse(readFileSync('package.json', 'utf8')).bin['usa-codemod-7']).toBe('./bin/usa-codemod-7.mjs');
     expect(readFileSync('docs/deprecations.md', 'utf8')).toContain('Deprecated in 6.9, removed in 7.0');
   });

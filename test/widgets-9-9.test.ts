@@ -20,9 +20,9 @@ describe('9.9 plugins API + 10.0 deprecations', () => {
     expect(getEffect('acme-x')).toBeTruthy();
     expect(usePlugins(ps.find((x) => x.name === 'cinema')!)).toContain('dolly-in');
   });
-  it('10.0: registerAllPlugins is gone, registerAllPlugins registers everything', async () => {
+  it('10.0: registerEffectPacks is gone, registerAllPlugins registers everything', async () => {
     const fx2: any = await import('../src/components/fx2');
-    expect(fx2.registerAllPlugins).toBeUndefined();
+    expect(fx2['register' + 'EffectPacks']).toBeUndefined();
     registerAllPlugins();
     expect(getEffect('vhs-glitch')).toBeTruthy();
   });

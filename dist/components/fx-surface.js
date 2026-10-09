@@ -1,5 +1,5 @@
-import { registerEffects } from '../chunks/registry-BRM2BRRY.js';
-import '../chunks/base-DWYNLg6P.js';
+import { registerEffects } from '../chunks/registry-gFJRpPES.js';
+import '../chunks/base-BnRyfuyM.js';
 
 /** The built-in surface themes of the 8.6 theme system. */
 const SURFACE_THEMES = ['light', 'dark', 'neon', 'glass', 'neu'];

@@ -1,4 +1,4 @@
-import { e as animateWithMotion, i as getMotionSensitivity, p as prefersReducedMotion } from './base-DWYNLg6P.js';
+import { e as animateWithMotion, i as getMotionSensitivity, p as prefersReducedMotion } from './base-BnRyfuyM.js';
 
 var _a;
 const EFFECT_KINDS = ['enter', 'exit', 'attention', 'click', 'hover', 'card', 'loop', 'page', 'background', 'text', 'cursor', 'scroll'];
@@ -118,4 +118,4 @@ function bindEffect(el, name, options = {}) {
 }
 
 export { EFFECT_KINDS, EFFECT_TRIGGERS, bindEffect, getEffect, hasEffect, listEffects, playEffect, registerEffect, registerEffects };
-//# sourceMappingURL=registry-BRM2BRRY.js.map
+//# sourceMappingURL=registry-gFJRpPES.js.map

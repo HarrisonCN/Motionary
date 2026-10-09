@@ -1,4 +1,4 @@
-import { k as clamp } from './base-DWYNLg6P.js';
+import { k as clamp } from './base-BnRyfuyM.js';
 
 /** The swipe a pointer release represents, or `null` (pure). */
 function swipeDirection(dx, dy, vx, vy, o = {}) {
@@ -178,4 +178,4 @@ function gesture(el, h, o = {}) {
 }
 
 export { gesture as g, pinchScale as p, swipeDirection as s };
-//# sourceMappingURL=core-BhuojMcL.js.map
+//# sourceMappingURL=core-XA2yhn1b.js.map

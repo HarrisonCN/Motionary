@@ -22,6 +22,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Accessibility
 - The core honours reduced motion everywhere (OS setting or `reducedMotion: 'reduce'`): entrance presets fade instead of moving, loop / background / cursor effects are skipped, effects get `ctx.reduced`. `pause()` stops everything an instance started (WCAG 2.2.2).
 
+### Fixed
+
+- Tests: running `usa-codemod-10 --write` over the test suite also rewrote assertions about historical artifacts — the `usa-codemod-7` output and `docs/upgrading-7.md`, which still (correctly) name `registerEffectPacks` — and the new "`registerEffectPacks` is gone" check itself; those assertions are restored.
+
 ## [9.9.0] - 2026-10-09
 
 ### Added
