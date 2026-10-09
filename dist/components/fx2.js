@@ -33,6 +33,8 @@ import { AI_FX, registerAiPack } from './fx-ai.js';
 export { splitWords } from './fx-ai.js';
 import { FESTIVAL_FX, registerFestivalPack } from './fx-festival.js';
 export { sparkVectors } from './fx-festival.js';
+import { RETRO_FX, registerRetroPack } from './fx-retro.js';
+export { pixelSteps } from './fx-retro.js';
 import '../chunks/registry-CnO7ZVPK.js';
 import '../chunks/base-CLuqlLfG.js';
 import '../chunks/generative-2LhxG5BJ.js';
@@ -59,6 +61,7 @@ const EFFECT_PACKS = {
     form: FORM_FX,
     ai: AI_FX,
     festival: FESTIVAL_FX,
+    retro: RETRO_FX,
 };
 /** Register every 6.x effect pack (idempotent). */
 function registerEffectPacks() {
@@ -80,7 +83,8 @@ function registerEffectPacks() {
     registerFormPack();
     registerAiPack();
     registerFestivalPack();
+    registerRetroPack();
 }
 
-export { AI_FX, CHART_FX, DEPTH3_FX, EFFECT_PACKS, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GEO_FX, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, PHYSICS2_FX, SHOP_FX, SOCIAL_FX, TEXT3_FX, TRANSITIONS2_FX, WEATHER_FX, register3dPack, registerAiPack, registerChartPack, registerEffectPacks, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGeoPack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerPhysicsPack, registerShopPack, registerSocialPack, registerTextPack, registerTransitionsPack, registerWeatherPack };
+export { AI_FX, CHART_FX, DEPTH3_FX, EFFECT_PACKS, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GEO_FX, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, PHYSICS2_FX, RETRO_FX, SHOP_FX, SOCIAL_FX, TEXT3_FX, TRANSITIONS2_FX, WEATHER_FX, register3dPack, registerAiPack, registerChartPack, registerEffectPacks, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGeoPack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerPhysicsPack, registerRetroPack, registerShopPack, registerSocialPack, registerTextPack, registerTransitionsPack, registerWeatherPack };
 //# sourceMappingURL=fx2.js.map

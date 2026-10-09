@@ -19,6 +19,7 @@ var components_fxGeo = require('./fx-geo.cjs');
 var components_fxForm = require('./fx-form.cjs');
 var components_fxAi = require('./fx-ai.cjs');
 var components_fxFestival = require('./fx-festival.cjs');
+var components_fxRetro = require('./fx-retro.cjs');
 require('../chunks/registry-BVklOepd.cjs');
 require('../chunks/base-DoRUZBy-.cjs');
 require('../chunks/generative-BHIj-NU0.cjs');
@@ -45,6 +46,7 @@ const EFFECT_PACKS = {
     form: components_fxForm.FORM_FX,
     ai: components_fxAi.AI_FX,
     festival: components_fxFestival.FESTIVAL_FX,
+    retro: components_fxRetro.RETRO_FX,
 };
 /** Register every 6.x effect pack (idempotent). */
 function registerEffectPacks() {
@@ -66,6 +68,7 @@ function registerEffectPacks() {
     components_fxForm.registerFormPack();
     components_fxAi.registerAiPack();
     components_fxFestival.registerFestivalPack();
+    components_fxRetro.registerRetroPack();
 }
 
 exports.EFFECT_PACK_FORMAT = components_marketplace.EFFECT_PACK_FORMAT;
@@ -135,6 +138,9 @@ exports.splitWords = components_fxAi.splitWords;
 exports.FESTIVAL_FX = components_fxFestival.FESTIVAL_FX;
 exports.registerFestivalPack = components_fxFestival.registerFestivalPack;
 exports.sparkVectors = components_fxFestival.sparkVectors;
+exports.RETRO_FX = components_fxRetro.RETRO_FX;
+exports.pixelSteps = components_fxRetro.pixelSteps;
+exports.registerRetroPack = components_fxRetro.registerRetroPack;
 exports.EFFECT_PACKS = EFFECT_PACKS;
 exports.registerEffectPacks = registerEffectPacks;
 //# sourceMappingURL=fx2.cjs.map

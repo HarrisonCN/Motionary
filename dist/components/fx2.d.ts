@@ -611,6 +611,28 @@ declare const FESTIVAL_FX: EffectDefinition[];
 declare function registerFestivalPack(): void;
 
 /**
+ * 8.2 — Retro pack (`motionary/fx/retro`, also `motionary/components/fx-retro`):
+ *
+ * - `pixelate-in` (enter) — the element resolves from big blocky pixels to
+ *   sharp, like an 8-bit sprite loading (`steps`).
+ * - `crt-power` (enter) — a CRT switching on: a bright line opens into the
+ *   picture with a flash (`duration`).
+ * - `vhs-glitch` (attention) — VHS tracking jitter with an RGB split and a
+ *   noise band (`intensity`).
+ * - `y2k-shine` (attention) — a chrome Y2K highlight sweeps across the
+ *   element with a little bounce (`color`).
+ *
+ * Reduced motion: pixelate-in / crt-power fade in, vhs-glitch does nothing,
+ * y2k-shine is a short brightness flash.
+ */
+
+/** Keyframes stepping a CSS blur/contrast "pixel" filter from coarse to sharp (8.2). */
+declare function pixelSteps(steps?: number): Keyframe[];
+declare const RETRO_FX: EffectDefinition[];
+/** Register pixelate-in, crt-power, vhs-glitch and y2k-shine (8.2). */
+declare function registerRetroPack(): void;
+
+/**
  * 5.5 — generative backgrounds on Canvas 2D, registered through
  * `registerEffect()` (kind `background`): `flow-field`, `voronoi`,
  * `mesh-gradient`, `starfield`, `metaballs`, `contours`.
@@ -719,5 +741,5 @@ declare const EFFECT_PACKS: Record<string, EffectDefinition[]>;
 /** Register every 6.x effect pack (idempotent). */
 declare function registerEffectPacks(): void;
 
-export { AI_FX, CHART_FX, DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GEO_FX, GLSL_HEAD, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, PHYSICS2_FX, SHOP_FX, SOCIAL_FX, TEXT3_FX, TRANSITIONS2_FX, VerletWorld, WEATHER_FX, WGSL_HEAD, arcPath, crossDocumentTransitions, fanAngles, fieldFallback, glslToWgsl, loadEffectPack, musicSample, packManifest, pageTransition, parseFigure, pointsToPath, register3dPack, registerAiPack, registerChartPack, registerEffectPacks, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGeoPack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerPhysicsPack, registerShopPack, registerSocialPack, registerTextPack, registerTransitionsPack, registerWeatherPack, routeLength, samplePath, shaderBackground, shakeFrames, skyAt, sparkVectors, splitChars, splitWords, supportsWebGL2, supportsWebGPU, syntheticSample, throwPath, trackPointer, validateManifest, webgpuBackground, wgslModule };
+export { AI_FX, CHART_FX, DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GEO_FX, GLSL_HEAD, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, PHYSICS2_FX, RETRO_FX, SHOP_FX, SOCIAL_FX, TEXT3_FX, TRANSITIONS2_FX, VerletWorld, WEATHER_FX, WGSL_HEAD, arcPath, crossDocumentTransitions, fanAngles, fieldFallback, glslToWgsl, loadEffectPack, musicSample, packManifest, pageTransition, parseFigure, pixelSteps, pointsToPath, register3dPack, registerAiPack, registerChartPack, registerEffectPacks, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGeoPack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerPhysicsPack, registerRetroPack, registerShopPack, registerSocialPack, registerTextPack, registerTransitionsPack, registerWeatherPack, routeLength, samplePath, shaderBackground, shakeFrames, skyAt, sparkVectors, splitChars, splitWords, supportsWebGL2, supportsWebGPU, syntheticSample, throwPath, trackPointer, validateManifest, webgpuBackground, wgslModule };
 export type { EffectPackManifest, ShaderSpec };
