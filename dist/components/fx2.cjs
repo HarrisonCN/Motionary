@@ -28,6 +28,7 @@ var components_fxGesture = require('./fx-gesture.cjs');
 var components_fxSpatial = require('./fx-spatial.cjs');
 var components_fxCinema = require('./fx-cinema.cjs');
 var components_fxLottie = require('./fx-lottie.cjs');
+var components_fxGenart = require('./fx-genart.cjs');
 require('../chunks/registry-BVklOepd.cjs');
 require('../chunks/base-DoRUZBy-.cjs');
 require('../chunks/generative-BHIj-NU0.cjs');
@@ -63,6 +64,7 @@ const EFFECT_PACKS = {
     spatial: components_fxSpatial.SPATIAL_FX,
     cinema: components_fxCinema.CINEMA_FX,
     lottie: components_fxLottie.LOTTIE_FX,
+    genart: components_fxGenart.GENART_FX,
 };
 /** Register every 6.x effect pack (idempotent). */
 function registerEffectPacks() {
@@ -93,6 +95,7 @@ function registerEffectPacks() {
     components_fxSpatial.registerSpatialPack();
     components_fxCinema.registerCinemaPack();
     components_fxLottie.registerLottiePack();
+    components_fxGenart.registerGenArtPack();
 }
 
 exports.EFFECT_PACK_FORMAT = manifest.EFFECT_PACK_FORMAT;
@@ -197,6 +200,11 @@ exports.lottieToKeyframes = components_fxLottie.lottieToKeyframes;
 exports.lottieToSvg = components_fxLottie.lottieToSvg;
 exports.registerLottiePack = components_fxLottie.registerLottiePack;
 exports.riveInputs = components_fxLottie.riveInputs;
+exports.GENART_FX = components_fxGenart.GENART_FX;
+exports.PALETTES = components_fxGenart.PALETTES;
+exports.meshGradient = components_fxGenart.meshGradient;
+exports.registerGenArtPack = components_fxGenart.registerGenArtPack;
+exports.seededRandom = components_fxGenart.seededRandom;
 exports.EFFECT_PACKS = EFFECT_PACKS;
 exports.registerEffectPacks = registerEffectPacks;
 //# sourceMappingURL=fx2.cjs.map

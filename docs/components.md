@@ -1205,6 +1205,22 @@ riveInputs(riveInstance, 'State Machine 1', button, { hover: 'isHover', click: '
 - `<usa-lottie-icon name trigger size color label>`: `play()`; `LOTTIE_ICONS`.
 - Effects: `lottie-play`, `icon-pop` (`color`).
 
+### v9.3 Generative art 2.0: `<usa-gen-art>`, `<usa-bg-generator>` + genart pack (`motionary/fx/genart`)
+
+```html
+<usa-gen-art art="flow" seed="7" palette="ocean" style="height:240px"></usa-gen-art>
+<usa-bg-generator palette="candy"></usa-bg-generator>
+<usa-fx effect="mesh-drift" trigger="loop" seed="4" palette="ocean"><section class="hero">…</section></usa-fx>
+```
+```js
+import { registerGenArtPack, meshGradient } from 'motionary/fx/genart';
+registerGenArtPack();
+hero.style.background = meshGradient(42, 'forest');
+```
+- `<usa-gen-art art seed palette label>`: `generate(seed?)`, `toDataURL()`; `usa:generate`.
+- `<usa-bg-generator palette style seed label>`: `css`, `shuffle()`, `copy()`; `usa:change`; `backgroundCss(style, seed, palette)`.
+- Genart: `halftone-in` (`dot`) · `mesh-drift` (`seed`, `palette`) · `kaleido` (`color`, `segments`) · `grain-flicker` (`opacity`); `PALETTES`, `seededRandom`, `meshGradient`.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.
