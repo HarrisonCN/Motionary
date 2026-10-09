@@ -6905,7 +6905,7 @@
       "source": "src/components/ui/slider.ts"
     },
     {
-      "id": "smooth-scroll",
+      "id": "smooth-scroller",
       "tag": "usa-smooth-scroll",
       "title": "Smooth scroll",
       "description": "10.4: smooth, inertial wheel scrolling for the page or a container (wrapper), anchor links glide (with offset for sticky headers); keyboard / scrollbar / touch stay native and it switches off under reduced motion. Requires motionary/runtime/smooth — npm i motionary, then use(smooth) before it mounts.",
