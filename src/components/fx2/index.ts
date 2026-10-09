@@ -28,6 +28,7 @@ import { RETRO_FX, registerRetroPack, pixelSteps } from './retro2';
 import { ORGANIC_FX, registerOrganicPack, blobRadius } from './organic';
 import { CYBER_FX, registerCyberPack, decodeFrame } from './cyber';
 import { PAPER_FX, registerPaperPack, roughLine, paperRandom } from './paper';
+import { SURFACE_FX, registerSurfacePack, SURFACE_THEMES, applySurfaceTheme } from './themefx';
 
 export { GPU_FX, registerGpuPack, TEXT3_FX, registerTextPack, splitChars };
 export { shaderBackground, supportsWebGL2, fieldFallback, GLSL_HEAD } from './gl';
@@ -74,6 +75,8 @@ export { CYBER_FX, registerCyberPack, decodeFrame };
 
 export { PAPER_FX, registerPaperPack, roughLine, paperRandom };
 
+export { SURFACE_FX, registerSurfacePack, SURFACE_THEMES, applySurfaceTheme };
+
 /** The 6.x effect packs by name. */
 export const EFFECT_PACKS: Record<string, EffectDefinition[]> = {
   gpu: GPU_FX,
@@ -98,6 +101,7 @@ export const EFFECT_PACKS: Record<string, EffectDefinition[]> = {
   organic: ORGANIC_FX,
   cyber: CYBER_FX,
   paper: PAPER_FX,
+  surface: SURFACE_FX,
 };
 
 /** Register every 6.x effect pack (idempotent). */
@@ -124,6 +128,7 @@ export function registerEffectPacks(): void {
   registerOrganicPack();
   registerCyberPack();
   registerPaperPack();
+  registerSurfacePack();
 }
 
 

@@ -23,6 +23,7 @@ var components_fxRetro = require('./fx-retro.cjs');
 var components_fxOrganic = require('./fx-organic.cjs');
 var components_fxCyber = require('./fx-cyber.cjs');
 var components_fxPaper = require('./fx-paper.cjs');
+var components_fxSurface = require('./fx-surface.cjs');
 require('../chunks/registry-BVklOepd.cjs');
 require('../chunks/base-DoRUZBy-.cjs');
 require('../chunks/generative-BHIj-NU0.cjs');
@@ -53,6 +54,7 @@ const EFFECT_PACKS = {
     organic: components_fxOrganic.ORGANIC_FX,
     cyber: components_fxCyber.CYBER_FX,
     paper: components_fxPaper.PAPER_FX,
+    surface: components_fxSurface.SURFACE_FX,
 };
 /** Register every 6.x effect pack (idempotent). */
 function registerEffectPacks() {
@@ -78,6 +80,7 @@ function registerEffectPacks() {
     components_fxOrganic.registerOrganicPack();
     components_fxCyber.registerCyberPack();
     components_fxPaper.registerPaperPack();
+    components_fxSurface.registerSurfacePack();
 }
 
 exports.EFFECT_PACK_FORMAT = components_marketplace.EFFECT_PACK_FORMAT;
@@ -160,6 +163,10 @@ exports.PAPER_FX = components_fxPaper.PAPER_FX;
 exports.paperRandom = components_fxPaper.paperRandom;
 exports.registerPaperPack = components_fxPaper.registerPaperPack;
 exports.roughLine = components_fxPaper.roughLine;
+exports.SURFACE_FX = components_fxSurface.SURFACE_FX;
+exports.SURFACE_THEMES = components_fxSurface.SURFACE_THEMES;
+exports.applySurfaceTheme = components_fxSurface.applySurfaceTheme;
+exports.registerSurfacePack = components_fxSurface.registerSurfacePack;
 exports.EFFECT_PACKS = EFFECT_PACKS;
 exports.registerEffectPacks = registerEffectPacks;
 //# sourceMappingURL=fx2.cjs.map

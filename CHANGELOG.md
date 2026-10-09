@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.6.0] - 2026-10-09
+
+### Added
+- **Theme system (8.6)** — five surface themes (`light`, `dark`, `neon`, `glass`, `neu` / neumorphism) driven by a `data-usa-surface` attribute; `SURFACE_THEMES`, `applySurfaceTheme(name, target?)`.
+- **2 new components (8.6)** in `motionary/components/widgets` (also in `dist/widgets.umd.js`):
+  - `<usa-theme-switcher>` — segmented theme switcher: sets `data-usa-surface` on `target` (default `<html>`), sliding pill, circular View-Transition wipe from the click point (page-level), `themes`, `value`, `persist` (localStorage key); `usa:change` { theme }.
+  - `<usa-theme-surface>` — themeable card that follows the nearest `data-usa-surface` (or its own `theme`): neon glow edge that pulses, frosted glass with a sheen, soft neumorphic relief that presses; cross-fades on theme change; `theme`; `usa:theme` { theme }.
+- **Surface theme pack — `motionary/fx/surface`** (= `motionary/components/fx-surface`, `registerSurfacePack()`, also in `registerEffectPacks()`): `neon-ignite` (enter), `neon-pulse` (loop), `glass-frost` (enter), `neu-press` (attention). Names chosen not to override the existing 3.x `neon-flicker` theme effect.
+- Showcase: 4 new gallery cards with copyable code, live demos and live Store thumbnails.
+
+### Accessibility
+- Theme switcher is a labelled `radiogroup` of `radio`s with roving tabindex and arrow keys; the swatches are `aria-hidden`. Theme surfaces keep your content and text contrast in every theme. Reduced motion: the switch is instant (no wipe, no pill slide), the neon / sheen loops stop, `neon-ignite` / `glass-frost` just show, `neon-pulse` is skipped, `neu-press` does nothing.
+
+### Fixed
+- the 5.8 theme packs (applyTheme / <usa-theme>) already own the `data-usa-theme` attribute, so the 8.6 surface themes use `data-usa-surface` instead (no clash with neon/paper/glass/retro/brutalist motion themes); effect names neon-ignite (not the 5.8 neon-flicker) and 8.5 paper-unfold (not 5.8 paper-fold) avoid overriding existing effects.
+
 ## [8.5.0] - 2026-10-09
 
 ### Added
