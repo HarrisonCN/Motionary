@@ -44,9 +44,10 @@ describe('10.6 runtime/vector (pure parts)', () => {
   it('inspectLottie lists the features the renderer skips; the sample uses none', () => {
     expect(V.inspectLottie(sample())).toEqual({ layers: expect.any(Number), unsupported: [] });
     const a = sample();
-    a.layers.push({ ty: 5, ind: 99, ip: 0, op: 60, ks: { p: { a: 0, k: [0, 0], x: 'wiggle(1,2)' } }, ef: [{}] });
+    // 10.8: text layers and the expression subset are supported — only text animators and other expressions are listed
+    a.layers.push({ ty: 5, ind: 99, ip: 0, op: 60, ks: { p: { a: 0, k: [0, 0], x: "effect('Slider')(1)" } }, ef: [{}], t: { d: { k: [] }, a: [{}] } } as any);
     const r = V.inspectLottie(a);
-    expect(r.unsupported).toEqual(expect.arrayContaining(['text layers', 'effects', 'expressions']));
+    expect(r.unsupported).toEqual(expect.arrayContaining(['text animators (range selectors)', 'effects', 'expressions outside the supported subset']));
   });
   it('trims contours (0–50 % keeps half the length)', () => {
     // contour = moveTo x,y then cubic segments (c1x c1y c2x c2y x y); a 10 × 10 square as straight cubics, 40 long
