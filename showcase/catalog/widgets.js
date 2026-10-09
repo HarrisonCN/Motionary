@@ -901,14 +901,14 @@ export const components = [
     '8.5：便利贴墙 —— 每个子元素变成带图钉、略微倾斜的纸质便签，依次落到墙上，点击可将便签提到最前。',
     ['sticky notes', 'paper', 'board', 'hand-drawn', 'notes'],
     '<usa-sticky-wall label="Ideas">\n  <p>Ship 8.5 ✏️</p>\n  <p data-color="pink">Call Mia</p>\n  <p data-color="blue">Buy paper</p>\n</usa-sticky-wall>',
-    '<usa-sticky-wall class="demo-sticky" label="Ideas"><p>Ship 8.5 ✏️</p><p>Sketch the onboarding</p><p>Water the plants</p></usa-sticky-wall>',
+    '<div class="demo-col demo-stickyw"><usa-sticky-wall class="demo-sticky" label="Ideas"><p>Ship 8.5 ✏️</p><p>Sketch the onboarding</p><p>Water the plants</p></usa-sticky-wall><button type="button" class="demo-skbtn" data-sticky-pick>Pick a note</button></div>',
     undefined, { since: '8.5' }),
   W('usa-sketch-chart', 'ui', 'Sketch chart', '手绘图表',
     '8.5: a hand-drawn chart — wobbly pencil axes with hatched bars or a sketchy line, sketched in stroke by stroke when it scrolls into view.',
     '8.5：手绘风图表 —— 铅笔质感的抖动坐标轴，配合排线柱状图或手绘折线，进入视口时一笔一笔画出来。',
     ['chart', 'sketch', 'hand-drawn', 'bar chart', 'pencil'],
     '<usa-sketch-chart values="3,7,5,9" labels="Q1,Q2,Q3,Q4" label="Revenue"></usa-sketch-chart>',
-    '<div class="demo-row demo-sks"><usa-sketch-chart values="3,7,5,9" labels="Q1,Q2,Q3,Q4"></usa-sketch-chart><usa-sketch-chart type="line" color="#e11d48" values="2,5,4,8,6" labels="M,T,W,T,F"></usa-sketch-chart></div>',
+    '<div class="demo-col demo-skw"><div class="demo-row demo-sks"><usa-sketch-chart values="3,7,5,9" labels="Q1,Q2,Q3,Q4"></usa-sketch-chart><usa-sketch-chart type="line" color="#e11d48" values="2,5,4,8,6" labels="M,T,W,T,F"></usa-sketch-chart></div><button type="button" class="demo-skbtn" data-sketch-new>New data</button></div>',
     undefined, { since: '8.5' }),
   X('fx-paper', ['fx-paper', 'registerPaperPack'], 'Paper fold & crumple', '纸张折叠与揉皱',
     '8.5: paper-unfold unfolds an element like a folded sheet of paper with a soft crease shadow; crumple scrunches it up like paper and springs it back flat.',
@@ -1111,5 +1111,17 @@ export const wire = {
     const text = { lunar: 'Happy Lunar New Year 🧧', xmas: 'Merry Christmas 🎄', halloween: 'Happy Halloween 🎃', fireworks: 'Happy New Year 🎆' };
     let i = 0;
     stage.querySelector('[data-fb]')?.addEventListener('click', () => { i = (i + 1) % themes.length; b.lastChild.textContent = text[themes[i]]; b.theme = themes[i]; });
+  },
+  'sticky-wall': (stage) => {
+    const w = stage.querySelector('usa-sticky-wall');
+    let i = 0;
+    stage.querySelector('[data-sticky-pick]')?.addEventListener('click', () => w?.pick(i++ % (w.notes.length || 1)));
+  },
+  'sketch-chart': (stage) => {
+    stage.querySelector('[data-sketch-new]')?.addEventListener('click', () =>
+      stage.querySelectorAll('usa-sketch-chart').forEach((c) => {
+        c.setValues(c.values.map(() => 1 + Math.round(Math.random() * 9)));
+        c.redraw();
+      }));
   },
 };

@@ -7973,7 +7973,7 @@ function defineStickyWall(tag = 'usa-sticky-wall') {
     }, { id: 'sticky-wall', text: css$1 });
 }
 
-var css = "usa-sketch-chart{display:block;max-width:100%;color:#334155;--usa-sk-c:#2563eb}usa-sketch-chart .usa-sk{display:block;width:100%;height:auto;overflow:visible}usa-sketch-chart .usa-sk path{fill:none;stroke-linecap:round;stroke-linejoin:round}usa-sketch-chart .usa-sk-axis{stroke:currentColor;stroke-width:1.6}usa-sketch-chart .usa-sk-mark{stroke:var(--usa-sk-c);stroke-width:2.2}usa-sketch-chart .usa-sk-hatch{stroke:var(--usa-sk-c);stroke-width:1;opacity:.55}usa-sketch-chart .usa-sk-dot{fill:#fff;stroke:var(--usa-sk-c);stroke-width:2}usa-sketch-chart text{fill:currentColor;font:12px 'Comic Sans MS','Segoe Print','Bradley Hand',cursive,system-ui;text-anchor:middle}";
+var css = "usa-sketch-chart{display:block;max-width:100%;cursor:pointer;color:#334155;--usa-sk-c:#2563eb}usa-sketch-chart .usa-sk{display:block;width:100%;height:auto;overflow:visible}usa-sketch-chart .usa-sk path{fill:none;stroke-linecap:round;stroke-linejoin:round}usa-sketch-chart .usa-sk-axis{stroke:currentColor;stroke-width:1.6}usa-sketch-chart .usa-sk-mark{stroke:var(--usa-sk-c);stroke-width:2.2}usa-sketch-chart .usa-sk-hatch{stroke:var(--usa-sk-c);stroke-width:1;opacity:.55}usa-sketch-chart .usa-sk-dot{fill:#fff;stroke:var(--usa-sk-c);stroke-width:2}usa-sketch-chart text{fill:currentColor;font:12px 'Comic Sans MS','Segoe Print','Bradley Hand',cursive,system-ui;text-anchor:middle}";
 
 const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 const nums = (s) => s.split(',').map((x) => Number(x.trim())).filter((x) => Number.isFinite(x));
@@ -8031,6 +8031,7 @@ function defineSketchChart(tag = 'usa-sketch-chart') {
                 this.insertAdjacentHTML('beforeend', `<svg class="usa-sk" viewBox="0 0 ${W} ${H}" aria-hidden="true" data-usa-part>${g}</svg>`);
                 if (this.reduced)
                     return void this.setAttribute('data-drawn', '');
+                this.listen(this, 'click', () => this.redraw());
                 let done = false;
                 this.inView((v) => {
                     if (v && !done) {
@@ -8038,6 +8039,13 @@ function defineSketchChart(tag = 'usa-sketch-chart') {
                         this.draw();
                     }
                 }, { threshold: 0.3 });
+            }
+            /** Sketch the chart in again. */
+            redraw() {
+                if (this.reduced)
+                    return;
+                this.querySelectorAll('.usa-sk path, .usa-sk circle').forEach((p) => p.getAnimations?.().forEach((a) => a.cancel()));
+                this.draw();
             }
             draw() {
                 const strokes = Array.from(this.querySelectorAll('.usa-sk-axis, .usa-sk-mark, .usa-sk-hatch, .usa-sk-dot'));

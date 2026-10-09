@@ -1416,12 +1416,14 @@ declare function defineStickyWall(tag?: string): CustomElementConstructor | unde
  * hand-drawn chart: wobbly pencil axes, hatched bars (`type="bar"`, default)
  * or a sketchy line with dots (`type="line"`), sketched in stroke by stroke
  * when it scrolls into view. `color`, `label`; `values` property /
- * `setValues()`; `usa:drawn` when finished. An `img` whose label lists the
- * data; reduced motion: drawn at once.
+ * `setValues()`; `redraw()` (also on click) sketches it again; `usa:drawn`
+ * when finished. An `img` whose label lists the data; reduced motion: drawn
+ * at once.
  */
 interface UsaSketchChartElement extends UsaElement {
     values: number[];
     setValues(v: number[]): void;
+    redraw(): void;
 }
 declare function defineSketchChart(tag?: string): CustomElementConstructor | undefined;
 

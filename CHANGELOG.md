@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - the 5.8 theme pack already registers a `paper-fold` effect, so the 8.5 unfold effect is named `paper-unfold` (registering it as `paper-fold` would have overridden the 5.8 theme effect).
 - the sketch chart only sketched itself once, on first view — it now re-sketches on click / `redraw()` (gallery and Store demos replay it).
+- the sticky-wall and sketch-chart gallery / Store demos only animated once on first view — demos now have "Pick a note" / "New data" buttons (wired to `pick()` / `setValues()` + `redraw()`).
 
 ## [8.4.0] - 2026-10-09
 
