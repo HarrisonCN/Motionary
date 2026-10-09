@@ -19,6 +19,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Accessibility
 - HUD panel is a labelled `region` (its `title`); the frame and bars are `aria-hidden`, the percentage is real text. Radar is an `img` whose label lists every target with its bearing; the sweep only runs on screen. `data-decode` keeps the real text as `aria-label` while it scrambles. Reduced motion: the panel shows at once, the radar is a still scope with all targets lit, `hud-frame` / `data-decode` just show, `scanline-sweep` does nothing, `hologram` is skipped.
 
+### Fixed
+- the 8.4 hologram gallery card id `fx-holo` collided with the 5.x "Holographic card" card (catalog ids must be unique — caught by the showcase catalog test) → renamed `fx-hologram`; a duplicate-id check now runs at staging.
+
+
 ## [8.3.0] - 2026-10-09
 
 ### Added

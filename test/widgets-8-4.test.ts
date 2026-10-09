@@ -47,7 +47,7 @@ describe('8.4 release', () => {
       expect(componentSnippets(card).esm).toContain(card.define);
     }
     expect(componentSnippets(COMPONENTS.find((c: any) => c.id === 'fx-hud')).esm).toContain("from 'motionary/components/fx-cyber'");
-    for (const id of ["hud-panel", "radar", "fx-hud", "fx-holo"]) expect(COMPONENT_ITEMS.some((i: any) => i.gallery === id), id).toBe(true);
+    for (const id of ["hud-panel", "radar", "fx-hud", "fx-hologram"]) expect(COMPONENT_ITEMS.some((i: any) => i.gallery === id), id).toBe(true);
     const doc = readFileSync('docs/components.md', 'utf8');
     for (const s of ["<usa-hud-panel", "<usa-radar", "motionary/fx/cyber"]) expect(doc).toContain(s);
   });

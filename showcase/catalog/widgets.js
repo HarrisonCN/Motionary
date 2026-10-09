@@ -888,7 +888,7 @@ export const components = [
     '<usa-fx effect="hud-frame" trigger="enter"><div class="card">Target</div></usa-fx>\n<usa-fx effect="scanline-sweep" trigger="click"><button>Scan</button></usa-fx>',
     '<div class="demo-row"><usa-fx effect="hud-frame" trigger="click"><button type="button" class="demo-cy">◎ Lock on</button></usa-fx><usa-fx effect="scanline-sweep" trigger="click" passes="2"><button type="button" class="demo-cy">Scan</button></usa-fx></div>',
     [{ key: 'effect', values: ['hud-frame', 'scanline-sweep'] }], '8.4'),
-  X('fx-holo', ['fx-cyber', 'registerCyberPack'], 'Hologram & data decode', '全息投影与数据解码',
+  X('fx-hologram', ['fx-cyber', 'registerCyberPack'], 'Hologram & data decode', '全息投影与数据解码',
     '8.4: hologram gives an element a flickering translucent cyan look with drifting scan bands; data-decode resolves text from random glyphs to the real characters, left to right.',
     '8.4：hologram 让元素呈现闪烁、半透明的青色全息效果与漂移扫描带；data-decode 让文字从随机字符自左向右解码为真实内容。',
     ['hologram', 'decode', 'glitch', 'cyber', 'text'],
