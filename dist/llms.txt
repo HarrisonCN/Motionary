@@ -1,6 +1,6 @@
-# Motionary 10.6.0
+# Motionary 10.7.0
 
-> Motionary is a zero-dependency motion library: scroll animations, 200+ presets and 205 animated Web Components (<usa-*>) that work in plain HTML and every framework, plus motionary/runtime — its own tween/timeline engine and format loaders.
+> Motionary is a zero-dependency motion library: scroll animations, 200+ presets and 207 animated Web Components (<usa-*>) that work in plain HTML and every framework, plus motionary/runtime — its own tween/timeline engine and format loaders.
 
 Install: `npm i motionary` · CDN: https://unpkg.com/motionary@10/dist/components.umd.js (+ https://unpkg.com/motionary@10/dist/widgets.umd.js for 6.x+ widgets) · Manifest: https://harrisoncn.github.io/Motionary/components.json · Full text: https://harrisoncn.github.io/Motionary/llms-full.txt
 
@@ -24,6 +24,8 @@ Rules for using a component: (1) import its define function from `import.path` a
 - [motionary/runtime/format-obj](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/format-obj.md): Load Wavefront OBJ (+ MTL materials and diffuse textures) into motionary/runtime/gl nodes: polygons triangulated, groups, per-material meshes.
 - [motionary/runtime/vector](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/vector.md): Plays Lottie (bodymovin JSON) and dotLottie (.lottie) files on Canvas 2D with Motionary’s own renderer (no lottie-web code): shapes, gradients, trim paths, masks, track mattes, precomps, images; a runtime timeline you can seek, reverse and scrub.
 - [@rive-app/canvas](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/rive.md): The official MIT-licensed Rive runtime, used by <usa-rive> to play .riv files (artboards, animations, state machines with inputs). Optional peer dependency: lazy-loaded on first use, never bundled into Motionary.
+- [motionary/runtime/physics](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/physics.md): A small 2D rigid-body engine written for Motionary (own implementation and API — no Matter.js / Box2D code): circles, boxes and convex polygons, mass from density, restitution, friction, sensors, collision groups, sleeping, distance / spring / pin constraints, pointer drag, a fixed time step on the shared ticker.
+- [motionary/runtime/format-scene](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/format-scene.md): The versioned motionary-scene@1 format: a JSON description of a 2D physics scene (world, named materials, bodies, constraints, per-body style) — validate, migrate older drafts, load into a physics world and save one back.
 
 ## Components
 
@@ -129,6 +131,7 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<usa-motion>` (motionary/components/widgets): 9.0: the declarative motion DSL — describe motion as one readable string (“enter: fade-up 600ms stagger 80ms; hover: pop”) on <usa-motion> or any element’s data
 - `<usa-motion-inspector>` (motionary/components/widgets): 10.2: a live panel listing the running animations in a scope (CSS animations, transitions, element.animate(), components) with state and progress, plus the moti
 - `<usa-motion-prefs>` (motionary/components/widgets): 9.5: a motion settings panel for your users — motion level (full, gentle, minimal, none), animation speed, pause autoplaying video, no parallax — applied instan
+- `<usa-motion-prompt>` (motionary/components/widgets): 10.7 (AI-assisted motion): describe a motion in English or Chinese and get a live preview plus ready code — Web Animations, CSS (with a reduced-motion guard) or
 - `<usa-motion-spec>` (motionary/components/widgets): 9.7: a motion spec sheet for design hand-off — each rule of a motion string with its trigger, a duration bar on a shared timeline and the easing curve, a Play p
 - `<usa-motion-switch>` (motionary/components/page): Let users pick Off · Low · Normal · High for the whole app; scales every component, persists, and Off equals reduced motion.
 - `<usa-motion-theme>` (motionary/components/effects): 5.8: <usa-motion-theme name> applies a theme pack — design tokens (--usa-theme-*), motion tokens and effect presets per role (enter / hover / click / attention 
@@ -148,6 +151,7 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<usa-particles>` (motionary/components/background): A canvas constellation that drifts away from the pointer. Runs only while visible, DPR ≤ 2, a still frame under reduced motion.
 - `<usa-pause-all>` (motionary/components/widgets): 9.5: one button that pauses all motion on the page (WCAG 2.2.2) — Motionary’s shared clock, every CSS / Web animation and autoplaying media — and resumes it aga
 - `<usa-perf-monitor>` (motionary/components/widgets): 9.6: a live performance overlay for motion work — FPS with a sparkline, active Motionary animations, frame-loop callbacks, long tasks and the shared clock — fla
+- `<usa-physics-playground>` (motionary/components/widgets; requires motionary/runtime/physics + motionary/runtime/format-scene): 10.7: a 2D rigid-body sandbox on Motionary’s own physics engine — circles, boxes and polygons, friction, restitution, constraints, sleeping — loaded from a vers
 - `<usa-pinch-zoom>` (motionary/components/gesture): Pinch with two fingers or Ctrl + wheel / trackpad pinch, pan while zoomed, double-tap to toggle; scale and position spring back inside the bounds.
 - `<usa-player>` (motionary/components/effects): 5.9: <usa-player> plays a JSON animation — timeline presets, your own keyframes and any registered effect on a shared clock; play / pause / seek / rate / loop, 
 - `<usa-plugin-card>` (motionary/components/widgets; requires motionary/runtime): 10.1: a plugin’s name, version and author with a Motionary compatibility badge (semver `engine` range), a signature badge (SHA-256 integrity checked with Web Cr

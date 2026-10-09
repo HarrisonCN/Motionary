@@ -3,7 +3,7 @@
   "format": "motionary/components",
   "schemaVersion": 1,
   "package": "motionary",
-  "version": "10.6.0",
+  "version": "10.7.0",
   "homepage": "https://harrisoncn.github.io/Motionary/",
   "llms": "https://harrisoncn.github.io/Motionary/llms.txt",
   "cdn": {
@@ -1145,6 +1145,137 @@
         ]
       ],
       "example": "// npm i @rive-app/canvas\nimport { defineRive } from 'motionary/components/widgets';\ndefineRive();\n// <usa-rive src=\"/anim/icon.riv\" state-machine=\"State Machine 1\" autoplay></usa-rive>"
+    },
+    {
+      "kind": "runtime",
+      "id": "physics",
+      "label": "motionary/runtime/physics",
+      "title": "2D rigid-body physics",
+      "summary": "A small 2D rigid-body engine written for Motionary (own implementation and API — no Matter.js / Box2D code): circles, boxes and convex polygons, mass from density, restitution, friction, sensors, collision groups, sleeping, distance / spring / pin constraints, pointer drag, a fixed time step on the shared ticker.",
+      "install": "npm i motionary",
+      "importPath": "motionary/runtime/physics",
+      "import": "import { use } from 'motionary/runtime';\nimport { physics } from 'motionary/runtime/physics';",
+      "register": "use(physics);",
+      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/physics.iife.js\"></script>",
+      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/physics.js",
+      "order": "Register the core first, then the module: use(physics) also registers the core. CDN: load runtime.iife.js, then runtime/physics.iife.js (it registers itself).",
+      "docs": "docs/runtime/physics.md",
+      "budget": 10240,
+      "exports": [
+        "physics",
+        "createWorld",
+        "World",
+        "Body",
+        "Constraint",
+        "collide",
+        "dragConstraint"
+      ],
+      "compat": [
+        [
+          "bodies: circle, box, convex polygon (any winding, made convex)",
+          "yes",
+          "concave shapes: split them into convex parts"
+        ],
+        [
+          "static, dynamic and kinematic bodies; density / mass, inertia, fixed rotation",
+          "yes",
+          ""
+        ],
+        [
+          "collisions: sort-and-sweep broad phase, SAT narrow phase, up to 2 contact points",
+          "yes",
+          "no continuous collision detection: very fast small bodies can tunnel"
+        ],
+        [
+          "restitution, Coulomb friction, warm-started accumulated impulses",
+          "yes",
+          ""
+        ],
+        [
+          "constraints: distance (rigid or spring with stiffness / damping), pin, pointer drag",
+          "yes",
+          "no revolute motors / joint limits"
+        ],
+        [
+          "sensors, collision categories / masks, collision events, sleeping",
+          "yes",
+          ""
+        ],
+        [
+          "fixed time step + accumulator (same result at any frame rate)",
+          "yes",
+          ""
+        ],
+        [
+          "SSR / workers",
+          "yes",
+          "pure maths; world.run() needs the runtime ticker"
+        ]
+      ],
+      "example": "import { use } from 'motionary/runtime';\nimport { physics, createWorld } from 'motionary/runtime/physics';\nuse(physics);\nconst world = createWorld({ gravity: [0, 980] });\nworld.bounds(600, 400);\nconst ball = world.body({ shape: 'circle', x: 300, y: 40, radius: 20, restitution: 0.7 });\nworld.run(); // steps on the shared ticker"
+    },
+    {
+      "kind": "runtime",
+      "id": "format-scene",
+      "label": "motionary/runtime/format-scene",
+      "title": "Scene JSON (motionary-scene@1)",
+      "summary": "The versioned motionary-scene@1 format: a JSON description of a 2D physics scene (world, named materials, bodies, constraints, per-body style) — validate, migrate older drafts, load into a physics world and save one back.",
+      "install": "npm i motionary",
+      "importPath": "motionary/runtime/format-scene",
+      "import": "import { use } from 'motionary/runtime';\nimport { formatScene } from 'motionary/runtime/format-scene';",
+      "register": "use(formatScene);",
+      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-scene.iife.js\"></script>",
+      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-scene.js",
+      "order": "Register the core first, then the module: use(formatScene) also registers the core. CDN: load runtime.iife.js, then runtime/format-scene.iife.js (it registers itself).",
+      "docs": "docs/runtime/format-scene.md",
+      "budget": 3072,
+      "exports": [
+        "formatScene",
+        "SCENE_FORMAT",
+        "migrateScene",
+        "validateScene",
+        "parseScene",
+        "sceneToWorld",
+        "worldToScene"
+      ],
+      "compat": [
+        [
+          "world: size, gravity, walls (with or without a top), solver iterations",
+          "yes",
+          ""
+        ],
+        [
+          "named materials (restitution, friction, density), per-body overrides",
+          "yes",
+          ""
+        ],
+        [
+          "bodies: circle / box / polygon, static / kinematic, velocity, angle, sensor, style",
+          "yes",
+          ""
+        ],
+        [
+          "constraints: distance / spring / pin between bodies or to a world point",
+          "yes",
+          ""
+        ],
+        [
+          "validation (lists every problem, never throws) + parseScene (throws one error)",
+          "yes",
+          ""
+        ],
+        [
+          "migration: unversioned scenes and the motionary-scene@0 draft → @1, with a change list",
+          "yes",
+          ""
+        ],
+        [
+          "save: worldToScene() (walls made by bounds() are left out)",
+          "yes",
+          ""
+        ]
+      ],
+      "example": "import { use } from 'motionary/runtime';\nimport { physics } from 'motionary/runtime/physics';\nimport { formatScene, sceneToWorld } from 'motionary/runtime/format-scene';\nuse(physics, formatScene);\nconst { world, bodies } = sceneToWorld(await (await fetch('/scenes/stack.json')).json());\nworld.run();"
     }
   ],
   "components": [
@@ -5375,6 +5506,47 @@
       "source": "src/components/widgets/motion-prefs.ts"
     },
     {
+      "id": "motion-prompt",
+      "tag": "usa-motion-prompt",
+      "title": "Motion prompt (text → motion)",
+      "description": "10.7 (AI-assisted motion): describe a motion in English or Chinese and get a live preview plus ready code — Web Animations, CSS (with a reduced-motion guard) or a Motionary component. A small deterministic parser (motionary/components/ai), no model and no network; the same parser powers suggest_motion in motionary-mcp 2.0.",
+      "category": "ui",
+      "since": "10.7",
+      "keywords": [
+        "ai",
+        "natural language",
+        "prompt",
+        "motion spec",
+        "code generator",
+        "mcp"
+      ],
+      "import": {
+        "path": "motionary/components/widgets",
+        "define": "defineMotionPrompt",
+        "register": "defineMotionPrompt();"
+      },
+      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "attributes": [
+        "value",
+        "format",
+        "placeholder",
+        "label"
+      ],
+      "events": [
+        "usa:suggest",
+        "usa:copy"
+      ],
+      "slots": [],
+      "methods": [
+        "suggest"
+      ],
+      "example": "<usa-motion-prompt value=\"fade the cards up slowly, one after another\"></usa-motion-prompt>",
+      "esm": "import { defineMotionPrompt } from 'motionary/components/widgets';\n\ndefineMotionPrompt(); // registers <usa-motion-prompt>\n\n/* then use it in your HTML:\n<usa-motion-prompt value=\"fade the cards up slowly, one after another\"></usa-motion-prompt>\n*/",
+      "requires": [],
+      "prerequisites": null,
+      "source": "src/components/widgets/motion-prompt.ts"
+    },
+    {
       "id": "motion-spec",
       "tag": "usa-motion-spec",
       "title": "Motion spec sheet",
@@ -6088,6 +6260,71 @@
       "requires": [],
       "prerequisites": null,
       "source": "src/components/widgets/perf-monitor.ts"
+    },
+    {
+      "id": "physics-playground",
+      "tag": "usa-physics-playground",
+      "title": "Physics playground",
+      "description": "10.7: a 2D rigid-body sandbox on Motionary’s own physics engine — circles, boxes and polygons, friction, restitution, constraints, sleeping — loaded from a versioned motionary-scene@1 JSON (or a preset: balls, pyramid, pendulum, dominoes). Drag bodies, tap to spawn, arrow keys nudge. Requires motionary/runtime/physics + motionary/runtime/format-scene — npm i motionary, then use(physics, formatScene) before it mounts.",
+      "category": "ui",
+      "since": "10.7",
+      "keywords": [
+        "physics",
+        "rigid body",
+        "gravity",
+        "collision",
+        "scene json",
+        "runtime"
+      ],
+      "import": {
+        "path": "motionary/components/widgets",
+        "define": "definePhysicsPlayground",
+        "register": "definePhysicsPlayground();"
+      },
+      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "attributes": [
+        "preset",
+        "src",
+        "gravity",
+        "spawn",
+        "label"
+      ],
+      "events": [
+        "usa:collision",
+        "usa:load",
+        "usa:error",
+        "usa:runtime-missing"
+      ],
+      "slots": [],
+      "methods": [
+        "reset",
+        "play",
+        "pause",
+        "toScene"
+      ],
+      "example": "<usa-physics-playground preset=\"pyramid\" spawn label=\"Knock the pyramid over\"></usa-physics-playground>",
+      "esm": "import { use } from 'motionary/runtime';\nimport { physics } from 'motionary/runtime/physics';\nimport { formatScene } from 'motionary/runtime/format-scene';\n\nuse(physics, formatScene);\nimport { definePhysicsPlayground } from 'motionary/components/widgets';\n\ndefinePhysicsPlayground(); // registers <usa-physics-playground>\n\n/* then use it in your HTML:\n<usa-physics-playground preset=\"pyramid\" spawn label=\"Knock the pyramid over\"></usa-physics-playground>\n*/",
+      "requires": [
+        "physics",
+        "format-scene"
+      ],
+      "prerequisites": {
+        "badge": "Requires: motionary/runtime/physics + motionary/runtime/format-scene",
+        "modules": [
+          "motionary/runtime/physics",
+          "motionary/runtime/format-scene"
+        ],
+        "install": "npm i motionary",
+        "importAndRegister": "import { use } from 'motionary/runtime';\nimport { physics } from 'motionary/runtime/physics';\nimport { formatScene } from 'motionary/runtime/format-scene';\nimport { definePhysicsPlayground } from 'motionary/components/widgets';\n\nuse(physics, formatScene);\ndefinePhysicsPlayground(); // registers <usa-physics-playground> — after the prerequisites",
+        "order": "Register the core first, then the module: use(physics) also registers the core. CDN: load runtime.iife.js, then runtime/physics.iife.js (it registers itself). Register the core first, then the module: use(formatScene) also registers the core. CDN: load runtime.iife.js, then runtime/format-scene.iife.js (it registers itself).",
+        "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/physics.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-scene.iife.js\"></script>\n<!-- then the component bundles -->\n<script src=\"https://unpkg.com/motionary@10/dist/components.umd.js\"></script>\n<script src=\"https://unpkg.com/motionary@10/dist/widgets.umd.js\"></script>",
+        "example": "<usa-physics-playground preset=\"pyramid\" spawn label=\"Knock the pyramid over\"></usa-physics-playground>",
+        "docs": [
+          "https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/physics.md",
+          "https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/format-scene.md"
+        ]
+      },
+      "source": "src/components/widgets/physics-playground.ts"
     },
     {
       "id": "pinch-zoom",

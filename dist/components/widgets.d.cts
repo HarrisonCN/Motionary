@@ -2478,7 +2478,7 @@ interface Light {
     color: Vec3;
     intensity: number;
 }
-declare class Scene {
+declare class Scene$1 {
     root: GlNode;
     ambient: Vec3;
     lights: Light[];
@@ -2503,7 +2503,7 @@ declare class Scene {
  * `<usa-three-scene>` is an alias with the same API.
  */
 interface UsaGlSceneElement extends UsaElement {
-    readonly scene: Scene | null;
+    readonly scene: Scene$1 | null;
     readonly camera: Camera | null;
     readonly root: GlNode | null;
     reload(): Promise<void>;
@@ -2580,45 +2580,45 @@ declare function defineShaderBackdrop(tag?: string): CustomElementConstructor | 
  * runtime timeline (seek, reverse, scrub with `progress`, markers → labels).
  */
 
-type Num = number;
+type Num$2 = number;
 interface LottieProp {
-    a?: Num;
+    a?: Num$2;
     k: any;
     x?: string;
     s?: boolean;
 }
 interface LottieLayer {
-    ty: Num;
-    ind?: Num;
-    parent?: Num;
-    ip: Num;
-    op: Num;
-    st?: Num;
-    sr?: Num;
+    ty: Num$2;
+    ind?: Num$2;
+    parent?: Num$2;
+    ip: Num$2;
+    op: Num$2;
+    st?: Num$2;
+    sr?: Num$2;
     ks: any;
     shapes?: any[];
     hd?: boolean;
-    tt?: Num;
-    td?: Num;
+    tt?: Num$2;
+    td?: Num$2;
     masksProperties?: any[];
     refId?: string;
-    w?: Num;
-    h?: Num;
-    sw?: Num;
-    sh?: Num;
+    w?: Num$2;
+    h?: Num$2;
+    sw?: Num$2;
+    sh?: Num$2;
     sc?: string;
     tm?: LottieProp;
     nm?: string;
-    ddd?: Num;
+    ddd?: Num$2;
     ef?: unknown[];
 }
 interface LottieAnimation {
     v?: string;
-    fr: Num;
-    ip: Num;
-    op: Num;
-    w: Num;
-    h: Num;
+    fr: Num$2;
+    ip: Num$2;
+    op: Num$2;
+    w: Num$2;
+    h: Num$2;
     nm?: string;
     layers: LottieLayer[];
     assets?: {
@@ -2626,23 +2626,23 @@ interface LottieAnimation {
         layers?: LottieLayer[];
         p?: string;
         u?: string;
-        w?: Num;
-        h?: Num;
-        e?: Num;
+        w?: Num$2;
+        h?: Num$2;
+        e?: Num$2;
     }[];
     markers?: {
         cm: string;
-        tm: Num;
-        dr: Num;
+        tm: Num$2;
+        dr: Num$2;
     }[];
 }
 type LottiePlayer = Playable & {
-    readonly frame: Num;
-    readonly totalFrames: Num;
+    readonly frame: Num$2;
+    readonly totalFrames: Num$2;
     readonly animation: LottieAnimation;
-    goToFrame(f: Num): void;
-    setSegment(seg: [Num, Num] | string | null): void;
-    markers: Record<string, [Num, Num]>;
+    goToFrame(f: Num$2): void;
+    setSegment(seg: [Num$2, Num$2] | string | null): void;
+    markers: Record<string, [Num$2, Num$2]>;
 };
 
 /**
@@ -2748,6 +2748,407 @@ interface UsaTokenEditorElement extends UsaElement {
     importJSON(json: unknown): string[];
 }
 declare function defineTokenEditor(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `motionary/runtime/physics` (10.7) — a small 2D rigid-body engine written
+ * for Motionary (own implementation and API; no Matter.js / Box2D code):
+ *
+ * - bodies: circles, boxes and convex polygons (static, dynamic or
+ *   kinematic), density → mass + moment of inertia, restitution, friction,
+ *   sensors, collision groups / masks, sleeping;
+ * - collisions: sort-and-sweep broad phase, separating-axis narrow phase
+ *   with clipped contact manifolds (up to 2 points), sequential, accumulated and
+ *   clamped impulses (normal + Coulomb friction) with a Baumgarte position bias;
+ * - constraints: `distance` (rigid or a spring with `stiffness` /
+ *   `damping`), `pin` (a body point to a world point — also the pointer
+ *   drag constraint) and `weld`-like stiff distance pairs;
+ * - a fixed time step (default 1/60 s) with an accumulator, so results are
+ *   the same at any frame rate; `world.run()` drives it from the shared
+ *   runtime ticker (pauses while the ticker sleeps).
+ *
+ * Pure maths — no DOM: safe in SSR and workers. Units are up to you (the
+ * defaults assume pixels: gravity 980 px/s²).
+ */
+
+type Num$1 = number;
+interface Vec2 {
+    x: Num$1;
+    y: Num$1;
+}
+type ShapeKind = 'circle' | 'box' | 'polygon';
+interface BodyOptions {
+    shape?: ShapeKind;
+    x?: Num$1;
+    y?: Num$1;
+    angle?: Num$1;
+    /** circle */
+    radius?: Num$1;
+    /** box */
+    width?: Num$1;
+    height?: Num$1;
+    /** polygon: local vertices (any winding; made convex-ccw) */
+    vertices?: [Num$1, Num$1][];
+    /** 'dynamic' (default), 'static' (never moves) or 'kinematic' (moves by its velocity, ignores forces / collisions). */
+    type?: 'dynamic' | 'static' | 'kinematic';
+    /** Mass per unit area (default 0.001 → a 40 px box weighs 1.6). */
+    density?: Num$1;
+    /** Overrides density. */
+    mass?: Num$1;
+    restitution?: Num$1;
+    friction?: Num$1;
+    vx?: Num$1;
+    vy?: Num$1;
+    angularVelocity?: Num$1;
+    /** Linear / angular damping per second (0–1). */
+    damping?: Num$1;
+    angularDamping?: Num$1;
+    /** Collides with nothing, reports overlaps only. */
+    sensor?: boolean;
+    /** Collision filtering: bodies collide when (a.category & b.mask) && (b.category & a.mask). */
+    category?: Num$1;
+    mask?: Num$1;
+    /** No rotation (infinite inertia). */
+    fixedRotation?: boolean;
+    label?: string;
+    /** Anything (e.g. a fill colour for your renderer). */
+    data?: unknown;
+}
+declare class Body {
+    readonly id: number;
+    label: string;
+    shape: ShapeKind;
+    type: 'dynamic' | 'static' | 'kinematic';
+    position: Vec2;
+    velocity: Vec2;
+    angle: Num$1;
+    angularVelocity: Num$1;
+    force: Vec2;
+    torque: number;
+    radius: number;
+    /** Local convex vertices (counter-clockwise) for boxes / polygons. */
+    verts: Vec2[];
+    normals: Vec2[];
+    mass: number;
+    invMass: number;
+    inertia: number;
+    invInertia: number;
+    restitution: Num$1;
+    friction: Num$1;
+    damping: Num$1;
+    angularDamping: Num$1;
+    sensor: boolean;
+    category: Num$1;
+    mask: Num$1;
+    sleeping: boolean;
+    sleepTime: number;
+    data: unknown;
+    /** Bounding box, refreshed every step. */
+    aabb: {
+        minX: number;
+        minY: number;
+        maxX: number;
+        maxY: number;
+    };
+    private wv;
+    private wvAngle;
+    private wvPos;
+    constructor(o?: BodyOptions);
+    get isStatic(): boolean;
+    /** Vertices in world space (cached per pose). */
+    worldVerts(): Vec2[];
+    worldNormal(i: Num$1): Vec2;
+    updateAabb(): void;
+    applyImpulse(j: Vec2, at?: Vec2): void;
+    applyForce(f: Vec2, at?: Vec2): void;
+    wake(): void;
+    /** Is the world point inside this body? */
+    contains(x: Num$1, y: Num$1): boolean;
+}
+interface Contact {
+    point: Vec2;
+    depth: Num$1;
+}
+interface Manifold {
+    a: Body;
+    b: Body;
+    normal: Vec2;
+    contacts: Contact[];
+}
+interface ConstraintOptions {
+    type: 'distance' | 'pin';
+    a: Body;
+    /** distance: the other body; pin: omitted. */
+    b?: Body;
+    /** Anchor on a / b in body-local coordinates (default the centre). */
+    anchorA?: [Num$1, Num$1];
+    anchorB?: [Num$1, Num$1];
+    /** pin: the world point. */
+    point?: [Num$1, Num$1];
+    /** Rest length (default: the current distance). */
+    length?: Num$1;
+    /** 1 = rigid; < 1 = spring (fraction of the error corrected per step). */
+    stiffness?: Num$1;
+    /** Spring damping (0–1). */
+    damping?: Num$1;
+    label?: string;
+}
+declare class Constraint {
+    type: 'distance' | 'pin';
+    a: Body;
+    b: Body | null;
+    anchorA: Vec2;
+    anchorB: Vec2;
+    point: Vec2;
+    length: Num$1;
+    stiffness: Num$1;
+    damping: Num$1;
+    label: string;
+    constructor(o: ConstraintOptions);
+    worldA(): Vec2;
+    worldB(): Vec2;
+    /** One velocity iteration (impulse along the constraint axis, with a position bias). */
+    solve(h: Num$1): void;
+}
+interface WorldOptions {
+    gravity?: [Num$1, Num$1];
+    /** Velocity iterations per step (default 10). */
+    iterations?: Num$1;
+    /** Fixed step in seconds (default 1/60). */
+    step?: Num$1;
+    /** Let resting bodies sleep (default true). */
+    sleeping?: boolean;
+}
+type CollisionListener = (m: Manifold) => void;
+declare class World {
+    gravity: Vec2;
+    iterations: Num$1;
+    fixedStep: Num$1;
+    sleeping: boolean;
+    bodies: Body[];
+    constraints: Constraint[];
+    /** Manifolds of the last step (incl. sensor overlaps, which have no response). */
+    contacts: Manifold[];
+    time: number;
+    steps: number;
+    private acc;
+    private warm;
+    private listeners;
+    private stop;
+    constructor(o?: WorldOptions);
+    add<T extends Body | Constraint>(...items: T[]): T;
+    body(o: BodyOptions): Body;
+    constraint(o: ConstraintOptions): Constraint;
+    remove(...items: (Body | Constraint)[]): void;
+    clear(): void;
+    /** Static walls around a w × h box (thickness t outside it). */
+    bounds(w: Num$1, h: Num$1, t?: number, o?: {
+        top?: boolean;
+    }): Body[];
+    onCollision(fn: CollisionListener): () => void;
+    /** Bodies under a world point (topmost = last added first). */
+    query(x: Num$1, y: Num$1): Body[];
+    /** Advance by `seconds` of real time in fixed steps (max 8 steps per call). */
+    update(seconds: Num$1): Num$1;
+    /** One fixed step of h seconds. */
+    step(h?: Num$1): void;
+    /** Drive the world from the shared runtime ticker (needs the core). Returns a stopper. */
+    run(): () => void;
+    get running(): boolean;
+    /** Total kinetic energy (handy for tests / "settled" checks). */
+    energy(): Num$1;
+}
+
+/**
+ * `motionary/runtime/format-scene` (10.7) — the versioned scene format
+ * `motionary-scene@1`: a JSON description of a 2D physics scene (world,
+ * named materials, bodies, constraints, per-body style) that
+ * `<usa-physics-playground>` and your own code can load, validate,
+ * migrate and save.
+ *
+ * ```json
+ * { "format": "motionary-scene@1",
+ *   "world": { "width": 600, "height": 360, "gravity": [0, 980], "walls": true },
+ *   "materials": { "rubber": { "restitution": 0.8, "friction": 0.6, "density": 0.001 } },
+ *   "bodies": [
+ *     { "id": "ball", "shape": "circle", "radius": 20, "position": [120, 40], "material": "rubber", "style": { "fill": "#f472b6" } },
+ *     { "id": "floor-plank", "shape": "box", "size": [300, 16], "position": [300, 300], "angle": 0.1, "static": true }
+ *   ],
+ *   "constraints": [ { "type": "distance", "a": "ball", "b": "floor-plank", "length": 120, "stiffness": 0.3 } ] }
+ * ```
+ *
+ * - `validateScene(json)` lists problems (never throws);
+ * - `migrateScene(json)` upgrades older shapes (an unversioned scene, the
+ *   `motionary-scene@0` draft) to `@1` and reports what it changed;
+ * - `parseScene(json)` = migrate + validate, throws on errors;
+ * - `sceneToWorld(scene)` builds a `motionary/runtime/physics` world
+ *   (bodies by id); `worldToScene(world)` saves one back.
+ *
+ * Needs `motionary/runtime/physics` registered for `sceneToWorld` /
+ * `worldToScene`; validation and migration are pure.
+ */
+
+type Num = number;
+declare const SCENE_FORMAT = "motionary-scene@1";
+interface SceneMaterial {
+    restitution?: Num;
+    friction?: Num;
+    density?: Num;
+}
+interface SceneBody {
+    id: string;
+    shape: 'circle' | 'box' | 'polygon';
+    position: [Num, Num];
+    angle?: Num;
+    radius?: Num;
+    size?: [Num, Num];
+    vertices?: [Num, Num][];
+    static?: boolean;
+    kinematic?: boolean;
+    material?: string;
+    restitution?: Num;
+    friction?: Num;
+    density?: Num;
+    velocity?: [Num, Num];
+    angularVelocity?: Num;
+    sensor?: boolean;
+    style?: {
+        fill?: string;
+        stroke?: string;
+        label?: string;
+    };
+}
+interface SceneConstraint {
+    type: 'distance' | 'pin';
+    a: string;
+    b?: string;
+    point?: [Num, Num];
+    anchorA?: [Num, Num];
+    anchorB?: [Num, Num];
+    length?: Num;
+    stiffness?: Num;
+    damping?: Num;
+}
+interface Scene {
+    format: typeof SCENE_FORMAT;
+    name?: string;
+    world: {
+        width: Num;
+        height: Num;
+        gravity?: [Num, Num];
+        walls?: boolean | {
+            top?: boolean;
+        };
+        iterations?: Num;
+    };
+    materials?: Record<string, SceneMaterial>;
+    bodies: SceneBody[];
+    constraints?: SceneConstraint[];
+}
+
+/**
+ * `<usa-physics-playground preset="pyramid"></usa-physics-playground>` (10.7)
+ * — a 2D rigid-body sandbox drawn on Canvas 2D, simulated by Motionary's own
+ * **`motionary/runtime/physics`** and loaded from a **`motionary-scene@1`**
+ * scene (`motionary/runtime/format-scene`). Requires `use(physics,
+ * formatScene)` before it mounts.
+ *
+ * Attributes: `preset` (balls · pyramid · pendulum · dominoes), `src` (a
+ * scene JSON URL) or an inline `<script type="application/json">` scene,
+ * `gravity` (px/s², default 980), `spawn` (click / tap empty space drops a
+ * body), `paused`, `label`. Drag any dynamic body (pointer or touch);
+ * arrow keys nudge the last body touched. Reduced motion: the scene is
+ * settled off-screen and drawn once (dragging still works, one frame per
+ * move). Only steps while visible.
+ *
+ * API: `world`, `bodies` (by scene id), `scene` (the loaded scene),
+ * `reset()`, `play()`, `pause()`, `toScene()`; events `usa:load` ({ bodies,
+ * format }), `usa:collision` (first contact between two dynamic bodies per
+ * step), `usa:error`, `usa:runtime-missing`.
+ */
+interface UsaPhysicsPlaygroundElement extends UsaElement {
+    readonly world: World | null;
+    readonly bodies: Record<string, Body>;
+    readonly scene: Scene | null;
+    reset(): void;
+    play(): void;
+    pause(): void;
+    toScene(): Scene | null;
+}
+/** The built-in scenes (motionary-scene@1). */
+declare const PHYSICS_PRESETS: Record<string, () => unknown>;
+declare function definePhysicsPlayground(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `motionary/components/ai` (10.7, AI-assisted motion) — turns a short
+ * natural-language description ("fade the cards up slowly when they scroll
+ * into view, one after another") into a motion spec: effect, direction,
+ * distance, duration, delay, easing, trigger, repeat, stagger, Web
+ * Animations keyframes + options, a CSS rule and the Motionary components
+ * that do it. English and Chinese phrases. A small deterministic parser —
+ * no model, no network — shared by `<usa-motion-prompt>` and the
+ * `suggest_motion` tool of `motionary-mcp` (which runs an evaluation set of
+ * prompts against it in CI).
+ *
+ * Pure: no DOM access — safe in Node, workers and SSR.
+ */
+type MotionEffect = 'fade' | 'slide' | 'zoom' | 'rotate' | 'flip' | 'bounce' | 'shake' | 'pulse' | 'blur' | 'reveal' | 'typewriter' | 'count' | 'tilt' | 'magnetic' | 'ripple' | 'parallax' | 'marquee' | 'particles';
+type MotionTrigger = 'load' | 'scroll' | 'hover' | 'click' | 'loop';
+type Direction = 'up' | 'down' | 'left' | 'right' | null;
+interface MotionIntent {
+    /** The input, trimmed. */
+    text: string;
+    effect: MotionEffect;
+    /** Secondary effects mentioned with the main one ("fade and zoom"). */
+    also: MotionEffect[];
+    direction: Direction;
+    /** px for slides, scale factor for zooms, degrees for rotations / flips. */
+    amount: number;
+    duration: number;
+    delay: number;
+    easing: string;
+    /** Named easing the text asked for ('spring', 'bouncy', 'smooth', 'linear', 'snappy', 'ease-out' …). */
+    easingName: string;
+    trigger: MotionTrigger;
+    /** 1 = once, Infinity = forever. */
+    iterations: number;
+    alternate: boolean;
+    /** ms between items for lists / groups (0 = none). */
+    stagger: number;
+    reducedMotion: 'respect';
+    keyframes: Keyframe[];
+    options: KeyframeAnimationOptions;
+    css: string;
+    /** Motionary components that implement it, best first. */
+    components: {
+        tag: string;
+        why: string;
+        snippet: string;
+    }[];
+    /** 0–1: how much of the text was understood. */
+    confidence: number;
+    /** Words / phrases that drove each decision (for explanations). */
+    matched: string[];
+}
+
+/**
+ * `<usa-motion-prompt></usa-motion-prompt>` (10.7, AI-assisted motion) — type
+ * what you want ("fade the cards up slowly, one after another" / "卡片从下往上
+ * 依次淡入") and get a live preview plus ready code: Web Animations, CSS or a
+ * Motionary component. Runs `describeMotion()` from
+ * `motionary/components/ai` — a small deterministic parser (English and
+ * Chinese), **no model and no network**; the same parser backs the
+ * `suggest_motion` tool of `motionary-mcp`.
+ *
+ * Attributes: `value` (initial prompt), `format` (waapi · css · component,
+ * default waapi), `placeholder`, `label`. The preview respects reduced
+ * motion (shows the end state). API: `intent`, `suggest(text)`; events
+ * `usa:suggest` ({ intent }), `usa:copy` ({ format, code }).
+ */
+interface UsaMotionPromptElement extends UsaElement {
+    readonly intent: MotionIntent | null;
+    suggest(text: string): MotionIntent;
+}
+declare function defineMotionPrompt(tag?: string): CustomElementConstructor | undefined;
 
 /**
  * motionary/components/widgets — the 6.x animated UI widgets, in their own
@@ -2884,8 +3285,10 @@ declare global {
         'usa-lottie-player': UsaLottiePlayerElement;
         'usa-rive': UsaRiveElement;
         'usa-token-editor': UsaTokenEditorElement;
+        'usa-physics-playground': UsaPhysicsPlaygroundElement;
+        'usa-motion-prompt': UsaMotionPromptElement;
     }
 }
 
-export { BACKDROP_PRESETS, CAROUSEL_EFFECTS, EQ_PRESETS, FESTIVAL_THEMES, LOTTIE_ICONS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PARTICLE_DRAW_WGSL, PARTICLE_SIM_WGSL, POST_PASSES, PRESENCE_STATES, PROGRESS_VARIANTS, RETRO_VARIANTS, RIVE_CDN, RIVE_PEER, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SPARK_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, WORKER_SCENES, backgroundCss, badgeProgress, cartTotal, defineAddToCart, defineBadgeWall, defineBarChart, defineBgGenerator, defineCarousel, defineCartDrawer, defineChapterNav, defineChatComposer, defineClockControl, defineCodeExport, defineColorPicker, defineCommandPalette, defineCompare, defineCountdown, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineFestivalBanner, defineField, defineFileDrop, defineGauge, defineGenArt, defineGestureSticker, defineGlScene, defineGlobe, defineGpuParticles, defineGyroCard, defineHeroVideo, defineHudPanel, defineHydrate, defineInstallButton, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLiquidNav, defineLocationCard, defineLottie, defineLottieIcon, defineLottiePlayer, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMessageList, defineMilestones, defineModal, defineMotion, defineMotionInspector, defineMotionPrefs, defineMotionSpec, defineMusicPlayer, defineNativePreview, defineNavMorph, defineNotificationBell, defineOdometer, defineOrganicCard, defineOtp, definePagination, definePanorama, defineParallaxLayers, definePauseAll, definePerfMonitor, definePluginCard, definePluginStore, definePresence, definePrizeWheel, defineProductGallery, defineProgressRing, definePropPanel, definePullCord, defineRadar, defineReactions, defineRedEnvelope, defineRetroButton, defineRive, defineRouteTransition, defineScene, defineScrollRing, defineScrollScene, defineSegmented, defineShaderBackdrop, defineSheet, defineShortcut, defineSkeletonReveal, defineSketchChart, defineSmoothScroll, defineSparkline, defineSpatialCard, defineStarRating, defineStepper, defineStickyWall, defineStories, defineSuggestionChips, defineSwipeDeck, defineSwitch, defineTabBar, defineTerminal, defineTextSplitter, defineThemeSurface, defineThemeSwitcher, defineThreeScene, defineTip, defineToastStack, defineTokenEditor, defineUploadProgress, defineVideoCard, defineVoiceButton, defineVolumeKnob, defineWeatherCard, defineWidgets, defineWorkerCanvas, defineXpBar, describeComponent, exportComponent, formatBytes, formatDistance, fuzzyMatch, haversine, hexToHsv, hsvToHex, initials, keyLabels, levelFor, loadRiveRuntime, matchesKeys, monthGrid, pageWindow, parseChips, parseISODate, parseLRC, parseMarkers, parseProps, parseReactions, parseScrub, parseTargets, passwordStrength, project, provideRiveRuntime, rankRows, sanitizeCode, sparkPoints, splitTime, stackToast, waveBars, wheelAngle, wrapIndex };
-export type { BellNotice, CartItem, ChatMessage, ExportFormat, ExportedNode, GlobeMarker, LeaderRow, PaletteCommand, PerfStats, PresenceState, PropSpec, RadarTarget, StackToastOptions, StickerState, UsaAddToCartElement, UsaBadgeWallElement, UsaBarChartElement, UsaBgGeneratorElement, UsaCarouselElement, UsaCartDrawerElement, UsaChapterNavElement, UsaChatComposerElement, UsaClockControlElement, UsaCodeExportElement, UsaColorPickerElement, UsaCommandPaletteElement, UsaCompareElement, UsaCountdownElement, UsaCubeGalleryElement, UsaDatePickerElement, UsaDisclosureElement, UsaDockElement, UsaEqualizerElement, UsaFestivalBannerElement, UsaFieldElement, UsaFileDropElement, UsaGaugeElement, UsaGenArtElement, UsaGestureStickerElement, UsaGlSceneElement, UsaGlobeElement, UsaGpuParticlesElement, UsaGyroCardElement, UsaHeroVideoElement, UsaHudPanelElement, UsaHydrateElement, UsaInstallButtonElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaKpiElement, UsaLeaderboardElement, UsaLiquidNavElement, UsaLocationCardElement, UsaLottieElement, UsaLottieIconElement, UsaLottiePlayerElement, UsaLyricsElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMessageListElement, UsaMilestonesElement, UsaModalElement, UsaMotionElement, UsaMotionInspectorElement, UsaMotionPrefsElement, UsaMotionSpecElement, UsaMusicPlayerElement, UsaNativePreviewElement, UsaNavMorphElement, UsaNotificationBellElement, UsaOdometerElement, UsaOrganicCardElement, UsaOtpElement, UsaPaginationElement, UsaPanoramaElement, UsaParallaxLayersElement, UsaPauseAllElement, UsaPerfMonitorElement, UsaPluginCardElement, UsaPluginStoreElement, UsaPresenceElement, UsaPrizeWheelElement, UsaProductGalleryElement, UsaProgressRingElement, UsaPropPanelElement, UsaPullCordElement, UsaRadarElement, UsaReactionsElement, UsaRedEnvelopeElement, UsaRetroButtonElement, UsaRiveElement, UsaRouteTransitionElement, UsaSceneElement, UsaScrollRingElement, UsaScrollSceneElement, UsaSegmentedElement, UsaShaderBackdropElement, UsaSheetElement, UsaShortcutElement, UsaSkeletonRevealElement, UsaSketchChartElement, UsaSmoothScrollElement, UsaSparklineElement, UsaSpatialCardElement, UsaStarRatingElement, UsaStepperElement, UsaStickyWallElement, UsaStoriesElement, UsaSuggestionChipsElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTerminalElement, UsaTextSplitterElement, UsaThemeSurfaceElement, UsaThemeSwitcherElement, UsaTipElement, UsaToastStackElement, UsaTokenEditorElement, UsaUploadProgressElement, UsaVideoCardElement, UsaVoiceButtonElement, UsaVolumeKnobElement, UsaWeatherCardElement, UsaWorkerCanvasElement, UsaXpBarElement, WallBadge };
+export { BACKDROP_PRESETS, CAROUSEL_EFFECTS, EQ_PRESETS, FESTIVAL_THEMES, LOTTIE_ICONS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PARTICLE_DRAW_WGSL, PARTICLE_SIM_WGSL, PHYSICS_PRESETS, POST_PASSES, PRESENCE_STATES, PROGRESS_VARIANTS, RETRO_VARIANTS, RIVE_CDN, RIVE_PEER, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SPARK_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, WORKER_SCENES, backgroundCss, badgeProgress, cartTotal, defineAddToCart, defineBadgeWall, defineBarChart, defineBgGenerator, defineCarousel, defineCartDrawer, defineChapterNav, defineChatComposer, defineClockControl, defineCodeExport, defineColorPicker, defineCommandPalette, defineCompare, defineCountdown, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineFestivalBanner, defineField, defineFileDrop, defineGauge, defineGenArt, defineGestureSticker, defineGlScene, defineGlobe, defineGpuParticles, defineGyroCard, defineHeroVideo, defineHudPanel, defineHydrate, defineInstallButton, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLiquidNav, defineLocationCard, defineLottie, defineLottieIcon, defineLottiePlayer, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMessageList, defineMilestones, defineModal, defineMotion, defineMotionInspector, defineMotionPrefs, defineMotionPrompt, defineMotionSpec, defineMusicPlayer, defineNativePreview, defineNavMorph, defineNotificationBell, defineOdometer, defineOrganicCard, defineOtp, definePagination, definePanorama, defineParallaxLayers, definePauseAll, definePerfMonitor, definePhysicsPlayground, definePluginCard, definePluginStore, definePresence, definePrizeWheel, defineProductGallery, defineProgressRing, definePropPanel, definePullCord, defineRadar, defineReactions, defineRedEnvelope, defineRetroButton, defineRive, defineRouteTransition, defineScene, defineScrollRing, defineScrollScene, defineSegmented, defineShaderBackdrop, defineSheet, defineShortcut, defineSkeletonReveal, defineSketchChart, defineSmoothScroll, defineSparkline, defineSpatialCard, defineStarRating, defineStepper, defineStickyWall, defineStories, defineSuggestionChips, defineSwipeDeck, defineSwitch, defineTabBar, defineTerminal, defineTextSplitter, defineThemeSurface, defineThemeSwitcher, defineThreeScene, defineTip, defineToastStack, defineTokenEditor, defineUploadProgress, defineVideoCard, defineVoiceButton, defineVolumeKnob, defineWeatherCard, defineWidgets, defineWorkerCanvas, defineXpBar, describeComponent, exportComponent, formatBytes, formatDistance, fuzzyMatch, haversine, hexToHsv, hsvToHex, initials, keyLabels, levelFor, loadRiveRuntime, matchesKeys, monthGrid, pageWindow, parseChips, parseISODate, parseLRC, parseMarkers, parseProps, parseReactions, parseScrub, parseTargets, passwordStrength, project, provideRiveRuntime, rankRows, sanitizeCode, sparkPoints, splitTime, stackToast, waveBars, wheelAngle, wrapIndex };
+export type { BellNotice, CartItem, ChatMessage, ExportFormat, ExportedNode, GlobeMarker, LeaderRow, PaletteCommand, PerfStats, PresenceState, PropSpec, RadarTarget, StackToastOptions, StickerState, UsaAddToCartElement, UsaBadgeWallElement, UsaBarChartElement, UsaBgGeneratorElement, UsaCarouselElement, UsaCartDrawerElement, UsaChapterNavElement, UsaChatComposerElement, UsaClockControlElement, UsaCodeExportElement, UsaColorPickerElement, UsaCommandPaletteElement, UsaCompareElement, UsaCountdownElement, UsaCubeGalleryElement, UsaDatePickerElement, UsaDisclosureElement, UsaDockElement, UsaEqualizerElement, UsaFestivalBannerElement, UsaFieldElement, UsaFileDropElement, UsaGaugeElement, UsaGenArtElement, UsaGestureStickerElement, UsaGlSceneElement, UsaGlobeElement, UsaGpuParticlesElement, UsaGyroCardElement, UsaHeroVideoElement, UsaHudPanelElement, UsaHydrateElement, UsaInstallButtonElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaKpiElement, UsaLeaderboardElement, UsaLiquidNavElement, UsaLocationCardElement, UsaLottieElement, UsaLottieIconElement, UsaLottiePlayerElement, UsaLyricsElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMessageListElement, UsaMilestonesElement, UsaModalElement, UsaMotionElement, UsaMotionInspectorElement, UsaMotionPrefsElement, UsaMotionPromptElement, UsaMotionSpecElement, UsaMusicPlayerElement, UsaNativePreviewElement, UsaNavMorphElement, UsaNotificationBellElement, UsaOdometerElement, UsaOrganicCardElement, UsaOtpElement, UsaPaginationElement, UsaPanoramaElement, UsaParallaxLayersElement, UsaPauseAllElement, UsaPerfMonitorElement, UsaPhysicsPlaygroundElement, UsaPluginCardElement, UsaPluginStoreElement, UsaPresenceElement, UsaPrizeWheelElement, UsaProductGalleryElement, UsaProgressRingElement, UsaPropPanelElement, UsaPullCordElement, UsaRadarElement, UsaReactionsElement, UsaRedEnvelopeElement, UsaRetroButtonElement, UsaRiveElement, UsaRouteTransitionElement, UsaSceneElement, UsaScrollRingElement, UsaScrollSceneElement, UsaSegmentedElement, UsaShaderBackdropElement, UsaSheetElement, UsaShortcutElement, UsaSkeletonRevealElement, UsaSketchChartElement, UsaSmoothScrollElement, UsaSparklineElement, UsaSpatialCardElement, UsaStarRatingElement, UsaStepperElement, UsaStickyWallElement, UsaStoriesElement, UsaSuggestionChipsElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTerminalElement, UsaTextSplitterElement, UsaThemeSurfaceElement, UsaThemeSwitcherElement, UsaTipElement, UsaToastStackElement, UsaTokenEditorElement, UsaUploadProgressElement, UsaVideoCardElement, UsaVoiceButtonElement, UsaVolumeKnobElement, UsaWeatherCardElement, UsaWorkerCanvasElement, UsaXpBarElement, WallBadge };

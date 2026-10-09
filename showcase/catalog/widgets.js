@@ -1314,6 +1314,21 @@ export const components = [
     '<usa-token-editor apply format="2025.10"></usa-token-editor>',
     '<usa-token-editor class="demo-te" groups="duration,easing" label="Motion tokens"></usa-token-editor>',
     [{ key: 'format', values: ['2025.10', 'draft'] }], { since: '10.6' }),
+  // ---- 10.7 ------------------------------------------------------------
+  W('usa-physics-playground', 'ui', 'Physics playground', '物理沙盒',
+    '10.7: a 2D rigid-body sandbox on Motionary’s own physics engine — circles, boxes and polygons, friction, restitution, constraints, sleeping — loaded from a versioned motionary-scene@1 JSON (or a preset: balls, pyramid, pendulum, dominoes). Drag bodies, tap to spawn, arrow keys nudge. Requires motionary/runtime/physics + motionary/runtime/format-scene — npm i motionary, then use(physics, formatScene) before it mounts.',
+    '10.7：基于 Motionary 自研物理引擎的 2D 刚体沙盒 —— 圆、盒、多边形，摩擦、弹性、约束、休眠 —— 从带版本号的 motionary-scene@1 JSON（或预设：小球、金字塔、摆、多米诺）加载。可拖拽物体、点击生成、方向键推动。需要 motionary/runtime/physics 与 motionary/runtime/format-scene —— npm i motionary，并在挂载前 use(physics, formatScene)。',
+    ['physics', 'rigid body', 'gravity', 'collision', 'scene json', 'runtime'],
+    '<usa-physics-playground preset="pyramid" spawn label="Knock the pyramid over"></usa-physics-playground>',
+    '<usa-physics-playground class="demo-phys" preset="pyramid" spawn label="Physics pyramid"></usa-physics-playground>',
+    [{ key: 'preset', values: ['pyramid', 'balls', 'pendulum', 'dominoes'] }], { since: '10.7', requires: ['physics', 'format-scene'] }),
+  W('usa-motion-prompt', 'ui', 'Motion prompt (text → motion)', '动效提示框（文字 → 动效）',
+    '10.7 (AI-assisted motion): describe a motion in English or Chinese and get a live preview plus ready code — Web Animations, CSS (with a reduced-motion guard) or a Motionary component. A small deterministic parser (motionary/components/ai), no model and no network; the same parser powers suggest_motion in motionary-mcp 2.0.',
+    '10.7（AI 辅助动效）：用中文或英文描述动效，即得实时预览与可用代码 —— Web Animations、CSS（含减少动态效果保护）或 Motionary 组件。小型确定性解析器（motionary/components/ai），无模型、无网络；motionary-mcp 2.0 的 suggest_motion 使用同一解析器。',
+    ['ai', 'natural language', 'prompt', 'motion spec', 'code generator', 'mcp'],
+    '<usa-motion-prompt value="fade the cards up slowly, one after another"></usa-motion-prompt>',
+    '<usa-motion-prompt class="demo-mp" value="slide the cards in from the left, one after another" label="Describe the motion"></usa-motion-prompt>',
+    [{ key: 'format', values: ['waapi', 'css', 'component'] }], { since: '10.7' }),
 ];
 
 /** item id → live-demo wiring. */

@@ -189,6 +189,8 @@ Motionary ships its own zero-dependency animation runtime — shared ticker, twe
 | [OBJ / MTL loader](docs/runtime/format-obj.md) | `motionary/runtime/format-obj` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-obj.iife.js` | `use(formatObj);` | 3.0 KB |
 | [Lottie + dotLottie player](docs/runtime/vector.md) | `motionary/runtime/vector` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/vector.iife.js` | `use(vector);` | 12.0 KB |
 | [Official Rive runtime](docs/runtime/rive.md) | `@rive-app/canvas` | `https://unpkg.com/@rive-app/canvas@2.44.1/rive.js` | `provideRiveRuntime(() => import('@rive-app/canvas')); // lazy: fetched when the first <usa-rive> mounts` | official runtime (not bundled) |
+| [2D rigid-body physics](docs/runtime/physics.md) | `motionary/runtime/physics` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/physics.iife.js` | `use(physics);` | 10.0 KB |
+| [Scene JSON (motionary-scene@1)](docs/runtime/format-scene.md) | `motionary/runtime/format-scene` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-scene.iife.js` | `use(formatScene);` | 3.0 KB |
 
 Install once: `npm i motionary`. Plain HTML: load `runtime.iife.js` first, then the module files (each registers itself).
 
@@ -407,6 +409,38 @@ defineRive(); // registers <usa-rive> — after the prerequisites
 <usa-rive src="/anim/icon.riv" state-machine="State Machine 1" autoplay label="Icon"></usa-rive>
 ```
 
+#### `<usa-physics-playground>` — Requires: motionary/runtime/physics + motionary/runtime/format-scene
+
+- **Install:** `npm i motionary`
+- **Import order & registration:** Register the core first, then the module: use(physics) also registers the core. CDN: load runtime.iife.js, then runtime/physics.iife.js (it registers itself). Register the core first, then the module: use(formatScene) also registers the core. CDN: load runtime.iife.js, then runtime/format-scene.iife.js (it registers itself).
+
+```js
+import { use } from 'motionary/runtime';
+import { physics } from 'motionary/runtime/physics';
+import { formatScene } from 'motionary/runtime/format-scene';
+import { definePhysicsPlayground } from 'motionary/components/widgets';
+
+use(physics, formatScene);
+definePhysicsPlayground(); // registers <usa-physics-playground> — after the prerequisites
+```
+
+- **CDN:**
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/physics.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-scene.iife.js"></script>
+<!-- then the component bundles -->
+<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>
+```
+
+- **Minimal example:**
+
+```html
+<usa-physics-playground preset="pyramid" spawn label="Knock the pyramid over"></usa-physics-playground>
+```
+
 <!-- runtime:end -->
 
 ## Accessibility & reduced motion
@@ -440,7 +474,7 @@ Evergreen browsers since 2023: Chrome / Edge ≥ 111, Safari ≥ 16.4, Firefox �
 
 ## Documentation
 
-- **MCP server:** `npx -y -p motionary motionary-mcp` — read-only component catalog for MCP clients (search, API, prerequisite-aware snippets): [docs/mcp.md](docs/mcp.md).
+- **MCP server:** `npx -y -p motionary motionary-mcp` — read-only component catalog for MCP clients (search, API, prerequisite-aware snippets; 2.0 adds `suggest_motion` and `validate_snippet`): [docs/mcp.md](docs/mcp.md).
 - **AI assistants:** [AGENTS.md](AGENTS.md) · [prompt guide](docs/ai-prompt-guide.md) · one page per component in [docs/components/](docs/components/README.md) · `components.json` / `llms.txt` / `llms-full.txt` on the site root.
 
 - [API reference](./docs/API.md) — every export, option and `data-sa-*` attribute

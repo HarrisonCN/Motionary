@@ -1,6 +1,6 @@
 {
   "name": "motionary",
-  "version": "10.6.0",
+  "version": "10.7.0",
   "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 94 animated Web Components — 214 scroll-reveal presets, card/click/button morphs, physics, page transitions, generative & sound-reactive backgrounds, cursor/gesture effects, themes, micro-interactions, <usa-player>, WebGL. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -1198,6 +1198,16 @@
         "default": "./dist/components/plugins.cjs"
       }
     },
+    "./components/ai": {
+      "import": {
+        "types": "./dist/components/ai.d.ts",
+        "default": "./dist/components/ai.js"
+      },
+      "require": {
+        "types": "./dist/components/ai.d.cts",
+        "default": "./dist/components/ai.cjs"
+      }
+    },
     "./components/lite": {
       "import": {
         "types": "./dist/components/lite.d.ts",
@@ -1356,6 +1366,26 @@
       "require": {
         "types": "./dist/runtime/vector.d.cts",
         "default": "./dist/runtime/vector.cjs"
+      }
+    },
+    "./runtime/physics": {
+      "import": {
+        "types": "./dist/runtime/physics.d.ts",
+        "default": "./dist/runtime/physics.js"
+      },
+      "require": {
+        "types": "./dist/runtime/physics.d.cts",
+        "default": "./dist/runtime/physics.cjs"
+      }
+    },
+    "./runtime/format-scene": {
+      "import": {
+        "types": "./dist/runtime/format-scene.d.ts",
+        "default": "./dist/runtime/format-scene.js"
+      },
+      "require": {
+        "types": "./dist/runtime/format-scene.d.cts",
+        "default": "./dist/runtime/format-scene.cjs"
       }
     },
     "./manifest.json": "./dist/manifest.json",

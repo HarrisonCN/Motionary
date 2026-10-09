@@ -392,3 +392,5 @@ usa-carousel[data-effect="cards"].demo-carousel .demo-slide{margin:0 18%}
 .demo-lottie{width:min(200px,100%)}
 .demo-rive{width:min(200px,100%);height:160px}
 .demo-te{width:min(320px,100%);--usa-te-max:170px}
+.demo-phys{width:min(300px,100%);height:180px;aspect-ratio:auto}
+.demo-mp{width:min(320px,100%)}
