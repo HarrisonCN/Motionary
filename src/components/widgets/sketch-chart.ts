@@ -7,12 +7,14 @@ import css from './sketch-chart.css?raw';
  * hand-drawn chart: wobbly pencil axes, hatched bars (`type="bar"`, default)
  * or a sketchy line with dots (`type="line"`), sketched in stroke by stroke
  * when it scrolls into view. `color`, `label`; `values` property /
- * `setValues()`; `usa:drawn` when finished. An `img` whose label lists the
- * data; reduced motion: drawn at once.
+ * `setValues()`; `redraw()` (also on click) sketches it again; `usa:drawn`
+ * when finished. An `img` whose label lists the data; reduced motion: drawn
+ * at once.
  */
 export interface UsaSketchChartElement extends UsaElement {
   values: number[];
   setValues(v: number[]): void;
+  redraw(): void;
 }
 
 const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c] as string);
@@ -66,6 +68,7 @@ export function defineSketchChart(tag = 'usa-sketch-chart'): CustomElementConstr
           g += vs.map((_, i) => (labels[i] ? `<text x="${(L + step * (i + 0.5)).toFixed(1)}" y="${B + 14}">${esc(labels[i])}</text>` : '')).join('');
           this.insertAdjacentHTML('beforeend', `<svg class="usa-sk" viewBox="0 0 ${W} ${H}" aria-hidden="true" data-usa-part>${g}</svg>`);
           if (this.reduced) return void this.setAttribute('data-drawn', '');
+          this.listen(this, 'click', () => this.redraw());
           let done = false;
           this.inView((v) => {
             if (v && !done) {
@@ -73,6 +76,12 @@ export function defineSketchChart(tag = 'usa-sketch-chart'): CustomElementConstr
               this.draw();
             }
           }, { threshold: 0.3 });
+        }
+        /** Sketch the chart in again. */
+        redraw(): void {
+          if (this.reduced) return;
+          this.querySelectorAll<SVGElement>('.usa-sk path, .usa-sk circle').forEach((p) => p.getAnimations?.().forEach((a) => a.cancel()));
+          this.draw();
         }
         private draw(): void {
           const strokes = Array.from(this.querySelectorAll<SVGGeometryElement>('.usa-sk-axis, .usa-sk-mark, .usa-sk-hatch, .usa-sk-dot'));

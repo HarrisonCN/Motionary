@@ -1,4 +1,4 @@
-usa-sketch-chart{display:block;max-width:100%;color:#334155;--usa-sk-c:#2563eb}
+usa-sketch-chart{display:block;max-width:100%;cursor:pointer;color:#334155;--usa-sk-c:#2563eb}
 usa-sketch-chart .usa-sk{display:block;width:100%;height:auto;overflow:visible}
 usa-sketch-chart .usa-sk path{fill:none;stroke-linecap:round;stroke-linejoin:round}
 usa-sketch-chart .usa-sk-axis{stroke:currentColor;stroke-width:1.6}
