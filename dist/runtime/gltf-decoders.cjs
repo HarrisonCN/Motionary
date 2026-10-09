@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-DrMvKcV3.cjs');
+var registry = require('../chunks/registry-BIhHroDh.cjs');
 
 /**
  * `motionary/runtime/gltf-decoders` (10.9) — hooks that let

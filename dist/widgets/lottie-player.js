@@ -1,5 +1,5 @@
-export { d as defineLottiePlayer } from '../chunks/lottie-player-BDWPvC9T.js';
+export { d as defineLottiePlayer } from '../chunks/lottie-player-BYWndDoz.js';
 import '../chunks/base-zSGb8ujt.js';
-import '../chunks/runtime-link-GgTrq8pt.js';
-import '../chunks/registry-DUAt7GXU.js';
+import '../chunks/runtime-link-BiyHzDSA.js';
+import '../chunks/registry-DZMe2rVp.js';
 //# sourceMappingURL=lottie-player.js.map

@@ -1,9 +1,9 @@
 'use strict';
 
-var widgets_scrollScene = require('../chunks/scroll-scene-BbHHO4YU.cjs');
+var widgets_scrollScene = require('../chunks/scroll-scene-Bxigz4ju.cjs');
 require('../chunks/base-B3me2y0o.cjs');
-require('../chunks/runtime-link-BGOVYbEP.cjs');
-require('../chunks/registry-DrMvKcV3.cjs');
+require('../chunks/runtime-link-Bne5p2tj.cjs');
+require('../chunks/registry-BIhHroDh.cjs');
 
 
 

@@ -1,5 +1,5 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-DUAt7GXU.js';
-import { g as getTicker } from '../chunks/ticker-C_z3Ak_Y.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-DZMe2rVp.js';
+import { g as getTicker } from '../chunks/ticker-Cq2SmYNJ.js';
 
 /**
  * `motionary/runtime/scroll` (10.2) — scroll-linked scenes, an original

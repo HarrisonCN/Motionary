@@ -1,8 +1,8 @@
 'use strict';
 
 var base = require('../chunks/base-B3me2y0o.cjs');
-var runtimeLink = require('../chunks/runtime-link-BGOVYbEP.cjs');
-var registry = require('../chunks/registry-DrMvKcV3.cjs');
+var runtimeLink = require('../chunks/runtime-link-Bne5p2tj.cjs');
+var registry = require('../chunks/registry-BIhHroDh.cjs');
 
 var css = "usa-text-splitter{display:block;max-width:100%}usa-text-splitter .usa-split-word{white-space:nowrap}usa-text-splitter .usa-split-char,usa-text-splitter .usa-split-word,usa-text-splitter .usa-split-line{will-change:transform,opacity}usa-text-splitter .usa-rt-missing{margin:0 0 8px;padding:8px;border-radius:8px;background:#fef2f2;color:#991b1b;font:11px/1.4 ui-monospace,monospace;overflow-wrap:anywhere}";
 

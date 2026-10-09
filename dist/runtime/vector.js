@@ -1,6 +1,6 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-DUAt7GXU.js';
-import { P as Playable } from '../chunks/tween-JtaA1sy9.js';
-import '../chunks/ticker-C_z3Ak_Y.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-DZMe2rVp.js';
+import { P as Playable } from '../chunks/tween-MhtysD-Y.js';
+import '../chunks/ticker-Cq2SmYNJ.js';
 import '../chunks/ease-XN8_0sXu.js';
 
 const ALLOWED = /*#__PURE__*/ new Set(['time', 'value', 'thisComp', 'thisLayer', 'thisProperty', 'Math', 'wiggle', 'loopOut', 'loopIn', 'loopOutDuration', 'loopInDuration', 'linear', 'ease', 'easeIn', 'easeOut', 'clamp', 'valueAtTime', 'framesToTime', 'timeToFrames', 'degreesToRadians', 'radiansToDegrees', 'add', 'sub', 'mul', 'div', 'length', 'true', 'false', '$bm_rt', 'index']);

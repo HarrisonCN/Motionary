@@ -1,4 +1,4 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-DUAt7GXU.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-DZMe2rVp.js';
 
 /**
  * `motionary/runtime/lottie-state` (10.9) — dotLottie **themes** (slots) and a

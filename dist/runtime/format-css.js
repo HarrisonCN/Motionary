@@ -1,7 +1,7 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-DUAt7GXU.js';
-import { f as framesToTimeline, d as distributeOffsets, c as camelProp } from '../chunks/keyframes-DQbdQ_eH.js';
-import '../chunks/tween-JtaA1sy9.js';
-import '../chunks/ticker-C_z3Ak_Y.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-DZMe2rVp.js';
+import { f as framesToTimeline, d as distributeOffsets, c as camelProp } from '../chunks/keyframes-AcVaNJ4U.js';
+import '../chunks/tween-MhtysD-Y.js';
+import '../chunks/ticker-Cq2SmYNJ.js';
 import '../chunks/ease-XN8_0sXu.js';
 
 /**

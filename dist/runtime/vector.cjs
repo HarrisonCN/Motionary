@@ -1,8 +1,8 @@
 'use strict';
 
-var registry = require('../chunks/registry-DrMvKcV3.cjs');
-var tween = require('../chunks/tween-CTo0OifR.cjs');
-require('../chunks/ticker-Dr5fi6vJ.cjs');
+var registry = require('../chunks/registry-BIhHroDh.cjs');
+var tween = require('../chunks/tween-BqL2cEKf.cjs');
+require('../chunks/ticker--1A-E9Vg.cjs');
 require('../chunks/ease-HwYZnZat.cjs');
 
 const ALLOWED = /*#__PURE__*/ new Set(['time', 'value', 'thisComp', 'thisLayer', 'thisProperty', 'Math', 'wiggle', 'loopOut', 'loopIn', 'loopOutDuration', 'loopInDuration', 'linear', 'ease', 'easeIn', 'easeOut', 'clamp', 'valueAtTime', 'framesToTime', 'timeToFrames', 'degreesToRadians', 'radiansToDegrees', 'add', 'sub', 'mul', 'div', 'length', 'true', 'false', '$bm_rt', 'index']);
