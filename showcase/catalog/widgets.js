@@ -1165,6 +1165,28 @@ export const components = [
     '<usa-fx effect="focus-glow" trigger="click"><button>Notice me</button></usa-fx>\n<usa-fx effect="underline-sweep" trigger="hover"><a href="#">Read more</a></usa-fx>',
     '<div class="demo-row"><usa-fx effect="focus-glow" trigger="click"><button type="button" class="demo-safe">Focus glow</button></usa-fx><usa-fx effect="color-pulse" trigger="click"><button type="button" class="demo-safe">Colour pulse</button></usa-fx><usa-fx effect="underline-sweep" trigger="hover"><a href="#" class="demo-safe-link" onclick="return false">Underline</a></usa-fx></div>',
     [{ key: 'effect', values: ['focus-glow', 'color-pulse', 'safe-fade', 'underline-sweep'] }], '9.5'),
+  // ---- 9.6 -------------------------------------------------------------
+  W('usa-perf-monitor', 'ui', 'Perf monitor', '性能监视器',
+    '9.6: a live performance overlay for motion work — FPS with a sparkline, active Motionary animations, frame-loop callbacks, long tasks and the shared clock — flagging jank.',
+    '9.6：动效开发用的实时性能浮层 —— 帧率与迷你折线、Motionary 活动动画数、帧循环回调、长任务与共享时钟状态，掉帧时高亮提醒。',
+    ['performance', 'fps', 'monitor', 'debug', 'jank'],
+    '<usa-perf-monitor corner="bottom-right"></usa-perf-monitor>',
+    '<div class="demo-row demo-perf"><usa-worker-canvas scene="orbits" label="Orbits rendered in a worker"></usa-worker-canvas><usa-perf-monitor corner="inline"></usa-perf-monitor></div>',
+    undefined, { since: '9.6' }),
+  W('usa-worker-canvas', 'ui', 'Worker canvas', 'Worker 画布',
+    '9.6: a canvas animation rendered in a Web Worker on an OffscreenCanvas — the main thread stays free for input — with a main-thread fallback; particles, orbits, starfield or your own draw program.',
+    '9.6：在 Web Worker 中借助 OffscreenCanvas 渲染的画布动画 —— 主线程留给交互 —— 并带主线程回退；内置粒子、轨道、星空，或传入自定义绘制程序。',
+    ['offscreencanvas', 'worker', 'canvas', 'performance', 'particles'],
+    '<usa-worker-canvas scene="starfield" style="height:240px"></usa-worker-canvas>',
+    '<usa-worker-canvas class="demo-wcanvas" scene="starfield" label="Starfield rendered off the main thread"></usa-worker-canvas>',
+    undefined, { since: '9.6' }),
+  X('fx-gpu-lift', ['fx-perf', 'registerPerf3Pack'], 'GPU lift & idle reveal', 'GPU 悬浮与空闲显现',
+    '9.6: gpu-lift is a compositor-only hover lift (transform + opacity only, never layout or paint); idle-reveal waits for an idle moment before fading content in.',
+    '9.6：gpu-lift 仅改变 transform 与 opacity 的悬停抬升，只走合成层不触发布局与重绘；idle-reveal 等到浏览器空闲时再淡入内容。',
+    ['performance', 'hover', 'compositor', 'idle', 'lift'],
+    '<usa-fx effect="gpu-lift" trigger="hover"><article class="card">…</article></usa-fx>\n<usa-fx effect="idle-reveal" trigger="enter"><aside>…</aside></usa-fx>',
+    '<div class="demo-row"><usa-fx effect="gpu-lift" trigger="hover"><button type="button" class="demo-lift">Hover me</button></usa-fx><usa-fx effect="idle-reveal" trigger="click"><button type="button" class="demo-lift">Idle reveal</button></usa-fx></div>',
+    [{ key: 'effect', values: ['gpu-lift', 'idle-reveal'] }], '9.6'),
 ];
 
 /** item id → live-demo wiring. */

@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [9.6.0] - 2026-10-09
+
+### Added
+- **Performance 3.0 — `motionary/fx/perf`** (= `motionary/components/fx-perf`, `registerPerf3Pack()`, also in `registerEffectPacks()` and the marketplace): `offscreenRender(canvas, program, { worker, paused })` (canvas animation in a Web Worker via OffscreenCanvas, main-thread fallback on the shared frame loop; `{ backend, stop, resize }`), `runInWorker(fn, ...args)` (one-off pure computation in a worker, inline fallback), `fpsMeter()`. Effects `idle-reveal` (enter — waits for `requestIdleCallback`) and `gpu-lift` (hover — compositor-only).
+- **2 new components (9.6)** in `motionary/components/widgets`:
+  - `<usa-perf-monitor>` — live overlay: FPS + sparkline, active animations, frame-loop callbacks, long tasks, clock state; `corner` (or `inline`), `collapsed`, `warn`; `stats`; `usa:jank` { fps }.
+  - `<usa-worker-canvas>` — canvas animation rendered off the main thread (`scene` particles · orbits · starfield, or your `program`); `data-usa-backend` worker / main; `backend`; `usa:backend`; `WORKER_SCENES`.
+- Showcase: 3 new gallery cards with copyable code, live demos and live Store thumbnails.
+
+### Accessibility
+- The perf monitor is a labelled `status` region with a real expand / collapse button (`aria-expanded`). The worker canvas is an `img` with `label`. Reduced motion: the worker canvas paints one still frame, `idle-reveal` shows at once, `gpu-lift` does nothing.
+
 ## [9.5.0] - 2026-10-09
 
 ### Added
