@@ -653,5 +653,30 @@
     "name": "dist/runtime/format-scene.iife.js (CDN module, fixed 3.5 KB)",
     "file": "dist/runtime/format-scene.iife.js",
     "limit": 3584
+  },
+  {
+    "name": "import 'motionary/runtime/drag-snap' (fixed 4.0 KB incl. the core parts it uses)",
+    "import": "export * from 'pkg/runtime/drag-snap';",
+    "limit": 4096
+  },
+  {
+    "name": "dist/runtime/drag-snap.iife.js (CDN module, fixed 3.5 KB)",
+    "file": "dist/runtime/drag-snap.iife.js",
+    "limit": 3584
+  },
+  {
+    "name": "import 'motionary/runtime/gltf-anim' (fixed 4.5 KB incl. the core parts it uses)",
+    "import": "export * from 'pkg/runtime/gltf-anim';",
+    "limit": 4608
+  },
+  {
+    "name": "dist/runtime/gltf-anim.iife.js (CDN module, fixed 4.0 KB)",
+    "file": "dist/runtime/gltf-anim.iife.js",
+    "limit": 4096
+  },
+  {
+    "name": "import 'motionary/components/snap-carousel' (own entry, fixed 4.0 KB; not in widgets / lite)",
+    "import": "export * from 'pkg/components/snap-carousel';",
+    "limit": 4096
   }
 ]

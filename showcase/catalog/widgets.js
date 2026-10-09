@@ -1329,6 +1329,28 @@ export const components = [
     '<usa-motion-prompt value="fade the cards up slowly, one after another"></usa-motion-prompt>',
     '<usa-motion-prompt class="demo-mp" value="slide the cards in from the left, one after another" label="Describe the motion"></usa-motion-prompt>',
     [{ key: 'format', values: ['waapi', 'css', 'component'] }], { since: '10.7' }),
+  // ---- 10.8 ------------------------------------------------------------
+  W('usa-snap-carousel', 'ui', 'Snap carousel (drag · inertia · snap)', '吸附轮播（拖拽 · 惯性 · 吸附）',
+    '10.8: drag or swipe with real inertia — a throw keeps gliding, then springs to the nearest slide (a quick flick always moves one); rubber-band edges, arrows, dots, ←/→ / Home / End, optional autoplay that pauses on hover, focus and off screen. Slides keep their own width so the next one peeks in. Requires motionary/runtime/drag-snap — npm i motionary, then use(dragSnap) before it mounts. Its own entry point: motionary/components/snap-carousel (not in the widgets / lite bundles).',
+    '10.8：真实惯性的拖拽 / 滑动 —— 甩出后继续滑行，再以弹簧吸附到最近的幻灯片（快速轻扫至少前进一张）；橡皮筋边缘、箭头、圆点、←/→ / Home / End，可选自动播放（悬停、聚焦、离开视口时暂停）。幻灯片保留自身宽度，可露出下一张。需要 motionary/runtime/drag-snap —— npm i motionary，并在挂载前 use(dragSnap)。独立入口：motionary/components/snap-carousel（不在 widgets / lite 包中）。',
+    ['carousel', 'slider', 'drag', 'inertia', 'snap', 'swipe', 'runtime'],
+    '<usa-snap-carousel align="center" gap="16" label="Featured">\n  <article>…</article>\n  <article>…</article>\n  <article>…</article>\n</usa-snap-carousel>',
+    `<usa-snap-carousel class="demo-snap" label="Featured slides">${slides(5)}</usa-snap-carousel>`,
+    [{ key: 'align', values: ['center', 'start'] }], { since: '10.8', requires: ['drag-snap'], entry: 'snap-carousel', define: 'defineSnapCarousel' }),
+  W('usa-gl-scene', 'ui', '3D animation (glTF skin + morph)', '3D 动画（glTF 蒙皮 + 变形）',
+    '10.8: <usa-gl-scene animation> plays glTF animations — skeletal skinning (4 joints per vertex), morph targets and LINEAR / STEP / CUBICSPLINE channels — on Motionary’s own WebGL2 renderer. Pick a clip by name or index, set animation-speed; reduced motion shows the first pose. Requires motionary/runtime/gl + motionary/runtime/format-gltf + motionary/runtime/gltf-anim — npm i motionary, then use(gl, formatGltf, gltfAnim).',
+    '10.8：<usa-gl-scene animation> 播放 glTF 动画 —— 骨骼蒙皮（每顶点 4 个关节）、变形目标与 LINEAR / STEP / CUBICSPLINE 通道 —— 基于 Motionary 自研 WebGL2 渲染器。可按名称或序号选择片段、设置 animation-speed；减少动态效果时显示首帧姿势。需要 motionary/runtime/gl + motionary/runtime/format-gltf + motionary/runtime/gltf-anim —— npm i motionary，并 use(gl, formatGltf, gltfAnim)。',
+    ['3d', 'gltf', 'skinning', 'morph targets', 'animation', 'webgl', 'runtime'],
+    '<usa-gl-scene src="/models/robot.glb" animation="walk" controls label="Walking robot"></usa-gl-scene>',
+    '<usa-gl-scene class="demo-gl" src="assets/motionary-tentacle.glb" animation="wave" controls label="Skinned tentacle waving"></usa-gl-scene>',
+    [{ key: 'animation', values: ['wave', 'curl'] }], { since: '10.8', requires: ['gl', 'format-gltf', 'gltf-anim'], id: 'gl-skinned' }),
+  W('usa-lottie-player', 'ui', 'Lottie text + expressions', 'Lottie 文本 + 表达式',
+    '10.8: the Lottie player now draws text layers (fonts by family and style, justification, tracking, line height, fill and stroke, wrapping box text, source-text keyframes) and runs an expression subset — time, value, wiggle, loopOut / loopIn, linear / ease, Math — with its own interpreter (no eval, CSP-safe). Requires motionary/runtime/vector — npm i motionary, then use(vector).',
+    '10.8：Lottie 播放器现在可绘制文本图层（按字体族与样式、对齐、字距、行高、填充与描边、自动换行的段落文本、源文本关键帧），并以自研解释器（无 eval，兼容 CSP）运行表达式子集 —— time、value、wiggle、loopOut / loopIn、linear / ease、Math。需要 motionary/runtime/vector —— npm i motionary，并 use(vector)。',
+    ['lottie', 'text layer', 'expressions', 'wiggle', 'loopOut', 'vector', 'runtime'],
+    '<usa-lottie-player src="/anim/title.json" autoplay loop label="Animated title"></usa-lottie-player>',
+    '<usa-lottie-player class="demo-lottie" src="assets/motionary-text.json" autoplay loop label="Lottie text and expressions sample"></usa-lottie-player>',
+    [{ key: 'mode', values: ['normal', 'bounce'] }], { since: '10.8', requires: ['vector'], id: 'lottie-text' }),
 ];
 
 /** item id → live-demo wiring. */

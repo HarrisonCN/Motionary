@@ -20,19 +20,24 @@
  *   `DecompressionStream`), `manifest.json` v1 / v2, several animations,
  *   embedded images.
  *
- * Not supported (documented): 3D layers, effects, text layers (10.8),
- * expressions (10.8 subset), merge paths, repeaters. `lottiePlayer()` is a
+ * 10.8: **text layers** (system / web fonts by family + style, justification,
+ * tracking, line height, fill + stroke, box text with wrapping, source-text
+ * keyframes and expressions) and an **expression subset** (see
+ * `lottie-expr.ts`: time, value, wiggle, loopOut / loopIn, linear / ease,
+ * Math…; no eval). Not supported (documented): 3D layers, effects, text
+ * animators, glyph outlines (`chars`), merge paths, repeaters. `lottiePlayer()` is a
  * runtime timeline (seek, reverse, scrub with `progress`, markers → labels).
  */
 import { RUNTIME_VERSION, type RuntimeModule } from './registry';
 import { Playable } from './tween';
+import { expression, runExpression } from './lottie-expr';
 
 // ------------------------------------------------------------------ types
 type Num = number;
 interface Kf { t: Num; s?: any; e?: any; i?: { x: Num | Num[]; y: Num | Num[] }; o?: { x: Num | Num[]; y: Num | Num[] }; h?: Num; to?: Num[]; ti?: Num[] }
 export interface LottieProp { a?: Num; k: any; x?: string; s?: boolean }
-export interface LottieLayer { ty: Num; ind?: Num; parent?: Num; ip: Num; op: Num; st?: Num; sr?: Num; ks: any; shapes?: any[]; hd?: boolean; tt?: Num; td?: Num; masksProperties?: any[]; refId?: string; w?: Num; h?: Num; sw?: Num; sh?: Num; sc?: string; tm?: LottieProp; nm?: string; ddd?: Num; ef?: unknown[] }
-export interface LottieAnimation { v?: string; fr: Num; ip: Num; op: Num; w: Num; h: Num; nm?: string; layers: LottieLayer[]; assets?: { id: string; layers?: LottieLayer[]; p?: string; u?: string; w?: Num; h?: Num; e?: Num }[]; markers?: { cm: string; tm: Num; dr: Num }[] }
+export interface LottieLayer { t?: any; ty: Num; ind?: Num; parent?: Num; ip: Num; op: Num; st?: Num; sr?: Num; ks: any; shapes?: any[]; hd?: boolean; tt?: Num; td?: Num; masksProperties?: any[]; refId?: string; w?: Num; h?: Num; sw?: Num; sh?: Num; sc?: string; tm?: LottieProp; nm?: string; ddd?: Num; ef?: unknown[] }
+export interface LottieAnimation { v?: string; fr: Num; ip: Num; op: Num; w: Num; h: Num; nm?: string; layers: LottieLayer[]; assets?: { id: string; layers?: LottieLayer[]; p?: string; u?: string; w?: Num; h?: Num; e?: Num }[]; markers?: { cm: string; tm: Num; dr: Num }[]; fonts?: { list?: { fName: string; fFamily?: string; fStyle?: string }[] }; chars?: unknown[] }
 
 /** What the renderer skipped in a file (shown by `inspectLottie()`). */
 export interface LottieReport { layers: Num; unsupported: string[] }
@@ -60,9 +65,27 @@ const lerpAny = (a: any, b: any, p: Num | Num[]): any => {
   return a;
 };
 
-/** Value of an (animated or static) property at frame `f`. */
+let FR = 30; // frame rate of the composition being rendered (expressions)
+const seedOf = (s: string) => Array.from(s).reduce((h, c) => (h * 31 + c.charCodeAt(0)) % 9973, 7);
+const isKeyed = (p: LottieProp) => !!(p.a || (Array.isArray(p.k) && p.k.length && typeof p.k[0] === 'object' && 't' in p.k[0]));
+/** Run a property's expression (10.8 subset) on its keyframed value; the value itself when there is none or it is unsupported. */
+function withExpr(p: LottieProp, f: Num, v: any): any {
+  const ast = typeof p.x === 'string' ? expression(p.x) : null;
+  if (!ast) return v;
+  try {
+    const r = runExpression(ast, { time: f / FR, value: v, fr: FR, at: (g) => keyValue(p, g), keys: isKeyed(p) ? p.k.map((k: Kf) => k.t) : [], seed: seedOf(p.x!) });
+    return r === undefined || (typeof r === 'number' && !isFinite(r)) ? v : r;
+  } catch {
+    return v;
+  }
+}
+
+/** Value of an (animated or static) property at frame `f` (10.8: with its expression applied). */
 export function propValue(p: LottieProp | undefined, f: Num, fallback?: any): any {
   if (!p) return fallback;
+  return withExpr(p, f, keyValue(p, f));
+}
+function keyValue(p: LottieProp, f: Num): any {
   if (!p.a && !(Array.isArray(p.k) && p.k.length && typeof p.k[0] === 'object' && 't' in p.k[0])) return p.k;
   const ks: Kf[] = p.k;
   if (f <= ks[0].t) return unwrap(ks[0].s);
@@ -411,6 +434,8 @@ function drawLayers(ctx: Ctx, anim: LottieAnimation, layers: LottieLayer[], f: N
       const ops: Op[] = [];
       buildOps(L.shapes || [], lf, m, 1, ops);
       for (const p of ops) paint(x, p, lf);
+    } else if (L.ty === 5) {
+      drawText(x, anim, L, lf, m);
     } else if (L.ty === 1) {
       x.transform(m[0], m[1], m[2], m[3], m[4], m[5]);
       x.fillStyle = L.sc || '#000';
@@ -459,9 +484,58 @@ function drawLayers(ctx: Ctx, anim: LottieAnimation, layers: LottieLayer[], f: N
   }
 }
 
+// ------------------------------------------------------------------ text layers (10.8)
+function textDoc(L: LottieLayer, f: Num): any {
+  const d = L.t?.d;
+  let s = d?.k?.[0]?.s;
+  for (const k of d?.k || []) if (k.t <= f) s = k.s;
+  if (s && typeof d.x === 'string') s = { ...s, t: String(withExpr({ k: s.t, x: d.x }, f, s.t)) };
+  return s;
+}
+function drawText(x: Ctx, anim: LottieAnimation, L: LottieLayer, f: Num, m: M): void {
+  const d = textDoc(L, f);
+  if (!d) return;
+  x.transform(m[0], m[1], m[2], m[3], m[4], m[5]);
+  const font = anim.fonts?.list?.find((q) => q.fName === d.f);
+  const st = (font?.fStyle || d.f || '').toLowerCase();
+  const wt = /black|heavy/.test(st) ? 900 : /extra ?bold/.test(st) ? 800 : /semi ?bold|demi/.test(st) ? 600 : /bold/.test(st) ? 700 : /medium/.test(st) ? 500 : /light/.test(st) ? 300 : /thin/.test(st) ? 100 : 400;
+  x.font = `${/italic|oblique/.test(st) ? 'italic ' : ''}${wt} ${d.s}px ${font?.fFamily ? `"${font.fFamily}", ` : ''}sans-serif`;
+  x.textAlign = d.j === 1 ? 'right' : d.j === 2 ? 'center' : 'left';
+  x.textBaseline = 'alphabetic';
+  if ('letterSpacing' in x) (x as any).letterSpacing = `${((d.tr || 0) * d.s) / 1000}px`;
+  const lh = d.lh || d.s * 1.2;
+  let lines: string[] = String(d.t ?? '').split(/\r\n|\r|\n|\u0003/);
+  let ox = 0, oy = 0;
+  if (d.sz) {
+    // box text: wrap to the box width; `ps` is the box's top-left
+    const bw = d.sz[0], [px, py] = d.ps || [0, 0];
+    lines = lines.flatMap((ln) => {
+      const out: string[] = [];
+      let cur = '';
+      for (const w of ln.split(' ')) {
+        const t = cur ? cur + ' ' + w : w;
+        if (cur && x.measureText(t).width > bw) out.push(cur), (cur = w);
+        else cur = t;
+      }
+      return out.concat(cur);
+    });
+    ox = px + (d.j === 1 ? bw : d.j === 2 ? bw / 2 : 0);
+    oy = py + d.s;
+  }
+  const fill = d.fc ? col(d.fc) : null, stroke = d.sc && d.sw ? col(d.sc) : null;
+  lines.forEach((ln, i) => {
+    const y = oy + i * lh;
+    const F = () => fill && ((x.fillStyle = fill), x.fillText(ln, ox, y));
+    const S = () => stroke && ((x.strokeStyle = stroke), (x.lineWidth = d.sw), (x.lineJoin = 'round'), x.strokeText(ln, ox, y));
+    if (d.of) F(), S();
+    else S(), F();
+  });
+}
+
 /** Render one frame onto a 2D context sized `width × height` (the animation is fitted with `fit`). */
 export function renderLottieFrame(ctx: Ctx, anim: LottieAnimation, frame: Num, o: RenderOptions & { fit?: 'contain' | 'cover' | 'fill'; width?: Num; height?: Num; background?: string } = {}): void {
   const W = o.width ?? (ctx.canvas as any).width, H = o.height ?? (ctx.canvas as any).height;
+  FR = anim.fr || 30;
   ctx.save();
   ctx.setTransform(1, 0, 0, 1, 0, 0);
   ctx.clearRect(0, 0, W, H);
@@ -494,13 +568,17 @@ export function inspectLottie(anim: LottieAnimation): LottieReport {
   const walk = (ls: LottieLayer[]) => ls.forEach((l) => {
     if (l.ddd) u.add('3D layers');
     if (l.ef?.length) u.add('effects');
-    if (l.ty === 5) u.add('text layers');
+    if (l.ty === 5 && l.t?.a?.length) u.add('text animators (range selectors)');
     if (l.tt === 3 || l.tt === 4) u.add('luma mattes (approximated by alpha)');
-    if (JSON.stringify(l.ks).includes('"x":"')) u.add('expressions');
+    JSON.stringify([l.ks, l.t, l.shapes], (k, v) => {
+      if (k === 'x' && typeof v === 'string' && !expression(v)) u.add('expressions outside the supported subset');
+      return v;
+    });
     walkShapes(l.shapes || []);
   });
   walk(anim.layers);
   anim.assets?.forEach((a) => a.layers && walk(a.layers));
+  if (anim.chars?.length) u.add('glyph outlines (chars): drawn with system fonts');
   return { layers: anim.layers.length, unsupported: [...u] };
 }
 
@@ -662,7 +740,18 @@ export function lottiePlayer(canvas: HTMLCanvasElement | OffscreenCanvas, animat
   return new LPlayer(canvas, animation, o) as unknown as LottiePlayer;
 }
 
+/** Evaluate a Lottie expression (10.8 subset) on a value at `time` seconds — `undefined` when it is outside the subset. */
+export function evalExpression(src: string, value: any, time = 0, fr = 30): any {
+  const ast = expression(src);
+  try {
+    return ast ? runExpression(ast, { time, value, fr, at: () => value, keys: [], seed: seedOf(src) }) : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
 export interface VectorApi {
+  evalExpression: typeof evalExpression;
   loadLottie: typeof loadLottie;
   parseDotLottie: typeof parseDotLottie;
   unzipEntries: typeof unzipEntries;
@@ -676,4 +765,4 @@ export interface VectorApi {
 }
 
 /** The module object for `use(vector)`. */
-export const vector: RuntimeModule<VectorApi> = { id: 'vector', version: RUNTIME_VERSION, requires: ['core'], api: { loadLottie, parseDotLottie, unzipEntries, lottiePlayer, renderLottieFrame, inspectLottie, propValue, transformAt, trimContours, loadLottieImages } };
+export const vector: RuntimeModule<VectorApi> = { id: 'vector', version: RUNTIME_VERSION, requires: ['core'], api: { evalExpression, loadLottie, parseDotLottie, unzipEntries, lottiePlayer, renderLottieFrame, inspectLottie, propValue, transformAt, trimContours, loadLottieImages } };

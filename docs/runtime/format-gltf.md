@@ -53,9 +53,10 @@ const r = createRenderer(canvas); r.resize(); r.render(scene, cam);
 | POSITION / NORMAL / TEXCOORD_0, indices, all component types, normalised ints, byteStride | ✅ yes | missing normals computed (flat) |
 | primitive modes points / lines / triangles / strips / fans | ✅ yes | strips and fans converted to triangles |
 | PBR metallic-roughness factors, base colour texture, emissive, alpha blend, double-sided | ✅ yes | KHR_materials_emissive_strength, KHR_materials_unlit |
-| skins, morph targets, animations | ✕ no | arrive in 10.8 |
+| skins, morph targets, animations | ✅ yes | data kept on the nodes / geometry; played by motionary/runtime/gltf-anim (10.8) |
+| sparse accessors | ✅ yes | 10.8 |
 | Draco / meshopt / KTX2 (Basis) compression | ✕ no | files that require them fail with a clear error; decoder hooks planned for 10.9 |
-| sparse accessors, cameras, KHR_lights_punctual, texture transforms | ✕ no | ignored |
+| cameras, KHR_lights_punctual, texture transforms | ✕ no | ignored |
 | SSR / workers | ◐ partial | parseGlb / gltfToNode are pure; loadGltf decodes images with createImageBitmap |
 
 ## Components that need it

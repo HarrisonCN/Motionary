@@ -1,0 +1,232 @@
+{
+ "asset": {
+  "version": "2.0",
+  "generator": "Motionary test generator"
+ },
+ "scene": 0,
+ "scenes": [
+  {
+   "nodes": [
+    0
+   ]
+  }
+ ],
+ "nodes": [
+  {
+   "name": "Morph",
+   "mesh": 0
+  }
+ ],
+ "meshes": [
+  {
+   "primitives": [
+    {
+     "attributes": {
+      "POSITION": 0,
+      "NORMAL": 1
+     },
+     "indices": 2,
+     "targets": [
+      {
+       "POSITION": 3
+      },
+      {
+       "POSITION": 4
+      }
+     ]
+    }
+   ],
+   "weights": [
+    0,
+    0
+   ]
+  }
+ ],
+ "animations": [
+  {
+   "name": "morph",
+   "samplers": [
+    {
+     "input": 5,
+     "output": 6
+    }
+   ],
+   "channels": [
+    {
+     "sampler": 0,
+     "target": {
+      "node": 0,
+      "path": "weights"
+     }
+    }
+   ]
+  },
+  {
+   "name": "pulse",
+   "samplers": [
+    {
+     "input": 5,
+     "output": 7,
+     "interpolation": "STEP"
+    }
+   ],
+   "channels": [
+    {
+     "sampler": 0,
+     "target": {
+      "node": 0,
+      "path": "weights"
+     }
+    }
+   ]
+  }
+ ],
+ "buffers": [
+  {
+   "byteLength": 224,
+   "uri": "data:application/octet-stream;base64,AAAAAAAAAAAAAAAAAACAPwAAAAAAAAAAAACAPwAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAABAAIAAAACAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAAAAAQACAAAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAPwAAAAAAAIA/AACAPwAAAAA="
+  }
+ ],
+ "bufferViews": [
+  {
+   "buffer": 0,
+   "byteOffset": 0,
+   "byteLength": 48
+  },
+  {
+   "buffer": 0,
+   "byteOffset": 48,
+   "byteLength": 48
+  },
+  {
+   "buffer": 0,
+   "byteOffset": 96,
+   "byteLength": 12
+  },
+  {
+   "buffer": 0,
+   "byteOffset": 108,
+   "byteLength": 48
+  },
+  {
+   "buffer": 0,
+   "byteOffset": 156,
+   "byteLength": 4
+  },
+  {
+   "buffer": 0,
+   "byteOffset": 160,
+   "byteLength": 24
+  },
+  {
+   "buffer": 0,
+   "byteOffset": 184,
+   "byteLength": 8
+  },
+  {
+   "buffer": 0,
+   "byteOffset": 192,
+   "byteLength": 16
+  },
+  {
+   "buffer": 0,
+   "byteOffset": 208,
+   "byteLength": 16
+  }
+ ],
+ "accessors": [
+  {
+   "bufferView": 0,
+   "componentType": 5126,
+   "count": 4,
+   "type": "VEC3",
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    1,
+    1,
+    0
+   ]
+  },
+  {
+   "bufferView": 1,
+   "componentType": 5126,
+   "count": 4,
+   "type": "VEC3"
+  },
+  {
+   "bufferView": 2,
+   "componentType": 5123,
+   "count": 6,
+   "type": "SCALAR"
+  },
+  {
+   "bufferView": 3,
+   "componentType": 5126,
+   "count": 4,
+   "type": "VEC3",
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    0,
+    1,
+    0
+   ]
+  },
+  {
+   "componentType": 5126,
+   "count": 4,
+   "type": "VEC3",
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    1,
+    0,
+    0
+   ],
+   "sparse": {
+    "count": 2,
+    "indices": {
+     "bufferView": 4,
+     "componentType": 5123
+    },
+    "values": {
+     "bufferView": 5
+    }
+   }
+  },
+  {
+   "bufferView": 6,
+   "componentType": 5126,
+   "count": 2,
+   "type": "SCALAR",
+   "min": [
+    0
+   ],
+   "max": [
+    1
+   ]
+  },
+  {
+   "bufferView": 7,
+   "componentType": 5126,
+   "count": 4,
+   "type": "SCALAR"
+  },
+  {
+   "bufferView": 8,
+   "componentType": 5126,
+   "count": 4,
+   "type": "SCALAR"
+  }
+ ]
+}

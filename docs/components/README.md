@@ -1,4 +1,4 @@
-# Motionary components (207)
+# Motionary components (208)
 
 One page per `<usa-*>` element, generated from the source. Machine-readable: `motionary/manifest.json` · Pages `/components.json` · `/llms.txt` · `/llms-full.txt`. How to use these with an AI assistant: [AGENTS.md](../../AGENTS.md) and [the prompt guide](../ai-prompt-guide.md).
 
@@ -51,7 +51,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<usa-gauge>`](usa-gauge.md) — Spring gauge
 - [`<usa-gen-art>`](usa-gen-art.md) — Generative artwork
 - [`<usa-gesture-sticker>`](usa-gesture-sticker.md) — Multi-touch sticker
-- [`<usa-gl-scene>`](usa-gl-scene.md) — 3D scene (glTF / OBJ) · Requires: motionary/runtime/gl + motionary/runtime/format-gltf + motionary/runtime/format-obj
+- [`<usa-gl-scene>`](usa-gl-scene.md) — 3D scene (glTF / OBJ) · Requires: motionary/runtime/gl + motionary/runtime/format-gltf + motionary/runtime/format-obj + motionary/runtime/gltf-anim
 - [`<usa-globe>`](usa-globe.md) — Spinning globe
 - [`<usa-gpu-particles>`](usa-gpu-particles.md) — GPU particle canvas
 - [`<usa-gyro-card>`](usa-gyro-card.md) — Gyro 3D card
@@ -104,6 +104,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<usa-shortcut>`](usa-shortcut.md) — Shortcut hint
 - [`<usa-sketch-chart>`](usa-sketch-chart.md) — Sketch chart
 - [`<usa-slider>`](usa-slider.md) — Slider
+- [`<usa-snap-carousel>`](usa-snap-carousel.md) — Snap carousel (drag · inertia · snap) · Requires: motionary/runtime/drag-snap
 - [`<usa-sparkline>`](usa-sparkline.md) — Sparkline
 - [`<usa-spatial-card>`](usa-spatial-card.md) — Spatial card
 - [`<usa-stepper>`](usa-stepper.md) — Stepper / wizard

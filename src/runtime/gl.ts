@@ -118,6 +118,8 @@ export interface Geometry {
   indices?: Uint16Array | Uint32Array;
   /** 'triangles' (default), 'lines', 'points'. */
   mode?: 'triangles' | 'lines' | 'points';
+  /** Bump after changing positions / normals in place (10.8: skinning, morph targets) — the renderer re-uploads them. */
+  version?: number;
   /** Renderer cache. */
   _gpu?: unknown;
 }
@@ -503,7 +505,20 @@ export function createRenderer(canvas: HTMLCanvasElement | OffscreenCanvas, o: R
     return pr.u.get(n)!;
   };
   const uploadGeo = (g: Geometry) => {
-    if (g._gpu) return g._gpu as { vao: WebGLVertexArrayObject; count: number; type: number; indexed: boolean };
+    const c = g._gpu as { vao: WebGLVertexArrayObject; count: number; type: number; indexed: boolean; v?: number; b: (WebGLBuffer | undefined)[] } | undefined;
+    if (c) {
+      if (c.v !== g.version) {
+        c.v = g.version;
+        [g.positions, g.normals].forEach((d, i) => {
+          if (d && c.b[i]) {
+            gl.bindBuffer(gl.ARRAY_BUFFER, c.b[i]!);
+            gl.bufferData(gl.ARRAY_BUFFER, d, gl.DYNAMIC_DRAW);
+          }
+        });
+      }
+      return c;
+    }
+    const bufs: (WebGLBuffer | undefined)[] = [];
     const vao = gl.createVertexArray()!;
     gl.bindVertexArray(vao);
     const attr = (i: number, data: Float32Array | undefined, size: number, fallback: number[]) => {
@@ -515,6 +530,7 @@ export function createRenderer(canvas: HTMLCanvasElement | OffscreenCanvas, o: R
       }
       const b = gl.createBuffer()!;
       owned.push({ del: () => gl.deleteBuffer(b) });
+      bufs[i] = b;
       gl.bindBuffer(gl.ARRAY_BUFFER, b);
       gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW);
       gl.enableVertexAttribArray(i);
@@ -534,7 +550,7 @@ export function createRenderer(canvas: HTMLCanvasElement | OffscreenCanvas, o: R
     }
     gl.bindVertexArray(null);
     owned.push({ del: () => gl.deleteVertexArray(vao) });
-    return (g._gpu = { vao, count, type, indexed: !!g.indices });
+    return (g._gpu = { vao, count, type, indexed: !!g.indices, v: g.version, b: bufs });
   };
   const uploadTex = (t: GlTexture, unit: number) => {
     let tex = t._gpu as WebGLTexture | undefined;

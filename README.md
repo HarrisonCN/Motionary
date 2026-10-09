@@ -191,6 +191,8 @@ Motionary ships its own zero-dependency animation runtime — shared ticker, twe
 | [Official Rive runtime](docs/runtime/rive.md) | `@rive-app/canvas` | `https://unpkg.com/@rive-app/canvas@2.44.1/rive.js` | `provideRiveRuntime(() => import('@rive-app/canvas')); // lazy: fetched when the first <usa-rive> mounts` | official runtime (not bundled) |
 | [2D rigid-body physics](docs/runtime/physics.md) | `motionary/runtime/physics` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/physics.iife.js` | `use(physics);` | 10.0 KB |
 | [Scene JSON (motionary-scene@1)](docs/runtime/format-scene.md) | `motionary/runtime/format-scene` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-scene.iife.js` | `use(formatScene);` | 3.0 KB |
+| [Drag, inertia and snap points](docs/runtime/drag-snap.md) | `motionary/runtime/drag-snap` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/drag-snap.iife.js` | `use(dragSnap);` | 4.0 KB |
+| [glTF animation, skinning and morph targets](docs/runtime/gltf-anim.md) | `motionary/runtime/gltf-anim` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gltf-anim.iife.js` | `use(gltfAnim);` | 4.5 KB |
 
 Install once: `npm i motionary`. Plain HTML: load `runtime.iife.js` first, then the module files (each registers itself).
 
@@ -441,6 +443,40 @@ definePhysicsPlayground(); // registers <usa-physics-playground> — after the p
 <usa-physics-playground preset="pyramid" spawn label="Knock the pyramid over"></usa-physics-playground>
 ```
 
+#### `<usa-snap-carousel>` — Requires: motionary/runtime/drag-snap
+
+- **Install:** `npm i motionary`
+- **Import order & registration:** Register the core first, then the module: use(dragSnap) also registers the core. CDN: load runtime.iife.js, then runtime/drag-snap.iife.js (it registers itself).
+
+```js
+import { use } from 'motionary/runtime';
+import { dragSnap } from 'motionary/runtime/drag-snap';
+import { defineSnapCarousel } from 'motionary/components/snap-carousel';
+
+use(dragSnap);
+defineSnapCarousel(); // registers <usa-snap-carousel> — after the prerequisites
+```
+
+- **CDN:**
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/drag-snap.iife.js"></script>
+<!-- then the component bundles -->
+<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>
+```
+
+- **Minimal example:**
+
+```html
+<usa-snap-carousel align="center" gap="16" label="Featured">
+  <article>…</article>
+  <article>…</article>
+  <article>…</article>
+</usa-snap-carousel>
+```
+
 <!-- runtime:end -->
 
 ## Accessibility & reduced motion
@@ -474,6 +510,7 @@ Evergreen browsers since 2023: Chrome / Edge ≥ 111, Safari ≥ 16.4, Firefox �
 
 ## Documentation
 
+- **Individual entry points (10.8+):** new components ship as their own entry (`motionary/components/snap-carousel`) and are not added to `motionary/components/widgets` or the all-components `motionary/components/lite` bundle (its 70 KB gzip budget is fixed).
 - **MCP server:** `npx -y -p motionary motionary-mcp` — read-only component catalog for MCP clients (search, API, prerequisite-aware snippets; 2.0 adds `suggest_motion` and `validate_snippet`): [docs/mcp.md](docs/mcp.md).
 - **AI assistants:** [AGENTS.md](AGENTS.md) · [prompt guide](docs/ai-prompt-guide.md) · one page per component in [docs/components/](docs/components/README.md) · `components.json` / `llms.txt` / `llms-full.txt` on the site root.
 

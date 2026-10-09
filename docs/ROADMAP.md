@@ -73,7 +73,7 @@ Store 卡片显示 **「Requires: motionary/runtime/<module>」** 徽章（官�
   - 主线 A：MCP 2.0 —— `suggest_motion`、`validate_snippet`；AI 使用评测集（运行 AI 写的片段检验能否直接工作）。
   - 主线 B：**physics 模块** —— 2D 刚体（圆 / 盒 / 多边形）、约束；场景 JSON `motionary-scene@1`。
   - 新组件：动效提示输入框、`<usa-physics-playground>`。
-- **v10.8** — 跨端 3.0：小程序适配、鸿蒙 ArkTS 示例。
+- ✅ **v10.8** — 跨端 3.0：小程序适配、鸿蒙 ArkTS 示例。
   - 主线 B：**drag-snap 模块** —— 拖拽吸附 / 惯性轮播。
   - 格式：glTF 蒙皮 / 变形目标 / 动画；Lottie 文本层 + 表达式子集。
   - 新组件：跨端预览器、`<usa-snap-carousel>`（`<usa-carousel>` 已被 6.2 轮播占用）。
