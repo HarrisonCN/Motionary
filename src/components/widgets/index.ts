@@ -86,6 +86,8 @@ import { defineThemeSwitcher, type UsaThemeSwitcherElement } from './theme-switc
 import { defineThemeSurface, type UsaThemeSurfaceElement } from './theme-surface';
 import { defineGyroCard, type UsaGyroCardElement } from './gyro-card';
 import { defineGestureSticker, type UsaGestureStickerElement, type StickerState } from './gesture-sticker';
+import { definePanorama, type UsaPanoramaElement } from './panorama';
+import { defineSpatialCard, type UsaSpatialCardElement } from './spatial-card';
 
 export { defineCarousel, defineTabBar, defineDisclosure, defineStories, CAROUSEL_EFFECTS, TAB_INDICATORS };
 export type { UsaCarouselElement, UsaTabBarElement, UsaDisclosureElement, UsaStoriesElement };
@@ -161,6 +163,9 @@ export type { UsaThemeSwitcherElement, UsaThemeSurfaceElement };
 export { defineGyroCard, defineGestureSticker };
 export type { UsaGyroCardElement, UsaGestureStickerElement, StickerState };
 
+export { definePanorama, defineSpatialCard };
+export type { UsaPanoramaElement, UsaSpatialCardElement };
+
 /** The widgets by release (tag → define function). */
 export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElementConstructor | undefined>> = {
   '6.2': { 'usa-carousel': defineCarousel, 'usa-tab-bar': defineTabBar, 'usa-disclosure': defineDisclosure, 'usa-stories': defineStories },
@@ -188,6 +193,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '8.5': { 'usa-sticky-wall': defineStickyWall, 'usa-sketch-chart': defineSketchChart },
   '8.6': { 'usa-theme-switcher': defineThemeSwitcher, 'usa-theme-surface': defineThemeSurface },
   '8.7': { 'usa-gyro-card': defineGyroCard, 'usa-gesture-sticker': defineGestureSticker },
+  '8.8': { 'usa-panorama': definePanorama, 'usa-spatial-card': defineSpatialCard },
 };
 
 /** Every widget tag, in release order. */
@@ -278,5 +284,7 @@ declare global {
     'usa-theme-surface': UsaThemeSurfaceElement;
     'usa-gyro-card': UsaGyroCardElement;
     'usa-gesture-sticker': UsaGestureStickerElement;
+    'usa-panorama': UsaPanoramaElement;
+    'usa-spatial-card': UsaSpatialCardElement;
   }
 }

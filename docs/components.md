@@ -1108,6 +1108,29 @@ sticker.addEventListener('usa:transform', (e) => save(e.detail)); // { x, y, sca
 - `<usa-gesture-sticker min max label>`: `x`, `y`, `scale`, `angle`, `transformTo(state)`, `reset()`; `usa:transform`.
 - Gesture: `swipe-hint` (`direction`) · `pinch-hint` · `tilt-wobble` · `depth-in` (`stagger`, `data-depth`); `pinchScale`, `pinchAngle`, `orientationToTilt(beta, gamma, max?, rest?)`.
 
+### v8.8 XR / spatial: 360° panorama, spatial card (`components/widgets`) + spatial pack (`motionary/fx/spatial`)
+
+```html
+<usa-panorama src="pano-equirect.jpg" label="Lake at dawn" autorotate="6"></usa-panorama>
+<usa-spatial-card>
+  <h3 data-depth="2">Photos</h3><p data-depth="1">Spatial window</p>
+  <nav slot="ornament"><button>⟲</button><button>♡</button></nav>
+</usa-spatial-card>
+
+<usa-fx effect="portal-open" trigger="enter"><img src="world.jpg" alt=""></usa-fx>
+<usa-fx effect="spatial-float" trigger="loop"><div class="window">…</div></usa-fx>
+```
+```js
+import { defineWidgets } from 'motionary/components/widgets';
+import { registerSpatialPack, xrSupport } from 'motionary/fx/spatial';
+defineWidgets(); registerSpatialPack();
+if ((await xrSupport()) === 'immersive-vr') enterVR();
+pano.addEventListener('usa:look', (e) => console.log(e.detail.yaw));
+```
+- `<usa-panorama src autorotate label>`: `yaw`, `lookAt(deg)`; `usa:look`, `usa:xr`, `usa:xr-request`.
+- `<usa-spatial-card>`: `active`; `usa:focus-depth`.
+- Spatial: `portal-open` (`color`) · `orbit-in` (`from`) · `spatial-float` · `depth-pop`; `yawToOffset(yaw, width)`, `xrSupport()`.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.
