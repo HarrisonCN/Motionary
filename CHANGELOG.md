@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.5.0] - 2026-10-09
+
+### Added
+- **2 new components (8.5)** in `motionary/components/widgets` (also in `dist/widgets.umd.js`):
+  - `<usa-sticky-wall>` — wall of sticky notes: each child becomes a pinned paper note (`data-color` yellow · pink · blue · green, or cycling) with a slight tilt (`seed`); notes drop onto the wall one by one on first view; click / Enter lifts a note to the front (`pick(index)`, `usa:pick` { index }); `notes`, `label`.
+  - `<usa-sketch-chart>` — hand-drawn chart: wobbly pencil axes, hatched bars (`type="bar"`) or a sketchy line with dots (`type="line"`), sketched in stroke by stroke on first view; `values`, `labels`, `color`, `label`; `values` / `setValues()`; `usa:drawn`.
+- **Paper & hand-drawn pack — `motionary/fx/paper`** (= `motionary/components/fx-paper`, `registerPaperPack()`, also in `registerEffectPacks()`): `paper-unfold` (enter), `pencil-sketch` (enter), `watercolor` (enter), `crumple` (attention). `roughLine()`, `paperRandom()`.
+- Showcase: 4 new gallery cards with copyable code, live demos and live Store thumbnails.
+
+### Accessibility
+- Sticky wall is a `list` of focusable `listitem`s (Enter / Space picks a note). Sketch chart is an `img` whose label lists every label and value; the drawing is `aria-hidden`. Reduced motion: notes and charts are shown at once, `paper-unfold` / `watercolor` fade in, `pencil-sketch` shows the drawing, `crumple` does nothing.
+
+### Fixed
+- the 5.8 theme pack already registers a `paper-fold` effect, so the 8.5 unfold effect is named `paper-unfold` (registering it as `paper-fold` would have overridden the 5.8 theme effect).
+
 ## [8.4.0] - 2026-10-09
 
 ### Added

@@ -1046,6 +1046,28 @@ radar.addEventListener('usa:ping', (e) => console.log(e.detail.name));
 - `<usa-radar targets rings speed label>`: `targets`, `setTargets(list)`; `usa:ping` { name }; `parseTargets(str)`.
 - Cyber: `hud-frame` (`color`) · `scanline-sweep` (`color`, `passes`) · `hologram` (`color`) · `data-decode` (`speed`, `frames`); `decodeFrame(text, k, n)`.
 
+### v8.5 Widgets: sticky-note wall, sketch chart (`components/widgets`) + paper pack (`motionary/fx/paper`)
+
+```html
+<usa-sticky-wall label="Ideas">
+  <p>Ship 8.5</p><p data-color="pink">Call Mia</p><p data-color="blue">Buy paper</p>
+</usa-sticky-wall>
+<usa-sketch-chart values="3,7,5,9" labels="Q1,Q2,Q3,Q4" label="Revenue"></usa-sketch-chart>
+
+<usa-fx effect="paper-unfold" trigger="enter"><div class="letter">Dear reader…</div></usa-fx>
+<usa-fx effect="pencil-sketch" trigger="enter"><svg viewBox="0 0 100 60"><path d="M5 55 L50 5 L95 55 Z"/></svg></usa-fx>
+```
+```js
+import { defineWidgets } from 'motionary/components/widgets';
+import { registerPaperPack } from 'motionary/fx/paper';
+defineWidgets(); registerPaperPack();
+chart.setValues([4, 8, 6, 10]);
+wall.addEventListener('usa:pick', (e) => console.log(e.detail.index));
+```
+- `<usa-sticky-wall seed label>`: `notes`, `pick(index)`; `usa:pick` { index }.
+- `<usa-sketch-chart values labels type color label>`: `values`, `setValues(list)`; `usa:drawn`.
+- Paper: `paper-unfold` (`folds`) · `pencil-sketch` (`stagger`) · `watercolor` · `crumple`; `roughLine(x1, y1, x2, y2, seed, amp)`, `paperRandom(seed)`.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

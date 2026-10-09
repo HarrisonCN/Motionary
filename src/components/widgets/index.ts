@@ -80,6 +80,8 @@ import { defineOrganicCard, type UsaOrganicCardElement } from './organic-card';
 import { defineLiquidNav, type UsaLiquidNavElement } from './liquid-nav';
 import { defineHudPanel, type UsaHudPanelElement } from './hud-panel';
 import { defineRadar, parseTargets, type UsaRadarElement, type RadarTarget } from './radar';
+import { defineStickyWall, type UsaStickyWallElement } from './sticky-wall';
+import { defineSketchChart, type UsaSketchChartElement } from './sketch-chart';
 
 export { defineCarousel, defineTabBar, defineDisclosure, defineStories, CAROUSEL_EFFECTS, TAB_INDICATORS };
 export type { UsaCarouselElement, UsaTabBarElement, UsaDisclosureElement, UsaStoriesElement };
@@ -146,6 +148,9 @@ export type { UsaOrganicCardElement, UsaLiquidNavElement };
 export { defineHudPanel, defineRadar, parseTargets };
 export type { UsaHudPanelElement, UsaRadarElement, RadarTarget };
 
+export { defineStickyWall, defineSketchChart };
+export type { UsaStickyWallElement, UsaSketchChartElement };
+
 /** The widgets by release (tag → define function). */
 export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElementConstructor | undefined>> = {
   '6.2': { 'usa-carousel': defineCarousel, 'usa-tab-bar': defineTabBar, 'usa-disclosure': defineDisclosure, 'usa-stories': defineStories },
@@ -170,6 +175,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '8.2': { 'usa-terminal': defineTerminal, 'usa-retro-button': defineRetroButton },
   '8.3': { 'usa-organic-card': defineOrganicCard, 'usa-liquid-nav': defineLiquidNav },
   '8.4': { 'usa-hud-panel': defineHudPanel, 'usa-radar': defineRadar },
+  '8.5': { 'usa-sticky-wall': defineStickyWall, 'usa-sketch-chart': defineSketchChart },
 };
 
 /** Every widget tag, in release order. */
@@ -254,5 +260,7 @@ declare global {
     'usa-liquid-nav': UsaLiquidNavElement;
     'usa-hud-panel': UsaHudPanelElement;
     'usa-radar': UsaRadarElement;
+    'usa-sticky-wall': UsaStickyWallElement;
+    'usa-sketch-chart': UsaSketchChartElement;
   }
 }
