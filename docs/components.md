@@ -1239,6 +1239,23 @@ frameSequence(canvas, { count: 120, src: (i) => `/frames/${String(i).padStart(4,
 - `<usa-hero-video label poster scrub>`: `paused`, `toggle()`; `usa:play`, `usa:pause`.
 - Video: `scrubVideo`, `frameSequence`, `scrollProgress`; effects `film-burn` (`color`), `jump-cut`.
 
+### v9.5 Accessible motion 2.0: `<usa-motion-prefs>`, `<usa-pause-all>` + safe pack (`motionary/fx/safe`)
+
+```html
+<usa-pause-all></usa-pause-all>
+<usa-motion-prefs></usa-motion-prefs>
+<usa-fx effect="focus-glow" trigger="click"><button>Notice me</button></usa-fx>
+```
+```js
+import { applyMotionPreferences, loadMotionPreferences, vestibularSafe, isFlashSafe } from 'motionary/fx/safe';
+applyMotionPreferences(loadMotionPreferences());           // restore the user's choice on load
+el.animate(vestibularSafe(frames), 400);                    // a movement-free twin
+console.assert(isFlashSafe(frames, 600, Infinity));
+```
+- `<usa-motion-prefs label>`: `prefs`, `reset()`; `usa:change` { prefs }.
+- `<usa-pause-all label resume-label scope>`: `paused`, `toggle()`; `usa:pause-all` { paused }.
+- Safe: `safe-fade` · `focus-glow` · `color-pulse` (`color`) · `underline-sweep`; `vestibularSafe`, `flashCount`, `isFlashSafe`, `applyMotionPreferences`, `loadMotionPreferences`.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

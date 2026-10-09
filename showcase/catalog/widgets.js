@@ -1143,6 +1143,28 @@ export const components = [
     '<usa-fx effect="film-burn" trigger="enter"><img src="still.jpg" alt=""></usa-fx>\n<usa-fx effect="jump-cut" trigger="click"><figure>…</figure></usa-fx>',
     '<div class="demo-row"><usa-fx effect="film-burn" trigger="click"><button type="button" class="demo-burn">Film burn</button></usa-fx><usa-fx effect="jump-cut" trigger="click"><button type="button" class="demo-burn">Jump cut</button></usa-fx></div>',
     [{ key: 'effect', values: ['film-burn', 'jump-cut'] }], '9.4'),
+  // ---- 9.5 -------------------------------------------------------------
+  W('usa-motion-prefs', 'ui', 'Motion preference panel', '动效偏好面板',
+    '9.5: a motion settings panel for your users — motion level (full, gentle, minimal, none), animation speed, pause autoplaying video, no parallax — applied instantly to every Motionary animation and remembered.',
+    '9.5：给用户的动效设置面板 —— 动效级别（完整、柔和、极简、关闭）、动画速度、暂停自动播放视频、关闭视差 —— 立即作用于页面上所有 Motionary 动画并被记住。',
+    ['accessibility', 'reduced motion', 'settings', 'vestibular', 'preferences'],
+    '<usa-motion-prefs></usa-motion-prefs>',
+    '<usa-motion-prefs class="demo-mprefs"></usa-motion-prefs>',
+    undefined, { since: '9.5' }),
+  W('usa-pause-all', 'ui', 'Pause all motion', '暂停全部动效',
+    '9.5: one button that pauses all motion on the page (WCAG 2.2.2) — Motionary’s shared clock, every CSS / Web animation and autoplaying media — and resumes it again; `scope` limits it to one area.',
+    '9.5：一键暂停页面上的所有动效（WCAG 2.2.2）—— Motionary 共享时钟、所有 CSS / Web 动画与自动播放的媒体 —— 再按一次恢复；`scope` 可限定在某个区域。',
+    ['pause', 'accessibility', 'wcag', 'stop animation', 'button'],
+    '<usa-pause-all></usa-pause-all>',
+    '<div class="demo-row demo-pa"><usa-pause-all scope=".demo-pa"></usa-pause-all><span class="demo-pa-spin" aria-hidden="true"></span><span class="demo-pa-spin demo-pa-b" aria-hidden="true"></span></div>',
+    undefined, { since: '9.5' }),
+  X('fx-safe', ['fx-safe', 'registerSafePack'], 'Motion-safe attention', '无位移的提示动效',
+    '9.5: effects that never move anything — focus-glow pulses a focus-ring glow, color-pulse flashes a colour, safe-fade fades in, underline-sweep grows an underline — so attention cues stay safe for vestibular disorders.',
+    '9.5：完全不产生位移的效果 —— focus-glow 脉动焦点光晕、color-pulse 闪现底色、safe-fade 淡入、underline-sweep 生长下划线 —— 让提示动效对前庭障碍用户依然安全。',
+    ['accessibility', 'vestibular', 'focus', 'safe', 'no motion'],
+    '<usa-fx effect="focus-glow" trigger="click"><button>Notice me</button></usa-fx>\n<usa-fx effect="underline-sweep" trigger="hover"><a href="#">Read more</a></usa-fx>',
+    '<div class="demo-row"><usa-fx effect="focus-glow" trigger="click"><button type="button" class="demo-safe">Focus glow</button></usa-fx><usa-fx effect="color-pulse" trigger="click"><button type="button" class="demo-safe">Colour pulse</button></usa-fx><usa-fx effect="underline-sweep" trigger="hover"><a href="#" class="demo-safe-link" onclick="return false">Underline</a></usa-fx></div>',
+    [{ key: 'effect', values: ['focus-glow', 'color-pulse', 'safe-fade', 'underline-sweep'] }], '9.5'),
 ];
 
 /** item id → live-demo wiring. */

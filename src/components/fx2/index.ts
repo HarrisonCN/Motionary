@@ -35,6 +35,7 @@ import { CINEMA_FX, registerCinemaPack, cameraFrame, CAMERA_MOVES } from './cine
 import { LOTTIE_FX, registerLottiePack, lottieToKeyframes, lottieToSvg, riveInputs } from './lottie';
 import { GENART_FX, registerGenArtPack, PALETTES, seededRandom, meshGradient } from './genart';
 import { VIDEO_FX, registerVideoPack, scrollProgress, scrubVideo, frameSequence } from './video';
+import { SAFE_FX, registerSafePack, vestibularSafe, flashCount, isFlashSafe, applyMotionPreferences, loadMotionPreferences, MOTION_PREFS_KEY, DEFAULT_MOTION_PREFS } from './safemotion';
 
 export { GPU_FX, registerGpuPack, TEXT3_FX, registerTextPack, splitChars };
 export { shaderBackground, supportsWebGL2, fieldFallback, GLSL_HEAD } from './gl';
@@ -95,6 +96,8 @@ export { GENART_FX, registerGenArtPack, PALETTES, seededRandom, meshGradient };
 
 export { VIDEO_FX, registerVideoPack, scrollProgress, scrubVideo, frameSequence };
 
+export { SAFE_FX, registerSafePack, vestibularSafe, flashCount, isFlashSafe, applyMotionPreferences, loadMotionPreferences, MOTION_PREFS_KEY, DEFAULT_MOTION_PREFS };
+
 /** The 6.x effect packs by name. */
 export const EFFECT_PACKS: Record<string, EffectDefinition[]> = {
   gpu: GPU_FX,
@@ -126,6 +129,7 @@ export const EFFECT_PACKS: Record<string, EffectDefinition[]> = {
   lottie: LOTTIE_FX,
   genart: GENART_FX,
   video: VIDEO_FX,
+  safe: SAFE_FX,
 };
 
 /** Register every 6.x effect pack (idempotent). */
@@ -159,6 +163,7 @@ export function registerEffectPacks(): void {
   registerLottiePack();
   registerGenArtPack();
   registerVideoPack();
+  registerSafePack();
 }
 
 

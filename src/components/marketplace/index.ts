@@ -49,6 +49,7 @@ export const MARKETPLACE: PluginListing[] = [
   L('motionary/fx/lottie', 'Lottie & Rive', 'Lottie import (keyframes + SVG), Rive state-machine inputs, icon pop.', 'motionary/fx/lottie', 'registerLottiePack', 'lottie-play icon-pop', 'lottie rive after-effects icons', '9.2'),
   L('motionary/fx/genart', 'Generative art 2.0', 'Halftone print-in, drifting mesh gradients, kaleidoscope and film grain.', 'motionary/fx/genart', 'registerGenArtPack', 'halftone-in mesh-drift kaleido grain-flicker', 'generative gradient grain art', '9.3'),
   L('motionary/fx/video', 'Video motion', 'Scroll-driven video and frame sequences, film burn, jump cut.', 'motionary/fx/video', 'registerVideoPack', 'film-burn jump-cut', 'video scroll film', '9.4'),
+  L('motionary/fx/safe', 'Accessible motion 2.0', 'Motion that never moves: safe fade, focus glow, colour pulse, underline sweep.', 'motionary/fx/safe', 'registerSafePack', 'safe-fade focus-glow color-pulse underline-sweep', 'a11y accessibility vestibular reduced-motion', '9.5'),
 ];
 
 /** Ranked search over listings (name / title / tags / effects / description) (9.0). */
