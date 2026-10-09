@@ -948,6 +948,47 @@ declare const SAFE_FX: EffectDefinition[];
 declare function registerSafePack(): void;
 
 /**
+ * 9.6 — Performance 3.0 (`motionary/fx/perf`, also `motionary/components/fx-perf`):
+ *
+ * - `runInWorker(fn, ...args)` — run a pure function in a throw-away Web
+ *   Worker (built from its source) and get a promise of its result; runs
+ *   inline when Workers are unavailable.
+ * - `offscreenRender(canvas, program, options)` — move a canvas animation
+ *   off the main thread: `program` is the source of
+ *   `function (ctx, t, w, h, state) {…}`; with OffscreenCanvas + Worker it
+ *   runs in a worker (`backend: 'worker'`), otherwise on the main thread via
+ *   the shared frame loop (`'main'`). Returns { backend, stop, resize }.
+ * - `fpsMeter()` — a rolling frames-per-second meter on the shared loop.
+ *
+ * Effects: `idle-reveal` (enter) waits for an idle moment before fading in
+ * (keeps first paint / input snappy); `gpu-lift` (hover) a compositor-only
+ * lift (transform + opacity only). Reduced motion: idle-reveal just shows,
+ * gpu-lift does nothing.
+ */
+
+/** Run a pure function in a Web Worker; resolves with its (structured-cloneable) result (9.6). */
+declare function runInWorker<A extends unknown[], R>(fn: (...args: A) => R | Promise<R>, ...args: A): Promise<R>;
+type DrawProgram = string | ((ctx: CanvasRenderingContext2D, t: number, w: number, h: number, state: Record<string, unknown>) => void);
+/** Animate `canvas` with `program` in a worker (OffscreenCanvas) when possible, else on the main thread (9.6). */
+declare function offscreenRender(canvas: HTMLCanvasElement, program: DrawProgram, opts?: {
+    worker?: boolean;
+    paused?: boolean;
+}): {
+    backend: 'worker' | 'main' | 'none';
+    stop(): void;
+    resize(w: number, h: number): void;
+};
+/** A rolling FPS meter on the shared frame loop: { fps, stop } (fps updates every frame) (9.6). */
+declare function fpsMeter(window?: number): {
+    readonly fps: number;
+    readonly samples: number[];
+    stop(): void;
+};
+declare const PERF3_FX: EffectDefinition[];
+/** Register idle-reveal and gpu-lift (9.6). */
+declare function registerPerf3Pack(): void;
+
+/**
  * 5.5 — generative backgrounds on Canvas 2D, registered through
  * `registerEffect()` (kind `background`): `flow-field`, `voronoi`,
  * `mesh-gradient`, `starfield`, `metaballs`, `contours`.
@@ -1056,5 +1097,5 @@ declare const EFFECT_PACKS: Record<string, EffectDefinition[]>;
 /** Register every 6.x effect pack (idempotent). */
 declare function registerEffectPacks(): void;
 
-export { AI_FX, CAMERA_MOVES, CHART_FX, CINEMA_FX, CYBER_FX, DEFAULT_MOTION_PREFS, DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GENART_FX, GEO_FX, GESTURE3_FX, GLSL_HEAD, GPU_FX, LIGHT_FX, LOTTIE_FX, MORPH2_FX, MOTION_PREFS_KEY, MUSIC_FX, ORGANIC_FX, PALETTES, PAPER_FX, PHYSICS2_FX, RETRO_FX, SAFE_FX, SHOP_FX, SOCIAL_FX, SPATIAL_FX, SURFACE_FX, SURFACE_THEMES, TEXT3_FX, TRANSITIONS2_FX, VIDEO_FX, VerletWorld, WEATHER_FX, WGSL_HEAD, applyMotionPreferences, applySurfaceTheme, arcPath, blobRadius, cameraFrame, crossDocumentTransitions, decodeFrame, fanAngles, fieldFallback, flashCount, frameSequence, glslToWgsl, isFlashSafe, loadEffectPack, loadMotionPreferences, lottieToKeyframes, lottieToSvg, meshGradient, musicSample, orientationToTilt, packManifest, pageTransition, paperRandom, parseFigure, pinchAngle, pinchScale, pixelSteps, pointsToPath, register3dPack, registerAiPack, registerChartPack, registerCinemaPack, registerCyberPack, registerEffectPacks, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGenArtPack, registerGeoPack, registerGesture3Pack, registerGpuPack, registerLightPack, registerLottiePack, registerMorphPack, registerMusicPack, registerOrganicPack, registerPaperPack, registerPhysicsPack, registerRetroPack, registerSafePack, registerShopPack, registerSocialPack, registerSpatialPack, registerSurfacePack, registerTextPack, registerTransitionsPack, registerVideoPack, registerWeatherPack, riveInputs, roughLine, routeLength, samplePath, scrollProgress, scrubVideo, seededRandom, shaderBackground, shakeFrames, skyAt, sparkVectors, splitChars, splitWords, supportsWebGL2, supportsWebGPU, syntheticSample, throwPath, trackPointer, validateManifest, vestibularSafe, webgpuBackground, wgslModule, xrSupport, yawToOffset };
+export { AI_FX, CAMERA_MOVES, CHART_FX, CINEMA_FX, CYBER_FX, DEFAULT_MOTION_PREFS, DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GENART_FX, GEO_FX, GESTURE3_FX, GLSL_HEAD, GPU_FX, LIGHT_FX, LOTTIE_FX, MORPH2_FX, MOTION_PREFS_KEY, MUSIC_FX, ORGANIC_FX, PALETTES, PAPER_FX, PERF3_FX, PHYSICS2_FX, RETRO_FX, SAFE_FX, SHOP_FX, SOCIAL_FX, SPATIAL_FX, SURFACE_FX, SURFACE_THEMES, TEXT3_FX, TRANSITIONS2_FX, VIDEO_FX, VerletWorld, WEATHER_FX, WGSL_HEAD, applyMotionPreferences, applySurfaceTheme, arcPath, blobRadius, cameraFrame, crossDocumentTransitions, decodeFrame, fanAngles, fieldFallback, flashCount, fpsMeter, frameSequence, glslToWgsl, isFlashSafe, loadEffectPack, loadMotionPreferences, lottieToKeyframes, lottieToSvg, meshGradient, musicSample, offscreenRender, orientationToTilt, packManifest, pageTransition, paperRandom, parseFigure, pinchAngle, pinchScale, pixelSteps, pointsToPath, register3dPack, registerAiPack, registerChartPack, registerCinemaPack, registerCyberPack, registerEffectPacks, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGenArtPack, registerGeoPack, registerGesture3Pack, registerGpuPack, registerLightPack, registerLottiePack, registerMorphPack, registerMusicPack, registerOrganicPack, registerPaperPack, registerPerf3Pack, registerPhysicsPack, registerRetroPack, registerSafePack, registerShopPack, registerSocialPack, registerSpatialPack, registerSurfacePack, registerTextPack, registerTransitionsPack, registerVideoPack, registerWeatherPack, riveInputs, roughLine, routeLength, runInWorker, samplePath, scrollProgress, scrubVideo, seededRandom, shaderBackground, shakeFrames, skyAt, sparkVectors, splitChars, splitWords, supportsWebGL2, supportsWebGPU, syntheticSample, throwPath, trackPointer, validateManifest, vestibularSafe, webgpuBackground, wgslModule, xrSupport, yawToOffset };
 export type { EffectPackManifest, ShaderSpec };

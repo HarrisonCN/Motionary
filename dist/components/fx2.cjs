@@ -31,6 +31,7 @@ var components_fxLottie = require('./fx-lottie.cjs');
 var components_fxGenart = require('./fx-genart.cjs');
 var components_fxVideo = require('./fx-video.cjs');
 var components_fxSafe = require('./fx-safe.cjs');
+var components_fxPerf = require('./fx-perf.cjs');
 require('../chunks/registry-BVklOepd.cjs');
 require('../chunks/base-DoRUZBy-.cjs');
 require('../chunks/generative-BHIj-NU0.cjs');
@@ -69,6 +70,7 @@ const EFFECT_PACKS = {
     genart: components_fxGenart.GENART_FX,
     video: components_fxVideo.VIDEO_FX,
     safe: components_fxSafe.SAFE_FX,
+    perf3: components_fxPerf.PERF3_FX,
 };
 /** Register every 6.x effect pack (idempotent). */
 function registerEffectPacks() {
@@ -102,6 +104,7 @@ function registerEffectPacks() {
     components_fxGenart.registerGenArtPack();
     components_fxVideo.registerVideoPack();
     components_fxSafe.registerSafePack();
+    components_fxPerf.registerPerf3Pack();
 }
 
 exports.EFFECT_PACK_FORMAT = manifest.EFFECT_PACK_FORMAT;
@@ -225,6 +228,11 @@ exports.isFlashSafe = components_fxSafe.isFlashSafe;
 exports.loadMotionPreferences = components_fxSafe.loadMotionPreferences;
 exports.registerSafePack = components_fxSafe.registerSafePack;
 exports.vestibularSafe = components_fxSafe.vestibularSafe;
+exports.PERF3_FX = components_fxPerf.PERF3_FX;
+exports.fpsMeter = components_fxPerf.fpsMeter;
+exports.offscreenRender = components_fxPerf.offscreenRender;
+exports.registerPerf3Pack = components_fxPerf.registerPerf3Pack;
+exports.runInWorker = components_fxPerf.runInWorker;
 exports.EFFECT_PACKS = EFFECT_PACKS;
 exports.registerEffectPacks = registerEffectPacks;
 //# sourceMappingURL=fx2.cjs.map

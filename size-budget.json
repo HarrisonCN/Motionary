@@ -407,7 +407,7 @@
   {
     "name": "import 'motionary/components/marketplace'",
     "import": "export * from 'pkg/components/marketplace';",
-    "limit": 3072
+    "limit": 3584
   },
   {
     "name": "import 'motionary/components/fx-music'",
