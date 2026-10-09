@@ -1,9 +1,0 @@
-/* <usa-rating> */
-usa-rating { --usa-rating-on: #f5b301; display: inline-flex; gap: 2px; font-size: 1.5em; line-height: 1; cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent; }
-usa-rating[readonly] { cursor: default; }
-usa-rating .usa-rating-star { display: inline-block; color: color-mix(in srgb, currentColor 22%, transparent); transition: color 0.15s ease, transform 0.2s ease; }
-usa-rating .usa-rating-star[data-on] { color: var(--usa-rating-on); }
-usa-rating[data-previewing] .usa-rating-star { color: color-mix(in srgb, currentColor 22%, transparent); }
-usa-rating[data-previewing] .usa-rating-star[data-preview] { color: var(--usa-rating-on); transform: scale(1.12); }
-usa-rating:focus-visible { outline: 2px solid var(--usa-accent, #7c5cff); outline-offset: 3px; border-radius: 6px; }
-@media (prefers-reduced-motion: reduce) { usa-rating .usa-rating-star { transition: none; transform: none !important; } }

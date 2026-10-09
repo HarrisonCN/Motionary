@@ -323,6 +323,7 @@ export function animateWithMotion(el: Element, keyframes: Keyframe[], options: K
   const k = motionScale();
   if (k !== 1 && k > 0 && typeof options.duration === 'number') options = { ...options, duration: options.duration * k, delay: (options.delay || 0) * k };
   const a = (el as HTMLElement).animate(keyframes, options);
+  trackAnimation(a);
   if (options.iterations !== Infinity) {
     active++;
     let done = false;
@@ -403,8 +404,13 @@ function flushFrame(t: number): void {
       error ??= e;
     }
   }
-  frameListeners.forEach((fn) => fn(t, dt));
-  if (frameListeners.size) requestFlush();
+  // 8.0: loops run on the unified motion clock — dt scaled by its rate, frozen while paused
+  if (!clockState.paused) {
+    const cdt = dt * clockState.rate;
+    clockState.time += cdt;
+    frameListeners.forEach((fn) => fn(t, cdt));
+    if (frameListeners.size) requestFlush();
+  }
   if (error) throw error;
 }
 
@@ -432,13 +438,70 @@ export const caf = (id: number): void => {
 /** Run `fn(time, dt)` every frame on the shared scheduler until the returned function is called. */
 export function onFrame(fn: (t: number, dt: number) => void): () => void {
   frameListeners.add(fn);
-  requestFlush();
+  if (!clockState.paused) requestFlush();
   return () => frameListeners.delete(fn);
 }
 
 /** Scheduler counters: frames flushed, callbacks run, peak callbacks in one frame, pending now. */
 export function schedulerStats(): { frames: number; callbacks: number; peak: number; pending: number; loops: number } {
   return { frames: frameStats.frames, callbacks: frameStats.callbacks, peak: frameStats.peak, pending: frameQueue.size, loops: frameListeners.size };
+}
+
+// --- unified motion clock (8.0) --------------------------------------------------
+// One clock drives every component, effect and frame loop: its rate scales
+// all WAAPI animations started through animateWithMotion() and the dt of the
+// shared frame loop; pausing it pauses them all. Shared across bundles via a
+// global symbol so the ESM, CJS and UMD builds on one page agree.
+interface ClockState {
+  rate: number;
+  paused: boolean;
+  time: number;
+  anims: Set<Animation>;
+  subs: Set<() => void>;
+}
+const CLOCK_KEY = Symbol.for('motionary.clock');
+const clockState: ClockState = ((globalThis as any)[CLOCK_KEY] ||= { rate: 1, paused: false, time: 0, anims: new Set(), subs: new Set() });
+
+function applyClock(a: Animation): void {
+  try {
+    if (typeof (a as any).updatePlaybackRate === 'function') (a as any).updatePlaybackRate(clockState.rate);
+    else if (clockState.rate !== 1 || (a as any).playbackRate !== undefined) (a as any).playbackRate = clockState.rate;
+    if (clockState.paused) a.pause?.();
+    else if (a.playState === 'paused' && (a as any)._usaClockPaused) a.play?.();
+    (a as any)._usaClockPaused = clockState.paused;
+  } catch {
+    /* finished / detached animation */
+  }
+}
+
+/** Put an animation on the shared motion clock (animateWithMotion does this for every component / effect animation). */
+export function trackAnimation(a: Animation | null | undefined): void {
+  if (!a) return;
+  if (clockState.rate !== 1 || clockState.paused) applyClock(a);
+  clockState.anims.add(a);
+  const drop = () => clockState.anims.delete(a);
+  a.finished?.then(drop, drop);
+}
+
+/** The motion clock's state: `rate` (1 = normal), `paused`, `time` (clock ms elapsed, scaled by rate). */
+export function getClock(): { rate: number; paused: boolean; time: number; tracked: number } {
+  return { rate: clockState.rate, paused: clockState.paused, time: clockState.time, tracked: clockState.anims.size };
+}
+
+/** Change the shared clock: `{ rate }` (0.05–8) and / or `{ paused }`. Applies to running animations and loops. */
+export function setClock(next: { rate?: number; paused?: boolean }): void {
+  const wasPaused = clockState.paused;
+  if (typeof next.rate === 'number' && Number.isFinite(next.rate)) clockState.rate = Math.min(8, Math.max(0.05, next.rate));
+  if (typeof next.paused === 'boolean') clockState.paused = next.paused;
+  clockState.anims.forEach(applyClock);
+  if (wasPaused && !clockState.paused && frameListeners.size) requestFlush();
+  clockState.subs.forEach((fn) => fn());
+}
+
+/** Subscribe to clock changes; returns an unsubscribe. */
+export function onClockChange(fn: () => void): () => void {
+  clockState.subs.add(fn);
+  return () => clockState.subs.delete(fn);
 }
 
 // --- active animation budget (4.5) ---------------------------------------------

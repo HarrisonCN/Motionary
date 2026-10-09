@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.0.0] - 2026-10-08
+
+### ⚠️ Breaking
+- **`<usa-rating>` / `defineRating()` removed** (deprecated in 7.9) → `<usa-star-rating>` / `defineStarRating()` from `motionary/components/widgets` (same `value`, `max`, `readonly`, `label`, `name`; `icon="heart"`; `--usa-star-on`). `npx usa-codemod-8 --write src` rewrites tags, icons and the CSS variable. See [docs/upgrading-8.md](./docs/upgrading-8.md).
+- Frame loops on the shared scheduler receive a `dt` scaled by the motion clock rate (identical at the default rate 1) and are not called while the clock is paused.
+
+### Added
+- **Unified timeline engine — `motionary/engine`** (= `motionary/components/engine`): one clock drives every component, effect and frame loop. `motionClock` (`rate` 0.05–8, `pause()`, `resume()`, `toggle()`, `paused`, `time`, `onChange()`); low-level `getClock()`, `setClock({ rate, paused })`, `onClockChange()`, `trackAnimation()` (also in `motionary/components`' base). Every animation started through the library (`animateWithMotion`, so all `<usa-*>` elements and registered effects) is on the clock.
+- **`createTimeline()`** — sequence animations on the clock: `add(target | targets, keyframes, duration | options (+ stagger), position)` with positions `1200`, `'+=200'`, `'-=100'`, `'<'`, `'<+=80'`, `'>'`; `play()`, `pause()`, `seek(ms)`, `restart()`, `cancel()`, `progress` (get / set), `duration`, `playing`, `finished`; `resolvePosition()`.
+- **SSR hydration animations** — `ssrHead(nonce?)` (`<style>` + one-line `<script>` for the server-rendered head), `HYDRATION_CSS`, `hydrateMotion(root, { stagger, duration, preset, easing })` animates `[data-usa-hydrate="fade | fade-up | fade-down | scale | blur | slide-left"]` (per-element `data-usa-delay`) and emits `usa:hydrated`; `HYDRATE_PRESETS`. No-JS: content visible; JS that never runs: 3 s CSS fallback.
+- **2 new components (8.0)** in `motionary/components/widgets`: `<usa-clock-control>` (pause / speed bar for the motion clock, `speeds`, `usa:change`) and `<usa-hydrate effect stagger duration>` (SSR hydration wrapper for its children, `replay()`, `timeline`, `usa:hydrated`).
+- Chinese roadmap v8.1 → v9.0 in [docs/ROADMAP.md](./docs/ROADMAP.md).
+- Showcase: 2 new gallery cards with copyable code, live demos and live Store thumbnails; the legacy Rating card is gone (Animation Store 333 → 334 items).
+- npm: `motionary` and the `use-scroll-animate` alias are published with the `latest` tag.
+
+### Accessibility
+- Clock control: labelled group, play / pause toggle with `aria-pressed` and a changing label, speeds as a `radiogroup` of `radio` buttons — a page-wide "pause animations" control (WCAG 2.2.2). Hydration never hides content without JS or under reduced motion, and the CSS fallback reveals it after 3 s. Reduced motion: timelines jump to their end, hydration shows at once.
+
 ## [7.9.0] - 2026-10-08
 
 ### Added

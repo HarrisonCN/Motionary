@@ -13,7 +13,6 @@ Audited in v2.9 (automated sweep in `test/components-a11y-frameworks.test.ts` + 
 | `<usa-switch>`, `<usa-checkbox>`, `<usa-like>` | Space / Enter |
 | `<usa-hold>` | hold Space / Enter |
 | `<usa-slider>` | ←/→/↑/↓, PageUp/PageDown, Home/End |
-| `<usa-rating>` | ←/→, number keys, Home/End |
 | `<usa-tabs>` | ←/→/↑/↓, Home/End (roving tabindex) |
 | `<usa-draggable>` | arrows (by `step` / `snap`), Home / Esc resets |
 | `<usa-card-stack>` | ← / → swipe |
@@ -24,7 +23,7 @@ Audited in v2.9 (automated sweep in `test/components-a11y-frameworks.test.ts` + 
 | `<usa-double-tap>` | `L` |
 
 ## Roles & states
-`switch` (toggle), `checkbox` (+ `aria-checked="mixed"`), `slider` (slider, rating; `aria-valuenow/-text`), `tablist`/`tab`/`tabpanel`, `dialog` + `aria-modal` (drawer, sheet, dialog, popover), `button` + `aria-pressed` (like, click-flip card, icon-morph toggle) / `aria-expanded` (fab, popover, expand card), `progressbar` (progress, loading bar, scroll progress), `status` live regions (toasts, submit button, pull-to-refresh, badge), `radiogroup` (motion switch), `aria-busy` while loading (submit, pull-refresh, auto-skeleton, splash).
+`switch` (toggle), `checkbox` (+ `aria-checked="mixed"`), `slider` (slider, star rating; `aria-valuenow/-text`), `tablist`/`tab`/`tabpanel`, `dialog` + `aria-modal` (drawer, sheet, dialog, popover), `button` + `aria-pressed` (like, click-flip card, icon-morph toggle) / `aria-expanded` (fab, popover, expand card), `progressbar` (progress, loading bar, scroll progress), `status` live regions (toasts, submit button, pull-to-refresh, badge), `radiogroup` (motion switch), `aria-busy` while loading (submit, pull-refresh, auto-skeleton, splash).
 
 Animated text (`<usa-split-text>`, `<usa-typewriter>`, `<usa-wave-text>`, `<usa-handwriting>`, `<usa-scroll-highlight>` …) renders an `aria-hidden` animated copy plus a visually hidden plain copy. Decorative layers (`<usa-cursor>`, `<usa-ambient>`, particles, sheens, goo) are `aria-hidden` and never take pointer events.
 

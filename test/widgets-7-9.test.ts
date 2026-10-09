@@ -114,13 +114,9 @@ describe('7.9 widgets behave', () => {
     document.dispatchEvent(new KeyboardEvent('keydown', { key: 'j', ctrlKey: true, bubbles: true }));
     expect(t2).not.toHaveBeenCalled();
   });
-  it('8.0 deprecations: <usa-rating> warns once; star-rating is a drop-in; codemod-8', async () => {
-    const { defineRating } = await import('../src/components/ui');
-    defineRating();
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-    mount('<usa-rating value="2"></usa-rating>');
-    mount('<usa-rating value="3"></usa-rating>');
-    expect(warn.mock.calls.filter((c) => String(c[0]).includes('<usa-rating> is deprecated')).length).toBe(1);
+  it('8.0: <usa-rating> removed; star-rating is a drop-in; codemod-8', async () => {
+    const ui: any = await import('../src/components/ui');
+    expect(ui.defineRating).toBeUndefined(); // removed in 8.0
     const sr = mount<any>('<usa-star-rating value="2" icon="♥" name="stars"></usa-star-rating>');
     expect((customElements.get('usa-star-rating') as any).formAssociated).toBe(true);
     expect(sr.querySelector('path').getAttribute('d')).toContain('M12 21s');

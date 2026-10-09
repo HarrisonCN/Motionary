@@ -156,7 +156,7 @@ describe('<usa-fab>, <usa-navbar>', () => {
   });
 });
 
-describe('<usa-slider>, <usa-rating>', () => {
+describe('<usa-slider>', () => {
   it('slider: role, keyboard, pointer, events', () => {
     const el = mount<any>('<usa-slider min="0" max="10" step="2" value="4" label="Vol"></usa-slider>');
     expect(el.getAttribute('role')).toBe('slider');
@@ -177,21 +177,6 @@ describe('<usa-slider>, <usa-rating>', () => {
     expect(change).toHaveBeenCalledTimes(3);
   });
 
-  it('rating: click, toggling off, number keys, readonly', () => {
-    const el = mount<any>('<usa-rating value="2"></usa-rating>');
-    expect(el.querySelectorAll('[data-on]')).toHaveLength(2);
-    (el.querySelectorAll('[data-i]')[3] as HTMLElement).click();
-    expect(el.value).toBe(4);
-    expect(el.getAttribute('aria-valuetext')).toBe('4 of 5');
-    key(el, '1');
-    expect(el.value).toBe(1);
-    (el.querySelectorAll('[data-i]')[0] as HTMLElement).click();
-    expect(el.value).toBe(0);
-    const ro = mount<any>('<usa-rating value="3" readonly></usa-rating>');
-    (ro.querySelectorAll('[data-i]')[0] as HTMLElement).click();
-    expect(ro.value).toBe(3);
-    expect(ro.getAttribute('aria-readonly')).toBe('true');
-  });
 });
 
 describe('<usa-popover>, <usa-badge>, <usa-avatar-stack>', () => {

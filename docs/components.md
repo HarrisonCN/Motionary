@@ -165,7 +165,6 @@ Presets (`SPRING_PRESETS`): `default` (170/26), `gentle` (120/14), `wobbly` (180
 | `<usa-fab>` | FAB speed dial (first child = main button) | `open`, `direction` (`up` · `down` · `left` · `right` · `radial`), `position`, `gap` (56) | `open`, `toggle()`; `usa:toggle` |
 | `<usa-navbar>` | Auto-hiding app bar | `threshold` (64), `shrink`, `target` | `show()`, `hiddenByScroll`; `usa:hide`, `usa:show` |
 | `<usa-slider>` | Range slider (form-associated) | `value`, `min`, `max`, `step`, `name`, `label`, `bubble`, `disabled` | `value`; `input`/`change`, `usa:input`/`usa:change`; `--usa-slider` |
-| `<usa-rating>` | Star rating | `value`, `max` (5), `icon`, `readonly`, `label`, `name` | `value`; `change`, `usa:change` |
 | `<usa-popover>` | Click-to-open panel (`[data-popover]`) | `open`, `placement` (`bottom`) | `open`, `toggle()`; `usa:open`, `usa:close` |
 | `<usa-badge>` | Count / dot badge | `value`, `max` (99), `dot`, `pulse`, `show-zero`, `label` | `value` |
 | `<usa-avatar-stack>` | Overlapping avatars | `max` (5), `size` (36), `overlap` (0.35), `label` | — |
@@ -936,6 +935,31 @@ palette.setCommands([{ id: 'zen', label: 'Zen mode', group: 'View', keys: 'mod+.
 - `<usa-command-palette hotkey placeholder label>`: `commands`, `setCommands(list)`, `show()`, `close()`, `toggle()`, `opened`; `usa:run` { id, label }, `usa:open`, `usa:close`; `fuzzyMatch(query, text)`, `keyLabels(keys)`, `matchesKeys(event, keys)`.
 - `<usa-shortcut keys label for listen>`: `labels`, `press()`; `usa:trigger` { keys }.
 - Deprecated in 7.9 (removed in 8.0): `<usa-rating>` → `<usa-star-rating>` — see [upgrading-8.md](./upgrading-8.md) and `npx usa-codemod-8`.
+
+### v8.0 Unified timeline engine (`motionary/engine`) + SSR hydration + widgets: clock control, hydrate
+
+```js
+import { motionClock, createTimeline, hydrateMotion, ssrHead } from 'motionary/engine';
+motionClock.rate = 0.5;          // every Motionary animation and loop at half speed
+motionClock.pause();             // … or frozen
+const tl = createTimeline({ easing: 'ease-out' })
+  .add(title, [{ opacity: 0 }, { opacity: 1 }], 400)
+  .add(cards, [{ transform: 'translateY(20px)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 500, stagger: 80 }, '-=200')
+  .add(cta, [{ transform: 'scale(0)' }, { transform: 'none' }], 300, '<+=100');
+tl.play(); tl.progress = 0.5; await tl.finished;
+
+// SSR: server head gets ssrHead(); after hydration on the client:
+hydrateMotion(document, { stagger: 60 });
+```
+```html
+<section data-usa-hydrate="fade-up">…</section>
+<usa-hydrate effect="blur" stagger="80"><h1>…</h1><p>…</p></usa-hydrate>
+<usa-clock-control speeds="0.25,0.5,1,2"></usa-clock-control>
+```
+- `motionClock`: `rate`, `paused`, `time`, `pause()`, `resume()`, `toggle()`, `onChange(fn)`; `getClock()`, `setClock()`, `onClockChange()`, `trackAnimation()`.
+- `createTimeline(defaults)`: `add(target, keyframes, options, position)`, `play()`, `pause()`, `seek(ms)`, `restart()`, `cancel()`, `progress`, `duration`, `playing`, `finished`; positions `ms` · `'+=n'` · `'-=n'` · `'<'` · `'<+=n'` · `'>'`.
+- `hydrateMotion(root, { stagger, duration, preset, easing })` → timeline; `ssrHead(nonce)`, `HYDRATION_CSS`, `HYDRATE_PRESETS`.
+- `<usa-clock-control speeds label>`: `rate`, `paused`; `usa:change`. `<usa-hydrate effect stagger duration>`: `replay()`, `timeline`; `usa:hydrated`.
 
 ## Frameworks
 
