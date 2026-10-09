@@ -701,6 +701,31 @@ declare const PAPER_FX: EffectDefinition[];
 declare function registerPaperPack(): void;
 
 /**
+ * 8.6 — Surface theme pack (`motionary/fx/surface`, also `motionary/components/fx-surface`):
+ *
+ * - `neon-ignite` (enter) — the element powers on like a neon tube: a few
+ *   stuttering flickers, then a steady glow (`color`).
+ * - `neon-pulse` (loop) — a slow breathing neon glow; the cleanup stops it
+ *   (`color`).
+ * - `glass-frost` (enter) — frosted glass condenses: blur and transparency
+ *   settle into a crisp glass panel, with a shine passing over it.
+ * - `neu-press` (attention) — a soft neumorphic press: the raised shadow
+ *   flips to an inset one and pops back.
+ *
+ * Reduced motion: neon-ignite / glass-frost just show, neon-pulse is
+ * skipped, neu-press does nothing.
+ */
+
+/** The built-in surface themes of the 8.6 theme system. */
+declare const SURFACE_THEMES: readonly ["light", "dark", "neon", "glass", "neu"];
+type SurfaceTheme = (typeof SURFACE_THEMES)[number];
+/** Set `data-usa-surface` on `target` (default `<html>`) and return the theme actually applied (unknown → `light`) (8.6). */
+declare function applySurfaceTheme(name: string, target?: Element | null): SurfaceTheme;
+declare const SURFACE_FX: EffectDefinition[];
+/** Register neon-ignite, neon-pulse, glass-frost and neu-press (8.6). */
+declare function registerSurfacePack(): void;
+
+/**
  * 5.5 — generative backgrounds on Canvas 2D, registered through
  * `registerEffect()` (kind `background`): `flow-field`, `voronoi`,
  * `mesh-gradient`, `starfield`, `metaballs`, `contours`.
@@ -809,5 +834,5 @@ declare const EFFECT_PACKS: Record<string, EffectDefinition[]>;
 /** Register every 6.x effect pack (idempotent). */
 declare function registerEffectPacks(): void;
 
-export { AI_FX, CHART_FX, CYBER_FX, DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GEO_FX, GLSL_HEAD, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, ORGANIC_FX, PAPER_FX, PHYSICS2_FX, RETRO_FX, SHOP_FX, SOCIAL_FX, TEXT3_FX, TRANSITIONS2_FX, VerletWorld, WEATHER_FX, WGSL_HEAD, arcPath, blobRadius, crossDocumentTransitions, decodeFrame, fanAngles, fieldFallback, glslToWgsl, loadEffectPack, musicSample, packManifest, pageTransition, paperRandom, parseFigure, pixelSteps, pointsToPath, register3dPack, registerAiPack, registerChartPack, registerCyberPack, registerEffectPacks, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGeoPack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerOrganicPack, registerPaperPack, registerPhysicsPack, registerRetroPack, registerShopPack, registerSocialPack, registerTextPack, registerTransitionsPack, registerWeatherPack, roughLine, routeLength, samplePath, shaderBackground, shakeFrames, skyAt, sparkVectors, splitChars, splitWords, supportsWebGL2, supportsWebGPU, syntheticSample, throwPath, trackPointer, validateManifest, webgpuBackground, wgslModule };
+export { AI_FX, CHART_FX, CYBER_FX, DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GEO_FX, GLSL_HEAD, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, ORGANIC_FX, PAPER_FX, PHYSICS2_FX, RETRO_FX, SHOP_FX, SOCIAL_FX, SURFACE_FX, SURFACE_THEMES, TEXT3_FX, TRANSITIONS2_FX, VerletWorld, WEATHER_FX, WGSL_HEAD, applySurfaceTheme, arcPath, blobRadius, crossDocumentTransitions, decodeFrame, fanAngles, fieldFallback, glslToWgsl, loadEffectPack, musicSample, packManifest, pageTransition, paperRandom, parseFigure, pixelSteps, pointsToPath, register3dPack, registerAiPack, registerChartPack, registerCyberPack, registerEffectPacks, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGeoPack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerOrganicPack, registerPaperPack, registerPhysicsPack, registerRetroPack, registerShopPack, registerSocialPack, registerSurfacePack, registerTextPack, registerTransitionsPack, registerWeatherPack, roughLine, routeLength, samplePath, shaderBackground, shakeFrames, skyAt, sparkVectors, splitChars, splitWords, supportsWebGL2, supportsWebGPU, syntheticSample, throwPath, trackPointer, validateManifest, webgpuBackground, wgslModule };
 export type { EffectPackManifest, ShaderSpec };
