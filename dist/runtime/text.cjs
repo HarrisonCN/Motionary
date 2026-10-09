@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-D_iQfO4b.cjs');
+var registry = require('../chunks/registry-VITvgTNc.cjs');
 
 /**
  * `motionary/runtime/text` (10.3) — split text into characters, words and
@@ -139,9 +139,9 @@ function splitText(el, o = {}) {
     return result;
 }
 /** The module object for `use(text)`. */
-const text = { id: 'text', version: registry.RUNTIME_VERSION, requires: ['core'], api: { segment, splitText } };
+const text = { id: 'text', version: registry.RUNTIME_VERSION, tier: 'basic', requires: ['core'], api: { segment, splitText } };
 
 exports.segment = segment;
 exports.splitText = splitText;
 exports.text = text;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/runtime/text.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/runtime/text.cjs.map

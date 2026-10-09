@@ -1,8 +1,8 @@
 'use strict';
 
-var registry = require('../chunks/registry-D_iQfO4b.cjs');
-var tween = require('../chunks/tween-CtquqexF.cjs');
-require('../chunks/ticker-DYsDZNuj.cjs');
+var registry = require('../chunks/registry-VITvgTNc.cjs');
+var tween = require('../chunks/tween-ookpV7jR.cjs');
+require('../chunks/ticker-DwRa5hIu.cjs');
 require('../chunks/ease-HwYZnZat.cjs');
 
 /**
@@ -212,7 +212,7 @@ function sequencePlayer(canvas, images, o = {}) {
     return new SequencePlayer(canvas, images, o);
 }
 /** The module object for `use(formatSprite)`. */
-const formatSprite = { id: 'format-sprite', version: registry.RUNTIME_VERSION, requires: ['core'], api: { parseSpriteSheet, gridSheet, frameOrder, drawFrame, spritePlayer, imageSequence, preloadImages, sequencePlayer } };
+const formatSprite = { id: 'format-sprite', version: registry.RUNTIME_VERSION, tier: 'standard', requires: ['core'], api: { parseSpriteSheet, gridSheet, frameOrder, drawFrame, spritePlayer, imageSequence, preloadImages, sequencePlayer } };
 
 exports.drawFrame = drawFrame;
 exports.formatSprite = formatSprite;
@@ -223,4 +223,4 @@ exports.parseSpriteSheet = parseSpriteSheet;
 exports.preloadImages = preloadImages;
 exports.sequencePlayer = sequencePlayer;
 exports.spritePlayer = spritePlayer;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/runtime/format-sprite.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/runtime/format-sprite.cjs.map

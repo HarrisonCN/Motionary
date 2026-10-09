@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-D_iQfO4b.cjs');
+var registry = require('../chunks/registry-VITvgTNc.cjs');
 
 /**
  * `motionary/runtime/drag-snap` (10.8) — pointer drag with inertia and snap
@@ -257,7 +257,7 @@ function createDragSnap(el, o = {}) {
     };
 }
 /** The module object: `use(dragSnap)`. */
-const dragSnap = { id: 'drag-snap', version: registry.RUNTIME_VERSION, requires: ['core'], api: { createDragSnap, projectThrow, nearestSnap, rubberband, springStep, velocityTracker } };
+const dragSnap = { id: 'drag-snap', version: registry.RUNTIME_VERSION, tier: 'standard', requires: ['core'], api: { createDragSnap, projectThrow, nearestSnap, rubberband, springStep, velocityTracker } };
 
 exports.createDragSnap = createDragSnap;
 exports.dragSnap = dragSnap;
@@ -266,4 +266,4 @@ exports.projectThrow = projectThrow;
 exports.rubberband = rubberband;
 exports.springStep = springStep;
 exports.velocityTracker = velocityTracker;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/runtime/drag-snap.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/runtime/drag-snap.cjs.map

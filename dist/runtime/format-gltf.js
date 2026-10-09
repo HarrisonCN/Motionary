@@ -1,4 +1,4 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-xlsVOzSM.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-CorBCE7b.js';
 import { standardMaterial, texture, computeNormals, GlNode } from './gl.js';
 
 /**
@@ -217,7 +217,7 @@ async function loadGltf(src, o = {}) {
     return gltfToNode(json, buffers, images, o.scene);
 }
 /** The module object for `use(formatGltf)` (needs `gl`). */
-const formatGltf = { id: 'format-gltf', version: RUNTIME_VERSION, requires: ['core', 'gl'], api: { parseGlb, readAccessor, gltfToNode, loadGltf, SUPPORTED_EXTENSIONS } };
+const formatGltf = { id: 'format-gltf', version: RUNTIME_VERSION, tier: 'advanced', requires: ['core', 'gl'], api: { parseGlb, readAccessor, gltfToNode, loadGltf, SUPPORTED_EXTENSIONS } };
 
 export { SUPPORTED_EXTENSIONS, formatGltf, gltfToNode, loadGltf, parseGlb, readAccessor };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/runtime/format-gltf.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/runtime/format-gltf.js.map

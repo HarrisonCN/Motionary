@@ -1,9 +1,9 @@
 'use strict';
 
-var registry = require('../chunks/registry-D_iQfO4b.cjs');
-var animImage = require('../chunks/anim-image-Cz9T5ZiX.cjs');
-require('../chunks/tween-CtquqexF.cjs');
-require('../chunks/ticker-DYsDZNuj.cjs');
+var registry = require('../chunks/registry-VITvgTNc.cjs');
+var animImage = require('../chunks/anim-image-Bjmc17ZU.cjs');
+require('../chunks/tween-ookpV7jR.cjs');
+require('../chunks/ticker-DwRa5hIu.cjs');
 require('../chunks/ease-HwYZnZat.cjs');
 
 /**
@@ -119,7 +119,7 @@ async function loadApng(src, o = {}) {
     return decodeApng(await animImage.bytesOf(src), o);
 }
 /** The module object for `use(formatApng)`. */
-const formatApng = { id: 'format-apng', version: registry.RUNTIME_VERSION, requires: ['core'], api: { parseApng, apngFramePngs, decodeApng, loadApng, animatedImagePlayer: animImage.animatedImagePlayer } };
+const formatApng = { id: 'format-apng', version: registry.RUNTIME_VERSION, tier: 'standard', requires: ['core'], api: { parseApng, apngFramePngs, decodeApng, loadApng, animatedImagePlayer: animImage.animatedImagePlayer } };
 
 exports.animatedImagePlayer = animImage.animatedImagePlayer;
 exports.apngFramePngs = apngFramePngs;
@@ -128,4 +128,4 @@ exports.formatApng = formatApng;
 exports.loadApng = loadApng;
 exports.parseApng = parseApng;
 exports.pngChunks = pngChunks;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/runtime/format-apng.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/runtime/format-apng.cjs.map

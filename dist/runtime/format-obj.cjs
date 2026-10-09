@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-D_iQfO4b.cjs');
+var registry = require('../chunks/registry-VITvgTNc.cjs');
 var runtime_gl = require('./gl.cjs');
 
 /**
@@ -170,7 +170,7 @@ async function loadObj(url) {
     return node;
 }
 /** The module object for `use(formatObj)` (needs `gl`). */
-const formatObj = { id: 'format-obj', version: registry.RUNTIME_VERSION, requires: ['core', 'gl'], api: { parseObj, parseMtl, objMaterial, objToNode, loadObj } };
+const formatObj = { id: 'format-obj', version: registry.RUNTIME_VERSION, tier: 'advanced', requires: ['core', 'gl'], api: { parseObj, parseMtl, objMaterial, objToNode, loadObj } };
 
 exports.formatObj = formatObj;
 exports.loadObj = loadObj;
@@ -178,4 +178,4 @@ exports.objMaterial = objMaterial;
 exports.objToNode = objToNode;
 exports.parseMtl = parseMtl;
 exports.parseObj = parseObj;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/runtime/format-obj.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/runtime/format-obj.cjs.map

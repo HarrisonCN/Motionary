@@ -1,5 +1,5 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-xlsVOzSM.js';
-import { g as getTicker } from '../chunks/ticker-BJA5lDMi.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-CorBCE7b.js';
+import { g as getTicker } from '../chunks/ticker-CZisW9Nb.js';
 
 /**
  * `motionary/runtime/scroll` (10.2) — scroll-linked scenes, an original
@@ -286,7 +286,7 @@ function killScenes() {
 /** The live scenes. */
 const allScenes = () => Array.from(scenes);
 /** The module object for `use(scroll)`. */
-const scroll = { id: 'scroll', version: RUNTIME_VERSION, requires: ['core'], api: { scrollScene, refreshScenes, killScenes, allScenes, parseEdge, resolveRule, ScrollScene } };
+const scroll = { id: 'scroll', version: RUNTIME_VERSION, tier: 'basic', requires: ['core'], api: { scrollScene, refreshScenes, killScenes, allScenes, parseEdge, resolveRule, ScrollScene } };
 
 export { ScrollScene, allScenes, killScenes, parseEdge, refreshScenes, resolveRule, scroll, scrollScene };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/runtime/scroll.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/runtime/scroll.js.map

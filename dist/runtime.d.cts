@@ -150,9 +150,22 @@ declare function timeline(o?: TimelineOptions): Timeline;
  * inside Web Workers.
  */
 /** Runtime version (kept in sync with the package version by the release script). */
-declare const RUNTIME_VERSION = "11.3.0";
+declare const RUNTIME_VERSION = "11.4.0";
 /** Where the CDN builds live (major-pinned). */
 declare const RUNTIME_CDN = "https://cdn.jsdelivr.net/npm/motionary@11/dist/";
+/**
+ * 11.4: runtime tiers. **basic** — ticker, tween, timeline, scroll, text, CSS / WAAPI keyframes; **standard** — smooth
+ * scrolling, drag-snap, SVG, sprites, GIF / APNG / WebP, Lottie; **advanced** — WebGL, 3D file parsing and decoders,
+ * physics. A page that only uses basic modules never downloads standard or advanced code.
+ */
+type RuntimeTier = 'basic' | 'standard' | 'advanced';
+declare const TIER_ORDER: readonly RuntimeTier[];
+/** The tier of every runtime module id (and of the optional peer runtimes components can use). */
+declare const RUNTIME_TIERS: Readonly<Record<string, RuntimeTier>>;
+/** The tier of a module id (`undefined` for an unknown id). */
+declare const tierOf: (id: string) => RuntimeTier | undefined;
+/** The highest tier among module ids — what a component that requires them costs (`basic` for none). */
+declare function maxTier(ids?: readonly string[]): RuntimeTier;
 /** A runtime module: `{ id, version, api }`, registered with `use()`. */
 interface RuntimeModule<A = unknown> {
     /** Module id: 'core', 'format-css', 'scroll', … (import path `motionary/runtime/<id>`). */
@@ -160,6 +173,8 @@ interface RuntimeModule<A = unknown> {
     version: string;
     /** Other modules this one needs (registered first by `use()` callers). */
     requires?: string[];
+    /** 11.4: runtime tier — basic · standard · advanced (docs/runtime-tiers.md). */
+    tier?: RuntimeTier;
     /** The module's public API (what `requireModule(id)` returns). */
     api: A;
     /** Optional one-time setup, called on first registration. */
@@ -239,5 +254,5 @@ declare function resolveTargets(t: any): any;
  */
 declare function use(...mods: RuntimeModule[]): RuntimeRegistry;
 
-export { EASES, Playable, RUNTIME_CDN, RUNTIME_VERSION, RuntimeModuleError, Timeline, Tween, core, cubicBezier, getTicker, hasModule, missingMessage, moduleCdn, modulePath, parseEase, parseValue, register, registeredModules, registry, requireModule, resolveTargets, steps, timeline, tween, use };
-export type { CoreApi, Ease, PlayOptions, Position, Props, RuntimeModule, RuntimeRegistry, Target, TickFn, Ticker, TimelineOptions, TweenOptions };
+export { EASES, Playable, RUNTIME_CDN, RUNTIME_TIERS, RUNTIME_VERSION, RuntimeModuleError, TIER_ORDER, Timeline, Tween, core, cubicBezier, getTicker, hasModule, maxTier, missingMessage, moduleCdn, modulePath, parseEase, parseValue, register, registeredModules, registry, requireModule, resolveTargets, steps, tierOf, timeline, tween, use };
+export type { CoreApi, Ease, PlayOptions, Position, Props, RuntimeModule, RuntimeRegistry, RuntimeTier, Target, TickFn, Ticker, TimelineOptions, TweenOptions };

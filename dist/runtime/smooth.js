@@ -1,4 +1,4 @@
-import { R as RUNTIME_VERSION, r as requireModule } from '../chunks/registry-xlsVOzSM.js';
+import { R as RUNTIME_VERSION, r as requireModule } from '../chunks/registry-CorBCE7b.js';
 import { p as parseEase } from '../chunks/ease-XN8_0sXu.js';
 
 /**
@@ -273,7 +273,7 @@ function smoothScroll(o = {}) {
 /** Every live instance. */
 const allSmooth = () => Array.from(instances);
 /** The module object for `use(smooth)`. */
-const smooth = { id: 'smooth', version: RUNTIME_VERSION, requires: ['core'], api: { smoothScroll, allSmooth, SmoothScroll } };
+const smooth = { id: 'smooth', version: RUNTIME_VERSION, tier: 'standard', requires: ['core'], api: { smoothScroll, allSmooth, SmoothScroll } };
 
 export { SmoothScroll, allSmooth, smooth, smoothScroll };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/runtime/smooth.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/runtime/smooth.js.map

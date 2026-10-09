@@ -12,4 +12,4 @@ function registerMarkerPulse() {
 }
 
 export { effect, registerMarkerPulse as register, registerMarkerPulse };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/effects/marker-pulse.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/effects/marker-pulse.js.map

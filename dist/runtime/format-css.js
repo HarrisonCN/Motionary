@@ -1,7 +1,7 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-xlsVOzSM.js';
-import { f as framesToTimeline, d as distributeOffsets, c as camelProp } from '../chunks/keyframes-DqWXtvxl.js';
-import '../chunks/tween-GiD1mhGX.js';
-import '../chunks/ticker-BJA5lDMi.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-CorBCE7b.js';
+import { f as framesToTimeline, d as distributeOffsets, c as camelProp } from '../chunks/keyframes-_50j1RoO.js';
+import '../chunks/tween-BHDOFhXX.js';
+import '../chunks/ticker-CZisW9Nb.js';
 import '../chunks/ease-XN8_0sXu.js';
 
 /**
@@ -172,7 +172,7 @@ function playKeyframes(target, frames, o = {}) {
     return framesToTimeline(target, Array.isArray(frames) ? frames : frames.frames, { ...o, paused: o.paused ?? false });
 }
 /** The module object for `use(formatCss)`. */
-const formatCss = { id: 'format-css', version: RUNTIME_VERSION, requires: ['core'], api: { parseKeyframes, fromCssRule, fromWaapi, toWaapi, playKeyframes } };
+const formatCss = { id: 'format-css', version: RUNTIME_VERSION, tier: 'basic', requires: ['core'], api: { parseKeyframes, fromCssRule, fromWaapi, toWaapi, playKeyframes } };
 
 export { formatCss, fromCssRule, fromWaapi, parseKeyframes, parseKeyframesBody, playKeyframes, toWaapi };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/runtime/format-css.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/runtime/format-css.js.map

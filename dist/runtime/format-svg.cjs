@@ -1,9 +1,9 @@
 'use strict';
 
-var registry = require('../chunks/registry-D_iQfO4b.cjs');
-var tween = require('../chunks/tween-CtquqexF.cjs');
+var registry = require('../chunks/registry-VITvgTNc.cjs');
+var tween = require('../chunks/tween-ookpV7jR.cjs');
 var ease = require('../chunks/ease-HwYZnZat.cjs');
-require('../chunks/ticker-DYsDZNuj.cjs');
+require('../chunks/ticker-DwRa5hIu.cjs');
 
 /**
  * `motionary/runtime/format-svg` (10.2) — SVG animation with the runtime
@@ -443,7 +443,7 @@ function playSmil(svg, o = {}) {
     };
 }
 /** The module object for `use(formatSvg)`. */
-const formatSvg = { id: 'format-svg', version: registry.RUNTIME_VERSION, requires: ['core'], api: { parsePath, flattenPath, pathLength, pointAtLength, samplePath, morphPath, readSmil, playSmil, smilTime } };
+const formatSvg = { id: 'format-svg', version: registry.RUNTIME_VERSION, tier: 'standard', requires: ['core'], api: { parsePath, flattenPath, pathLength, pointAtLength, samplePath, morphPath, readSmil, playSmil, smilTime } };
 
 exports.flattenPath = flattenPath;
 exports.formatSvg = formatSvg;
@@ -455,4 +455,4 @@ exports.pointAtLength = pointAtLength;
 exports.readSmil = readSmil;
 exports.samplePath = samplePath;
 exports.smilTime = smilTime;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/runtime/format-svg.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/runtime/format-svg.cjs.map

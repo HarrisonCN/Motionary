@@ -191,6 +191,14 @@
             "experimental",
             "stable"
           ]
+        },
+        "tier": {
+          "enum": [
+            "basic",
+            "standard",
+            "advanced"
+          ],
+          "description": "11.4: runtime tier (docs/runtime-tiers.md)."
         }
       }
     },
@@ -360,6 +368,14 @@
             "null"
           ],
           "description": "10.9: per-component entry point that registers only this tag (motionary/widgets/<name>)."
+        },
+        "tier": {
+          "enum": [
+            "basic",
+            "standard",
+            "advanced"
+          ],
+          "description": "11.4: runtime tier (docs/runtime-tiers.md)."
         }
       }
     }

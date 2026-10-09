@@ -1,7 +1,7 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-xlsVOzSM.js';
-import { a as animatedImagePlayer, b as browserDecode, c as composeFrames, d as bytesOf, u as u8, f as fixDelay } from '../chunks/anim-image-D5Yboz1O.js';
-import '../chunks/tween-GiD1mhGX.js';
-import '../chunks/ticker-BJA5lDMi.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-CorBCE7b.js';
+import { a as animatedImagePlayer, b as browserDecode, c as composeFrames, d as bytesOf, u as u8, f as fixDelay } from '../chunks/anim-image-CSrYZ3ZY.js';
+import '../chunks/tween-BHDOFhXX.js';
+import '../chunks/ticker-CZisW9Nb.js';
 import '../chunks/ease-XN8_0sXu.js';
 
 /**
@@ -109,7 +109,7 @@ async function loadWebp(src, o = {}) {
     return decodeWebp(await bytesOf(src), o);
 }
 /** The module object for `use(formatWebp)`. */
-const formatWebp = { id: 'format-webp', version: RUNTIME_VERSION, requires: ['core'], api: { parseWebp, webpFrameFiles, decodeWebp, loadWebp, animatedImagePlayer } };
+const formatWebp = { id: 'format-webp', version: RUNTIME_VERSION, tier: 'standard', requires: ['core'], api: { parseWebp, webpFrameFiles, decodeWebp, loadWebp, animatedImagePlayer } };
 
 export { animatedImagePlayer, decodeWebp, formatWebp, loadWebp, parseWebp, riffChunks, webpFrameFiles };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/runtime/format-webp.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/runtime/format-webp.js.map

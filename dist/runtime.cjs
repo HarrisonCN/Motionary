@@ -1,8 +1,8 @@
 'use strict';
 
-var registry = require('./chunks/registry-D_iQfO4b.cjs');
-var ticker = require('./chunks/ticker-DYsDZNuj.cjs');
-var tween$1 = require('./chunks/tween-CtquqexF.cjs');
+var registry = require('./chunks/registry-VITvgTNc.cjs');
+var ticker = require('./chunks/ticker-DwRa5hIu.cjs');
+var tween$1 = require('./chunks/tween-ookpV7jR.cjs');
 var ease = require('./chunks/ease-HwYZnZat.cjs');
 
 /**
@@ -29,6 +29,7 @@ var ease = require('./chunks/ease-HwYZnZat.cjs');
 const core = {
     id: 'core',
     version: registry.RUNTIME_VERSION,
+    tier: 'basic',
     api: { version: registry.RUNTIME_VERSION, getTicker: ticker.getTicker, tween, timeline: tween$1.timeline, Tween: tween$1.Tween, Timeline: tween$1.Timeline, EASES: ease.EASES, parseEase: ease.parseEase, cubicBezier: ease.cubicBezier, steps: ease.steps },
 };
 /** Tween targets (objects, elements, lists or a CSS selector). See `TweenOptions`. */
@@ -53,9 +54,12 @@ function use(...mods) {
 }
 
 exports.RUNTIME_CDN = registry.RUNTIME_CDN;
+exports.RUNTIME_TIERS = registry.RUNTIME_TIERS;
 exports.RUNTIME_VERSION = registry.RUNTIME_VERSION;
 exports.RuntimeModuleError = registry.RuntimeModuleError;
+exports.TIER_ORDER = registry.TIER_ORDER;
 exports.hasModule = registry.hasModule;
+exports.maxTier = registry.maxTier;
 exports.missingMessage = registry.missingMessage;
 exports.moduleCdn = registry.moduleCdn;
 exports.modulePath = registry.modulePath;
@@ -63,6 +67,7 @@ exports.register = registry.register;
 exports.registeredModules = registry.registeredModules;
 exports.registry = registry.registry;
 exports.requireModule = registry.requireModule;
+exports.tierOf = registry.tierOf;
 exports.getTicker = ticker.getTicker;
 exports.Playable = tween$1.Playable;
 exports.Timeline = tween$1.Timeline;
@@ -77,4 +82,4 @@ exports.core = core;
 exports.resolveTargets = resolveTargets;
 exports.tween = tween;
 exports.use = use;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/runtime.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/runtime.cjs.map

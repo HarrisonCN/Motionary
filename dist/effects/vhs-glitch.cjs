@@ -16,4 +16,4 @@ function registerVhsGlitch() {
 exports.effect = effect;
 exports.register = registerVhsGlitch;
 exports.registerVhsGlitch = registerVhsGlitch;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/effects/vhs-glitch.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/effects/vhs-glitch.cjs.map

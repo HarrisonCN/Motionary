@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-D_iQfO4b.cjs');
+var registry = require('../chunks/registry-VITvgTNc.cjs');
 var runtime_gl = require('./gl.cjs');
 
 /**
@@ -219,7 +219,7 @@ async function loadGltf(src, o = {}) {
     return gltfToNode(json, buffers, images, o.scene);
 }
 /** The module object for `use(formatGltf)` (needs `gl`). */
-const formatGltf = { id: 'format-gltf', version: registry.RUNTIME_VERSION, requires: ['core', 'gl'], api: { parseGlb, readAccessor, gltfToNode, loadGltf, SUPPORTED_EXTENSIONS } };
+const formatGltf = { id: 'format-gltf', version: registry.RUNTIME_VERSION, tier: 'advanced', requires: ['core', 'gl'], api: { parseGlb, readAccessor, gltfToNode, loadGltf, SUPPORTED_EXTENSIONS } };
 
 exports.SUPPORTED_EXTENSIONS = SUPPORTED_EXTENSIONS;
 exports.formatGltf = formatGltf;
@@ -227,4 +227,4 @@ exports.gltfToNode = gltfToNode;
 exports.loadGltf = loadGltf;
 exports.parseGlb = parseGlb;
 exports.readAccessor = readAccessor;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/runtime/format-gltf.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/runtime/format-gltf.cjs.map

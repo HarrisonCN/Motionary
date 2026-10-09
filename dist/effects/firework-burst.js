@@ -12,4 +12,4 @@ function registerFireworkBurst() {
 }
 
 export { effect, registerFireworkBurst as register, registerFireworkBurst };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.3.0/dist/effects/firework-burst.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/effects/firework-burst.js.map
