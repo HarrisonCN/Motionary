@@ -154,4 +154,4 @@ export interface FormatApngApi {
 }
 
 /** The module object for `use(formatApng)`. */
-export const formatApng: RuntimeModule<FormatApngApi> = { id: 'format-apng', version: RUNTIME_VERSION, requires: ['core'], api: { parseApng, apngFramePngs, decodeApng, loadApng, animatedImagePlayer } };
+export const formatApng: RuntimeModule<FormatApngApi> = { id: 'format-apng', version: RUNTIME_VERSION, tier: 'standard', requires: ['core'], api: { parseApng, apngFramePngs, decodeApng, loadApng, animatedImagePlayer } };

@@ -4,6 +4,8 @@
 
 Lets motionary/runtime/format-gltf load KHR_draco_mesh_compression meshes and KHR_texture_basisu (KTX2) textures through the official decoders — Google draco3d and the Basis Universal transcoder — registered as lazy loaders; Motionary does not reimplement them.
 
+**Runtime tier:** advanced — see [runtime tiers](../runtime-tiers.md).
+
 Part of Motionary's own zero-dependency runtime. Size budget: **3.0 KB gzip** (enforced in CI).
 
 ## Prerequisites

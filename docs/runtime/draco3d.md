@@ -4,6 +4,8 @@
 
 Google’s official Draco geometry decoder (Apache-2.0, WASM / JS), used by motionary/runtime/gltf-decoders for KHR_draco_mesh_compression meshes. Optional peer dependency: lazy-loaded when the first Draco file is opened, never bundled into Motionary.
 
+**Runtime tier:** advanced — see [runtime tiers](../runtime-tiers.md).
+
 **Official third-party runtime** (optional peer dependency, lazy-loaded). Why not our own: Draco is a specialised geometry codec with a large reference decoder (WASM); the official decoder is the only safe, maintained implementation, so Motionary does not reimplement it.
 
 ## Prerequisites

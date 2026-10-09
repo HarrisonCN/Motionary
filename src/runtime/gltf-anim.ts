@@ -280,4 +280,4 @@ export interface GltfAnimApi {
   gltfAnimator: typeof gltfAnimator;
 }
 
-export const gltfAnim: RuntimeModule<GltfAnimApi> = { id: 'gltf-anim', version: RUNTIME_VERSION, requires: ['core', 'gl', 'format-gltf'], api: { gltfClips, sampleChannel, applyClip, deformModel, deformGeometry, gltfAnimator } };
+export const gltfAnim: RuntimeModule<GltfAnimApi> = { id: 'gltf-anim', version: RUNTIME_VERSION, tier: 'advanced', requires: ['core', 'gl', 'format-gltf'], api: { gltfClips, sampleChannel, applyClip, deformModel, deformGeometry, gltfAnimator } };

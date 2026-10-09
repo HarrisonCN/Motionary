@@ -657,6 +657,8 @@ Four logical layers — Public API (HTML · React · Vue · Svelte · Solid · A
 
 **Performance in CI (11.3):** every PR measures, in headless Chrome, the first-screen transfer with on-demand loading, script parse / execute time, WebGL resources (and leaks after removal) and frame stability, against fixed budgets — see [docs/perf-ci.md](./docs/perf-ci.md).
 
+**Runtime tiers (11.4):** `motionary/runtime` modules are **basic** (ticker, tween, timeline, scroll, text, CSS / WAAPI keyframes), **standard** (smooth scrolling, drag-snap, SVG, sprites, GIF / APNG / WebP, Lottie) or **advanced** (WebGL, 3D files and decoders, physics) — a page that only uses basic never pays for the rest. The manifest, the Store badges and `RUNTIME_TIERS` say which; see [docs/runtime-tiers.md](./docs/runtime-tiers.md).
+
 ## Roadmap
 
 One version per PR towards 7.0 — particles & fluids, text effects, light & materials, 3D scenes, morphing, transitions, weather, interactive physics: [docs/ROADMAP.md](./docs/ROADMAP.md).

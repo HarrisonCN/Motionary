@@ -244,4 +244,4 @@ export interface FormatSceneApi {
 }
 
 /** The module object for `use(formatScene)` (needs `physics`). */
-export const formatScene: RuntimeModule<FormatSceneApi> = { id: 'format-scene', version: RUNTIME_VERSION, requires: ['core', 'physics'], api: { SCENE_FORMAT, migrateScene, validateScene, parseScene, sceneToWorld, worldToScene } };
+export const formatScene: RuntimeModule<FormatSceneApi> = { id: 'format-scene', version: RUNTIME_VERSION, tier: 'advanced', requires: ['core', 'physics'], api: { SCENE_FORMAT, migrateScene, validateScene, parseScene, sceneToWorld, worldToScene } };

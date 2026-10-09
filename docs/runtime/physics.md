@@ -4,6 +4,8 @@
 
 A small 2D rigid-body engine written for Motionary (own implementation and API — no Matter.js / Box2D code): circles, boxes and convex polygons, mass from density, restitution, friction, sensors, collision groups, sleeping, distance / spring / pin constraints, pointer drag, a fixed time step on the shared ticker.
 
+**Runtime tier:** advanced — see [runtime tiers](../runtime-tiers.md).
+
 Part of Motionary's own zero-dependency runtime. Size budget: **10.0 KB gzip** (enforced in CI).
 
 ## Prerequisites

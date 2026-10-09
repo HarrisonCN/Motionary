@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [11.4.0] - 2026-10-09
+
+### Runtime tiers (Runtime)
+- Every `motionary/runtime` module now belongs to a tier: **basic** — core (ticker, tween, timeline), `scroll`, `text`, `format-css`, `format-motion`; **standard** — `smooth`, `drag-snap`, `format-svg`, `format-sprite`, `format-gif`, `format-apng`, `format-webp`, `vector` (Lottie), `lottie-state`, official Rive runtime; **advanced** — `gl`, `format-gltf`, `format-obj`, `gltf-anim`, `gltf-decoders`, `physics`, `format-scene`, Draco and Basis decoders. A module only depends on its own tier or below.
+- `motionary/runtime` exports `RUNTIME_TIERS`, `TIER_ORDER`, `tierOf(id)`, `maxTier(ids)` and the `RuntimeTier` type; every module object carries `tier`.
+- Manifest (schema v2, new optional property): `runtimeModules[].tier`, `components[].tier` (highest tier among the component's prerequisites, `basic` for none) — served by `motionary-mcp` too.
+- Store: a tier badge next to "Requires"; the gallery prerequisites panel names the tier; every `docs/runtime/<module>.md` states it.
+- New [docs/runtime-tiers.md](./docs/runtime-tiers.md); README note.
+
+### Checks
+- New `npm run check:tiers` (`scripts/check-tiers.mjs`, CI after the build): all modules of a tier (plus lower tiers) bundled with `use()` stay within fixed gzip budgets — basic 12 KB (10.84 measured), standard 37 KB (33.73), advanced 60 KB (54.55) — and a lower-tier bundle never contains a higher-tier module.
+- New `test/widgets-11-4.test.ts`: tier table, module objects, dependency direction, showcase/runtime tables equal, manifest schema, Store/gallery/docs wiring.
+
 ## [11.3.0] - 2026-10-09
 
 ### Performance metrics in CI (Tooling)

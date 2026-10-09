@@ -264,4 +264,4 @@ export interface LottieStateApi {
   compare: typeof compare;
 }
 
-export const lottieState: RuntimeModule<LottieStateApi> = { id: 'lottie-state', version: RUNTIME_VERSION, requires: ['core', 'vector'], api: { applyTheme, ruleProp, createStateMachine, inspectStateMachine, compare } };
+export const lottieState: RuntimeModule<LottieStateApi> = { id: 'lottie-state', version: RUNTIME_VERSION, tier: 'standard', requires: ['core', 'vector'], api: { applyTheme, ruleProp, createStateMachine, inspectStateMachine, compare } };

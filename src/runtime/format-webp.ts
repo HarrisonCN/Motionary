@@ -149,4 +149,4 @@ export interface FormatWebpApi {
 }
 
 /** The module object for `use(formatWebp)`. */
-export const formatWebp: RuntimeModule<FormatWebpApi> = { id: 'format-webp', version: RUNTIME_VERSION, requires: ['core'], api: { parseWebp, webpFrameFiles, decodeWebp, loadWebp, animatedImagePlayer } };
+export const formatWebp: RuntimeModule<FormatWebpApi> = { id: 'format-webp', version: RUNTIME_VERSION, tier: 'standard', requires: ['core'], api: { parseWebp, webpFrameFiles, decodeWebp, loadWebp, animatedImagePlayer } };

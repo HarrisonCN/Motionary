@@ -149,4 +149,4 @@ export interface TextApi {
 }
 
 /** The module object for `use(text)`. */
-export const text: RuntimeModule<TextApi> = { id: 'text', version: RUNTIME_VERSION, requires: ['core'], api: { segment, splitText } };
+export const text: RuntimeModule<TextApi> = { id: 'text', version: RUNTIME_VERSION, tier: 'basic', requires: ['core'], api: { segment, splitText } };

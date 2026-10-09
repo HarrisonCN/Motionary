@@ -34,6 +34,8 @@ jobs:
       - run: npm run check:exports
       - name: Tree-shaking (side-effect-free imports, one export pulls in only its own code)
         run: npm run check:treeshake
+      - name: Runtime tiers (basic / standard / advanced bundles within fixed budgets)
+        run: npm run check:tiers
       - name: Prerequisite docs in all five places (check:peer-docs)
         run: npm run check:peer-docs
       - name: Package lint (publint + are-the-types-wrong)

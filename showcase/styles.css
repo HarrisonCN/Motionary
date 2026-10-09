@@ -453,3 +453,7 @@ code, kbd, pre { font-family: var(--mono); }
 .prereq dt{margin-top:8px;font-weight:600;font-size:.85rem}
 .prereq dd{margin:3px 0 0}
 .prereq pre{margin:0;padding:8px 10px;max-width:100%;overflow:auto;border-radius:8px;background:#0f172a;color:#e2e8f0;font:12px/1.45 ui-monospace,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+
+/* 11.4 runtime tier badge */
+.tier-badge { display: inline-block; margin-left: .35em; padding: .05em .45em; border-radius: 999px; font-size: .72em; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; border: 1px solid currentColor; opacity: .85; }
+.tier-badge.tier-basic { color: #2e9d5b; } .tier-badge.tier-standard { color: #2f6fd6; } .tier-badge.tier-advanced { color: #b5531d; }

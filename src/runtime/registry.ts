@@ -8,10 +8,53 @@
  */
 
 /** Runtime version (kept in sync with the package version by the release script). */
-export const RUNTIME_VERSION = '11.3.0';
+export const RUNTIME_VERSION = '11.4.0';
 
 /** Where the CDN builds live (major-pinned). */
 export const RUNTIME_CDN = 'https://cdn.jsdelivr.net/npm/motionary@11/dist/';
+
+/**
+ * 11.4: runtime tiers. **basic** — ticker, tween, timeline, scroll, text, CSS / WAAPI keyframes; **standard** — smooth
+ * scrolling, drag-snap, SVG, sprites, GIF / APNG / WebP, Lottie; **advanced** — WebGL, 3D file parsing and decoders,
+ * physics. A page that only uses basic modules never downloads standard or advanced code.
+ */
+export type RuntimeTier = 'basic' | 'standard' | 'advanced';
+export const TIER_ORDER: readonly RuntimeTier[] = ['basic', 'standard', 'advanced'];
+/** The tier of every runtime module id (and of the optional peer runtimes components can use). */
+export const RUNTIME_TIERS: Readonly<Record<string, RuntimeTier>> = {
+  'core': 'basic',
+  'scroll': 'basic',
+  'text': 'basic',
+  'format-css': 'basic',
+  'format-motion': 'basic',
+  'smooth': 'standard',
+  'drag-snap': 'standard',
+  'format-svg': 'standard',
+  'format-sprite': 'standard',
+  'format-gif': 'standard',
+  'format-apng': 'standard',
+  'format-webp': 'standard',
+  'vector': 'standard',
+  'lottie-state': 'standard',
+  'rive': 'standard',
+  'gl': 'advanced',
+  'format-gltf': 'advanced',
+  'format-obj': 'advanced',
+  'gltf-anim': 'advanced',
+  'gltf-decoders': 'advanced',
+  'basis-transcoder': 'advanced',
+  'draco3d': 'advanced',
+  'physics': 'advanced',
+  'format-scene': 'advanced',
+};
+/** The tier of a module id (`undefined` for an unknown id). */
+export const tierOf = (id: string): RuntimeTier | undefined => RUNTIME_TIERS[id];
+/** The highest tier among module ids — what a component that requires them costs (`basic` for none). */
+export function maxTier(ids: readonly string[] = []): RuntimeTier {
+  let i = 0;
+  for (const id of ids) i = Math.max(i, TIER_ORDER.indexOf(RUNTIME_TIERS[id] ?? 'basic'));
+  return TIER_ORDER[i];
+}
 
 /** A runtime module: `{ id, version, api }`, registered with `use()`. */
 export interface RuntimeModule<A = unknown> {
@@ -20,6 +63,8 @@ export interface RuntimeModule<A = unknown> {
   version: string;
   /** Other modules this one needs (registered first by `use()` callers). */
   requires?: string[];
+  /** 11.4: runtime tier — basic · standard · advanced (docs/runtime-tiers.md). */
+  tier?: RuntimeTier;
   /** The module's public API (what `requireModule(id)` returns). */
   api: A;
   /** Optional one-time setup, called on first registration. */

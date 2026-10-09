@@ -160,4 +160,4 @@ export interface FormatCssApi {
 }
 
 /** The module object for `use(formatCss)`. */
-export const formatCss: RuntimeModule<FormatCssApi> = { id: 'format-css', version: RUNTIME_VERSION, requires: ['core'], api: { parseKeyframes, fromCssRule, fromWaapi, toWaapi, playKeyframes } };
+export const formatCss: RuntimeModule<FormatCssApi> = { id: 'format-css', version: RUNTIME_VERSION, tier: 'basic', requires: ['core'], api: { parseKeyframes, fromCssRule, fromWaapi, toWaapi, playKeyframes } };

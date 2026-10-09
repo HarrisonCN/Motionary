@@ -294,4 +294,4 @@ export interface DragSnapApi {
 }
 
 /** The module object: `use(dragSnap)`. */
-export const dragSnap: RuntimeModule<DragSnapApi> = { id: 'drag-snap', version: RUNTIME_VERSION, requires: ['core'], api: { createDragSnap, projectThrow, nearestSnap, rubberband, springStep, velocityTracker } };
+export const dragSnap: RuntimeModule<DragSnapApi> = { id: 'drag-snap', version: RUNTIME_VERSION, tier: 'standard', requires: ['core'], api: { createDragSnap, projectThrow, nearestSnap, rubberband, springStep, velocityTracker } };

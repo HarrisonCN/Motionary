@@ -4,6 +4,8 @@
 
 Split text into characters (grapheme-aware), words and lines for animation while keeping it accessible (aria-label with the full text, pieces hidden from assistive tech).
 
+**Runtime tier:** basic — see [runtime tiers](../runtime-tiers.md).
+
 Part of Motionary's own zero-dependency runtime. Size budget: **2.5 KB gzip** (enforced in CI).
 
 ## Prerequisites

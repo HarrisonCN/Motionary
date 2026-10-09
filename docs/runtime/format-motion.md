@@ -4,6 +4,8 @@
 
 Play Motion / Framer-style { initial, animate, transition } JSON (arrays as keyframes, times, repeatType, springs) with the runtime.
 
+**Runtime tier:** basic — see [runtime tiers](../runtime-tiers.md).
+
 Part of Motionary's own zero-dependency runtime. Size budget: **2.5 KB gzip** (enforced in CI).
 
 ## Prerequisites

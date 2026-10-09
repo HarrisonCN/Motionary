@@ -4,6 +4,8 @@
 
 Play TexturePacker / Aseprite sprite sheets and numbered image sequences on a canvas or an element background, as runtime timelines (scrubbable).
 
+**Runtime tier:** standard — see [runtime tiers](../runtime-tiers.md).
+
 Part of Motionary's own zero-dependency runtime. Size budget: **3.0 KB gzip** (enforced in CI).
 
 ## Prerequisites

@@ -4,6 +4,8 @@
 
 Scroll-linked scenes: start / end rules, scrub (direct or smoothed), pin, markers, enter / leave callbacks and per-edge actions for a runtime tween or timeline.
 
+**Runtime tier:** basic — see [runtime tiers](../runtime-tiers.md).
+
 Part of Motionary's own zero-dependency runtime. Size budget: **4.5 KB gzip** (enforced in CI).
 
 ## Prerequisites

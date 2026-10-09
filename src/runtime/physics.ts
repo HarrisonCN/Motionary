@@ -773,4 +773,4 @@ export interface PhysicsApi {
 }
 
 /** The module object for `use(physics)`. */
-export const physics: RuntimeModule<PhysicsApi> = { id: 'physics', version: RUNTIME_VERSION, requires: ['core'], api: { createWorld, World, Body, Constraint, collide, dragConstraint } };
+export const physics: RuntimeModule<PhysicsApi> = { id: 'physics', version: RUNTIME_VERSION, tier: 'advanced', requires: ['core'], api: { createWorld, World, Body, Constraint, collide, dragConstraint } };

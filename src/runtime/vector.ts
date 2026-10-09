@@ -816,4 +816,4 @@ export interface VectorApi {
 }
 
 /** The module object for `use(vector)`. */
-export const vector: RuntimeModule<VectorApi> = { id: 'vector', version: RUNTIME_VERSION, requires: ['core'], api: { evalExpression, loadLottie, parseDotLottie, unzipEntries, lottiePlayer, renderLottieFrame, inspectLottie, propValue, transformAt, trimContours, loadLottieImages } };
+export const vector: RuntimeModule<VectorApi> = { id: 'vector', version: RUNTIME_VERSION, tier: 'standard', requires: ['core'], api: { evalExpression, loadLottie, parseDotLottie, unzipEntries, lottiePlayer, renderLottieFrame, inspectLottie, propValue, transformAt, trimContours, loadLottieImages } };

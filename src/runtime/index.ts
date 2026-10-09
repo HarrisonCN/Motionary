@@ -24,7 +24,8 @@ import { tween as rawTween, timeline, Tween, Timeline, type TweenOptions, type P
 import { EASES, parseEase, cubicBezier, steps } from './ease';
 
 export { registry, register, requireModule, hasModule, registeredModules, missingMessage, modulePath, moduleCdn, RuntimeModuleError, RUNTIME_VERSION, RUNTIME_CDN } from './registry';
-export type { RuntimeModule, RuntimeRegistry } from './registry';
+export { RUNTIME_TIERS, TIER_ORDER, tierOf, maxTier } from './registry';
+export type { RuntimeModule, RuntimeRegistry, RuntimeTier } from './registry';
 export { getTicker } from './ticker';
 export type { Ticker, TickFn } from './ticker';
 export { timeline, Tween, Timeline, Playable, parseValue } from './tween';
@@ -50,6 +51,7 @@ export interface CoreApi {
 export const core: RuntimeModule<CoreApi> = {
   id: 'core',
   version: RUNTIME_VERSION,
+  tier: 'basic',
   api: { version: RUNTIME_VERSION, getTicker, tween, timeline, Tween, Timeline, EASES, parseEase, cubicBezier, steps },
 };
 

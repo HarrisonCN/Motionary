@@ -29,6 +29,8 @@ export function modulePage(p) {
     '',
     p.summary,
     '',
+    `**Runtime tier:** ${p.tier} — see [runtime tiers](../runtime-tiers.md).`,
+    '',
     p.kind === 'peer' ? `**Official third-party runtime** (optional peer dependency, lazy-loaded). Why not our own: ${p.why || 'proprietary format'}.` : `Part of Motionary's own zero-dependency runtime. Size budget: **${(p.budget / 1024).toFixed(1)} KB gzip** (enforced in CI).`,
     '',
     '## Prerequisites',

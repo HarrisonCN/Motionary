@@ -4,6 +4,8 @@
 
 Plays Lottie (bodymovin JSON) and dotLottie (.lottie) files on Canvas 2D with Motionary’s own renderer (no lottie-web code): shapes, gradients, trim paths, masks, track mattes, precomps, images; a runtime timeline you can seek, reverse and scrub.
 
+**Runtime tier:** standard — see [runtime tiers](../runtime-tiers.md).
+
 Part of Motionary's own zero-dependency runtime. Size budget: **12.0 KB gzip** (enforced in CI).
 
 ## Prerequisites

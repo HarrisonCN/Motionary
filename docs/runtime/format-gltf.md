@@ -4,6 +4,8 @@
 
 Load glTF 2.0 (.gltf with external or data: buffers, .glb) into motionary/runtime/gl nodes: node hierarchy, meshes, PBR metallic-roughness materials, embedded / external images.
 
+**Runtime tier:** advanced — see [runtime tiers](../runtime-tiers.md).
+
 Part of Motionary's own zero-dependency runtime. Size budget: **6.0 KB gzip** (enforced in CI).
 
 ## Prerequisites

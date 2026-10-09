@@ -4,6 +4,8 @@
 
 Shared ticker (one rAF loop), tween + timeline engine with easing, module registry with clear errors.
 
+**Runtime tier:** basic — see [runtime tiers](../runtime-tiers.md).
+
 Part of Motionary's own zero-dependency runtime. Size budget: **5.5 KB gzip** (enforced in CI).
 
 ## Prerequisites

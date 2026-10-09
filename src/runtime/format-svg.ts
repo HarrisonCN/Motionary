@@ -366,4 +366,4 @@ export interface FormatSvgApi {
 }
 
 /** The module object for `use(formatSvg)`. */
-export const formatSvg: RuntimeModule<FormatSvgApi> = { id: 'format-svg', version: RUNTIME_VERSION, requires: ['core'], api: { parsePath, flattenPath, pathLength, pointAtLength, samplePath, morphPath, readSmil, playSmil, smilTime } };
+export const formatSvg: RuntimeModule<FormatSvgApi> = { id: 'format-svg', version: RUNTIME_VERSION, tier: 'standard', requires: ['core'], api: { parsePath, flattenPath, pathLength, pointAtLength, samplePath, morphPath, readSmil, playSmil, smilTime } };

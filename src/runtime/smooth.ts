@@ -294,4 +294,4 @@ export interface SmoothApi {
 }
 
 /** The module object for `use(smooth)`. */
-export const smooth: RuntimeModule<SmoothApi> = { id: 'smooth', version: RUNTIME_VERSION, requires: ['core'], api: { smoothScroll, allSmooth, SmoothScroll } };
+export const smooth: RuntimeModule<SmoothApi> = { id: 'smooth', version: RUNTIME_VERSION, tier: 'standard', requires: ['core'], api: { smoothScroll, allSmooth, SmoothScroll } };

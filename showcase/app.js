@@ -632,6 +632,7 @@ function buildCard(item) {
     h('div', { class: 'card-body' }, [
       h('h3', { class: 'card-title' }, [h('span', { class: 'ttl', text: L(item.title) }), h('code', { text: item.id })]),
       item.requiresBadge ? h('span', { class: 'req-badge', title: item.prereq?.install, text: item.requiresBadge }) : null,
+      item.tier ? h('span', { class: 'tier-badge tier-' + item.tier, title: 'Runtime tier (docs/runtime-tiers.md)', text: item.tier }) : null,
       h('p', { class: 'card-desc', text: L(item.desc) }),
       h('ul', { class: 'tags' }, (item.tags || []).slice(0, 3).map((tg) => h('li', { class: 'tag', text: tg }))),
       h('div', { class: 'card-foot' }, [h('span', { class: 'price', text: T('card.free') }), h('span', { class: 'get', html: `<span>${T('card.get')}</span>${ICON.arrow}` })]),
