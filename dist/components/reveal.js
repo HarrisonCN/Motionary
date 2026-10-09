@@ -1,4 +1,4 @@
-import { u as defineElement, D as EASE_OUT, l as caf, r as raf, k as clamp } from '../chunks/base-BnRyfuyM.js';
+import { f as defineElement, D as EASE_OUT, b as caf, r as raf, d as clamp } from '../chunks/base-BTev8qxg.js';
 
 /** Entrance effects shared by `<usa-reveal>` and `<usa-stagger>` (transform / opacity / filter only). */
 const REVEAL_EFFECTS = [

@@ -1,4 +1,4 @@
-# Motionary components (195)
+# Motionary components (198)
 
 One page per `<usa-*>` element, generated from the source. Machine-readable: `motionary/manifest.json` · Pages `/components.json` · `/llms.txt` · `/llms-full.txt`. How to use these with an AI assistant: [AGENTS.md](../../AGENTS.md) and [the prompt guide](../ai-prompt-guide.md).
 
@@ -191,6 +191,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<usa-magnetic>`](usa-magnetic.md) — Magnetic button
 - [`<usa-press>`](usa-press.md) — Press feedback
 - [`<usa-ripple>`](usa-ripple.md) — Ripple
+- [`<usa-smooth-scroll>`](usa-smooth-scroll.md) — Smooth scroll · Requires: motionary/runtime/smooth
 - [`<usa-spotlight>`](usa-spotlight.md) — Reveal highlight
 - [`<usa-tilt>`](usa-tilt.md) — 3D tilt card
 - [`<usa-volume-knob>`](usa-volume-knob.md) — Volume knob
@@ -240,16 +241,18 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 
 - [`<usa-pack>`](usa-pack.md) — E-commerce pack
 
+## reveal
+
+- [`<usa-parallax-layers>`](usa-parallax-layers.md) — Parallax layers
+- [`<usa-reveal>`](usa-reveal.md) — Reveal
+- [`<usa-scroll-progress>`](usa-scroll-progress.md) — Scroll progress bar
+- [`<usa-scroll-ring>`](usa-scroll-ring.md) — Scroll progress ring
+- [`<usa-scroll-scene>`](usa-scroll-scene.md) — Scroll scene · Requires: motionary/runtime/scroll
+- [`<usa-scrolly>`](usa-scrolly.md) — Sticky scrollytelling
+- [`<usa-stagger>`](usa-stagger.md) — Stagger list
+
 ## gesture
 
 - [`<usa-pinch-zoom>`](usa-pinch-zoom.md) — Pinch zoom
 - [`<usa-swipe-deck>`](usa-swipe-deck.md) — Swipe cards deck
 - [`<usa-swipeable>`](usa-swipeable.md) — Swipeable
-
-## reveal
-
-- [`<usa-reveal>`](usa-reveal.md) — Reveal
-- [`<usa-scroll-progress>`](usa-scroll-progress.md) — Scroll progress bar
-- [`<usa-scroll-scene>`](usa-scroll-scene.md) — Scroll scene · Requires: motionary/runtime/scroll
-- [`<usa-scrolly>`](usa-scrolly.md) — Sticky scrollytelling
-- [`<usa-stagger>`](usa-stagger.md) — Stagger list

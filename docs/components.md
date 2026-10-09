@@ -1437,6 +1437,36 @@ defineTextSplitter(); // registers <usa-text-splitter> — after the prerequisit
 <usa-text-splitter split="chars" effect="rise" stagger="30">Motion, made simple.</usa-text-splitter>
 ```
 
+### `<usa-smooth-scroll>` — Requires: motionary/runtime/smooth
+
+- **Install:** `npm i motionary`
+- **Import order & registration:** Register the core first, then the module: use(smooth) also registers the core. CDN: load runtime.iife.js, then runtime/smooth.iife.js (it registers itself).
+
+```js
+import { use } from 'motionary/runtime';
+import { smooth } from 'motionary/runtime/smooth';
+import { defineSmoothScroll } from 'motionary/components/widgets';
+
+use(smooth);
+defineSmoothScroll(); // registers <usa-smooth-scroll> — after the prerequisites
+```
+
+- **CDN:**
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/smooth.iife.js"></script>
+<!-- then the component bundles -->
+<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>
+```
+
+- **Minimal example:**
+
+```html
+<usa-smooth-scroll lerp="0.1" offset="64"></usa-smooth-scroll>
+```
+
 <!-- prereqs:end -->
 
 ### v10.2 Scroll scenes (`motionary/runtime/scroll`) + SVG loader + `data-motion` in core: `<usa-scroll-scene>`, `<usa-motion-inspector>` (`components/widgets`)
@@ -1470,6 +1500,25 @@ Declarative motion with just the core: `applyMotionAttributes(createMotion())` +
 |---|---|---|
 | `<usa-route-transition>` | `effect` (fade, slide, zoom), `engine` (auto, view-transition, waapi), `selector`, `history` (push, replace, off), `links` (inside, document), `cross-document`; `[data-to]`, `<template data-route>`, `[data-shared]` | `navigate(url)`, `current`; `usa:navigate`, `usa:navigated` |
 | `<usa-text-splitter>` (Requires: motionary/runtime/text) | `split` (chars, words, lines), `effect` (rise, fade, blur, flip, wave), `stagger`, `duration`, `trigger` (view, load, hover), `loop` | `replay()`, `pieces()`; `usa:split`, `usa:done`, `usa:runtime-missing` |
+
+### v10.4 Scroll-driven 3.0 + smooth scrolling (`motionary/runtime/smooth`) + animated images: `<usa-scroll-ring>`, `<usa-parallax-layers>`, `<usa-smooth-scroll>` (`components/widgets`) · `motionary-mcp`
+
+```html
+<usa-scroll-ring label back-to-top></usa-scroll-ring>
+<usa-parallax-layers range="120">
+  <img data-depth="0.6" src="mountains.webp" alt="">
+  <h2 data-depth="-0.3">Above the clouds</h2>
+</usa-parallax-layers>
+<usa-smooth-scroll lerp="0.1" offset="64"></usa-smooth-scroll>
+```
+
+| Element | Attributes | Methods / events |
+|---|---|---|
+| `<usa-scroll-ring>` | `for` (page or a selector), `engine` (auto, native, js), `label`, `back-to-top`, `size`, `thickness`, `horizontal`, `preview` | `progress`, `engine`; `usa:progress`, `usa:top` |
+| `<usa-parallax-layers>` | `range`, `engine` (auto, native, js), `horizontal`, `pointer`, `strength`, `preview`; children `[data-depth]` | `layers()`, `progress`; `usa:progress` |
+| `<usa-smooth-scroll>` (Requires: motionary/runtime/smooth) | `wrapper`, `lerp`, `duration`, `ease`, `wheel-multiplier`, `horizontal`, `touch`, `anchors`, `offset`, `preview` | `glideTo(target)`, `stop()`, `resume()`, `instance`; `usa:ready`, `usa:scroll`, `usa:runtime-missing` |
+
+MCP: `npx -y -p motionary motionary-mcp` — see [docs/mcp.md](docs/mcp.md).
 
 ## Frameworks
 

@@ -1,5 +1,5 @@
-import { registerEffects } from '../chunks/registry-gFJRpPES.js';
-import '../chunks/base-BnRyfuyM.js';
+import { registerEffects } from '../chunks/registry-BKzyg1JV.js';
+import '../chunks/base-BTev8qxg.js';
 
 /** Split text into words, keeping the whitespace after each (7.8). */
 function splitWords(text) {

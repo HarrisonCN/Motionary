@@ -1,0 +1,265 @@
+#!/usr/bin/env node
+// motionary-mcp (10.4) — a read-only Model Context Protocol server for the
+// Motionary component catalog. Zero dependencies: speaks MCP (JSON-RPC 2.0,
+// newline-delimited) over stdio and answers from the AI manifest that ships
+// in the package (dist/manifest.json, the same data as components.json /
+// llms.txt). It never writes files, runs code or touches the network.
+//
+//   npx -p motionary motionary-mcp            (or: npx motionary-mcp once installed)
+//   MOTIONARY_MANIFEST=/path/manifest.json motionary-mcp   (use another manifest)
+//
+// Tools: list_components, search_components, get_component, get_example,
+// scaffold_snippet (prerequisites included automatically).
+// Resources: motionary://manifest, motionary://llms.txt, motionary://component/<tag>.
+import { readFileSync, existsSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
+import { createInterface } from 'node:readline';
+
+const HERE = dirname(fileURLToPath(import.meta.url));
+const SERVER = { name: 'motionary-mcp', version: '0.1.0' };
+const PROTOCOLS = ['2025-06-18', '2025-03-26', '2024-11-05'];
+
+export function loadManifest(path = process.env.MOTIONARY_MANIFEST || join(HERE, '../dist/manifest.json')) {
+  if (!existsSync(path)) throw new Error(`motionary-mcp: manifest not found at ${path} (set MOTIONARY_MANIFEST, or run from an installed motionary package)`);
+  return JSON.parse(readFileSync(path, 'utf8'));
+}
+
+// ---------------------------------------------------------------- catalog logic (pure)
+const norm = (s) => String(s || '').toLowerCase();
+const tagOf = (s) => {
+  const t = norm(s).trim().replace(/^<|\/?>$/g, '');
+  return t.startsWith('usa-') ? t : `usa-${t}`;
+};
+const brief = (c) => ({ tag: c.tag, title: c.title, category: c.category, import: c.import.path, requires: c.requires.map((r) => (r === 'core' ? 'motionary/runtime' : r.includes('/') || r.startsWith('@') ? r : `motionary/runtime/${r}`)), since: c.since, description: c.description.slice(0, 200) });
+
+export function findComponent(m, tag) {
+  const t = tagOf(tag);
+  return m.components.find((c) => c.tag === t) || m.components.find((c) => c.id === norm(tag));
+}
+
+/** Rank components for a free-text query (tag, title, keywords, description, category). */
+export function searchComponents(m, query, limit = 10) {
+  const words = norm(query).split(/[^a-z0-9\u00c0-\uffff-]+/).filter(Boolean);
+  if (!words.length) return [];
+  const scored = m.components.map((c) => {
+    const tag = c.tag, title = norm(c.title), kw = (c.keywords || []).map(norm).join(' '), desc = norm(c.description), cat = norm(c.category);
+    let s = 0;
+    for (const w of words) {
+      if (tag === `usa-${w}` || tag === w) s += 20;
+      else if (tag.includes(w)) s += 8;
+      if (title.includes(w)) s += 6;
+      if (kw.includes(w)) s += 5;
+      if (cat === w) s += 4;
+      if (desc.includes(w)) s += 2;
+      if ((c.attributes || []).includes(w)) s += 1;
+    }
+    return { c, s };
+  });
+  return scored.filter((x) => x.s > 0).sort((a, b) => b.s - a.s || a.c.tag.localeCompare(b.c.tag)).slice(0, limit).map((x) => ({ ...brief(x.c), score: x.s }));
+}
+
+const FRAMEWORKS = ['html', 'esm', 'react', 'vue', 'svelte'];
+const runtimeCdn = (m, ids) => {
+  const base = m.cdn.runtime.replace(/runtime\.iife\.js$/, '');
+  return [`<script src="${m.cdn.runtime}"></script>`, ...ids.filter((i) => i !== 'core').map((i) => `<script src="${base}runtime/${i}.iife.js"></script>`)];
+};
+const runtimeImports = (ids) => {
+  const mods = ids.filter((i) => i !== 'core');
+  const camel = (id) => id.replace(/-(\w)/g, (_, c) => c.toUpperCase());
+  return { lines: ["import { use } from 'motionary/runtime';", ...mods.map((i) => `import { ${camel(i)} } from 'motionary/runtime/${i}';`)], register: `use(${mods.map(camel).join(', ')});` };
+};
+
+/** A ready-to-paste snippet for one or more components, prerequisites first. */
+export function scaffold(m, tags, framework = 'esm') {
+  if (!FRAMEWORKS.includes(framework)) throw new Error(`framework must be one of ${FRAMEWORKS.join(', ')}`);
+  const comps = tags.map((t) => {
+    const c = findComponent(m, t);
+    if (!c) throw new Error(`unknown component ${t} — use search_components first`);
+    return c;
+  });
+  const req = [...new Set(comps.flatMap((c) => c.requires))].filter((r) => !r.startsWith('@'));
+  const peers = [...new Set(comps.flatMap((c) => c.requires))].filter((r) => r.startsWith('@'));
+  const needsWidgets = comps.some((c) => /widgets\.umd/.test(c.cdn));
+  const markup = comps.map((c) => c.example).join('\n');
+  const byPath = new Map();
+  for (const c of comps) byPath.set(c.import.path, [...(byPath.get(c.import.path) || []), c.import.define]);
+  const defImports = [...byPath].map(([p, d]) => `import { ${[...new Set(d)].join(', ')} } from '${p}';`);
+  const defCalls = [...new Set(comps.map((c) => c.import.register))];
+  const install = ['npm i motionary', ...peers.map((p) => `npm i ${p}`)].join(' && ');
+  const rt = req.length ? runtimeImports(req) : null;
+  const prereqNote = req.length ? `Prerequisites: ${req.map((r) => (r === 'core' ? 'motionary/runtime' : `motionary/runtime/${r}`)).join(', ')} — register them before the components mount.` : 'No prerequisites.';
+  let code;
+  if (framework === 'html') {
+    code = [
+      '<!-- ' + prereqNote + ' -->',
+      ...(req.length ? runtimeCdn(m, req) : []),
+      `<script src="${m.cdn.components}"></script>`,
+      ...(needsWidgets ? [`<script src="${m.cdn.widgets}"></script>`] : []),
+      '',
+      markup,
+    ].join('\n');
+  } else {
+    const setup = [...(rt ? [...rt.lines] : []), ...defImports, '', ...(rt ? [rt.register + ' // prerequisites first'] : []), ...defCalls].join('\n');
+    if (framework === 'esm') code = `// ${install}\n${setup}\n\n/* HTML:\n${markup}\n*/`;
+    else if (framework === 'react') code = `// ${install}\n${setup}\n\nexport function Demo() {\n  return (\n    <>\n${markup.split('\n').map((l) => '      ' + l.replace(/\bclass=/g, 'className=')).join('\n')}\n    </>\n  );\n}`;
+    else if (framework === 'vue') code = `<!-- ${install} -->\n<script setup>\n${setup}\n</script>\n\n<template>\n${markup.split('\n').map((l) => '  ' + l).join('\n')}\n</template>\n<!-- vite.config: vue({ template: { compilerOptions: { isCustomElement: (t) => t.startsWith('usa-') } } }) -->`;
+    else code = `<!-- ${install} -->\n<script>\n${setup}\n</script>\n\n${markup}`;
+  }
+  return { framework, components: comps.map((c) => c.tag), install, prerequisites: req.map((r) => (r === 'core' ? 'motionary/runtime' : `motionary/runtime/${r}`)).concat(peers), code };
+}
+
+// ---------------------------------------------------------------- MCP surface
+const RO = { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false };
+export const TOOLS = [
+  { name: 'list_components', title: 'List Motionary components', description: 'List the <usa-*> Web Components in the Motionary catalog (tag, title, category, import path, prerequisites). Filter by category, by required runtime module, or by version introduced.', inputSchema: { type: 'object', properties: { category: { type: 'string', description: 'e.g. text, scroll, ui, transitions, widgets' }, requires: { type: 'string', description: "only components needing this prerequisite, e.g. 'scroll' or 'motionary/runtime/text'; 'none' for components without prerequisites" }, since: { type: 'string', description: "introduced in this version or later, e.g. '10.0'" }, limit: { type: 'number', default: 500 } }, additionalProperties: false }, annotations: { title: 'List components', ...RO } },
+  { name: 'search_components', title: 'Search Motionary components', description: 'Free-text search over tags, titles, keywords and descriptions; best matches first. Use it to pick a component for a UI need ("animated counter", "scroll pinned scene", "confetti").', inputSchema: { type: 'object', properties: { query: { type: 'string' }, limit: { type: 'number', default: 10 } }, required: ['query'], additionalProperties: false }, annotations: { title: 'Search components', ...RO } },
+  { name: 'get_component', title: 'Get a component', description: 'Everything about one component: attributes, events, slots, methods, import / define, CDN, prerequisites (install, import + register order, CDN script order), minimal example, variants.', inputSchema: { type: 'object', properties: { tag: { type: 'string', description: "'usa-tilt', 'tilt' or '<usa-tilt>'" } }, required: ['tag'], additionalProperties: false }, annotations: { title: 'Get component', ...RO } },
+  { name: 'get_example', title: 'Get an example', description: "A working example for one component in the requested style ('html' = CDN, 'esm' = npm + bundler, or a variant id).", inputSchema: { type: 'object', properties: { tag: { type: 'string' }, variant: { type: 'string', description: "'html' (default), 'esm', or a variant id from get_component" } }, required: ['tag'], additionalProperties: false }, annotations: { title: 'Get example', ...RO } },
+  { name: 'scaffold_snippet', title: 'Scaffold a snippet', description: 'A ready-to-paste snippet using one or more components, with every prerequisite installed, imported and registered in the right order before the components mount.', inputSchema: { type: 'object', properties: { tags: { type: 'array', items: { type: 'string' }, minItems: 1 }, framework: { type: 'string', enum: FRAMEWORKS, default: 'esm' } }, required: ['tags'], additionalProperties: false }, annotations: { title: 'Scaffold snippet', ...RO } },
+];
+
+const text = (obj) => ({ content: [{ type: 'text', text: typeof obj === 'string' ? obj : JSON.stringify(obj, null, 2) }], ...(typeof obj === 'object' ? { structuredContent: Array.isArray(obj) ? { items: obj } : obj } : {}) });
+
+export function callTool(m, name, a = {}) {
+  switch (name) {
+    case 'list_components': {
+      let list = m.components;
+      if (a.category) list = list.filter((c) => norm(c.category) === norm(a.category));
+      if (a.requires) {
+        const r = norm(a.requires).replace(/^motionary\/runtime\/?/, '') || 'core';
+        list = r === 'none' ? list.filter((c) => !c.requires.length) : list.filter((c) => c.requires.includes(r));
+      }
+      if (a.since) {
+        const v = (s) => String(s || '0').split('.').map(Number);
+        const [M, n] = v(a.since);
+        list = list.filter((c) => c.since && (v(c.since)[0] > M || (v(c.since)[0] === M && (v(c.since)[1] || 0) >= (n || 0))));
+      }
+      const items = list.slice(0, a.limit || 500).map(brief);
+      return text({ version: m.version, count: items.length, total: m.components.length, components: items });
+    }
+    case 'search_components':
+      if (!a.query) throw new Error('query is required');
+      return text({ query: a.query, results: searchComponents(m, a.query, a.limit || 10) });
+    case 'get_component': {
+      const c = findComponent(m, a.tag);
+      if (!c) throw new Error(`unknown component ${a.tag} — use search_components`);
+      return text(c);
+    }
+    case 'get_example': {
+      const c = findComponent(m, a.tag);
+      if (!c) throw new Error(`unknown component ${a.tag} — use search_components`);
+      const v = a.variant || 'html';
+      if (v === 'esm') return text(c.prerequisites ? `// ${c.prerequisites.install}\n${c.prerequisites.importAndRegister}\n\n/* HTML:\n${c.example}\n*/` : c.esm);
+      if (v === 'html') return text(scaffold(m, [c.tag], 'html').code);
+      const variant = (c.variants || []).find((x) => x.id === v);
+      if (!variant) throw new Error(`no variant ${v} for ${c.tag}; variants: ${(c.variants || []).map((x) => x.id).join(', ') || 'none'}`);
+      return text(variant.example);
+    }
+    case 'scaffold_snippet':
+      if (!Array.isArray(a.tags) || !a.tags.length) throw new Error('tags must be a non-empty array');
+      return text(scaffold(m, a.tags, a.framework || 'esm'));
+    default:
+      throw Object.assign(new Error(`unknown tool ${name}`), { code: -32602 });
+  }
+}
+
+export function resources(m) {
+  return [
+    { uri: 'motionary://manifest', name: 'manifest', title: 'Motionary component manifest (components.json)', mimeType: 'application/json' },
+    { uri: 'motionary://llms.txt', name: 'llms.txt', title: 'Motionary llms.txt', mimeType: 'text/plain' },
+  ];
+}
+
+export function readResource(m, uri) {
+  if (uri === 'motionary://manifest') return { uri, mimeType: 'application/json', text: JSON.stringify(m) };
+  if (uri === 'motionary://llms.txt') {
+    const p = join(HERE, '../dist/llms.txt');
+    const t = existsSync(p) ? readFileSync(p, 'utf8') : m.components.map((c) => `- <${c.tag}> (${c.import.path}): ${c.description}`).join('\n');
+    return { uri, mimeType: 'text/plain', text: t };
+  }
+  const mm = /^motionary:\/\/component\/(.+)$/.exec(uri);
+  if (mm) {
+    const c = findComponent(m, decodeURIComponent(mm[1]));
+    if (c) return { uri, mimeType: 'application/json', text: JSON.stringify(c, null, 2) };
+  }
+  throw Object.assign(new Error(`unknown resource ${uri}`), { code: -32002 });
+}
+
+/** Handle one JSON-RPC message; returns the response object (or null for notifications). */
+export function handle(m, msg, state = {}) {
+  const { id, method, params = {} } = msg || {};
+  const isNote = id === undefined || id === null;
+  const ok = (result) => (isNote ? null : { jsonrpc: '2.0', id, result });
+  const err = (code, message) => (isNote ? null : { jsonrpc: '2.0', id, error: { code, message } });
+  if (!msg || msg.jsonrpc !== '2.0' || typeof method !== 'string') return msg && 'result' in msg ? null : err(-32600, 'Invalid Request');
+  try {
+    switch (method) {
+      case 'initialize': {
+        const v = PROTOCOLS.includes(params.protocolVersion) ? params.protocolVersion : PROTOCOLS[0];
+        state.initialized = true;
+        return ok({ protocolVersion: v, capabilities: { tools: { listChanged: false }, resources: { listChanged: false, subscribe: false }, prompts: { listChanged: false }, logging: {} }, serverInfo: { ...SERVER, title: 'Motionary component catalog' }, instructions: `Read-only catalog of Motionary ${m.version} (${m.components.length} <usa-*> Web Components + motionary/runtime modules). Search or list to pick a component, get_component for its API, scaffold_snippet for code that already registers every prerequisite in the right order.` });
+      }
+      case 'ping':
+        return ok({});
+      case 'tools/list':
+        return ok({ tools: TOOLS });
+      case 'tools/call':
+        try {
+          return ok(callTool(m, params.name, params.arguments || {}));
+        } catch (e) {
+          if (e.code === -32602) return err(-32602, e.message);
+          return ok({ content: [{ type: 'text', text: String(e.message || e) }], isError: true });
+        }
+      case 'resources/list':
+        return ok({ resources: resources(m) });
+      case 'resources/templates/list':
+        return ok({ resourceTemplates: [{ uriTemplate: 'motionary://component/{tag}', name: 'component', title: 'One Motionary component (JSON)', mimeType: 'application/json' }] });
+      case 'resources/read':
+        return ok({ contents: [readResource(m, params.uri)] });
+      case 'prompts/list':
+        return ok({ prompts: [] });
+      case 'logging/setLevel':
+        return ok({});
+      default:
+        if (method.startsWith('notifications/')) return null;
+        return err(-32601, `Method not found: ${method}`);
+    }
+  } catch (e) {
+    return err(e.code || -32603, String(e.message || e));
+  }
+}
+
+export function serve(input = process.stdin, output = process.stdout, manifest) {
+  const m = manifest || loadManifest();
+  const state = {};
+  const send = (o) => o && output.write(JSON.stringify(o) + '\n');
+  const rl = createInterface({ input, crlfDelay: Infinity });
+  rl.on('line', (line) => {
+    if (!line.trim()) return;
+    let msg;
+    try {
+      msg = JSON.parse(line);
+    } catch {
+      return send({ jsonrpc: '2.0', id: null, error: { code: -32700, message: 'Parse error' } });
+    }
+    if (Array.isArray(msg)) msg.forEach((x) => send(handle(m, x, state)));
+    else send(handle(m, msg, state));
+  });
+  return rl;
+}
+
+const invoked = process.argv[1] && fileURLToPath(import.meta.url) === (await import('node:fs')).realpathSync(process.argv[1]);
+if (invoked) {
+  if (process.argv.includes('--help') || process.argv.includes('-h')) {
+    console.log('motionary-mcp — read-only MCP server (stdio) for the Motionary component catalog.\nConfigure your MCP client with: { "command": "npx", "args": ["-y", "-p", "motionary", "motionary-mcp"] }\nTools: ' + TOOLS.map((t) => t.name).join(', '));
+  } else if (process.argv.includes('--version')) console.log(SERVER.version);
+  else {
+    try {
+      serve();
+    } catch (e) {
+      console.error(String(e.message || e));
+      process.exit(1);
+    }
+  }
+}

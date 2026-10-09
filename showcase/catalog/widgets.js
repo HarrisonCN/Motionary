@@ -1248,6 +1248,28 @@ export const components = [
     '<usa-text-splitter split="chars" effect="rise" stagger="30">Motion, made simple.</usa-text-splitter>',
     '<usa-text-splitter class="demo-splitter" split="chars" effect="rise" stagger="35" loop>Motion, made simple ✨</usa-text-splitter>',
     [{ key: 'effect', values: ['rise', 'fade', 'blur', 'flip', 'wave'] }, { key: 'split', values: ['chars', 'words', 'lines'] }], { since: '10.3', requires: ['text'] }),
+  // ---- 10.4 ------------------------------------------------------------
+  W('usa-scroll-ring', 'reveal', 'Scroll progress ring', '滚动进度环',
+    '10.4: a circular scroll-progress indicator for the page or any scroll container (for=".article"), optional percentage label and back-to-top button. Scroll-driven 3.0: native animation-timeline: scroll() first (no script per frame), a small JS loop where scroll timelines are missing.',
+    '10.4：页面或任意滚动容器（for=".article"）的环形滚动进度指示器，可选百分比标签与回到顶部按钮。滚动驱动 3.0：优先使用原生 animation-timeline: scroll()（每帧无脚本），不支持时回退为轻量 JS 循环。',
+    ['scroll progress', 'reading progress', 'back to top', 'animation-timeline', 'scroll-driven'],
+    '<usa-scroll-ring label back-to-top></usa-scroll-ring>',
+    '<div class="demo-ring"><div class="demo-ring-scroll"><p>Scroll-driven animations run on the compositor where the browser supports them.</p><p>Where it does not, a small passive loop takes over — same look, same API.</p><p>Keyboard, scrollbar and screen-reader scrolling stay native.</p><p>Keep going…</p><p>Almost there.</p><p>Done — 100 %.</p></div><usa-scroll-ring for=".demo-ring-scroll" label back-to-top preview size="64"></usa-scroll-ring></div>',
+    [{ key: 'engine', values: ['auto', 'native', 'js'] }], { since: '10.4' }),
+  W('usa-parallax-layers', 'reveal', 'Parallax layers', '视差分层容器',
+    '10.4: a parallax container — children with data-depth move at different speeds while it crosses the viewport (native view() scroll timeline first, JS fallback), optional pointer tilt; static under reduced motion.',
+    '10.4：视差分层容器 —— 带 data-depth 的子元素在容器穿过视口时以不同速度移动（优先原生 view() 滚动时间线，JS 回退），可选指针倾斜；减少动态效果时保持静止。',
+    ['parallax', 'depth', 'layers', 'view timeline', 'scroll-driven'],
+    '<usa-parallax-layers range="120">\n  <img data-depth="0.6" src="mountains.webp" alt="">\n  <h2 data-depth="-0.3">Above the clouds</h2>\n</usa-parallax-layers>',
+    '<usa-parallax-layers class="demo-plx" range="26" pointer preview><div class="demo-plx-sky" data-depth="0.9"></div><div class="demo-plx-sun" data-depth="0.7"></div><div class="demo-plx-far" data-depth="0.45"></div><div class="demo-plx-near" data-depth="0.15"></div><h4 data-depth="-0.5">Above the clouds</h4></usa-parallax-layers>',
+    [], { since: '10.4' }),
+  W('usa-smooth-scroll', 'interaction', 'Smooth scroll', '平滑滚动',
+    '10.4: smooth, inertial wheel scrolling for the page or a container (wrapper), anchor links glide (with offset for sticky headers); keyboard / scrollbar / touch stay native and it switches off under reduced motion. Requires motionary/runtime/smooth — npm i motionary, then use(smooth) before it mounts.',
+    '10.4：页面或容器（wrapper）的平滑惯性滚轮滚动，锚点链接平滑滑动（可为吸顶头部设置 offset）；键盘 / 滚动条 / 触摸保持原生，减少动态效果时自动关闭。需要 motionary/runtime/smooth —— npm i motionary，并在挂载前 use(smooth)。',
+    ['smooth scroll', 'inertia', 'lerp', 'anchors', 'runtime'],
+    '<usa-smooth-scroll lerp="0.1" offset="64"></usa-smooth-scroll>',
+    '<usa-smooth-scroll class="demo-smooth" wrapper preview lerp="0.08"><div class="demo-smooth-bar"></div><h4>Smooth scroll</h4><p>Scroll-driven animations run on the compositor where the browser supports them.</p><p>Where it does not, a small passive loop takes over — same look, same API.</p><p>Keyboard, scrollbar and screen-reader scrolling stay native.</p><p>Keep going…</p><p>Almost there.</p><p>Done — 100 %.</p></usa-smooth-scroll>',
+    [], { since: '10.4', requires: ['smooth'], id: 'smooth-scroller' }), // id: 'smooth-scroll' is the 5.x smoothScroll() helper card
 ];
 
 /** item id → live-demo wiring. */

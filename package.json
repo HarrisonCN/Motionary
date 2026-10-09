@@ -1,6 +1,6 @@
 {
   "name": "motionary",
-  "version": "10.3.0",
+  "version": "10.4.0",
   "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 94 animated Web Components — 214 scroll-reveal presets, card/click/button morphs, physics, page transitions, generative & sound-reactive backgrounds, cursor/gesture effects, themes, micro-interactions, <usa-player>, WebGL. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -1278,6 +1278,46 @@
         "default": "./dist/runtime/format-sprite.cjs"
       }
     },
+    "./runtime/smooth": {
+      "import": {
+        "types": "./dist/runtime/smooth.d.ts",
+        "default": "./dist/runtime/smooth.js"
+      },
+      "require": {
+        "types": "./dist/runtime/smooth.d.cts",
+        "default": "./dist/runtime/smooth.cjs"
+      }
+    },
+    "./runtime/format-gif": {
+      "import": {
+        "types": "./dist/runtime/format-gif.d.ts",
+        "default": "./dist/runtime/format-gif.js"
+      },
+      "require": {
+        "types": "./dist/runtime/format-gif.d.cts",
+        "default": "./dist/runtime/format-gif.cjs"
+      }
+    },
+    "./runtime/format-apng": {
+      "import": {
+        "types": "./dist/runtime/format-apng.d.ts",
+        "default": "./dist/runtime/format-apng.js"
+      },
+      "require": {
+        "types": "./dist/runtime/format-apng.d.cts",
+        "default": "./dist/runtime/format-apng.cjs"
+      }
+    },
+    "./runtime/format-webp": {
+      "import": {
+        "types": "./dist/runtime/format-webp.d.ts",
+        "default": "./dist/runtime/format-webp.js"
+      },
+      "require": {
+        "types": "./dist/runtime/format-webp.d.cts",
+        "default": "./dist/runtime/format-webp.cjs"
+      }
+    },
     "./manifest.json": "./dist/manifest.json",
     "./manifest.schema.json": "./dist/manifest.schema.json",
     "./components.css": "./dist/components.css",
@@ -1384,6 +1424,7 @@
   "homepage": "https://harrisoncn.github.io/Motionary/showcase/",
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.5",
+    "@modelcontextprotocol/sdk": "^1.32.1",
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@rollup/plugin-terser": "^1.0.0",
     "@rollup/plugin-typescript": "^12.3.0",
@@ -1418,6 +1459,7 @@
     "usa-codemod-8": "./bin/usa-codemod-8.mjs",
     "usa-codemod-9": "./bin/usa-codemod-9.mjs",
     "usa-codemod-10": "./bin/usa-codemod-10.mjs",
-    "create-motionary-plugin": "./bin/create-motionary-plugin.mjs"
+    "create-motionary-plugin": "./bin/create-motionary-plugin.mjs",
+    "motionary-mcp": "./bin/motionary-mcp.mjs"
   }
 }

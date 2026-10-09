@@ -2196,6 +2196,168 @@ interface UsaTextSplitterElement extends UsaElement {
 declare function defineTextSplitter(tag?: string): CustomElementConstructor | undefined;
 
 /**
+ * `<usa-scroll-ring label back-to-top></usa-scroll-ring>` (10.4, scroll-driven
+ * 3.0) — a circular scroll-progress indicator for the page or for any scroll
+ * container (`for=".article"`, looked up next to the ring first). Native
+ * `animation-timeline: scroll()` first (the ring then animates off the main
+ * thread, no script per frame); a small passive JS loop where scroll
+ * timelines are missing (`engine="auto | native | js"`, the one in use is
+ * reflected in `data-engine`). `label` shows the percentage, `back-to-top`
+ * makes it a button that scrolls the target back to the start, `size`,
+ * `thickness`, `horizontal`, `preview` (demo: glides the tracked container
+ * back and forth while visible). `progress` (0–1); `usa:progress` on change
+ * (whole percents), `usa:top`.
+ */
+interface UsaScrollRingElement extends UsaElement {
+    readonly progress: number;
+    readonly engine: 'native' | 'js';
+}
+declare function defineScrollRing(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-parallax-layers range="120"><img data-depth="0.2" …><h2 data-depth="-0.4">…</h2></usa-parallax-layers>`
+ * (10.4, scroll-driven 3.0) — a parallax container: each child with
+ * `data-depth` (−1…1; 0 = still, positive = slower / behind, negative =
+ * faster / in front) moves by `depth × range` px while the container crosses
+ * the viewport. Native `view()` scroll timeline first (no script per frame),
+ * JS fallback otherwise (`engine="auto | native | js"`, reflected in
+ * `data-engine`); `horizontal` moves layers sideways, `pointer` adds a
+ * pointer-driven tilt of the layers (`strength` px), `preview` loops the
+ * motion when the page cannot scroll (thumbnails). Static under reduced
+ * motion. `layers()`, `progress`; `usa:progress`.
+ */
+interface UsaParallaxLayersElement extends UsaElement {
+    layers(): HTMLElement[];
+    readonly progress: number;
+}
+declare function defineParallaxLayers(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `motionary/runtime/smooth` (10.4) — smooth (inertial) scrolling on the
+ * runtime ticker, written for Motionary (own implementation and API).
+ *
+ * - Wheel / trackpad input is eased towards its target (`lerp` or a fixed
+ *   `duration` + `ease`) on the shared ticker; keyboard, scrollbar dragging,
+ *   find-in-page and screen-reader scrolling stay native (the target follows
+ *   them), touch stays native by default (`touch: true` to smooth it).
+ * - Works on the window or inside any scrollable `wrapper`; vertical or
+ *   horizontal; nested scrollables and `[data-smooth-ignore]` are left alone.
+ * - Anchor links (`#id`) glide to their target (with `offset`), focus moves
+ *   for keyboard users, and the URL hash is kept.
+ * - **Off under `prefers-reduced-motion: reduce`** (and while the media query
+ *   matches; it re-enables when it stops matching) — wheel scrolling is then
+ *   fully native. `force: true` overrides this only for non-motion use cases.
+ * - Real `scroll` events still fire, so `motionary/runtime/scroll` scenes,
+ *   IntersectionObservers and CSS scroll timelines all keep working.
+ * SSR-safe: nothing touches `window` until `smoothScroll()` is called.
+ */
+
+interface SmoothOptions {
+    /** Scroll container (default: the window / document scroller). */
+    wrapper?: HTMLElement | Window;
+    /** Easing factor per 60 fps frame, 0–1 (default 0.1). Ignored when `duration` is set. */
+    lerp?: number;
+    /** Fixed glide time in ms (with `ease`) instead of `lerp`. */
+    duration?: number;
+    ease?: string | Ease;
+    orientation?: 'vertical' | 'horizontal';
+    /** Wheel delta multiplier (default 1). */
+    wheelMultiplier?: number;
+    /** Smooth touch scrolling too (default false: native momentum is better on touch devices). */
+    touch?: boolean;
+    touchMultiplier?: number;
+    /** Glide to `#anchor` links (default true). */
+    anchors?: boolean | {
+        offset?: number;
+    };
+    /** Ignore prefers-reduced-motion (default false — leave it off unless the motion is essential). */
+    force?: boolean;
+    onScroll?: (s: SmoothScroll) => void;
+}
+interface ScrollToOptions2 {
+    offset?: number;
+    /** Jump without animating. */
+    immediate?: boolean;
+    duration?: number;
+    ease?: string | Ease;
+    onComplete?: () => void;
+}
+declare class SmoothScroll {
+    /** Current (animated) scroll position, px. */
+    current: number;
+    /** Where the scroll is heading, px. */
+    target: number;
+    /** px per frame of the last update. */
+    velocity: number;
+    /** True while gliding. */
+    isScrolling: boolean;
+    private o;
+    private el;
+    private win;
+    private stopped;
+    private reduced;
+    private off;
+    private tickOff;
+    private written;
+    private glide;
+    private listeners;
+    private touchY;
+    constructor(o?: SmoothOptions);
+    private on;
+    private get horizontal();
+    private axis;
+    /** The scroll position the browser reports. */
+    get native(): number;
+    /** Maximum scroll, px. */
+    get limit(): number;
+    /** 0–1 */
+    get progress(): number;
+    /** Smoothing is running (not stopped, not reduced motion). */
+    get active(): boolean;
+    private wheel;
+    private push;
+    private start;
+    private tick;
+    private easeOf;
+    private write;
+    private halt;
+    private anchor;
+    /** Scroll to a position (px), an element, or a selector. Animated unless reduced motion / `immediate`. */
+    scrollTo(to: number | string | Element, o?: ScrollToOptions2): void;
+    /** Pause smoothing (native scrolling everywhere) — e.g. while a modal is open. */
+    stop(): void;
+    /** Resume after `stop()`. */
+    resume(): void;
+    /** Listen to every smoothed frame; returns an unsubscribe function. */
+    onScroll(fn: (s: SmoothScroll) => void): () => void;
+    /** Remove all listeners and restore native scrolling. */
+    destroy(): void;
+}
+
+/**
+ * `<usa-smooth-scroll lerp="0.1"></usa-smooth-scroll>` (10.4) — smooth,
+ * inertial wheel scrolling with **`motionary/runtime/smooth`** (requires
+ * `use(smooth)` first). Without `wrapper` it smooths the whole page while it
+ * is in the document; with `wrapper` the element itself becomes the smooth
+ * scroll container (give it a height). `lerp` (0–1), `duration` + `ease`
+ * (fixed glide instead of lerp), `wheel-multiplier`, `horizontal`, `touch`,
+ * `anchors` (default on; `anchors="false"` to keep native jumps), `offset`
+ * (px, for sticky headers), `preview` (demo: glides through a wrapper while
+ * visible). Off under reduced motion (native scrolling). `glideTo(target)`,
+ * `stop()`, `resume()`, `instance`; `usa:ready`, `usa:scroll` (progress).
+ */
+interface UsaSmoothScrollElement extends UsaElement {
+    glideTo(target: number | string | Element, opts?: {
+        offset?: number;
+        immediate?: boolean;
+    }): void;
+    stop(): void;
+    resume(): void;
+    readonly instance: SmoothScroll | null;
+}
+declare function defineSmoothScroll(tag?: string): CustomElementConstructor | undefined;
+
+/**
  * motionary/components/widgets — the 6.x animated UI widgets, in their own
  * entry so `motionary/components` and `components/lite` keep their size
  * budgets. Every widget is reduced-motion safe and keyboard accessible.
@@ -2320,8 +2482,11 @@ declare global {
         'usa-motion-inspector': UsaMotionInspectorElement;
         'usa-route-transition': UsaRouteTransitionElement;
         'usa-text-splitter': UsaTextSplitterElement;
+        'usa-scroll-ring': UsaScrollRingElement;
+        'usa-parallax-layers': UsaParallaxLayersElement;
+        'usa-smooth-scroll': UsaSmoothScrollElement;
     }
 }
 
-export { CAROUSEL_EFFECTS, EQ_PRESETS, FESTIVAL_THEMES, LOTTIE_ICONS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PRESENCE_STATES, PROGRESS_VARIANTS, RETRO_VARIANTS, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SPARK_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, WORKER_SCENES, backgroundCss, badgeProgress, cartTotal, defineAddToCart, defineBadgeWall, defineBarChart, defineBgGenerator, defineCarousel, defineCartDrawer, defineChapterNav, defineChatComposer, defineClockControl, defineCodeExport, defineColorPicker, defineCommandPalette, defineCompare, defineCountdown, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineFestivalBanner, defineField, defineFileDrop, defineGauge, defineGenArt, defineGestureSticker, defineGlobe, defineGyroCard, defineHeroVideo, defineHudPanel, defineHydrate, defineInstallButton, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLiquidNav, defineLocationCard, defineLottie, defineLottieIcon, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMessageList, defineMilestones, defineModal, defineMotion, defineMotionInspector, defineMotionPrefs, defineMotionSpec, defineMusicPlayer, defineNativePreview, defineNavMorph, defineNotificationBell, defineOdometer, defineOrganicCard, defineOtp, definePagination, definePanorama, definePauseAll, definePerfMonitor, definePluginCard, definePluginStore, definePresence, definePrizeWheel, defineProductGallery, defineProgressRing, definePropPanel, definePullCord, defineRadar, defineReactions, defineRedEnvelope, defineRetroButton, defineRouteTransition, defineScene, defineScrollScene, defineSegmented, defineSheet, defineShortcut, defineSkeletonReveal, defineSketchChart, defineSparkline, defineSpatialCard, defineStarRating, defineStepper, defineStickyWall, defineStories, defineSuggestionChips, defineSwipeDeck, defineSwitch, defineTabBar, defineTerminal, defineTextSplitter, defineThemeSurface, defineThemeSwitcher, defineTip, defineToastStack, defineUploadProgress, defineVideoCard, defineVoiceButton, defineVolumeKnob, defineWeatherCard, defineWidgets, defineWorkerCanvas, defineXpBar, describeComponent, exportComponent, formatBytes, formatDistance, fuzzyMatch, haversine, hexToHsv, hsvToHex, initials, keyLabels, levelFor, matchesKeys, monthGrid, pageWindow, parseChips, parseISODate, parseLRC, parseMarkers, parseProps, parseReactions, parseScrub, parseTargets, passwordStrength, project, rankRows, sanitizeCode, sparkPoints, splitTime, stackToast, waveBars, wheelAngle, wrapIndex };
-export type { BellNotice, CartItem, ChatMessage, ExportFormat, ExportedNode, GlobeMarker, LeaderRow, PaletteCommand, PerfStats, PresenceState, PropSpec, RadarTarget, StackToastOptions, StickerState, UsaAddToCartElement, UsaBadgeWallElement, UsaBarChartElement, UsaBgGeneratorElement, UsaCarouselElement, UsaCartDrawerElement, UsaChapterNavElement, UsaChatComposerElement, UsaClockControlElement, UsaCodeExportElement, UsaColorPickerElement, UsaCommandPaletteElement, UsaCompareElement, UsaCountdownElement, UsaCubeGalleryElement, UsaDatePickerElement, UsaDisclosureElement, UsaDockElement, UsaEqualizerElement, UsaFestivalBannerElement, UsaFieldElement, UsaFileDropElement, UsaGaugeElement, UsaGenArtElement, UsaGestureStickerElement, UsaGlobeElement, UsaGyroCardElement, UsaHeroVideoElement, UsaHudPanelElement, UsaHydrateElement, UsaInstallButtonElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaKpiElement, UsaLeaderboardElement, UsaLiquidNavElement, UsaLocationCardElement, UsaLottieElement, UsaLottieIconElement, UsaLyricsElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMessageListElement, UsaMilestonesElement, UsaModalElement, UsaMotionElement, UsaMotionInspectorElement, UsaMotionPrefsElement, UsaMotionSpecElement, UsaMusicPlayerElement, UsaNativePreviewElement, UsaNavMorphElement, UsaNotificationBellElement, UsaOdometerElement, UsaOrganicCardElement, UsaOtpElement, UsaPaginationElement, UsaPanoramaElement, UsaPauseAllElement, UsaPerfMonitorElement, UsaPluginCardElement, UsaPluginStoreElement, UsaPresenceElement, UsaPrizeWheelElement, UsaProductGalleryElement, UsaProgressRingElement, UsaPropPanelElement, UsaPullCordElement, UsaRadarElement, UsaReactionsElement, UsaRedEnvelopeElement, UsaRetroButtonElement, UsaRouteTransitionElement, UsaSceneElement, UsaScrollSceneElement, UsaSegmentedElement, UsaSheetElement, UsaShortcutElement, UsaSkeletonRevealElement, UsaSketchChartElement, UsaSparklineElement, UsaSpatialCardElement, UsaStarRatingElement, UsaStepperElement, UsaStickyWallElement, UsaStoriesElement, UsaSuggestionChipsElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTerminalElement, UsaTextSplitterElement, UsaThemeSurfaceElement, UsaThemeSwitcherElement, UsaTipElement, UsaToastStackElement, UsaUploadProgressElement, UsaVideoCardElement, UsaVoiceButtonElement, UsaVolumeKnobElement, UsaWeatherCardElement, UsaWorkerCanvasElement, UsaXpBarElement, WallBadge };
+export { CAROUSEL_EFFECTS, EQ_PRESETS, FESTIVAL_THEMES, LOTTIE_ICONS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PRESENCE_STATES, PROGRESS_VARIANTS, RETRO_VARIANTS, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SPARK_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, WORKER_SCENES, backgroundCss, badgeProgress, cartTotal, defineAddToCart, defineBadgeWall, defineBarChart, defineBgGenerator, defineCarousel, defineCartDrawer, defineChapterNav, defineChatComposer, defineClockControl, defineCodeExport, defineColorPicker, defineCommandPalette, defineCompare, defineCountdown, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineFestivalBanner, defineField, defineFileDrop, defineGauge, defineGenArt, defineGestureSticker, defineGlobe, defineGyroCard, defineHeroVideo, defineHudPanel, defineHydrate, defineInstallButton, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLiquidNav, defineLocationCard, defineLottie, defineLottieIcon, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMessageList, defineMilestones, defineModal, defineMotion, defineMotionInspector, defineMotionPrefs, defineMotionSpec, defineMusicPlayer, defineNativePreview, defineNavMorph, defineNotificationBell, defineOdometer, defineOrganicCard, defineOtp, definePagination, definePanorama, defineParallaxLayers, definePauseAll, definePerfMonitor, definePluginCard, definePluginStore, definePresence, definePrizeWheel, defineProductGallery, defineProgressRing, definePropPanel, definePullCord, defineRadar, defineReactions, defineRedEnvelope, defineRetroButton, defineRouteTransition, defineScene, defineScrollRing, defineScrollScene, defineSegmented, defineSheet, defineShortcut, defineSkeletonReveal, defineSketchChart, defineSmoothScroll, defineSparkline, defineSpatialCard, defineStarRating, defineStepper, defineStickyWall, defineStories, defineSuggestionChips, defineSwipeDeck, defineSwitch, defineTabBar, defineTerminal, defineTextSplitter, defineThemeSurface, defineThemeSwitcher, defineTip, defineToastStack, defineUploadProgress, defineVideoCard, defineVoiceButton, defineVolumeKnob, defineWeatherCard, defineWidgets, defineWorkerCanvas, defineXpBar, describeComponent, exportComponent, formatBytes, formatDistance, fuzzyMatch, haversine, hexToHsv, hsvToHex, initials, keyLabels, levelFor, matchesKeys, monthGrid, pageWindow, parseChips, parseISODate, parseLRC, parseMarkers, parseProps, parseReactions, parseScrub, parseTargets, passwordStrength, project, rankRows, sanitizeCode, sparkPoints, splitTime, stackToast, waveBars, wheelAngle, wrapIndex };
+export type { BellNotice, CartItem, ChatMessage, ExportFormat, ExportedNode, GlobeMarker, LeaderRow, PaletteCommand, PerfStats, PresenceState, PropSpec, RadarTarget, StackToastOptions, StickerState, UsaAddToCartElement, UsaBadgeWallElement, UsaBarChartElement, UsaBgGeneratorElement, UsaCarouselElement, UsaCartDrawerElement, UsaChapterNavElement, UsaChatComposerElement, UsaClockControlElement, UsaCodeExportElement, UsaColorPickerElement, UsaCommandPaletteElement, UsaCompareElement, UsaCountdownElement, UsaCubeGalleryElement, UsaDatePickerElement, UsaDisclosureElement, UsaDockElement, UsaEqualizerElement, UsaFestivalBannerElement, UsaFieldElement, UsaFileDropElement, UsaGaugeElement, UsaGenArtElement, UsaGestureStickerElement, UsaGlobeElement, UsaGyroCardElement, UsaHeroVideoElement, UsaHudPanelElement, UsaHydrateElement, UsaInstallButtonElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaKpiElement, UsaLeaderboardElement, UsaLiquidNavElement, UsaLocationCardElement, UsaLottieElement, UsaLottieIconElement, UsaLyricsElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMessageListElement, UsaMilestonesElement, UsaModalElement, UsaMotionElement, UsaMotionInspectorElement, UsaMotionPrefsElement, UsaMotionSpecElement, UsaMusicPlayerElement, UsaNativePreviewElement, UsaNavMorphElement, UsaNotificationBellElement, UsaOdometerElement, UsaOrganicCardElement, UsaOtpElement, UsaPaginationElement, UsaPanoramaElement, UsaParallaxLayersElement, UsaPauseAllElement, UsaPerfMonitorElement, UsaPluginCardElement, UsaPluginStoreElement, UsaPresenceElement, UsaPrizeWheelElement, UsaProductGalleryElement, UsaProgressRingElement, UsaPropPanelElement, UsaPullCordElement, UsaRadarElement, UsaReactionsElement, UsaRedEnvelopeElement, UsaRetroButtonElement, UsaRouteTransitionElement, UsaSceneElement, UsaScrollRingElement, UsaScrollSceneElement, UsaSegmentedElement, UsaSheetElement, UsaShortcutElement, UsaSkeletonRevealElement, UsaSketchChartElement, UsaSmoothScrollElement, UsaSparklineElement, UsaSpatialCardElement, UsaStarRatingElement, UsaStepperElement, UsaStickyWallElement, UsaStoriesElement, UsaSuggestionChipsElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTerminalElement, UsaTextSplitterElement, UsaThemeSurfaceElement, UsaThemeSwitcherElement, UsaTipElement, UsaToastStackElement, UsaUploadProgressElement, UsaVideoCardElement, UsaVoiceButtonElement, UsaVolumeKnobElement, UsaWeatherCardElement, UsaWorkerCanvasElement, UsaXpBarElement, WallBadge };

@@ -3,7 +3,7 @@
   "format": "motionary/components",
   "schemaVersion": 1,
   "package": "motionary",
-  "version": "10.3.0",
+  "version": "10.4.0",
   "homepage": "https://harrisoncn.github.io/Motionary/",
   "llms": "https://harrisoncn.github.io/Motionary/llms.txt",
   "cdn": {
@@ -492,6 +492,271 @@
         ]
       ],
       "example": "import { use } from 'motionary/runtime';\nimport { formatSprite, parseSpriteSheet, spritePlayer } from 'motionary/runtime/format-sprite';\nuse(formatSprite);\nconst sheet = parseSpriteSheet(await (await fetch('/slime.json')).json());\nconst img = new Image(); img.src = '/slime.png'; await img.decode();\nspritePlayer(document.querySelector('canvas'), sheet, img, { tag: 'bounce' });"
+    },
+    {
+      "kind": "runtime",
+      "id": "smooth",
+      "label": "motionary/runtime/smooth",
+      "title": "Smooth scrolling",
+      "summary": "Smooth, inertial wheel scrolling (lerp or fixed-duration glide) for the window or any scroll container, anchor links that glide, off under prefers-reduced-motion; real scroll events keep scroll scenes and observers working.",
+      "install": "npm i motionary",
+      "importPath": "motionary/runtime/smooth",
+      "import": "import { use } from 'motionary/runtime';\nimport { smooth } from 'motionary/runtime/smooth';",
+      "register": "use(smooth);",
+      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/smooth.iife.js\"></script>",
+      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/smooth.js",
+      "order": "Register the core first, then the module: use(smooth) also registers the core. CDN: load runtime.iife.js, then runtime/smooth.iife.js (it registers itself).",
+      "docs": "docs/runtime/smooth.md",
+      "budget": 3584,
+      "exports": [
+        "smooth",
+        "smoothScroll",
+        "SmoothScroll",
+        "allSmooth"
+      ],
+      "compat": [
+        [
+          "wheel / trackpad smoothing (lerp, or duration + ease)",
+          "yes",
+          "frame-rate independent"
+        ],
+        [
+          "window and scroll containers (wrapper), vertical / horizontal",
+          "yes",
+          ""
+        ],
+        [
+          "keyboard, scrollbar, find-in-page, assistive tech",
+          "yes",
+          "stay native; the smoothed target follows them"
+        ],
+        [
+          "touch",
+          "partial",
+          "native momentum by default; touch: true smooths it"
+        ],
+        [
+          "anchor links (#id) with offset, focus moved, URL hash kept",
+          "yes",
+          ""
+        ],
+        [
+          "nested scrollables, [data-smooth-ignore], ctrl+wheel zoom",
+          "yes",
+          "left native"
+        ],
+        [
+          "prefers-reduced-motion",
+          "yes",
+          "disabled while it matches (re-enabled live)"
+        ],
+        [
+          "scroll scenes / IntersectionObserver / CSS scroll timelines",
+          "yes",
+          "real scroll events still fire"
+        ],
+        [
+          "SSR / workers",
+          "partial",
+          "import is safe; smoothScroll() needs a browser"
+        ]
+      ],
+      "example": "import { use } from 'motionary/runtime';\nimport { smooth, smoothScroll } from 'motionary/runtime/smooth';\nuse(smooth);\nconst s = smoothScroll({ lerp: 0.1, anchors: { offset: -64 } });\ns.scrollTo('#pricing');"
+    },
+    {
+      "kind": "runtime",
+      "id": "format-gif",
+      "label": "motionary/runtime/format-gif",
+      "title": "GIF decoder",
+      "summary": "Decode animated GIFs (own LZW decoder, no DOM) into composited RGBA frames and play / scrub / reverse them on a canvas as a runtime timeline.",
+      "install": "npm i motionary",
+      "importPath": "motionary/runtime/format-gif",
+      "import": "import { use } from 'motionary/runtime';\nimport { formatGif } from 'motionary/runtime/format-gif';",
+      "register": "use(formatGif);",
+      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-gif.iife.js\"></script>",
+      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-gif.js",
+      "order": "Register the core first, then the module: use(formatGif) also registers the core. CDN: load runtime.iife.js, then runtime/format-gif.iife.js (it registers itself).",
+      "docs": "docs/runtime/format-gif.md",
+      "budget": 3072,
+      "exports": [
+        "formatGif",
+        "decodeGif",
+        "loadGif",
+        "lzwDecode",
+        "animatedImagePlayer"
+      ],
+      "compat": [
+        [
+          "GIF87a / GIF89a",
+          "yes",
+          ""
+        ],
+        [
+          "global + local palettes, transparency",
+          "yes",
+          ""
+        ],
+        [
+          "interlaced frames",
+          "yes",
+          "4-pass row order"
+        ],
+        [
+          "disposal 0–3 (none / keep / background / previous)",
+          "yes",
+          "background clears to transparent, like browsers"
+        ],
+        [
+          "frame delays, NETSCAPE2.0 / ANIMEXTS loop count",
+          "yes",
+          "delays ≤ 10 ms play at 100 ms, like browsers"
+        ],
+        [
+          "truncated files",
+          "partial",
+          "decodes what is there"
+        ],
+        [
+          "plain-text extension",
+          "no",
+          "ignored (browsers ignore it too)"
+        ],
+        [
+          "SSR / workers",
+          "yes",
+          "decoding is pure; the player needs a (Offscreen)Canvas"
+        ]
+      ],
+      "example": "import { use } from 'motionary/runtime';\nimport { formatGif, loadGif, animatedImagePlayer } from 'motionary/runtime/format-gif';\nuse(formatGif);\nconst gif = await loadGif('/loader.gif');\nconst player = animatedImagePlayer(document.querySelector('canvas'), gif);\nplayer.pause(); player.progress = 0.5; // scrub"
+    },
+    {
+      "kind": "runtime",
+      "id": "format-apng",
+      "label": "motionary/runtime/format-apng",
+      "title": "APNG loader",
+      "summary": "Split animated PNGs into standalone frame PNGs (decoded by the browser), composite them (dispose / blend) and play them on a canvas as a runtime timeline.",
+      "install": "npm i motionary",
+      "importPath": "motionary/runtime/format-apng",
+      "import": "import { use } from 'motionary/runtime';\nimport { formatApng } from 'motionary/runtime/format-apng';",
+      "register": "use(formatApng);",
+      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-apng.iife.js\"></script>",
+      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-apng.js",
+      "order": "Register the core first, then the module: use(formatApng) also registers the core. CDN: load runtime.iife.js, then runtime/format-apng.iife.js (it registers itself).",
+      "docs": "docs/runtime/format-apng.md",
+      "budget": 3072,
+      "exports": [
+        "formatApng",
+        "parseApng",
+        "apngFramePngs",
+        "decodeApng",
+        "loadApng",
+        "animatedImagePlayer"
+      ],
+      "compat": [
+        [
+          "acTL / fcTL / fdAT, frame offsets and delays",
+          "yes",
+          ""
+        ],
+        [
+          "dispose_op none / background / previous",
+          "yes",
+          "first-frame previous → background (spec)"
+        ],
+        [
+          "blend_op source / over",
+          "yes",
+          ""
+        ],
+        [
+          "hidden default image (IDAT not part of the animation)",
+          "yes",
+          ""
+        ],
+        [
+          "palette / tRNS / gAMA / iCCP / sRGB / sBIT copied into frames",
+          "yes",
+          ""
+        ],
+        [
+          "plain (non-animated) PNG",
+          "yes",
+          "one frame"
+        ],
+        [
+          "decoding",
+          "yes",
+          "the browser's PNG decoder (createImageBitmap), or your own { decode }"
+        ],
+        [
+          "SSR / workers",
+          "partial",
+          "parsing is pure; decoding needs createImageBitmap (workers OK) or { decode }"
+        ]
+      ],
+      "example": "import { use } from 'motionary/runtime';\nimport { formatApng, loadApng, animatedImagePlayer } from 'motionary/runtime/format-apng';\nuse(formatApng);\nconst anim = await loadApng('/sticker.png');\nanimatedImagePlayer(document.querySelector('canvas'), anim);"
+    },
+    {
+      "kind": "runtime",
+      "id": "format-webp",
+      "label": "motionary/runtime/format-webp",
+      "title": "Animated WebP loader",
+      "summary": "Split animated WebP files (ANIM / ANMF) into standalone frames (decoded by the browser), composite them (blend / dispose) and play them on a canvas as a runtime timeline.",
+      "install": "npm i motionary",
+      "importPath": "motionary/runtime/format-webp",
+      "import": "import { use } from 'motionary/runtime';\nimport { formatWebp } from 'motionary/runtime/format-webp';",
+      "register": "use(formatWebp);",
+      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-webp.iife.js\"></script>",
+      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-webp.js",
+      "order": "Register the core first, then the module: use(formatWebp) also registers the core. CDN: load runtime.iife.js, then runtime/format-webp.iife.js (it registers itself).",
+      "docs": "docs/runtime/format-webp.md",
+      "budget": 3072,
+      "exports": [
+        "formatWebp",
+        "parseWebp",
+        "webpFrameFiles",
+        "decodeWebp",
+        "loadWebp",
+        "animatedImagePlayer"
+      ],
+      "compat": [
+        [
+          "VP8X + ANIM + ANMF frames, offsets, durations, loop count",
+          "yes",
+          ""
+        ],
+        [
+          "lossy (VP8) with alpha (ALPH) and lossless (VP8L) frames",
+          "yes",
+          "lossy + alpha frames get their own VP8X header"
+        ],
+        [
+          "blending on / off, dispose none / background",
+          "yes",
+          "composited on transparent, like browsers"
+        ],
+        [
+          "still WebP (simple and extended)",
+          "yes",
+          "one frame"
+        ],
+        [
+          "ICC / EXIF / XMP metadata",
+          "no",
+          "ignored"
+        ],
+        [
+          "browsers without WebP decoding",
+          "no",
+          "fall back to <img>"
+        ],
+        [
+          "SSR / workers",
+          "partial",
+          "parsing is pure; decoding needs createImageBitmap (workers OK) or { decode }"
+        ]
+      ],
+      "example": "import { use } from 'motionary/runtime';\nimport { formatWebp, loadWebp, animatedImagePlayer } from 'motionary/runtime/format-webp';\nuse(formatWebp);\nconst anim = await loadWebp('/hero.webp');\nconst p = animatedImagePlayer(document.querySelector('canvas'), anim, { speed: 0.5 });"
     }
   ],
   "components": [
@@ -5105,6 +5370,47 @@
       "source": "src/components/widgets/panorama.ts"
     },
     {
+      "id": "parallax-layers",
+      "tag": "usa-parallax-layers",
+      "title": "Parallax layers",
+      "description": "10.4: a parallax container — children with data-depth move at different speeds while it crosses the viewport (native view() scroll timeline first, JS fallback), optional pointer tilt; static under reduced motion.",
+      "category": "reveal",
+      "since": "10.4",
+      "keywords": [
+        "parallax",
+        "depth",
+        "layers",
+        "view timeline",
+        "scroll-driven"
+      ],
+      "import": {
+        "path": "motionary/components/widgets",
+        "define": "defineParallaxLayers",
+        "register": "defineParallaxLayers();"
+      },
+      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "attributes": [
+        "range",
+        "engine",
+        "horizontal",
+        "pointer",
+        "strength",
+        "preview"
+      ],
+      "events": [
+        "usa:progress"
+      ],
+      "slots": [],
+      "methods": [
+        "layers"
+      ],
+      "example": "<usa-parallax-layers range=\"120\">\n  <img data-depth=\"0.6\" src=\"mountains.webp\" alt=\"\">\n  <h2 data-depth=\"-0.3\">Above the clouds</h2>\n</usa-parallax-layers>",
+      "esm": "import { defineParallaxLayers } from 'motionary/components/widgets';\n\ndefineParallaxLayers(); // registers <usa-parallax-layers>\n\n/* then use it in your HTML:\n<usa-parallax-layers range=\"120\">\n  <img data-depth=\"0.6\" src=\"mountains.webp\" alt=\"\">\n  <h2 data-depth=\"-0.3\">Above the clouds</h2>\n</usa-parallax-layers>\n*/",
+      "requires": [],
+      "prerequisites": null,
+      "source": "src/components/widgets/parallax-layers.ts"
+    },
+    {
       "id": "particles",
       "tag": "usa-particles",
       "title": "Particles",
@@ -6139,6 +6445,48 @@
       "source": "src/components/reveal/scroll-progress.ts"
     },
     {
+      "id": "scroll-ring",
+      "tag": "usa-scroll-ring",
+      "title": "Scroll progress ring",
+      "description": "10.4: a circular scroll-progress indicator for the page or any scroll container (for=\".article\"), optional percentage label and back-to-top button. Scroll-driven 3.0: native animation-timeline: scroll() first (no script per frame), a small JS loop where scroll timelines are missing.",
+      "category": "reveal",
+      "since": "10.4",
+      "keywords": [
+        "scroll progress",
+        "reading progress",
+        "back to top",
+        "animation-timeline",
+        "scroll-driven"
+      ],
+      "import": {
+        "path": "motionary/components/widgets",
+        "define": "defineScrollRing",
+        "register": "defineScrollRing();"
+      },
+      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "attributes": [
+        "for",
+        "engine",
+        "label",
+        "back-to-top",
+        "size",
+        "thickness",
+        "horizontal",
+        "preview"
+      ],
+      "events": [
+        "usa:progress",
+        "usa:top"
+      ],
+      "slots": [],
+      "methods": [],
+      "example": "<usa-scroll-ring label back-to-top></usa-scroll-ring>",
+      "esm": "import { defineScrollRing } from 'motionary/components/widgets';\n\ndefineScrollRing(); // registers <usa-scroll-ring>\n\n/* then use it in your HTML:\n<usa-scroll-ring label back-to-top></usa-scroll-ring>\n*/",
+      "requires": [],
+      "prerequisites": null,
+      "source": "src/components/widgets/scroll-ring.ts"
+    },
+    {
       "id": "scroll-scene",
       "tag": "usa-scroll-scene",
       "title": "Scroll scene",
@@ -6555,6 +6903,70 @@
       "requires": [],
       "prerequisites": null,
       "source": "src/components/ui/slider.ts"
+    },
+    {
+      "id": "smooth-scroller",
+      "tag": "usa-smooth-scroll",
+      "title": "Smooth scroll",
+      "description": "10.4: smooth, inertial wheel scrolling for the page or a container (wrapper), anchor links glide (with offset for sticky headers); keyboard / scrollbar / touch stay native and it switches off under reduced motion. Requires motionary/runtime/smooth — npm i motionary, then use(smooth) before it mounts.",
+      "category": "interaction",
+      "since": "10.4",
+      "keywords": [
+        "smooth scroll",
+        "inertia",
+        "lerp",
+        "anchors",
+        "runtime"
+      ],
+      "import": {
+        "path": "motionary/components/widgets",
+        "define": "defineSmoothScroll",
+        "register": "defineSmoothScroll();"
+      },
+      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "attributes": [
+        "lerp",
+        "duration",
+        "ease",
+        "wheel-multiplier",
+        "horizontal",
+        "touch",
+        "anchors",
+        "offset",
+        "wrapper",
+        "preview"
+      ],
+      "events": [
+        "usa:scroll",
+        "usa:ready",
+        "usa:runtime-missing"
+      ],
+      "slots": [],
+      "methods": [
+        "glideTo",
+        "stop",
+        "resume"
+      ],
+      "example": "<usa-smooth-scroll lerp=\"0.1\" offset=\"64\"></usa-smooth-scroll>",
+      "esm": "import { use } from 'motionary/runtime';\nimport { smooth } from 'motionary/runtime/smooth';\n\nuse(smooth);\nimport { defineSmoothScroll } from 'motionary/components/widgets';\n\ndefineSmoothScroll(); // registers <usa-smooth-scroll>\n\n/* then use it in your HTML:\n<usa-smooth-scroll lerp=\"0.1\" offset=\"64\"></usa-smooth-scroll>\n*/",
+      "requires": [
+        "smooth"
+      ],
+      "prerequisites": {
+        "badge": "Requires: motionary/runtime/smooth",
+        "modules": [
+          "motionary/runtime/smooth"
+        ],
+        "install": "npm i motionary",
+        "importAndRegister": "import { use } from 'motionary/runtime';\nimport { smooth } from 'motionary/runtime/smooth';\nimport { defineSmoothScroll } from 'motionary/components/widgets';\n\nuse(smooth);\ndefineSmoothScroll(); // registers <usa-smooth-scroll> — after the prerequisites",
+        "order": "Register the core first, then the module: use(smooth) also registers the core. CDN: load runtime.iife.js, then runtime/smooth.iife.js (it registers itself).",
+        "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/smooth.iife.js\"></script>\n<!-- then the component bundles -->\n<script src=\"https://unpkg.com/motionary@10/dist/components.umd.js\"></script>\n<script src=\"https://unpkg.com/motionary@10/dist/widgets.umd.js\"></script>",
+        "example": "<usa-smooth-scroll lerp=\"0.1\" offset=\"64\"></usa-smooth-scroll>",
+        "docs": [
+          "https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/smooth.md"
+        ]
+      },
+      "source": "src/components/widgets/smooth-scroll.ts"
     },
     {
       "id": "sparkline",

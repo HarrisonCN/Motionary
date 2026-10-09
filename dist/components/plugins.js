@@ -1,4 +1,4 @@
-import { G as GPU_FX } from '../chunks/gpu-CDcXiNA8.js';
+import { G as GPU_FX } from '../chunks/gpu-BWfgYWMY.js';
 import { TEXT3_FX } from './fx-text.js';
 import { LIGHT_FX } from './fx-light.js';
 import { DEPTH3_FX } from './fx-3d.js';
@@ -29,11 +29,11 @@ import { GENART_FX } from './fx-genart.js';
 import { VIDEO_FX } from './fx-video.js';
 import { SAFE_FX } from './fx-safe.js';
 import { PERF3_FX } from './fx-perf.js';
-import '../chunks/registry-gFJRpPES.js';
-import '../chunks/base-BnRyfuyM.js';
+import '../chunks/registry-BKzyg1JV.js';
+import '../chunks/base-BTev8qxg.js';
 import '../chunks/generative-2LhxG5BJ.js';
 import '../chunks/shared-CkKHWrtJ.js';
-import '../chunks/audio-D95jwlOh.js';
+import '../chunks/audio-CWt1xdZB.js';
 
 const P = (name, effects) => ({ name, effects });
 /** The `gpu` pack. */

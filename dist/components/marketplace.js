@@ -1,7 +1,7 @@
-import { l as loadEffectPack } from '../chunks/manifest-D58HXVY-.js';
-export { E as EFFECT_PACK_FORMAT, p as packManifest, v as validateManifest } from '../chunks/manifest-D58HXVY-.js';
-import '../chunks/registry-gFJRpPES.js';
-import '../chunks/base-BnRyfuyM.js';
+import { l as loadEffectPack } from '../chunks/manifest-BHx5yPN6.js';
+export { E as EFFECT_PACK_FORMAT, p as packManifest, v as validateManifest } from '../chunks/manifest-BHx5yPN6.js';
+import '../chunks/registry-BKzyg1JV.js';
+import '../chunks/base-BTev8qxg.js';
 
 /**
  * 10.1: plugin signature (integrity) checks and version compatibility.

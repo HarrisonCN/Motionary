@@ -59,3 +59,7 @@ Declarative motion without components (10.2):
   applyMotionAttributes(createMotion());
 </script>
 ```
+
+## MCP server
+
+If your client speaks MCP, add `motionary-mcp` (read-only, ships with the package): `{ "command": "npx", "args": ["-y", "-p", "motionary", "motionary-mcp"] }`. Use `search_components` → `get_component` → `scaffold_snippet` (prerequisites are already in the snippet, in order). See docs/mcp.md.
