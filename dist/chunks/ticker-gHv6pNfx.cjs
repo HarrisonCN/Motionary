@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('./registry-eJgpFAzI.cjs');
+var registry = require('./registry-CSVil2qJ.cjs');
 
 /**
  * The shared ticker: one requestAnimationFrame loop per page (or worker) for
@@ -69,4 +69,4 @@ function getTicker() {
 }
 
 exports.getTicker = getTicker;
-//# sourceMappingURL=ticker-D4o6enH0.cjs.map
+//# sourceMappingURL=ticker-gHv6pNfx.cjs.map

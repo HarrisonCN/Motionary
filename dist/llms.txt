@@ -1,6 +1,6 @@
-# Motionary 10.2.0
+# Motionary 10.3.0
 
-> Motionary is a zero-dependency motion library: scroll animations, 200+ presets and 193 animated Web Components (<usa-*>) that work in plain HTML and every framework, plus motionary/runtime — its own tween/timeline engine and format loaders.
+> Motionary is a zero-dependency motion library: scroll animations, 200+ presets and 195 animated Web Components (<usa-*>) that work in plain HTML and every framework, plus motionary/runtime — its own tween/timeline engine and format loaders.
 
 Install: `npm i motionary` · CDN: https://unpkg.com/motionary@10/dist/components.umd.js (+ https://unpkg.com/motionary@10/dist/widgets.umd.js for 6.x+ widgets) · Manifest: https://harrisoncn.github.io/Motionary/components.json · Full text: https://harrisoncn.github.io/Motionary/llms-full.txt
 
@@ -13,6 +13,8 @@ Rules for using a component: (1) import its define function from `import.path` a
 - [motionary/runtime/format-motion](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/format-motion.md): Play Motion / Framer-style { initial, animate, transition } JSON (arrays as keyframes, times, repeatType, springs) with the runtime.
 - [motionary/runtime/scroll](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/scroll.md): Scroll-linked scenes: start / end rules, scrub (direct or smoothed), pin, markers, enter / leave callbacks and per-edge actions for a runtime tween or timeline.
 - [motionary/runtime/format-svg](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/format-svg.md): Replay SVG SMIL animations (animate, set, animateTransform, animateMotion) on the runtime timeline, morph between any two paths, and measure paths without the DOM.
+- [motionary/runtime/text](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/text.md): Split text into characters (grapheme-aware), words and lines for animation while keeping it accessible (aria-label with the full text, pieces hidden from assistive tech).
+- [motionary/runtime/format-sprite](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/format-sprite.md): Play TexturePacker / Aseprite sprite sheets and numbered image sequences on a canvas or an element background, as runtime timelines (scrubbable).
 
 ## Components
 
@@ -154,6 +156,7 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<usa-retro-button>` (motionary/components/widgets): 8.2: buttons in four eras with matching press motion — 8-bit pixel (stepped press), CRT phosphor (flicker), Y2K chrome pill (bounce) and Windows 95 bevel (sink)
 - `<usa-reveal>` (motionary/components/reveal): Fade, slide, zoom, blur or flip content in as it enters the viewport. 12 effects, replay on re-entry with repeat.
 - `<usa-ripple>` (motionary/components/interaction): Ink ripple from the pointer — or from the centre for Space/Enter — on any button, list item or card.
+- `<usa-route-transition>` (motionary/components/widgets): 10.3: View Transitions 2.0 — link clicks swap the container’s content with the target page (fetched) or an inline <template data-route>, animated with the View 
 - `<usa-scene>` (motionary/components/widgets): 9.1: a scroll-scrubbed cinematic shot — while the scene crosses the screen its image follows a camera move (dolly, pan, tilt, zoom, orbit) and captions fade in 
 - `<usa-scramble>` (motionary/components/text): Decodes text out of random glyphs, left to right. Trigger on view, hover/focus or manually.
 - `<usa-scroll-highlight>` (motionary/components/text): Words light up one by one as you read down the page, or a highlighter marker sweeps behind the text.
@@ -191,6 +194,7 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<usa-tabs>` (motionary/components/ui): Accessible tabs whose indicator slides between tabs with a spring; panels slide in from the direction you moved. Line or pill indicator.
 - `<usa-terminal>` (motionary/components/widgets): 8.2: a retro terminal window that types its commands after the prompt with a blinking block cursor and prints the output line by line when it scrolls into view 
 - `<usa-text-rotate>` (motionary/components/text): Cycles words in place — the box keeps the width of the longest word, so nothing around it reflows.
+- `<usa-text-splitter>` (motionary/components/widgets; requires motionary/runtime/text): 10.3: splits its text into characters, words or lines and animates them in with a stagger (rise, fade, blur, flip, wave) when it scrolls into view — accessible,
 - `<usa-theme-surface>` (motionary/components/widgets): 8.6: a themeable card that follows the nearest theme — light, dark, neon (pulsing glow edge), glass (frosted backdrop with a sheen) or soft neumorphic relief — 
 - `<usa-theme-switcher>` (motionary/components/widgets): 8.6: a segmented switcher for the 8.6 theme system — light, dark, neon, glass and soft (neumorphism); a pill slides under the active option and the page change 
 - `<usa-tilt>` (motionary/components/interaction): Tilts toward the pointer in 3D with an optional glare; exposes --usa-tilt-x/y for parallax layers inside.

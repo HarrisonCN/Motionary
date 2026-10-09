@@ -1,4 +1,4 @@
-import { f as registry } from './registry-BIEjKngP.js';
+import { f as registry } from './registry-46AAzyeC.js';
 
 /**
  * The shared ticker: one requestAnimationFrame loop per page (or worker) for
@@ -67,4 +67,4 @@ function getTicker() {
 }
 
 export { getTicker as g };
-//# sourceMappingURL=ticker-CM_56oVy.js.map
+//# sourceMappingURL=ticker-COOYAyQy.js.map

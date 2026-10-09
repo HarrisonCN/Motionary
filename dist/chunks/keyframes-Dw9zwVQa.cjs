@@ -1,6 +1,6 @@
 'use strict';
 
-var tween = require('./tween-CBuWYpI-.cjs');
+var tween = require('./tween-CFN0WcOb.cjs');
 
 /**
  * Normalised keyframes shared by the format loaders: a list of frames with
@@ -184,4 +184,4 @@ function framesToTimeline(target, frames, o = {}) {
 exports.camelProp = camelProp;
 exports.distributeOffsets = distributeOffsets;
 exports.framesToTimeline = framesToTimeline;
-//# sourceMappingURL=keyframes-ZheOkpt0.cjs.map
+//# sourceMappingURL=keyframes-Dw9zwVQa.cjs.map
