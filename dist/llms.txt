@@ -1,8 +1,8 @@
-# Motionary 10.9.0
+# Motionary 11.0.0
 
-> Motionary is a zero-dependency motion library: scroll animations, 200+ presets and 210 animated Web Components (<usa-*>) that work in plain HTML and every framework, plus motionary/runtime — its own tween/timeline engine and format loaders.
+> Motionary is a zero-dependency motion library: scroll animations, 200+ presets and 209 animated Web Components (<usa-*>) that work in plain HTML and every framework, plus motionary/runtime — its own tween/timeline engine and format loaders.
 
-Install: `npm i motionary` · CDN: https://unpkg.com/motionary@10/dist/components.umd.js (+ https://unpkg.com/motionary@10/dist/widgets.umd.js for 6.x+ widgets) · Manifest: https://harrisoncn.github.io/Motionary/components.json · Full text: https://harrisoncn.github.io/Motionary/llms-full.txt
+Install: `npm i motionary` · CDN: https://unpkg.com/motionary@11/dist/components.umd.js (+ https://unpkg.com/motionary@11/dist/widgets.umd.js for 6.x+ widgets) · Manifest: https://harrisoncn.github.io/Motionary/components.json · Full text: https://harrisoncn.github.io/Motionary/llms-full.txt
 
 Rules for using a component: (1) import its define function from `import.path` and call it once (or load the CDN bundle); (2) if `requires` is non-empty, install / import / register the prerequisites first (see the component's Prerequisites); (3) then use the tag in HTML.
 
@@ -227,7 +227,6 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<usa-text-splitter>` (motionary/components/widgets; requires motionary/runtime/text): 10.3: splits its text into characters, words or lines and animates them in with a stagger (rise, fade, blur, flip, wave) when it scrolls into view — accessible,
 - `<usa-theme-surface>` (motionary/components/widgets): 8.6: a themeable card that follows the nearest theme — light, dark, neon (pulsing glow edge), glass (frosted backdrop with a sheen) or soft neumorphic relief — 
 - `<usa-theme-switcher>` (motionary/components/widgets): 8.6: a segmented switcher for the 8.6 theme system — light, dark, neon, glass and soft (neumorphism); a pill slides under the active option and the page change 
-- `<usa-three-scene>` (motionary/components/widgets): `<usa-three-scene>` — alias of `<usa-gl-scene>`. @deprecated 10.9, removed in 11.0: use `<usa-gl-scene>` / `defineGlScene()`.
 - `<usa-tilt>` (motionary/components/interaction): Tilts toward the pointer in 3D with an optional glare; exposes --usa-tilt-x/y for parallax layers inside.
 - `<usa-timeline>` (motionary/components/timeline): Every data-tl child becomes a step in document order. data-at ('-=200', '<', 'label+=100') overlaps or aligns steps; scrub ties progress to scroll; trigger view
 - `<usa-tip>` (motionary/components/widgets): 6.6: springs out of its trigger with an arrow, flips to stay inside the viewport and shifts along the edge; hover + keyboard focus (Esc closes) or click popover

@@ -137,7 +137,8 @@ declare class Timeline extends Playable {
  * - keyframes: bezier easing per dimension, hold keyframes, v4 (`e`) and v5+
  *   (`s` only) files;
  * - **dotLottie** (`.lottie`): zip (stored + deflate via the native
- *   `DecompressionStream`), `manifest.json` v1 / v2, several animations,
+ *   `DecompressionStream`; 11.0: entry-count / size / ratio limits enforced
+ *   while inflating — `ZipLimits`, `ZIP_LIMITS`), `manifest.json` v1 / v2, several animations,
  *   embedded images.
  *
  * 10.8: **text layers** (system / web fonts by family + style, justification,
@@ -252,9 +253,29 @@ interface ZipEntry {
     name: string;
     method: Num;
     data: Uint8Array;
+    size: Num;
 }
+/**
+ * 11.0: limits for reading untrusted zip / `.lottie` archives (zip-bomb protection). Enforced while inflating —
+ * declared sizes are never trusted; inflating stops as soon as a limit is crossed.
+ */
+interface ZipLimits {
+    /** Max entries in the archive (default 1000). */
+    maxEntries?: Num;
+    /** Max uncompressed bytes of one entry (default 32 MB). */
+    maxEntryBytes?: Num;
+    /** Max uncompressed bytes of the whole archive (default 64 MB). */
+    maxTotalBytes?: Num;
+    /** Max uncompressed / compressed ratio of an entry once it is past 1 MB (default 100). */
+    maxRatio?: Num;
+}
+declare const ZIP_LIMITS: Readonly<Required<ZipLimits>>;
 /** Read a zip archive's entries (central directory; stored + deflate). Pure; inflating uses `DecompressionStream`. */
-declare function unzipEntries(input: ArrayBuffer | Uint8Array): ZipEntry[];
+declare function unzipEntries(input: ArrayBuffer | Uint8Array, limits?: ZipLimits): ZipEntry[];
+/** Inflate one entry, counting the real output against `limits`; `used` is shared across one archive. */
+declare function inflateEntry(e: ZipEntry, limits?: ZipLimits, used?: {
+    total: number;
+}): Promise<Uint8Array>;
 interface DotLottie {
     manifest: any;
     animations: Record<string, LottieAnimation>;
@@ -263,8 +284,10 @@ interface DotLottie {
     themes: Record<string, unknown>;
     stateMachines: Record<string, unknown>;
 }
-/** Unpack a `.lottie` (dotLottie v1 or v2). */
-declare function parseDotLottie(input: ArrayBuffer | Uint8Array): Promise<DotLottie>;
+/** Unpack a `.lottie` (dotLottie v1 or v2). 11.0: `limits` (zip-bomb protection, safe defaults in `ZIP_LIMITS`). */
+declare function parseDotLottie(input: ArrayBuffer | Uint8Array, o?: {
+    limits?: ZipLimits;
+}): Promise<DotLottie>;
 /** Decode the images an animation references (embedded data URIs, dotLottie images, or URLs relative to `base`). */
 declare function loadLottieImages(anim: LottieAnimation, o?: {
     files?: Record<string, Uint8Array>;
@@ -274,6 +297,7 @@ declare function loadLottieImages(anim: LottieAnimation, o?: {
 declare function loadLottie(src: string | ArrayBuffer | Uint8Array, o?: {
     animation?: string;
     base?: string;
+    limits?: ZipLimits;
 }): Promise<{
     animation: LottieAnimation;
     images: Record<string, CanvasImageSource>;
@@ -318,5 +342,5 @@ interface VectorApi {
 /** The module object for `use(vector)`. */
 declare const vector: RuntimeModule<VectorApi>;
 
-export { evalExpression, inspectLottie, loadLottie, loadLottieImages, lottiePlayer, parseDotLottie, propValue, renderLottieFrame, transformAt, trimContours, unzipEntries, vector };
-export type { DotLottie, LottieAnimation, LottieLayer, LottiePlayer, LottiePlayerOptions, LottieProp, LottieReport, RenderOptions, VectorApi, ZipEntry };
+export { ZIP_LIMITS, evalExpression, inflateEntry, inspectLottie, loadLottie, loadLottieImages, lottiePlayer, parseDotLottie, propValue, renderLottieFrame, transformAt, trimContours, unzipEntries, vector };
+export type { DotLottie, LottieAnimation, LottieLayer, LottiePlayer, LottiePlayerOptions, LottieProp, LottieReport, RenderOptions, VectorApi, ZipEntry, ZipLimits };

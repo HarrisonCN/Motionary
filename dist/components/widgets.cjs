@@ -93,25 +93,25 @@ var widgets_heroVideo = require('../widgets/hero-video.cjs');
 var widgets_motionPrefs = require('../widgets/motion-prefs.cjs');
 var widgets_pauseAll = require('../widgets/pause-all.cjs');
 var widgets_perfMonitor = require('../widgets/perf-monitor.cjs');
-var widgets_workerCanvas = require('../chunks/worker-canvas-Ckc3R2Ye.cjs');
+var widgets_workerCanvas = require('../chunks/worker-canvas-DW3VgtxO.cjs');
 var widgets_motionSpec = require('../widgets/motion-spec.cjs');
 var widgets_nativePreview = require('../widgets/native-preview.cjs');
 var widgets_pluginCard = require('../widgets/plugin-card.cjs');
 var widgets_installButton = require('../widgets/install-button.cjs');
-var widgets_scrollScene = require('../chunks/scroll-scene-C-6sdMtR.cjs');
+var widgets_scrollScene = require('../chunks/scroll-scene-CeIosbEs.cjs');
 var widgets_motionInspector = require('../widgets/motion-inspector.cjs');
 var widgets_routeTransition = require('../widgets/route-transition.cjs');
 var widgets_textSplitter = require('../widgets/text-splitter.cjs');
 var widgets_scrollRing = require('../widgets/scroll-ring.cjs');
 var widgets_parallaxLayers = require('../widgets/parallax-layers.cjs');
 var widgets_smoothScroll = require('../widgets/smooth-scroll.cjs');
-var widgets_glScene = require('../chunks/three-scene-BFZnZuqp.cjs');
+var widgets_glScene = require('../chunks/gl-scene-SO5UU93S.cjs');
 var widgets_gpuParticles = require('../chunks/gpu-particles-BSdRfZLW.cjs');
 var widgets_shaderBackdrop = require('../chunks/shader-backdrop-C4hYivMV.cjs');
-var widgets_lottiePlayer = require('../chunks/lottie-player-Mcpt1H5w.cjs');
+var widgets_lottiePlayer = require('../chunks/lottie-player-DD1pnLN2.cjs');
 var widgets_rive = require('../chunks/rive-DplDvYH5.cjs');
 var widgets_tokenEditor = require('../widgets/token-editor.cjs');
-var widgets_physicsPlayground = require('../chunks/physics-playground-BxnQyZ_V.cjs');
+var widgets_physicsPlayground = require('../chunks/physics-playground-B00t13Nz.cjs');
 var widgets_motionPrompt = require('../widgets/motion-prompt.cjs');
 require('../chunks/base-DBheNxJu.cjs');
 require('../chunks/shared-BxK1D7EZ.cjs');
@@ -141,8 +141,8 @@ require('./fx-safe.cjs');
 require('./fx-perf.cjs');
 require('./design.cjs');
 require('./native.cjs');
-require('../chunks/registry-xGDPpmX2.cjs');
-require('../chunks/runtime-link-GD9ayzxH.cjs');
+require('../chunks/registry-uaO8pDKn.cjs');
+require('../chunks/runtime-link-Bz3rGMsh.cjs');
 require('../chunks/scroll-driven-CQbwzCdn.cjs');
 require('./ai.cjs');
 
@@ -200,7 +200,7 @@ const WIDGETS = {
     '10.2': { 'usa-scroll-scene': widgets_scrollScene.defineScrollScene, 'usa-motion-inspector': widgets_motionInspector.defineMotionInspector },
     '10.3': { 'usa-route-transition': widgets_routeTransition.defineRouteTransition, 'usa-text-splitter': widgets_textSplitter.defineTextSplitter },
     '10.4': { 'usa-scroll-ring': widgets_scrollRing.defineScrollRing, 'usa-parallax-layers': widgets_parallaxLayers.defineParallaxLayers, 'usa-smooth-scroll': widgets_smoothScroll.defineSmoothScroll },
-    '10.5': { 'usa-gl-scene': widgets_glScene.defineGlScene, 'usa-three-scene': widgets_glScene.defineThreeScene, 'usa-gpu-particles': widgets_gpuParticles.defineGpuParticles, 'usa-shader-backdrop': widgets_shaderBackdrop.defineShaderBackdrop },
+    '10.5': { 'usa-gl-scene': widgets_glScene.defineGlScene, 'usa-gpu-particles': widgets_gpuParticles.defineGpuParticles, 'usa-shader-backdrop': widgets_shaderBackdrop.defineShaderBackdrop },
     '10.6': { 'usa-lottie-player': widgets_lottiePlayer.defineLottiePlayer, 'usa-rive': widgets_rive.defineRive, 'usa-token-editor': widgets_tokenEditor.defineTokenEditor },
     '10.7': { 'usa-physics-playground': widgets_physicsPlayground.definePhysicsPlayground, 'usa-motion-prompt': widgets_motionPrompt.defineMotionPrompt },
 };
@@ -364,6 +364,7 @@ exports.defineMotionPrefs = widgets_motionPrefs.defineMotionPrefs;
 exports.definePauseAll = widgets_pauseAll.definePauseAll;
 exports.definePerfMonitor = widgets_perfMonitor.definePerfMonitor;
 exports.WORKER_SCENES = widgets_workerCanvas.WORKER_SCENES;
+exports.WORKER_SCENE_FNS = widgets_workerCanvas.WORKER_SCENE_FNS;
 exports.defineWorkerCanvas = widgets_workerCanvas.defineWorkerCanvas;
 exports.defineMotionSpec = widgets_motionSpec.defineMotionSpec;
 exports.defineNativePreview = widgets_nativePreview.defineNativePreview;
@@ -378,7 +379,6 @@ exports.defineScrollRing = widgets_scrollRing.defineScrollRing;
 exports.defineParallaxLayers = widgets_parallaxLayers.defineParallaxLayers;
 exports.defineSmoothScroll = widgets_smoothScroll.defineSmoothScroll;
 exports.defineGlScene = widgets_glScene.defineGlScene;
-exports.defineThreeScene = widgets_glScene.defineThreeScene;
 exports.PARTICLE_DRAW_WGSL = widgets_gpuParticles.PARTICLE_DRAW_WGSL;
 exports.PARTICLE_SIM_WGSL = widgets_gpuParticles.PARTICLE_SIM_WGSL;
 exports.defineGpuParticles = widgets_gpuParticles.defineGpuParticles;

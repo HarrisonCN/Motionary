@@ -969,10 +969,15 @@ declare function registerSafePack(): void;
 /** Run a pure function in a Web Worker; resolves with its (structured-cloneable) result (9.6). */
 declare function runInWorker<A extends unknown[], R>(fn: (...args: A) => R | Promise<R>, ...args: A): Promise<R>;
 type DrawProgram = string | ((ctx: CanvasRenderingContext2D, t: number, w: number, h: number, state: Record<string, unknown>) => void);
-/** Animate `canvas` with `program` in a worker (OffscreenCanvas) when possible, else on the main thread (9.6). */
+/**
+ * Animate `canvas` with `program` in a worker (OffscreenCanvas) when possible, else on the main thread (9.6).
+ * 11.0: a **string** program only runs in a worker. Without a worker it needs `opts.fallback` (a function);
+ * otherwise it is refused (`backend: 'none'`, console error) — strings are never evaluated on the main thread.
+ */
 declare function offscreenRender(canvas: HTMLCanvasElement, program: DrawProgram, opts?: {
     worker?: boolean;
     paused?: boolean;
+    fallback?: Exclude<DrawProgram, string>;
 }): {
     backend: 'worker' | 'main' | 'none';
     stop(): void;

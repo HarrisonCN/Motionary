@@ -1,7 +1,7 @@
 import { f as defineElement } from '../chunks/base-BTev8qxg.js';
-import { r as runtimeModule } from '../chunks/runtime-link-CQyKFwE1.js';
-import { c as css, d as defineLottiePlayer } from '../chunks/lottie-player-UJHOl-8L.js';
-import '../chunks/registry-RJYrdUTF.js';
+import { r as runtimeModule } from '../chunks/runtime-link-CP3qaRja.js';
+import { c as css, d as defineLottiePlayer } from '../chunks/lottie-player-CPdwHhqe.js';
+import '../chunks/registry-W7pXOwju.js';
 
 function defineDotLottie(tag = 'usa-dotlottie') {
     return defineElement(tag, () => {

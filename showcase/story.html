@@ -118,7 +118,7 @@
 
   <script type="module">
     const LOCAL = new URL('../dist/', import.meta.url).href;
-    const CDN = 'https://cdn.jsdelivr.net/npm/motionary@6/dist/';
+    const CDN = 'https://cdn.jsdelivr.net/npm/motionary@11/dist/';
     let lib;
     try { lib = await import(LOCAL + 'components/effects.js'); } catch { lib = await import(CDN + 'components/effects.js'); }
     lib.defineStory();

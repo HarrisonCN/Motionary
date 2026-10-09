@@ -210,7 +210,7 @@ interface GltfAnimator {
  * `motionary/runtime/gltf-anim`), `animation-speed`; reduced motion shows
  * the first pose. Renders only while visible. `scene`, `camera`, `root`,
  * `animator`, `reload()`; `usa:load` { meshes, animations }, `usa:error`.
- * `<usa-three-scene>` is an alias with the same API.
+ * (The 10.5 alias `<usa-three-scene>` was removed in 11.0.)
  */
 interface UsaGlSceneElement extends UsaElement {
     readonly scene: Scene | null;

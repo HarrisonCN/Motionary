@@ -2,15 +2,15 @@
   "$schema": "https://harrisoncn.github.io/Motionary/components.schema.json",
   "format": "motionary/components",
   "schemaVersion": 2,
-  "stability": "release-candidate",
+  "stability": "stable",
   "package": "motionary",
-  "version": "10.9.0",
+  "version": "11.0.0",
   "homepage": "https://harrisoncn.github.io/Motionary/",
   "llms": "https://harrisoncn.github.io/Motionary/llms.txt",
   "cdn": {
-    "components": "https://unpkg.com/motionary@10/dist/components.umd.js",
-    "widgets": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
-    "runtime": "https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"
+    "components": "https://unpkg.com/motionary@11/dist/components.umd.js",
+    "widgets": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
+    "runtime": "https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js"
   },
   "runtimeModules": [
     {
@@ -23,8 +23,8 @@
       "importPath": "motionary/runtime",
       "import": "import { use } from 'motionary/runtime';",
       "register": "use();",
-      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>",
-      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.js",
+      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js\"></script>",
+      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.js",
       "order": "Import motionary/runtime and call use() once at start-up, before any runtime-powered component mounts. CDN: the IIFE registers itself (window.MotionaryRuntime).",
       "docs": "docs/runtime/core.md",
       "budget": 5632,
@@ -94,8 +94,8 @@
       "importPath": "motionary/runtime/format-css",
       "import": "import { use } from 'motionary/runtime';\nimport { formatCss } from 'motionary/runtime/format-css';",
       "register": "use(formatCss);",
-      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-css.iife.js\"></script>",
-      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-css.js",
+      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/format-css.iife.js\"></script>",
+      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/format-css.js",
       "order": "Register the core first, then the module: use(formatCss) also registers the core. CDN: load runtime.iife.js, then runtime/format-css.iife.js (it registers itself).",
       "docs": "docs/runtime/format-css.md",
       "budget": 2560,
@@ -163,8 +163,8 @@
       "importPath": "motionary/runtime/format-motion",
       "import": "import { use } from 'motionary/runtime';\nimport { formatMotion } from 'motionary/runtime/format-motion';",
       "register": "use(formatMotion);",
-      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-motion.iife.js\"></script>",
-      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-motion.js",
+      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/format-motion.iife.js\"></script>",
+      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/format-motion.js",
       "order": "Register the core first, then the module: use(formatMotion) also registers the core. CDN: load runtime.iife.js, then runtime/format-motion.iife.js (it registers itself).",
       "docs": "docs/runtime/format-motion.md",
       "budget": 2560,
@@ -221,8 +221,8 @@
       "importPath": "motionary/runtime/scroll",
       "import": "import { use } from 'motionary/runtime';\nimport { scroll } from 'motionary/runtime/scroll';",
       "register": "use(scroll);",
-      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/scroll.iife.js\"></script>",
-      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/scroll.js",
+      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/scroll.iife.js\"></script>",
+      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/scroll.js",
       "order": "Register the core first, then the module: use(scroll) also registers the core. CDN: load runtime.iife.js, then runtime/scroll.iife.js (it registers itself).",
       "docs": "docs/runtime/scroll.md",
       "budget": 4608,
@@ -302,8 +302,8 @@
       "importPath": "motionary/runtime/format-svg",
       "import": "import { use } from 'motionary/runtime';\nimport { formatSvg } from 'motionary/runtime/format-svg';",
       "register": "use(formatSvg);",
-      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-svg.iife.js\"></script>",
-      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-svg.js",
+      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/format-svg.iife.js\"></script>",
+      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/format-svg.js",
       "order": "Register the core first, then the module: use(formatSvg) also registers the core. CDN: load runtime.iife.js, then runtime/format-svg.iife.js (it registers itself).",
       "docs": "docs/runtime/format-svg.md",
       "budget": 5120,
@@ -380,8 +380,8 @@
       "importPath": "motionary/runtime/text",
       "import": "import { use } from 'motionary/runtime';\nimport { text } from 'motionary/runtime/text';",
       "register": "use(text);",
-      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/text.iife.js\"></script>",
-      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/text.js",
+      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/text.iife.js\"></script>",
+      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/text.js",
       "order": "Register the core first, then the module: use(text) also registers the core. CDN: load runtime.iife.js, then runtime/text.iife.js (it registers itself).",
       "docs": "docs/runtime/text.md",
       "budget": 2560,
@@ -446,8 +446,8 @@
       "importPath": "motionary/runtime/format-sprite",
       "import": "import { use } from 'motionary/runtime';\nimport { formatSprite } from 'motionary/runtime/format-sprite';",
       "register": "use(formatSprite);",
-      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-sprite.iife.js\"></script>",
-      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-sprite.js",
+      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/format-sprite.iife.js\"></script>",
+      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/format-sprite.js",
       "order": "Register the core first, then the module: use(formatSprite) also registers the core. CDN: load runtime.iife.js, then runtime/format-sprite.iife.js (it registers itself).",
       "docs": "docs/runtime/format-sprite.md",
       "budget": 3072,
@@ -518,8 +518,8 @@
       "importPath": "motionary/runtime/smooth",
       "import": "import { use } from 'motionary/runtime';\nimport { smooth } from 'motionary/runtime/smooth';",
       "register": "use(smooth);",
-      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/smooth.iife.js\"></script>",
-      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/smooth.js",
+      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/smooth.iife.js\"></script>",
+      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/smooth.js",
       "order": "Register the core first, then the module: use(smooth) also registers the core. CDN: load runtime.iife.js, then runtime/smooth.iife.js (it registers itself).",
       "docs": "docs/runtime/smooth.md",
       "budget": 3584,
@@ -590,8 +590,8 @@
       "importPath": "motionary/runtime/format-gif",
       "import": "import { use } from 'motionary/runtime';\nimport { formatGif } from 'motionary/runtime/format-gif';",
       "register": "use(formatGif);",
-      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-gif.iife.js\"></script>",
-      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-gif.js",
+      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/format-gif.iife.js\"></script>",
+      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/format-gif.js",
       "order": "Register the core first, then the module: use(formatGif) also registers the core. CDN: load runtime.iife.js, then runtime/format-gif.iife.js (it registers itself).",
       "docs": "docs/runtime/format-gif.md",
       "budget": 3072,
@@ -658,8 +658,8 @@
       "importPath": "motionary/runtime/format-apng",
       "import": "import { use } from 'motionary/runtime';\nimport { formatApng } from 'motionary/runtime/format-apng';",
       "register": "use(formatApng);",
-      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-apng.iife.js\"></script>",
-      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-apng.js",
+      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/format-apng.iife.js\"></script>",
+      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/format-apng.js",
       "order": "Register the core first, then the module: use(formatApng) also registers the core. CDN: load runtime.iife.js, then runtime/format-apng.iife.js (it registers itself).",
       "docs": "docs/runtime/format-apng.md",
       "budget": 3072,
@@ -727,8 +727,8 @@
       "importPath": "motionary/runtime/format-webp",
       "import": "import { use } from 'motionary/runtime';\nimport { formatWebp } from 'motionary/runtime/format-webp';",
       "register": "use(formatWebp);",
-      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-webp.iife.js\"></script>",
-      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-webp.js",
+      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/format-webp.iife.js\"></script>",
+      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/format-webp.js",
       "order": "Register the core first, then the module: use(formatWebp) also registers the core. CDN: load runtime.iife.js, then runtime/format-webp.iife.js (it registers itself).",
       "docs": "docs/runtime/format-webp.md",
       "budget": 3072,
@@ -791,8 +791,8 @@
       "importPath": "motionary/runtime/gl",
       "import": "import { use } from 'motionary/runtime';\nimport { gl } from 'motionary/runtime/gl';",
       "register": "use(gl);",
-      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gl.iife.js\"></script>",
-      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gl.js",
+      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/gl.iife.js\"></script>",
+      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/gl.js",
       "order": "Register the core first, then the module: use(gl) also registers the core. CDN: load runtime.iife.js, then runtime/gl.iife.js (it registers itself).",
       "docs": "docs/runtime/gl.md",
       "budget": 9216,
@@ -879,8 +879,8 @@
       "importPath": "motionary/runtime/format-gltf",
       "import": "import { use } from 'motionary/runtime';\nimport { formatGltf } from 'motionary/runtime/format-gltf';",
       "register": "use(formatGltf);",
-      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-gltf.iife.js\"></script>",
-      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-gltf.js",
+      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/format-gltf.iife.js\"></script>",
+      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/format-gltf.js",
       "order": "Register the core first, then the module: use(formatGltf) also registers the core. CDN: load runtime.iife.js, then runtime/format-gltf.iife.js (it registers itself).",
       "docs": "docs/runtime/format-gltf.md",
       "budget": 6144,
@@ -963,8 +963,8 @@
       "importPath": "motionary/runtime/format-obj",
       "import": "import { use } from 'motionary/runtime';\nimport { formatObj } from 'motionary/runtime/format-obj';",
       "register": "use(formatObj);",
-      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-obj.iife.js\"></script>",
-      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-obj.js",
+      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/format-obj.iife.js\"></script>",
+      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/format-obj.js",
       "order": "Register the core first, then the module: use(formatObj) also registers the core. CDN: load runtime.iife.js, then runtime/format-obj.iife.js (it registers itself).",
       "docs": "docs/runtime/format-obj.md",
       "budget": 3072,
@@ -1027,8 +1027,8 @@
       "importPath": "motionary/runtime/vector",
       "import": "import { use } from 'motionary/runtime';\nimport { vector } from 'motionary/runtime/vector';",
       "register": "use(vector);",
-      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/vector.iife.js\"></script>",
-      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/vector.js",
+      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/vector.iife.js\"></script>",
+      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/vector.js",
       "order": "Register the core first, then the module: use(vector) also registers the core. CDN: load runtime.iife.js, then runtime/vector.iife.js (it registers itself).",
       "docs": "docs/runtime/vector.md",
       "budget": 12288,
@@ -1210,8 +1210,8 @@
       "importPath": "motionary/runtime/physics",
       "import": "import { use } from 'motionary/runtime';\nimport { physics } from 'motionary/runtime/physics';",
       "register": "use(physics);",
-      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/physics.iife.js\"></script>",
-      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/physics.js",
+      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/physics.iife.js\"></script>",
+      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/physics.js",
       "order": "Register the core first, then the module: use(physics) also registers the core. CDN: load runtime.iife.js, then runtime/physics.iife.js (it registers itself).",
       "docs": "docs/runtime/physics.md",
       "budget": 10240,
@@ -1280,8 +1280,8 @@
       "importPath": "motionary/runtime/format-scene",
       "import": "import { use } from 'motionary/runtime';\nimport { formatScene } from 'motionary/runtime/format-scene';",
       "register": "use(formatScene);",
-      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-scene.iife.js\"></script>",
-      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-scene.js",
+      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/format-scene.iife.js\"></script>",
+      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/format-scene.js",
       "order": "Register the core first, then the module: use(formatScene) also registers the core. CDN: load runtime.iife.js, then runtime/format-scene.iife.js (it registers itself).",
       "docs": "docs/runtime/format-scene.md",
       "budget": 3072,
@@ -1345,8 +1345,8 @@
       "importPath": "motionary/runtime/drag-snap",
       "import": "import { use } from 'motionary/runtime';\nimport { dragSnap } from 'motionary/runtime/drag-snap';",
       "register": "use(dragSnap);",
-      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/drag-snap.iife.js\"></script>",
-      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/drag-snap.js",
+      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/drag-snap.iife.js\"></script>",
+      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/drag-snap.js",
       "order": "Register the core first, then the module: use(dragSnap) also registers the core. CDN: load runtime.iife.js, then runtime/drag-snap.iife.js (it registers itself).",
       "docs": "docs/runtime/drag-snap.md",
       "budget": 4096,
@@ -1415,8 +1415,8 @@
       "importPath": "motionary/runtime/gltf-anim",
       "import": "import { use } from 'motionary/runtime';\nimport { gltfAnim } from 'motionary/runtime/gltf-anim';",
       "register": "use(gltfAnim);",
-      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gltf-anim.iife.js\"></script>",
-      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gltf-anim.js",
+      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/gltf-anim.iife.js\"></script>",
+      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/gltf-anim.js",
       "order": "Register the core first, then the module: use(gltfAnim) also registers the core. CDN: load runtime.iife.js, then runtime/gltf-anim.iife.js (it registers itself).",
       "docs": "docs/runtime/gltf-anim.md",
       "budget": 4608,
@@ -1485,8 +1485,8 @@
       "importPath": "motionary/runtime/lottie-state",
       "import": "import { use } from 'motionary/runtime';\nimport { lottieState } from 'motionary/runtime/lottie-state';",
       "register": "use(lottieState);",
-      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/lottie-state.iife.js\"></script>",
-      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/lottie-state.js",
+      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/lottie-state.iife.js\"></script>",
+      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/lottie-state.js",
       "order": "Register the core first, then the module: use(lottieState) also registers the core. CDN: load runtime.iife.js, then runtime/lottie-state.iife.js (it registers itself).",
       "docs": "docs/runtime/lottie-state.md",
       "budget": 3584,
@@ -1554,8 +1554,8 @@
       "importPath": "motionary/runtime/gltf-decoders",
       "import": "import { use } from 'motionary/runtime';\nimport { gltfDecoders } from 'motionary/runtime/gltf-decoders';",
       "register": "use(gltfDecoders);",
-      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gltf-decoders.iife.js\"></script>",
-      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gltf-decoders.js",
+      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/gltf-decoders.iife.js\"></script>",
+      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/gltf-decoders.js",
       "order": "Register the core first, then the module: use(gltfDecoders) also registers the core. CDN: load runtime.iife.js, then runtime/gltf-decoders.iife.js (it registers itself).",
       "docs": "docs/runtime/gltf-decoders.md",
       "budget": 3072,
@@ -1691,7 +1691,7 @@
         "define": "defineAccordion",
         "register": "defineAccordion();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [],
       "events": [
         "usa:toggle"
@@ -1725,7 +1725,7 @@
         "define": "defineAcrylic",
         "register": "defineAcrylic();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "tint",
         "tint-opacity",
@@ -1763,7 +1763,7 @@
         "define": "defineAddToCart",
         "register": "defineAddToCart();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [],
       "events": [
         "usa:add"
@@ -1798,7 +1798,7 @@
         "define": "defineAmbient",
         "register": "defineAmbient();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "effect",
         "density",
@@ -1842,7 +1842,7 @@
         "define": "defineAnimIcon",
         "register": "defineAnimIcon();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "name",
         "size",
@@ -1881,7 +1881,7 @@
         "define": "defineAudio",
         "register": "defineAudio();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "source"
       ],
@@ -1914,7 +1914,7 @@
         "define": "defineAurora",
         "register": "defineAurora();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "colors",
         "speed",
@@ -1950,7 +1950,7 @@
         "define": "defineAutoAnimate",
         "register": "defineAutoAnimate();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [],
       "events": [],
       "slots": [],
@@ -1983,7 +1983,7 @@
         "define": "defineAutoSkeleton",
         "register": "defineAutoSkeleton();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "loading"
       ],
@@ -2014,7 +2014,7 @@
         "define": "defineAvatarStack",
         "register": "defineAvatarStack();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "max",
         "size",
@@ -2050,7 +2050,7 @@
         "define": "defineBackToTop",
         "register": "defineBackToTop();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [],
       "events": [],
       "slots": [],
@@ -2080,7 +2080,7 @@
         "define": "defineBadge",
         "register": "defineBadge();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "value",
         "max",
@@ -2118,7 +2118,7 @@
         "define": "defineBadgeWall",
         "register": "defineBadgeWall();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [],
       "events": [
         "usa:unlock"
@@ -2155,7 +2155,7 @@
         "define": "defineBarChart",
         "register": "defineBarChart();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "horizontal",
         "unit",
@@ -2192,7 +2192,7 @@
         "define": "defineBgGenerator",
         "register": "defineBgGenerator();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "label"
       ],
@@ -2229,7 +2229,7 @@
         "define": "defineBlobs",
         "register": "defineBlobs();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [],
       "events": [],
       "slots": [],
@@ -2261,7 +2261,7 @@
         "define": "defineBottomSheet",
         "register": "defineBottomSheet();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "open",
         "snap"
@@ -2299,7 +2299,7 @@
         "define": "defineButton",
         "register": "defineButton();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "deform",
         "state",
@@ -2361,7 +2361,7 @@
         "define": "defineCard",
         "register": "defineCard();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "effect",
         "trigger",
@@ -2423,7 +2423,7 @@
         "define": "defineCardStack",
         "register": "defineCardStack();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "visible",
         "offset",
@@ -2465,7 +2465,7 @@
         "define": "defineCarousel",
         "register": "defineCarousel();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "effect",
         "autoplay",
@@ -2507,7 +2507,7 @@
         "define": "defineCarousel3d",
         "register": "defineCarousel3d();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "radius",
         "perspective",
@@ -2550,7 +2550,7 @@
         "define": "defineCartDrawer",
         "register": "defineCartDrawer();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [],
       "events": [
         "usa:open",
@@ -2591,7 +2591,7 @@
         "define": "defineChapterNav",
         "register": "defineChapterNav();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "for",
         "orientation",
@@ -2632,7 +2632,7 @@
         "define": "defineChatComposer",
         "register": "defineChatComposer();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "placeholder",
         "label",
@@ -2672,7 +2672,7 @@
         "define": "defineCheck",
         "register": "defineCheck();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "kind",
         "size",
@@ -2711,7 +2711,7 @@
         "define": "defineCheckbox",
         "register": "defineCheckbox();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "checked",
         "indeterminate",
@@ -2752,7 +2752,7 @@
         "define": "defineClick",
         "register": "defineClick();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "effect",
         "disabled"
@@ -2793,7 +2793,7 @@
         "define": "defineClockControl",
         "register": "defineClockControl();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "speeds",
         "label"
@@ -2831,7 +2831,7 @@
         "define": "defineCodeExport",
         "register": "defineCodeExport();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "for",
         "formats"
@@ -2871,7 +2871,7 @@
         "define": "defineColorPicker",
         "register": "defineColorPicker();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "swatches"
       ],
@@ -2909,7 +2909,7 @@
         "define": "defineCommandPalette",
         "register": "defineCommandPalette();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "placeholder",
         "label",
@@ -2956,7 +2956,7 @@
         "define": "defineCompare",
         "register": "defineCompare();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "orientation",
         "labels"
@@ -2994,7 +2994,7 @@
         "define": "defineCountdown",
         "register": "defineCountdown();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "to",
         "seconds"
@@ -3032,7 +3032,7 @@
         "define": "defineCounter",
         "register": "defineCounter();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "to",
         "decimals",
@@ -3075,7 +3075,7 @@
         "define": "defineCube",
         "register": "defineCube();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "size",
         "autoplay"
@@ -3117,7 +3117,7 @@
         "define": "defineCubeGallery",
         "register": "defineCubeGallery();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "axis",
         "autoplay"
@@ -3157,7 +3157,7 @@
         "define": "defineCursor",
         "register": "defineCursor();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "mode",
         "size",
@@ -3195,7 +3195,7 @@
         "define": "defineDatePicker",
         "register": "defineDatePicker();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "min",
         "max",
@@ -3236,7 +3236,7 @@
         "define": "defineDepth",
         "register": "defineDepth();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "source",
         "strength",
@@ -3272,7 +3272,7 @@
         "define": "defineDialog",
         "register": "defineDialog();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "open",
         "kind",
@@ -3318,7 +3318,7 @@
         "define": "defineDisclosure",
         "register": "defineDisclosure();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [],
       "events": [
         "usa:toggle"
@@ -3355,7 +3355,7 @@
         "define": "defineDistort",
         "register": "defineDistort();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [],
       "events": [],
       "slots": [],
@@ -3388,7 +3388,7 @@
         "define": "defineDock",
         "register": "defineDock();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "orientation",
         "magnify",
@@ -3422,7 +3422,7 @@
         "define": "defineDotNetwork",
         "register": "defineDotNetwork();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [],
       "events": [],
       "slots": [],
@@ -3458,7 +3458,7 @@
         "define": "defineDotLottie",
         "register": "defineDotLottie();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "theme",
         "state-machine"
@@ -3490,7 +3490,7 @@
         "install": "npm i motionary",
         "importAndRegister": "import { use } from 'motionary/runtime';\nimport { vector } from 'motionary/runtime/vector';\nimport { lottieState } from 'motionary/runtime/lottie-state';\nimport { defineDotLottie } from 'motionary/components/dotlottie';\n\nuse(vector, lottieState);\ndefineDotLottie(); // registers <usa-dotlottie> — after the prerequisites",
         "order": "Register the core first, then the module: use(vector) also registers the core. CDN: load runtime.iife.js, then runtime/vector.iife.js (it registers itself). Register the core first, then the module: use(lottieState) also registers the core. CDN: load runtime.iife.js, then runtime/lottie-state.iife.js (it registers itself).",
-        "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/vector.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/lottie-state.iife.js\"></script>\n<!-- then the component bundles -->\n<script src=\"https://unpkg.com/motionary@10/dist/components.umd.js\"></script>\n<script src=\"https://unpkg.com/motionary@10/dist/widgets.umd.js\"></script>",
+        "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/vector.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/lottie-state.iife.js\"></script>\n<!-- then the component bundles -->\n<script src=\"https://unpkg.com/motionary@11/dist/components.umd.js\"></script>\n<script src=\"https://unpkg.com/motionary@11/dist/widgets.umd.js\"></script>",
         "example": "<usa-dotlottie src=\"/anim/button.lottie\" state-machine=\"toggle\" theme=\"dark\" label=\"Like button\"></usa-dotlottie>",
         "docs": [
           "https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/vector.md",
@@ -3518,7 +3518,7 @@
         "define": "defineDoubleTap",
         "register": "defineDoubleTap();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [],
       "events": [
         "usa:double-tap"
@@ -3553,7 +3553,7 @@
         "define": "defineDraggable",
         "register": "defineDraggable();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "axis",
         "disabled",
@@ -3596,7 +3596,7 @@
         "define": "defineDraw",
         "register": "defineDraw();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [],
       "events": [
         "usa:complete"
@@ -3630,7 +3630,7 @@
         "define": "defineDrawer",
         "register": "defineDrawer();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [],
       "events": [],
       "slots": [],
@@ -3666,7 +3666,7 @@
         "define": "defineEqualizer",
         "register": "defineEqualizer();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "bands"
       ],
@@ -3702,7 +3702,7 @@
         "define": "defineFab",
         "register": "defineFab();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "direction",
         "gap"
@@ -3742,7 +3742,7 @@
         "define": "defineFestivalBanner",
         "register": "defineFestivalBanner();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "theme",
         "label",
@@ -3783,7 +3783,7 @@
         "define": "defineField",
         "register": "defineField();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "label",
         "hint",
@@ -3826,7 +3826,7 @@
         "define": "defineFileDrop",
         "register": "defineFileDrop();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [],
       "events": [
         "usa:files"
@@ -3862,7 +3862,7 @@
         "define": "defineFullpage",
         "register": "defineFullpage();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [],
       "events": [
         "usa:section"
@@ -3900,7 +3900,7 @@
         "define": "defineFx",
         "register": "defineFx();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "effect",
         "trigger",
@@ -4439,7 +4439,7 @@
         "define": "defineGauge",
         "register": "defineGauge();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "min",
         "max",
@@ -4478,7 +4478,7 @@
         "define": "defineGenArt",
         "register": "defineGenArt();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "art",
         "seed",
@@ -4522,7 +4522,7 @@
         "define": "defineGestureFx",
         "register": "defineGestureFx();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "gesture",
         "effect",
@@ -4559,7 +4559,7 @@
         "define": "defineGestureSticker",
         "register": "defineGestureSticker();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "min",
         "max",
@@ -4603,7 +4603,7 @@
         "define": "defineGlModel",
         "register": "defineGlModel();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [],
       "events": [
         "usa:runtime-missing"
@@ -4631,7 +4631,7 @@
         "install": "npm i motionary && npm i draco3d && curl -LO https://cdn.jsdelivr.net/gh/BinomialLLC/basis_universal@1.16.4/webgl/transcoder/build/basis_transcoder.js -LO https://cdn.jsdelivr.net/gh/BinomialLLC/basis_universal@1.16.4/webgl/transcoder/build/basis_transcoder.wasm",
         "importAndRegister": "import { use } from 'motionary/runtime';\nimport { gl } from 'motionary/runtime/gl';\nimport { formatGltf } from 'motionary/runtime/format-gltf';\nimport { gltfDecoders } from 'motionary/runtime/gltf-decoders';\nimport { provideGltfDecoder } from 'motionary/runtime/gltf-decoders';\nimport { defineGlModel } from 'motionary/components/gl-model';\n\nuse(gl, formatGltf, gltfDecoders);\nprovideGltfDecoder('draco', () => import('draco3d')); // lazy: fetched when the first Draco-compressed model loads\nprovideGltfDecoder('ktx2', () => import('/vendor/basis_transcoder.js').then((m) => m.default || window.BASIS)); // lazy: fetched with the first KTX2 texture\ndefineGlModel(); // registers <usa-gl-model> — after the prerequisites",
         "order": "Register the core first, then the module: use(gl) also registers the core. CDN: load runtime.iife.js, then runtime/gl.iife.js (it registers itself). Register the core first, then the module: use(formatGltf) also registers the core. CDN: load runtime.iife.js, then runtime/format-gltf.iife.js (it registers itself). Register the core first, then the module: use(gltfDecoders) also registers the core. CDN: load runtime.iife.js, then runtime/gltf-decoders.iife.js (it registers itself). Install draco3d next to motionary, then register the lazy loader with provideGltfDecoder('draco', () => import('draco3d')) before a compressed model loads. Without a bundler: load Google’s draco_decoder.js from gstatic (window.DracoDecoderModule) and provideGltfDecoder('draco', () => window.DracoDecoderModule). Missing → a clear error naming the extension and this line. The transcoder is not published on npm by Binomial: copy basis_transcoder.js + basis_transcoder.wasm (same folder) into your static files, then provideGltfDecoder('ktx2', …) before a KTX2 model loads; or load it from the CDN (window.BASIS) and provideGltfDecoder('ktx2', () => window.BASIS). Missing → a clear error naming the extension and this line.",
-        "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gl.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-gltf.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gltf-decoders.iife.js\"></script>\n<script src=\"https://www.gstatic.com/draco/versioned/decoders/1.5.7/draco_decoder.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/gh/BinomialLLC/basis_universal@1.16.4/webgl/transcoder/build/basis_transcoder.js\"></script>\n<!-- then the component bundles -->\n<script src=\"https://unpkg.com/motionary@10/dist/components.umd.js\"></script>\n<script src=\"https://unpkg.com/motionary@10/dist/widgets.umd.js\"></script>",
+        "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/gl.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/format-gltf.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/gltf-decoders.iife.js\"></script>\n<script src=\"https://www.gstatic.com/draco/versioned/decoders/1.5.7/draco_decoder.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/gh/BinomialLLC/basis_universal@1.16.4/webgl/transcoder/build/basis_transcoder.js\"></script>\n<!-- then the component bundles -->\n<script src=\"https://unpkg.com/motionary@11/dist/components.umd.js\"></script>\n<script src=\"https://unpkg.com/motionary@11/dist/widgets.umd.js\"></script>",
         "example": "<usa-gl-model src=\"/models/robot-draco.glb\" controls label=\"Robot\"></usa-gl-model>",
         "docs": [
           "https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/gl.md",
@@ -4650,7 +4650,7 @@
       "id": "gl-scene",
       "tag": "usa-gl-scene",
       "title": "3D scene (glTF / OBJ)",
-      "description": "10.5: a WebGL2 3D viewer on Motionary’s own renderer — glTF 2.0 / GLB and OBJ / MTL models or built-in shapes, PBR-style materials, orbit controls (drag, wheel, pinch, arrow keys), auto-rotate and video textures. Requires motionary/runtime/gl (+ format-gltf for .gltf / .glb, format-obj for .obj, gltf-anim for glTF animation — 10.8) — npm i motionary, then use(gl, formatGltf, formatObj, gltfAnim) before it mounts. Alias: <usa-three-scene>.",
+      "description": "10.5: a WebGL2 3D viewer on Motionary’s own renderer — glTF 2.0 / GLB and OBJ / MTL models or built-in shapes, PBR-style materials, orbit controls (drag, wheel, pinch, arrow keys), auto-rotate and video textures. Requires motionary/runtime/gl (+ format-gltf for .gltf / .glb, format-obj for .obj, gltf-anim for glTF animation — 10.8) — npm i motionary, then use(gl, formatGltf, formatObj, gltfAnim) before it mounts.",
       "category": "ui",
       "since": "10.5",
       "keywords": [
@@ -4667,7 +4667,7 @@
         "define": "defineGlScene",
         "register": "defineGlScene();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "src",
         "shape",
@@ -4712,7 +4712,7 @@
         "install": "npm i motionary",
         "importAndRegister": "import { use } from 'motionary/runtime';\nimport { gl } from 'motionary/runtime/gl';\nimport { formatGltf } from 'motionary/runtime/format-gltf';\nimport { formatObj } from 'motionary/runtime/format-obj';\nimport { gltfAnim } from 'motionary/runtime/gltf-anim';\nimport { defineGlScene } from 'motionary/components/widgets';\n\nuse(gl, formatGltf, formatObj, gltfAnim);\ndefineGlScene(); // registers <usa-gl-scene> — after the prerequisites",
         "order": "Register the core first, then the module: use(gl) also registers the core. CDN: load runtime.iife.js, then runtime/gl.iife.js (it registers itself). Register the core first, then the module: use(formatGltf) also registers the core. CDN: load runtime.iife.js, then runtime/format-gltf.iife.js (it registers itself). Register the core first, then the module: use(formatObj) also registers the core. CDN: load runtime.iife.js, then runtime/format-obj.iife.js (it registers itself). Register the core first, then the module: use(gltfAnim) also registers the core. CDN: load runtime.iife.js, then runtime/gltf-anim.iife.js (it registers itself).",
-        "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gl.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-gltf.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-obj.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/gltf-anim.iife.js\"></script>\n<!-- then the component bundles -->\n<script src=\"https://unpkg.com/motionary@10/dist/components.umd.js\"></script>\n<script src=\"https://unpkg.com/motionary@10/dist/widgets.umd.js\"></script>",
+        "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/gl.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/format-gltf.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/format-obj.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/gltf-anim.iife.js\"></script>\n<!-- then the component bundles -->\n<script src=\"https://unpkg.com/motionary@11/dist/components.umd.js\"></script>\n<script src=\"https://unpkg.com/motionary@11/dist/widgets.umd.js\"></script>",
         "example": "<usa-gl-scene src=\"/models/chair.glb\" controls auto-rotate=\"20\" label=\"Chair\"></usa-gl-scene>",
         "docs": [
           "https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/gl.md",
@@ -4729,7 +4729,7 @@
         {
           "id": "gl-scene",
           "title": "3D scene (glTF / OBJ)",
-          "description": "10.5: a WebGL2 3D viewer on Motionary’s own renderer — glTF 2.0 / GLB and OBJ / MTL models or built-in shapes, PBR-style materials, orbit controls (drag, wheel, pinch, arrow keys), auto-rotate and video textures. Requires motionary/runtime/gl (+ format-gltf for .gltf / .glb, format-obj for .obj, gltf-anim for glTF animation — 10.8) — npm i motionary, then use(gl, formatGltf, formatObj, gltfAnim) before it mounts. Alias: <usa-three-scene>.",
+          "description": "10.5: a WebGL2 3D viewer on Motionary’s own renderer — glTF 2.0 / GLB and OBJ / MTL models or built-in shapes, PBR-style materials, orbit controls (drag, wheel, pinch, arrow keys), auto-rotate and video textures. Requires motionary/runtime/gl (+ format-gltf for .gltf / .glb, format-obj for .obj, gltf-anim for glTF animation — 10.8) — npm i motionary, then use(gl, formatGltf, formatObj, gltfAnim) before it mounts.",
           "example": "<usa-gl-scene src=\"/models/chair.glb\" controls auto-rotate=\"20\" label=\"Chair\"></usa-gl-scene>"
         },
         {
@@ -4755,7 +4755,7 @@
         "define": "defineGlitch",
         "register": "defineGlitch();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "text",
         "intensity"
@@ -4794,7 +4794,7 @@
         "define": "defineGlobe",
         "register": "defineGlobe();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "markers",
         "speed",
@@ -4835,7 +4835,7 @@
         "define": "defineGpuParticles",
         "register": "defineGpuParticles();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "count",
         "mode",
@@ -4875,7 +4875,7 @@
         "define": "defineGradientText",
         "register": "defineGradientText();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "colors",
         "speed",
@@ -4911,7 +4911,7 @@
         "define": "defineGrain",
         "register": "defineGrain();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "opacity",
         "blend",
@@ -4945,7 +4945,7 @@
         "define": "defineGridGlow",
         "register": "defineGridGlow();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [],
       "events": [],
       "slots": [],
@@ -4980,7 +4980,7 @@
         "define": "defineGyroCard",
         "register": "defineGyroCard();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "max",
         "glare"
@@ -5018,7 +5018,7 @@
         "define": "defineHandwriting",
         "register": "defineHandwriting();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "text",
         "size",
@@ -5060,7 +5060,7 @@
         "define": "defineHeroVideo",
         "register": "defineHeroVideo();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "label",
         "scrub",
@@ -5096,7 +5096,7 @@
         "define": "defineHold",
         "register": "defineHold();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "duration",
         "disabled"
@@ -5138,7 +5138,7 @@
         "define": "defineHudPanel",
         "register": "defineHudPanel();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "title",
         "status",
@@ -5179,7 +5179,7 @@
         "define": "defineHydrate",
         "register": "defineHydrate();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "effect",
         "stagger",
@@ -5218,7 +5218,7 @@
         "define": "defineIconMorph",
         "register": "defineIconMorph();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "icons",
         "size",
@@ -5260,7 +5260,7 @@
         "define": "defineInstallButton",
         "register": "defineInstallButton();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "package",
         "managers",
@@ -5276,8 +5276,8 @@
         "command",
         "copy"
       ],
-      "example": "<usa-install-button package=\"motionary\" managers=\"npm pnpm yarn bun cdn\" cdn=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></usa-install-button>",
-      "esm": "import { defineInstallButton } from 'motionary/components/widgets';\n\ndefineInstallButton(); // registers <usa-install-button>\n\n/* then use it in your HTML:\n<usa-install-button package=\"motionary\" managers=\"npm pnpm yarn bun cdn\" cdn=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></usa-install-button>\n*/",
+      "example": "<usa-install-button package=\"motionary\" managers=\"npm pnpm yarn bun cdn\" cdn=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js\"></usa-install-button>",
+      "esm": "import { defineInstallButton } from 'motionary/components/widgets';\n\ndefineInstallButton(); // registers <usa-install-button>\n\n/* then use it in your HTML:\n<usa-install-button package=\"motionary\" managers=\"npm pnpm yarn bun cdn\" cdn=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js\"></usa-install-button>\n*/",
       "requires": [],
       "prerequisites": null,
       "entry": "motionary/widgets/install-button",
@@ -5304,7 +5304,7 @@
         "define": "defineKanban",
         "register": "defineKanban();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [],
       "events": [
         "usa:move"
@@ -5342,7 +5342,7 @@
         "define": "defineKeyframeEditor",
         "register": "defineKeyframeEditor();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [],
       "events": [
         "usa:change"
@@ -5381,7 +5381,7 @@
         "define": "defineKpi",
         "register": "defineKpi();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "label",
         "delta",
@@ -5420,7 +5420,7 @@
         "define": "defineLeaderboard",
         "register": "defineLeaderboard();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [],
       "events": [
         "usa:rank"
@@ -5454,7 +5454,7 @@
         "define": "defineLike",
         "register": "defineLike();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "liked",
         "count",
@@ -5494,7 +5494,7 @@
         "define": "defineLiquid",
         "register": "defineLiquid();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [],
       "events": [],
       "slots": [],
@@ -5527,7 +5527,7 @@
         "define": "defineLiquidNav",
         "register": "defineLiquidNav();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "label"
       ],
@@ -5561,7 +5561,7 @@
         "define": "defineLoadingBar",
         "register": "defineLoadingBar();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [],
       "events": [],
       "slots": [],
@@ -5598,7 +5598,7 @@
         "define": "defineLocationCard",
         "register": "defineLocationCard();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "name",
         "address",
@@ -5645,7 +5645,7 @@
         "define": "defineLottie",
         "register": "defineLottie();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "src",
         "loop",
@@ -5691,7 +5691,7 @@
         "define": "defineLottieIcon",
         "register": "defineLottieIcon();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "name",
         "size",
@@ -5733,7 +5733,7 @@
         "define": "defineLottiePlayer",
         "register": "defineLottiePlayer();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "src",
         "animation",
@@ -5774,7 +5774,7 @@
         "install": "npm i motionary",
         "importAndRegister": "import { use } from 'motionary/runtime';\nimport { vector } from 'motionary/runtime/vector';\nimport { defineLottiePlayer } from 'motionary/components/widgets';\n\nuse(vector);\ndefineLottiePlayer(); // registers <usa-lottie-player> — after the prerequisites",
         "order": "Register the core first, then the module: use(vector) also registers the core. CDN: load runtime.iife.js, then runtime/vector.iife.js (it registers itself).",
-        "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/vector.iife.js\"></script>\n<!-- then the component bundles -->\n<script src=\"https://unpkg.com/motionary@10/dist/components.umd.js\"></script>\n<script src=\"https://unpkg.com/motionary@10/dist/widgets.umd.js\"></script>",
+        "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/vector.iife.js\"></script>\n<!-- then the component bundles -->\n<script src=\"https://unpkg.com/motionary@11/dist/components.umd.js\"></script>\n<script src=\"https://unpkg.com/motionary@11/dist/widgets.umd.js\"></script>",
         "example": "<usa-lottie-player src=\"/anim/hero.lottie\" autoplay loop label=\"Hero animation\"></usa-lottie-player>",
         "docs": [
           "https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/vector.md"
@@ -5818,7 +5818,7 @@
         "define": "defineLyrics",
         "register": "defineLyrics();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [],
       "events": [
         "usa:seek"
@@ -5849,7 +5849,7 @@
         "define": "defineMagnetic",
         "register": "defineMagnetic();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "strength",
         "radius",
@@ -5882,7 +5882,7 @@
         "define": "defineMarquee",
         "register": "defineMarquee();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "speed",
         "direction",
@@ -5921,7 +5921,7 @@
         "define": "defineMaskReveal",
         "register": "defineMaskReveal();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [],
       "events": [
         "usa:complete"
@@ -5956,7 +5956,7 @@
         "define": "defineMasonry",
         "register": "defineMasonry();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "columns",
         "min",
@@ -5997,7 +5997,7 @@
         "define": "defineMasonryFlow",
         "register": "defineMasonryFlow();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "min",
         "gap"
@@ -6040,7 +6040,7 @@
         "define": "defineMenu",
         "register": "defineMenu();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "placement",
         "effect"
@@ -6084,7 +6084,7 @@
         "define": "defineMenuToggle",
         "register": "defineMenuToggle();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "variant"
       ],
@@ -6123,7 +6123,7 @@
         "define": "defineMessageList",
         "register": "defineMessageList();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [],
       "events": [
         "usa:message"
@@ -6161,7 +6161,7 @@
         "define": "defineMilestones",
         "register": "defineMilestones();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "layout"
       ],
@@ -6198,7 +6198,7 @@
         "define": "defineModal",
         "register": "defineModal();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [],
       "events": [],
       "slots": [],
@@ -6228,7 +6228,7 @@
         "define": "defineMorph",
         "register": "defineMorph();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "paths",
         "trigger"
@@ -6268,7 +6268,7 @@
         "define": "defineMotion",
         "register": "defineMotion();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "rules"
       ],
@@ -6305,7 +6305,7 @@
         "define": "defineMotionInspector",
         "register": "defineMotionInspector();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "scope",
         "interval"
@@ -6349,7 +6349,7 @@
         "define": "defineMotionPrefs",
         "register": "defineMotionPrefs();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "label"
       ],
@@ -6389,7 +6389,7 @@
         "define": "defineMotionPrompt",
         "register": "defineMotionPrompt();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "value",
         "format",
@@ -6432,7 +6432,7 @@
         "define": "defineMotionSpec",
         "register": "defineMotionSpec();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "rules",
         "label"
@@ -6469,7 +6469,7 @@
         "define": "defineMotionSwitch",
         "register": "defineMotionSwitch();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [],
       "events": [
         "usa:change"
@@ -6506,7 +6506,7 @@
         "define": "defineMotionTheme",
         "register": "defineMotionTheme();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "name"
       ],
@@ -6541,7 +6541,7 @@
         "define": "defineMusicPlayer",
         "register": "defineMusicPlayer();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "title",
         "artist",
@@ -6588,7 +6588,7 @@
         "define": "defineNativePreview",
         "register": "defineNativePreview();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "rules",
         "platform",
@@ -6630,7 +6630,7 @@
         "define": "defineNavMorph",
         "register": "defineNavMorph();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "indicator"
       ],
@@ -6664,7 +6664,7 @@
         "define": "defineNavbar",
         "register": "defineNavbar();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [],
       "events": [
         "usa:hide",
@@ -6702,7 +6702,7 @@
         "define": "defineNotificationBell",
         "register": "defineNotificationBell();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [],
       "events": [
         "usa:notify",
@@ -6742,7 +6742,7 @@
         "define": "defineOdometer",
         "register": "defineOdometer();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "value",
         "locale",
@@ -6781,7 +6781,7 @@
         "define": "defineOrganicCard",
         "register": "defineOrganicCard();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "tint",
         "seed"
@@ -6819,7 +6819,7 @@
         "define": "defineOtp",
         "register": "defineOtp();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "length",
         "mode",
@@ -6860,7 +6860,7 @@
         "define": "defineOverscroll",
         "register": "defineOverscroll();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "axis",
         "disabled"
@@ -6894,7 +6894,7 @@
         "define": "definePack",
         "register": "definePack();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "name"
       ],
@@ -6961,7 +6961,7 @@
         "define": "definePagination",
         "register": "definePagination();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "total",
         "siblings"
@@ -6999,7 +6999,7 @@
         "define": "definePanorama",
         "register": "definePanorama();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "src",
         "autorotate",
@@ -7042,7 +7042,7 @@
         "define": "defineParallaxLayers",
         "register": "defineParallaxLayers();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "range",
         "engine",
@@ -7082,7 +7082,7 @@
         "define": "defineParticles",
         "register": "defineParticles();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "count",
         "color",
@@ -7125,7 +7125,7 @@
         "define": "definePauseAll",
         "register": "definePauseAll();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "label",
         "scope",
@@ -7166,7 +7166,7 @@
         "define": "definePerfMonitor",
         "register": "definePerfMonitor();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "corner",
         "warn"
@@ -7205,7 +7205,7 @@
         "define": "definePhysicsPlayground",
         "register": "definePhysicsPlayground();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "preset",
         "src",
@@ -7241,7 +7241,7 @@
         "install": "npm i motionary",
         "importAndRegister": "import { use } from 'motionary/runtime';\nimport { physics } from 'motionary/runtime/physics';\nimport { formatScene } from 'motionary/runtime/format-scene';\nimport { definePhysicsPlayground } from 'motionary/components/widgets';\n\nuse(physics, formatScene);\ndefinePhysicsPlayground(); // registers <usa-physics-playground> — after the prerequisites",
         "order": "Register the core first, then the module: use(physics) also registers the core. CDN: load runtime.iife.js, then runtime/physics.iife.js (it registers itself). Register the core first, then the module: use(formatScene) also registers the core. CDN: load runtime.iife.js, then runtime/format-scene.iife.js (it registers itself).",
-        "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/physics.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-scene.iife.js\"></script>\n<!-- then the component bundles -->\n<script src=\"https://unpkg.com/motionary@10/dist/components.umd.js\"></script>\n<script src=\"https://unpkg.com/motionary@10/dist/widgets.umd.js\"></script>",
+        "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/physics.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/format-scene.iife.js\"></script>\n<!-- then the component bundles -->\n<script src=\"https://unpkg.com/motionary@11/dist/components.umd.js\"></script>\n<script src=\"https://unpkg.com/motionary@11/dist/widgets.umd.js\"></script>",
         "example": "<usa-physics-playground preset=\"pyramid\" spawn label=\"Knock the pyramid over\"></usa-physics-playground>",
         "docs": [
           "https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/physics.md",
@@ -7270,7 +7270,7 @@
         "define": "definePinchZoom",
         "register": "definePinchZoom();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [],
       "events": [
         "usa:zoom"
@@ -7308,7 +7308,7 @@
         "define": "definePlayer",
         "register": "definePlayer();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "src",
         "trigger",
@@ -7351,7 +7351,7 @@
         "define": "definePluginCard",
         "register": "definePluginCard();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "name",
         "title",
@@ -7386,7 +7386,7 @@
         "install": "npm i motionary",
         "importAndRegister": "import { use } from 'motionary/runtime';\nimport { definePluginCard } from 'motionary/components/widgets';\n\nuse();\ndefinePluginCard(); // registers <usa-plugin-card> — after the prerequisites",
         "order": "Import motionary/runtime and call use() once at start-up, before any runtime-powered component mounts. CDN: the IIFE registers itself (window.MotionaryRuntime).",
-        "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<!-- then the component bundles -->\n<script src=\"https://unpkg.com/motionary@10/dist/components.umd.js\"></script>\n<script src=\"https://unpkg.com/motionary@10/dist/widgets.umd.js\"></script>",
+        "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js\"></script>\n<!-- then the component bundles -->\n<script src=\"https://unpkg.com/motionary@11/dist/components.umd.js\"></script>\n<script src=\"https://unpkg.com/motionary@11/dist/widgets.umd.js\"></script>",
         "example": "<usa-plugin-card name=\"retro\" title=\"Retro\" version=\"1.2.0\" author=\"Motionary\" engine=\"^10.0.0\" downloads=\"12400\">\n  <p>Pixel, CRT, VHS and Y2K effects.</p>\n</usa-plugin-card>",
         "docs": [
           "https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/core.md"
@@ -7416,7 +7416,7 @@
         "define": "definePluginStore",
         "register": "definePluginStore();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "query",
         "label"
@@ -7454,7 +7454,7 @@
         "define": "definePopover",
         "register": "definePopover();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [],
       "events": [],
       "slots": [],
@@ -7488,7 +7488,7 @@
         "define": "definePostFx",
         "register": "definePostFx();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [],
       "events": [],
       "slots": [],
@@ -7521,7 +7521,7 @@
         "define": "definePresence",
         "register": "definePresence();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "status",
         "speaking",
@@ -7555,7 +7555,7 @@
         "define": "definePress",
         "register": "definePress();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "disabled"
       ],
@@ -7590,7 +7590,7 @@
         "define": "definePrizeWheel",
         "register": "definePrizeWheel();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [],
       "events": [
         "usa:result"
@@ -7627,7 +7627,7 @@
         "define": "defineProductGallery",
         "register": "defineProductGallery();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "index"
       ],
@@ -7664,7 +7664,7 @@
         "define": "defineProgress",
         "register": "defineProgress();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "value",
         "max",
@@ -7704,7 +7704,7 @@
         "define": "defineProgressRing",
         "register": "defineProgressRing();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "variant",
         "value",
@@ -7744,7 +7744,7 @@
         "define": "definePropPanel",
         "register": "definePropPanel();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "for",
         "props",
@@ -7785,7 +7785,7 @@
         "define": "definePullCord",
         "register": "definePullCord();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [],
       "events": [
         "usa:change"
@@ -7818,7 +7818,7 @@
         "define": "definePullRefresh",
         "register": "definePullRefresh();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [],
       "events": [],
       "slots": [],
@@ -7853,7 +7853,7 @@
         "define": "defineRadar",
         "register": "defineRadar();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "targets",
         "rings",
@@ -7895,7 +7895,7 @@
         "define": "defineReactions",
         "register": "defineReactions();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [],
       "events": [
         "usa:react"
@@ -7932,7 +7932,7 @@
         "define": "defineRedEnvelope",
         "register": "defineRedEnvelope();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "amount",
         "currency",
@@ -7975,7 +7975,7 @@
         "define": "defineRetroButton",
         "register": "defineRetroButton();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "variant",
         "disabled"
@@ -8008,7 +8008,7 @@
         "define": "defineReveal",
         "register": "defineReveal();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "effect",
         "distance",
@@ -8050,7 +8050,7 @@
         "define": "defineRipple",
         "register": "defineRipple();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [],
       "events": [],
       "slots": [],
@@ -8086,7 +8086,7 @@
         "define": "defineRive",
         "register": "defineRive();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "src",
         "artboard",
@@ -8121,7 +8121,7 @@
         "install": "npm i @rive-app/canvas",
         "importAndRegister": "import { provideRiveRuntime } from 'motionary/components/widgets';\nimport { defineRive } from 'motionary/components/widgets';\n\nprovideRiveRuntime(() => import('@rive-app/canvas')); // lazy: fetched when the first <usa-rive> mounts\ndefineRive(); // registers <usa-rive> — after the prerequisites",
         "order": "Install the official runtime next to motionary, then hand <usa-rive> a lazy loader with provideRiveRuntime(() => import('@rive-app/canvas')) before the element mounts — your bundler splits the runtime into its own chunk, fetched only when the first <usa-rive> appears. Without a bundler: load the official rive.js from a CDN before the component bundles (window.rive), use an import map, or set runtime-src on the element. Missing → a clear message in place + usa:runtime-missing.",
-        "cdn": "<script src=\"https://unpkg.com/@rive-app/canvas@2.44.1/rive.js\"></script>\n<!-- then the component bundles -->\n<script src=\"https://unpkg.com/motionary@10/dist/components.umd.js\"></script>\n<script src=\"https://unpkg.com/motionary@10/dist/widgets.umd.js\"></script>",
+        "cdn": "<script src=\"https://unpkg.com/@rive-app/canvas@2.44.1/rive.js\"></script>\n<!-- then the component bundles -->\n<script src=\"https://unpkg.com/motionary@11/dist/components.umd.js\"></script>\n<script src=\"https://unpkg.com/motionary@11/dist/widgets.umd.js\"></script>",
         "example": "<usa-rive src=\"/anim/icon.riv\" state-machine=\"State Machine 1\" autoplay label=\"Icon\"></usa-rive>",
         "docs": [
           "https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/rive.md"
@@ -8151,7 +8151,7 @@
         "define": "defineRouteTransition",
         "register": "defineRouteTransition();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "effect",
         "engine",
@@ -8193,7 +8193,7 @@
         "define": "defineScene",
         "register": "defineScene();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "camera",
         "strength",
@@ -8230,7 +8230,7 @@
         "define": "defineScramble",
         "register": "defineScramble();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "text"
       ],
@@ -8266,7 +8266,7 @@
         "define": "defineScrollHighlight",
         "register": "defineScrollHighlight();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "mode",
         "text"
@@ -8301,7 +8301,7 @@
         "define": "defineScrollProgress",
         "register": "defineScrollProgress();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "target",
         "label"
@@ -8341,7 +8341,7 @@
         "define": "defineScrollRing",
         "register": "defineScrollRing();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "for",
         "engine",
@@ -8386,7 +8386,7 @@
         "define": "defineScrollScene",
         "register": "defineScrollScene();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "start",
         "end",
@@ -8421,7 +8421,7 @@
         "install": "npm i motionary",
         "importAndRegister": "import { use } from 'motionary/runtime';\nimport { scroll } from 'motionary/runtime/scroll';\nimport { defineScrollScene } from 'motionary/components/widgets';\n\nuse(scroll);\ndefineScrollScene(); // registers <usa-scroll-scene> — after the prerequisites",
         "order": "Register the core first, then the module: use(scroll) also registers the core. CDN: load runtime.iife.js, then runtime/scroll.iife.js (it registers itself).",
-        "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/scroll.iife.js\"></script>\n<!-- then the component bundles -->\n<script src=\"https://unpkg.com/motionary@10/dist/components.umd.js\"></script>\n<script src=\"https://unpkg.com/motionary@10/dist/widgets.umd.js\"></script>",
+        "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/scroll.iife.js\"></script>\n<!-- then the component bundles -->\n<script src=\"https://unpkg.com/motionary@11/dist/components.umd.js\"></script>\n<script src=\"https://unpkg.com/motionary@11/dist/widgets.umd.js\"></script>",
         "example": "<usa-scroll-scene start=\"top 80%\" end=\"bottom 20%\" scrub=\"120\" stagger=\"120\">\n  <h2 data-scrub=\"x: -80 -> 0; opacity: 0 -> 1\">Scroll</h2>\n  <p data-scrub=\"y: 40 -> 0; opacity: 0 -> 1\">and it follows.</p>\n</usa-scroll-scene>",
         "docs": [
           "https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/scroll.md"
@@ -8448,7 +8448,7 @@
         "define": "defineScrolly",
         "register": "defineScrolly();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "offset"
       ],
@@ -8485,7 +8485,7 @@
         "define": "defineSegmented",
         "register": "defineSegmented();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "variant"
       ],
@@ -8521,7 +8521,7 @@
         "define": "defineShader",
         "register": "defineShader();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [],
       "events": [],
       "slots": [],
@@ -8568,7 +8568,7 @@
         "define": "defineShaderBackdrop",
         "register": "defineShaderBackdrop();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "preset",
         "post",
@@ -8610,7 +8610,7 @@
         "define": "defineSheet",
         "register": "defineSheet();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [],
       "events": [],
       "slots": [],
@@ -8638,7 +8638,7 @@
         "define": "defineShimmerText",
         "register": "defineShimmerText();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "duration",
         "color",
@@ -8676,7 +8676,7 @@
         "define": "defineShortcut",
         "register": "defineShortcut();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "keys",
         "label",
@@ -8714,7 +8714,7 @@
         "define": "defineSkeleton",
         "register": "defineSkeleton();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "loading",
         "lines",
@@ -8757,7 +8757,7 @@
         "define": "defineSkeletonReveal",
         "register": "defineSkeletonReveal();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "loading",
         "variant"
@@ -8797,7 +8797,7 @@
         "define": "defineSketchChart",
         "register": "defineSketchChart();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "values",
         "labels",
@@ -8838,7 +8838,7 @@
         "define": "defineSlider",
         "register": "defineSlider();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "min",
         "max",
@@ -8879,7 +8879,7 @@
         "define": "defineSmoothScroll",
         "register": "defineSmoothScroll();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "lerp",
         "duration",
@@ -8916,7 +8916,7 @@
         "install": "npm i motionary",
         "importAndRegister": "import { use } from 'motionary/runtime';\nimport { smooth } from 'motionary/runtime/smooth';\nimport { defineSmoothScroll } from 'motionary/components/widgets';\n\nuse(smooth);\ndefineSmoothScroll(); // registers <usa-smooth-scroll> — after the prerequisites",
         "order": "Register the core first, then the module: use(smooth) also registers the core. CDN: load runtime.iife.js, then runtime/smooth.iife.js (it registers itself).",
-        "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/smooth.iife.js\"></script>\n<!-- then the component bundles -->\n<script src=\"https://unpkg.com/motionary@10/dist/components.umd.js\"></script>\n<script src=\"https://unpkg.com/motionary@10/dist/widgets.umd.js\"></script>",
+        "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/smooth.iife.js\"></script>\n<!-- then the component bundles -->\n<script src=\"https://unpkg.com/motionary@11/dist/components.umd.js\"></script>\n<script src=\"https://unpkg.com/motionary@11/dist/widgets.umd.js\"></script>",
         "example": "<usa-smooth-scroll lerp=\"0.1\" offset=\"64\"></usa-smooth-scroll>",
         "docs": [
           "https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/smooth.md"
@@ -8948,7 +8948,7 @@
         "define": "defineSnapCarousel",
         "register": "defineSnapCarousel();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "align",
         "gap",
@@ -8980,7 +8980,7 @@
         "install": "npm i motionary",
         "importAndRegister": "import { use } from 'motionary/runtime';\nimport { dragSnap } from 'motionary/runtime/drag-snap';\nimport { defineSnapCarousel } from 'motionary/components/snap-carousel';\n\nuse(dragSnap);\ndefineSnapCarousel(); // registers <usa-snap-carousel> — after the prerequisites",
         "order": "Register the core first, then the module: use(dragSnap) also registers the core. CDN: load runtime.iife.js, then runtime/drag-snap.iife.js (it registers itself).",
-        "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/drag-snap.iife.js\"></script>\n<!-- then the component bundles -->\n<script src=\"https://unpkg.com/motionary@10/dist/components.umd.js\"></script>\n<script src=\"https://unpkg.com/motionary@10/dist/widgets.umd.js\"></script>",
+        "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/drag-snap.iife.js\"></script>\n<!-- then the component bundles -->\n<script src=\"https://unpkg.com/motionary@11/dist/components.umd.js\"></script>\n<script src=\"https://unpkg.com/motionary@11/dist/widgets.umd.js\"></script>",
         "example": "<usa-snap-carousel align=\"center\" gap=\"16\" label=\"Featured\">\n  <article>…</article>\n  <article>…</article>\n  <article>…</article>\n</usa-snap-carousel>",
         "docs": [
           "https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/drag-snap.md"
@@ -9010,7 +9010,7 @@
         "define": "defineSparkline",
         "register": "defineSparkline();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "variant",
         "color"
@@ -9046,7 +9046,7 @@
         "define": "defineSpatialCard",
         "register": "defineSpatialCard();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [],
       "events": [
         "usa:focus-depth"
@@ -9078,7 +9078,7 @@
         "define": "defineSpinner",
         "register": "defineSpinner();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "kind",
         "size",
@@ -9112,7 +9112,7 @@
         "define": "defineSplash",
         "register": "defineSplash();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [],
       "events": [
         "usa:done"
@@ -9146,7 +9146,7 @@
         "define": "defineSplitText",
         "register": "defineSplitText();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "by",
         "text"
@@ -9183,7 +9183,7 @@
         "define": "defineSpotlight",
         "register": "defineSpotlight();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "size",
         "color",
@@ -9218,7 +9218,7 @@
         "define": "defineSpring",
         "register": "defineSpring();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "effect",
         "trigger",
@@ -9256,7 +9256,7 @@
         "define": "defineStagger",
         "register": "defineStagger();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "effect",
         "repeat",
@@ -9299,7 +9299,7 @@
         "define": "defineStarRating",
         "register": "defineStarRating();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "max",
         "icon",
@@ -9339,7 +9339,7 @@
         "define": "defineStepper",
         "register": "defineStepper();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "orientation"
       ],
@@ -9375,7 +9375,7 @@
         "define": "defineStickyStack",
         "register": "defineStickyStack();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "top",
         "gap",
@@ -9414,7 +9414,7 @@
         "define": "defineStickyWall",
         "register": "defineStickyWall();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "seed",
         "label"
@@ -9454,7 +9454,7 @@
         "define": "defineStories",
         "register": "defineStories();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "duration",
         "loop"
@@ -9498,7 +9498,7 @@
         "define": "defineStory",
         "register": "defineStory();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "template",
         "zoom"
@@ -9554,7 +9554,7 @@
         "define": "defineSuggestionChips",
         "register": "defineSuggestionChips();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "items",
         "label",
@@ -9595,7 +9595,7 @@
         "define": "defineSwipeDeck",
         "register": "defineSwipeDeck();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [],
       "events": [
         "usa:swipe",
@@ -9633,7 +9633,7 @@
         "define": "defineSwipeable",
         "register": "defineSwipeable();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "axis",
         "disabled"
@@ -9675,7 +9675,7 @@
         "define": "defineSwitch",
         "register": "defineSwitch();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "variant"
       ],
@@ -9714,7 +9714,7 @@
         "define": "defineTabBar",
         "register": "defineTabBar();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "indicator"
       ],
@@ -9750,7 +9750,7 @@
         "define": "defineTabs",
         "register": "defineTabs();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "indicator"
       ],
@@ -9789,7 +9789,7 @@
         "define": "defineTerminal",
         "register": "defineTerminal();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "title",
         "prompt",
@@ -9829,7 +9829,7 @@
         "define": "defineTextRotate",
         "register": "defineTextRotate();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "words",
         "interval",
@@ -9871,7 +9871,7 @@
         "define": "defineTextSplitter",
         "register": "defineTextSplitter();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "split",
         "effect",
@@ -9903,7 +9903,7 @@
         "install": "npm i motionary",
         "importAndRegister": "import { use } from 'motionary/runtime';\nimport { text } from 'motionary/runtime/text';\nimport { defineTextSplitter } from 'motionary/components/widgets';\n\nuse(text);\ndefineTextSplitter(); // registers <usa-text-splitter> — after the prerequisites",
         "order": "Register the core first, then the module: use(text) also registers the core. CDN: load runtime.iife.js, then runtime/text.iife.js (it registers itself).",
-        "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/text.iife.js\"></script>\n<!-- then the component bundles -->\n<script src=\"https://unpkg.com/motionary@10/dist/components.umd.js\"></script>\n<script src=\"https://unpkg.com/motionary@10/dist/widgets.umd.js\"></script>",
+        "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/text.iife.js\"></script>\n<!-- then the component bundles -->\n<script src=\"https://unpkg.com/motionary@11/dist/components.umd.js\"></script>\n<script src=\"https://unpkg.com/motionary@11/dist/widgets.umd.js\"></script>",
         "example": "<usa-text-splitter split=\"chars\" effect=\"rise\" stagger=\"30\">Motion, made simple.</usa-text-splitter>",
         "docs": [
           "https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/text.md"
@@ -9933,7 +9933,7 @@
         "define": "defineThemeSurface",
         "register": "defineThemeSurface();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "theme"
       ],
@@ -9970,7 +9970,7 @@
         "define": "defineThemeSwitcher",
         "register": "defineThemeSwitcher();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "themes",
         "target",
@@ -9991,34 +9991,6 @@
       "source": "src/components/widgets/theme-switcher.ts"
     },
     {
-      "id": "three-scene",
-      "tag": "usa-three-scene",
-      "title": "<usa-three-scene>",
-      "description": "`<usa-three-scene>` — alias of `<usa-gl-scene>`. @deprecated 10.9, removed in 11.0: use `<usa-gl-scene>` / `defineGlScene()`.",
-      "category": "widgets",
-      "import": {
-        "path": "motionary/components/widgets",
-        "define": "defineThreeScene",
-        "register": "defineThreeScene();"
-      },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
-      "attributes": [],
-      "events": [],
-      "slots": [],
-      "methods": [],
-      "example": "<usa-three-scene></usa-three-scene>",
-      "requires": [],
-      "prerequisites": null,
-      "entry": "motionary/widgets/three-scene",
-      "stability": "deprecated",
-      "deprecated": {
-        "since": "10.9",
-        "removedIn": "11.0",
-        "use": "usa-gl-scene"
-      },
-      "source": "src/components/widgets/gl-scene.ts"
-    },
-    {
       "id": "tilt",
       "tag": "usa-tilt",
       "title": "3D tilt card",
@@ -10033,7 +10005,7 @@
         "define": "defineTilt",
         "register": "defineTilt();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "max",
         "scale",
@@ -10072,7 +10044,7 @@
         "define": "defineTimeline",
         "register": "defineTimeline();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "scrub",
         "trigger",
@@ -10115,7 +10087,7 @@
         "define": "defineTip",
         "register": "defineTip();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "text",
         "placement",
@@ -10158,7 +10130,7 @@
         "define": "defineToastStack",
         "register": "defineToastStack();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "position"
       ],
@@ -10196,7 +10168,7 @@
         "define": "defineToaster",
         "register": "defineToaster();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "label"
       ],
@@ -10237,7 +10209,7 @@
         "define": "defineTokenEditor",
         "register": "defineTokenEditor();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "apply",
         "format",
@@ -10278,7 +10250,7 @@
         "define": "defineTypewriter",
         "register": "defineTypewriter();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "text",
         "words"
@@ -10320,7 +10292,7 @@
         "define": "defineUploadProgress",
         "register": "defineUploadProgress();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "name",
         "size",
@@ -10363,7 +10335,7 @@
         "define": "defineVideoCard",
         "register": "defineVideoCard();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "label",
         "duration"
@@ -10397,7 +10369,7 @@
         "define": "defineViewSwitch",
         "register": "defineViewSwitch();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "active"
       ],
@@ -10436,7 +10408,7 @@
         "define": "defineVoiceButton",
         "register": "defineVoiceButton();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "label",
         "bars",
@@ -10475,7 +10447,7 @@
         "define": "defineVolumeKnob",
         "register": "defineVolumeKnob();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "min",
         "max"
@@ -10511,7 +10483,7 @@
         "define": "defineWaterRipple",
         "register": "defineWaterRipple();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [],
       "events": [],
       "slots": [],
@@ -10542,7 +10514,7 @@
         "define": "defineWaveText",
         "register": "defineWaveText();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "text"
       ],
@@ -10580,7 +10552,7 @@
         "define": "defineWeatherCard",
         "register": "defineWeatherCard();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "condition",
         "temp",
@@ -10619,7 +10591,7 @@
         "define": "defineWorkerCanvas",
         "register": "defineWorkerCanvas();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "scene",
         "label"
@@ -10657,7 +10629,7 @@
         "define": "defineXpBar",
         "register": "defineXpBar();"
       },
-      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "level",
         "xp",

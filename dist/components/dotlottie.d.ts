@@ -128,7 +128,8 @@ declare class Timeline extends Playable {
  * - keyframes: bezier easing per dimension, hold keyframes, v4 (`e`) and v5+
  *   (`s` only) files;
  * - **dotLottie** (`.lottie`): zip (stored + deflate via the native
- *   `DecompressionStream`), `manifest.json` v1 / v2, several animations,
+ *   `DecompressionStream`; 11.0: entry-count / size / ratio limits enforced
+ *   while inflating — `ZipLimits`, `ZIP_LIMITS`), `manifest.json` v1 / v2, several animations,
  *   embedded images.
  *
  * 10.8: **text layers** (system / web fonts by family + style, justification,
