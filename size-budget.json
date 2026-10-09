@@ -1,5 +1,10 @@
 [
   {
+    "name": "import 'motionary/core' (zero-dep core, fixed 10 KB)",
+    "import": "export * from 'pkg/components/core';",
+    "limit": 10240
+  },
+  {
     "name": "dist/index.umd.js (minified)",
     "file": "dist/index.umd.js",
     "limit": 9984

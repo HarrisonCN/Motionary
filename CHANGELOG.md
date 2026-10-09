@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [10.0.0] - 2026-10-09
+
+### ⚠️ Breaking
+- **`registerEffectPacks()` removed** from `motionary/fx2` (deprecated in 9.9) → `registerAllPlugins()` (same behaviour) or only the plugins you use. `npx usa-codemod-10 --write src` rewrites it. See [docs/upgrading-10.md](./docs/upgrading-10.md).
+
+### Added
+- **New architecture — zero-dependency core `motionary/core`** (= `motionary/components/core`), **under 10 KB gzip** (≈ 2 KB; fixed size budget + test): `createMotion({ reducedMotion, rate })` → `use(...plugins)`, `play()`, `bind(el, effect, { trigger })`, `reveal(targets, preset, { stagger, once, threshold })`, `animate()`, `pause()` / `resume()` / `setRate()`, `has()`, `effects()`, `destroy()`; `PRESETS` (10 entrance presets), `preferredBackend()` (`webgpu` → `webgl2` → `canvas`), `VERSION`. See [docs/core.md](./docs/core.md).
+- **Every effect as a plugin — `motionary/plugins`** (= `motionary/components/plugins`): every built-in effect pack as an `{ name, effects }` plugin (`retro`, `cinema`, `paper`, `cyber`, `weather`, …, `ALL_PLUGINS`) for `createMotion().use(…)` or `usePlugins(…)`; each import pulls in only its own pack.
+- **WebGPU by default**: GPU effects and backgrounds keep `backend: 'auto'` = WebGPU → WebGL2 → Canvas, and plugins built on the core use the same order via `preferredBackend()`.
+- Chinese roadmap v10.1 → v11.0 in [docs/ROADMAP.md](./docs/ROADMAP.md), with two new tracks across the minors: **AI-readable components** (components manifest + `llms.txt` in 10.1, per-component Markdown docs + `AGENTS.md` in 10.2, the `motionary-mcp` MCP server in 10.4) and **components that need peer plugins** (GSAP/ScrollTrigger, SplitType, Lenis, Three.js, lottie-web/Rive, Matter.js, Embla — optional peerDependencies, lazy-loaded with a clear error, prerequisites stated on every card / Store detail / docs page / README / manifest, and a "Requires: X" Store badge).
+- npm: `motionary` and the `use-scroll-animate` alias are published with the `latest` tag.
+
+### Accessibility
+- The core honours reduced motion everywhere (OS setting or `reducedMotion: 'reduce'`): entrance presets fade instead of moving, loop / background / cursor effects are skipped, effects get `ctx.reduced`. `pause()` stops everything an instance started (WCAG 2.2.2).
+
 ## [9.9.0] - 2026-10-09
 
 ### Added

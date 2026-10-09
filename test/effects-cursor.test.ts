@@ -2,16 +2,7 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { installComponentMocks, mount, anims } from './components-setup';
 import { configureComponents } from '../src/components/base';
 import { defineFxComponents, bindEffect, getEffect, registerEffect } from '../src/components/fx';
-import {
-  registerAllEffects,
-  registerCursorEffects,
-  CURSOR_FX,
-  EFFECT_PACKS,
-  bindGesture,
-  flingVelocity,
-  angleDelta,
-  defineGestureFx,
-} from '../src/components/effects';
+import { registerAllEffects, registerCursorEffects, CURSOR_FX, EFFECT_PACKS, bindGesture, flingVelocity, angleDelta, defineGestureFx } from '../src/components/effects';
 
 function stubCanvas() {
   const calls: string[] = [];

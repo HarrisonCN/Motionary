@@ -1,19 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { installComponentMocks, anims, finishAll, mount, tick } from './components-setup';
-import {
-  definePageComponents,
-  pageTransition,
-  themeTransition,
-  enableMpaTransitions,
-  smoothScroll,
-  scrollToTarget,
-  loadingBar,
-  setMotionIntensity,
-  setMotionLevel,
-  restoreMotionIntensity,
-  getMotionIntensity,
-  PAGE_EFFECTS,
-} from '../src/components/page';
+import { definePageComponents, pageTransition, themeTransition, enableMpaTransitions, smoothScroll, scrollToTarget, loadingBar, setMotionIntensity, setMotionLevel, restoreMotionIntensity, getMotionIntensity, PAGE_EFFECTS } from '../src/components/page';
 import { configureComponents, motionScale, prefersReducedMotion } from '../src/components/base';
 
 beforeEach(() => {

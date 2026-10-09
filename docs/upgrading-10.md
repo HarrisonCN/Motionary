@@ -1,6 +1,6 @@
 # Upgrading to 10.0
 
-10.0.0 is the next major — a new architecture: a zero-dependency core under 10 KB (`motionary/core`), every effect pack delivered as a plugin, and WebGPU as the default backend for GPU effects. 9.9 **warns once in the console** for everything that goes away, and a codemod rewrites it:
+10.0.0 is released — a new architecture: a zero-dependency core under 10 KB (`motionary/core`), every effect pack delivered as a plugin, and WebGPU as the default backend for GPU effects. 9.9 warned once in the console for everything that went away, and a codemod rewrites it:
 
 ```sh
 npx usa-codemod-10 src            # dry run: lists every change (and what needs a manual edit)

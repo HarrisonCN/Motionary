@@ -4,7 +4,7 @@ import { configureComponents } from '../src/components/base';
 import { defineWidgets, WIDGETS, monthGrid, parseISODate, hsvToHex, hexToHsv } from '../src/components/widgets';
 import * as fx2 from '../src/components/fx2';
 import { defineComponents } from '../src/components';
-import { FOCUS_FX, registerFocusPack, registerEffectPacks, EFFECT_PACKS, packManifest, validateManifest, loadEffectPack, EFFECT_PACK_FORMAT } from '../src/components/fx2';
+import { FOCUS_FX, registerFocusPack, registerAllPlugins, EFFECT_PACKS, packManifest, validateManifest, loadEffectPack, EFFECT_PACK_FORMAT } from '../src/components/fx2';
 import { getEffect, playEffect } from '../src/components/fx';
 import { COMPONENT_ITEMS } from '../showcase/catalog-components.js';
 import { COMPONENTS, componentSnippets } from '../showcase/components-catalog.js';
@@ -109,9 +109,9 @@ describe('6.9 widgets', () => {
 });
 
 describe('focus pack + marketplace', () => {
-  it('registers the focus pack (also via registerEffectPacks)', () => {
+  it('registers the focus pack (also via registerAllPlugins)', () => {
     registerFocusPack();
-    registerEffectPacks();
+    registerAllPlugins();
     expect(FOCUS_FX.map((d) => d.name)).toEqual(['focus-draw', 'marching-ants', 'success-check', 'highlight-sweep']);
     for (const d of FOCUS_FX) expect(getEffect(d.name)).toBe(d);
     expect(EFFECT_PACKS.focus).toBe(FOCUS_FX);
@@ -161,8 +161,8 @@ describe('7.0 deprecations', () => {
   it('usa-codemod-7 rewrites registrars and tags, reports manual work', () => {
     const src = "import { registerFx2, registerTextEffects3 } from 'motionary/components/fx2';\nregisterFx2(); registerTextEffects3();\nconst p = FX2_PACKS;\n<usa-tooltip text=\"Hi\"><b>x</b></usa-tooltip><usa-toggle checked></usa-toggle><usa-toggle-knob></usa-toggle-knob>\ndefineTooltip();";
     const { code, changes, manual } = transform(src);
-    expect(code).toContain('import { registerEffectPacks, registerTextPack }');
-    expect(code).toContain('registerEffectPacks(); registerTextPack();');
+    expect(code).toContain('import { registerAllPlugins, registerTextPack }');
+    expect(code).toContain('registerAllPlugins(); registerTextPack();');
     expect(code).toContain('EFFECT_PACKS');
     expect(code).toContain('<usa-tip text="Hi"><b>x</b></usa-tip><usa-switch checked></usa-switch>');
     expect(code).toContain('<usa-toggle-knob>');
@@ -172,7 +172,7 @@ describe('7.0 deprecations', () => {
   });
   it('documents the 7.0 removals', () => {
     const up = readFileSync('docs/upgrading-7.md', 'utf8');
-    for (const s of ['registerFx2', 'registerEffectPacks', '<usa-tooltip', '<usa-toggle', 'usa-codemod-7']) expect(up).toContain(s);
+    for (const s of ['registerFx2', 'registerAllPlugins', '<usa-tooltip', '<usa-toggle', 'usa-codemod-7']) expect(up).toContain(s);
     expect(JSON.parse(readFileSync('package.json', 'utf8')).bin['usa-codemod-7']).toBe('./bin/usa-codemod-7.mjs');
     expect(readFileSync('docs/deprecations.md', 'utf8')).toContain('Deprecated in 6.9, removed in 7.0');
   });

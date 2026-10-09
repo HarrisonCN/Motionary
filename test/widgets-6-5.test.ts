@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { installComponentMocks, mount, anims } from './components-setup';
 import { configureComponents } from '../src/components/base';
 import { defineWidgets, WIDGETS } from '../src/components/widgets';
-import { DEPTH3_FX, register3dPack, registerEffectPacks, EFFECT_PACKS } from '../src/components/fx2';
+import { DEPTH3_FX, register3dPack, registerAllPlugins, EFFECT_PACKS } from '../src/components/fx2';
 import { getEffect, playEffect } from '../src/components/fx';
 import { COMPONENT_ITEMS } from '../showcase/catalog-components.js';
 import { COMPONENTS, componentSnippets } from '../showcase/components-catalog.js';
@@ -137,7 +137,7 @@ describe('<usa-cube-gallery>', () => {
 describe('6.5 3D effects', () => {
   it('registers 5 effects in motionary/components/fx-3d', () => {
     register3dPack();
-    registerEffectPacks();
+    registerAllPlugins();
     expect(DEPTH3_FX.map((d) => d.name)).toEqual(['depth-stack', 'product-spin', 'card-flip-3d', 'origami', 'orbit-camera']);
     for (const d of DEPTH3_FX) expect(getEffect(d.name)).toBe(d);
     expect(EFFECT_PACKS.depth).toBe(DEPTH3_FX);

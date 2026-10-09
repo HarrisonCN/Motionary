@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { installComponentMocks, mount, anims } from './components-setup';
 import { configureComponents } from '../src/components/base';
 import { defineWidgets, WIDGETS, pageWindow, SEGMENTED_VARIANTS, SWITCH_VARIANTS } from '../src/components/widgets';
-import { TRANSITIONS2_FX, registerTransitionsPack, registerEffectPacks, EFFECT_PACKS, pageTransition, crossDocumentTransitions } from '../src/components/fx2';
+import { TRANSITIONS2_FX, registerTransitionsPack, registerAllPlugins, EFFECT_PACKS, pageTransition, crossDocumentTransitions } from '../src/components/fx2';
 import { getEffect, playEffect } from '../src/components/fx';
 import { COMPONENT_ITEMS } from '../showcase/catalog-components.js';
 import { COMPONENTS, componentSnippets } from '../showcase/components-catalog.js';
@@ -100,9 +100,9 @@ describe('6.7 widgets', () => {
 });
 
 describe('Transitions 2.0 (fx-transitions)', () => {
-  it('registers 6 page effects (also via registerEffectPacks) and is its own entry', () => {
+  it('registers 6 page effects (also via registerAllPlugins) and is its own entry', () => {
     registerTransitionsPack();
-    registerEffectPacks();
+    registerAllPlugins();
     expect(TRANSITIONS2_FX.map((d) => d.name)).toEqual(['ripple-dissolve', 'shatter', 'mosaic-flip', 'liquid-wipe', 'page-curl', 'camera-dolly']);
     for (const d of TRANSITIONS2_FX) {
       expect(getEffect(d.name)).toBe(d);

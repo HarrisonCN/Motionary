@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { installComponentMocks, mount } from './components-setup';
 import { configureComponents } from '../src/components/base';
-import { glslToWgsl, wgslModule, WGSL_HEAD, supportsWebGPU, webgpuBackground, shaderBackground, GPU_FX, registerGpuPack, EFFECT_PACKS, registerEffectPacks } from '../src/components/fx2';
+import { glslToWgsl, wgslModule, WGSL_HEAD, supportsWebGPU, webgpuBackground, shaderBackground, GPU_FX, registerGpuPack, EFFECT_PACKS, registerAllPlugins } from '../src/components/fx2';
 import { getEffect } from '../src/components/fx';
 import { readFileSync } from 'node:fs';
 
@@ -82,8 +82,8 @@ describe('7.0 entries, removals, docs', () => {
       expect(pkg.exports[`./fx/${p}`].require.default).toBe(`./dist/components/${n}.cjs`);
     }
   });
-  it('registerEffectPacks / EFFECT_PACKS are the only aggregate names', () => {
-    registerEffectPacks();
+  it('registerAllPlugins / EFFECT_PACKS are the only aggregate names', () => {
+    registerAllPlugins();
     expect(EFFECT_PACKS.gpu).toBe(GPU_FX);
     expect(Object.keys(EFFECT_PACKS)).toEqual(expect.arrayContaining(['gpu', 'text', 'light', 'depth', 'morph', 'transitions', 'weather', 'physics', 'focus']));
   });

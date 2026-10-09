@@ -1,19 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { installComponentMocks, anims, finishAll, intersect, mount, tick } from './components-setup';
-import {
-  definePhysicsComponents,
-  SPRING_PRESETS,
-  resolveSpring,
-  springSamples,
-  springEasing,
-  linearEasing,
-  spring,
-  createSpring,
-  projectInertia,
-  snapTo,
-  rubberBand,
-  springEffectKeyframes,
-} from '../src/components/physics';
+import { definePhysicsComponents, SPRING_PRESETS, resolveSpring, springSamples, springEasing, linearEasing, spring, createSpring, projectInertia, snapTo, rubberBand, springEffectKeyframes } from '../src/components/physics';
 import { configureComponents } from '../src/components/base';
 
 beforeEach(() => {

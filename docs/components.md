@@ -1310,6 +1310,17 @@ usePlugins(definePlugin('acme/sparkle', [sparkleEffect]));
 ```
 - `registerEffectPacks()` is deprecated (removed in 10.0) → `registerAllPlugins()`; `npx usa-codemod-10 --write src`. See docs/upgrading-10.md.
 
+### v10.0 New architecture — `motionary/core` (< 10 KB gzip) + `motionary/plugins`
+
+```js
+import { createMotion } from 'motionary/core';
+import { retro, cinema } from 'motionary/plugins';
+const motion = createMotion().use(retro, cinema);
+motion.reveal('.card', 'fade-up', { stagger: 80 });
+motion.bind(button, 'vhs-glitch', { trigger: 'click' });
+```
+- Zero dependencies, ≈ 2 KB gzip; every effect pack is a plugin; WebGPU is the default GPU backend. `registerEffectPacks()` is removed → `registerAllPlugins()` (`npx usa-codemod-10 --write src`). See docs/core.md and docs/upgrading-10.md.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

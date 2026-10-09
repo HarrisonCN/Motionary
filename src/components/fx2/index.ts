@@ -37,7 +37,6 @@ import { GENART_FX, registerGenArtPack, PALETTES, seededRandom, meshGradient } f
 import { VIDEO_FX, registerVideoPack, scrollProgress, scrubVideo, frameSequence } from './video';
 import { SAFE_FX, registerSafePack, vestibularSafe, flashCount, isFlashSafe, applyMotionPreferences, loadMotionPreferences, MOTION_PREFS_KEY, DEFAULT_MOTION_PREFS } from './safemotion';
 import { PERF3_FX, registerPerf3Pack, runInWorker, offscreenRender, fpsMeter } from './perf3';
-import { deprecate } from '../base';
 import { registerEffects } from '../fx/registry';
 
 export { GPU_FX, registerGpuPack, TEXT3_FX, registerTextPack, splitChars };
@@ -203,12 +202,4 @@ export function usePlugins(...plugins: MotionPlugin[]): string[] {
     names.push(...p.effects.map((e) => e.name));
   }
   return names;
-}
-/**
- * Register every 6.x–9.x effect pack.
- * @deprecated 9.9 — removed in 10.0. Use `registerAllPlugins()` (same behaviour) or `usePlugins(...)`.
- */
-export function registerEffectPacks(): void {
-  deprecate('registerEffectPacks', 'registerEffectPacks() is deprecated and removed in 10.0 — use registerAllPlugins() (same behaviour) or usePlugins(...). Run `npx usa-codemod-10 --write src`.');
-  registerAllPlugins();
 }

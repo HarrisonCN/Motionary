@@ -1,18 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { installComponentMocks, mount, anims } from './components-setup';
 import { raf, caf, configureComponents, getMotionIntensity } from '../src/components/base';
-import {
-  onFrame,
-  schedulerStats,
-  activeAnimations,
-  setAnimationBudget,
-  animationBudget,
-  autoDegrade,
-  loadCategoryStyles,
-  onDemandStyles,
-  categoryOf,
-  loadedStyles,
-} from '../src/components/perf';
+import { onFrame, schedulerStats, activeAnimations, setAnimationBudget, animationBudget, autoDegrade, loadCategoryStyles, onDemandStyles, categoryOf, loadedStyles } from '../src/components/perf';
 import { defineComponents } from '../src/components';
 
 describe('shared rAF scheduler (4.5)', () => {

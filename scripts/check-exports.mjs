@@ -26,6 +26,8 @@ const entries = {
   'motionary/marketplace': ['MARKETPLACE', 'MARKETPLACE_FORMAT', 'searchPlugins', 'installPlugin', 'installedPlugins', 'fetchMarketplace', 'packManifest', 'validateManifest', 'loadEffectPack', 'EFFECT_PACK_FORMAT'],
   'motionary/design': ['figmaToMotion', 'framerComponent', 'motionToCss', 'easingPoints'],
   'motionary/native': ['toReactNative', 'toFlutter', 'nativeEasing', 'nativeTokens', 'entranceFrom'],
+  'motionary/core': ['createMotion', 'PRESETS', 'preferredBackend', 'VERSION'],
+  'motionary/plugins': ['ALL_PLUGINS', 'retro', 'cinema', 'paper'],
   'motionary/components/ui': ['defineUiComponents', 'defineTabs', 'defineDrawer', 'defineBottomSheet', 'definePullRefresh', 'defineFab', 'defineNavbar', 'defineSlider', 'definePopover', 'defineBadge', 'defineAvatarStack', 'VARIANTS', 'setVariant'],
   'motionary/components/page': ['definePageComponents', 'defineCursor', 'defineFullpage', 'defineLoadingBar', 'defineBackToTop', 'defineAmbient', 'defineSplash', 'defineAutoSkeleton', 'defineMotionSwitch', 'pageTransition', 'enableMpaTransitions', 'themeTransition', 'smoothScroll', 'scrollToTarget', 'loadingBar', 'setMotionIntensity'],
   'motionary/components/react': ['createUsaComponents', 'USA_TAGS', 'eventName'],
