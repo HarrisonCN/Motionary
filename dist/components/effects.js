@@ -7,7 +7,7 @@ export { n as noise2 } from '../chunks/generative-2LhxG5BJ.js';
 import { A as AUDIO_FX, d as defineAudio } from '../chunks/audio-CynhhWDi.js';
 export { b as bindBeat, c as createBeatDetector, a as disableAudio, e as enableAudio, g as getAudio, o as onBeat } from '../chunks/audio-CynhhWDi.js';
 import { playEffect, bindEffect, registerEffects } from '../chunks/registry-CnO7ZVPK.js';
-import { u as defineElement, B as adoptStyles } from '../chunks/base-CLuqlLfG.js';
+import { u as defineElement, B as adoptStyles, C as deprecate } from '../chunks/base-CLuqlLfG.js';
 import { applyMotionTokens, motionTokensToVars, mergeMotionTokens } from './tokens.js';
 import '../chunks/builtins-Bs4smevg.js';
 import '../chunks/core-CiN5sqxB.js';
@@ -1158,6 +1158,10 @@ const THEMES = {
     },
 };
 const THEME_NAMES = Object.keys(THEMES);
+/** The 5.8 motion theme packs (8.9 name of `THEMES`). */
+const MOTION_THEMES = THEMES;
+/** Names of the 5.8 motion theme packs (8.9 name of `THEME_NAMES`). */
+const MOTION_THEME_NAMES = THEME_NAMES;
 const BASE_CSS = `[data-usa-theme]{background:var(--usa-theme-bg);color:var(--usa-theme-fg);font-family:var(--usa-theme-font)}
 [data-usa-theme] .usa-surface{background:var(--usa-theme-surface);border:var(--usa-theme-border);border-radius:var(--usa-theme-radius);box-shadow:var(--usa-theme-shadow)}
 [data-usa-theme] .usa-accent{color:var(--usa-theme-accent)}
@@ -1181,8 +1185,16 @@ function themeCss(t, selector) {
     const p = pack(t);
     return `${selector || `[data-usa-theme=${p.name}]`}{${Object.entries(themeVars(p)).map(([k, v]) => `${k}:${v}`).join(';')}}`;
 }
-/** Apply a theme to `root` (default `<html>`). Returns an undo. */
+/**
+ * Apply a motion theme to `root` (default `<html>`). Returns an undo.
+ * @deprecated 8.9 — removed in 9.0. Use `applyMotionTheme()` (same signature); `npx usa-codemod-9 --write src`.
+ */
 function applyTheme(t, root) {
+    deprecate('applyTheme', 'applyTheme() is deprecated and removed in 9.0 — use applyMotionTheme() (same signature). Run `npx usa-codemod-9 --write src`.');
+    return applyMotionTheme(t, root);
+}
+/** Apply a 5.8 motion theme to `root` (default `<html>`). Returns an undo (8.9). */
+function applyMotionTheme(t, root) {
     const p = pack(t);
     const el = root || document.documentElement;
     adoptStyles('usa-theme', BASE_CSS);
@@ -1281,7 +1293,9 @@ function defineTheme(tag = 'usa-theme') {
             return THEMES[n] ? n : 'neon';
         }
         mount() {
-            this.onCleanup(applyTheme(this.theme, this));
+            if (this.localName === 'usa-theme')
+                deprecate('usa-theme', '<usa-theme> is deprecated and removed in 9.0 — use <usa-motion-theme> (same name / data-theme-fx). Run `npx usa-codemod-9 --write src`.');
+            this.onCleanup(applyMotionTheme(this.theme, this));
             this.querySelectorAll('[data-theme-fx]').forEach((el) => {
                 const role = (el.dataset.themeFx || 'click');
                 if (!THEME_ROLES.includes(role))
@@ -1297,6 +1311,10 @@ function defineTheme(tag = 'usa-theme') {
             });
         }
     }, { id: 'usa-theme-el', text: 'usa-theme{display:block}' });
+}
+/** `<usa-motion-theme name="neon">` — the 8.9 name of `<usa-theme>` (removed in 9.0). */
+function defineMotionTheme(tag = 'usa-motion-theme') {
+    return defineTheme(tag);
 }
 
 /**
@@ -1357,6 +1375,7 @@ function defineEffectElements() {
     defineAudio();
     defineGestureFx();
     defineTheme();
+    defineMotionTheme();
     definePlayer();
 }
 /** Register the built-ins and every pack (idempotent). */
@@ -1366,5 +1385,5 @@ function registerAllEffects() {
         registerEffects(defs);
 }
 
-export { AUDIO_FX, CARD_FX, CLICK_FX, CURSOR_FX, EFFECT_PACKS, GENERATIVE_FX, GESTURES, MICRO_FX, PAGE_FX, PHYSICS_FX, THEMES, THEME_FX, THEME_NAMES, THEME_ROLES, angleDelta, applyTheme, bindGesture, bounceKeyframes, bumpCount, canvasBackground, defineAudio, defineEffectElements, defineGestureFx, definePlayer, defineStory, defineTheme, flingVelocity, fxLayer, hexRgb, playThemeEffect, registerAllEffects, registerAudioEffects, registerCardClickEffects, registerCursorEffects, registerGenerativeEffects, registerMicroEffects, registerPageEffects, registerPhysicsEffects, solveSpring, springKeyframes, swapLabel, themeCss, themePreset, themeVars, togglePressed };
+export { AUDIO_FX, CARD_FX, CLICK_FX, CURSOR_FX, EFFECT_PACKS, GENERATIVE_FX, GESTURES, MICRO_FX, MOTION_THEMES, MOTION_THEME_NAMES, PAGE_FX, PHYSICS_FX, THEMES, THEME_FX, THEME_NAMES, THEME_ROLES, angleDelta, applyMotionTheme, applyTheme, bindGesture, bounceKeyframes, bumpCount, canvasBackground, defineAudio, defineEffectElements, defineGestureFx, defineMotionTheme, definePlayer, defineStory, defineTheme, flingVelocity, fxLayer, hexRgb, playThemeEffect, registerAllEffects, registerAudioEffects, registerCardClickEffects, registerCursorEffects, registerGenerativeEffects, registerMicroEffects, registerPageEffects, registerPhysicsEffects, solveSpring, springKeyframes, swapLabel, themeCss, themePreset, themeVars, togglePressed };
 //# sourceMappingURL=effects.js.map

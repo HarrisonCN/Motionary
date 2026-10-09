@@ -1157,6 +1157,10 @@ const THEMES = {
     },
 };
 const THEME_NAMES = Object.keys(THEMES);
+/** The 5.8 motion theme packs (8.9 name of `THEMES`). */
+const MOTION_THEMES = THEMES;
+/** Names of the 5.8 motion theme packs (8.9 name of `THEME_NAMES`). */
+const MOTION_THEME_NAMES = THEME_NAMES;
 const BASE_CSS = `[data-usa-theme]{background:var(--usa-theme-bg);color:var(--usa-theme-fg);font-family:var(--usa-theme-font)}
 [data-usa-theme] .usa-surface{background:var(--usa-theme-surface);border:var(--usa-theme-border);border-radius:var(--usa-theme-radius);box-shadow:var(--usa-theme-shadow)}
 [data-usa-theme] .usa-accent{color:var(--usa-theme-accent)}
@@ -1180,8 +1184,16 @@ function themeCss(t, selector) {
     const p = pack(t);
     return `${selector || `[data-usa-theme=${p.name}]`}{${Object.entries(themeVars(p)).map(([k, v]) => `${k}:${v}`).join(';')}}`;
 }
-/** Apply a theme to `root` (default `<html>`). Returns an undo. */
+/**
+ * Apply a motion theme to `root` (default `<html>`). Returns an undo.
+ * @deprecated 8.9 — removed in 9.0. Use `applyMotionTheme()` (same signature); `npx usa-codemod-9 --write src`.
+ */
 function applyTheme(t, root) {
+    base.deprecate('applyTheme', 'applyTheme() is deprecated and removed in 9.0 — use applyMotionTheme() (same signature). Run `npx usa-codemod-9 --write src`.');
+    return applyMotionTheme(t, root);
+}
+/** Apply a 5.8 motion theme to `root` (default `<html>`). Returns an undo (8.9). */
+function applyMotionTheme(t, root) {
     const p = pack(t);
     const el = root || document.documentElement;
     base.adoptStyles('usa-theme', BASE_CSS);
@@ -1280,7 +1292,9 @@ function defineTheme(tag = 'usa-theme') {
             return THEMES[n] ? n : 'neon';
         }
         mount() {
-            this.onCleanup(applyTheme(this.theme, this));
+            if (this.localName === 'usa-theme')
+                base.deprecate('usa-theme', '<usa-theme> is deprecated and removed in 9.0 — use <usa-motion-theme> (same name / data-theme-fx). Run `npx usa-codemod-9 --write src`.');
+            this.onCleanup(applyMotionTheme(this.theme, this));
             this.querySelectorAll('[data-theme-fx]').forEach((el) => {
                 const role = (el.dataset.themeFx || 'click');
                 if (!THEME_ROLES.includes(role))
@@ -1296,6 +1310,10 @@ function defineTheme(tag = 'usa-theme') {
             });
         }
     }, { id: 'usa-theme-el', text: 'usa-theme{display:block}' });
+}
+/** `<usa-motion-theme name="neon">` — the 8.9 name of `<usa-theme>` (removed in 9.0). */
+function defineMotionTheme(tag = 'usa-motion-theme') {
+    return defineTheme(tag);
 }
 
 /**
@@ -1356,6 +1374,7 @@ function defineEffectElements() {
     audio.defineAudio();
     defineGestureFx();
     defineTheme();
+    defineMotionTheme();
     player.definePlayer();
 }
 /** Register the built-ins and every pack (idempotent). */
@@ -1392,6 +1411,8 @@ exports.CURSOR_FX = CURSOR_FX;
 exports.EFFECT_PACKS = EFFECT_PACKS;
 exports.GESTURES = GESTURES;
 exports.MICRO_FX = MICRO_FX;
+exports.MOTION_THEMES = MOTION_THEMES;
+exports.MOTION_THEME_NAMES = MOTION_THEME_NAMES;
 exports.PAGE_FX = PAGE_FX;
 exports.PHYSICS_FX = PHYSICS_FX;
 exports.THEMES = THEMES;
@@ -1399,12 +1420,14 @@ exports.THEME_FX = THEME_FX;
 exports.THEME_NAMES = THEME_NAMES;
 exports.THEME_ROLES = THEME_ROLES;
 exports.angleDelta = angleDelta;
+exports.applyMotionTheme = applyMotionTheme;
 exports.applyTheme = applyTheme;
 exports.bindGesture = bindGesture;
 exports.bounceKeyframes = bounceKeyframes;
 exports.bumpCount = bumpCount;
 exports.defineEffectElements = defineEffectElements;
 exports.defineGestureFx = defineGestureFx;
+exports.defineMotionTheme = defineMotionTheme;
 exports.defineTheme = defineTheme;
 exports.flingVelocity = flingVelocity;
 exports.playThemeEffect = playThemeEffect;
