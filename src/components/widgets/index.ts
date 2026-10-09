@@ -102,6 +102,8 @@ import { defineVideoCard, type UsaVideoCardElement } from './video-card';
 import { defineHeroVideo, type UsaHeroVideoElement } from './hero-video';
 import { defineMotionPrefs, type UsaMotionPrefsElement } from './motion-prefs';
 import { definePauseAll, type UsaPauseAllElement } from './pause-all';
+import { definePerfMonitor, type UsaPerfMonitorElement, type PerfStats } from './perf-monitor';
+import { defineWorkerCanvas, WORKER_SCENES, type UsaWorkerCanvasElement } from './worker-canvas';
 
 export { defineCarousel, defineTabBar, defineDisclosure, defineStories, CAROUSEL_EFFECTS, TAB_INDICATORS };
 export type { UsaCarouselElement, UsaTabBarElement, UsaDisclosureElement, UsaStoriesElement };
@@ -201,6 +203,9 @@ export type { UsaVideoCardElement, UsaHeroVideoElement };
 export { defineMotionPrefs, definePauseAll };
 export type { UsaMotionPrefsElement, UsaPauseAllElement };
 
+export { definePerfMonitor, defineWorkerCanvas, WORKER_SCENES };
+export type { UsaPerfMonitorElement, PerfStats, UsaWorkerCanvasElement };
+
 /** The widgets by release (tag → define function). */
 export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElementConstructor | undefined>> = {
   '6.2': { 'usa-carousel': defineCarousel, 'usa-tab-bar': defineTabBar, 'usa-disclosure': defineDisclosure, 'usa-stories': defineStories },
@@ -236,6 +241,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '9.3': { 'usa-gen-art': defineGenArt, 'usa-bg-generator': defineBgGenerator },
   '9.4': { 'usa-video-card': defineVideoCard, 'usa-hero-video': defineHeroVideo },
   '9.5': { 'usa-motion-prefs': defineMotionPrefs, 'usa-pause-all': definePauseAll },
+  '9.6': { 'usa-perf-monitor': definePerfMonitor, 'usa-worker-canvas': defineWorkerCanvas },
 };
 
 /** Every widget tag, in release order. */
@@ -342,5 +348,7 @@ declare global {
     'usa-hero-video': UsaHeroVideoElement;
     'usa-motion-prefs': UsaMotionPrefsElement;
     'usa-pause-all': UsaPauseAllElement;
+    'usa-perf-monitor': UsaPerfMonitorElement;
+    'usa-worker-canvas': UsaWorkerCanvasElement;
   }
 }

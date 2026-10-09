@@ -1256,6 +1256,22 @@ console.assert(isFlashSafe(frames, 600, Infinity));
 - `<usa-pause-all label resume-label scope>`: `paused`, `toggle()`; `usa:pause-all` { paused }.
 - Safe: `safe-fade` · `focus-glow` · `color-pulse` (`color`) · `underline-sweep`; `vestibularSafe`, `flashCount`, `isFlashSafe`, `applyMotionPreferences`, `loadMotionPreferences`.
 
+### v9.6 Performance 3.0: `<usa-perf-monitor>`, `<usa-worker-canvas>` + perf pack (`motionary/fx/perf`)
+
+```html
+<usa-perf-monitor corner="bottom-right"></usa-perf-monitor>
+<usa-worker-canvas scene="starfield" style="height:240px"></usa-worker-canvas>
+```
+```js
+import { offscreenRender, runInWorker, fpsMeter } from 'motionary/fx/perf';
+const r = offscreenRender(canvas, (ctx, t, w, h) => { ctx.clearRect(0, 0, w, h); ctx.fillRect((t / 5) % w, h / 2, 8, 8); });
+console.log(r.backend); // 'worker' when OffscreenCanvas is available
+const primes = await runInWorker((n) => { /* heavy */ return n * 2; }, 21);
+```
+- `<usa-perf-monitor corner collapsed warn>`: `stats`; `usa:jank` { fps }.
+- `<usa-worker-canvas scene label>`: `program`, `backend`; `usa:backend`.
+- Perf: `offscreenRender`, `runInWorker`, `fpsMeter`; effects `idle-reveal` (`timeout`), `gpu-lift` (`lift`).
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.
