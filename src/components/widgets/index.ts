@@ -72,6 +72,8 @@ import { defineCommandPalette, fuzzyMatch, keyLabels, matchesKeys, type UsaComma
 import { defineShortcut, type UsaShortcutElement } from './shortcut';
 import { defineClockControl, type UsaClockControlElement } from './clock-control';
 import { defineHydrate, type UsaHydrateElement } from './hydrate';
+import { defineRedEnvelope, type UsaRedEnvelopeElement } from './red-envelope';
+import { defineFestivalBanner, FESTIVAL_THEMES, type UsaFestivalBannerElement } from './festival-banner';
 
 export { defineCarousel, defineTabBar, defineDisclosure, defineStories, CAROUSEL_EFFECTS, TAB_INDICATORS };
 export type { UsaCarouselElement, UsaTabBarElement, UsaDisclosureElement, UsaStoriesElement };
@@ -126,6 +128,9 @@ export type { UsaCommandPaletteElement, PaletteCommand, UsaShortcutElement };
 export { defineClockControl, defineHydrate };
 export type { UsaClockControlElement, UsaHydrateElement };
 
+export { defineRedEnvelope, defineFestivalBanner, FESTIVAL_THEMES };
+export type { UsaRedEnvelopeElement, UsaFestivalBannerElement };
+
 /** The widgets by release (tag → define function). */
 export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElementConstructor | undefined>> = {
   '6.2': { 'usa-carousel': defineCarousel, 'usa-tab-bar': defineTabBar, 'usa-disclosure': defineDisclosure, 'usa-stories': defineStories },
@@ -146,6 +151,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '7.8': { 'usa-chat-composer': defineChatComposer, 'usa-suggestion-chips': defineSuggestionChips, 'usa-voice-button': defineVoiceButton },
   '7.9': { 'usa-command-palette': defineCommandPalette, 'usa-shortcut': defineShortcut },
   '8.0': { 'usa-clock-control': defineClockControl, 'usa-hydrate': defineHydrate },
+  '8.1': { 'usa-red-envelope': defineRedEnvelope, 'usa-festival-banner': defineFestivalBanner },
 };
 
 /** Every widget tag, in release order. */
@@ -222,5 +228,7 @@ declare global {
     'usa-shortcut': UsaShortcutElement;
     'usa-clock-control': UsaClockControlElement;
     'usa-hydrate': UsaHydrateElement;
+    'usa-red-envelope': UsaRedEnvelopeElement;
+    'usa-festival-banner': UsaFestivalBannerElement;
   }
 }

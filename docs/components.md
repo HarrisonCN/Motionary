@@ -961,6 +961,25 @@ hydrateMotion(document, { stagger: 60 });
 - `hydrateMotion(root, { stagger, duration, preset, easing })` → timeline; `ssrHead(nonce)`, `HYDRATION_CSS`, `HYDRATE_PRESETS`.
 - `<usa-clock-control speeds label>`: `rate`, `paused`; `usa:change`. `<usa-hydrate effect stagger duration>`: `replay()`, `timeline`; `usa:hydrated`.
 
+### v8.1 Widgets: red envelope, festival banner (`components/widgets`) + festival packs (`motionary/fx/festival`)
+
+```html
+<usa-red-envelope amount="88.88" from="Grandma" message="恭喜发财"></usa-red-envelope>
+<usa-festival-banner theme="lunar" dismissible>🧧 Happy Lunar New Year — 20% off all week</usa-festival-banner>
+
+<usa-fx effect="firework-burst" trigger="click"><button>Celebrate</button></usa-fx>
+<usa-fx effect="xmas-snow" trigger="loop"><div class="card">Season’s greetings</div></usa-fx>
+```
+```js
+import { defineWidgets } from 'motionary/components/widgets';
+import { registerFestivalPack } from 'motionary/fx/festival';
+defineWidgets(); registerFestivalPack();
+envelope.addEventListener('usa:open', (e) => console.log(e.detail.amount));
+```
+- `<usa-red-envelope amount currency message from opened>`: `open()`, `close()`, `opened`; `usa:open` { amount }.
+- `<usa-festival-banner theme label dismissible>`: `theme`, `dismiss()`; `usa:dismiss`; `FESTIVAL_THEMES`.
+- Festival: `firework-burst` (`bursts`, `colors`) · `lantern-rise` (`sway`) · `xmas-snow` (`flakes`) · `spooky-float` (`cycles`); `sparkVectors(n, radius, seed)`.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.
