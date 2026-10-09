@@ -94,6 +94,8 @@ import { defineMotion, type UsaMotionElement } from './motion';
 import { definePluginStore, type UsaPluginStoreElement } from './plugin-store';
 import { defineChapterNav, type UsaChapterNavElement } from './chapter-nav';
 import { defineScene, type UsaSceneElement } from './scene';
+import { defineLottie, type UsaLottieElement } from './lottie';
+import { defineLottieIcon, LOTTIE_ICONS, type UsaLottieIconElement } from './lottie-icon';
 
 export { defineCarousel, defineTabBar, defineDisclosure, defineStories, CAROUSEL_EFFECTS, TAB_INDICATORS };
 export type { UsaCarouselElement, UsaTabBarElement, UsaDisclosureElement, UsaStoriesElement };
@@ -181,6 +183,9 @@ export type { UsaMotionElement, UsaPluginStoreElement };
 export { defineChapterNav, defineScene };
 export type { UsaChapterNavElement, UsaSceneElement };
 
+export { defineLottie, defineLottieIcon, LOTTIE_ICONS };
+export type { UsaLottieElement, UsaLottieIconElement };
+
 /** The widgets by release (tag → define function). */
 export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElementConstructor | undefined>> = {
   '6.2': { 'usa-carousel': defineCarousel, 'usa-tab-bar': defineTabBar, 'usa-disclosure': defineDisclosure, 'usa-stories': defineStories },
@@ -212,6 +217,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '8.9': { 'usa-code-export': defineCodeExport, 'usa-prop-panel': definePropPanel },
   '9.0': { 'usa-motion': defineMotion, 'usa-plugin-store': definePluginStore },
   '9.1': { 'usa-chapter-nav': defineChapterNav, 'usa-scene': defineScene },
+  '9.2': { 'usa-lottie': defineLottie, 'usa-lottie-icon': defineLottieIcon },
 };
 
 /** Every widget tag, in release order. */
@@ -310,5 +316,7 @@ declare global {
     'usa-plugin-store': UsaPluginStoreElement;
     'usa-chapter-nav': UsaChapterNavElement;
     'usa-scene': UsaSceneElement;
+    'usa-lottie': UsaLottieElement;
+    'usa-lottie-icon': UsaLottieIconElement;
   }
 }
