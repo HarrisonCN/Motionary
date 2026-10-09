@@ -17,6 +17,7 @@ var components_fxSocial = require('./fx-social.cjs');
 var components_fxGame = require('./fx-game.cjs');
 var components_fxGeo = require('./fx-geo.cjs');
 var components_fxForm = require('./fx-form.cjs');
+var components_fxAi = require('./fx-ai.cjs');
 require('../chunks/registry-DehBVRDV.cjs');
 require('../chunks/base-BaQV-2ha.cjs');
 require('../chunks/generative-BHIj-NU0.cjs');
@@ -41,6 +42,7 @@ const EFFECT_PACKS = {
     game: components_fxGame.GAME_FX,
     geo: components_fxGeo.GEO_FX,
     form: components_fxForm.FORM_FX,
+    ai: components_fxAi.AI_FX,
 };
 /** Register every 6.x effect pack (idempotent). */
 function registerEffectPacks() {
@@ -60,6 +62,7 @@ function registerEffectPacks() {
     components_fxGame.registerGamePack();
     components_fxGeo.registerGeoPack();
     components_fxForm.registerFormPack();
+    components_fxAi.registerAiPack();
 }
 
 exports.EFFECT_PACK_FORMAT = components_marketplace.EFFECT_PACK_FORMAT;
@@ -123,6 +126,9 @@ exports.routeLength = components_fxGeo.routeLength;
 exports.FORM_FX = components_fxForm.FORM_FX;
 exports.registerFormPack = components_fxForm.registerFormPack;
 exports.shakeFrames = components_fxForm.shakeFrames;
+exports.AI_FX = components_fxAi.AI_FX;
+exports.registerAiPack = components_fxAi.registerAiPack;
+exports.splitWords = components_fxAi.splitWords;
 exports.EFFECT_PACKS = EFFECT_PACKS;
 exports.registerEffectPacks = registerEffectPacks;
 //# sourceMappingURL=fx2.cjs.map

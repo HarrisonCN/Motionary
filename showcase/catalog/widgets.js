@@ -740,14 +740,14 @@ export const components = [
     '7.8：stream-text 像大模型流式输出一样逐词显示文字并带闪烁光标；thinking-glow 在模型思考时让元素周围呼吸般漂移着彩色光晕。',
     ['ai', 'stream', 'typing', 'llm', 'glow'],
     '<usa-fx effect="stream-text" trigger="enter"><p>Here is a streamed answer…</p></usa-fx>\n<usa-fx effect="thinking-glow" trigger="loop"><div class="bubble">Thinking…</div></usa-fx>',
-    '<usa-fx effect="stream-text" trigger="click"><p class="demo-streamp">Sure! Kyoto in two days: Fushimi Inari at sunrise, Arashiyama bamboo grove, then dinner in Pontocho. Tap to stream again.</p></usa-fx>',
+    '<usa-fx effect="stream-text" trigger="click"><button type="button" class="demo-streamp">Sure! Kyoto in two days: Fushimi Inari at sunrise, Arashiyama bamboo grove, then dinner in Pontocho. Tap to stream again.</button></usa-fx>',
     [{ key: 'effect', values: ['stream-text', 'thinking-glow'] }], '7.8'),
   X('fx-voice', ['fx-ai', 'registerAiPack'], 'Voice wave & generating skeleton', '语音波形与生成骨架',
     '7.8: voice-wave bounces an element\'s children like voice level bars; gen-skeleton covers content with a shimmering skeleton, then dissolves to reveal it.',
     '7.8：voice-wave 让元素的子项像语音音量条一样波动；gen-skeleton 先用流光骨架覆盖内容，再溶解显示生成结果。',
     ['voice', 'wave', 'skeleton', 'generating', 'ai'],
     '<usa-fx effect="voice-wave" trigger="click"><div class="bars"><i></i><i></i><i></i></div></usa-fx>\n<usa-fx effect="gen-skeleton" trigger="enter"><img src="generated.png" alt=""></usa-fx>',
-    '<div class="demo-row"><usa-fx effect="voice-wave" trigger="click"><button type="button" class="demo-vbars" aria-label="Play voice wave"><i></i><i></i><i></i><i></i><i></i></button></usa-fx><usa-fx effect="gen-skeleton" trigger="click"><button type="button" class="demo-gencard">🖼️ Generated image<br><small>tap to regenerate</small></button></usa-fx></div>',
+    '<div class="demo-row"><usa-fx effect="voice-wave" trigger="click"><button type="button" class="demo-vbars" aria-label="Play voice wave"><i></i><i></i><i></i><i></i><i></i></button></usa-fx><usa-fx effect="gen-skeleton" trigger="click"><button type="button" class="demo-gencard">Generated image<br><small>tap to regenerate</small></button></usa-fx></div>',
     [{ key: 'effect', values: ['voice-wave', 'gen-skeleton'] }], '7.8'),
 ];
 

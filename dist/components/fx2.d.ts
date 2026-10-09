@@ -564,6 +564,28 @@ declare const FORM_FX: EffectDefinition[];
 declare function registerFormPack(): void;
 
 /**
+ * 7.8 — AI UI motion (`motionary/fx/ai`, also `motionary/components/fx-ai`):
+ *
+ * - `stream-text` (enter) — the element's text appears word by word, like a
+ *   streamed LLM reply, with a blinking caret at the end (`speed` ms/word).
+ * - `thinking-glow` (loop) — a soft colour glow breathes and drifts round the
+ *   element while a model is "thinking" (`colors`); the cleanup stops it.
+ * - `voice-wave` (attention) — the element's children bounce in a wave like
+ *   voice level bars (or the element pulses when it has none) (`cycles`).
+ * - `gen-skeleton` (enter) — a shimmering skeleton covers the element, then
+ *   dissolves to reveal the generated content (`hold`).
+ *
+ * Reduced motion: stream-text shows the text, thinking-glow is skipped,
+ * voice-wave does nothing, gen-skeleton fades in.
+ */
+
+/** Split text into words, keeping the whitespace after each (7.8). */
+declare function splitWords(text: string): string[];
+declare const AI_FX: EffectDefinition[];
+/** Register stream-text, thinking-glow, voice-wave and gen-skeleton (7.8). */
+declare function registerAiPack(): void;
+
+/**
  * 5.5 — generative backgrounds on Canvas 2D, registered through
  * `registerEffect()` (kind `background`): `flow-field`, `voronoi`,
  * `mesh-gradient`, `starfield`, `metaballs`, `contours`.
@@ -672,5 +694,5 @@ declare const EFFECT_PACKS: Record<string, EffectDefinition[]>;
 /** Register every 6.x effect pack (idempotent). */
 declare function registerEffectPacks(): void;
 
-export { CHART_FX, DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FOCUS_FX, FORM_FX, GAME_FX, GEO_FX, GLSL_HEAD, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, PHYSICS2_FX, SHOP_FX, SOCIAL_FX, TEXT3_FX, TRANSITIONS2_FX, VerletWorld, WEATHER_FX, WGSL_HEAD, arcPath, crossDocumentTransitions, fanAngles, fieldFallback, glslToWgsl, loadEffectPack, musicSample, packManifest, pageTransition, parseFigure, pointsToPath, register3dPack, registerChartPack, registerEffectPacks, registerFocusPack, registerFormPack, registerGamePack, registerGeoPack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerPhysicsPack, registerShopPack, registerSocialPack, registerTextPack, registerTransitionsPack, registerWeatherPack, routeLength, samplePath, shaderBackground, shakeFrames, skyAt, splitChars, supportsWebGL2, supportsWebGPU, syntheticSample, throwPath, trackPointer, validateManifest, webgpuBackground, wgslModule };
+export { AI_FX, CHART_FX, DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FOCUS_FX, FORM_FX, GAME_FX, GEO_FX, GLSL_HEAD, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, PHYSICS2_FX, SHOP_FX, SOCIAL_FX, TEXT3_FX, TRANSITIONS2_FX, VerletWorld, WEATHER_FX, WGSL_HEAD, arcPath, crossDocumentTransitions, fanAngles, fieldFallback, glslToWgsl, loadEffectPack, musicSample, packManifest, pageTransition, parseFigure, pointsToPath, register3dPack, registerAiPack, registerChartPack, registerEffectPacks, registerFocusPack, registerFormPack, registerGamePack, registerGeoPack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerPhysicsPack, registerShopPack, registerSocialPack, registerTextPack, registerTransitionsPack, registerWeatherPack, routeLength, samplePath, shaderBackground, shakeFrames, skyAt, splitChars, splitWords, supportsWebGL2, supportsWebGPU, syntheticSample, throwPath, trackPointer, validateManifest, webgpuBackground, wgslModule };
 export type { EffectPackManifest, ShaderSpec };
