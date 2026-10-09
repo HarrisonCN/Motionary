@@ -711,7 +711,7 @@ export const components = [
     '7.7：form-cascade 让表单的字段与按钮依次滑入；label-float 让内部每个标签上浮再落定，模拟浮动标签。',
     ['form', 'cascade', 'stagger', 'label', 'enter'],
     '<usa-fx effect="form-cascade" trigger="enter">\n  <form>…fields…</form>\n</usa-fx>',
-    '<usa-fx effect="form-cascade" trigger="click" class="demo-formfx"><div class="demo-mini-field"><label>Name</label><span></span></div><div class="demo-mini-field"><label>Email</label><span></span></div><button type="button" class="demo-btn">Sign up — click to replay</button></usa-fx>',
+    '<usa-fx effect="form-cascade" trigger="click"><div class="demo-formfx"><div class="demo-mini-field"><label>Name</label><span></span></div><div class="demo-mini-field"><label>Email</label><span></span></div><button type="button" class="demo-btn">Sign up — click to replay</button></div></usa-fx>',
     [{ key: 'effect', values: ['form-cascade', 'label-float'] }], '7.7'),
 ];
 

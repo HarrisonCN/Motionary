@@ -347,7 +347,7 @@
   {
     "name": "dist/widgets.umd.js (minified, 6.x widgets + 6.x effect packs)",
     "file": "dist/widgets.umd.js",
-    "limit": 110080
+    "limit": 119296
   },
   {
     "name": "import 'motionary/components/widgets'",
@@ -443,5 +443,15 @@
     "name": "import 'motionary/components/fx-social'",
     "import": "export * from 'pkg/components/fx-social';",
     "limit": 2560
+  },
+  {
+    "name": "import 'motionary/components/fx-form'",
+    "import": "export * from 'pkg/components/fx-form';",
+    "limit": 2048
+  },
+  {
+    "name": "import { registerFormPack } from '…/components/fx-form'",
+    "import": "export { registerFormPack } from 'pkg/components/fx-form';",
+    "limit": 2048
   }
 ]
