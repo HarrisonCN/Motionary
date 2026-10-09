@@ -24,8 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - `<usa-plugin-store>` called `CSS.escape` without checking that the `CSS` global exists (throws in jsdom / some SSR shims) — now guarded with a fallback.
 - the 9.0 removal check treated the internal style-sheet id and the theme switcher's `localStorage` key `'usa-theme'` as leftovers of `<usa-theme>`; they are kept (saved theme choices survive the upgrade).
-- the 9.0 removal check flagged the internal style-sheet id `adoptStyles('usa-theme', …)` and the theme switcher's default `localStorage` key `'usa-theme'` as leftovers of the removed `<usa-theme>` element — they are not; the check now ignores them (the key stays the same so saved theme choices survive the upgrade).
-- - Found while verifying (full suite): the Store / gallery catalog still named the removed `defineTheme` for the motion-theme cards (the cards would fail to define their element) → `defineMotionTheme`; the 6.9 test still expected `marketplace` to map to `fx2/manifest` → now its own `marketplace/index` entry.
+- the gallery / Store motion-theme cards still named the removed `defineTheme` (they would not have defined their element) → `defineMotionTheme`.
 
 ## [8.9.0] - 2026-10-09
 
