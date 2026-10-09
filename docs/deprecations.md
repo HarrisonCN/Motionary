@@ -1,5 +1,9 @@
 # Deprecations
 
+## Deprecated in 7.9, removed in 8.0
+
+See [upgrading-8.md](./upgrading-8.md) — `<usa-rating>` / `defineRating()` (use `<usa-star-rating>` / `defineStarRating()`; same `value`, `max`, `readonly`, `label`, `name`; `icon="♥"` → `icon="heart"`). Run `npx usa-codemod-8 --write src`.
+
 ## Deprecated in 6.9, removed in 7.0
 
 See [upgrading-7.md](./upgrading-7.md) — `registerFx2()` / `FX2_PACKS` (use `registerEffectPacks()` / `EFFECT_PACKS`), the 6.x pack registrars `registerGpuEffects`, `registerTextEffects3`, `registerLightEffects`, `register3dEffects`, `registerMorphEffects2`, `registerTransitionEffects2`, `registerWeatherEffects`, `registerPhysicsEffects2` (use the `register*Pack()` names), `<usa-tooltip>` (use `<usa-tip>`) and `<usa-toggle>` (use `<usa-switch>`). Run `npx usa-codemod-7 --write src`.

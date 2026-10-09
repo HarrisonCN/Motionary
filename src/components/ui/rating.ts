@@ -1,4 +1,4 @@
-import { defineElement, clamp, type UsaElement } from '../base';
+import { defineElement, clamp, deprecate, type UsaElement } from '../base';
 import { springEasing } from '../physics/spring';
 import { adoptVariants } from './variants';
 import css from './rating.css?raw';
@@ -9,6 +9,10 @@ import css from './rating.css?raw';
  * Attributes: `value` (0), `max` (5), `icon` (★), `readonly`, `label`
  * ("Rating"), `name` (form value), `variant`. Events: `change`, `usa:change` (`{ value }`).
  * Reduced motion: no pop.
+ *
+ * @deprecated 7.9 — removed in 8.0. Use `<usa-star-rating>` (6.4; same
+ * `value` / `max` / `readonly` / `label` / `name`, `icon="heart"` for ♥).
+ * `npx usa-codemod-8 --write src` rewrites the tags.
  */
 export interface UsaRatingElement extends UsaElement {
   value: number;
@@ -42,6 +46,8 @@ export function defineRating(tag = 'usa-rating'): CustomElementConstructor | und
         }
 
         mount(): void {
+
+          deprecate('usa-rating', '<usa-rating> is deprecated and removed in 8.0 — use <usa-star-rating> (same value / max / readonly / label / name; icon="heart"). Run `npx usa-codemod-8 --write src`.');
           const max = this.num('max', 5);
           this.innerHTML = Array.from({ length: max }, (_, i) => `<span class="usa-rating-star" data-i="${i + 1}" aria-hidden="true">${this.str('icon', '★')}</span>`).join('');
           this.setAttribute('role', 'slider');
