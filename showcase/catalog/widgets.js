@@ -779,6 +779,35 @@ export const components = [
     '<!-- <head> -->${ssrHead()}\n<usa-hydrate effect="fade-up" stagger="80">\n  <h1>Server-rendered title</h1>\n  <p>…</p>\n</usa-hydrate>\n<!-- or: <section data-usa-hydrate="blur">…</section> + hydrateMotion() -->',
     '<div class="demo-col"><usa-hydrate class="demo-hy" effect="fade-up" stagger="110"><div class="demo-hy-h"></div><div class="demo-hy-l"></div><div class="demo-hy-l"></div><div class="demo-hy-row"><span></span><span></span><span></span></div></usa-hydrate><button type="button" class="demo-btn" data-hy>Hydrate again</button></div>',
     undefined, { since: '8.0' }),
+  // ---- 8.1 -------------------------------------------------------------
+  W('usa-red-envelope', 'ui', 'Red envelope (红包)', '红包',
+    '8.1: a Lunar New Year red envelope — tap and the flap swings open, the card slides out with the amount counting up and gold coins pop out.',
+    '8.1：新春红包 —— 点击后封口翻开，卡片滑出、金额滚动增长，金币四散弹出。',
+    ['red envelope', 'hongbao', 'lunar new year', 'festival', 'gift'],
+    '<usa-red-envelope amount="88.88" from="Grandma" message="恭喜发财"></usa-red-envelope>',
+    '<div class="demo-row demo-res"><usa-red-envelope amount="88.88" from="Grandma"></usa-red-envelope><usa-red-envelope amount="666" opened from="Boss"></usa-red-envelope></div>',
+    undefined, { since: '8.1' }),
+  W('usa-festival-banner', 'ui', 'Festival banner', '节日横幅',
+    '8.1: an announcement banner with an ambient festive scene behind the text — lunar lanterns and sparkles, Christmas lights and snow, Halloween bats and moon, or fireworks.',
+    '8.1：带节日氛围背景的公告横幅 —— 新春灯笼与金光、圣诞彩灯与飘雪、万圣节蝙蝠与月亮，或烟花绽放。',
+    ['banner', 'festival', 'christmas', 'halloween', 'lunar new year'],
+    '<usa-festival-banner theme="lunar" dismissible>🧧 Happy Lunar New Year — 20% off all week</usa-festival-banner>',
+    '<div class="demo-col demo-fbs"><usa-festival-banner theme="lunar">Happy Lunar New Year 🧧</usa-festival-banner><usa-festival-banner theme="xmas" dismissible>Merry Christmas 🎄</usa-festival-banner><div class="demo-row"><button type="button" class="demo-btn" data-fb>Next theme</button></div></div>',
+    undefined, { since: '8.1' }),
+  X('fx-fireworks', ['fx-festival', 'registerFestivalPack'], 'Fireworks & lantern rise', '烟花与灯笼升起',
+    '8.1: firework-burst sends rockets of sparks out of an element in festive colours; lantern-rise floats an element up and sways it in like a Lunar New Year lantern.',
+    '8.1：firework-burst 让元素迸发出多束彩色烟花火星；lantern-rise 让元素像新春灯笼一样飘升并轻轻摇摆入场。',
+    ['fireworks', 'lantern', 'festival', 'celebration', 'new year'],
+    '<usa-fx effect="firework-burst" trigger="click"><button>Celebrate</button></usa-fx>\n<usa-fx effect="lantern-rise" trigger="enter"><img src="lantern.png" alt=""></usa-fx>',
+    '<div class="demo-row"><usa-fx effect="firework-burst" trigger="click"><button type="button" class="demo-btn">🎆 Celebrate</button></usa-fx><usa-fx effect="lantern-rise" trigger="click"><button type="button" class="demo-lantern" aria-label="Raise lantern">🏮</button></usa-fx></div>',
+    [{ key: 'effect', values: ['firework-burst', 'lantern-rise'] }], '8.1'),
+  X('fx-seasonal', ['fx-festival', 'registerFestivalPack'], 'Christmas snow & spooky float', '圣诞飘雪与幽灵漂浮',
+    '8.1: xmas-snow drifts snowflakes down over an element in a loop; spooky-float wobbles and flickers an element like a Halloween ghost.',
+    '8.1：xmas-snow 让雪花在元素上方循环飘落；spooky-float 让元素像万圣节幽灵一样摇晃闪烁。',
+    ['snow', 'christmas', 'halloween', 'ghost', 'seasonal'],
+    '<usa-fx effect="xmas-snow" trigger="loop"><div class="card">Season’s greetings</div></usa-fx>\n<usa-fx effect="spooky-float" trigger="hover"><span>👻</span></usa-fx>',
+    '<div class="demo-row"><usa-fx effect="xmas-snow" trigger="loop"><div class="demo-snowcard">Season’s greetings</div></usa-fx><usa-fx effect="spooky-float" trigger="click"><button type="button" class="demo-lantern" aria-label="Boo">👻</button></usa-fx></div>',
+    [{ key: 'effect', values: ['xmas-snow', 'spooky-float'] }], '8.1'),
 ];
 
 /** item id → live-demo wiring. */
@@ -959,5 +988,12 @@ export const wire = {
   },
   hydrate: (stage) => {
     stage.querySelector('[data-hy]')?.addEventListener('click', () => stage.querySelector('usa-hydrate').replay());
+  },
+  'festival-banner': (stage) => {
+    const themes = ['lunar', 'xmas', 'halloween', 'fireworks'];
+    const b = stage.querySelector('usa-festival-banner');
+    const text = { lunar: 'Happy Lunar New Year 🧧', xmas: 'Merry Christmas 🎄', halloween: 'Happy Halloween 🎃', fireworks: 'Happy New Year 🎆' };
+    let i = 0;
+    stage.querySelector('[data-fb]')?.addEventListener('click', () => { i = (i + 1) % themes.length; b.lastChild.textContent = text[themes[i]]; b.theme = themes[i]; });
   },
 };

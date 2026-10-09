@@ -23,6 +23,7 @@ import { GAME_FX, registerGamePack, throwPath } from './game';
 import { GEO_FX, registerGeoPack, routeLength } from './geo';
 import { FORM_FX, registerFormPack, shakeFrames } from './form';
 import { AI_FX, registerAiPack, splitWords } from './ai';
+import { FESTIVAL_FX, registerFestivalPack, sparkVectors } from './festival';
 
 export { GPU_FX, registerGpuPack, TEXT3_FX, registerTextPack, splitChars };
 export { shaderBackground, supportsWebGL2, fieldFallback, GLSL_HEAD } from './gl';
@@ -59,6 +60,8 @@ export { FORM_FX, registerFormPack, shakeFrames };
 
 export { AI_FX, registerAiPack, splitWords };
 
+export { FESTIVAL_FX, registerFestivalPack, sparkVectors };
+
 /** The 6.x effect packs by name. */
 export const EFFECT_PACKS: Record<string, EffectDefinition[]> = {
   gpu: GPU_FX,
@@ -78,6 +81,7 @@ export const EFFECT_PACKS: Record<string, EffectDefinition[]> = {
   geo: GEO_FX,
   form: FORM_FX,
   ai: AI_FX,
+  festival: FESTIVAL_FX,
 };
 
 /** Register every 6.x effect pack (idempotent). */
@@ -99,6 +103,7 @@ export function registerEffectPacks(): void {
   registerGeoPack();
   registerFormPack();
   registerAiPack();
+  registerFestivalPack();
 }
 
 

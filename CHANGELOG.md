@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.1.0] - 2026-10-08
+
+### Added
+- **2 new components (8.1)** in `motionary/components/widgets` (also in `dist/widgets.umd.js`):
+  - `<usa-red-envelope>` — Lunar New Year red envelope (红包): tap / Enter / Space → the flap swings open, the card slides out with `amount` counting up (`currency`, default ¥) and gold coins pop out; `message` (恭喜发财), `from`, `opened`; `open()`, `close()`, `opened`; `usa:open` { amount }.
+  - `<usa-festival-banner theme="lunar | xmas | halloween | fireworks">` — announcement banner with an ambient festive scene behind its text (lanterns + sparkles, lights + snow, bats + moon, rockets), animating only while on screen; `dismissible` → close button (`usa:dismiss`), `label`; `FESTIVAL_THEMES`.
+- **Festival packs — `motionary/fx/festival`** (= `motionary/components/fx-festival`, `registerFestivalPack()`, also in `registerEffectPacks()`): `firework-burst` (attention), `lantern-rise` (enter), `xmas-snow` (loop), `spooky-float` (attention). `sparkVectors()`.
+- Showcase: 4 new gallery cards with copyable code, live demos and live Store thumbnails; Animation Store 334 → 338 items.
+
+### Fixed
+- Store live thumbnails (`showcase/thumb.js`): the CDN fallback still pointed at `motionary@7` after 8.0 → `motionary@8`.
+
+### Accessibility
+- Red envelope is a real `<button aria-expanded>` with a descriptive label; the amount is announced through a polite live region. Banner: labelled `region`, decorations `aria-hidden`, real dismiss button. Reduced motion: envelope opens without swing / slide / count / coins, the banner scene is static, `firework-burst` / `spooky-float` do nothing, `xmas-snow` is skipped, `lantern-rise` fades in.
+
 ## [8.0.0] - 2026-10-08
 
 ### ⚠️ Breaking
