@@ -278,7 +278,7 @@ function frameworkDemo(item, host, getState, cleanups) {
   const track = h('div', { class: 'fw-track' });
   scroller.append(track);
   const pre = h('pre', { class: 'fw-snip', 'aria-label': `${L(item.title)} code`, html: highlight(item.thumbCode || '') });
-  box.append(scroller, pre);
+  box.append(pre, scroller);
   host.append(box);
   let stops = [];
   let inner = null;
@@ -307,26 +307,24 @@ function frameworkDemo(item, host, getState, cleanups) {
       tiles.push(tile);
     }
     if (item.framework === 'element' && customElements.get('scroll-animate')) return; // the element animates itself
-    if (item.framework === 'svelte' && svelteMod) {
-      tiles.forEach((t) => {
-        const a = svelteMod.scrollAnimate(t, opts); // the real Svelte action, no Svelte runtime needed
-        stops.push(() => a && a.destroy && a.destroy());
-      });
-      return;
-    }
     const gen = ++generation;
     const viaCore = () => {
       inner = lib.createScrollAnimate({ root: scroller });
       inner.observe(tiles, opts);
     };
-    if (item.framework !== 'react' && item.framework !== 'vue') return viaCore();
-    adapterModule(item.framework).then((mod) => {
+    if (!['react', 'vue', 'svelte'].includes(item.framework)) return viaCore();
+    // Attach once the card is in the document (like a framework mounting it)
+    const ready = item.framework === 'svelte' ? Promise.resolve(svelteMod) : adapterModule(item.framework);
+    ready.then((mod) => {
       if (gen !== generation) return;
       if (!mod) return viaCore();
       // The real adapter, driven by a minimal stand-in for the framework's hook / lifecycle API
       tiles.forEach((tile) => {
         const effects = [];
-        if (item.framework === 'react') {
+        if (item.framework === 'svelte') {
+          const a = mod.scrollAnimate(tile, opts); // the real Svelte action, no Svelte runtime needed
+          stops.push(() => a && a.destroy && a.destroy());
+        } else if (item.framework === 'react') {
           const React = { useRef: (v) => ({ current: v }), useEffect: (fn) => effects.push(fn) };
           const ref = mod.createReactHooks(React).useScrollAnimate(opts);
           ref.current = tile;

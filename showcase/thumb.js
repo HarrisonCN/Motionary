@@ -50,7 +50,7 @@ function scaleToFit() {
   fit.style.setProperty('--th', `${Math.round(tw * (hgt / w))}px`);
   const natW = fit.offsetWidth || tw;
   const natH = Math.max(fit.offsetHeight, 1);
-  const s = Math.min(w / natW, hgt / natH);
+  const s = Math.min(w / natW, hgt / natH) * 0.94; // a little air around the demo
   fit.style.setProperty('--ts', String(Math.round(s * 1000) / 1000));
 }
 
