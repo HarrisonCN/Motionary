@@ -1,0 +1,10 @@
+<style>body{font:12px system-ui;margin:12px}code{display:block;padding:6px;margin:4px 0 10px;background:#f1f5f9;border-radius:6px;white-space:pre-wrap}</style>
+<h3>Motionary export</h3>
+<div id="out">Select layers with prototype interactions…</div>
+<button onclick="parent.postMessage({ pluginMessage: 'close' }, '*')">Close</button>
+<script>
+onmessage = (e) => {
+  const rows = (e.data.pluginMessage || {}).rows || [];
+  document.getElementById('out').innerHTML = rows.length ? rows.map((r) => `<b>${r.name}</b><code>data-motion="${r.motion || '—'}"</code>`).join('') : 'Nothing selected.';
+};
+</script>

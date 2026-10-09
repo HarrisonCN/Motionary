@@ -1272,6 +1272,20 @@ const primes = await runInWorker((n) => { /* heavy */ return n * 2; }, 21);
 - `<usa-worker-canvas scene label>`: `program`, `backend`; `usa:backend`.
 - Perf: `offscreenRender`, `runInWorker`, `fpsMeter`; effects `idle-reveal` (`timeout`), `gpu-lift` (`lift`).
 
+### v9.7 Design tool integration (`motionary/design`) + `<usa-motion-spec>`
+
+```html
+<usa-motion-spec label="Card entrance" rules="enter: fade-up 600ms ease-out stagger 80ms; hover: pop 300ms spring"></usa-motion-spec>
+```
+```js
+import { figmaToMotion, framerComponent, motionToCss } from 'motionary/design';
+el.dataset.motion = figmaToMotion(figmaNode.reactions);   // "click: fade 300ms ease-out"
+const tsx = framerComponent(describeComponent(card), { name: 'PricingCard' });
+const css = motionToCss('enter: fade-up 600ms stagger 80ms', '.cards');
+```
+- Figma: import `figma-plugin/manifest.json` (Plugins → Development) and run **Motionary export** on layers with prototype interactions.
+- `<usa-motion-spec rules label>`: `parsed`, `css`, `play()`; `usa:copy` { ok }.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.
