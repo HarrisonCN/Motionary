@@ -1,7 +1,7 @@
 'use strict';
 
 var components_marketplace = require('./marketplace.cjs');
-var components_fxGpu = require('../chunks/gpu-Dx0H875w.cjs');
+var components_fxGpu = require('../chunks/gpu-CcdA2D2i.cjs');
 var components_fxText = require('./fx-text.cjs');
 var components_fxLight = require('./fx-light.cjs');
 var components_fx3d = require('./fx-3d.cjs');
@@ -18,11 +18,11 @@ var components_fxGame = require('./fx-game.cjs');
 var components_fxGeo = require('./fx-geo.cjs');
 var components_fxForm = require('./fx-form.cjs');
 var components_fxAi = require('./fx-ai.cjs');
-require('../chunks/registry-DehBVRDV.cjs');
-require('../chunks/base-BaQV-2ha.cjs');
+require('../chunks/registry-BVklOepd.cjs');
+require('../chunks/base-DoRUZBy-.cjs');
 require('../chunks/generative-BHIj-NU0.cjs');
 require('../chunks/shared-jkgRH-Hx.cjs');
-require('../chunks/audio-EXUoijsG.cjs');
+require('../chunks/audio-cgWbDkoY.cjs');
 
 /** The 6.x effect packs by name. */
 const EFFECT_PACKS = {

@@ -1,9 +1,9 @@
 'use strict';
 
-var registry = require('../chunks/registry-DehBVRDV.cjs');
+var registry = require('../chunks/registry-BVklOepd.cjs');
 var shared = require('../chunks/shared-jkgRH-Hx.cjs');
 var components_fxLight = require('./fx-light.cjs');
-require('../chunks/base-BaQV-2ha.cjs');
+require('../chunks/base-DoRUZBy-.cjs');
 require('../chunks/generative-BHIj-NU0.cjs');
 
 const layers = (el) => {

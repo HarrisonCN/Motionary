@@ -13,7 +13,6 @@ const INTERACTIVE: Record<string, string> = {
   'usa-hold': 'button',
   'usa-checkbox': 'checkbox',
   'usa-slider': 'slider',
-  'usa-rating': 'slider',
   'usa-motion-switch': 'radiogroup',
 };
 

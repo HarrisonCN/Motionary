@@ -1,9 +1,9 @@
 'use strict';
 
-var registry = require('../chunks/registry-DehBVRDV.cjs');
+var registry = require('../chunks/registry-BVklOepd.cjs');
 var generative = require('../chunks/generative-BHIj-NU0.cjs');
-var audio = require('../chunks/audio-EXUoijsG.cjs');
-require('../chunks/base-BaQV-2ha.cjs');
+var audio = require('../chunks/audio-cgWbDkoY.cjs');
+require('../chunks/base-DoRUZBy-.cjs');
 require('../chunks/shared-jkgRH-Hx.cjs');
 
 /** A smooth, deterministic fake analyser frame at time `t` (s). */

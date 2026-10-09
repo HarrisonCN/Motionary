@@ -9,7 +9,7 @@ declare const COMPONENT_CATEGORIES: {
     readonly physics: readonly ["usa-spring", "usa-draggable", "usa-overscroll"];
     readonly cards: readonly ["usa-card", "usa-card-stack", "usa-sticky-stack", "usa-carousel-3d"];
     readonly click: readonly ["usa-click", "usa-button", "usa-icon-morph", "usa-like", "usa-hold", "usa-double-tap", "usa-checkbox"];
-    readonly ui: readonly ["usa-tabs", "usa-drawer", "usa-bottom-sheet", "usa-pull-refresh", "usa-fab", "usa-navbar", "usa-slider", "usa-rating", "usa-popover", "usa-badge", "usa-avatar-stack"];
+    readonly ui: readonly ["usa-tabs", "usa-drawer", "usa-bottom-sheet", "usa-pull-refresh", "usa-fab", "usa-navbar", "usa-slider", "usa-popover", "usa-badge", "usa-avatar-stack"];
     readonly page: readonly ["usa-cursor", "usa-fullpage", "usa-loading-bar", "usa-back-to-top", "usa-ambient", "usa-splash", "usa-auto-skeleton", "usa-motion-switch"];
     readonly timeline: readonly ["usa-timeline"];
     readonly gesture: readonly ["usa-swipeable", "usa-pinch-zoom"];

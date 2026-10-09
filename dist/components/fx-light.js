@@ -1,7 +1,7 @@
-import { registerEffects } from '../chunks/registry-CyKExAmE.js';
+import { registerEffects } from '../chunks/registry-CnO7ZVPK.js';
 import { c as canvasBackground, h as hexRgb } from '../chunks/generative-2LhxG5BJ.js';
 import { o as overlay } from '../chunks/shared-CkKHWrtJ.js';
-import '../chunks/base-2-yYc93C.js';
+import '../chunks/base-CLuqlLfG.js';
 
 /** Track the pointer over `el` as 0–1 coordinates (`fn(x, y, inside)`); starts at (`x0`, `y0`). Returns a remover. */
 function trackPointer(el, ctx, fn, x0 = 0.3, y0 = 0.25) {

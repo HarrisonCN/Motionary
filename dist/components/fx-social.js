@@ -1,5 +1,5 @@
-import { registerEffects } from '../chunks/registry-CyKExAmE.js';
-import '../chunks/base-2-yYc93C.js';
+import { registerEffects } from '../chunks/registry-CnO7ZVPK.js';
+import '../chunks/base-CLuqlLfG.js';
 
 /** Fan-out angles (deg) for `n` floating emoji, centred on straight up (7.4). */
 function fanAngles(n, spread = 60) {

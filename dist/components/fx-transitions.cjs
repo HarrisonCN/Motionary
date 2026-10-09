@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-DehBVRDV.cjs');
-var base = require('../chunks/base-BaQV-2ha.cjs');
+var registry = require('../chunks/registry-BVklOepd.cjs');
+var base = require('../chunks/base-DoRUZBy-.cjs');
 var shared = require('../chunks/shared-jkgRH-Hx.cjs');
 
 const fade = (el, ctx, out) => ctx.animate(el, out ? [{ opacity: 1 }, { opacity: 0 }] : [{ opacity: 0 }, { opacity: 1 }], { duration: 200, fill: out ? 'forwards' : 'none' });
@@ -224,7 +224,7 @@ async function pageTransition(update, effect = 'ripple-dissolve', options = {}, 
     await update();
     const el = target || document.body.firstElementChild;
     if (el && def) {
-        const { playEffect } = await Promise.resolve().then(function () { return require('../chunks/registry-DehBVRDV.cjs'); });
+        const { playEffect } = await Promise.resolve().then(function () { return require('../chunks/registry-BVklOepd.cjs'); });
         await playEffect(el, effect, { ...options, mode: 'in' });
     }
 }

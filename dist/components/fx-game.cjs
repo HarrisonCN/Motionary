@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-DehBVRDV.cjs');
-require('../chunks/base-BaQV-2ha.cjs');
+var registry = require('../chunks/registry-BVklOepd.cjs');
+require('../chunks/base-DoRUZBy-.cjs');
 
 /** Ballistic keyframe points for a coin thrown at `deg` with `power` (7.5). */
 function throwPath(deg, power = 120, steps = 6, g = 2.2) {

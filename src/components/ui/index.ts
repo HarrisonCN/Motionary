@@ -1,7 +1,7 @@
 /**
  * motionary/components/ui — animated UI components + style variants (v2.6).
  * `<usa-tabs>`, `<usa-drawer>`, `<usa-bottom-sheet>`, `<usa-pull-refresh>`,
- * `<usa-fab>`, `<usa-navbar>`, `<usa-slider>`, `<usa-rating>`,
+ * `<usa-fab>`, `<usa-navbar>`, `<usa-slider>`,
  * `<usa-popover>`, `<usa-badge>`, `<usa-avatar-stack>`,
  * and `variant="minimal | neon | glass | brutalist | fluent | material"`
  * design tokens (`setVariant()`, `VARIANTS`).
@@ -12,12 +12,11 @@ import { definePullRefresh, type UsaPullRefreshElement } from './pull-refresh';
 import { defineFab, type UsaFabElement } from './fab';
 import { defineNavbar, type UsaNavbarElement } from './navbar';
 import { defineSlider, type UsaSliderElement } from './slider';
-import { defineRating, type UsaRatingElement } from './rating';
 import { definePopover, type UsaPopoverElement } from './popover';
 import { defineBadge, type UsaBadgeElement } from './badge';
 import { defineAvatarStack, type UsaAvatarStackElement } from './avatar-stack';
 
-export { defineTabs, defineDrawer, defineBottomSheet, definePullRefresh, defineFab, defineNavbar, defineSlider, defineRating, definePopover, defineBadge, defineAvatarStack };
+export { defineTabs, defineDrawer, defineBottomSheet, definePullRefresh, defineFab, defineNavbar, defineSlider, definePopover, defineBadge, defineAvatarStack };
 export { VARIANTS, setVariant, adoptVariants } from './variants';
 export type { Variant } from './variants';
 export type { Placement } from './position';
@@ -29,7 +28,6 @@ export type {
   UsaFabElement,
   UsaNavbarElement,
   UsaSliderElement,
-  UsaRatingElement,
   UsaPopoverElement,
   UsaBadgeElement,
   UsaAvatarStackElement,
@@ -44,7 +42,6 @@ export function defineUiComponents(): void {
   defineFab();
   defineNavbar();
   defineSlider();
-  defineRating();
   definePopover();
   defineBadge();
   defineAvatarStack();
@@ -59,7 +56,6 @@ declare global {
     'usa-fab': UsaFabElement;
     'usa-navbar': UsaNavbarElement;
     'usa-slider': UsaSliderElement;
-    'usa-rating': UsaRatingElement;
     'usa-popover': UsaPopoverElement;
     'usa-badge': UsaBadgeElement;
     'usa-avatar-stack': UsaAvatarStackElement;

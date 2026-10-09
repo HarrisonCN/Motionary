@@ -1,6 +1,6 @@
 'use strict';
 
-var indexTags = require('../chunks/index-tags-BTMwrfgV.cjs');
+var indexTags = require('../chunks/index-tags-hLIF2Clq.cjs');
 
 /**
  * motionary/components/react — React wrappers for every `<usa-*>`

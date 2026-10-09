@@ -1,6 +1,6 @@
 # Deprecations
 
-## Deprecated in 7.9, removed in 8.0
+## Deprecated in 7.9, removed in 8.0 (released)
 
 See [upgrading-8.md](./upgrading-8.md) — `<usa-rating>` / `defineRating()` (use `<usa-star-rating>` / `defineStarRating()`; same `value`, `max`, `readonly`, `label`, `name`; `icon="♥"` → `icon="heart"`). Run `npx usa-codemod-8 --write src`.
 

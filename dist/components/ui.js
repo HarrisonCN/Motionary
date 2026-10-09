@@ -1,7 +1,7 @@
-import { u as defineElement, k as clamp, l as caf, r as raf, y as deprecate } from '../chunks/base-2-yYc93C.js';
-import { d as springEasing, c as createSpring, p as projectInertia, s as snapTo, a as rubberBand } from '../chunks/spring-BK8DiezC.js';
-import { a as adoptVariants } from '../chunks/variants-BQ6bhzn4.js';
-export { V as VARIANTS, s as setVariant } from '../chunks/variants-BQ6bhzn4.js';
+import { u as defineElement, k as clamp, l as caf, r as raf } from '../chunks/base-CLuqlLfG.js';
+import { d as springEasing, c as createSpring, p as projectInertia, s as snapTo, a as rubberBand } from '../chunks/spring-BFKNHmfl.js';
+import { a as adoptVariants } from '../chunks/variants-B-zKORvt.js';
+export { V as VARIANTS, s as setVariant } from '../chunks/variants-B-zKORvt.js';
 
 /** Position a fixed `floating` element next to `anchor`, flipping when it would leave the viewport. */
 function place(floating, anchor, placement = 'top', gap = 8) {
@@ -35,7 +35,7 @@ function place(floating, anchor, placement = 'top', gap = 8) {
 let uid = 0;
 const nextId = (prefix) => `${prefix}-${++uid}`;
 
-var css$9 = "usa-tabs{display:block;font-family:var(--usa-font)}usa-tabs .usa-tabs-list{position:relative;display:flex;gap:4px;border-bottom:1px solid color-mix(in srgb,currentColor 14%,transparent)}usa-tabs [role=\"tab\"]{position:relative;z-index:1;padding:10px 14px;border:0;background:none;color:inherit;font:inherit;cursor:pointer;opacity:0.7;transition:opacity 0.2s ease,color 0.2s ease;border-radius:calc(var(--usa-radius,14px) / 2)}usa-tabs [role=\"tab\"][aria-selected=\"true\"]{opacity:1;color:var(--usa-accent,#7c5cff)}usa-tabs [role=\"tab\"]:focus-visible{outline:2px solid var(--usa-accent,#7c5cff);outline-offset:-2px}usa-tabs .usa-tabs-indicator{position:absolute;left:0;bottom:-1px;height:3px;width:0;border-radius:3px;background:var(--usa-accent,#7c5cff);pointer-events:none}usa-tabs[indicator=\"pill\"] .usa-tabs-list{border-bottom:0;padding:4px;border-radius:999px;background:color-mix(in srgb,currentColor 8%,transparent)}usa-tabs[indicator=\"pill\"] .usa-tabs-indicator{top:4px;bottom:4px;height:auto;border-radius:999px;opacity:0.18}usa-tabs [role=\"tabpanel\"]{padding:14px 2px}usa-tabs [role=\"tabpanel\"]:focus-visible{outline:2px solid var(--usa-accent,#7c5cff);outline-offset:2px;border-radius:6px}";
+var css$8 = "usa-tabs{display:block;font-family:var(--usa-font)}usa-tabs .usa-tabs-list{position:relative;display:flex;gap:4px;border-bottom:1px solid color-mix(in srgb,currentColor 14%,transparent)}usa-tabs [role=\"tab\"]{position:relative;z-index:1;padding:10px 14px;border:0;background:none;color:inherit;font:inherit;cursor:pointer;opacity:0.7;transition:opacity 0.2s ease,color 0.2s ease;border-radius:calc(var(--usa-radius,14px) / 2)}usa-tabs [role=\"tab\"][aria-selected=\"true\"]{opacity:1;color:var(--usa-accent,#7c5cff)}usa-tabs [role=\"tab\"]:focus-visible{outline:2px solid var(--usa-accent,#7c5cff);outline-offset:-2px}usa-tabs .usa-tabs-indicator{position:absolute;left:0;bottom:-1px;height:3px;width:0;border-radius:3px;background:var(--usa-accent,#7c5cff);pointer-events:none}usa-tabs[indicator=\"pill\"] .usa-tabs-list{border-bottom:0;padding:4px;border-radius:999px;background:color-mix(in srgb,currentColor 8%,transparent)}usa-tabs[indicator=\"pill\"] .usa-tabs-indicator{top:4px;bottom:4px;height:auto;border-radius:999px;opacity:0.18}usa-tabs [role=\"tabpanel\"]{padding:14px 2px}usa-tabs [role=\"tabpanel\"]:focus-visible{outline:2px solid var(--usa-accent,#7c5cff);outline-offset:2px;border-radius:6px}";
 
 function defineTabs(tag = 'usa-tabs') {
     adoptVariants();
@@ -138,10 +138,10 @@ function defineTabs(tag = 'usa-tabs') {
                 this.motion(p, [{ opacity: 0, transform: `translateX(${i > prev ? 16 : -16}px)` }, { opacity: 1, transform: 'none' }], { duration: 280, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' });
             this.emit('change', { index: i });
         }
-    }, { id: 'tabs', text: css$9 });
+    }, { id: 'tabs', text: css$8 });
 }
 
-var css$8 = "usa-drawer,usa-bottom-sheet{position:fixed;z-index:1001;box-sizing:border-box;overflow:auto;overscroll-behavior:contain;touch-action:pan-y;will-change:transform;outline:none}usa-drawer{top:0;bottom:0;left:0;width:min(86vw,360px);border-radius:0 var(--usa-radius,14px) var(--usa-radius,14px) 0;padding:20px}usa-drawer[side=\"right\"]{left:auto;right:0;border-radius:var(--usa-radius,14px) 0 0 var(--usa-radius,14px)}usa-drawer[side=\"top\"],usa-drawer[side=\"bottom\"]{left:0;right:0;width:auto;bottom:auto;max-height:80vh;border-radius:0 0 var(--usa-radius,14px) var(--usa-radius,14px);touch-action:pan-x}usa-drawer[side=\"bottom\"]{top:auto;bottom:0;border-radius:var(--usa-radius,14px) var(--usa-radius,14px) 0 0}usa-bottom-sheet{left:0;right:0;bottom:0;margin:0 auto;max-width:640px;border-radius:22px 22px 0 0;padding:8px 20px 24px;touch-action:none}usa-bottom-sheet .usa-sheet-handle{width:40px;height:5px;border-radius:3px;margin:4px auto 14px;background:color-mix(in srgb,currentColor 35%,transparent);cursor:grab}usa-drawer[hidden],usa-bottom-sheet[hidden]{display:none}.usa-panel-backdrop{position:fixed;inset:0;z-index:1000;background:rgb(0 0 0 / 0.45)}";
+var css$7 = "usa-drawer,usa-bottom-sheet{position:fixed;z-index:1001;box-sizing:border-box;overflow:auto;overscroll-behavior:contain;touch-action:pan-y;will-change:transform;outline:none}usa-drawer{top:0;bottom:0;left:0;width:min(86vw,360px);border-radius:0 var(--usa-radius,14px) var(--usa-radius,14px) 0;padding:20px}usa-drawer[side=\"right\"]{left:auto;right:0;border-radius:var(--usa-radius,14px) 0 0 var(--usa-radius,14px)}usa-drawer[side=\"top\"],usa-drawer[side=\"bottom\"]{left:0;right:0;width:auto;bottom:auto;max-height:80vh;border-radius:0 0 var(--usa-radius,14px) var(--usa-radius,14px);touch-action:pan-x}usa-drawer[side=\"bottom\"]{top:auto;bottom:0;border-radius:var(--usa-radius,14px) var(--usa-radius,14px) 0 0}usa-bottom-sheet{left:0;right:0;bottom:0;margin:0 auto;max-width:640px;border-radius:22px 22px 0 0;padding:8px 20px 24px;touch-action:none}usa-bottom-sheet .usa-sheet-handle{width:40px;height:5px;border-radius:3px;margin:4px auto 14px;background:color-mix(in srgb,currentColor 35%,transparent);cursor:grab}usa-drawer[hidden],usa-bottom-sheet[hidden]{display:none}.usa-panel-backdrop{position:fixed;inset:0;z-index:1000;background:rgb(0 0 0 / 0.45)}";
 
 /** Shared machinery of `<usa-drawer>` and `<usa-bottom-sheet>`: backdrop, focus, Esc, drag-to-dismiss. */
 function makePanel(Base, kind) {
@@ -298,7 +298,7 @@ function makePanel(Base, kind) {
 }
 function defineDrawer(tag = 'usa-drawer') {
     adoptVariants();
-    return defineElement(tag, (Base) => makePanel(Base, 'drawer'), { id: 'sheet', text: css$8 });
+    return defineElement(tag, (Base) => makePanel(Base, 'drawer'), { id: 'sheet', text: css$7 });
 }
 function defineBottomSheet(tag = 'usa-bottom-sheet') {
     adoptVariants();
@@ -341,10 +341,10 @@ function defineBottomSheet(tag = 'usa-bottom-sheet') {
                 super.render(v);
             }
         };
-    }, { id: 'sheet', text: css$8 });
+    }, { id: 'sheet', text: css$7 });
 }
 
-var css$7 = "usa-pull-refresh{position:relative;display:block;overflow:auto;overscroll-behavior-y:contain;touch-action:pan-x pan-down}usa-pull-refresh>:not(.usa-pull-indicator):not(.usa-sr){transform:translateY(var(--usa-pull,0px))}usa-pull-refresh .usa-pull-indicator{position:absolute;left:50%;top:0;width:34px;height:34px;margin-left:-17px;z-index:2;display:grid;place-items:center;border-radius:50%;background:var(--usa-surface,#1b1e27);box-shadow:var(--usa-shadow);color:var(--usa-accent,#7c5cff);transform:translateY(calc(var(--usa-pull,0px) - 40px)) rotate(calc(var(--usa-pull-p,0) * 270deg));opacity:var(--usa-pull-p,0);pointer-events:none}usa-pull-refresh .usa-pull-indicator svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round}usa-pull-refresh .usa-pull-indicator circle{stroke-dasharray:calc(var(--usa-pull-p,0) * 75) 100}usa-pull-refresh[data-armed] .usa-pull-indicator{background:var(--usa-accent,#7c5cff);color:var(--usa-accent-text,#fff)}usa-pull-refresh[data-refreshing] .usa-pull-indicator{opacity:1;animation:usa-pull-spin 0.8s linear infinite}usa-pull-refresh[data-refreshing] .usa-pull-indicator circle{stroke-dasharray:60 100}@keyframes usa-pull-spin{from{transform:translateY(calc(var(--usa-pull,0px) - 40px)) rotate(0)}to{transform:translateY(calc(var(--usa-pull,0px) - 40px)) rotate(360deg)}}@media (prefers-reduced-motion:reduce){usa-pull-refresh[data-refreshing] .usa-pull-indicator{animation-duration:2.4s;transform:translateY(8px)}}";
+var css$6 = "usa-pull-refresh{position:relative;display:block;overflow:auto;overscroll-behavior-y:contain;touch-action:pan-x pan-down}usa-pull-refresh>:not(.usa-pull-indicator):not(.usa-sr){transform:translateY(var(--usa-pull,0px))}usa-pull-refresh .usa-pull-indicator{position:absolute;left:50%;top:0;width:34px;height:34px;margin-left:-17px;z-index:2;display:grid;place-items:center;border-radius:50%;background:var(--usa-surface,#1b1e27);box-shadow:var(--usa-shadow);color:var(--usa-accent,#7c5cff);transform:translateY(calc(var(--usa-pull,0px) - 40px)) rotate(calc(var(--usa-pull-p,0) * 270deg));opacity:var(--usa-pull-p,0);pointer-events:none}usa-pull-refresh .usa-pull-indicator svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round}usa-pull-refresh .usa-pull-indicator circle{stroke-dasharray:calc(var(--usa-pull-p,0) * 75) 100}usa-pull-refresh[data-armed] .usa-pull-indicator{background:var(--usa-accent,#7c5cff);color:var(--usa-accent-text,#fff)}usa-pull-refresh[data-refreshing] .usa-pull-indicator{opacity:1;animation:usa-pull-spin 0.8s linear infinite}usa-pull-refresh[data-refreshing] .usa-pull-indicator circle{stroke-dasharray:60 100}@keyframes usa-pull-spin{from{transform:translateY(calc(var(--usa-pull,0px) - 40px)) rotate(0)}to{transform:translateY(calc(var(--usa-pull,0px) - 40px)) rotate(360deg)}}@media (prefers-reduced-motion:reduce){usa-pull-refresh[data-refreshing] .usa-pull-indicator{animation-duration:2.4s;transform:translateY(8px)}}";
 
 function definePullRefresh(tag = 'usa-pull-refresh') {
     adoptVariants();
@@ -443,10 +443,10 @@ function definePullRefresh(tag = 'usa-pull-refresh') {
                     Promise.resolve(fn(ev)).then(done, done);
             });
         }
-    }, { id: 'pull-refresh', text: css$7 });
+    }, { id: 'pull-refresh', text: css$6 });
 }
 
-var css$6 = "usa-fab{position:fixed;right:max(20px,env(safe-area-inset-right));bottom:max(20px,env(safe-area-inset-bottom));z-index:900;display:grid;place-items:center}usa-fab[position=\"bottom-left\"]{right:auto;left:max(20px,env(safe-area-inset-left))}usa-fab[position=\"inline\"]{position:relative;right:auto;bottom:auto;display:inline-grid}usa-fab>*{grid-area:1 / 1}usa-fab .usa-fab-main{position:relative;z-index:1;width:56px;height:56px;border-radius:min(var(--usa-radius,14px) * 1.2,28px);border:0;display:grid;place-items:center;font-size:24px;cursor:pointer;background:var(--usa-accent,#7c5cff);color:var(--usa-accent-text,#fff);box-shadow:var(--usa-shadow);transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1)}usa-fab[open] .usa-fab-main{transform:rotate(45deg)}usa-fab .usa-fab-action{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;opacity:0;transform:scale(0.4);will-change:transform,opacity}usa-fab .usa-fab-main:focus-visible,usa-fab .usa-fab-action:focus-visible{outline:2px solid var(--usa-accent,#7c5cff);outline-offset:3px}@media (prefers-reduced-motion:reduce){usa-fab .usa-fab-main{transition:none}}";
+var css$5 = "usa-fab{position:fixed;right:max(20px,env(safe-area-inset-right));bottom:max(20px,env(safe-area-inset-bottom));z-index:900;display:grid;place-items:center}usa-fab[position=\"bottom-left\"]{right:auto;left:max(20px,env(safe-area-inset-left))}usa-fab[position=\"inline\"]{position:relative;right:auto;bottom:auto;display:inline-grid}usa-fab>*{grid-area:1 / 1}usa-fab .usa-fab-main{position:relative;z-index:1;width:56px;height:56px;border-radius:min(var(--usa-radius,14px) * 1.2,28px);border:0;display:grid;place-items:center;font-size:24px;cursor:pointer;background:var(--usa-accent,#7c5cff);color:var(--usa-accent-text,#fff);box-shadow:var(--usa-shadow);transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1)}usa-fab[open] .usa-fab-main{transform:rotate(45deg)}usa-fab .usa-fab-action{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;opacity:0;transform:scale(0.4);will-change:transform,opacity}usa-fab .usa-fab-main:focus-visible,usa-fab .usa-fab-action:focus-visible{outline:2px solid var(--usa-accent,#7c5cff);outline-offset:3px}@media (prefers-reduced-motion:reduce){usa-fab .usa-fab-main{transition:none}}";
 
 function defineFab(tag = 'usa-fab') {
     adoptVariants();
@@ -532,10 +532,10 @@ function defineFab(tag = 'usa-fab') {
             this.apply(true);
             this.emit('toggle', { open: next });
         }
-    }, { id: 'fab', text: css$6 });
+    }, { id: 'fab', text: css$5 });
 }
 
-var css$5 = "usa-navbar{position:sticky;top:0;z-index:800;display:block;transition:transform 0.35s cubic-bezier(0.22,1,0.36,1),padding 0.25s ease,box-shadow 0.25s ease;will-change:transform}usa-navbar[data-hidden]{transform:translateY(-100%)}usa-navbar[data-scrolled]{box-shadow:var(--usa-shadow,0 6px 20px -10px rgb(0 0 0 / 0.4))}usa-navbar[shrink][data-scrolled]{padding-block:4px}@media (prefers-reduced-motion:reduce){usa-navbar{transition:none}}";
+var css$4 = "usa-navbar{position:sticky;top:0;z-index:800;display:block;transition:transform 0.35s cubic-bezier(0.22,1,0.36,1),padding 0.25s ease,box-shadow 0.25s ease;will-change:transform}usa-navbar[data-hidden]{transform:translateY(-100%)}usa-navbar[data-scrolled]{box-shadow:var(--usa-shadow,0 6px 20px -10px rgb(0 0 0 / 0.4))}usa-navbar[shrink][data-scrolled]{padding-block:4px}@media (prefers-reduced-motion:reduce){usa-navbar{transition:none}}";
 
 function defineNavbar(tag = 'usa-navbar') {
     adoptVariants();
@@ -588,10 +588,10 @@ function defineNavbar(tag = 'usa-navbar') {
             this.removeAttribute('data-hidden');
             this.emit('show');
         }
-    }, { id: 'navbar', text: css$5 });
+    }, { id: 'navbar', text: css$4 });
 }
 
-var css$4 = "usa-slider{--usa-slider:0;position:relative;display:block;height:28px;min-width:120px;touch-action:none;cursor:pointer;-webkit-tap-highlight-color:transparent}usa-slider .usa-slider-track{position:absolute;left:0;right:0;top:50%;height:6px;margin-top:-3px;border-radius:3px;background:color-mix(in srgb,currentColor 16%,transparent);overflow:hidden}usa-slider .usa-slider-fill{position:absolute;inset:0;background:var(--usa-accent,#7c5cff);transform-origin:0 50%;transform:scaleX(var(--usa-slider))}usa-slider .usa-slider-thumb{position:absolute;top:50%;left:calc(var(--usa-slider) * 100%);width:20px;height:20px;margin:-10px 0 0 -10px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgb(0 0 0 / 0.35),0 0 0 4px color-mix(in srgb,var(--usa-accent,#7c5cff) 0%,transparent);transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.2s ease}usa-slider:hover .usa-slider-thumb,usa-slider:focus-visible .usa-slider-thumb{box-shadow:0 1px 4px rgb(0 0 0 / 0.35),0 0 0 6px color-mix(in srgb,var(--usa-accent,#7c5cff) 25%,transparent)}usa-slider[data-dragging] .usa-slider-thumb{transform:scale(1.25)}usa-slider .usa-slider-bubble{position:absolute;bottom:150%;left:50%;transform:translateX(-50%) scale(0.6);opacity:0;padding:2px 8px;border-radius:8px;font:600 12px/1.6 system-ui,sans-serif;color:var(--usa-accent-text,#fff);background:var(--usa-accent,#7c5cff);white-space:nowrap;pointer-events:none;transition:opacity 0.15s ease,transform 0.25s cubic-bezier(0.34,1.56,0.64,1)}usa-slider[bubble][data-dragging] .usa-slider-bubble,usa-slider[bubble]:focus-visible .usa-slider-bubble{opacity:1;transform:translateX(-50%) scale(1)}usa-slider:focus-visible{outline:none}usa-slider[disabled]{opacity:0.45;cursor:not-allowed}@media (prefers-reduced-motion:reduce){usa-slider .usa-slider-thumb,usa-slider .usa-slider-bubble{transition:none}}";
+var css$3 = "usa-slider{--usa-slider:0;position:relative;display:block;height:28px;min-width:120px;touch-action:none;cursor:pointer;-webkit-tap-highlight-color:transparent}usa-slider .usa-slider-track{position:absolute;left:0;right:0;top:50%;height:6px;margin-top:-3px;border-radius:3px;background:color-mix(in srgb,currentColor 16%,transparent);overflow:hidden}usa-slider .usa-slider-fill{position:absolute;inset:0;background:var(--usa-accent,#7c5cff);transform-origin:0 50%;transform:scaleX(var(--usa-slider))}usa-slider .usa-slider-thumb{position:absolute;top:50%;left:calc(var(--usa-slider) * 100%);width:20px;height:20px;margin:-10px 0 0 -10px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgb(0 0 0 / 0.35),0 0 0 4px color-mix(in srgb,var(--usa-accent,#7c5cff) 0%,transparent);transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.2s ease}usa-slider:hover .usa-slider-thumb,usa-slider:focus-visible .usa-slider-thumb{box-shadow:0 1px 4px rgb(0 0 0 / 0.35),0 0 0 6px color-mix(in srgb,var(--usa-accent,#7c5cff) 25%,transparent)}usa-slider[data-dragging] .usa-slider-thumb{transform:scale(1.25)}usa-slider .usa-slider-bubble{position:absolute;bottom:150%;left:50%;transform:translateX(-50%) scale(0.6);opacity:0;padding:2px 8px;border-radius:8px;font:600 12px/1.6 system-ui,sans-serif;color:var(--usa-accent-text,#fff);background:var(--usa-accent,#7c5cff);white-space:nowrap;pointer-events:none;transition:opacity 0.15s ease,transform 0.25s cubic-bezier(0.34,1.56,0.64,1)}usa-slider[bubble][data-dragging] .usa-slider-bubble,usa-slider[bubble]:focus-visible .usa-slider-bubble{opacity:1;transform:translateX(-50%) scale(1)}usa-slider:focus-visible{outline:none}usa-slider[disabled]{opacity:0.45;cursor:not-allowed}@media (prefers-reduced-motion:reduce){usa-slider .usa-slider-thumb,usa-slider .usa-slider-bubble{transition:none}}";
 
 function defineSlider(tag = 'usa-slider') {
     adoptVariants();
@@ -712,96 +712,7 @@ function defineSlider(tag = 'usa-slider') {
         }
         UsaSlider.formAssociated = true;
         return UsaSlider;
-    }, { id: 'slider', text: css$4 });
-}
-
-var css$3 = "usa-rating{--usa-rating-on:#f5b301;display:inline-flex;gap:2px;font-size:1.5em;line-height:1;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}usa-rating[readonly]{cursor:default}usa-rating .usa-rating-star{display:inline-block;color:color-mix(in srgb,currentColor 22%,transparent);transition:color 0.15s ease,transform 0.2s ease}usa-rating .usa-rating-star[data-on]{color:var(--usa-rating-on)}usa-rating[data-previewing] .usa-rating-star{color:color-mix(in srgb,currentColor 22%,transparent)}usa-rating[data-previewing] .usa-rating-star[data-preview]{color:var(--usa-rating-on);transform:scale(1.12)}usa-rating:focus-visible{outline:2px solid var(--usa-accent,#7c5cff);outline-offset:3px;border-radius:6px}@media (prefers-reduced-motion:reduce){usa-rating .usa-rating-star{transition:none;transform:none !important}}";
-
-function defineRating(tag = 'usa-rating') {
-    adoptVariants();
-    return defineElement(tag, (Base) => {
-        class UsaRating extends Base {
-            static get observedAttributes() {
-                return ['max', 'icon', 'readonly'];
-            }
-            constructor() {
-                super();
-                this._internals = null;
-                try {
-                    this._internals = this.attachInternals?.() ?? null;
-                }
-                catch {
-                    this._internals = null;
-                }
-            }
-            get value() {
-                return clamp(this.num('value', 0), 0, this.num('max', 5));
-            }
-            set value(v) {
-                this.setAttribute('value', String(clamp(Math.round(v), 0, this.num('max', 5))));
-                this.sync();
-            }
-            mount() {
-                deprecate('usa-rating', '<usa-rating> is deprecated and removed in 8.0 — use <usa-star-rating> (same value / max / readonly / label / name; icon="heart"). Run `npx usa-codemod-8 --write src`.');
-                const max = this.num('max', 5);
-                this.innerHTML = Array.from({ length: max }, (_, i) => `<span class="usa-rating-star" data-i="${i + 1}" aria-hidden="true">${this.str('icon', '★')}</span>`).join('');
-                this.setAttribute('role', 'slider');
-                this.setAttribute('aria-valuemin', '0');
-                this.setAttribute('aria-valuemax', String(max));
-                this.setAttribute('aria-label', this.str('label', 'Rating'));
-                if (this.flag('readonly'))
-                    this.setAttribute('aria-readonly', 'true');
-                else if (!this.hasAttribute('tabindex'))
-                    this.tabIndex = 0;
-                this.sync();
-                if (this.flag('readonly'))
-                    return;
-                this.listen(this, 'pointerover', (e) => {
-                    const s = e.target.closest?.('[data-i]');
-                    if (s)
-                        this.preview(Number(s.dataset.i));
-                });
-                this.listen(this, 'pointerleave', () => this.preview(0));
-                this.listen(this, 'click', (e) => {
-                    const s = e.target.closest?.('[data-i]');
-                    if (s)
-                        this.choose(Number(s.dataset.i) === this.value ? 0 : Number(s.dataset.i));
-                });
-                this.listen(this, 'keydown', (e) => {
-                    const v = this.value;
-                    const map = { ArrowRight: v + 1, ArrowUp: v + 1, ArrowLeft: v - 1, ArrowDown: v - 1, Home: 0, End: max };
-                    const n = /^[0-9]$/.test(e.key) ? Number(e.key) : map[e.key];
-                    if (n === undefined)
-                        return;
-                    e.preventDefault();
-                    this.choose(clamp(n, 0, max));
-                });
-            }
-            preview(n) {
-                this.querySelectorAll('[data-i]').forEach((s) => s.toggleAttribute('data-preview', n > 0 && Number(s.dataset.i) <= n));
-                this.toggleAttribute('data-previewing', n > 0);
-            }
-            sync() {
-                const v = this.value;
-                this.setAttribute('aria-valuenow', String(v));
-                this.setAttribute('aria-valuetext', `${v} of ${this.num('max', 5)}`);
-                this._internals?.setFormValue?.(String(v));
-                this.querySelectorAll('[data-i]').forEach((s) => s.toggleAttribute('data-on', Number(s.dataset.i) <= v));
-            }
-            choose(n) {
-                if (n === this.value)
-                    return;
-                this.value = n;
-                const star = this.querySelector(`[data-i="${n}"]`);
-                if (star && !this.reduced)
-                    this.motion(star, [{ transform: 'scale(0.5) rotate(-20deg)' }, { transform: 'scale(1) rotate(0)' }], springEasing('bouncy'));
-                this.dispatchEvent(new Event('change', { bubbles: true }));
-                this.emit('change', { value: n });
-            }
-        }
-        UsaRating.formAssociated = true;
-        return UsaRating;
-    }, { id: 'rating', text: css$3 });
+    }, { id: 'slider', text: css$3 });
 }
 
 var css$2 = "usa-popover{display:inline-block}usa-popover .usa-popover-panel{position:fixed;z-index:1500;min-width:180px;max-width:min(92vw,360px);padding:12px 14px;outline:none}usa-popover .usa-popover-panel[hidden]{display:none}";
@@ -954,7 +865,7 @@ function defineAvatarStack(tag = 'usa-avatar-stack') {
 /**
  * motionary/components/ui — animated UI components + style variants (v2.6).
  * `<usa-tabs>`, `<usa-drawer>`, `<usa-bottom-sheet>`, `<usa-pull-refresh>`,
- * `<usa-fab>`, `<usa-navbar>`, `<usa-slider>`, `<usa-rating>`,
+ * `<usa-fab>`, `<usa-navbar>`, `<usa-slider>`,
  * `<usa-popover>`, `<usa-badge>`, `<usa-avatar-stack>`,
  * and `variant="minimal | neon | glass | brutalist | fluent | material"`
  * design tokens (`setVariant()`, `VARIANTS`).
@@ -968,11 +879,10 @@ function defineUiComponents() {
     defineFab();
     defineNavbar();
     defineSlider();
-    defineRating();
     definePopover();
     defineBadge();
     defineAvatarStack();
 }
 
-export { adoptVariants, defineAvatarStack, defineBadge, defineBottomSheet, defineDrawer, defineFab, defineNavbar, definePopover, definePullRefresh, defineRating, defineSlider, defineTabs, defineUiComponents };
+export { adoptVariants, defineAvatarStack, defineBadge, defineBottomSheet, defineDrawer, defineFab, defineNavbar, definePopover, definePullRefresh, defineSlider, defineTabs, defineUiComponents };
 //# sourceMappingURL=ui.js.map

@@ -764,6 +764,21 @@ export const components = [
     '<usa-shortcut keys="mod+k" label="Search"></usa-shortcut>\n<usa-shortcut keys="mod+shift+p" for="palette-button"></usa-shortcut>',
     '<div class="demo-col demo-sks"><usa-shortcut keys="mod+k" label="Search" listen="false"></usa-shortcut><usa-shortcut keys="mod+shift+p" label="Commands" listen="false"></usa-shortcut><usa-shortcut keys="alt+enter" label="Send" listen="false"></usa-shortcut><button type="button" class="demo-btn" data-sk>Press them</button></div>',
     undefined, { since: '7.9' }),
+  // ---- 8.0 -------------------------------------------------------------
+  W('usa-clock-control', 'ui', 'Motion clock control', '动效时钟控制',
+    '8.0: a pause / speed bar for the unified motion clock — pause, slow down or speed up every Motionary animation and frame loop on the page at once (motionClock in motionary/engine).',
+    '8.0：统一动效时钟的暂停 / 变速控制条 —— 一键暂停、放慢或加速页面上所有 Motionary 动画与帧循环（motionary/engine 中的 motionClock）。',
+    ['clock', 'timeline', 'pause', 'speed', 'engine'],
+    '<usa-clock-control speeds="0.25,0.5,1,2"></usa-clock-control>\n<script type="module">\nimport { motionClock, createTimeline } from \'motionary/engine\';\nmotionClock.rate = 0.5;\ncreateTimeline().add(a, [{ opacity: 0 }, { opacity: 1 }], 400).add(b, [{ transform: \'scale(0)\' }, { transform: \'none\' }], 500, \'-=200\').play();\n</script>',
+    '<div class="demo-col demo-clk"><usa-clock-control></usa-clock-control><div class="demo-row"><usa-fx effect="thinking-glow" trigger="loop"><span class="demo-clkbox">AI</span></usa-fx><usa-hydrate class="demo-clkseq" effect="scale" stagger="140" duration="500"><i></i><i></i><i></i><i></i></usa-hydrate></div></div>',
+    undefined, { since: '8.0' }),
+  W('usa-hydrate', 'ui', 'SSR hydration animation', 'SSR 水合动画',
+    '8.0: server-rendered children animate in on hydration — hidden only while JS is on and not yet upgraded (ssrHead() in the head, 3 s CSS fallback), then staggered in on the unified clock.',
+    '8.0：服务端渲染的子元素在水合时依次入场 —— 仅在启用 JS 且尚未升级时隐藏（head 中放 ssrHead()，3 秒 CSS 兜底），然后在统一时钟上错峰显示。',
+    ['ssr', 'hydration', 'next.js', 'nuxt', 'enter'],
+    '<!-- <head> -->${ssrHead()}\n<usa-hydrate effect="fade-up" stagger="80">\n  <h1>Server-rendered title</h1>\n  <p>…</p>\n</usa-hydrate>\n<!-- or: <section data-usa-hydrate="blur">…</section> + hydrateMotion() -->',
+    '<div class="demo-col"><usa-hydrate class="demo-hy" effect="fade-up" stagger="110"><div class="demo-hy-h"></div><div class="demo-hy-l"></div><div class="demo-hy-l"></div><div class="demo-hy-row"><span></span><span></span><span></span></div></usa-hydrate><button type="button" class="demo-btn" data-hy>Hydrate again</button></div>',
+    undefined, { since: '8.0' }),
 ];
 
 /** item id → live-demo wiring. */
@@ -936,5 +951,13 @@ export const wire = {
     let i = 0;
     const tick = () => { if (!stage.isConnected) return; all[i % all.length].press(); i++; setTimeout(tick, 1400); };
     setTimeout(tick, 800);
+  },
+  'clock-control': (stage) => {
+    const seq = stage.querySelector('usa-hydrate');
+    const loop = () => { if (!stage.isConnected) return; seq.replay(); seq.timeline?.finished.then(() => setTimeout(loop, 700)); };
+    setTimeout(loop, 300);
+  },
+  hydrate: (stage) => {
+    stage.querySelector('[data-hy]')?.addEventListener('click', () => stage.querySelector('usa-hydrate').replay());
   },
 };

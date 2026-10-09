@@ -10,7 +10,7 @@ export const COMPONENT_CATEGORIES = {
   physics: ['usa-spring', 'usa-draggable', 'usa-overscroll'],
   cards: ['usa-card', 'usa-card-stack', 'usa-sticky-stack', 'usa-carousel-3d'],
   click: ['usa-click', 'usa-button', 'usa-icon-morph', 'usa-like', 'usa-hold', 'usa-double-tap', 'usa-checkbox'],
-  ui: ['usa-tabs', 'usa-drawer', 'usa-bottom-sheet', 'usa-pull-refresh', 'usa-fab', 'usa-navbar', 'usa-slider', 'usa-rating', 'usa-popover', 'usa-badge', 'usa-avatar-stack'],
+  ui: ['usa-tabs', 'usa-drawer', 'usa-bottom-sheet', 'usa-pull-refresh', 'usa-fab', 'usa-navbar', 'usa-slider', 'usa-popover', 'usa-badge', 'usa-avatar-stack'],
   page: ['usa-cursor', 'usa-fullpage', 'usa-loading-bar', 'usa-back-to-top', 'usa-ambient', 'usa-splash', 'usa-auto-skeleton', 'usa-motion-switch'],
   timeline: ['usa-timeline'],
   gesture: ['usa-swipeable', 'usa-pinch-zoom'],

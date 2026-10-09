@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-BaQV-2ha.cjs');
+var base = require('../chunks/base-DoRUZBy-.cjs');
 
 /** FLIP keyframes from a previous box to the current one (pure). */
 function flipFrames(from, to, scale = true) {

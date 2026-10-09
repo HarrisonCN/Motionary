@@ -1,9 +1,9 @@
 'use strict';
 
-var registry = require('../chunks/registry-DehBVRDV.cjs');
+var registry = require('../chunks/registry-BVklOepd.cjs');
 var generative = require('../chunks/generative-BHIj-NU0.cjs');
 var shared = require('../chunks/shared-jkgRH-Hx.cjs');
-require('../chunks/base-BaQV-2ha.cjs');
+require('../chunks/base-DoRUZBy-.cjs');
 
 const bg = (name, description, defaults, spec) => ({
     name,

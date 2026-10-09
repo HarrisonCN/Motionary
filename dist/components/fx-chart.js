@@ -1,6 +1,6 @@
-import { registerEffects } from '../chunks/registry-CyKExAmE.js';
+import { registerEffects } from '../chunks/registry-CnO7ZVPK.js';
 import { a as all } from '../chunks/shared-CkKHWrtJ.js';
-import '../chunks/base-2-yYc93C.js';
+import '../chunks/base-CLuqlLfG.js';
 
 const fade = (el, ctx) => ctx.animate(el, [{ opacity: 0 }, { opacity: 1 }], { duration: 250 });
 const pick = (el, sel) => Array.from(el.querySelectorAll(sel));

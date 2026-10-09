@@ -1,6 +1,6 @@
 {
   "name": "motionary",
-  "version": "7.9.0",
+  "version": "8.0.0",
   "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 94 animated Web Components — 214 scroll-reveal presets, card/click/button morphs, physics, page transitions, generative & sound-reactive backgrounds, cursor/gesture effects, themes, micro-interactions, <usa-player>, WebGL. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -86,6 +86,16 @@
       "require": {
         "types": "./dist/components.d.cts",
         "default": "./dist/components.cjs"
+      }
+    },
+    "./engine": {
+      "import": {
+        "types": "./dist/components/engine.d.ts",
+        "default": "./dist/components/engine.js"
+      },
+      "require": {
+        "types": "./dist/components/engine.d.cts",
+        "default": "./dist/components/engine.cjs"
       }
     },
     "./fx": {
@@ -786,6 +796,16 @@
       "require": {
         "types": "./dist/components/fx-ai.d.cts",
         "default": "./dist/components/fx-ai.cjs"
+      }
+    },
+    "./components/engine": {
+      "import": {
+        "types": "./dist/components/engine.d.ts",
+        "default": "./dist/components/engine.js"
+      },
+      "require": {
+        "types": "./dist/components/engine.d.cts",
+        "default": "./dist/components/engine.cjs"
       }
     },
     "./components/lite": {
