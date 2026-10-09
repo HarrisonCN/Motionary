@@ -633,6 +633,28 @@ declare const RETRO_FX: EffectDefinition[];
 declare function registerRetroPack(): void;
 
 /**
+ * 8.3 — Organic pack (`motionary/fx/organic`, also `motionary/components/fx-organic`):
+ *
+ * - `vine-grow` (enter) — SVG paths inside grow along their length like a
+ *   vine and `[data-leaf]` / circles pop in along the way (`duration`).
+ * - `bloom` (enter) — the element's children unfold from the centre like
+ *   petals (or the element itself blooms open) (`stagger`).
+ * - `water-drop` (attention) — the element dips like a drop hit water and
+ *   concentric ripples spread out (`rings`, `color`).
+ * - `breathe` (loop) — a slow organic morph of shape and scale, like a
+ *   living blob; the cleanup stops it (`duration`).
+ *
+ * Reduced motion: vine-grow shows the vine, bloom fades in, water-drop does
+ * nothing, breathe is skipped.
+ */
+
+/** A blob border-radius ("63% 37% 54% 46% / 55% 48% 52% 45%") from a seed (8.3). */
+declare function blobRadius(seed: number): string;
+declare const ORGANIC_FX: EffectDefinition[];
+/** Register vine-grow, bloom, water-drop and breathe (8.3). */
+declare function registerOrganicPack(): void;
+
+/**
  * 5.5 — generative backgrounds on Canvas 2D, registered through
  * `registerEffect()` (kind `background`): `flow-field`, `voronoi`,
  * `mesh-gradient`, `starfield`, `metaballs`, `contours`.
@@ -741,5 +763,5 @@ declare const EFFECT_PACKS: Record<string, EffectDefinition[]>;
 /** Register every 6.x effect pack (idempotent). */
 declare function registerEffectPacks(): void;
 
-export { AI_FX, CHART_FX, DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GEO_FX, GLSL_HEAD, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, PHYSICS2_FX, RETRO_FX, SHOP_FX, SOCIAL_FX, TEXT3_FX, TRANSITIONS2_FX, VerletWorld, WEATHER_FX, WGSL_HEAD, arcPath, crossDocumentTransitions, fanAngles, fieldFallback, glslToWgsl, loadEffectPack, musicSample, packManifest, pageTransition, parseFigure, pixelSteps, pointsToPath, register3dPack, registerAiPack, registerChartPack, registerEffectPacks, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGeoPack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerPhysicsPack, registerRetroPack, registerShopPack, registerSocialPack, registerTextPack, registerTransitionsPack, registerWeatherPack, routeLength, samplePath, shaderBackground, shakeFrames, skyAt, sparkVectors, splitChars, splitWords, supportsWebGL2, supportsWebGPU, syntheticSample, throwPath, trackPointer, validateManifest, webgpuBackground, wgslModule };
+export { AI_FX, CHART_FX, DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GEO_FX, GLSL_HEAD, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, ORGANIC_FX, PHYSICS2_FX, RETRO_FX, SHOP_FX, SOCIAL_FX, TEXT3_FX, TRANSITIONS2_FX, VerletWorld, WEATHER_FX, WGSL_HEAD, arcPath, blobRadius, crossDocumentTransitions, fanAngles, fieldFallback, glslToWgsl, loadEffectPack, musicSample, packManifest, pageTransition, parseFigure, pixelSteps, pointsToPath, register3dPack, registerAiPack, registerChartPack, registerEffectPacks, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGeoPack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerOrganicPack, registerPhysicsPack, registerRetroPack, registerShopPack, registerSocialPack, registerTextPack, registerTransitionsPack, registerWeatherPack, routeLength, samplePath, shaderBackground, shakeFrames, skyAt, sparkVectors, splitChars, splitWords, supportsWebGL2, supportsWebGPU, syntheticSample, throwPath, trackPointer, validateManifest, webgpuBackground, wgslModule };
 export type { EffectPackManifest, ShaderSpec };
