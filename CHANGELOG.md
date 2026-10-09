@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [9.7.0] - 2026-10-09
+
+### Added
+- **Design tool integration — `motionary/design`** (= `motionary/components/design`):
+  - `figmaToMotion(reactions)` — Figma prototype reactions (ON_CLICK / ON_HOVER / ON_PRESS / AFTER_TIMEOUT; DISSOLVE / SMART_ANIMATE / MOVE_IN / SLIDE_IN / PUSH; easing presets or custom bezier; duration) → a `data-motion` DSL string.
+  - `framerComponent(desc, { name })` — a Framer code component (TSX with `addPropertyControls` for every attribute) from the 8.9 component JSON.
+  - `motionToCss(rules, selector)` — `@keyframes` + rules (with stagger delays and a reduced-motion guard) for the entrance rules of a motion string.
+  - `easingPoints(easing)` — cubic-bezier control points of a CSS easing.
+- **Figma plugin scaffold** — `figma-plugin/` (manifest, code, UI, README; shipped in the npm package): select layers with prototype interactions → copy their `data-motion` strings.
+- **New component (9.7)** `<usa-motion-spec>` in `motionary/components/widgets` — motion spec sheet for hand-off: per-rule trigger, timing bar on a shared axis, easing curve, Play playhead, Copy CSS; `parsed`, `css`, `play()`; `usa:copy`.
+- Showcase: a new gallery card with copyable code, live demo and live Store thumbnail.
+
+### Accessibility
+- The spec sheet is a real `table` with row / column headers and a label; curves and bars are decorative next to their text values.
+
 ## [9.6.0] - 2026-10-09
 
 ### Added

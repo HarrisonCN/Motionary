@@ -1187,6 +1187,14 @@ export const components = [
     '<usa-fx effect="gpu-lift" trigger="hover"><article class="card">…</article></usa-fx>\n<usa-fx effect="idle-reveal" trigger="enter"><aside>…</aside></usa-fx>',
     '<div class="demo-row"><usa-fx effect="gpu-lift" trigger="hover"><button type="button" class="demo-lift">Hover me</button></usa-fx><usa-fx effect="idle-reveal" trigger="click"><button type="button" class="demo-lift">Idle reveal</button></usa-fx></div>',
     [{ key: 'effect', values: ['gpu-lift', 'idle-reveal'] }], '9.6'),
+  // ---- 9.7 -------------------------------------------------------------
+  W('usa-motion-spec', 'ui', 'Motion spec sheet', '动效规格表',
+    '9.7: a motion spec sheet for design hand-off — each rule of a motion string with its trigger, a duration bar on a shared timeline and the easing curve, a Play playhead and Copy CSS; pairs with the Figma plugin and Framer export of motionary/design.',
+    '9.7：用于设计交付的动效规格表 —— 列出动效字符串中每条规则的触发方式、共享时间轴上的时长条与缓动曲线，可播放进度线并复制 CSS；与 motionary/design 的 Figma 插件和 Framer 导出配合使用。',
+    ['design handoff', 'figma', 'framer', 'spec', 'easing'],
+    '<usa-motion-spec label="Card entrance" rules="enter: fade-up 600ms ease-out stagger 80ms; hover: pop 300ms spring"></usa-motion-spec>',
+    '<usa-motion-spec class="demo-mspec" label="Card entrance" rules="enter: fade-up 600ms ease-out stagger 80ms; hover: pop 300ms spring; click: confetti delay 120ms"></usa-motion-spec>',
+    undefined, { since: '9.7' }),
 ];
 
 /** item id → live-demo wiring. */
