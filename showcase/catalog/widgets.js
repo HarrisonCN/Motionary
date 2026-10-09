@@ -1070,6 +1070,28 @@ export const components = [
     '<usa-fx effect="letterbox" trigger="enter"><img src="scene.jpg" alt=""></usa-fx>\n<usa-fx effect="rack-focus" trigger="click"><div><b>Near</b><b>Far</b></div></usa-fx>',
     '<div class="demo-row"><usa-fx effect="letterbox" trigger="click"><button type="button" class="demo-film demo-film-wide">Letterbox</button></usa-fx><usa-fx effect="rack-focus" trigger="click"><button type="button" class="demo-rack"><b>Near</b><b>Far</b></button></usa-fx></div>',
     [{ key: 'effect', values: ['letterbox', 'rack-focus'] }], '9.1'),
+  // ---- 9.2 -------------------------------------------------------------
+  W('usa-lottie', 'ui', 'Lottie player', 'Lottie 播放器',
+    '9.2: plays Lottie (After Effects / bodymovin) files without lottie-web — vector layers render as SVG and their keyframes run as native animations on Motionary’s clock.',
+    '9.2：无需 lottie-web 即可播放 Lottie（After Effects / bodymovin）文件 —— 矢量图层渲染为 SVG，关键帧以原生动画在 Motionary 时钟上运行。',
+    ['lottie', 'after effects', 'bodymovin', 'import', 'svg'],
+    '<usa-lottie src="confetti.json" autoplay loop label="Celebration"></usa-lottie>',
+    '<div class="demo-row demo-lottie"><usa-lottie-icon name="check" trigger="loop" size="72" label="Done"></usa-lottie-icon><usa-lottie-icon name="spinner" trigger="loop" size="72" label="Loading"></usa-lottie-icon></div>',
+    undefined, { since: '9.2' }),
+  W('usa-lottie-icon', 'ui', 'Animated icon set', '动画图标集',
+    '9.2: an animated icon set shipped as tiny Lottie files — heart beat, bell swing, check draw-in, spinner, star twinkle, bolt zap — on click, hover, enter or loop.',
+    '9.2：以微型 Lottie 文件提供的动画图标集 —— 心跳、铃铛摇摆、对勾绘入、加载旋转、星星闪烁、闪电 —— 支持点击、悬停、进入视口或循环触发。',
+    ['icons', 'lottie', 'animated icons', 'micro-interaction', 'svg'],
+    '<usa-lottie-icon name="heart" trigger="click" size="32" label="Like"></usa-lottie-icon>\n<usa-lottie-icon name="bell" trigger="hover"></usa-lottie-icon>',
+    '<div class="demo-row demo-licons"><usa-lottie-icon name="heart" size="40" label="Like"></usa-lottie-icon><usa-lottie-icon name="bell" size="40" trigger="hover" label="Notifications"></usa-lottie-icon><usa-lottie-icon name="star" size="40" label="Star"></usa-lottie-icon><usa-lottie-icon name="bolt" size="40" trigger="loop" label="Power"></usa-lottie-icon></div>',
+    undefined, { since: '9.2' }),
+  X('fx-icon-pop', ['fx-lottie', 'registerLottiePack'], 'Icon pop', '图标弹跳',
+    '9.2: icon-pop gives an icon a sticker-like pop with a ring burst; lottie-play replays a Lottie animation on any trigger.',
+    '9.2：icon-pop 让图标像贴纸一样弹跳并扩散一圈光环；lottie-play 可在任意触发时重播 Lottie 动画。',
+    ['icon', 'pop', 'burst', 'lottie', 'click'],
+    '<usa-fx effect="icon-pop" trigger="click" color="#f43f5e"><button aria-label="Like">♥</button></usa-fx>',
+    '<div class="demo-row"><usa-fx effect="icon-pop" trigger="click"><button type="button" class="demo-ipop" aria-label="Like">♥</button></usa-fx><usa-fx effect="icon-pop" trigger="click" color="#6366f1"><button type="button" class="demo-ipop demo-ipop-b" aria-label="Save">★</button></usa-fx></div>',
+    [{ key: 'effect', values: ['icon-pop'] }], '9.2'),
 ];
 
 /** item id → live-demo wiring. */

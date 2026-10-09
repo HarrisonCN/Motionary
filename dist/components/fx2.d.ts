@@ -805,6 +805,49 @@ declare const CINEMA_FX: EffectDefinition[];
 declare function registerCinemaPack(): void;
 
 /**
+ * 9.2 — Lottie import (`motionary/fx/lottie`, also `motionary/components/fx-lottie`).
+ *
+ * `lottieToKeyframes(json)` converts the layer transforms of a Lottie
+ * (bodymovin) JSON — position `p`, scale `s`, rotation `r`, opacity `o`
+ * (static or keyframed) — into WAAPI keyframes per layer plus the duration
+ * (`op − ip` frames at `fr` fps), so a designer's After Effects motion runs
+ * on Motionary's clock without lottie-web. `lottieToSvg(json)` renders the
+ * simple vector shapes (ellipse `el`, rect `rc`, path `sh`, fill `fl`,
+ * stroke `st`) as SVG groups, one per layer. `riveInputs(instance, el, map)`
+ * wires Motionary-style triggers (hover / press / click / enter) to the
+ * boolean / trigger inputs of a Rive state machine you created with the
+ * Rive runtime.
+ *
+ * Effects: `lottie-play` (attention) plays the keyframes stored on an
+ * element by `<usa-lottie>`; `icon-pop` (click) a sticker-like pop with a
+ * ring burst for icons. Reduced motion: no motion.
+ */
+
+interface LottieLayerMotion {
+    name: string;
+    index: number;
+    keyframes: Keyframe[];
+    anchor: [number, number];
+}
+interface LottieMotion {
+    width: number;
+    height: number;
+    duration: number;
+    layers: LottieLayerMotion[];
+}
+/** Lottie JSON → WAAPI keyframes per layer + duration (ms) (9.2). */
+declare function lottieToKeyframes(json: any): LottieMotion;
+/** Render the simple vector layers of a Lottie JSON as an SVG string (one `<g data-layer>` per layer, top layer last) (9.2). */
+declare function lottieToSvg(json: any): string;
+/** Wire hover / press / click / enter on `el` to a Rive state machine's inputs: map { hover: 'isHover', click: 'fire' } (9.2). */
+declare function riveInputs(instance: {
+    stateMachineInputs(sm: string): any[];
+}, stateMachine: string, el: HTMLElement, map: Partial<Record<'hover' | 'press' | 'click' | 'enter', string>>): () => void;
+declare const LOTTIE_FX: EffectDefinition[];
+/** Register lottie-play and icon-pop (9.2). */
+declare function registerLottiePack(): void;
+
+/**
  * 5.5 — generative backgrounds on Canvas 2D, registered through
  * `registerEffect()` (kind `background`): `flow-field`, `voronoi`,
  * `mesh-gradient`, `starfield`, `metaballs`, `contours`.
@@ -913,5 +956,5 @@ declare const EFFECT_PACKS: Record<string, EffectDefinition[]>;
 /** Register every 6.x effect pack (idempotent). */
 declare function registerEffectPacks(): void;
 
-export { AI_FX, CAMERA_MOVES, CHART_FX, CINEMA_FX, CYBER_FX, DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GEO_FX, GESTURE3_FX, GLSL_HEAD, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, ORGANIC_FX, PAPER_FX, PHYSICS2_FX, RETRO_FX, SHOP_FX, SOCIAL_FX, SPATIAL_FX, SURFACE_FX, SURFACE_THEMES, TEXT3_FX, TRANSITIONS2_FX, VerletWorld, WEATHER_FX, WGSL_HEAD, applySurfaceTheme, arcPath, blobRadius, cameraFrame, crossDocumentTransitions, decodeFrame, fanAngles, fieldFallback, glslToWgsl, loadEffectPack, musicSample, orientationToTilt, packManifest, pageTransition, paperRandom, parseFigure, pinchAngle, pinchScale, pixelSteps, pointsToPath, register3dPack, registerAiPack, registerChartPack, registerCinemaPack, registerCyberPack, registerEffectPacks, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGeoPack, registerGesture3Pack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerOrganicPack, registerPaperPack, registerPhysicsPack, registerRetroPack, registerShopPack, registerSocialPack, registerSpatialPack, registerSurfacePack, registerTextPack, registerTransitionsPack, registerWeatherPack, roughLine, routeLength, samplePath, shaderBackground, shakeFrames, skyAt, sparkVectors, splitChars, splitWords, supportsWebGL2, supportsWebGPU, syntheticSample, throwPath, trackPointer, validateManifest, webgpuBackground, wgslModule, xrSupport, yawToOffset };
+export { AI_FX, CAMERA_MOVES, CHART_FX, CINEMA_FX, CYBER_FX, DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GEO_FX, GESTURE3_FX, GLSL_HEAD, GPU_FX, LIGHT_FX, LOTTIE_FX, MORPH2_FX, MUSIC_FX, ORGANIC_FX, PAPER_FX, PHYSICS2_FX, RETRO_FX, SHOP_FX, SOCIAL_FX, SPATIAL_FX, SURFACE_FX, SURFACE_THEMES, TEXT3_FX, TRANSITIONS2_FX, VerletWorld, WEATHER_FX, WGSL_HEAD, applySurfaceTheme, arcPath, blobRadius, cameraFrame, crossDocumentTransitions, decodeFrame, fanAngles, fieldFallback, glslToWgsl, loadEffectPack, lottieToKeyframes, lottieToSvg, musicSample, orientationToTilt, packManifest, pageTransition, paperRandom, parseFigure, pinchAngle, pinchScale, pixelSteps, pointsToPath, register3dPack, registerAiPack, registerChartPack, registerCinemaPack, registerCyberPack, registerEffectPacks, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGeoPack, registerGesture3Pack, registerGpuPack, registerLightPack, registerLottiePack, registerMorphPack, registerMusicPack, registerOrganicPack, registerPaperPack, registerPhysicsPack, registerRetroPack, registerShopPack, registerSocialPack, registerSpatialPack, registerSurfacePack, registerTextPack, registerTransitionsPack, registerWeatherPack, riveInputs, roughLine, routeLength, samplePath, shaderBackground, shakeFrames, skyAt, sparkVectors, splitChars, splitWords, supportsWebGL2, supportsWebGPU, syntheticSample, throwPath, trackPointer, validateManifest, webgpuBackground, wgslModule, xrSupport, yawToOffset };
 export type { EffectPackManifest, ShaderSpec };

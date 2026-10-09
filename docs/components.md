@@ -1190,6 +1190,21 @@ nav.addEventListener('usa:chapter', (e) => console.log(e.detail.title));
 - `<usa-scene camera strength>`: `progress`, `setProgress(p)`; `usa:shot` { progress }.
 - Cinema: `dolly-in` · `pan-reveal` (`from`) · `letterbox` (`hold`) · `rack-focus`; `cameraFrame(move, p, strength?)`, `CAMERA_MOVES`.
 
+### v9.2 Lottie / Rive import (`motionary/fx/lottie`): `<usa-lottie>`, `<usa-lottie-icon>`
+
+```html
+<usa-lottie src="confetti.json" autoplay loop label="Celebration"></usa-lottie>
+<usa-lottie-icon name="heart" trigger="click" label="Like"></usa-lottie-icon>
+```
+```js
+import { lottieToKeyframes, riveInputs } from 'motionary/fx/lottie';
+const { duration, layers } = lottieToKeyframes(json);      // WAAPI keyframes per layer
+riveInputs(riveInstance, 'State Machine 1', button, { hover: 'isHover', click: 'press' });
+```
+- `<usa-lottie src json autoplay loop speed label>`: `play()`, `pause()`, `stop()`, `parsed`; `usa:load`, `usa:complete`.
+- `<usa-lottie-icon name trigger size color label>`: `play()`; `LOTTIE_ICONS`.
+- Effects: `lottie-play`, `icon-pop` (`color`).
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

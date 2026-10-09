@@ -27,6 +27,7 @@ var components_fxSurface = require('./fx-surface.cjs');
 var components_fxGesture = require('./fx-gesture.cjs');
 var components_fxSpatial = require('./fx-spatial.cjs');
 var components_fxCinema = require('./fx-cinema.cjs');
+var components_fxLottie = require('./fx-lottie.cjs');
 require('../chunks/registry-BVklOepd.cjs');
 require('../chunks/base-DoRUZBy-.cjs');
 require('../chunks/generative-BHIj-NU0.cjs');
@@ -61,6 +62,7 @@ const EFFECT_PACKS = {
     gesture3: components_fxGesture.GESTURE3_FX,
     spatial: components_fxSpatial.SPATIAL_FX,
     cinema: components_fxCinema.CINEMA_FX,
+    lottie: components_fxLottie.LOTTIE_FX,
 };
 /** Register every 6.x effect pack (idempotent). */
 function registerEffectPacks() {
@@ -90,6 +92,7 @@ function registerEffectPacks() {
     components_fxGesture.registerGesture3Pack();
     components_fxSpatial.registerSpatialPack();
     components_fxCinema.registerCinemaPack();
+    components_fxLottie.registerLottiePack();
 }
 
 exports.EFFECT_PACK_FORMAT = manifest.EFFECT_PACK_FORMAT;
@@ -189,6 +192,11 @@ exports.CAMERA_MOVES = components_fxCinema.CAMERA_MOVES;
 exports.CINEMA_FX = components_fxCinema.CINEMA_FX;
 exports.cameraFrame = components_fxCinema.cameraFrame;
 exports.registerCinemaPack = components_fxCinema.registerCinemaPack;
+exports.LOTTIE_FX = components_fxLottie.LOTTIE_FX;
+exports.lottieToKeyframes = components_fxLottie.lottieToKeyframes;
+exports.lottieToSvg = components_fxLottie.lottieToSvg;
+exports.registerLottiePack = components_fxLottie.registerLottiePack;
+exports.riveInputs = components_fxLottie.riveInputs;
 exports.EFFECT_PACKS = EFFECT_PACKS;
 exports.registerEffectPacks = registerEffectPacks;
 //# sourceMappingURL=fx2.cjs.map

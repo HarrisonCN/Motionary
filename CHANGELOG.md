@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [9.2.0] - 2026-10-09
+
+### Added
+- **Lottie / Rive import — `motionary/fx/lottie`** (= `motionary/components/fx-lottie`, `registerLottiePack()`, also in `registerEffectPacks()` and the marketplace): `lottieToKeyframes(json)` (layer position / anchor / rotation / scale / opacity → WAAPI keyframes + duration), `lottieToSvg(json)` (ellipse / rect / path shapes with fill / stroke, nested groups), `riveInputs(instance, stateMachine, el, { hover, press, click, enter })` (drive a Rive state machine's boolean / trigger inputs). Effects `lottie-play` (attention) and `icon-pop` (click).
+- **2 new components (9.2)** in `motionary/components/widgets`:
+  - `<usa-lottie>` — Lottie player without lottie-web: `src` or `json`, `autoplay` (on screen), `loop`, `speed`, `label`; `play()`, `pause()`, `stop()`, `parsed`; `usa:load` { duration, layers }, `usa:complete`, `usa:error`.
+  - `<usa-lottie-icon>` — animated icon set shipped as tiny Lottie files (`heart`, `bell`, `check`, `spinner`, `star`, `bolt`; JSON exported as `LOTTIE_ICONS`); `trigger` click · hover · enter · loop, `size`, `color`, `label`; `play()`.
+- Showcase: 3 new gallery cards with copyable code, live demos and live Store thumbnails.
+
+### Accessibility
+- `<usa-lottie>` is an `img` with `label`; icons are decorative (`aria-hidden`) unless they get a `label` (then `img`). Reduced motion: the first frame is shown, nothing autoplays, `icon-pop` / `lottie-play` do nothing.
+
 ## [9.1.0] - 2026-10-09
 
 ### Added
