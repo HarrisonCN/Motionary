@@ -106,4 +106,4 @@ function haptic(pattern = 10) {
 }
 
 export { burst as b, confetti as c, haptic as h, shake as s };
-//# sourceMappingURL=fx-DUteojZx.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/chunks/fx-DUteojZx.js.map

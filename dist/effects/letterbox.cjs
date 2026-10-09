@@ -16,4 +16,4 @@ function registerLetterbox() {
 exports.effect = effect;
 exports.register = registerLetterbox;
 exports.registerLetterbox = registerLetterbox;
-//# sourceMappingURL=letterbox.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/effects/letterbox.cjs.map

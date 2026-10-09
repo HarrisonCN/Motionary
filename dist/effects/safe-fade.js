@@ -12,4 +12,4 @@ function registerSafeFade() {
 }
 
 export { effect, registerSafeFade as register, registerSafeFade };
-//# sourceMappingURL=safe-fade.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/effects/safe-fade.js.map

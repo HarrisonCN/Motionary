@@ -16,4 +16,4 @@ function registerFocusDraw() {
 exports.effect = effect;
 exports.register = registerFocusDraw;
 exports.registerFocusDraw = registerFocusDraw;
-//# sourceMappingURL=focus-draw.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/effects/focus-draw.cjs.map

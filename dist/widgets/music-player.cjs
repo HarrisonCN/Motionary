@@ -168,4 +168,4 @@ function defineMusicPlayer(tag = 'usa-music-player') {
 }
 
 exports.defineMusicPlayer = defineMusicPlayer;
-//# sourceMappingURL=music-player.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/widgets/music-player.cjs.map

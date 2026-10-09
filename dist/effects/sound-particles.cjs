@@ -19,4 +19,4 @@ function registerSoundParticles() {
 exports.effect = effect;
 exports.register = registerSoundParticles;
 exports.registerSoundParticles = registerSoundParticles;
-//# sourceMappingURL=sound-particles.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/effects/sound-particles.cjs.map

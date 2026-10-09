@@ -338,4 +338,4 @@ exports.definePress = definePress;
 exports.defineRipple = defineRipple;
 exports.defineSpotlight = defineSpotlight;
 exports.defineTilt = defineTilt;
-//# sourceMappingURL=interaction.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/components/interaction.cjs.map

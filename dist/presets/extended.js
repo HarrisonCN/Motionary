@@ -236,4 +236,4 @@ function registerExtendedPresets() {
 }
 
 export { EXTENDED_PRESETS, EXTENDED_PRESET_CATEGORIES, registerExtendedPresets };
-//# sourceMappingURL=extended.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/presets/extended.js.map

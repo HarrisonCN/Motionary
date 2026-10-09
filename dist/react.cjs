@@ -65,4 +65,4 @@ function createReactHooks(React) {
 
 exports.createReactHooks = createReactHooks;
 exports.withLatestCallbacks = withLatestCallbacks;
-//# sourceMappingURL=react.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/react.cjs.map

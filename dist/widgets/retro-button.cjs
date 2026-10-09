@@ -6,4 +6,4 @@ require('../chunks/base-B3me2y0o.cjs');
 
 
 exports.defineRetroButton = widgets_retroButton.defineRetroButton;
-//# sourceMappingURL=retro-button.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/widgets/retro-button.cjs.map

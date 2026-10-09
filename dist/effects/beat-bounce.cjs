@@ -19,4 +19,4 @@ function registerBeatBounce() {
 exports.effect = effect;
 exports.register = registerBeatBounce;
 exports.registerBeatBounce = registerBeatBounce;
-//# sourceMappingURL=beat-bounce.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/effects/beat-bounce.cjs.map

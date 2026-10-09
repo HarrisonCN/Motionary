@@ -16,4 +16,4 @@ function registerHologram() {
 exports.effect = effect;
 exports.register = registerHologram;
 exports.registerHologram = registerHologram;
-//# sourceMappingURL=hologram.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/effects/hologram.cjs.map

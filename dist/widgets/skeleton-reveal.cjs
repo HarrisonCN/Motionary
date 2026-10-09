@@ -7,4 +7,4 @@ require('../chunks/shared-BxK1D7EZ.cjs');
 
 
 exports.defineSkeletonReveal = widgets_skeletonReveal.defineSkeletonReveal;
-//# sourceMappingURL=skeleton-reveal.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/widgets/skeleton-reveal.cjs.map

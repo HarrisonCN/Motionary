@@ -12,4 +12,4 @@ function registerColorPulse() {
 }
 
 export { effect, registerColorPulse as register, registerColorPulse };
-//# sourceMappingURL=color-pulse.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/effects/color-pulse.js.map

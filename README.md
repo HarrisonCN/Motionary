@@ -653,6 +653,8 @@ Four logical layers — Public API (HTML · React · Vue · Svelte · Solid · A
 
 **Tree-shaking (11.1):** importing a module registers nothing and writes nothing to the page until you call `define*()` / `register*()` / `use()`; `sideEffects` lists only CSS, the UMD / IIFE builds, `presets/extended` and `components/lite`. Importing one export pulls in only its own code — see [docs/tree-shaking.md](./docs/tree-shaking.md).
 
+**Source maps (11.2):** not shipped to npm (the package is about half the size); every built file still links its map in the release tag on GitHub, so DevTools resolves it on demand — see [docs/source-maps.md](./docs/source-maps.md).
+
 ## Roadmap
 
 One version per PR towards 7.0 — particles & fluids, text effects, light & materials, 3D scenes, morphing, transitions, weather, interactive physics: [docs/ROADMAP.md](./docs/ROADMAP.md).

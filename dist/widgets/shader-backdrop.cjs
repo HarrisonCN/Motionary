@@ -6,4 +6,4 @@ require('../chunks/base-B3me2y0o.cjs');
 
 
 exports.defineShaderBackdrop = widgets_shaderBackdrop.defineShaderBackdrop;
-//# sourceMappingURL=shader-backdrop.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/widgets/shader-backdrop.cjs.map

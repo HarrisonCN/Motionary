@@ -2,11 +2,11 @@
 
 var components_glModel = require('../components/gl-model.cjs');
 require('../chunks/base-B3me2y0o.cjs');
-require('../chunks/runtime-link-BGOVYbEP.cjs');
-require('../chunks/registry-DrMvKcV3.cjs');
-require('../chunks/gl-scene-BFCzaO_8.cjs');
+require('../chunks/runtime-link-Bne5p2tj.cjs');
+require('../chunks/registry-BIhHroDh.cjs');
+require('../chunks/gl-scene-BZ-Tm38b.cjs');
 
 
 
 exports.defineGlModel = components_glModel.defineGlModel;
-//# sourceMappingURL=gl-model.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/widgets/gl-model.cjs.map

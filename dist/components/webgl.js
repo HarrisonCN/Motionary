@@ -439,4 +439,4 @@ function defineWebglComponents() {
 }
 
 export { GL_FALLBACKS, PARTICLE_PRESETS, POST_EFFECTS, SHADERS, defineDistort, defineLiquid, definePostFx, defineShader, defineWebglComponents, fragmentSource, glFallbackCss, glGovernor, glQuad, postFxShader, supportsWebGL, watchPowerSaver };
-//# sourceMappingURL=webgl.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/components/webgl.js.map

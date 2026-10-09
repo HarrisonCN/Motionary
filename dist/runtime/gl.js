@@ -1,4 +1,4 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-DUAt7GXU.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-DZMe2rVp.js';
 
 /**
  * `motionary/runtime/gl` (10.5) — a small WebGL2 scene renderer written for
@@ -749,4 +749,4 @@ const gl = {
 };
 
 export { Camera, GlNode, Scene, bounds, box, color, computeNormals, createRenderer, frameNode, gl, mat4, orbitControls, plane, quatFromEuler, quatMultiply, quatSlerp, scrubVideo, shaderMaterial, sphere, standardMaterial, texture, torus, unlitMaterial };
-//# sourceMappingURL=gl.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/runtime/gl.js.map

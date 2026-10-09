@@ -18,4 +18,4 @@ function registerSnowfall() {
 exports.effect = effect;
 exports.register = registerSnowfall;
 exports.registerSnowfall = registerSnowfall;
-//# sourceMappingURL=snowfall.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/effects/snowfall.cjs.map

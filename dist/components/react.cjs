@@ -93,4 +93,4 @@ exports.USA_TAGS = USA_TAGS;
 exports.createUsaComponents = createUsaComponents;
 exports.eventName = eventName;
 exports.pascal = pascal;
-//# sourceMappingURL=react.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.2.0/dist/components/react.cjs.map
