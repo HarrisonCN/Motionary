@@ -873,6 +873,41 @@ declare const GENART_FX: EffectDefinition[];
 declare function registerGenArtPack(): void;
 
 /**
+ * 9.4 — Video motion (`motionary/fx/video`, also `motionary/components/fx-video`):
+ *
+ * - `scrubVideo(video, trigger?)` — scroll-driven video: `currentTime`
+ *   follows the scroll progress of `trigger` (default the video) through the
+ *   viewport, eased. Returns a stop function.
+ * - `frameSequence(canvas, { count, src | draw }, trigger?)` — an Apple-style
+ *   image sequence scrubbed by scroll: frame `i` is the image `src(i)`
+ *   (preloaded) or whatever `draw(ctx, i, w, h)` paints. Returns a stop.
+ * - `scrollProgress(el)` — 0 when `el` enters at the bottom, 1 when it leaves
+ *   at the top.
+ *
+ * Effects: `film-burn` (enter) — a warm light leak burns across as the
+ * element appears; `jump-cut` (attention) — two hard cuts (zoom / reframe)
+ * and back, like an edit. Reduced motion: scrubbing shows the first frame,
+ * film-burn fades, jump-cut does nothing.
+ */
+
+/** Scroll progress of `el` through the viewport: 0 entering at the bottom → 1 leaving at the top (9.4). */
+declare function scrollProgress(el: Element): number;
+/** Scroll-driven video: `video.currentTime` follows the scroll progress of `trigger` (9.4). */
+declare function scrubVideo(video: HTMLVideoElement, trigger?: Element, opts?: {
+    ease?: number;
+}): () => void;
+interface FrameSequenceSource {
+    count: number;
+    src?: (i: number) => string;
+    draw?: (ctx: CanvasRenderingContext2D, i: number, w: number, h: number) => void;
+}
+/** Image-sequence scrubbing on a canvas (preloads `src(i)`, or paints with `draw`) (9.4). */
+declare function frameSequence(canvas: HTMLCanvasElement, seq: FrameSequenceSource, trigger?: Element): () => void;
+declare const VIDEO_FX: EffectDefinition[];
+/** Register film-burn and jump-cut (9.4). */
+declare function registerVideoPack(): void;
+
+/**
  * 5.5 — generative backgrounds on Canvas 2D, registered through
  * `registerEffect()` (kind `background`): `flow-field`, `voronoi`,
  * `mesh-gradient`, `starfield`, `metaballs`, `contours`.
@@ -981,5 +1016,5 @@ declare const EFFECT_PACKS: Record<string, EffectDefinition[]>;
 /** Register every 6.x effect pack (idempotent). */
 declare function registerEffectPacks(): void;
 
-export { AI_FX, CAMERA_MOVES, CHART_FX, CINEMA_FX, CYBER_FX, DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GENART_FX, GEO_FX, GESTURE3_FX, GLSL_HEAD, GPU_FX, LIGHT_FX, LOTTIE_FX, MORPH2_FX, MUSIC_FX, ORGANIC_FX, PALETTES, PAPER_FX, PHYSICS2_FX, RETRO_FX, SHOP_FX, SOCIAL_FX, SPATIAL_FX, SURFACE_FX, SURFACE_THEMES, TEXT3_FX, TRANSITIONS2_FX, VerletWorld, WEATHER_FX, WGSL_HEAD, applySurfaceTheme, arcPath, blobRadius, cameraFrame, crossDocumentTransitions, decodeFrame, fanAngles, fieldFallback, glslToWgsl, loadEffectPack, lottieToKeyframes, lottieToSvg, meshGradient, musicSample, orientationToTilt, packManifest, pageTransition, paperRandom, parseFigure, pinchAngle, pinchScale, pixelSteps, pointsToPath, register3dPack, registerAiPack, registerChartPack, registerCinemaPack, registerCyberPack, registerEffectPacks, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGenArtPack, registerGeoPack, registerGesture3Pack, registerGpuPack, registerLightPack, registerLottiePack, registerMorphPack, registerMusicPack, registerOrganicPack, registerPaperPack, registerPhysicsPack, registerRetroPack, registerShopPack, registerSocialPack, registerSpatialPack, registerSurfacePack, registerTextPack, registerTransitionsPack, registerWeatherPack, riveInputs, roughLine, routeLength, samplePath, seededRandom, shaderBackground, shakeFrames, skyAt, sparkVectors, splitChars, splitWords, supportsWebGL2, supportsWebGPU, syntheticSample, throwPath, trackPointer, validateManifest, webgpuBackground, wgslModule, xrSupport, yawToOffset };
+export { AI_FX, CAMERA_MOVES, CHART_FX, CINEMA_FX, CYBER_FX, DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GENART_FX, GEO_FX, GESTURE3_FX, GLSL_HEAD, GPU_FX, LIGHT_FX, LOTTIE_FX, MORPH2_FX, MUSIC_FX, ORGANIC_FX, PALETTES, PAPER_FX, PHYSICS2_FX, RETRO_FX, SHOP_FX, SOCIAL_FX, SPATIAL_FX, SURFACE_FX, SURFACE_THEMES, TEXT3_FX, TRANSITIONS2_FX, VIDEO_FX, VerletWorld, WEATHER_FX, WGSL_HEAD, applySurfaceTheme, arcPath, blobRadius, cameraFrame, crossDocumentTransitions, decodeFrame, fanAngles, fieldFallback, frameSequence, glslToWgsl, loadEffectPack, lottieToKeyframes, lottieToSvg, meshGradient, musicSample, orientationToTilt, packManifest, pageTransition, paperRandom, parseFigure, pinchAngle, pinchScale, pixelSteps, pointsToPath, register3dPack, registerAiPack, registerChartPack, registerCinemaPack, registerCyberPack, registerEffectPacks, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGenArtPack, registerGeoPack, registerGesture3Pack, registerGpuPack, registerLightPack, registerLottiePack, registerMorphPack, registerMusicPack, registerOrganicPack, registerPaperPack, registerPhysicsPack, registerRetroPack, registerShopPack, registerSocialPack, registerSpatialPack, registerSurfacePack, registerTextPack, registerTransitionsPack, registerVideoPack, registerWeatherPack, riveInputs, roughLine, routeLength, samplePath, scrollProgress, scrubVideo, seededRandom, shaderBackground, shakeFrames, skyAt, sparkVectors, splitChars, splitWords, supportsWebGL2, supportsWebGPU, syntheticSample, throwPath, trackPointer, validateManifest, webgpuBackground, wgslModule, xrSupport, yawToOffset };
 export type { EffectPackManifest, ShaderSpec };

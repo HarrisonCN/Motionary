@@ -1221,6 +1221,24 @@ hero.style.background = meshGradient(42, 'forest');
 - `<usa-bg-generator palette style seed label>`: `css`, `shuffle()`, `copy()`; `usa:change`; `backgroundCss(style, seed, palette)`.
 - Genart: `halftone-in` (`dot`) · `mesh-drift` (`seed`, `palette`) · `kaleido` (`color`, `segments`) · `grain-flicker` (`opacity`); `PALETTES`, `seededRandom`, `meshGradient`.
 
+### v9.4 Video motion (`motionary/fx/video`): `<usa-video-card>`, `<usa-hero-video>`
+
+```html
+<usa-hero-video label="Welcome" poster="poster.jpg">
+  <video src="hero.mp4" autoplay muted loop playsinline></video>
+  <h1>Motion, declared.</h1>
+</usa-hero-video>
+<usa-video-card duration="2:41"><img src="poster.jpg" alt=""><video src="preview.mp4"></video><h3>Making of</h3></usa-video-card>
+```
+```js
+import { scrubVideo, frameSequence } from 'motionary/fx/video';
+scrubVideo(document.querySelector('#product-video'), document.querySelector('#product'));
+frameSequence(canvas, { count: 120, src: (i) => `/frames/${String(i).padStart(4, '0')}.webp` }, section);
+```
+- `<usa-video-card duration label>`: `previewing`; `usa:open` { src }.
+- `<usa-hero-video label poster scrub>`: `paused`, `toggle()`; `usa:play`, `usa:pause`.
+- Video: `scrubVideo`, `frameSequence`, `scrollProgress`; effects `film-burn` (`color`), `jump-cut`.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

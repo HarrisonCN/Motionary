@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [9.4.0] - 2026-10-09
+
+### Added
+- **Video motion — `motionary/fx/video`** (= `motionary/components/fx-video`, `registerVideoPack()`, also in `registerEffectPacks()` and the marketplace): `scrubVideo(video, trigger?)` (scroll-driven video, eased `currentTime`), `frameSequence(canvas, { count, src | draw }, trigger?)` (Apple-style image sequences scrubbed by scroll, preloaded), `scrollProgress(el)`. Effects `film-burn` (enter) and `jump-cut` (attention).
+- **2 new components (9.4)** in `motionary/components/widgets`:
+  - `<usa-video-card>` — hover / focus plays a muted preview with a progress line, play badge and duration chip (`duration` or read from the video); poster Ken Burns drift when there is no playable video; click / Enter → `usa:open` { src }; `previewing`.
+  - `<usa-hero-video>` — full-bleed hero: poster (`poster`, `<img>` or gradient) cross-fades to the background video when it can play, scrim, always-present pause / play button, `scrub` for a scroll-driven video, poster drift when no video; `paused`, `toggle()`; `usa:play` / `usa:pause`.
+- Showcase: 3 new gallery cards with copyable code, live demos and live Store thumbnails.
+
+### Accessibility
+- The hero always offers a labelled pause / play button for moving video (WCAG 2.2.2) and is a labelled `region`; background videos are muted and `aria-hidden`. The video card is a focusable button labelled "Play <title>". Reduced motion: no autoplay or preview (poster only), scrubbing shows the first frame, `film-burn` fades, `jump-cut` does nothing.
+
 ## [9.3.0] - 2026-10-09
 
 ### Added

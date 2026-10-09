@@ -53,6 +53,8 @@ import { LOTTIE_FX, registerLottiePack } from './fx-lottie.js';
 export { lottieToKeyframes, lottieToSvg, riveInputs } from './fx-lottie.js';
 import { GENART_FX, registerGenArtPack } from './fx-genart.js';
 export { PALETTES, meshGradient, seededRandom } from './fx-genart.js';
+import { VIDEO_FX, registerVideoPack } from './fx-video.js';
+export { frameSequence, scrollProgress, scrubVideo } from './fx-video.js';
 import '../chunks/registry-CnO7ZVPK.js';
 import '../chunks/base-CLuqlLfG.js';
 import '../chunks/generative-2LhxG5BJ.js';
@@ -89,6 +91,7 @@ const EFFECT_PACKS = {
     cinema: CINEMA_FX,
     lottie: LOTTIE_FX,
     genart: GENART_FX,
+    video: VIDEO_FX,
 };
 /** Register every 6.x effect pack (idempotent). */
 function registerEffectPacks() {
@@ -120,7 +123,8 @@ function registerEffectPacks() {
     registerCinemaPack();
     registerLottiePack();
     registerGenArtPack();
+    registerVideoPack();
 }
 
-export { AI_FX, CHART_FX, CINEMA_FX, CYBER_FX, DEPTH3_FX, EFFECT_PACKS, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GENART_FX, GEO_FX, GESTURE3_FX, GPU_FX, LIGHT_FX, LOTTIE_FX, MORPH2_FX, MUSIC_FX, ORGANIC_FX, PAPER_FX, PHYSICS2_FX, RETRO_FX, SHOP_FX, SOCIAL_FX, SPATIAL_FX, SURFACE_FX, TEXT3_FX, TRANSITIONS2_FX, WEATHER_FX, register3dPack, registerAiPack, registerChartPack, registerCinemaPack, registerCyberPack, registerEffectPacks, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGenArtPack, registerGeoPack, registerGesture3Pack, registerGpuPack, registerLightPack, registerLottiePack, registerMorphPack, registerMusicPack, registerOrganicPack, registerPaperPack, registerPhysicsPack, registerRetroPack, registerShopPack, registerSocialPack, registerSpatialPack, registerSurfacePack, registerTextPack, registerTransitionsPack, registerWeatherPack };
+export { AI_FX, CHART_FX, CINEMA_FX, CYBER_FX, DEPTH3_FX, EFFECT_PACKS, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GENART_FX, GEO_FX, GESTURE3_FX, GPU_FX, LIGHT_FX, LOTTIE_FX, MORPH2_FX, MUSIC_FX, ORGANIC_FX, PAPER_FX, PHYSICS2_FX, RETRO_FX, SHOP_FX, SOCIAL_FX, SPATIAL_FX, SURFACE_FX, TEXT3_FX, TRANSITIONS2_FX, VIDEO_FX, WEATHER_FX, register3dPack, registerAiPack, registerChartPack, registerCinemaPack, registerCyberPack, registerEffectPacks, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGenArtPack, registerGeoPack, registerGesture3Pack, registerGpuPack, registerLightPack, registerLottiePack, registerMorphPack, registerMusicPack, registerOrganicPack, registerPaperPack, registerPhysicsPack, registerRetroPack, registerShopPack, registerSocialPack, registerSpatialPack, registerSurfacePack, registerTextPack, registerTransitionsPack, registerVideoPack, registerWeatherPack };
 //# sourceMappingURL=fx2.js.map
