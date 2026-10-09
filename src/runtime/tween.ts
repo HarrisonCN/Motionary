@@ -183,8 +183,8 @@ export abstract class Playable {
     if (t < 0) this.renderLocal(0, false);
     else if (!d) this.renderLocal(0, true);
     else {
-      let it = Math.floor(t / d);
-      let local = t - it * d;
+      let it = d === Infinity ? 0 : Math.floor(t / d);
+      let local = d === Infinity ? t : t - it * d;
       if (t >= td - this.delay && td !== Infinity) {
         it = this.repeat;
         local = d;

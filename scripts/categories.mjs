@@ -10,4 +10,4 @@ export const COMPONENT_ENTRIES = { react: 'frameworks/react', vue: 'frameworks/v
 
 // 10.1+: `motionary/runtime` and its modules (dist name → source under src/runtime/), each also built as a
 // self-registering IIFE for CDNs (dist/runtime.iife.js, dist/runtime/<module>.iife.js).
-export const RUNTIME_ENTRIES = { runtime: 'index', 'runtime/format-css': 'format-css', 'runtime/format-motion': 'format-motion' };
+export const RUNTIME_ENTRIES = { runtime: 'index', 'runtime/format-css': 'format-css', 'runtime/format-motion': 'format-motion', 'runtime/scroll': 'scroll', 'runtime/format-svg': 'format-svg' };

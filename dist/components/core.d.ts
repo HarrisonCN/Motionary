@@ -1,4 +1,45 @@
 /**
+ * 10.2: declarative `data-motion` in `motionary/core` — no DSL package needed.
+ *
+ * ```html
+ * <h1 data-motion="enter: fade-up 600ms">Hello</h1>
+ * <ul data-motion="enter: fade-up 500ms stagger 80ms"> <li>…</li> <li>…</li> </ul>
+ * <button data-motion="click: pop; hover: lift">Buy</button>
+ * ```
+ * ```ts
+ * import { createMotion, applyMotionAttributes } from 'motionary/core';
+ * const stop = applyMotionAttributes(createMotion(), document, { observe: true });
+ * ```
+ *
+ * Rule grammar (subset of the 9.0 DSL): `trigger: effect [duration] [delay <t>]
+ * [stagger <t>] [ease <easing>] [once]`, rules separated by `;`. Triggers:
+ * `enter`, `load`, `click`, `hover`, `loop`. Times: `600ms`, `0.6s`, `600`.
+ * `stagger` animates the element's children. Effects are core presets or any
+ * effect a plugin registered with `use()`.
+ */
+
+interface MotionAttrRule {
+    trigger: Trigger;
+    effect: string;
+    duration?: number;
+    delay?: number;
+    stagger?: number;
+    easing?: string;
+    once?: boolean;
+}
+/** Parse a `data-motion` value. Throws on an unknown trigger or a malformed rule. */
+declare function parseMotionAttr(value: string): MotionAttrRule[];
+/**
+ * Wire every `[data-motion]` element under `root` to the motion instance.
+ * `observe: true` also wires elements added later (MutationObserver).
+ * Returns a function that unbinds everything. No-op without a DOM (SSR).
+ */
+declare function applyMotionAttributes(m: MotionInstance, root?: ParentNode | null, o?: {
+    attribute?: string;
+    observe?: boolean;
+}): () => void;
+
+/**
  * `motionary/core` (10.0) — the zero-dependency core, under 10 KB gzip.
  *
  * Everything else is a plugin: `createMotion().use(retro, cinema)` with the
@@ -18,6 +59,7 @@
  * 'reduce'`): entrances fade, loops / backgrounds / cursors are skipped.
  */
 declare const VERSION = "10.0.0";
+
 type CoreEffectKind = 'enter' | 'exit' | 'attention' | 'hover' | 'click' | 'loop' | 'background' | 'cursor' | 'text' | 'scroll' | (string & {});
 interface CoreEffectContext {
     reduced: boolean;
@@ -77,5 +119,5 @@ declare function createMotion(config?: {
     rate?: number;
 }): MotionInstance;
 
-export { PRESETS, VERSION, createMotion, preferredBackend };
-export type { CoreEffect, CoreEffectContext, CoreEffectKind, CorePlugin, MotionInstance, RevealOptions, Trigger };
+export { PRESETS, VERSION, applyMotionAttributes, createMotion, parseMotionAttr, preferredBackend };
+export type { CoreEffect, CoreEffectContext, CoreEffectKind, CorePlugin, MotionAttrRule, MotionInstance, RevealOptions, Trigger };

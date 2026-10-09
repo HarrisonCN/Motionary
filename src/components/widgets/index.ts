@@ -108,6 +108,8 @@ import { defineMotionSpec, type UsaMotionSpecElement } from './motion-spec';
 import { defineNativePreview, type UsaNativePreviewElement } from './native-preview';
 import { definePluginCard, type UsaPluginCardElement } from './plugin-card';
 import { defineInstallButton, type UsaInstallButtonElement } from './install-button';
+import { defineScrollScene, parseScrub, type UsaScrollSceneElement } from './scroll-scene';
+import { defineMotionInspector, type UsaMotionInspectorElement } from './motion-inspector';
 
 export { defineCarousel, defineTabBar, defineDisclosure, defineStories, CAROUSEL_EFFECTS, TAB_INDICATORS };
 export type { UsaCarouselElement, UsaTabBarElement, UsaDisclosureElement, UsaStoriesElement };
@@ -219,6 +221,9 @@ export type { UsaNativePreviewElement };
 export { definePluginCard, defineInstallButton };
 export type { UsaPluginCardElement, UsaInstallButtonElement };
 
+export { defineScrollScene, parseScrub, defineMotionInspector };
+export type { UsaScrollSceneElement, UsaMotionInspectorElement };
+
 /** The widgets by release (tag → define function). */
 export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElementConstructor | undefined>> = {
   '6.2': { 'usa-carousel': defineCarousel, 'usa-tab-bar': defineTabBar, 'usa-disclosure': defineDisclosure, 'usa-stories': defineStories },
@@ -258,6 +263,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '9.7': { 'usa-motion-spec': defineMotionSpec },
   '9.8': { 'usa-native-preview': defineNativePreview },
   '10.1': { 'usa-plugin-card': definePluginCard, 'usa-install-button': defineInstallButton },
+  '10.2': { 'usa-scroll-scene': defineScrollScene, 'usa-motion-inspector': defineMotionInspector },
 };
 
 /** Every widget tag, in release order. */
@@ -370,5 +376,7 @@ declare global {
     'usa-native-preview': UsaNativePreviewElement;
     'usa-plugin-card': UsaPluginCardElement;
     'usa-install-button': UsaInstallButtonElement;
+    'usa-scroll-scene': UsaScrollSceneElement;
+    'usa-motion-inspector': UsaMotionInspectorElement;
   }
 }

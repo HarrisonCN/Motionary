@@ -176,6 +176,8 @@ Motionary ships its own zero-dependency animation runtime — shared ticker, twe
 | [Runtime core](docs/runtime/core.md) | `motionary/runtime` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js` | `use();` | 5.5 KB |
 | [CSS @keyframes & WAAPI keyframes loader](docs/runtime/format-css.md) | `motionary/runtime/format-css` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-css.iife.js` | `use(formatCss);` | 2.5 KB |
 | [Motion / Framer keyframe JSON loader](docs/runtime/format-motion.md) | `motionary/runtime/format-motion` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-motion.iife.js` | `use(formatMotion);` | 2.5 KB |
+| [Scroll scenes](docs/runtime/scroll.md) | `motionary/runtime/scroll` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/scroll.iife.js` | `use(scroll);` | 4.5 KB |
+| [SVG loader: SMIL playback + path morphing](docs/runtime/format-svg.md) | `motionary/runtime/format-svg` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-svg.iife.js` | `use(formatSvg);` | 5.0 KB |
 
 Install once: `npm i motionary`. Plain HTML: load `runtime.iife.js` first, then the module files (each registers itself).
 
@@ -207,6 +209,39 @@ definePluginCard(); // registers <usa-plugin-card> — after the prerequisites
 <usa-plugin-card name="retro" title="Retro" version="1.2.0" author="Motionary" engine="^10.0.0" downloads="12400">
   <p>Pixel, CRT, VHS and Y2K effects.</p>
 </usa-plugin-card>
+```
+
+#### `<usa-scroll-scene>` — Requires: motionary/runtime/scroll
+
+- **Install:** `npm i motionary`
+- **Import order & registration:** Register the core first, then the module: use(scroll) also registers the core. CDN: load runtime.iife.js, then runtime/scroll.iife.js (it registers itself).
+
+```js
+import { use } from 'motionary/runtime';
+import { scroll } from 'motionary/runtime/scroll';
+import { defineScrollScene } from 'motionary/components/widgets';
+
+use(scroll);
+defineScrollScene(); // registers <usa-scroll-scene> — after the prerequisites
+```
+
+- **CDN:**
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/scroll.iife.js"></script>
+<!-- then the component bundles -->
+<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>
+```
+
+- **Minimal example:**
+
+```html
+<usa-scroll-scene start="top 80%" end="bottom 20%" scrub="120" stagger="120">
+  <h2 data-scrub="x: -80 -> 0; opacity: 0 -> 1">Scroll</h2>
+  <p data-scrub="y: 40 -> 0; opacity: 0 -> 1">and it follows.</p>
+</usa-scroll-scene>
 ```
 
 <!-- runtime:end -->
@@ -241,6 +276,8 @@ More: [docs/performance.md](./docs/performance.md).
 Evergreen browsers since 2023: Chrome / Edge ≥ 111, Safari ≥ 16.4, Firefox ≥ 115, WebView2, Electron ≥ 24 (Custom Elements, Web Animations, IntersectionObserver, ResizeObserver, constructable stylesheets). View Transitions and scroll-driven animations are progressive — used when present, JS fallback otherwise. Importing on the server (SSR) is a no-op. Check a browser with `baselineReport()`.
 
 ## Documentation
+
+- **AI assistants:** [AGENTS.md](AGENTS.md) · [prompt guide](docs/ai-prompt-guide.md) · one page per component in [docs/components/](docs/components/README.md) · `components.json` / `llms.txt` / `llms-full.txt` on the site root.
 
 - [API reference](./docs/API.md) — every export, option and `data-sa-*` attribute
 - [Presets](./docs/presets.md) — all 214 by category

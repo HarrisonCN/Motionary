@@ -1374,7 +1374,57 @@ definePluginCard(); // registers <usa-plugin-card> — after the prerequisites
 </usa-plugin-card>
 ```
 
+### `<usa-scroll-scene>` — Requires: motionary/runtime/scroll
+
+- **Install:** `npm i motionary`
+- **Import order & registration:** Register the core first, then the module: use(scroll) also registers the core. CDN: load runtime.iife.js, then runtime/scroll.iife.js (it registers itself).
+
+```js
+import { use } from 'motionary/runtime';
+import { scroll } from 'motionary/runtime/scroll';
+import { defineScrollScene } from 'motionary/components/widgets';
+
+use(scroll);
+defineScrollScene(); // registers <usa-scroll-scene> — after the prerequisites
+```
+
+- **CDN:**
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/scroll.iife.js"></script>
+<!-- then the component bundles -->
+<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>
+```
+
+- **Minimal example:**
+
+```html
+<usa-scroll-scene start="top 80%" end="bottom 20%" scrub="120" stagger="120">
+  <h2 data-scrub="x: -80 -> 0; opacity: 0 -> 1">Scroll</h2>
+  <p data-scrub="y: 40 -> 0; opacity: 0 -> 1">and it follows.</p>
+</usa-scroll-scene>
+```
+
 <!-- prereqs:end -->
+
+### v10.2 Scroll scenes (`motionary/runtime/scroll`) + SVG loader + `data-motion` in core: `<usa-scroll-scene>`, `<usa-motion-inspector>` (`components/widgets`)
+
+```html
+<usa-scroll-scene start="top 80%" end="bottom 20%" scrub="120" stagger="120">
+  <h2 data-scrub="x: -80 -> 0; opacity: 0 -> 1">Scroll</h2>
+  <p data-scrub="y: 40 -> 0; opacity: 0 -> 1">and it follows.</p>
+</usa-scroll-scene>
+<usa-motion-inspector scope="#app"></usa-motion-inspector>
+```
+
+| Element | Attributes | Methods / events |
+|---|---|---|
+| `<usa-scroll-scene>` (Requires: motionary/runtime/scroll) | `start`, `end`, `scrub` (`true` or ms), `pin`, `markers`, `stagger`, `toggle-class`, `preview`; children `data-scrub="prop: from -> to; …"` | `progress`, `refresh()`, `timeline()`; `usa:progress`, `usa:enter`, `usa:leave`, `usa:runtime-missing` |
+| `<usa-motion-inspector>` | `scope`, `interval` | `refresh()`, `pauseAll()`, `playAll()`, `setRate(rate)`, `animations()`; `usa:change` |
+
+Declarative motion with just the core: `applyMotionAttributes(createMotion())` + `data-motion="enter: fade-up 600ms"`.
 
 ## Frameworks
 

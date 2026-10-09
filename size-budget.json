@@ -513,5 +513,25 @@
     "name": "dist/runtime/format-motion.iife.js (CDN module, fixed 2.5 KB)",
     "file": "dist/runtime/format-motion.iife.js",
     "limit": 2560
+  },
+  {
+    "name": "import 'motionary/runtime/scroll' (fixed 4.5 KB incl. the core parts it uses)",
+    "import": "export * from 'pkg/runtime/scroll';",
+    "limit": 4608
+  },
+  {
+    "name": "dist/runtime/scroll.iife.js (CDN module, fixed 4.5 KB)",
+    "file": "dist/runtime/scroll.iife.js",
+    "limit": 4608
+  },
+  {
+    "name": "import 'motionary/runtime/format-svg' (fixed 10.5 KB incl. the core parts it uses)",
+    "import": "export * from 'pkg/runtime/format-svg';",
+    "limit": 10752
+  },
+  {
+    "name": "dist/runtime/format-svg.iife.js (CDN module, fixed 5.0 KB)",
+    "file": "dist/runtime/format-svg.iife.js",
+    "limit": 5120
   }
 ]

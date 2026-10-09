@@ -1,8 +1,9 @@
 'use strict';
 
-var registry = require('../chunks/registry-C0xLNq3-.cjs');
-var keyframes = require('../chunks/keyframes-cUdsXSXQ.cjs');
-require('../chunks/tween-JEthWrjo.cjs');
+var registry = require('../chunks/registry-eJgpFAzI.cjs');
+var keyframes = require('../chunks/keyframes-ZheOkpt0.cjs');
+require('../chunks/tween-CBuWYpI-.cjs');
+require('../chunks/ticker-D4o6enH0.cjs');
 
 /**
  * `motionary/runtime/format-css` (10.1) — import CSS `@keyframes` and Web

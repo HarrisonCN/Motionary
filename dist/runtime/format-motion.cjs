@@ -1,8 +1,9 @@
 'use strict';
 
-var registry = require('../chunks/registry-C0xLNq3-.cjs');
-var tween = require('../chunks/tween-JEthWrjo.cjs');
-var keyframes = require('../chunks/keyframes-cUdsXSXQ.cjs');
+var registry = require('../chunks/registry-eJgpFAzI.cjs');
+var tween = require('../chunks/tween-CBuWYpI-.cjs');
+var keyframes = require('../chunks/keyframes-ZheOkpt0.cjs');
+require('../chunks/ticker-D4o6enH0.cjs');
 
 /**
  * `motionary/runtime/format-motion` (10.1) — play Motion / Framer-style
