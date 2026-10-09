@@ -980,6 +980,29 @@ envelope.addEventListener('usa:open', (e) => console.log(e.detail.amount));
 - `<usa-festival-banner theme label dismissible>`: `theme`, `dismiss()`; `usa:dismiss`; `FESTIVAL_THEMES`.
 - Festival: `firework-burst` (`bursts`, `colors`) · `lantern-rise` (`sway`) · `xmas-snow` (`flakes`) · `spooky-float` (`cycles`); `sparkVectors(n, radius, seed)`.
 
+### v8.2 Widgets: terminal, retro buttons (`components/widgets`) + retro pack (`motionary/fx/retro`)
+
+```html
+<usa-terminal title="zsh" theme="green">
+  <p data-cmd>npm i motionary</p>
+  <p>added 1 package in 2s</p>
+</usa-terminal>
+<usa-retro-button variant="pixel">Start</usa-retro-button>
+<usa-retro-button variant="win95">OK</usa-retro-button>
+
+<usa-fx effect="crt-power" trigger="enter"><img src="screen.png" alt=""></usa-fx>
+<usa-fx effect="vhs-glitch" trigger="hover"><h2>REWIND</h2></usa-fx>
+```
+```js
+import { defineWidgets } from 'motionary/components/widgets';
+import { registerRetroPack } from 'motionary/fx/retro';
+defineWidgets(); registerRetroPack();
+term.addEventListener('usa:done', () => term.replay());
+```
+- `<usa-terminal title prompt theme speed loop>`: `replay()`, `skip()`; `usa:done`.
+- `<usa-retro-button variant type disabled name value>`: `button`, `variant`; `RETRO_VARIANTS`.
+- Retro: `pixelate-in` (`steps`) · `crt-power` · `vhs-glitch` (`intensity`) · `y2k-shine` (`color`); `pixelSteps(steps)`.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

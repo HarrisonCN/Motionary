@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.2.0] - 2026-10-08
+
+### Added
+- **2 new components (8.2)** in `motionary/components/widgets` (also in `dist/widgets.umd.js`):
+  - `<usa-terminal>` — retro terminal window: child `<p data-cmd>` lines are typed after the `prompt` (default `$`) with a blinking block cursor, other children print as output, line by line, when it scrolls into view; `title`, `theme` (dark · green · amber phosphor glow), `speed`, `loop`; `replay()`, `skip()`; `usa:done`.
+  - `<usa-retro-button variant="pixel | crt | y2k | win95">` — retro buttons with era-true press motion (stepped 8-bit press, phosphor flicker, chrome bounce, bevel sink); the content becomes a real `<button>` (`type`, `disabled`, `name`, `value`); `RETRO_VARIANTS`.
+- **Retro pack — `motionary/fx/retro`** (= `motionary/components/fx-retro`, `registerRetroPack()`, also in `registerEffectPacks()`): `pixelate-in` (enter), `crt-power` (enter), `vhs-glitch` (attention), `y2k-shine` (attention). `pixelSteps()`. (The 5.8 theme effects `retro` / `retro-scanlines` are unchanged.)
+- Showcase: 4 new gallery cards with copyable code, live demos and live Store thumbnails; Animation Store 339 → 343 items.
+
+### Accessibility
+- Terminal output is a labelled `role="log"`; the prompt and cursor are `aria-hidden`. Retro buttons are real `<button>`s with visible focus styles per variant. Reduced motion: the terminal shows everything at once (no blink), buttons only change colour, `pixelate-in` / `crt-power` fade in, `vhs-glitch` does nothing, `y2k-shine` is a short brightness flash.
+
 ## [8.1.0] - 2026-10-08
 
 ### Added
