@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.9.0] - 2026-10-09
+
+### Added
+- **Low-code component export (8.9)** in `motionary/components/widgets` (also in `dist/widgets.umd.js`):
+  - `exportComponent(el, 'html' | 'react' | 'vue' | 'json')` — copy-paste code for any live, configured element (runtime attributes / generated parts stripped; HTML gets a CDN module import, React a `useEffect(defineWidgets)` component, Vue an SFC); `describeComponent(el)` — the portable JSON (`motionary/component@1`) the 9.0 declarative DSL reads.
+  - `<usa-code-export>` — shows that code in HTML / React / Vue / JSON tabs (`formats`) for its child or `for` target, follows attribute changes, one-click copy (`copy()`, `usa:copy` { format, ok }); `format`, `code`.
+  - `<usa-prop-panel>` — property editor bound to a live component's attributes (`for` selector or `previous`): `props="value:number:0:100, icon:select:star|heart, readonly:boolean, color:color, label:text"` (falls back to its `observedAttributes`); `reset()` (also a Reset button); `usa:prop` { name, value }; `parseProps()`.
+- `usa-codemod-9` (`npx usa-codemod-9 --write src`) and [docs/upgrading-9.md](docs/upgrading-9.md).
+- `applyMotionTheme()`, `MOTION_THEMES`, `MOTION_THEME_NAMES`, `<usa-motion-theme>` / `defineMotionTheme()` — the 9.0 names of the 5.8 motion-theme API (`motionary/components/effects`).
+
+### Deprecated (removed in 9.0)
+- `applyTheme()`, `THEMES`, `THEME_NAMES`, `<usa-theme>` / `defineTheme()` — renamed with a `Motion` prefix so they can't be confused with the 8.6 surface themes (`applySurfaceTheme`, `SURFACE_THEMES`). `applyTheme()` and `<usa-theme>` warn once in the console; the codemod rewrites identifiers and tags.
+
+### Accessibility
+- Code export: a `tablist` with arrow keys and a focusable `tabpanel`; the copy button reports "Copied ✓" in text. Property panel: a labelled `form` with a `<label>` for every field, `<output>` readouts and `role="switch"` checkboxes.
+
+### Fixed
+- the low-code export test checked the whole `<usa-hud-panel>` description for `usa-hud` (always present in the tag name); it now checks that the generated HUD parts are stripped from the children.
+
 ## [8.8.0] - 2026-10-09
 
 ### Added

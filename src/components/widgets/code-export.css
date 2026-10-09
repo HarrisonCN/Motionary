@@ -1,0 +1,10 @@
+usa-code-export{display:block;max-width:100%;border-radius:12px;overflow:hidden;background:#0f172a;color:#e2e8f0;font:13px/1.4 system-ui,sans-serif}
+usa-code-export>:not([data-usa-part]){display:block;margin:12px auto}
+usa-code-export:not([for])>:not([data-usa-part]){padding:0 12px}
+usa-code-export .usa-ce-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:#1e293b}
+usa-code-export [role=tablist]{display:flex;gap:2px}
+usa-code-export button{padding:5px 10px;border:0;border-radius:6px;background:none;color:#94a3b8;font:600 12px/1 system-ui,sans-serif;cursor:pointer}
+usa-code-export [aria-selected=true]{background:#334155;color:#fff}
+usa-code-export .usa-ce-copy{background:#4f46e5;color:#fff}
+usa-code-export button:focus-visible,usa-code-export pre:focus-visible{outline:2px solid #818cf8;outline-offset:1px}
+usa-code-export pre{margin:0;padding:10px 12px;max-height:220px;overflow:auto;font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre;color:#e2e8f0;background:#0f172a}

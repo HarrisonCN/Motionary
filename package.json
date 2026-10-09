@@ -1,6 +1,6 @@
 {
   "name": "motionary",
-  "version": "8.8.0",
+  "version": "8.9.0",
   "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 94 animated Web Components — 214 scroll-reveal presets, card/click/button morphs, physics, page transitions, generative & sound-reactive backgrounds, cursor/gesture effects, themes, micro-interactions, <usa-player>, WebGL. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -1101,6 +1101,7 @@
     "usa-codemod-5": "./bin/usa-codemod-5.mjs",
     "usa-codemod-6": "./bin/usa-codemod-6.mjs",
     "usa-codemod-7": "./bin/usa-codemod-7.mjs",
-    "usa-codemod-8": "./bin/usa-codemod-8.mjs"
+    "usa-codemod-8": "./bin/usa-codemod-8.mjs",
+    "usa-codemod-9": "./bin/usa-codemod-9.mjs"
   }
 }

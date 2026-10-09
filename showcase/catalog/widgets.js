@@ -1011,6 +1011,21 @@ export const components = [
     '<usa-fx effect="spatial-float" trigger="loop"><div class="window">…</div></usa-fx>\n<usa-fx effect="depth-pop" trigger="click"><button>Pop</button></usa-fx>',
     '<div class="demo-row"><usa-fx effect="spatial-float" trigger="loop"><span class="demo-float">Floating</span></usa-fx><usa-fx effect="depth-pop" trigger="click"><button type="button" class="demo-orbit">Pop</button></usa-fx></div>',
     [{ key: 'effect', values: ['spatial-float', 'depth-pop'] }], '8.8'),
+  // ---- 8.9 -------------------------------------------------------------
+  W('usa-code-export', 'ui', 'Code export', '代码导出',
+    '8.9 low-code: shows copy-paste code (HTML, React, Vue or JSON) for a live, configured component next to it, follows its attribute changes and copies with one click.',
+    '8.9 低代码：为旁边已配置好的实时组件生成可复制粘贴的代码（HTML、React、Vue 或 JSON），跟随其属性变化并一键复制。',
+    ['low-code', 'export', 'code', 'copy', 'react'],
+    '<usa-code-export formats="html,react,vue">\n  <usa-star-rating value="4"></usa-star-rating>\n</usa-code-export>',
+    '<usa-code-export class="demo-ce" formats="html,react,vue"><usa-progress-ring value="72" label="Upload"></usa-progress-ring></usa-code-export>',
+    undefined, { since: '8.9' }),
+  W('usa-prop-panel', 'ui', 'Property panel', '属性面板',
+    '8.9 low-code: a property editor for a live component — typed fields (number / range, select, color, switch, text) bound to its attributes, so the component re-renders as you edit.',
+    '8.9 低代码：实时组件的属性编辑器 —— 数字 / 滑块、下拉、颜色、开关与文本等字段绑定到组件属性，边改边重新渲染。',
+    ['low-code', 'properties', 'editor', 'playground', 'inspector'],
+    '<usa-star-rating id="r" value="3"></usa-star-rating>\n<usa-prop-panel for="#r" props="value:number:0:5, icon:select:star|heart, readonly:boolean"></usa-prop-panel>',
+    '<div class="demo-col demo-pp"><usa-progress-ring value="40" label="Progress"></usa-progress-ring><usa-prop-panel for="previous" props="value:number:0:100, label:text"></usa-prop-panel></div>',
+    undefined, { since: '8.9' }),
 ];
 
 /** item id → live-demo wiring. */

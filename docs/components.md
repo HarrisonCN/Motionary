@@ -1131,6 +1131,22 @@ pano.addEventListener('usa:look', (e) => console.log(e.detail.yaw));
 - `<usa-spatial-card>`: `active`; `usa:focus-depth`.
 - Spatial: `portal-open` (`color`) · `orbit-in` (`from`) · `spatial-float` · `depth-pop`; `yawToOffset(yaw, width)`, `xrSupport()`.
 
+### v8.9 Low-code export: `exportComponent()`, `<usa-code-export>`, `<usa-prop-panel>` (`components/widgets`)
+
+```html
+<usa-star-rating id="r" value="3"></usa-star-rating>
+<usa-prop-panel for="#r" props="value:number:0:5, icon:select:star|heart, readonly:boolean"></usa-prop-panel>
+<usa-code-export for="#r" formats="html,react,vue,json"></usa-code-export>
+```
+```js
+import { defineWidgets, exportComponent, describeComponent } from 'motionary/components/widgets';
+defineWidgets();
+console.log(exportComponent(document.querySelector('#r'), 'react'));
+```
+- `<usa-code-export for formats>`: `format`, `code`, `copy()`; `usa:copy` { format, ok }.
+- `<usa-prop-panel for props label>`: `props`, `reset()`; `usa:prop` { name, value }; `parseProps(str)`.
+- 9.0 prep: `applyTheme` / `THEMES` / `THEME_NAMES` / `<usa-theme>` are deprecated → `applyMotionTheme` / `MOTION_THEMES` / `MOTION_THEME_NAMES` / `<usa-motion-theme>` (`npx usa-codemod-9 --write src`, see docs/upgrading-9.md).
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.
