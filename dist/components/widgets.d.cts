@@ -1,3 +1,4 @@
+type MotionSensitivity = 'full' | 'gentle' | 'minimal' | 'static';
 /**
  * Members shared by every `<usa-*>` element. Attribute helpers, a cleanup
  * bag that is emptied on disconnect, and motion helpers that degrade to the
@@ -1832,6 +1833,63 @@ interface UsaHeroVideoElement extends UsaElement {
 declare function defineHeroVideo(tag?: string): CustomElementConstructor | undefined;
 
 /**
+ * 9.5 — Accessible motion 2.0 (`motionary/fx/safe`, also `motionary/components/fx-safe`):
+ *
+ * - `vestibularSafe(keyframes)` — strips movement (translate / scale /
+ *   rotate / skew / perspective, clip and blur) from keyframes, keeping
+ *   opacity and colour, so any animation can get a vestibular-safe twin.
+ * - `flashCount(keyframes, duration)` / `isFlashSafe(...)` — counts large
+ *   opacity / brightness swings and checks WCAG 2.3.1's three-flashes-per-
+ *   second limit.
+ * - `applyMotionPreferences(prefs)` / `loadMotionPreferences()` — the
+ *   settings behind `<usa-motion-prefs>`: sensitivity level, speed (shared
+ *   clock rate), pause autoplay, no parallax; persisted in localStorage and
+ *   exposed as `data-usa-*` attributes on `<html>` for your CSS.
+ *
+ * Effects that never move anything: `safe-fade` (enter), `focus-glow`
+ * (attention), `color-pulse` (attention), `underline-sweep` (hover).
+ */
+
+interface MotionPreferences {
+    sensitivity: MotionSensitivity;
+    speed: number;
+    pauseAutoplay: boolean;
+    noParallax: boolean;
+}
+
+/**
+ * `<usa-motion-prefs>` (9.5) — a motion preference panel for your users:
+ * motion level (Full · Gentle · Minimal · None — Motionary's sensitivity
+ * levels), animation speed (the shared clock rate, 0.25–2×), "pause
+ * autoplaying video" and "no parallax". Changes apply instantly to every
+ * Motionary component on the page, persist in localStorage and are shown
+ * as `data-usa-*` attributes on `<html>`; a live sample shows the result.
+ * `prefs`, `reset()`; `usa:change` { prefs }. A labelled `form` of real
+ * radio buttons, slider and checkboxes.
+ */
+interface UsaMotionPrefsElement extends UsaElement {
+    readonly prefs: MotionPreferences;
+    reset(): void;
+}
+declare function defineMotionPrefs(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-pause-all>` (9.5) — one button that pauses all motion on the page
+ * (WCAG 2.2.2 "Pause, Stop, Hide"): it pauses Motionary's shared clock
+ * (every component, effect and frame loop), every other CSS / WAAPI
+ * animation in the document and autoplaying media; pressing again resumes
+ * them. Stays in sync with `motionClock`. `scope` (a selector) limits it to
+ * one subtree's animations and media and leaves the shared clock alone.
+ * `paused`, `toggle()`;
+ * `usa:pause-all` { paused }. A real `button` with `aria-pressed`.
+ */
+interface UsaPauseAllElement extends UsaElement {
+    readonly paused: boolean;
+    toggle(): void;
+}
+declare function definePauseAll(tag?: string): CustomElementConstructor | undefined;
+
+/**
  * motionary/components/widgets — the 6.x animated UI widgets, in their own
  * entry so `motionary/components` and `components/lite` keep their size
  * budgets. Every widget is reduced-motion safe and keyboard accessible.
@@ -1944,8 +2002,10 @@ declare global {
         'usa-bg-generator': UsaBgGeneratorElement;
         'usa-video-card': UsaVideoCardElement;
         'usa-hero-video': UsaHeroVideoElement;
+        'usa-motion-prefs': UsaMotionPrefsElement;
+        'usa-pause-all': UsaPauseAllElement;
     }
 }
 
-export { CAROUSEL_EFFECTS, EQ_PRESETS, FESTIVAL_THEMES, LOTTIE_ICONS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PRESENCE_STATES, PROGRESS_VARIANTS, RETRO_VARIANTS, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SPARK_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, backgroundCss, badgeProgress, cartTotal, defineAddToCart, defineBadgeWall, defineBarChart, defineBgGenerator, defineCarousel, defineCartDrawer, defineChapterNav, defineChatComposer, defineClockControl, defineCodeExport, defineColorPicker, defineCommandPalette, defineCompare, defineCountdown, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineFestivalBanner, defineField, defineFileDrop, defineGauge, defineGenArt, defineGestureSticker, defineGlobe, defineGyroCard, defineHeroVideo, defineHudPanel, defineHydrate, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLiquidNav, defineLocationCard, defineLottie, defineLottieIcon, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMessageList, defineMilestones, defineModal, defineMotion, defineMusicPlayer, defineNavMorph, defineNotificationBell, defineOdometer, defineOrganicCard, defineOtp, definePagination, definePanorama, definePluginStore, definePresence, definePrizeWheel, defineProductGallery, defineProgressRing, definePropPanel, definePullCord, defineRadar, defineReactions, defineRedEnvelope, defineRetroButton, defineScene, defineSegmented, defineSheet, defineShortcut, defineSkeletonReveal, defineSketchChart, defineSparkline, defineSpatialCard, defineStarRating, defineStepper, defineStickyWall, defineStories, defineSuggestionChips, defineSwipeDeck, defineSwitch, defineTabBar, defineTerminal, defineThemeSurface, defineThemeSwitcher, defineTip, defineToastStack, defineUploadProgress, defineVideoCard, defineVoiceButton, defineVolumeKnob, defineWeatherCard, defineWidgets, defineXpBar, describeComponent, exportComponent, formatBytes, formatDistance, fuzzyMatch, haversine, hexToHsv, hsvToHex, initials, keyLabels, levelFor, matchesKeys, monthGrid, pageWindow, parseChips, parseISODate, parseLRC, parseMarkers, parseProps, parseReactions, parseTargets, passwordStrength, project, rankRows, sanitizeCode, sparkPoints, splitTime, stackToast, waveBars, wheelAngle, wrapIndex };
-export type { BellNotice, CartItem, ChatMessage, ExportFormat, ExportedNode, GlobeMarker, LeaderRow, PaletteCommand, PresenceState, PropSpec, RadarTarget, StackToastOptions, StickerState, UsaAddToCartElement, UsaBadgeWallElement, UsaBarChartElement, UsaBgGeneratorElement, UsaCarouselElement, UsaCartDrawerElement, UsaChapterNavElement, UsaChatComposerElement, UsaClockControlElement, UsaCodeExportElement, UsaColorPickerElement, UsaCommandPaletteElement, UsaCompareElement, UsaCountdownElement, UsaCubeGalleryElement, UsaDatePickerElement, UsaDisclosureElement, UsaDockElement, UsaEqualizerElement, UsaFestivalBannerElement, UsaFieldElement, UsaFileDropElement, UsaGaugeElement, UsaGenArtElement, UsaGestureStickerElement, UsaGlobeElement, UsaGyroCardElement, UsaHeroVideoElement, UsaHudPanelElement, UsaHydrateElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaKpiElement, UsaLeaderboardElement, UsaLiquidNavElement, UsaLocationCardElement, UsaLottieElement, UsaLottieIconElement, UsaLyricsElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMessageListElement, UsaMilestonesElement, UsaModalElement, UsaMotionElement, UsaMusicPlayerElement, UsaNavMorphElement, UsaNotificationBellElement, UsaOdometerElement, UsaOrganicCardElement, UsaOtpElement, UsaPaginationElement, UsaPanoramaElement, UsaPluginStoreElement, UsaPresenceElement, UsaPrizeWheelElement, UsaProductGalleryElement, UsaProgressRingElement, UsaPropPanelElement, UsaPullCordElement, UsaRadarElement, UsaReactionsElement, UsaRedEnvelopeElement, UsaRetroButtonElement, UsaSceneElement, UsaSegmentedElement, UsaSheetElement, UsaShortcutElement, UsaSkeletonRevealElement, UsaSketchChartElement, UsaSparklineElement, UsaSpatialCardElement, UsaStarRatingElement, UsaStepperElement, UsaStickyWallElement, UsaStoriesElement, UsaSuggestionChipsElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTerminalElement, UsaThemeSurfaceElement, UsaThemeSwitcherElement, UsaTipElement, UsaToastStackElement, UsaUploadProgressElement, UsaVideoCardElement, UsaVoiceButtonElement, UsaVolumeKnobElement, UsaWeatherCardElement, UsaXpBarElement, WallBadge };
+export { CAROUSEL_EFFECTS, EQ_PRESETS, FESTIVAL_THEMES, LOTTIE_ICONS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PRESENCE_STATES, PROGRESS_VARIANTS, RETRO_VARIANTS, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SPARK_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, backgroundCss, badgeProgress, cartTotal, defineAddToCart, defineBadgeWall, defineBarChart, defineBgGenerator, defineCarousel, defineCartDrawer, defineChapterNav, defineChatComposer, defineClockControl, defineCodeExport, defineColorPicker, defineCommandPalette, defineCompare, defineCountdown, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineFestivalBanner, defineField, defineFileDrop, defineGauge, defineGenArt, defineGestureSticker, defineGlobe, defineGyroCard, defineHeroVideo, defineHudPanel, defineHydrate, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLiquidNav, defineLocationCard, defineLottie, defineLottieIcon, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMessageList, defineMilestones, defineModal, defineMotion, defineMotionPrefs, defineMusicPlayer, defineNavMorph, defineNotificationBell, defineOdometer, defineOrganicCard, defineOtp, definePagination, definePanorama, definePauseAll, definePluginStore, definePresence, definePrizeWheel, defineProductGallery, defineProgressRing, definePropPanel, definePullCord, defineRadar, defineReactions, defineRedEnvelope, defineRetroButton, defineScene, defineSegmented, defineSheet, defineShortcut, defineSkeletonReveal, defineSketchChart, defineSparkline, defineSpatialCard, defineStarRating, defineStepper, defineStickyWall, defineStories, defineSuggestionChips, defineSwipeDeck, defineSwitch, defineTabBar, defineTerminal, defineThemeSurface, defineThemeSwitcher, defineTip, defineToastStack, defineUploadProgress, defineVideoCard, defineVoiceButton, defineVolumeKnob, defineWeatherCard, defineWidgets, defineXpBar, describeComponent, exportComponent, formatBytes, formatDistance, fuzzyMatch, haversine, hexToHsv, hsvToHex, initials, keyLabels, levelFor, matchesKeys, monthGrid, pageWindow, parseChips, parseISODate, parseLRC, parseMarkers, parseProps, parseReactions, parseTargets, passwordStrength, project, rankRows, sanitizeCode, sparkPoints, splitTime, stackToast, waveBars, wheelAngle, wrapIndex };
+export type { BellNotice, CartItem, ChatMessage, ExportFormat, ExportedNode, GlobeMarker, LeaderRow, PaletteCommand, PresenceState, PropSpec, RadarTarget, StackToastOptions, StickerState, UsaAddToCartElement, UsaBadgeWallElement, UsaBarChartElement, UsaBgGeneratorElement, UsaCarouselElement, UsaCartDrawerElement, UsaChapterNavElement, UsaChatComposerElement, UsaClockControlElement, UsaCodeExportElement, UsaColorPickerElement, UsaCommandPaletteElement, UsaCompareElement, UsaCountdownElement, UsaCubeGalleryElement, UsaDatePickerElement, UsaDisclosureElement, UsaDockElement, UsaEqualizerElement, UsaFestivalBannerElement, UsaFieldElement, UsaFileDropElement, UsaGaugeElement, UsaGenArtElement, UsaGestureStickerElement, UsaGlobeElement, UsaGyroCardElement, UsaHeroVideoElement, UsaHudPanelElement, UsaHydrateElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaKpiElement, UsaLeaderboardElement, UsaLiquidNavElement, UsaLocationCardElement, UsaLottieElement, UsaLottieIconElement, UsaLyricsElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMessageListElement, UsaMilestonesElement, UsaModalElement, UsaMotionElement, UsaMotionPrefsElement, UsaMusicPlayerElement, UsaNavMorphElement, UsaNotificationBellElement, UsaOdometerElement, UsaOrganicCardElement, UsaOtpElement, UsaPaginationElement, UsaPanoramaElement, UsaPauseAllElement, UsaPluginStoreElement, UsaPresenceElement, UsaPrizeWheelElement, UsaProductGalleryElement, UsaProgressRingElement, UsaPropPanelElement, UsaPullCordElement, UsaRadarElement, UsaReactionsElement, UsaRedEnvelopeElement, UsaRetroButtonElement, UsaSceneElement, UsaSegmentedElement, UsaSheetElement, UsaShortcutElement, UsaSkeletonRevealElement, UsaSketchChartElement, UsaSparklineElement, UsaSpatialCardElement, UsaStarRatingElement, UsaStepperElement, UsaStickyWallElement, UsaStoriesElement, UsaSuggestionChipsElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTerminalElement, UsaThemeSurfaceElement, UsaThemeSwitcherElement, UsaTipElement, UsaToastStackElement, UsaUploadProgressElement, UsaVideoCardElement, UsaVoiceButtonElement, UsaVolumeKnobElement, UsaWeatherCardElement, UsaXpBarElement, WallBadge };

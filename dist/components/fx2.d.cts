@@ -908,6 +908,46 @@ declare const VIDEO_FX: EffectDefinition[];
 declare function registerVideoPack(): void;
 
 /**
+ * 9.5 — Accessible motion 2.0 (`motionary/fx/safe`, also `motionary/components/fx-safe`):
+ *
+ * - `vestibularSafe(keyframes)` — strips movement (translate / scale /
+ *   rotate / skew / perspective, clip and blur) from keyframes, keeping
+ *   opacity and colour, so any animation can get a vestibular-safe twin.
+ * - `flashCount(keyframes, duration)` / `isFlashSafe(...)` — counts large
+ *   opacity / brightness swings and checks WCAG 2.3.1's three-flashes-per-
+ *   second limit.
+ * - `applyMotionPreferences(prefs)` / `loadMotionPreferences()` — the
+ *   settings behind `<usa-motion-prefs>`: sensitivity level, speed (shared
+ *   clock rate), pause autoplay, no parallax; persisted in localStorage and
+ *   exposed as `data-usa-*` attributes on `<html>` for your CSS.
+ *
+ * Effects that never move anything: `safe-fade` (enter), `focus-glow`
+ * (attention), `color-pulse` (attention), `underline-sweep` (hover).
+ */
+
+/** Keyframes with all movement removed (opacity / colour / shadow kept; blur removed from filters) (9.5). */
+declare function vestibularSafe(frames: Keyframe[]): Keyframe[];
+/** Number of flashes (a ≥ 0.3 luminance swing that comes back) in one run of `frames` (9.5). */
+declare function flashCount(frames: Keyframe[]): number;
+/** WCAG 2.3.1: no more than three flashes in any one second (9.5). */
+declare function isFlashSafe(frames: Keyframe[], duration: number, iterations?: number): boolean;
+interface MotionPreferences {
+    sensitivity: MotionSensitivity;
+    speed: number;
+    pauseAutoplay: boolean;
+    noParallax: boolean;
+}
+declare const MOTION_PREFS_KEY = "usa-motion-prefs";
+declare const DEFAULT_MOTION_PREFS: MotionPreferences;
+/** Apply (and persist) motion preferences: sensitivity, shared clock speed, `data-usa-*` flags on `<html>` (9.5). */
+declare function applyMotionPreferences(p: Partial<MotionPreferences>, persist?: boolean): MotionPreferences;
+/** Saved preferences (or the defaults) (9.5). */
+declare function loadMotionPreferences(): MotionPreferences;
+declare const SAFE_FX: EffectDefinition[];
+/** Register safe-fade, focus-glow, color-pulse and underline-sweep (9.5). */
+declare function registerSafePack(): void;
+
+/**
  * 5.5 — generative backgrounds on Canvas 2D, registered through
  * `registerEffect()` (kind `background`): `flow-field`, `voronoi`,
  * `mesh-gradient`, `starfield`, `metaballs`, `contours`.
@@ -1016,5 +1056,5 @@ declare const EFFECT_PACKS: Record<string, EffectDefinition[]>;
 /** Register every 6.x effect pack (idempotent). */
 declare function registerEffectPacks(): void;
 
-export { AI_FX, CAMERA_MOVES, CHART_FX, CINEMA_FX, CYBER_FX, DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GENART_FX, GEO_FX, GESTURE3_FX, GLSL_HEAD, GPU_FX, LIGHT_FX, LOTTIE_FX, MORPH2_FX, MUSIC_FX, ORGANIC_FX, PALETTES, PAPER_FX, PHYSICS2_FX, RETRO_FX, SHOP_FX, SOCIAL_FX, SPATIAL_FX, SURFACE_FX, SURFACE_THEMES, TEXT3_FX, TRANSITIONS2_FX, VIDEO_FX, VerletWorld, WEATHER_FX, WGSL_HEAD, applySurfaceTheme, arcPath, blobRadius, cameraFrame, crossDocumentTransitions, decodeFrame, fanAngles, fieldFallback, frameSequence, glslToWgsl, loadEffectPack, lottieToKeyframes, lottieToSvg, meshGradient, musicSample, orientationToTilt, packManifest, pageTransition, paperRandom, parseFigure, pinchAngle, pinchScale, pixelSteps, pointsToPath, register3dPack, registerAiPack, registerChartPack, registerCinemaPack, registerCyberPack, registerEffectPacks, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGenArtPack, registerGeoPack, registerGesture3Pack, registerGpuPack, registerLightPack, registerLottiePack, registerMorphPack, registerMusicPack, registerOrganicPack, registerPaperPack, registerPhysicsPack, registerRetroPack, registerShopPack, registerSocialPack, registerSpatialPack, registerSurfacePack, registerTextPack, registerTransitionsPack, registerVideoPack, registerWeatherPack, riveInputs, roughLine, routeLength, samplePath, scrollProgress, scrubVideo, seededRandom, shaderBackground, shakeFrames, skyAt, sparkVectors, splitChars, splitWords, supportsWebGL2, supportsWebGPU, syntheticSample, throwPath, trackPointer, validateManifest, webgpuBackground, wgslModule, xrSupport, yawToOffset };
+export { AI_FX, CAMERA_MOVES, CHART_FX, CINEMA_FX, CYBER_FX, DEFAULT_MOTION_PREFS, DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GENART_FX, GEO_FX, GESTURE3_FX, GLSL_HEAD, GPU_FX, LIGHT_FX, LOTTIE_FX, MORPH2_FX, MOTION_PREFS_KEY, MUSIC_FX, ORGANIC_FX, PALETTES, PAPER_FX, PHYSICS2_FX, RETRO_FX, SAFE_FX, SHOP_FX, SOCIAL_FX, SPATIAL_FX, SURFACE_FX, SURFACE_THEMES, TEXT3_FX, TRANSITIONS2_FX, VIDEO_FX, VerletWorld, WEATHER_FX, WGSL_HEAD, applyMotionPreferences, applySurfaceTheme, arcPath, blobRadius, cameraFrame, crossDocumentTransitions, decodeFrame, fanAngles, fieldFallback, flashCount, frameSequence, glslToWgsl, isFlashSafe, loadEffectPack, loadMotionPreferences, lottieToKeyframes, lottieToSvg, meshGradient, musicSample, orientationToTilt, packManifest, pageTransition, paperRandom, parseFigure, pinchAngle, pinchScale, pixelSteps, pointsToPath, register3dPack, registerAiPack, registerChartPack, registerCinemaPack, registerCyberPack, registerEffectPacks, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGenArtPack, registerGeoPack, registerGesture3Pack, registerGpuPack, registerLightPack, registerLottiePack, registerMorphPack, registerMusicPack, registerOrganicPack, registerPaperPack, registerPhysicsPack, registerRetroPack, registerSafePack, registerShopPack, registerSocialPack, registerSpatialPack, registerSurfacePack, registerTextPack, registerTransitionsPack, registerVideoPack, registerWeatherPack, riveInputs, roughLine, routeLength, samplePath, scrollProgress, scrubVideo, seededRandom, shaderBackground, shakeFrames, skyAt, sparkVectors, splitChars, splitWords, supportsWebGL2, supportsWebGPU, syntheticSample, throwPath, trackPointer, validateManifest, vestibularSafe, webgpuBackground, wgslModule, xrSupport, yawToOffset };
 export type { EffectPackManifest, ShaderSpec };

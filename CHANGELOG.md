@@ -19,6 +19,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Accessibility
 - The preference panel is a labelled `form` with a `fieldset` / `legend` of radio buttons, a labelled range with an `<output>`, and checkboxes; its sample is `aria-hidden`. The pause button is a real `button` with `aria-pressed` and a text label.
 
+### Fixed
+
+- Build: Rollup ran out of heap at the 4 GB cap (`npm run build` aborted with "JavaScript heap out of memory") once the 9.5 entries were added; the build script's `--max-old-space-size` is raised to 6144.
+
 ## [9.4.0] - 2026-10-09
 
 ### Added

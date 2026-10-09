@@ -1147,7 +1147,7 @@
     "./dist/presets-extended.umd.js"
   ],
   "scripts": {
-    "build": "npm run clean && node --max-old-space-size=4096 ./node_modules/rollup/dist/bin/rollup -c rollup.config.mjs",
+    "build": "npm run clean && node --max-old-space-size=6144 ./node_modules/rollup/dist/bin/rollup -c rollup.config.mjs",
     "dev": "rollup -c rollup.config.mjs -w",
     "typecheck": "tsc --noEmit -p .",
     "test": "vitest run",
