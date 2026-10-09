@@ -1003,6 +1003,27 @@ term.addEventListener('usa:done', () => term.replay());
 - `<usa-retro-button variant type disabled name value>`: `button`, `variant`; `RETRO_VARIANTS`.
 - Retro: `pixelate-in` (`steps`) · `crt-power` · `vhs-glitch` (`intensity`) · `y2k-shine` (`color`); `pixelSteps(steps)`.
 
+### v8.3 Widgets: organic card, liquid nav (`components/widgets`) + organic pack (`motionary/fx/organic`)
+
+```html
+<usa-organic-card tint="ocean"><h3>Deep sea</h3><p>…</p></usa-organic-card>
+<usa-liquid-nav label="Main">
+  <a href="/" aria-current="page">Home</a><a href="/shop">Shop</a><a href="/about">About</a>
+</usa-liquid-nav>
+
+<usa-fx effect="vine-grow" trigger="enter"><svg viewBox="0 0 200 80"><path d="M5 75 C60 10 120 90 195 10"/><circle data-leaf cx="70" cy="40" r="6"/></svg></usa-fx>
+<usa-fx effect="water-drop" trigger="click"><button>Drop</button></usa-fx>
+```
+```js
+import { defineWidgets } from 'motionary/components/widgets';
+import { registerOrganicPack } from 'motionary/fx/organic';
+defineWidgets(); registerOrganicPack();
+nav.addEventListener('usa:change', (e) => route(e.detail.index));
+```
+- `<usa-organic-card tint seed>`: `morph(seed?)`.
+- `<usa-liquid-nav label value>`: `value`; `usa:change` { index, item }.
+- Organic: `vine-grow` · `bloom` (`stagger`) · `water-drop` (`rings`, `color`) · `breathe`; `blobRadius(seed)`.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.
