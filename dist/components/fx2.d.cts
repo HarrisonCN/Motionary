@@ -516,6 +516,32 @@ declare const GAME_FX: EffectDefinition[];
 declare function registerGamePack(): void;
 
 /**
+ * 7.6 — Maps & geo motion (`motionary/fx/geo`, also `motionary/components/fx-geo`):
+ *
+ * - `route-draw` (enter) — every SVG `path` / `polyline` inside the element
+ *   (or `[data-route]` only, when present) draws itself along its length,
+ *   one after another (`duration`, `stagger`).
+ * - `marker-pulse` (attention) — rings expand out of the element like a
+ *   location beacon (`color`, `rings`).
+ * - `pin-drop` (enter) — the element drops onto its spot with a squash and a
+ *   landing shadow (`height`).
+ * - `globe-spin` (enter) — the element turns in like a globe coming round
+ *   (rotateY with perspective) (`turns`).
+ *
+ * Reduced motion: route-draw shows the routes, marker-pulse does nothing,
+ * pin-drop and globe-spin fade in.
+ */
+
+/** Length of a polyline through `points` (7.6). */
+declare function routeLength(points: {
+    x: number;
+    y: number;
+}[]): number;
+declare const GEO_FX: EffectDefinition[];
+/** Register route-draw, marker-pulse, pin-drop and globe-spin (7.6). */
+declare function registerGeoPack(): void;
+
+/**
  * 5.5 — generative backgrounds on Canvas 2D, registered through
  * `registerEffect()` (kind `background`): `flow-field`, `voronoi`,
  * `mesh-gradient`, `starfield`, `metaballs`, `contours`.
@@ -624,5 +650,5 @@ declare const EFFECT_PACKS: Record<string, EffectDefinition[]>;
 /** Register every 6.x effect pack (idempotent). */
 declare function registerEffectPacks(): void;
 
-export { CHART_FX, DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FOCUS_FX, GAME_FX, GLSL_HEAD, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, PHYSICS2_FX, SHOP_FX, SOCIAL_FX, TEXT3_FX, TRANSITIONS2_FX, VerletWorld, WEATHER_FX, WGSL_HEAD, arcPath, crossDocumentTransitions, fanAngles, fieldFallback, glslToWgsl, loadEffectPack, musicSample, packManifest, pageTransition, parseFigure, pointsToPath, register3dPack, registerChartPack, registerEffectPacks, registerFocusPack, registerGamePack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerPhysicsPack, registerShopPack, registerSocialPack, registerTextPack, registerTransitionsPack, registerWeatherPack, samplePath, shaderBackground, skyAt, splitChars, supportsWebGL2, supportsWebGPU, syntheticSample, throwPath, trackPointer, validateManifest, webgpuBackground, wgslModule };
+export { CHART_FX, DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FOCUS_FX, GAME_FX, GEO_FX, GLSL_HEAD, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, PHYSICS2_FX, SHOP_FX, SOCIAL_FX, TEXT3_FX, TRANSITIONS2_FX, VerletWorld, WEATHER_FX, WGSL_HEAD, arcPath, crossDocumentTransitions, fanAngles, fieldFallback, glslToWgsl, loadEffectPack, musicSample, packManifest, pageTransition, parseFigure, pointsToPath, register3dPack, registerChartPack, registerEffectPacks, registerFocusPack, registerGamePack, registerGeoPack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerPhysicsPack, registerShopPack, registerSocialPack, registerTextPack, registerTransitionsPack, registerWeatherPack, routeLength, samplePath, shaderBackground, skyAt, splitChars, supportsWebGL2, supportsWebGPU, syntheticSample, throwPath, trackPointer, validateManifest, webgpuBackground, wgslModule };
 export type { EffectPackManifest, ShaderSpec };
