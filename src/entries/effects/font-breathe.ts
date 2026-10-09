@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { TEXT3_FX } from '../../components/fx2/text3';
 
 /** The effect definition. */
-export const effect: EffectDefinition = TEXT3_FX.find((d) => d.name === 'font-breathe')!;
+export const effect: EffectDefinition = /*#__PURE__*/ TEXT3_FX.find((d) => d.name === 'font-breathe')!;
 /** Register only this effect (idempotent). */
 export function registerFontBreathe(): void {
   registerEffects([effect]);

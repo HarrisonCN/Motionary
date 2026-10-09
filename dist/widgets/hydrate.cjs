@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-DBheNxJu.cjs');
+var base = require('../chunks/base-B3me2y0o.cjs');
 var components_engine = require('../components/engine.cjs');
 
 var css = "usa-hydrate{display:block}";

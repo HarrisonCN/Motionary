@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { FORM_FX } from '../../components/fx2/form';
 
 /** The effect definition. */
-export const effect: EffectDefinition = FORM_FX.find((d) => d.name === 'label-float')!;
+export const effect: EffectDefinition = /*#__PURE__*/ FORM_FX.find((d) => d.name === 'label-float')!;
 /** Register only this effect (idempotent). */
 export function registerLabelFloat(): void {
   registerEffects([effect]);

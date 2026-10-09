@@ -1,3 +1,3 @@
-export { d as definePrizeWheel } from '../chunks/prize-wheel-B3opfcbO.js';
-import '../chunks/base-BTev8qxg.js';
+export { d as definePrizeWheel } from '../chunks/prize-wheel-BzYWrEvu.js';
+import '../chunks/base-zSGb8ujt.js';
 //# sourceMappingURL=prize-wheel.js.map

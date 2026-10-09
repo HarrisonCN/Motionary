@@ -1,7 +1,7 @@
-import { f as defineElement } from '../chunks/base-BTev8qxg.js';
-import { r as runtimeModule } from '../chunks/runtime-link-CP3qaRja.js';
-import { c as css, d as defineGlScene } from '../chunks/gl-scene-BDA6FlGQ.js';
-import '../chunks/registry-W7pXOwju.js';
+import { f as defineElement } from '../chunks/base-zSGb8ujt.js';
+import { r as runtimeModule } from '../chunks/runtime-link-GgTrq8pt.js';
+import { c as css, d as defineGlScene } from '../chunks/gl-scene-DhIdXgIZ.js';
+import '../chunks/registry-DUAt7GXU.js';
 
 function defineGlModel(tag = 'usa-gl-model') {
     return defineElement(tag, () => {

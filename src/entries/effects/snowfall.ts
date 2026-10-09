@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { WEATHER_FX } from '../../components/fx2/weather';
 
 /** The effect definition. */
-export const effect: EffectDefinition = WEATHER_FX.find((d) => d.name === 'snowfall')!;
+export const effect: EffectDefinition = /*#__PURE__*/ WEATHER_FX.find((d) => d.name === 'snowfall')!;
 /** Register only this effect (idempotent). */
 export function registerSnowfall(): void {
   registerEffects([effect]);

@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { SHOP_FX } from '../../components/fx2/shop';
 
 /** The effect definition. */
-export const effect: EffectDefinition = SHOP_FX.find((d) => d.name === 'price-flip')!;
+export const effect: EffectDefinition = /*#__PURE__*/ SHOP_FX.find((d) => d.name === 'price-flip')!;
 /** Register only this effect (idempotent). */
 export function registerPriceFlip(): void {
   registerEffects([effect]);

@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { LIGHT_FX } from '../../components/fx2/light';
 
 /** The effect definition. */
-export const effect: EffectDefinition = LIGHT_FX.find((d) => d.name === 'light-follow')!;
+export const effect: EffectDefinition = /*#__PURE__*/ LIGHT_FX.find((d) => d.name === 'light-follow')!;
 /** Register only this effect (idempotent). */
 export function registerLightFollow(): void {
   registerEffects([effect]);

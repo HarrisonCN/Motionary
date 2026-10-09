@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { DEPTH3_FX } from '../../components/fx2/depth3';
 
 /** The effect definition. */
-export const effect: EffectDefinition = DEPTH3_FX.find((d) => d.name === 'product-spin')!;
+export const effect: EffectDefinition = /*#__PURE__*/ DEPTH3_FX.find((d) => d.name === 'product-spin')!;
 /** Register only this effect (idempotent). */
 export function registerProductSpin(): void {
   registerEffects([effect]);

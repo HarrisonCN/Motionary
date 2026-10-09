@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { GPU_FX } from '../../components/fx2/gpu';
 
 /** The effect definition. */
-export const effect: EffectDefinition = GPU_FX.find((d) => d.name === 'fluid')!;
+export const effect: EffectDefinition = /*#__PURE__*/ GPU_FX.find((d) => d.name === 'fluid')!;
 /** Register only this effect (idempotent). */
 export function registerFluid(): void {
   registerEffects([effect]);

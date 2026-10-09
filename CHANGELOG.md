@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [11.1.0] - 2026-10-09
+
+### Tree-shaking (Motion Core · Components)
+- **Nothing runs on import.** Importing any library module registers nothing (no custom element, effect or runtime module) and writes nothing to `globalThis`; the effect table and the shared motion clock are now created on first use (still one per page via `Symbol.for`, shared across bundles). Registration happens only when you call `define*()` / `register*()` / `use()`.
+- **`/*#__PURE__*/` on every module-level call initializer** in `src/` (e.g. `WIDGET_TAGS`, the `motionary/plugins` pack objects, theme / token tables) and in the generated `motionary/effects/<name>` entries. Before, `WIDGET_TAGS = Object.values(WIDGETS)…` kept every widget alive: `import { defineAddToCart } from 'motionary/components/widgets'` bundled ≈ 156 KB gzip with esbuild; it is now ≈ 5 KB. One plugin from `motionary/plugins` no longer brings all 31 packs.
+- **Precise `sideEffects`** in package.json: only `*.css`, the UMD / IIFE builds (`dist/*.umd.js`, `dist/runtime.iife.js`, `dist/runtime/*.iife.js`), `presets/extended` (registers on import, by design) and `components/lite` (sets its CSS base — previously missing from the list), plus their `src/` counterparts.
+- New [docs/tree-shaking.md](./docs/tree-shaking.md); README note.
+
+### Checks
+- New `test/widgets-11-1.test.ts`: esbuild bundles the sources — a bare import of any library module bundles to nothing; one widget / one plugin / the runtime core contain none of the other modules' code; every module-level call is annotated; importing registers nothing.
+- New `npm run check:treeshake` (`scripts/check-treeshake.mjs`, CI step after `check:exports`): every `exports` entry is empty when imported for nothing (except the `sideEffects` ones) and single-export bundles stay under fixed limits.
+- `esbuild` is now an explicit devDependency (it was already installed through Vite). `dependencies` stays empty.
+
 ## [11.0.0] - 2026-10-09
 
 ### ⚠️ Breaking

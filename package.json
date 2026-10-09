@@ -1,6 +1,6 @@
 {
   "name": "motionary",
-  "version": "11.0.0",
+  "version": "11.1.0",
   "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 94 animated Web Components — 214 scroll-reveal presets, card/click/button morphs, physics, page transitions, generative & sound-reactive backgrounds, cursor/gesture effects, themes, micro-interactions, <usa-player>, WebGL. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -4088,7 +4088,18 @@
     "*.css",
     "./dist/presets/extended.js",
     "./dist/presets/extended.cjs",
-    "./dist/presets-extended.umd.js"
+    "./dist/components/lite.js",
+    "./dist/components/lite.cjs",
+    "./dist/*.umd.js",
+    "./dist/runtime.iife.js",
+    "./dist/runtime/*.iife.js",
+    "./src/extended-presets.ts",
+    "./src/extended-presets-umd.ts",
+    "./src/element-auto.ts",
+    "./src/components/auto.ts",
+    "./src/components/widgets/auto.ts",
+    "./src/components/lite.ts",
+    "./src/runtime/iife/*.ts"
   ],
   "scripts": {
     "build": "npm run clean && PART=code node --max-old-space-size=5120 ./node_modules/rollup/dist/bin/rollup -c rollup.config.mjs && PART=dts SLICE=0/3 node --max-old-space-size=4096 ./node_modules/rollup/dist/bin/rollup -c rollup.config.mjs && PART=dts SLICE=1/3 node --max-old-space-size=4096 ./node_modules/rollup/dist/bin/rollup -c rollup.config.mjs && PART=dts SLICE=2/3 node --max-old-space-size=4096 ./node_modules/rollup/dist/bin/rollup -c rollup.config.mjs && node scripts/gen-manifest.mjs",
@@ -4106,7 +4117,8 @@
     "manifest": "node scripts/gen-manifest.mjs",
     "docs:runtime": "node scripts/gen-runtime-docs.mjs",
     "check:peer-docs": "node scripts/check-peer-docs.mjs",
-    "docs:components": "node scripts/gen-component-docs.mjs"
+    "docs:components": "node scripts/gen-component-docs.mjs",
+    "check:treeshake": "node scripts/check-treeshake.mjs"
   },
   "keywords": [
     "motionary",
@@ -4158,6 +4170,8 @@
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@rollup/plugin-terser": "^1.0.0",
     "@rollup/plugin-typescript": "^12.3.0",
+    "draco3d": "1.5.7",
+    "esbuild": "^0.28.2",
     "jsdom": "^26.1.0",
     "publint": "^0.3.25",
     "rollup": "^4.60.0",
@@ -4165,14 +4179,13 @@
     "solid-js": "^1.9.16",
     "tslib": "^2.8.1",
     "typescript": "^6.0.2",
-    "vitest": "^3.2.7",
-    "draco3d": "1.5.7"
+    "vitest": "^3.2.7"
   },
   "peerDependencies": {
-    "solid-js": ">=1.6.0",
-    "svelte": ">=3.0.0",
     "@rive-app/canvas": ">=2.20.0",
-    "draco3d": ">=1.5.0"
+    "draco3d": ">=1.5.0",
+    "solid-js": ">=1.6.0",
+    "svelte": ">=3.0.0"
   },
   "peerDependenciesMeta": {
     "solid-js": {

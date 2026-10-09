@@ -75,7 +75,7 @@ export const MOTION_THEMES: Record<string, ThemePack> = {
   },
 };
 
-export const MOTION_THEME_NAMES = Object.keys(MOTION_THEMES);
+export const MOTION_THEME_NAMES = /*#__PURE__*/ Object.keys(MOTION_THEMES);
 
 const BASE_CSS = `[data-usa-theme]{background:var(--usa-theme-bg);color:var(--usa-theme-fg);font-family:var(--usa-theme-font)}
 [data-usa-theme] .usa-surface{background:var(--usa-theme-surface);border:var(--usa-theme-border);border-radius:var(--usa-theme-radius);box-shadow:var(--usa-theme-shadow)}

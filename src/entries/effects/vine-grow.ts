@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { ORGANIC_FX } from '../../components/fx2/organic';
 
 /** The effect definition. */
-export const effect: EffectDefinition = ORGANIC_FX.find((d) => d.name === 'vine-grow')!;
+export const effect: EffectDefinition = /*#__PURE__*/ ORGANIC_FX.find((d) => d.name === 'vine-grow')!;
 /** Register only this effect (idempotent). */
 export function registerVineGrow(): void {
   registerEffects([effect]);

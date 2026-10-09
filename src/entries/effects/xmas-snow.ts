@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { FESTIVAL_FX } from '../../components/fx2/festival';
 
 /** The effect definition. */
-export const effect: EffectDefinition = FESTIVAL_FX.find((d) => d.name === 'xmas-snow')!;
+export const effect: EffectDefinition = /*#__PURE__*/ FESTIVAL_FX.find((d) => d.name === 'xmas-snow')!;
 /** Register only this effect (idempotent). */
 export function registerXmasSnow(): void {
   registerEffects([effect]);

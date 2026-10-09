@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { SURFACE_FX } from '../../components/fx2/themefx';
 
 /** The effect definition. */
-export const effect: EffectDefinition = SURFACE_FX.find((d) => d.name === 'neon-pulse')!;
+export const effect: EffectDefinition = /*#__PURE__*/ SURFACE_FX.find((d) => d.name === 'neon-pulse')!;
 /** Register only this effect (idempotent). */
 export function registerNeonPulse(): void {
   registerEffects([effect]);

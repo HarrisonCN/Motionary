@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { SAFE_FX } from '../../components/fx2/safemotion';
 
 /** The effect definition. */
-export const effect: EffectDefinition = SAFE_FX.find((d) => d.name === 'focus-glow')!;
+export const effect: EffectDefinition = /*#__PURE__*/ SAFE_FX.find((d) => d.name === 'focus-glow')!;
 /** Register only this effect (idempotent). */
 export function registerFocusGlow(): void {
   registerEffects([effect]);

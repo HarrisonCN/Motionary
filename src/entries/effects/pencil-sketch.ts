@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { PAPER_FX } from '../../components/fx2/paper';
 
 /** The effect definition. */
-export const effect: EffectDefinition = PAPER_FX.find((d) => d.name === 'pencil-sketch')!;
+export const effect: EffectDefinition = /*#__PURE__*/ PAPER_FX.find((d) => d.name === 'pencil-sketch')!;
 /** Register only this effect (idempotent). */
 export function registerPencilSketch(): void {
   registerEffects([effect]);

@@ -1,7 +1,7 @@
 'use strict';
 
-var widgets_badgeWall = require('../chunks/badge-wall-CU06ZtRD.cjs');
-require('../chunks/base-DBheNxJu.cjs');
+var widgets_badgeWall = require('../chunks/badge-wall-CHvTcDpR.cjs');
+require('../chunks/base-B3me2y0o.cjs');
 
 
 

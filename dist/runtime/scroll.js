@@ -1,5 +1,5 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-W7pXOwju.js';
-import { g as getTicker } from '../chunks/ticker-D0qF_rV_.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-DUAt7GXU.js';
+import { g as getTicker } from '../chunks/ticker-C_z3Ak_Y.js';
 
 /**
  * `motionary/runtime/scroll` (10.2) — scroll-linked scenes, an original
@@ -49,7 +49,7 @@ function resolveRule(rule, triggerStart, triggerSize, viewport) {
     const s = parts[1] ?? 'bottom';
     return triggerStart + parseEdge(t, triggerSize) - parseEdge(s, viewport);
 }
-const scenes = new Set();
+const scenes = /*#__PURE__*/ new Set();
 const q = (x) => {
     const el = typeof x === 'string' ? document.querySelector(x) : x;
     if (!el)

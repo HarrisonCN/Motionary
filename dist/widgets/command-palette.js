@@ -1,3 +1,3 @@
-export { d as defineCommandPalette } from '../chunks/command-palette-BzD2fATL.js';
-import '../chunks/base-BTev8qxg.js';
+export { d as defineCommandPalette } from '../chunks/command-palette-BSTQQK3b.js';
+import '../chunks/base-zSGb8ujt.js';
 //# sourceMappingURL=command-palette.js.map

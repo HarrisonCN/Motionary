@@ -6,7 +6,7 @@ export const CARD_EFFECTS = ['flip', 'holo', 'glass', 'border-glow', 'conic-bord
 export type CardEffect = (typeof CARD_EFFECTS)[number];
 
 /** Effects that follow the pointer (they share one rAF-throttled tracker). */
-const TRACKING = new Set(['holo', 'border-glow', 'spotlight', 'parallax-layers', 'lift']);
+const TRACKING = /*#__PURE__*/ new Set(['holo', 'border-glow', 'spotlight', 'parallax-layers', 'lift']);
 
 /**
  * `<usa-card>` — card effects, combinable: `effect="lift sheen"`.

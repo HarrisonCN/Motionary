@@ -1,6 +1,6 @@
 import { createRenderEffect, onMount, onCleanup } from 'solid-js';
-import { c as createScrollAnimate } from './chunks/core-D7cVumUu.js';
-import { s as staggerChildren } from './chunks/stagger-DtMKo2SK.js';
+import { c as createScrollAnimate } from './chunks/core-Dj6iomdc.js';
+import { s as staggerChildren } from './chunks/stagger-B9sKPwQB.js';
 import './chunks/presets-BYBVJVeP.js';
 
 /**

@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { DEPTH3_FX } from '../../components/fx2/depth3';
 
 /** The effect definition. */
-export const effect: EffectDefinition = DEPTH3_FX.find((d) => d.name === 'origami')!;
+export const effect: EffectDefinition = /*#__PURE__*/ DEPTH3_FX.find((d) => d.name === 'origami')!;
 /** Register only this effect (idempotent). */
 export function registerOrigami(): void {
   registerEffects([effect]);

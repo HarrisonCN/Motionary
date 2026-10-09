@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { GESTURE3_FX } from '../../components/fx2/gesture3';
 
 /** The effect definition. */
-export const effect: EffectDefinition = GESTURE3_FX.find((d) => d.name === 'swipe-hint')!;
+export const effect: EffectDefinition = /*#__PURE__*/ GESTURE3_FX.find((d) => d.name === 'swipe-hint')!;
 /** Register only this effect (idempotent). */
 export function registerSwipeHint(): void {
   registerEffects([effect]);

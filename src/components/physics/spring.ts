@@ -61,7 +61,7 @@ export function stepSpring(cfg: Required<SpringConfig>, x: number, v: number, to
   return [x + nv * dt, nv];
 }
 
-const cache = new Map<string, { values: number[]; duration: number }>();
+const cache = /*#__PURE__*/ new Map<string, { values: number[]; duration: number }>();
 
 /**
  * Sample the spring from 0 to 1 at `fps` (default 60). `values` may exceed 1

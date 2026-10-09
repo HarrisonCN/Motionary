@@ -1,7 +1,7 @@
 'use strict';
 
-var widgets_menu = require('../chunks/menu-Bk8wTMy9.cjs');
-require('../chunks/base-DBheNxJu.cjs');
+var widgets_menu = require('../chunks/menu-BgO53POm.cjs');
+require('../chunks/base-B3me2y0o.cjs');
 require('../chunks/shared-BxK1D7EZ.cjs');
 
 

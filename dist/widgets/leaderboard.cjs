@@ -1,7 +1,7 @@
 'use strict';
 
-var widgets_leaderboard = require('../chunks/leaderboard-BriQkJqy.cjs');
-require('../chunks/base-DBheNxJu.cjs');
+var widgets_leaderboard = require('../chunks/leaderboard-DYRLL45b.cjs');
+require('../chunks/base-B3me2y0o.cjs');
 
 
 

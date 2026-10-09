@@ -82,7 +82,7 @@ export function resolveRule(rule: string, triggerStart: number, triggerSize: num
   return triggerStart + parseEdge(t, triggerSize) - parseEdge(s, viewport);
 }
 
-const scenes = new Set<ScrollScene>();
+const scenes = /*#__PURE__*/ new Set<ScrollScene>();
 const q = (x: Element | string): Element => {
   const el = typeof x === 'string' ? document.querySelector(x) : x;
   if (!el) throw new Error(`[motionary] scroll: element "${x}" not found`);

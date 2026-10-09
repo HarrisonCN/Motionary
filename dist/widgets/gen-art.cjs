@@ -1,8 +1,8 @@
 'use strict';
 
-var base = require('../chunks/base-DBheNxJu.cjs');
+var base = require('../chunks/base-B3me2y0o.cjs');
 var components_fxGenart = require('../components/fx-genart.cjs');
-require('../chunks/registry-xQZnSqqV.cjs');
+require('../chunks/registry-BB1oO-lR.cjs');
 
 var css = "usa-gen-art{position:relative;display:block;min-height:120px;border-radius:12px;overflow:hidden;cursor:pointer;outline:none}usa-gen-art>canvas{display:block;width:100%;height:100%;position:absolute;inset:0}usa-gen-art:focus-visible{box-shadow:0 0 0 3px #6366f1}";
 

@@ -1,10 +1,10 @@
-import { f as defineElement } from '../chunks/base-BTev8qxg.js';
-import { playEffect, bindEffect, EFFECT_TRIGGERS, registerEffects } from '../chunks/registry-BKzyg1JV.js';
-export { EFFECT_KINDS, getEffect, hasEffect, listEffects, registerEffect } from '../chunks/registry-BKzyg1JV.js';
-import { B as BUILTIN_EFFECTS } from '../chunks/builtins-CPmS6aDB.js';
-import '../chunks/core-BviA7nFa.js';
+import { f as defineElement } from '../chunks/base-zSGb8ujt.js';
+import { playEffect, bindEffect, EFFECT_TRIGGERS, registerEffects } from '../chunks/registry-CYojuxi5.js';
+export { EFFECT_KINDS, getEffect, hasEffect, listEffects, registerEffect } from '../chunks/registry-CYojuxi5.js';
+import { B as BUILTIN_EFFECTS } from '../chunks/builtins-Simwbnqg.js';
+import '../chunks/core-BOCM9zD5.js';
 import './tokens.js';
-import '../chunks/fx-CgWKqVsn.js';
+import '../chunks/fx-DUteojZx.js';
 
 function defineFx(tag = 'usa-fx') {
     return defineElement(tag, (Base) => class UsaFx extends Base {

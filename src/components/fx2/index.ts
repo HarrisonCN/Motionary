@@ -188,7 +188,7 @@ export function definePlugin(name: string, effects: EffectDefinition[], install?
 export function effectPlugins(): MotionPlugin[] {
   return Object.entries(PACK_SOURCES).map(([k, effects]) => ({ name: k, effects }));
 }
-const usedPlugins = new Set<string>();
+const usedPlugins = /*#__PURE__*/ new Set<string>();
 /** Register plugins (each once); returns the names of their effects (9.9). */
 export function usePlugins(...plugins: MotionPlugin[]): string[] {
   const names: string[] = [];

@@ -39,10 +39,10 @@ export function eventName(prop: string): string | null {
 }
 
 /** Props written as DOM properties (not attributes) when given non-string values. */
-const PROPS = new Set(['checked', 'value', 'state', 'open', 'liked', 'count', 'loading', 'flipped', 'selected', 'index', 'indeterminate']);
+const PROPS = /*#__PURE__*/ new Set(['checked', 'value', 'state', 'open', 'liked', 'count', 'loading', 'flipped', 'selected', 'index', 'indeterminate']);
 
 /** All `<usa-*>` tags shipped by the package. */
-export const USA_TAGS: string[] = Object.values(COMPONENT_CATEGORIES).flat() as string[];
+export const USA_TAGS: string[] = /*#__PURE__*/ Object.values(COMPONENT_CATEGORIES).flat() as string[];
 
 export function createUsaComponents(React: ReactLike): Record<string, any> {
   const useIso = React.useLayoutEffect || React.useEffect;

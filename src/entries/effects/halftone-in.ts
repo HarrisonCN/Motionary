@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { GENART_FX } from '../../components/fx2/genart';
 
 /** The effect definition. */
-export const effect: EffectDefinition = GENART_FX.find((d) => d.name === 'halftone-in')!;
+export const effect: EffectDefinition = /*#__PURE__*/ GENART_FX.find((d) => d.name === 'halftone-in')!;
 /** Register only this effect (idempotent). */
 export function registerHalftoneIn(): void {
   registerEffects([effect]);

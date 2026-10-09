@@ -9,7 +9,7 @@ import { hasModule, requireModule, missingMessage } from '../../runtime/registry
 
 export { hasModule, missingMessage };
 
-const logged = new Set<string>();
+const logged = /*#__PURE__*/ new Set<string>();
 
 /** The module API, or null after rendering the "missing module" notice into `host`. */
 export function runtimeModule<A>(host: HTMLElement, id: string): A | null {

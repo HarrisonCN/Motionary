@@ -1,4 +1,4 @@
-import { R as RUNTIME_VERSION, r as requireModule } from '../chunks/registry-W7pXOwju.js';
+import { R as RUNTIME_VERSION, r as requireModule } from '../chunks/registry-DUAt7GXU.js';
 import { p as parseEase } from '../chunks/ease-XN8_0sXu.js';
 
 /**
@@ -21,7 +21,7 @@ import { p as parseEase } from '../chunks/ease-XN8_0sXu.js';
  * SSR-safe: nothing touches `window` until `smoothScroll()` is called.
  */
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
-const instances = new Set();
+const instances = /*#__PURE__*/ new Set();
 class SmoothScroll {
     constructor(o = {}) {
         /** Current (animated) scroll position, px. */

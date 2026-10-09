@@ -1,7 +1,7 @@
 'use strict';
 
-var widgets_rive = require('../chunks/rive-DplDvYH5.cjs');
-require('../chunks/base-DBheNxJu.cjs');
+var widgets_rive = require('../chunks/rive-CfWKBIa5.cjs');
+require('../chunks/base-B3me2y0o.cjs');
 
 
 

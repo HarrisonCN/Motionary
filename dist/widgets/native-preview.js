@@ -1,10 +1,10 @@
-import { f as defineElement } from '../chunks/base-BTev8qxg.js';
+import { f as defineElement } from '../chunks/base-zSGb8ujt.js';
 import { toFlutter, toReactNative, entranceFrom } from '../components/native.js';
 import { parseMotion } from '../components/dsl.js';
 import '../components/design.js';
-import '../chunks/core-BviA7nFa.js';
+import '../chunks/core-BOCM9zD5.js';
 import '../components/tokens.js';
-import '../chunks/registry-BKzyg1JV.js';
+import '../chunks/registry-CYojuxi5.js';
 
 var css = "usa-native-preview{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start;max-width:100%;font:12px/1.4 system-ui,sans-serif}usa-native-preview .usa-np-device{position:relative;flex:none;width:150px;height:280px;padding:26px 8px 10px;border-radius:30px;background:#0f172a;box-shadow:0 14px 30px -16px rgba(15,23,42,.8);box-sizing:border-box}usa-native-preview[data-platform=android] .usa-np-device{border-radius:18px;padding-top:18px}usa-native-preview .usa-np-notch{position:absolute;top:8px;left:50%;width:52px;height:12px;margin-left:-26px;border-radius:8px;background:#000}usa-native-preview[data-platform=android] .usa-np-notch{width:8px;height:8px;margin-left:-4px;border-radius:50%;top:6px}usa-native-preview .usa-np-screen{display:flex;flex-direction:column;gap:8px;height:100%;padding:10px;border-radius:22px;background:#f8fafc;overflow:hidden;box-sizing:border-box}usa-native-preview[data-platform=android] .usa-np-screen{border-radius:10px}usa-native-preview .usa-np-side{flex:1 1 200px;min-width:0}usa-native-preview [role=tablist]{display:flex;gap:4px;flex-wrap:wrap}usa-native-preview [role=tablist] button{padding:4px 8px;border:1px solid #cbd5e1;border-radius:7px;background:#fff;font:600 11px/1 system-ui,sans-serif;cursor:pointer}usa-native-preview [aria-selected=true]{background:#0f172a!important;color:#fff;border-color:#0f172a!important}usa-native-preview .usa-np-replay{margin-left:auto;background:#4f46e5!important;color:#fff;border-color:#4f46e5!important}usa-native-preview .usa-np-code{margin:6px 0 0;padding:8px;max-height:230px;overflow:auto;border-radius:8px;background:#0f172a;color:#e2e8f0;font:10.5px/1.45 ui-monospace,monospace;white-space:pre}";
 

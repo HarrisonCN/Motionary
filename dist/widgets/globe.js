@@ -1,3 +1,3 @@
-export { d as defineGlobe } from '../chunks/globe-DoDIrULa.js';
-import '../chunks/base-BTev8qxg.js';
+export { d as defineGlobe } from '../chunks/globe-DAdScNVh.js';
+import '../chunks/base-zSGb8ujt.js';
 //# sourceMappingURL=globe.js.map

@@ -1,4 +1,4 @@
-import { p as prefersReducedMotion, n as now, m as motionScale, r as raf, d as clamp, D as EASE_OUT, E as EASE_SPRING, f as defineElement } from '../chunks/base-BTev8qxg.js';
+import { p as prefersReducedMotion, n as now, m as motionScale, r as raf, D as EASE_OUT, d as clamp, E as EASE_SPRING, f as defineElement } from '../chunks/base-zSGb8ujt.js';
 
 const anim = (el, frames, o) => {
     if (typeof el.animate !== 'function')
@@ -150,7 +150,7 @@ function applyPack(name, root = document) {
     return () => cleanups.splice(0).forEach((c) => c());
 }
 /** Primitive names a pack uses (for docs / tooling). */
-const PACK_PRIMITIVES = Object.keys(PRIMITIVES);
+const PACK_PRIMITIVES = /*#__PURE__*/ Object.keys(PRIMITIVES);
 
 function definePack(tag = 'usa-pack') {
     return defineElement(tag, (Base) => class UsaPack extends Base {

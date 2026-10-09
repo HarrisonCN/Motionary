@@ -1,7 +1,7 @@
 'use strict';
 
-var widgets_productGallery = require('../chunks/product-gallery-nSXnskzk.cjs');
-require('../chunks/base-DBheNxJu.cjs');
+var widgets_productGallery = require('../chunks/product-gallery-CTswLWBk.cjs');
+require('../chunks/base-B3me2y0o.cjs');
 
 
 

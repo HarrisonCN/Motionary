@@ -1,6 +1,6 @@
-import { f as defineElement } from '../chunks/base-BTev8qxg.js';
+import { f as defineElement } from '../chunks/base-zSGb8ujt.js';
 import { roughLine } from '../components/fx-paper.js';
-import '../chunks/registry-BKzyg1JV.js';
+import '../chunks/registry-CYojuxi5.js';
 
 var css = "usa-sketch-chart{display:block;max-width:100%;cursor:pointer;color:#334155;--usa-sk-c:#2563eb}usa-sketch-chart .usa-sk{display:block;width:100%;height:auto;overflow:visible}usa-sketch-chart .usa-sk path{fill:none;stroke-linecap:round;stroke-linejoin:round}usa-sketch-chart .usa-sk-axis{stroke:currentColor;stroke-width:1.6}usa-sketch-chart .usa-sk-mark{stroke:var(--usa-sk-c);stroke-width:2.2}usa-sketch-chart .usa-sk-hatch{stroke:var(--usa-sk-c);stroke-width:1;opacity:.55}usa-sketch-chart .usa-sk-dot{fill:#fff;stroke:var(--usa-sk-c);stroke-width:2}usa-sketch-chart text{fill:currentColor;font:12px 'Comic Sans MS','Segoe Print','Bradley Hand',cursive,system-ui;text-anchor:middle}";
 

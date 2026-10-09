@@ -1,11 +1,11 @@
 'use strict';
 
-var base = require('../chunks/base-DBheNxJu.cjs');
-var registry = require('../chunks/registry-xQZnSqqV.cjs');
-var builtins = require('../chunks/builtins-CKKZNR95.cjs');
-require('../chunks/core-MQlXZKUG.cjs');
+var base = require('../chunks/base-B3me2y0o.cjs');
+var registry = require('../chunks/registry-BB1oO-lR.cjs');
+var builtins = require('../chunks/builtins-Cz3iufK6.cjs');
+require('../chunks/core-KIvPGg0c.cjs');
 require('./tokens.cjs');
-require('../chunks/fx-B_pbhpDp.cjs');
+require('../chunks/fx-BaPAanPW.cjs');
 
 function defineFx(tag = 'usa-fx') {
     return base.defineElement(tag, (Base) => class UsaFx extends Base {

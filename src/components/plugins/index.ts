@@ -43,67 +43,67 @@ export interface EffectPlugin {
 const P = (name: string, effects: EffectDefinition[]): EffectPlugin => ({ name, effects });
 
 /** The `gpu` pack. */
-export const gpu = P('gpu', GPU_FX);
+export const gpu = /*#__PURE__*/ P('gpu', GPU_FX);
 /** The `text` pack. */
-export const text = P('text', TEXT3_FX);
+export const text = /*#__PURE__*/ P('text', TEXT3_FX);
 /** The `light` pack. */
-export const light = P('light', LIGHT_FX);
+export const light = /*#__PURE__*/ P('light', LIGHT_FX);
 /** The `depth` pack. */
-export const depth = P('depth', DEPTH3_FX);
+export const depth = /*#__PURE__*/ P('depth', DEPTH3_FX);
 /** The `morph` pack. */
-export const morph = P('morph', MORPH2_FX);
+export const morph = /*#__PURE__*/ P('morph', MORPH2_FX);
 /** The `transitions` pack. */
-export const transitions = P('transitions', TRANSITIONS2_FX);
+export const transitions = /*#__PURE__*/ P('transitions', TRANSITIONS2_FX);
 /** The `weather` pack. */
-export const weather = P('weather', WEATHER_FX);
+export const weather = /*#__PURE__*/ P('weather', WEATHER_FX);
 /** The `physics` pack. */
-export const physics = P('physics', PHYSICS2_FX);
+export const physics = /*#__PURE__*/ P('physics', PHYSICS2_FX);
 /** The `focus` pack. */
-export const focus = P('focus', FOCUS_FX);
+export const focus = /*#__PURE__*/ P('focus', FOCUS_FX);
 /** The `music` pack. */
-export const music = P('music', MUSIC_FX);
+export const music = /*#__PURE__*/ P('music', MUSIC_FX);
 /** The `chart` pack. */
-export const chart = P('chart', CHART_FX);
+export const chart = /*#__PURE__*/ P('chart', CHART_FX);
 /** The `shop` pack. */
-export const shop = P('shop', SHOP_FX);
+export const shop = /*#__PURE__*/ P('shop', SHOP_FX);
 /** The `social` pack. */
-export const social = P('social', SOCIAL_FX);
+export const social = /*#__PURE__*/ P('social', SOCIAL_FX);
 /** The `game` pack. */
-export const game = P('game', GAME_FX);
+export const game = /*#__PURE__*/ P('game', GAME_FX);
 /** The `geo` pack. */
-export const geo = P('geo', GEO_FX);
+export const geo = /*#__PURE__*/ P('geo', GEO_FX);
 /** The `form` pack. */
-export const form = P('form', FORM_FX);
+export const form = /*#__PURE__*/ P('form', FORM_FX);
 /** The `ai` pack. */
-export const ai = P('ai', AI_FX);
+export const ai = /*#__PURE__*/ P('ai', AI_FX);
 /** The `festival` pack. */
-export const festival = P('festival', FESTIVAL_FX);
+export const festival = /*#__PURE__*/ P('festival', FESTIVAL_FX);
 /** The `retro` pack. */
-export const retro = P('retro', RETRO_FX);
+export const retro = /*#__PURE__*/ P('retro', RETRO_FX);
 /** The `organic` pack. */
-export const organic = P('organic', ORGANIC_FX);
+export const organic = /*#__PURE__*/ P('organic', ORGANIC_FX);
 /** The `cyber` pack. */
-export const cyber = P('cyber', CYBER_FX);
+export const cyber = /*#__PURE__*/ P('cyber', CYBER_FX);
 /** The `paper` pack. */
-export const paper = P('paper', PAPER_FX);
+export const paper = /*#__PURE__*/ P('paper', PAPER_FX);
 /** The `surface` pack. */
-export const surface = P('surface', SURFACE_FX);
+export const surface = /*#__PURE__*/ P('surface', SURFACE_FX);
 /** The `gesture3` pack. */
-export const gesture3 = P('gesture3', GESTURE3_FX);
+export const gesture3 = /*#__PURE__*/ P('gesture3', GESTURE3_FX);
 /** The `spatial` pack. */
-export const spatial = P('spatial', SPATIAL_FX);
+export const spatial = /*#__PURE__*/ P('spatial', SPATIAL_FX);
 /** The `cinema` pack. */
-export const cinema = P('cinema', CINEMA_FX);
+export const cinema = /*#__PURE__*/ P('cinema', CINEMA_FX);
 /** The `lottie` pack. */
-export const lottie = P('lottie', LOTTIE_FX);
+export const lottie = /*#__PURE__*/ P('lottie', LOTTIE_FX);
 /** The `genart` pack. */
-export const genart = P('genart', GENART_FX);
+export const genart = /*#__PURE__*/ P('genart', GENART_FX);
 /** The `video` pack. */
-export const video = P('video', VIDEO_FX);
+export const video = /*#__PURE__*/ P('video', VIDEO_FX);
 /** The `safe` pack. */
-export const safe = P('safe', SAFE_FX);
+export const safe = /*#__PURE__*/ P('safe', SAFE_FX);
 /** The `perf3` pack. */
-export const perf3 = P('perf3', PERF3_FX);
+export const perf3 = /*#__PURE__*/ P('perf3', PERF3_FX);
 
 /** Every built-in plugin. */
 export const ALL_PLUGINS: EffectPlugin[] = [gpu, text, light, depth, morph, transitions, weather, physics, focus, music, chart, shop, social, game, geo, form, ai, festival, retro, organic, cyber, paper, surface, gesture3, spatial, cinema, lottie, genart, video, safe, perf3];

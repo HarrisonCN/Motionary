@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { MUSIC_FX } from '../../components/fx2/music';
 
 /** The effect definition. */
-export const effect: EffectDefinition = MUSIC_FX.find((d) => d.name === 'sound-particles')!;
+export const effect: EffectDefinition = /*#__PURE__*/ MUSIC_FX.find((d) => d.name === 'sound-particles')!;
 /** Register only this effect (idempotent). */
 export function registerSoundParticles(): void {
   registerEffects([effect]);

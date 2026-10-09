@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { CHART_FX } from '../../components/fx2/chart';
 
 /** The effect definition. */
-export const effect: EffectDefinition = CHART_FX.find((d) => d.name === 'bars-grow')!;
+export const effect: EffectDefinition = /*#__PURE__*/ CHART_FX.find((d) => d.name === 'bars-grow')!;
 /** Register only this effect (idempotent). */
 export function registerBarsGrow(): void {
   registerEffects([effect]);

@@ -1,5 +1,5 @@
-import { registerEffects } from '../chunks/registry-BKzyg1JV.js';
-import '../chunks/base-BTev8qxg.js';
+import { registerEffects } from '../chunks/registry-CYojuxi5.js';
+import '../chunks/base-zSGb8ujt.js';
 
 /** A blob border-radius ("63% 37% 54% 46% / 55% 48% 52% 45%") from a seed (8.3). */
 function blobRadius(seed) {

@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { PAPER_FX } from '../../components/fx2/paper';
 
 /** The effect definition. */
-export const effect: EffectDefinition = PAPER_FX.find((d) => d.name === 'crumple')!;
+export const effect: EffectDefinition = /*#__PURE__*/ PAPER_FX.find((d) => d.name === 'crumple')!;
 /** Register only this effect (idempotent). */
 export function registerCrumple(): void {
   registerEffects([effect]);

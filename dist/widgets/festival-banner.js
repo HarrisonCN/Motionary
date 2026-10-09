@@ -1,3 +1,3 @@
-export { d as defineFestivalBanner } from '../chunks/festival-banner-D1KfMWzk.js';
-import '../chunks/base-BTev8qxg.js';
+export { d as defineFestivalBanner } from '../chunks/festival-banner-BYn-HCza.js';
+import '../chunks/base-zSGb8ujt.js';
 //# sourceMappingURL=festival-banner.js.map

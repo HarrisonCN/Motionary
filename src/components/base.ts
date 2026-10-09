@@ -121,7 +121,7 @@ export function prefersReducedMotion(): boolean {
   return typeof matchMedia === 'function' && !!matchMedia('(prefers-reduced-motion: reduce)')?.matches;
 }
 
-const injected = new Set<string>();
+const injected = /*#__PURE__*/ new Set<string>();
 
 /** Add a component's stylesheet to the document once. */
 export function adoptStyles(id: string, css: string): void {
@@ -380,7 +380,7 @@ export function srText(text: string): HTMLSpanElement {
 // Every component loop goes through one requestAnimationFrame per frame
 // instead of one per element: callbacks are batched, run in order, and a
 // throwing callback no longer starves the others (the first error is rethrown).
-const frameQueue = new Map<number, FrameRequestCallback>();
+const frameQueue = /*#__PURE__*/ new Map<number, FrameRequestCallback>();
 let frameSeq = 1;
 let frameHandle: number | ReturnType<typeof setTimeout> | 0 = 0;
 let frameVia: unknown = null;
@@ -405,9 +405,9 @@ function flushFrame(t: number): void {
     }
   }
   // 8.0: loops run on the unified motion clock — dt scaled by its rate, frozen while paused
-  if (!clockState.paused) {
-    const cdt = dt * clockState.rate;
-    clockState.time += cdt;
+  if (!clk().paused) {
+    const cdt = dt * clk().rate;
+    clk().time += cdt;
     frameListeners.forEach((fn) => fn(t, cdt));
     if (frameListeners.size) requestFlush();
   }
@@ -438,7 +438,7 @@ export const caf = (id: number): void => {
 /** Run `fn(time, dt)` every frame on the shared scheduler until the returned function is called. */
 export function onFrame(fn: (t: number, dt: number) => void): () => void {
   frameListeners.add(fn);
-  if (!clockState.paused) requestFlush();
+  if (!clk().paused) requestFlush();
   return () => frameListeners.delete(fn);
 }
 
@@ -459,16 +459,17 @@ interface ClockState {
   anims: Set<Animation>;
   subs: Set<() => void>;
 }
-const CLOCK_KEY = Symbol.for('motionary.clock');
-const clockState: ClockState = ((globalThis as any)[CLOCK_KEY] ||= { rate: 1, paused: false, time: 0, anims: new Set(), subs: new Set() });
+const CLOCK_KEY = /*#__PURE__*/ Symbol.for('motionary.clock');
+// 11.1: created on first use, so importing this module writes nothing to globalThis.
+const clk = (): ClockState => ((globalThis as any)[CLOCK_KEY] ||= { rate: 1, paused: false, time: 0, anims: new Set(), subs: new Set() });
 
 function applyClock(a: Animation): void {
   try {
-    if (typeof (a as any).updatePlaybackRate === 'function') (a as any).updatePlaybackRate(clockState.rate);
-    else if (clockState.rate !== 1 || (a as any).playbackRate !== undefined) (a as any).playbackRate = clockState.rate;
-    if (clockState.paused) a.pause?.();
+    if (typeof (a as any).updatePlaybackRate === 'function') (a as any).updatePlaybackRate(clk().rate);
+    else if (clk().rate !== 1 || (a as any).playbackRate !== undefined) (a as any).playbackRate = clk().rate;
+    if (clk().paused) a.pause?.();
     else if (a.playState === 'paused' && (a as any)._usaClockPaused) a.play?.();
-    (a as any)._usaClockPaused = clockState.paused;
+    (a as any)._usaClockPaused = clk().paused;
   } catch {
     /* finished / detached animation */
   }
@@ -477,31 +478,31 @@ function applyClock(a: Animation): void {
 /** Put an animation on the shared motion clock (animateWithMotion does this for every component / effect animation). */
 export function trackAnimation(a: Animation | null | undefined): void {
   if (!a) return;
-  if (clockState.rate !== 1 || clockState.paused) applyClock(a);
-  clockState.anims.add(a);
-  const drop = () => clockState.anims.delete(a);
+  if (clk().rate !== 1 || clk().paused) applyClock(a);
+  clk().anims.add(a);
+  const drop = () => clk().anims.delete(a);
   a.finished?.then(drop, drop);
 }
 
 /** The motion clock's state: `rate` (1 = normal), `paused`, `time` (clock ms elapsed, scaled by rate). */
 export function getClock(): { rate: number; paused: boolean; time: number; tracked: number } {
-  return { rate: clockState.rate, paused: clockState.paused, time: clockState.time, tracked: clockState.anims.size };
+  return { rate: clk().rate, paused: clk().paused, time: clk().time, tracked: clk().anims.size };
 }
 
 /** Change the shared clock: `{ rate }` (0.05–8) and / or `{ paused }`. Applies to running animations and loops. */
 export function setClock(next: { rate?: number; paused?: boolean }): void {
-  const wasPaused = clockState.paused;
-  if (typeof next.rate === 'number' && Number.isFinite(next.rate)) clockState.rate = Math.min(8, Math.max(0.05, next.rate));
-  if (typeof next.paused === 'boolean') clockState.paused = next.paused;
-  clockState.anims.forEach(applyClock);
-  if (wasPaused && !clockState.paused && frameListeners.size) requestFlush();
-  clockState.subs.forEach((fn) => fn());
+  const wasPaused = clk().paused;
+  if (typeof next.rate === 'number' && Number.isFinite(next.rate)) clk().rate = Math.min(8, Math.max(0.05, next.rate));
+  if (typeof next.paused === 'boolean') clk().paused = next.paused;
+  clk().anims.forEach(applyClock);
+  if (wasPaused && !clk().paused && frameListeners.size) requestFlush();
+  clk().subs.forEach((fn) => fn());
 }
 
 /** Subscribe to clock changes; returns an unsubscribe. */
 export function onClockChange(fn: () => void): () => void {
-  clockState.subs.add(fn);
-  return () => clockState.subs.delete(fn);
+  clk().subs.add(fn);
+  return () => clk().subs.delete(fn);
 }
 
 // --- active animation budget (4.5) ---------------------------------------------
@@ -528,7 +529,7 @@ export const EASE_SPRING = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
 /** Windows Fluent "decelerate" / "point-to-point" curves. */
 export const FLUENT_DECELERATE = 'cubic-bezier(0.1, 0.9, 0.2, 1)';
 
-const warned = new Set<string>();
+const warned = /*#__PURE__*/ new Set<string>();
 /** Log a deprecation once per key (console.warn). */
 export function deprecate(key: string, message: string): void {
   if (warned.has(key)) return;

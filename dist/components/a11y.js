@@ -1,5 +1,5 @@
-import { B as deprecate, g as getMotionSensitivity, M as MOTION_SENSITIVITY_LEVELS, c as configureComponents, C as adoptStyles } from '../chunks/base-BTev8qxg.js';
-export { l as adaptKeyframes } from '../chunks/base-BTev8qxg.js';
+import { B as deprecate, g as getMotionSensitivity, M as MOTION_SENSITIVITY_LEVELS, c as configureComponents, C as adoptStyles } from '../chunks/base-zSGb8ujt.js';
+export { l as adaptKeyframes } from '../chunks/base-zSGb8ujt.js';
 import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-B-JBecYg.js';
 
 /**

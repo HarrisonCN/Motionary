@@ -1,6 +1,6 @@
-import { f as defineElement } from '../chunks/base-BTev8qxg.js';
+import { f as defineElement } from '../chunks/base-zSGb8ujt.js';
 import { lottieToKeyframes, lottieToSvg } from '../components/fx-lottie.js';
-import '../chunks/registry-BKzyg1JV.js';
+import '../chunks/registry-CYojuxi5.js';
 
 var css = "usa-lottie{display:inline-block;line-height:0;max-width:100%}usa-lottie .usa-lt-svg{max-width:100%;height:auto;overflow:visible}usa-lottie [data-layer]{transform-box:view-box;transform-origin:0 0}";
 

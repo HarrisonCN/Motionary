@@ -1,9 +1,9 @@
 'use strict';
 
-var manifest = require('../chunks/manifest-PaF9B8Vt.cjs');
+var manifest = require('../chunks/manifest-Bcz6rQ20.cjs');
 var sign = require('../chunks/sign-RAkQIWrM.cjs');
-require('../chunks/registry-xQZnSqqV.cjs');
-require('../chunks/base-DBheNxJu.cjs');
+require('../chunks/registry-BB1oO-lR.cjs');
+require('../chunks/base-B3me2y0o.cjs');
 
 const MARKETPLACE_FORMAT = 'motionary/marketplace';
 const L = (name, title, description, entry, register, effects, tags, since) => ({ name, title, description, entry, register, effects: effects.split(' '), tags: tags.split(' '), since, author: 'Motionary', official: true });
@@ -49,7 +49,7 @@ function searchPlugins(query, list = MARKETPLACE) {
         .sort((a, b) => b[1] - a[1])
         .map(([p]) => p);
 }
-const installed = new Map();
+const installed = /*#__PURE__*/ new Map();
 /** Names of installed plugins → their registered effects (9.0). */
 function installedPlugins() {
     return Object.fromEntries(installed);

@@ -1,7 +1,7 @@
 'use strict';
 
-var widgets_voiceButton = require('../chunks/voice-button-CwKLfjli.cjs');
-require('../chunks/base-DBheNxJu.cjs');
+var widgets_voiceButton = require('../chunks/voice-button-CZ5cpeWN.cjs');
+require('../chunks/base-B3me2y0o.cjs');
 
 
 

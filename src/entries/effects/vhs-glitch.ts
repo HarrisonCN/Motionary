@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { RETRO_FX } from '../../components/fx2/retro2';
 
 /** The effect definition. */
-export const effect: EffectDefinition = RETRO_FX.find((d) => d.name === 'vhs-glitch')!;
+export const effect: EffectDefinition = /*#__PURE__*/ RETRO_FX.find((d) => d.name === 'vhs-glitch')!;
 /** Register only this effect (idempotent). */
 export function registerVhsGlitch(): void {
   registerEffects([effect]);

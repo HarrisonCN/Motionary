@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { MORPH2_FX } from '../../components/fx2/morph2';
 
 /** The effect definition. */
-export const effect: EffectDefinition = MORPH2_FX.find((d) => d.name === 'icon-swap')!;
+export const effect: EffectDefinition = /*#__PURE__*/ MORPH2_FX.find((d) => d.name === 'icon-swap')!;
 /** Register only this effect (idempotent). */
 export function registerIconSwap(): void {
   registerEffects([effect]);

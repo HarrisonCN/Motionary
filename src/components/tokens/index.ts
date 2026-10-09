@@ -52,7 +52,7 @@ export const MOTION_TOKENS: MotionTokens = {
 export type MotionTokenGroup = keyof MotionTokens;
 export type DeepPartialTokens = { [K in keyof MotionTokens]?: Partial<MotionTokens[K]> };
 
-let active: MotionTokens = clone(MOTION_TOKENS);
+let active: MotionTokens = /*#__PURE__*/ clone(MOTION_TOKENS);
 
 function clone(t: MotionTokens): MotionTokens {
   return { duration: { ...t.duration }, easing: { ...t.easing }, spring: Object.fromEntries(Object.entries(t.spring).map(([k, v]) => [k, { ...v }])) };

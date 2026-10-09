@@ -157,4 +157,4 @@ export function applyPack(name: PackName | string, root: HTMLElement | Document 
 }
 
 /** Primitive names a pack uses (for docs / tooling). */
-export const PACK_PRIMITIVES = Object.keys(PRIMITIVES);
+export const PACK_PRIMITIVES = /*#__PURE__*/ Object.keys(PRIMITIVES);

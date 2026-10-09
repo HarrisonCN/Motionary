@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { LIGHT_FX } from '../../components/fx2/light';
 
 /** The effect definition. */
-export const effect: EffectDefinition = LIGHT_FX.find((d) => d.name === 'god-rays')!;
+export const effect: EffectDefinition = /*#__PURE__*/ LIGHT_FX.find((d) => d.name === 'god-rays')!;
 /** Register only this effect (idempotent). */
 export function registerGodRays(): void {
   registerEffects([effect]);

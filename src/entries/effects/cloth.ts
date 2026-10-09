@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { PHYSICS2_FX } from '../../components/fx2/physics2';
 
 /** The effect definition. */
-export const effect: EffectDefinition = PHYSICS2_FX.find((d) => d.name === 'cloth')!;
+export const effect: EffectDefinition = /*#__PURE__*/ PHYSICS2_FX.find((d) => d.name === 'cloth')!;
 /** Register only this effect (idempotent). */
 export function registerCloth(): void {
   registerEffects([effect]);

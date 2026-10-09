@@ -1,8 +1,8 @@
 'use strict';
 
-var base = require('../chunks/base-DBheNxJu.cjs');
+var base = require('../chunks/base-B3me2y0o.cjs');
 var components_fxLottie = require('../components/fx-lottie.cjs');
-require('../chunks/registry-xQZnSqqV.cjs');
+require('../chunks/registry-BB1oO-lR.cjs');
 
 var css = "usa-lottie{display:inline-block;line-height:0;max-width:100%}usa-lottie .usa-lt-svg{max-width:100%;height:auto;overflow:visible}usa-lottie [data-layer]{transform-box:view-box;transform-origin:0 0}";
 

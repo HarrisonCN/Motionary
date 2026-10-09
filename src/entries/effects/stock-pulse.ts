@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { SHOP_FX } from '../../components/fx2/shop';
 
 /** The effect definition. */
-export const effect: EffectDefinition = SHOP_FX.find((d) => d.name === 'stock-pulse')!;
+export const effect: EffectDefinition = /*#__PURE__*/ SHOP_FX.find((d) => d.name === 'stock-pulse')!;
 /** Register only this effect (idempotent). */
 export function registerStockPulse(): void {
   registerEffects([effect]);

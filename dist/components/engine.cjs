@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-DBheNxJu.cjs');
+var base = require('../chunks/base-B3me2y0o.cjs');
 
 /**
  * `motionary/engine` (= `motionary/components/engine`, 8.0) — the unified

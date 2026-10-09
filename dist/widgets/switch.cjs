@@ -1,7 +1,7 @@
 'use strict';
 
-var widgets_switch = require('../chunks/switch-CeuEDr-j.cjs');
-require('../chunks/base-DBheNxJu.cjs');
+var widgets_switch = require('../chunks/switch-0mn-fRmX.cjs');
+require('../chunks/base-B3me2y0o.cjs');
 
 
 

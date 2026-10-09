@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-DBheNxJu.cjs');
+var base = require('../chunks/base-B3me2y0o.cjs');
 var shared = require('../chunks/shared-BxK1D7EZ.cjs');
 
 var css = "usa-swipe-deck{position:relative;display:grid;width:var(--usa-sd-w,240px);max-width:100%;height:var(--usa-sd-h,300px);touch-action:pan-y;outline-offset:6px;border-radius:18px}.usa-sd-card{grid-area:1/1;position:relative;display:grid;place-items:center;border-radius:18px;background:var(--usa-sd-bg,linear-gradient(160deg,#7c5cff,#22d3ee));color:#fff;font:800 22px/1.2 system-ui,sans-serif;box-shadow:0 12px 28px -10px rgba(0,0,0,.4);transition:transform .3s cubic-bezier(.3,1.3,.5,1),opacity .3s;user-select:none;cursor:grab;overflow:hidden;touch-action:none}.usa-sd-card.usa-sd-dragging{transition:none;cursor:grabbing}.usa-sd-stamp{position:absolute;top:18px;padding:4px 10px;border:3px solid currentColor;border-radius:8px;font:900 20px/1 system-ui,sans-serif;letter-spacing:.1em;opacity:0;pointer-events:none}.usa-sd-like{left:16px;color:#4ade80;transform:rotate(-14deg)}.usa-sd-nope{right:16px;color:#f87171;transform:rotate(14deg)}@media (prefers-reduced-motion:reduce){.usa-sd-card{transition:none}}";

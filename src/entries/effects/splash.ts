@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { GPU_FX } from '../../components/fx2/gpu';
 
 /** The effect definition. */
-export const effect: EffectDefinition = GPU_FX.find((d) => d.name === 'splash')!;
+export const effect: EffectDefinition = /*#__PURE__*/ GPU_FX.find((d) => d.name === 'splash')!;
 /** Register only this effect (idempotent). */
 export function registerSplash(): void {
   registerEffects([effect]);

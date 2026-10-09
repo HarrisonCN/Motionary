@@ -1,7 +1,7 @@
 'use strict';
 
-var widgets_odometer = require('../chunks/progress-ring-Da6LFA5p.cjs');
-require('../chunks/base-DBheNxJu.cjs');
+var widgets_odometer = require('../chunks/progress-ring-TnacbuYB.cjs');
+require('../chunks/base-B3me2y0o.cjs');
 require('../chunks/shared-BxK1D7EZ.cjs');
 
 

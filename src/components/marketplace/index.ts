@@ -76,7 +76,7 @@ export function searchPlugins(query: string, list: PluginListing[] = MARKETPLACE
     .map(([p]) => p);
 }
 
-const installed = new Map<string, string[]>();
+const installed = /*#__PURE__*/ new Map<string, string[]>();
 /** Names of installed plugins → their registered effects (9.0). */
 export function installedPlugins(): Record<string, string[]> {
   return Object.fromEntries(installed);

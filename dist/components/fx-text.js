@@ -1,5 +1,5 @@
-import { registerEffects } from '../chunks/registry-BKzyg1JV.js';
-import { A as srText } from '../chunks/base-BTev8qxg.js';
+import { registerEffects } from '../chunks/registry-CYojuxi5.js';
+import { A as srText } from '../chunks/base-zSGb8ujt.js';
 import { a as all, r as rand, f as fxLayer, s as spawn } from '../chunks/shared-CkKHWrtJ.js';
 
 /** Split `el`'s text into `aria-hidden` inline-block characters (idempotent). Returns them. */

@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { RETRO_FX } from '../../components/fx2/retro2';
 
 /** The effect definition. */
-export const effect: EffectDefinition = RETRO_FX.find((d) => d.name === 'crt-power')!;
+export const effect: EffectDefinition = /*#__PURE__*/ RETRO_FX.find((d) => d.name === 'crt-power')!;
 /** Register only this effect (idempotent). */
 export function registerCrtPower(): void {
   registerEffects([effect]);

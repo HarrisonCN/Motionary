@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { GEO_FX } from '../../components/fx2/geo';
 
 /** The effect definition. */
-export const effect: EffectDefinition = GEO_FX.find((d) => d.name === 'route-draw')!;
+export const effect: EffectDefinition = /*#__PURE__*/ GEO_FX.find((d) => d.name === 'route-draw')!;
 /** Register only this effect (idempotent). */
 export function registerRouteDraw(): void {
   registerEffects([effect]);

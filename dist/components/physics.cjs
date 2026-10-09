@@ -1,13 +1,13 @@
 'use strict';
 
-var base = require('../chunks/base-DBheNxJu.cjs');
-var spring = require('../chunks/spring-BlTQD2AV.cjs');
+var base = require('../chunks/base-B3me2y0o.cjs');
+var spring = require('../chunks/spring-DcM7pQgx.cjs');
 
 var css$2 = "usa-spring{display:inline-block;transform-origin:50% 70%}usa-spring[block]{display:block}usa-spring[effect=\"drop\"]{transform-origin:50% 100%}usa-spring[data-state=\"hidden\"]{opacity:0}usa-spring[trigger=\"click\"],usa-spring[trigger=\"hover\"]{cursor:pointer;-webkit-tap-highlight-color:transparent}";
 
 const SPRING_EFFECTS = ['bounce-in', 'pop', 'drop', 'jelly', 'rubber-band'];
 /** Entrance effects start hidden; attention effects (jelly, rubber-band) play on visible content. */
-const ENTRANCE = new Set(['bounce-in', 'pop', 'drop']);
+const ENTRANCE = /*#__PURE__*/ new Set(['bounce-in', 'pop', 'drop']);
 /** Keyframes of a spring effect (entrances use spring timing, attention effects fixed frames). */
 function springEffectKeyframes(effect, reduced = false) {
     if (reduced)

@@ -1,10 +1,10 @@
 'use strict';
 
-var widgets_lottieIcon = require('../chunks/lottie-icon-RYBpSuUE.cjs');
-require('../chunks/base-DBheNxJu.cjs');
+var widgets_lottieIcon = require('../chunks/lottie-icon-BfG8_n32.cjs');
+require('../chunks/base-B3me2y0o.cjs');
 require('./lottie.cjs');
 require('../components/fx-lottie.cjs');
-require('../chunks/registry-xQZnSqqV.cjs');
+require('../chunks/registry-BB1oO-lR.cjs');
 
 
 

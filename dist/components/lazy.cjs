@@ -36,7 +36,7 @@ const LOADERS = {
     packs: () => Promise.resolve().then(function () { return require('./packs.cjs'); }),
     fx: () => Promise.resolve().then(function () { return require('./fx.cjs'); }),
 };
-const TAG_TO_CAT = new Map();
+const TAG_TO_CAT = /*#__PURE__*/ new Map();
 for (const [cat, tags] of Object.entries(indexTags.COMPONENT_CATEGORIES))
     for (const t of tags)
         TAG_TO_CAT.set(t, cat);

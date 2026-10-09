@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-xQZnSqqV.cjs');
-require('../chunks/base-DBheNxJu.cjs');
+var registry = require('../chunks/registry-BB1oO-lR.cjs');
+require('../chunks/base-B3me2y0o.cjs');
 
 /** The built-in surface themes of the 8.6 theme system. */
 const SURFACE_THEMES = ['light', 'dark', 'neon', 'glass', 'neu'];

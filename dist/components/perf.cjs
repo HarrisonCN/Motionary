@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-DBheNxJu.cjs');
+var base = require('../chunks/base-B3me2y0o.cjs');
 var indexTags = require('../chunks/index-tags-hLIF2Clq.cjs');
 
 /**
@@ -80,7 +80,7 @@ for (const [cat, tags] of Object.entries(indexTags.COMPONENT_CATEGORIES))
         TAG_CATEGORY[t] = cat;
 /** The category of a default `<usa-*>` tag. */
 const categoryOf = (tag) => TAG_CATEGORY[tag];
-const loaded = new Set();
+const loaded = /*#__PURE__*/ new Set();
 /**
  * Add `<link rel="stylesheet" href="{base}components/{category}.css">` once.
  * `base` is the URL of the package's `dist/` folder.

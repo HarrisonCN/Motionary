@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { AI_FX } from '../../components/fx2/ai';
 
 /** The effect definition. */
-export const effect: EffectDefinition = AI_FX.find((d) => d.name === 'gen-skeleton')!;
+export const effect: EffectDefinition = /*#__PURE__*/ AI_FX.find((d) => d.name === 'gen-skeleton')!;
 /** Register only this effect (idempotent). */
 export function registerGenSkeleton(): void {
   registerEffects([effect]);

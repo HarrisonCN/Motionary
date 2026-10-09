@@ -651,6 +651,8 @@ Evergreen browsers since 2023: Chrome / Edge ≥ 111, Safari ≥ 16.4, Firefox �
 
 Four logical layers — Public API (HTML · React · Vue · Svelte · Solid · Angular) → Components · Motion Core · Runtime → Motion Intelligence & Tooling — with import rules enforced by `test/architecture.test.ts`: [docs/architecture.md](./docs/architecture.md).
 
+**Tree-shaking (11.1):** importing a module registers nothing and writes nothing to the page until you call `define*()` / `register*()` / `use()`; `sideEffects` lists only CSS, the UMD / IIFE builds, `presets/extended` and `components/lite`. Importing one export pulls in only its own code — see [docs/tree-shaking.md](./docs/tree-shaking.md).
+
 ## Roadmap
 
 One version per PR towards 7.0 — particles & fluids, text effects, light & materials, 3D scenes, morphing, transitions, weather, interactive physics: [docs/ROADMAP.md](./docs/ROADMAP.md).

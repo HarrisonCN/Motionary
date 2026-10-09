@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { VIDEO_FX } from '../../components/fx2/video';
 
 /** The effect definition. */
-export const effect: EffectDefinition = VIDEO_FX.find((d) => d.name === 'film-burn')!;
+export const effect: EffectDefinition = /*#__PURE__*/ VIDEO_FX.find((d) => d.name === 'film-burn')!;
 /** Register only this effect (idempotent). */
 export function registerFilmBurn(): void {
   registerEffects([effect]);

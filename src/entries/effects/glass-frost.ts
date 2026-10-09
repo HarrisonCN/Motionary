@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { SURFACE_FX } from '../../components/fx2/themefx';
 
 /** The effect definition. */
-export const effect: EffectDefinition = SURFACE_FX.find((d) => d.name === 'glass-frost')!;
+export const effect: EffectDefinition = /*#__PURE__*/ SURFACE_FX.find((d) => d.name === 'glass-frost')!;
 /** Register only this effect (idempotent). */
 export function registerGlassFrost(): void {
   registerEffects([effect]);

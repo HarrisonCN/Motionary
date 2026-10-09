@@ -1,5 +1,5 @@
-import { registerEffects } from '../chunks/registry-BKzyg1JV.js';
-import '../chunks/base-BTev8qxg.js';
+import { registerEffects } from '../chunks/registry-CYojuxi5.js';
+import '../chunks/base-zSGb8ujt.js';
 
 /** Scale factor of a two-finger pinch from start points (a1, a2) to current points (b1, b2) (8.7). */
 function pinchScale(a1, a2, b1, b2) {

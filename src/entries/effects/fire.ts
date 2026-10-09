@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { GPU_FX } from '../../components/fx2/gpu';
 
 /** The effect definition. */
-export const effect: EffectDefinition = GPU_FX.find((d) => d.name === 'fire')!;
+export const effect: EffectDefinition = /*#__PURE__*/ GPU_FX.find((d) => d.name === 'fire')!;
 /** Register only this effect (idempotent). */
 export function registerFire(): void {
   registerEffects([effect]);

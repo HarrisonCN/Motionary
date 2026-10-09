@@ -105,7 +105,7 @@ for (const [cat, tags] of Object.entries(COMPONENT_CATEGORIES)) for (const t of 
 /** The category of a default `<usa-*>` tag. */
 export const categoryOf = (tag: string): ComponentCategory | undefined => TAG_CATEGORY[tag];
 
-const loaded = new Set<string>();
+const loaded = /*#__PURE__*/ new Set<string>();
 /**
  * Add `<link rel="stylesheet" href="{base}components/{category}.css">` once.
  * `base` is the URL of the package's `dist/` folder.

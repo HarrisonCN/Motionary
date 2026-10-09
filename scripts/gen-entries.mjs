@@ -72,7 +72,7 @@ for (const e of entries) {
   } else {
     e.entry = `motionary/effects/${e.name}`;
     e.src = `src/entries/effects/${e.name}.ts`;
-    files[e.src] = `${HEAD}/** \`${e.entry}\` — the \`${e.name}\` effect alone (${e.pack} pack): \`import { ${e.register} } from '${e.entry}'; ${e.register}();\` then <usa-fx effect="${e.name}"> (defineFx from motionary/components/fx). */\nimport { registerEffects, type EffectDefinition } from '../../components/fx/registry';\nimport { ${e.array} } from '../../${e.module}';\n\n/** The effect definition. */\nexport const effect: EffectDefinition = ${e.array}.find((d) => d.name === '${e.name}')!;\n/** Register only this effect (idempotent). */\nexport function ${e.register}(): void {\n  registerEffects([effect]);\n}\nexport { ${e.register} as register };\n`;
+    files[e.src] = `${HEAD}/** \`${e.entry}\` — the \`${e.name}\` effect alone (${e.pack} pack): \`import { ${e.register} } from '${e.entry}'; ${e.register}();\` then <usa-fx effect="${e.name}"> (defineFx from motionary/components/fx). */\nimport { registerEffects, type EffectDefinition } from '../../components/fx/registry';\nimport { ${e.array} } from '../../${e.module}';\n\n/** The effect definition. */\nexport const effect: EffectDefinition = /*#__PURE__*/ ${e.array}.find((d) => d.name === '${e.name}')!;\n/** Register only this effect (idempotent). */\nexport function ${e.register}(): void {\n  registerEffects([effect]);\n}\nexport { ${e.register} as register };\n`;
   }
 }
 const list = entries.map(({ kind, name, tag, define, register, entry, src, module, types, dts, pack }) => ({ kind, name, entry, src, ...(tag ? { tag, define, types, dts } : { pack, register }), module }));

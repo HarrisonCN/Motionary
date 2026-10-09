@@ -1,8 +1,8 @@
 'use strict';
 
-var registry = require('../chunks/registry-xQZnSqqV.cjs');
+var registry = require('../chunks/registry-BB1oO-lR.cjs');
 var shared = require('../chunks/shared-jkgRH-Hx.cjs');
-require('../chunks/base-DBheNxJu.cjs');
+require('../chunks/base-B3me2y0o.cjs');
 
 const fade = (el, ctx) => ctx.animate(el, [{ opacity: 0 }, { opacity: 1 }], { duration: 250 });
 const pick = (el, sel) => Array.from(el.querySelectorAll(sel));

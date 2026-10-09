@@ -60,7 +60,7 @@ export interface BeatOptions {
 
 let actx: AudioContext | null = null;
 let current: AudioReactive | null = null;
-const mediaSources = new WeakMap<HTMLMediaElement, MediaElementAudioSourceNode>();
+const mediaSources = /*#__PURE__*/ new WeakMap<HTMLMediaElement, MediaElementAudioSourceNode>();
 
 /** The running analyser, if `enableAudio()` was called. */
 export const getAudio = (): AudioReactive | null => current;
@@ -176,7 +176,7 @@ export function createBeatDetector(o: BeatOptions = {}): (energy: number, now: n
 }
 
 type BeatListener = { detect: (e: number, t: number) => boolean; cb: (detail: { energy: number; time: number }) => void };
-const listeners = new Set<BeatListener>();
+const listeners = /*#__PURE__*/ new Set<BeatListener>();
 let raf = 0;
 
 function setVars(level: number, bass: number): void {

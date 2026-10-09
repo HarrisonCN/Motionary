@@ -35,7 +35,7 @@ const LOADERS: Record<ComponentCategory, () => Promise<Record<string, any>>> = {
   fx: () => import('./fx/index'),
 };
 
-const TAG_TO_CAT = new Map<string, ComponentCategory>();
+const TAG_TO_CAT = /*#__PURE__*/ new Map<string, ComponentCategory>();
 for (const [cat, tags] of Object.entries(COMPONENT_CATEGORIES)) for (const t of tags) TAG_TO_CAT.set(t, cat as ComponentCategory);
 const loaded = new Map<ComponentCategory, Promise<void>>();
 

@@ -4,7 +4,7 @@ import { registerEffects, type EffectDefinition } from '../../components/fx/regi
 import { SAFE_FX } from '../../components/fx2/safemotion';
 
 /** The effect definition. */
-export const effect: EffectDefinition = SAFE_FX.find((d) => d.name === 'color-pulse')!;
+export const effect: EffectDefinition = /*#__PURE__*/ SAFE_FX.find((d) => d.name === 'color-pulse')!;
 /** Register only this effect (idempotent). */
 export function registerColorPulse(): void {
   registerEffects([effect]);
