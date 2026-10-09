@@ -1321,6 +1321,61 @@ motion.bind(button, 'vhs-glitch', { trigger: 'click' });
 ```
 - Zero dependencies, ≈ 2 KB gzip; every effect pack is a plugin; WebGPU is the default GPU backend. `registerEffectPacks()` is removed → `registerAllPlugins()` (`npx usa-codemod-10 --write src`). See docs/core.md and docs/upgrading-10.md.
 
+### v10.1 Runtime (`motionary/runtime`) + AI manifest: `<usa-plugin-card>`, `<usa-install-button>` (`components/widgets`)
+
+`motionary/runtime` is Motionary's own zero-dependency animation runtime (ticker, tween + timeline, easing, module registry) with one tree-shakable module per feature / format — see [docs/runtime/](runtime/). Components that need a module carry a **Requires** badge and list their prerequisites below.
+
+```html
+<usa-plugin-card name="retro" title="Retro" version="1.2.0" author="Motionary" engine="^10.0.0" downloads="12400">
+  <p>Pixel, CRT, VHS and Y2K effects.</p>
+</usa-plugin-card>
+<usa-install-button package="motionary" managers="npm pnpm yarn bun cdn" cdn="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></usa-install-button>
+```
+
+| Element | Attributes | Methods / events |
+|---|---|---|
+| `<usa-plugin-card>` (Requires: motionary/runtime) | `name`, `title`, `version`, `author`, `engine` (semver), `downloads`, `integrity`, `src` | `toggle(open?)`, `verify()`, `compat()`; `usa:toggle`, `usa:verified`, `usa:runtime-missing` |
+| `<usa-install-button>` | `package`, `managers`, `cdn`, `dev`, `manager` | `command(manager)`, `copy()`; `usa:copy` |
+
+AI manifest: `motionary/manifest.json` (Pages: `/components.json`, `/llms.txt`, `/llms-full.txt`).
+
+<!-- prereqs:start -->
+## Prerequisites of runtime-powered components
+
+Generated from `showcase/catalog/prereqs.js`. Runtime modules: see [docs/runtime/](runtime/).
+
+### `<usa-plugin-card>` — Requires: motionary/runtime
+
+- **Install:** `npm i motionary`
+- **Import order & registration:** Import motionary/runtime and call use() once at start-up, before any runtime-powered component mounts. CDN: the IIFE registers itself (window.MotionaryRuntime).
+
+```js
+import { use } from 'motionary/runtime';
+import { definePluginCard } from 'motionary/components/widgets';
+
+use();
+definePluginCard(); // registers <usa-plugin-card> — after the prerequisites
+```
+
+- **CDN:**
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></script>
+<!-- then the component bundles -->
+<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>
+```
+
+- **Minimal example:**
+
+```html
+<usa-plugin-card name="retro" title="Retro" version="1.2.0" author="Motionary" engine="^10.0.0" downloads="12400">
+  <p>Pixel, CRT, VHS and Y2K effects.</p>
+</usa-plugin-card>
+```
+
+<!-- prereqs:end -->
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.

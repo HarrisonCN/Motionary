@@ -1,0 +1,22 @@
+/* Motionary test fixture (MIT, written for this repo): a real-world style sheet with
+   prefixed rules, selector lists, per-frame timing functions, transforms and colours. */
+.btn { transition: transform .2s; }
+@-webkit-keyframes heartbeat { 0%, 28%, 70% { -webkit-transform: scale(1); transform: scale(1) } 14%, 42% { transform: scale(1.3) } }
+@keyframes heartbeat {
+  0%, 28%, 70% { transform: scale(1); }
+  14%, 42% { transform: scale(1.3); }
+}
+@keyframes slide-in-up {
+  from { opacity: 0; transform: translate3d(0, 40px, 0); animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
+  60% { opacity: 1 !important; }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes "glow" {
+  /* colours + custom properties */
+  0% { background-color: #0af; --spread: 0px; }
+  50% { background-color: rgb(255 0 128 / 0.5); --spread: 12px; animation-timing-function: steps(4, end); }
+  100% { background-color: #00aaff; --spread: 0px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes wobble { 0% { transform: translateX(0) rotate(0deg) } 25% { transform: translateX(-12px) rotate(-5deg) } 100% { transform: none } }
+}

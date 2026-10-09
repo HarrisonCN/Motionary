@@ -36,6 +36,10 @@ jobs:
           cp -r showcase demo dist _site/
           rm -f _site/dist/*.map _site/dist/chunks/*.map
           touch _site/.nojekyll
+          # 10.1: AI-readable manifest + llms.txt at the site root
+          cp dist/manifest.json _site/components.json
+          cp dist/manifest.schema.json _site/components.schema.json
+          cp dist/llms.txt dist/llms-full.txt _site/
           cat > _site/index.html <<'HTML'
           <!doctype html>
           <meta charset="utf-8">

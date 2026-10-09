@@ -10,6 +10,8 @@
 import { C } from './catalog/make.js';
 import { EXTENSIONS } from './catalog/index.js';
 
+import { prereqFor } from './catalog/prereqs.js';
+
 export const VERSION_RANGE = '6';
 
 /** Component categories, in display order (ids match the subpath exports). */
@@ -348,6 +350,9 @@ export function componentSnippets(item) {
     else if (v !== '') markup = markup.replace(new RegExp(`<${item.tag}\\b`), `<${item.tag} ${k}="${v}"`);
   }
   const html = stripScripts(markup);
+  // 10.1: runtime-powered components — prerequisites first (install / import + register / CDN)
+  const pq = item.requires?.length ? prereqFor(item) : null;
+  const pqEsm = pq ? pq.importAndRegister.split('\n').filter((l) => !l.includes(item.define + '(') && !l.includes(`{ ${item.define} }`)).join('\n').trim() + '\n' : '';
   // 5.1: effect-pack cards also register the packs (motionary/components/effects)
   let pre = item.pack && !item.entry ? `import { registerAllEffects } from 'motionary/components/effects';\n` : '';
   let preCall = item.pack && !item.entry ? 'registerAllEffects();\n' : '';
@@ -360,10 +365,10 @@ export function componentSnippets(item) {
   const six = item.reg || item.entry === 'widgets';
   const scripts = six ? `<script src="${cdn}"></script>\n<!-- 6.x widgets + effect packs -->\n<script src="${cdn.replace('components.umd.js', 'widgets.umd.js')}"></script>` : `<script src="${cdn}"></script>`;
   return {
-    html: `<!-- registers every <usa-*> element and effect -->\n${scripts}\n\n${markup}`,
-    esm: `${pre}import { ${item.define} } from '${sub}';\n\n${preCall}${item.define}(); // registers <${item.tag}>\n\n/* then use it in your HTML:\n${html}\n*/`,
-    react: `${pre}import { ${item.define} } from '${sub}';\n\n${preCall}${item.define}();\n\nexport function Demo() {\n  return (\n    <>\n${indent(toJsx(markup), 6)}\n    </>\n  );\n}`,
-    vue: `<!-- vite.config: vue({ template: { compilerOptions: { isCustomElement: (t) => t.startsWith('usa-') } } }) -->\n<script setup>\n${pre}import { ${item.define} } from '${sub}';\n${preCall}${item.define}();\n</script>\n\n<template>\n${indent(html, 2)}\n</template>`,
+    html: pq ? `<!-- ${pq.badge} — ${pq.install} -->\n${pq.cdn}\n\n${markup}` : `<!-- registers every <usa-*> element and effect -->\n${scripts}\n\n${markup}`,
+    esm: `${pqEsm}${pre}import { ${item.define} } from '${sub}';\n\n${preCall}${item.define}(); // registers <${item.tag}>\n\n/* then use it in your HTML:\n${html}\n*/`,
+    react: `${pqEsm}${pre}import { ${item.define} } from '${sub}';\n\n${preCall}${item.define}();\n\nexport function Demo() {\n  return (\n    <>\n${indent(toJsx(markup), 6)}\n    </>\n  );\n}`,
+    vue: `<!-- vite.config: vue({ template: { compilerOptions: { isCustomElement: (t) => t.startsWith('usa-') } } }) -->\n<script setup>\n${pqEsm}${pre}import { ${item.define} } from '${sub}';\n${preCall}${item.define}();\n</script>\n\n<template>\n${indent(html, 2)}\n</template>`,
     desktop: desktopSnippet(item, sub),
   };
 }

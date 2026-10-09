@@ -23,11 +23,14 @@ const entries = {
   'motionary/components/click': ['defineClickComponents', 'defineClick', 'defineButton', 'defineIconMorph', 'defineLike', 'defineHold', 'defineDoubleTap', 'defineCheckbox', 'haptic', 'morphPath', 'BUTTON_DEFORMS'],
   'motionary/engine': ['motionClock', 'createTimeline', 'resolvePosition', 'hydrateMotion', 'ssrHead', 'HYDRATION_CSS', 'HYDRATE_PRESETS', 'setClock', 'getClock'],
   'motionary/dsl': ['parseMotion', 'serializeMotion', 'motion', 'bindMotion', 'applyMotion', 'createComponent'],
-  'motionary/marketplace': ['MARKETPLACE', 'MARKETPLACE_FORMAT', 'searchPlugins', 'installPlugin', 'installedPlugins', 'fetchMarketplace', 'packManifest', 'validateManifest', 'loadEffectPack', 'EFFECT_PACK_FORMAT'],
+  'motionary/marketplace': ['pluginIntegrity', 'verifyPlugin', 'satisfies', 'checkCompat', 'MARKETPLACE', 'MARKETPLACE_FORMAT', 'searchPlugins', 'installPlugin', 'installedPlugins', 'fetchMarketplace', 'packManifest', 'validateManifest', 'loadEffectPack', 'EFFECT_PACK_FORMAT'],
   'motionary/design': ['figmaToMotion', 'framerComponent', 'motionToCss', 'easingPoints'],
   'motionary/native': ['toReactNative', 'toFlutter', 'nativeEasing', 'nativeTokens', 'entranceFrom'],
   'motionary/core': ['createMotion', 'PRESETS', 'preferredBackend', 'VERSION'],
   'motionary/plugins': ['ALL_PLUGINS', 'retro', 'cinema', 'paper'],
+  'motionary/runtime': ['use', 'requireModule', 'hasModule', 'getTicker', 'tween', 'timeline', 'Tween', 'Timeline', 'EASES', 'parseEase', 'cubicBezier', 'steps', 'RuntimeModuleError', 'RUNTIME_VERSION'],
+  'motionary/runtime/format-css': ['formatCss', 'parseKeyframes', 'fromCssRule', 'fromWaapi', 'toWaapi', 'playKeyframes'],
+  'motionary/runtime/format-motion': ['formatMotion', 'fromMotion', 'playMotion', 'springEase', 'motionEase'],
   'motionary/components/ui': ['defineUiComponents', 'defineTabs', 'defineDrawer', 'defineBottomSheet', 'definePullRefresh', 'defineFab', 'defineNavbar', 'defineSlider', 'definePopover', 'defineBadge', 'defineAvatarStack', 'VARIANTS', 'setVariant'],
   'motionary/components/page': ['definePageComponents', 'defineCursor', 'defineFullpage', 'defineLoadingBar', 'defineBackToTop', 'defineAmbient', 'defineSplash', 'defineAutoSkeleton', 'defineMotionSwitch', 'pageTransition', 'enableMpaTransitions', 'themeTransition', 'smoothScroll', 'scrollToTarget', 'loadingBar', 'setMotionIntensity'],
   'motionary/components/react': ['createUsaComponents', 'USA_TAGS', 'eventName'],
@@ -52,6 +55,16 @@ assert.equal(typeof require('motionary').default.init, 'function', 'default inst
 // Browser bundles ship at their CDN paths (served by file path, not through `exports`)
 for (const f of ['dist/index.umd.js', 'dist/presets-extended.umd.js', 'dist/element.umd.js', 'dist/components.umd.js', 'dist/components.css']) assert.ok(existsSync(new URL(`../${f}`, import.meta.url)), `missing ${f}`);
 require('motionary/package.json');
+// 10.1: runtime CDN builds + AI manifest
+for (const f of ['dist/runtime.iife.js', 'dist/runtime/format-css.iife.js', 'dist/runtime/format-motion.iife.js', 'dist/llms.txt', 'dist/llms-full.txt', 'dist/manifest.schema.json']) assert.ok(existsSync(new URL(`../${f}`, import.meta.url)), f);
+assert.equal(require('motionary/manifest.json').format, 'motionary/components', 'manifest.json');
+// 10.1: motionary/runtime is SSR-safe — import, use() and tween in plain Node (no window / document)
+const rtm = await import('motionary/runtime');
+rtm.use();
+const so = { v: 0 };
+rtm.tween(so, { to: { v: 1 }, duration: 10, paused: true }).seek(10);
+assert.equal(so.v, 1, 'runtime tween in Node');
+assert.equal(typeof require('motionary/runtime/format-css').parseKeyframes, 'function');
 // Component stylesheets resolve through `exports`
 for (const css of ['components.css', 'components/text.css']) assert.ok(require.resolve(`motionary/${css}`).endsWith(`dist/${css}`), css);
 // The component entries are SSR-safe: importing them in Node defines nothing and never throws

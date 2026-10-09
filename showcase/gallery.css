@@ -369,3 +369,12 @@ usa-carousel[data-effect="cards"].demo-carousel .demo-slide{margin:0 18%}
 .demo-lift{padding:12px 16px;border:0;border-radius:12px;background:#fff;color:#0f172a;font:700 14px/1 system-ui,sans-serif;box-shadow:0 8px 20px -12px rgba(15,23,42,.6);cursor:pointer}
 .demo-mspec{width:min(360px,100%)}
 .demo-native{width:min(420px,100%)}.demo-nrow{padding:10px;border-radius:10px;background:#fff;box-shadow:0 4px 10px -6px rgba(15,23,42,.4);color:#0f172a;font:600 12px/1 system-ui,sans-serif}
+.demo-plugin-card{width:min(300px,100%)}.demo-install{width:min(320px,100%)}
+
+/* 10.1: prerequisites of runtime-powered components */
+.ccard-prereq{margin:8px 0 0;border:1px solid var(--line,#e2e8f0);border-radius:10px;font-size:.8rem}
+.ccard-prereq summary{cursor:pointer;padding:6px 10px;font-weight:700;color:#4338ca}
+.ccard-prereq dl{margin:0;padding:0 10px 8px}
+.ccard-prereq dt{margin-top:6px;font-weight:600}
+.ccard-prereq dd{margin:2px 0 0}
+.ccard-prereq pre{margin:0;padding:6px 8px;max-width:100%;overflow:auto;border-radius:6px;background:#0f172a;color:#e2e8f0;font:11px/1.45 ui-monospace,monospace;white-space:pre-wrap;overflow-wrap:anywhere}

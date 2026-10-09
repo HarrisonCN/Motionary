@@ -3,7 +3,8 @@ import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
 import { dts } from 'rollup-plugin-dts';
 import { readFileSync, readdirSync } from 'node:fs';
-import { CATEGORIES, COMPONENT_ENTRIES } from './scripts/categories.mjs';
+import { CATEGORIES, COMPONENT_ENTRIES, RUNTIME_ENTRIES } from './scripts/categories.mjs';
+import { dirname, resolve as pathResolve } from 'node:path';
 
 // `import css from './x.css?raw'` → the minified stylesheet as a string
 // (Vite/Vitest support `?raw` natively; this mirrors it for the build).
@@ -73,7 +74,21 @@ const entries = {
   components: 'src/components/index.ts',
   ...Object.fromEntries(CATEGORIES.map((c) => [`components/${c}`, `src/components/${c}/index.ts`])),
   ...Object.fromEntries(Object.entries(COMPONENT_ENTRIES).filter(([n]) => n !== 'lite').map(([n, src]) => [`components/${n}`, `src/components/${src}.ts`])),
+  ...Object.fromEntries(Object.entries(RUNTIME_ENTRIES).map(([n, src]) => [n, `src/runtime/${src}.ts`])),
 };
+
+// 10.1: CDN builds of motionary/runtime. runtime.iife.js = core (window.MotionaryRuntime, registers itself);
+// runtime/<module>.iife.js reads the core from window.MotionaryRuntime (load it first) and registers the module.
+const RUNTIME_CORE_FILES = /[\\/]src[\\/]runtime[\\/](index|registry|ticker|tween|ease)(\.ts)?$/;
+const runtimeIife = () => [
+  { input: 'src/runtime/iife/core.ts', output: { file: 'dist/runtime.iife.js', format: 'iife', name: 'MotionaryRuntime', extend: true, exports: 'named', sourcemap: true, plugins: [terser()] }, plugins: [resolve(), ts()] },
+  ...Object.values(RUNTIME_ENTRIES).filter((m) => m !== 'index').map((m) => ({
+    input: `src/runtime/iife/${m}.ts`,
+    external: (id, importer) => !!importer && RUNTIME_CORE_FILES.test(id.startsWith('.') ? pathResolve(dirname(importer), id) : id),
+    output: { file: `dist/runtime/${m}.iife.js`, format: 'iife', name: 'MotionaryRuntime', extend: true, exports: 'named', globals: () => 'MotionaryRuntime', sourcemap: true, plugins: [terser()] },
+    plugins: [resolve(), ts()],
+  })),
+];
 
 // `?raw` imports of light-DOM CSS become '' (the lite build loads dist/components/<cat>.css
 // on demand instead); shadow-DOM styles stay inlined.
@@ -91,6 +106,7 @@ const cssEmpty = () => ({
 const ts = () => typescript({ tsconfig: './tsconfig.json', declaration: false, declarationDir: undefined });
 
 export default [
+  ...runtimeIife(),
   // ESM first ("type": "module": .js = ESM), plus CommonJS (.cjs) for require()
   {
     input: entries,

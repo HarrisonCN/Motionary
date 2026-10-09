@@ -18,6 +18,8 @@ import { loadEffectPack } from '../fx2/manifest';
 
 export { EFFECT_PACK_FORMAT, packManifest, validateManifest, loadEffectPack } from '../fx2/manifest';
 export type { EffectPackManifest } from '../fx2/manifest';
+export { pluginIntegrity, verifyPlugin, satisfies, checkCompat } from './sign';
+export type { CompatResult } from './sign';
 
 export const MARKETPLACE_FORMAT = 'motionary/marketplace';
 export interface PluginListing {

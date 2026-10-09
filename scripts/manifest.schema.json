@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://harrisoncn.github.io/Motionary/components.schema.json",
+  "title": "Motionary component manifest",
+  "description": "Machine-readable list of every Motionary component (tags, attributes, events, slots, import paths, CDN URLs, minimal examples, prerequisites) and every motionary/runtime module. Generated at build time from the source and the gallery catalog.",
+  "type": "object",
+  "required": ["format", "schemaVersion", "package", "version", "cdn", "runtimeModules", "components"],
+  "properties": {
+    "format": { "const": "motionary/components" },
+    "schemaVersion": { "type": "integer", "minimum": 1 },
+    "package": { "type": "string" },
+    "version": { "type": "string" },
+    "homepage": { "type": "string" },
+    "llms": { "type": "string" },
+    "cdn": {
+      "type": "object",
+      "properties": { "components": { "type": "string" }, "widgets": { "type": "string" }, "runtime": { "type": "string" } },
+      "required": ["components", "widgets", "runtime"]
+    },
+    "runtimeModules": { "type": "array", "items": { "$ref": "#/$defs/prerequisite" } },
+    "components": { "type": "array", "items": { "$ref": "#/$defs/component" } }
+  },
+  "$defs": {
+    "prerequisite": {
+      "type": "object",
+      "required": ["id", "kind", "label", "install", "importPath", "import", "register", "cdn", "order", "docs"],
+      "properties": {
+        "id": { "type": "string" },
+        "kind": { "enum": ["runtime", "peer"] },
+        "label": { "type": "string" },
+        "title": { "type": "string" },
+        "summary": { "type": "string" },
+        "install": { "type": "string", "description": "Exact install command." },
+        "importPath": { "type": "string" },
+        "import": { "type": "string" },
+        "register": { "type": "string", "description": "Registration code, run before the component mounts." },
+        "cdn": { "type": "string", "description": "Copyable <script> tags (version-pinned)." },
+        "cdnEsm": { "type": "string" },
+        "order": { "type": "string", "description": "Import order and registration steps in words." },
+        "docs": { "type": "string" },
+        "budget": { "type": "integer", "description": "gzip size budget in bytes (CI-enforced)." },
+        "exports": { "type": "array", "items": { "type": "string" } },
+        "compat": { "type": "array", "items": { "type": "array", "items": { "type": "string" } } },
+        "example": { "type": "string" }
+      }
+    },
+    "component": {
+      "type": "object",
+      "required": ["id", "tag", "title", "description", "category", "import", "cdn", "attributes", "events", "slots", "example", "requires"],
+      "properties": {
+        "id": { "type": "string" },
+        "tag": { "type": "string", "pattern": "^[a-z][a-z0-9]*-[a-z0-9-]+$" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string" },
+        "since": { "type": "string" },
+        "keywords": { "type": "array", "items": { "type": "string" } },
+        "import": {
+          "type": "object",
+          "required": ["path", "define"],
+          "properties": { "path": { "type": "string" }, "define": { "type": "string" }, "register": { "type": "string" } }
+        },
+        "cdn": { "type": "string" },
+        "attributes": { "type": "array", "items": { "type": "string" } },
+        "events": { "type": "array", "items": { "type": "string" } },
+        "slots": { "type": "array", "items": { "type": "string" } },
+        "methods": { "type": "array", "items": { "type": "string" } },
+        "example": { "type": "string" },
+        "requires": { "type": "array", "items": { "type": "string" }, "description": "Prerequisite ids (runtimeModules[].id or peer ids)." },
+        "prerequisites": {
+          "type": ["object", "null"],
+          "properties": {
+            "badge": { "type": "string" },
+            "install": { "type": "string" },
+            "importAndRegister": { "type": "string" },
+            "order": { "type": "string" },
+            "cdn": { "type": "string" },
+            "example": { "type": "string" }
+          }
+        },
+        "source": { "type": "string" }
+      }
+    }
+  }
+}

@@ -106,6 +106,8 @@ import { definePerfMonitor, type UsaPerfMonitorElement, type PerfStats } from '.
 import { defineWorkerCanvas, WORKER_SCENES, type UsaWorkerCanvasElement } from './worker-canvas';
 import { defineMotionSpec, type UsaMotionSpecElement } from './motion-spec';
 import { defineNativePreview, type UsaNativePreviewElement } from './native-preview';
+import { definePluginCard, type UsaPluginCardElement } from './plugin-card';
+import { defineInstallButton, type UsaInstallButtonElement } from './install-button';
 
 export { defineCarousel, defineTabBar, defineDisclosure, defineStories, CAROUSEL_EFFECTS, TAB_INDICATORS };
 export type { UsaCarouselElement, UsaTabBarElement, UsaDisclosureElement, UsaStoriesElement };
@@ -214,6 +216,9 @@ export type { UsaMotionSpecElement };
 export { defineNativePreview };
 export type { UsaNativePreviewElement };
 
+export { definePluginCard, defineInstallButton };
+export type { UsaPluginCardElement, UsaInstallButtonElement };
+
 /** The widgets by release (tag → define function). */
 export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElementConstructor | undefined>> = {
   '6.2': { 'usa-carousel': defineCarousel, 'usa-tab-bar': defineTabBar, 'usa-disclosure': defineDisclosure, 'usa-stories': defineStories },
@@ -252,6 +257,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '9.6': { 'usa-perf-monitor': definePerfMonitor, 'usa-worker-canvas': defineWorkerCanvas },
   '9.7': { 'usa-motion-spec': defineMotionSpec },
   '9.8': { 'usa-native-preview': defineNativePreview },
+  '10.1': { 'usa-plugin-card': definePluginCard, 'usa-install-button': defineInstallButton },
 };
 
 /** Every widget tag, in release order. */
@@ -362,5 +368,7 @@ declare global {
     'usa-worker-canvas': UsaWorkerCanvasElement;
     'usa-motion-spec': UsaMotionSpecElement;
     'usa-native-preview': UsaNativePreviewElement;
+    'usa-plugin-card': UsaPluginCardElement;
+    'usa-install-button': UsaInstallButtonElement;
   }
 }
