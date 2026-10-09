@@ -45,6 +45,8 @@ import { SURFACE_FX, registerSurfacePack } from './fx-surface.js';
 export { SURFACE_THEMES, applySurfaceTheme } from './fx-surface.js';
 import { GESTURE3_FX, registerGesture3Pack } from './fx-gesture.js';
 export { orientationToTilt, pinchAngle, pinchScale } from './fx-gesture.js';
+import { SPATIAL_FX, registerSpatialPack } from './fx-spatial.js';
+export { xrSupport, yawToOffset } from './fx-spatial.js';
 import '../chunks/registry-CnO7ZVPK.js';
 import '../chunks/base-CLuqlLfG.js';
 import '../chunks/generative-2LhxG5BJ.js';
@@ -77,6 +79,7 @@ const EFFECT_PACKS = {
     paper: PAPER_FX,
     surface: SURFACE_FX,
     gesture3: GESTURE3_FX,
+    spatial: SPATIAL_FX,
 };
 /** Register every 6.x effect pack (idempotent). */
 function registerEffectPacks() {
@@ -104,7 +107,8 @@ function registerEffectPacks() {
     registerPaperPack();
     registerSurfacePack();
     registerGesture3Pack();
+    registerSpatialPack();
 }
 
-export { AI_FX, CHART_FX, CYBER_FX, DEPTH3_FX, EFFECT_PACKS, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GEO_FX, GESTURE3_FX, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, ORGANIC_FX, PAPER_FX, PHYSICS2_FX, RETRO_FX, SHOP_FX, SOCIAL_FX, SURFACE_FX, TEXT3_FX, TRANSITIONS2_FX, WEATHER_FX, register3dPack, registerAiPack, registerChartPack, registerCyberPack, registerEffectPacks, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGeoPack, registerGesture3Pack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerOrganicPack, registerPaperPack, registerPhysicsPack, registerRetroPack, registerShopPack, registerSocialPack, registerSurfacePack, registerTextPack, registerTransitionsPack, registerWeatherPack };
+export { AI_FX, CHART_FX, CYBER_FX, DEPTH3_FX, EFFECT_PACKS, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GEO_FX, GESTURE3_FX, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, ORGANIC_FX, PAPER_FX, PHYSICS2_FX, RETRO_FX, SHOP_FX, SOCIAL_FX, SPATIAL_FX, SURFACE_FX, TEXT3_FX, TRANSITIONS2_FX, WEATHER_FX, register3dPack, registerAiPack, registerChartPack, registerCyberPack, registerEffectPacks, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGeoPack, registerGesture3Pack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerOrganicPack, registerPaperPack, registerPhysicsPack, registerRetroPack, registerShopPack, registerSocialPack, registerSpatialPack, registerSurfacePack, registerTextPack, registerTransitionsPack, registerWeatherPack };
 //# sourceMappingURL=fx2.js.map

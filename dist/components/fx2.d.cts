@@ -757,6 +757,30 @@ declare const GESTURE3_FX: EffectDefinition[];
 declare function registerGesture3Pack(): void;
 
 /**
+ * 8.8 — XR / spatial pack (`motionary/fx/spatial`, also `motionary/components/fx-spatial`):
+ *
+ * - `portal-open` (enter) — the element opens like a portal: a ring of
+ *   light expands and the content comes through from depth (`color`).
+ * - `orbit-in` (enter) — the element swings in around the vertical axis
+ *   like a spatial window placed beside you (`from` left|right).
+ * - `spatial-float` (loop) — a gentle floating in depth with a breathing
+ *   shadow; the cleanup stops it.
+ * - `depth-pop` (attention) — the element pops forward towards the viewer
+ *   and settles back.
+ *
+ * Reduced motion: portal-open / orbit-in just show, spatial-float is
+ * skipped, depth-pop does nothing.
+ */
+
+/** Horizontal background offset (px) of a 360° panorama `width` px wide for a `yaw` in degrees (wraps) (8.8). */
+declare function yawToOffset(yaw: number, width: number): number;
+/** Which WebXR session the browser offers: `'immersive-vr'`, `'immersive-ar'`, `'inline'` or `'none'` (8.8). */
+declare function xrSupport(): Promise<'immersive-vr' | 'immersive-ar' | 'inline' | 'none'>;
+declare const SPATIAL_FX: EffectDefinition[];
+/** Register portal-open, orbit-in, spatial-float and depth-pop (8.8). */
+declare function registerSpatialPack(): void;
+
+/**
  * 5.5 — generative backgrounds on Canvas 2D, registered through
  * `registerEffect()` (kind `background`): `flow-field`, `voronoi`,
  * `mesh-gradient`, `starfield`, `metaballs`, `contours`.
@@ -865,5 +889,5 @@ declare const EFFECT_PACKS: Record<string, EffectDefinition[]>;
 /** Register every 6.x effect pack (idempotent). */
 declare function registerEffectPacks(): void;
 
-export { AI_FX, CHART_FX, CYBER_FX, DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GEO_FX, GESTURE3_FX, GLSL_HEAD, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, ORGANIC_FX, PAPER_FX, PHYSICS2_FX, RETRO_FX, SHOP_FX, SOCIAL_FX, SURFACE_FX, SURFACE_THEMES, TEXT3_FX, TRANSITIONS2_FX, VerletWorld, WEATHER_FX, WGSL_HEAD, applySurfaceTheme, arcPath, blobRadius, crossDocumentTransitions, decodeFrame, fanAngles, fieldFallback, glslToWgsl, loadEffectPack, musicSample, orientationToTilt, packManifest, pageTransition, paperRandom, parseFigure, pinchAngle, pinchScale, pixelSteps, pointsToPath, register3dPack, registerAiPack, registerChartPack, registerCyberPack, registerEffectPacks, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGeoPack, registerGesture3Pack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerOrganicPack, registerPaperPack, registerPhysicsPack, registerRetroPack, registerShopPack, registerSocialPack, registerSurfacePack, registerTextPack, registerTransitionsPack, registerWeatherPack, roughLine, routeLength, samplePath, shaderBackground, shakeFrames, skyAt, sparkVectors, splitChars, splitWords, supportsWebGL2, supportsWebGPU, syntheticSample, throwPath, trackPointer, validateManifest, webgpuBackground, wgslModule };
+export { AI_FX, CHART_FX, CYBER_FX, DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GEO_FX, GESTURE3_FX, GLSL_HEAD, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, ORGANIC_FX, PAPER_FX, PHYSICS2_FX, RETRO_FX, SHOP_FX, SOCIAL_FX, SPATIAL_FX, SURFACE_FX, SURFACE_THEMES, TEXT3_FX, TRANSITIONS2_FX, VerletWorld, WEATHER_FX, WGSL_HEAD, applySurfaceTheme, arcPath, blobRadius, crossDocumentTransitions, decodeFrame, fanAngles, fieldFallback, glslToWgsl, loadEffectPack, musicSample, orientationToTilt, packManifest, pageTransition, paperRandom, parseFigure, pinchAngle, pinchScale, pixelSteps, pointsToPath, register3dPack, registerAiPack, registerChartPack, registerCyberPack, registerEffectPacks, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGeoPack, registerGesture3Pack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerOrganicPack, registerPaperPack, registerPhysicsPack, registerRetroPack, registerShopPack, registerSocialPack, registerSpatialPack, registerSurfacePack, registerTextPack, registerTransitionsPack, registerWeatherPack, roughLine, routeLength, samplePath, shaderBackground, shakeFrames, skyAt, sparkVectors, splitChars, splitWords, supportsWebGL2, supportsWebGPU, syntheticSample, throwPath, trackPointer, validateManifest, webgpuBackground, wgslModule, xrSupport, yawToOffset };
 export type { EffectPackManifest, ShaderSpec };

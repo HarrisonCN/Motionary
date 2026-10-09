@@ -25,6 +25,7 @@ var components_fxCyber = require('./fx-cyber.cjs');
 var components_fxPaper = require('./fx-paper.cjs');
 var components_fxSurface = require('./fx-surface.cjs');
 var components_fxGesture = require('./fx-gesture.cjs');
+var components_fxSpatial = require('./fx-spatial.cjs');
 require('../chunks/registry-BVklOepd.cjs');
 require('../chunks/base-DoRUZBy-.cjs');
 require('../chunks/generative-BHIj-NU0.cjs');
@@ -57,6 +58,7 @@ const EFFECT_PACKS = {
     paper: components_fxPaper.PAPER_FX,
     surface: components_fxSurface.SURFACE_FX,
     gesture3: components_fxGesture.GESTURE3_FX,
+    spatial: components_fxSpatial.SPATIAL_FX,
 };
 /** Register every 6.x effect pack (idempotent). */
 function registerEffectPacks() {
@@ -84,6 +86,7 @@ function registerEffectPacks() {
     components_fxPaper.registerPaperPack();
     components_fxSurface.registerSurfacePack();
     components_fxGesture.registerGesture3Pack();
+    components_fxSpatial.registerSpatialPack();
 }
 
 exports.EFFECT_PACK_FORMAT = components_marketplace.EFFECT_PACK_FORMAT;
@@ -175,6 +178,10 @@ exports.orientationToTilt = components_fxGesture.orientationToTilt;
 exports.pinchAngle = components_fxGesture.pinchAngle;
 exports.pinchScale = components_fxGesture.pinchScale;
 exports.registerGesture3Pack = components_fxGesture.registerGesture3Pack;
+exports.SPATIAL_FX = components_fxSpatial.SPATIAL_FX;
+exports.registerSpatialPack = components_fxSpatial.registerSpatialPack;
+exports.xrSupport = components_fxSpatial.xrSupport;
+exports.yawToOffset = components_fxSpatial.yawToOffset;
 exports.EFFECT_PACKS = EFFECT_PACKS;
 exports.registerEffectPacks = registerEffectPacks;
 //# sourceMappingURL=fx2.cjs.map
