@@ -29,6 +29,7 @@ var components_fxSpatial = require('./fx-spatial.cjs');
 var components_fxCinema = require('./fx-cinema.cjs');
 var components_fxLottie = require('./fx-lottie.cjs');
 var components_fxGenart = require('./fx-genart.cjs');
+var components_fxVideo = require('./fx-video.cjs');
 require('../chunks/registry-BVklOepd.cjs');
 require('../chunks/base-DoRUZBy-.cjs');
 require('../chunks/generative-BHIj-NU0.cjs');
@@ -65,6 +66,7 @@ const EFFECT_PACKS = {
     cinema: components_fxCinema.CINEMA_FX,
     lottie: components_fxLottie.LOTTIE_FX,
     genart: components_fxGenart.GENART_FX,
+    video: components_fxVideo.VIDEO_FX,
 };
 /** Register every 6.x effect pack (idempotent). */
 function registerEffectPacks() {
@@ -96,6 +98,7 @@ function registerEffectPacks() {
     components_fxCinema.registerCinemaPack();
     components_fxLottie.registerLottiePack();
     components_fxGenart.registerGenArtPack();
+    components_fxVideo.registerVideoPack();
 }
 
 exports.EFFECT_PACK_FORMAT = manifest.EFFECT_PACK_FORMAT;
@@ -205,6 +208,11 @@ exports.PALETTES = components_fxGenart.PALETTES;
 exports.meshGradient = components_fxGenart.meshGradient;
 exports.registerGenArtPack = components_fxGenart.registerGenArtPack;
 exports.seededRandom = components_fxGenart.seededRandom;
+exports.VIDEO_FX = components_fxVideo.VIDEO_FX;
+exports.frameSequence = components_fxVideo.frameSequence;
+exports.registerVideoPack = components_fxVideo.registerVideoPack;
+exports.scrollProgress = components_fxVideo.scrollProgress;
+exports.scrubVideo = components_fxVideo.scrubVideo;
 exports.EFFECT_PACKS = EFFECT_PACKS;
 exports.registerEffectPacks = registerEffectPacks;
 //# sourceMappingURL=fx2.cjs.map
