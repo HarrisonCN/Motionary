@@ -1638,6 +1638,13 @@ interface UsaMotionElement extends UsaElement {
 }
 declare function defineMotion(tag?: string): CustomElementConstructor | undefined;
 
+interface CompatResult {
+    ok: boolean;
+    range: string;
+    version: string;
+    message: string;
+}
+
 interface PluginListing {
     name: string;
     title: string;
@@ -1978,6 +1985,37 @@ interface UsaNativePreviewElement extends UsaElement {
 declare function defineNativePreview(tag?: string): CustomElementConstructor | undefined;
 
 /**
+ * `<usa-plugin-card name="retro" title="Retro" version="1.2.0" author="Motionary" engine="^10.0.0" downloads="12400">`
+ * (10.1) — a plugin detail card: version + Motionary compatibility badge
+ * (`engine` semver range vs the running version), signature badge
+ * (`integrity` checked against the code at `src` with Web Crypto), a
+ * download counter and an expandable details panel, both animated with
+ * **`motionary/runtime`** (requires the runtime core: `use()` first).
+ * Children become the details. `toggle(open?)`, `verify()`, `compat()`;
+ * `usa:toggle`, `usa:verified`, `usa:runtime-missing`.
+ */
+interface UsaPluginCardElement extends UsaElement {
+    toggle(open?: boolean): void;
+    verify(): Promise<boolean | null>;
+    compat(): CompatResult;
+}
+declare function definePluginCard(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<usa-install-button package="motionary" managers="npm pnpm yarn bun cdn" cdn="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js">`
+ * (10.1) — one-click install snippet: package-manager tabs (npm, pnpm, yarn,
+ * bun, CDN), the command in a code row and a copy button that confirms with
+ * a check. `package`, `dev` (dev dependency), `managers`, `cdn` (URL for the
+ * CDN tab; `<script>` for .js URLs, `@import` for .css), `manager` (initial
+ * tab). `command(manager)`, `copy()`; `usa:copy` `{ text, manager }`.
+ */
+interface UsaInstallButtonElement extends UsaElement {
+    command(manager?: string): string;
+    copy(): Promise<string>;
+}
+declare function defineInstallButton(tag?: string): CustomElementConstructor | undefined;
+
+/**
  * motionary/components/widgets — the 6.x animated UI widgets, in their own
  * entry so `motionary/components` and `components/lite` keep their size
  * budgets. Every widget is reduced-motion safe and keyboard accessible.
@@ -2096,8 +2134,10 @@ declare global {
         'usa-worker-canvas': UsaWorkerCanvasElement;
         'usa-motion-spec': UsaMotionSpecElement;
         'usa-native-preview': UsaNativePreviewElement;
+        'usa-plugin-card': UsaPluginCardElement;
+        'usa-install-button': UsaInstallButtonElement;
     }
 }
 
-export { CAROUSEL_EFFECTS, EQ_PRESETS, FESTIVAL_THEMES, LOTTIE_ICONS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PRESENCE_STATES, PROGRESS_VARIANTS, RETRO_VARIANTS, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SPARK_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, WORKER_SCENES, backgroundCss, badgeProgress, cartTotal, defineAddToCart, defineBadgeWall, defineBarChart, defineBgGenerator, defineCarousel, defineCartDrawer, defineChapterNav, defineChatComposer, defineClockControl, defineCodeExport, defineColorPicker, defineCommandPalette, defineCompare, defineCountdown, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineFestivalBanner, defineField, defineFileDrop, defineGauge, defineGenArt, defineGestureSticker, defineGlobe, defineGyroCard, defineHeroVideo, defineHudPanel, defineHydrate, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLiquidNav, defineLocationCard, defineLottie, defineLottieIcon, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMessageList, defineMilestones, defineModal, defineMotion, defineMotionPrefs, defineMotionSpec, defineMusicPlayer, defineNativePreview, defineNavMorph, defineNotificationBell, defineOdometer, defineOrganicCard, defineOtp, definePagination, definePanorama, definePauseAll, definePerfMonitor, definePluginStore, definePresence, definePrizeWheel, defineProductGallery, defineProgressRing, definePropPanel, definePullCord, defineRadar, defineReactions, defineRedEnvelope, defineRetroButton, defineScene, defineSegmented, defineSheet, defineShortcut, defineSkeletonReveal, defineSketchChart, defineSparkline, defineSpatialCard, defineStarRating, defineStepper, defineStickyWall, defineStories, defineSuggestionChips, defineSwipeDeck, defineSwitch, defineTabBar, defineTerminal, defineThemeSurface, defineThemeSwitcher, defineTip, defineToastStack, defineUploadProgress, defineVideoCard, defineVoiceButton, defineVolumeKnob, defineWeatherCard, defineWidgets, defineWorkerCanvas, defineXpBar, describeComponent, exportComponent, formatBytes, formatDistance, fuzzyMatch, haversine, hexToHsv, hsvToHex, initials, keyLabels, levelFor, matchesKeys, monthGrid, pageWindow, parseChips, parseISODate, parseLRC, parseMarkers, parseProps, parseReactions, parseTargets, passwordStrength, project, rankRows, sanitizeCode, sparkPoints, splitTime, stackToast, waveBars, wheelAngle, wrapIndex };
-export type { BellNotice, CartItem, ChatMessage, ExportFormat, ExportedNode, GlobeMarker, LeaderRow, PaletteCommand, PerfStats, PresenceState, PropSpec, RadarTarget, StackToastOptions, StickerState, UsaAddToCartElement, UsaBadgeWallElement, UsaBarChartElement, UsaBgGeneratorElement, UsaCarouselElement, UsaCartDrawerElement, UsaChapterNavElement, UsaChatComposerElement, UsaClockControlElement, UsaCodeExportElement, UsaColorPickerElement, UsaCommandPaletteElement, UsaCompareElement, UsaCountdownElement, UsaCubeGalleryElement, UsaDatePickerElement, UsaDisclosureElement, UsaDockElement, UsaEqualizerElement, UsaFestivalBannerElement, UsaFieldElement, UsaFileDropElement, UsaGaugeElement, UsaGenArtElement, UsaGestureStickerElement, UsaGlobeElement, UsaGyroCardElement, UsaHeroVideoElement, UsaHudPanelElement, UsaHydrateElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaKpiElement, UsaLeaderboardElement, UsaLiquidNavElement, UsaLocationCardElement, UsaLottieElement, UsaLottieIconElement, UsaLyricsElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMessageListElement, UsaMilestonesElement, UsaModalElement, UsaMotionElement, UsaMotionPrefsElement, UsaMotionSpecElement, UsaMusicPlayerElement, UsaNativePreviewElement, UsaNavMorphElement, UsaNotificationBellElement, UsaOdometerElement, UsaOrganicCardElement, UsaOtpElement, UsaPaginationElement, UsaPanoramaElement, UsaPauseAllElement, UsaPerfMonitorElement, UsaPluginStoreElement, UsaPresenceElement, UsaPrizeWheelElement, UsaProductGalleryElement, UsaProgressRingElement, UsaPropPanelElement, UsaPullCordElement, UsaRadarElement, UsaReactionsElement, UsaRedEnvelopeElement, UsaRetroButtonElement, UsaSceneElement, UsaSegmentedElement, UsaSheetElement, UsaShortcutElement, UsaSkeletonRevealElement, UsaSketchChartElement, UsaSparklineElement, UsaSpatialCardElement, UsaStarRatingElement, UsaStepperElement, UsaStickyWallElement, UsaStoriesElement, UsaSuggestionChipsElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTerminalElement, UsaThemeSurfaceElement, UsaThemeSwitcherElement, UsaTipElement, UsaToastStackElement, UsaUploadProgressElement, UsaVideoCardElement, UsaVoiceButtonElement, UsaVolumeKnobElement, UsaWeatherCardElement, UsaWorkerCanvasElement, UsaXpBarElement, WallBadge };
+export { CAROUSEL_EFFECTS, EQ_PRESETS, FESTIVAL_THEMES, LOTTIE_ICONS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PRESENCE_STATES, PROGRESS_VARIANTS, RETRO_VARIANTS, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SPARK_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, WORKER_SCENES, backgroundCss, badgeProgress, cartTotal, defineAddToCart, defineBadgeWall, defineBarChart, defineBgGenerator, defineCarousel, defineCartDrawer, defineChapterNav, defineChatComposer, defineClockControl, defineCodeExport, defineColorPicker, defineCommandPalette, defineCompare, defineCountdown, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineFestivalBanner, defineField, defineFileDrop, defineGauge, defineGenArt, defineGestureSticker, defineGlobe, defineGyroCard, defineHeroVideo, defineHudPanel, defineHydrate, defineInstallButton, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLiquidNav, defineLocationCard, defineLottie, defineLottieIcon, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMessageList, defineMilestones, defineModal, defineMotion, defineMotionPrefs, defineMotionSpec, defineMusicPlayer, defineNativePreview, defineNavMorph, defineNotificationBell, defineOdometer, defineOrganicCard, defineOtp, definePagination, definePanorama, definePauseAll, definePerfMonitor, definePluginCard, definePluginStore, definePresence, definePrizeWheel, defineProductGallery, defineProgressRing, definePropPanel, definePullCord, defineRadar, defineReactions, defineRedEnvelope, defineRetroButton, defineScene, defineSegmented, defineSheet, defineShortcut, defineSkeletonReveal, defineSketchChart, defineSparkline, defineSpatialCard, defineStarRating, defineStepper, defineStickyWall, defineStories, defineSuggestionChips, defineSwipeDeck, defineSwitch, defineTabBar, defineTerminal, defineThemeSurface, defineThemeSwitcher, defineTip, defineToastStack, defineUploadProgress, defineVideoCard, defineVoiceButton, defineVolumeKnob, defineWeatherCard, defineWidgets, defineWorkerCanvas, defineXpBar, describeComponent, exportComponent, formatBytes, formatDistance, fuzzyMatch, haversine, hexToHsv, hsvToHex, initials, keyLabels, levelFor, matchesKeys, monthGrid, pageWindow, parseChips, parseISODate, parseLRC, parseMarkers, parseProps, parseReactions, parseTargets, passwordStrength, project, rankRows, sanitizeCode, sparkPoints, splitTime, stackToast, waveBars, wheelAngle, wrapIndex };
+export type { BellNotice, CartItem, ChatMessage, ExportFormat, ExportedNode, GlobeMarker, LeaderRow, PaletteCommand, PerfStats, PresenceState, PropSpec, RadarTarget, StackToastOptions, StickerState, UsaAddToCartElement, UsaBadgeWallElement, UsaBarChartElement, UsaBgGeneratorElement, UsaCarouselElement, UsaCartDrawerElement, UsaChapterNavElement, UsaChatComposerElement, UsaClockControlElement, UsaCodeExportElement, UsaColorPickerElement, UsaCommandPaletteElement, UsaCompareElement, UsaCountdownElement, UsaCubeGalleryElement, UsaDatePickerElement, UsaDisclosureElement, UsaDockElement, UsaEqualizerElement, UsaFestivalBannerElement, UsaFieldElement, UsaFileDropElement, UsaGaugeElement, UsaGenArtElement, UsaGestureStickerElement, UsaGlobeElement, UsaGyroCardElement, UsaHeroVideoElement, UsaHudPanelElement, UsaHydrateElement, UsaInstallButtonElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaKpiElement, UsaLeaderboardElement, UsaLiquidNavElement, UsaLocationCardElement, UsaLottieElement, UsaLottieIconElement, UsaLyricsElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMessageListElement, UsaMilestonesElement, UsaModalElement, UsaMotionElement, UsaMotionPrefsElement, UsaMotionSpecElement, UsaMusicPlayerElement, UsaNativePreviewElement, UsaNavMorphElement, UsaNotificationBellElement, UsaOdometerElement, UsaOrganicCardElement, UsaOtpElement, UsaPaginationElement, UsaPanoramaElement, UsaPauseAllElement, UsaPerfMonitorElement, UsaPluginCardElement, UsaPluginStoreElement, UsaPresenceElement, UsaPrizeWheelElement, UsaProductGalleryElement, UsaProgressRingElement, UsaPropPanelElement, UsaPullCordElement, UsaRadarElement, UsaReactionsElement, UsaRedEnvelopeElement, UsaRetroButtonElement, UsaSceneElement, UsaSegmentedElement, UsaSheetElement, UsaShortcutElement, UsaSkeletonRevealElement, UsaSketchChartElement, UsaSparklineElement, UsaSpatialCardElement, UsaStarRatingElement, UsaStepperElement, UsaStickyWallElement, UsaStoriesElement, UsaSuggestionChipsElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTerminalElement, UsaThemeSurfaceElement, UsaThemeSwitcherElement, UsaTipElement, UsaToastStackElement, UsaUploadProgressElement, UsaVideoCardElement, UsaVoiceButtonElement, UsaVolumeKnobElement, UsaWeatherCardElement, UsaWorkerCanvasElement, UsaXpBarElement, WallBadge };
