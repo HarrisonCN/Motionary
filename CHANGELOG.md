@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.3.0] - 2026-10-09
+
+### Added
+- **2 new components (8.3)** in `motionary/components/widgets` (also in `dist/widgets.umd.js`):
+  - `<usa-organic-card>` — card with a soft, living blob outline: breathes slowly while on screen, morphs on hover (`morph(seed)`), `tint` leaf · ocean · petal · sand, `seed` for the starting shape.
+  - `<usa-liquid-nav>` — navigation bar with a liquid-drop indicator that stretches towards the next item and settles with a wobble (gooey SVG filter); children are links / buttons, `aria-current="page"`, `value`, arrow keys, `label`; `usa:change` { index, item }.
+- **Organic pack — `motionary/fx/organic`** (= `motionary/components/fx-organic`, `registerOrganicPack()`, also in `registerEffectPacks()`): `vine-grow` (enter), `bloom` (enter), `water-drop` (attention), `breathe` (loop). `blobRadius()`.
+- Showcase: 4 new gallery cards with copyable code, live demos and live Store thumbnails; Animation Store 343 → 347 items.
+
+### Accessibility
+- Liquid nav is a labelled `navigation` that keeps `aria-current="page"` on the active item and moves focus with ← / →; the drop is `aria-hidden`. Organic card keeps your content and shows a focus ring when something inside is focused. Reduced motion: static blob, the drop jumps, `vine-grow` shows the vine, `bloom` fades in, `water-drop` does nothing, `breathe` is skipped.
+
 ## [8.2.0] - 2026-10-08
 
 ### Added

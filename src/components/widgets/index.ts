@@ -76,6 +76,8 @@ import { defineRedEnvelope, type UsaRedEnvelopeElement } from './red-envelope';
 import { defineFestivalBanner, FESTIVAL_THEMES, type UsaFestivalBannerElement } from './festival-banner';
 import { defineTerminal, type UsaTerminalElement } from './terminal';
 import { defineRetroButton, RETRO_VARIANTS, type UsaRetroButtonElement } from './retro-button';
+import { defineOrganicCard, type UsaOrganicCardElement } from './organic-card';
+import { defineLiquidNav, type UsaLiquidNavElement } from './liquid-nav';
 
 export { defineCarousel, defineTabBar, defineDisclosure, defineStories, CAROUSEL_EFFECTS, TAB_INDICATORS };
 export type { UsaCarouselElement, UsaTabBarElement, UsaDisclosureElement, UsaStoriesElement };
@@ -136,6 +138,9 @@ export type { UsaRedEnvelopeElement, UsaFestivalBannerElement };
 export { defineTerminal, defineRetroButton, RETRO_VARIANTS };
 export type { UsaTerminalElement, UsaRetroButtonElement };
 
+export { defineOrganicCard, defineLiquidNav };
+export type { UsaOrganicCardElement, UsaLiquidNavElement };
+
 /** The widgets by release (tag → define function). */
 export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElementConstructor | undefined>> = {
   '6.2': { 'usa-carousel': defineCarousel, 'usa-tab-bar': defineTabBar, 'usa-disclosure': defineDisclosure, 'usa-stories': defineStories },
@@ -158,6 +163,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '8.0': { 'usa-clock-control': defineClockControl, 'usa-hydrate': defineHydrate },
   '8.1': { 'usa-red-envelope': defineRedEnvelope, 'usa-festival-banner': defineFestivalBanner },
   '8.2': { 'usa-terminal': defineTerminal, 'usa-retro-button': defineRetroButton },
+  '8.3': { 'usa-organic-card': defineOrganicCard, 'usa-liquid-nav': defineLiquidNav },
 };
 
 /** Every widget tag, in release order. */
@@ -238,5 +244,7 @@ declare global {
     'usa-festival-banner': UsaFestivalBannerElement;
     'usa-terminal': UsaTerminalElement;
     'usa-retro-button': UsaRetroButtonElement;
+    'usa-organic-card': UsaOrganicCardElement;
+    'usa-liquid-nav': UsaLiquidNavElement;
   }
 }

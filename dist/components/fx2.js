@@ -35,6 +35,8 @@ import { FESTIVAL_FX, registerFestivalPack } from './fx-festival.js';
 export { sparkVectors } from './fx-festival.js';
 import { RETRO_FX, registerRetroPack } from './fx-retro.js';
 export { pixelSteps } from './fx-retro.js';
+import { ORGANIC_FX, registerOrganicPack } from './fx-organic.js';
+export { blobRadius } from './fx-organic.js';
 import '../chunks/registry-CnO7ZVPK.js';
 import '../chunks/base-CLuqlLfG.js';
 import '../chunks/generative-2LhxG5BJ.js';
@@ -62,6 +64,7 @@ const EFFECT_PACKS = {
     ai: AI_FX,
     festival: FESTIVAL_FX,
     retro: RETRO_FX,
+    organic: ORGANIC_FX,
 };
 /** Register every 6.x effect pack (idempotent). */
 function registerEffectPacks() {
@@ -84,7 +87,8 @@ function registerEffectPacks() {
     registerAiPack();
     registerFestivalPack();
     registerRetroPack();
+    registerOrganicPack();
 }
 
-export { AI_FX, CHART_FX, DEPTH3_FX, EFFECT_PACKS, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GEO_FX, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, PHYSICS2_FX, RETRO_FX, SHOP_FX, SOCIAL_FX, TEXT3_FX, TRANSITIONS2_FX, WEATHER_FX, register3dPack, registerAiPack, registerChartPack, registerEffectPacks, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGeoPack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerPhysicsPack, registerRetroPack, registerShopPack, registerSocialPack, registerTextPack, registerTransitionsPack, registerWeatherPack };
+export { AI_FX, CHART_FX, DEPTH3_FX, EFFECT_PACKS, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GEO_FX, GPU_FX, LIGHT_FX, MORPH2_FX, MUSIC_FX, ORGANIC_FX, PHYSICS2_FX, RETRO_FX, SHOP_FX, SOCIAL_FX, TEXT3_FX, TRANSITIONS2_FX, WEATHER_FX, register3dPack, registerAiPack, registerChartPack, registerEffectPacks, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGeoPack, registerGpuPack, registerLightPack, registerMorphPack, registerMusicPack, registerOrganicPack, registerPhysicsPack, registerRetroPack, registerShopPack, registerSocialPack, registerTextPack, registerTransitionsPack, registerWeatherPack };
 //# sourceMappingURL=fx2.js.map
