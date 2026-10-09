@@ -713,6 +713,42 @@ export const components = [
     '<usa-fx effect="form-cascade" trigger="enter">\n  <form>…fields…</form>\n</usa-fx>',
     '<usa-fx effect="form-cascade" trigger="click"><div class="demo-formfx"><div class="demo-mini-field"><label>Name</label><span></span></div><div class="demo-mini-field"><label>Email</label><span></span></div><button type="button" class="demo-btn">Sign up — click to replay</button></div></usa-fx>',
     [{ key: 'effect', values: ['form-cascade', 'label-float'] }], '7.7'),
+  // ---- 7.8 -------------------------------------------------------------
+  W('usa-chat-composer', 'ui', 'AI chat composer', 'AI 对话输入框',
+    '7.8: an AI chat input that grows with its text; Enter sends, the send button pops when there is text and morphs into Stop while busy, with a thinking glow running round the composer.',
+    '7.8：随内容自动增高的 AI 对话输入框；回车发送，有内容时发送按钮弹出，busy 时变成“停止”按钮，并有思考光晕环绕输入框。',
+    ['ai', 'chat', 'composer', 'prompt', 'input'],
+    '<usa-chat-composer placeholder="Ask anything…"></usa-chat-composer>\n<script>composer.addEventListener(\'usa:send\', async (e) => { composer.busy = true; await ask(e.detail.text); composer.busy = false; });</script>',
+    '<div class="demo-col demo-ai"><usa-chat-composer class="demo-cc" placeholder="Ask anything…" value="Plan a weekend in Kyoto"></usa-chat-composer><p class="demo-ai-out" data-cc-out>Press Enter or the arrow — it “thinks” for 2 s.</p></div>',
+    undefined, { since: '7.8' }),
+  W('usa-suggestion-chips', 'ui', 'Suggestion chips', '建议标签',
+    '7.8: follow-up prompt chips that slide in one after another; picking one pulses it and (with dismiss) the others fade away. Real buttons, arrow-key navigation.',
+    '7.8：依次滑入的追问建议标签；点选后该标签脉冲，加 dismiss 时其余标签淡出。均为真实按钮，支持方向键切换。',
+    ['ai', 'chips', 'suggestions', 'prompts', 'follow-up'],
+    '<usa-suggestion-chips items="Summarise|Translate|Explain like I\'m 5" dismiss></usa-suggestion-chips>',
+    '<div class="demo-col"><usa-suggestion-chips class="demo-chips" items="Summarise this|Translate to Chinese|Make it shorter|Explain like I\'m 5" dismiss></usa-suggestion-chips><button type="button" class="demo-btn" data-chips>New suggestions</button></div>',
+    undefined, { since: '7.8' }),
+  W('usa-voice-button', 'ui', 'Voice button', '语音按钮',
+    '7.8: a push-to-talk mic button — while listening a halo breathes and level bars wave; feed it live input levels with level (0–1) and they follow your voice.',
+    '7.8：按下说话的麦克风按钮 —— 聆听时光晕呼吸、音量条起伏；用 level（0–1）传入实时音量，光晕和音量条随声音变化。',
+    ['voice', 'mic', 'speech', 'ai', 'waveform'],
+    '<usa-voice-button label="Talk to the assistant"></usa-voice-button>\n<script>vb.addEventListener(\'usa:start\', start); analyser.onlevel = (l) => (vb.level = l);</script>',
+    '<div class="demo-col"><usa-voice-button class="demo-vb" listening bars="7"></usa-voice-button><span class="demo-hint">Tap the mic to stop / start</span></div>',
+    undefined, { since: '7.8' }),
+  X('fx-stream', ['fx-ai', 'registerAiPack'], 'Streaming text & thinking glow', '流式文字与思考光晕',
+    '7.8: stream-text reveals text word by word like a streamed LLM reply with a blinking caret; thinking-glow breathes a drifting colour glow round an element while a model works.',
+    '7.8：stream-text 像大模型流式输出一样逐词显示文字并带闪烁光标；thinking-glow 在模型思考时让元素周围呼吸般漂移着彩色光晕。',
+    ['ai', 'stream', 'typing', 'llm', 'glow'],
+    '<usa-fx effect="stream-text" trigger="enter"><p>Here is a streamed answer…</p></usa-fx>\n<usa-fx effect="thinking-glow" trigger="loop"><div class="bubble">Thinking…</div></usa-fx>',
+    '<usa-fx effect="stream-text" trigger="click"><p class="demo-streamp">Sure! Kyoto in two days: Fushimi Inari at sunrise, Arashiyama bamboo grove, then dinner in Pontocho. Tap to stream again.</p></usa-fx>',
+    [{ key: 'effect', values: ['stream-text', 'thinking-glow'] }], '7.8'),
+  X('fx-voice', ['fx-ai', 'registerAiPack'], 'Voice wave & generating skeleton', '语音波形与生成骨架',
+    '7.8: voice-wave bounces an element\'s children like voice level bars; gen-skeleton covers content with a shimmering skeleton, then dissolves to reveal it.',
+    '7.8：voice-wave 让元素的子项像语音音量条一样波动；gen-skeleton 先用流光骨架覆盖内容，再溶解显示生成结果。',
+    ['voice', 'wave', 'skeleton', 'generating', 'ai'],
+    '<usa-fx effect="voice-wave" trigger="click"><div class="bars"><i></i><i></i><i></i></div></usa-fx>\n<usa-fx effect="gen-skeleton" trigger="enter"><img src="generated.png" alt=""></usa-fx>',
+    '<div class="demo-row"><usa-fx effect="voice-wave" trigger="click"><button type="button" class="demo-vbars" aria-label="Play voice wave"><i></i><i></i><i></i><i></i><i></i></button></usa-fx><usa-fx effect="gen-skeleton" trigger="click"><button type="button" class="demo-gencard">🖼️ Generated image<br><small>tap to regenerate</small></button></usa-fx></div>',
+    [{ key: 'effect', values: ['voice-wave', 'gen-skeleton'] }], '7.8'),
 ];
 
 /** item id → live-demo wiring. */
@@ -846,5 +882,31 @@ export const wire = {
       setTimeout(tick, v >= 100 ? 1800 : 600);
     };
     setTimeout(tick, 600);
+  },
+  'chat-composer': (stage) => {
+    const c = stage.querySelector('usa-chat-composer');
+    const out = stage.querySelector('[data-cc-out]');
+    c.addEventListener('usa:send', (e) => {
+      out.textContent = `You: ${e.detail.text}`;
+      c.busy = true;
+      setTimeout(() => { if (c.busy) { c.busy = false; out.textContent += ' → ✓ answered'; c.value = 'Plan a weekend in Kyoto'; } }, 2000);
+    });
+    c.addEventListener('usa:stop', () => (out.textContent += ' → stopped'));
+  },
+  'suggestion-chips': (stage) => {
+    const sets = [['Summarise this', 'Translate to Chinese', 'Make it shorter', 'Explain like I\'m 5'], ['Add examples', 'Write a haiku', 'Turn into a table'], ['Draft an email', 'Find sources', 'Make it funnier', 'Simplify']];
+    let i = 0;
+    stage.querySelector('[data-chips]')?.addEventListener('click', () => { i = (i + 1) % sets.length; stage.querySelector('usa-suggestion-chips').setItems(sets[i]); });
+  },
+  'voice-button': (stage) => {
+    const vb = stage.querySelector('usa-voice-button');
+    let t = 0;
+    const tick = () => {
+      if (!vb.isConnected) return;
+      t += 1;
+      if (vb.listening) vb.level = Math.abs(Math.sin(t / 3) * 0.6 + Math.sin(t / 1.7) * 0.4);
+      setTimeout(tick, 90);
+    };
+    tick();
   },
 };

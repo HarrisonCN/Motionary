@@ -895,6 +895,29 @@ row.value = 75; row.status = 'done';
 - `<usa-upload-progress name size value status message>`: `value`, `status`; `usa:done`, `usa:error`, `usa:retry`; `formatBytes(n)`.
 - Form: `field-shake` (`distance`, `color`) · `field-success` (`color`) · `label-float` (`stagger`) · `form-cascade` (`stagger`, `distance`); `shakeFrames(distance, steps)`.
 
+### v7.8 Widgets: chat composer, suggestion chips, voice button (`components/widgets`) + AI UI motion (`motionary/fx/ai`)
+
+```html
+<usa-chat-composer placeholder="Ask anything…"></usa-chat-composer>
+<usa-suggestion-chips items="Summarise|Translate|Explain like I'm 5" dismiss></usa-suggestion-chips>
+<usa-voice-button label="Talk to the assistant"></usa-voice-button>
+
+<usa-fx effect="stream-text" trigger="enter"><p>Here is a streamed answer…</p></usa-fx>
+<usa-fx effect="thinking-glow" trigger="loop"><div class="bubble">Thinking…</div></usa-fx>
+```
+```js
+import { defineWidgets } from 'motionary/components/widgets';
+import { registerAiPack } from 'motionary/fx/ai';
+defineWidgets(); registerAiPack();
+composer.addEventListener('usa:send', async (e) => { composer.busy = true; await ask(e.detail.text); composer.busy = false; });
+chips.addEventListener('usa:pick', (e) => composer.value = e.detail.text);
+vb.level = analyserLevel; // 0–1
+```
+- `<usa-chat-composer placeholder label rows busy value>`: `value`, `busy`, `send()`, `clear()`; `usa:send` { text } (cancelable), `usa:stop`.
+- `<usa-suggestion-chips items label dismiss>`: `items`, `setItems(list)`; `usa:pick` { text, index }; `parseChips(s)`.
+- `<usa-voice-button label bars listening>`: `listening`, `level`, `toggle(force?)`; `usa:start`, `usa:stop`; `waveBars(level, n, phase)`.
+- AI: `stream-text` (`speed`) · `thinking-glow` (`colors`) · `voice-wave` (`cycles`) · `gen-skeleton` (`hold`); `splitWords(text)`.
+
 ## Frameworks
 
 Custom elements work in every framework. Register once (e.g. in your entry file), then use the tags.
