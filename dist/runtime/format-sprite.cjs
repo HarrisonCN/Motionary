@@ -1,8 +1,9 @@
 'use strict';
 
-var registry = require('../chunks/registry-CSVil2qJ.cjs');
-var tween = require('../chunks/tween-CFN0WcOb.cjs');
-require('../chunks/ticker-gHv6pNfx.cjs');
+var registry = require('../chunks/registry-tzwKkldE.cjs');
+var tween = require('../chunks/tween-CwLLC3Ko.cjs');
+require('../chunks/ticker-Un0bvTWR.cjs');
+require('../chunks/ease-HwYZnZat.cjs');
 
 /**
  * `motionary/runtime/format-sprite` (10.3) — sprite sheets and image

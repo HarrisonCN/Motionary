@@ -1,8 +1,9 @@
 'use strict';
 
-var registry = require('./chunks/registry-CSVil2qJ.cjs');
-var ticker = require('./chunks/ticker-gHv6pNfx.cjs');
-var tween$1 = require('./chunks/tween-CFN0WcOb.cjs');
+var registry = require('./chunks/registry-tzwKkldE.cjs');
+var ticker = require('./chunks/ticker-Un0bvTWR.cjs');
+var tween$1 = require('./chunks/tween-CwLLC3Ko.cjs');
+var ease = require('./chunks/ease-HwYZnZat.cjs');
 
 /**
  * `motionary/runtime` (10.1) — Motionary's own zero-dependency animation
@@ -28,7 +29,7 @@ var tween$1 = require('./chunks/tween-CFN0WcOb.cjs');
 const core = {
     id: 'core',
     version: registry.RUNTIME_VERSION,
-    api: { version: registry.RUNTIME_VERSION, getTicker: ticker.getTicker, tween, timeline: tween$1.timeline, Tween: tween$1.Tween, Timeline: tween$1.Timeline, EASES: tween$1.EASES, parseEase: tween$1.parseEase, cubicBezier: tween$1.cubicBezier, steps: tween$1.steps },
+    api: { version: registry.RUNTIME_VERSION, getTicker: ticker.getTicker, tween, timeline: tween$1.timeline, Tween: tween$1.Tween, Timeline: tween$1.Timeline, EASES: ease.EASES, parseEase: ease.parseEase, cubicBezier: ease.cubicBezier, steps: ease.steps },
 };
 /** Tween targets (objects, elements, lists or a CSS selector). See `TweenOptions`. */
 function tween(target, o) {
@@ -63,15 +64,15 @@ exports.registeredModules = registry.registeredModules;
 exports.registry = registry.registry;
 exports.requireModule = registry.requireModule;
 exports.getTicker = ticker.getTicker;
-exports.EASES = tween$1.EASES;
 exports.Playable = tween$1.Playable;
 exports.Timeline = tween$1.Timeline;
 exports.Tween = tween$1.Tween;
-exports.cubicBezier = tween$1.cubicBezier;
-exports.parseEase = tween$1.parseEase;
 exports.parseValue = tween$1.parseValue;
-exports.steps = tween$1.steps;
 exports.timeline = tween$1.timeline;
+exports.EASES = ease.EASES;
+exports.cubicBezier = ease.cubicBezier;
+exports.parseEase = ease.parseEase;
+exports.steps = ease.steps;
 exports.core = core;
 exports.resolveTargets = resolveTargets;
 exports.tween = tween;

@@ -1,6 +1,6 @@
-# Motionary 10.3.0
+# Motionary 10.4.0
 
-> Motionary is a zero-dependency motion library: scroll animations, 200+ presets and 195 animated Web Components (<usa-*>) that work in plain HTML and every framework, plus motionary/runtime — its own tween/timeline engine and format loaders.
+> Motionary is a zero-dependency motion library: scroll animations, 200+ presets and 198 animated Web Components (<usa-*>) that work in plain HTML and every framework, plus motionary/runtime — its own tween/timeline engine and format loaders.
 
 Install: `npm i motionary` · CDN: https://unpkg.com/motionary@10/dist/components.umd.js (+ https://unpkg.com/motionary@10/dist/widgets.umd.js for 6.x+ widgets) · Manifest: https://harrisoncn.github.io/Motionary/components.json · Full text: https://harrisoncn.github.io/Motionary/llms-full.txt
 
@@ -15,6 +15,10 @@ Rules for using a component: (1) import its define function from `import.path` a
 - [motionary/runtime/format-svg](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/format-svg.md): Replay SVG SMIL animations (animate, set, animateTransform, animateMotion) on the runtime timeline, morph between any two paths, and measure paths without the DOM.
 - [motionary/runtime/text](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/text.md): Split text into characters (grapheme-aware), words and lines for animation while keeping it accessible (aria-label with the full text, pieces hidden from assistive tech).
 - [motionary/runtime/format-sprite](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/format-sprite.md): Play TexturePacker / Aseprite sprite sheets and numbered image sequences on a canvas or an element background, as runtime timelines (scrubbable).
+- [motionary/runtime/smooth](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/smooth.md): Smooth, inertial wheel scrolling (lerp or fixed-duration glide) for the window or any scroll container, anchor links that glide, off under prefers-reduced-motion; real scroll events keep scroll scenes and observers working.
+- [motionary/runtime/format-gif](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/format-gif.md): Decode animated GIFs (own LZW decoder, no DOM) into composited RGBA frames and play / scrub / reverse them on a canvas as a runtime timeline.
+- [motionary/runtime/format-apng](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/format-apng.md): Split animated PNGs into standalone frame PNGs (decoded by the browser), composite them (dispose / blend) and play them on a canvas as a runtime timeline.
+- [motionary/runtime/format-webp](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/format-webp.md): Split animated WebP files (ANIM / ANMF) into standalone frames (decoded by the browser), composite them (blend / dispose) and play them on a canvas as a runtime timeline.
 
 ## Components
 
@@ -132,6 +136,7 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<usa-pack>` (motionary/components/packs): Product cards reveal and lift, “Add to cart” presses and flies the product into the cart (which bumps), prices count up, badges pulse.
 - `<usa-pagination>` (motionary/components/widgets): 6.7: the highlight springs to the chosen page (squashing on the way) and page numbers slide in from the direction of travel when the window shifts. Prev / next,
 - `<usa-panorama>` (motionary/components/widgets): 8.8: a 360° panorama — drag or swipe to look around with inertia, a slow auto-rotate, a compass for the heading and a “View in XR” badge when the browser offers
+- `<usa-parallax-layers>` (motionary/components/widgets): 10.4: a parallax container — children with data-depth move at different speeds while it crosses the viewport (native view() scroll timeline first, JS fallback),
 - `<usa-particles>` (motionary/components/background): A canvas constellation that drifts away from the pointer. Runs only while visible, DPR ≤ 2, a still frame under reduced motion.
 - `<usa-pause-all>` (motionary/components/widgets): 9.5: one button that pauses all motion on the page (WCAG 2.2.2) — Motionary’s shared clock, every CSS / Web animation and autoplaying media — and resumes it aga
 - `<usa-perf-monitor>` (motionary/components/widgets): 9.6: a live performance overlay for motion work — FPS with a sparkline, active Motionary animations, frame-loop callbacks, long tasks and the shared clock — fla
@@ -161,6 +166,7 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<usa-scramble>` (motionary/components/text): Decodes text out of random glyphs, left to right. Trigger on view, hover/focus or manually.
 - `<usa-scroll-highlight>` (motionary/components/text): Words light up one by one as you read down the page, or a highlighter marker sweeps behind the text.
 - `<usa-scroll-progress>` (motionary/components/reveal): Reading progress of the page or of one article. Compositor-only scaleX, role="progressbar".
+- `<usa-scroll-ring>` (motionary/components/widgets): 10.4: a circular scroll-progress indicator for the page or any scroll container (for=".article"), optional percentage label and back-to-top button. Scroll-drive
 - `<usa-scroll-scene>` (motionary/components/widgets; requires motionary/runtime/scroll): 10.2: a scroll-linked scene — children with data-scrub="opacity: 0 -> 1; x: -80 -> 0" are tweened as you scroll, scrubbed directly or smoothed (scrub="120"), wi
 - `<usa-scrolly>` (motionary/components/reveal): A pinned graphic while [data-step] blocks scroll past; the active step drives the graphic via attributes, a CSS variable and events.
 - `<usa-segmented>` (motionary/components/widgets): 6.7: an iOS-style thumb slides under the chosen segment with a spring and stretches while it travels. A real radio group: arrow keys, Home / End. iOS, pill or o
@@ -172,6 +178,7 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<usa-skeleton-reveal>` (motionary/components/widgets): 6.4: the skeleton is generated from the real content — one bar per rendered text line, blocks for images and marked elements — with one synchronized shimmer (wa
 - `<usa-sketch-chart>` (motionary/components/widgets): 8.5: a hand-drawn chart — wobbly pencil axes with hatched bars or a sketchy line, sketched in stroke by stroke when it scrolls into view.
 - `<usa-slider>` (motionary/components/ui): A form-associated range slider: spring-following thumb, value bubble, full keyboard support (arrows, Page Up/Down, Home/End).
+- `<usa-smooth-scroll>` (motionary/components/widgets; requires motionary/runtime/smooth): 10.4: smooth, inertial wheel scrolling for the page or a container (wrapper), anchor links glide (with offset for sticky headers); keyboard / scrollbar / touch 
 - `<usa-sparkline>` (motionary/components/widgets): 7.2: a tiny inline trend — draws itself on first view, a soft area fades in, the last point pulses and new data morphs the line point by point. line | area | ba
 - `<usa-spatial-card>` (motionary/components/widgets): 8.8: a spatial-computing window — frosted glass floating in depth, a soft gaze highlight that follows the pointer, layered content and an ornament bar; it eases
 - `<usa-spinner>` (motionary/components/feedback): Six indeterminate indicators: the WinUI progress ring, the Windows 10 orbiting dots, ring, typing dots, pulse and bars.

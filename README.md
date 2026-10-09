@@ -180,6 +180,10 @@ Motionary ships its own zero-dependency animation runtime — shared ticker, twe
 | [SVG loader: SMIL playback + path morphing](docs/runtime/format-svg.md) | `motionary/runtime/format-svg` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-svg.iife.js` | `use(formatSvg);` | 5.0 KB |
 | [Text splitting](docs/runtime/text.md) | `motionary/runtime/text` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/text.iife.js` | `use(text);` | 2.5 KB |
 | [Sprite sheets & image sequences](docs/runtime/format-sprite.md) | `motionary/runtime/format-sprite` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-sprite.iife.js` | `use(formatSprite);` | 3.0 KB |
+| [Smooth scrolling](docs/runtime/smooth.md) | `motionary/runtime/smooth` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/smooth.iife.js` | `use(smooth);` | 3.5 KB |
+| [GIF decoder](docs/runtime/format-gif.md) | `motionary/runtime/format-gif` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-gif.iife.js` | `use(formatGif);` | 3.0 KB |
+| [APNG loader](docs/runtime/format-apng.md) | `motionary/runtime/format-apng` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-apng.iife.js` | `use(formatApng);` | 3.0 KB |
+| [Animated WebP loader](docs/runtime/format-webp.md) | `motionary/runtime/format-webp` | `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/format-webp.iife.js` | `use(formatWebp);` | 3.0 KB |
 
 Install once: `npm i motionary`. Plain HTML: load `runtime.iife.js` first, then the module files (each registers itself).
 
@@ -276,6 +280,36 @@ defineTextSplitter(); // registers <usa-text-splitter> — after the prerequisit
 <usa-text-splitter split="chars" effect="rise" stagger="30">Motion, made simple.</usa-text-splitter>
 ```
 
+#### `<usa-smooth-scroll>` — Requires: motionary/runtime/smooth
+
+- **Install:** `npm i motionary`
+- **Import order & registration:** Register the core first, then the module: use(smooth) also registers the core. CDN: load runtime.iife.js, then runtime/smooth.iife.js (it registers itself).
+
+```js
+import { use } from 'motionary/runtime';
+import { smooth } from 'motionary/runtime/smooth';
+import { defineSmoothScroll } from 'motionary/components/widgets';
+
+use(smooth);
+defineSmoothScroll(); // registers <usa-smooth-scroll> — after the prerequisites
+```
+
+- **CDN:**
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/smooth.iife.js"></script>
+<!-- then the component bundles -->
+<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>
+```
+
+- **Minimal example:**
+
+```html
+<usa-smooth-scroll lerp="0.1" offset="64"></usa-smooth-scroll>
+```
+
 <!-- runtime:end -->
 
 ## Accessibility & reduced motion
@@ -309,6 +343,7 @@ Evergreen browsers since 2023: Chrome / Edge ≥ 111, Safari ≥ 16.4, Firefox �
 
 ## Documentation
 
+- **MCP server:** `npx -y -p motionary motionary-mcp` — read-only component catalog for MCP clients (search, API, prerequisite-aware snippets): [docs/mcp.md](docs/mcp.md).
 - **AI assistants:** [AGENTS.md](AGENTS.md) · [prompt guide](docs/ai-prompt-guide.md) · one page per component in [docs/components/](docs/components/README.md) · `components.json` / `llms.txt` / `llms-full.txt` on the site root.
 
 - [API reference](./docs/API.md) — every export, option and `data-sa-*` attribute

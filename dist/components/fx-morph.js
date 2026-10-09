@@ -1,6 +1,6 @@
-import { registerEffects } from '../chunks/registry-gFJRpPES.js';
+import { registerEffects } from '../chunks/registry-BKzyg1JV.js';
 import { a as all } from '../chunks/shared-CkKHWrtJ.js';
-import '../chunks/base-BnRyfuyM.js';
+import '../chunks/base-BTev8qxg.js';
 
 const NS = 'http://www.w3.org/2000/svg';
 const raf = (f) => (typeof requestAnimationFrame === 'function' ? requestAnimationFrame(f) : 0);

@@ -1,4 +1,4 @@
-import { u as defineElement, q as now, k as clamp, l as caf, r as raf } from '../chunks/base-BnRyfuyM.js';
+import { f as defineElement, n as now, d as clamp, b as caf, r as raf } from '../chunks/base-BTev8qxg.js';
 
 /** Minimal WebGL runner: one full-canvas quad, one fragment shader, optional image texture. */
 const VERTEX = 'attribute vec2 p;varying vec2 v_uv;void main(){v_uv=p*.5+.5;gl_Position=vec4(p,0.,1.);}';

@@ -56,7 +56,7 @@ Store 卡片显示 **「Requires: motionary/runtime/<module>」** 徽章（官�
   - 主线 B：**text 模块** —— 逐字 / 逐词 / 逐行拆分（保留可访问文本）。
   - 格式：精灵图（TexturePacker / Aseprite JSON）、图片序列（`motionary/runtime/format-sprite`）。
   - 新组件：路由转场容器、`<usa-text-splitter>`（`<usa-split-text>` 已被 4.x 文本组件占用）。
-- **v10.4** — 滚动驱动 3.0：原生 `animation-timeline` 优先、JS 回退插件化。
+- ✅ **v10.4** — 滚动驱动 3.0：原生 `animation-timeline` 优先、JS 回退插件化。
   - 主线 A：发布 `motionary-mcp` MCP 服务器（`npx motionary-mcp`，stdio）：`list_components`、`search_components`、`get_component`、`get_example`、`scaffold_snippet`（自动带上前置条件）。
   - 主线 B：**smooth 模块** —— 平滑滚动（减少动态效果时停用）。
   - 格式：GIF（自研 LZW）、APNG、动画 WebP 拆帧到 canvas。

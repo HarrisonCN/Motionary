@@ -553,5 +553,45 @@
     "name": "dist/runtime/format-sprite.iife.js (CDN module, fixed 3.0 KB)",
     "file": "dist/runtime/format-sprite.iife.js",
     "limit": 3072
+  },
+  {
+    "name": "import 'motionary/runtime/smooth' (fixed 4.5 KB incl. the core parts it uses)",
+    "import": "export * from 'pkg/runtime/smooth';",
+    "limit": 4608
+  },
+  {
+    "name": "dist/runtime/smooth.iife.js (CDN module, fixed 3.5 KB)",
+    "file": "dist/runtime/smooth.iife.js",
+    "limit": 3584
+  },
+  {
+    "name": "import 'motionary/runtime/format-gif' (fixed 4.0 KB incl. the core parts it uses)",
+    "import": "export * from 'pkg/runtime/format-gif';",
+    "limit": 4096
+  },
+  {
+    "name": "dist/runtime/format-gif.iife.js (CDN module, fixed 3.5 KB)",
+    "file": "dist/runtime/format-gif.iife.js",
+    "limit": 3584
+  },
+  {
+    "name": "import 'motionary/runtime/format-apng' (fixed 4.0 KB incl. the core parts it uses)",
+    "import": "export * from 'pkg/runtime/format-apng';",
+    "limit": 4096
+  },
+  {
+    "name": "dist/runtime/format-apng.iife.js (CDN module, fixed 3.5 KB)",
+    "file": "dist/runtime/format-apng.iife.js",
+    "limit": 3584
+  },
+  {
+    "name": "import 'motionary/runtime/format-webp' (fixed 4.0 KB incl. the core parts it uses)",
+    "import": "export * from 'pkg/runtime/format-webp';",
+    "limit": 4096
+  },
+  {
+    "name": "dist/runtime/format-webp.iife.js (CDN module, fixed 3.5 KB)",
+    "file": "dist/runtime/format-webp.iife.js",
+    "limit": 3584
   }
 ]

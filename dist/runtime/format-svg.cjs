@@ -1,8 +1,9 @@
 'use strict';
 
-var registry = require('../chunks/registry-CSVil2qJ.cjs');
-var tween = require('../chunks/tween-CFN0WcOb.cjs');
-require('../chunks/ticker-gHv6pNfx.cjs');
+var registry = require('../chunks/registry-tzwKkldE.cjs');
+var tween = require('../chunks/tween-CwLLC3Ko.cjs');
+var ease = require('../chunks/ease-HwYZnZat.cjs');
+require('../chunks/ticker-Un0bvTWR.cjs');
 
 /**
  * `motionary/runtime/format-svg` (10.2) — SVG animation with the runtime
@@ -356,7 +357,7 @@ class SmilTrack extends tween.Playable {
         this.morphs = [];
         this.base = info.target.getAttribute(info.attribute);
         this.interp = info.attribute === 'd' ? (a, b, p) => this.morph(a, b)(p) : info.kind === 'animateTransform' ? lerpNumbers : lerpAny;
-        this.splines = (info.keySplines || '').split(';').filter((s) => s.trim()).map((s) => { const n = numList(s); return tween.cubicBezier(n[0], n[1], n[2], n[3]); });
+        this.splines = (info.keySplines || '').split(';').filter((s) => s.trim()).map((s) => { const n = numList(s); return ease.cubicBezier(n[0], n[1], n[2], n[3]); });
     }
     morph(a, b) {
         const key = a + '|' + b;

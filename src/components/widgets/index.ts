@@ -112,6 +112,9 @@ import { defineScrollScene, parseScrub, type UsaScrollSceneElement } from './scr
 import { defineMotionInspector, type UsaMotionInspectorElement } from './motion-inspector';
 import { defineRouteTransition, type UsaRouteTransitionElement } from './route-transition';
 import { defineTextSplitter, type UsaTextSplitterElement } from './text-splitter';
+import { defineScrollRing, type UsaScrollRingElement } from './scroll-ring';
+import { defineParallaxLayers, type UsaParallaxLayersElement } from './parallax-layers';
+import { defineSmoothScroll, type UsaSmoothScrollElement } from './smooth-scroll';
 
 export { defineCarousel, defineTabBar, defineDisclosure, defineStories, CAROUSEL_EFFECTS, TAB_INDICATORS };
 export type { UsaCarouselElement, UsaTabBarElement, UsaDisclosureElement, UsaStoriesElement };
@@ -229,6 +232,9 @@ export type { UsaScrollSceneElement, UsaMotionInspectorElement };
 export { defineRouteTransition, defineTextSplitter };
 export type { UsaRouteTransitionElement, UsaTextSplitterElement };
 
+export { defineScrollRing, defineParallaxLayers, defineSmoothScroll };
+export type { UsaScrollRingElement, UsaParallaxLayersElement, UsaSmoothScrollElement };
+
 /** The widgets by release (tag → define function). */
 export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElementConstructor | undefined>> = {
   '6.2': { 'usa-carousel': defineCarousel, 'usa-tab-bar': defineTabBar, 'usa-disclosure': defineDisclosure, 'usa-stories': defineStories },
@@ -270,6 +276,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '10.1': { 'usa-plugin-card': definePluginCard, 'usa-install-button': defineInstallButton },
   '10.2': { 'usa-scroll-scene': defineScrollScene, 'usa-motion-inspector': defineMotionInspector },
   '10.3': { 'usa-route-transition': defineRouteTransition, 'usa-text-splitter': defineTextSplitter },
+  '10.4': { 'usa-scroll-ring': defineScrollRing, 'usa-parallax-layers': defineParallaxLayers, 'usa-smooth-scroll': defineSmoothScroll },
 };
 
 /** Every widget tag, in release order. */
@@ -386,5 +393,8 @@ declare global {
     'usa-motion-inspector': UsaMotionInspectorElement;
     'usa-route-transition': UsaRouteTransitionElement;
     'usa-text-splitter': UsaTextSplitterElement;
+    'usa-scroll-ring': UsaScrollRingElement;
+    'usa-parallax-layers': UsaParallaxLayersElement;
+    'usa-smooth-scroll': UsaSmoothScrollElement;
   }
 }

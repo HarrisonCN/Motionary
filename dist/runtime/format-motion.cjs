@@ -1,9 +1,10 @@
 'use strict';
 
-var registry = require('../chunks/registry-CSVil2qJ.cjs');
-var tween = require('../chunks/tween-CFN0WcOb.cjs');
-var keyframes = require('../chunks/keyframes-Dw9zwVQa.cjs');
-require('../chunks/ticker-gHv6pNfx.cjs');
+var registry = require('../chunks/registry-tzwKkldE.cjs');
+var tween = require('../chunks/tween-CwLLC3Ko.cjs');
+var ease = require('../chunks/ease-HwYZnZat.cjs');
+var keyframes = require('../chunks/keyframes-tC3I7anQ.cjs');
+require('../chunks/ticker-Un0bvTWR.cjs');
 
 /**
  * `motionary/runtime/format-motion` (10.1) — play Motion / Framer-style
@@ -29,13 +30,13 @@ const NAMES = { linear: 'linear', easeIn: 'cubic-in', easeOut: 'cubic-out', ease
 /** A Motion ease → runtime ease. */
 function motionEase(e) {
     if (Array.isArray(e))
-        return tween.cubicBezier(e[0], e[1], e[2], e[3]);
+        return ease.cubicBezier(e[0], e[1], e[2], e[3]);
     if (!e)
-        return tween.EASES['cubic-out'];
+        return ease.EASES['cubic-out'];
     const n = NAMES[e] || e;
-    if (!tween.EASES[n])
+    if (!ease.EASES[n])
         throw new Error(`[motionary] format-motion: unknown ease "${e}"`);
-    return tween.EASES[n];
+    return ease.EASES[n];
 }
 /** Simulate a damped spring (unit step) → [ease, duration ms]. */
 function springEase(o) {

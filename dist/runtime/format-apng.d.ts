@@ -1,0 +1,250 @@
+/** A runtime module: `{ id, version, api }`, registered with `use()`. */
+interface RuntimeModule<A = unknown> {
+    /** Module id: 'core', 'format-css', 'scroll', … (import path `motionary/runtime/<id>`). */
+    id: string;
+    version: string;
+    /** Other modules this one needs (registered first by `use()` callers). */
+    requires?: string[];
+    /** The module's public API (what `requireModule(id)` returns). */
+    api: A;
+    /** Optional one-time setup, called on first registration. */
+    setup?(registry: RuntimeRegistry): void;
+}
+interface RuntimeRegistry {
+    version: string;
+    modules: Map<string, RuntimeModule>;
+    /** Shared per-page state slots (the ticker lives here). */
+    slots: Record<string, unknown>;
+}
+
+/** Easing functions (t ∈ [0, 1] → progress). Original implementations of the standard Penner-style curves. */
+type Ease = (t: number) => number;
+
+type Target = object | Element;
+type Props = Record<string, number | string>;
+interface PlayOptions {
+    /** Delay before the first iteration, ms. */
+    delay?: number;
+    /** Extra iterations (-1 = forever). */
+    repeat?: number;
+    /** Alternate direction on every other iteration. */
+    yoyo?: boolean;
+    /** Start paused (`play()` to start). */
+    paused?: boolean;
+    onUpdate?: (progress: number) => void;
+    onComplete?: () => void;
+}
+interface TweenOptions extends PlayOptions {
+    to?: Props;
+    from?: Props;
+    /** ms (default 600). */
+    duration?: number;
+    ease?: string | Ease;
+    /** Delay added per target index (ms) when several targets are given. */
+    stagger?: number;
+}
+/** Common playback: delay, repeat, yoyo, direction, ticker attachment, promise. */
+declare abstract class Playable {
+    delay: number;
+    repeat: number;
+    yoyo: boolean;
+    /** Playback rate multiplier. */
+    timeScale: number;
+    onUpdate?: (progress: number) => void;
+    onComplete?: () => void;
+    protected _t: number;
+    private _dir;
+    private _off;
+    private _done;
+    private _resolve;
+    /** Resolves on completion (forward end, or start when reversed). */
+    finished: Promise<void>;
+    /** Set when owned by a timeline (then the ticker never drives it). */
+    parent: Timeline | null;
+    constructor(o: PlayOptions);
+    /** One iteration, ms. */
+    abstract get duration(): number;
+    /** Render at `ms` into one iteration. */
+    protected abstract renderLocal(ms: number, iterationEnded: boolean): void;
+    get totalDuration(): number;
+    get time(): number;
+    get progress(): number;
+    set progress(p: number);
+    get isActive(): boolean;
+    get reversed(): boolean;
+    /** Jump to `ms` (total time, including the delay) and render. */
+    seek(ms: number): this;
+    play(): this;
+    pause(): this;
+    /** Play backwards from the current time. */
+    reverse(): this;
+    restart(): this;
+    /** Stop and detach for good. */
+    kill(): void;
+    /** Promise-like: `await tween(...)`. */
+    then<R>(ok?: (v: void) => R, err?: (e: unknown) => R): Promise<R>;
+    private attach;
+    private advance;
+    protected complete(): void;
+}
+/** Position: ms number, '<' (start of previous), '>' (end of previous, default), '+=200' / '-=200' (relative to the end), 'label', 'label+=100', '<+=100'. */
+type Position = number | string;
+interface TimelineOptions extends PlayOptions {
+    /** Defaults merged into every `.to()`. */
+    defaults?: Omit<TweenOptions, 'to' | 'from'>;
+}
+/** A sequence of tweens, nested timelines and callbacks. */
+declare class Timeline extends Playable {
+    private children;
+    private labels;
+    private prevStart;
+    private prevEnd;
+    private defaults;
+    private lastLocal;
+    constructor(o?: TimelineOptions);
+    get duration(): number;
+    private resolve;
+    /** Add a tween, timeline or callback at a position. */
+    add(item: Playable | (() => void), position?: Position): this;
+    /** `tween(target, vars)` placed at `position` (stagger across several targets). */
+    to(target: Target | Target[] | ArrayLike<Target>, vars: TweenOptions, position?: Position): this;
+    call(fn: () => void, position?: Position): this;
+    label(name: string, position?: Position): this;
+    /** Time of a label, ms. */
+    labelTime(name: string): number | undefined;
+    remove(item: Playable): void;
+    /** Children in start order (callbacks excluded). */
+    getChildren(): Playable[];
+    protected renderLocal(ms: number): void;
+}
+
+/**
+ * Shared internals of the animated-image loaders (`format-gif`, `format-apng`,
+ * `format-webp`, 10.4): the decoded-animation shape, frame compositing in
+ * plain RGBA arrays (no DOM — works in workers and on the server), the
+ * browser image decoder used for APNG / WebP frames, and the canvas player
+ * (a runtime `Playable`, so it can be paused, reversed, scrubbed and driven
+ * by a scroll scene). Bundled into each loader; not a public module.
+ */
+
+/** An RGBA bitmap (the shape of `ImageData`, without needing the DOM). */
+interface Rgba {
+    width: number;
+    height: number;
+    data: Uint8ClampedArray;
+}
+/** One frame of an animation, already composited to the full canvas size. */
+interface AnimFrame {
+    /** Display time, ms. */
+    delay: number;
+    image: Rgba;
+}
+interface AnimatedImage {
+    format: 'gif' | 'apng' | 'webp';
+    width: number;
+    height: number;
+    /** Number of plays: 0 = forever, 1 = once, … */
+    plays: number;
+    frames: AnimFrame[];
+}
+/** A frame region before compositing (APNG fcTL / WebP ANMF / GIF descriptor). */
+interface FramePart {
+    x: number;
+    y: number;
+    image: Rgba;
+    delay: number;
+    /** 'over' alpha-blends onto the canvas, 'source' replaces the region. */
+    blend: 'over' | 'source';
+    /** What happens to the region after the frame is shown. */
+    dispose: 'none' | 'background' | 'previous';
+}
+/** Image decoder for one frame file (PNG / WebP bytes) → RGBA. Replaceable (workers, tests, servers). */
+type FrameDecoder = (bytes: Uint8Array, mime: string) => Promise<Rgba>;
+interface AnimPlayerOptions {
+    /** Extra repeats; default from the file (`plays`: 0 → forever). */
+    repeat?: number;
+    yoyo?: boolean;
+    paused?: boolean;
+    /** Playback speed (default 1). */
+    speed?: number;
+}
+type AnimPlayer = Playable & {
+    readonly frame: number;
+    readonly frameCount: number;
+};
+/** Play a decoded animation on a canvas as a runtime timeline (seek / reverse / `progress` scrub). */
+declare function animatedImagePlayer(canvas: HTMLCanvasElement | OffscreenCanvas, anim: AnimatedImage, o?: AnimPlayerOptions): AnimPlayer;
+
+/**
+ * `motionary/runtime/format-apng` (10.4) — animated PNG (APNG) loader written
+ * for Motionary: reads `acTL` / `fcTL` / `fdAT`, rebuilds every frame as a
+ * standalone PNG (header + palette / transparency chunks + its image data,
+ * with fresh CRCs) and lets the browser's own PNG decoder decode it, then
+ * composites the frames (`dispose_op` none / background / previous,
+ * `blend_op` source / over) into full-size RGBA. A plain (non-animated) PNG
+ * loads as a one-frame animation.
+ *
+ * `parseApng()` and `apngFramePngs()` are pure (no DOM); `decodeApng()` needs
+ * an image decoder — the browser's by default (also in workers), or your own
+ * via `{ decode }`.
+ */
+
+interface ApngChunk {
+    type: string;
+    data: Uint8Array;
+}
+interface ApngFrameInfo {
+    width: number;
+    height: number;
+    x: number;
+    y: number;
+    /** ms */
+    delay: number;
+    dispose: FramePart['dispose'];
+    blend: FramePart['blend'];
+    /** Image data (zlib stream pieces) of this frame. */
+    data: Uint8Array[];
+}
+interface ApngInfo {
+    width: number;
+    height: number;
+    /** acTL num_plays (0 = forever); 1 for a plain PNG. */
+    plays: number;
+    animated: boolean;
+    /** The default image (IDAT) is not part of the animation. */
+    hiddenDefault: boolean;
+    frames: ApngFrameInfo[];
+    /** Chunks copied into every frame PNG (PLTE, tRNS, gAMA, cHRM, sRGB, iCCP, sBIT). */
+    shared: ApngChunk[];
+    ihdr: Uint8Array;
+}
+/** Read the chunk list of a PNG / APNG (pure). */
+declare function pngChunks(b: Uint8Array): ApngChunk[];
+/** Parse the animation structure (pure; no pixels decoded). */
+declare function parseApng(input: Uint8Array | ArrayBuffer): ApngInfo;
+/** Rebuild every animation frame as a standalone PNG file (pure). */
+declare function apngFramePngs(info: ApngInfo): Uint8Array[];
+/** Decode an APNG (or PNG) into composited RGBA frames. */
+declare function decodeApng(input: Uint8Array | ArrayBuffer, o?: {
+    decode?: FrameDecoder;
+}): Promise<AnimatedImage & {
+    info: ApngInfo;
+}>;
+/** Fetch (URL) or read (ArrayBuffer / Blob / bytes) and decode an APNG. */
+declare function loadApng(src: string | ArrayBuffer | ArrayBufferView | Blob, o?: {
+    decode?: FrameDecoder;
+}): Promise<AnimatedImage & {
+    info: ApngInfo;
+}>;
+interface FormatApngApi {
+    parseApng: typeof parseApng;
+    apngFramePngs: typeof apngFramePngs;
+    decodeApng: typeof decodeApng;
+    loadApng: typeof loadApng;
+    animatedImagePlayer: typeof animatedImagePlayer;
+}
+/** The module object for `use(formatApng)`. */
+declare const formatApng: RuntimeModule<FormatApngApi>;
+
+export { animatedImagePlayer, apngFramePngs, decodeApng, formatApng, loadApng, parseApng, pngChunks };
+export type { AnimFrame, AnimPlayer, AnimPlayerOptions, AnimatedImage, ApngChunk, ApngFrameInfo, ApngInfo, FormatApngApi, FrameDecoder, Rgba };

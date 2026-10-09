@@ -8,7 +8,7 @@
  */
 
 /** Runtime version (kept in sync with the package version by the release script). */
-export const RUNTIME_VERSION = '10.3.0';
+export const RUNTIME_VERSION = '10.4.0';
 
 /** Where the CDN builds live (major-pinned). */
 export const RUNTIME_CDN = 'https://cdn.jsdelivr.net/npm/motionary@10/dist/';

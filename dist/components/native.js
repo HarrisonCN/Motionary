@@ -1,9 +1,9 @@
 import { parseMotion } from './dsl.js';
 import { easingPoints } from './design.js';
 import { MOTION_TOKENS } from './tokens.js';
-import '../chunks/registry-gFJRpPES.js';
-import '../chunks/base-BnRyfuyM.js';
-import '../chunks/core-DsGoL9EY.js';
+import '../chunks/registry-BKzyg1JV.js';
+import '../chunks/base-BTev8qxg.js';
+import '../chunks/core-BviA7nFa.js';
 
 /**
  * `motionary/native` (= `motionary/components/native`, 9.8) — native 2.0:
