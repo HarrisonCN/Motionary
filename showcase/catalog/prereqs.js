@@ -102,6 +102,32 @@ export const PREREQS = {
       ['CSS-animated SVG', 'yes', 'via motionary/runtime/format-css'],
     ],
     "import { use } from 'motionary/runtime';\nimport { formatSvg, playSmil, morphPath } from 'motionary/runtime/format-svg';\nuse(formatSvg);\nconst player = playSmil(document.querySelector('svg'));\nplayer.timeline.timeScale = 0.5;   // scrub / slow down / reverse like any runtime timeline\nconst f = morphPath('M0 0 L100 0 L50 80 Z', 'M50 0 A40 40 0 1 1 49.9 0 Z');\npath.setAttribute('d', f(0.5));"),
+  text: R('text', 'Text splitting', 'Split text into characters (grapheme-aware), words and lines for animation while keeping it accessible (aria-label with the full text, pieces hidden from assistive tech).', 2560,
+    ['text', 'splitText', 'segment'],
+    [
+      ['chars (grapheme clusters: emoji, combining marks, CJK)', 'yes', 'Intl.Segmenter when available, code points otherwise'],
+      ['words, whitespace preserved', 'yes', ''],
+      ['lines (grouped by rendered position)', 'yes', 'wrapped in line spans for flat text; data-line on words inside nested markup'],
+      ['nested inline markup (a, em, strong…) kept', 'yes', ''],
+      ['accessibility: aria-label + aria-hidden pieces, revert()', 'yes', ''],
+      ['--i index custom property for CSS staggers', 'yes', ''],
+      ['SSR / workers', 'partial', 'segment() is pure; splitText() needs a DOM'],
+      ['right-to-left line detection', 'partial', 'lines by vertical position (works for RTL; bidi runs not reordered)'],
+    ],
+    "import { use, tween } from 'motionary/runtime';\nimport { text, splitText } from 'motionary/runtime/text';\nuse(text);\nconst { chars } = splitText(document.querySelector('h1'), { type: 'chars,words' });\ntween(chars, { from: { y: '1em', opacity: 0 }, to: { y: '0em', opacity: 1 }, stagger: 30 });"),
+  'format-sprite': R('format-sprite', 'Sprite sheets & image sequences', 'Play TexturePacker / Aseprite sprite sheets and numbered image sequences on a canvas or an element background, as runtime timelines (scrubbable).', 3072,
+    ['formatSprite', 'parseSpriteSheet', 'gridSheet', 'frameOrder', 'drawFrame', 'spritePlayer', 'imageSequence', 'preloadImages', 'sequencePlayer'],
+    [
+      ['TexturePacker JSON (hash + array)', 'yes', 'trimmed (spriteSourceSize / sourceSize) and rotated frames'],
+      ['Aseprite JSON (hash + array), per-frame duration', 'yes', ''],
+      ['Aseprite frameTags: forward / reverse / pingpong / pingpong_reverse', 'yes', ''],
+      ['plain grid sheets', 'yes', 'gridSheet(cols, rows, w, h)'],
+      ['image sequences (frame_{0001}.webp)', 'yes', 'preloading, cover-fit drawing, scrub via progress'],
+      ['multipack (several atlas images)', 'no', 'load each sheet separately'],
+      ['Aseprite slices / layers', 'no', 'frames only'],
+      ['SSR / workers', 'partial', 'parsing is pure; players need a canvas (OffscreenCanvas works)'],
+    ],
+    "import { use } from 'motionary/runtime';\nimport { formatSprite, parseSpriteSheet, spritePlayer } from 'motionary/runtime/format-sprite';\nuse(formatSprite);\nconst sheet = parseSpriteSheet(await (await fetch('/slime.json')).json());\nconst img = new Image(); img.src = '/slime.png'; await img.decode();\nspritePlayer(document.querySelector('canvas'), sheet, img, { tag: 'bounce' });"),
 };
 
 /** `Requires: motionary/runtime + …` */

@@ -1,0 +1,6 @@
+{"frames": [
+  {"filename": "coin_0","frame": {"x":0,"y":0,"w":16,"h":16},"rotated": false,"trimmed": false,"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},"sourceSize": {"w":16,"h":16}},
+  {"filename": "coin_1","frame": {"x":16,"y":0,"w":12,"h":16},"rotated": false,"trimmed": true,"spriteSourceSize": {"x":2,"y":0,"w":12,"h":16},"sourceSize": {"w":16,"h":16}},
+  {"filename": "coin_2","frame": {"x":28,"y":0,"w":4,"h":16},"rotated": false,"trimmed": true,"spriteSourceSize": {"x":6,"y":0,"w":4,"h":16},"sourceSize": {"w":16,"h":16}}
+],
+"meta": {"app": "https://www.codeandweb.com/texturepacker","image": "coin.png","size": {"w":32,"h":16}}}

@@ -533,5 +533,25 @@
     "name": "dist/runtime/format-svg.iife.js (CDN module, fixed 5.0 KB)",
     "file": "dist/runtime/format-svg.iife.js",
     "limit": 5120
+  },
+  {
+    "name": "import 'motionary/runtime/text' (fixed 3.0 KB incl. the core parts it uses)",
+    "import": "export * from 'pkg/runtime/text';",
+    "limit": 3072
+  },
+  {
+    "name": "dist/runtime/text.iife.js (CDN module, fixed 2.5 KB)",
+    "file": "dist/runtime/text.iife.js",
+    "limit": 2560
+  },
+  {
+    "name": "import 'motionary/runtime/format-sprite' (fixed 8.5 KB incl. the core parts it uses)",
+    "import": "export * from 'pkg/runtime/format-sprite';",
+    "limit": 8704
+  },
+  {
+    "name": "dist/runtime/format-sprite.iife.js (CDN module, fixed 3.0 KB)",
+    "file": "dist/runtime/format-sprite.iife.js",
+    "limit": 3072
   }
 ]

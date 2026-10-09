@@ -1,6 +1,6 @@
 {
   "name": "motionary",
-  "version": "10.2.0",
+  "version": "10.3.0",
   "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 94 animated Web Components — 214 scroll-reveal presets, card/click/button morphs, physics, page transitions, generative & sound-reactive backgrounds, cursor/gesture effects, themes, micro-interactions, <usa-player>, WebGL. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -1256,6 +1256,26 @@
       "require": {
         "types": "./dist/runtime/format-svg.d.cts",
         "default": "./dist/runtime/format-svg.cjs"
+      }
+    },
+    "./runtime/text": {
+      "import": {
+        "types": "./dist/runtime/text.d.ts",
+        "default": "./dist/runtime/text.js"
+      },
+      "require": {
+        "types": "./dist/runtime/text.d.cts",
+        "default": "./dist/runtime/text.cjs"
+      }
+    },
+    "./runtime/format-sprite": {
+      "import": {
+        "types": "./dist/runtime/format-sprite.d.ts",
+        "default": "./dist/runtime/format-sprite.js"
+      },
+      "require": {
+        "types": "./dist/runtime/format-sprite.d.cts",
+        "default": "./dist/runtime/format-sprite.cjs"
       }
     },
     "./manifest.json": "./dist/manifest.json",

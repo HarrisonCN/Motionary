@@ -52,7 +52,7 @@ Store 卡片显示 **「Requires: motionary/runtime/<module>」** 徽章（官�
   - 主线 B：**scroll 模块**（`motionary/runtime/scroll`）—— pin、scrub、markers、start / end 规则（自研，功能对标 ScrollTrigger，但不复制其代码或 API）。
   - 格式：SVG SMIL 回放、路径变形、CSS 动画 SVG（`motionary/runtime/format-svg`）。
   - 新组件：动效检查器面板、`<usa-scroll-scene>`（Requires: motionary/runtime/scroll）。
-- **v10.3** — View Transitions 2.0：跨文档页面转场、共享元素动画。
+- ✅ **v10.3** — View Transitions 2.0：跨文档页面转场、共享元素动画。
   - 主线 B：**text 模块** —— 逐字 / 逐词 / 逐行拆分（保留可访问文本）。
   - 格式：精灵图（TexturePacker / Aseprite JSON）、图片序列（`motionary/runtime/format-sprite`）。
   - 新组件：路由转场容器、`<usa-text-splitter>`（`<usa-split-text>` 已被 4.x 文本组件占用）。

@@ -1407,6 +1407,36 @@ defineScrollScene(); // registers <usa-scroll-scene> — after the prerequisites
 </usa-scroll-scene>
 ```
 
+### `<usa-text-splitter>` — Requires: motionary/runtime/text
+
+- **Install:** `npm i motionary`
+- **Import order & registration:** Register the core first, then the module: use(text) also registers the core. CDN: load runtime.iife.js, then runtime/text.iife.js (it registers itself).
+
+```js
+import { use } from 'motionary/runtime';
+import { text } from 'motionary/runtime/text';
+import { defineTextSplitter } from 'motionary/components/widgets';
+
+use(text);
+defineTextSplitter(); // registers <usa-text-splitter> — after the prerequisites
+```
+
+- **CDN:**
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/text.iife.js"></script>
+<!-- then the component bundles -->
+<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>
+```
+
+- **Minimal example:**
+
+```html
+<usa-text-splitter split="chars" effect="rise" stagger="30">Motion, made simple.</usa-text-splitter>
+```
+
 <!-- prereqs:end -->
 
 ### v10.2 Scroll scenes (`motionary/runtime/scroll`) + SVG loader + `data-motion` in core: `<usa-scroll-scene>`, `<usa-motion-inspector>` (`components/widgets`)
@@ -1425,6 +1455,21 @@ defineScrollScene(); // registers <usa-scroll-scene> — after the prerequisites
 | `<usa-motion-inspector>` | `scope`, `interval` | `refresh()`, `pauseAll()`, `playAll()`, `setRate(rate)`, `animations()`; `usa:change` |
 
 Declarative motion with just the core: `applyMotionAttributes(createMotion())` + `data-motion="enter: fade-up 600ms"`.
+
+### v10.3 View Transitions 2.0 + text splitting (`motionary/runtime/text`) + sprite sheets: `<usa-route-transition>`, `<usa-text-splitter>` (`components/widgets`)
+
+```html
+<usa-route-transition id="app" effect="slide" cross-document>
+  <nav><a href="/">Home</a> <a href="/about">About</a></nav>
+  <h1 data-shared="title">Home</h1>
+</usa-route-transition>
+<usa-text-splitter split="chars" effect="rise" stagger="30">Motion, made simple.</usa-text-splitter>
+```
+
+| Element | Attributes | Methods / events |
+|---|---|---|
+| `<usa-route-transition>` | `effect` (fade, slide, zoom), `engine` (auto, view-transition, waapi), `selector`, `history` (push, replace, off), `links` (inside, document), `cross-document`; `[data-to]`, `<template data-route>`, `[data-shared]` | `navigate(url)`, `current`; `usa:navigate`, `usa:navigated` |
+| `<usa-text-splitter>` (Requires: motionary/runtime/text) | `split` (chars, words, lines), `effect` (rise, fade, blur, flip, wave), `stagger`, `duration`, `trigger` (view, load, hover), `loop` | `replay()`, `pieces()`; `usa:split`, `usa:done`, `usa:runtime-missing` |
 
 ## Frameworks
 

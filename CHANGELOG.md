@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [10.3.0] - 2026-10-09
+
+### Added
+- **View Transitions 2.0** — `<usa-route-transition>`: a route container that swaps its content on same-origin link clicks (fetched pages, using the element that matches `selector` / its id) or inline `<template data-route>` routes; animated with the View Transitions API when available (`engine="auto"`) or the Web Animations fallback (`engine="waapi"`, effects `fade` / `slide` / `zoom`); `data-shared="name"` elements morph between routes (`view-transition-name`); `cross-document` opts the site into native cross-document (MPA) view transitions (`@view-transition { navigation: auto }`); history push / replace / off with `popstate`; `navigate(url)`, `current`; `usa:navigate` (cancelable), `usa:navigated`.
+- **`motionary/runtime/text`** — `splitText(el, { type: 'chars,words,lines' })`: grapheme-aware characters (`Intl.Segmenter`: emoji, combining marks, CJK), words, lines grouped by rendered position; nested inline markup kept; accessible (`aria-label` with the full text, pieces `aria-hidden`); `--i` index custom property; `revert()` / `resplit()`; pure `segment()` for SSR / workers. CDN `dist/runtime/text.iife.js`; fixed gzip budget.
+- **`motionary/runtime/format-sprite`** — sprite sheets and image sequences: `parseSpriteSheet()` (TexturePacker JSON hash + array with trimmed / rotated frames; Aseprite JSON hash + array with per-frame `duration` and `frameTags` forward / reverse / pingpong / pingpong_reverse), `gridSheet()`, `frameOrder()`, `drawFrame()`, `spritePlayer()` (canvas or element background), `imageSequence('frame_{0001}.webp', …)`, `preloadImages()`, `sequencePlayer()` (cover-fit, scrub with `progress`). All players are runtime timelines (seek, reverse, scroll-scrub). Test fixtures in the real export formats; `test/fixtures/formats/CREDITS.md` lists sample licences.
+- **Runtime tween**: numbers inside any CSS string are interpolated when both ends share the same text (`filter: blur(8px) saturate(0%)`, `box-shadow`, `clip-path`, `matrix(…)`), and values that cannot be interpolated (keywords such as `display`) switch at 50 % like CSS — previously they threw.
+- **New components (10.3)** in `motionary/components/widgets`: `<usa-route-transition>` and `<usa-text-splitter>` — splits into chars / words / lines and staggers them in (`rise`, `fade`, `blur`, `flip`, `wave`) on view, load or hover, optional `loop` (**Requires: motionary/runtime/text**). The 4.x `<usa-split-text>` keeps its name and API; the runtime-powered element is a new tag.
+- Showcase: new gallery cards with copyable code, live demos and live Store thumbnails.
+
+### Accessibility
+- `<usa-text-splitter>` keeps the full sentence as the element's accessible name and hides the animated pieces from screen readers; under reduced motion the text is shown at once. `<usa-route-transition>` swaps instantly under reduced motion and keeps native link semantics (modifier-clicks, `target`, downloads and cross-origin links are left alone).
+
+### Fixed
+- `<usa-route-transition>` (Web Animations fallback) no longer hangs when the exit animation's `finished` promise never settles (background tabs, DOMs without animation timing): the swap waits at most the exit duration.
+- `format-svg`: value interpolation narrows the runtime's new string values correctly (TypeScript build error after the 10.3 tween change; behaviour unchanged).
+
 ## [10.2.0] - 2026-10-09
 
 ### Added
@@ -20,6 +37,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Accessibility
 - `<usa-scroll-scene>` is user-driven (it only moves when the reader scrolls); under reduced motion the scrub is linear and the preview loop does not run. `<usa-motion-inspector>` controls are a labelled `toolbar`, rows have labelled scrub sliders, and its slow-motion switch helps people check motion for vestibular safety.
+
+### Fixed
+- Runtime timeline: a timeline holding an infinitely repeating child no longer seeks to `NaN` (`0 × Infinity`) — infinite-duration timelines seek on the raw time.
+- `format-svg`: SMIL `<set>` without `dur` is applied and holds its value (duration 0, freeze) instead of being dropped with a `NaN` duration.
+- Tests: the 10.1 manifest test no longer pins the exact runtime module list, so releases that add modules keep it green.
 
 ## [10.1.0] - 2026-10-09
 
