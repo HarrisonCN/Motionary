@@ -1,4 +1,4 @@
-# Motionary 10.5.0 — full component reference
+# Motionary 10.6.0 — full component reference
 
 Generated from the source. Machine-readable version: https://harrisoncn.github.io/Motionary/components.json (schema https://harrisoncn.github.io/Motionary/components.schema.json).
 
@@ -317,6 +317,49 @@ import { formatObj, loadObj } from 'motionary/runtime/format-obj';
 use(gl, formatObj);
 const cube = await loadObj('/models/cube.obj'); // + cube.mtl + textures next to it
 new Scene().add(cube);
+```
+
+### motionary/runtime/vector — Lottie + dotLottie player
+
+Plays Lottie (bodymovin JSON) and dotLottie (.lottie) files on Canvas 2D with Motionary’s own renderer (no lottie-web code): shapes, gradients, trim paths, masks, track mattes, precomps, images; a runtime timeline you can seek, reverse and scrub.
+
+- Install: `npm i motionary`
+- Import: `motionary/runtime/vector`
+- Register: `use(vector);` — Register the core first, then the module: use(vector) also registers the core. CDN: load runtime.iife.js, then runtime/vector.iife.js (it registers itself).
+- CDN:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/vector.iife.js"></script>
+```
+
+```js
+import { use } from 'motionary/runtime';
+import { vector, loadLottie, lottiePlayer } from 'motionary/runtime/vector';
+use(vector);
+const { animation } = await loadLottie('/anim/hero.lottie');
+const player = lottiePlayer(canvas, animation, { loop: true });
+player.play();
+```
+
+### @rive-app/canvas — Official Rive runtime
+
+The official MIT-licensed Rive runtime, used by <usa-rive> to play .riv files (artboards, animations, state machines with inputs). Optional peer dependency: lazy-loaded on first use, never bundled into Motionary.
+
+- Install: `npm i @rive-app/canvas`
+- Import: `@rive-app/canvas`
+- Register: `provideRiveRuntime(() => import('@rive-app/canvas')); // lazy: fetched when the first <usa-rive> mounts` — Install the official runtime next to motionary, then hand <usa-rive> a lazy loader with provideRiveRuntime(() => import('@rive-app/canvas')) before the element mounts — your bundler splits the runtime into its own chunk, fetched only when the first <usa-rive> appears. Without a bundler: load the official rive.js from a CDN before the component bundles (window.rive), use an import map, or set runtime-src on the element. Missing → a clear message in place + usa:runtime-missing.
+- CDN:
+
+```html
+<script src="https://unpkg.com/@rive-app/canvas@2.44.1/rive.js"></script>
+```
+
+```js
+// npm i @rive-app/canvas
+import { defineRive } from 'motionary/components/widgets';
+defineRive();
+// <usa-rive src="/anim/icon.riv" state-machine="State Machine 1" autoplay></usa-rive>
 ```
 
 ## Components
@@ -1660,6 +1703,40 @@ A slim NProgress-style bar for route changes and fetches: loadingBar.start() tri
 <usa-lottie-icon name="bell" trigger="hover"></usa-lottie-icon>
 ```
 
+### <usa-lottie-player> — Lottie player (JSON + dotLottie)
+
+10.6: plays Lottie JSON and dotLottie (.lottie) files with Motionary’s own Canvas 2D renderer — shapes, gradients, trim paths, masks, track mattes, precomps and images; autoplay, loop, bounce, segments / markers, play on hover or scrub with scroll. Requires motionary/runtime/vector — npm i motionary, then use(vector) before it mounts.
+
+- Import: `import { defineLottiePlayer } from 'motionary/components/widgets'; defineLottiePlayer();`
+- CDN: https://unpkg.com/motionary@10/dist/widgets.umd.js
+- Attributes: `src`, `animation`, `autoplay`, `loop`, `speed`, `mode`, `segment`, `hover`, `scrub`, `fit`, `background`, `label`
+- Events: `usa:complete`, `usa:load`, `usa:error`, `usa:runtime-missing`
+- Methods: `play()`, `pause()`, `stop()`, `seek()`
+- Requires: motionary/runtime/vector
+  - Install: `npm i motionary`
+  - Order: Register the core first, then the module: use(vector) also registers the core. CDN: load runtime.iife.js, then runtime/vector.iife.js (it registers itself).
+
+```js
+import { use } from 'motionary/runtime';
+import { vector } from 'motionary/runtime/vector';
+import { defineLottiePlayer } from 'motionary/components/widgets';
+
+use(vector);
+defineLottiePlayer(); // registers <usa-lottie-player> — after the prerequisites
+```
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/vector.iife.js"></script>
+<!-- then the component bundles -->
+<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>
+```
+
+```html
+<usa-lottie-player src="/anim/hero.lottie" autoplay loop label="Hero animation"></usa-lottie-player>
+```
+
 ### <usa-lyrics> — Synced karaoke lyrics
 
 7.1: LRC or [data-t] lines; the active line glows, scrolls to the centre and a highlight sweeps across it while past lines dim. Follows an <audio>, <video> or <usa-music-player> via for.
@@ -2505,6 +2582,38 @@ Ink ripple from the pointer — or from the centre for Space/Enter — on any bu
 
 ```html
 <usa-ripple><button>Click me</button></usa-ripple>
+```
+
+### <usa-rive> — Rive player (official runtime)
+
+10.6: plays Rive (.riv) files — artboards, animations and state machines with inputs — through the official Rive runtime @rive-app/canvas, an optional peer dependency that is lazy-loaded on first use (Motionary does not reimplement the proprietary .riv format). Requires @rive-app/canvas — npm i @rive-app/canvas, or load its CDN script first; missing → a clear message in place.
+
+- Import: `import { defineRive } from 'motionary/components/widgets'; defineRive();`
+- CDN: https://unpkg.com/motionary@10/dist/widgets.umd.js
+- Attributes: `src`, `artboard`, `animation`, `state-machine`, `autoplay`, `fit`, `label`, `runtime-src`
+- Events: `usa:load`, `usa:error`, `usa:runtime-missing`
+- Methods: `play()`, `pause()`, `input()`
+- Requires: @rive-app/canvas
+  - Install: `npm i @rive-app/canvas`
+  - Order: Install the official runtime next to motionary, then hand <usa-rive> a lazy loader with provideRiveRuntime(() => import('@rive-app/canvas')) before the element mounts — your bundler splits the runtime into its own chunk, fetched only when the first <usa-rive> appears. Without a bundler: load the official rive.js from a CDN before the component bundles (window.rive), use an import map, or set runtime-src on the element. Missing → a clear message in place + usa:runtime-missing.
+
+```js
+import { provideRiveRuntime } from 'motionary/components/widgets';
+import { defineRive } from 'motionary/components/widgets';
+
+provideRiveRuntime(() => import('@rive-app/canvas')); // lazy: fetched when the first <usa-rive> mounts
+defineRive(); // registers <usa-rive> — after the prerequisites
+```
+
+```html
+<script src="https://unpkg.com/@rive-app/canvas@2.44.1/rive.js"></script>
+<!-- then the component bundles -->
+<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>
+```
+
+```html
+<usa-rive src="/anim/icon.riv" state-machine="State Machine 1" autoplay label="Icon"></usa-rive>
 ```
 
 ### <usa-route-transition> — Route transition container
@@ -3354,6 +3463,20 @@ toast("Saved") slides a notification in; it pauses on hover, stacks with FLIP an
   import { toast } from 'motionary/components/feedback';
   toast('Saved', { type: 'success' });
 </script>
+```
+
+### <usa-token-editor> — Motion token editor (W3C DTCG)
+
+10.6 (motion design tokens 2.0): edit duration and cubic-bézier easing tokens with a live preview per token, then export W3C Design Tokens (DTCG 2025.10 or the earlier draft) or import a DTCG file — aliases resolved, problems listed; apply writes the tokens to :root custom properties as you edit.
+
+- Import: `import { defineTokenEditor } from 'motionary/components/widgets'; defineTokenEditor();`
+- CDN: https://unpkg.com/motionary@10/dist/widgets.umd.js
+- Attributes: `apply`, `format`, `groups`
+- Events: `usa:export`, `usa:import`, `usa:change`
+- Methods: `exportJSON()`, `importJSON()`
+
+```html
+<usa-token-editor apply format="2025.10"></usa-token-editor>
 ```
 
 ### <usa-typewriter> — Typewriter

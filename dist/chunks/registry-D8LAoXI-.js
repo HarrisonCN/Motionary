@@ -7,7 +7,7 @@
  * inside Web Workers.
  */
 /** Runtime version (kept in sync with the package version by the release script). */
-const RUNTIME_VERSION = '10.5.0';
+const RUNTIME_VERSION = '10.6.0';
 /** Where the CDN builds live (major-pinned). */
 const RUNTIME_CDN = 'https://cdn.jsdelivr.net/npm/motionary@10/dist/';
 const KEY = Symbol.for('motionary.runtime');
@@ -66,4 +66,4 @@ function requireModule(id, who) {
 const registeredModules = () => Array.from(registry().modules.keys());
 
 export { RUNTIME_VERSION as R, register as a, RUNTIME_CDN as b, RuntimeModuleError as c, moduleCdn as d, modulePath as e, registeredModules as f, requireModule as g, hasModule as h, missingMessage as m, registry as r };
-//# sourceMappingURL=registry-DXdFb2fJ.js.map
+//# sourceMappingURL=registry-D8LAoXI-.js.map

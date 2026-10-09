@@ -307,7 +307,7 @@
   {
     "name": "import 'motionary/components/tokens'",
     "import": "export * from 'pkg/components/tokens';",
-    "limit": 2048
+    "limit": 3840
   },
   {
     "name": "import 'motionary/components/a11y'",

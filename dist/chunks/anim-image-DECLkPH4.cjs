@@ -1,6 +1,6 @@
 'use strict';
 
-var tween = require('./tween-_BGIl6hK.cjs');
+var tween = require('./tween-CmkdSyaC.cjs');
 
 /**
  * Shared internals of the animated-image loaders (`format-gif`, `format-apng`,
@@ -171,4 +171,4 @@ exports.composeFrames = composeFrames;
 exports.crc32 = crc32;
 exports.fixDelay = fixDelay;
 exports.u8 = u8;
-//# sourceMappingURL=anim-image-DuxvYhq6.cjs.map
+//# sourceMappingURL=anim-image-DECLkPH4.cjs.map

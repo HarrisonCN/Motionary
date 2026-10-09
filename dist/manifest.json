@@ -3,7 +3,7 @@
   "format": "motionary/components",
   "schemaVersion": 1,
   "package": "motionary",
-  "version": "10.5.0",
+  "version": "10.6.0",
   "homepage": "https://harrisoncn.github.io/Motionary/",
   "llms": "https://harrisoncn.github.io/Motionary/llms.txt",
   "cdn": {
@@ -977,6 +977,174 @@
         ]
       ],
       "example": "import { use } from 'motionary/runtime';\nimport { gl, Scene } from 'motionary/runtime/gl';\nimport { formatObj, loadObj } from 'motionary/runtime/format-obj';\nuse(gl, formatObj);\nconst cube = await loadObj('/models/cube.obj'); // + cube.mtl + textures next to it\nnew Scene().add(cube);"
+    },
+    {
+      "kind": "runtime",
+      "id": "vector",
+      "label": "motionary/runtime/vector",
+      "title": "Lottie + dotLottie player",
+      "summary": "Plays Lottie (bodymovin JSON) and dotLottie (.lottie) files on Canvas 2D with Motionary’s own renderer (no lottie-web code): shapes, gradients, trim paths, masks, track mattes, precomps, images; a runtime timeline you can seek, reverse and scrub.",
+      "install": "npm i motionary",
+      "importPath": "motionary/runtime/vector",
+      "import": "import { use } from 'motionary/runtime';\nimport { vector } from 'motionary/runtime/vector';",
+      "register": "use(vector);",
+      "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/vector.iife.js\"></script>",
+      "cdnEsm": "https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/vector.js",
+      "order": "Register the core first, then the module: use(vector) also registers the core. CDN: load runtime.iife.js, then runtime/vector.iife.js (it registers itself).",
+      "docs": "docs/runtime/vector.md",
+      "budget": 12288,
+      "exports": [
+        "vector",
+        "loadLottie",
+        "parseDotLottie",
+        "unzipEntries",
+        "lottiePlayer",
+        "renderLottieFrame",
+        "inspectLottie",
+        "propValue",
+        "transformAt",
+        "trimContours",
+        "loadLottieImages"
+      ],
+      "compat": [
+        [
+          "shape, solid, null, image and precomp layers; parenting; in / out points",
+          "yes",
+          "precomp time stretch + time remap"
+        ],
+        [
+          "transforms: anchor, position (split X / Y, spatial bezier), scale, rotation, skew, opacity",
+          "yes",
+          ""
+        ],
+        [
+          "paths, rectangles (rounded), ellipses, stars / polygons, groups",
+          "yes",
+          ""
+        ],
+        [
+          "fills (non-zero / even-odd), strokes (caps, joins, dashes)",
+          "yes",
+          ""
+        ],
+        [
+          "linear + radial gradient fills / strokes",
+          "yes",
+          "highlight length / angle ignored"
+        ],
+        [
+          "trim paths (individually / simultaneously)",
+          "yes",
+          ""
+        ],
+        [
+          "masks: add, subtract, intersect, inverted, opacity",
+          "yes",
+          ""
+        ],
+        [
+          "track mattes: alpha, alpha inverted",
+          "yes",
+          "luma mattes approximated by alpha"
+        ],
+        [
+          "keyframes: per-dimension bezier easing, hold keyframes, v4 + v5 files",
+          "yes",
+          ""
+        ],
+        [
+          "dotLottie (.lottie): stored + deflate entries, manifest v1 / v2, several animations, embedded images",
+          "yes",
+          "deflate needs the native DecompressionStream"
+        ],
+        [
+          "markers → named segments",
+          "yes",
+          ""
+        ],
+        [
+          "text layers, expressions",
+          "no",
+          "planned for 10.8 (subset)"
+        ],
+        [
+          "3D layers, layer effects, merge paths, repeaters",
+          "no",
+          "listed by inspectLottie() / el.unsupported"
+        ],
+        [
+          "dotLottie themes / state machines",
+          "no",
+          "planned for 10.9 (subset)"
+        ],
+        [
+          "SSR / workers",
+          "partial",
+          "parsing + unzip are pure; rendering needs a 2D canvas (OffscreenCanvas works)"
+        ]
+      ],
+      "example": "import { use } from 'motionary/runtime';\nimport { vector, loadLottie, lottiePlayer } from 'motionary/runtime/vector';\nuse(vector);\nconst { animation } = await loadLottie('/anim/hero.lottie');\nconst player = lottiePlayer(canvas, animation, { loop: true });\nplayer.play();"
+    },
+    {
+      "kind": "peer",
+      "id": "rive",
+      "label": "@rive-app/canvas",
+      "title": "Official Rive runtime",
+      "summary": "The official MIT-licensed Rive runtime, used by <usa-rive> to play .riv files (artboards, animations, state machines with inputs). Optional peer dependency: lazy-loaded on first use, never bundled into Motionary.",
+      "install": "npm i @rive-app/canvas",
+      "importPath": "@rive-app/canvas",
+      "import": "import { provideRiveRuntime } from 'motionary/components/widgets';",
+      "register": "provideRiveRuntime(() => import('@rive-app/canvas')); // lazy: fetched when the first <usa-rive> mounts",
+      "cdn": "<script src=\"https://unpkg.com/@rive-app/canvas@2.44.1/rive.js\"></script>",
+      "cdnEsm": "https://cdn.jsdelivr.net/npm/@rive-app/canvas@2.44.1/+esm",
+      "order": "Install the official runtime next to motionary, then hand <usa-rive> a lazy loader with provideRiveRuntime(() => import('@rive-app/canvas')) before the element mounts — your bundler splits the runtime into its own chunk, fetched only when the first <usa-rive> appears. Without a bundler: load the official rive.js from a CDN before the component bundles (window.rive), use an import map, or set runtime-src on the element. Missing → a clear message in place + usa:runtime-missing.",
+      "why": ".riv is Rive’s proprietary binary format with a state-machine runtime; the official runtime is the only faithful player, so Motionary does not reimplement it",
+      "docs": "docs/runtime/rive.md",
+      "budget": 0,
+      "exports": [
+        "provideRiveRuntime",
+        "loadRiveRuntime",
+        "RIVE_PEER",
+        "RIVE_CDN"
+      ],
+      "compat": [
+        [
+          ".riv files: artboards, linear animations",
+          "yes",
+          "played by the official runtime"
+        ],
+        [
+          "state machines + inputs (boolean, number, trigger)",
+          "yes",
+          "el.input(name)"
+        ],
+        [
+          "fit: contain, cover, fill, fitWidth, fitHeight, none",
+          "yes",
+          ""
+        ],
+        [
+          "lazy loading, clear error when the runtime is missing",
+          "yes",
+          "usa:runtime-missing"
+        ],
+        [
+          "reduced motion",
+          "yes",
+          "no autoplay (first frame)"
+        ],
+        [
+          "WebGL2 renderer (@rive-app/webgl2)",
+          "partial",
+          "pass its URL as runtime-src or provideRiveRuntime(() => import('@rive-app/webgl2'))"
+        ],
+        [
+          "SSR",
+          "yes",
+          "nothing loads until the element mounts in a browser"
+        ]
+      ],
+      "example": "// npm i @rive-app/canvas\nimport { defineRive } from 'motionary/components/widgets';\ndefineRive();\n// <usa-rive src=\"/anim/icon.riv\" state-machine=\"State Machine 1\" autoplay></usa-rive>"
     }
   ],
   "components": [
@@ -4613,6 +4781,75 @@
       "source": "src/components/widgets/lottie-icon.ts"
     },
     {
+      "id": "lottie-player",
+      "tag": "usa-lottie-player",
+      "title": "Lottie player (JSON + dotLottie)",
+      "description": "10.6: plays Lottie JSON and dotLottie (.lottie) files with Motionary’s own Canvas 2D renderer — shapes, gradients, trim paths, masks, track mattes, precomps and images; autoplay, loop, bounce, segments / markers, play on hover or scrub with scroll. Requires motionary/runtime/vector — npm i motionary, then use(vector) before it mounts.",
+      "category": "ui",
+      "since": "10.6",
+      "keywords": [
+        "lottie",
+        "dotlottie",
+        "bodymovin",
+        "vector animation",
+        "player",
+        "runtime"
+      ],
+      "import": {
+        "path": "motionary/components/widgets",
+        "define": "defineLottiePlayer",
+        "register": "defineLottiePlayer();"
+      },
+      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "attributes": [
+        "src",
+        "animation",
+        "autoplay",
+        "loop",
+        "speed",
+        "mode",
+        "segment",
+        "hover",
+        "scrub",
+        "fit",
+        "background",
+        "label"
+      ],
+      "events": [
+        "usa:complete",
+        "usa:load",
+        "usa:error",
+        "usa:runtime-missing"
+      ],
+      "slots": [],
+      "methods": [
+        "play",
+        "pause",
+        "stop",
+        "seek"
+      ],
+      "example": "<usa-lottie-player src=\"/anim/hero.lottie\" autoplay loop label=\"Hero animation\"></usa-lottie-player>",
+      "esm": "import { use } from 'motionary/runtime';\nimport { vector } from 'motionary/runtime/vector';\n\nuse(vector);\nimport { defineLottiePlayer } from 'motionary/components/widgets';\n\ndefineLottiePlayer(); // registers <usa-lottie-player>\n\n/* then use it in your HTML:\n<usa-lottie-player src=\"/anim/hero.lottie\" autoplay loop label=\"Hero animation\"></usa-lottie-player>\n*/",
+      "requires": [
+        "vector"
+      ],
+      "prerequisites": {
+        "badge": "Requires: motionary/runtime/vector",
+        "modules": [
+          "motionary/runtime/vector"
+        ],
+        "install": "npm i motionary",
+        "importAndRegister": "import { use } from 'motionary/runtime';\nimport { vector } from 'motionary/runtime/vector';\nimport { defineLottiePlayer } from 'motionary/components/widgets';\n\nuse(vector);\ndefineLottiePlayer(); // registers <usa-lottie-player> — after the prerequisites",
+        "order": "Register the core first, then the module: use(vector) also registers the core. CDN: load runtime.iife.js, then runtime/vector.iife.js (it registers itself).",
+        "cdn": "<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/vector.iife.js\"></script>\n<!-- then the component bundles -->\n<script src=\"https://unpkg.com/motionary@10/dist/components.umd.js\"></script>\n<script src=\"https://unpkg.com/motionary@10/dist/widgets.umd.js\"></script>",
+        "example": "<usa-lottie-player src=\"/anim/hero.lottie\" autoplay loop label=\"Hero animation\"></usa-lottie-player>",
+        "docs": [
+          "https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/vector.md"
+        ]
+      },
+      "source": "src/components/widgets/lottie-player.ts"
+    },
+    {
       "id": "lyrics",
       "tag": "usa-lyrics",
       "title": "Synced karaoke lyrics",
@@ -6603,6 +6840,69 @@
       "source": "src/components/interaction/ripple.ts"
     },
     {
+      "id": "rive",
+      "tag": "usa-rive",
+      "title": "Rive player (official runtime)",
+      "description": "10.6: plays Rive (.riv) files — artboards, animations and state machines with inputs — through the official Rive runtime @rive-app/canvas, an optional peer dependency that is lazy-loaded on first use (Motionary does not reimplement the proprietary .riv format). Requires @rive-app/canvas — npm i @rive-app/canvas, or load its CDN script first; missing → a clear message in place.",
+      "category": "ui",
+      "since": "10.6",
+      "keywords": [
+        "rive",
+        "riv",
+        "state machine",
+        "interactive animation",
+        "official runtime",
+        "peer"
+      ],
+      "import": {
+        "path": "motionary/components/widgets",
+        "define": "defineRive",
+        "register": "defineRive();"
+      },
+      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "attributes": [
+        "src",
+        "artboard",
+        "animation",
+        "state-machine",
+        "autoplay",
+        "fit",
+        "label",
+        "runtime-src"
+      ],
+      "events": [
+        "usa:load",
+        "usa:error",
+        "usa:runtime-missing"
+      ],
+      "slots": [],
+      "methods": [
+        "play",
+        "pause",
+        "input"
+      ],
+      "example": "<usa-rive src=\"/anim/icon.riv\" state-machine=\"State Machine 1\" autoplay label=\"Icon\"></usa-rive>",
+      "esm": "import { provideRiveRuntime } from 'motionary/components/widgets';\n\nprovideRiveRuntime(() => import('@rive-app/canvas')); // lazy: fetched when the first <usa-rive> mounts\nimport { defineRive } from 'motionary/components/widgets';\n\ndefineRive(); // registers <usa-rive>\n\n/* then use it in your HTML:\n<usa-rive src=\"/anim/icon.riv\" state-machine=\"State Machine 1\" autoplay label=\"Icon\"></usa-rive>\n*/",
+      "requires": [
+        "rive"
+      ],
+      "prerequisites": {
+        "badge": "Requires: @rive-app/canvas",
+        "modules": [
+          "@rive-app/canvas"
+        ],
+        "install": "npm i @rive-app/canvas",
+        "importAndRegister": "import { provideRiveRuntime } from 'motionary/components/widgets';\nimport { defineRive } from 'motionary/components/widgets';\n\nprovideRiveRuntime(() => import('@rive-app/canvas')); // lazy: fetched when the first <usa-rive> mounts\ndefineRive(); // registers <usa-rive> — after the prerequisites",
+        "order": "Install the official runtime next to motionary, then hand <usa-rive> a lazy loader with provideRiveRuntime(() => import('@rive-app/canvas')) before the element mounts — your bundler splits the runtime into its own chunk, fetched only when the first <usa-rive> appears. Without a bundler: load the official rive.js from a CDN before the component bundles (window.rive), use an import map, or set runtime-src on the element. Missing → a clear message in place + usa:runtime-missing.",
+        "cdn": "<script src=\"https://unpkg.com/@rive-app/canvas@2.44.1/rive.js\"></script>\n<!-- then the component bundles -->\n<script src=\"https://unpkg.com/motionary@10/dist/components.umd.js\"></script>\n<script src=\"https://unpkg.com/motionary@10/dist/widgets.umd.js\"></script>",
+        "example": "<usa-rive src=\"/anim/icon.riv\" state-machine=\"State Machine 1\" autoplay label=\"Icon\"></usa-rive>",
+        "docs": [
+          "https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/rive.md"
+        ]
+      },
+      "source": "src/components/widgets/rive.ts"
+    },
+    {
       "id": "route-transition",
       "tag": "usa-route-transition",
       "title": "Route transition container",
@@ -8468,6 +8768,48 @@
       "requires": [],
       "prerequisites": null,
       "source": "src/components/feedback/toast.ts"
+    },
+    {
+      "id": "token-editor",
+      "tag": "usa-token-editor",
+      "title": "Motion token editor (W3C DTCG)",
+      "description": "10.6 (motion design tokens 2.0): edit duration and cubic-bézier easing tokens with a live preview per token, then export W3C Design Tokens (DTCG 2025.10 or the earlier draft) or import a DTCG file — aliases resolved, problems listed; apply writes the tokens to :root custom properties as you edit.",
+      "category": "ui",
+      "since": "10.6",
+      "keywords": [
+        "design tokens",
+        "dtcg",
+        "w3c",
+        "motion tokens",
+        "easing",
+        "duration"
+      ],
+      "import": {
+        "path": "motionary/components/widgets",
+        "define": "defineTokenEditor",
+        "register": "defineTokenEditor();"
+      },
+      "cdn": "https://unpkg.com/motionary@10/dist/widgets.umd.js",
+      "attributes": [
+        "apply",
+        "format",
+        "groups"
+      ],
+      "events": [
+        "usa:export",
+        "usa:import",
+        "usa:change"
+      ],
+      "slots": [],
+      "methods": [
+        "exportJSON",
+        "importJSON"
+      ],
+      "example": "<usa-token-editor apply format=\"2025.10\"></usa-token-editor>",
+      "esm": "import { defineTokenEditor } from 'motionary/components/widgets';\n\ndefineTokenEditor(); // registers <usa-token-editor>\n\n/* then use it in your HTML:\n<usa-token-editor apply format=\"2025.10\"></usa-token-editor>\n*/",
+      "requires": [],
+      "prerequisites": null,
+      "source": "src/components/widgets/token-editor.ts"
     },
     {
       "id": "typewriter",
