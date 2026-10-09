@@ -654,7 +654,7 @@ export const components = [
     '7.6：正射投影的 SVG 地球 —— 经纬网、脉冲标记点，在视口内自转，可拖拽旋转，flyTo(name) 把城市转到正面。无需 WebGL 与地图瓦片。',
     ['globe', 'map', 'geo', 'earth', 'markers'],
     '<usa-globe markers="Shanghai:31.2,121.5; London:51.5,-0.1; New York:40.7,-74"></usa-globe>\n<script>globe.flyTo(\'London\');</script>',
-    '<div class="demo-col"><usa-globe class="demo-gl" markers="Shanghai:31.2,121.5; London:51.5,-0.1; New York:40.7,-74; Sydney:-33.9,151.2" speed="20"></usa-globe><button type="button" class="demo-btn" data-gl>Fly to next city</button></div>',
+    '<div class="demo-col"><usa-globe class="demo-globe" markers="Shanghai:31.2,121.5; London:51.5,-0.1; New York:40.7,-74; Sydney:-33.9,151.2" speed="20"></usa-globe><button type="button" class="demo-btn" data-gl>Fly to next city</button></div>',
     undefined, { since: '7.6' }),
   W('usa-location-card', 'ui', 'Location card', '位置卡片',
     '7.6: a place card with a stylised mini map — the route from the origin draws itself, the pin drops in with a bounce and a ring pulses; distance computed with haversine (km or mi).',
