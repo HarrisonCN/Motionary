@@ -6,7 +6,7 @@
 
 - **Category:** click · **since** 6.8
 - **Import:** `import { definePullCord } from 'motionary/components/widgets'` then `definePullCord();`
-- **CDN:** `<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
 - **Attributes:** —
 - **Events:** `usa:change`
 - **Slots:** —

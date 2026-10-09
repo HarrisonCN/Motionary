@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 7.2
 - **Import:** `import { defineGauge } from 'motionary/components/widgets'` then `defineGauge();`
-- **CDN:** `<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
 - **Attributes:** `min`, `max`, `zones`, `unit`, `label`
 - **Events:** —
 - **Slots:** —

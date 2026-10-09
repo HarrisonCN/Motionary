@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 7.7
 - **Import:** `import { defineField } from 'motionary/components/widgets'` then `defineField();`
-- **CDN:** `<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
 - **Attributes:** `label`, `hint`, `error`, `strength`
 - **Events:** `usa:invalid`, `usa:valid`
 - **Slots:** —

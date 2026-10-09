@@ -13,11 +13,11 @@ Part of Motionary's own zero-dependency runtime. Size budget: **4.5 KB gzip** (e
 3. **CDN:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/scroll.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/scroll.iife.js"></script>
 ```
 
-   ESM from a CDN: `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime/scroll.js`
+   ESM from a CDN: `https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/scroll.js`
 
 4. **Import order & registration:** Register the core first, then the module: use(scroll) also registers the core. CDN: load runtime.iife.js, then runtime/scroll.iife.js (it registers itself).
 

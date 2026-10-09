@@ -1409,19 +1409,6 @@
  },
  {
   "kind": "widget",
-  "name": "three-scene",
-  "entry": "motionary/widgets/three-scene",
-  "src": "src/entries/widgets/three-scene.ts",
-  "tag": "usa-three-scene",
-  "define": "defineThreeScene",
-  "types": [
-   "UsaGlSceneElement"
-  ],
-  "dts": "../components/widgets",
-  "module": "components/widgets/gl-scene"
- },
- {
-  "kind": "widget",
   "name": "gpu-particles",
   "entry": "motionary/widgets/gpu-particles",
   "src": "src/entries/widgets/gpu-particles.ts",

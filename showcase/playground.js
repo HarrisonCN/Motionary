@@ -6,7 +6,7 @@ import { PLAYGROUND_EFFECTS, PLAYGROUND_CONTENT, PLAYGROUND_TABS, PG_STRINGS, DE
 import { highlight } from './codegen.js';
 
 const LOCAL = new URL('../dist/', import.meta.url).href;
-const CDN = 'https://unpkg.com/motionary@6/dist/';
+const CDN = 'https://unpkg.com/motionary@11/dist/';
 const $ = (s) => document.querySelector(s);
 let lang = document.documentElement.lang === 'zh-CN' ? 'zh' : 'en';
 let tab = 'html';

@@ -6,7 +6,7 @@ Reveal images or sections through a growing mask: circle, diamond, star, iris or
 
 - **Category:** svg
 - **Import:** `import { defineMaskReveal } from 'motionary/components/svg'` then `defineMaskReveal();`
-- **CDN:** `<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
 - **Attributes:** —
 - **Events:** `usa:complete`
 - **Slots:** —

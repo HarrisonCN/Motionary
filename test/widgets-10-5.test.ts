@@ -173,14 +173,10 @@ describe('10.5 widgets', () => {
     expect(el.dataset.usaBackend).toBe('none'); // jsdom has no WebGL2
     expect(errs[0]).toMatch(/WebGL2/);
   });
-  it('<usa-gl-scene src="x.glb"> also needs format-gltf; <usa-three-scene> is an alias', () => {
+  it('<usa-three-scene> (the 10.5 alias) was removed in 11.0 — only <usa-gl-scene> is defined', () => {
     rt.use(G.gl);
-    const c = HTMLCanvasElement.prototype.getContext;
-    HTMLCanvasElement.prototype.getContext = function () { return null; } as any;
-    document.body.innerHTML = '<usa-three-scene></usa-three-scene>';
-    expect(customElements.get('usa-three-scene')).toBeTruthy();
-    expect(customElements.get('usa-three-scene')).not.toBe(customElements.get('usa-gl-scene'));
-    HTMLCanvasElement.prototype.getContext = c;
+    expect(customElements.get('usa-gl-scene')).toBeTruthy();
+    expect(customElements.get('usa-three-scene')).toBeUndefined();
   });
   it('<usa-gpu-particles> falls back to Canvas 2D without WebGPU; WGSL splits compute (read_write) and draw (read-only)', () => {
     document.body.innerHTML = '<usa-gpu-particles count="500" mode="galaxy"></usa-gpu-particles>';

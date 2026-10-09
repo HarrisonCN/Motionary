@@ -6,7 +6,7 @@
 
 - **Category:** click · **since** 6.4
 - **Import:** `import { defineStarRating } from 'motionary/components/widgets'` then `defineStarRating();`
-- **CDN:** `<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
 - **Attributes:** `max`, `icon`, `readonly`, `step`
 - **Events:** `usa:change`
 - **Slots:** —

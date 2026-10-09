@@ -6,7 +6,7 @@ Double tap or double click a photo to pop a heart (or any emoji) at the tap poin
 
 - **Category:** click
 - **Import:** `import { defineDoubleTap } from 'motionary/components/click'` then `defineDoubleTap();`
-- **CDN:** `<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
 - **Attributes:** —
 - **Events:** `usa:double-tap`
 - **Slots:** —

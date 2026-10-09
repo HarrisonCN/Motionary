@@ -134,31 +134,31 @@ import { defineHeroVideo } from '../widgets/hero-video.js';
 import { defineMotionPrefs } from '../widgets/motion-prefs.js';
 import { definePauseAll } from '../widgets/pause-all.js';
 import { definePerfMonitor } from '../widgets/perf-monitor.js';
-import { d as defineWorkerCanvas } from '../chunks/worker-canvas-Bkwd1euX.js';
-export { W as WORKER_SCENES } from '../chunks/worker-canvas-Bkwd1euX.js';
+import { d as defineWorkerCanvas } from '../chunks/worker-canvas-BZNHRLcu.js';
+export { W as WORKER_SCENES, a as WORKER_SCENE_FNS } from '../chunks/worker-canvas-BZNHRLcu.js';
 import { defineMotionSpec } from '../widgets/motion-spec.js';
 import { defineNativePreview } from '../widgets/native-preview.js';
 import { definePluginCard } from '../widgets/plugin-card.js';
 import { defineInstallButton } from '../widgets/install-button.js';
-import { d as defineScrollScene } from '../chunks/scroll-scene-DtAaP0Aa.js';
-export { p as parseScrub } from '../chunks/scroll-scene-DtAaP0Aa.js';
+import { d as defineScrollScene } from '../chunks/scroll-scene-eHhGcoDQ.js';
+export { p as parseScrub } from '../chunks/scroll-scene-eHhGcoDQ.js';
 import { defineMotionInspector } from '../widgets/motion-inspector.js';
 import { defineRouteTransition } from '../widgets/route-transition.js';
 import { defineTextSplitter } from '../widgets/text-splitter.js';
 import { defineScrollRing } from '../widgets/scroll-ring.js';
 import { defineParallaxLayers } from '../widgets/parallax-layers.js';
 import { defineSmoothScroll } from '../widgets/smooth-scroll.js';
-import { d as defineThreeScene, a as defineGlScene } from '../chunks/three-scene-DibsZUID.js';
+import { d as defineGlScene } from '../chunks/gl-scene-BDA6FlGQ.js';
 import { d as defineGpuParticles } from '../chunks/gpu-particles-BV4EUv4i.js';
 export { P as PARTICLE_DRAW_WGSL, a as PARTICLE_SIM_WGSL } from '../chunks/gpu-particles-BV4EUv4i.js';
 import { d as defineShaderBackdrop } from '../chunks/shader-backdrop-Ce8aEeGG.js';
 export { B as BACKDROP_PRESETS, P as POST_PASSES } from '../chunks/shader-backdrop-Ce8aEeGG.js';
-import { d as defineLottiePlayer } from '../chunks/lottie-player-UJHOl-8L.js';
+import { d as defineLottiePlayer } from '../chunks/lottie-player-CPdwHhqe.js';
 import { d as defineRive } from '../chunks/rive-B_yxYGBn.js';
 export { R as RIVE_CDN, a as RIVE_PEER, l as loadRiveRuntime, p as provideRiveRuntime } from '../chunks/rive-B_yxYGBn.js';
 import { defineTokenEditor } from '../widgets/token-editor.js';
-import { d as definePhysicsPlayground } from '../chunks/physics-playground-B19qANJs.js';
-export { P as PHYSICS_PRESETS } from '../chunks/physics-playground-B19qANJs.js';
+import { d as definePhysicsPlayground } from '../chunks/physics-playground-CluT_Nj9.js';
+export { P as PHYSICS_PRESETS } from '../chunks/physics-playground-CluT_Nj9.js';
 import { defineMotionPrompt } from '../widgets/motion-prompt.js';
 import '../chunks/base-BTev8qxg.js';
 import '../chunks/shared-C8Pi6tuh.js';
@@ -188,8 +188,8 @@ import './fx-safe.js';
 import './fx-perf.js';
 import './design.js';
 import './native.js';
-import '../chunks/registry-RJYrdUTF.js';
-import '../chunks/runtime-link-CQyKFwE1.js';
+import '../chunks/registry-W7pXOwju.js';
+import '../chunks/runtime-link-CP3qaRja.js';
 import '../chunks/scroll-driven-LghshrWq.js';
 import './ai.js';
 
@@ -247,7 +247,7 @@ const WIDGETS = {
     '10.2': { 'usa-scroll-scene': defineScrollScene, 'usa-motion-inspector': defineMotionInspector },
     '10.3': { 'usa-route-transition': defineRouteTransition, 'usa-text-splitter': defineTextSplitter },
     '10.4': { 'usa-scroll-ring': defineScrollRing, 'usa-parallax-layers': defineParallaxLayers, 'usa-smooth-scroll': defineSmoothScroll },
-    '10.5': { 'usa-gl-scene': defineGlScene, 'usa-three-scene': defineThreeScene, 'usa-gpu-particles': defineGpuParticles, 'usa-shader-backdrop': defineShaderBackdrop },
+    '10.5': { 'usa-gl-scene': defineGlScene, 'usa-gpu-particles': defineGpuParticles, 'usa-shader-backdrop': defineShaderBackdrop },
     '10.6': { 'usa-lottie-player': defineLottiePlayer, 'usa-rive': defineRive, 'usa-token-editor': defineTokenEditor },
     '10.7': { 'usa-physics-playground': definePhysicsPlayground, 'usa-motion-prompt': defineMotionPrompt },
 };
@@ -261,5 +261,5 @@ function defineWidgets(release) {
                 fn(tag);
 }
 
-export { WIDGETS, WIDGET_TAGS, defineAddToCart, defineBadgeWall, defineBarChart, defineBgGenerator, defineCarousel, defineCartDrawer, defineChapterNav, defineChatComposer, defineClockControl, defineCodeExport, defineColorPicker, defineCommandPalette, defineCompare, defineCountdown, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineFestivalBanner, defineField, defineFileDrop, defineGauge, defineGenArt, defineGestureSticker, defineGlScene, defineGlobe, defineGpuParticles, defineGyroCard, defineHeroVideo, defineHudPanel, defineHydrate, defineInstallButton, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLiquidNav, defineLocationCard, defineLottie, defineLottieIcon, defineLottiePlayer, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMessageList, defineMilestones, defineModal, defineMotion, defineMotionInspector, defineMotionPrefs, defineMotionPrompt, defineMotionSpec, defineMusicPlayer, defineNativePreview, defineNavMorph, defineNotificationBell, defineOdometer, defineOrganicCard, defineOtp, definePagination, definePanorama, defineParallaxLayers, definePauseAll, definePerfMonitor, definePhysicsPlayground, definePluginCard, definePluginStore, definePresence, definePrizeWheel, defineProductGallery, defineProgressRing, definePropPanel, definePullCord, defineRadar, defineReactions, defineRedEnvelope, defineRetroButton, defineRive, defineRouteTransition, defineScene, defineScrollRing, defineScrollScene, defineSegmented, defineShaderBackdrop, defineSheet, defineShortcut, defineSkeletonReveal, defineSketchChart, defineSmoothScroll, defineSparkline, defineSpatialCard, defineStarRating, defineStepper, defineStickyWall, defineStories, defineSuggestionChips, defineSwipeDeck, defineSwitch, defineTabBar, defineTerminal, defineTextSplitter, defineThemeSurface, defineThemeSwitcher, defineThreeScene, defineTip, defineToastStack, defineTokenEditor, defineUploadProgress, defineVideoCard, defineVoiceButton, defineVolumeKnob, defineWeatherCard, defineWidgets, defineWorkerCanvas, defineXpBar };
+export { WIDGETS, WIDGET_TAGS, defineAddToCart, defineBadgeWall, defineBarChart, defineBgGenerator, defineCarousel, defineCartDrawer, defineChapterNav, defineChatComposer, defineClockControl, defineCodeExport, defineColorPicker, defineCommandPalette, defineCompare, defineCountdown, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineFestivalBanner, defineField, defineFileDrop, defineGauge, defineGenArt, defineGestureSticker, defineGlScene, defineGlobe, defineGpuParticles, defineGyroCard, defineHeroVideo, defineHudPanel, defineHydrate, defineInstallButton, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLiquidNav, defineLocationCard, defineLottie, defineLottieIcon, defineLottiePlayer, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMessageList, defineMilestones, defineModal, defineMotion, defineMotionInspector, defineMotionPrefs, defineMotionPrompt, defineMotionSpec, defineMusicPlayer, defineNativePreview, defineNavMorph, defineNotificationBell, defineOdometer, defineOrganicCard, defineOtp, definePagination, definePanorama, defineParallaxLayers, definePauseAll, definePerfMonitor, definePhysicsPlayground, definePluginCard, definePluginStore, definePresence, definePrizeWheel, defineProductGallery, defineProgressRing, definePropPanel, definePullCord, defineRadar, defineReactions, defineRedEnvelope, defineRetroButton, defineRive, defineRouteTransition, defineScene, defineScrollRing, defineScrollScene, defineSegmented, defineShaderBackdrop, defineSheet, defineShortcut, defineSkeletonReveal, defineSketchChart, defineSmoothScroll, defineSparkline, defineSpatialCard, defineStarRating, defineStepper, defineStickyWall, defineStories, defineSuggestionChips, defineSwipeDeck, defineSwitch, defineTabBar, defineTerminal, defineTextSplitter, defineThemeSurface, defineThemeSwitcher, defineTip, defineToastStack, defineTokenEditor, defineUploadProgress, defineVideoCard, defineVoiceButton, defineVolumeKnob, defineWeatherCard, defineWidgets, defineWorkerCanvas, defineXpBar };
 //# sourceMappingURL=widgets.js.map

@@ -17,7 +17,8 @@
  * - keyframes: bezier easing per dimension, hold keyframes, v4 (`e`) and v5+
  *   (`s` only) files;
  * - **dotLottie** (`.lottie`): zip (stored + deflate via the native
- *   `DecompressionStream`), `manifest.json` v1 / v2, several animations,
+ *   `DecompressionStream`; 11.0: entry-count / size / ratio limits enforced
+ *   while inflating — `ZipLimits`, `ZIP_LIMITS`), `manifest.json` v1 / v2, several animations,
  *   embedded images.
  *
  * 10.8: **text layers** (system / web fonts by family + style, justification,
@@ -583,37 +584,86 @@ export function inspectLottie(anim: LottieAnimation): LottieReport {
 }
 
 // ------------------------------------------------------------------ dotLottie (zip)
-export interface ZipEntry { name: string; method: Num; data: Uint8Array }
+export interface ZipEntry { name: string; method: Num; data: Uint8Array; size: Num }
+/**
+ * 11.0: limits for reading untrusted zip / `.lottie` archives (zip-bomb protection). Enforced while inflating —
+ * declared sizes are never trusted; inflating stops as soon as a limit is crossed.
+ */
+export interface ZipLimits {
+  /** Max entries in the archive (default 1000). */
+  maxEntries?: Num;
+  /** Max uncompressed bytes of one entry (default 32 MB). */
+  maxEntryBytes?: Num;
+  /** Max uncompressed bytes of the whole archive (default 64 MB). */
+  maxTotalBytes?: Num;
+  /** Max uncompressed / compressed ratio of an entry once it is past 1 MB (default 100). */
+  maxRatio?: Num;
+}
+export const ZIP_LIMITS: Readonly<Required<ZipLimits>> = { maxEntries: 1000, maxEntryBytes: 32 << 20, maxTotalBytes: 64 << 20, maxRatio: 100 };
+const zipErr = (m: string) => new Error(`[motionary] vector: zip limit exceeded — ${m} (see ZipLimits)`);
 
 /** Read a zip archive's entries (central directory; stored + deflate). Pure; inflating uses `DecompressionStream`. */
-export function unzipEntries(input: ArrayBuffer | Uint8Array): ZipEntry[] {
+export function unzipEntries(input: ArrayBuffer | Uint8Array, limits: ZipLimits = {}): ZipEntry[] {
+  const L = { ...ZIP_LIMITS, ...limits };
   const b = input instanceof Uint8Array ? input : new Uint8Array(input);
   const v = new DataView(b.buffer, b.byteOffset, b.byteLength);
   let e = b.length - 22;
   while (e >= 0 && v.getUint32(e, true) !== 0x06054b50) e--;
   if (e < 0) throw new Error('[motionary] vector: not a zip / .lottie file');
   const count = v.getUint16(e + 10, true);
+  if (count > L.maxEntries) throw zipErr(`${count} entries > maxEntries ${L.maxEntries}`);
   let p = v.getUint32(e + 16, true);
   const out: ZipEntry[] = [];
-  for (let i = 0; i < count; i++) {
+  for (let i = 0; i < count && p + 46 <= b.length; i++) {
     if (v.getUint32(p, true) !== 0x02014b50) break;
-    const method = v.getUint16(p + 10, true), csize = v.getUint32(p + 20, true), nlen = v.getUint16(p + 28, true), xlen = v.getUint16(p + 30, true), clen = v.getUint16(p + 32, true), lho = v.getUint32(p + 42, true);
+    const method = v.getUint16(p + 10, true), csize = v.getUint32(p + 20, true), size = v.getUint32(p + 24, true), nlen = v.getUint16(p + 28, true), xlen = v.getUint16(p + 30, true), clen = v.getUint16(p + 32, true), lho = v.getUint32(p + 42, true);
     const name = new TextDecoder().decode(b.subarray(p + 46, p + 46 + nlen));
+    if (size > L.maxEntryBytes) throw zipErr(`${name}: ${size} bytes > maxEntryBytes ${L.maxEntryBytes}`);
+    if (lho + 30 > b.length) throw new Error('[motionary] vector: corrupt zip (' + name + ')');
     const lnl = v.getUint16(lho + 26, true), lxl = v.getUint16(lho + 28, true);
     const start = lho + 30 + lnl + lxl;
-    out.push({ name, method, data: b.subarray(start, start + csize) });
+    out.push({ name, method, size, data: b.subarray(start, start + csize) });
     p += 46 + nlen + xlen + clen;
   }
   return out;
 }
 
-async function inflate(e: ZipEntry): Promise<Uint8Array> {
-  if (e.method === 0) return e.data;
+/** Inflate one entry, counting the real output against `limits`; `used` is shared across one archive. */
+export async function inflateEntry(e: ZipEntry, limits: ZipLimits = {}, used = { total: 0 }): Promise<Uint8Array> {
+  const L = { ...ZIP_LIMITS, ...limits };
+  const check = (n: Num) => {
+    if (n > L.maxEntryBytes) throw zipErr(`${e.name}: > maxEntryBytes ${L.maxEntryBytes}`);
+    if (used.total + n > L.maxTotalBytes) throw zipErr(`archive > maxTotalBytes ${L.maxTotalBytes}`);
+    if (n > 1 << 20 && n > Math.max(1, e.data.length) * L.maxRatio) throw zipErr(`${e.name}: compression ratio > maxRatio ${L.maxRatio}`);
+  };
+  if (e.method === 0) {
+    check(e.data.length);
+    used.total += e.data.length;
+    return e.data;
+  }
   if (e.method !== 8) throw new Error(`[motionary] vector: zip method ${e.method} unsupported (${e.name})`);
   const DS = (globalThis as any).DecompressionStream;
   if (!DS) throw new Error('[motionary] vector: DecompressionStream is missing — cannot inflate .lottie entries here');
-  const s = new Response(e.data as BodyInit).body!.pipeThrough(new DS('deflate-raw'));
-  return new Uint8Array(await new Response(s).arrayBuffer());
+  const r = (new Response(e.data as BodyInit).body!.pipeThrough(new DS('deflate-raw')) as ReadableStream<Uint8Array>).getReader();
+  const parts: Uint8Array[] = [];
+  let n = 0;
+  for (;;) {
+    const { done, value } = await r.read();
+    if (done) break;
+    n += value.length;
+    try {
+      check(n);
+    } catch (err) {
+      r.cancel().catch(() => undefined);
+      throw err;
+    }
+    parts.push(value);
+  }
+  used.total += n;
+  const out = new Uint8Array(n);
+  let o = 0;
+  for (const x of parts) out.set(x, (o += x.length) - x.length);
+  return out;
 }
 
 export interface DotLottie {
@@ -625,11 +675,12 @@ export interface DotLottie {
   stateMachines: Record<string, unknown>;
 }
 
-/** Unpack a `.lottie` (dotLottie v1 or v2). */
-export async function parseDotLottie(input: ArrayBuffer | Uint8Array): Promise<DotLottie> {
-  const entries = unzipEntries(input);
+/** Unpack a `.lottie` (dotLottie v1 or v2). 11.0: `limits` (zip-bomb protection, safe defaults in `ZIP_LIMITS`). */
+export async function parseDotLottie(input: ArrayBuffer | Uint8Array, o: { limits?: ZipLimits } = {}): Promise<DotLottie> {
+  const entries = unzipEntries(input, o.limits);
   const files: Record<string, Uint8Array> = {};
-  await Promise.all(entries.filter((e) => !e.name.endsWith('/')).map(async (e) => (files[e.name.replace(/^\.?\//, '')] = await inflate(e))));
+  const used = { total: 0 };
+  for (const e of entries) if (!e.name.endsWith('/')) files[e.name.replace(/^\.?\//, '')] = await inflateEntry(e, o.limits, used);
   const td = new TextDecoder();
   const json = (n: string) => JSON.parse(td.decode(files[n]));
   const manifest = files['manifest.json'] ? json('manifest.json') : { animations: [] };
@@ -661,7 +712,7 @@ export async function loadLottieImages(anim: LottieAnimation, o: { files?: Recor
 }
 
 /** Fetch a `.json` Lottie or a `.lottie` file. `animation` picks one of several in a dotLottie (default: the manifest's first / active one). */
-export async function loadLottie(src: string | ArrayBuffer | Uint8Array, o: { animation?: string; base?: string } = {}): Promise<{ animation: LottieAnimation; images: Record<string, CanvasImageSource>; dotLottie: DotLottie | null }> {
+export async function loadLottie(src: string | ArrayBuffer | Uint8Array, o: { animation?: string; base?: string; limits?: ZipLimits } = {}): Promise<{ animation: LottieAnimation; images: Record<string, CanvasImageSource>; dotLottie: DotLottie | null }> {
   let bytes: Uint8Array;
   const base = o.base || (typeof src === 'string' && typeof location !== 'undefined' ? new URL(src, location.href).href : undefined);
   if (typeof src === 'string') {
@@ -670,7 +721,7 @@ export async function loadLottie(src: string | ArrayBuffer | Uint8Array, o: { an
     bytes = new Uint8Array(await r.arrayBuffer());
   } else bytes = src instanceof Uint8Array ? src : new Uint8Array(src);
   if (bytes[0] === 0x50 && bytes[1] === 0x4b) {
-    const dl = await parseDotLottie(bytes);
+    const dl = await parseDotLottie(bytes, { limits: o.limits });
     const ids = Object.keys(dl.animations);
     const want = o.animation || dl.manifest.activeAnimationId || dl.manifest.animations?.[0]?.id || ids[0];
     const animation = dl.animations[want] || dl.animations[ids[0]];

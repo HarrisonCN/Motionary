@@ -19,7 +19,6 @@
 import type { EffectContext, EffectDefinition } from '../fx/registry';
 import { registerEffects } from '../fx/registry';
 import { onFrame } from '../base';
-import { deprecate } from '../base';
 
 /** Run a pure function in a Web Worker; resolves with its (structured-cloneable) result (9.6). */
 export function runInWorker<A extends unknown[], R>(fn: (...args: A) => R | Promise<R>, ...args: A): Promise<R> {
@@ -52,8 +51,12 @@ export function runInWorker<A extends unknown[], R>(fn: (...args: A) => R | Prom
 }
 
 export type DrawProgram = string | ((ctx: CanvasRenderingContext2D, t: number, w: number, h: number, state: Record<string, unknown>) => void);
-/** Animate `canvas` with `program` in a worker (OffscreenCanvas) when possible, else on the main thread (9.6). */
-export function offscreenRender(canvas: HTMLCanvasElement, program: DrawProgram, opts: { worker?: boolean; paused?: boolean } = {}): { backend: 'worker' | 'main' | 'none'; stop(): void; resize(w: number, h: number): void } {
+/**
+ * Animate `canvas` with `program` in a worker (OffscreenCanvas) when possible, else on the main thread (9.6).
+ * 11.0: a **string** program only runs in a worker. Without a worker it needs `opts.fallback` (a function);
+ * otherwise it is refused (`backend: 'none'`, console error) — strings are never evaluated on the main thread.
+ */
+export function offscreenRender(canvas: HTMLCanvasElement, program: DrawProgram, opts: { worker?: boolean; paused?: boolean; fallback?: Exclude<DrawProgram, string> } = {}): { backend: 'worker' | 'main' | 'none'; stop(): void; resize(w: number, h: number): void } {
   const code = typeof program === 'string' ? program : program.toString();
   const canWorker = opts.worker !== false && typeof Worker !== 'undefined' && typeof (canvas as any).transferControlToOffscreen === 'function' && typeof Blob !== 'undefined' && !!URL.createObjectURL;
   if (canWorker) {
@@ -79,9 +82,11 @@ export function offscreenRender(canvas: HTMLCanvasElement, program: DrawProgram,
   }
   const ctx = canvas.getContext?.('2d');
   if (!ctx) return { backend: 'none', stop: () => undefined, resize: () => undefined };
-  if (typeof program === 'string') deprecate('worker-canvas-string', 'offscreenRender() / <usa-worker-canvas> with a string program fell back to the main thread, where it is evaluated with new Function (blocked by a strict CSP). Deprecated in 10.9; 11.0 refuses string programs on the main thread — pass a function. See docs/upgrading-11.md.');
-  // eslint-disable-next-line no-new-func
-  const draw = typeof program === 'function' ? program : (new Function(`return (${code})`)() as Exclude<DrawProgram, string>);
+  if (typeof program === 'string' && !opts.fallback) {
+    console.error('[motionary] offscreenRender() / <usa-worker-canvas>: a string program can only run in a worker (OffscreenCanvas); 11.0 no longer evaluates it on the main thread (new Function) — pass a function. See docs/upgrading-11.md.');
+    return { backend: 'none', stop: () => undefined, resize: () => undefined };
+  }
+  const draw = typeof program === 'function' ? program : (opts.fallback as Exclude<DrawProgram, string>);
   const st: Record<string, unknown> = {};
   let t = 0;
   const stop = opts.paused

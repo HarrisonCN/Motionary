@@ -6,7 +6,7 @@ Letters bob in a travelling wave — playful headlines and loading labels.
 
 - **Category:** text
 - **Import:** `import { defineWaveText } from 'motionary/components/text'` then `defineWaveText();`
-- **CDN:** `<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
 - **Attributes:** `text`
 - **Events:** —
 - **Slots:** —

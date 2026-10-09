@@ -13,7 +13,7 @@
 
 1. **安装命令**：runtime 模块只需 `npm i motionary` 一次；官方运行时写出确切命令（如 `npm i @rive-app/canvas`）；
 2. **导入路径**：如 `motionary/runtime/scroll`；
-3. **CDN 地址**：可直接复制的 `<script>`（主版本固定，如 `https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js`）以及 ESM 地址；
+3. **CDN 地址**：可直接复制的 `<script>`（主版本固定，如 `https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js`）以及 ESM 地址；
 4. **引入顺序与注册代码**：先 `use(scroll)`（会同时注册核心），再注册组件；CDN 先加载 `runtime.iife.js`，再加载模块 IIFE（自动注册）；
 5. **最小用法示例**。
 
@@ -73,13 +73,53 @@ Store 卡片显示 **「Requires: motionary/runtime/<module>」** 徽章（官�
   - 主线 A：MCP 2.0 —— `suggest_motion`、`validate_snippet`；AI 使用评测集（运行 AI 写的片段检验能否直接工作）。
   - 主线 B：**physics 模块** —— 2D 刚体（圆 / 盒 / 多边形）、约束；场景 JSON `motionary-scene@1`。
   - 新组件：动效提示输入框、`<usa-physics-playground>`。
-- ✅ **v10.8** — 跨端 3.0：小程序适配、鸿蒙 ArkTS 示例。
+- ✅ **v10.8** — drag-snap、glTF 动画、Lottie 文本层（原计划的跨端 3.0 —— 小程序适配、鸿蒙 ArkTS 示例、跨端预览器 —— 已移到 11.0 之后，见下文）。
   - 主线 B：**drag-snap 模块** —— 拖拽吸附 / 惯性轮播。
   - 格式：glTF 蒙皮 / 变形目标 / 动画；Lottie 文本层 + 表达式子集。
-  - 新组件：跨端预览器、`<usa-snap-carousel>`（`<usa-carousel>` 已被 6.2 轮播占用）。
+  - 新组件：`<usa-snap-carousel>`（`<usa-carousel>` 已被 6.2 轮播占用）。
 - ✅ **v10.9** — 11.0 预备：11.0 弃用警告、`upgrading-11.md` 与 `usa-codemod-11`。
   - 主线 A：清单 Schema v2 定稿（11.0 起冻结）。
   - 主线 B：全部 runtime 模块审计、逐模块体积预算复核；dotLottie 主题 / 状态机子集；Draco / KTX2 官方解码器挂钩。
-- **v11.0** — 下一代：核心继续瘦身（目标 < 5 KB）、移除 10.9 弃用项；清单 Schema v2 与 `motionary-mcp` 1.0 稳定版；`motionary/runtime/*` 转为稳定 API；npm `latest`。
+- ✅ **v11.0** — 稳定版：移除 10.9 弃用项（`<usa-three-scene>` / `defineThreeScene()`、主线程字符串绘制程序）；清单 Schema v2 冻结；**`motionary-mcp` 2.x 稳定版**（服务器版本保持 2.0.0，原计划的“1.0”标签不再使用）；`motionary/runtime/*` 转为稳定 API（12.0 前遵循 semver）；兼容性矩阵冻结（[compat-matrix.md](./compat-matrix.md)）；CDN 主版本 `@11`；`motionary` 与 `use-scroll-animate` 同时成为 npm `latest`。
 
 完整的格式兼容性矩阵（格式 / 版本 / 支持特性 / 已知缺口 / 回退方案）见各模块文档页 `docs/runtime/<module>.md`。
+
+<!-- v11-13:start -->
+## 11.0 之后：11.1 → 13.0
+
+依据 2026-10-09 的方向调整。贯穿全部版本的约束：
+
+- **核心零直接运行时依赖**（`dependencies` 保持为空）；高级功能（Rive、Draco、KTX2 等专有格式）只用**可选 `peerDependencies`**，懒加载，缺失时给出清晰错误。
+- 目标架构见 [architecture.md](./architecture.md)：**Public API**（HTML · React · Vue · Svelte · Solid · Angular）→ **Components** · **Motion Core** · **Runtime** → **Motion Intelligence & Tooling**（Manifest · MCP · Code Generation · Validation · Figma）。这是逻辑分层，不代表拆成独立 npm 包。分层导入规则由 `test/architecture.test.ts` 强制。
+- 11.0 的导入路径在整个 11.x 保持可用：目录 / 子路径向分层靠拢时只加别名与弃用警告，**删除只发生在 12.0 / 13.0，并配 codemod**。
+- 每个版本照旧：一个 PR、CI 全绿、固定体积预算（不自动上调）、`components/lite` ≤ 70 KB gzip。
+
+### 11.x — 轻量、可摇树、可度量
+
+- **v11.1 — 核心无副作用、可 tree-shake**：`package.json` 精确的 `sideEffects` 字段（只列出真正有副作用的 CSS / IIFE / 自动注册入口）、模块顶层 `/*#__PURE__*/` 标注、导入时不执行注册；新增 tree-shake 测试（只导入一个导出，打包结果中不得出现其他模块的代码）。（层：Motion Core · Components）
+- **v11.2 — Source map 策略**：调试用的 `.map` 继续生成，但评估不再全部随 npm 发布 —— 实测 `npm pack` 体积（含 / 不含 `.map`），可选方案：source map 作为 GitHub Release 附件或独立包 `motionary-sourcemaps`；结论与数字写入文档并在 CI 中检查 pack 体积。（层：Tooling）
+- **v11.3 — 真正有意义的性能指标进 CI**：按需加载后的首屏传输量、解析 / 执行时间、GPU 资源占用（纹理 / 缓冲区 / 上下文数量）、帧稳定性（掉帧率、长帧 p95）；Headless Chromium 实测，设预算，回归即失败。（层：Tooling）
+- **v11.4 — Runtime 分级**：明确 **basic / standard / advanced** 三级 —— basic：ticker、tween、timeline、scroll、text、CSS / WAAPI 关键帧；standard：smooth、drag-snap、SVG、精灵图、GIF / APNG / WebP、Lottie；advanced：WebGL（gl）、3D 文件解析（glTF / OBJ / 解码器）、物理。普通网站只用 basic 永远不会为 WebGL、3D 解析或高级物理付费；清单、文档页与 Requires 徽章标明级别，体积预算按级别分组。（层：Runtime）
+- **v11.5 — Public API 对齐**：Angular 包装与 React / Vue / Svelte / Solid 同等覆盖（`motionary/components/angular`），按分层提供子路径别名（Motion Core / Runtime / Components / Tooling），旧路径保留并发出弃用提示（12.0 / 13.0 删除，codemod 覆盖）。（层：Public API）
+- **v11.6 — AI 层：本地确定性 + 可插拔 LLM**：`src/components/ai` 继续本地、确定性（正则 / 规则：离线、低延迟、可预测），新增**可选的、由用户提供的** LLM provider 接口，用于复杂的组合动效；LLM 输出一律经 JSON Schema 校验，失败时回退到本地规则。不内置任何服务商、不发出任何网络请求，除非用户传入 provider。（层：Tooling）
+- **v11.7 — 组件统一契约（审计）**：为每个组件生成契约报告 —— 属性、事件、键盘交互、生命周期、减少动态效果、错误信息 —— 找出不一致之处，测试只报告不阻断。（层：Components）
+- **v11.8 — 契约对齐（非破坏部分）**：能向后兼容的不一致先修（补齐事件、键盘交互、reduced-motion 行为、统一错误前缀）。（层：Components）
+- **v11.9 — 12.0 预备**：弃用警告、`upgrading-12.md`、`usa-codemod-12`。（层：全部）
+
+### 12.0 — 组件统一契约
+
+- **v12.0**：所有组件的属性、事件、键盘交互、生命周期、减少动态效果、错误信息完全一致（必要处为破坏性变更，附 `usa-codemod-12`）；删除 11.x 弃用的路径别名；契约测试改为阻断。npm `latest`。（层：Components · Public API）
+
+### 12.x — 工具层与跨端
+
+- **v12.1 — 跨端 3.0**（从 10.8 顺延）：小程序适配、鸿蒙 ArkTS 示例、跨端预览器。（层：Public API）
+- **v12.2 — MCP 生成校验加强**：`validate_snippet` 在无头 DOM 中真实挂载生成的代码，检查前置条件、属性与事件是否符合契约。（层：Tooling）
+- **v12.3 — Figma 导出**：`figma-plugin` 导出动效令牌与组件片段，可直接粘贴运行。（层：Tooling）
+- **v12.4 — 交互式示例 / Playground**：每个组件一键复制可运行代码，清楚显示其 runtime 依赖与级别。（层：Tooling · Public API）
+- **v12.5 — 版本兼容**：清单记录每个组件 / 模块的引入与变更版本，MCP 按用户安装的版本回答；兼容性矩阵按版本查询。（层：Tooling）
+- **v12.9 — 13.0 预备**：弃用警告、`upgrading-13.md`、`usa-codemod-13`。
+
+### 13.0 — 发现、复制、运行
+
+- **v13.0**：MCP 生成校验、Figma 导出、交互式示例与版本兼容全部稳定；用户能快速找到组件、复制可运行代码、清楚看到每个组件的 runtime 依赖；目录与子路径按四层架构整理完成，删除 12.x 弃用项（附 codemod）。npm `latest`。（层：Tooling · 全部）
+<!-- v11-13:end -->

@@ -11,7 +11,7 @@ import { WIRES } from './catalog/index.js';
 
 const COMPONENTS_COUNT = COMPONENTS.length;
 const LOCAL = new URL('../dist/', import.meta.url).href;
-const CDN = 'https://unpkg.com/motionary@6/dist/';
+const CDN = 'https://unpkg.com/motionary@11/dist/';
 const KEY = 'usa-showcase:';
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));

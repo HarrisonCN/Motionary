@@ -6,7 +6,7 @@ Morph an SVG path through a list of shapes (paths="A | B | C") on click, hover, 
 
 - **Category:** svg
 - **Import:** `import { defineMorph } from 'motionary/components/svg'` then `defineMorph();`
-- **CDN:** `<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
 - **Attributes:** `paths`, `trigger`
 - **Events:** `usa:change`
 - **Slots:** —

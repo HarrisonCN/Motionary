@@ -150,9 +150,9 @@ declare function timeline(o?: TimelineOptions): Timeline;
  * inside Web Workers.
  */
 /** Runtime version (kept in sync with the package version by the release script). */
-declare const RUNTIME_VERSION = "10.9.0";
+declare const RUNTIME_VERSION = "11.0.0";
 /** Where the CDN builds live (major-pinned). */
-declare const RUNTIME_CDN = "https://cdn.jsdelivr.net/npm/motionary@10/dist/";
+declare const RUNTIME_CDN = "https://cdn.jsdelivr.net/npm/motionary@11/dist/";
 /** A runtime module: `{ id, version, api }`, registered with `use()`. */
 interface RuntimeModule<A = unknown> {
     /** Module id: 'core', 'format-css', 'scroll', … (import path `motionary/runtime/<id>`). */

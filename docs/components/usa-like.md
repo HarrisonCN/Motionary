@@ -6,7 +6,7 @@ A heart that pops with a spring and bursts into particles; aria-pressed, optiona
 
 - **Category:** click
 - **Import:** `import { defineLike } from 'motionary/components/click'` then `defineLike();`
-- **CDN:** `<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
 - **Attributes:** `liked`, `count`, `label`, `disabled`
 - **Events:** `usa:change`
 - **Slots:** —

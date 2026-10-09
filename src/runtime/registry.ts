@@ -8,10 +8,10 @@
  */
 
 /** Runtime version (kept in sync with the package version by the release script). */
-export const RUNTIME_VERSION = '10.9.0';
+export const RUNTIME_VERSION = '11.0.0';
 
 /** Where the CDN builds live (major-pinned). */
-export const RUNTIME_CDN = 'https://cdn.jsdelivr.net/npm/motionary@10/dist/';
+export const RUNTIME_CDN = 'https://cdn.jsdelivr.net/npm/motionary@11/dist/';
 
 /** A runtime module: `{ id, version, api }`, registered with `use()`. */
 export interface RuntimeModule<A = unknown> {

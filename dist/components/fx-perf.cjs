@@ -36,7 +36,11 @@ function runInWorker(fn, ...args) {
         w.postMessage(args);
     });
 }
-/** Animate `canvas` with `program` in a worker (OffscreenCanvas) when possible, else on the main thread (9.6). */
+/**
+ * Animate `canvas` with `program` in a worker (OffscreenCanvas) when possible, else on the main thread (9.6).
+ * 11.0: a **string** program only runs in a worker. Without a worker it needs `opts.fallback` (a function);
+ * otherwise it is refused (`backend: 'none'`, console error) — strings are never evaluated on the main thread.
+ */
 function offscreenRender(canvas, program, opts = {}) {
     const code = typeof program === 'string' ? program : program.toString();
     const canWorker = opts.worker !== false && typeof Worker !== 'undefined' && typeof canvas.transferControlToOffscreen === 'function' && typeof Blob !== 'undefined' && !!URL.createObjectURL;
@@ -66,10 +70,11 @@ function offscreenRender(canvas, program, opts = {}) {
     const ctx = canvas.getContext?.('2d');
     if (!ctx)
         return { backend: 'none', stop: () => undefined, resize: () => undefined };
-    if (typeof program === 'string')
-        base.deprecate('worker-canvas-string', 'offscreenRender() / <usa-worker-canvas> with a string program fell back to the main thread, where it is evaluated with new Function (blocked by a strict CSP). Deprecated in 10.9; 11.0 refuses string programs on the main thread — pass a function. See docs/upgrading-11.md.');
-    // eslint-disable-next-line no-new-func
-    const draw = typeof program === 'function' ? program : new Function(`return (${code})`)();
+    if (typeof program === 'string' && !opts.fallback) {
+        console.error('[motionary] offscreenRender() / <usa-worker-canvas>: a string program can only run in a worker (OffscreenCanvas); 11.0 no longer evaluates it on the main thread (new Function) — pass a function. See docs/upgrading-11.md.');
+        return { backend: 'none', stop: () => undefined, resize: () => undefined };
+    }
+    const draw = typeof program === 'function' ? program : opts.fallback;
     const st = {};
     let t = 0;
     const stop = opts.paused

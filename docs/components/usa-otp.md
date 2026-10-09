@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 7.7
 - **Import:** `import { defineOtp } from 'motionary/components/widgets'` then `defineOtp();`
-- **CDN:** `<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
 - **Attributes:** `length`, `mode`, `label`
 - **Events:** `usa:complete`
 - **Slots:** —

@@ -1,4 +1,4 @@
-import { R as RUNTIME_VERSION, r as requireModule } from '../chunks/registry-RJYrdUTF.js';
+import { R as RUNTIME_VERSION, r as requireModule } from '../chunks/registry-W7pXOwju.js';
 import { mat4, quatSlerp } from './gl.js';
 
 /**

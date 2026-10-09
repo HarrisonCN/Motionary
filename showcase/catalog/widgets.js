@@ -1215,8 +1215,8 @@ export const components = [
     '10.1: one-click install snippet with npm / pnpm / yarn / bun / CDN tabs and a copy button that confirms with a check; `cdn` sets the URL of the CDN tab.',
     '10.1：一键复制安装命令，带 npm / pnpm / yarn / bun / CDN 标签与复制按钮（复制成功显示对勾）；`cdn` 指定 CDN 标签的地址。',
     ['install', 'npm', 'cdn', 'copy', 'snippet'],
-    '<usa-install-button package="motionary" managers="npm pnpm yarn bun cdn" cdn="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></usa-install-button>',
-    '<usa-install-button class="demo-install" package="motionary" managers="npm pnpm yarn cdn" cdn="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></usa-install-button>',
+    '<usa-install-button package="motionary" managers="npm pnpm yarn bun cdn" cdn="https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js"></usa-install-button>',
+    '<usa-install-button class="demo-install" package="motionary" managers="npm pnpm yarn cdn" cdn="https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js"></usa-install-button>',
     [{ key: 'manager', values: ['npm', 'pnpm', 'yarn', 'cdn'] }], { since: '10.1' }),
   // ---- 10.2 ------------------------------------------------------------
   W('usa-scroll-scene', 'reveal', 'Scroll scene', '滚动场景',
@@ -1272,8 +1272,8 @@ export const components = [
     [], { since: '10.4', requires: ['smooth'], id: 'smooth-scroller' }), // id: 'smooth-scroll' is the 5.x smoothScroll() helper card
   // ---- 10.5 ------------------------------------------------------------
   W('usa-gl-scene', 'ui', '3D scene (glTF / OBJ)', '3D 场景（glTF / OBJ）',
-    '10.5: a WebGL2 3D viewer on Motionary’s own renderer — glTF 2.0 / GLB and OBJ / MTL models or built-in shapes, PBR-style materials, orbit controls (drag, wheel, pinch, arrow keys), auto-rotate and video textures. Requires motionary/runtime/gl (+ format-gltf for .gltf / .glb, format-obj for .obj, gltf-anim for glTF animation — 10.8) — npm i motionary, then use(gl, formatGltf, formatObj, gltfAnim) before it mounts. Alias: <usa-three-scene>.',
-    '10.5：基于 Motionary 自研渲染器的 WebGL2 3D 查看器 —— glTF 2.0 / GLB 与 OBJ / MTL 模型或内置几何体、PBR 风格材质、轨道控制（拖拽、滚轮、双指、方向键）、自动旋转与视频纹理。需要 motionary/runtime/gl（.gltf / .glb 另需 format-gltf，.obj 另需 format-obj，glTF 动画另需 gltf-anim —— 10.8）—— npm i motionary，并在挂载前 use(gl, formatGltf, formatObj, gltfAnim)。别名：<usa-three-scene>。',
+    '10.5: a WebGL2 3D viewer on Motionary’s own renderer — glTF 2.0 / GLB and OBJ / MTL models or built-in shapes, PBR-style materials, orbit controls (drag, wheel, pinch, arrow keys), auto-rotate and video textures. Requires motionary/runtime/gl (+ format-gltf for .gltf / .glb, format-obj for .obj, gltf-anim for glTF animation — 10.8) — npm i motionary, then use(gl, formatGltf, formatObj, gltfAnim) before it mounts.',
+    '10.5：基于 Motionary 自研渲染器的 WebGL2 3D 查看器 —— glTF 2.0 / GLB 与 OBJ / MTL 模型或内置几何体、PBR 风格材质、轨道控制（拖拽、滚轮、双指、方向键）、自动旋转与视频纹理。需要 motionary/runtime/gl（.gltf / .glb 另需 format-gltf，.obj 另需 format-obj，glTF 动画另需 gltf-anim —— 10.8）—— npm i motionary，并在挂载前 use(gl, formatGltf, formatObj, gltfAnim)。',
     ['3d', 'webgl', 'gltf', 'glb', 'obj', 'model viewer', 'runtime'],
     '<usa-gl-scene src="/models/chair.glb" controls auto-rotate="20" label="Chair"></usa-gl-scene>',
     '<usa-gl-scene class="demo-gl" shape="torus" color="#818cf8" metallic="0.4" roughness="0.3" controls auto-rotate="35" label="Rotating torus"></usa-gl-scene>',

@@ -2,7 +2,7 @@ import { defineElement, type UsaElement } from '../base';
 import css from './install-button.css?raw';
 
 /**
- * `<usa-install-button package="motionary" managers="npm pnpm yarn bun cdn" cdn="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js">`
+ * `<usa-install-button package="motionary" managers="npm pnpm yarn bun cdn" cdn="https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js">`
  * (10.1) — one-click install snippet: package-manager tabs (npm, pnpm, yarn,
  * bun, CDN), the command in a code row and a copy button that confirms with
  * a check. `package`, `dev` (dev dependency), `managers`, `cdn` (URL for the

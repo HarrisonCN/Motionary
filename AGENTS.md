@@ -39,7 +39,7 @@ All of these are generated from the source at build time, so they match the inst
 Plain HTML:
 
 ```html
-<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>
 <usa-reveal effect="fade-up"><h2>Hello</h2></usa-reveal>
 ```
 

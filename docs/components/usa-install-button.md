@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 10.1
 - **Import:** `import { defineInstallButton } from 'motionary/components/widgets'` then `defineInstallButton();`
-- **CDN:** `<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
 - **Attributes:** `package`, `managers`, `cdn`, `dev`, `manager`
 - **Events:** `usa:copy`
 - **Slots:** —
@@ -16,7 +16,7 @@
 ## Minimal example
 
 ```html
-<usa-install-button package="motionary" managers="npm pnpm yarn bun cdn" cdn="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></usa-install-button>
+<usa-install-button package="motionary" managers="npm pnpm yarn bun cdn" cdn="https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js"></usa-install-button>
 ```
 
 ## ES module
@@ -27,6 +27,6 @@ import { defineInstallButton } from 'motionary/components/widgets';
 defineInstallButton(); // registers <usa-install-button>
 
 /* then use it in your HTML:
-<usa-install-button package="motionary" managers="npm pnpm yarn bun cdn" cdn="https://cdn.jsdelivr.net/npm/motionary@10/dist/runtime.iife.js"></usa-install-button>
+<usa-install-button package="motionary" managers="npm pnpm yarn bun cdn" cdn="https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js"></usa-install-button>
 */
 ```

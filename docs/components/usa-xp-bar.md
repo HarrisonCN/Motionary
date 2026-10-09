@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 7.5
 - **Import:** `import { defineXpBar } from 'motionary/components/widgets'` then `defineXpBar();`
-- **CDN:** `<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
 - **Attributes:** `level`, `xp`, `per`
 - **Events:** `usa:levelup`, `usa:xp`
 - **Slots:** —

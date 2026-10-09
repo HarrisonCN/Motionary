@@ -25,7 +25,7 @@ describe('6.1.1 — renamed to Motionary (no breaking change)', () => {
       expect(r, f).toMatch(/^<div align="center">\n\n# Motionary\n/);
       expect(r, f).toContain('use-scroll-animate');
       for (const page of ['showcase/', 'showcase/components.html', 'showcase/playground.html', 'showcase/story.html']) expect(r, f).toContain(`https://harrisoncn.github.io/Motionary/${page}`);
-      expect(r, f).toContain('https://unpkg.com/motionary@6/dist/index.umd.js');
+      expect(r, f).toContain('https://unpkg.com/motionary@11/dist/index.umd.js');
       for (const fw of ['motionary/react', 'motionary/vue', 'motionary/svelte', 'motionary/solid', 'motionary/components/angular']) expect(r, `${f} ${fw}`).toContain(fw);
       expect(r, f).toContain('./docs/upgrading-6.md');
       expect(r, f).toContain('./docs/upgrading-5.md');

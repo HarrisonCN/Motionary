@@ -7,6 +7,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [11.0.0] - 2026-10-09
+
+### ⚠️ Breaking
+- **`<usa-three-scene>` / `defineThreeScene()` / `motionary/widgets/three-scene` removed** (the 10.5 alias, deprecated in 10.9) → `<usa-gl-scene>` / `defineGlScene()` / `motionary/widgets/gl-scene` — same attributes, events and methods. `npx usa-codemod-11 --write src` rewrites it.
+- **String draw programs are never evaluated on the main thread.** `offscreenRender()` / `<usa-worker-canvas>` still run a string program in a worker (OffscreenCanvas); where no worker is available a string program is refused (`backend: 'none'`, one console error) instead of being run through `new Function` — pass a function. The built-in `scene`s (`particles`, `orbits`, `starfield`) now ship function versions (`WORKER_SCENE_FNS`) for that fallback, so `<usa-worker-canvas scene="…">` keeps working everywhere and under a strict CSP. `offscreenRender()` gains `opts.fallback`.
+- CDN URLs move to the new major: `https://cdn.jsdelivr.net/npm/motionary@11/dist/…` / `https://unpkg.com/motionary@11/dist/…` (runtime `RUNTIME_CDN`, every prerequisite, the install button, README, AGENTS.md, docs). The README quickstart and the playground snippets still said `@6` — they now say `@11` too.
+
+### Stable from 11.0 (semver until 12.0)
+- `motionary/runtime` and every `motionary/runtime/<module>` export and module id.
+- The AI manifest **schema v2** (`components.json`, `motionary/manifest.json`) is frozen: `stability: "stable"`, no deprecated components left. The `motionary-scene@1` format.
+- **`motionary-mcp` 2.x** tool names and result shapes (the server stays at 2.0.0; the roadmap's "MCP 1.0" label is retired).
+- The individual entry points (`motionary/widgets/<name>`, `motionary/effects/<name>`, `motionary/components/<name>`) and their fixed gzip budgets.
+- **Compatibility matrix frozen**: new generated page [docs/compat-matrix.md](./docs/compat-matrix.md) (every runtime module and official runtime, feature by feature, from the same tested data as `docs/runtime/<module>.md`; checked by `check:peer-docs`) and a README section **"Stable API (11.x) & compatibility matrix"**. A ✅ row is not removed before 12.0.
+
+### Security
+- **Zip-bomb protection for dotLottie / zip decoding** (`motionary/runtime/vector`, the only archive / inflate path): `unzipEntries()`, `parseDotLottie()` and `loadLottie()` take `limits` (`ZipLimits`: `maxEntries` 1000, `maxEntryBytes` 32 MB, `maxTotalBytes` 64 MB, `maxRatio` 100 once an entry passes 1 MB — defaults in `ZIP_LIMITS`). Declared sizes are not trusted: inflating streams through `DecompressionStream`, counts the real output and cancels as soon as a limit is crossed; entries inflate one at a time. Tests build a zip bomb at test time (24 MB of zeros in < 64 KB with a lying size field) plus entry-count / per-entry / total / stored-entry cases.
+
+### Architecture
+- New [docs/architecture.md](./docs/architecture.md) (Chinese, Mermaid + ASCII): four logical layers — **Public API** (HTML · React · Vue · Svelte · Solid · Angular) → **Components** · **Motion Core** · **Runtime** → **Motion Intelligence & Tooling** (Manifest · MCP · Code Generation · Validation · Figma) — every `src/` folder and roadmap item mapped onto them, with dependency rules (Core depends on nothing; Runtime / Components on Core only; Public API wraps them; Tooling reads the manifest). Not separate npm packages.
+- **`test/architecture.test.ts`** enforces the layer import rules on every value import in `src/` (type-only imports are ignored), forbids `src/` importing `scripts/` / `bin/` / `figma-plugin/`, and checks `dependencies` stays empty with every peer optional. One recorded exception (`<usa-motion-prompt>` → the AI layer) may only be removed, never added to.
+
+### CI
+- Removed `.github/workflows/jekyll-gh-pages.yml`, which failed at "Build with Jekyll" on every push; `pages.yml` (Showcase deploy) is the only Pages workflow.
+
+### Changed
+- ROADMAP: new **11.1 → 13.0** plan (Chinese) — 11.x light / side-effect-free / tree-shakable core, source-map strategy, CI performance metrics, runtime tiers (basic / standard / advanced), Public API alignment, pluggable LLM provider for the AI layer, component-contract audit; 12.0 unified component contract; 12.x cross-platform, MCP validation, Figma export, playground, version compatibility; 13.0 discover · copy · run.
+- ROADMAP: 11.0 done; "`motionary-mcp` 2.x 稳定版"; the cross-platform 3.0 items (mini-program, HarmonyOS ArkTS samples, cross-platform previewer) are moved past 11.0.
+- npm: `motionary` and the `use-scroll-animate` alias are published with the `latest` tag.
+
+### Upgrading
+See [docs/upgrading-11.md](./docs/upgrading-11.md): run `npx usa-codemod-11 --write src`, replace `@10` with `@11` in CDN URLs. Nothing else changes — package names, budgets and entry points stay the same.
+
 ## [10.9.0] - 2026-10-09
 
 ### Added

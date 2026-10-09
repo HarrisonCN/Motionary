@@ -6,7 +6,7 @@ Windows Fluent materials: frosted acrylic (backdrop blur + tint + noise) and mic
 
 - **Category:** background
 - **Import:** `import { defineAcrylic } from 'motionary/components/background'` then `defineAcrylic();`
-- **CDN:** `<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
 - **Attributes:** `tint`, `tint-opacity`, `blur`, `shimmer`
 - **Events:** —
 - **Slots:** —

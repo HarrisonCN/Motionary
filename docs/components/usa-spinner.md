@@ -6,7 +6,7 @@ Six indeterminate indicators: the WinUI progress ring, the Windows 10 orbiting d
 
 - **Category:** feedback
 - **Import:** `import { defineSpinner } from 'motionary/components/feedback'` then `defineSpinner();`
-- **CDN:** `<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
 - **Attributes:** `kind`, `size`, `label`
 - **Events:** —
 - **Slots:** —

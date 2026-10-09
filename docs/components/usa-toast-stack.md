@@ -6,7 +6,7 @@
 
 - **Category:** feedback · **since** 6.3
 - **Import:** `import { defineToastStack } from 'motionary/components/widgets'` then `defineToastStack();`
-- **CDN:** `<script src="https://unpkg.com/motionary@10/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
 - **Attributes:** `position`
 - **Events:** `usa:show`, `usa:dismiss`
 - **Slots:** —

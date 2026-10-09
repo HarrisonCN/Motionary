@@ -6,7 +6,7 @@ A dot grid that swells and links up with lines around the pointer.
 
 - **Category:** background
 - **Import:** `import { defineDotNetwork } from 'motionary/components/background'` then `defineDotNetwork();`
-- **CDN:** `<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
 - **Attributes:** —
 - **Events:** —
 - **Slots:** —

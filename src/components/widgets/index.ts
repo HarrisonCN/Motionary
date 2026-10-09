@@ -103,7 +103,7 @@ import { defineHeroVideo, type UsaHeroVideoElement } from './hero-video';
 import { defineMotionPrefs, type UsaMotionPrefsElement } from './motion-prefs';
 import { definePauseAll, type UsaPauseAllElement } from './pause-all';
 import { definePerfMonitor, type UsaPerfMonitorElement, type PerfStats } from './perf-monitor';
-import { defineWorkerCanvas, WORKER_SCENES, type UsaWorkerCanvasElement } from './worker-canvas';
+import { defineWorkerCanvas, WORKER_SCENES, WORKER_SCENE_FNS, type UsaWorkerCanvasElement } from './worker-canvas';
 import { defineMotionSpec, type UsaMotionSpecElement } from './motion-spec';
 import { defineNativePreview, type UsaNativePreviewElement } from './native-preview';
 import { definePluginCard, type UsaPluginCardElement } from './plugin-card';
@@ -115,7 +115,7 @@ import { defineTextSplitter, type UsaTextSplitterElement } from './text-splitter
 import { defineScrollRing, type UsaScrollRingElement } from './scroll-ring';
 import { defineParallaxLayers, type UsaParallaxLayersElement } from './parallax-layers';
 import { defineSmoothScroll, type UsaSmoothScrollElement } from './smooth-scroll';
-import { defineGlScene, defineThreeScene, type UsaGlSceneElement } from './gl-scene';
+import { defineGlScene, type UsaGlSceneElement } from './gl-scene';
 import { defineGpuParticles, PARTICLE_SIM_WGSL, PARTICLE_DRAW_WGSL, type UsaGpuParticlesElement } from './gpu-particles';
 import { defineShaderBackdrop, BACKDROP_PRESETS, POST_PASSES, type UsaShaderBackdropElement } from './shader-backdrop';
 import { defineLottiePlayer, type UsaLottiePlayerElement } from './lottie-player';
@@ -222,7 +222,7 @@ export type { UsaVideoCardElement, UsaHeroVideoElement };
 export { defineMotionPrefs, definePauseAll };
 export type { UsaMotionPrefsElement, UsaPauseAllElement };
 
-export { definePerfMonitor, defineWorkerCanvas, WORKER_SCENES };
+export { definePerfMonitor, defineWorkerCanvas, WORKER_SCENES, WORKER_SCENE_FNS };
 export type { UsaPerfMonitorElement, PerfStats, UsaWorkerCanvasElement };
 
 export { defineMotionSpec };
@@ -243,7 +243,7 @@ export type { UsaRouteTransitionElement, UsaTextSplitterElement };
 export { defineScrollRing, defineParallaxLayers, defineSmoothScroll };
 export type { UsaScrollRingElement, UsaParallaxLayersElement, UsaSmoothScrollElement };
 
-export { defineGlScene, defineThreeScene, defineGpuParticles, PARTICLE_SIM_WGSL, PARTICLE_DRAW_WGSL, defineShaderBackdrop, BACKDROP_PRESETS, POST_PASSES };
+export { defineGlScene, defineGpuParticles, PARTICLE_SIM_WGSL, PARTICLE_DRAW_WGSL, defineShaderBackdrop, BACKDROP_PRESETS, POST_PASSES };
 export type { UsaGlSceneElement, UsaGpuParticlesElement, UsaShaderBackdropElement };
 
 export { defineLottiePlayer, defineRive, RIVE_PEER, RIVE_CDN, loadRiveRuntime, provideRiveRuntime, defineTokenEditor };
@@ -294,7 +294,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '10.2': { 'usa-scroll-scene': defineScrollScene, 'usa-motion-inspector': defineMotionInspector },
   '10.3': { 'usa-route-transition': defineRouteTransition, 'usa-text-splitter': defineTextSplitter },
   '10.4': { 'usa-scroll-ring': defineScrollRing, 'usa-parallax-layers': defineParallaxLayers, 'usa-smooth-scroll': defineSmoothScroll },
-  '10.5': { 'usa-gl-scene': defineGlScene, 'usa-three-scene': defineThreeScene, 'usa-gpu-particles': defineGpuParticles, 'usa-shader-backdrop': defineShaderBackdrop },
+  '10.5': { 'usa-gl-scene': defineGlScene, 'usa-gpu-particles': defineGpuParticles, 'usa-shader-backdrop': defineShaderBackdrop },
   '10.6': { 'usa-lottie-player': defineLottiePlayer, 'usa-rive': defineRive, 'usa-token-editor': defineTokenEditor },
   '10.7': { 'usa-physics-playground': definePhysicsPlayground, 'usa-motion-prompt': defineMotionPrompt },
 };
@@ -417,7 +417,6 @@ declare global {
     'usa-parallax-layers': UsaParallaxLayersElement;
     'usa-smooth-scroll': UsaSmoothScrollElement;
     'usa-gl-scene': UsaGlSceneElement;
-    'usa-three-scene': UsaGlSceneElement;
     'usa-gpu-particles': UsaGpuParticlesElement;
     'usa-shader-backdrop': UsaShaderBackdropElement;
     'usa-lottie-player': UsaLottiePlayerElement;

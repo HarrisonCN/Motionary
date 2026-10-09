@@ -6,7 +6,7 @@ Click-to-open panel that springs from its trigger; Esc / outside click closes, f
 
 - **Category:** ui
 - **Import:** `import { definePopover } from 'motionary/components/ui'` then `definePopover();`
-- **CDN:** `<script src="https://unpkg.com/motionary@10/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
 - **Attributes:** —
 - **Events:** —
 - **Slots:** —
