@@ -33,6 +33,7 @@ import { GESTURE3_FX, registerGesture3Pack, pinchScale, pinchAngle, orientationT
 import { SPATIAL_FX, registerSpatialPack, yawToOffset, xrSupport } from './spatial';
 import { CINEMA_FX, registerCinemaPack, cameraFrame, CAMERA_MOVES } from './cinema';
 import { LOTTIE_FX, registerLottiePack, lottieToKeyframes, lottieToSvg, riveInputs } from './lottie';
+import { GENART_FX, registerGenArtPack, PALETTES, seededRandom, meshGradient } from './genart';
 
 export { GPU_FX, registerGpuPack, TEXT3_FX, registerTextPack, splitChars };
 export { shaderBackground, supportsWebGL2, fieldFallback, GLSL_HEAD } from './gl';
@@ -89,6 +90,8 @@ export { CINEMA_FX, registerCinemaPack, cameraFrame, CAMERA_MOVES };
 
 export { LOTTIE_FX, registerLottiePack, lottieToKeyframes, lottieToSvg, riveInputs };
 
+export { GENART_FX, registerGenArtPack, PALETTES, seededRandom, meshGradient };
+
 /** The 6.x effect packs by name. */
 export const EFFECT_PACKS: Record<string, EffectDefinition[]> = {
   gpu: GPU_FX,
@@ -118,6 +121,7 @@ export const EFFECT_PACKS: Record<string, EffectDefinition[]> = {
   spatial: SPATIAL_FX,
   cinema: CINEMA_FX,
   lottie: LOTTIE_FX,
+  genart: GENART_FX,
 };
 
 /** Register every 6.x effect pack (idempotent). */
@@ -149,6 +153,7 @@ export function registerEffectPacks(): void {
   registerSpatialPack();
   registerCinemaPack();
   registerLottiePack();
+  registerGenArtPack();
 }
 
 

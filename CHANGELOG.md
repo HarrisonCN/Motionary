@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [9.3.0] - 2026-10-09
+
+### Added
+- **2 new components (9.3)** in `motionary/components/widgets`:
+  - `<usa-gen-art>` — seeded generative artwork on a canvas: `art` = `flow` (flow field) · `circles` (circle packing) · `truchet` (quarter-arc tiles) · `waves` (layered ridges), `seed`, `palette`, `label`; draws itself in on screen; click / Enter re-seeds; `generate(seed?)`, `toDataURL()`, `seed`; `usa:generate` { seed }.
+  - `<usa-bg-generator>` — background generator: palette + style (`mesh`, `grain`, `stripes`, `dots`) + shuffle, live preview with a cross-fade, copy the CSS; `css`, `shuffle()`, `copy()`; `usa:change` { css, seed }; `backgroundCss()`.
+- **Generative art 2.0 pack — `motionary/fx/genart`** (= `motionary/components/fx-genart`, `registerGenArtPack()`, also in `registerEffectPacks()` and the marketplace): `halftone-in` (enter), `mesh-drift` (loop), `kaleido` (loop), `grain-flicker` (loop). `PALETTES`, `seededRandom()`, `meshGradient()`.
+- Showcase: 4 new gallery cards with copyable code, live demos and live Store thumbnails.
+
+### Accessibility
+- `<usa-gen-art>` is a focusable `img` whose label names the art style and seed (updated on re-seed). `<usa-bg-generator>` is a labelled `group` of real `<select>`s and buttons; the preview is `aria-hidden` and the CSS is shown as text. Reduced motion: artwork is drawn at once, no cross-fade, `halftone-in` fades, the loops are skipped.
+
 ## [9.2.0] - 2026-10-09
 
 ### Added

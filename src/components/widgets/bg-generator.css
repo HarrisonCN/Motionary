@@ -1,0 +1,7 @@
+usa-bg-generator{display:block;max-width:100%;font:13px/1.3 system-ui,sans-serif;color:#0f172a}
+usa-bg-generator .usa-bg-preview{height:120px;border-radius:12px;box-shadow:inset 0 0 0 1px rgba(15,23,42,.1)}
+usa-bg-generator .usa-bg-controls{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:8px}
+usa-bg-generator label{display:inline-flex;gap:4px;align-items:center;font-weight:600}
+usa-bg-generator select,usa-bg-generator button{padding:5px 8px;border:1px solid #cbd5e1;border-radius:7px;background:#fff;font:inherit;cursor:pointer}
+usa-bg-generator .usa-bg-copy{background:#4f46e5;border-color:#4f46e5;color:#fff}
+usa-bg-generator .usa-bg-code{display:block;margin-top:6px;padding:6px 8px;border-radius:7px;background:#0f172a;color:#e2e8f0;font:11px/1.4 ui-monospace,monospace;white-space:nowrap;overflow-x:auto}

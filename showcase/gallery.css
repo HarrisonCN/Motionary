@@ -355,3 +355,6 @@ usa-carousel[data-effect="cards"].demo-carousel .demo-slide{margin:0 18%}
 .demo-rack{display:flex;gap:16px;padding:12px 16px;border:0;border-radius:10px;background:#0f172a;color:#e2e8f0;font:700 16px/1 system-ui,sans-serif;cursor:pointer}
 .demo-lottie,.demo-licons{gap:16px;justify-content:center}
 .demo-ipop{width:48px;height:48px;border:0;border-radius:50%;background:#ffe4e6;color:#e11d48;font-size:22px;cursor:pointer}.demo-ipop-b{background:#e0e7ff;color:#4f46e5}
+.demo-genart{gap:10px}.demo-genart usa-gen-art{width:140px;height:110px}.demo-bggen{width:min(320px,100%)}
+.demo-ht{padding:18px 22px;border:0;border-radius:10px;background:linear-gradient(135deg,#f43f5e,#f59e0b);color:#fff;font:800 15px/1 system-ui,sans-serif;cursor:pointer}.demo-kal{display:inline-block;padding:18px 22px;border-radius:12px;background:#7c3aed;color:#fff;font:800 15px/1 system-ui,sans-serif}
+.demo-mesh{display:inline-block;padding:18px 22px;border-radius:12px;color:#fff;font:800 15px/1 system-ui,sans-serif;text-shadow:0 1px 4px rgba(0,0,0,.35)}.demo-grain{background:#334155}
