@@ -1,0 +1,5 @@
+{
+  "note": "13.1.0 browser perf baseline (test/browser/perf.spec.mjs): complex page, 32 components at once. Re-record with PERF_RECORD=1.",
+  "budget": { "factor": 3, "mountMsMax": 6000, "p95FrameMsMax": 50, "rafPerFrameMax": 3 },
+  "browsers": {}
+}
