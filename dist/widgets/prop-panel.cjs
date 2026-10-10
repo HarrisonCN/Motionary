@@ -6,4 +6,4 @@ require('../chunks/base-B3me2y0o.cjs');
 
 
 exports.definePropPanel = widgets_propPanel.definePropPanel;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.9.0/dist/widgets/prop-panel.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/widgets/prop-panel.cjs.map

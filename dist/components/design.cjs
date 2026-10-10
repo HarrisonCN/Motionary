@@ -7,7 +7,7 @@ require('../chunks/base-B3me2y0o.cjs');
 require('./tokens.cjs');
 
 /**
- * `motionary/design` (= `motionary/components/design`, 9.7) — design-tool
+ * `motionary/tooling/design` (= `motionary/tooling/design`, 9.7) — design-tool
  * integration.
  *
  * - `figmaToMotion(reactions)` — Figma prototype reactions (plugin API
@@ -114,4 +114,4 @@ exports.easingPoints = easingPoints;
 exports.figmaToMotion = figmaToMotion;
 exports.framerComponent = framerComponent;
 exports.motionToCss = motionToCss;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.9.0/dist/components/design.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/components/design.cjs.map

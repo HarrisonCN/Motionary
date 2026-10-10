@@ -16,4 +16,4 @@ function registerStockPulse() {
 exports.effect = effect;
 exports.register = registerStockPulse;
 exports.registerStockPulse = registerStockPulse;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.9.0/dist/effects/stock-pulse.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/effects/stock-pulse.cjs.map

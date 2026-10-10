@@ -135,4 +135,4 @@ exports.text = text;
 exports.transitions = transitions;
 exports.video = video;
 exports.weather = weather;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.9.0/dist/components/plugins.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/components/plugins.cjs.map

@@ -262,4 +262,4 @@ exports.TIMELINE_PRESETS = TIMELINE_PRESETS;
 exports.resolvePosition = resolvePosition;
 exports.supportsNativeScrub = supportsNativeScrub;
 exports.timeline = timeline;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.9.0/dist/chunks/core-KIvPGg0c.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/chunks/core-KIvPGg0c.cjs.map

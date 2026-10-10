@@ -944,4 +944,4 @@ function defineTextComponents() {
 }
 
 export { JOINING_SCRIPT, defineCounter, defineGlitch, defineGradientText, defineHandwriting, defineScramble, defineScrollHighlight, defineShimmerText, defineSplitText, defineTextComponents, defineTextRotate, defineTypewriter, defineWaveText, easeOutExpo, graphemes, scrambleFrame, splitOrder, splitText, splitTimeline, words as splitWords };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.9.0/dist/components/text.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/components/text.js.map

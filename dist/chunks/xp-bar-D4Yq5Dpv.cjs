@@ -104,4 +104,4 @@ function defineXpBar(tag = 'usa-xp-bar') {
 
 exports.defineXpBar = defineXpBar;
 exports.levelFor = levelFor;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.9.0/dist/chunks/xp-bar-D4Yq5Dpv.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/chunks/xp-bar-D4Yq5Dpv.cjs.map

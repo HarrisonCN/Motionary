@@ -1,4 +1,4 @@
-# Motionary 12.9.0 — full component reference
+# Motionary 13.0.0 — full component reference
 
 Generated from the source. Machine-readable version: https://harrisoncn.github.io/Motionary/components.json (schema https://harrisoncn.github.io/Motionary/components.schema.json).
 
@@ -14,7 +14,7 @@ Shared ticker (one rAF loop), tween + timeline engine with easing, module regist
 - CDN:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
 ```
 
 ```js
@@ -34,8 +34,8 @@ Import CSS @keyframes text or live CSSKeyframesRule objects and Web Animations A
 - CDN:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/format-css.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/format-css.iife.js"></script>
 ```
 
 ```js
@@ -56,8 +56,8 @@ Play Motion / Framer-style { initial, animate, transition } JSON (arrays as keyf
 - CDN:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/format-motion.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/format-motion.iife.js"></script>
 ```
 
 ```js
@@ -77,8 +77,8 @@ Scroll-linked scenes: start / end rules, scrub (direct or smoothed), pin, marker
 - CDN:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/scroll.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/scroll.iife.js"></script>
 ```
 
 ```js
@@ -99,8 +99,8 @@ Replay SVG SMIL animations (animate, set, animateTransform, animateMotion) on th
 - CDN:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/format-svg.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/format-svg.iife.js"></script>
 ```
 
 ```js
@@ -123,8 +123,8 @@ Split text into characters (grapheme-aware), words and lines for animation while
 - CDN:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/text.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/text.iife.js"></script>
 ```
 
 ```js
@@ -145,8 +145,8 @@ Play TexturePacker / Aseprite sprite sheets and numbered image sequences on a ca
 - CDN:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/format-sprite.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/format-sprite.iife.js"></script>
 ```
 
 ```js
@@ -168,8 +168,8 @@ Smooth, inertial wheel scrolling (lerp or fixed-duration glide) for the window o
 - CDN:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/smooth.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/smooth.iife.js"></script>
 ```
 
 ```js
@@ -190,8 +190,8 @@ Decode animated GIFs (own LZW decoder, no DOM) into composited RGBA frames and p
 - CDN:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/format-gif.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/format-gif.iife.js"></script>
 ```
 
 ```js
@@ -213,8 +213,8 @@ Split animated PNGs into standalone frame PNGs (decoded by the browser), composi
 - CDN:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/format-apng.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/format-apng.iife.js"></script>
 ```
 
 ```js
@@ -235,8 +235,8 @@ Split animated WebP files (ANIM / ANMF) into standalone frames (decoded by the b
 - CDN:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/format-webp.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/format-webp.iife.js"></script>
 ```
 
 ```js
@@ -257,8 +257,8 @@ A small WebGL2 renderer with its own API: scene graph, camera, lights, box / pla
 - CDN:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/gl.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/gl.iife.js"></script>
 ```
 
 ```js
@@ -281,8 +281,8 @@ Load glTF 2.0 (.gltf with external or data: buffers, .glb) into motionary/runtim
 - CDN:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/format-gltf.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/format-gltf.iife.js"></script>
 ```
 
 ```js
@@ -306,8 +306,8 @@ Load Wavefront OBJ (+ MTL materials and diffuse textures) into motionary/runtime
 - CDN:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/format-obj.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/format-obj.iife.js"></script>
 ```
 
 ```js
@@ -329,8 +329,8 @@ Plays Lottie (bodymovin JSON) and dotLottie (.lottie) files on Canvas 2D with Mo
 - CDN:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/vector.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/vector.iife.js"></script>
 ```
 
 ```js
@@ -372,8 +372,8 @@ A small 2D rigid-body engine written for Motionary (own implementation and API �
 - CDN:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/physics.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/physics.iife.js"></script>
 ```
 
 ```js
@@ -396,8 +396,8 @@ The versioned motionary-scene@1 format: a JSON description of a 2D physics scene
 - CDN:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/format-scene.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/format-scene.iife.js"></script>
 ```
 
 ```js
@@ -419,8 +419,8 @@ Pointer drag along one axis with velocity tracking, inertial throws, rubber-band
 - CDN:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/drag-snap.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/drag-snap.iife.js"></script>
 ```
 
 ```js
@@ -442,8 +442,8 @@ Plays glTF 2.0 animations on models loaded by motionary/runtime/format-gltf: tra
 - CDN:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/gltf-anim.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/gltf-anim.iife.js"></script>
 ```
 
 ```js
@@ -467,8 +467,8 @@ Resolves Lottie slots with dotLottie themes (Color / Scalar / Vector / Text rule
 - CDN:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/lottie-state.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/lottie-state.iife.js"></script>
 ```
 
 ```js
@@ -492,8 +492,8 @@ Lets motionary/runtime/format-gltf load KHR_draco_mesh_compression meshes and KH
 - CDN:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/gltf-decoders.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/gltf-decoders.iife.js"></script>
 ```
 
 ```js
@@ -549,7 +549,7 @@ provideGltfDecoder('ktx2', () => window.BASIS);
 Smooth expand / collapse for native <details> — semantics, keyboard and find-in-page kept; no wrapper elements.
 
 - Import: `import { defineAccordion } from 'motionary/components/transitions'; defineAccordion();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `multiple`, `duration`
 - Events: `usa:toggle`
 - Methods: `toggleItem()`
@@ -566,7 +566,7 @@ Smooth expand / collapse for native <details> — semantics, keyboard and find-i
 Windows Fluent materials: frosted acrylic (backdrop blur + tint + noise) and mica. Solid fallback when transparency is reduced.
 
 - Import: `import { defineAcrylic } from 'motionary/components/background'; defineAcrylic();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `tint`, `tint-opacity`, `blur`, `shimmer`
 
 ```html
@@ -581,7 +581,7 @@ Windows Fluent materials: frosted acrylic (backdrop blur + tint + noise) and mic
 7.3: a buy button — the product photo flies on an arc into the cart, the cart badge bumps and the button morphs into a ✓ “Added” state. Works with <usa-cart-drawer> (calls add(item)) or any [data-cart] icon.
 
 - Import: `import { defineAddToCart } from 'motionary/components/widgets'; defineAddToCart();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `label`, `added`, `item`, `cart`, `from`, `hold`
 - Events: `usa:add`
 - Methods: `add()`
@@ -599,7 +599,7 @@ Windows Fluent materials: frosted acrylic (backdrop blur + tint + noise) and mic
 A fixed page-wide layer: drifting particles, falling snow, twinkling stars, film grain or a gradient that shifts with scroll.
 
 - Import: `import { defineAmbient } from 'motionary/components/page'; defineAmbient();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `effect`, `density`, `color`, `opacity`, `speed`
 - Methods: `mount()`, `upd()`, `resize()`, `resize()`, `draw()`, `draw()`, `unmount()`, `caf()`
 
@@ -612,7 +612,7 @@ A fixed page-wide layer: drifting particles, falling snow, twinkling stars, film
 Stroke icons that move: the bell rings, the heart beats, the check draws, the gear turns. Hover, click, in view or loop; decorative unless labelled.
 
 - Import: `import { defineAnimIcon } from 'motionary/components/svg'; defineAnimIcon();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `name`, `size`, `label`, `trigger`
 - Methods: `play()`
 
@@ -626,7 +626,7 @@ Stroke icons that move: the bell rings, the heart beats, the check draws, the ge
 5.6: <usa-audio> renders a toggle (a user gesture starts Web Audio), detects beats and plays any registered effect on children with data-usa-beat="effect". JS: bindBeat(el, "pop"). Beats play nothing under reduced motion.
 
 - Import: `import { defineAudio } from 'motionary/components/effects'; defineAudio();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `source`, `label`, `threshold`, `cooldown`
 - Events: `usa:beat`, `usa:audio-error`
 - Methods: `toggle()`
@@ -643,7 +643,7 @@ Stroke icons that move: the bell rings, the heart beats, the check draws, the ge
 A slow drifting gradient mesh behind its content. Transforms only, paused off-screen, still under reduced motion.
 
 - Import: `import { defineAurora } from 'motionary/components/background'; defineAurora();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `colors`, `speed`, `intensity`
 
 ```html
@@ -657,7 +657,7 @@ A slow drifting gradient mesh behind its content. Transforms only, paused off-sc
 Wrap a list or grid: items that are added fade in, removed ones fade out in place, and everything else glides to its new spot — on sort, filter or resize. Zero code at the call site.
 
 - Import: `import { defineAutoAnimate } from 'motionary/components/layout'; defineAutoAnimate();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `duration`, `no-scale`
 - Methods: `enable()`, `disable()`
 
@@ -678,7 +678,7 @@ Wrap a list or grid: items that are added fade in, removed ones fade out in plac
 Set loading and every heading, paragraph, image and button inside becomes a shimmering placeholder of its own size — no extra markup.
 
 - Import: `import { defineAutoSkeleton } from 'motionary/components/page'; defineAutoSkeleton();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `loading`
 
 ```html
@@ -693,7 +693,7 @@ Set loading and every heading, paragraph, image and button inside becomes a shim
 Overlapping avatars that spread apart with a spring on hover; extras collapse into “+N”.
 
 - Import: `import { defineAvatarStack } from 'motionary/components/ui'; defineAvatarStack();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `max`, `size`, `overlap`, `label`
 - Methods: `adoptVariants()`, `mount()`
 
@@ -709,7 +709,7 @@ Overlapping avatars that spread apart with a spring on hover; extras collapse in
 Appears after you scroll, shows reading progress as a ring and springs the page back up, then moves focus to the top.
 
 - Import: `import { defineBackToTop } from 'motionary/components/page'; defineBackToTop();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `label`, `offset`, `focus-target`
 
 ```html
@@ -721,7 +721,7 @@ Appears after you scroll, shows reading progress as a ring and springs the page 
 Count or dot badge that bumps with a spring when its value changes; 99+ capping, optional pulse.
 
 - Import: `import { defineBadge } from 'motionary/components/ui'; defineBadge();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `value`, `max`, `dot`, `label`, `show-zero`
 
 ```html
@@ -735,7 +735,7 @@ Count or dot badge that bumps with a spring when its value changes; 99+ capping,
 7.5: an achievement grid — locked badges are grey with a 🔒; unlock(name) flips a badge to its colour side with a shine and the “n / m unlocked” counter updates.
 
 - Import: `import { defineBadgeWall } from 'motionary/components/widgets'; defineBadgeWall();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `label`
 - Events: `usa:unlock`
 - Methods: `unlock()`
@@ -753,7 +753,7 @@ Count or dot badge that bumps with a spring when its value changes; 99+ capping,
 7.2: bars grow from the baseline in a stagger on first view and new data glides every bar to its new height — bars that appear grow in, bars that leave shrink away. Data from values/labels, <data> children or the data property.
 
 - Import: `import { defineBarChart } from 'motionary/components/widgets'; defineBarChart();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `horizontal`, `unit`, `max`, `values`, `labels`, `label`
 
 ```html
@@ -766,7 +766,7 @@ Count or dot badge that bumps with a spring when its value changes; 99+ capping,
 9.3: a background generator — pick a palette and a style (mesh gradient, grain, stripes, dots), shuffle the seed and copy the CSS.
 
 - Import: `import { defineBgGenerator } from 'motionary/components/widgets'; defineBgGenerator();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `label`, `palette`, `style`, `seed`
 - Events: `usa:change`
 - Methods: `shuffle()`, `copy()`
@@ -780,7 +780,7 @@ Count or dot badge that bumps with a spring when its value changes; 99+ capping,
 Soft colour blobs that slowly morph and drift — a fluid gradient backdrop.
 
 - Import: `import { defineBlobs } from 'motionary/components/background'; defineBlobs();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `colors`, `speed`, `blur`
 - Methods: `mount()`
 
@@ -793,7 +793,7 @@ Soft colour blobs that slowly morph and drift — a fluid gradient backdrop.
 A draggable sheet with snap points, inertia and drag-down-to-dismiss — the iOS / Android pattern for web and Windows web-view apps.
 
 - Import: `import { defineBottomSheet } from 'motionary/components/ui'; defineBottomSheet();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `open`, `snap`, `start`
 - Methods: `show()`, `close()`
 
@@ -806,7 +806,7 @@ A draggable sheet with snap points, inertia and drag-down-to-dismiss — the iOS
 Spring-driven button click deformation: squash & stretch, elastic border-radius wobble, gooey liquid droplets, and a dent toward the pressed point. Combine them with deform="squash wobble".
 
 - Import: `import { defineButton } from 'motionary/components/click'; defineButton();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `deform`, `state`, `shape`, `disabled`, `morph`, `haptic`, `reset`
 - Events: `usa:submit`, `usa:state`
 - Methods: `morphTo()`
@@ -824,7 +824,7 @@ Spring-driven button click deformation: squash & stretch, elastic border-radius 
 Ten card effects you can combine (effect="lift sheen"): flip (hover or click, x/y axis), holo, glass, border-glow, conic-border, lift, spotlight, sheen, parallax-layers and expand (card → detail with FLIP + spring).
 
 - Import: `import { defineCard } from 'motionary/components/cards'; defineCard();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `effect`, `trigger`, `disabled`, `color`, `depth`
 - Events: `usa:flip`, `usa:expand`, `usa:collapse`
 - Methods: `flip()`, `expand()`, `collapse()`
@@ -848,7 +848,7 @@ Ten card effects you can combine (effect="lift sheen"): flip (hover or click, x/
 A deck where the top card swipes away left or right (pointer, touch, arrow keys) and the next springs forward. loop sends cards to the back.
 
 - Import: `import { defineCardStack } from 'motionary/components/cards'; defineCardStack();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `visible`, `offset`, `disabled`, `threshold`, `loop`
 - Events: `usa:swipe`, `usa:empty`
 - Methods: `swipe()`
@@ -866,7 +866,7 @@ A deck where the top card swipes away left or right (pointer, touch, arrow keys)
 6.2: swipe, drag, arrow keys, dots and autoplay (pauses on hover, focus, off screen). Four transitions — slide, fade, scale and a 3D "cards" coverflow. Reduced motion: slides switch without movement.
 
 - Import: `import { defineCarousel } from 'motionary/components/widgets'; defineCarousel();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `effect`, `autoplay`, `loop`, `no-controls`, `no-dots`, `label`, `index`
 - Events: `usa:change`
 - Methods: `next()`, `prev()`, `goTo()`
@@ -884,7 +884,7 @@ A deck where the top card swipes away left or right (pointer, touch, arrow keys)
 Items on a 3D ring, rotated by drag, arrow keys, clicks or autoplay — with spring motion. Reduced motion shows one flat item at a time.
 
 - Import: `import { defineCarousel3d } from 'motionary/components/cards'; defineCarousel3d();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `radius`, `perspective`, `autoplay`, `index`
 - Events: `usa:change`
 - Methods: `next()`, `prev()`, `goTo()`
@@ -902,7 +902,7 @@ Items on a 3D ring, rotated by drag, arrow keys, clicks or autoplay — with spr
 7.3: a cart button with a count badge and a drawer that slides in from the side — lines slide in (or bump their quantity), removed lines collapse, the badge bumps and the total rolls. Esc / backdrop close; focus is managed.
 
 - Import: `import { defineCartDrawer } from 'motionary/components/widgets'; defineCartDrawer();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `label`, `items`, `currency`
 - Events: `usa:open`, `usa:close`, `usa:change`
 - Methods: `add()`, `removeItem()`, `toggle()`
@@ -917,7 +917,7 @@ Items on a 3D ring, rotated by drag, arrow keys, clicks or autoplay — with spr
 9.1: chapter navigation for long-form stories — one entry per chapter with a reading-progress bar that fills as you scroll, the current chapter highlighted, click to glide there.
 
 - Import: `import { defineChapterNav } from 'motionary/components/widgets'; defineChapterNav();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `for`, `orientation`, `label`
 - Events: `usa:chapter`
 - Methods: `goTo()`
@@ -935,7 +935,7 @@ Items on a 3D ring, rotated by drag, arrow keys, clicks or autoplay — with spr
 7.8: an AI chat input that grows with its text; Enter sends, the send button pops when there is text and morphs into Stop while busy, with a thinking glow running round the composer.
 
 - Import: `import { defineChatComposer } from 'motionary/components/widgets'; defineChatComposer();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `placeholder`, `label`, `rows`, `busy`, `value`
 - Events: `usa:stop`, `usa:send`
 - Methods: `send()`, `clear()`
@@ -950,7 +950,7 @@ Items on a 3D ring, rotated by drag, arrow keys, clicks or autoplay — with spr
 The circle draws itself, then a check, cross or exclamation strokes in with a pop. Great after a payment or upload.
 
 - Import: `import { defineCheck } from 'motionary/components/feedback'; defineCheck();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `kind`, `size`, `label`, `start`
 - Events: `usa:complete`
 - Methods: `play()`, `reset()`
@@ -964,7 +964,7 @@ The circle draws itself, then a check, cross or exclamation strokes in with a po
 Form-associated checkbox: the box springs and the check draws itself; indeterminate state, circle shape.
 
 - Import: `import { defineCheckbox } from 'motionary/components/click'; defineCheckbox();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `checked`, `indeterminate`, `disabled`, `label`, `value`
 - Events: `usa:change`
 - Methods: `toggle()`
@@ -978,7 +978,7 @@ Form-associated checkbox: the box springs and the check draws itself; indetermin
 Wrap anything: ripple, burst (circle, star, heart, emoji), confetti, squish, press-spring and error shake — combinable, keyboard-friendly, optional haptics.
 
 - Import: `import { defineClick } from 'motionary/components/click'; defineClick();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `effect`, `disabled`, `trigger`, `color`, `count`, `shape`, `haptic`
 - Events: `usa:click-effect`
 - Methods: `play()`, `shake()`
@@ -994,7 +994,7 @@ Wrap anything: ripple, burst (circle, star, heart, emoji), confetti, squish, pre
 8.0: a pause / speed bar for the unified motion clock — pause, slow down or speed up every Motionary animation and frame loop on the page at once (motionClock in motionary/engine).
 
 - Import: `import { defineClockControl } from 'motionary/components/widgets'; defineClockControl();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `speeds`, `label`
 - Events: `usa:change`
 
@@ -1012,7 +1012,7 @@ createTimeline().add(a, [{ opacity: 0 }, { opacity: 1 }], 400).add(b, [{ transfo
 8.9 low-code: shows copy-paste code (HTML, React, Vue or JSON) for a live, configured component next to it, follows its attribute changes and copies with one click.
 
 - Import: `import { defineCodeExport } from 'motionary/components/widgets'; defineCodeExport();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `for`, `formats`
 - Events: `usa:copy`
 - Methods: `copy()`
@@ -1028,7 +1028,7 @@ createTimeline().add(a, [{ opacity: 0 }, { opacity: 1 }], 400).add(b, [{ transfo
 6.9: a saturation / brightness square and a hue strip with spring-follow thumbs (both keyboard sliders), a preview chip that morphs to the new colour and swatches that pop.
 
 - Import: `import { defineColorPicker } from 'motionary/components/widgets'; defineColorPicker();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `swatches`
 - Events: `usa:change`, `usa:input`
 
@@ -1041,7 +1041,7 @@ createTimeline().add(a, [{ opacity: 0 }, { opacity: 1 }], 400).add(b, [{ transfo
 7.9: a ⌘K command palette on the native <dialog> — scales in, filters as you type with fuzzy matching and highlighted letters, results stagger in and a highlight glides between rows (↑ ↓ Enter).
 
 - Import: `import { defineCommandPalette } from 'motionary/components/widgets'; defineCommandPalette();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `placeholder`, `label`, `hotkey`, `inline`
 - Events: `usa:run`, `usa:open`, `usa:close`
 - Methods: `setCommands()`, `show()`, `close()`, `toggle()`
@@ -1059,7 +1059,7 @@ createTimeline().add(a, [{ opacity: 0 }, { opacity: 1 }], 400).add(b, [{ transfo
 6.5: drag the handle (or hover with the hover attribute), click to jump, or use the keyboard slider; horizontal or vertical; an intro sweep plays once when it scrolls into view.
 
 - Import: `import { defineCompare } from 'motionary/components/widgets'; defineCompare();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `orientation`, `labels`, `label`, `position`, `hover`, `intro`
 - Events: `usa:change`
 
@@ -1075,7 +1075,7 @@ createTimeline().add(a, [{ opacity: 0 }, { opacity: 1 }], 400).add(b, [{ transfo
 7.3: a split-flap countdown to a date (to) or for a number of seconds — every digit flips when it changes; fires usa:done at zero. The timer label updates once a minute so screen readers are not flooded.
 
 - Import: `import { defineCountdown } from 'motionary/components/widgets'; defineCountdown();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `to`, `seconds`, `units`, `labels`, `label`
 - Events: `usa:tick`, `usa:done`
 - Methods: `start()`, `stop()`
@@ -1089,7 +1089,7 @@ createTimeline().add(a, [{ opacity: 0 }, { opacity: 1 }], 400).add(b, [{ transfo
 Counts up to a number when visible, locale-formatted with tabular digits. Set .value to animate live dashboards.
 
 - Import: `import { defineCounter } from 'motionary/components/text'; defineCounter();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `to`, `decimals`, `locale`, `prefix`, `suffix`, `grouping`, `from`, `start`, `duration`
 - Events: `usa:complete`
 - Methods: `play()`, `format()`
@@ -1103,7 +1103,7 @@ Counts up to a number when visible, locale-formatted with tabular digits. Set .v
 Up to six children become the faces of a CSS 3D cube. Drag / swipe, arrow keys, autoplay or show("top"); spring-driven, the front face is the only one exposed to screen readers.
 
 - Import: `import { defineCube } from 'motionary/components/depth'; defineCube();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `size`, `autoplay`, `perspective`
 - Events: `usa:change`
 - Methods: `show()`, `next()`, `prev()`
@@ -1119,7 +1119,7 @@ Up to six children become the faces of a CSS 3D cube. Drag / swipe, arrow keys, 
 6.5: slides sit on adjacent faces of a 3D cube that turns between them — swipe, arrow keys, buttons or autoplay (pauses on hover / focus / off screen); turn around the Y or X axis.
 
 - Import: `import { defineCubeGallery } from 'motionary/components/widgets'; defineCubeGallery();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `axis`, `autoplay`, `label`
 - Events: `usa:change`
 - Methods: `next()`, `prev()`, `goTo()`
@@ -1137,7 +1137,7 @@ Up to six children become the faces of a CSS 3D cube. Drag / swipe, arrow keys, 
 A spring-lagged ring, a magnetic ring that wraps buttons and links, or a soft glow following the pointer. Mouse / pen only. (6.0: for a comet tail use the comet-trail effect.)
 
 - Import: `import { defineCursor } from 'motionary/components/page'; defineCursor();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `mode`, `size`, `color`, `hide-native`, `targets`
 
 ```html
@@ -1149,7 +1149,7 @@ A spring-lagged ring, a magnetic ring that wraps buttons and links, or a soft gl
 6.9: months slide in from the direction of travel, the chosen day pops inside a spring circle, today has a ring. A real date grid: arrows, PageUp / PageDown, Home / End, min / max.
 
 - Import: `import { defineDatePicker } from 'motionary/components/widgets'; defineDatePicker();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `min`, `max`, `first-day`, `locale`
 - Events: `usa:change`
 - Methods: `showMonth()`
@@ -1163,7 +1163,7 @@ A spring-lagged ring, a magnetic ring that wraps buttons and links, or a soft gl
 Layers with data-depth (-1…1) shift and scale by depth as the pointer moves, the phone tilts (source="orientation") or the page scrolls; optional whole-scene rotation.
 
 - Import: `import { defineDepth } from 'motionary/components/depth'; defineDepth();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `source`, `strength`, `rotate`
 - Methods: `requestPermission()`
 
@@ -1182,7 +1182,7 @@ Layers with data-depth (-1…1) shift and scale by depth as the pointer moves, t
 Animated modal, side drawers and bottom sheet on the native <dialog>: top layer, focus trap, Esc, backdrop click.
 
 - Import: `import { defineDialog } from 'motionary/components/transitions'; defineDialog();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `open`, `kind`, `label`, `no-esc`, `no-backdrop-close`
 - Events: `usa:open`, `usa:beforeclose`, `usa:close`
 - Slots: default
@@ -1201,7 +1201,7 @@ Animated modal, side drawers and bottom sheet on the native <dialog>: top layer,
 6.2: native <details> that spring open and closed (height + fade) with an overshooting chevron; one open at a time unless multiple. Find-in-page and keyboard keep working.
 
 - Import: `import { defineDisclosure } from 'motionary/components/widgets'; defineDisclosure();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `multiple`, `spring`
 - Events: `usa:toggle`
 - Methods: `toggle()`, `openAll()`, `closeAll()`
@@ -1218,7 +1218,7 @@ Animated modal, side drawers and bottom sheet on the native <dialog>: top layer,
 The image bulges and splits into RGB around the pointer. Without WebGL (or a cross-origin image without CORS) it falls back to a gentle CSS zoom.
 
 - Import: `import { defineDistort } from 'motionary/components/webgl'; defineDistort();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 
 ```html
 <usa-distort>
@@ -1231,7 +1231,7 @@ The image bulges and splits into RGB around the pointer. Without WebGL (or a cro
 6.6: items magnify with a smooth cosine falloff as the pointer moves along the dock, neighbours make room, labels pop above the hovered item and a click bounces it. Keyboard focus magnifies too.
 
 - Import: `import { defineDock } from 'motionary/components/widgets'; defineDock();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `orientation`, `magnify`, `range`, `label`, `bounce`
 
 ```html
@@ -1247,7 +1247,7 @@ The image bulges and splits into RGB around the pointer. Without WebGL (or a cro
 A dot grid that swells and links up with lines around the pointer.
 
 - Import: `import { defineDotNetwork } from 'motionary/components/background'; defineDotNetwork();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `gap`, `radius`, `color`
 - Methods: `mount()`
 
@@ -1260,7 +1260,7 @@ A dot grid that swells and links up with lines around the pointer.
 10.9: plays .lottie files with their themes (slots recoloured by a theme from the file) and state machines — playback states, event / numeric / boolean guards, pointer and completion interactions, input and theme actions (OpenUrl is refused). Tap the dot: it starts pulsing, three taps switch it to the dark theme. Requires motionary/runtime/vector + motionary/runtime/lottie-state — npm i motionary, then use(vector, lottieState). Its own entry point: motionary/components/dotlottie.
 
 - Import: `import { defineDotLottie } from 'motionary/components/dotlottie'; defineDotLottie();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `theme`, `state-machine`
 - Events: `usa:error`, `usa:state`, `usa:custom`, `usa:runtime-missing`
 - Methods: `fire()`, `setInput()`, `setTheme()`
@@ -1279,12 +1279,12 @@ defineDotLottie(); // registers <usa-dotlottie> — after the prerequisites
 ```
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/vector.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/lottie-state.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/vector.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/lottie-state.iife.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>
 ```
 
 ```html
@@ -1296,7 +1296,7 @@ defineDotLottie(); // registers <usa-dotlottie> — after the prerequisites
 Double tap or double click a photo to pop a heart (or any emoji) at the tap point. L for keyboard users.
 
 - Import: `import { defineDoubleTap } from 'motionary/components/click'; defineDoubleTap();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `disabled`, `delay`, `icon`, `color`
 - Events: `usa:double-tap`
 - Methods: `pop()`
@@ -1312,7 +1312,7 @@ Double tap or double click a photo to pop a heart (or any emoji) at the tap poin
 Drag with mouse, touch, pen or arrow keys. spring-back returns home with a wobble; inertia glides after a flick; snap to a grid or points; rubber-band bounds.
 
 - Import: `import { defineDraggable } from 'motionary/components/physics'; defineDraggable();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `axis`, `disabled`, `preset`, `bounds`, `spring-back`, `inertia`, `snap`, `step`
 - Events: `usa:settle`, `usa:drag-start`, `usa:drag`, `usa:drag-end`
 - Methods: `moveTo()`, `reset()`
@@ -1329,7 +1329,7 @@ Drag with mouse, touch, pen or arrow keys. spring-back returns home with a wobbl
 Every stroke of the SVG inside draws itself — on view, hover, click or scrubbed with scroll — staggered between shapes, optional fill afterwards. No getTotalLength() needed.
 
 - Import: `import { defineDraw } from 'motionary/components/svg'; defineDraw();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `duration`, `stagger`, `trigger`, `repeat`
 - Events: `usa:complete`
 - Methods: `play()`
@@ -1345,7 +1345,7 @@ Every stroke of the SVG inside draws itself — on view, hover, click or scrubbe
 A side panel that springs in, drags / swipes closed, traps the page behind a backdrop and returns focus on close. Left, right, top or bottom.
 
 - Import: `import { defineDrawer } from 'motionary/components/ui'; defineDrawer();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Methods: `show()`, `close()`
 
 ```html
@@ -1358,7 +1358,7 @@ A side panel that springs in, drags / swipes closed, traps the page behind a bac
 7.1: one vertical slider per band with springy caps and a smooth response curve drawn through them; presets glide every band to its gain.
 
 - Import: `import { defineEqualizer } from 'motionary/components/widgets'; defineEqualizer();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `bands`, `preset`, `label`
 - Events: `usa:change`
 - Methods: `applyPreset()`
@@ -1373,7 +1373,7 @@ A side panel that springs in, drags / swipes closed, traps the page behind a bac
 A floating action button whose actions fan out with a staggered spring: up, down, left, right or radial.
 
 - Import: `import { defineFab } from 'motionary/components/ui'; defineFab();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `direction`, `gap`
 - Events: `usa:toggle`
 - Methods: `toggle()`
@@ -1391,7 +1391,7 @@ A floating action button whose actions fan out with a staggered spring: up, down
 8.1: an announcement banner with an ambient festive scene behind the text — lunar lanterns and sparkles, Christmas lights and snow, Halloween bats and moon, or fireworks.
 
 - Import: `import { defineFestivalBanner } from 'motionary/components/widgets'; defineFestivalBanner();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `theme`, `label`, `dismissible`
 - Events: `usa:dismiss`
 - Methods: `dismiss()`
@@ -1405,7 +1405,7 @@ A floating action button whose actions fan out with a staggered spring: up, down
 7.7: a text input whose label floats up on focus, with a growing underline; validates on blur — invalid shakes and slides the message in, valid draws a check. strength adds a 4-step password meter.
 
 - Import: `import { defineField } from 'motionary/components/widgets'; defineField();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `label`, `hint`, `error`, `strength`
 - Events: `usa:invalid`, `usa:valid`
 - Methods: `validate()`
@@ -1420,7 +1420,7 @@ A floating action button whose actions fan out with a staggered spring: up, down
 6.9: dragging files over it lights marching-ants borders and lifts the icon; dropped (or browsed) files fly into a list with progress bars that end in a drawn check.
 
 - Import: `import { defineFileDrop } from 'motionary/components/widgets'; defineFileDrop();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `label`, `accept`, `multiple`, `simulate`
 - Events: `usa:files`
 - Methods: `setProgress()`, `addFiles()`, `clear()`
@@ -1437,7 +1437,7 @@ A floating action button whose actions fan out with a staggered spring: up, down
 Full-screen sections that snap one at a time, with keyboard paging, dot navigation and a usa:section event.
 
 - Import: `import { defineFullpage } from 'motionary/components/page'; defineFullpage();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `dots`, `axis`
 - Events: `usa:section`
 - Methods: `go()`, `next()`, `prev()`
@@ -1454,7 +1454,7 @@ Full-screen sections that snap one at a time, with keyboard paging, dot navigati
 <usa-fx> plays any registered effect on its child: pulse, pop, jelly, wiggle, heartbeat, bounce, flash (≤ 2 per second), tada, shake. Click the button.
 
 - Import: `import { defineFx } from 'motionary/components/fx'; defineFx();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `effect`, `trigger`, `options`, `self`, `once`
 - Methods: `play()`
 
@@ -1469,7 +1469,7 @@ Full-screen sections that snap one at a time, with keyboard paging, dot navigati
 7.2: a semicircular gauge — the needle swings to the value on a damped spring (overshoot, settle), the arc fills in the colour of its zone and the number counts. role="meter".
 
 - Import: `import { defineGauge } from 'motionary/components/widgets'; defineGauge();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `min`, `max`, `zones`, `unit`, `label`, `value`
 
 ```html
@@ -1481,7 +1481,7 @@ Full-screen sections that snap one at a time, with keyboard paging, dot navigati
 9.3: seeded generative art on a canvas — flow fields, circle packing, Truchet tiles or layered waves in curated palettes; it draws itself in on screen and a tap re-seeds it.
 
 - Import: `import { defineGenArt } from 'motionary/components/widgets'; defineGenArt();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `art`, `seed`, `palette`, `label`
 - Events: `usa:generate`
 - Methods: `generate()`, `toDataURL()`
@@ -1495,7 +1495,7 @@ Full-screen sections that snap one at a time, with keyboard paging, dot navigati
 5.7: <usa-gesture-fx> plays any registered effect on a fling (fast release), a two-finger twist or a long press that charges --usa-charge 0 → 1. JS: bindGesture(el, "fling", "tada").
 
 - Import: `import { defineGestureFx } from 'motionary/components/effects'; defineGestureFx();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `gesture`, `effect`, `options`, `self`, `velocity`, `angle`, `duration`
 
 ```html
@@ -1509,7 +1509,7 @@ Full-screen sections that snap one at a time, with keyboard paging, dot navigati
 8.7: a multi-touch sticker — drag with one finger, pinch with two to scale and twist to rotate, all at once, with a lifted shadow while held (wheel / Shift + wheel and keyboard on desktop).
 
 - Import: `import { defineGestureSticker } from 'motionary/components/widgets'; defineGestureSticker();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `min`, `max`, `label`
 - Events: `usa:transform`
 - Methods: `transformTo()`, `reset()`
@@ -1525,7 +1525,7 @@ Full-screen sections that snap one at a time, with keyboard paging, dot navigati
 10.9: <usa-gl-scene> for compressed glTF — Draco meshes and KTX2 (Basis Universal) textures decoded by the official decoders (Google draco3d, Binomial’s Basis Universal transcoder), lazy-loaded optional peers: only the decoder a file needs is fetched. Requires motionary/runtime/gl + format-gltf + gltf-decoders and draco3d (+ the Basis transcoder for KTX2 textures). Its own entry point: motionary/components/gl-model.
 
 - Import: `import { defineGlModel } from 'motionary/components/gl-model'; defineGlModel();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Events: `usa:runtime-missing`
 - Requires: motionary/runtime/gl + motionary/runtime/format-gltf + motionary/runtime/gltf-decoders + draco3d + basis_transcoder.js
   - Install: `npm i motionary && npm i draco3d && curl -LO https://cdn.jsdelivr.net/gh/BinomialLLC/basis_universal@1.16.4/webgl/transcoder/build/basis_transcoder.js -LO https://cdn.jsdelivr.net/gh/BinomialLLC/basis_universal@1.16.4/webgl/transcoder/build/basis_transcoder.wasm`
@@ -1546,15 +1546,15 @@ defineGlModel(); // registers <usa-gl-model> — after the prerequisites
 ```
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/gl.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/format-gltf.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/gltf-decoders.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/gl.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/format-gltf.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/gltf-decoders.iife.js"></script>
 <script src="https://www.gstatic.com/draco/versioned/decoders/1.5.7/draco_decoder.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/BinomialLLC/basis_universal@1.16.4/webgl/transcoder/build/basis_transcoder.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>
 ```
 
 ```html
@@ -1566,7 +1566,7 @@ defineGlModel(); // registers <usa-gl-model> — after the prerequisites
 10.5: a WebGL2 3D viewer on Motionary’s own renderer — glTF 2.0 / GLB and OBJ / MTL models or built-in shapes, PBR-style materials, orbit controls (drag, wheel, pinch, arrow keys), auto-rotate and video textures. Requires motionary/runtime/gl (+ format-gltf for .gltf / .glb, format-obj for .obj, gltf-anim for glTF animation — 10.8) — npm i motionary, then use(gl, formatGltf, formatObj, gltfAnim) before it mounts.
 
 - Import: `import { defineGlScene } from 'motionary/components/widgets'; defineGlScene();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `src`, `shape`, `color`, `metallic`, `roughness`, `background`, `exposure`, `controls`, `auto-rotate`, `video`, `video-scrub`, `label`, `animation`, `animation-speed`
 - Events: `usa:error`, `usa:load`, `usa:runtime-missing`
 - Methods: `reload()`
@@ -1587,14 +1587,14 @@ defineGlScene(); // registers <usa-gl-scene> — after the prerequisites
 ```
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/gl.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/format-gltf.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/format-obj.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/gltf-anim.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/gl.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/format-gltf.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/format-obj.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/gltf-anim.iife.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>
 ```
 
 ```html
@@ -1606,7 +1606,7 @@ defineGlScene(); // registers <usa-gl-scene> — after the prerequisites
 An RGB-split, sliced glitch — always on or on hover.
 
 - Import: `import { defineGlitch } from 'motionary/components/text'; defineGlitch();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `text`, `intensity`
 - Methods: `mount()`, `splitChars()`
 
@@ -1619,7 +1619,7 @@ An RGB-split, sliced glitch — always on or on hover.
 7.6: an SVG globe in orthographic projection — graticule, pulsing markers, spins while on screen, drag to turn it, flyTo(name) brings a city round to the front. No WebGL, no tiles.
 
 - Import: `import { defineGlobe } from 'motionary/components/widgets'; defineGlobe();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `markers`, `speed`, `tilt`, `lon`
 - Events: `usa:focus`
 - Methods: `flyTo()`
@@ -1634,7 +1634,7 @@ An RGB-split, sliced glitch — always on or on hover.
 10.5 (WebGPU effects 2.0): tens of thousands of particles simulated by a WebGPU compute shader and drawn as instanced quads — swirl, galaxy or fountain, pointer repulsion, trails; Canvas 2D fallback where WebGPU is missing.
 
 - Import: `import { defineGpuParticles } from 'motionary/components/widgets'; defineGpuParticles();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `count`, `mode`, `colors`, `size`, `speed`, `trail`, `pointer`, `label`
 - Events: `usa:backend`
 
@@ -1647,7 +1647,7 @@ An RGB-split, sliced glitch — always on or on hover.
 Text filled with a multi-colour gradient that keeps flowing.
 
 - Import: `import { defineGradientText } from 'motionary/components/text'; defineGradientText();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `colors`, `speed`, `angle`
 - Methods: `mount()`, `splitChars()`
 
@@ -1660,7 +1660,7 @@ Text filled with a multi-colour gradient that keeps flowing.
 An SVG-noise grain overlay — no image to ship. animated makes it jitter like film.
 
 - Import: `import { defineGrain } from 'motionary/components/background'; defineGrain();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `opacity`, `blend`, `scale`
 
 ```html
@@ -1674,7 +1674,7 @@ An SVG-noise grain overlay — no image to ship. animated makes it jitter like f
 A line grid behind the content that lights up around the pointer.
 
 - Import: `import { defineGridGlow } from 'motionary/components/background'; defineGridGlow();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `size`, `radius`, `color`
 - Methods: `mount()`
 
@@ -1689,7 +1689,7 @@ A line grid behind the content that lights up around the pointer.
 8.7: a 3D card that tilts with the phone’s gyroscope (and with the pointer on desktop), with a moving glare and layers that float at different depths.
 
 - Import: `import { defineGyroCard } from 'motionary/components/widgets'; defineGyroCard();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `max`, `glare`
 - Events: `usa:tilt`
 - Methods: `tilt()`, `wobble()`
@@ -1706,7 +1706,7 @@ A line grid behind the content that lights up around the pointer.
 The text draws itself stroke by stroke, then fills in — signatures, hero words.
 
 - Import: `import { defineHandwriting } from 'motionary/components/text'; defineHandwriting();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `text`, `size`, `font`, `stroke`, `duration`
 - Events: `usa:complete`
 - Methods: `mount()`, `splitChars()`
@@ -1720,7 +1720,7 @@ The text draws itself stroke by stroke, then fills in — signatures, hero words
 9.4: a full-bleed hero with a background video — poster first, cross-fade to the video, a readable scrim, an always-there pause button and an optional scroll-scrubbed mode.
 
 - Import: `import { defineHeroVideo } from 'motionary/components/widgets'; defineHeroVideo();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `label`, `scrub`, `poster`
 - Methods: `toggle()`
 
@@ -1736,7 +1736,7 @@ The text draws itself stroke by stroke, then fills in — signatures, hero words
 Press and hold (pointer, Space or Enter) while a ring fills; releasing early rewinds. For destructive actions.
 
 - Import: `import { defineHold } from 'motionary/components/click'; defineHold();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `duration`, `disabled`, `color`, `label`
 - Events: `usa:progress`, `usa:confirm`, `usa:cancel`
 - Methods: `cancel()`
@@ -1750,7 +1750,7 @@ Press and hold (pointer, Space or Enter) while a ring fills; releasing early rew
 8.4: a sci-fi HUD panel — angled corners, a glowing frame that draws itself in when the panel scrolls into view, a header with a blinking status light, and data rows that fill in as animated bar readouts.
 
 - Import: `import { defineHudPanel } from 'motionary/components/widgets'; defineHudPanel();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `title`, `status`, `color`
 - Events: `usa:boot`
 - Methods: `boot()`
@@ -1767,7 +1767,7 @@ Press and hold (pointer, Space or Enter) while a ring fills; releasing early rew
 8.0: server-rendered children animate in on hydration — hidden only while JS is on and not yet upgraded (ssrHead() in the head, 3 s CSS fallback), then staggered in on the unified clock.
 
 - Import: `import { defineHydrate } from 'motionary/components/widgets'; defineHydrate();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `effect`, `stagger`, `duration`
 - Events: `usa:hydrated`
 - Methods: `replay()`
@@ -1786,7 +1786,7 @@ Press and hold (pointer, Space or Enter) while a ring fills; releasing early rew
 Icons that morph point-by-point with a spring: play ↔ pause, menu ↔ close, plus ↔ minus, check, arrow. toggle makes it a button with per-icon labels.
 
 - Import: `import { defineIconMorph } from 'motionary/components/click'; defineIconMorph();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `icons`, `size`, `toggle`, `index`, `preset`, `labels`
 - Events: `usa:change`
 - Methods: `next()`, `show()`
@@ -1801,13 +1801,13 @@ Icons that morph point-by-point with a spring: play ↔ pause, menu ↔ close, p
 10.1: one-click install snippet with npm / pnpm / yarn / bun / CDN tabs and a copy button that confirms with a check; `cdn` sets the URL of the CDN tab.
 
 - Import: `import { defineInstallButton } from 'motionary/components/widgets'; defineInstallButton();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `package`, `managers`, `cdn`, `dev`, `manager`
 - Events: `usa:copy`
 - Methods: `command()`, `copy()`
 
 ```html
-<usa-install-button package="motionary" managers="npm pnpm yarn bun cdn" cdn="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></usa-install-button>
+<usa-install-button package="motionary" managers="npm pnpm yarn bun cdn" cdn="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></usa-install-button>
 ```
 
 ### <usa-kanban> — Kanban board (drag-sort)
@@ -1815,7 +1815,7 @@ Icons that morph point-by-point with a spring: play ↔ pause, menu ↔ close, p
 6.8: drag cards between columns — the card lifts and tilts toward the drag, a placeholder opens where it will land and the other cards glide aside (FLIP). Full keyboard support: Space picks up, arrows move, Space drops.
 
 - Import: `import { defineKanban } from 'motionary/components/widgets'; defineKanban();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `label`
 - Events: `usa:move`
 - Methods: `cardsOf()`, `move()`
@@ -1836,7 +1836,7 @@ Icons that morph point-by-point with a spring: play ↔ pause, menu ↔ close, p
 6.9: a compact timeline for <usa-player> JSON — drag a bar to move a track, drag its edge to resize, scrub the playhead or press play; exports format use-scroll-animate/animation v1.
 
 - Import: `import { defineKeyframeEditor } from 'motionary/components/widgets'; defineKeyframeEditor();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `for`
 - Events: `usa:change`
 - Methods: `toJSON()`, `play()`, `seek()`
@@ -1854,7 +1854,7 @@ Icons that morph point-by-point with a spring: play ↔ pause, menu ↔ close, p
 7.2: the value counts up keeping prefix, suffix and decimals ("$12.4k", "98.2%"), the delta chip slides in with an arrow coloured by sign, and an optional trend draws a sparkline. Setting value rolls and flashes the card.
 
 - Import: `import { defineKpi } from 'motionary/components/widgets'; defineKpi();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `label`, `delta`, `caption`, `trend`, `invert`, `locale`
 
 ```html
@@ -1866,7 +1866,7 @@ Icons that morph point-by-point with a spring: play ↔ pause, menu ↔ close, p
 7.5: a ranked list — when scores change, rows glide to their new rank, climbers flash green with ▲n and fallers red with ▼n, scores roll and the top three get medals.
 
 - Import: `import { defineLeaderboard } from 'motionary/components/widgets'; defineLeaderboard();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `label`, `limit`, `me`
 - Events: `usa:rank`
 - Methods: `setScore()`
@@ -1885,7 +1885,7 @@ Icons that morph point-by-point with a spring: play ↔ pause, menu ↔ close, p
 A heart that pops with a spring and bursts into particles; aria-pressed, optional count.
 
 - Import: `import { defineLike } from 'motionary/components/click'; defineLike();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `liked`, `count`, `label`, `disabled`, `size`, `color`, `haptic`
 - Events: `usa:change`
 - Methods: `toggle()`
@@ -1899,7 +1899,7 @@ A heart that pops with a spring and bursts into particles; aria-pressed, optiona
 Click or tap to send water ripples through the image; hover adds a gentle wobble. The plain image stays when WebGL is unavailable.
 
 - Import: `import { defineLiquid } from 'motionary/components/webgl'; defineLiquid();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 
 ```html
 <usa-liquid strength="1">
@@ -1912,7 +1912,7 @@ Click or tap to send water ripples through the image; hover adds a gentle wobble
 8.3: a navigation bar whose active indicator is a drop of liquid — it stretches like a droplet towards the next item and settles with a wobble (gooey SVG filter).
 
 - Import: `import { defineLiquidNav } from 'motionary/components/widgets'; defineLiquidNav();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `label`, `value`
 - Events: `usa:change`
 
@@ -1927,7 +1927,7 @@ Click or tap to send water ripples through the image; hover adds a gentle wobble
 A slim NProgress-style bar for route changes and fetches: loadingBar.start() trickles, done() completes and fades.
 
 - Import: `import { defineLoadingBar } from 'motionary/components/page'; defineLoadingBar();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `label`, `color`, `height`
 - Methods: `start()`, `set()`, `done()`
 
@@ -1943,7 +1943,7 @@ A slim NProgress-style bar for route changes and fetches: loadingBar.start() tri
 7.6: a place card with a stylised mini map — the route from the origin draws itself, the pin drops in with a bounce and a ring pulses; distance computed with haversine (km or mi).
 
 - Import: `import { defineLocationCard } from 'motionary/components/widgets'; defineLocationCard();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `name`, `address`, `lat`, `lon`, `from-lat`, `from-lon`, `distance`, `href`, `unit`
 - Events: `usa:arrive`
 - Methods: `replay()`
@@ -1958,7 +1958,7 @@ A slim NProgress-style bar for route changes and fetches: loadingBar.start() tri
 9.2: plays Lottie (After Effects / bodymovin) files without lottie-web — vector layers render as SVG and their keyframes run as native animations on Motionary’s clock.
 
 - Import: `import { defineLottie } from 'motionary/components/widgets'; defineLottie();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `src`, `loop`, `speed`, `label`
 - Events: `usa:error`, `usa:load`, `usa:complete`
 - Methods: `play()`, `pause()`, `stop()`
@@ -1972,7 +1972,7 @@ A slim NProgress-style bar for route changes and fetches: loadingBar.start() tri
 9.2: an animated icon set shipped as tiny Lottie files — heart beat, bell swing, check draw-in, spinner, star twinkle, bolt zap — on click, hover, enter or loop.
 
 - Import: `import { defineLottieIcon } from 'motionary/components/widgets'; defineLottieIcon();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `name`, `size`, `color`, `label`, `trigger`
 - Methods: `play()`
 
@@ -1986,7 +1986,7 @@ A slim NProgress-style bar for route changes and fetches: loadingBar.start() tri
 10.6: plays Lottie JSON and dotLottie (.lottie) files with Motionary’s own Canvas 2D renderer — shapes, gradients, trim paths, masks, track mattes, precomps and images; autoplay, loop, bounce, segments / markers, play on hover or scrub with scroll. Requires motionary/runtime/vector — npm i motionary, then use(vector) before it mounts.
 
 - Import: `import { defineLottiePlayer } from 'motionary/components/widgets'; defineLottiePlayer();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `src`, `animation`, `autoplay`, `loop`, `speed`, `mode`, `segment`, `hover`, `scrub`, `fit`, `background`, `label`
 - Events: `usa:complete`, `usa:load`, `usa:error`, `usa:runtime-missing`
 - Methods: `play()`, `pause()`, `stop()`, `seek()`
@@ -2004,11 +2004,11 @@ defineLottiePlayer(); // registers <usa-lottie-player> — after the prerequisit
 ```
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/vector.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/vector.iife.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>
 ```
 
 ```html
@@ -2020,7 +2020,7 @@ defineLottiePlayer(); // registers <usa-lottie-player> — after the prerequisit
 7.1: LRC or [data-t] lines; the active line glows, scrolls to the centre and a highlight sweeps across it while past lines dim. Follows an <audio>, <video> or <usa-music-player> via for.
 
 - Import: `import { defineLyrics } from 'motionary/components/widgets'; defineLyrics();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `label`, `for`
 - Events: `usa:seek`
 
@@ -2038,7 +2038,7 @@ defineLottiePlayer(); // registers <usa-lottie-player> — after the prerequisit
 Content leans toward the pointer when it comes near and springs back. Fine pointers only; off under reduced motion.
 
 - Import: `import { defineMagnetic } from 'motionary/components/interaction'; defineMagnetic();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `strength`, `radius`, `disabled`
 
 ```html
@@ -2050,7 +2050,7 @@ Content leans toward the pointer when it comes near and springs back. Fine point
 A seamless infinite ticker with constant speed, pause on hover, soft edges and vertical mode. Clones are hidden from AT.
 
 - Import: `import { defineMarquee } from 'motionary/components/background'; defineMarquee();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `speed`, `direction`, `gap`, `paused`, `pause-on-hover`
 - Methods: `pause()`, `resume()`
 
@@ -2066,7 +2066,7 @@ A seamless infinite ticker with constant speed, pause on hover, soft edges and v
 Reveal images or sections through a growing mask: circle, diamond, star, iris or wipes, from any origin.
 
 - Import: `import { defineMaskReveal } from 'motionary/components/svg'; defineMaskReveal();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `shape`, `at`, `duration`, `delay`, `trigger`, `repeat`
 - Events: `usa:complete`
 - Methods: `reveal()`
@@ -2082,7 +2082,7 @@ Reveal images or sections through a growing mask: circle, diamond, star, iris or
 Pinterest-style masonry: items drop into the shortest column and glide when the width, the items or their sizes change. CSS columns before JS runs.
 
 - Import: `import { defineMasonry } from 'motionary/components/layout'; defineMasonry();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `columns`, `min`, `gap`
 - Methods: `enable()`, `disable()`
 
@@ -2098,7 +2098,7 @@ Pinterest-style masonry: items drop into the shortest column and glide when the 
 6.5: a masonry grid whose items glide to their new places (FLIP) on resize, insert / remove, filter(), shuffle() and sort(); hidden items scale out, new ones scale in.
 
 - Import: `import { defineMasonryFlow } from 'motionary/components/widgets'; defineMasonryFlow();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `min`, `gap`
 - Events: `usa:layout`
 - Methods: `layout()`, `filter()`, `shuffle()`, `sort()`
@@ -2117,7 +2117,7 @@ Pinterest-style masonry: items drop into the shortest column and glide when the 
 6.3: the list scales (or folds / slides) out of its button and the items cascade in. Full menu keyboard support — arrows, Home / End, Esc, Tab — and outside clicks close it.
 
 - Import: `import { defineMenu } from 'motionary/components/widgets'; defineMenu();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `placement`, `effect`
 - Events: `usa:select`, `usa:open`, `usa:close`
 - Methods: `open()`, `close()`, `toggle()`
@@ -2137,7 +2137,7 @@ Pinterest-style masonry: items drop into the shortest column and glide when the 
 6.6: the three bars morph into a cross, a back arrow, a minus or a spinning plus-to-cross; a real toggle button with aria-expanded that can open the element it controls (for).
 
 - Import: `import { defineMenuToggle } from 'motionary/components/widgets'; defineMenuToggle();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `variant`, `label`, `for`
 - Events: `usa:toggle`
 - Methods: `toggle()`
@@ -2152,7 +2152,7 @@ Pinterest-style masonry: items drop into the shortest column and glide when the 
 7.4: a chat thread — new bubbles pop in from their side, consecutive messages group, the list sticks to the bottom (or shows a “↓ New messages” pill when you scrolled up) and typing(name) shows animated typing dots.
 
 - Import: `import { defineMessageList } from 'motionary/components/widgets'; defineMessageList();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `label`
 - Events: `usa:message`
 - Methods: `push()`, `typing()`
@@ -2170,7 +2170,7 @@ Pinterest-style masonry: items drop into the shortest column and glide when the 
 6.5: a progress line grows down the rail as you scroll; each milestone pops its dot and slides its card in when the line reaches it. Alternating sides on wide screens, one column on phones; data-date labels.
 
 - Import: `import { defineMilestones } from 'motionary/components/widgets'; defineMilestones();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `layout`
 - Events: `usa:reach`
 
@@ -2187,7 +2187,7 @@ Pinterest-style masonry: items drop into the shortest column and glide when the 
 6.3: native <dialog> (top layer, focus trap, Esc) with animated open / close and a blurred backdrop — scale, slide-up, flip, or origin: it grows out of the button that opened it. Focus returns to the opener.
 
 - Import: `import { defineModal } from 'motionary/components/widgets'; defineModal();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 
 ```html
 <button data-usa-open="welcome">Open</button>
@@ -2203,7 +2203,7 @@ Pinterest-style masonry: items drop into the shortest column and glide when the 
 Morph an SVG path through a list of shapes (paths="A | B | C") on click, hover, in view or automatically. Same-structure paths morph point by point.
 
 - Import: `import { defineMorph } from 'motionary/components/svg'; defineMorph();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `paths`, `trigger`, `duration`, `interval`
 - Events: `usa:change`
 - Methods: `next()`
@@ -2218,7 +2218,7 @@ Morph an SVG path through a list of shapes (paths="A | B | C") on click, hover, 
 9.0: the declarative motion DSL — describe motion as one readable string (“enter: fade-up 600ms stagger 80ms; hover: pop”) on <usa-motion> or any element’s data-motion, no JavaScript per element.
 
 - Import: `import { defineMotion } from 'motionary/components/widgets'; defineMotion();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `rules`
 - Events: `usa:motion-error`
 
@@ -2236,7 +2236,7 @@ Morph an SVG path through a list of shapes (paths="A | B | C") on click, hover, 
 10.2: a live panel listing the running animations in a scope (CSS animations, transitions, element.animate(), components) with state and progress, plus the motionary/runtime ticker when present — pause / play all, 0.25× slow motion and per-row scrub.
 
 - Import: `import { defineMotionInspector } from 'motionary/components/widgets'; defineMotionInspector();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `scope`, `interval`
 - Events: `usa:change`
 - Methods: `refresh()`, `pauseAll()`, `playAll()`, `setRate()`, `animations()`
@@ -2250,7 +2250,7 @@ Morph an SVG path through a list of shapes (paths="A | B | C") on click, hover, 
 9.5: a motion settings panel for your users — motion level (full, gentle, minimal, none), animation speed, pause autoplaying video, no parallax — applied instantly to every Motionary animation and remembered.
 
 - Import: `import { defineMotionPrefs } from 'motionary/components/widgets'; defineMotionPrefs();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `label`
 - Events: `usa:change`
 - Methods: `reset()`
@@ -2264,7 +2264,7 @@ Morph an SVG path through a list of shapes (paths="A | B | C") on click, hover, 
 10.7 (AI-assisted motion): describe a motion in English or Chinese and get a live preview plus ready code — Web Animations, CSS (with a reduced-motion guard) or a Motionary component. A small deterministic parser (motionary/components/ai), no model and no network; the same parser powers suggest_motion in motionary-mcp 2.0.
 
 - Import: `import { defineMotionPrompt } from 'motionary/components/widgets'; defineMotionPrompt();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `value`, `format`, `placeholder`, `label`
 - Events: `usa:suggest`, `usa:copy`
 - Methods: `suggest()`
@@ -2278,7 +2278,7 @@ Morph an SVG path through a list of shapes (paths="A | B | C") on click, hover, 
 9.7: a motion spec sheet for design hand-off — each rule of a motion string with its trigger, a duration bar on a shared timeline and the easing curve, a Play playhead and Copy CSS; pairs with the Figma plugin and Framer export of motionary/design.
 
 - Import: `import { defineMotionSpec } from 'motionary/components/widgets'; defineMotionSpec();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `rules`, `label`
 - Events: `usa:copy`
 - Methods: `play()`
@@ -2292,7 +2292,7 @@ Morph an SVG path through a list of shapes (paths="A | B | C") on click, hover, 
 Let users pick Off · Low · Normal · High for the whole app; scales every component, persists, and Off equals reduced motion.
 
 - Import: `import { defineMotionSwitch } from 'motionary/components/page'; defineMotionSwitch();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `labels`, `label`
 - Events: `usa:change`
 
@@ -2306,7 +2306,7 @@ Let users pick Off · Low · Normal · High for the whole app; scales every comp
 5.8: <usa-motion-theme name> applies a theme pack — design tokens (--usa-theme-*), motion tokens and effect presets per role (enter / hover / click / attention / background). Neon, paper, glass, retro and brutalist; applyMotionTheme() for the whole page.
 
 - Import: `import { defineMotionTheme } from 'motionary/components/effects'; defineMotionTheme();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `name`
 
 ```html
@@ -2322,7 +2322,7 @@ Let users pick Off · Low · Normal · High for the whole app; scales every comp
 7.1: the cover spins like a record while playing, play morphs to pause, mini equalizer bars dance and the progress bar is a scrubbable slider. Plays a child <audio> or simulates a track.
 
 - Import: `import { defineMusicPlayer } from 'motionary/components/widgets'; defineMusicPlayer();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `title`, `artist`, `cover`, `src`, `duration`
 - Events: `usa:play`, `usa:pause`, `usa:seek`
 - Methods: `play()`, `pause()`, `toggle()`, `seek()`
@@ -2338,7 +2338,7 @@ Let users pick Off · Low · Normal · High for the whole app; scales every comp
 9.8: preview web motion as it will feel on a phone — an iOS / Android device frame replays the entrance with the rule’s curve and presses with a spring — and copy the generated React Native and Flutter code.
 
 - Import: `import { defineNativePreview } from 'motionary/components/widgets'; defineNativePreview();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `rules`, `platform`, `name`
 - Events: `usa:replay`
 - Methods: `replay()`, `code()`
@@ -2354,7 +2354,7 @@ Let users pick Off · Low · Normal · High for the whole app; scales every comp
 6.6: the indicator follows the hovered or focused link — stretching from the old one, leading edge first — and settles back on the current page. Underline, pill, blob or dot.
 
 - Import: `import { defineNavMorph } from 'motionary/components/widgets'; defineNavMorph();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `indicator`, `label`, `active`
 - Events: `usa:change`
 
@@ -2371,7 +2371,7 @@ Let users pick Off · Low · Normal · High for the whole app; scales every comp
 Hides while you scroll down, slides back on the first scroll up; shrink makes it compact once scrolled. This page’s demo scrolls an inner box.
 
 - Import: `import { defineNavbar } from 'motionary/components/ui'; defineNavbar();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `target`, `threshold`
 - Events: `usa:hide`, `usa:show`
 - Methods: `show()`
@@ -2387,7 +2387,7 @@ Hides while you scroll down, slides back on the first scroll up; shrink makes it
 7.4: a bell with an unread badge and a dropdown — notify() swings the bell, bumps the badge and slides the notice in; “Mark all read” shrinks the badge away. Esc / outside click close it.
 
 - Import: `import { defineNotificationBell } from 'motionary/components/widgets'; defineNotificationBell();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `label`
 - Events: `usa:notify`, `usa:read`
 - Methods: `notify()`, `markAllRead()`, `ring()`
@@ -2404,7 +2404,7 @@ Hides while you scroll down, slides back on the first scroll up; shrink makes it
 6.4: rolling digit wheels — every digit spins forward to its new value, new digits slide in, locale grouping via Intl.NumberFormat, decimals, prefix / suffix. The accessible name is the formatted number.
 
 - Import: `import { defineOdometer } from 'motionary/components/widgets'; defineOdometer();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `value`, `locale`, `decimals`, `prefix`, `suffix`, `duration`
 
 ```html
@@ -2417,7 +2417,7 @@ Hides while you scroll down, slides back on the first scroll up; shrink makes it
 8.3: a card with a soft, living blob shape — its outline slowly breathes on screen, morphs on hover and comes in leaf, ocean, petal and sand tints.
 
 - Import: `import { defineOrganicCard } from 'motionary/components/widgets'; defineOrganicCard();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `tint`, `seed`
 - Methods: `morph()`
 
@@ -2432,7 +2432,7 @@ Hides while you scroll down, slides back on the first scroll up; shrink makes it
 7.7: one-time-code boxes that auto-advance, step back on Backspace and take a pasted code; digits pop in, error() shakes the row red, success() sends a green wave across it.
 
 - Import: `import { defineOtp } from 'motionary/components/widgets'; defineOtp();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `length`, `mode`, `label`, `value`
 - Events: `usa:complete`
 - Methods: `fillCode()`, `clear()`, `error()`, `success()`
@@ -2447,7 +2447,7 @@ Hides while you scroll down, slides back on the first scroll up; shrink makes it
 A scroll container whose edges stretch with iOS-style rubber-band resistance and spring back — touch, trackpad and wheel.
 
 - Import: `import { defineOverscroll } from 'motionary/components/physics'; defineOverscroll();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `axis`, `disabled`, `max`, `preset`
 
 ```html
@@ -2461,7 +2461,7 @@ A scroll container whose edges stretch with iOS-style rubber-band resistance and
 Product cards reveal and lift, “Add to cart” presses and flies the product into the cart (which bumps), prices count up, badges pulse.
 
 - Import: `import { definePack } from 'motionary/components/packs'; definePack();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `name`
 
 ```html
@@ -2480,7 +2480,7 @@ Product cards reveal and lift, “Add to cart” presses and flies the product i
 6.7: the highlight springs to the chosen page (squashing on the way) and page numbers slide in from the direction of travel when the window shifts. Prev / next, ellipses, aria-current.
 
 - Import: `import { definePagination } from 'motionary/components/widgets'; definePagination();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `total`, `siblings`, `label`
 - Events: `usa:change`
 
@@ -2493,7 +2493,7 @@ Product cards reveal and lift, “Add to cart” presses and flies the product i
 8.8: a 360° panorama — drag or swipe to look around with inertia, a slow auto-rotate, a compass for the heading and a “View in XR” badge when the browser offers WebXR.
 
 - Import: `import { definePanorama } from 'motionary/components/widgets'; definePanorama();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `src`, `autorotate`, `label`
 - Events: `usa:xr`, `usa:xr-request`, `usa:look`
 - Methods: `lookAt()`
@@ -2507,7 +2507,7 @@ Product cards reveal and lift, “Add to cart” presses and flies the product i
 10.4: a parallax container — children with data-depth move at different speeds while it crosses the viewport (native view() scroll timeline first, JS fallback), optional pointer tilt; static under reduced motion.
 
 - Import: `import { defineParallaxLayers } from 'motionary/components/widgets'; defineParallaxLayers();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `range`, `engine`, `horizontal`, `pointer`, `strength`, `preview`
 - Events: `usa:progress`
 - Methods: `layers()`
@@ -2524,7 +2524,7 @@ Product cards reveal and lift, “Add to cart” presses and flies the product i
 A canvas constellation that drifts away from the pointer. Runs only while visible, DPR ≤ 2, a still frame under reduced motion.
 
 - Import: `import { defineParticles } from 'motionary/components/background'; defineParticles();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `count`, `color`, `size`, `speed`, `links`, `interactive`, `paused`
 - Methods: `reset()`
 
@@ -2537,7 +2537,7 @@ A canvas constellation that drifts away from the pointer. Runs only while visibl
 9.5: one button that pauses all motion on the page (WCAG 2.2.2) — Motionary’s shared clock, every CSS / Web animation and autoplaying media — and resumes it again; `scope` limits it to one area.
 
 - Import: `import { definePauseAll } from 'motionary/components/widgets'; definePauseAll();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `label`, `scope`, `resume-label`
 - Events: `usa:pause-all`
 - Methods: `toggle()`
@@ -2551,7 +2551,7 @@ A canvas constellation that drifts away from the pointer. Runs only while visibl
 9.6: a live performance overlay for motion work — FPS with a sparkline, active Motionary animations, frame-loop callbacks, long tasks and the shared clock — flagging jank.
 
 - Import: `import { definePerfMonitor } from 'motionary/components/widgets'; definePerfMonitor();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `corner`, `warn`
 - Events: `usa:jank`
 
@@ -2564,7 +2564,7 @@ A canvas constellation that drifts away from the pointer. Runs only while visibl
 10.7: a 2D rigid-body sandbox on Motionary’s own physics engine — circles, boxes and polygons, friction, restitution, constraints, sleeping — loaded from a versioned motionary-scene@1 JSON (or a preset: balls, pyramid, pendulum, dominoes). Drag bodies, tap to spawn, arrow keys nudge. Requires motionary/runtime/physics + motionary/runtime/format-scene — npm i motionary, then use(physics, formatScene) before it mounts.
 
 - Import: `import { definePhysicsPlayground } from 'motionary/components/widgets'; definePhysicsPlayground();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `preset`, `src`, `gravity`, `spawn`, `label`
 - Events: `usa:collision`, `usa:load`, `usa:error`, `usa:runtime-missing`
 - Methods: `reset()`, `play()`, `pause()`, `toScene()`
@@ -2583,12 +2583,12 @@ definePhysicsPlayground(); // registers <usa-physics-playground> — after the p
 ```
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/physics.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/format-scene.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/physics.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/format-scene.iife.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>
 ```
 
 ```html
@@ -2600,7 +2600,7 @@ definePhysicsPlayground(); // registers <usa-physics-playground> — after the p
 Pinch with two fingers or Ctrl + wheel / trackpad pinch, pan while zoomed, double-tap to toggle; scale and position spring back inside the bounds.
 
 - Import: `import { definePinchZoom } from 'motionary/components/gesture'; definePinchZoom();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `min`, `max`, `preset`, `double-tap`
 - Events: `usa:zoom`
 - Methods: `zoomTo()`
@@ -2616,7 +2616,7 @@ Pinch with two fingers or Ctrl + wheel / trackpad pinch, pan while zoomed, doubl
 5.9: <usa-player> plays a JSON animation — timeline presets, your own keyframes and any registered effect on a shared clock; play / pause / seek / rate / loop, scroll-scrubbing (trigger="scroll"). Export one from the Playground (<usa-player> JSON tab).
 
 - Import: `import { definePlayer } from 'motionary/components/effects'; definePlayer();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `src`, `trigger`, `loop`, `rate`, `controls`
 - Events: `usa:finish`, `usa:ready`
 - Methods: `load()`, `play()`, `pause()`, `seek()`
@@ -2633,7 +2633,7 @@ Pinch with two fingers or Ctrl + wheel / trackpad pinch, pan while zoomed, doubl
 10.1: a plugin’s name, version and author with a Motionary compatibility badge (semver `engine` range), a signature badge (SHA-256 integrity checked with Web Crypto), an animated download counter and expandable details. Requires motionary/runtime — npm i motionary, then use() before the card mounts.
 
 - Import: `import { definePluginCard } from 'motionary/components/widgets'; definePluginCard();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `name`, `title`, `version`, `author`, `engine`, `downloads`, `integrity`, `src`
 - Events: `usa:toggle`, `usa:verified`, `usa:runtime-missing`
 - Methods: `toggle()`, `verify()`, `compat()`
@@ -2650,10 +2650,10 @@ definePluginCard(); // registers <usa-plugin-card> — after the prerequisites
 ```
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>
 ```
 
 ```html
@@ -2667,7 +2667,7 @@ definePluginCard(); // registers <usa-plugin-card> — after the prerequisites
 9.0: the plugin marketplace as a component — search the catalogue of effect packs, see each plugin’s effects and install it with one click (imports and registers the pack).
 
 - Import: `import { definePluginStore } from 'motionary/components/widgets'; definePluginStore();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `query`, `label`
 - Events: `usa:install`, `usa:install-error`
 - Methods: `search()`, `install()`
@@ -2685,7 +2685,7 @@ definePluginCard(); // registers <usa-plugin-card> — after the prerequisites
 Click-to-open panel that springs from its trigger; Esc / outside click closes, focus returns.
 
 - Import: `import { definePopover } from 'motionary/components/ui'; definePopover();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `placement`
 - Methods: `toggle()`
 
@@ -2701,7 +2701,7 @@ Click-to-open panel that springs from its trigger; Esc / outside click closes, f
 Chainable GPU passes over an image (4.8): vignette, grain, chromatic aberration, scanlines, CRT, bloom, pixelate, duotone and glitch, with one intensity. Without WebGL the image gets an approximate CSS filter.
 
 - Import: `import { definePostFx } from 'motionary/components/webgl'; definePostFx();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 
 ```html
 <usa-post-fx effects="vignette grain" intensity="0.6">
@@ -2714,7 +2714,7 @@ Chainable GPU passes over an image (4.8): vignette, grain, chromatic aberration,
 7.4: an avatar with a live status dot (online, away, busy, offline) — coming online sends a ripple, speaking adds a pulsing ring and story an animated gradient ring. Initials when there is no photo.
 
 - Import: `import { definePresence } from 'motionary/components/widgets'; definePresence();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `status`, `speaking`, `name`, `src`
 
 ```html
@@ -2728,7 +2728,7 @@ Chainable GPU passes over an image (4.8): vignette, grain, chromatic aberration,
 Tactile press: dips while pressed and springs back, or bounces once with bounce. Mouse, touch, pen and keyboard.
 
 - Import: `import { definePress } from 'motionary/components/interaction'; definePress();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `disabled`, `scale`, `bounce`
 
 ```html
@@ -2740,7 +2740,7 @@ Tactile press: dips while pressed and springs back, or bounces once with bounce.
 7.5: a lottery wheel — Spin whirls it and it eases out on the result (random or spin(index)), the pointer ticks and the wheel glows; usa:result reports the prize.
 
 - Import: `import { definePrizeWheel } from 'motionary/components/widgets'; definePrizeWheel();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `segments`, `label`, `turns`, `duration`
 - Events: `usa:result`
 - Methods: `spin()`
@@ -2754,7 +2754,7 @@ Tactile press: dips while pressed and springs back, or bounces once with bounce.
 7.3: product photos with a thumbnail strip — the stage cross-slides in the direction of travel, the selection ring glides between thumbnails, hover zooms under the pointer, swipe and ←/→ work.
 
 - Import: `import { defineProductGallery } from 'motionary/components/widgets'; defineProductGallery();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `index`, `nozoom`, `zoom`
 - Events: `usa:change`
 - Methods: `go()`, `next()`, `prev()`
@@ -2772,7 +2772,7 @@ Tactile press: dips while pressed and springs back, or bounces once with bounce.
 Determinate bars glide between values; without a value it shows the Fluent indeterminate animation. Paused / error states.
 
 - Import: `import { defineProgress } from 'motionary/components/feedback'; defineProgress();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `value`, `max`, `indeterminate`, `label`
 - Events: `usa:complete`
 
@@ -2786,7 +2786,7 @@ Determinate bars glide between values; without a value it shows the Fluent indet
 6.4: the arc eases to every new value with a little overshoot while the label counts up; ring, bar or semicircle gauge, gradient strokes, indeterminate spinner without a value. role="progressbar", usa:complete at 100%.
 
 - Import: `import { defineProgressRing } from 'motionary/components/widgets'; defineProgressRing();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `variant`, `value`, `max`, `gradient`, `no-label`, `duration`
 - Events: `usa:complete`
 
@@ -2802,7 +2802,7 @@ Determinate bars glide between values; without a value it shows the Fluent indet
 8.9 low-code: a property editor for a live component — typed fields (number / range, select, color, switch, text) bound to its attributes, so the component re-renders as you edit.
 
 - Import: `import { definePropPanel } from 'motionary/components/widgets'; definePropPanel();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `for`, `props`, `label`
 - Events: `usa:prop`
 - Methods: `reset()`
@@ -2817,7 +2817,7 @@ Determinate bars glide between values; without a value it shows the Fluent indet
 6.8: pull the cord down and let go — past the threshold the lamp switches, and the cord swings back on a damped spring. Click, Space or Enter tug it too; role="switch".
 
 - Import: `import { definePullCord } from 'motionary/components/widgets'; definePullCord();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `label`, `threshold`
 - Events: `usa:change`
 - Methods: `toggle()`
@@ -2831,7 +2831,7 @@ Determinate bars glide between values; without a value it shows the Fluent indet
 Pull down at the top of a list: the spinner stretches in with rubber-band resistance; release past the threshold to refresh.
 
 - Import: `import { definePullRefresh } from 'motionary/components/ui'; definePullRefresh();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `threshold`, `disabled`, `label`
 - Methods: `refresh()`
 
@@ -2847,7 +2847,7 @@ Pull down at the top of a list: the spinner stretches in with rubber-band resist
 8.4: a sci-fi radar scope — a conic beam sweeps round and each target lights up and fades as the beam passes over it.
 
 - Import: `import { defineRadar } from 'motionary/components/widgets'; defineRadar();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `targets`, `rings`, `speed`, `label`
 - Events: `usa:ping`
 - Methods: `setTargets()`
@@ -2861,7 +2861,7 @@ Pull down at the top of a list: the spinner stretches in with rubber-band resist
 7.4: a reaction bar — clicking a pill toggles your reaction: the emoji pops, the count rolls and copies float up; ＋ springs open a picker. Each pill is a toggle button with a count label.
 
 - Import: `import { defineReactions } from 'motionary/components/widgets'; defineReactions();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `emojis`, `counts`, `picker`
 - Events: `usa:react`
 - Methods: `toggle()`
@@ -2875,7 +2875,7 @@ Pull down at the top of a list: the spinner stretches in with rubber-band resist
 8.1: a Lunar New Year red envelope — tap and the flap swings open, the card slides out with the amount counting up and gold coins pop out.
 
 - Import: `import { defineRedEnvelope } from 'motionary/components/widgets'; defineRedEnvelope();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `amount`, `currency`, `message`, `from`, `opened`
 - Events: `usa:open`
 - Methods: `open()`, `close()`
@@ -2889,7 +2889,7 @@ Pull down at the top of a list: the spinner stretches in with rubber-band resist
 8.2: buttons in four eras with matching press motion — 8-bit pixel (stepped press), CRT phosphor (flicker), Y2K chrome pill (bounce) and Windows 95 bevel (sink).
 
 - Import: `import { defineRetroButton } from 'motionary/components/widgets'; defineRetroButton();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `variant`, `disabled`, `type`
 
 ```html
@@ -2902,7 +2902,7 @@ Pull down at the top of a list: the spinner stretches in with rubber-band resist
 Fade, slide, zoom, blur or flip content in as it enters the viewport. 12 effects, replay on re-entry with repeat.
 
 - Import: `import { defineReveal } from 'motionary/components/reveal'; defineReveal();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `effect`, `distance`, `repeat`, `threshold`, `root-margin`, `duration`, `delay`, `easing`
 - Events: `usa:enter`, `usa:leave`, `usa:complete`
 - Methods: `reveal()`, `reset()`
@@ -2918,7 +2918,7 @@ Fade, slide, zoom, blur or flip content in as it enters the viewport. 12 effects
 Ink ripple from the pointer — or from the centre for Space/Enter — on any button, list item or card.
 
 - Import: `import { defineRipple } from 'motionary/components/interaction'; defineRipple();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `disabled`, `centered`, `color`, `opacity`, `duration`
 - Methods: `ripple()`
 
@@ -2931,7 +2931,7 @@ Ink ripple from the pointer — or from the centre for Space/Enter — on any bu
 10.6: plays Rive (.riv) files — artboards, animations and state machines with inputs — through the official Rive runtime @rive-app/canvas, an optional peer dependency that is lazy-loaded on first use (Motionary does not reimplement the proprietary .riv format). Requires @rive-app/canvas — npm i @rive-app/canvas, or load its CDN script first; missing → a clear message in place.
 
 - Import: `import { defineRive } from 'motionary/components/widgets'; defineRive();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `src`, `artboard`, `animation`, `state-machine`, `autoplay`, `fit`, `label`, `runtime-src`
 - Events: `usa:load`, `usa:error`, `usa:runtime-missing`
 - Methods: `play()`, `pause()`, `input()`
@@ -2950,8 +2950,8 @@ defineRive(); // registers <usa-rive> — after the prerequisites
 ```html
 <script src="https://unpkg.com/@rive-app/canvas@2.44.1/rive.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>
 ```
 
 ```html
@@ -2963,7 +2963,7 @@ defineRive(); // registers <usa-rive> — after the prerequisites
 10.3: View Transitions 2.0 — link clicks swap the container’s content with the target page (fetched) or an inline <template data-route>, animated with the View Transitions API (Web Animations fallback); data-shared elements morph between routes; cross-document enables native MPA transitions.
 
 - Import: `import { defineRouteTransition } from 'motionary/components/widgets'; defineRouteTransition();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `effect`, `engine`, `cross-document`, `current`, `links`, `history`, `selector`
 - Events: `usa:navigate`, `usa:navigated`
 - Methods: `navigate()`
@@ -2980,7 +2980,7 @@ defineRive(); // registers <usa-rive> — after the prerequisites
 9.1: a scroll-scrubbed cinematic shot — while the scene crosses the screen its image follows a camera move (dolly, pan, tilt, zoom, orbit) and captions fade in on cue.
 
 - Import: `import { defineScene } from 'motionary/components/widgets'; defineScene();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `camera`, `strength`, `autoplay`
 - Events: `usa:shot`
 - Methods: `setProgress()`
@@ -2997,7 +2997,7 @@ defineRive(); // registers <usa-rive> — after the prerequisites
 Decodes text out of random glyphs, left to right. Trigger on view, hover/focus or manually.
 
 - Import: `import { defineScramble } from 'motionary/components/text'; defineScramble();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `text`, `trigger`, `duration`, `chars`
 - Events: `usa:complete`
 - Methods: `play()`
@@ -3011,7 +3011,7 @@ Decodes text out of random glyphs, left to right. Trigger on view, hover/focus o
 Words light up one by one as you read down the page, or a highlighter marker sweeps behind the text.
 
 - Import: `import { defineScrollHighlight } from 'motionary/components/text'; defineScrollHighlight();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `mode`, `text`, `color`, `dim`
 - Methods: `mount()`
 
@@ -3025,7 +3025,7 @@ Words light up one by one as you read down the page, or a highlighter marker swe
 Reading progress of the page or of one article. Compositor-only scaleX, role="progressbar".
 
 - Import: `import { defineScrollProgress } from 'motionary/components/reveal'; defineScrollProgress();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `target`, `label`
 - Events: `usa:progress`
 - Methods: `update()`
@@ -3041,7 +3041,7 @@ Reading progress of the page or of one article. Compositor-only scaleX, role="pr
 10.4: a circular scroll-progress indicator for the page or any scroll container (for=".article"), optional percentage label and back-to-top button. Scroll-driven 3.0: native animation-timeline: scroll() first (no script per frame), a small JS loop where scroll timelines are missing.
 
 - Import: `import { defineScrollRing } from 'motionary/components/widgets'; defineScrollRing();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `for`, `engine`, `label`, `back-to-top`, `size`, `thickness`, `horizontal`, `preview`
 - Events: `usa:progress`, `usa:top`
 
@@ -3054,7 +3054,7 @@ Reading progress of the page or of one article. Compositor-only scaleX, role="pr
 10.2: a scroll-linked scene — children with data-scrub="opacity: 0 -> 1; x: -80 -> 0" are tweened as you scroll, scrubbed directly or smoothed (scrub="120"), with optional pin, markers and stagger. Requires motionary/runtime/scroll — npm i motionary, then use(scroll) before the scene mounts.
 
 - Import: `import { defineScrollScene } from 'motionary/components/widgets'; defineScrollScene();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `start`, `end`, `scrub`, `pin`, `markers`, `stagger`, `toggle-class`, `preview`
 - Events: `usa:enter`, `usa:leave`, `usa:progress`, `usa:runtime-missing`
 - Methods: `refresh()`, `timeline()`
@@ -3072,11 +3072,11 @@ defineScrollScene(); // registers <usa-scroll-scene> — after the prerequisites
 ```
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/scroll.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/scroll.iife.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>
 ```
 
 ```html
@@ -3091,7 +3091,7 @@ defineScrollScene(); // registers <usa-scroll-scene> — after the prerequisites
 A pinned graphic while [data-step] blocks scroll past; the active step drives the graphic via attributes, a CSS variable and events.
 
 - Import: `import { defineScrolly } from 'motionary/components/reveal'; defineScrolly();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `offset`
 - Events: `usa:step`
 
@@ -3108,7 +3108,7 @@ A pinned graphic while [data-step] blocks scroll past; the active step drives th
 6.7: an iOS-style thumb slides under the chosen segment with a spring and stretches while it travels. A real radio group: arrow keys, Home / End. iOS, pill or outline.
 
 - Import: `import { defineSegmented } from 'motionary/components/widgets'; defineSegmented();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `variant`, `label`, `value`
 - Events: `usa:change`
 
@@ -3125,7 +3125,7 @@ A pinned graphic while [data-step] blocks scroll past; the active step drives th
 A GPU shader behind your content: gradient, plasma, waves or aurora presets — or your own fragment shader in a <script type="x-shader/x-fragment">. Falls back to the CSS background.
 
 - Import: `import { defineShader } from 'motionary/components/webgl'; defineShader();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 
 ```html
 <usa-shader preset="aurora" speed="1">
@@ -3144,7 +3144,7 @@ A GPU shader behind your content: gradient, plasma, waves or aurora presets — 
 10.5 (WebGPU effects 2.0): an animated shader background (aurora, plasma, waves, nebula or your own GLSL) run through a post-processing chain — bloom, vignette, grain, chromatic aberration, pixelate, scanlines — in any order; CSS gradient fallback.
 
 - Import: `import { defineShaderBackdrop } from 'motionary/components/widgets'; defineShaderBackdrop();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `preset`, `post`, `colors`, `speed`, `intensity`, `label`
 - Events: `usa:backend`
 
@@ -3159,7 +3159,7 @@ A GPU shader behind your content: gradient, plasma, waves or aurora presets — 
 6.3: a side sheet from the right, left, top or bottom with a blurred backdrop; the bottom sheet can be dragged down to dismiss and springs back otherwise. Native <dialog> underneath.
 
 - Import: `import { defineSheet } from 'motionary/components/widgets'; defineSheet();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 
 ```html
 <button data-usa-open="cart">Cart</button>
@@ -3175,7 +3175,7 @@ A GPU shader behind your content: gradient, plasma, waves or aurora presets — 
 A light sweep across gradient-filled text. CSS only; colours and speed via attributes or custom properties.
 
 - Import: `import { defineShimmerText } from 'motionary/components/text'; defineShimmerText();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `duration`, `color`, `shine`, `angle`
 
 ```html
@@ -3187,7 +3187,7 @@ A light sweep across gradient-filled text. CSS only; colours and speed via attri
 7.9: keyboard-shortcut hints as keycaps (⌘ on Apple, Ctrl elsewhere); press the combination anywhere and the caps press down one after another and usa:trigger fires.
 
 - Import: `import { defineShortcut } from 'motionary/components/widgets'; defineShortcut();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `keys`, `label`, `listen`, `for`
 - Events: `usa:trigger`
 - Methods: `press()`
@@ -3202,7 +3202,7 @@ A light sweep across gradient-filled text. CSS only; colours and speed via attri
 Shimmering placeholders while loading; remove loading and the real content fades in. aria-busy included.
 
 - Import: `import { defineSkeleton } from 'motionary/components/feedback'; defineSkeleton();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `loading`, `lines`, `width`, `height`, `circle`, `avatar`, `radius`
 - Events: `usa:loaded`
 
@@ -3217,7 +3217,7 @@ Shimmering placeholders while loading; remove loading and the real content fades
 6.4: the skeleton is generated from the real content — one bar per rendered text line, blocks for images and marked elements — with one synchronized shimmer (wave, pulse or glow). Remove loading and the bars dissolve top-to-bottom while the content fades in from a blur.
 
 - Import: `import { defineSkeletonReveal } from 'motionary/components/widgets'; defineSkeletonReveal();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `loading`, `variant`
 - Events: `usa:reveal`
 - Methods: `reveal()`
@@ -3236,7 +3236,7 @@ Shimmering placeholders while loading; remove loading and the real content fades
 8.5: a hand-drawn chart — wobbly pencil axes with hatched bars or a sketchy line, sketched in stroke by stroke when it scrolls into view.
 
 - Import: `import { defineSketchChart } from 'motionary/components/widgets'; defineSketchChart();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `values`, `labels`, `type`, `color`, `label`
 - Events: `usa:drawn`
 - Methods: `setValues()`, `redraw()`
@@ -3250,7 +3250,7 @@ Shimmering placeholders while loading; remove loading and the real content fades
 A form-associated range slider: spring-following thumb, value bubble, full keyboard support (arrows, Page Up/Down, Home/End).
 
 - Import: `import { defineSlider } from 'motionary/components/ui'; defineSlider();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `min`, `max`, `disabled`, `label`, `step`, `value`
 - Events: `usa:input`, `usa:change`
 
@@ -3263,7 +3263,7 @@ A form-associated range slider: spring-following thumb, value bubble, full keybo
 10.4: smooth, inertial wheel scrolling for the page or a container (wrapper), anchor links glide (with offset for sticky headers); keyboard / scrollbar / touch stay native and it switches off under reduced motion. Requires motionary/runtime/smooth — npm i motionary, then use(smooth) before it mounts.
 
 - Import: `import { defineSmoothScroll } from 'motionary/components/widgets'; defineSmoothScroll();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `lerp`, `duration`, `ease`, `wheel-multiplier`, `horizontal`, `touch`, `anchors`, `offset`, `wrapper`, `preview`
 - Events: `usa:scroll`, `usa:ready`, `usa:runtime-missing`
 - Methods: `glideTo()`, `stop()`, `resume()`
@@ -3281,11 +3281,11 @@ defineSmoothScroll(); // registers <usa-smooth-scroll> — after the prerequisit
 ```
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/smooth.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/smooth.iife.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>
 ```
 
 ```html
@@ -3297,7 +3297,7 @@ defineSmoothScroll(); // registers <usa-smooth-scroll> — after the prerequisit
 10.8: drag or swipe with real inertia — a throw keeps gliding, then springs to the nearest slide (a quick flick always moves one); rubber-band edges, arrows, dots, ←/→ / Home / End, optional autoplay that pauses on hover, focus and off screen. Slides keep their own width so the next one peeks in. Requires motionary/runtime/drag-snap — npm i motionary, then use(dragSnap) before it mounts. Its own entry point: motionary/components/snap-carousel (not in the widgets / lite bundles).
 
 - Import: `import { defineSnapCarousel } from 'motionary/components/snap-carousel'; defineSnapCarousel();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `align`, `gap`, `autoplay`, `no-controls`, `no-dots`, `label`, `index`
 - Events: `usa:change`, `usa:runtime-missing`
 - Methods: `next()`, `prev()`, `goTo()`
@@ -3315,11 +3315,11 @@ defineSnapCarousel(); // registers <usa-snap-carousel> — after the prerequisit
 ```
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/drag-snap.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/drag-snap.iife.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>
 ```
 
 ```html
@@ -3335,7 +3335,7 @@ defineSnapCarousel(); // registers <usa-snap-carousel> — after the prerequisit
 7.2: a tiny inline trend — draws itself on first view, a soft area fades in, the last point pulses and new data morphs the line point by point. line | area | bars; hover shows the value.
 
 - Import: `import { defineSparkline } from 'motionary/components/widgets'; defineSparkline();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `variant`, `color`, `values`, `label`
 
 ```html
@@ -3347,7 +3347,7 @@ defineSnapCarousel(); // registers <usa-snap-carousel> — after the prerequisit
 8.8: a spatial-computing window — frosted glass floating in depth, a soft gaze highlight that follows the pointer, layered content and an ornament bar; it eases towards you on hover and sinks on press.
 
 - Import: `import { defineSpatialCard } from 'motionary/components/widgets'; defineSpatialCard();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Events: `usa:focus-depth`
 
 ```html
@@ -3363,7 +3363,7 @@ defineSnapCarousel(); // registers <usa-snap-carousel> — after the prerequisit
 Six indeterminate indicators: the WinUI progress ring, the Windows 10 orbiting dots, ring, typing dots, pulse and bars.
 
 - Import: `import { defineSpinner } from 'motionary/components/feedback'; defineSpinner();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `kind`, `size`, `label`
 
 ```html
@@ -3376,7 +3376,7 @@ Six indeterminate indicators: the WinUI progress ring, the Windows 10 orbiting d
 An app launch screen that leaves (fade, scale, slide-up, circle) once the page has loaded — never sooner than min ms.
 
 - Import: `import { defineSplash } from 'motionary/components/page'; defineSplash();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `label`, `manual`, `min`, `exit`
 - Events: `usa:done`
 - Methods: `done()`
@@ -3392,7 +3392,7 @@ An app launch screen that leaves (fade, scale, slide-up, circle) once the page h
 Splits a headline into letters or words and cascades them in: rise, fade, blur, flip or pop. Words never break.
 
 - Import: `import { defineSplitText } from 'motionary/components/text'; defineSplitText();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `by`, `text`, `from`, `stagger`, `duration`, `delay`, `trigger`, `repeat`
 - Events: `usa:complete`
 - Methods: `play()`, `reset()`
@@ -3406,7 +3406,7 @@ Splits a headline into letters or words and cascades them in: rise, fade, blur, 
 The Windows Fluent “Reveal” effect: a light follows the pointer, lighting the borders of nearby items and the hovered one.
 
 - Import: `import { defineSpotlight } from 'motionary/components/interaction'; defineSpotlight();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `size`, `color`, `border`
 
 ```html
@@ -3422,7 +3422,7 @@ The Windows Fluent “Reveal” effect: a light follows the pointer, lighting th
 bounce-in, pop and drop entrances with true spring timing (CSS linear() easing), plus jelly and rubber-band attention effects on view, hover or click.
 
 - Import: `import { defineSpring } from 'motionary/components/physics'; defineSpring();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `effect`, `trigger`, `repeat`, `stiffness`, `damping`, `mass`, `preset`, `duration`, `delay`
 - Events: `usa:complete`
 - Methods: `play()`, `reset()`
@@ -3441,7 +3441,7 @@ bounce-in, pop and drop entrances with true spring timing (CSS linear() easing),
 Reveals direct children one after another — lists, grids, feature rows.
 
 - Import: `import { defineStagger } from 'motionary/components/reveal'; defineStagger();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `effect`, `repeat`, `threshold`, `distance`, `interval`, `delay`, `duration`, `easing`
 - Events: `usa:enter`, `usa:complete`
 - Methods: `reveal()`, `reset()`
@@ -3459,7 +3459,7 @@ Reveals direct children one after another — lists, grids, feature rows.
 6.4: the fill follows the pointer (half stars with step="0.5"), a click pops the chosen star with a sparkle burst while the others ripple; stars or hearts; a keyboard slider (arrows, Home / End); readonly mode.
 
 - Import: `import { defineStarRating } from 'motionary/components/widgets'; defineStarRating();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `max`, `icon`, `readonly`, `step`, `label`, `value`
 - Events: `usa:change`
 
@@ -3473,7 +3473,7 @@ Reveals direct children one after another — lists, grids, feature rows.
 6.7: the rail fills toward the current step, finished steps pop a drawn check mark and the current step pulses. Horizontal or vertical; next() / prev() / value.
 
 - Import: `import { defineStepper } from 'motionary/components/widgets'; defineStepper();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `orientation`, `label`, `clickable`
 - Events: `usa:change`
 - Methods: `next()`, `prev()`
@@ -3492,7 +3492,7 @@ Reveals direct children one after another — lists, grids, feature rows.
 Cards stick while you scroll and the covered ones shrink and dim as the next slides over them.
 
 - Import: `import { defineStickyStack } from 'motionary/components/cards'; defineStickyStack();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `top`, `gap`, `scale`
 - Methods: `update()`
 
@@ -3509,7 +3509,7 @@ Cards stick while you scroll and the covered ones shrink and dim as the next sli
 8.5: a wall of sticky notes — each child becomes a pinned paper note with a slight tilt, the notes drop onto the wall one by one, and a tap lifts a note to the front.
 
 - Import: `import { defineStickyWall } from 'motionary/components/widgets'; defineStickyWall();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `seed`, `label`
 - Events: `usa:pick`
 - Methods: `pick()`
@@ -3527,7 +3527,7 @@ Cards stick while you scroll and the covered ones shrink and dim as the next sli
 6.2: segmented progress bars, auto-advance, tap left / right to step, press and hold to pause, plus a pause button. Under reduced motion it waits for the user instead of advancing.
 
 - Import: `import { defineStories } from 'motionary/components/widgets'; defineStories();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `duration`, `loop`
 - Events: `usa:end`, `usa:change`
 - Methods: `next()`, `prev()`, `goTo()`, `pause()`, `play()`
@@ -3544,7 +3544,7 @@ Cards stick while you scroll and the covered ones shrink and dim as the next sli
 5.4: <usa-story template="compare"> wipes from before to after as you scroll; the handle is draggable and a keyboard slider (←/→, Home/End). Full-page templates (pin, gallery, zoom) live on the Scroll stories page.
 
 - Import: `import { defineStory } from 'motionary/components/effects'; defineStory();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `template`, `zoom`, `label`
 - Events: `usa:step`
 
@@ -3562,7 +3562,7 @@ Cards stick while you scroll and the covered ones shrink and dim as the next sli
 7.8: follow-up prompt chips that slide in one after another; picking one pulses it and (with dismiss) the others fade away. Real buttons, arrow-key navigation.
 
 - Import: `import { defineSuggestionChips } from 'motionary/components/widgets'; defineSuggestionChips();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `items`, `label`, `dismiss`
 - Events: `usa:pick`
 - Methods: `setItems()`
@@ -3576,7 +3576,7 @@ Cards stick while you scroll and the covered ones shrink and dim as the next sli
 6.8: drag the top card — it rotates with the pointer, LIKE / NOPE stamps fade in and past the threshold (or on a fling) it flies off; otherwise it springs back. like(), nope(), undo(), ← / →.
 
 - Import: `import { defineSwipeDeck } from 'motionary/components/widgets'; defineSwipeDeck();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `label`, `threshold`
 - Events: `usa:swipe`, `usa:empty`
 - Methods: `like()`, `nope()`, `undo()`
@@ -3594,7 +3594,7 @@ Cards stick while you scroll and the covered ones shrink and dim as the next sli
 Swipe-to-dismiss and swipe actions: content follows the finger, flies out on a fast swipe or past the distance, otherwise springs home with your release velocity. Delete / arrow keys work too.
 
 - Import: `import { defineSwipeable } from 'motionary/components/gesture'; defineSwipeable();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `axis`, `disabled`, `distance`, `dismiss`, `preset`
 - Events: `usa:swipe`, `usa:dismiss`
 - Methods: `swipe()`, `reset()`
@@ -3610,7 +3610,7 @@ Swipe-to-dismiss and swipe actions: content follows the finger, flies out on a f
 6.7: four switches — iOS (the thumb stretches while pressed), day / night (sun becomes moon, stars appear), bounce (squash at the end) and liquid (a gooey fill pours in). role="switch", forms, keyboard.
 
 - Import: `import { defineSwitch } from 'motionary/components/widgets'; defineSwitch();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `variant`, `label`, `name`, `value`, `disabled`
 - Events: `usa:change`
 - Methods: `toggle()`
@@ -3624,7 +3624,7 @@ Swipe-to-dismiss and swipe actions: content follows the finger, flies out on a f
 6.2: the indicator stretches from the old tab to the new one (leading edge first) and the panel slides in from the side of travel. Pill, underline, glow or gooey; full tablist keyboard support.
 
 - Import: `import { defineTabBar } from 'motionary/components/widgets'; defineTabBar();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `indicator`, `label`, `selected`
 - Events: `usa:change`
 - Methods: `select()`
@@ -3645,7 +3645,7 @@ Swipe-to-dismiss and swipe actions: content follows the finger, flies out on a f
 Accessible tabs whose indicator slides between tabs with a spring; panels slide in from the direction you moved. Line or pill indicator.
 
 - Import: `import { defineTabs } from 'motionary/components/ui'; defineTabs();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `indicator`
 - Events: `usa:change`
 - Methods: `select()`
@@ -3663,7 +3663,7 @@ Accessible tabs whose indicator slides between tabs with a spring; panels slide 
 8.2: a retro terminal window that types its commands after the prompt with a blinking block cursor and prints the output line by line when it scrolls into view — dark, green-phosphor or amber.
 
 - Import: `import { defineTerminal } from 'motionary/components/widgets'; defineTerminal();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `title`, `prompt`, `theme`, `speed`, `loop`
 - Events: `usa:done`
 - Methods: `replay()`, `skip()`
@@ -3680,7 +3680,7 @@ Accessible tabs whose indicator slides between tabs with a spring; panels slide 
 Cycles words in place — the box keeps the width of the longest word, so nothing around it reflows.
 
 - Import: `import { defineTextRotate } from 'motionary/components/text'; defineTextRotate();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `words`, `interval`, `paused`, `effect`
 - Events: `usa:change`
 - Methods: `next()`
@@ -3694,7 +3694,7 @@ Build <usa-text-rotate words="fast|tiny|typed"></usa-text-rotate> apps
 10.3: splits its text into characters, words or lines and animates them in with a stagger (rise, fade, blur, flip, wave) when it scrolls into view — accessible, grapheme-aware. Requires motionary/runtime/text — npm i motionary, then use(text) before it mounts.
 
 - Import: `import { defineTextSplitter } from 'motionary/components/widgets'; defineTextSplitter();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `split`, `effect`, `stagger`, `duration`, `loop`, `trigger`
 - Events: `usa:split`, `usa:done`, `usa:runtime-missing`
 - Methods: `replay()`, `pieces()`
@@ -3712,11 +3712,11 @@ defineTextSplitter(); // registers <usa-text-splitter> — after the prerequisit
 ```
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/text.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/text.iife.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>
 ```
 
 ```html
@@ -3728,7 +3728,7 @@ defineTextSplitter(); // registers <usa-text-splitter> — after the prerequisit
 8.6: a themeable card that follows the nearest theme — light, dark, neon (pulsing glow edge), glass (frosted backdrop with a sheen) or soft neumorphic relief — and cross-fades when the theme changes.
 
 - Import: `import { defineThemeSurface } from 'motionary/components/widgets'; defineThemeSurface();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `theme`
 - Events: `usa:theme`
 
@@ -3743,7 +3743,7 @@ defineTextSplitter(); // registers <usa-text-splitter> — after the prerequisit
 8.6: a segmented switcher for the 8.6 theme system — light, dark, neon, glass and soft (neumorphism); a pill slides under the active option and the page change is revealed with a circular wipe from the click point.
 
 - Import: `import { defineThemeSwitcher } from 'motionary/components/widgets'; defineThemeSwitcher();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `themes`, `target`, `label`, `persist`, `value`
 - Events: `usa:change`
 
@@ -3756,7 +3756,7 @@ defineTextSplitter(); // registers <usa-text-splitter> — after the prerequisit
 Tilts toward the pointer in 3D with an optional glare; exposes --usa-tilt-x/y for parallax layers inside.
 
 - Import: `import { defineTilt } from 'motionary/components/interaction'; defineTilt();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `max`, `scale`, `perspective`, `glare`, `reverse`, `disabled`
 
 ```html
@@ -3770,7 +3770,7 @@ Tilts toward the pointer in 3D with an optional glare; exposes --usa-tilt-x/y fo
 Every data-tl child becomes a step in document order. data-at ('-=200', '<', 'label+=100') overlaps or aligns steps; scrub ties progress to scroll; trigger view / click / manual.
 
 - Import: `import { defineTimeline } from 'motionary/components/timeline'; defineTimeline();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `scrub`, `trigger`, `overlap`, `duration`, `stagger`, `smooth`, `repeat`
 - Events: `usa:complete`
 - Methods: `play()`, `reverse()`, `seek()`
@@ -3788,7 +3788,7 @@ Every data-tl child becomes a step in document order. data-at ('-=200', '<', 'la
 6.6: springs out of its trigger with an arrow, flips to stay inside the viewport and shifts along the edge; hover + keyboard focus (Esc closes) or click popovers with rich content.
 
 - Import: `import { defineTip } from 'motionary/components/widgets'; defineTip();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `text`, `placement`, `trigger`, `delay`
 - Events: `usa:open`, `usa:close`
 - Methods: `show()`, `hide()`
@@ -3808,7 +3808,7 @@ Every data-tl child becomes a step in document order. data-at ('-=200', '<', 'la
 6.3: toasts pile up into a collapsed stack (newest in front, older ones peeking behind), fan out on hover or focus, auto-dismiss (paused while hovered) and swipe away. Six positions, a polite live region, stackToast() helper and data-usa-toast triggers.
 
 - Import: `import { defineToastStack } from 'motionary/components/widgets'; defineToastStack();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `position`, `duration`, `max`
 - Events: `usa:show`, `usa:dismiss`
 - Methods: `show()`, `dismiss()`, `clear()`
@@ -3824,7 +3824,7 @@ Every data-tl child becomes a step in document order. data-at ('-=200', '<', 'la
 toast("Saved") slides a notification in; it pauses on hover, stacks with FLIP and announces politely (errors assertively).
 
 - Import: `import { defineToaster } from 'motionary/components/feedback'; defineToaster();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `label`, `position`, `max`
 - Events: `usa:toast`
 - Methods: `show()`, `clear()`
@@ -3842,7 +3842,7 @@ toast("Saved") slides a notification in; it pauses on hover, stacks with FLIP an
 10.6 (motion design tokens 2.0): edit duration and cubic-bézier easing tokens with a live preview per token, then export W3C Design Tokens (DTCG 2025.10 or the earlier draft) or import a DTCG file — aliases resolved, problems listed; apply writes the tokens to :root custom properties as you edit.
 
 - Import: `import { defineTokenEditor } from 'motionary/components/widgets'; defineTokenEditor();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `apply`, `format`, `groups`, `label`
 - Events: `usa:export`, `usa:import`, `usa:change`
 - Methods: `exportJSON()`, `importJSON()`
@@ -3856,7 +3856,7 @@ toast("Saved") slides a notification in; it pauses on hover, stacks with FLIP an
 Types text, or cycles through phrases with delete and pause. Full text stays available to screen readers.
 
 - Import: `import { defineTypewriter } from 'motionary/components/text'; defineTypewriter();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `text`, `words`, `start`, `speed`, `delete-speed`, `pause`, `loop`, `delay`
 - Events: `usa:complete`
 - Methods: `start()`, `stop()`, `restart()`
@@ -3870,7 +3870,7 @@ Types text, or cycles through phrases with delete and pause. Full text stays ava
 7.7: a file row whose bar eases to value with a running shine; at 100 it turns into a check that draws itself, on error it shakes and offers Retry.
 
 - Import: `import { defineUploadProgress } from 'motionary/components/widgets'; defineUploadProgress();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `name`, `size`, `value`, `status`, `message`
 - Events: `usa:retry`, `usa:done`, `usa:error`
 
@@ -3884,7 +3884,7 @@ Types text, or cycles through phrases with delete and pause. Full text stays ava
 9.4: a video thumbnail card — hover or focus plays a muted preview with a progress line, a play badge and a duration chip; without a video the poster drifts (Ken Burns).
 
 - Import: `import { defineVideoCard } from 'motionary/components/widgets'; defineVideoCard();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `label`, `duration`
 - Events: `usa:open`
 
@@ -3901,7 +3901,7 @@ Types text, or cycles through phrases with delete and pause. Full text stays ava
 One view at a time with direction-aware slide, fade, scale or drill transitions — tabs, wizards, app pages.
 
 - Import: `import { defineViewSwitch } from 'motionary/components/transitions'; defineViewSwitch();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `active`, `duration`, `effect`
 - Events: `usa:change`
 - Methods: `show()`
@@ -3918,7 +3918,7 @@ One view at a time with direction-aware slide, fade, scale or drill transitions 
 7.8: a push-to-talk mic button — while listening a halo breathes and level bars wave; feed it live input levels with level (0–1) and they follow your voice.
 
 - Import: `import { defineVoiceButton } from 'motionary/components/widgets'; defineVoiceButton();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `label`, `bars`, `listening`
 - Methods: `toggle()`
 
@@ -3932,7 +3932,7 @@ One view at a time with direction-aware slide, fade, scale or drill transitions 
 7.1: a rotary knob — drag up / down, scroll or use the keys; the value arc fills, a ring of LED ticks lights up and the pointer springs to the angle. role="slider".
 
 - Import: `import { defineVolumeKnob } from 'motionary/components/widgets'; defineVolumeKnob();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `min`, `max`, `label`
 - Events: `usa:change`, `usa:input`
 
@@ -3945,7 +3945,7 @@ One view at a time with direction-aware slide, fade, scale or drill transitions 
 Interactive water ripples on a canvas over the content: move or tap to disturb the surface.
 
 - Import: `import { defineWaterRipple } from 'motionary/components/background'; defineWaterRipple();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `damping`, `color`, `strength`
 - Methods: `mount()`
 
@@ -3960,7 +3960,7 @@ Interactive water ripples on a canvas over the content: move or tap to disturb t
 Letters bob in a travelling wave — playful headlines and loading labels.
 
 - Import: `import { defineWaveText } from 'motionary/components/text'; defineWaveText();`
-- CDN: https://unpkg.com/motionary@12/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
 - Attributes: `text`, `amplitude`, `speed`, `stagger`
 - Methods: `mount()`, `splitChars()`
 
@@ -3973,7 +3973,7 @@ Letters bob in a travelling wave — playful headlines and loading labels.
 6.8: sun rays turn, clouds drift, rain and snow fall, a flash-safe bolt glows, fog bands and stars — pick a condition and the scene cross-fades; the temperature counts up.
 
 - Import: `import { defineWeatherCard } from 'motionary/components/widgets'; defineWeatherCard();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `condition`, `temp`, `place`, `unit`, `label`
 
 ```html
@@ -3985,7 +3985,7 @@ Letters bob in a travelling wave — playful headlines and loading labels.
 9.6: a canvas animation rendered in a Web Worker on an OffscreenCanvas — the main thread stays free for input — with a main-thread fallback; particles, orbits, starfield or your own draw program.
 
 - Import: `import { defineWorkerCanvas } from 'motionary/components/widgets'; defineWorkerCanvas();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `scene`, `label`
 - Events: `usa:backend`
 
@@ -3998,7 +3998,7 @@ Letters bob in a travelling wave — playful headlines and loading labels.
 7.5: an experience bar — add(n) fills it smoothly; overflowing fills to the end, the level badge pops and the bar restarts with the remainder (several levels if needed).
 
 - Import: `import { defineXpBar } from 'motionary/components/widgets'; defineXpBar();`
-- CDN: https://unpkg.com/motionary@12/dist/widgets.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
 - Attributes: `level`, `xp`, `per`
 - Events: `usa:levelup`, `usa:xp`
 - Methods: `add()`

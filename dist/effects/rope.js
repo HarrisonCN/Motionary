@@ -14,4 +14,4 @@ function registerRope() {
 }
 
 export { effect, registerRope as register, registerRope };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.9.0/dist/effects/rope.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/effects/rope.js.map

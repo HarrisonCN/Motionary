@@ -207,4 +207,4 @@ exports.createComponent = createComponent;
 exports.motion = motion;
 exports.parseMotion = parseMotion;
 exports.serializeMotion = serializeMotion;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.9.0/dist/components/dsl.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/components/dsl.cjs.map

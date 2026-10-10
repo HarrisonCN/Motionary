@@ -13,4 +13,4 @@ function registerIconSwap() {
 }
 
 export { effect, registerIconSwap as register, registerIconSwap };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.9.0/dist/effects/icon-swap.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/effects/icon-swap.js.map

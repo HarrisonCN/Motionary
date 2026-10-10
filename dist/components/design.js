@@ -5,7 +5,7 @@ import '../chunks/base-zSGb8ujt.js';
 import './tokens.js';
 
 /**
- * `motionary/design` (= `motionary/components/design`, 9.7) — design-tool
+ * `motionary/tooling/design` (= `motionary/tooling/design`, 9.7) — design-tool
  * integration.
  *
  * - `figmaToMotion(reactions)` — Figma prototype reactions (plugin API
@@ -109,4 +109,4 @@ function motionToCss(rules, selector = '.motion') {
 }
 
 export { easingPoints, figmaToMotion, framerComponent, motionToCss };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.9.0/dist/components/design.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/components/design.js.map
