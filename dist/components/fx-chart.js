@@ -151,4 +151,4 @@ function registerChartPack() {
 }
 
 export { CHART_FX, parseFigure, registerChartPack };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/components/fx-chart.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.5.0/dist/components/fx-chart.js.map

@@ -1,7 +1,7 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-CorBCE7b.js';
-import { a as animatedImagePlayer, b as browserDecode, c as composeFrames, d as bytesOf, u as u8, f as fixDelay } from '../chunks/anim-image-CSrYZ3ZY.js';
-import '../chunks/tween-BHDOFhXX.js';
-import '../chunks/ticker-CZisW9Nb.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-CMjteilk.js';
+import { a as animatedImagePlayer, b as browserDecode, c as composeFrames, d as bytesOf, u as u8, f as fixDelay } from '../chunks/anim-image-C_KpJ7os.js';
+import '../chunks/tween-B0nMjJJi.js';
+import '../chunks/ticker-wWXyZQwD.js';
 import '../chunks/ease-XN8_0sXu.js';
 
 /**
@@ -112,4 +112,4 @@ async function loadWebp(src, o = {}) {
 const formatWebp = { id: 'format-webp', version: RUNTIME_VERSION, tier: 'standard', requires: ['core'], api: { parseWebp, webpFrameFiles, decodeWebp, loadWebp, animatedImagePlayer } };
 
 export { animatedImagePlayer, decodeWebp, formatWebp, loadWebp, parseWebp, riffChunks, webpFrameFiles };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/runtime/format-webp.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.5.0/dist/runtime/format-webp.js.map

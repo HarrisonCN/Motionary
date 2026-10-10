@@ -142,4 +142,4 @@ Helpers: `detectNativeHost()`, `postToNative(msg)`, `parseNativeSettings(data)`,
 | Vue | `motionary/components/vue` | `UsaPlugin`, `isUsaElement` |
 | Svelte | `motionary/components/svelte` | `use:usa={{ props, on }}` action, `defineUsa()` |
 | Solid | `motionary/components/solid` | `use:usa` directive, `defineUsa()`, JSX types |
-| Angular | `motionary/components/angular` | `usaInitializer()` for `APP_INITIALIZER`, `usaDetail()`; use `CUSTOM_ELEMENTS_SCHEMA` |
+| Angular | `motionary/angular` | `usaInitializer()` for `APP_INITIALIZER`, `usaDetail()`; use `CUSTOM_ELEMENTS_SCHEMA` |

@@ -294,7 +294,7 @@ Also see `flip()` in `components/transitions`. (4.0 removed `<usa-flip-list>` an
 |---|---|
 | `components/svelte` | `use:usa={{ props, on }}`, `defineUsa()` |
 | `components/solid` | `use:usa` directive, `defineUsa()`, JSX types (`prop:` / `on:usa:*` natively) |
-| `components/angular` | `usaInitializer()` (`APP_INITIALIZER`), `defineUsa()`, `usaDetail()`; `CUSTOM_ELEMENTS_SCHEMA` |
+| `angular` (11.5; old `components/angular`) | `provideUsa(APP_INITIALIZER)`, `usaInitializer()`, `defineUsa()`, `USA_TAGS`, `isUsaElement`, `bindUsa()`, `usaDetail()`; `CUSTOM_ELEMENTS_SCHEMA` |
 
 Hybrid / desktop hosts (MAUI, Flutter WebView, Electron, Tauri): [hybrid-apps.md](./hybrid-apps.md).
 

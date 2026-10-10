@@ -1,11 +1,11 @@
 'use strict';
 
-var widgets_glScene = require('../chunks/gl-scene-y_vtXfho.cjs');
+var widgets_glScene = require('../chunks/gl-scene-BO28sVfQ.cjs');
 require('../chunks/base-B3me2y0o.cjs');
-require('../chunks/runtime-link-BGsMpzx4.cjs');
-require('../chunks/registry-VITvgTNc.cjs');
+require('../chunks/runtime-link-Cnij6nmH.cjs');
+require('../chunks/registry-U0scTJZr.cjs');
 
 
 
 exports.defineGlScene = widgets_glScene.defineGlScene;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/widgets/gl-scene.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.5.0/dist/widgets/gl-scene.cjs.map

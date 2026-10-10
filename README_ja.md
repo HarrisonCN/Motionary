@@ -109,6 +109,8 @@ import 'motionary/presets/extended'; // lets <usa-reveal effect> use every prese
 export class Hero {}
 ```
 
+> 11.5：Angular はトップレベルのエントリ `motionary/angular` を使用します（`motionary/components/angular` は 13.0 まで利用可）。レイヤー別サブパスと非推奨パス：[docs/public-api.md](./docs/public-api.md) · `npx motionary doctor`。
+
 アニメーションコンポーネントはフレームワーク不要：
 
 ```html

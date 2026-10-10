@@ -117,7 +117,7 @@ export class RuntimeModuleError extends Error {
 export function register(...mods: RuntimeModule[]): RuntimeRegistry {
   const r = registry();
   for (const m of mods) {
-    if (!m || typeof m.id !== 'string') throw new TypeError('[motionary] use(): not a runtime module — pass the object exported by motionary/runtime/<module>');
+    if (!m || typeof m.id !== 'string') throw new TypeError('[motionary] use(): not a runtime module');
     if (r.modules.has(m.id)) continue;
     for (const dep of m.requires || []) if (!r.modules.has(dep)) throw new RuntimeModuleError(dep, `motionary/runtime/${m.id}`);
     r.modules.set(m.id, m as RuntimeModule);
