@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [12.3.0] - 2026-10-10
+
+### Figma export (Tooling)
+- The Figma plugin (`figma-plugin/`) now exports three things for the current selection, each with a Copy button: a **complete HTML page** you can paste and open (tokens as CSS, every prerequisite script in the right order, the component bundle, one element per layer), **CSS tokens** (`--usa-duration-*`, `--usa-easing-*`) and **motion.tokens.json** (W3C design tokens).
+- Layers named after a component (`usa-tilt`, `<usa-tilt>`, or plugin data `motionary:tag`) become that element; instance component properties become attributes — only attributes the component has; prototype interactions become `data-motion` (same mapping as `figmaToMotion()`).
+- Figma variables `motion/duration/<name>` and `motion/easing/<name>` override or extend Motionary's default tokens.
+- `figma-plugin/code.js` is generated from `plugin-src.js` by `node scripts/gen-figma-plugin.mjs` (`npm run figma:plugin`), embedding the component catalog from the AI manifest; no network access, the document is never edited.
+
+### Checks
+- New `test/widgets-12-3.test.ts`: generated plugin is current, catalog matches the manifest, token export (defaults, overrides, CSS), layer → element mapping (attributes filtered, booleans, data-motion), the HTML page's script order and CDN major, unknown layers.
+
 ## [12.2.0] - 2026-10-10
 
 ### Stronger MCP validation (Tooling)

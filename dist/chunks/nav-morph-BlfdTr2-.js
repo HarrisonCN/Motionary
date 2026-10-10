@@ -109,4 +109,4 @@ function defineNavMorph(tag = 'usa-nav-morph') {
 }
 
 export { NAV_INDICATORS as N, defineNavMorph as d };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.2.0/dist/chunks/nav-morph-BlfdTr2-.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.3.0/dist/chunks/nav-morph-BlfdTr2-.js.map

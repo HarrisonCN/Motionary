@@ -80,4 +80,4 @@ function defineHeroVideo(tag = 'usa-hero-video') {
 }
 
 exports.defineHeroVideo = defineHeroVideo;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.2.0/dist/widgets/hero-video.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.3.0/dist/widgets/hero-video.cjs.map

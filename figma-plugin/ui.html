@@ -1,10 +1,39 @@
-<style>body{font:12px system-ui;margin:12px}code{display:block;padding:6px;margin:4px 0 10px;background:#f1f5f9;border-radius:6px;white-space:pre-wrap}</style>
+<style>
+  body { font: 12px system-ui, sans-serif; margin: 12px; color: #111827; }
+  h3 { margin: 0 0 6px; }
+  .tabs { display: flex; gap: 4px; margin: 8px 0; }
+  .tabs button { padding: 4px 8px; border: 1px solid #d1d5db; border-radius: 6px; background: #fff; cursor: pointer; }
+  .tabs button[aria-selected="true"] { background: #7c5cff; border-color: #7c5cff; color: #fff; }
+  textarea { width: 100%; height: 300px; box-sizing: border-box; font: 11px ui-monospace, monospace; border: 1px solid #d1d5db; border-radius: 6px; padding: 6px; }
+  ul { margin: 6px 0; padding-left: 16px; max-height: 90px; overflow: auto; }
+  .warn { color: #b45309; }
+</style>
 <h3>Motionary export</h3>
-<div id="out">Select layers with prototype interactions…</div>
-<button onclick="parent.postMessage({ pluginMessage: 'close' }, '*')">Close</button>
+<div id="layers">Select layers named after Motionary components (e.g. <b>usa-tilt</b>) or with prototype interactions…</div>
+<div class="tabs" role="tablist">
+  <button role="tab" data-k="html" aria-selected="true">HTML page</button>
+  <button role="tab" data-k="css" aria-selected="false">CSS tokens</button>
+  <button role="tab" data-k="tokens" aria-selected="false">motion.tokens.json</button>
+</div>
+<textarea id="out" readonly></textarea>
+<p><button id="copy">Copy</button> <button onclick="parent.postMessage({ pluginMessage: 'close' }, '*')">Close</button> <span id="msg"></span></p>
 <script>
-onmessage = (e) => {
-  const rows = (e.data.pluginMessage || {}).rows || [];
-  document.getElementById('out').innerHTML = rows.length ? rows.map((r) => `<b>${r.name}</b><code>data-motion="${r.motion || '—'}"</code>`).join('') : 'Nothing selected.';
-};
+  let data = { html: '', css: '', tokens: '', rows: [] }, key = 'html';
+  const out = document.getElementById('out');
+  const show = () => { out.value = data[key] || ''; };
+  document.querySelectorAll('[role=tab]').forEach((b) => b.onclick = () => {
+    key = b.dataset.k;
+    document.querySelectorAll('[role=tab]').forEach((x) => x.setAttribute('aria-selected', String(x === b)));
+    show();
+  });
+  // Figma's plugin iframe has no async clipboard permission: select + execCommand
+  document.getElementById('copy').onclick = () => { out.select(); document.execCommand('copy'); document.getElementById('msg').textContent = 'Copied'; };
+  onmessage = (e) => {
+    data = e.data.pluginMessage || data;
+    const rows = data.rows || [];
+    document.getElementById('layers').innerHTML = rows.length
+      ? '<ul>' + rows.map((r) => `<li>${r.name.replace(/</g, '&lt;')} → ${r.tag ? (r.known ? '&lt;' + r.tag + '&gt;' : `<span class="warn">unknown ${r.tag}</span>`) : 'div'}${r.motion ? ' · data-motion' : ''}</li>`).join('') + '</ul>'
+      : 'Nothing selected — the tokens below are still exported.';
+    show();
+  };
 </script>

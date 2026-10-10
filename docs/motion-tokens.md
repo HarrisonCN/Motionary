@@ -44,3 +44,7 @@ Prebuilt files: [`docs/motion-tokens.css`](./motion-tokens.css) and [`docs/motio
 ## Style Dictionary
 
 Point Style Dictionary at `docs/motion.tokens.json` as a source, or export your own motion group and import it at runtime with `importMotionTokens()`. Tokens are plain data, so SSR is fine; `applyMotionTokens()` is a no-op without a DOM (it still sets the active scale).
+
+## From Figma (12.3)
+
+The Figma plugin ([figma-plugin/README.md](../figma-plugin/README.md)) reads variables named `motion/duration/<name>` and `motion/easing/<name>` and exports them in this format (and as CSS), merged over these defaults.
