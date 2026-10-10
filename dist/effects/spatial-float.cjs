@@ -16,4 +16,4 @@ function registerSpatialFloat() {
 exports.effect = effect;
 exports.register = registerSpatialFloat;
 exports.registerSpatialFloat = registerSpatialFloat;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/effects/spatial-float.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/effects/spatial-float.cjs.map

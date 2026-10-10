@@ -18,4 +18,4 @@ function registerAuroraVeil() {
 exports.effect = effect;
 exports.register = registerAuroraVeil;
 exports.registerAuroraVeil = registerAuroraVeil;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/effects/aurora-veil.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/effects/aurora-veil.cjs.map

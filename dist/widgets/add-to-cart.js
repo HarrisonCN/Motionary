@@ -58,4 +58,4 @@ function defineAddToCart(tag = 'usa-add-to-cart') {
 }
 
 export { defineAddToCart };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/add-to-cart.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/widgets/add-to-cart.js.map

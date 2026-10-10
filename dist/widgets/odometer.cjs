@@ -7,4 +7,4 @@ require('../chunks/shared-Bf72wLyt.cjs');
 
 
 exports.defineOdometer = widgets_odometer.defineOdometer;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/odometer.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/widgets/odometer.cjs.map

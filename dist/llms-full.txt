@@ -1,4 +1,4 @@
-# Motionary 13.1.0 — full component reference
+# Motionary 13.2.0 — full component reference
 
 Generated from the source. Machine-readable version: https://harrisoncn.github.io/Motionary/components.json (schema https://harrisoncn.github.io/Motionary/components.schema.json).
 
@@ -1260,7 +1260,7 @@ A dot grid that swells and links up with lines around the pointer.
 10.9: plays .lottie files with their themes (slots recoloured by a theme from the file) and state machines — playback states, event / numeric / boolean guards, pointer and completion interactions, input and theme actions (OpenUrl is refused). Tap the dot: it starts pulsing, three taps switch it to the dark theme. Requires motionary/runtime/vector + motionary/runtime/lottie-state — npm i motionary, then use(vector, lottieState). Its own entry point: motionary/components/dotlottie.
 
 - Import: `import { defineDotLottie } from 'motionary/components/dotlottie'; defineDotLottie();`
-- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components/dotlottie.js
 - Attributes: `theme`, `state-machine`
 - Events: `usa:error`, `usa:state`, `usa:custom`, `usa:runtime-missing`
 - Methods: `fire()`, `setInput()`, `setTheme()`
@@ -1525,7 +1525,7 @@ Full-screen sections that snap one at a time, with keyboard paging, dot navigati
 10.9: <usa-gl-scene> for compressed glTF — Draco meshes and KTX2 (Basis Universal) textures decoded by the official decoders (Google draco3d, Binomial’s Basis Universal transcoder), lazy-loaded optional peers: only the decoder a file needs is fetched. Requires motionary/runtime/gl + format-gltf + gltf-decoders and draco3d (+ the Basis transcoder for KTX2 textures). Its own entry point: motionary/components/gl-model.
 
 - Import: `import { defineGlModel } from 'motionary/components/gl-model'; defineGlModel();`
-- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components/gl-model.js
 - Events: `usa:runtime-missing`
 - Requires: motionary/runtime/gl + motionary/runtime/format-gltf + motionary/runtime/gltf-decoders + draco3d + basis_transcoder.js
   - Install: `npm i motionary && npm i draco3d && curl -LO https://cdn.jsdelivr.net/gh/BinomialLLC/basis_universal@1.16.4/webgl/transcoder/build/basis_transcoder.js -LO https://cdn.jsdelivr.net/gh/BinomialLLC/basis_universal@1.16.4/webgl/transcoder/build/basis_transcoder.wasm`
@@ -3303,7 +3303,7 @@ defineSmoothScroll(); // registers <usa-smooth-scroll> — after the prerequisit
 10.8: drag or swipe with real inertia — a throw keeps gliding, then springs to the nearest slide (a quick flick always moves one); rubber-band edges, arrows, dots, ←/→ / Home / End, optional autoplay that pauses on hover, focus and off screen. Slides keep their own width so the next one peeks in. Requires motionary/runtime/drag-snap — npm i motionary, then use(dragSnap) before it mounts. Its own entry point: motionary/components/snap-carousel (not in the widgets / lite bundles).
 
 - Import: `import { defineSnapCarousel } from 'motionary/components/snap-carousel'; defineSnapCarousel();`
-- CDN: https://unpkg.com/motionary@13/dist/components.umd.js
+- CDN: https://unpkg.com/motionary@13/dist/components/snap-carousel.js
 - Attributes: `align`, `gap`, `autoplay`, `no-controls`, `no-dots`, `label`, `index`
 - Events: `usa:change`, `usa:runtime-missing`
 - Methods: `next()`, `prev()`, `goTo()`

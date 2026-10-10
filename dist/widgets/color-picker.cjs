@@ -7,4 +7,4 @@ require('../chunks/shared-Bf72wLyt.cjs');
 
 
 exports.defineColorPicker = widgets_colorPicker.defineColorPicker;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/color-picker.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/widgets/color-picker.cjs.map

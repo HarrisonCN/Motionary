@@ -16,7 +16,9 @@ export function generate() {
   for (const c of [...m.components].sort((a, b) => a.tag.localeCompare(b.tag))) {
     const r = (c.requires || []).filter((x) => !x.startsWith('@') && !peers.has(x));
     const p = (c.requires || []).filter((x) => x.startsWith('@') || peers.has(x));
-    catalog[c.tag] = { b: /widgets\.umd\.js$/.test(c.cdn || '') ? 'w' : 'c', r, a: c.attributes || [], ...(p.length ? { p } : {}) };
+    // 13.2: b = 'w' widgets.umd.js, 'c' components.umd.js, 'm' own ES module entry (m = dist path, d = define function)
+    const mod = !/\.umd\.js$/.test(c.cdn || '') && (c.cdn || '').match(/\/dist\/(.+)$/);
+    catalog[c.tag] = { b: mod ? 'm' : /widgets\.umd\.js$/.test(c.cdn || '') ? 'w' : 'c', ...(mod ? { m: mod[1], d: c.import.define } : {}), r, a: c.attributes || [], ...(p.length ? { p } : {}) };
   }
   const major = String(m.version).split('.')[0];
   const tokens = JSON.parse(read('docs/motion.tokens.json'));

@@ -383,4 +383,4 @@ function resolveEasingToken(v, fallback) {
 }
 
 export { MOTION_TOKENS, applyMotionTokens, exportDesignTokens, getMotionTokens, importDesignTokens, importMotionTokens, mergeMotionTokens, motionToken, motionTokensToCss, motionTokensToJSON, motionTokensToVars, motionVar, parseDuration, parseEasing, resolveDurationToken, resolveEasingToken, resolveTokenAliases, validateDesignTokens };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/components/tokens.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/components/tokens.js.map

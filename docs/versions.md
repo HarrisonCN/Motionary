@@ -18,6 +18,12 @@ URLs. Nothing else changes: the `<usa-*>` tags, the `usa-` classes, the globals 
 `npm i motionary` does not move you to a minor without you asking for it. Exact versions always work. Both package names
 use the same tags. To see the current tags, run `npm view motionary dist-tags`.
 
+## How a release is gated
+
+Every release (major, minor or patch) is published from a pull request whose head commit passed all required CI checks —
+contract, size, tree-shaking, playground, the Node matrix and the Chromium / Firefox / WebKit browser jobs. See
+[release-gate.md](./release-gate.md) for the gate script and the branch settings.
+
 ## CDN majors
 
 CDN URLs pin a major: `https://unpkg.com/motionary@13/dist/…` or `https://cdn.jsdelivr.net/npm/motionary@13/dist/…`. A new

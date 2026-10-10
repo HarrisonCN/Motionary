@@ -1,7 +1,7 @@
 {
   "name": "motionary",
-  "version": "13.1.0",
-  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 94 animated Web Components — 214 scroll-reveal presets, card/click/button morphs, physics, page transitions, generative & sound-reactive backgrounds, cursor/gesture effects, themes, micro-interactions, <usa-player>, WebGL. React, Vue, Svelte, Solid, Angular or plain HTML.",
+  "version": "13.2.0",
+  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 209 animated Web Components (91 in motionary/components, 118 widgets with their own entry points) — 214 scroll-reveal presets, card/click/button morphs, physics, page transitions, generative & sound-reactive backgrounds, cursor/gesture effects, themes, micro-interactions, <usa-player>, WebGL. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
   "unpkg": "dist/index.umd.js",
@@ -4108,7 +4108,10 @@
     "contract": "node scripts/contract-audit.mjs",
     "check:contract": "node scripts/contract-audit.mjs --check",
     "contract:preview": "node scripts/contract-audit.mjs --preview",
-    "figma:plugin": "node scripts/gen-figma-plugin.mjs"
+    "figma:plugin": "node scripts/gen-figma-plugin.mjs",
+    "facts": "node scripts/facts.mjs",
+    "check:docs": "node scripts/facts.mjs --check && node scripts/gen-component-docs.mjs --check && node scripts/gen-entries.mjs --check && node scripts/gen-runtime-docs.mjs --check && node scripts/gen-figma-plugin.mjs --check && node scripts/check-versions.mjs",
+    "release:gate": "node scripts/release-gate.mjs"
   },
   "keywords": [
     "motionary",

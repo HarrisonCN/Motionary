@@ -11,7 +11,7 @@ import { GSTRINGS } from './gallery-i18n.js';
 import { WIRES } from './catalog/index.js';
 
 const LOCAL = new URL('../dist/', import.meta.url).href;
-const CDN = 'https://unpkg.com/motionary@8/dist/';
+const CDN = 'https://unpkg.com/motionary@13/dist/';
 const q = new URLSearchParams(location.search);
 const id = q.get('id') || '';
 const mode = q.get('mode') || 'card';

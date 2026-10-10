@@ -22,7 +22,7 @@ export function componentPage(c, m) {
     '',
     `- **Category:** ${c.category}${c.since ? ` · **since** ${c.since}` : ''}${c.changed && c.changed.length ? ` · **changed in** ${c.changed.join(', ')}` : ''}`,
     `- **Import:** \`import { ${c.import.define} } from '${c.import.path}'\` then \`${c.import.register}\``,
-    `- **CDN:** \`<script src="${c.cdn}"></script>\``,
+    /\.umd\.js$/.test(c.cdn) ? `- **CDN:** \`<script src="${c.cdn}"></script>\`` : `- **CDN:** \`<script type="module">import { ${c.import.define} } from '${c.cdn}'; ${c.import.register}</script>\` (own entry, not in the no-build bundles)`,
     `- **Attributes:** ${list(c.attributes)}`,
     `- **Events:** ${list(c.events)}`,
     `- **Slots:** ${list(c.slots, (x) => x)}`,

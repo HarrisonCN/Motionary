@@ -965,4 +965,4 @@ exports.splitOrder = splitOrder;
 exports.splitText = splitText;
 exports.splitTimeline = splitTimeline;
 exports.splitWords = words;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/components/text.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/components/text.cjs.map

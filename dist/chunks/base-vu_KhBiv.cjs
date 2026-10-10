@@ -518,4 +518,4 @@ exports.shadowStyles = shadowStyles;
 exports.srText = srText;
 exports.trackAnimation = trackAnimation;
 exports.withoutDeprecations = withoutDeprecations;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/chunks/base-vu_KhBiv.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/chunks/base-vu_KhBiv.cjs.map

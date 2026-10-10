@@ -4,9 +4,9 @@
 
 10.8: drag or swipe with real inertia — a throw keeps gliding, then springs to the nearest slide (a quick flick always moves one); rubber-band edges, arrows, dots, ←/→ / Home / End, optional autoplay that pauses on hover, focus and off screen. Slides keep their own width so the next one peeks in. Requires motionary/runtime/drag-snap — npm i motionary, then use(dragSnap) before it mounts. Its own entry point: motionary/components/snap-carousel (not in the widgets / lite bundles).
 
-- **Category:** ui · **since** 10.8
+- **Category:** ui · **since** 10.8 · **changed in** 13.2
 - **Import:** `import { defineSnapCarousel } from 'motionary/components/snap-carousel'` then `defineSnapCarousel();`
-- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>`
+- **CDN:** `<script type="module">import { defineSnapCarousel } from 'https://unpkg.com/motionary@13/dist/components/snap-carousel.js'; defineSnapCarousel();</script>` (own entry, not in the no-build bundles)
 - **Attributes:** `align`, `gap`, `autoplay`, `no-controls`, `no-dots`, `label`, `index`
 - **Events:** `usa:change`, `usa:runtime-missing`
 - **Slots:** —

@@ -16,4 +16,4 @@ function registerUnderlineSweep() {
 exports.effect = effect;
 exports.register = registerUnderlineSweep;
 exports.registerUnderlineSweep = registerUnderlineSweep;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/effects/underline-sweep.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/effects/underline-sweep.cjs.map

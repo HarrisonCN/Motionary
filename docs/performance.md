@@ -23,4 +23,4 @@ Same API as `motionary/components`, but the light-DOM CSS is **not** inlined: th
 | `motionary/components` (everything, CSS inlined) | ≈ 79 KB |
 | `motionary/components/lite` (everything, CSS on demand) | **≈ 62 KB** (budget 70 KB, checked in CI) |
 
-Serve the CSS from somewhere else with `onDemandStyles('https://cdn.example/motionary@6/dist/')`, or preload with `loadCategoryStyles('cards', base)`.
+Serve the CSS from somewhere else with `onDemandStyles('https://cdn.example/motionary@13/dist/')`, or preload with `loadCategoryStyles('cards', base)`.

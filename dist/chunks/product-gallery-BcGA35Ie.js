@@ -118,4 +118,4 @@ function defineProductGallery(tag = 'usa-product-gallery') {
 }
 
 export { defineProductGallery as d, wrapIndex as w };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/chunks/product-gallery-BcGA35Ie.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/chunks/product-gallery-BcGA35Ie.js.map

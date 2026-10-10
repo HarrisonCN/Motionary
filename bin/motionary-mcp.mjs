@@ -110,12 +110,15 @@ export function scaffold(m, tags, framework = 'esm') {
   const prereqNote = req.length || peers.length ? `Prerequisites: ${[...req.map(reqLabel), ...peers].join(', ')} — register them before the components mount.` : 'No prerequisites.';
   let code;
   if (framework === 'html') {
+    const esmOnly = comps.filter((c) => !/\.umd\.js$/.test(c.cdn));
     code = [
       '<!-- ' + prereqNote + ' -->',
       ...(req.length ? runtimeCdn(m, req) : []),
       ...peerSetup.map((p) => `<!-- ${p.label} (official runtime, lazy): -->\n${p.cdn}`),
-      `<script src="${m.cdn.components}"></script>`,
+      ...(comps.some((c) => /components\.umd/.test(c.cdn)) || !esmOnly.length ? [`<script src="${m.cdn.components}"></script>`] : []),
       ...(needsWidgets ? [`<script src="${m.cdn.widgets}"></script>`] : []),
+      // 13.2: elements with their own entry (not in the no-build bundles) load as ES modules from the same CDN major
+      ...(esmOnly.length ? [`<script type="module">\n${esmOnly.map((c) => `import { ${c.import.define} } from '${c.cdn}';`).join('\n')}\n${esmOnly.map((c) => c.import.register).join('\n')}\n</script>`] : []),
       '',
       markup,
     ].join('\n');

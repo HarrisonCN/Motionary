@@ -4,9 +4,9 @@
 
 10.9: plays .lottie files with their themes (slots recoloured by a theme from the file) and state machines — playback states, event / numeric / boolean guards, pointer and completion interactions, input and theme actions (OpenUrl is refused). Tap the dot: it starts pulsing, three taps switch it to the dark theme. Requires motionary/runtime/vector + motionary/runtime/lottie-state — npm i motionary, then use(vector, lottieState). Its own entry point: motionary/components/dotlottie.
 
-- **Category:** ui · **since** 10.9
+- **Category:** ui · **since** 10.9 · **changed in** 13.2
 - **Import:** `import { defineDotLottie } from 'motionary/components/dotlottie'` then `defineDotLottie();`
-- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>`
+- **CDN:** `<script type="module">import { defineDotLottie } from 'https://unpkg.com/motionary@13/dist/components/dotlottie.js'; defineDotLottie();</script>` (own entry, not in the no-build bundles)
 - **Attributes:** `theme`, `state-machine`
 - **Events:** `usa:error`, `usa:state`, `usa:custom`, `usa:runtime-missing`
 - **Slots:** —
