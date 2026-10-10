@@ -44,14 +44,14 @@ flowchart TB
 | Public API | Components、Motion Core、Runtime |
 | Motion Intelligence & Tooling | 读取 Manifest（`components.json` / `dist/manifest.json`）；`src/` 内的 AI 层只依赖 Motion Core |
 
-另外：`src/` 不得导入 `scripts/`、`bin/` 或 `figma-plugin/`。现存的一个例外记录在测试的允许列表中，只能减少不能增加：`<usa-motion-prompt>`（Components）直接导入 AI 层 `src/components/ai`，12.0 时改为由 Public API / Tooling 注入。
+另外：`src/` 不得导入 `scripts/`、`bin/` 或 `figma-plugin/`。测试的例外列表只能减少不能增加；11.6 起为空：确定性解析器移入 Motion Core（`src/components/core/intent.ts`，纯函数），`<usa-motion-prompt>` 不再导入 Tooling 层，Tooling 入口 `motionary/tooling/ai` 只做再导出并提供可插拔 LLM provider（[ai-provider.md](./ai-provider.md)）。
 
 ## 现有目录 → 层
 
 | 层 | 目录 / 文件 | 子路径 |
 |---|---|---|
 | Public API | `src/index.ts` 及根目录的 `core.ts`、`presets*.ts`、`parallax.ts`、`stagger.ts`、`element*.ts`、`types.ts`（HTML `data-*` API，原 use-scroll-animate）；`src/react.ts`、`vue.ts`、`svelte.ts`、`solid.ts`；`src/components/frameworks/*`（含 Angular）；`src/entries/*`（逐组件 / 逐特效入口）；`src/runtime/iife/*`（CDN `<script>` 入口） | `motionary`、`motionary/react` …、`motionary/angular`（11.5；旧 `motionary/components/angular`）、`motionary/widgets/<name>`、`motionary/effects/<name>`、`dist/runtime/*.iife.js` |
-| Motion Core | `src/runtime/{index,registry,ticker,tween,ease,keyframes}.ts`；`src/components/core/*`（`createMotion()`） | `motionary/runtime`、`motionary/core` |
+| Motion Core | `src/runtime/{index,registry,ticker,tween,ease,keyframes}.ts`；`src/components/core/*`（`createMotion()`；11.6 起含纯函数动效意图解析器 `intent.ts`） | `motionary/runtime`、`motionary/core` |
 | Runtime | `src/runtime/*.ts` 的其余模块（scroll、smooth、text、drag-snap、physics、vector、lottie-*、gl、gltf-*、format-*、anim-image） | `motionary/runtime/<module>` |
 | Components | `src/components/**`（除 `frameworks/`、`ai/`、`core/`） | `motionary/components/*` |
 | Motion Intelligence & Tooling | `src/components/ai`；`bin/`（`motionary-mcp`、`usa-codemod-*`）；`scripts/`（manifest、文档、entries、体积预算、检查）；`figma-plugin/`；`showcase/catalog/*`（清单数据） | `motionary/tooling/ai`、`motionary/tooling/design`、`motionary/tooling/manifest.json`（11.5 别名；旧路径 13.0 删除）、`npx motionary doctor`、`npx motionary-mcp` |

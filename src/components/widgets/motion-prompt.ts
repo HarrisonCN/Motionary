@@ -1,5 +1,5 @@
 import { defineElement, type UsaElement } from '../base';
-import { describeMotion, motionSnippet, type MotionIntent } from '../ai';
+import { describeMotion, motionSnippet, type MotionIntent, type MotionSuggestion } from '../core/intent';
 import css from './motion-prompt.css?raw';
 
 /**
@@ -14,10 +14,14 @@ import css from './motion-prompt.css?raw';
  * Attributes: `value` (initial prompt), `format` (waapi · css · component,
  * default waapi), `placeholder`, `label`. The preview respects reduced
  * motion (shows the end state). API: `intent`, `suggest(text)`; events
- * `usa:suggest` ({ intent }), `usa:copy` ({ format, code }).
+ * `usa:suggest` ({ intent, source, errors }), `usa:copy` ({ format, code }).
+ * 11.6: `suggester` — optional, e.g. `(text) => suggestMotion(text, { provider })` from `motionary/tooling/ai` (docs/ai-provider.md):
+ * the local suggestion shows at once and is replaced by the validated answer (kept on any failure). No network unless you set it.
  */
 export interface UsaMotionPromptElement extends UsaElement {
   readonly intent: MotionIntent | null;
+  /** 11.6: optional async suggester, e.g. `(t) => suggestMotion(t, { provider })` (motionary/tooling/ai). */
+  suggester: ((text: string) => Promise<MotionSuggestion>) | null;
   suggest(text: string): MotionIntent;
 }
 
@@ -33,6 +37,8 @@ export function defineMotionPrompt(tag = 'usa-motion-prompt'): CustomElementCons
           return ['value', 'format', 'placeholder', 'label'];
         }
         private cur: MotionIntent | null = null;
+        suggester: ((text: string) => Promise<MotionSuggestion>) | null = null;
+        private seq = 0;
         private render: ((i: MotionIntent) => void) | null = null;
         get intent(): MotionIntent | null {
           return this.cur;
@@ -41,7 +47,18 @@ export function defineMotionPrompt(tag = 'usa-motion-prompt'): CustomElementCons
           const i = describeMotion(text);
           this.cur = i;
           this.render?.(i);
-          this.emit('suggest', { intent: i });
+          this.emit('suggest', { intent: i, source: 'local', errors: [] });
+          const n = ++this.seq;
+          if (this.suggester)
+            void Promise.resolve()
+              .then(() => this.suggester!(text))
+              .then((r) => {
+                if (n !== this.seq || !r?.intent) return;
+                this.cur = r.intent;
+                this.render?.(r.intent);
+                this.emit('suggest', { intent: r.intent, source: r.source, errors: r.errors });
+              })
+              .catch(() => undefined);
           return i;
         }
         mount(): void {
