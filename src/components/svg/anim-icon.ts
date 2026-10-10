@@ -1,4 +1,5 @@
 import { defineElement, type UsaElement } from '../base';
+import { keyClick } from '../key-click';
 import css from './svg.css?raw';
 
 type Icon = { d: string; frames: Keyframe[]; duration: number; origin?: string };
@@ -31,7 +32,7 @@ export function defineAnimIcon(tag = 'usa-anim-icon'): CustomElementConstructor 
     (Base) =>
       class UsaAnimIcon extends Base {
         static get observedAttributes(): string[] {
-          return ['name', 'size', 'label'];
+          return ['name', 'size', 'label', 'trigger'];
         }
         private icon(): Icon {
           return ANIM_ICONS[this.str('name', 'heart')] || ANIM_ICONS.heart;
@@ -51,7 +52,10 @@ export function defineAnimIcon(tag = 'usa-anim-icon'): CustomElementConstructor 
           const label = this.str('label');
           this.innerHTML = `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform-origin:${i.origin || '50% 50%'}"${label ? ` role="img" aria-label="${label.replace(/"/g, '&quot;')}"` : ' aria-hidden="true"'}><path d="${i.d}"${i.frames[0].strokeDashoffset !== undefined ? ' pathLength="1" stroke-dasharray="1"' : ''}></path></svg>`;
           const t = this.str('trigger', 'hover');
-          if (t === 'click') this.listen(this, 'click', () => this.play());
+          if (t === 'click') {
+            this.listen(this, 'click', () => this.play());
+            keyClick(this as any);
+          }
           else if (t === 'view' || t === 'loop') this.inView((v) => v && this.play(), { threshold: 0.5 });
           else {
             this.listen(this, 'pointerenter', () => this.play());

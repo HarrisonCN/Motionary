@@ -23,7 +23,7 @@ export function defineCubeGallery(tag = 'usa-cube-gallery'): CustomElementConstr
     (Base) => {
       class UsaCubeGallery extends Base {
         static get observedAttributes(): string[] {
-          return ['axis', 'autoplay'];
+          return ['axis', 'autoplay', 'label'];
         }
         private _slides: HTMLElement[] = [];
         private _i = 0;

@@ -62,6 +62,7 @@ export function defineSpotlight(tag = 'usa-spotlight'): CustomElementConstructor
             x = e.clientX;
             y = e.clientY;
             if (!this.hasAttribute('data-lit')) this.setAttribute('data-lit', '');
+            // contract-exempt: reduced-motion — pointer-follow light, not a motion effect (documented to stay on under reduced motion)
             if (!this._frame) this._frame = raf(apply);
           });
           this.listen(this, 'pointerleave', () => this.removeAttribute('data-lit'));

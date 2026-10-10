@@ -27,7 +27,7 @@ export function defineCursor(tag = 'usa-cursor'): CustomElementConstructor | und
     (Base) =>
       class UsaCursor extends Base {
         static get observedAttributes(): string[] {
-          return ['mode', 'size', 'color', 'hide-native'];
+          return ['mode', 'size', 'color', 'hide-native', 'targets'];
         }
         private _frame = 0;
         get active(): boolean {

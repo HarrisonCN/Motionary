@@ -18,7 +18,7 @@ export function defineAvatarStack(tag = 'usa-avatar-stack'): CustomElementConstr
     (Base) =>
       class UsaAvatarStack extends Base {
         static get observedAttributes(): string[] {
-          return ['max', 'size', 'overlap'];
+          return ['max', 'size', 'overlap', 'label'];
         }
         mount(): void {
           this.querySelector(':scope > .usa-avatar-more')?.remove();

@@ -16,7 +16,7 @@ export function defineFx(tag = 'usa-fx'): CustomElementConstructor | undefined {
   return defineElement(tag, (Base) =>
     class UsaFx extends Base {
       static get observedAttributes(): string[] {
-        return ['effect', 'trigger', 'options'];
+        return ['effect', 'trigger', 'options', 'self', 'once'];
       }
       get target(): HTMLElement {
         return this.flag('self') ? this : ((this.firstElementChild as HTMLElement) || this);

@@ -22,7 +22,7 @@ export function defineDock(tag = 'usa-dock'): CustomElementConstructor | undefin
     (Base) => {
       class UsaDock extends Base {
         static get observedAttributes(): string[] {
-          return ['orientation', 'magnify', 'range'];
+          return ['orientation', 'magnify', 'range', 'label', 'bounce'];
         }
         private _items: HTMLElement[] = [];
         private _raf = 0;

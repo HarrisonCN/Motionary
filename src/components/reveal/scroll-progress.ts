@@ -62,6 +62,7 @@ export function defineScrollProgress(tag = 'usa-scroll-progress'): CustomElement
           this.setAttribute('aria-valuemax', '100');
           if (!this.hasAttribute('aria-label')) this.setAttribute('aria-label', this.str('label', 'Reading progress'));
           const schedule = () => {
+            // contract-exempt: reduced-motion — the bar mirrors scroll position (user-driven), no autonomous motion
             if (!this._frame) this._frame = raf(() => ((this._frame = 0), this.update()));
           };
           this.listen(window, 'scroll', schedule, { passive: true });

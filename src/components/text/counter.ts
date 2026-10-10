@@ -28,7 +28,7 @@ export function defineCounter(tag = 'usa-counter'): CustomElementConstructor | u
     (Base) =>
       class UsaCounter extends Base {
         static get observedAttributes(): string[] {
-          return ['to', 'decimals', 'locale', 'prefix', 'suffix', 'grouping'];
+          return ['to', 'decimals', 'locale', 'prefix', 'suffix', 'grouping', 'from', 'start', 'duration'];
         }
 
         private _current = NaN;

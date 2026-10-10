@@ -22,7 +22,7 @@ export function defineCompare(tag = 'usa-compare'): CustomElementConstructor | u
     (Base) => {
       class UsaCompare extends Base {
         static get observedAttributes(): string[] {
-          return ['orientation', 'labels'];
+          return ['orientation', 'labels', 'label', 'position', 'hover', 'intro'];
         }
         private _p = 50;
         private _after: HTMLElement | null = null;

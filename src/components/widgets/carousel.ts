@@ -27,7 +27,7 @@ export function defineCarousel(tag = 'usa-carousel'): CustomElementConstructor |
     (Base) => {
       class UsaCarousel extends Base {
         static get observedAttributes(): string[] {
-          return ['effect', 'autoplay', 'loop', 'no-controls', 'no-dots'];
+          return ['effect', 'autoplay', 'loop', 'no-controls', 'no-dots', 'label', 'index'];
         }
         private _i = 0;
         private _slides: HTMLElement[] = [];

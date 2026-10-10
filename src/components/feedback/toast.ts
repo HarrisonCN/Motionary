@@ -48,7 +48,7 @@ export function defineToaster(tag = 'usa-toaster'): CustomElementConstructor | u
     (Base) =>
       class UsaToaster extends Base {
         static get observedAttributes(): string[] {
-          return ['label'];
+          return ['label', 'position', 'max'];
         }
 
         mount(): void {

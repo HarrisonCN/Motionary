@@ -27,7 +27,7 @@ export function defineCheck(tag = 'usa-check'): CustomElementConstructor | undef
     (Base) =>
       class UsaCheck extends Base {
         static get observedAttributes(): string[] {
-          return ['kind', 'size', 'label'];
+          return ['kind', 'size', 'label', 'start'];
         }
 
         private _anims: Animation[] = [];

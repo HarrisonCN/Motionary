@@ -25,7 +25,7 @@ export function defineChatComposer(tag = 'usa-chat-composer'): CustomElementCons
     (Base) => {
       class UsaChatComposer extends Base {
         static get observedAttributes(): string[] {
-          return ['placeholder', 'label', 'rows', 'busy'];
+          return ['placeholder', 'label', 'rows', 'busy', 'value'];
         }
         private get area(): HTMLTextAreaElement | null {
           return this.querySelector('.usa-cc-input');

@@ -20,7 +20,7 @@ export function definePress(tag = 'usa-press'): CustomElementConstructor | undef
     (Base) =>
       class UsaPress extends Base {
         static get observedAttributes(): string[] {
-          return ['disabled'];
+          return ['disabled', 'scale', 'bounce'];
         }
 
         private _anim: Animation | null = null;

@@ -27,7 +27,7 @@ export function defineTip(tag = 'usa-tip'): CustomElementConstructor | undefined
     (Base) => {
       class UsaTip extends Base {
         static get observedAttributes(): string[] {
-          return ['text', 'placement', 'trigger'];
+          return ['text', 'placement', 'trigger', 'delay'];
         }
         private _bubble: HTMLElement | null = null;
         private _trigger: HTMLElement | null = null;

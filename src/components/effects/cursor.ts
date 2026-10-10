@@ -393,7 +393,7 @@ export function defineGestureFx(tag = 'usa-gesture-fx'): CustomElementConstructo
     (Base) =>
       class UsaGestureFx extends Base {
         static get observedAttributes(): string[] {
-          return ['gesture', 'effect', 'options'];
+          return ['gesture', 'effect', 'options', 'self', 'velocity', 'angle', 'duration'];
         }
         get gesture(): GestureName {
           const g = this.str('gesture', 'fling') as GestureName;

@@ -61,7 +61,7 @@ export function defineIconMorph(tag = 'usa-icon-morph'): CustomElementConstructo
     (Base) =>
       class UsaIconMorph extends Base {
         static get observedAttributes(): string[] {
-          return ['icons', 'size', 'toggle'];
+          return ['icons', 'size', 'toggle', 'index', 'preset', 'labels'];
         }
 
         private _i = 0;

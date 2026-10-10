@@ -239,7 +239,7 @@ export function definePlayer(tag = 'usa-player'): CustomElementConstructor | und
     (Base) =>
       class UsaPlayer extends Base {
         static get observedAttributes(): string[] {
-          return ['src', 'trigger', 'loop', 'rate'];
+          return ['src', 'trigger', 'loop', 'rate', 'controls'];
         }
         player: Player | null = null;
         private json: string | AnimationJSON | null = null;
@@ -264,7 +264,8 @@ export function definePlayer(tag = 'usa-player'): CustomElementConstructor | und
             this.player = createPlayer(this, this.json, {
               loop: this.hasAttribute('loop') ? true : undefined,
               rate: this.num('rate', 1),
-              onFinish: () => this.dispatchEvent(new CustomEvent('usa-player-finish', { bubbles: true })),
+              // contract-exempt: event-prefix — legacy usa-player-ready / usa-player-finish kept next to usa:ready / usa:finish until 12.0
+              onFinish: () => (this.dispatchEvent(new CustomEvent('usa-player-finish', { bubbles: true })), this.emit('finish')),
             });
             this.removeAttribute('data-error');
           } catch (err) {
@@ -273,8 +274,10 @@ export function definePlayer(tag = 'usa-player'): CustomElementConstructor | und
           }
           const p = this.player;
           this.dispatchEvent(new CustomEvent('usa-player-ready', { detail: { duration: p.duration }, bubbles: true }));
+          this.emit('ready', { duration: p.duration });
           const trig = this.str('trigger', 'view');
-          if (trig === 'load') p.play();
+          if (this.reduced && (trig === 'load' || trig === 'view')) p.seek(p.duration); // reduced motion: show the end state
+          else if (trig === 'load') p.play();
           else if (trig === 'view') this.inView((v) => v && p.play(), { threshold: 0.25 });
           else if (trig === 'click') this.listen(this, 'click', () => (p.playing ? p.pause() : p.play()));
           else if (trig === 'scroll') {

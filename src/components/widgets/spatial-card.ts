@@ -46,6 +46,7 @@ export function defineSpatialCard(tag = 'usa-spatial-card'): CustomElementConstr
           this.listen(this, 'focusout', (e: FocusEvent) => {
             if (!this.contains(e.relatedTarget as Node)) set(false);
           });
+          // contract-exempt: keyboard-click-only — pointer-driven depth decoration, no action
           this.listen(this, 'pointerdown', () => {
             if (!this.reduced) this.motion(this, [{ transform: 'perspective(900px) translateZ(18px)' }, { transform: 'perspective(900px) translateZ(-6px)', offset: 0.4 }, { transform: 'perspective(900px) translateZ(18px)' }], { duration: 320, easing: 'ease-out' });
           });

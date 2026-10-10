@@ -38,7 +38,7 @@ export function defineSnapCarousel(tag = 'usa-snap-carousel'): CustomElementCons
     (Base) => {
       class UsaSnapCarousel extends Base {
         static get observedAttributes(): string[] {
-          return ['align', 'gap', 'autoplay', 'no-controls', 'no-dots', 'label'];
+          return ['align', 'gap', 'autoplay', 'no-controls', 'no-dots', 'label', 'index'];
         }
         private slides: HTMLElement[] = [];
         private ds: DragSnap | null = null;

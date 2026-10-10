@@ -1,4 +1,5 @@
 import { defineElement, type UsaElement } from '../base';
+import { keyClick } from '../key-click';
 import { roughLine } from '../fx2/paper';
 import css from './sketch-chart.css?raw';
 
@@ -69,6 +70,7 @@ export function defineSketchChart(tag = 'usa-sketch-chart'): CustomElementConstr
           this.insertAdjacentHTML('beforeend', `<svg class="usa-sk" viewBox="0 0 ${W} ${H}" aria-hidden="true" data-usa-part>${g}</svg>`);
           if (this.reduced) return void this.setAttribute('data-drawn', '');
           this.listen(this, 'click', () => this.redraw());
+          keyClick(this as any);
           let done = false;
           this.inView((v) => {
             if (v && !done) {

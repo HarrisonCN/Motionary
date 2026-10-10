@@ -30,7 +30,7 @@ export function defineSplitText(tag = 'usa-split-text'): CustomElementConstructo
     (Base) =>
       class UsaSplitText extends Base {
         static get observedAttributes(): string[] {
-          return ['by', 'text'];
+          return ['by', 'text', 'from', 'stagger', 'duration', 'delay', 'trigger', 'repeat'];
         }
 
         private _source: string | null = null;

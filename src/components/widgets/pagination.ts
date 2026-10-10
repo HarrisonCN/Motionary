@@ -34,7 +34,7 @@ export function definePagination(tag = 'usa-pagination'): CustomElementConstruct
     (Base) => {
       class UsaPagination extends Base {
         static get observedAttributes(): string[] {
-          return ['total', 'siblings'];
+          return ['total', 'siblings', 'label'];
         }
         private _page = 1;
         private _ink: HTMLElement | null = null;

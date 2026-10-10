@@ -20,7 +20,7 @@ export function defineBarChart(tag = 'usa-bar-chart'): CustomElementConstructor 
     (Base) => {
       class UsaBarChart extends Base {
         static get observedAttributes(): string[] {
-          return ['horizontal', 'unit', 'max'];
+          return ['horizontal', 'unit', 'max', 'values', 'labels', 'label'];
         }
         private _data: { label: string; value: number }[] = [];
         private _seen = false;

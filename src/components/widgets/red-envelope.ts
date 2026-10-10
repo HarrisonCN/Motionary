@@ -24,7 +24,7 @@ export function defineRedEnvelope(tag = 'usa-red-envelope'): CustomElementConstr
     (Base) => {
       class UsaRedEnvelope extends Base {
         static get observedAttributes(): string[] {
-          return ['amount', 'currency', 'message', 'from'];
+          return ['amount', 'currency', 'message', 'from', 'opened'];
         }
         get opened(): boolean {
           return this.hasAttribute('data-open');

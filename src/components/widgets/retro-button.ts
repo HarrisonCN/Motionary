@@ -23,7 +23,7 @@ export function defineRetroButton(tag = 'usa-retro-button'): CustomElementConstr
     (Base) => {
       class UsaRetroButton extends Base {
         static get observedAttributes(): string[] {
-          return ['variant', 'disabled'];
+          return ['variant', 'disabled', 'type'];
         }
         get button(): HTMLButtonElement | null {
           return this.querySelector('.usa-rb');

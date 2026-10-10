@@ -22,7 +22,7 @@ export function defineNavMorph(tag = 'usa-nav-morph'): CustomElementConstructor 
     (Base) => {
       class UsaNavMorph extends Base {
         static get observedAttributes(): string[] {
-          return ['indicator'];
+          return ['indicator', 'label', 'active'];
         }
         private _links: HTMLElement[] = [];
         private _ink: HTMLElement | null = null;

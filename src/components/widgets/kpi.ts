@@ -21,7 +21,7 @@ export function defineKpi(tag = 'usa-kpi'): CustomElementConstructor | undefined
     (Base) => {
       class UsaKpi extends Base {
         static get observedAttributes(): string[] {
-          return ['label', 'delta', 'caption', 'trend', 'invert'];
+          return ['label', 'delta', 'caption', 'trend', 'invert', 'locale'];
         }
         private _shown = 0;
         private _raf = 0;

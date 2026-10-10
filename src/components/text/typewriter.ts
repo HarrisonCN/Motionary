@@ -27,7 +27,7 @@ export function defineTypewriter(tag = 'usa-typewriter'): CustomElementConstruct
     (Base) =>
       class UsaTypewriter extends Base {
         static get observedAttributes(): string[] {
-          return ['text', 'words'];
+          return ['text', 'words', 'start', 'speed', 'delete-speed', 'pause', 'loop', 'delay'];
         }
 
         private _source: string | null = null;

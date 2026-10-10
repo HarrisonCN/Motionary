@@ -30,7 +30,7 @@ export function defineCountdown(tag = 'usa-countdown'): CustomElementConstructor
     (Base) => {
       class UsaCountdown extends Base {
         static get observedAttributes(): string[] {
-          return ['to', 'seconds'];
+          return ['to', 'seconds', 'units', 'labels', 'label'];
         }
         private _end = 0;
         private _timer: ReturnType<typeof setInterval> | 0 = 0;

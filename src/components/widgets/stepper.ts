@@ -24,7 +24,7 @@ export function defineStepper(tag = 'usa-stepper'): CustomElementConstructor | u
     (Base) => {
       class UsaStepper extends Base {
         static get observedAttributes(): string[] {
-          return ['orientation'];
+          return ['orientation', 'label', 'clickable'];
         }
         private _steps: HTMLElement[] = [];
         private _v = 0;

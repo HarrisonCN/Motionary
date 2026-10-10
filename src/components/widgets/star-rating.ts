@@ -32,7 +32,7 @@ export function defineStarRating(tag = 'usa-star-rating'): CustomElementConstruc
       class UsaStarRating extends Base {
         static formAssociated = true;
         static get observedAttributes(): string[] {
-          return ['max', 'icon', 'readonly', 'step'];
+          return ['max', 'icon', 'readonly', 'step', 'label', 'value'];
         }
         private _internals: ElementInternals | null = null;
         constructor() {

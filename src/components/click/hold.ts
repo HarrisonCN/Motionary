@@ -23,7 +23,7 @@ export function defineHold(tag = 'usa-hold'): CustomElementConstructor | undefin
     (Base) =>
       class UsaHold extends Base {
         static get observedAttributes(): string[] {
-          return ['duration', 'disabled'];
+          return ['duration', 'disabled', 'color', 'label'];
         }
 
         private _p = 0;
@@ -92,6 +92,7 @@ export function defineHold(tag = 'usa-hold'): CustomElementConstructor | undefin
               }, 700);
               return;
             }
+            // contract-exempt: reduced-motion — the fill follows the press and is the feedback itself
             this._frame = raf(tick);
           };
           this._frame = raf(tick);

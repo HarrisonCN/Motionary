@@ -24,7 +24,7 @@ export function defineSwitch(tag = 'usa-switch'): CustomElementConstructor | und
     (Base) => {
       class UsaSwitch extends Base {
         static get observedAttributes(): string[] {
-          return ['variant'];
+          return ['variant', 'label', 'name', 'value', 'disabled'];
         }
         private _on = false;
         private _input: HTMLInputElement | null = null;

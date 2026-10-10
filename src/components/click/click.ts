@@ -34,7 +34,7 @@ export function defineClick(tag = 'usa-click'): CustomElementConstructor | undef
     (Base) =>
       class UsaClick extends Base {
         static get observedAttributes(): string[] {
-          return ['effect', 'disabled'];
+          return ['effect', 'disabled', 'trigger', 'color', 'count', 'shape', 'haptic'];
         }
 
         private _press: Animation | null = null;

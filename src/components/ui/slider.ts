@@ -24,7 +24,7 @@ export function defineSlider(tag = 'usa-slider'): CustomElementConstructor | und
       class UsaSlider extends Base {
         static formAssociated = true;
         static get observedAttributes(): string[] {
-          return ['min', 'max', 'disabled', 'label'];
+          return ['min', 'max', 'disabled', 'label', 'step', 'value'];
         }
         private _internals: ElementInternals | null = null;
         private _v = 0;

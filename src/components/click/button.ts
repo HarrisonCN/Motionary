@@ -57,7 +57,7 @@ export function defineButton(tag = 'usa-button'): CustomElementConstructor | und
     (Base) =>
       class UsaButton extends Base {
         static get observedAttributes(): string[] {
-          return ['deform', 'state', 'shape', 'disabled'];
+          return ['deform', 'state', 'shape', 'disabled', 'morph', 'haptic', 'reset'];
         }
 
         private _press: Animation | null = null;

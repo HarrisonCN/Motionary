@@ -30,7 +30,7 @@ export function defineEqualizer(tag = 'usa-equalizer'): CustomElementConstructor
     (Base) => {
       class UsaEqualizer extends Base {
         static get observedAttributes(): string[] {
-          return ['bands'];
+          return ['bands', 'preset', 'label'];
         }
         private _v: number[] = [];
 

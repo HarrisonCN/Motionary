@@ -23,7 +23,7 @@ export function defineThemeSwitcher(tag = 'usa-theme-switcher'): CustomElementCo
     (Base) => {
       class UsaThemeSwitcher extends Base {
         static get observedAttributes(): string[] {
-          return ['themes', 'target', 'label'];
+          return ['themes', 'target', 'label', 'persist', 'value'];
         }
         private _v = '';
         private list(): string[] {

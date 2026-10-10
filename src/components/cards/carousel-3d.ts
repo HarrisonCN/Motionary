@@ -25,7 +25,7 @@ export function defineCarousel3d(tag = 'usa-carousel-3d'): CustomElementConstruc
     (Base) =>
       class UsaCarousel3d extends Base {
         static get observedAttributes(): string[] {
-          return ['radius', 'perspective', 'autoplay'];
+          return ['radius', 'perspective', 'autoplay', 'index'];
         }
 
         private _angle!: SpringValue;

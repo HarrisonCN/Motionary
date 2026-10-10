@@ -24,7 +24,7 @@ export function defineSegmented(tag = 'usa-segmented'): CustomElementConstructor
     (Base) => {
       class UsaSegmented extends Base {
         static get observedAttributes(): string[] {
-          return ['variant'];
+          return ['variant', 'label', 'value'];
         }
         private _segs: HTMLElement[] = [];
         private _v = 0;

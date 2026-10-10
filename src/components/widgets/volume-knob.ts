@@ -22,7 +22,7 @@ export function defineVolumeKnob(tag = 'usa-volume-knob'): CustomElementConstruc
     (Base) => {
       class UsaVolumeKnob extends Base {
         static get observedAttributes(): string[] {
-          return ['min', 'max'];
+          return ['min', 'max', 'label'];
         }
         private _v = 50;
 

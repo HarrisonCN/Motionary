@@ -3,44 +3,36 @@
   "version": 1,
   "summary": {
     "components": 207,
-    "clean": 78,
-    "findings": 314,
+    "clean": 164,
+    "findings": 102,
+    "exempt": 16,
     "byRule": {
-      "attr-unobserved": 284,
-      "event-prefix": 5,
-      "event-bubbles": 1,
-      "keyboard-click-only": 15,
-      "lifecycle-global-listener": 1,
+      "attr-unobserved": 102,
+      "event-prefix": 0,
+      "event-bubbles": 0,
+      "keyboard-click-only": 0,
+      "lifecycle-global-listener": 0,
       "lifecycle-timer": 0,
-      "reduced-motion": 7,
-      "error-prefix": 1
+      "reduced-motion": 0,
+      "error-prefix": 0
     }
   },
   "components": [
     {
       "tag": "usa-accordion",
       "file": "src/components/transitions/accordion.ts",
-      "attributes": [],
+      "attributes": [
+        "multiple",
+        "duration"
+      ],
       "events": [
         "usa:toggle"
       ],
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "multiple"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "duration"
-        },
-        {
-          "rule": "keyboard-click-only",
-          "detail": "not focusable"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-acrylic",
@@ -55,6 +47,7 @@
       "keyboard": false,
       "lifecycle": false,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -67,6 +60,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
         {
           "rule": "attr-unobserved",
@@ -100,22 +94,16 @@
       "attributes": [
         "effect",
         "density",
-        "color"
+        "color",
+        "opacity",
+        "speed"
       ],
       "events": [],
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "opacity"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "speed"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-anim-icon",
@@ -123,55 +111,39 @@
       "attributes": [
         "name",
         "size",
-        "label"
+        "label",
+        "trigger"
       ],
       "events": [],
-      "keyboard": false,
+      "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "trigger"
-        },
-        {
-          "rule": "keyboard-click-only",
-          "detail": "not focusable"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-audio",
       "file": "src/components/effects/audio.ts",
       "attributes": [
-        "source"
+        "source",
+        "label",
+        "threshold",
+        "cooldown"
       ],
-      "events": [],
+      "events": [
+        "usa:beat",
+        "usa:audio-error"
+      ],
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "label"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "threshold"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "cooldown"
-        },
+      "exempt": [
         {
           "rule": "event-prefix",
-          "detail": "usa-beat"
-        },
-        {
-          "rule": "event-prefix",
-          "detail": "usa-audio-error"
+          "reason": "legacy usa-beat / usa-audio-error kept next to usa:beat / usa:audio-error until 12.0"
         }
-      ]
+      ],
+      "findings": []
     },
     {
       "tag": "usa-aurora",
@@ -185,6 +157,7 @@
       "keyboard": false,
       "lifecycle": false,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -195,6 +168,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
         {
           "rule": "attr-unobserved",
@@ -216,6 +190,7 @@
       "keyboard": false,
       "lifecycle": false,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -224,18 +199,15 @@
       "attributes": [
         "max",
         "size",
-        "overlap"
+        "overlap",
+        "label"
       ],
       "events": [],
       "keyboard": false,
       "lifecycle": false,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "label"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-back-to-top",
@@ -244,7 +216,13 @@
       "events": [],
       "keyboard": false,
       "lifecycle": true,
-      "reducedMotion": false,
+      "reducedMotion": true,
+      "exempt": [
+        {
+          "rule": "reduced-motion",
+          "reason": "rAF only throttles the scroll-synced visibility check, no decorative motion"
+        }
+      ],
       "findings": [
         {
           "rule": "attr-unobserved",
@@ -257,10 +235,6 @@
         {
           "rule": "attr-unobserved",
           "detail": "focus-target"
-        },
-        {
-          "rule": "reduced-motion",
-          "detail": "animates without a reduced-motion check"
         }
       ]
     },
@@ -271,18 +245,15 @@
         "value",
         "max",
         "dot",
-        "label"
+        "label",
+        "show-zero"
       ],
       "events": [],
       "keyboard": false,
       "lifecycle": false,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "show-zero"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-badge-wall",
@@ -294,6 +265,7 @@
       "keyboard": false,
       "lifecycle": false,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
         {
           "rule": "attr-unobserved",
@@ -307,32 +279,26 @@
       "attributes": [
         "horizontal",
         "unit",
-        "max"
+        "max",
+        "values",
+        "labels",
+        "label"
       ],
       "events": [],
       "keyboard": false,
       "lifecycle": false,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "values"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "labels"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "label"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-bg-generator",
       "file": "src/components/widgets/bg-generator.ts",
       "attributes": [
-        "label"
+        "label",
+        "palette",
+        "style",
+        "seed"
       ],
       "events": [
         "usa:change"
@@ -340,20 +306,8 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "palette"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "style"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "seed"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-blobs",
@@ -363,6 +317,7 @@
       "keyboard": false,
       "lifecycle": false,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
         {
           "rule": "attr-unobserved",
@@ -383,18 +338,15 @@
       "file": "src/components/ui/sheet.ts",
       "attributes": [
         "open",
-        "snap"
+        "snap",
+        "start"
       ],
       "events": [],
       "keyboard": false,
       "lifecycle": false,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "start"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-button",
@@ -403,7 +355,10 @@
         "deform",
         "state",
         "shape",
-        "disabled"
+        "disabled",
+        "morph",
+        "haptic",
+        "reset"
       ],
       "events": [
         "usa:submit",
@@ -412,20 +367,8 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "morph"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "haptic"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "reset"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-card",
@@ -433,7 +376,9 @@
       "attributes": [
         "effect",
         "trigger",
-        "disabled"
+        "disabled",
+        "color",
+        "depth"
       ],
       "events": [
         "usa:flip",
@@ -443,6 +388,7 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
         {
           "rule": "attr-unobserved",
@@ -451,14 +397,6 @@
         {
           "rule": "attr-unobserved",
           "detail": "expanded"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "color"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "depth"
         }
       ]
     },
@@ -468,7 +406,9 @@
       "attributes": [
         "visible",
         "offset",
-        "disabled"
+        "disabled",
+        "threshold",
+        "loop"
       ],
       "events": [
         "usa:swipe",
@@ -477,16 +417,8 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "threshold"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "loop"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-carousel",
@@ -496,7 +428,9 @@
         "autoplay",
         "loop",
         "no-controls",
-        "no-dots"
+        "no-dots",
+        "label",
+        "index"
       ],
       "events": [
         "usa:change"
@@ -504,16 +438,8 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "label"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "index"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-carousel-3d",
@@ -521,7 +447,8 @@
       "attributes": [
         "radius",
         "perspective",
-        "autoplay"
+        "autoplay",
+        "index"
       ],
       "events": [
         "usa:change"
@@ -529,12 +456,8 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "index"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-cart-drawer",
@@ -548,6 +471,7 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
         {
           "rule": "attr-unobserved",
@@ -577,6 +501,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -586,7 +511,8 @@
         "placeholder",
         "label",
         "rows",
-        "busy"
+        "busy",
+        "value"
       ],
       "events": [
         "usa:stop",
@@ -595,12 +521,8 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "value"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-check",
@@ -608,7 +530,8 @@
       "attributes": [
         "kind",
         "size",
-        "label"
+        "label",
+        "start"
       ],
       "events": [
         "usa:complete"
@@ -616,12 +539,8 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "start"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-checkbox",
@@ -630,7 +549,8 @@
         "checked",
         "indeterminate",
         "disabled",
-        "label"
+        "label",
+        "value"
       ],
       "events": [
         "usa:change"
@@ -638,19 +558,20 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "value"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-click",
       "file": "src/components/click/click.ts",
       "attributes": [
         "effect",
-        "disabled"
+        "disabled",
+        "trigger",
+        "color",
+        "count",
+        "shape",
+        "haptic"
       ],
       "events": [
         "usa:click-effect"
@@ -658,28 +579,8 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "trigger"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "color"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "count"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "shape"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "haptic"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-clock-control",
@@ -694,6 +595,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -709,6 +611,7 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -724,6 +627,7 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
         {
           "rule": "attr-unobserved",
@@ -748,6 +652,7 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -755,7 +660,11 @@
       "file": "src/components/widgets/compare.ts",
       "attributes": [
         "orientation",
-        "labels"
+        "labels",
+        "label",
+        "position",
+        "hover",
+        "intro"
       ],
       "events": [
         "usa:change"
@@ -763,31 +672,18 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "label"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "position"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "hover"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "intro"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-countdown",
       "file": "src/components/widgets/countdown.ts",
       "attributes": [
         "to",
-        "seconds"
+        "seconds",
+        "units",
+        "labels",
+        "label"
       ],
       "events": [
         "usa:tick",
@@ -796,20 +692,8 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "units"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "labels"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "label"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-counter",
@@ -820,7 +704,10 @@
         "locale",
         "prefix",
         "suffix",
-        "grouping"
+        "grouping",
+        "from",
+        "start",
+        "duration"
       ],
       "events": [
         "usa:complete"
@@ -828,27 +715,16 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "from"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "start"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "duration"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-cube",
       "file": "src/components/depth/cube.ts",
       "attributes": [
         "size",
-        "autoplay"
+        "autoplay",
+        "perspective"
       ],
       "events": [
         "usa:change"
@@ -856,19 +732,16 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "perspective"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-cube-gallery",
       "file": "src/components/widgets/cube-gallery.ts",
       "attributes": [
         "axis",
-        "autoplay"
+        "autoplay",
+        "label"
       ],
       "events": [
         "usa:change"
@@ -876,12 +749,8 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "label"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-cursor",
@@ -890,18 +759,15 @@
         "mode",
         "size",
         "color",
-        "hide-native"
+        "hide-native",
+        "targets"
       ],
       "events": [],
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "targets"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-date-picker",
@@ -918,6 +784,7 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -932,6 +799,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -940,7 +808,9 @@
       "attributes": [
         "open",
         "kind",
-        "label"
+        "label",
+        "no-esc",
+        "no-backdrop-close"
       ],
       "events": [
         "usa:open",
@@ -950,20 +820,8 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "no-esc"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "no-backdrop-close"
-        },
-        {
-          "rule": "keyboard-click-only",
-          "detail": "not focusable"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-disclosure",
@@ -975,6 +833,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
         {
           "rule": "attr-unobserved",
@@ -983,10 +842,6 @@
         {
           "rule": "attr-unobserved",
           "detail": "spring"
-        },
-        {
-          "rule": "keyboard-click-only",
-          "detail": "not focusable"
         }
       ]
     },
@@ -998,6 +853,7 @@
       "keyboard": false,
       "lifecycle": false,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -1006,22 +862,16 @@
       "attributes": [
         "orientation",
         "magnify",
-        "range"
+        "range",
+        "label",
+        "bounce"
       ],
       "events": [],
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "label"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "bounce"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-dot-network",
@@ -1031,6 +881,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
         {
           "rule": "attr-unobserved",
@@ -1061,6 +912,7 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -1073,6 +925,7 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
         {
           "rule": "attr-unobserved",
@@ -1098,7 +951,12 @@
       "attributes": [
         "axis",
         "disabled",
-        "preset"
+        "preset",
+        "bounds",
+        "spring-back",
+        "inertia",
+        "snap",
+        "step"
       ],
       "events": [
         "usa:settle",
@@ -1109,28 +967,8 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "bounds"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "spring-back"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "inertia"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "snap"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "step"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-draw",
@@ -1139,9 +977,10 @@
       "events": [
         "usa:complete"
       ],
-      "keyboard": false,
+      "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
         {
           "rule": "attr-unobserved",
@@ -1158,10 +997,6 @@
         {
           "rule": "attr-unobserved",
           "detail": "repeat"
-        },
-        {
-          "rule": "keyboard-click-only",
-          "detail": "not focusable"
         }
       ]
     },
@@ -1173,13 +1008,16 @@
       "keyboard": false,
       "lifecycle": false,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
       "tag": "usa-equalizer",
       "file": "src/components/widgets/equalizer.ts",
       "attributes": [
-        "bands"
+        "bands",
+        "preset",
+        "label"
       ],
       "events": [
         "usa:change"
@@ -1187,16 +1025,8 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "preset"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "label"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-fab",
@@ -1211,6 +1041,7 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
         {
           "rule": "attr-unobserved",
@@ -1232,6 +1063,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -1250,6 +1082,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -1262,6 +1095,7 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
         {
           "rule": "attr-unobserved",
@@ -1291,6 +1125,7 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
         {
           "rule": "attr-unobserved",
@@ -1308,22 +1143,16 @@
       "attributes": [
         "effect",
         "trigger",
-        "options"
+        "options",
+        "self",
+        "once"
       ],
       "events": [],
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "self"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "once"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-gauge",
@@ -1333,18 +1162,15 @@
         "max",
         "zones",
         "unit",
-        "label"
+        "label",
+        "value"
       ],
       "events": [],
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "value"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-gen-art",
@@ -1361,6 +1187,7 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -1369,30 +1196,18 @@
       "attributes": [
         "gesture",
         "effect",
-        "options"
+        "options",
+        "self",
+        "velocity",
+        "angle",
+        "duration"
       ],
       "events": [],
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "self"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "velocity"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "angle"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "duration"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-gesture-sticker",
@@ -1408,6 +1223,7 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -1418,6 +1234,7 @@
       "keyboard": false,
       "lifecycle": false,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -1446,6 +1263,7 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -1459,6 +1277,7 @@
       "keyboard": false,
       "lifecycle": false,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -1467,7 +1286,8 @@
       "attributes": [
         "markers",
         "speed",
-        "tilt"
+        "tilt",
+        "lon"
       ],
       "events": [
         "usa:focus"
@@ -1475,16 +1295,13 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "lon"
-        },
+      "exempt": [
         {
           "rule": "keyboard-click-only",
-          "detail": "not focusable"
+          "reason": "drag-to-rotate decoration; the globe auto-rotates and carries no action"
         }
-      ]
+      ],
+      "findings": []
     },
     {
       "tag": "usa-gpu-particles",
@@ -1505,12 +1322,8 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "error-prefix",
-          "detail": "no adapter"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-gradient-text",
@@ -1524,6 +1337,7 @@
       "keyboard": false,
       "lifecycle": false,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -1538,6 +1352,7 @@
       "keyboard": false,
       "lifecycle": false,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -1548,6 +1363,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
         {
           "rule": "attr-unobserved",
@@ -1573,15 +1389,11 @@
       "events": [
         "usa:tilt"
       ],
-      "keyboard": false,
+      "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "keyboard-click-only",
-          "detail": "not focusable"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-handwriting",
@@ -1589,7 +1401,9 @@
       "attributes": [
         "text",
         "size",
-        "font"
+        "font",
+        "stroke",
+        "duration"
       ],
       "events": [
         "usa:complete"
@@ -1597,16 +1411,8 @@
       "keyboard": false,
       "lifecycle": false,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "stroke"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "duration"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-hero-video",
@@ -1620,6 +1426,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -1627,7 +1434,9 @@
       "file": "src/components/click/hold.ts",
       "attributes": [
         "duration",
-        "disabled"
+        "disabled",
+        "color",
+        "label"
       ],
       "events": [
         "usa:progress",
@@ -1636,21 +1445,14 @@
       ],
       "keyboard": true,
       "lifecycle": true,
-      "reducedMotion": false,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "color"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "label"
-        },
+      "reducedMotion": true,
+      "exempt": [
         {
           "rule": "reduced-motion",
-          "detail": "animates without a reduced-motion check"
+          "reason": "the fill follows the press and is the feedback itself"
         }
-      ]
+      ],
+      "findings": []
     },
     {
       "tag": "usa-hud-panel",
@@ -1666,6 +1468,7 @@
       "keyboard": false,
       "lifecycle": false,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -1682,6 +1485,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -1690,7 +1494,10 @@
       "attributes": [
         "icons",
         "size",
-        "toggle"
+        "toggle",
+        "index",
+        "preset",
+        "labels"
       ],
       "events": [
         "usa:change"
@@ -1698,20 +1505,8 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "index"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "preset"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "labels"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-install-button",
@@ -1729,6 +1524,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -1741,6 +1537,7 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
         {
           "rule": "attr-unobserved",
@@ -1758,6 +1555,7 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
         {
           "rule": "attr-unobserved",
@@ -1773,20 +1571,18 @@
         "delta",
         "caption",
         "trend",
-        "invert"
+        "invert",
+        "locale"
       ],
       "events": [],
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
         {
           "rule": "attr-unobserved",
           "detail": "value"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "locale"
         }
       ]
     },
@@ -1800,6 +1596,7 @@
       "keyboard": false,
       "lifecycle": false,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
         {
           "rule": "attr-unobserved",
@@ -1822,7 +1619,10 @@
         "liked",
         "count",
         "label",
-        "disabled"
+        "disabled",
+        "size",
+        "color",
+        "haptic"
       ],
       "events": [
         "usa:change"
@@ -1830,20 +1630,8 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "size"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "color"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "haptic"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-liquid",
@@ -1853,13 +1641,15 @@
       "keyboard": false,
       "lifecycle": false,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
       "tag": "usa-liquid-nav",
       "file": "src/components/widgets/liquid-nav.ts",
       "attributes": [
-        "label"
+        "label",
+        "value"
       ],
       "events": [
         "usa:change"
@@ -1867,12 +1657,8 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "value"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-loading-bar",
@@ -1882,6 +1668,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
         {
           "rule": "attr-unobserved",
@@ -1917,6 +1704,7 @@
       "keyboard": false,
       "lifecycle": false,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -1936,6 +1724,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -1949,15 +1738,11 @@
         "trigger"
       ],
       "events": [],
-      "keyboard": false,
+      "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "keyboard-click-only",
-          "detail": "not focusable"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-lottie-player",
@@ -1984,6 +1769,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -1996,6 +1782,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
         {
           "rule": "attr-unobserved",
@@ -2019,6 +1806,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -2028,18 +1816,15 @@
         "speed",
         "direction",
         "gap",
-        "paused"
+        "paused",
+        "pause-on-hover"
       ],
       "events": [],
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "pause-on-hover"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-mask-reveal",
@@ -2048,9 +1833,10 @@
       "events": [
         "usa:complete"
       ],
-      "keyboard": false,
+      "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
         {
           "rule": "attr-unobserved",
@@ -2075,10 +1861,6 @@
         {
           "rule": "attr-unobserved",
           "detail": "repeat"
-        },
-        {
-          "rule": "keyboard-click-only",
-          "detail": "not focusable"
         }
       ]
     },
@@ -2093,13 +1875,14 @@
       "events": [],
       "keyboard": false,
       "lifecycle": true,
-      "reducedMotion": false,
-      "findings": [
+      "reducedMotion": true,
+      "exempt": [
         {
           "rule": "reduced-motion",
-          "detail": "animates without a reduced-motion check"
+          "reason": "rAF batches layout, no motion"
         }
-      ]
+      ],
+      "findings": []
     },
     {
       "tag": "usa-masonry-flow",
@@ -2114,6 +1897,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -2131,13 +1915,16 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
       "tag": "usa-menu-toggle",
       "file": "src/components/widgets/menu-toggle.ts",
       "attributes": [
-        "variant"
+        "variant",
+        "label",
+        "for"
       ],
       "events": [
         "usa:toggle"
@@ -2145,15 +1932,8 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "label"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "for"
-        },
         {
           "rule": "attr-unobserved",
           "detail": "pressed"
@@ -2170,6 +1950,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
         {
           "rule": "attr-unobserved",
@@ -2189,6 +1970,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -2196,7 +1978,9 @@
       "file": "src/components/svg/morph.ts",
       "attributes": [
         "paths",
-        "trigger"
+        "trigger",
+        "duration",
+        "interval"
       ],
       "events": [
         "usa:change"
@@ -2204,16 +1988,8 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "duration"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "interval"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-motion",
@@ -2227,6 +2003,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -2242,6 +2019,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -2256,6 +2034,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -2274,6 +2053,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -2289,6 +2069,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -2301,6 +2082,7 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
         {
           "rule": "attr-unobserved",
@@ -2322,6 +2104,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -2331,7 +2114,8 @@
         "title",
         "artist",
         "cover",
-        "src"
+        "src",
+        "duration"
       ],
       "events": [
         "usa:play",
@@ -2341,12 +2125,8 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "duration"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-native-preview",
@@ -2362,13 +2142,16 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
       "tag": "usa-nav-morph",
       "file": "src/components/widgets/nav-morph.ts",
       "attributes": [
-        "indicator"
+        "indicator",
+        "label",
+        "active"
       ],
       "events": [
         "usa:change"
@@ -2376,16 +2159,8 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "label"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "active"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-navbar",
@@ -2397,7 +2172,13 @@
       ],
       "keyboard": false,
       "lifecycle": true,
-      "reducedMotion": false,
+      "reducedMotion": true,
+      "exempt": [
+        {
+          "rule": "reduced-motion",
+          "reason": "rAF only throttles the scroll-synced hide / show check"
+        }
+      ],
       "findings": [
         {
           "rule": "attr-unobserved",
@@ -2406,10 +2187,6 @@
         {
           "rule": "attr-unobserved",
           "detail": "threshold"
-        },
-        {
-          "rule": "reduced-motion",
-          "detail": "animates without a reduced-motion check"
         }
       ]
     },
@@ -2424,6 +2201,7 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
         {
           "rule": "attr-unobserved",
@@ -2439,18 +2217,15 @@
         "locale",
         "decimals",
         "prefix",
-        "suffix"
+        "suffix",
+        "duration"
       ],
       "events": [],
       "keyboard": false,
       "lifecycle": false,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "duration"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-organic-card",
@@ -2463,6 +2238,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -2471,7 +2247,8 @@
       "attributes": [
         "length",
         "mode",
-        "label"
+        "label",
+        "value"
       ],
       "events": [
         "usa:complete"
@@ -2479,34 +2256,24 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "value"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-overscroll",
       "file": "src/components/physics/overscroll.ts",
       "attributes": [
         "axis",
-        "disabled"
+        "disabled",
+        "max",
+        "preset"
       ],
       "events": [],
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "max"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "preset"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-pack",
@@ -2518,6 +2285,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -2525,7 +2293,8 @@
       "file": "src/components/widgets/pagination.ts",
       "attributes": [
         "total",
-        "siblings"
+        "siblings",
+        "label"
       ],
       "events": [
         "usa:change"
@@ -2533,11 +2302,8 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "label"
-        },
         {
           "rule": "attr-unobserved",
           "detail": "page"
@@ -2560,6 +2326,7 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -2579,6 +2346,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -2597,6 +2365,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -2613,6 +2382,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -2628,6 +2398,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -2648,6 +2419,7 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
         {
           "rule": "attr-unobserved",
@@ -2665,6 +2437,7 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
         {
           "rule": "attr-unobserved",
@@ -2691,30 +2464,23 @@
         "src",
         "trigger",
         "loop",
-        "rate"
+        "rate",
+        "controls"
       ],
-      "events": [],
+      "events": [
+        "usa:finish",
+        "usa:ready"
+      ],
       "keyboard": false,
       "lifecycle": true,
-      "reducedMotion": false,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "controls"
-        },
+      "reducedMotion": true,
+      "exempt": [
         {
           "rule": "event-prefix",
-          "detail": "usa-player-finish"
-        },
-        {
-          "rule": "event-prefix",
-          "detail": "usa-player-ready"
-        },
-        {
-          "rule": "reduced-motion",
-          "detail": "animates without a reduced-motion check"
+          "reason": "legacy usa-player-ready / usa-player-finish kept next to usa:ready / usa:finish until 12.0"
         }
-      ]
+      ],
+      "findings": []
     },
     {
       "tag": "usa-plugin-card",
@@ -2736,6 +2502,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -2752,6 +2519,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -2762,6 +2530,7 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
         {
           "rule": "attr-unobserved",
@@ -2781,6 +2550,7 @@
       "keyboard": false,
       "lifecycle": false,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -2796,28 +2566,23 @@
       "keyboard": false,
       "lifecycle": false,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
       "tag": "usa-press",
       "file": "src/components/interaction/press.ts",
       "attributes": [
-        "disabled"
+        "disabled",
+        "scale",
+        "bounce"
       ],
       "events": [],
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "scale"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "bounce"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-prize-wheel",
@@ -2829,6 +2594,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
         {
           "rule": "attr-unobserved",
@@ -2852,7 +2618,9 @@
       "tag": "usa-product-gallery",
       "file": "src/components/widgets/product-gallery.ts",
       "attributes": [
-        "index"
+        "index",
+        "nozoom",
+        "zoom"
       ],
       "events": [
         "usa:change"
@@ -2860,16 +2628,8 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "nozoom"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "zoom"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-progress",
@@ -2886,6 +2646,7 @@
       "keyboard": false,
       "lifecycle": false,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -2895,7 +2656,9 @@
         "variant",
         "value",
         "max",
-        "gradient"
+        "gradient",
+        "no-label",
+        "duration"
       ],
       "events": [
         "usa:complete"
@@ -2903,16 +2666,8 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "no-label"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "duration"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-prop-panel",
@@ -2928,6 +2683,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -2940,6 +2696,7 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
         {
           "rule": "attr-unobserved",
@@ -2963,6 +2720,12 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [
+        {
+          "rule": "keyboard-click-only",
+          "reason": "touch gesture; the keyboard / button path is refresh()"
+        }
+      ],
       "findings": [
         {
           "rule": "attr-unobserved",
@@ -2975,14 +2738,6 @@
         {
           "rule": "attr-unobserved",
           "detail": "label"
-        },
-        {
-          "rule": "event-bubbles",
-          "detail": "usa:refresh"
-        },
-        {
-          "rule": "keyboard-click-only",
-          "detail": "not focusable"
         }
       ]
     },
@@ -3001,6 +2756,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -3013,6 +2769,7 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
         {
           "rule": "attr-unobserved",
@@ -3035,7 +2792,8 @@
         "amount",
         "currency",
         "message",
-        "from"
+        "from",
+        "opened"
       ],
       "events": [
         "usa:open"
@@ -3043,30 +2801,23 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "opened"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-retro-button",
       "file": "src/components/widgets/retro-button.ts",
       "attributes": [
         "variant",
-        "disabled"
+        "disabled",
+        "type"
       ],
       "events": [],
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "type"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-reveal",
@@ -3076,7 +2827,10 @@
         "distance",
         "repeat",
         "threshold",
-        "root-margin"
+        "root-margin",
+        "duration",
+        "delay",
+        "easing"
       ],
       "events": [
         "usa:enter",
@@ -3086,51 +2840,25 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "duration"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "delay"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "easing"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-ripple",
       "file": "src/components/interaction/ripple.ts",
-      "attributes": [],
+      "attributes": [
+        "disabled",
+        "centered",
+        "color",
+        "opacity",
+        "duration"
+      ],
       "events": [],
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "disabled"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "centered"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "color"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "opacity"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "duration"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-rive",
@@ -3153,6 +2881,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -3161,7 +2890,11 @@
       "attributes": [
         "effect",
         "engine",
-        "cross-document"
+        "cross-document",
+        "current",
+        "links",
+        "history",
+        "selector"
       ],
       "events": [
         "usa:navigate",
@@ -3170,24 +2903,8 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "current"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "links"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "history"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "selector"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-scene",
@@ -3203,13 +2920,17 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
       "tag": "usa-scramble",
       "file": "src/components/text/scramble.ts",
       "attributes": [
-        "text"
+        "text",
+        "trigger",
+        "duration",
+        "chars"
       ],
       "events": [
         "usa:complete"
@@ -3217,42 +2938,24 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "trigger"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "duration"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "chars"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-scroll-highlight",
       "file": "src/components/text/text-fx.ts",
       "attributes": [
         "mode",
-        "text"
+        "text",
+        "color",
+        "dim"
       ],
       "events": [],
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "color"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "dim"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-scroll-progress",
@@ -3266,13 +2969,14 @@
       ],
       "keyboard": false,
       "lifecycle": true,
-      "reducedMotion": false,
-      "findings": [
+      "reducedMotion": true,
+      "exempt": [
         {
           "rule": "reduced-motion",
-          "detail": "animates without a reduced-motion check"
+          "reason": "the bar mirrors scroll position (user-driven), no autonomous motion"
         }
-      ]
+      ],
+      "findings": []
     },
     {
       "tag": "usa-scroll-ring",
@@ -3294,6 +2998,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -3317,6 +3022,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -3331,13 +3037,16 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
       "tag": "usa-segmented",
       "file": "src/components/widgets/segmented.ts",
       "attributes": [
-        "variant"
+        "variant",
+        "label",
+        "value"
       ],
       "events": [
         "usa:change"
@@ -3345,16 +3054,8 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "label"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "value"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-shader",
@@ -3364,6 +3065,7 @@
       "keyboard": false,
       "lifecycle": false,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -3383,6 +3085,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -3398,6 +3101,7 @@
       "keyboard": false,
       "lifecycle": false,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -3415,6 +3119,7 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -3435,6 +3140,7 @@
       "keyboard": false,
       "lifecycle": false,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -3450,6 +3156,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -3465,15 +3172,11 @@
       "events": [
         "usa:drawn"
       ],
-      "keyboard": false,
+      "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "keyboard-click-only",
-          "detail": "not focusable"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-slider",
@@ -3482,7 +3185,9 @@
         "min",
         "max",
         "disabled",
-        "label"
+        "label",
+        "step",
+        "value"
       ],
       "events": [
         "usa:input",
@@ -3491,16 +3196,8 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "step"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "value"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-smooth-scroll",
@@ -3524,12 +3221,13 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
+      "exempt": [
         {
           "rule": "keyboard-click-only",
-          "detail": "not focusable"
+          "reason": "pointer drag on top of native scrolling; keyboard scrolling stays native"
         }
-      ]
+      ],
+      "findings": []
     },
     {
       "tag": "usa-snap-carousel",
@@ -3540,7 +3238,8 @@
         "autoplay",
         "no-controls",
         "no-dots",
-        "label"
+        "label",
+        "index"
       ],
       "events": [
         "usa:change"
@@ -3548,34 +3247,24 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "index"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-sparkline",
       "file": "src/components/widgets/sparkline.ts",
       "attributes": [
         "variant",
-        "color"
+        "color",
+        "values",
+        "label"
       ],
       "events": [],
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "values"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "label"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-spatial-card",
@@ -3587,12 +3276,13 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
+      "exempt": [
         {
           "rule": "keyboard-click-only",
-          "detail": "not focusable"
+          "reason": "pointer-driven depth decoration, no action"
         }
-      ]
+      ],
+      "findings": []
     },
     {
       "tag": "usa-spinner",
@@ -3606,6 +3296,7 @@
       "keyboard": false,
       "lifecycle": false,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -3618,6 +3309,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
         {
           "rule": "attr-unobserved",
@@ -3642,7 +3334,13 @@
       "file": "src/components/text/split-text.ts",
       "attributes": [
         "by",
-        "text"
+        "text",
+        "from",
+        "stagger",
+        "duration",
+        "delay",
+        "trigger",
+        "repeat"
       ],
       "events": [
         "usa:complete"
@@ -3650,32 +3348,8 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "from"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "stagger"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "duration"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "delay"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "trigger"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "repeat"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-spotlight",
@@ -3688,13 +3362,14 @@
       "events": [],
       "keyboard": false,
       "lifecycle": true,
-      "reducedMotion": false,
-      "findings": [
+      "reducedMotion": true,
+      "exempt": [
         {
           "rule": "reduced-motion",
-          "detail": "animates without a reduced-motion check"
+          "reason": "pointer-follow light, not a motion effect (documented to stay on under reduced motion)"
         }
-      ]
+      ],
+      "findings": []
     },
     {
       "tag": "usa-spring",
@@ -3702,7 +3377,13 @@
       "attributes": [
         "effect",
         "trigger",
-        "repeat"
+        "repeat",
+        "stiffness",
+        "damping",
+        "mass",
+        "preset",
+        "duration",
+        "delay"
       ],
       "events": [
         "usa:complete"
@@ -3710,32 +3391,8 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "stiffness"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "damping"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "mass"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "preset"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "duration"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "delay"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-stagger",
@@ -3743,7 +3400,12 @@
       "attributes": [
         "effect",
         "repeat",
-        "threshold"
+        "threshold",
+        "distance",
+        "interval",
+        "delay",
+        "duration",
+        "easing"
       ],
       "events": [
         "usa:enter",
@@ -3752,28 +3414,8 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "distance"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "interval"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "delay"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "duration"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "easing"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-star-rating",
@@ -3782,7 +3424,9 @@
         "max",
         "icon",
         "readonly",
-        "step"
+        "step",
+        "label",
+        "value"
       ],
       "events": [
         "usa:change"
@@ -3790,22 +3434,16 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "label"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "value"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-stepper",
       "file": "src/components/widgets/stepper.ts",
       "attributes": [
-        "orientation"
+        "orientation",
+        "label",
+        "clickable"
       ],
       "events": [
         "usa:change"
@@ -3813,15 +3451,8 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "label"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "clickable"
-        },
         {
           "rule": "attr-unobserved",
           "detail": "value"
@@ -3840,6 +3471,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -3855,6 +3487,7 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -3871,6 +3504,7 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -3878,22 +3512,22 @@
       "file": "src/components/effects/story.ts",
       "attributes": [
         "template",
-        "zoom"
+        "zoom",
+        "label"
       ],
-      "events": [],
+      "events": [
+        "usa:step"
+      ],
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "label"
-        },
+      "exempt": [
         {
           "rule": "event-prefix",
-          "detail": "usa-story-step"
+          "reason": "legacy usa-story-step kept next to usa:step until 12.0"
         }
-      ]
+      ],
+      "findings": []
     },
     {
       "tag": "usa-suggestion-chips",
@@ -3909,6 +3543,7 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -3922,6 +3557,7 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
         {
           "rule": "attr-unobserved",
@@ -3938,7 +3574,10 @@
       "file": "src/components/gesture/swipeable.ts",
       "attributes": [
         "axis",
-        "disabled"
+        "disabled",
+        "distance",
+        "dismiss",
+        "preset"
       ],
       "events": [
         "usa:swipe",
@@ -3947,26 +3586,18 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "distance"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "dismiss"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "preset"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-switch",
       "file": "src/components/widgets/switch.ts",
       "attributes": [
-        "variant"
+        "variant",
+        "label",
+        "name",
+        "value",
+        "disabled"
       ],
       "events": [
         "usa:change"
@@ -3974,26 +3605,11 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
         {
           "rule": "attr-unobserved",
-          "detail": "label"
-        },
-        {
-          "rule": "attr-unobserved",
           "detail": "checked"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "name"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "value"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "disabled"
         }
       ]
     },
@@ -4001,7 +3617,9 @@
       "tag": "usa-tab-bar",
       "file": "src/components/widgets/tab-bar.ts",
       "attributes": [
-        "indicator"
+        "indicator",
+        "label",
+        "selected"
       ],
       "events": [
         "usa:change"
@@ -4009,16 +3627,8 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "label"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "selected"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-tabs",
@@ -4032,6 +3642,7 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
         {
           "rule": "attr-unobserved",
@@ -4046,7 +3657,8 @@
         "title",
         "prompt",
         "theme",
-        "speed"
+        "speed",
+        "loop"
       ],
       "events": [
         "usa:done"
@@ -4054,12 +3666,8 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "loop"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-text-rotate",
@@ -4067,7 +3675,8 @@
       "attributes": [
         "words",
         "interval",
-        "paused"
+        "paused",
+        "effect"
       ],
       "events": [
         "usa:change"
@@ -4075,12 +3684,8 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "effect"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-text-splitter",
@@ -4100,6 +3705,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -4114,12 +3720,13 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
+      "exempt": [
         {
           "rule": "keyboard-click-only",
-          "detail": "not focusable"
+          "reason": "pointer-driven surface decoration, no action"
         }
-      ]
+      ],
+      "findings": []
     },
     {
       "tag": "usa-theme-switcher",
@@ -4127,7 +3734,9 @@
       "attributes": [
         "themes",
         "target",
-        "label"
+        "label",
+        "persist",
+        "value"
       ],
       "events": [
         "usa:change"
@@ -4135,16 +3744,8 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "persist"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "value"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-tilt",
@@ -4161,6 +3762,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -4169,7 +3771,11 @@
       "attributes": [
         "scrub",
         "trigger",
-        "overlap"
+        "overlap",
+        "duration",
+        "stagger",
+        "smooth",
+        "repeat"
       ],
       "events": [
         "usa:complete"
@@ -4177,24 +3783,8 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "duration"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "stagger"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "smooth"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "repeat"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-tip",
@@ -4202,7 +3792,8 @@
       "attributes": [
         "text",
         "placement",
-        "trigger"
+        "trigger",
+        "delay"
       ],
       "events": [
         "usa:open",
@@ -4211,18 +3802,16 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "delay"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-toast-stack",
       "file": "src/components/widgets/toast.ts",
       "attributes": [
-        "position"
+        "position",
+        "duration",
+        "max"
       ],
       "events": [
         "usa:show",
@@ -4231,26 +3820,21 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "duration"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "max"
-        },
+      "exempt": [
         {
           "rule": "lifecycle-global-listener",
-          "detail": "document click"
+          "reason": "one delegated listener for [data-usa-toast] triggers, installed once per page, never per element"
         }
-      ]
+      ],
+      "findings": []
     },
     {
       "tag": "usa-toaster",
       "file": "src/components/feedback/toast.ts",
       "attributes": [
-        "label"
+        "label",
+        "position",
+        "max"
       ],
       "events": [
         "usa:toast"
@@ -4258,16 +3842,8 @@
       "keyboard": false,
       "lifecycle": false,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "position"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "max"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-token-editor",
@@ -4275,7 +3851,8 @@
       "attributes": [
         "apply",
         "format",
-        "groups"
+        "groups",
+        "label"
       ],
       "events": [
         "usa:export",
@@ -4285,19 +3862,21 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "label"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-typewriter",
       "file": "src/components/text/typewriter.ts",
       "attributes": [
         "text",
-        "words"
+        "words",
+        "start",
+        "speed",
+        "delete-speed",
+        "pause",
+        "loop",
+        "delay"
       ],
       "events": [
         "usa:complete"
@@ -4305,32 +3884,8 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "start"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "speed"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "delete-speed"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "pause"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "loop"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "delay"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-upload-progress",
@@ -4350,6 +3905,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -4365,13 +3921,16 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
       "tag": "usa-view-switch",
       "file": "src/components/transitions/view-switch.ts",
       "attributes": [
-        "active"
+        "active",
+        "duration",
+        "effect"
       ],
       "events": [
         "usa:change"
@@ -4379,16 +3938,8 @@
       "keyboard": false,
       "lifecycle": false,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "duration"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "effect"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-voice-button",
@@ -4402,6 +3953,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -4409,7 +3961,8 @@
       "file": "src/components/widgets/volume-knob.ts",
       "attributes": [
         "min",
-        "max"
+        "max",
+        "label"
       ],
       "events": [
         "usa:change",
@@ -4418,14 +3971,11 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": [
         {
           "rule": "attr-unobserved",
           "detail": "value"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "label"
         }
       ]
     },
@@ -4437,6 +3987,12 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [
+        {
+          "rule": "keyboard-click-only",
+          "reason": "decorative ripple under the pointer, no action"
+        }
+      ],
       "findings": [
         {
           "rule": "attr-unobserved",
@@ -4449,10 +4005,6 @@
         {
           "rule": "attr-unobserved",
           "detail": "strength"
-        },
-        {
-          "rule": "keyboard-click-only",
-          "detail": "not focusable"
         }
       ]
     },
@@ -4460,26 +4012,17 @@
       "tag": "usa-wave-text",
       "file": "src/components/text/text-fx.ts",
       "attributes": [
-        "text"
+        "text",
+        "amplitude",
+        "speed",
+        "stagger"
       ],
       "events": [],
       "keyboard": false,
       "lifecycle": false,
       "reducedMotion": true,
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "amplitude"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "speed"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "stagger"
-        }
-      ]
+      "exempt": [],
+      "findings": []
     },
     {
       "tag": "usa-weather-card",
@@ -4495,6 +4038,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -4510,6 +4054,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     },
     {
@@ -4527,6 +4072,7 @@
       "keyboard": false,
       "lifecycle": false,
       "reducedMotion": true,
+      "exempt": [],
       "findings": []
     }
   ]

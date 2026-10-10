@@ -23,7 +23,7 @@ export function defineOverscroll(tag = 'usa-overscroll'): CustomElementConstruct
     (Base) =>
       class UsaOverscroll extends Base {
         static get observedAttributes(): string[] {
-          return ['axis', 'disabled'];
+          return ['axis', 'disabled', 'max', 'preset'];
         }
 
         private _off = 0;

@@ -1,4 +1,5 @@
 import { defineElement, type UsaElement } from '../base';
+import { keyClick } from '../key-click';
 import { orientationToTilt } from '../fx2/gesture3';
 import css from './gyro-card.css?raw';
 
@@ -60,6 +61,7 @@ export function defineGyroCard(tag = 'usa-gyro-card'): CustomElementConstructor 
             };
             const DOE = (window as any).DeviceOrientationEvent;
             if (typeof DOE.requestPermission === 'function') {
+              keyClick(this as any);
               this.listen(this, 'click', () => {
                 if (!active) DOE.requestPermission().then((s: string) => s === 'granted' && on(), () => undefined);
               });

@@ -30,7 +30,7 @@ export function defineTokenEditor(tag = 'usa-token-editor'): CustomElementConstr
     (Base) => {
       class UsaTokenEditor extends Base {
         static get observedAttributes(): string[] {
-          return ['apply', 'format', 'groups'];
+          return ['apply', 'format', 'groups', 'label'];
         }
         private t: MotionTokens = JSON.parse(JSON.stringify(getMotionTokens()));
         get tokens(): MotionTokens {
