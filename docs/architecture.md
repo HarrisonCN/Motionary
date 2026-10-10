@@ -50,11 +50,11 @@ flowchart TB
 
 | 层 | 目录 / 文件 | 子路径 |
 |---|---|---|
-| Public API | `src/index.ts` 及根目录的 `core.ts`、`presets*.ts`、`parallax.ts`、`stagger.ts`、`element*.ts`、`types.ts`（HTML `data-*` API，原 use-scroll-animate）；`src/react.ts`、`vue.ts`、`svelte.ts`、`solid.ts`；`src/components/frameworks/*`（含 Angular）；`src/entries/*`（逐组件 / 逐特效入口）；`src/runtime/iife/*`（CDN `<script>` 入口） | `motionary`、`motionary/react` …、`motionary/components/angular`、`motionary/widgets/<name>`、`motionary/effects/<name>`、`dist/runtime/*.iife.js` |
+| Public API | `src/index.ts` 及根目录的 `core.ts`、`presets*.ts`、`parallax.ts`、`stagger.ts`、`element*.ts`、`types.ts`（HTML `data-*` API，原 use-scroll-animate）；`src/react.ts`、`vue.ts`、`svelte.ts`、`solid.ts`；`src/components/frameworks/*`（含 Angular）；`src/entries/*`（逐组件 / 逐特效入口）；`src/runtime/iife/*`（CDN `<script>` 入口） | `motionary`、`motionary/react` …、`motionary/angular`（11.5；旧 `motionary/components/angular`）、`motionary/widgets/<name>`、`motionary/effects/<name>`、`dist/runtime/*.iife.js` |
 | Motion Core | `src/runtime/{index,registry,ticker,tween,ease,keyframes}.ts`；`src/components/core/*`（`createMotion()`） | `motionary/runtime`、`motionary/core` |
 | Runtime | `src/runtime/*.ts` 的其余模块（scroll、smooth、text、drag-snap、physics、vector、lottie-*、gl、gltf-*、format-*、anim-image） | `motionary/runtime/<module>` |
 | Components | `src/components/**`（除 `frameworks/`、`ai/`、`core/`） | `motionary/components/*` |
-| Motion Intelligence & Tooling | `src/components/ai`；`bin/`（`motionary-mcp`、`usa-codemod-*`）；`scripts/`（manifest、文档、entries、体积预算、检查）；`figma-plugin/`；`showcase/catalog/*`（清单数据） | `motionary/components/ai`、`motionary/manifest.json`、`npx motionary-mcp` |
+| Motion Intelligence & Tooling | `src/components/ai`；`bin/`（`motionary-mcp`、`usa-codemod-*`）；`scripts/`（manifest、文档、entries、体积预算、检查）；`figma-plugin/`；`showcase/catalog/*`（清单数据） | `motionary/tooling/ai`、`motionary/tooling/design`、`motionary/tooling/manifest.json`（11.5 别名；旧路径 13.0 删除）、`npx motionary doctor`、`npx motionary-mcp` |
 
 ## 路线图条目 → 层
 
@@ -75,4 +75,4 @@ flowchart TB
 
 ## 迁移原则
 
-11.x 内只新增与别名：新子路径与旧路径并存，旧路径发出一次性弃用提示；删除只在 12.0 / 13.0，并提供 `usa-codemod-12` / `usa-codemod-13`。
+11.x 内只新增与别名：新子路径与旧路径并存（11.5 起见 [public-api.md](./public-api.md)）。旧路径**运行时不发出警告**（导入保持无副作用，11.1 的保证），弃用通过 TypeScript `@deprecated`、`npx motionary doctor` 扫描、`usa-codemod-12` 改写和文档完成；删除只在 12.0 / 13.0，并提供 `usa-codemod-12` / `usa-codemod-13`。

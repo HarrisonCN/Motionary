@@ -88,7 +88,7 @@ onMount(() => defineUsa());
 
 ```ts
 import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
-import { usaInitializer, usaDetail } from 'motionary/components/angular';
+import { usaInitializer, usaDetail } from 'motionary/angular';
 // app.config.ts
 providers: [{ provide: APP_INITIALIZER, multi: true, useFactory: usaInitializer() }];
 // component

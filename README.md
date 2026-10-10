@@ -109,6 +109,8 @@ import 'motionary/presets/extended'; // lets <usa-reveal effect> use every prese
 export class Hero {}
 ```
 
+> 11.5: Angular has the top-level entry `motionary/angular` (`motionary/components/angular` still works until 13.0). Layer subpaths and deprecated paths: [docs/public-api.md](./docs/public-api.md) · `npx motionary doctor`.
+
 Animated components need no framework at all:
 
 ```html

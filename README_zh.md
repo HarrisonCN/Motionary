@@ -109,6 +109,8 @@ import 'motionary/presets/extended'; // lets <usa-reveal effect> use every prese
 export class Hero {}
 ```
 
+> 11.5：Angular 使用顶层入口 `motionary/angular`（`motionary/components/angular` 在 13.0 前仍可用）。分层子路径与弃用路径见 [docs/public-api.md](./docs/public-api.md) · `npx motionary doctor`。
+
 动画组件无需任何框架：
 
 ```html

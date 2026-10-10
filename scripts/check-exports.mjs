@@ -60,6 +60,9 @@ const entries = {
   'motionary/components/svelte': ['usa', 'defineUsa', 'bindUsa'],
   'motionary/components/solid': ['usa', 'defineUsa', 'bindUsa'],
   'motionary/components/angular': ['usaInitializer', 'defineUsa', 'usaDetail', 'bindUsa'],
+  'motionary/angular': ['usaInitializer', 'provideUsa', 'defineUsa', 'usaDetail', 'bindUsa', 'usaEventName', 'USA_TAGS', 'isUsaElement'],
+  'motionary/tooling/ai': ['describeMotion', 'motionSnippet'],
+  'motionary/tooling/design': ['figmaToMotion', 'framerComponent', 'motionToCss', 'easingPoints'],
   'motionary/components/lazy': ['lazyDefine', 'defineUsed', 'loadCategory', 'categoryOfTag'],
   'motionary/components/transitions': ['defineTransitionComponents', 'defineDialog', 'defineAccordion', 'defineViewSwitch', 'viewTransition', 'flip'],
 };
@@ -98,4 +101,9 @@ assert.equal(root.createReactHooks, undefined, 'createReactHooks moved to /react
 // 6.1: importing presets/extended registers its presets in the shared table
 assert.ok(root.PRESETS['bounce-in-up'] && root.PRESETS['clip-diamond'], 'extended presets registered');
 assert.ok(Object.keys(root.PRESETS).length >= 200, 'preset count');
+// 11.5: aliases are the same modules as the deprecated paths; the old paths' types are the generated @deprecated files
+for (const [a, b] of [['motionary/angular', 'motionary/components/angular'], ['motionary/tooling/ai', 'motionary/components/ai'], ['motionary/tooling/design', 'motionary/design'], ['motionary/core', 'motionary/components/core']])
+  assert.equal(await import(a), await import(b), `${a} is ${b}`);
+assert.equal(require('motionary/tooling/manifest.json'), require('motionary/manifest.json'), 'tooling/manifest.json');
+for (const f of ['components-ai', 'components-core', 'components-design', 'design', 'components-angular']) for (const x of ['d.ts', 'd.cts']) assert.ok(existsSync(new URL(`../dist/deprecated/${f}.${x}`, import.meta.url)), `dist/deprecated/${f}.${x}`);
 console.log(`exports OK (ESM + CJS): ${Object.keys(entries).join(', ')}`);
