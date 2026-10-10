@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [12.4.0] - 2026-10-10
+
+### Component playground (Tooling · Public API)
+- New `showcase/run.html` ([live](https://harrisoncn.github.io/Motionary/showcase/run.html)): every `<usa-*>` component from the AI manifest as a complete, runnable HTML page — search, edit, **Run** in a sandboxed preview, **Copy** or **Download .html** with one click; deep links `run.html#usa-tilt`.
+- Each component shows what it needs: `No prerequisites · basic tier` or `Requires: motionary/runtime/drag-snap · standard tier`; the page loads the prerequisites first (runtime core → modules → official runtimes), then the component bundle.
+- An "npm + bundler" tab gives the install line and the import + register order.
+- `showcase/runnable.js` (`runnablePage`, `scriptsFor`, `depsLabel`, `esmSnippet`) is pure and shared; the preview loads the bundles from the site, copies keep the CDN URLs. Linked from the Components page.
+
+### Checks
+- New `test/widgets-12-4.test.ts`: every manifest component yields a page with its example and its bundle; prerequisites load before the bundle in the order the manifest gives; labels and tiers; local base for previews; npm snippet; page wiring.
+
 ## [12.3.0] - 2026-10-10
 
 ### Figma export (Tooling)
