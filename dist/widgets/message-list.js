@@ -9,6 +9,9 @@ function defineMessageList(tag = 'usa-message-list') {
                 super(...arguments);
                 this._msgs = [];
             }
+            static get observedAttributes() {
+                return ['label'];
+            }
             get messages() {
                 return this._msgs.map((m) => ({ ...m }));
             }
@@ -91,4 +94,4 @@ function defineMessageList(tag = 'usa-message-list') {
 }
 
 export { defineMessageList };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/widgets/message-list.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/widgets/message-list.js.map

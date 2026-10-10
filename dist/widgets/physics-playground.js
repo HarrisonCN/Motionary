@@ -1,5 +1,5 @@
-export { d as definePhysicsPlayground } from '../chunks/physics-playground-YlkHVQQ3.js';
+export { d as definePhysicsPlayground } from '../chunks/physics-playground-DHO_tLsW.js';
 import '../chunks/base-zSGb8ujt.js';
-import '../chunks/runtime-link-2DE2Nz8C.js';
-import '../chunks/registry-CMjteilk.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/widgets/physics-playground.js.map
+import '../chunks/runtime-link-CvJOTQYQ.js';
+import '../chunks/registry-D3VGJOuX.js';
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/widgets/physics-playground.js.map

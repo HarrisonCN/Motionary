@@ -15,6 +15,9 @@ function defineAddToCart(tag = 'usa-add-to-cart') {
                 super(...arguments);
                 this._t = 0;
             }
+            static get observedAttributes() {
+                return ['label', 'added', 'item', 'cart', 'from', 'hold'];
+            }
             mount() {
                 registerShopPack();
                 this.querySelectorAll(':scope > [data-usa-part]').forEach((n) => n.remove());
@@ -55,4 +58,4 @@ function defineAddToCart(tag = 'usa-add-to-cart') {
 }
 
 export { defineAddToCart };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/widgets/add-to-cart.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/widgets/add-to-cart.js.map

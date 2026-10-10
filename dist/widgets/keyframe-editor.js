@@ -1,5 +1,5 @@
 import { f as defineElement } from '../chunks/base-zSGb8ujt.js';
-import { A as ANIMATION_FORMAT, c as createPlayer } from '../chunks/player-Ba3HWMUt.js';
+import { A as ANIMATION_FORMAT, c as createPlayer } from '../chunks/player-BA50IpKZ.js';
 import '../chunks/registry-CYojuxi5.js';
 import '../chunks/core-BOCM9zD5.js';
 import '../components/tokens.js';
@@ -23,6 +23,9 @@ function defineKeyframeEditor(tag = 'usa-keyframe-editor') {
                 super(...arguments);
                 this._anim = JSON.parse(JSON.stringify(DEFAULT));
                 this._player = null;
+            }
+            static get observedAttributes() {
+                return ['for'];
             }
             get animation() {
                 return this.toJSON();
@@ -182,4 +185,4 @@ function defineKeyframeEditor(tag = 'usa-keyframe-editor') {
 }
 
 export { defineKeyframeEditor };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/widgets/keyframe-editor.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/widgets/keyframe-editor.js.map

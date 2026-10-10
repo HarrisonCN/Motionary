@@ -105,6 +105,9 @@ function definePinchZoom(tag = 'usa-pinch-zoom') {
             super(...arguments);
             this._v = { k: 1, x: 0, y: 0 };
         }
+        static get observedAttributes() {
+            return ['min', 'max', 'preset', 'double-tap'];
+        }
         get scale() {
             return this._v.k;
         }
@@ -206,4 +209,4 @@ exports.swipeDirection = core.swipeDirection;
 exports.defineGestureComponents = defineGestureComponents;
 exports.definePinchZoom = definePinchZoom;
 exports.defineSwipeable = defineSwipeable;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/components/gesture.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/components/gesture.cjs.map

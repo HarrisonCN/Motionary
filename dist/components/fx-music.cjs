@@ -2,7 +2,7 @@
 
 var registry = require('../chunks/registry-BB1oO-lR.cjs');
 var generative = require('../chunks/generative-BHIj-NU0.cjs');
-var audio = require('../chunks/audio-h-eiqo5B.cjs');
+var audio = require('../chunks/audio-BSQmg3MB.cjs');
 require('../chunks/base-B3me2y0o.cjs');
 require('../chunks/shared-jkgRH-Hx.cjs');
 
@@ -176,4 +176,4 @@ exports.MUSIC_FX = MUSIC_FX;
 exports.musicSample = musicSample;
 exports.registerMusicPack = registerMusicPack;
 exports.syntheticSample = syntheticSample;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/components/fx-music.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/components/fx-music.cjs.map

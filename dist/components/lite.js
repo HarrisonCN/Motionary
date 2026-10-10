@@ -3674,6 +3674,9 @@ function canvasLoop(host, draw, still) {
 }
 function defineGridGlow(tag = 'usa-grid-glow') {
     return defineElement(tag, (Base) => class extends Base {
+        static get observedAttributes() {
+            return ['size', 'radius', 'color'];
+        }
         mount() {
             this.style.setProperty('--usa-grid', `${this.num('size', 32)}px`);
             this.style.setProperty('--usa-grid-r', `${this.num('radius', 220)}px`);
@@ -3701,6 +3704,9 @@ function defineGridGlow(tag = 'usa-grid-glow') {
 }
 function defineBlobs(tag = 'usa-blobs') {
     return defineElement(tag, (Base) => class extends Base {
+        static get observedAttributes() {
+            return ['colors', 'speed', 'blur'];
+        }
         mount() {
             this.querySelector(':scope > .usa-blobs-layer')?.remove();
             const colors = this.str('colors', '#7c5cff,#22d3ee,#f472b6,#34d399').split(',');
@@ -3719,6 +3725,9 @@ function defineWaterRipple(tag = 'usa-water-ripple') {
         constructor() {
             super(...arguments);
             this._drop = null;
+        }
+        static get observedAttributes() {
+            return ['damping', 'color', 'strength'];
         }
         drop(x, y, s = 1) {
             this._drop?.(x, y, s);
@@ -3779,6 +3788,9 @@ function defineWaterRipple(tag = 'usa-water-ripple') {
 }
 function defineDotNetwork(tag = 'usa-dot-network') {
     return defineElement(tag, (Base) => class extends Base {
+        static get observedAttributes() {
+            return ['gap', 'radius', 'color'];
+        }
         mount() {
             const gap = Math.max(8, this.num('gap', 28));
             const R = this.num('radius', 140);
@@ -4992,6 +5004,7 @@ const CARD_EFFECTS = ['flip', 'holo', 'glass', 'border-glow', 'conic-border', 'l
 /** Effects that follow the pointer (they share one rAF-throttled tracker). */
 const TRACKING = /*#__PURE__*/ new Set(['holo', 'border-glow', 'spotlight', 'parallax-layers', 'lift']);
 function defineCard(tag = 'usa-card') {
+    // contract-exempt: attr-unobserved — flipped, expanded: state reflected by the element itself (set the property instead); observing it would re-mount on every change
     return defineElement(tag, (Base) => class UsaCard extends Base {
         constructor() {
             super(...arguments);
@@ -6346,6 +6359,9 @@ var css$p = "";
 
 function defineDoubleTap(tag = 'usa-double-tap') {
     return defineElement(tag, (Base) => class UsaDoubleTap extends Base {
+        static get observedAttributes() {
+            return ['disabled', 'delay', 'icon', 'color'];
+        }
         mount() {
             let last = 0;
             let lx = 0;
@@ -6533,6 +6549,7 @@ const nextId = (prefix) => `${prefix}-${++uid}`;
 var css$n = "";
 
 function defineTabs(tag = 'usa-tabs') {
+    // contract-exempt: attr-unobserved — selected: state reflected by the element itself (set the property instead); observing it would re-mount on every change
     adoptVariants();
     return defineElement(tag, (Base) => class UsaTabs extends Base {
         constructor() {
@@ -6850,6 +6867,9 @@ function definePullRefresh(tag = 'usa-pull-refresh') {
             this._ind = null;
             this._live = null;
         }
+        static get observedAttributes() {
+            return ['threshold', 'disabled', 'label'];
+        }
         get refreshing() {
             return this._busy;
         }
@@ -6945,6 +6965,7 @@ function definePullRefresh(tag = 'usa-pull-refresh') {
 var css$k = "";
 
 function defineFab(tag = 'usa-fab') {
+    // contract-exempt: attr-unobserved — open: state reflected by the element itself (set the property instead); observing it would re-mount on every change
     adoptVariants();
     return defineElement(tag, (Base) => class UsaFab extends Base {
         static get observedAttributes() {
@@ -7040,6 +7061,9 @@ function defineNavbar(tag = 'usa-navbar') {
             super(...arguments);
             this._frame = 0;
             this._last = 0;
+        }
+        static get observedAttributes() {
+            return ['target', 'threshold'];
         }
         get hiddenByScroll() {
             return this.hasAttribute('data-hidden');
@@ -7215,8 +7239,12 @@ function defineSlider(tag = 'usa-slider') {
 var css$h = "";
 
 function definePopover(tag = 'usa-popover') {
+    // contract-exempt: attr-unobserved — open: state reflected by the element itself (set the property instead); observing it would re-mount on every change
     adoptVariants();
     return defineElement(tag, (Base) => class UsaPopover extends Base {
+        static get observedAttributes() {
+            return ['placement'];
+        }
         get open() {
             return this.flag('open');
         }
@@ -7572,6 +7600,9 @@ function defineFullpage(tag = 'usa-fullpage') {
             super(...arguments);
             this._i = 0;
         }
+        static get observedAttributes() {
+            return ['dots', 'axis'];
+        }
         get index() {
             return this._i;
         }
@@ -7658,6 +7689,9 @@ function defineLoadingBar(tag = 'usa-loading-bar') {
         constructor() {
             super(...arguments);
             this._p = 0;
+        }
+        static get observedAttributes() {
+            return ['label', 'color', 'height'];
         }
         get progress() {
             return this._p;
@@ -7749,6 +7783,9 @@ function defineBackToTop(tag = 'usa-back-to-top') {
         constructor() {
             super(...arguments);
             this._frame = 0;
+        }
+        static get observedAttributes() {
+            return ['label', 'offset', 'focus-target'];
         }
         get visible() {
             return this.hasAttribute('data-visible');
@@ -7901,6 +7938,9 @@ function defineSplash(tag = 'usa-splash') {
             this._t0 = 0;
             this._gone = false;
         }
+        static get observedAttributes() {
+            return ['label', 'manual', 'min', 'exit'];
+        }
         mount() {
             this._t0 = Date.now();
             this.setAttribute('role', 'status');
@@ -8025,6 +8065,9 @@ function restoreMotionIntensity() {
 }
 function defineMotionSwitch(tag = 'usa-motion-switch') {
     return defineElement(tag, (Base) => class UsaMotionSwitch extends Base {
+        static get observedAttributes() {
+            return ['labels', 'label'];
+        }
         get value() {
             return getMotionLevel();
         }
@@ -8549,6 +8592,9 @@ function definePinchZoom(tag = 'usa-pinch-zoom') {
             super(...arguments);
             this._v = { k: 1, x: 0, y: 0 };
         }
+        static get observedAttributes() {
+            return ['min', 'max', 'preset', 'double-tap'];
+        }
         get scale() {
             return this._v.k;
         }
@@ -8750,6 +8796,9 @@ function defineDraw(tag = 'usa-draw') {
             this._p = 0;
             this._id = 0;
         }
+        static get observedAttributes() {
+            return ['duration', 'stagger', 'trigger', 'repeat'];
+        }
         get progress() {
             return this._p;
         }
@@ -8897,6 +8946,9 @@ const MASK_SHAPES = {
 };
 function defineMaskReveal(tag = 'usa-mask-reveal') {
     return defineElement(tag, (Base) => class UsaMaskReveal extends Base {
+        static get observedAttributes() {
+            return ['shape', 'at', 'duration', 'delay', 'trigger', 'repeat'];
+        }
         frames() {
             const s = MASK_SHAPES[this.str('shape', 'circle')] || MASK_SHAPES.circle;
             const at = this.str('at');
@@ -9854,6 +9906,9 @@ function defineAutoAnimate(tag = 'usa-auto-animate') {
         constructor() {
             super(...arguments);
             this._c = null;
+        }
+        static get observedAttributes() {
+            return ['duration', 'no-scale'];
         }
         enable() {
             this._c?.enable();
@@ -10851,4 +10906,4 @@ const STYLE_BASE = new URL('../', import.meta.url).href;
 onDemandStyles(STYLE_BASE);
 
 export { ALL_TAGS, AMBIENT_EFFECTS, ANIM_ICONS, BRIDGE_PROTOCOL_VERSION, BUILTIN_EFFECTS, BUTTON_DEFORMS, CARD_EFFECTS, CLICK_EFFECTS, COMPONENT_CATEGORIES, CURSOR_MODES, EFFECT_KINDS, EFFECT_TRIGGERS, GL_FALLBACKS, JOINING_SCRIPT, LIVE_REGION_IDS, MASK_SHAPES, MORPH_ICONS, MOTION_SCALE, MOTION_SENSITIVITY, MOTION_SENSITIVITY_LEVELS, MOTION_TOKENS, PACKS, PACK_PRIMITIVES, PAGE_EFFECTS, PARTICLE_PRESETS, POST_EFFECTS, REVEAL_EFFECTS, SENSITIVITY_CSS, SHADERS, SPINNER_VARIANTS, SPRING_EFFECTS, SPRING_PRESETS, STATIC_ALTERNATIVES, STYLE_BASE, TIMELINE_PRESETS, VARIANTS, activeAnimations, adaptKeyframes, adoptVariants, animateWithMotion, animationBudget, announce, applyMotionTokens, applyNativeSettings, applyPack, auditMotionA11y, autoAnimate, autoDegrade, baselineReport, bindEffect, categoryOf, configureComponents, connectNativeShell, countUp, createSpring, defineAccordion, defineAcrylic, defineAmbient, defineAnimIcon, defineAurora, defineAutoAnimate, defineAutoSkeleton, defineAvatarStack, defineBackToTop, defineBackgroundComponents, defineBadge, defineBlobs, defineBottomSheet, defineButton, defineCard, defineCardComponents, defineCardStack, defineCarousel3d, defineCheck, defineCheckbox, defineClick, defineClickComponents, defineComponents, defineCounter, defineCube, defineCursor, defineDepth, defineDepthComponents, defineDialog, defineDistort, defineDotNetwork, defineDoubleTap, defineDraggable, defineDraw, defineDrawer, defineFab, defineFeedbackComponents, defineFullpage, defineFx, defineFxComponents, defineGestureComponents, defineGlitch, defineGradientText, defineGrain, defineGridGlow, defineHandwriting, defineHold, defineIconMorph, defineInteractionComponents, defineLayoutComponents, defineLike, defineLiquid, defineLoadingBar, defineMagnetic, defineMarquee, defineMaskReveal, defineMasonry, defineMorph, defineMotionSwitch, defineNavbar, defineOverscroll, definePack, definePacksComponents, definePageComponents, defineParticles, definePhysicsComponents, definePinchZoom, definePopover, definePostFx, definePress, defineProgress, definePullRefresh, defineReveal, defineRevealComponents, defineRipple, defineScramble, defineScrollHighlight, defineScrollProgress, defineScrolly, defineShader, defineShimmerText, defineSkeleton, defineSlider, defineSpinner, defineSplash, defineSplitText, defineSpotlight, defineSpring, defineStagger, defineStickyStack, defineSvgComponents, defineSwipeable, defineTabs, defineTextComponents, defineTextRotate, defineTilt, defineTimeline, defineTimelineComponents, defineToaster, defineTransitionComponents, defineTypewriter, defineUiComponents, defineViewSwitch, defineWaterRipple, defineWaveText, defineWebglComponents, detectNativeHost, deviceTilt, drawLines, easeOutExpo, enableMpaTransitions, exportDesignTokens, flip, flipFrames, fluentPreset, flyToCart, fragmentSource, gesture, getEffect, getMotionIntensity, getMotionLevel, getMotionSensitivity, getMotionTokens, glFallbackCss, glGovernor, glQuad, graphemes, haptic, hasEffect, importDesignTokens, importMotionTokens, interpolatePath, linearEasing, listEffects, liveRegion, loadCategoryStyles, loadedStyles, loadingBar, masonryLayout, mergeMotionTokens, morphPath, morphTo, motionAllowed, motionScale, motionToken, motionTokensToCss, motionTokensToJSON, motionTokensToVars, motionVar, onDemandStyles, onFrame, orientationToTilt, pageTransition, parseDuration, parseEasing, parseNativeSettings, pathsCompatible, pinchScale, playEffect, postFxShader, postToNative, prefersReducedMotion, projectInertia, readScrollProgress, registerBuiltinEffects, registerEffect, registerEffects, requestOrientationPermission, resolveDurationToken, resolveEasingToken, resolvePosition, resolveSpring, resolveTokenAliases, restoreMotionIntensity, restoreMotionSensitivity, revealKeyframes, rubberBand, schedulerStats, scrambleFrame, scrollToTarget, setAnimationBudget, setMotionIntensity, setMotionLevel, setMotionSensitivity, setVariant, sharedTransition, smoothScroll, snapTo, splitOrder, splitText, splitTimeline, words as splitWords, spring, springEasing, springEffectKeyframes, springSamples, staticAlternative, stepSpring, supportsLinearEasing, supportsNativeScrub, supportsOrientation, supportsViewTransitions, supportsWebGL, swipeDirection, themeTransition, timeline, toast, validateDesignTokens, viewTransition, warnBaseline, watchPowerSaver, withoutDeprecations };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/components/lite.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/components/lite.js.map

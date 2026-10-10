@@ -161,7 +161,7 @@ declare const GENERATIVE_FX: EffectDefinition[];
  * - Beat detection: `createBeatDetector()` (pure: energy → beat?), `onBeat(cb)`
  *   and `bindBeat(el, effect, options)`, which plays any registered effect on
  *   every beat. `<usa-audio>` does the same for `[data-usa-beat="effect"]`
- *   children and emits `usa-beat`.
+ *   children and emits `usa:beat`.
  * - While audio runs, `--usa-audio-level` and `--usa-audio-bass` (0–1) are set
  *   on `<html>` for CSS-driven reactions.
  *
@@ -231,7 +231,7 @@ interface UsaAudioElement extends UsaElement {
  * `[data-audio-toggle]`, or one it renders) that enables the audio source on
  * click; children with `data-usa-beat="effect"` play that effect on every
  * beat (`data-usa-beat-options` JSON; `threshold` / `cooldown` attributes).
- * Emits `usa-beat` and `usa-audio-error`.
+ * Emits `usa:beat` and `usa:audio-error` (12.0: the legacy `usa-beat` / `usa-audio-error` names are gone).
  */
 declare function defineAudio(tag?: string): CustomElementConstructor | undefined;
 
@@ -473,7 +473,7 @@ interface UsaPlayerElement extends UsaElement {
 /**
  * `<usa-player src="hero.json" | <script type="application/json"> child
  * trigger="load | view | scroll | click | manual" loop rate controls>`.
- * Emits `usa-player-ready` and `usa-player-finish`; sets `data-error` when the
+ * Emits `usa:ready` and `usa:finish` (12.0: legacy `usa-player-*` names gone); sets `data-error` when the
  * animation cannot be loaded.
  */
 declare function definePlayer(tag?: string): CustomElementConstructor | undefined;
@@ -491,7 +491,7 @@ declare function definePlayer(tag?: string): CustomElementConstructor | undefine
  * - `highlight` — paragraphs dim except the one crossing the viewport center.
  *
  * Every template sets `--usa-story-progress` (0–1) on the host and dispatches
- * `usa-story-step` (`detail: { index }`). Reduced motion: no sliding / zooming
+ * `usa:step` (`detail: { index }`; 12.0, was `usa-story-step`). Reduced motion: no sliding / zooming
  * (the gallery stacks vertically), counters show final values, the rest is
  * class changes only.
  */

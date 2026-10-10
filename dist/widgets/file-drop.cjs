@@ -13,6 +13,9 @@ function defineFileDrop(tag = 'usa-file-drop') {
                 this._files = [];
                 this._depth = 0;
             }
+            static get observedAttributes() {
+                return ['label', 'accept', 'multiple', 'simulate'];
+            }
             get files() {
                 return this._files.slice();
             }
@@ -107,4 +110,4 @@ function defineFileDrop(tag = 'usa-file-drop') {
 }
 
 exports.defineFileDrop = defineFileDrop;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/widgets/file-drop.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/widgets/file-drop.cjs.map

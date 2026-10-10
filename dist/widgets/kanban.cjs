@@ -14,6 +14,9 @@ function defineKanban(tag = 'usa-kanban') {
                 this._live = null;
                 this._held = null;
             }
+            static get observedAttributes() {
+                return ['label'];
+            }
             get columns() {
                 return this._cols;
             }
@@ -212,4 +215,4 @@ function defineKanban(tag = 'usa-kanban') {
 }
 
 exports.defineKanban = defineKanban;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/widgets/kanban.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/widgets/kanban.cjs.map

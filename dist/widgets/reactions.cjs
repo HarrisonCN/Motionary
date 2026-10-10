@@ -1,9 +1,9 @@
 'use strict';
 
-var widgets_reactions = require('../chunks/reactions-BNpZ7cPy.cjs');
+var widgets_reactions = require('../chunks/reactions-D2QL8ezS.cjs');
 require('../chunks/base-B3me2y0o.cjs');
 
 
 
 exports.defineReactions = widgets_reactions.defineReactions;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/widgets/reactions.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/widgets/reactions.cjs.map

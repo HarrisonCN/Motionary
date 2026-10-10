@@ -2,10 +2,10 @@
 
 var components_snapCarousel = require('../components/snap-carousel.cjs');
 require('../chunks/base-B3me2y0o.cjs');
-require('../chunks/runtime-link-Cnij6nmH.cjs');
-require('../chunks/registry-U0scTJZr.cjs');
+require('../chunks/runtime-link-CyExCzuU.cjs');
+require('../chunks/registry-VKfDCYYI.cjs');
 
 
 
 exports.defineSnapCarousel = components_snapCarousel.defineSnapCarousel;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/widgets/snap-carousel.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/widgets/snap-carousel.cjs.map

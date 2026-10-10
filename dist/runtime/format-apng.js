@@ -1,7 +1,7 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-CMjteilk.js';
-import { a as animatedImagePlayer, b as browserDecode, c as composeFrames, d as bytesOf, u as u8, f as fixDelay, e as crc32 } from '../chunks/anim-image-C_KpJ7os.js';
-import '../chunks/tween-B0nMjJJi.js';
-import '../chunks/ticker-wWXyZQwD.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-D3VGJOuX.js';
+import { a as animatedImagePlayer, b as browserDecode, c as composeFrames, d as bytesOf, u as u8, f as fixDelay, e as crc32 } from '../chunks/anim-image-KyCg37rY.js';
+import '../chunks/tween-DhlovBgd.js';
+import '../chunks/ticker-vWmxVVge.js';
 import '../chunks/ease-XN8_0sXu.js';
 
 /**
@@ -120,4 +120,4 @@ async function loadApng(src, o = {}) {
 const formatApng = { id: 'format-apng', version: RUNTIME_VERSION, tier: 'standard', requires: ['core'], api: { parseApng, apngFramePngs, decodeApng, loadApng, animatedImagePlayer } };
 
 export { animatedImagePlayer, apngFramePngs, decodeApng, formatApng, loadApng, parseApng, pngChunks };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/runtime/format-apng.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/runtime/format-apng.js.map

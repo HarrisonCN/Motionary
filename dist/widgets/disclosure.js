@@ -10,6 +10,9 @@ function defineDisclosure(tag = 'usa-disclosure') {
                 super(...arguments);
                 this._anims = new WeakMap();
             }
+            static get observedAttributes() {
+                return ['multiple', 'spring'];
+            }
             get items() {
                 return Array.from(this.children).filter((c) => c.localName === 'details');
             }
@@ -73,4 +76,4 @@ function defineDisclosure(tag = 'usa-disclosure') {
 }
 
 export { defineDisclosure };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/widgets/disclosure.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/widgets/disclosure.js.map

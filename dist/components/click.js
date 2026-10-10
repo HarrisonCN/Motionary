@@ -708,6 +708,9 @@ var css$1 = "usa-double-tap{position:relative;display:block;touch-action:manipul
 
 function defineDoubleTap(tag = 'usa-double-tap') {
     return defineElement(tag, (Base) => class UsaDoubleTap extends Base {
+        static get observedAttributes() {
+            return ['disabled', 'delay', 'icon', 'color'];
+        }
         mount() {
             let last = 0;
             let lx = 0;
@@ -861,4 +864,4 @@ function defineClickComponents() {
 }
 
 export { BUTTON_DEFORMS, CLICK_EFFECTS, MORPH_ICONS, defineButton, defineCheckbox, defineClick, defineClickComponents, defineDoubleTap, defineHold, defineIconMorph, defineLike, haptic, morphPath };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/components/click.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/components/click.js.map

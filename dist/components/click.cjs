@@ -710,6 +710,9 @@ var css$1 = "usa-double-tap{position:relative;display:block;touch-action:manipul
 
 function defineDoubleTap(tag = 'usa-double-tap') {
     return base.defineElement(tag, (Base) => class UsaDoubleTap extends Base {
+        static get observedAttributes() {
+            return ['disabled', 'delay', 'icon', 'color'];
+        }
         mount() {
             let last = 0;
             let lx = 0;
@@ -875,4 +878,4 @@ exports.defineHold = defineHold;
 exports.defineIconMorph = defineIconMorph;
 exports.defineLike = defineLike;
 exports.morphPath = morphPath;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/components/click.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/components/click.cjs.map

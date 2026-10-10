@@ -16,4 +16,4 @@ function registerFieldSuccess() {
 exports.effect = effect;
 exports.register = registerFieldSuccess;
 exports.registerFieldSuccess = registerFieldSuccess;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/effects/field-success.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/effects/field-success.cjs.map

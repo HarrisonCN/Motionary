@@ -10,6 +10,9 @@ function defineNotificationBell(tag = 'usa-notification-bell') {
                 this._n = [];
                 this._open = false;
             }
+            static get observedAttributes() {
+                return ['label'];
+            }
             get unread() {
                 return this._n.filter((n) => !n.read).length;
             }
@@ -99,4 +102,4 @@ function defineNotificationBell(tag = 'usa-notification-bell') {
 }
 
 export { defineNotificationBell };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/widgets/notification-bell.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/widgets/notification-bell.js.map

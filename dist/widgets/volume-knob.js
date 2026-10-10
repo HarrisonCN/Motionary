@@ -5,6 +5,7 @@ var css = "usa-volume-knob{--usa-vk-c:#22d3ee;--usa-vk-size:120px;position:relat
 
 const ARC = 270;
 function defineVolumeKnob(tag = 'usa-volume-knob') {
+    // contract-exempt: attr-unobserved — value: state reflected by the element itself (set the property instead); observing it would re-mount on every change
     return defineElement(tag, (Base) => {
         class UsaVolumeKnob extends Base {
             constructor() {
@@ -96,4 +97,4 @@ function defineVolumeKnob(tag = 'usa-volume-knob') {
 }
 
 export { defineVolumeKnob };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/widgets/volume-knob.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/widgets/volume-knob.js.map

@@ -1,7 +1,7 @@
 'use strict';
 
 var base = require('../chunks/base-B3me2y0o.cjs');
-var player = require('../chunks/player-oFkk6pPT.cjs');
+var player = require('../chunks/player-B7QRAdUN.cjs');
 require('../chunks/registry-BB1oO-lR.cjs');
 require('../chunks/core-KIvPGg0c.cjs');
 require('../components/tokens.cjs');
@@ -25,6 +25,9 @@ function defineKeyframeEditor(tag = 'usa-keyframe-editor') {
                 super(...arguments);
                 this._anim = JSON.parse(JSON.stringify(DEFAULT));
                 this._player = null;
+            }
+            static get observedAttributes() {
+                return ['for'];
             }
             get animation() {
                 return this.toJSON();
@@ -184,4 +187,4 @@ function defineKeyframeEditor(tag = 'usa-keyframe-editor') {
 }
 
 exports.defineKeyframeEditor = defineKeyframeEditor;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/widgets/keyframe-editor.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/widgets/keyframe-editor.cjs.map

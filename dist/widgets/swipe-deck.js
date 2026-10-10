@@ -11,6 +11,9 @@ function defineSwipeDeck(tag = 'usa-swipe-deck') {
                 this._cards = [];
                 this._gone = [];
             }
+            static get observedAttributes() {
+                return ['label', 'threshold'];
+            }
             get cards() {
                 return this._cards.filter((c) => !this._gone.includes(c));
             }
@@ -147,4 +150,4 @@ function defineSwipeDeck(tag = 'usa-swipe-deck') {
 }
 
 export { defineSwipeDeck };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/widgets/swipe-deck.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/widgets/swipe-deck.js.map

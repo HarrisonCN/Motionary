@@ -193,6 +193,9 @@ function defineFullpage(tag = 'usa-fullpage') {
             super(...arguments);
             this._i = 0;
         }
+        static get observedAttributes() {
+            return ['dots', 'axis'];
+        }
         get index() {
             return this._i;
         }
@@ -279,6 +282,9 @@ function defineLoadingBar(tag = 'usa-loading-bar') {
         constructor() {
             super(...arguments);
             this._p = 0;
+        }
+        static get observedAttributes() {
+            return ['label', 'color', 'height'];
         }
         get progress() {
             return this._p;
@@ -370,6 +376,9 @@ function defineBackToTop(tag = 'usa-back-to-top') {
         constructor() {
             super(...arguments);
             this._frame = 0;
+        }
+        static get observedAttributes() {
+            return ['label', 'offset', 'focus-target'];
         }
         get visible() {
             return this.hasAttribute('data-visible');
@@ -522,6 +531,9 @@ function defineSplash(tag = 'usa-splash') {
             this._t0 = 0;
             this._gone = false;
         }
+        static get observedAttributes() {
+            return ['label', 'manual', 'min', 'exit'];
+        }
         mount() {
             this._t0 = Date.now();
             this.setAttribute('role', 'status');
@@ -646,6 +658,9 @@ function restoreMotionIntensity() {
 }
 function defineMotionSwitch(tag = 'usa-motion-switch') {
     return defineElement(tag, (Base) => class UsaMotionSwitch extends Base {
+        static get observedAttributes() {
+            return ['labels', 'label'];
+        }
         get value() {
             return getMotionLevel();
         }
@@ -797,4 +812,4 @@ function definePageComponents() {
 }
 
 export { AMBIENT_EFFECTS, CURSOR_MODES, PAGE_EFFECTS, defineAmbient, defineAutoSkeleton, defineBackToTop, defineCursor, defineFullpage, defineLoadingBar, defineMotionSwitch, definePageComponents, defineSplash, enableMpaTransitions, getMotionIntensity, getMotionLevel, loadingBar, pageTransition, restoreMotionIntensity, scrollToTarget, setMotionIntensity, setMotionLevel, smoothScroll, supportsViewTransitions, themeTransition };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/components/page.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/components/page.js.map
