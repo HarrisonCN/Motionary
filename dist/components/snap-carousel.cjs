@@ -213,4 +213,4 @@ function defineSnapCarousel(tag = 'usa-snap-carousel') {
 }
 
 exports.defineSnapCarousel = defineSnapCarousel;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.5.0/dist/components/snap-carousel.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.9.0/dist/components/snap-carousel.cjs.map

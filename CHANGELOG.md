@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [12.9.0] - 2026-10-10
+
+### 13.0 preparation (all layers)
+- New [docs/upgrading-13.md](./docs/upgrading-13.md): 13.0 removes the import paths deprecated in 11.5 (`motionary/components/core`, `motionary/components/ai`, `motionary/components/design`, `motionary/design`, `motionary/components/angular`, `motionary/manifest.json`, `motionary/manifest.schema.json` → their layer subpaths); everything else in 12.x keeps working.
+- New `npx usa-codemod-13 [--write] [paths…]`: rewrites the removed paths, any legacy event names left from 11.x, and CDN URLs pinned to `@10` / `@11` / `@12` → `@13` (exact version pins are left alone). Idempotent.
+- `npx motionary doctor` and the `@deprecated` type messages now point at `usa-codemod-13`. Still no runtime warnings — imports stay side-effect free (the 11.5 decision).
+
+### Checks
+- New `test/widgets-12-9.test.ts`: codemod rewrites (paths, events, CDN majors, exact pins untouched), idempotence, CLI dry run / write, bin entry, doctor + types messages, docs.
+
 ## [12.5.0] - 2026-10-10
 
 ### Version compatibility (Tooling)

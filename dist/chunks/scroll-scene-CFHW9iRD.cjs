@@ -93,4 +93,4 @@ function defineScrollScene(tag = 'usa-scroll-scene') {
 
 exports.defineScrollScene = defineScrollScene;
 exports.parseScrub = parseScrub;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.5.0/dist/chunks/scroll-scene-CFHW9iRD.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.9.0/dist/chunks/scroll-scene-CFHW9iRD.cjs.map

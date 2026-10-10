@@ -119,6 +119,7 @@ export class Hero {}
 > 12.3: the Figma plugin exports motion tokens (W3C JSON + CSS) and a runnable HTML page per selection, prerequisites in order — [figma-plugin/README.md](./figma-plugin/README.md).
 > 12.4: [component playground](https://harrisoncn.github.io/Motionary/showcase/run.html) — every component as a runnable page with its prerequisites and tier, one-click copy.
 > 12.5: version compatibility — the manifest records when each component / module arrived and changed; `motionary-mcp` answers for your installed version; `npx motionary compat <version>` — [docs/version-compat.md](./docs/version-compat.md).
+> 12.9: preparing for 13.0 — the import paths deprecated in 11.5 are removed in 13.0: [docs/upgrading-13.md](./docs/upgrading-13.md) · `npx motionary doctor` · `npx usa-codemod-13 --write`.
 
 Animated components need no framework at all:
 
