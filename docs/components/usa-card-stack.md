@@ -6,7 +6,7 @@ A deck where the top card swipes away left or right (pointer, touch, arrow keys)
 
 - **Category:** cards
 - **Import:** `import { defineCardStack } from 'motionary/components/cards'` then `defineCardStack();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `visible`, `offset`, `disabled`, `threshold`, `loop`
 - **Events:** `usa:swipe`, `usa:empty`
 - **Slots:** —

@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 9.4
 - **Import:** `import { defineVideoCard } from 'motionary/components/widgets'` then `defineVideoCard();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
 - **Attributes:** `label`, `duration`
 - **Events:** `usa:open`
 - **Slots:** —

@@ -20,6 +20,9 @@ export function defineDoubleTap(tag = 'usa-double-tap'): CustomElementConstructo
     tag,
     (Base) =>
       class UsaDoubleTap extends Base {
+        static get observedAttributes(): string[] {
+          return ['disabled', 'delay', 'icon', 'color'];
+        }
         mount(): void {
           let last = 0;
           let lx = 0;

@@ -29,6 +29,6 @@ strings (`addEventListener('usa-beat', …)`), Vue `@usa-beat`, Angular `(usa-be
   `@deprecated` — and are removed in **13.0** ([public-api.md](./public-api.md)). Nothing warns at runtime.
 - Click-activated hosts became keyboard-reachable in 11.8 (`tabindex="0"`, `role="button"` unless you set them).
 
-## Preview the 12.0 check
+## The contract check
 
-`npm run check:contract -- --preview` (in the Motionary repo) prints what the blocking 12.0 contract check would report today.
+`npm run check:contract` (CI) fails on any contract finding; `npm run contract:preview` lists them. CDN URLs move with the major: `motionary@11/` → `motionary@12/`.

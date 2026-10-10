@@ -6,7 +6,7 @@
 
 - **Category:** reveal · **since** 10.4
 - **Import:** `import { defineScrollRing } from 'motionary/components/widgets'` then `defineScrollRing();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
 - **Attributes:** `for`, `engine`, `label`, `back-to-top`, `size`, `thickness`, `horizontal`, `preview`
 - **Events:** `usa:progress`, `usa:top`
 - **Slots:** —

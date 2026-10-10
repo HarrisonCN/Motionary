@@ -6,7 +6,7 @@ Click or tap to send water ripples through the image; hover adds a gentle wobble
 
 - **Category:** webgl
 - **Import:** `import { defineLiquid } from 'motionary/components/webgl'` then `defineLiquid();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** —
 - **Events:** —
 - **Slots:** —

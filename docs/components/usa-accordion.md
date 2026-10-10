@@ -6,7 +6,7 @@ Smooth expand / collapse for native <details> — semantics, keyboard and find-i
 
 - **Category:** transitions
 - **Import:** `import { defineAccordion } from 'motionary/components/transitions'` then `defineAccordion();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `multiple`, `duration`
 - **Events:** `usa:toggle`
 - **Slots:** —

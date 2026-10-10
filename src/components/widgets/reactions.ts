@@ -28,6 +28,9 @@ export function defineReactions(tag = 'usa-reactions'): CustomElementConstructor
     tag,
     (Base) => {
       class UsaReactions extends Base {
+        static get observedAttributes(): string[] {
+          return ['emojis', 'counts', 'picker'];
+        }
         private _c = new Map<string, number>();
         private _mine = new Set<string>();
         get counts(): Record<string, number> {

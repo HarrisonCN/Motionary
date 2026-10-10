@@ -32,6 +32,9 @@ export function defineLyrics(tag = 'usa-lyrics'): CustomElementConstructor | und
     tag,
     (Base) => {
       class UsaLyrics extends Base {
+        static get observedAttributes(): string[] {
+          return ['label', 'for'];
+        }
         private _lines: { t: number; text: string }[] = [];
         private _time = 0;
         private _active = -1;

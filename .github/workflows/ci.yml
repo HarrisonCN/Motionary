@@ -36,6 +36,8 @@ jobs:
         run: npm run check:treeshake
       - name: Runtime tiers (basic / standard / advanced bundles within fixed budgets)
         run: npm run check:tiers
+      - name: Component contract (12.0, blocking — docs/component-contract.md)
+        run: npm run check:contract
       - name: Prerequisite docs in all five places (check:peer-docs)
         run: npm run check:peer-docs
       - name: Package lint (publint + are-the-types-wrong)

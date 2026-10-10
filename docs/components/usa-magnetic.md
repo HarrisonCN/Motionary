@@ -6,7 +6,7 @@ Content leans toward the pointer when it comes near and springs back. Fine point
 
 - **Category:** interaction
 - **Import:** `import { defineMagnetic } from 'motionary/components/interaction'` then `defineMagnetic();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `strength`, `radius`, `disabled`
 - **Events:** —
 - **Slots:** —

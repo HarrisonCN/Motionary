@@ -6,7 +6,7 @@ Ten card effects you can combine (effect="lift sheen"): flip (hover or click, x/
 
 - **Category:** cards
 - **Import:** `import { defineCard } from 'motionary/components/cards'` then `defineCard();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `effect`, `trigger`, `disabled`, `color`, `depth`
 - **Events:** `usa:flip`, `usa:expand`, `usa:collapse`
 - **Slots:** —

@@ -35,6 +35,7 @@ export function hexToHsv(hex: string): [number, number, number] | null {
 }
 
 export function defineColorPicker(tag = 'usa-color-picker'): CustomElementConstructor | undefined {
+  // contract-exempt: attr-unobserved — value: state reflected by the element itself (set the property instead); observing it would re-mount on every change
   return defineElement(
     tag,
     (Base) => {

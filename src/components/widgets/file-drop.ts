@@ -24,6 +24,9 @@ export function defineFileDrop(tag = 'usa-file-drop'): CustomElementConstructor 
     tag,
     (Base) => {
       class UsaFileDrop extends Base {
+        static get observedAttributes(): string[] {
+          return ['label', 'accept', 'multiple', 'simulate'];
+        }
         private _files: File[] = [];
         private _depth = 0;
 

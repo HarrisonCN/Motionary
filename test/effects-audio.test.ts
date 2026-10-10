@@ -222,7 +222,7 @@ describe('5.6 sound-reactive backgrounds', () => {
 });
 
 describe('5.6 <usa-audio>', () => {
-  it('renders a toggle button, enables the source on click, plays [data-usa-beat] effects, emits usa-beat', async () => {
+  it('renders a toggle button, enables the source on click, plays [data-usa-beat] effects, emits usa:beat', async () => {
     defineAudio();
     const run = vi.fn();
     registerEffect({ name: 'test-el-beat', kind: 'attention', run });
@@ -231,7 +231,7 @@ describe('5.6 <usa-audio>', () => {
     expect(btn.tagName).toBe('BUTTON');
     expect(btn.getAttribute('aria-pressed')).toBe('false');
     const beats: unknown[] = [];
-    host.addEventListener('usa-beat', (e) => beats.push((e as CustomEvent).detail));
+    host.addEventListener('usa:beat', (e) => beats.push((e as CustomEvent).detail));
     await (host as any).toggle();
     expect(btn.getAttribute('aria-pressed')).toBe('true');
     expect((host as any).active).toBe(true);
@@ -255,7 +255,7 @@ describe('5.6 <usa-audio>', () => {
     const host = mount<HTMLElement>('<usa-audio><button data-audio-toggle>Mine</button></usa-audio>');
     expect(host.querySelectorAll('button').length).toBe(1);
     const errs: unknown[] = [];
-    host.addEventListener('usa-audio-error', (e) => errs.push(e));
+    host.addEventListener('usa:audio-error', (e) => errs.push(e));
     await (host as any).toggle();
     expect(host.hasAttribute('data-audio-error')).toBe(true);
     expect(errs.length).toBe(1);

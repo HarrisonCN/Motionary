@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 8.7
 - **Import:** `import { defineGyroCard } from 'motionary/components/widgets'` then `defineGyroCard();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
 - **Attributes:** `max`, `glare`
 - **Events:** `usa:tilt`
 - **Slots:** —

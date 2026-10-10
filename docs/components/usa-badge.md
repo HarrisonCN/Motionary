@@ -6,7 +6,7 @@ Count or dot badge that bumps with a spring when its value changes; 99+ capping,
 
 - **Category:** ui
 - **Import:** `import { defineBadge } from 'motionary/components/ui'` then `defineBadge();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `value`, `max`, `dot`, `label`, `show-zero`
 - **Events:** —
 - **Slots:** —

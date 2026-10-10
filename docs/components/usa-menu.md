@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 6.3
 - **Import:** `import { defineMenu } from 'motionary/components/widgets'` then `defineMenu();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
 - **Attributes:** `placement`, `effect`
 - **Events:** `usa:select`, `usa:open`, `usa:close`
 - **Slots:** —

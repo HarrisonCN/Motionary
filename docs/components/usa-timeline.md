@@ -6,7 +6,7 @@ Every data-tl child becomes a step in document order. data-at ('-=200', '<', 'la
 
 - **Category:** timeline
 - **Import:** `import { defineTimeline } from 'motionary/components/timeline'` then `defineTimeline();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `scrub`, `trigger`, `overlap`, `duration`, `stagger`, `smooth`, `repeat`
 - **Events:** `usa:complete`
 - **Slots:** —

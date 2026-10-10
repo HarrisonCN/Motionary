@@ -6,7 +6,7 @@ Animated modal, side drawers and bottom sheet on the native <dialog>: top layer,
 
 - **Category:** transitions
 - **Import:** `import { defineDialog } from 'motionary/components/transitions'` then `defineDialog();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `open`, `kind`, `label`, `no-esc`, `no-backdrop-close`
 - **Events:** `usa:open`, `usa:beforeclose`, `usa:close`
 - **Slots:** default

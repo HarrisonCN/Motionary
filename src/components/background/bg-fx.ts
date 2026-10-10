@@ -55,6 +55,9 @@ function canvasLoop(host: any, draw: (ctx: CanvasRenderingContext2D, w: number, 
 export interface UsaGridGlowElement extends UsaElement {}
 export function defineGridGlow(tag = 'usa-grid-glow'): CustomElementConstructor | undefined {
   return defineElement(tag, (Base) => class extends Base {
+    static get observedAttributes(): string[] {
+      return ['size', 'radius', 'color'];
+    }
     mount(): void {
       this.style.setProperty('--usa-grid', `${this.num('size', 32)}px`);
       this.style.setProperty('--usa-grid-r', `${this.num('radius', 220)}px`);
@@ -86,6 +89,9 @@ export function defineGridGlow(tag = 'usa-grid-glow'): CustomElementConstructor 
 export interface UsaBlobsElement extends UsaElement {}
 export function defineBlobs(tag = 'usa-blobs'): CustomElementConstructor | undefined {
   return defineElement(tag, (Base) => class extends Base {
+    static get observedAttributes(): string[] {
+      return ['colors', 'speed', 'blur'];
+    }
     mount(): void {
       this.querySelector(':scope > .usa-blobs-layer')?.remove();
       const colors = this.str('colors', '#7c5cff,#22d3ee,#f472b6,#34d399').split(',');
@@ -111,6 +117,9 @@ export interface UsaWaterRippleElement extends UsaElement {
 }
 export function defineWaterRipple(tag = 'usa-water-ripple'): CustomElementConstructor | undefined {
   return defineElement(tag, (Base) => class extends Base {
+    static get observedAttributes(): string[] {
+      return ['damping', 'color', 'strength'];
+    }
     private _drop: ((x: number, y: number, s?: number) => void) | null = null;
     drop(x: number, y: number, s = 1): void {
       this._drop?.(x, y, s);
@@ -177,6 +186,9 @@ export function defineWaterRipple(tag = 'usa-water-ripple'): CustomElementConstr
 export interface UsaDotNetworkElement extends UsaElement {}
 export function defineDotNetwork(tag = 'usa-dot-network'): CustomElementConstructor | undefined {
   return defineElement(tag, (Base) => class extends Base {
+    static get observedAttributes(): string[] {
+      return ['gap', 'radius', 'color'];
+    }
     mount(): void {
       const gap = Math.max(8, this.num('gap', 28));
       const R = this.num('radius', 140);

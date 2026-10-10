@@ -26,12 +26,12 @@ npm i motionary
 
 ```html
 <!-- CDN (no build) -->
-<script src="https://unpkg.com/motionary@11/dist/index.umd.js"></script>            <!-- window.ScrollAnimate -->
-<script src="https://unpkg.com/motionary@11/dist/presets-extended.umd.js"></script> <!-- +181 presets -->
-<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>       <!-- every <usa-*>, window.UsaComponents -->
+<script src="https://unpkg.com/motionary@12/dist/index.umd.js"></script>            <!-- window.ScrollAnimate -->
+<script src="https://unpkg.com/motionary@12/dist/presets-extended.umd.js"></script> <!-- +181 presets -->
+<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>       <!-- every <usa-*>, window.UsaComponents -->
 ```
 
-jsDelivr 同样可用：`https://cdn.jsdelivr.net/npm/motionary@11/dist/…`。已有的 `use-scroll-animate` 安装与 `unpkg.com/use-scroll-animate@6` 链接继续可用。
+jsDelivr 同样可用：`https://cdn.jsdelivr.net/npm/motionary@12/dist/…`。已有的 `use-scroll-animate` 安装与 `unpkg.com/use-scroll-animate@6` 链接继续可用。
 
 ## 30 秒上手
 

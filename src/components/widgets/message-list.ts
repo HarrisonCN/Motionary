@@ -29,6 +29,9 @@ export function defineMessageList(tag = 'usa-message-list'): CustomElementConstr
     tag,
     (Base) => {
       class UsaMessageList extends Base {
+        static get observedAttributes(): string[] {
+          return ['label'];
+        }
         private _msgs: ChatMessage[] = [];
         get messages(): ChatMessage[] {
           return this._msgs.map((m) => ({ ...m }));

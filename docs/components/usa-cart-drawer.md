@@ -6,8 +6,8 @@
 
 - **Category:** ui · **since** 7.3
 - **Import:** `import { defineCartDrawer } from 'motionary/components/widgets'` then `defineCartDrawer();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
-- **Attributes:** —
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
+- **Attributes:** `label`, `items`, `currency`
 - **Events:** `usa:open`, `usa:close`, `usa:change`
 - **Slots:** —
 - **Methods:** `add()`, `removeItem()`, `toggle()`

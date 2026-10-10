@@ -18,6 +18,9 @@ export function defineBackToTop(tag = 'usa-back-to-top'): CustomElementConstruct
     tag,
     (Base) =>
       class UsaBackToTop extends Base {
+        static get observedAttributes(): string[] {
+          return ['label', 'offset', 'focus-target'];
+        }
         private _frame = 0;
         get visible(): boolean {
           return this.hasAttribute('data-visible');

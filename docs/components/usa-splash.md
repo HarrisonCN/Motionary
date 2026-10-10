@@ -6,8 +6,8 @@ An app launch screen that leaves (fade, scale, slide-up, circle) once the page h
 
 - **Category:** page
 - **Import:** `import { defineSplash } from 'motionary/components/page'` then `defineSplash();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
-- **Attributes:** —
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
+- **Attributes:** `label`, `manual`, `min`, `exit`
 - **Events:** `usa:done`
 - **Slots:** —
 - **Methods:** `done()`

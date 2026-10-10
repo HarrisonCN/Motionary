@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 7.7
 - **Import:** `import { defineUploadProgress } from 'motionary/components/widgets'` then `defineUploadProgress();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
 - **Attributes:** `name`, `size`, `value`, `status`, `message`
 - **Events:** `usa:retry`, `usa:done`, `usa:error`
 - **Slots:** —

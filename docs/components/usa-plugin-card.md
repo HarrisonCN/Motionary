@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 10.1
 - **Import:** `import { definePluginCard } from 'motionary/components/widgets'` then `definePluginCard();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
 - **Attributes:** `name`, `title`, `version`, `author`, `engine`, `downloads`, `integrity`, `src`
 - **Events:** `usa:toggle`, `usa:verified`, `usa:runtime-missing`
 - **Slots:** —
@@ -29,10 +29,10 @@ definePluginCard(); // registers <usa-plugin-card> — after the prerequisites
 3. **CDN:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>
 ```
 
 ## Minimal example

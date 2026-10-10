@@ -6,8 +6,8 @@ Hides while you scroll down, slides back on the first scroll up; shrink makes it
 
 - **Category:** ui
 - **Import:** `import { defineNavbar } from 'motionary/components/ui'` then `defineNavbar();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
-- **Attributes:** —
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
+- **Attributes:** `target`, `threshold`
 - **Events:** `usa:hide`, `usa:show`
 - **Slots:** —
 - **Methods:** `show()`

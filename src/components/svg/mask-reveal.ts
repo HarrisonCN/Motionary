@@ -31,6 +31,9 @@ export function defineMaskReveal(tag = 'usa-mask-reveal'): CustomElementConstruc
     tag,
     (Base) =>
       class UsaMaskReveal extends Base {
+        static get observedAttributes(): string[] {
+          return ['shape', 'at', 'duration', 'delay', 'trigger', 'repeat'];
+        }
         private frames(): [string, string] {
           const s = MASK_SHAPES[this.str('shape', 'circle')] || MASK_SHAPES.circle;
           const at = this.str('at');

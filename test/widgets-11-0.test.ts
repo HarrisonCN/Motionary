@@ -57,21 +57,22 @@ describe('11.0: the 10.9 deprecations are removed', () => {
 });
 
 describe('11.0: stable surfaces', () => {
+  const MAJOR = JSON.parse(read('package.json')).version.split('.')[0]; // 12.0: follow the current major
   it('manifest schema v2 is frozen and stable, with nothing deprecated', () => {
     const m = JSON.parse(execFileSync(process.execPath, ['scripts/gen-manifest.mjs', '--stdout'], { maxBuffer: 64 << 20 }).toString());
     expect(m.schemaVersion).toBe(2);
     expect(m.stability).toBe('stable');
     expect(m.components.filter((c: any) => c.deprecated)).toEqual([]);
     expect(m.components.find((c: any) => c.tag === 'usa-three-scene')).toBeUndefined();
-    expect(JSON.stringify(m.cdn)).toMatch(/motionary@11\//);
+    expect(JSON.stringify(m.cdn)).toContain(`motionary@${MAJOR}/`);
   });
   it('version 11, CDN major @11 everywhere a URL is copied', () => {
-    expect(JSON.parse(read('package.json')).version).toMatch(/^11\./);
-    expect(RUNTIME_VERSION).toMatch(/^11\./);
-    expect(RUNTIME_CDN).toBe('https://cdn.jsdelivr.net/npm/motionary@11/dist/');
+    expect(Number(MAJOR)).toBeGreaterThanOrEqual(11);
+    expect(RUNTIME_VERSION.split('.')[0]).toBe(MAJOR);
+    expect(RUNTIME_CDN).toBe(`https://cdn.jsdelivr.net/npm/motionary@${MAJOR}/dist/`);
     for (const f of ['README.md', 'README_zh.md', 'README_ja.md', 'AGENTS.md', 'docs/ROADMAP.md', 'showcase/catalog/prereqs.js', 'showcase/catalog/widgets.js', 'src/components/widgets/install-button.ts', 'docs/runtime/core.md', 'docs/components/usa-gl-scene.md'])
       expect(read(f), f).not.toMatch(/motionary@(6|10)\//);
-    expect(read('README.md')).toMatch(/motionary@11\/dist\/runtime\.iife\.js/);
+    expect(read('README.md')).toContain(`motionary@${MAJOR}/dist/runtime.iife.js`);
   });
   it('the compatibility matrix is generated, frozen and linked from the README "Stable API" section', () => {
     const cm = read('docs/compat-matrix.md');

@@ -11,7 +11,7 @@
  * - `highlight` — paragraphs dim except the one crossing the viewport center.
  *
  * Every template sets `--usa-story-progress` (0–1) on the host and dispatches
- * `usa-story-step` (`detail: { index }`). Reduced motion: no sliding / zooming
+ * `usa:step` (`detail: { index }`; 12.0, was `usa-story-step`). Reduced motion: no sliding / zooming
  * (the gallery stacks vertically), counters show final values, the rest is
  * class changes only.
  */
@@ -91,8 +91,6 @@ export function defineStory(tag = 'usa-story'): CustomElementConstructor | undef
           this.steps().forEach((s, k) => s.toggleAttribute('data-active', k === i));
           const stage = this.querySelector<HTMLElement>('[data-stage]');
           if (stage) stage.dataset.activeStep = String(i);
-          // contract-exempt: event-prefix — legacy usa-story-step kept next to usa:step until 12.0
-          this.dispatchEvent(new CustomEvent('usa-story-step', { detail: { index: i }, bubbles: true }));
           this.emit('step', { index: i });
         }
         /** Recompute from the current scroll position (called on scroll / resize). */

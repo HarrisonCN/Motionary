@@ -23,6 +23,9 @@ export function definePullRefresh(tag = 'usa-pull-refresh'): CustomElementConstr
     tag,
     (Base) =>
       class UsaPullRefresh extends Base {
+        static get observedAttributes(): string[] {
+          return ['threshold', 'disabled', 'label'];
+        }
         private _y!: SpringValue;
         private _busy = false;
         private _ind: HTMLElement | null = null;

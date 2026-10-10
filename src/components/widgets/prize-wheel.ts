@@ -30,6 +30,9 @@ export function definePrizeWheel(tag = 'usa-prize-wheel'): CustomElementConstruc
     tag,
     (Base) => {
       class UsaPrizeWheel extends Base {
+        static get observedAttributes(): string[] {
+          return ['segments', 'label', 'turns', 'duration'];
+        }
         private _r = -1;
         private _spin = false;
         private _rot = 0;

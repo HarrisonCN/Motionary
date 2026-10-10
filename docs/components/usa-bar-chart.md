@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 7.2
 - **Import:** `import { defineBarChart } from 'motionary/components/widgets'` then `defineBarChart();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
 - **Attributes:** `horizontal`, `unit`, `max`, `values`, `labels`, `label`
 - **Events:** —
 - **Slots:** —

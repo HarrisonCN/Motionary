@@ -6,7 +6,7 @@
 
 - **Category:** layout · **since** 6.5
 - **Import:** `import { defineMasonryFlow } from 'motionary/components/widgets'` then `defineMasonryFlow();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
 - **Attributes:** `min`, `gap`
 - **Events:** `usa:layout`
 - **Slots:** —

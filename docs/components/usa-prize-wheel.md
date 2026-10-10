@@ -6,8 +6,8 @@
 
 - **Category:** ui · **since** 7.5
 - **Import:** `import { definePrizeWheel } from 'motionary/components/widgets'` then `definePrizeWheel();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
-- **Attributes:** —
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
+- **Attributes:** `segments`, `label`, `turns`, `duration`
 - **Events:** `usa:result`
 - **Slots:** —
 - **Methods:** `spin()`

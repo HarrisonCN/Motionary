@@ -22,6 +22,9 @@ export function definePinchZoom(tag = 'usa-pinch-zoom'): CustomElementConstructo
     tag,
     (Base) =>
       class UsaPinchZoom extends Base {
+        static get observedAttributes(): string[] {
+          return ['min', 'max', 'preset', 'double-tap'];
+        }
         private _k!: SpringValue;
         private _x!: SpringValue;
         private _y!: SpringValue;

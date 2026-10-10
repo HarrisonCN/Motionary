@@ -24,6 +24,9 @@ export function defineSwipeDeck(tag = 'usa-swipe-deck'): CustomElementConstructo
     tag,
     (Base) => {
       class UsaSwipeDeck extends Base {
+        static get observedAttributes(): string[] {
+          return ['label', 'threshold'];
+        }
         private _cards: HTMLElement[] = [];
         private _gone: HTMLElement[] = [];
 

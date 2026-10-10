@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 8.1
 - **Import:** `import { defineRedEnvelope } from 'motionary/components/widgets'` then `defineRedEnvelope();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
 - **Attributes:** `amount`, `currency`, `message`, `from`, `opened`
 - **Events:** `usa:open`
 - **Slots:** —

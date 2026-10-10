@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 10.9
 - **Import:** `import { defineDotLottie } from 'motionary/components/dotlottie'` then `defineDotLottie();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `theme`, `state-machine`
 - **Events:** `usa:error`, `usa:state`, `usa:custom`, `usa:runtime-missing`
 - **Slots:** —
@@ -31,12 +31,12 @@ defineDotLottie(); // registers <usa-dotlottie> — after the prerequisites
 3. **CDN:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/vector.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/lottie-state.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/vector.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/lottie-state.iife.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>
 ```
 
 ## Minimal example

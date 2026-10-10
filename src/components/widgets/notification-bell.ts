@@ -32,6 +32,9 @@ export function defineNotificationBell(tag = 'usa-notification-bell'): CustomEle
     tag,
     (Base) => {
       class UsaNotificationBell extends Base {
+        static get observedAttributes(): string[] {
+          return ['label'];
+        }
         private _n: BellNotice[] = [];
         private _open = false;
         get unread(): number {

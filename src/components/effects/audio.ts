@@ -12,7 +12,7 @@
  * - Beat detection: `createBeatDetector()` (pure: energy → beat?), `onBeat(cb)`
  *   and `bindBeat(el, effect, options)`, which plays any registered effect on
  *   every beat. `<usa-audio>` does the same for `[data-usa-beat="effect"]`
- *   children and emits `usa-beat`.
+ *   children and emits `usa:beat`.
  * - While audio runs, `--usa-audio-level` and `--usa-audio-bass` (0–1) are set
  *   on `<html>` for CSS-driven reactions.
  *
@@ -309,7 +309,7 @@ export interface UsaAudioElement extends UsaElement {
  * `[data-audio-toggle]`, or one it renders) that enables the audio source on
  * click; children with `data-usa-beat="effect"` play that effect on every
  * beat (`data-usa-beat-options` JSON; `threshold` / `cooldown` attributes).
- * Emits `usa-beat` and `usa-audio-error`.
+ * Emits `usa:beat` and `usa:audio-error` (12.0: the legacy `usa-beat` / `usa-audio-error` names are gone).
  */
 export function defineAudio(tag = 'usa-audio'): CustomElementConstructor | undefined {
   return defineElement(
@@ -343,8 +343,6 @@ export function defineAudio(tag = 'usa-audio'): CustomElementConstructor | undef
             this.removeAttribute('data-audio-error');
             b.setAttribute('aria-pressed', 'true');
             this.off = onBeat((d) => {
-              // contract-exempt: event-prefix — legacy usa-beat / usa-audio-error kept next to usa:beat / usa:audio-error until 12.0
-              this.dispatchEvent(new CustomEvent('usa-beat', { detail: d, bubbles: true }));
               this.emit('beat', d);
               if (prefersReducedMotion()) return;
               this.querySelectorAll<HTMLElement>('[data-usa-beat]').forEach((el) => {
@@ -359,7 +357,6 @@ export function defineAudio(tag = 'usa-audio'): CustomElementConstructor | undef
             }, { threshold: this.num('threshold', 1.35), cooldown: this.num('cooldown', 250) });
           } catch (err) {
             this.setAttribute('data-audio-error', '');
-            this.dispatchEvent(new CustomEvent('usa-audio-error', { detail: { error: err }, bubbles: true }));
             this.emit('audio-error', { error: err });
           }
         }

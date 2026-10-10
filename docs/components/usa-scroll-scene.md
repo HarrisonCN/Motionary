@@ -6,7 +6,7 @@
 
 - **Category:** reveal · **since** 10.2
 - **Import:** `import { defineScrollScene } from 'motionary/components/widgets'` then `defineScrollScene();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
 - **Attributes:** `start`, `end`, `scrub`, `pin`, `markers`, `stagger`, `toggle-class`, `preview`
 - **Events:** `usa:enter`, `usa:leave`, `usa:progress`, `usa:runtime-missing`
 - **Slots:** —
@@ -30,11 +30,11 @@ defineScrollScene(); // registers <usa-scroll-scene> — after the prerequisites
 3. **CDN:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/scroll.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/scroll.iife.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>
 ```
 
 ## Minimal example

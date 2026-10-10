@@ -6,7 +6,7 @@
 
 - **Category:** fx
 - **Import:** `import { defineStory } from 'motionary/components/effects'` then `defineStory();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `template`, `zoom`, `label`
 - **Events:** `usa:step`
 - **Slots:** —
@@ -69,7 +69,7 @@ defineStory(); // registers <usa-story>
 
 ### Story: step highlight
 
-5.4: template="highlight" dims every paragraph except the one crossing the viewport center (pin does the same for [data-step] sections next to a sticky [data-stage]); fires usa-story-step.
+5.4: template="highlight" dims every paragraph except the one crossing the viewport center (pin does the same for [data-step] sections next to a sticky [data-stage]); fires usa:step.
 
 ```html
 <usa-story template="pin">

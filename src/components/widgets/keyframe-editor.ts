@@ -37,6 +37,9 @@ export function defineKeyframeEditor(tag = 'usa-keyframe-editor'): CustomElement
     tag,
     (Base) => {
       class UsaKeyframeEditor extends Base {
+        static get observedAttributes(): string[] {
+          return ['for'];
+        }
         private _anim: AnimationJSON = JSON.parse(JSON.stringify(DEFAULT));
         private _player: Player | null = null;
 

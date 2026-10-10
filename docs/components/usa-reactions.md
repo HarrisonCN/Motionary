@@ -6,8 +6,8 @@
 
 - **Category:** ui · **since** 7.4
 - **Import:** `import { defineReactions } from 'motionary/components/widgets'` then `defineReactions();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
-- **Attributes:** —
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
+- **Attributes:** `emojis`, `counts`, `picker`
 - **Events:** `usa:react`
 - **Slots:** —
 - **Methods:** `toggle()`

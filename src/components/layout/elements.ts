@@ -17,6 +17,9 @@ export function defineAutoAnimate(tag = 'usa-auto-animate'): CustomElementConstr
     tag,
     (Base) =>
       class UsaAutoAnimate extends Base {
+        static get observedAttributes(): string[] {
+          return ['duration', 'no-scale'];
+        }
         private _c: ReturnType<typeof autoAnimate> | null = null;
         enable(): void {
           this._c?.enable();

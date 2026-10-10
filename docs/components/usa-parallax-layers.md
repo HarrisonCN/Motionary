@@ -6,7 +6,7 @@
 
 - **Category:** reveal · **since** 10.4
 - **Import:** `import { defineParallaxLayers } from 'motionary/components/widgets'` then `defineParallaxLayers();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
 - **Attributes:** `range`, `engine`, `horizontal`, `pointer`, `strength`, `preview`
 - **Events:** `usa:progress`
 - **Slots:** —

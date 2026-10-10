@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 7.8
 - **Import:** `import { defineChatComposer } from 'motionary/components/widgets'` then `defineChatComposer();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
 - **Attributes:** `placeholder`, `label`, `rows`, `busy`, `value`
 - **Events:** `usa:stop`, `usa:send`
 - **Slots:** —

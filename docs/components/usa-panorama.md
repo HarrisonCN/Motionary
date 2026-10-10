@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 8.8
 - **Import:** `import { definePanorama } from 'motionary/components/widgets'` then `definePanorama();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
 - **Attributes:** `src`, `autorotate`, `label`
 - **Events:** `usa:xr`, `usa:xr-request`, `usa:look`
 - **Slots:** —
