@@ -218,4 +218,4 @@ function registerLightPack() {
 exports.LIGHT_FX = LIGHT_FX;
 exports.registerLightPack = registerLightPack;
 exports.trackPointer = trackPointer;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.1.0/dist/components/fx-light.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.2.0/dist/components/fx-light.cjs.map

@@ -118,4 +118,4 @@ function defineTabBar(tag = 'usa-tab-bar') {
 }
 
 export { TAB_INDICATORS as T, defineTabBar as d };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.1.0/dist/chunks/tab-bar-2d1734DE.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.2.0/dist/chunks/tab-bar-2d1734DE.js.map

@@ -8,4 +8,4 @@ require('../chunks/sheet-BfH5vWIW.cjs');
 
 
 exports.defineToastStack = widgets_toastStack.defineToastStack;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.1.0/dist/widgets/toast-stack.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.2.0/dist/widgets/toast-stack.cjs.map

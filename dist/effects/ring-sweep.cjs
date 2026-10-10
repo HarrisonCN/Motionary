@@ -17,4 +17,4 @@ function registerRingSweep() {
 exports.effect = effect;
 exports.register = registerRingSweep;
 exports.registerRingSweep = registerRingSweep;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.1.0/dist/effects/ring-sweep.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.2.0/dist/effects/ring-sweep.cjs.map

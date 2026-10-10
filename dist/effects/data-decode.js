@@ -12,4 +12,4 @@ function registerDataDecode() {
 }
 
 export { effect, registerDataDecode as register, registerDataDecode };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.1.0/dist/effects/data-decode.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.2.0/dist/effects/data-decode.js.map

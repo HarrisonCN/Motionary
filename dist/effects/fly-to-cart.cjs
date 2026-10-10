@@ -16,4 +16,4 @@ function registerFlyToCart() {
 exports.effect = effect;
 exports.register = registerFlyToCart;
 exports.registerFlyToCart = registerFlyToCart;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.1.0/dist/effects/fly-to-cart.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.2.0/dist/effects/fly-to-cart.cjs.map
