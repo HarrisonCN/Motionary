@@ -98,4 +98,4 @@ const click = [
 const BUILTIN_EFFECTS = [...enter, ...attention, ...click];
 
 exports.BUILTIN_EFFECTS = BUILTIN_EFFECTS;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/chunks/builtins-Cz3iufK6.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/chunks/builtins-Cz3iufK6.cjs.map

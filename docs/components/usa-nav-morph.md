@@ -7,7 +7,7 @@
 - **Category:** ui · **since** 6.6
 - **Import:** `import { defineNavMorph } from 'motionary/components/widgets'` then `defineNavMorph();`
 - **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
-- **Attributes:** `indicator`
+- **Attributes:** `indicator`, `label`, `active`
 - **Events:** `usa:change`
 - **Slots:** —
 - **Methods:** —

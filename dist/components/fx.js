@@ -9,7 +9,7 @@ import '../chunks/fx-DUteojZx.js';
 function defineFx(tag = 'usa-fx') {
     return defineElement(tag, (Base) => class UsaFx extends Base {
         static get observedAttributes() {
-            return ['effect', 'trigger', 'options'];
+            return ['effect', 'trigger', 'options', 'self', 'once'];
         }
         get target() {
             return this.flag('self') ? this : (this.firstElementChild || this);
@@ -60,4 +60,4 @@ function defineFxComponents() {
 }
 
 export { BUILTIN_EFFECTS, EFFECT_TRIGGERS, bindEffect, defineFx, defineFxComponents, playEffect, registerBuiltinEffects, registerEffects };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/components/fx.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/components/fx.js.map

@@ -7,8 +7,8 @@
 - **Category:** fx
 - **Import:** `import { definePlayer } from 'motionary/components/effects'` then `definePlayer();`
 - **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
-- **Attributes:** `src`, `trigger`, `loop`, `rate`
-- **Events:** —
+- **Attributes:** `src`, `trigger`, `loop`, `rate`, `controls`
+- **Events:** `usa:finish`, `usa:ready`
 - **Slots:** —
 - **Methods:** `load()`, `play()`, `pause()`, `seek()`
 - **Source:** [src/components/effects/player.ts](../../src/components/effects/player.ts)

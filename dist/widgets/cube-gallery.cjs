@@ -17,7 +17,7 @@ function defineCubeGallery(tag = 'usa-cube-gallery') {
                 this._timer = 0;
             }
             static get observedAttributes() {
-                return ['axis', 'autoplay'];
+                return ['axis', 'autoplay', 'label'];
             }
             get index() {
                 return this._i;
@@ -140,4 +140,4 @@ function defineCubeGallery(tag = 'usa-cube-gallery') {
 }
 
 exports.defineCubeGallery = defineCubeGallery;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/widgets/cube-gallery.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/widgets/cube-gallery.cjs.map

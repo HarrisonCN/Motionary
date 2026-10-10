@@ -36,7 +36,7 @@ export function defineDraggable(tag = 'usa-draggable'): CustomElementConstructor
     (Base) =>
       class UsaDraggable extends Base {
         static get observedAttributes(): string[] {
-          return ['axis', 'disabled', 'preset'];
+          return ['axis', 'disabled', 'preset', 'bounds', 'spring-back', 'inertia', 'snap', 'step'];
         }
 
         private _x = 0;

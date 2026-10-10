@@ -14,7 +14,7 @@ function defineVolumeKnob(tag = 'usa-volume-knob') {
                 this._v = 50;
             }
             static get observedAttributes() {
-                return ['min', 'max'];
+                return ['min', 'max', 'label'];
             }
             get value() {
                 return this._v;
@@ -98,4 +98,4 @@ function defineVolumeKnob(tag = 'usa-volume-knob') {
 }
 
 exports.defineVolumeKnob = defineVolumeKnob;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/widgets/volume-knob.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/widgets/volume-knob.cjs.map

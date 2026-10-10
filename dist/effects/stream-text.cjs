@@ -16,4 +16,4 @@ function registerStreamText() {
 exports.effect = effect;
 exports.register = registerStreamText;
 exports.registerStreamText = registerStreamText;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/effects/stream-text.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/effects/stream-text.cjs.map

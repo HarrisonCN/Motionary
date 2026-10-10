@@ -15,7 +15,7 @@ function defineStepper(tag = 'usa-stepper') {
                 this._fill = null;
             }
             static get observedAttributes() {
-                return ['orientation'];
+                return ['orientation', 'label', 'clickable'];
             }
             get steps() {
                 return this._steps;
@@ -104,4 +104,4 @@ function defineStepper(tag = 'usa-stepper') {
 }
 
 exports.defineStepper = defineStepper;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/widgets/stepper.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/widgets/stepper.cjs.map

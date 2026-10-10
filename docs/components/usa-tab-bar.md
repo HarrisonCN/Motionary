@@ -7,7 +7,7 @@
 - **Category:** ui · **since** 6.2
 - **Import:** `import { defineTabBar } from 'motionary/components/widgets'` then `defineTabBar();`
 - **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
-- **Attributes:** `indicator`
+- **Attributes:** `indicator`, `label`, `selected`
 - **Events:** `usa:change`
 - **Slots:** —
 - **Methods:** `select()`

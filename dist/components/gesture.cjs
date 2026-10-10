@@ -13,7 +13,7 @@ function defineSwipeable(tag = 'usa-swipeable') {
             this._off = 0;
         }
         static get observedAttributes() {
-            return ['axis', 'disabled'];
+            return ['axis', 'disabled', 'distance', 'dismiss', 'preset'];
         }
         get offset() {
             return this._off;
@@ -206,4 +206,4 @@ exports.swipeDirection = core.swipeDirection;
 exports.defineGestureComponents = defineGestureComponents;
 exports.definePinchZoom = definePinchZoom;
 exports.defineSwipeable = defineSwipeable;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/components/gesture.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/components/gesture.cjs.map

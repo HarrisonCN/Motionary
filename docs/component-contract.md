@@ -13,6 +13,8 @@ consistent (with `usa-codemod-12` where markup changes) and turns the contract t
 | **Reduced motion** | honour `prefers-reduced-motion` and `configureComponents({ motionSensitivity })`: jump to the end state (`this.reduced`, `this.motion()`, `animateWithMotion()`). | `reduced-motion` |
 | **Errors** | messages start with `[motionary]`, name the element or function and say how to fix it; a missing runtime module fires `usa:runtime-missing`. | `error-prefix` |
 
+11.8 fixed the non-breaking findings: attributes an element reads are observed (unless it writes them itself), `usa:*` events next to legacy names (`usa:beat`, `usa:audio-error`, `usa:ready`, `usa:finish`, `usa:step`), click-activated hosts are focusable buttons with Enter / Space (`keyClick()`), `<usa-player>` shows its end state under reduced motion, `[motionary]` error prefix. Intended behaviour is recorded with a `// contract-exempt: <rule> — <reason>` comment and listed in the report.
+
 The audit is a static scan of `src/components` (one row per element, keyed by its default tag). A finding is a place to look,
 not proof of a bug — e.g. an attribute read only once on purpose. Such cases get an explicit exemption in 12.0 instead of a
 silent pass.

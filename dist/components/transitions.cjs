@@ -25,7 +25,7 @@ function defineDialog(tag = 'usa-dialog') {
             this.returnValue = '';
         }
         static get observedAttributes() {
-            return ['open', 'kind', 'label'];
+            return ['open', 'kind', 'label', 'no-esc', 'no-backdrop-close'];
         }
         get dialog() {
             return this._dialog;
@@ -171,7 +171,7 @@ function defineAccordion(tag = 'usa-accordion') {
             this._running = new WeakMap();
         }
         static get observedAttributes() {
-            return [];
+            return ['multiple', 'duration'];
         }
         get items() {
             return Array.from(this.children).filter((c) => c.tagName === 'DETAILS');
@@ -241,7 +241,7 @@ function defineViewSwitch(tag = 'usa-view-switch') {
             this._anims = [];
         }
         static get observedAttributes() {
-            return ['active'];
+            return ['active', 'duration', 'effect'];
         }
         get views() {
             return Array.from(this.children);
@@ -427,4 +427,4 @@ exports.defineTransitionComponents = defineTransitionComponents;
 exports.defineViewSwitch = defineViewSwitch;
 exports.flip = flip;
 exports.viewTransition = viewTransition;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/components/transitions.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/components/transitions.cjs.map

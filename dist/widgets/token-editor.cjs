@@ -17,7 +17,7 @@ function defineTokenEditor(tag = 'usa-token-editor') {
                 this.t = JSON.parse(JSON.stringify(components_tokens.getMotionTokens()));
             }
             static get observedAttributes() {
-                return ['apply', 'format', 'groups'];
+                return ['apply', 'format', 'groups', 'label'];
             }
             get tokens() {
                 return this.t;
@@ -146,4 +146,4 @@ function defineTokenEditor(tag = 'usa-token-editor') {
 }
 
 exports.defineTokenEditor = defineTokenEditor;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/widgets/token-editor.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/widgets/token-editor.cjs.map

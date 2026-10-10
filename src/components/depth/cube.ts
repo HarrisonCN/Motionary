@@ -27,7 +27,7 @@ export function defineCube(tag = 'usa-cube'): CustomElementConstructor | undefin
     (Base) =>
       class UsaCube extends Base {
         static get observedAttributes(): string[] {
-          return ['size', 'autoplay'];
+          return ['size', 'autoplay', 'perspective'];
         }
         private _i = 0;
         private _rx!: SpringValue;

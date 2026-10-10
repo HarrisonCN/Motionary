@@ -643,7 +643,7 @@ function defineReveal(tag = 'usa-reveal') {
             this._anim = null;
         }
         static get observedAttributes() {
-            return ['effect', 'distance', 'repeat', 'threshold', 'root-margin'];
+            return ['effect', 'distance', 'repeat', 'threshold', 'root-margin', 'duration', 'delay', 'easing'];
         }
         get effect() {
             return this.str('effect', 'fade-up');
@@ -719,7 +719,7 @@ function defineStagger(tag = 'usa-stagger') {
             this._anims = [];
         }
         static get observedAttributes() {
-            return ['effect', 'repeat', 'threshold'];
+            return ['effect', 'repeat', 'threshold', 'distance', 'interval', 'delay', 'duration', 'easing'];
         }
         mount() {
             if (this.reduced) {
@@ -820,6 +820,7 @@ function defineScrollProgress(tag = 'usa-scroll-progress') {
             if (!this.hasAttribute('aria-label'))
                 this.setAttribute('aria-label', this.str('label', 'Reading progress'));
             const schedule = () => {
+                // contract-exempt: reduced-motion — the bar mirrors scroll position (user-driven), no autonomous motion
                 if (!this._frame)
                     this._frame = raf(() => ((this._frame = 0), this.update()));
             };
@@ -928,7 +929,7 @@ function defineTypewriter(tag = 'usa-typewriter') {
             this._running = false;
         }
         static get observedAttributes() {
-            return ['text', 'words'];
+            return ['text', 'words', 'start', 'speed', 'delete-speed', 'pause', 'loop', 'delay'];
         }
         get phrases() {
             const words = this.getAttribute('words');
@@ -1925,7 +1926,7 @@ function defineSplitText(tag = 'usa-split-text') {
             this._steps = 0;
         }
         static get observedAttributes() {
-            return ['by', 'text'];
+            return ['by', 'text', 'from', 'stagger', 'duration', 'delay', 'trigger', 'repeat'];
         }
         get units() {
             return Array.from(this.querySelectorAll('.usa-split-unit'));
@@ -2045,7 +2046,7 @@ function defineScramble(tag = 'usa-scramble') {
             this._frame = 0;
         }
         static get observedAttributes() {
-            return ['text'];
+            return ['text', 'trigger', 'duration', 'chars'];
         }
         get text() {
             return this.getAttribute('text') ?? this._source ?? '';
@@ -2130,7 +2131,7 @@ function defineCounter(tag = 'usa-counter') {
             this._fmt = null;
         }
         static get observedAttributes() {
-            return ['to', 'decimals', 'locale', 'prefix', 'suffix', 'grouping'];
+            return ['to', 'decimals', 'locale', 'prefix', 'suffix', 'grouping', 'from', 'start', 'duration'];
         }
         get value() {
             return Number.isNaN(this._target) ? this.num('to', 0) : this._target;
@@ -2254,7 +2255,7 @@ function defineTextRotate(tag = 'usa-text-rotate') {
             this._visible = true;
         }
         static get observedAttributes() {
-            return ['words', 'interval', 'paused'];
+            return ['words', 'interval', 'paused', 'effect'];
         }
         get index() {
             return this._index;
@@ -2347,7 +2348,7 @@ function splitChars(host, text) {
 const textOf = (el) => (el.getAttribute('text') ?? el.dataset.usaText ?? (el.dataset.usaText = (el.textContent || '').trim()));
 function defineWaveText(tag = 'usa-wave-text') {
     return defineElement(tag, (Base) => class extends Base {
-        static get observedAttributes() { return ['text']; }
+        static get observedAttributes() { return ['text', 'amplitude', 'speed', 'stagger']; }
         mount() {
             splitChars(this, textOf(this));
             this.style.setProperty('--usa-wave-a', `${this.num('amplitude', 0.25)}em`);
@@ -2380,7 +2381,7 @@ function defineGradientText(tag = 'usa-gradient-text') {
 }
 function defineHandwriting(tag = 'usa-handwriting') {
     return defineElement(tag, (Base) => class extends Base {
-        static get observedAttributes() { return ['text', 'size', 'font']; }
+        static get observedAttributes() { return ['text', 'size', 'font', 'stroke', 'duration']; }
         mount() {
             const t = textOf(this);
             const size = this.num('size', 64);
@@ -2418,7 +2419,7 @@ function defineScrollHighlight(tag = 'usa-scroll-highlight') {
             this._f = 0;
             this._p = 0;
         }
-        static get observedAttributes() { return ['mode', 'text']; }
+        static get observedAttributes() { return ['mode', 'text', 'color', 'dim']; }
         get progress() { return this._p; }
         mount() {
             const mode = this.str('mode', 'words');
@@ -2501,7 +2502,7 @@ var css$W = "";
 function defineRipple(tag = 'usa-ripple') {
     return defineElement(tag, (Base) => class UsaRipple extends Base {
         static get observedAttributes() {
-            return [];
+            return ['disabled', 'centered', 'color', 'opacity', 'duration'];
         }
         mount() {
             this.listen(this, 'pointerdown', (e) => {
@@ -2730,6 +2731,7 @@ function defineSpotlight(tag = 'usa-spotlight') {
                 y = e.clientY;
                 if (!this.hasAttribute('data-lit'))
                     this.setAttribute('data-lit', '');
+                // contract-exempt: reduced-motion — pointer-follow light, not a motion effect (documented to stay on under reduced motion)
                 if (!this._frame)
                     this._frame = raf(apply);
             });
@@ -2753,7 +2755,7 @@ function definePress(tag = 'usa-press') {
             this._down = false;
         }
         static get observedAttributes() {
-            return ['disabled'];
+            return ['disabled', 'scale', 'bounce'];
         }
         get pressed() {
             return this._down;
@@ -3035,7 +3037,7 @@ const ICONS = {
 function defineToaster(tag = 'usa-toaster') {
     return defineElement(tag, (Base) => class UsaToaster extends Base {
         static get observedAttributes() {
-            return ['label'];
+            return ['label', 'position', 'max'];
         }
         mount() {
             this.setAttribute('role', 'region');
@@ -3175,7 +3177,7 @@ function defineCheck(tag = 'usa-check') {
             this._anims = [];
         }
         static get observedAttributes() {
-            return ['kind', 'size', 'label'];
+            return ['kind', 'size', 'label', 'start'];
         }
         mount() {
             const variant = kindOf(this, PATHS, 'success');
@@ -3489,7 +3491,7 @@ function defineMarquee(tag = 'usa-marquee') {
             this._size = 0;
         }
         static get observedAttributes() {
-            return ['speed', 'direction', 'gap', 'paused'];
+            return ['speed', 'direction', 'gap', 'paused', 'pause-on-hover'];
         }
         get vertical() {
             const d = this.str('direction', 'left');
@@ -3770,6 +3772,7 @@ function defineWaterRipple(tag = 'usa-water-ripple') {
                 const r = this.getBoundingClientRect();
                 this.drop(e.clientX - r.left, e.clientY - r.top, 0.35);
             });
+            // contract-exempt: keyboard-click-only — decorative ripple under the pointer, no action
             this.listen(this, 'pointerdown', (e) => {
                 const r = this.getBoundingClientRect();
                 this.drop(e.clientX - r.left, e.clientY - r.top, 1.5);
@@ -3951,7 +3954,7 @@ function defineDialog(tag = 'usa-dialog') {
             this.returnValue = '';
         }
         static get observedAttributes() {
-            return ['open', 'kind', 'label'];
+            return ['open', 'kind', 'label', 'no-esc', 'no-backdrop-close'];
         }
         get dialog() {
             return this._dialog;
@@ -4097,7 +4100,7 @@ function defineAccordion(tag = 'usa-accordion') {
             this._running = new WeakMap();
         }
         static get observedAttributes() {
-            return [];
+            return ['multiple', 'duration'];
         }
         get items() {
             return Array.from(this.children).filter((c) => c.tagName === 'DETAILS');
@@ -4167,7 +4170,7 @@ function defineViewSwitch(tag = 'usa-view-switch') {
             this._anims = [];
         }
         static get observedAttributes() {
-            return ['active'];
+            return ['active', 'duration', 'effect'];
         }
         get views() {
             return Array.from(this.children);
@@ -4607,7 +4610,7 @@ function defineSpring(tag = 'usa-spring') {
             this._anim = null;
         }
         static get observedAttributes() {
-            return ['effect', 'trigger', 'repeat'];
+            return ['effect', 'trigger', 'repeat', 'stiffness', 'damping', 'mass', 'preset', 'duration', 'delay'];
         }
         get effect() {
             return this.str('effect', 'bounce-in');
@@ -4699,7 +4702,7 @@ function defineDraggable(tag = 'usa-draggable') {
             this._drag = null;
         }
         static get observedAttributes() {
-            return ['axis', 'disabled', 'preset'];
+            return ['axis', 'disabled', 'preset', 'bounds', 'spring-back', 'inertia', 'snap', 'step'];
         }
         get x() {
             return this._x;
@@ -4889,7 +4892,7 @@ function defineOverscroll(tag = 'usa-overscroll') {
             this._off = 0;
         }
         static get observedAttributes() {
-            return ['axis', 'disabled'];
+            return ['axis', 'disabled', 'max', 'preset'];
         }
         get offset() {
             return this._off;
@@ -5001,7 +5004,7 @@ function defineCard(tag = 'usa-card') {
             this._busy = false;
         }
         static get observedAttributes() {
-            return ['effect', 'trigger', 'disabled'];
+            return ['effect', 'trigger', 'disabled', 'color', 'depth'];
         }
         get effects() {
             return this.str('effect', 'lift').split(/[\s,]+/).filter(Boolean);
@@ -5215,7 +5218,7 @@ function defineCardStack(tag = 'usa-card-stack') {
             this._busy = false;
         }
         static get observedAttributes() {
-            return ['visible', 'offset', 'disabled'];
+            return ['visible', 'offset', 'disabled', 'threshold', 'loop'];
         }
         get top() {
             return this.cards()[0] || null;
@@ -5407,7 +5410,7 @@ function defineCarousel3d(tag = 'usa-carousel-3d') {
             this._i = 0;
         }
         static get observedAttributes() {
-            return ['radius', 'perspective', 'autoplay'];
+            return ['radius', 'perspective', 'autoplay', 'index'];
         }
         get index() {
             return this._i;
@@ -5650,7 +5653,7 @@ function defineClick(tag = 'usa-click') {
             this._press = null;
         }
         static get observedAttributes() {
-            return ['effect', 'disabled'];
+            return ['effect', 'disabled', 'trigger', 'color', 'count', 'shape', 'haptic'];
         }
         get effects() {
             return this.str('effect', 'ripple').split(/[\s,]+/).filter(Boolean);
@@ -5792,7 +5795,7 @@ function defineButton(tag = 'usa-button') {
             this._shapeBefore = null;
         }
         static get observedAttributes() {
-            return ['deform', 'state', 'shape', 'disabled'];
+            return ['deform', 'state', 'shape', 'disabled', 'morph', 'haptic', 'reset'];
         }
         get target() {
             return this.querySelector(':scope > button, :scope > a, :scope > [role="button"]') || this;
@@ -6077,7 +6080,7 @@ function defineIconMorph(tag = 'usa-icon-morph') {
             this._to = 'play';
         }
         static get observedAttributes() {
-            return ['icons', 'size', 'toggle'];
+            return ['icons', 'size', 'toggle', 'index', 'preset', 'labels'];
         }
         list() {
             return this.str('icons', 'play,pause').split(',').map((s) => s.trim()).filter((s) => MORPH_ICONS[s]);
@@ -6154,7 +6157,7 @@ const HEART = 'M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.6 1.2 5.3 3.
 function defineLike(tag = 'usa-like') {
     return defineElement(tag, (Base) => class UsaLike extends Base {
         static get observedAttributes() {
-            return ['liked', 'count', 'label', 'disabled'];
+            return ['liked', 'count', 'label', 'disabled', 'size', 'color', 'haptic'];
         }
         get liked() {
             return this.flag('liked');
@@ -6238,7 +6241,7 @@ function defineHold(tag = 'usa-hold') {
             this._holding = false;
         }
         static get observedAttributes() {
-            return ['duration', 'disabled'];
+            return ['duration', 'disabled', 'color', 'label'];
         }
         get progress() {
             return this._p;
@@ -6306,6 +6309,7 @@ function defineHold(tag = 'usa-hold') {
                     }, 700);
                     return;
                 }
+                // contract-exempt: reduced-motion — the fill follows the press and is the feedback itself
                 this._frame = raf(tick);
             };
             this._frame = raf(tick);
@@ -6408,7 +6412,7 @@ function defineCheckbox(tag = 'usa-checkbox') {
     return defineElement(tag, (Base) => {
         class UsaCheckbox extends Base {
             static get observedAttributes() {
-                return ['checked', 'indeterminate', 'disabled', 'label'];
+                return ['checked', 'indeterminate', 'disabled', 'label', 'value'];
             }
             constructor() {
                 super();
@@ -6800,7 +6804,7 @@ function defineBottomSheet(tag = 'usa-bottom-sheet') {
         const Panel = makePanel(Base, 'sheet');
         return class UsaBottomSheet extends Panel {
             static get observedAttributes() {
-                return ['open', 'snap'];
+                return ['open', 'snap', 'start'];
             }
             mount() {
                 if (!this.querySelector(':scope > .usa-sheet-handle')) {
@@ -6873,6 +6877,7 @@ function definePullRefresh(tag = 'usa-pull-refresh') {
             this._y = createSpring({ spring: 'stiff', onUpdate: (v) => this.draw(v) });
             let start = null;
             let id = -1;
+            // contract-exempt: keyboard-click-only — touch gesture; the keyboard / button path is refresh()
             this.listen(this, 'pointerdown', (e) => {
                 if (this.flag('disabled') || this._busy || this.scrollTop > 0)
                     return;
@@ -7059,6 +7064,7 @@ function defineNavbar(tag = 'usa-navbar') {
                     this.hide();
             };
             const on = () => {
+                // contract-exempt: reduced-motion — rAF only throttles the scroll-synced hide / show check
                 if (!this._frame)
                     this._frame = raf(update);
             };
@@ -7092,7 +7098,7 @@ function defineSlider(tag = 'usa-slider') {
     return defineElement(tag, (Base) => {
         class UsaSlider extends Base {
             static get observedAttributes() {
-                return ['min', 'max', 'disabled', 'label'];
+                return ['min', 'max', 'disabled', 'label', 'step', 'value'];
             }
             constructor() {
                 super();
@@ -7282,7 +7288,7 @@ function defineBadge(tag = 'usa-badge') {
             this._el = null;
         }
         static get observedAttributes() {
-            return ['value', 'max', 'dot', 'label'];
+            return ['value', 'max', 'dot', 'label', 'show-zero'];
         }
         get value() {
             return this.str('value');
@@ -7328,7 +7334,7 @@ function defineAvatarStack(tag = 'usa-avatar-stack') {
     adoptVariants();
     return defineElement(tag, (Base) => class UsaAvatarStack extends Base {
         static get observedAttributes() {
-            return ['max', 'size', 'overlap'];
+            return ['max', 'size', 'overlap', 'label'];
         }
         mount() {
             this.querySelector(':scope > .usa-avatar-more')?.remove();
@@ -7388,7 +7394,7 @@ function defineCursor(tag = 'usa-cursor') {
             this._frame = 0;
         }
         static get observedAttributes() {
-            return ['mode', 'size', 'color', 'hide-native'];
+            return ['mode', 'size', 'color', 'hide-native', 'targets'];
         }
         get active() {
             return this.hasAttribute('data-active');
@@ -7763,6 +7769,7 @@ function defineBackToTop(tag = 'usa-back-to-top') {
                 this.style.setProperty('--usa-btt', Math.min(1, y / max).toFixed(4));
             };
             this.listen(window, 'scroll', () => {
+                // contract-exempt: reduced-motion — rAF only throttles the scroll-synced visibility check, no decorative motion
                 if (!this._frame)
                     this._frame = raf(update);
             }, { passive: true });
@@ -7792,7 +7799,7 @@ function defineAmbient(tag = 'usa-ambient') {
             this._frame = 0;
         }
         static get observedAttributes() {
-            return ['effect', 'density', 'color'];
+            return ['effect', 'density', 'color', 'opacity', 'speed'];
         }
         mount() {
             this.setAttribute('aria-hidden', 'true');
@@ -8180,7 +8187,7 @@ function defineTimeline(tag = 'usa-timeline') {
             this._tl = null;
         }
         static get observedAttributes() {
-            return ['scrub', 'trigger', 'overlap'];
+            return ['scrub', 'trigger', 'overlap', 'duration', 'stagger', 'smooth', 'repeat'];
         }
         get timeline() {
             return this._tl;
@@ -8453,7 +8460,7 @@ function defineSwipeable(tag = 'usa-swipeable') {
             this._off = 0;
         }
         static get observedAttributes() {
-            return ['axis', 'disabled'];
+            return ['axis', 'disabled', 'distance', 'dismiss', 'preset'];
         }
         get offset() {
             return this._off;
@@ -8640,6 +8647,28 @@ function defineGestureComponents() {
     definePinchZoom();
 }
 
+/**
+ * 11.8 (component contract · keyboard): a host that acts on click becomes keyboard-reachable — `tabindex="0"` and
+ * `role="button"` unless the page set them or a focusable control is inside, and Enter / Space on the host → `click()`.
+ * Both attributes are removed again on disconnect.
+ */
+function keyClick(el) {
+    if (el.querySelector('a[href],button,input,select,textarea,summary,[tabindex]'))
+        return;
+    for (const [n, v] of [['tabindex', '0'], ['role', 'button']]) {
+        if (el.hasAttribute(n))
+            continue;
+        el.setAttribute(n, v);
+        el.onCleanup(() => el.removeAttribute(n));
+    }
+    el.listen(el, 'keydown', (e) => {
+        if (e.target !== el || (e.key !== 'Enter' && e.key !== ' '))
+            return;
+        e.preventDefault();
+        el.click();
+    });
+}
+
 const NUM = /-?(?:\d+\.?\d*|\.\d+)(?:e[-+]?\d+)?/gi;
 /** `true` when two path strings share the same commands (so their numbers can be interpolated). */
 function pathsCompatible(a, b) {
@@ -8769,8 +8798,10 @@ function defineDraw(tag = 'usa-draw') {
             }
             else if (trigger === 'hover')
                 this.listen(this, 'pointerenter', () => this.play());
-            else if (trigger === 'click')
+            else if (trigger === 'click') {
                 this.listen(this, 'click', () => this.play());
+                keyClick(this);
+            }
             else {
                 let done = false;
                 this.inView((v) => {
@@ -8795,7 +8826,7 @@ function defineMorph(tag = 'usa-morph') {
             this._path = null;
         }
         static get observedAttributes() {
-            return ['paths', 'trigger'];
+            return ['paths', 'trigger', 'duration', 'interval'];
         }
         get index() {
             return this._i;
@@ -8906,8 +8937,10 @@ function defineMaskReveal(tag = 'usa-mask-reveal') {
             const t = this.str('trigger', 'view');
             if (t === 'hover')
                 this.listen(this, 'pointerenter', () => void this.reveal());
-            else if (t === 'click')
+            else if (t === 'click') {
                 this.listen(this, 'click', () => void this.reveal());
+                keyClick(this);
+            }
             else {
                 let done = false;
                 this.inView((v) => {
@@ -8937,7 +8970,7 @@ const ANIM_ICONS = {
 function defineAnimIcon(tag = 'usa-anim-icon') {
     return defineElement(tag, (Base) => class UsaAnimIcon extends Base {
         static get observedAttributes() {
-            return ['name', 'size', 'label'];
+            return ['name', 'size', 'label', 'trigger'];
         }
         icon() {
             return ANIM_ICONS[this.str('name', 'heart')] || ANIM_ICONS.heart;
@@ -8957,8 +8990,10 @@ function defineAnimIcon(tag = 'usa-anim-icon') {
             const label = this.str('label');
             this.innerHTML = `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform-origin:${i.origin || '50% 50%'}"${label ? ` role="img" aria-label="${label.replace(/"/g, '&quot;')}"` : ' aria-hidden="true"'}><path d="${i.d}"${i.frames[0].strokeDashoffset !== undefined ? ' pathLength="1" stroke-dasharray="1"' : ''}></path></svg>`;
             const t = this.str('trigger', 'hover');
-            if (t === 'click')
+            if (t === 'click') {
                 this.listen(this, 'click', () => this.play());
+                keyClick(this);
+            }
             else if (t === 'view' || t === 'loop')
                 this.inView((v) => v && this.play(), { threshold: 0.5 });
             else {
@@ -9434,7 +9469,7 @@ function defineCube(tag = 'usa-cube') {
             this._base = [0, 0];
         }
         static get observedAttributes() {
-            return ['size', 'autoplay'];
+            return ['size', 'autoplay', 'perspective'];
         }
         get index() {
             return this._i;
@@ -9864,6 +9899,7 @@ function defineMasonry(tag = 'usa-masonry') {
             const queue = () => {
                 if (id)
                     return;
+                // contract-exempt: reduced-motion — rAF batches layout, no motion
                 id = requestAnimationFrame(() => {
                     id = 0;
                     this.layout();
@@ -10210,7 +10246,7 @@ function bindEffect(el, name, options = {}) {
 function defineFx(tag = 'usa-fx') {
     return defineElement(tag, (Base) => class UsaFx extends Base {
         static get observedAttributes() {
-            return ['effect', 'trigger', 'options'];
+            return ['effect', 'trigger', 'options', 'self', 'once'];
         }
         get target() {
             return this.flag('self') ? this : (this.firstElementChild || this);
@@ -11084,4 +11120,4 @@ exports.viewTransition = viewTransition;
 exports.warnBaseline = warnBaseline;
 exports.watchPowerSaver = watchPowerSaver;
 exports.withoutDeprecations = withoutDeprecations;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/components/lite.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/components/lite.cjs.map

@@ -7,8 +7,8 @@
 - **Category:** fx
 - **Import:** `import { defineAudio } from 'motionary/components/effects'` then `defineAudio();`
 - **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
-- **Attributes:** `source`
-- **Events:** —
+- **Attributes:** `source`, `label`, `threshold`, `cooldown`
+- **Events:** `usa:beat`, `usa:audio-error`
 - **Slots:** —
 - **Methods:** `toggle()`
 - **Source:** [src/components/effects/audio.ts](../../src/components/effects/audio.ts)

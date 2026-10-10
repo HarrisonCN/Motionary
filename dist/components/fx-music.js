@@ -1,6 +1,6 @@
 import { registerEffects } from '../chunks/registry-CYojuxi5.js';
 import { c as canvasBackground } from '../chunks/generative-2LhxG5BJ.js';
-import { g as getAudio } from '../chunks/audio-Ds5ppQVV.js';
+import { g as getAudio } from '../chunks/audio-C10EnE3b.js';
 import '../chunks/base-zSGb8ujt.js';
 import '../chunks/shared-CkKHWrtJ.js';
 
@@ -171,4 +171,4 @@ function registerMusicPack() {
 }
 
 export { MUSIC_FX, musicSample, registerMusicPack, syntheticSample };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/components/fx-music.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/components/fx-music.js.map

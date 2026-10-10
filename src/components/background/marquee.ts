@@ -23,7 +23,7 @@ export function defineMarquee(tag = 'usa-marquee'): CustomElementConstructor | u
     (Base) =>
       class UsaMarquee extends Base {
         static get observedAttributes(): string[] {
-          return ['speed', 'direction', 'gap', 'paused'];
+          return ['speed', 'direction', 'gap', 'paused', 'pause-on-hover'];
         }
 
         private _track: HTMLElement | null = null;

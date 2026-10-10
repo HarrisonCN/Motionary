@@ -5,7 +5,7 @@ var css$4 = "usa-ripple{position:relative;display:inline-block;overflow:hidden;i
 function defineRipple(tag = 'usa-ripple') {
     return defineElement(tag, (Base) => class UsaRipple extends Base {
         static get observedAttributes() {
-            return [];
+            return ['disabled', 'centered', 'color', 'opacity', 'duration'];
         }
         mount() {
             this.listen(this, 'pointerdown', (e) => {
@@ -234,6 +234,7 @@ function defineSpotlight(tag = 'usa-spotlight') {
                 y = e.clientY;
                 if (!this.hasAttribute('data-lit'))
                     this.setAttribute('data-lit', '');
+                // contract-exempt: reduced-motion — pointer-follow light, not a motion effect (documented to stay on under reduced motion)
                 if (!this._frame)
                     this._frame = raf(apply);
             });
@@ -257,7 +258,7 @@ function definePress(tag = 'usa-press') {
             this._down = false;
         }
         static get observedAttributes() {
-            return ['disabled'];
+            return ['disabled', 'scale', 'bounce'];
         }
         get pressed() {
             return this._down;
@@ -331,4 +332,4 @@ function defineInteractionComponents() {
 }
 
 export { defineInteractionComponents, defineMagnetic, definePress, defineRipple, defineSpotlight, defineTilt };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/components/interaction.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/components/interaction.js.map

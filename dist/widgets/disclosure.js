@@ -73,4 +73,4 @@ function defineDisclosure(tag = 'usa-disclosure') {
 }
 
 export { defineDisclosure };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/widgets/disclosure.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/widgets/disclosure.js.map

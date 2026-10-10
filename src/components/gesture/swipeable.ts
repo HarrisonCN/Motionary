@@ -26,7 +26,7 @@ export function defineSwipeable(tag = 'usa-swipeable'): CustomElementConstructor
     (Base) =>
       class UsaSwipeable extends Base {
         static get observedAttributes(): string[] {
-          return ['axis', 'disabled'];
+          return ['axis', 'disabled', 'distance', 'dismiss', 'preset'];
         }
         private _s!: SpringValue;
         private _off = 0;

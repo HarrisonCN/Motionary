@@ -12,7 +12,7 @@ function defineTimeline(tag = 'usa-timeline') {
             this._tl = null;
         }
         static get observedAttributes() {
-            return ['scrub', 'trigger', 'overlap'];
+            return ['scrub', 'trigger', 'overlap', 'duration', 'stagger', 'smooth', 'repeat'];
         }
         get timeline() {
             return this._tl;
@@ -100,4 +100,4 @@ function defineTimelineComponents() {
 }
 
 export { TIMELINE_PRESETS, defineTimeline, defineTimelineComponents, timeline };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/components/timeline.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/components/timeline.js.map

@@ -78,7 +78,7 @@ function defineReveal(tag = 'usa-reveal') {
             this._anim = null;
         }
         static get observedAttributes() {
-            return ['effect', 'distance', 'repeat', 'threshold', 'root-margin'];
+            return ['effect', 'distance', 'repeat', 'threshold', 'root-margin', 'duration', 'delay', 'easing'];
         }
         get effect() {
             return this.str('effect', 'fade-up');
@@ -154,7 +154,7 @@ function defineStagger(tag = 'usa-stagger') {
             this._anims = [];
         }
         static get observedAttributes() {
-            return ['effect', 'repeat', 'threshold'];
+            return ['effect', 'repeat', 'threshold', 'distance', 'interval', 'delay', 'duration', 'easing'];
         }
         mount() {
             if (this.reduced) {
@@ -255,6 +255,7 @@ function defineScrollProgress(tag = 'usa-scroll-progress') {
             if (!this.hasAttribute('aria-label'))
                 this.setAttribute('aria-label', this.str('label', 'Reading progress'));
             const schedule = () => {
+                // contract-exempt: reduced-motion — the bar mirrors scroll position (user-driven), no autonomous motion
                 if (!this._frame)
                     this._frame = base.raf(() => ((this._frame = 0), this.update()));
             };
@@ -359,4 +360,4 @@ exports.defineScrolly = defineScrolly;
 exports.defineStagger = defineStagger;
 exports.readScrollProgress = readScrollProgress;
 exports.revealKeyframes = revealKeyframes;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/components/reveal.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/components/reveal.cjs.map

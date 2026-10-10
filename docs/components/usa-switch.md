@@ -7,7 +7,7 @@
 - **Category:** click · **since** 6.7
 - **Import:** `import { defineSwitch } from 'motionary/components/widgets'` then `defineSwitch();`
 - **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
-- **Attributes:** `variant`
+- **Attributes:** `variant`, `label`, `name`, `value`, `disabled`
 - **Events:** `usa:change`
 - **Slots:** —
 - **Methods:** `toggle()`

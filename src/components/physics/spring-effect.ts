@@ -64,7 +64,7 @@ export function defineSpring(tag = 'usa-spring'): CustomElementConstructor | und
     (Base) =>
       class UsaSpring extends Base {
         static get observedAttributes(): string[] {
-          return ['effect', 'trigger', 'repeat'];
+          return ['effect', 'trigger', 'repeat', 'stiffness', 'damping', 'mass', 'preset', 'duration', 'delay'];
         }
 
         private _anim: Animation | null = null;

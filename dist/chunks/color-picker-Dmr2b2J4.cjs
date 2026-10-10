@@ -129,4 +129,4 @@ function defineColorPicker(tag = 'usa-color-picker') {
 exports.defineColorPicker = defineColorPicker;
 exports.hexToHsv = hexToHsv;
 exports.hsvToHex = hsvToHex;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/chunks/color-picker-Dmr2b2J4.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/chunks/color-picker-Dmr2b2J4.cjs.map

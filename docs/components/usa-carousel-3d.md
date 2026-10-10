@@ -7,7 +7,7 @@ Items on a 3D ring, rotated by drag, arrow keys, clicks or autoplay — with spr
 - **Category:** cards
 - **Import:** `import { defineCarousel3d } from 'motionary/components/cards'` then `defineCarousel3d();`
 - **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
-- **Attributes:** `radius`, `perspective`, `autoplay`
+- **Attributes:** `radius`, `perspective`, `autoplay`, `index`
 - **Events:** `usa:change`
 - **Slots:** —
 - **Methods:** `next()`, `prev()`, `goTo()`

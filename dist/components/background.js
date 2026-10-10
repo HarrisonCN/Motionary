@@ -235,7 +235,7 @@ function defineMarquee(tag = 'usa-marquee') {
             this._size = 0;
         }
         static get observedAttributes() {
-            return ['speed', 'direction', 'gap', 'paused'];
+            return ['speed', 'direction', 'gap', 'paused', 'pause-on-hover'];
         }
         get vertical() {
             const d = this.str('direction', 'left');
@@ -516,6 +516,7 @@ function defineWaterRipple(tag = 'usa-water-ripple') {
                 const r = this.getBoundingClientRect();
                 this.drop(e.clientX - r.left, e.clientY - r.top, 0.35);
             });
+            // contract-exempt: keyboard-click-only — decorative ripple under the pointer, no action
             this.listen(this, 'pointerdown', (e) => {
                 const r = this.getBoundingClientRect();
                 this.drop(e.clientX - r.left, e.clientY - r.top, 1.5);
@@ -644,4 +645,4 @@ function defineBackgroundComponents() {
 }
 
 export { defineAcrylic, defineAurora, defineBackgroundComponents, defineBlobs, defineDotNetwork, defineGrain, defineGridGlow, defineMarquee, defineParticles, defineWaterRipple, fluentPreset };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/components/background.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/components/background.js.map

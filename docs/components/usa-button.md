@@ -7,7 +7,7 @@ Spring-driven button click deformation: squash & stretch, elastic border-radius 
 - **Category:** click
 - **Import:** `import { defineButton } from 'motionary/components/click'` then `defineButton();`
 - **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
-- **Attributes:** `deform`, `state`, `shape`, `disabled`
+- **Attributes:** `deform`, `state`, `shape`, `disabled`, `morph`, `haptic`, `reset`
 - **Events:** `usa:submit`, `usa:state`
 - **Slots:** —
 - **Methods:** `morphTo()`

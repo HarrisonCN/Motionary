@@ -35,6 +35,7 @@ export function defineBackToTop(tag = 'usa-back-to-top'): CustomElementConstruct
             this.style.setProperty('--usa-btt', Math.min(1, y / max).toFixed(4));
           };
           this.listen(window, 'scroll', () => {
+            // contract-exempt: reduced-motion — rAF only throttles the scroll-synced visibility check, no decorative motion
             if (!this._frame) this._frame = raf(update);
           }, { passive: true });
           this.listen(btn, 'click', async () => {

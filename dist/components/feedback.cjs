@@ -211,7 +211,7 @@ const ICONS = {
 function defineToaster(tag = 'usa-toaster') {
     return base.defineElement(tag, (Base) => class UsaToaster extends Base {
         static get observedAttributes() {
-            return ['label'];
+            return ['label', 'position', 'max'];
         }
         mount() {
             this.setAttribute('role', 'region');
@@ -351,7 +351,7 @@ function defineCheck(tag = 'usa-check') {
             this._anims = [];
         }
         static get observedAttributes() {
-            return ['kind', 'size', 'label'];
+            return ['kind', 'size', 'label', 'start'];
         }
         mount() {
             const variant = base.kindOf(this, PATHS, 'success');
@@ -439,4 +439,4 @@ exports.defineSkeleton = defineSkeleton;
 exports.defineSpinner = defineSpinner;
 exports.defineToaster = defineToaster;
 exports.toast = toast;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/components/feedback.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/components/feedback.cjs.map

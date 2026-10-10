@@ -62,6 +62,7 @@ function defineSmoothScroll(tag = 'usa-smooth-scroll') {
                         timer = v ? setTimeout(glide, 300) : null;
                     });
                     this.listen(this, 'wheel', () => (user = true), { passive: true });
+                    // contract-exempt: keyboard-click-only — pointer drag on top of native scrolling; keyboard scrolling stays native
                     this.listen(this, 'pointerdown', () => (user = true), { passive: true });
                     this.onCleanup(() => timer && clearTimeout(timer));
                 }
@@ -81,4 +82,4 @@ function defineSmoothScroll(tag = 'usa-smooth-scroll') {
 }
 
 exports.defineSmoothScroll = defineSmoothScroll;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/widgets/smooth-scroll.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/widgets/smooth-scroll.cjs.map

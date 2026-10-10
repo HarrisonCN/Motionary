@@ -32,6 +32,7 @@ var spring = require('./chunks/spring-DcM7pQgx.cjs');
 var core = require('./chunks/core-KIvPGg0c.cjs');
 var core$1 = require('./chunks/core-BdLFN0RS.cjs');
 var fx = require('./chunks/fx-BaPAanPW.cjs');
+require('./chunks/key-click-v7I4K5Sr.cjs');
 
 /**
  * motionary/components
@@ -350,4 +351,4 @@ exports.pinchScale = core$1.pinchScale;
 exports.swipeDirection = core$1.swipeDirection;
 exports.haptic = fx.haptic;
 exports.defineComponents = defineComponents;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/components.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/components.cjs.map

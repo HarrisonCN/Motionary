@@ -181,4 +181,4 @@ function definePacksComponents() {
 }
 
 export { PACKS, PACK_PRIMITIVES, applyPack, countUp, definePack, definePacksComponents, flyToCart };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/components/packs.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/components/packs.js.map

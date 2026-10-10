@@ -7,7 +7,7 @@ Overlapping avatars that spread apart with a spring on hover; extras collapse in
 - **Category:** ui
 - **Import:** `import { defineAvatarStack } from 'motionary/components/ui'` then `defineAvatarStack();`
 - **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
-- **Attributes:** `max`, `size`, `overlap`
+- **Attributes:** `max`, `size`, `overlap`, `label`
 - **Events:** —
 - **Slots:** —
 - **Methods:** `adoptVariants()`, `mount()`

@@ -24,7 +24,7 @@ export function defineViewSwitch(tag = 'usa-view-switch'): CustomElementConstruc
     (Base) =>
       class UsaViewSwitch extends Base {
         static get observedAttributes(): string[] {
-          return ['active'];
+          return ['active', 'duration', 'effect'];
         }
 
         private _index = -1;

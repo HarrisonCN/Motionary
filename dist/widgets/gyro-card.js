@@ -1,4 +1,5 @@
 import { f as defineElement } from '../chunks/base-zSGb8ujt.js';
+import { k as keyClick } from '../chunks/key-click-BLm3BI8_.js';
 import { orientationToTilt } from '../components/fx-gesture.js';
 import '../chunks/registry-CYojuxi5.js';
 
@@ -56,6 +57,7 @@ function defineGyroCard(tag = 'usa-gyro-card') {
                     };
                     const DOE = window.DeviceOrientationEvent;
                     if (typeof DOE.requestPermission === 'function') {
+                        keyClick(this);
                         this.listen(this, 'click', () => {
                             if (!active)
                                 DOE.requestPermission().then((s) => s === 'granted' && on(), () => undefined);
@@ -87,4 +89,4 @@ function defineGyroCard(tag = 'usa-gyro-card') {
 }
 
 export { defineGyroCard };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/widgets/gyro-card.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/widgets/gyro-card.js.map

@@ -35,7 +35,7 @@ require('../chunks/registry-BB1oO-lR.cjs');
 require('../chunks/base-B3me2y0o.cjs');
 require('../chunks/generative-BHIj-NU0.cjs');
 require('../chunks/shared-jkgRH-Hx.cjs');
-require('../chunks/audio-Dc4JT_0D.cjs');
+require('../chunks/audio-h-eiqo5B.cjs');
 
 const P = (name, effects) => ({ name, effects });
 /** The `gpu` pack. */
@@ -135,4 +135,4 @@ exports.text = text;
 exports.transitions = transitions;
 exports.video = video;
 exports.weather = weather;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/components/plugins.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/components/plugins.cjs.map

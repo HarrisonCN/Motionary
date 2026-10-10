@@ -29,7 +29,7 @@ export function defineOtp(tag = 'usa-otp'): CustomElementConstructor | undefined
     (Base) => {
       class UsaOtp extends Base {
         static get observedAttributes(): string[] {
-          return ['length', 'mode', 'label'];
+          return ['length', 'mode', 'label', 'value'];
         }
         private boxes(): HTMLInputElement[] {
           return Array.from(this.querySelectorAll<HTMLInputElement>('.usa-otp-box'));

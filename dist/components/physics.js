@@ -47,7 +47,7 @@ function defineSpring(tag = 'usa-spring') {
             this._anim = null;
         }
         static get observedAttributes() {
-            return ['effect', 'trigger', 'repeat'];
+            return ['effect', 'trigger', 'repeat', 'stiffness', 'damping', 'mass', 'preset', 'duration', 'delay'];
         }
         get effect() {
             return this.str('effect', 'bounce-in');
@@ -139,7 +139,7 @@ function defineDraggable(tag = 'usa-draggable') {
             this._drag = null;
         }
         static get observedAttributes() {
-            return ['axis', 'disabled', 'preset'];
+            return ['axis', 'disabled', 'preset', 'bounds', 'spring-back', 'inertia', 'snap', 'step'];
         }
         get x() {
             return this._x;
@@ -329,7 +329,7 @@ function defineOverscroll(tag = 'usa-overscroll') {
             this._off = 0;
         }
         static get observedAttributes() {
-            return ['axis', 'disabled'];
+            return ['axis', 'disabled', 'max', 'preset'];
         }
         get offset() {
             return this._off;
@@ -427,4 +427,4 @@ function definePhysicsComponents() {
 }
 
 export { SPRING_EFFECTS, createSpring, defineDraggable, defineOverscroll, definePhysicsComponents, defineSpring, projectInertia, rubberBand, snapTo, springEasing, springEffectKeyframes };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/components/physics.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/components/physics.js.map

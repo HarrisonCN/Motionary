@@ -159,6 +159,7 @@ export function defineWaterRipple(tag = 'usa-water-ripple'): CustomElementConstr
         const r = this.getBoundingClientRect();
         this.drop(e.clientX - r.left, e.clientY - r.top, 0.35);
       });
+      // contract-exempt: keyboard-click-only — decorative ripple under the pointer, no action
       this.listen(this, 'pointerdown', (e: PointerEvent) => {
         const r = this.getBoundingClientRect();
         this.drop(e.clientX - r.left, e.clientY - r.top, 1.5);

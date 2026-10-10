@@ -307,7 +307,7 @@ function defineBottomSheet(tag = 'usa-bottom-sheet') {
         const Panel = makePanel(Base, 'sheet');
         return class UsaBottomSheet extends Panel {
             static get observedAttributes() {
-                return ['open', 'snap'];
+                return ['open', 'snap', 'start'];
             }
             mount() {
                 if (!this.querySelector(':scope > .usa-sheet-handle')) {
@@ -380,6 +380,7 @@ function definePullRefresh(tag = 'usa-pull-refresh') {
             this._y = spring.createSpring({ spring: 'stiff', onUpdate: (v) => this.draw(v) });
             let start = null;
             let id = -1;
+            // contract-exempt: keyboard-click-only — touch gesture; the keyboard / button path is refresh()
             this.listen(this, 'pointerdown', (e) => {
                 if (this.flag('disabled') || this._busy || this.scrollTop > 0)
                     return;
@@ -566,6 +567,7 @@ function defineNavbar(tag = 'usa-navbar') {
                     this.hide();
             };
             const on = () => {
+                // contract-exempt: reduced-motion — rAF only throttles the scroll-synced hide / show check
                 if (!this._frame)
                     this._frame = base.raf(update);
             };
@@ -599,7 +601,7 @@ function defineSlider(tag = 'usa-slider') {
     return base.defineElement(tag, (Base) => {
         class UsaSlider extends Base {
             static get observedAttributes() {
-                return ['min', 'max', 'disabled', 'label'];
+                return ['min', 'max', 'disabled', 'label', 'step', 'value'];
             }
             constructor() {
                 super();
@@ -789,7 +791,7 @@ function defineBadge(tag = 'usa-badge') {
             this._el = null;
         }
         static get observedAttributes() {
-            return ['value', 'max', 'dot', 'label'];
+            return ['value', 'max', 'dot', 'label', 'show-zero'];
         }
         get value() {
             return this.str('value');
@@ -835,7 +837,7 @@ function defineAvatarStack(tag = 'usa-avatar-stack') {
     variants.adoptVariants();
     return base.defineElement(tag, (Base) => class UsaAvatarStack extends Base {
         static get observedAttributes() {
-            return ['max', 'size', 'overlap'];
+            return ['max', 'size', 'overlap', 'label'];
         }
         mount() {
             this.querySelector(':scope > .usa-avatar-more')?.remove();
@@ -899,4 +901,4 @@ exports.definePullRefresh = definePullRefresh;
 exports.defineSlider = defineSlider;
 exports.defineTabs = defineTabs;
 exports.defineUiComponents = defineUiComponents;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/components/ui.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/components/ui.cjs.map

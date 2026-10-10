@@ -8,4 +8,4 @@ require('../chunks/registry-U0scTJZr.cjs');
 
 
 exports.defineScrollScene = widgets_scrollScene.defineScrollScene;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/widgets/scroll-scene.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/widgets/scroll-scene.cjs.map

@@ -33,7 +33,7 @@ function defineMusicPlayer(tag = 'usa-music-player') {
                 };
             }
             static get observedAttributes() {
-                return ['title', 'artist', 'cover', 'src'];
+                return ['title', 'artist', 'cover', 'src', 'duration'];
             }
             get playing() {
                 return this._playing;
@@ -168,4 +168,4 @@ function defineMusicPlayer(tag = 'usa-music-player') {
 }
 
 exports.defineMusicPlayer = defineMusicPlayer;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/widgets/music-player.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/widgets/music-player.cjs.map

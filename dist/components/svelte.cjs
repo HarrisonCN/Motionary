@@ -23,6 +23,7 @@ require('./timeline.cjs');
 require('./gesture.cjs');
 require('../chunks/core-BdLFN0RS.cjs');
 require('./svg.cjs');
+require('../chunks/key-click-v7I4K5Sr.cjs');
 require('./webgl.cjs');
 require('./depth.cjs');
 require('./layout.cjs');
@@ -66,4 +67,4 @@ exports.bindUsa = bind.bindUsa;
 exports.usaEventName = bind.usaEventName;
 exports.defineUsa = defineUsa;
 exports.usa = usa;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/components/svelte.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/components/svelte.cjs.map

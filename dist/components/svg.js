@@ -1,4 +1,5 @@
 import { d as clamp, m as motionScale, b as caf, p as prefersReducedMotion, n as now, r as raf, f as defineElement, D as EASE_OUT } from '../chunks/base-zSGb8ujt.js';
+import { k as keyClick } from '../chunks/key-click-BLm3BI8_.js';
 
 const NUM = /-?(?:\d+\.?\d*|\.\d+)(?:e[-+]?\d+)?/gi;
 /** `true` when two path strings share the same commands (so their numbers can be interpolated). */
@@ -129,8 +130,10 @@ function defineDraw(tag = 'usa-draw') {
             }
             else if (trigger === 'hover')
                 this.listen(this, 'pointerenter', () => this.play());
-            else if (trigger === 'click')
+            else if (trigger === 'click') {
                 this.listen(this, 'click', () => this.play());
+                keyClick(this);
+            }
             else {
                 let done = false;
                 this.inView((v) => {
@@ -155,7 +158,7 @@ function defineMorph(tag = 'usa-morph') {
             this._path = null;
         }
         static get observedAttributes() {
-            return ['paths', 'trigger'];
+            return ['paths', 'trigger', 'duration', 'interval'];
         }
         get index() {
             return this._i;
@@ -266,8 +269,10 @@ function defineMaskReveal(tag = 'usa-mask-reveal') {
             const t = this.str('trigger', 'view');
             if (t === 'hover')
                 this.listen(this, 'pointerenter', () => void this.reveal());
-            else if (t === 'click')
+            else if (t === 'click') {
                 this.listen(this, 'click', () => void this.reveal());
+                keyClick(this);
+            }
             else {
                 let done = false;
                 this.inView((v) => {
@@ -297,7 +302,7 @@ const ANIM_ICONS = {
 function defineAnimIcon(tag = 'usa-anim-icon') {
     return defineElement(tag, (Base) => class UsaAnimIcon extends Base {
         static get observedAttributes() {
-            return ['name', 'size', 'label'];
+            return ['name', 'size', 'label', 'trigger'];
         }
         icon() {
             return ANIM_ICONS[this.str('name', 'heart')] || ANIM_ICONS.heart;
@@ -317,8 +322,10 @@ function defineAnimIcon(tag = 'usa-anim-icon') {
             const label = this.str('label');
             this.innerHTML = `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform-origin:${i.origin || '50% 50%'}"${label ? ` role="img" aria-label="${label.replace(/"/g, '&quot;')}"` : ' aria-hidden="true"'}><path d="${i.d}"${i.frames[0].strokeDashoffset !== undefined ? ' pathLength="1" stroke-dasharray="1"' : ''}></path></svg>`;
             const t = this.str('trigger', 'hover');
-            if (t === 'click')
+            if (t === 'click') {
                 this.listen(this, 'click', () => this.play());
+                keyClick(this);
+            }
             else if (t === 'view' || t === 'loop')
                 this.inView((v) => v && this.play(), { threshold: 0.5 });
             else {
@@ -344,4 +351,4 @@ function defineSvgComponents() {
 }
 
 export { ANIM_ICONS, MASK_SHAPES, defineAnimIcon, defineDraw, defineMaskReveal, defineMorph, defineSvgComponents, drawLines, interpolatePath, morphTo, pathsCompatible };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/components/svg.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/components/svg.js.map

@@ -24,7 +24,7 @@ export function defineMenuToggle(tag = 'usa-menu-toggle'): CustomElementConstruc
     (Base) => {
       class UsaMenuToggle extends Base {
         static get observedAttributes(): string[] {
-          return ['variant'];
+          return ['variant', 'label', 'for'];
         }
         private _open = false;
 

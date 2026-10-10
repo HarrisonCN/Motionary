@@ -84,4 +84,4 @@ function lazyDefine(root = typeof document !== 'undefined' ? document : undefine
 }
 
 export { categoryOfTag, defineUsed, lazyDefine, loadCategory };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/components/lazy.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/components/lazy.js.map

@@ -16,7 +16,7 @@ function defineTypewriter(tag = 'usa-typewriter') {
             this._running = false;
         }
         static get observedAttributes() {
-            return ['text', 'words'];
+            return ['text', 'words', 'start', 'speed', 'delete-speed', 'pause', 'loop', 'delay'];
         }
         get phrases() {
             const words = this.getAttribute('words');
@@ -374,7 +374,7 @@ function defineSplitText(tag = 'usa-split-text') {
             this._steps = 0;
         }
         static get observedAttributes() {
-            return ['by', 'text'];
+            return ['by', 'text', 'from', 'stagger', 'duration', 'delay', 'trigger', 'repeat'];
         }
         get units() {
             return Array.from(this.querySelectorAll('.usa-split-unit'));
@@ -494,7 +494,7 @@ function defineScramble(tag = 'usa-scramble') {
             this._frame = 0;
         }
         static get observedAttributes() {
-            return ['text'];
+            return ['text', 'trigger', 'duration', 'chars'];
         }
         get text() {
             return this.getAttribute('text') ?? this._source ?? '';
@@ -579,7 +579,7 @@ function defineCounter(tag = 'usa-counter') {
             this._fmt = null;
         }
         static get observedAttributes() {
-            return ['to', 'decimals', 'locale', 'prefix', 'suffix', 'grouping'];
+            return ['to', 'decimals', 'locale', 'prefix', 'suffix', 'grouping', 'from', 'start', 'duration'];
         }
         get value() {
             return Number.isNaN(this._target) ? this.num('to', 0) : this._target;
@@ -703,7 +703,7 @@ function defineTextRotate(tag = 'usa-text-rotate') {
             this._visible = true;
         }
         static get observedAttributes() {
-            return ['words', 'interval', 'paused'];
+            return ['words', 'interval', 'paused', 'effect'];
         }
         get index() {
             return this._index;
@@ -796,7 +796,7 @@ function splitChars(host, text) {
 const textOf = (el) => (el.getAttribute('text') ?? el.dataset.usaText ?? (el.dataset.usaText = (el.textContent || '').trim()));
 function defineWaveText(tag = 'usa-wave-text') {
     return base.defineElement(tag, (Base) => class extends Base {
-        static get observedAttributes() { return ['text']; }
+        static get observedAttributes() { return ['text', 'amplitude', 'speed', 'stagger']; }
         mount() {
             splitChars(this, textOf(this));
             this.style.setProperty('--usa-wave-a', `${this.num('amplitude', 0.25)}em`);
@@ -829,7 +829,7 @@ function defineGradientText(tag = 'usa-gradient-text') {
 }
 function defineHandwriting(tag = 'usa-handwriting') {
     return base.defineElement(tag, (Base) => class extends Base {
-        static get observedAttributes() { return ['text', 'size', 'font']; }
+        static get observedAttributes() { return ['text', 'size', 'font', 'stroke', 'duration']; }
         mount() {
             const t = textOf(this);
             const size = this.num('size', 64);
@@ -867,7 +867,7 @@ function defineScrollHighlight(tag = 'usa-scroll-highlight') {
             this._f = 0;
             this._p = 0;
         }
-        static get observedAttributes() { return ['mode', 'text']; }
+        static get observedAttributes() { return ['mode', 'text', 'color', 'dim']; }
         get progress() { return this._p; }
         mount() {
             const mode = this.str('mode', 'words');
@@ -965,4 +965,4 @@ exports.splitOrder = splitOrder;
 exports.splitText = splitText;
 exports.splitTimeline = splitTimeline;
 exports.splitWords = words;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/components/text.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/components/text.cjs.map

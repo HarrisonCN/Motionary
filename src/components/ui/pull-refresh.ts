@@ -54,6 +54,7 @@ export function definePullRefresh(tag = 'usa-pull-refresh'): CustomElementConstr
           this._y = createSpring({ spring: 'stiff', onUpdate: (v) => this.draw(v) });
           let start: number | null = null;
           let id = -1;
+          // contract-exempt: keyboard-click-only — touch gesture; the keyboard / button path is refresh()
           this.listen(this, 'pointerdown', (e: PointerEvent) => {
             if (this.flag('disabled') || this._busy || this.scrollTop > 0) return;
             start = e.clientY;

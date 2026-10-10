@@ -28,7 +28,7 @@ export function defineProductGallery(tag = 'usa-product-gallery'): CustomElement
     (Base) => {
       class UsaProductGallery extends Base {
         static get observedAttributes(): string[] {
-          return ['index'];
+          return ['index', 'nozoom', 'zoom'];
         }
         private _i = 0;
         private _imgs: HTMLImageElement[] = [];

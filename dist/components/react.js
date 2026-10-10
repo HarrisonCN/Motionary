@@ -88,4 +88,4 @@ function createUsaComponents(React) {
 }
 
 export { USA_TAGS, createUsaComponents, eventName, pascal };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/components/react.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/components/react.js.map

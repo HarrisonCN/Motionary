@@ -1,6 +1,7 @@
 'use strict';
 
 var base = require('../chunks/base-B3me2y0o.cjs');
+var keyClick = require('../chunks/key-click-v7I4K5Sr.cjs');
 var components_fxGesture = require('../components/fx-gesture.cjs');
 require('../chunks/registry-BB1oO-lR.cjs');
 
@@ -58,6 +59,7 @@ function defineGyroCard(tag = 'usa-gyro-card') {
                     };
                     const DOE = window.DeviceOrientationEvent;
                     if (typeof DOE.requestPermission === 'function') {
+                        keyClick.keyClick(this);
                         this.listen(this, 'click', () => {
                             if (!active)
                                 DOE.requestPermission().then((s) => s === 'granted' && on(), () => undefined);
@@ -89,4 +91,4 @@ function defineGyroCard(tag = 'usa-gyro-card') {
 }
 
 exports.defineGyroCard = defineGyroCard;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/widgets/gyro-card.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/widgets/gyro-card.cjs.map

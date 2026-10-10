@@ -1,4 +1,4 @@
-export { d as defineNavMorph } from '../chunks/nav-morph-Cn8rkJgZ.js';
+export { d as defineNavMorph } from '../chunks/nav-morph-BlfdTr2-.js';
 import '../chunks/base-zSGb8ujt.js';
 import '../chunks/shared-C8Pi6tuh.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/widgets/nav-morph.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/widgets/nav-morph.js.map

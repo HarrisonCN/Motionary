@@ -18,7 +18,7 @@ function defineCard(tag = 'usa-card') {
             this._busy = false;
         }
         static get observedAttributes() {
-            return ['effect', 'trigger', 'disabled'];
+            return ['effect', 'trigger', 'disabled', 'color', 'depth'];
         }
         get effects() {
             return this.str('effect', 'lift').split(/[\s,]+/).filter(Boolean);
@@ -232,7 +232,7 @@ function defineCardStack(tag = 'usa-card-stack') {
             this._busy = false;
         }
         static get observedAttributes() {
-            return ['visible', 'offset', 'disabled'];
+            return ['visible', 'offset', 'disabled', 'threshold', 'loop'];
         }
         get top() {
             return this.cards()[0] || null;
@@ -424,7 +424,7 @@ function defineCarousel3d(tag = 'usa-carousel-3d') {
             this._i = 0;
         }
         static get observedAttributes() {
-            return ['radius', 'perspective', 'autoplay'];
+            return ['radius', 'perspective', 'autoplay', 'index'];
         }
         get index() {
             return this._i;
@@ -558,4 +558,4 @@ exports.defineCardComponents = defineCardComponents;
 exports.defineCardStack = defineCardStack;
 exports.defineCarousel3d = defineCarousel3d;
 exports.defineStickyStack = defineStickyStack;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/components/cards.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/components/cards.cjs.map

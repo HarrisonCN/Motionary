@@ -22,6 +22,7 @@ require('./timeline.cjs');
 require('./gesture.cjs');
 require('../chunks/core-BdLFN0RS.cjs');
 require('./svg.cjs');
+require('../chunks/key-click-v7I4K5Sr.cjs');
 require('./webgl.cjs');
 require('./depth.cjs');
 require('./layout.cjs');
@@ -65,4 +66,4 @@ const UsaPlugin = {
 
 exports.UsaPlugin = UsaPlugin;
 exports.isUsaElement = isUsaElement;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/components/vue.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/components/vue.cjs.map

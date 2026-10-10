@@ -44,6 +44,7 @@ export function defineNavbar(tag = 'usa-navbar'): CustomElementConstructor | und
             else if (dy > 2 && !this.contains(document.activeElement)) this.hide();
           };
           const on = () => {
+            // contract-exempt: reduced-motion — rAF only throttles the scroll-synced hide / show check
             if (!this._frame) this._frame = raf(update);
           };
           this.listen(scroller, 'scroll', on, { passive: true });

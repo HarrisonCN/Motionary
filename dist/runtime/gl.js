@@ -750,4 +750,4 @@ const gl = {
 };
 
 export { Camera, GlNode, Scene, bounds, box, color, computeNormals, createRenderer, frameNode, gl, mat4, orbitControls, plane, quatFromEuler, quatMultiply, quatSlerp, scrubVideo, shaderMaterial, sphere, standardMaterial, texture, torus, unlitMaterial };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/runtime/gl.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/runtime/gl.js.map

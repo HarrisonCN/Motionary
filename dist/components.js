@@ -51,6 +51,7 @@ export { S as SPRING_PRESETS, c as createSpring, l as linearEasing, p as project
 export { T as TIMELINE_PRESETS, r as resolvePosition, s as supportsNativeScrub, t as timeline } from './chunks/core-BOCM9zD5.js';
 export { g as gesture, p as pinchScale, s as swipeDirection } from './chunks/core-BcQb_f91.js';
 export { h as haptic } from './chunks/fx-DUteojZx.js';
+import './chunks/key-click-BLm3BI8_.js';
 
 /**
  * motionary/components
@@ -104,4 +105,4 @@ function defineComponents(categories) {
 }
 
 export { adoptVariants, defineBackgroundComponents, defineCardComponents, defineClickComponents, defineComponents, defineDepthComponents, defineFeedbackComponents, defineFxComponents, defineGestureComponents, defineInteractionComponents, defineLayoutComponents, definePacksComponents, definePageComponents, definePhysicsComponents, defineRevealComponents, defineSvgComponents, defineTextComponents, defineTimelineComponents, defineTransitionComponents, defineUiComponents, defineWebglComponents };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/components.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/components.js.map

@@ -21,7 +21,7 @@ export function defineLiquidNav(tag = 'usa-liquid-nav'): CustomElementConstructo
     (Base) => {
       class UsaLiquidNav extends Base {
         static get observedAttributes(): string[] {
-          return ['label'];
+          return ['label', 'value'];
         }
         private _i = 0;
         private _id = `usa-lq-${++uid}`;

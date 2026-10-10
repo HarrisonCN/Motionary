@@ -229,4 +229,4 @@ exports.springEasing = springEasing;
 exports.springSamples = springSamples;
 exports.stepSpring = stepSpring;
 exports.supportsLinearEasing = supportsLinearEasing;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/chunks/spring-DcM7pQgx.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/chunks/spring-DcM7pQgx.cjs.map

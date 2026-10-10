@@ -1,6 +1,7 @@
 'use strict';
 
 var base = require('../chunks/base-B3me2y0o.cjs');
+var keyClick = require('../chunks/key-click-v7I4K5Sr.cjs');
 var components_fxPaper = require('../components/fx-paper.cjs');
 require('../chunks/registry-BB1oO-lR.cjs');
 
@@ -63,6 +64,7 @@ function defineSketchChart(tag = 'usa-sketch-chart') {
                 if (this.reduced)
                     return void this.setAttribute('data-drawn', '');
                 this.listen(this, 'click', () => this.redraw());
+                keyClick.keyClick(this);
                 let done = false;
                 this.inView((v) => {
                     if (v && !done) {
@@ -105,4 +107,4 @@ function defineSketchChart(tag = 'usa-sketch-chart') {
 }
 
 exports.defineSketchChart = defineSketchChart;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/widgets/sketch-chart.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/widgets/sketch-chart.cjs.map

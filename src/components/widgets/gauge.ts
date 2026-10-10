@@ -19,7 +19,7 @@ export function defineGauge(tag = 'usa-gauge'): CustomElementConstructor | undef
     (Base) => {
       class UsaGauge extends Base {
         static get observedAttributes(): string[] {
-          return ['min', 'max', 'zones', 'unit', 'label'];
+          return ['min', 'max', 'zones', 'unit', 'label', 'value'];
         }
         private _v = 0;
         private _shown = 0;

@@ -111,4 +111,4 @@ function definePropPanel(tag = 'usa-prop-panel') {
 
 exports.definePropPanel = definePropPanel;
 exports.parseProps = parseProps;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/chunks/prop-panel-B4SaLelu.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/chunks/prop-panel-B4SaLelu.cjs.map

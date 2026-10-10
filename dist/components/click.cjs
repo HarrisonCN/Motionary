@@ -14,7 +14,7 @@ function defineClick(tag = 'usa-click') {
             this._press = null;
         }
         static get observedAttributes() {
-            return ['effect', 'disabled'];
+            return ['effect', 'disabled', 'trigger', 'color', 'count', 'shape', 'haptic'];
         }
         get effects() {
             return this.str('effect', 'ripple').split(/[\s,]+/).filter(Boolean);
@@ -156,7 +156,7 @@ function defineButton(tag = 'usa-button') {
             this._shapeBefore = null;
         }
         static get observedAttributes() {
-            return ['deform', 'state', 'shape', 'disabled'];
+            return ['deform', 'state', 'shape', 'disabled', 'morph', 'haptic', 'reset'];
         }
         get target() {
             return this.querySelector(':scope > button, :scope > a, :scope > [role="button"]') || this;
@@ -441,7 +441,7 @@ function defineIconMorph(tag = 'usa-icon-morph') {
             this._to = 'play';
         }
         static get observedAttributes() {
-            return ['icons', 'size', 'toggle'];
+            return ['icons', 'size', 'toggle', 'index', 'preset', 'labels'];
         }
         list() {
             return this.str('icons', 'play,pause').split(',').map((s) => s.trim()).filter((s) => MORPH_ICONS[s]);
@@ -518,7 +518,7 @@ const HEART = 'M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.6 1.2 5.3 3.
 function defineLike(tag = 'usa-like') {
     return base.defineElement(tag, (Base) => class UsaLike extends Base {
         static get observedAttributes() {
-            return ['liked', 'count', 'label', 'disabled'];
+            return ['liked', 'count', 'label', 'disabled', 'size', 'color', 'haptic'];
         }
         get liked() {
             return this.flag('liked');
@@ -602,7 +602,7 @@ function defineHold(tag = 'usa-hold') {
             this._holding = false;
         }
         static get observedAttributes() {
-            return ['duration', 'disabled'];
+            return ['duration', 'disabled', 'color', 'label'];
         }
         get progress() {
             return this._p;
@@ -670,6 +670,7 @@ function defineHold(tag = 'usa-hold') {
                     }, 700);
                     return;
                 }
+                // contract-exempt: reduced-motion — the fill follows the press and is the feedback itself
                 this._frame = base.raf(tick);
             };
             this._frame = base.raf(tick);
@@ -772,7 +773,7 @@ function defineCheckbox(tag = 'usa-checkbox') {
     return base.defineElement(tag, (Base) => {
         class UsaCheckbox extends Base {
             static get observedAttributes() {
-                return ['checked', 'indeterminate', 'disabled', 'label'];
+                return ['checked', 'indeterminate', 'disabled', 'label', 'value'];
             }
             constructor() {
                 super();
@@ -874,4 +875,4 @@ exports.defineHold = defineHold;
 exports.defineIconMorph = defineIconMorph;
 exports.defineLike = defineLike;
 exports.morphPath = morphPath;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/components/click.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/components/click.cjs.map

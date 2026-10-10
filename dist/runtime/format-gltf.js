@@ -220,4 +220,4 @@ async function loadGltf(src, o = {}) {
 const formatGltf = { id: 'format-gltf', version: RUNTIME_VERSION, tier: 'advanced', requires: ['core', 'gl'], api: { parseGlb, readAccessor, gltfToNode, loadGltf, SUPPORTED_EXTENSIONS } };
 
 export { SUPPORTED_EXTENSIONS, formatGltf, gltfToNode, loadGltf, parseGlb, readAccessor };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/runtime/format-gltf.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/runtime/format-gltf.js.map

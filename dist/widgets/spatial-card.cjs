@@ -41,6 +41,7 @@ function defineSpatialCard(tag = 'usa-spatial-card') {
                     if (!this.contains(e.relatedTarget))
                         set(false);
                 });
+                // contract-exempt: keyboard-click-only — pointer-driven depth decoration, no action
                 this.listen(this, 'pointerdown', () => {
                     if (!this.reduced)
                         this.motion(this, [{ transform: 'perspective(900px) translateZ(18px)' }, { transform: 'perspective(900px) translateZ(-6px)', offset: 0.4 }, { transform: 'perspective(900px) translateZ(18px)' }], { duration: 320, easing: 'ease-out' });
@@ -52,4 +53,4 @@ function defineSpatialCard(tag = 'usa-spatial-card') {
 }
 
 exports.defineSpatialCard = defineSpatialCard;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/widgets/spatial-card.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/widgets/spatial-card.cjs.map

@@ -15,7 +15,7 @@ function defineSnapCarousel(tag = 'usa-snap-carousel') {
                 this.sync = null;
             }
             static get observedAttributes() {
-                return ['align', 'gap', 'autoplay', 'no-controls', 'no-dots', 'label'];
+                return ['align', 'gap', 'autoplay', 'no-controls', 'no-dots', 'label', 'index'];
             }
             get length() {
                 return this.slides.length;
@@ -211,4 +211,4 @@ function defineSnapCarousel(tag = 'usa-snap-carousel') {
 }
 
 export { defineSnapCarousel };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/components/snap-carousel.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/components/snap-carousel.js.map

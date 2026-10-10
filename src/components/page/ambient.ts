@@ -24,7 +24,7 @@ export function defineAmbient(tag = 'usa-ambient'): CustomElementConstructor | u
     (Base) =>
       class UsaAmbient extends Base {
         static get observedAttributes(): string[] {
-          return ['effect', 'density', 'color'];
+          return ['effect', 'density', 'color', 'opacity', 'speed'];
         }
         private _frame = 0;
 

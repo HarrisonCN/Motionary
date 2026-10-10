@@ -281,4 +281,4 @@ exports.SmoothScroll = SmoothScroll;
 exports.allSmooth = allSmooth;
 exports.smooth = smooth;
 exports.smoothScroll = smoothScroll;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/runtime/smooth.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/runtime/smooth.cjs.map

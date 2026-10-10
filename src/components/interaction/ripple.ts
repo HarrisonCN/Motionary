@@ -20,7 +20,7 @@ export function defineRipple(tag = 'usa-ripple'): CustomElementConstructor | und
     (Base) =>
       class UsaRipple extends Base {
         static get observedAttributes(): string[] {
-          return [];
+          return ['disabled', 'centered', 'color', 'opacity', 'duration'];
         }
 
         mount(): void {

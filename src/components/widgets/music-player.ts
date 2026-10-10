@@ -30,7 +30,7 @@ export function defineMusicPlayer(tag = 'usa-music-player'): CustomElementConstr
     (Base) => {
       class UsaMusicPlayer extends Base {
         static get observedAttributes(): string[] {
-          return ['title', 'artist', 'cover', 'src'];
+          return ['title', 'artist', 'cover', 'src', 'duration'];
         }
         private _audio: HTMLAudioElement | null = null;
         private _playing = false;

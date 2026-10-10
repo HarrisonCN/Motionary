@@ -18,4 +18,4 @@ function registerFireflies() {
 exports.effect = effect;
 exports.register = registerFireflies;
 exports.registerFireflies = registerFireflies;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/effects/fireflies.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/effects/fireflies.cjs.map

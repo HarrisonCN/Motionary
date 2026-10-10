@@ -18,7 +18,7 @@ function defineRouteTransition(tag = 'usa-route-transition') {
                 this.cur = '';
             }
             static get observedAttributes() {
-                return ['effect', 'engine', 'cross-document'];
+                return ['effect', 'engine', 'cross-document', 'current', 'links', 'history', 'selector'];
             }
             get current() {
                 return this.cur;
@@ -122,4 +122,4 @@ function defineRouteTransition(tag = 'usa-route-transition') {
 }
 
 exports.defineRouteTransition = defineRouteTransition;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/widgets/route-transition.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/widgets/route-transition.cjs.map

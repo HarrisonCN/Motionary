@@ -132,7 +132,7 @@ export function defineGpuParticles(tag = 'usa-gpu-particles'): CustomElementCons
           if (!gpu) return start2d();
           (async () => {
             const adapter = await gpu.requestAdapter();
-            if (!adapter) throw new Error('no adapter');
+            if (!adapter) throw new Error('[motionary] <usa-gpu-particles>: no WebGPU adapter — falling back to 2D');
             const dev = await adapter.requestDevice();
             if (stop) return;
             const ctx = canvas.getContext('webgpu') as any;

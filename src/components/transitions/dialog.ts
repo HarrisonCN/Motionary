@@ -40,7 +40,7 @@ export function defineDialog(tag = 'usa-dialog'): CustomElementConstructor | und
     (Base) =>
       class UsaDialog extends Base {
         static get observedAttributes(): string[] {
-          return ['open', 'kind', 'label'];
+          return ['open', 'kind', 'label', 'no-esc', 'no-backdrop-close'];
         }
 
         private _dialog: HTMLDialogElement | null = null;

@@ -21,7 +21,7 @@ export function defineBadge(tag = 'usa-badge'): CustomElementConstructor | undef
     (Base) =>
       class UsaBadge extends Base {
         static get observedAttributes(): string[] {
-          return ['value', 'max', 'dot', 'label'];
+          return ['value', 'max', 'dot', 'label', 'show-zero'];
         }
         private _el: HTMLElement | null = null;
         get value(): string {

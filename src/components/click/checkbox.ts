@@ -24,7 +24,7 @@ export function defineCheckbox(tag = 'usa-checkbox'): CustomElementConstructor |
       class UsaCheckbox extends Base {
         static formAssociated = true;
         static get observedAttributes(): string[] {
-          return ['checked', 'indeterminate', 'disabled', 'label'];
+          return ['checked', 'indeterminate', 'disabled', 'label', 'value'];
         }
 
         private _internals: ElementInternals | null = null;

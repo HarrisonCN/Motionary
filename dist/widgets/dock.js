@@ -12,7 +12,7 @@ function defineDock(tag = 'usa-dock') {
                 this._raf = 0;
             }
             static get observedAttributes() {
-                return ['orientation', 'magnify', 'range'];
+                return ['orientation', 'magnify', 'range', 'label', 'bounce'];
             }
             get items() {
                 return this._items;
@@ -73,4 +73,4 @@ function defineDock(tag = 'usa-dock') {
 }
 
 export { defineDock };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/widgets/dock.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/widgets/dock.js.map

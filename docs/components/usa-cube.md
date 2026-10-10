@@ -7,7 +7,7 @@ Up to six children become the faces of a CSS 3D cube. Drag / swipe, arrow keys, 
 - **Category:** depth
 - **Import:** `import { defineCube } from 'motionary/components/depth'` then `defineCube();`
 - **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
-- **Attributes:** `size`, `autoplay`
+- **Attributes:** `size`, `autoplay`, `perspective`
 - **Events:** `usa:change`
 - **Slots:** —
 - **Methods:** `show()`, `next()`, `prev()`

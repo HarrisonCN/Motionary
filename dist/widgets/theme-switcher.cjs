@@ -15,7 +15,7 @@ function defineThemeSwitcher(tag = 'usa-theme-switcher') {
                 this._v = '';
             }
             static get observedAttributes() {
-                return ['themes', 'target', 'label'];
+                return ['themes', 'target', 'label', 'persist', 'value'];
             }
             list() {
                 const l = this.str('themes').split(',').map((s) => s.trim()).filter((s) => components_fxSurface.SURFACE_THEMES.includes(s));
@@ -110,4 +110,4 @@ function defineThemeSwitcher(tag = 'usa-theme-switcher') {
 }
 
 exports.defineThemeSwitcher = defineThemeSwitcher;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/widgets/theme-switcher.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/widgets/theme-switcher.cjs.map

@@ -1,4 +1,5 @@
 import { defineElement, type UsaElement } from '../base';
+import { keyClick } from '../key-click';
 import { defineLottie } from './lottie';
 import css from './lottie-icon.css?raw';
 
@@ -74,7 +75,10 @@ export function defineLottieIcon(tag = 'usa-lottie-icon'): CustomElementConstruc
           if (t === 'hover') this.listen(this, 'pointerenter', () => this.play());
           else if (t === 'enter') this.inView((v) => v && this.play(), { threshold: 0.5 });
           else if (t === 'loop') this.inView((v) => (v ? this.play() : this.lottie()?.stop()));
-          else this.listen(this, 'click', () => this.play());
+          else {
+            this.listen(this, 'click', () => this.play());
+            keyClick(this as any);
+          }
         }
         play(): void {
           const l = this.lottie();

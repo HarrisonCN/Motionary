@@ -1,4 +1,5 @@
 import { defineElement, EASE_OUT, type UsaElement } from '../base';
+import { keyClick } from '../key-click';
 import css from './svg.css?raw';
 
 /** Clip-path start / end frames for each reveal shape. */
@@ -67,7 +68,10 @@ export function defineMaskReveal(tag = 'usa-mask-reveal'): CustomElementConstruc
           this.onCleanup(() => ((this.style.opacity = ''), (this.style.clipPath = '')));
           const t = this.str('trigger', 'view');
           if (t === 'hover') this.listen(this, 'pointerenter', () => void this.reveal());
-          else if (t === 'click') this.listen(this, 'click', () => void this.reveal());
+          else if (t === 'click') {
+            this.listen(this, 'click', () => void this.reveal());
+            keyClick(this as any);
+          }
           else {
             let done = false;
             this.inView((v) => {

@@ -13,7 +13,7 @@ function defineStarRating(tag = 'usa-star-rating') {
     return defineElement(tag, (Base) => {
         class UsaStarRating extends Base {
             static get observedAttributes() {
-                return ['max', 'icon', 'readonly', 'step'];
+                return ['max', 'icon', 'readonly', 'step', 'label', 'value'];
             }
             constructor() {
                 super();
@@ -142,4 +142,4 @@ function defineStarRating(tag = 'usa-star-rating') {
 }
 
 export { defineStarRating };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/widgets/star-rating.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/widgets/star-rating.js.map

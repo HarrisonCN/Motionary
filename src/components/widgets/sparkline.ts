@@ -31,7 +31,7 @@ export function defineSparkline(tag = 'usa-sparkline'): CustomElementConstructor
     (Base) => {
       class UsaSparkline extends Base {
         static get observedAttributes(): string[] {
-          return ['variant', 'color'];
+          return ['variant', 'color', 'values', 'label'];
         }
         private _data: number[] = [];
         private _drawn = false;

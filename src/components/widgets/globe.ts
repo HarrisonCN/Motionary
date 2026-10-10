@@ -69,7 +69,7 @@ export function defineGlobe(tag = 'usa-globe'): CustomElementConstructor | undef
     (Base) => {
       class UsaGlobe extends Base {
         static get observedAttributes(): string[] {
-          return ['markers', 'speed', 'tilt'];
+          return ['markers', 'speed', 'tilt', 'lon'];
         }
         private _lon = 0;
         private _raf = 0;
@@ -101,6 +101,7 @@ export function defineGlobe(tag = 'usa-globe'): CustomElementConstructor | undef
             if (v) this.spin();
             else cancelAnimationFrame(this._raf);
           });
+          // contract-exempt: keyboard-click-only — drag-to-rotate decoration; the globe auto-rotates and carries no action
           this.listen(this, 'pointerdown', (e: PointerEvent) => {
             this._drag = { x: e.clientX, lon: this._lon };
             this.setPointerCapture?.(e.pointerId);

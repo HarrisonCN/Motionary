@@ -24,7 +24,7 @@ export function defineCardStack(tag = 'usa-card-stack'): CustomElementConstructo
     (Base) =>
       class UsaCardStack extends Base {
         static get observedAttributes(): string[] {
-          return ['visible', 'offset', 'disabled'];
+          return ['visible', 'offset', 'disabled', 'threshold', 'loop'];
         }
 
         private _x!: SpringValue;

@@ -107,4 +107,4 @@ function defineFileDrop(tag = 'usa-file-drop') {
 }
 
 exports.defineFileDrop = defineFileDrop;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/widgets/file-drop.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/widgets/file-drop.cjs.map

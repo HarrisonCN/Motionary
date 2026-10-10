@@ -26,7 +26,7 @@ export function defineLike(tag = 'usa-like'): CustomElementConstructor | undefin
     (Base) =>
       class UsaLike extends Base {
         static get observedAttributes(): string[] {
-          return ['liked', 'count', 'label', 'disabled'];
+          return ['liked', 'count', 'label', 'disabled', 'size', 'color', 'haptic'];
         }
 
         get liked(): boolean {

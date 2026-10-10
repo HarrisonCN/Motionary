@@ -24,7 +24,7 @@ export function defineTabBar(tag = 'usa-tab-bar'): CustomElementConstructor | un
     (Base) => {
       class UsaTabBar extends Base {
         static get observedAttributes(): string[] {
-          return ['indicator'];
+          return ['indicator', 'label', 'selected'];
         }
         private _tabs: HTMLElement[] = [];
         private _panels: HTMLElement[] = [];

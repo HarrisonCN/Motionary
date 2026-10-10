@@ -22,7 +22,7 @@ export function defineMorph(tag = 'usa-morph'): CustomElementConstructor | undef
     (Base) =>
       class UsaMorph extends Base {
         static get observedAttributes(): string[] {
-          return ['paths', 'trigger'];
+          return ['paths', 'trigger', 'duration', 'interval'];
         }
         private _i = 0;
         private _path: SVGPathElement | null = null;

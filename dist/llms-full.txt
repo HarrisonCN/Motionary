@@ -1,4 +1,4 @@
-# Motionary 11.7.0 — full component reference
+# Motionary 11.8.0 — full component reference
 
 Generated from the source. Machine-readable version: https://harrisoncn.github.io/Motionary/components.json (schema https://harrisoncn.github.io/Motionary/components.schema.json).
 
@@ -550,6 +550,7 @@ Smooth expand / collapse for native <details> — semantics, keyboard and find-i
 
 - Import: `import { defineAccordion } from 'motionary/components/transitions'; defineAccordion();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
+- Attributes: `multiple`, `duration`
 - Events: `usa:toggle`
 - Methods: `toggleItem()`
 
@@ -598,7 +599,7 @@ A fixed page-wide layer: drifting particles, falling snow, twinkling stars, film
 
 - Import: `import { defineAmbient } from 'motionary/components/page'; defineAmbient();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `effect`, `density`, `color`
+- Attributes: `effect`, `density`, `color`, `opacity`, `speed`
 - Methods: `mount()`, `upd()`, `resize()`, `resize()`, `draw()`, `draw()`, `unmount()`, `caf()`
 
 ```html
@@ -611,7 +612,7 @@ Stroke icons that move: the bell rings, the heart beats, the check draws, the ge
 
 - Import: `import { defineAnimIcon } from 'motionary/components/svg'; defineAnimIcon();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `name`, `size`, `label`
+- Attributes: `name`, `size`, `label`, `trigger`
 - Methods: `play()`
 
 ```html
@@ -625,7 +626,8 @@ Stroke icons that move: the bell rings, the heart beats, the check draws, the ge
 
 - Import: `import { defineAudio } from 'motionary/components/effects'; defineAudio();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `source`
+- Attributes: `source`, `label`, `threshold`, `cooldown`
+- Events: `usa:beat`, `usa:audio-error`
 - Methods: `toggle()`
 
 ```html
@@ -690,7 +692,7 @@ Overlapping avatars that spread apart with a spring on hover; extras collapse in
 
 - Import: `import { defineAvatarStack } from 'motionary/components/ui'; defineAvatarStack();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `max`, `size`, `overlap`
+- Attributes: `max`, `size`, `overlap`, `label`
 - Methods: `adoptVariants()`, `mount()`
 
 ```html
@@ -717,7 +719,7 @@ Count or dot badge that bumps with a spring when its value changes; 99+ capping,
 
 - Import: `import { defineBadge } from 'motionary/components/ui'; defineBadge();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `value`, `max`, `dot`, `label`
+- Attributes: `value`, `max`, `dot`, `label`, `show-zero`
 
 ```html
 <usa-badge value="3">
@@ -748,7 +750,7 @@ Count or dot badge that bumps with a spring when its value changes; 99+ capping,
 
 - Import: `import { defineBarChart } from 'motionary/components/widgets'; defineBarChart();`
 - CDN: https://unpkg.com/motionary@11/dist/widgets.umd.js
-- Attributes: `horizontal`, `unit`, `max`
+- Attributes: `horizontal`, `unit`, `max`, `values`, `labels`, `label`
 
 ```html
 <usa-bar-chart values="12,19,8,15,22" labels="Mon,Tue,Wed,Thu,Fri" unit="k"></usa-bar-chart>
@@ -761,7 +763,7 @@ Count or dot badge that bumps with a spring when its value changes; 99+ capping,
 
 - Import: `import { defineBgGenerator } from 'motionary/components/widgets'; defineBgGenerator();`
 - CDN: https://unpkg.com/motionary@11/dist/widgets.umd.js
-- Attributes: `label`
+- Attributes: `label`, `palette`, `style`, `seed`
 - Events: `usa:change`
 - Methods: `shuffle()`, `copy()`
 
@@ -787,7 +789,7 @@ A draggable sheet with snap points, inertia and drag-down-to-dismiss — the iOS
 
 - Import: `import { defineBottomSheet } from 'motionary/components/ui'; defineBottomSheet();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `open`, `snap`
+- Attributes: `open`, `snap`, `start`
 - Methods: `show()`, `close()`
 
 ```html
@@ -800,7 +802,7 @@ Spring-driven button click deformation: squash & stretch, elastic border-radius 
 
 - Import: `import { defineButton } from 'motionary/components/click'; defineButton();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `deform`, `state`, `shape`, `disabled`
+- Attributes: `deform`, `state`, `shape`, `disabled`, `morph`, `haptic`, `reset`
 - Events: `usa:submit`, `usa:state`
 - Methods: `morphTo()`
 
@@ -818,7 +820,7 @@ Ten card effects you can combine (effect="lift sheen"): flip (hover or click, x/
 
 - Import: `import { defineCard } from 'motionary/components/cards'; defineCard();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `effect`, `trigger`, `disabled`
+- Attributes: `effect`, `trigger`, `disabled`, `color`, `depth`
 - Events: `usa:flip`, `usa:expand`, `usa:collapse`
 - Methods: `flip()`, `expand()`, `collapse()`
 
@@ -842,7 +844,7 @@ A deck where the top card swipes away left or right (pointer, touch, arrow keys)
 
 - Import: `import { defineCardStack } from 'motionary/components/cards'; defineCardStack();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `visible`, `offset`, `disabled`
+- Attributes: `visible`, `offset`, `disabled`, `threshold`, `loop`
 - Events: `usa:swipe`, `usa:empty`
 - Methods: `swipe()`
 
@@ -860,7 +862,7 @@ A deck where the top card swipes away left or right (pointer, touch, arrow keys)
 
 - Import: `import { defineCarousel } from 'motionary/components/widgets'; defineCarousel();`
 - CDN: https://unpkg.com/motionary@11/dist/widgets.umd.js
-- Attributes: `effect`, `autoplay`, `loop`, `no-controls`, `no-dots`
+- Attributes: `effect`, `autoplay`, `loop`, `no-controls`, `no-dots`, `label`, `index`
 - Events: `usa:change`
 - Methods: `next()`, `prev()`, `goTo()`
 
@@ -878,7 +880,7 @@ Items on a 3D ring, rotated by drag, arrow keys, clicks or autoplay — with spr
 
 - Import: `import { defineCarousel3d } from 'motionary/components/cards'; defineCarousel3d();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `radius`, `perspective`, `autoplay`
+- Attributes: `radius`, `perspective`, `autoplay`, `index`
 - Events: `usa:change`
 - Methods: `next()`, `prev()`, `goTo()`
 
@@ -928,7 +930,7 @@ Items on a 3D ring, rotated by drag, arrow keys, clicks or autoplay — with spr
 
 - Import: `import { defineChatComposer } from 'motionary/components/widgets'; defineChatComposer();`
 - CDN: https://unpkg.com/motionary@11/dist/widgets.umd.js
-- Attributes: `placeholder`, `label`, `rows`, `busy`
+- Attributes: `placeholder`, `label`, `rows`, `busy`, `value`
 - Events: `usa:stop`, `usa:send`
 - Methods: `send()`, `clear()`
 
@@ -943,7 +945,7 @@ The circle draws itself, then a check, cross or exclamation strokes in with a po
 
 - Import: `import { defineCheck } from 'motionary/components/feedback'; defineCheck();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `kind`, `size`, `label`
+- Attributes: `kind`, `size`, `label`, `start`
 - Events: `usa:complete`
 - Methods: `play()`, `reset()`
 
@@ -957,7 +959,7 @@ Form-associated checkbox: the box springs and the check draws itself; indetermin
 
 - Import: `import { defineCheckbox } from 'motionary/components/click'; defineCheckbox();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `checked`, `indeterminate`, `disabled`, `label`
+- Attributes: `checked`, `indeterminate`, `disabled`, `label`, `value`
 - Events: `usa:change`
 - Methods: `toggle()`
 
@@ -971,7 +973,7 @@ Wrap anything: ripple, burst (circle, star, heart, emoji), confetti, squish, pre
 
 - Import: `import { defineClick } from 'motionary/components/click'; defineClick();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `effect`, `disabled`
+- Attributes: `effect`, `disabled`, `trigger`, `color`, `count`, `shape`, `haptic`
 - Events: `usa:click-effect`
 - Methods: `play()`, `shake()`
 
@@ -1052,7 +1054,7 @@ createTimeline().add(a, [{ opacity: 0 }, { opacity: 1 }], 400).add(b, [{ transfo
 
 - Import: `import { defineCompare } from 'motionary/components/widgets'; defineCompare();`
 - CDN: https://unpkg.com/motionary@11/dist/widgets.umd.js
-- Attributes: `orientation`, `labels`
+- Attributes: `orientation`, `labels`, `label`, `position`, `hover`, `intro`
 - Events: `usa:change`
 
 ```html
@@ -1068,7 +1070,7 @@ createTimeline().add(a, [{ opacity: 0 }, { opacity: 1 }], 400).add(b, [{ transfo
 
 - Import: `import { defineCountdown } from 'motionary/components/widgets'; defineCountdown();`
 - CDN: https://unpkg.com/motionary@11/dist/widgets.umd.js
-- Attributes: `to`, `seconds`
+- Attributes: `to`, `seconds`, `units`, `labels`, `label`
 - Events: `usa:tick`, `usa:done`
 - Methods: `start()`, `stop()`
 
@@ -1082,7 +1084,7 @@ Counts up to a number when visible, locale-formatted with tabular digits. Set .v
 
 - Import: `import { defineCounter } from 'motionary/components/text'; defineCounter();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `to`, `decimals`, `locale`, `prefix`, `suffix`, `grouping`
+- Attributes: `to`, `decimals`, `locale`, `prefix`, `suffix`, `grouping`, `from`, `start`, `duration`
 - Events: `usa:complete`
 - Methods: `play()`, `format()`
 
@@ -1096,7 +1098,7 @@ Up to six children become the faces of a CSS 3D cube. Drag / swipe, arrow keys, 
 
 - Import: `import { defineCube } from 'motionary/components/depth'; defineCube();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `size`, `autoplay`
+- Attributes: `size`, `autoplay`, `perspective`
 - Events: `usa:change`
 - Methods: `show()`, `next()`, `prev()`
 
@@ -1112,7 +1114,7 @@ Up to six children become the faces of a CSS 3D cube. Drag / swipe, arrow keys, 
 
 - Import: `import { defineCubeGallery } from 'motionary/components/widgets'; defineCubeGallery();`
 - CDN: https://unpkg.com/motionary@11/dist/widgets.umd.js
-- Attributes: `axis`, `autoplay`
+- Attributes: `axis`, `autoplay`, `label`
 - Events: `usa:change`
 - Methods: `next()`, `prev()`, `goTo()`
 
@@ -1130,7 +1132,7 @@ A spring-lagged ring, a magnetic ring that wraps buttons and links, or a soft gl
 
 - Import: `import { defineCursor } from 'motionary/components/page'; defineCursor();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `mode`, `size`, `color`, `hide-native`
+- Attributes: `mode`, `size`, `color`, `hide-native`, `targets`
 
 ```html
 <usa-cursor mode="magnetic" hide-native></usa-cursor>
@@ -1175,7 +1177,7 @@ Animated modal, side drawers and bottom sheet on the native <dialog>: top layer,
 
 - Import: `import { defineDialog } from 'motionary/components/transitions'; defineDialog();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `open`, `kind`, `label`
+- Attributes: `open`, `kind`, `label`, `no-esc`, `no-backdrop-close`
 - Events: `usa:open`, `usa:beforeclose`, `usa:close`
 - Slots: default
 - Methods: `show()`, `close()`
@@ -1223,7 +1225,7 @@ The image bulges and splits into RGB around the pointer. Without WebGL (or a cro
 
 - Import: `import { defineDock } from 'motionary/components/widgets'; defineDock();`
 - CDN: https://unpkg.com/motionary@11/dist/widgets.umd.js
-- Attributes: `orientation`, `magnify`, `range`
+- Attributes: `orientation`, `magnify`, `range`, `label`, `bounce`
 
 ```html
 <usa-dock magnify="1.9" bounce label="Apps">
@@ -1302,7 +1304,7 @@ Drag with mouse, touch, pen or arrow keys. spring-back returns home with a wobbl
 
 - Import: `import { defineDraggable } from 'motionary/components/physics'; defineDraggable();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `axis`, `disabled`, `preset`
+- Attributes: `axis`, `disabled`, `preset`, `bounds`, `spring-back`, `inertia`, `snap`, `step`
 - Events: `usa:settle`, `usa:drag-start`, `usa:drag`, `usa:drag-end`
 - Methods: `moveTo()`, `reset()`
 
@@ -1347,7 +1349,7 @@ A side panel that springs in, drags / swipes closed, traps the page behind a bac
 
 - Import: `import { defineEqualizer } from 'motionary/components/widgets'; defineEqualizer();`
 - CDN: https://unpkg.com/motionary@11/dist/widgets.umd.js
-- Attributes: `bands`
+- Attributes: `bands`, `preset`, `label`
 - Events: `usa:change`
 - Methods: `applyPreset()`
 
@@ -1441,7 +1443,7 @@ Full-screen sections that snap one at a time, with keyboard paging, dot navigati
 
 - Import: `import { defineFx } from 'motionary/components/fx'; defineFx();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `effect`, `trigger`, `options`
+- Attributes: `effect`, `trigger`, `options`, `self`, `once`
 - Methods: `play()`
 
 ```html
@@ -1456,7 +1458,7 @@ Full-screen sections that snap one at a time, with keyboard paging, dot navigati
 
 - Import: `import { defineGauge } from 'motionary/components/widgets'; defineGauge();`
 - CDN: https://unpkg.com/motionary@11/dist/widgets.umd.js
-- Attributes: `min`, `max`, `zones`, `unit`, `label`
+- Attributes: `min`, `max`, `zones`, `unit`, `label`, `value`
 
 ```html
 <usa-gauge value="72" unit="%" label="CPU" zones="60:#22c55e,85:#f59e0b,100:#ef4444"></usa-gauge>
@@ -1482,7 +1484,7 @@ Full-screen sections that snap one at a time, with keyboard paging, dot navigati
 
 - Import: `import { defineGestureFx } from 'motionary/components/effects'; defineGestureFx();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `gesture`, `effect`, `options`
+- Attributes: `gesture`, `effect`, `options`, `self`, `velocity`, `angle`, `duration`
 
 ```html
 <usa-gesture-fx gesture="long-press" effect="tada">
@@ -1606,7 +1608,7 @@ An RGB-split, sliced glitch — always on or on hover.
 
 - Import: `import { defineGlobe } from 'motionary/components/widgets'; defineGlobe();`
 - CDN: https://unpkg.com/motionary@11/dist/widgets.umd.js
-- Attributes: `markers`, `speed`, `tilt`
+- Attributes: `markers`, `speed`, `tilt`, `lon`
 - Events: `usa:focus`
 - Methods: `flyTo()`
 
@@ -1692,7 +1694,7 @@ The text draws itself stroke by stroke, then fills in — signatures, hero words
 
 - Import: `import { defineHandwriting } from 'motionary/components/text'; defineHandwriting();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `text`, `size`, `font`
+- Attributes: `text`, `size`, `font`, `stroke`, `duration`
 - Events: `usa:complete`
 - Methods: `mount()`, `splitChars()`
 
@@ -1722,7 +1724,7 @@ Press and hold (pointer, Space or Enter) while a ring fills; releasing early rew
 
 - Import: `import { defineHold } from 'motionary/components/click'; defineHold();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `duration`, `disabled`
+- Attributes: `duration`, `disabled`, `color`, `label`
 - Events: `usa:progress`, `usa:confirm`, `usa:cancel`
 - Methods: `cancel()`
 
@@ -1772,7 +1774,7 @@ Icons that morph point-by-point with a spring: play ↔ pause, menu ↔ close, p
 
 - Import: `import { defineIconMorph } from 'motionary/components/click'; defineIconMorph();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `icons`, `size`, `toggle`
+- Attributes: `icons`, `size`, `toggle`, `index`, `preset`, `labels`
 - Events: `usa:change`
 - Methods: `next()`, `show()`
 
@@ -1838,7 +1840,7 @@ Icons that morph point-by-point with a spring: play ↔ pause, menu ↔ close, p
 
 - Import: `import { defineKpi } from 'motionary/components/widgets'; defineKpi();`
 - CDN: https://unpkg.com/motionary@11/dist/widgets.umd.js
-- Attributes: `label`, `delta`, `caption`, `trend`, `invert`
+- Attributes: `label`, `delta`, `caption`, `trend`, `invert`, `locale`
 
 ```html
 <usa-kpi label="Revenue" value="$48.2k" delta="+12.5%" trend="4,6,5,9,8,12" caption="vs last month"></usa-kpi>
@@ -1868,7 +1870,7 @@ A heart that pops with a spring and bursts into particles; aria-pressed, optiona
 
 - Import: `import { defineLike } from 'motionary/components/click'; defineLike();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `liked`, `count`, `label`, `disabled`
+- Attributes: `liked`, `count`, `label`, `disabled`, `size`, `color`, `haptic`
 - Events: `usa:change`
 - Methods: `toggle()`
 
@@ -1895,7 +1897,7 @@ Click or tap to send water ripples through the image; hover adds a gentle wobble
 
 - Import: `import { defineLiquidNav } from 'motionary/components/widgets'; defineLiquidNav();`
 - CDN: https://unpkg.com/motionary@11/dist/widgets.umd.js
-- Attributes: `label`
+- Attributes: `label`, `value`
 - Events: `usa:change`
 
 ```html
@@ -2031,7 +2033,7 @@ A seamless infinite ticker with constant speed, pause on hover, soft edges and v
 
 - Import: `import { defineMarquee } from 'motionary/components/background'; defineMarquee();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `speed`, `direction`, `gap`, `paused`
+- Attributes: `speed`, `direction`, `gap`, `paused`, `pause-on-hover`
 - Methods: `pause()`, `resume()`
 
 ```html
@@ -2117,7 +2119,7 @@ Pinterest-style masonry: items drop into the shortest column and glide when the 
 
 - Import: `import { defineMenuToggle } from 'motionary/components/widgets'; defineMenuToggle();`
 - CDN: https://unpkg.com/motionary@11/dist/widgets.umd.js
-- Attributes: `variant`
+- Attributes: `variant`, `label`, `for`
 - Events: `usa:toggle`
 - Methods: `toggle()`
 
@@ -2182,7 +2184,7 @@ Morph an SVG path through a list of shapes (paths="A | B | C") on click, hover, 
 
 - Import: `import { defineMorph } from 'motionary/components/svg'; defineMorph();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `paths`, `trigger`
+- Attributes: `paths`, `trigger`, `duration`, `interval`
 - Events: `usa:change`
 - Methods: `next()`
 
@@ -2300,7 +2302,7 @@ Let users pick Off · Low · Normal · High for the whole app; scales every comp
 
 - Import: `import { defineMusicPlayer } from 'motionary/components/widgets'; defineMusicPlayer();`
 - CDN: https://unpkg.com/motionary@11/dist/widgets.umd.js
-- Attributes: `title`, `artist`, `cover`, `src`
+- Attributes: `title`, `artist`, `cover`, `src`, `duration`
 - Events: `usa:play`, `usa:pause`, `usa:seek`
 - Methods: `play()`, `pause()`, `toggle()`, `seek()`
 
@@ -2332,7 +2334,7 @@ Let users pick Off · Low · Normal · High for the whole app; scales every comp
 
 - Import: `import { defineNavMorph } from 'motionary/components/widgets'; defineNavMorph();`
 - CDN: https://unpkg.com/motionary@11/dist/widgets.umd.js
-- Attributes: `indicator`
+- Attributes: `indicator`, `label`, `active`
 - Events: `usa:change`
 
 ```html
@@ -2380,7 +2382,7 @@ Hides while you scroll down, slides back on the first scroll up; shrink makes it
 
 - Import: `import { defineOdometer } from 'motionary/components/widgets'; defineOdometer();`
 - CDN: https://unpkg.com/motionary@11/dist/widgets.umd.js
-- Attributes: `value`, `locale`, `decimals`, `prefix`, `suffix`
+- Attributes: `value`, `locale`, `decimals`, `prefix`, `suffix`, `duration`
 
 ```html
 <usa-odometer value="1284" locale="en-US" prefix="$"></usa-odometer>
@@ -2408,7 +2410,7 @@ Hides while you scroll down, slides back on the first scroll up; shrink makes it
 
 - Import: `import { defineOtp } from 'motionary/components/widgets'; defineOtp();`
 - CDN: https://unpkg.com/motionary@11/dist/widgets.umd.js
-- Attributes: `length`, `mode`, `label`
+- Attributes: `length`, `mode`, `label`, `value`
 - Events: `usa:complete`
 - Methods: `fillCode()`, `clear()`, `error()`, `success()`
 
@@ -2423,7 +2425,7 @@ A scroll container whose edges stretch with iOS-style rubber-band resistance and
 
 - Import: `import { defineOverscroll } from 'motionary/components/physics'; defineOverscroll();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `axis`, `disabled`
+- Attributes: `axis`, `disabled`, `max`, `preset`
 
 ```html
 <usa-overscroll style="height: 240px">
@@ -2456,7 +2458,7 @@ Product cards reveal and lift, “Add to cart” presses and flies the product i
 
 - Import: `import { definePagination } from 'motionary/components/widgets'; definePagination();`
 - CDN: https://unpkg.com/motionary@11/dist/widgets.umd.js
-- Attributes: `total`, `siblings`
+- Attributes: `total`, `siblings`, `label`
 - Events: `usa:change`
 
 ```html
@@ -2591,7 +2593,8 @@ Pinch with two fingers or Ctrl + wheel / trackpad pinch, pan while zoomed, doubl
 
 - Import: `import { definePlayer } from 'motionary/components/effects'; definePlayer();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `src`, `trigger`, `loop`, `rate`
+- Attributes: `src`, `trigger`, `loop`, `rate`, `controls`
+- Events: `usa:finish`, `usa:ready`
 - Methods: `load()`, `play()`, `pause()`, `seek()`
 
 ```html
@@ -2701,7 +2704,7 @@ Tactile press: dips while pressed and springs back, or bounces once with bounce.
 
 - Import: `import { definePress } from 'motionary/components/interaction'; definePress();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `disabled`
+- Attributes: `disabled`, `scale`, `bounce`
 
 ```html
 <usa-press bounce><button>Press</button></usa-press>
@@ -2726,7 +2729,7 @@ Tactile press: dips while pressed and springs back, or bounces once with bounce.
 
 - Import: `import { defineProductGallery } from 'motionary/components/widgets'; defineProductGallery();`
 - CDN: https://unpkg.com/motionary@11/dist/widgets.umd.js
-- Attributes: `index`
+- Attributes: `index`, `nozoom`, `zoom`
 - Events: `usa:change`
 - Methods: `go()`, `next()`, `prev()`
 
@@ -2758,7 +2761,7 @@ Determinate bars glide between values; without a value it shows the Fluent indet
 
 - Import: `import { defineProgressRing } from 'motionary/components/widgets'; defineProgressRing();`
 - CDN: https://unpkg.com/motionary@11/dist/widgets.umd.js
-- Attributes: `variant`, `value`, `max`, `gradient`
+- Attributes: `variant`, `value`, `max`, `gradient`, `no-label`, `duration`
 - Events: `usa:complete`
 
 ```html
@@ -2844,7 +2847,7 @@ Pull down at the top of a list: the spinner stretches in with rubber-band resist
 
 - Import: `import { defineRedEnvelope } from 'motionary/components/widgets'; defineRedEnvelope();`
 - CDN: https://unpkg.com/motionary@11/dist/widgets.umd.js
-- Attributes: `amount`, `currency`, `message`, `from`
+- Attributes: `amount`, `currency`, `message`, `from`, `opened`
 - Events: `usa:open`
 - Methods: `open()`, `close()`
 
@@ -2858,7 +2861,7 @@ Pull down at the top of a list: the spinner stretches in with rubber-band resist
 
 - Import: `import { defineRetroButton } from 'motionary/components/widgets'; defineRetroButton();`
 - CDN: https://unpkg.com/motionary@11/dist/widgets.umd.js
-- Attributes: `variant`, `disabled`
+- Attributes: `variant`, `disabled`, `type`
 
 ```html
 <usa-retro-button variant="pixel">Start</usa-retro-button>
@@ -2871,7 +2874,7 @@ Fade, slide, zoom, blur or flip content in as it enters the viewport. 12 effects
 
 - Import: `import { defineReveal } from 'motionary/components/reveal'; defineReveal();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `effect`, `distance`, `repeat`, `threshold`, `root-margin`
+- Attributes: `effect`, `distance`, `repeat`, `threshold`, `root-margin`, `duration`, `delay`, `easing`
 - Events: `usa:enter`, `usa:leave`, `usa:complete`
 - Methods: `reveal()`, `reset()`
 
@@ -2887,6 +2890,7 @@ Ink ripple from the pointer — or from the centre for Space/Enter — on any bu
 
 - Import: `import { defineRipple } from 'motionary/components/interaction'; defineRipple();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
+- Attributes: `disabled`, `centered`, `color`, `opacity`, `duration`
 - Methods: `ripple()`
 
 ```html
@@ -2931,7 +2935,7 @@ defineRive(); // registers <usa-rive> — after the prerequisites
 
 - Import: `import { defineRouteTransition } from 'motionary/components/widgets'; defineRouteTransition();`
 - CDN: https://unpkg.com/motionary@11/dist/widgets.umd.js
-- Attributes: `effect`, `engine`, `cross-document`
+- Attributes: `effect`, `engine`, `cross-document`, `current`, `links`, `history`, `selector`
 - Events: `usa:navigate`, `usa:navigated`
 - Methods: `navigate()`
 
@@ -2965,7 +2969,7 @@ Decodes text out of random glyphs, left to right. Trigger on view, hover/focus o
 
 - Import: `import { defineScramble } from 'motionary/components/text'; defineScramble();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `text`
+- Attributes: `text`, `trigger`, `duration`, `chars`
 - Events: `usa:complete`
 - Methods: `play()`
 
@@ -2979,7 +2983,7 @@ Words light up one by one as you read down the page, or a highlighter marker swe
 
 - Import: `import { defineScrollHighlight } from 'motionary/components/text'; defineScrollHighlight();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `mode`, `text`
+- Attributes: `mode`, `text`, `color`, `dim`
 - Methods: `mount()`
 
 ```html
@@ -3076,7 +3080,7 @@ A pinned graphic while [data-step] blocks scroll past; the active step drives th
 
 - Import: `import { defineSegmented } from 'motionary/components/widgets'; defineSegmented();`
 - CDN: https://unpkg.com/motionary@11/dist/widgets.umd.js
-- Attributes: `variant`
+- Attributes: `variant`, `label`, `value`
 - Events: `usa:change`
 
 ```html
@@ -3218,7 +3222,7 @@ A form-associated range slider: spring-following thumb, value bubble, full keybo
 
 - Import: `import { defineSlider } from 'motionary/components/ui'; defineSlider();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `min`, `max`, `disabled`, `label`
+- Attributes: `min`, `max`, `disabled`, `label`, `step`, `value`
 - Events: `usa:input`, `usa:change`
 
 ```html
@@ -3265,7 +3269,7 @@ defineSmoothScroll(); // registers <usa-smooth-scroll> — after the prerequisit
 
 - Import: `import { defineSnapCarousel } from 'motionary/components/snap-carousel'; defineSnapCarousel();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `align`, `gap`, `autoplay`, `no-controls`, `no-dots`, `label`
+- Attributes: `align`, `gap`, `autoplay`, `no-controls`, `no-dots`, `label`, `index`
 - Events: `usa:change`, `usa:runtime-missing`
 - Methods: `next()`, `prev()`, `goTo()`
 - Requires: motionary/runtime/drag-snap
@@ -3303,7 +3307,7 @@ defineSnapCarousel(); // registers <usa-snap-carousel> — after the prerequisit
 
 - Import: `import { defineSparkline } from 'motionary/components/widgets'; defineSparkline();`
 - CDN: https://unpkg.com/motionary@11/dist/widgets.umd.js
-- Attributes: `variant`, `color`
+- Attributes: `variant`, `color`, `values`, `label`
 
 ```html
 <usa-sparkline values="3,5,4,8,6,9,12" variant="area"></usa-sparkline>
@@ -3359,7 +3363,7 @@ Splits a headline into letters or words and cascades them in: rise, fade, blur, 
 
 - Import: `import { defineSplitText } from 'motionary/components/text'; defineSplitText();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `by`, `text`
+- Attributes: `by`, `text`, `from`, `stagger`, `duration`, `delay`, `trigger`, `repeat`
 - Events: `usa:complete`
 - Methods: `play()`, `reset()`
 
@@ -3389,7 +3393,7 @@ bounce-in, pop and drop entrances with true spring timing (CSS linear() easing),
 
 - Import: `import { defineSpring } from 'motionary/components/physics'; defineSpring();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `effect`, `trigger`, `repeat`
+- Attributes: `effect`, `trigger`, `repeat`, `stiffness`, `damping`, `mass`, `preset`, `duration`, `delay`
 - Events: `usa:complete`
 - Methods: `play()`, `reset()`
 
@@ -3408,7 +3412,7 @@ Reveals direct children one after another — lists, grids, feature rows.
 
 - Import: `import { defineStagger } from 'motionary/components/reveal'; defineStagger();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `effect`, `repeat`, `threshold`
+- Attributes: `effect`, `repeat`, `threshold`, `distance`, `interval`, `delay`, `duration`, `easing`
 - Events: `usa:enter`, `usa:complete`
 - Methods: `reveal()`, `reset()`
 
@@ -3426,7 +3430,7 @@ Reveals direct children one after another — lists, grids, feature rows.
 
 - Import: `import { defineStarRating } from 'motionary/components/widgets'; defineStarRating();`
 - CDN: https://unpkg.com/motionary@11/dist/widgets.umd.js
-- Attributes: `max`, `icon`, `readonly`, `step`
+- Attributes: `max`, `icon`, `readonly`, `step`, `label`, `value`
 - Events: `usa:change`
 
 ```html
@@ -3440,7 +3444,7 @@ Reveals direct children one after another — lists, grids, feature rows.
 
 - Import: `import { defineStepper } from 'motionary/components/widgets'; defineStepper();`
 - CDN: https://unpkg.com/motionary@11/dist/widgets.umd.js
-- Attributes: `orientation`
+- Attributes: `orientation`, `label`, `clickable`
 - Events: `usa:change`
 - Methods: `next()`, `prev()`
 
@@ -3511,7 +3515,8 @@ Cards stick while you scroll and the covered ones shrink and dim as the next sli
 
 - Import: `import { defineStory } from 'motionary/components/effects'; defineStory();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `template`, `zoom`
+- Attributes: `template`, `zoom`, `label`
+- Events: `usa:step`
 
 ```html
 <usa-story template="compare" label="2019 vs 2026">
@@ -3559,7 +3564,7 @@ Swipe-to-dismiss and swipe actions: content follows the finger, flies out on a f
 
 - Import: `import { defineSwipeable } from 'motionary/components/gesture'; defineSwipeable();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `axis`, `disabled`
+- Attributes: `axis`, `disabled`, `distance`, `dismiss`, `preset`
 - Events: `usa:swipe`, `usa:dismiss`
 - Methods: `swipe()`, `reset()`
 
@@ -3575,7 +3580,7 @@ Swipe-to-dismiss and swipe actions: content follows the finger, flies out on a f
 
 - Import: `import { defineSwitch } from 'motionary/components/widgets'; defineSwitch();`
 - CDN: https://unpkg.com/motionary@11/dist/widgets.umd.js
-- Attributes: `variant`
+- Attributes: `variant`, `label`, `name`, `value`, `disabled`
 - Events: `usa:change`
 - Methods: `toggle()`
 
@@ -3589,7 +3594,7 @@ Swipe-to-dismiss and swipe actions: content follows the finger, flies out on a f
 
 - Import: `import { defineTabBar } from 'motionary/components/widgets'; defineTabBar();`
 - CDN: https://unpkg.com/motionary@11/dist/widgets.umd.js
-- Attributes: `indicator`
+- Attributes: `indicator`, `label`, `selected`
 - Events: `usa:change`
 - Methods: `select()`
 
@@ -3628,7 +3633,7 @@ Accessible tabs whose indicator slides between tabs with a spring; panels slide 
 
 - Import: `import { defineTerminal } from 'motionary/components/widgets'; defineTerminal();`
 - CDN: https://unpkg.com/motionary@11/dist/widgets.umd.js
-- Attributes: `title`, `prompt`, `theme`, `speed`
+- Attributes: `title`, `prompt`, `theme`, `speed`, `loop`
 - Events: `usa:done`
 - Methods: `replay()`, `skip()`
 
@@ -3645,7 +3650,7 @@ Cycles words in place — the box keeps the width of the longest word, so nothin
 
 - Import: `import { defineTextRotate } from 'motionary/components/text'; defineTextRotate();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `words`, `interval`, `paused`
+- Attributes: `words`, `interval`, `paused`, `effect`
 - Events: `usa:change`
 - Methods: `next()`
 
@@ -3708,7 +3713,7 @@ defineTextSplitter(); // registers <usa-text-splitter> — after the prerequisit
 
 - Import: `import { defineThemeSwitcher } from 'motionary/components/widgets'; defineThemeSwitcher();`
 - CDN: https://unpkg.com/motionary@11/dist/widgets.umd.js
-- Attributes: `themes`, `target`, `label`
+- Attributes: `themes`, `target`, `label`, `persist`, `value`
 - Events: `usa:change`
 
 ```html
@@ -3735,7 +3740,7 @@ Every data-tl child becomes a step in document order. data-at ('-=200', '<', 'la
 
 - Import: `import { defineTimeline } from 'motionary/components/timeline'; defineTimeline();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `scrub`, `trigger`, `overlap`
+- Attributes: `scrub`, `trigger`, `overlap`, `duration`, `stagger`, `smooth`, `repeat`
 - Events: `usa:complete`
 - Methods: `play()`, `reverse()`, `seek()`
 
@@ -3753,7 +3758,7 @@ Every data-tl child becomes a step in document order. data-at ('-=200', '<', 'la
 
 - Import: `import { defineTip } from 'motionary/components/widgets'; defineTip();`
 - CDN: https://unpkg.com/motionary@11/dist/widgets.umd.js
-- Attributes: `text`, `placement`, `trigger`
+- Attributes: `text`, `placement`, `trigger`, `delay`
 - Events: `usa:open`, `usa:close`
 - Methods: `show()`, `hide()`
 
@@ -3773,7 +3778,7 @@ Every data-tl child becomes a step in document order. data-at ('-=200', '<', 'la
 
 - Import: `import { defineToastStack } from 'motionary/components/widgets'; defineToastStack();`
 - CDN: https://unpkg.com/motionary@11/dist/widgets.umd.js
-- Attributes: `position`
+- Attributes: `position`, `duration`, `max`
 - Events: `usa:show`, `usa:dismiss`
 - Methods: `show()`, `dismiss()`, `clear()`
 
@@ -3789,7 +3794,7 @@ toast("Saved") slides a notification in; it pauses on hover, stacks with FLIP an
 
 - Import: `import { defineToaster } from 'motionary/components/feedback'; defineToaster();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `label`
+- Attributes: `label`, `position`, `max`
 - Events: `usa:toast`
 - Methods: `show()`, `clear()`
 
@@ -3807,7 +3812,7 @@ toast("Saved") slides a notification in; it pauses on hover, stacks with FLIP an
 
 - Import: `import { defineTokenEditor } from 'motionary/components/widgets'; defineTokenEditor();`
 - CDN: https://unpkg.com/motionary@11/dist/widgets.umd.js
-- Attributes: `apply`, `format`, `groups`
+- Attributes: `apply`, `format`, `groups`, `label`
 - Events: `usa:export`, `usa:import`, `usa:change`
 - Methods: `exportJSON()`, `importJSON()`
 
@@ -3821,7 +3826,7 @@ Types text, or cycles through phrases with delete and pause. Full text stays ava
 
 - Import: `import { defineTypewriter } from 'motionary/components/text'; defineTypewriter();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `text`, `words`
+- Attributes: `text`, `words`, `start`, `speed`, `delete-speed`, `pause`, `loop`, `delay`
 - Events: `usa:complete`
 - Methods: `start()`, `stop()`, `restart()`
 
@@ -3866,7 +3871,7 @@ One view at a time with direction-aware slide, fade, scale or drill transitions 
 
 - Import: `import { defineViewSwitch } from 'motionary/components/transitions'; defineViewSwitch();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `active`
+- Attributes: `active`, `duration`, `effect`
 - Events: `usa:change`
 - Methods: `show()`
 
@@ -3897,7 +3902,7 @@ One view at a time with direction-aware slide, fade, scale or drill transitions 
 
 - Import: `import { defineVolumeKnob } from 'motionary/components/widgets'; defineVolumeKnob();`
 - CDN: https://unpkg.com/motionary@11/dist/widgets.umd.js
-- Attributes: `min`, `max`
+- Attributes: `min`, `max`, `label`
 - Events: `usa:change`, `usa:input`
 
 ```html
@@ -3924,7 +3929,7 @@ Letters bob in a travelling wave — playful headlines and loading labels.
 
 - Import: `import { defineWaveText } from 'motionary/components/text'; defineWaveText();`
 - CDN: https://unpkg.com/motionary@11/dist/components.umd.js
-- Attributes: `text`
+- Attributes: `text`, `amplitude`, `speed`, `stagger`
 - Methods: `mount()`, `splitChars()`
 
 ```html

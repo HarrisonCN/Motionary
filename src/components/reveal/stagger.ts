@@ -21,7 +21,7 @@ export function defineStagger(tag = 'usa-stagger'): CustomElementConstructor | u
     (Base) =>
       class UsaStagger extends Base {
         static get observedAttributes(): string[] {
-          return ['effect', 'repeat', 'threshold'];
+          return ['effect', 'repeat', 'threshold', 'distance', 'interval', 'delay', 'duration', 'easing'];
         }
 
         private _anims: Animation[] = [];

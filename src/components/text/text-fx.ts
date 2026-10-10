@@ -37,7 +37,7 @@ const textOf = (el: HTMLElement): string => (el.getAttribute('text') ?? el.datas
 export interface UsaWaveTextElement extends UsaElement {}
 export function defineWaveText(tag = 'usa-wave-text'): CustomElementConstructor | undefined {
   return defineElement(tag, (Base) => class extends Base {
-    static get observedAttributes(): string[] { return ['text']; }
+    static get observedAttributes(): string[] { return ['text', 'amplitude', 'speed', 'stagger']; }
     mount(): void {
       splitChars(this, textOf(this));
       this.style.setProperty('--usa-wave-a', `${this.num('amplitude', 0.25)}em`);
@@ -94,7 +94,7 @@ export interface UsaHandwritingElement extends UsaElement {
 }
 export function defineHandwriting(tag = 'usa-handwriting'): CustomElementConstructor | undefined {
   return defineElement(tag, (Base) => class extends Base {
-    static get observedAttributes(): string[] { return ['text', 'size', 'font']; }
+    static get observedAttributes(): string[] { return ['text', 'size', 'font', 'stroke', 'duration']; }
     mount(): void {
       const t = textOf(this);
       const size = this.num('size', 64);
@@ -136,7 +136,7 @@ export interface UsaScrollHighlightElement extends UsaElement {
 }
 export function defineScrollHighlight(tag = 'usa-scroll-highlight'): CustomElementConstructor | undefined {
   return defineElement(tag, (Base) => class extends Base {
-    static get observedAttributes(): string[] { return ['mode', 'text']; }
+    static get observedAttributes(): string[] { return ['mode', 'text', 'color', 'dim']; }
     private _f = 0;
     private _p = 0;
     get progress(): number { return this._p; }

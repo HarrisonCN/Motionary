@@ -23,7 +23,7 @@ export function defineTextRotate(tag = 'usa-text-rotate'): CustomElementConstruc
     (Base) =>
       class UsaTextRotate extends Base {
         static get observedAttributes(): string[] {
-          return ['words', 'interval', 'paused'];
+          return ['words', 'interval', 'paused', 'effect'];
         }
 
         private _source: string | null = null;

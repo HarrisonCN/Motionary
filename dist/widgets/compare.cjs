@@ -15,7 +15,7 @@ function defineCompare(tag = 'usa-compare') {
                 this._handle = null;
             }
             static get observedAttributes() {
-                return ['orientation', 'labels'];
+                return ['orientation', 'labels', 'label', 'position', 'hover', 'intro'];
             }
             get position() {
                 return this._p;
@@ -131,4 +131,4 @@ function defineCompare(tag = 'usa-compare') {
 }
 
 exports.defineCompare = defineCompare;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/widgets/compare.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/widgets/compare.cjs.map

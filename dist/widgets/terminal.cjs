@@ -15,7 +15,7 @@ function defineTerminal(tag = 'usa-terminal') {
                 this._run = 0;
             }
             static get observedAttributes() {
-                return ['title', 'prompt', 'theme', 'speed'];
+                return ['title', 'prompt', 'theme', 'speed', 'loop'];
             }
             mount() {
                 const src = Array.from(this.children).filter((c) => !c.hasAttribute('data-usa-part'));
@@ -117,4 +117,4 @@ function defineTerminal(tag = 'usa-terminal') {
 }
 
 exports.defineTerminal = defineTerminal;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/widgets/terminal.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/widgets/terminal.cjs.map

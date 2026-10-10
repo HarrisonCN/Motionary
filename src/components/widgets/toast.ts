@@ -45,7 +45,7 @@ export function defineToastStack(tag = 'usa-toast-stack'): CustomElementConstruc
     (Base) => {
       class UsaToastStack extends Base {
         static get observedAttributes(): string[] {
-          return ['position'];
+          return ['position', 'duration', 'max'];
         }
         private _list: HTMLOListElement | null = null;
         private _timers = new Map<string, { left: number; start: number; h: ReturnType<typeof setTimeout> | 0 }>();
@@ -214,6 +214,7 @@ function installToastTriggers(): void {
   delegateTriggers();
   if (trig || typeof document === 'undefined') return;
   trig = true;
+  // contract-exempt: lifecycle-global-listener — one delegated listener for [data-usa-toast] triggers, installed once per page, never per element
   document.addEventListener('click', (e) => {
     const t = (e.target as Element | null)?.closest?.('[data-usa-toast]');
     if (!t) return;

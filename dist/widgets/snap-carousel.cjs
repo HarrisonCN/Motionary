@@ -8,4 +8,4 @@ require('../chunks/registry-U0scTJZr.cjs');
 
 
 exports.defineSnapCarousel = components_snapCarousel.defineSnapCarousel;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/widgets/snap-carousel.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/widgets/snap-carousel.cjs.map

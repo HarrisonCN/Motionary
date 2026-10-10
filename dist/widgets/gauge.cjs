@@ -16,7 +16,7 @@ function defineGauge(tag = 'usa-gauge') {
                 this._raf = 0;
             }
             static get observedAttributes() {
-                return ['min', 'max', 'zones', 'unit', 'label'];
+                return ['min', 'max', 'zones', 'unit', 'label', 'value'];
             }
             get value() {
                 return this._v;
@@ -92,4 +92,4 @@ function defineGauge(tag = 'usa-gauge') {
 }
 
 exports.defineGauge = defineGauge;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/widgets/gauge.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/widgets/gauge.cjs.map

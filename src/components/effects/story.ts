@@ -72,7 +72,7 @@ export function defineStory(tag = 'usa-story'): CustomElementConstructor | undef
     (Base) =>
       class UsaStory extends Base {
         static get observedAttributes(): string[] {
-          return ['template', 'zoom'];
+          return ['template', 'zoom', 'label'];
         }
         progress = 0;
         step = -1;
@@ -91,7 +91,9 @@ export function defineStory(tag = 'usa-story'): CustomElementConstructor | undef
           this.steps().forEach((s, k) => s.toggleAttribute('data-active', k === i));
           const stage = this.querySelector<HTMLElement>('[data-stage]');
           if (stage) stage.dataset.activeStep = String(i);
+          // contract-exempt: event-prefix — legacy usa-story-step kept next to usa:step until 12.0
           this.dispatchEvent(new CustomEvent('usa-story-step', { detail: { index: i }, bubbles: true }));
+          this.emit('step', { index: i });
         }
         /** Recompute from the current scroll position (called on scroll / resize). */
         update(): void {

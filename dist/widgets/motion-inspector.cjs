@@ -116,4 +116,4 @@ function defineMotionInspector(tag = 'usa-motion-inspector') {
 }
 
 exports.defineMotionInspector = defineMotionInspector;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/widgets/motion-inspector.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/widgets/motion-inspector.cjs.map

@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [11.8.0] - 2026-10-09
+
+### Component contract — non-breaking fixes (Components)
+- **Attributes:** 182 attributes that elements read but did not observe are now in their `observedAttributes` — changing them after mount re-renders the element, as the contract says (attributes an element writes itself are left out, so nothing re-mounts in a loop).
+- **Events:** `usa:beat` / `usa:audio-error` (`<usa-audio>`), `usa:ready` / `usa:finish` (`<usa-player>`) and `usa:step` (`<usa-story>`) — bubbling, composed — fire next to the legacy `usa-beat`, `usa-audio-error`, `usa-player-ready`, `usa-player-finish`, `usa-story-step` (legacy names removed in 12.0).
+- **Keyboard:** click-activated hosts (`<usa-anim-icon trigger="click">`, `<usa-draw trigger="click">`, `<usa-mask-reveal trigger="click">`, `<usa-lottie-icon>`, `<usa-sketch-chart>`, `<usa-gyro-card>` permission prompt) get `tabindex="0"` + `role="button"` unless set by the page or a control is inside, and Enter / Space activate them (`keyClick()`, removed on disconnect).
+- **Reduced motion:** `<usa-player trigger="load|view">` shows the end state under reduced motion.
+- **Errors:** `<usa-gpu-particles>` adapter error now starts with `[motionary]`.
+- Intended behaviour is recorded with `// contract-exempt: <rule> — <reason>` (pointer-only decorations, scroll-synced rAF throttling, the page-level toast trigger listener) and listed in the report.
+
+### Checks
+- `scripts/contract-audit.mjs`: exemptions, native `<dialog>` / `<summary>` detection, full `CustomEvent` init scan. Report: only `attr-unobserved` remains (elements without a static `observedAttributes` list) — for 12.0.
+- New `test/widgets-11-8.test.ts`.
+
 ## [11.7.0] - 2026-10-09
 
 ### Component contract audit (Components)

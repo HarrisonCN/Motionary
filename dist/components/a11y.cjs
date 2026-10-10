@@ -273,4 +273,4 @@ exports.restoreMotionSensitivity = restoreMotionSensitivity;
 exports.setMotionSensitivity = setMotionSensitivity;
 exports.staticAlternative = staticAlternative;
 exports.warnBaseline = warnBaseline;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/components/a11y.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/components/a11y.cjs.map

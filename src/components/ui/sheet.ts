@@ -187,7 +187,7 @@ export function defineBottomSheet(tag = 'usa-bottom-sheet'): CustomElementConstr
       const Panel = makePanel(Base, 'sheet');
       return class UsaBottomSheet extends Panel {
         static get observedAttributes(): string[] {
-          return ['open', 'snap'];
+          return ['open', 'snap', 'start'];
         }
         mount(): void {
           if (!this.querySelector(':scope > .usa-sheet-handle')) {

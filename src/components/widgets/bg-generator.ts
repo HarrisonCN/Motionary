@@ -33,7 +33,7 @@ export function defineBgGenerator(tag = 'usa-bg-generator'): CustomElementConstr
     (Base) => {
       class UsaBgGenerator extends Base {
         static get observedAttributes(): string[] {
-          return ['label'];
+          return ['label', 'palette', 'style', 'seed'];
         }
         private _st = { palette: 'sunset', style: 'mesh', seed: 1 };
         get css(): string {

@@ -86,4 +86,4 @@ async function fetchMarketplace(url, fetcher = fetch) {
 }
 
 export { MARKETPLACE, MARKETPLACE_FORMAT, fetchMarketplace, installPlugin, installedPlugins, loadEffectPack, searchPlugins };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/components/marketplace.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/components/marketplace.js.map

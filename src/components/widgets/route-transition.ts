@@ -33,7 +33,7 @@ export function defineRouteTransition(tag = 'usa-route-transition'): CustomEleme
     (Base) => {
       class UsaRouteTransition extends Base {
         static get observedAttributes(): string[] {
-          return ['effect', 'engine', 'cross-document'];
+          return ['effect', 'engine', 'cross-document', 'current', 'links', 'history', 'selector'];
         }
         private cur = '';
         get current(): string {

@@ -10,7 +10,7 @@ require('../chunks/fx-BaPAanPW.cjs');
 function defineFx(tag = 'usa-fx') {
     return base.defineElement(tag, (Base) => class UsaFx extends Base {
         static get observedAttributes() {
-            return ['effect', 'trigger', 'options'];
+            return ['effect', 'trigger', 'options', 'self', 'once'];
         }
         get target() {
             return this.flag('self') ? this : (this.firstElementChild || this);
@@ -73,4 +73,4 @@ exports.BUILTIN_EFFECTS = builtins.BUILTIN_EFFECTS;
 exports.defineFx = defineFx;
 exports.defineFxComponents = defineFxComponents;
 exports.registerBuiltinEffects = registerBuiltinEffects;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/components/fx.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/components/fx.cjs.map

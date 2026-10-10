@@ -25,7 +25,7 @@ export function defineReveal(tag = 'usa-reveal'): CustomElementConstructor | und
     (Base) =>
       class UsaReveal extends Base {
         static get observedAttributes(): string[] {
-          return ['effect', 'distance', 'repeat', 'threshold', 'root-margin'];
+          return ['effect', 'distance', 'repeat', 'threshold', 'root-margin', 'duration', 'delay', 'easing'];
         }
 
         private _anim: Animation | null = null;

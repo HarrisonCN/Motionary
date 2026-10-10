@@ -23,7 +23,7 @@ export function defineTerminal(tag = 'usa-terminal'): CustomElementConstructor |
     (Base) => {
       class UsaTerminal extends Base {
         static get observedAttributes(): string[] {
-          return ['title', 'prompt', 'theme', 'speed'];
+          return ['title', 'prompt', 'theme', 'speed', 'loop'];
         }
         private _lines: { cmd: boolean; text: string }[] = [];
         private _timer = 0 as unknown as ReturnType<typeof setTimeout>;

@@ -7,7 +7,7 @@ A scroll container whose edges stretch with iOS-style rubber-band resistance and
 - **Category:** physics
 - **Import:** `import { defineOverscroll } from 'motionary/components/physics'` then `defineOverscroll();`
 - **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
-- **Attributes:** `axis`, `disabled`
+- **Attributes:** `axis`, `disabled`, `max`, `preset`
 - **Events:** —
 - **Slots:** —
 - **Methods:** —

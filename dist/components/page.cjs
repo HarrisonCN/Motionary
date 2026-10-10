@@ -13,7 +13,7 @@ function defineCursor(tag = 'usa-cursor') {
             this._frame = 0;
         }
         static get observedAttributes() {
-            return ['mode', 'size', 'color', 'hide-native'];
+            return ['mode', 'size', 'color', 'hide-native', 'targets'];
         }
         get active() {
             return this.hasAttribute('data-active');
@@ -388,6 +388,7 @@ function defineBackToTop(tag = 'usa-back-to-top') {
                 this.style.setProperty('--usa-btt', Math.min(1, y / max).toFixed(4));
             };
             this.listen(window, 'scroll', () => {
+                // contract-exempt: reduced-motion — rAF only throttles the scroll-synced visibility check, no decorative motion
                 if (!this._frame)
                     this._frame = base.raf(update);
             }, { passive: true });
@@ -417,7 +418,7 @@ function defineAmbient(tag = 'usa-ambient') {
             this._frame = 0;
         }
         static get observedAttributes() {
-            return ['effect', 'density', 'color'];
+            return ['effect', 'density', 'color', 'opacity', 'speed'];
         }
         mount() {
             this.setAttribute('aria-hidden', 'true');
@@ -821,4 +822,4 @@ exports.setMotionLevel = setMotionLevel;
 exports.smoothScroll = smoothScroll;
 exports.supportsViewTransitions = supportsViewTransitions;
 exports.themeTransition = themeTransition;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/components/page.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/components/page.cjs.map

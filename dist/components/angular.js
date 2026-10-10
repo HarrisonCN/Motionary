@@ -22,6 +22,7 @@ import './timeline.js';
 import './gesture.js';
 import '../chunks/core-BcQb_f91.js';
 import './svg.js';
+import '../chunks/key-click-BLm3BI8_.js';
 import './webgl.js';
 import './depth.js';
 import './layout.js';
@@ -78,4 +79,4 @@ function defineUsa(categories) {
 const usaDetail = (e) => e.detail;
 
 export { USA_TAGS, defineUsa, isUsaElement, provideUsa, usaDetail, usaInitializer };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/components/angular.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/components/angular.js.map

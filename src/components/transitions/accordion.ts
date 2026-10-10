@@ -22,7 +22,7 @@ export function defineAccordion(tag = 'usa-accordion'): CustomElementConstructor
     (Base) =>
       class UsaAccordion extends Base {
         static get observedAttributes(): string[] {
-          return [];
+          return ['multiple', 'duration'];
         }
 
         private _running = new WeakMap<HTMLDetailsElement, Animation>();

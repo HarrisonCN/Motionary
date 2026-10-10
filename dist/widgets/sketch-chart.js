@@ -1,4 +1,5 @@
 import { f as defineElement } from '../chunks/base-zSGb8ujt.js';
+import { k as keyClick } from '../chunks/key-click-BLm3BI8_.js';
 import { roughLine } from '../components/fx-paper.js';
 import '../chunks/registry-CYojuxi5.js';
 
@@ -61,6 +62,7 @@ function defineSketchChart(tag = 'usa-sketch-chart') {
                 if (this.reduced)
                     return void this.setAttribute('data-drawn', '');
                 this.listen(this, 'click', () => this.redraw());
+                keyClick(this);
                 let done = false;
                 this.inView((v) => {
                     if (v && !done) {
@@ -103,4 +105,4 @@ function defineSketchChart(tag = 'usa-sketch-chart') {
 }
 
 export { defineSketchChart };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/widgets/sketch-chart.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/widgets/sketch-chart.js.map

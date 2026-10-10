@@ -33,7 +33,7 @@ export function defineScramble(tag = 'usa-scramble'): CustomElementConstructor |
     (Base) =>
       class UsaScramble extends Base {
         static get observedAttributes(): string[] {
-          return ['text'];
+          return ['text', 'trigger', 'duration', 'chars'];
         }
 
         private _source: string | null = null;

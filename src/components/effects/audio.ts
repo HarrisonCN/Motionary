@@ -317,7 +317,7 @@ export function defineAudio(tag = 'usa-audio'): CustomElementConstructor | undef
     (Base) =>
       class UsaAudio extends Base {
         static get observedAttributes(): string[] {
-          return ['source'];
+          return ['source', 'label', 'threshold', 'cooldown'];
         }
         active = false;
         private audio: AudioReactive | null = null;
@@ -343,7 +343,9 @@ export function defineAudio(tag = 'usa-audio'): CustomElementConstructor | undef
             this.removeAttribute('data-audio-error');
             b.setAttribute('aria-pressed', 'true');
             this.off = onBeat((d) => {
+              // contract-exempt: event-prefix — legacy usa-beat / usa-audio-error kept next to usa:beat / usa:audio-error until 12.0
               this.dispatchEvent(new CustomEvent('usa-beat', { detail: d, bubbles: true }));
+              this.emit('beat', d);
               if (prefersReducedMotion()) return;
               this.querySelectorAll<HTMLElement>('[data-usa-beat]').forEach((el) => {
                 let opts = {};
@@ -358,6 +360,7 @@ export function defineAudio(tag = 'usa-audio'): CustomElementConstructor | undef
           } catch (err) {
             this.setAttribute('data-audio-error', '');
             this.dispatchEvent(new CustomEvent('usa-audio-error', { detail: { error: err }, bubbles: true }));
+            this.emit('audio-error', { error: err });
           }
         }
         private stop(): void {

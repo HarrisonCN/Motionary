@@ -15,7 +15,7 @@ function defineCube(tag = 'usa-cube') {
             this._base = [0, 0];
         }
         static get observedAttributes() {
-            return ['size', 'autoplay'];
+            return ['size', 'autoplay', 'perspective'];
         }
         get index() {
             return this._i;
@@ -239,4 +239,4 @@ function defineDepthComponents() {
 }
 
 export { defineCube, defineDepth, defineDepthComponents, deviceTilt, orientationToTilt, requestOrientationPermission, supportsOrientation };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/components/depth.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/components/depth.js.map

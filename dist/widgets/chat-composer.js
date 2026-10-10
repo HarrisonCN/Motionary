@@ -7,7 +7,7 @@ function defineChatComposer(tag = 'usa-chat-composer') {
     return defineElement(tag, (Base) => {
         class UsaChatComposer extends Base {
             static get observedAttributes() {
-                return ['placeholder', 'label', 'rows', 'busy'];
+                return ['placeholder', 'label', 'rows', 'busy', 'value'];
             }
             get area() {
                 return this.querySelector('.usa-cc-input');
@@ -102,4 +102,4 @@ function defineChatComposer(tag = 'usa-chat-composer') {
 }
 
 export { defineChatComposer };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/widgets/chat-composer.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/widgets/chat-composer.js.map

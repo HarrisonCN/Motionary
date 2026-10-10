@@ -2,9 +2,9 @@
 
 var components_fx = require('./fx.cjs');
 var shared = require('../chunks/shared-jkgRH-Hx.cjs');
-var player = require('../chunks/player-DZe-cHvD.cjs');
+var player = require('../chunks/player-oFkk6pPT.cjs');
 var generative = require('../chunks/generative-BHIj-NU0.cjs');
-var audio = require('../chunks/audio-Dc4JT_0D.cjs');
+var audio = require('../chunks/audio-h-eiqo5B.cjs');
 var registry = require('../chunks/registry-BB1oO-lR.cjs');
 var base = require('../chunks/base-B3me2y0o.cjs');
 var components_tokens = require('./tokens.cjs');
@@ -934,7 +934,7 @@ function bindGesture(el, gesture, effect, o = {}) {
 function defineGestureFx(tag = 'usa-gesture-fx') {
     return base.defineElement(tag, (Base) => class UsaGestureFx extends Base {
         static get observedAttributes() {
-            return ['gesture', 'effect', 'options'];
+            return ['gesture', 'effect', 'options', 'self', 'velocity', 'angle', 'duration'];
         }
         get gesture() {
             const g = this.str('gesture', 'fling');
@@ -1423,4 +1423,4 @@ exports.themeCss = themeCss;
 exports.themePreset = themePreset;
 exports.themeVars = themeVars;
 exports.togglePressed = togglePressed;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/components/effects.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/components/effects.cjs.map

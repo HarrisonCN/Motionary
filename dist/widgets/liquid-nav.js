@@ -12,7 +12,7 @@ function defineLiquidNav(tag = 'usa-liquid-nav') {
                 this._id = `usa-lq-${++uid}`;
             }
             static get observedAttributes() {
-                return ['label'];
+                return ['label', 'value'];
             }
             items() {
                 return Array.from(this.children).filter((c) => !c.hasAttribute('data-usa-part'));
@@ -85,4 +85,4 @@ function defineLiquidNav(tag = 'usa-liquid-nav') {
 }
 
 export { defineLiquidNav };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/widgets/liquid-nav.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/widgets/liquid-nav.js.map

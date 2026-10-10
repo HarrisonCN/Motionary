@@ -37,7 +37,7 @@ export function defineProgressRing(tag = 'usa-progress-ring'): CustomElementCons
     (Base) => {
       class UsaProgressRing extends Base {
         static get observedAttributes(): string[] {
-          return ['variant', 'value', 'max', 'gradient'];
+          return ['variant', 'value', 'max', 'gradient', 'no-label', 'duration'];
         }
         private _shown = 0;
         private _arc: SVGPathElement | SVGCircleElement | HTMLElement | null = null;
@@ -167,7 +167,7 @@ export function defineOdometer(tag = 'usa-odometer'): CustomElementConstructor |
     (Base) => {
       class UsaOdometer extends Base {
         static get observedAttributes(): string[] {
-          return ['value', 'locale', 'decimals', 'prefix', 'suffix'];
+          return ['value', 'locale', 'decimals', 'prefix', 'suffix', 'duration'];
         }
         private _row: HTMLElement | null = null;
         private _text = '';

@@ -46,7 +46,7 @@ export function defineCard(tag = 'usa-card'): CustomElementConstructor | undefin
     (Base) =>
       class UsaCard extends Base {
         static get observedAttributes(): string[] {
-          return ['effect', 'trigger', 'disabled'];
+          return ['effect', 'trigger', 'disabled', 'color', 'depth'];
         }
 
         private _frame = 0;

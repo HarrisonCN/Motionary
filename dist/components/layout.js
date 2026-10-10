@@ -207,6 +207,7 @@ function defineMasonry(tag = 'usa-masonry') {
             const queue = () => {
                 if (id)
                     return;
+                // contract-exempt: reduced-motion — rAF batches layout, no motion
                 id = requestAnimationFrame(() => {
                     id = 0;
                     this.layout();
@@ -246,4 +247,4 @@ function defineLayoutComponents() {
 }
 
 export { autoAnimate, defineAutoAnimate, defineLayoutComponents, defineMasonry, flipFrames, masonryLayout, sharedTransition };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/components/layout.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/components/layout.js.map

@@ -7,7 +7,7 @@ A fixed page-wide layer: drifting particles, falling snow, twinkling stars, film
 - **Category:** page
 - **Import:** `import { defineAmbient } from 'motionary/components/page'` then `defineAmbient();`
 - **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
-- **Attributes:** `effect`, `density`, `color`
+- **Attributes:** `effect`, `density`, `color`, `opacity`, `speed`
 - **Events:** —
 - **Slots:** —
 - **Methods:** `mount()`, `upd()`, `resize()`, `resize()`, `draw()`, `draw()`, `unmount()`, `caf()`

@@ -30,7 +30,7 @@ export function defineTimeline(tag = 'usa-timeline'): CustomElementConstructor |
     (Base) =>
       class UsaTimeline extends Base {
         static get observedAttributes(): string[] {
-          return ['scrub', 'trigger', 'overlap'];
+          return ['scrub', 'trigger', 'overlap', 'duration', 'stagger', 'smooth', 'repeat'];
         }
         private _tl: Timeline | null = null;
 

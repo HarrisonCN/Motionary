@@ -9,7 +9,7 @@ function defineRedEnvelope(tag = 'usa-red-envelope') {
     return base.defineElement(tag, (Base) => {
         class UsaRedEnvelope extends Base {
             static get observedAttributes() {
-                return ['amount', 'currency', 'message', 'from'];
+                return ['amount', 'currency', 'message', 'from', 'opened'];
             }
             get opened() {
                 return this.hasAttribute('data-open');
@@ -70,4 +70,4 @@ function defineRedEnvelope(tag = 'usa-red-envelope') {
 }
 
 exports.defineRedEnvelope = defineRedEnvelope;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/widgets/red-envelope.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/widgets/red-envelope.cjs.map

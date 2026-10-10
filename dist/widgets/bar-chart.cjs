@@ -13,7 +13,7 @@ function defineBarChart(tag = 'usa-bar-chart') {
                 this._seen = false;
             }
             static get observedAttributes() {
-                return ['horizontal', 'unit', 'max'];
+                return ['horizontal', 'unit', 'max', 'values', 'labels', 'label'];
             }
             get data() {
                 return this._data.map((d) => ({ ...d }));
@@ -100,4 +100,4 @@ function defineBarChart(tag = 'usa-bar-chart') {
 }
 
 exports.defineBarChart = defineBarChart;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/widgets/bar-chart.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/widgets/bar-chart.cjs.map

@@ -4,7 +4,7 @@
   "schemaVersion": 2,
   "stability": "stable",
   "package": "motionary",
-  "version": "11.7.0",
+  "version": "11.8.0",
   "homepage": "https://harrisoncn.github.io/Motionary/",
   "llms": "https://harrisoncn.github.io/Motionary/llms.txt",
   "cdn": {
@@ -1716,7 +1716,10 @@
         "register": "defineAccordion();"
       },
       "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
-      "attributes": [],
+      "attributes": [
+        "multiple",
+        "duration"
+      ],
       "events": [
         "usa:toggle"
       ],
@@ -1829,7 +1832,9 @@
       "attributes": [
         "effect",
         "density",
-        "color"
+        "color",
+        "opacity",
+        "speed"
       ],
       "events": [],
       "slots": [],
@@ -1874,7 +1879,8 @@
       "attributes": [
         "name",
         "size",
-        "label"
+        "label",
+        "trigger"
       ],
       "events": [],
       "slots": [],
@@ -1912,9 +1918,15 @@
       },
       "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
-        "source"
+        "source",
+        "label",
+        "threshold",
+        "cooldown"
       ],
-      "events": [],
+      "events": [
+        "usa:beat",
+        "usa:audio-error"
+      ],
       "slots": [],
       "methods": [
         "toggle"
@@ -2051,7 +2063,8 @@
       "attributes": [
         "max",
         "size",
-        "overlap"
+        "overlap",
+        "label"
       ],
       "events": [],
       "slots": [],
@@ -2120,7 +2133,8 @@
         "value",
         "max",
         "dot",
-        "label"
+        "label",
+        "show-zero"
       ],
       "events": [],
       "slots": [],
@@ -2196,7 +2210,10 @@
       "attributes": [
         "horizontal",
         "unit",
-        "max"
+        "max",
+        "values",
+        "labels",
+        "label"
       ],
       "events": [],
       "slots": [],
@@ -2232,7 +2249,10 @@
       },
       "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
-        "label"
+        "label",
+        "palette",
+        "style",
+        "seed"
       ],
       "events": [
         "usa:change"
@@ -2304,7 +2324,8 @@
       "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "open",
-        "snap"
+        "snap",
+        "start"
       ],
       "events": [],
       "slots": [],
@@ -2345,7 +2366,10 @@
         "deform",
         "state",
         "shape",
-        "disabled"
+        "disabled",
+        "morph",
+        "haptic",
+        "reset"
       ],
       "events": [
         "usa:submit",
@@ -2407,7 +2431,9 @@
       "attributes": [
         "effect",
         "trigger",
-        "disabled"
+        "disabled",
+        "color",
+        "depth"
       ],
       "events": [
         "usa:flip",
@@ -2470,7 +2496,9 @@
       "attributes": [
         "visible",
         "offset",
-        "disabled"
+        "disabled",
+        "threshold",
+        "loop"
       ],
       "events": [
         "usa:swipe",
@@ -2515,7 +2543,9 @@
         "autoplay",
         "loop",
         "no-controls",
-        "no-dots"
+        "no-dots",
+        "label",
+        "index"
       ],
       "events": [
         "usa:change"
@@ -2556,7 +2586,8 @@
       "attributes": [
         "radius",
         "perspective",
-        "autoplay"
+        "autoplay",
+        "index"
       ],
       "events": [
         "usa:change"
@@ -2685,7 +2716,8 @@
         "placeholder",
         "label",
         "rows",
-        "busy"
+        "busy",
+        "value"
       ],
       "events": [
         "usa:stop",
@@ -2725,7 +2757,8 @@
       "attributes": [
         "kind",
         "size",
-        "label"
+        "label",
+        "start"
       ],
       "events": [
         "usa:complete"
@@ -2766,7 +2799,8 @@
         "checked",
         "indeterminate",
         "disabled",
-        "label"
+        "label",
+        "value"
       ],
       "events": [
         "usa:change"
@@ -2806,7 +2840,12 @@
       "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "effect",
-        "disabled"
+        "disabled",
+        "trigger",
+        "color",
+        "count",
+        "shape",
+        "haptic"
       ],
       "events": [
         "usa:click-effect"
@@ -3015,7 +3054,11 @@
       "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "orientation",
-        "labels"
+        "labels",
+        "label",
+        "position",
+        "hover",
+        "intro"
       ],
       "events": [
         "usa:change"
@@ -3054,7 +3097,10 @@
       "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "to",
-        "seconds"
+        "seconds",
+        "units",
+        "labels",
+        "label"
       ],
       "events": [
         "usa:tick",
@@ -3097,7 +3143,10 @@
         "locale",
         "prefix",
         "suffix",
-        "grouping"
+        "grouping",
+        "from",
+        "start",
+        "duration"
       ],
       "events": [
         "usa:complete"
@@ -3137,7 +3186,8 @@
       "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "size",
-        "autoplay"
+        "autoplay",
+        "perspective"
       ],
       "events": [
         "usa:change"
@@ -3180,7 +3230,8 @@
       "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "axis",
-        "autoplay"
+        "autoplay",
+        "label"
       ],
       "events": [
         "usa:change"
@@ -3223,7 +3274,8 @@
         "mode",
         "size",
         "color",
-        "hide-native"
+        "hide-native",
+        "targets"
       ],
       "events": [],
       "slots": [],
@@ -3340,7 +3392,9 @@
       "attributes": [
         "open",
         "kind",
-        "label"
+        "label",
+        "no-esc",
+        "no-backdrop-close"
       ],
       "events": [
         "usa:open",
@@ -3459,7 +3513,9 @@
       "attributes": [
         "orientation",
         "magnify",
-        "range"
+        "range",
+        "label",
+        "bounce"
       ],
       "events": [],
       "slots": [],
@@ -3628,7 +3684,12 @@
       "attributes": [
         "axis",
         "disabled",
-        "preset"
+        "preset",
+        "bounds",
+        "spring-back",
+        "inertia",
+        "snap",
+        "step"
       ],
       "events": [
         "usa:settle",
@@ -3742,7 +3803,9 @@
       },
       "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
-        "bands"
+        "bands",
+        "preset",
+        "label"
       ],
       "events": [
         "usa:change"
@@ -3984,7 +4047,9 @@
       "attributes": [
         "effect",
         "trigger",
-        "options"
+        "options",
+        "self",
+        "once"
       ],
       "events": [],
       "slots": [],
@@ -4526,7 +4591,8 @@
         "max",
         "zones",
         "unit",
-        "label"
+        "label",
+        "value"
       ],
       "events": [],
       "slots": [],
@@ -4609,7 +4675,11 @@
       "attributes": [
         "gesture",
         "effect",
-        "options"
+        "options",
+        "self",
+        "velocity",
+        "angle",
+        "duration"
       ],
       "events": [],
       "slots": [],
@@ -4886,7 +4956,8 @@
       "attributes": [
         "markers",
         "speed",
-        "tilt"
+        "tilt",
+        "lon"
       ],
       "events": [
         "usa:focus"
@@ -5116,7 +5187,9 @@
       "attributes": [
         "text",
         "size",
-        "font"
+        "font",
+        "stroke",
+        "duration"
       ],
       "events": [
         "usa:complete"
@@ -5195,7 +5268,9 @@
       "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "duration",
-        "disabled"
+        "disabled",
+        "color",
+        "label"
       ],
       "events": [
         "usa:progress",
@@ -5321,7 +5396,10 @@
       "attributes": [
         "icons",
         "size",
-        "toggle"
+        "toggle",
+        "index",
+        "preset",
+        "labels"
       ],
       "events": [
         "usa:change"
@@ -5490,7 +5568,8 @@
         "delta",
         "caption",
         "trend",
-        "invert"
+        "invert",
+        "locale"
       ],
       "events": [],
       "slots": [],
@@ -5564,7 +5643,10 @@
         "liked",
         "count",
         "label",
-        "disabled"
+        "disabled",
+        "size",
+        "color",
+        "haptic"
       ],
       "events": [
         "usa:change"
@@ -5636,7 +5718,8 @@
       },
       "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
-        "label"
+        "label",
+        "value"
       ],
       "events": [
         "usa:change"
@@ -6002,7 +6085,8 @@
         "speed",
         "direction",
         "gap",
-        "paused"
+        "paused",
+        "pause-on-hover"
       ],
       "events": [],
       "slots": [],
@@ -6206,7 +6290,9 @@
       },
       "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
-        "variant"
+        "variant",
+        "label",
+        "for"
       ],
       "events": [
         "usa:toggle"
@@ -6355,7 +6441,9 @@
       "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "paths",
-        "trigger"
+        "trigger",
+        "duration",
+        "interval"
       ],
       "events": [
         "usa:change"
@@ -6678,7 +6766,8 @@
         "title",
         "artist",
         "cover",
-        "src"
+        "src",
+        "duration"
       ],
       "events": [
         "usa:play",
@@ -6766,7 +6855,9 @@
       },
       "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
-        "indicator"
+        "indicator",
+        "label",
+        "active"
       ],
       "events": [
         "usa:change"
@@ -6885,7 +6976,8 @@
         "locale",
         "decimals",
         "prefix",
-        "suffix"
+        "suffix",
+        "duration"
       ],
       "events": [],
       "slots": [],
@@ -6962,7 +7054,8 @@
       "attributes": [
         "length",
         "mode",
-        "label"
+        "label",
+        "value"
       ],
       "events": [
         "usa:complete"
@@ -7003,7 +7096,9 @@
       "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "axis",
-        "disabled"
+        "disabled",
+        "max",
+        "preset"
       ],
       "events": [],
       "slots": [],
@@ -7106,7 +7201,8 @@
       "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "total",
-        "siblings"
+        "siblings",
+        "label"
       ],
       "events": [
         "usa:change"
@@ -7463,9 +7559,13 @@
         "src",
         "trigger",
         "loop",
-        "rate"
+        "rate",
+        "controls"
       ],
-      "events": [],
+      "events": [
+        "usa:finish",
+        "usa:ready"
+      ],
       "slots": [],
       "methods": [
         "load",
@@ -7713,7 +7813,9 @@
       },
       "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
-        "disabled"
+        "disabled",
+        "scale",
+        "bounce"
       ],
       "events": [],
       "slots": [],
@@ -7787,7 +7889,9 @@
       },
       "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
-        "index"
+        "index",
+        "nozoom",
+        "zoom"
       ],
       "events": [
         "usa:change"
@@ -7869,7 +7973,9 @@
         "variant",
         "value",
         "max",
-        "gradient"
+        "gradient",
+        "no-label",
+        "duration"
       ],
       "events": [
         "usa:complete"
@@ -8103,7 +8209,8 @@
         "amount",
         "currency",
         "message",
-        "from"
+        "from",
+        "opened"
       ],
       "events": [
         "usa:open"
@@ -8145,7 +8252,8 @@
       "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "variant",
-        "disabled"
+        "disabled",
+        "type"
       ],
       "events": [],
       "slots": [],
@@ -8182,7 +8290,10 @@
         "distance",
         "repeat",
         "threshold",
-        "root-margin"
+        "root-margin",
+        "duration",
+        "delay",
+        "easing"
       ],
       "events": [
         "usa:enter",
@@ -8220,7 +8331,13 @@
         "register": "defineRipple();"
       },
       "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
-      "attributes": [],
+      "attributes": [
+        "disabled",
+        "centered",
+        "color",
+        "opacity",
+        "duration"
+      ],
       "events": [],
       "slots": [],
       "methods": [
@@ -8326,7 +8443,11 @@
       "attributes": [
         "effect",
         "engine",
-        "cross-document"
+        "cross-document",
+        "current",
+        "links",
+        "history",
+        "selector"
       ],
       "events": [
         "usa:navigate",
@@ -8405,7 +8526,10 @@
       },
       "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
-        "text"
+        "text",
+        "trigger",
+        "duration",
+        "chars"
       ],
       "events": [
         "usa:complete"
@@ -8443,7 +8567,9 @@
       "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "mode",
-        "text"
+        "text",
+        "color",
+        "dim"
       ],
       "events": [],
       "slots": [],
@@ -8666,7 +8792,9 @@
       },
       "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
-        "variant"
+        "variant",
+        "label",
+        "value"
       ],
       "events": [
         "usa:change"
@@ -9031,7 +9159,9 @@
         "min",
         "max",
         "disabled",
-        "label"
+        "label",
+        "step",
+        "value"
       ],
       "events": [
         "usa:input",
@@ -9145,7 +9275,8 @@
         "autoplay",
         "no-controls",
         "no-dots",
-        "label"
+        "label",
+        "index"
       ],
       "events": [
         "usa:change",
@@ -9204,7 +9335,9 @@
       "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "variant",
-        "color"
+        "color",
+        "values",
+        "label"
       ],
       "events": [],
       "slots": [],
@@ -9344,7 +9477,13 @@
       "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "by",
-        "text"
+        "text",
+        "from",
+        "stagger",
+        "duration",
+        "delay",
+        "trigger",
+        "repeat"
       ],
       "events": [
         "usa:complete"
@@ -9419,7 +9558,13 @@
       "attributes": [
         "effect",
         "trigger",
-        "repeat"
+        "repeat",
+        "stiffness",
+        "damping",
+        "mass",
+        "preset",
+        "duration",
+        "delay"
       ],
       "events": [
         "usa:complete"
@@ -9458,7 +9603,12 @@
       "attributes": [
         "effect",
         "repeat",
-        "threshold"
+        "threshold",
+        "distance",
+        "interval",
+        "delay",
+        "duration",
+        "easing"
       ],
       "events": [
         "usa:enter",
@@ -9503,7 +9653,9 @@
         "max",
         "icon",
         "readonly",
-        "step"
+        "step",
+        "label",
+        "value"
       ],
       "events": [
         "usa:change"
@@ -9541,7 +9693,9 @@
       },
       "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
-        "orientation"
+        "orientation",
+        "label",
+        "clickable"
       ],
       "events": [
         "usa:change"
@@ -9705,9 +9859,12 @@
       "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "template",
-        "zoom"
+        "zoom",
+        "label"
       ],
-      "events": [],
+      "events": [
+        "usa:step"
+      ],
       "slots": [],
       "methods": [],
       "example": "<usa-story template=\"compare\" label=\"2019 vs 2026\">\n  <div data-sticky>\n    <img data-before src=\"before.jpg\" alt=\"Before\">\n    <img data-after src=\"after.jpg\" alt=\"After\">\n  </div>\n</usa-story>",
@@ -9843,7 +10000,10 @@
       "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "axis",
-        "disabled"
+        "disabled",
+        "distance",
+        "dismiss",
+        "preset"
       ],
       "events": [
         "usa:swipe",
@@ -9885,7 +10045,11 @@
       },
       "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
-        "variant"
+        "variant",
+        "label",
+        "name",
+        "value",
+        "disabled"
       ],
       "events": [
         "usa:change"
@@ -9925,7 +10089,9 @@
       },
       "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
-        "indicator"
+        "indicator",
+        "label",
+        "selected"
       ],
       "events": [
         "usa:change"
@@ -10005,7 +10171,8 @@
         "title",
         "prompt",
         "theme",
-        "speed"
+        "speed",
+        "loop"
       ],
       "events": [
         "usa:done"
@@ -10045,7 +10212,8 @@
       "attributes": [
         "words",
         "interval",
-        "paused"
+        "paused",
+        "effect"
       ],
       "events": [
         "usa:change"
@@ -10189,7 +10357,9 @@
       "attributes": [
         "themes",
         "target",
-        "label"
+        "label",
+        "persist",
+        "value"
       ],
       "events": [
         "usa:change"
@@ -10265,7 +10435,11 @@
       "attributes": [
         "scrub",
         "trigger",
-        "overlap"
+        "overlap",
+        "duration",
+        "stagger",
+        "smooth",
+        "repeat"
       ],
       "events": [
         "usa:complete"
@@ -10309,7 +10483,8 @@
       "attributes": [
         "text",
         "placement",
-        "trigger"
+        "trigger",
+        "delay"
       ],
       "events": [
         "usa:open",
@@ -10351,7 +10526,9 @@
       },
       "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
-        "position"
+        "position",
+        "duration",
+        "max"
       ],
       "events": [
         "usa:show",
@@ -10390,7 +10567,9 @@
       },
       "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
-        "label"
+        "label",
+        "position",
+        "max"
       ],
       "events": [
         "usa:toast"
@@ -10434,7 +10613,8 @@
       "attributes": [
         "apply",
         "format",
-        "groups"
+        "groups",
+        "label"
       ],
       "events": [
         "usa:export",
@@ -10475,7 +10655,13 @@
       "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
         "text",
-        "words"
+        "words",
+        "start",
+        "speed",
+        "delete-speed",
+        "pause",
+        "loop",
+        "delay"
       ],
       "events": [
         "usa:complete"
@@ -10596,7 +10782,9 @@
       },
       "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
-        "active"
+        "active",
+        "duration",
+        "effect"
       ],
       "events": [
         "usa:change"
@@ -10677,7 +10865,8 @@
       "cdn": "https://unpkg.com/motionary@11/dist/widgets.umd.js",
       "attributes": [
         "min",
-        "max"
+        "max",
+        "label"
       ],
       "events": [
         "usa:change",
@@ -10745,7 +10934,10 @@
       },
       "cdn": "https://unpkg.com/motionary@11/dist/components.umd.js",
       "attributes": [
-        "text"
+        "text",
+        "amplitude",
+        "speed",
+        "stagger"
       ],
       "events": [],
       "slots": [],

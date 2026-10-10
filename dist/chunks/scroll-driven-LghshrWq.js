@@ -41,4 +41,4 @@ function viewProgress(el) {
 }
 
 export { commonAncestor as c, pickEngine as p, scrollProgress as s, timelineName as t, viewProgress as v };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/chunks/scroll-driven-LghshrWq.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/chunks/scroll-driven-LghshrWq.js.map

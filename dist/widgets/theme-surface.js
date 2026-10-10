@@ -45,6 +45,7 @@ function defineThemeSurface(tag = 'usa-theme-surface') {
                         this._mo.observe(n, { attributes: true, attributeFilter: ['data-usa-surface'] });
                     this.onCleanup(() => this._mo?.disconnect());
                 }
+                // contract-exempt: keyboard-click-only — pointer-driven surface decoration, no action
                 this.listen(this, 'pointerdown', () => {
                     if (this._t === 'neu' && !this.reduced)
                         this.motion(this, [{ transform: 'scale(1)' }, { transform: 'scale(.98)', offset: 0.4 }, { transform: 'scale(1)' }], { duration: 300 });
@@ -59,4 +60,4 @@ function defineThemeSurface(tag = 'usa-theme-surface') {
 }
 
 export { defineThemeSurface };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/widgets/theme-surface.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/widgets/theme-surface.js.map

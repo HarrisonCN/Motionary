@@ -1,4 +1,5 @@
 import { defineElement, raf, caf, now, clamp, motionScale, type UsaElement } from '../base';
+import { keyClick } from '../key-click';
 import { drawLines } from './core';
 import css from './svg.css?raw';
 
@@ -66,7 +67,10 @@ export function defineDraw(tag = 'usa-draw'): CustomElementConstructor | undefin
             this.listen(window, 'scroll', update, { passive: true });
             update();
           } else if (trigger === 'hover') this.listen(this, 'pointerenter', () => this.play());
-          else if (trigger === 'click') this.listen(this, 'click', () => this.play());
+          else if (trigger === 'click') {
+            this.listen(this, 'click', () => this.play());
+            keyClick(this as any);
+          }
           else {
             let done = false;
             this.inView((v) => {

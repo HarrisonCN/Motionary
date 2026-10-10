@@ -74,6 +74,7 @@ export function defineMasonry(tag = 'usa-masonry'): CustomElementConstructor | u
           let id = 0;
           const queue = () => {
             if (id) return;
+            // contract-exempt: reduced-motion — rAF batches layout, no motion
             id = requestAnimationFrame(() => {
               id = 0;
               this.layout();

@@ -24,7 +24,7 @@ function defineKpi(tag = 'usa-kpi') {
                 this._seen = false;
             }
             static get observedAttributes() {
-                return ['label', 'delta', 'caption', 'trend', 'invert'];
+                return ['label', 'delta', 'caption', 'trend', 'invert', 'locale'];
             }
             get value() {
                 return this.str('value', '0');
@@ -96,4 +96,4 @@ function defineKpi(tag = 'usa-kpi') {
 }
 
 exports.defineKpi = defineKpi;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/widgets/kpi.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/widgets/kpi.cjs.map

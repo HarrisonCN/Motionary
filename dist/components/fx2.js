@@ -63,7 +63,7 @@ import { registerEffects } from '../chunks/registry-CYojuxi5.js';
 import '../chunks/generative-2LhxG5BJ.js';
 import '../chunks/shared-CkKHWrtJ.js';
 import '../chunks/base-zSGb8ujt.js';
-import '../chunks/audio-Ds5ppQVV.js';
+import '../chunks/audio-C10EnE3b.js';
 
 /** The 6.x effect packs by name. */
 const EFFECT_PACKS = {
@@ -160,4 +160,4 @@ function usePlugins(...plugins) {
 }
 
 export { AI_FX, CHART_FX, CINEMA_FX, CYBER_FX, DEPTH3_FX, EFFECT_PACKS, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GENART_FX, GEO_FX, GESTURE3_FX, GPU_FX, LIGHT_FX, LOTTIE_FX, MORPH2_FX, MUSIC_FX, ORGANIC_FX, PAPER_FX, PERF3_FX, PHYSICS2_FX, RETRO_FX, SAFE_FX, SHOP_FX, SOCIAL_FX, SPATIAL_FX, SURFACE_FX, TEXT3_FX, TRANSITIONS2_FX, VIDEO_FX, WEATHER_FX, definePlugin, effectPlugins, register3dPack, registerAiPack, registerAllPlugins, registerChartPack, registerCinemaPack, registerCyberPack, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGenArtPack, registerGeoPack, registerGesture3Pack, registerGpuPack, registerLightPack, registerLottiePack, registerMorphPack, registerMusicPack, registerOrganicPack, registerPaperPack, registerPerf3Pack, registerPhysicsPack, registerRetroPack, registerSafePack, registerShopPack, registerSocialPack, registerSpatialPack, registerSurfacePack, registerTextPack, registerTransitionsPack, registerVideoPack, registerWeatherPack, usePlugins };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/components/fx2.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/components/fx2.js.map
