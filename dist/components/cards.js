@@ -551,4 +551,4 @@ function defineCardComponents() {
 }
 
 export { CARD_EFFECTS, defineCard, defineCardComponents, defineCardStack, defineCarousel3d, defineStickyStack };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.6.0/dist/components/cards.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/components/cards.js.map

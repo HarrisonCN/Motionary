@@ -18,4 +18,4 @@ function registerLeaves() {
 exports.effect = effect;
 exports.register = registerLeaves;
 exports.registerLeaves = registerLeaves;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.6.0/dist/effects/leaves.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/effects/leaves.cjs.map

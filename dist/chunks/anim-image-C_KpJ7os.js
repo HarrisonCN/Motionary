@@ -163,4 +163,4 @@ function crc32(bytes, start = 0, end = bytes.length) {
 }
 
 export { animatedImagePlayer as a, browserDecode as b, composeFrames as c, bytesOf as d, crc32 as e, fixDelay as f, u8 as u };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.6.0/dist/chunks/anim-image-C_KpJ7os.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/chunks/anim-image-C_KpJ7os.js.map

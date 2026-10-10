@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [11.7.0] - 2026-10-09
+
+### Component contract audit (Components)
+- New [docs/component-contract.md](./docs/component-contract.md): one contract for every `<usa-*>` element — **attributes** (every attribute read is observed), **events** (`usa:*`, bubbling + composed, via `emit()`), **keyboard** (host click / pointer actions reachable by keyboard or delegated to a native control), **lifecycle** (full teardown on disconnect, re-mount on observed attribute change), **reduced motion** (end state under `prefers-reduced-motion` / `motionSensitivity`), **errors** (`[motionary]` prefix, actionable).
+- New `scripts/contract-audit.mjs` (`npm run contract`, `npm run check:contract`): static scan of `src/components`, eight rules, writes [docs/contract-report.md](./docs/contract-report.md) + `docs/contract-report.json`. **Report only** in 11.x — 11.8 fixes the non-breaking findings, 12.0 makes the contract blocking.
+
+### Checks
+- New `test/widgets-11-7.test.ts`: the audit covers the registered tags, the six parts, the committed report is current; findings are printed, never fail.
+
 ## [11.6.0] - 2026-10-09
 
 ### AI layer: local parser + pluggable LLM provider (Tooling)

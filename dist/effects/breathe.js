@@ -12,4 +12,4 @@ function registerBreathe() {
 }
 
 export { effect, registerBreathe as register, registerBreathe };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.6.0/dist/effects/breathe.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/effects/breathe.js.map

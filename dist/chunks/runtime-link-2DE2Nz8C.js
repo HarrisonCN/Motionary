@@ -33,4 +33,4 @@ function runtimeModule(host, id) {
 }
 
 export { runtimeModule as r };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.6.0/dist/chunks/runtime-link-2DE2Nz8C.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/chunks/runtime-link-2DE2Nz8C.js.map

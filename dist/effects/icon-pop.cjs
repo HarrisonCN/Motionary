@@ -16,4 +16,4 @@ function registerIconPop() {
 exports.effect = effect;
 exports.register = registerIconPop;
 exports.registerIconPop = registerIconPop;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.6.0/dist/effects/icon-pop.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/effects/icon-pop.cjs.map

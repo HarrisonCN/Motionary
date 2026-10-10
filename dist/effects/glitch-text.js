@@ -13,4 +13,4 @@ function registerGlitchText() {
 }
 
 export { effect, registerGlitchText as register, registerGlitchText };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.6.0/dist/effects/glitch-text.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/effects/glitch-text.js.map

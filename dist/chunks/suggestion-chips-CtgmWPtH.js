@@ -89,4 +89,4 @@ function defineSuggestionChips(tag = 'usa-suggestion-chips') {
 }
 
 export { defineSuggestionChips as d, parseChips as p };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.6.0/dist/chunks/suggestion-chips-CtgmWPtH.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/chunks/suggestion-chips-CtgmWPtH.js.map
