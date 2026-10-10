@@ -51,12 +51,13 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe('phone emulation', () => {
-  test('runs as a phone: touch, coarse pointer, DPR > 1, narrow portrait viewport', async ({ page }) => {
+  test('runs as a phone: touch, coarse pointer, DPR > 1, narrow portrait viewport', async ({ page, browserName }) => {
     await openFixture(page);
     const env = await page.evaluate(() => ({ coarse: matchMedia('(pointer: coarse)').matches, touch: 'ontouchstart' in window, mtp: navigator.maxTouchPoints, dpr: devicePixelRatio, w: innerWidth, h: innerHeight }));
     expect(env.coarse).toBe(true);
     expect(env.touch).toBe(true);
-    expect(env.mtp).toBeGreaterThan(0);
+    // Playwright's WebKit build reports navigator.maxTouchPoints = 0 even with hasTouch (touch events and pointer: coarse work)
+    if (browserName !== 'webkit') expect(env.mtp).toBeGreaterThan(0);
     expect(env.dpr).toBeGreaterThan(1);
     expect(env.w).toBeLessThan(500);
     expect(env.h).toBeGreaterThan(env.w);
@@ -282,6 +283,10 @@ test.describe('every component on a phone', () => {
       await settle(page, 600);
       const wide = await page.evaluate(() => [...document.querySelectorAll('#stage > section')].filter((s) => s.firstElementChild && s.firstElementChild.getBoundingClientRect().width > innerWidth * 2).map((s) => s.dataset.t));
       expect(wide, 'elements that grew past twice the screen width').toEqual([]);
+      // WebKit reports "ResizeObserver loop completed with undelivered notifications." as a page error when a rotation
+      // resizes many observed elements at once; per spec those notifications are delivered next frame (not a thrown error).
+      // Only that exact message is dropped here; everything else still fails the test.
+      page.__errors = page.__errors.filter((m) => m !== 'ResizeObserver loop completed with undelivered notifications.');
       expectNoErrors(page, batch.join(','));
     });
   }

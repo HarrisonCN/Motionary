@@ -25,6 +25,8 @@ instead of the 700-byte `motionary/components` module doc).
 - Playwright projects `mobile-chrome` (Pixel 7 on Chromium) and `mobile-safari` (iPhone 14 on WebKit) running
   `test/browser/mobile.spec.mjs`; CI runs them in the `Browser (chromium)` and `Browser (webkit)` jobs.
 - docs/mobile.md: what components do on phones, how it is tested, and what is not verified (no real devices).
+- Mobile Safari emulation (WebKit, CI): `navigator.maxTouchPoints` reads 0 and a rotation of every component at once reports
+  the benign "ResizeObserver loop completed" notice; both are noted in docs/mobile.md (Not verified).
 
 ### Security
 

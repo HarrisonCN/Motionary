@@ -127,3 +127,8 @@ own preview frame.
   are tested with the message shapes those hosts produce. The Figma plugin's `e.source === parent` check was not run
   inside Figma.
 - Firefox for Android: Playwright has no Firefox mobile emulation; desktop Firefox runs the rest of the browser suite.
+- **WebKit emulation quirks.** Playwright's WebKit reports `navigator.maxTouchPoints = 0` with touch enabled (touch events
+  and `pointer: coarse` work), so that one check runs on mobile Chrome only. When a rotation resizes every component at
+  once, WebKit reports "ResizeObserver loop completed with undelivered notifications." as a page error; the spec delivers
+  those notifications in the next frame, so the every-component sweep ignores exactly that message. Which component's
+  resize callback triggers it was not narrowed down.
