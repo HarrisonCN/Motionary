@@ -19,4 +19,4 @@ function registerWaveformScope() {
 exports.effect = effect;
 exports.register = registerWaveformScope;
 exports.registerWaveformScope = registerWaveformScope;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.5.0/dist/effects/waveform-scope.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.9.0/dist/effects/waveform-scope.cjs.map

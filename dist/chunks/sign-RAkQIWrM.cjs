@@ -104,4 +104,4 @@ exports.checkCompat = checkCompat;
 exports.pluginIntegrity = pluginIntegrity;
 exports.satisfies = satisfies;
 exports.verifyPlugin = verifyPlugin;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.5.0/dist/chunks/sign-RAkQIWrM.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.9.0/dist/chunks/sign-RAkQIWrM.cjs.map

@@ -12,4 +12,4 @@ function registerThinkingGlow() {
 }
 
 export { effect, registerThinkingGlow as register, registerThinkingGlow };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.5.0/dist/effects/thinking-glow.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.9.0/dist/effects/thinking-glow.js.map

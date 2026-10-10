@@ -103,4 +103,4 @@ function defineEqualizer(tag = 'usa-equalizer') {
 }
 
 export { EQ_PRESETS as E, defineEqualizer as d };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.5.0/dist/chunks/equalizer-C8mel4Mn.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.9.0/dist/chunks/equalizer-C8mel4Mn.js.map

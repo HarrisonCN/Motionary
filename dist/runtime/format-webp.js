@@ -112,4 +112,4 @@ async function loadWebp(src, o = {}) {
 const formatWebp = { id: 'format-webp', version: RUNTIME_VERSION, tier: 'standard', requires: ['core'], api: { parseWebp, webpFrameFiles, decodeWebp, loadWebp, animatedImagePlayer } };
 
 export { animatedImagePlayer, decodeWebp, formatWebp, loadWebp, parseWebp, riffChunks, webpFrameFiles };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.5.0/dist/runtime/format-webp.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.9.0/dist/runtime/format-webp.js.map
