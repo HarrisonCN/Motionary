@@ -4,7 +4,7 @@
 
 The image bulges and splits into RGB around the pointer. Without WebGL (or a cross-origin image without CORS) it falls back to a gentle CSS zoom.
 
-- **Category:** webgl
+- **Category:** webgl · **since** 3.4 · **changed in** 4.0
 - **Import:** `import { defineDistort } from 'motionary/components/webgl'` then `defineDistort();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** —

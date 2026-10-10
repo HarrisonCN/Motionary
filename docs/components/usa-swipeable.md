@@ -4,7 +4,7 @@
 
 Swipe-to-dismiss and swipe actions: content follows the finger, flies out on a fast swipe or past the distance, otherwise springs home with your release velocity. Delete / arrow keys work too.
 
-- **Category:** gesture
+- **Category:** gesture · **since** 3.2 · **changed in** 6.8
 - **Import:** `import { defineSwipeable } from 'motionary/components/gesture'` then `defineSwipeable();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `axis`, `disabled`, `distance`, `dismiss`, `preset`

@@ -4,7 +4,7 @@
 
 Wrap a list or grid: items that are added fade in, removed ones fade out in place, and everything else glides to its new spot — on sort, filter or resize. Zero code at the call site.
 
-- **Category:** layout
+- **Category:** layout · **since** 3.6 · **changed in** 3.9, 4.0
 - **Import:** `import { defineAutoAnimate } from 'motionary/components/layout'` then `defineAutoAnimate();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `duration`, `no-scale`

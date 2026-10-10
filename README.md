@@ -118,6 +118,7 @@ export class Hero {}
 > 12.2: `motionary-mcp` `validate_snippet { mount: true }` mounts generated code in a headless DOM with the real bundles and checks it against the component contract — [docs/mcp.md](./docs/mcp.md#mounted-validation-122).
 > 12.3: the Figma plugin exports motion tokens (W3C JSON + CSS) and a runnable HTML page per selection, prerequisites in order — [figma-plugin/README.md](./figma-plugin/README.md).
 > 12.4: [component playground](https://harrisoncn.github.io/Motionary/showcase/run.html) — every component as a runnable page with its prerequisites and tier, one-click copy.
+> 12.5: version compatibility — the manifest records when each component / module arrived and changed; `motionary-mcp` answers for your installed version; `npx motionary compat <version>` — [docs/version-compat.md](./docs/version-compat.md).
 
 Animated components need no framework at all:
 

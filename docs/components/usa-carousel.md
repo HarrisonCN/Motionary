@@ -4,7 +4,7 @@
 
 6.2: swipe, drag, arrow keys, dots and autoplay (pauses on hover, focus, off screen). Four transitions — slide, fade, scale and a 3D "cards" coverflow. Reduced motion: slides switch without movement.
 
-- **Category:** ui · **since** 6.2
+- **Category:** ui · **since** 6.2 · **changed in** 10.1
 - **Import:** `import { defineCarousel } from 'motionary/components/widgets'` then `defineCarousel();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
 - **Attributes:** `effect`, `autoplay`, `loop`, `no-controls`, `no-dots`, `label`, `index`

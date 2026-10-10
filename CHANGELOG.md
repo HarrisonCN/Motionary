@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [12.5.0] - 2026-10-10
+
+### Version compatibility (Tooling)
+- The AI manifest records, for every component and `motionary/runtime` module, `since` (the gallery card's value, else the first release whose notes mention it) and `changed` (every later release whose notes mention it), derived from CHANGELOG.md by `bin/compat-history.mjs`. Schema v2 stays compatible (both fields optional).
+- `motionary-mcp` answers for the version installed in the user's project (`./node_modules/motionary`, or `MOTIONARY_INSTALLED`): `list_components { version }` lists only what that version has, `get_component { version }` adds `compat: { installed, available, since, changedAfter }`, and the new `check_compat { version, tags? }` tool lists what is missing or changed for that version, the runtime modules involved, and the upgrade command.
+- `npx motionary compat <version> [--json]` prints the same from the command line.
+- Component docs show `changed in`. New [docs/version-compat.md](./docs/version-compat.md).
+
+### Checks
+- New `test/widgets-12-5.test.ts`: version parsing / ordering, CHANGELOG parsing, mention patterns (components, runtime modules, core boundary), since/changed rules, manifest fields + schema, MCP version filtering and `check_compat`, CLI.
+
 ## [12.4.0] - 2026-10-10
 
 ### Component playground (Tooling · Public API)

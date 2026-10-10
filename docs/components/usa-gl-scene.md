@@ -4,7 +4,7 @@
 
 10.5: a WebGL2 3D viewer on Motionary’s own renderer — glTF 2.0 / GLB and OBJ / MTL models or built-in shapes, PBR-style materials, orbit controls (drag, wheel, pinch, arrow keys), auto-rotate and video textures. Requires motionary/runtime/gl (+ format-gltf for .gltf / .glb, format-obj for .obj, gltf-anim for glTF animation — 10.8) — npm i motionary, then use(gl, formatGltf, formatObj, gltfAnim) before it mounts.
 
-- **Category:** ui · **since** 10.5
+- **Category:** ui · **since** 10.5 · **changed in** 10.8, 10.9, 11.0, 11.3
 - **Import:** `import { defineGlScene } from 'motionary/components/widgets'` then `defineGlScene();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
 - **Attributes:** `src`, `shape`, `color`, `metallic`, `roughness`, `background`, `exposure`, `controls`, `auto-rotate`, `video`, `video-scrub`, `label`, `animation`, `animation-speed`

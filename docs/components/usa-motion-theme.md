@@ -4,7 +4,7 @@
 
 5.8: <usa-motion-theme name> applies a theme pack — design tokens (--usa-theme-*), motion tokens and effect presets per role (enter / hover / click / attention / background). Neon, paper, glass, retro and brutalist; applyMotionTheme() for the whole page.
 
-- **Category:** fx
+- **Category:** fx · **since** 8.9 · **changed in** 9.0
 - **Import:** `import { defineMotionTheme } from 'motionary/components/effects'` then `defineMotionTheme();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `name`

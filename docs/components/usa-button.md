@@ -4,7 +4,7 @@
 
 Spring-driven button click deformation: squash & stretch, elastic border-radius wobble, gooey liquid droplets, and a dent toward the pressed point. Combine them with deform="squash wobble".
 
-- **Category:** click
+- **Category:** click · **since** 2.5
 - **Import:** `import { defineButton } from 'motionary/components/click'` then `defineButton();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `deform`, `state`, `shape`, `disabled`, `morph`, `haptic`, `reset`

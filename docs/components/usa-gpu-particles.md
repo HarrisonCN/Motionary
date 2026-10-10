@@ -4,7 +4,7 @@
 
 10.5 (WebGPU effects 2.0): tens of thousands of particles simulated by a WebGPU compute shader and drawn as instanced quads — swirl, galaxy or fountain, pointer repulsion, trails; Canvas 2D fallback where WebGPU is missing.
 
-- **Category:** ui · **since** 10.5
+- **Category:** ui · **since** 10.5 · **changed in** 11.8
 - **Import:** `import { defineGpuParticles } from 'motionary/components/widgets'` then `defineGpuParticles();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
 - **Attributes:** `count`, `mode`, `colors`, `size`, `speed`, `trail`, `pointer`, `label`

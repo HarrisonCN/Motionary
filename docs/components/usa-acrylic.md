@@ -4,7 +4,7 @@
 
 Windows Fluent materials: frosted acrylic (backdrop blur + tint + noise) and mica. Solid fallback when transparency is reduced.
 
-- **Category:** background
+- **Category:** background · **since** 2.2 · **changed in** 2.9, 3.0
 - **Import:** `import { defineAcrylic } from 'motionary/components/background'` then `defineAcrylic();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `tint`, `tint-opacity`, `blur`, `shimmer`

@@ -4,7 +4,7 @@
 
 Set loading and every heading, paragraph, image and button inside becomes a shimmering placeholder of its own size — no extra markup.
 
-- **Category:** page
+- **Category:** page · **since** 2.7
 - **Import:** `import { defineAutoSkeleton } from 'motionary/components/page'` then `defineAutoSkeleton();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `loading`

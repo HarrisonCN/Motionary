@@ -4,7 +4,7 @@
 
 A scroll container whose edges stretch with iOS-style rubber-band resistance and spring back — touch, trackpad and wheel.
 
-- **Category:** physics
+- **Category:** physics · **since** 2.3
 - **Import:** `import { defineOverscroll } from 'motionary/components/physics'` then `defineOverscroll();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `axis`, `disabled`, `max`, `preset`

@@ -4,7 +4,7 @@
 
 A floating action button whose actions fan out with a staggered spring: up, down, left, right or radial.
 
-- **Category:** ui
+- **Category:** ui · **since** 2.6
 - **Import:** `import { defineFab } from 'motionary/components/ui'` then `defineFab();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `direction`, `gap`

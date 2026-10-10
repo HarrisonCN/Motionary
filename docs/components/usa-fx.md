@@ -4,7 +4,7 @@
 
 <usa-fx> plays any registered effect on its child: pulse, pop, jelly, wiggle, heartbeat, bounce, flash (≤ 2 per second), tada, shake. Click the button.
 
-- **Category:** fx
+- **Category:** fx · **since** 5.0 · **changed in** 5.1, 5.9, 6.0
 - **Import:** `import { defineFx } from 'motionary/components/fx'` then `defineFx();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `effect`, `trigger`, `options`, `self`, `once`

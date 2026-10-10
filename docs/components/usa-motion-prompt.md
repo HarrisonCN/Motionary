@@ -4,7 +4,7 @@
 
 10.7 (AI-assisted motion): describe a motion in English or Chinese and get a live preview plus ready code — Web Animations, CSS (with a reduced-motion guard) or a Motionary component. A small deterministic parser (motionary/components/ai), no model and no network; the same parser powers suggest_motion in motionary-mcp 2.0.
 
-- **Category:** ui · **since** 10.7
+- **Category:** ui · **since** 10.7 · **changed in** 11.0, 11.6
 - **Import:** `import { defineMotionPrompt } from 'motionary/components/widgets'` then `defineMotionPrompt();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
 - **Attributes:** `value`, `format`, `placeholder`, `label`

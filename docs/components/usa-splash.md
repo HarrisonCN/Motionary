@@ -4,7 +4,7 @@
 
 An app launch screen that leaves (fade, scale, slide-up, circle) once the page has loaded — never sooner than min ms.
 
-- **Category:** page
+- **Category:** page · **since** 2.7 · **changed in** 9.8
 - **Import:** `import { defineSplash } from 'motionary/components/page'` then `defineSplash();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `label`, `manual`, `min`, `exit`

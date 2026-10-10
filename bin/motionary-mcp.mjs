@@ -21,6 +21,7 @@ import { dirname, join } from 'node:path';
 import { createInterface } from 'node:readline';
 import { pathToFileURL } from 'node:url';
 import { mountSnippet } from './mcp-mount.mjs';
+import { compatAt, cmpVer } from './compat-history.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const SERVER = { name: 'motionary-mcp', version: '2.0.0' };
@@ -267,16 +268,40 @@ export async function validateSnippetMounted(m, code, opts = {}) {
   return { ...r, valid: errors.length === 0, errors, warnings, mount: { mounted: true, environment: mt.environment, components: mt.components, confirmed } };
 }
 
+/** 12.5: the motionary version installed in the user's project (MOTIONARY_INSTALLED, else ./node_modules/motionary). */
+export function installedVersion(cwd = process.cwd()) {
+  if (process.env.MOTIONARY_INSTALLED) return process.env.MOTIONARY_INSTALLED;
+  try { return JSON.parse(readFileSync(join(cwd, 'node_modules/motionary/package.json'), 'utf8')).version; } catch { return null; }
+}
+
+/** 12.5: what a project on `version` can use, and what changed after it. */
+export function checkCompat(m, version, tags) {
+  indexModules(m);
+  const v = version || installedVersion() || m.version;
+  const comps = (tags && tags.length ? tags.map((t) => { const c = findComponent(m, t); if (!c) throw new Error(`unknown component ${t} — use search_components`); return c; }) : m.components);
+  const rows = comps.map((c) => ({ tag: c.tag, ...compatAt(c, v) }));
+  const mods = [...new Set(comps.flatMap((c) => c.requires))].map((id) => m.runtimeModules.find((r) => r.id === id)).filter(Boolean).map((r) => ({ module: r.label, ...compatAt(r, v) }));
+  const missing = rows.filter((r) => !r.available), changed = rows.filter((r) => r.available && r.changedAfter.length);
+  return {
+    version: v, catalog: m.version, behind: cmpVer(v, m.version) < 0,
+    summary: `${rows.length - missing.length}/${rows.length} available in ${v}; ${changed.length} changed after it`,
+    components: tags && tags.length ? rows : [...missing, ...changed],
+    modules: mods,
+    ...(missing.length || changed.length ? { upgrade: `npm i motionary@${m.version} (see docs/upgrading-${String(m.version).split('.')[0]}.md)` } : {}),
+  };
+}
+
 // ---------------------------------------------------------------- MCP surface
 const RO = { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false };
 export const TOOLS = [
-  { name: 'list_components', title: 'List Motionary components', description: 'List the <usa-*> Web Components in the Motionary catalog (tag, title, category, import path, prerequisites). Filter by category, by required runtime module, or by version introduced.', inputSchema: { type: 'object', properties: { category: { type: 'string', description: 'e.g. text, scroll, ui, transitions, widgets' }, requires: { type: 'string', description: "only components needing this prerequisite, e.g. 'scroll' or 'motionary/runtime/text'; 'none' for components without prerequisites" }, since: { type: 'string', description: "introduced in this version or later, e.g. '10.0'" }, limit: { type: 'number', default: 500 } }, additionalProperties: false }, annotations: { title: 'List components', ...RO } },
+  { name: 'list_components', title: 'List Motionary components', description: 'List the <usa-*> Web Components in the Motionary catalog (tag, title, category, import path, prerequisites). Filter by category, by required runtime module, or by version introduced.', inputSchema: { type: 'object', properties: { category: { type: 'string', description: 'e.g. text, scroll, ui, transitions, widgets' }, requires: { type: 'string', description: "only components needing this prerequisite, e.g. 'scroll' or 'motionary/runtime/text'; 'none' for components without prerequisites" }, since: { type: 'string', description: "introduced in this version or later, e.g. '10.0'" }, version: { type: 'string', description: "the motionary version installed in the user's project (default: ./node_modules/motionary, else the catalog version) — answers are filtered for it" }, limit: { type: 'number', default: 500 } }, additionalProperties: false }, annotations: { title: 'List components', ...RO } },
   { name: 'search_components', title: 'Search Motionary components', description: 'Free-text search over tags, titles, keywords and descriptions; best matches first. Use it to pick a component for a UI need ("animated counter", "scroll pinned scene", "confetti").', inputSchema: { type: 'object', properties: { query: { type: 'string' }, limit: { type: 'number', default: 10 } }, required: ['query'], additionalProperties: false }, annotations: { title: 'Search components', ...RO } },
-  { name: 'get_component', title: 'Get a component', description: 'Everything about one component: attributes, events, slots, methods, import / define, CDN, prerequisites (install, import + register order, CDN script order), minimal example, variants.', inputSchema: { type: 'object', properties: { tag: { type: 'string', description: "'usa-tilt', 'tilt' or '<usa-tilt>'" } }, required: ['tag'], additionalProperties: false }, annotations: { title: 'Get component', ...RO } },
+  { name: 'get_component', title: 'Get a component', description: 'Everything about one component: attributes, events, slots, methods, import / define, CDN, prerequisites (install, import + register order, CDN script order), minimal example, variants.', inputSchema: { type: 'object', properties: { tag: { type: 'string', description: "'usa-tilt', 'tilt' or '<usa-tilt>'" }, version: { type: 'string', description: "the motionary version installed in the user's project (default: ./node_modules/motionary, else the catalog version) — answers are filtered for it" } }, required: ['tag'], additionalProperties: false }, annotations: { title: 'Get component', ...RO } },
   { name: 'get_example', title: 'Get an example', description: "A working example for one component in the requested style ('html' = CDN, 'esm' = npm + bundler, or a variant id).", inputSchema: { type: 'object', properties: { tag: { type: 'string' }, variant: { type: 'string', description: "'html' (default), 'esm', or a variant id from get_component" } }, required: ['tag'], additionalProperties: false }, annotations: { title: 'Get example', ...RO } },
   { name: 'scaffold_snippet', title: 'Scaffold a snippet', description: 'A ready-to-paste snippet using one or more components, with every prerequisite installed, imported and registered in the right order before the components mount.', inputSchema: { type: 'object', properties: { tags: { type: 'array', items: { type: 'string' }, minItems: 1 }, framework: { type: 'string', enum: FRAMEWORKS, default: 'esm' } }, required: ['tags'], additionalProperties: false }, annotations: { title: 'Scaffold snippet', ...RO } },
   { name: 'suggest_motion', title: 'Suggest a motion', description: 'Natural language (English or Chinese) → a motion spec: effect, direction, duration, easing, trigger, stagger, Web Animations keyframes + options, CSS, and the Motionary components that implement it, with prerequisite-aware code. Deterministic parser, no model, no network.', inputSchema: { type: 'object', properties: { text: { type: 'string', description: "e.g. 'fade the cards up slowly when they scroll into view, one after another'" }, format: { type: 'string', enum: ['waapi', 'css', 'component'], default: 'waapi' } }, required: ['text'], additionalProperties: false }, annotations: { title: 'Suggest motion', ...RO } },
   { name: 'validate_snippet', title: 'Validate a snippet', description: 'Check HTML / ESM / JSX / Vue / Svelte code that uses <usa-*> components: unknown tags (with suggestions) and attributes, missing or mis-ordered prerequisites (motionary/runtime modules, official runtimes), components never defined, hand-written animation without a reduced-motion path. Static analysis by default; mount: true also mounts the markup in a headless DOM (jsdom, optional peer) with the real Motionary bundles and checks definitions, upgrade errors, prerequisites, observed attributes and event names against the component contract — the snippet\'s own scripts never run.', inputSchema: { type: 'object', properties: { code: { type: 'string' }, mount: { type: 'boolean', default: false, description: 'also mount the markup in jsdom with the real bundles (12.2)' } }, required: ['code'], additionalProperties: false }, annotations: { title: 'Validate snippet', ...RO } },
+  { name: 'check_compat', title: 'Check version compatibility', description: "Which components / runtime modules a project on a given motionary version can use, which were added later (with the release that added them) and which changed after it (from the release notes). Defaults to the version installed in the user's project.", inputSchema: { type: 'object', properties: { version: { type: 'string', description: "the motionary version installed in the user's project (default: ./node_modules/motionary, else the catalog version) — answers are filtered for it" }, tags: { type: 'array', items: { type: 'string' }, description: 'only these components (default: everything that is missing or changed for that version)' } }, additionalProperties: false }, annotations: { title: 'Check compatibility', ...RO } },
 ];
 
 const text = (obj) => ({ content: [{ type: 'text', text: typeof obj === 'string' ? obj : JSON.stringify(obj, null, 2) }], ...(typeof obj === 'object' ? { structuredContent: Array.isArray(obj) ? { items: obj } : obj } : {}) });
@@ -296,8 +321,10 @@ export function callTool(m, name, a = {}) {
         const [M, n] = v(a.since);
         list = list.filter((c) => c.since && (v(c.since)[0] > M || (v(c.since)[0] === M && (v(c.since)[1] || 0) >= (n || 0))));
       }
+      const iv = a.version || installedVersion();
+      if (a.version) list = list.filter((c) => compatAt(c, a.version).available);
       const items = list.slice(0, a.limit || 500).map(brief);
-      return text({ version: m.version, count: items.length, total: m.components.length, components: items });
+      return text({ version: m.version, ...(iv ? { installed: iv } : {}), count: items.length, total: m.components.length, components: items });
     }
     case 'search_components':
       if (!a.query) throw new Error('query is required');
@@ -305,7 +332,8 @@ export function callTool(m, name, a = {}) {
     case 'get_component': {
       const c = findComponent(m, a.tag);
       if (!c) throw new Error(`unknown component ${a.tag} — use search_components`);
-      return text(c);
+      const iv = a.version || installedVersion();
+      return text(iv ? { ...c, compat: { installed: iv, ...compatAt(c, iv) } } : c);
     }
     case 'get_example': {
       const c = findComponent(m, a.tag);
@@ -323,6 +351,8 @@ export function callTool(m, name, a = {}) {
     case 'suggest_motion':
       if (!a.text) throw new Error('text is required');
       return text(suggestMotion(m, a.text, a.format || 'waapi'));
+    case 'check_compat':
+      return text(checkCompat(m, a.version, a.tags));
     case 'validate_snippet':
       if (typeof a.code !== 'string') throw new Error('code is required');
       if (a.mount) return validateSnippetMounted(m, a.code).then(text);

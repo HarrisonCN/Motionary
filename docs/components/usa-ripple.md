@@ -4,7 +4,7 @@
 
 Ink ripple from the pointer — or from the centre for Space/Enter — on any button, list item or card.
 
-- **Category:** interaction
+- **Category:** interaction · **since** 2.2
 - **Import:** `import { defineRipple } from 'motionary/components/interaction'` then `defineRipple();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `disabled`, `centered`, `color`, `opacity`, `duration`

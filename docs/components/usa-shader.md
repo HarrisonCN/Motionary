@@ -4,7 +4,7 @@
 
 A GPU shader behind your content: gradient, plasma, waves or aurora presets — or your own fragment shader in a <script type="x-shader/x-fragment">. Falls back to the CSS background.
 
-- **Category:** webgl
+- **Category:** webgl · **since** 3.4 · **changed in** 4.0, 4.8
 - **Import:** `import { defineShader } from 'motionary/components/webgl'` then `defineShader();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** —

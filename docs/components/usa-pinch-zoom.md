@@ -4,7 +4,7 @@
 
 Pinch with two fingers or Ctrl + wheel / trackpad pinch, pan while zoomed, double-tap to toggle; scale and position spring back inside the bounds.
 
-- **Category:** gesture
+- **Category:** gesture · **since** 3.2
 - **Import:** `import { definePinchZoom } from 'motionary/components/gesture'` then `definePinchZoom();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `min`, `max`, `preset`, `double-tap`

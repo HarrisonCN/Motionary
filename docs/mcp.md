@@ -66,3 +66,11 @@ snippet's own `<script>` code is never executed.
 
 The result adds `mount: { mounted, environment: 'jsdom', components: [{ tag, defined, upgraded }], confirmed }`; without jsdom it is
 `mount: { mounted: false, skipped }` and the static result is unchanged. Set `MOTIONARY_DIST` to point the server at another build.
+
+## Version-aware answers (12.5)
+
+The server reads the motionary version installed in the project it runs in (`./node_modules/motionary/package.json`, or
+`MOTIONARY_INSTALLED`). `list_components` and `get_component` take `version` (default: that installed version):
+`list_components` then lists only what that version has, and `get_component` adds `compat: { installed, available, since, changedAfter }`.
+The `check_compat` tool lists, for a version, the components added later (with the release that added them) and the ones whose
+release notes changed after it, plus the runtime modules they need. See [version-compat.md](./version-compat.md).

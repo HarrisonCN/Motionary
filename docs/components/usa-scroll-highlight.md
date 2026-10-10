@@ -4,7 +4,7 @@
 
 Words light up one by one as you read down the page, or a highlighter marker sweeps behind the text.
 
-- **Category:** text
+- **Category:** text · **since** 2.8
 - **Import:** `import { defineScrollHighlight } from 'motionary/components/text'` then `defineScrollHighlight();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `mode`, `text`, `color`, `dim`

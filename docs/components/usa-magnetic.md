@@ -4,7 +4,7 @@
 
 Content leans toward the pointer when it comes near and springs back. Fine pointers only; off under reduced motion.
 
-- **Category:** interaction
+- **Category:** interaction · **since** 2.2
 - **Import:** `import { defineMagnetic } from 'motionary/components/interaction'` then `defineMagnetic();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `strength`, `radius`, `disabled`

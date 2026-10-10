@@ -4,7 +4,7 @@
 
 Types text, or cycles through phrases with delete and pause. Full text stays available to screen readers.
 
-- **Category:** text
+- **Category:** text · **since** 2.2
 - **Import:** `import { defineTypewriter } from 'motionary/components/text'` then `defineTypewriter();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `text`, `words`, `start`, `speed`, `delete-speed`, `pause`, `loop`, `delay`

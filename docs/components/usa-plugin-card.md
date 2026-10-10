@@ -4,7 +4,7 @@
 
 10.1: a plugin’s name, version and author with a Motionary compatibility badge (semver `engine` range), a signature badge (SHA-256 integrity checked with Web Crypto), an animated download counter and expandable details. Requires motionary/runtime — npm i motionary, then use() before the card mounts.
 
-- **Category:** ui · **since** 10.1
+- **Category:** ui · **since** 10.1 · **changed in** 12.0
 - **Import:** `import { definePluginCard } from 'motionary/components/widgets'` then `definePluginCard();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
 - **Attributes:** `name`, `title`, `version`, `author`, `engine`, `downloads`, `integrity`, `src`

@@ -4,7 +4,7 @@
 
 Items on a 3D ring, rotated by drag, arrow keys, clicks or autoplay — with spring motion. Reduced motion shows one flat item at a time.
 
-- **Category:** cards
+- **Category:** cards · **since** 2.4 · **changed in** 3.5
 - **Import:** `import { defineCarousel3d } from 'motionary/components/cards'` then `defineCarousel3d();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `radius`, `perspective`, `autoplay`, `index`

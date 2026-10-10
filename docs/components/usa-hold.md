@@ -4,7 +4,7 @@
 
 Press and hold (pointer, Space or Enter) while a ring fills; releasing early rewinds. For destructive actions.
 
-- **Category:** click
+- **Category:** click · **since** 2.5
 - **Import:** `import { defineHold } from 'motionary/components/click'` then `defineHold();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `duration`, `disabled`, `color`, `label`

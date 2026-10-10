@@ -4,7 +4,7 @@
 
 10.6: plays Lottie JSON and dotLottie (.lottie) files with Motionary’s own Canvas 2D renderer — shapes, gradients, trim paths, masks, track mattes, precomps and images; autoplay, loop, bounce, segments / markers, play on hover or scrub with scroll. Requires motionary/runtime/vector — npm i motionary, then use(vector) before it mounts.
 
-- **Category:** ui · **since** 10.6
+- **Category:** ui · **since** 10.6 · **changed in** 10.9
 - **Import:** `import { defineLottiePlayer } from 'motionary/components/widgets'` then `defineLottiePlayer();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
 - **Attributes:** `src`, `animation`, `autoplay`, `loop`, `speed`, `mode`, `segment`, `hover`, `scrub`, `fit`, `background`, `label`

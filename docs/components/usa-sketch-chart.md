@@ -4,7 +4,7 @@
 
 8.5: a hand-drawn chart — wobbly pencil axes with hatched bars or a sketchy line, sketched in stroke by stroke when it scrolls into view.
 
-- **Category:** ui · **since** 8.5
+- **Category:** ui · **since** 8.5 · **changed in** 11.8
 - **Import:** `import { defineSketchChart } from 'motionary/components/widgets'` then `defineSketchChart();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
 - **Attributes:** `values`, `labels`, `type`, `color`, `label`

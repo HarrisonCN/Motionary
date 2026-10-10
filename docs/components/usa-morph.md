@@ -4,7 +4,7 @@
 
 Morph an SVG path through a list of shapes (paths="A | B | C") on click, hover, in view or automatically. Same-structure paths morph point by point.
 
-- **Category:** svg
+- **Category:** svg · **since** 3.3
 - **Import:** `import { defineMorph } from 'motionary/components/svg'` then `defineMorph();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `paths`, `trigger`, `duration`, `interval`

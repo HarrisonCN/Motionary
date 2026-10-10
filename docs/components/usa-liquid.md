@@ -4,7 +4,7 @@
 
 Click or tap to send water ripples through the image; hover adds a gentle wobble. The plain image stays when WebGL is unavailable.
 
-- **Category:** webgl
+- **Category:** webgl · **since** 3.4 · **changed in** 4.0
 - **Import:** `import { defineLiquid } from 'motionary/components/webgl'` then `defineLiquid();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** —

@@ -4,7 +4,7 @@
 
 Reveals direct children one after another — lists, grids, feature rows.
 
-- **Category:** reveal
+- **Category:** reveal · **since** 2.2 · **changed in** 6.1
 - **Import:** `import { defineStagger } from 'motionary/components/reveal'` then `defineStagger();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `effect`, `repeat`, `threshold`, `distance`, `interval`, `delay`, `duration`, `easing`
