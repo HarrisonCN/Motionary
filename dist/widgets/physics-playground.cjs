@@ -8,4 +8,4 @@ require('../chunks/registry-VITvgTNc.cjs');
 
 
 exports.definePhysicsPlayground = widgets_physicsPlayground.definePhysicsPlayground;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/widgets/physics-playground.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.5.0/dist/widgets/physics-playground.cjs.map

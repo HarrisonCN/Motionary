@@ -4,7 +4,7 @@
   "schemaVersion": 2,
   "stability": "stable",
   "package": "motionary",
-  "version": "11.4.0",
+  "version": "11.5.0",
   "homepage": "https://harrisoncn.github.io/Motionary/",
   "llms": "https://harrisoncn.github.io/Motionary/llms.txt",
   "cdn": {

@@ -8,4 +8,4 @@ require('../chunks/registry-VITvgTNc.cjs');
 
 
 exports.defineGlScene = widgets_glScene.defineGlScene;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/widgets/gl-scene.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.5.0/dist/widgets/gl-scene.cjs.map

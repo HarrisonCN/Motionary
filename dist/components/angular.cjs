@@ -1,6 +1,7 @@
 'use strict';
 
 var components = require('../components.cjs');
+var indexTags = require('../chunks/index-tags-hLIF2Clq.cjs');
 var bind = require('../chunks/bind-Ui43-n2d.cjs');
 require('./reveal.cjs');
 require('../chunks/base-B3me2y0o.cjs');
@@ -31,35 +32,44 @@ require('./fx.cjs');
 require('../chunks/registry-BB1oO-lR.cjs');
 require('../chunks/builtins-Cz3iufK6.cjs');
 require('./a11y.cjs');
-require('../chunks/index-tags-hLIF2Clq.cjs');
 require('./perf.cjs');
 require('./bridge.cjs');
 
 /**
- * motionary/components/angular — Angular integration (v3.8).
- * Angular renders `<usa-*>` tags once the component (or NgModule) allows
- * custom elements with `CUSTOM_ELEMENTS_SCHEMA`; property binding
- * `[checked]="on"` and event binding `(usa:change)="…"` then work as is.
- * This entry is framework-free (no `@angular/*` import):
+ * motionary/angular — Angular integration (v3.8; 11.5: top-level entry `motionary/angular`, parity with the
+ * React / Vue / Svelte / Solid entries). The old path `motionary/components/angular` is the same file and is
+ * deprecated (removed in 13.0). Angular renders `<usa-*>` tags once the component (or NgModule) allows
+ * custom elements with `CUSTOM_ELEMENTS_SCHEMA`; property binding `[checked]="on"` and event binding
+ * `(usa:change)="…"` then work as is. This entry is framework-free (no `@angular/*` import):
  *
  * ```ts
- * import { CUSTOM_ELEMENTS_SCHEMA, Component, APP_INITIALIZER } from '@angular/core';
- * import { usaInitializer } from 'motionary/components/angular';
+ * import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
+ * import { provideUsa, usaDetail } from 'motionary/angular';
  *
  * // app.config.ts
- * providers: [{ provide: APP_INITIALIZER, multi: true, useFactory: usaInitializer(['click', 'ui']) }]
+ * providers: [provideUsa(APP_INITIALIZER, ['click', 'ui'])]
  *
  * @Component({ standalone: true, schemas: [CUSTOM_ELEMENTS_SCHEMA],
  *   template: `<usa-switch [checked]="on" (usa:change)="on = $any($event).detail.checked"></usa-switch>` })
  * ```
- * `bindUsa(el, { props, on })` is available for directives that bind imperatively.
+ * Parity with the other wrappers: register (`defineUsa` · `usaInitializer` · `provideUsa`, like Vue's `UsaPlugin`),
+ * tag list (`USA_TAGS`, like React), custom-element predicate (`isUsaElement`, like Vue), imperative binding
+ * (`bindUsa`, like Svelte / Solid), event names (`usaEventName`) and event payloads (`usaDetail`).
  */
+/** All `<usa-*>` tags shipped by the package (same list as `motionary/react`'s wrappers). */
+const USA_TAGS = /*#__PURE__*/ Object.values(indexTags.COMPONENT_CATEGORIES).flat();
+/** `true` for every `<usa-*>` tag — e.g. for a custom schema check or a template linter. */
+const isUsaElement = (tag) => tag.startsWith('usa-');
 /** `APP_INITIALIZER` factory: registers the elements in the browser (no-op during SSR). */
 function usaInitializer(categories) {
     return () => () => {
         if (typeof window !== 'undefined')
             components.defineComponents(categories);
     };
+}
+/** A provider for `providers: [...]`: pass Angular's `APP_INITIALIZER` token (this entry never imports `@angular/core`). */
+function provideUsa(appInitializer, categories) {
+    return { provide: appInitializer, multi: true, useFactory: usaInitializer(categories) };
 }
 /** Register the elements directly (e.g. in `main.ts` before `bootstrapApplication`). */
 function defineUsa(categories) {
@@ -71,7 +81,10 @@ const usaDetail = (e) => e.detail;
 
 exports.bindUsa = bind.bindUsa;
 exports.usaEventName = bind.usaEventName;
+exports.USA_TAGS = USA_TAGS;
 exports.defineUsa = defineUsa;
+exports.isUsaElement = isUsaElement;
+exports.provideUsa = provideUsa;
 exports.usaDetail = usaDetail;
 exports.usaInitializer = usaInitializer;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/components/angular.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.5.0/dist/components/angular.cjs.map

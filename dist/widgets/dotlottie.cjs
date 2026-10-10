@@ -9,4 +9,4 @@ require('../chunks/lottie-player-Duv92v1E.cjs');
 
 
 exports.defineDotLottie = components_dotlottie.defineDotLottie;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/widgets/dotlottie.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.5.0/dist/widgets/dotlottie.cjs.map

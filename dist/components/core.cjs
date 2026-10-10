@@ -322,4 +322,4 @@ exports.applyMotionAttributes = applyMotionAttributes;
 exports.createMotion = createMotion;
 exports.parseMotionAttr = parseMotionAttr;
 exports.preferredBackend = preferredBackend;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/components/core.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.5.0/dist/components/core.cjs.map

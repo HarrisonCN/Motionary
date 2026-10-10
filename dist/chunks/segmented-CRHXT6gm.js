@@ -99,4 +99,4 @@ function defineSegmented(tag = 'usa-segmented') {
 }
 
 export { SEGMENTED_VARIANTS as S, defineSegmented as d };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/chunks/segmented-CRHXT6gm.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.5.0/dist/chunks/segmented-CRHXT6gm.js.map

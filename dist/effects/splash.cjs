@@ -18,4 +18,4 @@ function registerSplash() {
 exports.effect = effect;
 exports.register = registerSplash;
 exports.registerSplash = registerSplash;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/effects/splash.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.5.0/dist/effects/splash.cjs.map

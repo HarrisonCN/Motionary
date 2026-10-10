@@ -203,4 +203,4 @@ exports.decodeGif = decodeGif;
 exports.formatGif = formatGif;
 exports.loadGif = loadGif;
 exports.lzwDecode = lzwDecode;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.4.0/dist/runtime/format-gif.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.5.0/dist/runtime/format-gif.cjs.map

@@ -488,6 +488,38 @@
         "default": "./dist/components/fx-perf.cjs"
       }
     },
+    "./tooling/ai": {
+      "import": {
+        "types": "./dist/components/ai.d.ts",
+        "default": "./dist/components/ai.js"
+      },
+      "require": {
+        "types": "./dist/components/ai.d.cts",
+        "default": "./dist/components/ai.cjs"
+      }
+    },
+    "./tooling/design": {
+      "import": {
+        "types": "./dist/components/design.d.ts",
+        "default": "./dist/components/design.js"
+      },
+      "require": {
+        "types": "./dist/components/design.d.cts",
+        "default": "./dist/components/design.cjs"
+      }
+    },
+    "./tooling/manifest.json": "./dist/manifest.json",
+    "./tooling/manifest.schema.json": "./dist/manifest.schema.json",
+    "./angular": {
+      "import": {
+        "types": "./dist/components/angular.d.ts",
+        "default": "./dist/components/angular.js"
+      },
+      "require": {
+        "types": "./dist/components/angular.d.cts",
+        "default": "./dist/components/angular.cjs"
+      }
+    },
     "./components/reveal": {
       "import": {
         "types": "./dist/components/reveal.d.ts",
@@ -4070,38 +4102,6 @@
     "./components/layout.css": "./dist/components/layout.css",
     "./components/packs.css": "./dist/components/packs.css",
     "./components/fx.css": "./dist/components/fx.css",
-    "./tooling/ai": {
-      "import": {
-        "types": "./dist/components/ai.d.ts",
-        "default": "./dist/components/ai.js"
-      },
-      "require": {
-        "types": "./dist/components/ai.d.cts",
-        "default": "./dist/components/ai.cjs"
-      }
-    },
-    "./tooling/design": {
-      "import": {
-        "types": "./dist/components/design.d.ts",
-        "default": "./dist/components/design.js"
-      },
-      "require": {
-        "types": "./dist/components/design.d.cts",
-        "default": "./dist/components/design.cjs"
-      }
-    },
-    "./tooling/manifest.json": "./dist/manifest.json",
-    "./tooling/manifest.schema.json": "./dist/manifest.schema.json",
-    "./angular": {
-      "import": {
-        "types": "./dist/components/angular.d.ts",
-        "default": "./dist/components/angular.js"
-      },
-      "require": {
-        "types": "./dist/components/angular.d.cts",
-        "default": "./dist/components/angular.cjs"
-      }
-    },
     "./package.json": "./package.json"
   },
   "files": [
