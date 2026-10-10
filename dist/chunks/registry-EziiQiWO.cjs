@@ -136,4 +136,4 @@ exports.listEffects = listEffects;
 exports.playEffect = playEffect;
 exports.registerEffect = registerEffect;
 exports.registerEffects = registerEffects;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/chunks/registry-EziiQiWO.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/chunks/registry-EziiQiWO.cjs.map

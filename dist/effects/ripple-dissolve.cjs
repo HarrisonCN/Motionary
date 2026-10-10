@@ -17,4 +17,4 @@ function registerRippleDissolve() {
 exports.effect = effect;
 exports.register = registerRippleDissolve;
 exports.registerRippleDissolve = registerRippleDissolve;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/effects/ripple-dissolve.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/effects/ripple-dissolve.cjs.map

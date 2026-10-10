@@ -166,4 +166,4 @@ function defineMusicPlayer(tag = 'usa-music-player') {
 }
 
 export { defineMusicPlayer };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/music-player.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/widgets/music-player.js.map

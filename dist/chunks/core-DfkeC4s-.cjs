@@ -182,4 +182,4 @@ function gesture(el, h, o = {}) {
 exports.gesture = gesture;
 exports.pinchScale = pinchScale;
 exports.swipeDirection = swipeDirection;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/chunks/core-DfkeC4s-.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/chunks/core-DfkeC4s-.cjs.map

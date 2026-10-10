@@ -258,4 +258,4 @@ function registerWeatherPack() {
 }
 
 export { WEATHER_FX, registerWeatherPack, skyAt };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/components/fx-weather.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/components/fx-weather.js.map

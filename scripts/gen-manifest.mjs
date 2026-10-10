@@ -96,7 +96,8 @@ export function buildManifest() {
       since: c.since || undefined,
       keywords: c.tags || [],
       import: { path: `motionary/components/${c.entry || c.category}`, define: c.define, register: `${c.define}();` },
-      cdn: c.entry === 'widgets' || c.reg ? `https://unpkg.com/motionary@${MAJOR}/dist/widgets.umd.js` : `https://unpkg.com/motionary@${MAJOR}/dist/components.umd.js`,
+      // 13.2: an element with its own entry that neither no-build bundle registers loads as an ES module from the same CDN major
+      cdn: c.entry === 'widgets' || c.reg ? `https://unpkg.com/motionary@${MAJOR}/dist/widgets.umd.js` : ENTRY_BY_TAG[tag] ? `https://unpkg.com/motionary@${MAJOR}/dist/components/${c.entry}.js` : `https://unpkg.com/motionary@${MAJOR}/dist/components.umd.js`,
       attributes: s.attributes,
       events: s.events,
       slots: s.slots,

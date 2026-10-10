@@ -6,4 +6,4 @@ require('../chunks/base-vu_KhBiv.cjs');
 
 
 exports.definePropPanel = widgets_propPanel.definePropPanel;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/prop-panel.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/widgets/prop-panel.cjs.map

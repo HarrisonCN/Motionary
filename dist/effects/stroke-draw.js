@@ -13,4 +13,4 @@ function registerStrokeDraw() {
 }
 
 export { effect, registerStrokeDraw as register, registerStrokeDraw };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/effects/stroke-draw.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/effects/stroke-draw.js.map

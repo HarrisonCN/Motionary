@@ -524,4 +524,4 @@ exports.defineStory = defineStory;
 exports.formatCount = formatCount;
 exports.normalizeAnimation = normalizeAnimation;
 exports.storyProgress = storyProgress;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/chunks/player-DIwSjUFR.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/chunks/player-DIwSjUFR.cjs.map

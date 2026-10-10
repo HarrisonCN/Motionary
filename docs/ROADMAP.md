@@ -13,7 +13,7 @@
 
 1. **安装命令**：runtime 模块只需 `npm i motionary` 一次；官方运行时写出确切命令（如 `npm i @rive-app/canvas`）；
 2. **导入路径**：如 `motionary/runtime/scroll`；
-3. **CDN 地址**：可直接复制的 `<script>`（主版本固定，如 `https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js`）以及 ESM 地址；
+3. **CDN 地址**：可直接复制的 `<script>`（主版本固定，如 `https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js`）以及 ESM 地址；
 4. **引入顺序与注册代码**：先 `use(scroll)`（会同时注册核心），再注册组件；CDN 先加载 `runtime.iife.js`，再加载模块 IIFE（自动注册）；
 5. **最小用法示例**。
 

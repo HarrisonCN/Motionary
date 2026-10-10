@@ -1,0 +1,4 @@
+{
+  "$comment": "13.2: every check a release PR's head commit must pass before scripts/release-gate.mjs lets it merge and publish. Set the same names as required status checks for main (docs/release-gate.md). A test keeps this list equal to the jobs in .github/workflows/ci.yml.",
+  "checks": ["Node 20", "Node 22", "Node 24", "Browser (chromium)", "Browser (firefox)", "Browser (webkit)"]
+}

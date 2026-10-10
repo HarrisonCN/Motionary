@@ -85,13 +85,14 @@ function nodeToElement(node) {
 /** Elements → a complete, runnable HTML page: tokens, prerequisites (runtime first), the component bundle(s), the markup. */
 function buildHtml(elements, tokens) {
   var cdn = function (f) { return (f.indexOf('runtime') === 0 ? 'https://cdn.jsdelivr.net/npm/motionary@' : 'https://unpkg.com/motionary@') + MOTIONARY_MAJOR + '/dist/' + f; };
-  var pre = [], bundles = [], seen = {};
+  var pre = [], bundles = [], modules = [], seen = {};
   var add = function (list, f) { if (!seen[f]) { seen[f] = 1; list.push(f); } };
   elements.forEach(function (e) {
     var info = e.tag && CATALOG[e.tag];
     if (!info) return;
     if (info.r.length) { add(pre, 'runtime.iife.js'); info.r.forEach(function (r) { if (r !== 'core') add(pre, 'runtime/' + r + '.iife.js'); }); }
-    add(bundles, info.b === 'w' ? 'widgets.umd.js' : 'components.umd.js');
+    if (info.b === 'm') { if (!seen[info.m]) { seen[info.m] = 1; modules.push(info); } } // 13.2: own ES module entry
+    else add(bundles, info.b === 'w' ? 'widgets.umd.js' : 'components.umd.js');
   });
   var peers = [];
   elements.forEach(function (e) { var info = e.tag && CATALOG[e.tag]; if (info && info.p) info.p.forEach(function (x) { if (peers.indexOf(x) < 0) peers.push(x); }); });
@@ -105,6 +106,7 @@ function buildHtml(elements, tokens) {
   if (peers.length) L.push('<!-- also needs: ' + peers.join(', ') + ' (official runtime, optional peer) — see the component docs -->');
   if (pre.length) L.push('<!-- prerequisites first: the motionary/runtime core, then its modules -->');
   pre.concat(bundles).forEach(function (f) { L.push('<script src="' + cdn(f) + '"></script>'); });
+  if (modules.length) L.push('<script type="module">' + modules.map(function (x) { return 'import { ' + x.d + ' } from \'' + cdn(x.m) + '\'; ' + x.d + '();'; }).join(' ') + '</script>');
   if (elements.some(function (e) { return e.motion; })) L.push('<script type="module">import { applyMotion } from \'https://unpkg.com/motionary@' + MOTIONARY_MAJOR + '/dist/components/dsl.js\'; applyMotion();</script>');
   L.push('<body>');
   body.forEach(function (b) { L.push(b); });

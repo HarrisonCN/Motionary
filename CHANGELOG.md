@@ -7,6 +7,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [13.2.0] - 2026-10-10
+
+Docs and contract consistency. The numbers, tables and version descriptions in the READMEs, docs, site and package metadata
+now come from the manifest or are checked against it in CI, and a release can no longer skip the CI checks on its way to npm.
+No runtime API changes; budgets unchanged.
+
+### Added
+
+- `scripts/facts.mjs` (`npm run facts`): component counts, the core element table (category · entry point · elements) in
+  README / README_zh / README_ja and the `package.json` description are generated from the manifest.
+  [docs/components.md#how-components-are-counted](docs/components.md#how-components-are-counted) defines every count:
+  **209 public components** = **91 core** (registered by `motionary/components`, CDN `components.umd.js`) + **118 widgets**
+  with their own entry points (115 also in `widgets.umd.js`, 3 entry-only).
+- `scripts/check-versions.mjs`: package / lock / `RUNTIME_VERSION` / CHANGELOG agree; CDN URLs pinned to a major use the
+  current one; "Motionary vN" on the site names the current major; statements of what npm `latest` points to follow the
+  policy in docs/versions.md.
+- `npm run check:docs` (CI, every Node job): facts, component docs, entry points, prerequisite docs, the Figma plugin and the
+  version check, all in check mode.
+- Release gate: `scripts/release-gate.mjs` (`npm run release:gate -- --pr <n>`) refuses unless the PR is open and every
+  required check in `.github/required-checks.json` is green on its head commit (newest run counts; any failed check closes
+  it). A test keeps the list equal to the CI jobs. [docs/release-gate.md](docs/release-gate.md) documents the flow and how to
+  set the required status checks in the branch settings.
+
+### Fixed
+
+- CI steps now run in `bash -eo pipefail` (`defaults.run.shell: bash` in ci.yml and pages.yml). Before, a failing
+  `check:pack`, `size:check`, `check:playground` or `perf` piped into `tee` did not fail the job.
+- Manifest `cdn` for `<usa-snap-carousel>`, `<usa-dotlottie>` and `<usa-gl-model>` said `components.umd.js`, which does not
+  register them; it is now their ES module entry (`/dist/components/<name>.js`). The MCP HTML scaffold, the component docs and
+  the Figma plugin export load them as modules after the runtime prerequisites.
+- `package.json` description said 94 components; README said "91 in motionary/components and 118 widgets" without saying how
+  the 3 entry-only elements are counted; docs/components.md still said "now v3 … 30 animated UI components".
+- Stale version descriptions: the site kicker said "Motionary v6"; CDN examples pinned `@6` / `@8` / `@11` / `@12` in
+  docs/components.md, docs/presets.md, docs/performance.md, docs/ROADMAP.md, showcase/components.html and the thumbnail
+  fallback in showcase/thumb.js.
+
 ## [13.1.0] - 2026-10-10
 
 Real browser compatibility. A Playwright suite now runs every public component in Chromium, Firefox and WebKit on the

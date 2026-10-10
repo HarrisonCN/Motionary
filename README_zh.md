@@ -14,7 +14,7 @@ _原名 **use-scroll-animate**。旧 npm 包仍会作为别名，与 motionary �
 
 </div>
 
-Motionary 让内容在滚入视口时自然登场，并提供 209 个开箱即用的 `<usa-*>` 动画自定义元素：卡片、按钮、物理效果、页面转场、生成式背景、Lottie、WebGL 等等。无论是纯 HTML，还是 React、Vue、Svelte、Solid、Angular，乃至 Electron、Tauri、WebView2 这类桌面 Web 视图，都能直接使用。运行时零依赖，每个入口都可 tree-shaking，并在 CI 中有固定的 gzip 体积预算；所有动画都遵循 `prefers-reduced-motion`。
+Motionary 让内容在滚入视口时自然登场，并提供 <!--fact:public-->209<!--/fact--> 个开箱即用的 `<usa-*>` 动画自定义元素：卡片、按钮、物理效果、页面转场、生成式背景、Lottie、WebGL 等等。无论是纯 HTML，还是 React、Vue、Svelte、Solid、Angular，乃至 Electron、Tauri、WebView2 这类桌面 Web 视图，都能直接使用。运行时零依赖，每个入口都可 tree-shaking，并在 CI 中有固定的 gzip 体积预算；所有动画都遵循 `prefers-reduced-motion`。
 
 > 13.0：发现 · 复制 · 运行。12.x 的工具链在 13.0 转为稳定版：MCP 挂载校验（`validate_snippet { mount: true }`）与按版本作答（`check_compat`）、Figma 插件导出、[组件演练场](https://harrisoncn.github.io/Motionary/showcase/run.html)、`npx motionary export` 和 `npx motionary compat`。11.5 起标记为弃用的导入路径已移除，详见 [升级到 13](#升级到-13)。
 
@@ -25,9 +25,9 @@ Motionary 让内容在滚入视口时自然登场，并提供 209 个开箱即�
 ## 特性
 
 - **214 个滚动显现预设**，分为 14 个系列（核心内置 33 个，`motionary/presets/extended` 再提供 181 个）：淡入、缩放、3D 翻转、clip-path 形状、模糊与遮罩、弹跳、景深、故障风，以及随滚动进度变化的 `scrub-*`。另有 `timeline()`、`staggerChildren()` 和 `parallax()`。
-- **209 个 `<usa-*>` Web Components**：`motionary/components` 中按分类提供 91 个，另有 118 个小部件，每个都有独立入口（`motionary/widgets/<name>`）。此外还有 141 个效果，同样各有独立入口（`motionary/effects/<name>`）。
+- **<!--fact:public-->209<!--/fact--> 个 `<usa-*>` Web Components**：`motionary/components` 中按分类提供 <!--fact:core-->91<!--/fact--> 个核心组件，另有 <!--fact:widgets-->118<!--/fact--> 个小部件，每个都有独立入口（`motionary/widgets/<name>`）。此外还有 <!--fact:effects-->141<!--/fact--> 个效果，同样各有独立入口（`motionary/effects/<name>`）。统计口径见 [docs/components.md](./docs/components.md#how-components-are-counted)。
 - **Motion Core**：`motionary/core` 提供的 `createMotion()`，插件化引擎，gzip 后约 2.5 KB（预算 10 KB）。
-- **自研运行时**：`motionary/runtime`（ticker、tween、timeline）加 20 个模块，覆盖滚动场景、平滑滚动、文字拆分、SVG 变形、精灵图、GIF / APNG / WebP、Lottie 与 dotLottie、WebGL2、glTF / OBJ、2D 物理。模块分为三个等级，只为实际导入的部分付出体积。
+- **自研运行时**：`motionary/runtime`（ticker、tween、timeline）加 <!--fact:runtimeModules-->20<!--/fact--> 个模块，覆盖滚动场景、平滑滚动、文字拆分、SVG 变形、精灵图、GIF / APNG / WebP、Lottie 与 dotLottie、WebGL2、glTF / OBJ、2D 物理。模块分为三个等级，只为实际导入的部分付出体积。
 - **适配所有框架**：`motionary/react`、`motionary/vue`、`motionary/svelte`、`motionary/solid`、`motionary/angular`，以及元素封装 `motionary/components/react` · `vue` · `svelte` · `solid`。在服务端导入不会产生任何副作用。
 - **配套工具**：面向 AI 助手的 MCP 服务器、本地动效解析器（可接入你自己的 LLM）、Figma 插件、可导出 CSS / 小程序 WXSS / 鸿蒙 ArkTS 的 CLI，以及每个大版本的 codemod。
 - **默认无障碍**：处处支持减少动态效果，提供面向用户的动效开关；所有元素遵循同一份组件契约（属性、事件、键盘、生命周期），由 CI 强制检查。
@@ -195,30 +195,32 @@ defineScrollScene();  // 再注册依赖它的组件
 可以按分类导入（`motionary/components/cards`）、全部导入（`motionary/components`）、使用按需加载 CSS 的构建（`motionary/components/lite`），或只导入单个小部件（`motionary/widgets/<name>`，例如 `motionary/widgets/toast-stack`）。全部元素：[docs/components.md](./docs/components.md)；每个元素的单独页面：[docs/components/](./docs/components/README.md)；全部入口：[docs/entry-points.md](./docs/entry-points.md)。
 
 <details>
-<summary><b><code>motionary/components</code> 中的 91 个元素</b></summary>
+<summary><b><code>motionary/components</code> 中的 <!--fact:core-->91<!--/fact--> 个核心元素</b></summary>
 
+<!-- core-table:start -->
 | 分类 | 入口 | 元素 |
 |---|---|---|
-| **滚动显现** | `motionary/components/reveal` | `<usa-reveal>` · `<usa-stagger>` · `<usa-scroll-progress>` · `<usa-scrolly>` |
-| **文字** | `motionary/components/text` | `<usa-typewriter>` · `<usa-split-text>` · `<usa-scramble>` · `<usa-counter>` · `<usa-shimmer-text>` · `<usa-text-rotate>` · `<usa-wave-text>` · `<usa-glitch>` · `<usa-gradient-text>` · `<usa-handwriting>` · `<usa-scroll-highlight>` |
-| **交互** | `motionary/components/interaction` | `<usa-ripple>` · `<usa-magnetic>` · `<usa-tilt>` · `<usa-spotlight>` · `<usa-press>` |
-| **反馈** | `motionary/components/feedback` | `<usa-spinner>` · `<usa-skeleton>` · `<usa-progress>` · `<usa-toaster>` · `<usa-check>` |
-| **背景** | `motionary/components/background` | `<usa-aurora>` · `<usa-particles>` · `<usa-grain>` · `<usa-marquee>` · `<usa-acrylic>` · `<usa-grid-glow>` · `<usa-blobs>` · `<usa-water-ripple>` · `<usa-dot-network>` |
-| **过渡** | `motionary/components/transitions` | `<usa-dialog>` · `<usa-accordion>` · `<usa-view-switch>` |
-| **弹簧与物理** | `motionary/components/physics` | `<usa-spring>` · `<usa-draggable>` · `<usa-overscroll>` |
-| **卡片** | `motionary/components/cards` | `<usa-card>` · `<usa-card-stack>` · `<usa-sticky-stack>` · `<usa-carousel-3d>` |
-| **点击与按钮** | `motionary/components/click` | `<usa-click>` · `<usa-button>` · `<usa-icon-morph>` · `<usa-like>` · `<usa-hold>` · `<usa-double-tap>` · `<usa-checkbox>` |
-| **UI 套件** | `motionary/components/ui` | `<usa-tabs>` · `<usa-drawer>` · `<usa-bottom-sheet>` · `<usa-pull-refresh>` · `<usa-fab>` · `<usa-navbar>` · `<usa-slider>` · `<usa-popover>` · `<usa-badge>` · `<usa-avatar-stack>` |
-| **整页** | `motionary/components/page` | `<usa-cursor>` · `<usa-fullpage>` · `<usa-loading-bar>` · `<usa-back-to-top>` · `<usa-ambient>` · `<usa-splash>` · `<usa-auto-skeleton>` · `<usa-motion-switch>` |
+| **滚动显现** | `motionary/components/reveal` | `<usa-reveal>` · `<usa-scroll-progress>` · `<usa-scrolly>` · `<usa-stagger>` |
+| **文字** | `motionary/components/text` | `<usa-counter>` · `<usa-glitch>` · `<usa-gradient-text>` · `<usa-handwriting>` · `<usa-scramble>` · `<usa-scroll-highlight>` · `<usa-shimmer-text>` · `<usa-split-text>` · `<usa-text-rotate>` · `<usa-typewriter>` · `<usa-wave-text>` |
+| **交互** | `motionary/components/interaction` | `<usa-magnetic>` · `<usa-press>` · `<usa-ripple>` · `<usa-spotlight>` · `<usa-tilt>` |
+| **反馈** | `motionary/components/feedback` | `<usa-check>` · `<usa-progress>` · `<usa-skeleton>` · `<usa-spinner>` · `<usa-toaster>` |
+| **背景** | `motionary/components/background` | `<usa-acrylic>` · `<usa-aurora>` · `<usa-blobs>` · `<usa-dot-network>` · `<usa-grain>` · `<usa-grid-glow>` · `<usa-marquee>` · `<usa-particles>` · `<usa-water-ripple>` |
+| **过渡** | `motionary/components/transitions` | `<usa-accordion>` · `<usa-dialog>` · `<usa-view-switch>` |
+| **弹簧与物理** | `motionary/components/physics` | `<usa-draggable>` · `<usa-overscroll>` · `<usa-spring>` |
+| **卡片** | `motionary/components/cards` | `<usa-card>` · `<usa-card-stack>` · `<usa-carousel-3d>` · `<usa-sticky-stack>` |
+| **点击与按钮** | `motionary/components/click` | `<usa-button>` · `<usa-checkbox>` · `<usa-click>` · `<usa-double-tap>` · `<usa-hold>` · `<usa-icon-morph>` · `<usa-like>` |
+| **UI 套件** | `motionary/components/ui` | `<usa-avatar-stack>` · `<usa-badge>` · `<usa-bottom-sheet>` · `<usa-drawer>` · `<usa-fab>` · `<usa-navbar>` · `<usa-popover>` · `<usa-pull-refresh>` · `<usa-slider>` · `<usa-tabs>` |
+| **整页** | `motionary/components/page` | `<usa-ambient>` · `<usa-auto-skeleton>` · `<usa-back-to-top>` · `<usa-cursor>` · `<usa-fullpage>` · `<usa-loading-bar>` · `<usa-motion-switch>` · `<usa-splash>` |
 | **时间线** | `motionary/components/timeline` | `<usa-timeline>` |
-| **手势** | `motionary/components/gesture` | `<usa-swipeable>` · `<usa-pinch-zoom>` |
-| **SVG** | `motionary/components/svg` | `<usa-draw>` · `<usa-morph>` · `<usa-mask-reveal>` · `<usa-anim-icon>` |
-| **WebGL** | `motionary/components/webgl` | `<usa-shader>` · `<usa-distort>` · `<usa-liquid>` · `<usa-post-fx>` |
+| **手势** | `motionary/components/gesture` | `<usa-pinch-zoom>` · `<usa-swipeable>` |
+| **SVG** | `motionary/components/svg` | `<usa-anim-icon>` · `<usa-draw>` · `<usa-mask-reveal>` · `<usa-morph>` |
+| **WebGL** | `motionary/components/webgl` | `<usa-distort>` · `<usa-liquid>` · `<usa-post-fx>` · `<usa-shader>` |
 | **3D 景深** | `motionary/components/depth` | `<usa-cube>` · `<usa-depth>` |
 | **布局** | `motionary/components/layout` | `<usa-auto-animate>` · `<usa-masonry>` |
 | **效果包** | `motionary/components/packs` | `<usa-pack>` |
 | **效果注册表** | `motionary/components/fx` | `<usa-fx>` |
-| **效果包元素** | `motionary/components/effects` | `<usa-player>` · `<usa-story>` · `<usa-audio>` · `<usa-motion-theme>` · `<usa-gesture-fx>` |
+| **效果包元素** | `motionary/components/effects` | `<usa-audio>` · `<usa-gesture-fx>` · `<usa-motion-theme>` · `<usa-player>` · `<usa-story>` |
+<!-- core-table:end -->
 
 </details>
 

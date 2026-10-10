@@ -78,4 +78,4 @@ exports.EFFECT_PACK_FORMAT = EFFECT_PACK_FORMAT;
 exports.loadEffectPack = loadEffectPack;
 exports.packManifest = packManifest;
 exports.validateManifest = validateManifest;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/chunks/manifest-Rxf1Mumb.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/chunks/manifest-Rxf1Mumb.cjs.map

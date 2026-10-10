@@ -7,4 +7,4 @@ require('../chunks/shared-Bf72wLyt.cjs');
 
 
 exports.defineEqualizer = widgets_equalizer.defineEqualizer;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/equalizer.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/widgets/equalizer.cjs.map

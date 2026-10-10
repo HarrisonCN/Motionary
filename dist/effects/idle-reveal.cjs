@@ -16,4 +16,4 @@ function registerIdleReveal() {
 exports.effect = effect;
 exports.register = registerIdleReveal;
 exports.registerIdleReveal = registerIdleReveal;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/effects/idle-reveal.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/effects/idle-reveal.cjs.map

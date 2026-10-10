@@ -14,7 +14,7 @@ _旧名 **use-scroll-animate**。旧 npm パッケージも、同じビルドの
 
 </div>
 
-Motionary は、スクロールして画面に入ってきたコンテンツをアニメーションで表示し、さらに 209 個の `<usa-*>` カスタム要素を提供します。カード、ボタン、物理演算、ページ遷移、ジェネレーティブ背景、Lottie、WebGL などがそろっています。素の HTML でも、React・Vue・Svelte・Solid・Angular でも、Electron・Tauri・WebView2 といったデスクトップの Web ビューでも、そのまま動きます。ランタイム依存はゼロ。すべてのエントリポイントは tree-shaking でき、CI で gzip サイズの上限がチェックされます。どのアニメーションも `prefers-reduced-motion` を尊重します。
+Motionary は、スクロールして画面に入ってきたコンテンツをアニメーションで表示し、さらに <!--fact:public-->209<!--/fact--> 個の `<usa-*>` カスタム要素を提供します。カード、ボタン、物理演算、ページ遷移、ジェネレーティブ背景、Lottie、WebGL などがそろっています。素の HTML でも、React・Vue・Svelte・Solid・Angular でも、Electron・Tauri・WebView2 といったデスクトップの Web ビューでも、そのまま動きます。ランタイム依存はゼロ。すべてのエントリポイントは tree-shaking でき、CI で gzip サイズの上限がチェックされます。どのアニメーションも `prefers-reduced-motion` を尊重します。
 
 > 13.0：見つける・コピーする・動かす。12.x で追加したツール群が安定版になりました。MCP のマウント検証（`validate_snippet { mount: true }`）とバージョンに応じた回答（`check_compat`）、Figma プラグインのエクスポート、[コンポーネントプレイグラウンド](https://harrisoncn.github.io/Motionary/showcase/run.html)、`npx motionary export`、`npx motionary compat` です。11.5 で非推奨になったインポートパスは削除されました。詳しくは [13 へのアップグレード](#13-へのアップグレード) を参照してください。
 
@@ -25,9 +25,9 @@ Motionary は、スクロールして画面に入ってきたコンテンツを�
 ## 特長
 
 - **スクロール表示プリセット 214 種**を 14 のファミリーで提供（コアに 33 種、`motionary/presets/extended` にさらに 181 種）。フェード、ズーム、3D フリップ、clip-path の図形、ブラーとマスク、バウンス、奥行き、グリッチ、スクロール量に連動する `scrub-*` など。`timeline()`、`staggerChildren()`、`parallax()` もあります。
-- **`<usa-*>` Web Components 209 個**：`motionary/components` にカテゴリ別で 91 個、さらにウィジェットが 118 個あり、それぞれ専用のエントリポイント（`motionary/widgets/<name>`）を持ちます。加えて、専用エントリ（`motionary/effects/<name>`）を持つエフェクトが 141 種あります。
+- **`<usa-*>` Web Components <!--fact:public-->209<!--/fact--> 個**：`motionary/components` にカテゴリ別で <!--fact:core-->91<!--/fact--> 個のコアコンポーネント、さらにウィジェットが <!--fact:widgets-->118<!--/fact--> 個あり、それぞれ専用のエントリポイント（`motionary/widgets/<name>`）を持ちます。加えて、専用エントリ（`motionary/effects/<name>`）を持つエフェクトが <!--fact:effects-->141<!--/fact--> 種あります。数え方は [docs/components.md](./docs/components.md#how-components-are-counted) を参照。
 - **Motion Core**：`motionary/core` の `createMotion()`。プラグイン方式のエンジンで、gzip 後およそ 2.5 KB（上限 10 KB）です。
-- **独自のランタイム**：`motionary/runtime`（ticker・tween・timeline）と 20 のモジュール。スクロールシーン、スムーズスクロール、テキスト分割、SVG モーフィング、スプライト、GIF / APNG / WebP、Lottie と dotLottie、WebGL2、glTF / OBJ、2D 物理演算をカバーします。モジュールは 3 つの階層に分かれていて、インポートした分だけのサイズで済みます。
+- **独自のランタイム**：`motionary/runtime`（ticker・tween・timeline）と <!--fact:runtimeModules-->20<!--/fact--> のモジュール。スクロールシーン、スムーズスクロール、テキスト分割、SVG モーフィング、スプライト、GIF / APNG / WebP、Lottie と dotLottie、WebGL2、glTF / OBJ、2D 物理演算をカバーします。モジュールは 3 つの階層に分かれていて、インポートした分だけのサイズで済みます。
 - **どのフレームワークでも**：`motionary/react`、`motionary/vue`、`motionary/svelte`、`motionary/solid`、`motionary/angular`。要素用のラッパー `motionary/components/react` · `vue` · `svelte` · `solid` もあります。サーバー側でインポートしても何も起きません。
 - **ツール群**：AI アシスタント向けの MCP サーバー、ローカルで動くモーション解析器（任意の LLM も接続可能）、Figma プラグイン、CSS / ミニプログラム WXSS / HarmonyOS ArkTS へ書き出す CLI、そしてメジャーバージョンごとの codemod。
 - **アクセシビリティが標準**：どこでも reduced motion に対応し、ユーザー向けのモーション切り替えも用意。すべての要素が同じコンポーネント規約（属性・イベント・キーボード・ライフサイクル）に従い、CI で検証されます。
@@ -195,30 +195,32 @@ defineScrollScene();  // そのあとで、それを使うコンポーネント�
 カテゴリ単位（`motionary/components/cards`）、全部まとめて（`motionary/components`）、CSS をオンデマンドで読み込むビルド（`motionary/components/lite`）、ウィジェット 1 つだけ（`motionary/widgets/<name>`、例：`motionary/widgets/toast-stack`）のいずれでもインポートできます。全要素は [docs/components.md](./docs/components.md)、要素ごとのページは [docs/components/](./docs/components/README.md)、全エントリポイントは [docs/entry-points.md](./docs/entry-points.md) にあります。
 
 <details>
-<summary><b><code>motionary/components</code> の 91 要素</b></summary>
+<summary><b><code>motionary/components</code> の <!--fact:core-->91<!--/fact--> コア要素</b></summary>
 
+<!-- core-table:start -->
 | カテゴリ | エントリ | 要素 |
 |---|---|---|
-| **スクロール表示** | `motionary/components/reveal` | `<usa-reveal>` · `<usa-stagger>` · `<usa-scroll-progress>` · `<usa-scrolly>` |
-| **テキスト** | `motionary/components/text` | `<usa-typewriter>` · `<usa-split-text>` · `<usa-scramble>` · `<usa-counter>` · `<usa-shimmer-text>` · `<usa-text-rotate>` · `<usa-wave-text>` · `<usa-glitch>` · `<usa-gradient-text>` · `<usa-handwriting>` · `<usa-scroll-highlight>` |
-| **インタラクション** | `motionary/components/interaction` | `<usa-ripple>` · `<usa-magnetic>` · `<usa-tilt>` · `<usa-spotlight>` · `<usa-press>` |
-| **フィードバック** | `motionary/components/feedback` | `<usa-spinner>` · `<usa-skeleton>` · `<usa-progress>` · `<usa-toaster>` · `<usa-check>` |
-| **背景** | `motionary/components/background` | `<usa-aurora>` · `<usa-particles>` · `<usa-grain>` · `<usa-marquee>` · `<usa-acrylic>` · `<usa-grid-glow>` · `<usa-blobs>` · `<usa-water-ripple>` · `<usa-dot-network>` |
-| **トランジション** | `motionary/components/transitions` | `<usa-dialog>` · `<usa-accordion>` · `<usa-view-switch>` |
-| **バネ・物理** | `motionary/components/physics` | `<usa-spring>` · `<usa-draggable>` · `<usa-overscroll>` |
-| **カード** | `motionary/components/cards` | `<usa-card>` · `<usa-card-stack>` · `<usa-sticky-stack>` · `<usa-carousel-3d>` |
-| **クリック・ボタン** | `motionary/components/click` | `<usa-click>` · `<usa-button>` · `<usa-icon-morph>` · `<usa-like>` · `<usa-hold>` · `<usa-double-tap>` · `<usa-checkbox>` |
-| **UI キット** | `motionary/components/ui` | `<usa-tabs>` · `<usa-drawer>` · `<usa-bottom-sheet>` · `<usa-pull-refresh>` · `<usa-fab>` · `<usa-navbar>` · `<usa-slider>` · `<usa-popover>` · `<usa-badge>` · `<usa-avatar-stack>` |
-| **ページ全体** | `motionary/components/page` | `<usa-cursor>` · `<usa-fullpage>` · `<usa-loading-bar>` · `<usa-back-to-top>` · `<usa-ambient>` · `<usa-splash>` · `<usa-auto-skeleton>` · `<usa-motion-switch>` |
+| **スクロール表示** | `motionary/components/reveal` | `<usa-reveal>` · `<usa-scroll-progress>` · `<usa-scrolly>` · `<usa-stagger>` |
+| **テキスト** | `motionary/components/text` | `<usa-counter>` · `<usa-glitch>` · `<usa-gradient-text>` · `<usa-handwriting>` · `<usa-scramble>` · `<usa-scroll-highlight>` · `<usa-shimmer-text>` · `<usa-split-text>` · `<usa-text-rotate>` · `<usa-typewriter>` · `<usa-wave-text>` |
+| **インタラクション** | `motionary/components/interaction` | `<usa-magnetic>` · `<usa-press>` · `<usa-ripple>` · `<usa-spotlight>` · `<usa-tilt>` |
+| **フィードバック** | `motionary/components/feedback` | `<usa-check>` · `<usa-progress>` · `<usa-skeleton>` · `<usa-spinner>` · `<usa-toaster>` |
+| **背景** | `motionary/components/background` | `<usa-acrylic>` · `<usa-aurora>` · `<usa-blobs>` · `<usa-dot-network>` · `<usa-grain>` · `<usa-grid-glow>` · `<usa-marquee>` · `<usa-particles>` · `<usa-water-ripple>` |
+| **トランジション** | `motionary/components/transitions` | `<usa-accordion>` · `<usa-dialog>` · `<usa-view-switch>` |
+| **バネ・物理** | `motionary/components/physics` | `<usa-draggable>` · `<usa-overscroll>` · `<usa-spring>` |
+| **カード** | `motionary/components/cards` | `<usa-card>` · `<usa-card-stack>` · `<usa-carousel-3d>` · `<usa-sticky-stack>` |
+| **クリック・ボタン** | `motionary/components/click` | `<usa-button>` · `<usa-checkbox>` · `<usa-click>` · `<usa-double-tap>` · `<usa-hold>` · `<usa-icon-morph>` · `<usa-like>` |
+| **UI キット** | `motionary/components/ui` | `<usa-avatar-stack>` · `<usa-badge>` · `<usa-bottom-sheet>` · `<usa-drawer>` · `<usa-fab>` · `<usa-navbar>` · `<usa-popover>` · `<usa-pull-refresh>` · `<usa-slider>` · `<usa-tabs>` |
+| **ページ全体** | `motionary/components/page` | `<usa-ambient>` · `<usa-auto-skeleton>` · `<usa-back-to-top>` · `<usa-cursor>` · `<usa-fullpage>` · `<usa-loading-bar>` · `<usa-motion-switch>` · `<usa-splash>` |
 | **タイムライン** | `motionary/components/timeline` | `<usa-timeline>` |
-| **ジェスチャー** | `motionary/components/gesture` | `<usa-swipeable>` · `<usa-pinch-zoom>` |
-| **SVG** | `motionary/components/svg` | `<usa-draw>` · `<usa-morph>` · `<usa-mask-reveal>` · `<usa-anim-icon>` |
-| **WebGL** | `motionary/components/webgl` | `<usa-shader>` · `<usa-distort>` · `<usa-liquid>` · `<usa-post-fx>` |
+| **ジェスチャー** | `motionary/components/gesture` | `<usa-pinch-zoom>` · `<usa-swipeable>` |
+| **SVG** | `motionary/components/svg` | `<usa-anim-icon>` · `<usa-draw>` · `<usa-mask-reveal>` · `<usa-morph>` |
+| **WebGL** | `motionary/components/webgl` | `<usa-distort>` · `<usa-liquid>` · `<usa-post-fx>` · `<usa-shader>` |
 | **3D 奥行き** | `motionary/components/depth` | `<usa-cube>` · `<usa-depth>` |
 | **レイアウト** | `motionary/components/layout` | `<usa-auto-animate>` · `<usa-masonry>` |
 | **パック** | `motionary/components/packs` | `<usa-pack>` |
 | **エフェクトレジストリ** | `motionary/components/fx` | `<usa-fx>` |
-| **エフェクトパック** | `motionary/components/effects` | `<usa-player>` · `<usa-story>` · `<usa-audio>` · `<usa-motion-theme>` · `<usa-gesture-fx>` |
+| **エフェクトパック** | `motionary/components/effects` | `<usa-audio>` · `<usa-gesture-fx>` · `<usa-motion-theme>` · `<usa-player>` · `<usa-story>` |
+<!-- core-table:end -->
 
 </details>
 

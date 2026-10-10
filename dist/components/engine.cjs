@@ -263,4 +263,4 @@ exports.hydrateMotion = hydrateMotion;
 exports.motionClock = motionClock;
 exports.resolvePosition = resolvePosition;
 exports.ssrHead = ssrHead;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/components/engine.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/components/engine.cjs.map

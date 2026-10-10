@@ -11,8 +11,8 @@ ScrollAnimate.observe('.card', { animation: 'bounce-in-up', duration: 900 });
 
 ```html
 <!-- No build: the UMD core, then the extended set (registers itself) -->
-<script src="https://unpkg.com/motionary@6/dist/index.umd.js"></script>
-<script src="https://unpkg.com/motionary@6/dist/presets-extended.umd.js"></script>
+<script src="https://unpkg.com/motionary@13/dist/index.umd.js"></script>
+<script src="https://unpkg.com/motionary@13/dist/presets-extended.umd.js"></script>
 <div data-sa data-sa-animation="clip-diamond">…</div>
 <script>ScrollAnimate.default.init();</script>
 ```

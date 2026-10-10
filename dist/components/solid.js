@@ -81,4 +81,4 @@ function defineUsa(categories) {
 }
 
 export { bindUsa, defineUsa, usa };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/components/solid.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/components/solid.js.map

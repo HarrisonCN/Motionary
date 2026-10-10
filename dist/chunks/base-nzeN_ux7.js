@@ -480,4 +480,4 @@ function kindOf(el, valid, fallback) {
 const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
 
 export { srText as A, deprecate as B, adoptStyles as C, EASE_OUT as D, EASE_SPRING as E, FOCUSABLE as F, queryAttr as G, kindOf as H, shadowStyles as I, FLUENT_DECELERATE as J, MOTION_SENSITIVITY_LEVELS as M, applyFrame as a, caf as b, configureComponents as c, clamp as d, animateWithMotion as e, defineElement as f, getMotionSensitivity as g, getClock as h, canDefine as i, MOTION_SCALE as j, activeAnimations as k, adaptKeyframes as l, motionScale as m, now as n, onClockChange as o, prefersReducedMotion as p, animationBudget as q, raf as r, setClock as s, trackAnimation as t, getMotionIntensity as u, onFrame as v, schedulerStats as w, setAnimationBudget as x, withoutDeprecations as y, setStyleLoader as z };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/chunks/base-nzeN_ux7.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/chunks/base-nzeN_ux7.js.map
