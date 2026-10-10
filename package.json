@@ -1,7 +1,7 @@
 {
   "name": "motionary",
   "version": "13.2.0",
-  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 209 animated Web Components (91 in motionary/components, 118 widgets with their own entry points) — 214 scroll-reveal presets, card/click/button morphs, physics, page transitions, generative & sound-reactive backgrounds, cursor/gesture effects, themes, micro-interactions, <usa-player>, WebGL. React, Vue, Svelte, Solid, Angular or plain HTML.",
+  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 209 animated Web Components (91 core, 118 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
   "unpkg": "dist/index.umd.js",

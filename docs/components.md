@@ -14,7 +14,7 @@ Live gallery: <https://harrisoncn.github.io/Motionary/showcase/components.html>
 
 | Count | Value | What it counts |
 |---|---|---|
-| **All public components** | **209** | Every `<usa-*>` element in the manifest (`motionary/manifest.json`, `/components.json`). Each has a contract (`npm run check:contract`), a docs page and a gzip budget. |
+| **All public components** | **209** | Every `<usa-*>` element in the manifest (`motionary/tooling/manifest.json`, `/components.json`). Each has a contract (`npm run check:contract`), a docs page and a gzip budget. |
 | **Core components** | **91** | Elements registered by `motionary/components` (`defineComponents()`, CDN `components.umd.js`), imported by category (`motionary/components/<category>`). |
 | Widgets | 118 | Elements with their own entry point `motionary/widgets/<name>`. 115 of them are also in the no-build `widgets.umd.js`; 3 (`<usa-dotlottie>`, `<usa-gl-model>`, `<usa-snap-carousel>`) load only from their own ES module entry. |
 | Effects | 141 | Effects with their own entry point `motionary/effects/<name>` (not elements, not in the counts above). |

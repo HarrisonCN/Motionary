@@ -41,7 +41,8 @@ export function componentCounts(m) {
 
 export function packageDescription(m) {
   const n = componentCounts(m);
-  return `Motionary (formerly use-scroll-animate): dependency-free scroll animations + ${n.public} animated Web Components (${n.core} in motionary/components, ${n.widgets} widgets with their own entry points) — 214 scroll-reveal presets, card/click/button morphs, physics, page transitions, generative & sound-reactive backgrounds, cursor/gesture effects, themes, micro-interactions, <usa-player>, WebGL. React, Vue, Svelte, Solid, Angular or plain HTML.`;
+  // ≤ 350 characters (npm search shows the start; test/motionary-6-1-1.test.ts) and names the old package
+  return `Motionary (formerly use-scroll-animate): dependency-free scroll animations + ${n.public} animated Web Components (${n.core} core, ${n.widgets} widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.`;
 }
 
 // category labels of the core table, per README language (order follows the manifest)
@@ -74,7 +75,7 @@ export function countingSection(m) {
     '',
     '| Count | Value | What it counts |',
     '|---|---|---|',
-    `| **All public components** | **${n.public}** | Every \`<usa-*>\` element in the manifest (\`motionary/manifest.json\`, \`/components.json\`). Each has a contract (\`npm run check:contract\`), a docs page and a gzip budget. |`,
+    `| **All public components** | **${n.public}** | Every \`<usa-*>\` element in the manifest (\`motionary/tooling/manifest.json\`, \`/components.json\`). Each has a contract (\`npm run check:contract\`), a docs page and a gzip budget. |`,
     `| **Core components** | **${n.core}** | Elements registered by \`motionary/components\` (\`defineComponents()\`, CDN \`components.umd.js\`), imported by category (\`motionary/components/<category>\`). |`,
     `| Widgets | ${n.widgets} | Elements with their own entry point \`motionary/widgets/<name>\`. ${n.widgetsBundle} of them are also in the no-build \`widgets.umd.js\`; ${n.entryOnly} (${entryOnly}) load only from their own ES module entry. |`,
     `| Effects | ${n.effects} | Effects with their own entry point \`motionary/effects/<name>\` (not elements, not in the counts above). |`,
