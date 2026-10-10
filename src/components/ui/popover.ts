@@ -18,7 +18,7 @@ export interface UsaPopoverElement extends UsaElement {
 }
 
 export function definePopover(tag = 'usa-popover'): CustomElementConstructor | undefined {
-  // contract-exempt: attr-unobserved — open: state reflected by the element itself (set the property instead); observing it would re-mount on every change
+  // contract-exempt: attr-unobserved(open) — state reflected by the element itself (set the property instead); observing it would re-mount on every change
   adoptVariants();
   return defineElement(
     tag,

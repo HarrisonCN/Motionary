@@ -19,7 +19,7 @@ export interface UsaTabsElement extends UsaElement {
 }
 
 export function defineTabs(tag = 'usa-tabs'): CustomElementConstructor | undefined {
-  // contract-exempt: attr-unobserved — selected: state reflected by the element itself (set the property instead); observing it would re-mount on every change
+  // contract-exempt: attr-unobserved(selected) — state reflected by the element itself (set the property instead); observing it would re-mount on every change
   adoptVariants();
   return defineElement(
     tag,

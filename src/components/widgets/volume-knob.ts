@@ -17,7 +17,7 @@ export interface UsaVolumeKnobElement extends UsaElement {
 const ARC = 270;
 
 export function defineVolumeKnob(tag = 'usa-volume-knob'): CustomElementConstructor | undefined {
-  // contract-exempt: attr-unobserved — value: state reflected by the element itself (set the property instead); observing it would re-mount on every change
+  // contract-exempt: attr-unobserved(value) — state reflected by the element itself (set the property instead); observing it would re-mount on every change
   return defineElement(
     tag,
     (Base) => {

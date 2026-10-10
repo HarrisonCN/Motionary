@@ -1,0 +1,996 @@
+{
+  "format": "motionary/event-details",
+  "version": 1,
+  "note": "13.0.1: the detail shape of every usa:* event the audited components dispatch, as extracted by scripts/contract-audit.mjs (eventDetails). (none) = dispatched without a detail (event.detail is null); {a, b} = an object with exactly these keys; object: <expr> = a non-literal object. Changing a shape is a contract change: update this spec deliberately (and the CHANGELOG).",
+  "dynamicNames": {
+    "usa:<act.dataset.act!>": "<usa-music-player> prev / next buttons → usa:prev, usa:next"
+  },
+  "nonLiteral": {
+    "usa:beat": "<usa-audio>: the { energy, time } object onBeat() passes (src/components/effects/audio.ts)"
+  },
+  "components": {
+    "usa-accordion": {
+      "usa:toggle": [
+        "{details, open}"
+      ]
+    },
+    "usa-add-to-cart": {
+      "usa:add": [
+        "{item}"
+      ]
+    },
+    "usa-audio": {
+      "usa:audio-error": [
+        "{error}"
+      ],
+      "usa:beat": [
+        "object: d"
+      ]
+    },
+    "usa-badge-wall": {
+      "usa:unlock": [
+        "{name}"
+      ]
+    },
+    "usa-bg-generator": {
+      "usa:change": [
+        "{css, seed}"
+      ]
+    },
+    "usa-button": {
+      "usa:state": [
+        "{state}"
+      ],
+      "usa:submit": [
+        "{done}"
+      ]
+    },
+    "usa-card": {
+      "usa:collapse": [
+        "(none)"
+      ],
+      "usa:expand": [
+        "(none)"
+      ],
+      "usa:flip": [
+        "{flipped}"
+      ]
+    },
+    "usa-card-stack": {
+      "usa:empty": [
+        "(none)"
+      ],
+      "usa:swipe": [
+        "{card, direction}"
+      ]
+    },
+    "usa-carousel": {
+      "usa:change": [
+        "{from, index}"
+      ]
+    },
+    "usa-carousel-3d": {
+      "usa:change": [
+        "{index}"
+      ]
+    },
+    "usa-cart-drawer": {
+      "usa:change": [
+        "{items, total}"
+      ],
+      "usa:close": [
+        "{}"
+      ],
+      "usa:open": [
+        "{}"
+      ]
+    },
+    "usa-chapter-nav": {
+      "usa:chapter": [
+        "{index, title}"
+      ]
+    },
+    "usa-chat-composer": {
+      "usa:send": [
+        "{text}"
+      ],
+      "usa:stop": [
+        "(none)"
+      ]
+    },
+    "usa-check": {
+      "usa:complete": [
+        "(none)"
+      ]
+    },
+    "usa-checkbox": {
+      "usa:change": [
+        "{checked}"
+      ]
+    },
+    "usa-click": {
+      "usa:click-effect": [
+        "{effects, x, y}"
+      ]
+    },
+    "usa-clock-control": {
+      "usa:change": [
+        "{paused, rate}"
+      ]
+    },
+    "usa-code-export": {
+      "usa:copy": [
+        "{format, ok}"
+      ]
+    },
+    "usa-color-picker": {
+      "usa:change": [
+        "{value}"
+      ],
+      "usa:input": [
+        "{value}"
+      ]
+    },
+    "usa-command-palette": {
+      "usa:close": [
+        "(none)"
+      ],
+      "usa:open": [
+        "(none)"
+      ],
+      "usa:run": [
+        "{id, label}"
+      ]
+    },
+    "usa-compare": {
+      "usa:change": [
+        "{position}"
+      ]
+    },
+    "usa-countdown": {
+      "usa:done": [
+        "{}"
+      ],
+      "usa:tick": [
+        "{left}"
+      ]
+    },
+    "usa-counter": {
+      "usa:complete": [
+        "{value}"
+      ]
+    },
+    "usa-cube": {
+      "usa:change": [
+        "{face, index}"
+      ]
+    },
+    "usa-cube-gallery": {
+      "usa:change": [
+        "{from, index}"
+      ]
+    },
+    "usa-date-picker": {
+      "usa:change": [
+        "{date, value}"
+      ]
+    },
+    "usa-dialog": {
+      "usa:beforeclose": [
+        "{returnValue}"
+      ],
+      "usa:close": [
+        "{returnValue}"
+      ],
+      "usa:open": [
+        "(none)"
+      ]
+    },
+    "usa-disclosure": {
+      "usa:toggle": [
+        "{index, open}"
+      ]
+    },
+    "usa-dotlottie": {
+      "usa:custom": [
+        "{name}"
+      ],
+      "usa:error": [
+        "{error}"
+      ],
+      "usa:state": [
+        "{from, state}"
+      ]
+    },
+    "usa-double-tap": {
+      "usa:double-tap": [
+        "{x, y}"
+      ]
+    },
+    "usa-draggable": {
+      "usa:drag": [
+        "{x, y}"
+      ],
+      "usa:drag-end": [
+        "{vx, vy, x, y}"
+      ],
+      "usa:drag-start": [
+        "{x, y}"
+      ],
+      "usa:settle": [
+        "{x, y}"
+      ]
+    },
+    "usa-draw": {
+      "usa:complete": [
+        "(none)"
+      ]
+    },
+    "usa-equalizer": {
+      "usa:change": [
+        "{values}"
+      ]
+    },
+    "usa-fab": {
+      "usa:toggle": [
+        "{open}"
+      ]
+    },
+    "usa-festival-banner": {
+      "usa:dismiss": [
+        "(none)"
+      ]
+    },
+    "usa-field": {
+      "usa:invalid": [
+        "{message, value}"
+      ],
+      "usa:valid": [
+        "{value}"
+      ]
+    },
+    "usa-file-drop": {
+      "usa:files": [
+        "{files}"
+      ]
+    },
+    "usa-fullpage": {
+      "usa:section": [
+        "{index}"
+      ]
+    },
+    "usa-gen-art": {
+      "usa:generate": [
+        "{seed}"
+      ]
+    },
+    "usa-gesture-sticker": {
+      "usa:transform": [
+        "{...n}"
+      ]
+    },
+    "usa-gl-scene": {
+      "usa:error": [
+        "{error}"
+      ],
+      "usa:load": [
+        "{animations, meshes}"
+      ]
+    },
+    "usa-globe": {
+      "usa:focus": [
+        "{lat, lon, name}"
+      ]
+    },
+    "usa-gpu-particles": {
+      "usa:backend": [
+        "{backend}"
+      ]
+    },
+    "usa-gyro-card": {
+      "usa:tilt": [
+        "{rx, ry, source}"
+      ]
+    },
+    "usa-handwriting": {
+      "usa:complete": [
+        "(none)"
+      ]
+    },
+    "usa-hero-video": {
+      "usa:pause": [
+        "(none)"
+      ],
+      "usa:play": [
+        "(none)"
+      ]
+    },
+    "usa-hold": {
+      "usa:cancel": [
+        "{progress}"
+      ],
+      "usa:confirm": [
+        "(none)"
+      ],
+      "usa:progress": [
+        "{progress}"
+      ]
+    },
+    "usa-hud-panel": {
+      "usa:boot": [
+        "(none)"
+      ]
+    },
+    "usa-hydrate": {
+      "usa:hydrated": [
+        "{count}"
+      ]
+    },
+    "usa-icon-morph": {
+      "usa:change": [
+        "{icon, index}"
+      ]
+    },
+    "usa-install-button": {
+      "usa:copy": [
+        "{manager, text}"
+      ]
+    },
+    "usa-kanban": {
+      "usa:move": [
+        "{card, from, index, to}"
+      ]
+    },
+    "usa-keyframe-editor": {
+      "usa:change": [
+        "{animation}"
+      ]
+    },
+    "usa-leaderboard": {
+      "usa:rank": [
+        "{from, name, to}"
+      ]
+    },
+    "usa-like": {
+      "usa:change": [
+        "{count, liked}"
+      ]
+    },
+    "usa-liquid-nav": {
+      "usa:change": [
+        "{index, item}"
+      ]
+    },
+    "usa-location-card": {
+      "usa:arrive": [
+        "{name}"
+      ]
+    },
+    "usa-lottie": {
+      "usa:complete": [
+        "(none)"
+      ],
+      "usa:error": [
+        "{src}"
+      ],
+      "usa:load": [
+        "{duration, layers}"
+      ]
+    },
+    "usa-lottie-player": {
+      "usa:complete": [
+        "(none)"
+      ],
+      "usa:error": [
+        "{error}"
+      ],
+      "usa:load": [
+        "{fr, frames, h, unsupported, w}"
+      ]
+    },
+    "usa-lyrics": {
+      "usa:seek": [
+        "{time}"
+      ]
+    },
+    "usa-mask-reveal": {
+      "usa:complete": [
+        "(none)"
+      ]
+    },
+    "usa-masonry-flow": {
+      "usa:layout": [
+        "{columns}"
+      ]
+    },
+    "usa-menu": {
+      "usa:close": [
+        "(none)"
+      ],
+      "usa:open": [
+        "(none)"
+      ],
+      "usa:select": [
+        "{index, item, value}"
+      ]
+    },
+    "usa-menu-toggle": {
+      "usa:toggle": [
+        "{open}"
+      ]
+    },
+    "usa-message-list": {
+      "usa:message": [
+        "{message}"
+      ]
+    },
+    "usa-milestones": {
+      "usa:reach": [
+        "{index}"
+      ]
+    },
+    "usa-modal": {
+      "usa:close": [
+        "{value}"
+      ],
+      "usa:open": [
+        "{trigger}"
+      ]
+    },
+    "usa-morph": {
+      "usa:change": [
+        "{index}"
+      ]
+    },
+    "usa-motion": {
+      "usa:motion-error": [
+        "{message}"
+      ]
+    },
+    "usa-motion-inspector": {
+      "usa:change": [
+        "{count}",
+        "{rate}"
+      ]
+    },
+    "usa-motion-prefs": {
+      "usa:change": [
+        "{prefs}"
+      ]
+    },
+    "usa-motion-prompt": {
+      "usa:copy": [
+        "{code, format}"
+      ],
+      "usa:suggest": [
+        "{errors, intent, source}"
+      ]
+    },
+    "usa-motion-spec": {
+      "usa:copy": [
+        "{ok}"
+      ]
+    },
+    "usa-motion-switch": {
+      "usa:change": [
+        "{level}"
+      ]
+    },
+    "usa-music-player": {
+      "usa:<act.dataset.act!>": [
+        "{}"
+      ],
+      "usa:pause": [
+        "{}"
+      ],
+      "usa:play": [
+        "{}"
+      ],
+      "usa:seek": [
+        "{time}"
+      ]
+    },
+    "usa-native-preview": {
+      "usa:replay": [
+        "(none)"
+      ]
+    },
+    "usa-nav-morph": {
+      "usa:change": [
+        "{index}"
+      ]
+    },
+    "usa-navbar": {
+      "usa:hide": [
+        "(none)"
+      ],
+      "usa:show": [
+        "(none)"
+      ]
+    },
+    "usa-notification-bell": {
+      "usa:notify": [
+        "{notice}"
+      ],
+      "usa:read": [
+        "{}"
+      ]
+    },
+    "usa-otp": {
+      "usa:complete": [
+        "{code}"
+      ]
+    },
+    "usa-pagination": {
+      "usa:change": [
+        "{page}"
+      ]
+    },
+    "usa-panorama": {
+      "usa:look": [
+        "{yaw}"
+      ],
+      "usa:xr": [
+        "{mode}"
+      ],
+      "usa:xr-request": [
+        "{yaw}"
+      ]
+    },
+    "usa-parallax-layers": {
+      "usa:progress": [
+        "{progress}"
+      ]
+    },
+    "usa-pause-all": {
+      "usa:pause-all": [
+        "{paused}"
+      ]
+    },
+    "usa-perf-monitor": {
+      "usa:jank": [
+        "{fps}"
+      ]
+    },
+    "usa-physics-playground": {
+      "usa:collision": [
+        "{a, b}"
+      ],
+      "usa:error": [
+        "{error}"
+      ],
+      "usa:load": [
+        "{bodies, format}"
+      ]
+    },
+    "usa-pinch-zoom": {
+      "usa:zoom": [
+        "{scale}"
+      ]
+    },
+    "usa-player": {
+      "usa:finish": [
+        "(none)"
+      ],
+      "usa:ready": [
+        "{duration}"
+      ]
+    },
+    "usa-plugin-card": {
+      "usa:toggle": [
+        "{open}"
+      ],
+      "usa:verified": [
+        "{ok}"
+      ]
+    },
+    "usa-plugin-store": {
+      "usa:install": [
+        "{effects, name}"
+      ],
+      "usa:install-error": [
+        "{message, name}"
+      ]
+    },
+    "usa-popover": {
+      "usa:close": [
+        "(none)"
+      ],
+      "usa:open": [
+        "(none)"
+      ]
+    },
+    "usa-prize-wheel": {
+      "usa:result": [
+        "{index, label}"
+      ]
+    },
+    "usa-product-gallery": {
+      "usa:change": [
+        "{index}"
+      ]
+    },
+    "usa-progress": {
+      "usa:complete": [
+        "(none)"
+      ]
+    },
+    "usa-progress-ring": {
+      "usa:complete": [
+        "{value}"
+      ]
+    },
+    "usa-prop-panel": {
+      "usa:prop": [
+        "{name, value}"
+      ]
+    },
+    "usa-pull-cord": {
+      "usa:change": [
+        "{on}"
+      ]
+    },
+    "usa-pull-refresh": {
+      "usa:refresh": [
+        "{done}"
+      ]
+    },
+    "usa-radar": {
+      "usa:ping": [
+        "{name}"
+      ]
+    },
+    "usa-reactions": {
+      "usa:react": [
+        "{count, emoji, on}"
+      ]
+    },
+    "usa-red-envelope": {
+      "usa:open": [
+        "{amount}"
+      ]
+    },
+    "usa-reveal": {
+      "usa:complete": [
+        "(none)"
+      ],
+      "usa:enter": [
+        "(none)"
+      ],
+      "usa:leave": [
+        "(none)"
+      ]
+    },
+    "usa-rive": {
+      "usa:error": [
+        "{error}"
+      ],
+      "usa:load": [
+        "{animations, artboard, stateMachines}"
+      ],
+      "usa:runtime-missing": [
+        "{message, module}"
+      ]
+    },
+    "usa-route-transition": {
+      "usa:navigate": [
+        "{from, url}"
+      ],
+      "usa:navigated": [
+        "{url}"
+      ]
+    },
+    "usa-scene": {
+      "usa:shot": [
+        "{progress}"
+      ]
+    },
+    "usa-scramble": {
+      "usa:complete": [
+        "(none)"
+      ]
+    },
+    "usa-scroll-progress": {
+      "usa:progress": [
+        "{progress}"
+      ]
+    },
+    "usa-scroll-ring": {
+      "usa:progress": [
+        "{percent, progress}"
+      ],
+      "usa:top": [
+        "(none)"
+      ]
+    },
+    "usa-scroll-scene": {
+      "usa:enter": [
+        "(none)"
+      ],
+      "usa:leave": [
+        "(none)"
+      ],
+      "usa:progress": [
+        "{progress}"
+      ]
+    },
+    "usa-scrolly": {
+      "usa:step": [
+        "{index, name, step}"
+      ]
+    },
+    "usa-segmented": {
+      "usa:change": [
+        "{label, value}"
+      ]
+    },
+    "usa-shader-backdrop": {
+      "usa:backend": [
+        "{backend, error}",
+        "{backend, passes}",
+        "{backend}"
+      ]
+    },
+    "usa-sheet": {
+      "usa:close": [
+        "{value}"
+      ],
+      "usa:open": [
+        "{trigger}"
+      ]
+    },
+    "usa-shortcut": {
+      "usa:trigger": [
+        "{keys}"
+      ]
+    },
+    "usa-skeleton": {
+      "usa:loaded": [
+        "(none)"
+      ]
+    },
+    "usa-skeleton-reveal": {
+      "usa:reveal": [
+        "(none)"
+      ]
+    },
+    "usa-sketch-chart": {
+      "usa:drawn": [
+        "(none)"
+      ]
+    },
+    "usa-slider": {
+      "usa:change": [
+        "{value}"
+      ],
+      "usa:input": [
+        "{value}"
+      ]
+    },
+    "usa-smooth-scroll": {
+      "usa:ready": [
+        "{active}"
+      ],
+      "usa:scroll": [
+        "{progress, velocity}"
+      ]
+    },
+    "usa-snap-carousel": {
+      "usa:change": [
+        "{from, index}"
+      ]
+    },
+    "usa-spatial-card": {
+      "usa:focus-depth": [
+        "{active}"
+      ]
+    },
+    "usa-splash": {
+      "usa:done": [
+        "(none)"
+      ]
+    },
+    "usa-split-text": {
+      "usa:complete": [
+        "(none)"
+      ]
+    },
+    "usa-spring": {
+      "usa:complete": [
+        "{effect}"
+      ]
+    },
+    "usa-stagger": {
+      "usa:complete": [
+        "(none)"
+      ],
+      "usa:enter": [
+        "(none)"
+      ]
+    },
+    "usa-star-rating": {
+      "usa:change": [
+        "{value}"
+      ]
+    },
+    "usa-stepper": {
+      "usa:change": [
+        "{value}"
+      ]
+    },
+    "usa-sticky-wall": {
+      "usa:pick": [
+        "{index}"
+      ]
+    },
+    "usa-stories": {
+      "usa:change": [
+        "{index}"
+      ],
+      "usa:end": [
+        "(none)"
+      ]
+    },
+    "usa-story": {
+      "usa:step": [
+        "{index}"
+      ]
+    },
+    "usa-suggestion-chips": {
+      "usa:pick": [
+        "{index, text}"
+      ]
+    },
+    "usa-swipe-deck": {
+      "usa:empty": [
+        "{}"
+      ],
+      "usa:swipe": [
+        "{card, dir, index}"
+      ]
+    },
+    "usa-swipeable": {
+      "usa:dismiss": [
+        "{direction}"
+      ],
+      "usa:swipe": [
+        "{direction}"
+      ]
+    },
+    "usa-switch": {
+      "usa:change": [
+        "{checked}"
+      ]
+    },
+    "usa-tab-bar": {
+      "usa:change": [
+        "{from, index}"
+      ]
+    },
+    "usa-tabs": {
+      "usa:change": [
+        "{index}"
+      ]
+    },
+    "usa-terminal": {
+      "usa:done": [
+        "(none)"
+      ]
+    },
+    "usa-text-rotate": {
+      "usa:change": [
+        "{index, word}"
+      ]
+    },
+    "usa-text-splitter": {
+      "usa:done": [
+        "(none)"
+      ],
+      "usa:split": [
+        "{count}"
+      ]
+    },
+    "usa-theme-surface": {
+      "usa:theme": [
+        "{theme}"
+      ]
+    },
+    "usa-theme-switcher": {
+      "usa:change": [
+        "{theme}"
+      ]
+    },
+    "usa-timeline": {
+      "usa:complete": [
+        "(none)"
+      ]
+    },
+    "usa-tip": {
+      "usa:close": [
+        "(none)"
+      ],
+      "usa:open": [
+        "(none)"
+      ]
+    },
+    "usa-toast-stack": {
+      "usa:dismiss": [
+        "{id, reason}"
+      ],
+      "usa:show": [
+        "{...o, id}"
+      ]
+    },
+    "usa-toaster": {
+      "usa:toast": [
+        "{element, message, type}"
+      ]
+    },
+    "usa-token-editor": {
+      "usa:change": [
+        "{group, name, tokens}"
+      ],
+      "usa:export": [
+        "{json}"
+      ],
+      "usa:import": [
+        "{problems}"
+      ]
+    },
+    "usa-typewriter": {
+      "usa:complete": [
+        "(none)"
+      ]
+    },
+    "usa-upload-progress": {
+      "usa:done": [
+        "{name}"
+      ],
+      "usa:error": [
+        "{message, name}"
+      ],
+      "usa:retry": [
+        "{name}"
+      ]
+    },
+    "usa-video-card": {
+      "usa:open": [
+        "{src}"
+      ]
+    },
+    "usa-view-switch": {
+      "usa:change": [
+        "{index, name, view}"
+      ]
+    },
+    "usa-voice-button": {
+      "usa:start": [
+        "(none)"
+      ],
+      "usa:stop": [
+        "(none)"
+      ]
+    },
+    "usa-volume-knob": {
+      "usa:change": [
+        "{value}"
+      ],
+      "usa:input": [
+        "{value}"
+      ]
+    },
+    "usa-worker-canvas": {
+      "usa:backend": [
+        "{backend}"
+      ]
+    },
+    "usa-xp-bar": {
+      "usa:levelup": [
+        "{level}"
+      ],
+      "usa:xp": [
+        "{gained, level, xp}"
+      ]
+    }
+  }
+}

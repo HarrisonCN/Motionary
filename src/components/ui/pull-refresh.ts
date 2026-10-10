@@ -106,7 +106,7 @@ export function definePullRefresh(tag = 'usa-pull-refresh'): CustomElementConstr
               this._y.set(0);
               resolve();
             };
-            const ev = new CustomEvent('usa:refresh', { detail: { done }, bubbles: true, cancelable: true });
+            const ev = new CustomEvent('usa:refresh', { detail: { done }, bubbles: true, composed: true, cancelable: true });
             this.dispatchEvent(ev);
             const fn = (this as any).onrefresh;
             if (typeof fn === 'function') Promise.resolve(fn(ev)).then(done, done);

@@ -32,10 +32,20 @@ export function scanSource() {
     const s = readFileSync(file, 'utf8');
     const re = /export function (define\w+)\(tag = '([a-z][a-z0-9]*-[a-z0-9-]+)'/g;
     const hits = [...s.matchAll(re)];
-    hits.forEach((m, i) => {
-      const body = s.slice(m.index, hits[i + 1]?.index ?? s.length);
+    // 13.0.1: `export const defineX = (tag = '…') … => helper(tag, 'variant')` (<usa-modal> / <usa-sheet>) — scanned in the helper
+    const consts = [...s.matchAll(/export const (define\w+)\s*=\s*\(tag = '([a-z][a-z0-9]*-[a-z0-9-]+)'\)[^\n]*?=>\s*(\w+)\(\s*tag\s*(?:,\s*'([\w-]+)')?/g)];
+    const delegated = consts.map((m) => {
+      const at = s.search(new RegExp(`\\nfunction ${m[3]}\\(`));
+      if (at < 0) return null;
+      const end = s.indexOf('\n}\n', at);
+      return { index: at, 0: m[0], 1: m[1], 2: m[2], variant: m[4], body: s.slice(at, end < 0 ? s.length : end + 2) };
+    }).filter(Boolean);
+    [...hits, ...delegated].forEach((m, i) => {
+      const body = m.body ?? s.slice(m.index, hits[i + 1]?.index ?? s.length);
       const attrs = /observedAttributes\(\)[^{]*\{\s*return \[([\s\S]*?)\];/.exec(body); // [\s\S]*?\]; — a spread like `...(X.observedAttributes || [])` must not end the list early
-      const attributes = attrs ? [...attrs[1].matchAll(/'([^']+)'/g)].map((x) => x[1]) : [];
+      const branch = /observedAttributes\(\)[^{]*\{\s*return \w+ === '([\w-]+)' \? \[([^\]]*)\] : \[([^\]]*)\];/.exec(body); // per-variant list
+      const list = attrs ? attrs[1] : branch ? (m.variant === branch[1] ? branch[2] : branch[3]) : '';
+      const attributes = [...list.matchAll(/'([^']+)'/g)].map((x) => x[1]);
       const events = [...new Set([...body.matchAll(/\.emit\(\s*'([\w:-]+)'/g)].map((x) => 'usa:' + x[1]))];
       if (/usa:runtime-missing|runtimeModule</.test(body)) events.push('usa:runtime-missing');
       const slots = [...new Set([...body.matchAll(/<slot(?:\s+name="([\w-]+)")?/g)].map((x) => x[1] || 'default'))];

@@ -14,7 +14,8 @@ import css from './overlay.css?raw';
  *   built-in grab handle).
  *
  * Attributes: `open` (initial), `label`, `persistent` (backdrop click / Esc
- * don't close). Any element with `data-usa-open="<id>"` opens the overlay
+ * don't close). `label`, `persistent`, `effect` and `side` can change at any
+ * time, also while the overlay is open (13.0.1: updated in place). Any element with `data-usa-open="<id>"` opens the overlay
  * with that id; `[data-usa-close]` inside closes it. API: `show(trigger?)`,
  * `close(value?)`, `toggle()`, `opened`. Events: `usa:open`, `usa:close`
  * (`{ value }`). Focus returns to the opener. Reduced motion: no movement,
@@ -59,7 +60,7 @@ function defineOverlay(tag: string, kind: 'modal' | 'sheet'): CustomElementConst
     (Base) => {
       class UsaOverlay extends Base {
         static get observedAttributes(): string[] {
-          return kind === 'modal' ? ['effect'] : ['side'];
+          return kind === 'modal' ? ['effect', 'label', 'persistent'] : ['side', 'label', 'persistent'];
         }
         private _dlg: HTMLDialogElement | null = null;
         private _panel: HTMLElement | null = null;
@@ -76,6 +77,7 @@ function defineOverlay(tag: string, kind: 'modal' | 'sheet'): CustomElementConst
           return this._value;
         }
 
+        // contract-exempt: attr-unobserved(open) — initial state only (documented as `open` (initial)); the element reflects its own state as data-open, so open / close through show() / close() / toggle()
         mount(): void {
           let d = this.querySelector<HTMLDialogElement>(':scope > dialog.usa-ov');
           if (!d) {
@@ -87,16 +89,9 @@ function defineOverlay(tag: string, kind: 'modal' | 'sheet'): CustomElementConst
           }
           this._dlg = d;
           this._panel = d.querySelector('.usa-ov-body');
-          if (kind === 'modal') {
-            const ef = this.str('effect', 'scale');
-            this.dataset.effect = (MODAL_EFFECTS as readonly string[]).includes(ef) ? ef : 'scale';
-          } else {
-            const side = this.str('side', 'right');
-            this.dataset.side = (SHEET_SIDES as readonly string[]).includes(side) ? side : 'right';
-            if (this.dataset.side === 'bottom' && this._panel && !this._panel.querySelector('[data-handle]')) this._panel.prepend(part('div', 'usa-ov-grab', { 'data-handle': '', 'aria-hidden': 'true' }));
-            this.drag();
-          }
-          if (!d.hasAttribute('aria-labelledby')) d.setAttribute('aria-label', this.str('label', kind === 'modal' ? 'Dialog' : 'Panel'));
+          this.syncKind();
+          if (kind === 'sheet') this.drag();
+          this.syncLabel();
           this.listen(d, 'cancel', (e: Event) => {
             e.preventDefault();
             if (!this.flag('persistent')) void this.close();
@@ -108,6 +103,33 @@ function defineOverlay(tag: string, kind: 'modal' | 'sheet'): CustomElementConst
             if (t === d && !this.flag('persistent')) void this.close(); // the ::backdrop
           });
           if (this.flag('open') && !this._open) this.show();
+        }
+
+        // 13.0.1: observed attributes update in place — the default re-mount would close an open overlay without usa:close
+        changed(name: string): void {
+          if (!this._dlg) return super.changed(name);
+          if (name === 'label') this.syncLabel();
+          else if (name !== 'persistent') this.syncKind(); // persistent is read when Esc / the backdrop is used
+        }
+
+        private syncLabel(): void {
+          const d = this._dlg;
+          if (d && !d.hasAttribute('aria-labelledby')) d.setAttribute('aria-label', this.str('label', kind === 'modal' ? 'Dialog' : 'Panel'));
+        }
+
+        private syncKind(): void {
+          if (kind === 'modal') {
+            const ef = this.str('effect', 'scale');
+            this.dataset.effect = (MODAL_EFFECTS as readonly string[]).includes(ef) ? ef : 'scale';
+            return;
+          }
+          const side = this.str('side', 'right');
+          this.dataset.side = (SHEET_SIDES as readonly string[]).includes(side) ? side : 'right';
+          const p = this._panel;
+          if (!p) return;
+          const grab = p.querySelector(':scope > .usa-ov-grab');
+          if (this.dataset.side !== 'bottom') grab?.remove();
+          else if (!p.querySelector('[data-handle]')) p.prepend(part('div', 'usa-ov-grab', { 'data-handle': '', 'aria-hidden': 'true' }));
         }
 
         unmount(): void {
@@ -200,12 +222,12 @@ function defineOverlay(tag: string, kind: 'modal' | 'sheet'): CustomElementConst
         private drag(): void {
           const p = this._panel;
           const d = this._dlg;
-          if (!p || !d || this.dataset.side !== 'bottom') return;
+          if (!p || !d) return;
           let y0 = -1;
           let dy = 0;
           let t0 = 0;
           this.listen(p, 'pointerdown', (e: PointerEvent) => {
-            if (!(e.target as Element).closest('[data-handle]')) return;
+            if (this.dataset.side !== 'bottom' || !(e.target as Element).closest('[data-handle]')) return;
             y0 = e.clientY;
             dy = 0;
             t0 = performance.now();

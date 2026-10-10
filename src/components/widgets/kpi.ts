@@ -16,7 +16,7 @@ export interface UsaKpiElement extends UsaElement {
 }
 
 export function defineKpi(tag = 'usa-kpi'): CustomElementConstructor | undefined {
-  // contract-exempt: attr-unobserved — value: state reflected by the element itself (set the property instead); observing it would re-mount on every change
+  // contract-exempt: attr-unobserved(value) — state reflected by the element itself (set the property instead); observing it would re-mount on every change
   return defineElement(
     tag,
     (Base) => {

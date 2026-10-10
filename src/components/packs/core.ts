@@ -115,7 +115,7 @@ const PRIMITIVES: Record<string, Effect> = {
     on(el, 'click', () => {
       const cart = c.root.querySelector('[data-role="cart"]') || document.querySelector('[data-role="cart"]');
       const item = el.closest('[data-role="product"]')?.querySelector('img, [data-role="thumb"]') || el;
-      if (cart) void flyToCart(item, cart).then(() => cart.dispatchEvent(new CustomEvent('usa:added', { bubbles: true })));
+      if (cart) void flyToCart(item, cart).then(() => cart.dispatchEvent(new CustomEvent('usa:added', { bubbles: true, composed: true })));
     }),
 };
 

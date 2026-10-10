@@ -19,7 +19,7 @@ export interface UsaSwitchElement extends UsaElement {
 export const SWITCH_VARIANTS = ['ios', 'daynight', 'bounce', 'liquid'] as const;
 
 export function defineSwitch(tag = 'usa-switch'): CustomElementConstructor | undefined {
-  // contract-exempt: attr-unobserved — checked: state reflected by the element itself (set the property instead); observing it would re-mount on every change
+  // contract-exempt: attr-unobserved(checked) — state reflected by the element itself (set the property instead); observing it would re-mount on every change
   return defineElement(
     tag,
     (Base) => {

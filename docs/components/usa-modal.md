@@ -4,14 +4,14 @@
 
 6.3: native <dialog> (top layer, focus trap, Esc) with animated open / close and a blurred backdrop — scale, slide-up, flip, or origin: it grows out of the button that opened it. Focus returns to the opener.
 
-- **Category:** transitions · **since** 6.3 · **changed in** 6.6
+- **Category:** transitions · **since** 6.3 · **changed in** 6.6, 13.0
 - **Import:** `import { defineModal } from 'motionary/components/widgets'` then `defineModal();`
 - **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
-- **Attributes:** —
-- **Events:** —
+- **Attributes:** `effect`, `label`, `persistent`
+- **Events:** `usa:open`, `usa:close`
 - **Slots:** —
-- **Methods:** —
-- **Source:** [undefined](../../undefined)
+- **Methods:** `show()`, `close()`, `toggle()`
+- **Source:** [src/components/widgets/overlay.ts](../../src/components/widgets/overlay.ts)
 
 ## Minimal example
 
