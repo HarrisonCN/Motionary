@@ -12,4 +12,4 @@ function registerFormCascade() {
 }
 
 export { effect, registerFormCascade as register, registerFormCascade };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.3.0/dist/effects/form-cascade.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.4.0/dist/effects/form-cascade.js.map

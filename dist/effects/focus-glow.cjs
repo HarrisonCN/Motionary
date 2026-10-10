@@ -16,4 +16,4 @@ function registerFocusGlow() {
 exports.effect = effect;
 exports.register = registerFocusGlow;
 exports.registerFocusGlow = registerFocusGlow;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.3.0/dist/effects/focus-glow.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.4.0/dist/effects/focus-glow.cjs.map

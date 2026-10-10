@@ -14,4 +14,4 @@ function registerLeaves() {
 }
 
 export { effect, registerLeaves as register, registerLeaves };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.3.0/dist/effects/leaves.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.4.0/dist/effects/leaves.js.map

@@ -837,4 +837,4 @@ exports.setMotionLevel = setMotionLevel;
 exports.smoothScroll = smoothScroll;
 exports.supportsViewTransitions = supportsViewTransitions;
 exports.themeTransition = themeTransition;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.3.0/dist/components/page.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.4.0/dist/components/page.cjs.map

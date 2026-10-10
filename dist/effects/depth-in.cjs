@@ -16,4 +16,4 @@ function registerDepthIn() {
 exports.effect = effect;
 exports.register = registerDepthIn;
 exports.registerDepthIn = registerDepthIn;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.3.0/dist/effects/depth-in.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.4.0/dist/effects/depth-in.cjs.map

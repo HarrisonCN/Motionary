@@ -119,4 +119,4 @@ exports.registeredModules = registeredModules;
 exports.registry = registry;
 exports.requireModule = requireModule;
 exports.tierOf = tierOf;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.3.0/dist/chunks/registry-VKfDCYYI.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.4.0/dist/chunks/registry-VKfDCYYI.cjs.map
