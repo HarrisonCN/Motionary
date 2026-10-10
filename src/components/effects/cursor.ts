@@ -13,6 +13,7 @@
  * dispatches `usa-gesture` (`detail: { gesture, … }`). The effect itself goes
  * through `playEffect()`, so reduced motion is honoured there.
  */
+import { raf as sraf, caf as scaf } from '../base';
 import type { EffectContext, EffectDefinition } from '../fx/registry';
 import { playEffect } from '../fx/registry';
 import { defineElement, type UsaElement } from '../base';
@@ -42,14 +43,14 @@ function overlayCanvas(draw: (g: CanvasRenderingContext2D, w: number, h: number,
     }
     g.setTransform(dpr, 0, 0, dpr, 0, 0);
     g.clearRect(0, 0, w, h);
-    if (draw(g, w, h, now)) raf = requestAnimationFrame(frame);
+    if (draw(g, w, h, now)) raf = sraf(frame);
   };
   return {
     kick: () => {
-      if (!raf && g) raf = requestAnimationFrame(frame);
+      if (!raf && g) raf = sraf(frame);
     },
     stop: () => {
-      cancelAnimationFrame(raf);
+      scaf(raf);
       raf = 0;
       c.remove();
     },
@@ -209,7 +210,7 @@ export const CURSOR_FX: EffectDefinition[] = [
         y += (ty - y) * o.ease;
         s.style.setProperty('--sx', `${x.toFixed(1)}px`);
         s.style.setProperty('--sy', `${y.toFixed(1)}px`);
-        raf = Math.abs(tx - x) + Math.abs(ty - y) > 0.3 ? requestAnimationFrame(tick) : 0;
+        raf = Math.abs(tx - x) + Math.abs(ty - y) > 0.3 ? sraf(tick) : 0;
       };
       const move = (e: PointerEvent) => {
         if (!touchOk(e, o)) return;
@@ -217,13 +218,13 @@ export const CURSOR_FX: EffectDefinition[] = [
         tx = e.clientX - rc.left;
         ty = e.clientY - rc.top;
         if (s.style.opacity !== '1') ((x = tx), (y = ty), (s.style.opacity = '1'));
-        if (!raf) raf = requestAnimationFrame(tick);
+        if (!raf) raf = sraf(tick);
       };
       const leave = () => (s.style.opacity = '0');
       el.addEventListener('pointermove', move, { passive: true });
       el.addEventListener('pointerleave', leave);
       return () => {
-        cancelAnimationFrame(raf);
+        scaf(raf);
         el.removeEventListener('pointermove', move);
         el.removeEventListener('pointerleave', leave);
         s.remove();
@@ -312,7 +313,7 @@ export function bindGesture(el: HTMLElement, gesture: GestureName, effect: strin
   };
   const endPress = () => {
     if (!press) return;
-    cancelAnimationFrame(press.raf);
+    scaf(press.raf);
     press = null;
     charge(0);
   };
@@ -330,9 +331,9 @@ export function bindGesture(el: HTMLElement, gesture: GestureName, effect: strin
           endPress();
           el.style.setProperty('--usa-charge', '1');
           fire({ gesture, charge: 1 }, e);
-        } else press.raf = requestAnimationFrame(step);
+        } else press.raf = sraf(step);
       };
-      press.raf = requestAnimationFrame(step);
+      press.raf = sraf(step);
     }
   };
   const move = (e: PointerEvent) => {

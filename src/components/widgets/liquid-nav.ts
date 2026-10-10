@@ -1,3 +1,4 @@
+import { raf as sraf, caf as scaf } from '../base';
 import { defineElement, type UsaElement } from '../base';
 import css from './liquid-nav.css?raw';
 
@@ -55,7 +56,7 @@ export function defineLiquidNav(tag = 'usa-liquid-nav'): CustomElementConstructo
               items[(i + d + items.length) % items.length].focus();
             });
           });
-          requestAnimationFrame(() => this.place(false));
+          sraf(() => this.place(false));
           this.place(false);
           this.listen(window, 'resize', () => this.place(false));
         }

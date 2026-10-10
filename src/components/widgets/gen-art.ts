@@ -1,3 +1,4 @@
+import { raf as sraf, caf as scaf } from '../base';
 import { defineElement, type UsaElement } from '../base';
 import { PALETTES, seededRandom } from '../fx2/genart';
 import css from './gen-art.css?raw';
@@ -57,7 +58,7 @@ export function defineGenArt(tag = 'usa-gen-art'): CustomElementConstructor | un
               this.draw();
             }
           });
-          this.onCleanup(() => cancelAnimationFrame(this._raf));
+          this.onCleanup(() => scaf(this._raf));
         }
         generate(seed = Math.floor(Math.random() * 1e6)): void {
           this._seed = seed;
@@ -72,7 +73,7 @@ export function defineGenArt(tag = 'usa-gen-art'): CustomElementConstructor | un
           const c = this.canvas();
           const ctx = c?.getContext?.('2d');
           if (!c || !ctx) return;
-          cancelAnimationFrame(this._raf);
+          scaf(this._raf);
           const w = Math.max(60, Math.round(this.clientWidth || 300));
           const h = Math.max(60, Math.round(this.clientHeight || 180));
           const dpr = Math.min(2, (typeof devicePixelRatio === 'number' && devicePixelRatio) || 1);
@@ -177,7 +178,7 @@ export function defineGenArt(tag = 'usa-gen-art'): CustomElementConstructor | un
           let i = 0;
           const tick = () => {
             for (let k = 0; k < per && i < steps.length; k++) steps[i++]();
-            if (i < steps.length) this._raf = requestAnimationFrame(tick);
+            if (i < steps.length) this._raf = sraf(tick, this);
           };
           tick();
         }

@@ -402,37 +402,76 @@ export function srText(text: string): HTMLSpanElement {
 // Every component loop goes through one requestAnimationFrame per frame
 // instead of one per element: callbacks are batched, run in order, and a
 // throwing callback no longer starves the others (the first error is rethrown).
+// 13.4: frame budget — once one frame's queued callbacks have used `budget`
+// ms the rest wait for the next frame (oldest first, nobody starves). A
+// callback / loop given an owner element is parked while the document is
+// hidden or the owner is off screen, and dropped once the owner is detached.
 const frameQueue = /*#__PURE__*/ new Map<number, FrameRequestCallback>();
+const owner = /*#__PURE__*/ new Map<unknown, Element>();
 let frameSeq = 1;
 let frameHandle: number | ReturnType<typeof setTimeout> | 0 = 0;
 let frameVia: unknown = null;
-const frameStats = { frames: 0, callbacks: 0, peak: 0, last: 0 };
+const frameStats = { frames: 0, callbacks: 0, peak: 0, last: 0, deferred: 0, parked: 0, budget: 8 };
 const frameListeners = new Set<(t: number, dt: number) => void>();
+const offscreen = /*#__PURE__*/ new WeakSet<Element>();
+let io: IntersectionObserver | undefined;
+/** 0 = run, 1 = park (hidden document / owner off screen), 2 = drop (owner detached). */
+function gate(k: unknown): number {
+  const el = owner.get(k);
+  return el && !el.isConnected ? 2 : typeof document < 'u' && document.hidden && document.visibilityState == 'hidden' ? 1 : el && offscreen.has(el) ? 1 : 0;
+}
+function own(k: unknown, el?: Element): void {
+  if (!el) return;
+  owner.set(k, el);
+  if (typeof IntersectionObserver < 'u')
+    (io ||= new IntersectionObserver((es) => {
+      for (const e of es) e.isIntersecting ? offscreen.delete(e.target) : offscreen.add(e.target);
+      requestFlush();
+    })).observe(el);
+}
 
 function flushFrame(t: number): void {
   frameHandle = 0;
   const dt = frameStats.last && t > frameStats.last ? t - frameStats.last : 16.7;
   frameStats.last = t;
   frameStats.frames++;
-  const cbs = Array.from(frameQueue.values());
-  frameQueue.clear();
-  frameStats.callbacks += cbs.length;
-  frameStats.peak = Math.max(frameStats.peak, cbs.length);
+  const start = now();
+  let n = 0;
+  let parked = 0;
   let error: unknown = null;
-  for (const cb of cbs) {
+  const run = (id: number, g = gate(id)): unknown => {
+    if (g == 1) return parked++;
+    frameQueue.delete(id);
+    owner.delete(id);
+    if (g) return;
+    n++;
     try {
-      cb(t);
+      (cbs.get(id) as FrameRequestCallback)(t);
     } catch (e) {
       error ??= e;
     }
+  };
+  const cbs = new Map(frameQueue);
+  for (const id of cbs.keys()) {
+    if (n && now() - start > frameStats.budget) {
+      frameStats.deferred++;
+      break;
+    }
+    run(id);
   }
+  frameStats.callbacks += n;
+  frameStats.peak = Math.max(frameStats.peak, n);
+  let live = 0;
+  let pl = 0;
   // 8.0: loops run on the unified motion clock — dt scaled by its rate, frozen while paused
   if (!clk().paused) {
     const cdt = dt * clk().rate;
     clk().time += cdt;
-    frameListeners.forEach((fn) => fn(t, cdt));
-    if (frameListeners.size) requestFlush();
+    frameListeners.forEach((fn) => (gate(fn) ? pl++ : (live++, fn(t, cdt))));
   }
+  frameStats.parked += parked + pl;
+  if (live || frameQueue.size > parked) requestFlush();
+  else if (parked + pl && typeof document < 'u') document.addEventListener('visibilitychange', requestFlush, { once: true });
   if (error) throw error;
 }
 
@@ -444,10 +483,14 @@ function requestFlush(): void {
   frameHandle = native ? native(flushFrame) : setTimeout(() => flushFrame(now()), 16);
 }
 
-/** requestAnimationFrame through the shared scheduler (timeout fallback in jsdom / hidden documents). */
-export const raf = (cb: FrameRequestCallback): number => {
+/**
+ * requestAnimationFrame through the shared scheduler (timeout fallback in jsdom / hidden documents).
+ * 13.4: with an owner `el`, the callback waits while `el` is off screen and is dropped once `el` is detached.
+ */
+export const raf = (cb: FrameRequestCallback, el?: Element): number => {
   const id = frameSeq++;
   frameQueue.set(id, cb);
+  own(id, el);
   requestFlush();
   return id;
 };
@@ -455,18 +498,32 @@ export const raf = (cb: FrameRequestCallback): number => {
 export const now = (): number => (typeof performance !== 'undefined' ? performance.now() : Date.now());
 export const caf = (id: number): void => {
   frameQueue.delete(id);
+  owner.delete(id);
 };
 
-/** Run `fn(time, dt)` every frame on the shared scheduler until the returned function is called. */
-export function onFrame(fn: (t: number, dt: number) => void): () => void {
+/**
+ * Run `fn(time, dt)` every frame on the shared scheduler until the returned function is called.
+ * 13.4: with an owner `el`, the loop is paused while `el` is off screen or detached (every loop pauses while the document is hidden).
+ */
+export function onFrame(fn: (t: number, dt: number) => void, el?: Element): () => void {
   frameListeners.add(fn);
+  own(fn, el);
   if (!clk().paused) requestFlush();
-  return () => frameListeners.delete(fn);
+  return () => {
+    frameListeners.delete(fn);
+    owner.delete(fn);
+  };
 }
 
-/** Scheduler counters: frames flushed, callbacks run, peak callbacks in one frame, pending now. */
-export function schedulerStats(): { frames: number; callbacks: number; peak: number; pending: number; loops: number } {
-  return { frames: frameStats.frames, callbacks: frameStats.callbacks, peak: frameStats.peak, pending: frameQueue.size, loops: frameListeners.size };
+/** Scheduler counters: frames flushed, callbacks run, peak callbacks in one frame, pending now, loops, frames cut short by the budget, callbacks / loops parked. */
+export function schedulerStats(): { frames: number; callbacks: number; peak: number; pending: number; loops: number; deferred: number; parked: number; budget: number } {
+  const { frames, callbacks, peak, deferred, parked, budget } = frameStats;
+  return { frames, callbacks, peak, pending: frameQueue.size, loops: frameListeners.size, deferred, parked, budget };
+}
+
+/** 13.4: per-frame time budget in ms for queued callbacks (default 8; `Infinity` = never split a frame). */
+export function setFrameBudget(ms: number): void {
+  frameStats.budget = ms > 0 ? ms : 8;
 }
 
 // --- unified motion clock (8.0) --------------------------------------------------

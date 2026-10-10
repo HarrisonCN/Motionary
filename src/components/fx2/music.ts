@@ -14,6 +14,7 @@
  *
  * Reduced motion: backgrounds draw one static frame, loops do nothing.
  */
+import { raf as sraf, caf as scaf } from '../base';
 import type { EffectContext, EffectDefinition } from '../fx/registry';
 import { registerEffects } from '../fx/registry';
 import { canvasBackground, type GenerativeSpec } from '../effects/generative';
@@ -71,11 +72,11 @@ const loop = (name: string, description: string, defaults: Record<string, unknow
     const f = (now: number) => {
       const t = (now - t0) / 1000;
       apply(el, musicSample(t), t, o, st);
-      raf = requestAnimationFrame(f);
+      raf = sraf(f);
     };
-    if (typeof requestAnimationFrame === 'function') raf = requestAnimationFrame(f);
+    if (typeof requestAnimationFrame === 'function') raf = sraf(f);
     const stop = () => {
-      cancelAnimationFrame(raf);
+      scaf(raf);
       el.style.transform = prev;
     };
     ctx.onCleanup(stop);

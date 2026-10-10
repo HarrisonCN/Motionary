@@ -1,3 +1,4 @@
+import { raf as sraf, caf as scaf } from '../base';
 import { defineElement, type UsaElement } from '../base';
 import css from './pull-cord.css?raw';
 
@@ -54,7 +55,7 @@ export function definePullCord(tag = 'usa-pull-cord'): CustomElementConstructor 
             }
           });
           this.listen(this, 'pointerdown', (e: PointerEvent) => this.drag(e));
-          this.onCleanup(() => this._raf && cancelAnimationFrame(this._raf));
+          this.onCleanup(() => this._raf && scaf(this._raf));
         }
 
         private sync(): void {
@@ -88,10 +89,10 @@ export function definePullCord(tag = 'usa-pull-cord'): CustomElementConstructor 
             this._x += this._vx * dt;
             this._y += this._vy * dt;
             this.draw();
-            if (Math.abs(this._x) + Math.abs(this._y) + Math.abs(this._vx) + Math.abs(this._vy) > 0.05) this._raf = requestAnimationFrame(f);
+            if (Math.abs(this._x) + Math.abs(this._y) + Math.abs(this._vx) + Math.abs(this._vy) > 0.05) this._raf = sraf(f, this);
             else ((this._raf = 0), (this._x = this._y = this._vx = this._vy = 0), this.draw());
           };
-          if (!this._raf) this._raf = requestAnimationFrame(f);
+          if (!this._raf) this._raf = sraf(f, this);
         }
 
         /** Pull once (keyboard / click): tug the cord and toggle. */
@@ -108,7 +109,7 @@ export function definePullCord(tag = 'usa-pull-cord'): CustomElementConstructor 
           const y0 = e.clientY;
           const x0 = e.clientX;
           let moved = false;
-          if (this._raf) (cancelAnimationFrame(this._raf), (this._raf = 0));
+          if (this._raf) (scaf(this._raf), (this._raf = 0));
           const move = (ev: PointerEvent) => {
             moved = moved || Math.abs(ev.clientY - y0) > 4;
             this._y = Math.max(0, Math.min(50, ev.clientY - y0));

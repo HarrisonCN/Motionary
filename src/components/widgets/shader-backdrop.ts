@@ -1,3 +1,4 @@
+import { raf as sraf, caf as scaf } from '../base';
 import { defineElement, type UsaElement } from '../base';
 import css from './shader-backdrop.css?raw';
 
@@ -142,15 +143,15 @@ export function defineShaderBackdrop(tag = 'usa-shader-backdrop'): CustomElement
             if (posts.length) fit(w, h);
             run(scene, w, h, t, null, posts.length ? targets[0].fb : null);
             posts.forEach((p, i) => run(p, w, h, t, targets[i % 2].tex, i === posts.length - 1 ? null : targets[(i + 1) % 2].fb));
-            if (visible && !this.reduced) raf = requestAnimationFrame(frame);
+            if (visible && !this.reduced) raf = sraf(frame);
           };
           this.inView((v) => {
             visible = v;
-            if (v && !raf) raf = requestAnimationFrame(frame);
+            if (v && !raf) raf = sraf(frame);
           });
           this.onCleanup(() => {
             stop = true;
-            raf && cancelAnimationFrame(raf);
+            raf && scaf(raf);
             gl.getExtension('WEBGL_lose_context')?.loseContext();
           });
         }

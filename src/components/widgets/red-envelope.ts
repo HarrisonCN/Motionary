@@ -1,3 +1,4 @@
+import { raf as sraf, caf as scaf } from '../base';
 import { defineElement, type UsaElement } from '../base';
 import css from './red-envelope.css?raw';
 
@@ -57,9 +58,9 @@ export function defineRedEnvelope(tag = 'usa-red-envelope'): CustomElementConstr
             const step = () => {
               const k = Math.min(1, (performance.now() - t0 - 350) / 700);
               amt.textContent = fmt(amount * Math.max(0, 1 - Math.pow(1 - Math.max(0, k), 3)));
-              if (k < 1 && this.isConnected) requestAnimationFrame(step);
+              if (k < 1 && this.isConnected) sraf(step);
             };
-            requestAnimationFrame(step);
+            sraf(step);
             const coins = this.querySelector('.usa-re-coins') as HTMLElement;
             for (let i = 0; i < 7; i++) {
               const c = document.createElement('i');

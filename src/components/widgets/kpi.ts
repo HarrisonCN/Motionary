@@ -1,3 +1,4 @@
+import { raf as sraf, caf as scaf } from '../base';
 import { defineElement, type UsaElement } from '../base';
 import { parseFigureText } from './shared-figure';
 import { localeAttr } from './shared';
@@ -50,7 +51,7 @@ export function defineKpi(tag = 'usa-kpi'): CustomElementConstructor | undefined
           if (ds) ds.textContent = delta;
           this.setAttribute('role', 'group');
           this.setAttribute('aria-label', [this.str('label', ''), this.value, delta && `(${delta})`, this.str('caption', '')].filter(Boolean).join(' '));
-          this.onCleanup(() => cancelAnimationFrame(this._raf));
+          this.onCleanup(() => scaf(this._raf));
           const f = parseFigureText(this.value);
           this._shown = this.reduced || !f ? (f?.n ?? 0) : 0;
           this.write(this._shown);
@@ -78,15 +79,15 @@ export function defineKpi(tag = 'usa-kpi'): CustomElementConstructor | undefined
             this._shown = to;
             return this.write(to);
           }
-          cancelAnimationFrame(this._raf);
+          scaf(this._raf);
           const t0 = performance.now();
           const step = (now: number) => {
             const k = Math.min(1, (now - t0) / 1100);
             this._shown = from + (to - from) * (1 - Math.pow(1 - k, 3));
             this.write(this._shown);
-            if (k < 1) this._raf = requestAnimationFrame(step);
+            if (k < 1) this._raf = sraf(step, this);
           };
-          this._raf = requestAnimationFrame(step);
+          this._raf = sraf(step, this);
           if (flash) this.motion(this, [{ boxShadow: '0 0 0 0 rgba(124,92,255,.5)' }, { boxShadow: '0 0 0 10px rgba(124,92,255,0)' }], { duration: 700, easing: 'ease-out' });
         }
       }

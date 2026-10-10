@@ -1,3 +1,4 @@
+import { raf as sraf, caf as scaf } from '../base';
 import { defineElement, type UsaElement } from '../base';
 import { ownChildren } from './shared';
 import css from './dock.css?raw';
@@ -45,11 +46,11 @@ export function defineDock(tag = 'usa-dock'): CustomElementConstructor | undefin
           });
           this.listen(this, 'pointermove', (e: PointerEvent) => {
             const v = this.dataset.orientation === 'vertical' ? e.clientY : e.clientX;
-            if (!this._raf) this._raf = typeof requestAnimationFrame === 'function' ? requestAnimationFrame(() => ((this._raf = 0), this.magnifyAt(v))) : (this.magnifyAt(v), 0);
+            if (!this._raf) this._raf = typeof requestAnimationFrame === 'function' ? sraf(() => ((this._raf = 0), this.magnifyAt(v))) : (this.magnifyAt(v), 0);
           });
           this.listen(this, 'pointerleave', () => this.magnifyAt(null));
           this.onCleanup(() => {
-            if (this._raf && typeof cancelAnimationFrame === 'function') cancelAnimationFrame(this._raf);
+            if (this._raf && typeof cancelAnimationFrame === 'function') scaf(this._raf);
           });
         }
 

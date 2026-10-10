@@ -19,6 +19,7 @@
  * Reduced motion: the visual effects are skipped, beats play no effects and
  * the CSS variables stay at 0 — audio itself keeps playing.
  */
+import { raf as sraf, caf as scaf } from '../base';
 import type { EffectDefinition } from '../fx/registry';
 import { playEffect } from '../fx/registry';
 import { defineElement, prefersReducedMotion, type UsaElement } from '../base';
@@ -134,7 +135,7 @@ export async function enableAudio(input: AudioInput = 'mic', opts: { fftSize?: n
     stop: () => {
       if (current === self) {
         current = null;
-        if (raf && typeof cancelAnimationFrame === 'function') cancelAnimationFrame(raf);
+        if (raf && typeof cancelAnimationFrame === 'function') scaf(raf);
         raf = 0;
       }
       try {
@@ -197,7 +198,7 @@ function loop(now: number): void {
 }
 
 function kick(): void {
-  if (!raf && current && typeof requestAnimationFrame === 'function') raf = requestAnimationFrame(loop);
+  if (!raf && current && typeof requestAnimationFrame === 'function') raf = sraf(loop);
 }
 
 /** Call `cb` on every detected beat of the current audio source. Returns an unsubscribe. */

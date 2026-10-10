@@ -1,3 +1,4 @@
+import { raf as sraf, caf as scaf } from '../base';
 import { defineElement, type UsaElement } from '../base';
 import { ownChildren } from './shared';
 import css from './lyrics.css?raw';
@@ -80,10 +81,10 @@ export function defineLyrics(tag = 'usa-lyrics'): CustomElementConstructor | und
             const f = () => {
               const t = (src as unknown as { currentTime?: number }).currentTime;
               if (typeof t === 'number' && Math.abs(t - this._time) > 0.01) this.time = t;
-              this._raf = requestAnimationFrame(f);
+              this._raf = sraf(f, this);
             };
-            this._raf = requestAnimationFrame(f);
-            this.onCleanup(() => cancelAnimationFrame(this._raf));
+            this._raf = sraf(f, this);
+            this.onCleanup(() => scaf(this._raf));
           }
           this.update();
         }

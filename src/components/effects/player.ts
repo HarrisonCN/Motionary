@@ -23,6 +23,7 @@
  * play, pause, seek, change rate and be scrubbed by scroll
  * (`trigger="scroll"`). Reduced motion: jumps to the end state, effects skipped.
  */
+import { raf as sraf, caf as scaf } from '../base';
 import { playEffect } from '../fx/registry';
 import { defineElement, prefersReducedMotion, type UsaElement } from '../base';
 import { TIMELINE_PRESETS } from '../timeline/core';
@@ -167,7 +168,7 @@ export function createPlayer(root: HTMLElement, animation: string | AnimationJSO
         return;
       }
     }
-    raf = requestAnimationFrame(frame);
+    raf = sraf(frame);
   };
   const player: Player = {
     get duration() {
@@ -198,11 +199,11 @@ export function createPlayer(root: HTMLElement, animation: string | AnimationJSO
       playing = true;
       last = performance.now();
       fireDue();
-      raf = requestAnimationFrame(frame);
+      raf = sraf(frame);
     },
     pause() {
       playing = false;
-      cancelAnimationFrame(raf);
+      scaf(raf);
       raf = 0;
     },
     seek(ms: number) {
@@ -284,10 +285,10 @@ export function definePlayer(tag = 'usa-player'): CustomElementConstructor | und
               f = 0;
               p.seek(storyProgress(this) * p.duration);
             };
-            const kick = () => void (f ||= requestAnimationFrame(upd));
+            const kick = () => void (f ||= sraf(upd));
             this.listen(window, 'scroll', kick, { passive: true });
             this.listen(window, 'resize', kick);
-            this.onCleanup(() => cancelAnimationFrame(f));
+            this.onCleanup(() => scaf(f));
             upd();
           }
           if (this.flag('controls')) this.mountControls(p);

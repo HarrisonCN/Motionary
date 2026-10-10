@@ -1,3 +1,4 @@
+import { raf as sraf, caf as scaf } from '../base';
 import { defineElement, type UsaElement } from '../base';
 import css from './gpu-particles.css?raw';
 
@@ -99,7 +100,7 @@ export function defineGpuParticles(tag = 'usa-gpu-particles'): CustomElementCons
             let last = 0, t = 0;
             const loop = (now: number) => {
               if (stop) return;
-              requestAnimationFrame(loop);
+              sraf(loop);
               if (!visible && last) return;
               const dt = last ? Math.min(0.05, (now - last) / 1000) : 0.016;
               last = now;
@@ -127,7 +128,7 @@ export function defineGpuParticles(tag = 'usa-gpu-particles'): CustomElementCons
               }
               if (this.reduced) stop = true;
             };
-            requestAnimationFrame(loop);
+            sraf(loop);
           };
           if (!gpu) return start2d();
           (async () => {
@@ -158,7 +159,7 @@ export function defineGpuParticles(tag = 'usa-gpu-particles'): CustomElementCons
             let last = 0, t = 0;
             const loop = (now: number) => {
               if (stop) return;
-              requestAnimationFrame(loop);
+              sraf(loop);
               if (!visible && last) return;
               const dt = last ? Math.min(0.05, (now - last) / 1000) : 0.016;
               last = now;
@@ -181,7 +182,7 @@ export function defineGpuParticles(tag = 'usa-gpu-particles'): CustomElementCons
               dev.queue.submit([enc.finish()]);
               if (this.reduced) stop = true;
             };
-            requestAnimationFrame(loop);
+            sraf(loop);
           })().catch(() => !stop && start2d());
         }
       }

@@ -15,6 +15,7 @@
  * (the gallery stacks vertically), counters show final values, the rest is
  * class changes only.
  */
+import { raf as sraf, caf as scaf } from '../base';
 import { defineElement, type UsaElement } from '../base';
 
 export const STORY_TEMPLATES = ['pin', 'gallery', 'zoom', 'compare', 'counter', 'highlight'] as const;
@@ -148,19 +149,19 @@ export function defineStory(tag = 'usa-story'): CustomElementConstructor | undef
           const tick = (now: number) => {
             const k = clamp((now - t0) / dur);
             el.textContent = formatCount(target, 1 - (1 - k) ** 3);
-            if (k < 1) requestAnimationFrame(tick);
+            if (k < 1) sraf(tick);
           };
-          requestAnimationFrame(tick);
+          sraf(tick);
         }
         mount(): void {
           this.toggleAttribute('data-static', this.reduced);
           if (this.template === 'compare') this.mountCompare();
           const kick = () => {
-            if (!this.frame) this.frame = requestAnimationFrame(() => this.update());
+            if (!this.frame) this.frame = sraf(() => this.update(), this);
           };
           this.listen(window, 'scroll', kick, { passive: true });
           this.listen(window, 'resize', kick);
-          this.onCleanup(() => cancelAnimationFrame(this.frame));
+          this.onCleanup(() => scaf(this.frame));
           this.update();
         }
         private mountCompare(): void {

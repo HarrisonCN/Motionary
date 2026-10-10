@@ -19,6 +19,7 @@
  * Reduced motion: surfaces stay lit from a fixed angle (no tracking),
  * `god-rays` draws one still frame.
  */
+import { raf as sraf, caf as scaf } from '../base';
 import type { EffectContext, EffectDefinition } from '../fx/registry';
 import { registerEffects } from '../fx/registry';
 import { canvasBackground, hexRgb } from '../effects/generative';
@@ -37,7 +38,7 @@ export function trackPointer(el: HTMLElement, ctx: EffectContext, fn: (x: number
     fn(px, py, inside);
   };
   const queue = () => {
-    if (!raf) raf = typeof requestAnimationFrame === 'function' ? requestAnimationFrame(flush) : (flush(), 0);
+    if (!raf) raf = typeof requestAnimationFrame === 'function' ? sraf(flush) : (flush(), 0);
   };
   const move = (e: PointerEvent) => {
     const r = el.getBoundingClientRect();
@@ -55,7 +56,7 @@ export function trackPointer(el: HTMLElement, ctx: EffectContext, fn: (x: number
   el.addEventListener('pointermove', move);
   el.addEventListener('pointerleave', leave);
   return () => {
-    if (raf && typeof cancelAnimationFrame === 'function') cancelAnimationFrame(raf);
+    if (raf && typeof cancelAnimationFrame === 'function') scaf(raf);
     el.removeEventListener('pointermove', move);
     el.removeEventListener('pointerleave', leave);
   };

@@ -1,3 +1,4 @@
+import { raf as sraf, caf as scaf } from '../base';
 import { defineElement, type UsaElement } from '../base';
 import css from './sparkline.css?raw';
 
@@ -56,7 +57,7 @@ export function defineSparkline(tag = 'usa-sparkline'): CustomElementConstructor
           this.setAttribute('role', 'img');
           this.listen(this, 'pointermove', (e: PointerEvent) => this.hover(e));
           this.listen(this, 'pointerleave', () => this.removeAttribute('data-hover'));
-          this.onCleanup(() => cancelAnimationFrame(this._raf));
+          this.onCleanup(() => scaf(this._raf));
           this.render(null);
           this.inView((vis) => {
             if (!vis || this._drawn) return;
@@ -100,15 +101,15 @@ export function defineSparkline(tag = 'usa-sparkline'): CustomElementConstructor
             bars.innerHTML = this._data.map((v, i) => `<rect x="${(i * w + w * 0.15).toFixed(2)}" width="${(w * 0.7).toFixed(2)}" y="${(30 - ((v - lo) / (hi - lo || 1)) * 28).toFixed(2)}" height="${(((v - lo) / (hi - lo || 1)) * 28).toFixed(2)}" rx="1"/>`).join('');
           }
           if (!from || from.length !== to.length || this.reduced || typeof requestAnimationFrame !== 'function') return apply(to);
-          cancelAnimationFrame(this._raf);
+          scaf(this._raf);
           const t0 = performance.now();
           const f = (now: number) => {
             const k = Math.min(1, (now - t0) / 500);
             const e = 1 - Math.pow(1 - k, 3);
             apply(to.map(([x, y], i) => [from[i][0] + (x - from[i][0]) * e, from[i][1] + (y - from[i][1]) * e]));
-            if (k < 1) this._raf = requestAnimationFrame(f);
+            if (k < 1) this._raf = sraf(f, this);
           };
-          this._raf = requestAnimationFrame(f);
+          this._raf = sraf(f, this);
         }
 
         private hover(e: PointerEvent): void {

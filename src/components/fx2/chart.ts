@@ -15,6 +15,7 @@
  *
  * Reduced motion: final state with a short fade (sankey-flow is static).
  */
+import { raf as sraf, caf as scaf } from '../base';
 import type { EffectContext, EffectDefinition } from '../fx/registry';
 import { registerEffects } from '../fx/registry';
 import { all } from '../effects/shared';
@@ -132,11 +133,11 @@ export const CHART_FX: EffectDefinition[] = [
           const k = Math.min(1, (now - t0) / o.duration);
           const e = 1 - Math.pow(1 - k, 3);
           jobs.forEach(({ t, f }) => (t.textContent = out(f, f.n * e)));
-          if (k < 1) raf = requestAnimationFrame(step);
+          if (k < 1) raf = sraf(step);
           else resolve();
         };
-        raf = requestAnimationFrame(step);
-        ctx.onCleanup(() => cancelAnimationFrame(raf));
+        raf = sraf(step);
+        ctx.onCleanup(() => scaf(raf));
       });
     },
   },

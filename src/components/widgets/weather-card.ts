@@ -1,3 +1,4 @@
+import { raf as sraf, caf as scaf } from '../base';
 import { defineElement, type UsaElement } from '../base';
 import css from './weather-card.css?raw';
 
@@ -88,10 +89,10 @@ export function defineWeatherCard(tag = 'usa-weather-card'): CustomElementConstr
             const f = (now: number) => {
               const k = Math.min(1, (now - t0) / 900);
               el.textContent = Math.round(from + (Math.round(temp) - from) * (1 - Math.pow(1 - k, 3))) + unit;
-              if (k < 1) raf = requestAnimationFrame(f);
+              if (k < 1) raf = sraf(f);
             };
-            raf = requestAnimationFrame(f);
-            this.onCleanup(() => cancelAnimationFrame(raf));
+            raf = sraf(f);
+            this.onCleanup(() => scaf(raf));
           }
         }
       }

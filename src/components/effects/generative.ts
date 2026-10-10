@@ -9,6 +9,7 @@
  * render scale drops when frames get slow and recovers when they are fast.
  * Reduced motion: one static frame, no loop.
  */
+import { raf as sraf, caf as scaf } from '../base';
 import type { EffectContext, EffectDefinition } from '../fx/registry';
 import { PALETTE } from './shared';
 
@@ -99,12 +100,12 @@ export function canvasBackground(el: HTMLElement, fx: EffectContext, spec: Gener
       resize();
     }
     spec.draw({ ctx, w, h, t: (now - t0) / 1000, quality, state, o });
-    if (visible && !document.hidden) raf = requestAnimationFrame(frame);
+    if (visible && !document.hidden) raf = sraf(frame);
   };
   const start = () => {
     if (!raf && ctx && !fx.reduced) {
       last = performance.now();
-      raf = requestAnimationFrame(frame);
+      raf = sraf(frame);
     }
   };
   resize();
@@ -123,7 +124,7 @@ export function canvasBackground(el: HTMLElement, fx: EffectContext, spec: Gener
   document.addEventListener('visibilitychange', vis);
   start();
   return () => {
-    cancelAnimationFrame(raf);
+    scaf(raf);
     raf = 0;
     io?.disconnect();
     ro?.disconnect();

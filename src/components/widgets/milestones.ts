@@ -1,3 +1,4 @@
+import { raf as sraf, caf as scaf } from '../base';
 import { defineElement, type UsaElement } from '../base';
 import { ownChildren, part } from './shared';
 import css from './milestones.css?raw';
@@ -59,12 +60,12 @@ export function defineMilestones(tag = 'usa-milestones'): CustomElementConstruct
             return;
           }
           const on = () => {
-            if (!this._raf) this._raf = typeof requestAnimationFrame === 'function' ? requestAnimationFrame(() => this.update()) : (this.update(), 0);
+            if (!this._raf) this._raf = typeof requestAnimationFrame === 'function' ? sraf(() => this.update()) : (this.update(), 0);
           };
           this.listen(window, 'scroll', on, { passive: true });
           this.listen(window, 'resize', on);
           this.onCleanup(() => {
-            if (this._raf && typeof cancelAnimationFrame === 'function') cancelAnimationFrame(this._raf);
+            if (this._raf && typeof cancelAnimationFrame === 'function') scaf(this._raf);
           });
           this.update();
         }

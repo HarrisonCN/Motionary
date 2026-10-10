@@ -1,3 +1,4 @@
+import { raf as sraf, caf as scaf } from '../base';
 import { defineElement, type UsaElement } from '../base';
 import { pickEngine, timelineName, viewProgress } from './scroll-driven';
 import css from './parallax-layers.css?raw';
@@ -78,7 +79,7 @@ export function defineParallaxLayers(tag = 'usa-parallax-layers'): CustomElement
               this.emit('progress', { progress: this.p });
             };
             const onScroll = () => {
-              if (!raf) raf = requestAnimationFrame(update);
+              if (!raf) raf = sraf(update);
             };
             let visible = false;
             this.inView((v) => {
@@ -87,7 +88,7 @@ export function defineParallaxLayers(tag = 'usa-parallax-layers'): CustomElement
             }, { rootMargin: '20% 0px' });
             this.listen(window, 'scroll', () => visible && onScroll(), { passive: true });
             this.listen(window, 'resize', onScroll, { passive: true });
-            this.onCleanup(() => raf && cancelAnimationFrame(raf));
+            this.onCleanup(() => raf && scaf(raf));
             update();
           }
           if (this.flag('pointer')) {
