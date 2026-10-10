@@ -7,7 +7,7 @@ import css from './motion-prompt.css?raw';
  * what you want ("fade the cards up slowly, one after another" / "卡片从下往上
  * 依次淡入") and get a live preview plus ready code: Web Animations, CSS or a
  * Motionary component. Runs `describeMotion()` from
- * `motionary/components/ai` — a small deterministic parser (English and
+ * `motionary/tooling/ai` — a small deterministic parser (English and
  * Chinese), **no model and no network**; the same parser backs the
  * `suggest_motion` tool of `motionary-mcp`.
  *

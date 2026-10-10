@@ -6,7 +6,7 @@ Icons that morph point-by-point with a spring: play ↔ pause, menu ↔ close, p
 
 - **Category:** click · **since** 2.5 · **changed in** 6.6
 - **Import:** `import { defineIconMorph } from 'motionary/components/click'` then `defineIconMorph();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>`
 - **Attributes:** `icons`, `size`, `toggle`, `index`, `preset`, `labels`
 - **Events:** `usa:change`
 - **Slots:** —

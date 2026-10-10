@@ -6,7 +6,7 @@
 
 - **Category:** feedback · **since** 6.4
 - **Import:** `import { defineProgressRing } from 'motionary/components/widgets'` then `defineProgressRing();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `variant`, `value`, `max`, `gradient`, `no-label`, `duration`
 - **Events:** `usa:complete`
 - **Slots:** —

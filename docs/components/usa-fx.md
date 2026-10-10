@@ -6,7 +6,7 @@
 
 - **Category:** fx · **since** 5.0 · **changed in** 5.1, 5.9, 6.0
 - **Import:** `import { defineFx } from 'motionary/components/fx'` then `defineFx();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>`
 - **Attributes:** `effect`, `trigger`, `options`, `self`, `once`
 - **Events:** —
 - **Slots:** —

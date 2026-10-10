@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 8.2
 - **Import:** `import { defineTerminal } from 'motionary/components/widgets'` then `defineTerminal();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `title`, `prompt`, `theme`, `speed`, `loop`
 - **Events:** `usa:done`
 - **Slots:** —

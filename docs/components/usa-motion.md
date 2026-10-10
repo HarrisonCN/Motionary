@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 9.0
 - **Import:** `import { defineMotion } from 'motionary/components/widgets'` then `defineMotion();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `rules`
 - **Events:** `usa:motion-error`
 - **Slots:** —

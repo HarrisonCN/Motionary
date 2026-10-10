@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 8.0
 - **Import:** `import { defineHydrate } from 'motionary/components/widgets'` then `defineHydrate();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `effect`, `stagger`, `duration`
 - **Events:** `usa:hydrated`
 - **Slots:** —

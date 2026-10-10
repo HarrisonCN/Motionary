@@ -6,7 +6,7 @@ The circle draws itself, then a check, cross or exclamation strokes in with a po
 
 - **Category:** feedback · **since** 2.2 · **changed in** 2.9, 3.0
 - **Import:** `import { defineCheck } from 'motionary/components/feedback'` then `defineCheck();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>`
 - **Attributes:** `kind`, `size`, `label`, `start`
 - **Events:** `usa:complete`
 - **Slots:** —

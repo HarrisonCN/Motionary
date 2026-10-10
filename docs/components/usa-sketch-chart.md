@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 8.5 · **changed in** 11.8
 - **Import:** `import { defineSketchChart } from 'motionary/components/widgets'` then `defineSketchChart();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `values`, `labels`, `type`, `color`, `label`
 - **Events:** `usa:drawn`
 - **Slots:** —

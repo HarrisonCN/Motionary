@@ -6,7 +6,7 @@
 
 - **Category:** fx · **since** 5.6 · **changed in** 7.1, 11.8, 12.0
 - **Import:** `import { defineAudio } from 'motionary/components/effects'` then `defineAudio();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>`
 - **Attributes:** `source`, `label`, `threshold`, `cooldown`
 - **Events:** `usa:beat`, `usa:audio-error`
 - **Slots:** —

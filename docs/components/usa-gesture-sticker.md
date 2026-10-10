@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 8.7
 - **Import:** `import { defineGestureSticker } from 'motionary/components/widgets'` then `defineGestureSticker();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `min`, `max`, `label`
 - **Events:** `usa:transform`
 - **Slots:** —

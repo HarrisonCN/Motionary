@@ -6,7 +6,7 @@ Pull down at the top of a list: the spinner stretches in with rubber-band resist
 
 - **Category:** ui · **since** 2.6 · **changed in** 6.8
 - **Import:** `import { definePullRefresh } from 'motionary/components/ui'` then `definePullRefresh();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>`
 - **Attributes:** `threshold`, `disabled`, `label`
 - **Events:** —
 - **Slots:** —

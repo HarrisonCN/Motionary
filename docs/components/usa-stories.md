@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 6.2
 - **Import:** `import { defineStories } from 'motionary/components/widgets'` then `defineStories();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `duration`, `loop`
 - **Events:** `usa:end`, `usa:change`
 - **Slots:** —

@@ -6,7 +6,7 @@ Decodes text out of random glyphs, left to right. Trigger on view, hover/focus o
 
 - **Category:** text · **since** 2.2
 - **Import:** `import { defineScramble } from 'motionary/components/text'` then `defineScramble();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>`
 - **Attributes:** `text`, `trigger`, `duration`, `chars`
 - **Events:** `usa:complete`
 - **Slots:** —

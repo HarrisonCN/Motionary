@@ -6,7 +6,7 @@
 
 - **Category:** feedback · **since** 6.4
 - **Import:** `import { defineSkeletonReveal } from 'motionary/components/widgets'` then `defineSkeletonReveal();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `loading`, `variant`
 - **Events:** `usa:reveal`
 - **Slots:** —

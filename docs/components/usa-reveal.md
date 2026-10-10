@@ -6,7 +6,7 @@ Fade, slide, zoom, blur or flip content in as it enters the viewport. 12 effects
 
 - **Category:** reveal · **since** 2.2 · **changed in** 6.1
 - **Import:** `import { defineReveal } from 'motionary/components/reveal'` then `defineReveal();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>`
 - **Attributes:** `effect`, `distance`, `repeat`, `threshold`, `root-margin`, `duration`, `delay`, `easing`
 - **Events:** `usa:enter`, `usa:leave`, `usa:complete`
 - **Slots:** —

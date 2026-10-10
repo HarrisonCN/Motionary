@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 8.1
 - **Import:** `import { defineFestivalBanner } from 'motionary/components/widgets'` then `defineFestivalBanner();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `theme`, `label`, `dismissible`
 - **Events:** `usa:dismiss`
 - **Slots:** —

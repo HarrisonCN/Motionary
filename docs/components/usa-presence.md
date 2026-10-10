@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 7.4
 - **Import:** `import { definePresence } from 'motionary/components/widgets'` then `definePresence();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `status`, `speaking`, `name`, `src`
 - **Events:** —
 - **Slots:** —

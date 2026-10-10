@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 9.4
 - **Import:** `import { defineHeroVideo } from 'motionary/components/widgets'` then `defineHeroVideo();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `label`, `scrub`, `poster`
 - **Events:** —
 - **Slots:** —

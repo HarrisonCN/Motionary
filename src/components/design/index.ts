@@ -1,5 +1,5 @@
 /**
- * `motionary/design` (= `motionary/components/design`, 9.7) — design-tool
+ * `motionary/tooling/design` (= `motionary/tooling/design`, 9.7) — design-tool
  * integration.
  *
  * - `figmaToMotion(reactions)` — Figma prototype reactions (plugin API

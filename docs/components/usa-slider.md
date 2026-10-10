@@ -6,7 +6,7 @@ A form-associated range slider: spring-following thumb, value bubble, full keybo
 
 - **Category:** ui · **since** 2.6
 - **Import:** `import { defineSlider } from 'motionary/components/ui'` then `defineSlider();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>`
 - **Attributes:** `min`, `max`, `disabled`, `label`, `step`, `value`
 - **Events:** `usa:input`, `usa:change`
 - **Slots:** —

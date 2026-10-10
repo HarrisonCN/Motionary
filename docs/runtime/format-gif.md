@@ -15,11 +15,11 @@ Part of Motionary's own zero-dependency runtime. Size budget: **3.0 KB gzip** (e
 3. **CDN:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/format-gif.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/format-gif.iife.js"></script>
 ```
 
-   ESM from a CDN: `https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/format-gif.js`
+   ESM from a CDN: `https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/format-gif.js`
 
 4. **Import order & registration:** Register the core first, then the module: use(formatGif) also registers the core. CDN: load runtime.iife.js, then runtime/format-gif.iife.js (it registers itself).
 

@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 9.0
 - **Import:** `import { definePluginStore } from 'motionary/components/widgets'` then `definePluginStore();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `query`, `label`
 - **Events:** `usa:install`, `usa:install-error`
 - **Slots:** —

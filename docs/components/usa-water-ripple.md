@@ -6,7 +6,7 @@ Interactive water ripples on a canvas over the content: move or tap to disturb t
 
 - **Category:** background · **since** 2.8
 - **Import:** `import { defineWaterRipple } from 'motionary/components/background'` then `defineWaterRipple();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>`
 - **Attributes:** `damping`, `color`, `strength`
 - **Events:** —
 - **Slots:** —

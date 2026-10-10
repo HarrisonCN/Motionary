@@ -6,7 +6,7 @@ Accessible tabs whose indicator slides between tabs with a spring; panels slide 
 
 - **Category:** ui · **since** 2.6 · **changed in** 6.7
 - **Import:** `import { defineTabs } from 'motionary/components/ui'` then `defineTabs();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>`
 - **Attributes:** `indicator`
 - **Events:** `usa:change`
 - **Slots:** —

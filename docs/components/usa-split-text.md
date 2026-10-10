@@ -6,7 +6,7 @@ Splits a headline into letters or words and cascades them in: rise, fade, blur, 
 
 - **Category:** text · **since** 2.2 · **changed in** 4.3, 10.1, 10.3
 - **Import:** `import { defineSplitText } from 'motionary/components/text'` then `defineSplitText();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>`
 - **Attributes:** `by`, `text`, `from`, `stagger`, `duration`, `delay`, `trigger`, `repeat`
 - **Events:** `usa:complete`
 - **Slots:** —

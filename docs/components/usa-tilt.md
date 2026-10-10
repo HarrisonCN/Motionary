@@ -6,7 +6,7 @@ Tilts toward the pointer in 3D with an optional glare; exposes --usa-tilt-x/y fo
 
 - **Category:** interaction · **since** 2.2 · **changed in** 12.3
 - **Import:** `import { defineTilt } from 'motionary/components/interaction'` then `defineTilt();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>`
 - **Attributes:** `max`, `scale`, `perspective`, `glare`, `reverse`, `disabled`
 - **Events:** —
 - **Slots:** —

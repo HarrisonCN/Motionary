@@ -5,7 +5,7 @@
 import { mkdirSync, writeFileSync, existsSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { pathToFileURL } from 'node:url';
-import { DEPRECATED_PATHS, REMOVED_IN } from '../bin/public-paths.mjs';
+import { DEPRECATED_PATHS, REMOVED_IN, PATHS_REMOVED } from '../bin/public-paths.mjs';
 
 /** File name under dist/deprecated/ for an old subpath (`components/ai` → `components-ai`). */
 export const deprecatedFile = (oldPath) => oldPath.replace(/\//g, '-');
@@ -32,6 +32,7 @@ export function exportsOf(dtsFile) {
 }
 
 export function run(dist = new URL('../dist/', import.meta.url)) {
+  if (PATHS_REMOVED) return console.log(`deprecated types: none — the old subpaths were removed in ${REMOVED_IN}`);
   mkdirSync(new URL('deprecated/', dist), { recursive: true });
   let n = 0;
   for (const [oldPath, newPath] of Object.entries(DEPRECATED_PATHS)) {

@@ -267,7 +267,7 @@ describe('10.1 plugin ecosystem: integrity, semver, scaffold', () => {
       execFileSync(process.execPath, ['bin/create-motionary-plugin.mjs', 'motionary-plugin-sparkle', '--dir', join(dir, 'p')], { stdio: 'pipe' });
       for (const f of ['package.json', 'src/index.js', 'test/plugin.test.mjs', 'scripts/sign.mjs', 'README.md']) expect(existsSync(join(dir, 'p', f)), f).toBe(true);
       const pkg = JSON.parse(readFileSync(join(dir, 'p/package.json'), 'utf8'));
-      expect(pkg.engines.motionary).toMatch(/^>=12/); // 12.0: the scaffold targets the current major
+      expect(pkg.engines.motionary).toMatch(/^>=13/); // 13.0: the scaffold targets the current major
       execFileSync(process.execPath, ['--test', 'test/plugin.test.mjs'], { cwd: join(dir, 'p'), stdio: 'pipe' });
       expect(() => execFileSync(process.execPath, ['bin/create-motionary-plugin.mjs', 'Bad Name'], { stdio: 'pipe' })).toThrow();
     } finally {
@@ -297,14 +297,14 @@ describe('10.1 widgets', () => {
   });
   it('<usa-plugin-card> with the runtime: compat badge, toggle, details', () => {
     rt.use();
-    document.body.innerHTML = '<usa-plugin-card name="retro" title="Retro" version="1.2.0" author="Motionary" engine="^12.0.0" downloads="12400"><p>Details</p></usa-plugin-card><usa-plugin-card name="next" engine=">=13"></usa-plugin-card>';
+    document.body.innerHTML = '<usa-plugin-card name="retro" title="Retro" version="1.2.0" author="Motionary" engine="^13.0.0" downloads="12400"><p>Details</p></usa-plugin-card><usa-plugin-card name="next" engine=">=14"></usa-plugin-card>';
     const [a, b] = Array.from(document.querySelectorAll('usa-plugin-card')) as any[];
     expect(a.querySelector('.usa-rt-missing')).toBeNull();
     expect(a.querySelector('.usa-pc-name').textContent).toBe('Retro');
     expect(a.querySelector('.usa-pc-sub').textContent).toBe('v1.2.0 · Motionary');
     expect(a.querySelector('.usa-pc-compat').dataset.ok).toBe('true');
     expect(b.compat().ok).toBe(false);
-    expect(b.querySelector('.usa-pc-compat').textContent).toContain('needs >=13');
+    expect(b.querySelector('.usa-pc-compat').textContent).toContain('needs >=14');
     expect(a.querySelector('.usa-pc-details p').textContent).toBe('Details');
     const ev: any[] = [];
     a.addEventListener('usa:toggle', (e: any) => ev.push(e.detail.open));
@@ -324,13 +324,13 @@ describe('10.1 widgets', () => {
   it('<usa-install-button>: manager tabs, commands, copy + usa:copy', async () => {
     const write = vi.fn(async () => {});
     vi.stubGlobal('navigator', { ...navigator, clipboard: { writeText: write } });
-    document.body.innerHTML = '<usa-install-button package="motionary" managers="npm pnpm yarn bun cdn" cdn="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></usa-install-button>';
+    document.body.innerHTML = '<usa-install-button package="motionary" managers="npm pnpm yarn bun cdn" cdn="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></usa-install-button>';
     const el = document.querySelector('usa-install-button') as any;
     expect(el.querySelectorAll('[role=tab]')).toHaveLength(5);
     expect(el.command('npm')).toBe('npm i motionary');
     expect(el.command('pnpm')).toBe('pnpm add motionary');
     expect(el.command('bun')).toBe('bun add motionary');
-    expect(el.command('cdn')).toBe('<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>');
+    expect(el.command('cdn')).toBe('<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>');
     (el.querySelector('[data-m=yarn]') as HTMLElement).click();
     expect(el.querySelector('code').textContent).toBe('yarn add motionary');
     const got: any[] = [];
@@ -393,7 +393,7 @@ describe('10.1 prerequisites in the gallery, Store, docs, README and AI manifest
   });
   it('package wiring: runtime subpath exports, CDN builds, CI check, Pages files', () => {
     const pkg = JSON.parse(readFileSync('package.json', 'utf8'));
-    for (const k of ['./runtime', './runtime/format-css', './runtime/format-motion', './manifest.json']) expect(pkg.exports[k], k).toBeTruthy();
+    for (const k of ['./runtime', './runtime/format-css', './runtime/format-motion', './tooling/manifest.json']) expect(pkg.exports[k], k).toBeTruthy(); // 13.0: ./manifest.json removed
     expect(pkg.bin['create-motionary-plugin']).toBe('./bin/create-motionary-plugin.mjs');
     expect(pkg.scripts['check:peer-docs']).toBeTruthy();
     expect(pkg.peerDependencies).not.toHaveProperty('gsap');

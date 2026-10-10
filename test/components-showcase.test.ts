@@ -100,7 +100,7 @@ describe('component gallery page', () => {
     expect(html).toContain('<script type="module" src="./gallery.js"></script>');
     expect(js).toContain("new URL('../dist/', import.meta.url)");
     expect(js).toContain("'components.js'");
-    expect(js).toContain('https://unpkg.com/motionary@12/dist/');
+    expect(js).toContain('https://unpkg.com/motionary@13/dist/');
     expect(js).toContain('prefers-reduced-motion');
   });
 

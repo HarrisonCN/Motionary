@@ -6,7 +6,7 @@
 
 - **Category:** transitions · **since** 6.2
 - **Import:** `import { defineDisclosure } from 'motionary/components/widgets'` then `defineDisclosure();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `multiple`, `spring`
 - **Events:** `usa:toggle`
 - **Slots:** —

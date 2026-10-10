@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 8.4
 - **Import:** `import { defineRadar } from 'motionary/components/widgets'` then `defineRadar();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `targets`, `rings`, `speed`, `label`
 - **Events:** `usa:ping`
 - **Slots:** —

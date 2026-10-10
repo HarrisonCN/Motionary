@@ -4,7 +4,7 @@ import { readFileSync, mkdtempSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
-import { LAYER_ALIASES, DEPRECATED_PATHS, REMOVED_IN, rewritePaths, findOldPaths } from '../bin/public-paths.mjs';
+import { LAYER_ALIASES, DEPRECATED_PATHS, REMOVED_IN, PATHS_REMOVED, rewritePaths, findOldPaths } from '../bin/public-paths.mjs';
 import { transform } from '../bin/usa-codemod-12.mjs';
 import { doctor, main } from '../bin/motionary.mjs';
 import { deprecatedDts, deprecatedFile } from '../scripts/gen-deprecated-types.mjs';
@@ -19,30 +19,27 @@ describe('11.5: layer subpath aliases', () => {
   it('every layer and framework subpath exists', () => {
     for (const p of ['core', 'runtime', 'runtime/gl', 'components', 'components/ui', 'tooling/ai', 'tooling/design', 'tooling/manifest.json', 'tooling/manifest.schema.json', 'react', 'vue', 'svelte', 'solid', 'angular'])
       expect(ex[`./${p}`], p).toBeTruthy();
-    for (const fw of ['react', 'vue', 'svelte', 'solid', 'angular']) expect(ex[`./components/${fw}`], fw).toBeTruthy();
+    for (const fw of ['react', 'vue', 'svelte', 'solid']) expect(ex[`./components/${fw}`], fw).toBeTruthy(); // 13.0: motionary/components/angular removed → motionary/angular
   });
-  it('aliases serve the same files as the paths they replace (0 bytes added)', () => {
-    for (const [alias, target] of Object.entries(LAYER_ALIASES)) {
-      const a = ex[`./${alias}`], t = ex[`./${target}`];
-      if (typeof a === 'string') { expect(a, alias).toBe(t); continue; }
-      expect(a.import.default, alias).toBe(t.import.default);
-      expect(a.require.default, alias).toBe(t.require.default);
+  it('aliases serve the dist files the removed paths served (0 bytes added)', () => {
+    for (const alias of Object.keys(LAYER_ALIASES)) {
+      const a = ex[`./${alias}`];
+      expect(a, alias).toBeTruthy();
+      if (typeof a === 'string') { expect(a, alias).toMatch(/^\.\/dist\//); continue; }
+      expect(a.import.default, alias).toMatch(/^\.\/dist\/components\/[\w-]+\.js$/);
       expect(a.import.types, alias).not.toMatch(/deprecated/);
     }
-    expect(ex['./core'].import.default).toBe(ex['./components/core'].import.default);
-    expect(ex['./tooling/design'].import.default).toBe(ex['./design'].import.default);
+    expect(ex['./core'].import.default).toBe('./dist/components/core.js');
   });
-  it('old paths keep their JavaScript; only their types are the @deprecated declarations', () => {
+  it('13.0: the old paths are removed; their replacements exist', () => {
     for (const [old, to] of Object.entries(DEPRECATED_PATHS)) {
       expect(ex[`./${to}`], `${old} → ${to}`).toBeTruthy();
-      if (old.endsWith('.json')) continue;
-      expect(ex[`./${old}`].import.types).toBe(`./dist/deprecated/${deprecatedFile(old)}.d.ts`);
-      expect(ex[`./${old}`].require.types).toBe(`./dist/deprecated/${deprecatedFile(old)}.d.cts`);
-      expect(ex[`./${old}`].import.default).toMatch(/^\.\/dist\/components\/[\w-]+\.js$/);
+      expect(ex[`./${old}`], old).toBeUndefined();
     }
     expect(REMOVED_IN).toBe('13.0');
-    expect(pkg.scripts.build).toMatch(/gen-manifest\.mjs && node scripts\/gen-deprecated-types\.mjs/);
+    expect(PATHS_REMOVED).toBe(true);
     expect(pkg.scripts['lint:package']).toContain('./tooling/manifest.json');
+    expect(pkg.scripts['lint:package']).not.toMatch(/ \.\/manifest\.json/);
   });
   it('the generated declaration tags every export and points at the replacement', () => {
     const d = deprecatedDts('components/ai', 'tooling/ai', '../components/ai.js', [{ name: 'describeMotion', type: false }, { name: 'MotionIntent', type: true }]);

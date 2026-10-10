@@ -6,7 +6,7 @@ An SVG-noise grain overlay — no image to ship. animated makes it jitter like f
 
 - **Category:** background · **since** 2.2
 - **Import:** `import { defineGrain } from 'motionary/components/background'` then `defineGrain();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>`
 - **Attributes:** `opacity`, `blend`, `scale`
 - **Events:** —
 - **Slots:** —

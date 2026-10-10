@@ -6,7 +6,7 @@ Full-screen sections that snap one at a time, with keyboard paging, dot navigati
 
 - **Category:** page · **since** 2.7
 - **Import:** `import { defineFullpage } from 'motionary/components/page'` then `defineFullpage();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>`
 - **Attributes:** `dots`, `axis`
 - **Events:** `usa:section`
 - **Slots:** —

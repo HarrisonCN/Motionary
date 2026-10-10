@@ -6,7 +6,7 @@ Swipe-to-dismiss and swipe actions: content follows the finger, flies out on a f
 
 - **Category:** gesture · **since** 3.2 · **changed in** 6.8
 - **Import:** `import { defineSwipeable } from 'motionary/components/gesture'` then `defineSwipeable();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>`
 - **Attributes:** `axis`, `disabled`, `distance`, `dismiss`, `preset`
 - **Events:** `usa:swipe`, `usa:dismiss`
 - **Slots:** —

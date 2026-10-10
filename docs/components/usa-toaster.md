@@ -6,7 +6,7 @@ toast("Saved") slides a notification in; it pauses on hover, stacks with FLIP an
 
 - **Category:** feedback · **since** 2.2
 - **Import:** `import { defineToaster } from 'motionary/components/feedback'` then `defineToaster();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>`
 - **Attributes:** `label`, `position`, `max`
 - **Events:** `usa:toast`
 - **Slots:** —

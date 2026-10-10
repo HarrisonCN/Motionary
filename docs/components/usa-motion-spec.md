@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 9.7
 - **Import:** `import { defineMotionSpec } from 'motionary/components/widgets'` then `defineMotionSpec();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `rules`, `label`
 - **Events:** `usa:copy`
 - **Slots:** —

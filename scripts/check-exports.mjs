@@ -24,7 +24,6 @@ const entries = {
   'motionary/engine': ['motionClock', 'createTimeline', 'resolvePosition', 'hydrateMotion', 'ssrHead', 'HYDRATION_CSS', 'HYDRATE_PRESETS', 'setClock', 'getClock'],
   'motionary/dsl': ['parseMotion', 'serializeMotion', 'motion', 'bindMotion', 'applyMotion', 'createComponent'],
   'motionary/marketplace': ['pluginIntegrity', 'verifyPlugin', 'satisfies', 'checkCompat', 'MARKETPLACE', 'MARKETPLACE_FORMAT', 'searchPlugins', 'installPlugin', 'installedPlugins', 'fetchMarketplace', 'packManifest', 'validateManifest', 'loadEffectPack', 'EFFECT_PACK_FORMAT'],
-  'motionary/design': ['figmaToMotion', 'framerComponent', 'motionToCss', 'easingPoints'],
   'motionary/native': ['toReactNative', 'toFlutter', 'nativeEasing', 'nativeTokens', 'entranceFrom'],
   'motionary/core': ['createMotion', 'PRESETS', 'preferredBackend', 'VERSION', 'applyMotionAttributes', 'parseMotionAttr'],
   'motionary/plugins': ['ALL_PLUGINS', 'retro', 'cinema', 'paper'],
@@ -45,7 +44,6 @@ const entries = {
   'motionary/runtime/vector': ['vector', 'loadLottie', 'parseDotLottie', 'unzipEntries', 'lottiePlayer', 'renderLottieFrame', 'inspectLottie', 'propValue', 'transformAt', 'trimContours', 'loadLottieImages'],
   'motionary/runtime/physics': ['physics', 'createWorld', 'World', 'Body', 'Constraint', 'collide', 'dragConstraint'],
   'motionary/runtime/format-scene': ['formatScene', 'SCENE_FORMAT', 'migrateScene', 'validateScene', 'parseScene', 'sceneToWorld', 'worldToScene'],
-  'motionary/components/ai': ['describeMotion', 'motionSnippet'],
   'motionary/runtime/drag-snap': ['dragSnap', 'createDragSnap', 'projectThrow', 'nearestSnap', 'rubberband', 'springStep', 'velocityTracker'],
   'motionary/runtime/gltf-anim': ['gltfAnim', 'gltfClips', 'sampleChannel', 'applyClip', 'deformModel', 'deformGeometry', 'gltfAnimator'],
   'motionary/components/snap-carousel': ['defineSnapCarousel'],
@@ -59,7 +57,6 @@ const entries = {
   'motionary/components/vue': ['UsaPlugin', 'isUsaElement'],
   'motionary/components/svelte': ['usa', 'defineUsa', 'bindUsa'],
   'motionary/components/solid': ['usa', 'defineUsa', 'bindUsa'],
-  'motionary/components/angular': ['usaInitializer', 'defineUsa', 'usaDetail', 'bindUsa'],
   'motionary/angular': ['usaInitializer', 'provideUsa', 'defineUsa', 'usaDetail', 'bindUsa', 'usaEventName', 'USA_TAGS', 'isUsaElement'],
   'motionary/tooling/ai': ['describeMotion', 'motionSnippet', 'suggestMotion', 'validateMotionSpec', 'intentFromSpec', 'specOf', 'MOTION_SPEC_SCHEMA'],
   'motionary/tooling/design': ['figmaToMotion', 'framerComponent', 'motionToCss', 'easingPoints'],
@@ -82,7 +79,7 @@ for (const f of ['dist/index.umd.js', 'dist/presets-extended.umd.js', 'dist/elem
 require('motionary/package.json');
 // 10.1: runtime CDN builds + AI manifest
 for (const f of ['dist/runtime.iife.js', 'dist/runtime/format-css.iife.js', 'dist/runtime/format-motion.iife.js', 'dist/runtime/gltf-decoders.iife.js', 'dist/runtime/lottie-state.iife.js', 'dist/runtime/gltf-anim.iife.js', 'dist/runtime/drag-snap.iife.js', 'dist/runtime/format-scene.iife.js', 'dist/runtime/physics.iife.js', 'dist/runtime/vector.iife.js', 'dist/runtime/format-obj.iife.js', 'dist/runtime/format-gltf.iife.js', 'dist/runtime/gl.iife.js', 'dist/runtime/format-webp.iife.js', 'dist/runtime/format-apng.iife.js', 'dist/runtime/format-gif.iife.js', 'dist/runtime/smooth.iife.js', 'dist/runtime/format-sprite.iife.js', 'dist/runtime/text.iife.js', 'dist/runtime/format-svg.iife.js', 'dist/runtime/scroll.iife.js', 'dist/llms.txt', 'dist/llms-full.txt', 'dist/manifest.schema.json']) assert.ok(existsSync(new URL(`../${f}`, import.meta.url)), f);
-assert.equal(require('motionary/manifest.json').format, 'motionary/components', 'manifest.json');
+assert.equal(require('motionary/tooling/manifest.json').format, 'motionary/components', 'tooling/manifest.json');
 // 10.1: motionary/runtime is SSR-safe — import, use() and tween in plain Node (no window / document)
 const rtm = await import('motionary/runtime');
 rtm.use();
@@ -101,9 +98,8 @@ assert.equal(root.createReactHooks, undefined, 'createReactHooks moved to /react
 // 6.1: importing presets/extended registers its presets in the shared table
 assert.ok(root.PRESETS['bounce-in-up'] && root.PRESETS['clip-diamond'], 'extended presets registered');
 assert.ok(Object.keys(root.PRESETS).length >= 200, 'preset count');
-// 11.5: aliases are the same modules as the deprecated paths; the old paths' types are the generated @deprecated files
-for (const [a, b] of [['motionary/angular', 'motionary/components/angular'], ['motionary/tooling/ai', 'motionary/components/ai'], ['motionary/tooling/design', 'motionary/design'], ['motionary/core', 'motionary/components/core']])
-  assert.equal(await import(a), await import(b), `${a} is ${b}`);
-assert.equal(require('motionary/tooling/manifest.json'), require('motionary/manifest.json'), 'tooling/manifest.json');
-for (const f of ['components-ai', 'components-core', 'components-design', 'design', 'components-angular']) for (const x of ['d.ts', 'd.cts']) assert.ok(existsSync(new URL(`../dist/deprecated/${f}.${x}`, import.meta.url)), `dist/deprecated/${f}.${x}`);
+// 13.0: the paths deprecated in 11.5 are removed; their layer subpaths serve the same files
+for (const old of ['motionary/components/core', 'motionary/components/ai', 'motionary/components/design', 'motionary/design', 'motionary/components/angular', 'motionary/manifest.json', 'motionary/manifest.schema.json'])
+  assert.throws(() => require.resolve(old), /ERR_PACKAGE_PATH_NOT_EXPORTED|not defined by "exports"|is not exported/, `${old} should be removed`);
+assert.ok(!existsSync(new URL('../dist/deprecated/', import.meta.url)), 'dist/deprecated/ is gone');
 console.log(`exports OK (ESM + CJS): ${Object.keys(entries).join(', ')}`);

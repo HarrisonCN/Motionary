@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 6.9
 - **Import:** `import { defineDatePicker } from 'motionary/components/widgets'` then `defineDatePicker();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `min`, `max`, `first-day`, `locale`
 - **Events:** `usa:change`
 - **Slots:** —
