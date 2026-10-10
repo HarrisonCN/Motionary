@@ -1,7 +1,7 @@
-import { f as defineElement, d as clamp, b as caf, r as raf } from '../chunks/base-zSGb8ujt.js';
-import { d as springEasing, c as createSpring, p as projectInertia, s as snapTo, a as rubberBand } from '../chunks/spring-CznnvQCN.js';
-import { a as adoptVariants } from '../chunks/variants-DRi3tBJf.js';
-export { V as VARIANTS, s as setVariant } from '../chunks/variants-DRi3tBJf.js';
+import { f as defineElement, d as clamp, b as caf, r as raf } from '../chunks/base-CBMzOs1k.js';
+import { d as springEasing, c as createSpring, p as projectInertia, s as snapTo, a as rubberBand } from '../chunks/spring-2YZXQmr7.js';
+import { a as adoptVariants } from '../chunks/variants-B8gnRVha.js';
+export { V as VARIANTS, s as setVariant } from '../chunks/variants-B8gnRVha.js';
 
 /** Position a fixed `floating` element next to `anchor`, flipping when it would leave the viewport. */
 function place(floating, anchor, placement = 'top', gap = 8) {
@@ -38,7 +38,7 @@ const nextId = (prefix) => `${prefix}-${++uid}`;
 var css$8 = "usa-tabs{display:block;font-family:var(--usa-font)}usa-tabs .usa-tabs-list{position:relative;display:flex;gap:4px;border-bottom:1px solid color-mix(in srgb,currentColor 14%,transparent)}usa-tabs [role=\"tab\"]{position:relative;z-index:1;padding:10px 14px;border:0;background:none;color:inherit;font:inherit;cursor:pointer;opacity:0.7;transition:opacity 0.2s ease,color 0.2s ease;border-radius:calc(var(--usa-radius,14px) / 2)}usa-tabs [role=\"tab\"][aria-selected=\"true\"]{opacity:1;color:var(--usa-accent,#7c5cff)}usa-tabs [role=\"tab\"]:focus-visible{outline:2px solid var(--usa-accent,#7c5cff);outline-offset:-2px}usa-tabs .usa-tabs-indicator{position:absolute;left:0;bottom:-1px;height:3px;width:0;border-radius:3px;background:var(--usa-accent,#7c5cff);pointer-events:none}usa-tabs[indicator=\"pill\"] .usa-tabs-list{border-bottom:0;padding:4px;border-radius:999px;background:color-mix(in srgb,currentColor 8%,transparent)}usa-tabs[indicator=\"pill\"] .usa-tabs-indicator{top:4px;bottom:4px;height:auto;border-radius:999px;opacity:0.18}usa-tabs [role=\"tabpanel\"]{padding:14px 2px}usa-tabs [role=\"tabpanel\"]:focus-visible{outline:2px solid var(--usa-accent,#7c5cff);outline-offset:2px;border-radius:6px}";
 
 function defineTabs(tag = 'usa-tabs') {
-    // contract-exempt: attr-unobserved — selected: state reflected by the element itself (set the property instead); observing it would re-mount on every change
+    // contract-exempt: attr-unobserved(selected) — state reflected by the element itself (set the property instead); observing it would re-mount on every change
     adoptVariants();
     return defineElement(tag, (Base) => class UsaTabs extends Base {
         constructor() {
@@ -441,7 +441,7 @@ function definePullRefresh(tag = 'usa-pull-refresh') {
                     this._y.set(0);
                     resolve();
                 };
-                const ev = new CustomEvent('usa:refresh', { detail: { done }, bubbles: true, cancelable: true });
+                const ev = new CustomEvent('usa:refresh', { detail: { done }, bubbles: true, composed: true, cancelable: true });
                 this.dispatchEvent(ev);
                 const fn = this.onrefresh;
                 if (typeof fn === 'function')
@@ -454,7 +454,7 @@ function definePullRefresh(tag = 'usa-pull-refresh') {
 var css$5 = "usa-fab{position:fixed;right:max(20px,env(safe-area-inset-right));bottom:max(20px,env(safe-area-inset-bottom));z-index:900;display:grid;place-items:center}usa-fab[position=\"bottom-left\"]{right:auto;left:max(20px,env(safe-area-inset-left))}usa-fab[position=\"inline\"]{position:relative;right:auto;bottom:auto;display:inline-grid}usa-fab>*{grid-area:1 / 1}usa-fab .usa-fab-main{position:relative;z-index:1;width:56px;height:56px;border-radius:min(var(--usa-radius,14px) * 1.2,28px);border:0;display:grid;place-items:center;font-size:24px;cursor:pointer;background:var(--usa-accent,#7c5cff);color:var(--usa-accent-text,#fff);box-shadow:var(--usa-shadow);transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1)}usa-fab[open] .usa-fab-main{transform:rotate(45deg)}usa-fab .usa-fab-action{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;opacity:0;transform:scale(0.4);will-change:transform,opacity}usa-fab .usa-fab-main:focus-visible,usa-fab .usa-fab-action:focus-visible{outline:2px solid var(--usa-accent,#7c5cff);outline-offset:3px}@media (prefers-reduced-motion:reduce){usa-fab .usa-fab-main{transition:none}}";
 
 function defineFab(tag = 'usa-fab') {
-    // contract-exempt: attr-unobserved — open: state reflected by the element itself (set the property instead); observing it would re-mount on every change
+    // contract-exempt: attr-unobserved(open) — state reflected by the element itself (set the property instead); observing it would re-mount on every change
     adoptVariants();
     return defineElement(tag, (Base) => class UsaFab extends Base {
         static get observedAttributes() {
@@ -728,7 +728,7 @@ function defineSlider(tag = 'usa-slider') {
 var css$2 = "usa-popover{display:inline-block}usa-popover .usa-popover-panel{position:fixed;z-index:1500;min-width:180px;max-width:min(92vw,360px);padding:12px 14px;outline:none}usa-popover .usa-popover-panel[hidden]{display:none}";
 
 function definePopover(tag = 'usa-popover') {
-    // contract-exempt: attr-unobserved — open: state reflected by the element itself (set the property instead); observing it would re-mount on every change
+    // contract-exempt: attr-unobserved(open) — state reflected by the element itself (set the property instead); observing it would re-mount on every change
     adoptVariants();
     return defineElement(tag, (Base) => class UsaPopover extends Base {
         static get observedAttributes() {
@@ -899,4 +899,4 @@ function defineUiComponents() {
 }
 
 export { adoptVariants, defineAvatarStack, defineBadge, defineBottomSheet, defineDrawer, defineFab, defineNavbar, definePopover, definePullRefresh, defineSlider, defineTabs, defineUiComponents };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/components/ui.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/components/ui.js.map

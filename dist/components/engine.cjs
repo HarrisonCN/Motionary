@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-B3me2y0o.cjs');
+var base = require('../chunks/base-BG_mxssu.cjs');
 
 /**
  * `motionary/engine` (= `motionary/components/engine`, 8.0) — the unified
@@ -248,7 +248,7 @@ function hydrateMotion(root = document, options = {}) {
     tl.play();
     els.forEach((el) => el.setAttribute('data-usa-hydrated', ''));
     const target = root.dispatchEvent ? root : document;
-    tl.finished.then(() => target.dispatchEvent?.(new CustomEvent('usa:hydrated', { detail: { count: els.length }, bubbles: true })));
+    tl.finished.then(() => target.dispatchEvent?.(new CustomEvent('usa:hydrated', { detail: { count: els.length }, bubbles: true, composed: true })));
     return tl;
 }
 
@@ -263,4 +263,4 @@ exports.hydrateMotion = hydrateMotion;
 exports.motionClock = motionClock;
 exports.resolvePosition = resolvePosition;
 exports.ssrHead = ssrHead;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/components/engine.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/components/engine.cjs.map

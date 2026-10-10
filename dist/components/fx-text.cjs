@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-BB1oO-lR.cjs');
-var base = require('../chunks/base-B3me2y0o.cjs');
+var registry = require('../chunks/registry-LE5iyTqw.cjs');
+var base = require('../chunks/base-BG_mxssu.cjs');
 var shared = require('../chunks/shared-jkgRH-Hx.cjs');
 
 /** Split `el`'s text into `aria-hidden` inline-block characters (idempotent). Returns them. */
@@ -264,4 +264,4 @@ function registerTextPack() {
 exports.TEXT3_FX = TEXT3_FX;
 exports.registerTextPack = registerTextPack;
 exports.splitChars = splitChars;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/components/fx-text.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/components/fx-text.cjs.map

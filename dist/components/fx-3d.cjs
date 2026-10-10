@@ -1,9 +1,9 @@
 'use strict';
 
-var registry = require('../chunks/registry-BB1oO-lR.cjs');
+var registry = require('../chunks/registry-LE5iyTqw.cjs');
 var shared = require('../chunks/shared-jkgRH-Hx.cjs');
 var components_fxLight = require('./fx-light.cjs');
-require('../chunks/base-B3me2y0o.cjs');
+require('../chunks/base-BG_mxssu.cjs');
 require('../chunks/generative-BHIj-NU0.cjs');
 
 const layers = (el) => {
@@ -233,4 +233,4 @@ function register3dPack() {
 
 exports.DEPTH3_FX = DEPTH3_FX;
 exports.register3dPack = register3dPack;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/components/fx-3d.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/components/fx-3d.cjs.map

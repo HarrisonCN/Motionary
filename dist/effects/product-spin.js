@@ -1,6 +1,6 @@
-import { registerEffects } from '../chunks/registry-CYojuxi5.js';
+import { registerEffects } from '../chunks/registry-4UDF3Dpk.js';
 import { DEPTH3_FX } from '../components/fx-3d.js';
-import '../chunks/base-zSGb8ujt.js';
+import '../chunks/base-CBMzOs1k.js';
 import '../chunks/shared-CkKHWrtJ.js';
 import '../components/fx-light.js';
 import '../chunks/generative-2LhxG5BJ.js';
@@ -15,4 +15,4 @@ function registerProductSpin() {
 }
 
 export { effect, registerProductSpin as register, registerProductSpin };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/effects/product-spin.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/effects/product-spin.js.map

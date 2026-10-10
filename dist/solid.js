@@ -86,4 +86,4 @@ function useScrollAnimate(options = {}) {
 }
 
 export { scrollAnimate, scrollStagger, useScrollAnimate };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/solid.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/solid.js.map

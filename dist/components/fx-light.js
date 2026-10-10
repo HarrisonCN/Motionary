@@ -1,7 +1,7 @@
-import { registerEffects } from '../chunks/registry-CYojuxi5.js';
+import { registerEffects } from '../chunks/registry-4UDF3Dpk.js';
 import { c as canvasBackground, h as hexRgb } from '../chunks/generative-2LhxG5BJ.js';
 import { o as overlay } from '../chunks/shared-CkKHWrtJ.js';
-import '../chunks/base-zSGb8ujt.js';
+import '../chunks/base-CBMzOs1k.js';
 
 /** Track the pointer over `el` as 0–1 coordinates (`fn(x, y, inside)`); starts at (`x0`, `y0`). Returns a remover. */
 function trackPointer(el, ctx, fn, x0 = 0.3, y0 = 0.25) {
@@ -214,4 +214,4 @@ function registerLightPack() {
 }
 
 export { LIGHT_FX, registerLightPack, trackPointer };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/components/fx-light.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/components/fx-light.js.map

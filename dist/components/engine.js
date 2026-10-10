@@ -1,5 +1,5 @@
-import { o as onClockChange, s as setClock, h as getClock, p as prefersReducedMotion, e as animateWithMotion } from '../chunks/base-zSGb8ujt.js';
-export { t as trackAnimation } from '../chunks/base-zSGb8ujt.js';
+import { o as onClockChange, s as setClock, h as getClock, p as prefersReducedMotion, e as animateWithMotion } from '../chunks/base-CBMzOs1k.js';
+export { t as trackAnimation } from '../chunks/base-CBMzOs1k.js';
 
 /**
  * `motionary/engine` (= `motionary/components/engine`, 8.0) — the unified
@@ -247,9 +247,9 @@ function hydrateMotion(root = document, options = {}) {
     tl.play();
     els.forEach((el) => el.setAttribute('data-usa-hydrated', ''));
     const target = root.dispatchEvent ? root : document;
-    tl.finished.then(() => target.dispatchEvent?.(new CustomEvent('usa:hydrated', { detail: { count: els.length }, bubbles: true })));
+    tl.finished.then(() => target.dispatchEvent?.(new CustomEvent('usa:hydrated', { detail: { count: els.length }, bubbles: true, composed: true })));
     return tl;
 }
 
 export { HYDRATE_PRESETS, HYDRATION_CSS, createTimeline, getClock, hydrateMotion, motionClock, onClockChange, resolvePosition, setClock, ssrHead };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/components/engine.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/components/engine.js.map

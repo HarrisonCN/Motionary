@@ -1,4 +1,4 @@
-# Motionary 13.0.0 — full component reference
+# Motionary 13.0.1 — full component reference
 
 Generated from the source. Machine-readable version: https://harrisoncn.github.io/Motionary/components.json (schema https://harrisoncn.github.io/Motionary/components.schema.json).
 
@@ -2188,6 +2188,9 @@ Pinterest-style masonry: items drop into the shortest column and glide when the 
 
 - Import: `import { defineModal } from 'motionary/components/widgets'; defineModal();`
 - CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
+- Attributes: `effect`, `label`, `persistent`
+- Events: `usa:open`, `usa:close`
+- Methods: `show()`, `close()`, `toggle()`
 
 ```html
 <button data-usa-open="welcome">Open</button>
@@ -3160,6 +3163,9 @@ A GPU shader behind your content: gradient, plasma, waves or aurora presets — 
 
 - Import: `import { defineSheet } from 'motionary/components/widgets'; defineSheet();`
 - CDN: https://unpkg.com/motionary@13/dist/widgets.umd.js
+- Attributes: `side`, `label`, `persistent`
+- Events: `usa:open`, `usa:close`
+- Methods: `show()`, `close()`, `toggle()`
 
 ```html
 <button data-usa-open="cart">Cart</button>

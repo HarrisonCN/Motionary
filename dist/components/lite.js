@@ -222,7 +222,8 @@ function getBase() {
             return animateWithMotion(el, keyframes, options);
         }
         emit(type, detail) {
-            return this.dispatchEvent(new CustomEvent(`usa:${type}`, { detail, bubbles: true, cancelable: true }));
+            // 13.0.1: composed — usa:* events cross Shadow DOM boundaries (documented since 12.0, missing until now)
+            return this.dispatchEvent(new CustomEvent(`usa:${type}`, { detail, bubbles: true, composed: true, cancelable: true }));
         }
     }
     baseClass = Base;
@@ -5004,7 +5005,7 @@ const CARD_EFFECTS = ['flip', 'holo', 'glass', 'border-glow', 'conic-border', 'l
 /** Effects that follow the pointer (they share one rAF-throttled tracker). */
 const TRACKING = /*#__PURE__*/ new Set(['holo', 'border-glow', 'spotlight', 'parallax-layers', 'lift']);
 function defineCard(tag = 'usa-card') {
-    // contract-exempt: attr-unobserved — flipped, expanded: state reflected by the element itself (set the property instead); observing it would re-mount on every change
+    // contract-exempt: attr-unobserved(flipped, expanded) — state reflected by the element itself (set the property instead); observing it would re-mount on every change
     return defineElement(tag, (Base) => class UsaCard extends Base {
         constructor() {
             super(...arguments);
@@ -6549,7 +6550,7 @@ const nextId = (prefix) => `${prefix}-${++uid}`;
 var css$n = "";
 
 function defineTabs(tag = 'usa-tabs') {
-    // contract-exempt: attr-unobserved — selected: state reflected by the element itself (set the property instead); observing it would re-mount on every change
+    // contract-exempt: attr-unobserved(selected) — state reflected by the element itself (set the property instead); observing it would re-mount on every change
     adoptVariants();
     return defineElement(tag, (Base) => class UsaTabs extends Base {
         constructor() {
@@ -6952,7 +6953,7 @@ function definePullRefresh(tag = 'usa-pull-refresh') {
                     this._y.set(0);
                     resolve();
                 };
-                const ev = new CustomEvent('usa:refresh', { detail: { done }, bubbles: true, cancelable: true });
+                const ev = new CustomEvent('usa:refresh', { detail: { done }, bubbles: true, composed: true, cancelable: true });
                 this.dispatchEvent(ev);
                 const fn = this.onrefresh;
                 if (typeof fn === 'function')
@@ -6965,7 +6966,7 @@ function definePullRefresh(tag = 'usa-pull-refresh') {
 var css$k = "";
 
 function defineFab(tag = 'usa-fab') {
-    // contract-exempt: attr-unobserved — open: state reflected by the element itself (set the property instead); observing it would re-mount on every change
+    // contract-exempt: attr-unobserved(open) — state reflected by the element itself (set the property instead); observing it would re-mount on every change
     adoptVariants();
     return defineElement(tag, (Base) => class UsaFab extends Base {
         static get observedAttributes() {
@@ -7239,7 +7240,7 @@ function defineSlider(tag = 'usa-slider') {
 var css$h = "";
 
 function definePopover(tag = 'usa-popover') {
-    // contract-exempt: attr-unobserved — open: state reflected by the element itself (set the property instead); observing it would re-mount on every change
+    // contract-exempt: attr-unobserved(open) — state reflected by the element itself (set the property instead); observing it would re-mount on every change
     adoptVariants();
     return defineElement(tag, (Base) => class UsaPopover extends Base {
         static get observedAttributes() {
@@ -10101,7 +10102,7 @@ const PRIMITIVES = {
         const cart = c.root.querySelector('[data-role="cart"]') || document.querySelector('[data-role="cart"]');
         const item = el.closest('[data-role="product"]')?.querySelector('img, [data-role="thumb"]') || el;
         if (cart)
-            void flyToCart(item, cart).then(() => cart.dispatchEvent(new CustomEvent('usa:added', { bubbles: true })));
+            void flyToCart(item, cart).then(() => cart.dispatchEvent(new CustomEvent('usa:added', { bubbles: true, composed: true })));
     }),
 };
 /** The five effect packs: `data-role` → primitives. */
@@ -10906,4 +10907,4 @@ const STYLE_BASE = new URL('../', import.meta.url).href;
 onDemandStyles(STYLE_BASE);
 
 export { ALL_TAGS, AMBIENT_EFFECTS, ANIM_ICONS, BRIDGE_PROTOCOL_VERSION, BUILTIN_EFFECTS, BUTTON_DEFORMS, CARD_EFFECTS, CLICK_EFFECTS, COMPONENT_CATEGORIES, CURSOR_MODES, EFFECT_KINDS, EFFECT_TRIGGERS, GL_FALLBACKS, JOINING_SCRIPT, LIVE_REGION_IDS, MASK_SHAPES, MORPH_ICONS, MOTION_SCALE, MOTION_SENSITIVITY, MOTION_SENSITIVITY_LEVELS, MOTION_TOKENS, PACKS, PACK_PRIMITIVES, PAGE_EFFECTS, PARTICLE_PRESETS, POST_EFFECTS, REVEAL_EFFECTS, SENSITIVITY_CSS, SHADERS, SPINNER_VARIANTS, SPRING_EFFECTS, SPRING_PRESETS, STATIC_ALTERNATIVES, STYLE_BASE, TIMELINE_PRESETS, VARIANTS, activeAnimations, adaptKeyframes, adoptVariants, animateWithMotion, animationBudget, announce, applyMotionTokens, applyNativeSettings, applyPack, auditMotionA11y, autoAnimate, autoDegrade, baselineReport, bindEffect, categoryOf, configureComponents, connectNativeShell, countUp, createSpring, defineAccordion, defineAcrylic, defineAmbient, defineAnimIcon, defineAurora, defineAutoAnimate, defineAutoSkeleton, defineAvatarStack, defineBackToTop, defineBackgroundComponents, defineBadge, defineBlobs, defineBottomSheet, defineButton, defineCard, defineCardComponents, defineCardStack, defineCarousel3d, defineCheck, defineCheckbox, defineClick, defineClickComponents, defineComponents, defineCounter, defineCube, defineCursor, defineDepth, defineDepthComponents, defineDialog, defineDistort, defineDotNetwork, defineDoubleTap, defineDraggable, defineDraw, defineDrawer, defineFab, defineFeedbackComponents, defineFullpage, defineFx, defineFxComponents, defineGestureComponents, defineGlitch, defineGradientText, defineGrain, defineGridGlow, defineHandwriting, defineHold, defineIconMorph, defineInteractionComponents, defineLayoutComponents, defineLike, defineLiquid, defineLoadingBar, defineMagnetic, defineMarquee, defineMaskReveal, defineMasonry, defineMorph, defineMotionSwitch, defineNavbar, defineOverscroll, definePack, definePacksComponents, definePageComponents, defineParticles, definePhysicsComponents, definePinchZoom, definePopover, definePostFx, definePress, defineProgress, definePullRefresh, defineReveal, defineRevealComponents, defineRipple, defineScramble, defineScrollHighlight, defineScrollProgress, defineScrolly, defineShader, defineShimmerText, defineSkeleton, defineSlider, defineSpinner, defineSplash, defineSplitText, defineSpotlight, defineSpring, defineStagger, defineStickyStack, defineSvgComponents, defineSwipeable, defineTabs, defineTextComponents, defineTextRotate, defineTilt, defineTimeline, defineTimelineComponents, defineToaster, defineTransitionComponents, defineTypewriter, defineUiComponents, defineViewSwitch, defineWaterRipple, defineWaveText, defineWebglComponents, detectNativeHost, deviceTilt, drawLines, easeOutExpo, enableMpaTransitions, exportDesignTokens, flip, flipFrames, fluentPreset, flyToCart, fragmentSource, gesture, getEffect, getMotionIntensity, getMotionLevel, getMotionSensitivity, getMotionTokens, glFallbackCss, glGovernor, glQuad, graphemes, haptic, hasEffect, importDesignTokens, importMotionTokens, interpolatePath, linearEasing, listEffects, liveRegion, loadCategoryStyles, loadedStyles, loadingBar, masonryLayout, mergeMotionTokens, morphPath, morphTo, motionAllowed, motionScale, motionToken, motionTokensToCss, motionTokensToJSON, motionTokensToVars, motionVar, onDemandStyles, onFrame, orientationToTilt, pageTransition, parseDuration, parseEasing, parseNativeSettings, pathsCompatible, pinchScale, playEffect, postFxShader, postToNative, prefersReducedMotion, projectInertia, readScrollProgress, registerBuiltinEffects, registerEffect, registerEffects, requestOrientationPermission, resolveDurationToken, resolveEasingToken, resolvePosition, resolveSpring, resolveTokenAliases, restoreMotionIntensity, restoreMotionSensitivity, revealKeyframes, rubberBand, schedulerStats, scrambleFrame, scrollToTarget, setAnimationBudget, setMotionIntensity, setMotionLevel, setMotionSensitivity, setVariant, sharedTransition, smoothScroll, snapTo, splitOrder, splitText, splitTimeline, words as splitWords, spring, springEasing, springEffectKeyframes, springSamples, staticAlternative, stepSpring, supportsLinearEasing, supportsNativeScrub, supportsOrientation, supportsViewTransitions, supportsWebGL, swipeDirection, themeTransition, timeline, toast, validateDesignTokens, viewTransition, warnBaseline, watchPowerSaver, withoutDeprecations };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/components/lite.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/components/lite.js.map

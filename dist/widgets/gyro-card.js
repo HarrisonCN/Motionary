@@ -1,7 +1,7 @@
-import { f as defineElement } from '../chunks/base-zSGb8ujt.js';
+import { f as defineElement } from '../chunks/base-CBMzOs1k.js';
 import { k as keyClick } from '../chunks/key-click-BLm3BI8_.js';
 import { orientationToTilt } from '../components/fx-gesture.js';
-import '../chunks/registry-CYojuxi5.js';
+import '../chunks/registry-4UDF3Dpk.js';
 
 var css = "usa-gyro-card{position:relative;display:block;box-sizing:border-box;padding:22px;border-radius:18px;color:#fff;background:linear-gradient(135deg,#6366f1,#ec4899);box-shadow:0 18px 40px -20px rgba(79,70,229,.8);transform:perspective(800px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transform-style:preserve-3d;transition:transform .25s ease-out;will-change:transform;overflow:hidden}usa-gyro-card [data-depth]{display:block;transform:translateZ(calc(var(--depth-k,14px) * var(--d,1)))}usa-gyro-card [data-depth=\"2\"]{--d:2}usa-gyro-card [data-depth=\"3\"]{--d:3}usa-gyro-card .usa-gy-glare{position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(circle at var(--gx,50%) var(--gy,30%),rgba(255,255,255,.4),transparent 55%);opacity:.5;transition:opacity .3s}usa-gyro-card[data-tilted] .usa-gy-glare{opacity:1}@media (prefers-reduced-motion:reduce){usa-gyro-card{transform:none;transition:none}}";
 
@@ -89,4 +89,4 @@ function defineGyroCard(tag = 'usa-gyro-card') {
 }
 
 export { defineGyroCard };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/widgets/gyro-card.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/widgets/gyro-card.js.map

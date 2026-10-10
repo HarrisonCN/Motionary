@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-B3me2y0o.cjs');
+var base = require('../chunks/base-BG_mxssu.cjs');
 
 var css = "usa-terminal{display:block;width:var(--usa-term-w,100%);max-width:100%;--usa-term-bg:#0f172a;--usa-term-fg:#e2e8f0;--usa-term-accent:#22c55e}usa-terminal[data-theme=green]{--usa-term-bg:#03140a;--usa-term-fg:#4ade80;--usa-term-accent:#86efac}usa-terminal[data-theme=amber]{--usa-term-bg:#1a1003;--usa-term-fg:#fbbf24;--usa-term-accent:#fde68a}.usa-term{border-radius:10px;overflow:hidden;background:var(--usa-term-bg);color:var(--usa-term-fg);box-shadow:0 16px 36px -18px rgba(0,0,0,.6);font:500 12.5px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}usa-terminal[data-theme=green] .usa-term,usa-terminal[data-theme=amber] .usa-term{text-shadow:0 0 6px currentColor}.usa-term-bar{display:flex;align-items:center;gap:6px;padding:8px 10px;background:rgba(255,255,255,.06)}.usa-term-bar i{width:10px;height:10px;border-radius:50%;background:#ef4444}.usa-term-bar i:nth-child(2){background:#f59e0b}.usa-term-bar i:nth-child(3){background:#22c55e}.usa-term-bar span{flex:1;text-align:center;margin-right:40px;opacity:.6;font-size:11px}.usa-term-body{min-height:var(--usa-term-h,120px);padding:10px 12px 12px}.usa-term-body p{margin:0;white-space:pre-wrap;word-break:break-word}.usa-term-ps{color:var(--usa-term-accent)}.usa-term-out{opacity:.8}.usa-term-cursor{display:inline-block;width:.6em;height:1.15em;margin-left:1px;vertical-align:text-bottom;background:currentColor;animation:usa-term-blink 1s steps(1) infinite}@keyframes usa-term-blink{50%{opacity:0}}@media (prefers-reduced-motion:reduce){.usa-term-cursor{animation:none}}";
 
@@ -117,4 +117,4 @@ function defineTerminal(tag = 'usa-terminal') {
 }
 
 exports.defineTerminal = defineTerminal;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/widgets/terminal.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/widgets/terminal.cjs.map

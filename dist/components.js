@@ -36,21 +36,21 @@ import { definePacksComponents } from './components/packs.js';
 export { PACKS, PACK_PRIMITIVES, applyPack, countUp, definePack, flyToCart } from './components/packs.js';
 import { defineFxComponents } from './components/fx.js';
 export { defineFx, registerBuiltinEffects } from './components/fx.js';
-import { a as adoptVariants } from './chunks/variants-DRi3tBJf.js';
-export { V as VARIANTS, s as setVariant } from './chunks/variants-DRi3tBJf.js';
-import { i as canDefine } from './chunks/base-zSGb8ujt.js';
-export { j as MOTION_SCALE, M as MOTION_SENSITIVITY_LEVELS, k as activeAnimations, l as adaptKeyframes, e as animateWithMotion, q as animationBudget, c as configureComponents, u as getMotionIntensity, g as getMotionSensitivity, m as motionScale, v as onFrame, p as prefersReducedMotion, w as schedulerStats, x as setAnimationBudget, y as withoutDeprecations } from './chunks/base-zSGb8ujt.js';
+import { a as adoptVariants } from './chunks/variants-B8gnRVha.js';
+export { V as VARIANTS, s as setVariant } from './chunks/variants-B8gnRVha.js';
+import { i as canDefine } from './chunks/base-CBMzOs1k.js';
+export { j as MOTION_SCALE, M as MOTION_SENSITIVITY_LEVELS, k as activeAnimations, l as adaptKeyframes, e as animateWithMotion, q as animationBudget, c as configureComponents, u as getMotionIntensity, g as getMotionSensitivity, m as motionScale, v as onFrame, p as prefersReducedMotion, w as schedulerStats, x as setAnimationBudget, y as withoutDeprecations } from './chunks/base-CBMzOs1k.js';
 export { MOTION_TOKENS, applyMotionTokens, exportDesignTokens, getMotionTokens, importDesignTokens, importMotionTokens, mergeMotionTokens, motionToken, motionTokensToCss, motionTokensToJSON, motionTokensToVars, motionVar, parseDuration, parseEasing, resolveDurationToken, resolveEasingToken, resolveTokenAliases, validateDesignTokens } from './components/tokens.js';
 export { ALL_TAGS, LIVE_REGION_IDS, MOTION_SENSITIVITY, SENSITIVITY_CSS, STATIC_ALTERNATIVES, announce, auditMotionA11y, baselineReport, liveRegion, motionAllowed, restoreMotionSensitivity, setMotionSensitivity, staticAlternative, warnBaseline } from './components/a11y.js';
 export { autoDegrade, categoryOf, loadCategoryStyles, loadedStyles, onDemandStyles } from './components/perf.js';
 export { BRIDGE_PROTOCOL_VERSION, applyNativeSettings, connectNativeShell, detectNativeHost, parseNativeSettings, postToNative } from './components/bridge.js';
 export { C as COMPONENT_CATEGORIES } from './chunks/index-tags-B-JBecYg.js';
-export { B as BUILTIN_EFFECTS } from './chunks/builtins-Simwbnqg.js';
-export { EFFECT_KINDS, EFFECT_TRIGGERS, bindEffect, getEffect, hasEffect, listEffects, playEffect, registerEffect, registerEffects } from './chunks/registry-CYojuxi5.js';
-export { S as SPRING_PRESETS, c as createSpring, l as linearEasing, p as projectInertia, r as resolveSpring, a as rubberBand, s as snapTo, b as spring, d as springEasing, e as springSamples, f as stepSpring, g as supportsLinearEasing } from './chunks/spring-CznnvQCN.js';
-export { T as TIMELINE_PRESETS, r as resolvePosition, s as supportsNativeScrub, t as timeline } from './chunks/core-BOCM9zD5.js';
-export { g as gesture, p as pinchScale, s as swipeDirection } from './chunks/core-BcQb_f91.js';
-export { h as haptic } from './chunks/fx-DUteojZx.js';
+export { B as BUILTIN_EFFECTS } from './chunks/builtins-DINhkShu.js';
+export { EFFECT_KINDS, EFFECT_TRIGGERS, bindEffect, getEffect, hasEffect, listEffects, playEffect, registerEffect, registerEffects } from './chunks/registry-4UDF3Dpk.js';
+export { S as SPRING_PRESETS, c as createSpring, l as linearEasing, p as projectInertia, r as resolveSpring, a as rubberBand, s as snapTo, b as spring, d as springEasing, e as springSamples, f as stepSpring, g as supportsLinearEasing } from './chunks/spring-2YZXQmr7.js';
+export { T as TIMELINE_PRESETS, r as resolvePosition, s as supportsNativeScrub, t as timeline } from './chunks/core-CBU40kLB.js';
+export { g as gesture, p as pinchScale, s as swipeDirection } from './chunks/core-D1vhyt2F.js';
+export { h as haptic } from './chunks/fx-tuYvq2Dr.js';
 import './chunks/key-click-BLm3BI8_.js';
 
 /**
@@ -105,4 +105,4 @@ function defineComponents(categories) {
 }
 
 export { adoptVariants, defineBackgroundComponents, defineCardComponents, defineClickComponents, defineComponents, defineDepthComponents, defineFeedbackComponents, defineFxComponents, defineGestureComponents, defineInteractionComponents, defineLayoutComponents, definePacksComponents, definePageComponents, definePhysicsComponents, defineRevealComponents, defineSvgComponents, defineTextComponents, defineTimelineComponents, defineTransitionComponents, defineUiComponents, defineWebglComponents };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/components.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/components.js.map
