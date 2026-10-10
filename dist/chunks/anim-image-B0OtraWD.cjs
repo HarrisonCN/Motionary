@@ -171,4 +171,4 @@ exports.composeFrames = composeFrames;
 exports.crc32 = crc32;
 exports.fixDelay = fixDelay;
 exports.u8 = u8;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.5.0/dist/chunks/anim-image-B0OtraWD.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.6.0/dist/chunks/anim-image-B0OtraWD.cjs.map

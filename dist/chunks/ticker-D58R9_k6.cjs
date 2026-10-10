@@ -69,4 +69,4 @@ function getTicker() {
 }
 
 exports.getTicker = getTicker;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.5.0/dist/chunks/ticker-D58R9_k6.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.6.0/dist/chunks/ticker-D58R9_k6.cjs.map

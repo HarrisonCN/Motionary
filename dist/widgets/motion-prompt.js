@@ -10,6 +10,8 @@ function defineMotionPrompt(tag = 'usa-motion-prompt') {
             constructor() {
                 super(...arguments);
                 this.cur = null;
+                this.suggester = null;
+                this.seq = 0;
                 this.render = null;
             }
             static get observedAttributes() {
@@ -22,7 +24,19 @@ function defineMotionPrompt(tag = 'usa-motion-prompt') {
                 const i = describeMotion(text);
                 this.cur = i;
                 this.render?.(i);
-                this.emit('suggest', { intent: i });
+                this.emit('suggest', { intent: i, source: 'local', errors: [] });
+                const n = ++this.seq;
+                if (this.suggester)
+                    void Promise.resolve()
+                        .then(() => this.suggester(text))
+                        .then((r) => {
+                        if (n !== this.seq || !r?.intent)
+                            return;
+                        this.cur = r.intent;
+                        this.render?.(r.intent);
+                        this.emit('suggest', { intent: r.intent, source: r.source, errors: r.errors });
+                    })
+                        .catch(() => undefined);
                 return i;
             }
             mount() {
@@ -99,4 +113,4 @@ function defineMotionPrompt(tag = 'usa-motion-prompt') {
 }
 
 export { defineMotionPrompt };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.5.0/dist/widgets/motion-prompt.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.6.0/dist/widgets/motion-prompt.js.map

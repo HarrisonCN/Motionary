@@ -16,4 +16,4 @@ function registerPinDrop() {
 exports.effect = effect;
 exports.register = registerPinDrop;
 exports.registerPinDrop = registerPinDrop;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.5.0/dist/effects/pin-drop.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.6.0/dist/effects/pin-drop.cjs.map

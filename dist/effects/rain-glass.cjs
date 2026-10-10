@@ -18,4 +18,4 @@ function registerRainGlass() {
 exports.effect = effect;
 exports.register = registerRainGlass;
 exports.registerRainGlass = registerRainGlass;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.5.0/dist/effects/rain-glass.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.6.0/dist/effects/rain-glass.cjs.map

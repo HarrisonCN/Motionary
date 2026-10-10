@@ -19,4 +19,4 @@ function bindUsa(el, binding = {}) {
 }
 
 export { bindUsa as b, usaEventName as u };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.5.0/dist/chunks/bind-B_CTL6Qn.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.6.0/dist/chunks/bind-B_CTL6Qn.js.map

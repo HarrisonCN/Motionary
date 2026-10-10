@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * `motionary/components/ai` (10.7, AI-assisted motion) — turns a short
+ * Motion intent parser (10.7; 11.6: moved to Motion Core, re-exported by `motionary/tooling/ai`) — turns a short
  * natural-language description ("fade the cards up slowly when they scroll
  * into view, one after another") into a motion spec: effect, direction,
  * distance, duration, delay, easing, trigger, repeat, stagger, Web
@@ -308,7 +308,171 @@ function motionSnippet(i, style = 'waapi') {
             return `const el = document.querySelector('.target');\n${guard}${play}`;
     }
 }
+// ---------------------------------------------------------------------------------------------------------------
+// 11.6: optional, user-supplied LLM provider. The local parser above stays the default (offline, deterministic,
+// low latency). A provider is only called when the caller passes one; its output must validate against
+// MOTION_SPEC_SCHEMA (JSON Schema) or the local result is used. This module never performs a network request itself.
+const MOTION_EFFECTS = ['fade', 'slide', 'zoom', 'rotate', 'flip', 'bounce', 'shake', 'pulse', 'blur', 'reveal', 'typewriter', 'count', 'tilt', 'magnetic', 'ripple', 'parallax', 'marquee', 'particles'];
+const MOTION_TRIGGERS = ['load', 'scroll', 'hover', 'click', 'loop'];
+const EASING_BY_NAME = /*#__PURE__*/ Object.fromEntries(EASINGS.map((r) => r.v));
+const EASING_RE = '^(?:linear|ease|ease-in|ease-out|ease-in-out|spring|bouncy|snappy|smooth|cubic-bezier\\(\\s*-?[\\d.]+\\s*,\\s*-?[\\d.]+\\s*,\\s*-?[\\d.]+\\s*,\\s*-?[\\d.]+\\s*\\)|steps\\(\\s*\\d+\\s*(?:,\\s*(?:start|end|jump-[a-z]+)\\s*)?\\))$';
+/** JSON Schema (2020-12) every provider answer must satisfy. */
+const MOTION_SPEC_SCHEMA = {
+    $schema: 'https://json-schema.org/draft/2020-12/schema',
+    title: 'Motionary motion spec',
+    type: 'object',
+    additionalProperties: false,
+    required: ['effect'],
+    properties: {
+        effect: { type: 'string', enum: MOTION_EFFECTS },
+        also: { type: 'array', items: { type: 'string', enum: MOTION_EFFECTS }, maxItems: 4 },
+        direction: { enum: ['up', 'down', 'left', 'right', null] },
+        amount: { type: 'number', minimum: 0, maximum: 2000 },
+        duration: { type: 'number', minimum: 0, maximum: 20000 },
+        delay: { type: 'number', minimum: 0, maximum: 20000 },
+        easing: { type: 'string', maxLength: 80, pattern: EASING_RE },
+        trigger: { type: 'string', enum: MOTION_TRIGGERS },
+        iterations: { anyOf: [{ type: 'integer', minimum: 1, maximum: 1000 }, { const: 'infinite' }] },
+        alternate: { type: 'boolean' },
+        stagger: { type: 'number', minimum: 0, maximum: 5000 },
+    },
+};
+const typeOk = (t, v) => t === 'integer' ? Number.isInteger(v) : t === 'number' ? typeof v === 'number' && Number.isFinite(v) : t === 'array' ? Array.isArray(v) : t === 'object' ? !!v && typeof v === 'object' && !Array.isArray(v) : t === 'null' ? v === null : typeof v === t;
+/** Validate a value against the JSON Schema subset used by MOTION_SPEC_SCHEMA (type, enum, const, required,
+ * additionalProperties, properties, items, anyOf, minimum, maximum, maxItems, maxLength, pattern). Returns the errors. */
+function validateMotionSpec(value, schema = MOTION_SPEC_SCHEMA, path = '$') {
+    const e = [];
+    if (schema.anyOf) {
+        if (!schema.anyOf.some((s) => !validateMotionSpec(value, s, path).length))
+            e.push(`${path}: matches none of the allowed forms`);
+        return e;
+    }
+    if ('const' in schema && value !== schema.const)
+        return [`${path}: must be ${JSON.stringify(schema.const)}`];
+    if (schema.enum && !schema.enum.includes(value))
+        return [`${path}: must be one of ${schema.enum.map((x) => JSON.stringify(x)).join(', ')}`];
+    if (schema.type && !typeOk(schema.type, value))
+        return [`${path}: must be ${schema.type}`];
+    if (typeof value === 'number') {
+        if (schema.minimum != null && value < schema.minimum)
+            e.push(`${path}: must be ≥ ${schema.minimum}`);
+        if (schema.maximum != null && value > schema.maximum)
+            e.push(`${path}: must be ≤ ${schema.maximum}`);
+    }
+    if (typeof value === 'string') {
+        if (schema.maxLength != null && value.length > schema.maxLength)
+            e.push(`${path}: longer than ${schema.maxLength}`);
+        if (schema.pattern && !new RegExp(schema.pattern).test(value))
+            e.push(`${path}: does not match ${schema.pattern}`);
+    }
+    if (Array.isArray(value)) {
+        if (schema.maxItems != null && value.length > schema.maxItems)
+            e.push(`${path}: more than ${schema.maxItems} items`);
+        if (schema.items)
+            value.forEach((v, i) => e.push(...validateMotionSpec(v, schema.items, `${path}[${i}]`)));
+    }
+    if (schema.type === 'object' && value && typeof value === 'object') {
+        const o = value;
+        for (const k of schema.required || [])
+            if (!(k in o))
+                e.push(`${path}.${k}: required`);
+        for (const [k, v] of Object.entries(o)) {
+            const s = schema.properties?.[k];
+            if (!s) {
+                if (schema.additionalProperties === false)
+                    e.push(`${path}.${k}: not allowed`);
+            }
+            else
+                e.push(...validateMotionSpec(v, s, `${path}.${k}`));
+        }
+    }
+    return e;
+}
+/** The decisions of an intent, in MotionSpec form (what a provider is asked to improve). */
+function specOf(i) {
+    return { effect: i.effect, also: i.also, direction: i.direction, amount: i.amount, duration: i.duration, delay: i.delay, easing: i.easingName || i.easing, trigger: i.trigger, iterations: i.iterations === Infinity ? 'infinite' : i.iterations, alternate: i.alternate, stagger: i.stagger };
+}
+/** Build a full intent (keyframes, WAAPI options, CSS, components) from a validated spec; unset fields come from `base`. */
+function intentFromSpec(text, spec, base = describeMotion(text)) {
+    const effect = spec.effect;
+    const also = (spec.also || []).filter((x) => x !== effect);
+    const direction = spec.direction !== undefined ? spec.direction : effect === base.effect ? base.direction : effect === 'slide' ? 'up' : null;
+    const amount = spec.amount ?? (effect === base.effect ? base.amount : parseAmount('', effect));
+    const trigger = spec.trigger || base.trigger;
+    const easingName = spec.easing ? (EASING_BY_NAME[spec.easing] ? spec.easing : '') : base.easingName;
+    const easing = spec.easing ? EASING_BY_NAME[spec.easing] || spec.easing : base.easing;
+    const iterations = spec.iterations === 'infinite' ? Infinity : spec.iterations ?? base.iterations;
+    const alternate = spec.alternate ?? base.alternate;
+    const duration = spec.duration ?? base.duration;
+    const delay = spec.delay ?? base.delay;
+    const stagger = spec.stagger ?? base.stagger;
+    const kf = keyframesFor({ effect, also, direction, amount });
+    const options = { duration, delay, easing, fill: 'both', iterations, ...(alternate ? { direction: 'alternate' } : {}) };
+    const comps = [];
+    for (const key of [effect, trigger])
+        for (const [tag, why, snippet] of COMPONENTS[key] || [])
+            if (!comps.some((c) => c.tag === tag))
+                comps.push({ tag, why, snippet });
+    if (stagger)
+        comps.push({ tag: 'usa-stagger', why: 'staggers its children', snippet: `<usa-stagger delay="${stagger}"><div>…</div><div>…</div></usa-stagger>` });
+    return { text: String(text || '').trim(), effect, also, direction, amount, duration, delay, easing, easingName, trigger, iterations, alternate, stagger, reducedMotion: 'respect', keyframes: kf, options, css: cssFor(kf, options, trigger, stagger), components: comps, confidence: 1, matched: ['provider'] };
+}
+const MOTION_SYSTEM_PROMPT = 'You turn a short description of a UI animation into a JSON object that matches the given JSON Schema. Answer with the JSON object only. Durations, delays and stagger are milliseconds; amount is px for slides, a scale factor for zooms and degrees for rotations / flips.';
+/**
+ * Suggest a motion for a description. Without `provider`: the local deterministic parser (no network).
+ * With `provider`: asks it for a MotionSpec, validates the answer against MOTION_SPEC_SCHEMA and falls back to the
+ * local result on any error, timeout (default 8 s) or abort.
+ */
+async function suggestMotion(text, options = {}) {
+    const local = describeMotion(text);
+    const p = options.provider;
+    if (!p)
+        return { intent: local, source: 'local', errors: [] };
+    const name = typeof p === 'function' ? p.name || 'provider' : p.name || 'provider';
+    const fail = (errors) => ({ intent: local, source: 'fallback', provider: name, errors });
+    try {
+        const req = { prompt: local.text, system: MOTION_SYSTEM_PROMPT, schema: MOTION_SPEC_SCHEMA, local: specOf(local), signal: options.signal };
+        const call = Promise.resolve(typeof p === 'function' ? p(req) : p.complete(req));
+        let timer;
+        const ms = options.timeout ?? 8000;
+        const timeout = new Promise((_, rej) => (timer = setTimeout(() => rej(new Error(`timed out after ${ms} ms`)), ms)));
+        let raw;
+        try {
+            raw = await Promise.race([call, timeout]);
+        }
+        finally {
+            clearTimeout(timer);
+        }
+        if (options.signal?.aborted)
+            return fail(['aborted']);
+        let value = raw;
+        if (typeof raw === 'string') {
+            const m = /\{[\s\S]*\}/.exec(raw.replace(/```(?:json)?/g, ''));
+            try {
+                value = JSON.parse(m ? m[0] : raw);
+            }
+            catch {
+                return fail(['provider answer is not JSON']);
+            }
+        }
+        const errors = validateMotionSpec(value);
+        if (errors.length)
+            return fail(errors);
+        return { intent: intentFromSpec(local.text, value, local), source: 'provider', provider: name, errors: [] };
+    }
+    catch (err) {
+        return fail([`provider error: ${err?.message || String(err)}`]);
+    }
+}
 
+exports.MOTION_EFFECTS = MOTION_EFFECTS;
+exports.MOTION_SPEC_SCHEMA = MOTION_SPEC_SCHEMA;
+exports.MOTION_SYSTEM_PROMPT = MOTION_SYSTEM_PROMPT;
+exports.MOTION_TRIGGERS = MOTION_TRIGGERS;
 exports.describeMotion = describeMotion;
+exports.intentFromSpec = intentFromSpec;
 exports.motionSnippet = motionSnippet;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.5.0/dist/components/ai.cjs.map
+exports.specOf = specOf;
+exports.suggestMotion = suggestMotion;
+exports.validateMotionSpec = validateMotionSpec;
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.6.0/dist/components/ai.cjs.map

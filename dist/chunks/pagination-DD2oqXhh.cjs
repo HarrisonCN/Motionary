@@ -130,4 +130,4 @@ function definePagination(tag = 'usa-pagination') {
 
 exports.definePagination = definePagination;
 exports.pageWindow = pageWindow;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.5.0/dist/chunks/pagination-DD2oqXhh.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.6.0/dist/chunks/pagination-DD2oqXhh.cjs.map

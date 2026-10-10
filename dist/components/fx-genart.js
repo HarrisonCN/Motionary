@@ -128,4 +128,4 @@ function registerGenArtPack() {
 }
 
 export { GENART_FX, PALETTES, meshGradient, registerGenArtPack, seededRandom };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.5.0/dist/components/fx-genart.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.6.0/dist/components/fx-genart.js.map

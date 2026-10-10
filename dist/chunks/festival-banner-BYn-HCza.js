@@ -52,4 +52,4 @@ function defineFestivalBanner(tag = 'usa-festival-banner') {
 }
 
 export { FESTIVAL_THEMES as F, defineFestivalBanner as d };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.5.0/dist/chunks/festival-banner-BYn-HCza.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.6.0/dist/chunks/festival-banner-BYn-HCza.js.map

@@ -12,4 +12,4 @@ function registerPixelateIn() {
 }
 
 export { effect, registerPixelateIn as register, registerPixelateIn };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.5.0/dist/effects/pixelate-in.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.6.0/dist/effects/pixelate-in.js.map
