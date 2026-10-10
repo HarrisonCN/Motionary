@@ -2,21 +2,53 @@
 
 # Motionary
 
-**Scroll animations and animated Web Components for the modern web — 214 scroll presets, 90 effects, zero dependencies.**
+**Scroll animations, animated Web Components and a zero-dependency motion runtime for the web.**
 
-_Formerly **use-scroll-animate** — same API, same `<usa-*>` tags; the old npm package keeps working as an alias._
+_Formerly **use-scroll-animate**. The old npm package is still published as an alias of the same build._
 
-[![npm](https://img.shields.io/npm/v/motionary?style=flat-square)](https://www.npmjs.com/package/motionary) [![CI](https://github.com/HarrisonCN/Motionary/actions/workflows/ci.yml/badge.svg)](https://github.com/HarrisonCN/Motionary/actions/workflows/ci.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](./LICENSE)
+[![npm](https://img.shields.io/npm/v/motionary?style=flat-square)](https://www.npmjs.com/package/motionary) [![CI](https://github.com/HarrisonCN/Motionary/actions/workflows/ci.yml/badge.svg)](https://github.com/HarrisonCN/Motionary/actions/workflows/ci.yml) [![motionary/core size](https://deno.bundlejs.com/?q=motionary/core&badge)](https://bundlejs.com/?q=motionary/core) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](./LICENSE)
 
-[English](./README.md) | [简体中文](./README_zh.md) | [日本語](./README_ja.md)
+**English** | [简体中文](./README_zh.md) | [日本語](./README_ja.md)
 
-**[🛍 Animation Store](https://harrisoncn.github.io/Motionary/showcase/)** · **[🧩 Components](https://harrisoncn.github.io/Motionary/showcase/components.html)** · **[🎛 Playground](https://harrisoncn.github.io/Motionary/showcase/playground.html)** · **[📜 Story](https://harrisoncn.github.io/Motionary/showcase/story.html)**
-
-<sub>The Store lets you preview, tweak and copy all <b>227</b> animations — 214 scroll presets plus card, click, physics and page effects — at desktop and phone sizes.</sub>
+**[Animation Store](https://harrisoncn.github.io/Motionary/showcase/)** · **[Components](https://harrisoncn.github.io/Motionary/showcase/components.html)** · **[Component playground](https://harrisoncn.github.io/Motionary/showcase/run.html)** · **[Timeline playground](https://harrisoncn.github.io/Motionary/showcase/playground.html)** · **[Scroll story](https://harrisoncn.github.io/Motionary/showcase/story.html)**
 
 </div>
 
-Motionary reveals content as it scrolls into view (IntersectionObserver + Web Animations, or the browser's native scroll timeline) and ships 94 animated custom elements — cards, buttons, physics, page transitions, backgrounds, WebGL and more — that work in any framework, in plain HTML and in desktop web-view apps (Electron, Tauri, WebView2). Everything respects `prefers-reduced-motion`.
+Motionary reveals content as it scrolls into view and gives you 209 animated `<usa-*>` custom elements: cards, buttons,
+physics, page transitions, generative backgrounds, Lottie, WebGL and more. It runs in plain HTML, in React, Vue, Svelte,
+Solid and Angular, and in desktop web views (Electron, Tauri, WebView2). It has no runtime dependencies, every entry point
+is tree-shakeable and has a gzip budget checked in CI, and every animation respects `prefers-reduced-motion`.
+
+> 13.0: discover, copy, run. The 12.x tooling is now stable: MCP mounted validation (`validate_snippet { mount: true }`) and
+> version-aware answers (`check_compat`), the Figma plugin export, the [component playground](https://harrisoncn.github.io/Motionary/showcase/run.html),
+> `npx motionary export` and `npx motionary compat`. The import paths deprecated in 11.5 are removed. See
+> [Upgrading to 13](#upgrading-to-13).
+
+## Contents
+
+[Features](#features) · [Install](#install) · [Quick start](#quick-start) · [Runtime tiers](#runtime-and-tiers) ·
+[Components](#components-gallery-and-playground) · [CLI](#cli) · [MCP server and AI](#mcp-server-and-ai) ·
+[Figma plugin](#figma-plugin) · [Accessibility](#accessibility) · [Size budgets](#size-budgets) ·
+[Upgrading to 13](#upgrading-to-13) · [Versions](#versions-and-compatibility) · [Docs](#documentation) ·
+[Contributing](#contributing) · [Reference](#reference)
+
+## Features
+
+- **214 scroll-reveal presets** in 14 families (33 in the core, 181 more in `motionary/presets/extended`): fades, zooms,
+  3D flips, clip-path shapes, blur and mask, bounce, depth, glitch, and scroll-linked `scrub-*`. Also `timeline()`,
+  `staggerChildren()` and `parallax()`.
+- **209 `<usa-*>` Web Components**: 91 in `motionary/components` (by category) and 118 widgets, one entry point each
+  (`motionary/widgets/<name>`). Plus 141 effects with their own entry points (`motionary/effects/<name>`).
+- **Motion Core**: `createMotion()` from `motionary/core`, a plugin-based engine at about 2.5 KB gzip (budget 10 KB).
+- **A runtime of its own**: `motionary/runtime` (ticker, tween, timeline) plus 20 modules: scroll scenes, smooth scrolling,
+  text splitting, SVG morphing, sprites, GIF / APNG / WebP, Lottie and dotLottie, WebGL2, glTF / OBJ, 2D physics. They are
+  grouped in three tiers, and you pay only for the modules you import.
+- **Any framework**: `motionary/react`, `motionary/vue`, `motionary/svelte`, `motionary/solid` and `motionary/angular`, plus
+  element wrappers in `motionary/components/react` · `vue` · `svelte` · `solid`. Importing on the server does nothing.
+- **Tooling**: an MCP server for AI assistants, a local motion parser with an optional LLM provider, a Figma plugin, a
+  CLI that exports to CSS / mini program WXSS / HarmonyOS ArkTS, and codemods for every major.
+- **Accessible by default**: reduced motion everywhere, user-facing motion controls, and one component contract
+  (attributes, events, keyboard, lifecycle) checked in CI.
 
 ## Install
 
@@ -24,41 +56,77 @@ Motionary reveals content as it scrolls into view (IntersectionObserver + Web An
 npm i motionary
 ```
 
+No build step? Use the CDN. URLs pin the major version (`@13`):
+
 ```html
-<!-- CDN (no build) -->
-<script src="https://unpkg.com/motionary@13/dist/index.umd.js"></script>            <!-- window.ScrollAnimate -->
+<script src="https://unpkg.com/motionary@13/dist/index.umd.js"></script>            <!-- scroll API: window.ScrollAnimate -->
 <script src="https://unpkg.com/motionary@13/dist/presets-extended.umd.js"></script> <!-- +181 presets -->
-<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>       <!-- every <usa-*>, window.UsaComponents -->
+<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>       <!-- the motionary/components elements: window.UsaComponents -->
+<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>          <!-- the widgets: window.UsaWidgets -->
 ```
 
-jsDelivr works too: `https://cdn.jsdelivr.net/npm/motionary@13/dist/…`. Existing `use-scroll-animate` installs and `unpkg.com/use-scroll-animate@6` URLs keep working.
+jsDelivr works too: `https://cdn.jsdelivr.net/npm/motionary@13/dist/…`. Already on `use-scroll-animate`? It keeps
+working, at the same versions. To switch, replace the name in imports and URLs ([details](./docs/versions.md)).
 
-## 30-second quickstart
+## Quick start
 
-Mark elements with `data-sa` and pick a preset with `data-sa-animation` (every option has a `data-sa-*` attribute), or use the JS API:
+### HTML: data attributes
 
 ```html
-<!-- 1. HTML only: data attributes + one init() call -->
 <h2 data-sa data-sa-animation="fade-in-up">Hello</h2>
 <div data-sa data-sa-animation="bounce-in-up" data-sa-delay="150">Card</div>
+
 <script type="module">
   import ScrollAnimate from 'motionary';
   import 'motionary/presets/extended'; // optional: +181 presets (bounce-in-up, clip-diamond, …)
-  ScrollAnimate.init(); // picks up every [data-sa]
+  ScrollAnimate.init();                // picks up every [data-sa]
 </script>
 ```
 
+Every option has a `data-sa-*` attribute ([API reference](./docs/API.md)).
+
+### JavaScript
+
 ```js
-// 2. JS API
-import ScrollAnimate, { staggerChildren, parallax, timeline } from 'motionary';
+import ScrollAnimate, { staggerChildren, parallax } from 'motionary';
 
 ScrollAnimate.observe('.card', { animation: 'zoom-in-up', duration: 800, easing: 'spring' });
 staggerChildren(document.querySelector('.grid'), { animation: 'stagger-pop', stagger: 60 });
 parallax('.hero-bg', { speed: 0.3 });
+// native scroll timeline, off the main thread where the browser supports it
 ScrollAnimate.observe('.logo', { animation: 'scrub-spin', engine: 'css', viewRange: ['cover 0%', 'cover 100%'] });
 ```
 
-Frameworks — each adapter is its own entry point and cleans up on unmount:
+### Motion Core (`motionary/core`)
+
+```js
+import { createMotion } from 'motionary/core';
+import { retro, cinema } from 'motionary/plugins';
+
+const motion = createMotion().use(retro, cinema);
+motion.reveal('.card', 'fade-up', { stagger: 80 });       // scroll-in entrances
+motion.bind(button, 'vhs-glitch', { trigger: 'click' });  // an effect on a trigger
+await motion.play(hero, 'dolly-in', { duration: 900 });   // play once and wait for it
+```
+
+More: [docs/core.md](./docs/core.md).
+
+### Web Components
+
+```html
+<script type="module">
+  import { defineComponents } from 'motionary/components';
+  defineComponents(); // or lazyDefine() from 'motionary/components/lazy': loads only the tags on the page
+</script>
+
+<usa-card effect="holo">…</usa-card>
+<usa-button deform="gooey">Buy</usa-button>
+<usa-fx effect="confetti" trigger="click"><button>Celebrate</button></usa-fx>
+```
+
+### Frameworks
+
+Each adapter is its own entry point and cleans up on unmount.
 
 ```jsx
 // React
@@ -94,90 +162,255 @@ const { animateRef } = useScrollAnimate({ animation: 'zoom-in' });
 ```jsx
 // Solid
 import { scrollAnimate } from 'motionary/solid';
-scrollAnimate; // keep the directive import (TypeScript)
+scrollAnimate; // keeps the directive import (TypeScript)
 export const Card = () => <div use:scrollAnimate={{ animation: 'blur-in-up' }}>Hello</div>;
 ```
 
 ```ts
-// Angular (standalone) — the animated Web Components
+// Angular (standalone): the <usa-*> elements
 import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
-import { usaInitializer } from 'motionary/angular';
-import 'motionary/presets/extended'; // lets <usa-reveal effect> use every preset name
-// app.config.ts: providers: [{ provide: APP_INITIALIZER, multi: true, useFactory: usaInitializer() }]
+import { provideUsa } from 'motionary/angular';
+// app.config.ts: providers: [provideUsa(APP_INITIALIZER, ['click', 'ui'])]   (the categories to register)
 @Component({ standalone: true, schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  template: `<usa-reveal effect="bounce-in-up"><h2>Hello</h2></usa-reveal>` })
-export class Hero {}
+  template: `<usa-checkbox label="Motion" [checked]="on" (usa:change)="on = $any($event).detail.checked"></usa-checkbox>` })
+export class Settings { on = false; }
 ```
 
-> 11.5: Angular has the top-level entry `motionary/angular` (`motionary/angular` still works until 13.0). Layer subpaths and deprecated paths: [docs/public-api.md](./docs/public-api.md) · `npx motionary doctor`.
-> 11.6: `suggestMotion(text, { provider })` from `motionary/tooling/ai` — local parser by default, optional user-supplied LLM ([docs/ai-provider.md](./docs/ai-provider.md)).
-> 11.7: every `<usa-*>` element is audited against one contract — attributes, events, keyboard, lifecycle, reduced motion, errors ([docs/component-contract.md](./docs/component-contract.md), [report](./docs/contract-report.md)).
-> 11.9: preparing for 12.0 — [docs/upgrading-12.md](./docs/upgrading-12.md) · `npx motionary doctor` · `npx usa-codemod-12 --write`.
-> 12.0: one component contract for every `<usa-*>` element, enforced in CI — [docs/component-contract.md](./docs/component-contract.md) · upgrading: [docs/upgrading-12.md](./docs/upgrading-12.md).
-> 12.1: cross-platform 3.0 — `npx motionary export --target css|wxss|arkts` for mini programs and HarmonyOS ArkUI, plus a [cross-platform previewer](https://harrisoncn.github.io/Motionary/showcase/xplat.html) — [docs/cross-platform.md](./docs/cross-platform.md).
-> 12.2: `motionary-mcp` `validate_snippet { mount: true }` mounts generated code in a headless DOM with the real bundles and checks it against the component contract — [docs/mcp.md](./docs/mcp.md#mounted-validation-122).
-> 12.3: the Figma plugin exports motion tokens (W3C JSON + CSS) and a runnable HTML page per selection, prerequisites in order — [figma-plugin/README.md](./figma-plugin/README.md).
-> 12.4: [component playground](https://harrisoncn.github.io/Motionary/showcase/run.html) — every component as a runnable page with its prerequisites and tier, one-click copy.
-> 12.5: version compatibility — the manifest records when each component / module arrived and changed; `motionary-mcp` answers for your installed version; `npx motionary compat <version>` — [docs/version-compat.md](./docs/version-compat.md).
-> 13.0: discover, copy, run — the 12.x tooling is stable (MCP mounted validation `validate_snippet { mount }` + version-aware answers `check_compat`, Figma export, component playground, `motionary export`, `motionary compat`); the import paths deprecated in 11.5 are removed — [docs/upgrading-13.md](./docs/upgrading-13.md).
-> 12.9: preparing for 13.0 — the import paths deprecated in 11.5 are removed in 13.0: [docs/upgrading-13.md](./docs/upgrading-13.md) · `npx motionary doctor` · `npx usa-codemod-13 --write`.
+SSR, Next.js, Nuxt and SvelteKit: [docs/frameworks-ssr.md](./docs/frameworks-ssr.md). Every public subpath by layer:
+[docs/public-api.md](./docs/public-api.md).
 
-Animated components need no framework at all:
+## Runtime and tiers
 
-```html
-<script type="module">
-  import { defineComponents } from 'motionary/components';
-  defineComponents(); // or lazyDefine() from 'motionary/components/lazy'
-</script>
-<usa-card effect="holo">…</usa-card>
-<usa-button deform="gooey">Buy</usa-button>
-<usa-fx effect="confetti" trigger="click"><button>Celebrate</button></usa-fx>
+`motionary/runtime` is Motionary's own animation runtime: a shared ticker, tween and timeline engine, and one module per
+feature or file format (`motionary/runtime/<module>`). Register what you use with `use()`. Each module belongs to a tier,
+and a module only depends on its own tier or lower ones, so a basic page never downloads WebGL, 3D or physics code.
+
+| Tier | Modules | Bundle (gzip, 13.0) | Budget |
+|---|---|---:|---:|
+| **Basic** | core (ticker, tween, timeline), `scroll`, `text`, `format-css`, `format-motion` | 10.83 KB | 12 KB |
+| **Standard** | basic + `smooth`, `drag-snap`, `format-svg`, `format-sprite`, `format-gif`, `format-apng`, `format-webp`, `vector` (Lottie / dotLottie), `lottie-state`; official Rive runtime | 33.74 KB | 37 KB |
+| **Advanced** | standard + `gl` (WebGL2), `format-gltf`, `format-obj`, `gltf-anim`, `gltf-decoders` (Draco / KTX2), `physics`, `format-scene` | 54.55 KB | 60 KB |
+
+```js
+import { use } from 'motionary/runtime';
+import { scroll } from 'motionary/runtime/scroll';
+import { defineScrollScene } from 'motionary/components/widgets';
+
+use(scroll);          // register the module first (this also registers the core)
+defineScrollScene();  // then the component that needs it
 ```
 
-## What's inside
+A component that needs a module shows a **Requires:** badge in the gallery, and it throws a clear error (install, import,
+CDN) when the module is missing. Details: [docs/runtime-tiers.md](./docs/runtime-tiers.md), one page per module in
+[docs/runtime/](./docs/runtime/), and the [module and prerequisite tables](#reference) at the end of this README.
 
-| Area | What you get |
+## Components, gallery and playground
+
+| Page | What it does |
 |---|---|
-| **Scroll presets** | **214** reveal presets (33 core + 181 in `motionary/presets/extended`) in 14 families — fades, zooms, 3D flips & doors, overshoot slides, clip-path shapes, blur & mask, bounce & elastic, colour & light, depth, glitch / typewriter, stagger-ready and scroll-linked `scrub-*`; plus `timeline()` with 10 timeline presets |
-| **Cards, clicks & button morphs** | `<usa-card>` with 10 effects (flip, holo, glass, border glow, …), stacks & 3D carousel; 7 click components with 4 button deforms (squash · wobble · gooey · dent) and icon morphs; 12 registered card / click effects (holo, book-open, shockwave, ink-splash, emoji-rain, …) |
-| **Physics & bounce** | `<usa-spring>`, `<usa-draggable>` (spring-back · inertia · snap), `<usa-overscroll>`; `spring()` / `solveSpring()` with 7 spring presets; 7 physics effects (bounce-in, rubber-band, gravity-text, bell-swing, …) |
-| **Page transitions** | `pageTransition()`, `viewTransition()`, `sharedTransition()`, `flip()`, MPA transitions; 7 page effects (curtain, iris, pixel-dissolve, blinds, velocity-skew, …); `<usa-dialog>`, `<usa-view-switch>` |
-| **Generative backgrounds** | 6 canvas backgrounds (flow-field, voronoi, mesh-gradient, starfield, metaballs, contours) + 9 background elements (aurora, particles, grain, blobs, water ripple, Acrylic / Mica, …) |
-| **Sound-reactive** | `<usa-audio>` + Web Audio beat detection (`createBeatDetector()`, `onBeat()`); 3 audio visualisers (spectrum-bars, pulse-ring, wave-ring); any effect can fire on the beat |
-| **Cursor & gestures** | 5 cursor effects (comet / ribbon / sparkle trails, magnetic dots, spotlight) + `<usa-cursor>`; fling · twist · long-press → effects with `<usa-gesture-fx>`; `<usa-swipeable>`, `<usa-pinch-zoom>` |
-| **Themes** | 5 theme packs (neon · paper · glass · retro · brutalist) via `<usa-motion-theme>` / `applyMotionTheme()`, each with a signature effect; motion tokens (`/components/tokens`) |
-| **Micro-interactions** | 23 ready-made UI moments: copy-success, like-heart, add-to-cart, send-plane, upvote, trash-shake, input-shake, success-check, notify-badge, … |
-| **`<usa-player>` & stories** | `<usa-player>` plays JSON animations (keyframe tracks, presets, effects; load / view / scroll / click triggers) exported from the Playground; `<usa-story>` with 6 scroll-story templates |
-| **WebGL** | `<usa-shader>`, `<usa-distort>`, `<usa-liquid>`, `<usa-post-fx>` — 5 particle presets, 9 post effects (bloom, CRT, chromatic, glitch, …) with CSS fallbacks and a power-saving governor |
+| [Animation Store](https://harrisoncn.github.io/Motionary/showcase/) | Preview, tweak and copy every preset and effect at desktop and phone sizes |
+| [Components](https://harrisoncn.github.io/Motionary/showcase/components.html) | The gallery: every `<usa-*>` element with its attributes, prerequisites and tier |
+| [Component playground](https://harrisoncn.github.io/Motionary/showcase/run.html) | Each component as a complete runnable page: edit, **Run**, **Copy** or **Download .html**; deep links like `run.html#usa-tilt` |
+| [Timeline playground](https://harrisoncn.github.io/Motionary/showcase/playground.html) | Visual keyframe editor; exports JSON for `<usa-player>` |
+| [Scroll story](https://harrisoncn.github.io/Motionary/showcase/story.html) | `<usa-story>` scroll-storytelling templates |
+| [Cross-platform previewer](https://harrisoncn.github.io/Motionary/showcase/xplat.html) | One preset on the web, in a mini program and in HarmonyOS ArkUI |
+| [demo/index.html](./demo/index.html) | Every preset, no build step (open it locally) |
 
-90 effects share one registry (`registerEffect()` / `playEffect()` / `bindEffect()` / `<usa-fx>`, `motionary/components/fx`); the 5.x packs live in `motionary/components/effects`.
+Import one category (`motionary/components/cards`), everything (`motionary/components`), the CSS-on-demand build
+(`motionary/components/lite`), or one widget (`motionary/widgets/<name>`, e.g. `motionary/widgets/toast-stack`).
+Every element: [docs/components.md](./docs/components.md), one page per element in
+[docs/components/](./docs/components/README.md), every entry point in [docs/entry-points.md](./docs/entry-points.md).
 
-### All 94 animated components
+<details>
+<summary><b>The 91 elements in <code>motionary/components</code></b></summary>
 
-Import one category (`motionary/components/cards`), everything (`motionary/components`), the CSS-on-demand build (`/components/lite`), or let `lazyDefine()` load only the tags on the page. Wrappers: `/components/react`, `/vue`, `/svelte`, `/solid`, `/angular`.
+| Category | Entry | Elements |
+|---|---|---|
+| **Scroll reveal** | `motionary/components/reveal` | `<usa-reveal>` · `<usa-stagger>` · `<usa-scroll-progress>` · `<usa-scrolly>` |
+| **Text** | `motionary/components/text` | `<usa-typewriter>` · `<usa-split-text>` · `<usa-scramble>` · `<usa-counter>` · `<usa-shimmer-text>` · `<usa-text-rotate>` · `<usa-wave-text>` · `<usa-glitch>` · `<usa-gradient-text>` · `<usa-handwriting>` · `<usa-scroll-highlight>` |
+| **Interaction** | `motionary/components/interaction` | `<usa-ripple>` · `<usa-magnetic>` · `<usa-tilt>` · `<usa-spotlight>` · `<usa-press>` |
+| **Feedback** | `motionary/components/feedback` | `<usa-spinner>` · `<usa-skeleton>` · `<usa-progress>` · `<usa-toaster>` · `<usa-check>` |
+| **Backgrounds** | `motionary/components/background` | `<usa-aurora>` · `<usa-particles>` · `<usa-grain>` · `<usa-marquee>` · `<usa-acrylic>` · `<usa-grid-glow>` · `<usa-blobs>` · `<usa-water-ripple>` · `<usa-dot-network>` |
+| **Transitions** | `motionary/components/transitions` | `<usa-dialog>` · `<usa-accordion>` · `<usa-view-switch>` |
+| **Spring & physics** | `motionary/components/physics` | `<usa-spring>` · `<usa-draggable>` · `<usa-overscroll>` |
+| **Cards** | `motionary/components/cards` | `<usa-card>` · `<usa-card-stack>` · `<usa-sticky-stack>` · `<usa-carousel-3d>` |
+| **Click & buttons** | `motionary/components/click` | `<usa-click>` · `<usa-button>` · `<usa-icon-morph>` · `<usa-like>` · `<usa-hold>` · `<usa-double-tap>` · `<usa-checkbox>` |
+| **UI kit** | `motionary/components/ui` | `<usa-tabs>` · `<usa-drawer>` · `<usa-bottom-sheet>` · `<usa-pull-refresh>` · `<usa-fab>` · `<usa-navbar>` · `<usa-slider>` · `<usa-popover>` · `<usa-badge>` · `<usa-avatar-stack>` |
+| **Page-wide** | `motionary/components/page` | `<usa-cursor>` · `<usa-fullpage>` · `<usa-loading-bar>` · `<usa-back-to-top>` · `<usa-ambient>` · `<usa-splash>` · `<usa-auto-skeleton>` · `<usa-motion-switch>` |
+| **Timeline** | `motionary/components/timeline` | `<usa-timeline>` |
+| **Gestures** | `motionary/components/gesture` | `<usa-swipeable>` · `<usa-pinch-zoom>` |
+| **SVG** | `motionary/components/svg` | `<usa-draw>` · `<usa-morph>` · `<usa-mask-reveal>` · `<usa-anim-icon>` |
+| **WebGL** | `motionary/components/webgl` | `<usa-shader>` · `<usa-distort>` · `<usa-liquid>` · `<usa-post-fx>` |
+| **3D depth** | `motionary/components/depth` | `<usa-cube>` · `<usa-depth>` |
+| **Layout** | `motionary/components/layout` | `<usa-auto-animate>` · `<usa-masonry>` |
+| **Packs** | `motionary/components/packs` | `<usa-pack>` |
+| **Effect registry** | `motionary/components/fx` | `<usa-fx>` |
+| **Effect packs** | `motionary/components/effects` | `<usa-player>` · `<usa-story>` · `<usa-audio>` · `<usa-motion-theme>` · `<usa-gesture-fx>` |
 
-| Entry | Elements |
+</details>
+
+## CLI
+
+Everything ships in the `motionary` package and runs with `npx`:
+
+| Command | What it does |
 |---|---|
-| **Scroll reveal** (`/components/reveal`) | `<usa-reveal>` · `<usa-stagger>` · `<usa-scroll-progress>` · `<usa-scrolly>` |
-| **Text** (`/components/text`) | `<usa-typewriter>` · `<usa-split-text>` · `<usa-scramble>` · `<usa-counter>` · `<usa-shimmer-text>` · `<usa-text-rotate>` · `<usa-wave-text>` · `<usa-glitch>` · `<usa-gradient-text>` · `<usa-handwriting>` · `<usa-scroll-highlight>` |
-| **Interaction** (`/components/interaction`) | `<usa-ripple>` · `<usa-magnetic>` · `<usa-tilt>` · `<usa-spotlight>` · `<usa-press>` · `<usa-switch>` |
-| **Feedback** (`/components/feedback`) | `<usa-spinner>` · `<usa-skeleton>` · `<usa-progress>` · `<usa-toaster>` · `<usa-check>` |
-| **Backgrounds** (`/components/background`) | `<usa-aurora>` · `<usa-particles>` · `<usa-grain>` · `<usa-marquee>` · `<usa-acrylic>` · `<usa-grid-glow>` · `<usa-blobs>` · `<usa-water-ripple>` · `<usa-dot-network>` |
-| **Transitions** (`/components/transitions`) | `<usa-dialog>` · `<usa-accordion>` · `<usa-view-switch>` |
-| **Spring & physics** (`/components/physics`) | `<usa-spring>` · `<usa-draggable>` · `<usa-overscroll>` |
-| **Cards** (`/components/cards`) | `<usa-card>` · `<usa-card-stack>` · `<usa-sticky-stack>` · `<usa-carousel-3d>` |
-| **Click & buttons** (`/components/click`) | `<usa-click>` · `<usa-button>` · `<usa-icon-morph>` · `<usa-like>` · `<usa-hold>` · `<usa-double-tap>` · `<usa-checkbox>` |
-| **UI kit** (`/components/ui`) | `<usa-tabs>` · `<usa-drawer>` · `<usa-bottom-sheet>` · `<usa-pull-refresh>` · `<usa-fab>` · `<usa-navbar>` · `<usa-slider>` · `<usa-popover>` · `<usa-badge>` · `<usa-avatar-stack>` |
-| **Page-wide** (`/components/page`) | `<usa-cursor>` · `<usa-fullpage>` · `<usa-loading-bar>` · `<usa-back-to-top>` · `<usa-ambient>` · `<usa-splash>` · `<usa-auto-skeleton>` · `<usa-motion-switch>` |
-| **Timeline** (`/components/timeline`) | `<usa-timeline>` |
-| **Gestures** (`/components/gesture`) | `<usa-swipeable>` · `<usa-pinch-zoom>` |
-| **SVG** (`/components/svg`) | `<usa-draw>` · `<usa-morph>` · `<usa-mask-reveal>` · `<usa-anim-icon>` |
-| **WebGL** (`/components/webgl`) | `<usa-shader>` · `<usa-distort>` · `<usa-liquid>` · `<usa-post-fx>` |
-| **3D depth** (`/components/depth`) | `<usa-cube>` · `<usa-depth>` |
-| **Layout** (`/components/layout`) | `<usa-auto-animate>` · `<usa-masonry>` |
-| **Packs** (`/components/packs`) | `<usa-pack>` |
-| **Effect registry** (`/components/fx`) | `<usa-fx>` |
-| **Effect packs** (`/components/effects`) | `<usa-player>` · `<usa-story>` · `<usa-audio>` · `<usa-motion-theme>` · `<usa-gesture-fx>` |
+| `npx motionary doctor [paths…] [--json]` | Lists removed import paths and legacy event names in your project. Exits with code 1 when it finds any, so you can use it in CI |
+| `npx motionary export --target css\|wxss\|arkts [--presets a,b] [--rpx] [--out file]` | Exports presets and motion tokens to CSS, mini program WXSS or HarmonyOS ArkTS ([docs/cross-platform.md](./docs/cross-platform.md)) |
+| `npx motionary compat <version> [--json]` | What a project on that version can use, and what changed after it ([docs/version-compat.md](./docs/version-compat.md)) |
+| `npx usa-codemod-13 [--write] [paths…]` | Rewrites the paths removed in 13.0 and CDN URLs pinned to `@10` / `@11` / `@12`. It is a dry run unless you pass `--write`. `usa-codemod-5` … `usa-codemod-12` cover the earlier majors |
+| `npx create-motionary-plugin <name>` | Scaffolds an effect plugin with tests and a signing script |
+| `npx -y -p motionary motionary-mcp` | Starts the MCP server (next section) |
+
+## MCP server and AI
+
+`motionary-mcp` is a read-only [Model Context Protocol](https://modelcontextprotocol.io) server. It lets Claude, Cursor,
+VS Code, Windsurf, Zed and other MCP clients look up the component catalog and get snippets that already install, import
+and register every prerequisite in the right order.
+
+```json
+{ "mcpServers": { "motionary": { "command": "npx", "args": ["-y", "-p", "motionary", "motionary-mcp"] } } }
+```
+
+Claude Code: `claude mcp add motionary -- npx -y -p motionary motionary-mcp`.
+
+- Tools: `list_components`, `search_components`, `get_component`, `get_example`, `scaffold_snippet`, `suggest_motion`,
+  `validate_snippet`, `check_compat`.
+- `validate_snippet { mount: true }` mounts the markup in jsdom (an optional peer: `npm i -D jsdom`) with the real bundles
+  and checks it against the component contract. The snippet's own scripts never run.
+- Answers match the version installed in your project. `check_compat` lists what that version is missing or does differently.
+- Full guide: [docs/mcp.md](./docs/mcp.md).
+
+**Motion from text.** `motionary/tooling/ai` turns a description like "fade the cards up slowly, one after another" into
+an effect, keyframes, CSS and matching components. The default parser is local and deterministic (English and
+Chinese). To use your own LLM, pass a provider to `suggestMotion()`. Motionary bundles no vendor SDK and makes no
+network request unless you pass a provider. Answers are checked against a JSON Schema, and the local result is used if
+they fail.
+
+```ts
+import { suggestMotion } from 'motionary/tooling/ai';
+const { intent, source } = await suggestMotion('cards cascade in like falling dominoes', { provider }); // provider is optional
+el.animate(intent.keyframes, intent.options);
+```
+
+More: [docs/ai-provider.md](./docs/ai-provider.md) · [prompt guide](./docs/ai-prompt-guide.md) · [AGENTS.md](./AGENTS.md) ·
+the site serves [`components.json`](https://harrisoncn.github.io/Motionary/components.json) and
+[`llms.txt`](https://harrisoncn.github.io/Motionary/llms.txt).
+
+## Figma plugin
+
+[figma-plugin/](./figma-plugin/README.md) (also in `node_modules/motionary/figma-plugin/`) exports the current selection
+as a **complete HTML page** (tokens, prerequisite scripts in order, one element per layer), **CSS tokens** and
+**motion.tokens.json** (W3C design tokens). A layer named after a component (`usa-tilt`) becomes that element. Figma
+variables `motion/duration/*` and `motion/easing/*` override the default tokens. The plugin has no network access and
+never edits the document. See [figma-plugin/README.md](./figma-plugin/README.md) and [docs/motion-tokens.md](./docs/motion-tokens.md).
+
+## Accessibility
+
+- With `prefers-reduced-motion: reduce`, scroll reveals show content right away (no entrance, parallax or scrub), and
+  components switch to calm states (`staticAlternative()`, `adaptKeyframes()`).
+- `motionary/components/a11y`: `setMotionSensitivity()` lets users turn off flashes, loops or parallax. It also has `announce()`
+  for live regions, `auditMotionA11y()` and `baselineReport()`. `<usa-motion-switch>` is a ready-made motion toggle for users.
+- Every element follows one [component contract](./docs/component-contract.md) (keyboard, focus, events, lifecycle,
+  reduced motion), and `npm run check:contract` enforces it in CI.
+- More: [docs/accessibility.md](./docs/accessibility.md).
+
+## Size budgets
+
+Every entry point has a fixed gzip budget in [`size-budget.json`](./size-budget.json) (401 entries). CI fails when an
+entry goes over its budget, and budgets are never raised automatically. Measured on the 13.0.0 build (minified + gzip):
+
+| What you import | gzip | Budget |
+|---|---:|---:|
+| `motionary/core` (`createMotion`) | 2.53 KB | 10.00 KB |
+| `import ScrollAnimate from 'motionary'` (default instance) | 5.49 KB | 6.00 KB |
+| Everything from `motionary` | 8.77 KB | 9.75 KB |
+| `dist/index.umd.js` (CDN) | 8.93 KB | 9.75 KB |
+| `parallax()` alone | 0.94 KB | 2.00 KB |
+| `motionary/presets/extended` (181 presets) | 4.69 KB | 5.25 KB |
+| `motionary/runtime` (runtime core) | 5.42 KB | 5.50 KB |
+| `motionary/components/reveal` | 4.32 KB | 5.00 KB |
+| `motionary/components/lite` (every element, CSS on demand) | 69.61 KB | 70.00 KB |
+| `motionary/components` (every element + CSS) | 85.66 KB | 93.75 KB |
+| `dist/components.umd.js` (CDN, everything) | 107.40 KB | 115.75 KB |
+
+By default there are no scroll listeners (IntersectionObserver is used instead). Animations stay on the compositor
+(`transform`, `opacity`, `filter`, `clip-path`). Imports have no side effects
+([docs/tree-shaking.md](./docs/tree-shaking.md)). Every PR also measures first-screen transfer, script time, GPU resources
+and frame stability in headless Chrome ([docs/perf-ci.md](./docs/perf-ci.md)). Source maps are not shipped to npm. They are
+attached to each GitHub release instead ([docs/source-maps.md](./docs/source-maps.md)). More: [docs/performance.md](./docs/performance.md).
+
+**Browsers:** evergreen browsers since 2023 (Chrome / Edge ≥ 111, Safari ≥ 16.4, Firefox ≥ 115, WebView2, Electron ≥ 24).
+Motionary uses View Transitions and scroll-driven animations where the browser has them, and falls back to JavaScript
+where it does not. `baselineReport()` checks a given browser.
+
+## Upgrading to 13
+
+13.0 breaks one thing: **the import paths deprecated in 11.5 are removed.** Their replacements serve the same files,
+so behaviour and bundle size do not change.
+
+```bash
+npx motionary doctor            # lists every removed path (and any legacy event name) in your project
+npx usa-codemod-13 --write      # rewrites them, plus CDN URLs pinned to @10 / @11 / @12 → @13
+```
+
+| Removed | Use instead |
+|---|---|
+| ~~motionary/components/core~~ | `motionary/core` |
+| ~~motionary/components/ai~~ | `motionary/tooling/ai` |
+| ~~motionary/components/design~~, ~~motionary/design~~ | `motionary/tooling/design` |
+| ~~motionary/components/angular~~ | `motionary/angular` |
+| ~~motionary/manifest.json~~, ~~motionary/manifest.schema.json~~ | `motionary/tooling/manifest.json`, `motionary/tooling/manifest.schema.json` |
+
+The same applies to `use-scroll-animate/…`. Full guide: [docs/upgrading-13.md](./docs/upgrading-13.md).
+Earlier majors: [12](./docs/upgrading-12.md) · [11](./docs/upgrading-11.md) · [10](./docs/upgrading-10.md) ·
+[9](./docs/upgrading-9.md) · [8](./docs/upgrading-8.md) · [7](./docs/upgrading-7.md) · [6](./docs/upgrading-6.md) ·
+[5](./docs/upgrading-5.md) · [4](./docs/upgrading-4.md) · [3](./docs/upgrading-3.md) · [2](./docs/deprecations.md).
+Coming from another library: [AOS](./docs/migration-from-aos.md) · [GSAP ScrollTrigger](./docs/migration-from-gsap-scrolltrigger.md).
+
+## Versions and compatibility
+
+- **npm dist-tags:** `latest` is the current major (13.0.0). Each minor release also gets its own tag `v<major>-<minor>`
+  (for example `v12-9`). `motionary` and `use-scroll-animate` are published together at the same versions.
+- **CDN:** URLs pin a major (`motionary@13`). Exact pins (`motionary@12.4.0`) keep working.
+- **Semver:** breaking changes come only in majors, each with a guide and a codemod. Deprecations stay in place until the
+  next major, with `@deprecated` types and no runtime warning.
+- **What each version has:** `since` / `changed` for every component and runtime module ([docs/version-compat.md](./docs/version-compat.md)),
+  feature-by-feature support ([docs/compat-matrix.md](./docs/compat-matrix.md)).
+- Details: [docs/versions.md](./docs/versions.md) · [CHANGELOG.md](./CHANGELOG.md).
+
+## Documentation
+
+| Topic | Docs |
+|---|---|
+| Reference | [API](./docs/API.md) · [Presets](./docs/presets.md) (all 214) · [Components](./docs/components.md) · [Entry points](./docs/entry-points.md) · [Public API by layer](./docs/public-api.md) · [Motion Core](./docs/core.md) |
+| Runtime | [Runtime tiers](./docs/runtime-tiers.md) · [Modules](./docs/runtime/) · [Compatibility matrix](./docs/compat-matrix.md) |
+| Platforms | [Frameworks & SSR](./docs/frameworks-ssr.md) · [Windows apps](./docs/windows-apps.md) · [Hybrid apps (MAUI, Flutter, Electron, Tauri)](./docs/hybrid-apps.md) · [Cross-platform export](./docs/cross-platform.md) · [Examples](./examples/) |
+| Design & AI | [Motion tokens](./docs/motion-tokens.md) · [Figma plugin](./figma-plugin/README.md) · [MCP server](./docs/mcp.md) · [AI provider](./docs/ai-provider.md) · [Prompt guide](./docs/ai-prompt-guide.md) |
+| Quality | [Accessibility](./docs/accessibility.md) · [Component contract](./docs/component-contract.md) · [Performance](./docs/performance.md) · [Perf CI](./docs/perf-ci.md) · [Tree-shaking](./docs/tree-shaking.md) · [Source maps](./docs/source-maps.md) |
+| Project | [Architecture](./docs/architecture.md) · [Roadmap](./docs/ROADMAP.md) · [Versions](./docs/versions.md) · [Changelog](./CHANGELOG.md) |
+
+The architecture has four layers: Motion Core, Runtime, Components, and Tooling, with the framework entries on top.
+`test/architecture.test.ts` enforces the import rules between layers ([docs/architecture.md](./docs/architecture.md)).
+
+The docs in `docs/` are in English, except the roadmap, which is in Chinese.
+
+## Contributing
+
+Issues and pull requests are welcome. See [CONTRIBUTING.md](./CONTRIBUTING.md). Before you open a PR, run `npm test`,
+`npm run build`, `npm run check:contract`, `npm run check:peer-docs` and `npm run size:check`. When you change behaviour,
+update this README together with [README_zh.md](./README_zh.md) and [README_ja.md](./README_ja.md).
+
+## License
+
+MIT © HarrisonCN. See [LICENSE](./LICENSE).
+
+## Reference
+
+`node scripts/gen-runtime-docs.mjs` generates the tables below from the tested module data. Do not edit them by hand.
+
+<details>
+<summary><b>Runtime modules and component prerequisites</b></summary>
 
 <!-- runtime:start -->
 ## Runtime (`motionary/runtime`) & prerequisites
@@ -569,6 +802,11 @@ defineGlModel(); // registers <usa-gl-model> — after the prerequisites
 
 <!-- runtime:end -->
 
+</details>
+
+<details>
+<summary><b>Stable API and compatibility matrix (frozen in 11.0)</b></summary>
+
 <!-- stable:start -->
 ## Stable API (11.x) & compatibility matrix
 
@@ -610,72 +848,4 @@ From 11.0 these are stable and follow semver until 12.0 (additions only in minor
 Feature by feature: [docs/compat-matrix.md](./docs/compat-matrix.md).
 <!-- stable:end -->
 
-## Accessibility & reduced motion
-
-- With `prefers-reduced-motion: reduce`, scroll reveals show content immediately (no entrance, parallax or scrub motion), and components fall back to calm states (`staticAlternative()` / `adaptKeyframes()`).
-- `motionary/components/a11y`: `setMotionSensitivity()` levels let users drop flashes, loops or parallax; `announce()` live regions; `auditMotionA11y()`; `baselineReport()`. `<usa-motion-switch>` is a ready-made user-facing motion toggle.
-- Details: [docs/accessibility.md](./docs/accessibility.md).
-
-## Performance & size
-
-No scroll listeners by default (IntersectionObserver), animations on the compositor (`transform`, `opacity`, `filter`, `clip-path`), optional off-main-thread native scroll timelines (`engine: 'css'`). Every entry is tree-shakeable and has a gzip budget enforced in CI (`size-budget.json`). Measured for 6.1 (minified + gzip):
-
-| What you import | gzip |
-|---|---:|
-| `import ScrollAnimate from 'motionary'` (default instance) | 5.72 kB |
-| Everything from the main entry | 8.69 kB |
-| `dist/index.umd.js` (CDN) | 8.81 kB |
-| `parallax()` alone | 1.22 kB |
-| `motionary/presets/extended` (181 presets) | 4.69 kB |
-| `motionary/components/reveal` | 4.10 kB |
-| `motionary/components/effects` (8 effect packs) | 26.40 kB |
-| `motionary/components/lite` (every component, CSS on demand) | 68.48 kB |
-| `motionary/components` (every component + CSS) | 85.15 kB |
-| `dist/components.umd.js` (CDN, everything) | 106.75 kB |
-
-More: [docs/performance.md](./docs/performance.md).
-
-## Browser support
-
-Evergreen browsers since 2023: Chrome / Edge ≥ 111, Safari ≥ 16.4, Firefox ≥ 115, WebView2, Electron ≥ 24 (Custom Elements, Web Animations, IntersectionObserver, ResizeObserver, constructable stylesheets). View Transitions and scroll-driven animations are progressive — used when present, JS fallback otherwise. Importing on the server (SSR) is a no-op. Check a browser with `baselineReport()`.
-
-## Documentation
-
-- **Individual entry points (10.8+):** new components ship as their own entry (`motionary/components/snap-carousel`, `motionary/components/gl-model`, `motionary/components/dotlottie`) and are not added to `motionary/components/widgets` or the all-components `motionary/components/lite` bundle (its 70 KB gzip budget is fixed).
-- **Per-component entry points (10.9):** every widget has `motionary/widgets/<name>` (tag without `usa-`, e.g. `motionary/widgets/toast-stack`, `motionary/widgets/dock`) and every 6.x+ effect has `motionary/effects/<name>` (e.g. `motionary/effects/pearlescent`, `motionary/effects/spectrum-mirror`); each registers only its own tag / effect, has a fixed gzip budget, and is listed in `components.json` (`entry`, `effects`). Full list: [docs/entry-points.md](docs/entry-points.md).
-- **Upgrading to 11:** [docs/upgrading-11.md](docs/upgrading-11.md) (`npx usa-codemod-11 --write src`); 10.9 audit: [docs/audit-10.9.md](docs/audit-10.9.md).
-- **MCP server:** `npx -y -p motionary motionary-mcp` — read-only component catalog for MCP clients (search, API, prerequisite-aware snippets; 2.0 adds `suggest_motion` and `validate_snippet`): [docs/mcp.md](docs/mcp.md).
-- **AI assistants:** [AGENTS.md](AGENTS.md) · [prompt guide](docs/ai-prompt-guide.md) · one page per component in [docs/components/](docs/components/README.md) · `components.json` / `llms.txt` / `llms-full.txt` on the site root.
-
-- [API reference](./docs/API.md) — every export, option and `data-sa-*` attribute
-- [Presets](./docs/presets.md) — all 214 by category
-- [Components](./docs/components.md) — every `<usa-*>` element, attribute and event
-- [Frameworks & SSR](./docs/frameworks-ssr.md) · [Windows apps](./docs/windows-apps.md) · [Hybrid apps (MAUI, Flutter, Electron, Tauri)](./docs/hybrid-apps.md)
-- [Motion tokens](./docs/motion-tokens.md) · [Migrating from AOS](./docs/migration-from-aos.md) · [from GSAP ScrollTrigger](./docs/migration-from-gsap-scrolltrigger.md)
-- [Demo page](./demo/index.html) — every preset clickable, no build step
-
-## Upgrading
-
-- From `use-scroll-animate`: `npm i motionary` and replace `use-scroll-animate` with `motionary` in imports and CDN URLs — nothing else changes (the old package name keeps receiving the same releases).
-- [Upgrading to 11.0](./docs/upgrading-11.md) (`npx usa-codemod-11`) · [10.0](./docs/upgrading-10.md) · [Upgrading to 6.0](./docs/upgrading-6.md) (`npx usa-codemod-6`) · [Upgrading to 5.0](./docs/upgrading-5.md) (`npx usa-codemod-5`) · [4.0](./docs/upgrading-4.md) · [3.0](./docs/upgrading-3.md) · [2.0](./docs/deprecations.md)
-- [Changelog](./CHANGELOG.md)
-
-## Architecture
-
-Four logical layers — Public API (HTML · React · Vue · Svelte · Solid · Angular) → Components · Motion Core · Runtime → Motion Intelligence & Tooling — with import rules enforced by `test/architecture.test.ts`: [docs/architecture.md](./docs/architecture.md).
-
-**Tree-shaking (11.1):** importing a module registers nothing and writes nothing to the page until you call `define*()` / `register*()` / `use()`; `sideEffects` lists only CSS, the UMD / IIFE builds, `presets/extended` and `components/lite`. Importing one export pulls in only its own code — see [docs/tree-shaking.md](./docs/tree-shaking.md).
-
-**Source maps (11.2):** not shipped to npm (the package is about half the size); every built file still links its map in the release tag on GitHub, so DevTools resolves it on demand — see [docs/source-maps.md](./docs/source-maps.md).
-
-**Performance in CI (11.3):** every PR measures, in headless Chrome, the first-screen transfer with on-demand loading, script parse / execute time, WebGL resources (and leaks after removal) and frame stability, against fixed budgets — see [docs/perf-ci.md](./docs/perf-ci.md).
-
-**Runtime tiers (11.4):** `motionary/runtime` modules are **basic** (ticker, tween, timeline, scroll, text, CSS / WAAPI keyframes), **standard** (smooth scrolling, drag-snap, SVG, sprites, GIF / APNG / WebP, Lottie) or **advanced** (WebGL, 3D files and decoders, physics) — a page that only uses basic never pays for the rest. The manifest, the Store badges and `RUNTIME_TIERS` say which; see [docs/runtime-tiers.md](./docs/runtime-tiers.md).
-
-## Roadmap
-
-One version per PR towards 7.0 — particles & fluids, text effects, light & materials, 3D scenes, morphing, transitions, weather, interactive physics: [docs/ROADMAP.md](./docs/ROADMAP.md).
-
-## Contributing & license
-
-Issues and PRs welcome — see [CONTRIBUTING.md](./CONTRIBUTING.md). MIT © HarrisonCN — see [LICENSE](./LICENSE).
+</details>
