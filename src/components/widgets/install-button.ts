@@ -1,4 +1,5 @@
 import { defineElement, type UsaElement } from '../base';
+import { arrowIndex, nextId } from './shared';
 import css from './install-button.css?raw';
 
 /**
@@ -46,9 +47,26 @@ export function defineInstallButton(tag = 'usa-install-button'): CustomElementCo
         mount(): void {
           const list = this.list();
           this.cur = list.includes(this.str('manager')) ? this.str('manager') : list[0];
-          this.innerHTML = `<div role="tablist" aria-label="Package manager">${list.map((m) => `<button type="button" role="tab" data-m="${m}">${m === 'cdn' ? 'CDN' : m}</button>`).join('')}</div><div class="usa-ib-row"><code></code><button type="button" class="usa-ib-copy" aria-live="polite">Copy</button></div>`;
+          // 13.1.0: full tabs pattern — tabs control the command row (tabpanel), one tab stop, arrows / Home / End
+          const id = nextId('usa-ib');
+          this.innerHTML = `<div role="tablist" aria-label="Package manager">${list.map((m) => `<button type="button" role="tab" id="${id}-${m}" aria-controls="${id}" data-m="${m}">${m === 'cdn' ? 'CDN' : m}</button>`).join('')}</div><div class="usa-ib-row" id="${id}" role="tabpanel"><code></code><button type="button" class="usa-ib-copy" aria-live="polite">Copy</button></div>`;
+          const tabs = Array.from(this.querySelectorAll<HTMLElement>('[role=tab]'));
+          this.listen(this, 'keydown', (e: KeyboardEvent) => {
+            const i = tabs.indexOf(e.target as HTMLElement);
+            const j = i < 0 ? -1 : arrowIndex(e, i, tabs.length);
+            if (j < 0) return;
+            e.preventDefault();
+            this.cur = tabs[j].dataset.m!;
+            show(true);
+            tabs[j].focus();
+          });
           const show = (animate = false) => {
-            this.querySelectorAll<HTMLElement>('[role=tab]').forEach((t) => t.setAttribute('aria-selected', String(t.dataset.m === this.cur)));
+            tabs.forEach((t) => {
+              const on = t.dataset.m === this.cur;
+              t.setAttribute('aria-selected', String(on));
+              t.tabIndex = on ? 0 : -1;
+              if (on) this.querySelector('[role=tabpanel]')?.setAttribute('aria-labelledby', t.id);
+            });
             const code = this.querySelector('code') as HTMLElement;
             code.textContent = this.command();
             if (animate && !this.reduced) this.motion(code, [{ opacity: 0.25, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], { duration: 220, easing: 'cubic-bezier(.22,1,.36,1)' });

@@ -1,8 +1,8 @@
 'use strict';
 
-var registry = require('../chunks/registry-LE5iyTqw.cjs');
+var registry = require('../chunks/registry-EziiQiWO.cjs');
 var generative = require('../chunks/generative-BHIj-NU0.cjs');
-require('../chunks/base-BG_mxssu.cjs');
+require('../chunks/base-vu_KhBiv.cjs');
 require('../chunks/shared-jkgRH-Hx.cjs');
 
 /** A minimal Verlet world: points, distance sticks, gravity, damping. */
@@ -341,4 +341,4 @@ function registerPhysicsPack() {
 exports.PHYSICS2_FX = PHYSICS2_FX;
 exports.VerletWorld = VerletWorld;
 exports.registerPhysicsPack = registerPhysicsPack;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/components/fx-physics.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/components/fx-physics.cjs.map

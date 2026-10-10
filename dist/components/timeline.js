@@ -1,6 +1,6 @@
-import { f as defineElement } from '../chunks/base-CBMzOs1k.js';
-import { t as timeline, T as TIMELINE_PRESETS } from '../chunks/core-CBU40kLB.js';
-export { r as resolvePosition, s as supportsNativeScrub } from '../chunks/core-CBU40kLB.js';
+import { f as defineElement } from '../chunks/base-nzeN_ux7.js';
+import { t as timeline, T as TIMELINE_PRESETS } from '../chunks/core-Bar7NFx7.js';
+export { r as resolvePosition, s as supportsNativeScrub } from '../chunks/core-Bar7NFx7.js';
 import './tokens.js';
 
 var css = "usa-timeline{display:block}usa-timeline[scrub]{position:relative}@media (prefers-reduced-motion:reduce){usa-timeline [data-tl]{opacity:1 !important;transform:none !important;filter:none !important;clip-path:none !important}}";
@@ -100,4 +100,4 @@ function defineTimelineComponents() {
 }
 
 export { TIMELINE_PRESETS, defineTimeline, defineTimelineComponents, timeline };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/components/timeline.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/components/timeline.js.map

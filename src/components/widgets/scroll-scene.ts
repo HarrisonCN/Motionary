@@ -46,6 +46,24 @@ export function defineScrollScene(tag = 'usa-scroll-scene'): CustomElementConstr
         }
         private scene: ScrollScene | null = null;
         private tl: Timeline | null = null;
+        // 13.1.0: `pin` wraps this element in a spacer (and unwraps it on kill) — that move fires disconnected / connected,
+        // which tore the half-built scene down without killing it and mounted a second one inside the first (44 scenes and
+        // their scroll / resize listeners leaked per re-mount). Moves made by the scene itself are ignored.
+        private _moving = false;
+        private moving<T>(fn: () => T): T {
+          this._moving = true;
+          try {
+            return fn();
+          } finally {
+            this._moving = false;
+          }
+        }
+        connectedCallback(): void {
+          if (!this._moving) (Base.prototype as unknown as HTMLElement & { connectedCallback(): void }).connectedCallback.call(this);
+        }
+        disconnectedCallback(): void {
+          if (!this._moving) (Base.prototype as unknown as HTMLElement & { disconnectedCallback(): void }).disconnectedCallback.call(this);
+        }
         get progress(): number {
           return this.scene?.progress ?? 0;
         }
@@ -80,10 +98,21 @@ export function defineScrollScene(tag = 'usa-scroll-scene'): CustomElementConstr
             this.setAttribute('data-preview', '');
             return;
           }
-          this.scene = sc.scrollScene({
+          // 13.1.0: an invalid start / end attribute falls back to the documented default (it threw and leaked the scene)
+          const edge = (name: string, d: string): string => {
+            const v = this.str(name, d);
+            try {
+              sc.resolveRule(v, 0, 0, 0);
+              return v;
+            } catch {
+              console.warn(`[motionary] <${this.localName}>: invalid ${name}="${v}" — using "${d}"`);
+              return d;
+            }
+          };
+          this.scene = this.moving(() => sc.scrollScene({
             trigger: this,
-            start: this.str('start', 'top 85%'),
-            end: this.str('end', 'bottom 35%'),
+            start: edge('start', 'top 85%'),
+            end: /^\s*\+=/.test(this.str('end')) ? this.str('end') : edge('end', 'bottom 35%'),
             scrub,
             pin: this.flag('pin'),
             markers: this.flag('markers'),
@@ -92,9 +121,10 @@ export function defineScrollScene(tag = 'usa-scroll-scene'): CustomElementConstr
             onEnter: () => this.emit('enter'),
             onLeave: () => this.emit('leave'),
             onUpdate: (s) => this.emit('progress', { progress: s.progress }),
-          });
+          }));
           this.onCleanup(() => {
-            this.scene?.kill();
+            const scene = this.scene;
+            if (scene) this.moving(() => scene.kill());
             this.scene = null;
             tl.kill();
           });

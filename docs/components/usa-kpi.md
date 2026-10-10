@@ -4,7 +4,7 @@
 
 7.2: the value counts up keeping prefix, suffix and decimals ("$12.4k", "98.2%"), the delta chip slides in with an arrow coloured by sign, and an optional trend draws a sparkline. Setting value rolls and flashes the card.
 
-- **Category:** ui · **since** 7.2
+- **Category:** ui · **since** 7.2 · **changed in** 13.1
 - **Import:** `import { defineKpi } from 'motionary/components/widgets'` then `defineKpi();`
 - **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `label`, `delta`, `caption`, `trend`, `invert`, `locale`

@@ -1,4 +1,4 @@
-import { defineElement, type UsaElement } from '../base';
+import { defineElement, type UsaElement, queryAttr } from '../base';
 import { pickEngine, timelineName, commonAncestor, scrollProgress } from './scroll-driven';
 import css from './scroll-ring.css?raw';
 
@@ -41,7 +41,7 @@ export function defineScrollRing(tag = 'usa-scroll-ring'): CustomElementConstruc
         private target(): Element {
           const sel = this.str('for', 'page');
           if (sel === 'page') return document.scrollingElement || document.documentElement;
-          return this.parentElement?.querySelector(sel) || document.querySelector(sel) || document.scrollingElement || document.documentElement;
+          return (this.parentElement && queryAttr(sel, this.parentElement)) || queryAttr(sel) || document.scrollingElement || document.documentElement;
         }
         mount(): void {
           const size = this.num('size', 56), th = this.num('thickness', 5), r = (size - th) / 2, C = 2 * Math.PI * r;

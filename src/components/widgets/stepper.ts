@@ -67,7 +67,19 @@ export function defineStepper(tag = 'usa-stepper'): CustomElementConstructor | u
               d.innerHTML = `<span class="usa-st-num">${i + 1}</span><svg class="usa-st-check" viewBox="0 0 16 16"><path d="M3 8.5l3.2 3L13 4.8"/></svg>`;
               s.prepend(d);
             }
-            if (s.hasAttribute('data-clickable') || this.flag('clickable')) this.listen(s, 'click', () => this.go(i));
+            if (s.hasAttribute('data-clickable') || this.flag('clickable')) {
+              this.listen(s, 'click', () => this.go(i));
+              // 13.1.0: clickable steps are keyboard reachable — in the tab order, Enter / Space go to the step
+              if (!s.hasAttribute('tabindex')) {
+                s.tabIndex = 0;
+                this.onCleanup(() => s.removeAttribute('tabindex'));
+              }
+              this.listen(s, 'keydown', (e: KeyboardEvent) => {
+                if (e.key !== 'Enter' && e.key !== ' ') return;
+                e.preventDefault();
+                this.go(i);
+              });
+            }
           });
           this._v = clampN(this.num('value', 0) | 0, 0, Math.max(0, this._steps.length - 1));
           this.sync(-1);

@@ -1,9 +1,9 @@
 'use strict';
 
-var widgets_globe = require('../chunks/globe-BvTRCzBa.cjs');
-require('../chunks/base-BG_mxssu.cjs');
+var widgets_globe = require('../chunks/globe-Dms25CB5.cjs');
+require('../chunks/base-vu_KhBiv.cjs');
 
 
 
 exports.defineGlobe = widgets_globe.defineGlobe;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/globe.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/globe.cjs.map

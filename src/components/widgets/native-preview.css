@@ -6,8 +6,9 @@ usa-native-preview[data-platform=android] .usa-np-notch{width:8px;height:8px;mar
 usa-native-preview .usa-np-screen{display:flex;flex-direction:column;gap:8px;height:100%;padding:10px;border-radius:22px;background:#f8fafc;overflow:hidden;box-sizing:border-box}
 usa-native-preview[data-platform=android] .usa-np-screen{border-radius:10px}
 usa-native-preview .usa-np-side{flex:1 1 200px;min-width:0}
-usa-native-preview [role=tablist]{display:flex;gap:4px;flex-wrap:wrap}
-usa-native-preview [role=tablist] button{padding:4px 8px;border:1px solid #cbd5e1;border-radius:7px;background:#fff;font:600 11px/1 system-ui,sans-serif;cursor:pointer}
+usa-native-preview .usa-np-bar,usa-native-preview [role=tablist]{display:flex;gap:4px;flex-wrap:wrap}
+usa-native-preview .usa-np-bar{align-items:center}
+usa-native-preview .usa-np-bar button{padding:4px 8px;border:1px solid #cbd5e1;border-radius:7px;background:#fff;font:600 11px/1 system-ui,sans-serif;cursor:pointer}
 usa-native-preview [aria-selected=true]{background:#0f172a!important;color:#fff;border-color:#0f172a!important}
 usa-native-preview .usa-np-replay{margin-left:auto;background:#4f46e5!important;color:#fff;border-color:#4f46e5!important}
 usa-native-preview .usa-np-code{margin:6px 0 0;padding:8px;max-height:230px;overflow:auto;border-radius:8px;background:#0f172a;color:#e2e8f0;font:10.5px/1.45 ui-monospace,monospace;white-space:pre}

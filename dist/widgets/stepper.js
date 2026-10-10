@@ -1,5 +1,5 @@
-import { f as defineElement } from '../chunks/base-CBMzOs1k.js';
-import { o as ownChildren, c as clampN } from '../chunks/shared-C8Pi6tuh.js';
+import { f as defineElement } from '../chunks/base-nzeN_ux7.js';
+import { o as ownChildren, c as clampN } from '../chunks/shared-o9CtwHmi.js';
 
 var css = "usa-stepper{--usa-st-c:#7c5cff;--usa-st-size:30px;position:relative;display:flex;justify-content:space-between;gap:8px;padding:0;counter-reset:s;max-width:100%}usa-stepper[data-orientation=\"vertical\"]{flex-direction:column;gap:22px}.usa-st-rail{position:absolute;left:calc(var(--usa-st-size)/2);right:calc(var(--usa-st-size)/2);top:calc(var(--usa-st-size)/2 - 2px);height:4px;border-radius:4px;background:rgba(127,127,127,.25);pointer-events:none}usa-stepper[data-orientation=\"vertical\"] .usa-st-rail{left:calc(var(--usa-st-size)/2 - 2px);right:auto;top:calc(var(--usa-st-size)/2);bottom:calc(var(--usa-st-size)/2);width:4px;height:auto}.usa-st-fill{position:absolute;inset:0;border-radius:inherit;background:var(--usa-st-c);transform-origin:0 0;transform:scaleX(calc(var(--usa-st-p,0%) / 100%));transition:transform .55s cubic-bezier(.6,.05,.3,1)}usa-stepper[data-orientation=\"vertical\"] .usa-st-fill{transform:scaleY(calc(var(--usa-st-p,0%) / 100%))}.usa-st-step{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0;font:600 12px/1.25 system-ui,sans-serif;text-align:center;color:rgba(127,127,127,.95)}usa-stepper[data-orientation=\"vertical\"] .usa-st-step{flex-direction:row;text-align:left}.usa-st-step[data-current],.usa-st-step[data-done]{color:inherit}.usa-st-dot{position:relative;display:grid;place-items:center;flex:none;width:var(--usa-st-size);height:var(--usa-st-size);border-radius:50%;background:var(--usa-st-bg,#fff);box-shadow:inset 0 0 0 2px rgba(127,127,127,.4);color:#666;font-weight:700;transition:background .3s,box-shadow .3s,color .3s}.usa-st-step[data-current] .usa-st-dot{box-shadow:inset 0 0 0 2px var(--usa-st-c);color:var(--usa-st-c)}.usa-st-step[data-done] .usa-st-dot{background:var(--usa-st-c);box-shadow:none;color:#fff}.usa-st-check{position:absolute;width:60%;height:60%;fill:none;stroke:#fff;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:20;stroke-dashoffset:20;opacity:0}.usa-st-step[data-done] .usa-st-check{stroke-dashoffset:0;opacity:1}.usa-st-step[data-done] .usa-st-num{opacity:0}.usa-st-step[data-clickable],usa-stepper[clickable] .usa-st-step{cursor:pointer}@media (prefers-reduced-motion:reduce){.usa-st-fill,.usa-st-dot{transition:none}}";
 
@@ -52,8 +52,20 @@ function defineStepper(tag = 'usa-stepper') {
                         d.innerHTML = `<span class="usa-st-num">${i + 1}</span><svg class="usa-st-check" viewBox="0 0 16 16"><path d="M3 8.5l3.2 3L13 4.8"/></svg>`;
                         s.prepend(d);
                     }
-                    if (s.hasAttribute('data-clickable') || this.flag('clickable'))
+                    if (s.hasAttribute('data-clickable') || this.flag('clickable')) {
                         this.listen(s, 'click', () => this.go(i));
+                        // 13.1.0: clickable steps are keyboard reachable — in the tab order, Enter / Space go to the step
+                        if (!s.hasAttribute('tabindex')) {
+                            s.tabIndex = 0;
+                            this.onCleanup(() => s.removeAttribute('tabindex'));
+                        }
+                        this.listen(s, 'keydown', (e) => {
+                            if (e.key !== 'Enter' && e.key !== ' ')
+                                return;
+                            e.preventDefault();
+                            this.go(i);
+                        });
+                    }
                 });
                 this._v = clampN(this.num('value', 0) | 0, 0, Math.max(0, this._steps.length - 1));
                 this.sync(-1);
@@ -103,4 +115,4 @@ function defineStepper(tag = 'usa-stepper') {
 }
 
 export { defineStepper };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/stepper.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/stepper.js.map

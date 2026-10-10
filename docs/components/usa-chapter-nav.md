@@ -4,7 +4,7 @@
 
 9.1: chapter navigation for long-form stories — one entry per chapter with a reading-progress bar that fills as you scroll, the current chapter highlighted, click to glide there.
 
-- **Category:** ui · **since** 9.1
+- **Category:** ui · **since** 9.1 · **changed in** 13.1
 - **Import:** `import { defineChapterNav } from 'motionary/components/widgets'` then `defineChapterNav();`
 - **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `for`, `orientation`, `label`

@@ -1,5 +1,5 @@
-export { d as defineGlScene } from '../chunks/gl-scene-DEgXh2qB.js';
-import '../chunks/base-CBMzOs1k.js';
-import '../chunks/runtime-link-TwXAB9lk.js';
-import '../chunks/registry-BpRcQEC5.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/gl-scene.js.map
+export { d as defineGlScene } from '../chunks/gl-scene-_Ure0n-p.js';
+import '../chunks/base-nzeN_ux7.js';
+import '../chunks/runtime-link-BqIicT9E.js';
+import '../chunks/registry-DG7d_uS7.js';
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/gl-scene.js.map

@@ -1,4 +1,4 @@
-import { f as defineElement, D as EASE_OUT, d as clamp, b as caf, r as raf } from '../chunks/base-CBMzOs1k.js';
+import { f as defineElement, D as EASE_OUT, d as clamp, b as caf, G as queryAttr, r as raf } from '../chunks/base-nzeN_ux7.js';
 
 /** Entrance effects shared by `<usa-reveal>` and `<usa-stagger>` (transform / opacity / filter only). */
 const REVEAL_EFFECTS = [
@@ -267,7 +267,7 @@ function defineScrollProgress(tag = 'usa-scroll-progress') {
         }
         update() {
             const sel = this.getAttribute('target');
-            const target = sel ? document.querySelector(sel) : null;
+            const target = queryAttr(sel);
             const p = readScrollProgress(target);
             if (Math.abs(p - this._p) < 0.0005)
                 return;
@@ -351,4 +351,4 @@ function defineRevealComponents() {
 }
 
 export { REVEAL_EFFECTS, defineReveal, defineRevealComponents, defineScrollProgress, defineScrolly, defineStagger, readScrollProgress, revealKeyframes };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/components/reveal.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/components/reveal.js.map

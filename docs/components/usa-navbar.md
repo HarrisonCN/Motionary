@@ -4,7 +4,7 @@
 
 Hides while you scroll down, slides back on the first scroll up; shrink makes it compact once scrolled. This page’s demo scrolls an inner box.
 
-- **Category:** ui · **since** 2.6 · **changed in** 6.6, 12.0
+- **Category:** ui · **since** 2.6 · **changed in** 6.6, 12.0, 13.1
 - **Import:** `import { defineNavbar } from 'motionary/components/ui'` then `defineNavbar();`
 - **CDN:** `<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>`
 - **Attributes:** `target`, `threshold`

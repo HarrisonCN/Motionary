@@ -1,10 +1,10 @@
 'use strict';
 
-var widgets_colorPicker = require('../chunks/color-picker-C17hLqcy.cjs');
-require('../chunks/base-BG_mxssu.cjs');
-require('../chunks/shared-BxK1D7EZ.cjs');
+var widgets_colorPicker = require('../chunks/color-picker-B6YXJdur.cjs');
+require('../chunks/base-vu_KhBiv.cjs');
+require('../chunks/shared-Bf72wLyt.cjs');
 
 
 
 exports.defineColorPicker = widgets_colorPicker.defineColorPicker;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/color-picker.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/color-picker.cjs.map

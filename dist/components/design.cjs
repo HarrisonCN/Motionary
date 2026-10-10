@@ -1,9 +1,9 @@
 'use strict';
 
 var components_dsl = require('./dsl.cjs');
-var core = require('../chunks/core-DMrg99HN.cjs');
-require('../chunks/registry-LE5iyTqw.cjs');
-require('../chunks/base-BG_mxssu.cjs');
+var core = require('../chunks/core-E18xla6s.cjs');
+require('../chunks/registry-EziiQiWO.cjs');
+require('../chunks/base-vu_KhBiv.cjs');
 require('./tokens.cjs');
 
 /**
@@ -114,4 +114,4 @@ exports.easingPoints = easingPoints;
 exports.figmaToMotion = figmaToMotion;
 exports.framerComponent = framerComponent;
 exports.motionToCss = motionToCss;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/components/design.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/components/design.cjs.map

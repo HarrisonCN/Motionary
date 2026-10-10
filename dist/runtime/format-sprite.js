@@ -1,6 +1,6 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-BpRcQEC5.js';
-import { P as Playable } from '../chunks/tween-BW49KMKU.js';
-import '../chunks/ticker-CbTuFTz0.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-DG7d_uS7.js';
+import { P as Playable } from '../chunks/tween-DbF_MjRO.js';
+import '../chunks/ticker-DIuv8agN.js';
 import '../chunks/ease-XN8_0sXu.js';
 
 /**
@@ -213,4 +213,4 @@ function sequencePlayer(canvas, images, o = {}) {
 const formatSprite = { id: 'format-sprite', version: RUNTIME_VERSION, tier: 'standard', requires: ['core'], api: { parseSpriteSheet, gridSheet, frameOrder, drawFrame, spritePlayer, imageSequence, preloadImages, sequencePlayer } };
 
 export { drawFrame, formatSprite, frameOrder, gridSheet, imageSequence, parseSpriteSheet, preloadImages, sequencePlayer, spritePlayer };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/runtime/format-sprite.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/runtime/format-sprite.js.map

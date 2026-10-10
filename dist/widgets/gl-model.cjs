@@ -1,12 +1,12 @@
 'use strict';
 
 var components_glModel = require('../components/gl-model.cjs');
-require('../chunks/base-BG_mxssu.cjs');
-require('../chunks/runtime-link-Dv0W9Elh.cjs');
-require('../chunks/registry-CP1MIOtI.cjs');
-require('../chunks/gl-scene-C4lLF0yP.cjs');
+require('../chunks/base-vu_KhBiv.cjs');
+require('../chunks/runtime-link-BmkNOjwB.cjs');
+require('../chunks/registry-CeBi49cV.cjs');
+require('../chunks/gl-scene-DqD4O5Se.cjs');
 
 
 
 exports.defineGlModel = components_glModel.defineGlModel;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/gl-model.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/gl-model.cjs.map

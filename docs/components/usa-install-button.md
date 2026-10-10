@@ -4,7 +4,7 @@
 
 10.1: one-click install snippet with npm / pnpm / yarn / bun / CDN tabs and a copy button that confirms with a check; `cdn` sets the URL of the CDN tab.
 
-- **Category:** ui · **since** 10.1
+- **Category:** ui · **since** 10.1 · **changed in** 13.1
 - **Import:** `import { defineInstallButton } from 'motionary/components/widgets'` then `defineInstallButton();`
 - **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `package`, `managers`, `cdn`, `dev`, `manager`

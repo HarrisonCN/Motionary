@@ -4,7 +4,7 @@
 
 6.7: the rail fills toward the current step, finished steps pop a drawn check mark and the current step pulses. Horizontal or vertical; next() / prev() / value.
 
-- **Category:** ui · **since** 6.7
+- **Category:** ui · **since** 6.7 · **changed in** 13.1
 - **Import:** `import { defineStepper } from 'motionary/components/widgets'` then `defineStepper();`
 - **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `orientation`, `label`, `clickable`

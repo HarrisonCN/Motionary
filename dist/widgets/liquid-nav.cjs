@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-BG_mxssu.cjs');
+var base = require('../chunks/base-vu_KhBiv.cjs');
 
 var css = "usa-liquid-nav{position:relative;display:inline-flex;align-items:center;gap:4px;padding:8px 10px 18px;border-radius:18px;background:var(--usa-lq-bg,#0f172a);color:#e2e8f0;font:600 13px/1 system-ui,sans-serif;--usa-lq-accent:#38bdf8}.usa-lq-defs{position:absolute}.usa-lq-goo{position:absolute;left:0;right:0;bottom:4px;height:14px;pointer-events:none}.usa-lq-goo i{position:absolute;left:-6px;top:1px;width:12px;height:12px;border-radius:50%;background:var(--usa-lq-accent)}.usa-lq-tail{width:9px!important;height:9px!important;left:-4.5px!important;top:2.5px!important}.usa-lq-item{position:relative;padding:8px 12px;border:0;border-radius:10px;background:none;color:inherit;font:inherit;text-decoration:none;cursor:pointer;opacity:.7;transition:opacity .2s,color .2s}.usa-lq-item[aria-current]{opacity:1;color:var(--usa-lq-accent)}.usa-lq-item:focus-visible{outline:2px solid var(--usa-lq-accent);outline-offset:1px;opacity:1}";
 
@@ -87,4 +87,4 @@ function defineLiquidNav(tag = 'usa-liquid-nav') {
 }
 
 exports.defineLiquidNav = defineLiquidNav;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/liquid-nav.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/liquid-nav.cjs.map

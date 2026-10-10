@@ -93,6 +93,8 @@ function make(kind: Kind) {
           q.resize(this._scale);
           this.frame();
         };
+        // 13.1.0: an image that already failed (re-connect after a 404) fires no more events — fall back now
+        if (img && img.complete && !img.naturalWidth && img.currentSrc) return this.fallback('image');
         if (img && !(img.complete && img.naturalWidth)) {
           if (!img.crossOrigin && /^https?:/.test(img.src) && !img.src.startsWith(location.origin)) img.crossOrigin = 'anonymous';
           this.listen(img, 'load', () => start() && draw());

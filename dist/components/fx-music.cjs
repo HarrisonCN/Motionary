@@ -1,9 +1,9 @@
 'use strict';
 
-var registry = require('../chunks/registry-LE5iyTqw.cjs');
+var registry = require('../chunks/registry-EziiQiWO.cjs');
 var generative = require('../chunks/generative-BHIj-NU0.cjs');
-var audio = require('../chunks/audio-CztPMZ1b.cjs');
-require('../chunks/base-BG_mxssu.cjs');
+var audio = require('../chunks/audio-DhgfWYZ_.cjs');
+require('../chunks/base-vu_KhBiv.cjs');
 require('../chunks/shared-jkgRH-Hx.cjs');
 
 /** A smooth, deterministic fake analyser frame at time `t` (s). */
@@ -176,4 +176,4 @@ exports.MUSIC_FX = MUSIC_FX;
 exports.musicSample = musicSample;
 exports.registerMusicPack = registerMusicPack;
 exports.syntheticSample = syntheticSample;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/components/fx-music.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/components/fx-music.cjs.map

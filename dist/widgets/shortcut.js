@@ -1,5 +1,5 @@
-import { f as defineElement } from '../chunks/base-CBMzOs1k.js';
-import { k as keyLabels, m as matchesKeys } from '../chunks/command-palette-B-_C5aOb.js';
+import { f as defineElement } from '../chunks/base-nzeN_ux7.js';
+import { k as keyLabels, m as matchesKeys } from '../chunks/command-palette-C6XV1glX.js';
 
 var css = "usa-shortcut{display:inline-block;font:500 13px/1.3 system-ui,sans-serif}.usa-sk{display:inline-flex;align-items:center;gap:8px}.usa-sk-caps{display:inline-flex;gap:4px}usa-shortcut kbd{display:inline-grid;place-items:center;min-width:1.9em;height:1.9em;padding:0 6px;box-sizing:border-box;border-radius:6px;border:1px solid rgba(100,116,139,.4);border-bottom-width:3px;background:var(--usa-kbd-bg,#fff);color:inherit;font:600 12px/1 system-ui,sans-serif;box-shadow:0 1px 0 rgba(15,23,42,.08)}usa-shortcut[data-pressed] kbd{background:var(--usa-kbd-on,#eef2ff);border-color:var(--usa-kbd-accent,#6366f1)}.usa-sk-label{opacity:.75}";
 
@@ -56,4 +56,4 @@ function defineShortcut(tag = 'usa-shortcut') {
 }
 
 export { defineShortcut };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/shortcut.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/shortcut.js.map

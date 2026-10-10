@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-BG_mxssu.cjs');
+var base = require('../chunks/base-vu_KhBiv.cjs');
 
 /** Entrance effects shared by `<usa-reveal>` and `<usa-stagger>` (transform / opacity / filter only). */
 const REVEAL_EFFECTS = [
@@ -269,7 +269,7 @@ function defineScrollProgress(tag = 'usa-scroll-progress') {
         }
         update() {
             const sel = this.getAttribute('target');
-            const target = sel ? document.querySelector(sel) : null;
+            const target = base.queryAttr(sel);
             const p = readScrollProgress(target);
             if (Math.abs(p - this._p) < 0.0005)
                 return;
@@ -360,4 +360,4 @@ exports.defineScrolly = defineScrolly;
 exports.defineStagger = defineStagger;
 exports.readScrollProgress = readScrollProgress;
 exports.revealKeyframes = revealKeyframes;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/components/reveal.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/components/reveal.cjs.map

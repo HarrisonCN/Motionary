@@ -1,11 +1,11 @@
 'use strict';
 
-var widgets_workerCanvas = require('../chunks/worker-canvas-Bqsw_Fym.cjs');
-require('../chunks/base-BG_mxssu.cjs');
+var widgets_workerCanvas = require('../chunks/worker-canvas-CEbqBgK5.cjs');
+require('../chunks/base-vu_KhBiv.cjs');
 require('../components/fx-perf.cjs');
-require('../chunks/registry-LE5iyTqw.cjs');
+require('../chunks/registry-EziiQiWO.cjs');
 
 
 
 exports.defineWorkerCanvas = widgets_workerCanvas.defineWorkerCanvas;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/worker-canvas.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/worker-canvas.cjs.map

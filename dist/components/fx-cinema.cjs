@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-LE5iyTqw.cjs');
-require('../chunks/base-BG_mxssu.cjs');
+var registry = require('../chunks/registry-EziiQiWO.cjs');
+require('../chunks/base-vu_KhBiv.cjs');
 
 const CAMERA_MOVES = ['dolly-in', 'dolly-out', 'pan-left', 'pan-right', 'tilt-up', 'tilt-down', 'zoom-in', 'zoom-out', 'orbit'];
 /** Transform of camera `move` at progress `p` (0–1, clamped), `strength` 0–2 (9.1). */
@@ -97,4 +97,4 @@ exports.CAMERA_MOVES = CAMERA_MOVES;
 exports.CINEMA_FX = CINEMA_FX;
 exports.cameraFrame = cameraFrame;
 exports.registerCinemaPack = registerCinemaPack;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/components/fx-cinema.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/components/fx-cinema.cjs.map

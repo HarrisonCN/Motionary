@@ -1,9 +1,9 @@
 'use strict';
 
-var widgets_suggestionChips = require('../chunks/suggestion-chips-DIzEGoUE.cjs');
-require('../chunks/base-BG_mxssu.cjs');
+var widgets_suggestionChips = require('../chunks/suggestion-chips-D9i2FGGX.cjs');
+require('../chunks/base-vu_KhBiv.cjs');
 
 
 
 exports.defineSuggestionChips = widgets_suggestionChips.defineSuggestionChips;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/suggestion-chips.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/suggestion-chips.cjs.map

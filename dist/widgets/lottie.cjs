@@ -1,8 +1,8 @@
 'use strict';
 
-var base = require('../chunks/base-BG_mxssu.cjs');
+var base = require('../chunks/base-vu_KhBiv.cjs');
 var components_fxLottie = require('../components/fx-lottie.cjs');
-require('../chunks/registry-LE5iyTqw.cjs');
+require('../chunks/registry-EziiQiWO.cjs');
 
 var css = "usa-lottie{display:inline-block;line-height:0;max-width:100%}usa-lottie .usa-lt-svg{max-width:100%;height:auto;overflow:visible}usa-lottie [data-layer]{transform-box:view-box;transform-origin:0 0}";
 
@@ -100,4 +100,4 @@ function defineLottie(tag = 'usa-lottie') {
 }
 
 exports.defineLottie = defineLottie;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/lottie.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/lottie.cjs.map

@@ -1,5 +1,5 @@
-import { getEffect, registerEffects } from '../chunks/registry-4UDF3Dpk.js';
-import { p as prefersReducedMotion } from '../chunks/base-CBMzOs1k.js';
+import { getEffect, registerEffects } from '../chunks/registry-PxXkPc1Q.js';
+import { p as prefersReducedMotion } from '../chunks/base-nzeN_ux7.js';
 import { b as origin, a as all } from '../chunks/shared-CkKHWrtJ.js';
 
 const fade = (el, ctx, out) => ctx.animate(el, out ? [{ opacity: 1 }, { opacity: 0 }] : [{ opacity: 0 }, { opacity: 1 }], { duration: 200, fill: out ? 'forwards' : 'none' });
@@ -222,7 +222,7 @@ async function pageTransition(update, effect = 'ripple-dissolve', options = {}, 
     await update();
     const el = target || document.body.firstElementChild;
     if (el && def) {
-        const { playEffect } = await import('../chunks/registry-4UDF3Dpk.js');
+        const { playEffect } = await import('../chunks/registry-PxXkPc1Q.js');
         await playEffect(el, effect, { ...options, mode: 'in' });
     }
 }
@@ -241,4 +241,4 @@ function registerTransitionsPack() {
 }
 
 export { TRANSITIONS2_FX, crossDocumentTransitions, pageTransition, registerTransitionsPack };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/components/fx-transitions.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/components/fx-transitions.js.map

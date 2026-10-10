@@ -360,7 +360,7 @@ test('usa-slider: role=slider, arrows / Page / Home / End, value attribute', asy
   expectNoErrors(page);
 });
 
-test('usa-color-picker: both areas are keyboard sliders; value attribute', async ({ page }) => {
+test('usa-color-picker: both areas are keyboard sliders; value property reflected', async ({ page }) => {
   await openFixture(page); await define(page, 'usa-color-picker');
   await mount(page, '<usa-color-picker id="c" value="#7c5cff"></usa-color-picker>');
   await events(page, 'usa:change');
@@ -377,9 +377,10 @@ test('usa-color-picker: both areas are keyboard sliders; value attribute', async
     expect((await s.getAttribute('aria-valuetext')) + (await s.getAttribute('aria-valuenow')), `slider ${i} moves`).not.toBe(v0);
   }
   expect((await got(page, 'usa:change')).length).toBeGreaterThan(0);
-  await page.evaluate(() => document.getElementById('c').setAttribute('value', '#22c55e'));
+  // contract: `value` is state the element reflects (not an observed attribute) — set the property, the attribute follows
+  await page.evaluate(() => (document.getElementById('c').value = '#22c55e'));
   await settle(page);
-  expect(await page.locator('#c').evaluate((c) => String(c.value).toLowerCase())).toBe('#22c55e');
+  expect(await page.locator('#c').evaluate((c) => [String(c.value).toLowerCase(), c.getAttribute('value')])).toEqual(['#22c55e', '#22c55e']);
   expectNoErrors(page);
 });
 

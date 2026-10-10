@@ -1,5 +1,6 @@
 import { defineElement, type UsaElement } from '../base';
 import { parseFigureText } from './shared-figure';
+import { localeAttr } from './shared';
 import css from './kpi.css?raw';
 
 /**
@@ -66,7 +67,7 @@ export function defineKpi(tag = 'usa-kpi'): CustomElementConstructor | undefined
           const f = parseFigureText(this.value);
           const el = this.querySelector('.usa-kpi-value');
           if (!el) return;
-          el.textContent = f ? f.pre + n.toLocaleString(this.str('locale', '') || undefined, { minimumFractionDigits: f.dec, maximumFractionDigits: f.dec }) + f.post : this.value;
+          el.textContent = f ? f.pre + n.toLocaleString(localeAttr(this.str('locale', '')), { minimumFractionDigits: f.dec, maximumFractionDigits: f.dec }) + f.post : this.value;
         }
 
         private roll(from: number, flash: boolean): void {

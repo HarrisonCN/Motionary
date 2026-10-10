@@ -4,7 +4,7 @@
 
 10.9: <usa-gl-scene> for compressed glTF — Draco meshes and KTX2 (Basis Universal) textures decoded by the official decoders (Google draco3d, Binomial’s Basis Universal transcoder), lazy-loaded optional peers: only the decoder a file needs is fetched. Requires motionary/runtime/gl + format-gltf + gltf-decoders and draco3d (+ the Basis transcoder for KTX2 textures). Its own entry point: motionary/components/gl-model.
 
-- **Category:** ui · **since** 10.9
+- **Category:** ui · **since** 10.9 · **changed in** 13.1
 - **Import:** `import { defineGlModel } from 'motionary/components/gl-model'` then `defineGlModel();`
 - **CDN:** `<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>`
 - **Attributes:** —

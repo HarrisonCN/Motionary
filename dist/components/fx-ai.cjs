@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-LE5iyTqw.cjs');
-require('../chunks/base-BG_mxssu.cjs');
+var registry = require('../chunks/registry-EziiQiWO.cjs');
+require('../chunks/base-vu_KhBiv.cjs');
 
 /** Split text into words, keeping the whitespace after each (7.8). */
 function splitWords(text) {
@@ -127,4 +127,4 @@ function registerAiPack() {
 exports.AI_FX = AI_FX;
 exports.registerAiPack = registerAiPack;
 exports.splitWords = splitWords;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/components/fx-ai.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/components/fx-ai.cjs.map

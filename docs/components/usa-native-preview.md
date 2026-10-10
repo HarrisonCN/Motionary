@@ -4,7 +4,7 @@
 
 9.8: preview web motion as it will feel on a phone — an iOS / Android device frame replays the entrance with the rule’s curve and presses with a spring — and copy the generated React Native and Flutter code.
 
-- **Category:** ui · **since** 9.8
+- **Category:** ui · **since** 9.8 · **changed in** 13.1
 - **Import:** `import { defineNativePreview } from 'motionary/components/widgets'` then `defineNativePreview();`
 - **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `rules`, `platform`, `name`

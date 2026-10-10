@@ -91,13 +91,18 @@ export function defineCompare(tag = 'usa-compare'): CustomElementConstructor | u
               played = true;
               const end = this._p;
               const t0 = performance.now();
+              // 13.1.0: the intro loop stops on disconnect / re-mount (it kept painting a detached element)
+              let id = 0;
               const step = (now: number) => {
                 const k = Math.min(1, (now - t0) / 1400);
                 this.paint(end + Math.sin(k * Math.PI * 2) * 22 * (1 - k));
-                if (k < 1 && typeof requestAnimationFrame === 'function') requestAnimationFrame(step);
+                if (k < 1) id = requestAnimationFrame(step);
                 else this.paint(end);
               };
-              if (typeof requestAnimationFrame === 'function') requestAnimationFrame(step);
+              if (typeof requestAnimationFrame === 'function') {
+                id = requestAnimationFrame(step);
+                this.onCleanup(() => cancelAnimationFrame(id));
+              }
             }, { threshold: 0.5 });
           }
         }

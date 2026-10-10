@@ -1,6 +1,6 @@
 'use strict';
 
-var components_fxGpu = require('../chunks/gpu-BFYGfLfN.cjs');
+var components_fxGpu = require('../chunks/gpu-BREsvJpT.cjs');
 var components_fxText = require('./fx-text.cjs');
 var components_fxLight = require('./fx-light.cjs');
 var components_fx3d = require('./fx-3d.cjs');
@@ -31,11 +31,11 @@ var components_fxGenart = require('./fx-genart.cjs');
 var components_fxVideo = require('./fx-video.cjs');
 var components_fxSafe = require('./fx-safe.cjs');
 var components_fxPerf = require('./fx-perf.cjs');
-require('../chunks/registry-LE5iyTqw.cjs');
-require('../chunks/base-BG_mxssu.cjs');
+require('../chunks/registry-EziiQiWO.cjs');
+require('../chunks/base-vu_KhBiv.cjs');
 require('../chunks/generative-BHIj-NU0.cjs');
 require('../chunks/shared-jkgRH-Hx.cjs');
-require('../chunks/audio-CztPMZ1b.cjs');
+require('../chunks/audio-DhgfWYZ_.cjs');
 
 const P = (name, effects) => ({ name, effects });
 /** The `gpu` pack. */
@@ -135,4 +135,4 @@ exports.text = text;
 exports.transitions = transitions;
 exports.video = video;
 exports.weather = weather;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/components/plugins.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/components/plugins.cjs.map

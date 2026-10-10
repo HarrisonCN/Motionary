@@ -1,4 +1,4 @@
-import { R as RUNTIME_VERSION, r as requireModule } from '../chunks/registry-BpRcQEC5.js';
+import { R as RUNTIME_VERSION, r as requireModule } from '../chunks/registry-DG7d_uS7.js';
 
 /**
  * `motionary/runtime/physics` (10.7) — a small 2D rigid-body engine written
@@ -728,4 +728,4 @@ function dragConstraint(world, body, x, y, stiffness = 0.6) {
 const physics = { id: 'physics', version: RUNTIME_VERSION, tier: 'advanced', requires: ['core'], api: { createWorld, World, Body, Constraint, collide, dragConstraint } };
 
 export { Body, Constraint, World, collide, createWorld, dragConstraint, physics };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/runtime/physics.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/runtime/physics.js.map

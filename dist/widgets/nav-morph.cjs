@@ -1,10 +1,10 @@
 'use strict';
 
-var widgets_navMorph = require('../chunks/nav-morph-DeVvWJm-.cjs');
-require('../chunks/base-BG_mxssu.cjs');
-require('../chunks/shared-BxK1D7EZ.cjs');
+var widgets_navMorph = require('../chunks/nav-morph-kKmG_ocG.cjs');
+require('../chunks/base-vu_KhBiv.cjs');
+require('../chunks/shared-Bf72wLyt.cjs');
 
 
 
 exports.defineNavMorph = widgets_navMorph.defineNavMorph;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/nav-morph.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/nav-morph.cjs.map

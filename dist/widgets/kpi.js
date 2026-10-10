@@ -1,4 +1,5 @@
-import { f as defineElement } from '../chunks/base-CBMzOs1k.js';
+import { f as defineElement } from '../chunks/base-nzeN_ux7.js';
+import { l as localeAttr } from '../chunks/shared-o9CtwHmi.js';
 
 /** Parse a figure like "$12.4k" / "−3.5%" / "1,204" → number + prefix / suffix / decimals (7.2). */
 function parseFigureText(s) {
@@ -65,7 +66,7 @@ function defineKpi(tag = 'usa-kpi') {
                 const el = this.querySelector('.usa-kpi-value');
                 if (!el)
                     return;
-                el.textContent = f ? f.pre + n.toLocaleString(this.str('locale', '') || undefined, { minimumFractionDigits: f.dec, maximumFractionDigits: f.dec }) + f.post : this.value;
+                el.textContent = f ? f.pre + n.toLocaleString(localeAttr(this.str('locale', '')), { minimumFractionDigits: f.dec, maximumFractionDigits: f.dec }) + f.post : this.value;
             }
             roll(from, flash) {
                 const f = parseFigureText(this.value);
@@ -95,4 +96,4 @@ function defineKpi(tag = 'usa-kpi') {
 }
 
 export { defineKpi };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/kpi.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/kpi.js.map

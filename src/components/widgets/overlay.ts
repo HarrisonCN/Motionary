@@ -1,4 +1,4 @@
-import { defineElement, type UsaElement } from '../base';
+import { defineElement, getMotionSensitivity, type UsaElement } from '../base';
 import { ownChildren, part } from './shared';
 import css from './overlay.css?raw';
 
@@ -161,7 +161,8 @@ function defineOverlay(tag: string, kind: 'modal' | 'sheet'): CustomElementConst
         }
 
         private backdrop(opening: boolean): void {
-          if (!this._dlg) return;
+          // 13.1.0: motion sensitivity "static" means no animation at all — the backdrop just appears
+          if (!this._dlg || getMotionSensitivity() === 'static') return;
           const k: Keyframe[] = [{ opacity: 0 }, { opacity: 1 }];
           try {
             this._dlg.animate?.(opening ? k : k.reverse(), { duration: opening ? 280 : 200, pseudoElement: '::backdrop', fill: 'forwards' } as KeyframeAnimationOptions);

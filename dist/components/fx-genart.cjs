@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-LE5iyTqw.cjs');
-require('../chunks/base-BG_mxssu.cjs');
+var registry = require('../chunks/registry-EziiQiWO.cjs');
+require('../chunks/base-vu_KhBiv.cjs');
 
 const PALETTES = {
     sunset: ['#ff6b6b', '#feca57', '#ff9ff3', '#5f27cd', '#1dd1a1'],
@@ -134,4 +134,4 @@ exports.PALETTES = PALETTES;
 exports.meshGradient = meshGradient;
 exports.registerGenArtPack = registerGenArtPack;
 exports.seededRandom = seededRandom;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/components/fx-genart.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/components/fx-genart.cjs.map

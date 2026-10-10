@@ -1,6 +1,6 @@
-import { registerEffects } from '../chunks/registry-4UDF3Dpk.js';
+import { registerEffects } from '../chunks/registry-PxXkPc1Q.js';
 import { DEPTH3_FX } from '../components/fx-3d.js';
-import '../chunks/base-CBMzOs1k.js';
+import '../chunks/base-nzeN_ux7.js';
 import '../chunks/shared-CkKHWrtJ.js';
 import '../components/fx-light.js';
 import '../chunks/generative-2LhxG5BJ.js';
@@ -15,4 +15,4 @@ function registerCardFlip3d() {
 }
 
 export { effect, registerCardFlip3d as register, registerCardFlip3d };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/effects/card-flip-3d.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/effects/card-flip-3d.js.map

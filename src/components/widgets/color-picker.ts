@@ -62,13 +62,13 @@ export function defineColorPicker(tag = 'usa-color-picker'): CustomElementConstr
           if (hsv) [this._h, this._s, this._v] = hsv;
           this.querySelectorAll(':scope > [data-usa-part]').forEach((n) => n.remove());
           const sw = this.str('swatches', '').split(',').map((s) => s.trim()).filter((s) => hexToHsv(s));
-          this.insertAdjacentHTML('afterbegin', `<div class="usa-cp-sv" data-usa-part role="slider" tabindex="0" aria-label="Saturation and brightness"><span class="usa-cp-thumb"></span></div><div class="usa-cp-row" data-usa-part><span class="usa-cp-chip" aria-hidden="true"></span><div class="usa-cp-hue" role="slider" tabindex="0" aria-label="Hue" aria-valuemin="0" aria-valuemax="360"><span class="usa-cp-thumb"></span></div></div>${sw.length ? `<div class="usa-cp-swatches" data-usa-part>${sw.map((c) => `<button type="button" class="usa-cp-sw" style="background:${c}" data-c="${c}" aria-label="${c}"></button>`).join('')}</div>` : ''}`);
+          this.insertAdjacentHTML('afterbegin', `<div class="usa-cp-sv" data-usa-part role="slider" tabindex="0" aria-label="Saturation and brightness" aria-valuemin="0" aria-valuemax="100"><span class="usa-cp-thumb"></span></div><div class="usa-cp-row" data-usa-part><span class="usa-cp-chip" aria-hidden="true"></span><div class="usa-cp-hue" role="slider" tabindex="0" aria-label="Hue" aria-valuemin="0" aria-valuemax="360"><span class="usa-cp-thumb"></span></div></div>${sw.length ? `<div class="usa-cp-swatches" data-usa-part>${sw.map((c) => `<button type="button" class="usa-cp-sw" style="background:${c}" data-c="${c}" aria-label="${c}"></button>`).join('')}</div>` : ''}`);
           const sv = this.querySelector('.usa-cp-sv') as HTMLElement;
           const hue = this.querySelector('.usa-cp-hue') as HTMLElement;
           this.drag(sv, (x, y) => ((this._s = x), (this._v = 1 - y)));
           this.drag(hue, (x) => (this._h = x * 360));
           this.listen(sv, 'keydown', (e: KeyboardEvent) => this.keys(e, (d, ax) => (ax ? (this._v = clampN(this._v - d, 0, 1)) : (this._s = clampN(this._s + d, 0, 1)))));
-          this.listen(hue, 'keydown', (e: KeyboardEvent) => this.keys(e, (d) => (this._h = (this._h + d * 360 + 360) % 360)));
+          this.listen(hue, 'keydown', (e: KeyboardEvent) => this.keys(e, (d, ax) => (this._h = (this._h + (ax ? -d : d) * 360 + 360) % 360))); // 13.1.0: Up raises the hue like Right (one-axis slider)
           this.listen(this, 'click', (e: Event) => {
             const b = (e.target as HTMLElement).closest?.('.usa-cp-sw') as HTMLElement | null;
             if (!b) return;
@@ -122,6 +122,7 @@ export function defineColorPicker(tag = 'usa-color-picker'): CustomElementConstr
           this.style.setProperty('--usa-cp-hx', ((this._h / 360) * 100).toFixed(2) + '%');
           const sv = this.querySelector('.usa-cp-sv');
           sv?.setAttribute('aria-valuetext', `saturation ${Math.round(this._s * 100)}%, brightness ${Math.round(this._v * 100)}%`);
+          sv?.setAttribute('aria-valuenow', String(Math.round(this._s * 100))); // 13.1.0: required on role=slider (aria-valuetext carries both axes)
           const hue = this.querySelector('.usa-cp-hue');
           hue?.setAttribute('aria-valuenow', String(Math.round(this._h)));
           this.setAttribute('value', c);

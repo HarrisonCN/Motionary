@@ -98,6 +98,12 @@ export function defineSegmented(tag = 'usa-segmented'): CustomElementConstructor
           this.motion(t, [{ transform: `translateX(${dx}px) scaleX(${sx})` }, { transform: `translateX(${dx * 0.35}px) scaleX(${Math.max(sx, 1) * 1.18}) scaleY(.88)`, offset: 0.45 }, { transform: 'none' }], { duration: 430, easing: 'cubic-bezier(.3,1.25,.5,1)' });
         }
 
+        changed(name: string): void {
+          // 13.1.0: `value` is observed — setting it selects that segment (a re-mount kept the previous selection)
+          if (name === 'value') this.select(this.num('value', 0), false);
+          else super.changed(name);
+        }
+
         select(i: number, user: boolean): void {
           const v = clampN(i | 0, 0, Math.max(0, this._segs.length - 1));
           if (v === this._v) return;

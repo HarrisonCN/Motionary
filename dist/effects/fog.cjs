@@ -1,8 +1,8 @@
 'use strict';
 
-var registry = require('../chunks/registry-LE5iyTqw.cjs');
+var registry = require('../chunks/registry-EziiQiWO.cjs');
 var components_fxWeather = require('../components/fx-weather.cjs');
-require('../chunks/base-BG_mxssu.cjs');
+require('../chunks/base-vu_KhBiv.cjs');
 require('../chunks/generative-BHIj-NU0.cjs');
 require('../chunks/shared-jkgRH-Hx.cjs');
 
@@ -18,4 +18,4 @@ function registerFog() {
 exports.effect = effect;
 exports.register = registerFog;
 exports.registerFog = registerFog;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/effects/fog.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/effects/fog.cjs.map

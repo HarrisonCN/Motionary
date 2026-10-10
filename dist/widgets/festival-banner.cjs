@@ -1,9 +1,9 @@
 'use strict';
 
-var widgets_festivalBanner = require('../chunks/festival-banner-DWCMdZM1.cjs');
-require('../chunks/base-BG_mxssu.cjs');
+var widgets_festivalBanner = require('../chunks/festival-banner-ByYX1Oy6.cjs');
+require('../chunks/base-vu_KhBiv.cjs');
 
 
 
 exports.defineFestivalBanner = widgets_festivalBanner.defineFestivalBanner;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/festival-banner.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/festival-banner.cjs.map

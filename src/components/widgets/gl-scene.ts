@@ -143,6 +143,9 @@ export function defineGlScene(tag = 'usa-gl-scene'): CustomElementConstructor | 
           this.onCleanup(() => {
             ctl?.dispose();
             r.dispose();
+            // 13.1.0: release the WebGL2 context with the canvas — every re-mount (attribute change, reconnect) made a new
+            // one and browsers cap live contexts (~16), dropping the oldest with a warning
+            (canvas.getContext('webgl2') as WebGL2RenderingContext | null)?.getExtension('WEBGL_lose_context')?.loseContext();
             this.r = null;
             this.an = null;
           });

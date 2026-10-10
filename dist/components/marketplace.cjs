@@ -1,9 +1,9 @@
 'use strict';
 
-var manifest = require('../chunks/manifest-CKtkSVw4.cjs');
+var manifest = require('../chunks/manifest-Rxf1Mumb.cjs');
 var sign = require('../chunks/sign-RAkQIWrM.cjs');
-require('../chunks/registry-LE5iyTqw.cjs');
-require('../chunks/base-BG_mxssu.cjs');
+require('../chunks/registry-EziiQiWO.cjs');
+require('../chunks/base-vu_KhBiv.cjs');
 
 const MARKETPLACE_FORMAT = 'motionary/marketplace';
 const L = (name, title, description, entry, register, effects, tags, since) => ({ name, title, description, entry, register, effects: effects.split(' '), tags: tags.split(' '), since, author: 'Motionary', official: true });
@@ -100,4 +100,4 @@ exports.fetchMarketplace = fetchMarketplace;
 exports.installPlugin = installPlugin;
 exports.installedPlugins = installedPlugins;
 exports.searchPlugins = searchPlugins;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/components/marketplace.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/components/marketplace.cjs.map

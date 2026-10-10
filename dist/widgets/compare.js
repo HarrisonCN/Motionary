@@ -1,5 +1,5 @@
-import { f as defineElement } from '../chunks/base-CBMzOs1k.js';
-import { o as ownChildren, p as part, c as clampN } from '../chunks/shared-C8Pi6tuh.js';
+import { f as defineElement } from '../chunks/base-nzeN_ux7.js';
+import { o as ownChildren, p as part, c as clampN } from '../chunks/shared-o9CtwHmi.js';
 
 var css = "usa-compare{position:relative;display:grid;overflow:hidden;border-radius:var(--usa-cmp-radius,14px);user-select:none;touch-action:pan-y;cursor:ew-resize;--usa-cmp-line:#fff;outline-offset:3px}usa-compare[data-orientation=\"vertical\"]{touch-action:pan-x;cursor:ns-resize}usa-compare>.usa-cmp-before,usa-compare>.usa-cmp-after{grid-area:1/1;display:block;width:100%;height:100%;object-fit:cover;pointer-events:none}.usa-cmp-handle{position:absolute;top:0;bottom:0;left:50%;width:0;z-index:2;pointer-events:none}.usa-cmp-handle::before{content:\"\";position:absolute;top:0;bottom:0;left:-1.5px;width:3px;background:var(--usa-cmp-line);box-shadow:0 0 8px rgba(0,0,0,.35)}usa-compare[data-orientation=\"vertical\"] .usa-cmp-handle{top:50%;bottom:auto;left:0;right:0;width:auto;height:0}usa-compare[data-orientation=\"vertical\"] .usa-cmp-handle::before{left:0;right:0;top:-1.5px;width:auto;height:3px}.usa-cmp-knob{position:absolute;top:50%;left:0;display:grid;place-items:center;width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;background:var(--usa-cmp-line);color:#111827;box-shadow:0 6px 18px rgba(0,0,0,.35);pointer-events:auto;cursor:grab;transition:transform .2s}usa-compare[data-orientation=\"vertical\"] .usa-cmp-knob{left:50%;top:0;transform:rotate(90deg)}usa-compare:active .usa-cmp-knob{transform:scale(.92)}usa-compare[data-orientation=\"vertical\"]:active .usa-cmp-knob{transform:rotate(90deg) scale(.92)}.usa-cmp-label{position:absolute;top:10px;z-index:1;padding:3px 9px;border-radius:999px;background:rgba(0,0,0,.55);color:#fff;font:600 12px/1.4 system-ui,sans-serif;pointer-events:none}.usa-cmp-label-b{left:10px}.usa-cmp-label-a{right:10px}";
 
@@ -86,16 +86,20 @@ function defineCompare(tag = 'usa-compare') {
                         played = true;
                         const end = this._p;
                         const t0 = performance.now();
+                        // 13.1.0: the intro loop stops on disconnect / re-mount (it kept painting a detached element)
+                        let id = 0;
                         const step = (now) => {
                             const k = Math.min(1, (now - t0) / 1400);
                             this.paint(end + Math.sin(k * Math.PI * 2) * 22 * (1 - k));
-                            if (k < 1 && typeof requestAnimationFrame === 'function')
-                                requestAnimationFrame(step);
+                            if (k < 1)
+                                id = requestAnimationFrame(step);
                             else
                                 this.paint(end);
                         };
-                        if (typeof requestAnimationFrame === 'function')
-                            requestAnimationFrame(step);
+                        if (typeof requestAnimationFrame === 'function') {
+                            id = requestAnimationFrame(step);
+                            this.onCleanup(() => cancelAnimationFrame(id));
+                        }
                     }, { threshold: 0.5 });
                 }
             }
@@ -129,4 +133,4 @@ function defineCompare(tag = 'usa-compare') {
 }
 
 export { defineCompare };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/compare.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/compare.js.map

@@ -1,7 +1,7 @@
-import { f as defineElement, d as clamp, b as caf, r as raf } from '../chunks/base-CBMzOs1k.js';
-import { d as springEasing, c as createSpring, p as projectInertia, s as snapTo, a as rubberBand } from '../chunks/spring-2YZXQmr7.js';
-import { a as adoptVariants } from '../chunks/variants-B8gnRVha.js';
-export { V as VARIANTS, s as setVariant } from '../chunks/variants-B8gnRVha.js';
+import { f as defineElement, d as clamp, F as FOCUSABLE, G as queryAttr, b as caf, r as raf } from '../chunks/base-nzeN_ux7.js';
+import { d as springEasing, c as createSpring, p as projectInertia, s as snapTo, a as rubberBand } from '../chunks/spring-BX7EJst7.js';
+import { a as adoptVariants } from '../chunks/variants-DY08myqK.js';
+export { V as VARIANTS, s as setVariant } from '../chunks/variants-DY08myqK.js';
 
 /** Position a fixed `floating` element next to `anchor`, flipping when it would leave the viewport. */
 function place(floating, anchor, placement = 'top', gap = 8) {
@@ -200,6 +200,18 @@ function makePanel(Base, kind) {
                 this._pos.jump(this.size() * 1.2);
             }
             this.listen(document, 'keydown', (e) => e.key === 'Escape' && this.open && this.close());
+            // 13.1.0: aria-modal means modal — Tab / Shift+Tab wrap inside the open panel instead of reaching the page behind it
+            this.listen(this, 'keydown', (e) => {
+                if (e.key !== 'Tab' || !this.open)
+                    return;
+                const h = this;
+                const f = Array.from(h.querySelectorAll(FOCUSABLE)).filter((x) => x.getClientRects().length);
+                const a = f[0] || h, z = f[f.length - 1] || h, c = document.activeElement;
+                if (e.shiftKey ? c === a || c === h : c === z) {
+                    e.preventDefault();
+                    (e.shiftKey ? z : a).focus();
+                }
+            });
             this.listen(this, 'click', (e) => e.target.closest?.('[data-close]') && this.close());
             this.listen(this, 'pointerdown', (e) => this.dragStart(e));
             this.listen(this, 'pointermove', (e) => this.dragMove(e));
@@ -245,13 +257,16 @@ function makePanel(Base, kind) {
         }
         hide() {
             this._pos.set(this.size() * 1.05);
+            // 13.1.0: focus leaves the dismissed panel now, not when the slide-out spring comes to rest
+            if (this.contains(document.activeElement) && this._return instanceof HTMLElement)
+                this._return.focus({ preventScroll: true });
             this.emit('close');
         }
         afterClose() {
             this.hidden = true;
             this._backdrop?.remove();
             this._backdrop = null;
-            if (this._return instanceof HTMLElement)
+            if (this.contains(document.activeElement) && this._return instanceof HTMLElement)
                 this._return.focus({ preventScroll: true });
         }
         close() {
@@ -559,7 +574,7 @@ function defineNavbar(tag = 'usa-navbar') {
         }
         mount() {
             const sel = this.str('target');
-            const scroller = (sel && document.querySelector(sel)) || window;
+            const scroller = queryAttr(sel) || window;
             const pos = () => (scroller === window ? window.scrollY || document.documentElement.scrollTop : scroller.scrollTop);
             this._last = pos();
             const update = () => {
@@ -899,4 +914,4 @@ function defineUiComponents() {
 }
 
 export { adoptVariants, defineAvatarStack, defineBadge, defineBottomSheet, defineDrawer, defineFab, defineNavbar, definePopover, definePullRefresh, defineSlider, defineTabs, defineUiComponents };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/components/ui.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/components/ui.js.map

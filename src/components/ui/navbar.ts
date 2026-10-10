@@ -1,4 +1,4 @@
-import { defineElement, raf, caf, type UsaElement } from '../base';
+import { defineElement, raf, caf, type UsaElement, queryAttr } from '../base';
 import { adoptVariants } from './variants';
 import css from './navbar.css?raw';
 
@@ -34,7 +34,7 @@ export function defineNavbar(tag = 'usa-navbar'): CustomElementConstructor | und
 
         mount(): void {
           const sel = this.str('target');
-          const scroller: HTMLElement | Window = (sel && (document.querySelector(sel) as HTMLElement)) || window;
+          const scroller: HTMLElement | Window = queryAttr(sel) || window;
           const pos = () => (scroller === window ? window.scrollY || document.documentElement.scrollTop : (scroller as HTMLElement).scrollTop);
           this._last = pos();
           const update = () => {

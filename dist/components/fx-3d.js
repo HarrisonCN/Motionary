@@ -1,7 +1,7 @@
-import { registerEffects } from '../chunks/registry-4UDF3Dpk.js';
+import { registerEffects } from '../chunks/registry-PxXkPc1Q.js';
 import { a as all } from '../chunks/shared-CkKHWrtJ.js';
 import { trackPointer } from './fx-light.js';
-import '../chunks/base-CBMzOs1k.js';
+import '../chunks/base-nzeN_ux7.js';
 import '../chunks/generative-2LhxG5BJ.js';
 
 const layers = (el) => {
@@ -230,4 +230,4 @@ function register3dPack() {
 }
 
 export { DEPTH3_FX, register3dPack };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/components/fx-3d.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/components/fx-3d.js.map

@@ -7,6 +7,43 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [13.1.0] - 2026-10-10
+
+Real browser compatibility. A Playwright suite now runs every public component in Chromium, Firefox and WebKit on the
+built package (`npm run test:browser`, CI job `browser`). It found the bugs below on 13.0.2; each is fixed here and kept
+covered by the suite. Minor release: npm tag `v13-1` (`latest` stays on 13.0.x, see docs/versions.md). No API removed,
+no budget raised.
+
+### Fixed (keyboard and ARIA)
+- **`<usa-native-preview>`**: the Replay `<button>` sat inside `role="tablist"` (axe `aria-required-children`, first reported downstream); the code was not a tabpanel and every tab was a Tab stop. Replay now sits next to the list (`.usa-np-bar`), the code is a `role="tabpanel"` (`aria-controls` / `aria-labelledby`), tabs use a roving tabindex with ←/→/Home/End.
+- **`<usa-install-button>`**: same tabs pattern (one Tab stop, arrow keys, Home/End, tabpanel).
+- **`<usa-code-export>`**: the tablist now also handles Home / End.
+- **`<usa-switch>`**: `disabled` is exposed as `aria-disabled`.
+- **`<usa-stepper clickable>`**: steps are keyboard reachable (`tabindex="0"`, Enter / Space), not click-only.
+- **`<usa-color-picker>`**: the saturation/brightness area has the `aria-valuenow` that `role="slider"` requires (`aria-valuetext` still reads both axes); on the hue slider ↑ now raises the value like → (it cancelled it out).
+- **`<usa-drawer>` / `<usa-bottom-sheet>`**: the `aria-modal="true"` panel had no focus trap — Tab reached the page behind it. Tab / Shift+Tab now wrap inside the open panel, and focus returns to the opener as soon as the panel is dismissed (not when the slide-out spring comes to rest).
+
+### Fixed (motion sensitivity)
+- **`<usa-modal>` / `<usa-sheet>`**: the `::backdrop` fade still animated under motion sensitivity `"static"`; it now just appears.
+
+### Fixed (attributes and errors — component contract)
+- **`<usa-segmented>`**: changing the observed `value` attribute after mount did not change the selection.
+- **Invalid selector attributes threw** instead of falling back (`<usa-navbar target>`, `<usa-scroll-progress target>`, `<usa-back-to-top focus-target>`, `<usa-chapter-nav for>`, `<usa-motion-inspector scope>`, `<usa-scroll-ring for>`, `<usa-theme-switcher target>`, `<usa-code-export for>`, `<usa-add-to-cart from / cart>`). A selector that does not parse now finds nothing and the element uses its documented default (new internal `queryAttr()`).
+- **Invalid `locale` attribute threw a `RangeError`** (`<usa-date-picker>`, `<usa-kpi>`); it now falls back to the user's locale.
+- **Invalid `root-margin` threw from `IntersectionObserver`** (`<usa-reveal>` and every component using the base `inView()`); it now falls back to the defaults.
+- **`scrollScene()` (runtime/scroll) with a bad `start` / `end`** threw from the first `refresh()` — after it had registered scroll / resize listeners, the ticker and the global scene, which then leaked and re-threw on every resize. The edges are validated before any side effect; `<usa-scroll-scene>` falls back to its defaults with a `[motionary]` warning.
+
+### Fixed (resources)
+- **`<usa-scroll-scene pin>`**: pinning wraps the element in a spacer (and unwraps it on kill); that move fired `disconnected` / `connected` in the middle of mounting, so the half-built scene was never killed and a second one mounted inside it — dozens of scenes with their scroll / resize listeners and ticker callbacks leaked per re-mount. Moves made by the scene itself are now ignored.
+- **`<usa-compare>`**: the intro rAF loop was not cancelled on disconnect / re-mount (stacked loops painting a detached element).
+- **`<usa-gl-scene>` / `<usa-gl-model>`**: the WebGL2 context was never released on disconnect / re-mount (7 live contexts after 6 re-mounts, 16 after attribute changes — browsers then drop the oldest). It is now lost with the canvas.
+- **`<usa-distort>` / `<usa-liquid>` / `<usa-post-fx>`**: re-connected after their image had failed, they kept a dead canvas and a live context; they now show the image fallback.
+
+### Added (checks)
+- `test/browser/` (Playwright, devDependency only) — lifecycle sweep of every manifest component (mount / attribute changes / unmount / re-mount: no error, no leaked window or document listener, interval, observer on a detached node, rAF loop or WebGL context), keyboard and ARIA patterns, motion sensitivity levels, WebGL / Canvas resource release and the per-browser GPU capability matrix, and a 32-component page measured against `perf/browser-baseline.json`.
+- `npm run test:browser`; CI job `browser` (chromium / firefox / webkit matrix, browsers cached by Playwright version, results uploaded as artifacts). See [docs/browser-matrix.md](docs/browser-matrix.md) for what each browser supports and the documented limitations.
+- `test/browser-compat-13-1-0.test.ts` keeps the pure logic (selector / locale fallbacks, scroll-scene validation) in the fast jsdom run.
+
 ## [13.0.2] - 2026-10-10
 
 ### Fixed (component playground — `showcase/run.html`)

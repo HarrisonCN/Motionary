@@ -1,5 +1,5 @@
-import { B as deprecate, g as getMotionSensitivity, M as MOTION_SENSITIVITY_LEVELS, c as configureComponents, C as adoptStyles } from '../chunks/base-CBMzOs1k.js';
-export { l as adaptKeyframes } from '../chunks/base-CBMzOs1k.js';
+import { B as deprecate, F as FOCUSABLE, g as getMotionSensitivity, M as MOTION_SENSITIVITY_LEVELS, c as configureComponents, C as adoptStyles } from '../chunks/base-nzeN_ux7.js';
+export { l as adaptKeyframes } from '../chunks/base-nzeN_ux7.js';
 import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-B-JBecYg.js';
 
 /**
@@ -193,7 +193,6 @@ function announce(message, options = {}) {
     el.textContent = message;
     return true;
 }
-const FOCUSABLE = 'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
 const NAMED_ROLES = ['button', 'switch', 'checkbox', 'slider', 'tab', 'progressbar', 'radiogroup', 'dialog'];
 function accessibleName(el) {
     const label = el.getAttribute('aria-label');
@@ -256,4 +255,4 @@ function auditMotionA11y(root) {
 const ALL_TAGS = Object.values(COMPONENT_CATEGORIES).flat();
 
 export { ALL_TAGS, LIVE_REGION_IDS, MOTION_SENSITIVITY, MOTION_SENSITIVITY_LEVELS, SENSITIVITY_CSS, STATIC_ALTERNATIVES, announce, auditMotionA11y, baselineReport, getMotionSensitivity, liveRegion, motionAllowed, restoreMotionSensitivity, setMotionSensitivity, staticAlternative, warnBaseline };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/components/a11y.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/components/a11y.js.map

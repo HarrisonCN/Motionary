@@ -1,6 +1,6 @@
-import { registerEffects } from '../chunks/registry-4UDF3Dpk.js';
+import { registerEffects } from '../chunks/registry-PxXkPc1Q.js';
 import { PHYSICS2_FX } from '../components/fx-physics.js';
-import '../chunks/base-CBMzOs1k.js';
+import '../chunks/base-nzeN_ux7.js';
 import '../chunks/generative-2LhxG5BJ.js';
 import '../chunks/shared-CkKHWrtJ.js';
 
@@ -14,4 +14,4 @@ function registerSoftBody() {
 }
 
 export { effect, registerSoftBody as register, registerSoftBody };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/effects/soft-body.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/effects/soft-body.js.map

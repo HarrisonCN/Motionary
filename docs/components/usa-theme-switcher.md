@@ -4,7 +4,7 @@
 
 8.6: a segmented switcher for the 8.6 theme system — light, dark, neon, glass and soft (neumorphism); a pill slides under the active option and the page change is revealed with a circular wipe from the click point.
 
-- **Category:** ui · **since** 8.6
+- **Category:** ui · **since** 8.6 · **changed in** 13.1
 - **Import:** `import { defineThemeSwitcher } from 'motionary/components/widgets'` then `defineThemeSwitcher();`
 - **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `themes`, `target`, `label`, `persist`, `value`

@@ -1,4 +1,4 @@
-import { defineElement, clamp, type UsaElement } from '../base';
+import { defineElement, clamp, FOCUSABLE, type UsaElement } from '../base';
 import { createSpring, projectInertia, snapTo, rubberBand, type SpringValue } from '../physics/spring';
 import { adoptVariants } from './variants';
 import css from './sheet.css?raw';
@@ -57,6 +57,17 @@ function makePanel(Base: any, kind: 'drawer' | 'sheet') {
         this._pos.jump(this.size() * 1.2);
       }
       this.listen(document, 'keydown', (e: KeyboardEvent) => e.key === 'Escape' && this.open && this.close());
+      // 13.1.0: aria-modal means modal — Tab / Shift+Tab wrap inside the open panel instead of reaching the page behind it
+      this.listen(this, 'keydown', (e: KeyboardEvent) => {
+        if (e.key !== 'Tab' || !this.open) return;
+        const h = this as unknown as HTMLElement;
+        const f = Array.from(h.querySelectorAll<HTMLElement>(FOCUSABLE)).filter((x) => x.getClientRects().length);
+        const a = f[0] || h, z = f[f.length - 1] || h, c = document.activeElement;
+        if (e.shiftKey ? c === a || c === h : c === z) {
+          e.preventDefault();
+          (e.shiftKey ? z : a).focus();
+        }
+      });
       this.listen(this, 'click', (e: MouseEvent) => (e.target as Element).closest?.('[data-close]') && this.close());
       this.listen(this, 'pointerdown', (e: PointerEvent) => this.dragStart(e));
       this.listen(this, 'pointermove', (e: PointerEvent) => this.dragMove(e));
@@ -103,6 +114,8 @@ function makePanel(Base: any, kind: 'drawer' | 'sheet') {
 
     hide(): void {
       this._pos.set(this.size() * 1.05);
+      // 13.1.0: focus leaves the dismissed panel now, not when the slide-out spring comes to rest
+      if (this.contains(document.activeElement) && this._return instanceof HTMLElement) this._return.focus({ preventScroll: true });
       this.emit('close');
     }
 
@@ -110,7 +123,7 @@ function makePanel(Base: any, kind: 'drawer' | 'sheet') {
       this.hidden = true;
       this._backdrop?.remove();
       this._backdrop = null;
-      if (this._return instanceof HTMLElement) this._return.focus({ preventScroll: true });
+      if (this.contains(document.activeElement) && this._return instanceof HTMLElement) this._return.focus({ preventScroll: true });
     }
 
     close(): void {
