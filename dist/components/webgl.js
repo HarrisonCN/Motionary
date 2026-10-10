@@ -1,4 +1,4 @@
-import { f as defineElement, n as now, d as clamp, b as caf, r as raf } from '../chunks/base-CBMzOs1k.js';
+import { f as defineElement, n as now, d as clamp, b as caf, r as raf } from '../chunks/base-nzeN_ux7.js';
 
 /** Minimal WebGL runner: one full-canvas quad, one fragment shader, optional image texture. */
 const VERTEX = 'attribute vec2 p;varying vec2 v_uv;void main(){v_uv=p*.5+.5;gl_Position=vec4(p,0.,1.);}';
@@ -324,6 +324,9 @@ function make(kind) {
                 q.resize(this._scale);
                 this.frame();
             };
+            // 13.1.0: an image that already failed (re-connect after a 404) fires no more events — fall back now
+            if (img && img.complete && !img.naturalWidth && img.currentSrc)
+                return this.fallback('image');
             if (img && !(img.complete && img.naturalWidth)) {
                 if (!img.crossOrigin && /^https?:/.test(img.src) && !img.src.startsWith(location.origin))
                     img.crossOrigin = 'anonymous';
@@ -439,4 +442,4 @@ function defineWebglComponents() {
 }
 
 export { GL_FALLBACKS, PARTICLE_PRESETS, POST_EFFECTS, SHADERS, defineDistort, defineLiquid, definePostFx, defineShader, defineWebglComponents, fragmentSource, glFallbackCss, glGovernor, glQuad, postFxShader, supportsWebGL, watchPowerSaver };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/components/webgl.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/components/webgl.js.map

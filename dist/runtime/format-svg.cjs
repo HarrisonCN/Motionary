@@ -1,9 +1,9 @@
 'use strict';
 
-var registry = require('../chunks/registry-CP1MIOtI.cjs');
-var tween = require('../chunks/tween-D30sTGVW.cjs');
+var registry = require('../chunks/registry-CeBi49cV.cjs');
+var tween = require('../chunks/tween-CDewrfuy.cjs');
 var ease = require('../chunks/ease-HwYZnZat.cjs');
-require('../chunks/ticker-qpbJvWSb.cjs');
+require('../chunks/ticker-D9DzTlll.cjs');
 
 /**
  * `motionary/runtime/format-svg` (10.2) — SVG animation with the runtime
@@ -455,4 +455,4 @@ exports.pointAtLength = pointAtLength;
 exports.readSmil = readSmil;
 exports.samplePath = samplePath;
 exports.smilTime = smilTime;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/runtime/format-svg.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/runtime/format-svg.cjs.map

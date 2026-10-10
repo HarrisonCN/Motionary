@@ -1,4 +1,4 @@
-import { defineElement, type UsaElement } from '../base';
+import { defineElement, type UsaElement, queryAttr } from '../base';
 import { getEffect, playEffect } from '../fx';
 import { registerShopPack } from '../fx2/shop';
 import css from './add-to-cart.css?raw';
@@ -46,8 +46,8 @@ export function defineAddToCart(tag = 'usa-add-to-cart'): CustomElementConstruct
             item = { name: this.str('item', '') };
           }
           const cartSel = this.str('cart', '[data-cart]');
-          const cart = document.querySelector(cartSel) as (HTMLElement & { add?: (i: unknown) => void }) | null;
-          const from = (this.str('from', '') && document.querySelector(this.str('from', ''))) || this.closest('[data-product]')?.querySelector('img') || this;
+          const cart = queryAttr(cartSel) as (HTMLElement & { add?: (i: unknown) => void }) | null;
+          const from = queryAttr(this.str('from')) || this.closest('[data-product]')?.querySelector('img') || this;
           if (getEffect('fly-to-cart')) void playEffect(from as HTMLElement, 'fly-to-cart', { to: cart?.matches('usa-cart-drawer') ? `${cartSel} .usa-cd2-toggle` : cartSel });
           cart?.add?.(item);
           this.setAttribute('data-added', '');

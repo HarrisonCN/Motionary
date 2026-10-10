@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-BG_mxssu.cjs');
+var base = require('../chunks/base-vu_KhBiv.cjs');
 
 var shadowCss = ":host{display:contents}dialog{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:transparent;color:inherit;overflow:hidden}dialog:not([open]){display:none}dialog::backdrop{background:transparent}[part=\"backdrop\"]{position:absolute;inset:0;background:var(--usa-dialog-backdrop,rgb(0 0 0 / 0.42))}[part=\"panel\"]{position:absolute;left:50%;top:50%;translate:-50% -50%;box-sizing:border-box;width:min(var(--usa-dialog-width,480px),calc(100vw - 32px));max-height:calc(100vh - 32px);overflow:auto;padding:var(--usa-dialog-padding,24px);border-radius:var(--usa-dialog-radius,12px);background:var(--usa-dialog-bg,Canvas);color:var(--usa-dialog-fg,CanvasText);box-shadow:0 32px 64px -12px rgb(0 0 0 / 0.45),0 0 0 1px rgb(127 127 127 / 0.18)}dialog[data-kind^=\"drawer\"] [part=\"panel\"]{top:0;bottom:0;translate:none;max-height:none;height:100%;border-radius:0;width:min(var(--usa-dialog-width,380px),88vw)}dialog[data-kind=\"drawer-start\"] [part=\"panel\"]{left:0}dialog[data-kind=\"drawer-end\"] [part=\"panel\"]{left:auto;right:0}dialog[data-kind=\"drawer-bottom\"] [part=\"panel\"],dialog[data-kind=\"sheet\"] [part=\"panel\"]{top:auto;bottom:0;left:0;right:0;translate:none;width:100%;height:auto;max-height:85vh;border-radius:var(--usa-dialog-radius,16px) var(--usa-dialog-radius,16px) 0 0}dialog[data-kind=\"sheet\"] [part=\"panel\"]{left:50%;translate:-50% 0;width:min(var(--usa-dialog-width,560px),100vw)}";
 
@@ -427,4 +427,4 @@ exports.defineTransitionComponents = defineTransitionComponents;
 exports.defineViewSwitch = defineViewSwitch;
 exports.flip = flip;
 exports.viewTransition = viewTransition;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/components/transitions.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/components/transitions.cjs.map

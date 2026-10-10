@@ -1,6 +1,6 @@
-import { f as defineElement } from '../chunks/base-CBMzOs1k.js';
+import { f as defineElement } from '../chunks/base-nzeN_ux7.js';
 import { loadMotionPreferences, applyMotionPreferences } from '../components/fx-safe.js';
-import '../chunks/registry-4UDF3Dpk.js';
+import '../chunks/registry-PxXkPc1Q.js';
 
 var css = "usa-motion-prefs{display:block;max-width:100%;font:13px/1.35 system-ui,sans-serif;color:#0f172a}usa-motion-prefs .usa-mp{display:grid;gap:10px;margin:0;padding:14px;border:1px solid rgba(15,23,42,.12);border-radius:14px;background:#fff}usa-motion-prefs fieldset{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:6px;margin:0;padding:0;border:0}usa-motion-prefs legend{margin-bottom:6px;font-weight:700}usa-motion-prefs .usa-mp-level{display:flex;gap:6px;align-items:flex-start;padding:8px;border:1px solid #e2e8f0;border-radius:10px;cursor:pointer}usa-motion-prefs .usa-mp-level:has(input:checked){border-color:#6366f1;background:#eef2ff}usa-motion-prefs .usa-mp-level span{display:flex;flex-direction:column}usa-motion-prefs small{color:#64748b}usa-motion-prefs .usa-mp-row{display:flex;gap:8px;align-items:center;font-weight:600}usa-motion-prefs input[type=range]{flex:1;min-width:0;accent-color:#4f46e5}usa-motion-prefs .usa-mp-sample{height:22px;border-radius:999px;background:#f1f5f9;padding:3px;overflow:hidden}usa-motion-prefs .usa-mp-sample i{display:block;width:16px;height:16px;border-radius:50%;background:#4f46e5}usa-motion-prefs .usa-mp-reset{justify-self:start;padding:5px 12px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;font:inherit;cursor:pointer}usa-motion-prefs :focus-visible{outline:2px solid #6366f1;outline-offset:2px}";
 
@@ -69,4 +69,4 @@ function defineMotionPrefs(tag = 'usa-motion-prefs') {
 }
 
 export { defineMotionPrefs };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/motion-prefs.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/motion-prefs.js.map

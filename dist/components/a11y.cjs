@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-BG_mxssu.cjs');
+var base = require('../chunks/base-vu_KhBiv.cjs');
 var indexTags = require('../chunks/index-tags-hLIF2Clq.cjs');
 
 /**
@@ -194,7 +194,6 @@ function announce(message, options = {}) {
     el.textContent = message;
     return true;
 }
-const FOCUSABLE = 'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
 const NAMED_ROLES = ['button', 'switch', 'checkbox', 'slider', 'tab', 'progressbar', 'radiogroup', 'dialog'];
 function accessibleName(el) {
     const label = el.getAttribute('aria-label');
@@ -220,7 +219,7 @@ function auditMotionA11y(root) {
     const add = (rule, level, element, message) => issues.push({ rule, level, element, message });
     const scope = root;
     scope.querySelectorAll('[aria-hidden="true"]').forEach((h) => {
-        const f = (h.matches(FOCUSABLE) ? [h] : Array.from(h.querySelectorAll(FOCUSABLE))).filter((x) => !x.closest('[inert]'));
+        const f = (h.matches(base.FOCUSABLE) ? [h] : Array.from(h.querySelectorAll(base.FOCUSABLE))).filter((x) => !x.closest('[inert]'));
         f.forEach((x) => add('aria-hidden-focusable', 'error', x, `focusable <${x.tagName.toLowerCase()}> inside aria-hidden`));
     });
     scope.querySelectorAll('[role]').forEach((el) => {
@@ -273,4 +272,4 @@ exports.restoreMotionSensitivity = restoreMotionSensitivity;
 exports.setMotionSensitivity = setMotionSensitivity;
 exports.staticAlternative = staticAlternative;
 exports.warnBaseline = warnBaseline;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/components/a11y.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/components/a11y.cjs.map

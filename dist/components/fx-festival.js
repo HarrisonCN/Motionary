@@ -1,5 +1,5 @@
-import { registerEffects } from '../chunks/registry-4UDF3Dpk.js';
-import '../chunks/base-CBMzOs1k.js';
+import { registerEffects } from '../chunks/registry-PxXkPc1Q.js';
+import '../chunks/base-nzeN_ux7.js';
 
 /** Evenly spread spark directions with a little jitter (8.1). */
 function sparkVectors(n, radius, seed = 1) {
@@ -114,4 +114,4 @@ function registerFestivalPack() {
 }
 
 export { FESTIVAL_FX, registerFestivalPack, sparkVectors };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/components/fx-festival.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/components/fx-festival.js.map

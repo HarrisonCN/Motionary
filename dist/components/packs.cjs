@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-BG_mxssu.cjs');
+var base = require('../chunks/base-vu_KhBiv.cjs');
 
 const anim = (el, frames, o) => {
     if (typeof el.animate !== 'function')
@@ -189,4 +189,4 @@ exports.countUp = countUp;
 exports.definePack = definePack;
 exports.definePacksComponents = definePacksComponents;
 exports.flyToCart = flyToCart;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/components/packs.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/components/packs.cjs.map

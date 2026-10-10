@@ -4,7 +4,7 @@
 
 10.2: a live panel listing the running animations in a scope (CSS animations, transitions, element.animate(), components) with state and progress, plus the motionary/runtime ticker when present — pause / play all, 0.25× slow motion and per-row scrub.
 
-- **Category:** ui · **since** 10.2
+- **Category:** ui · **since** 10.2 · **changed in** 13.1
 - **Import:** `import { defineMotionInspector } from 'motionary/components/widgets'` then `defineMotionInspector();`
 - **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `scope`, `interval`

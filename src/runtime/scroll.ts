@@ -114,6 +114,10 @@ export class ScrollScene {
     if (typeof window === 'undefined') throw new Error('[motionary] scroll scenes need a browser window');
     this.options = o;
     this.trigger = q(o.trigger);
+    // 13.1.0: a bad start / end throws here — before any listener, ticker, pin or registry entry exists (it used to throw
+    // from the first refresh() and leave all of those behind, re-throwing on every resize)
+    if (o.start) resolveRule(o.start, 0, 0, 0);
+    if (o.end && !/^\+=/.test(o.end.trim())) resolveRule(o.end, 0, 0, 0);
     this.scroller = o.scroller ? q(o.scroller) : window;
     if (o.pin) this.setupPin(o.pin === true ? (this.trigger as HTMLElement) : (q(o.pin) as HTMLElement));
     const target: EventTarget = this.scroller;

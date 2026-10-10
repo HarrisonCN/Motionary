@@ -4,7 +4,7 @@
 
 10.4: a circular scroll-progress indicator for the page or any scroll container (for=".article"), optional percentage label and back-to-top button. Scroll-driven 3.0: native animation-timeline: scroll() first (no script per frame), a small JS loop where scroll timelines are missing.
 
-- **Category:** reveal · **since** 10.4
+- **Category:** reveal · **since** 10.4 · **changed in** 13.1
 - **Import:** `import { defineScrollRing } from 'motionary/components/widgets'` then `defineScrollRing();`
 - **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `for`, `engine`, `label`, `back-to-top`, `size`, `thickness`, `horizontal`, `preview`

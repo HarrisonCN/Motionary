@@ -1,8 +1,8 @@
 'use strict';
 
-var base = require('../chunks/base-BG_mxssu.cjs');
+var base = require('../chunks/base-vu_KhBiv.cjs');
 var components_fxPaper = require('../components/fx-paper.cjs');
-require('../chunks/registry-LE5iyTqw.cjs');
+require('../chunks/registry-EziiQiWO.cjs');
 
 var css = "usa-sticky-wall{display:flex;flex-wrap:wrap;gap:14px;padding:14px;align-items:flex-start}usa-sticky-wall>.usa-sticky{position:relative;box-sizing:border-box;width:120px;min-height:96px;padding:18px 12px 12px;font:500 13px/1.35 'Comic Sans MS','Segoe Print','Bradley Hand',cursive,system-ui;color:#3f3a2e;background:#fef08a;transform:rotate(var(--tilt,0deg));box-shadow:0 10px 16px -10px rgba(0,0,0,.45),inset 0 -12px 18px -14px rgba(0,0,0,.25);cursor:pointer;outline:none;transition:box-shadow .2s}usa-sticky-wall>.usa-sticky::before{content:'';position:absolute;top:5px;left:50%;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fca5a5,#dc2626 70%);box-shadow:0 2px 2px rgba(0,0,0,.3)}usa-sticky-wall>[data-paper=pink]{background:#fbcfe8}usa-sticky-wall>[data-paper=blue]{background:#bae6fd}usa-sticky-wall>[data-paper=green]{background:#bbf7d0}usa-sticky-wall>.usa-sticky:focus-visible{box-shadow:0 0 0 3px #6366f1,0 10px 16px -10px rgba(0,0,0,.45)}usa-sticky-wall>[data-picked]{box-shadow:0 18px 26px -12px rgba(0,0,0,.5)}";
 
@@ -72,4 +72,4 @@ function defineStickyWall(tag = 'usa-sticky-wall') {
 }
 
 exports.defineStickyWall = defineStickyWall;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/sticky-wall.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/sticky-wall.cjs.map

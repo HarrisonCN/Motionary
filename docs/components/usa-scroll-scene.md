@@ -4,7 +4,7 @@
 
 10.2: a scroll-linked scene — children with data-scrub="opacity: 0 -> 1; x: -80 -> 0" are tweened as you scroll, scrubbed directly or smoothed (scrub="120"), with optional pin, markers and stagger. Requires motionary/runtime/scroll — npm i motionary, then use(scroll) before the scene mounts.
 
-- **Category:** reveal · **since** 10.2
+- **Category:** reveal · **since** 10.2 · **changed in** 13.1
 - **Import:** `import { defineScrollScene } from 'motionary/components/widgets'` then `defineScrollScene();`
 - **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `start`, `end`, `scrub`, `pin`, `markers`, `stagger`, `toggle-class`, `preview`

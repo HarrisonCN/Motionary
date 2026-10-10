@@ -1,8 +1,8 @@
-import { l as loadEffectPack } from '../chunks/manifest-CQUlazDF.js';
-export { E as EFFECT_PACK_FORMAT, p as packManifest, v as validateManifest } from '../chunks/manifest-CQUlazDF.js';
+import { l as loadEffectPack } from '../chunks/manifest-pVzW6oyg.js';
+export { E as EFFECT_PACK_FORMAT, p as packManifest, v as validateManifest } from '../chunks/manifest-pVzW6oyg.js';
 export { c as checkCompat, p as pluginIntegrity, s as satisfies, v as verifyPlugin } from '../chunks/sign-DvZ1jHxE.js';
-import '../chunks/registry-4UDF3Dpk.js';
-import '../chunks/base-CBMzOs1k.js';
+import '../chunks/registry-PxXkPc1Q.js';
+import '../chunks/base-nzeN_ux7.js';
 
 const MARKETPLACE_FORMAT = 'motionary/marketplace';
 const L = (name, title, description, entry, register, effects, tags, since) => ({ name, title, description, entry, register, effects: effects.split(' '), tags: tags.split(' '), since, author: 'Motionary', official: true });
@@ -86,4 +86,4 @@ async function fetchMarketplace(url, fetcher = fetch) {
 }
 
 export { MARKETPLACE, MARKETPLACE_FORMAT, fetchMarketplace, installPlugin, installedPlugins, loadEffectPack, searchPlugins };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/components/marketplace.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/components/marketplace.js.map

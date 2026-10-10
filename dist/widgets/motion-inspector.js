@@ -1,5 +1,5 @@
-import { f as defineElement } from '../chunks/base-CBMzOs1k.js';
-import { h as hasModule, r as requireModule } from '../chunks/registry-BpRcQEC5.js';
+import { f as defineElement, G as queryAttr } from '../chunks/base-nzeN_ux7.js';
+import { h as hasModule, r as requireModule } from '../chunks/registry-DG7d_uS7.js';
 
 var css = "usa-motion-inspector{display:block;max-width:100%;box-sizing:border-box;padding:10px;border-radius:14px;background:#0f172a;color:#e2e8f0;font:12px/1.4 system-ui,sans-serif}usa-motion-inspector .usa-mi-bar{display:flex;justify-content:space-between;gap:8px;align-items:baseline;flex-wrap:wrap}usa-motion-inspector .usa-mi-rt{color:#94a3b8;font:11px/1.2 ui-monospace,monospace}usa-motion-inspector .usa-mi-tools{display:flex;flex-wrap:wrap;gap:4px;margin:8px 0}usa-motion-inspector button{padding:4px 8px;border:1px solid #334155;border-radius:7px;background:#1e293b;color:#e2e8f0;font:600 11px/1 system-ui,sans-serif;cursor:pointer}usa-motion-inspector button[aria-pressed=true]{background:#6366f1;border-color:#6366f1}usa-motion-inspector .usa-mi-list{margin:0;padding:0;list-style:none;display:grid;gap:4px;max-height:180px;overflow:auto}usa-motion-inspector .usa-mi-list li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 8px;padding:5px 6px;border-radius:7px;background:#1e293b}usa-motion-inspector .usa-mi-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:11px/1.3 ui-monospace,monospace}usa-motion-inspector .usa-mi-state{color:#a5b4fc;font-size:10.5px}usa-motion-inspector li[data-state=paused] .usa-mi-state{color:#fbbf24}usa-motion-inspector input[type=range]{grid-column:1/-1;width:100%;margin:0;accent-color:#818cf8}usa-motion-inspector .usa-mi-empty{display:block!important;color:#94a3b8}";
 
@@ -22,7 +22,7 @@ function defineMotionInspector(tag = 'usa-motion-inspector') {
                 return ['scope', 'interval'];
             }
             animations() {
-                const scope = this.str('scope') ? document.querySelector(this.str('scope')) : document;
+                const scope = this.str('scope') ? queryAttr(this.str('scope')) : document;
                 if (!scope)
                     return [];
                 const list = typeof scope.getAnimations === 'function' ? scope.getAnimations(scope === document ? undefined : { subtree: true }) : [];
@@ -114,4 +114,4 @@ function defineMotionInspector(tag = 'usa-motion-inspector') {
 }
 
 export { defineMotionInspector };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/motion-inspector.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/motion-inspector.js.map

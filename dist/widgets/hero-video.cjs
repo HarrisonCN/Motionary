@@ -1,8 +1,8 @@
 'use strict';
 
-var base = require('../chunks/base-BG_mxssu.cjs');
+var base = require('../chunks/base-vu_KhBiv.cjs');
 var components_fxVideo = require('../components/fx-video.cjs');
-require('../chunks/registry-LE5iyTqw.cjs');
+require('../chunks/registry-EziiQiWO.cjs');
 
 var css = "usa-hero-video{position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:260px;padding:24px;overflow:hidden;border-radius:16px;color:#fff;isolation:isolate}usa-hero-video>video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;opacity:0;transition:opacity .8s}usa-hero-video[data-ready]:not([data-poster-only])>video{opacity:1}usa-hero-video .usa-hv-poster{position:absolute;inset:-4%;z-index:-3;background:linear-gradient(135deg,#1e1b4b,#7c3aed 45%,#f472b6) center/cover no-repeat}usa-hero-video>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-3}usa-hero-video[data-poster-only] .usa-hv-poster{animation:usa-hv-kb 18s ease-in-out infinite alternate}usa-hero-video .usa-hv-scrim{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.6))}usa-hero-video .usa-hv-toggle{position:absolute;right:12px;top:12px;width:34px;height:34px;border:0;border-radius:50%;background:rgba(0,0,0,.45) url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M7 5h4v14H7zM13 5h4v14h-4z'/%3E%3C/svg%3E\") center/16px no-repeat;cursor:pointer}usa-hero-video[data-paused] .usa-hv-toggle{background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M8 5l11 7-11 7z'/%3E%3C/svg%3E\")}usa-hero-video .usa-hv-toggle:focus-visible{outline:2px solid #fff;outline-offset:2px}@keyframes usa-hv-kb{from{transform:scale(1)}to{transform:scale(1.08) translate(-2%,-1%)}}@media (prefers-reduced-motion:reduce){usa-hero-video .usa-hv-poster{animation:none!important}usa-hero-video>video{transition:none}}";
 
@@ -80,4 +80,4 @@ function defineHeroVideo(tag = 'usa-hero-video') {
 }
 
 exports.defineHeroVideo = defineHeroVideo;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/hero-video.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/hero-video.cjs.map

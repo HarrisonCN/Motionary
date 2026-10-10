@@ -1,3 +1,3 @@
-export { d as defineFestivalBanner } from '../chunks/festival-banner-CvGwychu.js';
-import '../chunks/base-CBMzOs1k.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/festival-banner.js.map
+export { d as defineFestivalBanner } from '../chunks/festival-banner-Dsu53in5.js';
+import '../chunks/base-nzeN_ux7.js';
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/festival-banner.js.map

@@ -1,6 +1,6 @@
-import { f as defineElement, b as caf, r as raf, p as prefersReducedMotion, n as now, g as getMotionSensitivity, u as getMotionIntensity, c as configureComponents, C as adoptStyles } from '../chunks/base-CBMzOs1k.js';
-export { j as MOTION_SCALE } from '../chunks/base-CBMzOs1k.js';
-import { e as springSamples } from '../chunks/spring-2YZXQmr7.js';
+import { f as defineElement, b as caf, r as raf, p as prefersReducedMotion, n as now, G as queryAttr, g as getMotionSensitivity, u as getMotionIntensity, c as configureComponents, C as adoptStyles } from '../chunks/base-nzeN_ux7.js';
+export { j as MOTION_SCALE } from '../chunks/base-nzeN_ux7.js';
+import { e as springSamples } from '../chunks/spring-BX7EJst7.js';
 
 var css$8 = "usa-cursor{--usa-cursor-color:var(--usa-accent,#7c5cff);--usa-cursor-size:28px;position:fixed;inset:0;pointer-events:none;z-index:2147483600;opacity:0;transition:opacity 0.2s ease;contain:strict}usa-cursor[data-active]{opacity:1}usa-cursor .usa-cursor-ring{position:absolute;left:0;top:0;width:var(--usa-cursor-size);height:var(--usa-cursor-size);margin:calc(var(--usa-cursor-size) / -2) 0 0 calc(var(--usa-cursor-size) / -2);border:1.5px solid var(--usa-cursor-color);border-radius:999px;box-sizing:border-box;transition:width 0.25s cubic-bezier(0.34,1.56,0.64,1),height 0.25s cubic-bezier(0.34,1.56,0.64,1),margin 0.25s ease,border-radius 0.25s ease,background-color 0.2s ease;will-change:transform}usa-cursor[data-hover] .usa-cursor-ring:first-child{width:calc(var(--usa-cursor-size) * 1.6);height:calc(var(--usa-cursor-size) * 1.6);margin:calc(var(--usa-cursor-size) * -0.8) 0 0 calc(var(--usa-cursor-size) * -0.8);background:color-mix(in srgb,var(--usa-cursor-color) 15%,transparent)}usa-cursor[data-snapped] .usa-cursor-ring{border-radius:12px;background:color-mix(in srgb,var(--usa-cursor-color) 12%,transparent);translate:-50% -50%;margin:0}usa-cursor[data-down] .usa-cursor-ring:first-child{scale:0.8}usa-cursor .usa-cursor-dot{position:absolute;left:-3px;top:-3px;width:6px;height:6px;border-radius:50%;background:var(--usa-cursor-color)}usa-cursor[data-snapped] .usa-cursor-dot{opacity:0}usa-cursor .usa-cursor-glow{position:absolute;left:-200px;top:-200px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--usa-cursor-color) 35%,transparent),transparent 65%);mix-blend-mode:screen}.usa-cursor-none,.usa-cursor-none *{cursor:none !important}@media (pointer:coarse),(prefers-reduced-motion:reduce){usa-cursor{display:none}.usa-cursor-none,.usa-cursor-none *{cursor:auto !important}}";
 
@@ -402,7 +402,7 @@ function defineBackToTop(tag = 'usa-back-to-top') {
             }, { passive: true });
             this.listen(btn, 'click', async () => {
                 await scrollToTarget(0, { preset: 'slow' });
-                const f = document.querySelector(this.str('focus-target', '#main')) || document.body;
+                const f = queryAttr(this.str('focus-target', '#main')) || document.body;
                 if (!f.hasAttribute('tabindex') && f !== document.body)
                     f.tabIndex = -1;
                 f.focus?.({ preventScroll: true });
@@ -812,4 +812,4 @@ function definePageComponents() {
 }
 
 export { AMBIENT_EFFECTS, CURSOR_MODES, PAGE_EFFECTS, defineAmbient, defineAutoSkeleton, defineBackToTop, defineCursor, defineFullpage, defineLoadingBar, defineMotionSwitch, definePageComponents, defineSplash, enableMpaTransitions, getMotionIntensity, getMotionLevel, loadingBar, pageTransition, restoreMotionIntensity, scrollToTarget, setMotionIntensity, setMotionLevel, smoothScroll, supportsViewTransitions, themeTransition };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/components/page.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/components/page.js.map

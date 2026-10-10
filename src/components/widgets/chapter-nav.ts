@@ -1,4 +1,4 @@
-import { defineElement, type UsaElement } from '../base';
+import { defineElement, type UsaElement, queryAttr } from '../base';
 import css from './chapter-nav.css?raw';
 
 /**
@@ -33,7 +33,7 @@ export function defineChapterNav(tag = 'usa-chapter-nav'): CustomElementConstruc
         }
         mount(): void {
           this.querySelectorAll(':scope > [data-usa-part]').forEach((n) => n.remove());
-          const root: ParentNode = (this.str('for') && document.querySelector(this.str('for'))) || document;
+          const root: ParentNode = queryAttr(this.str('for')) || document;
           this._secs = Array.from(root.querySelectorAll<HTMLElement>('[data-chapter]'));
           this.setAttribute('role', 'navigation');
           this.setAttribute('aria-label', this.str('label', 'Chapters'));

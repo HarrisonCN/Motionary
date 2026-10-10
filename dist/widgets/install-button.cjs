@@ -1,6 +1,7 @@
 'use strict';
 
-var base = require('../chunks/base-BG_mxssu.cjs');
+var base = require('../chunks/base-vu_KhBiv.cjs');
+var shared = require('../chunks/shared-Bf72wLyt.cjs');
 
 var css = "usa-install-button{display:inline-flex;flex-direction:column;gap:6px;max-width:100%;box-sizing:border-box;font:12px/1.4 system-ui,sans-serif}usa-install-button [role=tablist]{display:flex;flex-wrap:wrap;gap:4px}usa-install-button [role=tab]{padding:4px 9px;border:1px solid #cbd5e1;border-radius:999px;background:#fff;color:#334155;font:600 11px/1 system-ui,sans-serif;cursor:pointer}usa-install-button [role=tab][aria-selected=true]{background:#0f172a;border-color:#0f172a;color:#fff}usa-install-button .usa-ib-row{display:flex;align-items:stretch;min-width:0;border-radius:10px;background:#0f172a;color:#e2e8f0;overflow:hidden}usa-install-button code{flex:1;min-width:0;padding:9px 10px;font:12px/1.4 ui-monospace,monospace;white-space:pre-wrap;overflow-wrap:anywhere}usa-install-button .usa-ib-copy{flex:none;position:relative;min-width:74px;padding:0 12px;border:0;background:#4f46e5;color:#fff;font:700 12px/1 system-ui,sans-serif;cursor:pointer}usa-install-button .usa-ib-copy[data-copied]{background:#16a34a}";
 
@@ -36,9 +37,28 @@ function defineInstallButton(tag = 'usa-install-button') {
             mount() {
                 const list = this.list();
                 this.cur = list.includes(this.str('manager')) ? this.str('manager') : list[0];
-                this.innerHTML = `<div role="tablist" aria-label="Package manager">${list.map((m) => `<button type="button" role="tab" data-m="${m}">${m === 'cdn' ? 'CDN' : m}</button>`).join('')}</div><div class="usa-ib-row"><code></code><button type="button" class="usa-ib-copy" aria-live="polite">Copy</button></div>`;
+                // 13.1.0: full tabs pattern — tabs control the command row (tabpanel), one tab stop, arrows / Home / End
+                const id = shared.nextId('usa-ib');
+                this.innerHTML = `<div role="tablist" aria-label="Package manager">${list.map((m) => `<button type="button" role="tab" id="${id}-${m}" aria-controls="${id}" data-m="${m}">${m === 'cdn' ? 'CDN' : m}</button>`).join('')}</div><div class="usa-ib-row" id="${id}" role="tabpanel"><code></code><button type="button" class="usa-ib-copy" aria-live="polite">Copy</button></div>`;
+                const tabs = Array.from(this.querySelectorAll('[role=tab]'));
+                this.listen(this, 'keydown', (e) => {
+                    const i = tabs.indexOf(e.target);
+                    const j = i < 0 ? -1 : shared.arrowIndex(e, i, tabs.length);
+                    if (j < 0)
+                        return;
+                    e.preventDefault();
+                    this.cur = tabs[j].dataset.m;
+                    show(true);
+                    tabs[j].focus();
+                });
                 const show = (animate = false) => {
-                    this.querySelectorAll('[role=tab]').forEach((t) => t.setAttribute('aria-selected', String(t.dataset.m === this.cur)));
+                    tabs.forEach((t) => {
+                        const on = t.dataset.m === this.cur;
+                        t.setAttribute('aria-selected', String(on));
+                        t.tabIndex = on ? 0 : -1;
+                        if (on)
+                            this.querySelector('[role=tabpanel]')?.setAttribute('aria-labelledby', t.id);
+                    });
                     const code = this.querySelector('code');
                     code.textContent = this.command();
                     if (animate && !this.reduced)
@@ -85,4 +105,4 @@ function defineInstallButton(tag = 'usa-install-button') {
 }
 
 exports.defineInstallButton = defineInstallButton;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/install-button.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/install-button.cjs.map

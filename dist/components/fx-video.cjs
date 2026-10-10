@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-LE5iyTqw.cjs');
-var base = require('../chunks/base-BG_mxssu.cjs');
+var registry = require('../chunks/registry-EziiQiWO.cjs');
+var base = require('../chunks/base-vu_KhBiv.cjs');
 
 /** Scroll progress of `el` through the viewport: 0 entering at the bottom → 1 leaving at the top (9.4). */
 function scrollProgress(el) {
@@ -108,4 +108,4 @@ exports.frameSequence = frameSequence;
 exports.registerVideoPack = registerVideoPack;
 exports.scrollProgress = scrollProgress;
 exports.scrubVideo = scrubVideo;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/components/fx-video.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/components/fx-video.cjs.map

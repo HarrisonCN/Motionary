@@ -1,4 +1,4 @@
-import { f as defineElement, h as getClock, o as onClockChange, s as setClock } from '../chunks/base-CBMzOs1k.js';
+import { f as defineElement, h as getClock, o as onClockChange, s as setClock } from '../chunks/base-nzeN_ux7.js';
 
 var css = "usa-pause-all{display:inline-block}usa-pause-all .usa-pa-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border:1px solid #cbd5e1;border-radius:999px;background:#fff;color:#0f172a;font:600 13px/1 system-ui,sans-serif;cursor:pointer}usa-pause-all .usa-pa-btn:focus-visible{outline:2px solid #6366f1;outline-offset:2px}usa-pause-all .usa-pa-icon{width:12px;height:12px;background:linear-gradient(90deg,currentColor 0 35%,transparent 35% 65%,currentColor 65%)}usa-pause-all[data-paused] .usa-pa-icon{background:currentColor;clip-path:polygon(10% 0,100% 50%,10% 100%)}[data-usa-paused] *,[data-usa-paused] *::before,[data-usa-paused] *::after{animation-play-state:paused!important}";
 
@@ -69,4 +69,4 @@ function definePauseAll(tag = 'usa-pause-all') {
 }
 
 export { definePauseAll };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/pause-all.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/pause-all.js.map

@@ -1,10 +1,10 @@
 'use strict';
 
-var widgets_odometer = require('../chunks/progress-ring-B8Ytgw_Q.cjs');
-require('../chunks/base-BG_mxssu.cjs');
-require('../chunks/shared-BxK1D7EZ.cjs');
+var widgets_odometer = require('../chunks/progress-ring-BO9a3Q24.cjs');
+require('../chunks/base-vu_KhBiv.cjs');
+require('../chunks/shared-Bf72wLyt.cjs');
 
 
 
 exports.defineProgressRing = widgets_odometer.defineProgressRing;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/progress-ring.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/progress-ring.cjs.map

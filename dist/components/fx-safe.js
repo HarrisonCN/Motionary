@@ -1,5 +1,5 @@
-import { registerEffects } from '../chunks/registry-4UDF3Dpk.js';
-import { c as configureComponents, s as setClock } from '../chunks/base-CBMzOs1k.js';
+import { registerEffects } from '../chunks/registry-PxXkPc1Q.js';
+import { c as configureComponents, s as setClock } from '../chunks/base-nzeN_ux7.js';
 
 const MOVE = /^(transform|translate|scale|rotate|offset|offsetPath|offsetDistance|clipPath|top|left|right|bottom|margin.*|perspective)$/;
 /** Keyframes with all movement removed (opacity / colour / shadow kept; blur removed from filters) (9.5). */
@@ -142,4 +142,4 @@ function registerSafePack() {
 }
 
 export { DEFAULT_MOTION_PREFS, MOTION_PREFS_KEY, SAFE_FX, applyMotionPreferences, flashCount, isFlashSafe, loadMotionPreferences, registerSafePack, vestibularSafe };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/components/fx-safe.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/components/fx-safe.js.map

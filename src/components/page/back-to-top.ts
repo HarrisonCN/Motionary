@@ -1,4 +1,4 @@
-import { defineElement, raf, caf, type UsaElement } from '../base';
+import { defineElement, raf, caf, type UsaElement, queryAttr } from '../base';
 import { scrollToTarget } from './scroll';
 import css from './back-to-top.css?raw';
 
@@ -43,7 +43,7 @@ export function defineBackToTop(tag = 'usa-back-to-top'): CustomElementConstruct
           }, { passive: true });
           this.listen(btn, 'click', async () => {
             await scrollToTarget(0, { preset: 'slow' });
-            const f = document.querySelector<HTMLElement>(this.str('focus-target', '#main')) || document.body;
+            const f = queryAttr(this.str('focus-target', '#main')) || document.body;
             if (!f.hasAttribute('tabindex') && f !== document.body) f.tabIndex = -1;
             f.focus?.({ preventScroll: true });
           });

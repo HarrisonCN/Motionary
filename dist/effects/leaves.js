@@ -1,6 +1,6 @@
-import { registerEffects } from '../chunks/registry-4UDF3Dpk.js';
-import { G as GPU_FX } from '../chunks/gpu-CxTWIssF.js';
-import '../chunks/base-CBMzOs1k.js';
+import { registerEffects } from '../chunks/registry-PxXkPc1Q.js';
+import { G as GPU_FX } from '../chunks/gpu-DdiOOXTP.js';
+import '../chunks/base-nzeN_ux7.js';
 import '../chunks/generative-2LhxG5BJ.js';
 import '../chunks/shared-CkKHWrtJ.js';
 
@@ -14,4 +14,4 @@ function registerLeaves() {
 }
 
 export { effect, registerLeaves as register, registerLeaves };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/effects/leaves.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/effects/leaves.js.map

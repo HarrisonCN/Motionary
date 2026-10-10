@@ -1759,7 +1759,7 @@
           "{manager, text}"
         ]
       },
-      "keyboard": false,
+      "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
       "exempt": [],
@@ -2521,7 +2521,7 @@
           "(none)"
         ]
       },
-      "keyboard": false,
+      "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
       "exempt": [],
@@ -4139,7 +4139,7 @@
           "{value}"
         ]
       },
-      "keyboard": false,
+      "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
       "exempt": [

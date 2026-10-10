@@ -1,4 +1,4 @@
-import { defineElement, type UsaElement } from '../base';
+import { defineElement, type UsaElement, queryAttr } from '../base';
 import { SURFACE_THEMES, applySurfaceTheme } from '../fx2/themefx';
 import css from './theme-switcher.css?raw';
 
@@ -32,7 +32,7 @@ export function defineThemeSwitcher(tag = 'usa-theme-switcher'): CustomElementCo
         }
         private tgt(): Element | null {
           const s = this.str('target');
-          return s ? document.querySelector(s) : document.documentElement;
+          return s ? queryAttr(s) : document.documentElement;
         }
         get value(): string {
           return this._v;

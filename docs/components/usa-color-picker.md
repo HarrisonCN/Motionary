@@ -4,7 +4,7 @@
 
 6.9: a saturation / brightness square and a hue strip with spring-follow thumbs (both keyboard sliders), a preview chip that morphs to the new colour and swatches that pop.
 
-- **Category:** ui · **since** 6.9
+- **Category:** ui · **since** 6.9 · **changed in** 13.1
 - **Import:** `import { defineColorPicker } from 'motionary/components/widgets'` then `defineColorPicker();`
 - **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `swatches`

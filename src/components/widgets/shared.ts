@@ -32,3 +32,13 @@ export function arrowIndex(e: KeyboardEvent, i: number, n: number, vertical = fa
   if (e.key === 'End') return n - 1;
   return -1;
 }
+
+/** A `locale` attribute as a valid BCP 47 tag, or `undefined` (the user's locale) when it is not one (13.1.0: an
+ * invalid tag threw a RangeError from Intl / toLocale*String instead of falling back). */
+export function localeAttr(tag: string): string | undefined {
+  try {
+    return tag ? Intl.getCanonicalLocales(tag)[0] : undefined;
+  } catch {
+    return undefined;
+  }
+}

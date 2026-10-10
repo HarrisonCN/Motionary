@@ -1,9 +1,9 @@
 'use strict';
 
-var registry = require('../chunks/registry-LE5iyTqw.cjs');
+var registry = require('../chunks/registry-EziiQiWO.cjs');
 var generative = require('../chunks/generative-BHIj-NU0.cjs');
 var shared = require('../chunks/shared-jkgRH-Hx.cjs');
-require('../chunks/base-BG_mxssu.cjs');
+require('../chunks/base-vu_KhBiv.cjs');
 
 /** Track the pointer over `el` as 0–1 coordinates (`fn(x, y, inside)`); starts at (`x0`, `y0`). Returns a remover. */
 function trackPointer(el, ctx, fn, x0 = 0.3, y0 = 0.25) {
@@ -218,4 +218,4 @@ function registerLightPack() {
 exports.LIGHT_FX = LIGHT_FX;
 exports.registerLightPack = registerLightPack;
 exports.trackPointer = trackPointer;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/components/fx-light.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/components/fx-light.cjs.map

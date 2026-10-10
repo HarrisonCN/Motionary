@@ -1,5 +1,5 @@
-import { f as defineElement } from '../chunks/base-CBMzOs1k.js';
-import { o as ownChildren } from '../chunks/shared-C8Pi6tuh.js';
+import { f as defineElement } from '../chunks/base-nzeN_ux7.js';
+import { o as ownChildren } from '../chunks/shared-o9CtwHmi.js';
 
 var css = "usa-kanban{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(140px,1fr);gap:12px;max-width:100%;overflow-x:auto;padding:4px;font:500 13px/1.35 system-ui,sans-serif}.usa-kb-col{display:flex;flex-direction:column;gap:8px;min-height:80px;padding:10px;border-radius:14px;background:rgba(127,127,127,.12);margin:0;list-style:none}.usa-kb-col>h1,.usa-kb-col>h2,.usa-kb-col>h3,.usa-kb-col>h4{margin:0 0 2px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;opacity:.7}.usa-kb-card{padding:10px 12px;border-radius:10px;background:var(--usa-kb-card,#fff);color:#111;box-shadow:0 1px 3px rgba(0,0,0,.14);cursor:grab;touch-action:none;user-select:none;outline-offset:2px}.usa-kb-card:focus-visible{outline:2px solid #7c5cff}.usa-kb-lifted{cursor:grabbing;box-shadow:0 18px 30px -8px rgba(0,0,0,.35);transition:transform .12s}.usa-kb-held{outline:2px dashed #7c5cff;transform:scale(1.03)}.usa-kb-ph{border-radius:10px;border:2px dashed rgba(124,92,255,.5);background:rgba(124,92,255,.08)}.usa-kb-live{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}@media (prefers-reduced-motion:reduce){.usa-kb-lifted,.usa-kb-held{transition:none;transform:none!important}}";
 
@@ -213,4 +213,4 @@ function defineKanban(tag = 'usa-kanban') {
 }
 
 export { defineKanban };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/kanban.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/kanban.js.map

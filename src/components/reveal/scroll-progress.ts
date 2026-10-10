@@ -1,4 +1,4 @@
-import { defineElement, raf, caf, clamp, type UsaElement } from '../base';
+import { defineElement, raf, caf, clamp, type UsaElement, queryAttr } from '../base';
 import css from './scroll-progress.css?raw';
 
 /**
@@ -77,7 +77,7 @@ export function defineScrollProgress(tag = 'usa-scroll-progress'): CustomElement
 
         update(): void {
           const sel = this.getAttribute('target');
-          const target = sel ? document.querySelector(sel) : null;
+          const target = queryAttr(sel);
           const p = readScrollProgress(target);
           if (Math.abs(p - this._p) < 0.0005) return;
           this._p = p;

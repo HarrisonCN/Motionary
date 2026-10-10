@@ -1,4 +1,5 @@
 import { defineElement, type UsaElement } from '../base';
+import { localeAttr } from './shared';
 import css from './date-picker.css?raw';
 
 /**
@@ -84,7 +85,7 @@ export function defineDatePicker(tag = 'usa-date-picker'): CustomElementConstruc
         private render(dir: number, focus = false): void {
           const grid = this.querySelector('.usa-dp-grid') as HTMLElement | null;
           if (!grid) return;
-          const loc = this.str('locale', '') || undefined;
+          const loc = localeAttr(this.str('locale', ''));
           const fd = this.num('first-day', 1);
           const title = this.querySelector('.usa-dp-title') as HTMLElement;
           title.textContent = this._view.toLocaleDateString(loc, { month: 'long', year: 'numeric' });

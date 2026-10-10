@@ -1,6 +1,6 @@
-import { registerEffects } from '../chunks/registry-4UDF3Dpk.js';
+import { registerEffects } from '../chunks/registry-PxXkPc1Q.js';
 import { WEATHER_FX } from '../components/fx-weather.js';
-import '../chunks/base-CBMzOs1k.js';
+import '../chunks/base-nzeN_ux7.js';
 import '../chunks/generative-2LhxG5BJ.js';
 import '../chunks/shared-CkKHWrtJ.js';
 
@@ -14,4 +14,4 @@ function registerAuroraVeil() {
 }
 
 export { effect, registerAuroraVeil as register, registerAuroraVeil };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/effects/aurora-veil.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/effects/aurora-veil.js.map

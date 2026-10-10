@@ -77,6 +77,20 @@ function getMotionIntensity() {
 function motionScale() {
     return MOTION_SCALE[config.motionIntensity] ?? 1;
 }
+/**
+ * `querySelector` for a selector the page wrote in an attribute (`target`, `for`, `scope` …): an invalid selector finds
+ * nothing instead of throwing, so the element falls back to its documented default (13.1.0, component contract).
+ */
+function queryAttr(sel, root = document) {
+    try {
+        return sel ? root.querySelector(sel) : null;
+    }
+    catch {
+        return null;
+    }
+}
+/** Focusable descendants (internal; shared by the a11y audit and the modal panels' focus trap). */
+const FOCUSABLE = 'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
 const canDefine = () => typeof customElements !== 'undefined' && typeof HTMLElement !== 'undefined';
 /** `true` when animations should be reduced (OS setting or `configureComponents`). */
 function prefersReducedMotion() {
@@ -210,10 +224,17 @@ function getBase() {
                 cb(true);
                 return;
             }
-            const io = new IntersectionObserver((entries) => {
+            const f = (entries) => {
                 for (const e of entries)
                     cb(e.isIntersecting, e);
-            }, init);
+            };
+            let io;
+            try {
+                io = new IntersectionObserver(f, init);
+            }
+            catch {
+                io = new IntersectionObserver(f); // 13.1.0: an invalid root-margin / threshold attribute falls back to the defaults
+            }
             io.observe(target);
             this.onCleanup(() => io.disconnect());
         }
@@ -832,7 +853,7 @@ function defineScrollProgress(tag = 'usa-scroll-progress') {
         }
         update() {
             const sel = this.getAttribute('target');
-            const target = sel ? document.querySelector(sel) : null;
+            const target = queryAttr(sel);
             const p = readScrollProgress(target);
             if (Math.abs(p - this._p) < 0.0005)
                 return;
@@ -6712,6 +6733,18 @@ function makePanel(Base, kind) {
                 this._pos.jump(this.size() * 1.2);
             }
             this.listen(document, 'keydown', (e) => e.key === 'Escape' && this.open && this.close());
+            // 13.1.0: aria-modal means modal — Tab / Shift+Tab wrap inside the open panel instead of reaching the page behind it
+            this.listen(this, 'keydown', (e) => {
+                if (e.key !== 'Tab' || !this.open)
+                    return;
+                const h = this;
+                const f = Array.from(h.querySelectorAll(FOCUSABLE)).filter((x) => x.getClientRects().length);
+                const a = f[0] || h, z = f[f.length - 1] || h, c = document.activeElement;
+                if (e.shiftKey ? c === a || c === h : c === z) {
+                    e.preventDefault();
+                    (e.shiftKey ? z : a).focus();
+                }
+            });
             this.listen(this, 'click', (e) => e.target.closest?.('[data-close]') && this.close());
             this.listen(this, 'pointerdown', (e) => this.dragStart(e));
             this.listen(this, 'pointermove', (e) => this.dragMove(e));
@@ -6757,13 +6790,16 @@ function makePanel(Base, kind) {
         }
         hide() {
             this._pos.set(this.size() * 1.05);
+            // 13.1.0: focus leaves the dismissed panel now, not when the slide-out spring comes to rest
+            if (this.contains(document.activeElement) && this._return instanceof HTMLElement)
+                this._return.focus({ preventScroll: true });
             this.emit('close');
         }
         afterClose() {
             this.hidden = true;
             this._backdrop?.remove();
             this._backdrop = null;
-            if (this._return instanceof HTMLElement)
+            if (this.contains(document.activeElement) && this._return instanceof HTMLElement)
                 this._return.focus({ preventScroll: true });
         }
         close() {
@@ -7071,7 +7107,7 @@ function defineNavbar(tag = 'usa-navbar') {
         }
         mount() {
             const sel = this.str('target');
-            const scroller = (sel && document.querySelector(sel)) || window;
+            const scroller = queryAttr(sel) || window;
             const pos = () => (scroller === window ? window.scrollY || document.documentElement.scrollTop : scroller.scrollTop);
             this._last = pos();
             const update = () => {
@@ -7810,7 +7846,7 @@ function defineBackToTop(tag = 'usa-back-to-top') {
             }, { passive: true });
             this.listen(btn, 'click', async () => {
                 await scrollToTarget(0, { preset: 'slow' });
-                const f = document.querySelector(this.str('focus-target', '#main')) || document.body;
+                const f = queryAttr(this.str('focus-target', '#main')) || document.body;
                 if (!f.hasAttribute('tabindex') && f !== document.body)
                     f.tabIndex = -1;
                 f.focus?.({ preventScroll: true });
@@ -9392,6 +9428,9 @@ function make(kind) {
                 q.resize(this._scale);
                 this.frame();
             };
+            // 13.1.0: an image that already failed (re-connect after a 404) fires no more events — fall back now
+            if (img && img.complete && !img.naturalWidth && img.currentSrc)
+                return this.fallback('image');
             if (img && !(img.complete && img.naturalWidth)) {
                 if (!img.crossOrigin && /^https?:/.test(img.src) && !img.src.startsWith(location.origin))
                     img.crossOrigin = 'anonymous';
@@ -10634,7 +10673,6 @@ function announce(message, options = {}) {
     el.textContent = message;
     return true;
 }
-const FOCUSABLE = 'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
 const NAMED_ROLES = ['button', 'switch', 'checkbox', 'slider', 'tab', 'progressbar', 'radiogroup', 'dialog'];
 function accessibleName(el) {
     const label = el.getAttribute('aria-label');
@@ -10907,4 +10945,4 @@ const STYLE_BASE = new URL('../', import.meta.url).href;
 onDemandStyles(STYLE_BASE);
 
 export { ALL_TAGS, AMBIENT_EFFECTS, ANIM_ICONS, BRIDGE_PROTOCOL_VERSION, BUILTIN_EFFECTS, BUTTON_DEFORMS, CARD_EFFECTS, CLICK_EFFECTS, COMPONENT_CATEGORIES, CURSOR_MODES, EFFECT_KINDS, EFFECT_TRIGGERS, GL_FALLBACKS, JOINING_SCRIPT, LIVE_REGION_IDS, MASK_SHAPES, MORPH_ICONS, MOTION_SCALE, MOTION_SENSITIVITY, MOTION_SENSITIVITY_LEVELS, MOTION_TOKENS, PACKS, PACK_PRIMITIVES, PAGE_EFFECTS, PARTICLE_PRESETS, POST_EFFECTS, REVEAL_EFFECTS, SENSITIVITY_CSS, SHADERS, SPINNER_VARIANTS, SPRING_EFFECTS, SPRING_PRESETS, STATIC_ALTERNATIVES, STYLE_BASE, TIMELINE_PRESETS, VARIANTS, activeAnimations, adaptKeyframes, adoptVariants, animateWithMotion, animationBudget, announce, applyMotionTokens, applyNativeSettings, applyPack, auditMotionA11y, autoAnimate, autoDegrade, baselineReport, bindEffect, categoryOf, configureComponents, connectNativeShell, countUp, createSpring, defineAccordion, defineAcrylic, defineAmbient, defineAnimIcon, defineAurora, defineAutoAnimate, defineAutoSkeleton, defineAvatarStack, defineBackToTop, defineBackgroundComponents, defineBadge, defineBlobs, defineBottomSheet, defineButton, defineCard, defineCardComponents, defineCardStack, defineCarousel3d, defineCheck, defineCheckbox, defineClick, defineClickComponents, defineComponents, defineCounter, defineCube, defineCursor, defineDepth, defineDepthComponents, defineDialog, defineDistort, defineDotNetwork, defineDoubleTap, defineDraggable, defineDraw, defineDrawer, defineFab, defineFeedbackComponents, defineFullpage, defineFx, defineFxComponents, defineGestureComponents, defineGlitch, defineGradientText, defineGrain, defineGridGlow, defineHandwriting, defineHold, defineIconMorph, defineInteractionComponents, defineLayoutComponents, defineLike, defineLiquid, defineLoadingBar, defineMagnetic, defineMarquee, defineMaskReveal, defineMasonry, defineMorph, defineMotionSwitch, defineNavbar, defineOverscroll, definePack, definePacksComponents, definePageComponents, defineParticles, definePhysicsComponents, definePinchZoom, definePopover, definePostFx, definePress, defineProgress, definePullRefresh, defineReveal, defineRevealComponents, defineRipple, defineScramble, defineScrollHighlight, defineScrollProgress, defineScrolly, defineShader, defineShimmerText, defineSkeleton, defineSlider, defineSpinner, defineSplash, defineSplitText, defineSpotlight, defineSpring, defineStagger, defineStickyStack, defineSvgComponents, defineSwipeable, defineTabs, defineTextComponents, defineTextRotate, defineTilt, defineTimeline, defineTimelineComponents, defineToaster, defineTransitionComponents, defineTypewriter, defineUiComponents, defineViewSwitch, defineWaterRipple, defineWaveText, defineWebglComponents, detectNativeHost, deviceTilt, drawLines, easeOutExpo, enableMpaTransitions, exportDesignTokens, flip, flipFrames, fluentPreset, flyToCart, fragmentSource, gesture, getEffect, getMotionIntensity, getMotionLevel, getMotionSensitivity, getMotionTokens, glFallbackCss, glGovernor, glQuad, graphemes, haptic, hasEffect, importDesignTokens, importMotionTokens, interpolatePath, linearEasing, listEffects, liveRegion, loadCategoryStyles, loadedStyles, loadingBar, masonryLayout, mergeMotionTokens, morphPath, morphTo, motionAllowed, motionScale, motionToken, motionTokensToCss, motionTokensToJSON, motionTokensToVars, motionVar, onDemandStyles, onFrame, orientationToTilt, pageTransition, parseDuration, parseEasing, parseNativeSettings, pathsCompatible, pinchScale, playEffect, postFxShader, postToNative, prefersReducedMotion, projectInertia, readScrollProgress, registerBuiltinEffects, registerEffect, registerEffects, requestOrientationPermission, resolveDurationToken, resolveEasingToken, resolvePosition, resolveSpring, resolveTokenAliases, restoreMotionIntensity, restoreMotionSensitivity, revealKeyframes, rubberBand, schedulerStats, scrambleFrame, scrollToTarget, setAnimationBudget, setMotionIntensity, setMotionLevel, setMotionSensitivity, setVariant, sharedTransition, smoothScroll, snapTo, splitOrder, splitText, splitTimeline, words as splitWords, spring, springEasing, springEffectKeyframes, springSamples, staticAlternative, stepSpring, supportsLinearEasing, supportsNativeScrub, supportsOrientation, supportsViewTransitions, supportsWebGL, swipeDirection, themeTransition, timeline, toast, validateDesignTokens, viewTransition, warnBaseline, watchPowerSaver, withoutDeprecations };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/components/lite.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/components/lite.js.map

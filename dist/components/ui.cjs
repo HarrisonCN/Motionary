@@ -1,8 +1,8 @@
 'use strict';
 
-var base = require('../chunks/base-BG_mxssu.cjs');
-var spring = require('../chunks/spring-CibVO2Tk.cjs');
-var variants = require('../chunks/variants-D7gblATl.cjs');
+var base = require('../chunks/base-vu_KhBiv.cjs');
+var spring = require('../chunks/spring-Q3Y-pHuP.cjs');
+var variants = require('../chunks/variants-Dk-FItCT.cjs');
 
 /** Position a fixed `floating` element next to `anchor`, flipping when it would leave the viewport. */
 function place(floating, anchor, placement = 'top', gap = 8) {
@@ -201,6 +201,18 @@ function makePanel(Base, kind) {
                 this._pos.jump(this.size() * 1.2);
             }
             this.listen(document, 'keydown', (e) => e.key === 'Escape' && this.open && this.close());
+            // 13.1.0: aria-modal means modal — Tab / Shift+Tab wrap inside the open panel instead of reaching the page behind it
+            this.listen(this, 'keydown', (e) => {
+                if (e.key !== 'Tab' || !this.open)
+                    return;
+                const h = this;
+                const f = Array.from(h.querySelectorAll(base.FOCUSABLE)).filter((x) => x.getClientRects().length);
+                const a = f[0] || h, z = f[f.length - 1] || h, c = document.activeElement;
+                if (e.shiftKey ? c === a || c === h : c === z) {
+                    e.preventDefault();
+                    (e.shiftKey ? z : a).focus();
+                }
+            });
             this.listen(this, 'click', (e) => e.target.closest?.('[data-close]') && this.close());
             this.listen(this, 'pointerdown', (e) => this.dragStart(e));
             this.listen(this, 'pointermove', (e) => this.dragMove(e));
@@ -246,13 +258,16 @@ function makePanel(Base, kind) {
         }
         hide() {
             this._pos.set(this.size() * 1.05);
+            // 13.1.0: focus leaves the dismissed panel now, not when the slide-out spring comes to rest
+            if (this.contains(document.activeElement) && this._return instanceof HTMLElement)
+                this._return.focus({ preventScroll: true });
             this.emit('close');
         }
         afterClose() {
             this.hidden = true;
             this._backdrop?.remove();
             this._backdrop = null;
-            if (this._return instanceof HTMLElement)
+            if (this.contains(document.activeElement) && this._return instanceof HTMLElement)
                 this._return.focus({ preventScroll: true });
         }
         close() {
@@ -560,7 +575,7 @@ function defineNavbar(tag = 'usa-navbar') {
         }
         mount() {
             const sel = this.str('target');
-            const scroller = (sel && document.querySelector(sel)) || window;
+            const scroller = base.queryAttr(sel) || window;
             const pos = () => (scroller === window ? window.scrollY || document.documentElement.scrollTop : scroller.scrollTop);
             this._last = pos();
             const update = () => {
@@ -913,4 +928,4 @@ exports.definePullRefresh = definePullRefresh;
 exports.defineSlider = defineSlider;
 exports.defineTabs = defineTabs;
 exports.defineUiComponents = defineUiComponents;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/components/ui.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/components/ui.cjs.map

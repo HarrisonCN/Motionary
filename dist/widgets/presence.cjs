@@ -1,9 +1,9 @@
 'use strict';
 
-var widgets_presence = require('../chunks/presence-CwaD7bup.cjs');
-require('../chunks/base-BG_mxssu.cjs');
+var widgets_presence = require('../chunks/presence-CRfWmNWz.cjs');
+require('../chunks/base-vu_KhBiv.cjs');
 
 
 
 exports.definePresence = widgets_presence.definePresence;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/presence.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/presence.cjs.map

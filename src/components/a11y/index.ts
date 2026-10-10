@@ -22,6 +22,7 @@ import {
   adaptKeyframes,
   adoptStyles,
   MOTION_SENSITIVITY_LEVELS,
+  FOCUSABLE,
   type MotionSensitivity,
 } from '../base';
 import { COMPONENT_CATEGORIES, type ComponentCategory } from '../index-tags';
@@ -182,7 +183,6 @@ export interface A11yIssue {
   message: string;
 }
 
-const FOCUSABLE = 'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
 const NAMED_ROLES = ['button', 'switch', 'checkbox', 'slider', 'tab', 'progressbar', 'radiogroup', 'dialog'];
 
 function accessibleName(el: Element): string {

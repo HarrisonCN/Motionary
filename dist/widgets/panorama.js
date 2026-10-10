@@ -1,6 +1,6 @@
-import { f as defineElement } from '../chunks/base-CBMzOs1k.js';
+import { f as defineElement } from '../chunks/base-nzeN_ux7.js';
 import { xrSupport, yawToOffset } from '../components/fx-spatial.js';
-import '../chunks/registry-4UDF3Dpk.js';
+import '../chunks/registry-PxXkPc1Q.js';
 
 var css = "usa-panorama{position:relative;display:block;height:220px;border-radius:14px;overflow:hidden;background:#0f172a;cursor:grab;touch-action:pan-y;outline:none;-webkit-user-select:none;user-select:none}usa-panorama[data-dragging]{cursor:grabbing}usa-panorama:focus-visible{box-shadow:0 0 0 3px #6366f1}usa-panorama .usa-pano-view{position:absolute;inset:0;background-repeat:repeat-x;background-size:auto 100%;background-position:0 50%}usa-panorama .usa-pano-procedural{background-size:400% 100%;background-repeat:repeat-x;background-image:radial-gradient(circle at 12% 30%,#fde68a 0 3%,transparent 3.5%),linear-gradient(170deg,transparent 58%,#166534 58.5% 64%,transparent 64.5%),linear-gradient(10deg,transparent 52%,#15803d 52.5% 60%,transparent 60.5%),linear-gradient(160deg,transparent 46%,#475569 46.5% 70%,transparent 70.5%),linear-gradient(20deg,transparent 48%,#64748b 48.5% 70%,transparent 70.5%),linear-gradient(#38bdf8,#bae6fd 55%,#86efac 55.5%,#22c55e)}usa-panorama .usa-pano-compass{position:absolute;right:10px;top:10px;width:34px;height:34px;border-radius:50%;background:rgba(15,23,42,.55);box-shadow:inset 0 0 0 2px rgba(255,255,255,.6)}usa-panorama .usa-pano-compass i{position:absolute;inset:4px;border-radius:50%;transition:transform .25s linear;background:conic-gradient(#ef4444 0 6deg,transparent 6deg 354deg,#ef4444 354deg)}usa-panorama .usa-pano-xr{position:absolute;left:10px;bottom:10px;padding:6px 10px;border:0;border-radius:999px;background:rgba(15,23,42,.7);color:#fff;font:600 12px/1 system-ui,sans-serif;cursor:pointer}";
 
@@ -128,4 +128,4 @@ function definePanorama(tag = 'usa-panorama') {
 }
 
 export { definePanorama };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/panorama.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/panorama.js.map

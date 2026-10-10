@@ -1,8 +1,8 @@
 'use strict';
 
-var registry = require('../chunks/registry-LE5iyTqw.cjs');
+var registry = require('../chunks/registry-EziiQiWO.cjs');
 var components_fx3d = require('../components/fx-3d.cjs');
-require('../chunks/base-BG_mxssu.cjs');
+require('../chunks/base-vu_KhBiv.cjs');
 require('../chunks/shared-jkgRH-Hx.cjs');
 require('../components/fx-light.cjs');
 require('../chunks/generative-BHIj-NU0.cjs');
@@ -19,4 +19,4 @@ function registerOrigami() {
 exports.effect = effect;
 exports.register = registerOrigami;
 exports.registerOrigami = registerOrigami;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/effects/origami.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/effects/origami.cjs.map

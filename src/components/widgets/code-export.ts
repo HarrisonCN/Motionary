@@ -1,4 +1,5 @@
-import { defineElement, type UsaElement } from '../base';
+import { defineElement, type UsaElement, queryAttr } from '../base';
+import { arrowIndex } from './shared';
 import css from './code-export.css?raw';
 
 /**
@@ -104,7 +105,7 @@ export function defineCodeExport(tag = 'usa-code-export'): CustomElementConstruc
         }
         private src(): Element | null {
           const f = this.str('for');
-          return f ? document.querySelector(f) : this.querySelector(':scope > :not([data-usa-part])');
+          return f ? queryAttr(f) : this.querySelector(':scope > :not([data-usa-part])');
         }
         get format(): ExportFormat {
           return this._f;
@@ -137,9 +138,12 @@ export function defineCodeExport(tag = 'usa-code-export'): CustomElementConstruc
             if (t.closest?.('.usa-ce-copy')) void this.copy();
           });
           this.listen(this, 'keydown', (e: KeyboardEvent) => {
-            if (!(e.target as Element).closest?.('[role=tab]') || (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft')) return;
+            if (!(e.target as Element).closest?.('[role=tab]')) return;
             const l = this.fmts();
-            this.format = l[(l.indexOf(this._f) + (e.key === 'ArrowRight' ? 1 : -1) + l.length) % l.length];
+            const j = arrowIndex(e, l.indexOf(this._f), l.length); // 13.1.0: Home / End too
+            if (j < 0) return;
+            e.preventDefault();
+            this.format = l[j];
             (this.querySelector(`[data-f="${this._f}"]`) as HTMLElement | null)?.focus();
           });
           const s = this.src();

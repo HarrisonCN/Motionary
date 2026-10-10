@@ -1,6 +1,6 @@
-import { f as defineElement, d as clamp } from '../chunks/base-CBMzOs1k.js';
+import { f as defineElement, d as clamp } from '../chunks/base-nzeN_ux7.js';
 import { pinchAngle, pinchScale } from '../components/fx-gesture.js';
-import '../chunks/registry-4UDF3Dpk.js';
+import '../chunks/registry-PxXkPc1Q.js';
 
 var css = "usa-gesture-sticker{display:inline-block;touch-action:none;cursor:grab;outline:none;-webkit-user-select:none;user-select:none;transform-origin:50% 50%;filter:drop-shadow(0 6px 8px rgba(15,23,42,.25));will-change:transform}usa-gesture-sticker[data-held]{cursor:grabbing;filter:drop-shadow(0 16px 18px rgba(15,23,42,.35))}usa-gesture-sticker:focus-visible{outline:2px dashed #6366f1;outline-offset:4px}usa-gesture-sticker img{display:block;-webkit-user-drag:none;pointer-events:none}";
 
@@ -133,4 +133,4 @@ function defineGestureSticker(tag = 'usa-gesture-sticker') {
 }
 
 export { defineGestureSticker };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/gesture-sticker.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/gesture-sticker.js.map

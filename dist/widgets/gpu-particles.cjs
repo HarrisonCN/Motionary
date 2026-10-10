@@ -1,9 +1,9 @@
 'use strict';
 
-var widgets_gpuParticles = require('../chunks/gpu-particles-C4UZX5H4.cjs');
-require('../chunks/base-BG_mxssu.cjs');
+var widgets_gpuParticles = require('../chunks/gpu-particles-DrjYuSVR.cjs');
+require('../chunks/base-vu_KhBiv.cjs');
 
 
 
 exports.defineGpuParticles = widgets_gpuParticles.defineGpuParticles;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/gpu-particles.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/gpu-particles.cjs.map

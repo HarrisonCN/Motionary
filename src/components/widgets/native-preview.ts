@@ -1,4 +1,5 @@
 import { defineElement, type UsaElement } from '../base';
+import { arrowIndex, nextId } from './shared';
 import { toFlutter, toReactNative, entranceFrom } from '../native/index';
 import { parseMotion } from '../dsl/index';
 import css from './native-preview.css?raw';
@@ -36,16 +37,34 @@ export function defineNativePreview(tag = 'usa-native-preview'): CustomElementCo
           this.setAttribute('data-platform', plat);
           if (!this.querySelector(':scope > .usa-np-device')) {
             const kids = Array.from(this.childNodes);
-            this.insertAdjacentHTML('afterbegin', '<div class="usa-np-device"><span class="usa-np-notch" aria-hidden="true"></span><div class="usa-np-screen"></div></div><div class="usa-np-side"><div role="tablist" aria-label="Native code"><button type="button" role="tab" data-p="react-native">React Native</button><button type="button" role="tab" data-p="flutter">Flutter</button><button type="button" class="usa-np-replay">Replay</button></div><pre class="usa-np-code" tabindex="0"><code></code></pre></div>');
+            // 13.1.0: Replay sits next to the tab list, not in it (a tablist may only own tabs — axe aria-required-children);
+            // the code is the tabs' tabpanel
+            const id = nextId('usa-np');
+            this.insertAdjacentHTML('afterbegin', `<div class="usa-np-device"><span class="usa-np-notch" aria-hidden="true"></span><div class="usa-np-screen"></div></div><div class="usa-np-side"><div class="usa-np-bar"><div role="tablist" aria-label="Native code"><button type="button" role="tab" id="${id}-rn" aria-controls="${id}-code" data-p="react-native">React Native</button><button type="button" role="tab" id="${id}-fl" aria-controls="${id}-code" data-p="flutter">Flutter</button></div><button type="button" class="usa-np-replay">Replay</button></div><pre class="usa-np-code" id="${id}-code" role="tabpanel" tabindex="0"><code></code></pre></div>`);
             const scr = this.querySelector('.usa-np-screen') as HTMLElement;
             kids.forEach((k) => scr.appendChild(k));
           }
           let cur: 'react-native' | 'flutter' = 'react-native';
+          const tabs = Array.from(this.querySelectorAll<HTMLElement>('[role=tab][data-p]'));
           const show = () => {
-            this.querySelectorAll<HTMLElement>('[role=tab][data-p]').forEach((t) => t.setAttribute('aria-selected', String(t.dataset.p === cur)));
+            tabs.forEach((t) => {
+              const on = t.dataset.p === cur;
+              t.setAttribute('aria-selected', String(on));
+              t.tabIndex = on ? 0 : -1;
+              if (on) this.querySelector('.usa-np-code')?.setAttribute('aria-labelledby', t.id);
+            });
             const c = this.querySelector('.usa-np-code code');
             if (c) c.textContent = this.code(cur);
           };
+          this.listen(this, 'keydown', (e: KeyboardEvent) => {
+            const i = tabs.indexOf(e.target as HTMLElement);
+            const j = i < 0 ? -1 : arrowIndex(e, i, tabs.length);
+            if (j < 0) return;
+            e.preventDefault();
+            cur = tabs[j].dataset.p as typeof cur;
+            show();
+            tabs[j].focus();
+          });
           this.listen(this, 'click', (e: Event) => {
             const t = e.target as HTMLElement;
             const tab = t.closest?.('[data-p]') as HTMLElement | null;

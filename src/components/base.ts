@@ -112,6 +112,21 @@ export function motionScale(): number {
   return MOTION_SCALE[config.motionIntensity] ?? 1;
 }
 
+/**
+ * `querySelector` for a selector the page wrote in an attribute (`target`, `for`, `scope` …): an invalid selector finds
+ * nothing instead of throwing, so the element falls back to its documented default (13.1.0, component contract).
+ */
+export function queryAttr<T extends Element = HTMLElement>(sel: string | null, root: ParentNode = document): T | null {
+  try {
+    return sel ? root.querySelector<T>(sel) : null;
+  } catch {
+    return null;
+  }
+}
+
+/** Focusable descendants (internal; shared by the a11y audit and the modal panels' focus trap). */
+export const FOCUSABLE = 'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
+
 export const canDefine = (): boolean => typeof customElements !== 'undefined' && typeof HTMLElement !== 'undefined';
 
 /** `true` when animations should be reduced (OS setting or `configureComponents`). */
@@ -284,9 +299,15 @@ export function getBase(): BaseCtor {
         cb(true);
         return;
       }
-      const io = new IntersectionObserver((entries) => {
+      const f: IntersectionObserverCallback = (entries) => {
         for (const e of entries) cb(e.isIntersecting, e);
-      }, init);
+      };
+      let io: IntersectionObserver;
+      try {
+        io = new IntersectionObserver(f, init);
+      } catch {
+        io = new IntersectionObserver(f); // 13.1.0: an invalid root-margin / threshold attribute falls back to the defaults
+      }
       io.observe(target);
       this.onCleanup(() => io.disconnect());
     }

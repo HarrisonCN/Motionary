@@ -1,4 +1,4 @@
-import { defineElement, type UsaElement } from '../base';
+import { defineElement, type UsaElement, queryAttr } from '../base';
 import { hasModule, requireModule } from '../../runtime/registry';
 import type { CoreApi } from '../../runtime/index';
 import css from './motion-inspector.css?raw';
@@ -38,7 +38,7 @@ export function defineMotionInspector(tag = 'usa-motion-inspector'): CustomEleme
         }
         private rate = 1;
         animations(): Animation[] {
-          const scope = this.str('scope') ? document.querySelector(this.str('scope')) : document;
+          const scope = this.str('scope') ? queryAttr(this.str('scope')) : document;
           if (!scope) return [];
           const list: Animation[] = typeof (scope as any).getAnimations === 'function' ? (scope as any).getAnimations(scope === document ? undefined : { subtree: true }) : [];
           return list.filter((a) => !this.contains(((a.effect as KeyframeEffect | null)?.target as Node) || null));

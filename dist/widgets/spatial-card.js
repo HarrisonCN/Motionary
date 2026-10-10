@@ -1,4 +1,4 @@
-import { f as defineElement } from '../chunks/base-CBMzOs1k.js';
+import { f as defineElement } from '../chunks/base-nzeN_ux7.js';
 
 var css = "usa-spatial-card{position:relative;display:block;box-sizing:border-box;padding:20px 22px;margin-bottom:28px;border-radius:24px;color:#0f172a;background:linear-gradient(140deg,rgba(255,255,255,.62),rgba(255,255,255,.28));border:1px solid rgba(255,255,255,.75);-webkit-backdrop-filter:blur(18px) saturate(1.5);backdrop-filter:blur(18px) saturate(1.5);box-shadow:0 22px 44px -26px rgba(15,23,42,.6),inset 0 1px 0 rgba(255,255,255,.8);transform:perspective(900px) translateZ(0);transform-style:preserve-3d;transition:transform .45s cubic-bezier(.2,.9,.25,1),box-shadow .45s}usa-spatial-card[data-active]{transform:perspective(900px) translateZ(18px);box-shadow:0 34px 60px -28px rgba(15,23,42,.55),inset 0 1px 0 rgba(255,255,255,.9)}usa-spatial-card .usa-sp-gaze{position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(circle at var(--gx,50%) var(--gy,40%),rgba(255,255,255,.55),transparent 45%);opacity:0;transition:opacity .3s}usa-spatial-card[data-active] .usa-sp-gaze{opacity:1}usa-spatial-card [data-depth]{position:relative;display:block;transform:translateZ(calc(10px * var(--d,1)));transition:transform .45s}usa-spatial-card [data-depth=\"2\"]{--d:2}usa-spatial-card [data-depth=\"3\"]{--d:3}usa-spatial-card .usa-sp-ornament{position:absolute;left:50%;bottom:-22px;display:flex;gap:6px;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.7);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 10px 20px -12px rgba(15,23,42,.5);transform:translateX(-50%) translateZ(30px);transition:transform .45s}usa-spatial-card[data-active] .usa-sp-ornament{transform:translateX(-50%) translateZ(40px) translateY(4px)}@media (prefers-reduced-motion:reduce){usa-spatial-card,usa-spatial-card *{transition:none!important}usa-spatial-card[data-active]{transform:none}}";
 
@@ -51,4 +51,4 @@ function defineSpatialCard(tag = 'usa-spatial-card') {
 }
 
 export { defineSpatialCard };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/spatial-card.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/spatial-card.js.map

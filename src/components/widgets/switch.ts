@@ -50,6 +50,9 @@ export function defineSwitch(tag = 'usa-switch'): CustomElementConstructor | und
           }
           this.setAttribute('role', 'switch');
           if (!this.hasAttribute('tabindex')) this.tabIndex = 0;
+          // 13.1.0: a disabled switch says so to assistive tech (it already ignored clicks and keys)
+          if (this.flag('disabled')) this.setAttribute('aria-disabled', 'true');
+          else this.removeAttribute('aria-disabled');
           if (!this.hasAttribute('aria-label') && !this.textContent?.trim()) this.setAttribute('aria-label', this.str('label', 'Toggle'));
           this._on = this.flag('checked');
           if (this.str('name', '') && !this._input) {

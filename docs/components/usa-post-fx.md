@@ -4,7 +4,7 @@
 
 Chainable GPU passes over an image (4.8): vignette, grain, chromatic aberration, scanlines, CRT, bloom, pixelate, duotone and glitch, with one intensity. Without WebGL the image gets an approximate CSS filter.
 
-- **Category:** webgl · **since** 4.8
+- **Category:** webgl · **since** 4.8 · **changed in** 13.1
 - **Import:** `import { definePostFx } from 'motionary/components/webgl'` then `definePostFx();`
 - **CDN:** `<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>`
 - **Attributes:** —

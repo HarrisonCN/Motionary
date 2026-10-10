@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-BG_mxssu.cjs');
+var base = require('../chunks/base-vu_KhBiv.cjs');
 
 /** Minimal WebGL runner: one full-canvas quad, one fragment shader, optional image texture. */
 const VERTEX = 'attribute vec2 p;varying vec2 v_uv;void main(){v_uv=p*.5+.5;gl_Position=vec4(p,0.,1.);}';
@@ -326,6 +326,9 @@ function make(kind) {
                 q.resize(this._scale);
                 this.frame();
             };
+            // 13.1.0: an image that already failed (re-connect after a 404) fires no more events — fall back now
+            if (img && img.complete && !img.naturalWidth && img.currentSrc)
+                return this.fallback('image');
             if (img && !(img.complete && img.naturalWidth)) {
                 if (!img.crossOrigin && /^https?:/.test(img.src) && !img.src.startsWith(location.origin))
                     img.crossOrigin = 'anonymous';
@@ -456,4 +459,4 @@ exports.glQuad = glQuad;
 exports.postFxShader = postFxShader;
 exports.supportsWebGL = supportsWebGL;
 exports.watchPowerSaver = watchPowerSaver;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/components/webgl.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/components/webgl.cjs.map

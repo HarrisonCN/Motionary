@@ -4,7 +4,7 @@
 
 6.9: months slide in from the direction of travel, the chosen day pops inside a spring circle, today has a ring. A real date grid: arrows, PageUp / PageDown, Home / End, min / max.
 
-- **Category:** ui · **since** 6.9
+- **Category:** ui · **since** 6.9 · **changed in** 13.1
 - **Import:** `import { defineDatePicker } from 'motionary/components/widgets'` then `defineDatePicker();`
 - **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `min`, `max`, `first-day`, `locale`

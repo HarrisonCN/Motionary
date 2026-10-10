@@ -4,7 +4,7 @@
 
 6.3: a side sheet from the right, left, top or bottom with a blurred backdrop; the bottom sheet can be dragged down to dismiss and springs back otherwise. Native <dialog> underneath.
 
-- **Category:** transitions · **since** 6.3 · **changed in** 6.6, 13.0
+- **Category:** transitions · **since** 6.3 · **changed in** 6.6, 13.0, 13.1
 - **Import:** `import { defineSheet } from 'motionary/components/widgets'` then `defineSheet();`
 - **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `side`, `label`, `persistent`

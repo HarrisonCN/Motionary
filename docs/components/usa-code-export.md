@@ -4,7 +4,7 @@
 
 8.9 low-code: shows copy-paste code (HTML, React, Vue or JSON) for a live, configured component next to it, follows its attribute changes and copies with one click.
 
-- **Category:** ui · **since** 8.9
+- **Category:** ui · **since** 8.9 · **changed in** 13.1
 - **Import:** `import { defineCodeExport } from 'motionary/components/widgets'` then `defineCodeExport();`
 - **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `for`, `formats`

@@ -4,7 +4,7 @@
 
 7.3: a buy button — the product photo flies on an arc into the cart, the cart badge bumps and the button morphs into a ✓ “Added” state. Works with <usa-cart-drawer> (calls add(item)) or any [data-cart] icon.
 
-- **Category:** ui · **since** 7.3
+- **Category:** ui · **since** 7.3 · **changed in** 13.1
 - **Import:** `import { defineAddToCart } from 'motionary/components/widgets'` then `defineAddToCart();`
 - **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `label`, `added`, `item`, `cart`, `from`, `hold`
