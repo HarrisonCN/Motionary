@@ -9,6 +9,16 @@ import terser from '@rollup/plugin-terser';
 const check = process.argv.includes('--check');
 const budgets = JSON.parse(readFileSync(new URL('../size-budget.json', import.meta.url), 'utf8'));
 const gz = (code) => gzipSync(code, { level: 9 }).length;
+// Resolve `pkg` / `pkg/<sub>` through package.json `exports` (as a consumer would), so a budget on a removed or
+// unexported path fails instead of silently measuring the dist file behind it.
+const exportsMap = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8')).exports;
+const resolvePkg = (id) => {
+  const key = id === 'pkg' ? '.' : './' + id.slice(4);
+  const e = exportsMap[key];
+  const file = e && (typeof e === 'string' ? e : e.import?.default ?? e.default);
+  if (!file) throw new Error(`size budget imports '${id.replace(/^pkg/, 'motionary')}', which package.json does not export`);
+  return file.replace(/^\.\//, '');
+};
 const rows = [];
 const fmt = (n) => (n / 1024).toFixed(2) + ' kB';
 
@@ -20,7 +30,7 @@ async function treeShaken(source) {
     plugins: [
       {
         name: 'virtual',
-        resolveId: (id) => (id === 'entry' ? id : id.startsWith('pkg') ? `dist/${id === 'pkg' ? 'index' : id.slice(4)}.js` : null),
+        resolveId: (id) => (id === 'entry' ? id : id === 'pkg' || id.startsWith('pkg/') ? resolvePkg(id) : null),
         load: (id) => (id === 'entry' ? source : null),
       },
       terser(),
