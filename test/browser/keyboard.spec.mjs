@@ -451,8 +451,8 @@ test('usa-disclosure: native summary toggles with Enter and Space', async ({ pag
   await settle(page, 700);
   expect(await page.locator('#d details').first().evaluate((d) => d.open)).toBe(true);
   await page.keyboard.press(' ');
-  await settle(page, 700);
-  expect(await page.locator('#d details').first().evaluate((d) => d.open)).toBe(false);
+  // `open` drops when the close animation (spring, up to 700 ms) ends — poll instead of racing it on a slow CI machine
+  await expect.poll(() => page.locator('#d details').first().evaluate((d) => d.open), { timeout: 3000 }).toBe(false);
   expect((await got(page, 'usa:toggle')).length).toBeGreaterThanOrEqual(2);
   expectNoErrors(page);
 });

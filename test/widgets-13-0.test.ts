@@ -30,7 +30,7 @@ describe('13.0: removed paths', () => {
 describe('13.0: version, CDN, stable tooling', () => {
   it('version 13, CDN major @13', () => {
     expect(pkg.version).toMatch(/^13\./);
-    expect(RUNTIME_VERSION).toMatch(/^13\.0\.\d+$/); // 13.0.x patches bump it
+    expect(RUNTIME_VERSION).toBe(pkg.version); // every 13.x release bumps it (13.1.0: minor)
     expect(read('README.md')).toContain('motionary@13/dist/');
     expect(read('README.md')).not.toMatch(/motionary@12\//);
     expect(read('showcase/components-catalog.js')).toContain("VERSION_RANGE = '13'");

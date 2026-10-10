@@ -27,9 +27,42 @@ none, such as linux-arm64). Playwright is a devDependency only; nothing in the p
 ## GPU capability per browser
 
 What the browser offers to the page (the `platform capabilities` test) and which backend the GPU components chose.
-"CI" is GitHub Actions `ubuntu-latest` (x64, headless, software GL); "local" is the linux-arm64 development sandbox.
+Measured on GitHub Actions `ubuntu-latest` (x64, headless, Playwright 1.64.0) for 13.1.0; the linux-arm64 development sandbox gave the same capabilities (Chromium 129 via `CHROME_PATH`). Backends are what each component reported (`data-backend` / `data-fallback`) or, where it reports none, what it created (WebGL contexts / canvases); "DOM / CSS" means no canvas at all. The CI job uploads the raw per-component records as `test-results/gpu-matrix/`.
 
-CI_GPU_TABLE
+| | Chromium | Firefox | WebKit |
+|---|---|---|---|
+| webgl2 | yes | no | yes |
+| webgl | yes | no | yes |
+| webgpu | no | no | no |
+| offscreenCanvas | yes | yes | yes |
+| loseContext | yes | no | yes |
+| renderer | SwiftShader (ANGLE / Vulkan, software) | — | Apple GPU |
+
+| Component | Chromium | Firefox | WebKit |
+|---|---|---|---|
+| `<usa-shader>` | WebGL (2 ctx) | fallback (webgl) | WebGL (2 ctx) |
+| `<usa-distort>` | WebGL (1 ctx) | fallback (webgl) | WebGL (1 ctx) |
+| `<usa-liquid>` | WebGL (1 ctx) | fallback (webgl) | WebGL (1 ctx) |
+| `<usa-post-fx>` | WebGL (1 ctx) | fallback (webgl) | WebGL (1 ctx) |
+| `<usa-gl-scene>` | webgl2 | no GL (backend none) | webgl2 |
+| `<usa-gl-model>` | webgl2 | no GL (backend none) | webgl2 |
+| `<usa-gpu-particles>` | canvas2d | canvas2d | canvas2d |
+| `<usa-shader-backdrop>` | webgl2 | css | webgl2 |
+| `<usa-physics-playground>` | Canvas 2D | Canvas 2D | Canvas 2D |
+| `<usa-globe>` | DOM / CSS | DOM / CSS | DOM / CSS |
+| `<usa-gen-art>` | Canvas 2D | Canvas 2D | Canvas 2D |
+| `<usa-worker-canvas>` | worker | worker | worker |
+| `<usa-particles>` | Canvas 2D | Canvas 2D | Canvas 2D |
+| `<usa-blobs>` | DOM / CSS | DOM / CSS | DOM / CSS |
+| `<usa-dot-network>` | Canvas 2D | Canvas 2D | Canvas 2D |
+| `<usa-grid-glow>` | DOM / CSS | DOM / CSS | DOM / CSS |
+| `<usa-water-ripple>` | Canvas 2D | Canvas 2D | Canvas 2D |
+| `<usa-ambient>` | Canvas 2D | Canvas 2D | Canvas 2D |
+| `<usa-gesture-fx>` | DOM / CSS | DOM / CSS | DOM / CSS |
+| `<usa-skeleton-reveal>` | DOM / CSS | DOM / CSS | DOM / CSS |
+| `<usa-lottie-player>` | Canvas 2D | Canvas 2D | Canvas 2D |
+| `<usa-dotlottie>` | Canvas 2D | Canvas 2D | Canvas 2D |
+| `<usa-audio>` | DOM / CSS | DOM / CSS | DOM / CSS |
 
 The components degrade instead of failing: with no WebGL, `<usa-shader>` / `<usa-distort>` / `<usa-liquid>` /
 `<usa-post-fx>` set `data-fallback="webgl"` and show their CSS / image fallback, `<usa-shader-backdrop>` uses its CSS
@@ -40,7 +73,7 @@ The resource checks still run in that case — they then prove that nothing was 
 
 - **Firefox headless without WebGL.** Headless Firefox on a machine with no usable GL driver (the linux-arm64 sandbox;
   some CI images) exposes neither `webgl` nor `webgl2`. The WebGL components take their Canvas 2D / CSS fallback there,
-  so Firefox runs cover the fallback path; the WebGL path is covered by Chromium and WebKit. FIREFOX_CI_NOTE
+  so Firefox runs cover the fallback path; the WebGL path is covered by Chromium and WebKit. This is the case on GitHub Actions `ubuntu-latest` too (Firefox reports no `webgl` / `webgl2` there), so in CI Firefox exercises the fallback paths for every WebGL component.
 - **`<usa-rive>` is excluded** from the lifecycle sweep: it needs the optional peer `@rive-app/canvas` from npm / a CDN,
   and the suite runs offline. It is covered by unit tests and the component playground.
 - **WebKit Tab order.** Like Safari, Playwright's WebKit skips buttons and links on Tab unless "Press Tab to highlight
@@ -57,4 +90,12 @@ The resource checks still run in that case — they then prove that nothing was 
 
 ## Results for 13.1.0
 
-RESULTS_TABLE
+| | Chromium | Firefox | WebKit |
+|---|---|---|---|
+| CI (`ubuntu-latest`) | all pass | all pass | all pass |
+| Complex page on CI — mount / p95 frame / rAF per frame | 703 ms / 33.4 ms / 1.22 | 738 ms / 17.1 ms / 1.32 | 1973 ms / 227 ms / 1.03 |
+| Perf limit (max(ceiling, baseline × 3)) — mount / p95 | 6000 ms / 100 ms | 6000 ms / 51 ms | 6000 ms / 681 ms |
+
+On 13.0.2 the same suite failed 33 tests in Chromium, 23 in Firefox and 31 in WebKit (the bugs fixed in 13.1.0, see the
+CHANGELOG). WebKit on Linux renders in software, hence its frame interval; the budget guards against regressions relative
+to that, not against Safari on a Mac.

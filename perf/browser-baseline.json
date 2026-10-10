@@ -1,5 +1,9 @@
 {
-  "note": "13.1.0 browser perf baseline (test/browser/perf.spec.mjs): complex page, 32 components at once. Re-record with PERF_RECORD=1.",
+  "note": "13.1.0 browser perf baseline (test/browser/perf.spec.mjs): complex page, 32 components at once. Numbers are from GitHub Actions ubuntu-latest (PR #135, run 38070118902, Playwright 1.64.0 headless; webkit = slower of its two attempts). Limit per metric = max(absolute ceiling, baseline x factor). Re-record from the CI job's test-results/perf-<browser>.json artifacts (PERF_RECORD=1); never from a local machine.",
   "budget": { "factor": 3, "mountMsMax": 6000, "p95FrameMsMax": 50, "rafPerFrameMax": 3 },
-  "browsers": {}
+  "browsers": {
+    "chromium": { "mountMs": 703, "p95FrameMs": 33.4, "meanFrameMs": 21.43, "rafPerFrame": 1.22, "recorded": "2026-10-10 CI ubuntu-latest, Chromium (Playwright 1.64.0), SwiftShader WebGL" },
+    "firefox": { "mountMs": 738, "p95FrameMs": 17.1, "meanFrameMs": 16.67, "rafPerFrame": 1.32, "recorded": "2026-10-10 CI ubuntu-latest, Firefox (Playwright 1.64.0), no WebGL in headless (fallback paths)" },
+    "webkit": { "mountMs": 1973, "p95FrameMs": 227, "meanFrameMs": 85.78, "rafPerFrame": 1.03, "recorded": "2026-10-10 CI ubuntu-latest, WebKit (Playwright 1.64.0), software rendering" }
+  }
 }
