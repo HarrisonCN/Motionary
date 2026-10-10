@@ -98,4 +98,4 @@ function defineVolumeKnob(tag = 'usa-volume-knob') {
 }
 
 exports.defineVolumeKnob = defineVolumeKnob;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.5.0/dist/widgets/volume-knob.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.6.0/dist/widgets/volume-knob.cjs.map

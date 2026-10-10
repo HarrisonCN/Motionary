@@ -15,4 +15,4 @@ function registerProductSpin() {
 }
 
 export { effect, registerProductSpin as register, registerProductSpin };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.5.0/dist/effects/product-spin.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.6.0/dist/effects/product-spin.js.map

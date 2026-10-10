@@ -84,4 +84,4 @@ function defineTextSplitter(tag = 'usa-text-splitter') {
 }
 
 exports.defineTextSplitter = defineTextSplitter;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.5.0/dist/widgets/text-splitter.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.6.0/dist/widgets/text-splitter.cjs.map

@@ -3154,7 +3154,7 @@ declare const PHYSICS_PRESETS: Record<string, () => unknown>;
 declare function definePhysicsPlayground(tag?: string): CustomElementConstructor | undefined;
 
 /**
- * `motionary/components/ai` (10.7, AI-assisted motion) — turns a short
+ * Motion intent parser (10.7; 11.6: moved to Motion Core, re-exported by `motionary/tooling/ai`) — turns a short
  * natural-language description ("fade the cards up slowly when they scroll
  * into view, one after another") into a motion spec: effect, direction,
  * distance, duration, delay, easing, trigger, repeat, stagger, Web
@@ -3204,6 +3204,13 @@ interface MotionIntent {
     /** Words / phrases that drove each decision (for explanations). */
     matched: string[];
 }
+interface MotionSuggestion {
+    intent: MotionIntent;
+    /** `local`: no provider given · `provider`: the provider's validated answer · `fallback`: provider failed or answered invalid JSON. */
+    source: 'local' | 'provider' | 'fallback';
+    provider?: string;
+    errors: string[];
+}
 
 /**
  * `<usa-motion-prompt></usa-motion-prompt>` (10.7, AI-assisted motion) — type
@@ -3217,10 +3224,14 @@ interface MotionIntent {
  * Attributes: `value` (initial prompt), `format` (waapi · css · component,
  * default waapi), `placeholder`, `label`. The preview respects reduced
  * motion (shows the end state). API: `intent`, `suggest(text)`; events
- * `usa:suggest` ({ intent }), `usa:copy` ({ format, code }).
+ * `usa:suggest` ({ intent, source, errors }), `usa:copy` ({ format, code }).
+ * 11.6: `suggester` — optional, e.g. `(text) => suggestMotion(text, { provider })` from `motionary/tooling/ai` (docs/ai-provider.md):
+ * the local suggestion shows at once and is replaced by the validated answer (kept on any failure). No network unless you set it.
  */
 interface UsaMotionPromptElement extends UsaElement {
     readonly intent: MotionIntent | null;
+    /** 11.6: optional async suggester, e.g. `(t) => suggestMotion(t, { provider })` (motionary/tooling/ai). */
+    suggester: ((text: string) => Promise<MotionSuggestion>) | null;
     suggest(text: string): MotionIntent;
 }
 declare function defineMotionPrompt(tag?: string): CustomElementConstructor | undefined;

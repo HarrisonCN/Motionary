@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [11.6.0] - 2026-10-09
+
+### AI layer: local parser + pluggable LLM provider (Tooling)
+- `motionary/tooling/ai` (and the deprecated `motionary/components/ai`) adds **`suggestMotion(text, { provider, signal, timeout })`**: without a provider it returns the local deterministic parser's result (no network); with a user-supplied `MotionProvider` (a function or `{ name, complete }`) it asks for a **MotionSpec**, validates it against **`MOTION_SPEC_SCHEMA`** (JSON Schema 2020-12) and falls back to the local rules on invalid JSON, schema errors, exceptions, timeouts (default 8 s) or abort. Result: `{ intent, source: 'local' | 'provider' | 'fallback', provider, errors }`.
+- Also exported: `validateMotionSpec()`, `intentFromSpec()` (keyframes / CSS / components are always derived locally — a model cannot inject CSS), `specOf()`, `MOTION_SYSTEM_PROMPT`, `MOTION_EFFECTS`, `MOTION_TRIGGERS` and the `MotionSpec` / `MotionProvider` / `MotionProviderRequest` / `MotionSuggestion` types. No vendor SDK, no API keys, no request unless you pass a provider.
+- `<usa-motion-prompt>`: new `suggester` property (e.g. `(t) => suggestMotion(t, { provider })`) — shows the local suggestion immediately, then the validated answer (`usa:suggest` detail now carries `source` and `errors`). The element does not bundle the provider code (its per-entry budget is unchanged).
+- New [docs/ai-provider.md](./docs/ai-provider.md).
+
+### Architecture
+- The deterministic parser moved to Motion Core (`src/components/core/intent.ts`, pure); the Tooling entry re-exports it. `<usa-motion-prompt>` no longer imports the Tooling layer, so `test/architecture.test.ts` has **no exceptions** left.
+
+### Checks
+- New `test/widgets-11-6.test.ts`: local default without network, provider success (object and fenced JSON), schema rejections (unknown effect, extra property, CSS-injection easing, out-of-range numbers), exceptions / timeout / abort fallbacks, element provider flow, architecture exception removed, docs.
+
 ## [11.5.0] - 2026-10-09
 
 ### Public API alignment (Public API)

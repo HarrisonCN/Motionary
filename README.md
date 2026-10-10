@@ -110,6 +110,7 @@ export class Hero {}
 ```
 
 > 11.5: Angular has the top-level entry `motionary/angular` (`motionary/components/angular` still works until 13.0). Layer subpaths and deprecated paths: [docs/public-api.md](./docs/public-api.md) · `npx motionary doctor`.
+> 11.6: `suggestMotion(text, { provider })` from `motionary/tooling/ai` — local parser by default, optional user-supplied LLM ([docs/ai-provider.md](./docs/ai-provider.md)).
 
 Animated components need no framework at all:
 

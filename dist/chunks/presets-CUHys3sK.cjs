@@ -230,4 +230,4 @@ exports.registerPresets = registerPresets;
 exports.resolveEasing = resolveEasing;
 exports.resolvePreset = resolvePreset;
 exports.reversePreset = reversePreset;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.5.0/dist/chunks/presets-CUHys3sK.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.6.0/dist/chunks/presets-CUHys3sK.cjs.map

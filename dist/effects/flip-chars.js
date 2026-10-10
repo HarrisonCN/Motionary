@@ -13,4 +13,4 @@ function registerFlipChars() {
 }
 
 export { effect, registerFlipChars as register, registerFlipChars };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.5.0/dist/effects/flip-chars.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.6.0/dist/effects/flip-chars.js.map

@@ -18,4 +18,4 @@ function registerRefraction() {
 exports.effect = effect;
 exports.register = registerRefraction;
 exports.registerRefraction = registerRefraction;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.5.0/dist/effects/refraction.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.6.0/dist/effects/refraction.cjs.map

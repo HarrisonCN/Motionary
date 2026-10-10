@@ -19,4 +19,4 @@ function registerVinylSpin() {
 exports.effect = effect;
 exports.register = registerVinylSpin;
 exports.registerVinylSpin = registerVinylSpin;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.5.0/dist/effects/vinyl-spin.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.6.0/dist/effects/vinyl-spin.cjs.map

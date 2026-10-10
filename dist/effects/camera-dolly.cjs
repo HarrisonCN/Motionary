@@ -17,4 +17,4 @@ function registerCameraDolly() {
 exports.effect = effect;
 exports.register = registerCameraDolly;
 exports.registerCameraDolly = registerCameraDolly;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.5.0/dist/effects/camera-dolly.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.6.0/dist/effects/camera-dolly.cjs.map

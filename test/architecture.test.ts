@@ -26,7 +26,7 @@ const ALLOWED: Record<Layer, Layer[]> = {
   api: ['api', 'core', 'runtime', 'components'],
 };
 /** Known exceptions — may only shrink (each must still exist; remove the line when it is fixed). */
-const EXCEPTIONS = new Set(['src/components/widgets/motion-prompt.ts -> src/components/ai/index.ts']);
+const EXCEPTIONS = new Set<string>([]); // 11.6: the last one (motion-prompt → ai) is gone
 
 function edges() {
   const out: { from: string; to: string; a: Layer; b: Layer }[] = [];
