@@ -6,4 +6,4 @@ require('../chunks/base-BG_mxssu.cjs');
 
 
 exports.defineXpBar = widgets_xpBar.defineXpBar;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/widgets/xp-bar.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/xp-bar.cjs.map

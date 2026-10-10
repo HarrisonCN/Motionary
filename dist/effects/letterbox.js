@@ -12,4 +12,4 @@ function registerLetterbox() {
 }
 
 export { effect, registerLetterbox as register, registerLetterbox };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/effects/letterbox.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/effects/letterbox.js.map

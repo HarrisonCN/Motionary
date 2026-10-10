@@ -42,6 +42,8 @@ jobs:
           cp dist/manifest.json _site/components.json
           cp dist/manifest.schema.json _site/components.schema.json
           cp dist/llms.txt dist/llms-full.txt _site/
+          # 13.0.2: the component playground's npm + bundler tab builds its import map from package.json "exports"
+          cp package.json _site/
           cat > _site/index.html <<'HTML'
           <!doctype html>
           <meta charset="utf-8">

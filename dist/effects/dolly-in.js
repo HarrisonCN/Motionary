@@ -12,4 +12,4 @@ function registerDollyIn() {
 }
 
 export { effect, registerDollyIn as register, registerDollyIn };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/effects/dolly-in.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/effects/dolly-in.js.map

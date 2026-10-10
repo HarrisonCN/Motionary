@@ -186,7 +186,7 @@ defineScrollScene();  // 再注册依赖它的组件
 |---|---|
 | [动画商店](https://harrisoncn.github.io/Motionary/showcase/) | 在桌面和手机尺寸下预览、调整并复制所有预设与效果 |
 | [组件库](https://harrisoncn.github.io/Motionary/showcase/components.html) | 每个 `<usa-*>` 元素的属性、前置依赖与等级 |
-| [组件演练场](https://harrisoncn.github.io/Motionary/showcase/run.html) | 每个组件都是一个完整可运行的页面：编辑、**Run**、**Copy** 或 **Download .html**；支持 `run.html#usa-tilt` 这样的深链接 |
+| [组件演练场](https://harrisoncn.github.io/Motionary/showcase/run.html) | 每个组件都是一个完整可运行的页面：编辑、**Run**、**Copy** 或 **Download** —— 三者都使用编辑器中的当前代码（下载的文件可独立运行）。HTML (CDN) 运行整个页面，npm + bundler 通过 import map 运行模块；缺少前置模块或运行出错时显示具体修复说明；支持 `run.html#usa-tilt` 这样的深链接 |
 | [时间线编辑器](https://harrisoncn.github.io/Motionary/showcase/playground.html) | 可视化关键帧编辑，导出 `<usa-player>` 可播放的 JSON |
 | [滚动叙事](https://harrisoncn.github.io/Motionary/showcase/story.html) | `<usa-story>` 滚动叙事模板 |
 | [跨平台预览](https://harrisoncn.github.io/Motionary/showcase/xplat.html) | 同一个预设在 Web、小程序与鸿蒙 ArkUI 中的效果对比 |
@@ -314,7 +314,7 @@ npx usa-codemod-13 --write      # 一并改写，并把固定在 @10 / @11 / @12
 
 ## 版本与兼容性
 
-- **npm dist-tags：** `latest` 指向当前大版本及其补丁版本（13.0.1）。每个次版本另有自己的标签 `v<major>-<minor>`（例如 `v12-9`）。`motionary` 与 `use-scroll-animate` 总是以相同版本一起发布。
+- **npm dist-tags：** `latest` 指向当前大版本及其补丁版本（13.0.2）。每个次版本另有自己的标签 `v<major>-<minor>`（例如 `v12-9`）。`motionary` 与 `use-scroll-animate` 总是以相同版本一起发布。
 - **CDN：** URL 固定到大版本（`motionary@13`）；固定到具体版本（`motionary@12.4.0`）的链接也继续可用。
 - **语义化版本：** 破坏性变更只出现在大版本，每次都附带升级指南和 codemod。弃用的内容会保留到下一个大版本，期间类型标记为 `@deprecated`，运行时不输出警告。
 - **各版本包含什么：** 每个组件和运行时模块的 `since` / `changed`（[docs/version-compat.md](./docs/version-compat.md)），以及逐项功能支持（[docs/compat-matrix.md](./docs/compat-matrix.md)）。

@@ -6,4 +6,4 @@ require('../chunks/base-BG_mxssu.cjs');
 
 
 exports.defineMenuToggle = widgets_menuToggle.defineMenuToggle;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/widgets/menu-toggle.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/menu-toggle.cjs.map

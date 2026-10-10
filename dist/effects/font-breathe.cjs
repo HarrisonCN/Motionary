@@ -17,4 +17,4 @@ function registerFontBreathe() {
 exports.effect = effect;
 exports.register = registerFontBreathe;
 exports.registerFontBreathe = registerFontBreathe;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/effects/font-breathe.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/effects/font-breathe.cjs.map

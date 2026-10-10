@@ -92,4 +92,4 @@ function defineBgGenerator(tag = 'usa-bg-generator') {
 }
 
 export { backgroundCss as b, defineBgGenerator as d };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/chunks/bg-generator-CFjnTyP9.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/chunks/bg-generator-CFjnTyP9.js.map

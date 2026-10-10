@@ -186,7 +186,7 @@ defineScrollScene();  // そのあとで、それを使うコンポーネント�
 |---|---|
 | [アニメーションストア](https://harrisoncn.github.io/Motionary/showcase/) | すべてのプリセットとエフェクトを、デスクトップとスマホのサイズでプレビュー・調整・コピー |
 | [コンポーネント](https://harrisoncn.github.io/Motionary/showcase/components.html) | ギャラリー：各 `<usa-*>` 要素の属性、前提モジュール、階層 |
-| [コンポーネントプレイグラウンド](https://harrisoncn.github.io/Motionary/showcase/run.html) | コンポーネントごとに動く完全なページ。編集して **Run**、**Copy**、**Download .html**。`run.html#usa-tilt` のようなディープリンクにも対応 |
+| [コンポーネントプレイグラウンド](https://harrisoncn.github.io/Motionary/showcase/run.html) | コンポーネントごとに動く完全なページ。編集して **Run**、**Copy**、**Download** — 3 つともエディタの内容そのものを使います（ダウンロードしたファイルは単体で動作）。HTML (CDN) はページ全体を実行し、npm + bundler はインポートマップでモジュールを実行。前提モジュールの不足やエラーは修正方法付きで表示。`run.html#usa-tilt` のようなディープリンクにも対応 |
 | [タイムラインエディタ](https://harrisoncn.github.io/Motionary/showcase/playground.html) | ビジュアルなキーフレーム編集。`<usa-player>` 用の JSON を書き出せます |
 | [スクロールストーリー](https://harrisoncn.github.io/Motionary/showcase/story.html) | `<usa-story>` のスクロールストーリーテンプレート |
 | [クロスプラットフォームプレビュー](https://harrisoncn.github.io/Motionary/showcase/xplat.html) | 1 つのプリセットを Web・ミニプログラム・HarmonyOS ArkUI で見比べる |
@@ -314,7 +314,7 @@ npx usa-codemod-13 --write      # まとめて書き換え。@10 / @11 / @12 に
 
 ## バージョンと互換性
 
-- **npm の dist-tag：** `latest` は現在のメジャーとそのパッチ（13.0.1）を指します。マイナーリリースにはそれぞれ `v<major>-<minor>` のタグも付きます（例：`v12-9`）。`motionary` と `use-scroll-animate` は常に同じバージョンで同時に公開されます。
+- **npm の dist-tag：** `latest` は現在のメジャーとそのパッチ（13.0.2）を指します。マイナーリリースにはそれぞれ `v<major>-<minor>` のタグも付きます（例：`v12-9`）。`motionary` と `use-scroll-animate` は常に同じバージョンで同時に公開されます。
 - **CDN：** URL はメジャーで固定します（`motionary@13`）。正確なバージョン指定（`motionary@12.4.0`）もそのまま使えます。
 - **セマンティックバージョニング：** 破壊的変更はメジャーだけで行い、毎回ガイドと codemod を用意します。非推奨になったものは次のメジャーまで残り、その間は型に `@deprecated` が付くだけで、実行時の警告は出ません。
 - **各バージョンに含まれるもの：** コンポーネントとランタイムモジュールごとの `since` / `changed`（[docs/version-compat.md](./docs/version-compat.md)）、機能ごとの対応状況（[docs/compat-matrix.md](./docs/compat-matrix.md)）。

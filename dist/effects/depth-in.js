@@ -12,4 +12,4 @@ function registerDepthIn() {
 }
 
 export { effect, registerDepthIn as register, registerDepthIn };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/effects/depth-in.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/effects/depth-in.js.map

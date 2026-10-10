@@ -13,4 +13,4 @@ function registerLineDraw() {
 }
 
 export { effect, registerLineDraw as register, registerLineDraw };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/effects/line-draw.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/effects/line-draw.js.map

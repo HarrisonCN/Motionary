@@ -130,4 +130,4 @@ function definePanorama(tag = 'usa-panorama') {
 }
 
 exports.definePanorama = definePanorama;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/widgets/panorama.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/panorama.cjs.map

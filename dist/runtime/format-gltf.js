@@ -1,4 +1,4 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-BgdHqx0s.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-BpRcQEC5.js';
 import { standardMaterial, texture, computeNormals, GlNode } from './gl.js';
 
 /**
@@ -220,4 +220,4 @@ async function loadGltf(src, o = {}) {
 const formatGltf = { id: 'format-gltf', version: RUNTIME_VERSION, tier: 'advanced', requires: ['core', 'gl'], api: { parseGlb, readAccessor, gltfToNode, loadGltf, SUPPORTED_EXTENSIONS } };
 
 export { SUPPORTED_EXTENSIONS, formatGltf, gltfToNode, loadGltf, parseGlb, readAccessor };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/runtime/format-gltf.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/runtime/format-gltf.js.map

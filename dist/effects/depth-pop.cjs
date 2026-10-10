@@ -16,4 +16,4 @@ function registerDepthPop() {
 exports.effect = effect;
 exports.register = registerDepthPop;
 exports.registerDepthPop = registerDepthPop;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/effects/depth-pop.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/effects/depth-pop.cjs.map

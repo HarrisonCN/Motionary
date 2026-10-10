@@ -11,7 +11,7 @@ URLs. Nothing else changes: the `<usa-*>` tags, the `usa-` classes, the globals 
 
 | Tag | Points to | Install |
 |---|---|---|
-| `latest` | the current major release and its patches (13.0.1 today) | `npm i motionary` |
+| `latest` | the current major release and its patches (13.0.2 today) | `npm i motionary` |
 | `v<major>-<minor>` | each minor release, e.g. `v12-9` → 12.9.0, `v12-5` → 12.5.0 | `npm i motionary@v12-9` or `npm i motionary@12.9.0` |
 
 `latest` moves when a new major ships (x.0.0) and with each patch of it (x.0.y, bug fixes only). Minor releases get their own `v<major>-<minor>` tag, so a plain

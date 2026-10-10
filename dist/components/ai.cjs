@@ -475,4 +475,4 @@ exports.motionSnippet = motionSnippet;
 exports.specOf = specOf;
 exports.suggestMotion = suggestMotion;
 exports.validateMotionSpec = validateMotionSpec;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/components/ai.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/components/ai.cjs.map

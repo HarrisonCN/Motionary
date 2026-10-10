@@ -864,4 +864,4 @@ function defineClickComponents() {
 }
 
 export { BUTTON_DEFORMS, CLICK_EFFECTS, MORPH_ICONS, defineButton, defineCheckbox, defineClick, defineClickComponents, defineDoubleTap, defineHold, defineIconMorph, defineLike, haptic, morphPath };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/components/click.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/components/click.js.map

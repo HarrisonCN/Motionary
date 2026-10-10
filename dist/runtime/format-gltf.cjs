@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-D3N8O2Nc.cjs');
+var registry = require('../chunks/registry-CP1MIOtI.cjs');
 var runtime_gl = require('./gl.cjs');
 
 /**
@@ -227,4 +227,4 @@ exports.gltfToNode = gltfToNode;
 exports.loadGltf = loadGltf;
 exports.parseGlb = parseGlb;
 exports.readAccessor = readAccessor;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/runtime/format-gltf.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/runtime/format-gltf.cjs.map

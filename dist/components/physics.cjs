@@ -445,4 +445,4 @@ exports.defineOverscroll = defineOverscroll;
 exports.definePhysicsComponents = definePhysicsComponents;
 exports.defineSpring = defineSpring;
 exports.springEffectKeyframes = springEffectKeyframes;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/components/physics.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/components/physics.cjs.map

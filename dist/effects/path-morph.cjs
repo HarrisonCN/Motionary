@@ -17,4 +17,4 @@ function registerPathMorph() {
 exports.effect = effect;
 exports.register = registerPathMorph;
 exports.registerPathMorph = registerPathMorph;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/effects/path-morph.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/effects/path-morph.cjs.map

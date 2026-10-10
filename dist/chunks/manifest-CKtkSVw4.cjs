@@ -78,4 +78,4 @@ exports.EFFECT_PACK_FORMAT = EFFECT_PACK_FORMAT;
 exports.loadEffectPack = loadEffectPack;
 exports.packManifest = packManifest;
 exports.validateManifest = validateManifest;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/chunks/manifest-CKtkSVw4.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/chunks/manifest-CKtkSVw4.cjs.map

@@ -12,4 +12,4 @@ function registerChestOpen() {
 }
 
 export { effect, registerChestOpen as register, registerChestOpen };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/effects/chest-open.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/effects/chest-open.js.map

@@ -12,4 +12,4 @@ function registerStockPulse() {
 }
 
 export { effect, registerStockPulse as register, registerStockPulse };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/effects/stock-pulse.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/effects/stock-pulse.js.map

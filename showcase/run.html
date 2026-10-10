@@ -9,8 +9,7 @@
   <link rel="stylesheet" href="./styles.css" />
   <style>
     body { margin: 0; font: 15px/1.5 system-ui, sans-serif; background: #0b0d12; color: #e8ecf3; }
-    .wrap { max-width: 1280px; margin: 0 auto; padding: 16px; display: grid; grid-template-columns: 260px 1fr; gap: 16px; }
-    @media (max-width: 820px) { .wrap { grid-template-columns: 1fr; } aside ul { max-height: 180px; } }
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 16px; display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 16px; }
     header { max-width: 1280px; margin: 0 auto; padding: 16px 16px 0; }
     header h1 { margin: 0; font-size: 22px; }
     header p { margin: 4px 0 0; opacity: .7; }
@@ -19,20 +18,37 @@
     aside li button { width: 100%; text-align: left; padding: 6px 8px; border: 0; border-radius: 6px; background: none; color: inherit; font: inherit; cursor: pointer; }
     aside li button[aria-current="true"], aside li button:hover { background: #1d2230; }
     aside small { opacity: .6; }
-    .badge { display: inline-block; padding: 3px 10px; border-radius: 999px; background: #1d2230; border: 1px solid #2a3040; font-size: 13px; }
+    .pill { display: inline-block; padding: 3px 10px; border-radius: 999px; background: #1d2230; border: 1px solid #2a3040; font-size: 13px; }
     .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 8px 0; }
     .row button, .tabs button { padding: 6px 12px; border-radius: 8px; border: 1px solid #2a3040; background: #161a23; color: inherit; font: inherit; cursor: pointer; }
     .tabs button[aria-selected="true"] { background: #7c5cff; border-color: #7c5cff; }
-    .panes { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    @media (max-width: 1100px) { .panes { grid-template-columns: 1fr; } }
+    #run { background: #1f6f43; border-color: #2a8a56; }
+    .panes { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
     textarea { width: 100%; min-height: 420px; box-sizing: border-box; font: 12.5px/1.5 ui-monospace, monospace; padding: 12px; border-radius: 12px; border: 1px solid #2a3040; background: #11141b; color: inherit; }
-    iframe { width: 100%; min-height: 420px; border: 1px solid #2a3040; border-radius: 12px; background: #0b0d12; }
+    iframe { width: 100%; min-height: 420px; box-sizing: border-box; border: 1px solid #2a3040; border-radius: 12px; background: #0b0d12; }
+    #problems { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 6px; }
+    #problems li { padding: 8px 12px; border-radius: 10px; border: 1px solid #2a3040; background: #11141b; overflow-wrap: anywhere; }
+    #problems li[data-level="error"] { border-color: #8a2b3a; background: #24121a; }
+    #problems li[data-level="warning"] { border-color: #8a6a2b; background: #231d12; }
+    #problems b { display: block; }
+    #problems pre { margin: 6px 0 0; white-space: pre-wrap; font: 12.5px/1.5 ui-monospace, monospace; opacity: .9; }
+    .hint { opacity: .6; font-size: 13px; }
+    @media (max-width: 1100px) { .panes { grid-template-columns: minmax(0, 1fr); } }
+    /* after the base rules so they win: phones and narrow windows */
+    @media (max-width: 820px) {
+      .wrap { grid-template-columns: minmax(0, 1fr); padding: 12px; }
+      header { padding: 12px 12px 0; }
+      aside ul { max-height: 180px; }
+      .row button, .tabs button, aside input { min-height: 40px; }
+      textarea { font-size: 16px; min-height: 300px; }
+      iframe { min-height: 360px; }
+    }
   </style>
 </head>
 <body>
   <header>
     <h1>Component playground</h1>
-    <p>Every <code>&lt;usa-*&gt;</code> component as a runnable page. Edit and run it here, see what it needs (runtime prerequisites and tier), copy it with one click. <a href="./components.html">← Components</a> · <a href="./playground.html">Effects playground</a></p>
+    <p>Every <code>&lt;usa-*&gt;</code> component as a runnable page. Edit and run it here, see what it needs (runtime prerequisites and tier), copy or download exactly what you edited. <a href="./components.html">← Components</a> · <a href="./playground.html">Effects playground</a></p>
   </header>
   <div class="wrap">
     <aside>
@@ -40,58 +56,111 @@
       <ul id="list" role="list"></ul>
     </aside>
     <main>
-      <div class="row"><strong id="title"></strong> <span class="badge" id="deps"></span></div>
+      <div class="row"><strong id="title"></strong> <span class="pill" id="deps"></span></div>
       <div class="row tabs" role="tablist">
         <button role="tab" data-k="html" aria-selected="true">HTML (CDN)</button>
         <button role="tab" data-k="esm" aria-selected="false">npm + bundler</button>
-        <button id="run" type="button">Run ▶</button>
+        <button id="run" type="button" title="Ctrl/Cmd + Enter">Run ▶</button>
         <button id="copy" type="button">Copy</button>
         <button id="download" type="button">Download .html</button>
+        <button id="reset" type="button" title="Back to the sample for this tab">Reset</button>
         <span id="msg" aria-live="polite"></span>
       </div>
       <div class="panes">
-        <textarea id="code" spellcheck="false" aria-label="Code"></textarea>
+        <textarea id="code" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Code"></textarea>
         <iframe id="preview" title="Preview" sandbox="allow-scripts"></iframe>
       </div>
+      <ul id="problems" aria-live="polite" aria-label="Problems"></ul>
+      <p class="hint" id="mode-hint"></p>
     </main>
   </div>
   <script type="module">
-    import { runnablePage, esmSnippet, depsLabel } from './runnable.js';
+    // 13.0.2: the editor is the one source of truth — Run previews it, Copy and Download hand it out unchanged.
+    import { depsLabel, starterCode, downloadFile, previewDocument, checkCode, explainReport, exportsToMap } from './runnable.js';
     const $ = (id) => document.getElementById(id);
     const res = await fetch('../dist/manifest.json').catch(() => null);
     const m = res && res.ok ? await res.json() : await (await fetch('../components.json')).json();
     const comps = [...m.components].sort((a, b) => a.tag.localeCompare(b.tag));
     // the preview loads the bundles from this site (works before a release reaches the CDN); Copy / Download keep the CDN URLs
     const local = new URL('../dist/', location.href).href;
-    let cur = null, tab = 'html';
+    // npm + bundler tab: package.json "exports" names the dist file of every import path (falls back to the CDN copy)
+    const pkg = await fetch('../package.json').then((r) => (r.ok ? r.json() : Promise.reject())).catch(() => fetch(`https://cdn.jsdelivr.net/npm/motionary@${m.version}/package.json`).then((r) => r.json())).catch(() => ({}));
+    const exportsMap = exportsToMap(pkg.exports);
+    const edits = new Map(); // `${tag}|${tab}` → edited code, kept across tab and component switches
+    let cur = null, tab = 'html', token = '', reported = [];
+    const editorCode = () => $('code').value;
     const list = (q = '') => {
       q = q.toLowerCase();
       $('list').innerHTML = comps.filter((c) => !q || c.tag.includes(q) || c.title.toLowerCase().includes(q) || (c.keywords || []).join(' ').toLowerCase().includes(q))
         .map((c) => `<li><button data-tag="${c.tag}" aria-current="${c === cur}">&lt;${c.tag}&gt;<br><small>${c.tier} tier${c.requires.length ? ' · ' + c.requires.length + ' prerequisite(s)' : ''}</small></button></li>`).join('');
     };
-    const code = () => (tab === 'html' ? runnablePage(cur, { version: m.version }) : esmSnippet(cur));
-    const run = () => { $('preview').srcdoc = runnablePage(cur, { base: local, version: m.version }).replace(cur.example, tab === 'html' ? ($('code').value.match(/<body>\n([\s\S]*)\n<\/body>/) || [, cur.example])[1] : cur.example); };
+    const load = () => {
+      $('code').value = edits.get(`${cur.tag}|${tab}`) ?? starterCode(cur, tab, { version: m.version, exportsMap });
+      $('download').textContent = tab === 'esm' ? 'Download .js' : 'Download .html';
+      $('mode-hint').textContent = tab === 'esm'
+        ? 'npm + bundler: the preview resolves motionary imports through an import map to this site\'s dist/ (other packages from cdn.jsdelivr.net). In your project, a bundler resolves them from node_modules.'
+        : 'HTML (CDN): the whole page runs as written; motionary@' + m.version.split('.')[0] + ' CDN files are served from this site in the preview. Download saves this exact page — it runs on its own.';
+    };
+    // problems: rendered as text only (messages from the preview are untrusted)
+    const renderProblems = (items) => {
+      const ul = $('problems'); ul.replaceChildren();
+      const seen = new Set();
+      for (const p of items) {
+        const key = p.level + p.message; if (seen.has(key)) continue; seen.add(key);
+        const li = document.createElement('li'); li.dataset.level = p.level;
+        const b = document.createElement('b'); b.textContent = (p.level === 'error' ? '✖ ' : p.level === 'warning' ? '⚠ ' : 'ℹ ') + p.message; li.append(b);
+        if (p.fix) { const pre = document.createElement('pre'); pre.textContent = 'Fix: ' + p.fix; li.append(pre); }
+        ul.append(li);
+      }
+    };
+    let found = [];
+    const run = () => {
+      token = (crypto.randomUUID && crypto.randomUUID()) || String(Math.random()).slice(2);
+      found = checkCode(editorCode(), cur, { mode: tab, exportsMap }); reported = [];
+      renderProblems(found);
+      $('msg').textContent = 'Running…';
+      // a fresh frame per run (same sandbox, cloned): re-assigning srcdoc while the previous run is still loading can
+      // leave the old document in place, and old timers / listeners must not leak into the new run
+      const old = $('preview'), frame = old.cloneNode(false);
+      frame.srcdoc = previewDocument(editorCode(), cur, { mode: tab, base: local, version: m.version, exportsMap, token });
+      old.replaceWith(frame);
+    };
+    addEventListener('message', (e) => {
+      if (e.source !== $('preview').contentWindow || !e.data || typeof e.data !== 'object' || e.data.__motionaryPlayground !== token) return;
+      const p = explainReport(e.data, cur, tab);
+      if (p) { reported.push(p); renderProblems([...found, ...reported]); }
+      if (e.data.kind === 'ready') {
+        const n = [...found, ...reported].filter((x) => x.level === 'error').length;
+        $('msg').textContent = n ? `Ran with ${n} problem${n > 1 ? 's' : ''} — see below` : 'Ran ✓';
+      }
+    });
     const pick = (tag) => {
       cur = comps.find((c) => c.tag === tag) || comps[0];
       $('title').textContent = `<${cur.tag}> — ${cur.title}`;
       $('deps').textContent = depsLabel(cur);
-      $('code').value = code();
+      load();
       history.replaceState(null, '', '#' + cur.tag);
       list($('q').value);
       run();
     };
     $('q').addEventListener('input', (e) => list(e.target.value));
     $('list').addEventListener('click', (e) => { const b = e.target.closest('button[data-tag]'); if (b) pick(b.dataset.tag); });
+    $('code').addEventListener('input', () => edits.set(`${cur.tag}|${tab}`, editorCode()));
+    $('code').addEventListener('keydown', (e) => { if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); run(); } });
     document.querySelectorAll('[role=tab]').forEach((b) => b.addEventListener('click', () => {
+      edits.set(`${cur.tag}|${tab}`, editorCode());
       tab = b.dataset.k;
       document.querySelectorAll('[role=tab]').forEach((x) => x.setAttribute('aria-selected', String(x === b)));
-      $('code').value = code();
+      load(); run();
     }));
     $('run').addEventListener('click', run);
-    $('copy').addEventListener('click', async () => { try { await navigator.clipboard.writeText($('code').value); $('msg').textContent = 'Copied'; } catch { $('code').select(); $('msg').textContent = 'Press Ctrl/Cmd+C'; } });
+    $('reset').addEventListener('click', () => { edits.delete(`${cur.tag}|${tab}`); load(); run(); });
+    $('copy').addEventListener('click', async () => { try { await navigator.clipboard.writeText(editorCode()); $('msg').textContent = 'Copied'; } catch { $('code').select(); $('msg').textContent = 'Press Ctrl/Cmd+C'; } });
     $('download').addEventListener('click', () => {
-      const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(new Blob([runnablePage(cur, { version: m.version })], { type: 'text/html' })), download: `${cur.tag}.html` });
-      a.click(); URL.revokeObjectURL(a.href);
+      const f = downloadFile(cur, tab, editorCode());
+      const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(new Blob([f.text], { type: f.type })), download: f.name });
+      document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+      $('msg').textContent = `Saved ${f.name}`;
     });
     pick(decodeURIComponent(location.hash.slice(1)) || 'usa-reveal');
   </script>

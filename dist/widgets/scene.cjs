@@ -82,4 +82,4 @@ function defineScene(tag = 'usa-scene') {
 }
 
 exports.defineScene = defineScene;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/widgets/scene.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/scene.cjs.map

@@ -104,4 +104,4 @@ function defineChatComposer(tag = 'usa-chat-composer') {
 }
 
 exports.defineChatComposer = defineChatComposer;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/widgets/chat-composer.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/chat-composer.cjs.map

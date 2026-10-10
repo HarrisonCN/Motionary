@@ -12,4 +12,4 @@ function registerCrtPower() {
 }
 
 export { effect, registerCrtPower as register, registerCrtPower };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/effects/crt-power.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/effects/crt-power.js.map

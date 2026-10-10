@@ -12,4 +12,4 @@ function registerWatercolor() {
 }
 
 export { effect, registerWatercolor as register, registerWatercolor };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/effects/watercolor.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/effects/watercolor.js.map

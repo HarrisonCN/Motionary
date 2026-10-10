@@ -112,4 +112,4 @@ function registerOrganicPack() {
 exports.ORGANIC_FX = ORGANIC_FX;
 exports.blobRadius = blobRadius;
 exports.registerOrganicPack = registerOrganicPack;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/components/fx-organic.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/components/fx-organic.cjs.map

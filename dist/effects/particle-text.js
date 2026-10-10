@@ -13,4 +13,4 @@ function registerParticleText() {
 }
 
 export { effect, registerParticleText as register, registerParticleText };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/effects/particle-text.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/effects/particle-text.js.map

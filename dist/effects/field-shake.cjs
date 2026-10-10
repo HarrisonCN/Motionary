@@ -16,4 +16,4 @@ function registerFieldShake() {
 exports.effect = effect;
 exports.register = registerFieldShake;
 exports.registerFieldShake = registerFieldShake;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/effects/field-shake.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/effects/field-shake.cjs.map

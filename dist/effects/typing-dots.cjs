@@ -16,4 +16,4 @@ function registerTypingDots() {
 exports.effect = effect;
 exports.register = registerTypingDots;
 exports.registerTypingDots = registerTypingDots;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/effects/typing-dots.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/effects/typing-dots.cjs.map

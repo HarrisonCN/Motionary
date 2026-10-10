@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [13.0.2] - 2026-10-10
+
+### Fixed (component playground — `showcase/run.html`)
+- **Run, Copy and Download share the editor.** Download rebuilt the original sample (`runnablePage(cur)`), so edits were lost in the downloaded file; it now saves exactly the editor text (`.html` on the HTML tab, `.js` on the npm tab) — the same text Copy puts on the clipboard and Run previews.
+- **Run uses the whole document.** Run cut the `<body>` out of the editor with a regex and pasted it into a freshly generated page, so edits to `<head>` (styles, scripts, title, script versions) were ignored, and a reformatted `<body>` silently fell back to the original example. The preview now runs the page as written (this major's CDN URLs are served from the site so a release can be previewed before it reaches the CDN); markup alone runs inside the sample page.
+- **HTML (CDN) and npm + bundler run differently.** The npm tab used to preview the HTML sample and ignore its own edits. It now runs the edited module through an import map: `motionary/…` paths resolve to the site's `dist/` exactly as `package.json` `exports` name them, other packages to `cdn.jsdelivr.net/…/+esm`.
+- **Pages that need ES modules run from the CDN.** The snap carousel, dotLottie and glTF model components are not in any CDN bundle (they have their own entry points), so their HTML pages never defined the element; they now load through an import map + module script (prerequisites first). The four examples with `import … from 'motionary/…'` module scripts (auto-animate, toaster, clock control, loading bar) get an import map too, so the downloaded page runs on its own. (Playground pages only — the components themselves are unchanged.)
+- **Problems with fixes.** Before running, the editor is checked: a missing or misordered prerequisite `<script>` names the module and the exact `<script src="…">` line to add, and where; on the npm tab a missing import, `use(…)` or `defineX()` call, an import that motionary does not export (with "did you mean"), a bare import without an import map. While it runs, script errors, failed loads, `usa:runtime-missing` and elements that never registered are reported from the preview with the fix. Same-site scripts load with `crossorigin` in the preview so errors are not reduced to "Script error.".
+- **Isolation kept.** The preview stays `sandbox="allow-scripts"` (no `allow-same-origin`, popups, top navigation or modals); it reports through `postMessage` only, the page accepts messages only from the current run's frame and token, and renders them as text.
+- **Mobile.** The prerequisites badge reused the gallery's absolutely positioned `.badge` and covered the page title (desktop too); the component list's 180 px limit on narrow screens was overridden by the base rule, pushing the editor below a 70vh list. Now: own pill, short list, 16 px editor (no iOS zoom on focus), 40 px tap targets. Edits are kept per component and tab (Reset restores the sample); Ctrl/Cmd + Enter runs.
+
+### Checks
+- New `npm run check:playground` (`scripts/check-playground.mjs`, headless Chrome over CDP, no new dependency; CI on Node 22): an edit in `<head>` and `<body>` shows after Run; Copy == Download == editor; the downloaded file opened from `file://` runs (its CDN URLs served from the build); tabs keep edits; the npm tab runs an edited module; a user script cannot reach `parent` / `top` / storage or inject markup into the page; a removed prerequisite and an unknown import show their fix; runtime errors are shown; module-only pages register; at 390 px no horizontal scroll, controls reachable, Run works. On 13.0.1, 10 of 11 failed (isolation already held).
+- New `test/playground-13-0-2.test.ts` (unit): starter code, download file, full-document preview, import maps from `exports`, every starter page and snippet free of errors, prerequisite / order / import / define problems, reports → fixes, `ESM_ONLY` equals the components no CDN bundle defines, sandbox attribute and message handling.
+- `scripts/perf-ci.mjs` exports its Chrome launcher (`launch`, `findChrome`) for the playground check. Pages ships `package.json` for the import map. No runtime code, public API or size budget changed (the runtime version string reads 13.0.2).
+
 ## [13.0.1] - 2026-10-10
 
 ### Fixed (component contract)

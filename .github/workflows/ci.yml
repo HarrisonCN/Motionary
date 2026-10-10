@@ -52,6 +52,9 @@ jobs:
       - name: Bundle size budget
         if: matrix.node == 22
         run: npm run size:check | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Component playground in headless Chrome — Run / Copy / Download share the editor, standalone download, import map, prerequisite hints, sandbox isolation, 390 px (check:playground)
+        if: matrix.node == 22
+        run: npm run check:playground | tee -a "$GITHUB_STEP_SUMMARY"
       - name: Performance metrics in headless Chrome — first-screen transfer, script time, GPU resources, frame stability (perf/budgets.json)
         if: matrix.node == 22
         run: npm run perf | tee -a "$GITHUB_STEP_SUMMARY"

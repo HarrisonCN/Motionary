@@ -99,4 +99,4 @@ function defineWorkerCanvas(tag = 'usa-worker-canvas') {
 }
 
 export { WORKER_SCENES as W, WORKER_SCENE_FNS as a, defineWorkerCanvas as d };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/chunks/worker-canvas-D2TU72M8.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/chunks/worker-canvas-D2TU72M8.js.map

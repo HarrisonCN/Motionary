@@ -108,4 +108,4 @@ exports.frameSequence = frameSequence;
 exports.registerVideoPack = registerVideoPack;
 exports.scrollProgress = scrollProgress;
 exports.scrubVideo = scrubVideo;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/components/fx-video.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/components/fx-video.cjs.map

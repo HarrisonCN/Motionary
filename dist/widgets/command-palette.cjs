@@ -6,4 +6,4 @@ require('../chunks/base-BG_mxssu.cjs');
 
 
 exports.defineCommandPalette = widgets_commandPalette.defineCommandPalette;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/widgets/command-palette.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/command-palette.cjs.map

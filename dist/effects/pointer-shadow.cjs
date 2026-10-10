@@ -18,4 +18,4 @@ function registerPointerShadow() {
 exports.effect = effect;
 exports.register = registerPointerShadow;
 exports.registerPointerShadow = registerPointerShadow;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/effects/pointer-shadow.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/effects/pointer-shadow.cjs.map

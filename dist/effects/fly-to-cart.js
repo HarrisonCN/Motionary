@@ -12,4 +12,4 @@ function registerFlyToCart() {
 }
 
 export { effect, registerFlyToCart as register, registerFlyToCart };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/effects/fly-to-cart.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/effects/fly-to-cart.js.map

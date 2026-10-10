@@ -14,4 +14,4 @@ function registerFire() {
 }
 
 export { effect, registerFire as register, registerFire };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/effects/fire.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/effects/fire.js.map

@@ -73,4 +73,4 @@ async function loadEffectPack(src, opts = {}) {
 }
 
 export { EFFECT_PACK_FORMAT as E, loadEffectPack as l, packManifest as p, validateManifest as v };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/chunks/manifest-CQUlazDF.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/chunks/manifest-CQUlazDF.js.map

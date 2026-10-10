@@ -13,4 +13,4 @@ function registerRingSweep() {
 }
 
 export { effect, registerRingSweep as register, registerRingSweep };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/effects/ring-sweep.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/effects/ring-sweep.js.map
