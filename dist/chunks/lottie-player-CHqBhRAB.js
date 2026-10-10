@@ -124,4 +124,4 @@ function defineLottiePlayer(tag = 'usa-lottie-player') {
 }
 
 export { css as c, defineLottiePlayer as d };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/chunks/lottie-player-CHqBhRAB.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.1.0/dist/chunks/lottie-player-CHqBhRAB.js.map

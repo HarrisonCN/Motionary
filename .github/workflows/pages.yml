@@ -34,6 +34,8 @@ jobs:
         run: |
           mkdir -p _site
           cp -r showcase demo dist _site/
+          # 12.1: the cross-platform previewer (showcase/xplat.html) needs the exporter and the motion tokens
+          mkdir -p _site/bin _site/docs && cp bin/xplat.mjs _site/bin/ && cp docs/motion.tokens.json _site/docs/
           rm -f _site/dist/*.map _site/dist/chunks/*.map
           touch _site/.nojekyll
           # 10.1: AI-readable manifest + llms.txt at the site root

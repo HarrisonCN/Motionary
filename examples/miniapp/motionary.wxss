@@ -1,0 +1,29 @@
+/* motionary 12.1 — mini program export (WXSS / ACSS / TTSS). Generated: npx motionary export --target wxss */
+page {
+  --usa-duration-instant: 0ms;
+  --usa-duration-fast: 150ms;
+  --usa-duration-normal: 300ms;
+  --usa-duration-slow: 600ms;
+  --usa-duration-slower: 900ms;
+  --usa-duration-slowest: 1400ms;
+  --usa-easing-linear: linear;
+  --usa-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+  --usa-easing-emphasized: cubic-bezier(0.22, 1, 0.36, 1);
+  --usa-easing-decelerate: cubic-bezier(0, 0, 0, 1);
+  --usa-easing-accelerate: cubic-bezier(0.3, 0, 1, 1);
+  --usa-easing-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --usa-easing-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes usa-fade-in-up { from { opacity: 0; transform: translateY(80rpx); } to { opacity: 1; transform: translateY(0rpx); } }
+.usa-fade-in-up { animation: usa-fade-in-up var(--usa-duration-normal, 300ms) var(--usa-easing-standard, cubic-bezier(0.2, 0, 0, 1)) both; }
+@keyframes usa-zoom-in { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+.usa-zoom-in { animation: usa-zoom-in var(--usa-duration-normal, 300ms) var(--usa-easing-standard, cubic-bezier(0.2, 0, 0, 1)) both; }
+@keyframes usa-slide-up { from { transform: translateY(100%); } to { transform: translateY(0rpx); } }
+.usa-slide-up { animation: usa-slide-up var(--usa-duration-normal, 300ms) var(--usa-easing-standard, cubic-bezier(0.2, 0, 0, 1)) both; }
+
+/* reduced motion: OS setting where the renderer exposes it, or add .usa-reduce-motion from your own setting */
+@media (prefers-reduced-motion: reduce) { .usa-fade-in-up, .usa-zoom-in, .usa-slide-up { animation-duration: 1ms; animation-delay: 0s; } }
+.usa-reduce-motion .usa-fade-in-up, .usa-reduce-motion.usa-fade-in-up,
+.usa-reduce-motion .usa-zoom-in, .usa-reduce-motion.usa-zoom-in,
+.usa-reduce-motion .usa-slide-up, .usa-reduce-motion.usa-slide-up { animation-duration: 1ms; animation-delay: 0s; }

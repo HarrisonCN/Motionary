@@ -397,4 +397,4 @@ function timeline(o = {}) {
 }
 
 export { Playable as P, Timeline as T, Tween as a, tween as b, parseValue as p, timeline as t };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/chunks/tween-DhlovBgd.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.1.0/dist/chunks/tween-DhlovBgd.js.map
