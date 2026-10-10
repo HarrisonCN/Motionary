@@ -21,6 +21,9 @@ export function defineAddToCart(tag = 'usa-add-to-cart'): CustomElementConstruct
     tag,
     (Base) => {
       class UsaAddToCart extends Base {
+        static get observedAttributes(): string[] {
+          return ['label', 'added', 'item', 'cart', 'from', 'hold'];
+        }
         private _t: ReturnType<typeof setTimeout> | 0 = 0;
 
         mount(): void {

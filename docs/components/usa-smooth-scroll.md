@@ -6,7 +6,7 @@
 
 - **Category:** interaction · **since** 10.4
 - **Import:** `import { defineSmoothScroll } from 'motionary/components/widgets'` then `defineSmoothScroll();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
 - **Attributes:** `lerp`, `duration`, `ease`, `wheel-multiplier`, `horizontal`, `touch`, `anchors`, `offset`, `wrapper`, `preview`
 - **Events:** `usa:scroll`, `usa:ready`, `usa:runtime-missing`
 - **Slots:** —
@@ -30,11 +30,11 @@ defineSmoothScroll(); // registers <usa-smooth-scroll> — after the prerequisit
 3. **CDN:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/smooth.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/smooth.iife.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>
 ```
 
 ## Minimal example

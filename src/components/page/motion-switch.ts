@@ -70,6 +70,9 @@ export function defineMotionSwitch(tag = 'usa-motion-switch'): CustomElementCons
     tag,
     (Base) =>
       class UsaMotionSwitch extends Base {
+        static get observedAttributes(): string[] {
+          return ['labels', 'label'];
+        }
         get value(): MotionSwitchLevel {
           return getMotionLevel();
         }

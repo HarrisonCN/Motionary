@@ -15,11 +15,11 @@ Part of Motionary's own zero-dependency runtime. Size budget: **4.0 KB gzip** (e
 3. **CDN:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/drag-snap.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/drag-snap.iife.js"></script>
 ```
 
-   ESM from a CDN: `https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/drag-snap.js`
+   ESM from a CDN: `https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/drag-snap.js`
 
 4. **Import order & registration:** Register the core first, then the module: use(dragSnap) also registers the core. CDN: load runtime.iife.js, then runtime/drag-snap.iife.js (it registers itself).
 

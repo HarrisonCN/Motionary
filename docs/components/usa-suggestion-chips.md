@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 7.8
 - **Import:** `import { defineSuggestionChips } from 'motionary/components/widgets'` then `defineSuggestionChips();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
 - **Attributes:** `items`, `label`, `dismiss`
 - **Events:** `usa:pick`
 - **Slots:** —

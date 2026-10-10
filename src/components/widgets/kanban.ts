@@ -24,6 +24,9 @@ export function defineKanban(tag = 'usa-kanban'): CustomElementConstructor | und
     tag,
     (Base) => {
       class UsaKanban extends Base {
+        static get observedAttributes(): string[] {
+          return ['label'];
+        }
         private _cols: HTMLElement[] = [];
         private _live: HTMLElement | null = null;
         private _held: HTMLElement | null = null;

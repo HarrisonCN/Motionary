@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 8.3
 - **Import:** `import { defineOrganicCard } from 'motionary/components/widgets'` then `defineOrganicCard();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
 - **Attributes:** `tint`, `seed`
 - **Events:** —
 - **Slots:** —

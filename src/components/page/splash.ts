@@ -19,6 +19,9 @@ export function defineSplash(tag = 'usa-splash'): CustomElementConstructor | und
     tag,
     (Base) =>
       class UsaSplash extends Base {
+        static get observedAttributes(): string[] {
+          return ['label', 'manual', 'min', 'exit'];
+        }
         private _t0 = 0;
         private _gone = false;
         mount(): void {

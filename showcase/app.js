@@ -12,7 +12,7 @@ import { t as tr } from './i18n.js';
 /* ------------------------------------------------------------------ */
 
 const LOCAL = new URL('../dist/', import.meta.url).href;
-const CDN = 'https://unpkg.com/motionary@11/dist/';
+const CDN = 'https://unpkg.com/motionary@12/dist/';
 const KEY = 'usa-showcase:';
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));

@@ -6,7 +6,7 @@ A draggable sheet with snap points, inertia and drag-down-to-dismiss — the iOS
 
 - **Category:** ui
 - **Import:** `import { defineBottomSheet } from 'motionary/components/ui'` then `defineBottomSheet();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `open`, `snap`, `start`
 - **Events:** —
 - **Slots:** —

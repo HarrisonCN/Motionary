@@ -22,6 +22,9 @@ export function defineNavbar(tag = 'usa-navbar'): CustomElementConstructor | und
     tag,
     (Base) =>
       class UsaNavbar extends Base {
+        static get observedAttributes(): string[] {
+          return ['target', 'threshold'];
+        }
         private _frame = 0;
         private _last = 0;
 

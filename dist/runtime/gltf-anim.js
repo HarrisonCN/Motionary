@@ -1,4 +1,4 @@
-import { R as RUNTIME_VERSION, r as requireModule } from '../chunks/registry-CMjteilk.js';
+import { R as RUNTIME_VERSION, r as requireModule } from '../chunks/registry-D3VGJOuX.js';
 import { mat4, quatSlerp } from './gl.js';
 
 /**
@@ -240,4 +240,4 @@ function gltfAnimator(root, o = {}) {
 const gltfAnim = { id: 'gltf-anim', version: RUNTIME_VERSION, tier: 'advanced', requires: ['core', 'gl', 'format-gltf'], api: { gltfClips, sampleChannel, applyClip, deformModel, deformGeometry, gltfAnimator } };
 
 export { applyClip, deformGeometry, deformModel, gltfAnim, gltfAnimator, gltfClips, sampleChannel };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/runtime/gltf-anim.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/runtime/gltf-anim.js.map

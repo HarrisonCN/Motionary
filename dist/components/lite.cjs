@@ -3677,6 +3677,9 @@ function canvasLoop(host, draw, still) {
 }
 function defineGridGlow(tag = 'usa-grid-glow') {
     return defineElement(tag, (Base) => class extends Base {
+        static get observedAttributes() {
+            return ['size', 'radius', 'color'];
+        }
         mount() {
             this.style.setProperty('--usa-grid', `${this.num('size', 32)}px`);
             this.style.setProperty('--usa-grid-r', `${this.num('radius', 220)}px`);
@@ -3704,6 +3707,9 @@ function defineGridGlow(tag = 'usa-grid-glow') {
 }
 function defineBlobs(tag = 'usa-blobs') {
     return defineElement(tag, (Base) => class extends Base {
+        static get observedAttributes() {
+            return ['colors', 'speed', 'blur'];
+        }
         mount() {
             this.querySelector(':scope > .usa-blobs-layer')?.remove();
             const colors = this.str('colors', '#7c5cff,#22d3ee,#f472b6,#34d399').split(',');
@@ -3722,6 +3728,9 @@ function defineWaterRipple(tag = 'usa-water-ripple') {
         constructor() {
             super(...arguments);
             this._drop = null;
+        }
+        static get observedAttributes() {
+            return ['damping', 'color', 'strength'];
         }
         drop(x, y, s = 1) {
             this._drop?.(x, y, s);
@@ -3782,6 +3791,9 @@ function defineWaterRipple(tag = 'usa-water-ripple') {
 }
 function defineDotNetwork(tag = 'usa-dot-network') {
     return defineElement(tag, (Base) => class extends Base {
+        static get observedAttributes() {
+            return ['gap', 'radius', 'color'];
+        }
         mount() {
             const gap = Math.max(8, this.num('gap', 28));
             const R = this.num('radius', 140);
@@ -4995,6 +5007,7 @@ const CARD_EFFECTS = ['flip', 'holo', 'glass', 'border-glow', 'conic-border', 'l
 /** Effects that follow the pointer (they share one rAF-throttled tracker). */
 const TRACKING = /*#__PURE__*/ new Set(['holo', 'border-glow', 'spotlight', 'parallax-layers', 'lift']);
 function defineCard(tag = 'usa-card') {
+    // contract-exempt: attr-unobserved — flipped, expanded: state reflected by the element itself (set the property instead); observing it would re-mount on every change
     return defineElement(tag, (Base) => class UsaCard extends Base {
         constructor() {
             super(...arguments);
@@ -6349,6 +6362,9 @@ var css$p = "";
 
 function defineDoubleTap(tag = 'usa-double-tap') {
     return defineElement(tag, (Base) => class UsaDoubleTap extends Base {
+        static get observedAttributes() {
+            return ['disabled', 'delay', 'icon', 'color'];
+        }
         mount() {
             let last = 0;
             let lx = 0;
@@ -6536,6 +6552,7 @@ const nextId = (prefix) => `${prefix}-${++uid}`;
 var css$n = "";
 
 function defineTabs(tag = 'usa-tabs') {
+    // contract-exempt: attr-unobserved — selected: state reflected by the element itself (set the property instead); observing it would re-mount on every change
     adoptVariants();
     return defineElement(tag, (Base) => class UsaTabs extends Base {
         constructor() {
@@ -6853,6 +6870,9 @@ function definePullRefresh(tag = 'usa-pull-refresh') {
             this._ind = null;
             this._live = null;
         }
+        static get observedAttributes() {
+            return ['threshold', 'disabled', 'label'];
+        }
         get refreshing() {
             return this._busy;
         }
@@ -6948,6 +6968,7 @@ function definePullRefresh(tag = 'usa-pull-refresh') {
 var css$k = "";
 
 function defineFab(tag = 'usa-fab') {
+    // contract-exempt: attr-unobserved — open: state reflected by the element itself (set the property instead); observing it would re-mount on every change
     adoptVariants();
     return defineElement(tag, (Base) => class UsaFab extends Base {
         static get observedAttributes() {
@@ -7043,6 +7064,9 @@ function defineNavbar(tag = 'usa-navbar') {
             super(...arguments);
             this._frame = 0;
             this._last = 0;
+        }
+        static get observedAttributes() {
+            return ['target', 'threshold'];
         }
         get hiddenByScroll() {
             return this.hasAttribute('data-hidden');
@@ -7218,8 +7242,12 @@ function defineSlider(tag = 'usa-slider') {
 var css$h = "";
 
 function definePopover(tag = 'usa-popover') {
+    // contract-exempt: attr-unobserved — open: state reflected by the element itself (set the property instead); observing it would re-mount on every change
     adoptVariants();
     return defineElement(tag, (Base) => class UsaPopover extends Base {
+        static get observedAttributes() {
+            return ['placement'];
+        }
         get open() {
             return this.flag('open');
         }
@@ -7575,6 +7603,9 @@ function defineFullpage(tag = 'usa-fullpage') {
             super(...arguments);
             this._i = 0;
         }
+        static get observedAttributes() {
+            return ['dots', 'axis'];
+        }
         get index() {
             return this._i;
         }
@@ -7661,6 +7692,9 @@ function defineLoadingBar(tag = 'usa-loading-bar') {
         constructor() {
             super(...arguments);
             this._p = 0;
+        }
+        static get observedAttributes() {
+            return ['label', 'color', 'height'];
         }
         get progress() {
             return this._p;
@@ -7752,6 +7786,9 @@ function defineBackToTop(tag = 'usa-back-to-top') {
         constructor() {
             super(...arguments);
             this._frame = 0;
+        }
+        static get observedAttributes() {
+            return ['label', 'offset', 'focus-target'];
         }
         get visible() {
             return this.hasAttribute('data-visible');
@@ -7904,6 +7941,9 @@ function defineSplash(tag = 'usa-splash') {
             this._t0 = 0;
             this._gone = false;
         }
+        static get observedAttributes() {
+            return ['label', 'manual', 'min', 'exit'];
+        }
         mount() {
             this._t0 = Date.now();
             this.setAttribute('role', 'status');
@@ -8028,6 +8068,9 @@ function restoreMotionIntensity() {
 }
 function defineMotionSwitch(tag = 'usa-motion-switch') {
     return defineElement(tag, (Base) => class UsaMotionSwitch extends Base {
+        static get observedAttributes() {
+            return ['labels', 'label'];
+        }
         get value() {
             return getMotionLevel();
         }
@@ -8552,6 +8595,9 @@ function definePinchZoom(tag = 'usa-pinch-zoom') {
             super(...arguments);
             this._v = { k: 1, x: 0, y: 0 };
         }
+        static get observedAttributes() {
+            return ['min', 'max', 'preset', 'double-tap'];
+        }
         get scale() {
             return this._v.k;
         }
@@ -8753,6 +8799,9 @@ function defineDraw(tag = 'usa-draw') {
             this._p = 0;
             this._id = 0;
         }
+        static get observedAttributes() {
+            return ['duration', 'stagger', 'trigger', 'repeat'];
+        }
         get progress() {
             return this._p;
         }
@@ -8900,6 +8949,9 @@ const MASK_SHAPES = {
 };
 function defineMaskReveal(tag = 'usa-mask-reveal') {
     return defineElement(tag, (Base) => class UsaMaskReveal extends Base {
+        static get observedAttributes() {
+            return ['shape', 'at', 'duration', 'delay', 'trigger', 'repeat'];
+        }
         frames() {
             const s = MASK_SHAPES[this.str('shape', 'circle')] || MASK_SHAPES.circle;
             const at = this.str('at');
@@ -9857,6 +9909,9 @@ function defineAutoAnimate(tag = 'usa-auto-animate') {
         constructor() {
             super(...arguments);
             this._c = null;
+        }
+        static get observedAttributes() {
+            return ['duration', 'no-scale'];
         }
         enable() {
             this._c?.enable();
@@ -11120,4 +11175,4 @@ exports.viewTransition = viewTransition;
 exports.warnBaseline = warnBaseline;
 exports.watchPowerSaver = watchPowerSaver;
 exports.withoutDeprecations = withoutDeprecations;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/components/lite.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/components/lite.cjs.map

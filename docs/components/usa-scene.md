@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 9.1
 - **Import:** `import { defineScene } from 'motionary/components/widgets'` then `defineScene();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
 - **Attributes:** `camera`, `strength`, `autoplay`
 - **Events:** `usa:shot`
 - **Slots:** —

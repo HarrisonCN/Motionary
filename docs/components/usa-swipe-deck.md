@@ -6,8 +6,8 @@
 
 - **Category:** gesture · **since** 6.8
 - **Import:** `import { defineSwipeDeck } from 'motionary/components/widgets'` then `defineSwipeDeck();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
-- **Attributes:** —
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
+- **Attributes:** `label`, `threshold`
 - **Events:** `usa:swipe`, `usa:empty`
 - **Slots:** —
 - **Methods:** `like()`, `nope()`, `undo()`

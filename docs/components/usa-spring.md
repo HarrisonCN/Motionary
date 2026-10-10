@@ -6,7 +6,7 @@ bounce-in, pop and drop entrances with true spring timing (CSS linear() easing),
 
 - **Category:** physics
 - **Import:** `import { defineSpring } from 'motionary/components/physics'` then `defineSpring();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `effect`, `trigger`, `repeat`, `stiffness`, `damping`, `mass`, `preset`, `duration`, `delay`
 - **Events:** `usa:complete`
 - **Slots:** —

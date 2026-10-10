@@ -6,8 +6,8 @@
 
 - **Category:** ui · **since** 7.4
 - **Import:** `import { defineMessageList } from 'motionary/components/widgets'` then `defineMessageList();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
-- **Attributes:** —
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
+- **Attributes:** `label`
 - **Events:** `usa:message`
 - **Slots:** —
 - **Methods:** `push()`, `typing()`

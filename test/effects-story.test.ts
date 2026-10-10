@@ -38,13 +38,13 @@ describe('5.4 <usa-story> scroll-storytelling templates', () => {
     expect(formatCount('n/a', 0.5)).toBe('n/a');
   });
 
-  it('pin: marks the step crossing the viewport center active and fires usa-story-step', () => {
+  it('pin: marks the step crossing the viewport center active and fires usa:step', () => {
     const s = mount<any>('<usa-story template="pin"><div data-stage></div><section data-step>a</section><section data-step>b</section></usa-story>');
     const [a, b] = Array.from(s.querySelectorAll('[data-step]')) as HTMLElement[];
     rect(a, -500, 400);
     rect(b, 100, 600);
     const seen: number[] = [];
-    s.addEventListener('usa-story-step', (e: CustomEvent) => seen.push(e.detail.index));
+    s.addEventListener('usa:step', (e: CustomEvent) => seen.push(e.detail.index));
     s.update();
     expect(b.hasAttribute('data-active')).toBe(true);
     expect(a.hasAttribute('data-active')).toBe(false);

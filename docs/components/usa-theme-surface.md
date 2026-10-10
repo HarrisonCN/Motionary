@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 8.6
 - **Import:** `import { defineThemeSurface } from 'motionary/components/widgets'` then `defineThemeSurface();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
 - **Attributes:** `theme`
 - **Events:** `usa:theme`
 - **Slots:** —

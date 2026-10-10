@@ -6,7 +6,7 @@ Cards stick while you scroll and the covered ones shrink and dim as the next sli
 
 - **Category:** cards
 - **Import:** `import { defineStickyStack } from 'motionary/components/cards'` then `defineStickyStack();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `top`, `gap`, `scale`
 - **Events:** —
 - **Slots:** —

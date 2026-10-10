@@ -140,13 +140,13 @@ describe('5.9 <usa-player>', () => {
   it('reads inline JSON, plays on load, emits ready / finish', () => {
     definePlayer();
     const ready = vi.fn();
-    document.addEventListener('usa-player-ready', ready, { once: true });
+    document.addEventListener('usa:ready', ready, { once: true });
     const el = mount<any>(`<usa-player trigger="load"><h1>Hi</h1><button class="cta">Go</button><script type="application/json">${JSON.stringify(ANIM)}</script></usa-player>`);
     expect(ready).toHaveBeenCalled();
     expect(el.player.duration).toBe(900);
     expect(el.player.playing).toBe(true);
     const fin = vi.fn();
-    el.addEventListener('usa-player-finish', fin);
+    el.addEventListener('usa:finish', fin);
     tick(performance.now() + 2000);
     expect(fin).toHaveBeenCalledTimes(1);
   });

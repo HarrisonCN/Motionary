@@ -16,4 +16,4 @@ function registerNeonIgnite() {
 exports.effect = effect;
 exports.register = registerNeonIgnite;
 exports.registerNeonIgnite = registerNeonIgnite;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/effects/neon-ignite.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/effects/neon-ignite.cjs.map

@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [12.0.0] - 2026-10-10
+
+### ⚠️ Breaking — unified component contract (Components · Public API)
+- Every `<usa-*>` element follows one contract ([docs/component-contract.md](./docs/component-contract.md)); **`npm run check:contract` now runs in CI and fails on any finding**. Intended exceptions are written next to the code (`// contract-exempt: <rule> — <reason>`) and listed in [docs/contract-report.md](./docs/contract-report.md).
+- **Legacy event names removed:** `usa-beat`, `usa-audio-error` (`<usa-audio>`), `usa-player-ready`, `usa-player-finish` (`<usa-player>`), `usa-story-step` (`<usa-story>`). Listen to `usa:beat`, `usa:audio-error`, `usa:ready`, `usa:finish`, `usa:step` (available since 11.8). `npx usa-codemod-12 --write` rewrites listeners and Vue / Angular / Svelte bindings.
+- **Attributes:** elements that had no `observedAttributes` list now observe every attribute they read — changing e.g. `<usa-popover placement>` or `<usa-navbar threshold>` after mount re-renders the element instead of being ignored. State the element reflects itself (`checked`, `value`, `open`, `page` …) is set through the property (documented exemption).
+- CDN URLs move with the major: `motionary@11/` → `motionary@12/` (docs, showcase, `RUNTIME_CDN`); `RUNTIME_VERSION` 12.0.0 (plugins declaring `engines.motionary: "^11"` show as incompatible in `<usa-plugin-card>`).
+
+### Not changed
+- The import paths deprecated in 11.5 keep working through 12.x (removed in 13.0); still no runtime warning. Migration guide: [docs/upgrading-12.md](./docs/upgrading-12.md).
+
+### Checks
+- New `test/widgets-12-0.test.ts`: zero contract findings, documented exemptions, blocking `check:contract`, legacy events gone, version wiring.
+
 ## [11.9.0] - 2026-10-10
 
 ### 12.0 preparation (all layers)

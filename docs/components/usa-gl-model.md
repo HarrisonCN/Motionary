@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 10.9
 - **Import:** `import { defineGlModel } from 'motionary/components/gl-model'` then `defineGlModel();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** —
 - **Events:** `usa:runtime-missing`
 - **Slots:** —
@@ -35,15 +35,15 @@ defineGlModel(); // registers <usa-gl-model> — after the prerequisites
 3. **CDN:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/gl.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/format-gltf.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime/gltf-decoders.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/gl.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/format-gltf.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/gltf-decoders.iife.js"></script>
 <script src="https://www.gstatic.com/draco/versioned/decoders/1.5.7/draco_decoder.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/BinomialLLC/basis_universal@1.16.4/webgl/transcoder/build/basis_transcoder.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>
 ```
 
 ## Minimal example

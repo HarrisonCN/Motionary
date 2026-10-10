@@ -19,6 +19,7 @@ export interface UsaMenuToggleElement extends UsaElement {
 export const TOGGLE_VARIANTS = ['cross', 'arrow', 'minus', 'plus-x'] as const;
 
 export function defineMenuToggle(tag = 'usa-menu-toggle'): CustomElementConstructor | undefined {
+  // contract-exempt: attr-unobserved — pressed: state reflected by the element itself (set the property instead); observing it would re-mount on every change
   return defineElement(
     tag,
     (Base) => {

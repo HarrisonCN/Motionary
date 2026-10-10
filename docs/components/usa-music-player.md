@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 7.1
 - **Import:** `import { defineMusicPlayer } from 'motionary/components/widgets'` then `defineMusicPlayer();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
 - **Attributes:** `title`, `artist`, `cover`, `src`, `duration`
 - **Events:** `usa:play`, `usa:pause`, `usa:seek`
 - **Slots:** —

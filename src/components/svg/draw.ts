@@ -20,6 +20,9 @@ export function defineDraw(tag = 'usa-draw'): CustomElementConstructor | undefin
     tag,
     (Base) =>
       class UsaDraw extends Base {
+        static get observedAttributes(): string[] {
+          return ['duration', 'stagger', 'trigger', 'repeat'];
+        }
         private _set: (p: number) => void = () => {};
         private _p = 0;
         private _id = 0;

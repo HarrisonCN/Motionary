@@ -36,7 +36,7 @@ var registry = require('../chunks/registry-BB1oO-lR.cjs');
 require('../chunks/generative-BHIj-NU0.cjs');
 require('../chunks/shared-jkgRH-Hx.cjs');
 require('../chunks/base-B3me2y0o.cjs');
-require('../chunks/audio-h-eiqo5B.cjs');
+require('../chunks/audio-BSQmg3MB.cjs');
 
 /** The 6.x effect packs by name. */
 const EFFECT_PACKS = {
@@ -263,4 +263,4 @@ exports.definePlugin = definePlugin;
 exports.effectPlugins = effectPlugins;
 exports.registerAllPlugins = registerAllPlugins;
 exports.usePlugins = usePlugins;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/components/fx2.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/components/fx2.cjs.map

@@ -7,6 +7,7 @@ const CARD_EFFECTS = ['flip', 'holo', 'glass', 'border-glow', 'conic-border', 'l
 /** Effects that follow the pointer (they share one rAF-throttled tracker). */
 const TRACKING = /*#__PURE__*/ new Set(['holo', 'border-glow', 'spotlight', 'parallax-layers', 'lift']);
 function defineCard(tag = 'usa-card') {
+    // contract-exempt: attr-unobserved — flipped, expanded: state reflected by the element itself (set the property instead); observing it would re-mount on every change
     return defineElement(tag, (Base) => class UsaCard extends Base {
         constructor() {
             super(...arguments);
@@ -551,4 +552,4 @@ function defineCardComponents() {
 }
 
 export { CARD_EFFECTS, defineCard, defineCardComponents, defineCardStack, defineCarousel3d, defineStickyStack };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/components/cards.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/components/cards.js.map

@@ -1,6 +1,6 @@
 export { defineGlModel } from '../components/gl-model.js';
 import '../chunks/base-zSGb8ujt.js';
-import '../chunks/runtime-link-2DE2Nz8C.js';
-import '../chunks/registry-CMjteilk.js';
-import '../chunks/gl-scene-B9CUF5f3.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/widgets/gl-model.js.map
+import '../chunks/runtime-link-CvJOTQYQ.js';
+import '../chunks/registry-D3VGJOuX.js';
+import '../chunks/gl-scene-DqFpR0Z7.js';
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/widgets/gl-model.js.map

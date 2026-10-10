@@ -18,11 +18,15 @@ export interface UsaPopoverElement extends UsaElement {
 }
 
 export function definePopover(tag = 'usa-popover'): CustomElementConstructor | undefined {
+  // contract-exempt: attr-unobserved — open: state reflected by the element itself (set the property instead); observing it would re-mount on every change
   adoptVariants();
   return defineElement(
     tag,
     (Base) =>
       class UsaPopover extends Base {
+        static get observedAttributes(): string[] {
+          return ['placement'];
+        }
         get open(): boolean {
           return this.flag('open');
         }

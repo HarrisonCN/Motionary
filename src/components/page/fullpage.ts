@@ -23,6 +23,9 @@ export function defineFullpage(tag = 'usa-fullpage'): CustomElementConstructor |
     tag,
     (Base) =>
       class UsaFullpage extends Base {
+        static get observedAttributes(): string[] {
+          return ['dots', 'axis'];
+        }
         private _i = 0;
         get index(): number {
           return this._i;

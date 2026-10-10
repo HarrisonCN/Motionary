@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 6.9
 - **Import:** `import { defineColorPicker } from 'motionary/components/widgets'` then `defineColorPicker();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
 - **Attributes:** `swatches`
 - **Events:** `usa:change`, `usa:input`
 - **Slots:** —

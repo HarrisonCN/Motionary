@@ -37,6 +37,9 @@ export function defineCartDrawer(tag = 'usa-cart-drawer'): CustomElementConstruc
     tag,
     (Base) => {
       class UsaCartDrawer extends Base {
+        static get observedAttributes(): string[] {
+          return ['label', 'items', 'currency'];
+        }
         private _items: CartItem[] = [];
         private _open = false;
         private _ret: HTMLElement | null = null;

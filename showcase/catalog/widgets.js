@@ -1215,8 +1215,8 @@ export const components = [
     '10.1: one-click install snippet with npm / pnpm / yarn / bun / CDN tabs and a copy button that confirms with a check; `cdn` sets the URL of the CDN tab.',
     '10.1：一键复制安装命令，带 npm / pnpm / yarn / bun / CDN 标签与复制按钮（复制成功显示对勾）；`cdn` 指定 CDN 标签的地址。',
     ['install', 'npm', 'cdn', 'copy', 'snippet'],
-    '<usa-install-button package="motionary" managers="npm pnpm yarn bun cdn" cdn="https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js"></usa-install-button>',
-    '<usa-install-button class="demo-install" package="motionary" managers="npm pnpm yarn cdn" cdn="https://cdn.jsdelivr.net/npm/motionary@11/dist/runtime.iife.js"></usa-install-button>',
+    '<usa-install-button package="motionary" managers="npm pnpm yarn bun cdn" cdn="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></usa-install-button>',
+    '<usa-install-button class="demo-install" package="motionary" managers="npm pnpm yarn cdn" cdn="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></usa-install-button>',
     [{ key: 'manager', values: ['npm', 'pnpm', 'yarn', 'cdn'] }], { since: '10.1' }),
   // ---- 10.2 ------------------------------------------------------------
   W('usa-scroll-scene', 'reveal', 'Scroll scene', '滚动场景',

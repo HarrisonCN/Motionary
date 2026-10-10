@@ -17,9 +17,9 @@ export const TABS = [
 ];
 
 export const PKG = 'motionary';
-export const CDN_UMD = 'https://unpkg.com/motionary@11/dist/index.umd.js';
-export const CDN_ELEMENT = 'https://unpkg.com/motionary@11/dist/element.umd.js';
-export const CDN_EXTENDED = 'https://unpkg.com/motionary@11/dist/presets-extended.umd.js';
+export const CDN_UMD = 'https://unpkg.com/motionary@12/dist/index.umd.js';
+export const CDN_ELEMENT = 'https://unpkg.com/motionary@12/dist/element.umd.js';
+export const CDN_EXTENDED = 'https://unpkg.com/motionary@12/dist/presets-extended.umd.js';
 
 /** Names of the 6.1 extended presets (they need `motionary/presets/extended`). */
 export const EXTENDED_NAMES = new Set(EXTENDED_ITEMS.map((i) => i.id));

@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 7.3
 - **Import:** `import { defineProductGallery } from 'motionary/components/widgets'` then `defineProductGallery();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
 - **Attributes:** `index`, `nozoom`, `zoom`
 - **Events:** `usa:change`
 - **Slots:** —

@@ -55,7 +55,7 @@ interface EffectDefinition<O extends Record<string, unknown> = Record<string, an
  * - Beat detection: `createBeatDetector()` (pure: energy → beat?), `onBeat(cb)`
  *   and `bindBeat(el, effect, options)`, which plays any registered effect on
  *   every beat. `<usa-audio>` does the same for `[data-usa-beat="effect"]`
- *   children and emits `usa-beat`.
+ *   children and emits `usa:beat`.
  * - While audio runs, `--usa-audio-level` and `--usa-audio-bass` (0–1) are set
  *   on `<html>` for CSS-driven reactions.
  *

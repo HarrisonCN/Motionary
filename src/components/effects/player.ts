@@ -230,7 +230,7 @@ export interface UsaPlayerElement extends UsaElement {
 /**
  * `<usa-player src="hero.json" | <script type="application/json"> child
  * trigger="load | view | scroll | click | manual" loop rate controls>`.
- * Emits `usa-player-ready` and `usa-player-finish`; sets `data-error` when the
+ * Emits `usa:ready` and `usa:finish` (12.0: legacy `usa-player-*` names gone); sets `data-error` when the
  * animation cannot be loaded.
  */
 export function definePlayer(tag = 'usa-player'): CustomElementConstructor | undefined {
@@ -264,8 +264,7 @@ export function definePlayer(tag = 'usa-player'): CustomElementConstructor | und
             this.player = createPlayer(this, this.json, {
               loop: this.hasAttribute('loop') ? true : undefined,
               rate: this.num('rate', 1),
-              // contract-exempt: event-prefix — legacy usa-player-ready / usa-player-finish kept next to usa:ready / usa:finish until 12.0
-              onFinish: () => (this.dispatchEvent(new CustomEvent('usa-player-finish', { bubbles: true })), this.emit('finish')),
+              onFinish: () => this.emit('finish'),
             });
             this.removeAttribute('data-error');
           } catch (err) {
@@ -273,7 +272,6 @@ export function definePlayer(tag = 'usa-player'): CustomElementConstructor | und
             return;
           }
           const p = this.player;
-          this.dispatchEvent(new CustomEvent('usa-player-ready', { detail: { duration: p.duration }, bubbles: true }));
           this.emit('ready', { duration: p.duration });
           const trig = this.str('trigger', 'view');
           if (this.reduced && (trig === 'load' || trig === 'view')) p.seek(p.duration); // reduced motion: show the end state

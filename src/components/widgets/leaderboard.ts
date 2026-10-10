@@ -30,6 +30,9 @@ export function defineLeaderboard(tag = 'usa-leaderboard'): CustomElementConstru
     tag,
     (Base) => {
       class UsaLeaderboard extends Base {
+        static get observedAttributes(): string[] {
+          return ['label', 'limit', 'me'];
+        }
         private _rows: LeaderRow[] = [];
         get rows(): LeaderRow[] {
           return rankRows(this._rows).map((r) => ({ ...r }));

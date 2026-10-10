@@ -6,7 +6,7 @@
 
 - **Category:** click · **since** 6.6
 - **Import:** `import { defineMenuToggle } from 'motionary/components/widgets'` then `defineMenuToggle();`
-- **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
 - **Attributes:** `variant`, `label`, `for`
 - **Events:** `usa:toggle`
 - **Slots:** —

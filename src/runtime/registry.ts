@@ -8,10 +8,10 @@
  */
 
 /** Runtime version (kept in sync with the package version by the release script). */
-export const RUNTIME_VERSION = '11.4.0';
+export const RUNTIME_VERSION = '12.0.0';
 
 /** Where the CDN builds live (major-pinned). */
-export const RUNTIME_CDN = 'https://cdn.jsdelivr.net/npm/motionary@11/dist/';
+export const RUNTIME_CDN = 'https://cdn.jsdelivr.net/npm/motionary@12/dist/';
 
 /**
  * 11.4: runtime tiers. **basic** — ticker, tween, timeline, scroll, text, CSS / WAAPI keyframes; **standard** — smooth

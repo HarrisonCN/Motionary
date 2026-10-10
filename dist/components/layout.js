@@ -166,6 +166,9 @@ function defineAutoAnimate(tag = 'usa-auto-animate') {
             super(...arguments);
             this._c = null;
         }
+        static get observedAttributes() {
+            return ['duration', 'no-scale'];
+        }
         enable() {
             this._c?.enable();
         }
@@ -247,4 +250,4 @@ function defineLayoutComponents() {
 }
 
 export { autoAnimate, defineAutoAnimate, defineLayoutComponents, defineMasonry, flipFrames, masonryLayout, sharedTransition };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/components/layout.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/components/layout.js.map

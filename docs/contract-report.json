@@ -3,11 +3,11 @@
   "version": 1,
   "summary": {
     "components": 207,
-    "clean": 164,
-    "findings": 102,
-    "exempt": 16,
+    "clean": 207,
+    "findings": 0,
+    "exempt": 26,
     "byRule": {
-      "attr-unobserved": 102,
+      "attr-unobserved": 0,
       "event-prefix": 0,
       "event-bubbles": 0,
       "keyboard-click-only": 0,
@@ -53,7 +53,14 @@
     {
       "tag": "usa-add-to-cart",
       "file": "src/components/widgets/add-to-cart.ts",
-      "attributes": [],
+      "attributes": [
+        "label",
+        "added",
+        "item",
+        "cart",
+        "from",
+        "hold"
+      ],
       "events": [
         "usa:add"
       ],
@@ -61,32 +68,7 @@
       "lifecycle": true,
       "reducedMotion": true,
       "exempt": [],
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "label"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "added"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "item"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "cart"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "from"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "hold"
-        }
-      ]
+      "findings": []
     },
     {
       "tag": "usa-ambient",
@@ -137,12 +119,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "exempt": [
-        {
-          "rule": "event-prefix",
-          "reason": "legacy usa-beat / usa-audio-error kept next to usa:beat / usa:audio-error until 12.0"
-        }
-      ],
+      "exempt": [],
       "findings": []
     },
     {
@@ -163,22 +140,16 @@
     {
       "tag": "usa-auto-animate",
       "file": "src/components/layout/elements.ts",
-      "attributes": [],
+      "attributes": [
+        "duration",
+        "no-scale"
+      ],
       "events": [],
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
       "exempt": [],
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "duration"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "no-scale"
-        }
-      ]
+      "findings": []
     },
     {
       "tag": "usa-auto-skeleton",
@@ -212,7 +183,11 @@
     {
       "tag": "usa-back-to-top",
       "file": "src/components/page/back-to-top.ts",
-      "attributes": [],
+      "attributes": [
+        "label",
+        "offset",
+        "focus-target"
+      ],
       "events": [],
       "keyboard": false,
       "lifecycle": true,
@@ -223,20 +198,7 @@
           "reason": "rAF only throttles the scroll-synced visibility check, no decorative motion"
         }
       ],
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "label"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "offset"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "focus-target"
-        }
-      ]
+      "findings": []
     },
     {
       "tag": "usa-badge",
@@ -258,7 +220,9 @@
     {
       "tag": "usa-badge-wall",
       "file": "src/components/widgets/badge-wall.ts",
-      "attributes": [],
+      "attributes": [
+        "label"
+      ],
       "events": [
         "usa:unlock"
       ],
@@ -266,12 +230,7 @@
       "lifecycle": false,
       "reducedMotion": true,
       "exempt": [],
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "label"
-        }
-      ]
+      "findings": []
     },
     {
       "tag": "usa-bar-chart",
@@ -312,26 +271,17 @@
     {
       "tag": "usa-blobs",
       "file": "src/components/background/bg-fx.ts",
-      "attributes": [],
+      "attributes": [
+        "colors",
+        "speed",
+        "blur"
+      ],
       "events": [],
       "keyboard": false,
       "lifecycle": false,
       "reducedMotion": true,
       "exempt": [],
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "colors"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "speed"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "blur"
-        }
-      ]
+      "findings": []
     },
     {
       "tag": "usa-bottom-sheet",
@@ -388,17 +338,13 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "exempt": [],
-      "findings": [
+      "exempt": [
         {
           "rule": "attr-unobserved",
-          "detail": "flipped"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "expanded"
+          "reason": "flipped, expanded: state reflected by the element itself (set the property instead); observing it would re-mount on every change"
         }
-      ]
+      ],
+      "findings": []
     },
     {
       "tag": "usa-card-stack",
@@ -462,7 +408,11 @@
     {
       "tag": "usa-cart-drawer",
       "file": "src/components/widgets/cart-drawer.ts",
-      "attributes": [],
+      "attributes": [
+        "label",
+        "items",
+        "currency"
+      ],
       "events": [
         "usa:open",
         "usa:close",
@@ -472,20 +422,7 @@
       "lifecycle": true,
       "reducedMotion": true,
       "exempt": [],
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "label"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "items"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "currency"
-        }
-      ]
+      "findings": []
     },
     {
       "tag": "usa-chapter-nav",
@@ -627,13 +564,13 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "exempt": [],
-      "findings": [
+      "exempt": [
         {
           "rule": "attr-unobserved",
-          "detail": "value"
+          "reason": "value: state reflected by the element itself (set the property instead); observing it would re-mount on every change"
         }
-      ]
+      ],
+      "findings": []
     },
     {
       "tag": "usa-command-palette",
@@ -826,7 +763,10 @@
     {
       "tag": "usa-disclosure",
       "file": "src/components/widgets/disclosure.ts",
-      "attributes": [],
+      "attributes": [
+        "multiple",
+        "spring"
+      ],
       "events": [
         "usa:toggle"
       ],
@@ -834,16 +774,7 @@
       "lifecycle": true,
       "reducedMotion": true,
       "exempt": [],
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "multiple"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "spring"
-        }
-      ]
+      "findings": []
     },
     {
       "tag": "usa-distort",
@@ -876,26 +807,17 @@
     {
       "tag": "usa-dot-network",
       "file": "src/components/background/bg-fx.ts",
-      "attributes": [],
+      "attributes": [
+        "gap",
+        "radius",
+        "color"
+      ],
       "events": [],
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
       "exempt": [],
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "gap"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "radius"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "color"
-        }
-      ]
+      "findings": []
     },
     {
       "tag": "usa-dotlottie",
@@ -918,7 +840,12 @@
     {
       "tag": "usa-double-tap",
       "file": "src/components/click/double-tap.ts",
-      "attributes": [],
+      "attributes": [
+        "disabled",
+        "delay",
+        "icon",
+        "color"
+      ],
       "events": [
         "usa:double-tap"
       ],
@@ -926,24 +853,7 @@
       "lifecycle": true,
       "reducedMotion": true,
       "exempt": [],
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "disabled"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "delay"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "icon"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "color"
-        }
-      ]
+      "findings": []
     },
     {
       "tag": "usa-draggable",
@@ -973,7 +883,12 @@
     {
       "tag": "usa-draw",
       "file": "src/components/svg/draw.ts",
-      "attributes": [],
+      "attributes": [
+        "duration",
+        "stagger",
+        "trigger",
+        "repeat"
+      ],
       "events": [
         "usa:complete"
       ],
@@ -981,24 +896,7 @@
       "lifecycle": true,
       "reducedMotion": true,
       "exempt": [],
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "duration"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "stagger"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "trigger"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "repeat"
-        }
-      ]
+      "findings": []
     },
     {
       "tag": "usa-drawer",
@@ -1041,13 +939,13 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "exempt": [],
-      "findings": [
+      "exempt": [
         {
           "rule": "attr-unobserved",
-          "detail": "open"
+          "reason": "open: state reflected by the element itself (set the property instead); observing it would re-mount on every change"
         }
-      ]
+      ],
+      "findings": []
     },
     {
       "tag": "usa-festival-banner",
@@ -1088,7 +986,12 @@
     {
       "tag": "usa-file-drop",
       "file": "src/components/widgets/file-drop.ts",
-      "attributes": [],
+      "attributes": [
+        "label",
+        "accept",
+        "multiple",
+        "simulate"
+      ],
       "events": [
         "usa:files"
       ],
@@ -1096,29 +999,15 @@
       "lifecycle": true,
       "reducedMotion": true,
       "exempt": [],
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "label"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "accept"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "multiple"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "simulate"
-        }
-      ]
+      "findings": []
     },
     {
       "tag": "usa-fullpage",
       "file": "src/components/page/fullpage.ts",
-      "attributes": [],
+      "attributes": [
+        "dots",
+        "axis"
+      ],
       "events": [
         "usa:section"
       ],
@@ -1126,16 +1015,7 @@
       "lifecycle": true,
       "reducedMotion": true,
       "exempt": [],
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "dots"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "axis"
-        }
-      ]
+      "findings": []
     },
     {
       "tag": "usa-fx",
@@ -1358,26 +1238,17 @@
     {
       "tag": "usa-grid-glow",
       "file": "src/components/background/bg-fx.ts",
-      "attributes": [],
+      "attributes": [
+        "size",
+        "radius",
+        "color"
+      ],
       "events": [],
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
       "exempt": [],
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "size"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "radius"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "color"
-        }
-      ]
+      "findings": []
     },
     {
       "tag": "usa-gyro-card",
@@ -1530,7 +1401,9 @@
     {
       "tag": "usa-kanban",
       "file": "src/components/widgets/kanban.ts",
-      "attributes": [],
+      "attributes": [
+        "label"
+      ],
       "events": [
         "usa:move"
       ],
@@ -1538,17 +1411,14 @@
       "lifecycle": true,
       "reducedMotion": true,
       "exempt": [],
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "label"
-        }
-      ]
+      "findings": []
     },
     {
       "tag": "usa-keyframe-editor",
       "file": "src/components/widgets/keyframe-editor.ts",
-      "attributes": [],
+      "attributes": [
+        "for"
+      ],
       "events": [
         "usa:change"
       ],
@@ -1556,12 +1426,7 @@
       "lifecycle": true,
       "reducedMotion": true,
       "exempt": [],
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "for"
-        }
-      ]
+      "findings": []
     },
     {
       "tag": "usa-kpi",
@@ -1578,18 +1443,22 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "exempt": [],
-      "findings": [
+      "exempt": [
         {
           "rule": "attr-unobserved",
-          "detail": "value"
+          "reason": "value: state reflected by the element itself (set the property instead); observing it would re-mount on every change"
         }
-      ]
+      ],
+      "findings": []
     },
     {
       "tag": "usa-leaderboard",
       "file": "src/components/widgets/leaderboard.ts",
-      "attributes": [],
+      "attributes": [
+        "label",
+        "limit",
+        "me"
+      ],
       "events": [
         "usa:rank"
       ],
@@ -1597,20 +1466,7 @@
       "lifecycle": false,
       "reducedMotion": true,
       "exempt": [],
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "label"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "limit"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "me"
-        }
-      ]
+      "findings": []
     },
     {
       "tag": "usa-like",
@@ -1663,26 +1519,17 @@
     {
       "tag": "usa-loading-bar",
       "file": "src/components/page/loading-bar.ts",
-      "attributes": [],
+      "attributes": [
+        "label",
+        "color",
+        "height"
+      ],
       "events": [],
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
       "exempt": [],
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "label"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "color"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "height"
-        }
-      ]
+      "findings": []
     },
     {
       "tag": "usa-location-card",
@@ -1775,7 +1622,10 @@
     {
       "tag": "usa-lyrics",
       "file": "src/components/widgets/lyrics.ts",
-      "attributes": [],
+      "attributes": [
+        "label",
+        "for"
+      ],
       "events": [
         "usa:seek"
       ],
@@ -1783,16 +1633,7 @@
       "lifecycle": true,
       "reducedMotion": true,
       "exempt": [],
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "label"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "for"
-        }
-      ]
+      "findings": []
     },
     {
       "tag": "usa-magnetic",
@@ -1829,7 +1670,14 @@
     {
       "tag": "usa-mask-reveal",
       "file": "src/components/svg/mask-reveal.ts",
-      "attributes": [],
+      "attributes": [
+        "shape",
+        "at",
+        "duration",
+        "delay",
+        "trigger",
+        "repeat"
+      ],
       "events": [
         "usa:complete"
       ],
@@ -1837,32 +1685,7 @@
       "lifecycle": true,
       "reducedMotion": true,
       "exempt": [],
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "shape"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "at"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "duration"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "delay"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "trigger"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "repeat"
-        }
-      ]
+      "findings": []
     },
     {
       "tag": "usa-masonry",
@@ -1932,18 +1755,20 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "exempt": [],
-      "findings": [
+      "exempt": [
         {
           "rule": "attr-unobserved",
-          "detail": "pressed"
+          "reason": "pressed: state reflected by the element itself (set the property instead); observing it would re-mount on every change"
         }
-      ]
+      ],
+      "findings": []
     },
     {
       "tag": "usa-message-list",
       "file": "src/components/widgets/message-list.ts",
-      "attributes": [],
+      "attributes": [
+        "label"
+      ],
       "events": [
         "usa:message"
       ],
@@ -1951,12 +1776,7 @@
       "lifecycle": true,
       "reducedMotion": true,
       "exempt": [],
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "label"
-        }
-      ]
+      "findings": []
     },
     {
       "tag": "usa-milestones",
@@ -2075,7 +1895,10 @@
     {
       "tag": "usa-motion-switch",
       "file": "src/components/page/motion-switch.ts",
-      "attributes": [],
+      "attributes": [
+        "labels",
+        "label"
+      ],
       "events": [
         "usa:change"
       ],
@@ -2083,16 +1906,7 @@
       "lifecycle": true,
       "reducedMotion": true,
       "exempt": [],
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "labels"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "label"
-        }
-      ]
+      "findings": []
     },
     {
       "tag": "usa-motion-theme",
@@ -2165,7 +1979,10 @@
     {
       "tag": "usa-navbar",
       "file": "src/components/ui/navbar.ts",
-      "attributes": [],
+      "attributes": [
+        "target",
+        "threshold"
+      ],
       "events": [
         "usa:hide",
         "usa:show"
@@ -2179,21 +1996,14 @@
           "reason": "rAF only throttles the scroll-synced hide / show check"
         }
       ],
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "target"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "threshold"
-        }
-      ]
+      "findings": []
     },
     {
       "tag": "usa-notification-bell",
       "file": "src/components/widgets/notification-bell.ts",
-      "attributes": [],
+      "attributes": [
+        "label"
+      ],
       "events": [
         "usa:notify",
         "usa:read"
@@ -2202,12 +2012,7 @@
       "lifecycle": true,
       "reducedMotion": true,
       "exempt": [],
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "label"
-        }
-      ]
+      "findings": []
     },
     {
       "tag": "usa-odometer",
@@ -2302,13 +2107,13 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "exempt": [],
-      "findings": [
+      "exempt": [
         {
           "rule": "attr-unobserved",
-          "detail": "page"
+          "reason": "page: state reflected by the element itself (set the property instead); observing it would re-mount on every change"
         }
-      ]
+      ],
+      "findings": []
     },
     {
       "tag": "usa-panorama",
@@ -2419,18 +2224,23 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "exempt": [],
-      "findings": [
+      "exempt": [
         {
           "rule": "attr-unobserved",
-          "detail": "paused"
+          "reason": "paused: state reflected by the element itself (set the property instead); observing it would re-mount on every change"
         }
-      ]
+      ],
+      "findings": []
     },
     {
       "tag": "usa-pinch-zoom",
       "file": "src/components/gesture/pinch-zoom.ts",
-      "attributes": [],
+      "attributes": [
+        "min",
+        "max",
+        "preset",
+        "double-tap"
+      ],
       "events": [
         "usa:zoom"
       ],
@@ -2438,24 +2248,7 @@
       "lifecycle": true,
       "reducedMotion": true,
       "exempt": [],
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "min"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "max"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "preset"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "double-tap"
-        }
-      ]
+      "findings": []
     },
     {
       "tag": "usa-player",
@@ -2474,12 +2267,7 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "exempt": [
-        {
-          "rule": "event-prefix",
-          "reason": "legacy usa-player-ready / usa-player-finish kept next to usa:ready / usa:finish until 12.0"
-        }
-      ],
+      "exempt": [],
       "findings": []
     },
     {
@@ -2525,22 +2313,20 @@
     {
       "tag": "usa-popover",
       "file": "src/components/ui/popover.ts",
-      "attributes": [],
+      "attributes": [
+        "placement"
+      ],
       "events": [],
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "exempt": [],
-      "findings": [
+      "exempt": [
         {
           "rule": "attr-unobserved",
-          "detail": "open"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "placement"
+          "reason": "open: state reflected by the element itself (set the property instead); observing it would re-mount on every change"
         }
-      ]
+      ],
+      "findings": []
     },
     {
       "tag": "usa-post-fx",
@@ -2587,7 +2373,12 @@
     {
       "tag": "usa-prize-wheel",
       "file": "src/components/widgets/prize-wheel.ts",
-      "attributes": [],
+      "attributes": [
+        "segments",
+        "label",
+        "turns",
+        "duration"
+      ],
       "events": [
         "usa:result"
       ],
@@ -2595,24 +2386,7 @@
       "lifecycle": true,
       "reducedMotion": true,
       "exempt": [],
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "segments"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "label"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "turns"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "duration"
-        }
-      ]
+      "findings": []
     },
     {
       "tag": "usa-product-gallery",
@@ -2689,33 +2463,32 @@
     {
       "tag": "usa-pull-cord",
       "file": "src/components/widgets/pull-cord.ts",
-      "attributes": [],
+      "attributes": [
+        "label",
+        "threshold"
+      ],
       "events": [
         "usa:change"
       ],
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "exempt": [],
-      "findings": [
+      "exempt": [
         {
           "rule": "attr-unobserved",
-          "detail": "label"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "on"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "threshold"
+          "reason": "on: state reflected by the element itself (set the property instead); observing it would re-mount on every change"
         }
-      ]
+      ],
+      "findings": []
     },
     {
       "tag": "usa-pull-refresh",
       "file": "src/components/ui/pull-refresh.ts",
-      "attributes": [],
+      "attributes": [
+        "threshold",
+        "disabled",
+        "label"
+      ],
       "events": [],
       "keyboard": false,
       "lifecycle": true,
@@ -2726,20 +2499,7 @@
           "reason": "touch gesture; the keyboard / button path is refresh()"
         }
       ],
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "threshold"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "disabled"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "label"
-        }
-      ]
+      "findings": []
     },
     {
       "tag": "usa-radar",
@@ -2762,7 +2522,11 @@
     {
       "tag": "usa-reactions",
       "file": "src/components/widgets/reactions.ts",
-      "attributes": [],
+      "attributes": [
+        "emojis",
+        "counts",
+        "picker"
+      ],
       "events": [
         "usa:react"
       ],
@@ -2770,20 +2534,7 @@
       "lifecycle": true,
       "reducedMotion": true,
       "exempt": [],
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "emojis"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "counts"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "picker"
-        }
-      ]
+      "findings": []
     },
     {
       "tag": "usa-red-envelope",
@@ -3302,7 +3053,12 @@
     {
       "tag": "usa-splash",
       "file": "src/components/page/splash.ts",
-      "attributes": [],
+      "attributes": [
+        "label",
+        "manual",
+        "min",
+        "exit"
+      ],
       "events": [
         "usa:done"
       ],
@@ -3310,24 +3066,7 @@
       "lifecycle": true,
       "reducedMotion": true,
       "exempt": [],
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "label"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "manual"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "min"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "exit"
-        }
-      ]
+      "findings": []
     },
     {
       "tag": "usa-split-text",
@@ -3451,13 +3190,13 @@
       "keyboard": false,
       "lifecycle": true,
       "reducedMotion": true,
-      "exempt": [],
-      "findings": [
+      "exempt": [
         {
           "rule": "attr-unobserved",
-          "detail": "value"
+          "reason": "value: state reflected by the element itself (set the property instead); observing it would re-mount on every change"
         }
-      ]
+      ],
+      "findings": []
     },
     {
       "tag": "usa-sticky-stack",
@@ -3521,12 +3260,7 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "exempt": [
-        {
-          "rule": "event-prefix",
-          "reason": "legacy usa-story-step kept next to usa:step until 12.0"
-        }
-      ],
+      "exempt": [],
       "findings": []
     },
     {
@@ -3549,7 +3283,10 @@
     {
       "tag": "usa-swipe-deck",
       "file": "src/components/widgets/swipe-deck.ts",
-      "attributes": [],
+      "attributes": [
+        "label",
+        "threshold"
+      ],
       "events": [
         "usa:swipe",
         "usa:empty"
@@ -3558,16 +3295,7 @@
       "lifecycle": true,
       "reducedMotion": true,
       "exempt": [],
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "label"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "threshold"
-        }
-      ]
+      "findings": []
     },
     {
       "tag": "usa-swipeable",
@@ -3605,13 +3333,13 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "exempt": [],
-      "findings": [
+      "exempt": [
         {
           "rule": "attr-unobserved",
-          "detail": "checked"
+          "reason": "checked: state reflected by the element itself (set the property instead); observing it would re-mount on every change"
         }
-      ]
+      ],
+      "findings": []
     },
     {
       "tag": "usa-tab-bar",
@@ -3642,13 +3370,13 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "exempt": [],
-      "findings": [
+      "exempt": [
         {
           "rule": "attr-unobserved",
-          "detail": "selected"
+          "reason": "selected: state reflected by the element itself (set the property instead); observing it would re-mount on every change"
         }
-      ]
+      ],
+      "findings": []
     },
     {
       "tag": "usa-terminal",
@@ -3971,18 +3699,22 @@
       "keyboard": true,
       "lifecycle": true,
       "reducedMotion": true,
-      "exempt": [],
-      "findings": [
+      "exempt": [
         {
           "rule": "attr-unobserved",
-          "detail": "value"
+          "reason": "value: state reflected by the element itself (set the property instead); observing it would re-mount on every change"
         }
-      ]
+      ],
+      "findings": []
     },
     {
       "tag": "usa-water-ripple",
       "file": "src/components/background/bg-fx.ts",
-      "attributes": [],
+      "attributes": [
+        "damping",
+        "color",
+        "strength"
+      ],
       "events": [],
       "keyboard": false,
       "lifecycle": true,
@@ -3993,20 +3725,7 @@
           "reason": "decorative ripple under the pointer, no action"
         }
       ],
-      "findings": [
-        {
-          "rule": "attr-unobserved",
-          "detail": "damping"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "color"
-        },
-        {
-          "rule": "attr-unobserved",
-          "detail": "strength"
-        }
-      ]
+      "findings": []
     },
     {
       "tag": "usa-wave-text",

@@ -28,6 +28,9 @@ export function defineBadgeWall(tag = 'usa-badge-wall'): CustomElementConstructo
     tag,
     (Base) => {
       class UsaBadgeWall extends Base {
+        static get observedAttributes(): string[] {
+          return ['label'];
+        }
         private _b: WallBadge[] = [];
         get badges(): WallBadge[] {
           return this._b.map((b) => ({ ...b }));

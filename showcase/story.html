@@ -59,7 +59,7 @@
   <header>
     <p><a href="./components.html">← Components</a> · <a href="./playground.html">Playground</a></p>
     <h1>Scroll stories with &lt;usa-story&gt;</h1>
-    <p>Six scroll-storytelling templates (5.4) — each sets <code>--usa-story-progress</code> and fires <code>usa-story-step</code>. Under reduced motion nothing slides or zooms: the gallery stacks, counters show their final values.</p>
+    <p>Six scroll-storytelling templates (5.4) — each sets <code>--usa-story-progress</code> and fires <code>usa:step</code>. Under reduced motion nothing slides or zooms: the gallery stacks, counters show their final values.</p>
   </header>
 
   <span class="label">template="pin"</span>
@@ -118,7 +118,7 @@
 
   <script type="module">
     const LOCAL = new URL('../dist/', import.meta.url).href;
-    const CDN = 'https://cdn.jsdelivr.net/npm/motionary@11/dist/';
+    const CDN = 'https://cdn.jsdelivr.net/npm/motionary@12/dist/';
     let lib;
     try { lib = await import(LOCAL + 'components/effects.js'); } catch { lib = await import(CDN + 'components/effects.js'); }
     lib.defineStory();

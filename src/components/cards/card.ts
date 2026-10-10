@@ -41,6 +41,7 @@ export interface UsaCardElement extends UsaElement {
 }
 
 export function defineCard(tag = 'usa-card'): CustomElementConstructor | undefined {
+  // contract-exempt: attr-unobserved — flipped, expanded: state reflected by the element itself (set the property instead); observing it would re-mount on every change
   return defineElement(
     tag,
     (Base) =>

@@ -21,6 +21,9 @@ export function defineLoadingBar(tag = 'usa-loading-bar'): CustomElementConstruc
     tag,
     (Base) =>
       class UsaLoadingBar extends Base {
+        static get observedAttributes(): string[] {
+          return ['label', 'color', 'height'];
+        }
         private _p = 0;
         private _t: ReturnType<typeof setInterval> | undefined;
         private _h: ReturnType<typeof setTimeout> | undefined;

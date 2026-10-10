@@ -85,6 +85,9 @@ function defineDraw(tag = 'usa-draw') {
             this._p = 0;
             this._id = 0;
         }
+        static get observedAttributes() {
+            return ['duration', 'stagger', 'trigger', 'repeat'];
+        }
         get progress() {
             return this._p;
         }
@@ -232,6 +235,9 @@ const MASK_SHAPES = {
 };
 function defineMaskReveal(tag = 'usa-mask-reveal') {
     return defineElement(tag, (Base) => class UsaMaskReveal extends Base {
+        static get observedAttributes() {
+            return ['shape', 'at', 'duration', 'delay', 'trigger', 'repeat'];
+        }
         frames() {
             const s = MASK_SHAPES[this.str('shape', 'circle')] || MASK_SHAPES.circle;
             const at = this.str('at');
@@ -351,4 +357,4 @@ function defineSvgComponents() {
 }
 
 export { ANIM_ICONS, MASK_SHAPES, defineAnimIcon, defineDraw, defineMaskReveal, defineMorph, defineSvgComponents, drawLines, interpolatePath, morphTo, pathsCompatible };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/components/svg.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/components/svg.js.map

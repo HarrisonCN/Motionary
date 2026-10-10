@@ -16,10 +16,14 @@ export interface UsaPullCordElement extends UsaElement {
 }
 
 export function definePullCord(tag = 'usa-pull-cord'): CustomElementConstructor | undefined {
+  // contract-exempt: attr-unobserved — on: state reflected by the element itself (set the property instead); observing it would re-mount on every change
   return defineElement(
     tag,
     (Base) => {
       class UsaPullCord extends Base {
+        static get observedAttributes(): string[] {
+          return ['label', 'threshold'];
+        }
         private _on = false;
         private _raf = 0;
         private _x = 0;

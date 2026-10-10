@@ -1,8 +1,8 @@
-# Motionary 11.9.0
+# Motionary 12.0.0
 
 > Motionary is a zero-dependency motion library: scroll animations, 200+ presets and 209 animated Web Components (<usa-*>) that work in plain HTML and every framework, plus motionary/runtime — its own tween/timeline engine and format loaders.
 
-Install: `npm i motionary` · CDN: https://unpkg.com/motionary@11/dist/components.umd.js (+ https://unpkg.com/motionary@11/dist/widgets.umd.js for 6.x+ widgets) · Manifest: https://harrisoncn.github.io/Motionary/components.json · Full text: https://harrisoncn.github.io/Motionary/llms-full.txt
+Install: `npm i motionary` · CDN: https://unpkg.com/motionary@12/dist/components.umd.js (+ https://unpkg.com/motionary@12/dist/widgets.umd.js for 6.x+ widgets) · Manifest: https://harrisoncn.github.io/Motionary/components.json · Full text: https://harrisoncn.github.io/Motionary/llms-full.txt
 
 Rules for using a component: (1) import its define function from `import.path` and call it once (or load the CDN bundle); (2) if `requires` is non-empty, install / import / register the prerequisites first (see the component's Prerequisites); (3) then use the tag in HTML.
 

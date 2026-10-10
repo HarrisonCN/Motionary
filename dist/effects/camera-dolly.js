@@ -13,4 +13,4 @@ function registerCameraDolly() {
 }
 
 export { effect, registerCameraDolly as register, registerCameraDolly };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/effects/camera-dolly.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/effects/camera-dolly.js.map

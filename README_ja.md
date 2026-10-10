@@ -26,12 +26,12 @@ npm i motionary
 
 ```html
 <!-- CDN (no build) -->
-<script src="https://unpkg.com/motionary@11/dist/index.umd.js"></script>            <!-- window.ScrollAnimate -->
-<script src="https://unpkg.com/motionary@11/dist/presets-extended.umd.js"></script> <!-- +181 presets -->
-<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>       <!-- every <usa-*>, window.UsaComponents -->
+<script src="https://unpkg.com/motionary@12/dist/index.umd.js"></script>            <!-- window.ScrollAnimate -->
+<script src="https://unpkg.com/motionary@12/dist/presets-extended.umd.js"></script> <!-- +181 presets -->
+<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>       <!-- every <usa-*>, window.UsaComponents -->
 ```
 
-jsDelivr も利用できます：`https://cdn.jsdelivr.net/npm/motionary@11/dist/…`。既存の `use-scroll-animate` と `unpkg.com/use-scroll-animate@6` の URL もそのまま動きます。
+jsDelivr も利用できます：`https://cdn.jsdelivr.net/npm/motionary@12/dist/…`。既存の `use-scroll-animate` と `unpkg.com/use-scroll-animate@6` の URL もそのまま動きます。
 
 ## 30 秒クイックスタート
 

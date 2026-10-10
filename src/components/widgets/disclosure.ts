@@ -22,6 +22,9 @@ export function defineDisclosure(tag = 'usa-disclosure'): CustomElementConstruct
     tag,
     (Base) => {
       class UsaDisclosure extends Base {
+        static get observedAttributes(): string[] {
+          return ['multiple', 'spring'];
+        }
         private _anims = new WeakMap<HTMLDetailsElement, Animation>();
         get items(): HTMLDetailsElement[] {
           return Array.from(this.children).filter((c): c is HTMLDetailsElement => c.localName === 'details');

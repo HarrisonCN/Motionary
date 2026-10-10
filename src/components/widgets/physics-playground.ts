@@ -70,6 +70,7 @@ export const PHYSICS_PRESETS: Record<string, () => unknown> = {
 };
 
 export function definePhysicsPlayground(tag = 'usa-physics-playground'): CustomElementConstructor | undefined {
+  // contract-exempt: attr-unobserved — paused: state reflected by the element itself (set the property instead); observing it would re-mount on every change
   return defineElement(
     tag,
     (Base) => {

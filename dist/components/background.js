@@ -421,6 +421,9 @@ function canvasLoop(host, draw, still) {
 }
 function defineGridGlow(tag = 'usa-grid-glow') {
     return defineElement(tag, (Base) => class extends Base {
+        static get observedAttributes() {
+            return ['size', 'radius', 'color'];
+        }
         mount() {
             this.style.setProperty('--usa-grid', `${this.num('size', 32)}px`);
             this.style.setProperty('--usa-grid-r', `${this.num('radius', 220)}px`);
@@ -448,6 +451,9 @@ function defineGridGlow(tag = 'usa-grid-glow') {
 }
 function defineBlobs(tag = 'usa-blobs') {
     return defineElement(tag, (Base) => class extends Base {
+        static get observedAttributes() {
+            return ['colors', 'speed', 'blur'];
+        }
         mount() {
             this.querySelector(':scope > .usa-blobs-layer')?.remove();
             const colors = this.str('colors', '#7c5cff,#22d3ee,#f472b6,#34d399').split(',');
@@ -466,6 +472,9 @@ function defineWaterRipple(tag = 'usa-water-ripple') {
         constructor() {
             super(...arguments);
             this._drop = null;
+        }
+        static get observedAttributes() {
+            return ['damping', 'color', 'strength'];
         }
         drop(x, y, s = 1) {
             this._drop?.(x, y, s);
@@ -526,6 +535,9 @@ function defineWaterRipple(tag = 'usa-water-ripple') {
 }
 function defineDotNetwork(tag = 'usa-dot-network') {
     return defineElement(tag, (Base) => class extends Base {
+        static get observedAttributes() {
+            return ['gap', 'radius', 'color'];
+        }
         mount() {
             const gap = Math.max(8, this.num('gap', 28));
             const R = this.num('radius', 140);
@@ -645,4 +657,4 @@ function defineBackgroundComponents() {
 }
 
 export { defineAcrylic, defineAurora, defineBackgroundComponents, defineBlobs, defineDotNetwork, defineGrain, defineGridGlow, defineMarquee, defineParticles, defineWaterRipple, fluentPreset };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/components/background.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/components/background.js.map
