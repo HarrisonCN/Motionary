@@ -1,3 +1,0 @@
-/* motionary/components/layout */
-.usa-sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
-usa-auto-animate{display:block}usa-masonry{display:block;column-width:220px;column-gap:16px}usa-masonry>*{break-inside:avoid;margin-bottom:16px}usa-masonry[data-js]{position:relative;columns:auto}usa-masonry[data-js]>*{position:absolute;left:0;top:0;margin:0;box-sizing:border-box;transition:transform 0.45s cubic-bezier(0.22,1,0.36,1)}@media (prefers-reduced-motion:reduce){usa-masonry[data-js]>*{transition:none}}
