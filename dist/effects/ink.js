@@ -14,4 +14,4 @@ function registerInk() {
 }
 
 export { effect, registerInk as register, registerInk };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/effects/ink.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/effects/ink.js.map

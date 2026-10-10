@@ -12,13 +12,14 @@ const major = String(m.version).split('.')[0];
 const pkg = JSON.parse(read('package.json'));
 const exportsMap = (R as any).exportsToMap?.(pkg.exports) ?? {}; // tolerant so each test reports on its own (13.0.1 has no exportsToMap)
 const byTag = (t: string) => m.components.find((c: any) => c.tag === t);
-const reveal = byTag('usa-reveal'), snap = byTag('usa-snap-carousel'), rive = byTag('usa-rive');
-const html = (c: any) => (R as any).starterCode(c, 'html', { version: m.version });
+const reveal = byTag('usa-reveal'), snap = byTag('usa-snap-carousel'), rive = byTag('usa-rive'), splitter = byTag('usa-text-splitter');
+const html = (c: any) => (R as any).starterCode(c, 'html', { version: m.version, exportsMap });
 const esm = (c: any) => (R as any).starterCode(c, 'esm', { version: m.version });
 
 describe('13.0.2 one source of truth: Copy == Download == editor', () => {
   it('starter code is the 12.4 page / npm snippet', () => {
     expect(html(reveal)).toBe(R.runnablePage(reveal, { version: m.version }));
+    expect(html(snap)).toBe((R.runnablePage as any)(snap, { version: m.version, exportsMap }));
     expect(esm(snap)).toBe(R.esmSnippet(snap));
   });
   it('downloadFile returns exactly the editor text (edited, not the sample), named per tab', () => {
@@ -58,7 +59,7 @@ describe('13.0.2 Run uses the whole document (HTML / CDN tab)', () => {
   });
   it('swaps this major\'s CDN for the local dist/, leaves other versions alone', () => {
     const doc = D(), edited = E();
-    expect(doc).toContain('<script src="/dist/components.umd.js"></script>');
+    expect(doc).toContain('<script crossorigin="anonymous" src="/dist/components.umd.js"></script>');
     expect(doc).not.toMatch(new RegExp(`motionary@${major}/dist/`));
     const pinned = edited.replace(`motionary@${major}/`, 'motionary@12.4.0/');
     expect((R as any).previewDocument(pinned, reveal, { mode: 'html', base: '/dist/', version: m.version })).toContain('motionary@12.4.0/dist/');
@@ -67,13 +68,15 @@ describe('13.0.2 Run uses the whole document (HTML / CDN tab)', () => {
     const doc = D();
     const i = doc.indexOf('__motionaryPlayground');
     expect(i).toBeGreaterThan(-1);
-    expect(i).toBeLessThan(doc.indexOf('<script src='));
+    expect(i).toBeLessThan(doc.indexOf('components.umd.js'));
     expect(doc).toContain('"t1"');
   });
   it('a markup-only editor runs inside the sample page (prerequisites + bundles)', () => {
-    const d = (R as any).previewDocument('<usa-snap-carousel><article>1</article></usa-snap-carousel>', snap, { mode: 'html', base: '/dist/', version: m.version });
-    expect(d).toContain('<script src="/dist/runtime/drag-snap.iife.js"></script>');
-    expect(d).toContain('<usa-snap-carousel><article>1</article></usa-snap-carousel>');
+    const d = (R as any).previewDocument('<usa-text-splitter>Hi</usa-text-splitter>', splitter, { mode: 'html', base: '/dist/', version: m.version });
+    expect(d).toContain('src="/dist/runtime/text.iife.js"></script>');
+    expect(d).toContain('<usa-text-splitter>Hi</usa-text-splitter>');
+    const e = (R as any).previewDocument('<usa-snap-carousel><article>1</article></usa-snap-carousel>', snap, { mode: 'html', base: '/dist/', version: m.version, exportsMap });
+    expect(e).toContain('"motionary/runtime/drag-snap": "/dist/runtime/drag-snap.js"');
   });
 });
 
@@ -112,19 +115,26 @@ describe('13.0.2 problems: missing prerequisites, unknown imports, runtime error
     }
   });
   it('HTML: a removed prerequisite names the module and the exact <script> line', () => {
-    const code = html(snap).split('\n').filter((l: string) => !l.includes('runtime/drag-snap.iife.js')).join('\n');
-    const ps = (R as any).checkCode(code, snap, { mode: 'html', exportsMap });
+    const code = html(splitter).split('\n').filter((l: string) => !l.includes('runtime/text.iife.js')).join('\n');
+    const ps = (R as any).checkCode(code, splitter, { mode: 'html', exportsMap });
     expect(ps[0].level).toBe('error');
-    expect(msgs(ps)).toContain('motionary/runtime/drag-snap');
-    expect(msgs(ps)).toContain(`<script src="https://cdn.jsdelivr.net/npm/motionary@${major}/dist/runtime/drag-snap.iife.js"></script>`);
+    expect(msgs(ps)).toContain('motionary/runtime/text');
+    expect(msgs(ps)).toContain(`<script src="https://cdn.jsdelivr.net/npm/motionary@${major}/dist/runtime/text.iife.js"></script>`);
   });
   it('HTML: prerequisites after the bundle are flagged with the order to use', () => {
-    const lines = html(snap).split('\n');
-    const i = lines.findIndex((l: string) => l.includes('runtime/drag-snap.iife.js'));
+    const lines = html(splitter).split('\n');
+    const i = lines.findIndex((l: string) => l.includes('runtime/text.iife.js'));
     const [mod] = lines.splice(i, 1);
     lines.splice(lines.findIndex((l: string) => l.startsWith('<body>')), 0, mod);
-    const ps = (R as any).checkCode(lines.join('\n'), snap, { mode: 'html', exportsMap });
+    const ps = (R as any).checkCode(lines.join('\n'), splitter, { mode: 'html', exportsMap });
     expect(msgs(ps)).toMatch(/before/);
+  });
+  it('HTML: an ES-module-only component without its module script gets the module code to add', () => {
+    const code = html(snap).replace(/<script type="module">[\s\S]*?<\/script>\n/, '');
+    const ps = (R as any).checkCode(code, snap, { mode: 'html', exportsMap });
+    expect(msgs(ps)).toContain('use(dragSnap);');
+    const noUse = html(snap).replace('use(dragSnap);', '');
+    expect(msgs((R as any).checkCode(noUse, snap, { mode: 'html', exportsMap }))).toContain('use(dragSnap);');
   });
   it('HTML: a missing component bundle is an error with its line', () => {
     const code = html(reveal).replace(/<script src="[^"]*components\.umd\.js"><\/script>\n/, '');
@@ -149,9 +159,44 @@ describe('13.0.2 problems: missing prerequisites, unknown imports, runtime error
     expect(er.message).toContain('foo is not defined');
     const spec = (R as any).explainReport({ kind: 'error', message: 'Failed to resolve module specifier "lodash". Relative references must start with either "/", "./", or "../".' }, reveal, 'esm');
     expect(spec.fix).toMatch(/npm i lodash|import map/);
+    expect((R as any).explainReport({ kind: 'error', message: "Uncaught TypeError: Failed to construct 'URL': Invalid URL" }, reveal, 'html').fix).toContain('absolute https:// URL');
     expect((R as any).explainReport({ kind: 'ready', undefined: [] }, reveal, 'html')).toBe(null);
     expect((R as any).explainReport({ kind: 'nonsense' }, reveal, 'html')).toBe(null);
     expect((R as any).explainReport('<img src=x>', reveal, 'html')).toBe(null);
+  });
+});
+
+describe('13.0.2 HTML pages that need ES modules', () => {
+  it('ESM_ONLY lists exactly the components no CDN bundle defines', () => {
+    const bundles: Record<string, string> = {};
+    const text = (f: string) => (bundles[f] ??= (() => { try { return read('dist/' + f); } catch { return ''; } })());
+    const none = m.components.filter((c: any) => {
+      const all = [c.cdn.split('/dist/')[1], 'components.umd.js', 'widgets.umd.js'].map(text).join('\n');
+      const short = c.tag.slice(4);
+      return !all.includes(c.tag) && !all.includes(`"${short}"`) && !all.includes(`'${short}'`) && !all.includes(c.import?.define || '@@');
+    }).map((c: any) => c.tag).sort();
+    if (!text('components.umd.js')) return; // dist not built
+    expect(none).toEqual([...(R as any).ESM_ONLY].sort());
+  });
+  it('an ESM_ONLY page loads the component through an import map + module script (prerequisites first)', () => {
+    const p = html(snap);
+    expect(p).toContain('<script type="importmap">');
+    expect(p).toContain(`"motionary/runtime/drag-snap": "https://cdn.jsdelivr.net/npm/motionary@${major}/dist/runtime/drag-snap.js"`);
+    expect(p).toContain('<script type="module">\n' + snap.prerequisites.importAndRegister);
+    expect(p).not.toContain('components.umd.js');
+  });
+  it('bare imports in an example\'s module script get an import map; a page without one is flagged', () => {
+    const aa = byTag('usa-auto-animate');
+    const p = html(aa);
+    expect(p).toContain(`"motionary/components/layout": "https://cdn.jsdelivr.net/npm/motionary@${major}/dist/${exportsMap['motionary/components/layout']}"`);
+    expect(p.indexOf('type="importmap"')).toBeLessThan(p.indexOf('type="module"'));
+    const without = R.runnablePage(aa, { version: m.version });
+    const ps = (R as any).checkCode(without, aa, { mode: 'html', exportsMap });
+    expect(ps.map((x: any) => x.message + x.fix).join()).toContain('"motionary/components/layout"');
+  });
+  it('preview: same-site scripts load with crossorigin so errors are not "Script error."', () => {
+    const d = (R as any).previewDocument(html(reveal), reveal, { mode: 'html', base: 'http://site/dist/', version: m.version });
+    expect(d).toContain('<script crossorigin="anonymous" src="http://site/dist/components.umd.js"></script>');
   });
 });
 
@@ -162,7 +207,8 @@ describe('13.0.2 isolation and page wiring', () => {
     expect((R as any).PREVIEW_SANDBOX).toBe('allow-scripts');
     expect(h).toContain('sandbox="allow-scripts"');
     expect(h).not.toMatch(/allow-same-origin|allow-top-navigation|allow-popups|allow-modals/);
-    expect(h).not.toMatch(/\.sandbox\s*=|setAttribute\(['"]sandbox/);
+    expect(h).not.toMatch(/\.sandbox\s*=|setAttribute\(['"]sandbox|createElement\(['"]iframe/);
+    expect(h).toContain("old.cloneNode(false)"); // each run gets a fresh frame with the same sandbox attribute
   });
   it('messages are accepted only from the current preview run and rendered as text', () => {
     expect(h).toMatch(/e\.source !== \$\('preview'\)\.contentWindow/);

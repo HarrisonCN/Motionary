@@ -12,4 +12,4 @@ function registerNeuPress() {
 }
 
 export { effect, registerNeuPress as register, registerNeuPress };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/effects/neu-press.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/effects/neu-press.js.map

@@ -16,4 +16,4 @@ function registerCrumple() {
 exports.effect = effect;
 exports.register = registerCrumple;
 exports.registerCrumple = registerCrumple;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/effects/crumple.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/effects/crumple.cjs.map

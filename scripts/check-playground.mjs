@@ -5,11 +5,14 @@
 //
 // Checks (docs/ROADMAP + Q4 plan, v13.0.2 acceptance):
 //  edit-run        an edit anywhere in the HTML document (head and body) shows up in the preview after Run
+//  rapid-run       Run pressed again while the previous preview is loading shows the last edit
 //  copy-download   Copy and Download hand out exactly the code in the editor (not the original sample)
-//  standalone      the downloaded .html opens on its own (file://) and the component registers from the CDN
+//  standalone      the downloaded .html opens on its own (file://) and the component registers from its CDN URLs
+//                  (served from this build's dist/ unless PLAYGROUND_REAL_CDN=1)
 //  tabs-keep-edits switching HTML (CDN) ↔ npm + bundler keeps each tab's edits
 //  esm-run         the npm + bundler tab runs the edited module through an import map
 //  isolation       a user script cannot reach the playground page (parent / top / storage) or inject markup into it
+//  module-samples  pages whose component or example needs ES modules (no CDN bundle / bare imports) register and resolve
 //  missing-prereq  removing a prerequisite <script> shows the module and the exact line that fixes it
 //  runtime-error   a script error in the preview is shown under the editor
 //  esm-unknown     an import that motionary does not export is named with a fix
@@ -40,7 +43,7 @@ function serve() {
   return new Promise((ok) => srv.listen(0, '127.0.0.1', () => ok({ srv, port: srv.address().port })));
 }
 
-async function openTab(b, url, { width = 1280, height = 900, mobile = false, init } = {}) {
+async function openTab(b, url, { width = 1280, height = 900, mobile = false, init, cdnFromDist = false } = {}) {
   const { targetId } = await b.send('Target.createTarget', { url: 'about:blank' });
   const { sessionId } = await b.send('Target.attachToTarget', { targetId, flatten: true });
   const s = (m, p) => b.send(m, p, sessionId);
@@ -48,6 +51,14 @@ async function openTab(b, url, { width = 1280, height = 900, mobile = false, ini
   const onMsg = (m) => {
     if (m.method === 'Target.attachedToTarget' && m.sessionId === sessionId && m.params.targetInfo.type === 'iframe') frames.set(m.params.targetInfo.targetId, m.params.sessionId);
     if (m.method === 'Target.detachedFromTarget' && m.sessionId === sessionId) for (const [k, v] of frames) if (v === m.params.sessionId) frames.delete(k);
+    if (m.method === 'Fetch.requestPaused' && m.sessionId === sessionId) {
+      // the page keeps its CDN URLs; their bytes come from this build's dist/ (deterministic, and the release under
+      // test is not on the CDN yet). PLAYGROUND_REAL_CDN=1 lets them through to the network instead.
+      const hit = m.params.request.url.match(/motionary@[^/]+\/dist\/([^?#]+)/);
+      const f = hit && join(ROOT, 'dist', normalize(hit[1]));
+      if (f && f.startsWith(join(ROOT, 'dist')) && existsSync(f)) s('Fetch.fulfillRequest', { requestId: m.params.requestId, responseCode: 200, responseHeaders: [{ name: 'content-type', value: TYPES[extname(f)] || 'text/javascript' }, { name: 'access-control-allow-origin', value: '*' }], body: readFileSync(f).toString('base64') }).catch(() => {});
+      else s('Fetch.continueRequest', { requestId: m.params.requestId }).catch(() => {});
+    }
   };
   b.listeners.push(onMsg);
   await s('Page.enable'); await s('Runtime.enable');
@@ -55,6 +66,7 @@ async function openTab(b, url, { width = 1280, height = 900, mobile = false, ini
   await s('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: mobile ? 2 : 1, mobile });
   if (mobile) await s('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 5 });
   if (init) await s('Page.addScriptToEvaluateOnNewDocument', { source: init });
+  if (cdnFromDist && !process.env.PLAYGROUND_REAL_CDN) await s('Fetch.enable', { patterns: [{ urlPattern: '*motionary@*' }] });
   await s('Page.navigate', { url });
   const ev = async (expression) => {
     const r = await s('Runtime.evaluate', { expression, awaitPromise: true, returnByValue: true });
@@ -63,20 +75,23 @@ async function openTab(b, url, { width = 1280, height = 900, mobile = false, ini
   };
   // evaluate inside the preview iframe (the parent cannot: it is sandboxed without allow-same-origin)
   const frameEv = async (expression) => {
+    // the preview may be in-process (isolated world on the child frame) or an out-of-process iframe target; a sandboxed
+    // srcdoc frame can change process on every Run, so ask every candidate and keep the first non-empty answer
+    let reached = false, empty = null;
     const tree = await s('Page.getFrameTree');
-    const child = (tree.frameTree.childFrames || [])[0];
-    if (child) {
+    for (const child of tree.frameTree.childFrames || []) {
       try {
         const { executionContextId } = await s('Page.createIsolatedWorld', { frameId: child.frame.id, worldName: 'check' });
         const r = await s('Runtime.evaluate', { expression, contextId: executionContextId, awaitPromise: true, returnByValue: true });
-        if (!r.exceptionDetails) return r.result.value;
+        if (!r.exceptionDetails) { reached = true; if (r.result.value != null && r.result.value !== false) return r.result.value; empty = r.result.value; }
       } catch {}
     }
     for (const fs of [...frames.values()].reverse()) {
       const r = await b.send('Runtime.evaluate', { expression, awaitPromise: true, returnByValue: true }, fs).catch(() => null);
-      if (r && !r.exceptionDetails) return r.result.value;
+      if (r && !r.exceptionDetails) { reached = true; if (r.result.value != null && r.result.value !== false) return r.result.value; empty = r.result.value; }
     }
-    throw new Error('preview frame not reachable');
+    if (!reached) throw new Error('preview frame not reachable');
+    return empty;
   };
   const shot = async (name) => {
     if (!SHOTS) return null;
@@ -126,10 +141,20 @@ export async function main() {
     await check('edit-run', async () => {
       if (edited === original) return 'sample changed: could not apply the edit';
       await t.ev(setCode(edited)); await t.ev(click('#run'));
-      const r = await until(() => t.frameEv(`(() => { const h = document.getElementById('edited'); return h && document.getElementById('head-edit') && customElements.get('usa-reveal') ? { text: h.textContent, color: getComputedStyle(h).color, title: document.title } : null; })()`));
-      if (!r || typeof r !== 'object') return 'preview does not show the edit: ' + JSON.stringify(r);
+      const r = await until(() => t.frameEv(`(() => { const h = document.getElementById('edited'); return h && document.getElementById('head-edit') && customElements.get('usa-reveal') ? { text: h.textContent, color: getComputedStyle(h).color, title: document.title } : null; })()`), 25000);
+      if (!r || typeof r !== 'object') {
+        const diag = { srcdocHasEdit: await t.ev(`document.getElementById('preview').srcdoc.includes('id="edited"')`), frame: await t.frameEv(`location.href + ' ' + document.readyState + ' ' + !!document.getElementById('edited') + ' ' + !!document.getElementById('head-edit') + ' ' + !!customElements.get('usa-reveal')`).catch((e) => e.message), msg: await t.ev(`document.getElementById('msg').textContent + ' | ' + ${problems}`) };
+        return 'preview does not show the edit: ' + JSON.stringify(r) + ' ' + JSON.stringify(diag);
+      }
       return r.text === 'Edited in the playground' && r.color === 'rgb(255, 0, 0)' && /\(edited\)/.test(r.title) ? true : 'head edit missing in preview: ' + JSON.stringify(r);
     });
+    await check('rapid-run', async () => {
+      // Run clicked again while the previous preview is still loading: the last edit wins
+      for (const n of [1, 2, 3]) { await t.ev(setCode(original.replace('<h2>Hello</h2>', `<h2 id="rapid">Run ${n}</h2>`))); await t.ev(click('#run')); }
+      const r = await until(() => t.frameEv(`(document.getElementById('rapid') || {}).textContent || null`).then((x) => (x === 'Run 3' ? x : null)), 20000);
+      return r === 'Run 3' ? true : 'preview did not show the last Run: ' + JSON.stringify(r);
+    });
+    await t.ev(setCode(edited));
     await check('copy-download', async () => {
       await t.ev(click('#copy'));
       const copied = await until(() => t.ev('window.__copied'));
@@ -146,7 +171,7 @@ export async function main() {
     await check('standalone', async () => {
       const file = readdirSync(dl).find((f) => /\.html$/.test(f));
       if (!file) return 'no downloaded file';
-      const sa = await openTab(b, pathToFileURL(join(dl, file)).href);
+      const sa = await openTab(b, pathToFileURL(join(dl, file)).href, { cdnFromDist: true });
       try {
         const r = await until(() => sa.ev(`(() => { const h = document.getElementById('edited'); return h && customElements.get('usa-reveal') ? { text: h.textContent, color: getComputedStyle(h).color } : null; })()`), 30000);
         if (!r || typeof r !== 'object') return 'standalone page did not run: ' + JSON.stringify(r);
@@ -194,18 +219,35 @@ export async function main() {
     await t.close();
 
     // ---------------------------------------------------------------- prerequisites
-    const p = await openTab(b, url('usa-snap-carousel'));
+    const p = await openTab(b, url('usa-text-splitter'));
     await p.ev(READY);
     await check('missing-prereq', async () => {
       const code = await p.ev(getCode);
-      const without = code.split('\n').filter((l) => !/runtime\/drag-snap\.iife\.js/.test(l)).join('\n');
-      if (without === code) return 'sample has no drag-snap script';
+      const without = code.split('\n').filter((l) => !/runtime\/text\.iife\.js/.test(l)).join('\n');
+      if (without === code) return 'sample has no runtime/text script';
       await p.ev(setCode(without)); await p.ev(click('#run'));
-      const x = await until(async () => { const v = await p.ev(problems); return /motionary\/runtime\/drag-snap/.test(v) && /drag-snap\.iife\.js/.test(v) ? v : null; }, 8000);
+      const x = await until(async () => { const v = await p.ev(problems); return /motionary\/runtime\/text/.test(v) && /runtime\/text\.iife\.js/.test(v) ? v : null; }, 8000);
       return typeof x === 'string' ? true : 'no concrete fix shown for the missing prerequisite: ' + JSON.stringify(await p.ev(problems));
     });
     if (SHOTS) await p.shot('desktop-1280-missing-prereq');
     await p.close();
+
+    // ---------------------------------------------------------------- HTML pages that need ES modules
+    await check('module-samples', async () => {
+      const bad = [];
+      for (const tag of ['usa-snap-carousel', 'usa-dotlottie', 'usa-auto-animate', 'usa-toaster']) {
+        const x = await openTab(b, url(tag));
+        try {
+          await x.ev(READY);
+          const r = await until(async () => { const msg = await x.ev(`document.getElementById('msg').textContent`); return /^Ran/.test(msg) ? { msg, p: await x.ev(problems) } : null; }, 12000);
+          if (!r || typeof r !== 'object') { bad.push(`${tag}: did not finish`); continue; }
+          if (/not registered|resolve module specifier|bare import|No CDN bundle/i.test(r.p)) bad.push(`${tag}: ${r.p.slice(0, 160)}`);
+          const reg = await x.frameEv(`!!customElements.get(${JSON.stringify(tag)})`);
+          if (!reg) bad.push(`${tag}: not registered in the preview`);
+        } finally { await x.close(); }
+      }
+      return bad.length ? bad.join(' ; ') : true;
+    });
 
     // ---------------------------------------------------------------- npm + bundler tab
     const e = await openTab(b, url('usa-reveal'));

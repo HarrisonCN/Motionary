@@ -151,4 +151,4 @@ exports.connectNativeShell = connectNativeShell;
 exports.detectNativeHost = detectNativeHost;
 exports.parseNativeSettings = parseNativeSettings;
 exports.postToNative = postToNative;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/components/bridge.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/components/bridge.cjs.map

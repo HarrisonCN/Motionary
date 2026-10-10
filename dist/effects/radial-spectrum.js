@@ -15,4 +15,4 @@ function registerRadialSpectrum() {
 }
 
 export { effect, registerRadialSpectrum as register, registerRadialSpectrum };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/effects/radial-spectrum.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/effects/radial-spectrum.js.map

@@ -1,8 +1,8 @@
 'use strict';
 
-var registry = require('../chunks/registry-D3N8O2Nc.cjs');
-var tween = require('../chunks/tween-CO_7OEFf.cjs');
-require('../chunks/ticker-D73Bn74b.cjs');
+var registry = require('../chunks/registry-CP1MIOtI.cjs');
+var tween = require('../chunks/tween-D30sTGVW.cjs');
+require('../chunks/ticker-qpbJvWSb.cjs');
 require('../chunks/ease-HwYZnZat.cjs');
 
 const ALLOWED = /*#__PURE__*/ new Set(['time', 'value', 'thisComp', 'thisLayer', 'thisProperty', 'Math', 'wiggle', 'loopOut', 'loopIn', 'loopOutDuration', 'loopInDuration', 'linear', 'ease', 'easeIn', 'easeOut', 'clamp', 'valueAtTime', 'framesToTime', 'timeToFrames', 'degreesToRadians', 'radiansToDegrees', 'add', 'sub', 'mul', 'div', 'length', 'true', 'false', '$bm_rt', 'index']);
@@ -1160,4 +1160,4 @@ exports.transformAt = transformAt;
 exports.trimContours = trimContours;
 exports.unzipEntries = unzipEntries;
 exports.vector = vector;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/runtime/vector.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/runtime/vector.cjs.map

@@ -6,4 +6,4 @@ require('../chunks/base-BG_mxssu.cjs');
 
 
 exports.defineProductGallery = widgets_productGallery.defineProductGallery;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/widgets/product-gallery.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/product-gallery.cjs.map

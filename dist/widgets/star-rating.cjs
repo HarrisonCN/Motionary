@@ -144,4 +144,4 @@ function defineStarRating(tag = 'usa-star-rating') {
 }
 
 exports.defineStarRating = defineStarRating;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/widgets/star-rating.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/star-rating.cjs.map

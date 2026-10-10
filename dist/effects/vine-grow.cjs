@@ -16,4 +16,4 @@ function registerVineGrow() {
 exports.effect = effect;
 exports.register = registerVineGrow;
 exports.registerVineGrow = registerVineGrow;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/effects/vine-grow.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/effects/vine-grow.cjs.map

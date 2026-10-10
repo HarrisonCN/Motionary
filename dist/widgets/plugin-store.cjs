@@ -96,4 +96,4 @@ function definePluginStore(tag = 'usa-plugin-store') {
 }
 
 exports.definePluginStore = definePluginStore;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/widgets/plugin-store.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/plugin-store.cjs.map

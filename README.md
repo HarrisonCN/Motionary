@@ -210,7 +210,7 @@ CDN) when the module is missing. Details: [docs/runtime-tiers.md](./docs/runtime
 |---|---|
 | [Animation Store](https://harrisoncn.github.io/Motionary/showcase/) | Preview, tweak and copy every preset and effect at desktop and phone sizes |
 | [Components](https://harrisoncn.github.io/Motionary/showcase/components.html) | The gallery: every `<usa-*>` element with its attributes, prerequisites and tier |
-| [Component playground](https://harrisoncn.github.io/Motionary/showcase/run.html) | Each component as a complete runnable page: edit, **Run**, **Copy** or **Download .html**; deep links like `run.html#usa-tilt` |
+| [Component playground](https://harrisoncn.github.io/Motionary/showcase/run.html) | Each component as a complete runnable page: edit, **Run**, **Copy** or **Download** — all three use exactly what is in the editor (the download runs on its own). HTML (CDN) runs the whole page; npm + bundler runs the module through an import map. Missing prerequisites and errors show with the line that fixes them; deep links like `run.html#usa-tilt` |
 | [Timeline playground](https://harrisoncn.github.io/Motionary/showcase/playground.html) | Visual keyframe editor; exports JSON for `<usa-player>` |
 | [Scroll story](https://harrisoncn.github.io/Motionary/showcase/story.html) | `<usa-story>` scroll-storytelling templates |
 | [Cross-platform previewer](https://harrisoncn.github.io/Motionary/showcase/xplat.html) | One preset on the web, in a mini program and in HarmonyOS ArkUI |
@@ -370,7 +370,7 @@ Coming from another library: [AOS](./docs/migration-from-aos.md) · [GSAP Scroll
 
 ## Versions and compatibility
 
-- **npm dist-tags:** `latest` is the current major with its patch releases (13.0.1). Each minor release also gets its own tag `v<major>-<minor>`
+- **npm dist-tags:** `latest` is the current major with its patch releases (13.0.2). Each minor release also gets its own tag `v<major>-<minor>`
   (for example `v12-9`). `motionary` and `use-scroll-animate` are published together at the same versions.
 - **CDN:** URLs pin a major (`motionary@13`). Exact pins (`motionary@12.4.0`) keep working.
 - **Semver:** breaking changes come only in majors, each with a guide and a codemod. Deprecations stay in place until the

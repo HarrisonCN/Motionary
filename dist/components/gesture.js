@@ -203,4 +203,4 @@ function defineGestureComponents() {
 }
 
 export { defineGestureComponents, definePinchZoom, defineSwipeable, gesture };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/components/gesture.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/components/gesture.js.map

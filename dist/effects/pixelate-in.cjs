@@ -16,4 +16,4 @@ function registerPixelateIn() {
 exports.effect = effect;
 exports.register = registerPixelateIn;
 exports.registerPixelateIn = registerPixelateIn;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/effects/pixelate-in.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/effects/pixelate-in.cjs.map

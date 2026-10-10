@@ -1,8 +1,8 @@
 'use strict';
 
 var base = require('../chunks/base-BG_mxssu.cjs');
-var runtimeLink = require('../chunks/runtime-link-6mNrr9AF.cjs');
-require('../chunks/registry-D3N8O2Nc.cjs');
+var runtimeLink = require('../chunks/runtime-link-Dv0W9Elh.cjs');
+require('../chunks/registry-CP1MIOtI.cjs');
 
 var css = "usa-snap-carousel{display:block;position:relative;--usa-sc-size:80%;--usa-sc-gap:16px;--usa-sc-accent:#7c5cff}.usa-sc-viewport{overflow:hidden;border-radius:var(--usa-radius,14px);outline:none;cursor:grab}.usa-sc-viewport:focus-visible{box-shadow:0 0 0 2px var(--usa-sc-accent)}usa-snap-carousel[data-dragging] .usa-sc-viewport{cursor:grabbing}.usa-sc-track{display:flex;gap:var(--usa-sc-gap);will-change:transform;user-select:none;-webkit-user-select:none}.usa-sc-track>*{flex:0 0 var(--usa-sc-size);min-width:0;box-sizing:border-box;transition:opacity .3s,transform .3s}.usa-sc-track img{pointer-events:none;-webkit-user-drag:none}usa-snap-carousel:not([data-ready]) .usa-sc-viewport{overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:thin}usa-snap-carousel:not([data-ready]) .usa-sc-track>*{scroll-snap-align:center}usa-snap-carousel[data-ready] .usa-sc-track>:not([data-active]){opacity:.55;transform:scale(.94)}.usa-sc-nav{position:absolute;top:calc(50% - 18px);z-index:2;width:36px;height:36px;border-radius:50%;border:0;background:rgba(255,255,255,.9);color:#111;font:600 20px/1 system-ui;cursor:pointer;display:grid;place-items:center;box-shadow:0 4px 14px rgba(0,0,0,.18)}.usa-sc-nav:disabled{opacity:.35;cursor:default}.usa-sc-nav:focus-visible,.usa-sc-dot:focus-visible{outline:2px solid var(--usa-sc-accent);outline-offset:2px}.usa-sc-prev{left:8px}.usa-sc-next{right:8px}.usa-sc-dots{display:flex;justify-content:center;gap:6px;padding-top:10px}.usa-sc-dot{width:8px;height:8px;padding:0;border:0;border-radius:99px;background:color-mix(in srgb,currentColor 30%,transparent);cursor:pointer;transition:width .3s,background .3s}.usa-sc-dot[aria-current=\"true\"]{width:22px;background:var(--usa-sc-accent)}.usa-sc-live{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;margin:0}@media (prefers-reduced-motion:reduce){.usa-sc-track>*,.usa-sc-dot{transition:none}}";
 
@@ -213,4 +213,4 @@ function defineSnapCarousel(tag = 'usa-snap-carousel') {
 }
 
 exports.defineSnapCarousel = defineSnapCarousel;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/components/snap-carousel.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/components/snap-carousel.cjs.map

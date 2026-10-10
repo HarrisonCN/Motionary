@@ -18,4 +18,4 @@ function registerFog() {
 exports.effect = effect;
 exports.register = registerFog;
 exports.registerFog = registerFog;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/effects/fog.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/effects/fog.cjs.map

@@ -240,4 +240,4 @@ function registerExtendedPresets() {
 exports.EXTENDED_PRESETS = EXTENDED_PRESETS;
 exports.EXTENDED_PRESET_CATEGORIES = EXTENDED_PRESET_CATEGORIES;
 exports.registerExtendedPresets = registerExtendedPresets;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/presets/extended.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/presets/extended.cjs.map

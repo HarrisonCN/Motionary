@@ -16,4 +16,4 @@ function registerHalftoneIn() {
 exports.effect = effect;
 exports.register = registerHalftoneIn;
 exports.registerHalftoneIn = registerHalftoneIn;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/effects/halftone-in.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/effects/halftone-in.cjs.map

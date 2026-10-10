@@ -13,4 +13,4 @@ function registerNeonWrite() {
 }
 
 export { effect, registerNeonWrite as register, registerNeonWrite };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/effects/neon-write.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/effects/neon-write.js.map

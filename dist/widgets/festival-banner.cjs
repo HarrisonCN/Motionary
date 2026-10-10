@@ -6,4 +6,4 @@ require('../chunks/base-BG_mxssu.cjs');
 
 
 exports.defineFestivalBanner = widgets_festivalBanner.defineFestivalBanner;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/widgets/festival-banner.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.2/dist/widgets/festival-banner.cjs.map
