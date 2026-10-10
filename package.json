@@ -1,6 +1,6 @@
 {
   "name": "motionary",
-  "version": "12.1.0",
+  "version": "12.2.0",
   "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 94 animated Web Components — 214 scroll-reveal presets, card/click/button morphs, physics, page transitions, generative & sound-reactive backgrounds, cursor/gesture effects, themes, micro-interactions, <usa-player>, WebGL. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -4224,7 +4224,8 @@
     "@rive-app/canvas": ">=2.20.0",
     "draco3d": ">=1.5.0",
     "solid-js": ">=1.6.0",
-    "svelte": ">=3.0.0"
+    "svelte": ">=3.0.0",
+    "jsdom": ">=22.0.0"
   },
   "peerDependenciesMeta": {
     "solid-js": {
@@ -4237,6 +4238,9 @@
       "optional": true
     },
     "draco3d": {
+      "optional": true
+    },
+    "jsdom": {
       "optional": true
     }
   },

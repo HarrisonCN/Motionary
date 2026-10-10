@@ -17,4 +17,4 @@ function registerNoiseReveal() {
 exports.effect = effect;
 exports.register = registerNoiseReveal;
 exports.registerNoiseReveal = registerNoiseReveal;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.1.0/dist/effects/noise-reveal.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.2.0/dist/effects/noise-reveal.cjs.map

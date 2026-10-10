@@ -7,4 +7,4 @@ require('../chunks/shared-BxK1D7EZ.cjs');
 
 
 exports.defineLyrics = widgets_lyrics.defineLyrics;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.1.0/dist/widgets/lyrics.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.2.0/dist/widgets/lyrics.cjs.map

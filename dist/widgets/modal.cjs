@@ -7,4 +7,4 @@ require('../chunks/shared-BxK1D7EZ.cjs');
 
 
 exports.defineModal = widgets_modal.defineModal;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.1.0/dist/widgets/modal.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.2.0/dist/widgets/modal.cjs.map

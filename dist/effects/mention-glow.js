@@ -12,4 +12,4 @@ function registerMentionGlow() {
 }
 
 export { effect, registerMentionGlow as register, registerMentionGlow };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.1.0/dist/effects/mention-glow.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.2.0/dist/effects/mention-glow.js.map

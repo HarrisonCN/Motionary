@@ -109,4 +109,4 @@ function motionToCss(rules, selector = '.motion') {
 }
 
 export { easingPoints, figmaToMotion, framerComponent, motionToCss };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.1.0/dist/components/design.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.2.0/dist/components/design.js.map

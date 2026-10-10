@@ -128,4 +128,4 @@ exports.formatApng = formatApng;
 exports.loadApng = loadApng;
 exports.parseApng = parseApng;
 exports.pngChunks = pngChunks;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.1.0/dist/runtime/format-apng.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.2.0/dist/runtime/format-apng.cjs.map

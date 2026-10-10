@@ -9,4 +9,4 @@ require('../chunks/gl-scene-BzOKrqVW.cjs');
 
 
 exports.defineGlModel = components_glModel.defineGlModel;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.1.0/dist/widgets/gl-model.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.2.0/dist/widgets/gl-model.cjs.map

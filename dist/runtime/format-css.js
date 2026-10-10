@@ -175,4 +175,4 @@ function playKeyframes(target, frames, o = {}) {
 const formatCss = { id: 'format-css', version: RUNTIME_VERSION, tier: 'basic', requires: ['core'], api: { parseKeyframes, fromCssRule, fromWaapi, toWaapi, playKeyframes } };
 
 export { formatCss, fromCssRule, fromWaapi, parseKeyframes, parseKeyframesBody, playKeyframes, toWaapi };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.1.0/dist/runtime/format-css.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.2.0/dist/runtime/format-css.js.map

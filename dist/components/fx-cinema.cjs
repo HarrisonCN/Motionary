@@ -97,4 +97,4 @@ exports.CAMERA_MOVES = CAMERA_MOVES;
 exports.CINEMA_FX = CINEMA_FX;
 exports.cameraFrame = cameraFrame;
 exports.registerCinemaPack = registerCinemaPack;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.1.0/dist/components/fx-cinema.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.2.0/dist/components/fx-cinema.cjs.map

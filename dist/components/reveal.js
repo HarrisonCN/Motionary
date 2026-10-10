@@ -351,4 +351,4 @@ function defineRevealComponents() {
 }
 
 export { REVEAL_EFFECTS, defineReveal, defineRevealComponents, defineScrollProgress, defineScrolly, defineStagger, readScrollProgress, revealKeyframes };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.1.0/dist/components/reveal.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.2.0/dist/components/reveal.js.map

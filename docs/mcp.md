@@ -48,3 +48,21 @@ Unknown tags come back as tool errors (`isError: true`) with a hint to search fi
 
 - The server version follows its own track (`0.x` until Motionary 11.0 makes it `1.0`); the catalog version is the installed `motionary` version (`initialize` → `instructions`).
 - MCP 2.0 tools (`suggest_motion`, `validate_snippet`) arrive in 10.7.
+
+## Mounted validation (12.2)
+
+`validate_snippet` takes `mount: true` to go beyond static analysis: the snippet's markup is mounted in a headless DOM
+([jsdom](https://github.com/jsdom/jsdom), an **optional peer** — `npm i -D jsdom`) together with the real Motionary bundles
+(`dist/components.umd.js`, `dist/widgets.umd.js`, and the `motionary/runtime` modules the snippet loads, in the correct order). The
+snippet's own `<script>` code is never executed.
+
+| Check | Reported as |
+|---|---|
+| a `<usa-*>` tag is not defined by the bundles, or throws while upgrading | error |
+| a prerequisite is missing — the component's own `requires motionary/runtime/…` error | error (or `mount.confirmed` when the static pass already flagged it) |
+| a legacy event name removed in 12.0 (`usa-beat`, `usa-player-ready`, …) | error, with the `usa:*` replacement |
+| a `usa:*` event no component in the snippet emits | warning |
+| an attribute the element reads but does not observe (contract exemption: set it before mount) | warning |
+
+The result adds `mount: { mounted, environment: 'jsdom', components: [{ tag, defined, upgraded }], confirmed }`; without jsdom it is
+`mount: { mounted: false, skipped }` and the static result is unchanged. Set `MOTIONARY_DIST` to point the server at another build.

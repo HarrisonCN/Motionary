@@ -6,4 +6,4 @@ require('../chunks/base-B3me2y0o.cjs');
 
 
 exports.definePrizeWheel = widgets_prizeWheel.definePrizeWheel;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.1.0/dist/widgets/prize-wheel.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.2.0/dist/widgets/prize-wheel.cjs.map

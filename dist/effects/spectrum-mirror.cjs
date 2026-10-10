@@ -19,4 +19,4 @@ function registerSpectrumMirror() {
 exports.effect = effect;
 exports.register = registerSpectrumMirror;
 exports.registerSpectrumMirror = registerSpectrumMirror;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.1.0/dist/effects/spectrum-mirror.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.2.0/dist/effects/spectrum-mirror.cjs.map

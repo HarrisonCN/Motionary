@@ -6,4 +6,4 @@ require('../chunks/base-B3me2y0o.cjs');
 
 
 exports.defineVoiceButton = widgets_voiceButton.defineVoiceButton;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.1.0/dist/widgets/voice-button.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.2.0/dist/widgets/voice-button.cjs.map

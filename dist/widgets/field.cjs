@@ -6,4 +6,4 @@ require('../chunks/base-B3me2y0o.cjs');
 
 
 exports.defineField = widgets_field.defineField;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.1.0/dist/widgets/field.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.2.0/dist/widgets/field.cjs.map

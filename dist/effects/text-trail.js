@@ -13,4 +13,4 @@ function registerTextTrail() {
 }
 
 export { effect, registerTextTrail as register, registerTextTrail };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.1.0/dist/effects/text-trail.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.2.0/dist/effects/text-trail.js.map

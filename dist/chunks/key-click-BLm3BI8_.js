@@ -21,4 +21,4 @@ function keyClick(el) {
 }
 
 export { keyClick as k };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.1.0/dist/chunks/key-click-BLm3BI8_.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.2.0/dist/chunks/key-click-BLm3BI8_.js.map

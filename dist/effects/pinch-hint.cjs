@@ -16,4 +16,4 @@ function registerPinchHint() {
 exports.effect = effect;
 exports.register = registerPinchHint;
 exports.registerPinchHint = registerPinchHint;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.1.0/dist/effects/pinch-hint.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.2.0/dist/effects/pinch-hint.cjs.map

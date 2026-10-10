@@ -20,6 +20,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { createInterface } from 'node:readline';
 import { pathToFileURL } from 'node:url';
+import { mountSnippet } from './mcp-mount.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const SERVER = { name: 'motionary-mcp', version: '2.0.0' };
@@ -248,6 +249,24 @@ export function validateSnippet(m, code) {
   return { valid: errors.length === 0, errors, warnings, components: comps.map((c) => c.tag), prerequisites: modules.map(reqLabel) };
 }
 
+/** 12.2: static checks + a real mount in jsdom (optional peer) with the built bundles; the snippet's own scripts never run. */
+export async function validateSnippetMounted(m, code, opts = {}) {
+  const r = validateSnippet(m, code);
+  const src = String(code || '');
+  const ids = [...new Set(r.components.flatMap((t) => findComponent(m, t)?.requires || []))].filter((x) => !isPeer(x) && (x === 'core' ? /motionary\/runtime['"]|runtime\.iife\.js/.test(src) : src.includes(`motionary/runtime/${x}`) || src.includes(`runtime/${x}.iife.js`)));
+  if (ids.length && !ids.includes('core')) ids.unshift('core');
+  const mt = await mountSnippet(m, src, { distDir: opts.distDir || process.env.MOTIONARY_DIST || join(HERE, '../dist'), findComponent, runtimeIds: ids, bundles: opts.bundles, loadJsdom: opts.loadJsdom });
+  if (!mt.mounted) return { ...r, mount: { mounted: false, skipped: mt.skipped } };
+  // a missing prerequisite the static pass already reported is confirmed by the mount, not reported twice
+  const confirmed = [], errs = [];
+  for (const e of mt.errors) {
+    const k = (e.match(/requires (motionary\/runtime\/[\w-]+)/) || [])[1];
+    if (k && r.errors.concat(r.warnings).some((x) => x.includes(`requires ${k}`))) confirmed.push(e); else errs.push(e);
+  }
+  const errors = [...r.errors, ...errs], warnings = [...r.warnings, ...mt.warnings];
+  return { ...r, valid: errors.length === 0, errors, warnings, mount: { mounted: true, environment: mt.environment, components: mt.components, confirmed } };
+}
+
 // ---------------------------------------------------------------- MCP surface
 const RO = { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false };
 export const TOOLS = [
@@ -257,7 +276,7 @@ export const TOOLS = [
   { name: 'get_example', title: 'Get an example', description: "A working example for one component in the requested style ('html' = CDN, 'esm' = npm + bundler, or a variant id).", inputSchema: { type: 'object', properties: { tag: { type: 'string' }, variant: { type: 'string', description: "'html' (default), 'esm', or a variant id from get_component" } }, required: ['tag'], additionalProperties: false }, annotations: { title: 'Get example', ...RO } },
   { name: 'scaffold_snippet', title: 'Scaffold a snippet', description: 'A ready-to-paste snippet using one or more components, with every prerequisite installed, imported and registered in the right order before the components mount.', inputSchema: { type: 'object', properties: { tags: { type: 'array', items: { type: 'string' }, minItems: 1 }, framework: { type: 'string', enum: FRAMEWORKS, default: 'esm' } }, required: ['tags'], additionalProperties: false }, annotations: { title: 'Scaffold snippet', ...RO } },
   { name: 'suggest_motion', title: 'Suggest a motion', description: 'Natural language (English or Chinese) → a motion spec: effect, direction, duration, easing, trigger, stagger, Web Animations keyframes + options, CSS, and the Motionary components that implement it, with prerequisite-aware code. Deterministic parser, no model, no network.', inputSchema: { type: 'object', properties: { text: { type: 'string', description: "e.g. 'fade the cards up slowly when they scroll into view, one after another'" }, format: { type: 'string', enum: ['waapi', 'css', 'component'], default: 'waapi' } }, required: ['text'], additionalProperties: false }, annotations: { title: 'Suggest motion', ...RO } },
-  { name: 'validate_snippet', title: 'Validate a snippet', description: 'Check HTML / ESM / JSX / Vue / Svelte code that uses <usa-*> components: unknown tags (with suggestions) and attributes, missing or mis-ordered prerequisites (motionary/runtime modules, official runtimes), components never defined, hand-written animation without a reduced-motion path. Static analysis only — never runs the code.', inputSchema: { type: 'object', properties: { code: { type: 'string' } }, required: ['code'], additionalProperties: false }, annotations: { title: 'Validate snippet', ...RO } },
+  { name: 'validate_snippet', title: 'Validate a snippet', description: 'Check HTML / ESM / JSX / Vue / Svelte code that uses <usa-*> components: unknown tags (with suggestions) and attributes, missing or mis-ordered prerequisites (motionary/runtime modules, official runtimes), components never defined, hand-written animation without a reduced-motion path. Static analysis by default; mount: true also mounts the markup in a headless DOM (jsdom, optional peer) with the real Motionary bundles and checks definitions, upgrade errors, prerequisites, observed attributes and event names against the component contract — the snippet\'s own scripts never run.', inputSchema: { type: 'object', properties: { code: { type: 'string' }, mount: { type: 'boolean', default: false, description: 'also mount the markup in jsdom with the real bundles (12.2)' } }, required: ['code'], additionalProperties: false }, annotations: { title: 'Validate snippet', ...RO } },
 ];
 
 const text = (obj) => ({ content: [{ type: 'text', text: typeof obj === 'string' ? obj : JSON.stringify(obj, null, 2) }], ...(typeof obj === 'object' ? { structuredContent: Array.isArray(obj) ? { items: obj } : obj } : {}) });
@@ -306,6 +325,7 @@ export function callTool(m, name, a = {}) {
       return text(suggestMotion(m, a.text, a.format || 'waapi'));
     case 'validate_snippet':
       if (typeof a.code !== 'string') throw new Error('code is required');
+      if (a.mount) return validateSnippetMounted(m, a.code).then(text);
       return text(validateSnippet(m, a.code));
     default:
       throw Object.assign(new Error(`unknown tool ${name}`), { code: -32602 });
@@ -354,7 +374,9 @@ export function handle(m, msg, state = {}) {
         return ok({ tools: TOOLS });
       case 'tools/call':
         try {
-          return ok(callTool(m, params.name, params.arguments || {}));
+          const res = callTool(m, params.name, params.arguments || {});
+          if (res && typeof res.then === 'function') return res.then(ok, (e) => ok({ content: [{ type: 'text', text: String(e.message || e) }], isError: true }));
+          return ok(res);
         } catch (e) {
           if (e.code === -32602) return err(-32602, e.message);
           return ok({ content: [{ type: 'text', text: String(e.message || e) }], isError: true });
@@ -391,8 +413,9 @@ export function serve(input = process.stdin, output = process.stdout, manifest) 
     } catch {
       return send({ jsonrpc: '2.0', id: null, error: { code: -32700, message: 'Parse error' } });
     }
-    if (Array.isArray(msg)) msg.forEach((x) => send(handle(m, x, state)));
-    else send(handle(m, msg, state));
+    const out = (x) => { const r = handle(m, x, state); if (r && typeof r.then === 'function') r.then(send); else send(r); };
+    if (Array.isArray(msg)) msg.forEach(out);
+    else out(msg);
   });
   return rl;
 }

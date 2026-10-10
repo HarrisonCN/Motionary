@@ -183,4 +183,4 @@ exports.parseKeyframes = parseKeyframes;
 exports.parseKeyframesBody = parseKeyframesBody;
 exports.playKeyframes = playKeyframes;
 exports.toWaapi = toWaapi;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.1.0/dist/runtime/format-css.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.2.0/dist/runtime/format-css.cjs.map
