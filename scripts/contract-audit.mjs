@@ -25,6 +25,10 @@ export const RULES = {
   'lifecycle-timer': ['lifecycle', 'starts setInterval without clearing it on disconnect (onCleanup / clearInterval)'],
   'reduced-motion': ['reduced motion', 'animates (el.animate / requestAnimationFrame loop) without checking reduced motion (this.reduced, this.motion(), prefersReducedMotion())'],
   'error-prefix': ['errors', 'throws / logs a message that does not start with `[motionary]`'],
+};
+
+/** 13.0.1: findings about the audit itself (not one of the six contract parts) — blocking like the rules above. */
+export const META_RULES = {
   'exempt-unscoped': ['exemptions', 'a per-item rule is exempted without naming the items — write `contract-exempt: <rule>(<item>, …) — <reason>`'],
   'exempt-unused': ['exemptions', 'an exemption (or one of its items) masks no finding — remove it so it cannot hide a future one'],
   'audit-source': ['audit', 'the element\'s source could not be resolved for scanning (a define delegating to a helper outside the file)'],
@@ -170,7 +174,7 @@ function scanElement(tag, file, raw) {
   if (animates && !guarded) add('reduced-motion', 'animates without a reduced-motion check');
   for (const m of body.matchAll(/(?:throw new (?:\w*Error)\(|console\.(?:warn|error)\()\s*(['`])([^'`]*)/g)) if (!m[2].startsWith('[motionary]')) add('error-prefix', m[2].slice(0, 60));
   for (const e of exempt) {
-    if (!RULES[e.rule]) f.push({ rule: 'exempt-unused', detail: `${e.rule} (unknown rule)` });
+    if (!RULES[e.rule]) f.push({ rule: 'exempt-unused', detail: `${e.rule} (unknown rule)` }); // only the six contract parts can be exempted
     else if (SCOPED_RULES.includes(e.rule) && !e.scope) f.push({ rule: 'exempt-unscoped', detail: e.rule });
     if (!RULES[e.rule]) continue;
     if (e.scope) { for (const it of e.scope) if (!used.has(`${e.rule}(${it})`)) f.push({ rule: 'exempt-unused', detail: `${e.rule}(${it})` }); }
@@ -218,7 +222,7 @@ export function coverage(rows, tags) {
 }
 
 export function summary(rows) {
-  const byRule = Object.fromEntries(Object.keys(RULES).map((r) => [r, 0]));
+  const byRule = Object.fromEntries(Object.keys({ ...RULES, ...META_RULES }).map((r) => [r, 0]));
   for (const r of rows) for (const x of r.findings) byRule[x.rule]++;
   return { components: rows.length, clean: rows.filter((r) => !r.findings.length).length, findings: Object.values(byRule).reduce((a, b) => a + b, 0), exempt: rows.reduce((n, r) => n + r.exempt.length, 0), byRule };
 }
@@ -238,7 +242,7 @@ export function renderMarkdown(rows, gap = { missing: [], extra: [] }) {
     '',
     '| Rule | Contract part | Findings | What it means |',
     '|---|---|---|---|',
-    ...Object.entries(RULES).map(([id, [part, d]]) => `| \`${id}\` | ${part} | ${s.byRule[id]} | ${d} |`),
+    ...Object.entries({ ...RULES, ...META_RULES }).map(([id, [part, d]]) => `| \`${id}\` | ${part} | ${s.byRule[id]} | ${d} |`),
     '',
     '## Findings by component',
     '',

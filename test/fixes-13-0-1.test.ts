@@ -6,7 +6,7 @@ import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, readdirSync } from
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
-import { audit, summary, coverage, manifestTags, parseExemptions, RULES } from '../scripts/contract-audit.mjs';
+import { audit, summary, coverage, manifestTags, parseExemptions, RULES, META_RULES } from '../scripts/contract-audit.mjs';
 import { buildManifest } from '../scripts/gen-manifest.mjs';
 import { installComponentMocks, anims, finishAll } from './components-setup';
 import { configureComponents, defineElement } from '../src/components/base';
@@ -104,6 +104,10 @@ describe('13.0.1: zero non-exempt findings; exemptions are explicit and scoped',
         expect(e.reason.length, `${r.tag} ${e.rule}`).toBeGreaterThan(15);
         if (['attr-unobserved', 'lifecycle-global-listener', 'event-prefix', 'event-bubbles', 'error-prefix'].includes(e.rule)) expect(e.scope?.length, `${r.tag} ${e.rule} must be scoped`).toBeGreaterThan(0);
       }
+  });
+  it('audit meta-rules are separate from the six contract parts', () => {
+    expect(Object.keys(META_RULES).sort()).toEqual(['audit-source', 'exempt-unscoped', 'exempt-unused']);
+    for (const k of Object.keys(META_RULES)) expect(RULES[k]).toBeUndefined();
   });
   it('a scoped exemption only masks the items it names', () => {
     expect(parseExemptions("// contract-exempt: attr-unobserved(open, value) — state reflected by the element itself")).toEqual([{ rule: 'attr-unobserved', scope: ['open', 'value'], reason: 'state reflected by the element itself' }]);
