@@ -85,6 +85,9 @@ The resource checks still run in that case — they then prove that nothing was 
 - **Frame timing is environment-bound.** Headless browsers on shared CI machines render in software, so the perf budget
   is relative to the CI baseline with generous headroom (×3) plus absolute ceilings; it catches regressions such as an
   extra frame loop per component or a teardown that leaks, not small timing drift.
+- **Perf limits are for CI.** On a slow machine without GPU acceleration (the linux-arm64 development sandbox) headless
+  WebKit draws the 32-component page at about one frame per second (p95 ≈ 1 s), so `perf.spec.mjs` fails its frame-interval
+  limit there while every functional check passes; run the perf spec on CI-class hardware.
 - **Chromium build.** CI uses Playwright's Chromium; local runs on linux-arm64 use another Chromium build through
   `CHROME_PATH` (Playwright publishes no linux-arm64 Chromium).
 
@@ -92,9 +95,13 @@ The resource checks still run in that case — they then prove that nothing was 
 
 | | Chromium | Firefox | WebKit |
 |---|---|---|---|
-| CI (`ubuntu-latest`) | all pass | all pass | all pass |
+| CI (`ubuntu-latest`, PR #135) | 309 passed, 1 skipped | 308 passed, 2 skipped | 309 passed, 1 skipped |
+| Local (linux-arm64 sandbox) | all functional pass ¹ | 308 passed, 2 skipped | 308 passed; perf frame interval over its limit ² |
 | Complex page on CI — mount / p95 frame / rAF per frame | 703 ms / 33.4 ms / 1.22 | 738 ms / 17.1 ms / 1.32 | 1973 ms / 227 ms / 1.03 |
 | Perf limit (max(ceiling, baseline × 3)) — mount / p95 | 6000 ms / 100 ms | 6000 ms / 51 ms | 6000 ms / 681 ms |
+
+¹ Chromium 129 via `CHROME_PATH`; ² see "Perf limits are for CI". Skipped: `<usa-rive>` (all), and in Firefox the
+image-fallback check, which needs WebGL.
 
 On 13.0.2 the same suite failed 33 tests in Chromium, 23 in Firefox and 31 in WebKit (the bugs fixed in 13.1.0, see the
 CHANGELOG). WebKit on Linux renders in software, hence its frame interval; the budget guards against regressions relative
