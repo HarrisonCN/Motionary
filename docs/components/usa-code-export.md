@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 8.9
 - **Import:** `import { defineCodeExport } from 'motionary/components/widgets'` then `defineCodeExport();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `for`, `formats`
 - **Events:** `usa:copy`
 - **Slots:** —

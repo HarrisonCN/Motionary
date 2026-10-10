@@ -28,6 +28,9 @@ export const DEPRECATED_PATHS = {
 /** Release in which the old paths are removed. */
 export const REMOVED_IN = '13.0';
 
+/** 13.0: the old paths are gone from package.json exports; this table now only drives `motionary doctor` and the codemods. */
+export const PATHS_REMOVED = true;
+
 /** The four layers + framework entries, as documented (docs/public-api.md). */
 export const LAYERS = {
   core: ['core', 'runtime'],

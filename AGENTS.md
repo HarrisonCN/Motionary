@@ -6,7 +6,7 @@ This file tells AI coding agents (and the people prompting them) how to pick and
 
 | What | Where |
 |---|---|
-| Every component: tag, attributes, events, slots, methods, import path, define function, CDN URL, minimal example, prerequisites | `motionary/manifest.json` in the npm package · `https://harrisoncn.github.io/Motionary/components.json` (JSON Schema: `components.schema.json`) |
+| Every component: tag, attributes, events, slots, methods, import path, define function, CDN URL, minimal example, prerequisites | `motionary/tooling/manifest.json` in the npm package · `https://harrisoncn.github.io/Motionary/components.json` (JSON Schema: `components.schema.json`) |
 | Short index for LLMs | `https://harrisoncn.github.io/Motionary/llms.txt` |
 | Full reference in one file | `https://harrisoncn.github.io/Motionary/llms-full.txt` |
 | One Markdown page per component | [`docs/components/<tag>.md`](docs/components/README.md) |
@@ -39,7 +39,7 @@ All of these are generated from the source at build time, so they match the inst
 Plain HTML:
 
 ```html
-<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>
 <usa-reveal effect="fade-up"><h2>Hello</h2></usa-reveal>
 ```
 

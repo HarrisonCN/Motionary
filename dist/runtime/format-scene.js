@@ -1,4 +1,4 @@
-import { R as RUNTIME_VERSION, r as requireModule } from '../chunks/registry-D3VGJOuX.js';
+import { R as RUNTIME_VERSION, r as requireModule } from '../chunks/registry-DQEOHLh7.js';
 
 /**
  * `motionary/runtime/format-scene` (10.7) — the versioned scene format
@@ -230,4 +230,4 @@ function worldToScene(world, o = { width: 600, height: 400 }) {
 const formatScene = { id: 'format-scene', version: RUNTIME_VERSION, tier: 'advanced', requires: ['core', 'physics'], api: { SCENE_FORMAT, migrateScene, validateScene, parseScene, sceneToWorld, worldToScene } };
 
 export { SCENE_FORMAT, formatScene, migrateScene, parseScene, sceneToWorld, validateScene, worldToScene };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.9.0/dist/runtime/format-scene.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/runtime/format-scene.js.map

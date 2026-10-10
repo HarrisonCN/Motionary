@@ -156,7 +156,7 @@ export function stableSection() {
     'From 11.0 these are stable and follow semver until 12.0 (additions only in minors; see [docs/upgrading-11.md](./docs/upgrading-11.md)):',
     '',
     '- `motionary/runtime` and every `motionary/runtime/<module>` export and module id;',
-    '- the AI manifest **schema v2** (`components.json`, `motionary/manifest.json`, `stability: "stable"`) and the `motionary-scene@1` format;',
+    '- the AI manifest **schema v2** (`components.json`, `motionary/tooling/manifest.json`, `stability: "stable"`) and the `motionary-scene@1` format;',
     '- `motionary-mcp` **2.x** tool names and result shapes;',
     '- the individual entry points (`motionary/widgets/<name>`, `motionary/effects/<name>`, `motionary/components/<name>`) and their fixed gzip budgets;',
     '- the compatibility matrix below — a ✅ row is not removed before 12.0.',

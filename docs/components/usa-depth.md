@@ -6,7 +6,7 @@ Layers with data-depth (-1…1) shift and scale by depth as the pointer moves, t
 
 - **Category:** depth · **since** 3.5
 - **Import:** `import { defineDepth } from 'motionary/components/depth'` then `defineDepth();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>`
 - **Attributes:** `source`, `strength`, `rotate`
 - **Events:** —
 - **Slots:** —

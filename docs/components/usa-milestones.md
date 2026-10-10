@@ -6,7 +6,7 @@
 
 - **Category:** timeline · **since** 6.5
 - **Import:** `import { defineMilestones } from 'motionary/components/widgets'` then `defineMilestones();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `layout`
 - **Events:** `usa:reach`
 - **Slots:** —

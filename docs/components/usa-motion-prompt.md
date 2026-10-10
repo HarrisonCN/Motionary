@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 10.7 · **changed in** 11.0, 11.6
 - **Import:** `import { defineMotionPrompt } from 'motionary/components/widgets'` then `defineMotionPrompt();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `value`, `format`, `placeholder`, `label`
 - **Events:** `usa:suggest`, `usa:copy`
 - **Slots:** —

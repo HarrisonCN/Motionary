@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 9.3
 - **Import:** `import { defineGenArt } from 'motionary/components/widgets'` then `defineGenArt();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `art`, `seed`, `palette`, `label`
 - **Events:** `usa:generate`
 - **Slots:** —

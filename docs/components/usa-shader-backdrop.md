@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 10.5
 - **Import:** `import { defineShaderBackdrop } from 'motionary/components/widgets'` then `defineShaderBackdrop();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `preset`, `post`, `colors`, `speed`, `intensity`, `label`
 - **Events:** `usa:backend`
 - **Slots:** —

@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 8.0
 - **Import:** `import { defineClockControl } from 'motionary/components/widgets'` then `defineClockControl();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `speeds`, `label`
 - **Events:** `usa:change`
 - **Slots:** —

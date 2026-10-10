@@ -6,7 +6,7 @@ Every stroke of the SVG inside draws itself — on view, hover, click or scrubbe
 
 - **Category:** svg · **since** 3.3 · **changed in** 11.8
 - **Import:** `import { defineDraw } from 'motionary/components/svg'` then `defineDraw();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>`
 - **Attributes:** `duration`, `stagger`, `trigger`, `repeat`
 - **Events:** `usa:complete`
 - **Slots:** —

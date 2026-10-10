@@ -1,8 +1,8 @@
 'use strict';
 
 var base = require('../chunks/base-B3me2y0o.cjs');
-var runtimeLink = require('../chunks/runtime-link-CyExCzuU.cjs');
-require('../chunks/registry-VKfDCYYI.cjs');
+var runtimeLink = require('../chunks/runtime-link-D1Vn3BZq.cjs');
+require('../chunks/registry-CFnXdATC.cjs');
 
 var css = "usa-smooth-scroll{display:contents}usa-smooth-scroll[data-wrapper]{display:block;overflow:auto;overscroll-behavior:contain;max-height:100%;-webkit-overflow-scrolling:touch}usa-smooth-scroll[data-wrapper].usa-smooth{scroll-behavior:auto}html.usa-smooth{scroll-behavior:auto}usa-smooth-scroll .usa-rt-missing{margin:0 0 8px;padding:8px;border-radius:8px;background:#fef2f2;color:#991b1b;font:11px/1.4 ui-monospace,monospace;overflow-wrap:anywhere}";
 
@@ -82,4 +82,4 @@ function defineSmoothScroll(tag = 'usa-smooth-scroll') {
 }
 
 exports.defineSmoothScroll = defineSmoothScroll;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.9.0/dist/widgets/smooth-scroll.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/widgets/smooth-scroll.cjs.map

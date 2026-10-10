@@ -6,7 +6,7 @@ A slim NProgress-style bar for route changes and fetches: loadingBar.start() tri
 
 - **Category:** page · **since** 2.7
 - **Import:** `import { defineLoadingBar } from 'motionary/components/page'` then `defineLoadingBar();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>`
 - **Attributes:** `label`, `color`, `height`
 - **Events:** —
 - **Slots:** —

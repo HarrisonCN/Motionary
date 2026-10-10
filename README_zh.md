@@ -26,12 +26,12 @@ npm i motionary
 
 ```html
 <!-- CDN (no build) -->
-<script src="https://unpkg.com/motionary@12/dist/index.umd.js"></script>            <!-- window.ScrollAnimate -->
-<script src="https://unpkg.com/motionary@12/dist/presets-extended.umd.js"></script> <!-- +181 presets -->
-<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>       <!-- every <usa-*>, window.UsaComponents -->
+<script src="https://unpkg.com/motionary@13/dist/index.umd.js"></script>            <!-- window.ScrollAnimate -->
+<script src="https://unpkg.com/motionary@13/dist/presets-extended.umd.js"></script> <!-- +181 presets -->
+<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>       <!-- every <usa-*>, window.UsaComponents -->
 ```
 
-jsDelivr 同样可用：`https://cdn.jsdelivr.net/npm/motionary@12/dist/…`。已有的 `use-scroll-animate` 安装与 `unpkg.com/use-scroll-animate@6` 链接继续可用。
+jsDelivr 同样可用：`https://cdn.jsdelivr.net/npm/motionary@13/dist/…`。已有的 `use-scroll-animate` 安装与 `unpkg.com/use-scroll-animate@6` 链接继续可用。
 
 ## 30 秒上手
 
@@ -101,7 +101,7 @@ export const Card = () => <div use:scrollAnimate={{ animation: 'blur-in-up' }}>H
 ```ts
 // Angular (standalone) — the animated Web Components
 import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
-import { usaInitializer } from 'motionary/components/angular';
+import { usaInitializer } from 'motionary/angular';
 import 'motionary/presets/extended'; // lets <usa-reveal effect> use every preset name
 // app.config.ts: providers: [{ provide: APP_INITIALIZER, multi: true, useFactory: usaInitializer() }]
 @Component({ standalone: true, schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -109,7 +109,7 @@ import 'motionary/presets/extended'; // lets <usa-reveal effect> use every prese
 export class Hero {}
 ```
 
-> 11.5：Angular 使用顶层入口 `motionary/angular`（`motionary/components/angular` 在 13.0 前仍可用）。分层子路径与弃用路径见 [docs/public-api.md](./docs/public-api.md) · `npx motionary doctor`。
+> 11.5：Angular 使用顶层入口 `motionary/angular`（`motionary/angular` 在 13.0 前仍可用）。分层子路径与弃用路径见 [docs/public-api.md](./docs/public-api.md) · `npx motionary doctor`。
 
 动画组件无需任何框架：
 

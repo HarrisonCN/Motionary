@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 9.6
 - **Import:** `import { definePerfMonitor } from 'motionary/components/widgets'` then `definePerfMonitor();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `corner`, `warn`
 - **Events:** `usa:jank`
 - **Slots:** —

@@ -6,7 +6,7 @@ Text filled with a multi-colour gradient that keeps flowing.
 
 - **Category:** text · **since** 2.8
 - **Import:** `import { defineGradientText } from 'motionary/components/text'` then `defineGradientText();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>`
 - **Attributes:** `colors`, `speed`, `angle`
 - **Events:** —
 - **Slots:** —

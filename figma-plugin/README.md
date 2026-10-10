@@ -15,7 +15,7 @@ Exports **motion tokens** and **runnable component snippets** from a Figma file.
   `motionary:tag` works too). An instance's **component properties** become attributes, but only attributes the component has
   (booleans: `true` → bare attribute). Text inside the layer becomes the element's text.
 - Prototype interactions become a `data-motion` string (DISSOLVE → `fade`, SMART_ANIMATE → `scale`, MOVE_IN / SLIDE_IN / PUSH →
-  `fade-<direction>`, durations, easings) and the page calls `applyMotion()`; the mapping matches `figmaToMotion()` in `motionary/design`.
+  `fade-<direction>`, durations, easings) and the page calls `applyMotion()`; the mapping matches `figmaToMotion()` in `motionary/tooling/design`.
 - Variables named `motion/duration/<name>` (number, ms) and `motion/easing/<name>` (string, e.g. `cubic-bezier(0.2, 0, 0, 1)`)
   override or extend Motionary's default tokens.
 

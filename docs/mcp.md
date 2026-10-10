@@ -3,7 +3,7 @@
 `motionary-mcp` (10.4+) is a **read-only** [Model Context Protocol](https://modelcontextprotocol.io) server that ships inside the `motionary` package. AI assistants that speak MCP (Claude Desktop / Claude Code, Cursor, VS Code, Windsurf, Zed, …) can ask it which `<usa-*>` component fits a UI need, read the component's API and get a snippet that already installs, imports and registers every prerequisite in the right order.
 
 - **Zero dependencies**, stdio transport (newline-delimited JSON-RPC 2.0), protocol versions `2025-06-18`, `2025-03-26`, `2024-11-05`.
-- **Read-only**: it answers from the AI manifest bundled in the package (`motionary/manifest.json`, the same data as the site's `components.json` / `llms.txt`). It never writes files, executes code or touches the network. Every tool is annotated `readOnlyHint: true`.
+- **Read-only**: it answers from the AI manifest bundled in the package (`motionary/tooling/manifest.json`, the same data as the site's `components.json` / `llms.txt`). It never writes files, executes code or touches the network. Every tool is annotated `readOnlyHint: true`.
 - Tested in CI with the official MCP TypeScript SDK client over stdio.
 
 ## Run it
@@ -60,7 +60,7 @@ snippet's own `<script>` code is never executed.
 |---|---|
 | a `<usa-*>` tag is not defined by the bundles, or throws while upgrading | error |
 | a prerequisite is missing — the component's own `requires motionary/runtime/…` error | error (or `mount.confirmed` when the static pass already flagged it) |
-| a legacy event name removed in 12.0 (`usa-beat`, `usa-player-ready`, …) | error, with the `usa:*` replacement |
+| a legacy event name removed in 12.0 (`usa:beat`, `usa:ready`, …) | error, with the `usa:*` replacement |
 | a `usa:*` event no component in the snippet emits | warning |
 | an attribute the element reads but does not observe (contract exemption: set it before mount) | warning |
 

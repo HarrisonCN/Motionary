@@ -38,7 +38,7 @@ require('./bridge.cjs');
 
 /**
  * motionary/angular — Angular integration (v3.8; 11.5: top-level entry `motionary/angular`, parity with the
- * React / Vue / Svelte / Solid entries). The old path `motionary/components/angular` is the same file and is
+ * React / Vue / Svelte / Solid entries). The old path `motionary/angular` is the same file and is
  * deprecated (removed in 13.0). Angular renders `<usa-*>` tags once the component (or NgModule) allows
  * custom elements with `CUSTOM_ELEMENTS_SCHEMA`; property binding `[checked]="on"` and event binding
  * `(usa:change)="…"` then work as is. This entry is framework-free (no `@angular/*` import):
@@ -88,4 +88,4 @@ exports.isUsaElement = isUsaElement;
 exports.provideUsa = provideUsa;
 exports.usaDetail = usaDetail;
 exports.usaInitializer = usaInitializer;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.9.0/dist/components/angular.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/components/angular.cjs.map

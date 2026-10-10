@@ -1,7 +1,7 @@
 [
   {
     "name": "import 'motionary/core' (zero-dep core, fixed 10 KB)",
-    "import": "export * from 'pkg/components/core';",
+    "import": "export * from 'pkg/core';",
     "limit": 10240
   },
   {
@@ -290,8 +290,8 @@
     "limit": 81920
   },
   {
-    "name": "import 'motionary/components/angular'",
-    "import": "export * from 'pkg/components/angular';",
+    "name": "import 'motionary/angular'",
+    "import": "export * from 'pkg/angular';",
     "limit": 81920
   },
   {

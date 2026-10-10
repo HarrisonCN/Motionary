@@ -15,10 +15,10 @@ Part of Motionary's own zero-dependency runtime. Size budget: **5.5 KB gzip** (e
 3. **CDN:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
 ```
 
-   ESM from a CDN: `https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.js`
+   ESM from a CDN: `https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.js`
 
 4. **Import order & registration:** Import motionary/runtime and call use() once at start-up, before any runtime-powered component mounts. CDN: the IIFE registers itself (window.MotionaryRuntime).
 

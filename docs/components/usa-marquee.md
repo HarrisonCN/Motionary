@@ -6,7 +6,7 @@ A seamless infinite ticker with constant speed, pause on hover, soft edges and v
 
 - **Category:** background · **since** 2.2
 - **Import:** `import { defineMarquee } from 'motionary/components/background'` then `defineMarquee();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>`
 - **Attributes:** `speed`, `direction`, `gap`, `paused`, `pause-on-hover`
 - **Events:** —
 - **Slots:** —

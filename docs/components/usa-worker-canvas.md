@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 9.6 · **changed in** 10.9, 11.0
 - **Import:** `import { defineWorkerCanvas } from 'motionary/components/widgets'` then `defineWorkerCanvas();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `scene`, `label`
 - **Events:** `usa:backend`
 - **Slots:** —

@@ -6,7 +6,7 @@
 
 - **Category:** feedback · **since** 6.8
 - **Import:** `import { defineWeatherCard } from 'motionary/components/widgets'` then `defineWeatherCard();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `condition`, `temp`, `place`, `unit`, `label`
 - **Events:** —
 - **Slots:** —

@@ -16,7 +16,7 @@ A module only depends on modules of its own tier or below (checked by `test/widg
 
 - **Code:** `import { RUNTIME_TIERS, tierOf, maxTier } from 'motionary/runtime'` — `tierOf('gl')` is `'advanced'`;
   `maxTier(['scroll', 'vector'])` is `'standard'`. Every module object carries `tier` (`gl.tier`).
-- **Manifest** (`motionary/manifest.json`, schema v2 — optional property): `runtimeModules[].tier` and
+- **Manifest** (`motionary/tooling/manifest.json`, schema v2 — optional property): `runtimeModules[].tier` and
   `components[].tier` (the highest tier among a component's prerequisites; `basic` when it needs none). The MCP server
   (`motionary-mcp`) serves the same manifest.
 - **Store / gallery:** a tier badge next to the "Requires" badge; the prerequisites panel names the tier.

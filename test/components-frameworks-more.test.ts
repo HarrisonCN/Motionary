@@ -73,7 +73,8 @@ describe('Svelte / Solid / Angular entries', () => {
   it('are published as entry points', () => {
     for (const n of ['svelte', 'solid', 'angular']) {
       expect(COMPONENT_ENTRIES[n]).toBe(`frameworks/${n}`);
-      expect(pkg.exports[`./components/${n}`].import.default).toBe(`./dist/components/${n}.js`);
+      // 13.0: motionary/components/angular was removed — Angular is served at motionary/angular (same dist file)
+      expect(pkg.exports[n === 'angular' ? './angular' : `./components/${n}`].import.default).toBe(`./dist/components/${n}.js`);
     }
   });
 

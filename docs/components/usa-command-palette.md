@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 7.9
 - **Import:** `import { defineCommandPalette } from 'motionary/components/widgets'` then `defineCommandPalette();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `placeholder`, `label`, `hotkey`, `inline`
 - **Events:** `usa:run`, `usa:open`, `usa:close`
 - **Slots:** —

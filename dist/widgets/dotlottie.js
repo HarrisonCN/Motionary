@@ -1,6 +1,6 @@
 export { defineDotLottie } from '../components/dotlottie.js';
 import '../chunks/base-zSGb8ujt.js';
-import '../chunks/runtime-link-CvJOTQYQ.js';
-import '../chunks/registry-D3VGJOuX.js';
-import '../chunks/lottie-player-CHqBhRAB.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.9.0/dist/widgets/dotlottie.js.map
+import '../chunks/runtime-link-C3_nsDxl.js';
+import '../chunks/registry-DQEOHLh7.js';
+import '../chunks/lottie-player-D7exPyhQ.js';
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/widgets/dotlottie.js.map

@@ -6,7 +6,7 @@ Let users pick Off · Low · Normal · High for the whole app; scales every comp
 
 - **Category:** page · **since** 2.7 · **changed in** 4.9, 5.0
 - **Import:** `import { defineMotionSwitch } from 'motionary/components/page'` then `defineMotionSwitch();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>`
 - **Attributes:** `labels`, `label`
 - **Events:** `usa:change`
 - **Slots:** —

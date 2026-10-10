@@ -15,11 +15,11 @@ Part of Motionary's own zero-dependency runtime. Size budget: **3.0 KB gzip** (e
 3. **CDN:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/gltf-decoders.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/gltf-decoders.iife.js"></script>
 ```
 
-   ESM from a CDN: `https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime/gltf-decoders.js`
+   ESM from a CDN: `https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/gltf-decoders.js`
 
 4. **Import order & registration:** Register the core first, then the module: use(gltfDecoders) also registers the core. CDN: load runtime.iife.js, then runtime/gltf-decoders.iife.js (it registers itself).
 

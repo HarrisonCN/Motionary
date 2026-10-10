@@ -1,5 +1,7 @@
 # Upgrading to Motionary 13
 
+> 13.0 is released: the paths below are gone from `package.json` `exports`.
+
 13.0 finishes the four-layer layout (Motion Core · Runtime · Components · Tooling) and makes the 12.x tooling stable. One thing
 breaks: **the import paths deprecated in 11.5 are removed**. Everything else in 12.x keeps working.
 

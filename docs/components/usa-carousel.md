@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 6.2 · **changed in** 10.1
 - **Import:** `import { defineCarousel } from 'motionary/components/widgets'` then `defineCarousel();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `effect`, `autoplay`, `loop`, `no-controls`, `no-dots`, `label`, `index`
 - **Events:** `usa:change`
 - **Slots:** —

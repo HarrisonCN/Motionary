@@ -6,7 +6,7 @@
 
 - **Category:** transitions · **since** 6.3 · **changed in** 6.6
 - **Import:** `import { defineModal } from 'motionary/components/widgets'` then `defineModal();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** —
 - **Events:** —
 - **Slots:** —

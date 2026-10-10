@@ -6,7 +6,7 @@ Chainable GPU passes over an image (4.8): vignette, grain, chromatic aberration,
 
 - **Category:** webgl · **since** 4.8
 - **Import:** `import { definePostFx } from 'motionary/components/webgl'` then `definePostFx();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>`
 - **Attributes:** —
 - **Events:** —
 - **Slots:** —

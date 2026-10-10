@@ -1,4 +1,4 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-D3VGJOuX.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-DQEOHLh7.js';
 
 /**
  * `motionary/runtime/gltf-decoders` (10.9) — hooks that let
@@ -147,4 +147,4 @@ async function prepareGltf(json, buffers) {
 const gltfDecoders = { id: 'gltf-decoders', version: RUNTIME_VERSION, tier: 'advanced', requires: ['core', 'gl', 'format-gltf'], api: { provideGltfDecoder, providedDecoders, prepareGltf, decodeDraco, transcodeKtx2, DECODER_EXTENSIONS } };
 
 export { DECODER_EXTENSIONS, DECODER_HELP, decodeDraco, gltfDecoders, prepareGltf, provideGltfDecoder, providedDecoders, transcodeKtx2 };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.9.0/dist/runtime/gltf-decoders.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/runtime/gltf-decoders.js.map

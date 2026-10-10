@@ -50,7 +50,7 @@ flowchart TB
 
 | 层 | 目录 / 文件 | 子路径 |
 |---|---|---|
-| Public API | `src/index.ts` 及根目录的 `core.ts`、`presets*.ts`、`parallax.ts`、`stagger.ts`、`element*.ts`、`types.ts`（HTML `data-*` API，原 use-scroll-animate）；`src/react.ts`、`vue.ts`、`svelte.ts`、`solid.ts`；`src/components/frameworks/*`（含 Angular）；`src/entries/*`（逐组件 / 逐特效入口）；`src/runtime/iife/*`（CDN `<script>` 入口） | `motionary`、`motionary/react` …、`motionary/angular`（11.5；旧 `motionary/components/angular`）、`motionary/widgets/<name>`、`motionary/effects/<name>`、`dist/runtime/*.iife.js` |
+| Public API | `src/index.ts` 及根目录的 `core.ts`、`presets*.ts`、`parallax.ts`、`stagger.ts`、`element*.ts`、`types.ts`（HTML `data-*` API，原 use-scroll-animate）；`src/react.ts`、`vue.ts`、`svelte.ts`、`solid.ts`；`src/components/frameworks/*`（含 Angular）；`src/entries/*`（逐组件 / 逐特效入口）；`src/runtime/iife/*`（CDN `<script>` 入口） | `motionary`、`motionary/react` …、`motionary/angular`（11.5；旧 `motionary/angular`）、`motionary/widgets/<name>`、`motionary/effects/<name>`、`dist/runtime/*.iife.js` |
 | Motion Core | `src/runtime/{index,registry,ticker,tween,ease,keyframes}.ts`；`src/components/core/*`（`createMotion()`；11.6 起含纯函数动效意图解析器 `intent.ts`） | `motionary/runtime`、`motionary/core` |
 | Runtime | `src/runtime/*.ts` 的其余模块（scroll、smooth、text、drag-snap、physics、vector、lottie-*、gl、gltf-*、format-*、anim-image） | `motionary/runtime/<module>` |
 | Components | `src/components/**`（除 `frameworks/`、`ai/`、`core/`） | `motionary/components/*` |

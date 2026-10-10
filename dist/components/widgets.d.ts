@@ -2005,7 +2005,7 @@ interface UsaPluginCardElement extends UsaElement {
 declare function definePluginCard(tag?: string): CustomElementConstructor | undefined;
 
 /**
- * `<usa-install-button package="motionary" managers="npm pnpm yarn bun cdn" cdn="https://cdn.jsdelivr.net/npm/motionary@12/dist/runtime.iife.js">`
+ * `<usa-install-button package="motionary" managers="npm pnpm yarn bun cdn" cdn="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js">`
  * (10.1) — one-click install snippet: package-manager tabs (npm, pnpm, yarn,
  * bun, CDN), the command in a code row and a copy button that confirms with
  * a check. `package`, `dev` (dev dependency), `managers`, `cdn` (URL for the
@@ -3217,7 +3217,7 @@ interface MotionSuggestion {
  * what you want ("fade the cards up slowly, one after another" / "卡片从下往上
  * 依次淡入") and get a live preview plus ready code: Web Animations, CSS or a
  * Motionary component. Runs `describeMotion()` from
- * `motionary/components/ai` — a small deterministic parser (English and
+ * `motionary/tooling/ai` — a small deterministic parser (English and
  * Chinese), **no model and no network**; the same parser backs the
  * `suggest_motion` tool of `motionary-mcp`.
  *

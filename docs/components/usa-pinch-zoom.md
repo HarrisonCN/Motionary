@@ -6,7 +6,7 @@ Pinch with two fingers or Ctrl + wheel / trackpad pinch, pan while zoomed, doubl
 
 - **Category:** gesture · **since** 3.2
 - **Import:** `import { definePinchZoom } from 'motionary/components/gesture'` then `definePinchZoom();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>`
 - **Attributes:** `min`, `max`, `preset`, `double-tap`
 - **Events:** `usa:zoom`
 - **Slots:** —

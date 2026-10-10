@@ -6,7 +6,7 @@ Shimmering placeholders while loading; remove loading and the real content fades
 
 - **Category:** feedback · **since** 2.2 · **changed in** 6.4
 - **Import:** `import { defineSkeleton } from 'motionary/components/feedback'` then `defineSkeleton();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>`
 - **Attributes:** `loading`, `lines`, `width`, `height`, `circle`, `avatar`, `radius`
 - **Events:** `usa:loaded`
 - **Slots:** —

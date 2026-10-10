@@ -1,6 +1,6 @@
 # Motion AI: local parser + optional LLM provider (11.6)
 
-`motionary/tooling/ai` (old path `motionary/components/ai`) turns a short description — "fade the cards up slowly,
+`motionary/tooling/ai` (old path `motionary/tooling/ai`) turns a short description — "fade the cards up slowly,
 one after another" / "卡片从下往上依次淡入" — into a motion: effect, direction, timing, easing, trigger, Web Animations
 keyframes, CSS and the Motionary components that do it.
 

@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 10.6
 - **Import:** `import { defineTokenEditor } from 'motionary/components/widgets'` then `defineTokenEditor();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `apply`, `format`, `groups`, `label`
 - **Events:** `usa:export`, `usa:import`, `usa:change`
 - **Slots:** —

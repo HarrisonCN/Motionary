@@ -53,7 +53,7 @@ export function generateComponentDocs() {
   files[`${DIR}/README.md`] = [
     `# Motionary components (${m.components.length})`,
     '',
-    'One page per `<usa-*>` element, generated from the source. Machine-readable: `motionary/manifest.json` · Pages `/components.json` · `/llms.txt` · `/llms-full.txt`. How to use these with an AI assistant: [AGENTS.md](../../AGENTS.md) and [the prompt guide](../ai-prompt-guide.md).',
+    'One page per `<usa-*>` element, generated from the source. Machine-readable: `motionary/tooling/manifest.json` · Pages `/components.json` · `/llms.txt` · `/llms-full.txt`. How to use these with an AI assistant: [AGENTS.md](../../AGENTS.md) and [the prompt guide](../ai-prompt-guide.md).',
     '',
     ...cats.flatMap((cat) => [`## ${cat}`, '', ...m.components.filter((c) => c.category === cat).map((c) => `- [\`<${c.tag}>\`](${slug(c.tag)}.md) — ${c.title}${c.requires.length ? ` · ${c.prerequisites.badge}` : ''}`), '']),
   ].join('\n');

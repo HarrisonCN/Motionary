@@ -6,7 +6,7 @@
 
 - **Category:** cards · **since** 6.5
 - **Import:** `import { defineCubeGallery } from 'motionary/components/widgets'` then `defineCubeGallery();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `axis`, `autoplay`, `label`
 - **Events:** `usa:change`
 - **Slots:** —

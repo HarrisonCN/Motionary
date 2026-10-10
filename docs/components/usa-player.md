@@ -6,7 +6,7 @@
 
 - **Category:** fx · **since** 5.9 · **changed in** 6.9, 7.0, 7.1, 11.8, 12.0
 - **Import:** `import { definePlayer } from 'motionary/components/effects'` then `definePlayer();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>`
 - **Attributes:** `src`, `trigger`, `loop`, `rate`, `controls`
 - **Events:** `usa:finish`, `usa:ready`
 - **Slots:** —

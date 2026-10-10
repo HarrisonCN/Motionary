@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 7.3
 - **Import:** `import { defineAddToCart } from 'motionary/components/widgets'` then `defineAddToCart();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `label`, `added`, `item`, `cart`, `from`, `hold`
 - **Events:** `usa:add`
 - **Slots:** —

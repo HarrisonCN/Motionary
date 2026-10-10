@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 10.2
 - **Import:** `import { defineMotionInspector } from 'motionary/components/widgets'` then `defineMotionInspector();`
-- **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `scope`, `interval`
 - **Events:** `usa:change`
 - **Slots:** —

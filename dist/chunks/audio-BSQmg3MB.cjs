@@ -339,4 +339,4 @@ exports.disableAudio = disableAudio;
 exports.enableAudio = enableAudio;
 exports.getAudio = getAudio;
 exports.onBeat = onBeat;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.9.0/dist/chunks/audio-BSQmg3MB.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/chunks/audio-BSQmg3MB.cjs.map

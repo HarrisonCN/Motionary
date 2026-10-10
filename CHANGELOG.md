@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [13.0.0] - 2026-10-10
+
+### Breaking
+- The import paths deprecated in 11.5 are **removed** from `package.json` `exports`: `motionary/components/core` → `motionary/core`, `motionary/components/ai` → `motionary/tooling/ai`, `motionary/components/design` and `motionary/design` → `motionary/tooling/design`, `motionary/components/angular` → `motionary/angular`, `motionary/manifest.json` / `motionary/manifest.schema.json` → `motionary/tooling/…` (same for `use-scroll-animate`). The replacements serve the same files, so nothing else changes. `npx usa-codemod-13 --write` rewrites them; `npx motionary doctor` finds them. See [docs/upgrading-13.md](./docs/upgrading-13.md).
+- CDN major `@13` (`https://unpkg.com/motionary@13/dist/…`); exact version pins keep working.
+
+### Discover · copy · run (Tooling · all layers)
+- Stable: `motionary-mcp` mounted validation (`validate_snippet { mount: true }`) and version-aware answers (`check_compat`, `version` arguments); the Figma plugin export; the component playground (`showcase/run.html`); `npx motionary export` (CSS / mini program WXSS / HarmonyOS ArkTS) and `npx motionary compat`.
+- Public subpaths follow the four layers: Motion Core (`motionary/core`, `motionary/runtime`), Runtime (`motionary/runtime/*`), Components (`motionary/components/*`, `widgets/*`, `effects/*`), Tooling (`motionary/tooling/*`), plus framework entries. Dist file layout is unchanged, so every size budget is unchanged.
+- Docs, READMEs and generators use the layer subpaths throughout; `dist/deprecated/` is no longer generated.
+
+### Checks
+- New `test/widgets-13-0.test.ts`: removed exports, replacements resolve to the same files, CDN major, runtime version, docs free of removed paths, stable-tooling docs; `check:exports` asserts the old specifiers throw `ERR_PACKAGE_PATH_NOT_EXPORTED`.
+
 ## [12.9.0] - 2026-10-10
 
 ### 13.0 preparation (all layers)
