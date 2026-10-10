@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-B3me2y0o.cjs');
+var base = require('../chunks/base-BG_mxssu.cjs');
 var components_engine = require('../components/engine.cjs');
 
 var css = "usa-hydrate{display:block}";
@@ -43,4 +43,4 @@ function defineHydrate(tag = 'usa-hydrate') {
 }
 
 exports.defineHydrate = defineHydrate;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/widgets/hydrate.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/widgets/hydrate.cjs.map

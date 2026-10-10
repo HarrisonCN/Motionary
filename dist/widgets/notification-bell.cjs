@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-B3me2y0o.cjs');
+var base = require('../chunks/base-BG_mxssu.cjs');
 
 var css = "usa-notification-bell{position:relative;display:inline-block;font:400 13px/1.35 system-ui,sans-serif}.usa-nb-btn{position:relative;display:grid;place-items:center;width:42px;height:42px;border:0;border-radius:50%;background:var(--usa-nb-bg,#f1f5f9);color:var(--usa-nb-fg,#0f172a);cursor:pointer}.usa-nb-bell{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transform-origin:50% 12%}.usa-nb-badge{position:absolute;top:2px;right:2px;min-width:17px;height:17px;padding:0 4px;border-radius:9px;background:#ef4444;color:#fff;font:800 10px/17px system-ui,sans-serif;text-align:center}.usa-nb-badge:empty{display:none}.usa-nb-panel{position:absolute;top:calc(100% + 8px);right:0;width:min(280px,86vw);border-radius:14px;background:#fff;color:#0f172a;box-shadow:0 18px 40px -14px rgba(15,23,42,.45);overflow:hidden;z-index:20;transform-origin:90% 0}.usa-nb-panel[hidden]{display:none}.usa-nb-panel header{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-bottom:1px solid rgba(15,23,42,.08)}.usa-nb-read{border:0;background:none;color:#7c5cff;font:600 12px/1 system-ui,sans-serif;cursor:pointer}.usa-nb-list{max-height:220px;margin:0;padding:4px;list-style:none;overflow:auto}.usa-nb-item{display:flex;justify-content:space-between;gap:8px;padding:8px;border-radius:8px}.usa-nb-item[data-unread]{background:#f5f3ff;font-weight:600}.usa-nb-item[data-unread]::before{content:\"\";flex:0 0 7px;height:7px;margin-top:6px;border-radius:50%;background:#7c5cff}.usa-nb-item time{opacity:.5;font-size:11px;white-space:nowrap}.usa-nb-text{flex:1;min-width:0}.usa-nb-empty{margin:16px;text-align:center;opacity:.55}.usa-nb-btn:focus-visible,.usa-nb-read:focus-visible{outline:2px solid #7c5cff;outline-offset:2px}";
 
@@ -104,4 +104,4 @@ function defineNotificationBell(tag = 'usa-notification-bell') {
 }
 
 exports.defineNotificationBell = defineNotificationBell;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/widgets/notification-bell.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/widgets/notification-bell.cjs.map

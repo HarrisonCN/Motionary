@@ -4,7 +4,7 @@
   "schemaVersion": 2,
   "stability": "stable",
   "package": "motionary",
-  "version": "13.0.0",
+  "version": "13.0.1",
   "homepage": "https://harrisoncn.github.io/Motionary/",
   "llms": "https://harrisoncn.github.io/Motionary/llms.txt",
   "cdn": {
@@ -3604,7 +3604,8 @@
       "source": "src/components/transitions/dialog.ts",
       "changed": [
         "2.9",
-        "3.0"
+        "3.0",
+        "13.0"
       ]
     },
     {
@@ -6770,10 +6771,21 @@
         "register": "defineModal();"
       },
       "cdn": "https://unpkg.com/motionary@13/dist/widgets.umd.js",
-      "attributes": [],
-      "events": [],
+      "attributes": [
+        "effect",
+        "label",
+        "persistent"
+      ],
+      "events": [
+        "usa:open",
+        "usa:close"
+      ],
       "slots": [],
-      "methods": [],
+      "methods": [
+        "show",
+        "close",
+        "toggle"
+      ],
       "example": "<button data-usa-open=\"welcome\">Open</button>\n<usa-modal id=\"welcome\" effect=\"origin\" label=\"Welcome\">\n  <h2>Hello 👋</h2>\n  <p>…</p>\n  <button data-usa-close=\"ok\">Got it</button>\n</usa-modal>",
       "esm": "import { defineModal } from 'motionary/components/widgets';\n\ndefineModal(); // registers <usa-modal>\n\n/* then use it in your HTML:\n<button data-usa-open=\"welcome\">Open</button>\n<usa-modal id=\"welcome\" effect=\"origin\" label=\"Welcome\">\n  <h2>Hello 👋</h2>\n  <p>…</p>\n  <button data-usa-close=\"ok\">Got it</button>\n</usa-modal>\n*/",
       "requires": [],
@@ -6782,8 +6794,10 @@
       "entry": "motionary/widgets/modal",
       "stability": "stable",
       "deprecated": null,
+      "source": "src/components/widgets/overlay.ts",
       "changed": [
-        "6.6"
+        "6.6",
+        "13.0"
       ]
     },
     {
@@ -8574,7 +8588,8 @@
       "deprecated": null,
       "source": "src/components/ui/pull-refresh.ts",
       "changed": [
-        "6.8"
+        "6.8",
+        "13.0"
       ]
     },
     {
@@ -9432,10 +9447,21 @@
         "register": "defineSheet();"
       },
       "cdn": "https://unpkg.com/motionary@13/dist/widgets.umd.js",
-      "attributes": [],
-      "events": [],
+      "attributes": [
+        "side",
+        "label",
+        "persistent"
+      ],
+      "events": [
+        "usa:open",
+        "usa:close"
+      ],
       "slots": [],
-      "methods": [],
+      "methods": [
+        "show",
+        "close",
+        "toggle"
+      ],
       "example": "<button data-usa-open=\"cart\">Cart</button>\n<usa-sheet id=\"cart\" side=\"right\" label=\"Cart\">\n  <h2>Your cart</h2>\n  …\n  <button data-usa-close>Close</button>\n</usa-sheet>",
       "esm": "import { defineSheet } from 'motionary/components/widgets';\n\ndefineSheet(); // registers <usa-sheet>\n\n/* then use it in your HTML:\n<button data-usa-open=\"cart\">Cart</button>\n<usa-sheet id=\"cart\" side=\"right\" label=\"Cart\">\n  <h2>Your cart</h2>\n  …\n  <button data-usa-close>Close</button>\n</usa-sheet>\n*/",
       "requires": [],
@@ -9444,8 +9470,10 @@
       "entry": "motionary/widgets/sheet",
       "stability": "stable",
       "deprecated": null,
+      "source": "src/components/widgets/overlay.ts",
       "changed": [
-        "6.6"
+        "6.6",
+        "13.0"
       ]
     },
     {

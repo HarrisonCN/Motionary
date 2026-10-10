@@ -129,7 +129,8 @@ declare function stackToast(input: string | StackToastOptions, stack?: UsaToastS
  *   built-in grab handle).
  *
  * Attributes: `open` (initial), `label`, `persistent` (backdrop click / Esc
- * don't close). Any element with `data-usa-open="<id>"` opens the overlay
+ * don't close). `label`, `persistent`, `effect` and `side` can change at any
+ * time, also while the overlay is open (13.0.1: updated in place). Any element with `data-usa-open="<id>"` opens the overlay
  * with that id; `[data-usa-close]` inside closes it. API: `show(trigger?)`,
  * `close(value?)`, `toggle()`, `opened`. Events: `usa:open`, `usa:close`
  * (`{ value }`). Focus returns to the opener. Reduced motion: no movement,

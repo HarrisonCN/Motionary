@@ -1,7 +1,7 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-DQEOHLh7.js';
-import { T as Timeline, P as Playable, p as parseValue } from '../chunks/tween-DJfADHZK.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-BgdHqx0s.js';
+import { T as Timeline, P as Playable, p as parseValue } from '../chunks/tween-BtX9Wj7P.js';
 import { c as cubicBezier } from '../chunks/ease-XN8_0sXu.js';
-import '../chunks/ticker-CFlr9gom.js';
+import '../chunks/ticker-vHgAp_Uz.js';
 
 /**
  * `motionary/runtime/format-svg` (10.2) — SVG animation with the runtime
@@ -444,4 +444,4 @@ function playSmil(svg, o = {}) {
 const formatSvg = { id: 'format-svg', version: RUNTIME_VERSION, tier: 'standard', requires: ['core'], api: { parsePath, flattenPath, pathLength, pointAtLength, samplePath, morphPath, readSmil, playSmil, smilTime } };
 
 export { flattenPath, formatSvg, morphPath, parsePath, pathLength, playSmil, pointAtLength, readSmil, samplePath, smilTime };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/runtime/format-svg.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/runtime/format-svg.js.map

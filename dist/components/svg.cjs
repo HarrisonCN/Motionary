@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-B3me2y0o.cjs');
+var base = require('../chunks/base-BG_mxssu.cjs');
 var keyClick = require('../chunks/key-click-v7I4K5Sr.cjs');
 
 const NUM = /-?(?:\d+\.?\d*|\.\d+)(?:e[-+]?\d+)?/gi;
@@ -369,4 +369,4 @@ exports.drawLines = drawLines;
 exports.interpolatePath = interpolatePath;
 exports.morphTo = morphTo;
 exports.pathsCompatible = pathsCompatible;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/components/svg.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/components/svg.cjs.map

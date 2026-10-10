@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-B3me2y0o.cjs');
+var base = require('../chunks/base-BG_mxssu.cjs');
 var components_tokens = require('../components/tokens.cjs');
 
 var css = "usa-token-editor{display:block;max-width:100%;font:12px/1.4 ui-sans-serif,system-ui,sans-serif;color:#1e1b4b}usa-token-editor .usa-te-rows{display:grid;gap:4px;max-height:var(--usa-te-max,none);overflow:auto}usa-token-editor .usa-te-row{display:grid;grid-template-columns:minmax(0,1fr) 92px 18px 56px;align-items:center;gap:6px;padding:3px 6px;border-radius:8px;background:#f5f3ff}usa-token-editor .usa-te-row[data-invalid]{background:#fef2f2;outline:1px solid #fca5a5}usa-token-editor .usa-te-name{font:600 11px/1.2 ui-monospace,monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}usa-token-editor input{width:100%;min-width:0;box-sizing:border-box;padding:3px 5px;border:1px solid #c7d2fe;border-radius:6px;font:11px ui-monospace,monospace;background:#fff;color:inherit}usa-token-editor .usa-te-unit{font-size:10px;color:#6366f1}usa-token-editor .usa-te-prev{position:relative;height:10px;border-radius:5px;background:#e0e7ff;--usa-te-run:44px}usa-token-editor .usa-te-prev i{position:absolute;left:0;top:0;width:10px;height:10px;border-radius:50%;background:#6366f1}usa-token-editor .usa-te-bar{display:flex;gap:6px;margin-top:6px}usa-token-editor button{padding:5px 10px;border:0;border-radius:999px;background:#4f46e5;color:#fff;font:600 11px/1 system-ui,sans-serif;cursor:pointer}usa-token-editor button+button{background:#e0e7ff;color:#3730a3}usa-token-editor textarea{display:block;width:100%;box-sizing:border-box;margin-top:6px;font:10px/1.35 ui-monospace,monospace;border:1px solid #c7d2fe;border-radius:8px;padding:6px}usa-token-editor textarea[hidden]{display:none}usa-token-editor .usa-te-problems{margin:4px 0 0;padding-left:16px;color:#b91c1c;font-size:11px}usa-token-editor .usa-te-problems:empty{display:none}";
@@ -146,4 +146,4 @@ function defineTokenEditor(tag = 'usa-token-editor') {
 }
 
 exports.defineTokenEditor = defineTokenEditor;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/widgets/token-editor.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/widgets/token-editor.cjs.map

@@ -1,8 +1,8 @@
 'use strict';
 
-var base = require('../chunks/base-B3me2y0o.cjs');
+var base = require('../chunks/base-BG_mxssu.cjs');
 var components_dsl = require('../components/dsl.cjs');
-require('../chunks/registry-BB1oO-lR.cjs');
+require('../chunks/registry-LE5iyTqw.cjs');
 
 var css = "usa-motion{display:block}";
 
@@ -35,4 +35,4 @@ function defineMotion(tag = 'usa-motion') {
 }
 
 exports.defineMotion = defineMotion;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/widgets/motion.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/widgets/motion.cjs.map

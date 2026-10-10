@@ -4,7 +4,7 @@
 
 Pull down at the top of a list: the spinner stretches in with rubber-band resistance; release past the threshold to refresh.
 
-- **Category:** ui · **since** 2.6 · **changed in** 6.8
+- **Category:** ui · **since** 2.6 · **changed in** 6.8, 13.0
 - **Import:** `import { definePullRefresh } from 'motionary/components/ui'` then `definePullRefresh();`
 - **CDN:** `<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>`
 - **Attributes:** `threshold`, `disabled`, `label`

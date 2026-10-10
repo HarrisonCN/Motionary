@@ -29,7 +29,7 @@ export function runtimeModule<A>(host: HTMLElement, id: string): A | null {
       p.textContent = msg;
       host.prepend(p);
     }
-    host.dispatchEvent(new CustomEvent('usa:runtime-missing', { detail: { module: id, message: msg }, bubbles: true }));
+    host.dispatchEvent(new CustomEvent('usa:runtime-missing', { detail: { module: id, message: msg }, bubbles: true, composed: true }));
     return null;
   }
 }

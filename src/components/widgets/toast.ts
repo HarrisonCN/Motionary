@@ -214,7 +214,7 @@ function installToastTriggers(): void {
   delegateTriggers();
   if (trig || typeof document === 'undefined') return;
   trig = true;
-  // contract-exempt: lifecycle-global-listener — one delegated listener for [data-usa-toast] triggers, installed once per page, never per element
+  // contract-exempt: lifecycle-global-listener(document click) — one delegated listener for [data-usa-toast] triggers, installed once per page, never per element
   document.addEventListener('click', (e) => {
     const t = (e.target as Element | null)?.closest?.('[data-usa-toast]');
     if (!t) return;

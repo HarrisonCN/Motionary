@@ -4,9 +4,9 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 var core$1 = require('./chunks/core-BjcOCpJt.cjs');
 var stagger = require('./chunks/stagger-DFKwqOQG.cjs');
-var core = require('./chunks/core-KIvPGg0c.cjs');
+var core = require('./chunks/core-DMrg99HN.cjs');
 var presets = require('./chunks/presets-CUHys3sK.cjs');
-require('./chunks/base-B3me2y0o.cjs');
+require('./chunks/base-BG_mxssu.cjs');
 require('./components/tokens.cjs');
 
 /**
@@ -146,4 +146,4 @@ exports.resolvePreset = presets.resolvePreset;
 exports.reversePreset = presets.reversePreset;
 exports.default = ScrollAnimate;
 exports.parallax = parallax;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/index.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/index.cjs.map

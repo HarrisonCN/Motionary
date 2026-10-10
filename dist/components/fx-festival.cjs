@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-BB1oO-lR.cjs');
-require('../chunks/base-B3me2y0o.cjs');
+var registry = require('../chunks/registry-LE5iyTqw.cjs');
+require('../chunks/base-BG_mxssu.cjs');
 
 /** Evenly spread spark directions with a little jitter (8.1). */
 function sparkVectors(n, radius, seed = 1) {
@@ -118,4 +118,4 @@ function registerFestivalPack() {
 exports.FESTIVAL_FX = FESTIVAL_FX;
 exports.registerFestivalPack = registerFestivalPack;
 exports.sparkVectors = sparkVectors;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/components/fx-festival.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/components/fx-festival.cjs.map

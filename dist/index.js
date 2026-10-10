@@ -1,9 +1,9 @@
 import { b as resolveTargets, h as hasDOM, s as supportsObserver, g as getScrollProgress, d as prefersReducedMotion, c as createScrollAnimate } from './chunks/core-Dj6iomdc.js';
 export { e as supportsScrollTimeline } from './chunks/core-Dj6iomdc.js';
 export { s as staggerChildren } from './chunks/stagger-B9sKPwQB.js';
-export { T as TIMELINE_PRESETS, r as resolvePosition, s as supportsNativeScrub, t as timeline } from './chunks/core-BOCM9zD5.js';
+export { T as TIMELINE_PRESETS, r as resolvePosition, s as supportsNativeScrub, t as timeline } from './chunks/core-CBU40kLB.js';
 export { E as EASING_MAP, P as PRESETS, c as registerPresets, a as resolveEasing, r as resolvePreset, b as reversePreset } from './chunks/presets-BYBVJVeP.js';
-import './chunks/base-zSGb8ujt.js';
+import './chunks/base-CBMzOs1k.js';
 import './components/tokens.js';
 
 /**
@@ -128,4 +128,4 @@ function parallax(target, options = {}) {
 const ScrollAnimate = /* @__PURE__ */ createScrollAnimate();
 
 export { createScrollAnimate, ScrollAnimate as default, getScrollProgress, parallax };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/index.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/index.js.map

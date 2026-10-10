@@ -1,10 +1,10 @@
 'use strict';
 
-var widgets_lyrics = require('../chunks/lyrics-gmFffOvn.cjs');
-require('../chunks/base-B3me2y0o.cjs');
+var widgets_lyrics = require('../chunks/lyrics-CmZKfI0D.cjs');
+require('../chunks/base-BG_mxssu.cjs');
 require('../chunks/shared-BxK1D7EZ.cjs');
 
 
 
 exports.defineLyrics = widgets_lyrics.defineLyrics;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/widgets/lyrics.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/widgets/lyrics.cjs.map

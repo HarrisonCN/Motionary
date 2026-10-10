@@ -314,7 +314,7 @@ npx usa-codemod-13 --write      # まとめて書き換え。@10 / @11 / @12 に
 
 ## バージョンと互換性
 
-- **npm の dist-tag：** `latest` は現在のメジャー（13.0.0）を指します。マイナーリリースにはそれぞれ `v<major>-<minor>` のタグも付きます（例：`v12-9`）。`motionary` と `use-scroll-animate` は常に同じバージョンで同時に公開されます。
+- **npm の dist-tag：** `latest` は現在のメジャーとそのパッチ（13.0.1）を指します。マイナーリリースにはそれぞれ `v<major>-<minor>` のタグも付きます（例：`v12-9`）。`motionary` と `use-scroll-animate` は常に同じバージョンで同時に公開されます。
 - **CDN：** URL はメジャーで固定します（`motionary@13`）。正確なバージョン指定（`motionary@12.4.0`）もそのまま使えます。
 - **セマンティックバージョニング：** 破壊的変更はメジャーだけで行い、毎回ガイドと codemod を用意します。非推奨になったものは次のメジャーまで残り、その間は型に `@deprecated` が付くだけで、実行時の警告は出ません。
 - **各バージョンに含まれるもの：** コンポーネントとランタイムモジュールごとの `since` / `changed`（[docs/version-compat.md](./docs/version-compat.md)）、機能ごとの対応状況（[docs/compat-matrix.md](./docs/compat-matrix.md)）。

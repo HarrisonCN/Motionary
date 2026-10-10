@@ -1,6 +1,6 @@
-import { f as defineElement } from '../chunks/base-zSGb8ujt.js';
+import { f as defineElement } from '../chunks/base-CBMzOs1k.js';
 import { parseMotion, bindMotion } from '../components/dsl.js';
-import '../chunks/registry-CYojuxi5.js';
+import '../chunks/registry-4UDF3Dpk.js';
 
 var css = "usa-motion{display:block}";
 
@@ -33,4 +33,4 @@ function defineMotion(tag = 'usa-motion') {
 }
 
 export { defineMotion };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/widgets/motion.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/widgets/motion.js.map

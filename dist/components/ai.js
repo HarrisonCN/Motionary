@@ -464,4 +464,4 @@ async function suggestMotion(text, options = {}) {
 }
 
 export { MOTION_EFFECTS, MOTION_SPEC_SCHEMA, MOTION_SYSTEM_PROMPT, MOTION_TRIGGERS, describeMotion, intentFromSpec, motionSnippet, specOf, suggestMotion, validateMotionSpec };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/components/ai.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/components/ai.js.map

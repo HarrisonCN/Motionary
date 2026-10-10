@@ -225,7 +225,8 @@ function getBase() {
             return animateWithMotion(el, keyframes, options);
         }
         emit(type, detail) {
-            return this.dispatchEvent(new CustomEvent(`usa:${type}`, { detail, bubbles: true, cancelable: true }));
+            // 13.0.1: composed — usa:* events cross Shadow DOM boundaries (documented since 12.0, missing until now)
+            return this.dispatchEvent(new CustomEvent(`usa:${type}`, { detail, bubbles: true, composed: true, cancelable: true }));
         }
     }
     baseClass = Base;
@@ -5007,7 +5008,7 @@ const CARD_EFFECTS = ['flip', 'holo', 'glass', 'border-glow', 'conic-border', 'l
 /** Effects that follow the pointer (they share one rAF-throttled tracker). */
 const TRACKING = /*#__PURE__*/ new Set(['holo', 'border-glow', 'spotlight', 'parallax-layers', 'lift']);
 function defineCard(tag = 'usa-card') {
-    // contract-exempt: attr-unobserved — flipped, expanded: state reflected by the element itself (set the property instead); observing it would re-mount on every change
+    // contract-exempt: attr-unobserved(flipped, expanded) — state reflected by the element itself (set the property instead); observing it would re-mount on every change
     return defineElement(tag, (Base) => class UsaCard extends Base {
         constructor() {
             super(...arguments);
@@ -6552,7 +6553,7 @@ const nextId = (prefix) => `${prefix}-${++uid}`;
 var css$n = "";
 
 function defineTabs(tag = 'usa-tabs') {
-    // contract-exempt: attr-unobserved — selected: state reflected by the element itself (set the property instead); observing it would re-mount on every change
+    // contract-exempt: attr-unobserved(selected) — state reflected by the element itself (set the property instead); observing it would re-mount on every change
     adoptVariants();
     return defineElement(tag, (Base) => class UsaTabs extends Base {
         constructor() {
@@ -6955,7 +6956,7 @@ function definePullRefresh(tag = 'usa-pull-refresh') {
                     this._y.set(0);
                     resolve();
                 };
-                const ev = new CustomEvent('usa:refresh', { detail: { done }, bubbles: true, cancelable: true });
+                const ev = new CustomEvent('usa:refresh', { detail: { done }, bubbles: true, composed: true, cancelable: true });
                 this.dispatchEvent(ev);
                 const fn = this.onrefresh;
                 if (typeof fn === 'function')
@@ -6968,7 +6969,7 @@ function definePullRefresh(tag = 'usa-pull-refresh') {
 var css$k = "";
 
 function defineFab(tag = 'usa-fab') {
-    // contract-exempt: attr-unobserved — open: state reflected by the element itself (set the property instead); observing it would re-mount on every change
+    // contract-exempt: attr-unobserved(open) — state reflected by the element itself (set the property instead); observing it would re-mount on every change
     adoptVariants();
     return defineElement(tag, (Base) => class UsaFab extends Base {
         static get observedAttributes() {
@@ -7242,7 +7243,7 @@ function defineSlider(tag = 'usa-slider') {
 var css$h = "";
 
 function definePopover(tag = 'usa-popover') {
-    // contract-exempt: attr-unobserved — open: state reflected by the element itself (set the property instead); observing it would re-mount on every change
+    // contract-exempt: attr-unobserved(open) — state reflected by the element itself (set the property instead); observing it would re-mount on every change
     adoptVariants();
     return defineElement(tag, (Base) => class UsaPopover extends Base {
         static get observedAttributes() {
@@ -10104,7 +10105,7 @@ const PRIMITIVES = {
         const cart = c.root.querySelector('[data-role="cart"]') || document.querySelector('[data-role="cart"]');
         const item = el.closest('[data-role="product"]')?.querySelector('img, [data-role="thumb"]') || el;
         if (cart)
-            void flyToCart(item, cart).then(() => cart.dispatchEvent(new CustomEvent('usa:added', { bubbles: true })));
+            void flyToCart(item, cart).then(() => cart.dispatchEvent(new CustomEvent('usa:added', { bubbles: true, composed: true })));
     }),
 };
 /** The five effect packs: `data-role` → primitives. */
@@ -11175,4 +11176,4 @@ exports.viewTransition = viewTransition;
 exports.warnBaseline = warnBaseline;
 exports.watchPowerSaver = watchPowerSaver;
 exports.withoutDeprecations = withoutDeprecations;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/components/lite.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/components/lite.cjs.map

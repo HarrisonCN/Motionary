@@ -1,9 +1,9 @@
 'use strict';
 
-var base = require('../chunks/base-B3me2y0o.cjs');
+var base = require('../chunks/base-BG_mxssu.cjs');
 var keyClick = require('../chunks/key-click-v7I4K5Sr.cjs');
 var components_fxGesture = require('../components/fx-gesture.cjs');
-require('../chunks/registry-BB1oO-lR.cjs');
+require('../chunks/registry-LE5iyTqw.cjs');
 
 var css = "usa-gyro-card{position:relative;display:block;box-sizing:border-box;padding:22px;border-radius:18px;color:#fff;background:linear-gradient(135deg,#6366f1,#ec4899);box-shadow:0 18px 40px -20px rgba(79,70,229,.8);transform:perspective(800px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transform-style:preserve-3d;transition:transform .25s ease-out;will-change:transform;overflow:hidden}usa-gyro-card [data-depth]{display:block;transform:translateZ(calc(var(--depth-k,14px) * var(--d,1)))}usa-gyro-card [data-depth=\"2\"]{--d:2}usa-gyro-card [data-depth=\"3\"]{--d:3}usa-gyro-card .usa-gy-glare{position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(circle at var(--gx,50%) var(--gy,30%),rgba(255,255,255,.4),transparent 55%);opacity:.5;transition:opacity .3s}usa-gyro-card[data-tilted] .usa-gy-glare{opacity:1}@media (prefers-reduced-motion:reduce){usa-gyro-card{transform:none;transition:none}}";
 
@@ -91,4 +91,4 @@ function defineGyroCard(tag = 'usa-gyro-card') {
 }
 
 exports.defineGyroCard = defineGyroCard;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/widgets/gyro-card.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/widgets/gyro-card.cjs.map

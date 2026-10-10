@@ -1,4 +1,4 @@
-import { p as prefersReducedMotion, n as now, m as motionScale, r as raf, D as EASE_OUT, d as clamp, E as EASE_SPRING, f as defineElement } from '../chunks/base-zSGb8ujt.js';
+import { p as prefersReducedMotion, n as now, m as motionScale, r as raf, D as EASE_OUT, d as clamp, E as EASE_SPRING, f as defineElement } from '../chunks/base-CBMzOs1k.js';
 
 const anim = (el, frames, o) => {
     if (typeof el.animate !== 'function')
@@ -111,7 +111,7 @@ const PRIMITIVES = {
         const cart = c.root.querySelector('[data-role="cart"]') || document.querySelector('[data-role="cart"]');
         const item = el.closest('[data-role="product"]')?.querySelector('img, [data-role="thumb"]') || el;
         if (cart)
-            void flyToCart(item, cart).then(() => cart.dispatchEvent(new CustomEvent('usa:added', { bubbles: true })));
+            void flyToCart(item, cart).then(() => cart.dispatchEvent(new CustomEvent('usa:added', { bubbles: true, composed: true })));
     }),
 };
 /** The five effect packs: `data-role` → primitives. */
@@ -181,4 +181,4 @@ function definePacksComponents() {
 }
 
 export { PACKS, PACK_PRIMITIVES, applyPack, countUp, definePack, definePacksComponents, flyToCart };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/components/packs.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/components/packs.js.map

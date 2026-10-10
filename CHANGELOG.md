@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [13.0.1] - 2026-10-10
+
+### Fixed (component contract)
+- **`usa:*` events are now `composed: true`.** The base `emit()` dispatched `bubbles: true, cancelable: true` but not `composed`, although the contract documents composed events since 12.0 — so an event from a `<usa-*>` element inside a shadow root (a Lit / Stencil / Angular-emulated component, or `<usa-dialog>`'s own) stopped at that root. `emit()` and the direct dispatches of `usa:runtime-missing`, `usa:refresh` (`<usa-pull-refresh>`), `usa:hydrated` (`hydrateMotion()`) and `usa:added` now compose. **Behaviour note:** listeners outside a shadow root (e.g. on `document`) now receive these events, with `event.target` retargeted to the outermost shadow host (`event.composedPath()[0]` is still the element). Event names, `detail`, `bubbles` and `cancelable` are unchanged; events fired at `document` (`usa:motion`, `usa:sensitivity`, `usa:degrade`, `usa:native-settings`) are unaffected.
+- **`<usa-modal>` / `<usa-sheet>`: `label` is live.** It was read once on mount, so changing it later left the dialog's accessible name stale. `label` and `persistent` are now observed; `label`, `effect` and `side` update in place — also while the overlay is open (a re-mount would have closed it without `usa:close`). `aria-labelledby` still wins over `label`. `open` stays initial-only (state goes through `show()` / `close()` / `toggle()`), now as a documented exemption.
+- **Contract audit sees every public component.** `scripts/contract-audit.mjs` only recognised `export function defineX(tag = …)`, so `<usa-modal>` and `<usa-sheet>` (`export const defineModal = (tag = 'usa-modal') => defineOverlay(…)`) were never audited (207 of 209). It now audits the `export const` form against the helper it delegates to, and reads `observedAttributes` getters written as a conditional list. The AI manifest scanner had the same gap: `motionary/tooling/manifest.json` now lists `<usa-modal>` / `<usa-sheet>` attributes, events (`usa:open`, `usa:close`) and methods (`show`, `close`, `toggle`) instead of empty lists.
+- **Exemption comments could satisfy their own rule:** a `// contract-exempt: reduced-motion — …` comment matched the reduced-motion guard (`reduced`), so it masked nothing and would have hidden a later regression. The rules now ignore comments.
+
+### Checks
+- `check:contract` requires the audited tag set to equal the manifest's public components (209 = 209) and fails when a new component is not audited ("is in the manifest but not audited").
+- Exemptions are scoped: `// contract-exempt: <rule>(<item>, …) — <reason>`. Per-item rules (`attr-unobserved`, `event-*`, `lifecycle-global-listener`, `error-prefix`) must name their items and mask only those (`exempt-unscoped`); an exemption that masks nothing is a finding (`exempt-unused`); new rule `event-composed`. The 26 existing exemptions were rewritten to the scoped form (no reasons changed) and one added (`<usa-modal>` / `<usa-sheet>` `attr-unobserved(open)`): 209 components, 0 findings, 28 documented exemptions.
+- Event detail shapes are specified: the audit records each `usa:*` event's `detail` shape and `test/fixtures/event-details-13.json` is the spec (154 components, 224 events).
+- New `test/fixes-13-0-1.test.ts`: both define forms, manifest ⇔ audit coverage and the failing `--check`, scoped / unused / cross-element exemptions, overlay attributes live while open, `emit()` flags, events crossing two nested open shadow roots and a closed one (`<usa-modal>`, `<usa-sheet>`, `<usa-dialog>`, `usa:runtime-missing`), every element-level `usa:*` dispatch composed, detail-shape spec. No size budget changed.
+
 ## [13.0.0] - 2026-10-10
 
 ### Breaking

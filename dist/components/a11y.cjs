@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-B3me2y0o.cjs');
+var base = require('../chunks/base-BG_mxssu.cjs');
 var indexTags = require('../chunks/index-tags-hLIF2Clq.cjs');
 
 /**
@@ -273,4 +273,4 @@ exports.restoreMotionSensitivity = restoreMotionSensitivity;
 exports.setMotionSensitivity = setMotionSensitivity;
 exports.staticAlternative = staticAlternative;
 exports.warnBaseline = warnBaseline;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/components/a11y.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/components/a11y.cjs.map

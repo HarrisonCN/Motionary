@@ -275,6 +275,6 @@ export function hydrateMotion(root: ParentNode = document, options: HydrateOptio
   tl.play();
   els.forEach((el) => el.setAttribute('data-usa-hydrated', ''));
   const target = (root as any).dispatchEvent ? (root as unknown as EventTarget) : document;
-  tl.finished.then(() => target.dispatchEvent?.(new CustomEvent('usa:hydrated', { detail: { count: els.length }, bubbles: true })));
+  tl.finished.then(() => target.dispatchEvent?.(new CustomEvent('usa:hydrated', { detail: { count: els.length }, bubbles: true, composed: true })));
   return tl;
 }

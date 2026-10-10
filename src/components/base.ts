@@ -297,7 +297,8 @@ export function getBase(): BaseCtor {
     }
 
     emit(type: string, detail?: unknown): boolean {
-      return this.dispatchEvent(new CustomEvent(`usa:${type}`, { detail, bubbles: true, cancelable: true }));
+      // 13.0.1: composed — usa:* events cross Shadow DOM boundaries (documented since 12.0, missing until now)
+      return this.dispatchEvent(new CustomEvent(`usa:${type}`, { detail, bubbles: true, composed: true, cancelable: true }));
     }
   }
   baseClass = Base as unknown as BaseCtor;

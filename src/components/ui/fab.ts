@@ -19,7 +19,7 @@ export interface UsaFabElement extends UsaElement {
 }
 
 export function defineFab(tag = 'usa-fab'): CustomElementConstructor | undefined {
-  // contract-exempt: attr-unobserved — open: state reflected by the element itself (set the property instead); observing it would re-mount on every change
+  // contract-exempt: attr-unobserved(open) — state reflected by the element itself (set the property instead); observing it would re-mount on every change
   adoptVariants();
   return defineElement(
     tag,

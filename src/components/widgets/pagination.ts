@@ -29,7 +29,7 @@ export function pageWindow(page: number, total: number, siblings = 1): (number |
 }
 
 export function definePagination(tag = 'usa-pagination'): CustomElementConstructor | undefined {
-  // contract-exempt: attr-unobserved — page: state reflected by the element itself (set the property instead); observing it would re-mount on every change
+  // contract-exempt: attr-unobserved(page) — state reflected by the element itself (set the property instead); observing it would re-mount on every change
   return defineElement(
     tag,
     (Base) => {

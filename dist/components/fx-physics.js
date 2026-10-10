@@ -1,6 +1,6 @@
-import { registerEffects } from '../chunks/registry-CYojuxi5.js';
+import { registerEffects } from '../chunks/registry-4UDF3Dpk.js';
 import { c as canvasBackground } from '../chunks/generative-2LhxG5BJ.js';
-import '../chunks/base-zSGb8ujt.js';
+import '../chunks/base-CBMzOs1k.js';
 import '../chunks/shared-CkKHWrtJ.js';
 
 /** A minimal Verlet world: points, distance sticks, gravity, damping. */
@@ -337,4 +337,4 @@ function registerPhysicsPack() {
 }
 
 export { PHYSICS2_FX, VerletWorld, registerPhysicsPack };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.0/dist/components/fx-physics.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.0.1/dist/components/fx-physics.js.map
