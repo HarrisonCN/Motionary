@@ -174,7 +174,8 @@ describe('13.0.2 HTML pages that need ES modules', () => {
       // 13.2: the manifest cdn of an entry-only element is its own ES module entry, so only the two no-build bundles count here
       const all = ['components.umd.js', 'widgets.umd.js'].map(text).join('\n');
       const short = c.tag.slice(4);
-      return !all.includes(c.tag) && !all.includes(`"${short}"`) && !all.includes(`'${short}'`) && !all.includes(c.import?.define || '@@');
+      // 13.3.0: a quoted tag (a define call), not any mention — CSS selectors such as `usa-gl-scene,usa-gl-model{…}` define nothing
+      return ![`"${c.tag}"`, `'${c.tag}'`, `\`${c.tag}\``].some((q) => all.includes(q)) && !all.includes(`"${short}"`) && !all.includes(`'${short}'`) && !all.includes(c.import?.define || '@@');
     }).map((c: any) => c.tag).sort();
     if (!text('components.umd.js')) return; // dist not built
     expect(none).toEqual([...(R as any).ESM_ONLY].sort());

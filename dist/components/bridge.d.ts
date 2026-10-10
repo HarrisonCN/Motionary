@@ -15,6 +15,12 @@ type MotionSensitivity = 'full' | 'gentle' | 'minimal' | 'static';
  *
  * Hosts that can only run script call `window.usaNative.apply({...})`.
  * Samples: examples/native/{winui3,maui,flutter}.
+ *
+ * Security (13.3.0): `window` messages are accepted only from the page itself
+ * (host-injected script) or from native code (no source window). Messages from
+ * any other window — an iframe, the opener, an embedding parent — are dropped
+ * unless their exact origin is listed in `allowedOrigins`. `isTrustedMessage()`
+ * applies the same rule to your own listeners.
  */
 
 type NativeHost = 'webview2' | 'maui' | 'flutter' | 'electron' | 'tauri' | 'browser';
@@ -34,7 +40,19 @@ interface NativeShellOptions {
     channel?: string;
     /** Called after settings are applied. */
     onSettings?: (settings: NativeSettings, host: NativeHost) => void;
+    /**
+     * Exact origins (`https://app.example`) of other windows allowed to send `usa:settings`
+     * through `window.postMessage` — e.g. the page that embeds this one in an iframe (13.3.0).
+     * Default: none. `'*'` trusts every window (not recommended); opaque `"null"` origins never match.
+     */
+    allowedOrigins?: string[];
 }
+/**
+ * Whether a `message` event may drive the bridge (13.3.0): sent by this window itself (host-injected
+ * `window.postMessage`) or by native code (no source window), or by a window whose exact origin is in
+ * `allowedOrigins`. Use it in your own `message` listeners too.
+ */
+declare function isTrustedMessage(e: MessageEvent, allowedOrigins?: string[]): boolean;
 declare const BRIDGE_PROTOCOL_VERSION = 1;
 /** Which native shell (if any) hosts this page. */
 declare function detectNativeHost(channel?: string): NativeHost;
@@ -59,5 +77,5 @@ declare function connectNativeShell(options?: NativeShellOptions): {
     disconnect: () => void;
 };
 
-export { BRIDGE_PROTOCOL_VERSION, applyNativeSettings, connectNativeShell, detectNativeHost, parseNativeSettings, postToNative };
+export { BRIDGE_PROTOCOL_VERSION, applyNativeSettings, connectNativeShell, detectNativeHost, isTrustedMessage, parseNativeSettings, postToNative };
 export type { NativeHost, NativeSettings, NativeShellOptions, NativeTheme };

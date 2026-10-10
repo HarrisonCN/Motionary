@@ -1,6 +1,6 @@
 usa-toast-stack{position:fixed;z-index:2147482000;width:min(360px,calc(100vw - 24px));pointer-events:none;--usa-tstack-bg:#111827;--usa-tstack-fg:#f9fafb}
 usa-toast-stack[contained]{position:absolute;width:min(360px,calc(100% - 24px))}
-usa-toast-stack[data-position^="bottom"]{bottom:12px}
+usa-toast-stack[data-position^="bottom"]{bottom:calc(12px + var(--usa-kb,0px))}
 usa-toast-stack[data-position^="top"]{top:12px}
 usa-toast-stack[data-position$="right"]{right:12px}
 usa-toast-stack[data-position$="left"]{left:12px}

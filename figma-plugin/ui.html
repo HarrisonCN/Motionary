@@ -21,6 +21,7 @@
   let data = { html: '', css: '', tokens: '', rows: [] }, key = 'html';
   const out = document.getElementById('out');
   const show = () => { out.value = data[key] || ''; };
+  const esc = (v) => String(v).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
   document.querySelectorAll('[role=tab]').forEach((b) => b.onclick = () => {
     key = b.dataset.k;
     document.querySelectorAll('[role=tab]').forEach((x) => x.setAttribute('aria-selected', String(x === b)));
@@ -28,11 +29,13 @@
   });
   // Figma's plugin iframe has no async clipboard permission: select + execCommand
   document.getElementById('copy').onclick = () => { out.select(); document.execCommand('copy'); document.getElementById('msg').textContent = 'Copied'; };
+  // 13.3.0: only Figma (the parent window) talks to this UI; anything else posting here is ignored
   onmessage = (e) => {
-    data = e.data.pluginMessage || data;
+    if (e.source !== parent || !e.data || typeof e.data.pluginMessage !== 'object' || !e.data.pluginMessage) return;
+    data = e.data.pluginMessage;
     const rows = data.rows || [];
     document.getElementById('layers').innerHTML = rows.length
-      ? '<ul>' + rows.map((r) => `<li>${r.name.replace(/</g, '&lt;')} → ${r.tag ? (r.known ? '&lt;' + r.tag + '&gt;' : `<span class="warn">unknown ${r.tag}</span>`) : 'div'}${r.motion ? ' · data-motion' : ''}</li>`).join('') + '</ul>'
+      ? '<ul>' + rows.map((r) => `<li>${esc(r.name)} → ${r.tag ? (r.known ? '&lt;' + esc(r.tag) + '&gt;' : `<span class="warn">unknown ${esc(r.tag)}</span>`) : 'div'}${r.motion ? ' · data-motion' : ''}</li>`).join('') + '</ul>'
       : 'Nothing selected — the tokens below are still exported.';
     show();
   };

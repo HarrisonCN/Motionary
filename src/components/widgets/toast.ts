@@ -1,4 +1,5 @@
 import { defineElement, type UsaElement } from '../base';
+import { watchViewport } from '../viewport';
 import { part } from './shared';
 import { delegateTriggers } from './overlay';
 import css from './toast.css?raw';
@@ -73,6 +74,7 @@ export function defineToastStack(tag = 'usa-toast-stack'): CustomElementConstruc
           this.listen(this, 'focusin', () => expand(true));
           this.listen(this, 'focusout', (e: FocusEvent) => !this.contains(e.relatedTarget as Node) && expand(false));
           this.onCleanup(() => this._timers.forEach((t) => t.h && clearTimeout(t.h)));
+          this.onCleanup(watchViewport()); // 13.3.0: bottom stacks sit above the soft keyboard (--usa-kb)
         }
 
         private pause(_id: string, t: { left: number; start: number; h: ReturnType<typeof setTimeout> | 0 }): void {

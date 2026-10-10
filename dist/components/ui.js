@@ -2,6 +2,7 @@ import { f as defineElement, d as clamp, F as FOCUSABLE, G as queryAttr, b as ca
 import { d as springEasing, c as createSpring, p as projectInertia, s as snapTo, a as rubberBand } from '../chunks/spring-BX7EJst7.js';
 import { a as adoptVariants } from '../chunks/variants-DY08myqK.js';
 export { V as VARIANTS, s as setVariant } from '../chunks/variants-DY08myqK.js';
+import { v as viewportHeight, f as followPanel } from '../chunks/viewport-BAXHhZLV.js';
 
 /** Position a fixed `floating` element next to `anchor`, flipping when it would leave the viewport. */
 function place(floating, anchor, placement = 'top', gap = 8) {
@@ -142,7 +143,7 @@ function defineTabs(tag = 'usa-tabs') {
     }, { id: 'tabs', text: css$8 });
 }
 
-var css$7 = "usa-drawer,usa-bottom-sheet{position:fixed;z-index:1001;box-sizing:border-box;overflow:auto;overscroll-behavior:contain;touch-action:pan-y;will-change:transform;outline:none}usa-drawer{top:0;bottom:0;left:0;width:min(86vw,360px);border-radius:0 var(--usa-radius,14px) var(--usa-radius,14px) 0;padding:20px}usa-drawer[side=\"right\"]{left:auto;right:0;border-radius:var(--usa-radius,14px) 0 0 var(--usa-radius,14px)}usa-drawer[side=\"top\"],usa-drawer[side=\"bottom\"]{left:0;right:0;width:auto;bottom:auto;max-height:80vh;border-radius:0 0 var(--usa-radius,14px) var(--usa-radius,14px);touch-action:pan-x}usa-drawer[side=\"bottom\"]{top:auto;bottom:0;border-radius:var(--usa-radius,14px) var(--usa-radius,14px) 0 0}usa-bottom-sheet{left:0;right:0;bottom:0;margin:0 auto;max-width:640px;border-radius:22px 22px 0 0;padding:8px 20px 24px;touch-action:none}usa-bottom-sheet .usa-sheet-handle{width:40px;height:5px;border-radius:3px;margin:4px auto 14px;background:color-mix(in srgb,currentColor 35%,transparent);cursor:grab}usa-drawer[hidden],usa-bottom-sheet[hidden]{display:none}.usa-panel-backdrop{position:fixed;inset:0;z-index:1000;background:rgb(0 0 0 / 0.45)}";
+var css$7 = "usa-drawer,usa-bottom-sheet{position:fixed;z-index:1001;box-sizing:border-box;overflow:auto;overscroll-behavior:contain;touch-action:pan-y;will-change:transform;outline:none}usa-drawer{top:0;bottom:var(--usa-kb,0px);left:0;width:min(86vw,360px);border-radius:0 var(--usa-radius,14px) var(--usa-radius,14px) 0;padding:20px}usa-drawer[side=\"right\"]{left:auto;right:0;border-radius:var(--usa-radius,14px) 0 0 var(--usa-radius,14px)}usa-drawer[side=\"top\"],usa-drawer[side=\"bottom\"]{left:0;right:0;width:auto;bottom:auto;max-height:80vh;border-radius:0 0 var(--usa-radius,14px) var(--usa-radius,14px);touch-action:pan-x}usa-drawer[side=\"bottom\"]{top:auto;bottom:var(--usa-kb,0px);border-radius:var(--usa-radius,14px) var(--usa-radius,14px) 0 0}usa-bottom-sheet{left:0;right:0;bottom:var(--usa-kb,0px);margin:0 auto;max-width:640px;border-radius:22px 22px 0 0;padding:8px 20px 24px;touch-action:none}usa-bottom-sheet[data-scrollable]{touch-action:pan-y}usa-bottom-sheet .usa-sheet-handle{touch-action:none;width:40px;height:5px;border-radius:3px;margin:4px auto 14px;background:color-mix(in srgb,currentColor 35%,transparent);cursor:grab}usa-drawer[hidden],usa-bottom-sheet[hidden]{display:none}.usa-panel-backdrop{position:fixed;inset:0;z-index:1000;background:rgb(0 0 0 / 0.45)}";
 
 /** Shared machinery of `<usa-drawer>` and `<usa-bottom-sheet>`: backdrop, focus, Esc, drag-to-dismiss. */
 function makePanel(Base, kind) {
@@ -152,6 +153,8 @@ function makePanel(Base, kind) {
             this._backdrop = null;
             this._return = null;
             this._drag = null;
+            this._vp = null;
+            this._si = 0;
         }
         static get observedAttributes() {
             return ['open', 'side'];
@@ -165,7 +168,7 @@ function makePanel(Base, kind) {
         /** Main axis size of the panel (px). */
         size() {
             const r = this.getBoundingClientRect();
-            return (kind === 'sheet' || this.vertical() ? r.height : r.width) || (kind === 'sheet' ? window.innerHeight * 0.9 : 320);
+            return (kind === 'sheet' || this.vertical() ? r.height : r.width) || (kind === 'sheet' ? viewportHeight() * 0.9 : 320);
         }
         vertical() {
             return kind === 'sheet' || this.str('side') === 'top' || this.str('side') === 'bottom';
@@ -219,6 +222,7 @@ function makePanel(Base, kind) {
             this.listen(this, 'pointercancel', (e) => this.dragEnd(e));
         }
         unmount() {
+            this.unwatch();
             this._pos?.stop();
             this._backdrop?.remove();
             this._backdrop = null;
@@ -241,7 +245,9 @@ function makePanel(Base, kind) {
                 this._backdrop.addEventListener('click', () => this.close());
                 this.before(this._backdrop);
             }
-            const target = this.stops()[this.initialStop()];
+            // 13.3.0: phones — follow rotation and the soft keyboard while open; long content scrolls with a finger
+            this._vp || (this._vp = followPanel(this));
+            const target = this.stops()[(this._si = this.initialStop())];
             if (!animate)
                 this._pos.jump(target);
             else {
@@ -255,6 +261,10 @@ function makePanel(Base, kind) {
         initialStop() {
             return 0;
         }
+        unwatch() {
+            this._vp?.();
+            this._vp = null;
+        }
         hide() {
             this._pos.set(this.size() * 1.05);
             // 13.1.0: focus leaves the dismissed panel now, not when the slide-out spring comes to rest
@@ -263,6 +273,7 @@ function makePanel(Base, kind) {
             this.emit('close');
         }
         afterClose() {
+            this.unwatch();
             this.hidden = true;
             this._backdrop?.remove();
             this._backdrop = null;
@@ -298,6 +309,11 @@ function makePanel(Base, kind) {
             if (!d || e.pointerId !== d.id)
                 return;
             this._drag = null;
+            // 13.3.0: the browser took the gesture over (pointercancel) — no fling, spring back to the snap it started at
+            if (e.type === 'pointercancel') {
+                this._pos.set(this.stops()[this._si] ?? 0);
+                return;
+            }
             const moved = this._pos.value - d.origin;
             const dt = Math.max(16, d.t - d.lt) / 1000;
             const vel = Math.abs(moved) > 4 ? (moved / Math.max(dt, (e.timeStamp - (d.lt || 0)) / 1000 || 0.1)) * 0.2 : 0;
@@ -307,7 +323,7 @@ function makePanel(Base, kind) {
             if (to >= this.size() - 1)
                 this.close();
             else
-                this._pos.set(to);
+                this._pos.set(stops[(this._si = stops.indexOf(to))]);
             this.emit('snap', { offset: to });
         }
     };
@@ -334,7 +350,7 @@ function defineBottomSheet(tag = 'usa-bottom-sheet') {
                 super.mount();
             }
             size() {
-                return (window.innerHeight || 800) * Math.max(...this.fractions());
+                return (viewportHeight() || 800) * Math.max(...this.fractions());
             }
             fractions() {
                 const f = this.str('snap', '0.5,0.92').split(',').map(Number).filter((n) => n > 0 && n <= 1);
@@ -342,13 +358,13 @@ function defineBottomSheet(tag = 'usa-bottom-sheet') {
             }
             stops() {
                 const full = this.size();
-                const H = window.innerHeight || 800;
+                const H = viewportHeight() || 800;
                 return this.fractions().map((f) => Math.max(0, full - f * H)).sort((a, b) => a - b);
             }
             initialStop() {
                 const f = this.fractions();
                 const pick = f[clamp(this.num('start', 0), 0, f.length - 1)];
-                const target = Math.max(0, this.size() - pick * (window.innerHeight || 800));
+                const target = Math.max(0, this.size() - pick * (viewportHeight() || 800));
                 const s = this.stops();
                 return Math.max(0, s.indexOf(target));
             }
@@ -914,4 +930,4 @@ function defineUiComponents() {
 }
 
 export { adoptVariants, defineAvatarStack, defineBadge, defineBottomSheet, defineDrawer, defineFab, defineNavbar, definePopover, definePullRefresh, defineSlider, defineTabs, defineUiComponents };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/components/ui.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/components/ui.js.map

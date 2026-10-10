@@ -19,6 +19,7 @@ require('./cards.cjs');
 require('./click.cjs');
 require('../chunks/fx-lszndeFU.cjs');
 require('./ui.cjs');
+require('../chunks/viewport-EFYGqMNa.cjs');
 require('./page.cjs');
 require('./timeline.cjs');
 require('./gesture.cjs');
@@ -88,4 +89,4 @@ exports.isUsaElement = isUsaElement;
 exports.provideUsa = provideUsa;
 exports.usaDetail = usaDetail;
 exports.usaInitializer = usaInitializer;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/components/angular.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/components/angular.cjs.map

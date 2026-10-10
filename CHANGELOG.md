@@ -7,6 +7,52 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [13.3.0] - 2026-10-10
+
+Mobile compatibility and security. Components now handle the soft keyboard (`visualViewport`), screen rotation and touch
+on phones, the native bridge only accepts messages from trusted senders, and the browser suite runs on mobile Chrome and
+mobile Safari (WebKit) device emulation. No breaking changes; zero runtime dependencies; size budgets unchanged
+(`motionary/components/lite` stays within 70 KB: minified bundles now keep only a one-line licence comment
+instead of the 700-byte `motionary/components` module doc).
+[docs/mobile.md](docs/mobile.md)
+
+### Added
+
+- `watchViewport(fn?)` and `viewportHeight()` (`motionary/components/widgets`): one shared, reference-counted watcher for the
+  soft keyboard (`visualViewport` resize / scroll), window resize and `orientationchange`; while active, `<html>` has
+  `--usa-kb` (height the keyboard covers; `0px` while pinch-zoomed) and `--usa-vvh` (visible height).
+- `connectNativeShell({ allowedOrigins })` and `isTrustedMessage(event, allowedOrigins?)` (`motionary/components/bridge`).
+- Playwright projects `mobile-chrome` (Pixel 7 on Chromium) and `mobile-safari` (iPhone 14 on WebKit) running
+  `test/browser/mobile.spec.mjs`; CI runs them in the `Browser (chromium)` and `Browser (webkit)` jobs.
+- docs/mobile.md: what components do on phones, how it is tested, and what is not verified (no real devices).
+
+### Security
+
+- `connectNativeShell()` dropped no `window` messages: any frame that could post to the page (a cross-origin iframe,
+  the opener, an embedding parent) could change reduced motion, theme and accent. `window` messages are now accepted only
+  from the page itself (host-injected script) or with no source window (native code), or from an exact origin listed in
+  `allowedOrigins`; opaque `"null"` origins never match. WebView2 (`chrome.webview`) and `window.usaNative.apply()` — the
+  documented host paths — are unchanged. String payloads over 8 KB are rejected before parsing.
+- Figma plugin UI: accepts plugin messages only from its parent (Figma) and escapes layer names and tags.
+- A test scans shipped code (src, showcase, figma-plugin, examples) so that every `window` `message` listener checks the
+  sender.
+
+### Fixed
+
+- `<usa-bottom-sheet>` / `<usa-drawer>`: sat behind the soft keyboard; the sheet's height and snap points came from
+  `innerHeight` once, so after rotating the phone an open sheet was taller than the screen and off its snap point. Both now
+  follow the visible viewport while open.
+- `<usa-bottom-sheet>` and `<usa-sheet side="bottom">` set `touch-action: none` on the whole body: long content could not be
+  scrolled with a finger. Only the grab handles capture the gesture now (a bottom sheet whose content fits keeps
+  drag-anywhere).
+- `<usa-bottom-sheet>` / `<usa-drawer>`: a cancelled touch (`pointercancel`, the browser taking the gesture over for scrolling
+  or zoom) was treated like a release and could fling the sheet to another snap point or close it; it now springs back to
+  the snap point the drag started at.
+- `<usa-sheet side="bottom">`, `<usa-modal>` and bottom `<usa-toast-stack>` sat (partly) behind the soft keyboard.
+- `<usa-pagination>`: the ink stayed at its old position and width after rotation (buttons change size at 420 px).
+- `<usa-gl-model>` had none of the `<usa-gl-scene>` box styles: on a device with `devicePixelRatio` > 1 its canvas (and the
+  element) grew on every resize — 19 200 px wide at DPR 2.625 in the mobile emulation.
+
 ## [13.2.0] - 2026-10-10
 
 Docs and contract consistency. The numbers, tables and version descriptions in the READMEs, docs, site and package metadata

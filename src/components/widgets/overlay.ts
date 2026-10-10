@@ -1,4 +1,5 @@
-import { defineElement, getMotionSensitivity, type UsaElement } from '../base';
+import { defineElement, getMotionSensitivity, type UsaElement, type Cleanup } from '../base';
+import { watchViewport } from '../viewport';
 import { ownChildren, part } from './shared';
 import css from './overlay.css?raw';
 
@@ -69,6 +70,7 @@ function defineOverlay(tag: string, kind: 'modal' | 'sheet'): CustomElementConst
         private _origin: DOMRect | null = null;
         private _value = '';
         private _closing: Promise<void> | null = null;
+        private _vp: Cleanup | null = null; // 13.3.0: --usa-kb / --usa-vvh while open (soft keyboard, rotation)
 
         get opened(): boolean {
           return this._open;
@@ -135,6 +137,8 @@ function defineOverlay(tag: string, kind: 'modal' | 'sheet'): CustomElementConst
         unmount(): void {
           if (this._open && this._dlg?.open) this._dlg.close?.();
           this._open = false;
+          this._vp?.();
+          this._vp = null;
         }
 
         private frames(opening: boolean): Keyframe[] {
@@ -175,6 +179,7 @@ function defineOverlay(tag: string, kind: 'modal' | 'sheet'): CustomElementConst
           const d = this._dlg;
           if (!d || this._open) return;
           this._open = true;
+          this._vp ||= watchViewport();
           this._ret = trigger || (document.activeElement as Element | null);
           this._origin = trigger ? trigger.getBoundingClientRect() : null;
           if (typeof d.showModal === 'function') {
@@ -202,6 +207,8 @@ function defineOverlay(tag: string, kind: 'modal' | 'sheet'): CustomElementConst
           const done = () => {
             this._closing = null;
             this._open = false;
+            this._vp?.();
+            this._vp = null;
             this.removeAttribute('data-open');
             if (d.open && typeof d.close === 'function') d.close(value);
             else d.removeAttribute('open');

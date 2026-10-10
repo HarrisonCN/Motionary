@@ -4,7 +4,7 @@
 
 6.7: the highlight springs to the chosen page (squashing on the way) and page numbers slide in from the direction of travel when the window shifts. Prev / next, ellipses, aria-current.
 
-- **Category:** ui · **since** 6.7
+- **Category:** ui · **since** 6.7 · **changed in** 13.3
 - **Import:** `import { definePagination } from 'motionary/components/widgets'` then `definePagination();`
 - **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `total`, `siblings`, `label`

@@ -41,6 +41,15 @@ const touchDrag = (page, sel, dx, dy, end = 'pointerup') => page.evaluate(async 
 const settle = (page, ms = 1200) => page.waitForTimeout(ms);
 const rectOf = (page, sel) => page.evaluate((sel) => { const r = document.querySelector(sel).getBoundingClientRect(); return { top: r.top, bottom: r.bottom, left: r.left, right: r.right, width: r.width, height: r.height, vh: innerHeight, vw: innerWidth }; }, sel);
 
+// Synthetic touch PointerEvents (dispatchEvent) are not "active pointers" to the engine, so setPointerCapture() throws
+// NotFoundError for them; a real finger's pointer is active. Only that error is swallowed — a test artifact, not a fix.
+test.beforeEach(async ({ page }) => {
+  await page.addInitScript(() => {
+    const set = Element.prototype.setPointerCapture;
+    Element.prototype.setPointerCapture = function (id) { try { return set.call(this, id); } catch (e) { if (e.name !== 'NotFoundError') throw e; } };
+  });
+});
+
 test.describe('phone emulation', () => {
   test('runs as a phone: touch, coarse pointer, DPR > 1, narrow portrait viewport', async ({ page }) => {
     await openFixture(page);

@@ -127,6 +127,8 @@ import { defineMotionPrompt, type UsaMotionPromptElement } from './motion-prompt
 export { defineCarousel, defineTabBar, defineDisclosure, defineStories, CAROUSEL_EFFECTS, TAB_INDICATORS };
 export type { UsaCarouselElement, UsaTabBarElement, UsaDisclosureElement, UsaStoriesElement };
 export { defineToastStack, stackToast, TOAST_POSITIONS, defineModal, defineSheet, MODAL_EFFECTS, SHEET_SIDES, defineMenu, MENU_EFFECTS };
+// 13.3.0: phones — soft keyboard (visualViewport) and rotation watcher shared by the overlays (docs/mobile.md)
+export { watchViewport, viewportHeight } from '../viewport';
 export type { UsaToastStackElement, StackToastOptions, UsaModalElement, UsaSheetElement, UsaMenuElement };
 
 export { defineProgressRing, defineOdometer, PROGRESS_VARIANTS, defineSkeletonReveal, SKELETON_VARIANTS, defineStarRating };

@@ -4,11 +4,12 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { resolve, join } from 'node:path';
-import { installComponentMocks, mount, tick } from './components-setup';
+import { installComponentMocks, mount, tick, anims } from './components-setup';
 import { defineUiComponents } from '../src/components/ui';
 import * as base from '../src/components/base';
+import * as viewport from '../src/components/viewport';
 import * as bridge from '../src/components/bridge';
-import * as components from '../src/components';
+import * as widgets from '../src/components/widgets';
 import { defineSheet, defineModal, defineToastStack } from '../src/components/widgets';
 
 const root = resolve(__dirname, '..');
@@ -50,11 +51,13 @@ afterEach(() => {
 });
 
 describe('watchViewport — soft keyboard and rotation (13.3.0)', () => {
-  const watch = () => (base as any).watchViewport as (fn?: () => void) => () => void;
+  const watch = () => viewport.watchViewport;
 
-  it('is exported from base and from motionary/components', () => {
-    expect(typeof (base as any).watchViewport).toBe('function');
-    expect(typeof (components as any).watchViewport).toBe('function');
+  // Its own module (src/components/viewport.ts), exported from motionary/components/widgets; the bottom sheet / drawer
+  // import it directly.
+  it('is exported from motionary/components/widgets', () => {
+    expect(typeof (widgets as any).watchViewport).toBe('function');
+    expect(typeof (widgets as any).viewportHeight).toBe('function');
   });
 
   it('publishes the visible height and the keyboard inset as CSS variables on <html>', () => {
@@ -226,7 +229,9 @@ describe('<usa-sheet> / <usa-modal> / <usa-toast-stack> on phones (13.3.0)', () 
     expect(html().getPropertyValue('--usa-vvh')).toBe('800px');
     vv.set({ height: 450 });
     expect(html().getPropertyValue('--usa-kb')).toBe('350px');
-    await s.close();
+    const closing = s.close();
+    anims.forEach((a) => a.finish());
+    await closing;
     expect(html().getPropertyValue('--usa-vvh')).toBe('');
   });
 
@@ -342,7 +347,7 @@ describe('native bridge: message origin validation (13.3.0)', () => {
     ['src', 'showcase', 'figma-plugin', 'examples'].forEach(walk);
     // Worker message handlers talk to a worker this code created itself (fx2/perf3.ts) — not a window channel.
     const WORKER_ONLY = ['src/components/fx2/perf3.ts'];
-    const listeners = files.filter((f) => !WORKER_ONLY.includes(f) && /addEventListener\(\s*['"]message['"]|(^|[^.\w])onmessage\s*=/m.test(read(f)));
+    const listeners = files.filter((f) => !WORKER_ONLY.includes(f) && /addEventListener(\?\.)?\(\s*['"]message['"]|(^|[^.\w])onmessage\s*=/m.test(read(f)));
     expect(listeners.sort()).toEqual(['figma-plugin/ui.html', 'showcase/run.html', 'src/components/bridge/index.ts']);
     for (const f of listeners) expect(read(f), f).toMatch(/\.source\b|isTrustedMessage/);
   });

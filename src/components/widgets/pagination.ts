@@ -1,4 +1,5 @@
 import { defineElement, type UsaElement } from '../base';
+import { watchViewport } from '../viewport';
 import { clampN, dropParts } from './shared';
 import css from './pagination.css?raw';
 
@@ -73,6 +74,8 @@ export function definePagination(tag = 'usa-pagination'): CustomElementConstruct
             if (b) this.go(Number(b.dataset.page));
           });
           this.render(0);
+          // 13.3.0: rotation / resize changes the button sizes (420 px breakpoint): keep the ink on the current page
+          this.onCleanup(watchViewport(() => this.placeInk(false)));
         }
 
         private btn(txt: string, label: string, cls: string): HTMLButtonElement {
