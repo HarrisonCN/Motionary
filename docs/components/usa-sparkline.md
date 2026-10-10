@@ -4,7 +4,7 @@
 
 7.2: a tiny inline trend — draws itself on first view, a soft area fades in, the last point pulses and new data morphs the line point by point. line | area | bars; hover shows the value.
 
-- **Category:** ui · **since** 7.2
+- **Category:** ui · **since** 7.2 · **changed in** 7.5
 - **Import:** `import { defineSparkline } from 'motionary/components/widgets'` then `defineSparkline();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
 - **Attributes:** `variant`, `color`, `values`, `label`

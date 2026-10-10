@@ -55,4 +55,4 @@ function defineHudPanel(tag = 'usa-hud-panel') {
 }
 
 exports.defineHudPanel = defineHudPanel;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.4.0/dist/widgets/hud-panel.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.5.0/dist/widgets/hud-panel.cjs.map

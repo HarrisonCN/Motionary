@@ -227,7 +227,7 @@ describe('10.7 motionary-mcp 2.0', () => {
     await client.connect(new StdioClientTransport({ command: process.execPath, args: ['bin/motionary-mcp.mjs'], env: { ...process.env, MOTIONARY_MANIFEST: manifest, MOTIONARY_AI: aiBundle } as Record<string, string> }));
     expect(client.getServerVersion()?.version).toBe('2.0.0');
     const { tools } = await client.listTools();
-    expect(tools.map((t) => t.name)).toEqual(['list_components', 'search_components', 'get_component', 'get_example', 'scaffold_snippet', 'suggest_motion', 'validate_snippet']);
+    expect(tools.map((t) => t.name)).toEqual(['list_components', 'search_components', 'get_component', 'get_example', 'scaffold_snippet', 'suggest_motion', 'validate_snippet', 'check_compat']);
     expect(tools.every((t) => t.annotations?.readOnlyHint === true)).toBe(true);
     const s: any = await client.callTool({ name: 'suggest_motion', arguments: { text: 'fade the cards up when they scroll into view, one after another', format: 'css' } });
     expect(s.structuredContent.effect).toBe('fade');

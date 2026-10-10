@@ -4,7 +4,7 @@
 
 Counts up to a number when visible, locale-formatted with tabular digits. Set .value to animate live dashboards.
 
-- **Category:** text
+- **Category:** text · **since** 2.2 · **changed in** 6.4
 - **Import:** `import { defineCounter } from 'motionary/components/text'` then `defineCounter();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `to`, `decimals`, `locale`, `prefix`, `suffix`, `grouping`, `from`, `start`, `duration`

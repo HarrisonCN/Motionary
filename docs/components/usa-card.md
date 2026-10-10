@@ -4,7 +4,7 @@
 
 Ten card effects you can combine (effect="lift sheen"): flip (hover or click, x/y axis), holo, glass, border-glow, conic-border, lift, spotlight, sheen, parallax-layers and expand (card → detail with FLIP + spring).
 
-- **Category:** cards
+- **Category:** cards · **since** 2.4
 - **Import:** `import { defineCard } from 'motionary/components/cards'` then `defineCard();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `effect`, `trigger`, `disabled`, `color`, `depth`

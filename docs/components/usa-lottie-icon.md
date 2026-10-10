@@ -4,7 +4,7 @@
 
 9.2: an animated icon set shipped as tiny Lottie files — heart beat, bell swing, check draw-in, spinner, star twinkle, bolt zap — on click, hover, enter or loop.
 
-- **Category:** ui · **since** 9.2
+- **Category:** ui · **since** 9.2 · **changed in** 11.8
 - **Import:** `import { defineLottieIcon } from 'motionary/components/widgets'` then `defineLottieIcon();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
 - **Attributes:** `name`, `size`, `color`, `label`, `trigger`

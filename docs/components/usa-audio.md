@@ -4,7 +4,7 @@
 
 5.6: <usa-audio> renders a toggle (a user gesture starts Web Audio), detects beats and plays any registered effect on children with data-usa-beat="effect". JS: bindBeat(el, "pop"). Beats play nothing under reduced motion.
 
-- **Category:** fx
+- **Category:** fx · **since** 5.6 · **changed in** 7.1, 11.8, 12.0
 - **Import:** `import { defineAudio } from 'motionary/components/effects'` then `defineAudio();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `source`, `label`, `threshold`, `cooldown`

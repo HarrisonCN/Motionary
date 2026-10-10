@@ -4,7 +4,7 @@
 
 10.6: plays Rive (.riv) files — artboards, animations and state machines with inputs — through the official Rive runtime @rive-app/canvas, an optional peer dependency that is lazy-loaded on first use (Motionary does not reimplement the proprietary .riv format). Requires @rive-app/canvas — npm i @rive-app/canvas, or load its CDN script first; missing → a clear message in place.
 
-- **Category:** ui · **since** 10.6
+- **Category:** ui · **since** 10.6 · **changed in** 10.7
 - **Import:** `import { defineRive } from 'motionary/components/widgets'` then `defineRive();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
 - **Attributes:** `src`, `artboard`, `animation`, `state-machine`, `autoplay`, `fit`, `label`, `runtime-src`

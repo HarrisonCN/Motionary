@@ -4,7 +4,7 @@
   "schemaVersion": 2,
   "stability": "stable",
   "package": "motionary",
-  "version": "12.4.0",
+  "version": "12.5.0",
   "homepage": "https://harrisoncn.github.io/Motionary/",
   "llms": "https://harrisoncn.github.io/Motionary/llms.txt",
   "cdn": {
@@ -83,7 +83,14 @@
       ],
       "example": "import { use, tween, timeline } from 'motionary/runtime';\nuse();\ntween('.box', { to: { x: 120, opacity: 1 }, duration: 500, ease: 'back-out' });\ntimeline().to('.a', { to: { y: -20 } }).to('.b', { to: { scale: 1.2 } }, '<+=100');",
       "optional": false,
-      "stability": "stable"
+      "stability": "stable",
+      "since": "10.1",
+      "changed": [
+        "11.0",
+        "11.4",
+        "12.2",
+        "12.5"
+      ]
     },
     {
       "kind": "runtime",
@@ -153,7 +160,9 @@
       ],
       "example": "import { use } from 'motionary/runtime';\nimport { formatCss, parseKeyframes, playKeyframes } from 'motionary/runtime/format-css';\nuse(formatCss);\nconst [pulse] = parseKeyframes('@keyframes pulse { from { opacity: .4 } 50% { opacity: 1; transform: scale(1.1) } to { opacity: .4 } }');\nplayKeyframes(document.querySelector('.dot'), pulse, { duration: 1200, repeat: -1 });",
       "optional": false,
-      "stability": "stable"
+      "stability": "stable",
+      "since": "10.1",
+      "changed": []
     },
     {
       "kind": "runtime",
@@ -212,7 +221,9 @@
       ],
       "example": "import { use } from 'motionary/runtime';\nimport { formatMotion, playMotion } from 'motionary/runtime/format-motion';\nuse(formatMotion);\nplayMotion(document.querySelector('.card'), { initial: { opacity: 0, y: 40 }, animate: { opacity: 1, y: 0 }, transition: { type: 'spring', stiffness: 180, damping: 14 } });",
       "optional": false,
-      "stability": "stable"
+      "stability": "stable",
+      "since": "10.1",
+      "changed": []
     },
     {
       "kind": "runtime",
@@ -294,7 +305,9 @@
       ],
       "example": "import { use, timeline } from 'motionary/runtime';\nimport { scroll, scrollScene } from 'motionary/runtime/scroll';\nuse(scroll);\nconst tl = timeline({ paused: true }).to('.card', { to: { x: 200, rotate: 8 } });\nscrollScene({ trigger: '.section', start: 'top 80%', end: 'bottom 20%', scrub: 120, pin: true, markers: true, animation: tl });",
       "optional": false,
-      "stability": "stable"
+      "stability": "stable",
+      "since": "10.2",
+      "changed": []
     },
     {
       "kind": "runtime",
@@ -373,7 +386,9 @@
       ],
       "example": "import { use } from 'motionary/runtime';\nimport { formatSvg, playSmil, morphPath } from 'motionary/runtime/format-svg';\nuse(formatSvg);\nconst player = playSmil(document.querySelector('svg'));\nplayer.timeline.timeScale = 0.5;   // scrub / slow down / reverse like any runtime timeline\nconst f = morphPath('M0 0 L100 0 L50 80 Z', 'M50 0 A40 40 0 1 1 49.9 0 Z');\npath.setAttribute('d', f(0.5));",
       "optional": false,
-      "stability": "stable"
+      "stability": "stable",
+      "since": "10.2",
+      "changed": []
     },
     {
       "kind": "runtime",
@@ -440,7 +455,9 @@
       ],
       "example": "import { use, tween } from 'motionary/runtime';\nimport { text, splitText } from 'motionary/runtime/text';\nuse(text);\nconst { chars } = splitText(document.querySelector('h1'), { type: 'chars,words' });\ntween(chars, { from: { y: '1em', opacity: 0 }, to: { y: '0em', opacity: 1 }, stagger: 30 });",
       "optional": false,
-      "stability": "stable"
+      "stability": "stable",
+      "since": "10.3",
+      "changed": []
     },
     {
       "kind": "runtime",
@@ -513,7 +530,9 @@
       ],
       "example": "import { use } from 'motionary/runtime';\nimport { formatSprite, parseSpriteSheet, spritePlayer } from 'motionary/runtime/format-sprite';\nuse(formatSprite);\nconst sheet = parseSpriteSheet(await (await fetch('/slime.json')).json());\nconst img = new Image(); img.src = '/slime.png'; await img.decode();\nspritePlayer(document.querySelector('canvas'), sheet, img, { tag: 'bounce' });",
       "optional": false,
-      "stability": "stable"
+      "stability": "stable",
+      "since": "10.3",
+      "changed": []
     },
     {
       "kind": "runtime",
@@ -586,7 +605,9 @@
       ],
       "example": "import { use } from 'motionary/runtime';\nimport { smooth, smoothScroll } from 'motionary/runtime/smooth';\nuse(smooth);\nconst s = smoothScroll({ lerp: 0.1, anchors: { offset: -64 } });\ns.scrollTo('#pricing');",
       "optional": false,
-      "stability": "stable"
+      "stability": "stable",
+      "since": "10.4",
+      "changed": []
     },
     {
       "kind": "runtime",
@@ -655,7 +676,9 @@
       ],
       "example": "import { use } from 'motionary/runtime';\nimport { formatGif, loadGif, animatedImagePlayer } from 'motionary/runtime/format-gif';\nuse(formatGif);\nconst gif = await loadGif('/loader.gif');\nconst player = animatedImagePlayer(document.querySelector('canvas'), gif);\nplayer.pause(); player.progress = 0.5; // scrub",
       "optional": false,
-      "stability": "stable"
+      "stability": "stable",
+      "since": "10.4",
+      "changed": []
     },
     {
       "kind": "runtime",
@@ -725,7 +748,9 @@
       ],
       "example": "import { use } from 'motionary/runtime';\nimport { formatApng, loadApng, animatedImagePlayer } from 'motionary/runtime/format-apng';\nuse(formatApng);\nconst anim = await loadApng('/sticker.png');\nanimatedImagePlayer(document.querySelector('canvas'), anim);",
       "optional": false,
-      "stability": "stable"
+      "stability": "stable",
+      "since": "10.4",
+      "changed": []
     },
     {
       "kind": "runtime",
@@ -790,7 +815,9 @@
       ],
       "example": "import { use } from 'motionary/runtime';\nimport { formatWebp, loadWebp, animatedImagePlayer } from 'motionary/runtime/format-webp';\nuse(formatWebp);\nconst anim = await loadWebp('/hero.webp');\nconst p = animatedImagePlayer(document.querySelector('canvas'), anim, { speed: 0.5 });",
       "optional": false,
-      "stability": "stable"
+      "stability": "stable",
+      "since": "10.4",
+      "changed": []
     },
     {
       "kind": "runtime",
@@ -879,7 +906,12 @@
       ],
       "example": "import { use } from 'motionary/runtime';\nimport { gl, createRenderer, Scene, Camera, GlNode, torus, standardMaterial } from 'motionary/runtime/gl';\nuse(gl);\nconst r = createRenderer(canvas);\nconst scene = new Scene();\nscene.add(new GlNode('donut', { geometry: torus(), material: standardMaterial({ color: [0.5, 0.55, 1, 1] }) }));\nr.resize(); r.render(scene, new Camera({ position: [0, 0.5, 3] }));",
       "optional": false,
-      "stability": "stable"
+      "stability": "stable",
+      "since": "10.5",
+      "changed": [
+        "10.8",
+        "10.9"
+      ]
     },
     {
       "kind": "runtime",
@@ -964,7 +996,11 @@
       ],
       "example": "import { use } from 'motionary/runtime';\nimport { gl, createRenderer, Scene, Camera, frameNode } from 'motionary/runtime/gl';\nimport { formatGltf, loadGltf } from 'motionary/runtime/format-gltf';\nuse(gl, formatGltf);\nconst model = await loadGltf('/models/chair.glb');\nconst scene = new Scene().add(model), cam = new Camera();\nframeNode(cam, model);\nconst r = createRenderer(canvas); r.resize(); r.render(scene, cam);",
       "optional": false,
-      "stability": "stable"
+      "stability": "stable",
+      "since": "10.5",
+      "changed": [
+        "10.8"
+      ]
     },
     {
       "kind": "runtime",
@@ -1029,7 +1065,9 @@
       ],
       "example": "import { use } from 'motionary/runtime';\nimport { gl, Scene } from 'motionary/runtime/gl';\nimport { formatObj, loadObj } from 'motionary/runtime/format-obj';\nuse(gl, formatObj);\nconst cube = await loadObj('/models/cube.obj'); // + cube.mtl + textures next to it\nnew Scene().add(cube);",
       "optional": false,
-      "stability": "stable"
+      "stability": "stable",
+      "since": "10.5",
+      "changed": []
     },
     {
       "kind": "runtime",
@@ -1150,7 +1188,13 @@
       ],
       "example": "import { use } from 'motionary/runtime';\nimport { vector, loadLottie, lottiePlayer } from 'motionary/runtime/vector';\nuse(vector);\nconst { animation } = await loadLottie('/anim/hero.lottie');\nconst player = lottiePlayer(canvas, animation, { loop: true });\nplayer.play();",
       "optional": false,
-      "stability": "stable"
+      "stability": "stable",
+      "since": "10.6",
+      "changed": [
+        "10.8",
+        "10.9",
+        "11.0"
+      ]
     },
     {
       "tier": "standard",
@@ -1214,7 +1258,11 @@
       ],
       "example": "// npm i @rive-app/canvas\nimport { defineRive } from 'motionary/components/widgets';\ndefineRive();\n// <usa-rive src=\"/anim/icon.riv\" state-machine=\"State Machine 1\" autoplay></usa-rive>",
       "optional": true,
-      "stability": "stable"
+      "stability": "stable",
+      "since": "10.6",
+      "changed": [
+        "10.7"
+      ]
     },
     {
       "kind": "runtime",
@@ -1285,7 +1333,9 @@
       ],
       "example": "import { use } from 'motionary/runtime';\nimport { physics, createWorld } from 'motionary/runtime/physics';\nuse(physics);\nconst world = createWorld({ gravity: [0, 980] });\nworld.bounds(600, 400);\nconst ball = world.body({ shape: 'circle', x: 300, y: 40, radius: 20, restitution: 0.7 });\nworld.run(); // steps on the shared ticker",
       "optional": false,
-      "stability": "stable"
+      "stability": "stable",
+      "since": "10.7",
+      "changed": []
     },
     {
       "kind": "runtime",
@@ -1351,7 +1401,9 @@
       ],
       "example": "import { use } from 'motionary/runtime';\nimport { physics } from 'motionary/runtime/physics';\nimport { formatScene, sceneToWorld } from 'motionary/runtime/format-scene';\nuse(physics, formatScene);\nconst { world, bodies } = sceneToWorld(await (await fetch('/scenes/stack.json')).json());\nworld.run();",
       "optional": false,
-      "stability": "stable"
+      "stability": "stable",
+      "since": "10.7",
+      "changed": []
     },
     {
       "kind": "runtime",
@@ -1422,7 +1474,11 @@
       ],
       "example": "import { use } from 'motionary/runtime';\nimport { dragSnap, createDragSnap } from 'motionary/runtime/drag-snap';\nuse(dragSnap);\nconst track = document.querySelector('.track');\nconst ds = createDragSnap(track, { axis: 'x', snap: [0, -320, -640], onUpdate: (x) => (track.style.transform = `translateX(${x}px)`) });\nds.snapTo(1);",
       "optional": false,
-      "stability": "stable"
+      "stability": "stable",
+      "since": "10.8",
+      "changed": [
+        "12.4"
+      ]
     },
     {
       "kind": "runtime",
@@ -1493,7 +1549,9 @@
       ],
       "example": "import { use } from 'motionary/runtime';\nimport { gl } from 'motionary/runtime/gl';\nimport { formatGltf, loadGltf } from 'motionary/runtime/format-gltf';\nimport { gltfAnim, gltfAnimator } from 'motionary/runtime/gltf-anim';\nuse(gl, formatGltf, gltfAnim);\nconst model = await loadGltf('/models/robot.glb');\nconst anim = gltfAnimator(model, { clip: 'walk' });\nanim.play(); // or anim.update(dt) in your own loop",
       "optional": false,
-      "stability": "stable"
+      "stability": "stable",
+      "since": "10.8",
+      "changed": []
     },
     {
       "kind": "runtime",
@@ -1563,7 +1621,9 @@
       ],
       "example": "import { use } from 'motionary/runtime';\nimport { vector, loadLottie } from 'motionary/runtime/vector';\nimport { lottieState, applyTheme, createStateMachine } from 'motionary/runtime/lottie-state';\nuse(vector, lottieState);\nconst { animation, dotLottie } = await loadLottie('/anim/button.lottie');\nconst themed = applyTheme(animation, dotLottie.themes.dark);\nconst sm = createStateMachine(dotLottie.stateMachines.toggle, { onState: (s) => console.log(s.name) });\nsm.fire('tap');",
       "optional": false,
-      "stability": "stable"
+      "stability": "stable",
+      "since": "10.9",
+      "changed": []
     },
     {
       "kind": "runtime",
@@ -1624,7 +1684,9 @@
       ],
       "example": "import { use } from 'motionary/runtime';\nimport { gl } from 'motionary/runtime/gl';\nimport { formatGltf, loadGltf } from 'motionary/runtime/format-gltf';\nimport { gltfDecoders, provideGltfDecoder, prepareGltf } from 'motionary/runtime/gltf-decoders';\nuse(gl, formatGltf, gltfDecoders);\nprovideGltfDecoder('draco', () => import('draco3d'));\nconst model = await loadGltf('/models/robot-draco.glb', { prepare: prepareGltf });",
       "optional": false,
-      "stability": "stable"
+      "stability": "stable",
+      "since": "10.9",
+      "changed": []
     },
     {
       "tier": "advanced",
@@ -1660,7 +1722,9 @@
       ],
       "example": "import { provideGltfDecoder } from 'motionary/runtime/gltf-decoders';\nprovideGltfDecoder('draco', () => import('draco3d'));",
       "optional": true,
-      "stability": "stable"
+      "stability": "stable",
+      "since": "10.9",
+      "changed": []
     },
     {
       "tier": "advanced",
@@ -1696,7 +1760,9 @@
       ],
       "example": "import { provideGltfDecoder } from 'motionary/runtime/gltf-decoders';\nprovideGltfDecoder('ktx2', () => window.BASIS);",
       "optional": true,
-      "stability": "stable"
+      "stability": "stable",
+      "since": "10.9",
+      "changed": []
     }
   ],
   "components": [
@@ -1706,6 +1772,7 @@
       "title": "Accordion",
       "description": "Smooth expand / collapse for native <details> — semantics, keyboard and find-in-page kept; no wrapper elements.",
       "category": "transitions",
+      "since": "2.2",
       "keywords": [
         "<details>",
         "height"
@@ -1735,7 +1802,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/transitions/accordion.ts"
+      "source": "src/components/transitions/accordion.ts",
+      "changed": []
     },
     {
       "id": "acrylic",
@@ -1743,6 +1811,7 @@
       "title": "Acrylic & Mica",
       "description": "Windows Fluent materials: frosted acrylic (backdrop blur + tint + noise) and mica. Solid fallback when transparency is reduced.",
       "category": "background",
+      "since": "2.2",
       "keywords": [
         "Fluent",
         "Windows",
@@ -1771,7 +1840,11 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/background/acrylic.ts"
+      "source": "src/components/background/acrylic.ts",
+      "changed": [
+        "2.9",
+        "3.0"
+      ]
     },
     {
       "id": "add-to-cart",
@@ -1816,7 +1889,8 @@
       "entry": "motionary/widgets/add-to-cart",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/add-to-cart.ts"
+      "source": "src/components/widgets/add-to-cart.ts",
+      "changed": []
     },
     {
       "id": "ambient",
@@ -1824,6 +1898,7 @@
       "title": "Ambient layer",
       "description": "A fixed page-wide layer: drifting particles, falling snow, twinkling stars, film grain or a gradient that shifts with scroll.",
       "category": "page",
+      "since": "2.7",
       "keywords": [
         "snow",
         "stars",
@@ -1863,7 +1938,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/page/ambient.ts"
+      "source": "src/components/page/ambient.ts",
+      "changed": []
     },
     {
       "id": "anim-icon",
@@ -1871,6 +1947,7 @@
       "title": "Animated icons",
       "description": "Stroke icons that move: the bell rings, the heart beats, the check draws, the gear turns. Hover, click, in view or loop; decorative unless labelled.",
       "category": "svg",
+      "since": "3.3",
       "keywords": [
         "icon",
         "bell",
@@ -1902,7 +1979,10 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/svg/anim-icon.ts"
+      "source": "src/components/svg/anim-icon.ts",
+      "changed": [
+        "11.8"
+      ]
     },
     {
       "id": "fx-audio-beat",
@@ -1910,6 +1990,7 @@
       "title": "Beat-triggered effects",
       "description": "5.6: <usa-audio> renders a toggle (a user gesture starts Web Audio), detects beats and plays any registered effect on children with data-usa-beat=\"effect\". JS: bindBeat(el, \"pop\"). Beats play nothing under reduced motion.",
       "category": "fx",
+      "since": "5.6",
       "keywords": [
         "audio",
         "beat",
@@ -1946,7 +2027,12 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/effects/audio.ts"
+      "source": "src/components/effects/audio.ts",
+      "changed": [
+        "7.1",
+        "11.8",
+        "12.0"
+      ]
     },
     {
       "id": "aurora",
@@ -1954,6 +2040,7 @@
       "title": "Aurora",
       "description": "A slow drifting gradient mesh behind its content. Transforms only, paused off-screen, still under reduced motion.",
       "category": "background",
+      "since": "2.2",
       "keywords": [
         "gradient",
         "GPU"
@@ -1980,7 +2067,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/background/aurora.ts"
+      "source": "src/components/background/aurora.ts",
+      "changed": []
     },
     {
       "id": "auto-animate",
@@ -1988,6 +2076,7 @@
       "title": "Auto-animate",
       "description": "Wrap a list or grid: items that are added fade in, removed ones fade out in place, and everything else glides to its new spot — on sort, filter or resize. Zero code at the call site.",
       "category": "layout",
+      "since": "3.6",
       "keywords": [
         "auto animate",
         "reflow",
@@ -2019,7 +2108,11 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/layout/elements.ts"
+      "source": "src/components/layout/elements.ts",
+      "changed": [
+        "3.9",
+        "4.0"
+      ]
     },
     {
       "id": "auto-skeleton",
@@ -2027,6 +2120,7 @@
       "title": "Auto skeleton",
       "description": "Set loading and every heading, paragraph, image and button inside becomes a shimmering placeholder of its own size — no extra markup.",
       "category": "page",
+      "since": "2.7",
       "keywords": [
         "skeleton",
         "loading",
@@ -2052,7 +2146,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/page/auto-skeleton.ts"
+      "source": "src/components/page/auto-skeleton.ts",
+      "changed": []
     },
     {
       "id": "avatar-stack",
@@ -2060,6 +2155,7 @@
       "title": "Avatar stack",
       "description": "Overlapping avatars that spread apart with a spring on hover; extras collapse into “+N”.",
       "category": "ui",
+      "since": "2.6",
       "keywords": [
         "avatars",
         "group"
@@ -2090,7 +2186,10 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/ui/avatar-stack.ts"
+      "source": "src/components/ui/avatar-stack.ts",
+      "changed": [
+        "7.4"
+      ]
     },
     {
       "id": "back-to-top",
@@ -2098,6 +2197,7 @@
       "title": "Back to top",
       "description": "Appears after you scroll, shows reading progress as a ring and springs the page back up, then moves focus to the top.",
       "category": "page",
+      "since": "2.7",
       "keywords": [
         "progress ring",
         "a11y"
@@ -2124,7 +2224,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/page/back-to-top.ts"
+      "source": "src/components/page/back-to-top.ts",
+      "changed": []
     },
     {
       "id": "badge",
@@ -2132,6 +2233,7 @@
       "title": "Badge",
       "description": "Count or dot badge that bumps with a spring when its value changes; 99+ capping, optional pulse.",
       "category": "ui",
+      "since": "2.6",
       "keywords": [
         "count",
         "pulse",
@@ -2161,7 +2263,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/ui/badge.ts"
+      "source": "src/components/ui/badge.ts",
+      "changed": []
     },
     {
       "id": "badge-wall",
@@ -2201,7 +2304,8 @@
       "entry": "motionary/widgets/badge-wall",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/badge-wall.ts"
+      "source": "src/components/widgets/badge-wall.ts",
+      "changed": []
     },
     {
       "id": "bar-chart",
@@ -2242,7 +2346,8 @@
       "entry": "motionary/widgets/bar-chart",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/bar-chart.ts"
+      "source": "src/components/widgets/bar-chart.ts",
+      "changed": []
     },
     {
       "id": "bg-generator",
@@ -2286,7 +2391,8 @@
       "entry": "motionary/widgets/bg-generator",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/bg-generator.ts"
+      "source": "src/components/widgets/bg-generator.ts",
+      "changed": []
     },
     {
       "id": "blobs",
@@ -2294,6 +2400,7 @@
       "title": "Fluid blobs",
       "description": "Soft colour blobs that slowly morph and drift — a fluid gradient backdrop.",
       "category": "background",
+      "since": "2.8",
       "keywords": [
         "blobs",
         "gradient",
@@ -2323,7 +2430,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/background/bg-fx.ts"
+      "source": "src/components/background/bg-fx.ts",
+      "changed": []
     },
     {
       "id": "bottom-sheet",
@@ -2331,6 +2439,7 @@
       "title": "Bottom sheet",
       "description": "A draggable sheet with snap points, inertia and drag-down-to-dismiss — the iOS / Android pattern for web and Windows web-view apps.",
       "category": "ui",
+      "since": "2.6",
       "keywords": [
         "snap points",
         "inertia",
@@ -2361,7 +2470,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/ui/sheet.ts"
+      "source": "src/components/ui/sheet.ts",
+      "changed": []
     },
     {
       "id": "button-deform",
@@ -2369,6 +2479,7 @@
       "title": "Button deformation",
       "description": "Spring-driven button click deformation: squash & stretch, elastic border-radius wobble, gooey liquid droplets, and a dent toward the pressed point. Combine them with deform=\"squash wobble\".",
       "category": "click",
+      "since": "2.5",
       "keywords": [
         "squash",
         "wobble",
@@ -2427,7 +2538,8 @@
           "description": "morph=\"submit\": click shrinks the button into a spinner (aria-busy), then a drawn check (or a shake + cross on error) and back. Call event.detail.done(ok) from usa:submit.",
           "example": "<usa-button morph=\"submit\" deform=\"squash\">\n  <button>Pay $20</button>\n</usa-button>\n<script>\n  btn.addEventListener('usa:submit', async (e) => e.detail.done(await pay()));\n</script>"
         }
-      ]
+      ],
+      "changed": []
     },
     {
       "id": "card",
@@ -2435,6 +2547,7 @@
       "title": "Card",
       "description": "Ten card effects you can combine (effect=\"lift sheen\"): flip (hover or click, x/y axis), holo, glass, border-glow, conic-border, lift, spotlight, sheen, parallax-layers and expand (card → detail with FLIP + spring).",
       "category": "cards",
+      "since": "2.4",
       "keywords": [
         "flip",
         "holo",
@@ -2494,7 +2607,8 @@
           "description": "Click a card and it grows into a full detail view with a spring (FLIP); [data-detail] content appears. Esc, the backdrop or [data-close] collapses it back into place.",
           "example": "<usa-card effect=\"expand\">\n  <h3>Title</h3>\n  <div data-detail>…<button data-close>Close</button></div>\n</usa-card>"
         }
-      ]
+      ],
+      "changed": []
     },
     {
       "id": "card-stack",
@@ -2502,6 +2616,7 @@
       "title": "Swipe stack",
       "description": "A deck where the top card swipes away left or right (pointer, touch, arrow keys) and the next springs forward. loop sends cards to the back.",
       "category": "cards",
+      "since": "2.4",
       "keywords": [
         "swipe",
         "tinder",
@@ -2536,7 +2651,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/cards/card-stack.ts"
+      "source": "src/components/cards/card-stack.ts",
+      "changed": []
     },
     {
       "id": "carousel",
@@ -2584,7 +2700,10 @@
       "entry": "motionary/widgets/carousel",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/carousel.ts"
+      "source": "src/components/widgets/carousel.ts",
+      "changed": [
+        "10.1"
+      ]
     },
     {
       "id": "carousel-3d",
@@ -2592,6 +2711,7 @@
       "title": "3D carousel",
       "description": "Items on a 3D ring, rotated by drag, arrow keys, clicks or autoplay — with spring motion. Reduced motion shows one flat item at a time.",
       "category": "cards",
+      "since": "2.4",
       "keywords": [
         "3D",
         "carousel",
@@ -2626,7 +2746,10 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/cards/carousel-3d.ts"
+      "source": "src/components/cards/carousel-3d.ts",
+      "changed": [
+        "3.5"
+      ]
     },
     {
       "id": "cart-drawer",
@@ -2672,7 +2795,8 @@
       "entry": "motionary/widgets/cart-drawer",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/cart-drawer.ts"
+      "source": "src/components/widgets/cart-drawer.ts",
+      "changed": []
     },
     {
       "id": "chapter-nav",
@@ -2714,7 +2838,8 @@
       "entry": "motionary/widgets/chapter-nav",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/chapter-nav.ts"
+      "source": "src/components/widgets/chapter-nav.ts",
+      "changed": []
     },
     {
       "id": "chat-composer",
@@ -2760,7 +2885,8 @@
       "entry": "motionary/widgets/chat-composer",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/chat-composer.ts"
+      "source": "src/components/widgets/chat-composer.ts",
+      "changed": []
     },
     {
       "id": "check",
@@ -2768,6 +2894,7 @@
       "title": "Result icon",
       "description": "The circle draws itself, then a check, cross or exclamation strokes in with a pop. Great after a payment or upload.",
       "category": "feedback",
+      "since": "2.2",
       "keywords": [
         "SVG",
         "stroke"
@@ -2800,7 +2927,11 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/feedback/check.ts"
+      "source": "src/components/feedback/check.ts",
+      "changed": [
+        "2.9",
+        "3.0"
+      ]
     },
     {
       "id": "checkbox",
@@ -2808,6 +2939,7 @@
       "title": "Animated checkbox",
       "description": "Form-associated checkbox: the box springs and the check draws itself; indeterminate state, circle shape.",
       "category": "click",
+      "since": "2.5",
       "keywords": [
         "form",
         "role=checkbox",
@@ -2841,7 +2973,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/click/checkbox.ts"
+      "source": "src/components/click/checkbox.ts",
+      "changed": []
     },
     {
       "id": "click",
@@ -2849,6 +2982,7 @@
       "title": "Click effects",
       "description": "Wrap anything: ripple, burst (circle, star, heart, emoji), confetti, squish, press-spring and error shake — combinable, keyboard-friendly, optional haptics.",
       "category": "click",
+      "since": "2.5",
       "keywords": [
         "ripple",
         "burst",
@@ -2887,7 +3021,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/click/click.ts"
+      "source": "src/components/click/click.ts",
+      "changed": []
     },
     {
       "id": "clock-control",
@@ -2926,7 +3061,8 @@
       "entry": "motionary/widgets/clock-control",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/clock-control.ts"
+      "source": "src/components/widgets/clock-control.ts",
+      "changed": []
     },
     {
       "id": "code-export",
@@ -2967,7 +3103,8 @@
       "entry": "motionary/widgets/code-export",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/code-export.ts"
+      "source": "src/components/widgets/code-export.ts",
+      "changed": []
     },
     {
       "id": "color-picker",
@@ -3006,7 +3143,8 @@
       "entry": "motionary/widgets/color-picker",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/color-picker.ts"
+      "source": "src/components/widgets/color-picker.ts",
+      "changed": []
     },
     {
       "id": "command-palette",
@@ -3054,7 +3192,8 @@
       "entry": "motionary/widgets/command-palette",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/command-palette.ts"
+      "source": "src/components/widgets/command-palette.ts",
+      "changed": []
     },
     {
       "id": "compare",
@@ -3097,7 +3236,8 @@
       "entry": "motionary/widgets/compare",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/compare.ts"
+      "source": "src/components/widgets/compare.ts",
+      "changed": []
     },
     {
       "id": "countdown",
@@ -3143,7 +3283,8 @@
       "entry": "motionary/widgets/countdown",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/countdown.ts"
+      "source": "src/components/widgets/countdown.ts",
+      "changed": []
     },
     {
       "id": "counter",
@@ -3151,6 +3292,7 @@
       "title": "Number counter",
       "description": "Counts up to a number when visible, locale-formatted with tabular digits. Set .value to animate live dashboards.",
       "category": "text",
+      "since": "2.2",
       "keywords": [
         "Intl.NumberFormat",
         ".value"
@@ -3188,7 +3330,10 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/text/counter.ts"
+      "source": "src/components/text/counter.ts",
+      "changed": [
+        "6.4"
+      ]
     },
     {
       "id": "cube",
@@ -3196,6 +3341,7 @@
       "title": "3D cube",
       "description": "Up to six children become the faces of a CSS 3D cube. Drag / swipe, arrow keys, autoplay or show(\"top\"); spring-driven, the front face is the only one exposed to screen readers.",
       "category": "depth",
+      "since": "3.5",
       "keywords": [
         "cube",
         "3d",
@@ -3230,7 +3376,10 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/depth/cube.ts"
+      "source": "src/components/depth/cube.ts",
+      "changed": [
+        "6.5"
+      ]
     },
     {
       "id": "cube-gallery",
@@ -3274,7 +3423,8 @@
       "entry": "motionary/widgets/cube-gallery",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/cube-gallery.ts"
+      "source": "src/components/widgets/cube-gallery.ts",
+      "changed": []
     },
     {
       "id": "cursor",
@@ -3282,6 +3432,7 @@
       "title": "Custom cursor",
       "description": "A spring-lagged ring, a magnetic ring that wraps buttons and links, or a soft glow following the pointer. Mouse / pen only. (6.0: for a comet tail use the comet-trail effect.)",
       "category": "page",
+      "since": "2.7",
       "keywords": [
         "cursor",
         "magnetic",
@@ -3312,7 +3463,12 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/page/cursor.ts"
+      "source": "src/components/page/cursor.ts",
+      "changed": [
+        "4.4",
+        "5.9",
+        "6.0"
+      ]
     },
     {
       "id": "date-picker",
@@ -3355,7 +3511,8 @@
       "entry": "motionary/widgets/date-picker",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/date-picker.ts"
+      "source": "src/components/widgets/date-picker.ts",
+      "changed": []
     },
     {
       "id": "depth",
@@ -3363,6 +3520,7 @@
       "title": "Depth parallax",
       "description": "Layers with data-depth (-1…1) shift and scale by depth as the pointer moves, the phone tilts (source=\"orientation\") or the page scrolls; optional whole-scene rotation.",
       "category": "depth",
+      "since": "3.5",
       "keywords": [
         "parallax",
         "depth",
@@ -3394,7 +3552,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/depth/depth-el.ts"
+      "source": "src/components/depth/depth-el.ts",
+      "changed": []
     },
     {
       "id": "dialog",
@@ -3402,6 +3561,7 @@
       "title": "Modal & drawer",
       "description": "Animated modal, side drawers and bottom sheet on the native <dialog>: top layer, focus trap, Esc, backdrop click.",
       "category": "transitions",
+      "since": "2.2",
       "keywords": [
         "<dialog>",
         "Fluent",
@@ -3440,7 +3600,11 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/transitions/dialog.ts"
+      "source": "src/components/transitions/dialog.ts",
+      "changed": [
+        "2.9",
+        "3.0"
+      ]
     },
     {
       "id": "disclosure",
@@ -3483,7 +3647,8 @@
       "entry": "motionary/widgets/disclosure",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/disclosure.ts"
+      "source": "src/components/widgets/disclosure.ts",
+      "changed": []
     },
     {
       "id": "distort",
@@ -3491,6 +3656,7 @@
       "title": "Hover distortion",
       "description": "The image bulges and splits into RGB around the pointer. Without WebGL (or a cross-origin image without CORS) it falls back to a gentle CSS zoom.",
       "category": "webgl",
+      "since": "3.4",
       "keywords": [
         "hover",
         "distortion",
@@ -3515,7 +3681,10 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/webgl/elements.ts"
+      "source": "src/components/webgl/elements.ts",
+      "changed": [
+        "4.0"
+      ]
     },
     {
       "id": "dock",
@@ -3555,7 +3724,8 @@
       "entry": "motionary/widgets/dock",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/dock.ts"
+      "source": "src/components/widgets/dock.ts",
+      "changed": []
     },
     {
       "id": "dot-network",
@@ -3563,6 +3733,7 @@
       "title": "Dot network",
       "description": "A dot grid that swells and links up with lines around the pointer.",
       "category": "background",
+      "since": "2.8",
       "keywords": [
         "canvas",
         "dots",
@@ -3592,7 +3763,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/background/bg-fx.ts"
+      "source": "src/components/background/bg-fx.ts",
+      "changed": []
     },
     {
       "id": "dotlottie",
@@ -3657,7 +3829,8 @@
       "entry": "motionary/widgets/dotlottie",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/dotlottie.ts"
+      "source": "src/components/widgets/dotlottie.ts",
+      "changed": []
     },
     {
       "id": "double-tap",
@@ -3665,6 +3838,7 @@
       "title": "Double tap",
       "description": "Double tap or double click a photo to pop a heart (or any emoji) at the tap point. L for keyboard users.",
       "category": "click",
+      "since": "2.5",
       "keywords": [
         "double tap",
         "heart",
@@ -3697,7 +3871,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/click/double-tap.ts"
+      "source": "src/components/click/double-tap.ts",
+      "changed": []
     },
     {
       "id": "draggable",
@@ -3705,6 +3880,7 @@
       "title": "Draggable",
       "description": "Drag with mouse, touch, pen or arrow keys. spring-back returns home with a wobble; inertia glides after a flick; snap to a grid or points; rubber-band bounds.",
       "category": "physics",
+      "since": "2.3",
       "keywords": [
         "spring-back",
         "inertia",
@@ -3746,7 +3922,10 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/physics/draggable.ts"
+      "source": "src/components/physics/draggable.ts",
+      "changed": [
+        "6.8"
+      ]
     },
     {
       "id": "draw",
@@ -3754,6 +3933,7 @@
       "title": "Line drawing",
       "description": "Every stroke of the SVG inside draws itself — on view, hover, click or scrubbed with scroll — staggered between shapes, optional fill afterwards. No getTotalLength() needed.",
       "category": "svg",
+      "since": "3.3",
       "keywords": [
         "stroke",
         "draw",
@@ -3787,7 +3967,10 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/svg/draw.ts"
+      "source": "src/components/svg/draw.ts",
+      "changed": [
+        "11.8"
+      ]
     },
     {
       "id": "drawer",
@@ -3795,6 +3978,7 @@
       "title": "Drawer",
       "description": "A side panel that springs in, drags / swipes closed, traps the page behind a backdrop and returns focus on close. Left, right, top or bottom.",
       "category": "ui",
+      "since": "2.6",
       "keywords": [
         "swipe",
         "modal",
@@ -3821,7 +4005,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/ui/sheet.ts"
+      "source": "src/components/ui/sheet.ts",
+      "changed": []
     },
     {
       "id": "equalizer",
@@ -3863,7 +4048,8 @@
       "entry": "motionary/widgets/equalizer",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/equalizer.ts"
+      "source": "src/components/widgets/equalizer.ts",
+      "changed": []
     },
     {
       "id": "fab",
@@ -3871,6 +4057,7 @@
       "title": "FAB speed dial",
       "description": "A floating action button whose actions fan out with a staggered spring: up, down, left, right or radial.",
       "category": "ui",
+      "since": "2.6",
       "keywords": [
         "speed dial",
         "stagger",
@@ -3901,7 +4088,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/ui/fab.ts"
+      "source": "src/components/ui/fab.ts",
+      "changed": []
     },
     {
       "id": "festival-banner",
@@ -3943,7 +4131,8 @@
       "entry": "motionary/widgets/festival-banner",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/festival-banner.ts"
+      "source": "src/components/widgets/festival-banner.ts",
+      "changed": []
     },
     {
       "id": "field",
@@ -3987,7 +4176,8 @@
       "entry": "motionary/widgets/field",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/field.ts"
+      "source": "src/components/widgets/field.ts",
+      "changed": []
     },
     {
       "id": "file-drop",
@@ -4032,7 +4222,8 @@
       "entry": "motionary/widgets/file-drop",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/file-drop.ts"
+      "source": "src/components/widgets/file-drop.ts",
+      "changed": []
     },
     {
       "id": "fullpage",
@@ -4040,6 +4231,7 @@
       "title": "Full-page sections",
       "description": "Full-screen sections that snap one at a time, with keyboard paging, dot navigation and a usa:section event.",
       "category": "page",
+      "since": "2.7",
       "keywords": [
         "scroll-snap",
         "keyboard",
@@ -4072,7 +4264,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/page/fullpage.ts"
+      "source": "src/components/page/fullpage.ts",
+      "changed": []
     },
     {
       "id": "fx",
@@ -4080,6 +4273,7 @@
       "title": "Attention seekers",
       "description": "<usa-fx> plays any registered effect on its child: pulse, pop, jelly, wiggle, heartbeat, bounce, flash (≤ 2 per second), tada, shake. Click the button.",
       "category": "fx",
+      "since": "5.0",
       "keywords": [
         "attention",
         "pulse",
@@ -4613,6 +4807,11 @@
           "description": "9.6: gpu-lift is a compositor-only hover lift (transform + opacity only, never layout or paint); idle-reveal waits for an idle moment before fading content in.",
           "example": "<usa-fx effect=\"gpu-lift\" trigger=\"hover\"><article class=\"card\">…</article></usa-fx>\n<usa-fx effect=\"idle-reveal\" trigger=\"enter\"><aside>…</aside></usa-fx>"
         }
+      ],
+      "changed": [
+        "5.1",
+        "5.9",
+        "6.0"
       ]
     },
     {
@@ -4654,7 +4853,10 @@
       "entry": "motionary/widgets/gauge",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/gauge.ts"
+      "source": "src/components/widgets/gauge.ts",
+      "changed": [
+        "7.5"
+      ]
     },
     {
       "id": "gen-art",
@@ -4698,7 +4900,8 @@
       "entry": "motionary/widgets/gen-art",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/gen-art.ts"
+      "source": "src/components/widgets/gen-art.ts",
+      "changed": []
     },
     {
       "id": "fx-gesture",
@@ -4706,6 +4909,7 @@
       "title": "Gesture triggers",
       "description": "5.7: <usa-gesture-fx> plays any registered effect on a fling (fast release), a two-finger twist or a long press that charges --usa-charge 0 → 1. JS: bindGesture(el, \"fling\", \"tada\").",
       "category": "fx",
+      "since": "5.7",
       "keywords": [
         "gesture",
         "fling",
@@ -4741,7 +4945,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/effects/cursor.ts"
+      "source": "src/components/effects/cursor.ts",
+      "changed": []
     },
     {
       "id": "gesture-sticker",
@@ -4784,7 +4989,8 @@
       "entry": "motionary/widgets/gesture-sticker",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/gesture-sticker.ts"
+      "source": "src/components/widgets/gesture-sticker.ts",
+      "changed": []
     },
     {
       "id": "gl-model",
@@ -4849,7 +5055,8 @@
       "entry": "motionary/widgets/gl-model",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/gl-model.ts"
+      "source": "src/components/widgets/gl-model.ts",
+      "changed": []
     },
     {
       "id": "gl-scene",
@@ -4944,6 +5151,12 @@
           "description": "10.8: <usa-gl-scene animation> plays glTF animations — skeletal skinning (4 joints per vertex), morph targets and LINEAR / STEP / CUBICSPLINE channels — on Motionary’s own WebGL2 renderer. Pick a clip by name or index, set animation-speed; reduced motion shows the first pose. Requires motionary/runtime/gl + motionary/runtime/format-gltf + motionary/runtime/gltf-anim (+ format-obj for .obj models) — npm i motionary, then use(gl, formatGltf, formatObj, gltfAnim).",
           "example": "<usa-gl-scene src=\"/models/robot.glb\" animation=\"walk\" controls label=\"Walking robot\"></usa-gl-scene>"
         }
+      ],
+      "changed": [
+        "10.8",
+        "10.9",
+        "11.0",
+        "11.3"
       ]
     },
     {
@@ -4952,6 +5165,7 @@
       "title": "Glitch text",
       "description": "An RGB-split, sliced glitch — always on or on hover.",
       "category": "text",
+      "since": "2.8",
       "keywords": [
         "glitch",
         "cyberpunk"
@@ -4980,7 +5194,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/text/text-fx.ts"
+      "source": "src/components/text/text-fx.ts",
+      "changed": []
     },
     {
       "id": "globe",
@@ -5023,7 +5238,8 @@
       "entry": "motionary/widgets/globe",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/globe.ts"
+      "source": "src/components/widgets/globe.ts",
+      "changed": []
     },
     {
       "id": "gpu-particles",
@@ -5068,7 +5284,10 @@
       "entry": "motionary/widgets/gpu-particles",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/gpu-particles.ts"
+      "source": "src/components/widgets/gpu-particles.ts",
+      "changed": [
+        "11.8"
+      ]
     },
     {
       "id": "gradient-text",
@@ -5076,6 +5295,7 @@
       "title": "Gradient flow",
       "description": "Text filled with a multi-colour gradient that keeps flowing.",
       "category": "text",
+      "since": "2.8",
       "keywords": [
         "gradient",
         "background-clip"
@@ -5105,7 +5325,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/text/text-fx.ts"
+      "source": "src/components/text/text-fx.ts",
+      "changed": []
     },
     {
       "id": "grain",
@@ -5113,6 +5334,7 @@
       "title": "Film grain",
       "description": "An SVG-noise grain overlay — no image to ship. animated makes it jitter like film.",
       "category": "background",
+      "since": "2.2",
       "keywords": [
         "noise",
         "overlay"
@@ -5139,7 +5361,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/background/grain.ts"
+      "source": "src/components/background/grain.ts",
+      "changed": []
     },
     {
       "id": "grid-glow",
@@ -5147,6 +5370,7 @@
       "title": "Grid glow",
       "description": "A line grid behind the content that lights up around the pointer.",
       "category": "background",
+      "since": "2.8",
       "keywords": [
         "grid",
         "pointer",
@@ -5176,7 +5400,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/background/bg-fx.ts"
+      "source": "src/components/background/bg-fx.ts",
+      "changed": []
     },
     {
       "id": "gyro-card",
@@ -5218,7 +5443,10 @@
       "entry": "motionary/widgets/gyro-card",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/gyro-card.ts"
+      "source": "src/components/widgets/gyro-card.ts",
+      "changed": [
+        "11.8"
+      ]
     },
     {
       "id": "handwriting",
@@ -5226,6 +5454,7 @@
       "title": "Handwriting draw",
       "description": "The text draws itself stroke by stroke, then fills in — signatures, hero words.",
       "category": "text",
+      "since": "2.8",
       "keywords": [
         "SVG",
         "stroke",
@@ -5260,7 +5489,10 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/text/text-fx.ts"
+      "source": "src/components/text/text-fx.ts",
+      "changed": [
+        "4.0"
+      ]
     },
     {
       "id": "hero-video",
@@ -5300,7 +5532,8 @@
       "entry": "motionary/widgets/hero-video",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/hero-video.ts"
+      "source": "src/components/widgets/hero-video.ts",
+      "changed": []
     },
     {
       "id": "hold",
@@ -5308,6 +5541,7 @@
       "title": "Hold to confirm",
       "description": "Press and hold (pointer, Space or Enter) while a ring fills; releasing early rewinds. For destructive actions.",
       "category": "click",
+      "since": "2.5",
       "keywords": [
         "long-press",
         "progress ring",
@@ -5342,7 +5576,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/click/hold.ts"
+      "source": "src/components/click/hold.ts",
+      "changed": []
     },
     {
       "id": "hud-panel",
@@ -5384,7 +5619,10 @@
       "entry": "motionary/widgets/hud-panel",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/hud-panel.ts"
+      "source": "src/components/widgets/hud-panel.ts",
+      "changed": [
+        "8.9"
+      ]
     },
     {
       "id": "hydrate",
@@ -5426,7 +5664,8 @@
       "entry": "motionary/widgets/hydrate",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/hydrate.ts"
+      "source": "src/components/widgets/hydrate.ts",
+      "changed": []
     },
     {
       "id": "icon-morph",
@@ -5434,6 +5673,7 @@
       "title": "Icon morph",
       "description": "Icons that morph point-by-point with a spring: play ↔ pause, menu ↔ close, plus ↔ minus, check, arrow. toggle makes it a button with per-icon labels.",
       "category": "click",
+      "since": "2.5",
       "keywords": [
         "play/pause",
         "menu/close",
@@ -5470,7 +5710,10 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/click/icon-morph.ts"
+      "source": "src/components/click/icon-morph.ts",
+      "changed": [
+        "6.6"
+      ]
     },
     {
       "id": "install-button",
@@ -5515,7 +5758,8 @@
       "entry": "motionary/widgets/install-button",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/install-button.ts"
+      "source": "src/components/widgets/install-button.ts",
+      "changed": []
     },
     {
       "id": "kanban",
@@ -5556,7 +5800,8 @@
       "entry": "motionary/widgets/kanban",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/kanban.ts"
+      "source": "src/components/widgets/kanban.ts",
+      "changed": []
     },
     {
       "id": "keyframe-editor",
@@ -5598,7 +5843,8 @@
       "entry": "motionary/widgets/keyframe-editor",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/keyframe-editor.ts"
+      "source": "src/components/widgets/keyframe-editor.ts",
+      "changed": []
     },
     {
       "id": "kpi",
@@ -5639,7 +5885,8 @@
       "entry": "motionary/widgets/kpi",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/kpi.ts"
+      "source": "src/components/widgets/kpi.ts",
+      "changed": []
     },
     {
       "id": "leaderboard",
@@ -5681,7 +5928,8 @@
       "entry": "motionary/widgets/leaderboard",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/leaderboard.ts"
+      "source": "src/components/widgets/leaderboard.ts",
+      "changed": []
     },
     {
       "id": "like",
@@ -5689,6 +5937,7 @@
       "title": "Like button",
       "description": "A heart that pops with a spring and bursts into particles; aria-pressed, optional count.",
       "category": "click",
+      "since": "2.5",
       "keywords": [
         "heart",
         "burst",
@@ -5724,7 +5973,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/click/like.ts"
+      "source": "src/components/click/like.ts",
+      "changed": []
     },
     {
       "id": "liquid",
@@ -5732,6 +5982,7 @@
       "title": "Liquid image",
       "description": "Click or tap to send water ripples through the image; hover adds a gentle wobble. The plain image stays when WebGL is unavailable.",
       "category": "webgl",
+      "since": "3.4",
       "keywords": [
         "ripple",
         "liquid",
@@ -5756,7 +6007,10 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/webgl/elements.ts"
+      "source": "src/components/webgl/elements.ts",
+      "changed": [
+        "4.0"
+      ]
     },
     {
       "id": "liquid-nav",
@@ -5795,7 +6049,8 @@
       "entry": "motionary/widgets/liquid-nav",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/liquid-nav.ts"
+      "source": "src/components/widgets/liquid-nav.ts",
+      "changed": []
     },
     {
       "id": "loading-bar",
@@ -5803,6 +6058,7 @@
       "title": "Top loading bar",
       "description": "A slim NProgress-style bar for route changes and fetches: loadingBar.start() trickles, done() completes and fades.",
       "category": "page",
+      "since": "2.7",
       "keywords": [
         "loadingBar",
         "route change",
@@ -5834,7 +6090,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/page/loading-bar.ts"
+      "source": "src/components/page/loading-bar.ts",
+      "changed": []
     },
     {
       "id": "location-card",
@@ -5882,7 +6139,8 @@
       "entry": "motionary/widgets/location-card",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/location-card.ts"
+      "source": "src/components/widgets/location-card.ts",
+      "changed": []
     },
     {
       "id": "lottie",
@@ -5929,7 +6187,8 @@
       "entry": "motionary/widgets/lottie",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/lottie.ts"
+      "source": "src/components/widgets/lottie.ts",
+      "changed": []
     },
     {
       "id": "lottie-icon",
@@ -5971,7 +6230,10 @@
       "entry": "motionary/widgets/lottie-icon",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/lottie-icon.ts"
+      "source": "src/components/widgets/lottie-icon.ts",
+      "changed": [
+        "11.8"
+      ]
     },
     {
       "id": "lottie-player",
@@ -6058,6 +6320,9 @@
           "description": "10.8: the Lottie player now draws text layers (fonts by family and style, justification, tracking, line height, fill and stroke, wrapping box text, source-text keyframes) and runs an expression subset — time, value, wiggle, loopOut / loopIn, linear / ease, Math — with its own interpreter (no eval, CSP-safe). Requires motionary/runtime/vector — npm i motionary, then use(vector).",
           "example": "<usa-lottie-player src=\"/anim/title.json\" autoplay loop label=\"Animated title\"></usa-lottie-player>"
         }
+      ],
+      "changed": [
+        "10.9"
       ]
     },
     {
@@ -6097,7 +6362,8 @@
       "entry": "motionary/widgets/lyrics",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/lyrics.ts"
+      "source": "src/components/widgets/lyrics.ts",
+      "changed": []
     },
     {
       "id": "magnetic",
@@ -6105,6 +6371,7 @@
       "title": "Magnetic button",
       "description": "Content leans toward the pointer when it comes near and springs back. Fine pointers only; off under reduced motion.",
       "category": "interaction",
+      "since": "2.2",
       "keywords": [
         "pointer",
         "spring"
@@ -6131,7 +6398,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/interaction/magnetic.ts"
+      "source": "src/components/interaction/magnetic.ts",
+      "changed": []
     },
     {
       "id": "marquee",
@@ -6139,6 +6407,7 @@
       "title": "Marquee",
       "description": "A seamless infinite ticker with constant speed, pause on hover, soft edges and vertical mode. Clones are hidden from AT.",
       "category": "background",
+      "since": "2.2",
       "keywords": [
         "infinite",
         "logos"
@@ -6170,7 +6439,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/background/marquee.ts"
+      "source": "src/components/background/marquee.ts",
+      "changed": []
     },
     {
       "id": "mask-reveal",
@@ -6178,6 +6448,7 @@
       "title": "Mask reveal",
       "description": "Reveal images or sections through a growing mask: circle, diamond, star, iris or wipes, from any origin.",
       "category": "svg",
+      "since": "3.3",
       "keywords": [
         "mask",
         "clip-path",
@@ -6213,7 +6484,11 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/svg/mask-reveal.ts"
+      "source": "src/components/svg/mask-reveal.ts",
+      "changed": [
+        "4.0",
+        "11.8"
+      ]
     },
     {
       "id": "masonry",
@@ -6221,6 +6496,7 @@
       "title": "Masonry",
       "description": "Pinterest-style masonry: items drop into the shortest column and glide when the width, the items or their sizes change. CSS columns before JS runs.",
       "category": "layout",
+      "since": "3.6",
       "keywords": [
         "masonry",
         "pinterest",
@@ -6252,7 +6528,10 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/layout/elements.ts"
+      "source": "src/components/layout/elements.ts",
+      "changed": [
+        "6.5"
+      ]
     },
     {
       "id": "masonry-flow",
@@ -6297,7 +6576,8 @@
       "entry": "motionary/widgets/masonry-flow",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/masonry-flow.ts"
+      "source": "src/components/widgets/masonry-flow.ts",
+      "changed": []
     },
     {
       "id": "menu",
@@ -6342,7 +6622,8 @@
       "entry": "motionary/widgets/menu",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/menu.ts"
+      "source": "src/components/widgets/menu.ts",
+      "changed": []
     },
     {
       "id": "menu-toggle",
@@ -6384,7 +6665,8 @@
       "entry": "motionary/widgets/menu-toggle",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/menu-toggle.ts"
+      "source": "src/components/widgets/menu-toggle.ts",
+      "changed": []
     },
     {
       "id": "message-list",
@@ -6425,7 +6707,8 @@
       "entry": "motionary/widgets/message-list",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/message-list.ts"
+      "source": "src/components/widgets/message-list.ts",
+      "changed": []
     },
     {
       "id": "milestones",
@@ -6463,7 +6746,8 @@
       "entry": "motionary/widgets/milestones",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/milestones.ts"
+      "source": "src/components/widgets/milestones.ts",
+      "changed": []
     },
     {
       "id": "modal",
@@ -6496,7 +6780,10 @@
       "prerequisites": null,
       "entry": "motionary/widgets/modal",
       "stability": "stable",
-      "deprecated": null
+      "deprecated": null,
+      "changed": [
+        "6.6"
+      ]
     },
     {
       "id": "morph",
@@ -6504,6 +6791,7 @@
       "title": "Path morph",
       "description": "Morph an SVG path through a list of shapes (paths=\"A | B | C\") on click, hover, in view or automatically. Same-structure paths morph point by point.",
       "category": "svg",
+      "since": "3.3",
       "keywords": [
         "morph",
         "blob",
@@ -6537,7 +6825,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/svg/morph.ts"
+      "source": "src/components/svg/morph.ts",
+      "changed": []
     },
     {
       "id": "motion",
@@ -6575,7 +6864,8 @@
       "entry": "motionary/widgets/motion",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/motion.ts"
+      "source": "src/components/widgets/motion.ts",
+      "changed": []
     },
     {
       "id": "motion-inspector",
@@ -6620,7 +6910,8 @@
       "entry": "motionary/widgets/motion-inspector",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/motion-inspector.ts"
+      "source": "src/components/widgets/motion-inspector.ts",
+      "changed": []
     },
     {
       "id": "motion-prefs",
@@ -6660,7 +6951,8 @@
       "entry": "motionary/widgets/motion-prefs",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/motion-prefs.ts"
+      "source": "src/components/widgets/motion-prefs.ts",
+      "changed": []
     },
     {
       "id": "motion-prompt",
@@ -6705,7 +6997,11 @@
       "entry": "motionary/widgets/motion-prompt",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/motion-prompt.ts"
+      "source": "src/components/widgets/motion-prompt.ts",
+      "changed": [
+        "11.0",
+        "11.6"
+      ]
     },
     {
       "id": "motion-spec",
@@ -6746,7 +7042,8 @@
       "entry": "motionary/widgets/motion-spec",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/motion-spec.ts"
+      "source": "src/components/widgets/motion-spec.ts",
+      "changed": []
     },
     {
       "id": "motion-switch",
@@ -6754,6 +7051,7 @@
       "title": "Motion intensity",
       "description": "Let users pick Off · Low · Normal · High for the whole app; scales every component, persists, and Off equals reduced motion.",
       "category": "page",
+      "since": "2.7",
       "keywords": [
         "motion",
         "a11y",
@@ -6782,7 +7080,11 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/page/motion-switch.ts"
+      "source": "src/components/page/motion-switch.ts",
+      "changed": [
+        "4.9",
+        "5.0"
+      ]
     },
     {
       "id": "fx-theme",
@@ -6790,6 +7092,7 @@
       "title": "Theme packs",
       "description": "5.8: <usa-motion-theme name> applies a theme pack — design tokens (--usa-theme-*), motion tokens and effect presets per role (enter / hover / click / attention / background). Neon, paper, glass, retro and brutalist; applyMotionTheme() for the whole page.",
       "category": "fx",
+      "since": "8.9",
       "keywords": [
         "theme",
         "tokens",
@@ -6820,7 +7123,10 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/effects/themes.ts"
+      "source": "src/components/effects/themes.ts",
+      "changed": [
+        "9.0"
+      ]
     },
     {
       "id": "music-player",
@@ -6869,7 +7175,8 @@
       "entry": "motionary/widgets/music-player",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/music-player.ts"
+      "source": "src/components/widgets/music-player.ts",
+      "changed": []
     },
     {
       "id": "native-preview",
@@ -6912,7 +7219,8 @@
       "entry": "motionary/widgets/native-preview",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/native-preview.ts"
+      "source": "src/components/widgets/native-preview.ts",
+      "changed": []
     },
     {
       "id": "nav-morph",
@@ -6952,7 +7260,8 @@
       "entry": "motionary/widgets/nav-morph",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/nav-morph.ts"
+      "source": "src/components/widgets/nav-morph.ts",
+      "changed": []
     },
     {
       "id": "navbar",
@@ -6960,6 +7269,7 @@
       "title": "Auto-hide navbar",
       "description": "Hides while you scroll down, slides back on the first scroll up; shrink makes it compact once scrolled. This page’s demo scrolls an inner box.",
       "category": "ui",
+      "since": "2.6",
       "keywords": [
         "sticky",
         "scroll",
@@ -6991,7 +7301,11 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/ui/navbar.ts"
+      "source": "src/components/ui/navbar.ts",
+      "changed": [
+        "6.6",
+        "12.0"
+      ]
     },
     {
       "id": "notification-bell",
@@ -7034,7 +7348,8 @@
       "entry": "motionary/widgets/notification-bell",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/notification-bell.ts"
+      "source": "src/components/widgets/notification-bell.ts",
+      "changed": []
     },
     {
       "id": "odometer",
@@ -7075,7 +7390,8 @@
       "entry": "motionary/widgets/odometer",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/meters.ts"
+      "source": "src/components/widgets/meters.ts",
+      "changed": []
     },
     {
       "id": "organic-card",
@@ -7114,7 +7430,8 @@
       "entry": "motionary/widgets/organic-card",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/organic-card.ts"
+      "source": "src/components/widgets/organic-card.ts",
+      "changed": []
     },
     {
       "id": "otp",
@@ -7160,7 +7477,8 @@
       "entry": "motionary/widgets/otp",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/otp.ts"
+      "source": "src/components/widgets/otp.ts",
+      "changed": []
     },
     {
       "id": "overscroll",
@@ -7168,6 +7486,7 @@
       "title": "Elastic overscroll",
       "description": "A scroll container whose edges stretch with iOS-style rubber-band resistance and spring back — touch, trackpad and wheel.",
       "category": "physics",
+      "since": "2.3",
       "keywords": [
         "rubber-band",
         "scroll",
@@ -7196,7 +7515,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/physics/overscroll.ts"
+      "source": "src/components/physics/overscroll.ts",
+      "changed": []
     },
     {
       "id": "pack-ecommerce",
@@ -7204,6 +7524,7 @@
       "title": "E-commerce pack",
       "description": "Product cards reveal and lift, “Add to cart” presses and flies the product into the cart (which bumps), prices count up, badges pulse.",
       "category": "packs",
+      "since": "3.9",
       "keywords": [
         "shop",
         "cart",
@@ -7262,7 +7583,8 @@
           "description": "Hero and features reveal in sequence, features lift, logos float gently, stats count up, the CTA pulses and presses.",
           "example": "<usa-pack name=\"landing\">\n  <header data-role=\"hero\">…</header>\n  <section data-role=\"feature\">…</section>\n  <a data-role=\"cta\" href=\"/signup\">Start free</a>\n</usa-pack>"
         }
-      ]
+      ],
+      "changed": []
     },
     {
       "id": "pagination",
@@ -7302,7 +7624,8 @@
       "entry": "motionary/widgets/pagination",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/pagination.ts"
+      "source": "src/components/widgets/pagination.ts",
+      "changed": []
     },
     {
       "id": "panorama",
@@ -7346,7 +7669,8 @@
       "entry": "motionary/widgets/panorama",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/panorama.ts"
+      "source": "src/components/widgets/panorama.ts",
+      "changed": []
     },
     {
       "id": "parallax-layers",
@@ -7391,7 +7715,8 @@
       "entry": "motionary/widgets/parallax-layers",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/parallax-layers.ts"
+      "source": "src/components/widgets/parallax-layers.ts",
+      "changed": []
     },
     {
       "id": "particles",
@@ -7399,6 +7724,7 @@
       "title": "Particles",
       "description": "A canvas constellation that drifts away from the pointer. Runs only while visible, DPR ≤ 2, a still frame under reduced motion.",
       "category": "background",
+      "since": "2.2",
       "keywords": [
         "canvas",
         "interactive"
@@ -7431,7 +7757,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/background/particles.ts"
+      "source": "src/components/background/particles.ts",
+      "changed": []
     },
     {
       "id": "pause-all",
@@ -7473,7 +7800,8 @@
       "entry": "motionary/widgets/pause-all",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/pause-all.ts"
+      "source": "src/components/widgets/pause-all.ts",
+      "changed": []
     },
     {
       "id": "perf-monitor",
@@ -7512,7 +7840,8 @@
       "entry": "motionary/widgets/perf-monitor",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/perf-monitor.ts"
+      "source": "src/components/widgets/perf-monitor.ts",
+      "changed": []
     },
     {
       "id": "physics-playground",
@@ -7581,7 +7910,8 @@
       "entry": "motionary/widgets/physics-playground",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/physics-playground.ts"
+      "source": "src/components/widgets/physics-playground.ts",
+      "changed": []
     },
     {
       "id": "pinch-zoom",
@@ -7589,6 +7919,7 @@
       "title": "Pinch zoom",
       "description": "Pinch with two fingers or Ctrl + wheel / trackpad pinch, pan while zoomed, double-tap to toggle; scale and position spring back inside the bounds.",
       "category": "gesture",
+      "since": "3.2",
       "keywords": [
         "pinch",
         "zoom",
@@ -7622,7 +7953,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/gesture/pinch-zoom.ts"
+      "source": "src/components/gesture/pinch-zoom.ts",
+      "changed": []
     },
     {
       "id": "fx-player",
@@ -7630,6 +7962,7 @@
       "title": "JSON animation player",
       "description": "5.9: <usa-player> plays a JSON animation — timeline presets, your own keyframes and any registered effect on a shared clock; play / pause / seek / rate / loop, scroll-scrubbing (trigger=\"scroll\"). Export one from the Playground (<usa-player> JSON tab).",
       "category": "fx",
+      "since": "5.9",
       "keywords": [
         "player",
         "json",
@@ -7671,7 +8004,14 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/effects/player.ts"
+      "source": "src/components/effects/player.ts",
+      "changed": [
+        "6.9",
+        "7.0",
+        "7.1",
+        "11.8",
+        "12.0"
+      ]
     },
     {
       "id": "plugin-card",
@@ -7737,7 +8077,10 @@
       "entry": "motionary/widgets/plugin-card",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/plugin-card.ts"
+      "source": "src/components/widgets/plugin-card.ts",
+      "changed": [
+        "12.0"
+      ]
     },
     {
       "id": "plugin-store",
@@ -7780,7 +8123,8 @@
       "entry": "motionary/widgets/plugin-store",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/plugin-store.ts"
+      "source": "src/components/widgets/plugin-store.ts",
+      "changed": []
     },
     {
       "id": "popover",
@@ -7788,6 +8132,7 @@
       "title": "Popover",
       "description": "Click-to-open panel that springs from its trigger; Esc / outside click closes, focus returns.",
       "category": "ui",
+      "since": "2.6",
       "keywords": [
         "dialog",
         "aria-expanded"
@@ -7814,7 +8159,11 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/ui/popover.ts"
+      "source": "src/components/ui/popover.ts",
+      "changed": [
+        "6.6",
+        "12.0"
+      ]
     },
     {
       "id": "post-fx",
@@ -7822,6 +8171,7 @@
       "title": "Post-processing",
       "description": "Chainable GPU passes over an image (4.8): vignette, grain, chromatic aberration, scanlines, CRT, bloom, pixelate, duotone and glitch, with one intensity. Without WebGL the image gets an approximate CSS filter.",
       "category": "webgl",
+      "since": "4.8",
       "keywords": [
         "post-processing",
         "vignette",
@@ -7847,7 +8197,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/webgl/elements.ts"
+      "source": "src/components/webgl/elements.ts",
+      "changed": []
     },
     {
       "id": "presence",
@@ -7886,7 +8237,8 @@
       "entry": "motionary/widgets/presence",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/presence.ts"
+      "source": "src/components/widgets/presence.ts",
+      "changed": []
     },
     {
       "id": "press",
@@ -7894,6 +8246,7 @@
       "title": "Press feedback",
       "description": "Tactile press: dips while pressed and springs back, or bounces once with bounce. Mouse, touch, pen and keyboard.",
       "category": "interaction",
+      "since": "2.2",
       "keywords": [
         "spring",
         "touch"
@@ -7920,7 +8273,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/interaction/press.ts"
+      "source": "src/components/interaction/press.ts",
+      "changed": []
     },
     {
       "id": "prize-wheel",
@@ -7963,7 +8317,8 @@
       "entry": "motionary/widgets/prize-wheel",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/prize-wheel.ts"
+      "source": "src/components/widgets/prize-wheel.ts",
+      "changed": []
     },
     {
       "id": "product-gallery",
@@ -8007,7 +8362,8 @@
       "entry": "motionary/widgets/product-gallery",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/product-gallery.ts"
+      "source": "src/components/widgets/product-gallery.ts",
+      "changed": []
     },
     {
       "id": "progress",
@@ -8015,6 +8371,7 @@
       "title": "Progress bar",
       "description": "Determinate bars glide between values; without a value it shows the Fluent indeterminate animation. Paused / error states.",
       "category": "feedback",
+      "since": "2.2",
       "keywords": [
         "Fluent",
         "role=progressbar"
@@ -8044,7 +8401,11 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/feedback/progress.ts"
+      "source": "src/components/feedback/progress.ts",
+      "changed": [
+        "2.6",
+        "6.4"
+      ]
     },
     {
       "id": "progress-ring",
@@ -8087,7 +8448,8 @@
       "entry": "motionary/widgets/progress-ring",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/meters.ts"
+      "source": "src/components/widgets/meters.ts",
+      "changed": []
     },
     {
       "id": "prop-panel",
@@ -8129,7 +8491,8 @@
       "entry": "motionary/widgets/prop-panel",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/prop-panel.ts"
+      "source": "src/components/widgets/prop-panel.ts",
+      "changed": []
     },
     {
       "id": "pull-cord",
@@ -8170,7 +8533,8 @@
       "entry": "motionary/widgets/pull-cord",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/pull-cord.ts"
+      "source": "src/components/widgets/pull-cord.ts",
+      "changed": []
     },
     {
       "id": "pull-refresh",
@@ -8178,6 +8542,7 @@
       "title": "Pull to refresh",
       "description": "Pull down at the top of a list: the spinner stretches in with rubber-band resistance; release past the threshold to refresh.",
       "category": "ui",
+      "since": "2.6",
       "keywords": [
         "rubber-band",
         "usa:refresh"
@@ -8206,7 +8571,10 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/ui/pull-refresh.ts"
+      "source": "src/components/ui/pull-refresh.ts",
+      "changed": [
+        "6.8"
+      ]
     },
     {
       "id": "radar",
@@ -8249,7 +8617,8 @@
       "entry": "motionary/widgets/radar",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/radar.ts"
+      "source": "src/components/widgets/radar.ts",
+      "changed": []
     },
     {
       "id": "reactions",
@@ -8291,7 +8660,8 @@
       "entry": "motionary/widgets/reactions",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/reactions.ts"
+      "source": "src/components/widgets/reactions.ts",
+      "changed": []
     },
     {
       "id": "red-envelope",
@@ -8336,7 +8706,8 @@
       "entry": "motionary/widgets/red-envelope",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/red-envelope.ts"
+      "source": "src/components/widgets/red-envelope.ts",
+      "changed": []
     },
     {
       "id": "retro-button",
@@ -8374,7 +8745,8 @@
       "entry": "motionary/widgets/retro-button",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/retro-button.ts"
+      "source": "src/components/widgets/retro-button.ts",
+      "changed": []
     },
     {
       "id": "reveal",
@@ -8382,6 +8754,7 @@
       "title": "Reveal",
       "description": "Fade, slide, zoom, blur or flip content in as it enters the viewport. 12 effects, replay on re-entry with repeat.",
       "category": "reveal",
+      "since": "2.2",
       "keywords": [
         "IntersectionObserver",
         "WAAPI",
@@ -8421,7 +8794,10 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/reveal/reveal.ts"
+      "source": "src/components/reveal/reveal.ts",
+      "changed": [
+        "6.1"
+      ]
     },
     {
       "id": "ripple",
@@ -8429,6 +8805,7 @@
       "title": "Ripple",
       "description": "Ink ripple from the pointer — or from the centre for Space/Enter — on any button, list item or card.",
       "category": "interaction",
+      "since": "2.2",
       "keywords": [
         "pointer",
         "keyboard"
@@ -8459,7 +8836,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/interaction/ripple.ts"
+      "source": "src/components/interaction/ripple.ts",
+      "changed": []
     },
     {
       "id": "rive",
@@ -8526,7 +8904,10 @@
       "entry": "motionary/widgets/rive",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/rive.ts"
+      "source": "src/components/widgets/rive.ts",
+      "changed": [
+        "10.7"
+      ]
     },
     {
       "id": "route-transition",
@@ -8573,7 +8954,8 @@
       "entry": "motionary/widgets/route-transition",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/route-transition.ts"
+      "source": "src/components/widgets/route-transition.ts",
+      "changed": []
     },
     {
       "id": "scene",
@@ -8615,7 +8997,8 @@
       "entry": "motionary/widgets/scene",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/scene.ts"
+      "source": "src/components/widgets/scene.ts",
+      "changed": []
     },
     {
       "id": "scramble",
@@ -8623,6 +9006,7 @@
       "title": "Scramble / decode",
       "description": "Decodes text out of random glyphs, left to right. Trigger on view, hover/focus or manually.",
       "category": "text",
+      "since": "2.2",
       "keywords": [
         "hover",
         "glyphs"
@@ -8654,7 +9038,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/text/scramble.ts"
+      "source": "src/components/text/scramble.ts",
+      "changed": []
     },
     {
       "id": "scroll-highlight",
@@ -8662,6 +9047,7 @@
       "title": "Scroll highlight",
       "description": "Words light up one by one as you read down the page, or a highlighter marker sweeps behind the text.",
       "category": "text",
+      "since": "2.8",
       "keywords": [
         "scroll",
         "reading",
@@ -8692,7 +9078,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/text/text-fx.ts"
+      "source": "src/components/text/text-fx.ts",
+      "changed": []
     },
     {
       "id": "scroll-progress",
@@ -8700,6 +9087,7 @@
       "title": "Scroll progress bar",
       "description": "Reading progress of the page or of one article. Compositor-only scaleX, role=\"progressbar\".",
       "category": "reveal",
+      "since": "2.2",
       "keywords": [
         "scaleX",
         "a11y",
@@ -8730,7 +9118,10 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/reveal/scroll-progress.ts"
+      "source": "src/components/reveal/scroll-progress.ts",
+      "changed": [
+        "2.7"
+      ]
     },
     {
       "id": "scroll-ring",
@@ -8776,7 +9167,8 @@
       "entry": "motionary/widgets/scroll-ring",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/scroll-ring.ts"
+      "source": "src/components/widgets/scroll-ring.ts",
+      "changed": []
     },
     {
       "id": "scroll-scene",
@@ -8842,7 +9234,8 @@
       "entry": "motionary/widgets/scroll-scene",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/scroll-scene.ts"
+      "source": "src/components/widgets/scroll-scene.ts",
+      "changed": []
     },
     {
       "id": "scrolly",
@@ -8850,6 +9243,7 @@
       "title": "Sticky scrollytelling",
       "description": "A pinned graphic while [data-step] blocks scroll past; the active step drives the graphic via attributes, a CSS variable and events.",
       "category": "reveal",
+      "since": "2.2",
       "keywords": [
         "position: sticky",
         "steps",
@@ -8877,7 +9271,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/reveal/scrolly.ts"
+      "source": "src/components/reveal/scrolly.ts",
+      "changed": []
     },
     {
       "id": "segmented",
@@ -8917,7 +9312,8 @@
       "entry": "motionary/widgets/segmented",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/segmented.ts"
+      "source": "src/components/widgets/segmented.ts",
+      "changed": []
     },
     {
       "id": "shader",
@@ -8925,6 +9321,7 @@
       "title": "Shader background",
       "description": "A GPU shader behind your content: gradient, plasma, waves or aurora presets — or your own fragment shader in a <script type=\"x-shader/x-fragment\">. Falls back to the CSS background.",
       "category": "webgl",
+      "since": "3.4",
       "keywords": [
         "shader",
         "webgl",
@@ -8964,6 +9361,10 @@
           "description": "Particle presets (4.8) on the same single quad — snow, fireflies, a warp starfield, bokeh and rain — computed procedurally in the shader (no buffers, no per-particle JS). Adaptive: resolution steps down when fps drops, frame rate is capped on battery saver.",
           "example": "<usa-shader preset=\"snow\">\n  <h1>Winter sale</h1>\n</usa-shader>\n<!-- fireflies · stars · bokeh · rain; quality=\"high\" disables adaptive quality -->"
         }
+      ],
+      "changed": [
+        "4.0",
+        "4.8"
       ]
     },
     {
@@ -9007,7 +9408,8 @@
       "entry": "motionary/widgets/shader-backdrop",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/shader-backdrop.ts"
+      "source": "src/components/widgets/shader-backdrop.ts",
+      "changed": []
     },
     {
       "id": "sheet",
@@ -9040,7 +9442,10 @@
       "prerequisites": null,
       "entry": "motionary/widgets/sheet",
       "stability": "stable",
-      "deprecated": null
+      "deprecated": null,
+      "changed": [
+        "6.6"
+      ]
     },
     {
       "id": "shimmer-text",
@@ -9048,6 +9453,7 @@
       "title": "Shimmer text",
       "description": "A light sweep across gradient-filled text. CSS only; colours and speed via attributes or custom properties.",
       "category": "text",
+      "since": "2.2",
       "keywords": [
         "background-clip",
         "CSS"
@@ -9075,7 +9481,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/text/shimmer-text.ts"
+      "source": "src/components/text/shimmer-text.ts",
+      "changed": []
     },
     {
       "id": "shortcut",
@@ -9118,7 +9525,8 @@
       "entry": "motionary/widgets/shortcut",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/shortcut.ts"
+      "source": "src/components/widgets/shortcut.ts",
+      "changed": []
     },
     {
       "id": "skeleton",
@@ -9126,6 +9534,7 @@
       "title": "Skeleton",
       "description": "Shimmering placeholders while loading; remove loading and the real content fades in. aria-busy included.",
       "category": "feedback",
+      "since": "2.2",
       "keywords": [
         "shimmer",
         "aria-busy"
@@ -9158,7 +9567,10 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/feedback/skeleton.ts"
+      "source": "src/components/feedback/skeleton.ts",
+      "changed": [
+        "6.4"
+      ]
     },
     {
       "id": "skeleton-reveal",
@@ -9199,7 +9611,8 @@
       "entry": "motionary/widgets/skeleton-reveal",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/skeleton-reveal.ts"
+      "source": "src/components/widgets/skeleton-reveal.ts",
+      "changed": []
     },
     {
       "id": "sketch-chart",
@@ -9244,7 +9657,10 @@
       "entry": "motionary/widgets/sketch-chart",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/sketch-chart.ts"
+      "source": "src/components/widgets/sketch-chart.ts",
+      "changed": [
+        "11.8"
+      ]
     },
     {
       "id": "slider",
@@ -9252,6 +9668,7 @@
       "title": "Slider",
       "description": "A form-associated range slider: spring-following thumb, value bubble, full keyboard support (arrows, Page Up/Down, Home/End).",
       "category": "ui",
+      "since": "2.6",
       "keywords": [
         "role=slider",
         "form",
@@ -9285,7 +9702,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/ui/slider.ts"
+      "source": "src/components/ui/slider.ts",
+      "changed": []
     },
     {
       "id": "smooth-scroller",
@@ -9353,7 +9771,8 @@
       "entry": "motionary/widgets/smooth-scroll",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/smooth-scroll.ts"
+      "source": "src/components/widgets/smooth-scroll.ts",
+      "changed": []
     },
     {
       "id": "snap-carousel",
@@ -9419,7 +9838,8 @@
       "entry": "motionary/widgets/snap-carousel",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/snap-carousel.ts"
+      "source": "src/components/widgets/snap-carousel.ts",
+      "changed": []
     },
     {
       "id": "sparkline",
@@ -9458,7 +9878,10 @@
       "entry": "motionary/widgets/sparkline",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/sparkline.ts"
+      "source": "src/components/widgets/sparkline.ts",
+      "changed": [
+        "7.5"
+      ]
     },
     {
       "id": "spatial-card",
@@ -9494,7 +9917,8 @@
       "entry": "motionary/widgets/spatial-card",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/spatial-card.ts"
+      "source": "src/components/widgets/spatial-card.ts",
+      "changed": []
     },
     {
       "id": "spinner",
@@ -9502,6 +9926,7 @@
       "title": "Spinners",
       "description": "Six indeterminate indicators: the WinUI progress ring, the Windows 10 orbiting dots, ring, typing dots, pulse and bars.",
       "category": "feedback",
+      "since": "2.2",
       "keywords": [
         "Windows",
         "Fluent",
@@ -9529,7 +9954,11 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/feedback/spinner.ts"
+      "source": "src/components/feedback/spinner.ts",
+      "changed": [
+        "2.9",
+        "3.0"
+      ]
     },
     {
       "id": "splash",
@@ -9537,6 +9966,7 @@
       "title": "Splash screen",
       "description": "An app launch screen that leaves (fade, scale, slide-up, circle) once the page has loaded — never sooner than min ms.",
       "category": "page",
+      "since": "2.7",
       "keywords": [
         "launch",
         "PWA",
@@ -9569,7 +9999,10 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/page/splash.ts"
+      "source": "src/components/page/splash.ts",
+      "changed": [
+        "9.8"
+      ]
     },
     {
       "id": "split-text",
@@ -9577,6 +10010,7 @@
       "title": "Split-text reveal",
       "description": "Splits a headline into letters or words and cascades them in: rise, fade, blur, flip or pop. Words never break.",
       "category": "text",
+      "since": "2.2",
       "keywords": [
         "chars",
         "words",
@@ -9614,7 +10048,12 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/text/split-text.ts"
+      "source": "src/components/text/split-text.ts",
+      "changed": [
+        "4.3",
+        "10.1",
+        "10.3"
+      ]
     },
     {
       "id": "spotlight",
@@ -9622,6 +10061,7 @@
       "title": "Reveal highlight",
       "description": "The Windows Fluent “Reveal” effect: a light follows the pointer, lighting the borders of nearby items and the hovered one.",
       "category": "interaction",
+      "since": "2.2",
       "keywords": [
         "Fluent",
         "Windows"
@@ -9648,7 +10088,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/interaction/spotlight.ts"
+      "source": "src/components/interaction/spotlight.ts",
+      "changed": []
     },
     {
       "id": "spring",
@@ -9656,6 +10097,7 @@
       "title": "Spring effects",
       "description": "bounce-in, pop and drop entrances with true spring timing (CSS linear() easing), plus jelly and rubber-band attention effects on view, hover or click.",
       "category": "physics",
+      "since": "2.3",
       "keywords": [
         "spring",
         "bounce",
@@ -9695,7 +10137,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/physics/spring-effect.ts"
+      "source": "src/components/physics/spring-effect.ts",
+      "changed": []
     },
     {
       "id": "stagger",
@@ -9703,6 +10146,7 @@
       "title": "Stagger list",
       "description": "Reveals direct children one after another — lists, grids, feature rows.",
       "category": "reveal",
+      "since": "2.2",
       "keywords": [
         "children",
         "interval"
@@ -9740,7 +10184,10 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/reveal/stagger.ts"
+      "source": "src/components/reveal/stagger.ts",
+      "changed": [
+        "6.1"
+      ]
     },
     {
       "id": "star-rating",
@@ -9783,7 +10230,11 @@
       "entry": "motionary/widgets/star-rating",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/star-rating.ts"
+      "source": "src/components/widgets/star-rating.ts",
+      "changed": [
+        "7.9",
+        "8.0"
+      ]
     },
     {
       "id": "stepper",
@@ -9826,7 +10277,8 @@
       "entry": "motionary/widgets/stepper",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/stepper.ts"
+      "source": "src/components/widgets/stepper.ts",
+      "changed": []
     },
     {
       "id": "sticky-stack",
@@ -9834,6 +10286,7 @@
       "title": "Sticky stack",
       "description": "Cards stick while you scroll and the covered ones shrink and dim as the next slides over them.",
       "category": "cards",
+      "since": "2.4",
       "keywords": [
         "sticky",
         "scroll"
@@ -9862,7 +10315,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/cards/sticky-stack.ts"
+      "source": "src/components/cards/sticky-stack.ts",
+      "changed": []
     },
     {
       "id": "sticky-wall",
@@ -9903,7 +10357,8 @@
       "entry": "motionary/widgets/sticky-wall",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/sticky-wall.ts"
+      "source": "src/components/widgets/sticky-wall.ts",
+      "changed": []
     },
     {
       "id": "stories",
@@ -9949,7 +10404,8 @@
       "entry": "motionary/widgets/stories",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/stories.ts"
+      "source": "src/components/widgets/stories.ts",
+      "changed": []
     },
     {
       "id": "story-compare",
@@ -9957,6 +10413,7 @@
       "title": "Story: before / after",
       "description": "5.4: <usa-story template=\"compare\"> wipes from before to after as you scroll; the handle is draggable and a keyboard slider (←/→, Home/End). Full-page templates (pin, gallery, zoom) live on the Scroll stories page.",
       "category": "fx",
+      "since": "5.4",
       "keywords": [
         "story",
         "scrollytelling",
@@ -10008,6 +10465,10 @@
           "description": "5.4: template=\"highlight\" dims every paragraph except the one crossing the viewport center (pin does the same for [data-step] sections next to a sticky [data-stage]); fires usa:step.",
           "example": "<usa-story template=\"pin\">\n  <figure data-stage>…chart…</figure>\n  <section data-step>Step 1</section>\n  <section data-step>Step 2</section>\n</usa-story>"
         }
+      ],
+      "changed": [
+        "11.8",
+        "12.0"
       ]
     },
     {
@@ -10050,7 +10511,8 @@
       "entry": "motionary/widgets/suggestion-chips",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/suggestion-chips.ts"
+      "source": "src/components/widgets/suggestion-chips.ts",
+      "changed": []
     },
     {
       "id": "swipe-deck",
@@ -10094,7 +10556,8 @@
       "entry": "motionary/widgets/swipe-deck",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/swipe-deck.ts"
+      "source": "src/components/widgets/swipe-deck.ts",
+      "changed": []
     },
     {
       "id": "swipeable",
@@ -10102,6 +10565,7 @@
       "title": "Swipeable",
       "description": "Swipe-to-dismiss and swipe actions: content follows the finger, flies out on a fast swipe or past the distance, otherwise springs home with your release velocity. Delete / arrow keys work too.",
       "category": "gesture",
+      "since": "3.2",
       "keywords": [
         "swipe",
         "dismiss",
@@ -10138,7 +10602,10 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/gesture/swipeable.ts"
+      "source": "src/components/gesture/swipeable.ts",
+      "changed": [
+        "6.8"
+      ]
     },
     {
       "id": "switch",
@@ -10182,7 +10649,11 @@
       "entry": "motionary/widgets/switch",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/switch.ts"
+      "source": "src/components/widgets/switch.ts",
+      "changed": [
+        "6.9",
+        "7.0"
+      ]
     },
     {
       "id": "tab-bar",
@@ -10224,7 +10695,8 @@
       "entry": "motionary/widgets/tab-bar",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/tab-bar.ts"
+      "source": "src/components/widgets/tab-bar.ts",
+      "changed": []
     },
     {
       "id": "tabs",
@@ -10232,6 +10704,7 @@
       "title": "Tabs",
       "description": "Accessible tabs whose indicator slides between tabs with a spring; panels slide in from the direction you moved. Line or pill indicator.",
       "category": "ui",
+      "since": "2.6",
       "keywords": [
         "role=tablist",
         "indicator",
@@ -10261,7 +10734,10 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/ui/tabs.ts"
+      "source": "src/components/ui/tabs.ts",
+      "changed": [
+        "6.7"
+      ]
     },
     {
       "id": "terminal",
@@ -10306,7 +10782,8 @@
       "entry": "motionary/widgets/terminal",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/terminal.ts"
+      "source": "src/components/widgets/terminal.ts",
+      "changed": []
     },
     {
       "id": "text-rotate",
@@ -10314,6 +10791,7 @@
       "title": "Rotating words",
       "description": "Cycles words in place — the box keeps the width of the longest word, so nothing around it reflows.",
       "category": "text",
+      "since": "2.2",
       "keywords": [
         "no reflow",
         "slide",
@@ -10346,7 +10824,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/text/text-rotate.ts"
+      "source": "src/components/text/text-rotate.ts",
+      "changed": []
     },
     {
       "id": "text-splitter",
@@ -10410,7 +10889,8 @@
       "entry": "motionary/widgets/text-splitter",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/text-splitter.ts"
+      "source": "src/components/widgets/text-splitter.ts",
+      "changed": []
     },
     {
       "id": "theme-surface",
@@ -10448,7 +10928,8 @@
       "entry": "motionary/widgets/theme-surface",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/theme-surface.ts"
+      "source": "src/components/widgets/theme-surface.ts",
+      "changed": []
     },
     {
       "id": "theme-switcher",
@@ -10490,7 +10971,8 @@
       "entry": "motionary/widgets/theme-switcher",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/theme-switcher.ts"
+      "source": "src/components/widgets/theme-switcher.ts",
+      "changed": []
     },
     {
       "id": "tilt",
@@ -10498,6 +10980,7 @@
       "title": "3D tilt card",
       "description": "Tilts toward the pointer in 3D with an optional glare; exposes --usa-tilt-x/y for parallax layers inside.",
       "category": "interaction",
+      "since": "2.2",
       "keywords": [
         "perspective",
         "glare"
@@ -10527,7 +11010,10 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/interaction/tilt.ts"
+      "source": "src/components/interaction/tilt.ts",
+      "changed": [
+        "12.3"
+      ]
     },
     {
       "id": "timeline",
@@ -10535,6 +11021,7 @@
       "title": "Timeline",
       "description": "Every data-tl child becomes a step in document order. data-at ('-=200', '<', 'label+=100') overlaps or aligns steps; scrub ties progress to scroll; trigger view / click / manual.",
       "category": "timeline",
+      "since": "3.1",
       "keywords": [
         "choreography",
         "sequence",
@@ -10574,7 +11061,15 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/timeline/timeline-el.ts"
+      "source": "src/components/timeline/timeline-el.ts",
+      "changed": [
+        "4.0",
+        "4.1",
+        "4.6",
+        "4.9",
+        "5.0",
+        "6.5"
+      ]
     },
     {
       "id": "tip",
@@ -10619,7 +11114,11 @@
       "entry": "motionary/widgets/tip",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/tip.ts"
+      "source": "src/components/widgets/tip.ts",
+      "changed": [
+        "6.9",
+        "7.0"
+      ]
     },
     {
       "id": "toast-stack",
@@ -10664,7 +11163,8 @@
       "entry": "motionary/widgets/toast-stack",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/toast.ts"
+      "source": "src/components/widgets/toast.ts",
+      "changed": []
     },
     {
       "id": "toaster",
@@ -10672,6 +11172,7 @@
       "title": "Toasts",
       "description": "toast(\"Saved\") slides a notification in; it pauses on hover, stacks with FLIP and announces politely (errors assertively).",
       "category": "feedback",
+      "since": "2.2",
       "keywords": [
         "toast()",
         "aria-live"
@@ -10703,7 +11204,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/feedback/toast.ts"
+      "source": "src/components/feedback/toast.ts",
+      "changed": []
     },
     {
       "id": "token-editor",
@@ -10750,7 +11252,8 @@
       "entry": "motionary/widgets/token-editor",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/token-editor.ts"
+      "source": "src/components/widgets/token-editor.ts",
+      "changed": []
     },
     {
       "id": "typewriter",
@@ -10758,6 +11261,7 @@
       "title": "Typewriter",
       "description": "Types text, or cycles through phrases with delete and pause. Full text stays available to screen readers.",
       "category": "text",
+      "since": "2.2",
       "keywords": [
         "words",
         "loop",
@@ -10796,7 +11300,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/text/typewriter.ts"
+      "source": "src/components/text/typewriter.ts",
+      "changed": []
     },
     {
       "id": "upload-progress",
@@ -10840,7 +11345,8 @@
       "entry": "motionary/widgets/upload-progress",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/upload-progress.ts"
+      "source": "src/components/widgets/upload-progress.ts",
+      "changed": []
     },
     {
       "id": "video-card",
@@ -10879,7 +11385,8 @@
       "entry": "motionary/widgets/video-card",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/video-card.ts"
+      "source": "src/components/widgets/video-card.ts",
+      "changed": []
     },
     {
       "id": "view-switch",
@@ -10887,6 +11394,7 @@
       "title": "View switch",
       "description": "One view at a time with direction-aware slide, fade, scale or drill transitions — tabs, wizards, app pages.",
       "category": "transitions",
+      "since": "2.2",
       "keywords": [
         "tabs",
         "Fluent"
@@ -10917,7 +11425,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/transitions/view-switch.ts"
+      "source": "src/components/transitions/view-switch.ts",
+      "changed": []
     },
     {
       "id": "voice-button",
@@ -10957,7 +11466,8 @@
       "entry": "motionary/widgets/voice-button",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/voice-button.ts"
+      "source": "src/components/widgets/voice-button.ts",
+      "changed": []
     },
     {
       "id": "volume-knob",
@@ -10998,7 +11508,8 @@
       "entry": "motionary/widgets/volume-knob",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/volume-knob.ts"
+      "source": "src/components/widgets/volume-knob.ts",
+      "changed": []
     },
     {
       "id": "water-ripple",
@@ -11006,6 +11517,7 @@
       "title": "Water ripple",
       "description": "Interactive water ripples on a canvas over the content: move or tap to disturb the surface.",
       "category": "background",
+      "since": "2.8",
       "keywords": [
         "canvas",
         "ripple",
@@ -11035,7 +11547,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/background/bg-fx.ts"
+      "source": "src/components/background/bg-fx.ts",
+      "changed": []
     },
     {
       "id": "wave-text",
@@ -11043,6 +11556,7 @@
       "title": "Wave text",
       "description": "Letters bob in a travelling wave — playful headlines and loading labels.",
       "category": "text",
+      "since": "2.8",
       "keywords": [
         "wave",
         "letters"
@@ -11073,7 +11587,8 @@
       "entry": null,
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/text/text-fx.ts"
+      "source": "src/components/text/text-fx.ts",
+      "changed": []
     },
     {
       "id": "weather-card",
@@ -11113,7 +11628,8 @@
       "entry": "motionary/widgets/weather-card",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/weather-card.ts"
+      "source": "src/components/widgets/weather-card.ts",
+      "changed": []
     },
     {
       "id": "worker-canvas",
@@ -11152,7 +11668,11 @@
       "entry": "motionary/widgets/worker-canvas",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/worker-canvas.ts"
+      "source": "src/components/widgets/worker-canvas.ts",
+      "changed": [
+        "10.9",
+        "11.0"
+      ]
     },
     {
       "id": "xp-bar",
@@ -11195,7 +11715,8 @@
       "entry": "motionary/widgets/xp-bar",
       "stability": "stable",
       "deprecated": null,
-      "source": "src/components/widgets/xp-bar.ts"
+      "source": "src/components/widgets/xp-bar.ts",
+      "changed": []
     }
   ],
   "effects": [

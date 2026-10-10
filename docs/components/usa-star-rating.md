@@ -4,7 +4,7 @@
 
 6.4: the fill follows the pointer (half stars with step="0.5"), a click pops the chosen star with a sparkle burst while the others ripple; stars or hearts; a keyboard slider (arrows, Home / End); readonly mode.
 
-- **Category:** click · **since** 6.4
+- **Category:** click · **since** 6.4 · **changed in** 7.9, 8.0
 - **Import:** `import { defineStarRating } from 'motionary/components/widgets'` then `defineStarRating();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
 - **Attributes:** `max`, `icon`, `readonly`, `step`, `label`, `value`

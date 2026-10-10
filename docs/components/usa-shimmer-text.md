@@ -4,7 +4,7 @@
 
 A light sweep across gradient-filled text. CSS only; colours and speed via attributes or custom properties.
 
-- **Category:** text
+- **Category:** text · **since** 2.2
 - **Import:** `import { defineShimmerText } from 'motionary/components/text'` then `defineShimmerText();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `duration`, `color`, `shine`, `angle`

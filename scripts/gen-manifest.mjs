@@ -10,6 +10,7 @@ import { fileURLToPath } from 'node:url';
 import { join, relative } from 'node:path';
 import { COMPONENTS, componentSnippets } from '../showcase/components-catalog.js';
 import { PREREQS, prereqFor, RUNTIME_CDN, tierFor } from '../showcase/catalog/prereqs.js';
+import { mentions, componentPattern, modulePattern, historyFor } from '../bin/compat-history.mjs';
 
 const HERE = (() => { try { return fileURLToPath(new URL('..', import.meta.url)); } catch { return ''; } })();
 const ROOT = HERE && existsSync(join(HERE, 'package.json')) ? HERE : process.cwd();
@@ -130,6 +131,14 @@ export function buildManifest() {
     });
   }
   components.sort((a, b) => a.tag.localeCompare(b.tag));
+  // 12.5: version history from CHANGELOG.md — since (the gallery card's value wins, else the first release that mentions it) and
+  // changed (every later release whose notes mention it); bin/compat-history.mjs
+  const CL = existsSync(join(ROOT, 'CHANGELOG.md')) ? readFileSync(join(ROOT, 'CHANGELOG.md'), 'utf8') : '';
+  const ch = mentions(CL, Object.fromEntries(components.map((c) => [c.tag, componentPattern(c.tag)])));
+  for (const c of components) Object.assign(c, historyFor(ch[c.tag] || [], c.since));
+  const runtimeModules = Object.values(PREREQS).map((p) => ({ ...p, optional: p.kind === 'peer', stability: 'stable' }));
+  const mh = mentions(CL, Object.fromEntries(runtimeModules.map((r) => [r.id, r.kind === 'peer' ? new RegExp(r.label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')) : modulePattern(r.id)])));
+  for (const r of runtimeModules) Object.assign(r, historyFor(mh[r.id] || []));
   return {
     $schema: `${PAGES}components.schema.json`,
     format: 'motionary/components',
@@ -140,7 +149,7 @@ export function buildManifest() {
     homepage: PAGES,
     llms: `${PAGES}llms.txt`,
     cdn: { components: `https://unpkg.com/motionary@${MAJOR}/dist/components.umd.js`, widgets: `https://unpkg.com/motionary@${MAJOR}/dist/widgets.umd.js`, runtime: `${RUNTIME_CDN}runtime.iife.js` },
-    runtimeModules: Object.values(PREREQS).map((p) => ({ ...p, optional: p.kind === 'peer', stability: 'stable' })),
+    runtimeModules,
     components,
     effects: PER_ENTRY.filter((e) => e.kind === 'effect').map((e) => ({ name: e.name, pack: e.pack, entry: e.entry, register: `${e.register}();` })),
   };

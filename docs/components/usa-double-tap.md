@@ -4,7 +4,7 @@
 
 Double tap or double click a photo to pop a heart (or any emoji) at the tap point. L for keyboard users.
 
-- **Category:** click
+- **Category:** click · **since** 2.5
 - **Import:** `import { defineDoubleTap } from 'motionary/components/click'` then `defineDoubleTap();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `disabled`, `delay`, `icon`, `color`

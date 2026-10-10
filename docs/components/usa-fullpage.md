@@ -4,7 +4,7 @@
 
 Full-screen sections that snap one at a time, with keyboard paging, dot navigation and a usa:section event.
 
-- **Category:** page
+- **Category:** page · **since** 2.7
 - **Import:** `import { defineFullpage } from 'motionary/components/page'` then `defineFullpage();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `dots`, `axis`

@@ -4,7 +4,7 @@
 
 Form-associated checkbox: the box springs and the check draws itself; indeterminate state, circle shape.
 
-- **Category:** click
+- **Category:** click · **since** 2.5
 - **Import:** `import { defineCheckbox } from 'motionary/components/click'` then `defineCheckbox();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `checked`, `indeterminate`, `disabled`, `label`, `value`

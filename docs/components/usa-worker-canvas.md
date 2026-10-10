@@ -4,7 +4,7 @@
 
 9.6: a canvas animation rendered in a Web Worker on an OffscreenCanvas — the main thread stays free for input — with a main-thread fallback; particles, orbits, starfield or your own draw program.
 
-- **Category:** ui · **since** 9.6
+- **Category:** ui · **since** 9.6 · **changed in** 10.9, 11.0
 - **Import:** `import { defineWorkerCanvas } from 'motionary/components/widgets'` then `defineWorkerCanvas();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
 - **Attributes:** `scene`, `label`

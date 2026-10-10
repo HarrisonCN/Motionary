@@ -4,7 +4,7 @@
 
 8.7: a 3D card that tilts with the phone’s gyroscope (and with the pointer on desktop), with a moving glare and layers that float at different depths.
 
-- **Category:** ui · **since** 8.7
+- **Category:** ui · **since** 8.7 · **changed in** 11.8
 - **Import:** `import { defineGyroCard } from 'motionary/components/widgets'` then `defineGyroCard();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/widgets.umd.js"></script>`
 - **Attributes:** `max`, `glare`

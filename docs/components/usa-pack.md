@@ -4,7 +4,7 @@
 
 Product cards reveal and lift, “Add to cart” presses and flies the product into the cart (which bumps), prices count up, badges pulse.
 
-- **Category:** packs
+- **Category:** packs · **since** 3.9
 - **Import:** `import { definePack } from 'motionary/components/packs'` then `definePack();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `name`

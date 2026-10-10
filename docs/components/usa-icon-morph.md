@@ -4,7 +4,7 @@
 
 Icons that morph point-by-point with a spring: play ↔ pause, menu ↔ close, plus ↔ minus, check, arrow. toggle makes it a button with per-icon labels.
 
-- **Category:** click
+- **Category:** click · **since** 2.5 · **changed in** 6.6
 - **Import:** `import { defineIconMorph } from 'motionary/components/click'` then `defineIconMorph();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `icons`, `size`, `toggle`, `index`, `preset`, `labels`

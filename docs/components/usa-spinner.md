@@ -4,7 +4,7 @@
 
 Six indeterminate indicators: the WinUI progress ring, the Windows 10 orbiting dots, ring, typing dots, pulse and bars.
 
-- **Category:** feedback
+- **Category:** feedback · **since** 2.2 · **changed in** 2.9, 3.0
 - **Import:** `import { defineSpinner } from 'motionary/components/feedback'` then `defineSpinner();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `kind`, `size`, `label`

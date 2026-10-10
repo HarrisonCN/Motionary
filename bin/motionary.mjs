@@ -37,6 +37,7 @@ const HELP = `motionary <command>
                              Exit code 1 when any is found. Fix them with: npx usa-codemod-12 --write [paths…]
   export --target css|wxss|arkts [--presets a,b] [--duration token] [--easing token] [--rpx] [--out file]
                              export presets + motion tokens for the web, mini programs (WXSS) or HarmonyOS (ArkTS) — docs/cross-platform.md
+  compat <version> [--json]  what a project on <version> can use and what changed after it (from the manifest) — docs/version-compat.md
   help                       this text
 
 Deprecated subpaths (work until ${REMOVED_IN}, no runtime warning):
@@ -66,6 +67,22 @@ const TOKENS = () => { try { return JSON.parse(readFileSync(new URL('../docs/mot
 /** env.presets / env.tokens are for tests; the CLI loads PRESETS from the built package (dist/index.js). */
 export function main(argv, env = {}) {
   const [cmd = 'help', ...rest] = argv;
+  if (cmd === 'compat') {
+    const v = rest.find((x) => !x.startsWith('--'));
+    if (!v) { console.error('usage: motionary compat <version> [--json]'); return 2; }
+    const m = env.manifest || JSON.parse(readFileSync(new URL('../dist/manifest.json', import.meta.url), 'utf8'));
+    return import('./compat-history.mjs').then(({ compatAt }) => {
+      const rows = m.components.map((c) => ({ tag: c.tag, ...compatAt(c, v) }));
+      const missing = rows.filter((r) => !r.available), changed = rows.filter((r) => r.available && r.changedAfter.length);
+      if (rest.includes('--json')) console.log(JSON.stringify({ version: v, catalog: m.version, missing, changed }, null, 2));
+      else {
+        console.log(`motionary ${m.version} catalog, checked for ${v}: ${rows.length - missing.length}/${rows.length} components available, ${changed.length} changed after ${v}`);
+        if (missing.length) console.log('\nAdded later:\n' + missing.map((r) => `  <${r.tag}>  since ${r.since}`).join('\n'));
+        if (changed.length) console.log('\nChanged after ' + v + ':\n' + changed.map((r) => `  <${r.tag}>  ${r.changedAfter.join(', ')}`).join('\n'));
+      }
+      return 0;
+    });
+  }
   if (cmd === 'export') {
     if (env.presets) return runExport(rest, env.presets, env.tokens || TOKENS());
     return import('../dist/index.js').then((m) => runExport(rest, m.PRESETS, env.tokens || TOKENS()));

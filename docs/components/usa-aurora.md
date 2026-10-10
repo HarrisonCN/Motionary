@@ -4,7 +4,7 @@
 
 A slow drifting gradient mesh behind its content. Transforms only, paused off-screen, still under reduced motion.
 
-- **Category:** background
+- **Category:** background · **since** 2.2
 - **Import:** `import { defineAurora } from 'motionary/components/background'` then `defineAurora();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `colors`, `speed`, `intensity`

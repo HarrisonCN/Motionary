@@ -20,7 +20,7 @@ export function componentPage(c, m) {
     '',
     c.description,
     '',
-    `- **Category:** ${c.category}${c.since ? ` · **since** ${c.since}` : ''}`,
+    `- **Category:** ${c.category}${c.since ? ` · **since** ${c.since}` : ''}${c.changed && c.changed.length ? ` · **changed in** ${c.changed.join(', ')}` : ''}`,
     `- **Import:** \`import { ${c.import.define} } from '${c.import.path}'\` then \`${c.import.register}\``,
     `- **CDN:** \`<script src="${c.cdn}"></script>\``,
     `- **Attributes:** ${list(c.attributes)}`,

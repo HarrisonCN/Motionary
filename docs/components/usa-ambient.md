@@ -4,7 +4,7 @@
 
 A fixed page-wide layer: drifting particles, falling snow, twinkling stars, film grain or a gradient that shifts with scroll.
 
-- **Category:** page
+- **Category:** page · **since** 2.7
 - **Import:** `import { defineAmbient } from 'motionary/components/page'` then `defineAmbient();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `effect`, `density`, `color`, `opacity`, `speed`

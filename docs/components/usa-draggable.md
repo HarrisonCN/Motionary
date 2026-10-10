@@ -4,7 +4,7 @@
 
 Drag with mouse, touch, pen or arrow keys. spring-back returns home with a wobble; inertia glides after a flick; snap to a grid or points; rubber-band bounds.
 
-- **Category:** physics
+- **Category:** physics · **since** 2.3 · **changed in** 6.8
 - **Import:** `import { defineDraggable } from 'motionary/components/physics'` then `defineDraggable();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `axis`, `disabled`, `preset`, `bounds`, `spring-back`, `inertia`, `snap`, `step`

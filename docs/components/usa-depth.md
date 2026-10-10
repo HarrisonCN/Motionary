@@ -4,7 +4,7 @@
 
 Layers with data-depth (-1…1) shift and scale by depth as the pointer moves, the phone tilts (source="orientation") or the page scrolls; optional whole-scene rotation.
 
-- **Category:** depth
+- **Category:** depth · **since** 3.5
 - **Import:** `import { defineDepth } from 'motionary/components/depth'` then `defineDepth();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `source`, `strength`, `rotate`

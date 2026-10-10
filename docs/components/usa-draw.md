@@ -4,7 +4,7 @@
 
 Every stroke of the SVG inside draws itself — on view, hover, click or scrubbed with scroll — staggered between shapes, optional fill afterwards. No getTotalLength() needed.
 
-- **Category:** svg
+- **Category:** svg · **since** 3.3 · **changed in** 11.8
 - **Import:** `import { defineDraw } from 'motionary/components/svg'` then `defineDraw();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `duration`, `stagger`, `trigger`, `repeat`

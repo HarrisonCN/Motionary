@@ -4,7 +4,7 @@
 
 Determinate bars glide between values; without a value it shows the Fluent indeterminate animation. Paused / error states.
 
-- **Category:** feedback
+- **Category:** feedback · **since** 2.2 · **changed in** 2.6, 6.4
 - **Import:** `import { defineProgress } from 'motionary/components/feedback'` then `defineProgress();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `value`, `max`, `indeterminate`, `label`

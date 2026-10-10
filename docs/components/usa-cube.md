@@ -4,7 +4,7 @@
 
 Up to six children become the faces of a CSS 3D cube. Drag / swipe, arrow keys, autoplay or show("top"); spring-driven, the front face is the only one exposed to screen readers.
 
-- **Category:** depth
+- **Category:** depth · **since** 3.5 · **changed in** 6.5
 - **Import:** `import { defineCube } from 'motionary/components/depth'` then `defineCube();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `size`, `autoplay`, `perspective`

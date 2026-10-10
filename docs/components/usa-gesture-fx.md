@@ -4,7 +4,7 @@
 
 5.7: <usa-gesture-fx> plays any registered effect on a fling (fast release), a two-finger twist or a long press that charges --usa-charge 0 → 1. JS: bindGesture(el, "fling", "tada").
 
-- **Category:** fx
+- **Category:** fx · **since** 5.7
 - **Import:** `import { defineGestureFx } from 'motionary/components/effects'` then `defineGestureFx();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `gesture`, `effect`, `options`, `self`, `velocity`, `angle`, `duration`

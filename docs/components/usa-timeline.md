@@ -4,7 +4,7 @@
 
 Every data-tl child becomes a step in document order. data-at ('-=200', '<', 'label+=100') overlaps or aligns steps; scrub ties progress to scroll; trigger view / click / manual.
 
-- **Category:** timeline
+- **Category:** timeline · **since** 3.1 · **changed in** 4.0, 4.1, 4.6, 4.9, 5.0, 6.5
 - **Import:** `import { defineTimeline } from 'motionary/components/timeline'` then `defineTimeline();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `scrub`, `trigger`, `overlap`, `duration`, `stagger`, `smooth`, `repeat`

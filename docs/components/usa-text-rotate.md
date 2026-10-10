@@ -4,7 +4,7 @@
 
 Cycles words in place — the box keeps the width of the longest word, so nothing around it reflows.
 
-- **Category:** text
+- **Category:** text · **since** 2.2
 - **Import:** `import { defineTextRotate } from 'motionary/components/text'` then `defineTextRotate();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `words`, `interval`, `paused`, `effect`

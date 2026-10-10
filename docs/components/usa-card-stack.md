@@ -4,7 +4,7 @@
 
 A deck where the top card swipes away left or right (pointer, touch, arrow keys) and the next springs forward. loop sends cards to the back.
 
-- **Category:** cards
+- **Category:** cards · **since** 2.4
 - **Import:** `import { defineCardStack } from 'motionary/components/cards'` then `defineCardStack();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `visible`, `offset`, `disabled`, `threshold`, `loop`

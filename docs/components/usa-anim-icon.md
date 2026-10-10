@@ -4,7 +4,7 @@
 
 Stroke icons that move: the bell rings, the heart beats, the check draws, the gear turns. Hover, click, in view or loop; decorative unless labelled.
 
-- **Category:** svg
+- **Category:** svg · **since** 3.3 · **changed in** 11.8
 - **Import:** `import { defineAnimIcon } from 'motionary/components/svg'` then `defineAnimIcon();`
 - **CDN:** `<script src="https://unpkg.com/motionary@12/dist/components.umd.js"></script>`
 - **Attributes:** `name`, `size`, `label`, `trigger`

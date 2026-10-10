@@ -109,4 +109,4 @@ function definePluginCard(tag = 'usa-plugin-card') {
 }
 
 exports.definePluginCard = definePluginCard;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.4.0/dist/widgets/plugin-card.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.5.0/dist/widgets/plugin-card.cjs.map

@@ -1,4 +1,4 @@
-# Motionary 12.4.0 — full component reference
+# Motionary 12.5.0 — full component reference
 
 Generated from the source. Machine-readable version: https://harrisoncn.github.io/Motionary/components.json (schema https://harrisoncn.github.io/Motionary/components.schema.json).
 
