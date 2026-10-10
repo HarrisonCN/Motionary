@@ -1,0 +1,5 @@
+{
+  "pages": ["pages/index/index"],
+  "window": { "navigationBarTitleText": "Motionary mini program" },
+  "style": "v2"
+}

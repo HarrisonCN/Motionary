@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [12.1.0] - 2026-10-10
+
+### Cross-platform 3.0 (Public API)
+- `npx motionary export --target css|wxss|arkts [--presets a,b] [--duration token] [--easing token] [--rpx] [--out file]` exports the presets, durations and easings from `motion.tokens.json` to code each platform runs natively.
+- Mini programs (WeChat WXSS, Alipay ACSS, Douyin TTSS): `@keyframes` + `.usa-<preset>` classes, variables on `page`, optional px → rpx; example in `examples/miniapp`.
+- HarmonyOS ArkUI: an ArkTS module with `USA_DURATION`, `USA_CURVE` (`curves.cubicBezierCurve`), `USA_PRESETS` frames and `usaAnimate()` on `animateTo`; parts with no ArkUI attribute (skew, perspective, clip-path) are listed in the file, never silently dropped; example in `examples/harmony-arkts`.
+- Cross-platform previewer `showcase/xplat.html`: one preset on the web, in a mini program and as ArkUI maps it, with the generated code to copy.
+- Reduced motion in every target: `@media (prefers-reduced-motion)` + `.usa-reduce-motion` class (CSS / WXSS), `reduceMotion` flag (ArkTS).
+- New [docs/cross-platform.md](./docs/cross-platform.md). The exporter (`bin/xplat.mjs`) is build-time only: no runtime bundle changes.
+
+### Checks
+- New `test/widgets-12-1.test.ts`: transform parsing, ArkUI mapping + unmapped report, curves, every core preset exports to all three targets, reduced-motion rules, CLI (`--out`, unknown target / preset), committed example files equal a fresh export, previewer + docs.
+
 ## [12.0.0] - 2026-10-10
 
 ### ⚠️ Breaking — unified component contract (Components · Public API)

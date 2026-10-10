@@ -1,0 +1,1 @@
+App({ globalData: { reduceMotion: false } });

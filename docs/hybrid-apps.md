@@ -1,6 +1,6 @@
 # Hybrid & desktop apps: MAUI, Flutter WebView, Electron, Tauri
 
-`<usa-*>` components are plain Web Components (Custom Elements + CSS + Web Animations): anything that hosts a modern web view can run them, with **no bundler** if you want — copy `dist/components.umd.js` (and optionally `dist/components.css`) next to your HTML. For WinUI 3 / WPF / WinForms with WebView2 see [windows-apps.md](./windows-apps.md).
+`<usa-*>` components are plain Web Components (Custom Elements + CSS + Web Animations): anything that hosts a modern web view can run them, with **no bundler** if you want — copy `dist/components.umd.js` (and optionally `dist/components.css`) next to your HTML. For WinUI 3 / WPF / WinForms with WebView2 see [windows-apps.md](./windows-apps.md). Mini programs and native HarmonyOS ArkUI have no Custom Elements: export the motion with `npx motionary export` ([cross-platform.md](./cross-platform.md)).
 
 General rules for every host:
 

@@ -1,0 +1,2 @@
+@import "motionary.wxss";
+page { background: #0b0d12; color: #e8ecf3; }

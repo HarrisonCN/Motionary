@@ -1,0 +1,8 @@
+<view class="{{reduceMotion ? 'usa-reduce-motion' : ''}} wrap">
+  <view wx:for="{{cards}}" wx:key="title" class="card {{shown ? item.preset : 'hidden'}}" style="animation-delay: {{index * 80}}ms">
+    <text class="t">{{item.title}}</text>
+    <text class="p">{{item.preset}}</text>
+  </view>
+  <button bindtap="replay">Replay</button>
+  <switch checked="{{reduceMotion}}" bindchange="toggleReduce">Reduce motion</switch>
+</view>

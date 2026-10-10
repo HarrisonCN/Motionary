@@ -9,3 +9,5 @@ One web page (`web/index.html`) + three hosts that keep it in sync with the oper
 | **Flutter** (`flutter/`) | `MediaQuery.disableAnimations` (+ `didChangeAccessibilityFeatures`) | `platformBrightness`, `highContrast`, `colorScheme.primary` | `JavaScriptChannel('UsaBridge')` ⇄ `runJavaScript("window.usaNative.apply(…)")` |
 
 The page calls `connectNativeShell()` from `motionary/components/bridge` (also on `UsaComponents` in the UMD build). It announces `{"type":"usa:ready"}`, then applies every `{"type":"usa:settings", reducedMotion, theme, accent, sensitivity}` it receives. See [docs/hybrid-apps.md](../../docs/hybrid-apps.md#native-shell-bridge-47).
+
+Mini programs and native HarmonyOS ArkUI: see [../miniapp](../miniapp), [../harmony-arkts](../harmony-arkts) and [docs/cross-platform.md](../../docs/cross-platform.md).
