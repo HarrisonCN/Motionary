@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [12.2.0] - 2026-10-10
+
+### Stronger MCP validation (Tooling)
+- `motionary-mcp` `validate_snippet` takes `mount: true`: the snippet's markup is mounted in a headless DOM (jsdom) with the real Motionary bundles and the `motionary/runtime` modules the snippet loads, in the correct order. The snippet's own scripts never run.
+- Mounted checks, against the 12.0 component contract: every `<usa-*>` tag is defined and upgrades without throwing; a missing prerequisite surfaces as the component's own `requires motionary/runtime/…` error (`mount.confirmed` when the static pass already flagged it); legacy event names removed in 12.0 are errors with their `usa:*` replacement; `usa:*` events no used component emits and attributes an element reads but does not observe are warnings.
+- New result field `mount: { mounted, environment, components: [{ tag, defined, upgraded }], confirmed }`. Static analysis stays the default and is unchanged.
+- `jsdom` is a new **optional** peer (`npm i -D jsdom` to mount); without it `mount` is reported as skipped. Zero runtime dependencies, no runtime bundle changes.
+- `MOTIONARY_DIST` points the server at another build. Docs: [docs/mcp.md](./docs/mcp.md#mounted-validation-122).
+
+### Checks
+- New `test/widgets-12-2.test.ts`: markup extraction, listened events, skip without jsdom, tool schema + optional peer, and a stdio MCP session (official SDK client) mounting real component sources: clean snippet, legacy event, unknown `usa:*` event, missing prerequisite, static default.
+
 ## [12.1.0] - 2026-10-10
 
 ### Cross-platform 3.0 (Public API)
