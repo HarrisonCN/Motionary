@@ -14,4 +14,4 @@ function registerFireflies() {
 }
 
 export { effect, registerFireflies as register, registerFireflies };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/effects/fireflies.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/effects/fireflies.js.map

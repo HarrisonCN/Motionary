@@ -292,4 +292,4 @@ exports.GENERATIVE_FX = GENERATIVE_FX;
 exports.canvasBackground = canvasBackground;
 exports.hexRgb = hexRgb;
 exports.noise2 = noise2;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/chunks/generative-BHIj-NU0.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/chunks/generative-BHIj-NU0.cjs.map

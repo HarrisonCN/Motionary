@@ -6,16 +6,22 @@
 //      motionary/components/ai → motionary/tooling/ai, motionary/design and motionary/components/design → motionary/tooling/design,
 //      motionary/components/angular → motionary/angular, motionary/manifest(.schema).json → motionary/tooling/…
 //      (the same for the use-scroll-animate alias package).
+//   2. (11.9) legacy event names → usa:* (removed in 12.0): usa-beat → usa:beat, usa-audio-error → usa:audio-error,
+//      usa-player-ready → usa:ready, usa-player-finish → usa:finish, usa-story-step → usa:step — in quoted strings,
+//      Vue @x, Angular (x) and Svelte on:x bindings (data-usa-beat attributes are left alone).
 import { readFileSync, writeFileSync, readdirSync, statSync } from 'node:fs';
 import { join, extname } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { rewritePaths } from './public-paths.mjs';
+import { rewritePaths, rewriteEvents } from './public-paths.mjs';
 
 const EXT = new Set(['.js', '.mjs', '.cjs', '.jsx', '.ts', '.tsx', '.mts', '.cts', '.vue', '.svelte', '.html', '.astro', '.md', '.mdx', '.json']);
 
 /** Apply every rewrite to one file's source. Returns { code, changes, manual }. */
 export function transform(source) {
-  const { code, hits } = rewritePaths(source);
+  const p = rewritePaths(source);
+  const e = rewriteEvents(p.code);
+  const code = e.code;
+  const hits = [...p.hits, ...e.hits];
   const count = {};
   for (const h of hits) count[`${h.from} → ${h.to}`] = (count[`${h.from} → ${h.to}`] || 0) + 1;
   return { code, changes: Object.entries(count).map(([k, n]) => `${k} (${n}×)`), manual: [] };

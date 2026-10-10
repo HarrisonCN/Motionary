@@ -230,4 +230,4 @@ function worldToScene(world, o = { width: 600, height: 400 }) {
 const formatScene = { id: 'format-scene', version: RUNTIME_VERSION, tier: 'advanced', requires: ['core', 'physics'], api: { SCENE_FORMAT, migrateScene, validateScene, parseScene, sceneToWorld, worldToScene } };
 
 export { SCENE_FORMAT, formatScene, migrateScene, parseScene, sceneToWorld, validateScene, worldToScene };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/runtime/format-scene.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/runtime/format-scene.js.map

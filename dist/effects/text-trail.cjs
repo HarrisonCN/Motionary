@@ -17,4 +17,4 @@ function registerTextTrail() {
 exports.effect = effect;
 exports.register = registerTextTrail;
 exports.registerTextTrail = registerTextTrail;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/effects/text-trail.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/effects/text-trail.cjs.map

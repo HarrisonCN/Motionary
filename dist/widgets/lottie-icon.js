@@ -4,4 +4,4 @@ import '../chunks/key-click-BLm3BI8_.js';
 import './lottie.js';
 import '../components/fx-lottie.js';
 import '../chunks/registry-CYojuxi5.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/widgets/lottie-icon.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/widgets/lottie-icon.js.map

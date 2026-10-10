@@ -12,4 +12,4 @@ function registerTiltWobble() {
 }
 
 export { effect, registerTiltWobble as register, registerTiltWobble };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/effects/tilt-wobble.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/effects/tilt-wobble.js.map

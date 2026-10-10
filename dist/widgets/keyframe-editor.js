@@ -182,4 +182,4 @@ function defineKeyframeEditor(tag = 'usa-keyframe-editor') {
 }
 
 export { defineKeyframeEditor };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/widgets/keyframe-editor.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/widgets/keyframe-editor.js.map

@@ -41,4 +41,4 @@ function defineHydrate(tag = 'usa-hydrate') {
 }
 
 export { defineHydrate };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.8.0/dist/widgets/hydrate.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.9.0/dist/widgets/hydrate.js.map
