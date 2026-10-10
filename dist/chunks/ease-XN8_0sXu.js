@@ -86,4 +86,4 @@ function parseEase(e) {
 }
 
 export { EASES as E, cubicBezier as c, parseEase as p, steps as s };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.2.0/dist/chunks/ease-XN8_0sXu.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.3.0/dist/chunks/ease-XN8_0sXu.js.map

@@ -2,4 +2,4 @@ export { defineSnapCarousel } from '../components/snap-carousel.js';
 import '../chunks/base-zSGb8ujt.js';
 import '../chunks/runtime-link-CvJOTQYQ.js';
 import '../chunks/registry-D3VGJOuX.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.2.0/dist/widgets/snap-carousel.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.3.0/dist/widgets/snap-carousel.js.map

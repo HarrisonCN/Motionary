@@ -223,4 +223,4 @@ exports.parseSpriteSheet = parseSpriteSheet;
 exports.preloadImages = preloadImages;
 exports.sequencePlayer = sequencePlayer;
 exports.spritePlayer = spritePlayer;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.2.0/dist/runtime/format-sprite.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.3.0/dist/runtime/format-sprite.cjs.map

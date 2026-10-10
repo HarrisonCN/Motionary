@@ -56,4 +56,4 @@ function defineShortcut(tag = 'usa-shortcut') {
 }
 
 export { defineShortcut };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.2.0/dist/widgets/shortcut.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.3.0/dist/widgets/shortcut.js.map

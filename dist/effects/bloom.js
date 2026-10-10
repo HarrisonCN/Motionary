@@ -12,4 +12,4 @@ function registerBloom() {
 }
 
 export { effect, registerBloom as register, registerBloom };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.2.0/dist/effects/bloom.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.3.0/dist/effects/bloom.js.map

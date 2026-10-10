@@ -117,4 +117,4 @@ function defineDotLottie(tag = 'usa-dotlottie') {
 }
 
 export { defineDotLottie };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.2.0/dist/components/dotlottie.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.3.0/dist/components/dotlottie.js.map

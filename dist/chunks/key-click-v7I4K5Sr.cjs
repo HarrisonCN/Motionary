@@ -23,4 +23,4 @@ function keyClick(el) {
 }
 
 exports.keyClick = keyClick;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.2.0/dist/chunks/key-click-v7I4K5Sr.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.3.0/dist/chunks/key-click-v7I4K5Sr.cjs.map

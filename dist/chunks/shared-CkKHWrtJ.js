@@ -47,4 +47,4 @@ const rand = (a, b) => a + Math.random() * (b - a);
 const all = (anims) => Promise.all(anims.filter(Boolean).map((a) => a.finished.catch(() => undefined)));
 
 export { PALETTE as P, all as a, origin as b, fxLayer as f, overlay as o, rand as r, spawn as s };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.2.0/dist/chunks/shared-CkKHWrtJ.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.3.0/dist/chunks/shared-CkKHWrtJ.js.map

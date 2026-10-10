@@ -23,4 +23,4 @@ function defineGlModel(tag = 'usa-gl-model') {
 }
 
 export { defineGlModel };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.2.0/dist/components/gl-model.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.3.0/dist/components/gl-model.js.map

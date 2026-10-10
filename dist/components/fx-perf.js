@@ -159,4 +159,4 @@ function registerPerf3Pack() {
 }
 
 export { PERF3_FX, fpsMeter, offscreenRender, registerPerf3Pack, runInWorker };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.2.0/dist/components/fx-perf.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.3.0/dist/components/fx-perf.js.map

@@ -117,4 +117,4 @@ function defineTerminal(tag = 'usa-terminal') {
 }
 
 exports.defineTerminal = defineTerminal;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.2.0/dist/widgets/terminal.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.3.0/dist/widgets/terminal.cjs.map
