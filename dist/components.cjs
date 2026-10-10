@@ -32,6 +32,7 @@ var spring = require('./chunks/spring-Q3Y-pHuP.cjs');
 var core = require('./chunks/core-E18xla6s.cjs');
 var core$1 = require('./chunks/core-DfkeC4s-.cjs');
 var fx = require('./chunks/fx-lszndeFU.cjs');
+require('./chunks/viewport-EFYGqMNa.cjs');
 require('./chunks/key-click-v7I4K5Sr.cjs');
 
 /**
@@ -51,9 +52,9 @@ require('./chunks/key-click-v7I4K5Sr.cjs');
  *
  * Importing has no side effects and is SSR-safe; nothing is registered
  * until a `define*()` function runs in a browser.
- *
- * @license MIT
  */
+// 13.3.0: only the short licence line is kept in minified bundles (the long module doc above is not)
+/** @license MIT motionary */
 const BY_CATEGORY = {
     reveal: components_reveal.defineRevealComponents,
     text: components_text.defineTextComponents,
@@ -317,6 +318,7 @@ exports.BRIDGE_PROTOCOL_VERSION = components_bridge.BRIDGE_PROTOCOL_VERSION;
 exports.applyNativeSettings = components_bridge.applyNativeSettings;
 exports.connectNativeShell = components_bridge.connectNativeShell;
 exports.detectNativeHost = components_bridge.detectNativeHost;
+exports.isTrustedMessage = components_bridge.isTrustedMessage;
 exports.parseNativeSettings = components_bridge.parseNativeSettings;
 exports.postToNative = components_bridge.postToNative;
 exports.COMPONENT_CATEGORIES = indexTags.COMPONENT_CATEGORIES;
@@ -351,4 +353,4 @@ exports.pinchScale = core$1.pinchScale;
 exports.swipeDirection = core$1.swipeDirection;
 exports.haptic = fx.haptic;
 exports.defineComponents = defineComponents;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/components.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/components.cjs.map

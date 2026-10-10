@@ -2,6 +2,8 @@ import { defineElement, clamp, FOCUSABLE, type UsaElement } from '../base';
 import { createSpring, projectInertia, snapTo, rubberBand, type SpringValue } from '../physics/spring';
 import { adoptVariants } from './variants';
 import css from './sheet.css?raw';
+// 13.3.0: visible viewport height (soft keyboard excluded) + rotation / keyboard follower
+import { viewportHeight as vh, followPanel } from '../viewport';
 
 /** Shared machinery of `<usa-drawer>` and `<usa-bottom-sheet>`: backdrop, focus, Esc, drag-to-dismiss. */
 function makePanel(Base: any, kind: 'drawer' | 'sheet') {
@@ -14,6 +16,8 @@ function makePanel(Base: any, kind: 'drawer' | 'sheet') {
     _backdrop: HTMLElement | null = null;
     _return: Element | null = null;
     _drag: { id: number; start: number; origin: number; t: number; last: number; lt: number } | null = null;
+    _vp: (() => void) | null = null;
+    _si = 0;
 
     get open(): boolean {
       return this.flag('open');
@@ -25,7 +29,7 @@ function makePanel(Base: any, kind: 'drawer' | 'sheet') {
     /** Main axis size of the panel (px). */
     size(): number {
       const r = this.getBoundingClientRect();
-      return (kind === 'sheet' || this.vertical() ? r.height : r.width) || (kind === 'sheet' ? window.innerHeight * 0.9 : 320);
+      return (kind === 'sheet' || this.vertical() ? r.height : r.width) || (kind === 'sheet' ? vh() * 0.9 : 320);
     }
     vertical(): boolean {
       return kind === 'sheet' || this.str('side') === 'top' || this.str('side') === 'bottom';
@@ -76,6 +80,7 @@ function makePanel(Base: any, kind: 'drawer' | 'sheet') {
     }
 
     unmount(): void {
+      this.unwatch();
       this._pos?.stop();
       this._backdrop?.remove();
       this._backdrop = null;
@@ -97,7 +102,9 @@ function makePanel(Base: any, kind: 'drawer' | 'sheet') {
         this._backdrop.addEventListener('click', () => this.close());
         this.before(this._backdrop);
       }
-      const target = this.stops()[this.initialStop()];
+      // 13.3.0: phones — follow rotation and the soft keyboard while open; long content scrolls with a finger
+      this._vp ||= followPanel(this as never);
+      const target = this.stops()[(this._si = this.initialStop())];
       if (!animate) this._pos.jump(target);
       else {
         this._pos.jump(this.size());
@@ -112,6 +119,11 @@ function makePanel(Base: any, kind: 'drawer' | 'sheet') {
       return 0;
     }
 
+    unwatch(): void {
+      this._vp?.();
+      this._vp = null;
+    }
+
     hide(): void {
       this._pos.set(this.size() * 1.05);
       // 13.1.0: focus leaves the dismissed panel now, not when the slide-out spring comes to rest
@@ -120,6 +132,7 @@ function makePanel(Base: any, kind: 'drawer' | 'sheet') {
     }
 
     afterClose(): void {
+      this.unwatch();
       this.hidden = true;
       this._backdrop?.remove();
       this._backdrop = null;
@@ -152,6 +165,11 @@ function makePanel(Base: any, kind: 'drawer' | 'sheet') {
       const d = this._drag;
       if (!d || e.pointerId !== d.id) return;
       this._drag = null;
+      // 13.3.0: the browser took the gesture over (pointercancel) — no fling, spring back to the snap it started at
+      if (e.type === 'pointercancel') {
+        this._pos.set(this.stops()[this._si] ?? 0);
+        return;
+      }
       const moved = this._pos.value - d.origin;
       const dt = Math.max(16, d.t - d.lt) / 1000;
       const vel = Math.abs(moved) > 4 ? (moved / Math.max(dt, (e.timeStamp - (d.lt || 0)) / 1000 || 0.1)) * 0.2 : 0;
@@ -159,7 +177,7 @@ function makePanel(Base: any, kind: 'drawer' | 'sheet') {
       const stops = [...this.stops(), this.size()];
       const to = snapTo(projected, stops);
       if (to >= this.size() - 1) this.close();
-      else this._pos.set(to);
+      else this._pos.set(stops[(this._si = stops.indexOf(to))]);
       this.emit('snap', { offset: to });
     }
   };
@@ -212,7 +230,7 @@ export function defineBottomSheet(tag = 'usa-bottom-sheet'): CustomElementConstr
           super.mount();
         }
         size(): number {
-          return (window.innerHeight || 800) * Math.max(...this.fractions());
+          return (vh() || 800) * Math.max(...this.fractions());
         }
         fractions(): number[] {
           const f = this.str('snap', '0.5,0.92').split(',').map(Number).filter((n: number) => n > 0 && n <= 1);
@@ -220,13 +238,13 @@ export function defineBottomSheet(tag = 'usa-bottom-sheet'): CustomElementConstr
         }
         stops(): number[] {
           const full = this.size();
-          const H = window.innerHeight || 800;
+          const H = vh() || 800;
           return this.fractions().map((f: number) => Math.max(0, full - f * H)).sort((a: number, b: number) => a - b);
         }
         initialStop(): number {
           const f = this.fractions();
           const pick = f[clamp(this.num('start', 0), 0, f.length - 1)];
-          const target = Math.max(0, this.size() - pick * (window.innerHeight || 800));
+          const target = Math.max(0, this.size() - pick * (vh() || 800));
           const s = this.stops();
           return Math.max(0, s.indexOf(target));
         }

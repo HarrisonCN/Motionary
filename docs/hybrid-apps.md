@@ -9,6 +9,9 @@ General rules for every host:
 - **Reduced motion follows the OS** (`prefers-reduced-motion`) inside every web view listed here. To mirror an in-app setting, call `setMotionIntensity('off' | 'low' | 'normal' | 'high')` (or `configureComponents({ reducedMotion: 'reduce' })`) from the native side.
 - **Performance**: canvas / WebGL effects (`<usa-shader>`, `<usa-liquid>`, backgrounds) render only while visible and cap DPR at 2; they fall back to CSS where WebGL is unavailable (some Android web views).
 - **Native ↔ web**: listen to `usa:*` events in JS and forward them over the host bridge (examples below).
+- **Bridge security (13.3.0)**: `connectNativeShell()` accepts `window` messages only from the page itself or from native
+  code; other windows need `allowedOrigins` ([mobile.md](./mobile.md#native-bridge-security)). Soft keyboard, rotation and
+  touch on phones: [mobile.md](./mobile.md).
 
 ## .NET MAUI
 

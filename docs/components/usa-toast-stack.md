@@ -4,7 +4,7 @@
 
 6.3: toasts pile up into a collapsed stack (newest in front, older ones peeking behind), fan out on hover or focus, auto-dismiss (paused while hovered) and swipe away. Six positions, a polite live region, stackToast() helper and data-usa-toast triggers.
 
-- **Category:** feedback · **since** 6.3
+- **Category:** feedback · **since** 6.3 · **changed in** 13.3
 - **Import:** `import { defineToastStack } from 'motionary/components/widgets'` then `defineToastStack();`
 - **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `position`, `duration`, `max`

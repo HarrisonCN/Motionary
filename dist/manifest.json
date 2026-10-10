@@ -4,7 +4,7 @@
   "schemaVersion": 2,
   "stability": "stable",
   "package": "motionary",
-  "version": "13.2.0",
+  "version": "13.3.0",
   "homepage": "https://harrisoncn.github.io/Motionary/",
   "llms": "https://harrisoncn.github.io/Motionary/llms.txt",
   "cdn": {
@@ -2477,7 +2477,8 @@
       "deprecated": null,
       "source": "src/components/ui/sheet.ts",
       "changed": [
-        "13.1"
+        "13.1",
+        "13.3"
       ]
     },
     {
@@ -4028,7 +4029,8 @@
       "deprecated": null,
       "source": "src/components/ui/sheet.ts",
       "changed": [
-        "13.1"
+        "13.1",
+        "13.3"
       ]
     },
     {
@@ -5081,7 +5083,8 @@
       "source": "src/components/widgets/gl-model.ts",
       "changed": [
         "13.1",
-        "13.2"
+        "13.2",
+        "13.3"
       ]
     },
     {
@@ -5183,7 +5186,8 @@
         "10.9",
         "11.0",
         "11.3",
-        "13.1"
+        "13.1",
+        "13.3"
       ]
     },
     {
@@ -6828,7 +6832,8 @@
       "changed": [
         "6.6",
         "13.0",
-        "13.1"
+        "13.1",
+        "13.3"
       ]
     },
     {
@@ -7676,7 +7681,9 @@
       "stability": "stable",
       "deprecated": null,
       "source": "src/components/widgets/pagination.ts",
-      "changed": []
+      "changed": [
+        "13.3"
+      ]
     },
     {
       "id": "panorama",
@@ -9520,7 +9527,8 @@
       "changed": [
         "6.6",
         "13.0",
-        "13.1"
+        "13.1",
+        "13.3"
       ]
     },
     {
@@ -11247,7 +11255,9 @@
       "stability": "stable",
       "deprecated": null,
       "source": "src/components/widgets/toast.ts",
-      "changed": []
+      "changed": [
+        "13.3"
+      ]
     },
     {
       "id": "toaster",

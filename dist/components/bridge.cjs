@@ -17,7 +17,21 @@ var base = require('../chunks/base-vu_KhBiv.cjs');
  *
  * Hosts that can only run script call `window.usaNative.apply({...})`.
  * Samples: examples/native/{winui3,maui,flutter}.
+ *
+ * Security (13.3.0): `window` messages are accepted only from the page itself
+ * (host-injected script) or from native code (no source window). Messages from
+ * any other window — an iframe, the opener, an embedding parent — are dropped
+ * unless their exact origin is listed in `allowedOrigins`. `isTrustedMessage()`
+ * applies the same rule to your own listeners.
  */
+/**
+ * Whether a `message` event may drive the bridge (13.3.0): sent by this window itself (host-injected
+ * `window.postMessage`) or by native code (no source window), or by a window whose exact origin is in
+ * `allowedOrigins`. Use it in your own `message` listeners too.
+ */
+function isTrustedMessage(e, allowedOrigins = []) {
+    return !e.source || e.source === win() || (e.origin !== 'null' && [e.origin, '*'].some((o) => allowedOrigins.includes(o)));
+}
 const BRIDGE_PROTOCOL_VERSION = 1;
 const win = () => (typeof window === 'undefined' ? null : window);
 /** Which native shell (if any) hosts this page. */
@@ -66,6 +80,8 @@ const COLOR = /^(#[0-9a-f]{3,8}|rgba?\([\d\s.,%]+\)|hsla?\([\d\s.,%deg]+\))$/i;
 function parseNativeSettings(data) {
     let d = data;
     if (typeof d === 'string') {
+        if (d.length > 8192)
+            return null; // 13.3.0: settings are tiny — never parse an oversized payload
         try {
             d = JSON.parse(d);
         }
@@ -128,8 +144,10 @@ function connectNativeShell(options = {}) {
         applyNativeSettings(s, options.root);
         options.onSettings?.(s, host);
     };
-    const onMessage = (e) => handle(e.data);
-    w.chrome?.webview?.addEventListener?.('message', onMessage);
+    // WebView2 delivers host messages on chrome.webview only; window messages must pass the origin check (13.3.0)
+    const onHost = (e) => handle(e.data);
+    const onMessage = (e) => isTrustedMessage(e, options.allowedOrigins) && handle(e.data);
+    w.chrome?.webview?.addEventListener?.('message', onHost);
     w.addEventListener?.('message', onMessage);
     const prev = w.usaNative;
     w.usaNative = { apply: (s) => handle({ ...s, type: 'usa:settings' }), version: BRIDGE_PROTOCOL_VERSION, host };
@@ -138,7 +156,7 @@ function connectNativeShell(options = {}) {
     return {
         host,
         disconnect: () => {
-            w.chrome?.webview?.removeEventListener?.('message', onMessage);
+            w.chrome?.webview?.removeEventListener?.('message', onHost);
             w.removeEventListener?.('message', onMessage);
             w.usaNative = prev;
         },
@@ -149,6 +167,7 @@ exports.BRIDGE_PROTOCOL_VERSION = BRIDGE_PROTOCOL_VERSION;
 exports.applyNativeSettings = applyNativeSettings;
 exports.connectNativeShell = connectNativeShell;
 exports.detectNativeHost = detectNativeHost;
+exports.isTrustedMessage = isTrustedMessage;
 exports.parseNativeSettings = parseNativeSettings;
 exports.postToNative = postToNative;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/components/bridge.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/components/bridge.cjs.map

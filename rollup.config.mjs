@@ -165,7 +165,7 @@ export default pick([
     // No-build bundle: <script src="components.umd.js"> registers every <usa-*>
     // element and exposes the API as window.UsaComponents. Also writes the CSS files.
     input: 'src/components/auto.ts',
-    output: { dir: 'dist', entryFileNames: 'components.umd.js', format: 'umd', name: 'UsaComponents', exports: 'named', sourcemap: true, plugins: [terser()] },
+    output: { dir: 'dist', entryFileNames: 'components.umd.js', format: 'umd', name: 'UsaComponents', exports: 'named', inlineDynamicImports: true /* 13.3.0: sheet.ts loads ../viewport on demand */, sourcemap: true, plugins: [terser()] },
     plugins: [cssRaw(), resolve(), ts(), componentsCss()],
   },
   {

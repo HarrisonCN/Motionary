@@ -76,6 +76,12 @@ jobs:
       fail-fast: false
       matrix:
         browser: [chromium, firefox, webkit]
+        # 13.3.0: phones — device emulation of the same engine runs in the same job (test/browser/mobile.spec.mjs)
+        include:
+          - browser: chromium
+            mobile: --project=mobile-chrome
+          - browser: webkit
+            mobile: --project=mobile-safari
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -99,8 +105,8 @@ jobs:
       - name: Install system dependencies (browser restored from cache)
         if: steps.pw-cache.outputs.cache-hit == 'true'
         run: npx playwright install-deps ${{ matrix.browser }}
-      - name: Browser suite — lifecycle, keyboard / ARIA, motion sensitivity, resource release, complex-page performance
-        run: npm run test:browser -- --project=${{ matrix.browser }}
+      - name: Browser suite — lifecycle, keyboard / ARIA, motion sensitivity, resource release, complex-page performance (+ phone emulation — touch, rotation, soft keyboard, bridge origins)
+        run: npm run test:browser -- --project=${{ matrix.browser }} ${{ matrix.mobile }}
         env:
           PERF_RECORD: '1'
       - name: Upload results

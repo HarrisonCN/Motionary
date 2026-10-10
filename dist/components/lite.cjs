@@ -6680,6 +6680,65 @@ function defineTabs(tag = 'usa-tabs') {
 
 var css$m = "";
 
+// While anything watches, <html> carries --usa-vvh (visible height) and --usa-kb (the height the keyboard covers at
+// the bottom of the layout viewport).
+let vpSubs = null;
+const vpSet = (k, v) => {
+    const s = document.documentElement.style;
+    v === undefined ? s.removeProperty(k) : s.setProperty(k, v + 'px');
+};
+const vpUpdate = (e) => {
+    const v = window.visualViewport, h = viewportHeight();
+    vpSet('--usa-vvh', h);
+    // a pinch-zoom (scale > 1) shrinks the visual viewport too: that is not a keyboard
+    vpSet('--usa-kb', v && v.scale < 1.01 ? Math.max(0, Math.round(innerHeight - h - v.offsetTop)) : 0);
+    if (e)
+        vpSubs?.forEach((f) => f());
+};
+const vpOn = (m, v = window.visualViewport) => {
+    window[m]('resize', vpUpdate);
+    window[m]('orientationchange', vpUpdate);
+    v?.[m]('resize', vpUpdate);
+    v?.[m]('scroll', vpUpdate);
+};
+/** The visible viewport height: the layout height minus what the soft keyboard covers (13.3.0). */
+const viewportHeight = () => window.visualViewport?.height || innerHeight;
+/**
+ * Watch the visible viewport on phones (13.3.0): `fn` runs when the soft keyboard opens or closes
+ * (`visualViewport` resize / scroll), on window resize and on `orientationchange`. While at least one
+ * watcher is active, `<html>` has `--usa-vvh` and `--usa-kb` (px). Returns the unsubscribe function;
+ * the last one removes every listener and both variables.
+ */
+function watchViewport(fn) {
+    const f = () => fn?.();
+    if (!vpSubs)
+        vpOn('addEventListener'), (vpSubs = new Set());
+    vpSubs.add(f);
+    vpUpdate();
+    return () => {
+        if (!vpSubs?.delete(f) || vpSubs.size)
+            return;
+        vpOn('removeEventListener');
+        vpSubs = null;
+        vpSet('--usa-vvh');
+        vpSet('--usa-kb');
+    };
+}
+/**
+ * Keep an open panel on its snap point through rotation and the soft keyboard, and let long content scroll with a
+ * finger (`data-scrollable` → `touch-action: pan-y`; short content keeps drag-anywhere). Returns the unsubscribe.
+ */
+function followPanel(p) {
+    const fit = () => p.toggleAttribute('data-scrollable', p.scrollHeight > p.clientHeight + 1);
+    fit();
+    return watchViewport(() => {
+        if (p._drag || !p.open)
+            return;
+        p._pos.jump(p.stops()[p._si] ?? 0);
+        fit();
+    });
+}
+
 /** Shared machinery of `<usa-drawer>` and `<usa-bottom-sheet>`: backdrop, focus, Esc, drag-to-dismiss. */
 function makePanel(Base, kind) {
     return class UsaPanel extends Base {
@@ -6688,6 +6747,8 @@ function makePanel(Base, kind) {
             this._backdrop = null;
             this._return = null;
             this._drag = null;
+            this._vp = null;
+            this._si = 0;
         }
         static get observedAttributes() {
             return ['open', 'side'];
@@ -6701,7 +6762,7 @@ function makePanel(Base, kind) {
         /** Main axis size of the panel (px). */
         size() {
             const r = this.getBoundingClientRect();
-            return (kind === 'sheet' || this.vertical() ? r.height : r.width) || (kind === 'sheet' ? window.innerHeight * 0.9 : 320);
+            return (kind === 'sheet' || this.vertical() ? r.height : r.width) || (kind === 'sheet' ? viewportHeight() * 0.9 : 320);
         }
         vertical() {
             return kind === 'sheet' || this.str('side') === 'top' || this.str('side') === 'bottom';
@@ -6755,6 +6816,7 @@ function makePanel(Base, kind) {
             this.listen(this, 'pointercancel', (e) => this.dragEnd(e));
         }
         unmount() {
+            this.unwatch();
             this._pos?.stop();
             this._backdrop?.remove();
             this._backdrop = null;
@@ -6777,7 +6839,9 @@ function makePanel(Base, kind) {
                 this._backdrop.addEventListener('click', () => this.close());
                 this.before(this._backdrop);
             }
-            const target = this.stops()[this.initialStop()];
+            // 13.3.0: phones — follow rotation and the soft keyboard while open; long content scrolls with a finger
+            this._vp || (this._vp = followPanel(this));
+            const target = this.stops()[(this._si = this.initialStop())];
             if (!animate)
                 this._pos.jump(target);
             else {
@@ -6791,6 +6855,10 @@ function makePanel(Base, kind) {
         initialStop() {
             return 0;
         }
+        unwatch() {
+            this._vp?.();
+            this._vp = null;
+        }
         hide() {
             this._pos.set(this.size() * 1.05);
             // 13.1.0: focus leaves the dismissed panel now, not when the slide-out spring comes to rest
@@ -6799,6 +6867,7 @@ function makePanel(Base, kind) {
             this.emit('close');
         }
         afterClose() {
+            this.unwatch();
             this.hidden = true;
             this._backdrop?.remove();
             this._backdrop = null;
@@ -6834,6 +6903,11 @@ function makePanel(Base, kind) {
             if (!d || e.pointerId !== d.id)
                 return;
             this._drag = null;
+            // 13.3.0: the browser took the gesture over (pointercancel) — no fling, spring back to the snap it started at
+            if (e.type === 'pointercancel') {
+                this._pos.set(this.stops()[this._si] ?? 0);
+                return;
+            }
             const moved = this._pos.value - d.origin;
             const dt = Math.max(16, d.t - d.lt) / 1000;
             const vel = Math.abs(moved) > 4 ? (moved / Math.max(dt, (e.timeStamp - (d.lt || 0)) / 1000 || 0.1)) * 0.2 : 0;
@@ -6843,7 +6917,7 @@ function makePanel(Base, kind) {
             if (to >= this.size() - 1)
                 this.close();
             else
-                this._pos.set(to);
+                this._pos.set(stops[(this._si = stops.indexOf(to))]);
             this.emit('snap', { offset: to });
         }
     };
@@ -6870,7 +6944,7 @@ function defineBottomSheet(tag = 'usa-bottom-sheet') {
                 super.mount();
             }
             size() {
-                return (window.innerHeight || 800) * Math.max(...this.fractions());
+                return (viewportHeight() || 800) * Math.max(...this.fractions());
             }
             fractions() {
                 const f = this.str('snap', '0.5,0.92').split(',').map(Number).filter((n) => n > 0 && n <= 1);
@@ -6878,13 +6952,13 @@ function defineBottomSheet(tag = 'usa-bottom-sheet') {
             }
             stops() {
                 const full = this.size();
-                const H = window.innerHeight || 800;
+                const H = viewportHeight() || 800;
                 return this.fractions().map((f) => Math.max(0, full - f * H)).sort((a, b) => a - b);
             }
             initialStop() {
                 const f = this.fractions();
                 const pick = f[clamp(this.num('start', 0), 0, f.length - 1)];
-                const target = Math.max(0, this.size() - pick * (window.innerHeight || 800));
+                const target = Math.max(0, this.size() - pick * (viewportHeight() || 800));
                 const s = this.stops();
                 return Math.max(0, s.indexOf(target));
             }
@@ -10752,7 +10826,21 @@ const ALL_TAGS = Object.values(COMPONENT_CATEGORIES).flat();
  *
  * Hosts that can only run script call `window.usaNative.apply({...})`.
  * Samples: examples/native/{winui3,maui,flutter}.
+ *
+ * Security (13.3.0): `window` messages are accepted only from the page itself
+ * (host-injected script) or from native code (no source window). Messages from
+ * any other window — an iframe, the opener, an embedding parent — are dropped
+ * unless their exact origin is listed in `allowedOrigins`. `isTrustedMessage()`
+ * applies the same rule to your own listeners.
  */
+/**
+ * Whether a `message` event may drive the bridge (13.3.0): sent by this window itself (host-injected
+ * `window.postMessage`) or by native code (no source window), or by a window whose exact origin is in
+ * `allowedOrigins`. Use it in your own `message` listeners too.
+ */
+function isTrustedMessage(e, allowedOrigins = []) {
+    return !e.source || e.source === win() || (e.origin !== 'null' && [e.origin, '*'].some((o) => allowedOrigins.includes(o)));
+}
 const BRIDGE_PROTOCOL_VERSION = 1;
 const win = () => (typeof window === 'undefined' ? null : window);
 /** Which native shell (if any) hosts this page. */
@@ -10801,6 +10889,8 @@ const COLOR = /^(#[0-9a-f]{3,8}|rgba?\([\d\s.,%]+\)|hsla?\([\d\s.,%deg]+\))$/i;
 function parseNativeSettings(data) {
     let d = data;
     if (typeof d === 'string') {
+        if (d.length > 8192)
+            return null; // 13.3.0: settings are tiny — never parse an oversized payload
         try {
             d = JSON.parse(d);
         }
@@ -10863,8 +10953,10 @@ function connectNativeShell(options = {}) {
         applyNativeSettings(s, options.root);
         options.onSettings?.(s, host);
     };
-    const onMessage = (e) => handle(e.data);
-    w.chrome?.webview?.addEventListener?.('message', onMessage);
+    // WebView2 delivers host messages on chrome.webview only; window messages must pass the origin check (13.3.0)
+    const onHost = (e) => handle(e.data);
+    const onMessage = (e) => isTrustedMessage(e, options.allowedOrigins) && handle(e.data);
+    w.chrome?.webview?.addEventListener?.('message', onHost);
     w.addEventListener?.('message', onMessage);
     const prev = w.usaNative;
     w.usaNative = { apply: (s) => handle({ ...s, type: 'usa:settings' }), version: BRIDGE_PROTOCOL_VERSION, host };
@@ -10873,7 +10965,7 @@ function connectNativeShell(options = {}) {
     return {
         host,
         disconnect: () => {
-            w.chrome?.webview?.removeEventListener?.('message', onMessage);
+            w.chrome?.webview?.removeEventListener?.('message', onHost);
             w.removeEventListener?.('message', onMessage);
             w.usaNative = prev;
         },
@@ -10897,9 +10989,9 @@ function connectNativeShell(options = {}) {
  *
  * Importing has no side effects and is SSR-safe; nothing is registered
  * until a `define*()` function runs in a browser.
- *
- * @license MIT
  */
+// 13.3.0: only the short licence line is kept in minified bundles (the long module doc above is not)
+/** @license MIT motionary */
 const BY_CATEGORY = {
     reveal: defineRevealComponents,
     text: defineTextComponents,
@@ -11134,6 +11226,7 @@ exports.hasEffect = hasEffect;
 exports.importDesignTokens = importDesignTokens;
 exports.importMotionTokens = importMotionTokens;
 exports.interpolatePath = interpolatePath;
+exports.isTrustedMessage = isTrustedMessage;
 exports.linearEasing = linearEasing;
 exports.listEffects = listEffects;
 exports.liveRegion = liveRegion;
@@ -11214,4 +11307,4 @@ exports.viewTransition = viewTransition;
 exports.warnBaseline = warnBaseline;
 exports.watchPowerSaver = watchPowerSaver;
 exports.withoutDeprecations = withoutDeprecations;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/components/lite.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/components/lite.cjs.map

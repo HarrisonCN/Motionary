@@ -15,9 +15,9 @@
  *
  * Importing has no side effects and is SSR-safe; nothing is registered
  * until a `define*()` function runs in a browser.
- *
- * @license MIT
  */
+// 13.3.0: only the short licence line is kept in minified bundles (the long module doc above is not)
+/** @license MIT motionary */
 import { defineRevealComponents } from './reveal/index';
 import { defineTextComponents } from './text/index';
 import { defineInteractionComponents } from './interaction/index';

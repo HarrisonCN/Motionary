@@ -43,7 +43,7 @@ export { j as MOTION_SCALE, M as MOTION_SENSITIVITY_LEVELS, k as activeAnimation
 export { MOTION_TOKENS, applyMotionTokens, exportDesignTokens, getMotionTokens, importDesignTokens, importMotionTokens, mergeMotionTokens, motionToken, motionTokensToCss, motionTokensToJSON, motionTokensToVars, motionVar, parseDuration, parseEasing, resolveDurationToken, resolveEasingToken, resolveTokenAliases, validateDesignTokens } from './components/tokens.js';
 export { ALL_TAGS, LIVE_REGION_IDS, MOTION_SENSITIVITY, SENSITIVITY_CSS, STATIC_ALTERNATIVES, announce, auditMotionA11y, baselineReport, liveRegion, motionAllowed, restoreMotionSensitivity, setMotionSensitivity, staticAlternative, warnBaseline } from './components/a11y.js';
 export { autoDegrade, categoryOf, loadCategoryStyles, loadedStyles, onDemandStyles } from './components/perf.js';
-export { BRIDGE_PROTOCOL_VERSION, applyNativeSettings, connectNativeShell, detectNativeHost, parseNativeSettings, postToNative } from './components/bridge.js';
+export { BRIDGE_PROTOCOL_VERSION, applyNativeSettings, connectNativeShell, detectNativeHost, isTrustedMessage, parseNativeSettings, postToNative } from './components/bridge.js';
 export { C as COMPONENT_CATEGORIES } from './chunks/index-tags-B-JBecYg.js';
 export { B as BUILTIN_EFFECTS } from './chunks/builtins-hBOeCPXL.js';
 export { EFFECT_KINDS, EFFECT_TRIGGERS, bindEffect, getEffect, hasEffect, listEffects, playEffect, registerEffect, registerEffects } from './chunks/registry-PxXkPc1Q.js';
@@ -51,6 +51,7 @@ export { S as SPRING_PRESETS, c as createSpring, l as linearEasing, p as project
 export { T as TIMELINE_PRESETS, r as resolvePosition, s as supportsNativeScrub, t as timeline } from './chunks/core-Bar7NFx7.js';
 export { g as gesture, p as pinchScale, s as swipeDirection } from './chunks/core-DVGtPabi.js';
 export { h as haptic } from './chunks/fx-qAVpKs8e.js';
+import './chunks/viewport-BAXHhZLV.js';
 import './chunks/key-click-BLm3BI8_.js';
 
 /**
@@ -70,9 +71,9 @@ import './chunks/key-click-BLm3BI8_.js';
  *
  * Importing has no side effects and is SSR-safe; nothing is registered
  * until a `define*()` function runs in a browser.
- *
- * @license MIT
  */
+// 13.3.0: only the short licence line is kept in minified bundles (the long module doc above is not)
+/** @license MIT motionary */
 const BY_CATEGORY = {
     reveal: defineRevealComponents,
     text: defineTextComponents,
@@ -105,4 +106,4 @@ function defineComponents(categories) {
 }
 
 export { adoptVariants, defineBackgroundComponents, defineCardComponents, defineClickComponents, defineComponents, defineDepthComponents, defineFeedbackComponents, defineFxComponents, defineGestureComponents, defineInteractionComponents, defineLayoutComponents, definePacksComponents, definePageComponents, definePhysicsComponents, defineRevealComponents, defineSvgComponents, defineTextComponents, defineTimelineComponents, defineTransitionComponents, defineUiComponents, defineWebglComponents };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/components.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/components.js.map

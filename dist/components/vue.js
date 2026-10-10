@@ -15,6 +15,7 @@ import './cards.js';
 import './click.js';
 import '../chunks/fx-qAVpKs8e.js';
 import './ui.js';
+import '../chunks/viewport-BAXHhZLV.js';
 import './page.js';
 import './timeline.js';
 import './gesture.js';
@@ -63,4 +64,4 @@ const UsaPlugin = {
 };
 
 export { UsaPlugin, isUsaElement };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/components/vue.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/components/vue.js.map
