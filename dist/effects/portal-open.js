@@ -12,4 +12,4 @@ function registerPortalOpen() {
 }
 
 export { effect, registerPortalOpen as register, registerPortalOpen };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/effects/portal-open.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/effects/portal-open.js.map

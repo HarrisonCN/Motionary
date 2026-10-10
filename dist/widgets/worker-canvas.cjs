@@ -8,4 +8,4 @@ require('../chunks/registry-EziiQiWO.cjs');
 
 
 exports.defineWorkerCanvas = widgets_workerCanvas.defineWorkerCanvas;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/worker-canvas.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/widgets/worker-canvas.cjs.map

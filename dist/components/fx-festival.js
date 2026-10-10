@@ -114,4 +114,4 @@ function registerFestivalPack() {
 }
 
 export { FESTIVAL_FX, registerFestivalPack, sparkVectors };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/components/fx-festival.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/components/fx-festival.js.map

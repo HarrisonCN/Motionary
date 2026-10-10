@@ -4,7 +4,7 @@
   "schemaVersion": 2,
   "stability": "stable",
   "package": "motionary",
-  "version": "13.1.0",
+  "version": "13.2.0",
   "homepage": "https://harrisoncn.github.io/Motionary/",
   "llms": "https://harrisoncn.github.io/Motionary/llms.txt",
   "cdn": {
@@ -3805,7 +3805,7 @@
         "define": "defineDotLottie",
         "register": "defineDotLottie();"
       },
-      "cdn": "https://unpkg.com/motionary@13/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@13/dist/components/dotlottie.js",
       "attributes": [
         "theme",
         "state-machine"
@@ -3849,7 +3849,9 @@
       "stability": "stable",
       "deprecated": null,
       "source": "src/components/widgets/dotlottie.ts",
-      "changed": []
+      "changed": [
+        "13.2"
+      ]
     },
     {
       "id": "double-tap",
@@ -5034,7 +5036,7 @@
         "define": "defineGlModel",
         "register": "defineGlModel();"
       },
-      "cdn": "https://unpkg.com/motionary@13/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@13/dist/components/gl-model.js",
       "attributes": [],
       "events": [
         "usa:runtime-missing"
@@ -5078,7 +5080,8 @@
       "deprecated": null,
       "source": "src/components/widgets/gl-model.ts",
       "changed": [
-        "13.1"
+        "13.1",
+        "13.2"
       ]
     },
     {
@@ -9868,7 +9871,7 @@
         "define": "defineSnapCarousel",
         "register": "defineSnapCarousel();"
       },
-      "cdn": "https://unpkg.com/motionary@13/dist/components.umd.js",
+      "cdn": "https://unpkg.com/motionary@13/dist/components/snap-carousel.js",
       "attributes": [
         "align",
         "gap",
@@ -9912,7 +9915,9 @@
       "stability": "stable",
       "deprecated": null,
       "source": "src/components/widgets/snap-carousel.ts",
-      "changed": []
+      "changed": [
+        "13.2"
+      ]
     },
     {
       "id": "sparkline",

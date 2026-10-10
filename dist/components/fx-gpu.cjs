@@ -10,4 +10,4 @@ require('../chunks/base-vu_KhBiv.cjs');
 
 exports.GPU_FX = components_fxGpu.GPU_FX;
 exports.registerGpuPack = components_fxGpu.registerGpuPack;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/components/fx-gpu.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/components/fx-gpu.cjs.map

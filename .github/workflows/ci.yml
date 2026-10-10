@@ -8,6 +8,12 @@ on:
 permissions:
   contents: read
 
+# 13.2: bash with -eo pipefail for every step, so `npm run … | tee -a "$GITHUB_STEP_SUMMARY"` fails the job when the check fails
+# (GitHub's default `bash -e` ignores a failure on the left of a pipe). docs/release-gate.md
+defaults:
+  run:
+    shell: bash
+
 concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
@@ -40,6 +46,8 @@ jobs:
         run: npm run check:contract
       - name: Prerequisite docs in all five places (check:peer-docs)
         run: npm run check:peer-docs
+      - name: Docs and contract consistency — facts from the manifest, generated docs, version descriptions (check:docs)
+        run: npm run check:docs
       - name: Package lint (publint + are-the-types-wrong)
         if: matrix.node == 22
         run: npm run lint:package

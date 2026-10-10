@@ -12,4 +12,4 @@ function registerMeshDrift() {
 }
 
 export { effect, registerMeshDrift as register, registerMeshDrift };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/effects/mesh-drift.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/effects/mesh-drift.js.map

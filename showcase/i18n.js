@@ -3,7 +3,7 @@
 export const STRINGS = {
   en: {
     'brand.store': 'Animation Store',
-    'hero.kicker': 'Motionary v6 · 214 presets',
+    'hero.kicker': 'Motionary 13 · 214 presets',
     'hero.title': 'Pick an animation.<br>Take the code.',
     'hero.lead': 'All 214 scroll presets, helpers and framework adapters of a dependency-free scroll animation library — live, tweakable, free.',
     'hero.cta': 'Browse effects',
@@ -86,7 +86,7 @@ export const STRINGS = {
   },
   zh: {
     'brand.store': '动画商店',
-    'hero.kicker': 'Motionary v6 · 214 个预设',
+    'hero.kicker': 'Motionary 13 · 214 个预设',
     'hero.title': '挑一个动画，<br>直接拿走代码。',
     'hero.lead': '一个零依赖的滚动动画库：全部 214 个滚动预设、辅助函数与框架适配器都在这里——实时预览、随意调节、完全免费。',
     'hero.cta': '浏览效果',

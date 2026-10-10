@@ -74,6 +74,14 @@ Enhancement suggestions are tracked as GitHub issues. When you are creating an e
 
 `dist/` is committed only in release PRs; feature PRs leave it untouched.
 
+## Docs facts, versions and the release gate
+
+- Component counts, the core element table in the READMEs and the package description are generated from the manifest:
+  run `npm run facts` after adding or moving a component. `npm run check:docs` (also in CI) fails when any generated doc,
+  count or version description is stale — see [docs/components.md](./docs/components.md#how-components-are-counted).
+- Releases go through the release gate: required CI checks green on the PR head, merged at that exact commit —
+  [docs/release-gate.md](./docs/release-gate.md).
+
 ## Commit Messages
 
 We follow the [Conventional Commits](https://www.conventionalcommits.org/) specification. Please ensure your commit messages adhere to this format:

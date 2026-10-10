@@ -10,4 +10,4 @@ require('../chunks/registry-EziiQiWO.cjs');
 
 
 exports.defineLottieIcon = widgets_lottieIcon.defineLottieIcon;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/lottie-icon.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/widgets/lottie-icon.cjs.map

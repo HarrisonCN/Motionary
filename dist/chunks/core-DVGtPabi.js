@@ -178,4 +178,4 @@ function gesture(el, h, o = {}) {
 }
 
 export { gesture as g, pinchScale as p, swipeDirection as s };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/chunks/core-DVGtPabi.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/chunks/core-DVGtPabi.js.map

@@ -6,4 +6,4 @@ require('../chunks/base-vu_KhBiv.cjs');
 
 
 exports.defineShaderBackdrop = widgets_shaderBackdrop.defineShaderBackdrop;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/shader-backdrop.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/widgets/shader-backdrop.cjs.map

@@ -7,4 +7,4 @@ require('../chunks/shared-Bf72wLyt.cjs');
 
 
 exports.defineNavMorph = widgets_navMorph.defineNavMorph;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/widgets/nav-morph.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/widgets/nav-morph.cjs.map

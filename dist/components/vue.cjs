@@ -66,4 +66,4 @@ const UsaPlugin = {
 
 exports.UsaPlugin = UsaPlugin;
 exports.isUsaElement = isUsaElement;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/components/vue.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/components/vue.cjs.map

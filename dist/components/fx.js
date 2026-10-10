@@ -60,4 +60,4 @@ function defineFxComponents() {
 }
 
 export { BUILTIN_EFFECTS, EFFECT_TRIGGERS, bindEffect, defineFx, defineFxComponents, playEffect, registerBuiltinEffects, registerEffects };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.1.0/dist/components/fx.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.2.0/dist/components/fx.js.map
