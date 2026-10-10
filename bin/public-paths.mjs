@@ -62,3 +62,38 @@ export function findOldPaths(source) {
   });
   return out;
 }
+
+// 11.9: legacy event names (11.8 fires the usa:* names next to them; the legacy names are removed in 12.0).
+export const LEGACY_EVENTS = {
+  'usa-beat': 'usa:beat',
+  'usa-audio-error': 'usa:audio-error',
+  'usa-player-ready': 'usa:ready',
+  'usa-player-finish': 'usa:finish',
+  'usa-story-step': 'usa:step',
+};
+export const EVENTS_REMOVED_IN = '12.0';
+
+/** Rewrite legacy event names where they are used as event names: quoted strings ('usa-beat'), Vue `@usa-beat`,
+ * Angular `(usa-beat)`, Svelte `on:usa-beat`. `data-usa-beat` attributes and `<usa-…>` tags are left alone. */
+export function rewriteEvents(source) {
+  const hits = [];
+  let code = source;
+  for (const [from, to] of Object.entries(LEGACY_EVENTS)) {
+    const re = new RegExp(`(['"\`]|@|\\(|on:)${esc(from)}(?![\\w-])`, 'g');
+    code = code.replace(re, (m, pre) => {
+      hits.push({ from, to, kind: 'event' });
+      return `${pre}${to}`;
+    });
+  }
+  return { code, hits };
+}
+
+/** Every deprecated import path and legacy event name with its line (for `motionary doctor`). */
+export function findDeprecated(source) {
+  const out = [];
+  source.split('\n').forEach((line, i) => {
+    for (const h of rewritePaths(line).hits) out.push({ line: i + 1, kind: 'path', removedIn: REMOVED_IN, ...h });
+    for (const h of rewriteEvents(line).hits) out.push({ line: i + 1, removedIn: EVENTS_REMOVED_IN, ...h });
+  });
+  return out;
+}

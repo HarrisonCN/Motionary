@@ -43,3 +43,4 @@ The same applies to `use-scroll-animate/…`.
 - **Types:** the old paths' declarations mark every export `@deprecated`, so editors strike the import through and name the new path.
 - **Find them:** `npx motionary doctor [paths…]` lists every old path with file and line (exit code 1 when any is found — usable in CI; `--json` for tools).
 - **Fix them:** `npx usa-codemod-12 --write [paths…]` rewrites the import specifiers (dry run without `--write`).
+- 11.9: `doctor` and `usa-codemod-12` also cover the legacy event names removed in 12.0 ([upgrading-12.md](./upgrading-12.md)).

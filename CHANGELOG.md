@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [11.9.0] - 2026-10-10
+
+### 12.0 preparation (all layers)
+- New [docs/upgrading-12.md](./docs/upgrading-12.md): what 12.0 breaks (legacy event names `usa-beat`, `usa-audio-error`, `usa-player-ready`, `usa-player-finish`, `usa-story-step` → `usa:beat`, `usa:audio-error`, `usa:ready`, `usa:finish`, `usa:step`; every read attribute observed; blocking contract test) and what it does not (old import paths stay until 13.0).
+- `npx usa-codemod-12 --write` now also rewrites the legacy event names in quoted strings, Vue `@x`, Angular `(x)` and Svelte `on:x` bindings (`data-usa-*` attributes are left alone).
+- `npx motionary doctor` reports legacy event names next to old import paths, each with the release that removes it (`--json`: `kind`, `removedIn`).
+- `npm run contract:preview` prints what the blocking 12.0 contract check would report today.
+- ROADMAP: 12.0 removes the legacy event names; the import paths deprecated in 11.5 are removed in 13.0.
+
+### Checks
+- New `test/widgets-11-9.test.ts`: event table, codemod rewrites + idempotence + attribute safety, doctor output, docs, preview.
+
 ## [11.8.0] - 2026-10-09
 
 ### Component contract — non-breaking fixes (Components)

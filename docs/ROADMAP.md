@@ -108,7 +108,7 @@ Store 卡片显示 **「Requires: motionary/runtime/<module>」** 徽章（官�
 
 ### 12.0 — 组件统一契约
 
-- **v12.0**：所有组件的属性、事件、键盘交互、生命周期、减少动态效果、错误信息完全一致（必要处为破坏性变更，附 `usa-codemod-12`）；删除 11.x 弃用的路径别名；契约测试改为阻断。npm `latest`。（层：Components · Public API）
+- **v12.0**：所有组件的属性、事件、键盘交互、生命周期、减少动态效果、错误信息完全一致（必要处为破坏性变更，附 `usa-codemod-12`）；删除 11.8 起由 `usa:*` 取代的旧事件名（`usa-beat`、`usa-audio-error`、`usa-player-ready`、`usa-player-finish`、`usa-story-step`）；11.5 弃用的导入路径保留到 13.0（[public-api.md](./public-api.md)）；契约测试改为阻断。见 [upgrading-12.md](./upgrading-12.md)。npm `latest`。（层：Components · Public API）
 
 ### 12.x — 工具层与跨端
 
@@ -121,5 +121,5 @@ Store 卡片显示 **「Requires: motionary/runtime/<module>」** 徽章（官�
 
 ### 13.0 — 发现、复制、运行
 
-- **v13.0**：MCP 生成校验、Figma 导出、交互式示例与版本兼容全部稳定；用户能快速找到组件、复制可运行代码、清楚看到每个组件的 runtime 依赖；目录与子路径按四层架构整理完成，删除 12.x 弃用项（附 codemod）。npm `latest`。（层：Tooling · 全部）
+- **v13.0**：MCP 生成校验、Figma 导出、交互式示例与版本兼容全部稳定；用户能快速找到组件、复制可运行代码、清楚看到每个组件的 runtime 依赖；目录与子路径按四层架构整理完成，删除 12.x 弃用项与 11.5 弃用的导入路径（附 codemod）。npm `latest`。（层：Tooling · 全部）
 <!-- v11-13:end -->
