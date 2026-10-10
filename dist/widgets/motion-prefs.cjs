@@ -71,4 +71,4 @@ function defineMotionPrefs(tag = 'usa-motion-prefs') {
 }
 
 exports.defineMotionPrefs = defineMotionPrefs;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.6.0/dist/widgets/motion-prefs.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/widgets/motion-prefs.cjs.map

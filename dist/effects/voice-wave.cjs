@@ -16,4 +16,4 @@ function registerVoiceWave() {
 exports.effect = effect;
 exports.register = registerVoiceWave;
 exports.registerVoiceWave = registerVoiceWave;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.6.0/dist/effects/voice-wave.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/effects/voice-wave.cjs.map

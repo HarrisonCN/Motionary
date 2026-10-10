@@ -16,4 +16,4 @@ function registerRackFocus() {
 exports.effect = effect;
 exports.register = registerRackFocus;
 exports.registerRackFocus = registerRackFocus;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.6.0/dist/effects/rack-focus.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v11.7.0/dist/effects/rack-focus.cjs.map
