@@ -89,4 +89,4 @@ exports.categoryOfTag = categoryOfTag;
 exports.defineUsed = defineUsed;
 exports.lazyDefine = lazyDefine;
 exports.loadCategory = loadCategory;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/components/lazy.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.1.0/dist/components/lazy.cjs.map

@@ -142,4 +142,4 @@ function registerSafePack() {
 }
 
 export { DEFAULT_MOTION_PREFS, MOTION_PREFS_KEY, SAFE_FX, applyMotionPreferences, flashCount, isFlashSafe, loadMotionPreferences, registerSafePack, vestibularSafe };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/components/fx-safe.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.1.0/dist/components/fx-safe.js.map

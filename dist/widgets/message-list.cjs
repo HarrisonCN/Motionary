@@ -96,4 +96,4 @@ function defineMessageList(tag = 'usa-message-list') {
 }
 
 exports.defineMessageList = defineMessageList;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/widgets/message-list.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.1.0/dist/widgets/message-list.cjs.map

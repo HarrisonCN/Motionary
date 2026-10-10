@@ -144,4 +144,4 @@ const text = { id: 'text', version: registry.RUNTIME_VERSION, tier: 'basic', req
 exports.segment = segment;
 exports.splitText = splitText;
 exports.text = text;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/runtime/text.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.1.0/dist/runtime/text.cjs.map

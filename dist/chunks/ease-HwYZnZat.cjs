@@ -91,4 +91,4 @@ exports.EASES = EASES;
 exports.cubicBezier = cubicBezier;
 exports.parseEase = parseEase;
 exports.steps = steps;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/chunks/ease-HwYZnZat.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.1.0/dist/chunks/ease-HwYZnZat.cjs.map

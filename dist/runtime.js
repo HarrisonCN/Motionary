@@ -54,4 +54,4 @@ function use(...mods) {
 }
 
 export { EASES, RUNTIME_VERSION, Timeline, Tween, core, cubicBezier, getTicker, parseEase, register, resolveTargets, steps, timeline, tween, use };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.0.0/dist/runtime.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.1.0/dist/runtime.js.map
