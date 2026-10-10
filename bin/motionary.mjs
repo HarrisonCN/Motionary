@@ -34,7 +34,7 @@ export function doctor(paths) {
 const HELP = `motionary <command>
 
   doctor [paths…] [--json]   list deprecated motionary import paths and legacy event names (default: current directory).
-                             Exit code 1 when any is found. Fix them with: npx usa-codemod-12 --write [paths…]
+                             Exit code 1 when any is found. Fix them with: npx usa-codemod-13 --write [paths…]
   export --target css|wxss|arkts [--presets a,b] [--duration token] [--easing token] [--rpx] [--out file]
                              export presets + motion tokens for the web, mini programs (WXSS) or HarmonyOS (ArkTS) — docs/cross-platform.md
   compat <version> [--json]  what a project on <version> can use and what changed after it (from the manifest) — docs/version-compat.md
@@ -93,7 +93,7 @@ export function main(argv, env = {}) {
     else if (!found.length) console.log('motionary doctor: no deprecated import paths or event names found ✓');
     else {
       for (const x of found) console.log(`${x.file}:${x.line}  ${x.from}  →  ${x.to}  (removed in ${x.removedIn})`);
-      console.log(`\n${found.length} deprecated use(s). Rewrite them: npx usa-codemod-12 --write`);
+      console.log(`\n${found.length} deprecated use(s). Rewrite them: npx usa-codemod-13 --write (see docs/upgrading-13.md)`);
     }
     return found.length ? 1 : 0;
   }
