@@ -1,4 +1,4 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-CorBCE7b.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-CMjteilk.js';
 import { GlNode, texture, standardMaterial, computeNormals } from './gl.js';
 
 /**

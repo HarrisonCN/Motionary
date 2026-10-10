@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-VITvgTNc.cjs');
+var registry = require('../chunks/registry-U0scTJZr.cjs');
 
 /**
  * `motionary/runtime/gl` (10.5) — a small WebGL2 scene renderer written for

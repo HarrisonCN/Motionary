@@ -1,4 +1,4 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-CorBCE7b.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-CMjteilk.js';
 
 /**
  * `motionary/runtime/gltf-decoders` (10.9) — hooks that let

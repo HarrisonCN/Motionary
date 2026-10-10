@@ -2,9 +2,9 @@
 
 var components_dotlottie = require('../components/dotlottie.cjs');
 require('../chunks/base-B3me2y0o.cjs');
-require('../chunks/runtime-link-BGsMpzx4.cjs');
-require('../chunks/registry-VITvgTNc.cjs');
-require('../chunks/lottie-player-Duv92v1E.cjs');
+require('../chunks/runtime-link-Cnij6nmH.cjs');
+require('../chunks/registry-U0scTJZr.cjs');
+require('../chunks/lottie-player-B_4d1D6U.cjs');
 
 
 

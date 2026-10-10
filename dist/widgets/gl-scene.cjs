@@ -1,9 +1,9 @@
 'use strict';
 
-var widgets_glScene = require('../chunks/gl-scene-y_vtXfho.cjs');
+var widgets_glScene = require('../chunks/gl-scene-BO28sVfQ.cjs');
 require('../chunks/base-B3me2y0o.cjs');
-require('../chunks/runtime-link-BGsMpzx4.cjs');
-require('../chunks/registry-VITvgTNc.cjs');
+require('../chunks/runtime-link-Cnij6nmH.cjs');
+require('../chunks/registry-U0scTJZr.cjs');
 
 
 

@@ -1,9 +1,9 @@
 'use strict';
 
-var widgets_physicsPlayground = require('../chunks/physics-playground-8x5S9Wos.cjs');
+var widgets_physicsPlayground = require('../chunks/physics-playground-Byj_5mso.cjs');
 require('../chunks/base-B3me2y0o.cjs');
-require('../chunks/runtime-link-BGsMpzx4.cjs');
-require('../chunks/registry-VITvgTNc.cjs');
+require('../chunks/runtime-link-Cnij6nmH.cjs');
+require('../chunks/registry-U0scTJZr.cjs');
 
 
 

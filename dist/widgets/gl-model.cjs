@@ -2,9 +2,9 @@
 
 var components_glModel = require('../components/gl-model.cjs');
 require('../chunks/base-B3me2y0o.cjs');
-require('../chunks/runtime-link-BGsMpzx4.cjs');
-require('../chunks/registry-VITvgTNc.cjs');
-require('../chunks/gl-scene-y_vtXfho.cjs');
+require('../chunks/runtime-link-Cnij6nmH.cjs');
+require('../chunks/registry-U0scTJZr.cjs');
+require('../chunks/gl-scene-BO28sVfQ.cjs');
 
 
 

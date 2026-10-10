@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-VITvgTNc.cjs');
+var registry = require('../chunks/registry-U0scTJZr.cjs');
 
 /**
  * `motionary/runtime/physics` (10.7) — a small 2D rigid-body engine written
