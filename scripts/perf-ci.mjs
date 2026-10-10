@@ -37,7 +37,7 @@ export function overBudget(metrics, budgets) {
 }
 const round = (x) => Math.round(x * 100) / 100;
 
-function findChrome() {
+export function findChrome() {
   if (process.env.CHROME_PATH) return process.env.CHROME_PATH;
   for (const c of ['google-chrome-stable', 'google-chrome', 'chromium', 'chromium-browser']) {
     try { return execFileSync('which', [c], { encoding: 'utf8' }).trim(); } catch {}
@@ -60,7 +60,7 @@ function serve() {
   return new Promise((ok) => srv.listen(0, '127.0.0.1', () => ok({ srv, log, port: srv.address().port })));
 }
 
-async function launch(chrome) {
+export async function launch(chrome) {
   const dir = mkdtempSync(join(tmpdir(), 'motionary-perf-'));
   const args = ['--headless=new', '--remote-debugging-port=0', `--user-data-dir=${dir}`, '--no-first-run', '--no-default-browser-check',
     '--window-size=1280,800', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist', '--disable-background-timer-throttling',
