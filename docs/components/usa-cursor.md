@@ -7,7 +7,7 @@ A spring-lagged ring, a magnetic ring that wraps buttons and links, or a soft gl
 - **Category:** page
 - **Import:** `import { defineCursor } from 'motionary/components/page'` then `defineCursor();`
 - **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
-- **Attributes:** `mode`, `size`, `color`, `hide-native`
+- **Attributes:** `mode`, `size`, `color`, `hide-native`, `targets`
 - **Events:** —
 - **Slots:** —
 - **Methods:** —

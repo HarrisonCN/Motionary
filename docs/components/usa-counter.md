@@ -7,7 +7,7 @@ Counts up to a number when visible, locale-formatted with tabular digits. Set .v
 - **Category:** text
 - **Import:** `import { defineCounter } from 'motionary/components/text'` then `defineCounter();`
 - **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
-- **Attributes:** `to`, `decimals`, `locale`, `prefix`, `suffix`, `grouping`
+- **Attributes:** `to`, `decimals`, `locale`, `prefix`, `suffix`, `grouping`, `from`, `start`, `duration`
 - **Events:** `usa:complete`
 - **Slots:** —
 - **Methods:** `play()`, `format()`

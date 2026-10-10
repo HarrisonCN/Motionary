@@ -7,7 +7,7 @@
 - **Category:** ui · **since** 8.3
 - **Import:** `import { defineLiquidNav } from 'motionary/components/widgets'` then `defineLiquidNav();`
 - **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
-- **Attributes:** `label`
+- **Attributes:** `label`, `value`
 - **Events:** `usa:change`
 - **Slots:** —
 - **Methods:** —

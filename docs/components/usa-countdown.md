@@ -7,7 +7,7 @@
 - **Category:** ui · **since** 7.3
 - **Import:** `import { defineCountdown } from 'motionary/components/widgets'` then `defineCountdown();`
 - **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
-- **Attributes:** `to`, `seconds`
+- **Attributes:** `to`, `seconds`, `units`, `labels`, `label`
 - **Events:** `usa:tick`, `usa:done`
 - **Slots:** —
 - **Methods:** `start()`, `stop()`

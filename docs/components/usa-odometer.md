@@ -7,7 +7,7 @@
 - **Category:** text · **since** 6.4
 - **Import:** `import { defineOdometer } from 'motionary/components/widgets'` then `defineOdometer();`
 - **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
-- **Attributes:** `value`, `locale`, `decimals`, `prefix`, `suffix`
+- **Attributes:** `value`, `locale`, `decimals`, `prefix`, `suffix`, `duration`
 - **Events:** —
 - **Slots:** —
 - **Methods:** —

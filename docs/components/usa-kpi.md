@@ -7,7 +7,7 @@
 - **Category:** ui · **since** 7.2
 - **Import:** `import { defineKpi } from 'motionary/components/widgets'` then `defineKpi();`
 - **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
-- **Attributes:** `label`, `delta`, `caption`, `trend`, `invert`
+- **Attributes:** `label`, `delta`, `caption`, `trend`, `invert`, `locale`
 - **Events:** —
 - **Slots:** —
 - **Methods:** —

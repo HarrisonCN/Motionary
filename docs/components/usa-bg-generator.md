@@ -7,7 +7,7 @@
 - **Category:** ui · **since** 9.3
 - **Import:** `import { defineBgGenerator } from 'motionary/components/widgets'` then `defineBgGenerator();`
 - **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
-- **Attributes:** `label`
+- **Attributes:** `label`, `palette`, `style`, `seed`
 - **Events:** `usa:change`
 - **Slots:** —
 - **Methods:** `shuffle()`, `copy()`

@@ -7,7 +7,7 @@
 - **Category:** ui · **since** 8.6
 - **Import:** `import { defineThemeSwitcher } from 'motionary/components/widgets'` then `defineThemeSwitcher();`
 - **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
-- **Attributes:** `themes`, `target`, `label`
+- **Attributes:** `themes`, `target`, `label`, `persist`, `value`
 - **Events:** `usa:change`
 - **Slots:** —
 - **Methods:** —

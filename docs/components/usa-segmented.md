@@ -7,7 +7,7 @@
 - **Category:** ui · **since** 6.7
 - **Import:** `import { defineSegmented } from 'motionary/components/widgets'` then `defineSegmented();`
 - **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
-- **Attributes:** `variant`
+- **Attributes:** `variant`, `label`, `value`
 - **Events:** `usa:change`
 - **Slots:** —
 - **Methods:** —

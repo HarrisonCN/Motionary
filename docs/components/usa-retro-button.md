@@ -7,7 +7,7 @@
 - **Category:** ui · **since** 8.2
 - **Import:** `import { defineRetroButton } from 'motionary/components/widgets'` then `defineRetroButton();`
 - **CDN:** `<script src="https://unpkg.com/motionary@11/dist/widgets.umd.js"></script>`
-- **Attributes:** `variant`, `disabled`
+- **Attributes:** `variant`, `disabled`, `type`
 - **Events:** —
 - **Slots:** —
 - **Methods:** —

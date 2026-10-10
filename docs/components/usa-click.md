@@ -7,7 +7,7 @@ Wrap anything: ripple, burst (circle, star, heart, emoji), confetti, squish, pre
 - **Category:** click
 - **Import:** `import { defineClick } from 'motionary/components/click'` then `defineClick();`
 - **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
-- **Attributes:** `effect`, `disabled`
+- **Attributes:** `effect`, `disabled`, `trigger`, `color`, `count`, `shape`, `haptic`
 - **Events:** `usa:click-effect`
 - **Slots:** —
 - **Methods:** `play()`, `shake()`

@@ -7,7 +7,7 @@
 - **Category:** ui · **since** 10.8
 - **Import:** `import { defineSnapCarousel } from 'motionary/components/snap-carousel'` then `defineSnapCarousel();`
 - **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
-- **Attributes:** `align`, `gap`, `autoplay`, `no-controls`, `no-dots`, `label`
+- **Attributes:** `align`, `gap`, `autoplay`, `no-controls`, `no-dots`, `label`, `index`
 - **Events:** `usa:change`, `usa:runtime-missing`
 - **Slots:** —
 - **Methods:** `next()`, `prev()`, `goTo()`

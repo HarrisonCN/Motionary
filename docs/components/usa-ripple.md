@@ -7,7 +7,7 @@ Ink ripple from the pointer — or from the centre for Space/Enter — on any bu
 - **Category:** interaction
 - **Import:** `import { defineRipple } from 'motionary/components/interaction'` then `defineRipple();`
 - **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
-- **Attributes:** —
+- **Attributes:** `disabled`, `centered`, `color`, `opacity`, `duration`
 - **Events:** —
 - **Slots:** —
 - **Methods:** `ripple()`

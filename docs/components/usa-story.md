@@ -7,8 +7,8 @@
 - **Category:** fx
 - **Import:** `import { defineStory } from 'motionary/components/effects'` then `defineStory();`
 - **CDN:** `<script src="https://unpkg.com/motionary@11/dist/components.umd.js"></script>`
-- **Attributes:** `template`, `zoom`
-- **Events:** —
+- **Attributes:** `template`, `zoom`, `label`
+- **Events:** `usa:step`
 - **Slots:** —
 - **Methods:** —
 - **Source:** [src/components/effects/story.ts](../../src/components/effects/story.ts)
