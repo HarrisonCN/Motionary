@@ -116,6 +116,7 @@ export class Hero {}
 > 12.0: one component contract for every `<usa-*>` element, enforced in CI — [docs/component-contract.md](./docs/component-contract.md) · upgrading: [docs/upgrading-12.md](./docs/upgrading-12.md).
 > 12.1: cross-platform 3.0 — `npx motionary export --target css|wxss|arkts` for mini programs and HarmonyOS ArkUI, plus a [cross-platform previewer](https://harrisoncn.github.io/Motionary/showcase/xplat.html) — [docs/cross-platform.md](./docs/cross-platform.md).
 > 12.2: `motionary-mcp` `validate_snippet { mount: true }` mounts generated code in a headless DOM with the real bundles and checks it against the component contract — [docs/mcp.md](./docs/mcp.md#mounted-validation-122).
+> 12.3: the Figma plugin exports motion tokens (W3C JSON + CSS) and a runnable HTML page per selection, prerequisites in order — [figma-plugin/README.md](./figma-plugin/README.md).
 
 Animated components need no framework at all:
 
