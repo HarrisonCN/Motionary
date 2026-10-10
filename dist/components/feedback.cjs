@@ -439,4 +439,4 @@ exports.defineSkeleton = defineSkeleton;
 exports.defineSpinner = defineSpinner;
 exports.defineToaster = defineToaster;
 exports.toast = toast;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.4.0/dist/components/feedback.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.5.0/dist/components/feedback.cjs.map

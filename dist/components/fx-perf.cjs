@@ -165,4 +165,4 @@ exports.fpsMeter = fpsMeter;
 exports.offscreenRender = offscreenRender;
 exports.registerPerf3Pack = registerPerf3Pack;
 exports.runInWorker = runInWorker;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.4.0/dist/components/fx-perf.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.5.0/dist/components/fx-perf.cjs.map

@@ -728,4 +728,4 @@ function dragConstraint(world, body, x, y, stiffness = 0.6) {
 const physics = { id: 'physics', version: RUNTIME_VERSION, tier: 'advanced', requires: ['core'], api: { createWorld, World, Body, Constraint, collide, dragConstraint } };
 
 export { Body, Constraint, World, collide, createWorld, dragConstraint, physics };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.4.0/dist/runtime/physics.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.5.0/dist/runtime/physics.js.map

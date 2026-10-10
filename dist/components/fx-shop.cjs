@@ -130,4 +130,4 @@ function registerShopPack() {
 exports.SHOP_FX = SHOP_FX;
 exports.arcPath = arcPath;
 exports.registerShopPack = registerShopPack;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.4.0/dist/components/fx-shop.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.5.0/dist/components/fx-shop.cjs.map

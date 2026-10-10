@@ -7,4 +7,4 @@ require('../chunks/shared-BxK1D7EZ.cjs');
 
 
 exports.defineMenu = widgets_menu.defineMenu;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.4.0/dist/widgets/menu.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.5.0/dist/widgets/menu.cjs.map

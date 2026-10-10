@@ -129,4 +129,4 @@ function defineCompare(tag = 'usa-compare') {
 }
 
 export { defineCompare };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.4.0/dist/widgets/compare.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.5.0/dist/widgets/compare.js.map

@@ -70,4 +70,4 @@ function defineMotionSpec(tag = 'usa-motion-spec') {
 }
 
 exports.defineMotionSpec = defineMotionSpec;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.4.0/dist/widgets/motion-spec.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.5.0/dist/widgets/motion-spec.cjs.map

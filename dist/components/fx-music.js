@@ -171,4 +171,4 @@ function registerMusicPack() {
 }
 
 export { MUSIC_FX, musicSample, registerMusicPack, syntheticSample };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.4.0/dist/components/fx-music.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.5.0/dist/components/fx-music.js.map

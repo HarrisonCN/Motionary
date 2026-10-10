@@ -22,4 +22,4 @@ function bindUsa(el, binding = {}) {
 
 exports.bindUsa = bindUsa;
 exports.usaEventName = usaEventName;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.4.0/dist/chunks/bind-Ui43-n2d.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.5.0/dist/chunks/bind-Ui43-n2d.cjs.map

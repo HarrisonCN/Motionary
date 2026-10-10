@@ -199,6 +199,17 @@
             "advanced"
           ],
           "description": "11.4: runtime tier (docs/runtime-tiers.md)."
+        },
+        "since": {
+          "type": "string",
+          "description": "12.5: first release (major.minor) that mentions it."
+        },
+        "changed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "12.5: later releases (major.minor) whose notes mention it, from CHANGELOG.md."
         }
       }
     },
@@ -376,6 +387,13 @@
             "advanced"
           ],
           "description": "11.4: runtime tier (docs/runtime-tiers.md)."
+        },
+        "changed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "12.5: later releases (major.minor) whose notes mention it, from CHANGELOG.md."
         }
       }
     }

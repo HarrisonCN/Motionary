@@ -81,4 +81,4 @@ function defineMenuToggle(tag = 'usa-menu-toggle') {
 
 exports.TOGGLE_VARIANTS = TOGGLE_VARIANTS;
 exports.defineMenuToggle = defineMenuToggle;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.4.0/dist/chunks/menu-toggle-BJEK8BJD.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.5.0/dist/chunks/menu-toggle-BJEK8BJD.cjs.map

@@ -140,4 +140,4 @@ function splitText(el, o = {}) {
 const text = { id: 'text', version: RUNTIME_VERSION, tier: 'basic', requires: ['core'], api: { segment, splitText } };
 
 export { segment, splitText, text };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.4.0/dist/runtime/text.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.5.0/dist/runtime/text.js.map

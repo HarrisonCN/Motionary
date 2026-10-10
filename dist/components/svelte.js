@@ -63,4 +63,4 @@ function defineUsa(categories) {
 }
 
 export { bindUsa, defineUsa, usa };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.4.0/dist/components/svelte.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.5.0/dist/components/svelte.js.map
