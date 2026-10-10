@@ -234,4 +234,4 @@ const defineModal = (tag = 'usa-modal') => defineOverlay(tag, 'modal');
 const defineSheet = (tag = 'usa-sheet') => defineOverlay(tag, 'sheet');
 
 export { MODAL_EFFECTS as M, SHEET_SIDES as S, defineModal as a, delegateTriggers as b, defineSheet as d };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.3.0/dist/chunks/sheet-BHvZA7rD.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.4.0/dist/chunks/sheet-BHvZA7rD.js.map

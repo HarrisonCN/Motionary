@@ -11,6 +11,7 @@
   .gallery-page .topbar-actions .icon-btn { flex: none; min-width: 34px; height: 36px; padding: 0 7px; border-radius: 10px; }
   .gallery-page .topbar-actions .nav-link { padding: 0 7px; font-size: 0.74rem; }
   .gallery-page .topbar-actions .nav-link[href="./"] { display: none; } /* the brand already links to the store */
+  .gallery-page .topbar-actions .nav-run { display: none; } /* 12.4: the hero links to run.html on phones */
   .gallery-page .topbar .brand-store { display: none; }
 }
 @media (max-width: 374px) { .gallery-page .topbar-actions a.icon-btn[href^="https://github.com"] { display: none; } /* GitHub stays in the footer */ }

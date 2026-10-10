@@ -16,4 +16,4 @@ function registerNeonPulse() {
 exports.effect = effect;
 exports.register = registerNeonPulse;
 exports.registerNeonPulse = registerNeonPulse;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.3.0/dist/effects/neon-pulse.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.4.0/dist/effects/neon-pulse.cjs.map

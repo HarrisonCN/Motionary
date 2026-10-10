@@ -315,4 +315,4 @@ function createMotion(config = {}) {
 }
 
 export { PRESETS, VERSION, applyMotionAttributes, createMotion, parseMotionAttr, preferredBackend };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.3.0/dist/components/core.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.4.0/dist/components/core.js.map

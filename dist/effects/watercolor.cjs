@@ -16,4 +16,4 @@ function registerWatercolor() {
 exports.effect = effect;
 exports.register = registerWatercolor;
 exports.registerWatercolor = registerWatercolor;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.3.0/dist/effects/watercolor.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.4.0/dist/effects/watercolor.cjs.map

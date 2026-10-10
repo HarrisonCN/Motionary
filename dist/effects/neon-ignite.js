@@ -12,4 +12,4 @@ function registerNeonIgnite() {
 }
 
 export { effect, registerNeonIgnite as register, registerNeonIgnite };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.3.0/dist/effects/neon-ignite.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.4.0/dist/effects/neon-ignite.js.map

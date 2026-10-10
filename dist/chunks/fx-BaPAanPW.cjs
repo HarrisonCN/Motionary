@@ -111,4 +111,4 @@ exports.burst = burst;
 exports.confetti = confetti;
 exports.haptic = haptic;
 exports.shake = shake;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.3.0/dist/chunks/fx-BaPAanPW.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v12.4.0/dist/chunks/fx-BaPAanPW.cjs.map
