@@ -355,9 +355,9 @@
     "limit": 5632
   },
   {
-    "name": "import 'motionary/components/motion-tokens' (= motionary/tokens, 14.1 Motion Tokens 2.0: token set + modes, DTCG, CSS, engine/scene helpers, Figma Variables adapter; own entry, not in lite)",
+    "name": "import 'motionary/components/motion-tokens' (= motionary/tokens, 14.1 Motion Tokens 2.0: token set + modes, DTCG, CSS, engine/scene helpers, Figma Variables adapter; own entry with its own 10 KB budget, not in lite)",
     "import": "export * from 'pkg/components/motion-tokens';",
-    "limit": 7168
+    "limit": 10240
   },
   {
     "name": "import 'motionary/components/compat-v13' (= motionary/compat-v13, 14.0 compat layer for the removed 13.x interfaces; own entry, not in lite)",

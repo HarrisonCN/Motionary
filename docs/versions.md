@@ -11,13 +11,15 @@ URLs. Nothing else changes: the `<usa-*>` tags, the `usa-` classes, the globals 
 
 | Tag | Points to | Install |
 |---|---|---|
-| `latest` | the current major release and its patches (14.0.0 today) | `npm i motionary` |
+| `latest` | the newest release of the current major (14.1.0 today) | `npm i motionary` |
 | `v<major>-line` | each major line from 14 on, e.g. `v14-line` → the newest 14.x release (a bare `v14` is not allowed: npm rejects tag names that are valid SemVer ranges) | `npm i motionary@v14-line` |
 | `v13-lts` | the last 13.x release (13.9.0), for projects that stay on 13 | `npm i motionary@v13-lts` |
 | `v<major>-<minor>` | each minor release, e.g. `v12-9` → 12.9.0, `v12-5` → 12.5.0 | `npm i motionary@v12-9` or `npm i motionary@12.9.0` |
 
-`latest` moves when a new major ships (x.0.0) and with each patch of it (x.0.y, bug fixes only). Minor releases get their own `v<major>-<minor>` tag, so a plain
-`npm i motionary` does not move you to a minor without you asking for it. Exact versions always work. Both package names
+`latest` moves when a new major ships (x.0.0). From 14.1 on, it also moves with each minor and patch release of that major,
+once the release passes its post-publish checks (tarballs, ESM / CJS, main CI). Up to 14.0, minors stayed off `latest`.
+Every minor release also gets its own `v<major>-<minor>` tag, so you can pin a minor, or stay on a major line with
+`v<major>-line`. Exact versions always work. Both package names
 use the same tags. To see the current tags, run `npm view motionary dist-tags`.
 
 ## How a release is gated
