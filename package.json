@@ -760,6 +760,16 @@
         "default": "./dist/components/motion-scene.cjs"
       }
     },
+    "./components/motion-tokens": {
+      "import": {
+        "types": "./dist/components/motion-tokens.d.ts",
+        "default": "./dist/components/motion-tokens.js"
+      },
+      "require": {
+        "types": "./dist/components/motion-tokens.d.cts",
+        "default": "./dist/components/motion-tokens.cjs"
+      }
+    },
     "./components/compat-v13": {
       "import": {
         "types": "./dist/components/compat-v13.d.ts",
@@ -4170,6 +4180,16 @@
     "./components/layout.css": "./dist/components/layout.css",
     "./components/packs.css": "./dist/components/packs.css",
     "./components/fx.css": "./dist/components/fx.css",
+    "./tokens": {
+      "import": {
+        "types": "./dist/components/motion-tokens.d.ts",
+        "default": "./dist/components/motion-tokens.js"
+      },
+      "require": {
+        "types": "./dist/components/motion-tokens.d.cts",
+        "default": "./dist/components/motion-tokens.cjs"
+      }
+    },
     "./package.json": "./package.json"
   },
   "files": [

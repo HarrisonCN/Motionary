@@ -338,7 +338,7 @@ describe('14.1 Figma Variables adapter (REST API shapes, no network)', () => {
     expect(validateMotionTokens(s)).toEqual([]);
   });
   it('the library makes no network calls', () => {
-    const src = readFileSync('src/components/tokens/v2.ts', 'utf8') + readFileSync('src/components/tokens/figma.ts', 'utf8');
+    const src = ['v2', 'set', 'figma'].map((f) => readFileSync(`src/components/tokens/${f}.ts`, 'utf8')).join('\n');
     expect(src).not.toMatch(/\bfetch\(|XMLHttpRequest|api\.figma\.com/);
   });
 });
