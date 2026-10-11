@@ -1,4 +1,49 @@
-# Motionary 路线图（10.0 之后）
+# Motionary 路线图
+
+## 14.x → 15.0 版本追踪（2026-10-11 起采用）
+
+从 14.2 起，路线图按 **版本 / 状态 / 优先级 / 验收标准** 追踪。每个版本在发布前，都要以最新的 main、正式 Release 和必需 CI 的结果重新核对；表中的“建议”不是发布承诺。
+
+**状态：** `[已发布]` 已进入正式 Release，不再加新功能 · `[在研]` 已有代码或 PR，但未达到合并门槛 · `[建议]` 建议按此方向安排 · `[条件]` 是否需要取决于前一阶段的测试结果，不为凑版本号而发布。
+**优先级：** P0 = 发布阻断 / 安全 / 数据正确性；P1 = 核心产品能力；P2 = 体验与生态增强。
+
+| 版本 | 状态 | 优先级 | 核心内容 | 发布验收标准 |
+| --- | --- | --- | --- | --- |
+| v14.0.0 | [已发布] | P0 | Motion Engine v2（`motionary/motion`），Scene Format v2 成为正式格式，`motionary/compat-v13` | 已发布（PR #144）。 |
+| v14.1.0 | [已发布] | P1 | Motion Tokens 2.0（`motionary/tokens`：语义、距离、模式、DTCG、CSS、Figma Variables） | 已发布（PR #146）。 |
+| v14.2.0 | [已发布] | P0 | Layout Motion 2.0（`motionary/motion/layout`）：FLIP 与缩放 / 圆角校正、布局组、可中断动画、共享 `layoutId` 元素、View Transitions（同文档 / 跨文档）及 FLIP 回退、reduced motion（[docs/layout-motion.md](./layout-motion.md)） | 已发布（PR #147）。验收：Node 20/22/24、Chromium/Firefox/WebKit 和体积检查全绿后才合并；lite ≤ 70 KB，现有预算均未提高，新入口有独立的 8 KB 预算。 |
+| v14.3.0 | [建议] | P1 | 创作画布基础：可视化选中、框选、多选、层级 / 锁定、参考线、吸附、拖拽与触控调整、键盘导航 | 在真实浏览器和移动端完成画布编辑；编辑操作能无损映射到 Scene Format v2；不引入不受控的全局监听器。 |
+| v14.4.0 | [建议] | P0 | Motion Studio 1.0：时间轴 UI、关键帧拖动 / 框选、曲线编辑、轨道分组、属性检查器、逐帧预览、撤销重做 | 不改 JSON 也能建立多轨动画；保存、重新打开后效果等价；导出 / 导入回归测试通过。 |
+| v14.5.0 | [建议] | P1 | 工程与资源工作流：图片、SVG、字体、视频片段等资源引用；相对路径解析；离线工程包；缺失依赖提示 | 工程迁移到另一台设备后能找到资源，或列出缺失项；资源路径限制在允许的工程目录内；不自动执行导入脚本。 |
+| v14.6.0 | [建议] | P1 | AI 创作助手 2.0：提示词 → Scene v2；局部修改现有场景；组件与版本匹配；修复建议；经 MCP 校验后预览 | 每次 AI 编辑都生成可撤销、可拒绝的结构化 diff；通过 Schema、兼容性和浏览器检查；失败不破坏用户工程。 |
+| v14.7.0 | [建议] | P1 | 输出与预览可靠性：HTML/CSS/JS 独立导出、资源打包、可复现渲染；可选的动图 / 视频导出适配器（独立模块） | 独立导出的作品无需编辑器即可运行；同一 Scene 在同一时间点产生稳定的关键帧；视频生成失败可恢复，且不阻塞基础导出。 |
+| v14.8.0 | [建议] | P2 | 模板与扩展生态：模板包、设计令牌主题、可信组件与插件清单、模板版权与依赖说明 | 模板可安装、预览、卸载；组件的前置模块清楚列出；导入内容受沙箱和尺寸限制。 |
+| v14.9.0 | [建议] | P0 | v15 兼容准备：清理 compat-v13 的使用，正式迁移检查，Scene v2 回归，Studio 工程恢复测试，冻结发布候选 | doctor / codemod 能找到旧 API；从 v13 / v14 迁移工程时给出明确的损失报告和备份；六大框架测试与浏览器矩阵通过。 |
+| v15.0.0 | [建议] | P0 | Motion Studio 2.0 稳定主线：可视化动效创作、Scene v2 统一工程格式、稳定导出、AI 辅助编辑、强版本兼容 | 从零创建 → 编辑 → 预览 → 保存 → 重开 → 导出的完整闭环通过；升级不丢工程；源码和运行时继续按需加载，并遵守体积预算。 |
+
+### 每个版本都必须满足的发布约束
+
+1. `motionary/core`、`motionary/motion`、`components/lite`、WebGL 和编辑器工具彼此独立；Studio 不进入 lite。
+2. lite 约 70 KB gzip 的固定预算不因新功能提高；新增的大功能使用单独入口和独立预算。
+3. 浏览器覆盖 Chromium、Firefox、WebKit；继续验证 SSR / Hydration 和移动端操作。
+4. 工程格式、导出器和可视化时间轴必须支持确定性测试、回滚、恶意输入限制和迁移损失报告。
+5. 必需 CI（Node 20/22/24、三种浏览器、体积 / Tree Shaking / 打包检查）为红灯时，一律不合并。
+
+### 与 MCP Gateway 的联动
+
+| 阶段 | 适用版本 | 优先级 | 目标 | 验收 |
+| --- | --- | --- | --- | --- |
+| I. 基础互通 | MCP 14.9 + Motionary 14.1+ | P1 | 保留 Gateway interop 测试，使用 Motionary MCP 的 check_compatibility、suggest_fix、validate_snippet | 工具调用统一授权；身份和租户可追溯；输出符合已公布的 Schema。 |
+| II. 安全 AI 生成 | MCP 15.0 + Motionary 14.6 | P1 | 由 Gateway 管理 AI 的访问权限、预算和审计；Motionary 生成 / 修改 Scene v2 | 未授权的工具无法执行；生成的文档经过 Schema 和代码校验；提示注入拿不到额外权限。 |
+| III. 编辑器协同 | MCP 15.x + Motionary 14.4–14.7 | P1 | AI 产生结构化 diff，Studio 展示差异，由用户批准、预览或撤销 | 人工确认前不修改工程；回滚稳定；每处改动都能关联到生成者和时间。 |
+| IV. 资产与团队 | MCP 15.x + Motionary 14.8–15.0 | P2 | 多租户工程资源、版本管理、共享模板、审计与配额 | 不同租户的资源、密钥和缓存相互隔离；共享需要授权；导入资源不执行任意脚本。 |
+| V. 产品闭环 | MCP 15.x + Motionary 15.0 | P1 | 自然语言 → Scene → Studio 编辑 → 浏览器测试 → 输出 HTML/CSS/JS | 示例工程端到端测试可重复；出错时报告具体步骤并给出修复方向。 |
+
+---
+
+## 历史计划（10.0 → 13.x，归档）
+
+以下是 10.0 之后的原始计划，保留作记录。其中的版本均已发布，最新状态见上表与 [CHANGELOG](../CHANGELOG.md)。
 
 10.0 已发布：全新架构 —— 零依赖核心 `motionary/core`（gzip 后不到 10 KB，实测约 2 KB：`createMotion()`、入场预设、`play` / `bind` / `reveal`、统一暂停与倍速）、所有特效插件化（`motionary/plugins`，按需 `createMotion().use(retro, cinema)`）、GPU 特效默认使用 WebGPU（不支持时回退 WebGL2 → Canvas）；移除 9.9 弃用的 `registerEffectPacks()`；`motionary` 与 `use-scroll-animate` 同时成为 npm `latest`。
 
