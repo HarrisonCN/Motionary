@@ -17,7 +17,6 @@
  * characters are `aria-hidden`). Reduced motion: loops and the trail are
  * skipped, one-shot effects show the final state without movement.
  */
-import { raf as sraf, caf as scaf } from '../base';
 import type { EffectContext, EffectDefinition } from '../fx/registry';
 import { registerEffects } from '../fx/registry';
 import { srText } from '../base';
@@ -41,9 +40,9 @@ export function splitChars(el: HTMLElement): HTMLElement[] {
   return Array.from(el.querySelectorAll<HTMLElement>(':scope > .usa-ch'));
 }
 
-const raf = (fn: FrameRequestCallback): number => (typeof requestAnimationFrame === 'function' ? sraf(fn) : 0);
+const raf = (fn: FrameRequestCallback): number => (typeof requestAnimationFrame === 'function' ? requestAnimationFrame(fn) : 0);
 const caf = (h: number): void => {
-  if (h && typeof cancelAnimationFrame === 'function') scaf(h);
+  if (h && typeof cancelAnimationFrame === 'function') cancelAnimationFrame(h);
 };
 let fid = 0;
 

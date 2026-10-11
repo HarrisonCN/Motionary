@@ -9,8 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [13.4.0] - 2026-10-10
 
-Animation scheduling. One shared rAF loop now has a frame budget, drops the work of detached elements, and — in the
-widgets and `<usa-story>` — pauses loops that are off screen or in a hidden tab. New long-task helpers keep big setups
+Animation scheduling. One shared rAF loop now has a frame budget, drops the work of detached elements, and — with the
+new offscreen plug-in — pauses loops that are off screen or in a hidden tab. New long-task helpers keep big setups
 from blocking input. No breaking changes; zero runtime dependencies; size budgets unchanged
 (`motionary/components/lite` stays within 70 KB — the offscreen pause is a separate plug-in and not part of lite).
 [docs/scheduling.md](docs/scheduling.md)
@@ -22,14 +22,20 @@ from blocking input. No breaking changes; zero runtime dependencies; size budget
 - `onFrame(fn, el?)`: optional owner element; a one-shot scheduler callback with an owner is dropped once the owner
   is detached.
 - `motionary/components/offscreen`: `installOffscreenPause()`, `raf`, `caf`, `onFrame` — pause while the tab is hidden
-  and while the owner element is off screen (shared IntersectionObserver). Used by every widget loop and `<usa-story>`.
-  **Not included in `motionary/components/lite`.**
+  and while the owner element is off screen (shared IntersectionObserver). Installed on first use by `<usa-story>`,
+  `<usa-aurora>`, the marketplace and the sparkline / meter / music-player widgets. Gauge, KPI, pull-cord, lyrics, globe,
+  panorama and gen-art pass their owner element but do not install it themselves (fixed per-entry size budgets); they
+  pause once it is installed. **Not included in `motionary/components/lite`.**
 - `motionary/components/perf-tasks`: `yieldToMain()`, `shouldYield()`, `runChunked()`.
 - Connect / disconnect cycle test (no leaked loops or queued callbacks).
 
 ### Changed
 
-- 42 components moved from their own `requestAnimationFrame` calls to the shared scheduler; a test keeps it that way.
+- 39 components moved from their own `requestAnimationFrame` calls to the shared scheduler; a test keeps it that way,
+  with a documented exemption list: the short-lived `fx-text`, `fx-morph` and `fx-chart` effects stay on native rAF
+  (their size budgets are unchanged).
+- Deferred to 13.4.1: CPU-throttled scheduler baseline harness in CI (`perf/scheduler.html`, 4× throttling) — the
+  existing perf budgets still gate this release.
 - `withoutDeprecations(fn)` simply runs `fn` (its counter was never read); `now()` uses `performance.now()`.
 
 ## [13.3.0] - 2026-10-10

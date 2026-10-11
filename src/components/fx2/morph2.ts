@@ -16,15 +16,14 @@
  *
  * Reduced motion: no loops / wobble; enter effects and swaps fade.
  */
-import { raf as sraf, caf as scaf } from '../base';
 import type { EffectContext, EffectDefinition } from '../fx/registry';
 import { registerEffects } from '../fx/registry';
 import { all } from '../effects/shared';
 
 const NS = 'http://www.w3.org/2000/svg';
-const raf = (f: FrameRequestCallback): number => (typeof requestAnimationFrame === 'function' ? sraf(f) : 0);
+const raf = (f: FrameRequestCallback): number => (typeof requestAnimationFrame === 'function' ? requestAnimationFrame(f) : 0);
 const caf = (h: number): void => {
-  if (h && typeof cancelAnimationFrame === 'function') scaf(h);
+  if (h && typeof cancelAnimationFrame === 'function') cancelAnimationFrame(h);
 };
 
 /** Sample `d` into `n` points (needs SVG geometry support; `null` without it). */

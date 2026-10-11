@@ -25,11 +25,22 @@ const stop = onFrame(draw, canvas); // paused while `canvas` is off screen or th
 - While the document is hidden every loop and callback waits; `visibilitychange` resumes them.
 - A loop / callback with an owner element waits while the element is outside the viewport (one shared
   `IntersectionObserver`) and resumes when it scrolls back in.
-- `raf` / `onFrame` from this module install the pause on first use. The widgets (`motionary/components/widgets`,
-  `widgets.umd.js`, per-widget entries) and `<usa-story>` use them, so canvas / meter / globe / player loops stop
-  off screen.
+- `raf` / `onFrame` from this module install the pause on first use. `<usa-story>`, `<usa-aurora>`, the marketplace
+  and the sparkline / meter / music-player widgets use them, so their loops stop off screen.
+- `<usa-gauge>`, `<usa-kpi>`, `<usa-pull-cord>`, `<usa-lyrics>`, `<usa-globe>`, `<usa-panorama>` and `<usa-gen-art>`
+  pass their element as owner to the base scheduler but **do not install the pause themselves** (their fixed
+  per-entry size budgets cannot carry it). They pause off screen once the plug-in is installed — by
+  `installOffscreenPause()` or by any component above scheduling a frame on the page.
 - **`motionary/components/lite` does not include it** (size budget: lite keeps the frame budget and drop-on-detach
   only). Import `motionary/components/offscreen` next to lite if you want the pause there.
+
+## Native-rAF exemptions
+
+`fx-text` (`text3`), `fx-morph` (`morph2`) and `fx-chart` (`chart`, `registerChartPack`) keep their own
+`requestAnimationFrame`: they are short-lived, self-terminating effects (a fraction of a second after a trigger), so
+parking them buys nothing and the scheduler would put their fixed size budgets over. The "no direct rAF" test lists
+them explicitly (`RAF_EXEMPT` in `test/scheduler-13-4.test.ts`) together with the scheduler itself and the `perf3`
+worker string.
 
 ## Long tasks (`motionary/components/perf-tasks`)
 

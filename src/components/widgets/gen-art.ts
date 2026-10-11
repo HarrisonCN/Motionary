@@ -1,4 +1,5 @@
-import { raf as sraf, caf as scaf } from '../offscreen';
+// 13.4: base scheduler (frame budget, drop-on-detach); offscreen pause applies once installOffscreenPause() runs — not auto-installed, the fixed per-entry budget can't carry it.
+import { raf as sraf, caf as scaf } from '../base';
 import { defineElement, type UsaElement } from '../base';
 import { PALETTES, seededRandom } from '../fx2/genart';
 import css from './gen-art.css?raw';

@@ -6,55 +6,48 @@
  * `onFrame(fn, el)`) also waits while that element is off screen (one shared
  * IntersectionObserver). Widgets and the full bundles install it; the lite
  * bundle does not (lite keeps the frame budget and drop-on-detach only).
+ * Kept deliberately tiny: it rides in every per-widget entry.
  *
  * ```ts
  * import { installOffscreenPause } from 'motionary/components/offscreen';
  * installOffscreenPause();
  * ```
  */
-import { raf as baseRaf, onFrame as baseOnFrame, setPauseHook } from './base';
+import { raf as R, onFrame as F, setPauseHook as H } from './base';
 
-const hiddenEls = new WeakSet<Element>();
-let io: IntersectionObserver | undefined;
-let installed = false;
+const off = new WeakSet<Element>();
+let io: IntersectionObserver | null | undefined;
+let wake: () => void;
+
+/** Remove the pause (everything parked runs again). */
+const un = (): void => {
+  document.removeEventListener('visibilitychange', wake);
+  io?.disconnect();
+  io = undefined;
+  H();
+  wake();
+};
 
 /** Install the offscreen / hidden-tab pause (idempotent). Returns an uninstall function. */
 export function installOffscreenPause(): () => void {
-  if (installed || typeof document == 'undefined') return uninstall;
-  installed = true;
-  let wake: () => void = () => {};
-  const watch = (el: Element) => {
-    if (typeof IntersectionObserver == 'undefined') return;
-    (io ||= new IntersectionObserver((es) => {
-      for (const e of es) e.isIntersecting ? hiddenEls.delete(e.target) : hiddenEls.add(e.target);
-      wake();
-    })).observe(el);
-  };
-  wake = setPauseHook((el) => (document.hidden && document.visibilityState == 'hidden') || (el && hiddenEls.has(el)), watch);
-  document.addEventListener('visibilitychange', onVis);
-  function onVis() {
-    wake();
+  if (io === undefined && typeof document == 'object') {
+    io =
+      typeof IntersectionObserver == 'function'
+        ? new IntersectionObserver((es) => {
+            for (const e of es) off[e.isIntersecting ? 'delete' : 'add'](e.target);
+            wake();
+          })
+        : null;
+    wake = H((el) => document.hidden || (el && off.has(el)), (el) => io?.observe(el));
+    document.addEventListener('visibilitychange', wake);
   }
-  uninstallFn = () => {
-    document.removeEventListener('visibilitychange', onVis);
-    setPauseHook();
-    io?.disconnect();
-    io = undefined;
-    installed = false;
-    wake();
-  };
-  return uninstall;
-}
-
-let uninstallFn: () => void = () => {};
-function uninstall(): void {
-  uninstallFn();
+  return un;
 }
 
 /** `raf(cb, el)` with the offscreen pause installed. */
-export const raf = (cb: FrameRequestCallback, el?: Element): number => (installOffscreenPause(), baseRaf(cb, el));
+export const raf = (cb: FrameRequestCallback, el?: Element): number => (installOffscreenPause(), R(cb, el));
 
 /** `onFrame(fn, el)` with the offscreen pause installed. */
-export const onFrame = (fn: (t: number, dt: number) => void, el?: Element): (() => void) => (installOffscreenPause(), baseOnFrame(fn, el));
+export const onFrame = (fn: (t: number, dt: number) => void, el?: Element): (() => void) => (installOffscreenPause(), F(fn, el));
 
 export { caf } from './base';
