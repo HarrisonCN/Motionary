@@ -41,13 +41,13 @@ npm i motionary
 ビルドツールを使わない場合は CDN からどうぞ。URL はメジャーバージョン（`@13`）で固定します。
 
 ```html
-<script src="https://unpkg.com/motionary@13/dist/index.umd.js"></script>            <!-- スクロール API：window.ScrollAnimate -->
-<script src="https://unpkg.com/motionary@13/dist/presets-extended.umd.js"></script> <!-- プリセット +181 種 -->
-<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>       <!-- motionary/components の要素：window.UsaComponents -->
-<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>          <!-- ウィジェット：window.UsaWidgets -->
+<script src="https://unpkg.com/motionary@14/dist/index.umd.js"></script>            <!-- スクロール API：window.ScrollAnimate -->
+<script src="https://unpkg.com/motionary@14/dist/presets-extended.umd.js"></script> <!-- プリセット +181 種 -->
+<script src="https://unpkg.com/motionary@14/dist/components.umd.js"></script>       <!-- motionary/components の要素：window.UsaComponents -->
+<script src="https://unpkg.com/motionary@14/dist/widgets.umd.js"></script>          <!-- ウィジェット：window.UsaWidgets -->
 ```
 
-jsDelivr も使えます：`https://cdn.jsdelivr.net/npm/motionary@13/dist/…`。`use-scroll-animate` をお使いの場合も、同じバージョンで引き続き公開されます。乗り換えるときは、import と URL のパッケージ名を置き換えるだけです（[詳細](./docs/versions.md)）。
+jsDelivr も使えます：`https://cdn.jsdelivr.net/npm/motionary@14/dist/…`。`use-scroll-animate` をお使いの場合も、同じバージョンで引き続き公開されます。乗り換えるときは、import と URL のパッケージ名を置き換えるだけです（[詳細](./docs/versions.md)）。
 
 ## クイックスタート
 
@@ -316,8 +316,8 @@ npx usa-codemod-13 --write      # まとめて書き換え。@10 / @11 / @12 に
 
 ## バージョンと互換性
 
-- **npm の dist-tag：** `latest` は現在のメジャーとそのパッチ（13.0.2）を指します。マイナーリリースにはそれぞれ `v<major>-<minor>` のタグも付きます（例：`v12-9`）。`motionary` と `use-scroll-animate` は常に同じバージョンで同時に公開されます。
-- **CDN：** URL はメジャーで固定します（`motionary@13`）。正確なバージョン指定（`motionary@12.4.0`）もそのまま使えます。
+- **npm の dist-tag：** `latest` は現在のメジャーとそのパッチ（14.0.0）を指します。マイナーリリースにはそれぞれ `v<major>-<minor>` のタグも付きます（例：`v12-9`）。`motionary` と `use-scroll-animate` は常に同じバージョンで同時に公開されます。
+- **CDN：** URL はメジャーで固定します（`motionary@14`）。正確なバージョン指定（`motionary@12.4.0`）もそのまま使えます。
 - **セマンティックバージョニング：** 破壊的変更はメジャーだけで行い、毎回ガイドと codemod を用意します。非推奨になったものは次のメジャーまで残り、その間は型に `@deprecated` が付くだけで、実行時の警告は出ません。
 - **各バージョンに含まれるもの：** コンポーネントとランタイムモジュールごとの `since` / `changed`（[docs/version-compat.md](./docs/version-compat.md)）、機能ごとの対応状況（[docs/compat-matrix.md](./docs/compat-matrix.md)）。
 - 詳細：[docs/versions.md](./docs/versions.md) · [CHANGELOG.md](./CHANGELOG.md)。

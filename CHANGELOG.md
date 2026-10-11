@@ -7,6 +7,59 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [14.0.0] - 2026-10-11
+
+**Motion Engine v2** — MAJOR. One composable animation API with one controller interface, Scene Format v2 as the
+official motion document, and a versioned migration of the 13.9-deprecated interfaces: removed from the main entries,
+kept behind the compat entry `motionary/compat-v13`. Zero runtime dependencies; `<usa-*>` tags, attributes, events,
+presets and tokens unchanged (no visual changes); `motionary/components/lite` stays ≤ 70 KB gzip (budget not raised).
+[docs/migrating-to-v14.md](docs/migrating-to-v14.md) · [docs/motion-engine-v2.md](docs/motion-engine-v2.md) · [docs/scene-v2.md](docs/scene-v2.md)
+
+### Added
+
+- **Motion Engine v2: `motionary/motion`** (= `motionary/components/motion`; own entry with its own 5 KB budget, not in
+  lite): `animate()` (elements with keyframes / presets / property-indexed keyframes, plain objects, callbacks),
+  `sequence()`, `parallel()`, `stagger()` (`each`, `from`; also offsets existing controllers), `spring()` (spring presets,
+  configs, `{spring.x}` tokens; overshoot via CSS `linear()`), `timeline()` (`add` / `label` with the 3.1 position
+  grammar) and `playScene()` (scene v2 → one controller). All return the same `MotionControls`: `play` / `pause` /
+  `seek` / `reverse` / `finish` / `cancel`, `finished` (rejects with `AbortError` on cancel), `currentTime`, `progress`,
+  `duration`, `playbackRate`, `playState`. Compositions adopt and nest their children. Built on the shared frame
+  scheduler + motion clock (13.4 / 8.0), the timeline runtime's `resolvePosition` / presets, motion tokens and the 2.3
+  spring solver; DOM leaves are paused WAAPI animations driven by the controller; reduced motion jumps to the end.
+- **`motionary/scene`**: the official Scene Format v2 entry (same files as `motionary/components/scene-v2`, which stays).
+  `SCENE_V2_STATUS` is `'stable'`; validator, schema and converters unchanged.
+- **`<usa-player>` / `createPlayer()` read scene v2 natively** (token references, mute / solo, seeded `random()`), and
+  `motionary-timeline` v1 through auto-migration. Shared loader: `src/components/scene/play.ts` (also used by `playScene`).
+- **Timeline editor reads and writes scene v2**: `timelineDocToScene()` (lossless), `timelineDocFromScene()` (with a
+  `lost` list), `loadMotionDoc()` (scene v2 / timeline v1 / animation JSON v1). `sceneV2FromTimeline()` /
+  `sceneV2ToTimeline()` now use this same mapping.
+- **`motionary/compat-v13`** (own entry, not imported by `motionary`, `motionary/core`, `motionary/components` or lite):
+  `installCompatV13()` (the player reads playground documents and unversioned animation JSON again), `normalizeAnimation()`,
+  `upgradeLegacyAnimation()`, `COMPAT_V13`. Dev-only notices as in 13.9. Planned removal: 15.0.
+- **`npx motionary migrate --code`**: rewrites the 14.0 import moves (`normalizeAnimation` → `motionary/compat-v13`,
+  `motionary/components/scene-v2` → `motionary/scene`, `usa-codemod-5…10` scripts → `motionary codemod <n>`, CDN
+  `@10…@13` → `@14`); dry run by default, `--write`, `--json`; idempotent. **`npx motionary codemod <5–13>`** runs the
+  older codemods.
+- npm dist-tags: `v14` (the 14.x line) and `v13-lts` (13.9.0) next to `latest`.
+
+### Removed (kept in `motionary/compat-v13`)
+
+- `use-scroll-animate/playground` documents and animation JSON without `format` / `version` in `<usa-player>` /
+  `createPlayer()` — now an error that points to `npx motionary migrate` and `installCompatV13()`.
+- `normalizeAnimation()` from `motionary/components/effects`.
+- The `usa-codemod-5` … `usa-codemod-10` entries of the package `bin` (the scripts still ship; `npx motionary codemod <n>`).
+
+### Changed
+
+- CDN major is `@14` (docs, showcase, examples, `RUNTIME_CDN`); `@13` keeps serving 13.9.0.
+- docs/migrating-to-v14.md is final; docs/deprecations-v14.md describes the compat layer.
+
+### Tests
+
+- Written first: `test/motion-engine-v2-14-0.test.ts`, `test/scene-v2-official-14-0.test.ts`,
+  `test/compat-v13-14-0.test.ts` (all three failed before: modules missing / 12 of 14 scene tests;
+  usa-tools/v14.0.0/failing-before.txt). 13.x tests that pinned removed behaviour now go through the compat entry.
+
 ## [13.9.0] - 2026-10-11
 
 v14 compatibility prep — a draft of the next scene format, a migration tool and deprecation hints for 14.0. Additive:

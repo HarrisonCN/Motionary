@@ -19,17 +19,17 @@ physics, page transitions, generative backgrounds, Lottie, WebGL and more. It ru
 Solid and Angular, and in desktop web views (Electron, Tauri, WebView2). It has no runtime dependencies, every entry point
 is tree-shakeable and has a gzip budget checked in CI, and every animation respects `prefers-reduced-motion`.
 
-> 13.0: discover, copy, run. The 12.x tooling is now stable: MCP mounted validation (`validate_snippet { mount: true }`) and
-> version-aware answers (`check_compat`), the Figma plugin export, the [component playground](https://harrisoncn.github.io/Motionary/showcase/run.html),
-> `npx motionary export` and `npx motionary compat`. The import paths deprecated in 11.5 are removed. See
-> [Upgrading to 13](#upgrading-to-13).
+> 14.0: **Motion Engine v2** — `animate`, `sequence`, `parallel`, `stagger`, `spring` and `timeline` in
+> [`motionary/motion`](./docs/motion-engine-v2.md), all with one controller (play / pause / seek / reverse / finished /
+> cancel). [Scene Format v2](./docs/scene-v2.md) is the official motion document (`motionary/scene`; `<usa-player>` and the
+> Timeline editor read and write it). The 13.9 deprecations moved to `motionary/compat-v13`. See [Upgrading to 14](#upgrading-to-14).
 
 ## Contents
 
 [Features](#features) · [Install](#install) · [Quick start](#quick-start) · [Runtime tiers](#runtime-and-tiers) ·
 [Components](#components-gallery-and-playground) · [CLI](#cli) · [MCP server and AI](#mcp-server-and-ai) ·
 [Figma plugin](#figma-plugin) · [Accessibility](#accessibility) · [Size budgets](#size-budgets) ·
-[Upgrading to 13](#upgrading-to-13) · [Versions](#versions-and-compatibility) · [Docs](#documentation) ·
+[Upgrading to 14](#upgrading-to-14) · [Versions](#versions-and-compatibility) · [Docs](#documentation) ·
 [Contributing](#contributing) · [Reference](#reference)
 
 ## Features
@@ -60,13 +60,13 @@ npm i motionary
 No build step? Use the CDN. URLs pin the major version (`@13`):
 
 ```html
-<script src="https://unpkg.com/motionary@13/dist/index.umd.js"></script>            <!-- scroll API: window.ScrollAnimate -->
-<script src="https://unpkg.com/motionary@13/dist/presets-extended.umd.js"></script> <!-- +181 presets -->
-<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>       <!-- the motionary/components elements: window.UsaComponents -->
-<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>          <!-- the widgets: window.UsaWidgets -->
+<script src="https://unpkg.com/motionary@14/dist/index.umd.js"></script>            <!-- scroll API: window.ScrollAnimate -->
+<script src="https://unpkg.com/motionary@14/dist/presets-extended.umd.js"></script> <!-- +181 presets -->
+<script src="https://unpkg.com/motionary@14/dist/components.umd.js"></script>       <!-- the motionary/components elements: window.UsaComponents -->
+<script src="https://unpkg.com/motionary@14/dist/widgets.umd.js"></script>          <!-- the widgets: window.UsaWidgets -->
 ```
 
-jsDelivr works too: `https://cdn.jsdelivr.net/npm/motionary@13/dist/…`. Already on `use-scroll-animate`? It keeps
+jsDelivr works too: `https://cdn.jsdelivr.net/npm/motionary@14/dist/…`. Already on `use-scroll-animate`? It keeps
 working, at the same versions. To switch, replace the name in imports and URLs ([details](./docs/versions.md)).
 
 ## Quick start
@@ -350,35 +350,36 @@ attached to each GitHub release instead ([docs/source-maps.md](./docs/source-map
 Motionary uses View Transitions and scroll-driven animations where the browser has them, and falls back to JavaScript
 where it does not. `baselineReport()` checks a given browser.
 
-## Upgrading to 13
+## Upgrading to 14
 
-13.0 breaks one thing: **the import paths deprecated in 11.5 are removed.** Their replacements serve the same files,
-so behaviour and bundle size do not change.
+14.0 adds Motion Engine v2 and makes Scene Format v2 official. It removes four interfaces deprecated in 13.9 from the
+main entries and keeps each of them behind **`motionary/compat-v13`**, so nothing has to be migrated on day one.
+Tags, attributes, events, presets, tokens and visuals do not change; lite stays ≤ 70 KB gzip.
 
 ```bash
-npx motionary doctor            # lists every removed path (and any legacy event name) in your project
-npx usa-codemod-13 --write      # rewrites them, plus CDN URLs pinned to @10 / @11 / @12 → @13
+npx motionary migrate --code           # dry run: normalizeAnimation → compat-v13, scene-v2 → motionary/scene, CDN → @14
+npx motionary migrate --code --write   # apply
+npx motionary migrate src/motion/*.json --write   # optional: motion JSON → scene v2
 ```
 
-| Removed | Use instead |
-|---|---|
-| ~~motionary/components/core~~ | `motionary/core` |
-| ~~motionary/components/ai~~ | `motionary/tooling/ai` |
-| ~~motionary/components/design~~, ~~motionary/design~~ | `motionary/tooling/design` |
-| ~~motionary/components/angular~~ | `motionary/angular` |
-| ~~motionary/manifest.json~~, ~~motionary/manifest.schema.json~~ | `motionary/tooling/manifest.json`, `motionary/tooling/manifest.schema.json` |
+| Removed from the main entries | Keep it (compat) | Move to |
+|---|---|---|
+| playground documents / animation JSON without `format` in `<usa-player>` | `installCompatV13()` from `motionary/compat-v13` | scene v2 (`npx motionary migrate`) |
+| `normalizeAnimation()` (`motionary/components/effects`) | `motionary/compat-v13` | `validateSceneV2()` / `migrateToSceneV2()` (`motionary/scene`) |
+| `usa-codemod-5` … `usa-codemod-10` bins | `npx motionary codemod <n>` | — |
 
-The same applies to `use-scroll-animate/…`. Full guide: [docs/upgrading-13.md](./docs/upgrading-13.md).
-Earlier majors: [12](./docs/upgrading-12.md) · [11](./docs/upgrading-11.md) · [10](./docs/upgrading-10.md) ·
+Full guide: [docs/migrating-to-v14.md](./docs/migrating-to-v14.md). 13.x: `npm i motionary@v13-lts` (13.9.0).
+
+Earlier majors: [13](./docs/upgrading-13.md) · [12](./docs/upgrading-12.md) · [11](./docs/upgrading-11.md) · [10](./docs/upgrading-10.md) ·
 [9](./docs/upgrading-9.md) · [8](./docs/upgrading-8.md) · [7](./docs/upgrading-7.md) · [6](./docs/upgrading-6.md) ·
 [5](./docs/upgrading-5.md) · [4](./docs/upgrading-4.md) · [3](./docs/upgrading-3.md) · [2](./docs/deprecations.md).
 Coming from another library: [AOS](./docs/migration-from-aos.md) · [GSAP ScrollTrigger](./docs/migration-from-gsap-scrolltrigger.md).
 
 ## Versions and compatibility
 
-- **npm dist-tags:** `latest` is the current major with its patch releases (13.0.2). Each minor release also gets its own tag `v<major>-<minor>`
+- **npm dist-tags:** `latest` is the current major with its patch releases (14.0.0). Each minor release also gets its own tag `v<major>-<minor>`
   (for example `v12-9`). `motionary` and `use-scroll-animate` are published together at the same versions.
-- **CDN:** URLs pin a major (`motionary@13`). Exact pins (`motionary@12.4.0`) keep working.
+- **CDN:** URLs pin a major (`motionary@14`). Exact pins (`motionary@12.4.0`) keep working.
 - **Semver:** breaking changes come only in majors, each with a guide and a codemod. Deprecations stay in place until the
   next major, with `@deprecated` types and no runtime warning.
 - **What each version has:** `since` / `changed` for every component and runtime module ([docs/version-compat.md](./docs/version-compat.md)),
@@ -425,28 +426,28 @@ Motionary ships its own zero-dependency animation runtime — shared ticker, twe
 
 | Module | Import | CDN (IIFE) | Register | gzip budget |
 |---|---|---|---|---|
-| [Runtime core](docs/runtime/core.md) | `motionary/runtime` | `https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js` | `use();` | 5.5 KB |
-| [CSS @keyframes & WAAPI keyframes loader](docs/runtime/format-css.md) | `motionary/runtime/format-css` | `https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/format-css.iife.js` | `use(formatCss);` | 2.5 KB |
-| [Motion / Framer keyframe JSON loader](docs/runtime/format-motion.md) | `motionary/runtime/format-motion` | `https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/format-motion.iife.js` | `use(formatMotion);` | 2.5 KB |
-| [Scroll scenes](docs/runtime/scroll.md) | `motionary/runtime/scroll` | `https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/scroll.iife.js` | `use(scroll);` | 4.5 KB |
-| [SVG loader: SMIL playback + path morphing](docs/runtime/format-svg.md) | `motionary/runtime/format-svg` | `https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/format-svg.iife.js` | `use(formatSvg);` | 5.0 KB |
-| [Text splitting](docs/runtime/text.md) | `motionary/runtime/text` | `https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/text.iife.js` | `use(text);` | 2.5 KB |
-| [Sprite sheets & image sequences](docs/runtime/format-sprite.md) | `motionary/runtime/format-sprite` | `https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/format-sprite.iife.js` | `use(formatSprite);` | 3.0 KB |
-| [Smooth scrolling](docs/runtime/smooth.md) | `motionary/runtime/smooth` | `https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/smooth.iife.js` | `use(smooth);` | 3.5 KB |
-| [GIF decoder](docs/runtime/format-gif.md) | `motionary/runtime/format-gif` | `https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/format-gif.iife.js` | `use(formatGif);` | 3.0 KB |
-| [APNG loader](docs/runtime/format-apng.md) | `motionary/runtime/format-apng` | `https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/format-apng.iife.js` | `use(formatApng);` | 3.0 KB |
-| [Animated WebP loader](docs/runtime/format-webp.md) | `motionary/runtime/format-webp` | `https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/format-webp.iife.js` | `use(formatWebp);` | 3.0 KB |
-| [WebGL2 scene renderer](docs/runtime/gl.md) | `motionary/runtime/gl` | `https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/gl.iife.js` | `use(gl);` | 9.0 KB |
-| [glTF 2.0 / GLB loader](docs/runtime/format-gltf.md) | `motionary/runtime/format-gltf` | `https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/format-gltf.iife.js` | `use(formatGltf);` | 6.0 KB |
-| [OBJ / MTL loader](docs/runtime/format-obj.md) | `motionary/runtime/format-obj` | `https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/format-obj.iife.js` | `use(formatObj);` | 3.0 KB |
-| [Lottie + dotLottie player](docs/runtime/vector.md) | `motionary/runtime/vector` | `https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/vector.iife.js` | `use(vector);` | 12.0 KB |
+| [Runtime core](docs/runtime/core.md) | `motionary/runtime` | `https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime.iife.js` | `use();` | 5.5 KB |
+| [CSS @keyframes & WAAPI keyframes loader](docs/runtime/format-css.md) | `motionary/runtime/format-css` | `https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/format-css.iife.js` | `use(formatCss);` | 2.5 KB |
+| [Motion / Framer keyframe JSON loader](docs/runtime/format-motion.md) | `motionary/runtime/format-motion` | `https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/format-motion.iife.js` | `use(formatMotion);` | 2.5 KB |
+| [Scroll scenes](docs/runtime/scroll.md) | `motionary/runtime/scroll` | `https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/scroll.iife.js` | `use(scroll);` | 4.5 KB |
+| [SVG loader: SMIL playback + path morphing](docs/runtime/format-svg.md) | `motionary/runtime/format-svg` | `https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/format-svg.iife.js` | `use(formatSvg);` | 5.0 KB |
+| [Text splitting](docs/runtime/text.md) | `motionary/runtime/text` | `https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/text.iife.js` | `use(text);` | 2.5 KB |
+| [Sprite sheets & image sequences](docs/runtime/format-sprite.md) | `motionary/runtime/format-sprite` | `https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/format-sprite.iife.js` | `use(formatSprite);` | 3.0 KB |
+| [Smooth scrolling](docs/runtime/smooth.md) | `motionary/runtime/smooth` | `https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/smooth.iife.js` | `use(smooth);` | 3.5 KB |
+| [GIF decoder](docs/runtime/format-gif.md) | `motionary/runtime/format-gif` | `https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/format-gif.iife.js` | `use(formatGif);` | 3.0 KB |
+| [APNG loader](docs/runtime/format-apng.md) | `motionary/runtime/format-apng` | `https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/format-apng.iife.js` | `use(formatApng);` | 3.0 KB |
+| [Animated WebP loader](docs/runtime/format-webp.md) | `motionary/runtime/format-webp` | `https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/format-webp.iife.js` | `use(formatWebp);` | 3.0 KB |
+| [WebGL2 scene renderer](docs/runtime/gl.md) | `motionary/runtime/gl` | `https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/gl.iife.js` | `use(gl);` | 9.0 KB |
+| [glTF 2.0 / GLB loader](docs/runtime/format-gltf.md) | `motionary/runtime/format-gltf` | `https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/format-gltf.iife.js` | `use(formatGltf);` | 6.0 KB |
+| [OBJ / MTL loader](docs/runtime/format-obj.md) | `motionary/runtime/format-obj` | `https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/format-obj.iife.js` | `use(formatObj);` | 3.0 KB |
+| [Lottie + dotLottie player](docs/runtime/vector.md) | `motionary/runtime/vector` | `https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/vector.iife.js` | `use(vector);` | 12.0 KB |
 | [Official Rive runtime](docs/runtime/rive.md) | `@rive-app/canvas` | `https://unpkg.com/@rive-app/canvas@2.44.1/rive.js` | `provideRiveRuntime(() => import('@rive-app/canvas')); // lazy: fetched when the first <usa-rive> mounts` | official runtime (not bundled) |
-| [2D rigid-body physics](docs/runtime/physics.md) | `motionary/runtime/physics` | `https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/physics.iife.js` | `use(physics);` | 10.0 KB |
-| [Scene JSON (motionary-scene@1)](docs/runtime/format-scene.md) | `motionary/runtime/format-scene` | `https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/format-scene.iife.js` | `use(formatScene);` | 3.0 KB |
-| [Drag, inertia and snap points](docs/runtime/drag-snap.md) | `motionary/runtime/drag-snap` | `https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/drag-snap.iife.js` | `use(dragSnap);` | 4.0 KB |
-| [glTF animation, skinning and morph targets](docs/runtime/gltf-anim.md) | `motionary/runtime/gltf-anim` | `https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/gltf-anim.iife.js` | `use(gltfAnim);` | 4.5 KB |
-| [dotLottie themes + state machines](docs/runtime/lottie-state.md) | `motionary/runtime/lottie-state` | `https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/lottie-state.iife.js` | `use(lottieState);` | 3.5 KB |
-| [glTF decoder hooks (Draco, KTX2)](docs/runtime/gltf-decoders.md) | `motionary/runtime/gltf-decoders` | `https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/gltf-decoders.iife.js` | `use(gltfDecoders);` | 3.0 KB |
+| [2D rigid-body physics](docs/runtime/physics.md) | `motionary/runtime/physics` | `https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/physics.iife.js` | `use(physics);` | 10.0 KB |
+| [Scene JSON (motionary-scene@1)](docs/runtime/format-scene.md) | `motionary/runtime/format-scene` | `https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/format-scene.iife.js` | `use(formatScene);` | 3.0 KB |
+| [Drag, inertia and snap points](docs/runtime/drag-snap.md) | `motionary/runtime/drag-snap` | `https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/drag-snap.iife.js` | `use(dragSnap);` | 4.0 KB |
+| [glTF animation, skinning and morph targets](docs/runtime/gltf-anim.md) | `motionary/runtime/gltf-anim` | `https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/gltf-anim.iife.js` | `use(gltfAnim);` | 4.5 KB |
+| [dotLottie themes + state machines](docs/runtime/lottie-state.md) | `motionary/runtime/lottie-state` | `https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/lottie-state.iife.js` | `use(lottieState);` | 3.5 KB |
+| [glTF decoder hooks (Draco, KTX2)](docs/runtime/gltf-decoders.md) | `motionary/runtime/gltf-decoders` | `https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/gltf-decoders.iife.js` | `use(gltfDecoders);` | 3.0 KB |
 | [Official Draco decoder (Google)](docs/runtime/draco3d.md) | `draco3d` | `https://www.gstatic.com/draco/versioned/decoders/1.5.7/draco_decoder.js` | `provideGltfDecoder('draco', () => import('draco3d')); // lazy: fetched when the first Draco-compressed model loads` | official runtime (not bundled) |
 | [Official Basis Universal transcoder (Binomial)](docs/runtime/basis-transcoder.md) | `basis_transcoder.js` | `https://cdn.jsdelivr.net/gh/BinomialLLC/basis_universal@1.16.4/webgl/transcoder/build/basis_transcoder.js` | `provideGltfDecoder('ktx2', () => import('/vendor/basis_transcoder.js').then((m) => m.default || window.BASIS)); // lazy: fetched with the first KTX2 texture` | official runtime (not bundled) |
 
@@ -468,10 +469,10 @@ definePluginCard(); // registers <usa-plugin-card> — after the prerequisites
 - **CDN:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime.iife.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@14/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@14/dist/widgets.umd.js"></script>
 ```
 
 - **Minimal example:**
@@ -499,11 +500,11 @@ defineScrollScene(); // registers <usa-scroll-scene> — after the prerequisites
 - **CDN:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/scroll.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/scroll.iife.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@14/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@14/dist/widgets.umd.js"></script>
 ```
 
 - **Minimal example:**
@@ -532,11 +533,11 @@ defineTextSplitter(); // registers <usa-text-splitter> — after the prerequisit
 - **CDN:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/text.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/text.iife.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@14/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@14/dist/widgets.umd.js"></script>
 ```
 
 - **Minimal example:**
@@ -562,11 +563,11 @@ defineSmoothScroll(); // registers <usa-smooth-scroll> — after the prerequisit
 - **CDN:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/smooth.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/smooth.iife.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@14/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@14/dist/widgets.umd.js"></script>
 ```
 
 - **Minimal example:**
@@ -595,14 +596,14 @@ defineGlScene(); // registers <usa-gl-scene> — after the prerequisites
 - **CDN:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/gl.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/format-gltf.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/format-obj.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/gltf-anim.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/gl.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/format-gltf.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/format-obj.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/gltf-anim.iife.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@14/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@14/dist/widgets.umd.js"></script>
 ```
 
 - **Minimal example:**
@@ -628,11 +629,11 @@ defineLottiePlayer(); // registers <usa-lottie-player> — after the prerequisit
 - **CDN:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/vector.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/vector.iife.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@14/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@14/dist/widgets.umd.js"></script>
 ```
 
 - **Minimal example:**
@@ -659,8 +660,8 @@ defineRive(); // registers <usa-rive> — after the prerequisites
 ```html
 <script src="https://unpkg.com/@rive-app/canvas@2.44.1/rive.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@14/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@14/dist/widgets.umd.js"></script>
 ```
 
 - **Minimal example:**
@@ -687,12 +688,12 @@ definePhysicsPlayground(); // registers <usa-physics-playground> — after the p
 - **CDN:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/physics.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/format-scene.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/physics.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/format-scene.iife.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@14/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@14/dist/widgets.umd.js"></script>
 ```
 
 - **Minimal example:**
@@ -718,11 +719,11 @@ defineSnapCarousel(); // registers <usa-snap-carousel> — after the prerequisit
 - **CDN:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/drag-snap.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/drag-snap.iife.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@14/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@14/dist/widgets.umd.js"></script>
 ```
 
 - **Minimal example:**
@@ -753,12 +754,12 @@ defineDotLottie(); // registers <usa-dotlottie> — after the prerequisites
 - **CDN:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/vector.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/lottie-state.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/vector.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/lottie-state.iife.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@14/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@14/dist/widgets.umd.js"></script>
 ```
 
 - **Minimal example:**
@@ -789,15 +790,15 @@ defineGlModel(); // registers <usa-gl-model> — after the prerequisites
 - **CDN:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/gl.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/format-gltf.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/gltf-decoders.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/gl.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/format-gltf.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/gltf-decoders.iife.js"></script>
 <script src="https://www.gstatic.com/draco/versioned/decoders/1.5.7/draco_decoder.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/BinomialLLC/basis_universal@1.16.4/webgl/transcoder/build/basis_transcoder.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@14/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@14/dist/widgets.umd.js"></script>
 ```
 
 - **Minimal example:**

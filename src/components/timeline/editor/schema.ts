@@ -9,7 +9,7 @@ const value = { oneOf: [{ type: 'number' }, { type: 'string', maxLength: 2048 }]
 
 export const TIMELINE_DOC_SCHEMA = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
-  $id: 'https://cdn.jsdelivr.net/npm/motionary@13/docs/timeline-doc.schema.json',
+  $id: 'https://cdn.jsdelivr.net/npm/motionary@14/docs/timeline-doc.schema.json',
   title: 'motionary-timeline v1',
   type: 'object',
   additionalProperties: false,

@@ -2,7 +2,9 @@
 // motionary — command line (11.5).
 //   npx motionary doctor [paths…] [--json]   scan a project for deprecated import paths (exit 1 when found)
 //   npx motionary export --target css|wxss|arkts   presets + motion tokens for other platforms (12.1)
-//   npx motionary migrate <files…> [--write|--out f] [--diff] [--report] [--json] [--tokenize]   v1 motion JSON → scene v2 draft (13.9)
+//   npx motionary migrate <files…> [--write|--out f] [--diff] [--report] [--json] [--tokenize]   v1 motion JSON → scene v2 (13.9; official format since 14.0)
+//   npx motionary migrate --code [paths…] [--write] [--json]   rewrite the 14.0 import moves in source files (14.0)
+//   npx motionary codemod <5–13> [args…]   run an older usa-codemod-<n> (5–10 left the package bin in 14.0)
 //   npx motionary help
 // Old subpaths still work (removed in 13.0) and never warn at runtime; `doctor` is how a project finds them.
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
@@ -42,8 +44,15 @@ const HELP = `motionary <command>
   compat <version> [--json]  what a project on <version> can use and what changed after it (from the manifest) — docs/version-compat.md
   migrate <files…> [--dry-run] [--write | --out file] [--diff] [--report] [--json] [--tokenize]
                              migrate motionary-timeline v1 / <usa-player> animation JSON / playground state to the
-                             motionary-scene v2 DRAFT (14.0 format). Dry run by default; --write saves <name>.scene.json
+                             motionary-scene v2 (the 14.0 format). Dry run by default; --write saves <name>.scene.json
                              next to each input (never overwrites it). Exit 1 when any file fails — docs/migrating-to-v14.md
+  migrate --code [paths…] [--write] [--json]
+                             rewrite the 14.0 import moves in source files: normalizeAnimation → motionary/compat-v13,
+                             motionary/components/scene-v2 → motionary/scene, usa-codemod-5…10 scripts → motionary codemod <n>,
+                             CDN motionary@10…13/ → motionary@14/.
+                             Dry run by default (default path: current directory)
+  codemod <5–13> [--write] [paths…]
+                             run the usa-codemod-<n> upgrade tool (5–10 are 13.x compat tools, no longer package bins)
   help                       this text
 
 Deprecated subpaths (work until ${REMOVED_IN}, no runtime warning):
@@ -100,6 +109,67 @@ export function runMigrate(rest, S) {
   if (json) process.stdout.write(JSON.stringify(results, null, 2) + '\n');
   return failed ? 1 : 0;
 }
+// --- 14.0: migrate --code + codemod -------------------------------------------------------------
+const PKG = '(motionary|use-scroll-animate)';
+/** Rewrite the 14.0 import moves in one source text. Returns { code, changes }. Idempotent. */
+export function migrateCode(source) {
+  const changes = [];
+  let code = source.replace(new RegExp(`import\\s*\\{([^}]*)\\}\\s*from\\s*(['"])${PKG}/components/effects\\2;?`, 'g'), (m, names, q, pkg) => {
+    const list = names.split(',').map((x) => x.trim()).filter(Boolean);
+    const moved = list.filter((x) => /^normalizeAnimation(\s+as\s+\w+)?$/.test(x));
+    if (!moved.length) return m;
+    changes.push(`normalizeAnimation → ${pkg}/compat-v13`);
+    const rest = list.filter((x) => !moved.includes(x));
+    const compat = `import { ${moved.join(', ')} } from ${q}${pkg}/compat-v13${q};`;
+    return rest.length ? `import { ${rest.join(', ')} } from ${q}${pkg}/components/effects${q};\n${compat}` : compat;
+  });
+  code = code.replace(new RegExp(`(['"\`])${PKG}/components/scene-v2\\1`, 'g'), (m, q, pkg) => {
+    changes.push(`${pkg}/components/scene-v2 → ${pkg}/scene`);
+    return `${q}${pkg}/scene${q}`;
+  });
+  code = code.replace(/(npx\s+)?usa-codemod-(5|6|7|8|9|10)\b/g, (m, npx, n) => {
+    changes.push(`usa-codemod-${n} → motionary codemod ${n}`);
+    return `${npx || ''}motionary codemod ${n}`;
+  });
+  code = code.replace(/\b(motionary|use-scroll-animate)@(1[0-3])(?=\/)/g, (m, pkg, major) => {
+    changes.push(`${pkg}@${major}/ → ${pkg}@14/ (CDN major)`);
+    return `${pkg}@14`;
+  });
+  return { code, changes };
+}
+/** `motionary migrate --code`: returns the exit code. */
+export function runMigrateCode(rest) {
+  const write = rest.includes('--write');
+  const out = [];
+  for (const root of rest.filter((a) => !a.startsWith('--')).concat(rest.some((a) => !a.startsWith('--')) ? [] : ['.'])) {
+    if (!existsSync(root)) { console.error(`motionary migrate --code: ${root} not found`); return 2; }
+    for (const f of walk(root)) {
+      const src = readFileSync(f, 'utf8');
+      const { code, changes } = migrateCode(src);
+      if (!changes.length) continue;
+      out.push({ file: f, changes });
+      if (write) writeFileSync(f, code);
+    }
+  }
+  if (rest.includes('--json')) console.log(JSON.stringify({ write, files: out }, null, 2));
+  else {
+    for (const r of out) console.log(`${r.file}\n${r.changes.map((c) => `  - ${c}`).join('\n')}`);
+    console.log(`\nmotionary migrate --code: ${out.reduce((n, r) => n + r.changes.length, 0)} change(s) in ${out.length} file(s)${write ? ' written' : ' (dry run — add --write to apply)'}.`);
+  }
+  return 0;
+}
+// static specifiers (bundlers / vite cannot analyse a template import next to a shebang)
+const CM = { 5: () => import('./usa-codemod-5.mjs'), 6: () => import('./usa-codemod-6.mjs'), 7: () => import('./usa-codemod-7.mjs'), 8: () => import('./usa-codemod-8.mjs'), 9: () => import('./usa-codemod-9.mjs'), 10: () => import('./usa-codemod-10.mjs'), 11: () => import('./usa-codemod-11.mjs'), 12: () => import('./usa-codemod-12.mjs'), 13: () => import('./usa-codemod-13.mjs') };
+const CODEMODS = Object.keys(CM).map(Number);
+/** `motionary codemod <n> [args…]`: runs bin/usa-codemod-<n>.mjs; returns the exit code. */
+export async function runCodemod(rest) {
+  const n = Number(rest[0]);
+  if (!CODEMODS.includes(n)) { console.error(`usage: motionary codemod <${CODEMODS[0]}–${CODEMODS[CODEMODS.length - 1]}> [--write] [paths…]`); return 2; }
+  const m = await CM[n]();
+  m.run(rest.slice(1));
+  return 0;
+}
+
 const TOKENS = () => { try { return JSON.parse(readFileSync(new URL('../docs/motion.tokens.json', import.meta.url), 'utf8')); } catch { return JSON.parse(readFileSync(join(process.cwd(), 'docs/motion.tokens.json'), 'utf8')); } }; // non-file import.meta.url under jsdom
 
 /** env.presets / env.tokens are for tests; the CLI loads PRESETS from the built package (dist/index.js). */
@@ -121,6 +191,8 @@ export function main(argv, env = {}) {
       return 0;
     });
   }
+  if (cmd === 'codemod') return runCodemod(rest);
+  if (cmd === 'migrate' && rest.includes('--code')) return runMigrateCode(rest.filter((a) => a !== '--code'));
   if (cmd === 'migrate') {
     if (env.sceneV2) return runMigrate(rest, env.sceneV2);
     return runMigrate(rest, createRequire(import.meta.url)('../dist/components/scene-v2.cjs'));

@@ -131,7 +131,7 @@ describe('14.0 Timeline editor reads and writes scene v2', () => {
     expect(timelineDocFromScene(sceneV2FromTimeline(doc)).doc).toEqual(normalizeTimelineDoc(doc));
   });
   it('timelineDocFromScene resolves tokens and reports what timeline v1 cannot hold', () => {
-    const { doc, lost } = timelineDocFromScene(migrateToSceneV2(fx('player-presets-effects.json')).scene!);
+    const { doc, lost } = timelineDocFromScene(migrateToSceneV2(fx('player-presets-effects.json')).doc!);
     expect(doc.format).toBe('motionary-timeline');
     expect(lost.length).toBeGreaterThan(0);
     expect(lost.map((l) => l.message).join(' ')).toMatch(/preset|effect/);

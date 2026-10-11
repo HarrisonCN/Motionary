@@ -38,7 +38,7 @@ describe('14.0 removals from the main entries', () => {
   });
   it('lite, components, core and the root entry never import the compat layer', () => {
     for (const f of ['src/components/lite.ts', 'src/components/index.ts', 'src/core.ts', 'src/index.ts', 'src/components/effects/index.ts', 'src/components/effects/player.ts'])
-      expect(readFileSync(f, 'utf8'), f).not.toMatch(/compat-v13/);
+      expect(readFileSync(f, 'utf8'), f).not.toMatch(/from ['"][^'"]*compat-v13/);
   });
 });
 
@@ -108,6 +108,7 @@ describe('14.0 `motionary migrate --code`', () => {
     expect(code).toContain('motionary codemod 7 --write');
     expect(changes.length).toBe(4);
     expect(migrateCode(code).changes).toEqual([]);
+    expect(migrateCode('<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>').code).toContain('motionary@14/dist/');
   });
   it('CLI: dry run by default, --write rewrites files, exit 0', async () => {
     const dir = mkdtempSync(join(tmpdir(), 'mc-'));

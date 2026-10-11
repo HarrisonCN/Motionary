@@ -130,7 +130,7 @@ describe('7.9 widgets behave', () => {
     expect(r.changes.length).toBe(2);
     expect(r.manual.some((m: string) => m.includes('defineStarRating'))).toBe(true);
     const pkg = JSON.parse(readFileSync('package.json', 'utf8'));
-    expect(pkg.bin['usa-codemod-8']).toBe('./bin/usa-codemod-8.mjs');
+    expect(pkg.bin['usa-codemod-8']).toBeUndefined(); // 14.0: `npx motionary codemod 8`
     expect(readFileSync('docs/upgrading-8.md', 'utf8')).toContain('usa-codemod-8');
   });
 });

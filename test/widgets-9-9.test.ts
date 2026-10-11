@@ -32,7 +32,7 @@ describe('9.9 plugins API + 10.0 deprecations', () => {
     expect(r.code).toBe("import { registerAllPlugins } from 'motionary/fx2';\nregisterAllPlugins();\nmyregisterEffectPacksX();");
     expect(codemod10(r.code).changes).toEqual([]);
     const pkg = JSON.parse(readFileSync('package.json', 'utf8'));
-    expect(pkg.bin['usa-codemod-10']).toBe('./bin/usa-codemod-10.mjs');
+    expect(pkg.bin['usa-codemod-10']).toBeUndefined(); // 14.0: `npx motionary codemod 10`
     expect(readFileSync('docs/upgrading-10.md', 'utf8')).toContain('usa-codemod-10');
     expect(readFileSync('docs/deprecations.md', 'utf8')).toContain('Deprecated in 9.9, removed in 10.0 (released)');
     expect(readFileSync('src/components/widgets/auto.ts', 'utf8')).toContain('registerAllPlugins');

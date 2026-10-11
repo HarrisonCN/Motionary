@@ -11,7 +11,9 @@ URLs. Nothing else changes: the `<usa-*>` tags, the `usa-` classes, the globals 
 
 | Tag | Points to | Install |
 |---|---|---|
-| `latest` | the current major release and its patches (13.0.2 today) | `npm i motionary` |
+| `latest` | the current major release and its patches (14.0.0 today) | `npm i motionary` |
+| `v<major>` | each major line from 14 on, e.g. `v14` → the newest 14.x release published with that tag | `npm i motionary@v14` |
+| `v13-lts` | the last 13.x release (13.9.0), for projects that stay on 13 | `npm i motionary@v13-lts` |
 | `v<major>-<minor>` | each minor release, e.g. `v12-9` → 12.9.0, `v12-5` → 12.5.0 | `npm i motionary@v12-9` or `npm i motionary@12.9.0` |
 
 `latest` moves when a new major ships (x.0.0) and with each patch of it (x.0.y, bug fixes only). Minor releases get their own `v<major>-<minor>` tag, so a plain
@@ -26,7 +28,7 @@ contract, size, tree-shaking, playground, the Node matrix and the Chromium / Fir
 
 ## CDN majors
 
-CDN URLs pin a major: `https://unpkg.com/motionary@13/dist/…` or `https://cdn.jsdelivr.net/npm/motionary@13/dist/…`. A new
+CDN URLs pin a major: `https://unpkg.com/motionary@14/dist/…` or `https://cdn.jsdelivr.net/npm/motionary@14/dist/…`. A new
 major changes the docs, the showcase and `RUNTIME_CDN` to the new major. URLs pinned to an exact version (`motionary@12.4.0`)
 keep working. `npx usa-codemod-13 --write` rewrites URLs pinned to `@10` / `@11` / `@12`.
 
@@ -34,6 +36,7 @@ keep working. `npx usa-codemod-13 --write` rewrites URLs pinned to `@10` / `@11`
 
 Breaking changes come only in majors, and each one has a guide and a codemod:
 
+- [migrating-to-v14.md](./migrating-to-v14.md): Motion Engine v2, Scene Format v2, removals kept in `motionary/compat-v13`, `npx motionary migrate --code`
 - [upgrading-13.md](./upgrading-13.md): removed import paths, `npx usa-codemod-13`
 - [upgrading-12.md](./upgrading-12.md): component contract, legacy event names, `npx usa-codemod-12`
 - [upgrading-11.md](./upgrading-11.md), [upgrading-10.md](./upgrading-10.md) and older (`docs/upgrading-*.md`)

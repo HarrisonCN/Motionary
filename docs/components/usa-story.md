@@ -6,7 +6,7 @@
 
 - **Category:** fx · **since** 5.4 · **changed in** 11.8, 12.0, 13.4
 - **Import:** `import { defineStory } from 'motionary/components/effects'` then `defineStory();`
-- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@14/dist/components.umd.js"></script>`
 - **Attributes:** `template`, `zoom`, `label`
 - **Events:** `usa:step`
 - **Slots:** —

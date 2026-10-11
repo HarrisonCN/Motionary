@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 7.5
 - **Import:** `import { defineLeaderboard } from 'motionary/components/widgets'` then `defineLeaderboard();`
-- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@14/dist/widgets.umd.js"></script>`
 - **Attributes:** `label`, `limit`, `me`
 - **Events:** `usa:rank`
 - **Slots:** —

@@ -4,7 +4,7 @@
 // 13.4 frame scheduler and the 8.0 motion clock, reusing the timeline runtime's position grammar and presets.
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
-import { animate, sequence, parallel, stagger, spring, timeline, cubicBezier, toEasingFn, MOTION_ENGINE_VERSION } from '../src/components/motion/index';
+import { animate, sequence, parallel, stagger, spring, timeline, playScene, cubicBezier, toEasingFn, MOTION_ENGINE_VERSION } from '../src/components/motion/index';
 import { setClock } from '../src/components/base';
 
 const pkg = JSON.parse(readFileSync('package.json', 'utf8'));
@@ -141,7 +141,7 @@ describe('14.0 Motion Engine v2: one controller interface', () => {
     c.seek(100);
     expect(r.last()).toBeGreaterThan(0);
     expect(r.last()).toBeLessThan(0.5);
-    c.seek(250); // second iteration (alternate) at its midpoint, running backwards
+    c.seek(200); // second pass (alternate, running backwards): local 100 → 50 ms into the eased span
     const mid = r.last();
     c.seek(450);
     expect(r.last()).toBe(1);
@@ -230,7 +230,8 @@ describe('14.0 Motion Engine v2: composition', () => {
     expect(made.map((a) => a.currentTime)).toEqual([60, 10, -40]);
     const c = stagger('b', [{ opacity: 0 }, { opacity: 1 }], { duration: 100, each: 50, from: 'center', autoplay: false });
     c.seek(0);
-    expect(made.slice(3).map((a) => a.currentTime)).toEqual([-50, 0, -50]);
+    const kids = Array.from(document.body.children);
+    expect(made.slice(3).sort((p, q) => kids.indexOf(p.el) - kids.indexOf(q.el)).map((a) => a.currentTime)).toEqual([-50, 0, -50]);
     const x = rec(), y = rec();
     const k = stagger([animate(x.fn, { duration: 100 }), animate(y.fn, { duration: 100 })], { each: 100, autoplay: false });
     expect(k.duration).toBe(200);
@@ -282,6 +283,27 @@ describe('14.0 Motion Engine v2: composition', () => {
   });
   it('infinite repeat cannot be composed (clear error)', () => {
     expect(() => sequence([animate(rec().fn, { duration: 10, repeat: Infinity })])).toThrow(/infinite/i);
+  });
+});
+
+describe('14.0 Motion Engine v2: playScene (scene v2 → one controller)', () => {
+  it('plays a scene v2 document with the same loader as <usa-player>', () => {
+    const made = fakeWaapi();
+    const root = document.createElement('div');
+    root.innerHTML = '<h1 class="title"></h1><div class="glow"></div>';
+    const scene = JSON.parse(readFileSync('test/fixtures/scene-v2/timeline-basic.scene.json', 'utf8'));
+    const c = playScene(root, scene, { autoplay: false });
+    expect(c.duration).toBe(1200);
+    c.seek(300);
+    expect(made).toHaveLength(2);
+    expect(made[0].currentTime).toBe(300);
+    expect(made[1].currentTime).toBe(100);
+    const fired: string[] = [];
+    const e = playScene(root, { format: 'motionary-scene', version: 2, layers: [{ id: 'a', type: 'track', target: '.title', start: 100, effect: 'jelly' }] }, { autoplay: false, onEffect: (_el, n) => fired.push(n) });
+    e.seek(50);
+    expect(fired).toEqual([]);
+    e.finish();
+    expect(fired).toEqual(['jelly']);
   });
 });
 

@@ -16,7 +16,7 @@ describe('6.1.1 — renamed to Motionary (no breaking change)', () => {
     // 6.4: GitHub Pages paths are case-sensitive — the repo is HarrisonCN/Motionary
     expect(pkg.homepage).toBe('https://harrisoncn.github.io/Motionary/showcase/');
     for (const f of ['README.md', 'README_zh.md', 'README_ja.md', 'package.json', 'docs/components.md', 'showcase/index.html', 'showcase/components.html', 'showcase/playground.html', 'showcase/story.html']) expect(read(f), f).not.toMatch(/github\.io\/motionary\//);
-    expect(Object.keys(pkg.bin)).toEqual(expect.arrayContaining(['usa-codemod-6']));
+    expect(Object.keys(pkg.bin)).toEqual(expect.arrayContaining(['usa-codemod-13', 'motionary'])); // 14.0: usa-codemod-5…10 run via `motionary codemod <n>`
   });
 
   it('READMEs are rebranded, mention the old name and link the four showcase pages', () => {

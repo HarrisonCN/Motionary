@@ -6,7 +6,7 @@ Appears after you scroll, shows reading progress as a ring and springs the page 
 
 - **Category:** page · **since** 2.7 · **changed in** 13.1
 - **Import:** `import { defineBackToTop } from 'motionary/components/page'` then `defineBackToTop();`
-- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@14/dist/components.umd.js"></script>`
 - **Attributes:** `label`, `offset`, `focus-target`
 - **Events:** —
 - **Slots:** —

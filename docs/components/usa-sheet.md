@@ -6,7 +6,7 @@
 
 - **Category:** transitions · **since** 6.3 · **changed in** 6.6, 13.0, 13.1, 13.3
 - **Import:** `import { defineSheet } from 'motionary/components/widgets'` then `defineSheet();`
-- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@14/dist/widgets.umd.js"></script>`
 - **Attributes:** `side`, `label`, `persistent`
 - **Events:** `usa:open`, `usa:close`
 - **Slots:** —

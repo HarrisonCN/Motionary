@@ -1,6 +1,6 @@
-# Scene Format v2 (draft)
+# Scene Format v2
 
-> **Draft (13.9).** `motionary-scene` v2 is the planned motion document for 14.0, published early so tools can try it. The shape may still change before 14.0, and nothing in 13.x plays it directly: convert it back with `sceneV2ToAnimation()` / `sceneV2ToTimeline()`. Schema: [scene-v2.schema.json](./scene-v2.schema.json).
+> **Official since 14.0.** `motionary-scene` v2 is Motionary's motion document (drafted in 13.9; the shape did not change). `<usa-player>` plays it natively, the Timeline editor reads and writes it, and Motion Engine v2 plays it with `playScene()` (`motionary/motion`). Version 1 documents (`motionary-timeline` v1, `<usa-player>` animation JSON v1) are read through auto-migration. Schema: [scene-v2.schema.json](./scene-v2.schema.json). Entry: `motionary/scene` (`motionary/components/scene-v2` stays as an alias).
 
 In 13.x, motion data comes in three shapes. Scene v2 is one document for all of them:
 
@@ -27,13 +27,13 @@ In 13.x, motion data comes in three shapes. Scene v2 is one document for all of 
 }
 ```
 
-## API: `motionary/components/scene-v2`
+## API: `motionary/scene`
 
-This is an opt-in entry point. It is not part of `motionary/components`, and adds 0 bytes to lite.
+This is an opt-in entry point (same files as `motionary/components/scene-v2`). It is not part of `motionary/components`, and adds 0 bytes to lite.
 
 | Export | What it does |
 |---|---|
-| `SCENE_V2_FORMAT`, `SCENE_V2_VERSION`, `SCENE_V2_STATUS` (`'draft'`), `SCENE_V2_LIMITS`, `SCENE_V2_SCHEMA` | constants and the JSON Schema (draft 2020-12) |
+| `SCENE_V2_FORMAT`, `SCENE_V2_VERSION`, `SCENE_V2_STATUS` (`'stable'` since 14.0; `'draft'` in 13.9), `SCENE_V2_LIMITS`, `SCENE_V2_SCHEMA` | constants and the JSON Schema (draft 2020-12) |
 | `validateSceneV2(docOrText)` | every problem as `{ path, message }`. **Never throws**, not on wrong types, circular objects or invalid JSON. Also checks what the schema cannot: unique ids, parents that are groups, group cycles, easings, token references |
 | `isSceneV2(x)` | `validateSceneV2(x).length === 0` |
 | `detectMotionFormat(x)` | `'motionary-scene@2' \| 'motionary-timeline@1' \| 'animation@1' \| 'playground' \| 'unknown'` |
@@ -57,6 +57,14 @@ npx motionary migrate hero.json --tokenize --write   # literal easings / compone
 ```
 
 The exit code is 0 when every file migrated, 1 when any failed (problems are printed and nothing is written for that file), and 2 for usage errors.
+
+## Who reads it (14.0)
+
+| Consumer | Scene v2 | v1 documents |
+|---|---|---|
+| `<usa-player>` / `createPlayer()` | native: layers → tracks (token references resolved, muted / solo honoured, `random()` with the seed) | timeline v1: auto-migrated; animation JSON v1 with `format` / `version`: as before. Playground state and unversioned JSON: removed, `installCompatV13()` from `motionary/compat-v13` reads them |
+| Timeline editor (`motionary/components/timeline-editor`) | `timelineDocToScene(doc)` writes v2 losslessly; `timelineDocFromScene(scene)` opens v2 with a `lost` list; `loadMotionDoc(any)` opens any motion document | editor documents are timeline v1 internally (a subset of v2) |
+| Motion Engine v2 (`motionary/motion`) | `playScene(root, scene)` returns the standard controller (play / pause / seek / reverse / finished / cancel) | timeline v1 and animation JSON v1 too |
 
 ## Round trips (tested on golden fixtures in `test/fixtures/scene-v2/`)
 

@@ -17,7 +17,7 @@
 import { readFileSync, writeFileSync, readdirSync, statSync } from 'node:fs';
 import { join, extname } from 'node:path';
 import { pathToFileURL } from 'node:url';
-if (!process.env.MOTIONARY_NO_DEPRECATION) console.error('[motionary] usa-codemod-7 is deprecated and removed in 14.0 — run `npx motionary doctor` and the newest codemod (docs/deprecations-v14.md#old-codemods).');
+if (!process.env.MOTIONARY_NO_DEPRECATION) console.error('[motionary] usa-codemod-7 left the package bin in 14.0 (a 13.x compat tool): run it as `npx motionary codemod 7`. For 14.0 itself use `npx motionary migrate --code` (docs/migrating-to-v14.md).');
 
 const EXT = new Set(['.js', '.mjs', '.cjs', '.jsx', '.ts', '.tsx', '.mts', '.cts', '.vue', '.svelte', '.html', '.astro', '.md', '.mdx']);
 export const RENAMES = {
