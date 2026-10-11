@@ -80,13 +80,14 @@ export function adaptKeyframes(frames: Keyframe[], level: MotionSensitivity = co
   if (level === 'static') return [frames[frames.length - 1]];
   return frames.map((f) => {
     const out: Keyframe = {};
-    for (const [k, v] of Object.entries(f)) {
-      if (k === 'offset' || k === 'easing' || k === 'composite') out[k] = v as any;
-      else if (level === 'minimal') {
-        if (k === 'opacity') out[k] = v as any;
-      } else if (k === 'rotate' || k === 'scale' || (k === 'transform' && VESTIBULAR.test(String(v)))) continue;
-      else out[k] = v as any;
-    }
+    for (const [k, v] of Object.entries(f))
+      if (
+        k === 'offset' ||
+        k === 'easing' ||
+        k === 'composite' ||
+        (level === 'minimal' ? k === 'opacity' : !(k === 'rotate' || k === 'scale' || (k === 'transform' && VESTIBULAR.test(String(v)))))
+      )
+        out[k] = v as any;
     return out;
   });
 }
@@ -205,7 +206,8 @@ export function getBase(): BaseCtor {
   if (baseClass) return baseClass;
   class Base extends HTMLElement {
     private _cleanups: Cleanup[] = [];
-    private _connected = false;
+    // undefined until the first connect (falsy, same as false) — no initializer keeps the base class smaller
+    declare private _connected: boolean;
 
     get reduced(): boolean {
       return prefersReducedMotion();
@@ -216,17 +218,13 @@ export function getBase(): BaseCtor {
       this._connected = true;
       // 13.5.0: a property set before the element was defined (React 18 wrappers, Vue `.prop`, Svelte, Angular
       // `[prop]` while hydrating, then define) sits on the instance and hides the class's setter — move it through.
-      for (const [k, v] of Object.entries(this)) if (k in Base.prototype || k in Object.getPrototypeOf(this)) delete (this as any)[k], ((this as any)[k] = v);
+      for (const [k, v] of Object.entries(this)) if (k in Object.getPrototypeOf(this)) delete (this as any)[k], ((this as any)[k] = v);
       styleLoader?.(this.localName);
       // Upgraded while the parser is still inside us (a <script> in <head>
       // defined the element): children/text are not there yet, so wait.
       if (document.readyState === 'loading' && !this.nextSibling && !this.childNodes.length) {
-        const go = () => {
-          if (this._connected && this.isConnected) this.mount();
-        };
-        document.addEventListener('DOMContentLoaded', go, { once: true });
-        this._cleanups.push(() => document.removeEventListener('DOMContentLoaded', go));
-        return;
+        // listen() = addEventListener + a cleanup that removes it (same as before, smaller)
+        return this.listen(document, 'DOMContentLoaded', () => this._connected && this.isConnected && this.mount(), { once: true });
       }
       this.mount();
     }

@@ -93,5 +93,6 @@ export function createUsaComponents(React: ReactLike): Record<string, any> {
   });
 }
 
-/** `UsaAutoAnimate` → `usa-auto-animate` (inverse of {@link pascal}). */
-export const kebab = (name: string): string => name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').replace(/([A-Z])([A-Z][a-z])/g, '$1-$2').toLowerCase();
+/** `UsaAutoAnimate` → `usa-auto-animate`, `UsaCarousel3d` → `usa-carousel-3d` (inverse of {@link pascal} for the shipped tags). */
+export const kebab = (name: string): string =>
+  name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').replace(/([A-Z])([A-Z][a-z])/g, '$1-$2').replace(/([a-z])(\d)/g, '$1-$2').toLowerCase();
