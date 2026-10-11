@@ -1,2 +1,2 @@
-export { d as defineSuggestionChips } from '../chunks/suggestion-chips-CuuKEDNG.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.1.0/dist/widgets/suggestion-chips.js.map
+export { d as defineSuggestionChips } from '../chunks/suggestion-chips-BwKPsDra.js';
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.2.0/dist/widgets/suggestion-chips.js.map

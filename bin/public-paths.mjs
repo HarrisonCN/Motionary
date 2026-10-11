@@ -15,6 +15,8 @@ export const LAYER_ALIASES = {
   'compat-v13': 'components/compat-v13',
   // 14.1: Motion Tokens 2.0
   tokens: 'components/motion-tokens',
+  // 14.2: Layout Motion 2.0
+  'motion/layout': 'components/motion-layout',
 };
 
 /**

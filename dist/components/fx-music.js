@@ -1,7 +1,7 @@
-import { r as raf, b as caf } from '../chunks/base-D0sRwVz1.js';
-import { registerEffects } from '../chunks/registry-CE5_Mo_p.js';
-import { c as canvasBackground } from '../chunks/generative-D1QtbFNP.js';
-import { g as getAudio } from '../chunks/audio-CfvQzwt5.js';
+import { r as raf, b as caf } from '../chunks/base-ByyAdGqz.js';
+import { registerEffects } from '../chunks/registry-RLD_spxR.js';
+import { c as canvasBackground } from '../chunks/generative-CbMIaqxn.js';
+import { g as getAudio } from '../chunks/audio-D7mfQAUI.js';
 
 /**
  * 7.1 — Music visualization (`motionary/fx/music`, also
@@ -186,4 +186,4 @@ function registerMusicPack() {
 }
 
 export { MUSIC_FX, musicSample, registerMusicPack, syntheticSample };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.1.0/dist/components/fx-music.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.2.0/dist/components/fx-music.js.map

@@ -1,8 +1,8 @@
-import { b as isLayerLocked, i as isValidEasing, T as TimelineDocError, d as timelineDocDuration, e as isLayerActive, r as resolveRandom } from '../chunks/format-B2XGhlqH.js';
-export { a as TIMELINE_DOC_FORMAT, f as TIMELINE_DOC_LIMITS, g as TIMELINE_DOC_VERSION, h as createSeededRandom, j as createTimelineDoc, n as normalizeTimelineDoc, p as parseTimelineDoc, s as serializeTimelineDoc, t as timelineDocFromAnimation, k as timelineDocToAnimation, v as validateTimelineDoc } from '../chunks/format-B2XGhlqH.js';
+import { b as isLayerLocked, i as isValidEasing, T as TimelineDocError, d as timelineDocDuration, e as isLayerActive, r as resolveRandom } from '../chunks/format-ClNijrhe.js';
+export { a as TIMELINE_DOC_FORMAT, f as TIMELINE_DOC_LIMITS, g as TIMELINE_DOC_VERSION, h as createSeededRandom, j as createTimelineDoc, n as normalizeTimelineDoc, p as parseTimelineDoc, s as serializeTimelineDoc, t as timelineDocFromAnimation, k as timelineDocToAnimation, v as validateTimelineDoc } from '../chunks/format-ClNijrhe.js';
 import { p as parseEase } from '../chunks/ease-XN8_0sXu.js';
-import { n as now, r as raf, b as caf } from '../chunks/base-D0sRwVz1.js';
-export { l as loadMotionDoc, a as timelineDocFromScene, t as timelineDocToScene } from '../chunks/scene-DWNb4Lb1.js';
+import { n as now, r as raf, b as caf } from '../chunks/base-ByyAdGqz.js';
+export { l as loadMotionDoc, a as timelineDocFromScene, t as timelineDocToScene } from '../chunks/scene-Bc03O1V2.js';
 
 /**
  * 13.6: editing operations on a `motionary-timeline` document. Every operation
@@ -717,4 +717,4 @@ const TIMELINE_DOC_SCHEMA = {
 };
 
 export { TIMELINE_DOC_SCHEMA, TimelineDocError, addKeyframe, addLayer, bindHistoryKeys, copyKeyframes, createFixedClock, createTimelineHistory, createTimelinePreview, editableKeyframes, groupLayers, historyKeyAction, interpolateValue, isLayerActive, isLayerLocked, isValidEasing, layerSubtree, moveLayer, pasteKeyframes, removeKeyframes, removeLayers, resolveRandom, sampleTimelineDoc, scaleKeyframes, setKeyframeEasing, setKeyframeProps, shiftKeyframes, timelineDocDuration, ungroupLayer, uniqueId, updateLayers };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.1.0/dist/components/timeline-editor.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.2.0/dist/components/timeline-editor.js.map

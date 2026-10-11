@@ -1,5 +1,5 @@
-import { n as normalizePlayable } from '../chunks/player-D18aHq0n.js';
-import { s as setLegacyAnimationLoader, A as ANIMATION_FORMAT } from '../chunks/player-core-DR1WR-41.js';
+import { n as normalizePlayable } from '../chunks/player-DkhZKVZX.js';
+import { s as setLegacyAnimationLoader, A as ANIMATION_FORMAT } from '../chunks/player-core-BGIt5Gzl.js';
 
 /**
  * 13.9: deprecation notices for APIs planned for removal in 14.0
@@ -108,4 +108,4 @@ function normalizeAnimation(input) {
 }
 
 export { COMPAT_V13, installCompatV13, normalizeAnimation, upgradeLegacyAnimation };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.1.0/dist/components/compat-v13.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.2.0/dist/components/compat-v13.js.map

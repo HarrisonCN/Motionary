@@ -1,2 +1,2 @@
-export { d as defineSwitch } from '../chunks/switch-WErIYZJD.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.1.0/dist/widgets/switch.js.map
+export { d as defineSwitch } from '../chunks/switch-CMtM5gqP.js';
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.2.0/dist/widgets/switch.js.map

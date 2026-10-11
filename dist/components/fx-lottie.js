@@ -1,4 +1,4 @@
-import { registerEffects } from '../chunks/registry-CE5_Mo_p.js';
+import { registerEffects } from '../chunks/registry-RLD_spxR.js';
 
 const arr = (v) => (Array.isArray(v) ? v.map(Number) : [Number(v)]);
 /** Frames (t) → values for one transform property (static props give one key at t = ip) (9.2). */
@@ -206,4 +206,4 @@ function registerLottiePack() {
 }
 
 export { LOTTIE_FX, lottieToKeyframes, lottieToSvg, registerLottiePack, riveInputs };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.1.0/dist/components/fx-lottie.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.2.0/dist/components/fx-lottie.js.map
