@@ -122,7 +122,7 @@ const toEls = (t) => {
     return Array.from(t);
 };
 const KEYS = ['transform', 'transformOrigin', 'borderRadius', 'opacity', 'visibility'];
-const running = new WeakMap();
+const running = /*#__PURE__*/ new WeakMap();
 const save = (el) => Object.fromEntries(KEYS.map((k) => [k, el.style[k]]));
 const restore = (el, s) => KEYS.forEach((k) => (el.style[k] = s[k]));
 const restoreItem = (i) => {
