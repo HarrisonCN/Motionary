@@ -67,11 +67,11 @@ export class TimelineDocError extends Error {
 }
 
 const L = TIMELINE_DOC_LIMITS;
-const FORBIDDEN = new Set(['__proto__', 'constructor', 'prototype']);
+const FORBIDDEN = /*#__PURE__*/ new Set(['__proto__', 'constructor', 'prototype']);
 const isObj = (v: unknown): v is Record<string, any> => !!v && typeof v === 'object' && !Array.isArray(v);
-const DOC_KEYS = new Set(['format', 'version', 'name', 'duration', 'seed', 'layers', 'meta']);
-const LAYER_KEYS = new Set(['id', 'type', 'name', 'parent', 'locked', 'muted', 'solo', 'target', 'keyframes']);
-const KF_KEYS = new Set(['id', 'time', 'props', 'easing']);
+const DOC_KEYS = /*#__PURE__*/ new Set(['format', 'version', 'name', 'duration', 'seed', 'layers', 'meta']);
+const LAYER_KEYS = /*#__PURE__*/ new Set(['id', 'type', 'name', 'parent', 'locked', 'muted', 'solo', 'target', 'keyframes']);
+const KF_KEYS = /*#__PURE__*/ new Set(['id', 'time', 'props', 'easing']);
 const RANDOM = /random\(\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*\)/g;
 
 /** Whether `easing` is one the preview can evaluate (named ease, `cubic-bezier()`, `steps()`). */

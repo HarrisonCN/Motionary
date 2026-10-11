@@ -6,6 +6,7 @@
  * that state to the DOM; `createFixedClock` drives it in fixed steps for tests.
  */
 import { parseEase, type Ease } from '../../../runtime/ease';
+import { raf, caf, now } from '../../base';
 import { isLayerActive, resolveRandom, timelineDocDuration, type TimelineDoc, type TimelineValue } from './format';
 
 export interface TimelineFrame {
@@ -27,7 +28,7 @@ const hexRgb = (h: string): string => {
   const s = m[1].length === 3 ? m[1].replace(/./g, (c) => c + c) : m[1];
   return `rgb(${parseInt(s.slice(0, 2), 16)}, ${parseInt(s.slice(2, 4), 16)}, ${parseInt(s.slice(4, 6), 16)})`;
 };
-const easeCache = new Map<string, Ease>();
+const easeCache = /*#__PURE__*/ new Map<string, Ease>();
 const ease = (e: string | undefined): Ease => {
   const k = e || 'linear';
   let f = easeCache.get(k);
@@ -125,7 +126,7 @@ export interface TimelinePreview {
   seek(ms: number): TimelineFrame;
   /** Swap the document (e.g. after an edit or undo) and re-render the current time. */
   setDoc(doc: TimelineDoc): void;
-  /** Play from the current time with `requestAnimationFrame`, or step a `FixedClock` with `advance()`. */
+  /** Play from the current time on the shared frame scheduler, or step a `FixedClock` with `advance()`. */
   play(): void;
   pause(): void;
   /** Advance the attached fixed clock by `n` steps and render. */
@@ -173,7 +174,7 @@ export function createTimelinePreview(root: Element, doc: TimelineDoc, o: { cloc
     return f;
   };
   const stop = () => {
-    if (id && typeof cancelAnimationFrame === 'function') cancelAnimationFrame(id);
+    if (id) caf(id);
     id = 0;
   };
   const p: TimelinePreview = {
@@ -183,15 +184,15 @@ export function createTimelinePreview(root: Element, doc: TimelineDoc, o: { cloc
     setDoc(next) { d = next; render(t); },
     play() {
       stop();
-      if (typeof requestAnimationFrame !== 'function') return;
       if (t >= p.duration) t = 0;
-      let last = performance.now();
-      const loop = (now: number) => {
-        render(t + (now - last));
-        last = now;
-        id = t < p.duration ? requestAnimationFrame(loop) : 0;
+      let last = now();
+      const loop = () => {
+        const n = now();
+        render(t + (n - last));
+        last = n;
+        id = t < p.duration ? raf(loop, root) : 0;
       };
-      id = requestAnimationFrame(loop);
+      id = raf(loop, root);
     },
     pause: stop,
     advance(n = 1) {
