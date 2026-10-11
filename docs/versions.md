@@ -12,7 +12,7 @@ URLs. Nothing else changes: the `<usa-*>` tags, the `usa-` classes, the globals 
 | Tag | Points to | Install |
 |---|---|---|
 | `latest` | the current major release and its patches (14.0.0 today) | `npm i motionary` |
-| `v<major>` | each major line from 14 on, e.g. `v14` → the newest 14.x release published with that tag | `npm i motionary@v14` |
+| `v<major>-line` | each major line from 14 on, e.g. `v14-line` → the newest 14.x release (a bare `v14` is not allowed: npm rejects tag names that are valid SemVer ranges) | `npm i motionary@v14-line` |
 | `v13-lts` | the last 13.x release (13.9.0), for projects that stay on 13 | `npm i motionary@v13-lts` |
 | `v<major>-<minor>` | each minor release, e.g. `v12-9` → 12.9.0, `v12-5` → 12.5.0 | `npm i motionary@v12-9` or `npm i motionary@12.9.0` |
 
