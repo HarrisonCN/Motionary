@@ -540,6 +540,16 @@
         "default": "./dist/components/compat-v13.cjs"
       }
     },
+    "./motion/scene": {
+      "import": {
+        "types": "./dist/components/motion-scene.d.ts",
+        "default": "./dist/components/motion-scene.js"
+      },
+      "require": {
+        "types": "./dist/components/motion-scene.d.cts",
+        "default": "./dist/components/motion-scene.cjs"
+      }
+    },
     "./components/reveal": {
       "import": {
         "types": "./dist/components/reveal.d.ts",
@@ -4160,16 +4170,6 @@
     "./components/layout.css": "./dist/components/layout.css",
     "./components/packs.css": "./dist/components/packs.css",
     "./components/fx.css": "./dist/components/fx.css",
-    "./motion/scene": {
-      "import": {
-        "types": "./dist/components/motion-scene.d.ts",
-        "default": "./dist/components/motion-scene.js"
-      },
-      "require": {
-        "types": "./dist/components/motion-scene.d.cts",
-        "default": "./dist/components/motion-scene.cjs"
-      }
-    },
     "./package.json": "./package.json"
   },
   "files": [

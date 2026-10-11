@@ -5,4 +5,4 @@ var widgets_prizeWheel = require('../chunks/prize-wheel-emDopI5c.cjs');
 
 
 exports.definePrizeWheel = widgets_prizeWheel.definePrizeWheel;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.9.0/dist/widgets/prize-wheel.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.0.0/dist/widgets/prize-wheel.cjs.map

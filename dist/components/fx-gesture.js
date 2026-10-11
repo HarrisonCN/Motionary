@@ -1,4 +1,4 @@
-import { registerEffects } from '../chunks/registry-DKs_BiEo.js';
+import { registerEffects } from '../chunks/registry-CE5_Mo_p.js';
 
 /** Scale factor of a two-finger pinch from start points (a1, a2) to current points (b1, b2) (8.7). */
 function pinchScale(a1, a2, b1, b2) {
@@ -101,4 +101,4 @@ function registerGesture3Pack() {
 }
 
 export { GESTURE3_FX, orientationToTilt, pinchAngle, pinchScale, registerGesture3Pack };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.9.0/dist/components/fx-gesture.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.0.0/dist/components/fx-gesture.js.map

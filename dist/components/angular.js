@@ -56,4 +56,4 @@ function defineUsa(categories) {
 const usaDetail = (e) => e.detail;
 
 export { USA_TAGS, defineUsa, isUsaElement, provideUsa, usaDetail, usaInitializer };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.9.0/dist/components/angular.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.0.0/dist/components/angular.js.map

@@ -320,7 +320,7 @@ declare function createTimelinePreview(root: Element, doc: TimelineDoc, o?: {
 
 declare const TIMELINE_DOC_SCHEMA: {
     readonly $schema: "https://json-schema.org/draft/2020-12/schema";
-    readonly $id: "https://cdn.jsdelivr.net/npm/motionary@13/docs/timeline-doc.schema.json";
+    readonly $id: "https://cdn.jsdelivr.net/npm/motionary@14/docs/timeline-doc.schema.json";
     readonly title: "motionary-timeline v1";
     readonly type: "object";
     readonly additionalProperties: false;
@@ -451,5 +451,121 @@ declare const TIMELINE_DOC_SCHEMA: {
     };
 };
 
-export { TIMELINE_DOC_FORMAT, TIMELINE_DOC_LIMITS, TIMELINE_DOC_SCHEMA, TIMELINE_DOC_VERSION, TimelineDocError, addKeyframe, addLayer, bindHistoryKeys, copyKeyframes, createFixedClock, createSeededRandom, createTimelineDoc, createTimelineHistory, createTimelinePreview, editableKeyframes, groupLayers, historyKeyAction, interpolateValue, isLayerActive, isLayerLocked, isValidEasing, layerSubtree, moveLayer, normalizeTimelineDoc, parseTimelineDoc, pasteKeyframes, removeKeyframes, removeLayers, resolveRandom, sampleTimelineDoc, scaleKeyframes, serializeTimelineDoc, setKeyframeEasing, setKeyframeProps, shiftKeyframes, timelineDocDuration, timelineDocFromAnimation, timelineDocToAnimation, ungroupLayer, uniqueId, updateLayers, validateTimelineDoc };
-export type { AddLayerOptions, ApplyOptions, FixedClock, HistoryOptions, KeyframeClip, TimelineDoc, TimelineFrame, TimelineHistory, TimelineKeyframe, TimelineLayer, TimelinePreview, TimelineProblem, TimelineValue };
+/**
+ * motionary/components/tokens — motion design tokens (4.2).
+ *
+ * One source of truth for durations, easings and springs: as CSS custom
+ * properties (`--usa-duration-fast`, `--usa-easing-emphasized`,
+ * `--usa-spring-bouncy-stiffness`…), as W3C Design Tokens JSON, and importable
+ * from Figma Tokens (Tokens Studio) or Style Dictionary exports.
+ *
+ * ```ts
+ * import { applyMotionTokens, importMotionTokens, motionToken } from 'motionary/components/tokens';
+ * applyMotionTokens(importMotionTokens(await (await fetch('/tokens.json')).json()));
+ * el.animate(frames, { duration: motionToken('duration', 'slow'), easing: motionToken('easing', 'emphasized') });
+ * ```
+ */
+interface SpringToken {
+    stiffness: number;
+    damping: number;
+    mass: number;
+}
+interface MotionTokens {
+    /** Durations in ms. */
+    duration: Record<string, number>;
+    /** CSS easing strings. */
+    easing: Record<string, string>;
+    /** Spring physics parameters. */
+    spring: Record<string, SpringToken>;
+}
+
+declare const SCENE_V2_FORMAT = "motionary-scene";
+/** A literal, or a token reference such as `"{duration.fast}"`, `"{easing.standard}"`. */
+type SceneValue = number | string;
+interface SceneKeyframe {
+    id: string;
+    /** ms from the start of the scene. */
+    time: number;
+    props: Record<string, SceneValue>;
+    /** Easing of the segment to the next keyframe (CSS / named ease / `"{easing.x}"`). Default linear. */
+    easing?: string;
+    /** Web Animations composite of this keyframe (kept from player JSON). */
+    composite?: 'replace' | 'add' | 'accumulate';
+}
+interface SceneComponentBinding {
+    /** Custom element tag, e.g. `usa-fade-up`. */
+    tag: string;
+    /** Motion props (`duration`, `delay`, `easing`, `spring`, …): literals or token references. */
+    props: Record<string, SceneValue>;
+}
+interface SceneLayer {
+    id: string;
+    type: 'track' | 'group';
+    name?: string;
+    parent?: string;
+    locked?: boolean;
+    muted?: boolean;
+    solo?: boolean;
+    /** Tracks: selector inside the scene root (`:scope` = the root). */
+    target?: string;
+    /** Tracks: when the layer starts (ms). Keyframe times stay absolute; preset / effect tracks need it. */
+    start?: number;
+    /** Tracks: length (ms) of a preset track, or the span player JSON gave a keyframe track. */
+    duration?: number;
+    /** Tracks: default easing for segments without their own. */
+    easing?: string;
+    keyframes?: SceneKeyframe[];
+    /** Tracks: a named timeline preset (`fade-up`, `scale`, …) instead of keyframes. */
+    preset?: string;
+    /** Tracks: a registered effect fired at `start` instead of keyframes. */
+    effect?: string;
+    options?: Record<string, unknown>;
+    /** Tracks: a component whose motion props this layer drives. */
+    component?: SceneComponentBinding;
+}
+interface SceneV2Doc {
+    format: typeof SCENE_V2_FORMAT;
+    version: 2;
+    name?: string;
+    /** Total length in ms (default: the end of the last layer). */
+    duration?: number;
+    loop?: boolean;
+    /** Seed for `random(a, b)` values (default 1). */
+    seed?: number;
+    /** Scene-local motion tokens; references fall back to the active token set. */
+    tokens?: Partial<{
+        [K in keyof MotionTokens]: Partial<MotionTokens[K]>;
+    }>;
+    layers: SceneLayer[];
+    /** Where the document came from (set by `migrateToSceneV2`). */
+    source?: {
+        format: string;
+        version?: number;
+    };
+    meta?: unknown;
+}
+
+/** What a scene loses when opened as a timeline v1 document. */
+interface SceneLoss {
+    path: string;
+    message: string;
+}
+/** The editor document as scene v2 (lossless: `timelineDocFromScene(timelineDocToScene(d)).doc` equals the canonical `d`). */
+declare function timelineDocToScene(doc: TimelineDoc): SceneV2Doc;
+/**
+ * Open a scene v2 document in the editor. Token references resolve (scene tokens, then the
+ * built-in scale); preset / effect / component layers, `loop`, `tokens`, keyframe `composite`
+ * and track `start` / `duration` / `easing` have no v1 equivalent and are listed in `lost`.
+ */
+declare function timelineDocFromScene(scene: SceneV2Doc): {
+    doc: TimelineDoc;
+    lost: SceneLoss[];
+};
+/** Open any motion document (object or JSON text) as an editor document; throws `TimelineDocError` on anything else. */
+declare function loadMotionDoc(input: unknown): {
+    doc: TimelineDoc;
+    lost: SceneLoss[];
+};
+
+export { TIMELINE_DOC_FORMAT, TIMELINE_DOC_LIMITS, TIMELINE_DOC_SCHEMA, TIMELINE_DOC_VERSION, TimelineDocError, addKeyframe, addLayer, bindHistoryKeys, copyKeyframes, createFixedClock, createSeededRandom, createTimelineDoc, createTimelineHistory, createTimelinePreview, editableKeyframes, groupLayers, historyKeyAction, interpolateValue, isLayerActive, isLayerLocked, isValidEasing, layerSubtree, loadMotionDoc, moveLayer, normalizeTimelineDoc, parseTimelineDoc, pasteKeyframes, removeKeyframes, removeLayers, resolveRandom, sampleTimelineDoc, scaleKeyframes, serializeTimelineDoc, setKeyframeEasing, setKeyframeProps, shiftKeyframes, timelineDocDuration, timelineDocFromAnimation, timelineDocFromScene, timelineDocToAnimation, timelineDocToScene, ungroupLayer, uniqueId, updateLayers, validateTimelineDoc };
+export type { AddLayerOptions, ApplyOptions, FixedClock, HistoryOptions, KeyframeClip, SceneLoss, TimelineDoc, TimelineFrame, TimelineHistory, TimelineKeyframe, TimelineLayer, TimelinePreview, TimelineProblem, TimelineValue };

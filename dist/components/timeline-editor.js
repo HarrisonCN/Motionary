@@ -1,7 +1,8 @@
-import { a as isLayerLocked, i as isValidEasing, T as TimelineDocError, t as timelineDocDuration, b as isLayerActive, r as resolveRandom } from '../chunks/format-BU7xfxcU.js';
-export { c as TIMELINE_DOC_FORMAT, d as TIMELINE_DOC_LIMITS, e as TIMELINE_DOC_VERSION, f as createSeededRandom, g as createTimelineDoc, n as normalizeTimelineDoc, p as parseTimelineDoc, s as serializeTimelineDoc, h as timelineDocFromAnimation, j as timelineDocToAnimation, v as validateTimelineDoc } from '../chunks/format-BU7xfxcU.js';
+import { b as isLayerLocked, i as isValidEasing, T as TimelineDocError, d as timelineDocDuration, e as isLayerActive, r as resolveRandom } from '../chunks/format-B2XGhlqH.js';
+export { a as TIMELINE_DOC_FORMAT, f as TIMELINE_DOC_LIMITS, g as TIMELINE_DOC_VERSION, h as createSeededRandom, j as createTimelineDoc, n as normalizeTimelineDoc, p as parseTimelineDoc, s as serializeTimelineDoc, t as timelineDocFromAnimation, k as timelineDocToAnimation, v as validateTimelineDoc } from '../chunks/format-B2XGhlqH.js';
 import { p as parseEase } from '../chunks/ease-XN8_0sXu.js';
-import { n as now, r as raf, b as caf } from '../chunks/base-C9CJrhL3.js';
+import { n as now, r as raf, b as caf } from '../chunks/base-D0sRwVz1.js';
+export { l as loadMotionDoc, a as timelineDocFromScene, t as timelineDocToScene } from '../chunks/scene-DWNb4Lb1.js';
 
 /**
  * 13.6: editing operations on a `motionary-timeline` document. Every operation
@@ -660,7 +661,7 @@ const id = { type: 'string', minLength: 1, maxLength: 128 };
 const value = { oneOf: [{ type: 'number' }, { type: 'string', maxLength: 2048 }] };
 const TIMELINE_DOC_SCHEMA = {
     $schema: 'https://json-schema.org/draft/2020-12/schema',
-    $id: 'https://cdn.jsdelivr.net/npm/motionary@13/docs/timeline-doc.schema.json',
+    $id: 'https://cdn.jsdelivr.net/npm/motionary@14/docs/timeline-doc.schema.json',
     title: 'motionary-timeline v1',
     type: 'object',
     additionalProperties: false,
@@ -716,4 +717,4 @@ const TIMELINE_DOC_SCHEMA = {
 };
 
 export { TIMELINE_DOC_SCHEMA, TimelineDocError, addKeyframe, addLayer, bindHistoryKeys, copyKeyframes, createFixedClock, createTimelineHistory, createTimelinePreview, editableKeyframes, groupLayers, historyKeyAction, interpolateValue, isLayerActive, isLayerLocked, isValidEasing, layerSubtree, moveLayer, pasteKeyframes, removeKeyframes, removeLayers, resolveRandom, sampleTimelineDoc, scaleKeyframes, setKeyframeEasing, setKeyframeProps, shiftKeyframes, timelineDocDuration, ungroupLayer, uniqueId, updateLayers };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.9.0/dist/components/timeline-editor.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.0.0/dist/components/timeline-editor.js.map

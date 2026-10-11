@@ -1,4 +1,4 @@
-import { p as prefersReducedMotion, H as EASE_OUT, m as motionScale, f as defineElement, r as raf } from '../chunks/base-C9CJrhL3.js';
+import { p as prefersReducedMotion, H as EASE_OUT, m as motionScale, f as defineElement, r as raf } from '../chunks/base-D0sRwVz1.js';
 
 /** FLIP keyframes from a previous box to the current one (pure). */
 function flipFrames(from, to, scale = true) {
@@ -250,4 +250,4 @@ function defineLayoutComponents() {
 }
 
 export { autoAnimate, defineAutoAnimate, defineLayoutComponents, defineMasonry, flipFrames, masonryLayout, sharedTransition };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.9.0/dist/components/layout.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.0.0/dist/components/layout.js.map

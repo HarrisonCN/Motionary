@@ -96,8 +96,8 @@ interface MotionTokens {
 
 declare const SCENE_V2_FORMAT = "motionary-scene";
 declare const SCENE_V2_VERSION = 2;
-/** Draft until 14.0: the format may still change. */
-declare const SCENE_V2_STATUS = "draft";
+/** 14.0: the official motion document (was 'draft' in 13.9). */
+declare const SCENE_V2_STATUS = "stable";
 declare const SCENE_V2_LIMITS: {
     readonly layers: 1000;
     readonly keyframes: 100000;
@@ -277,7 +277,7 @@ declare function formatMigrationReport(r: MigrationResult, file?: string): strin
 
 declare const SCENE_V2_SCHEMA: {
     readonly $schema: "https://json-schema.org/draft/2020-12/schema";
-    readonly $id: "https://cdn.jsdelivr.net/npm/motionary@13/docs/scene-v2.schema.json";
+    readonly $id: "https://cdn.jsdelivr.net/npm/motionary@14/docs/scene-v2.schema.json";
     readonly title: "motionary-scene v2 (draft)";
     readonly description: "Draft of the 14.0 scene format: one document for timeline layers, <usa-player> tracks, component motion props and motion tokens. Values may reference tokens as \"{duration.fast}\".";
     readonly type: "object";

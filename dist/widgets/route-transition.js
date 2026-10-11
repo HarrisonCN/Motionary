@@ -1,4 +1,4 @@
-import { f as defineElement } from '../chunks/base-C9CJrhL3.js';
+import { f as defineElement } from '../chunks/base-D0sRwVz1.js';
 
 var css = "usa-route-transition{display:block;max-width:100%;box-sizing:border-box}usa-route-transition template{display:none}::view-transition-old(root),::view-transition-new(root){animation-duration:.28s}";
 
@@ -120,4 +120,4 @@ function defineRouteTransition(tag = 'usa-route-transition') {
 }
 
 export { defineRouteTransition };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.9.0/dist/widgets/route-transition.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.0.0/dist/widgets/route-transition.js.map

@@ -12,7 +12,7 @@ const MARKUP = `<div id="m" style="position:relative;width:400px;height:200px">
 
 test.describe('14.0 Motion Engine v2', () => {
   test('seek renders the exact state; sequence / stagger offsets; reverse + finished; cancel removes effects', async ({ page }) => {
-    const errors = await openFixture(page);
+    await openFixture(page);
     await page.evaluate((html) => { document.getElementById('stage').innerHTML = html; }, MARKUP);
     const r = await page.evaluate(async () => {
       const M = await import('motionary/motion');
@@ -44,11 +44,11 @@ test.describe('14.0 Motion Engine v2', () => {
     expect(r.afterCancel).toBe('1.00');
     expect(r.finished).toEqual(['finished', '1.00']);
     expect(r.reversed).toEqual([0, '0.00']);
-    expectNoErrors(errors);
+    expectNoErrors(page);
   });
 
   test('spring overshoots through a CSS linear() easing and settles', async ({ page }) => {
-    const errors = await openFixture(page);
+    await openFixture(page);
     await page.evaluate((html) => { document.getElementById('stage').innerHTML = html; }, MARKUP);
     const r = await page.evaluate(async () => {
       const M = await import('motionary/motion');
@@ -61,11 +61,11 @@ test.describe('14.0 Motion Engine v2', () => {
     });
     expect(r.peak).toBeGreaterThan(100);
     expect(r.end).toBeCloseTo(100, 0);
-    expectNoErrors(errors);
+    expectNoErrors(page);
   });
 
   test('scene v2: <usa-player> and playScene() reach the same state at the same time', async ({ page }) => {
-    const errors = await openFixture(page);
+    await openFixture(page);
     const r = await page.evaluate(async () => {
       const scene = { format: 'motionary-scene', version: 2, tokens: { duration: { hero: 400 } }, layers: [
         { id: 'a', type: 'track', target: '.a', keyframes: [{ id: 'k1', time: 0, props: { opacity: 0 } }, { id: 'k2', time: 400, props: { opacity: 1 } }] },
@@ -89,6 +89,6 @@ test.describe('14.0 Motion Engine v2', () => {
     expect(r.duration).toBe(600);
     expect(r.player).toEqual(r.engine);
     expect(r.player[0]).toBe('0.75');
-    expectNoErrors(errors);
+    expectNoErrors(page);
   });
 });

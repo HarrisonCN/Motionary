@@ -369,12 +369,6 @@ interface AnimationJSON {
     tracks: AnimationTrack[];
 }
 declare const ANIMATION_FORMAT = "use-scroll-animate/animation";
-/**
- * Validate / normalise an animation (object or JSON text). Throws on anything unusable.
- * @deprecated since 13.9, removed in 14.0 — validate with `validateSceneV2()` / `migrateToSceneV2()`
- * from `motionary/components/scene-v2` (docs/deprecations-v14.md#normalize-animation). `createPlayer` is unchanged.
- */
-declare function normalizeAnimation(input: string | AnimationJSON | Record<string, any>): Required<Pick<AnimationJSON, 'tracks' | 'duration' | 'loop' | 'name'>>;
 interface Player {
     readonly duration: number;
     readonly currentTime: number;
@@ -389,13 +383,15 @@ interface Player {
     readonly finished: Promise<void>;
     destroy(): void;
 }
-/** Bind an animation to `root` and return its controller (paused at 0 unless `autoplay`). */
-declare function createPlayer(root: HTMLElement, animation: string | AnimationJSON, o?: {
+interface PlayerOptions {
     autoplay?: boolean;
     loop?: boolean;
     rate?: number;
     onFinish?: () => void;
-}): Player;
+}
+
+/** Bind an animation to `root` and return its controller (paused at 0 unless `autoplay`). */
+declare function createPlayer(root: HTMLElement, animation: string | AnimationJSON, o?: PlayerOptions): Player;
 interface UsaPlayerElement extends UsaElement {
     readonly player: Player | null;
     /** Load an animation (object or JSON text) and restart. */
@@ -457,5 +453,5 @@ declare function defineEffectElements(): void;
 /** Register the built-ins and every pack (idempotent). */
 declare function registerAllEffects(): void;
 
-export { ANIMATION_FORMAT, AUDIO_FX, CARD_FX, CLICK_FX, CURSOR_FX, EFFECT_PACKS, GENERATIVE_FX, GESTURES, MICRO_FX, MOTION_THEMES, MOTION_THEME_NAMES, PAGE_FX, PHYSICS_FX, STORY_TEMPLATES, THEME_FX, THEME_ROLES, angleDelta, applyMotionTheme, bindBeat, bindGesture, bounceKeyframes, bumpCount, canvasBackground, createBeatDetector, createPlayer, defineAudio, defineEffectElements, defineGestureFx, defineMotionTheme, definePlayer, defineStory, disableAudio, enableAudio, flingVelocity, formatCount, fxLayer, getAudio, hexRgb, noise2, normalizeAnimation, onBeat, playThemeEffect, registerAllEffects, registerAudioEffects, registerCardClickEffects, registerCursorEffects, registerGenerativeEffects, registerMicroEffects, registerPageEffects, registerPhysicsEffects, solveSpring, springKeyframes, storyProgress, swapLabel, themeCss, themePreset, themeVars, togglePressed };
+export { ANIMATION_FORMAT, AUDIO_FX, CARD_FX, CLICK_FX, CURSOR_FX, EFFECT_PACKS, GENERATIVE_FX, GESTURES, MICRO_FX, MOTION_THEMES, MOTION_THEME_NAMES, PAGE_FX, PHYSICS_FX, STORY_TEMPLATES, THEME_FX, THEME_ROLES, angleDelta, applyMotionTheme, bindBeat, bindGesture, bounceKeyframes, bumpCount, canvasBackground, createBeatDetector, createPlayer, defineAudio, defineEffectElements, defineGestureFx, defineMotionTheme, definePlayer, defineStory, disableAudio, enableAudio, flingVelocity, formatCount, fxLayer, getAudio, hexRgb, noise2, onBeat, playThemeEffect, registerAllEffects, registerAudioEffects, registerCardClickEffects, registerCursorEffects, registerGenerativeEffects, registerMicroEffects, registerPageEffects, registerPhysicsEffects, solveSpring, springKeyframes, storyProgress, swapLabel, themeCss, themePreset, themeVars, togglePressed };
 export type { AnimationJSON, AnimationTrack, AudioInput, AudioReactive, AudioSample, BeatOptions, GenFrame, GenerativeSpec, GestureDetail, GestureFxOptions, GestureName, Player, SpringOptions, StoryTemplate, ThemePack, ThemeRole, UsaAudioElement, UsaGestureFxElement, UsaPlayerElement, UsaStoryElement, UsaThemeElement };
