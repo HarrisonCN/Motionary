@@ -1,0 +1,7 @@
+{
+  "name": "motionary-fixture-vue3",
+  "private": true,
+  "type": "module",
+  "description": "13.5.0 framework regression fixture — not published. Built by ../build.mjs against the built package (../../../dist).",
+  "dependencies": { "vue": "3.5.43" }
+}

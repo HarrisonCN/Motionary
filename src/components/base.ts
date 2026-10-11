@@ -214,6 +214,9 @@ export function getBase(): BaseCtor {
     connectedCallback(): void {
       if (this._connected) return;
       this._connected = true;
+      // 13.5.0: a property set before the element was defined (React 18 wrappers, Vue `.prop`, Svelte, Angular
+      // `[prop]` while hydrating, then define) sits on the instance and hides the class's setter — move it through.
+      for (const [k, v] of Object.entries(this)) if (k in Base.prototype || k in Object.getPrototypeOf(this)) delete (this as any)[k], ((this as any)[k] = v);
       styleLoader?.(this.localName);
       // Upgraded while the parser is still inside us (a <script> in <head>
       // defined the element): children/text are not there yet, so wait.
@@ -332,13 +335,8 @@ export function animateWithMotion(el: Element, keyframes: Keyframe[], options: K
   trackAnimation(a);
   if (options.iterations !== Infinity) {
     active++;
-    let done = false;
-    const end = () => {
-      if (!done) {
-        done = true;
-        active--;
-      }
-    };
+    // settles exactly once (fulfilled or rejected), so no guard is needed
+    const end = () => void active--;
     a?.finished?.then(end, end);
   }
   return a;

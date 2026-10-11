@@ -5,3 +5,6 @@ node_modules/
 coverage/
 test-results/
 playwright-report/
+
+# 13.5.0: framework fixtures (test/frameworks) — built output and the node_modules/motionary link
+test/frameworks/*/dist/

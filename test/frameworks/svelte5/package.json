@@ -1,0 +1,7 @@
+{
+  "name": "motionary-fixture-svelte5",
+  "private": true,
+  "type": "module",
+  "description": "13.5.0 framework regression fixture — not published. Built by ../build.mjs against the built package (../../../dist).",
+  "dependencies": { "svelte": "5.57.2" }
+}

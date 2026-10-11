@@ -1,0 +1,7 @@
+{
+  "name": "motionary-fixture-solid",
+  "private": true,
+  "type": "module",
+  "description": "13.5.0 framework regression fixture — not published. Built by ../build.mjs against the built package (../../../dist).",
+  "dependencies": { "solid-js": "1.9.17", "@babel/core": "7.29.7", "babel-preset-solid": "1.9.16" }
+}

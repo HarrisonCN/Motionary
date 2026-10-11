@@ -45,7 +45,8 @@ const PROPS = /*#__PURE__*/ new Set(['checked', 'value', 'state', 'open', 'liked
 export const USA_TAGS: string[] = /*#__PURE__*/ Object.values(COMPONENT_CATEGORIES).flat() as string[];
 
 export function createUsaComponents(React: ReactLike): Record<string, any> {
-  const useIso = React.useLayoutEffect || React.useEffect;
+  // 13.5.0: useLayoutEffect only in the browser — React 18 warns for every wrapper rendered on the server otherwise.
+  const useIso = (typeof document != 'undefined' && React.useLayoutEffect) || React.useEffect;
   const make = (tag: string) => {
     const C = React.forwardRef((props: AnyProps, ref: any) => {
       const inner = React.useRef<HTMLElement | null>(null);
@@ -83,5 +84,14 @@ export function createUsaComponents(React: ReactLike): Record<string, any> {
     (C as any).displayName = pascal(tag);
     return C;
   };
-  return Object.fromEntries(USA_TAGS.map((t) => [pascal(t), make(t)]));
+  // 13.5.0: the wrappers used to cover only the core tags (USA_TAGS) — `UsaSwitch`, `UsaPricing` and every other
+  // widget were `undefined`. Known tags are created up front (enumerable); any other `Usa*` name — widgets, packs,
+  // your own `usa-*` elements — is created on first access and cached.
+  const all: Record<string, any> = Object.fromEntries(USA_TAGS.map((t) => [pascal(t), make(t)]));
+  return new Proxy(all, {
+    get: (o, k) => (typeof k === 'string' && /^Usa[A-Z0-9]/.test(k) && !(k in o) ? (o[k] = make(kebab(k))) : o[k as any]),
+  });
 }
+
+/** `UsaAutoAnimate` → `usa-auto-animate` (inverse of {@link pascal}). */
+export const kebab = (name: string): string => name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').replace(/([A-Z])([A-Z][a-z])/g, '$1-$2').toLowerCase();

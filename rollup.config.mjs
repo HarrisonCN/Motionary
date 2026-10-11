@@ -138,8 +138,10 @@ export default pick([
     input: { ...entries, ...perEntryInputs },
     external,
     output: [
-      { dir: 'dist', format: 'es', entryFileNames: '[name].js', chunkFileNames: 'chunks/[name]-[hash].js', sourcemap: true },
-      { dir: 'dist', format: 'cjs', entryFileNames: '[name].cjs', chunkFileNames: 'chunks/[name]-[hash].cjs', exports: 'named', sourcemap: true },
+      // 13.5.0: no bare `import '../chunks/x.js'` lines for transitive chunks — esbuild / Vite warned `ignored-bare-import`
+      // for each one (the package is sideEffects-free), and they are only a preload hint.
+      { dir: 'dist', format: 'es', entryFileNames: '[name].js', chunkFileNames: 'chunks/[name]-[hash].js', sourcemap: true, hoistTransitiveImports: false },
+      { dir: 'dist', format: 'cjs', entryFileNames: '[name].cjs', chunkFileNames: 'chunks/[name]-[hash].cjs', exports: 'named', sourcemap: true, hoistTransitiveImports: false },
     ],
     plugins: [cssRaw(), resolve(), ts(), perEntryDts()],
   },
