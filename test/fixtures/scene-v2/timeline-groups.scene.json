@@ -1,0 +1,67 @@
+{
+  "format": "motionary-scene",
+  "version": 2,
+  "layers": [
+    {
+      "id": "g1",
+      "type": "group",
+      "name": "Cards",
+      "locked": true
+    },
+    {
+      "id": "c1",
+      "type": "track",
+      "parent": "g1",
+      "solo": true,
+      "target": ".card:nth-child(1)",
+      "keyframes": [
+        {
+          "id": "a",
+          "time": 0,
+          "props": {
+            "opacity": 0
+          }
+        },
+        {
+          "id": "b",
+          "time": 300,
+          "props": {
+            "opacity": 1
+          },
+          "easing": "steps(4, end)"
+        }
+      ]
+    },
+    {
+      "id": "c2",
+      "type": "track",
+      "parent": "g1",
+      "muted": true,
+      "target": ".card:nth-child(2)",
+      "keyframes": [
+        {
+          "id": "c",
+          "time": 100,
+          "props": {
+            "opacity": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "g2",
+      "type": "group",
+      "parent": "g1"
+    },
+    {
+      "id": "empty",
+      "type": "track",
+      "parent": "g2",
+      "keyframes": []
+    }
+  ],
+  "source": {
+    "format": "motionary-timeline",
+    "version": 1
+  }
+}

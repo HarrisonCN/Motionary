@@ -1,0 +1,5 @@
+{
+  "tracks": [
+    { "target": ":scope", "duration": 400, "keyframes": [ { "opacity": 0 }, { "opacity": 1 } ] }
+  ]
+}

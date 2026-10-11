@@ -62,6 +62,7 @@ const entries = {
   'motionary/tooling/design': ['figmaToMotion', 'framerComponent', 'motionToCss', 'easingPoints'],
   'motionary/components/offscreen': ['installOffscreenPause', 'raf', 'caf', 'onFrame'],
   'motionary/components/gl-pool': ['installGLPool', 'uninstallGLPool', 'glPoolStats', 'glSupport'],
+  'motionary/components/scene-v2': ['validateSceneV2', 'migrateToSceneV2', 'sceneV2ToAnimation', 'sceneV2ToTimeline', 'SCENE_V2_SCHEMA', 'SCENE_V2_FORMAT'],
   'motionary/components/perf-tasks': ['yieldToMain', 'shouldYield', 'runChunked'],
   'motionary/components/lazy': ['lazyDefine', 'defineUsed', 'loadCategory', 'categoryOfTag'],
   'motionary/components/transitions': ['defineTransitionComponents', 'defineDialog', 'defineAccordion', 'defineViewSwitch', 'viewTransition', 'flip'],

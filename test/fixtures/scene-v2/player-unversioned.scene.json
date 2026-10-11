@@ -1,0 +1,33 @@
+{
+  "format": "motionary-scene",
+  "version": 2,
+  "layers": [
+    {
+      "id": "t1",
+      "type": "track",
+      "target": ":scope",
+      "start": 0,
+      "duration": 400,
+      "keyframes": [
+        {
+          "id": "t1k1",
+          "time": 0,
+          "props": {
+            "opacity": 0
+          }
+        },
+        {
+          "id": "t1k2",
+          "time": 400,
+          "props": {
+            "opacity": 1
+          }
+        }
+      ]
+    }
+  ],
+  "source": {
+    "format": "use-scroll-animate/animation",
+    "version": 1
+  }
+}

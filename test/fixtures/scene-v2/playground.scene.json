@@ -1,0 +1,27 @@
+{
+  "format": "motionary-scene",
+  "version": 2,
+  "layers": [
+    {
+      "id": "t1",
+      "type": "track",
+      "name": "Title",
+      "target": ":scope > :nth-child(1)",
+      "start": 0,
+      "duration": 600,
+      "preset": "fade-up"
+    },
+    {
+      "id": "t2",
+      "type": "track",
+      "name": "Card",
+      "target": ":scope > :nth-child(2)",
+      "start": 200,
+      "duration": 400,
+      "preset": "scale"
+    }
+  ],
+  "source": {
+    "format": "use-scroll-animate/playground"
+  }
+}

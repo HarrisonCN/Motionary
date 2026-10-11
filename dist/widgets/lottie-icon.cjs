@@ -5,4 +5,4 @@ var widgets_lottieIcon = require('../chunks/lottie-icon-BoxkukMd.cjs');
 
 
 exports.defineLottieIcon = widgets_lottieIcon.defineLottieIcon;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.8.0/dist/widgets/lottie-icon.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.9.0/dist/widgets/lottie-icon.cjs.map

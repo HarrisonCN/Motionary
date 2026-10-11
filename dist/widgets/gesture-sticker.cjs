@@ -134,4 +134,4 @@ function defineGestureSticker(tag = 'usa-gesture-sticker') {
 }
 
 exports.defineGestureSticker = defineGestureSticker;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.8.0/dist/widgets/gesture-sticker.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.9.0/dist/widgets/gesture-sticker.cjs.map

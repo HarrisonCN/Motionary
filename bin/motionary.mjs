@@ -2,11 +2,13 @@
 // motionary — command line (11.5).
 //   npx motionary doctor [paths…] [--json]   scan a project for deprecated import paths (exit 1 when found)
 //   npx motionary export --target css|wxss|arkts   presets + motion tokens for other platforms (12.1)
+//   npx motionary migrate <files…> [--write|--out f] [--diff] [--report] [--json] [--tokenize]   v1 motion JSON → scene v2 draft (13.9)
 //   npx motionary help
 // Old subpaths still work (removed in 13.0) and never warn at runtime; `doctor` is how a project finds them.
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, extname } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { createRequire } from 'node:module';
 import { writeFileSync } from 'node:fs';
 import { exportMotion, TARGETS } from './xplat.mjs';
 import { DEPRECATED_PATHS, REMOVED_IN, LEGACY_EVENTS, EVENTS_REMOVED_IN, findDeprecated } from './public-paths.mjs';
@@ -38,6 +40,10 @@ const HELP = `motionary <command>
   export --target css|wxss|arkts [--presets a,b] [--duration token] [--easing token] [--rpx] [--out file]
                              export presets + motion tokens for the web, mini programs (WXSS) or HarmonyOS (ArkTS) — docs/cross-platform.md
   compat <version> [--json]  what a project on <version> can use and what changed after it (from the manifest) — docs/version-compat.md
+  migrate <files…> [--dry-run] [--write | --out file] [--diff] [--report] [--json] [--tokenize]
+                             migrate motionary-timeline v1 / <usa-player> animation JSON / playground state to the
+                             motionary-scene v2 DRAFT (14.0 format). Dry run by default; --write saves <name>.scene.json
+                             next to each input (never overwrites it). Exit 1 when any file fails — docs/migrating-to-v14.md
   help                       this text
 
 Deprecated subpaths (work until ${REMOVED_IN}, no runtime warning):
@@ -62,6 +68,38 @@ export function runExport(rest, presets, tokens) {
     return 2;
   }
 }
+/** `motionary migrate` (13.9): returns the exit code. `S` = the scene-v2 module (dist/components/scene-v2.js). */
+export function runMigrate(rest, S) {
+  const outFile = flag(rest, 'out');
+  const files = rest.filter((a, i) => !a.startsWith('--') && rest[i - 1] !== '--out');
+  if (!files.length) { console.error('usage: motionary migrate <files…> [--dry-run] [--write | --out file] [--diff] [--report] [--json] [--tokenize]'); return 2; }
+  if (outFile && files.length > 1) { console.error('motionary migrate: --out takes a single input (use --write for several)'); return 2; }
+  const write = rest.includes('--write') || !!outFile;
+  const dry = rest.includes('--dry-run') || !write;
+  const json = rest.includes('--json');
+  const results = [];
+  let failed = 0;
+  for (const f of files) {
+    let text;
+    try { text = readFileSync(f, 'utf8'); } catch (e) { failed++; results.push({ file: f, ok: false, problems: [{ path: '', message: `cannot read (${e.code || e.message})` }], report: { from: 'unknown', changes: [], lost: [], warnings: [], stats: {} } }); if (!json) console.error(`${f}: cannot read (${e.code || e.message})`); continue; }
+    const r = S.migrateToSceneV2(text, { tokenize: rest.includes('--tokenize') });
+    let input = null; try { input = JSON.parse(text); } catch {}
+    const target = outFile || f.replace(/(\.json)?$/i, '.scene.json');
+    if (!r.ok) failed++;
+    else if (!dry) writeFileSync(target, S.serializeSceneV2(r.doc));
+    const diff = r.ok && input ? S.diffJson(input, r.doc) : [];
+    results.push({ file: f, out: r.ok && !dry ? target : undefined, ok: r.ok, report: r.report, problems: r.problems, diff: rest.includes('--diff') ? diff : undefined });
+    if (json) continue;
+    console.log(S.formatMigrationReport(r, f));
+    if (rest.includes('--diff') && r.ok) {
+      const show = (v) => { const t = JSON.stringify(v); return t && t.length > 80 ? t.slice(0, 77) + '…' : t; };
+      for (const c of diff) console.log(`    ${c.op === 'add' ? '+' : c.op === 'remove' ? '-' : '~'} ${c.path}: ${c.op === 'add' ? show(c.to) : c.op === 'remove' ? show(c.from) : `${show(c.from)} → ${show(c.to)}`}`);
+    }
+    if (r.ok) console.log(dry ? '  (dry run — nothing written; --write to save ' + target + ')' : `  → ${target}`);
+  }
+  if (json) process.stdout.write(JSON.stringify(results, null, 2) + '\n');
+  return failed ? 1 : 0;
+}
 const TOKENS = () => { try { return JSON.parse(readFileSync(new URL('../docs/motion.tokens.json', import.meta.url), 'utf8')); } catch { return JSON.parse(readFileSync(join(process.cwd(), 'docs/motion.tokens.json'), 'utf8')); } }; // non-file import.meta.url under jsdom
 
 /** env.presets / env.tokens are for tests; the CLI loads PRESETS from the built package (dist/index.js). */
@@ -82,6 +120,10 @@ export function main(argv, env = {}) {
       }
       return 0;
     });
+  }
+  if (cmd === 'migrate') {
+    if (env.sceneV2) return runMigrate(rest, env.sceneV2);
+    return runMigrate(rest, createRequire(import.meta.url)('../dist/components/scene-v2.cjs'));
   }
   if (cmd === 'export') {
     if (env.presets) return runExport(rest, env.presets, env.tokens || TOKENS());

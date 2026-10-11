@@ -1,5 +1,9 @@
 # Deprecations
 
+## Deprecated in 13.9, planned for removal in 14.0
+
+See [deprecations-v14.md](./deprecations-v14.md): playground documents and unversioned animation JSON in `<usa-player>`, `normalizeAnimation()`, and the `usa-codemod-5` to `usa-codemod-10` bins. Each one warns once in development only, and the warnings are stripped from production builds. Migration guide (draft): [migrating-to-v14.md](./migrating-to-v14.md). Scene Format v2 draft: [scene-v2.md](./scene-v2.md).
+
 ## Deprecated in 10.9, removed in 11.0
 
 **Removed in 11.0.0.** `<usa-three-scene>` / `defineThreeScene()` / `motionary/widgets/three-scene` no longer exist, and a string program that cannot run in a worker is refused (no `new Function` on the main thread).

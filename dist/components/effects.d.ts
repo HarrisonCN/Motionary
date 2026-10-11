@@ -369,7 +369,11 @@ interface AnimationJSON {
     tracks: AnimationTrack[];
 }
 declare const ANIMATION_FORMAT = "use-scroll-animate/animation";
-/** Validate / normalise an animation (object or JSON text). Throws on anything unusable. */
+/**
+ * Validate / normalise an animation (object or JSON text). Throws on anything unusable.
+ * @deprecated since 13.9, removed in 14.0 — validate with `validateSceneV2()` / `migrateToSceneV2()`
+ * from `motionary/components/scene-v2` (docs/deprecations-v14.md#normalize-animation). `createPlayer` is unchanged.
+ */
 declare function normalizeAnimation(input: string | AnimationJSON | Record<string, any>): Required<Pick<AnimationJSON, 'tracks' | 'duration' | 'loop' | 'name'>>;
 interface Player {
     readonly duration: number;

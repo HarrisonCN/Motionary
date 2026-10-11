@@ -669,4 +669,4 @@ exports.defineMarquee = defineMarquee;
 exports.defineParticles = defineParticles;
 exports.defineWaterRipple = defineWaterRipple;
 exports.fluentPreset = fluentPreset;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.8.0/dist/components/background.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.9.0/dist/components/background.cjs.map

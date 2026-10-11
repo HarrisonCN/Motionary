@@ -1,6 +1,6 @@
 {
   "name": "motionary",
-  "version": "13.8.0",
+  "version": "13.9.0",
   "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 209 animated Web Components (91 core, 118 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -1248,6 +1248,16 @@
       "require": {
         "types": "./dist/components/gl-pool.d.cts",
         "default": "./dist/components/gl-pool.cjs"
+      }
+    },
+    "./components/scene-v2": {
+      "import": {
+        "types": "./dist/components/scene-v2.d.ts",
+        "default": "./dist/components/scene-v2.js"
+      },
+      "require": {
+        "types": "./dist/components/scene-v2.d.cts",
+        "default": "./dist/components/scene-v2.cjs"
       }
     },
     "./components/perf-tasks": {

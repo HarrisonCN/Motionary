@@ -163,4 +163,4 @@ function defineGlobe(tag = 'usa-globe') {
 }
 
 export { project as a, defineGlobe as d, parseMarkers as p };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.8.0/dist/chunks/globe-D56xlOmk.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.9.0/dist/chunks/globe-D56xlOmk.js.map

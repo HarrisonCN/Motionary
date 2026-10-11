@@ -11,4 +11,4 @@ function registerFluid() {
 }
 
 export { effect, registerFluid as register, registerFluid };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.8.0/dist/effects/fluid.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.9.0/dist/effects/fluid.js.map

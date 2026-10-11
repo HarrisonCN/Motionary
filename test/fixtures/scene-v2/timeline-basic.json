@@ -1,0 +1,18 @@
+{
+  "format": "motionary-timeline",
+  "version": 1,
+  "name": "hero",
+  "duration": 1200,
+  "seed": 7,
+  "layers": [
+    { "id": "title", "type": "track", "name": "Title", "target": ".title", "keyframes": [
+      { "id": "k1", "time": 0, "props": { "opacity": 0, "transform": "translateY(24px)" }, "easing": "ease-out" },
+      { "id": "k2", "time": 600, "props": { "opacity": 1, "transform": "translateY(0)" } }
+    ] },
+    { "id": "glow", "type": "track", "target": ".glow", "keyframes": [
+      { "id": "k3", "time": 200, "props": { "--x": "random(0, 40)", "filter": "blur(8px)" }, "easing": "cubic-bezier(0.2, 0, 0, 1)" },
+      { "id": "k4", "time": 1200, "props": { "--x": 0, "filter": "blur(0px)" } }
+    ] }
+  ],
+  "meta": { "author": "fixture", "tags": ["a", "b"] }
+}

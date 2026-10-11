@@ -3,7 +3,7 @@
 var components_fx = require('./fx.cjs');
 var shared = require('../chunks/shared-jkgRH-Hx.cjs');
 var base = require('../chunks/base-BvH4nAcv.cjs');
-var player = require('../chunks/player-BZOkQbZ9.cjs');
+var player = require('../chunks/player-CKOqYOLZ.cjs');
 var generative = require('../chunks/generative-BKoxWOSP.cjs');
 var audio = require('../chunks/audio-D0LwPShE.cjs');
 var registry = require('../chunks/registry-CibnX7Ui.cjs');
@@ -1453,4 +1453,4 @@ exports.themeCss = themeCss;
 exports.themePreset = themePreset;
 exports.themeVars = themeVars;
 exports.togglePressed = togglePressed;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.8.0/dist/components/effects.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.9.0/dist/components/effects.cjs.map

@@ -7,6 +7,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [13.9.0] - 2026-10-11
+
+v14 compatibility prep — a draft of the next scene format, a migration tool and deprecation hints for 14.0. Additive:
+no breaking change, zero runtime dependencies, `motionary/components/lite` unchanged, no size budget raised.
+[docs/scene-v2.md](docs/scene-v2.md) · [docs/deprecations-v14.md](docs/deprecations-v14.md) · [docs/migrating-to-v14.md](docs/migrating-to-v14.md) (draft)
+
+### Added
+
+- **Scene Format v2 (draft)**, `motionary-scene` v2: one document for Timeline layers (13.6 `motionary-timeline` v1:
+  groups, lock / mute / solo, per-segment easing, seed, meta), `<usa-player>` tracks (keyframe / preset / effect with
+  start, duration, easing, options) and component motion props (`component: { tag, props }`), with token references
+  (`"{duration.fast}"`) and scene-local `tokens`. JSON Schema (draft 2020-12) in `docs/scene-v2.schema.json`.
+- **`motionary/components/scene-v2`** (opt-in entry, not in `motionary/components` or lite): `validateSceneV2()`
+  (never throws, not even on circular objects or invalid JSON), `detectMotionFormat()`, `migrateToSceneV2()` (report of
+  changes / lost data / warnings), `sceneV2ToTimeline()` / `sceneV2ToAnimation()` (back to 13.x, with what is lost),
+  `resolveSceneTokens()`, `sceneV2ComponentLayer()`, `diffJson()`, `SCENE_V2_SCHEMA`.
+- **`npx motionary migrate <files…>`**: timeline v1 / animation JSON v1 / playground state to scene v2. Dry run by default;
+  `--write` (writes `<name>.scene.json`, never the input), `--out`, `--diff`, `--json`, `--tokenize`; exit 1 on any failure.
+
+### Deprecated (removed in 14.0, everything still works in 13.x)
+
+- `use-scroll-animate/playground` documents and animation JSON without `format` / `version` in `<usa-player>`;
+  `normalizeAnimation()`; the `usa-codemod-5` to `usa-codemod-10` bins. Each has `@deprecated` JSDoc and warns once in
+  development only (`process.env.NODE_ENV !== 'production'` at each call site, so production builds drop the check and
+  the text; nothing warns without a bundler; `globalThis.MOTIONARY_NO_DEPRECATION = true` silences them).
+
+### Tests
+
+- `test/scene-v2-13-9.test.ts` (46), `test/migrate-cli-13-9.test.ts` (11) and `test/deprecations-13-9.test.ts` (12), with golden
+  fixtures in `test/fixtures/scene-v2/` (round trips: timeline v1 → v2 → v1 lossless; player JSON → v2 → player keeps
+  every track; migrating twice is a no-op). All 3 files failed before (module missing).
+
 ## [13.8.0] - 2026-10-11
 
 Graphics reliability — a WebGL context pool, a GPU resource budget and verified fallback paths. Additive and opt-in:
