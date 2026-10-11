@@ -26,6 +26,9 @@ from blocking input. No breaking changes; zero runtime dependencies; size budget
   `<usa-aurora>`, the marketplace and the sparkline / meter / music-player widgets. Gauge, KPI, pull-cord, lyrics, globe,
   panorama and gen-art pass their owner element but do not install it themselves (fixed per-entry size budgets); they
   pause once it is installed. **Not included in `motionary/components/lite`.**
+  Leak-free: an owner that is detached is unobserved, and once no owner is left the plug-in removes its
+  `visibilitychange` listener and disconnects its IntersectionObserver (re-installed lazily on the next `raf` /
+  `onFrame`).
 - `motionary/components/perf-tasks`: `yieldToMain()`, `shouldYield()`, `runChunked()`.
 - Connect / disconnect cycle test (no leaked loops or queued callbacks).
 

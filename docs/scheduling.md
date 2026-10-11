@@ -25,6 +25,8 @@ const stop = onFrame(draw, canvas); // paused while `canvas` is off screen or th
 - While the document is hidden every loop and callback waits; `visibilitychange` resumes them.
 - A loop / callback with an owner element waits while the element is outside the viewport (one shared
   `IntersectionObserver`) and resumes when it scrolls back in.
+- No leaks: a detached owner is unobserved; when no owner is left the plug-in removes its `visibilitychange`
+  listener and disconnects the observer, and the next `raf` / `onFrame` from this module re-installs it.
 - `raf` / `onFrame` from this module install the pause on first use. `<usa-story>`, `<usa-aurora>`, the marketplace
   and the sparkline / meter / music-player widgets use them, so their loops stop off screen.
 - `<usa-gauge>`, `<usa-kpi>`, `<usa-pull-cord>`, `<usa-lyrics>`, `<usa-globe>`, `<usa-panorama>` and `<usa-gen-art>`

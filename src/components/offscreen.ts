@@ -15,17 +15,27 @@
  */
 import { raf as R, onFrame as F, setPauseHook as H } from './base';
 
-const off = /*#__PURE__*/ new WeakSet<Element>();
+/** watched owners → off screen? (detached ones are swept: unobserved, and the plug-in tears down when none remain) */
+const seen = /*#__PURE__*/ new Map<Element, boolean>();
 let io: IntersectionObserver | null | undefined;
 let wake: () => void;
 
-/** Remove the pause (everything parked runs again). */
+/** Remove the pause (everything parked runs again). Re-installed lazily by the next `raf` / `onFrame`. */
 const un = (): void => {
-  document.removeEventListener('visibilitychange', wake);
-  io?.disconnect();
-  io = undefined;
-  H();
-  wake();
+  if (io !== undefined) {
+    document.removeEventListener('visibilitychange', wake);
+    io?.disconnect();
+    io = undefined;
+    seen.clear();
+    H();
+    wake();
+  }
+};
+
+/** Unobserve detached owners; with nothing left to watch, drop the listener + observer. */
+const sweep = (): void => {
+  seen.forEach((_, el) => el.isConnected || (seen.delete(el), io?.unobserve(el)));
+  seen.size || un();
 };
 
 /** Install the offscreen / hidden-tab pause (idempotent). Returns an uninstall function. */
@@ -34,11 +44,18 @@ export function installOffscreenPause(): () => void {
     io =
       typeof IntersectionObserver == 'function'
         ? new IntersectionObserver((es) => {
-            for (const e of es) off[e.isIntersecting ? 'delete' : 'add'](e.target);
+            for (const e of es) seen.set(e.target, !e.isIntersecting);
             wake();
+            sweep();
           })
         : null;
-    wake = H((el) => document.hidden || (el && off.has(el)), (el) => io?.observe(el));
+    wake = H(
+      (el) => document.hidden || seen.get(el!),
+      (el) => {
+        seen.has(el) || (seen.set(el, false), io?.observe(el));
+        sweep();
+      },
+    );
     document.addEventListener('visibilitychange', wake);
   }
   return un;

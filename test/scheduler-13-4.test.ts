@@ -149,6 +149,61 @@ describe('scheduler 13.4', () => {
     el.remove();
   });
 
+  it('tears down on detach: detached owners are unobserved, and with none left the visibilitychange listener + observer go (lazy re-install)', () => {
+    off.installOffscreenPause()(); // start clean
+    const add = vi.spyOn(document, 'addEventListener');
+    const rem = vi.spyOn(document, 'removeEventListener');
+    const a = document.createElement('div');
+    const b = document.createElement('div');
+    document.body.append(a, b);
+    off.raf(() => {}, a);
+    off.raf(() => {}, b);
+    expect(add.mock.calls.filter((c) => c[0] === 'visibilitychange').length).toBe(1);
+    expect(observed.has(a) && observed.has(b)).toBe(true);
+    a.remove();
+    ioCb!([{ target: a, isIntersecting: false } as any], null as any);
+    expect(observed.has(a)).toBe(false); // unobserved on detach
+    expect(observed.has(b)).toBe(true);
+    expect(rem.mock.calls.some((c) => c[0] === 'visibilitychange')).toBe(false); // b still watched
+    b.remove(); // removed while already off screen: no IO entry — swept by the next watch / IO callback
+    const c = document.createElement('div');
+    document.body.append(c);
+    off.raf(() => {}, c);
+    expect(observed.has(b)).toBe(false);
+    expect(observed.has(c)).toBe(true);
+    c.remove();
+    ioCb!([{ target: c, isIntersecting: false } as any], null as any);
+    expect(observed.size).toBe(0);
+    expect(rem.mock.calls.filter((x) => x[0] === 'visibilitychange').length).toBe(1); // listener gone
+    expect(rem.mock.calls.find((x) => x[0] === 'visibilitychange')![1]).toBe(add.mock.calls.find((x) => x[0] === 'visibilitychange')![1]);
+    frame(); // drops the detached callbacks
+    // next use re-installs lazily
+    const d = document.createElement('div');
+    document.body.append(d);
+    let ran = 0;
+    off.raf(() => ran++, d);
+    expect(add.mock.calls.filter((x) => x[0] === 'visibilitychange').length).toBe(2);
+    expect(observed.has(d)).toBe(true);
+    frame();
+    expect(ran).toBe(1);
+    d.remove();
+    off.installOffscreenPause()();
+    add.mockRestore();
+    rem.mockRestore();
+  });
+
+  it('200x connect / disconnect cycles leave no watched owners behind', () => {
+    off.installOffscreenPause()();
+    for (let i = 0; i < 200; i++) {
+      const el = document.createElement('div');
+      document.body.append(el);
+      off.onFrame(() => {}, el)();
+      el.remove();
+      ioCb!([{ target: el, isIntersecting: false } as any], null as any);
+    }
+    expect(observed.size).toBe(0);
+  });
+
   // Documented exemptions (13.4): short-lived, self-terminating fx2 effects stay on native rAF. They run for a
   // fraction of a second after a trigger, so parking them buys nothing, and routing them through the scheduler
   // put their fixed per-entry size budgets over (fx-text 4.25 kB, fx-morph 3.75 kB, fx-chart / registerChartPack 2.5 kB).

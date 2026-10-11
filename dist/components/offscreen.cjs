@@ -17,16 +17,25 @@ var base = require('../chunks/base-Do-R_9gU.cjs');
  * installOffscreenPause();
  * ```
  */
-const off = /*#__PURE__*/ new WeakSet();
+/** watched owners → off screen? (detached ones are swept: unobserved, and the plug-in tears down when none remain) */
+const seen = /*#__PURE__*/ new Map();
 let io;
 let wake;
-/** Remove the pause (everything parked runs again). */
+/** Remove the pause (everything parked runs again). Re-installed lazily by the next `raf` / `onFrame`. */
 const un = () => {
-    document.removeEventListener('visibilitychange', wake);
-    io?.disconnect();
-    io = undefined;
-    base.setPauseHook();
-    wake();
+    if (io !== undefined) {
+        document.removeEventListener('visibilitychange', wake);
+        io?.disconnect();
+        io = undefined;
+        seen.clear();
+        base.setPauseHook();
+        wake();
+    }
+};
+/** Unobserve detached owners; with nothing left to watch, drop the listener + observer. */
+const sweep = () => {
+    seen.forEach((_, el) => el.isConnected || (seen.delete(el), io?.unobserve(el)));
+    seen.size || un();
 };
 /** Install the offscreen / hidden-tab pause (idempotent). Returns an uninstall function. */
 function installOffscreenPause() {
@@ -35,11 +44,15 @@ function installOffscreenPause() {
             typeof IntersectionObserver == 'function'
                 ? new IntersectionObserver((es) => {
                     for (const e of es)
-                        off[e.isIntersecting ? 'delete' : 'add'](e.target);
+                        seen.set(e.target, !e.isIntersecting);
                     wake();
+                    sweep();
                 })
                 : null;
-        wake = base.setPauseHook((el) => document.hidden || (el && off.has(el)), (el) => io?.observe(el));
+        wake = base.setPauseHook((el) => document.hidden || seen.get(el), (el) => {
+            seen.has(el) || (seen.set(el, false), io?.observe(el));
+            sweep();
+        });
         document.addEventListener('visibilitychange', wake);
     }
     return un;
