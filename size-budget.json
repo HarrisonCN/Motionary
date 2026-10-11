@@ -360,6 +360,11 @@
     "limit": 8192
   },
   {
+    "name": "import 'motionary/components/studio-canvas' (= motionary/studio/canvas, 14.3 Studio canvas foundations: selection / marquee / multi-select, layer order / lock / hide, guides + snapping, pointer / touch drag / resize / rotate + pinch-zoom, keyboard nudge, Scene v2 ops via the timeline editor model; own entry, not in lite)",
+    "import": "export * from 'pkg/components/studio-canvas';",
+    "limit": 12288
+  },
+  {
     "name": "import 'motionary/components/motion-tokens' (= motionary/tokens, 14.1 Motion Tokens 2.0: token set + modes, DTCG, CSS, engine/scene helpers, Figma Variables adapter; own entry with its own 10 KB budget, not in lite)",
     "import": "export * from 'pkg/components/motion-tokens';",
     "limit": 10240

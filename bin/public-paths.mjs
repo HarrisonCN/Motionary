@@ -17,6 +17,8 @@ export const LAYER_ALIASES = {
   tokens: 'components/motion-tokens',
   // 14.2: Layout Motion 2.0
   'motion/layout': 'components/motion-layout',
+  // 14.3: Studio canvas foundations
+  'studio/canvas': 'components/studio-canvas',
 };
 
 /**

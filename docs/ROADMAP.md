@@ -12,7 +12,7 @@
 | v14.0.0 | [已发布] | P0 | Motion Engine v2（`motionary/motion`），Scene Format v2 成为正式格式，`motionary/compat-v13` | 已发布（PR #144）。 |
 | v14.1.0 | [已发布] | P1 | Motion Tokens 2.0（`motionary/tokens`：语义、距离、模式、DTCG、CSS、Figma Variables） | 已发布（PR #146）。 |
 | v14.2.0 | [已发布] | P0 | Layout Motion 2.0（`motionary/motion/layout`）：FLIP 与缩放 / 圆角校正、布局组、可中断动画、共享 `layoutId` 元素、View Transitions（同文档 / 跨文档）及 FLIP 回退、reduced motion（[docs/layout-motion.md](./layout-motion.md)） | 已发布（PR #147）。验收：Node 20/22/24、Chromium/Firefox/WebKit 和体积检查全绿后才合并；lite ≤ 70 KB，现有预算均未提高，新入口有独立的 8 KB 预算。 |
-| v14.3.0 | [建议] | P1 | 创作画布基础：可视化选中、框选、多选、层级 / 锁定、参考线、吸附、拖拽与触控调整、键盘导航 | 在真实浏览器和移动端完成画布编辑；编辑操作能无损映射到 Scene Format v2；不引入不受控的全局监听器。 |
+| v14.3.0 | [已发布] | P1 | 创作画布基础（`motionary/studio/canvas`）：可视化选中、框选、多选、层级 / 锁定 / 隐藏、参考线与吸附（参考线、兄弟元素边缘 / 中心、网格）、指针与触控的拖拽 / 缩放 / 旋转及画布双指缩放、键盘导航与微移、无障碍选择模型（[docs/studio-canvas.md](./studio-canvas.md)） | 已发布（14.3.0）。验收：每次编辑都是可在 Scene Format v2 上无损重放的操作，并经由时间轴编辑器的撤销 / 重做；不使用 window / document 全局监听（测试断言监听数回到基线）；Chromium / Firefox / WebKit 用鼠标与触控指针模拟（手机视口）测试；lite ≤ 70 KB，现有预算均未提高，新入口独立 12 KB 预算。**真机清单（iOS Safari、Android Chrome、触控笔、触控板、读屏）尚待在真实设备上执行**，见 docs/studio-canvas.md。 |
 | v14.4.0 | [建议] | P0 | Motion Studio 1.0：时间轴 UI、关键帧拖动 / 框选、曲线编辑、轨道分组、属性检查器、逐帧预览、撤销重做 | 不改 JSON 也能建立多轨动画；保存、重新打开后效果等价；导出 / 导入回归测试通过。 |
 | v14.5.0 | [建议] | P1 | 工程与资源工作流：图片、SVG、字体、视频片段等资源引用；相对路径解析；离线工程包；缺失依赖提示 | 工程迁移到另一台设备后能找到资源，或列出缺失项；资源路径限制在允许的工程目录内；不自动执行导入脚本。 |
 | v14.6.0 | [建议] | P1 | AI 创作助手 2.0：提示词 → Scene v2；局部修改现有场景；组件与版本匹配；修复建议；经 MCP 校验后预览 | 每次 AI 编辑都生成可撤销、可拒绝的结构化 diff；通过 Schema、兼容性和浏览器检查；失败不破坏用户工程。 |

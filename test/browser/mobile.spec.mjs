@@ -291,3 +291,35 @@ test.describe('every component on a phone', () => {
     });
   }
 });
+
+// 14.3.0: the Studio canvas on a phone — real touch input (page.touchscreen) selects, coarse pointers get the larger
+// handles, a finger drag is one undo step, and the page under the canvas does not scroll (touch-action: none).
+test.describe('14.3 Studio canvas on a phone', () => {
+  test('a tap selects (real touch input), coarse handles, a finger drag moves one undo step, touch-action: none', async ({ page }) => {
+    await openFixture(page);
+    await page.evaluate(() => (document.getElementById('stage').innerHTML = `
+      <div id="cv" style="position:relative;width:360px;height:400px;background:#fafafa">
+        <div id="a" style="position:absolute;left:20px;top:20px;width:100px;height:60px;background:#08f"></div>
+        <div id="b" style="position:absolute;left:200px;top:200px;width:80px;height:40px;background:#f80"></div>
+      </div>`));
+    await page.evaluate(async () => {
+      const T = await import('motionary/components/timeline-editor');
+      const S = await import('motionary/studio/canvas');
+      window.__S = S;
+      window.__h = T.createTimelineHistory(T.createTimelineDoc({ layers: ['a', 'b'].map((id) => ({ id, type: 'track', target: '#' + id, keyframes: [] })) }));
+      window.__c = S.createStudioCanvas(document.getElementById('cv'), { history: window.__h, snap: false });
+    });
+    const a = await page.evaluate(() => { const r = document.getElementById('a').getBoundingClientRect(); return { x: r.left, y: r.top }; });
+    await page.touchscreen.tap(a.x + 20, a.y + 20);
+    expect(await page.evaluate(() => window.__c.selection)).toEqual(['a']);
+    const hs = await page.evaluate(() => ({ coarse: matchMedia('(pointer: coarse)').matches, w: document.querySelector('[data-canvas-handle="se"]').getBoundingClientRect().width }));
+    expect(hs.w).toBeCloseTo(hs.coarse ? 22 : 12, 0);
+    expect(await page.evaluate(() => getComputedStyle(document.getElementById('cv')).touchAction)).toBe('none');
+    await touchDrag(page, '#a', 40, 30);
+    expect(await page.evaluate(() => window.__S.readCanvasGeometry(window.__h.doc, 'a', 0))).toEqual({ x: 40, y: 30, rotation: 0 });
+    expect(await page.evaluate(() => window.__h.size)).toBe(1);
+    await page.evaluate(() => window.__c.destroy());
+    expect(await page.evaluate(() => getComputedStyle(document.getElementById('cv')).touchAction)).toBe('auto');
+    await expectNoErrors(page);
+  });
+});
