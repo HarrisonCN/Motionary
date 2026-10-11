@@ -123,4 +123,4 @@ function defineSkeletonReveal(tag = 'usa-skeleton-reveal') {
 
 exports.SKELETON_VARIANTS = SKELETON_VARIANTS;
 exports.defineSkeletonReveal = defineSkeletonReveal;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.7.0/dist/chunks/skeleton-reveal-Dsd3Wp0n.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.8.0/dist/chunks/skeleton-reveal-Dsd3Wp0n.cjs.map

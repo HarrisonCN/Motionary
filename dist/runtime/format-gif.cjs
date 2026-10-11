@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-DlT6mFCX.cjs');
-var animImage = require('../chunks/anim-image-CI1zz699.cjs');
+var registry = require('../chunks/registry-DghuE1q_.cjs');
+var animImage = require('../chunks/anim-image-B_Qz4e56.cjs');
 
 /**
  * `motionary/runtime/format-gif` (10.4) — a complete GIF decoder written for
@@ -200,4 +200,4 @@ exports.decodeGif = decodeGif;
 exports.formatGif = formatGif;
 exports.loadGif = loadGif;
 exports.lzwDecode = lzwDecode;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.7.0/dist/runtime/format-gif.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.8.0/dist/runtime/format-gif.cjs.map

@@ -335,6 +335,11 @@
     "limit": 3072
   },
   {
+    "name": "import 'motionary/components/gl-pool' (13.8 WebGL context pool + GPU budget, opt-in; not in lite)",
+    "import": "export * from 'pkg/components/gl-pool';",
+    "limit": 3072
+  },
+  {
     "name": "import 'motionary/components/perf-tasks' (13.4 yieldToMain / shouldYield / runChunked)",
     "import": "export * from 'pkg/components/perf-tasks';",
     "limit": 1024

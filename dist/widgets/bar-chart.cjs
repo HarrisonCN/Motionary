@@ -100,4 +100,4 @@ function defineBarChart(tag = 'usa-bar-chart') {
 }
 
 exports.defineBarChart = defineBarChart;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.7.0/dist/widgets/bar-chart.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.8.0/dist/widgets/bar-chart.cjs.map

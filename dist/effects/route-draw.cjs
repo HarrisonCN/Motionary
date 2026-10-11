@@ -15,4 +15,4 @@ function registerRouteDraw() {
 exports.effect = effect;
 exports.register = registerRouteDraw;
 exports.registerRouteDraw = registerRouteDraw;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.7.0/dist/effects/route-draw.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.8.0/dist/effects/route-draw.cjs.map

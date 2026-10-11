@@ -15,4 +15,4 @@ function registerNumberRoll() {
 exports.effect = effect;
 exports.register = registerNumberRoll;
 exports.registerNumberRoll = registerNumberRoll;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.7.0/dist/effects/number-roll.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.8.0/dist/effects/number-roll.cjs.map

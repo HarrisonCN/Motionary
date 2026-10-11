@@ -11312,4 +11312,4 @@ exports.viewTransition = viewTransition;
 exports.warnBaseline = warnBaseline;
 exports.watchPowerSaver = watchPowerSaver;
 exports.withoutDeprecations = withoutDeprecations;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.7.0/dist/components/lite.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.8.0/dist/components/lite.cjs.map

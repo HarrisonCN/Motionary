@@ -1,8 +1,8 @@
 'use strict';
 
-var widgets_shaderBackdrop = require('../chunks/shader-backdrop-C4UhepvI.cjs');
+var widgets_shaderBackdrop = require('../chunks/shader-backdrop-BodjXMhw.cjs');
 
 
 
 exports.defineShaderBackdrop = widgets_shaderBackdrop.defineShaderBackdrop;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.7.0/dist/widgets/shader-backdrop.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.8.0/dist/widgets/shader-backdrop.cjs.map

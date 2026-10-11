@@ -11,4 +11,4 @@ function registerBarsGrow() {
 }
 
 export { effect, registerBarsGrow as register, registerBarsGrow };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.7.0/dist/effects/bars-grow.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.8.0/dist/effects/bars-grow.js.map

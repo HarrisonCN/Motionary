@@ -40,7 +40,10 @@ let gl2: boolean | null = null;
 export function supportsWebGL2(): boolean {
   if (gl2 !== null) return gl2;
   try {
-    gl2 = typeof document !== 'undefined' && !!document.createElement('canvas').getContext('webgl2');
+    // 13.8: release the probe context right away (it used to linger until GC, one per probe, counting toward the browser's cap)
+    const g = typeof document !== 'undefined' ? document.createElement('canvas').getContext('webgl2') : null;
+    gl2 = !!g;
+    g?.getExtension('WEBGL_lose_context')?.loseContext();
   } catch {
     gl2 = false;
   }

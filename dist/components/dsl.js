@@ -199,4 +199,4 @@ function createComponent(desc) {
 }
 
 export { applyMotion, bindMotion, createComponent, motion, parseMotion, serializeMotion };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.7.0/dist/components/dsl.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.8.0/dist/components/dsl.js.map

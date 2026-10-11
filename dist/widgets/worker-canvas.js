@@ -1,2 +1,2 @@
 export { d as defineWorkerCanvas } from '../chunks/worker-canvas-CPZvzrWQ.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.7.0/dist/widgets/worker-canvas.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.8.0/dist/widgets/worker-canvas.js.map

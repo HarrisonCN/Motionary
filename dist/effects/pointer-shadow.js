@@ -11,4 +11,4 @@ function registerPointerShadow() {
 }
 
 export { effect, registerPointerShadow as register, registerPointerShadow };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.7.0/dist/effects/pointer-shadow.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.8.0/dist/effects/pointer-shadow.js.map

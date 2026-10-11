@@ -1,6 +1,6 @@
 'use strict';
 
-var components_fxGpu = require('../chunks/gpu-DTO3JmAF.cjs');
+var components_fxGpu = require('../chunks/gpu-C2C6iBQC.cjs');
 var components_fxText = require('./fx-text.cjs');
 var components_fxLight = require('./fx-light.cjs');
 var components_fx3d = require('./fx-3d.cjs');
@@ -130,4 +130,4 @@ exports.text = text;
 exports.transitions = transitions;
 exports.video = video;
 exports.weather = weather;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.7.0/dist/components/plugins.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.8.0/dist/components/plugins.cjs.map

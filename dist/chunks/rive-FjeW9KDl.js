@@ -136,4 +136,4 @@ function defineRive(tag = 'usa-rive') {
 }
 
 export { RIVE_CDN as R, RIVE_PEER as a, defineRive as d, loadRiveRuntime as l, provideRiveRuntime as p };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.7.0/dist/chunks/rive-FjeW9KDl.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.8.0/dist/chunks/rive-FjeW9KDl.js.map

@@ -56,3 +56,8 @@ worker string.
 
 See [perf-ci.md](perf-ci.md). The scheduler numbers are measured in Chromium with fixed CPU throttling
 (not on real devices).
+
+## WebGL contexts (13.8)
+
+The offscreen pause parks frame loops; `motionary/components/gl-pool` goes one step further for WebGL: it caps live
+contexts and takes them back from off-screen components (re-mounted when they scroll back). See [gl-pool.md](gl-pool.md).

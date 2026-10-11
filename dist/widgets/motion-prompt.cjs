@@ -115,4 +115,4 @@ function defineMotionPrompt(tag = 'usa-motion-prompt') {
 }
 
 exports.defineMotionPrompt = defineMotionPrompt;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.7.0/dist/widgets/motion-prompt.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.8.0/dist/widgets/motion-prompt.cjs.map

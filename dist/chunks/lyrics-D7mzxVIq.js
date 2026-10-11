@@ -121,4 +121,4 @@ function defineLyrics(tag = 'usa-lyrics') {
 }
 
 export { defineLyrics as d, parseLRC as p };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.7.0/dist/chunks/lyrics-D7mzxVIq.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.8.0/dist/chunks/lyrics-D7mzxVIq.js.map
