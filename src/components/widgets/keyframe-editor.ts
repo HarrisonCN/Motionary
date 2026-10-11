@@ -1,6 +1,6 @@
 import { raf as sraf, caf as scaf } from '../base';
 import { defineElement, type UsaElement } from '../base';
-import { createPlayer, ANIMATION_FORMAT, type AnimationJSON, type Player } from '../effects/player';
+import { createPlayerCore as createPlayer, ANIMATION_FORMAT, type AnimationJSON, type Player } from '../effects/player-core';
 import css from './keyframe-editor.css?raw';
 
 /**

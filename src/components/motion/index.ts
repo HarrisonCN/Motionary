@@ -4,6 +4,7 @@
  *
  * ```ts
  * import { animate, sequence, parallel, stagger, spring, timeline } from 'motionary/motion';
+ * import { playScene } from 'motionary/motion/scene'; // scene v2 → one controller (own entry)
  *
  * const intro = sequence([
  *   animate('.title', 'fade-up', { duration: '{duration.slow}' }),
@@ -30,7 +31,6 @@ import { resolveDurationToken, resolveEasingToken, MOTION_TOKENS } from '../toke
 import { springSamples, resolveSpring, linearEasing, supportsLinearEasing } from '../physics/spring';
 import type { SpringInput } from '../physics/spring';
 import { control, group, loop } from './controls';
-import { sceneToAnimation } from '../scene/play';
 import type { Ctl, MotionControls, MotionNode, ControlOptions } from './controls';
 
 export type { MotionControls, MotionPlayState, ControlOptions } from './controls';
@@ -66,23 +66,19 @@ export function cubicBezier(x1: number, y1: number, x2: number, y2: number): (p:
   const f = (a: number, b: number, t: number) => ((1 - 3 * b + 3 * a) * t + (3 * b - 6 * a)) * t * t + 3 * a * t;
   return (x) => {
     if (x <= 0 || x >= 1) return x <= 0 ? 0 : 1;
+    // bisection on x(t): 24 halvings ≈ 6e-8 precision
     let lo = 0, hi = 1, t = x;
-    for (let i = 0; i < 30; i++) {
-      const v = f(x1, x2, t);
-      if (Math.abs(v - x) < 1e-6) break;
-      v < x ? (lo = t) : (hi = t);
-      t = (lo + hi) / 2;
-    }
+    for (let i = 0; i < 24; i++) f(x1, x2, t) < x ? (lo = t) : (hi = t), (t = (lo + hi) / 2);
     return f(y1, y2, t);
   };
 }
-const KW: Record<string, number[]> = { ease: [0.25, 0.1, 0.25, 1], 'ease-in': [0.42, 0, 1, 1], 'ease-out': [0, 0, 0.58, 1], 'ease-in-out': [0.42, 0, 0.58, 1] };
+const KW: Record<string, string> = { ease: '.25,.1,.25,1', 'ease-in': '.42,0,1,1', 'ease-out': '0,0,.58,1', 'ease-in-out': '.42,0,.58,1' };
 
 /** A CSS easing string (keyword, `cubic-bezier()`, `steps()`, `linear(…)`, token) or function → function of 0–1. */
 export function toEasingFn(e?: EasingInput): (p: number) => number {
   if (typeof e === 'function') return e;
-  const s = easeCss(e).trim();
-  if (KW[s]) return cubicBezier(...(KW[s] as [number, number, number, number]));
+  let s = easeCss(e).trim();
+  if (KW[s]) s = `cubic-bezier(${KW[s]})`;
   const n = (/\(([^)]*)\)/.exec(s)?.[1] || '').split(',').map((x) => parseFloat(x));
   if (s.startsWith('cubic-bezier') && n.length === 4) return cubicBezier(n[0], n[1], n[2], n[3]);
   if (s.startsWith('steps') && n[0] > 0) return (p) => Math.min(1, Math.floor(p * n[0]) / n[0]);
@@ -119,7 +115,7 @@ function leaf(o: MotionOptions, draw: (t: number, dur: number) => void, x?: () =
 }
 
 function node(target: MotionTarget, keyframes: MotionKeyframes | undefined, o: MotionOptions, waapiEasing?: string): MotionNode {
-  const ease = toEasingFn(o.easing || (isEls(target) && typeof target !== 'function' ? 'ease' : 'linear'));
+  const ease = toEasingFn(o.easing || (isEls(target) ? 'ease' : 'linear'));
   if (typeof target === 'function') {
     let last: number | undefined;
     return leaf(o, (t, d) => {
@@ -224,11 +220,9 @@ export function stagger(targets: any, a?: any, b?: StaggerOptions): MotionContro
   const o: StaggerOptions = b || {};
   const list = els(targets);
   const off = offsets(list.length, o);
-  const { autoplay, onUpdate, onComplete, playbackRate, reducedMotion, repeat, alternate, ...leafO } = o;
-  return group(
-    list.map((el, i) => [control(node(el, a, leafO), { autoplay: false }), off[i]] as [Ctl, number]),
-    { autoplay, onUpdate, onComplete, playbackRate, reducedMotion, repeat, alternate }
-  );
+  // repeat / alternate and the control options belong to the group; each leaf gets one pass
+  const leafO = { ...o, repeat: 0, alternate: false };
+  return group(list.map((el, i) => [control(node(el, a, leafO), { autoplay: false }), off[i]] as [Ctl, number]), o);
 }
 
 /**
@@ -241,18 +235,13 @@ export function spring(target: MotionTarget, a?: any, b?: any, c?: any): MotionC
   const fn = typeof target === 'function';
   const input: SpringInput = fn ? a : b;
   const o = (fn ? b : c) || {};
-  const cfg = typeof input === 'string' && /^\{spring\.(.+)\}$/.test(input) ? springToken(input) : input;
+  const tok = typeof input === 'string' && /^\{spring\.(.+)\}$/.exec(input);
+  const cfg = tok ? ((MOTION_TOKENS.spring as any)[tok[1]] && resolveSpring((MOTION_TOKENS.spring as any)[tok[1]])) || undefined : input;
   const { values, duration } = springSamples(cfg);
   const css = supportsLinearEasing() ? linearEasing(values) : 'cubic-bezier(0.34, 1.56, 0.64, 1)';
   const opts: MotionOptions = { ...o, duration, easing: pts(values) };
   return control(node(target, fn ? undefined : a, opts, css), opts);
 }
-function springToken(ref: string): SpringInput {
-  const name = ref.slice(8, -1);
-  const t = (MOTION_TOKENS.spring as any)[name];
-  return t ? resolveSpring(t) : undefined;
-}
-
 export interface TimelineBuilder extends MotionControls {
   /** Add a child at a position (ms, `'>'`, `'<'`, `'+=n'`, `'-=n'`, `'label'`, `'label+=n'`; default `'>'` = after the last). */
   add(child: MotionControls, position?: number | string): TimelineBuilder;
@@ -281,63 +270,25 @@ export function timeline(entries?: [MotionControls, (number | string)?][] | Moti
       queueMicrotask(() => ctl.playState === 'idle' && ctl.play());
     }
   };
-  const tl = new Proxy({} as TimelineBuilder, {
-    get(_, k) {
-      if (k === 'add')
-        return (child: MotionControls, pos?: number | string) => {
-          const at = resolvePosition(pos, end, prev, labels);
-          items.push([child as Ctl, at]);
-          prev = at;
-          end = Math.max(end, at + (child as Ctl)._n.d);
-          rebuild();
-          return tl;
-        };
-      if (k === 'label')
-        return (name: string, pos?: number | string) => {
-          labels[name] = resolvePosition(pos, end, prev, labels);
-          return tl;
-        };
-      if (k === '_n' || k === '_a') return (ctl as any)[k];
+  const add = (child: MotionControls, pos?: number | string) => {
+    const at = resolvePosition(pos, end, prev, labels);
+    items.push([child as Ctl, (prev = at)]);
+    end = Math.max(end, at + (child as Ctl)._n.d);
+    rebuild();
+    return tl;
+  };
+  const label = (name: string, pos?: number | string) => ((labels[name] = resolvePosition(pos, end, prev, labels)), tl);
+  // the builder forwards to the current composition; chainable methods return the builder
+  const tl: TimelineBuilder = new Proxy({} as any, {
+    get: (_, k) => {
+      if (k === 'add') return add;
+      if (k === 'label') return label;
       const v = (ctl as any)[k];
-      return typeof v === 'function' ? (...args: any[]) => { const r = v.apply(ctl, args); return r === ctl ? tl : r; } : v;
+      return typeof v === 'function' && k !== '_a' ? (...args: any[]) => { const r = v.apply(ctl, args); return r === ctl ? tl : r; } : v;
     },
-    set(_, k, v) {
-      (ctl as any)[k] = v;
-      return true;
-    },
+    set: (_, k, v) => (((ctl as any)[k] = v), true),
   });
   for (const [c, p] of entries || []) tl.add(c, p);
   if (!(entries as any[])?.length && queued) rebuild();
   return tl;
-}
-
-export interface PlaySceneOptions extends ControlOptions {
-  /** Called when the playhead first passes an effect track (`<usa-player>` fires registered effects; the engine leaves that to you). */
-  onEffect?: (el: Element, effect: string, options: Record<string, unknown>) => void;
-}
-
-/**
- * Play a Scene Format v2 document (or `motionary-timeline` v1 / animation JSON v1) inside `root` with
- * Motion Engine v2: one standard controller for the whole scene. Token references, mute / solo and
- * seeded `random()` are resolved like `<usa-player>` does (same loader).
- */
-export function playScene(root: Element, doc: any, options: PlaySceneOptions = {}): MotionControls {
-  const d = typeof doc === 'string' ? JSON.parse(doc) : doc;
-  if (!d || typeof d !== 'object') throw new Error('[motionary] playScene: expected a scene document');
-  const a = d.format === 'motionary-scene' || d.format === 'motionary-timeline' ? sceneToAnimation(d) : { tracks: d.format === 'use-scroll-animate/animation' && Array.isArray(d.tracks) ? d.tracks : [], loop: false, duration: 0 };
-  const pick = (sel?: string): Element[] => (!sel || sel === ':scope' ? [root] : Array.from(root.querySelectorAll(sel)));
-  const items: [Ctl, number][] = [];
-  for (const t of a.tracks) {
-    const list = pick(t.target);
-    if (!list.length) continue;
-    const at = Math.max(0, Number(t.start) || 0);
-    if (t.effect) {
-      let fired = false;
-      items.push([control(node((p: number) => { if (p >= 1 && !fired) { fired = true; list.forEach((el) => options.onEffect?.(el, t.effect!, (t.options as any) || {})); } }, undefined, { duration: 1 }), { autoplay: false }), at]);
-      continue;
-    }
-    items.push([control(node(list, t.keyframes || t.preset || 'fade', { duration: Math.max(1, Number(t.duration) || 600), easing: t.easing || 'cubic-bezier(0.22, 1, 0.36, 1)' }), { autoplay: false }), at]);
-  }
-  if (a.duration) items.push([control({ d: a.duration, r() {} }, { autoplay: false }), 0]);
-  return group(items, { ...options, repeat: a.loop ? Infinity : 0 });
 }

@@ -36,7 +36,7 @@ installCompatV13(); // returns an uninstall function
 
 `motionary/compat-v13` is its own entry: nothing in `motionary`, `motionary/core`, `motionary/components` or lite imports
 it. In development it logs one notice per removed interface you still use (production builds drop the notices;
-`globalThis.MOTIONARY_NO_DEPRECATION = true` silences them). It is planned for removal in 15.0.
+`globalThis.MOTIONARY_NO_DEPRECATION = true` silences them). It is planned for removal in 15.0. Every removed interface, its replacement and its migration path: [deprecations-v14.md](./deprecations-v14.md).
 
 ## 3. `npx motionary migrate --code`
 
@@ -69,7 +69,8 @@ document with `loadMotionDoc()`. Format and API: [scene-v2.md](./scene-v2.md).
 One composable API with one controller interface:
 
 ```ts
-import { animate, sequence, parallel, stagger, spring, timeline, playScene } from 'motionary/motion';
+import { animate, sequence, parallel, stagger, spring, timeline } from 'motionary/motion';
+import { playScene } from 'motionary/motion/scene'; // scene v2 → one controller (own entry)
 
 const intro = sequence([
   animate('.title', 'fade-up', { duration: '{duration.slow}' }),

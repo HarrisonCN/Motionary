@@ -10,6 +10,7 @@ export const LAYER_ALIASES = {
   angular: 'components/angular',
   // 14.0: Motion Engine v2, the official Scene Format v2 entry, the 13.x compat layer
   motion: 'components/motion',
+  'motion/scene': 'components/motion-scene',
   scene: 'components/scene-v2',
   'compat-v13': 'components/compat-v13',
 };

@@ -10,13 +10,13 @@ import type { AnimationJSON, AnimationTrack } from '../effects/player';
 import { getMotionTokens } from '../tokens/index';
 import { resolveRandom } from '../timeline/editor/format';
 
-const REF = /^\{(duration|easing|spring)\.([\w-]+)\}$/;
+/** @internal `{group.name}` token reference. */
+export const REF = /^\{(duration|easing|spring)\.([\w-]+)\}$/;
 
 /** Scene v2 / timeline v1 → playable animation JSON v1. Throws on a document it cannot read. */
 export function sceneToAnimation(d: any): Required<Pick<AnimationJSON, 'tracks' | 'duration' | 'loop' | 'name'>> {
-  if (d.format === 'motionary-scene' && d.version > 2) throw new Error(`[motionary] scene: version ${d.version} needs a newer motionary`);
-  if (d.format === 'motionary-scene' ? d.version !== 2 : d.version !== 1) throw new Error(`[motionary] scene: unsupported ${d.format} version ${d.version}`);
-  if (!Array.isArray(d.layers)) throw new Error('[motionary] scene: "layers" must be an array (validate with validateSceneV2 from motionary/scene)');
+  if (d.version !== (d.format === 'motionary-scene' ? 2 : d.format === 'motionary-timeline' ? 1 : NaN) || !Array.isArray(d.layers))
+    throw new Error(`[motionary] scene: cannot read ${d.format} v${d.version} with "layers" ${typeof d.layers} (validateSceneV2 from motionary/scene explains; a newer version needs a newer motionary)`);
   const tok = getMotionTokens() as any;
   const r = (v: any) => {
     const m = typeof v === 'string' && REF.exec(v);

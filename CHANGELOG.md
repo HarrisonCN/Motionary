@@ -21,11 +21,14 @@ presets and tokens unchanged (no visual changes); `motionary/components/lite` st
   lite): `animate()` (elements with keyframes / presets / property-indexed keyframes, plain objects, callbacks),
   `sequence()`, `parallel()`, `stagger()` (`each`, `from`; also offsets existing controllers), `spring()` (spring presets,
   configs, `{spring.x}` tokens; overshoot via CSS `linear()`), `timeline()` (`add` / `label` with the 3.1 position
-  grammar) and `playScene()` (scene v2 → one controller). All return the same `MotionControls`: `play` / `pause` /
+  grammar). All return the same `MotionControls`: `play` / `pause` /
   `seek` / `reverse` / `finish` / `cancel`, `finished` (rejects with `AbortError` on cancel), `currentTime`, `progress`,
   `duration`, `playbackRate`, `playState`. Compositions adopt and nest their children. Built on the shared frame
   scheduler + motion clock (13.4 / 8.0), the timeline runtime's `resolvePosition` / presets, motion tokens and the 2.3
   spring solver; DOM leaves are paused WAAPI animations driven by the controller; reduced motion jumps to the end.
+- **`motionary/motion/scene`** (= `motionary/components/motion-scene`; own entry, own 5.5 KB budget): `playScene()` —
+  a scene v2 document (or timeline v1 / animation JSON v1) as one `MotionControls`, through the same loader as
+  `<usa-player>`. Separate from `motionary/motion` so the engine stays ≤ 5 KB.
 - **`motionary/scene`**: the official Scene Format v2 entry (same files as `motionary/components/scene-v2`, which stays).
   `SCENE_V2_STATUS` is `'stable'`; validator, schema and converters unchanged.
 - **`<usa-player>` / `createPlayer()` read scene v2 natively** (token references, mute / solo, seeded `random()`), and
@@ -58,7 +61,16 @@ presets and tokens unchanged (no visual changes); `motionary/components/lite` st
 
 - Written first: `test/motion-engine-v2-14-0.test.ts`, `test/scene-v2-official-14-0.test.ts`,
   `test/compat-v13-14-0.test.ts` (all three failed before: modules missing / 12 of 14 scene tests;
-  usa-tools/v14.0.0/failing-before.txt). 13.x tests that pinned removed behaviour now go through the compat entry.
+  kept in the release notes). 13.x tests that pinned removed behaviour now go through the compat entry
+  (`test/player-6.test.ts`, `test/deprecations-13-9.test.ts`).
+- Real browser: `test/browser/motion-engine.spec.mjs` — engine seek / sequence / stagger / reverse / cancel on real WAAPI,
+  spring overshoot through CSS `linear()`, and a scene v2 document reaching the same computed state in `<usa-player>`
+  and `playScene()`.
+
+### Size
+
+- `motionary/components/lite` unchanged (≤ 70 KB, budget not raised). The keyframe editor widget imports the player
+  without the scene loader (`effects/player-core`), so it stays within its 6.5 KB line.
 
 ## [13.9.0] - 2026-10-11
 

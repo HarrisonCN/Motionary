@@ -6,7 +6,7 @@
  * any motion document (scene v2, timeline v1, `<usa-player>` animation JSON v1).
  * `motionary/scene`'s `sceneV2FromTimeline` / `sceneV2ToTimeline` use this same mapping.
  */
-import { normalizeTimelineDoc, parseTimelineDoc, timelineDocFromAnimation, TimelineDocError, TIMELINE_DOC_FORMAT } from './format';
+import { normalizeTimelineDoc, parseTimelineDoc, timelineDocFromAnimation, TimelineDocError, TIMELINE_DOC_FORMAT, cloneJson as clone } from './format';
 import type { TimelineDoc, TimelineLayer, TimelineKeyframe, TimelineValue } from './format';
 import { MOTION_TOKENS } from '../../tokens/index';
 import type { SceneV2Doc } from '../../scene/v2';
@@ -15,7 +15,6 @@ import type { SceneV2Doc } from '../../scene/v2';
 export interface SceneLoss { path: string; message: string }
 
 const REF = /^\{(duration|easing|spring)\.([\w-]+)\}$/;
-const clone = (v: unknown): any => (v === undefined ? undefined : JSON.parse(JSON.stringify(v)));
 
 /** The editor document as scene v2 (lossless: `timelineDocFromScene(timelineDocToScene(d)).doc` equals the canonical `d`). */
 export function timelineDocToScene(doc: TimelineDoc): SceneV2Doc {
@@ -42,15 +41,15 @@ export function timelineDocFromScene(scene: SceneV2Doc): { doc: TimelineDoc; los
   const lost: SceneLoss[] = [];
   const fromTimeline = scene.source?.format === TIMELINE_DOC_FORMAT;
   if (scene.loop) lost.push({ path: 'loop', message: 'timeline v1 has no loop' });
-  if (scene.tokens) lost.push({ path: 'tokens', message: 'token references resolved to values' });
+  if (scene.tokens) lost.push({ path: 'tokens', message: 'tokens resolved' });
   const layers = scene.layers.map((l, i) => {
     const n: TimelineLayer = { id: l.id, type: l.type };
     for (const f of ['name', 'parent'] as const) if (l[f] !== undefined) n[f] = l[f];
     for (const f of ['locked', 'muted', 'solo'] as const) if (l[f]) n[f] = true;
     if (l.type === 'track') {
       if (l.target !== undefined) n.target = l.target;
-      for (const f of ['preset', 'effect', 'component'] as const) if (l[f] !== undefined) lost.push({ path: `layers[${i}].${f}`, message: `timeline v1 tracks have no ${f}` });
-      if (!fromTimeline) for (const f of ['start', 'duration', 'easing'] as const) if (l[f] !== undefined && l.keyframes) lost.push({ path: `layers[${i}].${f}`, message: 'kept only through keyframe times / easings' });
+      for (const f of ['preset', 'effect', 'component'] as const) if (l[f] !== undefined) lost.push({ path: `layers[${i}].${f}`, message: `timeline v1 has no ${f}` });
+      if (!fromTimeline) for (const f of ['start', 'duration', 'easing'] as const) if (l[f] !== undefined && l.keyframes) lost.push({ path: `layers[${i}].${f}`, message: 'kept as keyframe times / easings' });
       const le = r(l.easing);
       n.keyframes = [...(l.keyframes || [])].sort((a, b) => a.time - b.time).map((k) => {
         const props: Record<string, TimelineValue> = {};
@@ -58,7 +57,7 @@ export function timelineDocFromScene(scene: SceneV2Doc): { doc: TimelineDoc; los
         const kf: TimelineKeyframe = { id: k.id, time: k.time, props };
         const e = r(k.easing) ?? (le && le !== 'linear' ? le : undefined);
         if (e !== undefined) kf.easing = e;
-        if (k.composite && k.composite !== 'replace') lost.push({ path: `layers[${i}].keyframes.${k.id}.composite`, message: 'timeline v1 keyframes have no composite' });
+        if (k.composite && k.composite !== 'replace') lost.push({ path: `layers[${i}].keyframes.${k.id}.composite`, message: 'timeline v1 has no composite' });
         return kf;
       });
     }
@@ -80,7 +79,7 @@ export function loadMotionDoc(input: unknown): { doc: TimelineDoc; lost: SceneLo
   if (d?.format === TIMELINE_DOC_FORMAT) return { doc: parseTimelineDoc(d), lost: [] };
   if (d && Array.isArray(d.tracks)) {
     const { doc, skipped } = timelineDocFromAnimation(d);
-    return { doc, lost: skipped.map((i) => ({ path: `tracks[${i}]`, message: 'effect / empty track — no keyframes' })) };
+    return { doc, lost: skipped.map((i) => ({ path: `tracks[${i}]`, message: 'no keyframes' })) };
   }
-  throw new TimelineDocError([{ path: 'format', message: 'not a motion document (expected motionary-scene v2, motionary-timeline v1 or animation JSON v1)' }]);
+  throw new TimelineDocError([{ path: 'format', message: 'not scene v2, timeline v1 or animation JSON v1' }]);
 }

@@ -64,7 +64,7 @@ The exit code is 0 when every file migrated, 1 when any failed (problems are pri
 |---|---|---|
 | `<usa-player>` / `createPlayer()` | native: layers → tracks (token references resolved, muted / solo honoured, `random()` with the seed) | timeline v1: auto-migrated; animation JSON v1 with `format` / `version`: as before. Playground state and unversioned JSON: removed, `installCompatV13()` from `motionary/compat-v13` reads them |
 | Timeline editor (`motionary/components/timeline-editor`) | `timelineDocToScene(doc)` writes v2 losslessly; `timelineDocFromScene(scene)` opens v2 with a `lost` list; `loadMotionDoc(any)` opens any motion document | editor documents are timeline v1 internally (a subset of v2) |
-| Motion Engine v2 (`motionary/motion`) | `playScene(root, scene)` returns the standard controller (play / pause / seek / reverse / finished / cancel) | timeline v1 and animation JSON v1 too |
+| Motion Engine v2 (`motionary/motion/scene`) | `playScene(root, scene)` returns the standard controller (play / pause / seek / reverse / finished / cancel) | timeline v1 and animation JSON v1 too |
 
 ## Round trips (tested on golden fixtures in `test/fixtures/scene-v2/`)
 

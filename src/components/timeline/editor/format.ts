@@ -182,7 +182,8 @@ const sortKeys = <T extends Record<string, any>>(o: T): T => {
   for (const k of Object.keys(o).sort()) r[k] = o[k];
   return r;
 };
-const cloneJson = (v: unknown): any => (v === undefined ? undefined : JSON.parse(JSON.stringify(v)));
+/** @internal */
+export const cloneJson = (v: unknown): any => (v === undefined ? undefined : JSON.parse(JSON.stringify(v)));
 
 /** The canonical form of a valid document: fixed key order, keyframes sorted by time (stable), prop names sorted, defaults omitted. */
 export function normalizeTimelineDoc(doc: TimelineDoc): TimelineDoc {

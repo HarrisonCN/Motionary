@@ -5,8 +5,12 @@ One composable animation API with **one controller interface**. Opt-in entry (`m
 dependencies.
 
 ```ts
-import { animate, sequence, parallel, stagger, spring, timeline, playScene } from 'motionary/motion';
+import { animate, sequence, parallel, stagger, spring, timeline } from 'motionary/motion';
+import { playScene } from 'motionary/motion/scene'; // own entry: adds the scene v2 loader
 ```
+
+`motionary/motion` stays ≤ 5 KB gzip; `playScene` lives in `motionary/motion/scene` (=
+`motionary/components/motion-scene`, its own ≤ 5.5 KB budget) because it carries the scene loader `<usa-player>` uses.
 
 ## Building blocks
 
@@ -18,7 +22,7 @@ import { animate, sequence, parallel, stagger, spring, timeline, playScene } fro
 | `stagger(targets, keyframes, { each?, from? })` | one animation per element, starts `each` ms apart (`from`: `'first'`, `'last'`, `'center'` or an index). `stagger(controls[], { each })` offsets existing controllers |
 | `spring(target, keyframes, spring?, options?)` | duration and easing from spring physics: `'bouncy'` (preset), `{ stiffness, damping, mass, velocity }` or a token `'{spring.snappy}'`. Overshoots (CSS `linear()` easing where supported) |
 | `timeline(entries?, options?)` | children on one playhead: `.add(child, position)`, `.label(name, position)`; positions `1200`, `'>'`, `'<'`, `'+=200'`, `'-=100'`, `'label+=80'` (the 3.1 timeline grammar) |
-| `playScene(root, scene, { onEffect? })` | plays a Scene Format v2 document (or timeline v1 / animation JSON v1) inside `root`, with the same loader as `<usa-player>` |
+| `playScene(root, scene, { onEffect? })` (from `motionary/motion/scene`) | plays a Scene Format v2 document (or timeline v1 / animation JSON v1) inside `root`, with the same loader as `<usa-player>` |
 
 Options for leaves: `duration` (ms or a token: `'{duration.fast}'`, `'fast'`), `delay`, `endDelay`, `easing` (CSS
 string, `'{easing.standard}'`, or a function of 0–1; default `ease` for elements, `linear` for objects and callbacks),

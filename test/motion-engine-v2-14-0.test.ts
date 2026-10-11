@@ -4,7 +4,8 @@
 // 13.4 frame scheduler and the 8.0 motion clock, reusing the timeline runtime's position grammar and presets.
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
-import { animate, sequence, parallel, stagger, spring, timeline, playScene, cubicBezier, toEasingFn, MOTION_ENGINE_VERSION } from '../src/components/motion/index';
+import { animate, sequence, parallel, stagger, spring, timeline, cubicBezier, toEasingFn, MOTION_ENGINE_VERSION } from '../src/components/motion/index';
+import { playScene } from '../src/components/motion/scene'; // own entry motionary/motion/scene (keeps motionary/motion ≤ 5 KB)
 import { setClock } from '../src/components/base';
 
 const pkg = JSON.parse(readFileSync('package.json', 'utf8'));
