@@ -4,7 +4,6 @@
 // attribute), Motion Engine v2 + Scene Format v2 integration, and a Figma Variables (REST API shapes) adapter + CLI.
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { readFileSync, writeFileSync, mkdtempSync, rmSync, existsSync } from 'node:fs';
-import { execSync } from 'node:child_process';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import * as T from '../src/components/tokens/v2';
@@ -21,7 +20,8 @@ import { main } from '../bin/motionary.mjs';
 
 const pkg = JSON.parse(readFileSync('package.json', 'utf8'));
 const budgets = JSON.parse(readFileSync('size-budget.json', 'utf8')) as { name: string; import?: string; file?: string; limit: number }[];
-const mainBudgets = JSON.parse(execSync('git show origin/main:size-budget.json', { encoding: 'utf8' })) as typeof budgets;
+// the 14.0.0 budget lines (snapshot of main at 9e842456; CI clones are shallow, so no `git show origin/main`)
+const mainBudgets = JSON.parse(readFileSync('test/fixtures/size-budget-14-0-0.json', 'utf8')) as typeof budgets;
 
 describe('14.1 Motion Tokens 2.0: entry and packaging', () => {
   it('is its own opt-in entry motionary/tokens (= motionary/components/motion-tokens), not part of lite', () => {
