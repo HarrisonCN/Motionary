@@ -20,16 +20,23 @@ const freePort = () => new Promise((res) => { const s = createServer(); s.listen
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 async function rpc(url, key, session, body) {
-  const r = await fetch(url, { method: 'POST', headers: { 'content-type': 'application/json', accept: 'application/json, text/event-stream', authorization: `Bearer ${key}`, ...(session ? { 'mcp-session-id': session } : {}), 'mcp-protocol-version': '2025-06-18' }, body: JSON.stringify(body) });
+  const r = await fetch(url, { signal: AbortSignal.timeout(30_000), method: 'POST', headers: { 'content-type': 'application/json', accept: 'application/json, text/event-stream', authorization: `Bearer ${key}`, ...(session ? { 'mcp-session-id': session } : {}), 'mcp-protocol-version': '2025-06-18' }, body: JSON.stringify(body) });
   const sid = r.headers.get('mcp-session-id') || session;
-  const text = await r.text();
-  if (!r.ok && r.status !== 202) throw new Error(`${body.method}: HTTP ${r.status} ${text.slice(0, 300)}`);
-  if (!('id' in body)) return { sid };
   const ct = r.headers.get('content-type') || '';
-  let msg;
+  if (!r.ok && r.status !== 202) throw new Error(`${body.method}: HTTP ${r.status} ${(await r.text()).slice(0, 300)}`);
+  if (!('id' in body)) { await r.body?.cancel().catch(() => {}); return { sid }; }
+  let msg, text = '';
   if (ct.includes('text/event-stream')) {
-    for (const line of text.split('\n')) if (line.startsWith('data:')) { const j = JSON.parse(line.slice(5)); if (j.id === body.id) msg = j; }
-  } else msg = JSON.parse(text);
+    // read the stream only until our response arrives — a server may keep an SSE stream open afterwards
+    const reader = r.body.getReader(), dec = new TextDecoder();
+    for (;;) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      text += dec.decode(value, { stream: true });
+      for (const line of text.split('\n')) if (line.startsWith('data:')) { try { const j = JSON.parse(line.slice(5)); if (j.id === body.id) msg = j; } catch { /* partial line */ } }
+      if (msg) { reader.cancel().catch(() => {}); break; }
+    }
+  } else msg = JSON.parse((text = await r.text()));
   if (!msg) throw new Error(`${body.method}: no response in ${text.slice(0, 300)}`);
   if (msg.error) throw new Error(`${body.method}: ${JSON.stringify(msg.error)}`);
   return { sid, result: msg.result };
@@ -48,19 +55,23 @@ export async function run({ log = console.log } = {}) {
     'mcp:', '  allowedOrigins: []', '',
   ].join('\n'));
   const cmd = (process.env.MGW_CMD || 'npx -y @winstonsayno/mcp-gateway@latest').split(' ');
-  const gw = spawn(cmd[0], [...cmd.slice(1), 'start', '-c', cfg], { env: { ...process.env, MCP_GATEWAY_API_KEYS: key }, stdio: ['ignore', 'pipe', 'pipe'] });
+  const gw = spawn(cmd[0], [...cmd.slice(1), 'start', '-c', cfg], { env: { ...process.env, MCP_GATEWAY_API_KEYS: key }, stdio: ['ignore', 'pipe', 'pipe'], detached: true }); // own process group: npx + the gateway it starts are stopped together
   let out = '';
+  log(`starting ${cmd.join(' ')} on 127.0.0.1:${port}`);
   gw.stdout.on('data', (d) => (out += d)); gw.stderr.on('data', (d) => (out += d));
   const url = `http://127.0.0.1:${port}/mcp`;
   try {
     let sid, ready = false;
-    for (let i = 0; i < 240 && !ready; i++) {
+    // npx may first download the gateway (CI); allow up to 3 minutes for it to listen
+    for (let i = 0; i < 360 && !ready; i++) {
       if (gw.exitCode !== null) throw new Error(`gateway exited (${gw.exitCode}):\n${out.slice(-2000)}`);
-      try { ({ sid } = await rpc(url, key, null, { jsonrpc: '2.0', id: 1, method: 'initialize', params: { protocolVersion: '2025-06-18', capabilities: {}, clientInfo: { name: 'motionary-interop', version: '1' } } })); ready = true; } catch (e) { if (i === 239) throw e; await sleep(500); }
+      try { ({ sid } = await rpc(url, key, null, { jsonrpc: '2.0', id: 1, method: 'initialize', params: { protocolVersion: '2025-06-18', capabilities: {}, clientInfo: { name: 'motionary-interop', version: '1' } } })); ready = true; } catch (e) { if (i === 359) throw new Error(`gateway never answered on ${url}: ${e.message}\n${out.slice(-2000)}`); await sleep(500); }
     }
+    log(`initialized (session ${sid ? 'yes' : 'none'})`);
     await rpc(url, key, sid, { jsonrpc: '2.0', method: 'notifications/initialized' });
     let tools = [];
     for (let i = 0; i < 40; i++) { tools = (await rpc(url, key, sid, { jsonrpc: '2.0', id: 2, method: 'tools/list' })).result.tools.map((t) => t.name); if (EXPECT_TOOLS.every((t) => tools.some((n) => n === t || n.endsWith(t)))) break; await sleep(500); }
+    log(`tools/list: ${tools.join(', ')}`);
     const name = (t) => tools.find((n) => n === t) || tools.find((n) => n.endsWith(t));
     const missing = EXPECT_TOOLS.filter((t) => !name(t));
     if (missing.length) throw new Error(`tools missing through the gateway: ${missing.join(', ')} (got ${tools.join(', ')})`);
@@ -76,11 +87,19 @@ export async function run({ log = console.log } = {}) {
     if (!['browser', 'static'].includes(v.mode)) throw new Error(`validate_snippet: ${JSON.stringify(v).slice(0, 300)}`);
     log(`gateway interop OK: ${tools.length} tools through ${cmd.join(' ')} (${EXPECT_TOOLS.length} expected); search → ${top}; check_compatibility ✓; suggest_fix ✓; validate_snippet mode=${v.mode}`);
     return { tools };
+  } catch (e) {
+    e.message += `\n--- gateway output (tail) ---\n${out.slice(-3000)}`;
+    throw e;
   } finally {
-    gw.kill('SIGTERM');
-    await sleep(300);
+    try { process.kill(-gw.pid, 'SIGTERM'); } catch { gw.kill('SIGTERM'); }
+    await sleep(500);
+    try { process.kill(-gw.pid, 'SIGKILL'); } catch { /* already gone */ }
+    gw.stdout.destroy(); gw.stderr.destroy(); gw.unref();
     rmSync(dir, { recursive: true, force: true });
   }
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) run().catch((e) => { console.error('gateway interop FAILED:', e.message); process.exit(1); });
+if (import.meta.url === `file://${process.argv[1]}`) {
+  const guard = setTimeout(() => { console.error('gateway interop FAILED: timed out after 8 minutes'); process.exit(1); }, 8 * 60_000);
+  run().then(() => { clearTimeout(guard); process.exit(0); }, (e) => { console.error('gateway interop FAILED:', e.message); process.exit(1); });
+}
