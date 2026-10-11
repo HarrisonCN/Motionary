@@ -113,4 +113,4 @@ exports.COMPAT_V13 = COMPAT_V13;
 exports.installCompatV13 = installCompatV13;
 exports.normalizeAnimation = normalizeAnimation;
 exports.upgradeLegacyAnimation = upgradeLegacyAnimation;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.1.0/dist/components/compat-v13.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.2.0/dist/components/compat-v13.cjs.map

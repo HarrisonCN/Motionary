@@ -1,4 +1,4 @@
-import { f as defineElement } from '../chunks/base-D0sRwVz1.js';
+import { f as defineElement } from '../chunks/base-ByyAdGqz.js';
 import { parseMotion } from '../components/dsl.js';
 import { motionToCss, easingPoints } from '../components/design.js';
 
@@ -65,4 +65,4 @@ function defineMotionSpec(tag = 'usa-motion-spec') {
 }
 
 export { defineMotionSpec };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.1.0/dist/widgets/motion-spec.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.2.0/dist/widgets/motion-spec.js.map

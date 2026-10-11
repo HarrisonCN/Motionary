@@ -1,4 +1,4 @@
-import { registerEffects } from '../chunks/registry-CE5_Mo_p.js';
+import { registerEffects } from '../chunks/registry-RLD_spxR.js';
 
 /** Horizontal background offset (px) of a 360° panorama `width` px wide for a `yaw` in degrees (wraps) (8.8). */
 function yawToOffset(yaw, width) {
@@ -91,4 +91,4 @@ function registerSpatialPack() {
 }
 
 export { SPATIAL_FX, registerSpatialPack, xrSupport, yawToOffset };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.1.0/dist/components/fx-spatial.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.2.0/dist/components/fx-spatial.js.map

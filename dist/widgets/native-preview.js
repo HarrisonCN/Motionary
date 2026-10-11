@@ -1,4 +1,4 @@
-import { f as defineElement } from '../chunks/base-D0sRwVz1.js';
+import { f as defineElement } from '../chunks/base-ByyAdGqz.js';
 import { n as nextId, a as arrowIndex } from '../chunks/shared-o9CtwHmi.js';
 import { toFlutter, toReactNative, entranceFrom } from '../components/native.js';
 import { parseMotion } from '../components/dsl.js';
@@ -92,4 +92,4 @@ function defineNativePreview(tag = 'usa-native-preview') {
 }
 
 export { defineNativePreview };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.1.0/dist/widgets/native-preview.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.2.0/dist/widgets/native-preview.js.map

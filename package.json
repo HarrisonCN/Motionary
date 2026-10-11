@@ -560,6 +560,16 @@
         "default": "./dist/components/motion-tokens.cjs"
       }
     },
+    "./motion/layout": {
+      "import": {
+        "types": "./dist/components/motion-layout.d.ts",
+        "default": "./dist/components/motion-layout.js"
+      },
+      "require": {
+        "types": "./dist/components/motion-layout.d.cts",
+        "default": "./dist/components/motion-layout.cjs"
+      }
+    },
     "./components/reveal": {
       "import": {
         "types": "./dist/components/reveal.d.ts",
@@ -4200,16 +4210,6 @@
     "./components/layout.css": "./dist/components/layout.css",
     "./components/packs.css": "./dist/components/packs.css",
     "./components/fx.css": "./dist/components/fx.css",
-    "./motion/layout": {
-      "import": {
-        "types": "./dist/components/motion-layout.d.ts",
-        "default": "./dist/components/motion-layout.js"
-      },
-      "require": {
-        "types": "./dist/components/motion-layout.d.cts",
-        "default": "./dist/components/motion-layout.cjs"
-      }
-    },
     "./package.json": "./package.json"
   },
   "files": [

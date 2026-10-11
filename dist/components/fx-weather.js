@@ -1,5 +1,5 @@
-import { registerEffects } from '../chunks/registry-CE5_Mo_p.js';
-import { c as canvasBackground } from '../chunks/generative-D1QtbFNP.js';
+import { registerEffects } from '../chunks/registry-RLD_spxR.js';
+import { c as canvasBackground } from '../chunks/generative-CbMIaqxn.js';
 import { r as rand } from '../chunks/shared-CkKHWrtJ.js';
 
 const bg = (name, description, defaults, spec) => ({
@@ -257,4 +257,4 @@ function registerWeatherPack() {
 }
 
 export { WEATHER_FX, registerWeatherPack, skyAt };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.1.0/dist/components/fx-weather.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.2.0/dist/components/fx-weather.js.map

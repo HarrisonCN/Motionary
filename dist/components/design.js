@@ -1,5 +1,5 @@
 import { serializeMotion, parseMotion } from './dsl.js';
-import { T as TIMELINE_PRESETS } from '../chunks/core-BSqTp8Bt.js';
+import { T as TIMELINE_PRESETS } from '../chunks/core-BPPcJVGQ.js';
 
 /**
  * `motionary/tooling/design` (= `motionary/tooling/design`, 9.7) — design-tool
@@ -106,4 +106,4 @@ function motionToCss(rules, selector = '.motion') {
 }
 
 export { easingPoints, figmaToMotion, framerComponent, motionToCss };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.1.0/dist/components/design.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.2.0/dist/components/design.js.map

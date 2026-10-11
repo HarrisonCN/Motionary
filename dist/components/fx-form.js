@@ -1,4 +1,4 @@
-import { registerEffects } from '../chunks/registry-CE5_Mo_p.js';
+import { registerEffects } from '../chunks/registry-RLD_spxR.js';
 
 /** Decaying sideways shake keyframes (7.7). */
 function shakeFrames(distance = 8, steps = 5) {
@@ -84,4 +84,4 @@ function registerFormPack() {
 }
 
 export { FORM_FX, registerFormPack, shakeFrames };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.1.0/dist/components/fx-form.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.2.0/dist/components/fx-form.js.map
