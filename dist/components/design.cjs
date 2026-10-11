@@ -1,10 +1,7 @@
 'use strict';
 
 var components_dsl = require('./dsl.cjs');
-var core = require('../chunks/core-6FhnH_Kv.cjs');
-require('../chunks/registry-CyVCJneg.cjs');
-require('../chunks/base-Do-R_9gU.cjs');
-require('./tokens.cjs');
+var core = require('../chunks/core-DjjKLmZ6.cjs');
 
 /**
  * `motionary/tooling/design` (= `motionary/tooling/design`, 9.7) — design-tool
@@ -114,4 +111,4 @@ exports.easingPoints = easingPoints;
 exports.figmaToMotion = figmaToMotion;
 exports.framerComponent = framerComponent;
 exports.motionToCss = motionToCss;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/design.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/components/design.cjs.map

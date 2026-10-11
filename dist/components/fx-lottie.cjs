@@ -1,7 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-CyVCJneg.cjs');
-require('../chunks/base-Do-R_9gU.cjs');
+var registry = require('../chunks/registry-CibnX7Ui.cjs');
 
 const arr = (v) => (Array.isArray(v) ? v.map(Number) : [Number(v)]);
 /** Frames (t) → values for one transform property (static props give one key at t = ip) (9.2). */
@@ -213,4 +212,4 @@ exports.lottieToKeyframes = lottieToKeyframes;
 exports.lottieToSvg = lottieToSvg;
 exports.registerLottiePack = registerLottiePack;
 exports.riveInputs = riveInputs;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/fx-lottie.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/components/fx-lottie.cjs.map

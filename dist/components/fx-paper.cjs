@@ -1,7 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-CyVCJneg.cjs');
-require('../chunks/base-Do-R_9gU.cjs');
+var registry = require('../chunks/registry-CibnX7Ui.cjs');
 
 /** A deterministic PRNG in [0, 1) from a seed (8.5). */
 function paperRandom(seed) {
@@ -105,4 +104,4 @@ exports.PAPER_FX = PAPER_FX;
 exports.paperRandom = paperRandom;
 exports.registerPaperPack = registerPaperPack;
 exports.roughLine = roughLine;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/fx-paper.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/components/fx-paper.cjs.map

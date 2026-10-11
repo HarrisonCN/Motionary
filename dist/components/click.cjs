@@ -1,8 +1,8 @@
 'use strict';
 
-var base = require('../chunks/base-Do-R_9gU.cjs');
-var spring = require('../chunks/spring-B0v7o7dG.cjs');
-var fx = require('../chunks/fx-O90ZgYwV.cjs');
+var base = require('../chunks/base-BvH4nAcv.cjs');
+var spring = require('../chunks/spring-XEl_diDJ.cjs');
+var fx = require('../chunks/fx-DaVuB89C.cjs');
 
 var css$6 = "usa-click{position:relative;display:inline-block;overflow:hidden;isolation:isolate;border-radius:inherit;-webkit-tap-highlight-color:transparent;touch-action:manipulation}usa-click[block]{display:block}usa-click .usa-click-wave{position:absolute;border-radius:50%;pointer-events:none;z-index:-1;transform:scale(0);background:radial-gradient(circle,var(--usa-wave) 0 55%,color-mix(in srgb,var(--usa-wave) 40%,transparent) 70%,transparent 72%)}";
 
@@ -878,4 +878,4 @@ exports.defineHold = defineHold;
 exports.defineIconMorph = defineIconMorph;
 exports.defineLike = defineLike;
 exports.morphPath = morphPath;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/click.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/components/click.cjs.map

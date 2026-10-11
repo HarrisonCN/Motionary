@@ -21,6 +21,2036 @@ declare const COMPONENT_CATEGORIES: {
     readonly fx: readonly ["usa-fx"];
 };
 
+/** Documented attributes of every shipped `<usa-*>` element, keyed by tag (attribute values are strings / flags). */
+interface UsaElementAttributeMap {
+    /** `<usa-accordion>` — Accordion (motionary/components/transitions). */
+    'usa-accordion': {
+        duration?: string | boolean | number;
+        multiple?: string | boolean | number;
+    };
+    /** `<usa-acrylic>` — Acrylic & Mica (motionary/components/background). */
+    'usa-acrylic': {
+        blur?: string | boolean | number;
+        shimmer?: string | boolean | number;
+        tint?: string | boolean | number;
+        'tint-opacity'?: string | boolean | number;
+    };
+    /** `<usa-add-to-cart>` — Add to cart (fly-to-cart) (motionary/components/widgets). */
+    'usa-add-to-cart': {
+        added?: string | boolean | number;
+        cart?: string | boolean | number;
+        from?: string | boolean | number;
+        hold?: string | boolean | number;
+        item?: string | boolean | number;
+        label?: string | boolean | number;
+    };
+    /** `<usa-ambient>` — Ambient layer (motionary/components/page). */
+    'usa-ambient': {
+        color?: string | boolean | number;
+        density?: string | boolean | number;
+        effect?: string | boolean | number;
+        opacity?: string | boolean | number;
+        speed?: string | boolean | number;
+    };
+    /** `<usa-anim-icon>` — Animated icons (motionary/components/svg). */
+    'usa-anim-icon': {
+        label?: string | boolean | number;
+        name?: string | boolean | number;
+        size?: string | boolean | number;
+        trigger?: string | boolean | number;
+    };
+    /** `<usa-audio>` — Beat-triggered effects (motionary/components/effects). */
+    'usa-audio': {
+        cooldown?: string | boolean | number;
+        label?: string | boolean | number;
+        source?: string | boolean | number;
+        threshold?: string | boolean | number;
+    };
+    /** `<usa-aurora>` — Aurora (motionary/components/background). */
+    'usa-aurora': {
+        colors?: string | boolean | number;
+        intensity?: string | boolean | number;
+        speed?: string | boolean | number;
+    };
+    /** `<usa-auto-animate>` — Auto-animate (motionary/components/layout). */
+    'usa-auto-animate': {
+        duration?: string | boolean | number;
+        'no-scale'?: string | boolean | number;
+    };
+    /** `<usa-auto-skeleton>` — Auto skeleton (motionary/components/page). */
+    'usa-auto-skeleton': {
+        loading?: string | boolean | number;
+    };
+    /** `<usa-avatar-stack>` — Avatar stack (motionary/components/ui). */
+    'usa-avatar-stack': {
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+        overlap?: string | boolean | number;
+        size?: string | boolean | number;
+    };
+    /** `<usa-back-to-top>` — Back to top (motionary/components/page). */
+    'usa-back-to-top': {
+        'focus-target'?: string | boolean | number;
+        label?: string | boolean | number;
+        offset?: string | boolean | number;
+    };
+    /** `<usa-badge>` — Badge (motionary/components/ui). */
+    'usa-badge': {
+        dot?: string | boolean | number;
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+        'show-zero'?: string | boolean | number;
+        value?: string | boolean | number;
+    };
+    /** `<usa-badge-wall>` — Badge wall (motionary/components/widgets). */
+    'usa-badge-wall': {
+        label?: string | boolean | number;
+    };
+    /** `<usa-bar-chart>` — Animated bar chart (motionary/components/widgets). */
+    'usa-bar-chart': {
+        horizontal?: string | boolean | number;
+        label?: string | boolean | number;
+        labels?: string | boolean | number;
+        max?: string | boolean | number;
+        unit?: string | boolean | number;
+        values?: string | boolean | number;
+    };
+    /** `<usa-bg-generator>` — Background generator (motionary/components/widgets). */
+    'usa-bg-generator': {
+        label?: string | boolean | number;
+        palette?: string | boolean | number;
+        seed?: string | boolean | number;
+        style?: string | boolean | number;
+    };
+    /** `<usa-blobs>` — Fluid blobs (motionary/components/background). */
+    'usa-blobs': {
+        blur?: string | boolean | number;
+        colors?: string | boolean | number;
+        speed?: string | boolean | number;
+    };
+    /** `<usa-bottom-sheet>` — Bottom sheet (motionary/components/ui). */
+    'usa-bottom-sheet': {
+        open?: string | boolean | number;
+        snap?: string | boolean | number;
+        start?: string | boolean | number;
+    };
+    /** `<usa-button>` — Button deformation (motionary/components/click). */
+    'usa-button': {
+        deform?: string | boolean | number;
+        disabled?: string | boolean | number;
+        haptic?: string | boolean | number;
+        morph?: string | boolean | number;
+        reset?: string | boolean | number;
+        shape?: string | boolean | number;
+        state?: string | boolean | number;
+    };
+    /** `<usa-card>` — Card (motionary/components/cards). */
+    'usa-card': {
+        color?: string | boolean | number;
+        depth?: string | boolean | number;
+        disabled?: string | boolean | number;
+        effect?: string | boolean | number;
+        trigger?: string | boolean | number;
+    };
+    /** `<usa-card-stack>` — Swipe stack (motionary/components/cards). */
+    'usa-card-stack': {
+        disabled?: string | boolean | number;
+        loop?: string | boolean | number;
+        offset?: string | boolean | number;
+        threshold?: string | boolean | number;
+        visible?: string | boolean | number;
+    };
+    /** `<usa-carousel>` — Carousel / slider (motionary/components/widgets). */
+    'usa-carousel': {
+        autoplay?: string | boolean | number;
+        effect?: string | boolean | number;
+        index?: string | boolean | number;
+        label?: string | boolean | number;
+        loop?: string | boolean | number;
+        'no-controls'?: string | boolean | number;
+        'no-dots'?: string | boolean | number;
+    };
+    /** `<usa-carousel-3d>` — 3D carousel (motionary/components/cards). */
+    'usa-carousel-3d': {
+        autoplay?: string | boolean | number;
+        index?: string | boolean | number;
+        perspective?: string | boolean | number;
+        radius?: string | boolean | number;
+    };
+    /** `<usa-cart-drawer>` — Cart drawer (motionary/components/widgets). */
+    'usa-cart-drawer': {
+        currency?: string | boolean | number;
+        items?: string | boolean | number;
+        label?: string | boolean | number;
+    };
+    /** `<usa-chapter-nav>` — Chapter nav (motionary/components/widgets). */
+    'usa-chapter-nav': {
+        for?: string | boolean | number;
+        label?: string | boolean | number;
+        orientation?: string | boolean | number;
+    };
+    /** `<usa-chat-composer>` — AI chat composer (motionary/components/widgets). */
+    'usa-chat-composer': {
+        busy?: string | boolean | number;
+        label?: string | boolean | number;
+        placeholder?: string | boolean | number;
+        rows?: string | boolean | number;
+        value?: string | boolean | number;
+    };
+    /** `<usa-check>` — Result icon (motionary/components/feedback). */
+    'usa-check': {
+        kind?: string | boolean | number;
+        label?: string | boolean | number;
+        size?: string | boolean | number;
+        start?: string | boolean | number;
+    };
+    /** `<usa-checkbox>` — Animated checkbox (motionary/components/click). */
+    'usa-checkbox': {
+        checked?: string | boolean | number;
+        disabled?: string | boolean | number;
+        indeterminate?: string | boolean | number;
+        label?: string | boolean | number;
+        value?: string | boolean | number;
+    };
+    /** `<usa-click>` — Click effects (motionary/components/click). */
+    'usa-click': {
+        color?: string | boolean | number;
+        count?: string | boolean | number;
+        disabled?: string | boolean | number;
+        effect?: string | boolean | number;
+        haptic?: string | boolean | number;
+        shape?: string | boolean | number;
+        trigger?: string | boolean | number;
+    };
+    /** `<usa-clock-control>` — Motion clock control (motionary/components/widgets). */
+    'usa-clock-control': {
+        label?: string | boolean | number;
+        speeds?: string | boolean | number;
+    };
+    /** `<usa-code-export>` — Code export (motionary/components/widgets). */
+    'usa-code-export': {
+        for?: string | boolean | number;
+        formats?: string | boolean | number;
+    };
+    /** `<usa-color-picker>` — Color picker (motionary/components/widgets). */
+    'usa-color-picker': {
+        swatches?: string | boolean | number;
+    };
+    /** `<usa-command-palette>` — Command palette (⌘K) (motionary/components/widgets). */
+    'usa-command-palette': {
+        hotkey?: string | boolean | number;
+        inline?: string | boolean | number;
+        label?: string | boolean | number;
+        placeholder?: string | boolean | number;
+    };
+    /** `<usa-compare>` — Before / after compare (motionary/components/widgets). */
+    'usa-compare': {
+        hover?: string | boolean | number;
+        intro?: string | boolean | number;
+        label?: string | boolean | number;
+        labels?: string | boolean | number;
+        orientation?: string | boolean | number;
+        position?: string | boolean | number;
+    };
+    /** `<usa-countdown>` — Flip countdown (motionary/components/widgets). */
+    'usa-countdown': {
+        label?: string | boolean | number;
+        labels?: string | boolean | number;
+        seconds?: string | boolean | number;
+        to?: string | boolean | number;
+        units?: string | boolean | number;
+    };
+    /** `<usa-counter>` — Number counter (motionary/components/text). */
+    'usa-counter': {
+        decimals?: string | boolean | number;
+        duration?: string | boolean | number;
+        from?: string | boolean | number;
+        grouping?: string | boolean | number;
+        locale?: string | boolean | number;
+        prefix?: string | boolean | number;
+        start?: string | boolean | number;
+        suffix?: string | boolean | number;
+        to?: string | boolean | number;
+    };
+    /** `<usa-cube>` — 3D cube (motionary/components/depth). */
+    'usa-cube': {
+        autoplay?: string | boolean | number;
+        perspective?: string | boolean | number;
+        size?: string | boolean | number;
+    };
+    /** `<usa-cube-gallery>` — Cube gallery (motionary/components/widgets). */
+    'usa-cube-gallery': {
+        autoplay?: string | boolean | number;
+        axis?: string | boolean | number;
+        label?: string | boolean | number;
+    };
+    /** `<usa-cursor>` — Custom cursor (motionary/components/page). */
+    'usa-cursor': {
+        color?: string | boolean | number;
+        'hide-native'?: string | boolean | number;
+        mode?: string | boolean | number;
+        size?: string | boolean | number;
+        targets?: string | boolean | number;
+    };
+    /** `<usa-date-picker>` — Date picker (motionary/components/widgets). */
+    'usa-date-picker': {
+        'first-day'?: string | boolean | number;
+        locale?: string | boolean | number;
+        max?: string | boolean | number;
+        min?: string | boolean | number;
+    };
+    /** `<usa-depth>` — Depth parallax (motionary/components/depth). */
+    'usa-depth': {
+        rotate?: string | boolean | number;
+        source?: string | boolean | number;
+        strength?: string | boolean | number;
+    };
+    /** `<usa-dialog>` — Modal & drawer (motionary/components/transitions). */
+    'usa-dialog': {
+        kind?: string | boolean | number;
+        label?: string | boolean | number;
+        'no-backdrop-close'?: string | boolean | number;
+        'no-esc'?: string | boolean | number;
+        open?: string | boolean | number;
+    };
+    /** `<usa-disclosure>` — Accordion 2.0 (motionary/components/widgets). */
+    'usa-disclosure': {
+        multiple?: string | boolean | number;
+        spring?: string | boolean | number;
+    };
+    /** `<usa-distort>` — Hover distortion (motionary/components/webgl). */
+    'usa-distort': {};
+    /** `<usa-dock>` — macOS-style dock (motionary/components/widgets). */
+    'usa-dock': {
+        bounce?: string | boolean | number;
+        label?: string | boolean | number;
+        magnify?: string | boolean | number;
+        orientation?: string | boolean | number;
+        range?: string | boolean | number;
+    };
+    /** `<usa-dot-network>` — Dot network (motionary/components/background). */
+    'usa-dot-network': {
+        color?: string | boolean | number;
+        gap?: string | boolean | number;
+        radius?: string | boolean | number;
+    };
+    /** `<usa-dotlottie>` — Interactive dotLottie (themes + state machine) (motionary/components/dotlottie). */
+    'usa-dotlottie': {
+        'state-machine'?: string | boolean | number;
+        theme?: string | boolean | number;
+    };
+    /** `<usa-double-tap>` — Double tap (motionary/components/click). */
+    'usa-double-tap': {
+        color?: string | boolean | number;
+        delay?: string | boolean | number;
+        disabled?: string | boolean | number;
+        icon?: string | boolean | number;
+    };
+    /** `<usa-draggable>` — Draggable (motionary/components/physics). */
+    'usa-draggable': {
+        axis?: string | boolean | number;
+        bounds?: string | boolean | number;
+        disabled?: string | boolean | number;
+        inertia?: string | boolean | number;
+        preset?: string | boolean | number;
+        snap?: string | boolean | number;
+        'spring-back'?: string | boolean | number;
+        step?: string | boolean | number;
+    };
+    /** `<usa-draw>` — Line drawing (motionary/components/svg). */
+    'usa-draw': {
+        duration?: string | boolean | number;
+        repeat?: string | boolean | number;
+        stagger?: string | boolean | number;
+        trigger?: string | boolean | number;
+    };
+    /** `<usa-drawer>` — Drawer (motionary/components/ui). */
+    'usa-drawer': {};
+    /** `<usa-equalizer>` — Graphic equalizer (motionary/components/widgets). */
+    'usa-equalizer': {
+        bands?: string | boolean | number;
+        label?: string | boolean | number;
+        preset?: string | boolean | number;
+    };
+    /** `<usa-fab>` — FAB speed dial (motionary/components/ui). */
+    'usa-fab': {
+        direction?: string | boolean | number;
+        gap?: string | boolean | number;
+    };
+    /** `<usa-festival-banner>` — Festival banner (motionary/components/widgets). */
+    'usa-festival-banner': {
+        dismissible?: string | boolean | number;
+        label?: string | boolean | number;
+        theme?: string | boolean | number;
+    };
+    /** `<usa-field>` — Animated field (motionary/components/widgets). */
+    'usa-field': {
+        error?: string | boolean | number;
+        hint?: string | boolean | number;
+        label?: string | boolean | number;
+        strength?: string | boolean | number;
+    };
+    /** `<usa-file-drop>` — File drop zone (motionary/components/widgets). */
+    'usa-file-drop': {
+        accept?: string | boolean | number;
+        label?: string | boolean | number;
+        multiple?: string | boolean | number;
+        simulate?: string | boolean | number;
+    };
+    /** `<usa-fullpage>` — Full-page sections (motionary/components/page). */
+    'usa-fullpage': {
+        axis?: string | boolean | number;
+        dots?: string | boolean | number;
+    };
+    /** `<usa-fx>` — Attention seekers (motionary/components/fx). */
+    'usa-fx': {
+        effect?: string | boolean | number;
+        once?: string | boolean | number;
+        options?: string | boolean | number;
+        self?: string | boolean | number;
+        trigger?: string | boolean | number;
+    };
+    /** `<usa-gauge>` — Spring gauge (motionary/components/widgets). */
+    'usa-gauge': {
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+        min?: string | boolean | number;
+        unit?: string | boolean | number;
+        value?: string | boolean | number;
+        zones?: string | boolean | number;
+    };
+    /** `<usa-gen-art>` — Generative artwork (motionary/components/widgets). */
+    'usa-gen-art': {
+        art?: string | boolean | number;
+        label?: string | boolean | number;
+        palette?: string | boolean | number;
+        seed?: string | boolean | number;
+    };
+    /** `<usa-gesture-fx>` — Gesture triggers (motionary/components/effects). */
+    'usa-gesture-fx': {
+        angle?: string | boolean | number;
+        duration?: string | boolean | number;
+        effect?: string | boolean | number;
+        gesture?: string | boolean | number;
+        options?: string | boolean | number;
+        self?: string | boolean | number;
+        velocity?: string | boolean | number;
+    };
+    /** `<usa-gesture-sticker>` — Multi-touch sticker (motionary/components/widgets). */
+    'usa-gesture-sticker': {
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+        min?: string | boolean | number;
+    };
+    /** `<usa-gl-model>` — Compressed 3D model (Draco / KTX2) (motionary/components/gl-model). */
+    'usa-gl-model': {};
+    /** `<usa-gl-scene>` — 3D scene (glTF / OBJ) (motionary/components/widgets). */
+    'usa-gl-scene': {
+        animation?: string | boolean | number;
+        'animation-speed'?: string | boolean | number;
+        'auto-rotate'?: string | boolean | number;
+        background?: string | boolean | number;
+        color?: string | boolean | number;
+        controls?: string | boolean | number;
+        exposure?: string | boolean | number;
+        label?: string | boolean | number;
+        metallic?: string | boolean | number;
+        roughness?: string | boolean | number;
+        shape?: string | boolean | number;
+        src?: string | boolean | number;
+        video?: string | boolean | number;
+        'video-scrub'?: string | boolean | number;
+    };
+    /** `<usa-glitch>` — Glitch text (motionary/components/text). */
+    'usa-glitch': {
+        intensity?: string | boolean | number;
+        text?: string | boolean | number;
+    };
+    /** `<usa-globe>` — Spinning globe (motionary/components/widgets). */
+    'usa-globe': {
+        lon?: string | boolean | number;
+        markers?: string | boolean | number;
+        speed?: string | boolean | number;
+        tilt?: string | boolean | number;
+    };
+    /** `<usa-gpu-particles>` — GPU particle canvas (motionary/components/widgets). */
+    'usa-gpu-particles': {
+        colors?: string | boolean | number;
+        count?: string | boolean | number;
+        label?: string | boolean | number;
+        mode?: string | boolean | number;
+        pointer?: string | boolean | number;
+        size?: string | boolean | number;
+        speed?: string | boolean | number;
+        trail?: string | boolean | number;
+    };
+    /** `<usa-gradient-text>` — Gradient flow (motionary/components/text). */
+    'usa-gradient-text': {
+        angle?: string | boolean | number;
+        colors?: string | boolean | number;
+        speed?: string | boolean | number;
+    };
+    /** `<usa-grain>` — Film grain (motionary/components/background). */
+    'usa-grain': {
+        blend?: string | boolean | number;
+        opacity?: string | boolean | number;
+        scale?: string | boolean | number;
+    };
+    /** `<usa-grid-glow>` — Grid glow (motionary/components/background). */
+    'usa-grid-glow': {
+        color?: string | boolean | number;
+        radius?: string | boolean | number;
+        size?: string | boolean | number;
+    };
+    /** `<usa-gyro-card>` — Gyro 3D card (motionary/components/widgets). */
+    'usa-gyro-card': {
+        glare?: string | boolean | number;
+        max?: string | boolean | number;
+    };
+    /** `<usa-handwriting>` — Handwriting draw (motionary/components/text). */
+    'usa-handwriting': {
+        duration?: string | boolean | number;
+        font?: string | boolean | number;
+        size?: string | boolean | number;
+        stroke?: string | boolean | number;
+        text?: string | boolean | number;
+    };
+    /** `<usa-hero-video>` — Hero video (motionary/components/widgets). */
+    'usa-hero-video': {
+        label?: string | boolean | number;
+        poster?: string | boolean | number;
+        scrub?: string | boolean | number;
+    };
+    /** `<usa-hold>` — Hold to confirm (motionary/components/click). */
+    'usa-hold': {
+        color?: string | boolean | number;
+        disabled?: string | boolean | number;
+        duration?: string | boolean | number;
+        label?: string | boolean | number;
+    };
+    /** `<usa-hud-panel>` — HUD panel (motionary/components/widgets). */
+    'usa-hud-panel': {
+        color?: string | boolean | number;
+        status?: string | boolean | number;
+        title?: string | boolean | number;
+    };
+    /** `<usa-hydrate>` — SSR hydration animation (motionary/components/widgets). */
+    'usa-hydrate': {
+        duration?: string | boolean | number;
+        effect?: string | boolean | number;
+        stagger?: string | boolean | number;
+    };
+    /** `<usa-icon-morph>` — Icon morph (motionary/components/click). */
+    'usa-icon-morph': {
+        icons?: string | boolean | number;
+        index?: string | boolean | number;
+        labels?: string | boolean | number;
+        preset?: string | boolean | number;
+        size?: string | boolean | number;
+        toggle?: string | boolean | number;
+    };
+    /** `<usa-install-button>` — Install button (motionary/components/widgets). */
+    'usa-install-button': {
+        cdn?: string | boolean | number;
+        dev?: string | boolean | number;
+        manager?: string | boolean | number;
+        managers?: string | boolean | number;
+        package?: string | boolean | number;
+    };
+    /** `<usa-kanban>` — Kanban board (drag-sort) (motionary/components/widgets). */
+    'usa-kanban': {
+        label?: string | boolean | number;
+    };
+    /** `<usa-keyframe-editor>` — Animation editor 2.0 (motionary/components/widgets). */
+    'usa-keyframe-editor': {
+        for?: string | boolean | number;
+    };
+    /** `<usa-kpi>` — KPI card (motionary/components/widgets). */
+    'usa-kpi': {
+        caption?: string | boolean | number;
+        delta?: string | boolean | number;
+        invert?: string | boolean | number;
+        label?: string | boolean | number;
+        locale?: string | boolean | number;
+        trend?: string | boolean | number;
+    };
+    /** `<usa-leaderboard>` — Leaderboard (motionary/components/widgets). */
+    'usa-leaderboard': {
+        label?: string | boolean | number;
+        limit?: string | boolean | number;
+        me?: string | boolean | number;
+    };
+    /** `<usa-like>` — Like button (motionary/components/click). */
+    'usa-like': {
+        color?: string | boolean | number;
+        count?: string | boolean | number;
+        disabled?: string | boolean | number;
+        haptic?: string | boolean | number;
+        label?: string | boolean | number;
+        liked?: string | boolean | number;
+        size?: string | boolean | number;
+    };
+    /** `<usa-liquid>` — Liquid image (motionary/components/webgl). */
+    'usa-liquid': {};
+    /** `<usa-liquid-nav>` — Liquid nav (motionary/components/widgets). */
+    'usa-liquid-nav': {
+        label?: string | boolean | number;
+        value?: string | boolean | number;
+    };
+    /** `<usa-loading-bar>` — Top loading bar (motionary/components/page). */
+    'usa-loading-bar': {
+        color?: string | boolean | number;
+        height?: string | boolean | number;
+        label?: string | boolean | number;
+    };
+    /** `<usa-location-card>` — Location card (motionary/components/widgets). */
+    'usa-location-card': {
+        address?: string | boolean | number;
+        distance?: string | boolean | number;
+        'from-lat'?: string | boolean | number;
+        'from-lon'?: string | boolean | number;
+        href?: string | boolean | number;
+        lat?: string | boolean | number;
+        lon?: string | boolean | number;
+        name?: string | boolean | number;
+        unit?: string | boolean | number;
+    };
+    /** `<usa-lottie>` — Lottie player (motionary/components/widgets). */
+    'usa-lottie': {
+        label?: string | boolean | number;
+        loop?: string | boolean | number;
+        speed?: string | boolean | number;
+        src?: string | boolean | number;
+    };
+    /** `<usa-lottie-icon>` — Animated icon set (motionary/components/widgets). */
+    'usa-lottie-icon': {
+        color?: string | boolean | number;
+        label?: string | boolean | number;
+        name?: string | boolean | number;
+        size?: string | boolean | number;
+        trigger?: string | boolean | number;
+    };
+    /** `<usa-lottie-player>` — Lottie player (JSON + dotLottie) (motionary/components/widgets). */
+    'usa-lottie-player': {
+        animation?: string | boolean | number;
+        autoplay?: string | boolean | number;
+        background?: string | boolean | number;
+        fit?: string | boolean | number;
+        hover?: string | boolean | number;
+        label?: string | boolean | number;
+        loop?: string | boolean | number;
+        mode?: string | boolean | number;
+        scrub?: string | boolean | number;
+        segment?: string | boolean | number;
+        speed?: string | boolean | number;
+        src?: string | boolean | number;
+    };
+    /** `<usa-lyrics>` — Synced karaoke lyrics (motionary/components/widgets). */
+    'usa-lyrics': {
+        for?: string | boolean | number;
+        label?: string | boolean | number;
+    };
+    /** `<usa-magnetic>` — Magnetic button (motionary/components/interaction). */
+    'usa-magnetic': {
+        disabled?: string | boolean | number;
+        radius?: string | boolean | number;
+        strength?: string | boolean | number;
+    };
+    /** `<usa-marquee>` — Marquee (motionary/components/background). */
+    'usa-marquee': {
+        direction?: string | boolean | number;
+        gap?: string | boolean | number;
+        'pause-on-hover'?: string | boolean | number;
+        paused?: string | boolean | number;
+        speed?: string | boolean | number;
+    };
+    /** `<usa-mask-reveal>` — Mask reveal (motionary/components/svg). */
+    'usa-mask-reveal': {
+        at?: string | boolean | number;
+        delay?: string | boolean | number;
+        duration?: string | boolean | number;
+        repeat?: string | boolean | number;
+        shape?: string | boolean | number;
+        trigger?: string | boolean | number;
+    };
+    /** `<usa-masonry>` — Masonry (motionary/components/layout). */
+    'usa-masonry': {
+        columns?: string | boolean | number;
+        gap?: string | boolean | number;
+        min?: string | boolean | number;
+    };
+    /** `<usa-masonry-flow>` — Masonry with layout animation (motionary/components/widgets). */
+    'usa-masonry-flow': {
+        gap?: string | boolean | number;
+        min?: string | boolean | number;
+    };
+    /** `<usa-menu>` — Dropdown menu (motionary/components/widgets). */
+    'usa-menu': {
+        effect?: string | boolean | number;
+        placement?: string | boolean | number;
+    };
+    /** `<usa-menu-toggle>` — Hamburger → close (motionary/components/widgets). */
+    'usa-menu-toggle': {
+        for?: string | boolean | number;
+        label?: string | boolean | number;
+        variant?: string | boolean | number;
+    };
+    /** `<usa-message-list>` — Chat thread (motionary/components/widgets). */
+    'usa-message-list': {
+        label?: string | boolean | number;
+    };
+    /** `<usa-milestones>` — Scroll-drawn milestones (motionary/components/widgets). */
+    'usa-milestones': {
+        layout?: string | boolean | number;
+    };
+    /** `<usa-modal>` — Modal dialog (motionary/components/widgets). */
+    'usa-modal': {
+        effect?: string | boolean | number;
+        label?: string | boolean | number;
+        persistent?: string | boolean | number;
+    };
+    /** `<usa-morph>` — Path morph (motionary/components/svg). */
+    'usa-morph': {
+        duration?: string | boolean | number;
+        interval?: string | boolean | number;
+        paths?: string | boolean | number;
+        trigger?: string | boolean | number;
+    };
+    /** `<usa-motion>` — Motion DSL (motionary/components/widgets). */
+    'usa-motion': {
+        rules?: string | boolean | number;
+    };
+    /** `<usa-motion-inspector>` — Motion inspector (motionary/components/widgets). */
+    'usa-motion-inspector': {
+        interval?: string | boolean | number;
+        scope?: string | boolean | number;
+    };
+    /** `<usa-motion-prefs>` — Motion preference panel (motionary/components/widgets). */
+    'usa-motion-prefs': {
+        label?: string | boolean | number;
+    };
+    /** `<usa-motion-prompt>` — Motion prompt (text → motion) (motionary/components/widgets). */
+    'usa-motion-prompt': {
+        format?: string | boolean | number;
+        label?: string | boolean | number;
+        placeholder?: string | boolean | number;
+        value?: string | boolean | number;
+    };
+    /** `<usa-motion-spec>` — Motion spec sheet (motionary/components/widgets). */
+    'usa-motion-spec': {
+        label?: string | boolean | number;
+        rules?: string | boolean | number;
+    };
+    /** `<usa-motion-switch>` — Motion intensity (motionary/components/page). */
+    'usa-motion-switch': {
+        label?: string | boolean | number;
+        labels?: string | boolean | number;
+    };
+    /** `<usa-motion-theme>` — Theme packs (motionary/components/effects). */
+    'usa-motion-theme': {
+        name?: string | boolean | number;
+    };
+    /** `<usa-music-player>` — Music player (motionary/components/widgets). */
+    'usa-music-player': {
+        artist?: string | boolean | number;
+        cover?: string | boolean | number;
+        duration?: string | boolean | number;
+        src?: string | boolean | number;
+        title?: string | boolean | number;
+    };
+    /** `<usa-native-preview>` — Native preview (motionary/components/widgets). */
+    'usa-native-preview': {
+        name?: string | boolean | number;
+        platform?: string | boolean | number;
+        rules?: string | boolean | number;
+    };
+    /** `<usa-nav-morph>` — Navbar with morphing indicator (motionary/components/widgets). */
+    'usa-nav-morph': {
+        active?: string | boolean | number;
+        indicator?: string | boolean | number;
+        label?: string | boolean | number;
+    };
+    /** `<usa-navbar>` — Auto-hide navbar (motionary/components/ui). */
+    'usa-navbar': {
+        target?: string | boolean | number;
+        threshold?: string | boolean | number;
+    };
+    /** `<usa-notification-bell>` — Notification bell (motionary/components/widgets). */
+    'usa-notification-bell': {
+        label?: string | boolean | number;
+    };
+    /** `<usa-odometer>` — Odometer counter (motionary/components/widgets). */
+    'usa-odometer': {
+        decimals?: string | boolean | number;
+        duration?: string | boolean | number;
+        locale?: string | boolean | number;
+        prefix?: string | boolean | number;
+        suffix?: string | boolean | number;
+        value?: string | boolean | number;
+    };
+    /** `<usa-organic-card>` — Organic card (motionary/components/widgets). */
+    'usa-organic-card': {
+        seed?: string | boolean | number;
+        tint?: string | boolean | number;
+    };
+    /** `<usa-otp>` — OTP code input (motionary/components/widgets). */
+    'usa-otp': {
+        label?: string | boolean | number;
+        length?: string | boolean | number;
+        mode?: string | boolean | number;
+        value?: string | boolean | number;
+    };
+    /** `<usa-overscroll>` — Elastic overscroll (motionary/components/physics). */
+    'usa-overscroll': {
+        axis?: string | boolean | number;
+        disabled?: string | boolean | number;
+        max?: string | boolean | number;
+        preset?: string | boolean | number;
+    };
+    /** `<usa-pack>` — E-commerce pack (motionary/components/packs). */
+    'usa-pack': {
+        name?: string | boolean | number;
+    };
+    /** `<usa-pagination>` — Pagination with sliding ink (motionary/components/widgets). */
+    'usa-pagination': {
+        label?: string | boolean | number;
+        siblings?: string | boolean | number;
+        total?: string | boolean | number;
+    };
+    /** `<usa-panorama>` — 360° panorama viewer (motionary/components/widgets). */
+    'usa-panorama': {
+        autorotate?: string | boolean | number;
+        label?: string | boolean | number;
+        src?: string | boolean | number;
+    };
+    /** `<usa-parallax-layers>` — Parallax layers (motionary/components/widgets). */
+    'usa-parallax-layers': {
+        engine?: string | boolean | number;
+        horizontal?: string | boolean | number;
+        pointer?: string | boolean | number;
+        preview?: string | boolean | number;
+        range?: string | boolean | number;
+        strength?: string | boolean | number;
+    };
+    /** `<usa-particles>` — Particles (motionary/components/background). */
+    'usa-particles': {
+        color?: string | boolean | number;
+        count?: string | boolean | number;
+        interactive?: string | boolean | number;
+        links?: string | boolean | number;
+        paused?: string | boolean | number;
+        size?: string | boolean | number;
+        speed?: string | boolean | number;
+    };
+    /** `<usa-pause-all>` — Pause all motion (motionary/components/widgets). */
+    'usa-pause-all': {
+        label?: string | boolean | number;
+        'resume-label'?: string | boolean | number;
+        scope?: string | boolean | number;
+    };
+    /** `<usa-perf-monitor>` — Perf monitor (motionary/components/widgets). */
+    'usa-perf-monitor': {
+        corner?: string | boolean | number;
+        warn?: string | boolean | number;
+    };
+    /** `<usa-physics-playground>` — Physics playground (motionary/components/widgets). */
+    'usa-physics-playground': {
+        gravity?: string | boolean | number;
+        label?: string | boolean | number;
+        preset?: string | boolean | number;
+        spawn?: string | boolean | number;
+        src?: string | boolean | number;
+    };
+    /** `<usa-pinch-zoom>` — Pinch zoom (motionary/components/gesture). */
+    'usa-pinch-zoom': {
+        'double-tap'?: string | boolean | number;
+        max?: string | boolean | number;
+        min?: string | boolean | number;
+        preset?: string | boolean | number;
+    };
+    /** `<usa-player>` — JSON animation player (motionary/components/effects). */
+    'usa-player': {
+        controls?: string | boolean | number;
+        loop?: string | boolean | number;
+        rate?: string | boolean | number;
+        src?: string | boolean | number;
+        trigger?: string | boolean | number;
+    };
+    /** `<usa-plugin-card>` — Plugin detail card (motionary/components/widgets). */
+    'usa-plugin-card': {
+        author?: string | boolean | number;
+        downloads?: string | boolean | number;
+        engine?: string | boolean | number;
+        integrity?: string | boolean | number;
+        name?: string | boolean | number;
+        src?: string | boolean | number;
+        title?: string | boolean | number;
+        version?: string | boolean | number;
+    };
+    /** `<usa-plugin-store>` — Plugin marketplace (motionary/components/widgets). */
+    'usa-plugin-store': {
+        label?: string | boolean | number;
+        query?: string | boolean | number;
+    };
+    /** `<usa-popover>` — Popover (motionary/components/ui). */
+    'usa-popover': {
+        placement?: string | boolean | number;
+    };
+    /** `<usa-post-fx>` — Post-processing (motionary/components/webgl). */
+    'usa-post-fx': {};
+    /** `<usa-presence>` — Presence avatar (motionary/components/widgets). */
+    'usa-presence': {
+        name?: string | boolean | number;
+        speaking?: string | boolean | number;
+        src?: string | boolean | number;
+        status?: string | boolean | number;
+    };
+    /** `<usa-press>` — Press feedback (motionary/components/interaction). */
+    'usa-press': {
+        bounce?: string | boolean | number;
+        disabled?: string | boolean | number;
+        scale?: string | boolean | number;
+    };
+    /** `<usa-prize-wheel>` — Prize wheel (motionary/components/widgets). */
+    'usa-prize-wheel': {
+        duration?: string | boolean | number;
+        label?: string | boolean | number;
+        segments?: string | boolean | number;
+        turns?: string | boolean | number;
+    };
+    /** `<usa-product-gallery>` — Product gallery (motionary/components/widgets). */
+    'usa-product-gallery': {
+        index?: string | boolean | number;
+        nozoom?: string | boolean | number;
+        zoom?: string | boolean | number;
+    };
+    /** `<usa-progress>` — Progress bar (motionary/components/feedback). */
+    'usa-progress': {
+        indeterminate?: string | boolean | number;
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+        value?: string | boolean | number;
+    };
+    /** `<usa-progress-ring>` — Progress ring / bar / gauge (motionary/components/widgets). */
+    'usa-progress-ring': {
+        duration?: string | boolean | number;
+        gradient?: string | boolean | number;
+        max?: string | boolean | number;
+        'no-label'?: string | boolean | number;
+        value?: string | boolean | number;
+        variant?: string | boolean | number;
+    };
+    /** `<usa-prop-panel>` — Property panel (motionary/components/widgets). */
+    'usa-prop-panel': {
+        for?: string | boolean | number;
+        label?: string | boolean | number;
+        props?: string | boolean | number;
+    };
+    /** `<usa-pull-cord>` — Lamp pull-cord switch (motionary/components/widgets). */
+    'usa-pull-cord': {
+        label?: string | boolean | number;
+        threshold?: string | boolean | number;
+    };
+    /** `<usa-pull-refresh>` — Pull to refresh (motionary/components/ui). */
+    'usa-pull-refresh': {
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        threshold?: string | boolean | number;
+    };
+    /** `<usa-radar>` — Radar scope (motionary/components/widgets). */
+    'usa-radar': {
+        label?: string | boolean | number;
+        rings?: string | boolean | number;
+        speed?: string | boolean | number;
+        targets?: string | boolean | number;
+    };
+    /** `<usa-reactions>` — Emoji reactions (motionary/components/widgets). */
+    'usa-reactions': {
+        counts?: string | boolean | number;
+        emojis?: string | boolean | number;
+        picker?: string | boolean | number;
+    };
+    /** `<usa-red-envelope>` — Red envelope (红包) (motionary/components/widgets). */
+    'usa-red-envelope': {
+        amount?: string | boolean | number;
+        currency?: string | boolean | number;
+        from?: string | boolean | number;
+        message?: string | boolean | number;
+        opened?: string | boolean | number;
+    };
+    /** `<usa-retro-button>` — Retro buttons (motionary/components/widgets). */
+    'usa-retro-button': {
+        disabled?: string | boolean | number;
+        type?: string | boolean | number;
+        variant?: string | boolean | number;
+    };
+    /** `<usa-reveal>` — Reveal (motionary/components/reveal). */
+    'usa-reveal': {
+        delay?: string | boolean | number;
+        distance?: string | boolean | number;
+        duration?: string | boolean | number;
+        easing?: string | boolean | number;
+        effect?: string | boolean | number;
+        repeat?: string | boolean | number;
+        'root-margin'?: string | boolean | number;
+        threshold?: string | boolean | number;
+    };
+    /** `<usa-ripple>` — Ripple (motionary/components/interaction). */
+    'usa-ripple': {
+        centered?: string | boolean | number;
+        color?: string | boolean | number;
+        disabled?: string | boolean | number;
+        duration?: string | boolean | number;
+        opacity?: string | boolean | number;
+    };
+    /** `<usa-rive>` — Rive player (official runtime) (motionary/components/widgets). */
+    'usa-rive': {
+        animation?: string | boolean | number;
+        artboard?: string | boolean | number;
+        autoplay?: string | boolean | number;
+        fit?: string | boolean | number;
+        label?: string | boolean | number;
+        'runtime-src'?: string | boolean | number;
+        src?: string | boolean | number;
+        'state-machine'?: string | boolean | number;
+    };
+    /** `<usa-route-transition>` — Route transition container (motionary/components/widgets). */
+    'usa-route-transition': {
+        'cross-document'?: string | boolean | number;
+        current?: string | boolean | number;
+        effect?: string | boolean | number;
+        engine?: string | boolean | number;
+        history?: string | boolean | number;
+        links?: string | boolean | number;
+        selector?: string | boolean | number;
+    };
+    /** `<usa-scene>` — Cinematic scene (motionary/components/widgets). */
+    'usa-scene': {
+        autoplay?: string | boolean | number;
+        camera?: string | boolean | number;
+        strength?: string | boolean | number;
+    };
+    /** `<usa-scramble>` — Scramble / decode (motionary/components/text). */
+    'usa-scramble': {
+        chars?: string | boolean | number;
+        duration?: string | boolean | number;
+        text?: string | boolean | number;
+        trigger?: string | boolean | number;
+    };
+    /** `<usa-scroll-highlight>` — Scroll highlight (motionary/components/text). */
+    'usa-scroll-highlight': {
+        color?: string | boolean | number;
+        dim?: string | boolean | number;
+        mode?: string | boolean | number;
+        text?: string | boolean | number;
+    };
+    /** `<usa-scroll-progress>` — Scroll progress bar (motionary/components/reveal). */
+    'usa-scroll-progress': {
+        label?: string | boolean | number;
+        target?: string | boolean | number;
+    };
+    /** `<usa-scroll-ring>` — Scroll progress ring (motionary/components/widgets). */
+    'usa-scroll-ring': {
+        'back-to-top'?: string | boolean | number;
+        engine?: string | boolean | number;
+        for?: string | boolean | number;
+        horizontal?: string | boolean | number;
+        label?: string | boolean | number;
+        preview?: string | boolean | number;
+        size?: string | boolean | number;
+        thickness?: string | boolean | number;
+    };
+    /** `<usa-scroll-scene>` — Scroll scene (motionary/components/widgets). */
+    'usa-scroll-scene': {
+        end?: string | boolean | number;
+        markers?: string | boolean | number;
+        pin?: string | boolean | number;
+        preview?: string | boolean | number;
+        scrub?: string | boolean | number;
+        stagger?: string | boolean | number;
+        start?: string | boolean | number;
+        'toggle-class'?: string | boolean | number;
+    };
+    /** `<usa-scrolly>` — Sticky scrollytelling (motionary/components/reveal). */
+    'usa-scrolly': {
+        offset?: string | boolean | number;
+    };
+    /** `<usa-segmented>` — Segmented control (motionary/components/widgets). */
+    'usa-segmented': {
+        label?: string | boolean | number;
+        value?: string | boolean | number;
+        variant?: string | boolean | number;
+    };
+    /** `<usa-shader>` — Shader background (motionary/components/webgl). */
+    'usa-shader': {};
+    /** `<usa-shader-backdrop>` — Shader backdrop + post chain (motionary/components/widgets). */
+    'usa-shader-backdrop': {
+        colors?: string | boolean | number;
+        intensity?: string | boolean | number;
+        label?: string | boolean | number;
+        post?: string | boolean | number;
+        preset?: string | boolean | number;
+        speed?: string | boolean | number;
+    };
+    /** `<usa-sheet>` — Drawer / bottom sheet (motionary/components/widgets). */
+    'usa-sheet': {
+        label?: string | boolean | number;
+        persistent?: string | boolean | number;
+        side?: string | boolean | number;
+    };
+    /** `<usa-shimmer-text>` — Shimmer text (motionary/components/text). */
+    'usa-shimmer-text': {
+        angle?: string | boolean | number;
+        color?: string | boolean | number;
+        duration?: string | boolean | number;
+        shine?: string | boolean | number;
+    };
+    /** `<usa-shortcut>` — Shortcut hint (motionary/components/widgets). */
+    'usa-shortcut': {
+        for?: string | boolean | number;
+        keys?: string | boolean | number;
+        label?: string | boolean | number;
+        listen?: string | boolean | number;
+    };
+    /** `<usa-skeleton>` — Skeleton (motionary/components/feedback). */
+    'usa-skeleton': {
+        avatar?: string | boolean | number;
+        circle?: string | boolean | number;
+        height?: string | boolean | number;
+        lines?: string | boolean | number;
+        loading?: string | boolean | number;
+        radius?: string | boolean | number;
+        width?: string | boolean | number;
+    };
+    /** `<usa-skeleton-reveal>` — Skeleton → content reveal (motionary/components/widgets). */
+    'usa-skeleton-reveal': {
+        loading?: string | boolean | number;
+        variant?: string | boolean | number;
+    };
+    /** `<usa-sketch-chart>` — Sketch chart (motionary/components/widgets). */
+    'usa-sketch-chart': {
+        color?: string | boolean | number;
+        label?: string | boolean | number;
+        labels?: string | boolean | number;
+        type?: string | boolean | number;
+        values?: string | boolean | number;
+    };
+    /** `<usa-slider>` — Slider (motionary/components/ui). */
+    'usa-slider': {
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+        min?: string | boolean | number;
+        step?: string | boolean | number;
+        value?: string | boolean | number;
+    };
+    /** `<usa-smooth-scroll>` — Smooth scroll (motionary/components/widgets). */
+    'usa-smooth-scroll': {
+        anchors?: string | boolean | number;
+        duration?: string | boolean | number;
+        ease?: string | boolean | number;
+        horizontal?: string | boolean | number;
+        lerp?: string | boolean | number;
+        offset?: string | boolean | number;
+        preview?: string | boolean | number;
+        touch?: string | boolean | number;
+        'wheel-multiplier'?: string | boolean | number;
+        wrapper?: string | boolean | number;
+    };
+    /** `<usa-snap-carousel>` — Snap carousel (drag · inertia · snap) (motionary/components/snap-carousel). */
+    'usa-snap-carousel': {
+        align?: string | boolean | number;
+        autoplay?: string | boolean | number;
+        gap?: string | boolean | number;
+        index?: string | boolean | number;
+        label?: string | boolean | number;
+        'no-controls'?: string | boolean | number;
+        'no-dots'?: string | boolean | number;
+    };
+    /** `<usa-sparkline>` — Sparkline (motionary/components/widgets). */
+    'usa-sparkline': {
+        color?: string | boolean | number;
+        label?: string | boolean | number;
+        values?: string | boolean | number;
+        variant?: string | boolean | number;
+    };
+    /** `<usa-spatial-card>` — Spatial card (motionary/components/widgets). */
+    'usa-spatial-card': {};
+    /** `<usa-spinner>` — Spinners (motionary/components/feedback). */
+    'usa-spinner': {
+        kind?: string | boolean | number;
+        label?: string | boolean | number;
+        size?: string | boolean | number;
+    };
+    /** `<usa-splash>` — Splash screen (motionary/components/page). */
+    'usa-splash': {
+        exit?: string | boolean | number;
+        label?: string | boolean | number;
+        manual?: string | boolean | number;
+        min?: string | boolean | number;
+    };
+    /** `<usa-split-text>` — Split-text reveal (motionary/components/text). */
+    'usa-split-text': {
+        by?: string | boolean | number;
+        delay?: string | boolean | number;
+        duration?: string | boolean | number;
+        from?: string | boolean | number;
+        repeat?: string | boolean | number;
+        stagger?: string | boolean | number;
+        text?: string | boolean | number;
+        trigger?: string | boolean | number;
+    };
+    /** `<usa-spotlight>` — Reveal highlight (motionary/components/interaction). */
+    'usa-spotlight': {
+        border?: string | boolean | number;
+        color?: string | boolean | number;
+        size?: string | boolean | number;
+    };
+    /** `<usa-spring>` — Spring effects (motionary/components/physics). */
+    'usa-spring': {
+        damping?: string | boolean | number;
+        delay?: string | boolean | number;
+        duration?: string | boolean | number;
+        effect?: string | boolean | number;
+        mass?: string | boolean | number;
+        preset?: string | boolean | number;
+        repeat?: string | boolean | number;
+        stiffness?: string | boolean | number;
+        trigger?: string | boolean | number;
+    };
+    /** `<usa-stagger>` — Stagger list (motionary/components/reveal). */
+    'usa-stagger': {
+        delay?: string | boolean | number;
+        distance?: string | boolean | number;
+        duration?: string | boolean | number;
+        easing?: string | boolean | number;
+        effect?: string | boolean | number;
+        interval?: string | boolean | number;
+        repeat?: string | boolean | number;
+        threshold?: string | boolean | number;
+    };
+    /** `<usa-star-rating>` — Star rating 2.0 (motionary/components/widgets). */
+    'usa-star-rating': {
+        icon?: string | boolean | number;
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+        readonly?: string | boolean | number;
+        step?: string | boolean | number;
+        value?: string | boolean | number;
+    };
+    /** `<usa-stepper>` — Stepper / wizard (motionary/components/widgets). */
+    'usa-stepper': {
+        clickable?: string | boolean | number;
+        label?: string | boolean | number;
+        orientation?: string | boolean | number;
+    };
+    /** `<usa-sticky-stack>` — Sticky stack (motionary/components/cards). */
+    'usa-sticky-stack': {
+        gap?: string | boolean | number;
+        scale?: string | boolean | number;
+        top?: string | boolean | number;
+    };
+    /** `<usa-sticky-wall>` — Sticky-note wall (motionary/components/widgets). */
+    'usa-sticky-wall': {
+        label?: string | boolean | number;
+        seed?: string | boolean | number;
+    };
+    /** `<usa-stories>` — Stories viewer (motionary/components/widgets). */
+    'usa-stories': {
+        duration?: string | boolean | number;
+        loop?: string | boolean | number;
+    };
+    /** `<usa-story>` — Story: before / after (motionary/components/effects). */
+    'usa-story': {
+        label?: string | boolean | number;
+        template?: string | boolean | number;
+        zoom?: string | boolean | number;
+    };
+    /** `<usa-suggestion-chips>` — Suggestion chips (motionary/components/widgets). */
+    'usa-suggestion-chips': {
+        dismiss?: string | boolean | number;
+        items?: string | boolean | number;
+        label?: string | boolean | number;
+    };
+    /** `<usa-swipe-deck>` — Swipe cards deck (motionary/components/widgets). */
+    'usa-swipe-deck': {
+        label?: string | boolean | number;
+        threshold?: string | boolean | number;
+    };
+    /** `<usa-swipeable>` — Swipeable (motionary/components/gesture). */
+    'usa-swipeable': {
+        axis?: string | boolean | number;
+        disabled?: string | boolean | number;
+        dismiss?: string | boolean | number;
+        distance?: string | boolean | number;
+        preset?: string | boolean | number;
+    };
+    /** `<usa-switch>` — Toggle switch variants (motionary/components/widgets). */
+    'usa-switch': {
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        name?: string | boolean | number;
+        value?: string | boolean | number;
+        variant?: string | boolean | number;
+    };
+    /** `<usa-tab-bar>` — Tabs with animated indicator (motionary/components/widgets). */
+    'usa-tab-bar': {
+        indicator?: string | boolean | number;
+        label?: string | boolean | number;
+        selected?: string | boolean | number;
+    };
+    /** `<usa-tabs>` — Tabs (motionary/components/ui). */
+    'usa-tabs': {
+        indicator?: string | boolean | number;
+    };
+    /** `<usa-terminal>` — Terminal window (motionary/components/widgets). */
+    'usa-terminal': {
+        loop?: string | boolean | number;
+        prompt?: string | boolean | number;
+        speed?: string | boolean | number;
+        theme?: string | boolean | number;
+        title?: string | boolean | number;
+    };
+    /** `<usa-text-rotate>` — Rotating words (motionary/components/text). */
+    'usa-text-rotate': {
+        effect?: string | boolean | number;
+        interval?: string | boolean | number;
+        paused?: string | boolean | number;
+        words?: string | boolean | number;
+    };
+    /** `<usa-text-splitter>` — Text splitter (motionary/components/widgets). */
+    'usa-text-splitter': {
+        duration?: string | boolean | number;
+        effect?: string | boolean | number;
+        loop?: string | boolean | number;
+        split?: string | boolean | number;
+        stagger?: string | boolean | number;
+        trigger?: string | boolean | number;
+    };
+    /** `<usa-theme-surface>` — Theme surface (motionary/components/widgets). */
+    'usa-theme-surface': {
+        theme?: string | boolean | number;
+    };
+    /** `<usa-theme-switcher>` — Theme switcher (motionary/components/widgets). */
+    'usa-theme-switcher': {
+        label?: string | boolean | number;
+        persist?: string | boolean | number;
+        target?: string | boolean | number;
+        themes?: string | boolean | number;
+        value?: string | boolean | number;
+    };
+    /** `<usa-tilt>` — 3D tilt card (motionary/components/interaction). */
+    'usa-tilt': {
+        disabled?: string | boolean | number;
+        glare?: string | boolean | number;
+        max?: string | boolean | number;
+        perspective?: string | boolean | number;
+        reverse?: string | boolean | number;
+        scale?: string | boolean | number;
+    };
+    /** `<usa-timeline>` — Timeline (motionary/components/timeline). */
+    'usa-timeline': {
+        duration?: string | boolean | number;
+        overlap?: string | boolean | number;
+        repeat?: string | boolean | number;
+        scrub?: string | boolean | number;
+        smooth?: string | boolean | number;
+        stagger?: string | boolean | number;
+        trigger?: string | boolean | number;
+    };
+    /** `<usa-tip>` — Tooltip / popover 2.0 (motionary/components/widgets). */
+    'usa-tip': {
+        delay?: string | boolean | number;
+        placement?: string | boolean | number;
+        text?: string | boolean | number;
+        trigger?: string | boolean | number;
+    };
+    /** `<usa-toast-stack>` — Toast stack (motionary/components/widgets). */
+    'usa-toast-stack': {
+        duration?: string | boolean | number;
+        max?: string | boolean | number;
+        position?: string | boolean | number;
+    };
+    /** `<usa-toaster>` — Toasts (motionary/components/feedback). */
+    'usa-toaster': {
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+        position?: string | boolean | number;
+    };
+    /** `<usa-token-editor>` — Motion token editor (W3C DTCG) (motionary/components/widgets). */
+    'usa-token-editor': {
+        apply?: string | boolean | number;
+        format?: string | boolean | number;
+        groups?: string | boolean | number;
+        label?: string | boolean | number;
+    };
+    /** `<usa-typewriter>` — Typewriter (motionary/components/text). */
+    'usa-typewriter': {
+        delay?: string | boolean | number;
+        'delete-speed'?: string | boolean | number;
+        loop?: string | boolean | number;
+        pause?: string | boolean | number;
+        speed?: string | boolean | number;
+        start?: string | boolean | number;
+        text?: string | boolean | number;
+        words?: string | boolean | number;
+    };
+    /** `<usa-upload-progress>` — Upload progress (motionary/components/widgets). */
+    'usa-upload-progress': {
+        message?: string | boolean | number;
+        name?: string | boolean | number;
+        size?: string | boolean | number;
+        status?: string | boolean | number;
+        value?: string | boolean | number;
+    };
+    /** `<usa-video-card>` — Video card (motionary/components/widgets). */
+    'usa-video-card': {
+        duration?: string | boolean | number;
+        label?: string | boolean | number;
+    };
+    /** `<usa-view-switch>` — View switch (motionary/components/transitions). */
+    'usa-view-switch': {
+        active?: string | boolean | number;
+        duration?: string | boolean | number;
+        effect?: string | boolean | number;
+    };
+    /** `<usa-voice-button>` — Voice button (motionary/components/widgets). */
+    'usa-voice-button': {
+        bars?: string | boolean | number;
+        label?: string | boolean | number;
+        listening?: string | boolean | number;
+    };
+    /** `<usa-volume-knob>` — Volume knob (motionary/components/widgets). */
+    'usa-volume-knob': {
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+        min?: string | boolean | number;
+    };
+    /** `<usa-water-ripple>` — Water ripple (motionary/components/background). */
+    'usa-water-ripple': {
+        color?: string | boolean | number;
+        damping?: string | boolean | number;
+        strength?: string | boolean | number;
+    };
+    /** `<usa-wave-text>` — Wave text (motionary/components/text). */
+    'usa-wave-text': {
+        amplitude?: string | boolean | number;
+        speed?: string | boolean | number;
+        stagger?: string | boolean | number;
+        text?: string | boolean | number;
+    };
+    /** `<usa-weather-card>` — Animated weather card (motionary/components/widgets). */
+    'usa-weather-card': {
+        condition?: string | boolean | number;
+        label?: string | boolean | number;
+        place?: string | boolean | number;
+        temp?: string | boolean | number;
+        unit?: string | boolean | number;
+    };
+    /** `<usa-worker-canvas>` — Worker canvas (motionary/components/widgets). */
+    'usa-worker-canvas': {
+        label?: string | boolean | number;
+        scene?: string | boolean | number;
+    };
+    /** `<usa-xp-bar>` — XP bar (motionary/components/widgets). */
+    'usa-xp-bar': {
+        level?: string | boolean | number;
+        per?: string | boolean | number;
+        xp?: string | boolean | number;
+    };
+}
+/** The `usa:*` events each element dispatches, keyed by tag (`detail` shape: see the element's docs). */
+interface UsaElementEventMap {
+    'usa-accordion': {
+        'usa:toggle': CustomEvent<any>;
+    };
+    'usa-acrylic': {};
+    'usa-add-to-cart': {
+        'usa:add': CustomEvent<any>;
+    };
+    'usa-ambient': {};
+    'usa-anim-icon': {};
+    'usa-audio': {
+        'usa:audio-error': CustomEvent<any>;
+        'usa:beat': CustomEvent<any>;
+    };
+    'usa-aurora': {};
+    'usa-auto-animate': {};
+    'usa-auto-skeleton': {};
+    'usa-avatar-stack': {};
+    'usa-back-to-top': {};
+    'usa-badge': {};
+    'usa-badge-wall': {
+        'usa:unlock': CustomEvent<any>;
+    };
+    'usa-bar-chart': {};
+    'usa-bg-generator': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-blobs': {};
+    'usa-bottom-sheet': {};
+    'usa-button': {
+        'usa:state': CustomEvent<any>;
+        'usa:submit': CustomEvent<any>;
+    };
+    'usa-card': {
+        'usa:collapse': CustomEvent<any>;
+        'usa:expand': CustomEvent<any>;
+        'usa:flip': CustomEvent<any>;
+    };
+    'usa-card-stack': {
+        'usa:empty': CustomEvent<any>;
+        'usa:swipe': CustomEvent<any>;
+    };
+    'usa-carousel': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-carousel-3d': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-cart-drawer': {
+        'usa:change': CustomEvent<any>;
+        'usa:close': CustomEvent<any>;
+        'usa:open': CustomEvent<any>;
+    };
+    'usa-chapter-nav': {
+        'usa:chapter': CustomEvent<any>;
+    };
+    'usa-chat-composer': {
+        'usa:send': CustomEvent<any>;
+        'usa:stop': CustomEvent<any>;
+    };
+    'usa-check': {
+        'usa:complete': CustomEvent<any>;
+    };
+    'usa-checkbox': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-click': {
+        'usa:click-effect': CustomEvent<any>;
+    };
+    'usa-clock-control': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-code-export': {
+        'usa:copy': CustomEvent<any>;
+    };
+    'usa-color-picker': {
+        'usa:change': CustomEvent<any>;
+        'usa:input': CustomEvent<any>;
+    };
+    'usa-command-palette': {
+        'usa:close': CustomEvent<any>;
+        'usa:open': CustomEvent<any>;
+        'usa:run': CustomEvent<any>;
+    };
+    'usa-compare': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-countdown': {
+        'usa:done': CustomEvent<any>;
+        'usa:tick': CustomEvent<any>;
+    };
+    'usa-counter': {
+        'usa:complete': CustomEvent<any>;
+    };
+    'usa-cube': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-cube-gallery': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-cursor': {};
+    'usa-date-picker': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-depth': {};
+    'usa-dialog': {
+        'usa:beforeclose': CustomEvent<any>;
+        'usa:close': CustomEvent<any>;
+        'usa:open': CustomEvent<any>;
+    };
+    'usa-disclosure': {
+        'usa:toggle': CustomEvent<any>;
+    };
+    'usa-distort': {};
+    'usa-dock': {};
+    'usa-dot-network': {};
+    'usa-dotlottie': {
+        'usa:custom': CustomEvent<any>;
+        'usa:error': CustomEvent<any>;
+        'usa:runtime-missing': CustomEvent<any>;
+        'usa:state': CustomEvent<any>;
+    };
+    'usa-double-tap': {
+        'usa:double-tap': CustomEvent<any>;
+    };
+    'usa-draggable': {
+        'usa:drag': CustomEvent<any>;
+        'usa:drag-end': CustomEvent<any>;
+        'usa:drag-start': CustomEvent<any>;
+        'usa:settle': CustomEvent<any>;
+    };
+    'usa-draw': {
+        'usa:complete': CustomEvent<any>;
+    };
+    'usa-drawer': {};
+    'usa-equalizer': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-fab': {
+        'usa:toggle': CustomEvent<any>;
+    };
+    'usa-festival-banner': {
+        'usa:dismiss': CustomEvent<any>;
+    };
+    'usa-field': {
+        'usa:invalid': CustomEvent<any>;
+        'usa:valid': CustomEvent<any>;
+    };
+    'usa-file-drop': {
+        'usa:files': CustomEvent<any>;
+    };
+    'usa-fullpage': {
+        'usa:section': CustomEvent<any>;
+    };
+    'usa-fx': {};
+    'usa-gauge': {};
+    'usa-gen-art': {
+        'usa:generate': CustomEvent<any>;
+    };
+    'usa-gesture-fx': {};
+    'usa-gesture-sticker': {
+        'usa:transform': CustomEvent<any>;
+    };
+    'usa-gl-model': {
+        'usa:runtime-missing': CustomEvent<any>;
+    };
+    'usa-gl-scene': {
+        'usa:error': CustomEvent<any>;
+        'usa:load': CustomEvent<any>;
+        'usa:runtime-missing': CustomEvent<any>;
+    };
+    'usa-glitch': {};
+    'usa-globe': {
+        'usa:focus': CustomEvent<any>;
+    };
+    'usa-gpu-particles': {
+        'usa:backend': CustomEvent<any>;
+    };
+    'usa-gradient-text': {};
+    'usa-grain': {};
+    'usa-grid-glow': {};
+    'usa-gyro-card': {
+        'usa:tilt': CustomEvent<any>;
+    };
+    'usa-handwriting': {
+        'usa:complete': CustomEvent<any>;
+    };
+    'usa-hero-video': {};
+    'usa-hold': {
+        'usa:cancel': CustomEvent<any>;
+        'usa:confirm': CustomEvent<any>;
+        'usa:progress': CustomEvent<any>;
+    };
+    'usa-hud-panel': {
+        'usa:boot': CustomEvent<any>;
+    };
+    'usa-hydrate': {
+        'usa:hydrated': CustomEvent<any>;
+    };
+    'usa-icon-morph': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-install-button': {
+        'usa:copy': CustomEvent<any>;
+    };
+    'usa-kanban': {
+        'usa:move': CustomEvent<any>;
+    };
+    'usa-keyframe-editor': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-kpi': {};
+    'usa-leaderboard': {
+        'usa:rank': CustomEvent<any>;
+    };
+    'usa-like': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-liquid': {};
+    'usa-liquid-nav': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-loading-bar': {};
+    'usa-location-card': {
+        'usa:arrive': CustomEvent<any>;
+    };
+    'usa-lottie': {
+        'usa:complete': CustomEvent<any>;
+        'usa:error': CustomEvent<any>;
+        'usa:load': CustomEvent<any>;
+    };
+    'usa-lottie-icon': {};
+    'usa-lottie-player': {
+        'usa:complete': CustomEvent<any>;
+        'usa:error': CustomEvent<any>;
+        'usa:load': CustomEvent<any>;
+        'usa:runtime-missing': CustomEvent<any>;
+    };
+    'usa-lyrics': {
+        'usa:seek': CustomEvent<any>;
+    };
+    'usa-magnetic': {};
+    'usa-marquee': {};
+    'usa-mask-reveal': {
+        'usa:complete': CustomEvent<any>;
+    };
+    'usa-masonry': {};
+    'usa-masonry-flow': {
+        'usa:layout': CustomEvent<any>;
+    };
+    'usa-menu': {
+        'usa:close': CustomEvent<any>;
+        'usa:open': CustomEvent<any>;
+        'usa:select': CustomEvent<any>;
+    };
+    'usa-menu-toggle': {
+        'usa:toggle': CustomEvent<any>;
+    };
+    'usa-message-list': {
+        'usa:message': CustomEvent<any>;
+    };
+    'usa-milestones': {
+        'usa:reach': CustomEvent<any>;
+    };
+    'usa-modal': {
+        'usa:close': CustomEvent<any>;
+        'usa:open': CustomEvent<any>;
+    };
+    'usa-morph': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-motion': {
+        'usa:motion-error': CustomEvent<any>;
+    };
+    'usa-motion-inspector': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-motion-prefs': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-motion-prompt': {
+        'usa:copy': CustomEvent<any>;
+        'usa:suggest': CustomEvent<any>;
+    };
+    'usa-motion-spec': {
+        'usa:copy': CustomEvent<any>;
+    };
+    'usa-motion-switch': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-motion-theme': {};
+    'usa-music-player': {
+        'usa:pause': CustomEvent<any>;
+        'usa:play': CustomEvent<any>;
+        'usa:seek': CustomEvent<any>;
+    };
+    'usa-native-preview': {
+        'usa:replay': CustomEvent<any>;
+    };
+    'usa-nav-morph': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-navbar': {
+        'usa:hide': CustomEvent<any>;
+        'usa:show': CustomEvent<any>;
+    };
+    'usa-notification-bell': {
+        'usa:notify': CustomEvent<any>;
+        'usa:read': CustomEvent<any>;
+    };
+    'usa-odometer': {};
+    'usa-organic-card': {};
+    'usa-otp': {
+        'usa:complete': CustomEvent<any>;
+    };
+    'usa-overscroll': {};
+    'usa-pack': {};
+    'usa-pagination': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-panorama': {
+        'usa:look': CustomEvent<any>;
+        'usa:xr': CustomEvent<any>;
+        'usa:xr-request': CustomEvent<any>;
+    };
+    'usa-parallax-layers': {
+        'usa:progress': CustomEvent<any>;
+    };
+    'usa-particles': {};
+    'usa-pause-all': {
+        'usa:pause-all': CustomEvent<any>;
+    };
+    'usa-perf-monitor': {
+        'usa:jank': CustomEvent<any>;
+    };
+    'usa-physics-playground': {
+        'usa:collision': CustomEvent<any>;
+        'usa:error': CustomEvent<any>;
+        'usa:load': CustomEvent<any>;
+        'usa:runtime-missing': CustomEvent<any>;
+    };
+    'usa-pinch-zoom': {
+        'usa:zoom': CustomEvent<any>;
+    };
+    'usa-player': {
+        'usa:finish': CustomEvent<any>;
+        'usa:ready': CustomEvent<any>;
+    };
+    'usa-plugin-card': {
+        'usa:runtime-missing': CustomEvent<any>;
+        'usa:toggle': CustomEvent<any>;
+        'usa:verified': CustomEvent<any>;
+    };
+    'usa-plugin-store': {
+        'usa:install': CustomEvent<any>;
+        'usa:install-error': CustomEvent<any>;
+    };
+    'usa-popover': {};
+    'usa-post-fx': {};
+    'usa-presence': {};
+    'usa-press': {};
+    'usa-prize-wheel': {
+        'usa:result': CustomEvent<any>;
+    };
+    'usa-product-gallery': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-progress': {
+        'usa:complete': CustomEvent<any>;
+    };
+    'usa-progress-ring': {
+        'usa:complete': CustomEvent<any>;
+    };
+    'usa-prop-panel': {
+        'usa:prop': CustomEvent<any>;
+    };
+    'usa-pull-cord': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-pull-refresh': {};
+    'usa-radar': {
+        'usa:ping': CustomEvent<any>;
+    };
+    'usa-reactions': {
+        'usa:react': CustomEvent<any>;
+    };
+    'usa-red-envelope': {
+        'usa:open': CustomEvent<any>;
+    };
+    'usa-retro-button': {};
+    'usa-reveal': {
+        'usa:complete': CustomEvent<any>;
+        'usa:enter': CustomEvent<any>;
+        'usa:leave': CustomEvent<any>;
+    };
+    'usa-ripple': {};
+    'usa-rive': {
+        'usa:error': CustomEvent<any>;
+        'usa:load': CustomEvent<any>;
+        'usa:runtime-missing': CustomEvent<any>;
+    };
+    'usa-route-transition': {
+        'usa:navigate': CustomEvent<any>;
+        'usa:navigated': CustomEvent<any>;
+    };
+    'usa-scene': {
+        'usa:shot': CustomEvent<any>;
+    };
+    'usa-scramble': {
+        'usa:complete': CustomEvent<any>;
+    };
+    'usa-scroll-highlight': {};
+    'usa-scroll-progress': {
+        'usa:progress': CustomEvent<any>;
+    };
+    'usa-scroll-ring': {
+        'usa:progress': CustomEvent<any>;
+        'usa:top': CustomEvent<any>;
+    };
+    'usa-scroll-scene': {
+        'usa:enter': CustomEvent<any>;
+        'usa:leave': CustomEvent<any>;
+        'usa:progress': CustomEvent<any>;
+        'usa:runtime-missing': CustomEvent<any>;
+    };
+    'usa-scrolly': {
+        'usa:step': CustomEvent<any>;
+    };
+    'usa-segmented': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-shader': {};
+    'usa-shader-backdrop': {
+        'usa:backend': CustomEvent<any>;
+    };
+    'usa-sheet': {
+        'usa:close': CustomEvent<any>;
+        'usa:open': CustomEvent<any>;
+    };
+    'usa-shimmer-text': {};
+    'usa-shortcut': {
+        'usa:trigger': CustomEvent<any>;
+    };
+    'usa-skeleton': {
+        'usa:loaded': CustomEvent<any>;
+    };
+    'usa-skeleton-reveal': {
+        'usa:reveal': CustomEvent<any>;
+    };
+    'usa-sketch-chart': {
+        'usa:drawn': CustomEvent<any>;
+    };
+    'usa-slider': {
+        'usa:change': CustomEvent<any>;
+        'usa:input': CustomEvent<any>;
+    };
+    'usa-smooth-scroll': {
+        'usa:ready': CustomEvent<any>;
+        'usa:runtime-missing': CustomEvent<any>;
+        'usa:scroll': CustomEvent<any>;
+    };
+    'usa-snap-carousel': {
+        'usa:change': CustomEvent<any>;
+        'usa:runtime-missing': CustomEvent<any>;
+    };
+    'usa-sparkline': {};
+    'usa-spatial-card': {
+        'usa:focus-depth': CustomEvent<any>;
+    };
+    'usa-spinner': {};
+    'usa-splash': {
+        'usa:done': CustomEvent<any>;
+    };
+    'usa-split-text': {
+        'usa:complete': CustomEvent<any>;
+    };
+    'usa-spotlight': {};
+    'usa-spring': {
+        'usa:complete': CustomEvent<any>;
+    };
+    'usa-stagger': {
+        'usa:complete': CustomEvent<any>;
+        'usa:enter': CustomEvent<any>;
+    };
+    'usa-star-rating': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-stepper': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-sticky-stack': {};
+    'usa-sticky-wall': {
+        'usa:pick': CustomEvent<any>;
+    };
+    'usa-stories': {
+        'usa:change': CustomEvent<any>;
+        'usa:end': CustomEvent<any>;
+    };
+    'usa-story': {
+        'usa:step': CustomEvent<any>;
+    };
+    'usa-suggestion-chips': {
+        'usa:pick': CustomEvent<any>;
+    };
+    'usa-swipe-deck': {
+        'usa:empty': CustomEvent<any>;
+        'usa:swipe': CustomEvent<any>;
+    };
+    'usa-swipeable': {
+        'usa:dismiss': CustomEvent<any>;
+        'usa:swipe': CustomEvent<any>;
+    };
+    'usa-switch': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-tab-bar': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-tabs': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-terminal': {
+        'usa:done': CustomEvent<any>;
+    };
+    'usa-text-rotate': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-text-splitter': {
+        'usa:done': CustomEvent<any>;
+        'usa:runtime-missing': CustomEvent<any>;
+        'usa:split': CustomEvent<any>;
+    };
+    'usa-theme-surface': {
+        'usa:theme': CustomEvent<any>;
+    };
+    'usa-theme-switcher': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-tilt': {};
+    'usa-timeline': {
+        'usa:complete': CustomEvent<any>;
+    };
+    'usa-tip': {
+        'usa:close': CustomEvent<any>;
+        'usa:open': CustomEvent<any>;
+    };
+    'usa-toast-stack': {
+        'usa:dismiss': CustomEvent<any>;
+        'usa:show': CustomEvent<any>;
+    };
+    'usa-toaster': {
+        'usa:toast': CustomEvent<any>;
+    };
+    'usa-token-editor': {
+        'usa:change': CustomEvent<any>;
+        'usa:export': CustomEvent<any>;
+        'usa:import': CustomEvent<any>;
+    };
+    'usa-typewriter': {
+        'usa:complete': CustomEvent<any>;
+    };
+    'usa-upload-progress': {
+        'usa:done': CustomEvent<any>;
+        'usa:error': CustomEvent<any>;
+        'usa:retry': CustomEvent<any>;
+    };
+    'usa-video-card': {
+        'usa:open': CustomEvent<any>;
+    };
+    'usa-view-switch': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-voice-button': {};
+    'usa-volume-knob': {
+        'usa:change': CustomEvent<any>;
+        'usa:input': CustomEvent<any>;
+    };
+    'usa-water-ripple': {};
+    'usa-wave-text': {};
+    'usa-weather-card': {};
+    'usa-worker-canvas': {
+        'usa:backend': CustomEvent<any>;
+    };
+    'usa-xp-bar': {
+        'usa:levelup': CustomEvent<any>;
+        'usa:xp': CustomEvent<any>;
+    };
+}
+/** Every shipped `<usa-*>` tag. */
+type UsaElementTag = keyof UsaElementAttributeMap;
+
 /**
  * motionary/components/jsx — JSX typings for the raw `<usa-*>` tags (v2.9).
  *
@@ -29,10 +2059,15 @@ declare const COMPONENT_CATEGORIES: {
  * import type { UsaIntrinsicElements } from 'motionary/components/jsx';
  * declare module 'react' { namespace JSX { interface IntrinsicElements extends UsaIntrinsicElements {} } }
  * // Solid / Preact / other JSX: extend their JSX.IntrinsicElements the same way.
+ *
+ * // React 19 (13.5.0): per-tag attributes + typed `onusa:*` handlers, generated from the manifest:
+ * import type { UsaReact19IntrinsicElements } from 'motionary/components/jsx';
+ * declare module 'react' { namespace JSX { interface IntrinsicElements extends UsaReact19IntrinsicElements {} } }
  * ```
+ * (React 19 + SSR: `onusa:*` props are not attached to hydrated elements — use a ref + `bindUsa`, see `motionary/components/react`.)
  */
 
-type Tags = (typeof COMPONENT_CATEGORIES)[keyof typeof COMPONENT_CATEGORIES][number];
+type Tags = (typeof COMPONENT_CATEGORIES)[keyof typeof COMPONENT_CATEGORIES][number] | UsaElementTag;
 /** Attributes accepted by every `<usa-*>` element (all component attributes are strings / booleans). */
 interface UsaAttributes {
     [attr: string]: unknown;
@@ -45,9 +2080,20 @@ interface UsaAttributes {
     children?: unknown;
     ref?: unknown;
 }
+/** Documented attributes of tag `K` (13.5.0, generated from the manifest; `{}` for tags without documented attributes). */
+type UsaTagAttributes<K extends string> = K extends keyof UsaElementAttributeMap ? UsaElementAttributeMap[K] : {};
+/** `onusa:<event>` handler props for tag `K` (React 19 native custom-element events). */
+type UsaTagEventProps<K extends string> = K extends keyof UsaElementEventMap ? {
+    [E in keyof UsaElementEventMap[K] as `on${E & string}`]?: (event: UsaElementEventMap[K][E]) => void;
+} : {};
+/** Raw `<usa-*>` tags with their documented attributes (13.5.0: per-tag, generated). */
 type UsaIntrinsicElements = {
-    [K in Tags]: UsaAttributes;
+    [K in Tags]: UsaAttributes & UsaTagAttributes<K>;
+};
+/** React 19: raw tags + typed `onusa:*` event props (client-created elements; after SSR hydration use ref + `bindUsa`). */
+type UsaReact19IntrinsicElements = {
+    [K in Tags]: UsaAttributes & UsaTagAttributes<K> & UsaTagEventProps<K>;
 };
 type UsaTag = Tags;
 
-export type { UsaAttributes, UsaIntrinsicElements, UsaTag };
+export type { UsaAttributes, UsaElementAttributeMap, UsaElementEventMap, UsaElementTag, UsaIntrinsicElements, UsaReact19IntrinsicElements, UsaTag, UsaTagAttributes, UsaTagEventProps };

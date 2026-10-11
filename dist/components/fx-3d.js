@@ -1,8 +1,7 @@
-import { r as raf$1, b as caf$1 } from '../chunks/base-Be98yNyq.js';
-import { registerEffects } from '../chunks/registry-BEIhIRTY.js';
+import { r as raf$1, b as caf$1 } from '../chunks/base-C9CJrhL3.js';
+import { registerEffects } from '../chunks/registry-DKs_BiEo.js';
 import { a as all } from '../chunks/shared-CkKHWrtJ.js';
 import { trackPointer } from './fx-light.js';
-import '../chunks/generative-DkX6SvrL.js';
 
 /**
  * 6.5 — 3D scene cards (`motionary/components/fx-3d`), registered through
@@ -248,4 +247,4 @@ function register3dPack() {
 }
 
 export { DEPTH3_FX, register3dPack };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/fx-3d.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/components/fx-3d.js.map

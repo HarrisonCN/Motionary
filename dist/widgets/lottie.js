@@ -1,6 +1,5 @@
-import { f as defineElement } from '../chunks/base-Be98yNyq.js';
+import { f as defineElement } from '../chunks/base-C9CJrhL3.js';
 import { lottieToKeyframes, lottieToSvg } from '../components/fx-lottie.js';
-import '../chunks/registry-BEIhIRTY.js';
 
 var css = "usa-lottie{display:inline-block;line-height:0;max-width:100%}usa-lottie .usa-lt-svg{max-width:100%;height:auto;overflow:visible}usa-lottie [data-layer]{transform-box:view-box;transform-origin:0 0}";
 
@@ -98,4 +97,4 @@ function defineLottie(tag = 'usa-lottie') {
 }
 
 export { defineLottie };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/widgets/lottie.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/widgets/lottie.js.map

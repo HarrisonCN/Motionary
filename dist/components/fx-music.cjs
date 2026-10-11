@@ -1,10 +1,9 @@
 'use strict';
 
-var base = require('../chunks/base-Do-R_9gU.cjs');
-var registry = require('../chunks/registry-CyVCJneg.cjs');
-var generative = require('../chunks/generative-BTya0iHP.cjs');
-var audio = require('../chunks/audio-D7Dk2gUF.cjs');
-require('../chunks/shared-jkgRH-Hx.cjs');
+var base = require('../chunks/base-BvH4nAcv.cjs');
+var registry = require('../chunks/registry-CibnX7Ui.cjs');
+var generative = require('../chunks/generative-BKoxWOSP.cjs');
+var audio = require('../chunks/audio-D0LwPShE.cjs');
 
 /**
  * 7.1 — Music visualization (`motionary/fx/music`, also
@@ -192,4 +191,4 @@ exports.MUSIC_FX = MUSIC_FX;
 exports.musicSample = musicSample;
 exports.registerMusicPack = registerMusicPack;
 exports.syntheticSample = syntheticSample;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/fx-music.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/components/fx-music.cjs.map

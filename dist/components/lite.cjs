@@ -49,18 +49,12 @@ function adaptKeyframes(frames, level = config.motionSensitivity) {
         return [frames[frames.length - 1]];
     return frames.map((f) => {
         const out = {};
-        for (const [k, v] of Object.entries(f)) {
-            if (k === 'offset' || k === 'easing' || k === 'composite')
+        for (const [k, v] of Object.entries(f))
+            if (k === 'offset' ||
+                k === 'easing' ||
+                k === 'composite' ||
+                (level === 'minimal' ? k === 'opacity' : !(k === 'rotate' || k === 'scale' || (k === 'transform' && VESTIBULAR.test(String(v))))))
                 out[k] = v;
-            else if (level === 'minimal') {
-                if (k === 'opacity')
-                    out[k] = v;
-            }
-            else if (k === 'rotate' || k === 'scale' || (k === 'transform' && VESTIBULAR.test(String(v))))
-                continue;
-            else
-                out[k] = v;
-        }
         return out;
     });
 }
@@ -143,7 +137,6 @@ function getBase() {
         constructor() {
             super(...arguments);
             this._cleanups = [];
-            this._connected = false;
         }
         get reduced() {
             return prefersReducedMotion();
@@ -152,17 +145,17 @@ function getBase() {
             if (this._connected)
                 return;
             this._connected = true;
+            // 13.5.0: a property set before the element was defined (React 18 wrappers, Vue `.prop`, Svelte, Angular
+            // `[prop]` while hydrating, then define) sits on the instance and hides the class's setter — move it through.
+            for (const [k, v] of Object.entries(this))
+                if (k in Object.getPrototypeOf(this))
+                    delete this[k], (this[k] = v);
             styleLoader?.(this.localName);
             // Upgraded while the parser is still inside us (a <script> in <head>
             // defined the element): children/text are not there yet, so wait.
             if (document.readyState === 'loading' && !this.nextSibling && !this.childNodes.length) {
-                const go = () => {
-                    if (this._connected && this.isConnected)
-                        this.mount();
-                };
-                document.addEventListener('DOMContentLoaded', go, { once: true });
-                this._cleanups.push(() => document.removeEventListener('DOMContentLoaded', go));
-                return;
+                // listen() = addEventListener + a cleanup that removes it (same as before, smaller)
+                return this.listen(document, 'DOMContentLoaded', () => this._connected && this.isConnected && this.mount(), { once: true });
             }
             this.mount();
         }
@@ -260,13 +253,8 @@ function animateWithMotion(el, keyframes, options) {
     trackAnimation(a);
     if (options.iterations !== Infinity) {
         active$1++;
-        let done = false;
-        const end = () => {
-            if (!done) {
-                done = true;
-                active$1--;
-            }
-        };
+        // settles exactly once (fulfilled or rejected), so no guard is needed
+        const end = () => void active$1--;
         a?.finished?.then(end, end);
     }
     return a;
@@ -11324,4 +11312,4 @@ exports.viewTransition = viewTransition;
 exports.warnBaseline = warnBaseline;
 exports.watchPowerSaver = watchPowerSaver;
 exports.withoutDeprecations = withoutDeprecations;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/lite.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/components/lite.cjs.map

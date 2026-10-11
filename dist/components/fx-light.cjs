@@ -1,8 +1,8 @@
 'use strict';
 
-var base = require('../chunks/base-Do-R_9gU.cjs');
-var registry = require('../chunks/registry-CyVCJneg.cjs');
-var generative = require('../chunks/generative-BTya0iHP.cjs');
+var base = require('../chunks/base-BvH4nAcv.cjs');
+var registry = require('../chunks/registry-CibnX7Ui.cjs');
+var generative = require('../chunks/generative-BKoxWOSP.cjs');
 var shared = require('../chunks/shared-jkgRH-Hx.cjs');
 
 /**
@@ -239,4 +239,4 @@ function registerLightPack() {
 exports.LIGHT_FX = LIGHT_FX;
 exports.registerLightPack = registerLightPack;
 exports.trackPointer = trackPointer;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/fx-light.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/components/fx-light.cjs.map

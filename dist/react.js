@@ -1,6 +1,5 @@
 import { c as createScrollAnimate } from './chunks/core-Dj6iomdc.js';
 import { s as staggerChildren } from './chunks/stagger-B9sKPwQB.js';
-import './chunks/presets-BYBVJVeP.js';
 
 /**
  * motionary - React Integration
@@ -62,4 +61,4 @@ function createReactHooks(React) {
 }
 
 export { createReactHooks, withLatestCallbacks };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/react.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/react.js.map

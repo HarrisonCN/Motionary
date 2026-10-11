@@ -1,7 +1,6 @@
 'use strict';
 
 var core = require('./chunks/core-BjcOCpJt.cjs');
-require('./chunks/presets-CUHys3sK.cjs');
 
 /**
  * motionary - `<scroll-animate>` Web Component
@@ -94,4 +93,4 @@ function defineScrollAnimate(tagName = 'scroll-animate', instance) {
 }
 
 exports.defineScrollAnimate = defineScrollAnimate;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/element.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/element.cjs.map

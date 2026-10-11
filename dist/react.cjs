@@ -2,7 +2,6 @@
 
 var core = require('./chunks/core-BjcOCpJt.cjs');
 var stagger = require('./chunks/stagger-DFKwqOQG.cjs');
-require('./chunks/presets-CUHys3sK.cjs');
 
 /**
  * motionary - React Integration
@@ -65,4 +64,4 @@ function createReactHooks(React) {
 
 exports.createReactHooks = createReactHooks;
 exports.withLatestCallbacks = withLatestCallbacks;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/react.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/react.cjs.map

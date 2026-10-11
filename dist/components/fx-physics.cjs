@@ -1,9 +1,8 @@
 'use strict';
 
-var base = require('../chunks/base-Do-R_9gU.cjs');
-var registry = require('../chunks/registry-CyVCJneg.cjs');
-var generative = require('../chunks/generative-BTya0iHP.cjs');
-require('../chunks/shared-jkgRH-Hx.cjs');
+var base = require('../chunks/base-BvH4nAcv.cjs');
+var registry = require('../chunks/registry-CibnX7Ui.cjs');
+var generative = require('../chunks/generative-BKoxWOSP.cjs');
 
 /**
  * 6.8 — Interactive physics 2.0 (`motionary/components/fx-physics`) on a tiny
@@ -359,4 +358,4 @@ function registerPhysicsPack() {
 exports.PHYSICS2_FX = PHYSICS2_FX;
 exports.VerletWorld = VerletWorld;
 exports.registerPhysicsPack = registerPhysicsPack;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/fx-physics.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/components/fx-physics.cjs.map

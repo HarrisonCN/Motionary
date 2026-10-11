@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-Do-R_9gU.cjs');
+var base = require('../chunks/base-BvH4nAcv.cjs');
 
 /** FLIP keyframes from a previous box to the current one (pure). */
 function flipFrames(from, to, scale = true) {
@@ -258,4 +258,4 @@ exports.defineMasonry = defineMasonry;
 exports.flipFrames = flipFrames;
 exports.masonryLayout = masonryLayout;
 exports.sharedTransition = sharedTransition;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/layout.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/components/layout.cjs.map

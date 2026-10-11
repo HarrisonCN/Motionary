@@ -1,10 +1,9 @@
 'use strict';
 
-var base = require('../chunks/base-Do-R_9gU.cjs');
-var registry = require('../chunks/registry-CyVCJneg.cjs');
+var base = require('../chunks/base-BvH4nAcv.cjs');
+var registry = require('../chunks/registry-CibnX7Ui.cjs');
 var shared = require('../chunks/shared-jkgRH-Hx.cjs');
 var components_fxLight = require('./fx-light.cjs');
-require('../chunks/generative-BTya0iHP.cjs');
 
 /**
  * 6.5 — 3D scene cards (`motionary/components/fx-3d`), registered through
@@ -251,4 +250,4 @@ function register3dPack() {
 
 exports.DEPTH3_FX = DEPTH3_FX;
 exports.register3dPack = register3dPack;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/fx-3d.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/components/fx-3d.cjs.map

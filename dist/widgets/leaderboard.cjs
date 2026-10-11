@@ -1,9 +1,8 @@
 'use strict';
 
-var widgets_leaderboard = require('../chunks/leaderboard-BKmKMStS.cjs');
-require('../chunks/base-Do-R_9gU.cjs');
+var widgets_leaderboard = require('../chunks/leaderboard-DvSSQ8o3.cjs');
 
 
 
 exports.defineLeaderboard = widgets_leaderboard.defineLeaderboard;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/widgets/leaderboard.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/widgets/leaderboard.cjs.map

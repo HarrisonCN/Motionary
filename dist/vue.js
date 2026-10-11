@@ -1,6 +1,5 @@
 import { c as createScrollAnimate } from './chunks/core-Dj6iomdc.js';
 import { s as staggerChildren } from './chunks/stagger-B9sKPwQB.js';
-import './chunks/presets-BYBVJVeP.js';
 
 /**
  * motionary - Vue 3 Integration
@@ -57,4 +56,4 @@ function createVueComposables(Vue) {
 }
 
 export { createVueComposables };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/vue.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/vue.js.map

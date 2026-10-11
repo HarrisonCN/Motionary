@@ -1,5 +1,5 @@
-import { registerEffects } from '../chunks/registry-BEIhIRTY.js';
-import { p as prefersReducedMotion, o as onFrame } from '../chunks/base-Be98yNyq.js';
+import { registerEffects } from '../chunks/registry-DKs_BiEo.js';
+import { p as prefersReducedMotion, o as onFrame } from '../chunks/base-C9CJrhL3.js';
 
 /** Scroll progress of `el` through the viewport: 0 entering at the bottom → 1 leaving at the top (9.4). */
 function scrollProgress(el) {
@@ -102,4 +102,4 @@ function registerVideoPack() {
 }
 
 export { VIDEO_FX, frameSequence, registerVideoPack, scrollProgress, scrubVideo };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/fx-video.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/components/fx-video.js.map

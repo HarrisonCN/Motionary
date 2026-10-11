@@ -1,40 +1,6 @@
 import { defineComponents } from '../components.js';
 import { b as bindUsa } from '../chunks/bind-B_CTL6Qn.js';
 export { u as usaEventName } from '../chunks/bind-B_CTL6Qn.js';
-import './reveal.js';
-import '../chunks/base-Be98yNyq.js';
-import './text.js';
-import '../chunks/core-RZkPEx8i.js';
-import './tokens.js';
-import './interaction.js';
-import './feedback.js';
-import './background.js';
-import '../chunks/variants-D7tUTCVW.js';
-import './transitions.js';
-import './physics.js';
-import '../chunks/spring-p9RY-4VF.js';
-import './cards.js';
-import './click.js';
-import '../chunks/fx-Wd1GKAzZ.js';
-import './ui.js';
-import '../chunks/viewport-BAXHhZLV.js';
-import './page.js';
-import './timeline.js';
-import './gesture.js';
-import '../chunks/core-FB2gL64M.js';
-import './svg.js';
-import '../chunks/key-click-BLm3BI8_.js';
-import './webgl.js';
-import './depth.js';
-import './layout.js';
-import './packs.js';
-import './fx.js';
-import '../chunks/registry-BEIhIRTY.js';
-import '../chunks/builtins-BQZ7idez.js';
-import './a11y.js';
-import '../chunks/index-tags-B-JBecYg.js';
-import './perf.js';
-import './bridge.js';
 
 /**
  * motionary/components/svelte — Svelte integration (v3.8).
@@ -51,7 +17,15 @@ import './bridge.js';
  * </script>
  * <usa-switch use:usa={{ props: { checked: on }, on: { change: (e) => (on = e.detail.checked) } }}></usa-switch>
  * ```
- * Plain `on:usa:change` does not compile in Svelte 3/4 (colon); use the action or `onusa:change` in Svelte 5.
+ * Use the action in every Svelte version: plain `on:usa:change` does not compile in Svelte 3/4 (colon), and in
+ * Svelte 5 `onusa:change` triggers the `attribute_illegal_colon` warning (13.5.0) — `use:usa` is warning-free.
+ *
+ * Element types (13.5.0, generated from the manifest; svelte-check):
+ * ```ts
+ * // src/usa-svelte.d.ts
+ * import type { UsaSvelteElements } from 'motionary/components/svelte';
+ * declare module 'svelte/elements' { interface SvelteHTMLElements extends UsaSvelteElements {} }
+ * ```
  */
 /** Svelte action: `use:usa={{ props, on }}`. */
 function usa(node, binding = {}) {
@@ -64,4 +38,4 @@ function defineUsa(categories) {
 }
 
 export { bindUsa, defineUsa, usa };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/svelte.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/components/svelte.js.map

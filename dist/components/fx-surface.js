@@ -1,5 +1,4 @@
-import { registerEffects } from '../chunks/registry-BEIhIRTY.js';
-import '../chunks/base-Be98yNyq.js';
+import { registerEffects } from '../chunks/registry-DKs_BiEo.js';
 
 /** The built-in surface themes of the 8.6 theme system. */
 const SURFACE_THEMES = ['light', 'dark', 'neon', 'glass', 'neu'];
@@ -81,4 +80,4 @@ function registerSurfacePack() {
 }
 
 export { SURFACE_FX, SURFACE_THEMES, applySurfaceTheme, registerSurfacePack };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/fx-surface.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/components/fx-surface.js.map
