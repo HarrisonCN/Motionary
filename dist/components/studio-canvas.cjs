@@ -379,6 +379,7 @@ function createStudioCanvas(root, o) {
     if (!root.hasAttribute('aria-label') && !root.hasAttribute('aria-labelledby'))
         attr(root, 'aria-label', o.label || 'Canvas');
     css(root, 'touch-action', 'none');
+    css(root, '-webkit-user-select', undefined); // record both before writing: engines alias them (restore order matters)
     css(root, 'user-select', 'none');
     css(root, '-webkit-user-select', 'none');
     if (doc0.defaultView?.getComputedStyle(stage).position === 'static')
