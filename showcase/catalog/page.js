@@ -21,7 +21,7 @@ export const components = [
     'A slim NProgress-style bar for route changes and fetches: loadingBar.start() trickles, done() completes and fades.',
     'NProgress 风格的细加载条，适用于路由切换与请求：loadingBar.start() 渐进，done() 完成并淡出。',
     ['loadingBar', 'route change', 'role=progressbar'],
-    "<script type=\"module\">\n  import { loadingBar } from 'motionary/components/page';\n  await loadingBar.track(fetch('/api'));\n</script>",
+    "<script type=\"module\">\n  import { loadingBar } from 'motionary/components/page';\n  await loadingBar.track(new Promise((done) => setTimeout(done, 400))); // any promise, e.g. fetch('/api')\n</script>",
     '<div class="demo-row"><button class="demo-btn" type="button" data-loading="start">start()</button><button class="demo-btn demo-btn-alt" type="button" data-loading="done">done()</button></div><usa-loading-bar></usa-loading-bar>'),
   C('usa-back-to-top', 'page', 'Back to top', '回到顶部',
     'Appears after you scroll, shows reading progress as a ring and springs the page back up, then moves focus to the top.',

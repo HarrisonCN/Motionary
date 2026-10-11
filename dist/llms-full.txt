@@ -663,10 +663,11 @@ Wrap a list or grid: items that are added fade in, removed ones fade out in plac
 
 ```html
 <usa-auto-animate>
-  <ul class="todo">…</ul>
+  <ul class="todo"><li>Write the brief</li><li>Review</li></ul>
 </usa-auto-animate>
 
 <!-- or on any element: -->
+<ul class="grid"><li>A</li><li>B</li></ul>
 <script type="module">
   import { autoAnimate } from 'motionary/components/layout';
   autoAnimate(document.querySelector('.grid'));
@@ -745,7 +746,7 @@ Count or dot badge that bumps with a spring when its value changes; 99+ capping,
   <li data-icon="🏆">First win</li>
   <li data-icon="🔥" data-locked>7-day streak</li>
 </usa-badge-wall>
-<script>wall.unlock('7-day streak');</script>
+<script>addEventListener('DOMContentLoaded', () => { const wall = document.querySelector('usa-badge-wall'); wall.unlock('7-day streak'); });</script>
 ```
 
 ### <usa-bar-chart> — Animated bar chart
@@ -758,7 +759,7 @@ Count or dot badge that bumps with a spring when its value changes; 99+ capping,
 
 ```html
 <usa-bar-chart values="12,19,8,15,22" labels="Mon,Tue,Wed,Thu,Fri" unit="k"></usa-bar-chart>
-<script>chart.data = [{ label: 'Mon', value: 18 }, …];</script>
+<script>addEventListener('DOMContentLoaded', () => { document.querySelector('usa-bar-chart').data = [{ label: 'Mon', value: 18 }, { label: 'Tue', value: 12 }, { label: 'Wed', value: 21 }]; });</script>
 ```
 
 ### <usa-bg-generator> — Background generator
@@ -909,7 +910,7 @@ Items on a 3D ring, rotated by drag, arrow keys, clicks or autoplay — with spr
 
 ```html
 <usa-cart-drawer currency="$"></usa-cart-drawer>
-<script>cart.add({ id: 'tee', name: 'T-shirt', price: 24 });</script>
+<script>addEventListener('DOMContentLoaded', () => { const cart = document.querySelector('usa-cart-drawer'); cart.add({ id: 'tee', name: 'T-shirt', price: 24 }); });</script>
 ```
 
 ### <usa-chapter-nav> — Chapter nav
@@ -942,7 +943,7 @@ Items on a 3D ring, rotated by drag, arrow keys, clicks or autoplay — with spr
 
 ```html
 <usa-chat-composer placeholder="Ask anything…"></usa-chat-composer>
-<script>composer.addEventListener('usa:send', async (e) => { composer.busy = true; await ask(e.detail.text); composer.busy = false; });</script>
+<script>const composer = document.querySelector('usa-chat-composer'); composer.addEventListener('usa:send', async (e) => { composer.busy = true; await ask(e.detail.text); composer.busy = false; });</script>
 ```
 
 ### <usa-check> — Result icon
@@ -1000,9 +1001,11 @@ Wrap anything: ripple, burst (circle, star, heart, emoji), confetti, squish, pre
 
 ```html
 <usa-clock-control speeds="0.25,0.5,1,2"></usa-clock-control>
+<div class="box">A</div> <div class="box">B</div>
 <script type="module">
 import { motionClock, createTimeline } from 'motionary/engine';
 motionClock.rate = 0.5;
+const [a, b] = document.querySelectorAll('.box');
 createTimeline().add(a, [{ opacity: 0 }, { opacity: 1 }], 400).add(b, [{ transform: 'scale(0)' }, { transform: 'none' }], 500, '-=200').play();
 </script>
 ```
@@ -1051,7 +1054,7 @@ createTimeline().add(a, [{ opacity: 0 }, { opacity: 1 }], 400).add(b, [{ transfo
   <option value="new" data-group="File" data-keys="mod+n">New file</option>
   <option value="theme" data-group="View">Toggle theme</option>
 </usa-command-palette>
-<script>palette.addEventListener('usa:run', (e) => run(e.detail.id));</script>
+<script>const palette = document.querySelector('usa-command-palette'); palette.addEventListener('usa:run', (e) => run(e.detail.id));</script>
 ```
 
 ### <usa-compare> — Before / after compare
@@ -1365,7 +1368,7 @@ A side panel that springs in, drags / swipes closed, traps the page behind a bac
 
 ```html
 <usa-equalizer preset="rock" bands="60,150,400,1k,2.4k,6k,16k"></usa-equalizer>
-<script>eq.applyPreset('vocal');</script>
+<script>addEventListener('DOMContentLoaded', () => { const eq = document.querySelector('usa-equalizer'); eq.applyPreset('vocal'); });</script>
 ```
 
 ### <usa-fab> — FAB speed dial
@@ -1428,6 +1431,7 @@ A floating action button whose actions fan out with a staggered spring: up, down
 ```html
 <usa-file-drop multiple accept="image/*" label="Drop images or browse"></usa-file-drop>
 <script>
+  const drop = document.querySelector('usa-file-drop');
   drop.addEventListener('usa:files', (e) => upload(e.detail.files, (i, p) => drop.setProgress(i, p)));
 </script>
 ```
@@ -1626,7 +1630,7 @@ An RGB-split, sliced glitch — always on or on hover.
 
 ```html
 <usa-globe markers="Shanghai:31.2,121.5; London:51.5,-0.1; New York:40.7,-74"></usa-globe>
-<script>globe.flyTo('London');</script>
+<script>addEventListener('DOMContentLoaded', () => { const globe = document.querySelector('usa-globe'); globe.flyTo('London'); });</script>
 ```
 
 ### <usa-gpu-particles> — GPU particle canvas
@@ -1845,6 +1849,7 @@ Icons that morph point-by-point with a spring: play ↔ pause, menu ↔ close, p
 <div id="hero"><h1>Title</h1><div class="card">…</div><button>Go</button></div>
 <usa-keyframe-editor for="hero"></usa-keyframe-editor>
 <script>
+  const editor = document.querySelector('usa-keyframe-editor');
   editor.addEventListener('usa:change', (e) => save(e.detail.animation));
 </script>
 ```
@@ -1877,7 +1882,7 @@ Icons that morph point-by-point with a spring: play ↔ pause, menu ↔ close, p
   <li data-score="870">Alan</li>
   <li data-score="760">Grace</li>
 </usa-leaderboard>
-<script>board.setScore('Grace', 1000);</script>
+<script>addEventListener('DOMContentLoaded', () => { const board = document.querySelector('usa-leaderboard'); board.setScore('Grace', 1000); });</script>
 ```
 
 ### <usa-like> — Like button
@@ -1934,7 +1939,7 @@ A slim NProgress-style bar for route changes and fetches: loadingBar.start() tri
 ```html
 <script type="module">
   import { loadingBar } from 'motionary/components/page';
-  await loadingBar.track(fetch('/api'));
+  await loadingBar.track(new Promise((done) => setTimeout(done, 400))); // any promise, e.g. fetch('/api')
 </script>
 ```
 
@@ -2162,7 +2167,7 @@ Pinterest-style masonry: items drop into the shortest column and glide when the 
   <p data-from="Ada">Hi! 👋</p>
   <p data-me>Hey Ada</p>
 </usa-message-list>
-<script>list.typing('Ada'); list.push({ from: 'Ada', text: 'Ship it?' });</script>
+<script>addEventListener('DOMContentLoaded', () => { const list = document.querySelector('usa-message-list'); list.typing('Ada'); list.push({ from: 'Ada', text: 'Ship it?' }); });</script>
 ```
 
 ### <usa-milestones> — Scroll-drawn milestones
@@ -2399,7 +2404,7 @@ Hides while you scroll down, slides back on the first scroll up; shrink makes it
 <usa-notification-bell>
   <li data-time="2m">Ada liked your post</li>
 </usa-notification-bell>
-<script>bell.notify({ text: 'New follower', time: 'now' });</script>
+<script>addEventListener('DOMContentLoaded', () => { const bell = document.querySelector('usa-notification-bell'); bell.notify({ text: 'New follower', time: 'now' }); });</script>
 ```
 
 ### <usa-odometer> — Odometer counter
@@ -2442,7 +2447,7 @@ Hides while you scroll down, slides back on the first scroll up; shrink makes it
 
 ```html
 <usa-otp length="6"></usa-otp>
-<script>otp.addEventListener('usa:complete', (e) => check(e.detail.code) ? otp.success() : otp.error());</script>
+<script>const otp = document.querySelector('usa-otp'); otp.addEventListener('usa:complete', (e) => check(e.detail.code) ? otp.success() : otp.error());</script>
 ```
 
 ### <usa-overscroll> — Elastic overscroll
@@ -2842,7 +2847,7 @@ Pull down at the top of a list: the spinner stretches in with rubber-band resist
 <usa-pull-refresh style="height: 300px">
   <ul>…</ul>
 </usa-pull-refresh>
-<script>el.addEventListener('usa:refresh', async (e) => { await load(); e.detail.done(); });</script>
+<script>const el = document.querySelector('usa-pull-refresh'); el.addEventListener('usa:refresh', async (e) => { await load(); e.detail.done(); });</script>
 ```
 
 ### <usa-radar> — Radar scope
@@ -3882,7 +3887,7 @@ Types text, or cycles through phrases with delete and pause. Full text stays ava
 
 ```html
 <usa-upload-progress name="report.pdf" size="2400000" value="40"></usa-upload-progress>
-<script>row.value = 75; row.status = 'error';</script>
+<script>addEventListener('DOMContentLoaded', () => { const row = document.querySelector('usa-upload-progress'); row.value = 75; row.status = 'error'; });</script>
 ```
 
 ### <usa-video-card> — Video card
@@ -3930,7 +3935,7 @@ One view at a time with direction-aware slide, fade, scale or drill transitions 
 
 ```html
 <usa-voice-button label="Talk to the assistant"></usa-voice-button>
-<script>vb.addEventListener('usa:start', start); analyser.onlevel = (l) => (vb.level = l);</script>
+<script>const vb = document.querySelector('usa-voice-button'); vb.addEventListener('usa:start', () => (vb.level = 0.6)); // feed vb.level (0–1) from your audio analyser</script>
 ```
 
 ### <usa-volume-knob> — Volume knob
@@ -4011,5 +4016,5 @@ Letters bob in a travelling wave — playful headlines and loading labels.
 
 ```html
 <usa-xp-bar level="3" xp="40" per="100"></usa-xp-bar>
-<script>bar.add(75); // → level 4, 15 XP</script>
+<script>addEventListener('DOMContentLoaded', () => document.querySelector('usa-xp-bar').add(75)); /* → level 4, 15 XP */</script>
 ```

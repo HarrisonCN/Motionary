@@ -7,6 +7,55 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [13.7.0] - 2026-10-11
+
+AI tools 2.0 — `motionary-mcp` 2.1 (the MCP server in the package, `npx -p motionary motionary-mcp`). Additive only:
+`list_components`, `search_components` and `get_component` keep their input schema and result fields, no runtime
+code changed, zero runtime dependencies, no size budget raised. [docs/mcp-gateway-interop.md](docs/mcp-gateway-interop.md)
+
+### Added
+
+- **`check_compatibility`** tool — framework (html / esm / react / vue / svelte / solid / angular, with setup notes),
+  version (added in / changed after the installed version) and browser support (engines the browser suite tests,
+  minimum versions, web-platform features with their fallback) for components or for the components a snippet uses;
+  `compatible: false` when a component is unknown or newer than the installed version.
+- **`suggest_fix`** tool — concrete `{ find, replace }` patches: wrong tag names (closest real tag), mistyped or
+  deprecated attributes, components used but never imported / defined, bare `motionary/…` imports in CDN pages (→ the
+  CDN module URL of the same major), missing `motionary/runtime` prerequisites, import paths / event names / CDN pins
+  removed in 13.0; `fixed` (all patches applied) and what the validator still reports.
+- **`validate_snippet { browser: true | 'auto' }`** — runs the snippet in a real headless browser (Playwright, optional
+  peer, never a dependency) against the local build: HTML as a whole page with its own scripts, ESM behind an import
+  map; falls back to the static checks when no browser is available (`mode: 'browser' | 'static'`, `mount.skipped`).
+- Versioned tool schemas: `_meta["motionary/schemaVersion"]` on every tool, `outputSchema` + a `schema` id in the
+  results of the new tools.
+- Generated-example regression set (`scripts/mcp-examples.mjs`): every component's scaffold in seven frameworks; CI
+  runs all HTML + ESM ones (418) in Chromium through `validate_snippet { browser: true }` and fails on any uncaught
+  error or Motionary console error (`test/browser/mcp-examples.spec.mjs`); static checks for all of them in
+  `test/ai-tools-13-7.test.ts`.
+- MCP Gateway interop: `scripts/gateway-interop.mjs` + workflow **Gateway interop** run `motionary-mcp` behind
+  `npx @winstonsayno/mcp-gateway@latest` and call the new tools through it (the gateway is fetched in that job only).
+
+### Changed
+
+- `search_components` ranking: an exact tag (typed as `tilt`, `usa-tilt`, `<usa-tilt>` or `pull refresh`) always comes
+  first, exact tag segments / keywords outrank substrings, typos still match (`acordion` → `<usa-accordion>`), ties
+  break on the tag so results are stable. Same result fields.
+- `scaffold_snippet`: elements an example uses besides its own are registered too (`<usa-add-to-cart>` +
+  `<usa-cart-drawer>`), imports are merged per module (one name imported once), CDN pages import modules from the CDN
+  instead of bare `motionary/…` specifiers; React output renames DOM attributes and styles properly; solid and angular
+  scaffolds.
+
+### Fixed
+
+- 50 of 418 generated HTML / ESM examples failed in a real browser (measured on 13.1 / 13.2): example scripts used
+  undeclared element variables (`wall`, `cart`, `bar` …), a placeholder `…` inside a script, `fetch('/api')`, undefined
+  `a` / `b`, a missing `.grid`, bare `motionary/…` imports in CDN pages, a second element the example needs was never
+  registered, a duplicated import, method calls before the element mounted. All examples now run clean in Chromium
+  (the official Rive runtime example still needs `@rive-app/canvas`, which the offline test cannot fetch — it is
+  expected to report that peer).
+- `validate_snippet`: words inside quoted attribute values were reported as unknown attributes; a runtime module loaded
+  as `runtime/*.iife.js` (or named in an HTML comment) was reported as "imported but never registered".
+
 ## [13.6.0] - 2026-10-11
 
 Timeline editing model. A new editor-only entry, `motionary/components/timeline-editor`, gives timeline UIs (the

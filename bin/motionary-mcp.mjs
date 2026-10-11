@@ -21,10 +21,14 @@ import { dirname, join } from 'node:path';
 import { createInterface } from 'node:readline';
 import { pathToFileURL } from 'node:url';
 import { mountSnippet } from './mcp-mount.mjs';
+import { runSnippet } from './mcp-browser.mjs';
 import { compatAt, cmpVer } from './compat-history.mjs';
+import { rankComponents, checkCompatibility, suggestFix, SCHEMAS } from './mcp-tools-2.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
-const SERVER = { name: 'motionary-mcp', version: '2.0.0' };
+const SERVER = { name: 'motionary-mcp', version: '2.1.0' };
+/** 13.7: tool contract versions — input + output schema of each tool; a tool's major changes only on an incompatible change. */
+export const TOOL_SCHEMA_VERSIONS = { list_components: '1.0', search_components: '1.1', get_component: '1.0', get_example: '1.0', scaffold_snippet: '1.1', suggest_motion: '1.0', validate_snippet: '1.2', check_compat: '1.0', check_compatibility: '1.0', suggest_fix: '1.0' };
 const PROTOCOLS = ['2025-06-18', '2025-03-26', '2024-11-05'];
 
 export function loadManifest(path = process.env.MOTIONARY_MANIFEST || join(HERE, '../dist/manifest.json')) {
@@ -56,26 +60,11 @@ export function findComponent(m, tag) {
 /** Rank components for a free-text query (tag, title, keywords, description, category). */
 export function searchComponents(m, query, limit = 10) {
   indexModules(m);
-  const words = norm(query).split(/[^a-z0-9\u00c0-\uffff-]+/).filter(Boolean);
-  if (!words.length) return [];
-  const scored = m.components.map((c) => {
-    const tag = c.tag, title = norm(c.title), kw = (c.keywords || []).map(norm).join(' '), desc = norm(c.description), cat = norm(c.category);
-    let s = 0;
-    for (const w of words) {
-      if (tag === `usa-${w}` || tag === w) s += 20;
-      else if (tag.includes(w)) s += 8;
-      if (title.includes(w)) s += 6;
-      if (kw.includes(w)) s += 5;
-      if (cat === w) s += 4;
-      if (desc.includes(w)) s += 2;
-      if ((c.attributes || []).includes(w)) s += 1;
-    }
-    return { c, s };
-  });
-  return scored.filter((x) => x.s > 0).sort((a, b) => b.s - a.s || a.c.tag.localeCompare(b.c.tag)).slice(0, limit).map((x) => ({ ...brief(x.c), score: x.s }));
+  // 13.7: exact-tag priority, exact keyword / tag-segment boosts, typo-tolerant matching, stable tie-break (mcp-tools-2.mjs) — same result shape
+  return rankComponents(m, query).slice(0, limit).map((x) => ({ ...brief(x.c), score: x.s }));
 }
 
-const FRAMEWORKS = ['html', 'esm', 'react', 'vue', 'svelte'];
+const FRAMEWORKS = ['html', 'esm', 'react', 'vue', 'svelte', 'solid', 'angular'];
 const runtimeCdn = (m, ids) => {
   const base = m.cdn.runtime.replace(/runtime\.iife\.js$/, '');
   return [`<script src="${m.cdn.runtime}"></script>`, ...ids.filter((i) => i !== 'core').map((i) => `<script src="${base}runtime/${i}.iife.js"></script>`)];
@@ -86,21 +75,103 @@ const runtimeImports = (ids) => {
   return { lines: ["import { use } from 'motionary/runtime';", ...mods.map((i) => `import { ${camel(i)} } from 'motionary/runtime/${i}';`)], register: `use(${mods.map(camel).join(', ')});` };
 };
 
+// 13.2: `import { a } from 'x'` lines merged per module — one name is imported once (gl-model's two decoders shared one import)
+export function mergeImports(lines) {
+  const out = [], by = new Map();
+  for (const l of lines) {
+    const mm = l.match(/^import \{([^}]*)\} from (['"])([^'"]+)\2;?$/);
+    if (!mm) { if (!out.includes(l) || !l.startsWith('import ')) out.push(l); continue; }
+    if (!by.has(mm[3])) { by.set(mm[3], []); out.push({ from: mm[3] }); }
+    const names = by.get(mm[3]);
+    for (const n of mm[1].split(',').map((x) => x.trim()).filter(Boolean)) if (!names.includes(n)) names.push(n);
+  }
+  return out.map((l) => (typeof l === 'string' ? l : `import { ${by.get(l.from).join(', ')} } from '${l.from}';`));
+}
+
+// 13.2: package subpath → dist file, from the package.json next to this server (CDN pages cannot use bare `motionary/…` imports)
+let EXPORTS = null;
+const distPathOf = (spec) => {
+  if (!EXPORTS) {
+    EXPORTS = {};
+    try {
+      const pkg = JSON.parse(readFileSync(join(HERE, '../package.json'), 'utf8'));
+      for (const [k, v] of Object.entries(pkg.exports || {})) {
+        const t = typeof v === 'string' ? v : v && (v.import ? (typeof v.import === 'string' ? v.import : v.import.default) : v.default);
+        if (typeof t === 'string' && t.startsWith('./dist/')) EXPORTS[k === '.' ? 'motionary' : 'motionary/' + k.slice(2)] = t.slice(7);
+      }
+    } catch { /* fall back to the naming convention */ }
+  }
+  return EXPORTS[spec] || (spec === 'motionary' ? 'index.js' : spec.replace(/^motionary\//, '') + '.js');
+};
+const cdnBase = (m) => m.cdn.components.replace(/components\.umd\.js$/, '');
+/** Bare `motionary/…` specifiers in an HTML page → CDN module URLs of the same major. */
+export const cdnImports = (m, code) => String(code).replace(/(\bfrom\s+|\bimport\s*\(?\s*)(['"])(motionary(?:\/[\w./-]+)?)\2/g, (_, k, q, spec) => `${k}${q}${cdnBase(m)}${distPathOf(spec)}${q}`);
+
+const VOID = /^(area|base|br|col|embed|hr|img|input|link|meta|source|track|wbr)$/i;
+const ATTR_RE = /([^\s=/>]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+)))?/g;
+/** An example → { html (no scripts / comments), scripts: [code] } — framework scaffolds wire the scripts up after mount. */
+export function splitExample(markup) {
+  const scripts = [];
+  const html = String(markup || '')
+    .replace(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi, (_, a, body) => { if (body.trim()) scripts.push(body.trim()); return ''; })
+    .replace(/<!--[\s\S]*?-->/g, '')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+  return { html, scripts };
+}
+const camelCss = (p) => (p.startsWith('--') ? p : p.replace(/-([a-z])/g, (_, c) => c.toUpperCase()));
+const styleObj = (v) => `{{ ${v.split(';').map((d) => d.trim()).filter(Boolean).map((d) => { const i = d.indexOf(':'); return `${JSON.stringify(camelCss(d.slice(0, i).trim()))}: ${JSON.stringify(d.slice(i + 1).trim())}`; }).join(', ')} }}`;
+const REACT_ATTR = { class: 'className', for: 'htmlFor', tabindex: 'tabIndex', readonly: 'readOnly', maxlength: 'maxLength', colspan: 'colSpan', rowspan: 'rowSpan', autoplay: 'autoPlay', playsinline: 'playsInline', crossorigin: 'crossOrigin', srcset: 'srcSet', contenteditable: 'contentEditable', autocomplete: 'autoComplete', inputmode: 'inputMode', enterkeyhint: 'enterKeyHint' };
+const jsxValue = (v) => (v.includes('"') ? `{${JSON.stringify(v)}}` : `"${v}"`);
+/** HTML markup → JSX (React or Solid): void tags closed, text braces escaped; React renames DOM attributes and turns style into an object; Solid sets attributes on <usa-*> elements with attr: (Solid sets properties otherwise). */
+export function htmlToJsx(html, flavor = 'react') {
+  return String(html).split(/(<[^>]+>)/g).map((part) => {
+    if (!part.startsWith('<')) return part.replace(/[{}]/g, (c) => `{'${c}'}`);
+    if (/^<\//.test(part)) return part;
+    const mm = part.match(/^<([a-zA-Z][\w-]*)([\s\S]*?)(\/?)>$/);
+    if (!mm) return part;
+    const [, tag, rest] = mm;
+    const custom = tag.includes('-');
+    const attrs = [...rest.matchAll(ATTR_RE)].map(([, n, d, s1, u]) => {
+      const v = d ?? s1 ?? u;
+      let name = n;
+      if (/^on[a-z]+$/i.test(name)) return null; // inline handlers: wire them in code
+      if (flavor === 'react') {
+        if (!custom) name = REACT_ATTR[name.toLowerCase()] || name; else if (name === 'class') name = 'className';
+        if (name === 'style' && v != null) return `style=${styleObj(v)}`;
+        return v == null ? (custom || name.startsWith('data-') ? `${name}=""` : name) : `${name}=${jsxValue(v)}`;
+      }
+      if (custom && name !== 'class' && name !== 'style' && name !== 'slot' && name !== 'id' && !name.includes(':')) name = `attr:${name}`;
+      return v == null ? `${name}=""` : `${name}=${jsxValue(v)}`;
+    }).filter(Boolean);
+    const close = VOID.test(tag) || mm[3] ? ' />' : '>';
+    return `<${tag}${attrs.length ? ' ' + attrs.join(' ') : ''}${close}`;
+  }).join('');
+}
+/** Text and attribute braces / Angular block syntax as entities (Svelte, Angular templates). */
+const escTemplate = (html, chars) => String(html).replace(chars, (c) => `&#${c.charCodeAt(0)};`);
+const wireComment = (scripts, lang = 'js') => (scripts.length ? `\n${lang === 'html' ? '<!--' : '/*'} wire-up from the HTML example — run it after the component mounts:\n${scripts.join('\n').replace(/\*\//g, '* /').replace(/-->/g, '-- >')}\n${lang === 'html' ? '-->' : '*/'}` : '');
+
 /** A ready-to-paste snippet for one or more components, prerequisites first. */
 export function scaffold(m, tags, framework = 'esm') {
   indexModules(m);
   if (!FRAMEWORKS.includes(framework)) throw new Error(`framework must be one of ${FRAMEWORKS.join(', ')}`);
-  const comps = tags.map((t) => {
+  const primary = tags.map((t) => {
     const c = findComponent(m, t);
     if (!c) throw new Error(`unknown component ${t} — use search_components first`);
     return c;
   });
+  // 13.2: elements an example uses besides its own (e.g. <usa-add-to-cart> flies into a <usa-cart-drawer>) are registered too
+  const comps = [...primary];
+  for (const c of primary) for (const [, t] of String(c.example).matchAll(/<(usa-[a-z0-9-]+)/g)) { const k = findComponent(m, t); if (k && !comps.includes(k)) comps.push(k); }
   const req = [...new Set(comps.flatMap((c) => c.requires))].filter((r) => !isPeer(r));
   const peerIds = [...new Set(comps.flatMap((c) => c.requires))].filter(isPeer);
   const peers = peerIds.map(reqLabel);
   const peerSetup = peerIds.map((r) => MOD.get(r)).filter(Boolean);
+  const umd = (c) => /\.umd\.js$/.test(c.cdn);
+  const needsComponents = comps.some((c) => umd(c) && !/widgets\.umd/.test(c.cdn));
   const needsWidgets = comps.some((c) => /widgets\.umd/.test(c.cdn));
-  const markup = comps.map((c) => c.example).join('\n');
+  const markup = primary.map((c) => c.example).join('\n');
   const byPath = new Map();
   for (const c of comps) byPath.set(c.import.path, [...(byPath.get(c.import.path) || []), c.import.define]);
   const defImports = [...byPath].map(([p, d]) => `import { ${[...new Set(d)].join(', ')} } from '${p}';`);
@@ -110,24 +181,30 @@ export function scaffold(m, tags, framework = 'esm') {
   const prereqNote = req.length || peers.length ? `Prerequisites: ${[...req.map(reqLabel), ...peers].join(', ')} — register them before the components mount.` : 'No prerequisites.';
   let code;
   if (framework === 'html') {
-    const esmOnly = comps.filter((c) => !/\.umd\.js$/.test(c.cdn));
+    // entry-only elements (own ES module entry, not in the no-build bundles) load as modules from the same CDN major
+    const esmOnly = comps.filter((c) => !umd(c));
+    const mod = esmOnly.length ? [`<script type="module">\n${mergeImports(esmOnly.map((c) => `import { ${c.import.define} } from '${c.cdn}';`)).join('\n')}\n${esmOnly.map((c) => c.import.register).join('\n')}\n</script>`] : [];
     code = [
       '<!-- ' + prereqNote + ' -->',
       ...(req.length ? runtimeCdn(m, req) : []),
       ...peerSetup.map((p) => `<!-- ${p.label} (official runtime, lazy): -->\n${p.cdn}`),
-      ...(comps.some((c) => /components\.umd/.test(c.cdn)) || !esmOnly.length ? [`<script src="${m.cdn.components}"></script>`] : []),
+      ...(needsComponents || !esmOnly.length ? [`<script src="${m.cdn.components}"></script>`] : []),
       ...(needsWidgets ? [`<script src="${m.cdn.widgets}"></script>`] : []),
-      // 13.2: elements with their own entry (not in the no-build bundles) load as ES modules from the same CDN major
-      ...(esmOnly.length ? [`<script type="module">\n${esmOnly.map((c) => `import { ${c.import.define} } from '${c.cdn}';`).join('\n')}\n${esmOnly.map((c) => c.import.register).join('\n')}\n</script>`] : []),
+      ...mod,
       '',
-      markup,
+      cdnImports(m, markup),
     ].join('\n');
   } else {
-    const setup = [...(rt ? [...rt.lines] : []), ...peerSetup.map((p) => p.import).filter((l) => !defImports.includes(l)), ...defImports, '', ...(rt ? [rt.register + ' // prerequisites first'] : []), ...peerSetup.map((p) => p.register), ...defCalls].join('\n');
-    if (framework === 'esm') code = `// ${install}\n${setup}\n\n/* HTML:\n${markup}\n*/`;
-    else if (framework === 'react') code = `// ${install}\n${setup}\n\nexport function Demo() {\n  return (\n    <>\n${markup.split('\n').map((l) => '      ' + l.replace(/\bclass=/g, 'className=')).join('\n')}\n    </>\n  );\n}`;
-    else if (framework === 'vue') code = `<!-- ${install} -->\n<script setup>\n${setup}\n</script>\n\n<template>\n${markup.split('\n').map((l) => '  ' + l).join('\n')}\n</template>\n<!-- vite.config: vue({ template: { compilerOptions: { isCustomElement: (t) => t.startsWith('usa-') } } }) -->`;
-    else code = `<!-- ${install} -->\n<script>\n${setup}\n</script>\n\n${markup}`;
+    const setupLines = mergeImports([...(rt ? [...rt.lines] : []), ...peerSetup.map((p) => p.import).filter(Boolean), ...defImports]);
+    const calls = [...(rt ? [rt.register + ' // prerequisites first'] : []), ...peerSetup.map((p) => p.register), ...defCalls];
+    const setup = [...setupLines, '', ...calls].join('\n');
+    const { html, scripts } = splitExample(markup);
+    const indent = (s, n) => s.split('\n').map((l) => (l ? ' '.repeat(n) + l : l)).join('\n');
+    if (framework === 'esm') code = `// ${install}\n${setup}\n\n/* HTML:\n${markup.replace(/\*\//g, '* /')}\n*/`;
+    else if (framework === 'react' || framework === 'solid') code = `// ${install}\n${setup}\n\nexport function Demo() {\n  return (\n    <>\n${indent(htmlToJsx(html, framework), 6)}\n    </>\n  );\n}${wireComment(scripts)}`;
+    else if (framework === 'vue') code = `<!-- ${install} -->\n<script setup>\n${setup}\n</script>\n\n<template>\n${indent(html.replace(/\{\{/g, "{{ '{{' }}"), 2)}\n</template>\n<!-- vite.config: vue({ template: { compilerOptions: { isCustomElement: (t) => t.startsWith('usa-') } } }) -->${wireComment(scripts, 'html')}`;
+    else if (framework === 'svelte') code = `<!-- ${install} -->\n<script>\n${setup}\n</script>\n\n${escTemplate(html, /[{}]/g)}${wireComment(scripts, 'html')}`;
+    else code = `// ${install}\nimport { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';\n${setup}\n\n@Component({\n  selector: 'app-demo',\n  standalone: true,\n  schemas: [CUSTOM_ELEMENTS_SCHEMA],\n  template: \`\n${indent(escTemplate(html, /[{}@`$\\]/g), 4)}\n  \`,\n})\nexport class DemoComponent {}${wireComment(scripts)}`;
   }
   return { framework, components: comps.map((c) => c.tag), install, prerequisites: req.map(reqLabel).concat(peers), code };
 }
@@ -214,7 +291,7 @@ export function validateSnippet(m, code) {
     }
     used.set(tag, c);
     if (!(c.attributes || []).length) continue;
-    const attrs = [...rawAttrs.matchAll(/(?:^|\s)([:@]?[a-zA-Z_][\w:.-]*)(?=\s*=|\s|\/?$)/g)].map((x) => x[1].replace(/^[:@]/, '').replace(/^(?:v-bind|bind):/, '').toLowerCase());
+    const attrs = [...rawAttrs.replace(/=\s*("[^"]*"|'[^']*')/g, '=""').matchAll(/(?:^|\s)([:@]?[a-zA-Z_][\w:.-]*)(?=\s*=|\s|\/?$)/g)].map((x) => x[1].replace(/^[:@]/, '').replace(/^(?:v-bind|bind):/, '').toLowerCase());
     for (const a of attrs) {
       if (GLOBAL_ATTRS.has(a) || a.startsWith('data-') || a.startsWith('aria-') || a.startsWith('on') || a.startsWith('v-') || a.includes(':')) continue;
       if (!c.attributes.includes(a)) warnings.push(`<${tag}> has no attribute "${a}" (attributes: ${c.attributes.join(', ')})`);
@@ -240,7 +317,7 @@ export function validateSnippet(m, code) {
       (hasScript ? errors : warnings).push(`${who} requires ${path}: ${r === 'core' ? "import { use } from 'motionary/runtime'" : `import { ${camelId(r)} } from '${path}'; use(${camelId(r)});`} before the component mounts (CDN: runtime.iife.js${r === 'core' ? '' : `, then runtime/${r}.iife.js`}, before the component bundles)`);
       continue;
     }
-    if (r !== 'core' && /\bimport\s/.test(src) && !new RegExp(`use\\([^)]*\\b${camelId(r)}\\b`).test(src)) errors.push(`${path} is imported but never registered: call use(${camelId(r)}) before the components mount`);
+    if (r !== 'core' && /\bimport\s/.test(src) && src.replace(/<!--[\s\S]*?-->/g, '').includes(`motionary/runtime/${r}`) && !new RegExp(`use\\([^)]*\\b${camelId(r)}\\b`).test(src)) errors.push(`${path} is imported but never registered: call use(${camelId(r)}) before the components mount`);
     if (at > firstDefine) errors.push(`${path} is loaded after the components — register prerequisites first`);
     const useAt = src.search(new RegExp(`use\\([^)]*\\b${camelId(r)}\\b`));
     const defAt = Math.min(...comps.filter((c) => c.requires.includes(r)).map((c) => { const i = src.indexOf(c.import.define + '('); return i < 0 ? Infinity : i; }));
@@ -269,6 +346,23 @@ export async function validateSnippetMounted(m, code, opts = {}) {
   }
   const errors = [...r.errors, ...errs], warnings = [...r.warnings, ...mt.warnings];
   return { ...r, valid: errors.length === 0, errors, warnings, mount: { mounted: true, environment: mt.environment, components: mt.components, confirmed } };
+}
+
+/** 13.2: static checks + a real run in a headless browser (Playwright, optional peer) with the built bundles — see bin/mcp-browser.mjs. */
+export async function validateSnippetInBrowser(m, code, opts = {}) {
+  const r = validateSnippet(m, code);
+  const src = String(code || '');
+  const ids = [...new Set(r.components.flatMap((t) => findComponent(m, t)?.requires || []))].filter((x) => !isPeer(x) && (x === 'core' ? /motionary\/runtime['"]|runtime\.iife\.js/.test(src) : src.includes(`motionary/runtime/${x}`) || src.includes(`runtime/${x}.iife.js`)));
+  if (ids.length && !ids.includes('core')) ids.unshift('core');
+  const rn = await runSnippet(m, src, { ...opts, distDir: opts.distDir || process.env.MOTIONARY_DIST || join(HERE, '../dist'), findComponent, runtimeIds: ids });
+  if (!rn.mounted) return { ...r, mount: { mounted: false, skipped: rn.skipped } };
+  const confirmed = [], errs = [];
+  for (const e of rn.errors) {
+    const k = (e.match(/requires (motionary\/runtime\/[\w-]+)/) || [])[1];
+    if (k && r.errors.concat(r.warnings).some((x) => x.includes(`requires ${k}`))) confirmed.push(e); else errs.push(e);
+  }
+  const errors = [...r.errors, ...errs], warnings = [...r.warnings, ...rn.warnings];
+  return { ...r, valid: errors.length === 0, errors, warnings, mount: { mounted: true, environment: rn.environment, run: rn.run, components: rn.components, confirmed } };
 }
 
 /** 12.5: the motionary version installed in the user's project (MOTIONARY_INSTALLED, else ./node_modules/motionary). */
@@ -303,11 +397,15 @@ export const TOOLS = [
   { name: 'get_example', title: 'Get an example', description: "A working example for one component in the requested style ('html' = CDN, 'esm' = npm + bundler, or a variant id).", inputSchema: { type: 'object', properties: { tag: { type: 'string' }, variant: { type: 'string', description: "'html' (default), 'esm', or a variant id from get_component" } }, required: ['tag'], additionalProperties: false }, annotations: { title: 'Get example', ...RO } },
   { name: 'scaffold_snippet', title: 'Scaffold a snippet', description: 'A ready-to-paste snippet using one or more components, with every prerequisite installed, imported and registered in the right order before the components mount.', inputSchema: { type: 'object', properties: { tags: { type: 'array', items: { type: 'string' }, minItems: 1 }, framework: { type: 'string', enum: FRAMEWORKS, default: 'esm' } }, required: ['tags'], additionalProperties: false }, annotations: { title: 'Scaffold snippet', ...RO } },
   { name: 'suggest_motion', title: 'Suggest a motion', description: 'Natural language (English or Chinese) → a motion spec: effect, direction, duration, easing, trigger, stagger, Web Animations keyframes + options, CSS, and the Motionary components that implement it, with prerequisite-aware code. Deterministic parser, no model, no network.', inputSchema: { type: 'object', properties: { text: { type: 'string', description: "e.g. 'fade the cards up slowly when they scroll into view, one after another'" }, format: { type: 'string', enum: ['waapi', 'css', 'component'], default: 'waapi' } }, required: ['text'], additionalProperties: false }, annotations: { title: 'Suggest motion', ...RO } },
-  { name: 'validate_snippet', title: 'Validate a snippet', description: 'Check HTML / ESM / JSX / Vue / Svelte code that uses <usa-*> components: unknown tags (with suggestions) and attributes, missing or mis-ordered prerequisites (motionary/runtime modules, official runtimes), components never defined, hand-written animation without a reduced-motion path. Static analysis by default; mount: true also mounts the markup in a headless DOM (jsdom, optional peer) with the real Motionary bundles and checks definitions, upgrade errors, prerequisites, observed attributes and event names against the component contract — the snippet\'s own scripts never run.', inputSchema: { type: 'object', properties: { code: { type: 'string' }, mount: { type: 'boolean', default: false, description: 'also mount the markup in jsdom with the real bundles (12.2)' } }, required: ['code'], additionalProperties: false }, annotations: { title: 'Validate snippet', ...RO } },
+  { name: 'validate_snippet', title: 'Validate a snippet', description: 'Check HTML / ESM / JSX / Vue / Svelte code that uses <usa-*> components: unknown tags (with suggestions) and attributes, missing or mis-ordered prerequisites (motionary/runtime modules, official runtimes), components never defined, hand-written animation without a reduced-motion path. Static analysis by default; mount: true also mounts the markup in a headless DOM (jsdom, optional peer) with the real Motionary bundles and checks definitions, upgrade errors, prerequisites, observed attributes and event names against the component contract — the snippet\'s own scripts never run. browser: true (13.2) runs it in a real headless browser instead (Playwright, optional peer): HTML snippets run as a whole page, their own scripts included, against the local build; uncaught errors and motionary console errors are reported.', inputSchema: { type: 'object', properties: { code: { type: 'string' }, mount: { type: 'boolean', default: false, description: 'also mount the markup in jsdom with the real bundles (12.2)' }, browser: { type: ['boolean', 'string'], enum: [true, false, 'auto'], default: false, description: "run it in a real headless browser instead (Playwright, optional peer; implies mount) — HTML runs as a whole page with its own scripts, ESM behind an import map, framework code as markup (13.2). true / 'auto' (13.7) fall back to the static checks when no browser is available; the result's mode says which ran" } }, required: ['code'], additionalProperties: false }, annotations: { title: 'Validate snippet', ...RO } },
   { name: 'check_compat', title: 'Check version compatibility', description: "Which components / runtime modules a project on a given motionary version can use, which were added later (with the release that added them) and which changed after it (from the release notes). Defaults to the version installed in the user's project.", inputSchema: { type: 'object', properties: { version: { type: 'string', description: "the motionary version installed in the user's project (default: ./node_modules/motionary, else the catalog version) — answers are filtered for it" }, tags: { type: 'array', items: { type: 'string' }, description: 'only these components (default: everything that is missing or changed for that version)' } }, additionalProperties: false }, annotations: { title: 'Check compatibility', ...RO } },
+  { name: 'check_compatibility', title: 'Check compatibility (framework / version / browser)', description: "13.7: can these components (or the components a snippet uses) run in the user's setup? Per component: the motionary version that added it and releases that changed it after the given version, support and setup notes for html / esm / react / vue / svelte / solid / angular, the engines the browser suite tests every component in (Chromium, Firefox, WebKit), minimum browser versions and the web-platform features it needs with the fallback it uses. compatible is false when any component is unknown or newer than the version.", inputSchema: { type: 'object', properties: { tags: { type: 'array', items: { type: 'string' } }, code: { type: 'string', description: 'or: a snippet — its <usa-*> components are checked' }, framework: { type: 'string', enum: ['html', 'esm', 'react', 'vue', 'svelte', 'solid', 'angular'] }, version: { type: 'string', description: "the motionary version installed in the user's project (default: ./node_modules/motionary, else the catalog version)" }, browsers: { type: 'array', items: { type: 'string' }, description: "e.g. ['safari 16', 'firefox']" } }, additionalProperties: false }, outputSchema: { type: 'object', properties: { schema: { const: SCHEMAS.compatibility }, version: { type: 'string' }, catalog: { type: 'string' }, behind: { type: 'boolean' }, compatible: { type: 'boolean' }, components: { type: 'array' }, issues: { type: 'array' } }, required: ['schema', 'version', 'compatible', 'components', 'issues'] }, annotations: { title: 'Check compatibility', ...RO } },
+  { name: 'suggest_fix', title: 'Suggest fixes for a snippet', description: "13.7: concrete patches for code that uses <usa-*> components — wrong tag names (closest real tag), mistyped / deprecated attributes, components used but never imported or defined, bare `motionary/…` imports in a CDN page (→ the CDN module URL of the same major), missing motionary/runtime prerequisites, import paths / event names / CDN pins removed in 13.0. Each fix is { kind, message, line, patch: { find, replace } }; fixed is the code with every patch applied and remaining what the static validator still reports. Never writes files.", inputSchema: { type: 'object', properties: { code: { type: 'string' }, context: { type: 'string', enum: ['cdn', 'esm', 'html'], description: 'how the code loads Motionary (default: detected)' } }, required: ['code'], additionalProperties: false }, outputSchema: { type: 'object', properties: { schema: { const: SCHEMAS.fix }, context: { type: 'string' }, fixes: { type: 'array', items: { type: 'object', properties: { kind: { type: 'string', enum: ['unknown-tag', 'unknown-attribute', 'deprecated-attribute', 'deprecated-api', 'bare-import', 'missing-import', 'missing-prerequisite'] }, message: { type: 'string' }, line: { type: 'number' }, patch: { type: 'object', properties: { find: { type: 'string' }, replace: { type: 'string' } }, required: ['find', 'replace'] } }, required: ['kind', 'message', 'patch'] } }, fixed: { type: 'string' }, valid: { type: 'boolean' }, remaining: { type: 'object' } }, required: ['schema', 'fixes', 'fixed', 'valid'] }, annotations: { title: 'Suggest fix', ...RO } },
 ];
 
 const text = (obj) => ({ content: [{ type: 'text', text: typeof obj === 'string' ? obj : JSON.stringify(obj, null, 2) }], ...(typeof obj === 'object' ? { structuredContent: Array.isArray(obj) ? { items: obj } : obj } : {}) });
+
+for (const t of TOOLS) t._meta = { 'motionary/schemaVersion': TOOL_SCHEMA_VERSIONS[t.name] };
 
 export function callTool(m, name, a = {}) {
   indexModules(m);
@@ -358,8 +456,16 @@ export function callTool(m, name, a = {}) {
       return text(checkCompat(m, a.version, a.tags));
     case 'validate_snippet':
       if (typeof a.code !== 'string') throw new Error('code is required');
+      // 13.7: browser: true | 'auto' — a real headless browser when Playwright + a browser are available, otherwise the static
+      // checks (mode says which ran; mount.skipped says why the browser did not)
+      if (a.browser) return validateSnippetInBrowser(m, a.code).then((r) => text({ ...r, mode: r.mount?.mounted ? 'browser' : 'static', schema: SCHEMAS.validation }));
       if (a.mount) return validateSnippetMounted(m, a.code).then(text);
       return text(validateSnippet(m, a.code));
+    case 'check_compatibility':
+      return text(checkCompatibility(m, a, { findComponent, installedVersion, validateSnippet }));
+    case 'suggest_fix':
+      if (typeof a.code !== 'string') throw new Error('code is required');
+      return text(suggestFix(m, a.code, { context: a.context }, { findComponent, cdnImports, validateSnippet, searchComponents }));
     default:
       throw Object.assign(new Error(`unknown tool ${name}`), { code: -32602 });
   }

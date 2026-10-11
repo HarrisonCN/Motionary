@@ -1,0 +1,24 @@
+name: Gateway interop
+# 13.7.0: motionary-mcp behind the published MCP gateway (docs/mcp-gateway-interop.md). The gateway is fetched with npx
+# in this job only — it is not a dependency (or devDependency) of motionary.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  interop:
+    name: motionary-mcp via @winstonsayno/mcp-gateway@latest
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+      - name: Gateway version
+        run: npm view @winstonsayno/mcp-gateway@latest version
+      - name: initialize → tools/list → tools/call (search_components, check_compatibility, suggest_fix, validate_snippet) through the gateway
+        run: node scripts/gateway-interop.mjs
