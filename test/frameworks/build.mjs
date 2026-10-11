@@ -57,12 +57,13 @@ const dev = { 'process.env.NODE_ENV': '"development"' };
 // 1. server bundle + render in a DOM-free Node process
 await build({ ...common, entryPoints: [pick('server')], outfile: join(OUT, 'server.mjs'), platform: 'node', format: 'esm', define: { ...dev, ...extra.define }, ...serverExtra, plugins: [...common.plugins, ...(serverExtra.plugins || [])],
   banner: { js: "import { createRequire as __cr } from 'node:module'; const require = __cr(import.meta.url);" } });
-const html = execFileSync(process.execPath, ['--enable-source-maps', '-e', `
+const { html, head } = JSON.parse(execFileSync(process.execPath, ['--enable-source-maps', '-e', `
   for (const g of ['window', 'document', 'HTMLElement', 'customElements', 'localStorage', 'requestAnimationFrame'])
     if (typeof globalThis[g] !== 'undefined') { console.error('unexpected DOM global ' + g); process.exit(3); }
   const m = await import(${JSON.stringify('file://' + join(OUT, 'server.mjs'))});
-  process.stdout.write(await m.render());
-`], { cwd: DIR, encoding: 'utf8', input: '', stdio: ['pipe', 'pipe', 'inherit'] });
+  const r = await m.render();
+  process.stdout.write(JSON.stringify(typeof r === 'string' ? { html: r, head: '' } : r));
+`], { cwd: DIR, encoding: 'utf8', input: '', stdio: ['pipe', 'pipe', 'inherit'] }));
 if (!/<usa-switch\b/.test(html)) throw new Error(`${fw}: server HTML has no <usa-switch>:\n${html.slice(0, 500)}`);
 if (/usa-sw-track/.test(html)) throw new Error(`${fw}: server HTML already contains upgraded switch markup`);
 writeFileSync(join(OUT, 'ssr.html'), html);
@@ -72,6 +73,6 @@ await build({ ...common, entryPoints: [pick('client')], outfile: join(OUT, 'clie
 
 // 3. page
 writeFileSync(join(OUT, 'index.html'), `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>motionary × ${fw}</title>
-<meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/dist/components.css"></head>
+<meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/dist/components.css">${head}</head>
 <body><div id="app">${html}</div><script type="module" src="./client.js"></script></body></html>`);
 console.log(`${fw}: ok (ssr ${html.length} B) → test/frameworks/${fw}/dist/index.html`);
