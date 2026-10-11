@@ -1,9 +1,9 @@
 'use strict';
 
-var registry = require('../chunks/registry-BfiEkviv.cjs');
-var animImage = require('../chunks/anim-image-B68xnlYD.cjs');
-require('../chunks/tween-DQzuHdMx.cjs');
-require('../chunks/ticker-j_dmsse0.cjs');
+var registry = require('../chunks/registry-c80No5j_.cjs');
+var animImage = require('../chunks/anim-image-DnpOI25h.cjs');
+require('../chunks/tween-DUYiyPH_.cjs');
+require('../chunks/ticker-BFq0AxP5.cjs');
 require('../chunks/ease-HwYZnZat.cjs');
 
 /**
@@ -203,4 +203,4 @@ exports.decodeGif = decodeGif;
 exports.formatGif = formatGif;
 exports.loadGif = loadGif;
 exports.lzwDecode = lzwDecode;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/runtime/format-gif.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/runtime/format-gif.cjs.map

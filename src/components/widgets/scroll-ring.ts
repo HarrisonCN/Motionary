@@ -1,3 +1,4 @@
+import { raf as sraf, caf as scaf } from '../base';
 import { defineElement, type UsaElement, queryAttr } from '../base';
 import { pickEngine, timelineName, commonAncestor, scrollProgress } from './scroll-driven';
 import css from './scroll-ring.css?raw';
@@ -105,11 +106,11 @@ export function defineScrollRing(tag = 'usa-scroll-ring'): CustomElementConstruc
             }
           };
           const onScroll = () => {
-            if (!raf) raf = requestAnimationFrame(update);
+            if (!raf) raf = sraf(update);
           };
           this.listen(scrollEv, 'scroll', onScroll, { passive: true });
           this.listen(window, 'resize', onScroll, { passive: true });
-          this.onCleanup(() => raf && cancelAnimationFrame(raf));
+          this.onCleanup(() => raf && scaf(raf));
           update();
           if (host instanceof HTMLButtonElement)
             this.listen(host, 'click', () => {

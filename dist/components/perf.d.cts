@@ -1,13 +1,21 @@
-/** Run `fn(time, dt)` every frame on the shared scheduler until the returned function is called. */
-declare function onFrame(fn: (t: number, dt: number) => void): () => void;
-/** Scheduler counters: frames flushed, callbacks run, peak callbacks in one frame, pending now. */
+/**
+ * Run `fn(time, dt)` every frame on the shared scheduler until the returned function is called.
+ * 13.4: with an owner `el` the loop stops running once `el` is detached (and pauses off screen with the offscreen plug-in).
+ */
+declare function onFrame(fn: (t: number, dt: number) => void, el?: Element): () => void;
+/** Scheduler counters: frames flushed, callbacks run, peak per frame, pending now, loops, frames split by the budget, callbacks / loops parked, budget ms. */
 declare function schedulerStats(): {
     frames: number;
     callbacks: number;
     peak: number;
     pending: number;
     loops: number;
+    deferred: number;
+    parked: number;
+    budget: number;
 };
+/** 13.4: per-frame time budget in ms for queued callbacks (default 8; `Infinity` = never split a frame). */
+declare function setFrameBudget(ms: number): void;
 /** Number of component animations running right now. */
 declare const activeAnimations: () => number;
 /** Cap concurrent component animations; extra ones jump to their final frame (`Infinity` = no cap). */
@@ -94,5 +102,5 @@ declare function onDemandStyles(base: string): () => void;
 /** Categories whose CSS has been requested so far. */
 declare const loadedStyles: () => string[];
 
-export { activeAnimations, animationBudget, autoDegrade, categoryOf, loadCategoryStyles, loadedStyles, onDemandStyles, onFrame, schedulerStats, setAnimationBudget };
+export { activeAnimations, animationBudget, autoDegrade, categoryOf, loadCategoryStyles, loadedStyles, onDemandStyles, onFrame, schedulerStats, setAnimationBudget, setFrameBudget };
 export type { AutoDegradeOptions, DegradeState };

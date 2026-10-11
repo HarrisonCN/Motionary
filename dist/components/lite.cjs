@@ -21,16 +21,16 @@ function configureComponents(options) {
     if (options.reducedMotion && options.reducedMotion !== 'reduce')
         options.reducedMotion = 'user';
     Object.assign(config, options);
-    if (options.motionIntensity && typeof document !== 'undefined') {
-        document.documentElement.style.setProperty('--usa-motion', String(MOTION_SCALE[options.motionIntensity] ?? 1));
-        document.documentElement.setAttribute('data-usa-motion', options.motionIntensity);
+    const { motionIntensity: mi, motionSensitivity: ms } = options;
+    if (typeof document == 'undefined')
+        return;
+    const de = document.documentElement;
+    if (mi) {
+        de.style.setProperty('--usa-motion', String(MOTION_SCALE[mi] ?? 1));
+        de.setAttribute('data-usa-motion', mi);
     }
-    if (options.motionSensitivity && typeof document !== 'undefined') {
-        if (options.motionSensitivity === 'full')
-            document.documentElement.removeAttribute('data-usa-sensitivity');
-        else
-            document.documentElement.setAttribute('data-usa-sensitivity', options.motionSensitivity);
-    }
+    if (ms)
+        ms == 'full' ? de.removeAttribute('data-usa-sensitivity') : de.setAttribute('data-usa-sensitivity', ms);
 }
 /** The current motion-sensitivity level (v4.4). */
 function getMotionSensitivity() {
@@ -64,13 +64,9 @@ function adaptKeyframes(frames, level = config.motionSensitivity) {
         return out;
     });
 }
-/** Run `fn` without 4.9 deprecation warnings (library-internal calls). */
+/** Run `fn` without 4.9 deprecation warnings (library-internal calls). The suppression counter was never read, so this simply runs `fn` (counter removed in 13.4). */
 function withoutDeprecations(fn) {
-    try {
-        return fn();
-    }
-    finally {
-    }
+    return fn();
 }
 /** The current global motion intensity. */
 function getMotionIntensity() {
@@ -109,38 +105,34 @@ function adoptStyles(id, css) {
     if (!config.injectStyles || !css || injected.has(id) || typeof document === 'undefined')
         return;
     injected.add(id);
+    if (!adopt(document, css, true))
+        (document.head || document.documentElement).appendChild(styleEl(css)).setAttribute('data-usa', id);
+}
+/** Constructable stylesheet onto `root` (appended for a document, replacing for a shadow root); false without support. */
+function adopt(root, css, add) {
     try {
-        if (typeof CSSStyleSheet === 'function' && 'adoptedStyleSheets' in document) {
+        // no CSSStyleSheet constructor → ReferenceError → caught → <style>
+        if ('adoptedStyleSheets' in root) {
             const sheet = new CSSStyleSheet();
             sheet.replaceSync(css);
-            document.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet];
-            return;
+            root.adoptedStyleSheets = add ? [...root.adoptedStyleSheets, sheet] : [sheet];
+            return true;
         }
     }
     catch {
         /* fall through to <style> */
     }
-    const style = document.createElement('style');
-    style.setAttribute('data-usa', id);
-    style.textContent = css;
-    (document.head || document.documentElement).appendChild(style);
+    return false;
 }
+const styleEl = (css) => {
+    const style = document.createElement('style');
+    style.textContent = css;
+    return style;
+};
 /** Attach `css` to a shadow root (constructable sheet where supported, else `<style>`). */
 function shadowStyles(root, css) {
-    try {
-        if (typeof CSSStyleSheet === 'function' && 'adoptedStyleSheets' in root) {
-            const sheet = new CSSStyleSheet();
-            sheet.replaceSync(css);
-            root.adoptedStyleSheets = [sheet];
-            return;
-        }
-    }
-    catch {
-        /* fall through */
-    }
-    const style = document.createElement('style');
-    style.textContent = css;
-    root.prepend(style);
+    if (!adopt(root, css))
+        root.prepend(styleEl(css));
 }
 let baseClass = null;
 /** The lazily created base class (needs `HTMLElement`). */
@@ -163,7 +155,7 @@ function getBase() {
             styleLoader?.(this.localName);
             // Upgraded while the parser is still inside us (a <script> in <head>
             // defined the element): children/text are not there yet, so wait.
-            if (typeof document !== 'undefined' && document.readyState === 'loading' && !this.nextSibling && !this.childNodes.length) {
+            if (document.readyState === 'loading' && !this.nextSibling && !this.childNodes.length) {
                 const go = () => {
                     if (this._connected && this.isConnected)
                         this.mount();
@@ -195,12 +187,11 @@ function getBase() {
         mount() { }
         unmount() { }
         str(name, fallback = '') {
-            const v = this.getAttribute(name);
-            return v === null ? fallback : v;
+            return this.getAttribute(name) ?? fallback;
         }
         num(name, fallback) {
             const v = this.getAttribute(name);
-            const n = v === null || v.trim() === '' ? NaN : Number(v);
+            const n = v?.trim() ? Number(v) : NaN;
             return Number.isFinite(n) ? n : fallback;
         }
         /** Boolean attribute: present and not `"false"`. */
@@ -209,10 +200,7 @@ function getBase() {
             return v !== null && v !== 'false';
         }
         setFlag(name, on) {
-            if (on)
-                this.setAttribute(name, '');
-            else
-                this.removeAttribute(name);
+            this.toggleAttribute(name, !!on);
         }
         onCleanup(fn) {
             this._cleanups.push(fn);
@@ -260,12 +248,8 @@ function getBase() {
  * `null` (final frame applied) when nothing should animate.
  */
 function animateWithMotion(el, keyframes, options) {
-    if (typeof el.animate !== 'function' || config.motionSensitivity === 'static') {
-        applyFrame(el, keyframes[keyframes.length - 1]);
-        return null;
-    }
-    keyframes = adaptKeyframes(keyframes);
-    if (active$1 >= maxActive) {
+    // no WAAPI / `static` → the unadapted final frame; over the animation budget → the adapted one
+    if (typeof el.animate !== 'function' || config.motionSensitivity === 'static' || ((keyframes = adaptKeyframes(keyframes)), active$1 >= maxActive)) {
         applyFrame(el, keyframes[keyframes.length - 1]);
         return null;
     }
@@ -323,41 +307,62 @@ function srText(text) {
     return s;
 }
 // --- shared rAF scheduler (4.5) ----------------------------------------------
-// Every component loop goes through one requestAnimationFrame per frame
-// instead of one per element: callbacks are batched, run in order, and a
-// throwing callback no longer starves the others (the first error is rethrown).
+// One requestAnimationFrame per frame for every component loop; a throwing
+// callback no longer starves the others (the first error is rethrown).
+// 13.4: frame budget (over-budget callbacks wait for the next frame, oldest
+// first); a callback / loop given an owner element is dropped once the owner
+// is detached. Offscreen / hidden-tab pause is a plug-in (setPauseHook,
+// installed by motionary/components/offscreen — not part of lite).
 const frameQueue = /*#__PURE__*/ new Map();
 let frameSeq = 1;
 let frameHandle = 0;
 let frameVia = null;
-const frameStats = { frames: 0, callbacks: 0, peak: 0, last: 0 };
-const frameListeners = new Set();
+const frameStats = { frames: 0, callbacks: 0, peak: 0, last: 0, deferred: 0, parked: 0, budget: 8 };
+/** loop → owner element */
+const frameListeners = /*#__PURE__*/ new Map();
+/** 0 run, 1 park (detached owner / pause hook), 2 drop (raf callback of a detached owner). */
+const gate = (el) => (el && !el.isConnected ? 2 : 0);
 function flushFrame(t) {
+    const st = frameStats;
     frameHandle = 0;
-    const dt = frameStats.last && t > frameStats.last ? t - frameStats.last : 16.7;
-    frameStats.last = t;
-    frameStats.frames++;
-    const cbs = Array.from(frameQueue.values());
-    frameQueue.clear();
-    frameStats.callbacks += cbs.length;
-    frameStats.peak = Math.max(frameStats.peak, cbs.length);
+    const dt = st.last && t > st.last ? t - st.last : 16.7;
+    st.last = t;
+    st.frames++;
+    const start = now();
+    let n = 0;
+    let p = 0;
+    let live = 0;
     let error = null;
-    for (const cb of cbs) {
-        try {
-            cb(t);
+    for (const [id, [cb, el]] of [...frameQueue]) {
+        if (n && now() - start > st.budget) {
+            st.deferred++;
+            break;
         }
-        catch (e) {
-            error ?? (error = e);
-        }
+        const g = gate(el);
+        if (g & 1)
+            p++;
+        else if ((frameQueue.delete(id), !g))
+            try {
+                n++;
+                cb(t);
+            }
+            catch (e) {
+                error ?? (error = e);
+            }
     }
+    st.callbacks += n;
+    st.peak = Math.max(st.peak, n);
     // 8.0: loops run on the unified motion clock — dt scaled by its rate, frozen while paused
-    if (!clk().paused) {
-        const cdt = dt * clk().rate;
-        clk().time += cdt;
-        frameListeners.forEach((fn) => fn(t, cdt));
-        if (frameListeners.size)
-            requestFlush();
+    const c = clk();
+    if (!c.paused) {
+        const cdt = dt * c.rate;
+        c.time += cdt;
+        frameListeners.forEach((el, fn) => (gate(el) ? p++ : (live++, fn(t, cdt))));
     }
+    st.parked += p;
+    // everything parked: the pause hook's wake() restarts the loop
+    if (live || frameQueue.size > p)
+        requestFlush();
     if (error)
         throw error;
 }
@@ -369,43 +374,55 @@ function requestFlush() {
     frameVia = native;
     frameHandle = native ? native(flushFrame) : setTimeout(() => flushFrame(now()), 16);
 }
-/** requestAnimationFrame through the shared scheduler (timeout fallback in jsdom / hidden documents). */
-const raf = (cb) => {
+/**
+ * requestAnimationFrame through the shared scheduler (timeout fallback in jsdom / hidden documents).
+ * 13.4: with an owner `el` the callback is dropped once `el` is detached (and paused off screen when the offscreen plug-in is installed).
+ */
+const raf = (cb, el) => {
     const id = frameSeq++;
-    frameQueue.set(id, cb);
+    frameQueue.set(id, [cb, el]);
     requestFlush();
     return id;
 };
-/** Monotonic time in ms (rAF callback timestamps differ between environments, so loops use this). */
-const now = () => (typeof performance !== 'undefined' ? performance.now() : Date.now());
+/** High-resolution time (13.4: `performance` is global in every supported browser and Node ≥ 16). */
+const now = () => performance.now();
 const caf = (id) => {
     frameQueue.delete(id);
 };
-/** Run `fn(time, dt)` every frame on the shared scheduler until the returned function is called. */
-function onFrame(fn) {
-    frameListeners.add(fn);
+/**
+ * Run `fn(time, dt)` every frame on the shared scheduler until the returned function is called.
+ * 13.4: with an owner `el` the loop stops running once `el` is detached (and pauses off screen with the offscreen plug-in).
+ */
+function onFrame(fn, el) {
+    frameListeners.set(fn, el);
     if (!clk().paused)
         requestFlush();
     return () => frameListeners.delete(fn);
 }
-/** Scheduler counters: frames flushed, callbacks run, peak callbacks in one frame, pending now. */
+/** Scheduler counters: frames flushed, callbacks run, peak per frame, pending now, loops, frames split by the budget, callbacks / loops parked, budget ms. */
 function schedulerStats() {
-    return { frames: frameStats.frames, callbacks: frameStats.callbacks, peak: frameStats.peak, pending: frameQueue.size, loops: frameListeners.size };
+    const { last, ...rest } = frameStats;
+    return { ...rest, pending: frameQueue.size, loops: frameListeners.size };
+}
+/** 13.4: per-frame time budget in ms for queued callbacks (default 8; `Infinity` = never split a frame). */
+function setFrameBudget(ms) {
+    frameStats.budget = ms > 0 ? ms : 8;
 }
 const CLOCK_KEY = /*#__PURE__*/ Symbol.for('motionary.clock');
 // 11.1: created on first use, so importing this module writes nothing to globalThis.
 const clk = () => { var _a; return ((_a = globalThis)[CLOCK_KEY] || (_a[CLOCK_KEY] = { rate: 1, paused: false, time: 0, anims: new Set(), subs: new Set() })); };
 function applyClock(a) {
+    const { rate, paused } = clk();
     try {
         if (typeof a.updatePlaybackRate === 'function')
-            a.updatePlaybackRate(clk().rate);
-        else if (clk().rate !== 1 || a.playbackRate !== undefined)
-            a.playbackRate = clk().rate;
-        if (clk().paused)
+            a.updatePlaybackRate(rate);
+        else if (rate !== 1 || a.playbackRate !== undefined)
+            a.playbackRate = rate;
+        if (paused)
             a.pause?.();
         else if (a.playState === 'paused' && a._usaClockPaused)
             a.play?.();
-        a._usaClockPaused = clk().paused;
+        a._usaClockPaused = paused;
     }
     catch {
         /* finished / detached animation */
@@ -448,8 +465,7 @@ function deprecate(key, message) {
     if (warned.has(key))
         return;
     warned.add(key);
-    if (typeof console !== 'undefined')
-        console.warn(`[motionary] ${message}`);
+    console.warn(`[motionary] ${message}`);
 }
 /**
  * The `kind` attribute of `<usa-spinner>`, `<usa-check>`, `<usa-dialog>` and
@@ -10069,7 +10085,7 @@ function defineMasonry(tag = 'usa-masonry') {
                 if (id)
                     return;
                 // contract-exempt: reduced-motion — rAF batches layout, no motion
-                id = requestAnimationFrame(() => {
+                id = raf(() => {
                     id = 0;
                     this.layout();
                 });
@@ -11276,6 +11292,7 @@ exports.schedulerStats = schedulerStats;
 exports.scrambleFrame = scrambleFrame;
 exports.scrollToTarget = scrollToTarget;
 exports.setAnimationBudget = setAnimationBudget;
+exports.setFrameBudget = setFrameBudget;
 exports.setMotionIntensity = setMotionIntensity;
 exports.setMotionLevel = setMotionLevel;
 exports.setMotionSensitivity = setMotionSensitivity;
@@ -11307,4 +11324,4 @@ exports.viewTransition = viewTransition;
 exports.warnBaseline = warnBaseline;
 exports.watchPowerSaver = watchPowerSaver;
 exports.withoutDeprecations = withoutDeprecations;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/components/lite.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/lite.cjs.map

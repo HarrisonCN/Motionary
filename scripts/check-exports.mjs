@@ -60,6 +60,8 @@ const entries = {
   'motionary/angular': ['usaInitializer', 'provideUsa', 'defineUsa', 'usaDetail', 'bindUsa', 'usaEventName', 'USA_TAGS', 'isUsaElement'],
   'motionary/tooling/ai': ['describeMotion', 'motionSnippet', 'suggestMotion', 'validateMotionSpec', 'intentFromSpec', 'specOf', 'MOTION_SPEC_SCHEMA'],
   'motionary/tooling/design': ['figmaToMotion', 'framerComponent', 'motionToCss', 'easingPoints'],
+  'motionary/components/offscreen': ['installOffscreenPause', 'raf', 'caf', 'onFrame'],
+  'motionary/components/perf-tasks': ['yieldToMain', 'shouldYield', 'runChunked'],
   'motionary/components/lazy': ['lazyDefine', 'defineUsed', 'loadCategory', 'categoryOfTag'],
   'motionary/components/transitions': ['defineTransitionComponents', 'defineDialog', 'defineAccordion', 'defineViewSwitch', 'viewTransition', 'flip'],
 };

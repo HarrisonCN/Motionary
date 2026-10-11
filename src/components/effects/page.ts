@@ -8,6 +8,7 @@
  * await playEffect(document.body, 'iris', { onCovered: () => router.go('/next') });
  * ```
  */
+import { raf as sraf, caf as scaf } from '../base';
 import type { EffectContext, EffectDefinition } from '../fx/registry';
 import { origin } from './shared';
 
@@ -128,16 +129,16 @@ export const PAGE_FX: EffectDefinition[] = [
         last = y;
         skew += (target - skew) * 0.2;
         el.style.transform = `skewY(${skew.toFixed(3)}deg)`;
-        raf = Math.abs(skew) > 0.01 || Math.abs(target) > 0.01 ? requestAnimationFrame(tick) : 0;
+        raf = Math.abs(skew) > 0.01 || Math.abs(target) > 0.01 ? sraf(tick) : 0;
         if (!raf) el.style.transform = '';
       };
       const onScroll = () => {
-        if (!raf) raf = requestAnimationFrame(tick);
+        if (!raf) raf = sraf(tick);
       };
       addEventListener('scroll', onScroll, { passive: true });
       return () => {
         removeEventListener('scroll', onScroll);
-        cancelAnimationFrame(raf);
+        scaf(raf);
         el.style.transform = '';
       };
     },

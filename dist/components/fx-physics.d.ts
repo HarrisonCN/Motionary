@@ -41,25 +41,6 @@ interface EffectDefinition<O extends Record<string, unknown> = Record<string, an
     run(el: HTMLElement, options: O, ctx: EffectContext): void | Cleanup | Animation | null | Promise<unknown>;
 }
 
-/**
- * 6.8 — Interactive physics 2.0 (`motionary/components/fx-physics`) on a tiny
- * Verlet integrator (`VerletWorld`), registered through `registerEffect()`:
- *
- * - `soft-body` (kind `hover`) — the element wobbles like jelly: pointer
- *   motion pushes a damped spring that squashes and skews it.
- * - `magnet` (kind `hover`) — the element's children are pulled toward the
- *   pointer on springs and settle back when it leaves.
- * - `cloth` (kind `background`) — a cloth hangs from the top edge and ripples
- *   when the pointer moves through it.
- * - `rope` (kind `background`) — a rope with a weight swings from the top;
- *   the pointer pushes it.
- * - `pinball` (kind `background`) — balls fall through round bumpers that
- *   light up on a hit; click to drop another ball.
- *
- * Canvas effects render only while visible; reduced motion draws one static
- * frame and the hover effects do nothing.
- */
-
 interface VerletPoint {
     x: number;
     y: number;

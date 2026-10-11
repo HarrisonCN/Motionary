@@ -9,6 +9,7 @@
  * shader does not compile, the effect falls back to **WebGL2**, then to the
  * Canvas 2D fallback — `el.dataset.usaBackend` says which one runs.
  */
+import { raf as sraf, caf as scaf } from '../base';
 import type { EffectContext } from '../fx/registry';
 import { hexRgb } from '../effects/generative';
 
@@ -127,10 +128,10 @@ export async function webgpuBackground(el: HTMLElement, fx: EffectContext, spec:
       if (last && now - last > 34 && ++slow > 24 && quality > 0.3) ((quality = Math.max(0.3, quality - 0.15)), (slow = 0), resize());
       last = now;
       draw((now - t0) / 1000);
-      if (visible && !document.hidden) raf = requestAnimationFrame(frame);
+      if (visible && !document.hidden) raf = sraf(frame);
     };
     const start = () => {
-      if (!raf && !fx.reduced) raf = requestAnimationFrame(frame);
+      if (!raf && !fx.reduced) raf = sraf(frame);
     };
     resize();
     draw(fx.reduced ? 7 : 0);
@@ -147,7 +148,7 @@ export async function webgpuBackground(el: HTMLElement, fx: EffectContext, spec:
     document.addEventListener('visibilitychange', vis);
     start();
     return () => {
-      cancelAnimationFrame(raf);
+      scaf(raf);
       io?.disconnect();
       ro?.disconnect();
       el.removeEventListener('pointermove', move);

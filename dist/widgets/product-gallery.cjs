@@ -1,9 +1,9 @@
 'use strict';
 
-var widgets_productGallery = require('../chunks/product-gallery-Bi6I6x1o.cjs');
-require('../chunks/base-vu_KhBiv.cjs');
+var widgets_productGallery = require('../chunks/product-gallery-Dc7JVl8a.cjs');
+require('../chunks/base-Do-R_9gU.cjs');
 
 
 
 exports.defineProductGallery = widgets_productGallery.defineProductGallery;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/widgets/product-gallery.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/widgets/product-gallery.cjs.map

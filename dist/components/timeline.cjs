@@ -1,7 +1,7 @@
 'use strict';
 
-var base = require('../chunks/base-vu_KhBiv.cjs');
-var core = require('../chunks/core-E18xla6s.cjs');
+var base = require('../chunks/base-Do-R_9gU.cjs');
+var core = require('../chunks/core-6FhnH_Kv.cjs');
 require('./tokens.cjs');
 
 var css = "usa-timeline{display:block}usa-timeline[scrub]{position:relative}@media (prefers-reduced-motion:reduce){usa-timeline [data-tl]{opacity:1 !important;transform:none !important;filter:none !important;clip-path:none !important}}";
@@ -106,4 +106,4 @@ exports.supportsNativeScrub = core.supportsNativeScrub;
 exports.timeline = core.timeline;
 exports.defineTimeline = defineTimeline;
 exports.defineTimelineComponents = defineTimelineComponents;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/components/timeline.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/timeline.cjs.map

@@ -1,3 +1,4 @@
+import { raf as sraf, caf as scaf } from '../base';
 import { defineElement, type UsaElement } from '../base';
 import { runtimeModule } from './runtime-link';
 import type { GlApi, Scene, Camera, Renderer, GlNode } from '../../runtime/gl';
@@ -165,10 +166,10 @@ export function defineGlScene(tag = 'usa-gl-scene'): CustomElementConstructor | 
             const play = !!this.an?.clip && !this.reduced;
             if (play) this.an!.update(dt / 1000);
             r.render(scene, cam, t);
-            if (visible && (spin || ctl || video || play || !this.dataset.loaded)) raf = requestAnimationFrame(frame);
+            if (visible && (spin || ctl || video || play || !this.dataset.loaded)) raf = sraf(frame);
           };
           const kick = () => {
-            if (!raf) raf = requestAnimationFrame(frame);
+            if (!raf) raf = sraf(frame);
           };
           this.listen(canvas, 'pointerdown', kick);
           this.listen(canvas, 'wheel', kick, { passive: true });
@@ -183,7 +184,7 @@ export function defineGlScene(tag = 'usa-gl-scene'): CustomElementConstructor | 
               kick();
             }
           });
-          this.onCleanup(() => raf && cancelAnimationFrame(raf));
+          this.onCleanup(() => raf && scaf(raf));
         }
       }
       return UsaGlScene as unknown as CustomElementConstructor;

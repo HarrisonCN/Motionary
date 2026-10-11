@@ -1,10 +1,10 @@
-import { f as defineElement, G as queryAttr } from '../chunks/base-nzeN_ux7.js';
-import { getEffect, playEffect } from '../chunks/registry-PxXkPc1Q.js';
-import '../chunks/builtins-hBOeCPXL.js';
+import { f as defineElement, I as queryAttr } from '../chunks/base-Be98yNyq.js';
+import { getEffect, playEffect } from '../chunks/registry-BEIhIRTY.js';
+import '../chunks/builtins-BQZ7idez.js';
 import { registerShopPack } from '../components/fx-shop.js';
-import '../chunks/core-Bar7NFx7.js';
+import '../chunks/core-RZkPEx8i.js';
 import '../components/tokens.js';
-import '../chunks/fx-qAVpKs8e.js';
+import '../chunks/fx-Wd1GKAzZ.js';
 
 var css = "usa-add-to-cart{display:inline-block}.usa-atc-btn{position:relative;display:inline-grid;place-items:center;min-width:var(--usa-atc-w,150px);padding:11px 18px;border:0;border-radius:999px;background:var(--usa-atc-bg,#7c5cff);color:#fff;font:700 14px/1 system-ui,sans-serif;cursor:pointer;overflow:hidden;transition:background .3s}.usa-atc-btn>span{grid-area:1/1;transition:transform .35s cubic-bezier(.3,1.4,.5,1),opacity .25s}.usa-atc-done{transform:translateY(120%);opacity:0}usa-add-to-cart[data-added] .usa-atc-btn{background:var(--usa-atc-ok,#16a34a)}usa-add-to-cart[data-added] .usa-atc-label{transform:translateY(-120%);opacity:0}usa-add-to-cart[data-added] .usa-atc-done{transform:none;opacity:1}.usa-atc-btn:focus-visible{outline:3px solid #a78bfa;outline-offset:2px}.usa-atc-live{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}@media (prefers-reduced-motion:reduce){.usa-atc-btn>span{transition:none}}";
 
@@ -58,4 +58,4 @@ function defineAddToCart(tag = 'usa-add-to-cart') {
 }
 
 export { defineAddToCart };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/widgets/add-to-cart.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/widgets/add-to-cart.js.map

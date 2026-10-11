@@ -1,4 +1,4 @@
-import { p as prefersReducedMotion, D as EASE_OUT, m as motionScale, f as defineElement } from '../chunks/base-nzeN_ux7.js';
+import { p as prefersReducedMotion, H as EASE_OUT, m as motionScale, f as defineElement, r as raf } from '../chunks/base-Be98yNyq.js';
 
 /** FLIP keyframes from a previous box to the current one (pure). */
 function flipFrames(from, to, scale = true) {
@@ -211,7 +211,7 @@ function defineMasonry(tag = 'usa-masonry') {
                 if (id)
                     return;
                 // contract-exempt: reduced-motion — rAF batches layout, no motion
-                id = requestAnimationFrame(() => {
+                id = raf(() => {
                     id = 0;
                     this.layout();
                 });
@@ -250,4 +250,4 @@ function defineLayoutComponents() {
 }
 
 export { autoAnimate, defineAutoAnimate, defineLayoutComponents, defineMasonry, flipFrames, masonryLayout, sharedTransition };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/components/layout.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/layout.js.map

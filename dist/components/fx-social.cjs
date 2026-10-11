@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-EziiQiWO.cjs');
-require('../chunks/base-vu_KhBiv.cjs');
+var registry = require('../chunks/registry-CyVCJneg.cjs');
+require('../chunks/base-Do-R_9gU.cjs');
 
 /** Fan-out angles (deg) for `n` floating emoji, centred on straight up (7.4). */
 function fanAngles(n, spread = 60) {
@@ -118,4 +118,4 @@ function registerSocialPack() {
 exports.SOCIAL_FX = SOCIAL_FX;
 exports.fanAngles = fanAngles;
 exports.registerSocialPack = registerSocialPack;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/components/fx-social.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/fx-social.cjs.map

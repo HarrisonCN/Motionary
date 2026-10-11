@@ -1,6 +1,6 @@
 {
   "name": "motionary",
-  "version": "13.3.0",
+  "version": "13.4.0",
   "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 209 animated Web Components (91 core, 118 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -1218,6 +1218,26 @@
       "require": {
         "types": "./dist/components/dotlottie.d.cts",
         "default": "./dist/components/dotlottie.cjs"
+      }
+    },
+    "./components/offscreen": {
+      "import": {
+        "types": "./dist/components/offscreen.d.ts",
+        "default": "./dist/components/offscreen.js"
+      },
+      "require": {
+        "types": "./dist/components/offscreen.d.cts",
+        "default": "./dist/components/offscreen.cjs"
+      }
+    },
+    "./components/perf-tasks": {
+      "import": {
+        "types": "./dist/components/perf-tasks.d.ts",
+        "default": "./dist/components/perf-tasks.js"
+      },
+      "require": {
+        "types": "./dist/components/perf-tasks.d.cts",
+        "default": "./dist/components/perf-tasks.cjs"
       }
     },
     "./components/lite": {

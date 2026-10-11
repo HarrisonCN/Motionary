@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-EziiQiWO.cjs');
-require('../chunks/base-vu_KhBiv.cjs');
+var registry = require('../chunks/registry-CyVCJneg.cjs');
+require('../chunks/base-Do-R_9gU.cjs');
 
 /** Quadratic-bezier arc points from a to b, lifted by `lift` px (7.3). */
 function arcPath(ax, ay, bx, by, lift = 120, steps = 8) {
@@ -130,4 +130,4 @@ function registerShopPack() {
 exports.SHOP_FX = SHOP_FX;
 exports.arcPath = arcPath;
 exports.registerShopPack = registerShopPack;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/components/fx-shop.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/fx-shop.cjs.map

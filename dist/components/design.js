@@ -1,7 +1,7 @@
 import { serializeMotion, parseMotion } from './dsl.js';
-import { T as TIMELINE_PRESETS } from '../chunks/core-Bar7NFx7.js';
-import '../chunks/registry-PxXkPc1Q.js';
-import '../chunks/base-nzeN_ux7.js';
+import { T as TIMELINE_PRESETS } from '../chunks/core-RZkPEx8i.js';
+import '../chunks/registry-BEIhIRTY.js';
+import '../chunks/base-Be98yNyq.js';
 import './tokens.js';
 
 /**
@@ -109,4 +109,4 @@ function motionToCss(rules, selector = '.motion') {
 }
 
 export { easingPoints, figmaToMotion, framerComponent, motionToCss };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/components/design.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/design.js.map

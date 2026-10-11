@@ -1,4 +1,4 @@
-import { f as defineElement } from '../chunks/base-nzeN_ux7.js';
+import { f as defineElement, b as caf, r as raf } from '../chunks/base-Be98yNyq.js';
 import { l as localeAttr } from '../chunks/shared-o9CtwHmi.js';
 
 /** Parse a figure like "$12.4k" / "−3.5%" / "1,204" → number + prefix / suffix / decimals (7.2). */
@@ -13,6 +13,7 @@ function parseFigureText(s) {
 
 var css = "usa-kpi{display:inline-grid;grid-template-columns:1fr auto;grid-template-areas:\"label label\" \"value delta\" \"trend trend\" \"caption caption\";align-items:end;gap:4px 10px;width:var(--usa-kpi-w,220px);max-width:100%;padding:14px 16px;border-radius:16px;background:var(--usa-kpi-bg,#fff);color:#0f172a;box-shadow:0 8px 24px -12px rgba(15,23,42,.35);font:500 12px/1.3 system-ui,sans-serif}.usa-kpi-label{grid-area:label;opacity:.6;text-transform:uppercase;letter-spacing:.06em;font-size:11px;font-weight:700}.usa-kpi-value{grid-area:value;font:800 28px/1.05 system-ui,sans-serif;font-variant-numeric:tabular-nums;white-space:nowrap}.usa-kpi-delta{grid-area:delta;display:inline-flex;align-items:center;gap:3px;padding:3px 7px;border-radius:999px;font-weight:700;font-size:12px;margin-bottom:4px}.usa-kpi-delta[data-good=\"true\"]{background:rgba(34,197,94,.14);color:#15803d}.usa-kpi-delta[data-good=\"false\"]{background:rgba(239,68,68,.14);color:#b91c1c}.usa-kpi-delta i{font-style:normal;font-size:9px}.usa-kpi-trend{grid-area:trend;--usa-sl-w:100%;--usa-sl-h:34px;margin-top:4px}.usa-kpi-caption{grid-area:caption;opacity:.55;font-size:11px}.usa-kpi-caption:empty{display:none}";
 
+// 13.4: base scheduler (frame budget, drop-on-detach); offscreen pause applies once installOffscreenPause() runs — not auto-installed, the fixed per-entry budget can't carry it.
 function defineKpi(tag = 'usa-kpi') {
     // contract-exempt: attr-unobserved(value) — state reflected by the element itself (set the property instead); observing it would re-mount on every change
     return defineElement(tag, (Base) => {
@@ -47,7 +48,7 @@ function defineKpi(tag = 'usa-kpi') {
                     ds.textContent = delta;
                 this.setAttribute('role', 'group');
                 this.setAttribute('aria-label', [this.str('label', ''), this.value, delta && `(${delta})`, this.str('caption', '')].filter(Boolean).join(' '));
-                this.onCleanup(() => cancelAnimationFrame(this._raf));
+                this.onCleanup(() => caf(this._raf));
                 const f = parseFigureText(this.value);
                 this._shown = this.reduced || !f ? (f?.n ?? 0) : 0;
                 this.write(this._shown);
@@ -77,16 +78,16 @@ function defineKpi(tag = 'usa-kpi') {
                     this._shown = to;
                     return this.write(to);
                 }
-                cancelAnimationFrame(this._raf);
+                caf(this._raf);
                 const t0 = performance.now();
                 const step = (now) => {
                     const k = Math.min(1, (now - t0) / 1100);
                     this._shown = from + (to - from) * (1 - Math.pow(1 - k, 3));
                     this.write(this._shown);
                     if (k < 1)
-                        this._raf = requestAnimationFrame(step);
+                        this._raf = raf(step, this);
                 };
-                this._raf = requestAnimationFrame(step);
+                this._raf = raf(step, this);
                 if (flash)
                     this.motion(this, [{ boxShadow: '0 0 0 0 rgba(124,92,255,.5)' }, { boxShadow: '0 0 0 10px rgba(124,92,255,0)' }], { duration: 700, easing: 'ease-out' });
             }
@@ -96,4 +97,4 @@ function defineKpi(tag = 'usa-kpi') {
 }
 
 export { defineKpi };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/widgets/kpi.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/widgets/kpi.js.map

@@ -1,7 +1,8 @@
-import { f as defineElement } from '../chunks/base-nzeN_ux7.js';
+import { f as defineElement, b as caf, r as raf } from '../chunks/base-Be98yNyq.js';
 
 var css = "usa-pull-cord{--usa-pc-color:#cbd5e1;--usa-pc-light:#fde68a;position:relative;display:inline-flex;flex-direction:column;align-items:center;width:90px;height:190px;cursor:pointer;touch-action:none;user-select:none;outline-offset:4px;border-radius:12px}.usa-pc-lamp{position:relative;width:76px;height:38px;border-radius:38px 38px 6px 6px;background:linear-gradient(#475569,#334155);box-shadow:0 0 0 rgba(253,230,138,0);transition:box-shadow .35s,background .35s}.usa-pc-lamp::after{content:\"\";position:absolute;left:50%;bottom:-10px;width:22px;height:12px;margin-left:-11px;border-radius:0 0 12px 12px;background:#64748b;transition:background .35s,box-shadow .35s}usa-pull-cord[data-on] .usa-pc-lamp{background:linear-gradient(#f59e0b,#d97706);box-shadow:0 30px 60px 10px rgba(253,230,138,.55)}usa-pull-cord[data-on] .usa-pc-lamp::after{background:var(--usa-pc-light);box-shadow:0 0 22px 8px var(--usa-pc-light)}.usa-pc-svg{width:80px;height:150px;margin-top:-2px;overflow:visible}.usa-pc-cord{fill:none;stroke:var(--usa-pc-color);stroke-width:2.2;stroke-linecap:round}.usa-pc-knob{fill:#e2e8f0;stroke:#94a3b8;stroke-width:1.5}usa-pull-cord[data-on] .usa-pc-knob{fill:var(--usa-pc-light)}@media (prefers-reduced-motion:reduce){.usa-pc-lamp,.usa-pc-lamp::after{transition:none}}";
 
+// 13.4: base scheduler (frame budget, drop-on-detach); offscreen pause applies once installOffscreenPause() runs — not auto-installed, the fixed per-entry budget can't carry it.
 function definePullCord(tag = 'usa-pull-cord') {
     // contract-exempt: attr-unobserved(on) — state reflected by the element itself (set the property instead); observing it would re-mount on every change
     return defineElement(tag, (Base) => {
@@ -42,7 +43,7 @@ function definePullCord(tag = 'usa-pull-cord') {
                     }
                 });
                 this.listen(this, 'pointerdown', (e) => this.drag(e));
-                this.onCleanup(() => this._raf && cancelAnimationFrame(this._raf));
+                this.onCleanup(() => this._raf && caf(this._raf));
             }
             sync() {
                 this.setAttribute('aria-checked', String(this._on));
@@ -74,12 +75,12 @@ function definePullCord(tag = 'usa-pull-cord') {
                     this._y += this._vy * dt;
                     this.draw();
                     if (Math.abs(this._x) + Math.abs(this._y) + Math.abs(this._vx) + Math.abs(this._vy) > 0.05)
-                        this._raf = requestAnimationFrame(f);
+                        this._raf = raf(f, this);
                     else
                         ((this._raf = 0), (this._x = this._y = this._vx = this._vy = 0), this.draw());
                 };
                 if (!this._raf)
-                    this._raf = requestAnimationFrame(f);
+                    this._raf = raf(f, this);
             }
             /** Pull once (keyboard / click): tug the cord and toggle. */
             pull() {
@@ -96,7 +97,7 @@ function definePullCord(tag = 'usa-pull-cord') {
                 const x0 = e.clientX;
                 let moved = false;
                 if (this._raf)
-                    (cancelAnimationFrame(this._raf), (this._raf = 0));
+                    (caf(this._raf), (this._raf = 0));
                 const move = (ev) => {
                     moved = moved || Math.abs(ev.clientY - y0) > 4;
                     this._y = Math.max(0, Math.min(50, ev.clientY - y0));
@@ -137,4 +138,4 @@ function definePullCord(tag = 'usa-pull-cord') {
 }
 
 export { definePullCord };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/widgets/pull-cord.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/widgets/pull-cord.js.map

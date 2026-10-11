@@ -1,3 +1,4 @@
+import { raf as sraf, caf as scaf } from '../offscreen';
 import { defineElement, type UsaElement } from '../base';
 import { clampN, part } from './shared';
 import css from './meters.css?raw';
@@ -103,7 +104,7 @@ export function defineProgressRing(tag = 'usa-progress-ring'): CustomElementCons
           this.append(this._label);
           this._shown = 0;
           this.onCleanup(() => {
-            if (this._raf && typeof cancelAnimationFrame === 'function') cancelAnimationFrame(this._raf);
+            if (this._raf && typeof cancelAnimationFrame === 'function') scaf(this._raf);
           });
           this.update();
         }
@@ -132,7 +133,7 @@ export function defineProgressRing(tag = 'usa-progress-ring'): CustomElementCons
           const label = (f: number) => {
             if (this._label) this._label.textContent = `${Math.round(f * 100)}%`;
           };
-          if (this._raf && typeof cancelAnimationFrame === 'function') cancelAnimationFrame(this._raf);
+          if (this._raf && typeof cancelAnimationFrame === 'function') scaf(this._raf);
           if (this.reduced || typeof requestAnimationFrame !== 'function') {
             this.paint(target);
             label(target);
@@ -147,10 +148,10 @@ export function defineProgressRing(tag = 'usa-progress-ring'): CustomElementCons
               const f = from + (target - from) * e;
               this.paint(f);
               label(from + (target - from) * Math.min(1, k * 1.15));
-              this._raf = k < 1 ? requestAnimationFrame(step) : 0;
+              this._raf = k < 1 ? sraf(step) : 0;
               if (k >= 1) this.paint(target);
             };
-            this._raf = requestAnimationFrame(step);
+            this._raf = sraf(step, this);
           }
           if (target >= 1 && from < 1) this.emit('complete', { value: v });
         }

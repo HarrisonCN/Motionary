@@ -1,3 +1,4 @@
+import { raf as sraf, caf as scaf } from '../base';
 import { defineElement, type UsaElement } from '../base';
 import css from './cart-drawer.css?raw';
 
@@ -175,9 +176,9 @@ export function defineCartDrawer(tag = 'usa-cart-drawer'): CustomElementConstruc
             const f = (now: number) => {
               const k = Math.min(1, (now - t0) / 500);
               tot.textContent = `${cur}${(from + (to - from) * (1 - Math.pow(1 - k, 3))).toFixed(2)}`;
-              if (k < 1) requestAnimationFrame(f);
+              if (k < 1) sraf(f);
             };
-            requestAnimationFrame(f);
+            sraf(f);
           }
           this.emit('change', { items: this.items, total: to });
         }

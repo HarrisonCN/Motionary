@@ -1,3 +1,4 @@
+import { raf as sraf, caf as scaf } from '../base';
 import { defineElement, type UsaElement } from '../base';
 import { createPlayer, ANIMATION_FORMAT, type AnimationJSON, type Player } from '../effects/player';
 import css from './keyframe-editor.css?raw';
@@ -180,9 +181,9 @@ export function defineKeyframeEditor(tag = 'usa-keyframe-editor'): CustomElement
             this.style.setProperty('--usa-ke-head', `${(ms / total) * 100}%`);
             const out = this.querySelector('.usa-ke-time');
             if (out) out.textContent = `${Math.round(ms)} ms`;
-            if (ms < total && this.isConnected) requestAnimationFrame(f);
+            if (ms < total && this.isConnected) sraf(f);
           };
-          if (typeof requestAnimationFrame === 'function') requestAnimationFrame(f);
+          if (typeof requestAnimationFrame === 'function') sraf(f);
         }
       }
       return UsaKeyframeEditor as unknown as CustomElementConstructor;

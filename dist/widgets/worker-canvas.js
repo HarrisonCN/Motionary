@@ -1,5 +1,5 @@
-export { d as defineWorkerCanvas } from '../chunks/worker-canvas-BIuesniy.js';
-import '../chunks/base-nzeN_ux7.js';
+export { d as defineWorkerCanvas } from '../chunks/worker-canvas-C0lQZbKy.js';
+import '../chunks/base-Be98yNyq.js';
 import '../components/fx-perf.js';
-import '../chunks/registry-PxXkPc1Q.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/widgets/worker-canvas.js.map
+import '../chunks/registry-BEIhIRTY.js';
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/widgets/worker-canvas.js.map

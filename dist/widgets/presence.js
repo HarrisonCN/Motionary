@@ -1,3 +1,3 @@
-export { d as definePresence } from '../chunks/presence-DfTxVIEf.js';
-import '../chunks/base-nzeN_ux7.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/widgets/presence.js.map
+export { d as definePresence } from '../chunks/presence-DnBQPaaY.js';
+import '../chunks/base-Be98yNyq.js';
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/widgets/presence.js.map

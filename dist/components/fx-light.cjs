@@ -1,10 +1,31 @@
 'use strict';
 
-var registry = require('../chunks/registry-EziiQiWO.cjs');
-var generative = require('../chunks/generative-BHIj-NU0.cjs');
+var base = require('../chunks/base-Do-R_9gU.cjs');
+var registry = require('../chunks/registry-CyVCJneg.cjs');
+var generative = require('../chunks/generative-BTya0iHP.cjs');
 var shared = require('../chunks/shared-jkgRH-Hx.cjs');
-require('../chunks/base-vu_KhBiv.cjs');
 
+/**
+ * 6.4 — Light & materials (`motionary/components/fx-light`), registered
+ * through `registerEffect()`. Persistent effects (use `trigger="load"`)
+ * that return a cleanup:
+ *
+ * - `light-follow` (hover) — a soft point light + specular highlight that
+ *   follows the pointer over the surface.
+ * - `refraction` (hover) — a glass lens that bends and magnifies what is
+ *   behind it as it follows the pointer (backdrop filter, chromatic rim).
+ * - `brushed-metal` (card) — fine brushed lines with an anisotropic sheen
+ *   that turns with the pointer angle.
+ * - `pearlescent` (card) — a nacre / holographic film whose hues shift with
+ *   the pointer position.
+ * - `god-rays` (background) — volumetric light shafts from a source point
+ *   (Canvas 2D, additive).
+ * - `pointer-shadow` (hover) — the pointer is the light: the element casts
+ *   a soft real-time shadow away from it.
+ *
+ * Reduced motion: surfaces stay lit from a fixed angle (no tracking),
+ * `god-rays` draws one still frame.
+ */
 /** Track the pointer over `el` as 0–1 coordinates (`fn(x, y, inside)`); starts at (`x0`, `y0`). Returns a remover. */
 function trackPointer(el, ctx, fn, x0 = 0.3, y0 = 0.25) {
     fn(x0, y0, false);
@@ -20,7 +41,7 @@ function trackPointer(el, ctx, fn, x0 = 0.3, y0 = 0.25) {
     };
     const queue = () => {
         if (!raf)
-            raf = typeof requestAnimationFrame === 'function' ? requestAnimationFrame(flush) : (flush(), 0);
+            raf = typeof requestAnimationFrame === 'function' ? base.raf(flush) : (flush(), 0);
     };
     const move = (e) => {
         const r = el.getBoundingClientRect();
@@ -39,7 +60,7 @@ function trackPointer(el, ctx, fn, x0 = 0.3, y0 = 0.25) {
     el.addEventListener('pointerleave', leave);
     return () => {
         if (raf && typeof cancelAnimationFrame === 'function')
-            cancelAnimationFrame(raf);
+            base.caf(raf);
         el.removeEventListener('pointermove', move);
         el.removeEventListener('pointerleave', leave);
     };
@@ -218,4 +239,4 @@ function registerLightPack() {
 exports.LIGHT_FX = LIGHT_FX;
 exports.registerLightPack = registerLightPack;
 exports.trackPointer = trackPointer;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/components/fx-light.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/fx-light.cjs.map

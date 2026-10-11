@@ -1,4 +1,4 @@
-import { f as defineElement } from '../chunks/base-nzeN_ux7.js';
+import { f as defineElement, b as caf, r as raf } from '../chunks/base-Be98yNyq.js';
 import { p as pickEngine, t as timelineName, v as viewProgress } from '../chunks/scroll-driven-LghshrWq.js';
 
 var css = "usa-parallax-layers{position:relative;display:block;overflow:hidden;isolation:isolate}usa-parallax-layers [data-depth]{will-change:translate,transform;transition:transform .35s cubic-bezier(.22,1,.36,1)}@keyframes usa-plx-y{from{translate:0 calc(var(--usa-depth,0)*var(--usa-plx-range,120)*1px)}to{translate:0 calc(var(--usa-depth,0)*var(--usa-plx-range,120)*-1px)}}@keyframes usa-plx-x{from{translate:calc(var(--usa-depth,0)*var(--usa-plx-range,120)*1px) 0}to{translate:calc(var(--usa-depth,0)*var(--usa-plx-range,120)*-1px) 0}}@supports (animation-timeline:view()){usa-parallax-layers .usa-plx-native{animation:usa-plx-y linear both;animation-range:cover}usa-parallax-layers[data-horizontal] .usa-plx-native{animation-name:usa-plx-x}}@media (prefers-reduced-motion:reduce){usa-parallax-layers [data-depth]{transition:none;animation:none!important;translate:none!important}}";
@@ -52,9 +52,9 @@ function defineParallaxLayers(tag = 'usa-parallax-layers') {
                         });
                         this.onCleanup(() => layers.forEach((l) => l.classList.remove('usa-plx-native')));
                     }
-                    let raf = 0;
+                    let raf$1 = 0;
                     const update = () => {
-                        raf = 0;
+                        raf$1 = 0;
                         this.p = viewProgress(this);
                         if (eng === 'js')
                             layers.forEach((l) => {
@@ -64,8 +64,8 @@ function defineParallaxLayers(tag = 'usa-parallax-layers') {
                         this.emit('progress', { progress: this.p });
                     };
                     const onScroll = () => {
-                        if (!raf)
-                            raf = requestAnimationFrame(update);
+                        if (!raf$1)
+                            raf$1 = raf(update);
                     };
                     let visible = false;
                     this.inView((v) => {
@@ -75,7 +75,7 @@ function defineParallaxLayers(tag = 'usa-parallax-layers') {
                     }, { rootMargin: '20% 0px' });
                     this.listen(window, 'scroll', () => visible && onScroll(), { passive: true });
                     this.listen(window, 'resize', onScroll, { passive: true });
-                    this.onCleanup(() => raf && cancelAnimationFrame(raf));
+                    this.onCleanup(() => raf$1 && caf(raf$1));
                     update();
                 }
                 if (this.flag('pointer')) {
@@ -102,4 +102,4 @@ function defineParallaxLayers(tag = 'usa-parallax-layers') {
 }
 
 export { defineParallaxLayers };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/widgets/parallax-layers.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/widgets/parallax-layers.js.map

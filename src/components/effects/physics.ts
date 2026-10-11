@@ -6,6 +6,7 @@
  * Effects: `bounce-in`, `rubber-band`, `elastic-hover`, `drop-bounce`,
  * `gravity-text`, `spring-follow`, `bell-swing`.
  */
+import { raf as sraf, caf as scaf } from '../base';
 import type { EffectDefinition } from '../fx/registry';
 import { all } from './shared';
 
@@ -179,10 +180,10 @@ export const PHYSICS_FX: EffectDefinition[] = [
         x += vx;
         y += vy;
         el.style.translate = `${x.toFixed(2)}px ${y.toFixed(2)}px`;
-        raf = Math.abs(vx) + Math.abs(vy) + Math.abs(tx - x) + Math.abs(ty - y) > 0.05 ? requestAnimationFrame(tick) : 0;
+        raf = Math.abs(vx) + Math.abs(vy) + Math.abs(tx - x) + Math.abs(ty - y) > 0.05 ? sraf(tick) : 0;
       };
       const kick = () => {
-        if (!raf) raf = requestAnimationFrame(tick);
+        if (!raf) raf = sraf(tick);
       };
       const move = (e: PointerEvent) => {
         const r = host.getBoundingClientRect();
@@ -201,7 +202,7 @@ export const PHYSICS_FX: EffectDefinition[] = [
       return () => {
         host.removeEventListener('pointermove', move);
         host.removeEventListener('pointerleave', leave);
-        cancelAnimationFrame(raf);
+        scaf(raf);
         el.style.translate = '';
       };
     },

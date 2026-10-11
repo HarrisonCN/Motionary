@@ -41,28 +41,6 @@ interface EffectDefinition<O extends Record<string, unknown> = Record<string, an
     run(el: HTMLElement, options: O, ctx: EffectContext): void | Cleanup | Animation | null | Promise<unknown>;
 }
 
-/**
- * 5.6 — sound-reactive effects (Web Audio).
- *
- * - `enableAudio(input)` — start analysing the microphone (`'mic'`), an
- *   `<audio>` / `<video>` element (or a selector for one) or a `MediaStream`.
- *   Browsers only allow an `AudioContext` to start inside a user gesture, so
- *   call it from a click handler (or use `<usa-audio>`, which renders the
- *   toggle button for you).
- * - Background effects (kind `background`, Canvas 2D through
- *   `canvasBackground()`): `spectrum-bars`, `pulse-ring`, `wave-ring`. Before
- *   audio is enabled they idle gently.
- * - Beat detection: `createBeatDetector()` (pure: energy → beat?), `onBeat(cb)`
- *   and `bindBeat(el, effect, options)`, which plays any registered effect on
- *   every beat. `<usa-audio>` does the same for `[data-usa-beat="effect"]`
- *   children and emits `usa:beat`.
- * - While audio runs, `--usa-audio-level` and `--usa-audio-bass` (0–1) are set
- *   on `<html>` for CSS-driven reactions.
- *
- * Reduced motion: the visual effects are skipped, beats play no effects and
- * the CSS variables stay at 0 — audio itself keeps playing.
- */
-
 interface AudioSample {
     /** Overall loudness (RMS of the waveform), 0–1. */
     level: number;
@@ -73,23 +51,6 @@ interface AudioSample {
     /** Time-domain waveform, 0–255 (128 = silence). */
     wave: Uint8Array;
 }
-
-/**
- * 7.1 — Music visualization (`motionary/fx/music`, also
- * `motionary/components/fx-music`), registered through `registerEffect()`.
- * Every effect reads the running analyser (`enableAudio()` / `<usa-audio>`);
- * without one it plays a gentle synthetic signal (`syntheticSample()`), so
- * the visuals work as decoration too.
- *
- * - `waveform-scope` (background) — an oscilloscope line of the waveform.
- * - `radial-spectrum` (background) — spectrum bars around a circle.
- * - `spectrum-mirror` (background) — mirrored bars with a reflection.
- * - `sound-particles` (background) — particles launched by the bass.
- * - `beat-bounce` (loop) — the element pumps with the bass.
- * - `vinyl-spin` (loop) — the element turns like a record; level speeds it.
- *
- * Reduced motion: backgrounds draw one static frame, loops do nothing.
- */
 
 /** A smooth, deterministic fake analyser frame at time `t` (s). */
 declare function syntheticSample(t: number, bins?: number): AudioSample;

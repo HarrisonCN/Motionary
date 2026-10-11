@@ -1,3 +1,4 @@
+import { raf as sraf, caf as scaf } from '../offscreen';
 import { defineElement, type UsaElement } from '../base';
 import { clampN } from './shared';
 import css from './music-player.css?raw';
@@ -100,7 +101,7 @@ export function defineMusicPlayer(tag = 'usa-music-player'): CustomElementConstr
             this.listen(this._audio, 'loadedmetadata', () => this.sync());
             this.listen(this._audio, 'ended', () => this.pause());
           }
-          this.onCleanup(() => cancelAnimationFrame(this._raf));
+          this.onCleanup(() => scaf(this._raf));
           this.sync();
         }
 
@@ -135,7 +136,7 @@ export function defineMusicPlayer(tag = 'usa-music-player'): CustomElementConstr
             }
             this.sync();
           }
-          this._raf = requestAnimationFrame(this.tick);
+          this._raf = sraf(this.tick, this);
         };
 
         play(): void {
@@ -143,7 +144,7 @@ export function defineMusicPlayer(tag = 'usa-music-player'): CustomElementConstr
           this._playing = true;
           if (this._audio) void this._audio.play()?.catch?.(() => undefined);
           this._last = 0;
-          if (typeof requestAnimationFrame === 'function') this._raf = requestAnimationFrame(this.tick);
+          if (typeof requestAnimationFrame === 'function') this._raf = sraf(this.tick, this);
           this.sync();
           const icon = this.querySelector('.usa-mp-play');
           if (icon && !this.reduced) this.motion(icon, [{ transform: 'scale(.85)' }, { transform: 'scale(1.08)', offset: 0.6 }, { transform: 'scale(1)' }], { duration: 300, easing: 'ease-out' });
@@ -153,7 +154,7 @@ export function defineMusicPlayer(tag = 'usa-music-player'): CustomElementConstr
           if (!this._playing) return;
           this._playing = false;
           this._audio?.pause();
-          cancelAnimationFrame(this._raf);
+          scaf(this._raf);
           this.sync();
           this.emit('pause', {});
         }

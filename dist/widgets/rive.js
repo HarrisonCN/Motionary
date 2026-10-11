@@ -1,3 +1,3 @@
-export { d as defineRive } from '../chunks/rive-BHdln8XJ.js';
-import '../chunks/base-nzeN_ux7.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/widgets/rive.js.map
+export { d as defineRive } from '../chunks/rive-C9ySVu0Q.js';
+import '../chunks/base-Be98yNyq.js';
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/widgets/rive.js.map

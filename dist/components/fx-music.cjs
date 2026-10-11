@@ -1,11 +1,27 @@
 'use strict';
 
-var registry = require('../chunks/registry-EziiQiWO.cjs');
-var generative = require('../chunks/generative-BHIj-NU0.cjs');
-var audio = require('../chunks/audio-DhgfWYZ_.cjs');
-require('../chunks/base-vu_KhBiv.cjs');
+var base = require('../chunks/base-Do-R_9gU.cjs');
+var registry = require('../chunks/registry-CyVCJneg.cjs');
+var generative = require('../chunks/generative-BTya0iHP.cjs');
+var audio = require('../chunks/audio-D7Dk2gUF.cjs');
 require('../chunks/shared-jkgRH-Hx.cjs');
 
+/**
+ * 7.1 — Music visualization (`motionary/fx/music`, also
+ * `motionary/components/fx-music`), registered through `registerEffect()`.
+ * Every effect reads the running analyser (`enableAudio()` / `<usa-audio>`);
+ * without one it plays a gentle synthetic signal (`syntheticSample()`), so
+ * the visuals work as decoration too.
+ *
+ * - `waveform-scope` (background) — an oscilloscope line of the waveform.
+ * - `radial-spectrum` (background) — spectrum bars around a circle.
+ * - `spectrum-mirror` (background) — mirrored bars with a reflection.
+ * - `sound-particles` (background) — particles launched by the bass.
+ * - `beat-bounce` (loop) — the element pumps with the bass.
+ * - `vinyl-spin` (loop) — the element turns like a record; level speeds it.
+ *
+ * Reduced motion: backgrounds draw one static frame, loops do nothing.
+ */
 /** A smooth, deterministic fake analyser frame at time `t` (s). */
 function syntheticSample(t, bins = 64) {
     const freq = new Uint8Array(bins);
@@ -55,12 +71,12 @@ const loop = (name, description, defaults, apply) => ({
         const f = (now) => {
             const t = (now - t0) / 1000;
             apply(el, musicSample(t), t, o, st);
-            raf = requestAnimationFrame(f);
+            raf = base.raf(f);
         };
         if (typeof requestAnimationFrame === 'function')
-            raf = requestAnimationFrame(f);
+            raf = base.raf(f);
         const stop = () => {
-            cancelAnimationFrame(raf);
+            base.caf(raf);
             el.style.transform = prev;
         };
         ctx.onCleanup(stop);
@@ -176,4 +192,4 @@ exports.MUSIC_FX = MUSIC_FX;
 exports.musicSample = musicSample;
 exports.registerMusicPack = registerMusicPack;
 exports.syntheticSample = syntheticSample;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/components/fx-music.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/fx-music.cjs.map

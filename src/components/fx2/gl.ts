@@ -7,6 +7,7 @@
  * `fallback` spec runs through `canvasBackground()` instead.
  * `el.dataset.usaBackend` tells which one is active: `webgl2` or `canvas`.
  */
+import { raf as sraf, caf as scaf } from '../base';
 import type { EffectContext } from '../fx/registry';
 import { webgpuBackground, supportsWebGPU } from './webgpu';
 import { canvasBackground, hexRgb, noise2, type GenerativeSpec } from '../effects/generative';
@@ -158,10 +159,10 @@ function webglBackground(el: HTMLElement, fx: EffectContext, spec: ShaderSpec, o
     }
     last = now;
     draw((now - t0) / 1000);
-    if (visible && !document.hidden) raf = requestAnimationFrame(frame);
+    if (visible && !document.hidden) raf = sraf(frame);
   };
   const start = () => {
-    if (!raf && !fx.reduced) raf = requestAnimationFrame(frame);
+    if (!raf && !fx.reduced) raf = sraf(frame);
   };
   resize();
   draw(fx.reduced ? 7 : 0);
@@ -184,7 +185,7 @@ function webglBackground(el: HTMLElement, fx: EffectContext, spec: ShaderSpec, o
   };
   canvas.addEventListener('webglcontextlost', lost);
   const stop = () => {
-    cancelAnimationFrame(raf);
+    scaf(raf);
     raf = 0;
     io?.disconnect();
     ro?.disconnect();

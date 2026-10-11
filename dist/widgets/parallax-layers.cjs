@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-vu_KhBiv.cjs');
+var base = require('../chunks/base-Do-R_9gU.cjs');
 var scrollDriven = require('../chunks/scroll-driven-CQbwzCdn.cjs');
 
 var css = "usa-parallax-layers{position:relative;display:block;overflow:hidden;isolation:isolate}usa-parallax-layers [data-depth]{will-change:translate,transform;transition:transform .35s cubic-bezier(.22,1,.36,1)}@keyframes usa-plx-y{from{translate:0 calc(var(--usa-depth,0)*var(--usa-plx-range,120)*1px)}to{translate:0 calc(var(--usa-depth,0)*var(--usa-plx-range,120)*-1px)}}@keyframes usa-plx-x{from{translate:calc(var(--usa-depth,0)*var(--usa-plx-range,120)*1px) 0}to{translate:calc(var(--usa-depth,0)*var(--usa-plx-range,120)*-1px) 0}}@supports (animation-timeline:view()){usa-parallax-layers .usa-plx-native{animation:usa-plx-y linear both;animation-range:cover}usa-parallax-layers[data-horizontal] .usa-plx-native{animation-name:usa-plx-x}}@media (prefers-reduced-motion:reduce){usa-parallax-layers [data-depth]{transition:none;animation:none!important;translate:none!important}}";
@@ -67,7 +67,7 @@ function defineParallaxLayers(tag = 'usa-parallax-layers') {
                     };
                     const onScroll = () => {
                         if (!raf)
-                            raf = requestAnimationFrame(update);
+                            raf = base.raf(update);
                     };
                     let visible = false;
                     this.inView((v) => {
@@ -77,7 +77,7 @@ function defineParallaxLayers(tag = 'usa-parallax-layers') {
                     }, { rootMargin: '20% 0px' });
                     this.listen(window, 'scroll', () => visible && onScroll(), { passive: true });
                     this.listen(window, 'resize', onScroll, { passive: true });
-                    this.onCleanup(() => raf && cancelAnimationFrame(raf));
+                    this.onCleanup(() => raf && base.caf(raf));
                     update();
                 }
                 if (this.flag('pointer')) {
@@ -104,4 +104,4 @@ function defineParallaxLayers(tag = 'usa-parallax-layers') {
 }
 
 exports.defineParallaxLayers = defineParallaxLayers;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/widgets/parallax-layers.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/widgets/parallax-layers.cjs.map

@@ -1,3 +1,3 @@
-export { d as defineLocationCard } from '../chunks/location-card-GrQnXfwp.js';
-import '../chunks/base-nzeN_ux7.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/widgets/location-card.js.map
+export { d as defineLocationCard } from '../chunks/location-card-C_3CQ3u-.js';
+import '../chunks/base-Be98yNyq.js';
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/widgets/location-card.js.map

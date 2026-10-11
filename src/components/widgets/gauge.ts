@@ -1,3 +1,5 @@
+// 13.4: base scheduler (frame budget, drop-on-detach); offscreen pause applies once installOffscreenPause() runs — not auto-installed, the fixed per-entry budget can't carry it.
+import { raf as sraf, caf as scaf } from '../base';
 import { defineElement, type UsaElement } from '../base';
 import { clampN } from './shared';
 import css from './gauge.css?raw';
@@ -47,7 +49,7 @@ export function defineGauge(tag = 'usa-gauge'): CustomElementConstructor | undef
           this.setAttribute('aria-valuenow', String(this._v));
           this._shown = this.reduced ? this._v : this.num('min', 0);
           this.paint();
-          this.onCleanup(() => cancelAnimationFrame(this._raf));
+          this.onCleanup(() => scaf(this._raf));
           this.inView((v) => v && this.animateTo());
         }
 
@@ -85,10 +87,10 @@ export function defineGauge(tag = 'usa-gauge'): CustomElementConstructor | undef
             this._vel += (120 * (this._v - this._shown) - 11 * this._vel) * dt;
             this._shown += this._vel * dt;
             this.paint();
-            if (Math.abs(this._v - this._shown) / span > 0.0005 || Math.abs(this._vel) / span > 0.002) this._raf = requestAnimationFrame(f);
+            if (Math.abs(this._v - this._shown) / span > 0.0005 || Math.abs(this._vel) / span > 0.002) this._raf = sraf(f, this);
             else ((this._raf = 0), (this._shown = this._v), (this._vel = 0), this.paint());
           };
-          this._raf = requestAnimationFrame(f);
+          this._raf = sraf(f, this);
         }
       }
       return UsaGauge as unknown as CustomElementConstructor;

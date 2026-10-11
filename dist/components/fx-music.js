@@ -1,9 +1,25 @@
-import { registerEffects } from '../chunks/registry-PxXkPc1Q.js';
-import { c as canvasBackground } from '../chunks/generative-2LhxG5BJ.js';
-import { g as getAudio } from '../chunks/audio-5FOqrAxu.js';
-import '../chunks/base-nzeN_ux7.js';
+import { r as raf, b as caf } from '../chunks/base-Be98yNyq.js';
+import { registerEffects } from '../chunks/registry-BEIhIRTY.js';
+import { c as canvasBackground } from '../chunks/generative-DkX6SvrL.js';
+import { g as getAudio } from '../chunks/audio-DJkvNk0A.js';
 import '../chunks/shared-CkKHWrtJ.js';
 
+/**
+ * 7.1 — Music visualization (`motionary/fx/music`, also
+ * `motionary/components/fx-music`), registered through `registerEffect()`.
+ * Every effect reads the running analyser (`enableAudio()` / `<usa-audio>`);
+ * without one it plays a gentle synthetic signal (`syntheticSample()`), so
+ * the visuals work as decoration too.
+ *
+ * - `waveform-scope` (background) — an oscilloscope line of the waveform.
+ * - `radial-spectrum` (background) — spectrum bars around a circle.
+ * - `spectrum-mirror` (background) — mirrored bars with a reflection.
+ * - `sound-particles` (background) — particles launched by the bass.
+ * - `beat-bounce` (loop) — the element pumps with the bass.
+ * - `vinyl-spin` (loop) — the element turns like a record; level speeds it.
+ *
+ * Reduced motion: backgrounds draw one static frame, loops do nothing.
+ */
 /** A smooth, deterministic fake analyser frame at time `t` (s). */
 function syntheticSample(t, bins = 64) {
     const freq = new Uint8Array(bins);
@@ -48,17 +64,17 @@ const loop = (name, description, defaults, apply) => ({
     run: (el, o, ctx) => {
         const prev = el.style.transform;
         const st = {};
-        let raf = 0;
+        let raf$1 = 0;
         const t0 = performance.now();
         const f = (now) => {
             const t = (now - t0) / 1000;
             apply(el, musicSample(t), t, o, st);
-            raf = requestAnimationFrame(f);
+            raf$1 = raf(f);
         };
         if (typeof requestAnimationFrame === 'function')
-            raf = requestAnimationFrame(f);
+            raf$1 = raf(f);
         const stop = () => {
-            cancelAnimationFrame(raf);
+            caf(raf$1);
             el.style.transform = prev;
         };
         ctx.onCleanup(stop);
@@ -171,4 +187,4 @@ function registerMusicPack() {
 }
 
 export { MUSIC_FX, musicSample, registerMusicPack, syntheticSample };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/components/fx-music.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/fx-music.js.map

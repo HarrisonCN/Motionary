@@ -1,3 +1,4 @@
-export { d as defineSparkline } from '../chunks/sparkline-kl8sJ7cP.js';
-import '../chunks/base-nzeN_ux7.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/widgets/sparkline.js.map
+export { d as defineSparkline } from '../chunks/sparkline-B07Pc0F5.js';
+import '../components/offscreen.js';
+import '../chunks/base-Be98yNyq.js';
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/widgets/sparkline.js.map

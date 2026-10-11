@@ -16,6 +16,7 @@
  * Reduced motion: no tilt, spin, orbit or fold; the flip swaps faces with a
  * crossfade.
  */
+import { raf as sraf, caf as scaf } from '../base';
 import type { EffectContext, EffectDefinition } from '../fx/registry';
 import { registerEffects } from '../fx/registry';
 import { all } from '../effects/shared';
@@ -26,9 +27,9 @@ const layers = (el: HTMLElement): HTMLElement[] => {
   return marked.length ? marked : (Array.from(el.children) as HTMLElement[]);
 };
 
-const raf = (f: FrameRequestCallback): number => (typeof requestAnimationFrame === 'function' ? requestAnimationFrame(f) : 0);
+const raf = (f: FrameRequestCallback): number => (typeof requestAnimationFrame === 'function' ? sraf(f) : 0);
 const caf = (h: number): void => {
-  if (h && typeof cancelAnimationFrame === 'function') cancelAnimationFrame(h);
+  if (h && typeof cancelAnimationFrame === 'function') scaf(h);
 };
 
 export const DEPTH3_FX: EffectDefinition[] = [

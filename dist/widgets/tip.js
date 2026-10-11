@@ -1,4 +1,4 @@
-export { d as defineTip } from '../chunks/tip-C8T1SdOJ.js';
-import '../chunks/base-nzeN_ux7.js';
+export { d as defineTip } from '../chunks/tip-B-mmUYra.js';
+import '../chunks/base-Be98yNyq.js';
 import '../chunks/shared-o9CtwHmi.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/widgets/tip.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/widgets/tip.js.map

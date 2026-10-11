@@ -54,14 +54,14 @@ export function configureComponents(options: ComponentsConfig): void {
   if (options.motionIntensity && !(options.motionIntensity in MOTION_SCALE)) delete options.motionIntensity;
   if (options.reducedMotion && options.reducedMotion !== 'reduce') options.reducedMotion = 'user';
   Object.assign(config, options);
-  if (options.motionIntensity && typeof document !== 'undefined') {
-    document.documentElement.style.setProperty('--usa-motion', String(MOTION_SCALE[options.motionIntensity] ?? 1));
-    document.documentElement.setAttribute('data-usa-motion', options.motionIntensity);
+  const { motionIntensity: mi, motionSensitivity: ms } = options;
+  if (typeof document == 'undefined') return;
+  const de = document.documentElement;
+  if (mi) {
+    de.style.setProperty('--usa-motion', String(MOTION_SCALE[mi] ?? 1));
+    de.setAttribute('data-usa-motion', mi);
   }
-  if (options.motionSensitivity && typeof document !== 'undefined') {
-    if (options.motionSensitivity === 'full') document.documentElement.removeAttribute('data-usa-sensitivity');
-    else document.documentElement.setAttribute('data-usa-sensitivity', options.motionSensitivity);
-  }
+  if (ms) ms == 'full' ? de.removeAttribute('data-usa-sensitivity') : de.setAttribute('data-usa-sensitivity', ms);
 }
 
 /** The current motion-sensitivity level (v4.4). */
@@ -91,15 +91,9 @@ export function adaptKeyframes(frames: Keyframe[], level: MotionSensitivity = co
   });
 }
 
-let quiet = 0;
-/** Run `fn` without 4.9 deprecation warnings (library-internal calls). */
+/** Run `fn` without 4.9 deprecation warnings (library-internal calls). The suppression counter was never read, so this simply runs `fn` (counter removed in 13.4). */
 export function withoutDeprecations<T>(fn: () => T): T {
-  quiet++;
-  try {
-    return fn();
-  } finally {
-    quiet--;
-  }
+  return fn();
 }
 
 /** The current global motion intensity. */
@@ -142,37 +136,33 @@ const injected = /*#__PURE__*/ new Set<string>();
 export function adoptStyles(id: string, css: string): void {
   if (!config.injectStyles || !css || injected.has(id) || typeof document === 'undefined') return;
   injected.add(id);
+  if (!adopt(document, css, true)) (document.head || document.documentElement).appendChild(styleEl(css)).setAttribute('data-usa', id);
+}
+
+/** Constructable stylesheet onto `root` (appended for a document, replacing for a shadow root); false without support. */
+function adopt(root: Document | ShadowRoot, css: string, add?: boolean): boolean {
   try {
-    if (typeof CSSStyleSheet === 'function' && 'adoptedStyleSheets' in document) {
+    // no CSSStyleSheet constructor → ReferenceError → caught → <style>
+    if ('adoptedStyleSheets' in root) {
       const sheet = new CSSStyleSheet();
       sheet.replaceSync(css);
-      document.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet];
-      return;
+      root.adoptedStyleSheets = add ? [...root.adoptedStyleSheets, sheet] : [sheet];
+      return true;
     }
   } catch {
     /* fall through to <style> */
   }
-  const style = document.createElement('style');
-  style.setAttribute('data-usa', id);
-  style.textContent = css;
-  (document.head || document.documentElement).appendChild(style);
+  return false;
 }
+const styleEl = (css: string): HTMLStyleElement => {
+  const style = document.createElement('style');
+  style.textContent = css;
+  return style;
+};
 
 /** Attach `css` to a shadow root (constructable sheet where supported, else `<style>`). */
 export function shadowStyles(root: ShadowRoot, css: string): void {
-  try {
-    if (typeof CSSStyleSheet === 'function' && 'adoptedStyleSheets' in root) {
-      const sheet = new CSSStyleSheet();
-      sheet.replaceSync(css);
-      root.adoptedStyleSheets = [sheet];
-      return;
-    }
-  } catch {
-    /* fall through */
-  }
-  const style = document.createElement('style');
-  style.textContent = css;
-  root.prepend(style);
+  if (!adopt(root, css)) root.prepend(styleEl(css));
 }
 
 export type Cleanup = () => void;
@@ -227,7 +217,7 @@ export function getBase(): BaseCtor {
       styleLoader?.(this.localName);
       // Upgraded while the parser is still inside us (a <script> in <head>
       // defined the element): children/text are not there yet, so wait.
-      if (typeof document !== 'undefined' && document.readyState === 'loading' && !this.nextSibling && !this.childNodes.length) {
+      if (document.readyState === 'loading' && !this.nextSibling && !this.childNodes.length) {
         const go = () => {
           if (this._connected && this.isConnected) this.mount();
         };
@@ -263,13 +253,12 @@ export function getBase(): BaseCtor {
     unmount(): void {}
 
     str(name: string, fallback = ''): string {
-      const v = this.getAttribute(name);
-      return v === null ? fallback : v;
+      return this.getAttribute(name) ?? fallback;
     }
 
     num(name: string, fallback: number): number {
       const v = this.getAttribute(name);
-      const n = v === null || v.trim() === '' ? NaN : Number(v);
+      const n = v?.trim() ? Number(v) : NaN;
       return Number.isFinite(n) ? n : fallback;
     }
 
@@ -280,8 +269,7 @@ export function getBase(): BaseCtor {
     }
 
     setFlag(name: string, on: boolean): void {
-      if (on) this.setAttribute(name, '');
-      else this.removeAttribute(name);
+      this.toggleAttribute(name, !!on);
     }
 
     onCleanup(fn: Cleanup): void {
@@ -333,12 +321,8 @@ export function getBase(): BaseCtor {
  * `null` (final frame applied) when nothing should animate.
  */
 export function animateWithMotion(el: Element, keyframes: Keyframe[], options: KeyframeAnimationOptions): Animation | null {
-  if (typeof (el as HTMLElement).animate !== 'function' || config.motionSensitivity === 'static') {
-    applyFrame(el as HTMLElement, keyframes[keyframes.length - 1]);
-    return null;
-  }
-  keyframes = adaptKeyframes(keyframes);
-  if (active >= maxActive) {
+  // no WAAPI / `static` → the unadapted final frame; over the animation budget → the adapted one
+  if (typeof (el as HTMLElement).animate !== 'function' || config.motionSensitivity === 'static' || ((keyframes = adaptKeyframes(keyframes)), active >= maxActive)) {
     applyFrame(el as HTMLElement, keyframes[keyframes.length - 1]);
     return null;
   }
@@ -399,40 +383,62 @@ export function srText(text: string): HTMLSpanElement {
 }
 
 // --- shared rAF scheduler (4.5) ----------------------------------------------
-// Every component loop goes through one requestAnimationFrame per frame
-// instead of one per element: callbacks are batched, run in order, and a
-// throwing callback no longer starves the others (the first error is rethrown).
-const frameQueue = /*#__PURE__*/ new Map<number, FrameRequestCallback>();
+// One requestAnimationFrame per frame for every component loop; a throwing
+// callback no longer starves the others (the first error is rethrown).
+// 13.4: frame budget (over-budget callbacks wait for the next frame, oldest
+// first); a callback / loop given an owner element is dropped once the owner
+// is detached. Offscreen / hidden-tab pause is a plug-in (setPauseHook,
+// installed by motionary/components/offscreen — not part of lite).
+const frameQueue = /*#__PURE__*/ new Map<number, [FrameRequestCallback, Element?]>();
 let frameSeq = 1;
 let frameHandle: number | ReturnType<typeof setTimeout> | 0 = 0;
 let frameVia: unknown = null;
-const frameStats = { frames: 0, callbacks: 0, peak: 0, last: 0 };
-const frameListeners = new Set<(t: number, dt: number) => void>();
+const frameStats = { frames: 0, callbacks: 0, peak: 0, last: 0, deferred: 0, parked: 0, budget: 8 };
+/** loop → owner element */
+const frameListeners = /*#__PURE__*/ new Map<(t: number, dt: number) => void, Element | undefined>();
+let pauseHook: ((el?: Element) => unknown) | undefined;
+let watchHook: ((el: Element) => void) | undefined;
+/** 0 run, 1 park (detached owner / pause hook), 2 drop (raf callback of a detached owner). */
+const gate = (el?: Element): number => (el && !el.isConnected ? 2 : pauseHook?.(el) ? 1 : 0);
 
 function flushFrame(t: number): void {
+  const st = frameStats;
   frameHandle = 0;
-  const dt = frameStats.last && t > frameStats.last ? t - frameStats.last : 16.7;
-  frameStats.last = t;
-  frameStats.frames++;
-  const cbs = Array.from(frameQueue.values());
-  frameQueue.clear();
-  frameStats.callbacks += cbs.length;
-  frameStats.peak = Math.max(frameStats.peak, cbs.length);
+  const dt = st.last && t > st.last ? t - st.last : 16.7;
+  st.last = t;
+  st.frames++;
+  const start = now();
+  let n = 0;
+  let p = 0;
+  let live = 0;
   let error: unknown = null;
-  for (const cb of cbs) {
-    try {
-      cb(t);
-    } catch (e) {
-      error ??= e;
+  for (const [id, [cb, el]] of [...frameQueue]) {
+    if (n && now() - start > st.budget) {
+      st.deferred++;
+      break;
     }
+    const g = gate(el);
+    if (g & 1) p++;
+    else if ((frameQueue.delete(id), !g))
+      try {
+        n++;
+        cb(t);
+      } catch (e) {
+        error ??= e;
+      }
   }
+  st.callbacks += n;
+  st.peak = Math.max(st.peak, n);
   // 8.0: loops run on the unified motion clock — dt scaled by its rate, frozen while paused
-  if (!clk().paused) {
-    const cdt = dt * clk().rate;
-    clk().time += cdt;
-    frameListeners.forEach((fn) => fn(t, cdt));
-    if (frameListeners.size) requestFlush();
+  const c = clk();
+  if (!c.paused) {
+    const cdt = dt * c.rate;
+    c.time += cdt;
+    frameListeners.forEach((el, fn) => (gate(el) ? p++ : (live++, fn(t, cdt))));
   }
+  st.parked += p;
+  // everything parked: the pause hook's wake() restarts the loop
+  if (live || frameQueue.size > p) requestFlush();
   if (error) throw error;
 }
 
@@ -444,29 +450,55 @@ function requestFlush(): void {
   frameHandle = native ? native(flushFrame) : setTimeout(() => flushFrame(now()), 16);
 }
 
-/** requestAnimationFrame through the shared scheduler (timeout fallback in jsdom / hidden documents). */
-export const raf = (cb: FrameRequestCallback): number => {
+/**
+ * requestAnimationFrame through the shared scheduler (timeout fallback in jsdom / hidden documents).
+ * 13.4: with an owner `el` the callback is dropped once `el` is detached (and paused off screen when the offscreen plug-in is installed).
+ */
+export const raf = (cb: FrameRequestCallback, el?: Element): number => {
   const id = frameSeq++;
-  frameQueue.set(id, cb);
+  frameQueue.set(id, [cb, el]);
+  el && watchHook?.(el);
   requestFlush();
   return id;
 };
-/** Monotonic time in ms (rAF callback timestamps differ between environments, so loops use this). */
-export const now = (): number => (typeof performance !== 'undefined' ? performance.now() : Date.now());
+
+/** High-resolution time (13.4: `performance` is global in every supported browser and Node ≥ 16). */
+export const now = (): number => performance.now();
 export const caf = (id: number): void => {
   frameQueue.delete(id);
 };
 
-/** Run `fn(time, dt)` every frame on the shared scheduler until the returned function is called. */
-export function onFrame(fn: (t: number, dt: number) => void): () => void {
-  frameListeners.add(fn);
+/**
+ * Run `fn(time, dt)` every frame on the shared scheduler until the returned function is called.
+ * 13.4: with an owner `el` the loop stops running once `el` is detached (and pauses off screen with the offscreen plug-in).
+ */
+export function onFrame(fn: (t: number, dt: number) => void, el?: Element): () => void {
+  frameListeners.set(fn, el);
+  el && watchHook?.(el);
   if (!clk().paused) requestFlush();
   return () => frameListeners.delete(fn);
 }
 
-/** Scheduler counters: frames flushed, callbacks run, peak callbacks in one frame, pending now. */
-export function schedulerStats(): { frames: number; callbacks: number; peak: number; pending: number; loops: number } {
-  return { frames: frameStats.frames, callbacks: frameStats.callbacks, peak: frameStats.peak, pending: frameQueue.size, loops: frameListeners.size };
+/** Scheduler counters: frames flushed, callbacks run, peak per frame, pending now, loops, frames split by the budget, callbacks / loops parked, budget ms. */
+export function schedulerStats(): { frames: number; callbacks: number; peak: number; pending: number; loops: number; deferred: number; parked: number; budget: number } {
+  const { last, ...rest } = frameStats;
+  return { ...rest, pending: frameQueue.size, loops: frameListeners.size };
+}
+
+/** 13.4: per-frame time budget in ms for queued callbacks (default 8; `Infinity` = never split a frame). */
+export function setFrameBudget(ms: number): void {
+  frameStats.budget = ms > 0 ? ms : 8;
+}
+
+/**
+ * 13.4: plug a pause predicate into the scheduler. `park(el)` returning truthy holds an owned
+ * callback / loop (el is undefined for unowned ones); `watch(el)` is told about every new owner.
+ * Returns `wake()`, to call when the predicate may have flipped back.
+ */
+export function setPauseHook(park?: (el?: Element) => unknown, watch?: (el: Element) => void): () => void {
+  pauseHook = park;
+  watchHook = watch;
+  return requestFlush;
 }
 
 // --- unified motion clock (8.0) --------------------------------------------------
@@ -486,12 +518,13 @@ const CLOCK_KEY = /*#__PURE__*/ Symbol.for('motionary.clock');
 const clk = (): ClockState => ((globalThis as any)[CLOCK_KEY] ||= { rate: 1, paused: false, time: 0, anims: new Set(), subs: new Set() });
 
 function applyClock(a: Animation): void {
+  const { rate, paused } = clk();
   try {
-    if (typeof (a as any).updatePlaybackRate === 'function') (a as any).updatePlaybackRate(clk().rate);
-    else if (clk().rate !== 1 || (a as any).playbackRate !== undefined) (a as any).playbackRate = clk().rate;
-    if (clk().paused) a.pause?.();
+    if (typeof (a as any).updatePlaybackRate === 'function') (a as any).updatePlaybackRate(rate);
+    else if (rate !== 1 || (a as any).playbackRate !== undefined) (a as any).playbackRate = rate;
+    if (paused) a.pause?.();
     else if (a.playState === 'paused' && (a as any)._usaClockPaused) a.play?.();
-    (a as any)._usaClockPaused = clk().paused;
+    (a as any)._usaClockPaused = paused;
   } catch {
     /* finished / detached animation */
   }
@@ -508,17 +541,19 @@ export function trackAnimation(a: Animation | null | undefined): void {
 
 /** The motion clock's state: `rate` (1 = normal), `paused`, `time` (clock ms elapsed, scaled by rate). */
 export function getClock(): { rate: number; paused: boolean; time: number; tracked: number } {
-  return { rate: clk().rate, paused: clk().paused, time: clk().time, tracked: clk().anims.size };
+  const { rate, paused, time, anims } = clk();
+  return { rate, paused, time, tracked: anims.size };
 }
 
 /** Change the shared clock: `{ rate }` (0.05–8) and / or `{ paused }`. Applies to running animations and loops. */
 export function setClock(next: { rate?: number; paused?: boolean }): void {
-  const wasPaused = clk().paused;
-  if (typeof next.rate === 'number' && Number.isFinite(next.rate)) clk().rate = Math.min(8, Math.max(0.05, next.rate));
-  if (typeof next.paused === 'boolean') clk().paused = next.paused;
-  clk().anims.forEach(applyClock);
-  if (wasPaused && !clk().paused && frameListeners.size) requestFlush();
-  clk().subs.forEach((fn) => fn());
+  const c = clk();
+  const wasPaused = c.paused;
+  if (typeof next.rate === 'number' && Number.isFinite(next.rate)) c.rate = clamp(next.rate, 0.05, 8);
+  if (typeof next.paused === 'boolean') c.paused = next.paused;
+  c.anims.forEach(applyClock);
+  if (wasPaused && !c.paused && frameListeners.size) requestFlush();
+  c.subs.forEach((fn) => fn());
 }
 
 /** Subscribe to clock changes; returns an unsubscribe. */
@@ -556,7 +591,7 @@ const warned = /*#__PURE__*/ new Set<string>();
 export function deprecate(key: string, message: string): void {
   if (warned.has(key)) return;
   warned.add(key);
-  if (typeof console !== 'undefined') console.warn(`[motionary] ${message}`);
+  console.warn(`[motionary] ${message}`);
 }
 
 /**

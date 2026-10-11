@@ -1,3 +1,5 @@
+// 13.4: base scheduler (frame budget, drop-on-detach); offscreen pause applies once installOffscreenPause() runs — not auto-installed, the fixed per-entry budget can't carry it.
+import { raf as sraf, caf as scaf } from '../base';
 import { defineElement, type UsaElement } from '../base';
 import css from './globe.css?raw';
 
@@ -99,7 +101,7 @@ export function defineGlobe(tag = 'usa-globe'): CustomElementConstructor | undef
           this.inView((v) => {
             this._visible = v;
             if (v) this.spin();
-            else cancelAnimationFrame(this._raf);
+            else scaf(this._raf);
           });
           // contract-exempt: keyboard-click-only — drag-to-rotate decoration; the globe auto-rotates and carries no action
           this.listen(this, 'pointerdown', (e: PointerEvent) => {
@@ -112,10 +114,10 @@ export function defineGlobe(tag = 'usa-globe'): CustomElementConstructor | undef
           const up = () => (this._drag = null);
           this.listen(this, 'pointerup', up);
           this.listen(this, 'pointercancel', up);
-          this.onCleanup(() => cancelAnimationFrame(this._raf));
+          this.onCleanup(() => scaf(this._raf));
         }
         private spin(): void {
-          cancelAnimationFrame(this._raf);
+          scaf(this._raf);
           const speed = this.num('speed', 12);
           if (this.reduced || !speed) return;
           let last = 0;
@@ -124,9 +126,9 @@ export function defineGlobe(tag = 'usa-globe'): CustomElementConstructor | undef
             const dt = last ? Math.min(64, t - last) : 0;
             last = t;
             if (!this._drag) this.lon = this._lon + (speed * dt) / 1000;
-            this._raf = requestAnimationFrame(step);
+            this._raf = sraf(step, this);
           };
-          this._raf = requestAnimationFrame(step);
+          this._raf = sraf(step, this);
         }
         draw(): void {
           const grid = this.querySelector('.usa-gl-grid');
@@ -159,10 +161,10 @@ export function defineGlobe(tag = 'usa-globe'): CustomElementConstructor | undef
                 const k = Math.min(1, (t - t0) / dur);
                 const e = 1 - Math.pow(1 - k, 3);
                 this.lon = from + delta * e;
-                if (k < 1 && this.isConnected) requestAnimationFrame(tick);
+                if (k < 1 && this.isConnected) sraf(tick);
                 else done();
               };
-              requestAnimationFrame(tick);
+              sraf(tick);
             });
           this.querySelectorAll('.usa-gl-mark').forEach((g) => g.toggleAttribute('data-active', g.getAttribute('data-name') === name));
           this.emit('focus', { name, lat: m.lat, lon: m.lon });

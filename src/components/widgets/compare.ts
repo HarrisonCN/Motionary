@@ -1,3 +1,4 @@
+import { raf as sraf, caf as scaf } from '../base';
 import { defineElement, type UsaElement } from '../base';
 import { clampN, ownChildren, part } from './shared';
 import css from './compare.css?raw';
@@ -96,12 +97,12 @@ export function defineCompare(tag = 'usa-compare'): CustomElementConstructor | u
               const step = (now: number) => {
                 const k = Math.min(1, (now - t0) / 1400);
                 this.paint(end + Math.sin(k * Math.PI * 2) * 22 * (1 - k));
-                if (k < 1) id = requestAnimationFrame(step);
+                if (k < 1) id = sraf(step);
                 else this.paint(end);
               };
               if (typeof requestAnimationFrame === 'function') {
-                id = requestAnimationFrame(step);
-                this.onCleanup(() => cancelAnimationFrame(id));
+                id = sraf(step);
+                this.onCleanup(() => scaf(id));
               }
             }, { threshold: 0.5 });
           }

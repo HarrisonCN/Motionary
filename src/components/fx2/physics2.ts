@@ -16,6 +16,7 @@
  * Canvas effects render only while visible; reduced motion draws one static
  * frame and the hover effects do nothing.
  */
+import { raf as sraf, caf as scaf } from '../base';
 import type { EffectContext, EffectDefinition } from '../fx/registry';
 import { registerEffects } from '../fx/registry';
 import { canvasBackground, type GenerativeSpec } from '../effects/generative';
@@ -137,14 +138,14 @@ export const PHYSICS2_FX: EffectDefinition[] = [
         y += vy * dt;
         const a = o.amount;
         el.style.transform = `skew(${(x * 0.6 * a).toFixed(2)}deg,${(y * 0.25 * a).toFixed(2)}deg) scale(${(1 + y * 0.004 * a).toFixed(4)},${(1 - y * 0.004 * a).toFixed(4)})`;
-        if (Math.abs(x) + Math.abs(vx) + Math.abs(y) + Math.abs(vy) > 0.02) raf = requestAnimationFrame(loop);
+        if (Math.abs(x) + Math.abs(vx) + Math.abs(y) + Math.abs(vy) > 0.02) raf = sraf(loop);
         else ((raf = 0), (last = 0), (el.style.transform = prev));
       };
       const move = (e: PointerEvent) => {
         if (!Number.isNaN(lx)) (vx += Math.max(-60, Math.min(60, (e.clientX - lx) * 4))), (vy += Math.max(-60, Math.min(60, (e.clientY - ly) * 4)));
         lx = e.clientX;
         ly = e.clientY;
-        if (!raf && typeof requestAnimationFrame === 'function') raf = requestAnimationFrame(loop);
+        if (!raf && typeof requestAnimationFrame === 'function') raf = sraf(loop);
       };
       const leave = () => (lx = ly = NaN);
       el.addEventListener('pointermove', move);
@@ -152,7 +153,7 @@ export const PHYSICS2_FX: EffectDefinition[] = [
       const stop = () => {
         el.removeEventListener('pointermove', move);
         el.removeEventListener('pointerleave', leave);
-        if (raf) cancelAnimationFrame(raf);
+        if (raf) scaf(raf);
         el.style.transform = prev;
       };
       ctx.onCleanup(stop);

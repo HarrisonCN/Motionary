@@ -1,5 +1,5 @@
-import { registerEffects } from '../chunks/registry-PxXkPc1Q.js';
-import '../chunks/base-nzeN_ux7.js';
+import { registerEffects } from '../chunks/registry-BEIhIRTY.js';
+import '../chunks/base-Be98yNyq.js';
 
 const NS = 'http://www.w3.org/2000/svg';
 function overlay(el, z = 1) {
@@ -119,4 +119,4 @@ function registerFocusPack() {
 }
 
 export { FOCUS_FX, registerFocusPack };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/components/fx-focus.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/fx-focus.js.map

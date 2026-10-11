@@ -1,3 +1,4 @@
+import { raf as sraf, caf as scaf } from '../base';
 import { defineElement, type UsaElement } from '../base';
 import { runtimeModule } from './runtime-link';
 import type { PhysicsApi, World, Body } from '../../runtime/physics';
@@ -268,14 +269,14 @@ export function definePhysicsPlayground(tag = 'usa-physics-playground'): CustomE
           let prev = 0;
           const loop = (now: number) => {
             if (!alive) return;
-            requestAnimationFrame(loop);
+            sraf(loop);
             const dt = prev ? Math.min(0.05, (now - prev) / 1000) : 1 / 60;
             prev = now;
             if (!visible || !this.w) return;
             if (this.running) this.w.update(dt);
             draw();
           };
-          requestAnimationFrame(loop);
+          sraf(loop);
         }
       }
       return UsaPhysicsPlayground as unknown as CustomElementConstructor;

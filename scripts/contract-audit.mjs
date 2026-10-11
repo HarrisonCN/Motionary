@@ -169,7 +169,7 @@ function scanElement(tag, file, raw) {
   if (hostClick && !keyboard && !native) add('keyboard-click-only', focusable ? 'focusable but no key handler' : 'not focusable');
   for (const m of body.matchAll(/(window|document)\.addEventListener\(\s*'([\w-]+)'/g)) if (!/removeEventListener/.test(body)) add('lifecycle-global-listener', `${m[1]} ${m[2]}`);
   if (/setInterval\(/.test(body) && !/clearInterval/.test(body)) add('lifecycle-timer', 'setInterval');
-  const animates = /\.animate\(|requestAnimationFrame\(|\braf\(/.test(body);
+  const animates = /\.animate\(|requestAnimationFrame\(|\bs?raf\(/.test(body);
   const guarded = /this\.reduced|prefersReducedMotion\(|this\.motion\(|animateWithMotion\(|getMotionSensitivity\(|adaptKeyframes\(|reduced\b/.test(body);
   if (animates && !guarded) add('reduced-motion', 'animates without a reduced-motion check');
   for (const m of body.matchAll(/(?:throw new (?:\w*Error)\(|console\.(?:warn|error)\()\s*(['`])([^'`]*)/g)) if (!m[2].startsWith('[motionary]')) add('error-prefix', m[2].slice(0, 60));

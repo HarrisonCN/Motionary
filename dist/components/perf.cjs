@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-vu_KhBiv.cjs');
+var base = require('../chunks/base-Do-R_9gU.cjs');
 var indexTags = require('../chunks/index-tags-hLIF2Clq.cjs');
 
 /**
@@ -112,9 +112,10 @@ exports.animationBudget = base.animationBudget;
 exports.onFrame = base.onFrame;
 exports.schedulerStats = base.schedulerStats;
 exports.setAnimationBudget = base.setAnimationBudget;
+exports.setFrameBudget = base.setFrameBudget;
 exports.autoDegrade = autoDegrade;
 exports.categoryOf = categoryOf;
 exports.loadCategoryStyles = loadCategoryStyles;
 exports.loadedStyles = loadedStyles;
 exports.onDemandStyles = onDemandStyles;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/components/perf.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/perf.cjs.map

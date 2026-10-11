@@ -60,15 +60,6 @@ interface EffectDefinition<O extends Record<string, unknown> = Record<string, an
 declare const CARD_FX: EffectDefinition[];
 declare const CLICK_FX: EffectDefinition[];
 
-/**
- * 5.2 — bounce & physics micro-interactions, registered through
- * `registerEffect()`. Keyframes come from a damped-spring / gravity solver
- * (`springKeyframes()`, `bounceKeyframes()`), so the motion is physical but
- * still runs on the Web Animations API (compositor, reduced-motion aware).
- * Effects: `bounce-in`, `rubber-band`, `elastic-hover`, `drop-bounce`,
- * `gravity-text`, `spring-follow`, `bell-swing`.
- */
-
 interface SpringOptions {
     stiffness?: number;
     damping?: number;
@@ -93,30 +84,7 @@ declare function springKeyframes(map: (p: number) => Keyframe, spring?: SpringOp
 declare function bounceKeyframes(bounce?: number, steps?: number): number[];
 declare const PHYSICS_FX: EffectDefinition[];
 
-/**
- * 5.3 — page-wide effects, registered through `registerEffect()`.
- * Transitions (cover → `onCovered()` → reveal): `curtain`, `iris`,
- * `pixel-dissolve`, `blinds`. Persistent page effects: `velocity-skew`,
- * `spotlight`, `edge-glow`.
- *
- * ```ts
- * await playEffect(document.body, 'iris', { onCovered: () => router.go('/next') });
- * ```
- */
-
 declare const PAGE_FX: EffectDefinition[];
-
-/**
- * 5.5 — generative backgrounds on Canvas 2D, registered through
- * `registerEffect()` (kind `background`): `flow-field`, `voronoi`,
- * `mesh-gradient`, `starfield`, `metaballs`, `contours`.
- *
- * Shared runner (`canvasBackground()`): a canvas behind the element's content
- * (`aria-hidden`, pointer-transparent), rendering only while visible
- * (IntersectionObserver) and the tab is shown, with adaptive quality — the
- * render scale drops when frames get slow and recovers when they are fast.
- * Reduced motion: one static frame, no loop.
- */
 
 interface GenFrame {
     ctx: CanvasRenderingContext2D;
@@ -146,28 +114,6 @@ declare function hexRgb(hex: string): [number, number, number];
  */
 declare function canvasBackground(el: HTMLElement, fx: EffectContext, spec: GenerativeSpec, o: any): () => void;
 declare const GENERATIVE_FX: EffectDefinition[];
-
-/**
- * 5.6 — sound-reactive effects (Web Audio).
- *
- * - `enableAudio(input)` — start analysing the microphone (`'mic'`), an
- *   `<audio>` / `<video>` element (or a selector for one) or a `MediaStream`.
- *   Browsers only allow an `AudioContext` to start inside a user gesture, so
- *   call it from a click handler (or use `<usa-audio>`, which renders the
- *   toggle button for you).
- * - Background effects (kind `background`, Canvas 2D through
- *   `canvasBackground()`): `spectrum-bars`, `pulse-ring`, `wave-ring`. Before
- *   audio is enabled they idle gently.
- * - Beat detection: `createBeatDetector()` (pure: energy → beat?), `onBeat(cb)`
- *   and `bindBeat(el, effect, options)`, which plays any registered effect on
- *   every beat. `<usa-audio>` does the same for `[data-usa-beat="effect"]`
- *   children and emits `usa:beat`.
- * - While audio runs, `--usa-audio-level` and `--usa-audio-bass` (0–1) are set
- *   on `<html>` for CSS-driven reactions.
- *
- * Reduced motion: the visual effects are skipped, beats play no effects and
- * the CSS variables stay at 0 — audio itself keeps playing.
- */
 
 type AudioInput = 'mic' | HTMLMediaElement | MediaStream | string;
 interface AudioSample {
@@ -234,22 +180,6 @@ interface UsaAudioElement extends UsaElement {
  * Emits `usa:beat` and `usa:audio-error` (12.0: the legacy `usa-beat` / `usa-audio-error` names are gone).
  */
 declare function defineAudio(tag?: string): CustomElementConstructor | undefined;
-
-/**
- * 5.7 — cursor & gesture packs.
- *
- * Cursor effects (kind `cursor`, persistent, scoped to the element they are
- * bound to; skipped under reduced motion and — unless `touch: true` — for
- * touch pointers): `comet-trail`, `sparkle-trail`, `ribbon-trail`,
- * `magnetic-dots`, `spotlight-cursor`.
- *
- * Gestures → effects: `bindGesture(el, 'fling' | 'twist' | 'long-press',
- * effectOrCallback, options)` and `<usa-gesture-fx gesture effect>`. A fling
- * is a fast release, a twist a two-finger rotation past `angle` degrees, a
- * long press "charges" `--usa-charge` 0 → 1 and fires when full. Every fire
- * dispatches `usa-gesture` (`detail: { gesture, … }`). The effect itself goes
- * through `playEffect()`, so reduced motion is honoured there.
- */
 
 type Pt = {
     x: number;
@@ -477,24 +407,6 @@ interface UsaPlayerElement extends UsaElement {
  * animation cannot be loaded.
  */
 declare function definePlayer(tag?: string): CustomElementConstructor | undefined;
-
-/**
- * 5.4 — `<usa-story template="…">` scroll-storytelling templates.
- *
- * - `pin` — a sticky `[data-stage]` while `[data-step]` sections scroll past; the
- *   step in view gets `data-active`, the stage gets `data-active-step="<index>"`.
- * - `gallery` — a horizontal `[data-track]` slides sideways as you scroll down.
- * - `zoom` — the `[data-stage]` zooms toward the viewer (`zoom="6"`) and fades.
- * - `compare` — before / after (`[data-before]`, `[data-after]`) wipe driven by
- *   scroll, plus a draggable, keyboard-accessible handle (`role="slider"`).
- * - `counter` — `[data-count="1234"]` numbers count up when they enter view.
- * - `highlight` — paragraphs dim except the one crossing the viewport center.
- *
- * Every template sets `--usa-story-progress` (0–1) on the host and dispatches
- * `usa:step` (`detail: { index }`; 12.0, was `usa-story-step`). Reduced motion: no sliding / zooming
- * (the gallery stacks vertically), counters show final values, the rest is
- * class changes only.
- */
 
 declare const STORY_TEMPLATES: readonly ["pin", "gallery", "zoom", "compare", "counter", "highlight"];
 type StoryTemplate = (typeof STORY_TEMPLATES)[number];

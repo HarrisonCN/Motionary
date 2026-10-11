@@ -1,3 +1,5 @@
+// 13.4: base scheduler (frame budget, drop-on-detach); offscreen pause applies once installOffscreenPause() runs — not auto-installed, the fixed per-entry budget can't carry it.
+import { raf as sraf, caf as scaf } from '../base';
 import { defineElement, type UsaElement } from '../base';
 import { xrSupport, yawToOffset } from '../fx2/spatial';
 import css from './panorama.css?raw';
@@ -88,7 +90,7 @@ export function definePanorama(tag = 'usa-panorama'): CustomElementConstructor |
           if (this.reduced) return;
           const rate = this.num('autorotate', 6);
           this.inView((v) => {
-            cancelAnimationFrame(this._raf);
+            scaf(this._raf);
             if (!v) return;
             let last = performance.now();
             const tick = (t: number) => {
@@ -100,11 +102,11 @@ export function definePanorama(tag = 'usa-panorama'): CustomElementConstructor |
                   vel *= 0.94;
                 } else if (rate && !this.matches(':focus-within, :hover')) this.lookAt(this._yaw + (rate * dt) / 1000, true);
               }
-              this._raf = requestAnimationFrame(tick);
+              this._raf = sraf(tick, this);
             };
-            this._raf = requestAnimationFrame(tick);
+            this._raf = sraf(tick, this);
           });
-          this.onCleanup(() => cancelAnimationFrame(this._raf));
+          this.onCleanup(() => scaf(this._raf));
         }
         lookAt(deg: number, quiet = false): void {
           this._yaw = ((deg % 360) + 360) % 360;

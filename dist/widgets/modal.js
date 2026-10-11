@@ -1,5 +1,5 @@
-export { a as defineModal } from '../chunks/sheet-C63sKkKn.js';
-import '../chunks/base-nzeN_ux7.js';
+export { a as defineModal } from '../chunks/sheet-CtmrBo6Z.js';
+import '../chunks/base-Be98yNyq.js';
 import '../chunks/viewport-BAXHhZLV.js';
 import '../chunks/shared-o9CtwHmi.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/widgets/modal.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/widgets/modal.js.map

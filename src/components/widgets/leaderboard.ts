@@ -1,3 +1,4 @@
+import { raf as sraf, caf as scaf } from '../base';
 import { defineElement, type UsaElement } from '../base';
 import css from './leaderboard.css?raw';
 
@@ -118,9 +119,9 @@ export function defineLeaderboard(tag = 'usa-leaderboard'): CustomElementConstru
           const f = (now: number) => {
             const k = Math.min(1, (now - t0) / 600);
             el.textContent = Math.round(from + (to - from) * (1 - Math.pow(1 - k, 3))).toLocaleString();
-            if (k < 1) requestAnimationFrame(f);
+            if (k < 1) sraf(f);
           };
-          requestAnimationFrame(f);
+          sraf(f);
         }
       }
       return UsaLeaderboard as unknown as CustomElementConstructor;

@@ -1,13 +1,13 @@
 'use strict';
 
-var widgets_lottieIcon = require('../chunks/lottie-icon-DMkTeHCL.cjs');
-require('../chunks/base-vu_KhBiv.cjs');
+var widgets_lottieIcon = require('../chunks/lottie-icon-Dyz8XJm5.cjs');
+require('../chunks/base-Do-R_9gU.cjs');
 require('../chunks/key-click-v7I4K5Sr.cjs');
 require('./lottie.cjs');
 require('../components/fx-lottie.cjs');
-require('../chunks/registry-EziiQiWO.cjs');
+require('../chunks/registry-CyVCJneg.cjs');
 
 
 
 exports.defineLottieIcon = widgets_lottieIcon.defineLottieIcon;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/widgets/lottie-icon.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/widgets/lottie-icon.cjs.map

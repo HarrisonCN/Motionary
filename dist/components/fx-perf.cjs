@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-EziiQiWO.cjs');
-var base = require('../chunks/base-vu_KhBiv.cjs');
+var registry = require('../chunks/registry-CyVCJneg.cjs');
+var base = require('../chunks/base-Do-R_9gU.cjs');
 
 /** Run a pure function in a Web Worker; resolves with its (structured-cloneable) result (9.6). */
 function runInWorker(fn, ...args) {
@@ -165,4 +165,4 @@ exports.fpsMeter = fpsMeter;
 exports.offscreenRender = offscreenRender;
 exports.registerPerf3Pack = registerPerf3Pack;
 exports.runInWorker = runInWorker;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/components/fx-perf.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/fx-perf.cjs.map

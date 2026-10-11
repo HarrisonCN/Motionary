@@ -1,5 +1,5 @@
-import { hasEffect, bindEffect, EFFECT_TRIGGERS } from '../chunks/registry-PxXkPc1Q.js';
-import '../chunks/base-nzeN_ux7.js';
+import { hasEffect, bindEffect, EFFECT_TRIGGERS } from '../chunks/registry-BEIhIRTY.js';
+import '../chunks/base-Be98yNyq.js';
 
 /**
  * `motionary/dsl` (= `motionary/components/dsl`, 9.0) — the declarative
@@ -200,4 +200,4 @@ function createComponent(desc) {
 }
 
 export { applyMotion, bindMotion, createComponent, motion, parseMotion, serializeMotion };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/components/dsl.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/dsl.js.map

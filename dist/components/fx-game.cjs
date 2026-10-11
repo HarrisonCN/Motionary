@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-EziiQiWO.cjs');
-require('../chunks/base-vu_KhBiv.cjs');
+var registry = require('../chunks/registry-CyVCJneg.cjs');
+require('../chunks/base-Do-R_9gU.cjs');
 
 /** Ballistic keyframe points for a coin thrown at `deg` with `power` (7.5). */
 function throwPath(deg, power = 120, steps = 6, g = 2.2) {
@@ -124,4 +124,4 @@ function registerGamePack() {
 exports.GAME_FX = GAME_FX;
 exports.registerGamePack = registerGamePack;
 exports.throwPath = throwPath;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/components/fx-game.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/fx-game.cjs.map

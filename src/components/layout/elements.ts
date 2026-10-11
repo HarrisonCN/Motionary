@@ -1,3 +1,4 @@
+import { raf as sraf, caf as scaf } from '../base';
 import { defineElement, type UsaElement } from '../base';
 import { autoAnimate, masonryLayout } from './core';
 import css from './layout.css?raw';
@@ -78,7 +79,7 @@ export function defineMasonry(tag = 'usa-masonry'): CustomElementConstructor | u
           const queue = () => {
             if (id) return;
             // contract-exempt: reduced-motion — rAF batches layout, no motion
-            id = requestAnimationFrame(() => {
+            id = sraf(() => {
               id = 0;
               this.layout();
             });

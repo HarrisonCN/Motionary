@@ -16,6 +16,7 @@ import {
   activeAnimations,
   setAnimationBudget,
   animationBudget,
+  setFrameBudget,
   setStyleLoader,
   configureComponents,
   getMotionIntensity,
@@ -23,7 +24,7 @@ import {
 } from '../base';
 import { COMPONENT_CATEGORIES, type ComponentCategory } from '../index-tags';
 
-export { onFrame, schedulerStats, activeAnimations, setAnimationBudget, animationBudget };
+export { onFrame, schedulerStats, activeAnimations, setAnimationBudget, animationBudget, setFrameBudget };
 
 export interface AutoDegradeOptions {
   /** Frame rate below which motion is degraded (default 45). */

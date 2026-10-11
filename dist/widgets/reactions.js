@@ -1,3 +1,3 @@
-export { d as defineReactions } from '../chunks/reactions-B4xogsDd.js';
-import '../chunks/base-nzeN_ux7.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/widgets/reactions.js.map
+export { d as defineReactions } from '../chunks/reactions-CLwwZmwU.js';
+import '../chunks/base-Be98yNyq.js';
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/widgets/reactions.js.map
