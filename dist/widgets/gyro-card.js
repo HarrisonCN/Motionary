@@ -88,4 +88,4 @@ function defineGyroCard(tag = 'usa-gyro-card') {
 }
 
 export { defineGyroCard };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.7.0/dist/widgets/gyro-card.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.8.0/dist/widgets/gyro-card.js.map

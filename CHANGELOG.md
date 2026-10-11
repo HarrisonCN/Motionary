@@ -7,6 +7,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [13.8.0] - 2026-10-11
+
+Graphics reliability — a WebGL context pool, a GPU resource budget and verified fallback paths. Additive and opt-in:
+zero runtime dependencies, `motionary/components/lite` unchanged (the pool is its own entry), no size budget raised.
+[docs/gl-pool.md](docs/gl-pool.md)
+
+### Added
+
+- **`motionary/components/gl-pool`** — `installGLPool({ maxContexts = 8, budgetBytes = 256 MiB })`: caps live WebGL
+  contexts (1–16) below the browser limit; one lease per canvas; probe / detached contexts are reclaimed first; then
+  the least recently seen off-screen Motionary component gives its context back and is re-mounted when it scrolls back
+  into view; on-screen components and contexts the page created itself are never evicted (a request with every context
+  on screen gets `null` → the component's own fallback, re-mounted when a slot frees). A context lost while its
+  component is in the document re-mounts it on a fresh canvas (≤ 3 times in 10 s). `data-usa-gl` on the component:
+  `live` · `evicted` · `waiting` · `restored` · `lost`.
+- GPU budget: per-context accounting of textures (`texImage2D` / `texStorage2D`), buffers (`bufferData`) and drawing
+  buffers; over budget, off-screen components are evicted, largest first. `glPoolStats()` (live, peak, bytes,
+  evicted, denied, reclaimed, lost, recovered, leases), `glSupport(kind)` (one shared, immediately released probe),
+  `uninstallGLPool()`.
+
+### Fixed
+
+- `<usa-shader-backdrop>`: a lost WebGL context showed a blank canvas — it now shows its CSS gradient
+  (`data-usa-backend="css"`, `backend` event).
+- `<usa-gl-scene>` / `<usa-gl-model>`: no WebGL or a lost context left an empty box — they now show a static poster
+  (`data-usa-backend="none"`, `error` event on loss).
+- The WebGL2 feature probe of the GPU effect packs (`supportsWebGL2()`) released nothing; its probe context now goes
+  back right away instead of counting toward the browser's context limit until garbage collection.
+
+### Tests
+
+- `test/gl-pool-13-8.test.ts` (14; 13 failed before) and `test/browser/gl-pool.spec.mjs` (Chromium): 32 WebGL
+  components stay ≤ 8 live contexts while scrolling with every visible one rendering; forced `WEBGL_lose_context`
+  loss → re-mount; no WebGL → every GPU component paints a fallback; reduced motion → one frame, no loop.
+
 ## [13.7.0] - 2026-10-11
 
 AI tools 2.0 — `motionary-mcp` 2.1 (the MCP server in the package, `npx -p motionary motionary-mcp`). Additive only:

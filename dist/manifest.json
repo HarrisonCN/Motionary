@@ -4,7 +4,7 @@
   "schemaVersion": 2,
   "stability": "stable",
   "package": "motionary",
-  "version": "13.7.0",
+  "version": "13.8.0",
   "homepage": "https://harrisoncn.github.io/Motionary/",
   "llms": "https://harrisoncn.github.io/Motionary/llms.txt",
   "cdn": {
@@ -5089,7 +5089,8 @@
       "changed": [
         "13.1",
         "13.2",
-        "13.3"
+        "13.3",
+        "13.8"
       ]
     },
     {
@@ -5192,7 +5193,8 @@
         "11.0",
         "11.3",
         "13.1",
-        "13.3"
+        "13.3",
+        "13.8"
       ]
     },
     {
@@ -9483,7 +9485,9 @@
       "stability": "stable",
       "deprecated": null,
       "source": "src/components/widgets/shader-backdrop.ts",
-      "changed": []
+      "changed": [
+        "13.8"
+      ]
     },
     {
       "id": "sheet",

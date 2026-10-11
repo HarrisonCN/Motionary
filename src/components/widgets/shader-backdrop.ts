@@ -101,6 +101,14 @@ export function defineShaderBackdrop(tag = 'usa-shader-backdrop'): CustomElement
           }
           this.dataset.usaBackend = 'webgl2';
           this.emit('backend', { backend: 'webgl2', passes: this.chain });
+          // 13.8: a lost context (GPU reset, eviction, too many contexts) shows the CSS gradient instead of a blank canvas;
+          // with motionary/components/gl-pool installed the element is re-mounted on a fresh context
+          this.listen(canvas, 'webglcontextlost', () => {
+            stop = true;
+            canvas.style.display = 'none';
+            this.dataset.usaBackend = 'css';
+            this.emit('backend', { backend: 'css', error: 'context lost' });
+          });
           const targets = [0, 1].map(() => ({ fb: gl.createFramebuffer()!, tex: gl.createTexture()!, w: 0, h: 0 }));
           const fit = (w: number, h: number) => {
             for (const t of targets) {

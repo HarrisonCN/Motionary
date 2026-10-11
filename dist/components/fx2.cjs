@@ -1,7 +1,7 @@
 'use strict';
 
 var manifest = require('../chunks/manifest-xr3WET80.cjs');
-var components_fxGpu = require('../chunks/gpu-DTO3JmAF.cjs');
+var components_fxGpu = require('../chunks/gpu-C2C6iBQC.cjs');
 var components_fxText = require('./fx-text.cjs');
 var components_fxLight = require('./fx-light.cjs');
 var components_fx3d = require('./fx-3d.cjs');
@@ -259,4 +259,4 @@ exports.definePlugin = definePlugin;
 exports.effectPlugins = effectPlugins;
 exports.registerAllPlugins = registerAllPlugins;
 exports.usePlugins = usePlugins;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.7.0/dist/components/fx2.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.8.0/dist/components/fx2.cjs.map

@@ -4,7 +4,7 @@
 
 10.5 (WebGPU effects 2.0): an animated shader background (aurora, plasma, waves, nebula or your own GLSL) run through a post-processing chain — bloom, vignette, grain, chromatic aberration, pixelate, scanlines — in any order; CSS gradient fallback.
 
-- **Category:** ui · **since** 10.5
+- **Category:** ui · **since** 10.5 · **changed in** 13.8
 - **Import:** `import { defineShaderBackdrop } from 'motionary/components/widgets'` then `defineShaderBackdrop();`
 - **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
 - **Attributes:** `preset`, `post`, `colors`, `speed`, `intensity`, `label`

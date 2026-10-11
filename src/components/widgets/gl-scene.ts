@@ -81,6 +81,13 @@ export function defineGlScene(tag = 'usa-gl-scene'): CustomElementConstructor | 
           }
           this.r = r;
           this.dataset.usaBackend = 'webgl2';
+          // 13.8: a lost context shows the static fallback (data-usa-backend="none") instead of a frozen / blank canvas;
+          // with motionary/components/gl-pool installed the element is re-mounted on a fresh context
+          this.listen(canvas, 'webglcontextlost', () => {
+            canvas.style.display = 'none';
+            this.dataset.usaBackend = 'none';
+            this.emit('error', { error: 'WebGL context lost' });
+          });
           const scene = (this.s = new G.Scene());
           const bg = this.str('background');
           if (bg) scene.background = G.color(bg);

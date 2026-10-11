@@ -11,4 +11,4 @@ function registerLevelUp() {
 }
 
 export { effect, registerLevelUp as register, registerLevelUp };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.7.0/dist/effects/level-up.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.8.0/dist/effects/level-up.js.map

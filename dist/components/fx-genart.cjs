@@ -133,4 +133,4 @@ exports.PALETTES = PALETTES;
 exports.meshGradient = meshGradient;
 exports.registerGenArtPack = registerGenArtPack;
 exports.seededRandom = seededRandom;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.7.0/dist/components/fx-genart.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.8.0/dist/components/fx-genart.cjs.map

@@ -92,4 +92,4 @@ function defineCountdown(tag = 'usa-countdown') {
 }
 
 export { defineCountdown as d, splitTime as s };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.7.0/dist/chunks/countdown-WDZxXQz7.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.8.0/dist/chunks/countdown-WDZxXQz7.js.map
