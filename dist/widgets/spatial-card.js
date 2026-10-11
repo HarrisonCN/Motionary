@@ -51,4 +51,4 @@ function defineSpatialCard(tag = 'usa-spatial-card') {
 }
 
 export { defineSpatialCard };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.0.0/dist/widgets/spatial-card.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.1.0/dist/widgets/spatial-card.js.map

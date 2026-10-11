@@ -1,6 +1,6 @@
 'use strict';
 
-var components_motion = require('../chunks/index-B65QsFQk.cjs');
+var components_motion = require('../chunks/index-C9_FEsfz.cjs');
 var play = require('../chunks/play-DCeKlDqE.cjs');
 
 /**
@@ -40,4 +40,4 @@ function playScene(root, doc, options = {}) {
 }
 
 exports.playScene = playScene;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.0.0/dist/components/motion-scene.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.1.0/dist/components/motion-scene.cjs.map

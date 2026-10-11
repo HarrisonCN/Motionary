@@ -13,6 +13,8 @@ export const LAYER_ALIASES = {
   'motion/scene': 'components/motion-scene',
   scene: 'components/scene-v2',
   'compat-v13': 'components/compat-v13',
+  // 14.1: Motion Tokens 2.0
+  tokens: 'components/motion-tokens',
 };
 
 /**

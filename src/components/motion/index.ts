@@ -27,7 +27,7 @@
  */
 import { applyFrame } from '../base';
 import { resolvePosition, TIMELINE_PRESETS } from '../timeline/core';
-import { resolveDurationToken, resolveEasingToken, MOTION_TOKENS } from '../tokens/index';
+import { resolveDurationToken, resolveEasingToken, motionToken } from '../tokens/index';
 import { springSamples, resolveSpring, linearEasing, supportsLinearEasing } from '../physics/spring';
 import type { SpringInput } from '../physics/spring';
 import { control, group, loop } from './controls';
@@ -236,7 +236,8 @@ export function spring(target: MotionTarget, a?: any, b?: any, c?: any): MotionC
   const input: SpringInput = fn ? a : b;
   const o = (fn ? b : c) || {};
   const tok = typeof input === 'string' && /^\{spring\.(.+)\}$/.exec(input);
-  const cfg = tok ? ((MOTION_TOKENS.spring as any)[tok[1]] && resolveSpring((MOTION_TOKENS.spring as any)[tok[1]])) || undefined : input;
+  const st = tok && motionToken('spring', tok[1]); // 14.1: the active token set (applyMotionTokens / applyMotionTokenSet), then the defaults
+  const cfg = tok ? (st && resolveSpring(st)) || undefined : input;
   const { values, duration } = springSamples(cfg);
   const css = supportsLinearEasing() ? linearEasing(values) : 'cubic-bezier(0.34, 1.56, 0.64, 1)';
   const opts: MotionOptions = { ...o, duration, easing: pts(values) };

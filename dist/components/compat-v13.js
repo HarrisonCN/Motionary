@@ -108,4 +108,4 @@ function normalizeAnimation(input) {
 }
 
 export { COMPAT_V13, installCompatV13, normalizeAnimation, upgradeLegacyAnimation };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.0.0/dist/components/compat-v13.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.1.0/dist/components/compat-v13.js.map

@@ -7,6 +7,59 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [14.1.0] - 2026-10-11
+
+**Motion Tokens 2.0**. One token set for easing curves, durations, springs, spatial distances and motion semantics,
+with modes (reduced motion built in), a W3C Design Tokens importer / exporter, CSS custom properties, Motion Engine v2 /
+Scene Format v2 integration and a Figma Variables adapter. No breaking changes: the 4.2 / 10.6 tokens API is unchanged.
+Zero runtime dependencies; `motionary/components/lite` stays ≤ 70 KB gzip; no budget raised (the new entry has its own
+budget line). [docs/motion-tokens.md](docs/motion-tokens.md)
+
+### Added
+
+- **`motionary/tokens`** (= `motionary/components/motion-tokens`; own entry with its own 10 KB budget, not in lite):
+  - token set `MotionTokenSet`: `duration`, `easing`, `spring`, **`distance`** (px; `none` · `xs` · `sm` · `md` · `lg` · `xl`)
+    and **`semantic`** (`enter` / `exit` / `emphasis` / `transition`; each entry is `{ duration, easing?, delay?, distance?,
+    spring? }` with literals or `"{group.name}"` references)
+  - `MOTION_TOKENS_2`, `defineMotionTokens()`, `resolveMotionToken()`, `resolveSemantic()`, `motionOptions()`,
+    `motionKeyframes()`, `validateMotionTokens()`
+- **Modes:** `withMode(set, mode | modes[])`.
+  - **`reduced` is built in**: no travel, durations ≤ 150 ms, no overshooting curves, critically damped springs.
+    Explicit `modes.reduced` overrides apply on top.
+  - `compact` ships in the defaults; custom modes are named overrides.
+- **W3C Design Tokens (DTCG 2025.10):** `motionTokenSetToDTCG()` / `motionTokenSetFromDTCG()`.
+  - The export holds typed `duration` / `cubicBezier` / `dimension` groups and semantic `transition` tokens with
+    aliases. Springs, semantic distance / spring and modes go in `$extensions["org.motionary"]`.
+  - A Motionary export imports back to an equal set. Foreign files work too: the motion group is found anywhere,
+    `$type` is inherited, aliases are resolved, and seconds / rem are converted.
+- **CSS custom properties:** `motionTokenSetToCss()` / `motionTokenSetVars()`.
+  - Primitives (`--usa-distance-md: 16px` …) plus semantic vars that reference them
+    (`--usa-motion-enter-default-duration: var(--usa-duration-normal)`).
+  - Each mode holds only what changes: `reduced` under `@media (prefers-reduced-motion: reduce)`, and every mode
+    under `[data-usa-motion-mode~="<mode>"]`.
+- **Motion Engine v2 / Scene Format v2 integration:**
+  - `applyMotionTokenSet(set, { mode })` writes the variables and makes `{duration.*}` / `{easing.*}` / `{spring.*}`
+    references in `motionary/motion`, `motionary/motion/scene` and the components resolve to the set. `mode: 'auto'`
+    follows `prefers-reduced-motion`. Returns undo.
+  - `toSceneTokens()` / `withSceneTokens()` give scene v2 documents scene-local tokens, so custom names validate and
+    play.
+- **Figma Variables adapter** (REST API shapes, no network calls):
+  - `motionTokensToFigma()` builds a `POST /v1/files/:key/variables` body. It has one collection and one Figma mode per
+    token-set mode (`reduced` ↔ "Reduced motion"). Variables are named `motion/<group>/<name>`: FLOAT / STRING, springs
+    as three FLOATs, semantic tokens as `VARIABLE_ALIAS` values. Each carries `codeSyntax.WEB`.
+  - `motionTokensFromFigma()` reads a `GET /v1/files/:key/variables/local` response, or such a body. Non-default modes
+    become token-set modes holding only what differs.
+- **CLI:** `npx motionary tokens import-figma <file> [--css]`, `export-figma [tokens.json] [--collection] [--modes]`,
+  `validate <file>` (exit 1 on problems), `css [tokens.json]`, each with `--out`.
+
+### Changed
+
+- `spring(target, '{spring.x}')` in `motionary/motion` now reads the active token set (`applyMotionTokens` /
+  `applyMotionTokenSet`), then the defaults. Before, it read only the defaults; with no set applied, the result is
+  the same.
+- npm `latest` now follows the newest release of the current major, minor releases included, once the post-publish
+  checks pass (14.1.0). Each minor keeps its own `v<major>-<minor>` tag.
+
 ## [14.0.0] - 2026-10-11
 
 **Motion Engine v2** — MAJOR. One composable animation API with one controller interface, Scene Format v2 as the

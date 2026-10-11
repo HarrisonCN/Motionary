@@ -4,6 +4,7 @@
 //   npx motionary export --target css|wxss|arkts   presets + motion tokens for other platforms (12.1)
 //   npx motionary migrate <files…> [--write|--out f] [--diff] [--report] [--json] [--tokenize]   v1 motion JSON → scene v2 (13.9; official format since 14.0)
 //   npx motionary migrate --code [paths…] [--write] [--json]   rewrite the 14.0 import moves in source files (14.0)
+//   npx motionary tokens import-figma|export-figma|validate|css …   Motion Tokens 2.0 ↔ DTCG / Figma Variables / CSS (14.1)
 //   npx motionary codemod <5–13> [args…]   run an older usa-codemod-<n> (5–10 left the package bin in 14.0)
 //   npx motionary help
 // Old subpaths still work (removed in 13.0) and never warn at runtime; `doctor` is how a project finds them.
@@ -51,6 +52,15 @@ const HELP = `motionary <command>
                              motionary/components/scene-v2 → motionary/scene, usa-codemod-5…10 scripts → motionary codemod <n>,
                              CDN motionary@10…13/ → motionary@14/.
                              Dry run by default (default path: current directory)
+  tokens import-figma <file> [--out file] [--css] [--collection name]
+                             Figma Variables JSON (GET /v1/files/:key/variables/local response or a POST body) →
+                             Motion Tokens 2.0 as W3C Design Tokens (DTCG) JSON, or CSS with --css — docs/motion-tokens.md
+  tokens export-figma [tokens.json] [--out file] [--collection name] [--modes reduced,compact]
+                             DTCG tokens (default: the built-in set) → a Figma Variables POST /v1/files/:key/variables body
+                             (no network calls: send it with your own Figma token)
+  tokens validate <file>     check a DTCG or Figma Variables tokens file. Exit 1 when it has problems
+  tokens css [tokens.json] [--out file]
+                             CSS custom properties, with reduced-motion and mode blocks
   codemod <5–13> [--write] [paths…]
                              run the usa-codemod-<n> upgrade tool (5–10 are 13.x compat tools, no longer package bins)
   help                       this text
@@ -170,6 +180,58 @@ export async function runCodemod(rest) {
   return 0;
 }
 
+/** `motionary tokens …` (14.1): `T` = the motion-tokens module (dist/components/motion-tokens.cjs). Returns the exit code. */
+export function runTokens(rest, T) {
+  const USAGE = 'usage: motionary tokens <import-figma <file> | export-figma [tokens.json] | validate <file> | css [tokens.json]> [--out file] [--css] [--collection name] [--modes a,b]';
+  const [sub, ...args] = rest;
+  const opt = (n) => { const i = args.indexOf(n); return i >= 0 ? args[i + 1] : undefined; };
+  const VAL = new Set(['--out', '--collection', '--modes']);
+  const files = args.filter((a, i) => !a.startsWith('--') && !VAL.has(args[i - 1]));
+  const load = (f) => {
+    try { return JSON.parse(readFileSync(f, 'utf8')); } catch (e) { console.error(`motionary tokens: cannot read ${f}: ${e.code === 'ENOENT' ? 'no such file' : e.message}`); return undefined; }
+  };
+  const isFigma = (j) => !!(j && ((j.meta && j.meta.variables) || Array.isArray(j.variables)));
+  const emit = (text) => {
+    const out = opt('--out');
+    if (out) { writeFileSync(out, text.endsWith('\n') ? text : text + '\n'); console.error(`motionary tokens: wrote ${out}`); }
+    else process.stdout.write(text.endsWith('\n') ? text : text + '\n');
+    return 0;
+  };
+  const fromFile = (j) => (isFigma(j) ? T.motionTokensFromFigma(j, { collection: opt('--collection') }) : T.motionTokenSetFromDTCG(j));
+  try {
+    if (sub === 'import-figma' || sub === 'export-figma' || sub === 'css' || sub === 'validate') {
+      const needFile = sub === 'import-figma' || sub === 'validate';
+      if (needFile && !files[0]) { console.error(USAGE); return 2; }
+      const json = files[0] ? load(files[0]) : undefined;
+      if (files[0] && json === undefined) return 2;
+      if (sub === 'validate') {
+        let problems = [];
+        if (!isFigma(json)) problems = T.validateDesignTokens(json);
+        if (!problems.length) { try { problems = T.validateMotionTokens(fromFile(json)); } catch (e) { problems = [String(e.message).replace('[motionary] tokens: ', '')]; } }
+        if (!problems.length) { console.log(`motionary tokens: ${files[0]} ✓ valid (${isFigma(json) ? 'Figma Variables' : 'DTCG'})`); return 0; }
+        for (const p of problems) console.error(`  ${p}`);
+        console.error(`${problems.length} problem(s) in ${files[0]}`);
+        return 1;
+      }
+      if (sub === 'import-figma') {
+        if (!isFigma(json)) { console.error(`motionary tokens: ${files[0]} is not Figma Variables JSON (meta.variables or a POST body)`); return 2; }
+        const set = T.motionTokensFromFigma(json, { collection: opt('--collection') });
+        for (const p of T.validateMotionTokens(set)) console.error(`  warning: ${p}`);
+        return emit(args.includes('--css') ? T.motionTokenSetToCss(set) : JSON.stringify(T.motionTokenSetToDTCG(set), null, 2));
+      }
+      const set = json === undefined ? T.MOTION_TOKENS_2 : fromFile(json);
+      if (sub === 'css') return emit(T.motionTokenSetToCss(set));
+      const modes = opt('--modes');
+      return emit(JSON.stringify(T.motionTokensToFigma(set, { collection: opt('--collection'), modes: modes ? modes.split(',').map((m) => m.trim()).filter(Boolean) : undefined }), null, 2));
+    }
+  } catch (e) {
+    console.error(`motionary tokens: ${String(e.message).replace('[motionary] tokens: ', '')}`);
+    return 1;
+  }
+  console.error(USAGE);
+  return 2;
+}
+
 const TOKENS = () => { try { return JSON.parse(readFileSync(new URL('../docs/motion.tokens.json', import.meta.url), 'utf8')); } catch { return JSON.parse(readFileSync(join(process.cwd(), 'docs/motion.tokens.json'), 'utf8')); } }; // non-file import.meta.url under jsdom
 
 /** env.presets / env.tokens are for tests; the CLI loads PRESETS from the built package (dist/index.js). */
@@ -192,6 +254,7 @@ export function main(argv, env = {}) {
     });
   }
   if (cmd === 'codemod') return runCodemod(rest);
+  if (cmd === 'tokens') return runTokens(rest, env.motionTokens || createRequire(import.meta.url)('../dist/components/motion-tokens.cjs'));
   if (cmd === 'migrate' && rest.includes('--code')) return runMigrateCode(rest.filter((a) => a !== '--code'));
   if (cmd === 'migrate') {
     if (env.sceneV2) return runMigrate(rest, env.sceneV2);
