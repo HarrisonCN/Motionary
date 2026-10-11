@@ -7,6 +7,47 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [13.6.0] - 2026-10-11
+
+Timeline editing model. A new editor-only entry, `motionary/components/timeline-editor`, gives timeline UIs (the
+Timeline Playground, your own tools) a versioned document format, layer and keyframe batch operations, undo / redo
+and a reproducible preview. Additive only: no existing API changed, nothing in `motionary`, `motionary/core`,
+`motionary/components/lite` or `motionary/components/timeline` imports it. Zero runtime dependencies; existing size
+budgets unchanged (`motionary/components/lite` 69.99 / 70.00 KB); the new entry has its own budget (10 KB gzip). [docs/timeline-editor.md](docs/timeline-editor.md)
+
+### Added
+
+- **Format `motionary-timeline` v1** — layers (tracks and groups; `locked`, `muted`, `solo`), keyframes with
+  per-segment easing, `seed`, free-form `meta`. `validateTimelineDoc` (every problem with its path, never throws),
+  `parseTimelineDoc` (throws `TimelineDocError`; rejects malformed, oversized, unknown-key, newer-version,
+  prototype-polluting and cyclic input), `serializeTimelineDoc` (canonical and lossless: parse → serialize →
+  parse is deep-equal and serializing again is byte-identical), `TIMELINE_DOC_SCHEMA` +
+  [docs/timeline-doc.schema.json](docs/timeline-doc.schema.json) (JSON Schema 2020-12), golden fixtures
+  (`test/fixtures/timeline/`).
+- Player JSON interop (`use-scroll-animate/animation` v1): `timelineDocToAnimation` (mute / solo applied, seeded `random()` resolved) and
+  `timelineDocFromAnimation` (keyframe and preset tracks).
+- **Layers**: `addLayer`, `removeLayers`, `updateLayers`, `groupLayers`, `ungroupLayer`, `moveLayer` (reorder, into /
+  out of groups), `isLayerActive`, `isLayerLocked`.
+- **Keyframe batch editing**: `shiftKeyframes`, `scaleKeyframes`, `setKeyframeEasing`, `copyKeyframes` /
+  `pasteKeyframes`, `removeKeyframes`, `setKeyframeProps`, `addKeyframe`, `editableKeyframes`; locked layers are
+  never edited; operations are pure and share unchanged layers.
+- **Undo / redo**: `createTimelineHistory` (bounded stack, coalescing by key and time window, `begin` / `commit` /
+  `cancel` gestures, labels, `subscribe`), `bindHistoryKeys` (⌘/Ctrl+Z, ⇧⌘/Ctrl+Shift+Z, Ctrl+Y; ignored in text
+  fields), `historyKeyAction`.
+- **Reproducible preview**: `sampleTimelineDoc(doc, t)` (pure: same time → same frame state), `interpolateValue`,
+  seeded `random(a, b)` values (`createSeededRandom`, `resolveRandom`), `createFixedClock`, `createTimelinePreview`
+  (writes the full state on every seek, clears what stopped animating).
+- Tests: `test/timeline-editor-13-6.test.ts` (54) and `test/browser/timeline-editor.spec.mjs` (DOM-state determinism
+  in Chromium, Firefox and WebKit; pixel-identical snapshots in Chromium after stepping, jumping, scrubbing backwards
+  and reloading).
+
+### Deferred
+
+- The Timeline Playground UI on top of this model (layer panel, marquee multi-select, curve editor, undo buttons) —
+  moves to the Motion Studio work (14.4). The keyframe-editor widget and the showcase playground are unchanged.
+- Visual snapshot baselines committed to the repository: 13.6 compares pixels within a run (stepped vs jumped vs
+  reloaded), which is font- and GPU-independent.
+
 ## [13.5.0] - 2026-10-11
 
 Framework integration hardening. A new regression matrix server-renders and hydrates a small app per framework

@@ -41,11 +41,13 @@ const ease = (e: string | undefined): Ease => {
 /**
  * Interpolate two values at `p` (0–1): numbers, and strings whose non-numeric
  * parts match (`translateX(10px) scale(1)`, `rgb(…)`, `#hex` colours); anything
- * else switches at the midpoint (like CSS discrete animation).
+ * else switches at the midpoint (like CSS discrete animation). `p` outside 0–1
+ * (overshooting easings) extrapolates numbers.
  */
 export function interpolateValue(a: TimelineValue, b: TimelineValue, p: number): TimelineValue {
-  if (p <= 0) return a;
-  if (p >= 1) return b;
+  // eased progress may leave 0–1 (back / elastic overshoot): numbers extrapolate, discrete values clamp
+  if (p === 0) return a;
+  if (p === 1) return b;
   if (typeof a === 'number' && typeof b === 'number') return round(a + (b - a) * p);
   const sa = HEX.test(String(a).trim()) && HEX.test(String(b).trim()) ? hexRgb(String(a)) : String(a);
   const sb = sa !== String(a) ? hexRgb(String(b)) : String(b);
@@ -57,7 +59,7 @@ export function interpolateValue(a: TimelineValue, b: TimelineValue, p: number):
     return sa.replace(NUM, () => {
       const k = i++;
       const v = +na[k] + (+nb[k] - +na[k]) * p;
-      return String(rgb && k < 3 ? Math.round(v) : round(v));
+      return String(rgb && k < 3 ? Math.min(255, Math.max(0, Math.round(v))) : round(v));
     });
   }
   return p < 0.5 ? a : b;

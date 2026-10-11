@@ -9,7 +9,7 @@ unchanged.
 |---|---|
 | Motion Core | `motionary/core` (`createMotion()`, zero-dep, ≤ 10 KB gzip) · `motionary/runtime` (ticker, tween, timeline, `use()`) |
 | Runtime | `motionary/runtime/<module>` — scroll, smooth, text, drag-snap, physics, vector, gl, format-* … (tiers in [runtime-tiers.md](./runtime-tiers.md)) |
-| Components | `motionary/components` · `motionary/components/<category>` · `motionary/widgets/<name>` · `motionary/effects/<name>` |
+| Components | `motionary/components` · `motionary/components/<category>` · `motionary/widgets/<name>` · `motionary/effects/<name>` · `motionary/components/timeline-editor` (13.6, editor-only model: [timeline-editor.md](./timeline-editor.md)) |
 | Motion Intelligence & Tooling | `motionary/tooling/ai` (local parser + optional LLM provider, [ai-provider.md](./ai-provider.md)) · `motionary/tooling/design` · `motionary/tooling/manifest.json` · `motionary/tooling/manifest.schema.json` · `npx motionary doctor` · `npx motionary-mcp` · `npx usa-codemod-*` |
 | Public API — frameworks | `motionary/react` · `motionary/vue` · `motionary/svelte` · `motionary/solid` · **`motionary/angular`** (new) |
 

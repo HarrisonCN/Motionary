@@ -356,6 +356,12 @@ describe('13.6 reproducible preview', () => {
   });
   it('interpolates numbers, matching strings, hex colours; steps / easing applied; discrete otherwise', () => {
     expect(TE.interpolateValue(0, 10, 0.25)).toBe(2.5);
+    // overshooting easings (back-out, elastic) extrapolate instead of clamping
+    expect(TE.interpolateValue(0, 10, 1.1)).toBe(11);
+    expect(TE.interpolateValue('scale(0.6)', 'scale(1)', 1.05)).toBe('scale(1.02)');
+    expect(TE.interpolateValue('#000000', '#ffffff', 1.2)).toBe('rgb(255, 255, 255)');
+    const back = TE.sampleTimelineDoc(doc([track('o', [['o1', 0, { x: 0 }, 'back-out'], ['o2', 100, { x: 100 }]])]), 70).layers.o.x as number;
+    expect(back).toBeGreaterThan(100);
     expect(TE.interpolateValue('translateX(0px) scale(1)', 'translateX(10px) scale(2)', 0.5)).toBe('translateX(5px) scale(1.5)');
     expect(TE.interpolateValue('#000', '#ffffff', 0.5)).toBe('rgb(128, 128, 128)');
     expect(TE.interpolateValue('none', 'blur(4px)', 0.4)).toBe('none');
