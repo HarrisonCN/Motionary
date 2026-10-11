@@ -5,7 +5,7 @@
 import * as React from 'react';
 import { useCallback, useEffect, useState } from 'react';
 import { bindUsa } from 'motionary/components/react';
-import type {} from 'motionary/components/react-jsx'; // JSX types for <usa-*> (generated from the manifest)
+// JSX types for <usa-*>: ../types/usa-jsx.d.ts (motionary/components/jsx, generated from the manifest)
 
 const fx = (): any => (globalThis as any).__fx;
 

@@ -1,6 +1,6 @@
 {
   "name": "motionary",
-  "version": "13.4.0",
+  "version": "13.5.0",
   "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 209 animated Web Components (91 core, 118 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -4130,7 +4130,8 @@
     "contract:preview": "node scripts/contract-audit.mjs --preview",
     "figma:plugin": "node scripts/gen-figma-plugin.mjs",
     "facts": "node scripts/facts.mjs",
-    "check:docs": "node scripts/facts.mjs --check && node scripts/gen-component-docs.mjs --check && node scripts/gen-entries.mjs --check && node scripts/gen-runtime-docs.mjs --check && node scripts/gen-figma-plugin.mjs --check && node scripts/check-versions.mjs",
+    "gen:framework-types": "node scripts/gen-framework-types.mjs",
+    "check:docs": "node scripts/facts.mjs --check && node scripts/gen-component-docs.mjs --check && node scripts/gen-entries.mjs --check && node scripts/gen-runtime-docs.mjs --check && node scripts/gen-figma-plugin.mjs --check && node scripts/gen-framework-types.mjs --check && node scripts/check-versions.mjs",
     "release:gate": "node scripts/release-gate.mjs"
   },
   "keywords": [

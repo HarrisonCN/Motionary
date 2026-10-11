@@ -27,6 +27,12 @@ import { createUsaComponents } from 'motionary/components/react';
 export const { UsaButton, UsaToggle, UsaCard } = createUsaComponents(React);
 // <UsaToggle checked={on} onUsaChange={(e) => setOn(e.detail.checked)} />
 ```
+**React 19 + SSR (13.5.0):** React 19 sets properties on custom elements natively, but it does **not** attach custom-element event props (`onusa:change`) to server-rendered elements it hydrates (they only work on elements created on the client). In SSR/hydrated trees bind `usa:*` events with a ref callback over `bindUsa`:
+```tsx
+'use client';
+import { bindUsa } from 'motionary/components/react';
+<usa-switch checked={on} ref={(el) => { if (!el) return; const b = bindUsa(el, { on: { change: (e) => setOn(e.detail.checked) } }); return () => b.destroy(); }} />
+```
 Page transitions in the App Router: wrap `router.push` in `pageTransition(() => router.push(href), { effect: 'slide' })`.
 
 ## Astro

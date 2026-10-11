@@ -1,0 +1,72 @@
+name: Frameworks
+
+# 13.5.0: framework regression matrix (test/frameworks, docs/frameworks-matrix.md). Its own workflow on purpose: every job in
+# ci.yml is a required check for the release gate (.github/required-checks.json); this one is NOT required.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+concurrency:
+  group: frameworks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  frameworks:
+    name: Frameworks (${{ matrix.fw }})
+    # 13.5.0: framework regression matrix (test/frameworks, docs/frameworks-matrix.md) — SSR in Node, hydration,
+    # property binding, usa:* events, unmount / keep-alive and fixture type-check, Chromium only. NOT a required check.
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        fw: [react18, react19, vue3, svelte5, solid, angular]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npm run build
+      - name: Install the ${{ matrix.fw }} fixture (pinned versions)
+        run: cd test/frameworks/${{ matrix.fw }} && npm install --no-audit --no-fund --no-save
+      - name: Build fixture (SSR + client bundle; fails on bundler / SSR warnings)
+        run: node test/frameworks/build.mjs ${{ matrix.fw }}
+      - name: Type-check fixture against the built types (tsc --noEmit)
+        run: node test/frameworks/typecheck.mjs ${{ matrix.fw }}
+      - name: Playwright version
+        id: pw
+        run: echo "version=$(node -p "require('@playwright/test/package.json').version")" >> "$GITHUB_OUTPUT"
+      - name: Cache Playwright browsers
+        id: pw-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ steps.pw.outputs.version }}-chromium
+      - name: Install Chromium (with system dependencies)
+        if: steps.pw-cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps chromium
+      - name: Install system dependencies (browser restored from cache)
+        if: steps.pw-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium
+      - name: Matrix — SSR hydration, properties, usa:* events, unmount (+ keep-alive)
+        run: npx playwright test -c test/frameworks/playwright.config.mjs
+        env:
+          FW: ${{ matrix.fw }}
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: frameworks-results-${{ matrix.fw }}
+          path: test-results/
+          retention-days: 14
+          if-no-files-found: ignore

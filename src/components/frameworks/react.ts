@@ -16,6 +16,16 @@
  *
  * JSX types for the raw tags (`<usa-card effect="flip">`) come from
  * `motionary/components/jsx` (see `UsaIntrinsicElements`).
+ *
+ * React 19 + SSR (13.5.0): React 19 does NOT attach custom-element event props
+ * (`onusa:change`) to server-rendered elements it hydrates (they work on
+ * client-created elements). For SSR/hydrated trees bind events with a ref
+ * callback over `bindUsa` (re-exported here):
+ *
+ * ```tsx
+ * import { bindUsa } from 'motionary/components/react';
+ * <usa-switch ref={(el) => { if (!el) return; const b = bindUsa(el, { on: { change: onChange } }); return () => b.destroy(); }} />
+ * ```
  */
 import { COMPONENT_CATEGORIES } from '../index-tags';
 

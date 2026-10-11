@@ -2,18 +2,27 @@
  * motionary/angular — Angular integration (v3.8; 11.5: top-level entry `motionary/angular`, parity with the
  * React / Vue / Svelte / Solid entries). The old path `motionary/angular` is the same file and is
  * deprecated (removed in 13.0). Angular renders `<usa-*>` tags once the component (or NgModule) allows
- * custom elements with `CUSTOM_ELEMENTS_SCHEMA`; property binding `[checked]="on"` and event binding
- * `(usa:change)="…"` then work as is. This entry is framework-free (no `@angular/*` import):
+ * custom elements with `CUSTOM_ELEMENTS_SCHEMA`; property binding `[checked]="on"` works as is. Events: 13.5.0 —
+ * `(usa:change)="…"` does NOT compile in Angular 17+ (a colon in an event binding names a global target), so bind
+ * `usa:*` events with a small `[usaOn]` directive over `bindUsa`. This entry is framework-free (no `@angular/*` import):
  *
  * ```ts
- * import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
- * import { provideUsa, usaDetail } from 'motionary/angular';
+ * import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, Component, Directive, ElementRef, Input, inject } from '@angular/core';
+ * import { bindUsa, provideUsa, usaDetail } from 'motionary/angular';
  *
  * // app.config.ts
  * providers: [provideUsa(APP_INITIALIZER, ['click', 'ui'])]
  *
- * @Component({ standalone: true, schemas: [CUSTOM_ELEMENTS_SCHEMA],
- *   template: `<usa-switch [checked]="on" (usa:change)="on = $any($event).detail.checked"></usa-switch>` })
+ * @Directive({ selector: '[usaOn]', standalone: true })
+ * export class UsaOn {
+ *   private b = bindUsa(inject(ElementRef).nativeElement);
+ *   @Input({ required: true }) set usaOn(on: Record<string, (e: CustomEvent) => void>) { this.b.update({ on }); }
+ *   ngOnDestroy() { this.b.destroy(); }
+ * }
+ *
+ * @Component({ standalone: true, imports: [UsaOn], schemas: [CUSTOM_ELEMENTS_SCHEMA],
+ *   template: `<usa-switch [checked]="on" [usaOn]="{ change: onChange }"></usa-switch>` })
+ * class App { on = false; onChange = (e: CustomEvent) => (this.on = usaDetail(e).checked); }
  * ```
  * Parity with the other wrappers: register (`defineUsa` · `usaInitializer` · `provideUsa`, like Vue's `UsaPlugin`),
  * tag list (`USA_TAGS`, like React), custom-element predicate (`isUsaElement`, like Vue), imperative binding
@@ -24,6 +33,8 @@ import { COMPONENT_CATEGORIES } from '../index-tags';
 
 export { bindUsa, usaEventName } from './bind';
 export type { UsaBinding } from './bind';
+/** 13.5.0: generated per-tag attribute / `usa:*` event maps (e.g. type `[usaOn]` handlers or `HTMLElementTagNameMap` lookups). */
+export type { UsaElementAttributeMap, UsaElementEventMap, UsaElementTag } from './elements.generated';
 
 /** All `<usa-*>` tags shipped by the package (same list as `motionary/react`'s wrappers). */
 export const USA_TAGS: string[] = /*#__PURE__*/ Object.values(COMPONENT_CATEGORIES).flat() as string[];
@@ -48,5 +59,5 @@ export function defineUsa(categories?: ComponentCategory[]): void {
   if (typeof window !== 'undefined') defineComponents(categories);
 }
 
-/** Read `event.detail` from a `usa:*` event in a template handler: `(usa:change)="on = usaDetail($event).checked"`. */
+/** Read `event.detail` from a `usa:*` event in a `[usaOn]` handler: `onChange = (e: CustomEvent) => (this.on = usaDetail(e).checked)`. */
 export const usaDetail = <T = any>(e: Event): T => (e as CustomEvent<T>).detail;
