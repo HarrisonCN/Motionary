@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-Do-R_9gU.cjs');
+var base = require('../chunks/base-BvH4nAcv.cjs');
 
 /** Minimal WebGL runner: one full-canvas quad, one fragment shader, optional image texture. */
 const VERTEX = 'attribute vec2 p;varying vec2 v_uv;void main(){v_uv=p*.5+.5;gl_Position=vec4(p,0.,1.);}';
@@ -459,4 +459,4 @@ exports.glQuad = glQuad;
 exports.postFxShader = postFxShader;
 exports.supportsWebGL = supportsWebGL;
 exports.watchPowerSaver = watchPowerSaver;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/webgl.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/components/webgl.cjs.map

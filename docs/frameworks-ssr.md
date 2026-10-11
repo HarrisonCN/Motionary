@@ -27,6 +27,12 @@ import { createUsaComponents } from 'motionary/components/react';
 export const { UsaButton, UsaToggle, UsaCard } = createUsaComponents(React);
 // <UsaToggle checked={on} onUsaChange={(e) => setOn(e.detail.checked)} />
 ```
+**React 19 + SSR (13.5.0):** React 19 sets properties on custom elements natively, but it does **not** attach custom-element event props (`onusa:change`) to server-rendered elements it hydrates (they only work on elements created on the client). In SSR/hydrated trees bind `usa:*` events with a ref callback over `bindUsa`:
+```tsx
+'use client';
+import { bindUsa } from 'motionary/components/react';
+<usa-switch checked={on} ref={(el) => { if (!el) return; const b = bindUsa(el, { on: { change: (e) => setOn(e.detail.checked) } }); return () => b.destroy(); }} />
+```
 Page transitions in the App Router: wrap `router.push` in `pageTransition(() => router.push(href), { effect: 'slide' })`.
 
 ## Astro
@@ -58,7 +64,7 @@ app.use(UsaPlugin);            // or app.use(UsaPlugin, { categories: ['click', 
 `<usa-switch :checked.prop="on" @usa:change="on = $event.detail.checked" />`
 
 ## Svelte / Solid / Angular
-Custom elements work as-is: Svelte (`on:usa:change`), Solid (`on:usa:change`, `prop:checked`), Angular (`schemas: [CUSTOM_ELEMENTS_SCHEMA]`). Call `defineComponents()` or `lazyDefine()` in the client entry.
+Custom elements work as-is: Svelte (`use:usa` action — `on:usa:change` does not compile in Svelte 3/4 and `onusa:change` warns `attribute_illegal_colon` in Svelte 5), Solid (`prop:checked` + `use:usa` directive — `on:usa:change` is not valid JSX), Angular (`schemas: [CUSTOM_ELEMENTS_SCHEMA]`, `[checked]` + a `[usaOn]` directive over `bindUsa` — `(usa:change)` does not compile in Angular 17+, see below). Every pattern here is covered by the framework regression matrix ([frameworks-matrix.md](frameworks-matrix.md)). Call `defineComponents()` or `lazyDefine()` in the client entry.
 
 ## Lazy registration
 `lazyDefine()` (from `motionary/components/lazy`) watches the DOM and dynamically imports only the categories whose tags appear — a page with just `<usa-button>` loads the click chunk only.
@@ -79,22 +85,32 @@ Custom elements work as-is: Svelte (`on:usa:change`), Solid (`on:usa:change`, `p
 
 ```tsx
 import { onMount } from 'solid-js';
-import { defineUsa } from 'motionary/components/solid';
+import { defineUsa, usa } from 'motionary/components/solid';
+false && usa; // keep the directive import (Solid convention)
 onMount(() => defineUsa());
-<usa-switch prop:checked={on()} on:usa:change={(e) => setOn(e.detail.checked)} />;
+// `on:usa:change` is not valid JSX (two colons) — listen through the directive:
+<usa-switch prop:checked={on()} use:usa={{ on: { change: (e) => setOn(e.detail.checked) } }} />;
 ```
 
 ## Angular (v3.8)
 
 ```ts
-import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
-import { usaInitializer, usaDetail } from 'motionary/angular';
+import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, Component, DestroyRef, Directive, ElementRef, Input, inject } from '@angular/core';
+import { bindUsa, usaInitializer, usaDetail } from 'motionary/angular';
 // app.config.ts
 providers: [{ provide: APP_INITIALIZER, multi: true, useFactory: usaInitializer() }];
+// 13.5.0: `(usa:change)` does not compile in Angular 17+ (a colon in an event binding names a global target:
+// window / document / body) — bind usa:* events with this small directive over bindUsa:
+@Directive({ selector: '[usaOn]', standalone: true })
+export class UsaOn {
+  private b = bindUsa(inject(ElementRef).nativeElement);
+  @Input({ required: true }) set usaOn(on: Record<string, (e: CustomEvent) => void>) { this.b.update({ on }); }
+  constructor() { inject(DestroyRef).onDestroy(() => this.b.destroy()); }
+}
 // component
-@Component({ standalone: true, schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  template: `<usa-switch [checked]="on" (usa:change)="on = detail($event).checked"></usa-switch>` })
-export class Settings { on = false; detail = usaDetail; }
+@Component({ standalone: true, imports: [UsaOn], schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  template: `<usa-switch [checked]="on" [usaOn]="{ change: onChange }"></usa-switch>` })
+export class Settings { on = false; onChange = (e: Event) => (this.on = usaDetail(e).checked); }
 ```
 
 MAUI, Flutter WebView, Electron and Tauri: see [hybrid-apps.md](./hybrid-apps.md).

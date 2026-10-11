@@ -46,18 +46,12 @@ function adaptKeyframes(frames, level = config.motionSensitivity) {
         return [frames[frames.length - 1]];
     return frames.map((f) => {
         const out = {};
-        for (const [k, v] of Object.entries(f)) {
-            if (k === 'offset' || k === 'easing' || k === 'composite')
+        for (const [k, v] of Object.entries(f))
+            if (k === 'offset' ||
+                k === 'easing' ||
+                k === 'composite' ||
+                (level === 'minimal' ? k === 'opacity' : !(k === 'rotate' || k === 'scale' || (k === 'transform' && VESTIBULAR.test(String(v))))))
                 out[k] = v;
-            else if (level === 'minimal') {
-                if (k === 'opacity')
-                    out[k] = v;
-            }
-            else if (k === 'rotate' || k === 'scale' || (k === 'transform' && VESTIBULAR.test(String(v))))
-                continue;
-            else
-                out[k] = v;
-        }
         return out;
     });
 }
@@ -140,7 +134,6 @@ function getBase() {
         constructor() {
             super(...arguments);
             this._cleanups = [];
-            this._connected = false;
         }
         get reduced() {
             return prefersReducedMotion();
@@ -149,17 +142,17 @@ function getBase() {
             if (this._connected)
                 return;
             this._connected = true;
+            // 13.5.0: a property set before the element was defined (React 18 wrappers, Vue `.prop`, Svelte, Angular
+            // `[prop]` while hydrating, then define) sits on the instance and hides the class's setter — move it through.
+            for (const [k, v] of Object.entries(this))
+                if (k in Object.getPrototypeOf(this))
+                    delete this[k], (this[k] = v);
             styleLoader?.(this.localName);
             // Upgraded while the parser is still inside us (a <script> in <head>
             // defined the element): children/text are not there yet, so wait.
             if (document.readyState === 'loading' && !this.nextSibling && !this.childNodes.length) {
-                const go = () => {
-                    if (this._connected && this.isConnected)
-                        this.mount();
-                };
-                document.addEventListener('DOMContentLoaded', go, { once: true });
-                this._cleanups.push(() => document.removeEventListener('DOMContentLoaded', go));
-                return;
+                // listen() = addEventListener + a cleanup that removes it (same as before, smaller)
+                return this.listen(document, 'DOMContentLoaded', () => this._connected && this.isConnected && this.mount(), { once: true });
             }
             this.mount();
         }
@@ -257,13 +250,8 @@ function animateWithMotion(el, keyframes, options) {
     trackAnimation(a);
     if (options.iterations !== Infinity) {
         active$1++;
-        let done = false;
-        const end = () => {
-            if (!done) {
-                done = true;
-                active$1--;
-            }
-        };
+        // settles exactly once (fulfilled or rejected), so no guard is needed
+        const end = () => void active$1--;
         a?.finished?.then(end, end);
     }
     return a;
@@ -11053,4 +11041,4 @@ const STYLE_BASE = new URL('../', import.meta.url).href;
 onDemandStyles(STYLE_BASE);
 
 export { ALL_TAGS, AMBIENT_EFFECTS, ANIM_ICONS, BRIDGE_PROTOCOL_VERSION, BUILTIN_EFFECTS, BUTTON_DEFORMS, CARD_EFFECTS, CLICK_EFFECTS, COMPONENT_CATEGORIES, CURSOR_MODES, EFFECT_KINDS, EFFECT_TRIGGERS, GL_FALLBACKS, JOINING_SCRIPT, LIVE_REGION_IDS, MASK_SHAPES, MORPH_ICONS, MOTION_SCALE, MOTION_SENSITIVITY, MOTION_SENSITIVITY_LEVELS, MOTION_TOKENS, PACKS, PACK_PRIMITIVES, PAGE_EFFECTS, PARTICLE_PRESETS, POST_EFFECTS, REVEAL_EFFECTS, SENSITIVITY_CSS, SHADERS, SPINNER_VARIANTS, SPRING_EFFECTS, SPRING_PRESETS, STATIC_ALTERNATIVES, STYLE_BASE, TIMELINE_PRESETS, VARIANTS, activeAnimations, adaptKeyframes, adoptVariants, animateWithMotion, animationBudget, announce, applyMotionTokens, applyNativeSettings, applyPack, auditMotionA11y, autoAnimate, autoDegrade, baselineReport, bindEffect, categoryOf, configureComponents, connectNativeShell, countUp, createSpring, defineAccordion, defineAcrylic, defineAmbient, defineAnimIcon, defineAurora, defineAutoAnimate, defineAutoSkeleton, defineAvatarStack, defineBackToTop, defineBackgroundComponents, defineBadge, defineBlobs, defineBottomSheet, defineButton, defineCard, defineCardComponents, defineCardStack, defineCarousel3d, defineCheck, defineCheckbox, defineClick, defineClickComponents, defineComponents, defineCounter, defineCube, defineCursor, defineDepth, defineDepthComponents, defineDialog, defineDistort, defineDotNetwork, defineDoubleTap, defineDraggable, defineDraw, defineDrawer, defineFab, defineFeedbackComponents, defineFullpage, defineFx, defineFxComponents, defineGestureComponents, defineGlitch, defineGradientText, defineGrain, defineGridGlow, defineHandwriting, defineHold, defineIconMorph, defineInteractionComponents, defineLayoutComponents, defineLike, defineLiquid, defineLoadingBar, defineMagnetic, defineMarquee, defineMaskReveal, defineMasonry, defineMorph, defineMotionSwitch, defineNavbar, defineOverscroll, definePack, definePacksComponents, definePageComponents, defineParticles, definePhysicsComponents, definePinchZoom, definePopover, definePostFx, definePress, defineProgress, definePullRefresh, defineReveal, defineRevealComponents, defineRipple, defineScramble, defineScrollHighlight, defineScrollProgress, defineScrolly, defineShader, defineShimmerText, defineSkeleton, defineSlider, defineSpinner, defineSplash, defineSplitText, defineSpotlight, defineSpring, defineStagger, defineStickyStack, defineSvgComponents, defineSwipeable, defineTabs, defineTextComponents, defineTextRotate, defineTilt, defineTimeline, defineTimelineComponents, defineToaster, defineTransitionComponents, defineTypewriter, defineUiComponents, defineViewSwitch, defineWaterRipple, defineWaveText, defineWebglComponents, detectNativeHost, deviceTilt, drawLines, easeOutExpo, enableMpaTransitions, exportDesignTokens, flip, flipFrames, fluentPreset, flyToCart, fragmentSource, gesture, getEffect, getMotionIntensity, getMotionLevel, getMotionSensitivity, getMotionTokens, glFallbackCss, glGovernor, glQuad, graphemes, haptic, hasEffect, importDesignTokens, importMotionTokens, interpolatePath, isTrustedMessage, linearEasing, listEffects, liveRegion, loadCategoryStyles, loadedStyles, loadingBar, masonryLayout, mergeMotionTokens, morphPath, morphTo, motionAllowed, motionScale, motionToken, motionTokensToCss, motionTokensToJSON, motionTokensToVars, motionVar, onDemandStyles, onFrame, orientationToTilt, pageTransition, parseDuration, parseEasing, parseNativeSettings, pathsCompatible, pinchScale, playEffect, postFxShader, postToNative, prefersReducedMotion, projectInertia, readScrollProgress, registerBuiltinEffects, registerEffect, registerEffects, requestOrientationPermission, resolveDurationToken, resolveEasingToken, resolvePosition, resolveSpring, resolveTokenAliases, restoreMotionIntensity, restoreMotionSensitivity, revealKeyframes, rubberBand, schedulerStats, scrambleFrame, scrollToTarget, setAnimationBudget, setFrameBudget, setMotionIntensity, setMotionLevel, setMotionSensitivity, setVariant, sharedTransition, smoothScroll, snapTo, splitOrder, splitText, splitTimeline, words as splitWords, spring, springEasing, springEffectKeyframes, springSamples, staticAlternative, stepSpring, supportsLinearEasing, supportsNativeScrub, supportsOrientation, supportsViewTransitions, supportsWebGL, swipeDirection, themeTransition, timeline, toast, validateDesignTokens, viewTransition, warnBaseline, watchPowerSaver, withoutDeprecations };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/lite.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/components/lite.js.map

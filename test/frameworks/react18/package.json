@@ -1,0 +1,7 @@
+{
+  "name": "motionary-fixture-react18",
+  "private": true,
+  "type": "module",
+  "description": "13.5.0 framework regression fixture — not published. Built by ../build.mjs against the built package (../../../dist).",
+  "dependencies": { "react": "18.3.1", "react-dom": "18.3.1", "@types/react": "18.3.31", "@types/react-dom": "18.3.7" }
+}

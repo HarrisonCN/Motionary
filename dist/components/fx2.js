@@ -1,6 +1,6 @@
-export { E as EFFECT_PACK_FORMAT, l as loadEffectPack, p as packManifest, v as validateManifest } from '../chunks/manifest-C6nei25r.js';
-import { G as GPU_FX, r as registerGpuPack } from '../chunks/gpu-B8vgh4lW.js';
-export { a as GLSL_HEAD, W as WGSL_HEAD, f as fieldFallback, g as glslToWgsl, s as shaderBackground, b as supportsWebGL2, c as supportsWebGPU, w as webgpuBackground, d as wgslModule } from '../chunks/gpu-B8vgh4lW.js';
+export { E as EFFECT_PACK_FORMAT, l as loadEffectPack, p as packManifest, v as validateManifest } from '../chunks/manifest-CqfKtjeL.js';
+import { G as GPU_FX, r as registerGpuPack } from '../chunks/gpu-7AY-uzNc.js';
+export { a as GLSL_HEAD, W as WGSL_HEAD, f as fieldFallback, g as glslToWgsl, s as shaderBackground, b as supportsWebGL2, c as supportsWebGPU, w as webgpuBackground, d as wgslModule } from '../chunks/gpu-7AY-uzNc.js';
 import { TEXT3_FX, registerTextPack } from './fx-text.js';
 export { splitChars } from './fx-text.js';
 import { LIGHT_FX, registerLightPack } from './fx-light.js';
@@ -59,11 +59,7 @@ import { SAFE_FX, registerSafePack } from './fx-safe.js';
 export { DEFAULT_MOTION_PREFS, MOTION_PREFS_KEY, applyMotionPreferences, flashCount, isFlashSafe, loadMotionPreferences, vestibularSafe } from './fx-safe.js';
 import { PERF3_FX, registerPerf3Pack } from './fx-perf.js';
 export { fpsMeter, offscreenRender, runInWorker } from './fx-perf.js';
-import { registerEffects } from '../chunks/registry-BEIhIRTY.js';
-import '../chunks/generative-DkX6SvrL.js';
-import '../chunks/base-Be98yNyq.js';
-import '../chunks/shared-CkKHWrtJ.js';
-import '../chunks/audio-DJkvNk0A.js';
+import { registerEffects } from '../chunks/registry-DKs_BiEo.js';
 
 /** The 6.x effect packs by name. */
 const EFFECT_PACKS = {
@@ -160,4 +156,4 @@ function usePlugins(...plugins) {
 }
 
 export { AI_FX, CHART_FX, CINEMA_FX, CYBER_FX, DEPTH3_FX, EFFECT_PACKS, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GENART_FX, GEO_FX, GESTURE3_FX, GPU_FX, LIGHT_FX, LOTTIE_FX, MORPH2_FX, MUSIC_FX, ORGANIC_FX, PAPER_FX, PERF3_FX, PHYSICS2_FX, RETRO_FX, SAFE_FX, SHOP_FX, SOCIAL_FX, SPATIAL_FX, SURFACE_FX, TEXT3_FX, TRANSITIONS2_FX, VIDEO_FX, WEATHER_FX, definePlugin, effectPlugins, register3dPack, registerAiPack, registerAllPlugins, registerChartPack, registerCinemaPack, registerCyberPack, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGenArtPack, registerGeoPack, registerGesture3Pack, registerGpuPack, registerLightPack, registerLottiePack, registerMorphPack, registerMusicPack, registerOrganicPack, registerPaperPack, registerPerf3Pack, registerPhysicsPack, registerRetroPack, registerSafePack, registerShopPack, registerSocialPack, registerSpatialPack, registerSurfacePack, registerTextPack, registerTransitionsPack, registerVideoPack, registerWeatherPack, usePlugins };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/fx2.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/components/fx2.js.map

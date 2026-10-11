@@ -1,56 +1,32 @@
 import { defineComponents } from '../components.js';
 import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-B-JBecYg.js';
 export { b as bindUsa, u as usaEventName } from '../chunks/bind-B_CTL6Qn.js';
-import './reveal.js';
-import '../chunks/base-Be98yNyq.js';
-import './text.js';
-import '../chunks/core-RZkPEx8i.js';
-import './tokens.js';
-import './interaction.js';
-import './feedback.js';
-import './background.js';
-import '../chunks/variants-D7tUTCVW.js';
-import './transitions.js';
-import './physics.js';
-import '../chunks/spring-p9RY-4VF.js';
-import './cards.js';
-import './click.js';
-import '../chunks/fx-Wd1GKAzZ.js';
-import './ui.js';
-import '../chunks/viewport-BAXHhZLV.js';
-import './page.js';
-import './timeline.js';
-import './gesture.js';
-import '../chunks/core-FB2gL64M.js';
-import './svg.js';
-import '../chunks/key-click-BLm3BI8_.js';
-import './webgl.js';
-import './depth.js';
-import './layout.js';
-import './packs.js';
-import './fx.js';
-import '../chunks/registry-BEIhIRTY.js';
-import '../chunks/builtins-BQZ7idez.js';
-import './a11y.js';
-import './perf.js';
-import './bridge.js';
 
 /**
  * motionary/angular — Angular integration (v3.8; 11.5: top-level entry `motionary/angular`, parity with the
  * React / Vue / Svelte / Solid entries). The old path `motionary/angular` is the same file and is
  * deprecated (removed in 13.0). Angular renders `<usa-*>` tags once the component (or NgModule) allows
- * custom elements with `CUSTOM_ELEMENTS_SCHEMA`; property binding `[checked]="on"` and event binding
- * `(usa:change)="…"` then work as is. This entry is framework-free (no `@angular/*` import):
+ * custom elements with `CUSTOM_ELEMENTS_SCHEMA`; property binding `[checked]="on"` works as is. Events: 13.5.0 —
+ * `(usa:change)="…"` does NOT compile in Angular 17+ (a colon in an event binding names a global target), so bind
+ * `usa:*` events with a small `[usaOn]` directive over `bindUsa`. This entry is framework-free (no `@angular/*` import):
  *
  * ```ts
- * import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
- * import { provideUsa, usaDetail } from 'motionary/angular';
+ * import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, Component, Directive, ElementRef, Input, inject } from '@angular/core';
+ * import { bindUsa, provideUsa, usaDetail } from 'motionary/angular';
  *
  * // app.config.ts
  * providers: [provideUsa(APP_INITIALIZER, ['click', 'ui'])]
  *
- * @Component({ standalone: true, schemas: [CUSTOM_ELEMENTS_SCHEMA],
- *   template: `<usa-switch [checked]="on" (usa:change)="on = $any($event).detail.checked"></usa-switch>` })
+ * @Directive({ selector: '[usaOn]', standalone: true })
+ * export class UsaOn {
+ *   private b = bindUsa(inject(ElementRef).nativeElement);
+ *   @Input({ required: true }) set usaOn(on: Record<string, (e: CustomEvent) => void>) { this.b.update({ on }); }
+ *   ngOnDestroy() { this.b.destroy(); }
+ * }
+ *
+ * @Component({ standalone: true, imports: [UsaOn], schemas: [CUSTOM_ELEMENTS_SCHEMA],
+ *   template: `<usa-switch [checked]="on" [usaOn]="{ change: onChange }"></usa-switch>` })
+ * class App { on = false; onChange = (e: CustomEvent) => (this.on = usaDetail(e).checked); }
  * ```
  * Parity with the other wrappers: register (`defineUsa` · `usaInitializer` · `provideUsa`, like Vue's `UsaPlugin`),
  * tag list (`USA_TAGS`, like React), custom-element predicate (`isUsaElement`, like Vue), imperative binding
@@ -76,8 +52,8 @@ function defineUsa(categories) {
     if (typeof window !== 'undefined')
         defineComponents(categories);
 }
-/** Read `event.detail` from a `usa:*` event in a template handler: `(usa:change)="on = usaDetail($event).checked"`. */
+/** Read `event.detail` from a `usa:*` event in a `[usaOn]` handler: `onChange = (e: CustomEvent) => (this.on = usaDetail(e).checked)`. */
 const usaDetail = (e) => e.detail;
 
 export { USA_TAGS, defineUsa, isUsaElement, provideUsa, usaDetail, usaInitializer };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/angular.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/components/angular.js.map

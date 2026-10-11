@@ -1,40 +1,6 @@
 'use strict';
 
 var components = require('../components.cjs');
-require('./reveal.cjs');
-require('../chunks/base-Do-R_9gU.cjs');
-require('./text.cjs');
-require('../chunks/core-6FhnH_Kv.cjs');
-require('./tokens.cjs');
-require('./interaction.cjs');
-require('./feedback.cjs');
-require('./background.cjs');
-require('../chunks/variants-BbO5akAC.cjs');
-require('./transitions.cjs');
-require('./physics.cjs');
-require('../chunks/spring-B0v7o7dG.cjs');
-require('./cards.cjs');
-require('./click.cjs');
-require('../chunks/fx-O90ZgYwV.cjs');
-require('./ui.cjs');
-require('../chunks/viewport-EFYGqMNa.cjs');
-require('./page.cjs');
-require('./timeline.cjs');
-require('./gesture.cjs');
-require('../chunks/core-B2156q7g.cjs');
-require('./svg.cjs');
-require('../chunks/key-click-v7I4K5Sr.cjs');
-require('./webgl.cjs');
-require('./depth.cjs');
-require('./layout.cjs');
-require('./packs.cjs');
-require('./fx.cjs');
-require('../chunks/registry-CyVCJneg.cjs');
-require('../chunks/builtins-DGP3jBW1.cjs');
-require('./a11y.cjs');
-require('../chunks/index-tags-hLIF2Clq.cjs');
-require('./perf.cjs');
-require('./bridge.cjs');
 
 /**
  * motionary/components/vue — Vue integration (v2.9).
@@ -51,6 +17,13 @@ require('./bridge.cjs');
  * ```
  * In templates, listen with `@usa:change="…"` and bind properties with
  * `.prop`: `<usa-switch :checked.prop="on" @usa:change="on = $event.detail.checked">`.
+ *
+ * Template types (13.5.0, generated from the manifest; Volar / vue-tsc):
+ * ```ts
+ * // src/usa-vue.d.ts
+ * import type { UsaGlobalComponents } from 'motionary/components/vue';
+ * declare module 'vue' { interface GlobalComponents extends UsaGlobalComponents {} }
+ * ```
  */
 /** `compilerOptions.isCustomElement` predicate for every `<usa-*>` tag. */
 const isUsaElement = (tag) => tag.startsWith('usa-');
@@ -67,4 +40,4 @@ const UsaPlugin = {
 
 exports.UsaPlugin = UsaPlugin;
 exports.isUsaElement = isUsaElement;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/vue.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/components/vue.cjs.map

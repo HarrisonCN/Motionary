@@ -2,45 +2,12 @@ import { createRenderEffect, onCleanup } from 'solid-js';
 import { defineComponents } from '../components.js';
 import { b as bindUsa } from '../chunks/bind-B_CTL6Qn.js';
 export { u as usaEventName } from '../chunks/bind-B_CTL6Qn.js';
-import './reveal.js';
-import '../chunks/base-Be98yNyq.js';
-import './text.js';
-import '../chunks/core-RZkPEx8i.js';
-import './tokens.js';
-import './interaction.js';
-import './feedback.js';
-import './background.js';
-import '../chunks/variants-D7tUTCVW.js';
-import './transitions.js';
-import './physics.js';
-import '../chunks/spring-p9RY-4VF.js';
-import './cards.js';
-import './click.js';
-import '../chunks/fx-Wd1GKAzZ.js';
-import './ui.js';
-import '../chunks/viewport-BAXHhZLV.js';
-import './page.js';
-import './timeline.js';
-import './gesture.js';
-import '../chunks/core-FB2gL64M.js';
-import './svg.js';
-import '../chunks/key-click-BLm3BI8_.js';
-import './webgl.js';
-import './depth.js';
-import './layout.js';
-import './packs.js';
-import './fx.js';
-import '../chunks/registry-BEIhIRTY.js';
-import '../chunks/builtins-BQZ7idez.js';
-import './a11y.js';
-import '../chunks/index-tags-B-JBecYg.js';
-import './perf.js';
-import './bridge.js';
 
 /**
  * motionary/components/solid — Solid integration (v3.8).
  * Solid renders custom elements natively: set properties with `prop:` and
- * listen with `on:` (`<usa-switch prop:checked={on()} on:usa:change={…}>`).
+ * listen with the `use:usa` directive (`<usa-switch prop:checked={on()} use:usa={{ on: { change: … } }}>`).
+ * 13.5.0: `on:usa:change` is **not valid JSX** (an attribute name has at most one colon) — use `use:usa`.
  * This entry adds `defineUsa()` (client only, SolidStart-safe), a `usa`
  * directive for `use:usa={{ props, on }}`, and JSX types.
  *
@@ -82,4 +49,4 @@ function defineUsa(categories) {
 }
 
 export { bindUsa, defineUsa, usa };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/solid.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/components/solid.js.map

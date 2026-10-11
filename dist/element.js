@@ -1,5 +1,4 @@
 import { r as readOptions, c as createScrollAnimate } from './chunks/core-Dj6iomdc.js';
-import './chunks/presets-BYBVJVeP.js';
 
 /**
  * motionary - `<scroll-animate>` Web Component
@@ -92,4 +91,4 @@ function defineScrollAnimate(tagName = 'scroll-animate', instance) {
 }
 
 export { defineScrollAnimate };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/element.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/element.js.map

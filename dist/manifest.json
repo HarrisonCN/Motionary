@@ -4,7 +4,7 @@
   "schemaVersion": 2,
   "stability": "stable",
   "package": "motionary",
-  "version": "13.4.0",
+  "version": "13.5.0",
   "homepage": "https://harrisoncn.github.io/Motionary/",
   "llms": "https://harrisoncn.github.io/Motionary/llms.txt",
   "cdn": {
@@ -2758,7 +2758,8 @@
       "deprecated": null,
       "source": "src/components/cards/carousel-3d.ts",
       "changed": [
-        "3.5"
+        "3.5",
+        "13.5"
       ]
     },
     {
@@ -10744,7 +10745,8 @@
       "changed": [
         "6.9",
         "7.0",
-        "13.1"
+        "13.1",
+        "13.5"
       ]
     },
     {

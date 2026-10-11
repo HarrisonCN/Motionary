@@ -1,6 +1,5 @@
-import { registerEffects } from '../chunks/registry-BEIhIRTY.js';
+import { registerEffects } from '../chunks/registry-DKs_BiEo.js';
 import { a as all } from '../chunks/shared-CkKHWrtJ.js';
-import '../chunks/base-Be98yNyq.js';
 
 const NS = 'http://www.w3.org/2000/svg';
 const raf = (f) => (typeof requestAnimationFrame === 'function' ? requestAnimationFrame(f) : 0);
@@ -284,4 +283,4 @@ function registerMorphPack() {
 }
 
 export { MORPH2_FX, pointsToPath, registerMorphPack, samplePath };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/fx-morph.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/components/fx-morph.js.map

@@ -24,7 +24,7 @@ Angular's wrapper is now `motionary/angular` (it has no separate HTML-API bindin
 |---|---|---|---|---|
 | register the elements | `defineComponents()` | `UsaPlugin` | `defineUsa()` | `defineUsa()` · `usaInitializer()` · **`provideUsa(APP_INITIALIZER, categories)`** |
 | tag list / predicate | `USA_TAGS` | `isUsaElement` | — | **`USA_TAGS`** · **`isUsaElement`** |
-| bind props + events | wrapper props | `.prop` · `@usa:x` | `use:usa` / `bindUsa` | `[prop]` · `(usa:x)` · `bindUsa` |
+| bind props + events | wrapper props | `.prop` · `@usa:x` | `use:usa` / `bindUsa` | `[prop]` · `[usaOn]` directive over `bindUsa` (`(usa:x)` does not compile in Angular 17+) |
 | event name / payload | `eventName()` | — | `usaEventName()` | `usaEventName()` · `usaDetail()` |
 
 ## Deprecated paths (work until 13.0)

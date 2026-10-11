@@ -1,9 +1,8 @@
 'use strict';
 
-var widgets_weatherCard = require('../chunks/weather-card-CtqBfWnZ.cjs');
-require('../chunks/base-Do-R_9gU.cjs');
+var widgets_weatherCard = require('../chunks/weather-card-4Eg6e43D.cjs');
 
 
 
 exports.defineWeatherCard = widgets_weatherCard.defineWeatherCard;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/widgets/weather-card.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/widgets/weather-card.cjs.map

@@ -7,6 +7,49 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [13.5.0] - 2026-10-11
+
+Framework integration hardening. A new regression matrix server-renders and hydrates a small app per framework
+(React 18, React 19, Vue 3, Svelte 5, Solid, Angular 21) against the built package, and fixes what it found. No
+breaking changes; zero runtime dependencies; size budgets unchanged (`motionary/components/lite` 69.99 / 70.00 KB).
+[docs/frameworks-matrix.md](docs/frameworks-matrix.md)
+
+### Added
+
+- Framework regression matrix (`test/frameworks/`): SSR in Node → hydration in Chromium, property binding, `usa:*`
+  events, unmount (+ Vue `<KeepAlive>`), and a `tsc --noEmit` type check per fixture (`test/frameworks/typecheck.mjs`).
+  Workflow `.github/workflows/frameworks.yml` (one job per framework, Chromium, not a required check).
+- Generated element types (`scripts/gen-framework-types.mjs` → `elements.generated.ts`, from the manifest; checked by
+  `npm run check:docs`): `UsaElementAttributeMap`, `UsaElementEventMap`, `UsaElementTag`, exported from
+  `motionary/components/jsx`, `/vue`, `/svelte` and `motionary/angular`.
+  - `motionary/components/jsx`: per-tag attributes in `UsaIntrinsicElements`; new `UsaReact19IntrinsicElements` with
+    typed `onusa:*` handlers.
+  - `motionary/components/vue`: `UsaGlobalComponents` (augment `vue`'s `GlobalComponents`).
+  - `motionary/components/svelte`: `UsaSvelteElements` (augment `svelte/elements`' `SvelteHTMLElements`).
+- `motionary/components/react` re-exports `bindUsa` and `usaEventName`.
+
+### Fixed
+
+- React wrappers: `createUsaComponents(React)` only built wrappers for the core-category tags, so every widget
+  (`UsaSwitch`, `UsaTabs`, …) was `undefined`. Wrappers are now created for any `Usa*` name.
+- React wrappers no longer call `useLayoutEffect` during SSR (React 18 warning); they use `useEffect` without a `document`.
+- Properties set before the element is defined (Vue `.prop`, Solid `prop:`, React 18 wrappers) no longer shadow the
+  element's accessors; they are re-applied on upgrade.
+- `kebab()` handles digit segments: `UsaCarousel3d` → `usa-carousel-3d`.
+- JSX types: `UsaIntrinsicElements` now includes every manifest tag (widgets such as `<usa-switch>` were missing).
+- No more esbuild / Vite `ignored-bare-import` warnings for every entry (no hoisted transitive chunk imports).
+- Docs: Angular `(usa:change)` does not compile in Angular 17+ → `[usaOn]` directive over `bindUsa`; Solid
+  `on:usa:change` is not valid JSX → `use:usa`; Svelte 5 `onusa:change` warns `attribute_illegal_colon` → `use:usa`;
+  React 19 does not attach `onusa:*` props to hydrated (SSR) elements → ref callback + `bindUsa`
+  ([docs/frameworks-ssr.md](docs/frameworks-ssr.md)).
+
+### Deferred
+
+- Meta-framework apps (Next.js, Nuxt, SvelteKit, SolidStart, Analog) in the matrix.
+- Per-framework performance baseline.
+- Template type-checking with `vue-tsc` / `svelte-check` (the Vue / Svelte / Solid fixtures type-check type-level
+  assertion files only).
+
 ## [13.4.0] - 2026-10-10
 
 Animation scheduling. One shared rAF loop now has a frame budget, drops the work of detached elements, and — with the

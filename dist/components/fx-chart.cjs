@@ -1,8 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-CyVCJneg.cjs');
+var registry = require('../chunks/registry-CibnX7Ui.cjs');
 var shared = require('../chunks/shared-jkgRH-Hx.cjs');
-require('../chunks/base-Do-R_9gU.cjs');
 
 const fade = (el, ctx) => ctx.animate(el, [{ opacity: 0 }, { opacity: 1 }], { duration: 250 });
 const pick = (el, sel) => Array.from(el.querySelectorAll(sel));
@@ -155,4 +154,4 @@ function registerChartPack() {
 exports.CHART_FX = CHART_FX;
 exports.parseFigure = parseFigure;
 exports.registerChartPack = registerChartPack;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/fx-chart.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/components/fx-chart.cjs.map

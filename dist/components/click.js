@@ -1,6 +1,6 @@
-import { f as defineElement, H as EASE_OUT, d as clamp, b as caf, n as now, r as raf } from '../chunks/base-Be98yNyq.js';
-import { d as springEasing, c as createSpring } from '../chunks/spring-p9RY-4VF.js';
-import { b as burst, c as confetti, h as haptic, s as shake } from '../chunks/fx-Wd1GKAzZ.js';
+import { f as defineElement, H as EASE_OUT, d as clamp, b as caf, n as now, r as raf } from '../chunks/base-C9CJrhL3.js';
+import { d as springEasing, c as createSpring } from '../chunks/spring-DBCejV_z.js';
+import { b as burst, c as confetti, h as haptic, s as shake } from '../chunks/fx-Dc1sMyNg.js';
 
 var css$6 = "usa-click{position:relative;display:inline-block;overflow:hidden;isolation:isolate;border-radius:inherit;-webkit-tap-highlight-color:transparent;touch-action:manipulation}usa-click[block]{display:block}usa-click .usa-click-wave{position:absolute;border-radius:50%;pointer-events:none;z-index:-1;transform:scale(0);background:radial-gradient(circle,var(--usa-wave) 0 55%,color-mix(in srgb,var(--usa-wave) 40%,transparent) 70%,transparent 72%)}";
 
@@ -864,4 +864,4 @@ function defineClickComponents() {
 }
 
 export { BUTTON_DEFORMS, CLICK_EFFECTS, MORPH_ICONS, defineButton, defineCheckbox, defineClick, defineClickComponents, defineDoubleTap, defineHold, defineIconMorph, defineLike, haptic, morphPath };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/click.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/components/click.js.map

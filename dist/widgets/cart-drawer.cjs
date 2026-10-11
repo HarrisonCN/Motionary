@@ -1,9 +1,8 @@
 'use strict';
 
-var widgets_cartDrawer = require('../chunks/cart-drawer-DSRylorb.cjs');
-require('../chunks/base-Do-R_9gU.cjs');
+var widgets_cartDrawer = require('../chunks/cart-drawer-CkFMKMhx.cjs');
 
 
 
 exports.defineCartDrawer = widgets_cartDrawer.defineCartDrawer;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/widgets/cart-drawer.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/widgets/cart-drawer.cjs.map

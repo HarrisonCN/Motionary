@@ -1,4 +1,4 @@
-import { G as GPU_FX } from '../chunks/gpu-B8vgh4lW.js';
+import { G as GPU_FX } from '../chunks/gpu-7AY-uzNc.js';
 import { TEXT3_FX } from './fx-text.js';
 import { LIGHT_FX } from './fx-light.js';
 import { DEPTH3_FX } from './fx-3d.js';
@@ -29,11 +29,6 @@ import { GENART_FX } from './fx-genart.js';
 import { VIDEO_FX } from './fx-video.js';
 import { SAFE_FX } from './fx-safe.js';
 import { PERF3_FX } from './fx-perf.js';
-import '../chunks/registry-BEIhIRTY.js';
-import '../chunks/base-Be98yNyq.js';
-import '../chunks/generative-DkX6SvrL.js';
-import '../chunks/shared-CkKHWrtJ.js';
-import '../chunks/audio-DJkvNk0A.js';
 
 const P = (name, effects) => ({ name, effects });
 /** The `gpu` pack. */
@@ -102,4 +97,4 @@ const perf3 = /*#__PURE__*/ P('perf3', PERF3_FX);
 const ALL_PLUGINS = [gpu, text, light, depth, morph, transitions, weather, physics, focus, music, chart, shop, social, game, geo, form, ai, festival, retro, organic, cyber, paper, surface, gesture3, spatial, cinema, lottie, genart, video, safe, perf3];
 
 export { ALL_PLUGINS, ai, chart, cinema, cyber, depth, festival, focus, form, game, genart, geo, gesture3, gpu, light, lottie, morph, music, organic, paper, perf3, physics, retro, safe, shop, social, spatial, surface, text, transitions, video, weather };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/plugins.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/components/plugins.js.map

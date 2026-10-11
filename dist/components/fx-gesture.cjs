@@ -1,7 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-CyVCJneg.cjs');
-require('../chunks/base-Do-R_9gU.cjs');
+var registry = require('../chunks/registry-CibnX7Ui.cjs');
 
 /** Scale factor of a two-finger pinch from start points (a1, a2) to current points (b1, b2) (8.7). */
 function pinchScale(a1, a2, b1, b2) {
@@ -108,4 +107,4 @@ exports.orientationToTilt = orientationToTilt;
 exports.pinchAngle = pinchAngle;
 exports.pinchScale = pinchScale;
 exports.registerGesture3Pack = registerGesture3Pack;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/fx-gesture.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/components/fx-gesture.cjs.map

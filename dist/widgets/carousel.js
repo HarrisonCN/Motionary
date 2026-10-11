@@ -1,4 +1,2 @@
-export { d as defineCarousel } from '../chunks/carousel-BQb8S9_i.js';
-import '../chunks/base-Be98yNyq.js';
-import '../chunks/shared-o9CtwHmi.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/widgets/carousel.js.map
+export { d as defineCarousel } from '../chunks/carousel-u6rqMqGu.js';
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/widgets/carousel.js.map

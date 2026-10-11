@@ -1,5 +1,4 @@
-import { registerEffects } from '../chunks/registry-BEIhIRTY.js';
-import '../chunks/base-Be98yNyq.js';
+import { registerEffects } from '../chunks/registry-DKs_BiEo.js';
 
 /** Fan-out angles (deg) for `n` floating emoji, centred on straight up (7.4). */
 function fanAngles(n, spread = 60) {
@@ -114,4 +113,4 @@ function registerSocialPack() {
 }
 
 export { SOCIAL_FX, fanAngles, registerSocialPack };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/fx-social.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/components/fx-social.js.map

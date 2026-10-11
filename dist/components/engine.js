@@ -1,5 +1,5 @@
-import { h as onClockChange, i as setClock, j as getClock, p as prefersReducedMotion, e as animateWithMotion } from '../chunks/base-Be98yNyq.js';
-export { t as trackAnimation } from '../chunks/base-Be98yNyq.js';
+import { h as onClockChange, i as setClock, j as getClock, p as prefersReducedMotion, e as animateWithMotion } from '../chunks/base-C9CJrhL3.js';
+export { t as trackAnimation } from '../chunks/base-C9CJrhL3.js';
 
 /**
  * `motionary/engine` (= `motionary/components/engine`, 8.0) — the unified
@@ -252,4 +252,4 @@ function hydrateMotion(root = document, options = {}) {
 }
 
 export { HYDRATE_PRESETS, HYDRATION_CSS, createTimeline, getClock, hydrateMotion, motionClock, onClockChange, resolvePosition, setClock, ssrHead };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/engine.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/components/engine.js.map

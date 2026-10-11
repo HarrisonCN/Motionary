@@ -1,9 +1,8 @@
 'use strict';
 
-var registry = require('../chunks/registry-CyVCJneg.cjs');
-var generative = require('../chunks/generative-BTya0iHP.cjs');
+var registry = require('../chunks/registry-CibnX7Ui.cjs');
+var generative = require('../chunks/generative-BKoxWOSP.cjs');
 var shared = require('../chunks/shared-jkgRH-Hx.cjs');
-require('../chunks/base-Do-R_9gU.cjs');
 
 const bg = (name, description, defaults, spec) => ({
     name,
@@ -262,4 +261,4 @@ function registerWeatherPack() {
 exports.WEATHER_FX = WEATHER_FX;
 exports.registerWeatherPack = registerWeatherPack;
 exports.skyAt = skyAt;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/fx-weather.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/components/fx-weather.cjs.map

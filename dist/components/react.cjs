@@ -1,6 +1,7 @@
 'use strict';
 
 var indexTags = require('../chunks/index-tags-hLIF2Clq.cjs');
+var bind = require('../chunks/bind-Ui43-n2d.cjs');
 
 /**
  * motionary/components/react — React wrappers for every `<usa-*>`
@@ -20,6 +21,16 @@ var indexTags = require('../chunks/index-tags-hLIF2Clq.cjs');
  *
  * JSX types for the raw tags (`<usa-card effect="flip">`) come from
  * `motionary/components/jsx` (see `UsaIntrinsicElements`).
+ *
+ * React 19 + SSR (13.5.0): React 19 does NOT attach custom-element event props
+ * (`onusa:change`) to server-rendered elements it hydrates (they work on
+ * client-created elements). For SSR/hydrated trees bind events with a ref
+ * callback over `bindUsa` (re-exported here):
+ *
+ * ```tsx
+ * import { bindUsa } from 'motionary/components/react';
+ * <usa-switch ref={(el) => { if (!el) return; const b = bindUsa(el, { on: { change: onChange } }); return () => b.destroy(); }} />
+ * ```
  */
 /** `usa-auto-animate` → `UsaAutoAnimate` */
 const pascal = (tag) => tag.replace(/(^|-)([a-z0-9])/g, (_, __, c) => c.toUpperCase());
@@ -36,7 +47,8 @@ const PROPS = /*#__PURE__*/ new Set(['checked', 'value', 'state', 'open', 'liked
 /** All `<usa-*>` tags shipped by the package. */
 const USA_TAGS = /*#__PURE__*/ Object.values(indexTags.COMPONENT_CATEGORIES).flat();
 function createUsaComponents(React) {
-    const useIso = React.useLayoutEffect || React.useEffect;
+    // 13.5.0: useLayoutEffect only in the browser — React 18 warns for every wrapper rendered on the server otherwise.
+    const useIso = (typeof document != 'undefined' && React.useLayoutEffect) || React.useEffect;
     const make = (tag) => {
         const C = React.forwardRef((props, ref) => {
             const inner = React.useRef(null);
@@ -86,11 +98,22 @@ function createUsaComponents(React) {
         C.displayName = pascal(tag);
         return C;
     };
-    return Object.fromEntries(USA_TAGS.map((t) => [pascal(t), make(t)]));
+    // 13.5.0: the wrappers used to cover only the core tags (USA_TAGS) — `UsaSwitch`, `UsaPricing` and every other
+    // widget were `undefined`. Known tags are created up front (enumerable); any other `Usa*` name — widgets, packs,
+    // your own `usa-*` elements — is created on first access and cached.
+    const all = Object.fromEntries(USA_TAGS.map((t) => [pascal(t), make(t)]));
+    return new Proxy(all, {
+        get: (o, k) => (typeof k === 'string' && /^Usa[A-Z0-9]/.test(k) && !(k in o) ? (o[k] = make(kebab(k))) : o[k]),
+    });
 }
+/** `UsaAutoAnimate` → `usa-auto-animate`, `UsaCarousel3d` → `usa-carousel-3d` (inverse of {@link pascal} for the shipped tags). */
+const kebab = (name) => name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').replace(/([A-Z])([A-Z][a-z])/g, '$1-$2').replace(/([a-z])(\d)/g, '$1-$2').toLowerCase();
 
+exports.bindUsa = bind.bindUsa;
+exports.usaEventName = bind.usaEventName;
 exports.USA_TAGS = USA_TAGS;
 exports.createUsaComponents = createUsaComponents;
 exports.eventName = eventName;
+exports.kebab = kebab;
 exports.pascal = pascal;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/react.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/components/react.cjs.map
