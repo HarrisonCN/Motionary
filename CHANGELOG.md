@@ -43,7 +43,8 @@ presets and tokens unchanged (no visual changes); `motionary/components/lite` st
   `motionary/components/scene-v2` → `motionary/scene`, `usa-codemod-5…10` scripts → `motionary codemod <n>`, CDN
   `@10…@13` → `@14`); dry run by default, `--write`, `--json`; idempotent. **`npx motionary codemod <5–13>`** runs the
   older codemods.
-- npm dist-tags: `v14` (the 14.x line) and `v13-lts` (13.9.0) next to `latest`.
+- npm dist-tags: `v14-line` (the 14.x line; npm rejects a bare `v14` because it is a valid SemVer range), `v14-0` (14.0.0) and
+  `v13-lts` (13.9.0) next to `latest`.
 
 ### Removed (kept in `motionary/compat-v13`)
 
