@@ -17,7 +17,7 @@
 
 ```html
 <usa-chat-composer placeholder="Ask anything…"></usa-chat-composer>
-<script>composer.addEventListener('usa:send', async (e) => { composer.busy = true; await ask(e.detail.text); composer.busy = false; });</script>
+<script>const composer = document.querySelector('usa-chat-composer'); composer.addEventListener('usa:send', async (e) => { composer.busy = true; await ask(e.detail.text); composer.busy = false; });</script>
 ```
 
 ## ES module

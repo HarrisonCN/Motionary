@@ -1,0 +1,97 @@
+{
+ "list_components": {
+  "name": "list_components",
+  "title": "List Motionary components",
+  "description": "List the <usa-*> Web Components in the Motionary catalog (tag, title, category, import path, prerequisites). Filter by category, by required runtime module, or by version introduced.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "category": {
+     "type": "string",
+     "description": "e.g. text, scroll, ui, transitions, widgets"
+    },
+    "requires": {
+     "type": "string",
+     "description": "only components needing this prerequisite, e.g. 'scroll' or 'motionary/runtime/text'; 'none' for components without prerequisites"
+    },
+    "since": {
+     "type": "string",
+     "description": "introduced in this version or later, e.g. '10.0'"
+    },
+    "version": {
+     "type": "string",
+     "description": "the motionary version installed in the user's project (default: ./node_modules/motionary, else the catalog version) — answers are filtered for it"
+    },
+    "limit": {
+     "type": "number",
+     "default": 500
+    }
+   },
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "List components",
+   "readOnlyHint": true,
+   "destructiveHint": false,
+   "idempotentHint": true,
+   "openWorldHint": false
+  }
+ },
+ "search_components": {
+  "name": "search_components",
+  "title": "Search Motionary components",
+  "description": "Free-text search over tags, titles, keywords and descriptions; best matches first. Use it to pick a component for a UI need (\"animated counter\", \"scroll pinned scene\", \"confetti\").",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "query": {
+     "type": "string"
+    },
+    "limit": {
+     "type": "number",
+     "default": 10
+    }
+   },
+   "required": [
+    "query"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Search components",
+   "readOnlyHint": true,
+   "destructiveHint": false,
+   "idempotentHint": true,
+   "openWorldHint": false
+  }
+ },
+ "get_component": {
+  "name": "get_component",
+  "title": "Get a component",
+  "description": "Everything about one component: attributes, events, slots, methods, import / define, CDN, prerequisites (install, import + register order, CDN script order), minimal example, variants.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "tag": {
+     "type": "string",
+     "description": "'usa-tilt', 'tilt' or '<usa-tilt>'"
+    },
+    "version": {
+     "type": "string",
+     "description": "the motionary version installed in the user's project (default: ./node_modules/motionary, else the catalog version) — answers are filtered for it"
+    }
+   },
+   "required": [
+    "tag"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Get component",
+   "readOnlyHint": true,
+   "destructiveHint": false,
+   "idempotentHint": true,
+   "openWorldHint": false
+  }
+ }
+}

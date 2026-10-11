@@ -304,4 +304,4 @@ exports.GENERATIVE_FX = GENERATIVE_FX;
 exports.canvasBackground = canvasBackground;
 exports.hexRgb = hexRgb;
 exports.noise2 = noise2;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.6.0/dist/chunks/generative-BKoxWOSP.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.7.0/dist/chunks/generative-BKoxWOSP.cjs.map

@@ -19,7 +19,7 @@
 <usa-notification-bell>
   <li data-time="2m">Ada liked your post</li>
 </usa-notification-bell>
-<script>bell.notify({ text: 'New follower', time: 'now' });</script>
+<script>addEventListener('DOMContentLoaded', () => { const bell = document.querySelector('usa-notification-bell'); bell.notify({ text: 'New follower', time: 'now' }); });</script>
 ```
 
 ## ES module

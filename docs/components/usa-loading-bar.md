@@ -18,7 +18,7 @@ A slim NProgress-style bar for route changes and fetches: loadingBar.start() tri
 ```html
 <script type="module">
   import { loadingBar } from 'motionary/components/page';
-  await loadingBar.track(fetch('/api'));
+  await loadingBar.track(new Promise((done) => setTimeout(done, 400))); // any promise, e.g. fetch('/api')
 </script>
 ```
 

@@ -41,7 +41,7 @@ describe('12.5 manifest + MCP + CLI', () => {
     expect(sch.$defs.component.required).not.toContain('changed');
   });
   it('MCP: version filter, compat on get_component, check_compat', () => {
-    expect(TOOLS.map((t) => t.name).slice(-2)).toEqual(['validate_snippet', 'check_compat']);
+    { const names = TOOLS.map((t) => t.name); expect(names.indexOf('check_compat')).toBe(names.indexOf('validate_snippet') + 1); } // 13.7 appends check_compatibility + suggest_fix after them
     const all = callTool(m, 'list_components', { limit: 1000 }).structuredContent as any;
     const old = callTool(m, 'list_components', { version: '10.0.0', limit: 1000 }).structuredContent as any;
     expect(old.count).toBeLessThan(all.count);

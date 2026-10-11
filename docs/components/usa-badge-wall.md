@@ -20,7 +20,7 @@
   <li data-icon="🏆">First win</li>
   <li data-icon="🔥" data-locked>7-day streak</li>
 </usa-badge-wall>
-<script>wall.unlock('7-day streak');</script>
+<script>addEventListener('DOMContentLoaded', () => { const wall = document.querySelector('usa-badge-wall'); wall.unlock('7-day streak'); });</script>
 ```
 
 ## ES module

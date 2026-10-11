@@ -1126,4 +1126,4 @@ const TIMELINE_DOC_SCHEMA = {
 };
 
 export { TIMELINE_DOC_FORMAT, TIMELINE_DOC_LIMITS, TIMELINE_DOC_SCHEMA, TIMELINE_DOC_VERSION, TimelineDocError, addKeyframe, addLayer, bindHistoryKeys, copyKeyframes, createFixedClock, createSeededRandom, createTimelineDoc, createTimelineHistory, createTimelinePreview, editableKeyframes, groupLayers, historyKeyAction, interpolateValue, isLayerActive, isLayerLocked, isValidEasing, layerSubtree, moveLayer, normalizeTimelineDoc, parseTimelineDoc, pasteKeyframes, removeKeyframes, removeLayers, resolveRandom, sampleTimelineDoc, scaleKeyframes, serializeTimelineDoc, setKeyframeEasing, setKeyframeProps, shiftKeyframes, timelineDocDuration, timelineDocFromAnimation, timelineDocToAnimation, ungroupLayer, uniqueId, updateLayers, validateTimelineDoc };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.6.0/dist/components/timeline-editor.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.7.0/dist/components/timeline-editor.js.map

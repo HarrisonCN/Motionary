@@ -9,7 +9,7 @@ export const components = [
     'Wrap a list or grid: items that are added fade in, removed ones fade out in place, and everything else glides to its new spot — on sort, filter or resize. Zero code at the call site.',
     '包裹列表或网格：新增项淡入、删除项原地淡出，其余元素在排序、筛选或尺寸变化时平滑滑到新位置。调用处零代码。',
     ['auto animate', 'reflow', 'list', 'grid', 'FLIP'],
-    '<usa-auto-animate>\n  <ul class="todo">…</ul>\n</usa-auto-animate>\n\n<!-- or on any element: -->\n<script type="module">\n  import { autoAnimate } from \'motionary/components/layout\';\n  autoAnimate(document.querySelector(\'.grid\'));\n</script>',
+    '<usa-auto-animate>\n  <ul class="todo"><li>Write the brief</li><li>Review</li></ul>\n</usa-auto-animate>\n\n<!-- or on any element: -->\n<ul class="grid"><li>A</li><li>B</li></ul>\n<script type="module">\n  import { autoAnimate } from \'motionary/components/layout\';\n  autoAnimate(document.querySelector(\'.grid\'));\n</script>',
     `<div class="demo-row"><button type="button" class="demo-link" data-aa-add>Add</button><button type="button" class="demo-link" data-aa-shuffle>Shuffle</button><button type="button" class="demo-link" data-aa-remove>Remove</button></div><usa-auto-animate class="demo-aa">${pills(5)}</usa-auto-animate>`),
   C('usa-masonry', 'layout', 'Masonry', '瀑布流',
     'Pinterest-style masonry: items drop into the shortest column and glide when the width, the items or their sizes change. CSS columns before JS runs.',

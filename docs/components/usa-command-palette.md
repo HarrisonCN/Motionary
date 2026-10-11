@@ -20,7 +20,7 @@
   <option value="new" data-group="File" data-keys="mod+n">New file</option>
   <option value="theme" data-group="View">Toggle theme</option>
 </usa-command-palette>
-<script>palette.addEventListener('usa:run', (e) => run(e.detail.id));</script>
+<script>const palette = document.querySelector('usa-command-palette'); palette.addEventListener('usa:run', (e) => run(e.detail.id));</script>
 ```
 
 ## ES module

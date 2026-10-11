@@ -21,7 +21,7 @@
   <li data-score="870">Alan</li>
   <li data-score="760">Grace</li>
 </usa-leaderboard>
-<script>board.setScore('Grace', 1000);</script>
+<script>addEventListener('DOMContentLoaded', () => { const board = document.querySelector('usa-leaderboard'); board.setScore('Grace', 1000); });</script>
 ```
 
 ## ES module

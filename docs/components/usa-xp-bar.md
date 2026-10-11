@@ -17,7 +17,8 @@
 
 ```html
 <usa-xp-bar level="3" xp="40" per="100"></usa-xp-bar>
-<script>bar.add(75); // → level 4, 15 XP</script>
+<!-- +75 XP → level 4, 15 XP -->
+<script>addEventListener('DOMContentLoaded', () => document.querySelector('usa-xp-bar').add(75));</script>
 ```
 
 ## ES module
@@ -29,5 +30,6 @@ defineXpBar(); // registers <usa-xp-bar>
 
 /* then use it in your HTML:
 <usa-xp-bar level="3" xp="40" per="100"></usa-xp-bar>
+<!-- +75 XP → level 4, 15 XP -->
 */
 ```

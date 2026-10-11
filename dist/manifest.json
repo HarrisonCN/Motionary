@@ -4,7 +4,7 @@
   "schemaVersion": 2,
   "stability": "stable",
   "package": "motionary",
-  "version": "13.6.0",
+  "version": "13.7.0",
   "homepage": "https://harrisoncn.github.io/Motionary/",
   "llms": "https://harrisoncn.github.io/Motionary/llms.txt",
   "cdn": {
@@ -90,7 +90,8 @@
         "11.4",
         "12.2",
         "12.5",
-        "13.0"
+        "13.0",
+        "13.7"
       ]
     },
     {
@@ -1262,7 +1263,8 @@
       "stability": "stable",
       "since": "10.6",
       "changed": [
-        "10.7"
+        "10.7",
+        "13.7"
       ]
     },
     {
@@ -2105,8 +2107,8 @@
         "enable",
         "disable"
       ],
-      "example": "<usa-auto-animate>\n  <ul class=\"todo\">…</ul>\n</usa-auto-animate>\n\n<!-- or on any element: -->\n<script type=\"module\">\n  import { autoAnimate } from 'motionary/components/layout';\n  autoAnimate(document.querySelector('.grid'));\n</script>",
-      "esm": "import { defineAutoAnimate } from 'motionary/components/layout';\n\ndefineAutoAnimate(); // registers <usa-auto-animate>\n\n/* then use it in your HTML:\n<usa-auto-animate>\n  <ul class=\"todo\">…</ul>\n</usa-auto-animate>\n\n<!-- or on any element: -->\n*/",
+      "example": "<usa-auto-animate>\n  <ul class=\"todo\"><li>Write the brief</li><li>Review</li></ul>\n</usa-auto-animate>\n\n<!-- or on any element: -->\n<ul class=\"grid\"><li>A</li><li>B</li></ul>\n<script type=\"module\">\n  import { autoAnimate } from 'motionary/components/layout';\n  autoAnimate(document.querySelector('.grid'));\n</script>",
+      "esm": "import { defineAutoAnimate } from 'motionary/components/layout';\n\ndefineAutoAnimate(); // registers <usa-auto-animate>\n\n/* then use it in your HTML:\n<usa-auto-animate>\n  <ul class=\"todo\"><li>Write the brief</li><li>Review</li></ul>\n</usa-auto-animate>\n\n<!-- or on any element: -->\n<ul class=\"grid\"><li>A</li><li>B</li></ul>\n*/",
       "requires": [],
       "tier": "basic",
       "prerequisites": null,
@@ -2303,7 +2305,7 @@
       "methods": [
         "unlock"
       ],
-      "example": "<usa-badge-wall>\n  <li data-icon=\"🏆\">First win</li>\n  <li data-icon=\"🔥\" data-locked>7-day streak</li>\n</usa-badge-wall>\n<script>wall.unlock('7-day streak');</script>",
+      "example": "<usa-badge-wall>\n  <li data-icon=\"🏆\">First win</li>\n  <li data-icon=\"🔥\" data-locked>7-day streak</li>\n</usa-badge-wall>\n<script>addEventListener('DOMContentLoaded', () => { const wall = document.querySelector('usa-badge-wall'); wall.unlock('7-day streak'); });</script>",
       "esm": "import { defineBadgeWall } from 'motionary/components/widgets';\n\ndefineBadgeWall(); // registers <usa-badge-wall>\n\n/* then use it in your HTML:\n<usa-badge-wall>\n  <li data-icon=\"🏆\">First win</li>\n  <li data-icon=\"🔥\" data-locked>7-day streak</li>\n</usa-badge-wall>\n*/",
       "requires": [],
       "tier": "basic",
@@ -2345,7 +2347,7 @@
       "events": [],
       "slots": [],
       "methods": [],
-      "example": "<usa-bar-chart values=\"12,19,8,15,22\" labels=\"Mon,Tue,Wed,Thu,Fri\" unit=\"k\"></usa-bar-chart>\n<script>chart.data = [{ label: 'Mon', value: 18 }, …];</script>",
+      "example": "<usa-bar-chart values=\"12,19,8,15,22\" labels=\"Mon,Tue,Wed,Thu,Fri\" unit=\"k\"></usa-bar-chart>\n<script>addEventListener('DOMContentLoaded', () => { document.querySelector('usa-bar-chart').data = [{ label: 'Mon', value: 18 }, { label: 'Tue', value: 12 }, { label: 'Wed', value: 21 }]; });</script>",
       "esm": "import { defineBarChart } from 'motionary/components/widgets';\n\ndefineBarChart(); // registers <usa-bar-chart>\n\n/* then use it in your HTML:\n<usa-bar-chart values=\"12,19,8,15,22\" labels=\"Mon,Tue,Wed,Thu,Fri\" unit=\"k\"></usa-bar-chart>\n*/",
       "requires": [],
       "tier": "basic",
@@ -2798,7 +2800,7 @@
         "removeItem",
         "toggle"
       ],
-      "example": "<usa-cart-drawer currency=\"$\"></usa-cart-drawer>\n<script>cart.add({ id: 'tee', name: 'T-shirt', price: 24 });</script>",
+      "example": "<usa-cart-drawer currency=\"$\"></usa-cart-drawer>\n<script>addEventListener('DOMContentLoaded', () => { const cart = document.querySelector('usa-cart-drawer'); cart.add({ id: 'tee', name: 'T-shirt', price: 24 }); });</script>",
       "esm": "import { defineCartDrawer } from 'motionary/components/widgets';\n\ndefineCartDrawer(); // registers <usa-cart-drawer>\n\n/* then use it in your HTML:\n<usa-cart-drawer currency=\"$\"></usa-cart-drawer>\n*/",
       "requires": [],
       "tier": "basic",
@@ -2890,7 +2892,7 @@
         "send",
         "clear"
       ],
-      "example": "<usa-chat-composer placeholder=\"Ask anything…\"></usa-chat-composer>\n<script>composer.addEventListener('usa:send', async (e) => { composer.busy = true; await ask(e.detail.text); composer.busy = false; });</script>",
+      "example": "<usa-chat-composer placeholder=\"Ask anything…\"></usa-chat-composer>\n<script>const composer = document.querySelector('usa-chat-composer'); composer.addEventListener('usa:send', async (e) => { composer.busy = true; await ask(e.detail.text); composer.busy = false; });</script>",
       "esm": "import { defineChatComposer } from 'motionary/components/widgets';\n\ndefineChatComposer(); // registers <usa-chat-composer>\n\n/* then use it in your HTML:\n<usa-chat-composer placeholder=\"Ask anything…\"></usa-chat-composer>\n*/",
       "requires": [],
       "tier": "basic",
@@ -3066,8 +3068,8 @@
       ],
       "slots": [],
       "methods": [],
-      "example": "<usa-clock-control speeds=\"0.25,0.5,1,2\"></usa-clock-control>\n<script type=\"module\">\nimport { motionClock, createTimeline } from 'motionary/engine';\nmotionClock.rate = 0.5;\ncreateTimeline().add(a, [{ opacity: 0 }, { opacity: 1 }], 400).add(b, [{ transform: 'scale(0)' }, { transform: 'none' }], 500, '-=200').play();\n</script>",
-      "esm": "import { defineClockControl } from 'motionary/components/widgets';\n\ndefineClockControl(); // registers <usa-clock-control>\n\n/* then use it in your HTML:\n<usa-clock-control speeds=\"0.25,0.5,1,2\"></usa-clock-control>\n*/",
+      "example": "<usa-clock-control speeds=\"0.25,0.5,1,2\"></usa-clock-control>\n<div class=\"box\">A</div> <div class=\"box\">B</div>\n<script type=\"module\">\nimport { motionClock, createTimeline } from 'motionary/engine';\nmotionClock.rate = 0.5;\nconst [a, b] = document.querySelectorAll('.box');\ncreateTimeline().add(a, [{ opacity: 0 }, { opacity: 1 }], 400).add(b, [{ transform: 'scale(0)' }, { transform: 'none' }], 500, '-=200').play();\n</script>",
+      "esm": "import { defineClockControl } from 'motionary/components/widgets';\n\ndefineClockControl(); // registers <usa-clock-control>\n\n/* then use it in your HTML:\n<usa-clock-control speeds=\"0.25,0.5,1,2\"></usa-clock-control>\n<div class=\"box\">A</div> <div class=\"box\">B</div>\n*/",
       "requires": [],
       "tier": "basic",
       "prerequisites": null,
@@ -3201,7 +3203,7 @@
         "close",
         "toggle"
       ],
-      "example": "<usa-command-palette>\n  <option value=\"new\" data-group=\"File\" data-keys=\"mod+n\">New file</option>\n  <option value=\"theme\" data-group=\"View\">Toggle theme</option>\n</usa-command-palette>\n<script>palette.addEventListener('usa:run', (e) => run(e.detail.id));</script>",
+      "example": "<usa-command-palette>\n  <option value=\"new\" data-group=\"File\" data-keys=\"mod+n\">New file</option>\n  <option value=\"theme\" data-group=\"View\">Toggle theme</option>\n</usa-command-palette>\n<script>const palette = document.querySelector('usa-command-palette'); palette.addEventListener('usa:run', (e) => run(e.detail.id));</script>",
       "esm": "import { defineCommandPalette } from 'motionary/components/widgets';\n\ndefineCommandPalette(); // registers <usa-command-palette>\n\n/* then use it in your HTML:\n<usa-command-palette>\n  <option value=\"new\" data-group=\"File\" data-keys=\"mod+n\">New file</option>\n  <option value=\"theme\" data-group=\"View\">Toggle theme</option>\n</usa-command-palette>\n*/",
       "requires": [],
       "tier": "basic",
@@ -4068,7 +4070,7 @@
       "methods": [
         "applyPreset"
       ],
-      "example": "<usa-equalizer preset=\"rock\" bands=\"60,150,400,1k,2.4k,6k,16k\"></usa-equalizer>\n<script>eq.applyPreset('vocal');</script>",
+      "example": "<usa-equalizer preset=\"rock\" bands=\"60,150,400,1k,2.4k,6k,16k\"></usa-equalizer>\n<script>addEventListener('DOMContentLoaded', () => { const eq = document.querySelector('usa-equalizer'); eq.applyPreset('vocal'); });</script>",
       "esm": "import { defineEqualizer } from 'motionary/components/widgets';\n\ndefineEqualizer(); // registers <usa-equalizer>\n\n/* then use it in your HTML:\n<usa-equalizer preset=\"rock\" bands=\"60,150,400,1k,2.4k,6k,16k\"></usa-equalizer>\n*/",
       "requires": [],
       "tier": "basic",
@@ -4242,7 +4244,7 @@
         "addFiles",
         "clear"
       ],
-      "example": "<usa-file-drop multiple accept=\"image/*\" label=\"Drop images or browse\"></usa-file-drop>\n<script>\n  drop.addEventListener('usa:files', (e) => upload(e.detail.files, (i, p) => drop.setProgress(i, p)));\n</script>",
+      "example": "<usa-file-drop multiple accept=\"image/*\" label=\"Drop images or browse\"></usa-file-drop>\n<script>\n  const drop = document.querySelector('usa-file-drop');\n  drop.addEventListener('usa:files', (e) => upload(e.detail.files, (i, p) => drop.setProgress(i, p)));\n</script>",
       "esm": "import { defineFileDrop } from 'motionary/components/widgets';\n\ndefineFileDrop(); // registers <usa-file-drop>\n\n/* then use it in your HTML:\n<usa-file-drop multiple accept=\"image/*\" label=\"Drop images or browse\"></usa-file-drop>\n*/",
       "requires": [],
       "tier": "basic",
@@ -5264,7 +5266,7 @@
       "methods": [
         "flyTo"
       ],
-      "example": "<usa-globe markers=\"Shanghai:31.2,121.5; London:51.5,-0.1; New York:40.7,-74\"></usa-globe>\n<script>globe.flyTo('London');</script>",
+      "example": "<usa-globe markers=\"Shanghai:31.2,121.5; London:51.5,-0.1; New York:40.7,-74\"></usa-globe>\n<script>addEventListener('DOMContentLoaded', () => { const globe = document.querySelector('usa-globe'); globe.flyTo('London'); });</script>",
       "esm": "import { defineGlobe } from 'motionary/components/widgets';\n\ndefineGlobe(); // registers <usa-globe>\n\n/* then use it in your HTML:\n<usa-globe markers=\"Shanghai:31.2,121.5; London:51.5,-0.1; New York:40.7,-74\"></usa-globe>\n*/",
       "requires": [],
       "tier": "basic",
@@ -5871,7 +5873,7 @@
         "play",
         "seek"
       ],
-      "example": "<div id=\"hero\"><h1>Title</h1><div class=\"card\">…</div><button>Go</button></div>\n<usa-keyframe-editor for=\"hero\"></usa-keyframe-editor>\n<script>\n  editor.addEventListener('usa:change', (e) => save(e.detail.animation));\n</script>",
+      "example": "<div id=\"hero\"><h1>Title</h1><div class=\"card\">…</div><button>Go</button></div>\n<usa-keyframe-editor for=\"hero\"></usa-keyframe-editor>\n<script>\n  const editor = document.querySelector('usa-keyframe-editor');\n  editor.addEventListener('usa:change', (e) => save(e.detail.animation));\n</script>",
       "esm": "import { defineKeyframeEditor } from 'motionary/components/widgets';\n\ndefineKeyframeEditor(); // registers <usa-keyframe-editor>\n\n/* then use it in your HTML:\n<div id=\"hero\"><h1>Title</h1><div class=\"card\">…</div><button>Go</button></div>\n<usa-keyframe-editor for=\"hero\"></usa-keyframe-editor>\n*/",
       "requires": [],
       "tier": "basic",
@@ -5958,7 +5960,7 @@
       "methods": [
         "setScore"
       ],
-      "example": "<usa-leaderboard me=\"Ada\">\n  <li data-score=\"980\">Ada</li>\n  <li data-score=\"870\">Alan</li>\n  <li data-score=\"760\">Grace</li>\n</usa-leaderboard>\n<script>board.setScore('Grace', 1000);</script>",
+      "example": "<usa-leaderboard me=\"Ada\">\n  <li data-score=\"980\">Ada</li>\n  <li data-score=\"870\">Alan</li>\n  <li data-score=\"760\">Grace</li>\n</usa-leaderboard>\n<script>addEventListener('DOMContentLoaded', () => { const board = document.querySelector('usa-leaderboard'); board.setScore('Grace', 1000); });</script>",
       "esm": "import { defineLeaderboard } from 'motionary/components/widgets';\n\ndefineLeaderboard(); // registers <usa-leaderboard>\n\n/* then use it in your HTML:\n<usa-leaderboard me=\"Ada\">\n  <li data-score=\"980\">Ada</li>\n  <li data-score=\"870\">Alan</li>\n  <li data-score=\"760\">Grace</li>\n</usa-leaderboard>\n*/",
       "requires": [],
       "tier": "basic",
@@ -6121,7 +6123,7 @@
         "set",
         "done"
       ],
-      "example": "<script type=\"module\">\n  import { loadingBar } from 'motionary/components/page';\n  await loadingBar.track(fetch('/api'));\n</script>",
+      "example": "<script type=\"module\">\n  import { loadingBar } from 'motionary/components/page';\n  await loadingBar.track(new Promise((done) => setTimeout(done, 400))); // any promise, e.g. fetch('/api')\n</script>",
       "esm": "import { defineLoadingBar } from 'motionary/components/page';\n\ndefineLoadingBar(); // registers <usa-loading-bar>\n\n/* then use it in your HTML:\n\n*/",
       "requires": [],
       "tier": "basic",
@@ -6738,7 +6740,7 @@
         "push",
         "typing"
       ],
-      "example": "<usa-message-list>\n  <p data-from=\"Ada\">Hi! 👋</p>\n  <p data-me>Hey Ada</p>\n</usa-message-list>\n<script>list.typing('Ada'); list.push({ from: 'Ada', text: 'Ship it?' });</script>",
+      "example": "<usa-message-list>\n  <p data-from=\"Ada\">Hi! 👋</p>\n  <p data-me>Hey Ada</p>\n</usa-message-list>\n<script>addEventListener('DOMContentLoaded', () => { const list = document.querySelector('usa-message-list'); list.typing('Ada'); list.push({ from: 'Ada', text: 'Ship it?' }); });</script>",
       "esm": "import { defineMessageList } from 'motionary/components/widgets';\n\ndefineMessageList(); // registers <usa-message-list>\n\n/* then use it in your HTML:\n<usa-message-list>\n  <p data-from=\"Ada\">Hi! 👋</p>\n  <p data-me>Hey Ada</p>\n</usa-message-list>\n*/",
       "requires": [],
       "tier": "basic",
@@ -7399,7 +7401,7 @@
         "markAllRead",
         "ring"
       ],
-      "example": "<usa-notification-bell>\n  <li data-time=\"2m\">Ada liked your post</li>\n</usa-notification-bell>\n<script>bell.notify({ text: 'New follower', time: 'now' });</script>",
+      "example": "<usa-notification-bell>\n  <li data-time=\"2m\">Ada liked your post</li>\n</usa-notification-bell>\n<script>addEventListener('DOMContentLoaded', () => { const bell = document.querySelector('usa-notification-bell'); bell.notify({ text: 'New follower', time: 'now' }); });</script>",
       "esm": "import { defineNotificationBell } from 'motionary/components/widgets';\n\ndefineNotificationBell(); // registers <usa-notification-bell>\n\n/* then use it in your HTML:\n<usa-notification-bell>\n  <li data-time=\"2m\">Ada liked your post</li>\n</usa-notification-bell>\n*/",
       "requires": [],
       "tier": "basic",
@@ -7528,7 +7530,7 @@
         "error",
         "success"
       ],
-      "example": "<usa-otp length=\"6\"></usa-otp>\n<script>otp.addEventListener('usa:complete', (e) => check(e.detail.code) ? otp.success() : otp.error());</script>",
+      "example": "<usa-otp length=\"6\"></usa-otp>\n<script>const otp = document.querySelector('usa-otp'); otp.addEventListener('usa:complete', (e) => check(e.detail.code) ? otp.success() : otp.error());</script>",
       "esm": "import { defineOtp } from 'motionary/components/widgets';\n\ndefineOtp(); // registers <usa-otp>\n\n/* then use it in your HTML:\n<usa-otp length=\"6\"></usa-otp>\n*/",
       "requires": [],
       "tier": "basic",
@@ -8626,7 +8628,7 @@
       "methods": [
         "refresh"
       ],
-      "example": "<usa-pull-refresh style=\"height: 300px\">\n  <ul>…</ul>\n</usa-pull-refresh>\n<script>el.addEventListener('usa:refresh', async (e) => { await load(); e.detail.done(); });</script>",
+      "example": "<usa-pull-refresh style=\"height: 300px\">\n  <ul>…</ul>\n</usa-pull-refresh>\n<script>const el = document.querySelector('usa-pull-refresh'); el.addEventListener('usa:refresh', async (e) => { await load(); e.detail.done(); });</script>",
       "esm": "import { definePullRefresh } from 'motionary/components/ui';\n\ndefinePullRefresh(); // registers <usa-pull-refresh>\n\n/* then use it in your HTML:\n<usa-pull-refresh style=\"height: 300px\">\n  <ul>…</ul>\n</usa-pull-refresh>\n*/",
       "requires": [],
       "tier": "basic",
@@ -11435,7 +11437,7 @@
       ],
       "slots": [],
       "methods": [],
-      "example": "<usa-upload-progress name=\"report.pdf\" size=\"2400000\" value=\"40\"></usa-upload-progress>\n<script>row.value = 75; row.status = 'error';</script>",
+      "example": "<usa-upload-progress name=\"report.pdf\" size=\"2400000\" value=\"40\"></usa-upload-progress>\n<script>addEventListener('DOMContentLoaded', () => { const row = document.querySelector('usa-upload-progress'); row.value = 75; row.status = 'error'; });</script>",
       "esm": "import { defineUploadProgress } from 'motionary/components/widgets';\n\ndefineUploadProgress(); // registers <usa-upload-progress>\n\n/* then use it in your HTML:\n<usa-upload-progress name=\"report.pdf\" size=\"2400000\" value=\"40\"></usa-upload-progress>\n*/",
       "requires": [],
       "tier": "basic",
@@ -11556,7 +11558,7 @@
       "methods": [
         "toggle"
       ],
-      "example": "<usa-voice-button label=\"Talk to the assistant\"></usa-voice-button>\n<script>vb.addEventListener('usa:start', start); analyser.onlevel = (l) => (vb.level = l);</script>",
+      "example": "<usa-voice-button label=\"Talk to the assistant\"></usa-voice-button>\n<script>const vb = document.querySelector('usa-voice-button'); vb.addEventListener('usa:start', () => (vb.level = 0.6)); // feed vb.level (0–1) from your audio analyser</script>",
       "esm": "import { defineVoiceButton } from 'motionary/components/widgets';\n\ndefineVoiceButton(); // registers <usa-voice-button>\n\n/* then use it in your HTML:\n<usa-voice-button label=\"Talk to the assistant\"></usa-voice-button>\n*/",
       "requires": [],
       "tier": "basic",
@@ -11805,8 +11807,8 @@
       "methods": [
         "add"
       ],
-      "example": "<usa-xp-bar level=\"3\" xp=\"40\" per=\"100\"></usa-xp-bar>\n<script>bar.add(75); // → level 4, 15 XP</script>",
-      "esm": "import { defineXpBar } from 'motionary/components/widgets';\n\ndefineXpBar(); // registers <usa-xp-bar>\n\n/* then use it in your HTML:\n<usa-xp-bar level=\"3\" xp=\"40\" per=\"100\"></usa-xp-bar>\n*/",
+      "example": "<usa-xp-bar level=\"3\" xp=\"40\" per=\"100\"></usa-xp-bar>\n<!-- +75 XP → level 4, 15 XP -->\n<script>addEventListener('DOMContentLoaded', () => document.querySelector('usa-xp-bar').add(75));</script>",
+      "esm": "import { defineXpBar } from 'motionary/components/widgets';\n\ndefineXpBar(); // registers <usa-xp-bar>\n\n/* then use it in your HTML:\n<usa-xp-bar level=\"3\" xp=\"40\" per=\"100\"></usa-xp-bar>\n<!-- +75 XP → level 4, 15 XP -->\n*/",
       "requires": [],
       "tier": "basic",
       "prerequisites": null,

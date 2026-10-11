@@ -30,7 +30,7 @@ export const components = [
     'Pull down at the top of a list: the spinner stretches in with rubber-band resistance; release past the threshold to refresh.',
     '在列表顶部下拉：加载圈以橡皮筋阻尼拉出；超过阈值松手即刷新。',
     ['rubber-band', 'usa:refresh'],
-    '<usa-pull-refresh style="height: 300px">\n  <ul>…</ul>\n</usa-pull-refresh>\n<script>el.addEventListener(\'usa:refresh\', async (e) => { await load(); e.detail.done(); });</script>',
+    '<usa-pull-refresh style="height: 300px">\n  <ul>…</ul>\n</usa-pull-refresh>\n<script>const el = document.querySelector(\'usa-pull-refresh\'); el.addEventListener(\'usa:refresh\', async (e) => { await load(); e.detail.done(); });</script>',
     '<usa-pull-refresh class="demo-scroll"><ul class="demo-list"><li>Pull me down ↓</li><li>Item 2</li><li>Item 3</li><li>Item 4</li><li>Item 5</li></ul></usa-pull-refresh>'),
   C('usa-fab', 'ui', 'FAB speed dial', '悬浮按钮菜单',
     'A floating action button whose actions fan out with a staggered spring: up, down, left, right or radial.',

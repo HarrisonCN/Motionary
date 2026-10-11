@@ -17,9 +17,11 @@
 
 ```html
 <usa-clock-control speeds="0.25,0.5,1,2"></usa-clock-control>
+<div class="box">A</div> <div class="box">B</div>
 <script type="module">
 import { motionClock, createTimeline } from 'motionary/engine';
 motionClock.rate = 0.5;
+const [a, b] = document.querySelectorAll('.box');
 createTimeline().add(a, [{ opacity: 0 }, { opacity: 1 }], 400).add(b, [{ transform: 'scale(0)' }, { transform: 'none' }], 500, '-=200').play();
 </script>
 ```
@@ -33,5 +35,6 @@ defineClockControl(); // registers <usa-clock-control>
 
 /* then use it in your HTML:
 <usa-clock-control speeds="0.25,0.5,1,2"></usa-clock-control>
+<div class="box">A</div> <div class="box">B</div>
 */
 ```
