@@ -174,7 +174,7 @@ interface Item {
 interface Run { items: Item[]; ctl: Ctl; drop(el: Element): void }
 type Saved = Record<'transform' | 'transformOrigin' | 'borderRadius' | 'opacity' | 'visibility', string>;
 const KEYS = ['transform', 'transformOrigin', 'borderRadius', 'opacity', 'visibility'] as const;
-const running = new WeakMap<Element, Run>();
+const running = /*#__PURE__*/ new WeakMap<Element, Run>();
 
 const save = (el: HTMLElement): Saved => Object.fromEntries(KEYS.map((k) => [k, el.style[k]])) as Saved;
 const restore = (el: HTMLElement, s: Saved) => KEYS.forEach((k) => (el.style[k] = s[k]));
