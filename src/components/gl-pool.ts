@@ -93,10 +93,10 @@ interface Lease {
 }
 
 const GL = /^(webgl2?|experimental-webgl)$/;
-const leases = new Map<HTMLCanvasElement, Lease>();
+const leases = /*#__PURE__*/ new Map<HTMLCanvasElement, Lease>();
 /** owners waiting for a context: evicted, denied or lost — re-mounted when visible + a slot is free */
-const waiting = new Map<Element, string>();
-const recovers = new WeakMap<Element, number[]>();
+const waiting = /*#__PURE__*/ new Map<Element, string>();
+const recovers = /*#__PURE__*/ new WeakMap<Element, number[]>();
 let max = 8;
 let budget = 256 * 1024 * 1024;
 let io: IntersectionObserver | null = null;

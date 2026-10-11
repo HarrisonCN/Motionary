@@ -40,10 +40,10 @@
  * ```
  */
 const GL = /^(webgl2?|experimental-webgl)$/;
-const leases = new Map();
+const leases = /*#__PURE__*/ new Map();
 /** owners waiting for a context: evicted, denied or lost — re-mounted when visible + a slot is free */
-const waiting = new Map();
-const recovers = new WeakMap();
+const waiting = /*#__PURE__*/ new Map();
+const recovers = /*#__PURE__*/ new WeakMap();
 let max = 8;
 let budget = 256 * 1024 * 1024;
 let io = null;
