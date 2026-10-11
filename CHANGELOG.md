@@ -7,6 +7,58 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [14.2.0] - 2026-10-11
+
+**Layout Motion 2.0**. Layout-change animation built on Motion Engine v2: FLIP with transforms, scale correction,
+layout groups, interruptible animations, shared elements (`layoutId`) between states and routes, and the View
+Transitions API with an automatic FLIP fallback. No breaking changes: the 13.x layout API (`motionary/components/layout`)
+is unchanged. Zero runtime dependencies. `motionary/components/lite` stays ≤ 70 KB gzip, and no budget was raised (the
+new entry has its own budget line). [docs/layout-motion.md](docs/layout-motion.md)
+
+### Added
+
+- **`motionary/motion/layout`** (= `motionary/components/motion-layout`; its own entry with an 8 KB budget, not in
+  lite or `motionary/motion`). Every animation returns a Motion Engine v2 `MotionControls`.
+- **FLIP 2.0:** `flip(targets, update, options)`, `snapshotLayout()`, `measureLayout()`.
+  - Elements animate as `translate3d() scale()` with origin `0 0`. Options: `duration` (ms or token), `delay`,
+    `easing`, `scale`.
+  - **Scale correction:** direct children (or a `correct` selector) are counter-scaled, `border-radius` is corrected
+    for the current scale and interpolated between old and new radius, and nested layout elements animate in their
+    parent's frame.
+  - Inline styles are restored on finish and cancel.
+- **Interruptible:** a new layout change on an element that is still animating starts from its current box.
+  `isLayoutAnimating(el)` reports whether one is running.
+- **Layout groups:** `layoutGroup(members, { id })` with `add`, `remove`, `flip`, `snapshot` and `shared`. Selector
+  members are re-queried, and the id namespaces layoutIds.
+- **Shared elements:** `setLayoutId()` / `getLayoutId()` (`data-layout-id`; the 13.x `data-shared` is read too) and
+  `sharedLayout(update, options)`.
+  - Works with sync or async updates, so route changes too.
+  - If the old element stays in the DOM it is hidden during the flight, or with `crossfade: true` both fly and
+    cross-fade.
+  - Elements that only exist in the new state fade in.
+- **View Transitions:** `layoutTransition(update, options)`.
+  - Uses the same-document View Transitions API when present: layoutIds become `view-transition-name`s, timing comes
+    from the options, `types` is passed where supported, and the running transition is skipped when a new one starts.
+  - Falls back to FLIP automatically when the API is missing or throws, or with `method: 'flip'`.
+  - Reports `method`: `'view-transition'`, `'flip'`, `'instant'` or `'crossfade'`.
+  - `supportsViewTransitions()`, `supportsCrossDocumentViewTransitions()`, `viewTransitionName()`.
+- **Cross-document:** `crossDocumentLayout()`. Where supported it uses native cross-document view transitions
+  (`@view-transition { navigation: auto }`, with names set on `pageswap` / `pagereveal`). Elsewhere it uses a
+  sessionStorage FLIP fallback (`saveLayoutSnapshot()` / `playLayoutSnapshot()`).
+- **Reduced motion:** `reducedMotion: 'instant'` (default), `'crossfade'` (opacity only; under View Transitions only
+  the root cross-fade) or `'ignore'`.
+- **Correct under scroll containers, transforms and sticky:**
+  - Boxes are measured scroll-independently, so a container or the window scrolling during an update is not a layout
+    change.
+  - Sticky and fixed elements are measured in viewport space.
+  - Under scaled ancestors, deltas are converted to local px.
+- **Frameworks:** `createLayoutTracker(targets)` (`snapshot()` before a render, `animate()` after), with React, Vue,
+  Svelte, Solid and Angular recipes in the docs. The adapters themselves are unchanged.
+- **Tests:**
+  - `test/layout-motion-2-14-2.test.ts` (42 tests).
+  - `test/browser/layout-motion.spec.mjs`, run in Chromium, Firefox and WebKit: rects measured mid-transition, scale
+    correction, scroll containers, View Transitions on/off parity, and reduced motion.
+
 ## [14.1.0] - 2026-10-11
 
 **Motion Tokens 2.0**. One token set for easing curves, durations, springs, spatial distances and motion semantics,

@@ -355,6 +355,11 @@
     "limit": 5632
   },
   {
+    "name": "import 'motionary/components/motion-layout' (= motionary/motion/layout, 14.2 Layout Motion 2.0: FLIP with scale/radius correction, groups, interruption, layoutId shared elements, View Transitions + FLIP fallback, cross-document; own entry, not in lite)",
+    "import": "export * from 'pkg/components/motion-layout';",
+    "limit": 8192
+  },
+  {
     "name": "import 'motionary/components/motion-tokens' (= motionary/tokens, 14.1 Motion Tokens 2.0: token set + modes, DTCG, CSS, engine/scene helpers, Figma Variables adapter; own entry with its own 10 KB budget, not in lite)",
     "import": "export * from 'pkg/components/motion-tokens';",
     "limit": 10240

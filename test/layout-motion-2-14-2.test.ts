@@ -231,9 +231,10 @@ describe('14.2 flip(): FLIP with transforms', () => {
     for (const k of ['play', 'pause', 'seek', 'reverse', 'finish', 'cancel']) expect(typeof (c as any)[k]).toBe('function');
     c.seek(30);
     expect(el.style.transform).not.toBe('');
+    const done = c.finished;
     c.cancel();
     expect(el.style.transform).toBe('');
-    await expect(c.finished).rejects.toMatchObject({ name: 'AbortError' });
+    await expect(done).rejects.toMatchObject({ name: 'AbortError' });
   });
   it('accepts selectors, lists and duration tokens; unchanged elements get no animation', () => {
     const a = div(); a.className = 'it';
