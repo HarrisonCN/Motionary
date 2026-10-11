@@ -58,7 +58,7 @@ app.use(UsaPlugin);            // or app.use(UsaPlugin, { categories: ['click', 
 `<usa-switch :checked.prop="on" @usa:change="on = $event.detail.checked" />`
 
 ## Svelte / Solid / Angular
-Custom elements work as-is: Svelte (`on:usa:change`), Solid (`on:usa:change`, `prop:checked`), Angular (`schemas: [CUSTOM_ELEMENTS_SCHEMA]`). Call `defineComponents()` or `lazyDefine()` in the client entry.
+Custom elements work as-is: Svelte (`use:usa` action — `on:usa:change` does not compile in Svelte 3/4 and `onusa:change` warns `attribute_illegal_colon` in Svelte 5), Solid (`prop:checked` + `use:usa` directive — `on:usa:change` is not valid JSX), Angular (`schemas: [CUSTOM_ELEMENTS_SCHEMA]`, `[checked]` + `(usa:change)`). Every pattern here is covered by the framework regression matrix ([frameworks-matrix.md](frameworks-matrix.md)). Call `defineComponents()` or `lazyDefine()` in the client entry.
 
 ## Lazy registration
 `lazyDefine()` (from `motionary/components/lazy`) watches the DOM and dynamically imports only the categories whose tags appear — a page with just `<usa-button>` loads the click chunk only.
@@ -79,9 +79,11 @@ Custom elements work as-is: Svelte (`on:usa:change`), Solid (`on:usa:change`, `p
 
 ```tsx
 import { onMount } from 'solid-js';
-import { defineUsa } from 'motionary/components/solid';
+import { defineUsa, usa } from 'motionary/components/solid';
+false && usa; // keep the directive import (Solid convention)
 onMount(() => defineUsa());
-<usa-switch prop:checked={on()} on:usa:change={(e) => setOn(e.detail.checked)} />;
+// `on:usa:change` is not valid JSX (two colons) — listen through the directive:
+<usa-switch prop:checked={on()} use:usa={{ on: { change: (e) => setOn(e.detail.checked) } }} />;
 ```
 
 ## Angular (v3.8)

@@ -19,6 +19,11 @@
  */
 import { COMPONENT_CATEGORIES } from '../index-tags';
 
+// 13.5.0: React 19 does not attach custom-element event props (`onusa:change`) to server-rendered elements it hydrates —
+// bind events with a ref callback: `ref={(el) => { if (!el) return; const b = bindUsa(el, { on: { change } }); return () => b.destroy(); }}`.
+export { bindUsa, usaEventName } from './bind';
+export type { UsaBinding } from './bind';
+
 type AnyProps = Record<string, any>;
 interface ReactLike {
   createElement: (type: any, props?: any, ...children: any[]) => any;

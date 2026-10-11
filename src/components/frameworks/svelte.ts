@@ -13,7 +13,8 @@
  * </script>
  * <usa-switch use:usa={{ props: { checked: on }, on: { change: (e) => (on = e.detail.checked) } }}></usa-switch>
  * ```
- * Plain `on:usa:change` does not compile in Svelte 3/4 (colon); use the action or `onusa:change` in Svelte 5.
+ * Use the action in every Svelte version: plain `on:usa:change` does not compile in Svelte 3/4 (colon), and in
+ * Svelte 5 `onusa:change` triggers the `attribute_illegal_colon` warning (13.5.0) — `use:usa` is warning-free.
  */
 import { defineComponents, type ComponentCategory } from '../index';
 import { bindUsa, type UsaBinding } from './bind';

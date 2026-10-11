@@ -11,7 +11,7 @@
 // every framework import — also the ones inside motionary's own dist (e.g. solid-js) — resolves from the fixture,
 // so there is exactly one copy of each framework.
 import { build } from 'esbuild';
-import { execFileSync } from 'node:child_process';
+import { spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, readdirSync, rmSync, symlinkSync, writeFileSync, lstatSync } from 'node:fs';
 import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -51,25 +51,46 @@ rmSync(OUT, { recursive: true, force: true });
 mkdirSync(OUT, { recursive: true });
 if (prepare) await prepare({ DIR, OUT });
 
-const common = { bundle: true, absWorkingDir: DIR, logLevel: 'warning', plugins: [dedupe, ...plugins], sourcemap: 'inline', ...extra };
+const common = { bundle: true, absWorkingDir: DIR, logLevel: 'silent', plugins: [dedupe, ...plugins], sourcemap: 'inline', ...extra };
+
+// Every bundler warning fails the build (13.5.0), with one allowance: esbuild's `ignored-bare-import` for a bare
+// `import '../chunks/x.js'` that Rollup keeps in two dist files (add-to-cart, fx-gpu) as an execution-order hint into a
+// chunk the package declares side-effect free — dropping it changes nothing (hoistTransitiveImports:false removed the rest).
+const ALLOWED = (w) => w.id === 'ignored-bare-import' && /[\\/]dist[\\/]chunks[\\/]/.test(w.text);
+async function bundle(opts, label) {
+  const r = await build(opts);
+  const bad = r.warnings.filter((w) => !ALLOWED(w));
+  if (bad.length) {
+    for (const w of bad) console.error(`${fw} ${label}: ▲ [${w.id}] ${w.text}${w.location ? ` (${w.location.file}:${w.location.line})` : ''}`);
+    throw new Error(`${fw}: ${bad.length} bundler warning(s) in the ${label} build`);
+  }
+  return r;
+}
 const dev = { 'process.env.NODE_ENV': '"development"' };
 
 // 1. server bundle + render in a DOM-free Node process
-await build({ ...common, entryPoints: [pick('server')], outfile: join(OUT, 'server.mjs'), platform: 'node', format: 'esm', define: { ...dev, ...extra.define }, ...serverExtra, plugins: [...common.plugins, ...(serverExtra.plugins || [])],
-  banner: { js: "import { createRequire as __cr } from 'node:module'; const require = __cr(import.meta.url);" } });
-const { html, head } = JSON.parse(execFileSync(process.execPath, ['--enable-source-maps', '-e', `
+await bundle({ ...common, entryPoints: [pick('server')], outfile: join(OUT, 'server.mjs'), platform: 'node', format: 'esm', define: { ...dev, ...extra.define }, ...serverExtra, plugins: [...common.plugins, ...(serverExtra.plugins || [])],
+  banner: { js: "import { createRequire as __cr } from 'node:module'; const require = __cr(import.meta.url);" } }, 'server');
+const ssr = spawnSync(process.execPath, ['--enable-source-maps', '-e', `
   for (const g of ['window', 'document', 'HTMLElement', 'customElements', 'localStorage', 'requestAnimationFrame'])
     if (typeof globalThis[g] !== 'undefined') { console.error('unexpected DOM global ' + g); process.exit(3); }
   const m = await import(${JSON.stringify('file://' + join(OUT, 'server.mjs'))});
   const r = await m.render();
   process.stdout.write(JSON.stringify(typeof r === 'string' ? { html: r, head: '' } : r));
-`], { cwd: DIR, encoding: 'utf8', input: '', stdio: ['pipe', 'pipe', 'inherit'] }));
+`], { cwd: DIR, encoding: 'utf8', input: '' });
+// SSR must be silent: any stderr output (React's useLayoutEffect warning, Vue / Svelte / Solid / Angular warnings) fails
+const ssrNoise = (ssr.stderr || '').split('\n').filter((l) => l.trim() && !(fw === 'angular' && /^Angular is running in development mode\.?$/.test(l.trim())));
+if (ssr.status !== 0 || ssrNoise.length) {
+  console.error(ssr.stderr);
+  throw new Error(`${fw}: server render ${ssr.status !== 0 ? 'failed (exit ' + ssr.status + ')' : 'printed warnings'}`);
+}
+const { html, head } = JSON.parse(ssr.stdout);
 if (!/<usa-switch\b/.test(html)) throw new Error(`${fw}: server HTML has no <usa-switch>:\n${html.slice(0, 500)}`);
 if (/usa-sw-track/.test(html)) throw new Error(`${fw}: server HTML already contains upgraded switch markup`);
 writeFileSync(join(OUT, 'ssr.html'), html);
 
 // 2. client bundle (development build: hydration warnings on)
-await build({ ...common, entryPoints: [pick('client')], outfile: join(OUT, 'client.js'), platform: 'browser', format: 'esm', define: { ...dev, ...extra.define }, target: 'es2022', ...clientExtra, plugins: [...common.plugins, ...(clientExtra.plugins || [])] });
+await bundle({ ...common, entryPoints: [pick('client')], outfile: join(OUT, 'client.js'), platform: 'browser', format: 'esm', define: { ...dev, ...extra.define }, target: 'es2022', ...clientExtra, plugins: [...common.plugins, ...(clientExtra.plugins || [])] }, 'client');
 
 // 3. page
 writeFileSync(join(OUT, 'index.html'), `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>motionary × ${fw}</title>

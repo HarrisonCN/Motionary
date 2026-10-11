@@ -13,6 +13,7 @@ export function App() {
     const f = fx();
     if (!f) return;
     f.setChecked = setChecked;
+    f.hydrated?.();
     f.show = setShow;
     f.mounts = (f.mounts || 0) + 1;
   }, []);
