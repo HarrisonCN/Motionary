@@ -1453,4 +1453,4 @@ exports.themeCss = themeCss;
 exports.themePreset = themePreset;
 exports.themeVars = themeVars;
 exports.togglePressed = togglePressed;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.6.0/dist/components/effects.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.7.0/dist/components/effects.cjs.map

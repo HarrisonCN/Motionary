@@ -107,4 +107,4 @@ exports.orientationToTilt = orientationToTilt;
 exports.pinchAngle = pinchAngle;
 exports.pinchScale = pinchScale;
 exports.registerGesture3Pack = registerGesture3Pack;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.6.0/dist/components/fx-gesture.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.7.0/dist/components/fx-gesture.cjs.map

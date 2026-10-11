@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-KZcxpR09.cjs');
+var registry = require('../chunks/registry-DlT6mFCX.cjs');
 
 /**
  * `motionary/runtime/text` (10.3) — split text into characters, words and
@@ -144,4 +144,4 @@ const text = { id: 'text', version: registry.RUNTIME_VERSION, tier: 'basic', req
 exports.segment = segment;
 exports.splitText = splitText;
 exports.text = text;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.6.0/dist/runtime/text.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.7.0/dist/runtime/text.cjs.map

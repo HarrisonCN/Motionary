@@ -62,4 +62,4 @@ function followPanel(p) {
 exports.followPanel = followPanel;
 exports.viewportHeight = viewportHeight;
 exports.watchViewport = watchViewport;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.6.0/dist/chunks/viewport-EFYGqMNa.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.7.0/dist/chunks/viewport-EFYGqMNa.cjs.map

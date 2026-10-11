@@ -112,4 +112,4 @@ function defineReactions(tag = 'usa-reactions') {
 
 exports.defineReactions = defineReactions;
 exports.parseReactions = parseReactions;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.6.0/dist/chunks/reactions-BL2iO8iy.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.7.0/dist/chunks/reactions-BL2iO8iy.cjs.map
