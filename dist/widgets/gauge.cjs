@@ -93,4 +93,4 @@ function defineGauge(tag = 'usa-gauge') {
 }
 
 exports.defineGauge = defineGauge;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.2.0/dist/widgets/gauge.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.3.0/dist/widgets/gauge.cjs.map

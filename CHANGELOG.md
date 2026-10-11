@@ -7,6 +7,65 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [14.3.0] - 2026-10-11
+
+**Studio canvas foundations**. The first piece of the Motion Studio canvas: select, marquee and multi-select, layer
+order / lock / hide, guides and snapping, drag / resize / rotate with pointer and touch (including pinch-zoom of the
+canvas), keyboard navigation and nudge, and an accessible selection model. It builds on Scene Format v2 and the 13.6
+timeline editor model; there is no new document format. No breaking changes. Zero runtime dependencies.
+`motionary/components/lite` stays ≤ 70 KB gzip and no budget was raised: the new entry has its own budget line.
+[docs/studio-canvas.md](docs/studio-canvas.md)
+
+### Added
+
+- **`motionary/studio/canvas`** (= `motionary/components/studio-canvas`; its own entry with a 12 KB budget, not in
+  lite, `motionary/core` or `motionary/motion`). `createStudioCanvas(root, { history, stage, time, grid, snap, guides,
+  zoom, measure, onSelect, onEdit, onZoom })`.
+- **Edits are timeline editor operations:**
+  - Geometry is the keyframe props at the edit time: `translate`, `rotate`, `width` and `height`, which are CSS
+    properties that the player and `playScene` play as they are.
+  - Lock is `locked`, hide is `muted`, and order is the layer order (the first layer is in front).
+  - Every edit goes through the existing `createTimelineHistory`, and one gesture is one undo step.
+- **Lossless Scene v2 ops:** every edit is also returned as `CanvasOp`s (`add-keyframe`, `set-props`, `update-layers`,
+  `move-layer`). `applyCanvasOps(scene, ops)` replays them on any Scene v2 document. It keeps preset, effect and
+  component layers, tokens, loop and composite, and it throws on ops that do not apply.
+- **Selection:**
+  - Click or tap to select; Shift, Ctrl or ⌘ toggles.
+  - A marquee from empty space selects what it touches (rotated layers by their bounds); Shift adds.
+  - Locked layers can be selected but do not move. Hidden layers are not hit.
+- **Guides and snapping:** to guide lines, the other layers' edges and centres, and the grid. The snap line is shown
+  while dragging, and Alt turns snapping off. The threshold is in screen px, so it is the same at every zoom.
+- **Pointer and touch:**
+  - Pointer Events only, with pointer capture, and `touch-action: none` while the canvas is active.
+  - Eight resize handles (the opposite edge stays put, also when the layer is rotated; Shift keeps the aspect) and a
+    rotate handle (Shift: 15° steps).
+  - Two-finger pinch-zoom and pan around the midpoint. A move the first finger started is cancelled when the second
+    finger lands.
+  - Ctrl / ⌘ + wheel zooms around the pointer. `pointercancel` cancels the gesture.
+- **Keyboard:**
+  - Arrow keys nudge by 1 px (Shift: 10 px), and a burst of nudges is one undo step.
+  - Alt + arrows, Home and End move focus. Space and Enter select. Escape cancels or clears. Ctrl / ⌘ + A selects all.
+  - Ctrl / ⌘ + ] / [ reorders (with Shift: to the front / back). Ctrl / ⌘ + Shift + L locks and Ctrl / ⌘ + Shift + H
+    hides. Undo / redo use `bindHistoryKeys`.
+- **Accessibility:** the canvas is a `listbox` (`aria-multiselectable`) of `option`s with `aria-selected`, focus moves
+  with a roving `tabindex`, layer names become labels, lock and hide states are in `aria-description`, and a polite
+  live region announces selections and edits.
+- **No uncontrolled global listeners:** nothing on `window` or `document`. The move / up / cancel listeners exist only
+  during a gesture. `destroy()` removes everything and restores every attribute and inline style it changed.
+- **Pure helpers:** `readCanvasGeometry`, `canvasBox`, `canvasBounds`, `rectsIntersect`, `marqueeHits`, `snapLines`,
+  `snapValue`, `snapRect`, `snapToGrid`, `resizeBox`, `rotationFromPointer`, `canvasSetBox`, `canvasMove`,
+  `canvasSetLocked`, `canvasSetHidden`, `canvasReorder`.
+- **Tests:**
+  - `test/studio-canvas-14-3.test.ts`: op mapping, lossless replay, snapping and hit-testing math, and the controller
+    including listener counts.
+  - `test/browser/studio-canvas.spec.mjs` in Chromium, Firefox and WebKit: mouse input, plus touch pointer emulation
+    in a phone viewport.
+  - A manual real-device checklist in the docs (iOS Safari, Android Chrome, pen, trackpad, screen readers).
+
+### Changed
+
+- `test/layout-motion-2-14-2.test.ts` accepts any later 14.x version instead of exactly 14.2.0.
+
 ## [14.2.0] - 2026-10-11
 
 **Layout Motion 2.0**. Layout-change animation built on Motion Engine v2: FLIP with transforms, scale correction,

@@ -11,4 +11,4 @@ function registerBadgePop() {
 }
 
 export { effect, registerBadgePop as register, registerBadgePop };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.2.0/dist/effects/badge-pop.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.3.0/dist/effects/badge-pop.js.map
