@@ -58,7 +58,7 @@ app.use(UsaPlugin);            // or app.use(UsaPlugin, { categories: ['click', 
 `<usa-switch :checked.prop="on" @usa:change="on = $event.detail.checked" />`
 
 ## Svelte / Solid / Angular
-Custom elements work as-is: Svelte (`use:usa` action — `on:usa:change` does not compile in Svelte 3/4 and `onusa:change` warns `attribute_illegal_colon` in Svelte 5), Solid (`prop:checked` + `use:usa` directive — `on:usa:change` is not valid JSX), Angular (`schemas: [CUSTOM_ELEMENTS_SCHEMA]`, `[checked]` + `(usa:change)`). Every pattern here is covered by the framework regression matrix ([frameworks-matrix.md](frameworks-matrix.md)). Call `defineComponents()` or `lazyDefine()` in the client entry.
+Custom elements work as-is: Svelte (`use:usa` action — `on:usa:change` does not compile in Svelte 3/4 and `onusa:change` warns `attribute_illegal_colon` in Svelte 5), Solid (`prop:checked` + `use:usa` directive — `on:usa:change` is not valid JSX), Angular (`schemas: [CUSTOM_ELEMENTS_SCHEMA]`, `[checked]` + a `[usaOn]` directive over `bindUsa` — `(usa:change)` does not compile in Angular 17+, see below). Every pattern here is covered by the framework regression matrix ([frameworks-matrix.md](frameworks-matrix.md)). Call `defineComponents()` or `lazyDefine()` in the client entry.
 
 ## Lazy registration
 `lazyDefine()` (from `motionary/components/lazy`) watches the DOM and dynamically imports only the categories whose tags appear — a page with just `<usa-button>` loads the click chunk only.
@@ -89,14 +89,22 @@ onMount(() => defineUsa());
 ## Angular (v3.8)
 
 ```ts
-import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
-import { usaInitializer, usaDetail } from 'motionary/angular';
+import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, Component, DestroyRef, Directive, ElementRef, Input, inject } from '@angular/core';
+import { bindUsa, usaInitializer, usaDetail } from 'motionary/angular';
 // app.config.ts
 providers: [{ provide: APP_INITIALIZER, multi: true, useFactory: usaInitializer() }];
+// 13.5.0: `(usa:change)` does not compile in Angular 17+ (a colon in an event binding names a global target:
+// window / document / body) — bind usa:* events with this small directive over bindUsa:
+@Directive({ selector: '[usaOn]', standalone: true })
+export class UsaOn {
+  private b = bindUsa(inject(ElementRef).nativeElement);
+  @Input({ required: true }) set usaOn(on: Record<string, (e: CustomEvent) => void>) { this.b.update({ on }); }
+  constructor() { inject(DestroyRef).onDestroy(() => this.b.destroy()); }
+}
 // component
-@Component({ standalone: true, schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  template: `<usa-switch [checked]="on" (usa:change)="on = detail($event).checked"></usa-switch>` })
-export class Settings { on = false; detail = usaDetail; }
+@Component({ standalone: true, imports: [UsaOn], schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  template: `<usa-switch [checked]="on" [usaOn]="{ change: onChange }"></usa-switch>` })
+export class Settings { on = false; onChange = (e: Event) => (this.on = usaDetail(e).checked); }
 ```
 
 MAUI, Flutter WebView, Electron and Tauri: see [hybrid-apps.md](./hybrid-apps.md).
