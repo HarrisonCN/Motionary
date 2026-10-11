@@ -225,10 +225,15 @@ describe('10.7 motionary-mcp 2.0', () => {
     const { StdioClientTransport } = await import('@modelcontextprotocol/sdk/client/stdio.js');
     const client = new Client({ name: 'motionary-test', version: '1.0.0' });
     await client.connect(new StdioClientTransport({ command: process.execPath, args: ['bin/motionary-mcp.mjs'], env: { ...process.env, MOTIONARY_MANIFEST: manifest, MOTIONARY_AI: aiBundle } as Record<string, string> }));
-    expect(client.getServerVersion()?.version).toBe('2.0.0');
+    expect(client.getServerVersion()?.version).toMatch(/^2\./); // 2.x (2.1.0 in 13.7)
     const { tools } = await client.listTools();
-    expect(tools.map((t) => t.name)).toEqual(['list_components', 'search_components', 'get_component', 'get_example', 'scaffold_snippet', 'suggest_motion', 'validate_snippet', 'check_compat']);
+    expect(tools.map((t) => t.name)).toEqual(['list_components', 'search_components', 'get_component', 'get_example', 'scaffold_snippet', 'suggest_motion', 'validate_snippet', 'check_compat', 'check_compatibility', 'suggest_fix']); // 13.7 appends two
     expect(tools.every((t) => t.annotations?.readOnlyHint === true)).toBe(true);
+    // 13.7: the SDK client validates structuredContent against each new tool's outputSchema
+    const cc: any = await client.callTool({ name: 'check_compatibility', arguments: { tags: ['usa-tilt'], framework: 'vue' } });
+    expect(cc.structuredContent.compatible).toBe(true);
+    const sf: any = await client.callTool({ name: 'suggest_fix', arguments: { code: '<usa-tosater></usa-tosater>' } });
+    expect(sf.structuredContent.fixed).toContain('<usa-toaster>');
     const s: any = await client.callTool({ name: 'suggest_motion', arguments: { text: 'fade the cards up when they scroll into view, one after another', format: 'css' } });
     expect(s.structuredContent.effect).toBe('fade');
     expect(s.structuredContent.trigger).toBe('scroll');
