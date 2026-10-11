@@ -1,6 +1,6 @@
 // 13.7.0 (written in 13.2, parked until 13.7): the MCP example regression set in real browsers — every component's generated HTML page and ESM module
 // (scaffold_snippet / get_example) run through validate_snippet { browser: true } on the built package. Examples labelled
-// needs-peer:<pkg> need an official runtime the offline browser cannot fetch; they must fail with that prerequisite named.
+// needs-peer:<pkg> use an official runtime the offline browser cannot fetch; if they fail, it must be with that prerequisite named.
 import { test, expect } from '@playwright/test';
 import { loadManifest, validateSnippetInBrowser } from '../../bin/motionary-mcp.mjs';
 import { generateExamples } from '../../scripts/mcp-examples.mjs';
@@ -21,7 +21,8 @@ for (let i = 0; i < CHUNKS; i++) {
       expect(v.mount.mounted, x.id).toBe(true);
       if (x.environment.startsWith('needs-peer:')) {
         const pk = x.environment.slice(11);
-        if (!v.errors.concat(v.warnings).some((e) => e.includes(pk))) fails.push(`${x.id}: expected the missing ${pk} to be reported`);
+        // an optional runtime (e.g. draco3d for compressed glTF) may not be needed to mount; if the run fails, it must be for that peer
+        if (!v.valid && !v.errors.concat(v.warnings).some((e) => e.includes(pk))) fails.push(`${x.id}: failed without naming the missing ${pk}: ${v.errors.join(' | ')}`);
         continue;
       }
       if (!v.valid) fails.push(`${x.id}: ${v.errors.join(' | ')}`);
