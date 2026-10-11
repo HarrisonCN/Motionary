@@ -19,6 +19,7 @@
 <div id="hero"><h1>Title</h1><div class="card">…</div><button>Go</button></div>
 <usa-keyframe-editor for="hero"></usa-keyframe-editor>
 <script>
+  const editor = document.querySelector('usa-keyframe-editor');
   editor.addEventListener('usa:change', (e) => save(e.detail.animation));
 </script>
 ```

@@ -17,7 +17,7 @@
 
 ```html
 <usa-voice-button label="Talk to the assistant"></usa-voice-button>
-<script>vb.addEventListener('usa:start', start); analyser.onlevel = (l) => (vb.level = l);</script>
+<script>const vb = document.querySelector('usa-voice-button'); vb.addEventListener('usa:start', () => (vb.level = 0.6)); // feed vb.level (0–1) from your audio analyser</script>
 ```
 
 ## ES module

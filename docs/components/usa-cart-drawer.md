@@ -17,7 +17,7 @@
 
 ```html
 <usa-cart-drawer currency="$"></usa-cart-drawer>
-<script>cart.add({ id: 'tee', name: 'T-shirt', price: 24 });</script>
+<script>addEventListener('DOMContentLoaded', () => { const cart = document.querySelector('usa-cart-drawer'); cart.add({ id: 'tee', name: 'T-shirt', price: 24 }); });</script>
 ```
 
 ## ES module

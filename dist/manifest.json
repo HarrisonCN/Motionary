@@ -4,7 +4,7 @@
   "schemaVersion": 2,
   "stability": "stable",
   "package": "motionary",
-  "version": "13.6.0",
+  "version": "13.7.0",
   "homepage": "https://harrisoncn.github.io/Motionary/",
   "llms": "https://harrisoncn.github.io/Motionary/llms.txt",
   "cdn": {
@@ -90,7 +90,8 @@
         "11.4",
         "12.2",
         "12.5",
-        "13.0"
+        "13.0",
+        "13.7"
       ]
     },
     {
@@ -1262,7 +1263,8 @@
       "stability": "stable",
       "since": "10.6",
       "changed": [
-        "10.7"
+        "10.7",
+        "13.7"
       ]
     },
     {
@@ -11805,8 +11807,8 @@
       "methods": [
         "add"
       ],
-      "example": "<usa-xp-bar level=\"3\" xp=\"40\" per=\"100\"></usa-xp-bar>\n<script>addEventListener('DOMContentLoaded', () => document.querySelector('usa-xp-bar').add(75)); /* → level 4, 15 XP */</script>",
-      "esm": "import { defineXpBar } from 'motionary/components/widgets';\n\ndefineXpBar(); // registers <usa-xp-bar>\n\n/* then use it in your HTML:\n<usa-xp-bar level=\"3\" xp=\"40\" per=\"100\"></usa-xp-bar>\n*/",
+      "example": "<usa-xp-bar level=\"3\" xp=\"40\" per=\"100\"></usa-xp-bar>\n<!-- +75 XP → level 4, 15 XP -->\n<script>addEventListener('DOMContentLoaded', () => document.querySelector('usa-xp-bar').add(75));</script>",
+      "esm": "import { defineXpBar } from 'motionary/components/widgets';\n\ndefineXpBar(); // registers <usa-xp-bar>\n\n/* then use it in your HTML:\n<usa-xp-bar level=\"3\" xp=\"40\" per=\"100\"></usa-xp-bar>\n<!-- +75 XP → level 4, 15 XP -->\n*/",
       "requires": [],
       "tier": "basic",
       "prerequisites": null,

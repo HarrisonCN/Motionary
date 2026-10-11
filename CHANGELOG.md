@@ -37,11 +37,11 @@ code changed, zero runtime dependencies, no size budget raised. [docs/mcp-gatewa
 
 ### Changed
 
-- `search_components` ranking: an exact tag (typed as `tilt`, `usa-tilt`, `<usa-tilt>` or `pull refresh`) always comes
-  first, exact tag segments / keywords outrank substrings, typos still match (`acordion` → `<usa-accordion>`), ties
+- `search_components` ranking: an exact tag (typed bare, with the `usa-` prefix, in angle brackets or as words such as `pull refresh`) always comes
+  first, exact tag segments / keywords outrank substrings, typos still match (`acordion` finds the accordion), ties
   break on the tag so results are stable. Same result fields.
-- `scaffold_snippet`: elements an example uses besides its own are registered too (`<usa-add-to-cart>` +
-  `<usa-cart-drawer>`), imports are merged per module (one name imported once), CDN pages import modules from the CDN
+- `scaffold_snippet`: elements an example uses besides its own are registered too (an add-to-cart
+  example that flies into a cart drawer), imports are merged per module (one name imported once), CDN pages import modules from the CDN
   instead of bare `motionary/…` specifiers; React output renames DOM attributes and styles properly; solid and angular
   scaffolds.
 

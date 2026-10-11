@@ -17,10 +17,11 @@ Wrap a list or grid: items that are added fade in, removed ones fade out in plac
 
 ```html
 <usa-auto-animate>
-  <ul class="todo">…</ul>
+  <ul class="todo"><li>Write the brief</li><li>Review</li></ul>
 </usa-auto-animate>
 
 <!-- or on any element: -->
+<ul class="grid"><li>A</li><li>B</li></ul>
 <script type="module">
   import { autoAnimate } from 'motionary/components/layout';
   autoAnimate(document.querySelector('.grid'));
@@ -36,9 +37,10 @@ defineAutoAnimate(); // registers <usa-auto-animate>
 
 /* then use it in your HTML:
 <usa-auto-animate>
-  <ul class="todo">…</ul>
+  <ul class="todo"><li>Write the brief</li><li>Review</li></ul>
 </usa-auto-animate>
 
 <!-- or on any element: -->
+<ul class="grid"><li>A</li><li>B</li></ul>
 */
 ```

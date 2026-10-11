@@ -17,7 +17,7 @@
 
 ```html
 <usa-otp length="6"></usa-otp>
-<script>otp.addEventListener('usa:complete', (e) => check(e.detail.code) ? otp.success() : otp.error());</script>
+<script>const otp = document.querySelector('usa-otp'); otp.addEventListener('usa:complete', (e) => check(e.detail.code) ? otp.success() : otp.error());</script>
 ```
 
 ## ES module

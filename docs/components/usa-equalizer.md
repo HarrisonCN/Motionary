@@ -17,7 +17,7 @@
 
 ```html
 <usa-equalizer preset="rock" bands="60,150,400,1k,2.4k,6k,16k"></usa-equalizer>
-<script>eq.applyPreset('vocal');</script>
+<script>addEventListener('DOMContentLoaded', () => { const eq = document.querySelector('usa-equalizer'); eq.applyPreset('vocal'); });</script>
 ```
 
 ## ES module

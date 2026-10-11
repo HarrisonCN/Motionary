@@ -17,7 +17,7 @@
 
 ```html
 <usa-globe markers="Shanghai:31.2,121.5; London:51.5,-0.1; New York:40.7,-74"></usa-globe>
-<script>globe.flyTo('London');</script>
+<script>addEventListener('DOMContentLoaded', () => { const globe = document.querySelector('usa-globe'); globe.flyTo('London'); });</script>
 ```
 
 ## ES module

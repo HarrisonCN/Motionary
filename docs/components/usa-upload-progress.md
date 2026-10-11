@@ -17,7 +17,7 @@
 
 ```html
 <usa-upload-progress name="report.pdf" size="2400000" value="40"></usa-upload-progress>
-<script>row.value = 75; row.status = 'error';</script>
+<script>addEventListener('DOMContentLoaded', () => { const row = document.querySelector('usa-upload-progress'); row.value = 75; row.status = 'error'; });</script>
 ```
 
 ## ES module

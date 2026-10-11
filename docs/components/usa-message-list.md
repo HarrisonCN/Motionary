@@ -20,7 +20,7 @@
   <p data-from="Ada">Hi! 👋</p>
   <p data-me>Hey Ada</p>
 </usa-message-list>
-<script>list.typing('Ada'); list.push({ from: 'Ada', text: 'Ship it?' });</script>
+<script>addEventListener('DOMContentLoaded', () => { const list = document.querySelector('usa-message-list'); list.typing('Ada'); list.push({ from: 'Ada', text: 'Ship it?' }); });</script>
 ```
 
 ## ES module

@@ -19,7 +19,7 @@ Pull down at the top of a list: the spinner stretches in with rubber-band resist
 <usa-pull-refresh style="height: 300px">
   <ul>…</ul>
 </usa-pull-refresh>
-<script>el.addEventListener('usa:refresh', async (e) => { await load(); e.detail.done(); });</script>
+<script>const el = document.querySelector('usa-pull-refresh'); el.addEventListener('usa:refresh', async (e) => { await load(); e.detail.done(); });</script>
 ```
 
 ## ES module

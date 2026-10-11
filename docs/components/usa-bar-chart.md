@@ -17,7 +17,7 @@
 
 ```html
 <usa-bar-chart values="12,19,8,15,22" labels="Mon,Tue,Wed,Thu,Fri" unit="k"></usa-bar-chart>
-<script>chart.data = [{ label: 'Mon', value: 18 }, …];</script>
+<script>addEventListener('DOMContentLoaded', () => { document.querySelector('usa-bar-chart').data = [{ label: 'Mon', value: 18 }, { label: 'Tue', value: 12 }, { label: 'Wed', value: 21 }]; });</script>
 ```
 
 ## ES module

@@ -617,7 +617,7 @@ export const components = [
     '7.5: an experience bar — add(n) fills it smoothly; overflowing fills to the end, the level badge pops and the bar restarts with the remainder (several levels if needed).',
     '7.5：经验条 —— add(n) 平滑填充；溢出时填满、等级徽章弹跳，并以余数重新开始（必要时连升多级）。',
     ['xp', 'level', 'progress', 'game', 'experience'],
-    '<usa-xp-bar level="3" xp="40" per="100"></usa-xp-bar>\n<script>addEventListener(\'DOMContentLoaded\', () => document.querySelector(\'usa-xp-bar\').add(75)); /* → level 4, 15 XP */</script>',
+    '<usa-xp-bar level="3" xp="40" per="100"></usa-xp-bar>\n<!-- +75 XP → level 4, 15 XP -->\n<script>addEventListener(\'DOMContentLoaded\', () => document.querySelector(\'usa-xp-bar\').add(75));</script>',
     '<div class="demo-col"><usa-xp-bar level="3" xp="40" per="100"></usa-xp-bar><button type="button" class="demo-btn" data-xp>+35 XP</button></div>',
     undefined, { since: '7.5' }),
   W('usa-badge-wall', 'ui', 'Badge wall', '成就徽章墙',

@@ -18,6 +18,7 @@
 ```html
 <usa-file-drop multiple accept="image/*" label="Drop images or browse"></usa-file-drop>
 <script>
+  const drop = document.querySelector('usa-file-drop');
   drop.addEventListener('usa:files', (e) => upload(e.detail.files, (i, p) => drop.setProgress(i, p)));
 </script>
 ```
