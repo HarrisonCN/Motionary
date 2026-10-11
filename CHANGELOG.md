@@ -23,7 +23,7 @@ timeline editor model; there is no new document format. No breaking changes. Zer
   zoom, measure, onSelect, onEdit, onZoom })`.
 - **Edits are timeline editor operations:**
   - Geometry is the keyframe props at the edit time: `translate`, `rotate`, `width` and `height`, which are CSS
-    properties that `<usa-player>` / `playScene` play as they are.
+    properties that the player and `playScene` play as they are.
   - Lock is `locked`, hide is `muted`, and order is the layer order (the first layer is in front).
   - Every edit goes through the existing `createTimelineHistory`, and one gesture is one undo step.
 - **Lossless Scene v2 ops:** every edit is also returned as `CanvasOp`s (`add-keyframe`, `set-props`, `update-layers`,
