@@ -7,6 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [13.4.0] - 2026-10-10
+
+Animation scheduling. One shared rAF loop now has a frame budget, drops the work of detached elements, and — in the
+widgets and `<usa-story>` — pauses loops that are off screen or in a hidden tab. New long-task helpers keep big setups
+from blocking input. No breaking changes; zero runtime dependencies; size budgets unchanged
+(`motionary/components/lite` stays within 70 KB — the offscreen pause is a separate plug-in and not part of lite).
+[docs/scheduling.md](docs/scheduling.md)
+
+### Added
+
+- `setFrameBudget(ms)` (`motionary/components/perf`): queued callbacks that do not fit a frame's budget (default 8 ms)
+  run next frame, oldest first. `schedulerStats()` also reports `deferred`, `parked` and `budget`.
+- `onFrame(fn, el?)`: optional owner element; a one-shot scheduler callback with an owner is dropped once the owner
+  is detached.
+- `motionary/components/offscreen`: `installOffscreenPause()`, `raf`, `caf`, `onFrame` — pause while the tab is hidden
+  and while the owner element is off screen (shared IntersectionObserver). Used by every widget loop and `<usa-story>`.
+  **Not included in `motionary/components/lite`.**
+- `motionary/components/perf-tasks`: `yieldToMain()`, `shouldYield()`, `runChunked()`.
+- Connect / disconnect cycle test (no leaked loops or queued callbacks).
+
+### Changed
+
+- 42 components moved from their own `requestAnimationFrame` calls to the shared scheduler; a test keeps it that way.
+- `withoutDeprecations(fn)` simply runs `fn` (its counter was never read); `now()` uses `performance.now()`.
+
 ## [13.3.0] - 2026-10-10
 
 Mobile compatibility and security. Components now handle the soft keyboard (`visualViewport`), screen rotation and touch
