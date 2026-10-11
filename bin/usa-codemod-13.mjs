@@ -21,7 +21,7 @@ const EXT = new Set(['.js', '.mjs', '.cjs', '.jsx', '.ts', '.tsx', '.mts', '.cts
 export function rewriteCdnMajor(source, to = TARGET_MAJOR) {
   const hits = [];
   const code = source.replace(/((?:unpkg\.com|cdn\.jsdelivr\.net\/npm)\/(?:motionary|use-scroll-animate))@(\d+)\//g, (m, base, major) => {
-    if (major === to || Number(major) < 10) return m;
+    if (major === to || Number(major) < 10 || Number(major) > Number(to)) return m; // 14.0: never downgrade a newer major
     hits.push({ from: `@${major}/`, to: `@${to}/` });
     return `${base}@${to}/`;
   });
