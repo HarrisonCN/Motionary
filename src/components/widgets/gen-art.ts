@@ -1,4 +1,4 @@
-import { raf as sraf, caf as scaf } from '../base';
+import { raf as sraf, caf as scaf } from '../offscreen';
 import { defineElement, type UsaElement } from '../base';
 import { PALETTES, seededRandom } from '../fx2/genart';
 import css from './gen-art.css?raw';

@@ -17,8 +17,6 @@ import {
   setAnimationBudget,
   animationBudget,
   setFrameBudget,
-  raf,
-  caf,
   setStyleLoader,
   configureComponents,
   getMotionIntensity,
@@ -26,8 +24,7 @@ import {
 } from '../base';
 import { COMPONENT_CATEGORIES, type ComponentCategory } from '../index-tags';
 
-export { onFrame, schedulerStats, activeAnimations, setAnimationBudget, animationBudget, setFrameBudget, raf, caf };
-export { yieldToMain, shouldYield, runChunked, type ChunkOptions, type ChunkResult } from './tasks';
+export { onFrame, schedulerStats, activeAnimations, setAnimationBudget, animationBudget, setFrameBudget };
 
 export interface AutoDegradeOptions {
   /** Frame rate below which motion is degraded (default 45). */

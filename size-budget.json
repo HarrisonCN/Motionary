@@ -325,6 +325,16 @@
     "limit": 2304
   },
   {
+    "name": "import 'motionary/components/offscreen' (13.4 offscreen / hidden-tab pause plug-in incl. the shared element base; not in lite)",
+    "import": "export * from 'pkg/components/offscreen';",
+    "limit": 3072
+  },
+  {
+    "name": "import 'motionary/components/perf-tasks' (13.4 yieldToMain / shouldYield / runChunked)",
+    "import": "export * from 'pkg/components/perf-tasks';",
+    "limit": 1024
+  },
+  {
     "name": "import 'motionary/components/bridge'",
     "import": "export * from 'pkg/components/bridge';",
     "limit": 1792

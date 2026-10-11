@@ -1,4 +1,4 @@
-import { raf as sraf, caf as scaf } from '../base';
+import { raf as sraf, caf as scaf } from '../offscreen';
 import { defineElement, type UsaElement } from '../base';
 import { clampN } from './shared';
 import css from './gauge.css?raw';

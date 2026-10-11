@@ -15,7 +15,7 @@
  * (the gallery stacks vertically), counters show final values, the rest is
  * class changes only.
  */
-import { raf as sraf, caf as scaf } from '../base';
+import { raf as sraf, caf as scaf } from '../offscreen';
 import { defineElement, type UsaElement } from '../base';
 
 export const STORY_TEMPLATES = ['pin', 'gallery', 'zoom', 'compare', 'counter', 'highlight'] as const;

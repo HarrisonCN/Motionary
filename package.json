@@ -1220,6 +1220,26 @@
         "default": "./dist/components/dotlottie.cjs"
       }
     },
+    "./components/offscreen": {
+      "import": {
+        "types": "./dist/components/offscreen.d.ts",
+        "default": "./dist/components/offscreen.js"
+      },
+      "require": {
+        "types": "./dist/components/offscreen.d.cts",
+        "default": "./dist/components/offscreen.cjs"
+      }
+    },
+    "./components/perf-tasks": {
+      "import": {
+        "types": "./dist/components/perf-tasks.d.ts",
+        "default": "./dist/components/perf-tasks.js"
+      },
+      "require": {
+        "types": "./dist/components/perf-tasks.d.cts",
+        "default": "./dist/components/perf-tasks.cjs"
+      }
+    },
     "./components/lite": {
       "import": {
         "types": "./dist/components/lite.d.ts",

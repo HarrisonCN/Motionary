@@ -1,4 +1,4 @@
-import { raf as sraf, caf as scaf } from '../base';
+import { raf as sraf, caf as scaf } from '../offscreen';
 import { defineElement, type UsaElement } from '../base';
 import { clampN, part } from './shared';
 import css from './meters.css?raw';
