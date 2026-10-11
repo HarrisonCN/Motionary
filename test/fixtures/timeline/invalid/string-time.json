@@ -1,0 +1,1 @@
+{ "format": "motionary-timeline", "version": 1, "layers": [ { "id": "a", "type": "track", "keyframes": [ { "id": "k", "time": "100", "props": { "opacity": 1 } } ] } ] }

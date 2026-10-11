@@ -1,0 +1,130 @@
+{
+  "format": "motionary-timeline",
+  "version": 1,
+  "name": "Layers, groups, mute / solo / lock",
+  "duration": 1500,
+  "seed": 42,
+  "layers": [
+    {
+      "id": "hero",
+      "type": "group",
+      "name": "Hero",
+      "locked": true
+    },
+    {
+      "id": "bg",
+      "type": "track",
+      "parent": "hero",
+      "target": ".bg",
+      "keyframes": [
+        {
+          "id": "k1",
+          "time": 0,
+          "props": {
+            "backgroundColor": "#000000"
+          },
+          "easing": "cubic-bezier(0.22, 1, 0.36, 1)"
+        },
+        {
+          "id": "k2",
+          "time": 1000,
+          "props": {
+            "backgroundColor": "#ff8040"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cards",
+      "type": "group",
+      "name": "Cards",
+      "parent": "hero"
+    },
+    {
+      "id": "c1",
+      "type": "track",
+      "parent": "cards",
+      "solo": true,
+      "target": ".card:nth-child(1)",
+      "keyframes": [
+        {
+          "id": "k3",
+          "time": 200,
+          "props": {
+            "--x": "random(0, 100)",
+            "opacity": 0
+          },
+          "easing": "steps(4, end)"
+        },
+        {
+          "id": "k4",
+          "time": 800,
+          "props": {
+            "--x": "random(0, 100)",
+            "opacity": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "c2",
+      "type": "track",
+      "parent": "cards",
+      "muted": true,
+      "target": ".card:nth-child(2)",
+      "keyframes": [
+        {
+          "id": "k5",
+          "time": 300,
+          "props": {
+            "opacity": 0
+          }
+        },
+        {
+          "id": "k6",
+          "time": 900,
+          "props": {
+            "opacity": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "cta",
+      "type": "track",
+      "name": "Button",
+      "target": ".cta",
+      "keyframes": [
+        {
+          "id": "k7",
+          "time": 1000,
+          "props": {
+            "transform": "scale(0.8) rotate(-10deg)"
+          },
+          "easing": "back-out"
+        },
+        {
+          "id": "k8",
+          "time": 1500,
+          "props": {
+            "transform": "scale(1) rotate(0deg)"
+          }
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "editor": {
+      "zoom": 1.5,
+      "selection": [
+        "k3"
+      ]
+    },
+    "author": "fixture",
+    "tags": [
+      1,
+      null,
+      true
+    ]
+  }
+}

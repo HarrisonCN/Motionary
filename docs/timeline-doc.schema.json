@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cdn.jsdelivr.net/npm/motionary@13/docs/timeline-doc.schema.json",
+  "title": "motionary-timeline v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "version",
+    "layers"
+  ],
+  "properties": {
+    "format": {
+      "const": "motionary-timeline"
+    },
+    "version": {
+      "const": 1
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 2048
+    },
+    "duration": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 10000000
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "meta": {},
+    "layers": {
+      "type": "array",
+      "maxItems": 1000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "type"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "type": {
+            "enum": [
+              "track",
+              "group"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 2048
+          },
+          "parent": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "locked": {
+            "type": "boolean"
+          },
+          "muted": {
+            "type": "boolean"
+          },
+          "solo": {
+            "type": "boolean"
+          },
+          "target": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512
+          },
+          "keyframes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "time",
+                "props"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "time": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 10000000
+                },
+                "easing": {
+                  "type": "string",
+                  "maxLength": 200
+                },
+                "props": {
+                  "type": "object",
+                  "maxProperties": 64,
+                  "propertyNames": {
+                    "pattern": "^(--[A-Za-z0-9_-]+|[a-zA-Z][A-Za-z0-9_-]*)$",
+                    "not": {
+                      "enum": [
+                        "constructor",
+                        "prototype"
+                      ]
+                    }
+                  },
+                  "additionalProperties": {
+                    "oneOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "string",
+                        "maxLength": 2048
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "if": {
+          "properties": {
+            "type": {
+              "const": "group"
+            }
+          }
+        },
+        "then": {
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "target"
+                ]
+              },
+              {
+                "required": [
+                  "keyframes"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

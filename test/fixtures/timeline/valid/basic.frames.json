@@ -1,0 +1,146 @@
+[
+  {
+    "time": 0,
+    "layers": {
+      "title": {
+        "opacity": 0,
+        "transform": "translateY(24px)"
+      }
+    }
+  },
+  {
+    "time": 0,
+    "layers": {
+      "title": {
+        "opacity": 0,
+        "transform": "translateY(24px)"
+      }
+    }
+  },
+  {
+    "time": 50,
+    "layers": {
+      "title": {
+        "opacity": 0.1348,
+        "transform": "translateY(20.7644px)"
+      }
+    }
+  },
+  {
+    "time": 100,
+    "layers": {
+      "title": {
+        "opacity": 0.2603,
+        "transform": "translateY(17.7518px)"
+      }
+    }
+  },
+  {
+    "time": 150,
+    "layers": {
+      "title": {
+        "opacity": 0.3781,
+        "transform": "translateY(14.9247px)"
+      }
+    }
+  },
+  {
+    "time": 250,
+    "layers": {
+      "title": {
+        "opacity": 0.5907,
+        "transform": "translateY(9.8232px)"
+      }
+    }
+  },
+  {
+    "time": 400,
+    "layers": {
+      "title": {
+        "opacity": 0.8438,
+        "transform": "translateY(3.7479px)"
+      }
+    }
+  },
+  {
+    "time": 500,
+    "layers": {
+      "title": {
+        "opacity": 0.9555,
+        "transform": "translateY(1.068px)"
+      }
+    }
+  },
+  {
+    "time": 600,
+    "layers": {
+      "title": {
+        "opacity": 1,
+        "transform": "translateY(0px)"
+      }
+    }
+  },
+  {
+    "time": 600,
+    "layers": {
+      "title": {
+        "opacity": 1,
+        "transform": "translateY(0px)"
+      }
+    }
+  },
+  {
+    "time": 600,
+    "layers": {
+      "title": {
+        "opacity": 1,
+        "transform": "translateY(0px)"
+      }
+    }
+  },
+  {
+    "time": 600,
+    "layers": {
+      "title": {
+        "opacity": 1,
+        "transform": "translateY(0px)"
+      }
+    }
+  },
+  {
+    "time": 600,
+    "layers": {
+      "title": {
+        "opacity": 1,
+        "transform": "translateY(0px)"
+      }
+    }
+  },
+  {
+    "time": 600,
+    "layers": {
+      "title": {
+        "opacity": 1,
+        "transform": "translateY(0px)"
+      }
+    }
+  },
+  {
+    "time": 600,
+    "layers": {
+      "title": {
+        "opacity": 1,
+        "transform": "translateY(0px)"
+      }
+    }
+  },
+  {
+    "time": 600,
+    "layers": {
+      "title": {
+        "opacity": 1,
+        "transform": "translateY(0px)"
+      }
+    }
+  }
+]
