@@ -149,52 +149,11 @@ declare const TEXT3_FX: EffectDefinition[];
 /** Register the 6.3 text pack (idempotent). */
 declare function registerTextPack(): void;
 
-/**
- * 6.4 — Light & materials (`motionary/components/fx-light`), registered
- * through `registerEffect()`. Persistent effects (use `trigger="load"`)
- * that return a cleanup:
- *
- * - `light-follow` (hover) — a soft point light + specular highlight that
- *   follows the pointer over the surface.
- * - `refraction` (hover) — a glass lens that bends and magnifies what is
- *   behind it as it follows the pointer (backdrop filter, chromatic rim).
- * - `brushed-metal` (card) — fine brushed lines with an anisotropic sheen
- *   that turns with the pointer angle.
- * - `pearlescent` (card) — a nacre / holographic film whose hues shift with
- *   the pointer position.
- * - `god-rays` (background) — volumetric light shafts from a source point
- *   (Canvas 2D, additive).
- * - `pointer-shadow` (hover) — the pointer is the light: the element casts
- *   a soft real-time shadow away from it.
- *
- * Reduced motion: surfaces stay lit from a fixed angle (no tracking),
- * `god-rays` draws one still frame.
- */
-
 /** Track the pointer over `el` as 0–1 coordinates (`fn(x, y, inside)`); starts at (`x0`, `y0`). Returns a remover. */
 declare function trackPointer(el: HTMLElement, ctx: EffectContext, fn: (x: number, y: number, inside: boolean) => void, x0?: number, y0?: number): () => void;
 declare const LIGHT_FX: EffectDefinition[];
 /** Register the 6.4 light & materials pack (idempotent). */
 declare function registerLightPack(): void;
-
-/**
- * 6.5 — 3D scene cards (`motionary/components/fx-3d`), registered through
- * `registerEffect()`:
- *
- * - `depth-stack` (card, persistent) — the children (or `[data-depth]`
- *   layers) separate in Z and parallax against each other as the card tilts
- *   toward the pointer.
- * - `product-spin` (card, persistent) — a 360° product viewer: drag to turn
- *   the element in 3D with inertia, idles with a slow turntable spin.
- * - `card-flip-3d` (click) — a thick card flips to its back face (second
- *   child) with an edge that shows its depth.
- * - `origami` (enter) — the element unfolds panel by panel like folded paper.
- * - `orbit-camera` (scroll, persistent) — while the element scrolls through
- *   the viewport the camera orbits its 3D children.
- *
- * Reduced motion: no tilt, spin, orbit or fold; the flip swaps faces with a
- * crossfade.
- */
 
 declare const DEPTH3_FX: EffectDefinition[];
 /** Register the 6.5 3D pack (idempotent). */
@@ -286,25 +245,6 @@ declare const WEATHER_FX: EffectDefinition[];
 /** Register the 6.8 weather & ambience pack (idempotent). */
 declare function registerWeatherPack(): void;
 
-/**
- * 6.8 — Interactive physics 2.0 (`motionary/components/fx-physics`) on a tiny
- * Verlet integrator (`VerletWorld`), registered through `registerEffect()`:
- *
- * - `soft-body` (kind `hover`) — the element wobbles like jelly: pointer
- *   motion pushes a damped spring that squashes and skews it.
- * - `magnet` (kind `hover`) — the element's children are pulled toward the
- *   pointer on springs and settle back when it leaves.
- * - `cloth` (kind `background`) — a cloth hangs from the top edge and ripples
- *   when the pointer moves through it.
- * - `rope` (kind `background`) — a rope with a weight swings from the top;
- *   the pointer pushes it.
- * - `pinball` (kind `background`) — balls fall through round bumpers that
- *   light up on a hit; click to drop another ball.
- *
- * Canvas effects render only while visible; reduced motion draws one static
- * frame and the hover effects do nothing.
- */
-
 interface VerletPoint {
     x: number;
     y: number;
@@ -354,28 +294,6 @@ declare const FOCUS_FX: EffectDefinition[];
 /** Register the 6.9 focus & feedback pack (idempotent). */
 declare function registerFocusPack(): void;
 
-/**
- * 5.6 — sound-reactive effects (Web Audio).
- *
- * - `enableAudio(input)` — start analysing the microphone (`'mic'`), an
- *   `<audio>` / `<video>` element (or a selector for one) or a `MediaStream`.
- *   Browsers only allow an `AudioContext` to start inside a user gesture, so
- *   call it from a click handler (or use `<usa-audio>`, which renders the
- *   toggle button for you).
- * - Background effects (kind `background`, Canvas 2D through
- *   `canvasBackground()`): `spectrum-bars`, `pulse-ring`, `wave-ring`. Before
- *   audio is enabled they idle gently.
- * - Beat detection: `createBeatDetector()` (pure: energy → beat?), `onBeat(cb)`
- *   and `bindBeat(el, effect, options)`, which plays any registered effect on
- *   every beat. `<usa-audio>` does the same for `[data-usa-beat="effect"]`
- *   children and emits `usa:beat`.
- * - While audio runs, `--usa-audio-level` and `--usa-audio-bass` (0–1) are set
- *   on `<html>` for CSS-driven reactions.
- *
- * Reduced motion: the visual effects are skipped, beats play no effects and
- * the CSS variables stay at 0 — audio itself keeps playing.
- */
-
 interface AudioSample {
     /** Overall loudness (RMS of the waveform), 0–1. */
     level: number;
@@ -386,23 +304,6 @@ interface AudioSample {
     /** Time-domain waveform, 0–255 (128 = silence). */
     wave: Uint8Array;
 }
-
-/**
- * 7.1 — Music visualization (`motionary/fx/music`, also
- * `motionary/components/fx-music`), registered through `registerEffect()`.
- * Every effect reads the running analyser (`enableAudio()` / `<usa-audio>`);
- * without one it plays a gentle synthetic signal (`syntheticSample()`), so
- * the visuals work as decoration too.
- *
- * - `waveform-scope` (background) — an oscilloscope line of the waveform.
- * - `radial-spectrum` (background) — spectrum bars around a circle.
- * - `spectrum-mirror` (background) — mirrored bars with a reflection.
- * - `sound-particles` (background) — particles launched by the bass.
- * - `beat-bounce` (loop) — the element pumps with the bass.
- * - `vinyl-spin` (loop) — the element turns like a record; level speeds it.
- *
- * Reduced motion: backgrounds draw one static frame, loops do nothing.
- */
 
 /** A smooth, deterministic fake analyser frame at time `t` (s). */
 declare function syntheticSample(t: number, bins?: number): AudioSample;
@@ -993,18 +894,6 @@ declare const PERF3_FX: EffectDefinition[];
 /** Register idle-reveal and gpu-lift (9.6). */
 declare function registerPerf3Pack(): void;
 
-/**
- * 5.5 — generative backgrounds on Canvas 2D, registered through
- * `registerEffect()` (kind `background`): `flow-field`, `voronoi`,
- * `mesh-gradient`, `starfield`, `metaballs`, `contours`.
- *
- * Shared runner (`canvasBackground()`): a canvas behind the element's content
- * (`aria-hidden`, pointer-transparent), rendering only while visible
- * (IntersectionObserver) and the tab is shown, with adaptive quality — the
- * render scale drops when frames get slow and recovers when they are fast.
- * Reduced motion: one static frame, no loop.
- */
-
 interface GenFrame {
     ctx: CanvasRenderingContext2D;
     /** CSS-pixel size of the canvas. */
@@ -1023,16 +912,6 @@ interface GenerativeSpec {
     init?: (w: number, h: number, o: any) => any;
     draw: (f: GenFrame) => void;
 }
-
-/**
- * 6.2 — tiny WebGL2 full-screen shader runner with a Canvas 2D fallback, shared
- * by the 6.x GPU effect packs. One canvas behind the element (aria-hidden,
- * pointer-transparent), renders only while visible and the tab is shown,
- * adaptive resolution, pointer uniform, and a static first frame under reduced
- * motion. No WebGL2 (or a lost context / compile error) → the Canvas 2D
- * `fallback` spec runs through `canvasBackground()` instead.
- * `el.dataset.usaBackend` tells which one is active: `webgl2` or `canvas`.
- */
 
 /** GLSL shared by every shader: uniforms, hash, value noise, fbm. */
 declare const GLSL_HEAD = "#version 300 es\nprecision highp float;\nuniform vec2 u_res;uniform float u_t;uniform vec3 u_c0,u_c1,u_c2;uniform vec2 u_ptr;uniform float u_speed,u_scale;\nout vec4 o;\nfloat h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}\nfloat n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+1.),f.x),f.y);}\nfloat fbm(vec2 p){float v=0.,a=.5;for(int k=0;k<5;k++){v+=a*n(p);p=p*2.03+vec2(1.7,9.2);a*=.5;}return v;}\n";
@@ -1057,18 +936,6 @@ declare function shaderBackground(el: HTMLElement, fx: EffectContext, spec: Shad
  * returns `[r, g, b]` (0–255), sampled on a coarse grid and scaled up smoothly.
  */
 declare function fieldFallback(color: (x: number, y: number, t: number, o: any) => [number, number, number], cell?: number): GenerativeSpec;
-
-/**
- * 7.0 — WebGPU backend for the shader backgrounds (`shaderBackground()`).
- *
- * Every 6.x shader is written once as a small GLSL `main()` body. 7.0 runs it
- * on **WebGPU** where the browser has it: `glslToWgsl()` translates the body
- * (types, constructors, literals, loops, uniforms) into a WGSL fragment
- * shader with the same noise helpers; a spec can also ship hand-written
- * `wgsl`. If WebGPU is missing, the adapter / device is refused, or the
- * shader does not compile, the effect falls back to **WebGL2**, then to the
- * Canvas 2D fallback — `el.dataset.usaBackend` says which one runs.
- */
 
 /** WGSL shared by every shader: uniforms, hash, value noise, fbm (mirrors `GLSL_HEAD`). */
 declare const WGSL_HEAD = "struct U{res:vec2f,ptr:vec2f,t:f32,speed:f32,scale:f32,pad:f32,c0:vec4f,c1:vec4f,c2:vec4f};\n@group(0) @binding(0) var<uniform> u:U;\nfn h(p:vec2f)->f32{return fract(sin(dot(p,vec2f(127.1,311.7)))*43758.5453);}\nfn n(p:vec2f)->f32{let i=floor(p);var f=fract(p);f=f*f*(3.0-2.0*f);return mix(mix(h(i),h(i+vec2f(1.0,0.0)),f.x),mix(h(i+vec2f(0.0,1.0)),h(i+vec2f(1.0,1.0)),f.x),f.y);}\nfn fbm(p0:vec2f)->f32{var v=0.0;var a=0.5;var p=p0;for(var k=0;k<5;k++){v+=a*n(p);p=p*2.03+vec2f(1.7,9.2);a*=0.5;}return v;}\n@vertex fn vs(@builtin(vertex_index) i:u32)->@builtin(position) vec4f{var q=array<vec2f,3>(vec2f(-1.0,-1.0),vec2f(3.0,-1.0),vec2f(-1.0,3.0));return vec4f(q[i],0.0,1.0);}\n";

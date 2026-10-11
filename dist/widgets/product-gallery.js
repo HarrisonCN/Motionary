@@ -1,3 +1,3 @@
-export { d as defineProductGallery } from '../chunks/product-gallery-BcGA35Ie.js';
-import '../chunks/base-nzeN_ux7.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/widgets/product-gallery.js.map
+export { d as defineProductGallery } from '../chunks/product-gallery-7iuP6mwb.js';
+import '../chunks/base-Be98yNyq.js';
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/widgets/product-gallery.js.map

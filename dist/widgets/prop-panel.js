@@ -1,3 +1,3 @@
-export { d as definePropPanel } from '../chunks/prop-panel-DGm8VM4Z.js';
-import '../chunks/base-nzeN_ux7.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/widgets/prop-panel.js.map
+export { d as definePropPanel } from '../chunks/prop-panel-CS-i1ddG.js';
+import '../chunks/base-Be98yNyq.js';
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/widgets/prop-panel.js.map

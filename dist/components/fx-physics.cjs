@@ -1,10 +1,28 @@
 'use strict';
 
-var registry = require('../chunks/registry-EziiQiWO.cjs');
-var generative = require('../chunks/generative-BHIj-NU0.cjs');
-require('../chunks/base-vu_KhBiv.cjs');
+var base = require('../chunks/base-Do-R_9gU.cjs');
+var registry = require('../chunks/registry-CyVCJneg.cjs');
+var generative = require('../chunks/generative-BTya0iHP.cjs');
 require('../chunks/shared-jkgRH-Hx.cjs');
 
+/**
+ * 6.8 — Interactive physics 2.0 (`motionary/components/fx-physics`) on a tiny
+ * Verlet integrator (`VerletWorld`), registered through `registerEffect()`:
+ *
+ * - `soft-body` (kind `hover`) — the element wobbles like jelly: pointer
+ *   motion pushes a damped spring that squashes and skews it.
+ * - `magnet` (kind `hover`) — the element's children are pulled toward the
+ *   pointer on springs and settle back when it leaves.
+ * - `cloth` (kind `background`) — a cloth hangs from the top edge and ripples
+ *   when the pointer moves through it.
+ * - `rope` (kind `background`) — a rope with a weight swings from the top;
+ *   the pointer pushes it.
+ * - `pinball` (kind `background`) — balls fall through round bumpers that
+ *   light up on a hit; click to drop another ball.
+ *
+ * Canvas effects render only while visible; reduced motion draws one static
+ * frame and the hover effects do nothing.
+ */
 /** A minimal Verlet world: points, distance sticks, gravity, damping. */
 class VerletWorld {
     constructor(gravity = 900, damping = 0.99, iterations = 4) {
@@ -123,7 +141,7 @@ const PHYSICS2_FX = [
                 const a = o.amount;
                 el.style.transform = `skew(${(x * 0.6 * a).toFixed(2)}deg,${(y * 0.25 * a).toFixed(2)}deg) scale(${(1 + y * 0.004 * a).toFixed(4)},${(1 - y * 0.004 * a).toFixed(4)})`;
                 if (Math.abs(x) + Math.abs(vx) + Math.abs(y) + Math.abs(vy) > 0.02)
-                    raf = requestAnimationFrame(loop);
+                    raf = base.raf(loop);
                 else
                     ((raf = 0), (last = 0), (el.style.transform = prev));
             };
@@ -133,7 +151,7 @@ const PHYSICS2_FX = [
                 lx = e.clientX;
                 ly = e.clientY;
                 if (!raf && typeof requestAnimationFrame === 'function')
-                    raf = requestAnimationFrame(loop);
+                    raf = base.raf(loop);
             };
             const leave = () => (lx = ly = NaN);
             el.addEventListener('pointermove', move);
@@ -142,7 +160,7 @@ const PHYSICS2_FX = [
                 el.removeEventListener('pointermove', move);
                 el.removeEventListener('pointerleave', leave);
                 if (raf)
-                    cancelAnimationFrame(raf);
+                    base.caf(raf);
                 el.style.transform = prev;
             };
             ctx.onCleanup(stop);
@@ -341,4 +359,4 @@ function registerPhysicsPack() {
 exports.PHYSICS2_FX = PHYSICS2_FX;
 exports.VerletWorld = VerletWorld;
 exports.registerPhysicsPack = registerPhysicsPack;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/components/fx-physics.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/fx-physics.cjs.map

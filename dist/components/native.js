@@ -1,9 +1,9 @@
 import { parseMotion } from './dsl.js';
 import { easingPoints } from './design.js';
 import { MOTION_TOKENS } from './tokens.js';
-import '../chunks/registry-PxXkPc1Q.js';
-import '../chunks/base-nzeN_ux7.js';
-import '../chunks/core-Bar7NFx7.js';
+import '../chunks/registry-BEIhIRTY.js';
+import '../chunks/base-Be98yNyq.js';
+import '../chunks/core-RZkPEx8i.js';
 
 /**
  * `motionary/native` (= `motionary/components/native`, 9.8) — native 2.0:
@@ -139,4 +139,4 @@ function nativeTokens() {
 }
 
 export { entranceFrom, nativeEasing, nativeTokens, toFlutter, toReactNative };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/components/native.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/native.js.map

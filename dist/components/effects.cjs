@@ -2,15 +2,16 @@
 
 var components_fx = require('./fx.cjs');
 var shared = require('../chunks/shared-jkgRH-Hx.cjs');
-var player = require('../chunks/player-DIwSjUFR.cjs');
-var generative = require('../chunks/generative-BHIj-NU0.cjs');
-var audio = require('../chunks/audio-DhgfWYZ_.cjs');
-var registry = require('../chunks/registry-EziiQiWO.cjs');
-var base = require('../chunks/base-vu_KhBiv.cjs');
+var base = require('../chunks/base-Do-R_9gU.cjs');
+var player = require('../chunks/player-CbCdaCgu.cjs');
+var generative = require('../chunks/generative-BTya0iHP.cjs');
+var audio = require('../chunks/audio-D7Dk2gUF.cjs');
+var registry = require('../chunks/registry-CyVCJneg.cjs');
 var components_tokens = require('./tokens.cjs');
-require('../chunks/builtins-A9ihuDwy.cjs');
-require('../chunks/core-E18xla6s.cjs');
-require('../chunks/fx-lszndeFU.cjs');
+require('../chunks/builtins-DGP3jBW1.cjs');
+require('../chunks/core-6FhnH_Kv.cjs');
+require('../chunks/fx-O90ZgYwV.cjs');
+require('./offscreen.cjs');
 
 const CARD_FX = [
     {
@@ -188,6 +189,14 @@ const CLICK_FX = [
 ];
 
 /**
+ * 5.2 — bounce & physics micro-interactions, registered through
+ * `registerEffect()`. Keyframes come from a damped-spring / gravity solver
+ * (`springKeyframes()`, `bounceKeyframes()`), so the motion is physical but
+ * still runs on the Web Animations API (compositor, reduced-motion aware).
+ * Effects: `bounce-in`, `rubber-band`, `elastic-hover`, `drop-bounce`,
+ * `gravity-text`, `spring-follow`, `bell-swing`.
+ */
+/**
  * Sample a damped spring from 0 → 1 and return the progress values plus the
  * time (ms) it takes to settle. Pure, deterministic.
  */
@@ -353,11 +362,11 @@ const PHYSICS_FX = [
                 x += vx;
                 y += vy;
                 el.style.translate = `${x.toFixed(2)}px ${y.toFixed(2)}px`;
-                raf = Math.abs(vx) + Math.abs(vy) + Math.abs(tx - x) + Math.abs(ty - y) > 0.05 ? requestAnimationFrame(tick) : 0;
+                raf = Math.abs(vx) + Math.abs(vy) + Math.abs(tx - x) + Math.abs(ty - y) > 0.05 ? base.raf(tick) : 0;
             };
             const kick = () => {
                 if (!raf)
-                    raf = requestAnimationFrame(tick);
+                    raf = base.raf(tick);
             };
             const move = (e) => {
                 const r = host.getBoundingClientRect();
@@ -376,7 +385,7 @@ const PHYSICS_FX = [
             return () => {
                 host.removeEventListener('pointermove', move);
                 host.removeEventListener('pointerleave', leave);
-                cancelAnimationFrame(raf);
+                base.caf(raf);
                 el.style.translate = '';
             };
         },
@@ -397,6 +406,16 @@ const PHYSICS_FX = [
     },
 ];
 
+/**
+ * 5.3 — page-wide effects, registered through `registerEffect()`.
+ * Transitions (cover → `onCovered()` → reveal): `curtain`, `iris`,
+ * `pixel-dissolve`, `blinds`. Persistent page effects: `velocity-skew`,
+ * `spotlight`, `edge-glow`.
+ *
+ * ```ts
+ * await playEffect(document.body, 'iris', { onCovered: () => router.go('/next') });
+ * ```
+ */
 /** A full-viewport, aria-hidden, pointer-blocking (while covering) transition layer. */
 function screen(css = '') {
     const s = document.createElement('div');
@@ -512,18 +531,18 @@ const PAGE_FX = [
                 last = y;
                 skew += (target - skew) * 0.2;
                 el.style.transform = `skewY(${skew.toFixed(3)}deg)`;
-                raf = Math.abs(skew) > 0.01 || Math.abs(target) > 0.01 ? requestAnimationFrame(tick) : 0;
+                raf = Math.abs(skew) > 0.01 || Math.abs(target) > 0.01 ? base.raf(tick) : 0;
                 if (!raf)
                     el.style.transform = '';
             };
             const onScroll = () => {
                 if (!raf)
-                    raf = requestAnimationFrame(tick);
+                    raf = base.raf(tick);
             };
             addEventListener('scroll', onScroll, { passive: true });
             return () => {
                 removeEventListener('scroll', onScroll);
-                cancelAnimationFrame(raf);
+                base.caf(raf);
                 el.style.transform = '';
             };
         },
@@ -577,6 +596,21 @@ const PAGE_FX = [
     },
 ];
 
+/**
+ * 5.7 — cursor & gesture packs.
+ *
+ * Cursor effects (kind `cursor`, persistent, scoped to the element they are
+ * bound to; skipped under reduced motion and — unless `touch: true` — for
+ * touch pointers): `comet-trail`, `sparkle-trail`, `ribbon-trail`,
+ * `magnetic-dots`, `spotlight-cursor`.
+ *
+ * Gestures → effects: `bindGesture(el, 'fling' | 'twist' | 'long-press',
+ * effectOrCallback, options)` and `<usa-gesture-fx gesture effect>`. A fling
+ * is a fast release, a twist a two-finger rotation past `angle` degrees, a
+ * long press "charges" `--usa-charge` 0 → 1 and fires when full. Every fire
+ * dispatches `usa-gesture` (`detail: { gesture, … }`). The effect itself goes
+ * through `playEffect()`, so reduced motion is honoured there.
+ */
 const touchOk = (e, o) => o.touch || e.pointerType !== 'touch';
 /** A fixed, viewport-sized canvas in the fx layer, redrawn while `draw` returns true. */
 function overlayCanvas(draw) {
@@ -599,15 +633,15 @@ function overlayCanvas(draw) {
         g.setTransform(dpr, 0, 0, dpr, 0, 0);
         g.clearRect(0, 0, w, h);
         if (draw(g, w, h, now))
-            raf = requestAnimationFrame(frame);
+            raf = base.raf(frame);
     };
     return {
         kick: () => {
             if (!raf && g)
-                raf = requestAnimationFrame(frame);
+                raf = base.raf(frame);
         },
         stop: () => {
-            cancelAnimationFrame(raf);
+            base.caf(raf);
             raf = 0;
             c.remove();
         },
@@ -768,7 +802,7 @@ const CURSOR_FX = [
                 y += (ty - y) * o.ease;
                 s.style.setProperty('--sx', `${x.toFixed(1)}px`);
                 s.style.setProperty('--sy', `${y.toFixed(1)}px`);
-                raf = Math.abs(tx - x) + Math.abs(ty - y) > 0.3 ? requestAnimationFrame(tick) : 0;
+                raf = Math.abs(tx - x) + Math.abs(ty - y) > 0.3 ? base.raf(tick) : 0;
             };
             const move = (e) => {
                 if (!touchOk(e, o))
@@ -779,13 +813,13 @@ const CURSOR_FX = [
                 if (s.style.opacity !== '1')
                     ((x = tx), (y = ty), (s.style.opacity = '1'));
                 if (!raf)
-                    raf = requestAnimationFrame(tick);
+                    raf = base.raf(tick);
             };
             const leave = () => (s.style.opacity = '0');
             el.addEventListener('pointermove', move, { passive: true });
             el.addEventListener('pointerleave', leave);
             return () => {
-                cancelAnimationFrame(raf);
+                base.caf(raf);
                 el.removeEventListener('pointermove', move);
                 el.removeEventListener('pointerleave', leave);
                 s.remove();
@@ -829,7 +863,7 @@ function bindGesture(el, gesture, effect, o = {}) {
     const { velocity = 0.8, angle = 30, duration = 650, tolerance = 10, effectOptions = {} } = o;
     const pts = new Map();
     let path = [];
-    let base = null;
+    let base$1 = null;
     let press = null;
     const fire = (d, e) => {
         el.dispatchEvent(new CustomEvent('usa-gesture', { detail: d, bubbles: true }));
@@ -849,7 +883,7 @@ function bindGesture(el, gesture, effect, o = {}) {
     const endPress = () => {
         if (!press)
             return;
-        cancelAnimationFrame(press.raf);
+        base.caf(press.raf);
         press = null;
         charge(0);
     };
@@ -858,7 +892,7 @@ function bindGesture(el, gesture, effect, o = {}) {
         if (gesture === 'fling')
             path = [{ x: e.clientX, y: e.clientY, t: e.timeStamp || performance.now() }];
         if (gesture === 'twist' && pts.size === 2)
-            base = twistAngle();
+            base$1 = twistAngle();
         if (gesture === 'long-press' && pts.size === 1) {
             press = { x: e.clientX, y: e.clientY, t0: performance.now(), raf: 0 };
             const step = (now) => {
@@ -872,9 +906,9 @@ function bindGesture(el, gesture, effect, o = {}) {
                     fire({ gesture, charge: 1 }, e);
                 }
                 else
-                    press.raf = requestAnimationFrame(step);
+                    press.raf = base.raf(step);
             };
-            press.raf = requestAnimationFrame(step);
+            press.raf = base.raf(step);
         }
     };
     const move = (e) => {
@@ -886,11 +920,11 @@ function bindGesture(el, gesture, effect, o = {}) {
             if (path.length > 20)
                 path.shift();
         }
-        else if (gesture === 'twist' && pts.size >= 2 && base !== null) {
+        else if (gesture === 'twist' && pts.size >= 2 && base$1 !== null) {
             const now = twistAngle();
-            const d = angleDelta(base, now);
+            const d = angleDelta(base$1, now);
             if (Math.abs(d) >= angle) {
-                base = now;
+                base$1 = now;
                 fire({ gesture, angle: d, direction: d > 0 ? 'cw' : 'ccw' }, e);
             }
         }
@@ -909,7 +943,7 @@ function bindGesture(el, gesture, effect, o = {}) {
             }
         }
         if (pts.size < 2)
-            base = null;
+            base$1 = null;
         endPress();
     };
     el.addEventListener('pointerdown', down);
@@ -1423,4 +1457,4 @@ exports.themeCss = themeCss;
 exports.themePreset = themePreset;
 exports.themeVars = themeVars;
 exports.togglePressed = togglePressed;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/components/effects.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/effects.cjs.map

@@ -1,17 +1,35 @@
-import { registerEffects } from '../chunks/registry-PxXkPc1Q.js';
+import { r as raf$1, b as caf$1 } from '../chunks/base-Be98yNyq.js';
+import { registerEffects } from '../chunks/registry-BEIhIRTY.js';
 import { a as all } from '../chunks/shared-CkKHWrtJ.js';
 import { trackPointer } from './fx-light.js';
-import '../chunks/base-nzeN_ux7.js';
-import '../chunks/generative-2LhxG5BJ.js';
+import '../chunks/generative-DkX6SvrL.js';
 
+/**
+ * 6.5 — 3D scene cards (`motionary/components/fx-3d`), registered through
+ * `registerEffect()`:
+ *
+ * - `depth-stack` (card, persistent) — the children (or `[data-depth]`
+ *   layers) separate in Z and parallax against each other as the card tilts
+ *   toward the pointer.
+ * - `product-spin` (card, persistent) — a 360° product viewer: drag to turn
+ *   the element in 3D with inertia, idles with a slow turntable spin.
+ * - `card-flip-3d` (click) — a thick card flips to its back face (second
+ *   child) with an edge that shows its depth.
+ * - `origami` (enter) — the element unfolds panel by panel like folded paper.
+ * - `orbit-camera` (scroll, persistent) — while the element scrolls through
+ *   the viewport the camera orbits its 3D children.
+ *
+ * Reduced motion: no tilt, spin, orbit or fold; the flip swaps faces with a
+ * crossfade.
+ */
 const layers = (el) => {
     const marked = Array.from(el.querySelectorAll('[data-depth]'));
     return marked.length ? marked : Array.from(el.children);
 };
-const raf = (f) => (typeof requestAnimationFrame === 'function' ? requestAnimationFrame(f) : 0);
+const raf = (f) => (typeof requestAnimationFrame === 'function' ? raf$1(f) : 0);
 const caf = (h) => {
     if (h && typeof cancelAnimationFrame === 'function')
-        cancelAnimationFrame(h);
+        caf$1(h);
 };
 const DEPTH3_FX = [
     {
@@ -230,4 +248,4 @@ function register3dPack() {
 }
 
 export { DEPTH3_FX, register3dPack };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/components/fx-3d.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/fx-3d.js.map

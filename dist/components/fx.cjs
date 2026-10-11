@@ -1,11 +1,11 @@
 'use strict';
 
-var base = require('../chunks/base-vu_KhBiv.cjs');
-var registry = require('../chunks/registry-EziiQiWO.cjs');
-var builtins = require('../chunks/builtins-A9ihuDwy.cjs');
-require('../chunks/core-E18xla6s.cjs');
+var base = require('../chunks/base-Do-R_9gU.cjs');
+var registry = require('../chunks/registry-CyVCJneg.cjs');
+var builtins = require('../chunks/builtins-DGP3jBW1.cjs');
+require('../chunks/core-6FhnH_Kv.cjs');
 require('./tokens.cjs');
-require('../chunks/fx-lszndeFU.cjs');
+require('../chunks/fx-O90ZgYwV.cjs');
 
 function defineFx(tag = 'usa-fx') {
     return base.defineElement(tag, (Base) => class UsaFx extends Base {
@@ -73,4 +73,4 @@ exports.BUILTIN_EFFECTS = builtins.BUILTIN_EFFECTS;
 exports.defineFx = defineFx;
 exports.defineFxComponents = defineFxComponents;
 exports.registerBuiltinEffects = registerBuiltinEffects;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/components/fx.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/fx.cjs.map

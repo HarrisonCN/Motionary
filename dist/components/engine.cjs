@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-vu_KhBiv.cjs');
+var base = require('../chunks/base-Do-R_9gU.cjs');
 
 /**
  * `motionary/engine` (= `motionary/components/engine`, 8.0) — the unified
@@ -263,4 +263,4 @@ exports.hydrateMotion = hydrateMotion;
 exports.motionClock = motionClock;
 exports.resolvePosition = resolvePosition;
 exports.ssrHead = ssrHead;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/components/engine.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/engine.cjs.map

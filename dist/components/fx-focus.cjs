@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-EziiQiWO.cjs');
-require('../chunks/base-vu_KhBiv.cjs');
+var registry = require('../chunks/registry-CyVCJneg.cjs');
+require('../chunks/base-Do-R_9gU.cjs');
 
 const NS = 'http://www.w3.org/2000/svg';
 function overlay(el, z = 1) {
@@ -122,4 +122,4 @@ function registerFocusPack() {
 
 exports.FOCUS_FX = FOCUS_FX;
 exports.registerFocusPack = registerFocusPack;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/components/fx-focus.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/fx-focus.cjs.map

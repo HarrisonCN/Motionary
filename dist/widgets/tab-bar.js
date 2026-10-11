@@ -1,4 +1,4 @@
-export { d as defineTabBar } from '../chunks/tab-bar-CSx4fTC9.js';
-import '../chunks/base-nzeN_ux7.js';
+export { d as defineTabBar } from '../chunks/tab-bar-DUCZzsih.js';
+import '../chunks/base-Be98yNyq.js';
 import '../chunks/shared-o9CtwHmi.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/widgets/tab-bar.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/widgets/tab-bar.js.map

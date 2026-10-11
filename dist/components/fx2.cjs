@@ -1,7 +1,7 @@
 'use strict';
 
-var manifest = require('../chunks/manifest-Rxf1Mumb.cjs');
-var components_fxGpu = require('../chunks/gpu-BREsvJpT.cjs');
+var manifest = require('../chunks/manifest-DcyvsF07.cjs');
+var components_fxGpu = require('../chunks/gpu--UifKXUA.cjs');
 var components_fxText = require('./fx-text.cjs');
 var components_fxLight = require('./fx-light.cjs');
 var components_fx3d = require('./fx-3d.cjs');
@@ -32,11 +32,11 @@ var components_fxGenart = require('./fx-genart.cjs');
 var components_fxVideo = require('./fx-video.cjs');
 var components_fxSafe = require('./fx-safe.cjs');
 var components_fxPerf = require('./fx-perf.cjs');
-var registry = require('../chunks/registry-EziiQiWO.cjs');
-require('../chunks/generative-BHIj-NU0.cjs');
+var registry = require('../chunks/registry-CyVCJneg.cjs');
+require('../chunks/generative-BTya0iHP.cjs');
+require('../chunks/base-Do-R_9gU.cjs');
 require('../chunks/shared-jkgRH-Hx.cjs');
-require('../chunks/base-vu_KhBiv.cjs');
-require('../chunks/audio-DhgfWYZ_.cjs');
+require('../chunks/audio-D7Dk2gUF.cjs');
 
 /** The 6.x effect packs by name. */
 const EFFECT_PACKS = {
@@ -263,4 +263,4 @@ exports.definePlugin = definePlugin;
 exports.effectPlugins = effectPlugins;
 exports.registerAllPlugins = registerAllPlugins;
 exports.usePlugins = usePlugins;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/components/fx2.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/fx2.cjs.map

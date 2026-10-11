@@ -1,9 +1,10 @@
-import { f as defineElement } from '../chunks/base-nzeN_ux7.js';
+import { f as defineElement, b as caf, r as raf } from '../chunks/base-Be98yNyq.js';
 import { PALETTES, seededRandom } from '../components/fx-genart.js';
-import '../chunks/registry-PxXkPc1Q.js';
+import '../chunks/registry-BEIhIRTY.js';
 
 var css = "usa-gen-art{position:relative;display:block;min-height:120px;border-radius:12px;overflow:hidden;cursor:pointer;outline:none}usa-gen-art>canvas{display:block;width:100%;height:100%;position:absolute;inset:0}usa-gen-art:focus-visible{box-shadow:0 0 0 3px #6366f1}";
 
+// 13.4: base scheduler (frame budget, drop-on-detach); offscreen pause applies once installOffscreenPause() runs — not auto-installed, the fixed per-entry budget can't carry it.
 const ARTS = ['flow', 'circles', 'truchet', 'waves'];
 function defineGenArt(tag = 'usa-gen-art') {
     return defineElement(tag, (Base) => {
@@ -46,7 +47,7 @@ function defineGenArt(tag = 'usa-gen-art') {
                         this.draw();
                     }
                 });
-                this.onCleanup(() => cancelAnimationFrame(this._raf));
+                this.onCleanup(() => caf(this._raf));
             }
             generate(seed = Math.floor(Math.random() * 1e6)) {
                 this._seed = seed;
@@ -62,7 +63,7 @@ function defineGenArt(tag = 'usa-gen-art') {
                 const ctx = c?.getContext?.('2d');
                 if (!c || !ctx)
                     return;
-                cancelAnimationFrame(this._raf);
+                caf(this._raf);
                 const w = Math.max(60, Math.round(this.clientWidth || 300));
                 const h = Math.max(60, Math.round(this.clientHeight || 180));
                 const dpr = Math.min(2, (typeof devicePixelRatio === 'number' && devicePixelRatio) || 1);
@@ -176,7 +177,7 @@ function defineGenArt(tag = 'usa-gen-art') {
                     for (let k = 0; k < per && i < steps.length; k++)
                         steps[i++]();
                     if (i < steps.length)
-                        this._raf = requestAnimationFrame(tick);
+                        this._raf = raf(tick, this);
                 };
                 tick();
             }
@@ -186,4 +187,4 @@ function defineGenArt(tag = 'usa-gen-art') {
 }
 
 export { defineGenArt };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/widgets/gen-art.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/widgets/gen-art.js.map

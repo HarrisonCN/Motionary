@@ -41,28 +41,6 @@ interface EffectDefinition<O extends Record<string, unknown> = Record<string, an
     run(el: HTMLElement, options: O, ctx: EffectContext): void | Cleanup | Animation | null | Promise<unknown>;
 }
 
-/**
- * 6.4 — Light & materials (`motionary/components/fx-light`), registered
- * through `registerEffect()`. Persistent effects (use `trigger="load"`)
- * that return a cleanup:
- *
- * - `light-follow` (hover) — a soft point light + specular highlight that
- *   follows the pointer over the surface.
- * - `refraction` (hover) — a glass lens that bends and magnifies what is
- *   behind it as it follows the pointer (backdrop filter, chromatic rim).
- * - `brushed-metal` (card) — fine brushed lines with an anisotropic sheen
- *   that turns with the pointer angle.
- * - `pearlescent` (card) — a nacre / holographic film whose hues shift with
- *   the pointer position.
- * - `god-rays` (background) — volumetric light shafts from a source point
- *   (Canvas 2D, additive).
- * - `pointer-shadow` (hover) — the pointer is the light: the element casts
- *   a soft real-time shadow away from it.
- *
- * Reduced motion: surfaces stay lit from a fixed angle (no tracking),
- * `god-rays` draws one still frame.
- */
-
 /** Track the pointer over `el` as 0–1 coordinates (`fn(x, y, inside)`); starts at (`x0`, `y0`). Returns a remover. */
 declare function trackPointer(el: HTMLElement, ctx: EffectContext, fn: (x: number, y: number, inside: boolean) => void, x0?: number, y0?: number): () => void;
 declare const LIGHT_FX: EffectDefinition[];

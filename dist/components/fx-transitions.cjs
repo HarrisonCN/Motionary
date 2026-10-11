@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-EziiQiWO.cjs');
-var base = require('../chunks/base-vu_KhBiv.cjs');
+var registry = require('../chunks/registry-CyVCJneg.cjs');
+var base = require('../chunks/base-Do-R_9gU.cjs');
 var shared = require('../chunks/shared-jkgRH-Hx.cjs');
 
 const fade = (el, ctx, out) => ctx.animate(el, out ? [{ opacity: 1 }, { opacity: 0 }] : [{ opacity: 0 }, { opacity: 1 }], { duration: 200, fill: out ? 'forwards' : 'none' });
@@ -224,7 +224,7 @@ async function pageTransition(update, effect = 'ripple-dissolve', options = {}, 
     await update();
     const el = target || document.body.firstElementChild;
     if (el && def) {
-        const { playEffect } = await Promise.resolve().then(function () { return require('../chunks/registry-EziiQiWO.cjs'); });
+        const { playEffect } = await Promise.resolve().then(function () { return require('../chunks/registry-CyVCJneg.cjs'); });
         await playEffect(el, effect, { ...options, mode: 'in' });
     }
 }
@@ -246,4 +246,4 @@ exports.TRANSITIONS2_FX = TRANSITIONS2_FX;
 exports.crossDocumentTransitions = crossDocumentTransitions;
 exports.pageTransition = pageTransition;
 exports.registerTransitionsPack = registerTransitionsPack;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/components/fx-transitions.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/fx-transitions.cjs.map

@@ -1,7 +1,7 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-C8rYCsXx.js';
-import { a as animatedImagePlayer, u as u8, c as composeFrames, d as bytesOf, f as fixDelay } from '../chunks/anim-image-teDgsATS.js';
-import '../chunks/tween-BqIL1A7u.js';
-import '../chunks/ticker-DaMSl3Kd.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-BUmmzmpq.js';
+import { a as animatedImagePlayer, u as u8, c as composeFrames, d as bytesOf, f as fixDelay } from '../chunks/anim-image-Czp1v-zv.js';
+import '../chunks/tween-DehPKIbN.js';
+import '../chunks/ticker-DtCFsNm7.js';
 import '../chunks/ease-XN8_0sXu.js';
 
 /**
@@ -196,4 +196,4 @@ async function loadGif(src) {
 const formatGif = { id: 'format-gif', version: RUNTIME_VERSION, tier: 'standard', requires: ['core'], api: { decodeGif, loadGif, lzwDecode, animatedImagePlayer } };
 
 export { animatedImagePlayer, composeFrames, decodeGif, formatGif, loadGif, lzwDecode };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/runtime/format-gif.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/runtime/format-gif.js.map

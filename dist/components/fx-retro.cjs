@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-EziiQiWO.cjs');
-require('../chunks/base-vu_KhBiv.cjs');
+var registry = require('../chunks/registry-CyVCJneg.cjs');
+require('../chunks/base-Do-R_9gU.cjs');
 
 /** Keyframes stepping a CSS blur/contrast "pixel" filter from coarse to sharp (8.2). */
 function pixelSteps(steps = 6) {
@@ -93,4 +93,4 @@ function registerRetroPack() {
 exports.RETRO_FX = RETRO_FX;
 exports.pixelSteps = pixelSteps;
 exports.registerRetroPack = registerRetroPack;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.3.0/dist/components/fx-retro.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.4.0/dist/components/fx-retro.cjs.map
