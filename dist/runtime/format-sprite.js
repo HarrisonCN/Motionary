@@ -1,5 +1,5 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-DwxAf29L.js';
-import { P as Playable } from '../chunks/tween-CB3CoBmZ.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-BsVrFoLd.js';
+import { P as Playable } from '../chunks/tween-BehYElBX.js';
 
 /**
  * `motionary/runtime/format-sprite` (10.3) — sprite sheets and image
@@ -211,4 +211,4 @@ function sequencePlayer(canvas, images, o = {}) {
 const formatSprite = { id: 'format-sprite', version: RUNTIME_VERSION, tier: 'standard', requires: ['core'], api: { parseSpriteSheet, gridSheet, frameOrder, drawFrame, spritePlayer, imageSequence, preloadImages, sequencePlayer } };
 
 export { drawFrame, formatSprite, frameOrder, gridSheet, imageSequence, parseSpriteSheet, preloadImages, sequencePlayer, spritePlayer };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.0.0/dist/runtime/format-sprite.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.1.0/dist/runtime/format-sprite.js.map

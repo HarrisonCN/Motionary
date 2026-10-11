@@ -299,4 +299,4 @@ const GENERATIVE_FX = [
 ];
 
 export { GENERATIVE_FX as G, canvasBackground as c, hexRgb as h, noise2 as n };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.0.0/dist/chunks/generative-D1QtbFNP.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.1.0/dist/chunks/generative-D1QtbFNP.js.map

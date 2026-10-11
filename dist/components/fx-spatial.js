@@ -91,4 +91,4 @@ function registerSpatialPack() {
 }
 
 export { SPATIAL_FX, registerSpatialPack, xrSupport, yawToOffset };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.0.0/dist/components/fx-spatial.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.1.0/dist/components/fx-spatial.js.map

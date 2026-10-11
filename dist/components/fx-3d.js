@@ -247,4 +247,4 @@ function register3dPack() {
 }
 
 export { DEPTH3_FX, register3dPack };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.0.0/dist/components/fx-3d.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.1.0/dist/components/fx-3d.js.map

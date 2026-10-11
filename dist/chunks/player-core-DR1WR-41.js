@@ -172,4 +172,4 @@ function createPlayerCore(root, animation, o = {}, scene) {
 }
 
 export { ANIMATION_FORMAT as A, createPlayerCore as c, normalizePlayable as n, setLegacyAnimationLoader as s };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.0.0/dist/chunks/player-core-DR1WR-41.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.1.0/dist/chunks/player-core-DR1WR-41.js.map

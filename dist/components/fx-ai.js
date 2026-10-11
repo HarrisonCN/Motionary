@@ -122,4 +122,4 @@ function registerAiPack() {
 }
 
 export { AI_FX, registerAiPack, splitWords };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.0.0/dist/components/fx-ai.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.1.0/dist/components/fx-ai.js.map

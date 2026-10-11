@@ -414,4 +414,4 @@ function timelineDocFromAnimation(input) {
 }
 
 export { TimelineDocError as T, TIMELINE_DOC_FORMAT as a, isLayerLocked as b, cloneJson as c, timelineDocDuration as d, isLayerActive as e, TIMELINE_DOC_LIMITS as f, TIMELINE_DOC_VERSION as g, createSeededRandom as h, isValidEasing as i, createTimelineDoc as j, timelineDocToAnimation as k, normalizeTimelineDoc as n, parseTimelineDoc as p, resolveRandom as r, serializeTimelineDoc as s, timelineDocFromAnimation as t, validateTimelineDoc as v };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.0.0/dist/chunks/format-B2XGhlqH.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.1.0/dist/chunks/format-B2XGhlqH.js.map
