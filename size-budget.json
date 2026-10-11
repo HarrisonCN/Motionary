@@ -35,6 +35,11 @@
     "limit": 6656
   },
   {
+    "name": "import 'motionary/components/timeline-editor' (13.6 editor-only model, new entry; not in lite / core / timeline)",
+    "import": "export * from 'pkg/components/timeline-editor';",
+    "limit": 10240
+  },
+  {
     "name": "import { staggerChildren }",
     "import": "export { staggerChildren } from 'pkg';",
     "limit": 6400

@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "format": "motionary-timeline",
+  "name": "Basic",
+  "layers": [
+    { "id": "title", "type": "track", "target": ".title", "keyframes": [
+      { "id": "a2", "time": 600, "props": { "transform": "translateY(0px)", "opacity": 1 } },
+      { "id": "a1", "time": 0, "easing": "ease-out", "props": { "opacity": 0, "transform": "translateY(24px)" } }
+    ] }
+  ]
+}

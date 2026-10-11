@@ -1,0 +1,42 @@
+{
+  "format": "motionary-timeline",
+  "version": 1,
+  "name": "動き — ties & 🙂",
+  "layers": [
+    {
+      "id": "t",
+      "type": "track",
+      "keyframes": [
+        {
+          "id": "x0",
+          "time": 0,
+          "props": {
+            "filter": "blur(4px)",
+            "opacity": 0
+          }
+        },
+        {
+          "id": "x2",
+          "time": 100,
+          "props": {
+            "opacity": 0.5
+          }
+        },
+        {
+          "id": "x1",
+          "time": 100,
+          "props": {
+            "opacity": 0.25
+          }
+        },
+        {
+          "id": "x3",
+          "time": 400,
+          "props": {
+            "filter": "none"
+          }
+        }
+      ]
+    }
+  ]
+}

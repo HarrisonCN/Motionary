@@ -73,4 +73,4 @@ async function loadEffectPack(src, opts = {}) {
 }
 
 export { EFFECT_PACK_FORMAT as E, loadEffectPack as l, packManifest as p, validateManifest as v };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/chunks/manifest-CqfKtjeL.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.6.0/dist/chunks/manifest-CqfKtjeL.js.map

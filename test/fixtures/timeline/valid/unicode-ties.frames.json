@@ -1,0 +1,146 @@
+[
+  {
+    "time": 0,
+    "layers": {
+      "t": {
+        "filter": "blur(4px)",
+        "opacity": 0
+      }
+    }
+  },
+  {
+    "time": 0,
+    "layers": {
+      "t": {
+        "filter": "blur(4px)",
+        "opacity": 0
+      }
+    }
+  },
+  {
+    "time": 50,
+    "layers": {
+      "t": {
+        "filter": "blur(4px)",
+        "opacity": 0.25
+      }
+    }
+  },
+  {
+    "time": 100,
+    "layers": {
+      "t": {
+        "filter": "blur(4px)",
+        "opacity": 0.25
+      }
+    }
+  },
+  {
+    "time": 150,
+    "layers": {
+      "t": {
+        "filter": "blur(4px)",
+        "opacity": 0.25
+      }
+    }
+  },
+  {
+    "time": 250,
+    "layers": {
+      "t": {
+        "filter": "none",
+        "opacity": 0.25
+      }
+    }
+  },
+  {
+    "time": 400,
+    "layers": {
+      "t": {
+        "filter": "none",
+        "opacity": 0.25
+      }
+    }
+  },
+  {
+    "time": 400,
+    "layers": {
+      "t": {
+        "filter": "none",
+        "opacity": 0.25
+      }
+    }
+  },
+  {
+    "time": 400,
+    "layers": {
+      "t": {
+        "filter": "none",
+        "opacity": 0.25
+      }
+    }
+  },
+  {
+    "time": 400,
+    "layers": {
+      "t": {
+        "filter": "none",
+        "opacity": 0.25
+      }
+    }
+  },
+  {
+    "time": 400,
+    "layers": {
+      "t": {
+        "filter": "none",
+        "opacity": 0.25
+      }
+    }
+  },
+  {
+    "time": 400,
+    "layers": {
+      "t": {
+        "filter": "none",
+        "opacity": 0.25
+      }
+    }
+  },
+  {
+    "time": 400,
+    "layers": {
+      "t": {
+        "filter": "none",
+        "opacity": 0.25
+      }
+    }
+  },
+  {
+    "time": 400,
+    "layers": {
+      "t": {
+        "filter": "none",
+        "opacity": 0.25
+      }
+    }
+  },
+  {
+    "time": 400,
+    "layers": {
+      "t": {
+        "filter": "none",
+        "opacity": 0.25
+      }
+    }
+  },
+  {
+    "time": 400,
+    "layers": {
+      "t": {
+        "filter": "none",
+        "opacity": 0.25
+      }
+    }
+  }
+]
