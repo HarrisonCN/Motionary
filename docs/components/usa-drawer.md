@@ -6,7 +6,7 @@ A side panel that springs in, drags / swipes closed, traps the page behind a bac
 
 - **Category:** ui · **since** 2.6 · **changed in** 13.1, 13.3
 - **Import:** `import { defineDrawer } from 'motionary/components/ui'` then `defineDrawer();`
-- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@14/dist/components.umd.js"></script>`
 - **Attributes:** —
 - **Events:** —
 - **Slots:** —

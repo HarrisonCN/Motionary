@@ -4,9 +4,9 @@
 
 5.9: <usa-player> plays a JSON animation — timeline presets, your own keyframes and any registered effect on a shared clock; play / pause / seek / rate / loop, scroll-scrubbing (trigger="scroll"). Export one from the Playground (<usa-player> JSON tab).
 
-- **Category:** fx · **since** 5.9 · **changed in** 6.9, 7.0, 7.1, 11.8, 12.0, 13.9
+- **Category:** fx · **since** 5.9 · **changed in** 6.9, 7.0, 7.1, 11.8, 12.0, 13.9, 14.0
 - **Import:** `import { definePlayer } from 'motionary/components/effects'` then `definePlayer();`
-- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@14/dist/components.umd.js"></script>`
 - **Attributes:** `src`, `trigger`, `loop`, `rate`, `controls`
 - **Events:** `usa:finish`, `usa:ready`
 - **Slots:** —

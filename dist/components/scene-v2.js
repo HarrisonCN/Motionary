@@ -1,9 +1,10 @@
-import { v as validateTimelineDoc, n as normalizeTimelineDoc, i as isValidEasing } from '../chunks/format-BU7xfxcU.js';
+import { v as validateTimelineDoc, i as isValidEasing } from '../chunks/format-B2XGhlqH.js';
+import { t as timelineDocToScene, a as timelineDocFromScene } from '../chunks/scene-DWNb4Lb1.js';
 import { MOTION_TOKENS } from './tokens.js';
 
 /**
- * 13.9 (DRAFT): Scene Format v2 — `motionary-scene` version 2, the one motion
- * document planned for 14.0. It unifies the three shapes motion data has in 13.x:
+ * Scene Format v2 — `motionary-scene` version 2, the official motion document
+ * since 14.0 (`motionary/scene`; drafted in 13.9). It unifies the three shapes motion data has in 13.x:
  *
  * - the Timeline editor document (`motionary-timeline` v1, 13.6) — layers, groups,
  *   lock / mute / solo, keyframes with per-segment easing, seed, meta;
@@ -13,15 +14,15 @@ import { MOTION_TOKENS } from './tokens.js';
  *   motion props, and any value may reference a token as `"{duration.fast}"`
  *   (W3C Design Tokens alias syntax, as `importDesignTokens` already reads).
  *
- * Draft status: the shape can still change before 14.0. Nothing in 13.x reads it at
- * runtime; convert back with `sceneV2ToTimeline` / `sceneV2ToAnimation` to play it.
+ * 14.0: `<usa-player>` plays it natively and the Timeline editor reads / writes it;
+ * `sceneV2ToTimeline` / `sceneV2ToAnimation` convert back for 13.x consumers.
  * Pure (no DOM), never throws on bad input (`validateSceneV2`, `migrateToSceneV2`
  * report problems instead), never evaluates anything.
  */
 const SCENE_V2_FORMAT = 'motionary-scene';
 const SCENE_V2_VERSION = 2;
-/** Draft until 14.0: the format may still change. */
-const SCENE_V2_STATUS = 'draft';
+/** 14.0: the official motion document (was 'draft' in 13.9). */
+const SCENE_V2_STATUS = 'stable';
 const SCENE_V2_LIMITS = { layers: 1000, keyframes: 100000, props: 64, idLength: 128, stringLength: 2048, time: 1e7, depth: 32, textBytes: 5e6 };
 const L = SCENE_V2_LIMITS;
 const FORBIDDEN = /*#__PURE__*/ new Set(['__proto__', 'constructor', 'prototype']);
@@ -412,20 +413,7 @@ const serializeSceneV2 = (doc, space = 2) => JSON.stringify(normalizeSceneV2(doc
 // --- converters: v1 → v2 ------------------------------------------------------------
 /** `motionary-timeline` v1 → scene v2. Lossless: `sceneV2ToTimeline(sceneV2FromTimeline(d))` equals the canonical `d`. */
 function sceneV2FromTimeline(doc) {
-    const d = normalizeTimelineDoc(doc);
-    const out = { layers: d.layers.map((l) => ({ ...l, keyframes: l.keyframes?.map((k) => ({ ...k, props: { ...k.props } })) })), source: { format: 'motionary-timeline', version: 1 } };
-    for (const l of out.layers)
-        if (l.keyframes === undefined)
-            delete l.keyframes;
-    if (d.name !== undefined)
-        out.name = d.name;
-    if (d.duration !== undefined)
-        out.duration = d.duration;
-    if (d.seed !== undefined)
-        out.seed = d.seed;
-    if (d.meta !== undefined)
-        out.meta = clone(d.meta);
-    return normalizeSceneV2(out);
+    return normalizeSceneV2(timelineDocToScene(doc));
 }
 function decodePlayground(state) {
     try {
@@ -526,58 +514,7 @@ function resolveSceneTokens(doc, tokens = MOTION_TOKENS) {
  * are listed in `lost`.
  */
 function sceneV2ToTimeline(doc) {
-    const d = resolveSceneTokens(doc);
-    const lost = [];
-    const fromTimeline = doc.source?.format === 'motionary-timeline';
-    if (d.loop)
-        lost.push({ path: 'loop', message: 'timeline v1 has no loop' });
-    if (doc.tokens)
-        lost.push({ path: 'tokens', message: 'token references resolved to values' });
-    const layers = [];
-    d.layers.forEach((l, i) => {
-        const n = { id: l.id, type: l.type };
-        if (l.name !== undefined)
-            n.name = l.name;
-        if (l.parent !== undefined)
-            n.parent = l.parent;
-        if (l.locked)
-            n.locked = true;
-        if (l.muted)
-            n.muted = true;
-        if (l.solo)
-            n.solo = true;
-        if (l.type === 'track') {
-            if (l.target !== undefined)
-                n.target = l.target;
-            for (const f of ['preset', 'effect', 'component'])
-                if (l[f] !== undefined)
-                    lost.push({ path: `layers[${i}].${f}`, message: `timeline v1 tracks have no ${f}` });
-            if (!fromTimeline)
-                for (const f of ['start', 'duration', 'easing'])
-                    if (l[f] !== undefined && l.keyframes)
-                        lost.push({ path: `layers[${i}].${f}`, message: `kept only through keyframe times / easings` });
-            n.keyframes = (l.keyframes || []).map((k) => {
-                const kf = { id: k.id, time: k.time, props: k.props };
-                const e = k.easing ?? (l.easing && l.easing !== 'linear' ? l.easing : undefined);
-                if (e !== undefined)
-                    kf.easing = e;
-                if (k.composite)
-                    lost.push({ path: `layers[${i}].keyframes.${k.id}.composite`, message: 'timeline v1 keyframes have no composite' });
-                return kf;
-            });
-        }
-        layers.push(n);
-    });
-    const out = { layers };
-    if (d.name !== undefined)
-        out.name = d.name;
-    if (d.duration !== undefined)
-        out.duration = d.duration;
-    if (d.seed !== undefined)
-        out.seed = d.seed;
-    if (d.meta !== undefined)
-        out.meta = clone(d.meta);
-    return { doc: normalizeTimelineDoc(out), lost };
+    return timelineDocFromScene(doc);
 }
 /**
  * Scene v2 → `<usa-player>` animation JSON v1 (what 13.x plays). Token references
@@ -840,7 +777,7 @@ const propName = { pattern: '^(--[A-Za-z0-9_-]+|[a-zA-Z][A-Za-z0-9_-]*)$', not: 
 const tokenName = { pattern: '^[A-Za-z0-9_-]+$' };
 const SCENE_V2_SCHEMA = {
     $schema: 'https://json-schema.org/draft/2020-12/schema',
-    $id: 'https://cdn.jsdelivr.net/npm/motionary@13/docs/scene-v2.schema.json',
+    $id: 'https://cdn.jsdelivr.net/npm/motionary@14/docs/scene-v2.schema.json',
     title: 'motionary-scene v2 (draft)',
     description: 'Draft of the 14.0 scene format: one document for timeline layers, <usa-player> tracks, component motion props and motion tokens. Values may reference tokens as "{duration.fast}".',
     type: 'object',
@@ -925,4 +862,4 @@ const SCENE_V2_SCHEMA = {
 };
 
 export { SCENE_V2_FORMAT, SCENE_V2_LIMITS, SCENE_V2_SCHEMA, SCENE_V2_STATUS, SCENE_V2_VERSION, detectMotionFormat, diffJson, formatMigrationReport, isSceneV2, isTokenRef, migrateToSceneV2, normalizeSceneV2, resolveSceneTokens, sceneV2ComponentLayer, sceneV2FromAnimation, sceneV2FromTimeline, sceneV2ToAnimation, sceneV2ToTimeline, serializeSceneV2, tokenizeValue, validateSceneV2 };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.9.0/dist/components/scene-v2.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.0.0/dist/components/scene-v2.js.map

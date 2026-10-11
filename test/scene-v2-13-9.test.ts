@@ -4,7 +4,7 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync, readdirSync } from 'node:fs';
 import * as S from '../src/components/scene/index';
 import { parseTimelineDoc } from '../src/components/timeline/editor/format';
-import { normalizeAnimation as normalizeRaw } from '../src/components/effects/player';
+import { normalizeAnimation as normalizeRaw } from '../src/components/compat-v13/index'; // 14.0: moved to motionary/compat-v13
 
 (globalThis as any).MOTIONARY_NO_DEPRECATION = true; // the canonPlayer helper calls the deprecated normalizeAnimation
 const FIX = 'test/fixtures/scene-v2';
@@ -27,7 +27,7 @@ describe('13.9 scene v2: format constants, schema file, entry', () => {
   it('format / version / draft status', () => {
     expect(S.SCENE_V2_FORMAT).toBe('motionary-scene');
     expect(S.SCENE_V2_VERSION).toBe(2);
-    expect(S.SCENE_V2_STATUS).toBe('draft');
+    expect(S.SCENE_V2_STATUS).toBe('stable'); // 14.0: official
   });
   it('docs/scene-v2.schema.json is the exported schema', () => {
     expect(JSON.parse(readFileSync('docs/scene-v2.schema.json', 'utf8'))).toEqual(JSON.parse(JSON.stringify(S.SCENE_V2_SCHEMA)));
@@ -197,7 +197,7 @@ describe('13.9 migrate: reports, options, failures', () => {
   });
   it('formatMigrationReport summarises a success', () => {
     const t = S.formatMigrationReport(S.migrateToSceneV2(fx('timeline-basic.json')), 'hero.json');
-    expect(t).toMatch(/^hero\.json: motionary-timeline@1 → motionary-scene v2 \(draft\)/);
+    expect(t).toMatch(/^hero\.json: motionary-timeline@1 → motionary-scene v2/); // 14.0: status no longer "draft"
     expect(t).toMatch(/2 layer\(s\), 4 keyframe\(s\)/);
   });
 });

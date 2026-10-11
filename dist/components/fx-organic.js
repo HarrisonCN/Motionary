@@ -1,4 +1,4 @@
-import { registerEffects } from '../chunks/registry-DKs_BiEo.js';
+import { registerEffects } from '../chunks/registry-CE5_Mo_p.js';
 
 /** A blob border-radius ("63% 37% 54% 46% / 55% 48% 52% 45%") from a seed (8.3). */
 function blobRadius(seed) {
@@ -107,4 +107,4 @@ function registerOrganicPack() {
 }
 
 export { ORGANIC_FX, blobRadius, registerOrganicPack };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.9.0/dist/components/fx-organic.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.0.0/dist/components/fx-organic.js.map

@@ -29,18 +29,19 @@ describe('13.0: removed paths', () => {
 
 describe('13.0: version, CDN, stable tooling', () => {
   it('version 13, CDN major @13', () => {
-    expect(pkg.version).toMatch(/^13\./);
+    const major = pkg.version.split('.')[0]; // 14.0: the checks follow the current major (13 or later)
+    expect(Number(major)).toBeGreaterThanOrEqual(13);
     expect(RUNTIME_VERSION).toBe(pkg.version); // every 13.x release bumps it (13.1.0: minor)
-    expect(read('README.md')).toContain('motionary@13/dist/');
+    expect(read('README.md')).toContain(`motionary@${major}/dist/`);
     expect(read('README.md')).not.toMatch(/motionary@12\//);
-    expect(read('showcase/components-catalog.js')).toContain("VERSION_RANGE = '13'");
+    expect(read('showcase/components-catalog.js')).toContain(`VERSION_RANGE = '${major}'`);
   });
   it('upgrading guide, codemod, stable tooling in the README', () => {
     const u = read('docs/upgrading-13.md');
     expect(u).toContain('13.0 is released');
     expect(pkg.bin['usa-codemod-13']).toBe('./bin/usa-codemod-13.mjs');
     const r = read('README.md');
-    expect(r).toContain('> 13.0: discover, copy, run');
+    expect(r).toMatch(/> 1[3-9]\.0: /); // the current major's headline (13.0: discover, copy, run; 14.0: Motion Engine v2)
     for (const s of ['validate_snippet', 'check_compat', 'figma-plugin', 'showcase/run.html', 'motionary export', 'motionary compat']) expect(r, s).toContain(s);
     expect(pkg.dependencies).toBeUndefined();
   });

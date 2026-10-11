@@ -1,4 +1,4 @@
-import { f as defineElement } from '../chunks/base-C9CJrhL3.js';
+import { f as defineElement } from '../chunks/base-D0sRwVz1.js';
 import { HYDRATE_PRESETS, createTimeline } from '../components/engine.js';
 
 var css = "usa-hydrate{display:block}";
@@ -41,4 +41,4 @@ function defineHydrate(tag = 'usa-hydrate') {
 }
 
 export { defineHydrate };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.9.0/dist/widgets/hydrate.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.0.0/dist/widgets/hydrate.js.map

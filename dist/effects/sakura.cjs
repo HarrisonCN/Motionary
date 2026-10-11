@@ -15,4 +15,4 @@ function registerSakura() {
 exports.effect = effect;
 exports.register = registerSakura;
 exports.registerSakura = registerSakura;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.9.0/dist/effects/sakura.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.0.0/dist/effects/sakura.cjs.map

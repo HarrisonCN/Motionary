@@ -340,8 +340,23 @@
     "limit": 3072
   },
   {
-    "name": "import 'motionary/components/scene-v2' (13.9 DRAFT scene format v2: schema, validator, migration; opt-in, not in lite)",
+    "name": "import 'motionary/components/scene-v2' (= motionary/scene, 14.0 official scene format v2: schema, validator, migration; opt-in, not in lite)",
     "import": "export * from 'pkg/components/scene-v2';",
+    "limit": 10240
+  },
+  {
+    "name": "import 'motionary/components/motion' (= motionary/motion, 14.0 Motion Engine v2: animate / sequence / parallel / stagger / spring / timeline; own entry, not in lite)",
+    "import": "export * from 'pkg/components/motion';",
+    "limit": 5120
+  },
+  {
+    "name": "import 'motionary/components/motion-scene' (= motionary/motion/scene, 14.0 playScene: scene v2 on Motion Engine v2 incl. the shared scene loader; own entry, not in lite)",
+    "import": "export * from 'pkg/components/motion-scene';",
+    "limit": 5632
+  },
+  {
+    "name": "import 'motionary/components/compat-v13' (= motionary/compat-v13, 14.0 compat layer for the removed 13.x interfaces; own entry, not in lite)",
+    "import": "export * from 'pkg/components/compat-v13';",
     "limit": 10240
   },
   {

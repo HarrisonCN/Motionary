@@ -173,7 +173,7 @@ describe('7.0 deprecations', () => {
   it('documents the 7.0 removals', () => {
     const up = readFileSync('docs/upgrading-7.md', 'utf8');
     for (const s of ['registerFx2', 'register' + 'EffectPacks', '<usa-tooltip', '<usa-toggle', 'usa-codemod-7']) expect(up).toContain(s);
-    expect(JSON.parse(readFileSync('package.json', 'utf8')).bin['usa-codemod-7']).toBe('./bin/usa-codemod-7.mjs');
+    expect(JSON.parse(readFileSync('package.json', 'utf8')).bin['usa-codemod-7']).toBeUndefined(); // 14.0: `npx motionary codemod 7`
     expect(readFileSync('docs/deprecations.md', 'utf8')).toContain('Deprecated in 6.9, removed in 7.0');
   });
 });

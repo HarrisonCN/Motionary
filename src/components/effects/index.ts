@@ -27,7 +27,7 @@ export { CARD_FX, CLICK_FX, PHYSICS_FX, PAGE_FX, GENERATIVE_FX, AUDIO_FX, CURSOR
 export { togglePressed, swapLabel, bumpCount } from './micro';
 export { MOTION_THEMES, MOTION_THEME_NAMES, THEME_ROLES, themeVars, themeCss, applyMotionTheme, themePreset, playThemeEffect, defineMotionTheme } from './themes';
 export type { ThemePack, ThemeRole, UsaThemeElement } from './themes';
-export { createPlayer, normalizeAnimation, definePlayer, ANIMATION_FORMAT } from './player';
+export { createPlayer, definePlayer, ANIMATION_FORMAT } from './player';
 export type { AnimationJSON, AnimationTrack, Player, UsaPlayerElement } from './player';
 export { bindGesture, flingVelocity, angleDelta, GESTURES, defineGestureFx } from './cursor';
 export type { GestureName, GestureFxOptions, GestureDetail, UsaGestureFxElement } from './cursor';

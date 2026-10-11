@@ -16,7 +16,7 @@ describe('6.1.1 — renamed to Motionary (no breaking change)', () => {
     // 6.4: GitHub Pages paths are case-sensitive — the repo is HarrisonCN/Motionary
     expect(pkg.homepage).toBe('https://harrisoncn.github.io/Motionary/showcase/');
     for (const f of ['README.md', 'README_zh.md', 'README_ja.md', 'package.json', 'docs/components.md', 'showcase/index.html', 'showcase/components.html', 'showcase/playground.html', 'showcase/story.html']) expect(read(f), f).not.toMatch(/github\.io\/motionary\//);
-    expect(Object.keys(pkg.bin)).toEqual(expect.arrayContaining(['usa-codemod-6']));
+    expect(Object.keys(pkg.bin)).toEqual(expect.arrayContaining(['usa-codemod-13', 'motionary'])); // 14.0: usa-codemod-5…10 run via `motionary codemod <n>`
   });
 
   it('READMEs are rebranded, mention the old name and link the four showcase pages', () => {
@@ -25,7 +25,7 @@ describe('6.1.1 — renamed to Motionary (no breaking change)', () => {
       expect(r, f).toMatch(/^<div align="center">\n\n# Motionary\n/);
       expect(r, f).toContain('use-scroll-animate');
       for (const page of ['showcase/', 'showcase/components.html', 'showcase/playground.html', 'showcase/story.html']) expect(r, f).toContain(`https://harrisoncn.github.io/Motionary/${page}`);
-      expect(r, f).toContain('https://unpkg.com/motionary@13/dist/index.umd.js');
+      expect(r, f).toContain('https://unpkg.com/motionary@14/dist/index.umd.js');
       for (const fw of ['motionary/react', 'motionary/vue', 'motionary/svelte', 'motionary/solid', 'motionary/angular']) expect(r, `${f} ${fw}`).toContain(fw);
       expect(r, f).toContain('./docs/upgrading-6.md');
       expect(r, f).toContain('./docs/upgrading-5.md');
@@ -46,7 +46,7 @@ describe('6.1.1 — renamed to Motionary (no breaking change)', () => {
 
   it('keeps the compatibility surface: tags, globals, shared preset table key, player format id', () => {
     expect(read('src/presets.ts')).toContain("Symbol.for('use-scroll-animate.presets')");
-    expect(read('src/components/effects/player.ts')).toContain("ANIMATION_FORMAT = 'use-scroll-animate/animation'");
+    expect(read('src/components/effects/player-core.ts')).toContain("ANIMATION_FORMAT = 'use-scroll-animate/animation'");
     expect(read('rollup.config.mjs')).toContain("name: 'ScrollAnimate'");
     expect(read('showcase/playground-core.js')).toContain("format: 'use-scroll-animate/playground'");
   });

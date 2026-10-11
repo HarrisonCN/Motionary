@@ -2,7 +2,8 @@
  * motionary/components/timeline-editor (13.6) — the editing model behind the
  * Timeline Playground: the versioned `motionary-timeline` v1 document
  * (layers, groups, lock / mute / solo, keyframes, seed) with a validator,
- * a lossless canonical serializer and `<usa-player>` import / export; batch
+ * a lossless canonical serializer and `<usa-player>` import / export (14.0: reads and
+ * writes Scene Format v2 — `timelineDocToScene`, `timelineDocFromScene`, `loadMotionDoc`); batch
  * keyframe operations; bounded undo / redo with gesture coalescing and
  * keyboard shortcuts; and a reproducible preview (same time → same frame,
  * seeded randomness, fixed-step clock).
@@ -29,3 +30,5 @@ export type { TimelineHistory, HistoryOptions, ApplyOptions } from './history';
 export { sampleTimelineDoc, interpolateValue, createFixedClock, createTimelinePreview } from './preview';
 export type { TimelineFrame, FixedClock, TimelinePreview } from './preview';
 export { TIMELINE_DOC_SCHEMA } from './schema';
+export { timelineDocToScene, timelineDocFromScene, loadMotionDoc } from './scene';
+export type { SceneLoss } from './scene';

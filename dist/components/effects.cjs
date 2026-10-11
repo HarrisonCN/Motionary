@@ -3,11 +3,12 @@
 var components_fx = require('./fx.cjs');
 var shared = require('../chunks/shared-jkgRH-Hx.cjs');
 var base = require('../chunks/base-BvH4nAcv.cjs');
-var player = require('../chunks/player-CKOqYOLZ.cjs');
+var player = require('../chunks/player-BJPVdtzo.cjs');
 var generative = require('../chunks/generative-BKoxWOSP.cjs');
 var audio = require('../chunks/audio-D0LwPShE.cjs');
 var registry = require('../chunks/registry-CibnX7Ui.cjs');
 var components_tokens = require('./tokens.cjs');
+var playerCore = require('../chunks/player-core-BTFa6_IO.cjs');
 
 const CARD_FX = [
     {
@@ -1396,13 +1397,11 @@ function registerAllEffects() {
 }
 
 exports.fxLayer = shared.fxLayer;
-exports.ANIMATION_FORMAT = player.ANIMATION_FORMAT;
 exports.STORY_TEMPLATES = player.STORY_TEMPLATES;
 exports.createPlayer = player.createPlayer;
 exports.definePlayer = player.definePlayer;
 exports.defineStory = player.defineStory;
 exports.formatCount = player.formatCount;
-exports.normalizeAnimation = player.normalizeAnimation;
 exports.storyProgress = player.storyProgress;
 exports.GENERATIVE_FX = generative.GENERATIVE_FX;
 exports.canvasBackground = generative.canvasBackground;
@@ -1416,6 +1415,7 @@ exports.disableAudio = audio.disableAudio;
 exports.enableAudio = audio.enableAudio;
 exports.getAudio = audio.getAudio;
 exports.onBeat = audio.onBeat;
+exports.ANIMATION_FORMAT = playerCore.ANIMATION_FORMAT;
 exports.CARD_FX = CARD_FX;
 exports.CLICK_FX = CLICK_FX;
 exports.CURSOR_FX = CURSOR_FX;
@@ -1453,4 +1453,4 @@ exports.themeCss = themeCss;
 exports.themePreset = themePreset;
 exports.themeVars = themeVars;
 exports.togglePressed = togglePressed;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.9.0/dist/components/effects.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.0.0/dist/components/effects.cjs.map

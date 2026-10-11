@@ -1,4 +1,4 @@
-import { f as defineElement, n as now, d as clamp, b as caf, r as raf } from '../chunks/base-C9CJrhL3.js';
+import { f as defineElement, n as now, e as clamp, b as caf, r as raf } from '../chunks/base-D0sRwVz1.js';
 
 /** Minimal WebGL runner: one full-canvas quad, one fragment shader, optional image texture. */
 const VERTEX = 'attribute vec2 p;varying vec2 v_uv;void main(){v_uv=p*.5+.5;gl_Position=vec4(p,0.,1.);}';
@@ -442,4 +442,4 @@ function defineWebglComponents() {
 }
 
 export { GL_FALLBACKS, PARTICLE_PRESETS, POST_EFFECTS, SHADERS, defineDistort, defineLiquid, definePostFx, defineShader, defineWebglComponents, fragmentSource, glFallbackCss, glGovernor, glQuad, postFxShader, supportsWebGL, watchPowerSaver };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.9.0/dist/components/webgl.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.0.0/dist/components/webgl.js.map

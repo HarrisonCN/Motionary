@@ -91,7 +91,7 @@ describe('usa-codemod-5', () => {
 
   it('is published as a bin with an upgrade guide', () => {
     const pkg = JSON.parse(readFileSync(resolve(root, 'package.json'), 'utf8'));
-    expect(pkg.bin['usa-codemod-5']).toBe('./bin/usa-codemod-5.mjs');
+    expect(pkg.bin['usa-codemod-5']).toBeUndefined(); // 14.0: `npx motionary codemod 5`
     expect(pkg.files).toContain('bin');
     expect(existsSync(resolve(root, 'docs/upgrading-5.md'))).toBe(true);
   });

@@ -1,6 +1,6 @@
 {
   "name": "motionary",
-  "version": "13.9.0",
+  "version": "14.0.0",
   "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 209 animated Web Components (91 core, 118 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -510,6 +510,46 @@
         "default": "./dist/components/angular.cjs"
       }
     },
+    "./motion": {
+      "import": {
+        "types": "./dist/components/motion.d.ts",
+        "default": "./dist/components/motion.js"
+      },
+      "require": {
+        "types": "./dist/components/motion.d.cts",
+        "default": "./dist/components/motion.cjs"
+      }
+    },
+    "./scene": {
+      "import": {
+        "types": "./dist/components/scene-v2.d.ts",
+        "default": "./dist/components/scene-v2.js"
+      },
+      "require": {
+        "types": "./dist/components/scene-v2.d.cts",
+        "default": "./dist/components/scene-v2.cjs"
+      }
+    },
+    "./compat-v13": {
+      "import": {
+        "types": "./dist/components/compat-v13.d.ts",
+        "default": "./dist/components/compat-v13.js"
+      },
+      "require": {
+        "types": "./dist/components/compat-v13.d.cts",
+        "default": "./dist/components/compat-v13.cjs"
+      }
+    },
+    "./motion/scene": {
+      "import": {
+        "types": "./dist/components/motion-scene.d.ts",
+        "default": "./dist/components/motion-scene.js"
+      },
+      "require": {
+        "types": "./dist/components/motion-scene.d.cts",
+        "default": "./dist/components/motion-scene.cjs"
+      }
+    },
     "./components/reveal": {
       "import": {
         "types": "./dist/components/reveal.d.ts",
@@ -698,6 +738,36 @@
       "require": {
         "types": "./dist/components/fx.d.cts",
         "default": "./dist/components/fx.cjs"
+      }
+    },
+    "./components/motion": {
+      "import": {
+        "types": "./dist/components/motion.d.ts",
+        "default": "./dist/components/motion.js"
+      },
+      "require": {
+        "types": "./dist/components/motion.d.cts",
+        "default": "./dist/components/motion.cjs"
+      }
+    },
+    "./components/motion-scene": {
+      "import": {
+        "types": "./dist/components/motion-scene.d.ts",
+        "default": "./dist/components/motion-scene.js"
+      },
+      "require": {
+        "types": "./dist/components/motion-scene.d.cts",
+        "default": "./dist/components/motion-scene.cjs"
+      }
+    },
+    "./components/compat-v13": {
+      "import": {
+        "types": "./dist/components/compat-v13.d.ts",
+        "default": "./dist/components/compat-v13.js"
+      },
+      "require": {
+        "types": "./dist/components/compat-v13.d.cts",
+        "default": "./dist/components/compat-v13.cjs"
       }
     },
     "./components/react": {
@@ -4254,12 +4324,6 @@
     "node": ">=20"
   },
   "bin": {
-    "usa-codemod-5": "./bin/usa-codemod-5.mjs",
-    "usa-codemod-6": "./bin/usa-codemod-6.mjs",
-    "usa-codemod-7": "./bin/usa-codemod-7.mjs",
-    "usa-codemod-8": "./bin/usa-codemod-8.mjs",
-    "usa-codemod-9": "./bin/usa-codemod-9.mjs",
-    "usa-codemod-10": "./bin/usa-codemod-10.mjs",
     "create-motionary-plugin": "./bin/create-motionary-plugin.mjs",
     "motionary-mcp": "./bin/motionary-mcp.mjs",
     "usa-codemod-11": "./bin/usa-codemod-11.mjs",

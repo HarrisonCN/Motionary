@@ -152,4 +152,4 @@ function defineSwipeDeck(tag = 'usa-swipe-deck') {
 }
 
 exports.defineSwipeDeck = defineSwipeDeck;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.9.0/dist/widgets/swipe-deck.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.0.0/dist/widgets/swipe-deck.cjs.map

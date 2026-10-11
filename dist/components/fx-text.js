@@ -1,5 +1,5 @@
-import { registerEffects } from '../chunks/registry-DKs_BiEo.js';
-import { C as srText } from '../chunks/base-C9CJrhL3.js';
+import { registerEffects } from '../chunks/registry-CE5_Mo_p.js';
+import { C as srText } from '../chunks/base-D0sRwVz1.js';
 import { a as all, r as rand, f as fxLayer, s as spawn } from '../chunks/shared-CkKHWrtJ.js';
 
 /** Split `el`'s text into `aria-hidden` inline-block characters (idempotent). Returns them. */
@@ -260,4 +260,4 @@ function registerTextPack() {
 }
 
 export { TEXT3_FX, registerTextPack, splitChars };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.9.0/dist/components/fx-text.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.0.0/dist/components/fx-text.js.map

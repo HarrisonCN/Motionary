@@ -2,7 +2,9 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { installComponentMocks, mount, anims } from './components-setup';
 import { configureComponents } from '../src/components/base';
 import { defineFxComponents, registerEffect, playEffect } from '../src/components/fx';
-import { registerAllEffects, createPlayer, normalizeAnimation, definePlayer, ANIMATION_FORMAT } from '../src/components/effects';
+import { registerAllEffects, createPlayer, definePlayer, ANIMATION_FORMAT } from '../src/components/effects';
+// 14.0: normalizeAnimation (and the playground / unversioned formats it reads) moved to motionary/compat-v13
+import { normalizeAnimation } from '../src/components/compat-v13';
 import * as click from '../src/components/click';
 import { defineCursor } from '../src/components/page';
 // @ts-expect-error — plain ESM bin script
@@ -155,7 +157,7 @@ describe('5.9 <usa-player>', () => {
     definePlayer();
     const el = mount<any>('<usa-player trigger="manual" controls><script type="application/json">{"oops":1}</script><p>x</p></usa-player>');
     expect(el.getAttribute('data-error')).toMatch(/tracks/);
-    el.load({ tracks: [{ target: 'p', preset: 'fade', duration: 300 }] });
+    el.load({ format: ANIMATION_FORMAT, version: 1, tracks: [{ target: 'p', preset: 'fade', duration: 300 }] }); // 14.0: format / version required
     expect(el.hasAttribute('data-error')).toBe(false);
     expect(el.player.duration).toBe(300);
     const b = el.querySelector('[data-player-toggle]');

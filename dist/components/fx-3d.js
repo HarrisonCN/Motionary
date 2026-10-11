@@ -1,5 +1,5 @@
-import { r as raf$1, b as caf$1 } from '../chunks/base-C9CJrhL3.js';
-import { registerEffects } from '../chunks/registry-DKs_BiEo.js';
+import { r as raf$1, b as caf$1 } from '../chunks/base-D0sRwVz1.js';
+import { registerEffects } from '../chunks/registry-CE5_Mo_p.js';
 import { a as all } from '../chunks/shared-CkKHWrtJ.js';
 import { trackPointer } from './fx-light.js';
 
@@ -247,4 +247,4 @@ function register3dPack() {
 }
 
 export { DEPTH3_FX, register3dPack };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.9.0/dist/components/fx-3d.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.0.0/dist/components/fx-3d.js.map

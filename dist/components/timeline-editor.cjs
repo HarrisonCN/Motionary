@@ -1,8 +1,9 @@
 'use strict';
 
-var format = require('../chunks/format-ydoPCKjv.cjs');
+var format = require('../chunks/format-DrRrPbjl.cjs');
 var ease$1 = require('../chunks/ease-HwYZnZat.cjs');
 var base = require('../chunks/base-BvH4nAcv.cjs');
+var scene = require('../chunks/scene-C4h75wjo.cjs');
 
 /**
  * 13.6: editing operations on a `motionary-timeline` document. Every operation
@@ -661,7 +662,7 @@ const id = { type: 'string', minLength: 1, maxLength: 128 };
 const value = { oneOf: [{ type: 'number' }, { type: 'string', maxLength: 2048 }] };
 const TIMELINE_DOC_SCHEMA = {
     $schema: 'https://json-schema.org/draft/2020-12/schema',
-    $id: 'https://cdn.jsdelivr.net/npm/motionary@13/docs/timeline-doc.schema.json',
+    $id: 'https://cdn.jsdelivr.net/npm/motionary@14/docs/timeline-doc.schema.json',
     title: 'motionary-timeline v1',
     type: 'object',
     additionalProperties: false,
@@ -733,6 +734,9 @@ exports.timelineDocDuration = format.timelineDocDuration;
 exports.timelineDocFromAnimation = format.timelineDocFromAnimation;
 exports.timelineDocToAnimation = format.timelineDocToAnimation;
 exports.validateTimelineDoc = format.validateTimelineDoc;
+exports.loadMotionDoc = scene.loadMotionDoc;
+exports.timelineDocFromScene = scene.timelineDocFromScene;
+exports.timelineDocToScene = scene.timelineDocToScene;
 exports.TIMELINE_DOC_SCHEMA = TIMELINE_DOC_SCHEMA;
 exports.addKeyframe = addKeyframe;
 exports.addLayer = addLayer;
@@ -758,4 +762,4 @@ exports.shiftKeyframes = shiftKeyframes;
 exports.ungroupLayer = ungroupLayer;
 exports.uniqueId = uniqueId;
 exports.updateLayers = updateLayers;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.9.0/dist/components/timeline-editor.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.0.0/dist/components/timeline-editor.cjs.map

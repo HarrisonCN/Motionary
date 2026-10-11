@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 10.9 · **changed in** 13.1, 13.2, 13.3, 13.8
 - **Import:** `import { defineGlModel } from 'motionary/components/gl-model'` then `defineGlModel();`
-- **CDN:** `<script type="module">import { defineGlModel } from 'https://unpkg.com/motionary@13/dist/components/gl-model.js'; defineGlModel();</script>` (own entry, not in the no-build bundles)
+- **CDN:** `<script type="module">import { defineGlModel } from 'https://unpkg.com/motionary@14/dist/components/gl-model.js'; defineGlModel();</script>` (own entry, not in the no-build bundles)
 - **Attributes:** —
 - **Events:** `usa:runtime-missing`
 - **Slots:** —
@@ -35,15 +35,15 @@ defineGlModel(); // registers <usa-gl-model> — after the prerequisites
 3. **CDN:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/gl.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/format-gltf.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@13/dist/runtime/gltf-decoders.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/gl.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/format-gltf.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/gltf-decoders.iife.js"></script>
 <script src="https://www.gstatic.com/draco/versioned/decoders/1.5.7/draco_decoder.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/BinomialLLC/basis_universal@1.16.4/webgl/transcoder/build/basis_transcoder.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@13/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@14/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@14/dist/widgets.umd.js"></script>
 ```
 
 ## Minimal example

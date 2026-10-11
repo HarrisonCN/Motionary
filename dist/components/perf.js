@@ -1,5 +1,5 @@
-import { o as onFrame, B as setStyleLoader, v as animationBudget, w as getMotionIntensity, c as configureComponents, y as setAnimationBudget, q as activeAnimations } from '../chunks/base-C9CJrhL3.js';
-export { x as schedulerStats, z as setFrameBudget } from '../chunks/base-C9CJrhL3.js';
+import { o as onFrame, B as setStyleLoader, v as animationBudget, w as getMotionIntensity, c as configureComponents, y as setAnimationBudget, q as activeAnimations } from '../chunks/base-D0sRwVz1.js';
+export { x as schedulerStats, z as setFrameBudget } from '../chunks/base-D0sRwVz1.js';
 import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-B-JBecYg.js';
 
 /**
@@ -107,4 +107,4 @@ function onDemandStyles(base) {
 const loadedStyles = () => Array.from(loaded);
 
 export { activeAnimations, animationBudget, autoDegrade, categoryOf, loadCategoryStyles, loadedStyles, onDemandStyles, onFrame, setAnimationBudget };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.9.0/dist/components/perf.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.0.0/dist/components/perf.js.map

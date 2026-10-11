@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 8.6 · **changed in** 13.1
 - **Import:** `import { defineThemeSwitcher } from 'motionary/components/widgets'` then `defineThemeSwitcher();`
-- **CDN:** `<script src="https://unpkg.com/motionary@13/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@14/dist/widgets.umd.js"></script>`
 - **Attributes:** `themes`, `target`, `label`, `persist`, `value`
 - **Events:** `usa:change`
 - **Slots:** —

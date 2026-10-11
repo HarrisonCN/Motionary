@@ -267,7 +267,7 @@ describe('10.1 plugin ecosystem: integrity, semver, scaffold', () => {
       execFileSync(process.execPath, ['bin/create-motionary-plugin.mjs', 'motionary-plugin-sparkle', '--dir', join(dir, 'p')], { stdio: 'pipe' });
       for (const f of ['package.json', 'src/index.js', 'test/plugin.test.mjs', 'scripts/sign.mjs', 'README.md']) expect(existsSync(join(dir, 'p', f)), f).toBe(true);
       const pkg = JSON.parse(readFileSync(join(dir, 'p/package.json'), 'utf8'));
-      expect(pkg.engines.motionary).toMatch(/^>=13/); // 13.0: the scaffold targets the current major
+      expect(pkg.engines.motionary).toMatch(/^>=14/); // 13.0+: the scaffold targets the current major (14 since 14.0)
       execFileSync(process.execPath, ['--test', 'test/plugin.test.mjs'], { cwd: join(dir, 'p'), stdio: 'pipe' });
       expect(() => execFileSync(process.execPath, ['bin/create-motionary-plugin.mjs', 'Bad Name'], { stdio: 'pipe' })).toThrow();
     } finally {
@@ -297,14 +297,14 @@ describe('10.1 widgets', () => {
   });
   it('<usa-plugin-card> with the runtime: compat badge, toggle, details', () => {
     rt.use();
-    document.body.innerHTML = '<usa-plugin-card name="retro" title="Retro" version="1.2.0" author="Motionary" engine="^13.0.0" downloads="12400"><p>Details</p></usa-plugin-card><usa-plugin-card name="next" engine=">=14"></usa-plugin-card>';
+    document.body.innerHTML = '<usa-plugin-card name="retro" title="Retro" version="1.2.0" author="Motionary" engine="^14.0.0" downloads="12400"><p>Details</p></usa-plugin-card><usa-plugin-card name="next" engine=">=15"></usa-plugin-card>';
     const [a, b] = Array.from(document.querySelectorAll('usa-plugin-card')) as any[];
     expect(a.querySelector('.usa-rt-missing')).toBeNull();
     expect(a.querySelector('.usa-pc-name').textContent).toBe('Retro');
     expect(a.querySelector('.usa-pc-sub').textContent).toBe('v1.2.0 · Motionary');
     expect(a.querySelector('.usa-pc-compat').dataset.ok).toBe('true');
     expect(b.compat().ok).toBe(false);
-    expect(b.querySelector('.usa-pc-compat').textContent).toContain('needs >=14');
+    expect(b.querySelector('.usa-pc-compat').textContent).toContain('needs >=15');
     expect(a.querySelector('.usa-pc-details p').textContent).toBe('Details');
     const ev: any[] = [];
     a.addEventListener('usa:toggle', (e: any) => ev.push(e.detail.open));
