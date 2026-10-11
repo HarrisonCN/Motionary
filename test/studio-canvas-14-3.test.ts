@@ -67,7 +67,7 @@ describe('14.3 Studio canvas: entry and packaging', () => {
   });
   it('zero runtime dependencies; version 14.3.0; docs (incl. the real-device checklist) + changelog', () => {
     expect(pkg.dependencies ?? {}).toEqual({});
-    expect(pkg.version).toBe('14.3.0');
+    expect(pkg.version).toMatch(/^14\.([3-9]|\d\d)\.\d+$/); // 14.3.0 or a later 14.x
     expect(existsSync('docs/studio-canvas.md')).toBe(true);
     const doc = readFileSync('docs/studio-canvas.md', 'utf8');
     for (const s of ['createStudioCanvas', 'applyCanvasOps', 'marquee', 'snap', 'grid', 'guides', 'locked', 'muted', 'pinch', 'touch-action', 'aria-selected', 'Shift', 'undo', 'Scene Format v2', 'Real-device checklist', 'iOS Safari', 'Android Chrome'])

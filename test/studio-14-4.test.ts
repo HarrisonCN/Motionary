@@ -260,7 +260,7 @@ describe('14.4 controller: timeline grid, rows, accessibility', () => {
     expect(ph.getAttribute('aria-valuemax')).toBe('600');
     expect($('[data-studio] [role="status"][aria-live="polite"]')).toBeTruthy();
     expect($('[role="toolbar"]')).toBeTruthy();
-    expect($('[data-keys="title"]').style.touchAction).toBe('none');
+    expect($('[data-keys="title"]').getAttribute('style')).toMatch(/touch-action:\s*none/);
     studio.destroy();
     expect($('#app').innerHTML).toBe('');
   });
@@ -405,10 +405,10 @@ describe('14.4 controller: keyframes — drag, snapping, marquee, multi-select, 
   });
   it('marquee selects keys across rows; Shift / Ctrl click toggles; a multi-selection moves together', () => {
     const { studio, history } = make();
-    const cell = $('[data-keys="title"]');
-    ptr(cell, 'pointerdown', 120, 2);
-    ptr(cell, 'pointermove', 320, 2 * RH + 5);
-    ptr(cell, 'pointerup', 320, 2 * RH + 5);
+    const cell = () => $('[data-keys="title"]'); // re-query: the rows re-render as the selection changes
+    ptr(cell(), 'pointerdown', 120, 2);
+    ptr(cell(), 'pointermove', 320, 2 * RH + 5);
+    ptr(cell(), 'pointerup', 320, 2 * RH + 5);
     expect(studio.selection.sort()).toEqual(['k2', 'k3']); // 200–533 ms over rows title / img (the group row has no keys)
     expect($('[data-key="k2"]').getAttribute('aria-pressed')).toBe('true');
     const [x4, y4] = at(3, 100);
@@ -426,8 +426,8 @@ describe('14.4 controller: keyframes — drag, snapping, marquee, multi-select, 
     expect(kf(history.doc, 'k2').time).toBe(533.3333);
     expect(kf(history.doc, 'k4').time).toBe(133.3333);
     expect(history.size).toBe(1);
-    ptr(cell, 'pointerdown', 590, 5);
-    ptr(cell, 'pointerup', 590, 5);
+    ptr(cell(), 'pointerdown', 590, 5);
+    ptr(cell(), 'pointerup', 590, 5);
     expect(studio.selection).toEqual([]); // click on empty track space clears
     studio.destroy();
   });
@@ -507,16 +507,16 @@ describe('14.4 controller: curve editor and inspector', () => {
     expect(kf(history.doc, 'k1').easing).toBe('cubic-bezier(0.42, 0, 0.58, 1)');
     expect(kf(history.doc, 'k4').easing).toBe('cubic-bezier(0.42, 0, 0.58, 1)');
     expect(history.size).toBe(1);
-    const svg = $('[data-curve] svg');
+    const panel = $('[data-curve]'); // stable; the curve re-renders while dragging
     const h1 = $('[data-handle="1"]');
     // the curve box is 120 × 120 px with 60 px above / below for overshoot: (x, y) → (x × 120, 60 + (1 − y) × 120)
     ptr(h1, 'pointerdown', 0.42 * 120, 60 + 120);
-    ptr(svg, 'pointermove', 0.3 * 120, 60 + (1 - 0.5) * 120);
-    ptr(svg, 'pointermove', 0.25 * 120, 60 + (1 - 1.2) * 120);
-    ptr(svg, 'pointerup', 0.25 * 120, 60 + (1 - 1.2) * 120);
+    ptr(panel, 'pointermove', 0.3 * 120, 60 + (1 - 0.5) * 120);
+    ptr(panel, 'pointermove', 0.25 * 120, 60 + (1 - 1.2) * 120);
+    ptr(panel, 'pointerup', 0.25 * 120, 60 + (1 - 1.2) * 120);
     expect(kf(history.doc, 'k1').easing).toBe('cubic-bezier(0.25, 1.2, 0.58, 1)');
     expect(history.size).toBe(2);
-    expect(h1.getAttribute('aria-valuetext')).toMatch(/0\.25.*1\.2/);
+    expect($('[data-handle="1"]').getAttribute('aria-valuetext')).toMatch(/0\.25.*1\.2/);
     type($('[data-field="stiffness"]'), '180');
     type($('[data-field="damping"]'), '12');
     type($('[data-field="mass"]'), '1');
@@ -613,7 +613,8 @@ describe('14.4 acceptance: build through the UI, save, reopen, same frames', () 
     const frames = sampleFrames(built, { fps: 60 });
     const saved = studio.save();
     studio.setTime(350);
-    const dom350 = ['title', 'img', 'ok'].map((id) => $('#' + id).style.cssText);
+    const decl = (id: string) => $('#' + id).style.cssText.split(';').map((x) => x.trim()).filter(Boolean).sort(); // same declarations, any order
+    const dom350 = ['title', 'img', 'ok'].map(decl);
     studio.destroy();
 
     // reopen in a fresh Studio
@@ -626,7 +627,7 @@ describe('14.4 acceptance: build through the UI, save, reopen, same frames', () 
     expect(s2.collapsed).toEqual([gid]);
     expect(sampleFrames(h2.doc, { fps: 60 })).toEqual(frames);
     s2.setTime(350);
-    expect(['title', 'img', 'ok'].map((id) => $('#' + id).style.cssText)).toEqual(dom350);
+    expect(['title', 'img', 'ok'].map(decl)).toEqual(dom350);
     // the Scene v2 export opens to the same frames too (export / import regression)
     const scene = s2.exportScene();
     expect(scene.format).toBe('motionary-scene');

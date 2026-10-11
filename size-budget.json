@@ -365,6 +365,11 @@
     "limit": 12288
   },
   {
+    "name": "import 'motionary/components/studio' (= motionary/studio, 14.4 Motion Studio 1.0: timeline UI (tracks / groups, ruler, playhead, zoom), keyframe drag / marquee / copy-paste / snapping, curve editor, inspector, frame-step preview, save / load; composes the timeline editor model + the 14.3 canvas (both counted here); own entry, not in lite)",
+    "import": "export * from 'pkg/components/studio';",
+    "limit": 25600
+  },
+  {
     "name": "import 'motionary/components/motion-tokens' (= motionary/tokens, 14.1 Motion Tokens 2.0: token set + modes, DTCG, CSS, engine/scene helpers, Figma Variables adapter; own entry with its own 10 KB budget, not in lite)",
     "import": "export * from 'pkg/components/motion-tokens';",
     "limit": 10240
