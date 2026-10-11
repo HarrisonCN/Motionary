@@ -15,4 +15,4 @@ function registerHudFrame() {
 exports.effect = effect;
 exports.register = registerHudFrame;
 exports.registerHudFrame = registerHudFrame;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/effects/hud-frame.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.6.0/dist/effects/hud-frame.cjs.map

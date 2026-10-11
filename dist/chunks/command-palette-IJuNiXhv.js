@@ -263,4 +263,4 @@ function defineCommandPalette(tag = 'usa-command-palette') {
 }
 
 export { defineCommandPalette as d, fuzzyMatch as f, keyLabels as k, matchesKeys as m };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/chunks/command-palette-IJuNiXhv.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.6.0/dist/chunks/command-palette-IJuNiXhv.js.map

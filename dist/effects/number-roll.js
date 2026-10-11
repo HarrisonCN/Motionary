@@ -11,4 +11,4 @@ function registerNumberRoll() {
 }
 
 export { effect, registerNumberRoll as register, registerNumberRoll };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/effects/number-roll.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.6.0/dist/effects/number-roll.js.map

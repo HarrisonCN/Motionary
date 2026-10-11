@@ -170,4 +170,4 @@ exports.detectNativeHost = detectNativeHost;
 exports.isTrustedMessage = isTrustedMessage;
 exports.parseNativeSettings = parseNativeSettings;
 exports.postToNative = postToNative;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.5.0/dist/components/bridge.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.6.0/dist/components/bridge.cjs.map
