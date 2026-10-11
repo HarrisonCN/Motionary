@@ -40,6 +40,12 @@ describe('14.1 Motion Tokens 2.0: entry and packaging', () => {
     }
     expect(budgets.find((b) => /components\/lite'/.test(b.import || ''))!.limit).toBe(71680);
   });
+  it('docs policy: from 14 on, minors of the current major move npm latest (13.x unchanged)', async () => {
+    const V: any = await import('../scripts/check-versions.mjs');
+    expect(V.policyLatest('## [14.1.0] - x\n## [14.0.0] - x\n## [13.9.0] - x\n', '14.1.0')).toBe('14.1.0');
+    expect(V.policyLatest('## [13.1.0] - x\n## [13.0.2] - x\n## [13.0.0] - x\n', '13.1.0')).toBe('13.0.2');
+    expect(V.checkVersions().findings).toEqual([]);
+  });
   it('keeps zero runtime dependencies', () => {
     expect(pkg.dependencies || {}).toEqual({});
   });

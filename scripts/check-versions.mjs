@@ -17,10 +17,14 @@ const read = (f) => readFileSync(join(ROOT, f), 'utf8');
 const parse = (v) => String(v).split('.').map((x) => parseInt(x, 10) || 0);
 const cmp = (a, b) => { const x = parse(a), y = parse(b); for (let i = 0; i < 3; i++) if (x[i] !== y[i]) return x[i] - y[i]; return 0; };
 
-/** The version npm `latest` should point to under the docs/versions.md policy: the newest x.0.y of the current major. */
+/**
+ * The version npm `latest` should point to under the docs/versions.md policy: up to 13.x the newest x.0.y of the current
+ * major; from 14 on (14.1 policy change) the newest release of the current major, minors included.
+ */
 export function policyLatest(changelog, version) {
   const major = parse(version)[0];
-  const vs = [...String(changelog).matchAll(/^## \[(\d+\.\d+\.\d+)\]/gm)].map((x) => x[1]).filter((v) => parse(v)[0] === major && parse(v)[1] === 0 && cmp(v, version) <= 0);
+  const minorsMove = major >= 14;
+  const vs = [...String(changelog).matchAll(/^## \[(\d+\.\d+\.\d+)\]/gm)].map((x) => x[1]).filter((v) => parse(v)[0] === major && (minorsMove || parse(v)[1] === 0) && cmp(v, version) <= 0);
   return vs.sort(cmp).pop() || null;
 }
 
