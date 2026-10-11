@@ -906,4 +906,4 @@ function createScrollAnimate(userConfig = {}) {
 }
 
 export { stopAnimation as a, resolveTargets as b, createScrollAnimate as c, prefersReducedMotion as d, supportsScrollTimeline as e, getScrollProgress as g, hasDOM as h, prepareElement as p, readOptions as r, supportsObserver as s };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.2.0/dist/chunks/core-Dj6iomdc.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.3.0/dist/chunks/core-Dj6iomdc.js.map

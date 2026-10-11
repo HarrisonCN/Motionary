@@ -5,4 +5,4 @@ var widgets_weatherCard = require('../chunks/weather-card-4Eg6e43D.cjs');
 
 
 exports.defineWeatherCard = widgets_weatherCard.defineWeatherCard;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.2.0/dist/widgets/weather-card.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.3.0/dist/widgets/weather-card.cjs.map
