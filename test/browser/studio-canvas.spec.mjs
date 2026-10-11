@@ -73,17 +73,18 @@ test.describe('14.3 Studio canvas', () => {
     expect(await page.evaluate(() => window.__c.selection)).toEqual(['a', 'b']);
     await page.mouse.click(cv.x + 590, cv.y + 390);
     expect(await page.evaluate(() => window.__c.selection)).toEqual([]);
-    // c (left 150) dragged right by 147 → its left edge 297 snaps to b's left edge 300
+    // c (left 150) dragged right by 147 → its left edge 297 snaps to b's left edge 300 (grab the middle: once c is
+    // selected its corners carry the resize handles)
     const c0 = await rect(page, '#c');
-    await page.mouse.move(c0.x + 5, c0.y + 5);
+    await page.mouse.move(c0.x + 20, c0.y + 20);
     await page.mouse.down();
-    await page.mouse.move(c0.x + 152, c0.y + 5, { steps: 6 });
+    await page.mouse.move(c0.x + 167, c0.y + 20, { steps: 6 });
     expect(await page.evaluate(() => !!document.querySelector('[data-canvas-guide="x"]'))).toBe(true);
     await page.mouse.up();
     expect((await geo(page, 'c')).x).toBe(150);
     expect(await page.evaluate(() => !!document.querySelector('[data-canvas-guide]'))).toBe(false);
     await page.keyboard.press(process.platform === 'darwin' ? 'Meta+z' : 'Control+z');
-    await drag(page, { x: c0.x + 5, y: c0.y + 5 }, { x: c0.x + 152, y: c0.y + 5 }, 6, ['Alt']);
+    await drag(page, { x: c0.x + 20, y: c0.y + 20 }, { x: c0.x + 167, y: c0.y + 20 }, 6, ['Alt']);
     expect((await geo(page, 'c')).x).toBe(147);
     await expectNoErrors(page);
   });
