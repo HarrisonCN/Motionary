@@ -15,7 +15,7 @@
  */
 import { raf as R, onFrame as F, setPauseHook as H } from './base';
 
-const off = new WeakSet<Element>();
+const off = /*#__PURE__*/ new WeakSet<Element>();
 let io: IntersectionObserver | null | undefined;
 let wake: () => void;
 
