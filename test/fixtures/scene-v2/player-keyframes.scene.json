@@ -1,0 +1,73 @@
+{
+  "format": "motionary-scene",
+  "version": 2,
+  "name": "intro",
+  "duration": 2000,
+  "loop": true,
+  "layers": [
+    {
+      "id": "t1",
+      "type": "track",
+      "name": "Logo",
+      "target": ".logo",
+      "start": 100,
+      "duration": 800,
+      "easing": "ease-in-out",
+      "keyframes": [
+        {
+          "id": "t1k1",
+          "time": 100,
+          "props": {
+            "opacity": 0,
+            "transform": "scale(0.8)"
+          }
+        },
+        {
+          "id": "t1k2",
+          "time": 700,
+          "props": {
+            "opacity": 1,
+            "transform": "scale(1.05)"
+          },
+          "easing": "ease-out"
+        },
+        {
+          "id": "t1k3",
+          "time": 900,
+          "props": {
+            "opacity": 1,
+            "transform": "scale(1)"
+          },
+          "composite": "add"
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "type": "track",
+      "target": ".bar",
+      "start": 500,
+      "duration": 1000,
+      "keyframes": [
+        {
+          "id": "t2k1",
+          "time": 500,
+          "props": {
+            "width": "0%"
+          }
+        },
+        {
+          "id": "t2k2",
+          "time": 1500,
+          "props": {
+            "width": "100%"
+          }
+        }
+      ]
+    }
+  ],
+  "source": {
+    "format": "use-scroll-animate/animation",
+    "version": 1
+  }
+}

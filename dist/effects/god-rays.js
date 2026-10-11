@@ -11,4 +11,4 @@ function registerGodRays() {
 }
 
 export { effect, registerGodRays as register, registerGodRays };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.8.0/dist/effects/god-rays.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.9.0/dist/effects/god-rays.js.map

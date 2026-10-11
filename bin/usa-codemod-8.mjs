@@ -11,6 +11,7 @@
 import { readFileSync, writeFileSync, readdirSync, statSync } from 'node:fs';
 import { join, extname } from 'node:path';
 import { pathToFileURL } from 'node:url';
+if (!process.env.MOTIONARY_NO_DEPRECATION) console.error('[motionary] usa-codemod-8 is deprecated and removed in 14.0 — run `npx motionary doctor` and the newest codemod (docs/deprecations-v14.md#old-codemods).');
 
 const EXT = new Set(['.js', '.mjs', '.cjs', '.jsx', '.ts', '.tsx', '.mts', '.cts', '.vue', '.svelte', '.html', '.astro', '.md', '.mdx', '.css', '.scss']);
 export const TAGS = { 'usa-rating': 'usa-star-rating' };

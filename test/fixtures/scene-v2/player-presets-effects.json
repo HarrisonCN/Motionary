@@ -1,0 +1,10 @@
+{
+  "format": "use-scroll-animate/animation",
+  "version": 1,
+  "name": "mixed",
+  "tracks": [
+    { "target": ".a", "preset": "fade-up", "start": 0, "duration": 600, "label": "A" },
+    { "target": ".b", "preset": "scale", "start": 300, "duration": 500, "easing": "ease-out" },
+    { "target": ".c", "effect": "confetti", "start": 900, "options": { "count": 40, "colors": ["#f00", "#0f0"] } }
+  ]
+}

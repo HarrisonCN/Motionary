@@ -352,4 +352,4 @@ exports.pinchScale = core$1.pinchScale;
 exports.swipeDirection = core$1.swipeDirection;
 exports.haptic = fx.haptic;
 exports.defineComponents = defineComponents;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.8.0/dist/components.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.9.0/dist/components.cjs.map

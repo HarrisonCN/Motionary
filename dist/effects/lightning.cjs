@@ -15,4 +15,4 @@ function registerLightning() {
 exports.effect = effect;
 exports.register = registerLightning;
 exports.registerLightning = registerLightning;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.8.0/dist/effects/lightning.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v13.9.0/dist/effects/lightning.cjs.map

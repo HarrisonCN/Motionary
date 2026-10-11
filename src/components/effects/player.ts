@@ -17,7 +17,8 @@
  * player itself) with a timeline preset, its own keyframes, or fires any
  * registered effect at `start`. Playground presets (format
  * `use-scroll-animate/playground`) are accepted too — their tracks map to the
- * player's children in order.
+ * player's children in order. @deprecated since 13.9 (removed in 14.0): the playground
+ * format and animation JSON without `format` / `version` — `npx motionary migrate`.
  *
  * Keyframe tracks are WAAPI animations driven by one clock, so the player can
  * play, pause, seek, change rate and be scrubbed by scroll
@@ -28,6 +29,9 @@ import { playEffect } from '../fx/registry';
 import { defineElement, prefersReducedMotion, type UsaElement } from '../base';
 import { TIMELINE_PRESETS } from '../timeline/core';
 import { storyProgress } from './story';
+import { warnDeprecated } from '../deprecations';
+
+declare const process: { env: Record<string, string | undefined> };
 
 export interface AnimationTrack {
   /** Selector inside the player (`:scope` = the player). */
@@ -68,13 +72,17 @@ function decodePlayground(state: string): AnimationTrack[] {
   }
 }
 
-/** Validate / normalise an animation (object or JSON text). Throws on anything unusable. */
-export function normalizeAnimation(input: string | AnimationJSON | Record<string, any>): Required<Pick<AnimationJSON, 'tracks' | 'duration' | 'loop' | 'name'>> {
+function normalize(input: string | AnimationJSON | Record<string, any>): Required<Pick<AnimationJSON, 'tracks' | 'duration' | 'loop' | 'name'>> {
   const d: any = typeof input === 'string' ? JSON.parse(input) : input;
   if (!d || typeof d !== 'object') throw new Error('[motionary] animation: expected an object');
   let tracks: AnimationTrack[];
-  if (d.format === 'use-scroll-animate/playground') tracks = decodePlayground(String(d.state || ''));
-  else if (Array.isArray(d.tracks)) tracks = d.tracks;
+  if (d.format === 'use-scroll-animate/playground') {
+    if (typeof process !== 'undefined' && process.env.NODE_ENV !== 'production') warnDeprecated('player-playground-format');
+    tracks = decodePlayground(String(d.state || ''));
+  } else if (Array.isArray(d.tracks)) {
+    if (typeof process !== 'undefined' && process.env.NODE_ENV !== 'production' && d.format === undefined && d.version === undefined) warnDeprecated('player-unversioned-json');
+    tracks = d.tracks;
+  }
   else throw new Error('[motionary] animation: missing "tracks"');
   if (d.format && d.format !== ANIMATION_FORMAT && d.format !== 'use-scroll-animate/playground') throw new Error(`[motionary] animation: unknown format "${d.format}"`);
   if (d.version && d.version > 1 && d.format === ANIMATION_FORMAT) throw new Error(`[motionary] animation: version ${d.version} needs a newer motionary`);
@@ -83,6 +91,16 @@ export function normalizeAnimation(input: string | AnimationJSON | Record<string
     .map((t) => ({ ...t, target: t.target || ':scope', start: Math.max(0, Number(t.start) || 0), duration: t.effect ? 0 : Math.max(1, Number(t.duration) || 600) }));
   const end = out.reduce((m, t) => Math.max(m, t.start + t.duration), 0);
   return { tracks: out, duration: Math.max(end, Number(d.duration) || 0), loop: !!d.loop, name: String(d.name || 'animation') };
+}
+
+/**
+ * Validate / normalise an animation (object or JSON text). Throws on anything unusable.
+ * @deprecated since 13.9, removed in 14.0 — validate with `validateSceneV2()` / `migrateToSceneV2()`
+ * from `motionary/components/scene-v2` (docs/deprecations-v14.md#normalize-animation). `createPlayer` is unchanged.
+ */
+export function normalizeAnimation(input: string | AnimationJSON | Record<string, any>): Required<Pick<AnimationJSON, 'tracks' | 'duration' | 'loop' | 'name'>> {
+  if (typeof process !== 'undefined' && process.env.NODE_ENV !== 'production') warnDeprecated('normalize-animation');
+  return normalize(input);
 }
 
 export interface Player {
@@ -111,7 +129,7 @@ const pick = (root: HTMLElement, sel: string): HTMLElement[] => {
 
 /** Bind an animation to `root` and return its controller (paused at 0 unless `autoplay`). */
 export function createPlayer(root: HTMLElement, animation: string | AnimationJSON, o: { autoplay?: boolean; loop?: boolean; rate?: number; onFinish?: () => void } = {}): Player {
-  const a = normalizeAnimation(animation);
+  const a = normalize(animation);
   const loop = o.loop ?? a.loop;
   const anims: Animation[] = [];
   const effects: { els: HTMLElement[]; t: AnimationTrack; fired: boolean }[] = [];

@@ -1,0 +1,18 @@
+{
+  "format": "use-scroll-animate/animation",
+  "version": 1,
+  "name": "intro",
+  "loop": true,
+  "duration": 2000,
+  "tracks": [
+    { "target": ".logo", "start": 100, "duration": 800, "easing": "ease-in-out", "label": "Logo", "keyframes": [
+      { "opacity": 0, "transform": "scale(0.8)" },
+      { "opacity": 1, "transform": "scale(1.05)", "offset": 0.75, "easing": "ease-out" },
+      { "opacity": 1, "transform": "scale(1)", "composite": "add" }
+    ] },
+    { "target": ".bar", "start": 500, "duration": 1000, "keyframes": [
+      { "width": "0%", "offset": 0 },
+      { "width": "100%", "offset": 1 }
+    ] }
+  ]
+}

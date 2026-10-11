@@ -1,0 +1,43 @@
+{
+  "format": "motionary-scene",
+  "version": 2,
+  "name": "mixed",
+  "layers": [
+    {
+      "id": "t1",
+      "type": "track",
+      "name": "A",
+      "target": ".a",
+      "start": 0,
+      "duration": 600,
+      "preset": "fade-up"
+    },
+    {
+      "id": "t2",
+      "type": "track",
+      "target": ".b",
+      "start": 300,
+      "duration": 500,
+      "easing": "ease-out",
+      "preset": "scale"
+    },
+    {
+      "id": "t3",
+      "type": "track",
+      "target": ".c",
+      "start": 900,
+      "effect": "confetti",
+      "options": {
+        "count": 40,
+        "colors": [
+          "#f00",
+          "#0f0"
+        ]
+      }
+    }
+  ],
+  "source": {
+    "format": "use-scroll-animate/animation",
+    "version": 1
+  }
+}
