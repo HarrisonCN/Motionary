@@ -878,4 +878,4 @@ exports.defineHold = defineHold;
 exports.defineIconMorph = defineIconMorph;
 exports.defineLike = defineLike;
 exports.morphPath = morphPath;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.5.0/dist/components/click.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.6.0/dist/components/click.cjs.map

@@ -1,10 +1,10 @@
 import { createStudioCanvas } from './studio-canvas.js';
-import { h as historyKeyAction, d as setKeyframeEasing, s as setKeyframeProps, r as removeKeyframes, a as addKeyframe, u as updateLayers, e as addLayer, f as copyKeyframes, g as shiftKeyframes, i as editableKeyframes, p as pasteKeyframes } from '../chunks/history-33BSkOst.js';
-import { c as createTimelinePreview, s as sampleTimelineDoc } from '../chunks/preview-Bs9q_YWX.js';
-import { t as timelineDocToScene } from '../chunks/scene-BJvDY-LA.js';
-import { d as isLayerLocked, b as timelineDocDuration } from '../chunks/format-Bys6klFb.js';
-import { a as parseBezier, C as CURVE_PRESETS, p as parseStudioProject, s as serializeStudioProject, b as sampleFrames, c as springParams, d as springBezier, e as bezierEasing, f as frameTime } from '../chunks/project-DlmrullH.js';
-export { S as STUDIO_PROJECT_FORMAT, g as STUDIO_PROJECT_VERSION, h as cleanUiState } from '../chunks/project-DlmrullH.js';
+import { h as historyKeyAction, d as setKeyframeEasing, s as setKeyframeProps, r as removeKeyframes, a as addKeyframe, u as updateLayers, e as addLayer, f as copyKeyframes, g as shiftKeyframes, i as editableKeyframes, p as pasteKeyframes } from '../chunks/history-lWoJx_Yk.js';
+import { c as createTimelinePreview, s as sampleTimelineDoc } from '../chunks/preview-C9tONksA.js';
+import { t as timelineDocToScene } from '../chunks/scene-D5SKvFBd.js';
+import { d as isLayerLocked, b as timelineDocDuration } from '../chunks/format-CHcmOPqK.js';
+import { a as parseBezier, C as CURVE_PRESETS, p as parseStudioProject, s as serializeStudioProject, b as sampleFrames, c as springParams, d as springBezier, e as bezierEasing, f as frameTime } from '../chunks/project-C7WnO3IM.js';
+export { S as STUDIO_PROJECT_FORMAT, g as STUDIO_PROJECT_VERSION, h as cleanUiState } from '../chunks/project-C7WnO3IM.js';
 
 /**
  * motionary/studio (14.4) — Motion Studio 1.0: a timeline UI over the 13.6 timeline editor model, composed with the
@@ -808,4 +808,4 @@ function createStudio(root, o) {
 }
 
 export { CURVE_PRESETS, STUDIO_VERSION, bezierEasing, createStudio, frameTime, parseBezier, parseStudioProject, sampleFrames, serializeStudioProject, springBezier, springParams };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.5.0/dist/components/studio.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.6.0/dist/components/studio.js.map
