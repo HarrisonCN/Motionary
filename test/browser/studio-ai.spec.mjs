@@ -59,6 +59,9 @@ test.describe('14.6 AI Studio assistant — diff review', () => {
     await generate(page, 'smoother and hidden');
     await expect(ops(page)).toHaveCount(2);
     await ops(page).nth(0).locator('input[type=checkbox]').check();
+    await ops(page).nth(1).locator('input[type=checkbox]').check();
+    await ops(page).nth(1).locator('input[type=checkbox]').uncheck();
+    await expect(ops(page).nth(1)).toHaveAttribute('data-status', 'rejected');
     await expect(page.locator('[data-ai="apply"]')).toBeEnabled();
     await page.click('[data-ai="apply"]');
     const card = await page.evaluate(() => window.__h.doc.layers[1]);
