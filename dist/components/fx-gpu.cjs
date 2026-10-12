@@ -9,4 +9,4 @@ var components_fxGpu = require('../chunks/gpu-C2C6iBQC.cjs');
 
 exports.GPU_FX = components_fxGpu.GPU_FX;
 exports.registerGpuPack = components_fxGpu.registerGpuPack;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.5.0/dist/components/fx-gpu.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.6.0/dist/components/fx-gpu.cjs.map

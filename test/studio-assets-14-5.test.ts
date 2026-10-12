@@ -43,7 +43,7 @@ const FILES = (): Record<string, Uint8Array> => ({
 
 describe('14.5 entry, version and budget', () => {
   it('ships 14.5.0 with motionary/studio/assets + motionary/components/studio-assets, zero runtime deps', () => {
-    expect(pkg.version).toBe('14.5.0');
+    expect(pkg.version).toMatch(/^14\.([5-9]|\d\d)\.\d+$/); // 14.5.0 or a later 14.x
     expect(STUDIO_ASSETS_VERSION).toBe(1);
     for (const p of ['./studio/assets', './components/studio-assets']) expect(pkg.exports[p]?.import?.default).toBe('./dist/components/studio-assets.js');
     expect(pkg.dependencies ?? {}).toEqual({});

@@ -110,6 +110,11 @@
     "limit": 12288
   },
   {
+    "name": "import 'motionary/components/studio-ai' (= motionary/studio/ai, 14.6 AI Studio assistant 2.0: prompt → Scene v2 ops, parse model output as data, component / version matching, schema + compatibility + headless-render checks, fix suggestions, per-op review applied as one undo step, diff-review panel; includes the local motion parser; own entry, not in lite / studio)",
+    "import": "export * from 'pkg/components/studio-ai';",
+    "limit": 20480
+  },
+  {
     "name": "import 'motionary/components/interaction'",
     "import": "export * from 'pkg/components/interaction';",
     "limit": 6400

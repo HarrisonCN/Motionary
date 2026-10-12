@@ -7,6 +7,47 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [14.6.0] - 2026-10-12
+
+**AI Studio assistant 2.0**. A prompt becomes a proposed edit of a Scene v2 project — a list of structured ops in the
+`applyCanvasOps` format — that is checked on a copy (schema, component compatibility with your version, a headless
+render, optionally motionary-mcp / a real browser) before it is offered, reviewed op by op, and applied as one undo step.
+A failed check offers nothing and never touches the project. Model output is data only. No breaking changes. Zero
+runtime dependencies; no network in the entry or its tests. `motionary/components/lite` stays ≤ 70 KB gzip and no budget
+was raised: the new entry has its own budget line. [docs/studio-ai.md](docs/studio-ai.md)
+
+### Added
+
+- **`motionary/studio/ai`** (= `motionary/components/studio-ai`; its own entry, not in lite, `motionary/core`,
+  `motionary/motion`, `motionary/studio` or `motionary/studio/assets`).
+- **Scene v2 ops:** the four canvas ops (`add-keyframe`, `set-props`, `update-layers`, `move-layer`, replayed through
+  `applyCanvasOps` unchanged) plus `add-layer`, `remove-layer`, `set-layer`, `set-component`; `applySceneOps(scene, ops)`
+  (pure, never touches locked layers), `describeSceneOp(op)`.
+- **Prompt → edit:** `buildAiRequest` (system prompt, `AI_EDIT_SCHEMA`, the scene as data, selection, matched components,
+  the local answer), `localAiEdit` (deterministic local rules built on `describeMotion`; a new track on an empty scene),
+  `proposeAiEdit(scene, prompt, { provider, selection, catalog, version, validate, timeout, signal })` → `AiProposal`
+  with ops + reasons, a structured `diff`, `checks`, `errors` and repair `fixes`.
+- **Pluggable model adapter** — the 11.6 provider shape (function or `{ name, complete }`); timeouts, aborts, errors and
+  invalid answers end in `ok: false` (never a partial edit). `createMockProvider({ responses })` is deterministic.
+- **Local edits:** with `selection`, ops outside it are refused (new layers allowed); locked layers never change.
+- **Component and version matching:** `matchComponents(text, catalog, { version })`, `checkSceneCompatibility`
+  (unknown → closest tag, newer than the version, deprecated), `suggestSceneFixes` (repair ops).
+- **Checks before preview:** `validateAiEdit(scene, ops, options)` — `validateSceneV2`, compatibility,
+  `renderSceneHeadless` (every frame through the editor sampler; NaN / Infinity / throws fail), then the async
+  `validate` hook (e.g. motionary-mcp `validate_snippet { scene, browser: true }`).
+- **Review:** `createAiReview(history, proposal)` — accept / reject per op (an op that depends on a rejected one is
+  `blocked`), `preview()`, `apply()` as ONE history step re-validated on the current document (a stale base that no
+  longer fits is refused, history untouched), `discard()`. Undo is the editor's undo.
+- **Diff-review panel:** `createAiPanel(root, { history, provider, catalog, version, getSelection, validate })` — prompt,
+  one checkbox per op, the diff, check results, Apply / Accept all / Reject all / Discard / Use suggested fixes / Undo;
+  model text only ever as `textContent`. Chromium spec `test/browser/studio-ai.spec.mjs`.
+- **Injection hardening:** `parseAiEdit(raw)` — `JSON.parse` only, strict op / key whitelist, forbidden keys, size limits
+  (`AI_LIMITS`), code-like values (`javascript:`, markup, `expression(`, `@import`, `on…=`) rejected, all or nothing.
+- **motionary-mcp 2.2** (additive; every 13.7 argument and result field unchanged): `check_compatibility { scene }`,
+  `suggest_fix { scene }` → `sceneFixes` + `fixedScene`, `validate_snippet { scene, ops?, browser? }` (schema
+  `motionary-mcp/validate_scene@1`; `browser` renders the scene in a real headless browser), `suggest_motion
+  { format: 'scene' }`. `loadStudioAi` / `setStudioAi`; tool schema versions bumped for the four tools.
+
 ## [14.5.0] - 2026-10-12
 
 **Project & asset workflow**. Images, SVGs, fonts, video clips and audio referenced by a Motion Studio project are found,

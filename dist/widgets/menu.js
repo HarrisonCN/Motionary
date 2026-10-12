@@ -1,2 +1,2 @@
 export { d as defineMenu } from '../chunks/menu-DrQfp6bJ.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.5.0/dist/widgets/menu.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.6.0/dist/widgets/menu.js.map
