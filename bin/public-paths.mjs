@@ -21,6 +21,8 @@ export const LAYER_ALIASES = {
   'studio/canvas': 'components/studio-canvas',
   // 14.4: Motion Studio 1.0
   studio: 'components/studio',
+  // 14.5: project & asset workflow
+  'studio/assets': 'components/studio-assets',
 };
 
 /**

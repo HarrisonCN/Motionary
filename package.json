@@ -1,6 +1,6 @@
 {
   "name": "motionary",
-  "version": "14.4.0",
+  "version": "14.5.0",
   "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 209 animated Web Components (91 core, 118 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -828,6 +828,16 @@
       "require": {
         "types": "./dist/components/studio.d.cts",
         "default": "./dist/components/studio.cjs"
+      }
+    },
+    "./components/studio-assets": {
+      "import": {
+        "types": "./dist/components/studio-assets.d.ts",
+        "default": "./dist/components/studio-assets.js"
+      },
+      "require": {
+        "types": "./dist/components/studio-assets.d.cts",
+        "default": "./dist/components/studio-assets.cjs"
       }
     },
     "./components/motion-tokens": {
@@ -4250,6 +4260,16 @@
     "./components/layout.css": "./dist/components/layout.css",
     "./components/packs.css": "./dist/components/packs.css",
     "./components/fx.css": "./dist/components/fx.css",
+    "./studio/assets": {
+      "import": {
+        "types": "./dist/components/studio-assets.d.ts",
+        "default": "./dist/components/studio-assets.js"
+      },
+      "require": {
+        "types": "./dist/components/studio-assets.d.cts",
+        "default": "./dist/components/studio-assets.cjs"
+      }
+    },
     "./package.json": "./package.json"
   },
   "files": [

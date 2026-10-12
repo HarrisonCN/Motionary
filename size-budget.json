@@ -370,6 +370,11 @@
     "limit": 25600
   },
   {
+    "name": "import 'motionary/components/studio-assets' (= motionary/studio/assets, 14.5 project & asset workflow: asset references, project-confined path resolution, missing-asset report + relink, offline project pack; pure, includes the Studio project parser; own entry, not in lite / studio)",
+    "import": "export * from 'pkg/components/studio-assets';",
+    "limit": 12288
+  },
+  {
     "name": "import 'motionary/components/motion-tokens' (= motionary/tokens, 14.1 Motion Tokens 2.0: token set + modes, DTCG, CSS, engine/scene helpers, Figma Variables adapter; own entry with its own 10 KB budget, not in lite)",
     "import": "export * from 'pkg/components/motion-tokens';",
     "limit": 10240
