@@ -177,4 +177,4 @@ exports.ANIMATION_FORMAT = ANIMATION_FORMAT;
 exports.createPlayerCore = createPlayerCore;
 exports.normalizePlayable = normalizePlayable;
 exports.setLegacyAnimationLoader = setLegacyAnimationLoader;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.3.0/dist/chunks/player-core-BTFa6_IO.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.4.0/dist/chunks/player-core-BTFa6_IO.cjs.map

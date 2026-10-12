@@ -121,4 +121,4 @@ function registerGeoPack() {
 exports.GEO_FX = GEO_FX;
 exports.registerGeoPack = registerGeoPack;
 exports.routeLength = routeLength;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.3.0/dist/components/fx-geo.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.4.0/dist/components/fx-geo.cjs.map

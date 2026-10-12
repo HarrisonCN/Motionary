@@ -1,2 +1,2 @@
 export { d as defineCommandPalette } from '../chunks/command-palette-7lHRJzV1.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.3.0/dist/widgets/command-palette.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.4.0/dist/widgets/command-palette.js.map

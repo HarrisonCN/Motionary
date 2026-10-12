@@ -323,3 +323,34 @@ test.describe('14.3 Studio canvas on a phone', () => {
     await expectNoErrors(page);
   });
 });
+
+// 14.4.0: Motion Studio on a phone — real touch input (page.touchscreen) taps a key and scrubs the ruler, a finger
+// drag moves a key as one undo step, coarse pointers get the larger keys, and the timeline does not scroll the page
+// (touch-action: none).
+test.describe('14.4 Motion Studio on a phone', () => {
+  test('a tap selects a key (real touch input), the ruler scrubs by tap, a finger drag moves a key, touch-action: none', async ({ page }) => {
+    await openFixture(page);
+    await page.evaluate(() => (document.getElementById('stage').innerHTML = `<div id="st"></div><div id="cv" style="position:relative;width:300px;height:120px"><div id="a" style="position:absolute;left:10px;top:10px;width:60px;height:40px;background:#08f"></div></div>`));
+    await page.evaluate(async () => {
+      const T = await import('motionary/components/timeline-editor');
+      const S = await import('motionary/studio');
+      window.__h = T.createTimelineHistory(T.createTimelineDoc({ layers: [{ id: 'a', type: 'track', name: 'A', target: '#a', keyframes: [{ id: 'k1', time: 0, props: { opacity: 0 } }, { id: 'k2', time: 300, props: { opacity: 1 } }] }] }));
+      window.__s = S.createStudio(document.getElementById('st'), { history: window.__h, stage: document.getElementById('cv'), zoom: 300, length: 600, canvas: false });
+    });
+    const c = (sel) => page.evaluate((sel) => { const r = document.querySelector(sel).getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2, w: r.width }; }, sel);
+    const k2 = await c('[data-key="k2"]');
+    await page.touchscreen.tap(k2.x, k2.y);
+    expect(await page.evaluate(() => window.__s.selection)).toEqual(['k2']);
+    const coarse = await page.evaluate(() => matchMedia('(pointer: coarse)').matches);
+    expect(k2.w).toBeGreaterThan(coarse ? 14 : 9);
+    expect(await page.evaluate(() => getComputedStyle(document.querySelector('[data-keys="a"]')).touchAction)).toBe('none');
+    const rl = await page.evaluate(() => document.querySelector('[data-ruler]').getBoundingClientRect());
+    await page.touchscreen.tap(rl.left + 30, rl.top + rl.height / 2); // 30 px / 0.3 px/ms = 100 ms
+    expect(await page.evaluate(() => window.__s.time)).toBe(100);
+    await touchDrag(page, '[data-key="k2"]', 30, 0); // +100 ms
+    expect(await page.evaluate(() => window.__h.doc.layers[0].keyframes[1].time)).toBe(400);
+    expect(await page.evaluate(() => window.__h.size)).toBe(1);
+    await page.evaluate(() => window.__s.destroy());
+    await expectNoErrors(page);
+  });
+});

@@ -11,4 +11,4 @@ function registerBeatBounce() {
 }
 
 export { effect, registerBeatBounce as register, registerBeatBounce };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.3.0/dist/effects/beat-bounce.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.4.0/dist/effects/beat-bounce.js.map

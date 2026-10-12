@@ -7,6 +7,55 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [14.4.0] - 2026-10-11
+
+**Motion Studio 1.0**. A timeline UI for building animations without editing JSON: tracks and track groups, a time
+ruler and scrubbable playhead, keyframe drag / marquee / copy-paste with snapping, a curve editor (cubic-bezier,
+presets, springs), a property inspector, a frame-step preview, undo / redo, and save / load as Scene Format v2. It
+composes the 13.6 timeline editor model and the 14.3 canvas; nothing is reimplemented and there is no new scene
+format. No breaking changes. Zero runtime dependencies. `motionary/components/lite` stays ≤ 70 KB gzip and no budget was
+raised: the new entry has its own 25 KB budget line. [docs/studio.md](docs/studio.md)
+
+### Added
+
+- **`motionary/studio`** (= `motionary/components/studio`; its own entry, not in lite, `motionary/core` or
+  `motionary/motion`). `createStudio(root, { history, stage, canvas, fps, zoom, rowHeight, length, snap, label })`.
+- **Timeline:** tracks and track groups with collapse (editor state), mute (`muted`) and lock (`locked`); a time ruler;
+  a scrubbable playhead that lands on frames (also a keyboard `slider`); zoom (toolbar, Ctrl / ⌘ + wheel, keys).
+- **Keyframes:** drag (the whole selection moves, one undo step), snapping to other keys and the playhead within 6 px,
+  else to frames (Alt: free); marquee across rows; Shift / Ctrl / ⌘ toggle; copy / paste at the playhead; delete;
+  select all.
+- **Curve editor:** two draggable cubic-bezier handles (also keyboard sliders), presets (`CURVE_PRESETS`), and spring
+  parameters fitted to the closest cubic-bezier (`springBezier`); the spring parameters are kept in the project file.
+- **Property inspector:** the focused track's values at the playhead; editing changes the key there or adds one;
+  per-property key toggles; add a property at the playhead.
+- **Preview:** the editor model's `createTimelinePreview` on the stage — frame by frame, play / pause, deterministic
+  seek (the same time gives the same DOM however you got there).
+- **Undo / redo** through the existing `createTimelineHistory`: one gesture = one step; a shortcut another handler
+  already took is not applied twice.
+- **Save / load:** `serializeStudioProject` / `parseStudioProject` (`{ format: "motionary-studio", version: 1, scene:
+  <Scene v2>, studio: <editor state> }`), also opening bare Scene v2, timeline v1 and animation JSON, with size / shape
+  checks and a list of what a scene loses; `studio.save()`, `studio.exportScene()`, `studio.load()`; `sampleFrames` and
+  `frameTime` for frame-exact comparisons.
+- **Canvas composition:** with a `stage`, the 14.3 canvas edits at the playhead time, and selecting a layer on it
+  focuses that track in the inspector.
+- **Accessibility:** the timeline is a `role="grid"` with rows (`aria-level`, `aria-expanded`), row headers and cells;
+  keys are buttons with `aria-pressed`; roving `tabindex`; arrow-key navigation; a polite live region.
+- **No uncontrolled global listeners:** nothing on `window` or `document`; move / up / cancel listeners only during a
+  gesture; `destroy()` removes the DOM, the preview styles and the canvas.
+- **Tests:**
+  - `test/studio-14-4.test.ts`: curves, project round trips and hostile input, the controller (grid / ARIA, groups,
+    playhead, deterministic seek, drag / snapping / marquee / copy-paste, keyboard, curve editor, inspector, canvas
+    composition, listener counts), and the acceptance test: a multi-track animation built only through the DOM and the
+    Studio API is saved, reopened in a new Studio and gives the same sampled frames and the same stage DOM.
+  - `test/browser/studio.spec.mjs`: Chromium, Firefox and WebKit with real mouse, keyboard and touch pointer input
+    (phone viewport).
+
+### Docs
+
+- `docs/studio.md`, including a manual real-device checklist (iOS Safari, Android Chrome, pen, trackpad, screen
+  readers) that has not been run on real devices yet.
+
 ## [14.3.0] - 2026-10-11
 
 **Studio canvas foundations**. The first piece of the Motion Studio canvas: select, marquee and multi-select, layer
