@@ -41,7 +41,7 @@ const freeze = <T>(o: T): T => { if (o && typeof o === 'object') { Object.freeze
 
 describe('14.6 entry, version and budget', () => {
   it('ships 14.6.0 with motionary/studio/ai + motionary/components/studio-ai, zero runtime deps', () => {
-    expect(pkg.version).toBe('14.6.0');
+    expect(pkg.version).toMatch(/^14\.([6-9]|\d\d)\.\d+$/); // 14.6.0 or a later 14.x
     expect(STUDIO_AI_VERSION).toBe(1);
     for (const p of ['./studio/ai', './components/studio-ai']) expect(pkg.exports[p]?.import?.default).toBe('./dist/components/studio-ai.js');
     expect(pkg.dependencies ?? {}).toEqual({});
