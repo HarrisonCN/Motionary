@@ -23,6 +23,8 @@ export const LAYER_ALIASES = {
   studio: 'components/studio',
   // 14.5: project & asset workflow
   'studio/assets': 'components/studio-assets',
+  // 14.6: AI Studio assistant 2.0
+  'studio/ai': 'components/studio-ai',
 };
 
 /**

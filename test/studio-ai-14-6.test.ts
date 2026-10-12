@@ -165,6 +165,12 @@ describe('headless render', () => {
     const bad = applySceneOps(scene0(), [{ op: 'set-props', layer: 'title', keyframe: 'k2', props: { opacity: 'NaN' } }]);
     expect(renderSceneHeadless(bad).ok).toBe(false);
   });
+  it('renders scenes with token easings and component / preset layers (nothing to sample there is fine)', () => {
+    const s = scene0();
+    s.layers[0].keyframes![0].easing = '{easing.standard}';
+    s.layers.push({ id: 'p', type: 'track', target: '#p', preset: 'fade-up', duration: 300 });
+    expect(renderSceneHeadless(s)).toMatchObject({ ok: true, errors: [] });
+  });
 });
 
 describe('prompt → proposal (mock provider, no network)', () => {

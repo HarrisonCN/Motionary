@@ -26,9 +26,10 @@ import { compatAt, cmpVer } from './compat-history.mjs';
 import { rankComponents, checkCompatibility, suggestFix, SCHEMAS } from './mcp-tools-2.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
-const SERVER = { name: 'motionary-mcp', version: '2.1.0' };
+const SERVER = { name: 'motionary-mcp', version: '2.2.0' };
+export const SERVER_INFO = SERVER;
 /** 13.7: tool contract versions — input + output schema of each tool; a tool's major changes only on an incompatible change. */
-export const TOOL_SCHEMA_VERSIONS = { list_components: '1.0', search_components: '1.1', get_component: '1.0', get_example: '1.0', scaffold_snippet: '1.1', suggest_motion: '1.0', validate_snippet: '1.2', check_compat: '1.0', check_compatibility: '1.0', suggest_fix: '1.0' };
+export const TOOL_SCHEMA_VERSIONS = { list_components: '1.0', search_components: '1.1', get_component: '1.0', get_example: '1.0', scaffold_snippet: '1.1', suggest_motion: '1.1', validate_snippet: '1.3', check_compat: '1.0', check_compatibility: '1.1', suggest_fix: '1.1' };
 const PROTOCOLS = ['2025-06-18', '2025-03-26', '2024-11-05'];
 
 export function loadManifest(path = process.env.MOTIONARY_MANIFEST || join(HERE, '../dist/manifest.json')) {
@@ -221,6 +222,77 @@ export function setAi(mod) {
   AI = mod;
 }
 
+// ---------------------------------------------------------------- 2.2 (14.6): Scene v2 inputs
+let SAI = null;
+/** Load the AI Studio assistant (motionary/components/studio-ai: Scene v2 ops, checks, fixes) — package build or MOTIONARY_STUDIO_AI. */
+export async function loadStudioAi(path = process.env.MOTIONARY_STUDIO_AI || join(HERE, '../dist/components/studio-ai.js')) {
+  if (!SAI && existsSync(path)) SAI = await new Function('u', 'return import(u)')(pathToFileURL(path).href);
+  return SAI;
+}
+export function setStudioAi(mod) {
+  SAI = mod;
+}
+const needSai = () => { if (!SAI) throw new Error('scene inputs need motionary/components/studio-ai (dist/components/studio-ai.js) — run from an installed motionary package or set MOTIONARY_STUDIO_AI'); return SAI; };
+let CATALOG = null;
+const catalogOf = (m) => (CATALOG && CATALOG.m === m ? CATALOG.c : (CATALOG = { m, c: m.components.map((c) => ({ tag: c.tag, title: c.title, since: c.since, keywords: c.keywords || [], attributes: c.attributes || [], stability: c.stability })) }).c);
+/** A scene argument (object or JSON text) → { scene } or { problems } (never throws). */
+function sceneArg(a) {
+  let v = a.scene;
+  if (typeof v === 'string') { try { v = JSON.parse(v); } catch (e) { return { problems: [{ path: '', message: `invalid JSON (${e.message})` }] }; } }
+  if (!v || typeof v !== 'object' || Array.isArray(v) || !Array.isArray(v.layers)) return { problems: [{ path: v && typeof v === 'object' ? 'layers' : '', message: v && typeof v === 'object' ? 'expected an array' : 'expected a Scene v2 object' }] };
+  return { scene: v };
+}
+export const sceneTags = (scene) => [...new Set((scene.layers || []).map((l) => l && l.component && l.component.tag).filter((t) => typeof t === 'string'))];
+const esc2 = (s) => String(s).replace(/</g, '\\u003c');
+/** A page that renders a scene in a real browser: the headless sampler from the local build, then every keyframe track through the Web Animations API (finished at once). */
+export function scenePreviewHtml(scene) {
+  const els = [];
+  for (const l of scene.layers) {
+    const t = typeof l.target === 'string' ? l.target.trim() : '';
+    const mm = /^([#.])([A-Za-z_][\w-]*)$/.exec(t);
+    if (mm && !els.some((e) => e.t === t)) els.push({ t, html: mm[1] === '#' ? `<div id="${mm[2]}"></div>` : `<div class="${mm[2]}"></div>` });
+  }
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"></head><body>
+<div id="stage">${els.map((e) => e.html).join('')}</div>
+<script type="application/json" id="scene">${esc2(JSON.stringify(scene))}</script>
+<script type="module">
+import { renderSceneHeadless } from 'https://cdn.jsdelivr.net/npm/motionary@14/dist/components/studio-ai.js';
+const scene = JSON.parse(document.getElementById('scene').textContent);
+const r = renderSceneHeadless(scene);
+if (!r.ok) throw new Error('[motionary] scene render: ' + r.errors.join('; '));
+const stage = document.getElementById('stage');
+for (const l of scene.layers) {
+  if (l.type !== 'track' || !l.keyframes || !l.keyframes.length) continue;
+  const el = (l.target && l.target !== ':scope' && stage.querySelector(l.target)) || stage;
+  const ks = l.keyframes.slice().sort((a, b) => a.time - b.time), end = ks[ks.length - 1].time;
+  el.animate(ks.map((k) => Object.assign({}, k.props, { offset: end > 0 ? k.time / end : 0 })), { duration: Math.max(1, end), fill: 'both' }).finish();
+}
+document.documentElement.dataset.sceneRendered = String(r.frames);
+</script></body></html>`;
+}
+/** validate_snippet { scene, ops?, browser? }: model ops parsed as data, applied to a copy, schema + compatibility + headless render (+ a real browser). */
+export async function validateScene(m, a) {
+  const base = { schema: SCHEMAS.scene, valid: false, mode: 'static', problems: [], compatibility: [], render: { ok: false, frames: 0, errors: [] } };
+  const sa = sceneArg(a);
+  if (sa.problems) return { ...base, problems: sa.problems };
+  const S = needSai();
+  const parsed = S.parseAiEdit({ ops: Array.isArray(a.ops) ? a.ops : [] });
+  if (parsed.errors.length) return { ...base, problems: parsed.errors };
+  const version = a.version || installedVersion() || m.version;
+  let mode = 'static', browser;
+  const v = await S.validateAiEdit(sa.scene, parsed.ops, {
+    catalog: catalogOf(m), version,
+    validate: a.browser ? async (preview) => {
+      const r = await validateSnippetInBrowser(m, scenePreviewHtml(preview));
+      if (!r.mount?.mounted) { browser = { mounted: false, skipped: r.mount?.skipped }; return { ok: true, mode: 'static' }; }
+      mode = 'browser';
+      browser = { mounted: true, environment: r.mount.environment };
+      return { ok: r.errors.length === 0, mode, errors: r.errors };
+    } : undefined,
+  });
+  return { schema: SCHEMAS.scene, valid: v.ok, mode, version, problems: v.errors, compatibility: v.checks.compatibility, render: v.checks.render, ...(browser && { browser }), preview: v.preview };
+}
+
 /** Natural language → motion spec, code in three styles, and the catalog components that implement it. */
 export function suggestMotion(m, text, format = 'waapi') {
   if (!AI) throw new Error('suggest_motion needs motionary/components/ai (dist/components/ai.js) — run from an installed motionary package or set MOTIONARY_AI');
@@ -396,11 +468,11 @@ export const TOOLS = [
   { name: 'get_component', title: 'Get a component', description: 'Everything about one component: attributes, events, slots, methods, import / define, CDN, prerequisites (install, import + register order, CDN script order), minimal example, variants.', inputSchema: { type: 'object', properties: { tag: { type: 'string', description: "'usa-tilt', 'tilt' or '<usa-tilt>'" }, version: { type: 'string', description: "the motionary version installed in the user's project (default: ./node_modules/motionary, else the catalog version) — answers are filtered for it" } }, required: ['tag'], additionalProperties: false }, annotations: { title: 'Get component', ...RO } },
   { name: 'get_example', title: 'Get an example', description: "A working example for one component in the requested style ('html' = CDN, 'esm' = npm + bundler, or a variant id).", inputSchema: { type: 'object', properties: { tag: { type: 'string' }, variant: { type: 'string', description: "'html' (default), 'esm', or a variant id from get_component" } }, required: ['tag'], additionalProperties: false }, annotations: { title: 'Get example', ...RO } },
   { name: 'scaffold_snippet', title: 'Scaffold a snippet', description: 'A ready-to-paste snippet using one or more components, with every prerequisite installed, imported and registered in the right order before the components mount.', inputSchema: { type: 'object', properties: { tags: { type: 'array', items: { type: 'string' }, minItems: 1 }, framework: { type: 'string', enum: FRAMEWORKS, default: 'esm' } }, required: ['tags'], additionalProperties: false }, annotations: { title: 'Scaffold snippet', ...RO } },
-  { name: 'suggest_motion', title: 'Suggest a motion', description: 'Natural language (English or Chinese) → a motion spec: effect, direction, duration, easing, trigger, stagger, Web Animations keyframes + options, CSS, and the Motionary components that implement it, with prerequisite-aware code. Deterministic parser, no model, no network.', inputSchema: { type: 'object', properties: { text: { type: 'string', description: "e.g. 'fade the cards up slowly when they scroll into view, one after another'" }, format: { type: 'string', enum: ['waapi', 'css', 'component'], default: 'waapi' } }, required: ['text'], additionalProperties: false }, annotations: { title: 'Suggest motion', ...RO } },
-  { name: 'validate_snippet', title: 'Validate a snippet', description: 'Check HTML / ESM / JSX / Vue / Svelte code that uses <usa-*> components: unknown tags (with suggestions) and attributes, missing or mis-ordered prerequisites (motionary/runtime modules, official runtimes), components never defined, hand-written animation without a reduced-motion path. Static analysis by default; mount: true also mounts the markup in a headless DOM (jsdom, optional peer) with the real Motionary bundles and checks definitions, upgrade errors, prerequisites, observed attributes and event names against the component contract — the snippet\'s own scripts never run. browser: true (13.2) runs it in a real headless browser instead (Playwright, optional peer): HTML snippets run as a whole page, their own scripts included, against the local build; uncaught errors and motionary console errors are reported.', inputSchema: { type: 'object', properties: { code: { type: 'string' }, mount: { type: 'boolean', default: false, description: 'also mount the markup in jsdom with the real bundles (12.2)' }, browser: { type: ['boolean', 'string'], enum: [true, false, 'auto'], default: false, description: "run it in a real headless browser instead (Playwright, optional peer; implies mount) — HTML runs as a whole page with its own scripts, ESM behind an import map, framework code as markup (13.2). true / 'auto' (13.7) fall back to the static checks when no browser is available; the result's mode says which ran" } }, required: ['code'], additionalProperties: false }, annotations: { title: 'Validate snippet', ...RO } },
+  { name: 'suggest_motion', title: 'Suggest a motion', description: 'Natural language (English or Chinese) → a motion spec: effect, direction, duration, easing, trigger, stagger, Web Animations keyframes + options, CSS, and the Motionary components that implement it, with prerequisite-aware code. Deterministic parser, no model, no network.', inputSchema: { type: 'object', properties: { text: { type: 'string', description: "e.g. 'fade the cards up slowly when they scroll into view, one after another'" }, format: { type: 'string', enum: ['waapi', 'css', 'component', 'scene'], default: 'waapi', description: "'scene' (14.6): also a Scene v2 document (scene, ops, valid) made by the local rules of motionary/studio/ai" } }, required: ['text'], additionalProperties: false }, annotations: { title: 'Suggest motion', ...RO } },
+  { name: 'validate_snippet', title: 'Validate a snippet', description: 'Check HTML / ESM / JSX / Vue / Svelte code that uses <usa-*> components: unknown tags (with suggestions) and attributes, missing or mis-ordered prerequisites (motionary/runtime modules, official runtimes), components never defined, hand-written animation without a reduced-motion path. Static analysis by default; mount: true also mounts the markup in a headless DOM (jsdom, optional peer) with the real Motionary bundles and checks definitions, upgrade errors, prerequisites, observed attributes and event names against the component contract — the snippet\'s own scripts never run. browser: true (13.2) runs it in a real headless browser instead (Playwright, optional peer): HTML snippets run as a whole page, their own scripts included, against the local build; uncaught errors and motionary console errors are reported.', inputSchema: { type: 'object', properties: { code: { type: 'string' }, mount: { type: 'boolean', default: false, description: 'also mount the markup in jsdom with the real bundles (12.2)' }, browser: { type: ['boolean', 'string'], enum: [true, false, 'auto'], default: false, description: "run it in a real headless browser instead (Playwright, optional peer; implies mount) — HTML runs as a whole page with its own scripts, ESM behind an import map, framework code as markup (13.2). true / 'auto' (13.7) fall back to the static checks when no browser is available; the result's mode says which ran" }, scene: { type: ['object', 'string'], description: '14.6: instead of code — a Scene v2 document (object or JSON text): schema, component compatibility with the installed version and a headless render of every frame; with browser it is also rendered in a real headless browser' }, ops: { type: 'array', items: { type: 'object' }, description: '14.6: Scene v2 ops (motionary/studio/ai, applyCanvasOps format) applied to a copy of scene first — parsed as data, never evaluated' }, version: { type: 'string', description: "14.6, with scene: the motionary version installed in the user's project" } }, additionalProperties: false }, annotations: { title: 'Validate snippet', ...RO } },
   { name: 'check_compat', title: 'Check version compatibility', description: "Which components / runtime modules a project on a given motionary version can use, which were added later (with the release that added them) and which changed after it (from the release notes). Defaults to the version installed in the user's project.", inputSchema: { type: 'object', properties: { version: { type: 'string', description: "the motionary version installed in the user's project (default: ./node_modules/motionary, else the catalog version) — answers are filtered for it" }, tags: { type: 'array', items: { type: 'string' }, description: 'only these components (default: everything that is missing or changed for that version)' } }, additionalProperties: false }, annotations: { title: 'Check compatibility', ...RO } },
-  { name: 'check_compatibility', title: 'Check compatibility (framework / version / browser)', description: "13.7: can these components (or the components a snippet uses) run in the user's setup? Per component: the motionary version that added it and releases that changed it after the given version, support and setup notes for html / esm / react / vue / svelte / solid / angular, the engines the browser suite tests every component in (Chromium, Firefox, WebKit), minimum browser versions and the web-platform features it needs with the fallback it uses. compatible is false when any component is unknown or newer than the version.", inputSchema: { type: 'object', properties: { tags: { type: 'array', items: { type: 'string' } }, code: { type: 'string', description: 'or: a snippet — its <usa-*> components are checked' }, framework: { type: 'string', enum: ['html', 'esm', 'react', 'vue', 'svelte', 'solid', 'angular'] }, version: { type: 'string', description: "the motionary version installed in the user's project (default: ./node_modules/motionary, else the catalog version)" }, browsers: { type: 'array', items: { type: 'string' }, description: "e.g. ['safari 16', 'firefox']" } }, additionalProperties: false }, outputSchema: { type: 'object', properties: { schema: { const: SCHEMAS.compatibility }, version: { type: 'string' }, catalog: { type: 'string' }, behind: { type: 'boolean' }, compatible: { type: 'boolean' }, components: { type: 'array' }, issues: { type: 'array' } }, required: ['schema', 'version', 'compatible', 'components', 'issues'] }, annotations: { title: 'Check compatibility', ...RO } },
-  { name: 'suggest_fix', title: 'Suggest fixes for a snippet', description: "13.7: concrete patches for code that uses <usa-*> components — wrong tag names (closest real tag), mistyped / deprecated attributes, components used but never imported or defined, bare `motionary/…` imports in a CDN page (→ the CDN module URL of the same major), missing motionary/runtime prerequisites, import paths / event names / CDN pins removed in 13.0. Each fix is { kind, message, line, patch: { find, replace } }; fixed is the code with every patch applied and remaining what the static validator still reports. Never writes files.", inputSchema: { type: 'object', properties: { code: { type: 'string' }, context: { type: 'string', enum: ['cdn', 'esm', 'html'], description: 'how the code loads Motionary (default: detected)' } }, required: ['code'], additionalProperties: false }, outputSchema: { type: 'object', properties: { schema: { const: SCHEMAS.fix }, context: { type: 'string' }, fixes: { type: 'array', items: { type: 'object', properties: { kind: { type: 'string', enum: ['unknown-tag', 'unknown-attribute', 'deprecated-attribute', 'deprecated-api', 'bare-import', 'missing-import', 'missing-prerequisite'] }, message: { type: 'string' }, line: { type: 'number' }, patch: { type: 'object', properties: { find: { type: 'string' }, replace: { type: 'string' } }, required: ['find', 'replace'] } }, required: ['kind', 'message', 'patch'] } }, fixed: { type: 'string' }, valid: { type: 'boolean' }, remaining: { type: 'object' } }, required: ['schema', 'fixes', 'fixed', 'valid'] }, annotations: { title: 'Suggest fix', ...RO } },
+  { name: 'check_compatibility', title: 'Check compatibility (framework / version / browser)', description: "13.7: can these components (or the components a snippet uses) run in the user's setup? Per component: the motionary version that added it and releases that changed it after the given version, support and setup notes for html / esm / react / vue / svelte / solid / angular, the engines the browser suite tests every component in (Chromium, Firefox, WebKit), minimum browser versions and the web-platform features it needs with the fallback it uses. compatible is false when any component is unknown or newer than the version.", inputSchema: { type: 'object', properties: { tags: { type: 'array', items: { type: 'string' } }, code: { type: 'string', description: 'or: a snippet — its <usa-*> components are checked' }, framework: { type: 'string', enum: ['html', 'esm', 'react', 'vue', 'svelte', 'solid', 'angular'] }, version: { type: 'string', description: "the motionary version installed in the user's project (default: ./node_modules/motionary, else the catalog version)" }, browsers: { type: 'array', items: { type: 'string' }, description: "e.g. ['safari 16', 'firefox']" }, scene: { type: ['object', 'string'], description: '14.6: or a Scene v2 document — the components its layers bind are checked' } }, additionalProperties: false }, outputSchema: { type: 'object', properties: { schema: { const: SCHEMAS.compatibility }, version: { type: 'string' }, catalog: { type: 'string' }, behind: { type: 'boolean' }, compatible: { type: 'boolean' }, components: { type: 'array' }, issues: { type: 'array' } }, required: ['schema', 'version', 'compatible', 'components', 'issues'] }, annotations: { title: 'Check compatibility', ...RO } },
+  { name: 'suggest_fix', title: 'Suggest fixes for a snippet', description: "13.7: concrete patches for code that uses <usa-*> components — wrong tag names (closest real tag), mistyped / deprecated attributes, components used but never imported or defined, bare `motionary/…` imports in a CDN page (→ the CDN module URL of the same major), missing motionary/runtime prerequisites, import paths / event names / CDN pins removed in 13.0. Each fix is { kind, message, line, patch: { find, replace } }; fixed is the code with every patch applied and remaining what the static validator still reports. Never writes files.", inputSchema: { type: 'object', properties: { code: { type: 'string' }, context: { type: 'string', enum: ['cdn', 'esm', 'html'], description: 'how the code loads Motionary (default: detected)' }, scene: { type: ['object', 'string'], description: '14.6: instead of code — a Scene v2 document; the answer adds sceneFixes (Scene v2 ops in the applyCanvasOps format: closest tag for a typo, drop a binding the installed version lacks, default easing for an unknown one) and fixedScene' }, version: { type: 'string', description: "14.6, with scene: the motionary version installed in the user's project" } }, additionalProperties: false }, outputSchema: { type: 'object', properties: { schema: { const: SCHEMAS.fix }, context: { type: 'string' }, fixes: { type: 'array', items: { type: 'object', properties: { kind: { type: 'string', enum: ['unknown-tag', 'unknown-attribute', 'deprecated-attribute', 'deprecated-api', 'bare-import', 'missing-import', 'missing-prerequisite'] }, message: { type: 'string' }, line: { type: 'number' }, patch: { type: 'object', properties: { find: { type: 'string' }, replace: { type: 'string' } }, required: ['find', 'replace'] } }, required: ['kind', 'message', 'patch'] } }, fixed: { type: 'string' }, valid: { type: 'boolean' }, remaining: { type: 'object' }, sceneFixes: { type: 'array' }, fixedScene: { type: 'object' } }, required: ['schema', 'fixes', 'fixed', 'valid'] }, annotations: { title: 'Suggest fix', ...RO } },
 ];
 
 const text = (obj) => ({ content: [{ type: 'text', text: typeof obj === 'string' ? obj : JSON.stringify(obj, null, 2) }], ...(typeof obj === 'object' ? { structuredContent: Array.isArray(obj) ? { items: obj } : obj } : {}) });
@@ -451,20 +523,44 @@ export function callTool(m, name, a = {}) {
       return text(scaffold(m, a.tags, a.framework || 'esm'));
     case 'suggest_motion':
       if (!a.text) throw new Error('text is required');
+      if (a.format === 'scene') {
+        const S = needSai(), opts = { catalog: catalogOf(m), version: installedVersion() || m.version };
+        const empty = { format: 'motionary-scene', version: 2, layers: [] };
+        const edit = S.localAiEdit(String(a.text), empty, opts);
+        const ops = S.parseAiEdit(edit).ops;
+        return S.validateAiEdit(empty, ops, opts).then((v) => text({ ...suggestMotion(m, a.text, 'waapi'), format: 'scene', scene: v.preview, ops, valid: v.ok, problems: v.errors }));
+      }
       return text(suggestMotion(m, a.text, a.format || 'waapi'));
     case 'check_compat':
       return text(checkCompat(m, a.version, a.tags));
     case 'validate_snippet':
-      if (typeof a.code !== 'string') throw new Error('code is required');
+      if (a.scene !== undefined) return validateScene(m, a).then(text);
+      if (typeof a.code !== 'string') throw new Error('code is required (or scene)');
       // 13.7: browser: true | 'auto' — a real headless browser when Playwright + a browser are available, otherwise the static
       // checks (mode says which ran; mount.skipped says why the browser did not)
       if (a.browser) return validateSnippetInBrowser(m, a.code).then((r) => text({ ...r, mode: r.mount?.mounted ? 'browser' : 'static', schema: SCHEMAS.validation }));
       if (a.mount) return validateSnippetMounted(m, a.code).then(text);
       return text(validateSnippet(m, a.code));
-    case 'check_compatibility':
+    case 'check_compatibility': {
+      if (a.scene !== undefined) {
+        const sa = sceneArg(a);
+        if (sa.problems) throw new Error(`scene: ${sa.problems[0].message}`);
+        const tags = [...(a.tags || []), ...sceneTags(sa.scene)];
+        const { scene, ...rest } = a;
+        if (!tags.length && !a.code) return text({ schema: SCHEMAS.compatibility, version: a.version || installedVersion() || m.version, catalog: m.version, behind: false, compatible: true, components: [], issues: [] });
+        return text(checkCompatibility(m, { ...rest, tags }, { findComponent, installedVersion, validateSnippet }));
+      }
       return text(checkCompatibility(m, a, { findComponent, installedVersion, validateSnippet }));
+    }
     case 'suggest_fix':
-      if (typeof a.code !== 'string') throw new Error('code is required');
+      if (a.scene !== undefined && typeof a.code !== 'string') {
+        const sa = sceneArg(a);
+        if (sa.problems) throw new Error(`scene: ${sa.problems[0].message}`);
+        const S = needSai(), opts = { catalog: catalogOf(m), version: a.version || installedVersion() || m.version };
+        const f = S.suggestSceneFixes(sa.scene, opts);
+        return S.validateAiEdit(sa.scene, f.ops, opts).then((v) => text({ schema: SCHEMAS.fix, context: 'scene', fixes: [], fixed: JSON.stringify(v.preview, null, 2), valid: v.ok, remaining: { errors: v.errors.map((e) => `${e.path}: ${e.message}`), warnings: v.checks.compatibility.filter((i) => i.level === 'warning').map((i) => i.message) }, sceneFixes: f.ops, messages: f.messages, fixedScene: v.preview }));
+      }
+      if (typeof a.code !== 'string') throw new Error('code is required (or scene)');
       return text(suggestFix(m, a.code, { context: a.context }, { findComponent, cdnImports, validateSnippet, searchComponents }));
     default:
       throw Object.assign(new Error(`unknown tool ${name}`), { code: -32602 });
@@ -567,6 +663,7 @@ if (invoked) {
   else {
     try {
       await loadAi();
+      await loadStudioAi();
       serve();
     } catch (e) {
       console.error(String(e.message || e));

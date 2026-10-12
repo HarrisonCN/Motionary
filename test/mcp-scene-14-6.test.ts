@@ -10,8 +10,10 @@ const ROOT = join(__dirname, '..');
 const BIN = process.env.MOTIONARY_MCP_BIN || join(ROOT, 'bin/motionary-mcp.mjs');
 const M: any = await import(BIN);
 const m = M.loadManifest(join(ROOT, 'dist/manifest.json'));
-await M.loadAi(join(ROOT, 'dist/components/ai.js'));
-await M.loadStudioAi(join(ROOT, 'dist/components/studio-ai.js'));
+// (loadAi / loadStudioAi use a Function-wrapped import that vitest cannot run — hand the modules in, as the 10.7 test does)
+M.setAi(await import(join(ROOT, 'dist/components/ai.js')));
+M.setStudioAi(await import(join(ROOT, 'dist/components/studio-ai.js')));
+expect(typeof M.loadStudioAi).toBe('function');
 const call = async (name: string, args: any) => (await M.callTool(m, name, args)).structuredContent;
 
 const scene = (component?: any) => ({
