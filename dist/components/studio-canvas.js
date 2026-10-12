@@ -1,5 +1,5 @@
-import { a as addKeyframe, s as setKeyframeProps, u as updateLayers, m as moveLayer, b as bindHistoryKeys, c as uniqueId } from '../chunks/history-CA8zJNZa.js';
-import { i as isLayerLocked, T as TimelineDocError } from '../chunks/format-B6BO-aZk.js';
+import { a as addKeyframe, s as setKeyframeProps, u as updateLayers, m as moveLayer, b as bindHistoryKeys, c as uniqueId } from '../chunks/history-DYSOAKH5.js';
+import { i as isLayerLocked, T as TimelineDocError } from '../chunks/format-xyZDr-fG.js';
 
 /**
  * motionary/studio/canvas (14.3) — the foundations of the Studio canvas: visual selection, marquee and multi-select,
@@ -975,4 +975,4 @@ function createStudioCanvas(root, o) {
 }
 
 export { STUDIO_CANVAS_VERSION, applyCanvasOps, canvasBounds, canvasBox, canvasMove, canvasReorder, canvasSetBox, canvasSetHidden, canvasSetLocked, createStudioCanvas, marqueeHits, readCanvasGeometry, rectsIntersect, resizeBox, rotationFromPointer, snapLines, snapRect, snapToGrid, snapValue };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.3.0/dist/components/studio-canvas.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.4.0/dist/components/studio-canvas.js.map

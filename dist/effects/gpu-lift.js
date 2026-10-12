@@ -11,4 +11,4 @@ function registerGpuLift() {
 }
 
 export { effect, registerGpuLift as register, registerGpuLift };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.3.0/dist/effects/gpu-lift.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.4.0/dist/effects/gpu-lift.js.map

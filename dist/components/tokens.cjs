@@ -402,4 +402,4 @@ exports.resolveDurationToken = resolveDurationToken;
 exports.resolveEasingToken = resolveEasingToken;
 exports.resolveTokenAliases = resolveTokenAliases;
 exports.validateDesignTokens = validateDesignTokens;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.3.0/dist/components/tokens.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.4.0/dist/components/tokens.cjs.map

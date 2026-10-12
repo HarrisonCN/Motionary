@@ -288,4 +288,4 @@ exports.MORPH2_FX = MORPH2_FX;
 exports.pointsToPath = pointsToPath;
 exports.registerMorphPack = registerMorphPack;
 exports.samplePath = samplePath;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.3.0/dist/components/fx-morph.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.4.0/dist/components/fx-morph.cjs.map

@@ -106,4 +106,4 @@ function defineSketchChart(tag = 'usa-sketch-chart') {
 }
 
 exports.defineSketchChart = defineSketchChart;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.3.0/dist/widgets/sketch-chart.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.4.0/dist/widgets/sketch-chart.cjs.map

@@ -580,6 +580,16 @@
         "default": "./dist/components/studio-canvas.cjs"
       }
     },
+    "./studio": {
+      "import": {
+        "types": "./dist/components/studio.d.ts",
+        "default": "./dist/components/studio.js"
+      },
+      "require": {
+        "types": "./dist/components/studio.d.cts",
+        "default": "./dist/components/studio.cjs"
+      }
+    },
     "./components/reveal": {
       "import": {
         "types": "./dist/components/reveal.d.ts",
@@ -4240,16 +4250,6 @@
     "./components/layout.css": "./dist/components/layout.css",
     "./components/packs.css": "./dist/components/packs.css",
     "./components/fx.css": "./dist/components/fx.css",
-    "./studio": {
-      "import": {
-        "types": "./dist/components/studio.d.ts",
-        "default": "./dist/components/studio.js"
-      },
-      "require": {
-        "types": "./dist/components/studio.d.cts",
-        "default": "./dist/components/studio.cjs"
-      }
-    },
     "./package.json": "./package.json"
   },
   "files": [
