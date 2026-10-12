@@ -7,6 +7,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [14.5.0] - 2026-10-12
+
+**Project & asset workflow**. Images, SVGs, fonts, video clips and audio referenced by a Motion Studio project are found,
+kept inside the project directory, packed into one offline file and checked after the project moves to another device —
+with a missing-asset list and relink suggestions. Pure functions: no DOM, network or file system; nothing in a project
+or pack is ever executed. No breaking changes. Zero runtime dependencies. `motionary/components/lite` stays ≤ 70 KB gzip
+and no budget was raised: the new entry has its own budget line. [docs/studio-assets.md](docs/studio-assets.md)
+
+### Added
+
+- **`motionary/studio/assets`** (= `motionary/components/studio-assets`; its own entry, not in lite, `motionary/core`,
+  `motionary/motion` or `motionary/studio`).
+- **References:** `collectAssetRefs(doc)` finds `url(…)` values and `*src` props (`--src`, `--font-src`, `--video-src`),
+  deduplicated, with every use (layer / keyframe / prop); `https:` / `data:` are listed as external; `assetKind(path)`
+  (`image`, `svg`, `font`, `video`, `audio`, `data`, `script`, `other`).
+- **Paths confined to the project:** `normalizeAssetPath(path)` / `resolveAssetPath(ref, from)` give project-relative POSIX
+  paths (`./`, inner `..`, `//`, Windows `\` normalized; percent escapes decoded once before the checks) and throw
+  `AssetPathError` (`outside`, `absolute`, `scheme`, `control`, `encoding`, `empty`, `directory`, `length`, `forbidden`).
+- **Missing-asset report:** `createAssetManifest(doc, files)` (size + CRC-32), `checkAssets(manifestOrDoc, available)` →
+  `found` / `missing` / `changed` / `rejected` + readable `messages`.
+- **Relink:** `relinkAssets(manifest, files)` suggests new locations by content (size + CRC-32) or by a unique file name;
+  ambiguous matches, scripts and unsafe paths are never suggested.
+- **Offline pack:** `packStudioProject(project, files)` → one deterministic `motionary-studio-pack` v1 JSON file with the
+  project and every referenced local asset (base64 + CRC-32); `unpackStudioProject(text)` checks the project, every
+  path, size, CRC-32 and base64, and lists bad entries in `problems` without failing the rest. Limits: 2000 assets,
+  50 MB per file, 200 MB per pack.
+- **Nothing executed:** script-like files (`.js`, `.mjs`, `.html`, `.wasm`, shell…) are reported and never packed,
+  unpacked, returned or suggested; no `eval`, dynamic import or fetch.
+- `crc32`, `toBase64`, `fromBase64` helpers; `docs/studio-assets.md` with a move-to-another-device checklist.
+
 ## [14.4.0] - 2026-10-11
 
 **Motion Studio 1.0**. A timeline UI for building animations without editing JSON: tracks and track groups, a time

@@ -15,4 +15,4 @@ function registerBreathe() {
 exports.effect = effect;
 exports.register = registerBreathe;
 exports.registerBreathe = registerBreathe;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.4.0/dist/effects/breathe.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.5.0/dist/effects/breathe.cjs.map
