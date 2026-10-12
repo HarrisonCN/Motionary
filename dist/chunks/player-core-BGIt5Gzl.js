@@ -172,4 +172,4 @@ function createPlayerCore(root, animation, o = {}, scene) {
 }
 
 export { ANIMATION_FORMAT as A, createPlayerCore as c, normalizePlayable as n, setLegacyAnimationLoader as s };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.4.0/dist/chunks/player-core-BGIt5Gzl.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.5.0/dist/chunks/player-core-BGIt5Gzl.js.map

@@ -590,6 +590,16 @@
         "default": "./dist/components/studio.cjs"
       }
     },
+    "./studio/assets": {
+      "import": {
+        "types": "./dist/components/studio-assets.d.ts",
+        "default": "./dist/components/studio-assets.js"
+      },
+      "require": {
+        "types": "./dist/components/studio-assets.d.cts",
+        "default": "./dist/components/studio-assets.cjs"
+      }
+    },
     "./components/reveal": {
       "import": {
         "types": "./dist/components/reveal.d.ts",
@@ -4260,16 +4270,6 @@
     "./components/layout.css": "./dist/components/layout.css",
     "./components/packs.css": "./dist/components/packs.css",
     "./components/fx.css": "./dist/components/fx.css",
-    "./studio/assets": {
-      "import": {
-        "types": "./dist/components/studio-assets.d.ts",
-        "default": "./dist/components/studio-assets.js"
-      },
-      "require": {
-        "types": "./dist/components/studio-assets.d.cts",
-        "default": "./dist/components/studio-assets.cjs"
-      }
-    },
     "./package.json": "./package.json"
   },
   "files": [

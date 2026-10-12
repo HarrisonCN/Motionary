@@ -70,4 +70,4 @@ exports.BUILTIN_EFFECTS = builtins.BUILTIN_EFFECTS;
 exports.defineFx = defineFx;
 exports.defineFxComponents = defineFxComponents;
 exports.registerBuiltinEffects = registerBuiltinEffects;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.4.0/dist/components/fx.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.5.0/dist/components/fx.cjs.map

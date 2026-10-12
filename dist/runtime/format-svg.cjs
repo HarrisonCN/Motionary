@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-s4yL_aQj.cjs');
-var tween = require('../chunks/tween-Bnr2kPhW.cjs');
+var registry = require('../chunks/registry-BvS60yag.cjs');
+var tween = require('../chunks/tween-DuxKxc6_.cjs');
 var ease = require('../chunks/ease-HwYZnZat.cjs');
 
 /**
@@ -454,4 +454,4 @@ exports.pointAtLength = pointAtLength;
 exports.readSmil = readSmil;
 exports.samplePath = samplePath;
 exports.smilTime = smilTime;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.4.0/dist/runtime/format-svg.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.5.0/dist/runtime/format-svg.cjs.map

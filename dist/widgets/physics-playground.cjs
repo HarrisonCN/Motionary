@@ -1,8 +1,8 @@
 'use strict';
 
-var widgets_physicsPlayground = require('../chunks/physics-playground-emNzCmHD.cjs');
+var widgets_physicsPlayground = require('../chunks/physics-playground-swGn5cWJ.cjs');
 
 
 
 exports.definePhysicsPlayground = widgets_physicsPlayground.definePhysicsPlayground;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.4.0/dist/widgets/physics-playground.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.5.0/dist/widgets/physics-playground.cjs.map
