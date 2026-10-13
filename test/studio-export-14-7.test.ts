@@ -76,6 +76,12 @@ describe('14.7 entry, version and budget', () => {
     expect(lite!.limit).toBeLessThanOrEqual(71680);
     for (const f of ['lite', 'core/index', 'motion/index', 'studio/index', 'studio/assets', 'studio/ai']) expect(readFileSync(`src/components/${f}.ts`, 'utf8')).not.toMatch(/studio\/export|from '\.\/export'/);
   });
+  it('keeps the npm pack limits (11.2) unchanged: docs/images (README screenshots, served from GitHub) are no longer packed', () => {
+    const packSrc = readFileSync('scripts/check-pack.mjs', 'utf8');
+    expect(packSrc).toContain('PACK_LIMITS = { packed: 4.0 * 1024 * 1024, unpacked: 14 * 1024 * 1024, files: 2300 }');
+    expect(pkg.files).toContain('docs');
+    expect(pkg.files).toContain('!docs/images');
+  });
   it('the exporter never evaluates, fetches or touches the DOM (the player is data: a string)', () => {
     const code = SRC.replace(/export const PLAYER_JS =[\s\S]*?\n\);?\n/, '');
     expect(code).not.toMatch(/\beval\(|new Function|import\(|fetch\(|XMLHttpRequest|WebSocket|require\(|node:|innerHTML|document\.|window\./);

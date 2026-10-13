@@ -610,6 +610,16 @@
         "default": "./dist/components/studio-ai.cjs"
       }
     },
+    "./studio/export": {
+      "import": {
+        "types": "./dist/components/studio-export.d.ts",
+        "default": "./dist/components/studio-export.js"
+      },
+      "require": {
+        "types": "./dist/components/studio-export.d.cts",
+        "default": "./dist/components/studio-export.cjs"
+      }
+    },
     "./components/reveal": {
       "import": {
         "types": "./dist/components/reveal.d.ts",
@@ -4300,16 +4310,6 @@
     "./components/layout.css": "./dist/components/layout.css",
     "./components/packs.css": "./dist/components/packs.css",
     "./components/fx.css": "./dist/components/fx.css",
-    "./studio/export": {
-      "import": {
-        "types": "./dist/components/studio-export.d.ts",
-        "default": "./dist/components/studio-export.js"
-      },
-      "require": {
-        "types": "./dist/components/studio-export.d.cts",
-        "default": "./dist/components/studio-export.cjs"
-      }
-    },
     "./package.json": "./package.json"
   },
   "files": [
@@ -4323,7 +4323,8 @@
     "CHANGELOG.md",
     "figma-plugin",
     "AGENTS.md",
-    "!dist/**/*.map"
+    "!dist/**/*.map",
+    "!docs/images"
   ],
   "sideEffects": [
     "*.css",

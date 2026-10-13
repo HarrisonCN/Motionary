@@ -42,6 +42,8 @@ and resume there, independent of the basic export. No breaking changes. Zero run
 
 - New budget line `motionary/components/studio-export` (15 KB gzip; it includes the 14.5 asset rules and the timeline
   model it bakes). No existing line changed; lite ≤ 70 KB.
+- The npm tarball no longer contains `docs/images` (230 KB of README / showcase screenshots, shown from GitHub). With the
+  new entry the unpacked package had reached 14.02 MB, over the fixed 14 MB `check:pack` limit; the limit was not raised.
 
 ## [14.6.0] - 2026-10-12
 
