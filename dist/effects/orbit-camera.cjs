@@ -15,4 +15,4 @@ function registerOrbitCamera() {
 exports.effect = effect;
 exports.register = registerOrbitCamera;
 exports.registerOrbitCamera = registerOrbitCamera;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.6.0/dist/effects/orbit-camera.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.7.0/dist/effects/orbit-camera.cjs.map

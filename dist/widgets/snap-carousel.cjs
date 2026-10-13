@@ -5,4 +5,4 @@ var components_snapCarousel = require('../components/snap-carousel.cjs');
 
 
 exports.defineSnapCarousel = components_snapCarousel.defineSnapCarousel;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.6.0/dist/widgets/snap-carousel.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.7.0/dist/widgets/snap-carousel.cjs.map

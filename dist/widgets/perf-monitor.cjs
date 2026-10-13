@@ -75,4 +75,4 @@ function definePerfMonitor(tag = 'usa-perf-monitor') {
 }
 
 exports.definePerfMonitor = definePerfMonitor;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.6.0/dist/widgets/perf-monitor.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.7.0/dist/widgets/perf-monitor.cjs.map

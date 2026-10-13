@@ -11,4 +11,4 @@ function registerSpookyFloat() {
 }
 
 export { effect, registerSpookyFloat as register, registerSpookyFloat };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.6.0/dist/effects/spooky-float.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.7.0/dist/effects/spooky-float.js.map

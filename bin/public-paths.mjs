@@ -25,6 +25,8 @@ export const LAYER_ALIASES = {
   'studio/assets': 'components/studio-assets',
   // 14.6: AI Studio assistant 2.0
   'studio/ai': 'components/studio-ai',
+  // 14.7: output & preview reliability (standalone export, frame jobs)
+  'studio/export': 'components/studio-export',
 };
 
 /**

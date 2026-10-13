@@ -239,4 +239,4 @@ function defineDepthComponents() {
 }
 
 export { defineCube, defineDepth, defineDepthComponents, deviceTilt, orientationToTilt, requestOrientationPermission, supportsOrientation };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.6.0/dist/components/depth.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.7.0/dist/components/depth.js.map

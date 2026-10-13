@@ -1,6 +1,6 @@
 {
   "name": "motionary",
-  "version": "14.6.0",
+  "version": "14.7.0",
   "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 209 animated Web Components (91 core, 118 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -610,6 +610,16 @@
         "default": "./dist/components/studio-ai.cjs"
       }
     },
+    "./studio/export": {
+      "import": {
+        "types": "./dist/components/studio-export.d.ts",
+        "default": "./dist/components/studio-export.js"
+      },
+      "require": {
+        "types": "./dist/components/studio-export.d.cts",
+        "default": "./dist/components/studio-export.cjs"
+      }
+    },
     "./components/reveal": {
       "import": {
         "types": "./dist/components/reveal.d.ts",
@@ -868,6 +878,16 @@
       "require": {
         "types": "./dist/components/studio-ai.d.cts",
         "default": "./dist/components/studio-ai.cjs"
+      }
+    },
+    "./components/studio-export": {
+      "import": {
+        "types": "./dist/components/studio-export.d.ts",
+        "default": "./dist/components/studio-export.js"
+      },
+      "require": {
+        "types": "./dist/components/studio-export.d.cts",
+        "default": "./dist/components/studio-export.cjs"
       }
     },
     "./components/motion-tokens": {
@@ -4303,7 +4323,8 @@
     "CHANGELOG.md",
     "figma-plugin",
     "AGENTS.md",
-    "!dist/**/*.map"
+    "!dist/**/*.map",
+    "!docs/images"
   ],
   "sideEffects": [
     "*.css",

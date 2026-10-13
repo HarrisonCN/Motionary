@@ -11,4 +11,4 @@ function registerLightFollow() {
 }
 
 export { effect, registerLightFollow as register, registerLightFollow };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.6.0/dist/effects/light-follow.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.7.0/dist/effects/light-follow.js.map

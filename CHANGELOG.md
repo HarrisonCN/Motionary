@@ -7,6 +7,44 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [14.7.0] - 2026-10-13
+
+**Output & preview reliability**. A Studio project becomes a standalone work — `index.html`, `scene.css` (plays with
+scripts off), an optional `scene.js` player and `assets/`, or one inline HTML file — that runs without the editor and
+without a network. The same scene always gives the same bytes, and at every frame time the exported values equal the
+Studio preview (`sampleTimelineDoc`). Frame-export jobs feed GIF / video adapters, keep a checkpoint when a frame fails
+and resume there, independent of the basic export. No breaking changes. Zero runtime dependencies.
+`motionary/components/lite` stays ≤ 70 KB gzip and no existing budget was raised: the new entry has its own line.
+[docs/studio-export.md](docs/studio-export.md)
+
+### Added
+
+- **`motionary/studio/export`** (= `motionary/components/studio-export`; its own entry, not in lite, `motionary/core`,
+  `motionary/motion`, `motionary/studio`, `motionary/studio/assets` or `motionary/studio/ai`).
+- **`bakeScene(input, { fps })`** → per-property points of every active track: linear segments the browser interpolates
+  component by component keep their end points, eased / discrete / custom-property segments are sampled at each frame;
+  `random()` by seed; cut at `duration`. **`sampleBaked(baked, t)`** equals `sampleTimelineDoc` at every frame time.
+- **`exportStandalone(input, { assets, fps, inline, js, title, lang, loop, stage })`** → `{ files, report }`: CSS
+  `@keyframes` per track (reduced motion → final frame), the player (`PLAYER_JS`: `motionary.seek / play / pause`,
+  `?t=<ms>` freezes a frame), assets copied to `assets/` or inlined as `data:` URIs, a generated stage for simple
+  targets or your own (`cleanStage`). Deterministic to the byte. Input: project / Scene v2 / timeline document / animation
+  JSON, or `{ pack }` (a 14.5 offline project pack).
+- **`frameDigest(input, { fps })`** → `mfd1-<fps>-<frames>-<crc32>`, written into every export.
+- **`createFrameExportJob(input, { adapter, fps, checkpoint, onProgress })`** — `run()` / `resume()` / `abort()`,
+  serializable `checkpoint` (refused for another scene), and **`createJsonFramesAdapter()`**. No encoder is bundled.
+- **Safety:** values that could leave a CSS declaration, unsafe selectors, script-like / out-of-project asset paths and
+  stage scripts / handlers never reach the exported files; everything left out is listed in `report`.
+- Browser spec `test/browser/studio-export.spec.mjs` (Chromium / Firefox / WebKit): exported computed styles vs. the
+  reference through the player, through paused CSS animations, from `file://` with `assets/`, and under reduced motion,
+  with every network request aborted.
+
+### Size
+
+- New budget line `motionary/components/studio-export` (15 KB gzip; it includes the 14.5 asset rules and the timeline
+  model it bakes). No existing line changed; lite ≤ 70 KB.
+- The npm tarball no longer contains `docs/images` (230 KB of README / showcase screenshots, shown from GitHub). With the
+  new entry the unpacked package had reached 14.02 MB, over the fixed 14 MB `check:pack` limit; the limit was not raised.
+
 ## [14.6.0] - 2026-10-12
 
 **AI Studio assistant 2.0**. A prompt becomes a proposed edit of a Scene v2 project — a list of structured ops in the

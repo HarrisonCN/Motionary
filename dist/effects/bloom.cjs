@@ -15,4 +15,4 @@ function registerBloom() {
 exports.effect = effect;
 exports.register = registerBloom;
 exports.registerBloom = registerBloom;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.6.0/dist/effects/bloom.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.7.0/dist/effects/bloom.cjs.map
