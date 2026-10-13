@@ -115,6 +115,11 @@
     "limit": 20480
   },
   {
+    "name": "import 'motionary/components/studio-export' (= motionary/studio/export, 14.7 output & preview reliability: bake a Studio project to per-property points, standalone HTML / CSS @keyframes / player JS + assets or one inline file, frameDigest, resumable frame-export jobs for GIF / video adapters; includes the 14.5 asset rules and the timeline model; own entry, not in lite / studio)",
+    "import": "export * from 'pkg/components/studio-export';",
+    "limit": 15360
+  },
+  {
     "name": "import 'motionary/components/interaction'",
     "import": "export * from 'pkg/components/interaction';",
     "limit": 6400
