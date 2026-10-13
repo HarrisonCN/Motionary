@@ -11,4 +11,4 @@ function registerDayCycle() {
 }
 
 export { effect, registerDayCycle as register, registerDayCycle };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.6.0/dist/effects/day-cycle.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.7.0/dist/effects/day-cycle.js.map

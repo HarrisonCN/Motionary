@@ -369,4 +369,4 @@ exports.drawLines = drawLines;
 exports.interpolatePath = interpolatePath;
 exports.morphTo = morphTo;
 exports.pathsCompatible = pathsCompatible;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.6.0/dist/components/svg.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.7.0/dist/components/svg.cjs.map

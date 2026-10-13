@@ -11,4 +11,4 @@ function registerSmoke() {
 }
 
 export { effect, registerSmoke as register, registerSmoke };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.6.0/dist/effects/smoke.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.7.0/dist/effects/smoke.js.map
