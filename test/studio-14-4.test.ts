@@ -59,6 +59,7 @@ describe('14.4 Motion Studio: entry and packaging', () => {
     expect(own, 'budget line for motionary/components/studio').toBeTruthy();
     expect(own!.limit).toBeLessThanOrEqual(25 * 1024);
     for (const b of prevBudgets) {
+      if (b.name.includes("motionary/components/compat-v13'")) continue; // removed in 15.0 (docs/deprecations-v15.md)
       const now = budgets.find((x) => x.name === b.name);
       expect(now, `budget line kept: ${b.name}`).toBeTruthy();
       expect(now!.limit, `budget not raised: ${b.name}`).toBeLessThanOrEqual(b.limit);
@@ -67,7 +68,7 @@ describe('14.4 Motion Studio: entry and packaging', () => {
   });
   it('zero runtime dependencies; version 14.4.x; docs (incl. the real-device checklist), changelog, roadmap', () => {
     expect(pkg.dependencies ?? {}).toEqual({});
-    expect(pkg.version).toMatch(/^14\.([4-9]|\d\d)\.\d+$/);
+    expect(pkg.version).toMatch(/^(14\.([4-9]|\d\d)\.\d+|(1[5-9]|[2-9]\d)\.\d+\.\d+(-[0-9A-Za-z.]+)?)$/);
     expect(existsSync('docs/studio.md')).toBe(true);
     const doc = readFileSync('docs/studio.md', 'utf8');
     for (const s of ['createStudio', 'role="grid"', 'playhead', 'marquee', 'snap', 'cubic-bezier', 'spring', 'inspector', 'undo', 'Scene Format v2', 'serializeStudioProject', 'parseStudioProject', 'sampleFrames', 'Real-device checklist', 'iOS Safari', 'Android Chrome', 'motionary/studio/canvas'])

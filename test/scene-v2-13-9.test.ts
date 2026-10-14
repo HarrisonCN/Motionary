@@ -4,9 +4,9 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync, readdirSync } from 'node:fs';
 import * as S from '../src/components/scene/index';
 import { parseTimelineDoc } from '../src/components/timeline/editor/format';
-import { normalizeAnimation as normalizeRaw } from '../src/components/compat-v13/index'; // 14.0: moved to motionary/compat-v13
+import { normalizeLegacy13 as normalizeRaw } from './legacy-13'; // 15.0: compat-v13 removed; the 13.x reader is a test helper now
 
-(globalThis as any).MOTIONARY_NO_DEPRECATION = true; // the canonPlayer helper calls the deprecated normalizeAnimation
+
 const FIX = 'test/fixtures/scene-v2';
 const fx = (f: string) => JSON.parse(readFileSync(`${FIX}/${f}`, 'utf8'));
 /** player JSON in a comparable form: explicit offsets, defaults filled */

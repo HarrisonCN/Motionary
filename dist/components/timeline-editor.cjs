@@ -15,7 +15,7 @@ const id = { type: 'string', minLength: 1, maxLength: 128 };
 const value = { oneOf: [{ type: 'number' }, { type: 'string', maxLength: 2048 }] };
 const TIMELINE_DOC_SCHEMA = {
     $schema: 'https://json-schema.org/draft/2020-12/schema',
-    $id: 'https://cdn.jsdelivr.net/npm/motionary@14/docs/timeline-doc.schema.json',
+    $id: 'https://cdn.jsdelivr.net/npm/motionary@15/docs/timeline-doc.schema.json',
     title: 'motionary-timeline v1',
     type: 'object',
     additionalProperties: false,
@@ -115,4 +115,4 @@ exports.loadMotionDoc = scene.loadMotionDoc;
 exports.timelineDocFromScene = scene.timelineDocFromScene;
 exports.timelineDocToScene = scene.timelineDocToScene;
 exports.TIMELINE_DOC_SCHEMA = TIMELINE_DOC_SCHEMA;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.9.0/dist/components/timeline-editor.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0/dist/components/timeline-editor.cjs.map

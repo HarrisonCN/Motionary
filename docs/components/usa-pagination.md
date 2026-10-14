@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 6.7 · **changed in** 13.3
 - **Import:** `import { definePagination } from 'motionary/components/widgets'` then `definePagination();`
-- **CDN:** `<script src="https://unpkg.com/motionary@14/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@15/dist/widgets.umd.js"></script>`
 - **Attributes:** `total`, `siblings`, `label`
 - **Events:** `usa:change`
 - **Slots:** —

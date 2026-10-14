@@ -1,2 +1,2 @@
-export { d as defineWeatherCard } from '../chunks/weather-card-BdvgvAxQ.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.9.0/dist/widgets/weather-card.js.map
+export { d as defineWeatherCard } from '../chunks/weather-card-CL5yJ4rw.js';
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0/dist/widgets/weather-card.js.map

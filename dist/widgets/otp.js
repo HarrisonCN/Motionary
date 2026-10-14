@@ -1,2 +1,2 @@
-export { d as defineOtp } from '../chunks/otp-C1l7yq3_.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.9.0/dist/widgets/otp.js.map
+export { d as defineOtp } from '../chunks/otp-Cb48zoUe.js';
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0/dist/widgets/otp.js.map

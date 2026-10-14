@@ -1,6 +1,6 @@
 {
   "name": "motionary",
-  "version": "14.9.0",
+  "version": "15.0.0",
   "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 209 animated Web Components (91 core, 118 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -530,16 +530,6 @@
         "default": "./dist/components/scene-v2.cjs"
       }
     },
-    "./compat-v13": {
-      "import": {
-        "types": "./dist/components/compat-v13.d.ts",
-        "default": "./dist/components/compat-v13.js"
-      },
-      "require": {
-        "types": "./dist/components/compat-v13.d.cts",
-        "default": "./dist/components/compat-v13.cjs"
-      }
-    },
     "./motion/scene": {
       "import": {
         "types": "./dist/components/motion-scene.d.ts",
@@ -628,6 +618,16 @@
       "require": {
         "types": "./dist/components/studio-templates.d.cts",
         "default": "./dist/components/studio-templates.cjs"
+      }
+    },
+    "./studio/app": {
+      "import": {
+        "types": "./dist/components/studio-app.d.ts",
+        "default": "./dist/components/studio-app.js"
+      },
+      "require": {
+        "types": "./dist/components/studio-app.d.cts",
+        "default": "./dist/components/studio-app.cjs"
       }
     },
     "./components/reveal": {
@@ -910,6 +910,16 @@
         "default": "./dist/components/studio-templates.cjs"
       }
     },
+    "./components/studio-app": {
+      "import": {
+        "types": "./dist/components/studio-app.d.ts",
+        "default": "./dist/components/studio-app.js"
+      },
+      "require": {
+        "types": "./dist/components/studio-app.d.cts",
+        "default": "./dist/components/studio-app.cjs"
+      }
+    },
     "./components/motion-tokens": {
       "import": {
         "types": "./dist/components/motion-tokens.d.ts",
@@ -918,16 +928,6 @@
       "require": {
         "types": "./dist/components/motion-tokens.d.cts",
         "default": "./dist/components/motion-tokens.cjs"
-      }
-    },
-    "./components/compat-v13": {
-      "import": {
-        "types": "./dist/components/compat-v13.d.ts",
-        "default": "./dist/components/compat-v13.js"
-      },
-      "require": {
-        "types": "./dist/components/compat-v13.d.cts",
-        "default": "./dist/components/compat-v13.cjs"
       }
     },
     "./components/react": {

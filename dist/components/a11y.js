@@ -1,5 +1,5 @@
-import { F as deprecate, G as FOCUSABLE, g as getMotionSensitivity, M as MOTION_SENSITIVITY_LEVELS, c as configureComponents, H as adoptStyles } from '../chunks/base-ByyAdGqz.js';
-export { u as adaptKeyframes } from '../chunks/base-ByyAdGqz.js';
+import { F as deprecate, G as FOCUSABLE, g as getMotionSensitivity, M as MOTION_SENSITIVITY_LEVELS, c as configureComponents, H as adoptStyles } from '../chunks/base-QrtwTUOO.js';
+export { u as adaptKeyframes } from '../chunks/base-QrtwTUOO.js';
 import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-B-JBecYg.js';
 
 /**
@@ -255,4 +255,4 @@ function auditMotionA11y(root) {
 const ALL_TAGS = Object.values(COMPONENT_CATEGORIES).flat();
 
 export { ALL_TAGS, LIVE_REGION_IDS, MOTION_SENSITIVITY, MOTION_SENSITIVITY_LEVELS, SENSITIVITY_CSS, STATIC_ALTERNATIVES, announce, auditMotionA11y, baselineReport, getMotionSensitivity, liveRegion, motionAllowed, restoreMotionSensitivity, setMotionSensitivity, staticAlternative, warnBaseline };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.9.0/dist/components/a11y.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0/dist/components/a11y.js.map

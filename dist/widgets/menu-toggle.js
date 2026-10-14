@@ -1,2 +1,2 @@
-export { d as defineMenuToggle } from '../chunks/menu-toggle-DI8fAtZ0.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.9.0/dist/widgets/menu-toggle.js.map
+export { d as defineMenuToggle } from '../chunks/menu-toggle-5XOYiIyd.js';
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0/dist/widgets/menu-toggle.js.map

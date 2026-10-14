@@ -93,6 +93,7 @@ describe('14.2 Layout Motion 2.0: entry and packaging', () => {
     expect(own, 'budget line for motionary/components/motion-layout').toBeTruthy();
     expect(own!.limit).toBeLessThanOrEqual(10 * 1024);
     for (const b of prevBudgets) {
+      if (b.name.includes("motionary/components/compat-v13'")) continue; // removed in 15.0 (docs/deprecations-v15.md)
       const now = budgets.find((x) => x.name === b.name);
       expect(now, `budget line kept: ${b.name}`).toBeTruthy();
       expect(now!.limit, `budget not raised: ${b.name}`).toBeLessThanOrEqual(b.limit);
@@ -102,7 +103,7 @@ describe('14.2 Layout Motion 2.0: entry and packaging', () => {
   });
   it('zero runtime dependencies; version 14.2.0; docs + changelog', () => {
     expect(pkg.dependencies ?? {}).toEqual({});
-    expect(pkg.version).toMatch(/^14\.([2-9]|\d\d)\.\d+$/); // 14.2.0 or a later 14.x
+    expect(pkg.version).toMatch(/^(14\.([2-9]|\d\d)\.\d+|(1[5-9]|[2-9]\d)\.\d+\.\d+(-[0-9A-Za-z.]+)?)$/); // 14.2.0 or a later 14.x
     expect(existsSync('docs/layout-motion.md')).toBe(true);
     const doc = readFileSync('docs/layout-motion.md', 'utf8');
     for (const s of ['flip(', 'layoutGroup', 'layoutId', 'sharedLayout', 'layoutTransition', 'crossDocumentLayout', 'reducedMotion', 'createLayoutTracker', 'sticky', 'React', 'Vue', 'Svelte', 'Solid', 'Angular']) expect(doc, s).toContain(s);

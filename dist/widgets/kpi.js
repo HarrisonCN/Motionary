@@ -1,4 +1,4 @@
-import { f as defineElement, b as caf, r as raf } from '../chunks/base-ByyAdGqz.js';
+import { f as defineElement, b as caf, r as raf } from '../chunks/base-QrtwTUOO.js';
 import { l as localeAttr } from '../chunks/shared-o9CtwHmi.js';
 
 /** Parse a figure like "$12.4k" / "−3.5%" / "1,204" → number + prefix / suffix / decimals (7.2). */
@@ -97,4 +97,4 @@ function defineKpi(tag = 'usa-kpi') {
 }
 
 export { defineKpi };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.9.0/dist/widgets/kpi.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0/dist/widgets/kpi.js.map

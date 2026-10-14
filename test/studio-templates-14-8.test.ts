@@ -54,7 +54,7 @@ const rehash = (t: any) => { const c = JSON.parse(JSON.stringify(t)); delete c.s
 
 describe('14.8 entry, version and budget', () => {
   it('ships motionary/studio/templates (= motionary/components/studio-templates) with zero runtime dependencies', () => {
-    expect(pkg.version).toMatch(/^14\.([8-9]|\d\d)\.\d+$/);
+    expect(pkg.version).toMatch(/^(14\.([8-9]|\d\d)\.\d+|(1[5-9]|[2-9]\d)\.\d+\.\d+(-[0-9A-Za-z.]+)?)$/);
     expect(STUDIO_TEMPLATES_VERSION).toBe(1);
     expect(TEMPLATE_FORMAT).toBe('motionary-template');
     for (const p of ['./studio/templates', './components/studio-templates']) expect(pkg.exports[p]?.import?.default).toBe('./dist/components/studio-templates.js');
@@ -65,6 +65,7 @@ describe('14.8 entry, version and budget', () => {
     expect(line).toBeTruthy();
     expect(line!.limit).toBeLessThanOrEqual(20480);
     for (const b of prevBudgets) {
+      if (b.name.includes("motionary/components/compat-v13'")) continue; // removed in 15.0 (docs/deprecations-v15.md)
       const now = budgets.find((x) => x.name === b.name);
       expect(now, b.name).toBeTruthy();
       expect(now!.limit, b.name).toBeLessThanOrEqual(b.limit);

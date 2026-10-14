@@ -7,7 +7,7 @@ import { COMPONENT_ITEMS } from '../showcase/catalog-components.js';
 import { COMPONENTS, componentSnippets } from '../showcase/components-catalog.js';
 import { COMPONENT_ENTRIES } from '../scripts/categories.mjs';
 import { readFileSync } from 'node:fs';
-import { transform as codemod9 } from '../bin/usa-codemod-9.mjs';
+import { transform as codemod9 } from '../scripts/legacy-codemods/usa-codemod-9.mjs';
 import * as effects9 from '../src/components/effects';
 import { applyMotionTheme, MOTION_THEMES, defineMotionTheme } from '../src/components/effects';
 

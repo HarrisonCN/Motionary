@@ -1,4 +1,4 @@
-import { f as defineElement } from '../chunks/base-ByyAdGqz.js';
+import { f as defineElement } from '../chunks/base-QrtwTUOO.js';
 import { k as keyClick } from '../chunks/key-click-BLm3BI8_.js';
 import { roughLine } from '../components/fx-paper.js';
 
@@ -104,4 +104,4 @@ function defineSketchChart(tag = 'usa-sketch-chart') {
 }
 
 export { defineSketchChart };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.9.0/dist/widgets/sketch-chart.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0/dist/widgets/sketch-chart.js.map

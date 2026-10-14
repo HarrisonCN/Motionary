@@ -22,7 +22,9 @@ const resolvePkg = (id) => {
 const rows = [];
 const fmt = (n) => (n / 1024).toFixed(2) + ' kB';
 
-async function treeShaken(source) {
+// `static: true` (15.0+): sum the entry chunk and every chunk it imports statically
+// (lazy `import()` chunks excluded); `inline: true`: one bundle incl. lazy chunks.
+async function treeShaken(source, opts = {}) {
   const bundle = await rollup({
     input: 'entry',
     onwarn: () => undefined,
@@ -36,8 +38,13 @@ async function treeShaken(source) {
       terser(),
     ],
   });
-  const { output } = await bundle.generate({ format: 'es' });
-  return Buffer.from(output[0].code);
+  const { output } = await bundle.generate({ format: 'es', inlineDynamicImports: !!opts.inline });
+  if (!opts.static) return Buffer.from(output[0].code);
+  const byName = new Map(output.map((o) => [o.fileName, o]));
+  const seen = new Set();
+  const walk = (f) => { if (seen.has(f)) return; seen.add(f); for (const i of byName.get(f).imports ?? []) walk(i); };
+  walk(output[0].fileName);
+  return Buffer.concat([...seen].map((f) => Buffer.from(byName.get(f).code)));
 }
 
 for (const b of budgets) {
@@ -49,7 +56,7 @@ for (const b of budgets) {
     }
     code = readFileSync(b.file);
   } else {
-    code = await treeShaken(b.import);
+    code = await treeShaken(b.import, b);
   }
   rows.push({ ...b, raw: code.length, gz: gz(code) });
 }

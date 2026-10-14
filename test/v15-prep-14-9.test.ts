@@ -8,7 +8,7 @@
 // - `npx motionary migrate --to 15` (dry run by default) rewrites what is mechanical, converts legacy data in place to
 //   Scene v2 after writing a `.bak` copy, never overwrites an existing backup, and writes a loss / manual-work report;
 // - Studio project files that are truncated / corrupted / from an unknown version are reported, never rewritten.
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, existsSync, readdirSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -17,8 +17,8 @@ import { createRequire } from 'node:module';
 const ROOT = join(__dirname, '..');
 const CLI: any = await import(join(ROOT, 'bin/motionary.mjs'));
 const S = createRequire(import.meta.url)(join(ROOT, 'dist/components/scene-v2.cjs'));
-import { installCompatV13, normalizeAnimation, COMPAT_V13 } from '../src/components/compat-v13/index';
-import { resetDeprecationWarnings, DEPRECATIONS_V15 } from '../src/components/deprecations';
+// 15.0: motionary/compat-v13 and its notices are removed; the CLI side of 14.9 stays (doctor --v15, migrate --to 15).
+const DEPRECATIONS_V15 = { 'compat-v13-entry': 1, 'install-compat-v13': 1, 'normalize-animation': 1, 'old-codemods': 1, 'upgrade-legacy-animation': 1 };
 import { parseStudioProject, serializeStudioProject } from '../src/components/studio/index';
 import { createTimelineDoc } from '../src/components/timeline/editor/index';
 
@@ -47,23 +47,8 @@ describe('15.0 removal list: docs, ids, warnings', () => {
     const mig = readFileSync(join(ROOT, 'docs/migrating-to-v15.md'), 'utf8');
     expect(mig).toContain('npx motionary doctor --v15');
     expect(mig).toContain('npx motionary migrate --to 15');
-    expect(COMPAT_V13.plannedRemoval).toBe('15.0');
   });
-  it('compat-v13 notices (development only, once) name 15.0 and link deprecations-v15.md', () => {
-    resetDeprecationWarnings();
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-    const off = installCompatV13();
-    normalizeAnimation(UNVERSIONED as any);
-    normalizeAnimation(UNVERSIONED as any);
-    off();
-    const text = warn.mock.calls.map((c) => String(c[0])).join('\n');
-    expect(text).toMatch(/removed in 15\.0/);
-    expect(text).toContain('docs/deprecations-v15.md#install-compat-v13');
-    expect(text).toContain('docs/deprecations-v15.md#normalize-animation');
-    expect(warn.mock.calls.filter((c) => String(c[0]).includes('#normalize-animation')).length).toBe(1);
-    warn.mockRestore();
-  });
-  it('motionary codemod <5–10> warns on stderr that the runner is removed in 15.0 (13 does not)', async () => {
+  it('motionary codemod <5–10>: the message says the runner is removed in 15.0 (13 has none)', async () => {
     const err = vi.spyOn(console, 'error').mockImplementation(() => {});
     expect(CLI.codemodNotice(7)).toMatch(/removed in 15\.0/);
     expect(CLI.codemodNotice(13)).toBe('');

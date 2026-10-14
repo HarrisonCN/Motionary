@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-0F271MlM.cjs');
+var registry = require('../chunks/registry-BXcn3Rmb.cjs');
 var ease = require('../chunks/ease-HwYZnZat.cjs');
 
 /**
@@ -281,4 +281,4 @@ exports.SmoothScroll = SmoothScroll;
 exports.allSmooth = allSmooth;
 exports.smooth = smooth;
 exports.smoothScroll = smoothScroll;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.9.0/dist/runtime/smooth.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0/dist/runtime/smooth.cjs.map

@@ -786,4 +786,4 @@ exports.sceneV2ToTimeline = sceneV2ToTimeline;
 exports.serializeSceneV2 = serializeSceneV2;
 exports.tokenizeValue = tokenizeValue;
 exports.validateSceneV2 = validateSceneV2;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.9.0/dist/chunks/v2-BpVfM1Uo.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0/dist/chunks/v2-BpVfM1Uo.cjs.map

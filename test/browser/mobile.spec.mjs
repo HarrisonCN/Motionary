@@ -354,3 +354,34 @@ test.describe('14.4 Motion Studio on a phone', () => {
     await expectNoErrors(page);
   });
 });
+
+test.describe('15.0 Motion Studio 2.0 app on a phone', () => {
+  test('toolbar fits the viewport, taps save / reopen, the digest survives', async ({ page }) => {
+    await openFixture(page);
+    await page.evaluate(() => (document.getElementById('stage').innerHTML = `<div id="app"></div><div id="cv" style="position:relative;width:300px;height:120px"><div id="a" style="position:absolute;left:10px;top:10px;width:60px;height:40px;background:#08f"></div></div>`));
+    await page.evaluate(async () => {
+      const A = await import('motionary/studio/app');
+      window.__store = A.createMemoryStorage();
+      window.__A = A;
+      window.__app = await A.createStudioApp(document.getElementById('app'), { stage: document.getElementById('cv'), storage: window.__store, name: 'phone', zoom: 300, length: 600, canvas: false });
+      const id = window.__app.studio.addTrack({ name: 'A', target: '#a' });
+      window.__app.studio.setValue(id, 'opacity', 0);
+      window.__app.studio.setTime(300);
+      window.__app.studio.setValue(id, 'opacity', 1);
+    });
+    const vw = await page.evaluate(() => innerWidth);
+    const bar = await page.evaluate(() => { const r = document.querySelector('.usa-studio-app-bar').getBoundingClientRect(); return { right: r.right, w: r.width }; });
+    expect(bar.right).toBeLessThanOrEqual(vw + 1);
+    const save = await page.evaluate(() => { const r = document.querySelector('[data-app="save"]').getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; });
+    await page.touchscreen.tap(save.x, save.y);
+    await expect.poll(() => page.evaluate(() => window.__app.dirty)).toBe(false);
+    const digest = await page.evaluate(() => window.__app.digest());
+    await page.evaluate(async () => { window.__app.destroy(); window.__app = await window.__A.createStudioApp(document.getElementById('app'), { stage: document.getElementById('cv'), storage: window.__store, name: 'phone', canvas: false }); });
+    const re = await page.evaluate(() => { const r = document.querySelector('[data-app="reopen"]').getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; });
+    await page.touchscreen.tap(re.x, re.y);
+    await expect.poll(() => page.evaluate(() => window.__app.history.doc.layers.length)).toBe(1);
+    expect(await page.evaluate(() => window.__app.digest())).toBe(digest);
+    await page.evaluate(() => window.__app.destroy());
+    await expectNoErrors(page);
+  });
+});

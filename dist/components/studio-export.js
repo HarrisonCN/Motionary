@@ -1,6 +1,6 @@
-import { b as timelineDocDuration, e as isLayerActive, r as resolveRandom, T as TimelineDocError } from '../chunks/format-CHcmOPqK.js';
-import { s as sampleTimelineDoc, i as interpolateValue } from '../chunks/preview-C9tONksA.js';
-import { p as parseStudioProject, f as frameTime } from '../chunks/project-C7WnO3IM.js';
+import { b as timelineDocDuration, e as isLayerActive, r as resolveRandom, T as TimelineDocError } from '../chunks/format-efFi6HuG.js';
+import { s as sampleTimelineDoc, i as interpolateValue } from '../chunks/preview-UQjXLU7f.js';
+import { a as parseStudioProject, f as frameTime } from '../chunks/project-Blmkuhzk.js';
 import { unpackStudioProject, collectAssetRefs, isExternalAsset, normalizeAssetPath, AssetPathError, assetKind, toBase64 } from './studio-assets.js';
 
 /**
@@ -463,4 +463,4 @@ const PLAYER_JS =  ('(function(){var W=window,D=document,E=D.getElementById("mot
     'if(q)seek(+q[1]);else if(rm)seek(S.d);else{seek(0);play()}})();');
 
 export { BAKED_FORMAT, EXPORT_LIMITS, FRAME_JOB_FORMAT, PLAYER_JS, STUDIO_EXPORT_VERSION, bakeScene, cleanStage, createFrameExportJob, createJsonFramesAdapter, exportStandalone, frameDigest, sampleBaked };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.9.0/dist/components/studio-export.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0/dist/components/studio-export.js.map

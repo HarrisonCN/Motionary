@@ -1,5 +1,5 @@
-import { a as animate, c as control, g as group } from '../chunks/index-gwb-TO6r.js';
-import { s as sceneToAnimation } from '../chunks/play-BN3Yv2fu.js';
+import { a as animate, c as control, g as group } from '../chunks/index-Pkno706C.js';
+import { s as sceneToAnimation } from '../chunks/play-CQqgxhgJ.js';
 
 /**
  * `motionary/motion/scene` (= `motionary/components/motion-scene`, 14.0) — `playScene()`: play a
@@ -38,4 +38,4 @@ function playScene(root, doc, options = {}) {
 }
 
 export { playScene };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.9.0/dist/components/motion-scene.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0/dist/components/motion-scene.js.map

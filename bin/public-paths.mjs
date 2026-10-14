@@ -8,11 +8,10 @@ export const LAYER_ALIASES = {
   'tooling/manifest.json': 'manifest.json',
   'tooling/manifest.schema.json': 'manifest.schema.json',
   angular: 'components/angular',
-  // 14.0: Motion Engine v2, the official Scene Format v2 entry, the 13.x compat layer
+  // 14.0: Motion Engine v2, the official Scene Format v2 entry (the 13.x compat layer left in 15.0)
   motion: 'components/motion',
   'motion/scene': 'components/motion-scene',
   scene: 'components/scene-v2',
-  'compat-v13': 'components/compat-v13',
   // 14.1: Motion Tokens 2.0
   tokens: 'components/motion-tokens',
   // 14.2: Layout Motion 2.0
@@ -29,6 +28,8 @@ export const LAYER_ALIASES = {
   'studio/export': 'components/studio-export',
   // 14.8: templates & extension ecosystem
   'studio/templates': 'components/studio-templates',
+  // 15.0: Motion Studio 2.0
+  'studio/app': 'components/studio-app',
 };
 
 /**

@@ -7,7 +7,7 @@ import { COMPONENT_ITEMS } from '../showcase/catalog-components.js';
 import { COMPONENTS, componentSnippets } from '../showcase/components-catalog.js';
 import { COMPONENT_ENTRIES } from '../scripts/categories.mjs';
 import { readFileSync } from 'node:fs';
-import { transform as codemod8 } from '../bin/usa-codemod-8.mjs';
+import { transform as codemod8 } from '../scripts/legacy-codemods/usa-codemod-8.mjs';
 
 beforeEach(() => {
   installComponentMocks();

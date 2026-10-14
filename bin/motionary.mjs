@@ -3,9 +3,9 @@
 //   npx motionary doctor [paths…] [--json]   scan a project for deprecated import paths (exit 1 when found)
 //   npx motionary export --target css|wxss|arkts   presets + motion tokens for other platforms (12.1)
 //   npx motionary migrate <files…> [--write|--out f] [--diff] [--report] [--json] [--tokenize]   v1 motion JSON → scene v2 (13.9; official format since 14.0)
-//   npx motionary migrate --code [paths…] [--write] [--json]   rewrite the 14.0 import moves in source files (14.0)
+//   npx motionary migrate --code [paths…] [--write] [--json]   rewrite import moves + CDN majors in source files (14.0; @15 since 15.0)
 //   npx motionary tokens import-figma|export-figma|validate|css …   Motion Tokens 2.0 ↔ DTCG / Figma Variables / CSS (14.1)
-//   npx motionary codemod <5–13> [args…]   run an older usa-codemod-<n> (5–10 left the package bin in 14.0; removed in 15.0)
+//   npx motionary codemod <11–13> [args…]   run an older usa-codemod-<n> (5–10 removed in 15.0: use npx motionary@v14-lts codemod <n>)
 //   npx motionary doctor --v15 [paths…] [--json]   everything 15.0 removes: compat-v13 imports, codemod 5–10 scripts, legacy data (14.9)
 //   npx motionary migrate --to 15 [paths…] [--write] [--report f] [--json]   move off it: .bak first, loss / manual report (14.9)
 //   npx motionary help
@@ -50,9 +50,8 @@ const HELP = `motionary <command>
                              motionary-scene v2 (the 14.0 format). Dry run by default; --write saves <name>.scene.json
                              next to each input (never overwrites it). Exit 1 when any file fails — docs/migrating-to-v14.md
   migrate --code [paths…] [--write] [--json]
-                             rewrite the 14.0 import moves in source files: normalizeAnimation → motionary/compat-v13,
-                             motionary/components/scene-v2 → motionary/scene, usa-codemod-5…10 scripts → motionary codemod <n>,
-                             CDN motionary@10…13/ → motionary@14/.
+                             rewrite import moves in source files: motionary/components/scene-v2 → motionary/scene,
+                             CDN motionary@10…14/ → motionary@15/ (removed APIs: use migrate --to 15).
                              Dry run by default (default path: current directory)
   tokens import-figma <file> [--out file] [--css] [--collection name]
                              Figma Variables JSON (GET /v1/files/:key/variables/local response or a POST body) →
@@ -70,8 +69,8 @@ const HELP = `motionary <command>
                              convert legacy animation data to Scene v2 in place and remove plain installCompatV13() uses,
                              each after a .bak copy (never overwrites a backup: .bak.1, .bak.2 …); lists manual work and
                              damaged Studio projects (never rewritten). Dry run by default — docs/migrating-to-v15.md
-  codemod <5–13> [--write] [paths…]
-                             run the usa-codemod-<n> upgrade tool (5–10 are 13.x compat tools, no longer package bins; removed in 15.0)
+  codemod <11–13> [--write] [paths…]
+                             run the usa-codemod-<n> upgrade tool (5–10 were removed in 15.0: npx motionary@v14-lts codemod <n>)
   help                       this text
 
 Deprecated subpaths (work until ${REMOVED_IN}, no runtime warning):
@@ -133,26 +132,15 @@ const PKG = '(motionary|use-scroll-animate)';
 /** Rewrite the 14.0 import moves in one source text. Returns { code, changes }. Idempotent. */
 export function migrateCode(source) {
   const changes = [];
-  let code = source.replace(new RegExp(`import\\s*\\{([^}]*)\\}\\s*from\\s*(['"])${PKG}/components/effects\\2;?`, 'g'), (m, names, q, pkg) => {
-    const list = names.split(',').map((x) => x.trim()).filter(Boolean);
-    const moved = list.filter((x) => /^normalizeAnimation(\s+as\s+\w+)?$/.test(x));
-    if (!moved.length) return m;
-    changes.push(`normalizeAnimation → ${pkg}/compat-v13`);
-    const rest = list.filter((x) => !moved.includes(x));
-    const compat = `import { ${moved.join(', ')} } from ${q}${pkg}/compat-v13${q};`;
-    return rest.length ? `import { ${rest.join(', ')} } from ${q}${pkg}/components/effects${q};\n${compat}` : compat;
-  });
-  code = code.replace(new RegExp(`(['"\`])${PKG}/components/scene-v2\\1`, 'g'), (m, q, pkg) => {
+  // 15.0: normalizeAnimation is gone (no compat entry left to move it to) and the codemod 5–10 runner too —
+  // `migrate --to 15` lists both as manual work.
+  let code = source.replace(new RegExp(`(['"\`])${PKG}/components/scene-v2\\1`, 'g'), (m, q, pkg) => {
     changes.push(`${pkg}/components/scene-v2 → ${pkg}/scene`);
     return `${q}${pkg}/scene${q}`;
   });
-  code = code.replace(/(npx\s+)?usa-codemod-(5|6|7|8|9|10)\b/g, (m, npx, n) => {
-    changes.push(`usa-codemod-${n} → motionary codemod ${n}`);
-    return `${npx || ''}motionary codemod ${n}`;
-  });
-  code = code.replace(/\b(motionary|use-scroll-animate)@(1[0-3])(?=\/)/g, (m, pkg, major) => {
-    changes.push(`${pkg}@${major}/ → ${pkg}@14/ (CDN major)`);
-    return `${pkg}@14`;
+  code = code.replace(/\b(motionary|use-scroll-animate)@(1[0-4])(?=\/)/g, (m, pkg, major) => {
+    changes.push(`${pkg}@${major}/ → ${pkg}@15/ (CDN major)`);
+    return `${pkg}@15`;
   });
   return { code, changes };
 }
@@ -178,14 +166,14 @@ export function runMigrateCode(rest) {
   return 0;
 }
 // static specifiers (bundlers / vite cannot analyse a template import next to a shebang)
-const CM = { 5: () => import('./usa-codemod-5.mjs'), 6: () => import('./usa-codemod-6.mjs'), 7: () => import('./usa-codemod-7.mjs'), 8: () => import('./usa-codemod-8.mjs'), 9: () => import('./usa-codemod-9.mjs'), 10: () => import('./usa-codemod-10.mjs'), 11: () => import('./usa-codemod-11.mjs'), 12: () => import('./usa-codemod-12.mjs'), 13: () => import('./usa-codemod-13.mjs') };
+const CM = { 11: () => import('./usa-codemod-11.mjs'), 12: () => import('./usa-codemod-12.mjs'), 13: () => import('./usa-codemod-13.mjs') };
 const CODEMODS = Object.keys(CM).map(Number);
 /** `motionary codemod <n> [args…]`: runs bin/usa-codemod-<n>.mjs; returns the exit code. */
 export async function runCodemod(rest) {
   const n = Number(rest[0]);
-  if (!CODEMODS.includes(n)) { console.error(`usage: motionary codemod <${CODEMODS[0]}–${CODEMODS[CODEMODS.length - 1]}> [--write] [paths…]`); return 2; }
   const note = codemodNotice(n);
-  if (note) console.error(note);
+  if (note) { console.error(note); return 2; }
+  if (!CODEMODS.includes(n)) { console.error(`usage: motionary codemod <${CODEMODS[0]}–${CODEMODS[CODEMODS.length - 1]}> [--write] [paths…]`); return 2; }
   const m = await CM[n]();
   m.run(rest.slice(1));
   return 0;
@@ -204,9 +192,9 @@ export const V15_FIX = {
 const COMPAT_RE = /(['"`])(?:motionary|use-scroll-animate)\/(?:components\/)?compat-v13\1/;
 const OLD_CODEMOD_RE = /(?:\bmotionary\s+codemod\s+(?:10|[5-9])|\busa-codemod-(?:10|[5-9]))(?![\d.])/;
 const REPORT_NAME = 'motionary-migrate-report.json';
-/** stderr notice for `motionary codemod <n>`; '' for the codemods that stay (11–13). */
+/** Error for `motionary codemod <5–10>` (removed in 15.0); '' for the codemods that stay (11–13). */
 export function codemodNotice(n) {
-  return n >= 5 && n <= 10 ? `motionary codemod ${n}: the 13.x upgrade tools (codemod 5–10) are removed in 15.0 — see ${V15_DOC}#old-codemods` : '';
+  return n >= 5 && n <= 10 ? `motionary codemod ${n}: the 13.x upgrade tools (codemod 5–10) were removed in 15.0 — run it with a 14.x CLI: npx motionary@v14-lts codemod ${n} --write [paths…] (${V15_DOC}#old-codemods)` : '';
 }
 const isLegacyAnimation = (d) => !!d && typeof d === 'object' && !Array.isArray(d) && (d.format === 'use-scroll-animate/playground' || (d.format === undefined && d.version === undefined && Array.isArray(d.tracks)));
 const compatId = (line) => (/\binstallCompatV13\b/.test(line) ? 'install-compat-v13' : /\bnormalizeAnimation\b/.test(line) ? 'normalize-animation' : /\bupgradeLegacyAnimation\b/.test(line) ? 'upgrade-legacy-animation' : 'compat-v13-entry');

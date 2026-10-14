@@ -15,4 +15,4 @@ function registerHighlightSweep() {
 exports.effect = effect;
 exports.register = registerHighlightSweep;
 exports.registerHighlightSweep = registerHighlightSweep;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.9.0/dist/effects/highlight-sweep.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0/dist/effects/highlight-sweep.cjs.map

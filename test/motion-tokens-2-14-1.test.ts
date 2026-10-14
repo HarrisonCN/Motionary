@@ -34,6 +34,7 @@ describe('14.1 Motion Tokens 2.0: entry and packaging', () => {
     expect(own, 'budget line for motionary/components/motion-tokens').toBeTruthy();
     expect(own!.limit).toBeLessThanOrEqual(10 * 1024); // measured ~9.4 KB gz (esbuild) — set.ts ~60 %, figma.ts ~22 %
     for (const b of mainBudgets) {
+      if (b.name.includes("motionary/components/compat-v13'")) continue; // removed in 15.0 (docs/deprecations-v15.md)
       const now = budgets.find((x) => x.name === b.name);
       expect(now, `budget line kept: ${b.name}`).toBeTruthy();
       expect(now!.limit, `budget not raised: ${b.name}`).toBeLessThanOrEqual(b.limit);

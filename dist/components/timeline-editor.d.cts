@@ -320,7 +320,7 @@ declare function createTimelinePreview(root: Element, doc: TimelineDoc, o?: {
 
 declare const TIMELINE_DOC_SCHEMA: {
     readonly $schema: "https://json-schema.org/draft/2020-12/schema";
-    readonly $id: "https://cdn.jsdelivr.net/npm/motionary@14/docs/timeline-doc.schema.json";
+    readonly $id: "https://cdn.jsdelivr.net/npm/motionary@15/docs/timeline-doc.schema.json";
     readonly title: "motionary-timeline v1";
     readonly type: "object";
     readonly additionalProperties: false;

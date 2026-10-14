@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 10.5 · **changed in** 10.8, 10.9, 11.0, 11.3, 13.1, 13.3, 13.8
 - **Import:** `import { defineGlScene } from 'motionary/components/widgets'` then `defineGlScene();`
-- **CDN:** `<script src="https://unpkg.com/motionary@14/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@15/dist/widgets.umd.js"></script>`
 - **Attributes:** `src`, `shape`, `color`, `metallic`, `roughness`, `background`, `exposure`, `controls`, `auto-rotate`, `video`, `video-scrub`, `label`, `animation`, `animation-speed`
 - **Events:** `usa:error`, `usa:load`, `usa:runtime-missing`
 - **Slots:** —
@@ -33,14 +33,14 @@ defineGlScene(); // registers <usa-gl-scene> — after the prerequisites
 3. **CDN:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/gl.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/format-gltf.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/format-obj.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime/gltf-anim.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@15/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@15/dist/runtime/gl.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@15/dist/runtime/format-gltf.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@15/dist/runtime/format-obj.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@15/dist/runtime/gltf-anim.iife.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@14/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@14/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@15/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@15/dist/widgets.umd.js"></script>
 ```
 
 ## Minimal example
