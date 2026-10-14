@@ -83,4 +83,4 @@ function staggerChildren(container, options = {}, instance) {
 }
 
 exports.staggerChildren = staggerChildren;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.7.0/dist/chunks/stagger-DFKwqOQG.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.8.0/dist/chunks/stagger-DFKwqOQG.cjs.map

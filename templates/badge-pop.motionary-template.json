@@ -1,0 +1,7 @@
+{
+  "format": "motionary-template",
+  "version": 1,
+  "manifest": {"author":"Motionary","description":"A badge pops in with a small overshoot and its colour settles.","id":"badge-pop","license":"MIT","name":"Badge pop","preview":{"time":250},"requires":["motionary/studio"],"version":"1.0.0"},
+  "integrity": "sha256-7ixuFOdIiQSxjoTNkZ+lr2HLprgcZnLYyGzXms28Hos=",
+  "pack": "{\"format\":\"motionary-studio-pack\",\"version\":1,\"project\":{\"format\":\"motionary-studio\",\"version\":1,\"scene\":{\"format\":\"motionary-scene\",\"version\":2,\"name\":\"Badge pop\",\"seed\":1,\"layers\":[{\"id\":\"badge\",\"type\":\"track\",\"target\":\"#badge\",\"keyframes\":[{\"id\":\"b0\",\"time\":0,\"props\":{\"background-color\":\"#f59e0b\",\"opacity\":0,\"transform\":\"scale(0.6)\"},\"easing\":\"ease-out\"},{\"id\":\"b1\",\"time\":220,\"props\":{\"background-color\":\"#f97316\",\"opacity\":1,\"transform\":\"scale(1.08)\"},\"easing\":\"ease-in-out\"},{\"id\":\"b2\",\"time\":420,\"props\":{\"background-color\":\"#ef4444\",\"opacity\":1,\"transform\":\"scale(1)\"}}]}],\"source\":{\"format\":\"motionary-timeline\",\"version\":1}},\"studio\":{}},\"files\":[]}\n"
+}

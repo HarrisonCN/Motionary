@@ -975,4 +975,4 @@ function createStudioCanvas(root, o) {
 }
 
 export { STUDIO_CANVAS_VERSION, applyCanvasOps, canvasBounds, canvasBox, canvasMove, canvasReorder, canvasSetBox, canvasSetHidden, canvasSetLocked, createStudioCanvas, marqueeHits, readCanvasGeometry, rectsIntersect, resizeBox, rotationFromPointer, snapLines, snapRect, snapToGrid, snapValue };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.7.0/dist/components/studio-canvas.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.8.0/dist/components/studio-canvas.js.map

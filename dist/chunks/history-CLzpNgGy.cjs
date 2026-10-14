@@ -467,4 +467,4 @@ exports.shiftKeyframes = shiftKeyframes;
 exports.ungroupLayer = ungroupLayer;
 exports.uniqueId = uniqueId;
 exports.updateLayers = updateLayers;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.7.0/dist/chunks/history-CLzpNgGy.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.8.0/dist/chunks/history-CLzpNgGy.cjs.map

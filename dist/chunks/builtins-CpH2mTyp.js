@@ -96,4 +96,4 @@ const click = [
 const BUILTIN_EFFECTS = [...enter, ...attention, ...click];
 
 export { BUILTIN_EFFECTS as B };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.7.0/dist/chunks/builtins-CpH2mTyp.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.8.0/dist/chunks/builtins-CpH2mTyp.js.map

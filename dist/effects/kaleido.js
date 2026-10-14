@@ -11,4 +11,4 @@ function registerKaleido() {
 }
 
 export { effect, registerKaleido as register, registerKaleido };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.7.0/dist/effects/kaleido.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.8.0/dist/effects/kaleido.js.map

@@ -14,7 +14,7 @@ import { randomBytes } from 'node:crypto';
 import { createServer } from 'node:net';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-export const EXPECT_TOOLS = ['list_components', 'search_components', 'get_component', 'get_example', 'scaffold_snippet', 'suggest_motion', 'validate_snippet', 'check_compat', 'check_compatibility', 'suggest_fix'];
+export const EXPECT_TOOLS = ['list_components', 'search_components', 'get_component', 'get_example', 'scaffold_snippet', 'suggest_motion', 'validate_snippet', 'check_compat', 'check_compatibility', 'suggest_fix', 'list_templates', 'get_template', 'export_scene']; // 14.8: motionary-mcp 2.3 appends three
 
 const freePort = () => new Promise((res) => { const s = createServer(); s.listen(0, '127.0.0.1', () => { const p = s.address().port; s.close(() => res(p)); }); });
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));

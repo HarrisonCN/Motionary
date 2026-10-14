@@ -5,4 +5,4 @@ var widgets_segmented = require('../chunks/segmented-CpB4mKIn.cjs');
 
 
 exports.defineSegmented = widgets_segmented.defineSegmented;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.7.0/dist/widgets/segmented.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.8.0/dist/widgets/segmented.cjs.map

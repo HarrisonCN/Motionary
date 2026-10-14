@@ -69,4 +69,4 @@ const TIMELINE_DOC_SCHEMA = {
 };
 
 export { TIMELINE_DOC_SCHEMA };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.7.0/dist/components/timeline-editor.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.8.0/dist/components/timeline-editor.js.map

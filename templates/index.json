@@ -1,0 +1,30 @@
+{
+  "format": "motionary-template-index",
+  "version": 1,
+  "templates": [
+    {
+      "id": "fade-up-hero",
+      "file": "fade-up-hero.motionary-template.json",
+      "name": "Fade-up hero",
+      "version": "1.0.0",
+      "license": "MIT",
+      "integrity": "sha256-E20zAWTvdwFYz7sygf5YjDbqOrrB8W1uRpMdsM2u4PQ="
+    },
+    {
+      "id": "stagger-cards",
+      "file": "stagger-cards.motionary-template.json",
+      "name": "Stagger cards",
+      "version": "1.0.0",
+      "license": "MIT",
+      "integrity": "sha256-umrN16SFBSQjj/kq/+mbkoLqLhDIO7uWjXWtEDVhy6w="
+    },
+    {
+      "id": "badge-pop",
+      "file": "badge-pop.motionary-template.json",
+      "name": "Badge pop",
+      "version": "1.0.0",
+      "license": "MIT",
+      "integrity": "sha256-7ixuFOdIiQSxjoTNkZ+lr2HLprgcZnLYyGzXms28Hos="
+    }
+  ]
+}
