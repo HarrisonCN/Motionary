@@ -33,7 +33,7 @@ import { sceneToAnimation } from '../scene/play';
 import { createPlayerCore, normalizePlayable as normalizeCore } from './player-core';
 import type { AnimationJSON, Player, PlayerOptions } from './player-core';
 
-export { ANIMATION_FORMAT, setLegacyAnimationLoader } from './player-core';
+export { ANIMATION_FORMAT } from './player-core';
 export type { AnimationTrack, AnimationJSON, Player, PlayerOptions } from './player-core';
 
 /** @internal Parse + normalise any document `<usa-player>` reads (scene v2, timeline v1, animation JSON v1). */

@@ -400,11 +400,6 @@
     "limit": 10240
   },
   {
-    "name": "import 'motionary/components/compat-v13' (= motionary/compat-v13, 14.0 compat layer for the removed 13.x interfaces; own entry, not in lite)",
-    "import": "export * from 'pkg/components/compat-v13';",
-    "limit": 10240
-  },
-  {
     "name": "import 'motionary/components/perf-tasks' (13.4 yieldToMain / shouldYield / runChunked)",
     "import": "export * from 'pkg/components/perf-tasks';",
     "limit": 1024

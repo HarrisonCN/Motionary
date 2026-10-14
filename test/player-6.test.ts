@@ -4,11 +4,11 @@ import { configureComponents } from '../src/components/base';
 import { defineFxComponents, registerEffect, playEffect } from '../src/components/fx';
 import { registerAllEffects, createPlayer, definePlayer, ANIMATION_FORMAT } from '../src/components/effects';
 // 14.0: normalizeAnimation (and the playground / unversioned formats it reads) moved to motionary/compat-v13
-import { normalizeAnimation } from '../src/components/compat-v13';
+import { normalizeLegacy13 as normalizeAnimation } from './legacy-13'; // 15.0: compat-v13 removed; same reader kept as a test helper
 import * as click from '../src/components/click';
 import { defineCursor } from '../src/components/page';
 // @ts-expect-error — plain ESM bin script
-import { transform, splitArgs } from '../bin/usa-codemod-6.mjs';
+import { transform, splitArgs } from '../scripts/legacy-codemods/usa-codemod-6.mjs';
 // @ts-expect-error — plain JS showcase module
 import * as pg from '../showcase/playground-core.js';
 

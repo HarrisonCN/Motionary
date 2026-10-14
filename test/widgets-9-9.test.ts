@@ -3,7 +3,7 @@ import { installComponentMocks } from './components-setup';
 import { readFileSync } from 'node:fs';
 import { getEffect } from '../src/components/fx';
 import { registerAllPlugins, usePlugins, effectPlugins, definePlugin, EFFECT_PACKS } from '../src/components/fx2';
-import { transform as codemod10 } from '../bin/usa-codemod-10.mjs';
+import { transform as codemod10 } from '../scripts/legacy-codemods/usa-codemod-10.mjs';
 
 afterEach(() => vi.restoreAllMocks());
 

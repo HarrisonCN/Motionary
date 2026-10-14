@@ -36,25 +36,14 @@ export interface AnimationJSON {
 
 export const ANIMATION_FORMAT = 'use-scroll-animate/animation';
 
-/** @internal 14.0: set by `installCompatV13()` (motionary/compat-v13) to read removed 13.x documents again. */
-let legacy: ((d: any) => AnimationJSON | null) | undefined;
-/** @internal used by motionary/compat-v13; returns an uninstall. */
-export function setLegacyAnimationLoader(fn?: (d: any) => AnimationJSON | null): () => void {
-  legacy = fn;
-  return () => {
-    if (legacy === fn) legacy = undefined;
-  };
-}
-
 /** @internal Parse + normalise any document `<usa-player>` reads (scene v2, timeline v1, animation JSON v1). */
 export function normalizePlayable(input: string | AnimationJSON | Record<string, any>, scene?: (d: any) => AnimationJSON): Required<Pick<AnimationJSON, 'tracks' | 'duration' | 'loop' | 'name'>> {
   let d: any = typeof input === 'string' ? JSON.parse(input) : input;
   if (!d || typeof d !== 'object') throw new Error('[motionary] animation: expected an object');
   if (scene && (d.format === 'motionary-scene' || d.format === 'motionary-timeline')) d = scene(d);
   else {
-    d = legacy?.(d) || d;
     if (d.format === 'use-scroll-animate/playground' || (d.format === undefined && d.version === undefined && Array.isArray(d.tracks)))
-      throw new Error(`[motionary] animation: ${d.format ? 'playground documents' : 'animation JSON without "format" / "version"'} were removed in 14.0 — convert with \`npx motionary migrate\` (scene v2), or read them with installCompatV13() from motionary/compat-v13`);
+      throw new Error(`[motionary] animation: ${d.format ? 'playground documents' : 'animation JSON without "format" / "version"'} were removed in 14.0 — convert them to Scene v2 with \`npx motionary migrate --to 15 --write\` (docs/migrating-to-v15.md)`);
     if (!Array.isArray(d.tracks)) throw new Error('[motionary] animation: missing "tracks"');
     if (d.format !== ANIMATION_FORMAT) throw new Error(`[motionary] animation: unknown format "${d.format}"`);
     if (d.version > 1) throw new Error(`[motionary] animation: version ${d.version} needs a newer motionary`);

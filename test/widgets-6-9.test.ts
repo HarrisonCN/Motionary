@@ -10,7 +10,7 @@ import { COMPONENT_ITEMS } from '../showcase/catalog-components.js';
 import { COMPONENTS, componentSnippets } from '../showcase/components-catalog.js';
 import { COMPONENT_ENTRIES } from '../scripts/categories.mjs';
 // @ts-ignore — plain ESM bin
-import { transform } from '../bin/usa-codemod-7.mjs';
+import { transform } from '../scripts/legacy-codemods/usa-codemod-7.mjs';
 import { readFileSync } from 'node:fs';
 
 beforeEach(() => {

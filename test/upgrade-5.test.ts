@@ -8,7 +8,7 @@ import { setMotionIntensity, restoreMotionIntensity, definePageComponents, getMo
 import { baselineReport, warnBaseline } from '../src/components/a11y';
 import * as reveal from '../src/components/reveal';
 // @ts-ignore - untyped .mjs
-import { transform, run } from '../bin/usa-codemod-5.mjs';
+import { transform, run } from '../scripts/legacy-codemods/usa-codemod-5.mjs';
 
 const root = resolve(__dirname, '..');
 
