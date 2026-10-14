@@ -124,7 +124,7 @@ export function templateIntegrity(t: { manifest: unknown; pack: string }): strin
 const ID = /^[a-z0-9](?:[a-z0-9._-]{0,62}[a-z0-9])?$/;
 const SEMVER = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$/;
 const SPDX_ID = '\\(?[A-Za-z0-9][A-Za-z0-9.+-]*\\)?';
-const SPDX = new RegExp(`^${SPDX_ID}( (AND|OR|WITH) ${SPDX_ID})*$`);
+const SPDX = /*#__PURE__*/ new RegExp(`^${SPDX_ID}( (AND|OR|WITH) ${SPDX_ID})*$`);
 const MODULE = /^motionary(\/[a-z0-9][a-z0-9-]*){0,4}$/;
 const MANIFEST_KEYS = /*#__PURE__*/ new Set(['id', 'name', 'version', 'license', 'author', 'description', 'homepage', 'requires', 'tokens', 'preview']);
 

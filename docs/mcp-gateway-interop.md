@@ -51,6 +51,9 @@ npx @winstonsayno/mcp-gateway@latest start -c mcp-gateway.yml
 | `check_compat` | 1.0 | 12.5 |
 | `check_compatibility` | 1.0 — **new**: framework / version / browser support per component | 13.7 |
 | `suggest_fix` | 1.0 — **new**: concrete patches (wrong tag, mistyped / deprecated attribute, missing import, bare CDN import, missing prerequisite, removed 13.0 paths) | 13.7 |
+| `list_templates` | 1.0 — motionary-mcp 2.3: the shipped Studio templates (integrity-checked; license + required modules) | 14.8 |
+| `get_template` | 1.0 — motionary-mcp 2.3: one template's manifest, Scene v2 document and script-less preview | 14.8 |
+| `export_scene` | 1.0 — motionary-mcp 2.3: scene / project / template → 14.7 standalone files + `frameDigest` | 14.8 |
 
 Every tool definition carries its version in `_meta["motionary/schemaVersion"]`; the new tools also publish an
 `outputSchema` and put a `schema` id (`motionary-mcp/check_compatibility@1`, `motionary-mcp/suggest_fix@1`,
@@ -59,7 +62,7 @@ Every tool definition carries its version in `_meta["motionary/schemaVersion"]`;
 ## Tested here
 
 `scripts/gateway-interop.mjs` starts `npx -y @winstonsayno/mcp-gateway@latest` with a temporary config that runs this
-checkout's `bin/motionary-mcp.mjs`, then speaks MCP to the gateway: `initialize` → `tools/list` (all ten tools above must
+checkout's `bin/motionary-mcp.mjs`, then speaks MCP to the gateway: `initialize` → `tools/list` (all thirteen tools above must
 be listed) → `tools/call` of `search_components`, `check_compatibility`, `suggest_fix` and `validate_snippet`. The
 **Gateway interop** workflow (`.github/workflows/gateway-interop.yml`) runs it on every pull request and push to main;
 the gateway is fetched only inside that job. Locally: `node scripts/gateway-interop.mjs` (or
