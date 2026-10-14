@@ -164,3 +164,12 @@ describe('15.1 example: examples/gateway-provenance', () => {
     expect(src).toContain("'@winstonsayno/mcp-gateway@15.1.0-canary.1'");
   });
 });
+
+describe('15.1 package contents', () => {
+  it('the planning roadmap is not packed (docs/ROADMAP.md stays on GitHub) — keeps the package under its unchanged 14 MB unpacked budget', () => {
+    const pkg = JSON.parse(readFileSync('package.json', 'utf8'));
+    expect(pkg.files).toContain('docs');
+    expect(pkg.files).toContain('!docs/ROADMAP.md');
+    expect(readFileSync('scripts/check-pack.mjs', 'utf8')).toContain('unpacked: 14 * 1024 * 1024');
+  });
+});
