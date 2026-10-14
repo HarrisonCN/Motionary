@@ -4,7 +4,7 @@
 //   product-major    "Motionary vN" names the current major
 //   latest           a statement of what npm `latest` points to names the version docs/versions.md's policy gives
 //                    (the newest x.0.y of the current major — minors get their own v<major>-<minor> tag)
-// Exact pins (`motionary@12.4.0`) are allowed everywhere; history (CHANGELOG, upgrading guides, codemods, audits) is not scanned.
+// Exact pins (`motionary@12.4.0`) are allowed everywhere; history (CHANGELOG, upgrading guides, older majors' migrating-to-vN guides, codemods, audits) is not scanned.
 // `node scripts/check-versions.mjs` prints the findings and exits 1 when there are any (CI: npm run check:docs).
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -72,7 +72,9 @@ export function checkVersions() {
   if (lock.version !== pkg.version || (lock.packages && lock.packages[''] && lock.packages[''].version !== pkg.version)) findings.push({ rule: 'package-version', at: 'package-lock.json', text: lock.version, expected: pkg.version });
   if (rt !== pkg.version) findings.push({ rule: 'package-version', at: 'src/runtime/registry.ts', text: rt, expected: pkg.version });
   if (!new RegExp(`^## \\[${pkg.version.replace(/\./g, '\\.')}\\]`, 'm').test(changelog)) findings.push({ rule: 'package-version', at: 'CHANGELOG.md', text: 'no release heading', expected: `## [${pkg.version}]` });
-  for (const f of files()) findings.push(...scanText(f, read(f), { major, latest }));
+  // 15.0: an older major's migration guide (docs/migrating-to-v14.md …) is history like the upgrading guides
+  const oldGuide = (f) => { const m = f.match(/^docs\/migrating-to-v(\d+)\.md$/); return !!m && Number(m[1]) < major; };
+  for (const f of files()) if (!oldGuide(f)) findings.push(...scanText(f, read(f), { major, latest }));
   return { version: pkg.version, major, latest, findings };
 }
 
