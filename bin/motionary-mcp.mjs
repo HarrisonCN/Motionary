@@ -256,7 +256,7 @@ export function scenePreviewHtml(scene) {
 <div id="stage">${els.map((e) => e.html).join('')}</div>
 <script type="application/json" id="scene">${esc2(JSON.stringify(scene))}</script>
 <script type="module">
-import { renderSceneHeadless } from 'https://cdn.jsdelivr.net/npm/motionary@14/dist/components/studio-ai.js';
+import { renderSceneHeadless } from 'https://cdn.jsdelivr.net/npm/motionary@15/dist/components/studio-ai.js';
 const scene = JSON.parse(document.getElementById('scene').textContent);
 const r = renderSceneHeadless(scene);
 if (!r.ok) throw new Error('[motionary] scene render: ' + r.errors.join('; '));

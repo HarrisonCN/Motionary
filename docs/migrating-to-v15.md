@@ -1,5 +1,8 @@
 # Migrating to v15
 
+> 15.0 removed everything listed below. Stay on 14.x with `npm i motionary@v14-lts`; the 14.x CLI
+> (`npx motionary@v14-lts …`) still runs codemods 5–10.
+
 15.0 is the Motion Studio 2.0 major. Its only removals are the 13.x compatibility layer listed in
 [deprecations-v15.md](./deprecations-v15.md); every one of them warns in development since 14.9, and the CLI finds
 and moves them for you. Lite stays ≤ 70 KB gzip with zero dependencies.

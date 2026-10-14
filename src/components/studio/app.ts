@@ -102,6 +102,7 @@ export async function createStudioApp(root: HTMLElement, o: StudioAppOptions = {
   bar.className = 'usa-studio-app-bar';
   bar.setAttribute('role', 'toolbar');
   bar.setAttribute('aria-label', 'Project');
+  bar.style.cssText = 'display:flex;flex-wrap:wrap;gap:4px;align-items:center;max-width:100%';
   const status = d.createElement('output');
   status.className = 'usa-studio-app-status';
   status.setAttribute('role', 'status');

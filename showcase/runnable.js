@@ -223,7 +223,7 @@ export function checkCode(code, c, { mode = 'html', exportsMap = {} } = {}) {
   }
   // module scripts: every bare import needs an import map entry (browsers have no node_modules)
   const mapped = {};
-  for (const m of code.matchAll(/<script\b[^>]*\btype\s*=\s*["']?importmap["']?[^>]*>([\s\S]*?)<\/script>/gi)) { try { Object.assign(mapped, JSON.parse(m[1]).imports || {}); } catch { out.push({ level: 'error', message: 'The import map is not valid JSON.', fix: 'Check commas and quotes: {"imports": {"motionary/…": "https://cdn.jsdelivr.net/npm/motionary@14/dist/…"}}' }); } }
+  for (const m of code.matchAll(/<script\b[^>]*\btype\s*=\s*["']?importmap["']?[^>]*>([\s\S]*?)<\/script>/gi)) { try { Object.assign(mapped, JSON.parse(m[1]).imports || {}); } catch { out.push({ level: 'error', message: 'The import map is not valid JSON.', fix: 'Check commas and quotes: {"imports": {"motionary/…": "https://cdn.jsdelivr.net/npm/motionary@15/dist/…"}}' }); } }
   const mods = moduleBodies(code).join('\n');
   const cdnDist = `https://cdn.jsdelivr.net/npm/motionary@${majorOf(c)}/dist/`;
   for (const s of importSpecifiers(mods)) {
@@ -287,7 +287,7 @@ export function explainReport(r, c, mode = 'html') {
       };
     }
     case 'load':
-      return { level: 'warning', message: `Could not load ${txt(r.url)}.`, fix: /motionary@/.test(String(r.url)) ? 'Check the path against https://cdn.jsdelivr.net/npm/motionary@14/dist/ (a version that is not on the CDN yet, or a typo).' : 'Check the URL — sample assets such as /anim/… are placeholders for your own files.' };
+      return { level: 'warning', message: `Could not load ${txt(r.url)}.`, fix: /motionary@/.test(String(r.url)) ? 'Check the path against https://cdn.jsdelivr.net/npm/motionary@15/dist/ (a version that is not on the CDN yet, or a typo).' : 'Check the URL — sample assets such as /anim/… are placeholders for your own files.' };
     case 'error':
     case 'console': {
       const msg = txt(r.message);

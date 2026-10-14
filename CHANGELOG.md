@@ -7,6 +7,43 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [15.0.0-rc.1] - 2026-10-14
+
+**Motion Studio 2.0** (major, release candidate — npm `next` only; `latest` stays on 14.x until 15.0.0). The 14.x
+Studio parts become one authoring loop, and the 13.x compatibility layer announced in 14.9 is removed. Zero runtime
+dependencies; `motionary/components/lite` unchanged (≤ 70 KB gzip); the new entry has its own budget line and no
+existing line was raised. [docs/studio-app.md](docs/studio-app.md) · [docs/migrating-to-v15.md](docs/migrating-to-v15.md)
+
+### Added
+
+- **`motionary/studio/app`** (= `motionary/components/studio-app`): `createStudioApp(root, options)` — the Studio
+  (timeline + canvas, one undo history) with a project toolbar (New, Open…, Save, Reopen, Export, Undo, Redo) and a
+  status line: new → edit → preview → save → reopen → export. Storage adapters (`createMemoryStorage`,
+  `createLocalStorage`, or any `{ read, write }`); `open()` reads Studio projects, Scene v2, timeline v1, animation
+  JSON and 14.5 packs, keeps the current project on damaged input and lists missing assets with relink suggestions;
+  `exportStandalone()` is the 14.7 export; `digest()` is `frameDigest`; `savePack()`; optional 14.6 AI panel.
+  Export, assets and AI load on first use (dynamic `import()`).
+
+### Removed (breaking — announced in 14.9, [deprecations-v15.md](docs/deprecations-v15.md))
+
+- The **`motionary/compat-v13`** entry (= `motionary/components/compat-v13`): `installCompatV13()`,
+  `normalizeAnimation()`, `upgradeLegacyAnimation()`, `COMPAT_V13`, and its size-budget line.
+- The player's internal legacy loader hook (`setLegacyAnimationLoader`); playground documents and animation JSON
+  without `format` / `version` are refused with a pointer to `npx motionary migrate --to 15`.
+- **`npx motionary codemod <5–10>`**: exits 2 and points to `npx motionary@v14-lts codemod <n>`; codemods 11–13 stay.
+  The six old transforms stay in the repository (`scripts/legacy-codemods/`, not in the package) so their tests keep
+  running.
+- `migrate --code` no longer moves `normalizeAnimation` into `motionary/compat-v13` or rewrites old codemod scripts
+  (both are listed by `migrate --to 15` as manual work); it now rewrites CDN majors `@10`…`@14` → `@15`.
+
+### Changed
+
+- CDN major `@14` → `@15` in docs, showcase and `RUNTIME_CDN`.
+
+### Migration
+
+`npx motionary doctor --v15` then `npx motionary migrate --to 15 --write` (backups + loss report), from 14.9 or 15.
+
 ## [14.9.0] - 2026-10-14
 
 **Getting ready for 15.0** (P0). Every 15.0 removal now warns in development, is found by the CLI, has a migration

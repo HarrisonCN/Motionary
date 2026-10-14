@@ -1,5 +1,9 @@
 # Deprecated in 14.9, removed in 15.0
 
+> **Removed in 15.0.0.** `motionary/compat-v13` no longer exists (import fails to resolve), the player has no legacy
+> loader hook and `npx motionary codemod <5–10>` exits with code 2 and points to `npx motionary@v14-lts codemod <n>`.
+> `doctor --v15` and `migrate --to 15` are still in the 15.x CLI.
+
 15.0 removes the 13.x compatibility layer that 14.0 kept around. Everything on this page still works in 14.x and
 warns once in development (guarded by `process.env.NODE_ENV !== 'production'`, so production builds drop the text;
 `globalThis.MOTIONARY_NO_DEPRECATION = true` silences it). Nothing here is in `motionary/components/lite`,

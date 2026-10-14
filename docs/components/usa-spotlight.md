@@ -6,7 +6,7 @@ The Windows Fluent “Reveal” effect: a light follows the pointer, lighting th
 
 - **Category:** interaction · **since** 2.2
 - **Import:** `import { defineSpotlight } from 'motionary/components/interaction'` then `defineSpotlight();`
-- **CDN:** `<script src="https://unpkg.com/motionary@14/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@15/dist/components.umd.js"></script>`
 - **Attributes:** `size`, `color`, `border`
 - **Events:** —
 - **Slots:** —

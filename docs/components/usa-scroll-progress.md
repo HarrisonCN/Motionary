@@ -6,7 +6,7 @@ Reading progress of the page or of one article. Compositor-only scaleX, role="pr
 
 - **Category:** reveal · **since** 2.2 · **changed in** 2.7, 13.1
 - **Import:** `import { defineScrollProgress } from 'motionary/components/reveal'` then `defineScrollProgress();`
-- **CDN:** `<script src="https://unpkg.com/motionary@14/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@15/dist/components.umd.js"></script>`
 - **Attributes:** `target`, `label`
 - **Events:** `usa:progress`
 - **Slots:** —

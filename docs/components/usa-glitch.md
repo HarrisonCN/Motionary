@@ -6,7 +6,7 @@ An RGB-split, sliced glitch — always on or on hover.
 
 - **Category:** text · **since** 2.8
 - **Import:** `import { defineGlitch } from 'motionary/components/text'` then `defineGlitch();`
-- **CDN:** `<script src="https://unpkg.com/motionary@14/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@15/dist/components.umd.js"></script>`
 - **Attributes:** `text`, `intensity`
 - **Events:** —
 - **Slots:** —

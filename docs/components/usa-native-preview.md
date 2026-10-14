@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 9.8 · **changed in** 13.1
 - **Import:** `import { defineNativePreview } from 'motionary/components/widgets'` then `defineNativePreview();`
-- **CDN:** `<script src="https://unpkg.com/motionary@14/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@15/dist/widgets.umd.js"></script>`
 - **Attributes:** `rules`, `platform`, `name`
 - **Events:** `usa:replay`
 - **Slots:** —

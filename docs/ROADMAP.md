@@ -19,7 +19,7 @@
 | v14.7.0 | [已发布] | P1 | 输出与预览可靠性（`motionary/studio/export`）：工程 → 独立 HTML/CSS（JS 可选）；时间线烘焙为 CSS `@keyframes`（缓动 / 离散 / 自定义属性的段逐帧采样，所以每个帧时刻的值与 `sampleTimelineDoc` 一致）；资源复制到 `assets/` 或内联为单文件；`frameDigest` 帧指纹；可续跑的帧导出作业 + 适配器接口（独立于基础导出，不内置视频编码器） | 独立导出的作品无需编辑器、无需网络即可运行；同一 Scene 两次导出逐字节相同，帧时刻的计算样式与采样值一致（Chromium / Firefox / WebKit）；帧导出作业失败可从检查点续跑，且不阻塞基础导出；新入口独立预算（`motionary/components/studio-export` 15 KB，实测 13.49 KB），lite ≤ 70 KB，现有预算均未提高（[docs/studio-export.md](./studio-export.md)）。 |
 | v14.8.0 | [已发布] | P2 | 模板与扩展生态（`motionary/studio/templates`）：模板包 `motionary-template` v1（工程包 + 许可证 / 前置模块 / 令牌主题 / 完整性）、安装 / 预览 / 卸载、可信清单 | 模板可安装、预览、卸载，卸载后工程逐字节还原；许可与前置模块在 API / 文档 / MCP 三处一致；越界路径、超限、签名错误、脚本类文件一律拒绝且工程不变。实现：SHA-256 完整性（纯 JS）+ 可选 Ed25519 发布者签名（WebCrypto）；安装 = 一个撤销步骤；预览 = 14.7 导出的无脚本单文件；内置 3 个 MIT 起步模板；motionary-mcp 2.3 `list_templates` / `get_template` / `export_scene`。新入口独立预算（`motionary/components/studio-templates` 19 KB，实测 17.87 KB，含 14.7 导出；不含预览 11.25 KB / 12 KB），lite ≤ 70 KB，现有预算均未提高（[docs/studio-templates.md](./studio-templates.md)）。Pages 模板画廊与 Gateway 租户模板目录推迟到 15.5。 |
 | v14.9.0 | [已发布] | P0 | v15 兼容准备：15.0 删除清单定稿（[docs/deprecations-v15.md](./deprecations-v15.md)：`motionary/compat-v13` 整个入口 + `motionary codemod <5–10>`）全部发出开发期警告（`installCompatV13()` 安装时也提示，链接 v15 锚点）；`npx motionary doctor --v15`（compat 导入 / require、旧 codemod 脚本、旧数据）；`npx motionary migrate --to 15`（默认演练；`--write` 先写 `.bak` / `.bak.N`，旧数据原地转 Scene v2，删除可机械移除的 `installCompatV13`，其余列入 manual，损失报告 JSON）；Studio 工程损坏 / 截断 / 未知版本只报告不改写；`15.0.0-rc.1` 仅发布到 `next` | doctor 找到每一处旧 API；迁移语料（13.x fixtures + 内置模板）逐字节等于黄金 Scene v2、0 损失；`next` 与 `latest` 隔离。说明：`motionary-scene@1` 是物理运行时（`motionary/runtime/format-scene`，`<usa-physics-playground>`）的世界 / 刚体格式，不是 Scene Format 的 v1；Scene v2 无法表达刚体与物理世界，所以原计划中的“`motionary-scene@1` 写出改为只读”取消，15.0 不改动它；14.x 期间没有新增其他 @deprecated 类型。无新入口、无预算变化（[docs/migrating-to-v15.md](./migrating-to-v15.md)）。 |
-| v15.0.0 | [建议] | P0 | **major** · Motion Studio 2.0 稳定主线（`motionary/studio/app`）：把 canvas / studio / assets / ai / export / templates 组合成创作闭环；删除 `motionary/compat-v13`（14.0 起预告，14.9 警告） | 从零创建 → 编辑 → 预览 → 保存 → 重开 → 导出的完整闭环（三浏览器 + 手机视口）通过，重开前后帧指纹一致；升级不丢工程；附 codemod 与 migrating-to-v15；14.9.x 成为 `v14-lts`；lite ≤ 70 KB、零依赖。 |
+| v15.0.0 | [RC：15.0.0-rc.1 仅在 npm `next`] | P0 | **major** · Motion Studio 2.0 稳定主线（`motionary/studio/app`）：把 canvas / studio / assets / ai / export / templates 组合成创作闭环；删除 `motionary/compat-v13`（14.0 起预告，14.9 警告） | 从零创建 → 编辑 → 预览 → 保存 → 重开 → 导出的完整闭环（三浏览器 + 手机视口）通过，重开前后帧指纹一致；升级不丢工程；附 codemod 与 migrating-to-v15；14.9.x 成为 `v14-lts`；lite ≤ 70 KB、零依赖。 |
 
 ### 15.x → 17.0（2026-10-13 起规划）
 
@@ -82,7 +82,7 @@ Gateway 15.0 GA 仍受其门槛 A / B / C（72 小时 soak、专用硬件基线�
 
 1. **安装命令**：runtime 模块只需 `npm i motionary` 一次；官方运行时写出确切命令（如 `npm i @rive-app/canvas`）；
 2. **导入路径**：如 `motionary/runtime/scroll`；
-3. **CDN 地址**：可直接复制的 `<script>`（主版本固定，如 `https://cdn.jsdelivr.net/npm/motionary@14/dist/runtime.iife.js`）以及 ESM 地址；
+3. **CDN 地址**：可直接复制的 `<script>`（主版本固定，如 `https://cdn.jsdelivr.net/npm/motionary@15/dist/runtime.iife.js`）以及 ESM 地址；
 4. **引入顺序与注册代码**：先 `use(scroll)`（会同时注册核心），再注册组件；CDN 先加载 `runtime.iife.js`，再加载模块 IIFE（自动注册）；
 5. **最小用法示例**。
 
