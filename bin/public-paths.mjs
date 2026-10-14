@@ -27,6 +27,8 @@ export const LAYER_ALIASES = {
   'studio/ai': 'components/studio-ai',
   // 14.7: output & preview reliability (standalone export, frame jobs)
   'studio/export': 'components/studio-export',
+  // 14.8: templates & extension ecosystem
+  'studio/templates': 'components/studio-templates',
 };
 
 /**

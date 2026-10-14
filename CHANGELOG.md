@@ -7,6 +7,57 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [14.8.0] - 2026-10-14
+
+**Templates & extension ecosystem**. A Motion Studio project becomes a reusable, integrity-checked template that can be
+inspected (license, required modules), previewed without running any script, installed as one undo step and
+uninstalled so the project is byte-identical to the one before. No breaking changes. Zero runtime dependencies.
+`motionary/components/lite` stays ≤ 70 KB gzip and no existing budget was raised: the new entry has its own lines.
+[docs/studio-templates.md](docs/studio-templates.md)
+
+### Added
+
+- **`motionary/studio/templates`** (= `motionary/components/studio-templates`; its own entry, not in lite,
+  `motionary/core`, `motionary/motion`, `motionary/studio` or `motionary/studio/export`).
+- **`motionary-template` v1**: manifest (`id`, `name`, SemVer `version`, SPDX `license`, `author`, `description`,
+  `homepage`, `requires` (Motionary module paths), `tokens` theme, `preview.time`) + a 14.5 studio pack + `integrity`
+  (`sha256-…` over the canonical manifest and the pack) + optional Ed25519 `signature`. `TEMPLATE_LIMITS`: 10 MB text,
+  200 layers, 20 000 keyframes, 100 files, 5 MB per file.
+- **`createTemplate` / `serializeTemplate`** (deterministic) and **`parseTemplate`** (never throws; `{ ok, template,
+  info, doc, files, errors: [{ path, reason, message }] }`): refuses bad manifests, integrity mismatches, script-like
+  files, out-of-project paths, files failing their size / CRC-32 check, assets missing from the pack and anything over
+  a limit — the project is never touched.
+- **`sha256`** (pure JS, synchronous), **`templateIntegrity`**, **`signTemplate`** / **`verifyTemplate`** (Ed25519 via
+  WebCrypto: `valid` / `invalid` / `missing` / `untrusted` / `unsupported`, `requireSignature`).
+- **`templateInfo(t, { available })`** — license, requires and which of them are missing, before install.
+- **`installTemplate(history, t, { prefix, at, available })`** — ONE undo step: prefixed layer / keyframe / parent ids,
+  assets moved under `templates/<id>/` (returned in `files`), `solo` dropped, an explicit shorter `duration` extended,
+  the install recorded in `meta['motionary:templates']` (`installedTemplates(doc)`); refused on id conflicts, the same
+  template twice, missing required modules or a non-object `meta`.
+- **`uninstallTemplate(history, id)`** — removes exactly what the install added (layers, record, duration / meta it
+  created), one undo step; with several templates, any uninstall order ends at the original serialized bytes.
+- **`previewTemplate(t, { time, fps, js })`** — the 14.7 standalone export as one inline file without scripts (CSS
+  only, `sandbox: ''`), frozen at the preview time.
+- **Starter templates** in the package: `templates/fade-up-hero`, `stagger-cards`, `badge-pop` (MIT) + `index.json`,
+  rebuilt by `node scripts/build-templates.mjs` (`--check`).
+- **motionary-mcp 2.3** (additive): `list_templates`, `get_template`, `export_scene` (the `export_scene` tool moved here
+  from the 14.7 plan) — read-only, with output schemas; every 2.2 tool and argument unchanged.
+- Browser spec `test/browser/studio-templates.spec.mjs` (Chromium / Firefox / WebKit): install a shipped template,
+  read its preview frame from a script-less sandboxed iframe and compare with `sampleTimelineDoc`, uninstall back to
+  the original bytes; a tampered template is refused before anything renders; no network.
+
+### Size
+
+- New budget lines: `motionary/components/studio-templates` 19 KB gzip (measured 17.87 KB: it includes the 14.7
+  exporter for `previewTemplate`, the 14.5 pack rules and the timeline model; the plan's 10 KB target did not count the
+  export-based preview) and the import without `previewTemplate` 12 KB (measured 11.25 KB — guards that the exporter
+  tree-shakes away). No existing line changed; lite ≤ 70 KB.
+
+### Not in this release
+
+- The docs-site template gallery and a tenant template directory behind MCP Gateway authorization (roadmap stage IV)
+  move to 15.5 (team projects). `manifest.tokens` is carried, not applied on install.
+
 ## [14.7.0] - 2026-10-13
 
 **Output & preview reliability**. A Studio project becomes a standalone work — `index.html`, `scene.css` (plays with

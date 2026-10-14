@@ -15,7 +15,7 @@
 // validate_snippet (unknown tags / attributes, missing or mis-ordered
 // prerequisites, unregistered components, reduced-motion handling).
 // Resources: motionary://manifest, motionary://llms.txt, motionary://component/<tag>.
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { createInterface } from 'node:readline';
@@ -26,10 +26,10 @@ import { compatAt, cmpVer } from './compat-history.mjs';
 import { rankComponents, checkCompatibility, suggestFix, SCHEMAS } from './mcp-tools-2.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
-const SERVER = { name: 'motionary-mcp', version: '2.2.0' };
+const SERVER = { name: 'motionary-mcp', version: '2.3.0' };
 export const SERVER_INFO = SERVER;
 /** 13.7: tool contract versions — input + output schema of each tool; a tool's major changes only on an incompatible change. */
-export const TOOL_SCHEMA_VERSIONS = { list_components: '1.0', search_components: '1.1', get_component: '1.0', get_example: '1.0', scaffold_snippet: '1.1', suggest_motion: '1.1', validate_snippet: '1.3', check_compat: '1.0', check_compatibility: '1.1', suggest_fix: '1.1' };
+export const TOOL_SCHEMA_VERSIONS = { list_components: '1.0', search_components: '1.1', get_component: '1.0', get_example: '1.0', scaffold_snippet: '1.1', suggest_motion: '1.1', validate_snippet: '1.3', check_compat: '1.0', check_compatibility: '1.1', suggest_fix: '1.1', list_templates: '1.0', get_template: '1.0', export_scene: '1.0' };
 const PROTOCOLS = ['2025-06-18', '2025-03-26', '2024-11-05'];
 
 export function loadManifest(path = process.env.MOTIONARY_MANIFEST || join(HERE, '../dist/manifest.json')) {
@@ -293,6 +293,62 @@ export async function validateScene(m, a) {
   return { schema: SCHEMAS.scene, valid: v.ok, mode, version, problems: v.errors, compatibility: v.checks.compatibility, render: v.checks.render, ...(browser && { browser }), preview: v.preview };
 }
 
+// ---------------------------------------------------------------- 2.3 (14.8): templates + standalone export
+let SEX = null, STP = null, TPL = null;
+/** Load motionary/components/studio-export (14.7 standalone export) — package build or MOTIONARY_STUDIO_EXPORT. */
+export async function loadStudioExport(path = process.env.MOTIONARY_STUDIO_EXPORT || join(HERE, '../dist/components/studio-export.js')) {
+  if (!SEX && existsSync(path)) SEX = await new Function('u', 'return import(u)')(pathToFileURL(path).href);
+  return SEX;
+}
+export function setStudioExport(mod) {
+  SEX = mod;
+}
+/** Load motionary/components/studio-templates (14.8) — package build or MOTIONARY_STUDIO_TEMPLATES. */
+export async function loadStudioTemplates(path = process.env.MOTIONARY_STUDIO_TEMPLATES || join(HERE, '../dist/components/studio-templates.js')) {
+  if (!STP && existsSync(path)) STP = await new Function('u', 'return import(u)')(pathToFileURL(path).href);
+  return STP;
+}
+export function setStudioTemplates(mod) {
+  STP = mod;
+  TPL = null;
+}
+const needMod = (mod, name) => { if (!mod) throw new Error(`this tool needs motionary/components/${name} (dist/components/${name}.js) — run from an installed motionary package or set MOTIONARY_${name.toUpperCase().replace(/-/g, '_')}`); return mod; };
+/** The starter templates shipped in the package (templates/*.motionary-template.json, or MOTIONARY_TEMPLATES): parsed + integrity-checked, data only. */
+export function shippedTemplates(dir = process.env.MOTIONARY_TEMPLATES || join(HERE, '../templates')) {
+  if (TPL && TPL.dir === dir) return TPL.list;
+  const S = needMod(STP, 'studio-templates'), list = [];
+  const files = existsSync(dir) ? readdirSync(dir).filter((f) => f.endsWith('.motionary-template.json')).sort() : [];
+  for (const f of files) {
+    const r = S.parseTemplate(readFileSync(join(dir, f), 'utf8'));
+    list.push({ file: f, ok: r.ok, errors: r.errors, template: r.template, info: r.info });
+  }
+  TPL = { dir, list };
+  return list;
+}
+const templateBrief = (x) => ({ id: x.info.id, name: x.info.name, version: x.info.version, license: x.info.license, ...(x.info.author && { author: x.info.author }), ...(x.info.description && { description: x.info.description }), requires: x.info.requires, layers: x.info.layers, files: x.info.files, duration: x.info.duration, integrity: x.info.integrity, verified: true, signed: x.info.signed, file: x.file });
+const findTemplate = (id) => {
+  const x = shippedTemplates().find((t) => t.ok && t.info.id === String(id || '').trim());
+  if (!x) throw new Error(`unknown template ${id} — use list_templates`);
+  return x;
+};
+/** export_scene: a Scene v2 document / Studio project / shipped template → the 14.7 standalone files (utf8 text or base64), digest and report. */
+export function exportScene(m, a) {
+  const X = needMod(SEX, 'studio-export');
+  const given = ['scene', 'project', 'template'].filter((k) => a[k] !== undefined);
+  if (given.length !== 1) throw new Error('give exactly one of scene, project or template');
+  let input;
+  if (a.template !== undefined) input = { pack: findTemplate(a.template).template.pack };
+  else {
+    const v = a.scene !== undefined ? a.scene : a.project;
+    if (typeof v === 'string') { try { input = JSON.parse(v); } catch (e) { throw new Error(`invalid JSON (${e.message})`); } } else input = v;
+    if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error('expected a Scene v2 document or a Studio project');
+  }
+  const r = X.exportStandalone(input, { inline: !!a.inline, js: a.js !== false, ...(a.fps !== undefined && { fps: a.fps }), ...(a.title !== undefined && { title: String(a.title) }) });
+  const toB64 = (b) => Buffer.from(b).toString('base64');
+  const files = [...r.files].map(([path, v]) => (typeof v === 'string' ? { path, encoding: 'utf8', bytes: Buffer.byteLength(v), text: v } : { path, encoding: 'base64', bytes: v.length, data: toB64(v) }));
+  return { schema: SCHEMAS.exportScene, digest: r.report.digest, files, report: r.report };
+}
+
 /** Natural language → motion spec, code in three styles, and the catalog components that implement it. */
 export function suggestMotion(m, text, format = 'waapi') {
   if (!AI) throw new Error('suggest_motion needs motionary/components/ai (dist/components/ai.js) — run from an installed motionary package or set MOTIONARY_AI');
@@ -473,6 +529,9 @@ export const TOOLS = [
   { name: 'check_compat', title: 'Check version compatibility', description: "Which components / runtime modules a project on a given motionary version can use, which were added later (with the release that added them) and which changed after it (from the release notes). Defaults to the version installed in the user's project.", inputSchema: { type: 'object', properties: { version: { type: 'string', description: "the motionary version installed in the user's project (default: ./node_modules/motionary, else the catalog version) — answers are filtered for it" }, tags: { type: 'array', items: { type: 'string' }, description: 'only these components (default: everything that is missing or changed for that version)' } }, additionalProperties: false }, annotations: { title: 'Check compatibility', ...RO } },
   { name: 'check_compatibility', title: 'Check compatibility (framework / version / browser)', description: "13.7: can these components (or the components a snippet uses) run in the user's setup? Per component: the motionary version that added it and releases that changed it after the given version, support and setup notes for html / esm / react / vue / svelte / solid / angular, the engines the browser suite tests every component in (Chromium, Firefox, WebKit), minimum browser versions and the web-platform features it needs with the fallback it uses. compatible is false when any component is unknown or newer than the version.", inputSchema: { type: 'object', properties: { tags: { type: 'array', items: { type: 'string' } }, code: { type: 'string', description: 'or: a snippet — its <usa-*> components are checked' }, framework: { type: 'string', enum: ['html', 'esm', 'react', 'vue', 'svelte', 'solid', 'angular'] }, version: { type: 'string', description: "the motionary version installed in the user's project (default: ./node_modules/motionary, else the catalog version)" }, browsers: { type: 'array', items: { type: 'string' }, description: "e.g. ['safari 16', 'firefox']" }, scene: { type: ['object', 'string'], description: '14.6: or a Scene v2 document — the components its layers bind are checked' } }, additionalProperties: false }, outputSchema: { type: 'object', properties: { schema: { const: SCHEMAS.compatibility }, version: { type: 'string' }, catalog: { type: 'string' }, behind: { type: 'boolean' }, compatible: { type: 'boolean' }, components: { type: 'array' }, issues: { type: 'array' } }, required: ['schema', 'version', 'compatible', 'components', 'issues'] }, annotations: { title: 'Check compatibility', ...RO } },
   { name: 'suggest_fix', title: 'Suggest fixes for a snippet', description: "13.7: concrete patches for code that uses <usa-*> components — wrong tag names (closest real tag), mistyped / deprecated attributes, components used but never imported or defined, bare `motionary/…` imports in a CDN page (→ the CDN module URL of the same major), missing motionary/runtime prerequisites, import paths / event names / CDN pins removed in 13.0. Each fix is { kind, message, line, patch: { find, replace } }; fixed is the code with every patch applied and remaining what the static validator still reports. Never writes files.", inputSchema: { type: 'object', properties: { code: { type: 'string' }, context: { type: 'string', enum: ['cdn', 'esm', 'html'], description: 'how the code loads Motionary (default: detected)' }, scene: { type: ['object', 'string'], description: '14.6: instead of code — a Scene v2 document; the answer adds sceneFixes (Scene v2 ops in the applyCanvasOps format: closest tag for a typo, drop a binding the installed version lacks, default easing for an unknown one) and fixedScene' }, version: { type: 'string', description: "14.6, with scene: the motionary version installed in the user's project" } }, additionalProperties: false }, outputSchema: { type: 'object', properties: { schema: { const: SCHEMAS.fix }, context: { type: 'string' }, fixes: { type: 'array', items: { type: 'object', properties: { kind: { type: 'string', enum: ['unknown-tag', 'unknown-attribute', 'deprecated-attribute', 'deprecated-api', 'bare-import', 'missing-import', 'missing-prerequisite'] }, message: { type: 'string' }, line: { type: 'number' }, patch: { type: 'object', properties: { find: { type: 'string' }, replace: { type: 'string' } }, required: ['find', 'replace'] } }, required: ['kind', 'message', 'patch'] } }, fixed: { type: 'string' }, valid: { type: 'boolean' }, remaining: { type: 'object' }, sceneFixes: { type: 'array' }, fixedScene: { type: 'object' } }, required: ['schema', 'fixes', 'fixed', 'valid'] }, annotations: { title: 'Suggest fix', ...RO } },
+  { name: 'list_templates', title: 'List Studio templates', description: '14.8: the starter Motion Studio templates shipped with Motionary (motionary-template v1: data only, SHA-256 integrity checked before listing) — id, name, version, SPDX license, author, required Motionary modules, layer / file counts. query filters by id / name / description.', inputSchema: { type: 'object', properties: { query: { type: 'string' } }, additionalProperties: false }, outputSchema: { type: 'object', properties: { schema: { const: SCHEMAS.listTemplates }, count: { type: 'number' }, templates: { type: 'array' } }, required: ['schema', 'count', 'templates'] }, annotations: { title: 'List templates', ...RO } },
+  { name: 'get_template', title: 'Get a Studio template', description: '14.8: one shipped template: manifest (license, requires, token theme, preview time), info, its Scene v2 document and a still preview (one inline HTML file without scripts, for a sandboxed iframe). Install it in an app with motionary/studio/templates installTemplate (one undo step, uninstall restores the project byte for byte).', inputSchema: { type: 'object', properties: { id: { type: 'string' } }, required: ['id'], additionalProperties: false }, outputSchema: { type: 'object', properties: { schema: { const: SCHEMAS.getTemplate }, manifest: { type: 'object' }, info: { type: 'object' }, verified: { type: 'boolean' }, scene: { type: 'object' }, preview: { type: 'object' } }, required: ['schema', 'manifest', 'info', 'verified', 'scene'] }, annotations: { title: 'Get template', ...RO } },
+  { name: 'export_scene', title: 'Export a scene as a standalone page', description: '14.8: a Scene v2 document, a Studio project or a shipped template → the 14.7 standalone export (motionary/studio/export): index.html + scene.css (plays with scripts off) + optional scene.js player + assets/, or one inline file; byte-reproducible, with the frameDigest fingerprint and a report of anything left out. Returns the files (utf8 text, binary as base64); writes nothing.', inputSchema: { type: 'object', properties: { scene: { type: ['object', 'string'], description: 'a Scene v2 document (object or JSON text)' }, project: { type: ['object', 'string'], description: 'or a motionary-studio project' }, template: { type: 'string', description: 'or a shipped template id (list_templates)' }, inline: { type: 'boolean', default: false }, js: { type: 'boolean', default: true }, fps: { type: 'number', default: 60 }, title: { type: 'string' } }, additionalProperties: false }, outputSchema: { type: 'object', properties: { schema: { const: SCHEMAS.exportScene }, digest: { type: 'string' }, files: { type: 'array' }, report: { type: 'object' } }, required: ['schema', 'digest', 'files', 'report'] }, annotations: { title: 'Export scene', ...RO } },
 ];
 
 const text = (obj) => ({ content: [{ type: 'text', text: typeof obj === 'string' ? obj : JSON.stringify(obj, null, 2) }], ...(typeof obj === 'object' ? { structuredContent: Array.isArray(obj) ? { items: obj } : obj } : {}) });
@@ -562,6 +621,18 @@ export function callTool(m, name, a = {}) {
       }
       if (typeof a.code !== 'string') throw new Error('code is required (or scene)');
       return text(suggestFix(m, a.code, { context: a.context }, { findComponent, cdnImports, validateSnippet, searchComponents }));
+    case 'list_templates': {
+      const q = String(a.query || '').toLowerCase().trim();
+      const list = shippedTemplates().filter((x) => x.ok).map(templateBrief).filter((x) => !q || [x.id, x.name, x.description || ''].some((s) => s.toLowerCase().includes(q)));
+      return text({ schema: SCHEMAS.listTemplates, count: list.length, templates: list });
+    }
+    case 'get_template': {
+      const x = findTemplate(a.id), S = needMod(STP, 'studio-templates');
+      const scene = JSON.parse(x.template.pack).project.scene; // the pack's Scene v2 document (already checked by parseTemplate)
+      return text({ schema: SCHEMAS.getTemplate, manifest: x.template.manifest, info: x.info, verified: true, integrity: x.template.integrity, scene, preview: S.previewTemplate(x.template) });
+    }
+    case 'export_scene':
+      return text(exportScene(m, a));
     default:
       throw Object.assign(new Error(`unknown tool ${name}`), { code: -32602 });
   }
@@ -664,6 +735,8 @@ if (invoked) {
     try {
       await loadAi();
       await loadStudioAi();
+      await loadStudioExport();
+      await loadStudioTemplates();
       serve();
     } catch (e) {
       console.error(String(e.message || e));

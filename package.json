@@ -1,6 +1,6 @@
 {
   "name": "motionary",
-  "version": "14.7.0",
+  "version": "14.8.0",
   "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 209 animated Web Components (91 core, 118 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -620,6 +620,16 @@
         "default": "./dist/components/studio-export.cjs"
       }
     },
+    "./studio/templates": {
+      "import": {
+        "types": "./dist/components/studio-templates.d.ts",
+        "default": "./dist/components/studio-templates.js"
+      },
+      "require": {
+        "types": "./dist/components/studio-templates.d.cts",
+        "default": "./dist/components/studio-templates.cjs"
+      }
+    },
     "./components/reveal": {
       "import": {
         "types": "./dist/components/reveal.d.ts",
@@ -888,6 +898,16 @@
       "require": {
         "types": "./dist/components/studio-export.d.cts",
         "default": "./dist/components/studio-export.cjs"
+      }
+    },
+    "./components/studio-templates": {
+      "import": {
+        "types": "./dist/components/studio-templates.d.ts",
+        "default": "./dist/components/studio-templates.js"
+      },
+      "require": {
+        "types": "./dist/components/studio-templates.d.cts",
+        "default": "./dist/components/studio-templates.cjs"
       }
     },
     "./components/motion-tokens": {
@@ -4323,6 +4343,7 @@
     "CHANGELOG.md",
     "figma-plugin",
     "AGENTS.md",
+    "templates",
     "!dist/**/*.map",
     "!docs/images"
   ],
@@ -4372,7 +4393,7 @@
     "figma:plugin": "node scripts/gen-figma-plugin.mjs",
     "facts": "node scripts/facts.mjs",
     "gen:framework-types": "node scripts/gen-framework-types.mjs",
-    "check:docs": "node scripts/facts.mjs --check && node scripts/gen-component-docs.mjs --check && node scripts/gen-entries.mjs --check && node scripts/gen-runtime-docs.mjs --check && node scripts/gen-figma-plugin.mjs --check && node scripts/gen-framework-types.mjs --check && node scripts/check-versions.mjs",
+    "check:docs": "node scripts/facts.mjs --check && node scripts/gen-component-docs.mjs --check && node scripts/gen-entries.mjs --check && node scripts/gen-runtime-docs.mjs --check && node scripts/gen-figma-plugin.mjs --check && node scripts/gen-framework-types.mjs --check && node scripts/check-versions.mjs && node scripts/build-templates.mjs --check",
     "release:gate": "node scripts/release-gate.mjs"
   },
   "keywords": [

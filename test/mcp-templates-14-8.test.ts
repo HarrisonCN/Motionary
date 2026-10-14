@@ -63,7 +63,7 @@ describe('list_templates / get_template', () => {
     expect(g.scene.format).toBe('motionary-scene');
     expect(g.preview.html).not.toMatch(/<script/i);
     expect(g.preview.sandbox).toBe('');
-    const bad = await M.callTool(m, 'get_template', { id: 'nope' }).then((x: any) => x, (e: any) => ({ error: String(e.message) }));
+    const bad = await Promise.resolve().then(() => M.callTool(m, 'get_template', { id: 'nope' })).then((x: any) => x, (e: any) => ({ error: String(e.message) }));
     expect(JSON.stringify(bad)).toMatch(/unknown template/);
   });
 });

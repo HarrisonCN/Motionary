@@ -32,6 +32,9 @@ is tree-shakeable and has a gzip budget checked in CI, and every animation respe
 > layer order / lock / hide, guides and snapping, drag / resize / rotate with pointer and touch (pinch-zoom), keyboard
 > nudge — every edit a lossless Scene Format v2 op through the timeline editor's undo history.
 >
+> 14.8: **Studio templates** — [`motionary/studio/templates`](./docs/studio-templates.md): install / preview / uninstall
+> integrity-checked templates (license and required modules visible first; uninstall restores the project byte for byte).
+>
 > 14.7: **Standalone export** — [`motionary/studio/export`](./docs/studio-export.md): a Studio project becomes HTML / CSS
 > (+ a tiny player) that plays offline, byte-for-byte reproducible, with the same values as the preview at every frame.
 >
@@ -400,7 +403,7 @@ Coming from another library: [AOS](./docs/migration-from-aos.md) · [GSAP Scroll
 
 ## Versions and compatibility
 
-- **npm dist-tags:** `latest` is the newest release of the current major (14.7.0; minors move it since 14.1). Each minor release also gets its own tag `v<major>-<minor>`
+- **npm dist-tags:** `latest` is the newest release of the current major (14.8.0; minors move it since 14.1). Each minor release also gets its own tag `v<major>-<minor>`
   (for example `v14-1`), and `v14-line` follows the 14.x line. `motionary` and `use-scroll-animate` are published together at the same versions.
 - **CDN:** URLs pin a major (`motionary@14`). Exact pins (`motionary@12.4.0`) keep working.
 - **Semver:** breaking changes come only in majors, each with a guide and a codemod. Deprecations stay in place until the
@@ -416,7 +419,7 @@ Coming from another library: [AOS](./docs/migration-from-aos.md) · [GSAP Scroll
 | Reference | [API](./docs/API.md) · [Presets](./docs/presets.md) (all 214) · [Components](./docs/components.md) · [Entry points](./docs/entry-points.md) · [Public API by layer](./docs/public-api.md) · [Motion Core](./docs/core.md) · [Timeline editor model](./docs/timeline-editor.md) |
 | Runtime | [Runtime tiers](./docs/runtime-tiers.md) · [Modules](./docs/runtime/) · [Compatibility matrix](./docs/compat-matrix.md) |
 | Platforms | [Frameworks & SSR](./docs/frameworks-ssr.md) · [Framework matrix](./docs/frameworks-matrix.md) · [Windows apps](./docs/windows-apps.md) · [Hybrid apps (MAUI, Flutter, Electron, Tauri)](./docs/hybrid-apps.md) · [Cross-platform export](./docs/cross-platform.md) · [Examples](./examples/) |
-| Design & AI | [Motion Studio](./docs/studio.md) · [Studio export](./docs/studio-export.md) · [Studio AI assistant](./docs/studio-ai.md) · [Studio assets](./docs/studio-assets.md) · [Studio canvas](./docs/studio-canvas.md) · [Layout motion 2.0](./docs/layout-motion.md) · [Motion tokens 2.0](./docs/motion-tokens.md) · [Figma plugin](./figma-plugin/README.md) · [MCP server](./docs/mcp.md) · [AI provider](./docs/ai-provider.md) · [Prompt guide](./docs/ai-prompt-guide.md) |
+| Design & AI | [Motion Studio](./docs/studio.md) · [Studio export](./docs/studio-export.md) · [Studio templates](./docs/studio-templates.md) · [Studio AI assistant](./docs/studio-ai.md) · [Studio assets](./docs/studio-assets.md) · [Studio canvas](./docs/studio-canvas.md) · [Layout motion 2.0](./docs/layout-motion.md) · [Motion tokens 2.0](./docs/motion-tokens.md) · [Figma plugin](./figma-plugin/README.md) · [MCP server](./docs/mcp.md) · [AI provider](./docs/ai-provider.md) · [Prompt guide](./docs/ai-prompt-guide.md) |
 | Quality | [Accessibility](./docs/accessibility.md) · [Component contract](./docs/component-contract.md) · [Performance](./docs/performance.md) · [Perf CI](./docs/perf-ci.md) · [Scheduling](./docs/scheduling.md) · [Tree-shaking](./docs/tree-shaking.md) · [Source maps](./docs/source-maps.md) |
 | Project | [Architecture](./docs/architecture.md) · [Roadmap](./docs/ROADMAP.md) · [Versions](./docs/versions.md) · [Changelog](./CHANGELOG.md) |
 

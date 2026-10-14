@@ -36,6 +36,10 @@ Claude Code: `claude mcp add motionary -- npx -y -p motionary motionary-mcp`.
 | `get_example` | `tag`, `variant?` (`html` = CDN, `esm`, or a variant id) | a working example |
 | `scaffold_snippet` | `tags[]`, `framework?` (`html`, `esm`, `react`, `vue`, `svelte`) | one snippet for several components, prerequisites first |
 
+| `list_templates` (2.3, 14.8) | `query?` | the starter Studio templates shipped in the package (integrity-checked): id, name, version, SPDX license, author, required modules, layer / file counts |
+| `get_template` (2.3, 14.8) | `id` | manifest, info, the Scene v2 document and a still preview (one inline HTML file without scripts) — see [studio-templates.md](./studio-templates.md) |
+| `export_scene` (2.3, 14.8) | one of `scene` / `project` / `template`, `inline?`, `js?`, `fps?`, `title?` | the [14.7 standalone export](./studio-export.md): files (utf8 text, binary as base64), `digest` (`frameDigest`) and the report; writes nothing |
+
 Unknown tags come back as tool errors (`isError: true`) with a hint to search first.
 
 ## Resources

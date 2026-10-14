@@ -120,6 +120,16 @@
     "limit": 15360
   },
   {
+    "name": "import 'motionary/components/studio-templates' (= motionary/studio/templates, 14.8 templates & extension ecosystem: motionary-template v1 parse / integrity (pure-JS SHA-256) / Ed25519 verify, install / uninstall as one undo step, preview through the 14.7 standalone export — includes studio/export, the 14.5 pack rules and the timeline model; own entry, not in lite / studio / studio/export; measured 17.87 KB, plan target 10 KB was without the export-based preview)",
+    "import": "export * from 'pkg/components/studio-templates';",
+    "limit": 19456
+  },
+  {
+    "name": "import { parseTemplate, verifyTemplate, installTemplate, uninstallTemplate } from 'motionary/studio/templates' (14.8, without previewTemplate: the 14.7 exporter must tree-shake away; measured 11.25 KB with sha256)",
+    "import": "export { sha256, parseTemplate, verifyTemplate, installTemplate, uninstallTemplate } from 'pkg/components/studio-templates';",
+    "limit": 12288
+  },
+  {
     "name": "import 'motionary/components/interaction'",
     "import": "export * from 'pkg/components/interaction';",
     "limit": 6400
