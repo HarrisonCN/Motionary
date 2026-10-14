@@ -6,7 +6,7 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import {
   STUDIO_PROVENANCE_VERSION, PROVENANCE_META_KEY, REQUEST_ID_RE, validateProvenance, recordProvenance, provenanceOf,
-  aiChanges, changedLayers, withProvenance, matchLineage,
+  aiChanges, changedLayers, withProvenance, matchLineage, createProvenancePanel,
 } from '../src/components/studio/provenance';
 import { createTimelineHistory } from '../src/components/timeline/editor/history';
 import { createAiReview, proposeAiEdit, createMockProvider } from '../src/components/studio/ai';
@@ -129,5 +129,29 @@ describe('15.1 Gateway lineage join (Gateway 15.1 canary)', () => {
     const md = readFileSync('docs/studio-provenance.md', 'utf8');
     expect(md).toMatch(/Gateway 15\.1 canary/);
     expect(md).not.toMatch(/Gateway 15(\.0)? GA|Gateway 15\.0\.0\b(?!-rc)/);
+  });
+});
+
+describe('15.1 provenance panel (DOM)', () => {
+  it('lists records newest first, filters AI-only and by request id, follows undo, destroy removes it', () => {
+    const h = createTimelineHistory(doc0() as any);
+    withProvenance(h, { generator: 'keyboard', at: AT }).apply((d: any) => ({ ...d, layers: d.layers.map((l: any) => (l.id === 'card' ? { ...l, target: '.card2' } : l)) }), { label: 'retarget' });
+    withProvenance(h, P).apply((d: any) => ({ ...d, layers: d.layers.slice(1) }), { label: 'AI: remove title' });
+    const root = document.createElement('div');
+    const panel = createProvenancePanel(root, h);
+    const rows = () => [...root.querySelectorAll('[data-prov="list"] li')].map((li) => (li as HTMLElement).dataset.record);
+    expect(rows()).toEqual(['p2', 'p1']);
+    const only = root.querySelector('[data-prov="ai-only"]') as HTMLInputElement;
+    only.checked = true; only.dispatchEvent(new Event('change'));
+    expect(rows()).toEqual(['p2']);
+    only.checked = false; only.dispatchEvent(new Event('change'));
+    const q = root.querySelector('[data-prov="request"]') as HTMLInputElement;
+    q.value = P.requestId; q.dispatchEvent(new Event('input'));
+    expect(rows()).toEqual(['p2']);
+    q.value = ''; q.dispatchEvent(new Event('input'));
+    h.undo();
+    expect(rows()).toEqual(['p1']);
+    panel.destroy();
+    expect(root.querySelector('.usa-provenance')).toBeNull();
   });
 });
