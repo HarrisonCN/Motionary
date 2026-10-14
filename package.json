@@ -630,6 +630,16 @@
         "default": "./dist/components/studio-app.cjs"
       }
     },
+    "./studio/provenance": {
+      "import": {
+        "types": "./dist/components/studio-provenance.d.ts",
+        "default": "./dist/components/studio-provenance.js"
+      },
+      "require": {
+        "types": "./dist/components/studio-provenance.d.cts",
+        "default": "./dist/components/studio-provenance.cjs"
+      }
+    },
     "./components/reveal": {
       "import": {
         "types": "./dist/components/reveal.d.ts",
@@ -4340,16 +4350,6 @@
     "./components/layout.css": "./dist/components/layout.css",
     "./components/packs.css": "./dist/components/packs.css",
     "./components/fx.css": "./dist/components/fx.css",
-    "./studio/provenance": {
-      "import": {
-        "types": "./dist/components/studio-provenance.d.ts",
-        "default": "./dist/components/studio-provenance.js"
-      },
-      "require": {
-        "types": "./dist/components/studio-provenance.d.cts",
-        "default": "./dist/components/studio-provenance.cjs"
-      }
-    },
     "./package.json": "./package.json"
   },
   "files": [
@@ -4365,7 +4365,8 @@
     "AGENTS.md",
     "templates",
     "!dist/**/*.map",
-    "!docs/images"
+    "!docs/images",
+    "!docs/ROADMAP.md"
   ],
   "sideEffects": [
     "*.css",
