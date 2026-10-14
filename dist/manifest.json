@@ -4,7 +4,7 @@
   "schemaVersion": 2,
   "stability": "stable",
   "package": "motionary",
-  "version": "14.8.0",
+  "version": "14.9.0",
   "homepage": "https://harrisoncn.github.io/Motionary/",
   "llms": "https://harrisoncn.github.io/Motionary/llms.txt",
   "cdn": {
@@ -1406,7 +1406,9 @@
       "optional": false,
       "stability": "stable",
       "since": "10.7",
-      "changed": []
+      "changed": [
+        "14.9"
+      ]
     },
     {
       "kind": "runtime",

@@ -5,4 +5,4 @@ var widgets_menu = require('../chunks/menu-CZ1zHTT9.cjs');
 
 
 exports.defineMenu = widgets_menu.defineMenu;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.8.0/dist/widgets/menu.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.9.0/dist/widgets/menu.cjs.map

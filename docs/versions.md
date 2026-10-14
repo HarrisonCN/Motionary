@@ -11,7 +11,7 @@ URLs. Nothing else changes: the `<usa-*>` tags, the `usa-` classes, the globals 
 
 | Tag | Points to | Install |
 |---|---|---|
-| `latest` | the newest release of the current major (14.8.0 today) | `npm i motionary` |
+| `latest` | the newest release of the current major (14.9.0 today) | `npm i motionary` |
 | `v<major>-line` | each major line from 14 on, e.g. `v14-line` → the newest 14.x release (a bare `v14` is not allowed: npm rejects tag names that are valid SemVer ranges) | `npm i motionary@v14-line` |
 | `v13-lts` | the last 13.x release (13.9.0), for projects that stay on 13 | `npm i motionary@v13-lts` |
 | `v<major>-<minor>` | each minor release, e.g. `v12-9` → 12.9.0, `v12-5` → 12.5.0 | `npm i motionary@v12-9` or `npm i motionary@12.9.0` |
@@ -38,6 +38,7 @@ keep working. `npx usa-codemod-13 --write` rewrites URLs pinned to `@10` / `@11`
 
 Breaking changes come only in majors, and each one has a guide and a codemod:
 
+- [migrating-to-v15.md](./migrating-to-v15.md): removal of `motionary/compat-v13` and `motionary codemod <5–10>` (14.9 warnings, `npx motionary doctor --v15`, `npx motionary migrate --to 15`) — [deprecations-v15.md](./deprecations-v15.md)
 - [migrating-to-v14.md](./migrating-to-v14.md): Motion Engine v2, Scene Format v2, removals kept in `motionary/compat-v13`, `npx motionary migrate --code`
 - [upgrading-13.md](./upgrading-13.md): removed import paths, `npx usa-codemod-13`
 - [upgrading-12.md](./upgrading-12.md): component contract, legacy event names, `npx usa-codemod-12`

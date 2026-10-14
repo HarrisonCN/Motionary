@@ -434,4 +434,4 @@ function timeline(entries, options = {}) {
 }
 
 export { MOTION_ENGINE_VERSION as M, animate as a, cubicBezier as b, control as c, spring as d, stagger as e, timeline as f, group as g, parallel as p, sequence as s, toEasingFn as t };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.8.0/dist/chunks/index-gwb-TO6r.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.9.0/dist/chunks/index-gwb-TO6r.js.map

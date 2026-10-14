@@ -104,4 +104,4 @@ exports.PAPER_FX = PAPER_FX;
 exports.paperRandom = paperRandom;
 exports.registerPaperPack = registerPaperPack;
 exports.roughLine = roughLine;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.8.0/dist/components/fx-paper.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.9.0/dist/components/fx-paper.cjs.map
