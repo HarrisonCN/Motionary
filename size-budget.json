@@ -130,6 +130,18 @@
     "limit": 12288
   },
   {
+    "name": "import 'motionary/components/studio-app' (= motionary/studio/app, 15.0 Motion Studio 2.0 app shell: createStudioApp new → edit → preview → save → reopen → export, storage adapters, packs + missing-asset relink; static graph = entry + statically imported chunks, the lazy export / assets / ai chunks excluded; measured 26.02 KB; own entry, not in lite / studio)",
+    "import": "export * from 'pkg/components/studio-app';",
+    "static": true,
+    "limit": 27648
+  },
+  {
+    "name": "import 'motionary/components/studio-app' incl. its lazy chunks (export / assets / ai inlined into one bundle; 15.0; measured 49.09 KB)",
+    "import": "export * from 'pkg/components/studio-app';",
+    "inline": true,
+    "limit": 51200
+  },
+  {
     "name": "import 'motionary/components/interaction'",
     "import": "export * from 'pkg/components/interaction';",
     "limit": 6400
