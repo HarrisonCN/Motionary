@@ -155,3 +155,12 @@ describe('15.1 provenance panel (DOM)', () => {
     expect(root.querySelector('.usa-provenance')).toBeNull();
   });
 });
+
+describe('15.1 example: examples/gateway-provenance', () => {
+  it('writes a gateway config in schema v12 (Gateway 15.x no longer reads v11) and pins the 15.1 canary', () => {
+    const src = readFileSync('examples/gateway-provenance/run.mjs', 'utf8');
+    expect(src).toContain("'version: 12'");
+    expect(src).not.toMatch(/'version: 1[01]'/);
+    expect(src).toContain("'@winstonsayno/mcp-gateway@15.1.0-canary.1'");
+  });
+});
