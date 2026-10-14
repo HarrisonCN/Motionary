@@ -55,7 +55,7 @@ export async function run({ log = console.log } = {}) {
   const key = randomBytes(24).toString('hex');
   const cfg = join(dir, 'mcp-gateway.yml');
   writeFileSync(cfg, [
-    'version: 11', `port: ${port}`, 'host: 127.0.0.1', 'logLevel: warn',
+    'version: 12', `port: ${port}`, 'host: 127.0.0.1', 'logLevel: warn',
     'auth:', '  strategy: api-key', '  apiKeys:', `    - "${key}"`,
     'servers:', '  - id: motionary', '    name: Motionary MCP', '    transport: stdio', `    command: ${JSON.stringify(process.execPath)}`,
     `    args: [${JSON.stringify(join(ROOT, 'bin/motionary-mcp.mjs'))}]`, '    enabled: true',
