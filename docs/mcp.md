@@ -39,6 +39,7 @@ Claude Code: `claude mcp add motionary -- npx -y -p motionary motionary-mcp`.
 | `list_templates` (2.3, 14.8) | `query?` | the starter Studio templates shipped in the package (integrity-checked): id, name, version, SPDX license, author, required modules, layer / file counts |
 | `get_template` (2.3, 14.8) | `id` | manifest, info, the Scene v2 document and a still preview (one inline HTML file without scripts) — see [studio-templates.md](./studio-templates.md) |
 | `export_scene` (2.3, 14.8) | one of `scene` / `project` / `template`, `inline?`, `js?`, `fps?`, `title?` | the [14.7 standalone export](./studio-export.md): files (utf8 text, binary as base64), `digest` (`frameDigest`) and the report; writes nothing |
+| `propose_edit` (2.4, 15.1) | `scene`, `prompt`, `selection?`, `requestId?` | a validated edit proposal: ops (each with a sentence), JSON `diff`, changed `layers`, `preview`, checks, and `provenance { generator: 'motionary-mcp/propose_edit', requestId }` (`requestId` = the argument or `params._meta.correlationId`); `applied: false` — writes nothing, Studio applies it only after review ([studio-provenance.md](./studio-provenance.md)) |
 
 Unknown tags come back as tool errors (`isError: true`) with a hint to search first.
 

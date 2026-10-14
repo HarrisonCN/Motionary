@@ -26,7 +26,7 @@ describe('14.8 tool contracts (additive)', () => {
   it('server 2.3: list_templates / get_template / export_scene appended, read-only, with output schemas; every 2.2 tool unchanged', () => {
     expect(M.SERVER_INFO.version).toMatch(/^2\.([3-9]|\d\d)\.\d+$/);
     const names = M.TOOLS.map((x: any) => x.name);
-    expect(names.slice(-3)).toEqual(['list_templates', 'get_template', 'export_scene']);
+    expect(names.slice(names.indexOf('list_templates'), names.indexOf('list_templates') + 3)).toEqual(['list_templates', 'get_template', 'export_scene']); // 15.1 (MCP 2.4) appends propose_edit after them
     for (const n of ['list_components', 'search_components', 'get_component', 'get_example', 'scaffold_snippet', 'suggest_motion', 'validate_snippet', 'check_compat', 'check_compatibility', 'suggest_fix']) expect(names).toContain(n);
     for (const n of ['list_templates', 'get_template', 'export_scene']) {
       expect(t(n).annotations.readOnlyHint).toBe(true);
