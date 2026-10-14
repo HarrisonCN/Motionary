@@ -59,6 +59,7 @@ describe('14.3 Studio canvas: entry and packaging', () => {
     expect(own, 'budget line for motionary/components/studio-canvas').toBeTruthy();
     expect(own!.limit).toBeLessThanOrEqual(12 * 1024);
     for (const b of prevBudgets) {
+      if (b.name.includes("motionary/components/compat-v13'")) continue; // removed in 15.0 (docs/deprecations-v15.md)
       const now = budgets.find((x) => x.name === b.name);
       expect(now, `budget line kept: ${b.name}`).toBeTruthy();
       expect(now!.limit, `budget not raised: ${b.name}`).toBeLessThanOrEqual(b.limit);
@@ -67,7 +68,7 @@ describe('14.3 Studio canvas: entry and packaging', () => {
   });
   it('zero runtime dependencies; version 14.3.0; docs (incl. the real-device checklist) + changelog', () => {
     expect(pkg.dependencies ?? {}).toEqual({});
-    expect(pkg.version).toMatch(/^14\.([3-9]|\d\d)\.\d+$/); // 14.3.0 or a later 14.x
+    expect(pkg.version).toMatch(/^(14\.([3-9]|\d\d)\.\d+|(1[5-9]|[2-9]\d)\.\d+\.\d+(-[0-9A-Za-z.]+)?)$/); // 14.3.0 or a later 14.x
     expect(existsSync('docs/studio-canvas.md')).toBe(true);
     const doc = readFileSync('docs/studio-canvas.md', 'utf8');
     for (const s of ['createStudioCanvas', 'applyCanvasOps', 'marquee', 'snap', 'grid', 'guides', 'locked', 'muted', 'pinch', 'touch-action', 'aria-selected', 'Shift', 'undo', 'Scene Format v2', 'Real-device checklist', 'iOS Safari', 'Android Chrome'])

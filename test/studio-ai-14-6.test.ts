@@ -41,7 +41,7 @@ const freeze = <T>(o: T): T => { if (o && typeof o === 'object') { Object.freeze
 
 describe('14.6 entry, version and budget', () => {
   it('ships 14.6.0 with motionary/studio/ai + motionary/components/studio-ai, zero runtime deps', () => {
-    expect(pkg.version).toMatch(/^14\.([6-9]|\d\d)\.\d+$/); // 14.6.0 or a later 14.x
+    expect(pkg.version).toMatch(/^(14\.([6-9]|\d\d)\.\d+|(1[5-9]|[2-9]\d)\.\d+\.\d+(-[0-9A-Za-z.]+)?)$/); // 14.6.0 or a later 14.x
     expect(STUDIO_AI_VERSION).toBe(1);
     for (const p of ['./studio/ai', './components/studio-ai']) expect(pkg.exports[p]?.import?.default).toBe('./dist/components/studio-ai.js');
     expect(pkg.dependencies ?? {}).toEqual({});
@@ -50,6 +50,7 @@ describe('14.6 entry, version and budget', () => {
     const line = budgets.find((b) => b.import?.includes("pkg/components/studio-ai'"));
     expect(line && line.limit).toBeLessThanOrEqual(20480);
     for (const b of prevBudgets) {
+      if (b.name.includes("motionary/components/compat-v13'")) continue; // removed in 15.0 (docs/deprecations-v15.md)
       const now = budgets.find((x) => x.name === b.name);
       expect(now, b.name).toBeTruthy();
       expect(now!.limit, b.name).toBeLessThanOrEqual(b.limit);

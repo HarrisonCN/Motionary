@@ -43,7 +43,7 @@ const FILES = (): Record<string, Uint8Array> => ({
 
 describe('14.5 entry, version and budget', () => {
   it('ships 14.5.0 with motionary/studio/assets + motionary/components/studio-assets, zero runtime deps', () => {
-    expect(pkg.version).toMatch(/^14\.([5-9]|\d\d)\.\d+$/); // 14.5.0 or a later 14.x
+    expect(pkg.version).toMatch(/^(14\.([5-9]|\d\d)\.\d+|(1[5-9]|[2-9]\d)\.\d+\.\d+(-[0-9A-Za-z.]+)?)$/); // 14.5.0 or a later 14.x
     expect(STUDIO_ASSETS_VERSION).toBe(1);
     for (const p of ['./studio/assets', './components/studio-assets']) expect(pkg.exports[p]?.import?.default).toBe('./dist/components/studio-assets.js');
     expect(pkg.dependencies ?? {}).toEqual({});
@@ -52,6 +52,7 @@ describe('14.5 entry, version and budget', () => {
     const line = budgets.find((b) => b.import?.includes("pkg/components/studio-assets'"));
     expect(line && line.limit).toBeLessThanOrEqual(12288);
     for (const b of prevBudgets) {
+      if (b.name.includes("motionary/components/compat-v13'")) continue; // removed in 15.0 (docs/deprecations-v15.md)
       const now = budgets.find((x) => x.name === b.name);
       expect(now, b.name).toBeTruthy();
       expect(now!.limit, b.name).toBeLessThanOrEqual(b.limit);

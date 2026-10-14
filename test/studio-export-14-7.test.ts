@@ -58,7 +58,7 @@ const sameNum = (a: unknown, b: unknown) => (typeof a === 'number' && typeof b =
 
 describe('14.7 entry, version and budget', () => {
   it('ships motionary/studio/export (= motionary/components/studio-export) with zero runtime dependencies', () => {
-    expect(pkg.version).toMatch(/^14\.([7-9]|\d\d)\.\d+$/);
+    expect(pkg.version).toMatch(/^(14\.([7-9]|\d\d)\.\d+|(1[5-9]|[2-9]\d)\.\d+\.\d+(-[0-9A-Za-z.]+)?)$/);
     expect(STUDIO_EXPORT_VERSION).toBe(1);
     for (const p of ['./studio/export', './components/studio-export']) expect(pkg.exports[p]?.import?.default).toBe('./dist/components/studio-export.js');
     expect(pkg.dependencies ?? {}).toEqual({});
@@ -68,6 +68,7 @@ describe('14.7 entry, version and budget', () => {
     expect(line).toBeTruthy();
     expect(line!.limit).toBeLessThanOrEqual(15360);
     for (const b of prevBudgets) {
+      if (b.name.includes("motionary/components/compat-v13'")) continue; // removed in 15.0 (docs/deprecations-v15.md)
       const now = budgets.find((x) => x.name === b.name);
       expect(now, b.name).toBeTruthy();
       expect(now!.limit, b.name).toBeLessThanOrEqual(b.limit);
