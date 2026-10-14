@@ -842,4 +842,4 @@ exports.proposeAiEdit = proposeAiEdit;
 exports.renderSceneHeadless = renderSceneHeadless;
 exports.suggestSceneFixes = suggestSceneFixes;
 exports.validateAiEdit = validateAiEdit;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.8.0/dist/components/studio-ai.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.9.0/dist/components/studio-ai.cjs.map

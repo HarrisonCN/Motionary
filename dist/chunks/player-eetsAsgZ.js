@@ -365,4 +365,4 @@ function definePlayer(tag = 'usa-player') {
 }
 
 export { STORY_TEMPLATES as S, definePlayer as a, createPlayer as c, defineStory as d, formatCount as f, normalizePlayable as n, storyProgress as s };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.8.0/dist/chunks/player-eetsAsgZ.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.9.0/dist/chunks/player-eetsAsgZ.js.map

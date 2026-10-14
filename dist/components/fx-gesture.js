@@ -101,4 +101,4 @@ function registerGesture3Pack() {
 }
 
 export { GESTURE3_FX, orientationToTilt, pinchAngle, pinchScale, registerGesture3Pack };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.8.0/dist/components/fx-gesture.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.9.0/dist/components/fx-gesture.js.map

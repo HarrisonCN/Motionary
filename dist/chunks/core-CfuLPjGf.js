@@ -178,4 +178,4 @@ function gesture(el, h, o = {}) {
 }
 
 export { gesture as g, pinchScale as p, swipeDirection as s };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.8.0/dist/chunks/core-CfuLPjGf.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.9.0/dist/chunks/core-CfuLPjGf.js.map

@@ -22,13 +22,37 @@ const DEPRECATIONS_V14 = {
     'player-unversioned-json': 'animation JSON without "format" and "version" — add format "use-scroll-animate/animation", version 1, or migrate to scene v2',
     'normalize-animation': 'normalizeAnimation() — validate with validateSceneV2() / migrateToSceneV2() from motionary/scene',
 };
+/**
+ * 14.9: what 15.0 removes (docs/deprecations-v15.md; id = anchor). All of it is `motionary/compat-v13`
+ * and the CLI's 13.x codemod runner. Find uses with `npx motionary doctor --v15`, move with
+ * `npx motionary migrate --to 15`.
+ */
+const DEPRECATIONS_V15 = {
+    'compat-v13-entry': 'the motionary/compat-v13 entry (= motionary/components/compat-v13)',
+    'install-compat-v13': 'installCompatV13() (13.x player documents in <usa-player> / createPlayer()) — convert the data once with `npx motionary migrate --to 15`',
+    'normalize-animation': 'normalizeAnimation() — use validateSceneV2() / migrateToSceneV2() from motionary/scene',
+    'upgrade-legacy-animation': 'upgradeLegacyAnimation() — use migrateToSceneV2() from motionary/scene',
+    'old-codemods': '`motionary codemod <5–10>` (the 13.x upgrade tools) — run them with a 14.x CLI before upgrading, or use `npx motionary migrate --to 15`',
+};
+/** v14 notice → the 15.0 removal that ends it. */
+const V15_OF = {
+    'player-playground-format': 'install-compat-v13',
+    'player-unversioned-json': 'install-compat-v13',
+    'normalize-animation': 'normalize-animation',
+};
+const DOCS = 'https://github.com/HarrisonCN/Motionary/blob/main/docs/';
 /** Print a one-time `console.warn` for `id` (call it only behind the NODE_ENV check above). */
 function warnDeprecated(id) {
     if (seen.has(id) || globalThis.MOTIONARY_NO_DEPRECATION)
         return;
     seen.add(id);
+    const v14 = DEPRECATIONS_V14[id];
+    const v15 = v14 ? V15_OF[id] : id;
+    const tail = `removed in 15.0 together with motionary/compat-v13: ${DOCS}deprecations-v15.md#${v15}`;
     // eslint-disable-next-line no-console
-    console.warn(`[motionary] removed in 14.0, served by motionary/compat-v13 until 15.0: ${DEPRECATIONS_V14[id]}. See https://github.com/HarrisonCN/Motionary/blob/main/docs/deprecations-v14.md#${id}`);
+    console.warn(v14
+        ? `[motionary] removed in 14.0, served by motionary/compat-v13 until 15.0: ${v14}. See ${DOCS}deprecations-v14.md#${id} — ${tail}`
+        : `[motionary] ${DEPRECATIONS_V15[v15]} is ${tail}`);
 }
 
 /**
@@ -43,14 +67,16 @@ function warnDeprecated(id) {
  * - `upgradeLegacyAnimation()` — turn such a document into animation JSON v1 yourself (pure).
  * - The `usa-codemod-5` … `usa-codemod-10` tools: `npx motionary codemod <5–10>`.
  *
- * Planned removal: 15.0. Move off it with `npx motionary migrate` (data) and
- * `npx motionary migrate --code` (imports).
+ * Planned removal: 15.0 (docs/deprecations-v15.md, 14.9). Find every use with
+ * `npx motionary doctor --v15`; move off it with `npx motionary migrate --to 15`.
  */
 /** What this layer covers (ids match docs/deprecations-v14.md). */
 const COMPAT_V13 = {
     removedIn: '14.0',
     plannedRemoval: '15.0',
     covers: ['player-playground-format', 'player-unversioned-json', 'normalize-animation', 'old-codemods'],
+    /** 14.9: the anchors in docs/deprecations-v15.md. */
+    removalIds: ['compat-v13-entry', 'install-compat-v13', 'normalize-animation', 'upgrade-legacy-animation', 'old-codemods'],
 };
 function decodePlayground(state) {
     try {
@@ -67,6 +93,7 @@ function decodePlayground(state) {
 /**
  * A 13.x legacy document (playground state, or animation JSON without `format` / `version`) as
  * animation JSON v1; `null` for anything else (current documents included). Pure; never warns.
+ * @deprecated removed in 15.0 — use `migrateToSceneV2()` from `motionary/scene` (docs/deprecations-v15.md#upgrade-legacy-animation).
  */
 function upgradeLegacyAnimation(input) {
     let d = input;
@@ -86,8 +113,13 @@ function upgradeLegacyAnimation(input) {
         return { ...d, format: ANIMATION_FORMAT, version: 1 };
     return null;
 }
-/** Let `<usa-player>` / `createPlayer()` read the removed 13.x documents again. Returns an uninstall. */
+/**
+ * Let `<usa-player>` / `createPlayer()` read the removed 13.x documents again. Returns an uninstall.
+ * @deprecated removed in 15.0 — convert the data once with `npx motionary migrate --to 15` (docs/deprecations-v15.md#install-compat-v13).
+ */
 function installCompatV13() {
+    if (typeof process !== 'undefined' && process.env.NODE_ENV !== 'production')
+        warnDeprecated('install-compat-v13');
     return setLegacyAnimationLoader((d) => {
         const up = upgradeLegacyAnimation(d);
         if (up && typeof process !== 'undefined' && process.env.NODE_ENV !== 'production')
@@ -98,7 +130,7 @@ function installCompatV13() {
 /**
  * Validate / normalise an animation (object or JSON text); throws on anything unusable.
  * @deprecated removed from `motionary/components/effects` in 14.0 — use `validateSceneV2()` /
- * `migrateToSceneV2()` from `motionary/scene`.
+ * `migrateToSceneV2()` from `motionary/scene`. The whole entry is removed in 15.0 (docs/deprecations-v15.md#normalize-animation).
  */
 function normalizeAnimation(input) {
     if (typeof process !== 'undefined' && process.env.NODE_ENV !== 'production')
@@ -108,4 +140,4 @@ function normalizeAnimation(input) {
 }
 
 export { COMPAT_V13, installCompatV13, normalizeAnimation, upgradeLegacyAnimation };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.8.0/dist/components/compat-v13.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.9.0/dist/components/compat-v13.js.map

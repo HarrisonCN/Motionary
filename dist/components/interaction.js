@@ -332,4 +332,4 @@ function defineInteractionComponents() {
 }
 
 export { defineInteractionComponents, defineMagnetic, definePress, defineRipple, defineSpotlight, defineTilt };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.8.0/dist/components/interaction.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.9.0/dist/components/interaction.js.map
