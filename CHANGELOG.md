@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [15.0.0] - 2026-10-14
+
+**Motion Studio 2.0** (major). Same code as 15.0.0-rc.1 (below), which was published to npm `next`
+and verified (tarballs, ESM / CJS of every studio entry, CLI, MCP) before this release. `latest` moves to 15.0.0;
+`v15-line` and `v15-0` → 15.0.0; `v14-lts` → 14.9.0 (security and severe fixes at least until 16.0 ships); `next` →
+15.0.0 (the 15.0 release-candidate line is closed). Upgrade with `npx motionary doctor --v15`, then
+`npx motionary migrate --to 15` ([docs/migrating-to-v15.md](docs/migrating-to-v15.md)).
+
+### Added
+
+- `motionary/studio/app` (`createStudioApp`) — see 15.0.0-rc.1 below.
+
+### Removed (breaking)
+
+- `motionary/compat-v13`, the player legacy loader hook and `npx motionary codemod <5–10>` — see 15.0.0-rc.1 below.
+
+### Changed
+
+- Version 15.0.0; source-map URLs point at the `v15.0.0` tag. Zero runtime dependencies; lite 69.99 / 70 KB gzip;
+  no existing size budget raised.
+
 ## [15.0.0-rc.1] - 2026-10-14
 
 **Motion Studio 2.0** (major, release candidate — npm `next` only; `latest` stays on 14.x until 15.0.0). The 14.x
