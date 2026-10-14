@@ -15,4 +15,4 @@ function registerLightFollow() {
 exports.effect = effect;
 exports.register = registerLightFollow;
 exports.registerLightFollow = registerLightFollow;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.7.0/dist/effects/light-follow.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.8.0/dist/effects/light-follow.cjs.map

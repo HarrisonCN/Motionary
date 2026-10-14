@@ -15,4 +15,4 @@ function registerLiquidText() {
 exports.effect = effect;
 exports.register = registerLiquidText;
 exports.registerLiquidText = registerLiquidText;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.7.0/dist/effects/liquid-text.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.8.0/dist/effects/liquid-text.cjs.map

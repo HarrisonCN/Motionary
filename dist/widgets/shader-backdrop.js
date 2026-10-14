@@ -1,2 +1,2 @@
 export { d as defineShaderBackdrop } from '../chunks/shader-backdrop-C49tKiU1.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.7.0/dist/widgets/shader-backdrop.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.8.0/dist/widgets/shader-backdrop.js.map

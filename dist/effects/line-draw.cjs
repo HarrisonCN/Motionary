@@ -15,4 +15,4 @@ function registerLineDraw() {
 exports.effect = effect;
 exports.register = registerLineDraw;
 exports.registerLineDraw = registerLineDraw;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.7.0/dist/effects/line-draw.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.8.0/dist/effects/line-draw.cjs.map

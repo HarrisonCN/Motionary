@@ -1,5 +1,5 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-Crh-fTOg.js';
-import { P as Playable } from '../chunks/tween-B7fSC0dM.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-TizuMqAA.js';
+import { P as Playable } from '../chunks/tween-ChKWa3kh.js';
 
 const ALLOWED = /*#__PURE__*/ new Set(['time', 'value', 'thisComp', 'thisLayer', 'thisProperty', 'Math', 'wiggle', 'loopOut', 'loopIn', 'loopOutDuration', 'loopInDuration', 'linear', 'ease', 'easeIn', 'easeOut', 'clamp', 'valueAtTime', 'framesToTime', 'timeToFrames', 'degreesToRadians', 'radiansToDegrees', 'add', 'sub', 'mul', 'div', 'length', 'true', 'false', '$bm_rt', 'index']);
 function lex(src) {
@@ -1143,4 +1143,4 @@ function evalExpression(src, value, time = 0, fr = 30) {
 const vector = { id: 'vector', version: RUNTIME_VERSION, tier: 'standard', requires: ['core'], api: { evalExpression, loadLottie, parseDotLottie, unzipEntries, lottiePlayer, renderLottieFrame, inspectLottie, propValue, transformAt, trimContours, loadLottieImages } };
 
 export { ZIP_LIMITS, evalExpression, inflateEntry, inspectLottie, loadLottie, loadLottieImages, lottiePlayer, parseDotLottie, propValue, renderLottieFrame, transformAt, trimContours, unzipEntries, vector };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.7.0/dist/runtime/vector.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.8.0/dist/runtime/vector.js.map

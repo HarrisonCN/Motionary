@@ -1,2 +1,2 @@
 export { defineSnapCarousel } from '../components/snap-carousel.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.7.0/dist/widgets/snap-carousel.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.8.0/dist/widgets/snap-carousel.js.map

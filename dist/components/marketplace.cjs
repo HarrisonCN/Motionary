@@ -98,4 +98,4 @@ exports.fetchMarketplace = fetchMarketplace;
 exports.installPlugin = installPlugin;
 exports.installedPlugins = installedPlugins;
 exports.searchPlugins = searchPlugins;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.7.0/dist/components/marketplace.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.8.0/dist/components/marketplace.cjs.map

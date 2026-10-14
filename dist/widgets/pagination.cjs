@@ -5,4 +5,4 @@ var widgets_pagination = require('../chunks/pagination-DHmYZZU9.cjs');
 
 
 exports.definePagination = widgets_pagination.definePagination;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.7.0/dist/widgets/pagination.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.8.0/dist/widgets/pagination.cjs.map
