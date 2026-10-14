@@ -1,6 +1,10 @@
 # Deprecations
 
-## Deprecated in 13.9, planned for removal in 14.0
+## Deprecated in 14.9, removed in 15.0
+
+See [deprecations-v15.md](./deprecations-v15.md): the whole `motionary/compat-v13` entry (`installCompatV13()`, `normalizeAnimation()`, `upgradeLegacyAnimation()`) and `npx motionary codemod <5–10>`. Each warns once in development only (stripped from production builds). Find uses with `npx motionary doctor --v15`, move with `npx motionary migrate --to 15` (backups + loss report). Guide: [migrating-to-v15.md](./migrating-to-v15.md).
+
+## Deprecated in 13.9, removed in 14.0 (served by `motionary/compat-v13` until 15.0)
 
 See [deprecations-v14.md](./deprecations-v14.md): playground documents and unversioned animation JSON in `<usa-player>`, `normalizeAnimation()`, and the `usa-codemod-5` to `usa-codemod-10` bins. Each one warns once in development only, and the warnings are stripped from production builds. Migration guide (draft): [migrating-to-v14.md](./migrating-to-v14.md). Scene Format v2 draft: [scene-v2.md](./scene-v2.md).
 

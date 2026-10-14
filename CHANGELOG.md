@@ -7,6 +7,52 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [14.9.0] - 2026-10-14
+
+**Getting ready for 15.0** (P0). Every 15.0 removal now warns in development, is found by the CLI, has a migration
+path with backups and a loss report, and is documented before 15.0 ships. 15.0 removes only the 13.x compatibility
+layer: the `motionary/compat-v13` entry and `npx motionary codemod <5–10>`. No breaking changes in 14.9. Zero
+runtime dependencies; no new entry, `motionary/components/lite` unchanged (≤ 70 KB gzip) and no budget changed.
+[docs/deprecations-v15.md](docs/deprecations-v15.md) · [docs/migrating-to-v15.md](docs/migrating-to-v15.md)
+
+### Added
+
+- **`npx motionary doctor --v15 [paths…] [--json]`**: lists every use of what 15.0 removes — `motionary/compat-v13`
+  imports and requires (`compat-import`, with the API used), `motionary codemod <5–10>` / `usa-codemod-5…10` calls in
+  scripts and docs (`old-codemod`) and JSON files that are playground documents or animation JSON without `format` /
+  `version` (`legacy-data`); each finding has `file`, `line`, `id` (anchor in deprecations-v15.md) and `fix`. Exit 1
+  when anything is found.
+- **`npx motionary migrate --to 15 [paths…] [--write] [--report file] [--json]`** (dry run by default): converts
+  legacy animation data **in place** to Scene v2 and removes plain `installCompatV13()` uses, each after a backup
+  (`<file>.bak`; an existing backup is never overwritten: `.bak.1`, `.bak.2` …); lists what has no mechanical
+  replacement (`normalizeAnimation`, `upgradeLegacyAnimation`, kept uninstall handles, old codemod scripts) under
+  `manual` with the reason; writes a `motionary-migrate-report` v1 JSON (per file: `changes`, `losses`, `warnings`).
+  Idempotent: a second run changes nothing.
+- Studio project files (`*.motionary.json` / `"format": "motionary-studio"`) that are truncated, corrupted or from an
+  unknown version are reported under `problems` and never rewritten (exit 1).
+- `DEPRECATIONS_V15` (ids = anchors in docs/deprecations-v15.md) and `COMPAT_V13.removalIds`.
+- docs: `deprecations-v15.md`, `migrating-to-v15.md`; `deprecations.md`, `versions.md`, README updated.
+
+### Changed
+
+- `motionary/compat-v13` notices (development only, once per id) now say that the item is removed in 15.0 and link its
+  section in deprecations-v15.md; `installCompatV13()` itself warns once when called. Production builds still drop all
+  notice text (13.9 test).
+- `npx motionary codemod <5–10>` prints a one-line stderr notice that the runner is removed in 15.0 (11–13 unchanged).
+- `@deprecated` JSDoc on `installCompatV13` and `upgradeLegacyAnimation` (15.0).
+
+### Not changed (decided)
+
+- The physics world format `motionary-scene@1` (`motionary/runtime/format-scene`, `<usa-physics-playground>`) is not
+  Scene Format v1 and cannot be expressed in Scene v2, so the roadmap item “make `motionary-scene@1` read-only in
+  15.0” is dropped; it stays as it is.
+
+### Tests
+
+- `test/v15-prep-14-9.test.ts` (11): removal list / anchors / fixes, notices, codemod notice, doctor --v15 (API + CLI
+  exit codes), migrate --to 15 (dry run, write + backups + report + idempotence, `.bak.N`), project recovery, and a
+  golden corpus: the 13.x fixtures + shipped templates migrate to exactly the golden Scene v2 files with 0 losses.
+
 ## [14.8.0] - 2026-10-14
 
 **Templates & extension ecosystem**. A Motion Studio project becomes a reusable, integrity-checked template that can be

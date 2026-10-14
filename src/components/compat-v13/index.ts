@@ -10,8 +10,8 @@
  * - `upgradeLegacyAnimation()` — turn such a document into animation JSON v1 yourself (pure).
  * - The `usa-codemod-5` … `usa-codemod-10` tools: `npx motionary codemod <5–10>`.
  *
- * Planned removal: 15.0. Move off it with `npx motionary migrate` (data) and
- * `npx motionary migrate --code` (imports).
+ * Planned removal: 15.0 (docs/deprecations-v15.md, 14.9). Find every use with
+ * `npx motionary doctor --v15`; move off it with `npx motionary migrate --to 15`.
  */
 import { setLegacyAnimationLoader, normalizePlayable, ANIMATION_FORMAT } from '../effects/player';
 import type { AnimationJSON, AnimationTrack } from '../effects/player';
@@ -24,6 +24,8 @@ export const COMPAT_V13 = {
   removedIn: '14.0',
   plannedRemoval: '15.0',
   covers: ['player-playground-format', 'player-unversioned-json', 'normalize-animation', 'old-codemods'],
+  /** 14.9: the anchors in docs/deprecations-v15.md. */
+  removalIds: ['compat-v13-entry', 'install-compat-v13', 'normalize-animation', 'upgrade-legacy-animation', 'old-codemods'],
 } as const;
 
 function decodePlayground(state: string): AnimationTrack[] {
@@ -41,6 +43,7 @@ function decodePlayground(state: string): AnimationTrack[] {
 /**
  * A 13.x legacy document (playground state, or animation JSON without `format` / `version`) as
  * animation JSON v1; `null` for anything else (current documents included). Pure; never warns.
+ * @deprecated removed in 15.0 — use `migrateToSceneV2()` from `motionary/scene` (docs/deprecations-v15.md#upgrade-legacy-animation).
  */
 export function upgradeLegacyAnimation(input: unknown): AnimationJSON | null {
   let d: any = input;
@@ -51,8 +54,12 @@ export function upgradeLegacyAnimation(input: unknown): AnimationJSON | null {
   return null;
 }
 
-/** Let `<usa-player>` / `createPlayer()` read the removed 13.x documents again. Returns an uninstall. */
+/**
+ * Let `<usa-player>` / `createPlayer()` read the removed 13.x documents again. Returns an uninstall.
+ * @deprecated removed in 15.0 — convert the data once with `npx motionary migrate --to 15` (docs/deprecations-v15.md#install-compat-v13).
+ */
 export function installCompatV13(): () => void {
+  if (typeof process !== 'undefined' && process.env.NODE_ENV !== 'production') warnDeprecated('install-compat-v13');
   return setLegacyAnimationLoader((d) => {
     const up = upgradeLegacyAnimation(d);
     if (up && typeof process !== 'undefined' && process.env.NODE_ENV !== 'production') warnDeprecated(d.format ? 'player-playground-format' : 'player-unversioned-json');
@@ -63,7 +70,7 @@ export function installCompatV13(): () => void {
 /**
  * Validate / normalise an animation (object or JSON text); throws on anything unusable.
  * @deprecated removed from `motionary/components/effects` in 14.0 — use `validateSceneV2()` /
- * `migrateToSceneV2()` from `motionary/scene`.
+ * `migrateToSceneV2()` from `motionary/scene`. The whole entry is removed in 15.0 (docs/deprecations-v15.md#normalize-animation).
  */
 export function normalizeAnimation(input: string | AnimationJSON | Record<string, any>): Required<Pick<AnimationJSON, 'tracks' | 'duration' | 'loop' | 'name'>> {
   if (typeof process !== 'undefined' && process.env.NODE_ENV !== 'production') warnDeprecated('normalize-animation');

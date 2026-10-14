@@ -32,6 +32,9 @@ is tree-shakeable and has a gzip budget checked in CI, and every animation respe
 > layer order / lock / hide, guides and snapping, drag / resize / rotate with pointer and touch (pinch-zoom), keyboard
 > nudge — every edit a lossless Scene Format v2 op through the timeline editor's undo history.
 >
+> 14.9: **Getting ready for 15.0** — [`npx motionary doctor --v15`](./docs/migrating-to-v15.md) lists everything 15.0
+> removes (only the 13.x compat layer) and `npx motionary migrate --to 15` moves off it with backups and a loss report.
+>
 > 14.8: **Studio templates** — [`motionary/studio/templates`](./docs/studio-templates.md): install / preview / uninstall
 > integrity-checked templates (license and required modules visible first; uninstall restores the project byte for byte).
 >
@@ -403,7 +406,7 @@ Coming from another library: [AOS](./docs/migration-from-aos.md) · [GSAP Scroll
 
 ## Versions and compatibility
 
-- **npm dist-tags:** `latest` is the newest release of the current major (14.8.0; minors move it since 14.1). Each minor release also gets its own tag `v<major>-<minor>`
+- **npm dist-tags:** `latest` is the newest release of the current major (14.9.0; minors move it since 14.1). Each minor release also gets its own tag `v<major>-<minor>`
   (for example `v14-1`), and `v14-line` follows the 14.x line. `motionary` and `use-scroll-animate` are published together at the same versions.
 - **CDN:** URLs pin a major (`motionary@14`). Exact pins (`motionary@12.4.0`) keep working.
 - **Semver:** breaking changes come only in majors, each with a guide and a codemod. Deprecations stay in place until the

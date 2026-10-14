@@ -165,3 +165,24 @@ describe('Studio project recovery: damaged files are reported, never rewritten',
     expect(existsSync(join(d, 'cut.motionary.json.bak'))).toBe(false);
   });
 });
+
+describe('migration corpus (golden files): 0 unexpected losses', () => {
+  it('migrate --to 15 --write on the 13.x fixtures + shipped templates: legacy files become exactly the golden Scene v2, nothing lost, everything else untouched', () => {
+    const d = mkdtempSync(join(tmpdir(), 'mo-v15g-'));
+    const FX = join(ROOT, 'test/fixtures/scene-v2'), TP = join(ROOT, 'templates');
+    mkdirSync(join(d, 'fx')); mkdirSync(join(d, 'tp'));
+    for (const f of readdirSync(FX)) writeFileSync(join(d, 'fx', f), readFileSync(join(FX, f)));
+    for (const f of readdirSync(TP)) writeFileSync(join(d, 'tp', f), readFileSync(join(TP, f)));
+    const r = CLI.migrateTo15([d], { write: true, sceneV2: S });
+    expect(r.problems).toEqual([]);
+    expect(r.manual).toEqual([]);
+    const legacy = r.files.filter((x: any) => x.kind === 'legacy-data');
+    expect(legacy.map((x: any) => x.file.slice(d.length + 1)).sort()).toEqual(['fx/player-unversioned.json', 'fx/playground.json']);
+    for (const x of legacy) {
+      expect(x.losses, x.file).toEqual([]);
+      expect(readFileSync(x.file, 'utf8')).toBe(readFileSync(join(FX, x.file.slice(d.length + 4).replace(/\.json$/, '.scene.json')), 'utf8'));
+    }
+    for (const f of readdirSync(TP)) expect(readFileSync(join(d, 'tp', f), 'utf8')).toBe(readFileSync(join(TP, f), 'utf8'));
+    for (const f of readdirSync(FX).filter((n) => !/^(playground|player-unversioned)\.json$/.test(n))) expect(readFileSync(join(d, 'fx', f), 'utf8'), f).toBe(readFileSync(join(FX, f), 'utf8'));
+  });
+});
