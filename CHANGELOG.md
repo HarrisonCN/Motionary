@@ -43,7 +43,7 @@ runtime dependencies; no new entry, `motionary/components/lite` unchanged (≤ 7
 
 ### Not changed (decided)
 
-- The physics world format `motionary-scene@1` (`motionary/runtime/format-scene`, `<usa-physics-playground>`) is not
+- The physics world format `motionary-scene@1` (`motionary/runtime/format-scene`, used by the physics playground widget) is not
   Scene Format v1 and cannot be expressed in Scene v2, so the roadmap item “make `motionary-scene@1` read-only in
   15.0” is dropped; it stays as it is.
 
