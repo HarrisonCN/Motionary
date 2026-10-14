@@ -241,7 +241,7 @@ export async function createStudioApp(root: HTMLElement, o: StudioAppOptions = {
     const out = await app.exportStandalone({ inline: true });
     const html = out.files.get('index.html');
     if (typeof Blob === 'function' && typeof URL.createObjectURL === 'function' && html !== undefined) {
-      download = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
+      download = URL.createObjectURL(new Blob([html as BlobPart], { type: 'text/html' }));
       let a = el.querySelector<HTMLAnchorElement>('[data-app="download"]');
       if (!a) { a = d.createElement('a'); a.dataset.app = 'download'; a.textContent = 'Download export'; bar.append(a); }
       a.href = download;
