@@ -11,4 +11,4 @@ function registerPaperUnfold() {
 }
 
 export { effect, registerPaperUnfold as register, registerPaperUnfold };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0-rc.1/dist/effects/paper-unfold.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0/dist/effects/paper-unfold.js.map

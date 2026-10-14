@@ -77,4 +77,4 @@ function defineBadgeWall(tag = 'usa-badge-wall') {
 
 exports.badgeProgress = badgeProgress;
 exports.defineBadgeWall = defineBadgeWall;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0-rc.1/dist/chunks/badge-wall-CITexuW7.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0/dist/chunks/badge-wall-CITexuW7.cjs.map

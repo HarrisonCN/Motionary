@@ -17,4 +17,4 @@ exports.spring = components_motion.spring;
 exports.stagger = components_motion.stagger;
 exports.timeline = components_motion.timeline;
 exports.toEasingFn = components_motion.toEasingFn;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0-rc.1/dist/components/motion.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0/dist/components/motion.cjs.map

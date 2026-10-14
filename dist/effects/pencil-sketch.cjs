@@ -15,4 +15,4 @@ function registerPencilSketch() {
 exports.effect = effect;
 exports.register = registerPencilSketch;
 exports.registerPencilSketch = registerPencilSketch;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0-rc.1/dist/effects/pencil-sketch.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0/dist/effects/pencil-sketch.cjs.map

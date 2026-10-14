@@ -136,4 +136,4 @@ function nativeTokens() {
 }
 
 export { entranceFrom, nativeEasing, nativeTokens, toFlutter, toReactNative };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0-rc.1/dist/components/native.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0/dist/components/native.js.map

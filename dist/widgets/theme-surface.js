@@ -59,4 +59,4 @@ function defineThemeSurface(tag = 'usa-theme-surface') {
 }
 
 export { defineThemeSurface };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0-rc.1/dist/widgets/theme-surface.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0/dist/widgets/theme-surface.js.map

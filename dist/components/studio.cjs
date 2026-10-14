@@ -822,4 +822,4 @@ exports.springBezier = project.springBezier;
 exports.springParams = project.springParams;
 exports.STUDIO_VERSION = STUDIO_VERSION;
 exports.createStudio = createStudio;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0-rc.1/dist/components/studio.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0/dist/components/studio.cjs.map

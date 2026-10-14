@@ -138,4 +138,4 @@ function defineOtp(tag = 'usa-otp') {
 
 exports.defineOtp = defineOtp;
 exports.sanitizeCode = sanitizeCode;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0-rc.1/dist/chunks/otp-DUyEWYMi.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0/dist/chunks/otp-DUyEWYMi.cjs.map

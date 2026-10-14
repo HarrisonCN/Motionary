@@ -105,4 +105,4 @@ exports.supportsNativeScrub = core.supportsNativeScrub;
 exports.timeline = core.timeline;
 exports.defineTimeline = defineTimeline;
 exports.defineTimelineComponents = defineTimelineComponents;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0-rc.1/dist/components/timeline.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0/dist/components/timeline.cjs.map

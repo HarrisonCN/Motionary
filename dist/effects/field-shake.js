@@ -11,4 +11,4 @@ function registerFieldShake() {
 }
 
 export { effect, registerFieldShake as register, registerFieldShake };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0-rc.1/dist/effects/field-shake.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0/dist/effects/field-shake.js.map

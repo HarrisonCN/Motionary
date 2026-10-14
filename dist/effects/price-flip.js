@@ -11,4 +11,4 @@ function registerPriceFlip() {
 }
 
 export { effect, registerPriceFlip as register, registerPriceFlip };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0-rc.1/dist/effects/price-flip.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0/dist/effects/price-flip.js.map

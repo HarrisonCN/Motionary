@@ -90,4 +90,4 @@ function defineRadar(tag = 'usa-radar') {
 }
 
 export { defineRadar as d, parseTargets as p };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0-rc.1/dist/chunks/radar-t201zj2r.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0/dist/chunks/radar-t201zj2r.js.map

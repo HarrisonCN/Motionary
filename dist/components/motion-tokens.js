@@ -808,4 +808,4 @@ function motionTokensFromFigma(json, o = {}) {
 }
 
 export { MOTION_TOKENS_2, MOTION_TOKENS_VERSION, REDUCED_MOTION_MODE, SEMANTIC_KINDS, applyMotionTokenSet, defineMotionTokens, isCssEasing, kebab, motionKeyframes, motionOptions, motionTokenSetFromDTCG, motionTokenSetToCss, motionTokenSetToDTCG, motionTokenSetVars, motionTokensFromFigma, motionTokensToFigma, prefersReducedMotion, reducedMotionOverrides, resolveMotionToken, resolveSemantic, toSceneTokens, tokenRefPath, validateMotionTokens, withMode, withSceneTokens };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0-rc.1/dist/components/motion-tokens.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0/dist/components/motion-tokens.js.map
