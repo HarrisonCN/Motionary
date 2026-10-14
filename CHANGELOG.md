@@ -37,8 +37,8 @@ unchanged; the new entry has its own size-budget line and no existing line was r
   older tests that pinned the exact tool list follow the appended tool.
 - `docs/ROADMAP.md` (the project's planning document) is no longer in the npm package; it stays on GitHub. This keeps the
   package under its unchanged 14 MB unpacked limit (15.1 adds ~42 KB; package 13.97 MB unpacked, 3.58 MB packed).
-- Test: the `<usa-rive>` missing-runtime test waits for `usa:runtime-missing` instead of a fixed 30 ms (it flaked under
-  load); same assertions.
+- Tests only: test/widgets-10-6 (Rive, missing runtime) waits for the `usa:runtime-missing` event instead of a fixed
+  30 ms (it flaked under load); same assertions, no component change.
 
 ## [15.0.0] - 2026-10-14
 
