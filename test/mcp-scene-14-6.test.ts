@@ -26,7 +26,7 @@ const scene = (component?: any) => ({
 
 describe('14.6 tool contracts (additive)', () => {
   it('server 2.2; check_compatibility / suggest_fix / validate_snippet / suggest_motion accept scene inputs, old required args unchanged in meaning', () => {
-    expect(M.SERVER_INFO.version).toBe('2.2.0');
+    expect(M.SERVER_INFO.version).toMatch(/^2\.([2-9]|\d\d)\.\d+$/); // 14.8: 2.3 is additive
     const t = (n: string) => M.TOOLS.find((x: any) => x.name === n);
     expect(t('check_compatibility').inputSchema.properties.scene).toBeTruthy();
     expect(t('suggest_fix').inputSchema.properties.scene).toBeTruthy();
