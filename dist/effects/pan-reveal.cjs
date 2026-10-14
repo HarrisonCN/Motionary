@@ -15,4 +15,4 @@ function registerPanReveal() {
 exports.effect = effect;
 exports.register = registerPanReveal;
 exports.registerPanReveal = registerPanReveal;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.9.0/dist/effects/pan-reveal.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0-rc.1/dist/effects/pan-reveal.cjs.map

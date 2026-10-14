@@ -563,4 +563,4 @@ exports.solveLayoutTransform = solveLayoutTransform;
 exports.supportsCrossDocumentViewTransitions = supportsCrossDocumentViewTransitions;
 exports.supportsViewTransitions = supportsViewTransitions;
 exports.viewTransitionName = viewTransitionName;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.9.0/dist/components/motion-layout.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0-rc.1/dist/components/motion-layout.cjs.map

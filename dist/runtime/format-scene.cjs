@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-0F271MlM.cjs');
+var registry = require('../chunks/registry-BAlIG6Xb.cjs');
 
 /**
  * `motionary/runtime/format-scene` (10.7) — the versioned scene format
@@ -238,4 +238,4 @@ exports.parseScene = parseScene;
 exports.sceneToWorld = sceneToWorld;
 exports.validateScene = validateScene;
 exports.worldToScene = worldToScene;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.9.0/dist/runtime/format-scene.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0-rc.1/dist/runtime/format-scene.cjs.map

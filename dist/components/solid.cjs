@@ -53,4 +53,4 @@ exports.bindUsa = bind.bindUsa;
 exports.usaEventName = bind.usaEventName;
 exports.defineUsa = defineUsa;
 exports.usa = usa;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.9.0/dist/components/solid.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0-rc.1/dist/components/solid.cjs.map

@@ -1,2 +1,2 @@
-export { d as defineField } from '../chunks/field-B_JKBZ66.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.9.0/dist/widgets/field.js.map
+export { d as defineField } from '../chunks/field-DDv6HlpL.js';
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0-rc.1/dist/widgets/field.js.map

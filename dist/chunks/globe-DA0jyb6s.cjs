@@ -167,4 +167,4 @@ function defineGlobe(tag = 'usa-globe') {
 exports.defineGlobe = defineGlobe;
 exports.parseMarkers = parseMarkers;
 exports.project = project;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.9.0/dist/chunks/globe-DA0jyb6s.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0-rc.1/dist/chunks/globe-DA0jyb6s.cjs.map

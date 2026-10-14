@@ -1,5 +1,5 @@
-import { s as setPauseHook, o as onFrame$1, r as raf$1 } from '../chunks/base-ByyAdGqz.js';
-export { b as caf } from '../chunks/base-ByyAdGqz.js';
+import { s as setPauseHook, o as onFrame$1, r as raf$1 } from '../chunks/base-QrtwTUOO.js';
+export { b as caf } from '../chunks/base-QrtwTUOO.js';
 
 /**
  * motionary/components/offscreen (13.4) — pauses scheduler work nobody can see.
@@ -62,4 +62,4 @@ const raf = (cb, el) => (installOffscreenPause(), raf$1(cb, el));
 const onFrame = (fn, el) => (installOffscreenPause(), onFrame$1(fn, el));
 
 export { installOffscreenPause, onFrame, raf };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.9.0/dist/components/offscreen.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0-rc.1/dist/components/offscreen.js.map

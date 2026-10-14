@@ -1,5 +1,5 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-CZLybXRo.js';
-import { a as animatedImagePlayer, b as browserDecode, c as composeFrames, d as bytesOf, u as u8, f as fixDelay } from '../chunks/anim-image-s-gAMA-E.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-CnwVg7c-.js';
+import { a as animatedImagePlayer, b as browserDecode, c as composeFrames, d as bytesOf, u as u8, f as fixDelay } from '../chunks/anim-image-DGUBo9Ht.js';
 
 /**
  * `motionary/runtime/format-webp` (10.4) — animated WebP loader written for
@@ -109,4 +109,4 @@ async function loadWebp(src, o = {}) {
 const formatWebp = { id: 'format-webp', version: RUNTIME_VERSION, tier: 'standard', requires: ['core'], api: { parseWebp, webpFrameFiles, decodeWebp, loadWebp, animatedImagePlayer } };
 
 export { animatedImagePlayer, decodeWebp, formatWebp, loadWebp, parseWebp, riffChunks, webpFrameFiles };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.9.0/dist/runtime/format-webp.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0-rc.1/dist/runtime/format-webp.js.map

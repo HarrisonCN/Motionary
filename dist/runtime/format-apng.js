@@ -1,5 +1,5 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-CZLybXRo.js';
-import { a as animatedImagePlayer, b as browserDecode, c as composeFrames, d as bytesOf, u as u8, f as fixDelay, e as crc32 } from '../chunks/anim-image-s-gAMA-E.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-CnwVg7c-.js';
+import { a as animatedImagePlayer, b as browserDecode, c as composeFrames, d as bytesOf, u as u8, f as fixDelay, e as crc32 } from '../chunks/anim-image-DGUBo9Ht.js';
 
 /**
  * `motionary/runtime/format-apng` (10.4) — animated PNG (APNG) loader written
@@ -117,4 +117,4 @@ async function loadApng(src, o = {}) {
 const formatApng = { id: 'format-apng', version: RUNTIME_VERSION, tier: 'standard', requires: ['core'], api: { parseApng, apngFramePngs, decodeApng, loadApng, animatedImagePlayer } };
 
 export { animatedImagePlayer, apngFramePngs, decodeApng, formatApng, loadApng, parseApng, pngChunks };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.9.0/dist/runtime/format-apng.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0-rc.1/dist/runtime/format-apng.js.map

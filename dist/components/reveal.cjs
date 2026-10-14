@@ -360,4 +360,4 @@ exports.defineScrolly = defineScrolly;
 exports.defineStagger = defineStagger;
 exports.readScrollProgress = readScrollProgress;
 exports.revealKeyframes = revealKeyframes;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.9.0/dist/components/reveal.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0-rc.1/dist/components/reveal.cjs.map

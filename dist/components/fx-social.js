@@ -1,4 +1,4 @@
-import { registerEffects } from '../chunks/registry-RLD_spxR.js';
+import { registerEffects } from '../chunks/registry-B1ipgYF7.js';
 
 /** Fan-out angles (deg) for `n` floating emoji, centred on straight up (7.4). */
 function fanAngles(n, spread = 60) {
@@ -113,4 +113,4 @@ function registerSocialPack() {
 }
 
 export { SOCIAL_FX, fanAngles, registerSocialPack };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.9.0/dist/components/fx-social.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0-rc.1/dist/components/fx-social.js.map

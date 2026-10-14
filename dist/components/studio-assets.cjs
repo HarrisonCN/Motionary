@@ -350,4 +350,4 @@ exports.relinkAssets = relinkAssets;
 exports.resolveAssetPath = resolveAssetPath;
 exports.toBase64 = toBase64;
 exports.unpackStudioProject = unpackStudioProject;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.9.0/dist/components/studio-assets.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0-rc.1/dist/components/studio-assets.cjs.map

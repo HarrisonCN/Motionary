@@ -15,7 +15,7 @@ const propName = { pattern: '^(--[A-Za-z0-9_-]+|[a-zA-Z][A-Za-z0-9_-]*)$', not: 
 const tokenName = { pattern: '^[A-Za-z0-9_-]+$' };
 const SCENE_V2_SCHEMA = {
     $schema: 'https://json-schema.org/draft/2020-12/schema',
-    $id: 'https://cdn.jsdelivr.net/npm/motionary@14/docs/scene-v2.schema.json',
+    $id: 'https://cdn.jsdelivr.net/npm/motionary@15/docs/scene-v2.schema.json',
     title: 'motionary-scene v2 (draft)',
     description: 'Draft of the 14.0 scene format: one document for timeline layers, <usa-player> tracks, component motion props and motion tokens. Values may reference tokens as "{duration.fast}".',
     type: 'object',
@@ -120,4 +120,4 @@ exports.serializeSceneV2 = v2.serializeSceneV2;
 exports.tokenizeValue = v2.tokenizeValue;
 exports.validateSceneV2 = v2.validateSceneV2;
 exports.SCENE_V2_SCHEMA = SCENE_V2_SCHEMA;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.9.0/dist/components/scene-v2.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0-rc.1/dist/components/scene-v2.cjs.map

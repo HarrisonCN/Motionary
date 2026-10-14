@@ -1,4 +1,4 @@
-import { registerEffects } from '../chunks/registry-RLD_spxR.js';
+import { registerEffects } from '../chunks/registry-B1ipgYF7.js';
 import { a as all } from '../chunks/shared-CkKHWrtJ.js';
 
 const fade = (el, ctx) => ctx.animate(el, [{ opacity: 0 }, { opacity: 1 }], { duration: 250 });
@@ -150,4 +150,4 @@ function registerChartPack() {
 }
 
 export { CHART_FX, parseFigure, registerChartPack };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.9.0/dist/components/fx-chart.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0-rc.1/dist/components/fx-chart.js.map

@@ -1,6 +1,6 @@
-import { f as defineElement, e as clamp } from '../chunks/base-ByyAdGqz.js';
-import { d as springEasing, c as createSpring, s as snapTo, a as rubberBand, p as projectInertia } from '../chunks/spring-CLwlIQHm.js';
-export { S as SPRING_PRESETS, l as linearEasing, r as resolveSpring, b as spring, e as springSamples, f as stepSpring, g as supportsLinearEasing } from '../chunks/spring-CLwlIQHm.js';
+import { f as defineElement, d as clamp } from '../chunks/base-QrtwTUOO.js';
+import { d as springEasing, c as createSpring, s as snapTo, a as rubberBand, p as projectInertia } from '../chunks/spring-YKWCyYGf.js';
+export { S as SPRING_PRESETS, l as linearEasing, r as resolveSpring, b as spring, e as springSamples, f as stepSpring, g as supportsLinearEasing } from '../chunks/spring-YKWCyYGf.js';
 
 var css$2 = "usa-spring{display:inline-block;transform-origin:50% 70%}usa-spring[block]{display:block}usa-spring[effect=\"drop\"]{transform-origin:50% 100%}usa-spring[data-state=\"hidden\"]{opacity:0}usa-spring[trigger=\"click\"],usa-spring[trigger=\"hover\"]{cursor:pointer;-webkit-tap-highlight-color:transparent}";
 
@@ -427,4 +427,4 @@ function definePhysicsComponents() {
 }
 
 export { SPRING_EFFECTS, createSpring, defineDraggable, defineOverscroll, definePhysicsComponents, defineSpring, projectInertia, rubberBand, snapTo, springEasing, springEffectKeyframes };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.9.0/dist/components/physics.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0-rc.1/dist/components/physics.js.map

@@ -15,4 +15,4 @@ function registerReadReceipt() {
 exports.effect = effect;
 exports.register = registerReadReceipt;
 exports.registerReadReceipt = registerReadReceipt;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v14.9.0/dist/effects/read-receipt.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0-rc.1/dist/effects/read-receipt.cjs.map
