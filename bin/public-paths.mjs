@@ -40,6 +40,7 @@ export const LAYER_ALIASES = {
   'studio/store': 'components/studio-store',
   // 16.0: Scene Format v3 (15.9 preview name kept as an alias: scene/v3-preview → the same files)
   'scene/v3': 'components/scene-v3',
+  'scene/symbols': 'components/scene-symbols',
   'scene/v3-preview': 'components/scene-v3',
   'components/scene-v3-preview': 'components/scene-v3',
 };

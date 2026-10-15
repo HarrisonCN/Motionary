@@ -167,6 +167,11 @@
     "limit": 12288
   },
   {
+    "name": "import 'motionary/components/scene-symbols' (= motionary/scene/symbols, 16.1 Symbols: createSymbol / addInstance / setOverride / clearOverride / updateSymbol / renameSymbol / detachInstance / symbolUsage / validateSymbols on Scene v3 components, symbolsToCss with one @keyframes per symbol layer; includes the import-free v3 reader; own entry, not in lite / scene / studio; new line)",
+    "import": "export * from 'pkg/components/scene-symbols';",
+    "limit": 4096
+  },
+  {
     "name": "import 'motionary/components/interaction'",
     "import": "export * from 'pkg/components/interaction';",
     "limit": 6400

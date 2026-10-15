@@ -5,4 +5,4 @@ var widgets_lyrics = require('../chunks/lyrics-CRB7dA1j.cjs');
 
 
 exports.defineLyrics = widgets_lyrics.defineLyrics;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0/dist/widgets/lyrics.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.1.0/dist/widgets/lyrics.cjs.map

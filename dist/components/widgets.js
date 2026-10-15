@@ -140,25 +140,25 @@ import { defineMotionSpec } from '../widgets/motion-spec.js';
 import { defineNativePreview } from '../widgets/native-preview.js';
 import { definePluginCard } from '../widgets/plugin-card.js';
 import { defineInstallButton } from '../widgets/install-button.js';
-import { d as defineScrollScene } from '../chunks/scroll-scene-B-4b0Ijq.js';
-export { p as parseScrub } from '../chunks/scroll-scene-B-4b0Ijq.js';
+import { d as defineScrollScene } from '../chunks/scroll-scene-Chh_nc5L.js';
+export { p as parseScrub } from '../chunks/scroll-scene-Chh_nc5L.js';
 import { defineMotionInspector } from '../widgets/motion-inspector.js';
 import { defineRouteTransition } from '../widgets/route-transition.js';
 import { defineTextSplitter } from '../widgets/text-splitter.js';
 import { defineScrollRing } from '../widgets/scroll-ring.js';
 import { defineParallaxLayers } from '../widgets/parallax-layers.js';
 import { defineSmoothScroll } from '../widgets/smooth-scroll.js';
-import { d as defineGlScene } from '../chunks/gl-scene-CT4L4pJC.js';
+import { d as defineGlScene } from '../chunks/gl-scene-BqiVwX2S.js';
 import { d as defineGpuParticles } from '../chunks/gpu-particles-BCpT6_0b.js';
 export { P as PARTICLE_DRAW_WGSL, a as PARTICLE_SIM_WGSL } from '../chunks/gpu-particles-BCpT6_0b.js';
 import { d as defineShaderBackdrop } from '../chunks/shader-backdrop-JPI5yk7O.js';
 export { B as BACKDROP_PRESETS, P as POST_PASSES } from '../chunks/shader-backdrop-JPI5yk7O.js';
-import { d as defineLottiePlayer } from '../chunks/lottie-player-DKGirn7s.js';
+import { d as defineLottiePlayer } from '../chunks/lottie-player-BZQpJ3mP.js';
 import { d as defineRive } from '../chunks/rive-uSPb8arE.js';
 export { R as RIVE_CDN, a as RIVE_PEER, l as loadRiveRuntime, p as provideRiveRuntime } from '../chunks/rive-uSPb8arE.js';
 import { defineTokenEditor } from '../widgets/token-editor.js';
-import { d as definePhysicsPlayground } from '../chunks/physics-playground-COST2VVT.js';
-export { P as PHYSICS_PRESETS } from '../chunks/physics-playground-COST2VVT.js';
+import { d as definePhysicsPlayground } from '../chunks/physics-playground-BG1XGp6Q.js';
+export { P as PHYSICS_PRESETS } from '../chunks/physics-playground-BG1XGp6Q.js';
 import { defineMotionPrompt } from '../widgets/motion-prompt.js';
 export { v as viewportHeight, w as watchViewport } from '../chunks/viewport-BAXHhZLV.js';
 
@@ -231,4 +231,4 @@ function defineWidgets(release) {
 }
 
 export { WIDGETS, WIDGET_TAGS, defineAddToCart, defineBadgeWall, defineBarChart, defineBgGenerator, defineCarousel, defineCartDrawer, defineChapterNav, defineChatComposer, defineClockControl, defineCodeExport, defineColorPicker, defineCommandPalette, defineCompare, defineCountdown, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineFestivalBanner, defineField, defineFileDrop, defineGauge, defineGenArt, defineGestureSticker, defineGlScene, defineGlobe, defineGpuParticles, defineGyroCard, defineHeroVideo, defineHudPanel, defineHydrate, defineInstallButton, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLiquidNav, defineLocationCard, defineLottie, defineLottieIcon, defineLottiePlayer, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMessageList, defineMilestones, defineModal, defineMotion, defineMotionInspector, defineMotionPrefs, defineMotionPrompt, defineMotionSpec, defineMusicPlayer, defineNativePreview, defineNavMorph, defineNotificationBell, defineOdometer, defineOrganicCard, defineOtp, definePagination, definePanorama, defineParallaxLayers, definePauseAll, definePerfMonitor, definePhysicsPlayground, definePluginCard, definePluginStore, definePresence, definePrizeWheel, defineProductGallery, defineProgressRing, definePropPanel, definePullCord, defineRadar, defineReactions, defineRedEnvelope, defineRetroButton, defineRive, defineRouteTransition, defineScene, defineScrollRing, defineScrollScene, defineSegmented, defineShaderBackdrop, defineSheet, defineShortcut, defineSkeletonReveal, defineSketchChart, defineSmoothScroll, defineSparkline, defineSpatialCard, defineStarRating, defineStepper, defineStickyWall, defineStories, defineSuggestionChips, defineSwipeDeck, defineSwitch, defineTabBar, defineTerminal, defineTextSplitter, defineThemeSurface, defineThemeSwitcher, defineTip, defineToastStack, defineTokenEditor, defineUploadProgress, defineVideoCard, defineVoiceButton, defineVolumeKnob, defineWeatherCard, defineWidgets, defineWorkerCanvas, defineXpBar };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0/dist/components/widgets.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.1.0/dist/components/widgets.js.map

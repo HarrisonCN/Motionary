@@ -1,6 +1,6 @@
 {
   "name": "motionary",
-  "version": "16.0.0",
+  "version": "16.1.0",
   "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 209 animated Web Components (91 core, 118 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -678,6 +678,16 @@
       "require": {
         "types": "./dist/components/scene-v3.d.cts",
         "default": "./dist/components/scene-v3.cjs"
+      }
+    },
+    "./scene/symbols": {
+      "import": {
+        "types": "./dist/components/scene-symbols.d.ts",
+        "default": "./dist/components/scene-symbols.js"
+      },
+      "require": {
+        "types": "./dist/components/scene-symbols.d.cts",
+        "default": "./dist/components/scene-symbols.cjs"
       }
     },
     "./studio/store": {
@@ -1598,6 +1608,16 @@
       "require": {
         "types": "./dist/components/scene-v3.d.cts",
         "default": "./dist/components/scene-v3.cjs"
+      }
+    },
+    "./components/scene-symbols": {
+      "import": {
+        "types": "./dist/components/scene-symbols.d.ts",
+        "default": "./dist/components/scene-symbols.js"
+      },
+      "require": {
+        "types": "./dist/components/scene-symbols.d.cts",
+        "default": "./dist/components/scene-symbols.cjs"
       }
     },
     "./components/perf-tasks": {

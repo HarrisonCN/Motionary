@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [16.1.0] — Symbols
+
+### Added
+- `motionary/scene/symbols` (= `motionary/components/scene-symbols`): symbols on Scene v3 with no format change —
+  a symbol is a `components[id]` entry, an instance a `type: "component"` layer. Pure functions (input never
+  mutated): `createSymbol` (layers or one group → symbol + one instance in place; content time from 0, targets made
+  relative to the instance target), `addInstance`, `setOverride` / `clearOverride` (`target`, `muted`, `props`),
+  `updateSymbol` (edit the master once, every instance follows, overrides kept, cycles refused), `renameSymbol`,
+  `detachInstance` (back to plain layers, as `sceneV3ToV2` reads them), `symbolUsage`, `validateSymbols`.
+- `symbolsToCss(doc)`: each symbol layer's `@keyframes` is emitted once however many instances use it; instances add
+  one `animation` rule per layer (selector, duration, delay); prop overrides get their own block; report with
+  counts and what was not exported. Docs: `docs/scene-symbols.md`.
+
+### Size
+- New size line scene-symbols (limit 4.00 KB gzip). No existing line raised; lite 69.99 / 70 KB; zero runtime deps.
+
 ## [16.0.0] - 2026-10-15
 
 **Scene Format v3 + motionary-mcp 3.0** (major). Same code as 16.0.0-rc.1 (below), which was published to npm `next`

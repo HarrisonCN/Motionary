@@ -11,4 +11,4 @@ function registerSaleShine() {
 }
 
 export { effect, registerSaleShine as register, registerSaleShine };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0/dist/effects/sale-shine.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.1.0/dist/effects/sale-shine.js.map

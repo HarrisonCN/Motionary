@@ -12,7 +12,7 @@ Scene v2 ([scene-v2.md](./scene-v2.md)) is a flat list of `track` / `group` laye
 16.x cannot be expressed in it without loss:
 
 1. **Nested compositions** — a block of layers with its own clock (start, clip, playback rate) placed in a parent scene.
-2. **Components as layers** — one definition instantiated several times with overrides (the basis for 16.1 symbols).
+2. **Components as layers** — one definition instantiated several times with overrides (edited as symbols since 16.1: [scene-symbols.md](./scene-symbols.md)).
 3. **Breakpoint variants as format** — 15.3 kept them in `meta["motionary:variants"]`, which validators cannot check.
 
 ## The document

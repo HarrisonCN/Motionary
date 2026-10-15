@@ -1,4 +1,4 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-Dc55SD6l.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-Dk7T0M7p.js';
 import { GlNode, texture, standardMaterial, computeNormals } from './gl.js';
 
 /**
@@ -171,4 +171,4 @@ async function loadObj(url) {
 const formatObj = { id: 'format-obj', version: RUNTIME_VERSION, tier: 'advanced', requires: ['core', 'gl'], api: { parseObj, parseMtl, objMaterial, objToNode, loadObj } };
 
 export { formatObj, loadObj, objMaterial, objToNode, parseMtl, parseObj };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0/dist/runtime/format-obj.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.1.0/dist/runtime/format-obj.js.map

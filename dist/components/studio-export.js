@@ -463,4 +463,4 @@ const PLAYER_JS =  ('(function(){var W=window,D=document,E=D.getElementById("mot
     'if(q)seek(+q[1]);else if(rm)seek(S.d);else{seek(0);play()}})();');
 
 export { BAKED_FORMAT, EXPORT_LIMITS, FRAME_JOB_FORMAT, PLAYER_JS, STUDIO_EXPORT_VERSION, bakeScene, cleanStage, createFrameExportJob, createJsonFramesAdapter, exportStandalone, frameDigest, sampleBaked };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0/dist/components/studio-export.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.1.0/dist/components/studio-export.js.map
