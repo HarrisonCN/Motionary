@@ -6,7 +6,7 @@
 
 _Formerly **use-scroll-animate**. The old npm package is still published as an alias of the same build._
 
-[![npm](https://img.shields.io/npm/v/motionary?style=flat-square)](https://www.npmjs.com/package/motionary) [![CI](https://github.com/HarrisonCN/Motionary/actions/workflows/ci.yml/badge.svg)](https://github.com/HarrisonCN/Motionary/actions/workflows/ci.yml) [![motionary/core size](https://deno.bundlejs.com/?q=motionary/core&badge)](https://bundlejs.com/?q=motionary/core) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](./LICENSE)
+[![npm](https://img.shields.io/npm/v/motionary?style=flat-square)](https://www.npmjs.com/package/motionary) [![CI](https://github.com/HarrisonCN/Motionary/actions/workflows/ci.yml/badge.svg)](https://github.com/HarrisonCN/Motionary/actions/workflows/ci.yml) [![motionary/core size](https://deno.bundlejs.com/?q=motionary/core&badge)](https://bundlejs.com/?q=motionary/core) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](./LICENSE) [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/HarrisonCN/Motionary/badge)](https://scorecard.dev/viewer/?uri=github.com/HarrisonCN/Motionary)
 
 **English** | [简体中文](./README_zh.md) | [日本語](./README_ja.md)
 
@@ -30,6 +30,8 @@ Solid and Angular, and in desktop web views (Electron, Tauri, WebView2). It has 
 is tree-shakeable and has a gzip budget checked in CI, and every animation respects `prefers-reduced-motion`.
 
 Release notes for every version are in [CHANGELOG.md](./CHANGELOG.md).
+
+Supply chain: [docs/supply-chain.md](./docs/supply-chain.md) · CDN with SRI hashes: [docs/cdn-sri.md](./docs/cdn-sri.md) · Compared with AOS, GSAP, Lenis and Motion: [docs/compare](./docs/compare/README.md) · Try it online: [StackBlitz examples](./examples/stackblitz/README.md).
 
 ## Contents
 
