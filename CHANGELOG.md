@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [16.0.0] - 2026-10-15
+
+**Scene Format v3 + motionary-mcp 3.0** (major). Same code as 16.0.0-rc.1 (below), which was published to npm `next`
+and verified (tarballs, ESM / CJS, `motionary/scene/v3` and its `v3-preview` alias, CLI `migrate --to 16 --write`,
+motionary-mcp 3.0) before this release. `latest` moves to 16.0.0; `v16-line` and `v16-0` → 16.0.0; `v15-lts` → 15.9.0
+(security and severe fixes at least until 17.0 ships); `next` → 16.0.0 (the 16.0 release-candidate line is closed).
+Upgrade with `npx motionary@15 doctor --v16`, then `npx motionary migrate --to 16 --write`
+([docs/migrating-to-v16.md](docs/migrating-to-v16.md)).
+
+### Changed (breaking)
+
+- Scene v3 is the write format (Studio `exportScene()`, `motionary migrate`, motionary-mcp) and opens wherever v2 does;
+  motionary-mcp 3.0.0 removes `check_compat`, `validate_snippet { scene }` and JSON-text scenes — see 16.0.0-rc.1 below.
+
+### Changed
+
+- Version 16.0.0; source-map URLs point at the `v16.0.0` tag. Zero runtime dependencies; lite unchanged (≤ 70 KB gzip).
+
 ## [16.0.0-rc.1] - 2026-10-15
 
 **Scene Format v3 + motionary-mcp 3.0** (major, release candidate — npm `next` only; `latest` stays on 15.9.0 until
