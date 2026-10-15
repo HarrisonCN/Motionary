@@ -660,6 +660,16 @@
         "default": "./dist/components/studio-a11y.cjs"
       }
     },
+    "./scene/v3-preview": {
+      "import": {
+        "types": "./dist/components/scene-v3-preview.d.ts",
+        "default": "./dist/components/scene-v3-preview.js"
+      },
+      "require": {
+        "types": "./dist/components/scene-v3-preview.d.cts",
+        "default": "./dist/components/scene-v3-preview.cjs"
+      }
+    },
     "./studio/store": {
       "import": {
         "types": "./dist/components/studio-store.d.ts",
@@ -988,6 +998,16 @@
       "require": {
         "types": "./dist/components/studio-store.d.cts",
         "default": "./dist/components/studio-store.cjs"
+      }
+    },
+    "./components/scene-v3-preview": {
+      "import": {
+        "types": "./dist/components/scene-v3-preview.d.ts",
+        "default": "./dist/components/scene-v3-preview.js"
+      },
+      "require": {
+        "types": "./dist/components/scene-v3-preview.d.cts",
+        "default": "./dist/components/scene-v3-preview.cjs"
       }
     },
     "./components/studio-app": {

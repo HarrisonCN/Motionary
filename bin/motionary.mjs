@@ -9,6 +9,8 @@
 //   npx motionary codemod <11–13> [args…]   run an older usa-codemod-<n> (5–10 removed in 15.0: use npx motionary@v14-lts codemod <n>)
 //   npx motionary doctor --v15 [paths…] [--json]   everything 15.0 removes: compat-v13 imports, codemod 5–10 scripts, legacy data (14.9)
 //   npx motionary migrate --to 15 [paths…] [--write] [--report f] [--json]   move off it: .bak first, loss / manual report (14.9)
+//   npx motionary doctor --v16 [paths…] [--json]   everything 16.0 changes: Scene v2 data, variants in meta, exportScene() without a version, MCP 2.x shapes (15.9)
+//   npx motionary migrate --to 16 [paths…] [--dry-run] [--report f] [--json]   Scene v3 preview with a per-file loss report; --write waits for 16.0 (15.9)
 //   npx motionary help
 // Old subpaths still work (removed in 13.0) and never warn at runtime; `doctor` is how a project finds them.
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
@@ -73,6 +75,14 @@ const HELP = `motionary <command>
                              convert legacy animation data to Scene v2 in place and remove plain installCompatV13() uses,
                              each after a .bak copy (never overwrites a backup: .bak.1, .bak.2 …); lists manual work and
                              damaged Studio projects (never rewritten). Dry run by default — docs/migrating-to-v15.md
+  doctor --v16 [paths…] [--json]
+                             list everything 16.0 changes: Scene v2 files (16.0 writes v3), meta["motionary:variants"],
+                             studio.exportScene() without { version: 2 }, MCP 2.x shapes (check_compat, validate_snippet
+                             { scene }). Exit 1 when any is found — docs/deprecations-v16.md
+  migrate --to 16 [paths…] [--dry-run] [--report file] [--json]
+                             preview Scene v2 → v3 per file (lossless? what changes, what is lost) and list manual work.
+                             15.x only previews (a v3 file does not open in 15.x); 16.0 adds --write with .bak copies
+                             — docs/migrating-to-v16.md
   codemod <11–13> [--write] [paths…]
                              run the usa-codemod-<n> upgrade tool (5–10 were removed in 15.0: npx motionary@v14-lts codemod <n>)
   help                       this text
@@ -326,6 +336,94 @@ export function runMigrateTo15(rest, env = {}) {
   return r.problems.length ? 1 : 0;
 }
 
+// ---------------------------------------------------------------- 15.9: v16 preparation
+const V16_DOC = 'docs/deprecations-v16.md';
+/** What 16.0 changes (same ids as DEPRECATIONS_V16 in motionary/scene/v3-preview) → how to fix it. */
+export const V16_FIX = {
+  'scene-v2-write': '16.0 writes Scene v3 (v2 is still read): convert files with `npx motionary migrate --to 16`; code that needs v2 calls studio.exportScene({ version: 2 })',
+  'variants-meta': 'Scene v3 keeps breakpoint variants in "variants": `npx motionary migrate --to 16` moves them; code uses variantsOf() from motionary/studio/a11y',
+  'mcp-snippet-scene': 'motionary-mcp 3.0: validate_snippet takes code only — call validate_scene { scene } (motionary-mcp 2.5+)',
+  'mcp-scene-text': 'motionary-mcp 3.0: pass scene arguments as objects, not JSON text',
+  'mcp-check-compat': 'motionary-mcp 3.0 removes check_compat — call check_compatibility { tags, version }',
+};
+const isStudioProjectFile = (f, d) => /\.motionary\.json$/i.test(f) || !!(d && d.format === 'motionary-studio');
+const isSceneV2Data = (d) => !!d && typeof d === 'object' && !Array.isArray(d) && d.format === 'motionary-scene' && d.version === 2;
+const hasVariantsMeta = (d) => !!(d && d.meta && typeof d.meta === 'object' && !Array.isArray(d.meta) && Object.prototype.hasOwnProperty.call(d.meta, 'motionary:variants'));
+const V16_CODE = [
+  ['scene-v2-write', /\.exportScene\(\s*\)/],
+  ['variants-meta', /motionary:variants/],
+  ['mcp-check-compat', /(['"`])check_compat\1/],
+  ['mcp-snippet-scene', /(['"`])validate_snippet\1.*\bscene\b/],
+];
+function scanV16(f, text) {
+  const out = [], lines = text.split('\n');
+  const hit = (id, line, t) => out.push({ file: f, line, kind: extname(f) === '.json' ? 'scene-data' : 'code', id, fix: V16_FIX[id], text: t });
+  if (extname(f) === '.json') {
+    let d; try { d = JSON.parse(text); } catch { return out; }
+    if (isStudioProjectFile(f, d) || !isSceneV2Data(d)) return out;
+    hit('scene-v2-write', 1, 'motionary-scene version 2');
+    if (hasVariantsMeta(d)) hit('variants-meta', Math.max(1, lines.findIndex((l) => l.includes('motionary:variants')) + 1), 'meta["motionary:variants"]');
+    return out;
+  }
+  lines.forEach((l, i) => { for (const [id, re] of V16_CODE) if (re.test(l)) hit(id, i + 1, l.trim()); });
+  return out;
+}
+/** `doctor --v16` (15.9): every use of what 16.0 changes → [{ file, line, kind: 'scene-data' | 'code', id, fix, text }]. */
+export function doctorV16(paths) {
+  const found = [];
+  for (const f of v15Files(paths)) found.push(...scanV16(f, readFileSync(f, 'utf8')));
+  return found;
+}
+/**
+ * `migrate --to 16` (15.9). A dry run unless `write` — and the CLI refuses `write` on 15.x, because a Scene v3 file
+ * does not open in 15.x; `write` is the 16.0 code path (Scene v2 data → v3 after a `.bak`, never overwriting a backup).
+ * Studio projects are never rewritten (16.0 Studio upgrades them on open). Code findings are manual work.
+ * Returns { format: 'motionary-migrate-report', version: 1, to: '16', write, files, manual, skipped, problems }.
+ */
+export function migrateTo16(paths, opts = {}) {
+  const V3 = opts.sceneV3 || createRequire(import.meta.url)('../dist/components/scene-v3-preview.cjs');
+  const write = !!opts.write;
+  const files = [], manual = [], skipped = [], problems = [];
+  for (const f of v15Files(paths)) {
+    const text = readFileSync(f, 'utf8');
+    if (extname(f) === '.json') {
+      let d; try { d = JSON.parse(text); } catch { continue; }
+      if (isStudioProjectFile(f, d)) { skipped.push({ file: f, reason: 'Studio project — never rewritten here; the 16.0 Studio upgrades it on open (a .bak is kept)' }); continue; }
+      if (!isSceneV2Data(d)) continue;
+      const r = V3.migrateToSceneV3(text);
+      if (!r.ok) { problems.push({ file: f, kind: 'scene-data', message: (r.problems || []).map((p) => `${p.path || '(root)'}: ${p.message}`).join('; ') || 'migration failed' }); continue; }
+      const e = { file: f, kind: 'scene-data', id: 'scene-v2-write', changed: true, lossless: r.report.lossless, changes: r.report.changes, losses: r.report.lost, warnings: r.report.warnings };
+      if (write) { const b = backupPath(f); writeFileSync(b, text); writeFileSync(f, V3.serializeSceneV3(r.doc)); e.backup = b; }
+      files.push(e);
+      continue;
+    }
+    for (const h of scanV16(f, text)) manual.push({ file: f, line: h.line, id: h.id, reason: h.fix });
+  }
+  const report = { format: 'motionary-migrate-report', version: 1, to: '16', write, files, manual, skipped, problems };
+  if (opts.report) writeFileSync(opts.report, JSON.stringify(report, null, 2) + '\n');
+  return report;
+}
+const ownMajor = () => { try { return Number(JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8')).version.split('.')[0]); } catch { return 0; } };
+/** `motionary migrate --to 16 [paths…] [--dry-run] [--report file] [--json]`: exit 1 when a file could not be read / migrated; 2 for usage (and --write before 16.0). */
+export function runMigrateTo16(rest, env = {}) {
+  const VAL = new Set(['--to', '--report']);
+  const paths = rest.filter((a, i) => !a.startsWith('--') && !VAL.has(rest[i - 1]));
+  for (const p of paths) if (!existsSync(p)) { console.error(`motionary migrate --to 16: ${p} not found`); return 2; }
+  const major = env.major ?? ownMajor();
+  const write = rest.includes('--write');
+  if (write && major < 16) { console.error(`motionary migrate --to 16 --write: motionary ${major}.x cannot open Scene v3 files, so writing them waits for 16.0 (npx motionary@16 migrate --to 16 --write). Run without --write (or with --dry-run) for the report — ${V16_DOC}`); return 2; }
+  const r = migrateTo16(paths, { write, sceneV3: env.sceneV3, report: flag(rest, 'report') || (write ? join(paths[0] || '.', REPORT_NAME) : undefined) });
+  if (rest.includes('--json')) console.log(JSON.stringify(r, null, 2));
+  else {
+    for (const x of r.files) console.log(`${x.file}  Scene v2 → v3${write ? `  converted (backup ${x.backup})` : '  will change'}  ${x.lossless ? 'lossless' : `losses: ${x.losses.length}`}`);
+    for (const m of r.manual) console.log(`${m.file}:${m.line}  manual  ${m.reason}`);
+    for (const s of r.skipped) console.log(`${s.file}  skipped  ${s.reason}`);
+    for (const p of r.problems) console.log(`${p.file}  problem  ${p.message}`);
+    console.log(`\nmotionary migrate --to 16: ${r.files.length} scene file(s) ${write ? 'migrated' : 'to migrate in 16.0 (dry run)'}, ${r.files.filter((x) => !x.lossless).length} with losses, ${r.manual.length} manual item(s), ${r.problems.length} problem(s). See ${V16_DOC}.`);
+  }
+  return r.problems.length ? 1 : 0;
+}
+
 /** `motionary tokens …` (14.1): `T` = the motion-tokens module (dist/components/motion-tokens.cjs). Returns the exit code. */
 export function runTokens(rest, T) {
   const USAGE = 'usage: motionary tokens <import-figma <file> | export-figma [tokens.json] | validate <file> | css [tokens.json]> [--out file] [--css] [--collection name] [--modes a,b]';
@@ -401,7 +499,7 @@ export function main(argv, env = {}) {
   }
   if (cmd === 'codemod') return runCodemod(rest);
   if (cmd === 'tokens') return runTokens(rest, env.motionTokens || createRequire(import.meta.url)('../dist/components/motion-tokens.cjs'));
-  if (cmd === 'migrate' && rest.includes('--to')) return runMigrateTo15(rest, env);
+  if (cmd === 'migrate' && rest.includes('--to')) return flag(rest, 'to') === '16' ? runMigrateTo16(rest, env) : runMigrateTo15(rest, env);
   if (cmd === 'migrate' && rest.includes('--code')) return runMigrateCode(rest.filter((a) => a !== '--code'));
   if (cmd === 'migrate') {
     if (env.sceneV2) return runMigrate(rest, env.sceneV2);
@@ -411,6 +509,16 @@ export function main(argv, env = {}) {
     if (rest.includes('--scene')) return env.native ? runExportScene(rest, env.native) : runExportScene(rest, createRequire(import.meta.url)('../dist/components/studio-native.cjs'));
     if (env.presets) return runExport(rest, env.presets, env.tokens || TOKENS());
     return import('../dist/index.js').then((m) => runExport(rest, m.PRESETS, env.tokens || TOKENS()));
+  }
+  if ((cmd === 'doctor' || cmd === 'check') && rest.includes('--v16')) {
+    const found = doctorV16(rest.filter((a) => !a.startsWith('--')));
+    if (rest.includes('--json')) console.log(JSON.stringify({ v16: found }, null, 2));
+    else if (!found.length) console.log('motionary doctor --v16: nothing that 16.0 changes was found ✓');
+    else {
+      for (const x of found) console.log(`${x.file}:${x.line}  ${x.id}  ${x.text}\n    → ${x.fix}`);
+      console.log(`\n${found.length} use(s) of what 16.0 changes (${V16_DOC}). Preview the move: npx motionary migrate --to 16`);
+    }
+    return found.length ? 1 : 0;
   }
   if ((cmd === 'doctor' || cmd === 'check') && rest.includes('--v15')) {
     const found = doctorV15(rest.filter((a) => !a.startsWith('--')));

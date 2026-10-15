@@ -85,7 +85,7 @@ export function createLocalStorage(prefix = 'motionary-studio:', ls: Storage = g
 
 const filesMap = (f?: Files): Map<string, Uint8Array> => (f instanceof Map ? new Map(f) : new Map(Object.entries(f || {})));
 const msg = (e: unknown) => String((e as Error)?.message || e).replace(/^\[motionary\]\s*/, '');
-const sceneKey = (s: Studio) => JSON.stringify(s.exportScene());
+const sceneKey = (s: Studio) => JSON.stringify(s.exportScene({ version: 2 }));
 
 /** Build the app inside `root`. Resolves once the Studio is ready. */
 export async function createStudioApp(root: HTMLElement, o: StudioAppOptions = {}): Promise<StudioApp> {

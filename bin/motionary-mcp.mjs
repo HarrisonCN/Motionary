@@ -26,10 +26,10 @@ import { compatAt, cmpVer } from './compat-history.mjs';
 import { rankComponents, checkCompatibility, suggestFix, SCHEMAS } from './mcp-tools-2.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
-const SERVER = { name: 'motionary-mcp', version: '2.4.0' };
+const SERVER = { name: 'motionary-mcp', version: '2.5.0' };
 export const SERVER_INFO = SERVER;
 /** 13.7: tool contract versions — input + output schema of each tool; a tool's major changes only on an incompatible change. */
-export const TOOL_SCHEMA_VERSIONS = { list_components: '1.0', search_components: '1.1', get_component: '1.0', get_example: '1.0', scaffold_snippet: '1.1', suggest_motion: '1.1', validate_snippet: '1.3', check_compat: '1.0', check_compatibility: '1.1', suggest_fix: '1.1', list_templates: '1.0', get_template: '1.0', export_scene: '1.0', propose_edit: '1.0' };
+export const TOOL_SCHEMA_VERSIONS = { list_components: '1.0', search_components: '1.1', get_component: '1.0', get_example: '1.0', scaffold_snippet: '1.1', suggest_motion: '1.1', validate_snippet: '1.3', check_compat: '1.0', check_compatibility: '1.1', suggest_fix: '1.1', list_templates: '1.0', get_template: '1.0', export_scene: '1.0', propose_edit: '1.0', validate_scene: '1.0' };
 const PROTOCOLS = ['2025-06-18', '2025-03-26', '2024-11-05'];
 
 export function loadManifest(path = process.env.MOTIONARY_MANIFEST || join(HERE, '../dist/manifest.json')) {
@@ -533,6 +533,7 @@ export const TOOLS = [
   { name: 'get_template', title: 'Get a Studio template', description: '14.8: one shipped template: manifest (license, requires, token theme, preview time), info, its Scene v2 document and a still preview (one inline HTML file without scripts, for a sandboxed iframe). Install it in an app with motionary/studio/templates installTemplate (one undo step, uninstall restores the project byte for byte).', inputSchema: { type: 'object', properties: { id: { type: 'string' } }, required: ['id'], additionalProperties: false }, outputSchema: { type: 'object', properties: { schema: { const: SCHEMAS.getTemplate }, manifest: { type: 'object' }, info: { type: 'object' }, verified: { type: 'boolean' }, scene: { type: 'object' }, preview: { type: 'object' } }, required: ['schema', 'manifest', 'info', 'verified', 'scene'] }, annotations: { title: 'Get template', ...RO } },
   { name: 'export_scene', title: 'Export a scene as a standalone page', description: '14.8: a Scene v2 document, a Studio project or a shipped template → the 14.7 standalone export (motionary/studio/export): index.html + scene.css (plays with scripts off) + optional scene.js player + assets/, or one inline file; byte-reproducible, with the frameDigest fingerprint and a report of anything left out. Returns the files (utf8 text, binary as base64); writes nothing.', inputSchema: { type: 'object', properties: { scene: { type: ['object', 'string'], description: 'a Scene v2 document (object or JSON text)' }, project: { type: ['object', 'string'], description: 'or a motionary-studio project' }, template: { type: 'string', description: 'or a shipped template id (list_templates)' }, inline: { type: 'boolean', default: false }, js: { type: 'boolean', default: true }, fps: { type: 'number', default: 60 }, title: { type: 'string' } }, additionalProperties: false }, outputSchema: { type: 'object', properties: { schema: { const: SCHEMAS.exportScene }, digest: { type: 'string' }, files: { type: 'array' }, report: { type: 'object' } }, required: ['schema', 'digest', 'files', 'report'] }, annotations: { title: 'Export scene', ...RO } },
   { name: 'propose_edit', title: 'Propose a scene edit (never writes)', description: '15.1: a prompt + a Scene v2 document → a validated edit proposal: Scene v2 ops with a sentence each, the JSON diff, the changed layer ids, the preview document and the schema / compatibility / render checks. Nothing is written — the caller (Motion Studio) applies it only after a person accepts it (motionary/studio/ai review + motionary/studio/provenance). The answer carries provenance { generator, requestId }: requestId is the argument or the MCP params._meta.correlationId (the client correlation id that MCP Gateway 15.1 canary keeps with the call lineage).', inputSchema: { type: 'object', properties: { scene: { type: ['object', 'string'], description: 'a Scene v2 document (object or JSON text)' }, prompt: { type: 'string' }, selection: { type: 'array', items: { type: 'string' }, description: 'only touch these layer ids (new layers are allowed)' }, requestId: { type: 'string', description: 'correlation id, 1–128 of A–Z a–z 0–9 . _ : -' } }, required: ['scene', 'prompt'], additionalProperties: false }, outputSchema: { type: 'object', properties: { schema: { const: SCHEMAS.proposeEdit }, ok: { type: 'boolean' }, applied: { const: false }, ops: { type: 'array' }, diff: { type: 'array' }, layers: { type: 'array' }, preview: { type: 'object' }, provenance: { type: 'object' } }, required: ['schema', 'ok', 'applied', 'ops', 'diff', 'layers', 'provenance'] }, annotations: { title: 'Propose edit', ...RO } },
+  { name: 'validate_scene', title: 'Validate a scene', description: "15.9 (motionary-mcp 2.5): a Scene v2 document → schema problems, component compatibility with the installed version and a headless render of every frame; ops (Scene v2 ops, parsed as data) are applied to a copy first; browser also renders it in a real headless browser. The same checks validate_snippet { scene } runs — motionary-mcp 3.0 (16.0) keeps scenes here only, so prefer this tool. Pass the scene as an object (JSON text still works in 2.x and returns a deprecation).", inputSchema: { type: 'object', properties: { scene: { type: ['object', 'string'], description: 'a Scene v2 document (an object; JSON text is deprecated — removed in motionary-mcp 3.0)' }, ops: { type: 'array', items: { type: 'object' }, description: 'Scene v2 ops (motionary/studio/ai, applyCanvasOps format) applied to a copy first — parsed as data, never evaluated' }, version: { type: 'string', description: "the motionary version installed in the user's project" }, browser: { type: ['boolean', 'string'], enum: [true, false, 'auto'], default: false, description: 'also render it in a real headless browser (Playwright, optional peer)' } }, required: ['scene'], additionalProperties: false }, outputSchema: { type: 'object', properties: { schema: { const: SCHEMAS.scene }, valid: { type: 'boolean' }, mode: { type: 'string' }, problems: { type: 'array' }, compatibility: { type: 'array' }, render: { type: 'object' }, deprecations: { type: 'array' } }, required: ['schema', 'valid', 'problems'] }, annotations: { title: 'Validate scene', ...RO } },
 ];
 
 // ---------------------------------------------------------------- 2.4 (15.1): propose_edit (never writes)
@@ -570,7 +571,36 @@ const text = (obj) => ({ content: [{ type: 'text', text: typeof obj === 'string'
 
 for (const t of TOOLS) t._meta = { 'motionary/schemaVersion': TOOL_SCHEMA_VERSIONS[t.name] };
 
+// ---------------------------------------------------------------- 2.5 (15.9): what motionary-mcp 3.0 (16.0) removes
+const DEP16 = {
+  'mcp-snippet-scene': 'validate_snippet { scene } — motionary-mcp 3.0 takes code only here; call validate_scene { scene }',
+  'mcp-scene-text': 'scene as JSON text — motionary-mcp 3.0 takes scene objects only; pass the parsed object',
+  'mcp-check-compat': 'check_compat — removed in motionary-mcp 3.0; call check_compatibility { tags, version }',
+};
+/** The MCP 2.x input shapes a call uses that motionary-mcp 3.0 (16.0) removes → [{ id, removedIn, message, doc }]. */
+export function legacyInputs(name, a = {}) {
+  const ids = [];
+  if (name === 'check_compat') ids.push('mcp-check-compat');
+  if (name === 'validate_snippet' && a && a.scene !== undefined) ids.push('mcp-snippet-scene');
+  if (a && typeof a.scene === 'string') ids.push('mcp-scene-text');
+  return ids.map((id) => ({ id, removedIn: '16.0', message: DEP16[id], doc: `docs/deprecations-v16.md#${id}` }));
+}
+const warnedDep = new Set();
+const withDeprecations = (res, deps) => {
+  if (!deps.length || !res || !res.structuredContent || Array.isArray(res.structuredContent.items)) return res;
+  for (const d of deps) if (!warnedDep.has(d.id)) { warnedDep.add(d.id); try { process.stderr.write(`[motionary-mcp] deprecated: ${d.message} (${d.doc})\n`); } catch {} }
+  return text({ ...res.structuredContent, deprecations: deps });
+};
+
+/** Call one tool; results of calls that use an MCP 2.x shape 3.0 removes carry a `deprecations` array (2.5). */
 export function callTool(m, name, a = {}, ctx = {}) {
+  const deps = legacyInputs(name, a);
+  const res = callTool2(m, name, a, ctx);
+  if (!deps.length) return res;
+  return res && typeof res.then === 'function' ? res.then((r) => withDeprecations(r, deps)) : withDeprecations(res, deps);
+}
+
+function callTool2(m, name, a = {}, ctx = {}) {
   indexModules(m);
   switch (name) {
     case 'list_components': {
@@ -667,6 +697,9 @@ export function callTool(m, name, a = {}, ctx = {}) {
       return text(exportScene(m, a));
     case 'propose_edit':
       return proposeEdit(m, a, ctx).then(text);
+    case 'validate_scene':
+      if (a.scene === undefined) throw new Error('scene is required');
+      return validateScene(m, a).then(text);
     default:
       throw Object.assign(new Error(`unknown tool ${name}`), { code: -32602 });
   }
