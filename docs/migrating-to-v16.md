@@ -51,7 +51,7 @@ report.lossless; // true for every Scene v2 document
 const back = sceneV3ToV2(doc!); // read v3 in 15.x; names what v2 cannot express (comps, component instances)
 ```
 
-`motionary/scene/v3` (16.0; `motionary/scene/v3-preview` stays as a deprecated alias until 17.0) is an opt-in entry with its own size line; it is not in lite or `motionary/scene`. The player, the timeline editor and the Studio open Scene v3 without it.
+`motionary/scene/v3` (16.0; `motionary/scene/v3-preview` stays as a deprecated alias until 17.0) is an opt-in entry with its own size line; it is not in lite or `motionary/scene`. The player, the timeline editor and the Studio open flat Scene v3 without it; nested v3 (compositions, component instances) needs its `sceneV3ToV2` — e.g. `parseStudioProject(doc, { sceneV3ToV2 })`.
 
 ## 5. Update code
 

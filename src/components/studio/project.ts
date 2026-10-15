@@ -7,7 +7,6 @@
  * every frame at a fixed frame rate, a pure function of the document.
  */
 import { loadMotionDoc, timelineDocToScene, type SceneLoss } from '../timeline/editor/scene';
-import { flattenSceneV3 } from '../scene/v3-read';
 import { validateTimelineDoc, timelineDocDuration, TimelineDocError, TIMELINE_DOC_LIMITS, type TimelineDoc } from '../timeline/editor/format';
 import { sampleTimelineDoc, type TimelineFrame } from '../timeline/editor/preview';
 import { springBezier, springParams, type SpringParams } from './curve';
@@ -74,11 +73,15 @@ export function serializeStudioProject(doc: TimelineDoc, ui: StudioUiState = {},
   return JSON.stringify(p, null, space) + (space ? '\n' : '');
 }
 
+export interface ParseStudioProjectOptions {
+  /** `sceneV3ToV2` from motionary/scene/v3: opens nested Scene v3 (compositions, component instances). Without it only flat v3 opens. */
+  sceneV3ToV2?: (doc: any) => { doc: any; lost: SceneLoss[] };
+}
 /**
- * Open a Studio project, a Scene v2 document, a timeline v1 document or animation JSON (object or text). Throws a
+ * Open a Studio project, a Scene v3 / v2 document (nested v3 only with `opts.sceneV3ToV2`), a timeline v1 document or animation JSON (object or text). Throws a
  * `TimelineDocError` for anything malformed or over the limits; `lost` lists what a scene had that the editor cannot hold.
  */
-export function parseStudioProject(input: unknown): { doc: TimelineDoc; ui: StudioUiState; lost: SceneLoss[] } {
+export function parseStudioProject(input: unknown, opts?: ParseStudioProjectOptions): { doc: TimelineDoc; ui: StudioUiState; lost: SceneLoss[] } {
   let d: any = input;
   if (typeof input === 'string') {
     if (input.length > TIMELINE_DOC_LIMITS.textBytes) throw fail('', `text longer than ${TIMELINE_DOC_LIMITS.textBytes} characters`);
@@ -93,9 +96,9 @@ export function parseStudioProject(input: unknown): { doc: TimelineDoc; ui: Stud
     if (!isObj(d) || d.format !== 'motionary-scene') throw fail('scene', 'expected a Scene Format v3 / v2 document');
   }
   let lost3: SceneLoss[] = [];
-  if (d.format === 'motionary-scene' && d.version === 3 && Array.isArray(d.layers)) {
-    // 16.0: any Scene v3 — nested compositions become groups, component instances are expanded (losses reported)
-    try { const f = flattenSceneV3(d); d = f.doc; lost3 = f.lost; } catch (e) { throw fail('scene', `unreadable Scene v3 (${(e as Error)?.message || e})`); }
+  if (opts?.sceneV3ToV2 && d.format === 'motionary-scene' && d.version === 3 && Array.isArray(d.layers)) {
+    // 16.0: nested Scene v3 through the caller's full reader (comps → groups, component instances expanded, losses reported); flat v3 opens below
+    try { const f = opts.sceneV3ToV2(d); d = f.doc; lost3 = f.lost; } catch (e) { throw fail('scene', `unreadable Scene v3 (${(e as Error)?.message || e})`); }
   }
   if (d.format === 'motionary-scene') {
     // shape check before mapping (the mapping trusts its input)

@@ -21,8 +21,11 @@ unchanged (≤ 70 KB gzip). [docs/scene-v3.md](docs/scene-v3.md) · [docs/migrat
   `sceneV2ToFlatV3` for flat documents. `motionary/scene/v3-preview` and `motionary/components/scene-v3-preview` stay
   as aliases of the same build (deprecated; removed in 17.0).
 - Scene v3 opens wherever v2 does: `<usa-player>` / `playScene` and the timeline editor (`loadMotionDoc`) read flat v3
-  directly (variants kept in meta); the Studio and its project files open any v3 — compositions become groups and
-  component instances are expanded through the v3 reader, with what v2 could not keep reported.
+  directly (variants kept in meta), and so do the Studio and its project files (`parseStudioProject`). Nested v3
+  (compositions, component instances) opens through the full reader of `motionary/scene/v3`:
+  `parseStudioProject(doc, { sceneV3ToV2 })` turns compositions into groups and expands component instances, with what
+  v2 could not keep reported; without it nested v3 is refused with an error naming `sceneV3ToV2`, so the Studio
+  entries do not carry the full reader.
 - `npx motionary migrate --to 16 --write` converts files in place on 16.x (a `.bak` first, loss report).
 
 ### Changed (breaking)

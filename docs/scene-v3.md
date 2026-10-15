@@ -2,8 +2,8 @@
 
 > **Stable (16.0).** Scene v3 is the format the Studio (`exportScene()`), `motionary migrate` and motionary-mcp write.
 > `motionary/scene/v3` validates, migrates and reads it back as v2 (`motionary/scene/v3-preview`, the 15.9 name, is an
-> alias until 17.0). The player and the timeline editor open flat v3 directly; the Studio opens any v3 (compositions and
-> component instances through `sceneV3ToV2`, losses reported). JSON Schema: [`scripts/scene-v3.schema.json`](../scripts/scene-v3.schema.json). Changes it brings:
+> alias until 17.0). The player, the timeline editor and the Studio open flat v3 directly; nested v3 (compositions,
+> component instances) opens through `sceneV3ToV2` — `parseStudioProject(doc, { sceneV3ToV2 })` — with losses reported. JSON Schema: [`scripts/scene-v3.schema.json`](../scripts/scene-v3.schema.json). Changes it brings:
 > [deprecations-v16.md](./deprecations-v16.md).
 
 ## Why a new version

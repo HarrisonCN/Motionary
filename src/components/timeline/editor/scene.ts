@@ -10,7 +10,6 @@ import { normalizeTimelineDoc, parseTimelineDoc, timelineDocFromAnimation, Timel
 import type { TimelineDoc, TimelineLayer, TimelineKeyframe, TimelineValue } from './format';
 import { MOTION_TOKENS } from '../../tokens/index';
 import type { SceneV2Doc } from '../../scene/v2';
-import { flatSceneV3ToV2 } from '../../scene/v3-read';
 
 /** What a scene loses when opened as a timeline v1 document. */
 export interface SceneLoss { path: string; message: string }
@@ -34,6 +33,12 @@ export function timelineDocToScene(doc: TimelineDoc): SceneV2Doc {
  * and track `start` / `duration` / `easing` have no v1 equivalent and are listed in `lost`.
  */
 export function timelineDocFromScene(scene: SceneV2Doc): { doc: TimelineDoc; lost: SceneLoss[] } {
+  // 16.0: flat Scene v3 reads like v2 (variants go to meta); nested v3 needs the full reader of motionary/scene/v3
+  if ((scene as any).version === 3) {
+    const v: any = scene;
+    if ((v.components && Object.keys(v.components).length) || v.layers.some((l: any) => l?.type === 'comp' || l?.type === 'component')) throw new TimelineDocError([{ path: 'layers', message: 'nested compositions / component layers: read it with sceneV3ToV2() (motionary/scene/v3)' }]);
+    if (v.variants !== undefined) scene = { ...v, meta: { ...v.meta, 'motionary:variants': v.variants } };
+  }
   const r = (v: any) => {
     const m = typeof v === 'string' && REF.exec(v);
     const x = m ? ((scene.tokens as any)?.[m[1]]?.[m[2]] ?? (MOTION_TOKENS as any)[m[1]][m[2]]) : undefined;
@@ -70,15 +75,13 @@ export function timelineDocFromScene(scene: SceneV2Doc): { doc: TimelineDoc; los
   return { doc: normalizeTimelineDoc(out), lost };
 }
 
-const err3 = (): never => { throw new TimelineDocError([{ path: 'layers', message: 'nested compositions / component layers: read it with sceneV3ToV2() (motionary/scene/v3) or open it in the Studio' }]); };
-/** Open any motion document (object or JSON text; Scene v3 without comps / components since 16.0) as an editor document; throws `TimelineDocError` on anything else. */
+/** Open any motion document (object or JSON text; flat Scene v3 — no comps / components — since 16.0) as an editor document; throws `TimelineDocError` on anything else. */
 export function loadMotionDoc(input: unknown): { doc: TimelineDoc; lost: SceneLoss[] } {
   let d: any = input;
   if (typeof input === 'string') {
     try { d = JSON.parse(input); } catch (e) { throw new TimelineDocError([{ path: '', message: `invalid JSON (${(e as Error).message})` }]); }
   }
-  if (d?.format === 'motionary-scene' && d.version === 3) d = flatSceneV3ToV2(d) || err3();
-  if (d?.format === 'motionary-scene' && d.version === 2 && Array.isArray(d.layers)) return timelineDocFromScene(d);
+  if (d?.format === 'motionary-scene' && (d.version === 2 || d.version === 3) && Array.isArray(d.layers)) return timelineDocFromScene(d);
   if (d?.format === TIMELINE_DOC_FORMAT) return { doc: parseTimelineDoc(d), lost: [] };
   if (d && Array.isArray(d.tracks)) {
     const { doc, skipped } = timelineDocFromAnimation(d);

@@ -298,7 +298,7 @@ export function migrateTo15(paths, opts = {}) {
       try { d = JSON.parse(text); } catch (e) { bad = e; }
       const isProject = /\.motionary\.json$/i.test(f) || (d && d.format === 'motionary-studio');
       if (isProject) {
-        try { if (bad) throw new Error(`invalid JSON (${bad.message})`); studio().parseStudioProject(d); } catch (e) { problems.push({ file: f, kind: 'studio-project', message: String(e.message || e) + ' — left untouched; restore it from a backup or the last saved pack' }); }
+        try { if (bad) throw new Error(`invalid JSON (${bad.message})`); studio().parseStudioProject(d, { sceneV3ToV2: (x) => (opts.sceneV3 || createRequire(import.meta.url)('../dist/components/scene-v3.cjs')).sceneV3ToV2(x) }); } catch (e) { problems.push({ file: f, kind: 'studio-project', message: String(e.message || e) + ' — left untouched; restore it from a backup or the last saved pack' }); }
         continue;
       }
       if (isLegacyAnimation(d)) {
