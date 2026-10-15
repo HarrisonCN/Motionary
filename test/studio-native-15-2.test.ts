@@ -117,3 +117,20 @@ describe('15.2 package entry', () => {
     expect(readFileSync('size-budget.json', 'utf8')).toMatch(/components\/studio-native/);
   });
 });
+
+describe('15.2 export report lists AI changes (15.1 provenance, deferred from 15.1)', () => {
+  it('report.ai = the provenance records that touch an exported layer; empty without provenance', () => {
+    const meta = { 'motionary:provenance': [
+      { id: 'p1', generator: 'motionary/studio/ai', model: 'm1', requestId: 'req-1', at: '2026-10-14T10:00:00.000Z', layers: ['title'] },
+      { id: 'p2', generator: 'motionary/studio/ai', at: '2026-10-14T10:01:00.000Z', layers: ['hidden'] },
+      { id: 'p3', generator: 'user', at: '2026-10-14T10:02:00.000Z', layers: ['card'] },
+    ] };
+    const { report, code } = exportNative({ ...SCENE, meta }, { target: 'swiftui' });
+    expect(report.ai).toEqual([
+      { id: 'p1', generator: 'motionary/studio/ai', model: 'm1', requestId: 'req-1', at: '2026-10-14T10:00:00.000Z', layers: ['title'] },
+      { id: 'p3', generator: 'user', at: '2026-10-14T10:02:00.000Z', layers: ['card'] },
+    ]);
+    expect(code).toBe(exportNative(SCENE, { target: 'swiftui' }).code); // the report, not the code, carries provenance
+    expect(exportNative(SCENE, { target: 'css' }).report.ai).toEqual([]);
+  });
+});
