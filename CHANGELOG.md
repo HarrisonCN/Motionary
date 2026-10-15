@@ -36,6 +36,13 @@ line and no existing line was raised. [docs/deprecations-v16.md](docs/deprecatio
   `motionary-mcp/validate_scene@1`, appended after `propose_edit`); results of calls that use a shape 3.0 removes carry
   `deprecations: [{ id, removedIn: '16.0', message, doc }]`.
 
+### Changed
+
+- `dist/llms-full.txt` is no longer in the npm tarball (it stays in the build and on Pages:
+  https://harrisoncn.github.io/Motionary/llms-full.txt, which AGENTS.md and the AI prompt guide already link). The new
+  entry put 15.9 at 14.07 MB unpacked; this genuine reduction brings it to 13.91 MB under the unchanged 14 MB limit.
+  `dist/llms.txt` (the MCP resource) and `docs/components/` stay.
+
 ### Deprecated (changes in 16.0)
 
 - `scene-v2-write`: `studio.exportScene()` without `{ version: 2 }` warns once in development (16.0 returns Scene v3).
