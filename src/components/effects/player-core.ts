@@ -43,7 +43,7 @@ export function normalizePlayable(input: string | AnimationJSON | Record<string,
   if (scene && (d.format === 'motionary-scene' || d.format === 'motionary-timeline')) d = scene(d);
   else {
     if (d.format === 'use-scroll-animate/playground' || (d.format === undefined && d.version === undefined && Array.isArray(d.tracks)))
-      throw new Error(`[motionary] animation: ${d.format ? 'playground documents' : 'animation JSON without "format" / "version"'} were removed in 14.0 — convert them to Scene v2 with \`npx motionary migrate --to 15 --write\` (docs/migrating-to-v15.md)`);
+      throw new Error(`[motionary] animation: ${d.format ? 'playground documents' : 'animation JSON without "format" / "version"'} were removed in 14.0 — convert them to Scene v2 with \`npx motionary@v16-lts migrate --to 15 --write\` (docs/migrating-to-v15.md)`);
     if (!Array.isArray(d.tracks)) throw new Error('[motionary] animation: missing "tracks"');
     if (d.format !== ANIMATION_FORMAT) throw new Error(`[motionary] animation: unknown format "${d.format}"`);
     if (d.version > 1) throw new Error(`[motionary] animation: version ${d.version} needs a newer motionary`);
