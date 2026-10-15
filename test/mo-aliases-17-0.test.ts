@@ -45,9 +45,11 @@ describe('17.0 mo-* element aliases', () => {
     await new Promise((r) => setTimeout(r, 0));
     const seen: boolean[] = [];
     el.addEventListener('usa:change', (e: any) => seen.push(e.detail.checked));
-    el.toggle(true);
+    el.click(); // usa:change is for user input (click / Space / Enter), not for toggle() from code
     expect(el.checked).toBe(true);
-    expect(seen).toEqual([true]);
+    el.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+    expect(el.checked).toBe(false);
+    expect(seen).toEqual([true, false]);
     expect(el.querySelector('[role="switch"]') || (el.getAttribute('role') === 'switch' ? el : null)).toBeTruthy();
     const css = [...document.querySelectorAll('style')].map((s) => s.textContent).join('\n')
       + [...((document as any).adoptedStyleSheets || [])].map((s: any) => [...s.cssRules].map((r: any) => r.cssText).join('\n')).join('\n');
