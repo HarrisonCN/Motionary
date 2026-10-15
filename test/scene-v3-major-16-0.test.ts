@@ -39,12 +39,12 @@ const NESTED_V3 = () => ({
 });
 
 describe('16.0 motionary/scene/v3 (stable)', () => {
-  it('status stable; the package exports motionary/scene/v3 and keeps motionary/scene/v3-preview', () => {
+  it('status stable; the package exports motionary/scene/v3 (17.0 removed the motionary/scene/v3-preview alias)', () => {
     expect(V3.SCENE_V3_STATUS).toBe('stable');
     const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'));
-    expect(pkg.version).toMatch(/^16\./);
+    expect(pkg.version).toMatch(/^1[67]\./);
     expect(pkg.exports['./scene/v3'].import.default).toBe('./dist/components/scene-v3.js');
-    expect(pkg.exports['./scene/v3-preview']).toBeTruthy();
+    expect(pkg.exports['./scene/v3-preview']).toBeUndefined();
     expect(JSON.stringify(pkg.dependencies || {})).toBe('{}');
   });
 });

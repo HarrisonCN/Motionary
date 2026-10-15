@@ -17,7 +17,7 @@ import { createRequire } from 'node:module';
 const ROOT = join(__dirname, '..');
 const CLI: any = await import(join(ROOT, 'bin/motionary.mjs'));
 const S = createRequire(import.meta.url)(join(ROOT, 'dist/components/scene-v2.cjs'));
-// 15.0: motionary/compat-v13 and its notices are removed; the CLI side of 14.9 stays (doctor --v15, migrate --to 15).
+// 15.0: motionary/compat-v13 and its notices are removed; the CLI side of 14.9 (doctor --v15, migrate --to 15) stayed until 17.0.
 const DEPRECATIONS_V15 = { 'compat-v13-entry': 1, 'install-compat-v13': 1, 'normalize-animation': 1, 'old-codemods': 1, 'upgrade-legacy-animation': 1 };
 import { parseStudioProject, serializeStudioProject } from '../src/components/studio/index';
 import { createTimelineDoc } from '../src/components/timeline/editor/index';
@@ -56,76 +56,8 @@ describe('15.0 removal list: docs, ids, warnings', () => {
   });
 });
 
-describe('doctor --v15', () => {
-  it('finds compat imports / requires, codemod 5–10 scripts and legacy data; clean files are not listed', () => {
-    const d = project();
-    const f = CLI.doctorV15([d]);
-    const by = (k: string) => f.filter((x: any) => x.kind === k).map((x: any) => x.file.slice(d.length + 1)).sort();
-    expect(by('compat-import')).toEqual(['src/a.ts', 'src/b.js']);
-    expect(by('old-codemod')).toEqual(['package.json']);
-    expect(by('legacy-data')).toEqual(['data/old.json', 'data/unv.json']);
-    expect(f.every((x: any) => typeof x.line === 'number' && x.id && x.fix)).toBe(true);
-    expect(f.map((x: any) => x.file)).not.toContain(join(d, 'src/clean.ts'));
-  });
-  it('CLI: --json, exit 1 when found, 0 when clean', async () => {
-    const d = project();
-    const log = vi.spyOn(console, 'log').mockImplementation(() => {});
-    expect(await CLI.main(['doctor', '--v15', '--json', d])).toBe(1);
-    const out = JSON.parse(log.mock.calls.map((c) => c[0]).join('\n'));
-    expect(out.v15.length).toBe(5);
-    const clean = mkdtempSync(join(tmpdir(), 'mo-v15c-'));
-    writeFileSync(join(clean, 'a.ts'), "import { animate } from 'motionary/motion';\n");
-    expect(await CLI.main(['doctor', '--v15', clean])).toBe(0);
-    log.mockRestore();
-  });
-});
-
-describe('migrate --to 15', () => {
-  it('dry run: a report of planned changes and manual work, nothing written', () => {
-    const d = project();
-    const before = readdirSync(join(d, 'data')).concat(readdirSync(join(d, 'src')));
-    const r = CLI.migrateTo15([d], { write: false, sceneV2: S });
-    expect(r.format).toBe('motionary-migrate-report');
-    expect(r.version).toBe(1);
-    expect(r.to).toBe('15');
-    expect(r.write).toBe(false);
-    expect(readdirSync(join(d, 'data')).concat(readdirSync(join(d, 'src')))).toEqual(before);
-    expect(readFileSync(join(d, 'src/a.ts'), 'utf8')).toContain('installCompatV13');
-    const files = r.files.map((x: any) => x.file.slice(d.length + 1)).sort();
-    expect(files).toEqual(['data/old.json', 'data/unv.json', 'package.json', 'src/a.ts', 'src/b.js']);
-    expect(r.manual.map((x: any) => x.file.slice(d.length + 1)).sort()).toEqual(['package.json', 'src/b.js']);
-  });
-  it('--write: legacy data converted in place to Scene v2 after a byte-identical .bak; installCompatV13 removed; report written; second run changes nothing', () => {
-    const d = project();
-    const old = readFileSync(join(d, 'data/old.json'), 'utf8');
-    const r = CLI.migrateTo15([d], { write: true, sceneV2: S, report: join(d, 'motionary-migrate-report.json') });
-    expect(readFileSync(join(d, 'data/old.json.bak'), 'utf8')).toBe(old);
-    const conv = JSON.parse(readFileSync(join(d, 'data/old.json'), 'utf8'));
-    expect(conv.format).toBe('motionary-scene');
-    expect(S.validateSceneV2(conv)).toEqual([]);
-    expect(JSON.parse(readFileSync(join(d, 'data/unv.json'), 'utf8')).format).toBe('motionary-scene');
-    const a = readFileSync(join(d, 'src/a.ts'), 'utf8');
-    expect(a).not.toMatch(/compat-v13|installCompatV13/);
-    expect(a).toContain('export const x = 1;');
-    expect(existsSync(join(d, 'src/a.ts.bak'))).toBe(true);
-    // normalizeAnimation has no mechanical replacement: left as is, listed as manual work with the reason
-    expect(readFileSync(join(d, 'src/b.js'), 'utf8')).toContain('normalizeAnimation');
-    expect(r.manual.find((x: any) => x.file.endsWith('src/b.js')).reason).toMatch(/validateSceneV2|migrateToSceneV2/);
-    const rep = JSON.parse(readFileSync(join(d, 'motionary-migrate-report.json'), 'utf8'));
-    expect(rep.files.length).toBe(r.files.length);
-    for (const x of rep.files.filter((y: any) => y.kind === 'legacy-data')) expect(Array.isArray(x.losses)).toBe(true);
-    const r2 = CLI.migrateTo15([d], { write: true, sceneV2: S });
-    expect(r2.files.filter((x: any) => x.changed)).toEqual([]);
-    expect(existsSync(join(d, 'data/old.json.bak.1'))).toBe(false);
-  });
-  it('never overwrites an existing backup (next free .bak.N)', () => {
-    const d = project();
-    writeFileSync(join(d, 'data/unv.json.bak'), 'mine');
-    CLI.migrateTo15([d], { write: true, sceneV2: S });
-    expect(readFileSync(join(d, 'data/unv.json.bak'), 'utf8')).toBe('mine');
-    expect(JSON.parse(readFileSync(join(d, 'data/unv.json.bak.1'), 'utf8'))).toEqual(UNVERSIONED);
-  });
-});
+// 17.0: doctor --v15 / migrate --to 15 were removed from the CLI (announced in 16.9; npx motionary@v16-lts keeps them) —
+// their tests live on the 16.x line; test/platform-stable-17-0.test.ts checks the exit-2 pointer.
 
 describe('Studio project recovery: damaged files are reported, never rewritten', () => {
   const good = () => serializeStudioProject(createTimelineDoc({ layers: [{ id: 't', type: 'track', target: '#t', keyframes: [{ id: 'a', time: 0, props: { opacity: 0 } }, { id: 'b', time: 300, props: { opacity: 1 } }] }] }), { fps: 30 });
@@ -137,37 +69,5 @@ describe('Studio project recovery: damaged files are reported, never rewritten',
     expect(() => parseStudioProject(bad)).toThrow(/layers/);
     const v2 = JSON.parse(g); v2.version = 2;
     expect(() => parseStudioProject(v2)).toThrow(/version/);
-  });
-  it('migrate --to 15 reports damaged project files and leaves them (and valid projects) untouched', () => {
-    const d = mkdtempSync(join(tmpdir(), 'mo-v15p-'));
-    const g = good();
-    writeFileSync(join(d, 'ok.motionary.json'), g);
-    writeFileSync(join(d, 'cut.motionary.json'), g.slice(0, 40));
-    const r = CLI.migrateTo15([d], { write: true, sceneV2: S });
-    expect(readFileSync(join(d, 'ok.motionary.json'), 'utf8')).toBe(g);
-    expect(readFileSync(join(d, 'cut.motionary.json'), 'utf8')).toBe(g.slice(0, 40));
-    expect(r.problems.map((p: any) => p.file.slice(d.length + 1))).toEqual(['cut.motionary.json']);
-    expect(existsSync(join(d, 'cut.motionary.json.bak'))).toBe(false);
-  });
-});
-
-describe('migration corpus (golden files): 0 unexpected losses', () => {
-  it('migrate --to 15 --write on the 13.x fixtures + shipped templates: legacy files become exactly the golden Scene v2, nothing lost, everything else untouched', () => {
-    const d = mkdtempSync(join(tmpdir(), 'mo-v15g-'));
-    const FX = join(ROOT, 'test/fixtures/scene-v2'), TP = join(ROOT, 'templates');
-    mkdirSync(join(d, 'fx')); mkdirSync(join(d, 'tp'));
-    for (const f of readdirSync(FX)) writeFileSync(join(d, 'fx', f), readFileSync(join(FX, f)));
-    for (const f of readdirSync(TP)) writeFileSync(join(d, 'tp', f), readFileSync(join(TP, f)));
-    const r = CLI.migrateTo15([d], { write: true, sceneV2: S });
-    expect(r.problems).toEqual([]);
-    expect(r.manual).toEqual([]);
-    const legacy = r.files.filter((x: any) => x.kind === 'legacy-data');
-    expect(legacy.map((x: any) => x.file.slice(d.length + 1)).sort()).toEqual(['fx/player-unversioned.json', 'fx/playground.json']);
-    for (const x of legacy) {
-      expect(x.losses, x.file).toEqual([]);
-      expect(readFileSync(x.file, 'utf8')).toBe(readFileSync(join(FX, x.file.slice(d.length + 4).replace(/\.json$/, '.scene.json')), 'utf8'));
-    }
-    for (const f of readdirSync(TP)) expect(readFileSync(join(d, 'tp', f), 'utf8')).toBe(readFileSync(join(TP, f), 'utf8'));
-    for (const f of readdirSync(FX).filter((n) => !/^(playground|player-unversioned)\.json$/.test(n))) expect(readFileSync(join(d, 'fx', f), 'utf8'), f).toBe(readFileSync(join(FX, f), 'utf8'));
   });
 });

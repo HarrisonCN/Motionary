@@ -32,25 +32,7 @@ describe('16.9 DEPRECATIONS_V17 + docs', () => {
   });
 });
 
-describe('16.9 motionary/scene/v3-preview warns once and forwards', () => {
-  it('is its own entry (not the scene-v3 files) and behaves exactly like motionary/scene/v3', async () => {
-    expect(pkg.exports['./scene/v3-preview'].import.default).toBe('./dist/components/scene-v3-preview.js');
-    expect(pkg.exports['./components/scene-v3-preview'].require.default).toBe('./dist/components/scene-v3-preview.cjs');
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-    const P = await import('../src/components/scene/v3-preview');
-    const V3 = await import('../src/components/scene/v3');
-    const d = { format: 'motionary-scene', version: 2, layers: [{ id: 'a', type: 'track', target: '.a', keyframes: [{ id: 'k', time: 0, props: { opacity: 0 } }] }] };
-    expect(warn).not.toHaveBeenCalled(); // no side effect on import
-    const a = P.migrateToSceneV3(d), b = V3.migrateToSceneV3(d);
-    expect(a).toEqual(b);
-    expect(P.validateSceneV3(a.doc)).toEqual([]);
-    P.sceneV3ToV2(a.doc!);
-    expect(warn).toHaveBeenCalledTimes(1);
-    expect(String(warn.mock.calls[0][0])).toMatch(/v3-preview.*17\.0.*motionary\/scene\/v3/);
-    expect(P.SCENE_V3_STATUS).toBe('stable');
-    warn.mockRestore();
-  });
-});
+// 17.0 removed motionary/scene/v3-preview (the 16.9 warn-once forwarder); test/platform-stable-17-0.test.ts checks it is gone.
 
 describe('16.9 doctor --v17 / migrate --to 17', () => {
   const project = () => {
@@ -92,7 +74,7 @@ describe('16.9 doctor --v17 / migrate --to 17', () => {
     expect(await CLI.main(['migrate', '--to', '17', d, '--json'])).toBe(0);
     log.mockRestore();
   });
-  it('doctor --v15 / migrate --to 15 print the 17.0 removal notice on stderr', async () => {
+  it('doctor --v15 / migrate --to 15 print the 17.0 removal message on stderr (17.0: and exit 2)', async () => {
     const d = tmp();
     const err = vi.spyOn(console, 'error').mockImplementation(() => {});
     const log = vi.spyOn(console, 'log').mockImplementation(() => {});

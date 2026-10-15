@@ -1,6 +1,6 @@
 // 15.0.0 — Motion Studio 2.0 (major).
 // 1. Removals announced in 14.9 (docs/deprecations-v15.md): the motionary/compat-v13 entry, the player's legacy loader
-//    hook and `motionary codemod <5–10>` are gone; doctor --v15 / migrate --to 15 stay in the CLI.
+//    hook and `motionary codemod <5–10>` are gone; doctor --v15 / migrate --to 15 stayed in the CLI until 17.0 (v16-lts keeps them).
 // 2. `motionary/studio/app` (= components/studio-app): createStudioApp(root, options) composes the Studio (timeline +
 //    canvas), save / reopen through a storage adapter, packs with assets (missing-asset report + relink suggestions),
 //    the 14.7 standalone export and optional AI review — new → edit → preview → save → reopen → export. Heavy parts
@@ -43,15 +43,15 @@ describe('15.0 removals', () => {
     expect(err.mock.calls.map((c) => String(c[0])).join('\n')).toMatch(/removed in 15\.0.*motionary@v14-lts codemod 7/s);
     err.mockRestore();
   });
-  it('the player refuses 13.x documents and points to migrate --to 15 (no loader hook left)', async () => {
+  it('the player refuses 13.x documents and points to migrate --to 15 on the 16.x CLI (17.0: npx motionary@v16-lts; no loader hook left)', async () => {
     const m: any = await import('../src/components/effects/player');
     expect(m.setLegacyAnimationLoader).toBeUndefined();
     const el = document.createElement('div');
-    expect(() => createPlayer(el, { tracks: [{ target: ':scope', duration: 100, keyframes: [{ opacity: 0 }, { opacity: 1 }] }] } as any)).toThrow(/migrate --to 15/);
+    expect(() => createPlayer(el, { tracks: [{ target: ':scope', duration: 100, keyframes: [{ opacity: 0 }, { opacity: 1 }] }] } as any)).toThrow(/npx motionary@v16-lts migrate --to 15/);
   });
-  it('doctor --v15 and migrate --to 15 stay in the 15.x CLI', () => {
-    expect(typeof CLI.doctorV15).toBe('function');
-    expect(typeof CLI.migrateTo15).toBe('function');
+  it('doctor --v15 and migrate --to 15 stayed in the 15.x / 16.x CLI; 17.0 removed them', () => {
+    expect(CLI.doctorV15).toBeUndefined();
+    expect(CLI.migrateTo15).toBeUndefined();
   });
 });
 
