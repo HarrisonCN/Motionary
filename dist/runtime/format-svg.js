@@ -1,5 +1,5 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-Dc55SD6l.js';
-import { T as Timeline, P as Playable, p as parseValue } from '../chunks/tween-DXCGIXDh.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-Dk7T0M7p.js';
+import { T as Timeline, P as Playable, p as parseValue } from '../chunks/tween-QxulEo-G.js';
 import { c as cubicBezier } from '../chunks/ease-XN8_0sXu.js';
 
 /**
@@ -443,4 +443,4 @@ function playSmil(svg, o = {}) {
 const formatSvg = { id: 'format-svg', version: RUNTIME_VERSION, tier: 'standard', requires: ['core'], api: { parsePath, flattenPath, pathLength, pointAtLength, samplePath, morphPath, readSmil, playSmil, smilTime } };
 
 export { flattenPath, formatSvg, morphPath, parsePath, pathLength, playSmil, pointAtLength, readSmil, samplePath, smilTime };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0/dist/runtime/format-svg.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.1.0/dist/runtime/format-svg.js.map

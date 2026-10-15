@@ -142,4 +142,4 @@ exports.nativeEasing = nativeEasing;
 exports.nativeTokens = nativeTokens;
 exports.toFlutter = toFlutter;
 exports.toReactNative = toReactNative;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0/dist/components/native.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.1.0/dist/components/native.cjs.map

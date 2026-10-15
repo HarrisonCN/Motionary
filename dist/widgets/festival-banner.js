@@ -1,2 +1,2 @@
 export { d as defineFestivalBanner } from '../chunks/festival-banner-BBqV8cdf.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0/dist/widgets/festival-banner.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.1.0/dist/widgets/festival-banner.js.map

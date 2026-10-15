@@ -944,4 +944,4 @@ exports.definePullRefresh = definePullRefresh;
 exports.defineSlider = defineSlider;
 exports.defineTabs = defineTabs;
 exports.defineUiComponents = defineUiComponents;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0/dist/components/ui.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.1.0/dist/components/ui.cjs.map

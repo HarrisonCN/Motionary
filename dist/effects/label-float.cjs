@@ -15,4 +15,4 @@ function registerLabelFloat() {
 exports.effect = effect;
 exports.register = registerLabelFloat;
 exports.registerLabelFloat = registerLabelFloat;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0/dist/effects/label-float.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.1.0/dist/effects/label-float.cjs.map
