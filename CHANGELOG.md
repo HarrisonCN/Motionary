@@ -23,8 +23,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   no sandbox — tests / trusted code); `pluginWorkerSource` / `pluginFrameSource`. Docs: `docs/studio-plugins.md`.
 
 ### Size
-- New size line studio-plugins (limit 4.00 KB gzip, plan target; measured PL_KB). No existing line raised; lite
+- New size line studio-plugins (limit 4.00 KB gzip, plan target; measured 2.85 KB). No existing line raised; lite
   69.99 / 70 KB; zero runtime deps.
+- npm package: the contract audit reports (`docs/contract-report.json` / `.md`, CI output of `check:contract`) are no
+  longer packed — they stay in the repository (linked from `docs/component-contract.md`); unpacked 13.94 MB, limit
+  unchanged at 14 MB.
 
 ## [16.1.0] — Symbols
 
