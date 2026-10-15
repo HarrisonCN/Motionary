@@ -1,5 +1,5 @@
 /**
- * Studio plugin API v1 (preview in 16.2, stable and frozen since 17.0: 17.x adds permissions only as opt-in). Third-party panels and
+ * Studio plugin API v1 (`@experimental` since 16.2: may change in a minor release — docs/stability.md). Third-party panels and
  * exporters run in a sandbox (a Worker, or an iframe with `sandbox="allow-scripts"` and a `default-src 'none'` CSP)
  * and talk to the Studio only through messages. A manifest declares the permissions; the host answers a call only
  * when its permission was granted and audits every call. Proposals never write the project: the host hands a copy
@@ -8,7 +8,7 @@
  * Opt-in entry `motionary/studio/plugins` (= `motionary/components/studio-plugins`); not in lite or studio.
  */
 
-/** The plugin API version a manifest declares (`api: 1`); frozen since 17.0. */
+/** The plugin API version a manifest declares (`api: 1`). @experimental */
 export const PLUGIN_API_VERSION = 1 as const;
 
 export const PLUGIN_PERMISSIONS = ['project:read', 'project:propose', 'panel', 'exporter'] as const;

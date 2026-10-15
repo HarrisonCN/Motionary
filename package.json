@@ -4661,6 +4661,7 @@
     "usa-codemod-11": "./bin/usa-codemod-11.mjs",
     "motionary": "./bin/motionary.mjs",
     "usa-codemod-12": "./bin/usa-codemod-12.mjs",
-    "usa-codemod-13": "./bin/usa-codemod-13.mjs"
+    "usa-codemod-13": "./bin/usa-codemod-13.mjs",
+    "mo-codemod": "./bin/mo-codemod.mjs"
   }
 }

@@ -110,7 +110,7 @@ const t = (): number => (typeof performance == 'object' ? performance.now() : Da
 function ownerOf(c: Element): Element | null {
   let n: any = c.parentNode;
   while (n) {
-    if (n.nodeType === 1 && n.localName.startsWith('usa-') && typeof n.changed == 'function') return n;
+    if (n.nodeType === 1 && (n.localName.startsWith('usa-') || n.localName.startsWith('mo-')) && typeof n.changed == 'function') return n;
     n = n.parentNode || n.host;
   }
   return null;

@@ -138,6 +138,21 @@ export function adoptStyles(id: string, css: string): void {
   if (!config.injectStyles || !css || injected.has(id) || typeof document === 'undefined') return;
   injected.add(id);
   if (!adopt(document, css, true)) (document.head || document.documentElement).appendChild(styleEl(css)).setAttribute('data-usa', id);
+  if (!id.endsWith(':mo')) { cssSources.set(id, css); if (moActive) adoptAlias(id, css); }
+}
+
+// 17.0 mo-* aliases: the stylesheets injected so far, copied with renamed tag selectors once the first <mo-*> connects.
+const cssSources = new Map<string, string>();
+let moActive = false;
+function adoptAlias(id: string, css: string): void {
+  if (!/usa-[a-z]/.test(css)) return;
+  const a = aliasCss(css);
+  if (a !== css) adoptStyles(id + ':mo', a);
+}
+function activateAliases(): void {
+  if (moActive) return;
+  moActive = true;
+  cssSources.forEach((css, id) => adoptAlias(id, css));
 }
 
 /** Constructable stylesheet onto `root` (appended for a document, replacing for a shadow root); false without support. */
@@ -362,10 +377,50 @@ export function defineElement(
   adoptStyles('base', BASE_CSS);
   if (css) adoptStyles(css.id, css.text);
   const existing = customElements.get(tag);
-  if (existing) return existing;
+  if (existing) return defineAlias(tag, existing), existing;
   const ctor = make(getBase());
   customElements.define(tag, ctor);
+  defineAlias(tag, ctor);
   return ctor;
+}
+
+/** 17.0: the `mo-*` alias of a default `usa-*` tag (`usa-switch` → `mo-switch`), or `null` for any other tag. */
+export const aliasTag = (tag: string): string | null => (tag.startsWith('usa-') ? 'mo-' + tag.slice(4) : null);
+
+const TAG_RE = /(^|[^\w.#[\-])usa-(?=[a-z])/g;
+/** `usa-…` → `mo-…` in selectors only; declarations, @keyframes, classes, attributes and custom properties are untouched. */
+export function aliasCss(text: string): string {
+  let out = '', buf = '';
+  const stack: string[] = []; // 'rule' (declarations) | 'group' (@media …: nested rules) | 'raw' (@keyframes …: verbatim)
+  for (const ch of text) {
+    const k = stack[stack.length - 1];
+    if (k === 'rule' || k === 'raw') {
+      out += ch;
+      if (ch === '{') stack.push(k);
+      else if (ch === '}') stack.pop();
+    } else if (ch === '{') {
+      const pre = buf.trim();
+      if (pre.startsWith('@')) { out += buf + ch; stack.push(/^@(media|supports|layer|container|scope|document)\b/.test(pre) ? 'group' : 'raw'); }
+      else { out += buf.replace(TAG_RE, '$1mo-') + ch; stack.push('rule'); }
+      buf = '';
+    } else if (ch === '}' || ch === ';') { out += buf + ch; buf = ''; if (ch === '}') stack.pop(); }
+    else buf += ch;
+  }
+  return out + buf;
+}
+
+/** Register the `mo-*` alias: a subclass (one class cannot be defined twice); the first one to connect turns on the renamed CSS copies. */
+function defineAlias(tag: string, ctor: CustomElementConstructor): void {
+  const a = aliasTag(tag);
+  if (!a || customElements.get(a)) return;
+  const C = ctor as any;
+  class Alias extends C {
+    connectedCallback(): unknown {
+      activateAliases();
+      return super.connectedCallback?.();
+    }
+  }
+  try { customElements.define(a, Alias as unknown as CustomElementConstructor); } catch { /* the name is taken by another library */ }
 }
 
 const BASE_CSS = '.usa-sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}';
