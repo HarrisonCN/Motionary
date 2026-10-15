@@ -45,10 +45,10 @@ const CORPUS = () => [A11Y_DOC, GROUPED, ...templateScenes()];
 const copy = (x: any) => JSON.parse(JSON.stringify(x));
 
 describe('15.9 Scene v3 draft: constants and deprecation list', () => {
-  it('format / version / status (draft until 16.0) and limits', () => {
+  it('format / version / status (draft in 15.9, stable from 16.0) and limits', () => {
     expect(SCENE_V3_FORMAT).toBe('motionary-scene');
     expect(SCENE_V3_VERSION).toBe(3);
-    expect(SCENE_V3_STATUS).toBe('draft');
+    expect(SCENE_V3_STATUS).toBe('stable'); // 16.0: Scene v3 is the stable write format
     expect(SCENE_V3_LIMITS.compDepth).toBeGreaterThanOrEqual(4);
   });
   it('DEPRECATIONS_V16 names every 16.0 change with removedIn 16.0, a fix and a doc anchor', () => {

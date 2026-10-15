@@ -26,13 +26,13 @@ const scene = () => ({
 
 describe('15.1 propose_edit contract (additive)', () => {
   it('server 2.4: propose_edit appended after the 2.3 tools, read-only, schema 1.0, output schema; earlier tools unchanged', () => {
-    expect(M.SERVER_INFO.version).toMatch(/^2\.([4-9]|\d\d)\.\d+$/);
+    expect(M.SERVER_INFO.version).toMatch(/^(?:2\.(?:[4-9]|\d\d)|(?:[3-9]|\d\d)\.\d+)\.\d+$/); // 16.0: motionary-mcp 3.0
     const names = M.TOOLS.map((x: any) => x.name);
     expect(names.indexOf('propose_edit')).toBeGreaterThan(names.indexOf('export_scene'));
     for (const n of ['list_components', 'validate_snippet', 'check_compatibility', 'suggest_fix', 'list_templates', 'get_template', 'export_scene']) expect(names).toContain(n);
     const p = t('propose_edit');
     expect(p.annotations.readOnlyHint).toBe(true);
-    expect(p._meta['motionary/schemaVersion']).toBe('1.0');
+    expect(p._meta['motionary/schemaVersion']).toBe('2.0'); // 16.0 (MCP 3.0): scene input is an object (v3 or v2)
     expect(p.inputSchema.required).toEqual(['scene', 'prompt']);
     expect(Object.keys(p.inputSchema.properties).sort()).toEqual(['prompt', 'requestId', 'scene', 'selection']);
     expect(p.outputSchema.properties.schema.const).toBe('motionary-mcp/propose_edit@1');
@@ -56,12 +56,11 @@ describe('propose_edit', () => {
     expect(r.provenance).toEqual({ generator: 'motionary-mcp/propose_edit', requestId: 'req-15.1:abc_1' });
     expect(JSON.stringify(s)).toBe(before);
   });
-  it('accepts the scene as JSON text and is deterministic', async () => {
-    const a = await call('propose_edit', { scene: JSON.stringify(scene()), prompt: 'fade up the card' });
+  it('is deterministic; JSON text is refused (16.0: motionary-mcp 3.0 takes scene objects only)', async () => {
+    await expect(Promise.resolve().then(() => M.callTool(m, 'propose_edit', { scene: JSON.stringify(scene()), prompt: 'fade up the card' }))).rejects.toThrow(/JSON object/);
+    const a = await call('propose_edit', { scene: scene(), prompt: 'fade up the card' });
     const b = await call('propose_edit', { scene: scene(), prompt: 'fade up the card' });
-    const { deprecations, ...rest } = a; // 15.9 (MCP 2.5): JSON text still works and reports mcp-scene-text (removed in 3.0)
-    expect(deprecations.map((d: any) => d.id)).toEqual(['mcp-scene-text']);
-    expect(rest).toEqual(b);
+    expect(a).toEqual(b);
     expect(a.provenance).toEqual({ generator: 'motionary-mcp/propose_edit' });
   });
   it('a selection limits the layers the proposal may touch', async () => {

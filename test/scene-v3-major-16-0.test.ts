@@ -21,6 +21,7 @@ const CLI: any = await import(join(ROOT, 'bin/motionary.mjs'));
 const M: any = await import(join(ROOT, 'bin/motionary-mcp.mjs'));
 const m = M.loadManifest(join(ROOT, 'dist/manifest.json'));
 M.setStudioAi(await import(join(ROOT, 'dist/components/studio-ai.js')));
+M.setSceneV3(V3);
 const call = async (name: string, args: any) => (await M.callTool(m, name, args)).structuredContent;
 
 const V2 = { format: 'motionary-scene', version: 2, name: 's', layers: [

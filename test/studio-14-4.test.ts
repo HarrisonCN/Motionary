@@ -630,7 +630,8 @@ describe('14.4 acceptance: build through the UI, save, reopen, same frames', () 
     s2.setTime(350);
     expect(['title', 'img', 'ok'].map(decl)).toEqual(dom350);
     // the Scene v2 export opens to the same frames too (export / import regression)
-    const scene = s2.exportScene();
+    expect(s2.exportScene().version).toBe(3); // 16.0: exportScene() writes Scene v3; v2 on request
+    const scene = s2.exportScene({ version: 2 });
     expect(scene.format).toBe('motionary-scene');
     expect(scene.version).toBe(2);
     expect(sampleFrames(loadMotionDoc(JSON.stringify(scene)).doc, { fps: 60 })).toEqual(frames);

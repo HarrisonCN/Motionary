@@ -24,14 +24,14 @@ const scene = {
 
 describe('14.8 tool contracts (additive)', () => {
   it('server 2.3: list_templates / get_template / export_scene appended, read-only, with output schemas; every 2.2 tool unchanged', () => {
-    expect(M.SERVER_INFO.version).toMatch(/^2\.([3-9]|\d\d)\.\d+$/);
+    expect(M.SERVER_INFO.version).toMatch(/^(?:2\.(?:[3-9]|\d\d)|(?:[3-9]|\d\d)\.\d+)\.\d+$/); // 16.0: motionary-mcp 3.0
     const names = M.TOOLS.map((x: any) => x.name);
     expect(names.slice(names.indexOf('list_templates'), names.indexOf('list_templates') + 3)).toEqual(['list_templates', 'get_template', 'export_scene']); // 15.1 (MCP 2.4) appends propose_edit after them
-    for (const n of ['list_components', 'search_components', 'get_component', 'get_example', 'scaffold_snippet', 'suggest_motion', 'validate_snippet', 'check_compat', 'check_compatibility', 'suggest_fix']) expect(names).toContain(n);
+    for (const n of ['list_components', 'search_components', 'get_component', 'get_example', 'scaffold_snippet', 'suggest_motion', 'validate_snippet', 'check_compatibility', 'suggest_fix']) expect(names).toContain(n); // 16.0 (MCP 3.0) removed check_compat
     for (const n of ['list_templates', 'get_template', 'export_scene']) {
       expect(t(n).annotations.readOnlyHint).toBe(true);
       expect(t(n).outputSchema).toBeTruthy();
-      expect(t(n)._meta['motionary/schemaVersion']).toBe('1.0');
+      expect(t(n)._meta['motionary/schemaVersion']).toBe(n === 'export_scene' ? '2.0' : '1.0'); // 16.0: export_scene scene / project inputs are objects
     }
     expect(t('get_template').inputSchema.required).toEqual(['id']);
     expect(Object.keys(t('export_scene').inputSchema.properties).sort()).toEqual(['fps', 'inline', 'js', 'project', 'scene', 'template', 'title']);
@@ -77,7 +77,7 @@ describe('export_scene', () => {
     for (const f of a.files) expect(f.encoding).toBe('utf8');
     expect(a.report.ok).toBe(true);
     expect(JSON.stringify(await call('export_scene', { scene }))).toBe(JSON.stringify(a));
-    const one = await call('export_scene', { scene: JSON.stringify(scene), inline: true, js: false, fps: 30, title: 'T' });
+    const one = await call('export_scene', { scene: JSON.parse(JSON.stringify(scene)), inline: true, js: false, fps: 30, title: 'T' });
     expect(one.files.map((f: any) => f.path)).toEqual(['index.html']);
     expect(one.files[0].text).not.toMatch(/<script/i);
     expect(one.files[0].text).toContain('<title>T</title>');
@@ -89,9 +89,9 @@ describe('export_scene', () => {
     const r = await call('export_scene', { template: withAsset.id });
     expect(r.report.ok).toBe(true);
     if (withAsset.files > 0) expect(r.files.some((f: any) => f.path.startsWith('assets/') && f.encoding === 'base64')).toBe(true);
-    const project = JSON.stringify({ format: 'motionary-studio', version: 1, scene, studio: {} });
+    const project = { format: 'motionary-studio', version: 1, scene, studio: {} }; // 16.0 (MCP 3.0): objects only
     expect((await call('export_scene', { project })).digest).toBe((await call('export_scene', { scene })).digest);
-    for (const args of [{}, { scene: '{nope' }, { template: 'nope' }, { scene, fps: 0 }]) {
+    for (const args of [{}, { scene: '{nope' }, { project: JSON.stringify({ format: 'motionary-studio', version: 1, scene, studio: {} }) }, { template: 'nope' }, { scene, fps: 0 }]) {
       const res = await Promise.resolve().then(() => M.callTool(m, 'export_scene', args)).then((x: any) => x, (e: any) => ({ isError: true, e: String(e.message) }));
       expect(res.isError, JSON.stringify(args)).toBe(true);
     }

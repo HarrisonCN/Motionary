@@ -41,7 +41,7 @@ describe('12.5 manifest + MCP + CLI', () => {
     expect(sch.$defs.component.required).not.toContain('changed');
   });
   it('MCP: version filter, compat on get_component, check_compat', () => {
-    { const names = TOOLS.map((t) => t.name); expect(names.indexOf('check_compat')).toBe(names.indexOf('validate_snippet') + 1); } // 13.7 appends check_compatibility + suggest_fix after them
+    { const names = TOOLS.map((t) => t.name); expect(names.indexOf('check_compat')).toBe(-1); expect(names.indexOf('check_compatibility')).toBe(names.indexOf('validate_snippet') + 1); } // 13.7 appended check_compatibility + suggest_fix; 16.0 (MCP 3.0) removed the check_compat tool (checkCompat stays the library / CLI function)
     const all = callTool(m, 'list_components', { limit: 1000 }).structuredContent as any;
     const old = callTool(m, 'list_components', { version: '10.0.0', limit: 1000 }).structuredContent as any;
     expect(old.count).toBeLessThan(all.count);
