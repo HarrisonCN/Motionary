@@ -59,10 +59,10 @@ export const DEPRECATIONS_V16: readonly Deprecation16[] = [
 ];
 
 const L = SCENE_V3_LIMITS;
-const FORBIDDEN = new Set(['__proto__', 'constructor', 'prototype']);
-const DOC_KEYS = new Set(['format', 'version', 'name', 'duration', 'loop', 'seed', 'tokens', 'layers', 'components', 'variants', 'source', 'meta']);
-const COMP_KEYS = new Set(['id', 'type', 'name', 'parent', 'locked', 'muted', 'solo', 'start', 'duration', 'timeRemap', 'layers']);
-const INST_KEYS = new Set(['id', 'type', 'name', 'parent', 'locked', 'muted', 'solo', 'ref', 'target', 'start', 'overrides']);
+const FORBIDDEN = /*#__PURE__*/ new Set(['__proto__', 'constructor', 'prototype']);
+const DOC_KEYS = /*#__PURE__*/ new Set(['format', 'version', 'name', 'duration', 'loop', 'seed', 'tokens', 'layers', 'components', 'variants', 'source', 'meta']);
+const COMP_KEYS = /*#__PURE__*/ new Set(['id', 'type', 'name', 'parent', 'locked', 'muted', 'solo', 'start', 'duration', 'timeRemap', 'layers']);
+const INST_KEYS = /*#__PURE__*/ new Set(['id', 'type', 'name', 'parent', 'locked', 'muted', 'solo', 'ref', 'target', 'start', 'overrides']);
 const isObj = (v: unknown): v is Record<string, any> => !!v && typeof v === 'object' && !Array.isArray(v);
 const num = (v: unknown, min = 0, max: number = L.time): v is number => typeof v === 'number' && Number.isFinite(v) && v >= min && v <= max;
 const str = (v: unknown, max: number = L.stringLength): v is string => typeof v === 'string' && v.length <= max;
