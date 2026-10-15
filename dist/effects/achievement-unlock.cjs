@@ -15,4 +15,4 @@ function registerAchievementUnlock() {
 exports.effect = effect;
 exports.register = registerAchievementUnlock;
 exports.registerAchievementUnlock = registerAchievementUnlock;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.1.0/dist/effects/achievement-unlock.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.2.0/dist/effects/achievement-unlock.cjs.map

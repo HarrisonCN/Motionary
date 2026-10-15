@@ -15,4 +15,4 @@ function registerRope() {
 exports.effect = effect;
 exports.register = registerRope;
 exports.registerRope = registerRope;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.1.0/dist/effects/rope.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.2.0/dist/effects/rope.cjs.map

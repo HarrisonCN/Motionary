@@ -11,4 +11,4 @@ function registerSoftBody() {
 }
 
 export { effect, registerSoftBody as register, registerSoftBody };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.1.0/dist/effects/soft-body.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.2.0/dist/effects/soft-body.js.map

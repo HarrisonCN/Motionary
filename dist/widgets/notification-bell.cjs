@@ -104,4 +104,4 @@ function defineNotificationBell(tag = 'usa-notification-bell') {
 }
 
 exports.defineNotificationBell = defineNotificationBell;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.1.0/dist/widgets/notification-bell.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.2.0/dist/widgets/notification-bell.cjs.map
