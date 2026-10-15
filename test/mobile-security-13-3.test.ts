@@ -348,7 +348,8 @@ describe('native bridge: message origin validation (13.3.0)', () => {
     // Worker message handlers talk to a worker this code created itself (fx2/perf3.ts) — not a window channel.
     const WORKER_ONLY = ['src/components/fx2/perf3.ts'];
     const listeners = files.filter((f) => !WORKER_ONLY.includes(f) && /addEventListener(\?\.)?\(\s*['"]message['"]|(^|[^.\w])onmessage\s*=/m.test(read(f)));
-    expect(listeners.sort()).toEqual(['figma-plugin/ui.html', 'showcase/run.html', 'src/components/bridge/index.ts']);
+    // 16.2: studio/plugins.ts hosts sandboxed plugin iframes (listener checks e.source === iframe.contentWindow) and its own Workers.
+    expect(listeners.sort()).toEqual(['figma-plugin/ui.html', 'showcase/run.html', 'src/components/bridge/index.ts', 'src/components/studio/plugins.ts']);
     for (const f of listeners) expect(read(f), f).toMatch(/\.source\b|isTrustedMessage/);
   });
 
