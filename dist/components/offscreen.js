@@ -62,4 +62,4 @@ const raf = (cb, el) => (installOffscreenPause(), raf$1(cb, el));
 const onFrame = (fn, el) => (installOffscreenPause(), onFrame$1(fn, el));
 
 export { installOffscreenPause, onFrame, raf };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.2.0/dist/components/offscreen.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.3.0/dist/components/offscreen.js.map

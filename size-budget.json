@@ -152,6 +152,11 @@
     "limit": 8192
   },
   {
+    "name": "import 'motionary/components/studio-a11y' (= motionary/studio/a11y, 15.3 accessible & responsive motion: sensitivity tiers full / gentle / reduced, breakpoint variants in meta[\"motionary:variants\"], resolveVariant → plain Scene v2, validateVariants, motionSensitivity; own entry, not in lite / studio; measured 1.79 KB)",
+    "import": "export * from 'pkg/components/studio-a11y';",
+    "limit": 3072
+  },
+  {
     "name": "import 'motionary/components/interaction'",
     "import": "export * from 'pkg/components/interaction';",
     "limit": 6400

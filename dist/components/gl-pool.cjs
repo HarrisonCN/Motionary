@@ -354,4 +354,4 @@ exports.glPoolStats = glPoolStats;
 exports.glSupport = glSupport;
 exports.installGLPool = installGLPool;
 exports.uninstallGLPool = uninstallGLPool;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.2.0/dist/components/gl-pool.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.3.0/dist/components/gl-pool.cjs.map

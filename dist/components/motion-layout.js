@@ -540,4 +540,4 @@ function createLayoutTracker(targets, options = {}) {
 }
 
 export { LAYOUT_MOTION_VERSION, correctRadius, createLayoutTracker, crossDocumentLayout, flip, getLayoutId, isLayoutAnimating, layoutDelta, layoutGroup, layoutTransform, layoutTransition, measureLayout, mixBox, playLayoutSnapshot, saveLayoutSnapshot, setLayoutId, sharedLayout, snapshotLayout, solveLayoutTransform, supportsCrossDocumentViewTransitions, supportsViewTransitions, viewTransitionName };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.2.0/dist/components/motion-layout.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.3.0/dist/components/motion-layout.js.map

@@ -7,6 +7,50 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [15.3.0] - 2026-10-15
+
+**Accessible & responsive motion.** Motion sensitivity tiers and breakpoint variants that play the same in the Studio
+and in every export. Additive; zero runtime dependencies; `motionary/components/lite` unchanged; the new entry has its
+own size-budget line and no existing line was raised.
+[docs/accessible-motion.md](docs/accessible-motion.md)
+
+### Added
+
+- **`motionary/studio/a11y`** (= `motionary/components/studio-a11y`): `MOTION_SENSITIVITIES` (`full` / `gentle` /
+  `reduced`), `applySensitivity(doc, tier)` (gentle: travel × 0.5, scale halfway to 1, no overshoot, ≤ 600 ms;
+  reduced: no travel, ≤ 150 ms, opacity / colors kept), breakpoint variants in `meta["motionary:variants"]`
+  (`media: { minWidth (inclusive), maxWidth (exclusive) }`, per layer `muted` / `distanceScale` / `timeScale`),
+  `resolveVariant(doc, { width, sensitivity })` → a plain Scene v2 document (variant first, then tier),
+  `variantsOf`, `validateVariants`, `motionSensitivity()` (OS reduced-motion setting, then
+  `data-usa-motion-mode` on `<html>`), `scaleTransform`.
+- **Motion tokens: built-in `gentle` mode** next to `reduced` — `GENTLE_MOTION_MODE`, `gentleMotionOverrides(set)`
+  (distances × 0.5, durations ≤ 300 ms, no overshooting curves, springs ≥ 80 % of critical damping), `withMode(set,
+  'gentle')`; `motionTokenSetToCss` writes a `[data-usa-motion-mode~="gentle"]` block (never a media query).
+- Tests: the same variant + tier gives equal frame digests in the Studio app and the 14.7 standalone export, and the
+  15.2 native report lists the same layers; browser spec `accessible-motion.spec.mjs` (axe-core WCAG 2.1 A/AA on the
+  Studio app, keyboard-only reach with focus indicators, 200 % zoom = 640 × 400 CSS px without sideways scrolling,
+  sensitivity from the OS / page) on Chromium, Firefox and WebKit in CI.
+- `axe-core` as a **devDependency** (tests only; not in the package, runtime dependencies stay empty).
+
+### Fixed
+
+- Studio curve editor: the `<svg>` that holds the draggable handles is `role="group"` (was `role="img"`, which makes
+  its children presentational — axe `nested-interactive`).
+- Studio app: visible keyboard focus — `.usa-studio-app :focus-visible { outline: 2px solid; outline-offset: 2px }`.
+
+### Changed
+
+- `dist/manifest.json` (`motionary/tooling/manifest.json`, Pages `/components.json`) is written compact. Every
+  consumer parses it as JSON; the indentation was ~100 KB of package weight. The package stays under the unchanged
+  14 MB unpacked limit (13.92 MB) — no size limit raised.
+
+### Not done (documented)
+
+- Width / tier switches in the Studio toolbar (would grow the studio-app budget, 26.0 / 27 KB) — preview a variant by
+  opening its resolved document; planned for a later minor.
+- Real-device checklist (iOS Safari + VoiceOver, Android Chrome + TalkBack, Windows forced colors) — **not run**,
+  needs physical devices.
+
 ## [15.2.0] - 2026-10-15
 
 **Cross-platform export 2.0.** One Scene v2 document → CSS, mini-program WXSS, HarmonyOS ArkTS, Jetpack Compose or

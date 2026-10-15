@@ -215,7 +215,7 @@ if (process.argv[1]?.endsWith('gen-manifest.mjs')) {
   if (process.argv.includes('--stdout')) console.log(JSON.stringify(m, null, 2));
   else {
     mkdirSync(join(ROOT, 'dist'), { recursive: true });
-    writeFileSync(join(ROOT, 'dist/manifest.json'), JSON.stringify(m, null, 2) + '\n');
+    writeFileSync(join(ROOT, 'dist/manifest.json'), JSON.stringify(m) + '\n'); // 15.3: compact (all consumers parse it)
     writeFileSync(join(ROOT, 'dist/manifest.schema.json'), readFileSync(join(ROOT, 'scripts/manifest.schema.json')));
     writeFileSync(join(ROOT, 'dist/llms.txt'), llms(m));
     writeFileSync(join(ROOT, 'dist/llms-full.txt'), llmsFull(m));

@@ -235,7 +235,7 @@ function createStudio(root, o) {
         const svg = D.createElementNS(SVG, 'svg');
         const sa = (e, a) => { for (const n in a)
             e.setAttribute(n, String(a[n])); return e; };
-        sa(svg, { width: CW, height: CW + 2 * CP, viewBox: `0 0 ${CW} ${CW + 2 * CP}`, role: 'img', 'aria-label': `Curve ${k ? project.bezierEasing(b) : '(no keyframe selected)'}`, style: 'touch-action:none;overflow:visible;border:1px solid #8884' });
+        sa(svg, { width: CW, height: CW + 2 * CP, viewBox: `0 0 ${CW} ${CW + 2 * CP}`, role: 'group', 'aria-label': `Curve ${k ? project.bezierEasing(b) : '(no keyframe selected)'}`, style: 'touch-action:none;overflow:visible;border:1px solid #8884' });
         const el = (tag, a) => svg.appendChild(sa(D.createElementNS(SVG, tag), a));
         el('rect', { x: 0, y: CP, width: CW, height: CW, fill: 'none', stroke: '#8886' });
         el('path', { d: `M0 ${Y(0)} C${X(b[0])} ${Y(b[1])} ${X(b[2])} ${Y(b[3])} ${CW} ${Y(1)}`, fill: 'none', stroke: '#0a84ff', 'stroke-width': 2 });
@@ -822,4 +822,4 @@ exports.springBezier = project.springBezier;
 exports.springParams = project.springParams;
 exports.STUDIO_VERSION = STUDIO_VERSION;
 exports.createStudio = createStudio;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.2.0/dist/components/studio.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.3.0/dist/components/studio.cjs.map

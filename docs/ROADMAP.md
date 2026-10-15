@@ -29,7 +29,7 @@
 | --- | --- | --- | --- | --- |
 | v15.1.0 | [已发布] | P1 | AI 编辑溯源与 Gateway 协同：`motionary/studio/provenance`（历史条目带生成者 / 模型 / 请求 id / 时间，与改动同一撤销步；AI 过滤、面板、`matchLineage`）；motionary-mcp 2.4 `propose_edit` 只返回结构化提案 + diff + provenance，不写工程 | 未经人确认的改动 0 写入（测试）；已应用 AI 改动经 requestId 对到 Gateway 调用 lineage —— 对 **Gateway 15.1 canary** 验证（`examples/gateway-provenance`），**待 Gateway 15.1 稳定版**。导出报告列出 AI 改动推迟到 15.2。 |
 | v15.2.0 | [已发布] | P1 | 跨平台导出 2.0：`motionary/studio/native` 从 Scene v2（或 timeline / Studio 工程）导出 CSS / WXSS / ArkTS + Jetpack Compose / SwiftUI 支持子集；`motionary export --scene … --report --strict` | 每个导出带逐项损失报告（每个属性恰好一次 supported / lost + 原因，测试）；五个目标的黄金文件测试 + 括号 / 字符串平衡检查（CI 无原生编译器）；独立入口与预算行；报告列出 15.1 溯源记录（`report.ai`，15.1 推迟项）。 |
-| v15.3.0 | [建议] | P1 | 无障碍与响应式动效：敏感度分级、焦点、缩放、断点变体 | Studio 与导出物行为一致；axe + 键盘 + reduced-motion 三浏览器；真机清单未在真实设备执行前标注“未执行”。 |
+| v15.3.0 | [已发布] | P1 | 无障碍与响应式动效：`motionary/studio/a11y` 敏感度分级（full / gentle / reduced）+ 断点变体（`meta["motionary:variants"]`，`resolveVariant` 输出普通 Scene v2）；tokens 内置 `gentle` 模式；Studio 焦点环与曲线编辑器角色修正 | 同一变体 + 分级在 Studio、独立导出与原生导出中帧摘要一致（测试）；axe WCAG 2.1 A/AA + 纯键盘 + 200% 缩放 + reduced-motion 浏览器用例（CI 三浏览器）；工具栏宽度 / 分级切换推迟；真机清单（iOS VoiceOver / Android TalkBack / Windows 强制颜色）**未执行**。 |
 | v15.4.0 | [条件] | P2 | 渲染后端（WebGPU / 资源调度） | 只有 14.7 / 15.0 的性能数据证明需要时才做。 |
 | v15.5.0 | [建议] | P2 | 团队工程与资源：`ProjectStore` 适配器、版本历史、冲突检测（Motionary 不自带服务器） | Gateway 示例中跨租户读取被拒并审计，配额生效。 |
 | v15.9.0 | [建议] | P0 | v16 准备：Scene v3 草案 + 迁移预览；16.0 删除项全部警告 + codemod + 文档；`16.0.0-rc.1` 仅 `next` | 迁移语料 dry-run 损失报告完整；`next` / `latest` 隔离。 |
