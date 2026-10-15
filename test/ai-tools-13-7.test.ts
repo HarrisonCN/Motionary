@@ -115,7 +115,7 @@ describe('13.7 suggest_fix', () => {
     const r = fix('<script src="https://unpkg.com/motionary@14/dist/components.umd.js"></script>\n<script type="module">\nimport { loadingBar } from \'motionary/components/page\';\n</script>');
     expect(r.context).toBe('cdn');
     const f = r.fixes.find((x: any) => x.kind === 'bare-import');
-    expect(f.patch.replace).toMatch(/from 'https:\/\/[^']+motionary@15\/dist\/components\/page\.js'/); // CDN major = the current major (15 since 15.0)
+    expect(f.patch.replace).toMatch(/from 'https:\/\/[^']+motionary@16\/dist\/components\/page\.js'/); // CDN major = the current major (16 since 16.0)
     expect(f.line).toBe(3);
   });
   it('missing import / define in ESM → import + register lines', () => {
