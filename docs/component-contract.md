@@ -2,7 +2,7 @@
 
 Every `<usa-*>` element follows the same six rules. 11.7 measured them (report only), 11.8 fixed the non-breaking findings,
 **12.0 makes the contract blocking**: `npm run check:contract` (CI) fails on any finding, and every intended exception is
-written next to the code as `// contract-exempt: <rule> — <reason>` and listed in [contract-report.md](./contract-report.md).
+written next to the code as `// contract-exempt: <rule> — <reason>` and listed in [contract-report.md](https://github.com/HarrisonCN/Motionary/blob/main/docs/contract-report.md) (CI output of `npm run check:contract`; in the repository, not in the npm package).
 
 | Part | Rule | Audit rule ids |
 |---|---|---|

@@ -1030,6 +1030,16 @@
         "default": "./dist/components/studio-store.cjs"
       }
     },
+    "./components/studio-plugins": {
+      "import": {
+        "types": "./dist/components/studio-plugins.d.ts",
+        "default": "./dist/components/studio-plugins.js"
+      },
+      "require": {
+        "types": "./dist/components/studio-plugins.d.cts",
+        "default": "./dist/components/studio-plugins.cjs"
+      }
+    },
     "./components/studio-app": {
       "import": {
         "types": "./dist/components/studio-app.d.ts",
@@ -1628,16 +1638,6 @@
       "require": {
         "types": "./dist/components/scene-symbols.d.cts",
         "default": "./dist/components/scene-symbols.cjs"
-      }
-    },
-    "./components/studio-plugins": {
-      "import": {
-        "types": "./dist/components/studio-plugins.d.ts",
-        "default": "./dist/components/studio-plugins.js"
-      },
-      "require": {
-        "types": "./dist/components/studio-plugins.d.cts",
-        "default": "./dist/components/studio-plugins.cjs"
       }
     },
     "./components/perf-tasks": {
@@ -4507,7 +4507,9 @@
     "!dist/**/*.map",
     "!docs/images",
     "!docs/ROADMAP.md",
-    "!dist/llms-full.txt"
+    "!dist/llms-full.txt",
+    "!docs/contract-report.md",
+    "!docs/contract-report.json"
   ],
   "sideEffects": [
     "*.css",
