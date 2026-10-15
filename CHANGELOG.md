@@ -7,6 +7,46 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [16.9.0] — Getting ready for 17.0
+
+Positioning unchanged: zero runtime dependencies · a gzip budget on every entry point · accessible by default. Studio,
+MCP, the Figma plugin and the plugin API stay experimental (docs/stability.md).
+
+### Deprecated (removed in 17.0)
+- `motionary/scene/v3-preview` (+ `motionary/components/scene-v3-preview`), the 15.9 preview name of
+  `motionary/scene/v3`: now its own small module that forwards everything unchanged and warns once per session on the
+  first call (no side effect on import). Import from `motionary/scene/v3` instead.
+- `motionary doctor --v15` / `motionary migrate --to 15` (the 13.x / 14.x → 15 project migration) print a notice on
+  stderr: removed in 17.0; `npx motionary@v16-lts migrate --to 15 --write` keeps working after 17.0 ships.
+
+### Added
+- `npx motionary doctor --v17 [paths…] [--json]`: every use of what 17.0 removes, with the fix and doc anchor (exit 1
+  when something is found). `npx motionary migrate --to 17 [paths…] [--write] [--report file] [--json]`: rewrites the
+  alias imports to `motionary/scene/v3` (dry run by default; `--write` writes a `.bak` first, never overwrites a
+  backup, idempotent) and lists the v15 commands in scripts as manual work. `DEPRECATIONS_V17` exported from
+  `bin/motionary.mjs`.
+- Docs: `docs/deprecations-v17.md` (one anchor per removal), `docs/migrating-to-v17.md`, `docs/versions.md`
+  "17.0 and `v16-lts`".
+
+- Docs: `docs/compare/` — comparison pages vs AOS, GSAP + ScrollTrigger, Lenis and Motion (size, features,
+  accessibility; every claim about another library cites its own docs; where another library is the better choice, the
+  page says so). Sizes are measured by `scripts/compare-sizes.mjs` (exact published versions, gzip level 9) and stored in
+  `docs/compare/sizes.json`.
+- `examples/stackblitz/` — one Vite project per framework (vanilla, React 19, Vue 3, Svelte 5) with an "Open in
+  StackBlitz" link; each was built with `vite build` against the published package.
+- Supply chain: `.github/workflows/scorecard.yml` (OpenSSF Scorecard) + README badge; `.github/workflows/publish.yml`
+  (manual, `npm publish --provenance` from GitHub Actions — needs npm trusted publishing or an `NPM_TOKEN` secret set by
+  the maintainer, so releases so far carry no provenance); `docs/supply-chain.md` says what is and is not in place.
+  READMEs link supply chain, CDN SRI, comparisons and StackBlitz examples.
+
+### Size
+- No size line raised; lite unchanged; zero runtime deps.
+
+### Deferred
+- Real physical-device testing (iOS Safari + VoiceOver, Android Chrome + TalkBack, pen / trackpad, Windows forced
+  colors) — deferred by the maintainer's decision (2026-10-15): not run and not claimed. CI covers phones only through
+  the emulated `mobile-chrome` / `mobile-safari` profiles; see docs/mobile.md#not-verified.
+
 ## [16.3.0] — Performance budget in Studio
 
 ### Added
