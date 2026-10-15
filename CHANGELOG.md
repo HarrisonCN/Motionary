@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [16.2.0] — Studio plugin API (preview)
+
+### Added
+- `motionary/studio/plugins` (= `motionary/components/studio-plugins`, `@experimental` until plugin API v1 in 17.0):
+  third-party panels and exporters in a sandbox. `parsePluginManifest` (id, name, semver version, `api: 1`,
+  permissions `project:read` / `project:propose` / `panel` / `exporter`; anything else refused, ≤ 16 KB).
+  `createPluginHost({ getProject, propose, timeoutMs, maxMessages, onCrash })`: answers a plugin call only for a
+  granted permission and audits every call (`host.audit`); `propose` hands a copy to the Studio's callback and never
+  writes the project; `panel` is text only; `runExporter(id)` returns `{ files }` with path rules (relative, no `..`,
+  text only, ≤ 500 files / 10 MB). A plugin that throws, misses the exporter time limit or floods the host is
+  marked `crashed` and terminated; the host and other plugins keep working and no host method throws.
+- Sandboxes: `createWorkerTransport` (Blob URL Worker; `host.load(manifest, code)` uses it), `createIframeTransport`
+  (hidden `sandbox="allow-scripts"` iframe with a `default-src 'none'` CSP), `createLocalTransport` (in-process,
+  no sandbox — tests / trusted code); `pluginWorkerSource` / `pluginFrameSource`. Docs: `docs/studio-plugins.md`.
+
+### Size
+- New size line studio-plugins (limit 4.00 KB gzip, plan target; measured PL_KB). No existing line raised; lite
+  69.99 / 70 KB; zero runtime deps.
+
 ## [16.1.0] — Symbols
 
 ### Added

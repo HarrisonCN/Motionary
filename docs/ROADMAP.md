@@ -35,7 +35,7 @@
 | v15.9.0 | [已发布] | P0 | v16 准备：`motionary/scene/v3-preview`（Scene v3 草案：嵌套合成 / 组件即图层 / 一等 variants；`migrateToSceneV3` 预览 + 损失报告；`sceneV3ToV2`）；`doctor --v16` / `migrate --to 16`（15.x 只出报告，`--write` 留给 16.0，先写 `.bak`）；Studio `exportScene({ version: 2 })` + 开发期警告；motionary-mcp 2.5 `validate_scene` + 弃用提示 | 语料 v2 → v3 无损、回读 v2 与原文档相等、`frameDigest` 一致；16.0 每项变更都有警告 / doctor / 迁移 / 文档（docs/deprecations-v16.md）；`16.0.0-rc.1` 随后只发 `next` |
 | v16.0.0 | [已发布] | P0 | **major** · Scene Format v3（嵌套合成、组件即图层、断点变体）+ motionary-mcp 3.0 | v2 → v3 无损迁移或逐项损失报告；可表达部分导出帧指纹不变；`v15-lts`；codemod + migrating-to-v16。 |
 | v16.1.0 | [已发布] | P1 | 符号与实例：`motionary/scene/symbols`（符号 = Scene v3 `components`，实例 = `component` 图层；createSymbol / addInstance / setOverride / updateSymbol / detachInstance / renameSymbol / symbolUsage / validateSymbols，纯函数）；`symbolsToCss` 导出去重 | 一个符号多处实例、覆盖属性、更新主符号后所有实例一致（测试覆盖）；9 个实例的 CSS 中每个符号图层只有一个 `@keyframes` |
-| v16.2.0 | [建议] | P1 | Studio 插件 API（预览） | 沙箱运行、显式权限清单、插件崩溃不影响 Studio。 |
+| v16.2.0 | [已发布] | P1 | Studio 插件 API（预览）：`motionary/studio/plugins`（清单显式权限 project:read / project:propose / panel / exporter；宿主按权限应答并审计每次调用；提议只交给 Studio 的 propose 回调、从不直接写入；Worker / 沙箱 iframe（CSP default-src none）/ 本地传输） | 第三方面板 / 导出器在受限沙箱中运行（三浏览器规格）；插件抛错 / 超时 / 消息洪泛 → 标记 crashed 并终止，Studio 与其他插件不受影响 |
 | v16.3.0 | [建议] | P2 | 性能预算进 Studio | 编辑时显示导出体积 / 帧成本，超预算阻止发布导出。 |
 | v16.9.0 | [建议] | P0 | v17 准备 + `17.0.0-rc.1`（`next`） | 17.0 删除项全部警告 + codemod + 文档。 |
 | v17.0.0 | [建议] | P0 | **major** · 平台稳定版：冻结 Scene v3、Studio 插件 API v1、MCP 3.x；删除 16.x 弃用；LTS 策略 | lite 仍 ≤ 70 KB、零依赖；`v16-lts` 维护期写入 versions.md。 |
