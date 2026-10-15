@@ -261,4 +261,4 @@ exports.createMemoryProjectStore = createMemoryProjectStore;
 exports.detectConflict = detectConflict;
 exports.mergeProjects = mergeProjects;
 exports.toAppStorage = toAppStorage;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.5.0/dist/components/studio-store.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/components/studio-store.cjs.map

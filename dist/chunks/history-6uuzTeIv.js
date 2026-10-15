@@ -446,4 +446,4 @@ function bindHistoryKeys(target, history) {
 }
 
 export { addKeyframe as a, bindHistoryKeys as b, uniqueId as c, createTimelineHistory as d, setKeyframeEasing as e, addLayer as f, copyKeyframes as g, historyKeyAction as h, shiftKeyframes as i, editableKeyframes as j, groupLayers as k, layerSubtree as l, moveLayer as m, removeLayers as n, scaleKeyframes as o, pasteKeyframes as p, ungroupLayer as q, removeKeyframes as r, setKeyframeProps as s, updateLayers as u };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.5.0/dist/chunks/history-6uuzTeIv.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/chunks/history-6uuzTeIv.js.map

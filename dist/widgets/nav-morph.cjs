@@ -5,4 +5,4 @@ var widgets_navMorph = require('../chunks/nav-morph-C4rD3wrU.cjs');
 
 
 exports.defineNavMorph = widgets_navMorph.defineNavMorph;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.5.0/dist/widgets/nav-morph.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/widgets/nav-morph.cjs.map

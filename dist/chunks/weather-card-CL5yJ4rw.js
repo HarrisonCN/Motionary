@@ -85,4 +85,4 @@ function defineWeatherCard(tag = 'usa-weather-card') {
 }
 
 export { WEATHER_CONDITIONS as W, defineWeatherCard as d };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.5.0/dist/chunks/weather-card-CL5yJ4rw.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/chunks/weather-card-CL5yJ4rw.js.map

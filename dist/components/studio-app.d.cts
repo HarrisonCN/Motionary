@@ -418,7 +418,13 @@ interface Studio {
     frames(): TimelineFrame[];
     /** The project as JSON text (Scene v2 + editor state). */
     save(): string;
-    exportScene(): SceneV2Doc;
+    /**
+     * The document as Scene v2. 15.9: called without `{ version: 2 }` it warns once that 16.0 returns Scene v3
+     * (docs/deprecations-v16.md#scene-v2-write); `{ version: 2 }` keeps v2 in 16.x too and never warns.
+     */
+    exportScene(o?: {
+        version?: 2;
+    }): SceneV2Doc;
     /** Open a project / Scene v2 / timeline v1 / animation JSON; resets the history; returns what a scene lost. */
     load(input: unknown): SceneLoss[];
     undo(): boolean;

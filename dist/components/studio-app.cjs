@@ -35,7 +35,7 @@ function createLocalStorage(prefix = 'motionary-studio:', ls = globalThis.localS
 }
 const filesMap = (f) => (f instanceof Map ? new Map(f) : new Map(Object.entries(f || {})));
 const msg = (e) => String(e?.message || e).replace(/^\[motionary\]\s*/, '');
-const sceneKey = (s) => JSON.stringify(s.exportScene());
+const sceneKey = (s) => JSON.stringify(s.exportScene({ version: 2 }));
 /** Build the app inside `root`. Resolves once the Studio is ready. */
 async function createStudioApp(root, o = {}) {
     const d = root.ownerDocument;
@@ -239,4 +239,4 @@ exports.STUDIO_APP_VERSION = STUDIO_APP_VERSION;
 exports.createLocalStorage = createLocalStorage;
 exports.createMemoryStorage = createMemoryStorage;
 exports.createStudioApp = createStudioApp;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.5.0/dist/components/studio-app.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/components/studio-app.cjs.map

@@ -1000,16 +1000,6 @@
         "default": "./dist/components/studio-store.cjs"
       }
     },
-    "./components/scene-v3-preview": {
-      "import": {
-        "types": "./dist/components/scene-v3-preview.d.ts",
-        "default": "./dist/components/scene-v3-preview.js"
-      },
-      "require": {
-        "types": "./dist/components/scene-v3-preview.d.cts",
-        "default": "./dist/components/scene-v3-preview.cjs"
-      }
-    },
     "./components/studio-app": {
       "import": {
         "types": "./dist/components/studio-app.d.ts",
@@ -1588,6 +1578,16 @@
       "require": {
         "types": "./dist/components/scene-v2.d.cts",
         "default": "./dist/components/scene-v2.cjs"
+      }
+    },
+    "./components/scene-v3-preview": {
+      "import": {
+        "types": "./dist/components/scene-v3-preview.d.ts",
+        "default": "./dist/components/scene-v3-preview.js"
+      },
+      "require": {
+        "types": "./dist/components/scene-v3-preview.d.cts",
+        "default": "./dist/components/scene-v3-preview.cjs"
       }
     },
     "./components/perf-tasks": {
@@ -4446,7 +4446,8 @@
     "templates",
     "!dist/**/*.map",
     "!docs/images",
-    "!docs/ROADMAP.md"
+    "!docs/ROADMAP.md",
+    "!dist/llms-full.txt"
   ],
   "sideEffects": [
     "*.css",
