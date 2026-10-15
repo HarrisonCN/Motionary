@@ -28,7 +28,7 @@ test.describe('15.3 accessible motion', () => {
 
   test('keyboard only: Tab reaches every app toolbar action, each with a visible focus indicator', async ({ page }) => {
     await mountApp(page);
-    const actions = await page.evaluate(() => [...document.querySelectorAll('#app [data-app]')].filter((e) => e.matches('button, [role=button], a[href], input, select')).map((e) => e.getAttribute('data-app')));
+    const actions = await page.evaluate(() => [...document.querySelectorAll('#app [data-app]')].filter((e) => e.matches('button, [role=button], a[href], input, select') && e.getClientRects().length > 0 /* hidden file picker (opened by the Open button) / display:none download link are not Tab stops */).map((e) => e.getAttribute('data-app')));
     expect(actions.length).toBeGreaterThanOrEqual(3);
     const reached = new Set();
     await page.focus('body');
