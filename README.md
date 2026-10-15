@@ -410,7 +410,7 @@ Coming from another library: [AOS](./docs/migration-from-aos.md) · [GSAP Scroll
 
 ## Versions and compatibility
 
-- **npm dist-tags:** `latest` is the newest release of the current major (15.3.0; minors move it since 14.1). Each minor release also gets its own tag `v<major>-<minor>`
+- **npm dist-tags:** `latest` is the newest release of the current major (15.5.0; minors move it since 14.1). Each minor release also gets its own tag `v<major>-<minor>`
   (for example `v15-0`), `v15-line` follows the 15.x line and `v14-lts` is 14.9.x. `motionary` and `use-scroll-animate` are published together at the same versions.
 - **CDN:** URLs pin a major (`motionary@15`). Exact pins (`motionary@12.4.0`) keep working.
 - **Semver:** breaking changes come only in majors, each with a guide and a codemod. Deprecations stay in place until the
