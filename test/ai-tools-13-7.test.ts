@@ -196,4 +196,9 @@ describe('13.7 gateway interop (docs/mcp-gateway-interop.md, scripts/gateway-int
     const wf = readFileSync(join(ROOT, '.github/workflows/gateway-interop.yml'), 'utf8');
     expect(wf).toContain('scripts/gateway-interop.mjs');
   });
+  it('16.2: the interop config uses gateway config schema v13 (Gateway 17.0 reads only v13; v12 and older are refused at start)', () => {
+    expect(readFileSync(join(ROOT, 'scripts/gateway-interop.mjs'), 'utf8')).toContain("'version: 13'");
+    expect(readFileSync(join(ROOT, 'docs/mcp-gateway-interop.md'), 'utf8')).toMatch(/^version: 13$/m);
+    expect(readFileSync(join(ROOT, '.github/workflows/gateway-interop.yml'), 'utf8')).toMatch(/node-version: 24/);
+  });
 });

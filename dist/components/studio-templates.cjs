@@ -575,4 +575,4 @@ exports.templateInfo = templateInfo;
 exports.templateIntegrity = templateIntegrity;
 exports.uninstallTemplate = uninstallTemplate;
 exports.verifyTemplate = verifyTemplate;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.1.0/dist/components/studio-templates.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.2.0/dist/components/studio-templates.cjs.map

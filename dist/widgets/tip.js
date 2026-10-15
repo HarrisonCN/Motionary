@@ -1,2 +1,2 @@
 export { d as defineTip } from '../chunks/tip-UhHR-P4Q.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.1.0/dist/widgets/tip.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.2.0/dist/widgets/tip.js.map

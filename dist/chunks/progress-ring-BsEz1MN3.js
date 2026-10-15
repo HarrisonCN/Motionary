@@ -256,4 +256,4 @@ function defineOdometer(tag = 'usa-odometer') {
 }
 
 export { PROGRESS_VARIANTS as P, defineProgressRing as a, defineOdometer as d };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.1.0/dist/chunks/progress-ring-BsEz1MN3.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.2.0/dist/chunks/progress-ring-BsEz1MN3.js.map

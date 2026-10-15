@@ -1,6 +1,6 @@
 {
   "name": "motionary",
-  "version": "16.1.0",
+  "version": "16.2.0",
   "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 209 animated Web Components (91 core, 118 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -690,6 +690,16 @@
         "default": "./dist/components/scene-symbols.cjs"
       }
     },
+    "./studio/plugins": {
+      "import": {
+        "types": "./dist/components/studio-plugins.d.ts",
+        "default": "./dist/components/studio-plugins.js"
+      },
+      "require": {
+        "types": "./dist/components/studio-plugins.d.cts",
+        "default": "./dist/components/studio-plugins.cjs"
+      }
+    },
     "./studio/store": {
       "import": {
         "types": "./dist/components/studio-store.d.ts",
@@ -1018,6 +1028,16 @@
       "require": {
         "types": "./dist/components/studio-store.d.cts",
         "default": "./dist/components/studio-store.cjs"
+      }
+    },
+    "./components/studio-plugins": {
+      "import": {
+        "types": "./dist/components/studio-plugins.d.ts",
+        "default": "./dist/components/studio-plugins.js"
+      },
+      "require": {
+        "types": "./dist/components/studio-plugins.d.cts",
+        "default": "./dist/components/studio-plugins.cjs"
       }
     },
     "./components/studio-app": {
@@ -4487,7 +4507,9 @@
     "!dist/**/*.map",
     "!docs/images",
     "!docs/ROADMAP.md",
-    "!dist/llms-full.txt"
+    "!dist/llms-full.txt",
+    "!docs/contract-report.md",
+    "!docs/contract-report.json"
   ],
   "sideEffects": [
     "*.css",

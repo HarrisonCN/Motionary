@@ -490,4 +490,4 @@ exports.normalizeSceneV3 = normalizeSceneV3;
 exports.sceneV3ToV2 = sceneV3ToV2;
 exports.serializeSceneV3 = serializeSceneV3;
 exports.validateSceneV3 = validateSceneV3;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.1.0/dist/components/scene-v3.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.2.0/dist/components/scene-v3.cjs.map

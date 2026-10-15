@@ -1,2 +1,2 @@
 export { d as defineOdometer } from '../chunks/progress-ring-BsEz1MN3.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.1.0/dist/widgets/odometer.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.2.0/dist/widgets/odometer.js.map

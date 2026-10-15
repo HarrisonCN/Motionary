@@ -175,4 +175,4 @@ exports.resolveVariant = resolveVariant;
 exports.scaleTransform = scaleTransform;
 exports.validateVariants = validateVariants;
 exports.variantsOf = variantsOf;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.1.0/dist/components/studio-a11y.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.2.0/dist/components/studio-a11y.cjs.map
