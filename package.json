@@ -930,6 +930,16 @@
         "default": "./dist/components/studio-provenance.cjs"
       }
     },
+    "./components/studio-native": {
+      "import": {
+        "types": "./dist/components/studio-native.d.ts",
+        "default": "./dist/components/studio-native.js"
+      },
+      "require": {
+        "types": "./dist/components/studio-native.d.cts",
+        "default": "./dist/components/studio-native.cjs"
+      }
+    },
     "./components/studio-app": {
       "import": {
         "types": "./dist/components/studio-app.d.ts",
@@ -4350,6 +4360,16 @@
     "./components/layout.css": "./dist/components/layout.css",
     "./components/packs.css": "./dist/components/packs.css",
     "./components/fx.css": "./dist/components/fx.css",
+    "./studio/native": {
+      "import": {
+        "types": "./dist/components/studio-native.d.ts",
+        "default": "./dist/components/studio-native.js"
+      },
+      "require": {
+        "types": "./dist/components/studio-native.d.cts",
+        "default": "./dist/components/studio-native.cjs"
+      }
+    },
     "./package.json": "./package.json"
   },
   "files": [

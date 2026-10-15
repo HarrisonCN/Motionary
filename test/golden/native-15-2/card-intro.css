@@ -1,0 +1,19 @@
+/* motionary 15.2 — CSS export of "Card intro" (motionary/studio/native). Generated; edit the scene, not this file. */
+
+@keyframes usa-card-intro-title {
+  0% { opacity: 0; transform: translateY(20px) scale(0.9); animation-timing-function: cubic-bezier(0.2, 0, 0, 1); }
+  66.667% { opacity: 1; transform: translateY(0px) scale(1); }
+  100% { opacity: 1; transform: translateY(0px) scale(1); }
+}
+#title { animation: usa-card-intro-title 600ms linear both; }
+
+@keyframes usa-card-intro-card {
+  0% { background-color: #ffffff; clip-path: inset(0 0 100% 0); filter: blur(4px); }
+  16.667% { background-color: #ffffff; clip-path: inset(0 0 100% 0); filter: blur(4px); animation-timing-function: ease-out; }
+  100% { background-color: #0f172a; clip-path: inset(0 0 0% 0); filter: blur(0px); }
+}
+.card { animation: usa-card-intro-card 600ms linear both; }
+
+/* reduced motion: the OS setting, or add .usa-reduce-motion from your own setting */
+@media (prefers-reduced-motion: reduce) { #title, .card { animation-duration: 1ms; animation-delay: 0s; } }
+.usa-reduce-motion #title, .usa-reduce-motion .card { animation-duration: 1ms; animation-delay: 0s; }
