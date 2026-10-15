@@ -1,0 +1,58 @@
+name: Publish to npm (provenance)
+
+# 16.9: publish from GitHub Actions so npm shows a signed provenance statement (which commit and workflow built the
+# tarball). Run it by hand for a release tag. Needs ONE of:
+#   • npm trusted publishing: on npmjs.com → motionary / use-scroll-animate → Settings → Trusted publisher →
+#     GitHub Actions, repository HarrisonCN/Motionary, workflow publish.yml (no token needed; OIDC), or
+#   • a repository secret NPM_TOKEN (granular automation token with publish rights to both packages).
+# Until one of them is configured this workflow fails at `npm publish` and releases keep being published from the
+# maintainer's machine (without provenance) — see docs/supply-chain.md.
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'git tag to publish, e.g. v16.9.0'
+        required: true
+      dist_tag:
+        description: 'npm dist-tag (latest, next, v16-line …)'
+        required: true
+        default: latest
+
+permissions:
+  contents: read
+  id-token: write # OIDC: npm provenance + trusted publishing
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ inputs.tag }}
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          cache: npm
+      - run: npm install -g npm@latest # trusted publishing needs npm >= 11.5
+      - run: npm ci
+      - run: npm run build
+      - run: npm run size:check
+      - name: Already published?
+        id: seen
+        run: |
+          V=$(node -p "require('./package.json').version")
+          echo "version=$V" >> "$GITHUB_OUTPUT"
+          if npm view "motionary@$V" version >/dev/null 2>&1; then echo "skip=true" >> "$GITHUB_OUTPUT"; fi
+      - name: motionary
+        if: steps.seen.outputs.skip != 'true'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --provenance --access public --tag "${{ inputs.dist_tag }}"
+      - name: use-scroll-animate (alias, same build)
+        if: steps.seen.outputs.skip != 'true'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          node -e "const f='package.json',p=require('./'+f);p.name='use-scroll-animate';require('fs').writeFileSync(f,JSON.stringify(p,null,2)+'\n')"
+          npm publish --provenance --access public --tag "${{ inputs.dist_tag }}"
