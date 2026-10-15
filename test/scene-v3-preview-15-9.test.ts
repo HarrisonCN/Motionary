@@ -149,7 +149,7 @@ describe('corpus: v2 → v3 → v2 round trip', () => {
   });
   it('serializeSceneV3 is canonical: same text for a shuffled key order', () => {
     const v3 = migrateToSceneV3(A11Y_DOC).doc!;
-    const shuffled = JSON.parse(JSON.stringify(v3, Object.keys(v3).reverse()));
+    const shuffled: any = {}; for (const k of Object.keys(v3).reverse()) shuffled[k] = (v3 as any)[k];
     expect(serializeSceneV3(shuffled)).toBe(serializeSceneV3(v3));
     expect(normalizeSceneV3(v3)).toEqual(v3);
   });

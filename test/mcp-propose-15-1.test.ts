@@ -59,7 +59,9 @@ describe('propose_edit', () => {
   it('accepts the scene as JSON text and is deterministic', async () => {
     const a = await call('propose_edit', { scene: JSON.stringify(scene()), prompt: 'fade up the card' });
     const b = await call('propose_edit', { scene: scene(), prompt: 'fade up the card' });
-    expect(a).toEqual(b);
+    const { deprecations, ...rest } = a; // 15.9 (MCP 2.5): JSON text still works and reports mcp-scene-text (removed in 3.0)
+    expect(deprecations.map((d: any) => d.id)).toEqual(['mcp-scene-text']);
+    expect(rest).toEqual(b);
     expect(a.provenance).toEqual({ generator: 'motionary-mcp/propose_edit' });
   });
   it('a selection limits the layers the proposal may touch', async () => {

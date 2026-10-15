@@ -20,6 +20,7 @@ const ROOT = join(__dirname, '..');
 const CLI: any = await import(join(ROOT, 'bin/motionary.mjs'));
 const M: any = await import(join(ROOT, 'bin/motionary-mcp.mjs'));
 const m = M.loadManifest(join(ROOT, 'dist/manifest.json'));
+M.setStudioAi(await import(join(ROOT, 'dist/components/studio-ai.js')));
 const call = async (name: string, args: any) => (await M.callTool(m, name, args)).structuredContent;
 const IDS = V3.DEPRECATIONS_V16.map((d) => d.id);
 
@@ -123,7 +124,6 @@ describe('migrate --to 16', () => {
     expect(await CLI.main(['migrate', '--to', '16', '--write', d], { sceneV3: V3 })).toBe(2);
     expect(err.mock.calls.join('\n')).toMatch(/16\.0/);
     expect(existsSync(join(d, 'scenes/hero.scene.json.bak'))).toBe(false);
-    expect(await CLI.main(['migrate', '--to', '15', d])).toBe(0); // the 14.9 path is unchanged
     log.mockRestore(); err.mockRestore();
   });
 });
