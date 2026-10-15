@@ -1,5 +1,5 @@
 /**
- * 15.9: Scene Format v3 — DRAFT (`motionary/scene/v3-preview` = `motionary/components/scene-v3-preview`).
+ * 15.9: Scene Format v3 — DRAFT (then `motionary/scene/v3-preview`; stable here since 16.0, the preview path was removed in 17.0).
  *
  * The format 16.0 writes (docs/scene-v3.md, scripts/scene-v3.schema.json). Draft: it may change before 16.0.
  * What v3 adds over v2:

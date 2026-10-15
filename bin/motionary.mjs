@@ -238,7 +238,7 @@ export function backupPath(f) {
 }
 // ---------------------------------------------------------------- 15.9: v16 preparation
 const V16_DOC = 'docs/deprecations-v16.md';
-/** What 16.0 changes (same ids as DEPRECATIONS_V16 in motionary/scene/v3-preview) → how to fix it. */
+/** What 16.0 changes (same ids as DEPRECATIONS_V16 in motionary/scene/v3) → how to fix it. */
 export const V16_FIX = {
   'scene-v2-write': '16.0 writes Scene v3 (v2 is still read): convert files with `npx motionary migrate --to 16`; code that needs v2 calls studio.exportScene({ version: 2 })',
   'variants-meta': 'Scene v3 keeps breakpoint variants in "variants": `npx motionary migrate --to 16` moves them; code uses variantsOf() from motionary/studio/a11y',
