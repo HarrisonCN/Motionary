@@ -2,8 +2,9 @@
 // - Removes exactly what 16.9 announced (DEPRECATIONS_V17): the motionary/scene/v3-preview path (+ components/
 //   scene-v3-preview) and the CLI's v15 project migration (doctor --v15 / migrate --to 15 → exit 2, pointing to
 //   `npx motionary@v16-lts …`). doctor --v17 / migrate --to 17 stay so 16.x projects can still upgrade.
-// - Freezes three contracts: Scene Format v3, Studio plugin API v1 (no longer @experimental), motionary-mcp 3.x;
-//   docs/stability.md states them and the LTS policy (v16-lts until 18.0 ships). Lite stays ≤ 70 KB gzip.
+// - Owner review 2026-10-15: Studio (incl. the plugin API), MCP, AI, Figma plugin and cross-platform export stay
+//   EXPERIMENTAL in 17.0 (not frozen); Scene v3 is part of the stable core. docs/stability.md states that and the LTS
+//   policy (v16-lts until 18.0 ships). Lite stays ≤ 70 KB gzip.
 import { describe, it, expect, vi } from 'vitest';
 import { mkdtempSync, readFileSync, existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -46,21 +47,26 @@ describe('17.0 removes what 16.9 announced', () => {
   });
 });
 
-describe('17.0 freezes the platform contracts', () => {
-  it('Studio plugin API v1 is stable (PLUGIN_API_VERSION 1, not @experimental)', async () => {
+describe('17.0 stable core vs experimental surfaces', () => {
+  it('Studio plugin API stays experimental (manifests declare api: 1 = PLUGIN_API_VERSION; nothing claims it frozen)', async () => {
     const P = await import('../src/components/studio/plugins');
     expect(P.PLUGIN_API_VERSION).toBe(1);
-    expect(read('src/components/studio/plugins.ts')).not.toMatch(/@experimental/);
-    expect(read('docs/studio-plugins.md')).toMatch(/plugin API v1.*stable since 17\.0/i);
+    expect(read('src/components/studio/plugins.ts')).toMatch(/@experimental/);
+    expect(read('docs/studio-plugins.md')).toMatch(/experimental/i);
+    for (const f of ['docs/studio-plugins.md', 'docs/stability.md', 'docs/deprecations-v17.md', 'src/components/studio/plugins.ts'])
+      expect(read(f), f).not.toMatch(/\bfrozen\b/i);
   });
   it('Scene v3 is stable and motionary-mcp stays 3.x', async () => {
     const V3 = await import('../src/components/scene/v3');
     expect(V3.SCENE_V3_STATUS).toBe('stable');
     expect(read('bin/motionary-mcp.mjs')).toMatch(/name: 'motionary-mcp', version: '3\.\d+\.\d+'/);
   });
-  it('docs/stability.md states the frozen contracts and the LTS policy; versions.md names v16-lts', () => {
+  it('docs/stability.md lists the stable core and the experimental surfaces and the LTS policy; versions.md names v16-lts', () => {
     const s = read('docs/stability.md');
-    for (const a of ['scene-v3', 'plugin-api-v1', 'mcp-3', 'lts']) expect(s).toContain(`<a id="${a}"></a>`);
+    for (const a of ['stable-core', 'experimental', 'lts']) expect(s).toContain(`<a id="${a}"></a>`);
+    const exp = s.slice(s.indexOf('<a id="experimental"></a>'), s.indexOf('<a id="lts"></a>'));
+    for (const w of ['motionary/studio/plugins', 'motionary-mcp', 'Figma']) expect(exp, w).toContain(w);
+    expect(s).toMatch(/mo-\*/);
     expect(s).toMatch(/v16-lts/);
     expect(s).toMatch(/18\.0/);
     expect(read('docs/versions.md')).toMatch(/v16-lts/);
