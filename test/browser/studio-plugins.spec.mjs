@@ -8,6 +8,8 @@ test.describe('16.2 Studio plugins', () => {
   test('Worker + iframe plugins: permissions, proposals, exporter, crash isolation', async ({ page }) => {
     await openFixture(page);
     const r = await page.evaluate(async () => {
+      document.cookie = 'mtnHostProbe=1; path=/';
+      if (!document.cookie.includes('mtnHostProbe')) throw new Error('host cookie probe not set');
       const P = await import('motionary/studio/plugins');
       const project = { format: 'motionary-studio', version: 2, scene: { version: 3, duration: 1000, layers: [{ id: 'a', type: 'track', target: '.a', keyframes: [] }] } };
       const proposals = [];
@@ -24,8 +26,10 @@ test.describe('16.2 Studio plugins', () => {
         const p = await motionary.getProject();
         p.scene.duration = 2000;
         await motionary.propose(p, 'longer');
-        let cookie; try { cookie = document.cookie; } catch (e) { cookie = 'blocked'; }
-        await motionary.propose({ scene: { duration: cookie === 'blocked' ? -1 : -2 } }, 'cookie');
+        // Opaque-origin sandbox: Chromium/Firefox throw on document.cookie, WebKit returns '' — either way the
+        // host page's cookie must not be readable from the plugin frame.
+        let cookie; try { cookie = String(document.cookie); } catch (e) { cookie = 'blocked'; }
+        await motionary.propose({ scene: { duration: cookie === 'blocked' || !cookie.includes('mtnHostProbe') ? -1 : -2 } }, 'cookie');
       })();`));
       await until(() => proposals.length === 2 && host.panels()[0]?.text.includes('permission'));
       const exp = await host.runExporter('com.example.worker');
