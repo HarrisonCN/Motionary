@@ -11,4 +11,4 @@ function registerXpGain() {
 }
 
 export { effect, registerXpGain as register, registerXpGain };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.3.0/dist/effects/xp-gain.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.5.0/dist/effects/xp-gain.js.map

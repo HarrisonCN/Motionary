@@ -109,4 +109,4 @@ function loadMotionDoc(input) {
 exports.loadMotionDoc = loadMotionDoc;
 exports.timelineDocFromScene = timelineDocFromScene;
 exports.timelineDocToScene = timelineDocToScene;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.3.0/dist/chunks/scene-C4h75wjo.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.5.0/dist/chunks/scene-C4h75wjo.cjs.map
