@@ -15,4 +15,4 @@ function registerBrushedMetal() {
 exports.effect = effect;
 exports.register = registerBrushedMetal;
 exports.registerBrushedMetal = registerBrushedMetal;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0/dist/effects/brushed-metal.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.1.0/dist/effects/brushed-metal.cjs.map

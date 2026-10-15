@@ -5,7 +5,7 @@ import { transform as codemod13 } from './usa-codemod-13.mjs';
 import { compatAt, cmpVer } from './compat-history.mjs';
 
 /** Result schema versions of the 13.7 tools (bumped on any incompatible change; fields are only ever added within a major). */
-export const SCHEMAS = { search: 'motionary-mcp/search@1', compatibility: 'motionary-mcp/check_compatibility@1', validation: 'motionary-mcp/validate_snippet@1', fix: 'motionary-mcp/suggest_fix@1', scene: 'motionary-mcp/validate_scene@1', listTemplates: 'motionary-mcp/list_templates@1', getTemplate: 'motionary-mcp/get_template@1', exportScene: 'motionary-mcp/export_scene@1' };
+export const SCHEMAS = { search: 'motionary-mcp/search@1', compatibility: 'motionary-mcp/check_compatibility@1', validation: 'motionary-mcp/validate_snippet@1', fix: 'motionary-mcp/suggest_fix@1', scene: 'motionary-mcp/validate_scene@1', listTemplates: 'motionary-mcp/list_templates@1', getTemplate: 'motionary-mcp/get_template@1', exportScene: 'motionary-mcp/export_scene@1', proposeEdit: 'motionary-mcp/propose_edit@1' };
 
 export function levenshtein(a, b) {
   a = String(a); b = String(b);

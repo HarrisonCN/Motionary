@@ -213,4 +213,4 @@ function defineKanban(tag = 'usa-kanban') {
 }
 
 export { defineKanban };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0/dist/widgets/kanban.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.1.0/dist/widgets/kanban.js.map

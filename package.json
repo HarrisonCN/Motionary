@@ -1,6 +1,6 @@
 {
   "name": "motionary",
-  "version": "15.0.0",
+  "version": "15.1.0",
   "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 209 animated Web Components (91 core, 118 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -630,6 +630,16 @@
         "default": "./dist/components/studio-app.cjs"
       }
     },
+    "./studio/provenance": {
+      "import": {
+        "types": "./dist/components/studio-provenance.d.ts",
+        "default": "./dist/components/studio-provenance.js"
+      },
+      "require": {
+        "types": "./dist/components/studio-provenance.d.cts",
+        "default": "./dist/components/studio-provenance.cjs"
+      }
+    },
     "./components/reveal": {
       "import": {
         "types": "./dist/components/reveal.d.ts",
@@ -908,6 +918,16 @@
       "require": {
         "types": "./dist/components/studio-templates.d.cts",
         "default": "./dist/components/studio-templates.cjs"
+      }
+    },
+    "./components/studio-provenance": {
+      "import": {
+        "types": "./dist/components/studio-provenance.d.ts",
+        "default": "./dist/components/studio-provenance.js"
+      },
+      "require": {
+        "types": "./dist/components/studio-provenance.d.cts",
+        "default": "./dist/components/studio-provenance.cjs"
       }
     },
     "./components/studio-app": {
@@ -4345,7 +4365,8 @@
     "AGENTS.md",
     "templates",
     "!dist/**/*.map",
-    "!docs/images"
+    "!docs/images",
+    "!docs/ROADMAP.md"
   ],
   "sideEffects": [
     "*.css",

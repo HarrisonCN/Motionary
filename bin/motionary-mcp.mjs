@@ -26,10 +26,10 @@ import { compatAt, cmpVer } from './compat-history.mjs';
 import { rankComponents, checkCompatibility, suggestFix, SCHEMAS } from './mcp-tools-2.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
-const SERVER = { name: 'motionary-mcp', version: '2.3.0' };
+const SERVER = { name: 'motionary-mcp', version: '2.4.0' };
 export const SERVER_INFO = SERVER;
 /** 13.7: tool contract versions — input + output schema of each tool; a tool's major changes only on an incompatible change. */
-export const TOOL_SCHEMA_VERSIONS = { list_components: '1.0', search_components: '1.1', get_component: '1.0', get_example: '1.0', scaffold_snippet: '1.1', suggest_motion: '1.1', validate_snippet: '1.3', check_compat: '1.0', check_compatibility: '1.1', suggest_fix: '1.1', list_templates: '1.0', get_template: '1.0', export_scene: '1.0' };
+export const TOOL_SCHEMA_VERSIONS = { list_components: '1.0', search_components: '1.1', get_component: '1.0', get_example: '1.0', scaffold_snippet: '1.1', suggest_motion: '1.1', validate_snippet: '1.3', check_compat: '1.0', check_compatibility: '1.1', suggest_fix: '1.1', list_templates: '1.0', get_template: '1.0', export_scene: '1.0', propose_edit: '1.0' };
 const PROTOCOLS = ['2025-06-18', '2025-03-26', '2024-11-05'];
 
 export function loadManifest(path = process.env.MOTIONARY_MANIFEST || join(HERE, '../dist/manifest.json')) {
@@ -532,13 +532,45 @@ export const TOOLS = [
   { name: 'list_templates', title: 'List Studio templates', description: '14.8: the starter Motion Studio templates shipped with Motionary (motionary-template v1: data only, SHA-256 integrity checked before listing) — id, name, version, SPDX license, author, required Motionary modules, layer / file counts. query filters by id / name / description.', inputSchema: { type: 'object', properties: { query: { type: 'string' } }, additionalProperties: false }, outputSchema: { type: 'object', properties: { schema: { const: SCHEMAS.listTemplates }, count: { type: 'number' }, templates: { type: 'array' } }, required: ['schema', 'count', 'templates'] }, annotations: { title: 'List templates', ...RO } },
   { name: 'get_template', title: 'Get a Studio template', description: '14.8: one shipped template: manifest (license, requires, token theme, preview time), info, its Scene v2 document and a still preview (one inline HTML file without scripts, for a sandboxed iframe). Install it in an app with motionary/studio/templates installTemplate (one undo step, uninstall restores the project byte for byte).', inputSchema: { type: 'object', properties: { id: { type: 'string' } }, required: ['id'], additionalProperties: false }, outputSchema: { type: 'object', properties: { schema: { const: SCHEMAS.getTemplate }, manifest: { type: 'object' }, info: { type: 'object' }, verified: { type: 'boolean' }, scene: { type: 'object' }, preview: { type: 'object' } }, required: ['schema', 'manifest', 'info', 'verified', 'scene'] }, annotations: { title: 'Get template', ...RO } },
   { name: 'export_scene', title: 'Export a scene as a standalone page', description: '14.8: a Scene v2 document, a Studio project or a shipped template → the 14.7 standalone export (motionary/studio/export): index.html + scene.css (plays with scripts off) + optional scene.js player + assets/, or one inline file; byte-reproducible, with the frameDigest fingerprint and a report of anything left out. Returns the files (utf8 text, binary as base64); writes nothing.', inputSchema: { type: 'object', properties: { scene: { type: ['object', 'string'], description: 'a Scene v2 document (object or JSON text)' }, project: { type: ['object', 'string'], description: 'or a motionary-studio project' }, template: { type: 'string', description: 'or a shipped template id (list_templates)' }, inline: { type: 'boolean', default: false }, js: { type: 'boolean', default: true }, fps: { type: 'number', default: 60 }, title: { type: 'string' } }, additionalProperties: false }, outputSchema: { type: 'object', properties: { schema: { const: SCHEMAS.exportScene }, digest: { type: 'string' }, files: { type: 'array' }, report: { type: 'object' } }, required: ['schema', 'digest', 'files', 'report'] }, annotations: { title: 'Export scene', ...RO } },
+  { name: 'propose_edit', title: 'Propose a scene edit (never writes)', description: '15.1: a prompt + a Scene v2 document → a validated edit proposal: Scene v2 ops with a sentence each, the JSON diff, the changed layer ids, the preview document and the schema / compatibility / render checks. Nothing is written — the caller (Motion Studio) applies it only after a person accepts it (motionary/studio/ai review + motionary/studio/provenance). The answer carries provenance { generator, requestId }: requestId is the argument or the MCP params._meta.correlationId (the client correlation id that MCP Gateway 15.1 canary keeps with the call lineage).', inputSchema: { type: 'object', properties: { scene: { type: ['object', 'string'], description: 'a Scene v2 document (object or JSON text)' }, prompt: { type: 'string' }, selection: { type: 'array', items: { type: 'string' }, description: 'only touch these layer ids (new layers are allowed)' }, requestId: { type: 'string', description: 'correlation id, 1–128 of A–Z a–z 0–9 . _ : -' } }, required: ['scene', 'prompt'], additionalProperties: false }, outputSchema: { type: 'object', properties: { schema: { const: SCHEMAS.proposeEdit }, ok: { type: 'boolean' }, applied: { const: false }, ops: { type: 'array' }, diff: { type: 'array' }, layers: { type: 'array' }, preview: { type: 'object' }, provenance: { type: 'object' } }, required: ['schema', 'ok', 'applied', 'ops', 'diff', 'layers', 'provenance'] }, annotations: { title: 'Propose edit', ...RO } },
 ];
+
+// ---------------------------------------------------------------- 2.4 (15.1): propose_edit (never writes)
+/** The MCP Gateway correlation-id rule (Gateway 15.1 canary keeps it with the call lineage): 1–128 of A–Z a–z 0–9 . _ : - */
+export const REQUEST_ID_RE = /^[A-Za-z0-9._:-]{1,128}$/;
+const layerIdsChanged = (a, b) => {
+  const key = (d) => new Map((d.layers || []).filter((l) => l && typeof l.id === 'string').map((l) => [l.id, JSON.stringify(l)]));
+  const x = key(a), y = key(b), out = [];
+  for (const [id, v] of y) if (x.get(id) !== v) out.push(id);
+  for (const id of x.keys()) if (!y.has(id)) out.push(id);
+  return out.sort();
+};
+/** propose_edit: prompt + Scene v2 → a validated proposal (ops, JSON diff, changed layers, preview) + a provenance value. Writes nothing. */
+export async function proposeEdit(m, a, ctx = {}) {
+  if (typeof a.prompt !== 'string' || !a.prompt.trim()) throw new Error('prompt is required');
+  const sa = sceneArg(a);
+  if (sa.problems) throw new Error(`scene: ${sa.problems[0].message}`);
+  const rid = a.requestId !== undefined ? a.requestId : ctx.correlationId;
+  if (rid !== undefined && !(typeof rid === 'string' && REQUEST_ID_RE.test(rid))) throw new Error('requestId: 1–128 characters of A–Z a–z 0–9 . _ : - (the MCP Gateway correlation-id rule)');
+  if (a.selection !== undefined && !(Array.isArray(a.selection) && a.selection.every((x) => typeof x === 'string'))) throw new Error('selection: expected an array of layer ids');
+  const S = needSai(), base = JSON.parse(JSON.stringify(sa.scene));
+  const opts = { catalog: catalogOf(m), version: installedVersion() || m.version, ...(a.selection && a.selection.length && { selection: a.selection }) };
+  const p = await S.proposeAiEdit(base, a.prompt, opts);
+  return {
+    schema: SCHEMAS.proposeEdit, ok: p.ok, applied: false, summary: p.summary, source: p.source,
+    ops: p.ops.map((x) => ({ index: x.index, op: x.op, text: x.text, ...(x.reason && { reason: x.reason }) })),
+    diff: p.diff, layers: p.ok ? layerIdsChanged(base, p.preview) : [], preview: p.preview,
+    checks: { schema: p.checks.schema.length, compatibility: p.checks.compatibility.length, render: { ok: p.checks.render.ok, frames: p.checks.render.frames } },
+    errors: p.errors, fixes: p.fixes,
+    provenance: { generator: 'motionary-mcp/propose_edit', ...(rid !== undefined && { requestId: rid }) },
+  };
+}
 
 const text = (obj) => ({ content: [{ type: 'text', text: typeof obj === 'string' ? obj : JSON.stringify(obj, null, 2) }], ...(typeof obj === 'object' ? { structuredContent: Array.isArray(obj) ? { items: obj } : obj } : {}) });
 
 for (const t of TOOLS) t._meta = { 'motionary/schemaVersion': TOOL_SCHEMA_VERSIONS[t.name] };
 
-export function callTool(m, name, a = {}) {
+export function callTool(m, name, a = {}, ctx = {}) {
   indexModules(m);
   switch (name) {
     case 'list_components': {
@@ -633,6 +665,8 @@ export function callTool(m, name, a = {}) {
     }
     case 'export_scene':
       return text(exportScene(m, a));
+    case 'propose_edit':
+      return proposeEdit(m, a, ctx).then(text);
     default:
       throw Object.assign(new Error(`unknown tool ${name}`), { code: -32602 });
   }
@@ -680,7 +714,8 @@ export function handle(m, msg, state = {}) {
         return ok({ tools: TOOLS });
       case 'tools/call':
         try {
-          const res = callTool(m, params.name, params.arguments || {});
+          const cid = params._meta && typeof params._meta.correlationId === 'string' ? params._meta.correlationId : undefined;
+          const res = callTool(m, params.name, params.arguments || {}, cid ? { correlationId: cid } : {});
           if (res && typeof res.then === 'function') return res.then(ok, (e) => ok({ content: [{ type: 'text', text: String(e.message || e) }], isError: true }));
           return ok(res);
         } catch (e) {

@@ -99,4 +99,4 @@ function defineKpi(tag = 'usa-kpi') {
 }
 
 exports.defineKpi = defineKpi;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0/dist/widgets/kpi.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.1.0/dist/widgets/kpi.cjs.map

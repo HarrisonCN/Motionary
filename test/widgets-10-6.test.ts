@@ -91,8 +91,10 @@ describe('10.6 widgets', () => {
     el.setAttribute('src', 'icon.riv');
     const seen: any[] = [];
     el.addEventListener('usa:runtime-missing', (e: any) => seen.push(e.detail));
+    // await the event itself (not a fixed 30ms): the message is in place before it fires; robust under machine load
+    const missing = new Promise((r) => el.addEventListener('usa:runtime-missing', r, { once: true }));
     document.body.appendChild(el);
-    await new Promise((r) => setTimeout(r, 30));
+    await missing;
     const msg = el.querySelector('.usa-rt-missing')!.textContent!;
     expect(msg).toContain('npm i @rive-app/canvas');
     expect(msg).toContain("provideRiveRuntime(() => import('@rive-app/canvas'))");

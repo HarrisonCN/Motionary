@@ -142,6 +142,11 @@
     "limit": 51200
   },
   {
+    "name": "import 'motionary/components/studio-provenance' (= motionary/studio/provenance, 15.1 AI edit provenance: withProvenance records { generator, model, requestId, at } in the same undo step, aiChanges / changedLayers / matchLineage (Gateway 15.1 canary lineage), provenance panel; own entry, not in lite / studio; measured 1.70 KB)",
+    "import": "export * from 'pkg/components/studio-provenance';",
+    "limit": 2048
+  },
+  {
     "name": "import 'motionary/components/interaction'",
     "import": "export * from 'pkg/components/interaction';",
     "limit": 6400

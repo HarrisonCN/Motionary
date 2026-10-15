@@ -54,6 +54,7 @@ npx @winstonsayno/mcp-gateway@latest start -c mcp-gateway.yml
 | `list_templates` | 1.0 — motionary-mcp 2.3: the shipped Studio templates (integrity-checked; license + required modules) | 14.8 |
 | `get_template` | 1.0 — motionary-mcp 2.3: one template's manifest, Scene v2 document and script-less preview | 14.8 |
 | `export_scene` | 1.0 — motionary-mcp 2.3: scene / project / template → 14.7 standalone files + `frameDigest` | 14.8 |
+| `propose_edit` | 1.0 — motionary-mcp 2.4: prompt + scene → validated edit proposal (ops, diff, layers, provenance with the correlation id); writes nothing. With Gateway 15.1 canary the call's `X-Request-Id` joins the gateway lineage ([studio-provenance.md](./studio-provenance.md)) | 15.1 |
 
 Every tool definition carries its version in `_meta["motionary/schemaVersion"]`; the new tools also publish an
 `outputSchema` and put a `schema` id (`motionary-mcp/check_compatibility@1`, `motionary-mcp/suggest_fix@1`,

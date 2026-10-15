@@ -7,6 +7,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [15.1.0] - 2026-10-14
+
+**AI edit provenance & Gateway lineage.** Every AI change in a Studio project can say where it came from, and an applied
+AI edit can be traced to the MCP Gateway call behind it. Additive; zero runtime dependencies; `motionary/components/lite`
+unchanged; the new entry has its own size-budget line and no existing line was raised.
+[docs/studio-provenance.md](docs/studio-provenance.md)
+
+### Added
+
+- **`motionary/studio/provenance`** (= `motionary/components/studio-provenance`): `withProvenance(history, info)` records
+  `{ generator, model?, requestId?, at }` plus the changed layer ids in `meta["motionary:provenance"]`, in the **same
+  undo step** as the change (undo removes both; a no-op or an unaccepted proposal writes nothing). `recordProvenance`,
+  `validateProvenance` (request ids follow the MCP Gateway correlation-id rule, 1–128 of `A–Z a–z 0–9 . _ : -`),
+  `provenanceOf`, `aiChanges` (AI only / by request id / by generator), `changedLayers`, `matchLineage` (joins records
+  with Gateway lineage entries or the `{ lineage, total }` body of `GET /api/v1/admin/ops/lineage?correlationId=`:
+  matched / missing / unattributed), `createProvenancePanel` (newest first, filters).
+- **motionary-mcp 2.4** — `propose_edit` (schema 1.0, read-only): prompt + Scene v2 → validated proposal (ops with a
+  sentence each, JSON diff, changed layers, preview, checks) with `provenance { generator: 'motionary-mcp/propose_edit',
+  requestId }`; `applied: false`, never writes. The request id is the `requestId` argument or MCP
+  `params._meta.correlationId`.
+- **examples/gateway-provenance** — `propose_edit` through the gateway with one correlation id → apply after review →
+  gateway call lineage → `matchLineage` → undo. Integrated against Gateway 15.1 canary
+  (`@winstonsayno/mcp-gateway@15.1.0-canary.1`, a development prerelease).
+
+### Changed
+
+- The MCP tool list grows by one (`propose_edit` after `export_scene`); `scripts/gateway-interop.mjs` expects it. Two
+  older tests that pinned the exact tool list follow the appended tool.
+- `docs/ROADMAP.md` (the project's planning document) is no longer in the npm package; it stays on GitHub. This keeps the
+  package under its unchanged 14 MB unpacked limit (15.1 adds ~42 KB; package 13.97 MB unpacked, 3.58 MB packed).
+- Tests only: test/widgets-10-6 (Rive, missing runtime) waits for the `usa:runtime-missing` event instead of a fixed
+  30 ms (it flaked under load); same assertions, no component change.
+
 ## [15.0.0] - 2026-10-14
 
 **Motion Studio 2.0** (major). Same code as 15.0.0-rc.1 (below), which was published to npm `next`
