@@ -17,6 +17,8 @@ export const SEMANTIC_KINDS = ['enter', 'exit', 'emphasis', 'transition'] as con
 export type SemanticKind = (typeof SEMANTIC_KINDS)[number];
 /** The built-in reduced-motion mode (derived from any set; explicit overrides apply on top). */
 export const REDUCED_MOTION_MODE = 'reduced';
+/** 15.3: the built-in gentle mode — half the travel, durations ≤ 300 ms, no overshoot (opt-in: no OS setting maps to it). */
+export const GENTLE_MOTION_MODE = 'gentle';
 
 /** A semantic motion: literals or references to primitives (`"{duration.fast}"`, `"{distance.md}"`, `"{spring.snappy}"`). */
 export interface SemanticToken {
@@ -149,14 +151,38 @@ export function reducedMotionOverrides(set: MotionTokenSet): MotionTokenOverride
   return o;
 }
 
-/** The set as seen in `mode` (or several, applied in order); `reduced` is always available. The result has no `modes`. */
+/** 15.3: the gentle-motion overrides derived from a set: travel halved (rounded), durations ≤ 300 ms, no overshooting curves, springs at least 80 % of critical damping. Only changed values are listed. */
+export function gentleMotionOverrides(set: MotionTokenSet): MotionTokenOverrides {
+  const o: MotionTokenOverrides = { duration: {}, easing: {}, spring: {}, distance: {}, semantic: {} };
+  for (const k of keys(set.duration)) if (set.duration[k] > 300) o.duration![k] = 300;
+  for (const k of keys(set.distance)) { const v = Math.round(set.distance[k] * 0.5); if (v !== set.distance[k]) o.distance![k] = v; }
+  for (const k of keys(set.easing)) {
+    const b = bez(set.easing[k]);
+    if (b && (b[1] < 0 || b[1] > 1 || b[3] < 0 || b[3] > 1)) o.easing![k] = 'cubic-bezier(0.2, 0, 0, 1)';
+  }
+  for (const k of keys(set.spring)) {
+    const s = set.spring[k], min = up(0.8 * 2 * Math.sqrt(s.stiffness * s.mass));
+    if (s.damping < min) o.spring![k] = { damping: min };
+  }
+  for (const kind of keys(set.semantic) as SemanticKind[])
+    for (const n of keys(set.semantic[kind] || {})) {
+      const e = set.semantic[kind][n], p: Partial<SemanticToken> = {};
+      if (typeof e.distance === 'number' && e.distance) p.distance = Math.round(e.distance * 0.5);
+      if (typeof e.duration === 'number' && e.duration > 300) p.duration = 300;
+      if (keys(p).length) (o.semantic![kind] ||= {})[n] = p;
+    }
+  return o;
+}
+
+/** The set as seen in `mode` (or several, applied in order); `reduced` and `gentle` (15.3) are always available. The result has no `modes`. */
 export function withMode(set: MotionTokenSet, mode?: string | string[]): MotionTokenSet {
   const out = cloneSet(set);
   delete out.modes;
   for (const m of mode == null ? [] : Array.isArray(mode) ? mode : [mode]) {
     const explicit = set.modes && own(set.modes, m) ? set.modes[m] : undefined;
     if (m === REDUCED_MOTION_MODE) mergeOv(out, reducedMotionOverrides(out));
-    else if (!explicit) throw new Error(`[motionary] tokens: unknown mode "${m}" (have: ${[REDUCED_MOTION_MODE, ...keys(set.modes || {})].join(', ')})`);
+    else if (m === GENTLE_MOTION_MODE) mergeOv(out, gentleMotionOverrides(out));
+    else if (!explicit) throw new Error(`[motionary] tokens: unknown mode "${m}" (have: ${[REDUCED_MOTION_MODE, GENTLE_MOTION_MODE, ...keys(set.modes || {})].join(', ')})`);
     mergeOv(out, explicit);
   }
   return out;
@@ -483,7 +509,7 @@ export function motionTokenSetToCss(set: MotionTokenSet, o: { selector?: string;
   let css = block(sel, base);
   if (o.modes === false) return css;
   const diff = (m: string) => Object.fromEntries(Object.entries(motionTokenSetVars(set, { ...o, mode: m })).filter(([k, x]) => base[k] !== x));
-  const names = [...new Set([REDUCED_MOTION_MODE, ...keys(set.modes || {})])];
+  const names = [...new Set([REDUCED_MOTION_MODE, GENTLE_MOTION_MODE, ...keys(set.modes || {})])];
   for (const m of names) {
     const d = diff(m);
     if (!keys(d).length) continue;

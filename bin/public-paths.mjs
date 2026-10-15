@@ -34,6 +34,8 @@ export const LAYER_ALIASES = {
   'studio/provenance': 'components/studio-provenance',
   // 15.2: cross-platform export 2.0
   'studio/native': 'components/studio-native',
+  // 15.3: accessible & responsive motion
+  'studio/a11y': 'components/studio-a11y',
 };
 
 /**
