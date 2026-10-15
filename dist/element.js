@@ -91,4 +91,4 @@ function defineScrollAnimate(tagName = 'scroll-animate', instance) {
 }
 
 export { defineScrollAnimate };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/element.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0/dist/element.js.map

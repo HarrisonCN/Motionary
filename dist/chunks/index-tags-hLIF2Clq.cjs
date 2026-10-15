@@ -25,4 +25,4 @@ const COMPONENT_CATEGORIES = {
 };
 
 exports.COMPONENT_CATEGORIES = COMPONENT_CATEGORIES;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/chunks/index-tags-hLIF2Clq.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0/dist/chunks/index-tags-hLIF2Clq.cjs.map

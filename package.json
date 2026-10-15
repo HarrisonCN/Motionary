@@ -1,6 +1,6 @@
 {
   "name": "motionary",
-  "version": "15.9.0",
+  "version": "16.0.0",
   "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 209 animated Web Components (91 core, 118 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -660,14 +660,24 @@
         "default": "./dist/components/studio-a11y.cjs"
       }
     },
-    "./scene/v3-preview": {
+    "./scene/v3": {
       "import": {
-        "types": "./dist/components/scene-v3-preview.d.ts",
-        "default": "./dist/components/scene-v3-preview.js"
+        "types": "./dist/components/scene-v3.d.ts",
+        "default": "./dist/components/scene-v3.js"
       },
       "require": {
-        "types": "./dist/components/scene-v3-preview.d.cts",
-        "default": "./dist/components/scene-v3-preview.cjs"
+        "types": "./dist/components/scene-v3.d.cts",
+        "default": "./dist/components/scene-v3.cjs"
+      }
+    },
+    "./scene/v3-preview": {
+      "import": {
+        "types": "./dist/components/scene-v3.d.ts",
+        "default": "./dist/components/scene-v3.js"
+      },
+      "require": {
+        "types": "./dist/components/scene-v3.d.cts",
+        "default": "./dist/components/scene-v3.cjs"
       }
     },
     "./studio/store": {
@@ -1580,14 +1590,14 @@
         "default": "./dist/components/scene-v2.cjs"
       }
     },
-    "./components/scene-v3-preview": {
+    "./components/scene-v3": {
       "import": {
-        "types": "./dist/components/scene-v3-preview.d.ts",
-        "default": "./dist/components/scene-v3-preview.js"
+        "types": "./dist/components/scene-v3.d.ts",
+        "default": "./dist/components/scene-v3.js"
       },
       "require": {
-        "types": "./dist/components/scene-v3-preview.d.cts",
-        "default": "./dist/components/scene-v3-preview.cjs"
+        "types": "./dist/components/scene-v3.d.cts",
+        "default": "./dist/components/scene-v3.cjs"
       }
     },
     "./components/perf-tasks": {
@@ -4430,6 +4440,16 @@
     "./components/layout.css": "./dist/components/layout.css",
     "./components/packs.css": "./dist/components/packs.css",
     "./components/fx.css": "./dist/components/fx.css",
+    "./components/scene-v3-preview": {
+      "import": {
+        "types": "./dist/components/scene-v3.d.ts",
+        "default": "./dist/components/scene-v3.js"
+      },
+      "require": {
+        "types": "./dist/components/scene-v3.d.cts",
+        "default": "./dist/components/scene-v3.cjs"
+      }
+    },
     "./package.json": "./package.json"
   },
   "files": [

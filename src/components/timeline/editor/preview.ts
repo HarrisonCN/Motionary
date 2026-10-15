@@ -7,7 +7,7 @@
  */
 import { parseEase, type Ease } from '../../../runtime/ease';
 import { raf, caf, now } from '../../base';
-import { isLayerActive, resolveRandom, timelineDocDuration, type TimelineDoc, type TimelineValue } from './format';
+import { isLayerActive, resolveRandom, timelineDocDuration, round, byTime, type TimelineDoc, type TimelineValue } from './format';
 
 export interface TimelineFrame {
   /** The sampled time (clamped to 0…duration). */
@@ -16,10 +16,6 @@ export interface TimelineFrame {
   layers: Record<string, Record<string, TimelineValue>>;
 }
 
-const round = (n: number) => {
-  const r = Math.round(n * 1e4) / 1e4;
-  return r === 0 ? 0 : r;
-};
 const NUM = /-?(?:\d+\.?\d*|\.\d+)(?:e[-+]?\d+)?/gi;
 const HEX = /^#([0-9a-f]{3}|[0-9a-f]{6})$/i;
 const hexRgb = (h: string): string => {
@@ -74,7 +70,7 @@ export function sampleTimelineDoc(doc: TimelineDoc, time: number): TimelineFrame
   const layers: TimelineFrame['layers'] = {};
   for (const l of doc.layers) {
     if (l.type !== 'track' || !l.keyframes?.length || !isLayerActive(doc, l.id)) continue;
-    const ks = l.keyframes.map((k, i) => [k, i] as const).sort((x, y) => x[0].time - y[0].time || x[1] - y[1]).map(([k]) => k);
+    const ks = byTime(l.keyframes);
     const names: string[] = [];
     for (const k of ks) for (const n of Object.keys(k.props)) if (!names.includes(n)) names.push(n);
     const state: Record<string, TimelineValue> = {};

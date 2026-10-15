@@ -21,6 +21,7 @@ const CLI: any = await import(join(ROOT, 'bin/motionary.mjs'));
 const M: any = await import(join(ROOT, 'bin/motionary-mcp.mjs'));
 const m = M.loadManifest(join(ROOT, 'dist/manifest.json'));
 M.setStudioAi(await import(join(ROOT, 'dist/components/studio-ai.js')));
+M.setSceneV3(V3); // 16.0: scene tools read Scene v3 through the source module
 const call = async (name: string, args: any) => (await M.callTool(m, name, args)).structuredContent;
 const IDS = V3.DEPRECATIONS_V16.map((d) => d.id);
 
@@ -51,10 +52,10 @@ describe('16.0 change list: docs', () => {
   });
   it('docs/scene-v3.md + scripts/scene-v3.schema.json are marked draft and describe comp / component / variants', () => {
     const md = readFileSync(join(ROOT, 'docs/scene-v3.md'), 'utf8');
-    expect(md).toMatch(/draft/i);
+    expect(md).toMatch(/draft|stable \(16\.0\)/i); // 16.0: stable (was the 15.9 draft)
     for (const w of ['"comp"', '"component"', 'variants', 'timeRemap', 'migrateToSceneV3']) expect(md).toContain(w);
     const schema = JSON.parse(readFileSync(join(ROOT, 'scripts/scene-v3.schema.json'), 'utf8'));
-    expect(schema.$comment).toMatch(/draft/);
+    expect(schema.$comment).toMatch(/draft|stable since 16\.0/);
     expect(schema.properties.version.const).toBe(3);
     expect(JSON.stringify(schema)).toContain('"comp"');
   });
@@ -116,20 +117,20 @@ describe('migrate --to 16', () => {
     const r2 = CLI.migrateTo16([d], { sceneV3: V3, write: true });
     expect(r2.files).toEqual([]);
   });
-  it('CLI on 15.x: --dry-run exit 0; --write refused with exit 2 and nothing written', async () => {
+  it('CLI on 15.x: --dry-run exit 0; --write refused with exit 2 and nothing written (16.0: the 15.x path, pinned with env.major)', async () => {
     const d = project();
     const log = vi.spyOn(console, 'log').mockImplementation(() => {});
     const err = vi.spyOn(console, 'error').mockImplementation(() => {});
     expect(await CLI.main(['migrate', '--to', '16', '--dry-run', d], { sceneV3: V3 })).toBe(0);
-    expect(await CLI.main(['migrate', '--to', '16', '--write', d], { sceneV3: V3 })).toBe(2);
+    expect(await CLI.main(['migrate', '--to', '16', '--write', d], { sceneV3: V3, major: 15 })).toBe(2);
     expect(err.mock.calls.join('\n')).toMatch(/16\.0/);
     expect(existsSync(join(d, 'scenes/hero.scene.json.bak'))).toBe(false);
     log.mockRestore(); err.mockRestore();
   });
 });
 
-describe('Studio exportScene: warn once before 16.0 switches to v3', () => {
-  it('exportScene() warns once naming 16.0 and { version: 2 }; exportScene({ version: 2 }) is silent and equal', async () => {
+describe('Studio exportScene: 15.9 warned once before 16.0 switched to v3', () => {
+  it('16.0: exportScene() returns Scene v3 without a warning; exportScene({ version: 2 }) is silent and reads back equal', async () => {
     const { createStudio } = await import('../src/components/studio/index');
     const { createTimelineHistory, createTimelineDoc } = await import('../src/components/timeline/editor/index');
     const host = document.createElement('div'); document.body.append(host);
@@ -138,50 +139,46 @@ describe('Studio exportScene: warn once before 16.0 switches to v3', () => {
     const quiet = s.exportScene({ version: 2 });
     expect(warn).not.toHaveBeenCalled();
     const a = s.exportScene(); s.exportScene();
-    expect(warn).toHaveBeenCalledTimes(1);
-    expect(String(warn.mock.calls[0][0])).toMatch(/16\.0.*\{ version: 2 \}/);
-    expect(a).toEqual(quiet);
-    expect(a.version).toBe(2);
+    expect(warn).not.toHaveBeenCalled();
+    expect(a.version).toBe(3);
+    expect(V3.validateSceneV3(a)).toEqual([]);
+    expect(V3.sceneV3ToV2(a).doc).toEqual(quiet);
+    expect(quiet.version).toBe(2);
     warn.mockRestore(); s.destroy(); host.remove();
   });
 });
 
-describe('motionary-mcp 2.5: validate_scene + deprecations on MCP 2.x shapes', () => {
-  it('server 2.5; validate_scene appended after propose_edit, read-only, schema 1.0', () => {
-    expect(M.SERVER_INFO.version).toMatch(/^2\.([5-9]|\d\d)\.\d+$/);
+describe('motionary-mcp 2.5: validate_scene + deprecations on MCP 2.x shapes (16.0: 3.0 removes those shapes)', () => {
+  it('server 2.5+; validate_scene appended after propose_edit, read-only (schema 2.0 from 16.0)', () => {
+    expect(M.SERVER_INFO.version).toMatch(/^(?:2\.(?:[5-9]|\d\d)|(?:[3-9]|\d\d)\.\d+)\.\d+$/);
     const names = M.TOOLS.map((x: any) => x.name);
     expect(names[names.length - 1]).toBe('validate_scene');
     const t = M.TOOLS.find((x: any) => x.name === 'validate_scene');
     expect(t.annotations.readOnlyHint).toBe(true);
-    expect(t._meta['motionary/schemaVersion']).toBe('1.0');
+    expect(t._meta['motionary/schemaVersion']).toBe('2.0');
     expect(t.inputSchema.required).toEqual(['scene']);
   });
-  it('validate_scene validates like validate_snippet { scene } did, without deprecations', async () => {
+  it('validate_scene validates; validate_snippet { scene } is refused with a pointer (16.0)', async () => {
     const r = await call('validate_scene', { scene: SCENE });
     expect(r.schema).toBe('motionary-mcp/validate_scene@1');
     expect(r.valid).toBe(true);
     expect(r.deprecations).toBeUndefined();
-    const old = await call('validate_snippet', { scene: SCENE });
-    expect(old.valid).toBe(true);
-    expect(old.deprecations.map((x: any) => x.id)).toEqual(['mcp-snippet-scene']);
+    await expect(Promise.resolve().then(() => M.callTool(m, 'validate_snippet', { scene: SCENE }))).rejects.toThrow(/validate_scene/);
   });
-  it('scene as JSON text and check_compat carry deprecations (removedIn 16.0, doc link); normal calls have none', async () => {
-    const s = await call('validate_scene', { scene: JSON.stringify(SCENE) });
-    expect(s.deprecations.map((x: any) => x.id)).toEqual(['mcp-scene-text']);
-    expect(s.deprecations[0]).toMatchObject({ removedIn: '16.0', doc: 'docs/deprecations-v16.md#mcp-scene-text' });
-    const c = await M.callTool(m, 'check_compat', { version: '14.0.0' });
-    expect(c.structuredContent.deprecations[0].id).toBe('mcp-check-compat');
-    expect(JSON.parse(c.content[0].text).deprecations[0].id).toBe('mcp-check-compat');
+  it('16.0: scene as JSON text and check_compat are refused with the doc anchor; normal calls carry no deprecations', async () => {
+    await expect(Promise.resolve().then(() => M.callTool(m, 'validate_scene', { scene: JSON.stringify(SCENE) }))).rejects.toThrow(/deprecations-v16\.md#mcp-scene-text/);
+    await expect(Promise.resolve().then(() => M.callTool(m, 'check_compat', { version: '14.0.0' }))).rejects.toThrow(/deprecations-v16\.md#mcp-check-compat/);
+    expect(M.legacyInputs).toBeUndefined();
     const plain = await call('check_compatibility', { tags: ['usa-fade-up'] });
     expect(plain.deprecations).toBeUndefined();
   });
 });
 
-describe('15.9 package entry', () => {
-  it('motionary/scene/v3-preview and motionary/components/scene-v3-preview with a size line', () => {
+describe('15.9 package entry (16.0: aliases of motionary/scene/v3)', () => {
+  it('motionary/scene/v3-preview and motionary/components/scene-v3-preview stay, pointing at the scene-v3 build, with a size line', () => {
     const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'));
-    expect(pkg.exports['./scene/v3-preview'].import.default).toBe('./dist/components/scene-v3-preview.js');
-    expect(pkg.exports['./components/scene-v3-preview'].require.default).toBe('./dist/components/scene-v3-preview.cjs');
-    expect(readFileSync(join(ROOT, 'size-budget.json'), 'utf8')).toMatch(/components\/scene-v3-preview/);
+    expect(pkg.exports['./scene/v3-preview'].import.default).toBe('./dist/components/scene-v3.js');
+    expect(pkg.exports['./components/scene-v3-preview'].require.default).toBe('./dist/components/scene-v3.cjs');
+    expect(readFileSync(join(ROOT, 'size-budget.json'), 'utf8')).toMatch(/components\/scene-v3/);
   });
 });

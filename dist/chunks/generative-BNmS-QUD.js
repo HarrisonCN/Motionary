@@ -299,4 +299,4 @@ const GENERATIVE_FX = [
 ];
 
 export { GENERATIVE_FX as G, canvasBackground as c, hexRgb as h, noise2 as n };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/chunks/generative-BNmS-QUD.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0/dist/chunks/generative-BNmS-QUD.js.map

@@ -6,7 +6,7 @@ A line grid behind the content that lights up around the pointer.
 
 - **Category:** background · **since** 2.8
 - **Import:** `import { defineGridGlow } from 'motionary/components/background'` then `defineGridGlow();`
-- **CDN:** `<script src="https://unpkg.com/motionary@15/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@16/dist/components.umd.js"></script>`
 - **Attributes:** `size`, `radius`, `color`
 - **Events:** —
 - **Slots:** —

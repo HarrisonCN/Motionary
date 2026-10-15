@@ -38,8 +38,10 @@ export const LAYER_ALIASES = {
   'studio/a11y': 'components/studio-a11y',
   // 15.5: team projects (ProjectStore adapters, revisions, conflict detection)
   'studio/store': 'components/studio-store',
-  // 15.9: Scene Format v3 draft + migrator preview (16.0 makes v3 the write format)
-  'scene/v3-preview': 'components/scene-v3-preview',
+  // 16.0: Scene Format v3 (15.9 preview name kept as an alias: scene/v3-preview → the same files)
+  'scene/v3': 'components/scene-v3',
+  'scene/v3-preview': 'components/scene-v3',
+  'components/scene-v3-preview': 'components/scene-v3',
 };
 
 /**

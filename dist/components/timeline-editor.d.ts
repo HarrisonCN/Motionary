@@ -320,7 +320,7 @@ declare function createTimelinePreview(root: Element, doc: TimelineDoc, o?: {
 
 declare const TIMELINE_DOC_SCHEMA: {
     readonly $schema: "https://json-schema.org/draft/2020-12/schema";
-    readonly $id: "https://cdn.jsdelivr.net/npm/motionary@15/docs/timeline-doc.schema.json";
+    readonly $id: "https://cdn.jsdelivr.net/npm/motionary@16/docs/timeline-doc.schema.json";
     readonly title: "motionary-timeline v1";
     readonly type: "object";
     readonly additionalProperties: false;
@@ -561,7 +561,7 @@ declare function timelineDocFromScene(scene: SceneV2Doc): {
     doc: TimelineDoc;
     lost: SceneLoss[];
 };
-/** Open any motion document (object or JSON text) as an editor document; throws `TimelineDocError` on anything else. */
+/** Open any motion document (object or JSON text; flat Scene v3 — no comps / components — since 16.0) as an editor document; throws `TimelineDocError` on anything else. */
 declare function loadMotionDoc(input: unknown): {
     doc: TimelineDoc;
     lost: SceneLoss[];

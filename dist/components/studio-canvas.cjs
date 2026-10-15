@@ -1,7 +1,7 @@
 'use strict';
 
-var history = require('../chunks/history-CLzpNgGy.cjs');
-var format = require('../chunks/format-DrRrPbjl.cjs');
+var history = require('../chunks/history-B0Ml40k1.cjs');
+var format = require('../chunks/format-b5fQz-vc.cjs');
 
 /**
  * motionary/studio/canvas (14.3) — the foundations of the Studio canvas: visual selection, marquee and multi-select,
@@ -995,4 +995,4 @@ exports.snapLines = snapLines;
 exports.snapRect = snapRect;
 exports.snapToGrid = snapToGrid;
 exports.snapValue = snapValue;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/components/studio-canvas.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0/dist/components/studio-canvas.cjs.map

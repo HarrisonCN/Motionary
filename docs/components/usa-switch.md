@@ -6,7 +6,7 @@
 
 - **Category:** click · **since** 6.7 · **changed in** 6.9, 7.0, 13.1, 13.5
 - **Import:** `import { defineSwitch } from 'motionary/components/widgets'` then `defineSwitch();`
-- **CDN:** `<script src="https://unpkg.com/motionary@15/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@16/dist/widgets.umd.js"></script>`
 - **Attributes:** `variant`, `label`, `name`, `value`, `disabled`
 - **Events:** `usa:change`
 - **Slots:** —

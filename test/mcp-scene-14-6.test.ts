@@ -26,15 +26,16 @@ const scene = (component?: any) => ({
 
 describe('14.6 tool contracts (additive)', () => {
   it('server 2.2; check_compatibility / suggest_fix / validate_snippet / suggest_motion accept scene inputs, old required args unchanged in meaning', () => {
-    expect(M.SERVER_INFO.version).toMatch(/^2\.([2-9]|\d\d)\.\d+$/); // 14.8: 2.3 is additive
+    expect(M.SERVER_INFO.version).toMatch(/^(?:2\.(?:[2-9]|\d\d)|(?:[3-9]|\d\d)\.\d+)\.\d+$/); // 14.8: 2.3 is additive; 16.0: 3.0
     const t = (n: string) => M.TOOLS.find((x: any) => x.name === n);
     expect(t('check_compatibility').inputSchema.properties.scene).toBeTruthy();
     expect(t('suggest_fix').inputSchema.properties.scene).toBeTruthy();
-    expect(t('validate_snippet').inputSchema.properties.scene).toBeTruthy();
-    expect(t('validate_snippet').inputSchema.properties.ops).toBeTruthy();
+    // 16.0 (MCP 3.0): validate_snippet is code only; its scene / ops inputs moved to validate_scene
+    expect(t('validate_snippet').inputSchema.properties.scene).toBeUndefined();
+    expect(t('validate_scene').inputSchema.properties.ops).toBeTruthy();
     expect(t('suggest_motion').inputSchema.properties.format.enum).toEqual(['waapi', 'css', 'component', 'scene']);
-    for (const n of ['check_compatibility', 'suggest_fix', 'validate_snippet']) expect(t(n).annotations.readOnlyHint).toBe(true);
-    // 15.9 (MCP 2.5) adds validate_scene as the 3.0 home of validate_snippet { scene }; the 14.6 inputs above still work
+    for (const n of ['check_compatibility', 'suggest_fix', 'validate_snippet', 'validate_scene']) expect(t(n).annotations.readOnlyHint).toBe(true);
+    // 15.9 (MCP 2.5) added validate_scene as the 3.0 home of validate_snippet { scene } (16.0: the only one)
     expect(M.TOOLS.map((x: any) => x.name).indexOf('validate_scene')).toBeGreaterThan(M.TOOLS.map((x: any) => x.name).indexOf('propose_edit'));
   });
   it('suggest_fix / validate_snippet still need code when no scene is given', async () => {
@@ -66,10 +67,10 @@ describe('14.6 suggest_fix { scene }', () => {
   });
 });
 
-describe('14.6 validate_snippet { scene, ops }', () => {
+describe('14.6 validate_snippet { scene, ops } (16.0: validate_scene)', () => {
   it('valid scene + ops → schema, compatibility and render pass; the input scene is not modified', async () => {
     const s = scene();
-    const r = await call('validate_snippet', { scene: s, ops: [{ op: 'add-keyframe', layer: 'n', keyframe: { id: 'n1', time: 0, props: { opacity: '0' } } }] });
+    const r = await call('validate_scene', { scene: s, ops: [{ op: 'add-keyframe', layer: 'n', keyframe: { id: 'n1', time: 0, props: { opacity: '0' } } }] });
     expect(r.schema).toBe('motionary-mcp/validate_scene@1');
     expect(r.valid).toBe(true);
     expect(r.problems).toEqual([]);
@@ -78,18 +79,18 @@ describe('14.6 validate_snippet { scene, ops }', () => {
     expect(s.layers[1].keyframes).toEqual([]);
   });
   it('reports invalid ops, schema problems and unsafe model values; never throws on junk', async () => {
-    const a = await call('validate_snippet', { scene: scene(), ops: [{ op: 'set-props', layer: 'nope', keyframe: 'k', props: { opacity: '1' } }] });
+    const a = await call('validate_scene', { scene: scene(), ops: [{ op: 'set-props', layer: 'nope', keyframe: 'k', props: { opacity: '1' } }] });
     expect(a.valid).toBe(false);
-    const b = await call('validate_snippet', { scene: { format: 'motionary-scene', version: 2, layers: [{ id: 'x', type: 'blob' }] } });
+    const b = await call('validate_scene', { scene: { format: 'motionary-scene', version: 2, layers: [{ id: 'x', type: 'blob' }] } });
     expect(b.valid).toBe(false);
     expect(b.problems[0].path).toMatch(/layers\[0\]/);
-    const c = await call('validate_snippet', { scene: scene(), ops: [{ op: 'set-props', layer: 'title', keyframe: 'k2', props: { background: 'url(javascript:alert(1))' } }] });
+    const c = await call('validate_scene', { scene: scene(), ops: [{ op: 'set-props', layer: 'title', keyframe: 'k2', props: { background: 'url(javascript:alert(1))' } }] });
     expect(c.valid).toBe(false);
-    const d = await call('validate_snippet', { scene: '{not json' });
+    const d = await call('validate_scene', { scene: { not: 'a scene' } });
     expect(d.valid).toBe(false);
   });
   it("browser: 'auto' renders in a real headless browser when one is available, else falls back to the headless sampler", async () => {
-    const r = await call('validate_snippet', { scene: scene(), browser: 'auto' });
+    const r = await call('validate_scene', { scene: scene(), browser: 'auto' });
     expect(['browser', 'static']).toContain(r.mode);
     expect(r.valid).toBe(true);
   }, 60_000);

@@ -6,7 +6,7 @@ Soft colour blobs that slowly morph and drift — a fluid gradient backdrop.
 
 - **Category:** background · **since** 2.8
 - **Import:** `import { defineBlobs } from 'motionary/components/background'` then `defineBlobs();`
-- **CDN:** `<script src="https://unpkg.com/motionary@15/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@16/dist/components.umd.js"></script>`
 - **Attributes:** `colors`, `speed`, `blur`
 - **Events:** —
 - **Slots:** —

@@ -277,7 +277,7 @@ declare function formatMigrationReport(r: MigrationResult, file?: string): strin
 
 declare const SCENE_V2_SCHEMA: {
     readonly $schema: "https://json-schema.org/draft/2020-12/schema";
-    readonly $id: "https://cdn.jsdelivr.net/npm/motionary@15/docs/scene-v2.schema.json";
+    readonly $id: "https://cdn.jsdelivr.net/npm/motionary@16/docs/scene-v2.schema.json";
     readonly title: "motionary-scene v2 (draft)";
     readonly description: "Draft of the 14.0 scene format: one document for timeline layers, <usa-player> tracks, component motion props and motion tokens. Values may reference tokens as \"{duration.fast}\".";
     readonly type: "object";

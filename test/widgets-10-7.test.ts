@@ -225,9 +225,9 @@ describe('10.7 motionary-mcp 2.0', () => {
     const { StdioClientTransport } = await import('@modelcontextprotocol/sdk/client/stdio.js');
     const client = new Client({ name: 'motionary-test', version: '1.0.0' });
     await client.connect(new StdioClientTransport({ command: process.execPath, args: ['bin/motionary-mcp.mjs'], env: { ...process.env, MOTIONARY_MANIFEST: manifest, MOTIONARY_AI: aiBundle } as Record<string, string> }));
-    expect(client.getServerVersion()?.version).toMatch(/^2\./); // 2.x (2.1.0 in 13.7)
+    expect(client.getServerVersion()?.version).toMatch(/^[23]\./); // 2.x (2.1.0 in 13.7); 3.x from 16.0
     const { tools } = await client.listTools();
-    expect(tools.map((t) => t.name)).toEqual(['list_components', 'search_components', 'get_component', 'get_example', 'scaffold_snippet', 'suggest_motion', 'validate_snippet', 'check_compat', 'check_compatibility', 'suggest_fix', 'list_templates', 'get_template', 'export_scene', 'propose_edit', 'validate_scene']); // 13.7 appends two, 14.8 (MCP 2.3) three, 15.1 (MCP 2.4) one, 15.9 (MCP 2.5) validate_scene
+    expect(tools.map((t) => t.name)).toEqual(['list_components', 'search_components', 'get_component', 'get_example', 'scaffold_snippet', 'suggest_motion', 'validate_snippet', 'check_compatibility', 'suggest_fix', 'list_templates', 'get_template', 'export_scene', 'propose_edit', 'validate_scene']); // 13.7 appends two, 14.8 (MCP 2.3) three, 15.1 (MCP 2.4) one, 15.9 (MCP 2.5) validate_scene; 16.0 (MCP 3.0) removes check_compat
     expect(tools.every((t) => t.annotations?.readOnlyHint === true)).toBe(true);
     // 13.7: the SDK client validates structuredContent against each new tool's outputSchema
     const cc: any = await client.callTool({ name: 'check_compatibility', arguments: { tags: ['usa-tilt'], framework: 'vue' } });

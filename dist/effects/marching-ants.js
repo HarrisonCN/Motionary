@@ -11,4 +11,4 @@ function registerMarchingAnts() {
 }
 
 export { effect, registerMarchingAnts as register, registerMarchingAnts };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/effects/marching-ants.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0/dist/effects/marching-ants.js.map

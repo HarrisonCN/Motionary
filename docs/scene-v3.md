@@ -1,8 +1,9 @@
-# Scene Format v3 (draft)
+# Scene Format v3
 
-> **Draft (15.9).** Scene v3 is the format 16.0 writes. It may still change before 16.0.0; in 15.x it is a preview:
-> `motionary/scene/v3-preview` validates it, previews the migration and reads it back as v2 — nothing writes v3 yet.
-> JSON Schema (draft): [`scripts/scene-v3.schema.json`](../scripts/scene-v3.schema.json). Changes it brings:
+> **Stable (16.0).** Scene v3 is the format the Studio (`exportScene()`), `motionary migrate` and motionary-mcp write.
+> `motionary/scene/v3` validates, migrates and reads it back as v2 (`motionary/scene/v3-preview`, the 15.9 name, is an
+> alias until 17.0). The player, the timeline editor and the Studio open flat v3 directly; nested v3 (compositions,
+> component instances) opens through `sceneV3ToV2` — `parseStudioProject(doc, { sceneV3ToV2 })` — with losses reported. JSON Schema: [`scripts/scene-v3.schema.json`](../scripts/scene-v3.schema.json). Changes it brings:
 > [deprecations-v16.md](./deprecations-v16.md).
 
 ## Why a new version
@@ -64,7 +65,7 @@ layers with exactly the v2 rules (keyframes, presets, effects, component binding
 The 15.3 variant entries, unchanged: `[{ id, media: { minWidth?, maxWidth? }, layers?: { [id]: { muted?, distanceScale?, timeScale? } } }]`
 (`minWidth` inclusive, `maxWidth` exclusive, first match wins). Layer ids must exist in the scene.
 
-## API (`motionary/scene/v3-preview`)
+## API (`motionary/scene/v3`; 15.9: `motionary/scene/v3-preview`)
 
 | Export | What it does |
 |---|---|

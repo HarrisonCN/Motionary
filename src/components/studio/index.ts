@@ -28,6 +28,8 @@ import { timelineDocDuration, isLayerLocked, type TimelineDoc, type TimelineLaye
 import { CURVE_PRESETS, parseBezier, bezierEasing, springBezier, springParams, type Bezier, type SpringParams } from './curve';
 import { frameTime, sampleFrames, serializeStudioProject, parseStudioProject } from './project';
 import type { SceneV2Doc } from '../scene/v2';
+import type { SceneV3Doc } from '../scene/v3';
+import { sceneV2ToFlatV3 } from '../scene/v3-read';
 
 export { CURVE_PRESETS, parseBezier, bezierEasing, springBezier, springParams } from './curve';
 export type { Bezier, SpringParams } from './curve';
@@ -103,11 +105,10 @@ export interface Studio {
   frames(): TimelineFrame[];
   /** The project as JSON text (Scene v2 + editor state). */
   save(): string;
-  /**
-   * The document as Scene v2. 15.9: called without `{ version: 2 }` it warns once that 16.0 returns Scene v3
-   * (docs/deprecations-v16.md#scene-v2-write); `{ version: 2 }` keeps v2 in 16.x too and never warns.
-   */
-  exportScene(o?: { version?: 2 }): SceneV2Doc;
+  /** The document as Scene v3 (16.0: the write format); `{ version: 2 }` returns Scene v2. */
+  exportScene(): SceneV3Doc;
+  exportScene(o: { version: 2 }): SceneV2Doc;
+  exportScene(o?: { version?: 2 | 3 }): SceneV3Doc | SceneV2Doc;
   /** Open a project / Scene v2 / timeline v1 / animation JSON; resets the history; returns what a scene lost. */
   load(input: unknown): SceneLoss[];
   undo(): boolean;
@@ -125,15 +126,6 @@ const fmt = (t: number) => `${(t / 1000).toFixed(3)} s`;
 const parseVal = (v: string): TimelineValue => (/^\s*-?(\d+\.?\d*|\.\d+)\s*$/.test(v) ? +v : v.trim());
 
 /** Build a Studio inside `root` for the history's document. */
-declare const process: { env: Record<string, string | undefined> };
-let warnedV3 = false;
-/** 15.9: one development notice per page that 16.0's exportScene() returns Scene v3. */
-function warnSceneV3(): void {
-  if (warnedV3 || (globalThis as any).MOTIONARY_NO_DEPRECATION) return;
-  warnedV3 = true;
-  console.warn('[motionary] studio.exportScene() returns Scene v3 from 16.0 — pass { version: 2 } to keep Scene v2 (docs/deprecations-v16.md#scene-v2-write)');
-}
-
 export function createStudio(root: HTMLElement, o: StudioOptions): Studio {
   const { history } = o;
   const D = root.ownerDocument;
@@ -685,9 +677,9 @@ export function createStudio(root: HTMLElement, o: StudioOptions): Studio {
     },
     frames: () => sampleFrames(doc(), { fps }),
     save: () => serializeStudioProject(doc(), { time, zoom, fps, collapsed: [...collapsed], springs }),
-    exportScene(o) {
-      if ((!o || o.version !== 2) && typeof process !== 'undefined' && process.env.NODE_ENV !== 'production') warnSceneV3();
-      return timelineDocToScene(doc());
+    exportScene(o?: { version?: 2 | 3 }): any {
+      const v2 = timelineDocToScene(doc());
+      return o && o.version === 2 ? v2 : sceneV2ToFlatV3(v2);
     },
     load(input) {
       const r = parseStudioProject(input);

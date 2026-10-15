@@ -1,2 +1,2 @@
 export { d as defineRadar } from '../chunks/radar-t201zj2r.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/widgets/radar.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0/dist/widgets/radar.js.map

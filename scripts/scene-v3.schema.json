@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://cdn.jsdelivr.net/npm/motionary@15/scripts/scene-v3.schema.json",
-  "$comment": "draft, may change before 16.0 (15.9 preview: motionary/scene/v3-preview validates with validateSceneV3)",
+  "$id": "https://cdn.jsdelivr.net/npm/motionary@16/scripts/scene-v3.schema.json",
+  "$comment": "stable since 16.0 (motionary/scene/v3 validates with validateSceneV3; 15.9 shipped it as a draft)",
   "title": "motionary-scene v3 (draft)",
   "description": "Draft of the 16.0 scene format: Scene v2 plus nested compositions (type \"comp\"), components as layers (type \"component\" + components) and first-class breakpoint variants. Track and group layers are the v2 ones.",
   "type": "object",

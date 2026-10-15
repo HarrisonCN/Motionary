@@ -52,4 +52,4 @@ exports.localeAttr = localeAttr;
 exports.nextId = nextId;
 exports.ownChildren = ownChildren;
 exports.part = part;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/chunks/shared-Bf72wLyt.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0/dist/chunks/shared-Bf72wLyt.cjs.map

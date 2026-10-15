@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 7.4
 - **Import:** `import { defineNotificationBell } from 'motionary/components/widgets'` then `defineNotificationBell();`
-- **CDN:** `<script src="https://unpkg.com/motionary@15/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@16/dist/widgets.umd.js"></script>`
 - **Attributes:** `label`
 - **Events:** `usa:notify`, `usa:read`
 - **Slots:** —

@@ -88,4 +88,4 @@ function registerFormPack() {
 exports.FORM_FX = FORM_FX;
 exports.registerFormPack = registerFormPack;
 exports.shakeFrames = shakeFrames;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/components/fx-form.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0/dist/components/fx-form.cjs.map

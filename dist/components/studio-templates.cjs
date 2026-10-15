@@ -1,6 +1,6 @@
 'use strict';
 
-var format = require('../chunks/format-DrRrPbjl.cjs');
+var format = require('../chunks/format-b5fQz-vc.cjs');
 var components_studioAssets = require('./studio-assets.cjs');
 var components_studioExport = require('./studio-export.cjs');
 
@@ -575,4 +575,4 @@ exports.templateInfo = templateInfo;
 exports.templateIntegrity = templateIntegrity;
 exports.uninstallTemplate = uninstallTemplate;
 exports.verifyTemplate = verifyTemplate;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/components/studio-templates.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0/dist/components/studio-templates.cjs.map

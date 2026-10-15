@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-DNhh5i4q.cjs');
-var keyframes = require('../chunks/keyframes-Bk4ysJwz.cjs');
+var registry = require('../chunks/registry-CvFLujxx.cjs');
+var keyframes = require('../chunks/keyframes-BNndesQm.cjs');
 
 /**
  * `motionary/runtime/format-css` (10.1) — import CSS `@keyframes` and Web
@@ -180,4 +180,4 @@ exports.parseKeyframes = parseKeyframes;
 exports.parseKeyframesBody = parseKeyframesBody;
 exports.playKeyframes = playKeyframes;
 exports.toWaapi = toWaapi;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/runtime/format-css.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0/dist/runtime/format-css.cjs.map

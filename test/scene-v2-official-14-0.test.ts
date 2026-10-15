@@ -96,7 +96,7 @@ describe('14.0 <usa-player> reads scene v2 natively', () => {
   });
   it('invalid scene v2 is rejected with the validator message', () => {
     expect(() => createPlayer(root(), { format: 'motionary-scene', version: 2, layers: 'x' } as any)).toThrow(/layers/);
-    expect(() => createPlayer(root(), { format: 'motionary-scene', version: 3, layers: [] } as any)).toThrow(/newer motionary/);
+    expect(() => createPlayer(root(), { format: 'motionary-scene', version: 4, layers: [] } as any)).toThrow(/newer motionary/); // 16.0: flat v3 plays
   });
   it('without the compat layer, the removed 13.x formats fail with a pointer to migrate / motionary/compat-v13', () => {
     expect(() => createPlayer(root(), fx('playground.json'))).toThrow(/removed in 14\.0.*(motionary migrate|compat-v13)/s);

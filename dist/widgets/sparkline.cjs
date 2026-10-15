@@ -5,4 +5,4 @@ var widgets_sparkline = require('../chunks/sparkline-DeKhZpVo.cjs');
 
 
 exports.defineSparkline = widgets_sparkline.defineSparkline;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/widgets/sparkline.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0/dist/widgets/sparkline.cjs.map

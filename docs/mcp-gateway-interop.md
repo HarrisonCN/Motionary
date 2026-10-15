@@ -48,7 +48,6 @@ npx @winstonsayno/mcp-gateway@latest start -c mcp-gateway.yml
 | `scaffold_snippet` | 1.1 (registers every element an example uses; CDN pages import modules from the CDN) | 10.4 |
 | `suggest_motion` | 1.0 | 10.7 |
 | `validate_snippet` | 1.2 (`browser: true \| 'auto'` — real headless browser when Playwright is available, static fallback; `mode` says which ran) | 10.7 |
-| `check_compat` | 1.0 | 12.5 |
 | `check_compatibility` | 1.0 — **new**: framework / version / browser support per component | 13.7 |
 | `suggest_fix` | 1.0 — **new**: concrete patches (wrong tag, mistyped / deprecated attribute, missing import, bare CDN import, missing prerequisite, removed 13.0 paths) | 13.7 |
 | `list_templates` | 1.0 — motionary-mcp 2.3: the shipped Studio templates (integrity-checked; license + required modules) | 14.8 |
@@ -56,6 +55,10 @@ npx @winstonsayno/mcp-gateway@latest start -c mcp-gateway.yml
 | `export_scene` | 1.0 — motionary-mcp 2.3: scene / project / template → 14.7 standalone files + `frameDigest` | 14.8 |
 | `propose_edit` | 1.0 — motionary-mcp 2.4: prompt + scene → validated edit proposal (ops, diff, layers, provenance with the correlation id); writes nothing. With Gateway 15.1 canary the call's `X-Request-Id` joins the gateway lineage ([studio-provenance.md](./studio-provenance.md)) | 15.1 |
 | `validate_scene` | 1.0 — motionary-mcp 2.5: Scene v2 document (+ optional ops) → schema problems, component compatibility, headless render of every frame; takes over `validate_snippet { scene }`, which motionary-mcp 3.0 (16.0) removes ([deprecations-v16.md](./deprecations-v16.md)) | 15.9 |
+
+`check_compat` (1.0, 12.5) was removed in motionary-mcp 3.0 (16.0) — use `check_compatibility`. 3.0 also bumps the scene tools
+(`validate_scene`, `check_compatibility`, `suggest_fix`, `export_scene`, `propose_edit`) to schema 2.0: scene inputs are objects
+(Scene v3 or v2), JSON text is refused.
 
 Every tool definition carries its version in `_meta["motionary/schemaVersion"]`; the new tools also publish an
 `outputSchema` and put a `schema` id (`motionary-mcp/check_compatibility@1`, `motionary-mcp/suggest_fix@1`,
@@ -76,7 +79,7 @@ The gateway's own end-to-end test (`test/motionary-e2e.test.ts`, CI job "MCP com
 
 ```sh
 MOTIONARY_VERSION=13.7.0
-MOTIONARY_EXPECT_TOOLS=get_example,scaffold_snippet,suggest_motion,validate_snippet,check_compat,check_compatibility,suggest_fix
+MOTIONARY_EXPECT_TOOLS=get_example,scaffold_snippet,suggest_motion,validate_snippet,check_compatibility,suggest_fix
 ```
 
 (`list_components`, `search_components` and `get_component` are its built-in core set.)

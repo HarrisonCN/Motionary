@@ -5,4 +5,4 @@ var widgets_leaderboard = require('../chunks/leaderboard-DvSSQ8o3.cjs');
 
 
 exports.defineLeaderboard = widgets_leaderboard.defineLeaderboard;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/widgets/leaderboard.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0/dist/widgets/leaderboard.cjs.map

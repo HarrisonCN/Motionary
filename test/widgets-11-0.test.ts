@@ -92,7 +92,7 @@ describe('11.0: stable surfaces', () => {
     expect(r).toMatch(/motionary-mcp` 2\.x 稳定版/);
     expect(r).toMatch(/## 11\.0 之后[\s\S]*小程序适配[\s\S]*鸿蒙 ArkTS/);
     expect(r).not.toMatch(/motionary-mcp` 1\.0 稳定版/);
-    expect(read('bin/motionary-mcp.mjs')).toMatch(/version: '2\.\d+\.\d+'/); // 2.x stays stable (2.1.0 in 13.7)
+    expect(read('bin/motionary-mcp.mjs')).toMatch(/version: '[23]\.\d+\.\d+'/); // 2.x stayed stable (2.1.0 in 13.7); 3.0 in 16.0
   });
 });
 

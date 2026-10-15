@@ -6,7 +6,7 @@ A pinned graphic while [data-step] blocks scroll past; the active step drives th
 
 - **Category:** reveal · **since** 2.2
 - **Import:** `import { defineScrolly } from 'motionary/components/reveal'` then `defineScrolly();`
-- **CDN:** `<script src="https://unpkg.com/motionary@15/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@16/dist/components.umd.js"></script>`
 - **Attributes:** `offset`
 - **Events:** `usa:step`
 - **Slots:** —

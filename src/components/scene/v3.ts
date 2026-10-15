@@ -17,11 +17,13 @@ import { validateSceneV2, normalizeSceneV2, migrateToSceneV2, SCENE_V2_LIMITS } 
 import type { SceneV2Doc, SceneLayer, SceneProblem, SceneLoss, SceneValue, MigrateOptions, MotionSourceFormat } from './v2';
 import { validateVariants, VARIANTS_META_KEY } from '../studio/a11y';
 import type { MotionVariant } from '../studio/a11y';
+import { flattenSceneV3 } from './v3-read';
+export { flatSceneV3ToV2, sceneV2ToFlatV3 } from './v3-read';
 
 export const SCENE_V3_FORMAT = 'motionary-scene';
 export const SCENE_V3_VERSION = 3;
-/** 15.9: draft. 16.0 makes it the write format. */
-export const SCENE_V3_STATUS = 'draft';
+/** 15.9: draft. 16.0: stable — the write format. */
+export const SCENE_V3_STATUS = 'stable';
 export const SCENE_V3_LIMITS = { ...SCENE_V2_LIMITS, compDepth: 8, components: 256, rate: 16, depth: 64 } as const;
 
 export interface SceneTimeRemap { offset?: number; rate?: number }
@@ -354,74 +356,11 @@ export function migrateToSceneV3(input: unknown, o: MigrateV3Options = {}): Scen
 }
 
 /**
- * Read a v3 document as Scene v2 (for 15.x consumers). Compositions become groups with their start / time remap
- * baked into keyframe times; component instances are expanded (`<instance>/<layer>` ids, targets scoped under the
- * instance target, overrides applied); variants go back to meta. Every such step is listed in `lost`.
+ * Read a v3 document as Scene v2 (for 15.x consumers and every v2-only API). Compositions become groups with their
+ * start / time remap baked into keyframe times; component instances are expanded (`<instance>/<layer>` ids, targets
+ * scoped under the instance target, overrides applied); variants go back to meta. Every such step is listed in `lost`.
  */
 export function sceneV3ToV2(doc: SceneV3Doc): { doc: SceneV2Doc; lost: SceneLoss[] } {
-  const lost: SceneLoss[] = [];
-  const layers: any[] = [];
-  const comps: Record<string, SceneV3Component> = isObj(doc.components) ? (doc.components as any) : {};
-  type Map = (t: number) => number;
-  const emit = (src: any[], at: string, ctx: { parent?: string; map: Map; rate: number; prefix: string; target?: string; overrides?: Record<string, SceneV3Override>; depth: number }) => {
-    src.forEach((l: any, i: number) => {
-      const lp = `${at}[${i}]`;
-      const id = ctx.prefix + l.id;
-      const parent = l.parent !== undefined ? ctx.prefix + l.parent : ctx.parent;
-      const flags: any = {};
-      if (l.name !== undefined) flags.name = l.name;
-      if (parent !== undefined) flags.parent = parent;
-      for (const f of ['locked', 'muted', 'solo']) if (l[f]) flags[f] = true;
-      if (l.type === 'group') { layers.push({ ...clone(l), id, ...flags }); return; }
-      if (l.type === 'track') {
-        const n: any = { ...clone(l), id, ...flags };
-        const ov = ctx.overrides && ctx.overrides[l.id];
-        if (ctx.target !== undefined && n.target !== undefined) n.target = n.target === ':scope' ? ctx.target : `${ctx.target} ${n.target}`;
-        if (ov) {
-          if (ov.target !== undefined) n.target = ov.target;
-          if (ov.muted !== undefined) { if (ov.muted) n.muted = true; else delete n.muted; }
-        }
-        if (n.start !== undefined) n.start = round(Math.max(0, ctx.map(n.start)));
-        if (n.duration !== undefined && ctx.rate !== 1) n.duration = round(n.duration / ctx.rate);
-        if (Array.isArray(n.keyframes)) for (const k of n.keyframes) {
-          if (ctx.prefix) k.id = ctx.prefix + k.id;
-          const t = ctx.map(k.time);
-          if (t < 0) lost.push({ path: `${lp}.keyframes`, message: `keyframe "${k.id}" maps before 0 ms — clamped to 0` });
-          k.time = round(Math.max(0, t));
-          if (ov && ov.props) Object.assign(k.props, clone(ov.props));
-        }
-        layers.push(n);
-        return;
-      }
-      if (ctx.depth > L.compDepth + 4) { lost.push({ path: lp, message: 'nested too deep — dropped' }); return; }
-      if (l.type === 'comp') {
-        layers.push({ id, type: 'group', ...flags });
-        const start = num(l.start) ? l.start : 0, r = l.timeRemap || {}, off = num(r.offset) ? r.offset : 0, rate = num(r.rate, 0, L.rate) && r.rate > 0 ? r.rate : 1;
-        const outer = ctx.map;
-        lost.push({ path: lp, message: `composition "${l.id}" → group${start || off || rate !== 1 ? ` (start${off || rate !== 1 ? ' and time remap' : ''} baked into keyframe times)` : ''}${l.duration !== undefined ? '; its duration clip is not applied' : ''} — the composition boundary is not kept in v2` });
-        emit(l.layers || [], `${lp}.layers`, { ...ctx, parent: id, map: (t) => outer(start + (t - off) / rate), rate: ctx.rate * rate, depth: ctx.depth + 1 });
-        return;
-      }
-      if (l.type === 'component') {
-        const def = Object.prototype.hasOwnProperty.call(comps, l.ref) ? comps[l.ref] : undefined;
-        if (!def) { lost.push({ path: lp, message: `component instance "${l.id}": unknown component "${l.ref}" — dropped` }); return; }
-        layers.push({ id, type: 'group', ...flags });
-        lost.push({ path: lp, message: `component instance "${l.id}" of "${l.ref}" expanded — the link to the definition is not kept in v2` });
-        const start = num(l.start) ? l.start : 0, outer = ctx.map;
-        const target = l.target !== undefined ? (ctx.target !== undefined ? `${ctx.target} ${l.target}` : l.target) : ctx.target;
-        emit(def.layers || [], `${lp}(${l.ref})`, { parent: id, map: (t) => outer(start + t), rate: ctx.rate, prefix: `${id}/`, target, overrides: l.overrides, depth: ctx.depth + 1 });
-        return;
-      }
-      lost.push({ path: lp, message: `unknown layer type "${l.type}" — dropped` });
-    });
-  };
-  emit(Array.isArray(doc.layers) ? doc.layers : [], 'layers', { map: (t) => t, rate: 1, prefix: '', depth: 0 });
-  const out: any = { format: 'motionary-scene', version: 2, layers };
-  for (const k of ['name', 'duration', 'loop', 'seed', 'tokens', 'source'] as const) if ((doc as any)[k] !== undefined) out[k] = clone((doc as any)[k]);
-  if (doc.meta !== undefined) out.meta = clone(doc.meta);
-  if (doc.variants !== undefined) {
-    if (out.meta === undefined || isObj(out.meta)) out.meta = { ...(out.meta || {}), [VARIANTS_META_KEY]: clone(doc.variants) };
-    else lost.push({ path: 'variants', message: 'meta is not an object — variants cannot be stored in v2' });
-  }
-  return { doc: normalizeSceneV2(out), lost };
+  const r = flattenSceneV3(doc);
+  return { doc: normalizeSceneV2(r.doc), lost: r.lost };
 }

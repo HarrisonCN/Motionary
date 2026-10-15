@@ -33,7 +33,7 @@
 | v15.4.0 | [跳过] | P2 | 渲染后端（WebGPU / 资源调度） | 已按条件评估并跳过：15.2 性能数据中每帧脚本 6.25 ms（预算 8）、长任务 0、GPU 资源均在预算内，丢帧来自无头软件合成器而非 Canvas / WebGL；未做 WebGPU 后端，不发 15.4.0。真机轨迹证明 GPU 受限时再议。 |
 | v15.5.0 | [已发布] | P2 | 团队工程与资源：`motionary/studio/store` —— `ProjectStore` 适配器（内存 / IndexedDB / 自带 HTTP 后端；Motionary 不自带服务器）、版本历史、乐观并发冲突检测、图层级三方合并、`toAppStorage` 接入 Studio 应用 | 参考后端 `examples/project-store-server`：每租户一个 store，跨租户读取 403 并审计，配额 429 并审计（CI 测试）；IndexedDB 浏览器用例三浏览器。Gateway 托管的 store、租户模板目录与 Pages 模板画廊推迟（Gateway 无 project-store 路由，后端可作为普通 HTTP 上游放在 Gateway 后面）。 |
 | v15.9.0 | [已发布] | P0 | v16 准备：`motionary/scene/v3-preview`（Scene v3 草案：嵌套合成 / 组件即图层 / 一等 variants；`migrateToSceneV3` 预览 + 损失报告；`sceneV3ToV2`）；`doctor --v16` / `migrate --to 16`（15.x 只出报告，`--write` 留给 16.0，先写 `.bak`）；Studio `exportScene({ version: 2 })` + 开发期警告；motionary-mcp 2.5 `validate_scene` + 弃用提示 | 语料 v2 → v3 无损、回读 v2 与原文档相等、`frameDigest` 一致；16.0 每项变更都有警告 / doctor / 迁移 / 文档（docs/deprecations-v16.md）；`16.0.0-rc.1` 随后只发 `next` |
-| v16.0.0 | [建议] | P0 | **major** · Scene Format v3（嵌套合成、组件即图层、断点变体）+ motionary-mcp 3.0 | v2 → v3 无损迁移或逐项损失报告；可表达部分导出帧指纹不变；`v15-lts`；codemod + migrating-to-v16。 |
+| v16.0.0 | [已发布] | P0 | **major** · Scene Format v3（嵌套合成、组件即图层、断点变体）+ motionary-mcp 3.0 | v2 → v3 无损迁移或逐项损失报告；可表达部分导出帧指纹不变；`v15-lts`；codemod + migrating-to-v16。 |
 | v16.1.0 | [建议] | P1 | 符号与实例 | 覆盖属性、主符号更新传播、导出去重。 |
 | v16.2.0 | [建议] | P1 | Studio 插件 API（预览） | 沙箱运行、显式权限清单、插件崩溃不影响 Studio。 |
 | v16.3.0 | [建议] | P2 | 性能预算进 Studio | 编辑时显示导出体积 / 帧成本，超预算阻止发布导出。 |
@@ -82,7 +82,7 @@ Gateway 15.0 GA 仍受其门槛 A / B / C（72 小时 soak、专用硬件基线�
 
 1. **安装命令**：runtime 模块只需 `npm i motionary` 一次；官方运行时写出确切命令（如 `npm i @rive-app/canvas`）；
 2. **导入路径**：如 `motionary/runtime/scroll`；
-3. **CDN 地址**：可直接复制的 `<script>`（主版本固定，如 `https://cdn.jsdelivr.net/npm/motionary@15/dist/runtime.iife.js`）以及 ESM 地址；
+3. **CDN 地址**：可直接复制的 `<script>`（主版本固定，如 `https://cdn.jsdelivr.net/npm/motionary@16/dist/runtime.iife.js`）以及 ESM 地址；
 4. **引入顺序与注册代码**：先 `use(scroll)`（会同时注册核心），再注册组件；CDN 先加载 `runtime.iife.js`，再加载模块 IIFE（自动注册）；
 5. **最小用法示例**。
 

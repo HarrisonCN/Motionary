@@ -11,4 +11,4 @@ function registerDepthStack() {
 }
 
 export { effect, registerDepthStack as register, registerDepthStack };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/effects/depth-stack.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0/dist/effects/depth-stack.js.map

@@ -6,7 +6,7 @@ Product cards reveal and lift, “Add to cart” presses and flies the product i
 
 - **Category:** packs · **since** 3.9
 - **Import:** `import { definePack } from 'motionary/components/packs'` then `definePack();`
-- **CDN:** `<script src="https://unpkg.com/motionary@15/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@16/dist/components.umd.js"></script>`
 - **Attributes:** `name`
 - **Events:** —
 - **Slots:** —

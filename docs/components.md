@@ -56,7 +56,7 @@ defineTypewriter();
 No build step (registers every `<usa-*>` and exposes the API as `window.UsaComponents`):
 
 ```html
-<script src="https://unpkg.com/motionary@15/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@16/dist/components.umd.js"></script>
 <usa-typewriter words="Hello, Windows.|Hello, web."></usa-typewriter>
 <script>UsaComponents.toast('Ready', { type: 'success' });</script>
 ```
@@ -1345,7 +1345,7 @@ motion.bind(button, 'vhs-glitch', { trigger: 'click' });
 <usa-plugin-card name="retro" title="Retro" version="1.2.0" author="Motionary" engine="^10.0.0" downloads="12400">
   <p>Pixel, CRT, VHS and Y2K effects.</p>
 </usa-plugin-card>
-<usa-install-button package="motionary" managers="npm pnpm yarn bun cdn" cdn="https://cdn.jsdelivr.net/npm/motionary@15/dist/runtime.iife.js"></usa-install-button>
+<usa-install-button package="motionary" managers="npm pnpm yarn bun cdn" cdn="https://cdn.jsdelivr.net/npm/motionary@16/dist/runtime.iife.js"></usa-install-button>
 ```
 
 | Element | Attributes | Methods / events |
@@ -1376,10 +1376,10 @@ definePluginCard(); // registers <usa-plugin-card> — after the prerequisites
 - **CDN:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@15/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@16/dist/runtime.iife.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@15/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@15/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@16/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@16/dist/widgets.umd.js"></script>
 ```
 
 - **Minimal example:**
@@ -1407,11 +1407,11 @@ defineScrollScene(); // registers <usa-scroll-scene> — after the prerequisites
 - **CDN:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@15/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@15/dist/runtime/scroll.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@16/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@16/dist/runtime/scroll.iife.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@15/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@15/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@16/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@16/dist/widgets.umd.js"></script>
 ```
 
 - **Minimal example:**
@@ -1440,11 +1440,11 @@ defineTextSplitter(); // registers <usa-text-splitter> — after the prerequisit
 - **CDN:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@15/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@15/dist/runtime/text.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@16/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@16/dist/runtime/text.iife.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@15/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@15/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@16/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@16/dist/widgets.umd.js"></script>
 ```
 
 - **Minimal example:**
@@ -1470,11 +1470,11 @@ defineSmoothScroll(); // registers <usa-smooth-scroll> — after the prerequisit
 - **CDN:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@15/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@15/dist/runtime/smooth.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@16/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@16/dist/runtime/smooth.iife.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@15/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@15/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@16/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@16/dist/widgets.umd.js"></script>
 ```
 
 - **Minimal example:**
@@ -1503,14 +1503,14 @@ defineGlScene(); // registers <usa-gl-scene> — after the prerequisites
 - **CDN:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@15/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@15/dist/runtime/gl.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@15/dist/runtime/format-gltf.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@15/dist/runtime/format-obj.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@15/dist/runtime/gltf-anim.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@16/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@16/dist/runtime/gl.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@16/dist/runtime/format-gltf.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@16/dist/runtime/format-obj.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@16/dist/runtime/gltf-anim.iife.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@15/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@15/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@16/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@16/dist/widgets.umd.js"></script>
 ```
 
 - **Minimal example:**
@@ -1536,11 +1536,11 @@ defineLottiePlayer(); // registers <usa-lottie-player> — after the prerequisit
 - **CDN:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@15/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@15/dist/runtime/vector.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@16/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@16/dist/runtime/vector.iife.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@15/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@15/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@16/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@16/dist/widgets.umd.js"></script>
 ```
 
 - **Minimal example:**
@@ -1567,8 +1567,8 @@ defineRive(); // registers <usa-rive> — after the prerequisites
 ```html
 <script src="https://unpkg.com/@rive-app/canvas@2.44.1/rive.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@15/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@15/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@16/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@16/dist/widgets.umd.js"></script>
 ```
 
 - **Minimal example:**
@@ -1595,12 +1595,12 @@ definePhysicsPlayground(); // registers <usa-physics-playground> — after the p
 - **CDN:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@15/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@15/dist/runtime/physics.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@15/dist/runtime/format-scene.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@16/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@16/dist/runtime/physics.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@16/dist/runtime/format-scene.iife.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@15/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@15/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@16/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@16/dist/widgets.umd.js"></script>
 ```
 
 - **Minimal example:**
@@ -1626,11 +1626,11 @@ defineSnapCarousel(); // registers <usa-snap-carousel> — after the prerequisit
 - **CDN:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@15/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@15/dist/runtime/drag-snap.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@16/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@16/dist/runtime/drag-snap.iife.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@15/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@15/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@16/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@16/dist/widgets.umd.js"></script>
 ```
 
 - **Minimal example:**
@@ -1661,12 +1661,12 @@ defineDotLottie(); // registers <usa-dotlottie> — after the prerequisites
 - **CDN:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@15/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@15/dist/runtime/vector.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@15/dist/runtime/lottie-state.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@16/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@16/dist/runtime/vector.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@16/dist/runtime/lottie-state.iife.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@15/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@15/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@16/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@16/dist/widgets.umd.js"></script>
 ```
 
 - **Minimal example:**
@@ -1697,15 +1697,15 @@ defineGlModel(); // registers <usa-gl-model> — after the prerequisites
 - **CDN:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@15/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@15/dist/runtime/gl.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@15/dist/runtime/format-gltf.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@15/dist/runtime/gltf-decoders.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@16/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@16/dist/runtime/gl.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@16/dist/runtime/format-gltf.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@16/dist/runtime/gltf-decoders.iife.js"></script>
 <script src="https://www.gstatic.com/draco/versioned/decoders/1.5.7/draco_decoder.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/BinomialLLC/basis_universal@1.16.4/webgl/transcoder/build/basis_transcoder.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@15/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@15/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@16/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@16/dist/widgets.umd.js"></script>
 ```
 
 - **Minimal example:**

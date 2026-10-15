@@ -6,7 +6,7 @@ Pinterest-style masonry: items drop into the shortest column and glide when the 
 
 - **Category:** layout · **since** 3.6 · **changed in** 6.5
 - **Import:** `import { defineMasonry } from 'motionary/components/layout'` then `defineMasonry();`
-- **CDN:** `<script src="https://unpkg.com/motionary@15/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@16/dist/components.umd.js"></script>`
 - **Attributes:** `columns`, `min`, `gap`
 - **Events:** —
 - **Slots:** —

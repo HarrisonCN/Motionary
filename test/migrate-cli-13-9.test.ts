@@ -43,14 +43,15 @@ describe('13.9 motionary migrate', () => {
     expect(existsSync(join(dir, 'timeline-basic.scene.json'))).toBe(false);
   });
   it('--write writes <name>.scene.json next to each input (the golden output), never the input', async () => {
-    expect(await run('--write', join(dir, 'timeline-basic.json'), join(dir, 'player-keyframes.json'))).toBe(0);
+    // 16.0: v3 is the default write format; --to-v2 keeps the v2 goldens (v3 output: scene-v3-major-16-0)
+    expect(await run('--write', '--to-v2', join(dir, 'timeline-basic.json'), join(dir, 'player-keyframes.json'))).toBe(0);
     expect(readFileSync(join(dir, 'timeline-basic.scene.json'), 'utf8')).toBe(readFileSync(join(FIX, 'timeline-basic.scene.json'), 'utf8'));
     expect(readFileSync(join(dir, 'player-keyframes.scene.json'), 'utf8')).toBe(readFileSync(join(FIX, 'player-keyframes.scene.json'), 'utf8'));
     expect(readFileSync(join(dir, 'timeline-basic.json'), 'utf8')).toBe(readFileSync(join(FIX, 'timeline-basic.json'), 'utf8'));
   });
   it('--out <file> for a single input', async () => {
     const o = join(dir, 'x.json');
-    expect(await run(join(dir, 'playground.json'), '--out', o)).toBe(0);
+    expect(await run(join(dir, 'playground.json'), '--to-v2', '--out', o)).toBe(0);
     expect(scene.validateSceneV2(readFileSync(o, 'utf8'))).toEqual([]);
   });
   it('--out with several inputs → exit 2', async () => {

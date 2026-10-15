@@ -212,4 +212,4 @@ exports.lottieToKeyframes = lottieToKeyframes;
 exports.lottieToSvg = lottieToSvg;
 exports.registerLottiePack = registerLottiePack;
 exports.riveInputs = riveInputs;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/components/fx-lottie.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0/dist/components/fx-lottie.cjs.map

@@ -1,7 +1,7 @@
-# Changed in 16.0 (announced in 15.9)
+# Changed in 16.0.0 (announced in 15.9)
 
-16.0 is the **Scene Format v3 + motionary-mcp 3.0** major. Everything on this page still works in 15.x. In 15.9 each
-item has a development warning or a machine-readable deprecation, a `doctor --v16` finding and a migration path:
+16.0 is the **Scene Format v3 + motionary-mcp 3.0** major; every row below is in effect from 16.0.0. Everything on this
+page still works in 15.x (`v15-lts`). In 15.9 each item had a development warning or a machine-readable deprecation, a `doctor --v16` finding and a migration path:
 
 - the Studio warns once in development (`process.env.NODE_ENV !== 'production'`, so production builds drop the text;
   `globalThis.MOTIONARY_NO_DEPRECATION = true` silences it);
@@ -13,7 +13,7 @@ item has a development warning or a machine-readable deprecation, a `doctor --v1
 Find every use: `npx motionary doctor --v16` (exit 1 when anything is found). Preview the move:
 `npx motionary migrate --to 16` (15.x only reports — a Scene v3 file does not open in 15.x; 16.0 adds `--write`, which
 keeps a `.bak` of every file it changes). Guide: [migrating-to-v16.md](./migrating-to-v16.md). Format draft:
-[scene-v3.md](./scene-v3.md). The ids are exported as `DEPRECATIONS_V16` from `motionary/scene/v3-preview`.
+[scene-v3.md](./scene-v3.md). The ids are exported as `DEPRECATIONS_V16` from `motionary/scene/v3` (15.9: `motionary/scene/v3-preview`).
 
 | id | What changes in 16.0 | Replacement | Migration |
 |---|---|---|---|
