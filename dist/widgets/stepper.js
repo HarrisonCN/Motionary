@@ -115,4 +115,4 @@ function defineStepper(tag = 'usa-stepper') {
 }
 
 export { defineStepper };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0/dist/widgets/stepper.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.1.0/dist/widgets/stepper.js.map

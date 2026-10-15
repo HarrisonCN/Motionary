@@ -11,4 +11,4 @@ function registerPinball() {
 }
 
 export { effect, registerPinball as register, registerPinball };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0/dist/effects/pinball.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.1.0/dist/effects/pinball.js.map

@@ -96,4 +96,4 @@ const click = [
 const BUILTIN_EFFECTS = [...enter, ...attention, ...click];
 
 export { BUILTIN_EFFECTS as B };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0/dist/chunks/builtins-DQ_KD-84.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.1.0/dist/chunks/builtins-DQ_KD-84.js.map

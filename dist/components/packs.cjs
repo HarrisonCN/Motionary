@@ -189,4 +189,4 @@ exports.countUp = countUp;
 exports.definePack = definePack;
 exports.definePacksComponents = definePacksComponents;
 exports.flyToCart = flyToCart;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0/dist/components/packs.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.1.0/dist/components/packs.cjs.map

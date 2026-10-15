@@ -191,4 +191,4 @@ exports.MUSIC_FX = MUSIC_FX;
 exports.musicSample = musicSample;
 exports.registerMusicPack = registerMusicPack;
 exports.syntheticSample = syntheticSample;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.0.0/dist/components/fx-music.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.1.0/dist/components/fx-music.cjs.map
