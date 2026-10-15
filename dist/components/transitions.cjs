@@ -427,4 +427,4 @@ exports.defineTransitionComponents = defineTransitionComponents;
 exports.defineViewSwitch = defineViewSwitch;
 exports.flip = flip;
 exports.viewTransition = viewTransition;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/components/transitions.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0-rc.1/dist/components/transitions.cjs.map

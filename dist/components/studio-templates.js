@@ -1,4 +1,4 @@
-import { v as validateTimelineDoc, b as timelineDocDuration } from '../chunks/format-efFi6HuG.js';
+import { v as validateTimelineDoc, a as timelineDocDuration } from '../chunks/format-BSTz6pm_.js';
 import { packStudioProject, isExternalAsset, normalizeAssetPath, toBase64, fromBase64, unpackStudioProject } from './studio-assets.js';
 import { exportStandalone } from './studio-export.js';
 
@@ -557,4 +557,4 @@ function previewTemplate(t, o = {}) {
 }
 
 export { STUDIO_TEMPLATES_VERSION, TEMPLATE_FORMAT, TEMPLATE_LIMITS, TEMPLATE_META_KEY, TemplateError, createTemplate, installTemplate, installedTemplates, parseTemplate, previewTemplate, serializeTemplate, sha256, signTemplate, templateInfo, templateIntegrity, uninstallTemplate, verifyTemplate };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/components/studio-templates.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0-rc.1/dist/components/studio-templates.js.map

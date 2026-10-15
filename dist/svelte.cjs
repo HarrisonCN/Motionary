@@ -62,4 +62,4 @@ function scrollStagger(node, options = {}) {
 
 exports.scrollAnimate = scrollAnimate;
 exports.scrollStagger = scrollStagger;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/svelte.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0-rc.1/dist/svelte.cjs.map

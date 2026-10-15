@@ -1,5 +1,5 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-Vz-UooRN.js';
-import { f as framesToTimeline, d as distributeOffsets, c as camelProp } from '../chunks/keyframes-DmwFPNdS.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-p0QKiIIn.js';
+import { f as framesToTimeline, d as distributeOffsets, c as camelProp } from '../chunks/keyframes-BoehszQb.js';
 
 /**
  * `motionary/runtime/format-css` (10.1) — import CSS `@keyframes` and Web
@@ -172,4 +172,4 @@ function playKeyframes(target, frames, o = {}) {
 const formatCss = { id: 'format-css', version: RUNTIME_VERSION, tier: 'basic', requires: ['core'], api: { parseKeyframes, fromCssRule, fromWaapi, toWaapi, playKeyframes } };
 
 export { formatCss, fromCssRule, fromWaapi, parseKeyframes, parseKeyframesBody, playKeyframes, toWaapi };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/runtime/format-css.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0-rc.1/dist/runtime/format-css.js.map

@@ -1,4 +1,4 @@
-export { S as SCENE_V2_FORMAT, a as SCENE_V2_LIMITS, b as SCENE_V2_STATUS, c as SCENE_V2_VERSION, d as detectMotionFormat, e as diffJson, f as formatMigrationReport, i as isSceneV2, g as isTokenRef, m as migrateToSceneV2, n as normalizeSceneV2, r as resolveSceneTokens, s as sceneV2ComponentLayer, h as sceneV2FromAnimation, j as sceneV2FromTimeline, k as sceneV2ToAnimation, l as sceneV2ToTimeline, o as serializeSceneV2, t as tokenizeValue, v as validateSceneV2 } from '../chunks/v2-AmFfWfpi.js';
+export { S as SCENE_V2_FORMAT, a as SCENE_V2_LIMITS, b as SCENE_V2_STATUS, c as SCENE_V2_VERSION, d as detectMotionFormat, e as diffJson, f as formatMigrationReport, i as isSceneV2, g as isTokenRef, m as migrateToSceneV2, n as normalizeSceneV2, r as resolveSceneTokens, s as sceneV2ComponentLayer, h as sceneV2FromAnimation, j as sceneV2FromTimeline, k as sceneV2ToAnimation, l as sceneV2ToTimeline, o as serializeSceneV2, t as tokenizeValue, v as validateSceneV2 } from '../chunks/v2-C_rZCsjr.js';
 
 /**
  * 13.9 (DRAFT): JSON Schema (draft 2020-12) of `motionary-scene` v2, for editors
@@ -13,7 +13,7 @@ const propName = { pattern: '^(--[A-Za-z0-9_-]+|[a-zA-Z][A-Za-z0-9_-]*)$', not: 
 const tokenName = { pattern: '^[A-Za-z0-9_-]+$' };
 const SCENE_V2_SCHEMA = {
     $schema: 'https://json-schema.org/draft/2020-12/schema',
-    $id: 'https://cdn.jsdelivr.net/npm/motionary@15/docs/scene-v2.schema.json',
+    $id: 'https://cdn.jsdelivr.net/npm/motionary@16/docs/scene-v2.schema.json',
     title: 'motionary-scene v2 (draft)',
     description: 'Draft of the 14.0 scene format: one document for timeline layers, <usa-player> tracks, component motion props and motion tokens. Values may reference tokens as "{duration.fast}".',
     type: 'object',
@@ -98,4 +98,4 @@ const SCENE_V2_SCHEMA = {
 };
 
 export { SCENE_V2_SCHEMA };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/components/scene-v2.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0-rc.1/dist/components/scene-v2.js.map

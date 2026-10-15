@@ -1,5 +1,5 @@
-import { T as TimelineDocError } from '../chunks/format-efFi6HuG.js';
-import { a as parseStudioProject, s as serializeStudioProject } from '../chunks/project-Blmkuhzk.js';
+import { e as TimelineDocError } from '../chunks/format-BSTz6pm_.js';
+import { a as parseStudioProject, s as serializeStudioProject } from '../chunks/project-CCfILvjg.js';
 
 /**
  * 14.5 project & asset workflow (`motionary/studio/assets`): image, SVG, font, video and audio references in a Studio
@@ -332,4 +332,4 @@ function fromBase64(s) {
 }
 
 export { ASSET_LIMITS, AssetPathError, STUDIO_ASSETS_VERSION, STUDIO_PACK_FORMAT, assetKind, checkAssets, collectAssetRefs, crc32, createAssetManifest, fromBase64, isExternalAsset, normalizeAssetPath, packStudioProject, relinkAssets, resolveAssetPath, toBase64, unpackStudioProject };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/components/studio-assets.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0-rc.1/dist/components/studio-assets.js.map

@@ -340,6 +340,75 @@ declare function springBezier(input: Partial<SpringParams>): {
     duration: number;
 };
 
+interface VariantLayer {
+    muted?: boolean;
+    distanceScale?: number;
+    timeScale?: number;
+}
+interface MotionVariant {
+    id: string;
+    media: {
+        minWidth?: number;
+        maxWidth?: number;
+    };
+    layers?: Record<string, VariantLayer>;
+}
+
+declare const SCENE_V3_FORMAT = "motionary-scene";
+interface SceneTimeRemap {
+    offset?: number;
+    rate?: number;
+}
+interface SceneV3Override {
+    target?: string;
+    muted?: boolean;
+    props?: Record<string, SceneValue>;
+}
+interface LayerBase {
+    id: string;
+    name?: string;
+    parent?: string;
+    locked?: boolean;
+    muted?: boolean;
+    solo?: boolean;
+}
+interface SceneV3Comp extends LayerBase {
+    type: 'comp';
+    start?: number;
+    duration?: number;
+    timeRemap?: SceneTimeRemap;
+    layers: SceneV3Layer[];
+}
+interface SceneV3ComponentLayer extends LayerBase {
+    type: 'component';
+    ref: string;
+    target?: string;
+    start?: number;
+    overrides?: Record<string, SceneV3Override>;
+}
+type SceneV3Layer = SceneLayer | SceneV3Comp | SceneV3ComponentLayer;
+interface SceneV3Component {
+    name?: string;
+    layers: SceneV3Layer[];
+}
+interface SceneV3Doc {
+    format: typeof SCENE_V3_FORMAT;
+    version: 3;
+    name?: string;
+    duration?: number;
+    loop?: boolean;
+    seed?: number;
+    tokens?: SceneV2Doc['tokens'];
+    layers: SceneV3Layer[];
+    components?: Record<string, SceneV3Component>;
+    variants?: MotionVariant[];
+    source?: {
+        format: string;
+        version?: number;
+    };
+    meta?: unknown;
+}
+
 /**
  * 14.4 Motion Studio: save / load. A Studio project is `{ format: 'motionary-studio', version: 1, scene, studio }`:
  * `scene` is the document as Scene Format v2 (`timelineDocToScene`, lossless), `studio` is editor state (time, zoom,
@@ -381,11 +450,18 @@ declare function sampleFrames(doc: TimelineDoc, o?: {
 declare function cleanUiState(doc: TimelineDoc, s: unknown): StudioUiState;
 /** The project as JSON text (stable: the same document and state always give the same text). */
 declare function serializeStudioProject(doc: TimelineDoc, ui?: StudioUiState, space?: number | string): string;
+interface ParseStudioProjectOptions {
+    /** `sceneV3ToV2` from motionary/scene/v3: opens nested Scene v3 (compositions, component instances). Without it only flat v3 opens. */
+    sceneV3ToV2?: (doc: any) => {
+        doc: any;
+        lost: SceneLoss[];
+    };
+}
 /**
- * Open a Studio project, a Scene v2 document, a timeline v1 document or animation JSON (object or text). Throws a
+ * Open a Studio project, a Scene v3 / v2 document (nested v3 only with `opts.sceneV3ToV2`), a timeline v1 document or animation JSON (object or text). Throws a
  * `TimelineDocError` for anything malformed or over the limits; `lost` lists what a scene had that the editor cannot hold.
  */
-declare function parseStudioProject(input: unknown): {
+declare function parseStudioProject(input: unknown, opts?: ParseStudioProjectOptions): {
     doc: TimelineDoc;
     ui: StudioUiState;
     lost: SceneLoss[];
@@ -488,19 +564,21 @@ interface Studio {
     frames(): TimelineFrame[];
     /** The project as JSON text (Scene v2 + editor state). */
     save(): string;
-    /**
-     * The document as Scene v2. 15.9: called without `{ version: 2 }` it warns once that 16.0 returns Scene v3
-     * (docs/deprecations-v16.md#scene-v2-write); `{ version: 2 }` keeps v2 in 16.x too and never warns.
-     */
-    exportScene(o?: {
-        version?: 2;
+    /** The document as Scene v3 (16.0: the write format); `{ version: 2 }` returns Scene v2. */
+    exportScene(): SceneV3Doc;
+    exportScene(o: {
+        version: 2;
     }): SceneV2Doc;
+    exportScene(o?: {
+        version?: 2 | 3;
+    }): SceneV3Doc | SceneV2Doc;
     /** Open a project / Scene v2 / timeline v1 / animation JSON; resets the history; returns what a scene lost. */
     load(input: unknown): SceneLoss[];
     undo(): boolean;
     redo(): boolean;
     destroy(): void;
 }
+/** Build a Studio inside `root` for the history's document. */
 declare function createStudio(root: HTMLElement, o: StudioOptions): Studio;
 
 export { CURVE_PRESETS, STUDIO_PROJECT_FORMAT, STUDIO_PROJECT_VERSION, STUDIO_VERSION, bezierEasing, cleanUiState, createStudio, frameTime, parseBezier, parseStudioProject, sampleFrames, serializeStudioProject, springBezier, springParams };

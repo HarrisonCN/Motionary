@@ -246,4 +246,4 @@ exports.TRANSITIONS2_FX = TRANSITIONS2_FX;
 exports.crossDocumentTransitions = crossDocumentTransitions;
 exports.pageTransition = pageTransition;
 exports.registerTransitionsPack = registerTransitionsPack;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/components/fx-transitions.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0-rc.1/dist/components/fx-transitions.cjs.map

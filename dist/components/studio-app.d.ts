@@ -322,6 +322,75 @@ interface SpringParams {
     mass: number;
 }
 
+interface VariantLayer {
+    muted?: boolean;
+    distanceScale?: number;
+    timeScale?: number;
+}
+interface MotionVariant {
+    id: string;
+    media: {
+        minWidth?: number;
+        maxWidth?: number;
+    };
+    layers?: Record<string, VariantLayer>;
+}
+
+declare const SCENE_V3_FORMAT = "motionary-scene";
+interface SceneTimeRemap {
+    offset?: number;
+    rate?: number;
+}
+interface SceneV3Override {
+    target?: string;
+    muted?: boolean;
+    props?: Record<string, SceneValue>;
+}
+interface LayerBase {
+    id: string;
+    name?: string;
+    parent?: string;
+    locked?: boolean;
+    muted?: boolean;
+    solo?: boolean;
+}
+interface SceneV3Comp extends LayerBase {
+    type: 'comp';
+    start?: number;
+    duration?: number;
+    timeRemap?: SceneTimeRemap;
+    layers: SceneV3Layer[];
+}
+interface SceneV3ComponentLayer extends LayerBase {
+    type: 'component';
+    ref: string;
+    target?: string;
+    start?: number;
+    overrides?: Record<string, SceneV3Override>;
+}
+type SceneV3Layer = SceneLayer | SceneV3Comp | SceneV3ComponentLayer;
+interface SceneV3Component {
+    name?: string;
+    layers: SceneV3Layer[];
+}
+interface SceneV3Doc {
+    format: typeof SCENE_V3_FORMAT;
+    version: 3;
+    name?: string;
+    duration?: number;
+    loop?: boolean;
+    seed?: number;
+    tokens?: SceneV2Doc['tokens'];
+    layers: SceneV3Layer[];
+    components?: Record<string, SceneV3Component>;
+    variants?: MotionVariant[];
+    source?: {
+        format: string;
+        version?: number;
+    };
+    meta?: unknown;
+}
+
 /**
  * motionary/studio (14.4) — Motion Studio 1.0: a timeline UI over the 13.6 timeline editor model, composed with the
  * 14.3 canvas (`motionary/studio/canvas`).
@@ -418,13 +487,14 @@ interface Studio {
     frames(): TimelineFrame[];
     /** The project as JSON text (Scene v2 + editor state). */
     save(): string;
-    /**
-     * The document as Scene v2. 15.9: called without `{ version: 2 }` it warns once that 16.0 returns Scene v3
-     * (docs/deprecations-v16.md#scene-v2-write); `{ version: 2 }` keeps v2 in 16.x too and never warns.
-     */
-    exportScene(o?: {
-        version?: 2;
+    /** The document as Scene v3 (16.0: the write format); `{ version: 2 }` returns Scene v2. */
+    exportScene(): SceneV3Doc;
+    exportScene(o: {
+        version: 2;
     }): SceneV2Doc;
+    exportScene(o?: {
+        version?: 2 | 3;
+    }): SceneV3Doc | SceneV2Doc;
     /** Open a project / Scene v2 / timeline v1 / animation JSON; resets the history; returns what a scene lost. */
     load(input: unknown): SceneLoss[];
     undo(): boolean;

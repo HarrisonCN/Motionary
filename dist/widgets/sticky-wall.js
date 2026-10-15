@@ -69,4 +69,4 @@ function defineStickyWall(tag = 'usa-sticky-wall') {
 }
 
 export { defineStickyWall };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/widgets/sticky-wall.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0-rc.1/dist/widgets/sticky-wall.js.map

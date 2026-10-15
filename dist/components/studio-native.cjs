@@ -1,7 +1,7 @@
 'use strict';
 
-var scene = require('../chunks/scene-C4h75wjo.cjs');
-var format = require('../chunks/format-DrRrPbjl.cjs');
+var scene = require('../chunks/scene-U2YkjCm0.cjs');
+var format = require('../chunks/format-b5fQz-vc.cjs');
 
 /**
  * 15.2: cross-platform export 2.0 — `motionary/studio/native` (= `motionary/components/studio-native`).
@@ -341,4 +341,4 @@ exports.NATIVE_TARGETS = NATIVE_TARGETS;
 exports.STUDIO_NATIVE_VERSION = STUDIO_NATIVE_VERSION;
 exports.exportNative = exportNative;
 exports.nativeSupport = nativeSupport;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/components/studio-native.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0-rc.1/dist/components/studio-native.cjs.map

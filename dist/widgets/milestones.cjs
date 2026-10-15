@@ -95,4 +95,4 @@ function defineMilestones(tag = 'usa-milestones') {
 }
 
 exports.defineMilestones = defineMilestones;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/widgets/milestones.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0-rc.1/dist/widgets/milestones.cjs.map

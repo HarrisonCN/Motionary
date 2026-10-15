@@ -8,7 +8,7 @@ import { A as AUDIO_FX, d as defineAudio } from '../chunks/audio-CWxlWX4e.js';
 export { b as bindBeat, c as createBeatDetector, a as disableAudio, e as enableAudio, g as getAudio, o as onBeat } from '../chunks/audio-CWxlWX4e.js';
 import { playEffect, bindEffect, registerEffects } from '../chunks/registry-B1ipgYF7.js';
 import { applyMotionTokens, motionTokensToVars, mergeMotionTokens } from './tokens.js';
-import { s as sceneToAnimation } from '../chunks/play-CQqgxhgJ.js';
+import { s as sceneToAnimation } from '../chunks/play-DZ_ho9zJ.js';
 import { c as createPlayerCore } from '../chunks/player-core-DAEKafsQ.js';
 export { A as ANIMATION_FORMAT } from '../chunks/player-core-DAEKafsQ.js';
 
@@ -1756,4 +1756,4 @@ function registerAllEffects() {
 }
 
 export { AUDIO_FX, CARD_FX, CLICK_FX, CURSOR_FX, EFFECT_PACKS, GENERATIVE_FX, GESTURES, MICRO_FX, MOTION_THEMES, MOTION_THEME_NAMES, PAGE_FX, PHYSICS_FX, STORY_TEMPLATES, THEME_FX, THEME_ROLES, angleDelta, applyMotionTheme, bindGesture, bounceKeyframes, bumpCount, canvasBackground, createPlayer, defineAudio, defineEffectElements, defineGestureFx, defineMotionTheme, definePlayer, defineStory, flingVelocity, formatCount, fxLayer, hexRgb, playThemeEffect, registerAllEffects, registerAudioEffects, registerCardClickEffects, registerCursorEffects, registerGenerativeEffects, registerMicroEffects, registerPageEffects, registerPhysicsEffects, solveSpring, springKeyframes, storyProgress, swapLabel, themeCss, themePreset, themeVars, togglePressed };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/components/effects.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0-rc.1/dist/components/effects.js.map

@@ -1,8 +1,8 @@
 'use strict';
 
-var format = require('../chunks/format-DrRrPbjl.cjs');
-var preview = require('../chunks/preview-CyTKsXQP.cjs');
-var project = require('../chunks/project-CX5rdp4c.cjs');
+var format = require('../chunks/format-b5fQz-vc.cjs');
+var preview = require('../chunks/preview-kiMCBqSF.cjs');
+var project = require('../chunks/project-DiTOvzic.cjs');
 var components_studioAssets = require('./studio-assets.cjs');
 
 /**
@@ -476,4 +476,4 @@ exports.createJsonFramesAdapter = createJsonFramesAdapter;
 exports.exportStandalone = exportStandalone;
 exports.frameDigest = frameDigest;
 exports.sampleBaked = sampleBaked;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/components/studio-export.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0-rc.1/dist/components/studio-export.cjs.map

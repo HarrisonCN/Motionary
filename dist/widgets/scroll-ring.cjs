@@ -135,4 +135,4 @@ function defineScrollRing(tag = 'usa-scroll-ring') {
 }
 
 exports.defineScrollRing = defineScrollRing;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/widgets/scroll-ring.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0-rc.1/dist/widgets/scroll-ring.cjs.map

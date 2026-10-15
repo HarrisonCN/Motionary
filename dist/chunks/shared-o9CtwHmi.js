@@ -44,4 +44,4 @@ function localeAttr(tag) {
 }
 
 export { arrowIndex as a, clampN as c, dropParts as d, localeAttr as l, nextId as n, ownChildren as o, part as p };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/chunks/shared-o9CtwHmi.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0-rc.1/dist/chunks/shared-o9CtwHmi.js.map

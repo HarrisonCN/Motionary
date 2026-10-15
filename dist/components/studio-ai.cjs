@@ -1,10 +1,10 @@
 'use strict';
 
 var components_studioCanvas = require('./studio-canvas.cjs');
-var v2 = require('../chunks/v2-BpVfM1Uo.cjs');
+var v2 = require('../chunks/v2-El9dfBqV.cjs');
 var components_ai = require('./ai.cjs');
-var preview = require('../chunks/preview-CyTKsXQP.cjs');
-var format = require('../chunks/format-DrRrPbjl.cjs');
+var preview = require('../chunks/preview-kiMCBqSF.cjs');
+var format = require('../chunks/format-b5fQz-vc.cjs');
 
 /**
  * 14.6 AI Studio assistant 2.0 — `motionary/studio/ai` (= `motionary/components/studio-ai`).
@@ -842,4 +842,4 @@ exports.proposeAiEdit = proposeAiEdit;
 exports.renderSceneHeadless = renderSceneHeadless;
 exports.suggestSceneFixes = suggestSceneFixes;
 exports.validateAiEdit = validateAiEdit;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/components/studio-ai.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0-rc.1/dist/components/studio-ai.cjs.map

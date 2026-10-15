@@ -188,4 +188,4 @@ function defineGenArt(tag = 'usa-gen-art') {
 }
 
 exports.defineGenArt = defineGenArt;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/widgets/gen-art.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0-rc.1/dist/widgets/gen-art.cjs.map

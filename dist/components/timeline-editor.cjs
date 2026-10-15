@@ -1,9 +1,9 @@
 'use strict';
 
-var format = require('../chunks/format-DrRrPbjl.cjs');
-var history = require('../chunks/history-CLzpNgGy.cjs');
-var preview = require('../chunks/preview-CyTKsXQP.cjs');
-var scene = require('../chunks/scene-C4h75wjo.cjs');
+var format = require('../chunks/format-b5fQz-vc.cjs');
+var history = require('../chunks/history-B0Ml40k1.cjs');
+var preview = require('../chunks/preview-kiMCBqSF.cjs');
+var scene = require('../chunks/scene-U2YkjCm0.cjs');
 
 /**
  * 13.6: JSON Schema (draft 2020-12) of `motionary-timeline` v1, for editors and
@@ -15,7 +15,7 @@ const id = { type: 'string', minLength: 1, maxLength: 128 };
 const value = { oneOf: [{ type: 'number' }, { type: 'string', maxLength: 2048 }] };
 const TIMELINE_DOC_SCHEMA = {
     $schema: 'https://json-schema.org/draft/2020-12/schema',
-    $id: 'https://cdn.jsdelivr.net/npm/motionary@15/docs/timeline-doc.schema.json',
+    $id: 'https://cdn.jsdelivr.net/npm/motionary@16/docs/timeline-doc.schema.json',
     title: 'motionary-timeline v1',
     type: 'object',
     additionalProperties: false,
@@ -115,4 +115,4 @@ exports.loadMotionDoc = scene.loadMotionDoc;
 exports.timelineDocFromScene = scene.timelineDocFromScene;
 exports.timelineDocToScene = scene.timelineDocToScene;
 exports.TIMELINE_DOC_SCHEMA = TIMELINE_DOC_SCHEMA;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/components/timeline-editor.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0-rc.1/dist/components/timeline-editor.cjs.map

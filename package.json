@@ -1600,16 +1600,6 @@
         "default": "./dist/components/scene-v3.cjs"
       }
     },
-    "./components/scene-v3-preview": {
-      "import": {
-        "types": "./dist/components/scene-v3.d.ts",
-        "default": "./dist/components/scene-v3.js"
-      },
-      "require": {
-        "types": "./dist/components/scene-v3.d.cts",
-        "default": "./dist/components/scene-v3.cjs"
-      }
-    },
     "./components/perf-tasks": {
       "import": {
         "types": "./dist/components/perf-tasks.d.ts",
@@ -4450,6 +4440,16 @@
     "./components/layout.css": "./dist/components/layout.css",
     "./components/packs.css": "./dist/components/packs.css",
     "./components/fx.css": "./dist/components/fx.css",
+    "./components/scene-v3-preview": {
+      "import": {
+        "types": "./dist/components/scene-v3.d.ts",
+        "default": "./dist/components/scene-v3.js"
+      },
+      "require": {
+        "types": "./dist/components/scene-v3.d.cts",
+        "default": "./dist/components/scene-v3.cjs"
+      }
+    },
     "./package.json": "./package.json"
   },
   "files": [

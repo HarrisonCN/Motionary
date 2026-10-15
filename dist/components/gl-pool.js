@@ -349,4 +349,4 @@ function glSupport(kind = 'webgl2') {
 }
 
 export { glPoolStats, glSupport, installGLPool, uninstallGLPool };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/components/gl-pool.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0-rc.1/dist/components/gl-pool.js.map

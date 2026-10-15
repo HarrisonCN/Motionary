@@ -15,4 +15,4 @@ function registerY2kShine() {
 exports.effect = effect;
 exports.register = registerY2kShine;
 exports.registerY2kShine = registerY2kShine;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/effects/y2k-shine.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0-rc.1/dist/effects/y2k-shine.cjs.map

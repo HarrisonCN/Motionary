@@ -1,10 +1,11 @@
 import { createStudioCanvas } from './studio-canvas.js';
-import { h as historyKeyAction, e as setKeyframeEasing, s as setKeyframeProps, r as removeKeyframes, a as addKeyframe, u as updateLayers, f as addLayer, g as copyKeyframes, i as shiftKeyframes, j as editableKeyframes, p as pasteKeyframes } from '../chunks/history-6uuzTeIv.js';
-import { c as createTimelinePreview, s as sampleTimelineDoc } from '../chunks/preview-UQjXLU7f.js';
-import { t as timelineDocToScene } from '../chunks/scene-Dn6a9Id1.js';
-import { d as isLayerLocked, b as timelineDocDuration } from '../chunks/format-efFi6HuG.js';
-import { p as parseBezier, C as CURVE_PRESETS, a as parseStudioProject, s as serializeStudioProject, b as sampleFrames, c as springParams, d as springBezier, e as bezierEasing, f as frameTime } from '../chunks/project-Blmkuhzk.js';
-export { S as STUDIO_PROJECT_FORMAT, g as STUDIO_PROJECT_VERSION, h as cleanUiState } from '../chunks/project-Blmkuhzk.js';
+import { h as historyKeyAction, e as setKeyframeEasing, s as setKeyframeProps, r as removeKeyframes, a as addKeyframe, u as updateLayers, f as addLayer, g as copyKeyframes, i as shiftKeyframes, j as editableKeyframes, p as pasteKeyframes } from '../chunks/history-W7ot2kyl.js';
+import { c as createTimelinePreview, s as sampleTimelineDoc } from '../chunks/preview-DdgqW96I.js';
+import { t as timelineDocToScene } from '../chunks/scene-C7-PUIZK.js';
+import { f as isLayerLocked, a as timelineDocDuration } from '../chunks/format-BSTz6pm_.js';
+import { p as parseBezier, C as CURVE_PRESETS, a as parseStudioProject, s as serializeStudioProject, b as sampleFrames, c as springParams, d as springBezier, e as bezierEasing, f as frameTime } from '../chunks/project-CCfILvjg.js';
+export { S as STUDIO_PROJECT_FORMAT, g as STUDIO_PROJECT_VERSION, h as cleanUiState } from '../chunks/project-CCfILvjg.js';
+import { s as sceneV2ToFlatV3 } from '../chunks/v3-read-BqgIjLQP.js';
 
 /**
  * motionary/studio (14.4) — Motion Studio 1.0: a timeline UI over the 13.6 timeline editor model, composed with the
@@ -32,14 +33,7 @@ const PROP = /^(--)?[a-zA-Z][\w-]*$/;
 const r2 = (n) => Math.round(n * 100) / 100 + 0;
 const fmt = (t) => `${(t / 1000).toFixed(3)} s`;
 const parseVal = (v) => (/^\s*-?(\d+\.?\d*|\.\d+)\s*$/.test(v) ? +v : v.trim());
-let warnedV3 = false;
-/** 15.9: one development notice per page that 16.0's exportScene() returns Scene v3. */
-function warnSceneV3() {
-    if (warnedV3 || globalThis.MOTIONARY_NO_DEPRECATION)
-        return;
-    warnedV3 = true;
-    console.warn('[motionary] studio.exportScene() returns Scene v3 from 16.0 — pass { version: 2 } to keep Scene v2 (docs/deprecations-v16.md#scene-v2-write)');
-}
+/** Build a Studio inside `root` for the history's document. */
 function createStudio(root, o) {
     const { history } = o;
     const D = root.ownerDocument;
@@ -746,9 +740,8 @@ function createStudio(root, o) {
         frames: () => sampleFrames(doc(), { fps }),
         save: () => serializeStudioProject(doc(), { time, zoom, fps, collapsed: [...collapsed], springs }),
         exportScene(o) {
-            if ((!o || o.version !== 2) && typeof process !== 'undefined' && process.env.NODE_ENV !== 'production')
-                warnSceneV3();
-            return timelineDocToScene(doc());
+            const v2 = timelineDocToScene(doc());
+            return o && o.version === 2 ? v2 : sceneV2ToFlatV3(v2);
         },
         load(input) {
             const r = parseStudioProject(input);
@@ -819,4 +812,4 @@ function createStudio(root, o) {
 }
 
 export { CURVE_PRESETS, STUDIO_VERSION, bezierEasing, createStudio, frameTime, parseBezier, parseStudioProject, sampleFrames, serializeStudioProject, springBezier, springParams };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/components/studio.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0-rc.1/dist/components/studio.js.map
