@@ -36,7 +36,7 @@
 | v16.0.0 | [已发布] | P0 | **major** · Scene Format v3（嵌套合成、组件即图层、断点变体）+ motionary-mcp 3.0 | v2 → v3 无损迁移或逐项损失报告；可表达部分导出帧指纹不变；`v15-lts`；codemod + migrating-to-v16。 |
 | v16.1.0 | [已发布] | P1 | 符号与实例：`motionary/scene/symbols`（符号 = Scene v3 `components`，实例 = `component` 图层；createSymbol / addInstance / setOverride / updateSymbol / detachInstance / renameSymbol / symbolUsage / validateSymbols，纯函数）；`symbolsToCss` 导出去重 | 一个符号多处实例、覆盖属性、更新主符号后所有实例一致（测试覆盖）；9 个实例的 CSS 中每个符号图层只有一个 `@keyframes` |
 | v16.2.0 | [已发布] | P1 | Studio 插件 API（预览）：`motionary/studio/plugins`（清单显式权限 project:read / project:propose / panel / exporter；宿主按权限应答并审计每次调用；提议只交给 Studio 的 propose 回调、从不直接写入；Worker / 沙箱 iframe（CSP default-src none）/ 本地传输） | 第三方面板 / 导出器在受限沙箱中运行（三浏览器规格）；插件抛错 / 超时 / 消息洪泛 → 标记 crashed 并终止，Studio 与其他插件不受影响 |
-| v16.3.0 | [建议] | P2 | 性能预算进 Studio | 编辑时显示导出体积 / 帧成本，超预算阻止发布导出。 |
+| v16.3.0 | [已发布] | P1 | 性能预算进 Studio：`motionary/studio/budget`（编辑时测量独立导出物体积 raw + gzip、按属性类别的逐帧成本 composite 1 / paint 4 / layout 10；checkBudget；guardPublish 超预算不调用发布；createBudgetMeter 实时显示） | 编辑时实时显示导出物体积 / 帧成本（三浏览器规格）；超预算时“发布导出”被阻止（publish 回调不被调用，测试覆盖） |
 | v16.9.0 | [建议] | P0 | v17 准备 + `17.0.0-rc.1`（`next`） | 17.0 删除项全部警告 + codemod + 文档。 |
 | v17.0.0 | [建议] | P0 | **major** · 平台稳定版：冻结 Scene v3、Studio 插件 API v1、MCP 3.x；删除 16.x 弃用；LTS 策略 | lite 仍 ≤ 70 KB、零依赖；`v16-lts` 维护期写入 versions.md。 |
 
