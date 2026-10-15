@@ -1,7 +1,7 @@
 # Migrating to 17.0
 
-> 17.0.0 is not released yet: this guide is published with 16.9 so you can prepare. 16.x stays supported as
-> `v16-lts` (security and severe fixes at least until 18.0 ships).
+> 16.x stays supported as `v16-lts` (security and severe fixes at least until 18.0 ships). The frozen contracts and the
+> LTS policy: [stability.md](./stability.md).
 
 17.0 is the **platform-stable** major. It freezes three contracts and removes only what 16.9 announced:
 

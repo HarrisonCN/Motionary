@@ -1,8 +1,8 @@
 # Removed in 17.0.0 (announced in 16.9)
 
 17.0 is the **platform-stable** major: Scene Format v3, the Studio plugin API (v1) and motionary-mcp 3.x are frozen.
-It removes only what 16.9 announced below. Everything on this page still works in 16.x (`v16-lts` after 17.0 ships).
-In 16.9 each item has a development warning (once per session), a `doctor --v17` finding and a migration path; nothing
+It removes only what 16.9 announced below. Everything on this page still works in 16.x (`v16-lts`).
+In 16.9 each item had a development warning (once per session), a `doctor --v17` finding and a migration path; nothing
 here is in `motionary/components/lite` — lite stays ≤ 70 KB gzip with zero dependencies.
 
 Find every use: `npx motionary doctor --v17` (exit 1 when anything is found). Fix it: `npx motionary migrate --to 17`

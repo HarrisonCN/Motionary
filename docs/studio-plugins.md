@@ -1,9 +1,11 @@
-# Studio plugins (16.2, preview)
+# Studio plugins (plugin API v1, experimental)
 
 > **Experimental** — may change in a minor release; not covered by the stability promise ([stability.md](./stability.md)).
 
-Since 16.2 Motion Studio can run **third-party panels and exporters** in a sandbox. The API is a preview
-(`@experimental`): it may still change in a 16.x minor and is frozen as **plugin API v1 in 17.0**.
+Since 16.2 Motion Studio can run **third-party panels and exporters** in a sandbox. The plugin API is **experimental**
+([stability.md](./stability.md#experimental)): it may change in a minor release, so pin the exact Motionary version a
+plugin was written for. Manifests declare `api: 1` (`PLUGIN_API_VERSION`), so a host can refuse a manifest written for a
+different version.
 
 - A plugin declares what it needs in a **manifest**; the host answers a call only when that permission was granted,
   and every call (allowed or not) is written to `host.audit`.
