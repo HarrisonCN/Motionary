@@ -1,7 +1,8 @@
 // 16.0.0 — Scene Format v3 + motionary-mcp 3.0 (major). Tests first (failing-before: v16.0.0/failing-before.txt).
 // - motionary/scene/v3 is the stable entry (SCENE_V3_STATUS 'stable'); motionary/scene/v3-preview stays as an alias;
-// - Scene v3 opens wherever v2 does: flat v3 in the player and the timeline editor (loadMotionDoc), any v3 (nested comps,
-//   component instances) in the Studio (load / parseStudioProject) through the full v3 → v2 reader;
+// - Scene v3 opens wherever v2 does: flat v3 in the player, the timeline editor (loadMotionDoc) and the Studio
+//   (parseStudioProject); nested v3 (comps, component instances) only through the full reader of motionary/scene/v3
+//   (parseStudioProject(doc, { sceneV3ToV2 })), so the Studio entries do not carry it;
 // - Studio exportScene() returns Scene v3 (no warning); exportScene({ version: 2 }) still returns v2;
 // - `motionary migrate` writes v3; `migrate --to 16 --write` works on 16.x (.bak first);
 // - motionary-mcp 3.0.0: validate_snippet { scene } and JSON-text scenes are refused with a pointer, check_compat is
@@ -58,10 +59,19 @@ describe('reading Scene v3', () => {
     expect(a.doc).toEqual(b.doc);
     expect((a.doc.meta as any)['motionary:variants'][0].id).toBe('phone');
   });
-  it('the Studio opens nested v3 (comps → groups, component instances expanded) and reports what v2 could not keep', () => {
-    const r = parseStudioProject(NESTED_V3());
+  it('parseStudioProject opens flat v3 itself (same document as the v2 it came from)', () => {
+    expect(parseStudioProject(FLAT_V3()).doc).toEqual(parseStudioProject(V2).doc);
+  });
+  it('parseStudioProject opens nested v3 through { sceneV3ToV2 } (comps → groups, component instances expanded) and reports what v2 could not keep', () => {
+    const r = parseStudioProject(NESTED_V3(), { sceneV3ToV2: V3.sceneV3ToV2 });
     expect(r.doc.layers.map((l: any) => l.id)).toEqual(['intro', 'title', 'card1', 'card1/face']);
     expect(r.lost.length).toBeGreaterThanOrEqual(2);
+    const p = parseStudioProject({ format: 'motionary-studio', version: 1, scene: NESTED_V3() }, { sceneV3ToV2: V3.sceneV3ToV2 });
+    expect(p.doc.layers.length).toBe(4);
+  });
+  it('without { sceneV3ToV2 } nested v3 throws, pointing to sceneV3ToV2 (the full reader stays in motionary/scene/v3)', () => {
+    expect(() => parseStudioProject(NESTED_V3())).toThrow(/sceneV3ToV2/);
+    expect(() => parseStudioProject(JSON.stringify(NESTED_V3()))).toThrow(/sceneV3ToV2/);
   });
 });
 
