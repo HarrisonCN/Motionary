@@ -700,6 +700,16 @@
         "default": "./dist/components/studio-plugins.cjs"
       }
     },
+    "./studio/budget": {
+      "import": {
+        "types": "./dist/components/studio-budget.d.ts",
+        "default": "./dist/components/studio-budget.js"
+      },
+      "require": {
+        "types": "./dist/components/studio-budget.d.cts",
+        "default": "./dist/components/studio-budget.cjs"
+      }
+    },
     "./studio/store": {
       "import": {
         "types": "./dist/components/studio-store.d.ts",
@@ -1038,6 +1048,16 @@
       "require": {
         "types": "./dist/components/studio-plugins.d.cts",
         "default": "./dist/components/studio-plugins.cjs"
+      }
+    },
+    "./components/studio-budget": {
+      "import": {
+        "types": "./dist/components/studio-budget.d.ts",
+        "default": "./dist/components/studio-budget.js"
+      },
+      "require": {
+        "types": "./dist/components/studio-budget.d.cts",
+        "default": "./dist/components/studio-budget.cjs"
       }
     },
     "./components/studio-app": {

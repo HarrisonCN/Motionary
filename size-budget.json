@@ -177,6 +177,11 @@
     "limit": 4096
   },
   {
+    "name": "import 'motionary/components/studio-budget' (= motionary/studio/budget, 16.3 performance budget in Studio: export bytes raw / gzip, frame cost by property class, checkBudget, guardPublish, live meter; includes studio/export (the export it measures, 13.5 KB) — so its limit equals the studio-export line; own entry, not in lite / studio; new line)",
+    "import": "export * from 'pkg/components/studio-budget';",
+    "limit": 15360
+  },
+  {
     "name": "import 'motionary/components/interaction'",
     "import": "export * from 'pkg/components/interaction';",
     "limit": 6400
