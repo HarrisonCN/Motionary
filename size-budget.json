@@ -172,6 +172,11 @@
     "limit": 4096
   },
   {
+    "name": "import 'motionary/components/studio-plugins' (= motionary/studio/plugins, 16.2 Studio plugin API preview: manifest + permissions, audited host, proposals never write, exporters with path rules, Worker / sandboxed-iframe / local transports, crash / timeout / flood isolation; own entry, not in lite / studio; new line, plan target 4 KB, measured ~2.9 KB)",
+    "import": "export * from 'pkg/components/studio-plugins';",
+    "limit": 4096
+  },
+  {
     "name": "import 'motionary/components/interaction'",
     "import": "export * from 'pkg/components/interaction';",
     "limit": 6400

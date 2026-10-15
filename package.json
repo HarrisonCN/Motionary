@@ -690,6 +690,16 @@
         "default": "./dist/components/scene-symbols.cjs"
       }
     },
+    "./studio/plugins": {
+      "import": {
+        "types": "./dist/components/studio-plugins.d.ts",
+        "default": "./dist/components/studio-plugins.js"
+      },
+      "require": {
+        "types": "./dist/components/studio-plugins.d.cts",
+        "default": "./dist/components/studio-plugins.cjs"
+      }
+    },
     "./studio/store": {
       "import": {
         "types": "./dist/components/studio-store.d.ts",
@@ -1618,6 +1628,16 @@
       "require": {
         "types": "./dist/components/scene-symbols.d.cts",
         "default": "./dist/components/scene-symbols.cjs"
+      }
+    },
+    "./components/studio-plugins": {
+      "import": {
+        "types": "./dist/components/studio-plugins.d.ts",
+        "default": "./dist/components/studio-plugins.js"
+      },
+      "require": {
+        "types": "./dist/components/studio-plugins.d.cts",
+        "default": "./dist/components/studio-plugins.cjs"
       }
     },
     "./components/perf-tasks": {
