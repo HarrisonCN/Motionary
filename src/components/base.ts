@@ -142,7 +142,7 @@ export function adoptStyles(id: string, css: string): void {
 }
 
 // 17.0 mo-* aliases: the stylesheets injected so far, copied with renamed tag selectors once the first <mo-*> connects.
-const cssSources = new Map<string, string>();
+const cssSources = /*#__PURE__*/ new Map<string, string>();
 let moActive = false;
 function adoptAlias(id: string, css: string): void {
   if (!/usa-[a-z]/.test(css)) return;
