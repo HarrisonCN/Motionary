@@ -7,6 +7,50 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [15.9.0] - 2026-10-15
+
+**Getting ready for 16.0.** Every 16.0 change (Scene Format v3 as the write format, motionary-mcp 3.0) now has a
+development warning or a machine-readable deprecation, a `doctor --v16` finding, a migration path and docs — one minor
+ahead. Additive; zero runtime dependencies; `motionary/components/lite` unchanged; the new entry has its own size-budget
+line and no existing line was raised. [docs/deprecations-v16.md](docs/deprecations-v16.md) ·
+[docs/migrating-to-v16.md](docs/migrating-to-v16.md) · [docs/scene-v3.md](docs/scene-v3.md)
+
+### Added
+
+- **`motionary/scene/v3-preview`** (= `motionary/components/scene-v3-preview`) — Scene Format v3 **draft**: nested
+  compositions (`type: "comp"` with their own layers, `start`, `duration`, `timeRemap { offset, rate }`), components as
+  layers (`type: "component"`, `ref` into a top-level `components` map, scoped `target`, per-layer `overrides`) and
+  first-class breakpoint `variants`. `validateSceneV3` (never throws; v2 rules for track / group layers at every level,
+  unique ids across nesting, component cycles and over-deep nesting refused), `migrateToSceneV3(input, { dryRun })`
+  (preview: never mutates its input; report `{ from, lossless, changes, lost, warnings, stats }`), `sceneV3ToV2` (read
+  v3 in 15.x: comps → groups with times baked in, component instances expanded, variants back to meta; every step
+  listed in `lost`), `normalizeSceneV3` / `serializeSceneV3`, `DEPRECATIONS_V16`. JSON Schema draft
+  `scripts/scene-v3.schema.json`.
+- `npx motionary doctor --v16` — Scene v2 files (16.0 writes v3), `meta["motionary:variants"]`, `exportScene()` calls
+  without `{ version: 2 }`, MCP 2.x shapes in code (`check_compat`, `validate_snippet` with `scene`); exit 1 when found.
+- `npx motionary migrate --to 16` — per-file v2 → v3 report (lossless?, changes, losses), manual work, Studio projects
+  skipped. 15.x refuses `--write` (exit 2: a v3 file does not open in 15.x); the write path (`.bak` first, never
+  overwriting a backup) is in place for 16.0.
+- `studio.exportScene({ version: 2 })` — the explicit form that keeps returning Scene v2 in 16.x.
+- motionary-mcp **2.5.0**: `validate_scene` (the scene checks of `validate_snippet { scene }`, schema
+  `motionary-mcp/validate_scene@1`, appended after `propose_edit`); results of calls that use a shape 3.0 removes carry
+  `deprecations: [{ id, removedIn: '16.0', message, doc }]`.
+
+### Deprecated (changes in 16.0)
+
+- `scene-v2-write`: `studio.exportScene()` without `{ version: 2 }` warns once in development (16.0 returns Scene v3).
+- `variants-meta`: variants move from `meta["motionary:variants"]` to `variants`.
+- `mcp-snippet-scene`, `mcp-scene-text`, `mcp-check-compat`: motionary-mcp 3.0 takes scenes in `validate_scene` only,
+  as objects only, and removes `check_compat`.
+
+### Tests
+
+- `scene-v3-preview-15-9`: corpus (shipped templates, the 15.3 variants scene, grouped / token scenes) migrates
+  losslessly; `sceneV3ToV2(migrateToSceneV3(d).doc)` equals the canonical v2 document and `frameDigest` fingerprints
+  are identical; validation, cycles, nesting limit, time remap.
+- `v16-prep-15-9`: docs anchors, doctor / migrate (dry run, write path with backups, CLI refusal on 15.x), Studio
+  warn-once, MCP 2.5 contract and deprecations, package entry + size line.
+
 ## [15.5.0] - 2026-10-15
 
 **Team projects.** A project store with revision history and conflict detection for the Studio app. Additive; zero
