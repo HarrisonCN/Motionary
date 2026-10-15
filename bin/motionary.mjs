@@ -4,7 +4,7 @@
 //   npx motionary export --target css|wxss|arkts   presets + motion tokens for other platforms (12.1)
 //   npx motionary export --scene f.json --target css|wxss|arkts|compose|swiftui [--out f] [--report f] [--strict]   a scene → native code + loss report (15.2)
 //   npx motionary migrate <files…> [--write|--out f] [--diff] [--report] [--json] [--tokenize]   v1 motion JSON → scene v2 (13.9; official format since 14.0)
-//   npx motionary migrate --code [paths…] [--write] [--json]   rewrite import moves + CDN majors in source files (14.0; @15 since 15.0)
+//   npx motionary migrate --code [paths…] [--write] [--json]   rewrite import moves + CDN majors in source files (14.0; @16 since 16.0, + check_compat tool name)
 //   npx motionary tokens import-figma|export-figma|validate|css …   Motion Tokens 2.0 ↔ DTCG / Figma Variables / CSS (14.1)
 //   npx motionary codemod <11–13> [args…]   run an older usa-codemod-<n> (5–10 removed in 15.0: use npx motionary@v14-lts codemod <n>)
 //   npx motionary doctor --v15 [paths…] [--json]   everything 15.0 removes: compat-v13 imports, codemod 5–10 scripts, legacy data (14.9)
@@ -51,13 +51,13 @@ const HELP = `motionary <command>
                              loss report (lost properties are listed on stderr; --strict exits 1 when anything is lost) — docs/studio-native.md
                              export presets + motion tokens for the web, mini programs (WXSS) or HarmonyOS (ArkTS) — docs/cross-platform.md
   compat <version> [--json]  what a project on <version> can use and what changed after it (from the manifest) — docs/version-compat.md
-  migrate <files…> [--dry-run] [--write | --out file] [--diff] [--report] [--json] [--tokenize]
+  migrate <files…> [--dry-run] [--write | --out file] [--diff] [--report] [--json] [--tokenize] [--to-v2]
                              migrate motionary-timeline v1 / <usa-player> animation JSON / playground state to the
-                             motionary-scene v2 (the 14.0 format). Dry run by default; --write saves <name>.scene.json
+                             motionary-scene format: Scene v3 since 16.0 (--to-v2: Scene v2 for 15.x consumers). Dry run by default; --write saves <name>.scene.json
                              next to each input (never overwrites it). Exit 1 when any file fails — docs/migrating-to-v14.md
   migrate --code [paths…] [--write] [--json]
                              rewrite import moves in source files: motionary/components/scene-v2 → motionary/scene,
-                             CDN motionary@10…14/ → motionary@15/ (removed APIs: use migrate --to 15).
+                             CDN motionary@10…15/ → motionary@16/, MCP tool name check_compat → check_compatibility (16.0).
                              Dry run by default (default path: current directory)
   tokens import-figma <file> [--out file] [--css] [--collection name]
                              Figma Variables JSON (GET /v1/files/:key/variables/local response or a POST body) →
@@ -174,9 +174,15 @@ export function migrateCode(source) {
     changes.push(`${pkg}/components/scene-v2 → ${pkg}/scene`);
     return `${q}${pkg}/scene${q}`;
   });
-  code = code.replace(/\b(motionary|use-scroll-animate)@(1[0-4])(?=\/)/g, (m, pkg, major) => {
-    changes.push(`${pkg}@${major}/ → ${pkg}@15/ (CDN major)`);
-    return `${pkg}@15`;
+  code = code.replace(/\b(motionary|use-scroll-animate)@(1[0-5])(?=\/)/g, (m, pkg, major) => {
+    changes.push(`${pkg}@${major}/ → ${pkg}@16/ (CDN major)`);
+    return `${pkg}@16`;
+  });
+  // 16.0: motionary-mcp 3.0 removed the check_compat tool — rewrite the quoted tool name (validate_snippet { scene } is
+  // listed by `migrate --to 16` as manual work: the argument shape needs a person)
+  code = code.replace(/(['"`])check_compat\1/g, (m, q) => {
+    changes.push('check_compat → check_compatibility (motionary-mcp 3.0 tool name)');
+    return `${q}check_compatibility${q}`;
   });
   return { code, changes };
 }
