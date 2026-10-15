@@ -48,7 +48,7 @@ test.describe('15.3 accessible motion', () => {
     await mountApp(page);
     const o = await page.evaluate(() => ({ sw: document.documentElement.scrollWidth, cw: document.documentElement.clientWidth }));
     expect(o.sw).toBeLessThanOrEqual(o.cw + 1);
-    for (const el of await page.locator('#app [data-app]').all()) { await el.scrollIntoViewIfNeeded(); await expect(el).toBeInViewport(); }
+    for (const el of await page.locator('#app [data-app]').all()) { if (!(await el.isVisible())) continue; /* display:none (e.g. the download link before an export) is not an action on screen */ await el.scrollIntoViewIfNeeded(); await expect(el).toBeInViewport(); }
   });
 
   test('sensitivity: reduced from the OS setting, gentle from the page, resolveVariant follows it', async ({ page }) => {
