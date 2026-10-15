@@ -264,7 +264,7 @@ export function run(args = []) {
   const rows = audit();
   const gap = coverage(rows, manifestTags());
   const md = renderMarkdown(rows, gap);
-  const json = JSON.stringify({ format: 'motionary/contract-report', version: 1, summary: summary(rows), components: rows }, null, 2) + '\n';
+  const json = JSON.stringify({ format: 'motionary/contract-report', version: 1, summary: summary(rows), components: rows }) + '\n'; // 15.2: compact (packed; ~40 KB less)
   const mdPath = join(ROOT, 'docs/contract-report.md'), jsonPath = join(ROOT, 'docs/contract-report.json');
   if (args.includes('--preview')) {
     // 11.9: what the blocking 12.0 contract check would say today (never fails in 11.x)
