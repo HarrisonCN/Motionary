@@ -80,4 +80,4 @@ function registerSurfacePack() {
 }
 
 export { SURFACE_FX, SURFACE_THEMES, applySurfaceTheme, registerSurfacePack };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0-rc.1/dist/components/fx-surface.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0/dist/components/fx-surface.js.map

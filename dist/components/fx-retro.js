@@ -88,4 +88,4 @@ function registerRetroPack() {
 }
 
 export { RETRO_FX, pixelSteps, registerRetroPack };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0-rc.1/dist/components/fx-retro.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0/dist/components/fx-retro.js.map

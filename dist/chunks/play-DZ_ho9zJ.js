@@ -80,4 +80,4 @@ function sceneToAnimation(d) {
 }
 
 export { sceneToAnimation as s };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0-rc.1/dist/chunks/play-DZ_ho9zJ.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0/dist/chunks/play-DZ_ho9zJ.js.map

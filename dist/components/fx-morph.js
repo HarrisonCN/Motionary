@@ -283,4 +283,4 @@ function registerMorphPack() {
 }
 
 export { MORPH2_FX, pointsToPath, registerMorphPack, samplePath };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0-rc.1/dist/components/fx-morph.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0/dist/components/fx-morph.js.map

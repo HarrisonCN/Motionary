@@ -1,8 +1,8 @@
 'use strict';
 
 var base = require('../chunks/base-BvH4nAcv.cjs');
-var runtimeLink = require('../chunks/runtime-link-cedAZ92M.cjs');
-var widgets_lottiePlayer = require('../chunks/lottie-player-BJGy32PI.cjs');
+var runtimeLink = require('../chunks/runtime-link-DYZKFep6.cjs');
+var widgets_lottiePlayer = require('../chunks/lottie-player-BRJUQTP9.cjs');
 
 function defineDotLottie(tag = 'usa-dotlottie') {
     return base.defineElement(tag, () => {
@@ -118,4 +118,4 @@ function defineDotLottie(tag = 'usa-dotlottie') {
 }
 
 exports.defineDotLottie = defineDotLottie;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0-rc.1/dist/components/dotlottie.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0/dist/components/dotlottie.cjs.map

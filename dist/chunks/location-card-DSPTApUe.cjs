@@ -82,4 +82,4 @@ function defineLocationCard(tag = 'usa-location-card') {
 exports.defineLocationCard = defineLocationCard;
 exports.formatDistance = formatDistance;
 exports.haversine = haversine;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0-rc.1/dist/chunks/location-card-DSPTApUe.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0/dist/chunks/location-card-DSPTApUe.cjs.map

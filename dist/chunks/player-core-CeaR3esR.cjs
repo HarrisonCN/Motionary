@@ -164,4 +164,4 @@ function createPlayerCore(root, animation, o = {}, scene) {
 
 exports.ANIMATION_FORMAT = ANIMATION_FORMAT;
 exports.createPlayerCore = createPlayerCore;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0-rc.1/dist/chunks/player-core-CeaR3esR.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0/dist/chunks/player-core-CeaR3esR.cjs.map

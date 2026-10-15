@@ -97,4 +97,4 @@ function defineLottie(tag = 'usa-lottie') {
 }
 
 export { defineLottie };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0-rc.1/dist/widgets/lottie.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0/dist/widgets/lottie.js.map

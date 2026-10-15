@@ -11,4 +11,4 @@ function registerOrigami() {
 }
 
 export { effect, registerOrigami as register, registerOrigami };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0-rc.1/dist/effects/origami.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0/dist/effects/origami.js.map

@@ -118,4 +118,4 @@ function registerFocusPack() {
 }
 
 export { FOCUS_FX, registerFocusPack };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0-rc.1/dist/components/fx-focus.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.0.0/dist/components/fx-focus.js.map
