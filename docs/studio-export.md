@@ -1,5 +1,7 @@
 # Standalone export & reproducible frames (`motionary/studio/export`) — 14.7
 
+> **Experimental** — may change in a minor release; not covered by the stability promise ([stability.md](./stability.md)).
+
 Turn a Studio project into a work that **plays without the editor and without a network**: an `index.html`, a
 `scene.css` that animates with scripts switched off, an optional `scene.js` player, and the project's assets — or one
 self-contained HTML file. The same scene always gives the same bytes, and at every frame time the exported values are

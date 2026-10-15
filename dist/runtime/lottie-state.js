@@ -1,4 +1,4 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-Ce3_sUto.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-B3Ju6m4w.js';
 
 /**
  * `motionary/runtime/lottie-state` (10.9) — dotLottie **themes** (slots) and a
@@ -236,4 +236,4 @@ function createStateMachine(def, hooks = {}) {
 const lottieState = { id: 'lottie-state', version: RUNTIME_VERSION, tier: 'standard', requires: ['core', 'vector'], api: { applyTheme, ruleProp, createStateMachine, inspectStateMachine, compare } };
 
 export { applyTheme, compare, createStateMachine, inspectStateMachine, lottieState, ruleProp };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.2.0/dist/runtime/lottie-state.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.3.0/dist/runtime/lottie-state.js.map

@@ -135,4 +135,4 @@ function flattenSceneV3(doc) {
 }
 
 export { flattenSceneV3 as a, flatSceneV3ToV2 as f, sceneV2ToFlatV3 as s };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.2.0/dist/chunks/v3-read-BqgIjLQP.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.3.0/dist/chunks/v3-read-BqgIjLQP.js.map

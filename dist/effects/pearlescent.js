@@ -11,4 +11,4 @@ function registerPearlescent() {
 }
 
 export { effect, registerPearlescent as register, registerPearlescent };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.2.0/dist/effects/pearlescent.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.3.0/dist/effects/pearlescent.js.map

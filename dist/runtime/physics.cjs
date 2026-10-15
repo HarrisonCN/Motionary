@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-z74WGGq9.cjs');
+var registry = require('../chunks/registry-B6XX3AVt.cjs');
 
 /**
  * `motionary/runtime/physics` (10.7) — a small 2D rigid-body engine written
@@ -736,4 +736,4 @@ exports.collide = collide;
 exports.createWorld = createWorld;
 exports.dragConstraint = dragConstraint;
 exports.physics = physics;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.2.0/dist/runtime/physics.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.3.0/dist/runtime/physics.cjs.map

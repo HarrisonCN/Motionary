@@ -1,2 +1,2 @@
 export { d as defineToastStack } from '../chunks/toast-stack-B_bO4fVO.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.2.0/dist/widgets/toast-stack.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.3.0/dist/widgets/toast-stack.js.map

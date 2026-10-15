@@ -75,4 +75,4 @@ function defineDock(tag = 'usa-dock') {
 }
 
 exports.defineDock = defineDock;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.2.0/dist/widgets/dock.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.3.0/dist/widgets/dock.cjs.map

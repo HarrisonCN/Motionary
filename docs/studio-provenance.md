@@ -1,5 +1,7 @@
 # AI edit provenance (`motionary/studio/provenance`, 15.1)
 
+> **Experimental** — may change in a minor release; not covered by the stability promise ([stability.md](./stability.md)).
+
 Every change an AI (or any other generator) makes to a Studio project can say where it came from:
 `{ generator, model?, requestId?, at }`. The record is written **into the document** (`meta["motionary:provenance"]`) in
 the **same undo step** as the change, so it is saved with the project, survives reopen, and disappears again on undo.

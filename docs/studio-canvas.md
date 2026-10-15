@@ -1,5 +1,7 @@
 # Studio canvas (14.3)
 
+> **Experimental** — may change in a minor release; not covered by the stability promise ([stability.md](./stability.md)).
+
 `motionary/studio/canvas` (= `motionary/components/studio-canvas`) is the foundation of the Motion Studio canvas: you
 point at elements to select them, drag a marquee, move, resize and rotate with a mouse, pen or finger, pinch to zoom,
 snap to guides, to the other layers and to a grid, and nudge with the keyboard. It is an opt-in entry with its own

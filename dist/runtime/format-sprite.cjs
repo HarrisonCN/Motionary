@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-z74WGGq9.cjs');
-var tween = require('../chunks/tween-C5T1YCsy.cjs');
+var registry = require('../chunks/registry-B6XX3AVt.cjs');
+var tween = require('../chunks/tween-BxJQy5VJ.cjs');
 
 /**
  * `motionary/runtime/format-sprite` (10.3) — sprite sheets and image
@@ -221,4 +221,4 @@ exports.parseSpriteSheet = parseSpriteSheet;
 exports.preloadImages = preloadImages;
 exports.sequencePlayer = sequencePlayer;
 exports.spritePlayer = spritePlayer;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.2.0/dist/runtime/format-sprite.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.3.0/dist/runtime/format-sprite.cjs.map

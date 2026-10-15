@@ -476,4 +476,4 @@ exports.createJsonFramesAdapter = createJsonFramesAdapter;
 exports.exportStandalone = exportStandalone;
 exports.frameDigest = frameDigest;
 exports.sampleBaked = sampleBaked;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.2.0/dist/components/studio-export.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.3.0/dist/components/studio-export.cjs.map

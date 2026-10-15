@@ -2,7 +2,7 @@
 
 # Motionary
 
-**Web のためのスクロールアニメーション、アニメーション付き Web Components、そして依存ゼロのモーションランタイム。**
+**依存ゼロ・固定サイズ上限・標準でアクセシブル。** Web のためのスクロールアニメーションとアニメーション Web Components。
 
 _旧名 **use-scroll-animate**。旧 npm パッケージも、同じビルドのエイリアスとして引き続き公開しています。_
 
@@ -14,9 +14,19 @@ _旧名 **use-scroll-animate**。旧 npm パッケージも、同じビルドの
 
 </div>
 
+<p align="center"><img src="./docs/images/demo.gif" alt="Motionary スクロールストーリーのデモ：ページのスクロールに合わせて要素が現れ、変化する" width="640"></p>
+
+```bash
+npm i motionary
+```
+```html
+<h2 data-sa data-sa-animation="fade-in-up">Hello</h2>
+<script type="module">import ScrollAnimate from 'motionary'; ScrollAnimate.init();</script>
+```
+
 Motionary は、スクロールして画面に入ってきたコンテンツをアニメーションで表示し、さらに <!--fact:public-->209<!--/fact--> 個の `<usa-*>` カスタム要素を提供します。カード、ボタン、物理演算、ページ遷移、ジェネレーティブ背景、Lottie、WebGL などがそろっています。素の HTML でも、React・Vue・Svelte・Solid・Angular でも、Electron・Tauri・WebView2 といったデスクトップの Web ビューでも、そのまま動きます。ランタイム依存はゼロ。すべてのエントリポイントは tree-shaking でき、CI で gzip サイズの上限がチェックされます。どのアニメーションも `prefers-reduced-motion` を尊重します。
 
-> 13.0：見つける・コピーする・動かす。12.x で追加したツール群が安定版になりました。MCP のマウント検証（`validate_snippet { mount: true }`）とバージョンに応じた回答（`check_compat`）、Figma プラグインのエクスポート、[コンポーネントプレイグラウンド](https://harrisoncn.github.io/Motionary/showcase/run.html)、`npx motionary export`、`npx motionary compat` です。11.5 で非推奨になったインポートパスは削除されました。詳しくは [13 へのアップグレード](#13-へのアップグレード) を参照してください。
+各バージョンのリリースノートは [CHANGELOG.md](./CHANGELOG.md) にあります。
 
 ## 目次
 
@@ -38,7 +48,7 @@ Motionary は、スクロールして画面に入ってきたコンテンツを�
 npm i motionary
 ```
 
-ビルドツールを使わない場合は CDN からどうぞ。URL はメジャーバージョン（`@13`）で固定します。
+ビルドツールを使わない場合は CDN からどうぞ。URL はメジャーバージョン（`@<!--ver:major-->16<!--/ver-->`）で固定します。本番環境では正確なバージョンと SRI を指定してください（[docs/cdn-sri.md](./docs/cdn-sri.md)）。
 
 ```html
 <script src="https://unpkg.com/motionary@16/dist/index.umd.js"></script>            <!-- スクロール API：window.ScrollAnimate -->
@@ -266,6 +276,16 @@ el.animate(intent.keyframes, intent.options);
 
 [figma-plugin/](./figma-plugin/README.md)（`node_modules/motionary/figma-plugin/` にも同梱）は、選択中のレイヤーを 3 つの形式で書き出します。**そのまま開ける HTML ページ**（トークン、正しい順序の前提スクリプト、レイヤーごとに 1 要素）、**CSS トークン**、そして **motion.tokens.json**（W3C デザイントークン）です。コンポーネント名を付けたレイヤー（`usa-tilt` など）はその要素になり、Figma 変数の `motion/duration/*` と `motion/easing/*` は既定のトークンを上書きします。プラグインはネットワークにアクセスせず、ドキュメントを書き換えることもありません。詳しくは [figma-plugin/README.md](./figma-plugin/README.md) と [docs/motion-tokens.md](./docs/motion-tokens.md) を参照してください。
 
+## 安定コアと実験的な機能
+
+Motionary の方針は **依存ゼロ・固定サイズ上限・アクセシブルなモーション** です。安定コアは、スクロール API（`motionary`）、
+`motionary/core`、`motionary/presets/*`、`motionary/motion`、`motionary/scene`、`motionary/runtime/*`、`<usa-*>` コンポーネントと
+ウィジェット、フレームワークアダプター、CLI です。新しいコンポーネントやエフェクトの追加は予定しておらず、既存の機能を磨いていきます。
+
+**実験的**（マイナーリリースで変わる可能性があり、安定性の約束の対象外）：Motion Studio（`motionary/studio/*`、16.2 のプラグイン API と
+16.3 のパフォーマンス予算を含む）、AI アシスタントとプロバイダー（`motionary/studio/ai`、`motionary/ai*`）、MCP サーバー（`motionary-mcp`）、
+Figma プラグイン、クロスプラットフォーム書き出し（`npx motionary export`）。詳しくは [docs/stability.md](./docs/stability.md)。
+
 ## アクセシビリティ
 
 - `prefers-reduced-motion: reduce` のときは、スクロール表示がすぐにコンテンツを表示し（登場・パララックス・scrub の動きなし）、コンポーネントも落ち着いた状態に切り替わります（`staticAlternative()`、`adaptKeyframes()`）。
@@ -275,23 +295,27 @@ el.animate(intent.keyframes, intent.options);
 
 ## サイズ上限
 
-すべてのエントリポイントに、[`size-budget.json`](./size-budget.json) で固定の gzip 上限が設定されています（全 401 項目）。上限を超えるエントリがあれば CI は失敗し、上限が自動で引き上げられることはありません。13.0.0 ビルドでの実測値（minify ＋ gzip）は次のとおりです。
+すべてのエントリポイントに、[`size-budget.json`](./size-budget.json) で固定の gzip 上限が設定されています（全 401 項目）。上限を超えるエントリがあれば CI は失敗し、上限が自動で引き上げられることはありません。
+
+<!-- size-table:start -->
+16.3.0 ビルドでの実測値（minify ＋ gzip、`scripts/size.mjs --report` で生成）：
 
 | インポートするもの | gzip | 上限 |
 |---|---:|---:|
 | `motionary/core`（`createMotion`） | 2.53 KB | 10.00 KB |
 | `import ScrollAnimate from 'motionary'`（デフォルトインスタンス） | 5.49 KB | 6.00 KB |
-| `motionary` のすべて | 8.77 KB | 9.75 KB |
-| `dist/index.umd.js`（CDN） | 8.93 KB | 9.75 KB |
+| `motionary` のすべて | 8.89 KB | 9.75 KB |
+| `dist/index.umd.js`（CDN） | 9.03 KB | 9.75 KB |
 | `parallax()` のみ | 0.94 KB | 2.00 KB |
 | `motionary/presets/extended`（181 プリセット） | 4.69 KB | 5.25 KB |
 | `motionary/runtime`（ランタイムのコア） | 5.42 KB | 5.50 KB |
-| `motionary/components/reveal` | 4.32 KB | 5.00 KB |
-| `motionary/components/lite`（全要素、CSS はオンデマンド） | 69.61 KB | 70.00 KB |
-| `motionary/components`（全要素 ＋ CSS） | 85.66 KB | 93.75 KB |
-| `dist/components.umd.js`（CDN、すべて） | 107.40 KB | 115.75 KB |
+| `motionary/components/reveal` | 4.47 KB | 5.00 KB |
+| `motionary/components/lite`（全要素、CSS はオンデマンド） | 69.99 KB | 70.00 KB |
+| `motionary/components`（全要素 ＋ CSS） | 86.05 KB | 93.75 KB |
+| `dist/components.umd.js`（CDN、すべて） | 109.32 KB | 115.75 KB |
+<!-- size-table:end -->
 
-既定ではスクロールイベントを監視せず（IntersectionObserver を使用）、アニメーションはコンポジタで処理できるプロパティ（`transform`、`opacity`、`filter`、`clip-path`）に限られます。インポート自体に副作用はありません（[docs/tree-shaking.md](./docs/tree-shaking.md)）。PR ごとに、ヘッドレス Chrome でファーストビューの転送量、スクリプト時間、GPU リソース、フレームの安定性も計測しています（[docs/perf-ci.md](./docs/perf-ci.md)）。ソースマップは npm には含めず、GitHub の各リリースに添付しています（[docs/source-maps.md](./docs/source-maps.md)）。詳しくは [docs/performance.md](./docs/performance.md)。
+既定ではスクロールイベントを監視せず（IntersectionObserver を使用）、アニメーションはコンポジタで処理できるプロパティ（`transform`、`opacity`、`filter`、`clip-path`）に限られます。インポート自体に副作用はありません（[docs/tree-shaking.md](./docs/tree-shaking.md)）。PR ごとに、ヘッドレス Chrome でファーストビューの転送量、スクリプト時間、GPU リソース、フレームの安定性も計測しています（[docs/perf-ci.md](./docs/perf-ci.md)）。ソースマップは npm には含めません。タグ付きの git ツリーにあり（各ファイルの `sourceMappingURL` がそこを指します）、16.3 からは `sourcemaps` アーカイブとして GitHub の各リリースにも添付します（[docs/source-maps.md](./docs/source-maps.md)）。詳しくは [docs/performance.md](./docs/performance.md)。
 
 **対応ブラウザ：** 2023 年以降のエバーグリーンブラウザ（Chrome / Edge ≥ 111、Safari ≥ 16.4、Firefox ≥ 115、WebView2、Electron ≥ 24）。View Transitions やスクロール駆動アニメーションは、ブラウザが対応していれば使い、未対応なら JavaScript にフォールバックします。`baselineReport()` で個々のブラウザを確認できます。
 
@@ -316,8 +340,8 @@ npx usa-codemod-13 --write      # まとめて書き換え。@10 / @11 / @12 に
 
 ## バージョンと互換性
 
-- **npm の dist-tag：** `latest` は現在のメジャーの最新リリース（16.2.0）を指します。14.1 からはマイナーリリースでも移動します。マイナーリリースにはそれぞれ `v<major>-<minor>` のタグも付きます（例：`v15-0`）。`v15-line` は 15.x を追い、`v14-lts` は 14.9.x です。`motionary` と `use-scroll-animate` は常に同じバージョンで同時に公開されます。
-- **CDN：** URL はメジャーで固定します（`motionary@15`）。正確なバージョン指定（`motionary@12.4.0`）もそのまま使えます。
+- **npm の dist-tag：** `latest` は現在のメジャーの最新リリース（<!--ver:version-->16.3.0<!--/ver-->）を指します。14.1 からはマイナーリリースでも移動します。マイナーリリースにはそれぞれ `v<major>-<minor>` のタグも付きます（例：`v15-0`）。`v15-line` は 15.x を追い、`v14-lts` は 14.9.x です。`motionary` と `use-scroll-animate` は常に同じバージョンで同時に公開されます。
+- **CDN：** URL はメジャーで固定します（`motionary@<!--ver:major-->16<!--/ver-->`）。正確なバージョン指定（`motionary@12.4.0`）もそのまま使えます。
 - **セマンティックバージョニング：** 破壊的変更はメジャーだけで行い、毎回ガイドと codemod を用意します。非推奨になったものは次のメジャーまで残り、その間は型に `@deprecated` が付くだけで、実行時の警告は出ません。
 - **各バージョンに含まれるもの：** コンポーネントとランタイムモジュールごとの `since` / `changed`（[docs/version-compat.md](./docs/version-compat.md)）、機能ごとの対応状況（[docs/compat-matrix.md](./docs/compat-matrix.md)）。
 - 詳細：[docs/versions.md](./docs/versions.md) · [CHANGELOG.md](./CHANGELOG.md)。

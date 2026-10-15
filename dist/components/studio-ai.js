@@ -821,4 +821,4 @@ function createAiPanel(root, o) {
 }
 
 export { AI_EDIT_FORMAT, AI_EDIT_SCHEMA, AI_LIMITS, STUDIO_AI_SYSTEM_PROMPT, STUDIO_AI_VERSION, applySceneOps, buildAiRequest, checkSceneCompatibility, compareVersions, createAiPanel, createAiReview, createMockProvider, describeSceneOp, localAiEdit, matchComponents, parseAiEdit, proposeAiEdit, renderSceneHeadless, suggestSceneFixes, validateAiEdit };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.2.0/dist/components/studio-ai.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.3.0/dist/components/studio-ai.js.map

@@ -1,5 +1,7 @@
 # Cross-platform 3.0: web, mini programs, HarmonyOS (12.1)
 
+> **Experimental** — may change in a minor release; not covered by the stability promise ([stability.md](./stability.md)).
+
 Motionary's `<usa-*>` elements run anywhere a modern web view runs (browsers, Electron, Tauri, MAUI, Flutter, WebView2, ArkWeb —
 see [hybrid-apps.md](./hybrid-apps.md) and [windows-apps.md](./windows-apps.md)). Two popular targets have **no** Custom Elements:
 mini programs and native ArkUI. For those, 12.1 exports the motion itself — the presets, durations and easings from

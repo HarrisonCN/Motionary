@@ -126,4 +126,4 @@ function parallax(target, options = {}) {
 const ScrollAnimate = /* @__PURE__ */ createScrollAnimate();
 
 export { createScrollAnimate, ScrollAnimate as default, getScrollProgress, parallax };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.2.0/dist/index.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.3.0/dist/index.js.map

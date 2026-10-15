@@ -2,7 +2,7 @@
 
 # Motionary
 
-**Scroll animations, animated Web Components and a zero-dependency motion runtime for the web.**
+**Zero dependencies · fixed size budgets · accessible by default.** Scroll animations and animated Web Components for the web.
 
 _Formerly **use-scroll-animate**. The old npm package is still published as an alias of the same build._
 
@@ -14,46 +14,22 @@ _Formerly **use-scroll-animate**. The old npm package is still published as an a
 
 </div>
 
+<p align="center"><img src="./docs/images/demo.gif" alt="Motionary scroll story demo: elements reveal and transform as the page scrolls" width="640"></p>
+
+```bash
+npm i motionary
+```
+```html
+<h2 data-sa data-sa-animation="fade-in-up">Hello</h2>
+<script type="module">import ScrollAnimate from 'motionary'; ScrollAnimate.init();</script>
+```
+
 Motionary reveals content as it scrolls into view and gives you <!--fact:public-->209<!--/fact--> animated `<usa-*>` custom elements: cards, buttons,
 physics, page transitions, generative backgrounds, Lottie, WebGL and more. It runs in plain HTML, in React, Vue, Svelte,
 Solid and Angular, and in desktop web views (Electron, Tauri, WebView2). It has no runtime dependencies, every entry point
 is tree-shakeable and has a gzip budget checked in CI, and every animation respects `prefers-reduced-motion`.
 
-> 14.0: **Motion Engine v2** — `animate`, `sequence`, `parallel`, `stagger`, `spring` and `timeline` in
-> [`motionary/motion`](./docs/motion-engine-v2.md), all with one controller (play / pause / seek / reverse / finished /
-> cancel). [Scene Format v2](./docs/scene-v2.md) is the official motion document (`motionary/scene`; `<usa-player>` and the
-> Timeline editor read and write it). The 13.9 deprecations moved to `motionary/compat-v13`. See [Upgrading to 14](#upgrading-to-14).
->
-> 14.2: **Layout Motion 2.0** — [`motionary/motion/layout`](./docs/layout-motion.md): FLIP with scale and border-radius
-> correction, layout groups, interruptible layout animations, shared elements (`layoutId`) between states and routes,
-> and View Transitions (same- and cross-document) with an automatic FLIP fallback.
->
-> 14.3: **Studio canvas** — [`motionary/studio/canvas`](./docs/studio-canvas.md): select, marquee and multi-select,
-> layer order / lock / hide, guides and snapping, drag / resize / rotate with pointer and touch (pinch-zoom), keyboard
-> nudge — every edit a lossless Scene Format v2 op through the timeline editor's undo history.
->
-> 15.0: **Motion Studio 2.0** — [`motionary/studio/app`](./docs/studio-app.md): one call gives the whole loop — new →
-> edit → preview → save → reopen → export — with storage adapters, packs and missing-asset relinking. 15.0 removes the
-> 13.x compat layer ([migrating-to-v15.md](./docs/migrating-to-v15.md)).
->
-> 14.9: **Getting ready for 15.0** — [`npx motionary doctor --v15`](./docs/migrating-to-v15.md) lists everything 15.0
-> removes (only the 13.x compat layer) and `npx motionary migrate --to 15` moves off it with backups and a loss report.
->
-> 14.8: **Studio templates** — [`motionary/studio/templates`](./docs/studio-templates.md): install / preview / uninstall
-> integrity-checked templates (license and required modules visible first; uninstall restores the project byte for byte).
->
-> 14.7: **Standalone export** — [`motionary/studio/export`](./docs/studio-export.md): a Studio project becomes HTML / CSS
-> (+ a tiny player) that plays offline, byte-for-byte reproducible, with the same values as the preview at every frame.
->
-> 14.6: **AI Studio assistant 2.0** — [`motionary/studio/ai`](./docs/studio-ai.md): a prompt becomes Scene v2 ops you
-> review one by one — schema, compatibility and render checked first, applied as one undo step, model output parsed as data.
->
-> 14.5: **Project & asset workflow** — [`motionary/studio/assets`](./docs/studio-assets.md): asset references kept
-> inside the project directory, a missing-asset report with relink suggestions, and one-file offline project packs.
->
-> 14.4: **Motion Studio 1.0** — [`motionary/studio`](./docs/studio.md): a timeline with tracks and groups, a scrubbable
-> playhead, keyframe drag / marquee / copy-paste with snapping, a curve editor (cubic-bezier, springs), a property
-> inspector, frame-step preview, undo / redo and Scene Format v2 save / load — no JSON editing needed.
+Release notes for every version are in [CHANGELOG.md](./CHANGELOG.md).
 
 ## Contents
 
@@ -88,7 +64,7 @@ is tree-shakeable and has a gzip budget checked in CI, and every animation respe
 npm i motionary
 ```
 
-No build step? Use the CDN. URLs pin the major version (`@13`):
+No build step? Use the CDN. URLs pin the major version (`@<!--ver:major-->16<!--/ver-->`). For production, pin the exact version with SRI ([docs/cdn-sri.md](./docs/cdn-sri.md)):
 
 ```html
 <script src="https://unpkg.com/motionary@16/dist/index.umd.js"></script>            <!-- scroll API: window.ScrollAnimate -->
@@ -344,6 +320,18 @@ variables `motion/duration/*` and `motion/easing/*` override the default tokens.
 never edits the document. For the full Motion Tokens 2.0 set (distances, semantics, modes) as Figma Variables, use
 `npx motionary tokens export-figma` / `import-figma`. See [figma-plugin/README.md](./figma-plugin/README.md) and [docs/motion-tokens.md](./docs/motion-tokens.md).
 
+## Stable core and experimental surfaces
+
+Motionary's focus is **zero dependencies, fixed size budgets and accessible motion**. The stable core is the scroll API
+(`motionary`), `motionary/core`, `motionary/presets/*`, `motionary/motion`, `motionary/scene`, `motionary/runtime/*`,
+the `<usa-*>` components and widgets, the framework adapters and the CLI. No new components or effects are planned;
+releases improve what exists.
+
+**Experimental** (may change in a minor release, not covered by the stability promise):
+Motion Studio (`motionary/studio/*`, including the 16.2 plugin API and the 16.3 performance budget), the AI assistant
+and provider (`motionary/studio/ai`, `motionary/ai*`), the MCP server (`motionary-mcp`), the Figma plugin and the
+cross-platform exporters (`npx motionary export`). See [docs/stability.md](./docs/stability.md).
+
 ## Accessibility
 
 - With `prefers-reduced-motion: reduce`, scroll reveals show content right away (no entrance, parallax or scrub), and
@@ -357,27 +345,32 @@ never edits the document. For the full Motion Tokens 2.0 set (distances, semanti
 ## Size budgets
 
 Every entry point has a fixed gzip budget in [`size-budget.json`](./size-budget.json) (401 entries). CI fails when an
-entry goes over its budget, and budgets are never raised automatically. Measured on the 13.0.0 build (minified + gzip):
+entry goes over its budget, and budgets are never raised automatically. 
+
+<!-- size-table:start -->
+Measured on the 16.3.0 build (minified + gzip), generated by `scripts/size.mjs --report`:
 
 | What you import | gzip | Budget |
 |---|---:|---:|
 | `motionary/core` (`createMotion`) | 2.53 KB | 10.00 KB |
 | `import ScrollAnimate from 'motionary'` (default instance) | 5.49 KB | 6.00 KB |
-| Everything from `motionary` | 8.77 KB | 9.75 KB |
-| `dist/index.umd.js` (CDN) | 8.93 KB | 9.75 KB |
+| Everything from `motionary` | 8.89 KB | 9.75 KB |
+| `dist/index.umd.js` (CDN) | 9.03 KB | 9.75 KB |
 | `parallax()` alone | 0.94 KB | 2.00 KB |
 | `motionary/presets/extended` (181 presets) | 4.69 KB | 5.25 KB |
 | `motionary/runtime` (runtime core) | 5.42 KB | 5.50 KB |
-| `motionary/components/reveal` | 4.32 KB | 5.00 KB |
-| `motionary/components/lite` (every element, CSS on demand) | 69.61 KB | 70.00 KB |
-| `motionary/components` (every element + CSS) | 85.66 KB | 93.75 KB |
-| `dist/components.umd.js` (CDN, everything) | 107.40 KB | 115.75 KB |
+| `motionary/components/reveal` | 4.47 KB | 5.00 KB |
+| `motionary/components/lite` (every element, CSS on demand) | 69.99 KB | 70.00 KB |
+| `motionary/components` (every element + CSS) | 86.05 KB | 93.75 KB |
+| `dist/components.umd.js` (CDN, everything) | 109.32 KB | 115.75 KB |
+<!-- size-table:end -->
 
 By default there are no scroll listeners (IntersectionObserver is used instead). Animations stay on the compositor
 (`transform`, `opacity`, `filter`, `clip-path`). Imports have no side effects
 ([docs/tree-shaking.md](./docs/tree-shaking.md)). Every PR also measures first-screen transfer, script time, GPU resources
-and frame stability in headless Chrome ([docs/perf-ci.md](./docs/perf-ci.md)). Source maps are not shipped to npm. They are
-attached to each GitHub release instead ([docs/source-maps.md](./docs/source-maps.md)). More: [docs/performance.md](./docs/performance.md).
+and frame stability in headless Chrome ([docs/perf-ci.md](./docs/perf-ci.md)). Source maps are not shipped to npm. They live in
+the tagged git tree (each file's `sourceMappingURL` points there) and, from 16.3, also as a `sourcemaps` archive on each
+GitHub release ([docs/source-maps.md](./docs/source-maps.md)). More: [docs/performance.md](./docs/performance.md).
 
 **Browsers:** evergreen browsers since 2023 (Chrome / Edge ≥ 111, Safari ≥ 16.4, Firefox ≥ 115, WebView2, Electron ≥ 24).
 Motionary uses View Transitions and scroll-driven animations where the browser has them, and falls back to JavaScript
@@ -410,9 +403,9 @@ Coming from another library: [AOS](./docs/migration-from-aos.md) · [GSAP Scroll
 
 ## Versions and compatibility
 
-- **npm dist-tags:** `latest` is the newest release of the current major (15.9.0; minors move it since 14.1). Each minor release also gets its own tag `v<major>-<minor>`
+- **npm dist-tags:** `latest` is the newest release of the current major (<!--ver:version-->16.3.0<!--/ver-->; minors move it since 14.1). Each minor release also gets its own tag `v<major>-<minor>`
   (for example `v15-0`), `v15-line` follows the 15.x line and `v14-lts` is 14.9.x. `motionary` and `use-scroll-animate` are published together at the same versions.
-- **CDN:** URLs pin a major (`motionary@15`). Exact pins (`motionary@12.4.0`) keep working.
+- **CDN:** URLs pin a major (`motionary@<!--ver:major-->16<!--/ver-->`). Exact pins (`motionary@12.4.0`) keep working.
 - **Semver:** breaking changes come only in majors, each with a guide and a codemod. Deprecations stay in place until the
   next major, with `@deprecated` types and no runtime warning.
 - **What each version has:** `since` / `changed` for every component and runtime module ([docs/version-compat.md](./docs/version-compat.md)),

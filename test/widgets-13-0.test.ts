@@ -41,7 +41,9 @@ describe('13.0: version, CDN, stable tooling', () => {
     expect(u).toContain('13.0 is released');
     expect(pkg.bin['usa-codemod-13']).toBe('./bin/usa-codemod-13.mjs');
     const r = read('README.md');
-    expect(r).toMatch(/> 1[3-9]\.0: /); // the current major's headline (13.0: discover, copy, run; 14.0: Motion Engine v2)
+    // 16.3 (maintainer review): version headlines moved from the README top to CHANGELOG.md; the README links there
+    expect(r).toContain('[CHANGELOG.md](./CHANGELOG.md)');
+    expect(r).not.toMatch(/^> 1\d\.\d: /m);
     for (const s of ['validate_snippet', 'check_compat', 'figma-plugin', 'showcase/run.html', 'motionary export', 'motionary compat']) expect(r, s).toContain(s);
     expect(pkg.dependencies).toBeUndefined();
   });

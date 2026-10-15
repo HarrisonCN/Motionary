@@ -1,2 +1,2 @@
 export { d as defineLeaderboard } from '../chunks/leaderboard-CbiWHJt6.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.2.0/dist/widgets/leaderboard.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.3.0/dist/widgets/leaderboard.js.map

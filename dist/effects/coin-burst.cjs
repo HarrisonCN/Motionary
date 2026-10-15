@@ -15,4 +15,4 @@ function registerCoinBurst() {
 exports.effect = effect;
 exports.register = registerCoinBurst;
 exports.registerCoinBurst = registerCoinBurst;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.2.0/dist/effects/coin-burst.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.3.0/dist/effects/coin-burst.cjs.map

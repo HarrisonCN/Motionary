@@ -1,5 +1,7 @@
 # AI Studio assistant 2.0 (`motionary/studio/ai`) — 14.6
 
+> **Experimental** — may change in a minor release; not covered by the stability promise ([stability.md](./stability.md)).
+
 Describe a change in words ("fade the card up slowly", "让标题弹跳放大") and get a **proposed edit** of your Scene v2
 project: a list of small, structured ops you can review one by one. Nothing touches the project until you apply it,
 the accepted ops land as **one undo step**, and an edit that fails a check is never offered.

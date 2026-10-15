@@ -477,4 +477,4 @@ function sceneV3ToV2(doc) {
 }
 
 export { DEPRECATIONS_V16, SCENE_V3_FORMAT, SCENE_V3_LIMITS, SCENE_V3_STATUS, SCENE_V3_VERSION, isSceneV3, migrateToSceneV3, normalizeSceneV3, sceneV3ToV2, serializeSceneV3, validateSceneV3 };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.2.0/dist/components/scene-v3.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.3.0/dist/components/scene-v3.js.map

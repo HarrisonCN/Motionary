@@ -336,4 +336,4 @@ function exportNative(input, opts) {
 }
 
 export { NATIVE_TARGETS, STUDIO_NATIVE_VERSION, exportNative, nativeSupport };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.2.0/dist/components/studio-native.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.3.0/dist/components/studio-native.js.map

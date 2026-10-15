@@ -2,7 +2,7 @@
 
 # Motionary
 
-**面向 Web 的滚动动画、动画 Web Components 与零依赖动效运行时。**
+**零依赖 · 固定体积预算 · 默认无障碍。** 面向 Web 的滚动动画与动画 Web Components。
 
 _原名 **use-scroll-animate**。旧 npm 包仍会作为别名，与 motionary 同版本、同构建一起发布。_
 
@@ -14,9 +14,19 @@ _原名 **use-scroll-animate**。旧 npm 包仍会作为别名，与 motionary �
 
 </div>
 
+<p align="center"><img src="./docs/images/demo.gif" alt="Motionary 滚动叙事演示：元素随页面滚动登场与变换" width="640"></p>
+
+```bash
+npm i motionary
+```
+```html
+<h2 data-sa data-sa-animation="fade-in-up">Hello</h2>
+<script type="module">import ScrollAnimate from 'motionary'; ScrollAnimate.init();</script>
+```
+
 Motionary 让内容在滚入视口时自然登场，并提供 <!--fact:public-->209<!--/fact--> 个开箱即用的 `<usa-*>` 动画自定义元素：卡片、按钮、物理效果、页面转场、生成式背景、Lottie、WebGL 等等。无论是纯 HTML，还是 React、Vue、Svelte、Solid、Angular，乃至 Electron、Tauri、WebView2 这类桌面 Web 视图，都能直接使用。运行时零依赖，每个入口都可 tree-shaking，并在 CI 中有固定的 gzip 体积预算；所有动画都遵循 `prefers-reduced-motion`。
 
-> 13.0：发现 · 复制 · 运行。12.x 的工具链在 13.0 转为稳定版：MCP 挂载校验（`validate_snippet { mount: true }`）与按版本作答（`check_compat`）、Figma 插件导出、[组件演练场](https://harrisoncn.github.io/Motionary/showcase/run.html)、`npx motionary export` 和 `npx motionary compat`。11.5 起标记为弃用的导入路径已移除，详见 [升级到 13](#升级到-13)。
+各版本的更新说明见 [CHANGELOG.md](./CHANGELOG.md)。
 
 ## 目录
 
@@ -38,7 +48,7 @@ Motionary 让内容在滚入视口时自然登场，并提供 <!--fact:public-->
 npm i motionary
 ```
 
-不想引入构建工具？直接用 CDN。URL 固定到大版本（`@13`）：
+不想引入构建工具？直接用 CDN。URL 固定到大版本（`@<!--ver:major-->16<!--/ver-->`）。生产环境请固定到具体版本并加 SRI（[docs/cdn-sri.md](./docs/cdn-sri.md)）：
 
 ```html
 <script src="https://unpkg.com/motionary@16/dist/index.umd.js"></script>            <!-- 滚动 API：window.ScrollAnimate -->
@@ -266,6 +276,16 @@ el.animate(intent.keyframes, intent.options);
 
 [figma-plugin/](./figma-plugin/README.md)（也位于 `node_modules/motionary/figma-plugin/`）可以把当前选中的内容导出为三种格式：**完整的 HTML 页面**（令牌、按顺序排列的前置脚本、每个图层对应一个元素）、**CSS 令牌**，以及 **motion.tokens.json**（W3C 设计令牌）。以组件命名的图层（如 `usa-tilt`）会变成对应的元素；Figma 变量 `motion/duration/*` 和 `motion/easing/*` 会覆盖默认令牌。插件不访问网络，也不会修改文档。详见 [figma-plugin/README.md](./figma-plugin/README.md) 与 [docs/motion-tokens.md](./docs/motion-tokens.md)。
 
+## 稳定核心与实验性功能
+
+Motionary 的定位是 **零依赖、固定体积预算、无障碍动效**。稳定核心包括滚动 API（`motionary`）、`motionary/core`、
+`motionary/presets/*`、`motionary/motion`、`motionary/scene`、`motionary/runtime/*`、`<usa-*>` 组件与小部件、框架适配层和 CLI。
+不再计划新增组件或效果，后续版本只打磨已有功能。
+
+**实验性**（次版本中可能变化，不在稳定性承诺之内）：Motion Studio（`motionary/studio/*`，包括 16.2 插件 API 与 16.3 性能预算）、
+AI 助手与 provider（`motionary/studio/ai`、`motionary/ai*`）、MCP 服务器（`motionary-mcp`）、Figma 插件，以及跨平台导出
+（`npx motionary export`）。详见 [docs/stability.md](./docs/stability.md)。
+
 ## 无障碍
 
 - 当系统设置为 `prefers-reduced-motion: reduce` 时，滚动显现会直接显示内容（没有入场、视差或 scrub 动效），组件也会切换到平静的状态（`staticAlternative()`、`adaptKeyframes()`）。
@@ -275,23 +295,27 @@ el.animate(intent.keyframes, intent.options);
 
 ## 体积预算
 
-每个入口在 [`size-budget.json`](./size-budget.json) 中都有固定的 gzip 预算（共 401 项）。任何入口超出预算，CI 就会失败，预算也从不自动上调。以下为 13.0.0 构建的实测数据（压缩 + gzip）：
+每个入口在 [`size-budget.json`](./size-budget.json) 中都有固定的 gzip 预算（共 401 项）。任何入口超出预算，CI 就会失败，预算也从不自动上调。
 
-| 导入内容 | gzip | 预算 |
+<!-- size-table:start -->
+16.3.0 构建的实测值（minify + gzip），由 `scripts/size.mjs --report` 生成：
+
+| 导入内容 | gzip | 上限 |
 |---|---:|---:|
 | `motionary/core`（`createMotion`） | 2.53 KB | 10.00 KB |
 | `import ScrollAnimate from 'motionary'`（默认实例） | 5.49 KB | 6.00 KB |
-| `motionary` 的全部导出 | 8.77 KB | 9.75 KB |
-| `dist/index.umd.js`（CDN） | 8.93 KB | 9.75 KB |
+| `motionary` 全部导出 | 8.89 KB | 9.75 KB |
+| `dist/index.umd.js`（CDN） | 9.03 KB | 9.75 KB |
 | 仅 `parallax()` | 0.94 KB | 2.00 KB |
 | `motionary/presets/extended`（181 个预设） | 4.69 KB | 5.25 KB |
 | `motionary/runtime`（运行时核心） | 5.42 KB | 5.50 KB |
-| `motionary/components/reveal` | 4.32 KB | 5.00 KB |
-| `motionary/components/lite`（全部元素，CSS 按需加载） | 69.61 KB | 70.00 KB |
-| `motionary/components`（全部元素 + CSS） | 85.66 KB | 93.75 KB |
-| `dist/components.umd.js`（CDN，全部内容） | 107.40 KB | 115.75 KB |
+| `motionary/components/reveal` | 4.47 KB | 5.00 KB |
+| `motionary/components/lite`（全部元素，CSS 按需） | 69.99 KB | 70.00 KB |
+| `motionary/components`（全部元素 + CSS） | 86.05 KB | 93.75 KB |
+| `dist/components.umd.js`（CDN，全部） | 109.32 KB | 115.75 KB |
+<!-- size-table:end -->
 
-默认不监听 scroll 事件（改用 IntersectionObserver），动画只作用于合成层属性（`transform`、`opacity`、`filter`、`clip-path`），导入本身没有副作用（[docs/tree-shaking.md](./docs/tree-shaking.md)）。每个 PR 还会在无头 Chrome 中测量首屏传输量、脚本耗时、GPU 资源与帧稳定性（[docs/perf-ci.md](./docs/perf-ci.md)）。source map 不随 npm 包发布，而是附在每个 GitHub Release 上（[docs/source-maps.md](./docs/source-maps.md)）。更多：[docs/performance.md](./docs/performance.md)。
+默认不监听 scroll 事件（改用 IntersectionObserver），动画只作用于合成层属性（`transform`、`opacity`、`filter`、`clip-path`），导入本身没有副作用（[docs/tree-shaking.md](./docs/tree-shaking.md)）。每个 PR 还会在无头 Chrome 中测量首屏传输量、脚本耗时、GPU 资源与帧稳定性（[docs/perf-ci.md](./docs/perf-ci.md)）。source map 不随 npm 包发布：它们保存在打了标签的 git 树中（每个文件的 `sourceMappingURL` 指向那里），从 16.3 起也作为 `sourcemaps` 压缩包附在每个 GitHub Release 上（[docs/source-maps.md](./docs/source-maps.md)）。更多：[docs/performance.md](./docs/performance.md)。
 
 **浏览器支持：** 2023 年以来的常青浏览器（Chrome / Edge ≥ 111、Safari ≥ 16.4、Firefox ≥ 115、WebView2、Electron ≥ 24）。浏览器支持 View Transitions 和滚动驱动动画时直接使用，不支持时回退到 JavaScript 实现。可以用 `baselineReport()` 检查某个浏览器。
 
@@ -316,8 +340,8 @@ npx usa-codemod-13 --write      # 一并改写，并把固定在 @10 / @11 / @12
 
 ## 版本与兼容性
 
-- **npm dist-tags：** `latest` 指向当前大版本的最新版本（15.9.0；从 14.1 起次版本也会移动它）。每个次版本另有自己的标签 `v<major>-<minor>`（例如 `v15-0`），`v15-line` 跟随 15.x，`v14-lts` 为 14.9.x。`motionary` 与 `use-scroll-animate` 总是以相同版本一起发布。
-- **CDN：** URL 固定到大版本（`motionary@15`）；固定到具体版本（`motionary@12.4.0`）的链接也继续可用。
+- **npm dist-tags：** `latest` 指向当前大版本的最新版本（<!--ver:version-->16.3.0<!--/ver-->；从 14.1 起次版本也会移动它）。每个次版本另有自己的标签 `v<major>-<minor>`（例如 `v15-0`），`v15-line` 跟随 15.x，`v14-lts` 为 14.9.x。`motionary` 与 `use-scroll-animate` 总是以相同版本一起发布。
+- **CDN：** URL 固定到大版本（`motionary@<!--ver:major-->16<!--/ver-->`）；固定到具体版本（`motionary@12.4.0`）的链接也继续可用。
 - **语义化版本：** 破坏性变更只出现在大版本，每次都附带升级指南和 codemod。弃用的内容会保留到下一个大版本，期间类型标记为 `@deprecated`，运行时不输出警告。
 - **各版本包含什么：** 每个组件和运行时模块的 `since` / `changed`（[docs/version-compat.md](./docs/version-compat.md)），以及逐项功能支持（[docs/compat-matrix.md](./docs/compat-matrix.md)）。
 - 详情：[docs/versions.md](./docs/versions.md) · [CHANGELOG.md](./CHANGELOG.md)。

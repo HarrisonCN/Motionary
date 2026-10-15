@@ -250,4 +250,4 @@ function register3dPack() {
 
 exports.DEPTH3_FX = DEPTH3_FX;
 exports.register3dPack = register3dPack;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.2.0/dist/components/fx-3d.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.3.0/dist/components/fx-3d.cjs.map
