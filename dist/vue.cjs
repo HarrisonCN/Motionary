@@ -58,4 +58,4 @@ function createVueComposables(Vue) {
 }
 
 exports.createVueComposables = createVueComposables;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.1.0/dist/vue.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.2.0/dist/vue.cjs.map

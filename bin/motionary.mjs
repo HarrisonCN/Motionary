@@ -2,6 +2,7 @@
 // motionary — command line (11.5).
 //   npx motionary doctor [paths…] [--json]   scan a project for deprecated import paths (exit 1 when found)
 //   npx motionary export --target css|wxss|arkts   presets + motion tokens for other platforms (12.1)
+//   npx motionary export --scene f.json --target css|wxss|arkts|compose|swiftui [--out f] [--report f] [--strict]   a scene → native code + loss report (15.2)
 //   npx motionary migrate <files…> [--write|--out f] [--diff] [--report] [--json] [--tokenize]   v1 motion JSON → scene v2 (13.9; official format since 14.0)
 //   npx motionary migrate --code [paths…] [--write] [--json]   rewrite import moves + CDN majors in source files (14.0; @15 since 15.0)
 //   npx motionary tokens import-figma|export-figma|validate|css …   Motion Tokens 2.0 ↔ DTCG / Figma Variables / CSS (14.1)
@@ -43,6 +44,9 @@ const HELP = `motionary <command>
   doctor [paths…] [--json]   list deprecated motionary import paths and legacy event names (default: current directory).
                              Exit code 1 when any is found. Fix them with: npx usa-codemod-13 --write [paths…]
   export --target css|wxss|arkts [--presets a,b] [--duration token] [--easing token] [--rpx] [--out file]
+  export --scene scene.json --target css|wxss|arkts|compose|swiftui [--out file] [--report report.json] [--strict] [--rpx] [--package p]
+                             a Scene v2 / timeline document → CSS, WXSS, ArkTS, Jetpack Compose or SwiftUI with a per-property
+                             loss report (lost properties are listed on stderr; --strict exits 1 when anything is lost) — docs/studio-native.md
                              export presets + motion tokens for the web, mini programs (WXSS) or HarmonyOS (ArkTS) — docs/cross-platform.md
   compat <version> [--json]  what a project on <version> can use and what changed after it (from the manifest) — docs/version-compat.md
   migrate <files…> [--dry-run] [--write | --out file] [--diff] [--report] [--json] [--tokenize]
@@ -92,6 +96,24 @@ export function runExport(rest, presets, tokens) {
     return 0;
   } catch (e) {
     console.error(String(e.message || e) + `\n(targets: ${TARGETS.join(', ')})`);
+    return 2;
+  }
+}
+/** `motionary export --scene` (15.2): `N` = the studio-native module. 0 ok, 1 lost properties under --strict, 2 bad input / target. */
+export function runExportScene(rest, N) {
+  const target = flag(rest, 'target') || 'css';
+  try {
+    const doc = JSON.parse(readFileSync(flag(rest, 'scene'), 'utf8'));
+    const pkg = flag(rest, 'package');
+    const { code, file, report } = N.exportNative(doc, { target, rpx: rest.includes('--rpx'), ...(pkg ? { package: pkg } : {}) });
+    const out = flag(rest, 'out'), rep = flag(rest, 'report');
+    if (out) { writeFileSync(out, code); console.log(`motionary export: ${target} → ${out} (suggested name ${file})`); } else process.stdout.write(code);
+    if (rep) writeFileSync(rep, JSON.stringify(report, null, 2) + '\n');
+    for (const l of report.lost) console.error(`lost (${target}): layer "${l.layer}" ${l.prop} — ${l.reason}`);
+    for (const n of report.notes) console.error(`note: ${n}`);
+    return report.lost.length && rest.includes('--strict') ? 1 : 0;
+  } catch (e) {
+    console.error(String(e.message || e) + `\n(scene targets: ${N.NATIVE_TARGETS.join(', ')})`);
     return 2;
   }
 }
@@ -386,6 +408,7 @@ export function main(argv, env = {}) {
     return runMigrate(rest, createRequire(import.meta.url)('../dist/components/scene-v2.cjs'));
   }
   if (cmd === 'export') {
+    if (rest.includes('--scene')) return env.native ? runExportScene(rest, env.native) : runExportScene(rest, createRequire(import.meta.url)('../dist/components/studio-native.cjs'));
     if (env.presets) return runExport(rest, env.presets, env.tokens || TOKENS());
     return import('../dist/index.js').then((m) => runExport(rest, m.PRESETS, env.tokens || TOKENS()));
   }

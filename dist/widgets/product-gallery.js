@@ -1,2 +1,2 @@
 export { d as defineProductGallery } from '../chunks/product-gallery-BoiBGX9H.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.1.0/dist/widgets/product-gallery.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.2.0/dist/widgets/product-gallery.js.map

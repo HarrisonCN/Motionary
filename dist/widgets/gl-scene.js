@@ -1,2 +1,2 @@
-export { d as defineGlScene } from '../chunks/gl-scene-CQwzCM9n.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.1.0/dist/widgets/gl-scene.js.map
+export { d as defineGlScene } from '../chunks/gl-scene-T2lwGZQl.js';
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.2.0/dist/widgets/gl-scene.js.map

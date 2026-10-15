@@ -995,4 +995,4 @@ exports.snapLines = snapLines;
 exports.snapRect = snapRect;
 exports.snapToGrid = snapToGrid;
 exports.snapValue = snapValue;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.1.0/dist/components/studio-canvas.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.2.0/dist/components/studio-canvas.cjs.map

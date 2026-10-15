@@ -90,4 +90,4 @@ function definePrizeWheel(tag = 'usa-prize-wheel') {
 
 exports.definePrizeWheel = definePrizeWheel;
 exports.wheelAngle = wheelAngle;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.1.0/dist/chunks/prize-wheel-emDopI5c.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.2.0/dist/chunks/prize-wheel-emDopI5c.cjs.map

@@ -11,4 +11,4 @@ function registerLightning() {
 }
 
 export { effect, registerLightning as register, registerLightning };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.1.0/dist/effects/lightning.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.2.0/dist/effects/lightning.js.map

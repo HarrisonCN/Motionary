@@ -1,2 +1,2 @@
 export { d as defineEqualizer } from '../chunks/equalizer--Sk1CWfZ.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.1.0/dist/widgets/equalizer.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.2.0/dist/widgets/equalizer.js.map

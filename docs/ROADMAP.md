@@ -28,7 +28,7 @@
 | 版本 | 状态 | 优先级 | 核心内容 | 发布验收标准 |
 | --- | --- | --- | --- | --- |
 | v15.1.0 | [已发布] | P1 | AI 编辑溯源与 Gateway 协同：`motionary/studio/provenance`（历史条目带生成者 / 模型 / 请求 id / 时间，与改动同一撤销步；AI 过滤、面板、`matchLineage`）；motionary-mcp 2.4 `propose_edit` 只返回结构化提案 + diff + provenance，不写工程 | 未经人确认的改动 0 写入（测试）；已应用 AI 改动经 requestId 对到 Gateway 调用 lineage —— 对 **Gateway 15.1 canary** 验证（`examples/gateway-provenance`），**待 Gateway 15.1 稳定版**。导出报告列出 AI 改动推迟到 15.2。 |
-| v15.2.0 | [建议] | P1 | 跨平台导出 2.0：CSS / WXSS / ArkTS 改为从 Scene v2 导出，新增 Compose / SwiftUI 支持子集 | 每个导出带逐项损失报告；黄金文件测试；独立入口与预算。 |
+| v15.2.0 | [已发布] | P1 | 跨平台导出 2.0：`motionary/studio/native` 从 Scene v2（或 timeline / Studio 工程）导出 CSS / WXSS / ArkTS + Jetpack Compose / SwiftUI 支持子集；`motionary export --scene … --report --strict` | 每个导出带逐项损失报告（每个属性恰好一次 supported / lost + 原因，测试）；五个目标的黄金文件测试 + 括号 / 字符串平衡检查（CI 无原生编译器）；独立入口与预算行；报告列出 15.1 溯源记录（`report.ai`，15.1 推迟项）。 |
 | v15.3.0 | [建议] | P1 | 无障碍与响应式动效：敏感度分级、焦点、缩放、断点变体 | Studio 与导出物行为一致；axe + 键盘 + reduced-motion 三浏览器；真机清单未在真实设备执行前标注“未执行”。 |
 | v15.4.0 | [条件] | P2 | 渲染后端（WebGPU / 资源调度） | 只有 14.7 / 15.0 的性能数据证明需要时才做。 |
 | v15.5.0 | [建议] | P2 | 团队工程与资源：`ProjectStore` 适配器、版本历史、冲突检测（Motionary 不自带服务器） | Gateway 示例中跨租户读取被拒并审计，配额生效。 |

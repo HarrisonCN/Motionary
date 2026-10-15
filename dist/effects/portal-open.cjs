@@ -15,4 +15,4 @@ function registerPortalOpen() {
 exports.effect = effect;
 exports.register = registerPortalOpen;
 exports.registerPortalOpen = registerPortalOpen;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.1.0/dist/effects/portal-open.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.2.0/dist/effects/portal-open.cjs.map

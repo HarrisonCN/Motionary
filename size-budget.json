@@ -147,6 +147,11 @@
     "limit": 2048
   },
   {
+    "name": "import 'motionary/components/studio-native' (= motionary/studio/native, 15.2 cross-platform export 2.0: Scene v2 / timeline / Studio project → CSS, WXSS, ArkTS, Jetpack Compose, SwiftUI with a per-property loss report; includes the scene → timeline reader; own entry, not in lite / studio / studio/export; measured ~6.6 KB)",
+    "import": "export * from 'pkg/components/studio-native';",
+    "limit": 8192
+  },
+  {
     "name": "import 'motionary/components/interaction'",
     "import": "export * from 'pkg/components/interaction';",
     "limit": 6400
