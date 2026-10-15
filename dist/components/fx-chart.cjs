@@ -154,4 +154,4 @@ function registerChartPack() {
 exports.CHART_FX = CHART_FX;
 exports.parseFigure = parseFigure;
 exports.registerChartPack = registerChartPack;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.5.0/dist/components/fx-chart.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/components/fx-chart.cjs.map

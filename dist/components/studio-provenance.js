@@ -142,4 +142,4 @@ function createProvenancePanel(root, history) {
 }
 
 export { PROVENANCE_LIMITS, PROVENANCE_META_KEY, REQUEST_ID_RE, STUDIO_PROVENANCE_VERSION, aiChanges, changedLayers, createProvenancePanel, matchLineage, provenanceOf, recordProvenance, validateProvenance, withProvenance };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.5.0/dist/components/studio-provenance.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/components/studio-provenance.js.map

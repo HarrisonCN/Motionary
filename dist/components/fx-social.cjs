@@ -117,4 +117,4 @@ function registerSocialPack() {
 exports.SOCIAL_FX = SOCIAL_FX;
 exports.fanAngles = fanAngles;
 exports.registerSocialPack = registerSocialPack;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.5.0/dist/components/fx-social.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/components/fx-social.cjs.map

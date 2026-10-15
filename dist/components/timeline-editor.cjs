@@ -115,4 +115,4 @@ exports.loadMotionDoc = scene.loadMotionDoc;
 exports.timelineDocFromScene = scene.timelineDocFromScene;
 exports.timelineDocToScene = scene.timelineDocToScene;
 exports.TIMELINE_DOC_SCHEMA = TIMELINE_DOC_SCHEMA;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.5.0/dist/components/timeline-editor.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/components/timeline-editor.cjs.map

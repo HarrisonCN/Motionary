@@ -40,6 +40,12 @@ Claude Code: `claude mcp add motionary -- npx -y -p motionary motionary-mcp`.
 | `get_template` (2.3, 14.8) | `id` | manifest, info, the Scene v2 document and a still preview (one inline HTML file without scripts) — see [studio-templates.md](./studio-templates.md) |
 | `export_scene` (2.3, 14.8) | one of `scene` / `project` / `template`, `inline?`, `js?`, `fps?`, `title?` | the [14.7 standalone export](./studio-export.md): files (utf8 text, binary as base64), `digest` (`frameDigest`) and the report; writes nothing |
 | `propose_edit` (2.4, 15.1) | `scene`, `prompt`, `selection?`, `requestId?` | a validated edit proposal: ops (each with a sentence), JSON `diff`, changed `layers`, `preview`, checks, and `provenance { generator: 'motionary-mcp/propose_edit', requestId }` (`requestId` = the argument or `params._meta.correlationId`); `applied: false` — writes nothing, Studio applies it only after review ([studio-provenance.md](./studio-provenance.md)) |
+| `validate_scene` (2.5, 15.9) | `scene`, `ops?`, `version?`, `browser?` | the scene checks `validate_snippet { scene }` runs (schema, component compatibility, headless render of every frame, optional ops and real browser) under `schema: 'motionary-mcp/validate_scene@1'` — motionary-mcp 3.0 (16.0) keeps scenes here only ([deprecations-v16.md](./deprecations-v16.md)) |
+
+**Deprecations (2.5, 15.9).** A call that uses an input shape motionary-mcp 3.0 removes still works and its result carries
+`deprecations: [{ id, removedIn: '16.0', message, doc }]` (one stderr line per id): `validate_snippet { scene }`
+(`mcp-snippet-scene` → `validate_scene`), `scene` as JSON text (`mcp-scene-text` → pass an object), and `check_compat`
+(`mcp-check-compat` → `check_compatibility`). See [deprecations-v16.md](./deprecations-v16.md).
 
 Unknown tags come back as tool errors (`isError: true`) with a hint to search first.
 

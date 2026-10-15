@@ -34,7 +34,8 @@ describe('14.6 tool contracts (additive)', () => {
     expect(t('validate_snippet').inputSchema.properties.ops).toBeTruthy();
     expect(t('suggest_motion').inputSchema.properties.format.enum).toEqual(['waapi', 'css', 'component', 'scene']);
     for (const n of ['check_compatibility', 'suggest_fix', 'validate_snippet']) expect(t(n).annotations.readOnlyHint).toBe(true);
-    expect(M.TOOLS.map((x: any) => x.name)).not.toContain('validate_scene');
+    // 15.9 (MCP 2.5) adds validate_scene as the 3.0 home of validate_snippet { scene }; the 14.6 inputs above still work
+    expect(M.TOOLS.map((x: any) => x.name).indexOf('validate_scene')).toBeGreaterThan(M.TOOLS.map((x: any) => x.name).indexOf('propose_edit'));
   });
   it('suggest_fix / validate_snippet still need code when no scene is given', async () => {
     await expect(Promise.resolve().then(() => M.callTool(m, 'suggest_fix', {}))).rejects.toThrow(/code/);

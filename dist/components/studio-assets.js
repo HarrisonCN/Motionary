@@ -332,4 +332,4 @@ function fromBase64(s) {
 }
 
 export { ASSET_LIMITS, AssetPathError, STUDIO_ASSETS_VERSION, STUDIO_PACK_FORMAT, assetKind, checkAssets, collectAssetRefs, crc32, createAssetManifest, fromBase64, isExternalAsset, normalizeAssetPath, packStudioProject, relinkAssets, resolveAssetPath, toBase64, unpackStudioProject };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.5.0/dist/components/studio-assets.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/components/studio-assets.js.map

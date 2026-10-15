@@ -32,7 +32,14 @@ const PROP = /^(--)?[a-zA-Z][\w-]*$/;
 const r2 = (n) => Math.round(n * 100) / 100 + 0;
 const fmt = (t) => `${(t / 1000).toFixed(3)} s`;
 const parseVal = (v) => (/^\s*-?(\d+\.?\d*|\.\d+)\s*$/.test(v) ? +v : v.trim());
-/** Build a Studio inside `root` for the history's document. */
+let warnedV3 = false;
+/** 15.9: one development notice per page that 16.0's exportScene() returns Scene v3. */
+function warnSceneV3() {
+    if (warnedV3 || globalThis.MOTIONARY_NO_DEPRECATION)
+        return;
+    warnedV3 = true;
+    console.warn('[motionary] studio.exportScene() returns Scene v3 from 16.0 — pass { version: 2 } to keep Scene v2 (docs/deprecations-v16.md#scene-v2-write)');
+}
 function createStudio(root, o) {
     const { history } = o;
     const D = root.ownerDocument;
@@ -738,7 +745,11 @@ function createStudio(root, o) {
         },
         frames: () => sampleFrames(doc(), { fps }),
         save: () => serializeStudioProject(doc(), { time, zoom, fps, collapsed: [...collapsed], springs }),
-        exportScene: () => timelineDocToScene(doc()),
+        exportScene(o) {
+            if ((!o || o.version !== 2) && typeof process !== 'undefined' && process.env.NODE_ENV !== 'production')
+                warnSceneV3();
+            return timelineDocToScene(doc());
+        },
         load(input) {
             const r = parseStudioProject(input);
             if (playing)
@@ -808,4 +819,4 @@ function createStudio(root, o) {
 }
 
 export { CURVE_PRESETS, STUDIO_VERSION, bezierEasing, createStudio, frameTime, parseBezier, parseStudioProject, sampleFrames, serializeStudioProject, springBezier, springParams };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.5.0/dist/components/studio.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/components/studio.js.map

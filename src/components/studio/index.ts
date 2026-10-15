@@ -103,7 +103,11 @@ export interface Studio {
   frames(): TimelineFrame[];
   /** The project as JSON text (Scene v2 + editor state). */
   save(): string;
-  exportScene(): SceneV2Doc;
+  /**
+   * The document as Scene v2. 15.9: called without `{ version: 2 }` it warns once that 16.0 returns Scene v3
+   * (docs/deprecations-v16.md#scene-v2-write); `{ version: 2 }` keeps v2 in 16.x too and never warns.
+   */
+  exportScene(o?: { version?: 2 }): SceneV2Doc;
   /** Open a project / Scene v2 / timeline v1 / animation JSON; resets the history; returns what a scene lost. */
   load(input: unknown): SceneLoss[];
   undo(): boolean;
@@ -121,6 +125,15 @@ const fmt = (t: number) => `${(t / 1000).toFixed(3)} s`;
 const parseVal = (v: string): TimelineValue => (/^\s*-?(\d+\.?\d*|\.\d+)\s*$/.test(v) ? +v : v.trim());
 
 /** Build a Studio inside `root` for the history's document. */
+declare const process: { env: Record<string, string | undefined> };
+let warnedV3 = false;
+/** 15.9: one development notice per page that 16.0's exportScene() returns Scene v3. */
+function warnSceneV3(): void {
+  if (warnedV3 || (globalThis as any).MOTIONARY_NO_DEPRECATION) return;
+  warnedV3 = true;
+  console.warn('[motionary] studio.exportScene() returns Scene v3 from 16.0 — pass { version: 2 } to keep Scene v2 (docs/deprecations-v16.md#scene-v2-write)');
+}
+
 export function createStudio(root: HTMLElement, o: StudioOptions): Studio {
   const { history } = o;
   const D = root.ownerDocument;
@@ -672,7 +685,10 @@ export function createStudio(root: HTMLElement, o: StudioOptions): Studio {
     },
     frames: () => sampleFrames(doc(), { fps }),
     save: () => serializeStudioProject(doc(), { time, zoom, fps, collapsed: [...collapsed], springs }),
-    exportScene: () => timelineDocToScene(doc()),
+    exportScene(o) {
+      if ((!o || o.version !== 2) && typeof process !== 'undefined' && process.env.NODE_ENV !== 'production') warnSceneV3();
+      return timelineDocToScene(doc());
+    },
     load(input) {
       const r = parseStudioProject(input);
       if (playing) stop();

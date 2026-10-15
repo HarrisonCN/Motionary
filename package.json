@@ -1,6 +1,6 @@
 {
   "name": "motionary",
-  "version": "15.5.0",
+  "version": "15.9.0",
   "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 209 animated Web Components (91 core, 118 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -658,6 +658,16 @@
       "require": {
         "types": "./dist/components/studio-a11y.d.cts",
         "default": "./dist/components/studio-a11y.cjs"
+      }
+    },
+    "./scene/v3-preview": {
+      "import": {
+        "types": "./dist/components/scene-v3-preview.d.ts",
+        "default": "./dist/components/scene-v3-preview.js"
+      },
+      "require": {
+        "types": "./dist/components/scene-v3-preview.d.cts",
+        "default": "./dist/components/scene-v3-preview.cjs"
       }
     },
     "./studio/store": {
@@ -1568,6 +1578,16 @@
       "require": {
         "types": "./dist/components/scene-v2.d.cts",
         "default": "./dist/components/scene-v2.cjs"
+      }
+    },
+    "./components/scene-v3-preview": {
+      "import": {
+        "types": "./dist/components/scene-v3-preview.d.ts",
+        "default": "./dist/components/scene-v3-preview.js"
+      },
+      "require": {
+        "types": "./dist/components/scene-v3-preview.d.cts",
+        "default": "./dist/components/scene-v3-preview.cjs"
       }
     },
     "./components/perf-tasks": {
@@ -4426,7 +4446,8 @@
     "templates",
     "!dist/**/*.map",
     "!docs/images",
-    "!docs/ROADMAP.md"
+    "!docs/ROADMAP.md",
+    "!dist/llms-full.txt"
   ],
   "sideEffects": [
     "*.css",

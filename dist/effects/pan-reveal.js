@@ -11,4 +11,4 @@ function registerPanReveal() {
 }
 
 export { effect, registerPanReveal as register, registerPanReveal };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.5.0/dist/effects/pan-reveal.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.9.0/dist/effects/pan-reveal.js.map
