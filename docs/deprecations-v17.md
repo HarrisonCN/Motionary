@@ -1,7 +1,7 @@
 # Removed in 17.0.0 (announced in 16.9)
 
-17.0 is the **platform-stable** major: Scene Format v3, the Studio plugin API (v1) and motionary-mcp 3.x are frozen.
-It removes only what 16.9 announced below. Everything on this page still works in 16.x (`v16-lts`).
+17.0 removes only what 16.9 announced below, and introduces the `mo-*` names ([below](#mo-names)). Studio (incl. the
+plugin API), MCP, AI, the Figma plugin and cross-platform export stay experimental ([stability.md](./stability.md)). Everything on this page still works in 16.x (`v16-lts`).
 In 16.9 each item had a development warning (once per session), a `doctor --v17` finding and a migration path; nothing
 here is in `motionary/components/lite` — lite stays ≤ 70 KB gzip with zero dependencies.
 
@@ -38,3 +38,19 @@ codemod runner) for 15.0. In 16.9 both print a notice on stderr. 17.0 removes th
 
 Not removed in 17.0: Scene v2 stays readable (and `exportScene({ version: 2 })` / `sceneV3ToV2()` keep writing it on
 request), `doctor --v16` / `migrate --to 16` stay, the codemods `usa-codemod-11` … `13` stay.
+
+<a id="mo-names"></a>
+## `mo-*` names (17.0) — `usa-*` deprecated, kept
+
+17.0 adds Motionary-named aliases. The old names keep working; they are deprecated, and their removal is **not before a
+future major** (none is planned). Nothing to do now; prefer the new names in new code.
+
+| Deprecated (still works) | Preferred since 17.0 |
+|---|---|
+| every `<usa-*>` element, e.g. `<usa-switch>` | `<mo-*>`, e.g. `<mo-switch>` (same element: a subclass, same attributes, properties and `usa:*` events) |
+| `window.UsaComponents` (CDN bundle `components.umd.js`) | `window.MotionaryComponents` (the same object) |
+| `npx -p motionary usa-codemod-<n>` | `npx -p motionary mo-codemod <n>` (same runner as `npx motionary codemod <n>`) |
+
+Notes: aliases exist for the default tags; an element you registered under your own name (`defineSwitch('my-switch')`)
+gets none. CSS that targets `usa-switch` does not match `<mo-switch>`; the component's own styles are copied for `mo-*`
+the first time a `mo-*` element connects. Event names stay `usa:*`.

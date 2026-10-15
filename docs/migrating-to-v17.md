@@ -1,14 +1,16 @@
 # Migrating to 17.0
 
-> 16.x stays supported as `v16-lts` (security and severe fixes at least until 18.0 ships). The frozen contracts and the
-> LTS policy: [stability.md](./stability.md).
+> 16.x stays supported as `v16-lts` (security and severe fixes at least until 18.0 ships). Stable core, experimental
+> surfaces and the LTS policy: [stability.md](./stability.md).
 
-17.0 is the **platform-stable** major. It freezes three contracts and removes only what 16.9 announced:
+17.0 removes only what 16.9 announced and adds Motionary-named aliases:
 
-- **Scene Format v3** — frozen: 17.x only adds optional fields; validators accept every 16.x v3 file.
-- **Studio plugin API v1** (`motionary/studio/plugins`, preview in 16.2) — the manifest (`api: 1`), the permissions and
-  the `motionary` object inside a plugin are frozen; 17.x adds permissions only as opt-in.
-- **motionary-mcp 3.x** — tool names and input schemas are frozen; 3.x minors only add tools / optional fields.
+- **Removed:** the `motionary/scene/v3-preview` import path and the CLI's v15 project migration
+  ([deprecations-v17.md](./deprecations-v17.md)).
+- **New names, old ones kept:** `<mo-*>` for every `<usa-*>` element, `window.MotionaryComponents`, `mo-codemod`. The
+  `usa-*` names are deprecated but keep working; removal not before a future major ([details](./deprecations-v17.md#mo-names)).
+- **Unchanged:** Scene Format v3 stays stable; Studio (incl. the plugin API), MCP 3.x, AI, the Figma plugin and
+  cross-platform export stay experimental.
 
 ## Steps
 
