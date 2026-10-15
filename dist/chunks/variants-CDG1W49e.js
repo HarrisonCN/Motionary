@@ -32,4 +32,4 @@ function setVariant(variant, root = typeof document !== 'undefined' ? document.d
 }
 
 export { VARIANTS as V, adoptVariants as a, setVariant as s };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.2.0/dist/chunks/variants-CDG1W49e.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.3.0/dist/chunks/variants-CDG1W49e.js.map

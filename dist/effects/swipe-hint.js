@@ -11,4 +11,4 @@ function registerSwipeHint() {
 }
 
 export { effect, registerSwipeHint as register, registerSwipeHint };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.2.0/dist/effects/swipe-hint.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.3.0/dist/effects/swipe-hint.js.map

@@ -250,4 +250,4 @@ function toAppStorage(store, o = {}) {
 }
 
 export { STORE_LIMITS, STUDIO_STORE_VERSION, StoreError, contentTag, createHttpProjectStore, createIndexedDBProjectStore, createMemoryProjectStore, detectConflict, mergeProjects, toAppStorage };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.2.0/dist/components/studio-store.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.3.0/dist/components/studio-store.js.map
