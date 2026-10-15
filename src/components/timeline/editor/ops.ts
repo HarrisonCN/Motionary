@@ -4,16 +4,10 @@
  * snapshots stay cheap) and never edits a locked layer.
  */
 import {
-  isLayerLocked, isValidEasing, TimelineDocError,
+  isLayerLocked, isValidEasing, docError as bad, round, byTime,
   type TimelineDoc, type TimelineKeyframe, type TimelineLayer, type TimelineValue,
 } from './format';
 
-const bad = (path: string, message: string) => new TimelineDocError([{ path, message }]);
-const round = (n: number) => {
-  const r = Math.round(n * 1e4) / 1e4;
-  return r === 0 ? 0 : r;
-};
-const byTime = (ks: TimelineKeyframe[]) => ks.map((k, i) => [k, i] as const).sort((a, b) => a[0].time - b[0].time || a[1] - b[1]).map(([k]) => k);
 
 /** A fresh id `prefix<n>` unused by any layer or keyframe of `doc`. */
 export function uniqueId(doc: TimelineDoc, prefix = 'id', taken: Set<string> = new Set()): string {

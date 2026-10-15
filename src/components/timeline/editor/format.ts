@@ -65,6 +65,15 @@ export class TimelineDocError extends Error {
     this.problems = problems;
   }
 }
+/** @internal One-problem `TimelineDocError`. */
+export const docError = (path: string, message: string): TimelineDocError => new TimelineDocError([{ path, message }]);
+/** @internal Round to 1e-4 (no -0); shared by the editor modules. */
+export const round = (n: number): number => {
+  const r = Math.round(n * 1e4) / 1e4;
+  return r === 0 ? 0 : r;
+};
+/** @internal Keyframes sorted by time, stable for equal times. */
+export const byTime = <K extends { time: number }>(ks: readonly K[]): K[] => ks.map((k, i) => [k, i] as const).sort((a, b) => a[0].time - b[0].time || a[1] - b[1]).map(([k]) => k);
 
 const L = TIMELINE_DOC_LIMITS;
 const FORBIDDEN = /*#__PURE__*/ new Set(['__proto__', 'constructor', 'prototype']);
@@ -200,10 +209,7 @@ export function normalizeTimelineDoc(doc: TimelineDoc): TimelineDoc {
     if (l.solo) n.solo = true;
     if (l.type === 'track') {
       if (l.target !== undefined) n.target = l.target;
-      n.keyframes = (l.keyframes || [])
-        .map((k, i) => [k, i] as const)
-        .sort((a, b) => a[0].time - b[0].time || a[1] - b[1])
-        .map(([k]) => {
+      n.keyframes = byTime(l.keyframes || []).map((k) => {
           const kf: TimelineKeyframe = { id: k.id, time: k.time, props: sortKeys({ ...k.props }) };
           if (k.easing !== undefined && k.easing !== 'linear') kf.easing = k.easing;
           return kf;
@@ -222,11 +228,11 @@ export function normalizeTimelineDoc(doc: TimelineDoc): TimelineDoc {
 export function parseTimelineDoc(input: string | unknown): TimelineDoc {
   let data: unknown = input;
   if (typeof input === 'string') {
-    if (input.length > L.textBytes) throw new TimelineDocError([{ path: '', message: `text longer than ${L.textBytes} characters` }]);
+    if (input.length > L.textBytes) throw docError('', `text longer than ${L.textBytes} characters`);
     try {
       data = JSON.parse(input);
     } catch (e) {
-      throw new TimelineDocError([{ path: '', message: `invalid JSON (${(e as Error).message})` }]);
+      throw docError('', `invalid JSON (${(e as Error).message})`);
     }
   }
   const problems = validateTimelineDoc(data);
@@ -283,10 +289,6 @@ const hash = (s: string, seed: number): number => {
   for (let i = 0; i < s.length; i++) h = Math.imul(h ^ s.charCodeAt(i), 16777619) >>> 0;
   return h;
 };
-const round = (n: number) => {
-  const r = Math.round(n * 1e4) / 1e4;
-  return r === 0 ? 0 : r;
-};
 /**
  * Replace `random(a, b)` in a value with a number that depends only on the
  * seed and `key` (layer / keyframe / property), never on call order.
@@ -339,8 +341,8 @@ export function timelineDocToAnimation(doc: TimelineDoc): AnimationJSON {
  */
 export function timelineDocFromAnimation(input: AnimationJSON | string): { doc: TimelineDoc; skipped: number[] } {
   const a: any = typeof input === 'string' ? JSON.parse(input) : input;
-  if (!isObj(a) || !Array.isArray(a.tracks)) throw new TimelineDocError([{ path: 'tracks', message: 'expected an animation with "tracks"' }]);
-  if (a.format !== undefined && a.format !== 'use-scroll-animate/animation') throw new TimelineDocError([{ path: 'format', message: `unsupported animation format "${String(a.format)}"` }]);
+  if (!isObj(a) || !Array.isArray(a.tracks)) throw docError('tracks', 'expected an animation with "tracks"');
+  if (a.format !== undefined && a.format !== 'use-scroll-animate/animation') throw docError('format', `unsupported animation format "${String(a.format)}"`);
   const layers: TimelineLayer[] = [];
   const skipped: number[] = [];
   a.tracks.forEach((t: any, i: number) => {
