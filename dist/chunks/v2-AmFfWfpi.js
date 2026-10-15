@@ -765,4 +765,4 @@ function formatMigrationReport(r, file = 'input') {
 }
 
 export { SCENE_V2_FORMAT as S, SCENE_V2_LIMITS as a, SCENE_V2_STATUS as b, SCENE_V2_VERSION as c, detectMotionFormat as d, diffJson as e, formatMigrationReport as f, isTokenRef as g, sceneV2FromAnimation as h, isSceneV2 as i, sceneV2FromTimeline as j, sceneV2ToAnimation as k, sceneV2ToTimeline as l, migrateToSceneV2 as m, normalizeSceneV2 as n, serializeSceneV2 as o, resolveSceneTokens as r, sceneV2ComponentLayer as s, tokenizeValue as t, validateSceneV2 as v };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.2.0/dist/chunks/v2-AmFfWfpi.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.3.0/dist/chunks/v2-AmFfWfpi.js.map

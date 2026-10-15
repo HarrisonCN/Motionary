@@ -58,7 +58,9 @@ async function createStudioApp(root, o = {}) {
     status.setAttribute('aria-live', 'polite');
     const host = d.createElement('div');
     const aiHost = d.createElement('div');
-    el.append(bar, host, aiHost, status);
+    const css = d.createElement('style');
+    css.textContent = '.usa-studio-app :focus-visible{outline:2px solid #0a84ff;outline-offset:2px}';
+    el.append(css, bar, host, aiHost, status);
     root.append(el);
     const { name: _n, storage: _s, assets: _a, ai: _ai, onStatus: _o, ...studioOpts } = o;
     const studio = components_studio.createStudio(host, { ...studioOpts, fps, history: history$1 });
@@ -237,4 +239,4 @@ exports.STUDIO_APP_VERSION = STUDIO_APP_VERSION;
 exports.createLocalStorage = createLocalStorage;
 exports.createMemoryStorage = createMemoryStorage;
 exports.createStudioApp = createStudioApp;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.2.0/dist/components/studio-app.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.3.0/dist/components/studio-app.cjs.map

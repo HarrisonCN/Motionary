@@ -5,4 +5,4 @@ var widgets_reactions = require('../chunks/reactions-BL2iO8iy.cjs');
 
 
 exports.defineReactions = widgets_reactions.defineReactions;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.2.0/dist/widgets/reactions.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.3.0/dist/widgets/reactions.cjs.map

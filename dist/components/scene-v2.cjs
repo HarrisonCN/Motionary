@@ -120,4 +120,4 @@ exports.serializeSceneV2 = v2.serializeSceneV2;
 exports.tokenizeValue = v2.tokenizeValue;
 exports.validateSceneV2 = v2.validateSceneV2;
 exports.SCENE_V2_SCHEMA = SCENE_V2_SCHEMA;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.2.0/dist/components/scene-v2.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.3.0/dist/components/scene-v2.cjs.map

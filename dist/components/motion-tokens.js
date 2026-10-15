@@ -12,6 +12,8 @@ const MOTION_TOKENS_VERSION = 2;
 const SEMANTIC_KINDS = ['enter', 'exit', 'emphasis', 'transition'];
 /** The built-in reduced-motion mode (derived from any set; explicit overrides apply on top). */
 const REDUCED_MOTION_MODE = 'reduced';
+/** 15.3: the built-in gentle mode — half the travel, durations ≤ 300 ms, no overshoot (opt-in: no OS setting maps to it). */
+const GENTLE_MOTION_MODE = 'gentle';
 const PRIM = ['duration', 'easing', 'spring', 'distance'];
 const NAME = /^[A-Za-z0-9_-]+$/;
 const REF = /^\{([^{}]+)\}$/;
@@ -124,7 +126,41 @@ function reducedMotionOverrides(set) {
         }
     return o;
 }
-/** The set as seen in `mode` (or several, applied in order); `reduced` is always available. The result has no `modes`. */
+/** 15.3: the gentle-motion overrides derived from a set: travel halved (rounded), durations ≤ 300 ms, no overshooting curves, springs at least 80 % of critical damping. Only changed values are listed. */
+function gentleMotionOverrides(set) {
+    var _a;
+    const o = { duration: {}, easing: {}, spring: {}, distance: {}, semantic: {} };
+    for (const k of keys(set.duration))
+        if (set.duration[k] > 300)
+            o.duration[k] = 300;
+    for (const k of keys(set.distance)) {
+        const v = Math.round(set.distance[k] * 0.5);
+        if (v !== set.distance[k])
+            o.distance[k] = v;
+    }
+    for (const k of keys(set.easing)) {
+        const b = bez(set.easing[k]);
+        if (b && (b[1] < 0 || b[1] > 1 || b[3] < 0 || b[3] > 1))
+            o.easing[k] = 'cubic-bezier(0.2, 0, 0, 1)';
+    }
+    for (const k of keys(set.spring)) {
+        const s = set.spring[k], min = up(0.8 * 2 * Math.sqrt(s.stiffness * s.mass));
+        if (s.damping < min)
+            o.spring[k] = { damping: min };
+    }
+    for (const kind of keys(set.semantic))
+        for (const n of keys(set.semantic[kind] || {})) {
+            const e = set.semantic[kind][n], p = {};
+            if (typeof e.distance === 'number' && e.distance)
+                p.distance = Math.round(e.distance * 0.5);
+            if (typeof e.duration === 'number' && e.duration > 300)
+                p.duration = 300;
+            if (keys(p).length)
+                ((_a = o.semantic)[kind] || (_a[kind] = {}))[n] = p;
+        }
+    return o;
+}
+/** The set as seen in `mode` (or several, applied in order); `reduced` and `gentle` (15.3) are always available. The result has no `modes`. */
 function withMode(set, mode) {
     const out = cloneSet(set);
     delete out.modes;
@@ -132,8 +168,10 @@ function withMode(set, mode) {
         const explicit = set.modes && own(set.modes, m) ? set.modes[m] : undefined;
         if (m === REDUCED_MOTION_MODE)
             mergeOv(out, reducedMotionOverrides(out));
+        else if (m === GENTLE_MOTION_MODE)
+            mergeOv(out, gentleMotionOverrides(out));
         else if (!explicit)
-            throw new Error(`[motionary] tokens: unknown mode "${m}" (have: ${[REDUCED_MOTION_MODE, ...keys(set.modes || {})].join(', ')})`);
+            throw new Error(`[motionary] tokens: unknown mode "${m}" (have: ${[REDUCED_MOTION_MODE, GENTLE_MOTION_MODE, ...keys(set.modes || {})].join(', ')})`);
         mergeOv(out, explicit);
     }
     return out;
@@ -530,7 +568,7 @@ function motionTokenSetToCss(set, o = {}) {
     if (o.modes === false)
         return css;
     const diff = (m) => Object.fromEntries(Object.entries(motionTokenSetVars(set, { ...o, mode: m })).filter(([k, x]) => base[k] !== x));
-    const names = [...new Set([REDUCED_MOTION_MODE, ...keys(set.modes || {})])];
+    const names = [...new Set([REDUCED_MOTION_MODE, GENTLE_MOTION_MODE, ...keys(set.modes || {})])];
     for (const m of names) {
         const d = diff(m);
         if (!keys(d).length)
@@ -807,5 +845,5 @@ function motionTokensFromFigma(json, o = {}) {
     return out;
 }
 
-export { MOTION_TOKENS_2, MOTION_TOKENS_VERSION, REDUCED_MOTION_MODE, SEMANTIC_KINDS, applyMotionTokenSet, defineMotionTokens, isCssEasing, kebab, motionKeyframes, motionOptions, motionTokenSetFromDTCG, motionTokenSetToCss, motionTokenSetToDTCG, motionTokenSetVars, motionTokensFromFigma, motionTokensToFigma, prefersReducedMotion, reducedMotionOverrides, resolveMotionToken, resolveSemantic, toSceneTokens, tokenRefPath, validateMotionTokens, withMode, withSceneTokens };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.2.0/dist/components/motion-tokens.js.map
+export { GENTLE_MOTION_MODE, MOTION_TOKENS_2, MOTION_TOKENS_VERSION, REDUCED_MOTION_MODE, SEMANTIC_KINDS, applyMotionTokenSet, defineMotionTokens, gentleMotionOverrides, isCssEasing, kebab, motionKeyframes, motionOptions, motionTokenSetFromDTCG, motionTokenSetToCss, motionTokenSetToDTCG, motionTokenSetVars, motionTokensFromFigma, motionTokensToFigma, prefersReducedMotion, reducedMotionOverrides, resolveMotionToken, resolveSemantic, toSceneTokens, tokenRefPath, validateMotionTokens, withMode, withSceneTokens };
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.3.0/dist/components/motion-tokens.js.map

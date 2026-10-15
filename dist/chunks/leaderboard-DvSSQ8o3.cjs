@@ -119,4 +119,4 @@ function defineLeaderboard(tag = 'usa-leaderboard') {
 
 exports.defineLeaderboard = defineLeaderboard;
 exports.rankRows = rankRows;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.2.0/dist/chunks/leaderboard-DvSSQ8o3.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.3.0/dist/chunks/leaderboard-DvSSQ8o3.cjs.map

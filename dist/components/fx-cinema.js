@@ -91,4 +91,4 @@ function registerCinemaPack() {
 }
 
 export { CAMERA_MOVES, CINEMA_FX, cameraFrame, registerCinemaPack };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.2.0/dist/components/fx-cinema.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.3.0/dist/components/fx-cinema.js.map

@@ -209,4 +209,4 @@ function installToastTriggers() {
 exports.TOAST_POSITIONS = TOAST_POSITIONS;
 exports.defineToastStack = defineToastStack;
 exports.stackToast = stackToast;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.2.0/dist/chunks/toast-stack-DprisNp_.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.3.0/dist/chunks/toast-stack-DprisNp_.cjs.map

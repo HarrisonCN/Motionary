@@ -358,4 +358,4 @@ function registerPhysicsPack() {
 exports.PHYSICS2_FX = PHYSICS2_FX;
 exports.VerletWorld = VerletWorld;
 exports.registerPhysicsPack = registerPhysicsPack;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.2.0/dist/components/fx-physics.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.3.0/dist/components/fx-physics.cjs.map

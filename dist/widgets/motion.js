@@ -32,4 +32,4 @@ function defineMotion(tag = 'usa-motion') {
 }
 
 export { defineMotion };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.2.0/dist/widgets/motion.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.3.0/dist/widgets/motion.js.map

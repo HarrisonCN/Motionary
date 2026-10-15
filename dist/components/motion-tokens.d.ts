@@ -45,6 +45,8 @@ declare const SEMANTIC_KINDS: readonly ["enter", "exit", "emphasis", "transition
 type SemanticKind = (typeof SEMANTIC_KINDS)[number];
 /** The built-in reduced-motion mode (derived from any set; explicit overrides apply on top). */
 declare const REDUCED_MOTION_MODE = "reduced";
+/** 15.3: the built-in gentle mode — half the travel, durations ≤ 300 ms, no overshoot (opt-in: no OS setting maps to it). */
+declare const GENTLE_MOTION_MODE = "gentle";
 /** A semantic motion: literals or references to primitives (`"{duration.fast}"`, `"{distance.md}"`, `"{spring.snappy}"`). */
 interface SemanticToken {
     /** ms or `"{duration.x}"`. */
@@ -98,7 +100,9 @@ declare const MOTION_TOKENS_2: MotionTokenSet;
 declare function defineMotionTokens(partial?: MotionTokenInput, base?: MotionTokenSet): MotionTokenSet;
 /** The reduced-motion overrides derived from a set: no travel, durations ≤ 150 ms, no overshooting curves, critically damped springs. */
 declare function reducedMotionOverrides(set: MotionTokenSet): MotionTokenOverrides;
-/** The set as seen in `mode` (or several, applied in order); `reduced` is always available. The result has no `modes`. */
+/** 15.3: the gentle-motion overrides derived from a set: travel halved (rounded), durations ≤ 300 ms, no overshooting curves, springs at least 80 % of critical damping. Only changed values are listed. */
+declare function gentleMotionOverrides(set: MotionTokenSet): MotionTokenOverrides;
+/** The set as seen in `mode` (or several, applied in order); `reduced` and `gentle` (15.3) are always available. The result has no `modes`. */
 declare function withMode(set: MotionTokenSet, mode?: string | string[]): MotionTokenSet;
 /** One semantic motion, resolved to literals (falls back to the kind's `default`). */
 declare function resolveSemantic(set: MotionTokenSet, kind: SemanticKind, name?: string, mode?: string | string[]): ResolvedMotion;
@@ -238,5 +242,5 @@ declare function motionTokensFromFigma(json: unknown, o?: {
     base?: MotionTokenSet;
 }): MotionTokenSet;
 
-export { MOTION_TOKENS_2, MOTION_TOKENS_VERSION, REDUCED_MOTION_MODE, SEMANTIC_KINDS, applyMotionTokenSet, defineMotionTokens, isCssEasing, kebab, motionKeyframes, motionOptions, motionTokenSetFromDTCG, motionTokenSetToCss, motionTokenSetToDTCG, motionTokenSetVars, motionTokensFromFigma, motionTokensToFigma, prefersReducedMotion, reducedMotionOverrides, resolveMotionToken, resolveSemantic, toSceneTokens, tokenRefPath, validateDesignTokens, validateMotionTokens, withMode, withSceneTokens };
+export { GENTLE_MOTION_MODE, MOTION_TOKENS_2, MOTION_TOKENS_VERSION, REDUCED_MOTION_MODE, SEMANTIC_KINDS, applyMotionTokenSet, defineMotionTokens, gentleMotionOverrides, isCssEasing, kebab, motionKeyframes, motionOptions, motionTokenSetFromDTCG, motionTokenSetToCss, motionTokenSetToDTCG, motionTokenSetVars, motionTokensFromFigma, motionTokensToFigma, prefersReducedMotion, reducedMotionOverrides, resolveMotionToken, resolveSemantic, toSceneTokens, tokenRefPath, validateDesignTokens, validateMotionTokens, withMode, withSceneTokens };
 export type { CssOptions, DTCGOptions, FigmaAlias, FigmaExportOptions, FigmaResolvedType, FigmaValue, FigmaVariablesBody, MotionTokenInput, MotionTokenOverrides, MotionTokenSet, ResolvedMotion, SemanticKind, SemanticToken, SpringToken };
