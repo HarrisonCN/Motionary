@@ -38,7 +38,9 @@ describe('15.3 tokens: built-in gentle mode', () => {
   it('the CSS has a gentle block under [data-usa-motion-mode~="gentle"] and never under a media query', () => {
     const css = motionTokenSetToCss(defineMotionTokens({}));
     expect(css).toMatch(/\[data-usa-motion-mode~="gentle"\] \{/);
-    expect(css).not.toMatch(/@media[^{]*\{[^@]*gentle/);
+    const media = css.split('@media').slice(1).map((b) => b.slice(0, b.indexOf('}\n}') + 3));
+    expect(media.length).toBe(1); // reduced only
+    for (const b of media) expect(b).not.toMatch(/gentle/);
   });
 });
 
