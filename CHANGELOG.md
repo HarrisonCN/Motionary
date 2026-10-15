@@ -7,6 +7,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [15.2.0] - 2026-10-15
+
+**Cross-platform export 2.0.** One Scene v2 document → CSS, mini-program WXSS, HarmonyOS ArkTS, Jetpack Compose or
+SwiftUI, each with a per-property loss report. Additive; zero runtime dependencies; `motionary/components/lite`
+unchanged; the new entry has its own size-budget line and no existing line was raised.
+[docs/studio-native.md](docs/studio-native.md)
+
+### Added
+
+- **`motionary/studio/native`** (= `motionary/components/studio-native`): `exportNative(doc, { target })` for a Scene v2
+  document, a timeline v1 document or a Studio project `{ doc }` → `{ code, file, report }`. Targets `css`, `wxss`
+  (`rpx: true` for 2rpx per px), `arkts` (`UIContext.keyframeAnimateTo`, API 11+), `compose` (`updateTransition` +
+  `keyframes {}` + `graphicsLayer`), `swiftui` (`keyframeAnimator`, iOS 17+). Native subset on every target: opacity,
+  translate (px) / scale / 2D rotate, hex `color` / `background-color`, `linear` / `ease*` / `cubic-bezier()` easings.
+  Every animated property of every playing track is reported once, as `supported` or `lost` with a reason — nothing is
+  dropped silently. Reduced motion is handled in every target (CSS media query + class, Compose `reduceMotion` → `snap()`,
+  SwiftUI `accessibilityReduceMotion`, ArkTS `reduceMotion`). `NATIVE_TARGETS`, `nativeSupport(target, feature)`,
+  `STUDIO_NATIVE_VERSION` (1).
+- `report.ai` lists the 15.1 provenance records that touched an exported layer (deferred from 15.1: "the export report
+  lists AI changes"). The generated code is the same with or without provenance.
+- **`npx motionary export --scene scene.json --target css|wxss|arkts|compose|swiftui [--out f] [--report f] [--strict]`**:
+  lost properties are listed on stderr; `--strict` exits 1 when anything is lost; an unknown target exits 2. The 12.1
+  `export --target css|wxss|arkts` (presets + tokens) is unchanged.
+- Golden files `test/golden/native-15-2/` for all five targets, plus a bracket / string balance check (CI has no Kotlin /
+  Swift / ArkTS compiler — compile the output in your app before shipping it).
+
+### Changed
+
+- `docs/contract-report.json` is written as compact JSON (same data; 101.6 KB → 61.0 KB in the package). With it the
+  package stays under its unchanged 14 MB unpacked limit.
+
 ## [15.1.0] - 2026-10-14
 
 **AI edit provenance & Gateway lineage.** Every AI change in a Studio project can say where it came from, and an applied
