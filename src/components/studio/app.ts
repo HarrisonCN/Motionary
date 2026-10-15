@@ -109,7 +109,9 @@ export async function createStudioApp(root: HTMLElement, o: StudioAppOptions = {
   status.setAttribute('aria-live', 'polite');
   const host = d.createElement('div');
   const aiHost = d.createElement('div');
-  el.append(bar, host, aiHost, status);
+  const css = d.createElement('style');
+  css.textContent = '.usa-studio-app :focus-visible{outline:2px solid #0a84ff;outline-offset:2px}';
+  el.append(css, bar, host, aiHost, status);
   root.append(el);
   const { name: _n, storage: _s, assets: _a, ai: _ai, onStatus: _o, ...studioOpts } = o;
   const studio = createStudio(host, { ...studioOpts, fps, history });
