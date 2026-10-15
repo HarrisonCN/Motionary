@@ -10,6 +10,7 @@ import { normalizeTimelineDoc, parseTimelineDoc, timelineDocFromAnimation, Timel
 import type { TimelineDoc, TimelineLayer, TimelineKeyframe, TimelineValue } from './format';
 import { MOTION_TOKENS } from '../../tokens/index';
 import type { SceneV2Doc } from '../../scene/v2';
+import { flatSceneV3ToV2 } from '../../scene/v3-read';
 
 /** What a scene loses when opened as a timeline v1 document. */
 export interface SceneLoss { path: string; message: string }
@@ -69,17 +70,19 @@ export function timelineDocFromScene(scene: SceneV2Doc): { doc: TimelineDoc; los
   return { doc: normalizeTimelineDoc(out), lost };
 }
 
-/** Open any motion document (object or JSON text) as an editor document; throws `TimelineDocError` on anything else. */
+const err3 = (): never => { throw new TimelineDocError([{ path: 'layers', message: 'nested compositions / component layers: read it with sceneV3ToV2() (motionary/scene/v3) or open it in the Studio' }]); };
+/** Open any motion document (object or JSON text; Scene v3 without comps / components since 16.0) as an editor document; throws `TimelineDocError` on anything else. */
 export function loadMotionDoc(input: unknown): { doc: TimelineDoc; lost: SceneLoss[] } {
   let d: any = input;
   if (typeof input === 'string') {
     try { d = JSON.parse(input); } catch (e) { throw new TimelineDocError([{ path: '', message: `invalid JSON (${(e as Error).message})` }]); }
   }
+  if (d?.format === 'motionary-scene' && d.version === 3) d = flatSceneV3ToV2(d) || err3();
   if (d?.format === 'motionary-scene' && d.version === 2 && Array.isArray(d.layers)) return timelineDocFromScene(d);
   if (d?.format === TIMELINE_DOC_FORMAT) return { doc: parseTimelineDoc(d), lost: [] };
   if (d && Array.isArray(d.tracks)) {
     const { doc, skipped } = timelineDocFromAnimation(d);
     return { doc, lost: skipped.map((i) => ({ path: `tracks[${i}]`, message: 'no keyframes' })) };
   }
-  throw new TimelineDocError([{ path: 'format', message: 'not scene v2, timeline v1 or animation JSON v1' }]);
+  throw new TimelineDocError([{ path: 'format', message: 'not scene v3 / v2, timeline v1 or animation JSON v1' }]);
 }

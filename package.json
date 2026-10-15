@@ -660,14 +660,24 @@
         "default": "./dist/components/studio-a11y.cjs"
       }
     },
-    "./scene/v3-preview": {
+    "./scene/v3": {
       "import": {
-        "types": "./dist/components/scene-v3-preview.d.ts",
-        "default": "./dist/components/scene-v3-preview.js"
+        "types": "./dist/components/scene-v3.d.ts",
+        "default": "./dist/components/scene-v3.js"
       },
       "require": {
-        "types": "./dist/components/scene-v3-preview.d.cts",
-        "default": "./dist/components/scene-v3-preview.cjs"
+        "types": "./dist/components/scene-v3.d.cts",
+        "default": "./dist/components/scene-v3.cjs"
+      }
+    },
+    "./scene/v3-preview": {
+      "import": {
+        "types": "./dist/components/scene-v3.d.ts",
+        "default": "./dist/components/scene-v3.js"
+      },
+      "require": {
+        "types": "./dist/components/scene-v3.d.cts",
+        "default": "./dist/components/scene-v3.cjs"
       }
     },
     "./studio/store": {
@@ -1580,14 +1590,24 @@
         "default": "./dist/components/scene-v2.cjs"
       }
     },
-    "./components/scene-v3-preview": {
+    "./components/scene-v3": {
       "import": {
-        "types": "./dist/components/scene-v3-preview.d.ts",
-        "default": "./dist/components/scene-v3-preview.js"
+        "types": "./dist/components/scene-v3.d.ts",
+        "default": "./dist/components/scene-v3.js"
       },
       "require": {
-        "types": "./dist/components/scene-v3-preview.d.cts",
-        "default": "./dist/components/scene-v3-preview.cjs"
+        "types": "./dist/components/scene-v3.d.cts",
+        "default": "./dist/components/scene-v3.cjs"
+      }
+    },
+    "./components/scene-v3-preview": {
+      "import": {
+        "types": "./dist/components/scene-v3.d.ts",
+        "default": "./dist/components/scene-v3.js"
+      },
+      "require": {
+        "types": "./dist/components/scene-v3.d.cts",
+        "default": "./dist/components/scene-v3.cjs"
       }
     },
     "./components/perf-tasks": {

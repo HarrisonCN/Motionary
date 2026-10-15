@@ -9,12 +9,15 @@
 import type { AnimationJSON, AnimationTrack } from '../effects/player';
 import { getMotionTokens } from '../tokens/index';
 import { resolveRandom } from '../timeline/editor/format';
+import { flatSceneV3ToV2 } from './v3-read';
 
 /** @internal `{group.name}` token reference. */
 export const REF = /^\{(duration|easing|spring)\.([\w-]+)\}$/;
 
-/** Scene v2 / timeline v1 → playable animation JSON v1. Throws on a document it cannot read. */
+const fail3 = (): never => { throw new Error('[motionary] scene: this Scene v3 document has nested compositions / component layers — read it with sceneV3ToV2() from motionary/scene/v3 first'); };
+/** Scene v3 (flat) / v2 / timeline v1 → playable animation JSON v1. Throws on a document it cannot read. */
 export function sceneToAnimation(d: any): Required<Pick<AnimationJSON, 'tracks' | 'duration' | 'loop' | 'name'>> {
+  if (d.format === 'motionary-scene' && d.version === 3) d = flatSceneV3ToV2(d) || fail3(); // 16.0: flat Scene v3 plays natively
   if (d.version !== (d.format === 'motionary-scene' ? 2 : d.format === 'motionary-timeline' ? 1 : NaN) || !Array.isArray(d.layers))
     throw new Error(`[motionary] scene: cannot read ${d.format} v${d.version} with "layers" ${typeof d.layers} (validateSceneV2 from motionary/scene explains; a newer version needs a newer motionary)`);
   const tok = getMotionTokens() as any;

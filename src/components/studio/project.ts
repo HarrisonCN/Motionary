@@ -7,6 +7,7 @@
  * every frame at a fixed frame rate, a pure function of the document.
  */
 import { loadMotionDoc, timelineDocToScene, type SceneLoss } from '../timeline/editor/scene';
+import { flattenSceneV3 } from '../scene/v3-read';
 import { validateTimelineDoc, timelineDocDuration, TimelineDocError, TIMELINE_DOC_LIMITS, type TimelineDoc } from '../timeline/editor/format';
 import { sampleTimelineDoc, type TimelineFrame } from '../timeline/editor/preview';
 import { springBezier, springParams, type SpringParams } from './curve';
@@ -89,7 +90,12 @@ export function parseStudioProject(input: unknown): { doc: TimelineDoc; ui: Stud
     if (d.version !== STUDIO_PROJECT_VERSION) throw fail('version', `expected ${STUDIO_PROJECT_VERSION}`);
     ui = d.studio;
     d = d.scene;
-    if (!isObj(d) || d.format !== 'motionary-scene') throw fail('scene', 'expected a Scene Format v2 document');
+    if (!isObj(d) || d.format !== 'motionary-scene') throw fail('scene', 'expected a Scene Format v3 / v2 document');
+  }
+  let lost3: SceneLoss[] = [];
+  if (d.format === 'motionary-scene' && d.version === 3 && Array.isArray(d.layers)) {
+    // 16.0: any Scene v3 — nested compositions become groups, component instances are expanded (losses reported)
+    try { const f = flattenSceneV3(d); d = f.doc; lost3 = f.lost; } catch (e) { throw fail('scene', `unreadable Scene v3 (${(e as Error)?.message || e})`); }
   }
   if (d.format === 'motionary-scene') {
     // shape check before mapping (the mapping trusts its input)
@@ -101,5 +107,5 @@ export function parseStudioProject(input: unknown): { doc: TimelineDoc; ui: Stud
   try { r = loadMotionDoc(d); } catch (e) { throw e instanceof TimelineDocError ? e : fail('', String((e as Error)?.message || e)); }
   const problems = validateTimelineDoc(r.doc);
   if (problems.length) throw new TimelineDocError(problems);
-  return { doc: r.doc, ui: cleanUiState(r.doc, ui), lost: r.lost };
+  return { doc: r.doc, ui: cleanUiState(r.doc, ui), lost: [...lost3, ...r.lost] };
 }

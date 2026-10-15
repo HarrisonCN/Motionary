@@ -15,7 +15,7 @@
 // Old subpaths still work (removed in 13.0) and never warn at runtime; `doctor` is how a project finds them.
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, extname } from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { pathToFileURL, fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 import { writeFileSync } from 'node:fs';
 import { exportMotion, TARGETS } from './xplat.mjs';
@@ -128,10 +128,10 @@ export function runExportScene(rest, N) {
   }
 }
 /** `motionary migrate` (13.9): returns the exit code. `S` = the scene-v2 module (dist/components/scene-v2.js). */
-export function runMigrate(rest, S) {
+export function runMigrate(rest, S, V3) {
   const outFile = flag(rest, 'out');
   const files = rest.filter((a, i) => !a.startsWith('--') && rest[i - 1] !== '--out');
-  if (!files.length) { console.error('usage: motionary migrate <files…> [--dry-run] [--write | --out file] [--diff] [--report] [--json] [--tokenize]'); return 2; }
+  if (!files.length) { console.error('usage: motionary migrate <files…> [--dry-run] [--write | --out file] [--diff] [--report] [--json] [--tokenize] [--to-v2]'); return 2; }
   if (outFile && files.length > 1) { console.error('motionary migrate: --out takes a single input (use --write for several)'); return 2; }
   const write = rest.includes('--write') || !!outFile;
   const dry = rest.includes('--dry-run') || !write;
@@ -145,7 +145,11 @@ export function runMigrate(rest, S) {
     let input = null; try { input = JSON.parse(text); } catch {}
     const target = outFile || f.replace(/(\.json)?$/i, '.scene.json');
     if (!r.ok) failed++;
-    else if (!dry) writeFileSync(target, S.serializeSceneV2(r.doc));
+    else if (!dry) {
+      // 16.0: Scene v3 is the write format (`--to-v2` keeps writing v2 for 15.x consumers)
+      const v3 = !rest.includes('--to-v2') && (V3 ||= createRequire(import.meta.url)('../dist/components/scene-v3.cjs'));
+      writeFileSync(target, v3 ? v3.serializeSceneV3(v3.migrateToSceneV3(r.doc).doc) : S.serializeSceneV2(r.doc));
+    }
     const diff = r.ok && input ? S.diffJson(input, r.doc) : [];
     results.push({ file: f, out: r.ok && !dry ? target : undefined, ok: r.ok, report: r.report, problems: r.problems, diff: rest.includes('--diff') ? diff : undefined });
     if (json) continue;
@@ -381,7 +385,7 @@ export function doctorV16(paths) {
  * Returns { format: 'motionary-migrate-report', version: 1, to: '16', write, files, manual, skipped, problems }.
  */
 export function migrateTo16(paths, opts = {}) {
-  const V3 = opts.sceneV3 || createRequire(import.meta.url)('../dist/components/scene-v3-preview.cjs');
+  const V3 = opts.sceneV3 || createRequire(import.meta.url)('../dist/components/scene-v3.cjs');
   const write = !!opts.write;
   const files = [], manual = [], skipped = [], problems = [];
   for (const f of v15Files(paths)) {
@@ -403,7 +407,7 @@ export function migrateTo16(paths, opts = {}) {
   if (opts.report) writeFileSync(opts.report, JSON.stringify(report, null, 2) + '\n');
   return report;
 }
-const ownMajor = () => { try { return Number(JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8')).version.split('.')[0]); } catch { return 0; } };
+const ownMajor = () => { try { return Number(JSON.parse(readFileSync(join(fileURLToPath(import.meta.url), '../../package.json'), 'utf8')).version.split('.')[0]); } catch { return 0; } };
 /** `motionary migrate --to 16 [paths…] [--dry-run] [--report file] [--json]`: exit 1 when a file could not be read / migrated; 2 for usage (and --write before 16.0). */
 export function runMigrateTo16(rest, env = {}) {
   const VAL = new Set(['--to', '--report']);
@@ -411,7 +415,7 @@ export function runMigrateTo16(rest, env = {}) {
   for (const p of paths) if (!existsSync(p)) { console.error(`motionary migrate --to 16: ${p} not found`); return 2; }
   const major = env.major ?? ownMajor();
   const write = rest.includes('--write');
-  if (write && major < 16) { console.error(`motionary migrate --to 16 --write: motionary ${major}.x cannot open Scene v3 files, so writing them waits for 16.0 (npx motionary@16 migrate --to 16 --write). Run without --write (or with --dry-run) for the report — ${V16_DOC}`); return 2; }
+  if (write && major < 16 && !env.allowWrite) { console.error(`motionary migrate --to 16 --write: motionary ${major}.x cannot open Scene v3 files, so writing them waits for 16.0 (npx motionary@16 migrate --to 16 --write). Run without --write (or with --dry-run) for the report — ${V16_DOC}`); return 2; }
   const r = migrateTo16(paths, { write, sceneV3: env.sceneV3, report: flag(rest, 'report') || (write ? join(paths[0] || '.', REPORT_NAME) : undefined) });
   if (rest.includes('--json')) console.log(JSON.stringify(r, null, 2));
   else {
@@ -502,8 +506,7 @@ export function main(argv, env = {}) {
   if (cmd === 'migrate' && rest.includes('--to')) return flag(rest, 'to') === '16' ? runMigrateTo16(rest, env) : runMigrateTo15(rest, env);
   if (cmd === 'migrate' && rest.includes('--code')) return runMigrateCode(rest.filter((a) => a !== '--code'));
   if (cmd === 'migrate') {
-    if (env.sceneV2) return runMigrate(rest, env.sceneV2);
-    return runMigrate(rest, createRequire(import.meta.url)('../dist/components/scene-v2.cjs'));
+    return runMigrate(rest, env.sceneV2 || createRequire(import.meta.url)('../dist/components/scene-v2.cjs'), env.sceneV3);
   }
   if (cmd === 'export') {
     if (rest.includes('--scene')) return env.native ? runExportScene(rest, env.native) : runExportScene(rest, createRequire(import.meta.url)('../dist/components/studio-native.cjs'));

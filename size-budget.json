@@ -162,8 +162,8 @@
     "limit": 4096
   },
   {
-    "name": "import 'motionary/components/scene-v3-preview' (= motionary/scene/v3-preview, 15.9 Scene Format v3 draft: validateSceneV3, migrateToSceneV3 preview with loss report, sceneV3ToV2, DEPRECATIONS_V16; includes the Scene v2 validator / migration chunk and studio/a11y variants rules; own entry, not in lite / scene / studio; measured 10.91 KB)",
-    "import": "export * from 'pkg/components/scene-v3-preview';",
+    "name": "import 'motionary/components/scene-v3' (= motionary/scene/v3, alias motionary/scene/v3-preview; 15.9 Scene Format v3 draft, stable in 16.0: validateSceneV3, migrateToSceneV3 preview with loss report, sceneV3ToV2, DEPRECATIONS_V16; includes the Scene v2 validator / migration chunk and studio/a11y variants rules; own entry, not in lite / scene / studio; measured 10.91 KB)",
+    "import": "export * from 'pkg/components/scene-v3';",
     "limit": 12288
   },
   {
