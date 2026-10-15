@@ -40,7 +40,7 @@ describe('15.3 tokens: built-in gentle mode', () => {
     expect(css).toMatch(/\[data-usa-motion-mode~="gentle"\] \{/);
     const media = css.split('@media').slice(1).map((b) => b.slice(0, b.indexOf('}\n}') + 3));
     expect(media.length).toBe(1); // reduced only
-    for (const b of media) expect(b).not.toMatch(/gentle/);
+    for (const b of media) expect(b).not.toMatch(/data-usa-motion-mode/); // the default set has tokens named "gentle" (springs), so match the selector
   });
 });
 
