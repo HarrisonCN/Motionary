@@ -42,15 +42,8 @@ const findInstance = (d: Doc, id: string): Layer => {
   if (!l) throw bad(`no instance "${id}"`);
   return l;
 };
-/** Layer ids of the scene itself (top level and compositions; symbol definitions have their own id scope). */
-function sceneIds(d: Doc): Set<string> {
-  const s = new Set<string>();
-  const walk = (ls: unknown) => { if (Array.isArray(ls)) for (const l of ls) { s.add(l?.id); if (l?.type === 'comp') walk(l.layers); } };
-  walk(d.layers);
-  return s;
-}
-/** Layer ids a symbol defines (through its compositions, not into other symbols). */
-function symbolLayerIds(def: any): Set<string> {
+/** Layer ids of a symbol definition or of the scene itself (through compositions, not into other symbols; each has its own id scope). */
+function idsOf(def: any): Set<string> {
   const s = new Set<string>();
   const walk = (ls: unknown) => { if (Array.isArray(ls)) for (const l of ls) { s.add(l?.id); if (l?.type === 'comp') walk(l.layers); } };
   walk(def?.layers);
@@ -137,7 +130,7 @@ export interface AddInstanceOptions { id: string; target?: string; start?: numbe
 /** Add an instance of a symbol at the end of the top-level layer list. */
 export function addInstance(doc: Doc, symbolId: string, o: AddInstanceOptions): Doc {
   need(doc, symbolId);
-  if (!o?.id || sceneIds(doc).has(o.id)) throw bad(`layer id "${o?.id}" is taken or empty`);
+  if (!o?.id || idsOf(doc).has(o.id)) throw bad(`layer id "${o?.id}" is taken or empty`);
   const d = clone(doc);
   const inst: Layer = { id: o.id, type: 'component' };
   if (o.parent !== undefined) inst.parent = o.parent;
@@ -151,7 +144,7 @@ export function addInstance(doc: Doc, symbolId: string, o: AddInstanceOptions): 
 
 function setOv(d: Doc, instanceId: string, layerId: string, ov: SymbolOverride): void {
   const inst = findInstance(d, instanceId);
-  if (!symbolLayerIds(need(d, inst.ref)).has(layerId)) throw bad(`symbol "${inst.ref}" has no layer "${layerId}"`);
+  if (!idsOf(need(d, inst.ref)).has(layerId)) throw bad(`symbol "${inst.ref}" has no layer "${layerId}"`);
   const cur = isObj(inst.overrides) ? inst.overrides : {};
   const prev = isObj(cur[layerId]) ? cur[layerId] : {};
   const next: SymbolOverride = { ...prev, ...clone(ov) };
@@ -226,7 +219,7 @@ export function validateSymbols(doc: Doc): SymbolProblem[] {
       if (l?.type === 'comp') walk(l.layers, `${lp}.layers`);
       if (l?.type !== 'component') return;
       if (!hasSym(doc, l.ref)) { p.push({ path: `${lp}.ref`, message: `unknown symbol "${l.ref}"` }); return; }
-      const own = symbolLayerIds(comps(doc)[l.ref]);
+      const own = idsOf(comps(doc)[l.ref]);
       for (const k of Object.keys(isObj(l.overrides) ? l.overrides : {})) if (!own.has(k)) p.push({ path: `${lp}.overrides.${k}`, message: `symbol "${l.ref}" has no layer "${k}"` });
     });
   };
