@@ -56,3 +56,9 @@ Deprecations announced in a minor stay in place, with `@deprecated` types and no
   `npx motionary compat <version>` and the `check_compat` tool of `motionary-mcp` read the same data.
 - [compat-matrix.md](./compat-matrix.md): feature-by-feature browser and format support for the runtime modules.
 - [CHANGELOG.md](../CHANGELOG.md): the notes for every release.
+
+## 17.0 and `v16-lts`
+
+When 17.0.0 ships, `latest` moves to 17.0.0 and the last 16.x release gets `v16-lts` (security and severe fixes at
+least until 18.0 ships), the same way `v15-lts` and `v14-lts` were set. What 17.0 removes is listed in
+[deprecations-v17.md](./deprecations-v17.md) (announced in 16.9).

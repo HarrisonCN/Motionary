@@ -672,12 +672,12 @@
     },
     "./scene/v3-preview": {
       "import": {
-        "types": "./dist/components/scene-v3.d.ts",
-        "default": "./dist/components/scene-v3.js"
+        "types": "./dist/components/scene-v3-preview.d.ts",
+        "default": "./dist/components/scene-v3-preview.js"
       },
       "require": {
-        "types": "./dist/components/scene-v3.d.cts",
-        "default": "./dist/components/scene-v3.cjs"
+        "types": "./dist/components/scene-v3-preview.d.cts",
+        "default": "./dist/components/scene-v3-preview.cjs"
       }
     },
     "./scene/symbols": {
@@ -1648,6 +1648,16 @@
       "require": {
         "types": "./dist/components/scene-v3.d.cts",
         "default": "./dist/components/scene-v3.cjs"
+      }
+    },
+    "./components/scene-v3-preview": {
+      "import": {
+        "types": "./dist/components/scene-v3-preview.d.ts",
+        "default": "./dist/components/scene-v3-preview.js"
+      },
+      "require": {
+        "types": "./dist/components/scene-v3-preview.d.cts",
+        "default": "./dist/components/scene-v3-preview.cjs"
       }
     },
     "./components/scene-symbols": {
@@ -4500,16 +4510,6 @@
     "./components/layout.css": "./dist/components/layout.css",
     "./components/packs.css": "./dist/components/packs.css",
     "./components/fx.css": "./dist/components/fx.css",
-    "./components/scene-v3-preview": {
-      "import": {
-        "types": "./dist/components/scene-v3.d.ts",
-        "default": "./dist/components/scene-v3.js"
-      },
-      "require": {
-        "types": "./dist/components/scene-v3.d.cts",
-        "default": "./dist/components/scene-v3.cjs"
-      }
-    },
     "./package.json": "./package.json"
   },
   "files": [

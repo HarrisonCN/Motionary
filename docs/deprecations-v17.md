@@ -1,0 +1,40 @@
+# Removed in 17.0.0 (announced in 16.9)
+
+17.0 is the **platform-stable** major: Scene Format v3, the Studio plugin API (v1) and motionary-mcp 3.x are frozen.
+It removes only what 16.9 announced below. Everything on this page still works in 16.x (`v16-lts` after 17.0 ships).
+In 16.9 each item has a development warning (once per session), a `doctor --v17` finding and a migration path; nothing
+here is in `motionary/components/lite` — lite stays ≤ 70 KB gzip with zero dependencies.
+
+Find every use: `npx motionary doctor --v17` (exit 1 when anything is found). Fix it: `npx motionary migrate --to 17`
+(dry run) then `--write` (a `.bak` of every changed file first; an existing backup is never overwritten). Guide:
+[migrating-to-v17.md](./migrating-to-v17.md). The ids are exported as `DEPRECATIONS_V17` from the CLI module
+(`motionary/bin/motionary.mjs`).
+
+| id | Removed in 17.0 | Replacement | Migration |
+|---|---|---|---|
+| [`scene-v3-preview`](#scene-v3-preview) | the import path `motionary/scene/v3-preview` (+ `motionary/components/scene-v3-preview`) | `motionary/scene/v3` (same API) | `migrate --to 17 --write` rewrites the imports |
+| [`cli-migrate-15`](#cli-migrate-15) | `motionary doctor --v15` and `motionary migrate --to 15` (13.x / 14.x → 15 projects) | run them with the 16.x CLI first | manual: `npx motionary@v16-lts migrate --to 15 --write` |
+
+<a id="scene-v3-preview"></a>
+## `scene-v3-preview` — the 15.9 preview import path
+
+`motionary/scene/v3-preview` was the name of the Scene v3 draft in 15.9. Since 16.0 the format is stable at
+`motionary/scene/v3`; the old path stayed as an alias. In 16.9 it is a small module of its own that forwards every
+call to `motionary/scene/v3` and warns once per session (`console.warn`, nothing on import). 17.0 removes the path.
+
+```js
+// before
+import { migrateToSceneV3 } from 'motionary/scene/v3-preview';
+// after (16.0+)
+import { migrateToSceneV3 } from 'motionary/scene/v3';
+```
+
+<a id="cli-migrate-15"></a>
+## `cli-migrate-15` — the v15 project migration in the CLI
+
+`doctor --v15` / `migrate --to 15` convert 13.x / 14.x projects (compat-v13 imports, animation JSON v1, the 13.x
+codemod runner) for 15.0. In 16.9 both print a notice on stderr. 17.0 removes them; the 16.x CLI keeps them:
+`npx motionary@v16-lts doctor --v15` and `npx motionary@v16-lts migrate --to 15 --write`, then upgrade.
+
+Not removed in 17.0: Scene v2 stays readable (and `exportScene({ version: 2 })` / `sceneV3ToV2()` keep writing it on
+request), `doctor --v16` / `migrate --to 16` stay, the codemods `usa-codemod-11` … `13` stay.
