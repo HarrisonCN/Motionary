@@ -1,5 +1,7 @@
 # Studio plugins (16.2, preview)
 
+> **Experimental** — may change in a minor release; not covered by the stability promise ([stability.md](./stability.md)).
+
 Since 16.2 Motion Studio can run **third-party panels and exporters** in a sandbox. The API is a preview
 (`@experimental`): it may still change in a 16.x minor and is frozen as **plugin API v1 in 17.0**.
 

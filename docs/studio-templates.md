@@ -1,5 +1,7 @@
 # Studio templates (14.8)
 
+> **Experimental** — may change in a minor release; not covered by the stability promise ([stability.md](./stability.md)).
+
 `motionary/studio/templates` (= `motionary/components/studio-templates`) packages a Motion Studio project as a
 reusable **template**, checks it before anything touches your project, installs it as **one undo step** and uninstalls
 it so the project is **byte-identical** to the one before the install. Its own entry: not in lite, `motionary/core`,

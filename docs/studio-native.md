@@ -1,5 +1,7 @@
 # Cross-platform export 2.0 (`motionary/studio/native`, 15.2)
 
+> **Experimental** — may change in a minor release; not covered by the stability promise ([stability.md](./stability.md)).
+
 One Scene v2 document (or a timeline v1 document, or a Studio project `{ doc }`) → source code for five targets, each
 with a **per-property loss report**. Every animated property of every playing track appears in the report exactly once,
 as `supported` or as `lost` with a reason. Nothing is dropped silently. Pure functions: no DOM, no Node APIs, the same

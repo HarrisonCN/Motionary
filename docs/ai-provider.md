@@ -1,5 +1,7 @@
 # Motion AI: local parser + optional LLM provider (11.6)
 
+> **Experimental** — may change in a minor release; not covered by the stability promise ([stability.md](./stability.md)).
+
 `motionary/tooling/ai` turns a short description — "fade the cards up slowly,
 one after another" / "卡片从下往上依次淡入" — into a motion: effect, direction, timing, easing, trigger, Web Animations
 keyframes, CSS and the Motionary components that do it.

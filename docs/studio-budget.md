@@ -1,5 +1,7 @@
 # Performance budget in Studio (16.3)
 
+> **Experimental** — may change in a minor release; not covered by the stability promise ([stability.md](./stability.md)).
+
 `motionary/studio/budget` tells you what an export will cost **while you edit**, and stops "publish export" when it
 is over budget.
 

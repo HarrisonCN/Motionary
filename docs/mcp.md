@@ -1,5 +1,7 @@
 # `motionary-mcp` — the component catalog as an MCP server
 
+> **Experimental** — may change in a minor release; not covered by the stability promise ([stability.md](./stability.md)).
+
 `motionary-mcp` (10.4+) is a **read-only** [Model Context Protocol](https://modelcontextprotocol.io) server that ships inside the `motionary` package. AI assistants that speak MCP (Claude Desktop / Claude Code, Cursor, VS Code, Windsurf, Zed, …) can ask it which `<usa-*>` component fits a UI need, read the component's API and get a snippet that already installs, imports and registers every prerequisite in the right order.
 
 - **Zero dependencies**, stdio transport (newline-delimited JSON-RPC 2.0), protocol versions `2025-06-18`, `2025-03-26`, `2024-11-05`.

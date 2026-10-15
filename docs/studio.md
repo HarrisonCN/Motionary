@@ -1,5 +1,7 @@
 # Motion Studio 1.0 (14.4)
 
+> **Experimental** — may change in a minor release; not covered by the stability promise ([stability.md](./stability.md)).
+
 `motionary/studio` (= `motionary/components/studio`) is Motion Studio 1.0: a timeline you build animations in without
 touching JSON. You add tracks and track groups, scrub a playhead, drag keyframes, draw easing curves, type values at
 the current time and step through the result frame by frame. Then you save it as Scene Format v2 and open it again.

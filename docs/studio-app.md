@@ -1,5 +1,7 @@
 # Motion Studio 2.0: `motionary/studio/app` (15.0)
 
+> **Experimental** — may change in a minor release; not covered by the stability promise ([stability.md](./stability.md)).
+
 `motionary/studio/app` (= `motionary/components/studio-app`) puts the 14.x Studio parts together into one authoring
 loop you can drop into a page:
 

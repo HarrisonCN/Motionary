@@ -4529,7 +4529,9 @@
     "!docs/ROADMAP.md",
     "!dist/llms-full.txt",
     "!docs/contract-report.md",
-    "!docs/contract-report.json"
+    "!docs/contract-report.json",
+    "!docs/size-report.json",
+    "!docs/images/demo.gif"
   ],
   "sideEffects": [
     "*.css",
@@ -4577,7 +4579,7 @@
     "figma:plugin": "node scripts/gen-figma-plugin.mjs",
     "facts": "node scripts/facts.mjs",
     "gen:framework-types": "node scripts/gen-framework-types.mjs",
-    "check:docs": "node scripts/facts.mjs --check && node scripts/gen-component-docs.mjs --check && node scripts/gen-entries.mjs --check && node scripts/gen-runtime-docs.mjs --check && node scripts/gen-figma-plugin.mjs --check && node scripts/gen-framework-types.mjs --check && node scripts/check-versions.mjs && node scripts/build-templates.mjs --check",
+    "check:docs": "node scripts/facts.mjs --check && node scripts/readme-sync.mjs --check && node scripts/gen-component-docs.mjs --check && node scripts/gen-entries.mjs --check && node scripts/gen-runtime-docs.mjs --check && node scripts/gen-figma-plugin.mjs --check && node scripts/gen-framework-types.mjs --check && node scripts/check-versions.mjs && node scripts/build-templates.mjs --check",
     "release:gate": "node scripts/release-gate.mjs"
   },
   "keywords": [

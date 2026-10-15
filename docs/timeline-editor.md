@@ -1,5 +1,7 @@
 # Timeline editor model (13.6)
 
+> **Experimental** — may change in a minor release; not covered by the stability promise ([stability.md](./stability.md)).
+
 `motionary/components/timeline-editor` is the editing model behind a timeline UI such as the Timeline Playground:
 a versioned document format, layer and keyframe operations, undo / redo, and a reproducible preview. It is
 editor-only: nothing in `motionary`, `motionary/core`, `motionary/components/lite` or `motionary/components/timeline`

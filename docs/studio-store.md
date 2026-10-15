@@ -1,5 +1,7 @@
 # Team projects (`motionary/studio/store`, 15.5)
 
+> **Experimental** — may change in a minor release; not covered by the stability promise ([stability.md](./stability.md)).
+
 A **ProjectStore** keeps Studio projects with a revision history and optimistic concurrency. Every write names the
 revision it was based on; a write on a stale base is refused as a **conflict** instead of overwriting a teammate's
 work. Motionary ships **no server**: use the in-memory or IndexedDB store, or point the HTTP store at your own backend.

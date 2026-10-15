@@ -1,5 +1,7 @@
 # Project & asset workflow (`motionary/studio/assets`) — 14.5
 
+> **Experimental** — may change in a minor release; not covered by the stability promise ([stability.md](./stability.md)).
+
 A Motion Studio project refers to images, SVGs, fonts, video clips and audio by **project-relative paths** inside
 keyframe values. `motionary/studio/assets` (also `motionary/components/studio-assets`) finds those references,
 keeps them confined to the project directory, packs a project and its files into **one offline file**, and tells you
