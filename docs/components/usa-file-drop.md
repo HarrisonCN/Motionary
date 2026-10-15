@@ -6,7 +6,7 @@
 
 - **Category:** feedback · **since** 6.9
 - **Import:** `import { defineFileDrop } from 'motionary/components/widgets'` then `defineFileDrop();`
-- **CDN:** `<script src="https://unpkg.com/motionary@15/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@16/dist/widgets.umd.js"></script>`
 - **Attributes:** `label`, `accept`, `multiple`, `simulate`
 - **Events:** `usa:files`
 - **Slots:** —

@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 8.9
 - **Import:** `import { definePropPanel } from 'motionary/components/widgets'` then `definePropPanel();`
-- **CDN:** `<script src="https://unpkg.com/motionary@15/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@16/dist/widgets.umd.js"></script>`
 - **Attributes:** `for`, `props`, `label`
 - **Events:** `usa:prop`
 - **Slots:** —

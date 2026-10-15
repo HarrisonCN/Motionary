@@ -41,13 +41,13 @@ npm i motionary
 ビルドツールを使わない場合は CDN からどうぞ。URL はメジャーバージョン（`@13`）で固定します。
 
 ```html
-<script src="https://unpkg.com/motionary@15/dist/index.umd.js"></script>            <!-- スクロール API：window.ScrollAnimate -->
-<script src="https://unpkg.com/motionary@15/dist/presets-extended.umd.js"></script> <!-- プリセット +181 種 -->
-<script src="https://unpkg.com/motionary@15/dist/components.umd.js"></script>       <!-- motionary/components の要素：window.UsaComponents -->
-<script src="https://unpkg.com/motionary@15/dist/widgets.umd.js"></script>          <!-- ウィジェット：window.UsaWidgets -->
+<script src="https://unpkg.com/motionary@16/dist/index.umd.js"></script>            <!-- スクロール API：window.ScrollAnimate -->
+<script src="https://unpkg.com/motionary@16/dist/presets-extended.umd.js"></script> <!-- プリセット +181 種 -->
+<script src="https://unpkg.com/motionary@16/dist/components.umd.js"></script>       <!-- motionary/components の要素：window.UsaComponents -->
+<script src="https://unpkg.com/motionary@16/dist/widgets.umd.js"></script>          <!-- ウィジェット：window.UsaWidgets -->
 ```
 
-jsDelivr も使えます：`https://cdn.jsdelivr.net/npm/motionary@15/dist/…`。`use-scroll-animate` をお使いの場合も、同じバージョンで引き続き公開されます。乗り換えるときは、import と URL のパッケージ名を置き換えるだけです（[詳細](./docs/versions.md)）。
+jsDelivr も使えます：`https://cdn.jsdelivr.net/npm/motionary@16/dist/…`。`use-scroll-animate` をお使いの場合も、同じバージョンで引き続き公開されます。乗り換えるときは、import と URL のパッケージ名を置き換えるだけです（[詳細](./docs/versions.md)）。
 
 ## クイックスタート
 

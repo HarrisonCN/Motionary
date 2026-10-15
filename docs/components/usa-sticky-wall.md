@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 8.5
 - **Import:** `import { defineStickyWall } from 'motionary/components/widgets'` then `defineStickyWall();`
-- **CDN:** `<script src="https://unpkg.com/motionary@15/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@16/dist/widgets.umd.js"></script>`
 - **Attributes:** `seed`, `label`
 - **Events:** `usa:pick`
 - **Slots:** —

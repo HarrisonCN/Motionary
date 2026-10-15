@@ -7,6 +7,40 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [16.0.0-rc.1] - 2026-10-15
+
+**Scene Format v3 + motionary-mcp 3.0** (major, release candidate — npm `next` only; `latest` stays on 15.9.0 until
+16.0.0). Everything here was announced in 15.9 with warnings, `doctor --v16` findings and a migration path
+([docs/deprecations-v16.md](docs/deprecations-v16.md)). Zero runtime dependencies; `motionary/components/lite`
+unchanged (≤ 70 KB gzip). [docs/scene-v3.md](docs/scene-v3.md) · [docs/migrating-to-v16.md](docs/migrating-to-v16.md)
+
+### Added
+
+- **`motionary/scene/v3`** (= `motionary/components/scene-v3`, stable; `SCENE_V3_STATUS` `'stable'`): `validateSceneV3`,
+  `migrateToSceneV3`, `sceneV3ToV2`, `normalizeSceneV3` / `serializeSceneV3`, plus `flatSceneV3ToV2` /
+  `sceneV2ToFlatV3` for flat documents. `motionary/scene/v3-preview` and `motionary/components/scene-v3-preview` stay
+  as aliases of the same build (deprecated; removed in 17.0).
+- Scene v3 opens wherever v2 does: `<usa-player>` / `playScene` and the timeline editor (`loadMotionDoc`) read flat v3
+  directly (variants kept in meta); the Studio and its project files open any v3 — compositions become groups and
+  component instances are expanded through the v3 reader, with what v2 could not keep reported.
+- `npx motionary migrate --to 16 --write` converts files in place on 16.x (a `.bak` first, loss report).
+
+### Changed (breaking)
+
+- **Studio `exportScene()` returns Scene v3** (no warning); `exportScene({ version: 2 })` keeps returning v2.
+- **`npx motionary migrate` writes Scene v3**; `--to-v2` keeps writing v2 for 15.x consumers.
+- **motionary-mcp 3.0.0**: `validate_snippet` takes `code` only (`validate_scene` for scenes); `scene` / `project`
+  arguments are objects only (JSON text refused); `check_compat` removed (`check_compatibility`); the scene tools accept
+  Scene v3 (`validate_scene` reports `sceneVersion` and `lost`), and their schema version is 2.0; the 2.5
+  `legacyInputs` export and the `deprecations` result field are gone. Gateway interop expects the 3.0 tool list.
+- `npx motionary migrate --code` rewrites CDN majors `@10`…`@15` → `@16` and the `check_compat` tool name.
+- CDN major `@15` → `@16` in docs, showcase, the Figma plugin and `RUNTIME_CDN`.
+
+### Migration
+
+`npx motionary@15 doctor --v16`, then `npx motionary@next migrate --to 16 --write` (backups + loss report). Staying
+on 15.x: `npm i motionary@^15.9` (`v15-lts` from 16.0.0).
+
 ## [15.9.0] - 2026-10-15
 
 **Getting ready for 16.0.** Every 16.0 change (Scene Format v3 as the write format, motionary-mcp 3.0) now has a
