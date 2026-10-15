@@ -155,4 +155,4 @@ exports.provenanceOf = provenanceOf;
 exports.recordProvenance = recordProvenance;
 exports.validateProvenance = validateProvenance;
 exports.withProvenance = withProvenance;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.1.0/dist/components/studio-provenance.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.2.0/dist/components/studio-provenance.cjs.map

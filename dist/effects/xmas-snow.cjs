@@ -15,4 +15,4 @@ function registerXmasSnow() {
 exports.effect = effect;
 exports.register = registerXmasSnow;
 exports.registerXmasSnow = registerXmasSnow;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.1.0/dist/effects/xmas-snow.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.2.0/dist/effects/xmas-snow.cjs.map

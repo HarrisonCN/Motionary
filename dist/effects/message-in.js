@@ -11,4 +11,4 @@ function registerMessageIn() {
 }
 
 export { effect, registerMessageIn as register, registerMessageIn };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.1.0/dist/effects/message-in.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.2.0/dist/effects/message-in.js.map

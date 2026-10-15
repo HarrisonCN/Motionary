@@ -15,4 +15,4 @@ function registerLottiePlay() {
 exports.effect = effect;
 exports.register = registerLottiePlay;
 exports.registerLottiePlay = registerLottiePlay;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.1.0/dist/effects/lottie-play.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.2.0/dist/effects/lottie-play.cjs.map

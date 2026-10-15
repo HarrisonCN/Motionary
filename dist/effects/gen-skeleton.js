@@ -11,4 +11,4 @@ function registerGenSkeleton() {
 }
 
 export { effect, registerGenSkeleton as register, registerGenSkeleton };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.1.0/dist/effects/gen-skeleton.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.2.0/dist/effects/gen-skeleton.js.map

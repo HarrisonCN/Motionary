@@ -557,4 +557,4 @@ function previewTemplate(t, o = {}) {
 }
 
 export { STUDIO_TEMPLATES_VERSION, TEMPLATE_FORMAT, TEMPLATE_LIMITS, TEMPLATE_META_KEY, TemplateError, createTemplate, installTemplate, installedTemplates, parseTemplate, previewTemplate, serializeTemplate, sha256, signTemplate, templateInfo, templateIntegrity, uninstallTemplate, verifyTemplate };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.1.0/dist/components/studio-templates.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.2.0/dist/components/studio-templates.js.map
