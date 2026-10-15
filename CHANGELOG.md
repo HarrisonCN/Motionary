@@ -29,6 +29,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   longer packed — they stay in the repository (linked from `docs/component-contract.md`); unpacked 13.94 MB, limit
   unchanged at 14 MB.
 
+### Fixed
+- Gateway interop (CI only): the job's temporary gateway config is written in config schema v13 and runs on Node 24 —
+  `@winstonsayno/mcp-gateway@latest` is 17.0.0, which refuses v12 and older at start and declares `node >= 24`.
+  `docs/mcp-gateway-interop.md` shows the v13 config.
+
 ## [16.1.0] — Symbols
 
 ### Added

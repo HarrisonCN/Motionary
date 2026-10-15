@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
         with:
-          node-version: 22
+          node-version: 24
       - name: Gateway version
         run: npm view @winstonsayno/mcp-gateway@latest version
       - name: initialize → tools/list → tools/call (search_components, check_compatibility, suggest_fix, validate_snippet) through the gateway

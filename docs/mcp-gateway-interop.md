@@ -13,7 +13,7 @@ AI client ──Streamable HTTP (/mcp, Bearer key)──▶ mcp-gateway ──st
 
 ```yaml
 # mcp-gateway.yml
-version: 11
+version: 13
 port: 4000
 host: 127.0.0.1
 auth:
