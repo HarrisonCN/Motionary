@@ -11,7 +11,7 @@ URLs. Nothing else changes: the `<usa-*>` tags, the `usa-` classes, the globals 
 
 | Tag | Points to | Install |
 |---|---|---|
-| `latest` | the newest release of the current major (15.3.0 today) | `npm i motionary` |
+| `latest` | the newest release of the current major (15.5.0 today) | `npm i motionary` |
 | `v<major>-line` | each major line from 14 on, e.g. `v14-line` → the newest 14.x release (a bare `v14` is not allowed: npm rejects tag names that are valid SemVer ranges) | `npm i motionary@v14-line` |
 | `next` | release candidates of the next major; never moves `latest` (15.0.0 today: the 15.0 candidate line is closed, the next candidate is 16.0.0-rc.1) | `npm i motionary@next` |
 | `v14-lts` | the last 14.x release (14.9.0 today), security and severe fixes at least until 16.0 ships | `npm i motionary@v14-lts` |

@@ -1,8 +1,8 @@
 'use strict';
 
 var base = require('../chunks/base-BvH4nAcv.cjs');
-var runtimeLink = require('../chunks/runtime-link-B3vMMXNb.cjs');
-var widgets_glScene = require('../chunks/gl-scene-o18Mdd0i.cjs');
+var runtimeLink = require('../chunks/runtime-link-DrO5UkLG.cjs');
+var widgets_glScene = require('../chunks/gl-scene-Cqj-Kafh.cjs');
 
 function defineGlModel(tag = 'usa-gl-model') {
     return base.defineElement(tag, () => {
@@ -24,4 +24,4 @@ function defineGlModel(tag = 'usa-gl-model') {
 }
 
 exports.defineGlModel = defineGlModel;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.3.0/dist/components/gl-model.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.5.0/dist/components/gl-model.cjs.map

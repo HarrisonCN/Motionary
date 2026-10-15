@@ -157,6 +157,11 @@
     "limit": 3072
   },
   {
+    "name": "import 'motionary/components/studio-store' (= motionary/studio/store, 15.5 team projects: ProjectStore memory / IndexedDB / HTTP adapters, revision history, optimistic-concurrency conflicts, layer-level detectConflict / mergeProjects, toAppStorage; own entry, not in lite / studio / studio/app; measured ~2.9 KB)",
+    "import": "export * from 'pkg/components/studio-store';",
+    "limit": 4096
+  },
+  {
     "name": "import 'motionary/components/interaction'",
     "import": "export * from 'pkg/components/interaction';",
     "limit": 6400

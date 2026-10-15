@@ -36,6 +36,8 @@ export const LAYER_ALIASES = {
   'studio/native': 'components/studio-native',
   // 15.3: accessible & responsive motion
   'studio/a11y': 'components/studio-a11y',
+  // 15.5: team projects (ProjectStore adapters, revisions, conflict detection)
+  'studio/store': 'components/studio-store',
 };
 
 /**

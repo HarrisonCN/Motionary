@@ -7,6 +7,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [15.5.0] - 2026-10-15
+
+**Team projects.** A project store with revision history and conflict detection for the Studio app. Additive; zero
+runtime dependencies; `motionary/components/lite` unchanged; the new entry has its own size-budget line and no existing
+line was raised. Motionary ships no server. [docs/studio-store.md](docs/studio-store.md)
+
+15.4.0 (conditional rendering backend) was **skipped**: the perf data (script time 6.25 ms / frame, 0 long tasks, GPU
+resources inside budget) does not show Canvas / WebGL as the bottleneck, so no WebGPU backend was built and no 15.4.0
+was released.
+
+### Added
+
+- **`motionary/studio/store`** (= `motionary/components/studio-store`): `ProjectStore` interface with
+  `createMemoryProjectStore`, `createIndexedDBProjectStore` and `createHttpProjectStore(baseUrl, { fetch, headers })`
+  (REST: `GET /projects`, `GET|PUT|DELETE /projects/:name` with `If-Match`, `GET /projects/:name/revisions[/:rev]`).
+  Revision history (newest first, capped, default 50), optimistic concurrency (`put(name, text, { baseRev })`; a stale
+  base is a `conflict` `StoreError` with `currentRev`), name / size checks, error codes `conflict` / `not-found` /
+  `forbidden` / `quota` / `invalid` / `too-large` / `network` / `server`.
+- `detectConflict(base, mine, theirs)` and `mergeProjects(base, mine, theirs)`: layer-level three-way merge — edits to
+  different layers combine, the same layer changed on both sides is a conflict and nothing is merged.
+- `toAppStorage(store, { merge: 'refuse' | 'auto' })`: plug a store into `createStudioApp({ storage })`; save after a
+  teammate's save either refuses with "saved by someone else" or merges non-overlapping edits.
+- `examples/project-store-server`: a ~100-line node:http reference backend — one store per tenant, a token for another
+  tenant is refused (403) and audited (`cross-tenant-denied`), project-count / size quotas answer 429 (audited). Tested
+  in CI.
+- Tests: unit (stores, conflicts, merge, HTTP mapping, app storage), the reference server (tenant isolation, audit,
+  quotas), browser spec `studio-store.spec.mjs` (IndexedDB across instances, stale write refused, Studio save / reopen)
+  on Chromium, Firefox and WebKit in CI.
+
+### Not done (documented)
+
+- No Gateway-hosted project store: MCP Gateway has tenants and quotas but no project-store route — run your backend (or
+  the reference server) behind it as an HTTP upstream. The Gateway tenant template catalog and the Pages template
+  gallery (deferred from 14.8) stay deferred.
+- Real-time co-editing (presence, live cursors) is out of scope; merges happen on save.
+
 ## [15.3.0] - 2026-10-15
 
 **Accessible & responsive motion.** Motion sensitivity tiers and breakpoint variants that play the same in the Studio

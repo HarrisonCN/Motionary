@@ -234,4 +234,4 @@ async function createStudioApp(root, o = {}) {
 }
 
 export { STUDIO_APP_VERSION, createLocalStorage, createMemoryStorage, createStudioApp };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.3.0/dist/components/studio-app.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v15.5.0/dist/components/studio-app.js.map
