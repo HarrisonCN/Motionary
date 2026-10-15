@@ -660,6 +660,16 @@
         "default": "./dist/components/studio-a11y.cjs"
       }
     },
+    "./studio/store": {
+      "import": {
+        "types": "./dist/components/studio-store.d.ts",
+        "default": "./dist/components/studio-store.js"
+      },
+      "require": {
+        "types": "./dist/components/studio-store.d.cts",
+        "default": "./dist/components/studio-store.cjs"
+      }
+    },
     "./components/reveal": {
       "import": {
         "types": "./dist/components/reveal.d.ts",
@@ -4400,16 +4410,6 @@
     "./components/layout.css": "./dist/components/layout.css",
     "./components/packs.css": "./dist/components/packs.css",
     "./components/fx.css": "./dist/components/fx.css",
-    "./studio/store": {
-      "import": {
-        "types": "./dist/components/studio-store.d.ts",
-        "default": "./dist/components/studio-store.js"
-      },
-      "require": {
-        "types": "./dist/components/studio-store.d.cts",
-        "default": "./dist/components/studio-store.cjs"
-      }
-    },
     "./package.json": "./package.json"
   },
   "files": [
