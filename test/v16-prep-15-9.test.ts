@@ -52,10 +52,10 @@ describe('16.0 change list: docs', () => {
   });
   it('docs/scene-v3.md + scripts/scene-v3.schema.json are marked draft and describe comp / component / variants', () => {
     const md = readFileSync(join(ROOT, 'docs/scene-v3.md'), 'utf8');
-    expect(md).toMatch(/draft/i);
+    expect(md).toMatch(/draft|stable \(16\.0\)/i); // 16.0: stable (was the 15.9 draft)
     for (const w of ['"comp"', '"component"', 'variants', 'timeRemap', 'migrateToSceneV3']) expect(md).toContain(w);
     const schema = JSON.parse(readFileSync(join(ROOT, 'scripts/scene-v3.schema.json'), 'utf8'));
-    expect(schema.$comment).toMatch(/draft/);
+    expect(schema.$comment).toMatch(/draft|stable since 16\.0/);
     expect(schema.properties.version.const).toBe(3);
     expect(JSON.stringify(schema)).toContain('"comp"');
   });
