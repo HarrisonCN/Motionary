@@ -6,7 +6,7 @@ Wrap a list or grid: items that are added fade in, removed ones fade out in plac
 
 - **Category:** layout · **since** 3.6 · **changed in** 3.9, 4.0
 - **Import:** `import { defineAutoAnimate } from 'motionary/components/layout'` then `defineAutoAnimate();`
-- **CDN:** `<script src="https://unpkg.com/motionary@16/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@17/dist/components.umd.js"></script>`
 - **Attributes:** `duration`, `no-scale`
 - **Events:** —
 - **Slots:** —

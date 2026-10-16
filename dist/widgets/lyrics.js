@@ -1,2 +1,2 @@
-export { d as defineLyrics } from '../chunks/lyrics-DVbmLBlN.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/widgets/lyrics.js.map
+export { d as defineLyrics } from '../chunks/lyrics-D4zARPqR.js';
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/widgets/lyrics.js.map

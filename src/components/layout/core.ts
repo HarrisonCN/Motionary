@@ -64,7 +64,7 @@ export function autoAnimate(parent: HTMLElement, o: AutoAnimateOptions = {}): { 
               n.style.margin = '0';
               n.style.pointerEvents = 'none';
               if (getComputedStyle(parent).position === 'static') parent.style.position = 'relative';
-              parent.appendChild(n);
+              parent.append(n);
               (n as any).__usaGhost = true;
               const a = animate(n, [{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'scale(0.96)' }]);
               const drop = () => {

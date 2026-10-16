@@ -6,7 +6,7 @@
 
 - **Category:** fx · **since** 5.7
 - **Import:** `import { defineGestureFx } from 'motionary/components/effects'` then `defineGestureFx();`
-- **CDN:** `<script src="https://unpkg.com/motionary@16/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@17/dist/components.umd.js"></script>`
 - **Attributes:** `gesture`, `effect`, `options`, `self`, `velocity`, `angle`, `duration`
 - **Events:** —
 - **Slots:** —

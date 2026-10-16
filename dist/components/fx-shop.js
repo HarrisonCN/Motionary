@@ -1,4 +1,4 @@
-import { registerEffects } from '../chunks/registry-B1ipgYF7.js';
+import { registerEffects } from '../chunks/registry-BdSDdeL7.js';
 
 /** Quadratic-bezier arc points from a to b, lifted by `lift` px (7.3). */
 function arcPath(ax, ay, bx, by, lift = 120, steps = 8) {
@@ -125,4 +125,4 @@ function registerShopPack() {
 }
 
 export { SHOP_FX, arcPath, registerShopPack };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/fx-shop.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/components/fx-shop.js.map

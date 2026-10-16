@@ -1,5 +1,5 @@
-import { o as onFrame, B as setStyleLoader, v as animationBudget, w as getMotionIntensity, c as configureComponents, y as setAnimationBudget, q as activeAnimations } from '../chunks/base-QrtwTUOO.js';
-export { x as schedulerStats, z as setFrameBudget } from '../chunks/base-QrtwTUOO.js';
+import { o as onFrame, B as setStyleLoader, v as animationBudget, w as getMotionIntensity, c as configureComponents, y as setAnimationBudget, q as activeAnimations } from '../chunks/base-BQmWYlDq.js';
+export { x as schedulerStats, z as setFrameBudget } from '../chunks/base-BQmWYlDq.js';
 import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-B-JBecYg.js';
 
 /**
@@ -92,7 +92,7 @@ function loadCategoryStyles(category, base) {
     link.rel = 'stylesheet';
     link.href = `${base.replace(/\/?$/, '/')}${category === 'all' ? 'components.css' : `components/${category}.css`}`;
     link.setAttribute('data-usa-css', category);
-    document.head.appendChild(link);
+    document.head.append(link);
     return link;
 }
 /**
@@ -107,4 +107,4 @@ function onDemandStyles(base) {
 const loadedStyles = () => Array.from(loaded);
 
 export { activeAnimations, animationBudget, autoDegrade, categoryOf, loadCategoryStyles, loadedStyles, onDemandStyles, onFrame, setAnimationBudget };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/perf.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/components/perf.js.map

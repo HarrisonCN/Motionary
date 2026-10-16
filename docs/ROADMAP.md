@@ -38,7 +38,7 @@
 | v16.2.0 | [已发布] | P1 | Studio 插件 API（预览）：`motionary/studio/plugins`（清单显式权限 project:read / project:propose / panel / exporter；宿主按权限应答并审计每次调用；提议只交给 Studio 的 propose 回调、从不直接写入；Worker / 沙箱 iframe（CSP default-src none）/ 本地传输） | 第三方面板 / 导出器在受限沙箱中运行（三浏览器规格）；插件抛错 / 超时 / 消息洪泛 → 标记 crashed 并终止，Studio 与其他插件不受影响 |
 | v16.3.0 | [已发布] | P1 | 性能预算进 Studio：`motionary/studio/budget`（编辑时测量独立导出物体积 raw + gzip、按属性类别的逐帧成本 composite 1 / paint 4 / layout 10；checkBudget；guardPublish 超预算不调用发布；createBudgetMeter 实时显示） | 编辑时实时显示导出物体积 / 帧成本（三浏览器规格）；超预算时“发布导出”被阻止（publish 回调不被调用，测试覆盖） |
 | v16.9.0 | [已发布] | P0 | v17 准备：`motionary/scene/v3-preview` 改为独立转发模块（每会话首次调用警告一次，17.0 删除）；`DEPRECATIONS_V17`；`npx motionary doctor --v17` / `migrate --to 17`（默认预演，`--write` 先写 `.bak`，幂等）；`doctor --v15` / `migrate --to 15` 提示 17.0 删除（`v16-lts` 保留）；`17.0.0-rc.1`（`next`）随后单独发布 | 17.0 删除项全部有警告 + doctor 检出 + codemod + 文档锚点（docs/deprecations-v17.md、migrating-to-v17.md）；测试覆盖 |
-| v17.0.0 | [建议] | P0 | **major** · 平台稳定版：冻结 Scene v3、Studio 插件 API v1、MCP 3.x；删除 16.x 弃用；LTS 策略 | lite 仍 ≤ 70 KB、零依赖；`v16-lts` 维护期写入 versions.md。 |
+| v17.0.0 | [已发布] | P0 | **major** · 删除 16.9 公告的弃用；新增 `mo-*` 别名（`usa-*` 保留、标记弃用，不早于未来 major 删除）；Studio / 插件 API / MCP 等保持实验性；LTS 策略；此后不再计划 major | lite 仍 ≤ 70 KB、零依赖；`v16-lts` 维护期写入 versions.md。 |
 
 **破坏性变更规则：** 只在 major（15.0 / 16.0 / 17.0）出现；至少提前一个 minor 发出开发期弃用警告（生产构建剔除），并附 codemod、`migrating-to-vN.md` 与 `deprecations-vN.md`。
 
@@ -82,7 +82,7 @@ Gateway 15.0 GA 仍受其门槛 A / B / C（72 小时 soak、专用硬件基线�
 
 1. **安装命令**：runtime 模块只需 `npm i motionary` 一次；官方运行时写出确切命令（如 `npm i @rive-app/canvas`）；
 2. **导入路径**：如 `motionary/runtime/scroll`；
-3. **CDN 地址**：可直接复制的 `<script>`（主版本固定，如 `https://cdn.jsdelivr.net/npm/motionary@16/dist/runtime.iife.js`）以及 ESM 地址；
+3. **CDN 地址**：可直接复制的 `<script>`（主版本固定，如 `https://cdn.jsdelivr.net/npm/motionary@17/dist/runtime.iife.js`）以及 ESM 地址；
 4. **引入顺序与注册代码**：先 `use(scroll)`（会同时注册核心），再注册组件；CDN 先加载 `runtime.iife.js`，再加载模块 IIFE（自动注册）；
 5. **最小用法示例**。
 

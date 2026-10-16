@@ -1,4 +1,4 @@
-import { c as configureComponents, M as MOTION_SENSITIVITY_LEVELS } from '../chunks/base-QrtwTUOO.js';
+import { c as configureComponents, M as MOTION_SENSITIVITY_LEVELS } from '../chunks/base-BQmWYlDq.js';
 
 /**
  * motionary/components/bridge — native shell bridges (4.7).
@@ -162,4 +162,4 @@ function connectNativeShell(options = {}) {
 }
 
 export { BRIDGE_PROTOCOL_VERSION, applyNativeSettings, connectNativeShell, detectNativeHost, isTrustedMessage, parseNativeSettings, postToNative };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/bridge.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/components/bridge.js.map

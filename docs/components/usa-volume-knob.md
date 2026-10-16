@@ -6,7 +6,7 @@
 
 - **Category:** interaction · **since** 7.1
 - **Import:** `import { defineVolumeKnob } from 'motionary/components/widgets'` then `defineVolumeKnob();`
-- **CDN:** `<script src="https://unpkg.com/motionary@16/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@17/dist/widgets.umd.js"></script>`
 - **Attributes:** `min`, `max`, `label`
 - **Events:** `usa:change`, `usa:input`
 - **Slots:** —

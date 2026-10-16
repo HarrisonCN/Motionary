@@ -247,4 +247,4 @@ exports.deviceTilt = deviceTilt;
 exports.orientationToTilt = orientationToTilt;
 exports.requestOrientationPermission = requestOrientationPermission;
 exports.supportsOrientation = supportsOrientation;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/depth.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/components/depth.cjs.map

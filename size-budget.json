@@ -392,6 +392,11 @@
     "limit": 4864
   },
   {
+    "name": "import 'motionary/components/mo' (17.0 <mo-*> names: defineMoAliases / aliasTag / aliasCss + the default tag list; opt-in, not in lite / per-entry imports; the UMD bundles include it)",
+    "import": "export * from 'pkg/components/mo';",
+    "limit": 2048
+  },
+  {
     "name": "import 'motionary/components/lite'",
     "import": "export * from 'pkg/components/lite';",
     "limit": 71680

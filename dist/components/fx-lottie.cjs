@@ -168,7 +168,7 @@ const LOTTIE_FX = [
         run: (el, o, ctx) => {
             if (ctx.reduced)
                 return;
-            const host = el.closest('usa-lottie');
+            const host = el.closest('usa-lottie,mo-lottie');
             if (host?.play)
                 return void host.play();
             if (!o.json)
@@ -212,4 +212,4 @@ exports.lottieToKeyframes = lottieToKeyframes;
 exports.lottieToSvg = lottieToSvg;
 exports.registerLottiePack = registerLottiePack;
 exports.riveInputs = riveInputs;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/fx-lottie.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/components/fx-lottie.cjs.map

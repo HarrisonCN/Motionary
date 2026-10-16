@@ -2,7 +2,7 @@
 
 var base = require('../chunks/base-BvH4nAcv.cjs');
 var spring = require('../chunks/spring-XEl_diDJ.cjs');
-var fx = require('../chunks/fx-DaVuB89C.cjs');
+var fx = require('../chunks/fx-DEhvlMn6.cjs');
 
 var css$6 = "usa-click{position:relative;display:inline-block;overflow:hidden;isolation:isolate;border-radius:inherit;-webkit-tap-highlight-color:transparent;touch-action:manipulation}usa-click[block]{display:block}usa-click .usa-click-wave{position:absolute;border-radius:50%;pointer-events:none;z-index:-1;transform:scale(0);background:radial-gradient(circle,var(--usa-wave) 0 55%,color-mix(in srgb,var(--usa-wave) 40%,transparent) 70%,transparent 72%)}";
 
@@ -145,7 +145,7 @@ function injectGoo() {
     svg.setAttribute('height', '0');
     svg.style.position = 'absolute';
     svg.innerHTML = '<filter id="usa-goo"><feGaussianBlur in="SourceGraphic" stdDeviation="6" result="b"/><feColorMatrix in="b" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9" result="g"/><feComposite in="SourceGraphic" in2="g" operator="atop"/></filter>';
-    document.body.appendChild(svg);
+    document.body.append(svg);
 }
 function defineButton(tag = 'usa-button') {
     return base.defineElement(tag, (Base) => class UsaButton extends Base {
@@ -878,4 +878,4 @@ exports.defineHold = defineHold;
 exports.defineIconMorph = defineIconMorph;
 exports.defineLike = defineLike;
 exports.morphPath = morphPath;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/click.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/components/click.cjs.map

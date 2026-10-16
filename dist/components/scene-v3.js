@@ -1,10 +1,10 @@
-import { a as SCENE_V2_LIMITS, m as migrateToSceneV2, n as normalizeSceneV2, v as validateSceneV2 } from '../chunks/v2-C_rZCsjr.js';
+import { a as SCENE_V2_LIMITS, m as migrateToSceneV2, n as normalizeSceneV2, v as validateSceneV2 } from '../chunks/v2-BN000nHo.js';
 import { VARIANTS_META_KEY, validateVariants } from './studio-a11y.js';
 import { a as flattenSceneV3 } from '../chunks/v3-read-BqgIjLQP.js';
 export { f as flatSceneV3ToV2, s as sceneV2ToFlatV3 } from '../chunks/v3-read-BqgIjLQP.js';
 
 /**
- * 15.9: Scene Format v3 — DRAFT (`motionary/scene/v3-preview` = `motionary/components/scene-v3-preview`).
+ * 15.9: Scene Format v3 — DRAFT (then `motionary/scene/v3-preview`; stable here since 16.0, the preview path was removed in 17.0).
  *
  * The format 16.0 writes (docs/scene-v3.md, scripts/scene-v3.schema.json). Draft: it may change before 16.0.
  * What v3 adds over v2:
@@ -477,4 +477,4 @@ function sceneV3ToV2(doc) {
 }
 
 export { DEPRECATIONS_V16, SCENE_V3_FORMAT, SCENE_V3_LIMITS, SCENE_V3_STATUS, SCENE_V3_VERSION, isSceneV3, migrateToSceneV3, normalizeSceneV3, sceneV3ToV2, serializeSceneV3, validateSceneV3 };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/scene-v3.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/components/scene-v3.js.map

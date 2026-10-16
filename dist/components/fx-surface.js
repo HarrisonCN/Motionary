@@ -1,4 +1,4 @@
-import { registerEffects } from '../chunks/registry-B1ipgYF7.js';
+import { registerEffects } from '../chunks/registry-BdSDdeL7.js';
 
 /** The built-in surface themes of the 8.6 theme system. */
 const SURFACE_THEMES = ['light', 'dark', 'neon', 'glass', 'neu'];
@@ -80,4 +80,4 @@ function registerSurfacePack() {
 }
 
 export { SURFACE_FX, SURFACE_THEMES, applySurfaceTheme, registerSurfacePack };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/fx-surface.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/components/fx-surface.js.map

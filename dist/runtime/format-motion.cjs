@@ -1,9 +1,9 @@
 'use strict';
 
-var registry = require('../chunks/registry-sRiTWT0H.cjs');
-var tween = require('../chunks/tween-CLYPTo7k.cjs');
+var registry = require('../chunks/registry-CpNyoGLj.cjs');
+var tween = require('../chunks/tween-DsMQYI_8.cjs');
 var ease = require('../chunks/ease-HwYZnZat.cjs');
-var keyframes = require('../chunks/keyframes-CSjvnBpm.cjs');
+var keyframes = require('../chunks/keyframes-JLC_DABH.cjs');
 
 /**
  * `motionary/runtime/format-motion` (10.1) — play Motion / Framer-style
@@ -136,4 +136,4 @@ exports.fromMotion = fromMotion;
 exports.motionEase = motionEase;
 exports.playMotion = playMotion;
 exports.springEase = springEase;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/runtime/format-motion.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/runtime/format-motion.cjs.map

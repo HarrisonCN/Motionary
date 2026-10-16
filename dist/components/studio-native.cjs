@@ -341,4 +341,4 @@ exports.NATIVE_TARGETS = NATIVE_TARGETS;
 exports.STUDIO_NATIVE_VERSION = STUDIO_NATIVE_VERSION;
 exports.exportNative = exportNative;
 exports.nativeSupport = nativeSupport;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/studio-native.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/components/studio-native.cjs.map

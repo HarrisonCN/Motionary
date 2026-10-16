@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 10.8 · **changed in** 13.2
 - **Import:** `import { defineSnapCarousel } from 'motionary/components/snap-carousel'` then `defineSnapCarousel();`
-- **CDN:** `<script type="module">import { defineSnapCarousel } from 'https://unpkg.com/motionary@16/dist/components/snap-carousel.js'; defineSnapCarousel();</script>` (own entry, not in the no-build bundles)
+- **CDN:** `<script type="module">import { defineSnapCarousel } from 'https://unpkg.com/motionary@17/dist/components/snap-carousel.js'; defineSnapCarousel();</script>` (own entry, not in the no-build bundles)
 - **Attributes:** `align`, `gap`, `autoplay`, `no-controls`, `no-dots`, `label`, `index`
 - **Events:** `usa:change`, `usa:runtime-missing`
 - **Slots:** —
@@ -30,11 +30,11 @@ defineSnapCarousel(); // registers <usa-snap-carousel> — after the prerequisit
 3. **CDN:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@16/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@16/dist/runtime/drag-snap.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@17/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@17/dist/runtime/drag-snap.iife.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@16/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@16/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@17/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@17/dist/widgets.umd.js"></script>
 ```
 
 ## Minimal example

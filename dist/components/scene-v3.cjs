@@ -5,7 +5,7 @@ var components_studioA11y = require('./studio-a11y.cjs');
 var v3Read = require('../chunks/v3-read-BNhrN3tL.cjs');
 
 /**
- * 15.9: Scene Format v3 — DRAFT (`motionary/scene/v3-preview` = `motionary/components/scene-v3-preview`).
+ * 15.9: Scene Format v3 — DRAFT (then `motionary/scene/v3-preview`; stable here since 16.0, the preview path was removed in 17.0).
  *
  * The format 16.0 writes (docs/scene-v3.md, scripts/scene-v3.schema.json). Draft: it may change before 16.0.
  * What v3 adds over v2:
@@ -490,4 +490,4 @@ exports.normalizeSceneV3 = normalizeSceneV3;
 exports.sceneV3ToV2 = sceneV3ToV2;
 exports.serializeSceneV3 = serializeSceneV3;
 exports.validateSceneV3 = validateSceneV3;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/scene-v3.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/components/scene-v3.cjs.map

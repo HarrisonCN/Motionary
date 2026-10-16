@@ -6,7 +6,7 @@ A GPU shader behind your content: gradient, plasma, waves or aurora presets — 
 
 - **Category:** webgl · **since** 3.4 · **changed in** 4.0, 4.8
 - **Import:** `import { defineShader } from 'motionary/components/webgl'` then `defineShader();`
-- **CDN:** `<script src="https://unpkg.com/motionary@16/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@17/dist/components.umd.js"></script>`
 - **Attributes:** —
 - **Events:** —
 - **Slots:** —

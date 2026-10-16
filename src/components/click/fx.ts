@@ -14,7 +14,7 @@ function fxLayer(): HTMLElement {
   layer.className = 'usa-fx-layer';
   layer.setAttribute('aria-hidden', 'true');
   layer.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:2147483000;overflow:hidden;contain:strict';
-  document.body.appendChild(layer);
+  document.body.append(layer);
   return layer;
 }
 
@@ -42,7 +42,7 @@ function particle(x: number, y: number, size: number, color: string, shape: stri
   p.style.cssText = `position:absolute;left:${x}px;top:${y}px;width:${size}px;height:${size}px;margin:${-size / 2}px 0 0 ${-size / 2}px;will-change:transform,opacity;` +
     (glyph ? `font-size:${size * 2}px;line-height:${size}px;text-align:center;color:${color}` : `background:${color};border-radius:${shape === 'square' ? '2px' : '50%'}`);
   if (glyph) p.textContent = glyph;
-  fxLayer().appendChild(p);
+  fxLayer().append(p);
   return p;
 }
 

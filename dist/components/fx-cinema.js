@@ -1,4 +1,4 @@
-import { registerEffects } from '../chunks/registry-B1ipgYF7.js';
+import { registerEffects } from '../chunks/registry-BdSDdeL7.js';
 
 const CAMERA_MOVES = ['dolly-in', 'dolly-out', 'pan-left', 'pan-right', 'tilt-up', 'tilt-down', 'zoom-in', 'zoom-out', 'orbit'];
 /** Transform of camera `move` at progress `p` (0–1, clamped), `strength` 0–2 (9.1). */
@@ -91,4 +91,4 @@ function registerCinemaPack() {
 }
 
 export { CAMERA_MOVES, CINEMA_FX, cameraFrame, registerCinemaPack };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/fx-cinema.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/components/fx-cinema.js.map

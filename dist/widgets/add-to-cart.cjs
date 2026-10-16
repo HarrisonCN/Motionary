@@ -2,7 +2,7 @@
 
 var base = require('../chunks/base-BvH4nAcv.cjs');
 var registry = require('../chunks/registry-CibnX7Ui.cjs');
-require('../chunks/builtins-DweCp29Z.cjs');
+require('../chunks/builtins-fp4MVfE-.cjs');
 var components_fxShop = require('../components/fx-shop.cjs');
 
 var css = "usa-add-to-cart{display:inline-block}.usa-atc-btn{position:relative;display:inline-grid;place-items:center;min-width:var(--usa-atc-w,150px);padding:11px 18px;border:0;border-radius:999px;background:var(--usa-atc-bg,#7c5cff);color:#fff;font:700 14px/1 system-ui,sans-serif;cursor:pointer;overflow:hidden;transition:background .3s}.usa-atc-btn>span{grid-area:1/1;transition:transform .35s cubic-bezier(.3,1.4,.5,1),opacity .25s}.usa-atc-done{transform:translateY(120%);opacity:0}usa-add-to-cart[data-added] .usa-atc-btn{background:var(--usa-atc-ok,#16a34a)}usa-add-to-cart[data-added] .usa-atc-label{transform:translateY(-120%);opacity:0}usa-add-to-cart[data-added] .usa-atc-done{transform:none;opacity:1}.usa-atc-btn:focus-visible{outline:3px solid #a78bfa;outline-offset:2px}.usa-atc-live{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}@media (prefers-reduced-motion:reduce){.usa-atc-btn>span{transition:none}}";
@@ -40,7 +40,7 @@ function defineAddToCart(tag = 'usa-add-to-cart') {
                 const cart = base.queryAttr(cartSel);
                 const from = base.queryAttr(this.str('from')) || this.closest('[data-product]')?.querySelector('img') || this;
                 if (registry.getEffect('fly-to-cart'))
-                    void registry.playEffect(from, 'fly-to-cart', { to: cart?.matches('usa-cart-drawer') ? `${cartSel} .usa-cd2-toggle` : cartSel });
+                    void registry.playEffect(from, 'fly-to-cart', { to: cart?.matches('usa-cart-drawer,mo-cart-drawer') ? `${cartSel} .usa-cd2-toggle` : cartSel });
                 cart?.add?.(item);
                 this.setAttribute('data-added', '');
                 this.querySelector('.usa-atc-live').textContent = `${this.str('added', 'Added')} to cart`;
@@ -57,4 +57,4 @@ function defineAddToCart(tag = 'usa-add-to-cart') {
 }
 
 exports.defineAddToCart = defineAddToCart;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/widgets/add-to-cart.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/widgets/add-to-cart.cjs.map

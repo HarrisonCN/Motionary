@@ -186,7 +186,7 @@ export const LOTTIE_FX: EffectDefinition[] = [
     defaults: {},
     run: (el: HTMLElement, o: any, ctx: EffectContext) => {
       if (ctx.reduced) return;
-      const host = el.closest('usa-lottie') as (HTMLElement & { play?: () => void }) | null;
+      const host = el.closest('usa-lottie,mo-lottie') as (HTMLElement & { play?: () => void }) | null;
       if (host?.play) return void host.play();
       if (!o.json) return;
       const m = lottieToKeyframes(o.json);

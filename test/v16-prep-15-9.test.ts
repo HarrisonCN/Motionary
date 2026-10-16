@@ -174,12 +174,11 @@ describe('motionary-mcp 2.5: validate_scene + deprecations on MCP 2.x shapes (16
   });
 });
 
-describe('15.9 package entry (16.0: aliases of motionary/scene/v3)', () => {
-  it('motionary/scene/v3-preview and motionary/components/scene-v3-preview stay (16.9: their own forwarding module, removed in 17.0), with a size line for scene-v3', () => {
+describe('15.9 package entry (16.0: aliases of motionary/scene/v3; 17.0 removed them)', () => {
+  it('motionary/scene/v3-preview and motionary/components/scene-v3-preview are gone in 17.0; the scene-v3 size line stays', () => {
     const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'));
-    expect(pkg.exports['./scene/v3-preview'].import.default).toBe('./dist/components/scene-v3-preview.js');
-    expect(pkg.exports['./components/scene-v3-preview'].require.default).toBe('./dist/components/scene-v3-preview.cjs');
-    expect(readFileSync(join(ROOT, 'src/components/scene/v3-preview.ts'), 'utf8')).toMatch(/export \* from '\.\/v3'/);
+    expect(pkg.exports['./scene/v3-preview']).toBeUndefined();
+    expect(pkg.exports['./components/scene-v3-preview']).toBeUndefined();
     expect(readFileSync(join(ROOT, 'size-budget.json'), 'utf8')).toMatch(/components\/scene-v3/);
   });
 });

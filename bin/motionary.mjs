@@ -4,11 +4,10 @@
 //   npx motionary export --target css|wxss|arkts   presets + motion tokens for other platforms (12.1)
 //   npx motionary export --scene f.json --target css|wxss|arkts|compose|swiftui [--out f] [--report f] [--strict]   a scene → native code + loss report (15.2)
 //   npx motionary migrate <files…> [--write|--out f] [--diff] [--report] [--json] [--tokenize]   v1 motion JSON → scene v2 (13.9; official format since 14.0)
-//   npx motionary migrate --code [paths…] [--write] [--json]   rewrite import moves + CDN majors in source files (14.0; @16 since 16.0, + check_compat tool name)
+//   npx motionary migrate --code [paths…] [--write] [--json]   rewrite import moves + CDN majors in source files (14.0; to the package's own major since 17.0, + check_compat tool name)
 //   npx motionary tokens import-figma|export-figma|validate|css …   Motion Tokens 2.0 ↔ DTCG / Figma Variables / CSS (14.1)
 //   npx motionary codemod <11–13> [args…]   run an older usa-codemod-<n> (5–10 removed in 15.0: use npx motionary@v14-lts codemod <n>)
-//   npx motionary doctor --v15 [paths…] [--json]   everything 15.0 removes: compat-v13 imports, codemod 5–10 scripts, legacy data (14.9)
-//   npx motionary migrate --to 15 [paths…] [--write] [--report f] [--json]   move off it: .bak first, loss / manual report (14.9)
+//   (doctor --v15 / migrate --to 15 were removed in 17.0: npx motionary@v16-lts …)
 //   npx motionary doctor --v16 [paths…] [--json]   everything 16.0 changes: Scene v2 data, variants in meta, exportScene() without a version, MCP 2.x shapes (15.9)
 //   npx motionary migrate --to 16 [paths…] [--dry-run] [--report f] [--json]   Scene v3 preview with a per-file loss report; --write waits for 16.0 (15.9)
 //   npx motionary help
@@ -57,7 +56,7 @@ const HELP = `motionary <command>
                              next to each input (never overwrites it). Exit 1 when any file fails — docs/migrating-to-v14.md
   migrate --code [paths…] [--write] [--json]
                              rewrite import moves in source files: motionary/components/scene-v2 → motionary/scene,
-                             CDN motionary@10…15/ → motionary@16/, MCP tool name check_compat → check_compatibility (16.0).
+                             CDN motionary@10…15/ → motionary@17/, MCP tool name check_compat → check_compatibility (16.0).
                              Dry run by default (default path: current directory)
   tokens import-figma <file> [--out file] [--css] [--collection name]
                              Figma Variables JSON (GET /v1/files/:key/variables/local response or a POST body) →
@@ -68,13 +67,8 @@ const HELP = `motionary <command>
   tokens validate <file>     check a DTCG or Figma Variables tokens file. Exit 1 when it has problems
   tokens css [tokens.json] [--out file]
                              CSS custom properties, with reduced-motion and mode blocks
-  doctor --v15 [paths…] [--json]
-                             list everything 15.0 removes: motionary/compat-v13 imports, codemod 5–10 scripts and legacy
-                             (playground / unversioned) animation data. Exit 1 when any is found — docs/deprecations-v15.md
-  migrate --to 15 [paths…] [--write] [--report file] [--json]
-                             convert legacy animation data to Scene v2 in place and remove plain installCompatV13() uses,
-                             each after a .bak copy (never overwrites a backup: .bak.1, .bak.2 …); lists manual work and
-                             damaged Studio projects (never rewritten). Dry run by default — docs/migrating-to-v15.md
+  doctor --v15 / migrate --to 15
+                             removed in 17.0 — run them with the 16.x CLI: npx motionary@v16-lts doctor --v15
   doctor --v16 [paths…] [--json]
                              list everything 16.0 changes: Scene v2 files (16.0 writes v3), meta["motionary:variants"],
                              studio.exportScene() without { version: 2 }, MCP 2.x shapes (check_compat, validate_snippet
@@ -170,6 +164,7 @@ export function runMigrate(rest, S, V3) {
 }
 // --- 14.0: migrate --code + codemod -------------------------------------------------------------
 const PKG = '(motionary|use-scroll-animate)';
+const CDN_MAJOR = +String(createRequire(import.meta.url)('../package.json').version).split('.')[0];
 /** Rewrite the 14.0 import moves in one source text. Returns { code, changes }. Idempotent. */
 export function migrateCode(source) {
   const changes = [];
@@ -179,9 +174,11 @@ export function migrateCode(source) {
     changes.push(`${pkg}/components/scene-v2 → ${pkg}/scene`);
     return `${q}${pkg}/scene${q}`;
   });
-  code = code.replace(/\b(motionary|use-scroll-animate)@(1[0-5])(?=\/)/g, (m, pkg, major) => {
-    changes.push(`${pkg}@${major}/ → ${pkg}@16/ (CDN major)`);
-    return `${pkg}@16`;
+  // 17.0: the target is the installed package's own CDN major (was a hardcoded @16, so 17.0.0-rc.1 pointed pages back at 16)
+  code = code.replace(/\b(motionary|use-scroll-animate)@(1\d)(?=\/)/g, (m, pkg, major) => {
+    if (+major >= CDN_MAJOR) return m;
+    changes.push(`${pkg}@${major}/ → ${pkg}@${CDN_MAJOR}/ (CDN major)`);
+    return `${pkg}@${CDN_MAJOR}`;
   });
   // 16.0: motionary-mcp 3.0 removed the check_compat tool — rewrite the quoted tool name (validate_snippet { scene } is
   // listed by `migrate --to 16` as manual work: the argument shape needs a person)
@@ -226,43 +223,15 @@ export async function runCodemod(rest) {
   return 0;
 }
 
-// --- 14.9: v15 preparation (docs/deprecations-v15.md) ---------------------------------------------
+// --- 14.9: v15 preparation (docs/deprecations-v15.md); the v15 project migration itself was removed in 17.0 (v16-lts keeps it) ---
 const V15_DOC = 'docs/deprecations-v15.md';
-/** What 15.0 removes (same ids as DEPRECATIONS_V15 in motionary/compat-v13's notices) → how to fix it. */
-export const V15_FIX = {
-  'compat-v13-entry': 'motionary/compat-v13 is removed in 15.0 — drop the import (convert data with `npx motionary migrate --to 15`)',
-  'install-compat-v13': 'installCompatV13() is removed in 15.0 — convert playground / unversioned animation JSON once with `npx motionary migrate --to 15` and remove the call',
-  'normalize-animation': 'normalizeAnimation() is removed in 15.0 — use validateSceneV2() / migrateToSceneV2() from motionary/scene',
-  'upgrade-legacy-animation': 'upgradeLegacyAnimation() is removed in 15.0 — use migrateToSceneV2() from motionary/scene',
-  'old-codemods': '`motionary codemod <5–10>` is removed in 15.0 — run it with a 14.x CLI before upgrading, then drop the script',
-};
-const COMPAT_RE = /(['"`])(?:motionary|use-scroll-animate)\/(?:components\/)?compat-v13\1/;
-const OLD_CODEMOD_RE = /(?:\bmotionary\s+codemod\s+(?:10|[5-9])|\busa-codemod-(?:10|[5-9]))(?![\d.])/;
 const REPORT_NAME = 'motionary-migrate-report.json';
 /** Error for `motionary codemod <5–10>` (removed in 15.0); '' for the codemods that stay (11–13). */
 export function codemodNotice(n) {
   return n >= 5 && n <= 10 ? `motionary codemod ${n}: the 13.x upgrade tools (codemod 5–10) were removed in 15.0 — run it with a 14.x CLI: npx motionary@v14-lts codemod ${n} --write [paths…] (${V15_DOC}#old-codemods)` : '';
 }
-const isLegacyAnimation = (d) => !!d && typeof d === 'object' && !Array.isArray(d) && (d.format === 'use-scroll-animate/playground' || (d.format === undefined && d.version === undefined && Array.isArray(d.tracks)));
-const compatId = (line) => (/\binstallCompatV13\b/.test(line) ? 'install-compat-v13' : /\bnormalizeAnimation\b/.test(line) ? 'normalize-animation' : /\bupgradeLegacyAnimation\b/.test(line) ? 'upgrade-legacy-animation' : 'compat-v13-entry');
 function* v15Files(paths) {
   for (const root of paths.length ? paths : ['.']) if (existsSync(root)) for (const f of walk(root)) if (!f.endsWith(REPORT_NAME)) yield f;
-}
-function scanV15(f, text) {
-  const out = [];
-  const lines = text.split('\n');
-  if (extname(f) === '.json') {
-    let d; try { d = JSON.parse(text); } catch { d = undefined; }
-    if (isLegacyAnimation(d)) out.push({ file: f, line: 1, kind: 'legacy-data', id: 'install-compat-v13', fix: 'convert to Scene v2: npx motionary migrate --to 15 --write', text: d.format || 'animation JSON without "format" / "version"' });
-  } else lines.forEach((l, i) => { if (COMPAT_RE.test(l)) { const id = compatId(l); out.push({ file: f, line: i + 1, kind: 'compat-import', id, fix: V15_FIX[id], text: l.trim() }); } });
-  lines.forEach((l, i) => { const m = l.match(OLD_CODEMOD_RE); if (m) out.push({ file: f, line: i + 1, kind: 'old-codemod', id: 'old-codemods', fix: V15_FIX['old-codemods'], text: m[0] }); });
-  return out;
-}
-/** `doctor --v15` (14.9): every use of what 15.0 removes → [{ file, line, kind: 'compat-import' | 'old-codemod' | 'legacy-data', id, fix, text }]. */
-export function doctorV15(paths) {
-  const found = [];
-  for (const f of v15Files(paths)) found.push(...scanV15(f, readFileSync(f, 'utf8')));
-  return found;
 }
 /** Next free backup name: f.bak, then f.bak.1, f.bak.2 … (an existing backup is never overwritten). */
 export function backupPath(f) {
@@ -270,90 +239,9 @@ export function backupPath(f) {
   let n = 1; while (existsSync(`${f}.bak.${n}`)) n++;
   return `${f}.bak.${n}`;
 }
-const MANUAL_REASON = {
-  'normalize-animation': 'normalizeAnimation() has no drop-in replacement: validate with validateSceneV2() or convert with migrateToSceneV2() from motionary/scene',
-  'upgrade-legacy-animation': 'upgradeLegacyAnimation() has no drop-in replacement: convert with migrateToSceneV2() from motionary/scene (Scene v2 instead of animation JSON v1)',
-  'compat-v13-entry': 'the motionary/compat-v13 import is used for something migrate cannot rewrite safely — remove it by hand',
-  'install-compat-v13': 'installCompatV13() is used beyond a plain `installCompatV13();` statement (its uninstall is kept) — remove it by hand after converting the data',
-  'old-codemods': 'the 13.x codemod runner is removed in 15.0: run this script with a 14.x CLI first, then delete it',
-};
-/** Remove `import { installCompatV13 } from '…/compat-v13'` and plain `installCompatV13();` statements; null when not mechanical. */
-function stripInstallCompat(src) {
-  const imp = new RegExp(String.raw`^[ \t]*import\s*\{\s*installCompatV13\s*\}\s*from\s*(['"])(?:motionary|use-scroll-animate)/(?:components/)?compat-v13\1;?[ \t]*\r?\n?`, 'm');
-  if (!imp.test(src)) return null;
-  const code = src.replace(imp, '').replace(/^[ \t]*installCompatV13\(\);?[ \t]*\r?\n?/gm, '');
-  return /\binstallCompatV13\b|compat-v13/.test(code) ? null : code;
-}
-/**
- * `migrate --to 15` (14.9). Dry run unless `write`. Converts legacy animation data to Scene v2 in place (after a `.bak`),
- * removes mechanical installCompatV13 uses (after a `.bak`), lists manual work and damaged Studio projects (never rewritten).
- * Returns the report { format: 'motionary-migrate-report', version: 1, to: '15', write, files, manual, problems }.
- */
-export function migrateTo15(paths, opts = {}) {
-  const S = opts.sceneV2 || createRequire(import.meta.url)('../dist/components/scene-v2.cjs');
-  let ST = opts.studio;
-  const studio = () => (ST ||= createRequire(import.meta.url)('../dist/components/studio.cjs'));
-  const write = !!opts.write;
-  const files = [], manual = [], problems = [];
-  const save = (f, text, old) => { const b = backupPath(f); writeFileSync(b, old); writeFileSync(f, text); return b; };
-  for (const f of v15Files(paths)) {
-    const text = readFileSync(f, 'utf8');
-    if (extname(f) === '.json') {
-      let d, bad;
-      try { d = JSON.parse(text); } catch (e) { bad = e; }
-      const isProject = /\.motionary\.json$/i.test(f) || (d && d.format === 'motionary-studio');
-      if (isProject) {
-        try { if (bad) throw new Error(`invalid JSON (${bad.message})`); studio().parseStudioProject(d, { sceneV3ToV2: (x) => (opts.sceneV3 || createRequire(import.meta.url)('../dist/components/scene-v3.cjs')).sceneV3ToV2(x) }); } catch (e) { problems.push({ file: f, kind: 'studio-project', message: String(e.message || e) + ' — left untouched; restore it from a backup or the last saved pack' }); }
-        continue;
-      }
-      if (isLegacyAnimation(d)) {
-        const r = S.migrateToSceneV2(text);
-        if (!r.ok) { problems.push({ file: f, kind: 'legacy-data', message: (r.problems || []).map((p) => `${p.path || '(root)'}: ${p.message}`).join('; ') || 'migration failed' }); continue; }
-        const e = { file: f, kind: 'legacy-data', id: 'install-compat-v13', changed: true, changes: r.report.changes, losses: r.report.lost, warnings: r.report.warnings, from: r.report.from };
-        if (write) e.backup = save(f, S.serializeSceneV2(r.doc), text);
-        files.push(e);
-        continue;
-      }
-    }
-    const hits = scanV15(f, text);
-    if (!hits.length) continue;
-    const e = { file: f, kind: hits[0].kind, id: hits[0].id, changed: false, changes: [] };
-    const compat = hits.filter((h) => h.kind === 'compat-import');
-    if (compat.length) {
-      const only = compat.every((h) => h.id === 'install-compat-v13');
-      const code = only ? stripInstallCompat(text) : null;
-      if (code !== null) { e.changed = true; e.changes.push('removed installCompatV13 (import + call): convert the data it served with migrate --to 15'); if (write) e.backup = save(f, code, text); }
-      else for (const h of compat) manual.push({ file: f, line: h.line, id: h.id, reason: MANUAL_REASON[h.id] });
-    }
-    for (const h of hits.filter((x) => x.kind === 'old-codemod')) manual.push({ file: f, line: h.line, id: h.id, reason: `${h.text}: ${MANUAL_REASON['old-codemods']}` });
-    files.push(e);
-  }
-  const report = { format: 'motionary-migrate-report', version: 1, to: '15', write, files, manual, problems };
-  if (opts.report) writeFileSync(opts.report, JSON.stringify(report, null, 2) + '\n');
-  return report;
-}
-/** `motionary migrate --to 15 [paths…] [--write] [--report file] [--json]`: exit 1 when a file could not be migrated or read. */
-export function runMigrateTo15(rest, env = {}) {
-  const to = flag(rest, 'to');
-  if (to !== '15') { console.error('usage: motionary migrate --to 15 [paths…] [--write] [--report file] [--json]'); return 2; }
-  const VAL = new Set(['--to', '--report']);
-  const paths = rest.filter((a, i) => !a.startsWith('--') && !VAL.has(rest[i - 1]));
-  for (const p of paths) if (!existsSync(p)) { console.error(`motionary migrate --to 15: ${p} not found`); return 2; }
-  const write = rest.includes('--write');
-  const r = migrateTo15(paths, { write, sceneV2: env.sceneV2, studio: env.studio, report: flag(rest, 'report') || (write ? join(paths[0] || '.', REPORT_NAME) : undefined) });
-  if (rest.includes('--json')) console.log(JSON.stringify(r, null, 2));
-  else {
-    for (const x of r.files) console.log(`${x.file}  ${x.kind}${x.changed ? (write ? `  converted (backup ${x.backup})` : '  will change') : ''}${x.losses && x.losses.length ? `  losses: ${x.losses.length}` : ''}`);
-    for (const m of r.manual) console.log(`${m.file}:${m.line}  manual  ${m.reason}`);
-    for (const p of r.problems) console.log(`${p.file}  problem  ${p.message}`);
-    console.log(`\nmotionary migrate --to 15: ${r.files.filter((x) => x.changed).length} file(s) ${write ? 'migrated' : 'to migrate (dry run — add --write; backups are written first)'}, ${r.manual.length} manual item(s), ${r.problems.length} problem(s). See ${V15_DOC}.`);
-  }
-  return r.problems.length ? 1 : 0;
-}
-
 // ---------------------------------------------------------------- 15.9: v16 preparation
 const V16_DOC = 'docs/deprecations-v16.md';
-/** What 16.0 changes (same ids as DEPRECATIONS_V16 in motionary/scene/v3-preview) → how to fix it. */
+/** What 16.0 changes (same ids as DEPRECATIONS_V16 in motionary/scene/v3) → how to fix it. */
 export const V16_FIX = {
   'scene-v2-write': '16.0 writes Scene v3 (v2 is still read): convert files with `npx motionary migrate --to 16`; code that needs v2 calls studio.exportScene({ version: 2 })',
   'variants-meta': 'Scene v3 keeps breakpoint variants in "variants": `npx motionary migrate --to 16` moves them; code uses variantsOf() from motionary/studio/a11y',
@@ -452,6 +340,8 @@ const ALIAS17_RE = /(['"`])motionary\/(scene\/v3|components\/scene-v3)-preview\1
 const CLI15_RE = /\bmotionary(?:@[\w.-]+)?\s+(?:doctor\s+--v15|migrate\s+--to\s+15)\b/;
 /** Notice printed (stderr) by the commands 17.0 removes. */
 export const notice17 = (cmd) => `motionary ${cmd}: removed in 17.0 — run it with the 16.x CLI (npx motionary@v16-lts ${cmd}) before upgrading (${V17_DOC}#cli-migrate-15)`;
+/** 17.0: the v15 project migration commands are gone — the error they print (exit 2). */
+export const removed17 = (cmd) => `motionary ${cmd}: removed in 17.0 — run it with the 16.x CLI: npx motionary@v16-lts ${cmd} (${V17_DOC}#cli-migrate-15)`;
 function scanV17(f, text) {
   const out = [];
   text.split('\n').forEach((l, i) => {
@@ -588,8 +478,9 @@ export function main(argv, env = {}) {
     const to = flag(rest, 'to');
     if (to === '17') return runMigrateTo17(rest);
     if (to === '16') return runMigrateTo16(rest, env);
-    console.error(notice17('migrate --to 15'));
-    return runMigrateTo15(rest, env);
+    if (to === '15') { console.error(removed17('migrate --to 15')); return 2; }
+    console.error('usage: motionary migrate --to 16|17 [paths…] [--write] [--report file] [--json]');
+    return 2;
   }
   if (cmd === 'migrate' && rest.includes('--code')) return runMigrateCode(rest.filter((a) => a !== '--code'));
   if (cmd === 'migrate') {
@@ -620,17 +511,7 @@ export function main(argv, env = {}) {
     }
     return found.length ? 1 : 0;
   }
-  if ((cmd === 'doctor' || cmd === 'check') && rest.includes('--v15')) {
-    console.error(notice17('doctor --v15'));
-    const found = doctorV15(rest.filter((a) => !a.startsWith('--')));
-    if (rest.includes('--json')) console.log(JSON.stringify({ v15: found }, null, 2));
-    else if (!found.length) console.log('motionary doctor --v15: nothing that 15.0 removes was found ✓');
-    else {
-      for (const x of found) console.log(`${x.file}:${x.line}  ${x.kind}  ${x.text}\n    → ${x.fix}`);
-      console.log(`\n${found.length} use(s) of what 15.0 removes (${V15_DOC}). Fix: npx motionary migrate --to 15 (dry run) then --write`);
-    }
-    return found.length ? 1 : 0;
-  }
+  if ((cmd === 'doctor' || cmd === 'check') && rest.includes('--v15')) { console.error(removed17('doctor --v15')); return 2; }
   if (cmd === 'doctor' || cmd === 'check') {
     const found = doctor(rest.filter((a) => !a.startsWith('--')));
     if (rest.includes('--json')) console.log(JSON.stringify({ deprecated: found }, null, 2));

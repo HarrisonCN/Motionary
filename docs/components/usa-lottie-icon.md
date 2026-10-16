@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 9.2 · **changed in** 11.8
 - **Import:** `import { defineLottieIcon } from 'motionary/components/widgets'` then `defineLottieIcon();`
-- **CDN:** `<script src="https://unpkg.com/motionary@16/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@17/dist/widgets.umd.js"></script>`
 - **Attributes:** `name`, `size`, `color`, `label`, `trigger`
 - **Events:** —
 - **Slots:** —

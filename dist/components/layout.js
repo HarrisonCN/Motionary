@@ -1,4 +1,4 @@
-import { p as prefersReducedMotion, D as EASE_OUT, m as motionScale, f as defineElement, r as raf } from '../chunks/base-QrtwTUOO.js';
+import { p as prefersReducedMotion, F as EASE_OUT, m as motionScale, f as defineElement, r as raf } from '../chunks/base-BQmWYlDq.js';
 
 /** FLIP keyframes from a previous box to the current one (pure). */
 function flipFrames(from, to, scale = true) {
@@ -56,7 +56,7 @@ function autoAnimate(parent, o = {}) {
                     n.style.pointerEvents = 'none';
                     if (getComputedStyle(parent).position === 'static')
                         parent.style.position = 'relative';
-                    parent.appendChild(n);
+                    parent.append(n);
                     n.__usaGhost = true;
                     const a = animate(n, [{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'scale(0.96)' }]);
                     const drop = () => {
@@ -250,4 +250,4 @@ function defineLayoutComponents() {
 }
 
 export { autoAnimate, defineAutoAnimate, defineLayoutComponents, defineMasonry, flipFrames, masonryLayout, sharedTransition };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/layout.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/components/layout.js.map

@@ -123,4 +123,4 @@ function registerGamePack() {
 exports.GAME_FX = GAME_FX;
 exports.registerGamePack = registerGamePack;
 exports.throwPath = throwPath;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/fx-game.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/components/fx-game.cjs.map

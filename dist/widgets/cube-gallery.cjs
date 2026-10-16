@@ -140,4 +140,4 @@ function defineCubeGallery(tag = 'usa-cube-gallery') {
 }
 
 exports.defineCubeGallery = defineCubeGallery;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/widgets/cube-gallery.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/widgets/cube-gallery.cjs.map

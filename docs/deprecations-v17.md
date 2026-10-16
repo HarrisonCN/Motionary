@@ -1,8 +1,8 @@
 # Removed in 17.0.0 (announced in 16.9)
 
-17.0 is the **platform-stable** major: Scene Format v3, the Studio plugin API (v1) and motionary-mcp 3.x are frozen.
-It removes only what 16.9 announced below. Everything on this page still works in 16.x (`v16-lts` after 17.0 ships).
-In 16.9 each item has a development warning (once per session), a `doctor --v17` finding and a migration path; nothing
+17.0 removes only what 16.9 announced below, and introduces the `mo-*` names ([below](#mo-names)). Studio (incl. the
+plugin API), MCP, AI, the Figma plugin and cross-platform export stay experimental ([stability.md](./stability.md)). Everything on this page still works in 16.x (`v16-lts`).
+In 16.9 each item had a development warning (once per session), a `doctor --v17` finding and a migration path; nothing
 here is in `motionary/components/lite` — lite stays ≤ 70 KB gzip with zero dependencies.
 
 Find every use: `npx motionary doctor --v17` (exit 1 when anything is found). Fix it: `npx motionary migrate --to 17`
@@ -38,3 +38,38 @@ codemod runner) for 15.0. In 16.9 both print a notice on stderr. 17.0 removes th
 
 Not removed in 17.0: Scene v2 stays readable (and `exportScene({ version: 2 })` / `sceneV3ToV2()` keep writing it on
 request), `doctor --v16` / `migrate --to 16` stay, the codemods `usa-codemod-11` … `13` stay.
+
+<a id="mo-names"></a>
+## `mo-*` names (17.0) — `usa-*` deprecated, kept
+
+17.0 adds Motionary-named aliases. The old names keep working; they are deprecated, and their removal is **not before a
+future major** (none is planned). Nothing to do now; prefer the new names in new code.
+
+| Deprecated (still works) | Preferred since 17.0 |
+|---|---|
+| every `<usa-*>` element, e.g. `<usa-switch>` | `<mo-*>`, e.g. `<mo-switch>` (same element: a subclass, same attributes, properties and `usa:*` events) — on in the CDN bundles; with ESM call `defineMoAliases()` from `motionary/components/mo` |
+| `window.UsaComponents` (CDN bundle `components.umd.js`) | `window.MotionaryComponents` (the same object) |
+| `npx -p motionary usa-codemod-<n>` | `npx -p motionary mo-codemod <n>` (same runner as `npx motionary codemod <n>`) |
+
+Turning the names on:
+
+- **CDN / no-build** (`components.umd.js`, `widgets.umd.js`): nothing to do, both bundles turn them on before they
+  register anything.
+- **ESM / bundlers:** one call, ideally before you define components. The alias code is its own entry, so pages that only
+  use `usa-*` names (and every per-component import, and `motionary/components/lite`) keep their 16.9 size:
+
+  ```ts
+  import { defineMoAliases } from 'motionary/components/mo';
+  import { defineComponents } from 'motionary/components';
+  defineMoAliases();
+  defineComponents(); // <mo-card>, <mo-tabs>, … and <usa-*> both work
+  ```
+
+  Called later, it still aliases the default components already defined and anything behind a `<mo-*>` element already
+  on the page; everything defined afterwards is aliased as it is defined.
+
+Notes: aliases exist for `usa-*` tags; an element you registered under your own name (`defineSwitch('my-switch')`)
+gets none. CSS that targets `usa-switch` does not match `<mo-switch>`; the component's own styles are copied for `mo-*`
+(tag selectors renamed) the first time a `mo-*` element connects. With `motionary/components/lite` the category CSS files
+are copied once they load; a CSS file served from another origin without CORS cannot be read, so `<mo-*>` stays
+unstyled there — use `<usa-*>` names with lite from a CDN. Event names stay `usa:*`.

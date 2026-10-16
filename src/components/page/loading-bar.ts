@@ -85,11 +85,11 @@ export function defineLoadingBar(tag = 'usa-loading-bar'): CustomElementConstruc
 
 function bar(): UsaLoadingBarElement | null {
   if (typeof document === 'undefined') return null;
-  let el = document.querySelector('usa-loading-bar') as UsaLoadingBarElement | null;
+  let el = document.querySelector('usa-loading-bar,mo-loading-bar') as UsaLoadingBarElement | null;
   if (!el) {
     defineLoadingBar();
     el = document.createElement('usa-loading-bar') as UsaLoadingBarElement;
-    document.body.appendChild(el);
+    document.body.append(el);
   }
   return typeof el.start === 'function' ? el : null;
 }

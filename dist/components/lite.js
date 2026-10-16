@@ -576,7 +576,7 @@ function loadCategoryStyles(category, base) {
     link.rel = 'stylesheet';
     link.href = `${base.replace(/\/?$/, '/')}${category === 'all' ? 'components.css' : `components/${category}.css`}`;
     link.setAttribute('data-usa-css', category);
-    document.head.appendChild(link);
+    document.head.append(link);
     return link;
 }
 /**
@@ -3178,7 +3178,7 @@ function defineToaster(tag = 'usa-toaster') {
 function toast(message, options = {}) {
     if (typeof document === 'undefined' || !defineToaster())
         return null;
-    let host = typeof options.toaster === 'string' ? document.querySelector(options.toaster) : options.toaster || document.querySelector('usa-toaster');
+    let host = typeof options.toaster === 'string' ? document.querySelector(options.toaster) : options.toaster || document.querySelector('usa-toaster,mo-toaster');
     if (!host) {
         host = document.createElement('usa-toaster');
         document.body.append(host);
@@ -5588,7 +5588,7 @@ function fxLayer() {
     layer.className = 'usa-fx-layer';
     layer.setAttribute('aria-hidden', 'true');
     layer.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:2147483000;overflow:hidden;contain:strict';
-    document.body.appendChild(layer);
+    document.body.append(layer);
     return layer;
 }
 const PALETTE = ['#7c5cff', '#22d3ee', '#f472b6', '#facc15', '#34d399', '#fb923c'];
@@ -5600,7 +5600,7 @@ function particle(x, y, size, color, shape) {
         (glyph ? `font-size:${size * 2}px;line-height:${size}px;text-align:center;color:${color}` : `background:${color};border-radius:${shape === 'square' ? '2px' : '50%'}`);
     if (glyph)
         p.textContent = glyph;
-    fxLayer().appendChild(p);
+    fxLayer().append(p);
     return p;
 }
 const done = (a, el) => {
@@ -5820,7 +5820,7 @@ function injectGoo() {
     svg.setAttribute('height', '0');
     svg.style.position = 'absolute';
     svg.innerHTML = '<filter id="usa-goo"><feGaussianBlur in="SourceGraphic" stdDeviation="6" result="b"/><feColorMatrix in="b" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9" result="g"/><feComposite in="SourceGraphic" in2="g" operator="atop"/></filter>';
-    document.body.appendChild(svg);
+    document.body.append(svg);
 }
 function defineButton(tag = 'usa-button') {
     return defineElement(tag, (Base) => class UsaButton extends Base {
@@ -7866,11 +7866,11 @@ function defineLoadingBar(tag = 'usa-loading-bar') {
 function bar() {
     if (typeof document === 'undefined')
         return null;
-    let el = document.querySelector('usa-loading-bar');
+    let el = document.querySelector('usa-loading-bar,mo-loading-bar');
     if (!el) {
         defineLoadingBar();
         el = document.createElement('usa-loading-bar');
-        document.body.appendChild(el);
+        document.body.append(el);
     }
     return typeof el.start === 'function' ? el : null;
 }
@@ -9915,7 +9915,7 @@ function autoAnimate(parent, o = {}) {
                     n.style.pointerEvents = 'none';
                     if (getComputedStyle(parent).position === 'static')
                         parent.style.position = 'relative';
-                    parent.appendChild(n);
+                    parent.append(n);
                     n.__usaGhost = true;
                     const a = animate(n, [{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'scale(0.96)' }]);
                     const drop = () => {
@@ -10169,7 +10169,7 @@ async function flyToCart(from, to, o = {}) {
     const ghost = from.cloneNode(true);
     ghost.setAttribute('aria-hidden', 'true');
     Object.assign(ghost.style, { position: 'fixed', left: `${a.left}px`, top: `${a.top}px`, width: `${a.width}px`, height: `${a.height}px`, margin: '0', zIndex: '2147483000', pointerEvents: 'none' });
-    document.body.appendChild(ghost);
+    document.body.append(ghost);
     const dx = b.left + b.width / 2 - (a.left + a.width / 2);
     const dy = b.top + b.height / 2 - (a.top + a.height / 2);
     const f = anim(ghost, [
@@ -10528,7 +10528,7 @@ const click = [
             if (getComputedStyle(el).position === 'static')
                 el.style.position = 'relative';
             (_a = el.style).overflow || (_a.overflow = 'hidden');
-            el.appendChild(dot);
+            el.append(dot);
             const a = ctx.animate(dot, [{ transform: 'scale(0)', opacity: 0.3 }, { transform: 'scale(1)', opacity: 0 }], { duration: o.duration, easing: 'ease-out' });
             const done = () => dot.remove();
             if (a)
@@ -11041,4 +11041,4 @@ const STYLE_BASE = new URL('../', import.meta.url).href;
 onDemandStyles(STYLE_BASE);
 
 export { ALL_TAGS, AMBIENT_EFFECTS, ANIM_ICONS, BRIDGE_PROTOCOL_VERSION, BUILTIN_EFFECTS, BUTTON_DEFORMS, CARD_EFFECTS, CLICK_EFFECTS, COMPONENT_CATEGORIES, CURSOR_MODES, EFFECT_KINDS, EFFECT_TRIGGERS, GL_FALLBACKS, JOINING_SCRIPT, LIVE_REGION_IDS, MASK_SHAPES, MORPH_ICONS, MOTION_SCALE, MOTION_SENSITIVITY, MOTION_SENSITIVITY_LEVELS, MOTION_TOKENS, PACKS, PACK_PRIMITIVES, PAGE_EFFECTS, PARTICLE_PRESETS, POST_EFFECTS, REVEAL_EFFECTS, SENSITIVITY_CSS, SHADERS, SPINNER_VARIANTS, SPRING_EFFECTS, SPRING_PRESETS, STATIC_ALTERNATIVES, STYLE_BASE, TIMELINE_PRESETS, VARIANTS, activeAnimations, adaptKeyframes, adoptVariants, animateWithMotion, animationBudget, announce, applyMotionTokens, applyNativeSettings, applyPack, auditMotionA11y, autoAnimate, autoDegrade, baselineReport, bindEffect, categoryOf, configureComponents, connectNativeShell, countUp, createSpring, defineAccordion, defineAcrylic, defineAmbient, defineAnimIcon, defineAurora, defineAutoAnimate, defineAutoSkeleton, defineAvatarStack, defineBackToTop, defineBackgroundComponents, defineBadge, defineBlobs, defineBottomSheet, defineButton, defineCard, defineCardComponents, defineCardStack, defineCarousel3d, defineCheck, defineCheckbox, defineClick, defineClickComponents, defineComponents, defineCounter, defineCube, defineCursor, defineDepth, defineDepthComponents, defineDialog, defineDistort, defineDotNetwork, defineDoubleTap, defineDraggable, defineDraw, defineDrawer, defineFab, defineFeedbackComponents, defineFullpage, defineFx, defineFxComponents, defineGestureComponents, defineGlitch, defineGradientText, defineGrain, defineGridGlow, defineHandwriting, defineHold, defineIconMorph, defineInteractionComponents, defineLayoutComponents, defineLike, defineLiquid, defineLoadingBar, defineMagnetic, defineMarquee, defineMaskReveal, defineMasonry, defineMorph, defineMotionSwitch, defineNavbar, defineOverscroll, definePack, definePacksComponents, definePageComponents, defineParticles, definePhysicsComponents, definePinchZoom, definePopover, definePostFx, definePress, defineProgress, definePullRefresh, defineReveal, defineRevealComponents, defineRipple, defineScramble, defineScrollHighlight, defineScrollProgress, defineScrolly, defineShader, defineShimmerText, defineSkeleton, defineSlider, defineSpinner, defineSplash, defineSplitText, defineSpotlight, defineSpring, defineStagger, defineStickyStack, defineSvgComponents, defineSwipeable, defineTabs, defineTextComponents, defineTextRotate, defineTilt, defineTimeline, defineTimelineComponents, defineToaster, defineTransitionComponents, defineTypewriter, defineUiComponents, defineViewSwitch, defineWaterRipple, defineWaveText, defineWebglComponents, detectNativeHost, deviceTilt, drawLines, easeOutExpo, enableMpaTransitions, exportDesignTokens, flip, flipFrames, fluentPreset, flyToCart, fragmentSource, gesture, getEffect, getMotionIntensity, getMotionLevel, getMotionSensitivity, getMotionTokens, glFallbackCss, glGovernor, glQuad, graphemes, haptic, hasEffect, importDesignTokens, importMotionTokens, interpolatePath, isTrustedMessage, linearEasing, listEffects, liveRegion, loadCategoryStyles, loadedStyles, loadingBar, masonryLayout, mergeMotionTokens, morphPath, morphTo, motionAllowed, motionScale, motionToken, motionTokensToCss, motionTokensToJSON, motionTokensToVars, motionVar, onDemandStyles, onFrame, orientationToTilt, pageTransition, parseDuration, parseEasing, parseNativeSettings, pathsCompatible, pinchScale, playEffect, postFxShader, postToNative, prefersReducedMotion, projectInertia, readScrollProgress, registerBuiltinEffects, registerEffect, registerEffects, requestOrientationPermission, resolveDurationToken, resolveEasingToken, resolvePosition, resolveSpring, resolveTokenAliases, restoreMotionIntensity, restoreMotionSensitivity, revealKeyframes, rubberBand, schedulerStats, scrambleFrame, scrollToTarget, setAnimationBudget, setFrameBudget, setMotionIntensity, setMotionLevel, setMotionSensitivity, setVariant, sharedTransition, smoothScroll, snapTo, splitOrder, splitText, splitTimeline, words as splitWords, spring, springEasing, springEffectKeyframes, springSamples, staticAlternative, stepSpring, supportsLinearEasing, supportsNativeScrub, supportsOrientation, supportsViewTransitions, supportsWebGL, swipeDirection, themeTransition, timeline, toast, validateDesignTokens, viewTransition, warnBaseline, watchPowerSaver, withoutDeprecations };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/lite.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/components/lite.js.map

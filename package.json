@@ -1,6 +1,6 @@
 {
   "name": "motionary",
-  "version": "16.9.0",
+  "version": "17.0.0",
   "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 209 animated Web Components (91 core, 118 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -668,16 +668,6 @@
       "require": {
         "types": "./dist/components/scene-v3.d.cts",
         "default": "./dist/components/scene-v3.cjs"
-      }
-    },
-    "./scene/v3-preview": {
-      "import": {
-        "types": "./dist/components/scene-v3-preview.d.ts",
-        "default": "./dist/components/scene-v3-preview.js"
-      },
-      "require": {
-        "types": "./dist/components/scene-v3-preview.d.cts",
-        "default": "./dist/components/scene-v3-preview.cjs"
       }
     },
     "./scene/symbols": {
@@ -1650,16 +1640,6 @@
         "default": "./dist/components/scene-v3.cjs"
       }
     },
-    "./components/scene-v3-preview": {
-      "import": {
-        "types": "./dist/components/scene-v3-preview.d.ts",
-        "default": "./dist/components/scene-v3-preview.js"
-      },
-      "require": {
-        "types": "./dist/components/scene-v3-preview.d.cts",
-        "default": "./dist/components/scene-v3-preview.cjs"
-      }
-    },
     "./components/scene-symbols": {
       "import": {
         "types": "./dist/components/scene-symbols.d.ts",
@@ -1678,6 +1658,16 @@
       "require": {
         "types": "./dist/components/perf-tasks.d.cts",
         "default": "./dist/components/perf-tasks.cjs"
+      }
+    },
+    "./components/mo": {
+      "import": {
+        "types": "./dist/components/mo.d.ts",
+        "default": "./dist/components/mo.js"
+      },
+      "require": {
+        "types": "./dist/components/mo.d.cts",
+        "default": "./dist/components/mo.cjs"
       }
     },
     "./components/lite": {
@@ -4681,6 +4671,7 @@
     "usa-codemod-11": "./bin/usa-codemod-11.mjs",
     "motionary": "./bin/motionary.mjs",
     "usa-codemod-12": "./bin/usa-codemod-12.mjs",
-    "usa-codemod-13": "./bin/usa-codemod-13.mjs"
+    "usa-codemod-13": "./bin/usa-codemod-13.mjs",
+    "mo-codemod": "./bin/mo-codemod.mjs"
   }
 }

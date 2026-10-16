@@ -1,4 +1,4 @@
-import { registerEffects } from '../chunks/registry-B1ipgYF7.js';
+import { registerEffects } from '../chunks/registry-BdSDdeL7.js';
 
 /** Ballistic keyframe points for a coin thrown at `deg` with `power` (7.5). */
 function throwPath(deg, power = 120, steps = 6, g = 2.2) {
@@ -119,4 +119,4 @@ function registerGamePack() {
 }
 
 export { GAME_FX, registerGamePack, throwPath };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/fx-game.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/components/fx-game.js.map

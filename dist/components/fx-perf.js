@@ -1,5 +1,5 @@
-import { registerEffects } from '../chunks/registry-B1ipgYF7.js';
-import { o as onFrame } from '../chunks/base-QrtwTUOO.js';
+import { registerEffects } from '../chunks/registry-BdSDdeL7.js';
+import { o as onFrame } from '../chunks/base-BQmWYlDq.js';
 
 /** Run a pure function in a Web Worker; resolves with its (structured-cloneable) result (9.6). */
 function runInWorker(fn, ...args) {
@@ -159,4 +159,4 @@ function registerPerf3Pack() {
 }
 
 export { PERF3_FX, fpsMeter, offscreenRender, registerPerf3Pack, runInWorker };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/fx-perf.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/components/fx-perf.js.map

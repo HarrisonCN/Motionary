@@ -53,7 +53,7 @@ const t = () => (typeof performance == 'object' ? performance.now() : Date.now()
 function ownerOf(c) {
     let n = c.parentNode;
     while (n) {
-        if (n.nodeType === 1 && n.localName.startsWith('usa-') && typeof n.changed == 'function')
+        if (n.nodeType === 1 && /^(usa|mo)-/.test(n.localName) && typeof n.changed == 'function')
             return n;
         n = n.parentNode || n.host;
     }
@@ -349,4 +349,4 @@ function glSupport(kind = 'webgl2') {
 }
 
 export { glPoolStats, glSupport, installGLPool, uninstallGLPool };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/gl-pool.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/components/gl-pool.js.map

@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * 16.2: Studio plugin API (preview, `@experimental` until it is frozen as v1 in 17.0). Third-party panels and
+ * Studio plugin API v1 (`@experimental` since 16.2: may change in a minor release — docs/stability.md). Third-party panels and
  * exporters run in a sandbox (a Worker, or an iframe with `sandbox="allow-scripts"` and a `default-src 'none'` CSP)
  * and talk to the Studio only through messages. A manifest declares the permissions; the host answers a call only
  * when its permission was granted and audits every call. Proposals never write the project: the host hands a copy
@@ -9,6 +9,8 @@
  * host is marked `crashed` and terminated; the host and every other plugin keep working, and no host method throws.
  * Opt-in entry `motionary/studio/plugins` (= `motionary/components/studio-plugins`); not in lite or studio.
  */
+/** The plugin API version a manifest declares (`api: 1`). @experimental */
+const PLUGIN_API_VERSION = 1;
 const PLUGIN_PERMISSIONS = ['project:read', 'project:propose', 'panel', 'exporter'];
 const isObj = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
 const bad = (m) => new Error(`[motionary] plugins: ${m}`);
@@ -260,6 +262,7 @@ function createPluginHost(o) {
     };
 }
 
+exports.PLUGIN_API_VERSION = PLUGIN_API_VERSION;
 exports.PLUGIN_PERMISSIONS = PLUGIN_PERMISSIONS;
 exports.createIframeTransport = createIframeTransport;
 exports.createLocalTransport = createLocalTransport;
@@ -268,4 +271,4 @@ exports.createWorkerTransport = createWorkerTransport;
 exports.parsePluginManifest = parsePluginManifest;
 exports.pluginFrameSource = pluginFrameSource;
 exports.pluginWorkerSource = pluginWorkerSource;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/studio-plugins.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/components/studio-plugins.cjs.map

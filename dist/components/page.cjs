@@ -345,11 +345,11 @@ function defineLoadingBar(tag = 'usa-loading-bar') {
 function bar() {
     if (typeof document === 'undefined')
         return null;
-    let el = document.querySelector('usa-loading-bar');
+    let el = document.querySelector('usa-loading-bar,mo-loading-bar');
     if (!el) {
         defineLoadingBar();
         el = document.createElement('usa-loading-bar');
-        document.body.appendChild(el);
+        document.body.append(el);
     }
     return typeof el.start === 'function' ? el : null;
 }
@@ -837,4 +837,4 @@ exports.setMotionLevel = setMotionLevel;
 exports.smoothScroll = smoothScroll;
 exports.supportsViewTransitions = supportsViewTransitions;
 exports.themeTransition = themeTransition;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/page.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/components/page.cjs.map

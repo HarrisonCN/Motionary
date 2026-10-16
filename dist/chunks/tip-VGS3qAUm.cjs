@@ -140,4 +140,4 @@ function defineTip(tag = 'usa-tip') {
 
 exports.TIP_PLACEMENTS = TIP_PLACEMENTS;
 exports.defineTip = defineTip;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/chunks/tip-VGS3qAUm.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/chunks/tip-VGS3qAUm.cjs.map

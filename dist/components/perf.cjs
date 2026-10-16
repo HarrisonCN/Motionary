@@ -93,7 +93,7 @@ function loadCategoryStyles(category, base) {
     link.rel = 'stylesheet';
     link.href = `${base.replace(/\/?$/, '/')}${category === 'all' ? 'components.css' : `components/${category}.css`}`;
     link.setAttribute('data-usa-css', category);
-    document.head.appendChild(link);
+    document.head.append(link);
     return link;
 }
 /**
@@ -118,4 +118,4 @@ exports.categoryOf = categoryOf;
 exports.loadCategoryStyles = loadCategoryStyles;
 exports.loadedStyles = loadedStyles;
 exports.onDemandStyles = onDemandStyles;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/perf.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/components/perf.cjs.map

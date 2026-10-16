@@ -1,6 +1,6 @@
-import { f as defineElement, D as EASE_OUT, d as clamp, b as caf, n as now, r as raf } from '../chunks/base-QrtwTUOO.js';
-import { d as springEasing, c as createSpring } from '../chunks/spring-YKWCyYGf.js';
-import { b as burst, c as confetti, h as haptic, s as shake } from '../chunks/fx-cO_b2EVv.js';
+import { f as defineElement, F as EASE_OUT, d as clamp, b as caf, n as now, r as raf } from '../chunks/base-BQmWYlDq.js';
+import { d as springEasing, c as createSpring } from '../chunks/spring-BOKyL1Rj.js';
+import { b as burst, c as confetti, h as haptic, s as shake } from '../chunks/fx-C9Bq8hdA.js';
 
 var css$6 = "usa-click{position:relative;display:inline-block;overflow:hidden;isolation:isolate;border-radius:inherit;-webkit-tap-highlight-color:transparent;touch-action:manipulation}usa-click[block]{display:block}usa-click .usa-click-wave{position:absolute;border-radius:50%;pointer-events:none;z-index:-1;transform:scale(0);background:radial-gradient(circle,var(--usa-wave) 0 55%,color-mix(in srgb,var(--usa-wave) 40%,transparent) 70%,transparent 72%)}";
 
@@ -143,7 +143,7 @@ function injectGoo() {
     svg.setAttribute('height', '0');
     svg.style.position = 'absolute';
     svg.innerHTML = '<filter id="usa-goo"><feGaussianBlur in="SourceGraphic" stdDeviation="6" result="b"/><feColorMatrix in="b" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9" result="g"/><feComposite in="SourceGraphic" in2="g" operator="atop"/></filter>';
-    document.body.appendChild(svg);
+    document.body.append(svg);
 }
 function defineButton(tag = 'usa-button') {
     return defineElement(tag, (Base) => class UsaButton extends Base {
@@ -864,4 +864,4 @@ function defineClickComponents() {
 }
 
 export { BUTTON_DEFORMS, CLICK_EFFECTS, MORPH_ICONS, defineButton, defineCheckbox, defineClick, defineClickComponents, defineDoubleTap, defineHold, defineIconMorph, defineLike, haptic, morphPath };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/click.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/components/click.js.map

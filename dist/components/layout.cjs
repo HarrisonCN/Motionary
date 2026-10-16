@@ -58,7 +58,7 @@ function autoAnimate(parent, o = {}) {
                     n.style.pointerEvents = 'none';
                     if (getComputedStyle(parent).position === 'static')
                         parent.style.position = 'relative';
-                    parent.appendChild(n);
+                    parent.append(n);
                     n.__usaGhost = true;
                     const a = animate(n, [{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'scale(0.96)' }]);
                     const drop = () => {
@@ -258,4 +258,4 @@ exports.defineMasonry = defineMasonry;
 exports.flipFrames = flipFrames;
 exports.masonryLayout = masonryLayout;
 exports.sharedTransition = sharedTransition;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/layout.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/components/layout.cjs.map
