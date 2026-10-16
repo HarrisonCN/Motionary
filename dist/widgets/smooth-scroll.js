@@ -1,5 +1,5 @@
 import { f as defineElement } from '../chunks/base-BQmWYlDq.js';
-import { r as runtimeModule } from '../chunks/runtime-link-BZNS3wd5.js';
+import { r as runtimeModule } from '../chunks/runtime-link-B_JFtz71.js';
 
 var css = "usa-smooth-scroll{display:contents}usa-smooth-scroll[data-wrapper]{display:block;overflow:auto;overscroll-behavior:contain;max-height:100%;-webkit-overflow-scrolling:touch}usa-smooth-scroll[data-wrapper].usa-smooth{scroll-behavior:auto}html.usa-smooth{scroll-behavior:auto}usa-smooth-scroll .usa-rt-missing{margin:0 0 8px;padding:8px;border-radius:8px;background:#fef2f2;color:#991b1b;font:11px/1.4 ui-monospace,monospace;overflow-wrap:anywhere}";
 
@@ -79,4 +79,4 @@ function defineSmoothScroll(tag = 'usa-smooth-scroll') {
 }
 
 export { defineSmoothScroll };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/widgets/smooth-scroll.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/widgets/smooth-scroll.js.map

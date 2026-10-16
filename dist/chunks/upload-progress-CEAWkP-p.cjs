@@ -90,4 +90,4 @@ function defineUploadProgress(tag = 'usa-upload-progress') {
 
 exports.defineUploadProgress = defineUploadProgress;
 exports.formatBytes = formatBytes;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/chunks/upload-progress-CEAWkP-p.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/chunks/upload-progress-CEAWkP-p.cjs.map

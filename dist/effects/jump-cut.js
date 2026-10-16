@@ -11,4 +11,4 @@ function registerJumpCut() {
 }
 
 export { effect, registerJumpCut as register, registerJumpCut };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/effects/jump-cut.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/effects/jump-cut.js.map

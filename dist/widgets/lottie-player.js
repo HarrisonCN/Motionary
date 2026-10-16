@@ -1,2 +1,2 @@
-export { d as defineLottiePlayer } from '../chunks/lottie-player-DECN9Nbu.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/widgets/lottie-player.js.map
+export { d as defineLottiePlayer } from '../chunks/lottie-player-BJsFUiEI.js';
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/widgets/lottie-player.js.map

@@ -144,4 +144,4 @@ function defineMenu(tag = 'usa-menu') {
 }
 
 export { MENU_EFFECTS as M, defineMenu as d };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/chunks/menu-EOQH7vNp.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/chunks/menu-EOQH7vNp.js.map

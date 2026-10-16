@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-CwNAUn9i.cjs');
-var ticker = require('../chunks/ticker-CMYHvK4b.cjs');
+var registry = require('../chunks/registry-CpNyoGLj.cjs');
+var ticker = require('../chunks/ticker-CrBwiUlU.cjs');
 
 /**
  * `motionary/runtime/scroll` (10.2) — scroll-linked scenes, an original
@@ -304,4 +304,4 @@ exports.refreshScenes = refreshScenes;
 exports.resolveRule = resolveRule;
 exports.scroll = scroll;
 exports.scrollScene = scrollScene;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/runtime/scroll.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/runtime/scroll.cjs.map

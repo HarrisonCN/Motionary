@@ -58,4 +58,4 @@ function defineRetroButton(tag = 'usa-retro-button') {
 }
 
 export { RETRO_VARIANTS as R, defineRetroButton as d };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/chunks/retro-button-2x9sOTBI.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/chunks/retro-button-2x9sOTBI.js.map

@@ -94,4 +94,4 @@ function defineNativePreview(tag = 'usa-native-preview') {
 }
 
 exports.defineNativePreview = defineNativePreview;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/widgets/native-preview.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/widgets/native-preview.cjs.map

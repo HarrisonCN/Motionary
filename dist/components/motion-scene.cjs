@@ -40,4 +40,4 @@ function playScene(root, doc, options = {}) {
 }
 
 exports.playScene = playScene;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/components/motion-scene.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/components/motion-scene.cjs.map

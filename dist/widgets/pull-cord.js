@@ -138,4 +138,4 @@ function definePullCord(tag = 'usa-pull-cord') {
 }
 
 export { definePullCord };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/widgets/pull-cord.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/widgets/pull-cord.js.map

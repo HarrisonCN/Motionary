@@ -116,4 +116,4 @@ function createBudgetMeter(el, limits) {
 }
 
 export { PROP_COST, checkBudget, createBudgetMeter, frameCost, guardPublish, measureExport, propClass };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/components/studio-budget.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/components/studio-budget.js.map

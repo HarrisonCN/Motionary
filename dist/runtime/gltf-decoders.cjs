@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-CwNAUn9i.cjs');
+var registry = require('../chunks/registry-CpNyoGLj.cjs');
 
 /**
  * `motionary/runtime/gltf-decoders` (10.9) — hooks that let
@@ -156,4 +156,4 @@ exports.prepareGltf = prepareGltf;
 exports.provideGltfDecoder = provideGltfDecoder;
 exports.providedDecoders = providedDecoders;
 exports.transcodeKtx2 = transcodeKtx2;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/runtime/gltf-decoders.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/runtime/gltf-decoders.cjs.map

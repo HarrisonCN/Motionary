@@ -206,4 +206,4 @@ function registerLottiePack() {
 }
 
 export { LOTTIE_FX, lottieToKeyframes, lottieToSvg, registerLottiePack, riveInputs };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/components/fx-lottie.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/components/fx-lottie.js.map

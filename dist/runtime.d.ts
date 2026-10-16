@@ -150,7 +150,7 @@ declare function timeline(o?: TimelineOptions): Timeline;
  * inside Web Workers.
  */
 /** Runtime version (kept in sync with the package version by the release script). */
-declare const RUNTIME_VERSION = "17.0.0-rc.1";
+declare const RUNTIME_VERSION = "17.0.0";
 /** Where the CDN builds live (major-pinned). */
 declare const RUNTIME_CDN = "https://cdn.jsdelivr.net/npm/motionary@17/dist/";
 /**

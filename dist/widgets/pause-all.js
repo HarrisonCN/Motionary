@@ -69,4 +69,4 @@ function definePauseAll(tag = 'usa-pause-all') {
 }
 
 export { definePauseAll };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/widgets/pause-all.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/widgets/pause-all.js.map
