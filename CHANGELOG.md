@@ -7,6 +7,47 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [17.0.0] - 2026-10-16 — Removals, mo-* names and LTS
+
+### Removed (announced in 16.9 — docs/deprecations-v17.md)
+- `motionary/scene/v3-preview` and `motionary/components/scene-v3-preview` (the 15.9 preview path; a warn-once
+  forwarder in 16.9). Import from `motionary/scene/v3`; `npx motionary migrate --to 17 --write` rewrites the imports.
+- `motionary doctor --v15` / `motionary migrate --to 15` (the 13.x / 14.x → 15 project migration): they exit 2 and
+  point to `npx motionary@v16-lts …`, which keeps them. The player's error for 13.x documents points there too.
+
+### Added
+- **`mo-*` names:** every `<usa-*>` element is also registered as `<mo-*>` (a subclass: same attributes, properties,
+  `usa:*` events; the component's styles are copied for `mo-*` on the first `mo-*` connect). On in the CDN bundles
+  (`components.umd.js`, `widgets.umd.js`); with ESM call `defineMoAliases()` from the new entry
+  `motionary/components/mo` (own size line). The alias code is not in the component base, so `usa-*` pages, every
+  per-component import and lite keep their 16.9 sizes. `window.MotionaryComponents` is the same object as
+  `window.UsaComponents`. `mo-codemod <n>` runs the usa-codemod tools. Component lookups (toaster, loading bar, cart
+  drawer, Lottie, lazy loading) accept both names.
+
+### Deprecated (kept)
+- The `usa-*` element names, `window.UsaComponents` and the `usa-codemod-*` bins: they keep working; removal not
+  before a future major (none planned). docs/deprecations-v17.md#mo-names.
+
+### Changed
+- **Stability** (docs/stability.md): stable core (scroll API, Motion Core, Scene Format v3, runtime, components, CLI)
+  vs experimental surfaces (Studio incl. the plugin API — manifests declare `api: 1` = `PLUGIN_API_VERSION` —, MCP
+  3.x, AI, Figma plugin, cross-platform export), which may still change in a minor. 17.0 is the last planned major.
+- CDN major `@17` in docs and generated snippets; `migrate --code` rewrites `@10`…`@16` → `@17`.
+- **LTS policy:** 16.9.x is `v16-lts` (security and severe fixes at least until 18.0 ships); `v15-lts` (15.9.0) ends.
+
+### Kept
+- `doctor --v17` / `migrate --to 17` (for 16.x projects), `doctor --v16` / `migrate --to 16`, the codemods 11–13 (also as `mo-codemod`).
+- Lite ≤ 70 KB gzip, zero runtime dependencies; no size limit raised.
+
+### Fixed (since 17.0.0-rc.1)
+- `motionary migrate --code` rewrote old CDN major pins to a hardcoded `@16` in 17.0.0-rc.1 (and left `@16` pins alone);
+  it now rewrites `@10`…`@16` to the installed package's own major (`@17`). Found by the post-publish check of rc.1.
+
+### Deferred
+- Real physical-device testing (iOS Safari + VoiceOver, Android Chrome + TalkBack, pen / trackpad, Windows forced
+  colors) — deferred by the maintainer's decision (2026-10-15): not run and not claimed. CI covers phones only through
+  the emulated `mobile-chrome` / `mobile-safari` profiles; see docs/mobile.md#not-verified.
+
 ## [17.0.0-rc.1] — Removals, mo-* names and LTS (release candidate, npm `next` only)
 
 ### Removed (announced in 16.9 — docs/deprecations-v17.md)
