@@ -19,6 +19,7 @@ import { parseStudioProject } from '../src/components/studio/project';
 
 const ROOT = join(__dirname, '..');
 const CLI: any = await import(join(ROOT, 'bin/motionary.mjs'));
+const CLI_MAJOR = String(JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8')).version).split('.')[0];
 const M: any = await import(join(ROOT, 'bin/motionary-mcp.mjs'));
 const m = M.loadManifest(join(ROOT, 'dist/manifest.json'));
 M.setStudioAi(await import(join(ROOT, 'dist/components/studio-ai.js')));
@@ -134,10 +135,10 @@ describe('motionary-mcp 3.0', () => {
 });
 
 describe('16.0 migrate --code', () => {
-  it('rewrites CDN majors @10…@15 → @16 and the check_compat tool name → check_compatibility (quoted names only)', () => {
+  it('rewrites old CDN majors → the package major (@16 in 16.x, @17 since 17.0) and the check_compat tool name → check_compatibility (quoted names only)', () => {
     const r = CLI.migrateCode(`<script src="https://unpkg.com/motionary@15/dist/index.umd.js"></script>\n<script src="https://cdn.jsdelivr.net/npm/use-scroll-animate@12/dist/x.js"></script>\nclient.callTool({ name: 'check_compat', arguments: {} }); callTool("check_compat"); const check_compat_note = 1;`);
-    expect(r.code).toContain('motionary@16/dist/index.umd.js');
-    expect(r.code).toContain('use-scroll-animate@16/dist/x.js');
+    expect(r.code).toContain(`motionary@${CLI_MAJOR}/dist/index.umd.js`);
+    expect(r.code).toContain(`use-scroll-animate@${CLI_MAJOR}/dist/x.js`);
     expect(r.code).toContain("name: 'check_compatibility'");
     expect(r.code).toContain('callTool("check_compatibility")');
     expect(r.code).toContain('const check_compat_note = 1;');

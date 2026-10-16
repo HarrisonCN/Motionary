@@ -4,7 +4,7 @@
 //   npx motionary export --target css|wxss|arkts   presets + motion tokens for other platforms (12.1)
 //   npx motionary export --scene f.json --target css|wxss|arkts|compose|swiftui [--out f] [--report f] [--strict]   a scene → native code + loss report (15.2)
 //   npx motionary migrate <files…> [--write|--out f] [--diff] [--report] [--json] [--tokenize]   v1 motion JSON → scene v2 (13.9; official format since 14.0)
-//   npx motionary migrate --code [paths…] [--write] [--json]   rewrite import moves + CDN majors in source files (14.0; @16 since 16.0, + check_compat tool name)
+//   npx motionary migrate --code [paths…] [--write] [--json]   rewrite import moves + CDN majors in source files (14.0; to the package's own major since 17.0, + check_compat tool name)
 //   npx motionary tokens import-figma|export-figma|validate|css …   Motion Tokens 2.0 ↔ DTCG / Figma Variables / CSS (14.1)
 //   npx motionary codemod <11–13> [args…]   run an older usa-codemod-<n> (5–10 removed in 15.0: use npx motionary@v14-lts codemod <n>)
 //   (doctor --v15 / migrate --to 15 were removed in 17.0: npx motionary@v16-lts …)
@@ -164,6 +164,7 @@ export function runMigrate(rest, S, V3) {
 }
 // --- 14.0: migrate --code + codemod -------------------------------------------------------------
 const PKG = '(motionary|use-scroll-animate)';
+const CDN_MAJOR = +String(createRequire(import.meta.url)('../package.json').version).split('.')[0];
 /** Rewrite the 14.0 import moves in one source text. Returns { code, changes }. Idempotent. */
 export function migrateCode(source) {
   const changes = [];
@@ -173,9 +174,11 @@ export function migrateCode(source) {
     changes.push(`${pkg}/components/scene-v2 → ${pkg}/scene`);
     return `${q}${pkg}/scene${q}`;
   });
-  code = code.replace(/\b(motionary|use-scroll-animate)@(1[0-5])(?=\/)/g, (m, pkg, major) => {
-    changes.push(`${pkg}@${major}/ → ${pkg}@16/ (CDN major)`);
-    return `${pkg}@16`;
+  // 17.0: the target is the installed package's own CDN major (was a hardcoded @16, so 17.0.0-rc.1 pointed pages back at 16)
+  code = code.replace(/\b(motionary|use-scroll-animate)@(1\d)(?=\/)/g, (m, pkg, major) => {
+    if (+major >= CDN_MAJOR) return m;
+    changes.push(`${pkg}@${major}/ → ${pkg}@${CDN_MAJOR}/ (CDN major)`);
+    return `${pkg}@${CDN_MAJOR}`;
   });
   // 16.0: motionary-mcp 3.0 removed the check_compat tool — rewrite the quoted tool name (validate_snippet { scene } is
   // listed by `migrate --to 16` as manual work: the argument shape needs a person)
