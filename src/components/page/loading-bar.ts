@@ -89,7 +89,7 @@ function bar(): UsaLoadingBarElement | null {
   if (!el) {
     defineLoadingBar();
     el = document.createElement('usa-loading-bar') as UsaLoadingBarElement;
-    document.body.appendChild(el);
+    document.body.append(el);
   }
   return typeof el.start === 'function' ? el : null;
 }

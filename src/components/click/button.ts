@@ -18,7 +18,7 @@ function injectGoo(): void {
   svg.setAttribute('height', '0');
   svg.style.position = 'absolute';
   svg.innerHTML = '<filter id="usa-goo"><feGaussianBlur in="SourceGraphic" stdDeviation="6" result="b"/><feColorMatrix in="b" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9" result="g"/><feComposite in="SourceGraphic" in2="g" operator="atop"/></filter>';
-  document.body.appendChild(svg);
+  document.body.append(svg);
 }
 
 /**

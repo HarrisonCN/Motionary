@@ -80,7 +80,7 @@ const click: EffectDefinition[] = [
       Object.assign(dot.style, { position: 'absolute', left: `${(e?.clientX ?? r.left + r.width / 2) - r.left - d / 2}px`, top: `${(e?.clientY ?? r.top + r.height / 2) - r.top - d / 2}px`, width: `${d}px`, height: `${d}px`, borderRadius: '50%', background: o.color, opacity: '0.25', pointerEvents: 'none' });
       if (getComputedStyle(el).position === 'static') el.style.position = 'relative';
       el.style.overflow ||= 'hidden';
-      el.appendChild(dot);
+      el.append(dot);
       const a = ctx.animate(dot, [{ transform: 'scale(0)', opacity: 0.3 }, { transform: 'scale(1)', opacity: 0 }], { duration: o.duration, easing: 'ease-out' });
       const done = () => dot.remove();
       if (a) a.finished.then(done, done);
