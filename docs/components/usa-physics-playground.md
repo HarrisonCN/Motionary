@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 10.7
 - **Import:** `import { definePhysicsPlayground } from 'motionary/components/widgets'` then `definePhysicsPlayground();`
-- **CDN:** `<script src="https://unpkg.com/motionary@16/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@17/dist/widgets.umd.js"></script>`
 - **Attributes:** `preset`, `src`, `gravity`, `spawn`, `label`
 - **Events:** `usa:collision`, `usa:load`, `usa:error`, `usa:runtime-missing`
 - **Slots:** —
@@ -31,12 +31,12 @@ definePhysicsPlayground(); // registers <usa-physics-playground> — after the p
 3. **CDN:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/motionary@16/dist/runtime.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@16/dist/runtime/physics.iife.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/motionary@16/dist/runtime/format-scene.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@17/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@17/dist/runtime/physics.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@17/dist/runtime/format-scene.iife.js"></script>
 <!-- then the component bundles -->
-<script src="https://unpkg.com/motionary@16/dist/components.umd.js"></script>
-<script src="https://unpkg.com/motionary@16/dist/widgets.umd.js"></script>
+<script src="https://unpkg.com/motionary@17/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@17/dist/widgets.umd.js"></script>
 ```
 
 ## Minimal example

@@ -6,7 +6,7 @@ One view at a time with direction-aware slide, fade, scale or drill transitions 
 
 - **Category:** transitions · **since** 2.2
 - **Import:** `import { defineViewSwitch } from 'motionary/components/transitions'` then `defineViewSwitch();`
-- **CDN:** `<script src="https://unpkg.com/motionary@16/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@17/dist/components.umd.js"></script>`
 - **Attributes:** `active`, `duration`, `effect`
 - **Events:** `usa:change`
 - **Slots:** —

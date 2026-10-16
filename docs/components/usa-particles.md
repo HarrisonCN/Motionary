@@ -6,7 +6,7 @@ A canvas constellation that drifts away from the pointer. Runs only while visibl
 
 - **Category:** background · **since** 2.2
 - **Import:** `import { defineParticles } from 'motionary/components/background'` then `defineParticles();`
-- **CDN:** `<script src="https://unpkg.com/motionary@16/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@17/dist/components.umd.js"></script>`
 - **Attributes:** `count`, `color`, `size`, `speed`, `links`, `interactive`, `paused`
 - **Events:** —
 - **Slots:** —

@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 6.6
 - **Import:** `import { defineDock } from 'motionary/components/widgets'` then `defineDock();`
-- **CDN:** `<script src="https://unpkg.com/motionary@16/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@17/dist/widgets.umd.js"></script>`
 - **Attributes:** `orientation`, `magnify`, `range`, `label`, `bounce`
 - **Events:** —
 - **Slots:** —

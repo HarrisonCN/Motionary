@@ -6,7 +6,7 @@
 
 - **Category:** timeline · **since** 6.9
 - **Import:** `import { defineKeyframeEditor } from 'motionary/components/widgets'` then `defineKeyframeEditor();`
-- **CDN:** `<script src="https://unpkg.com/motionary@16/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@17/dist/widgets.umd.js"></script>`
 - **Attributes:** `for`
 - **Events:** `usa:change`
 - **Slots:** —

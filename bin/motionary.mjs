@@ -56,7 +56,7 @@ const HELP = `motionary <command>
                              next to each input (never overwrites it). Exit 1 when any file fails — docs/migrating-to-v14.md
   migrate --code [paths…] [--write] [--json]
                              rewrite import moves in source files: motionary/components/scene-v2 → motionary/scene,
-                             CDN motionary@10…15/ → motionary@16/, MCP tool name check_compat → check_compatibility (16.0).
+                             CDN motionary@10…15/ → motionary@17/, MCP tool name check_compat → check_compatibility (16.0).
                              Dry run by default (default path: current directory)
   tokens import-figma <file> [--out file] [--css] [--collection name]
                              Figma Variables JSON (GET /v1/files/:key/variables/local response or a POST body) →

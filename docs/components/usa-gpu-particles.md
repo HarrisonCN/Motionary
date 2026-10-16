@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 10.5 · **changed in** 11.8
 - **Import:** `import { defineGpuParticles } from 'motionary/components/widgets'` then `defineGpuParticles();`
-- **CDN:** `<script src="https://unpkg.com/motionary@16/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@17/dist/widgets.umd.js"></script>`
 - **Attributes:** `count`, `mode`, `colors`, `size`, `speed`, `trail`, `pointer`, `label`
 - **Events:** `usa:backend`
 - **Slots:** —

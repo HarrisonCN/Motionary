@@ -6,7 +6,7 @@ Tactile press: dips while pressed and springs back, or bounces once with bounce.
 
 - **Category:** interaction · **since** 2.2
 - **Import:** `import { definePress } from 'motionary/components/interaction'` then `definePress();`
-- **CDN:** `<script src="https://unpkg.com/motionary@16/dist/components.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@17/dist/components.umd.js"></script>`
 - **Attributes:** `disabled`, `scale`, `bounce`
 - **Events:** —
 - **Slots:** —

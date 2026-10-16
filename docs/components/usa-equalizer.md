@@ -6,7 +6,7 @@
 
 - **Category:** interaction · **since** 7.1
 - **Import:** `import { defineEqualizer } from 'motionary/components/widgets'` then `defineEqualizer();`
-- **CDN:** `<script src="https://unpkg.com/motionary@16/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@17/dist/widgets.umd.js"></script>`
 - **Attributes:** `bands`, `preset`, `label`
 - **Events:** `usa:change`
 - **Slots:** —

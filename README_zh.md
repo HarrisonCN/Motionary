@@ -53,13 +53,13 @@ npm i motionary
 不想引入构建工具？直接用 CDN。URL 固定到大版本（`@<!--ver:major-->16<!--/ver-->`）。生产环境请固定到具体版本并加 SRI（[docs/cdn-sri.md](./docs/cdn-sri.md)）：
 
 ```html
-<script src="https://unpkg.com/motionary@16/dist/index.umd.js"></script>            <!-- 滚动 API：window.ScrollAnimate -->
-<script src="https://unpkg.com/motionary@16/dist/presets-extended.umd.js"></script> <!-- 再加 181 个预设 -->
-<script src="https://unpkg.com/motionary@16/dist/components.umd.js"></script>       <!-- motionary/components 的元素：window.UsaComponents -->
-<script src="https://unpkg.com/motionary@16/dist/widgets.umd.js"></script>          <!-- 小部件：window.UsaWidgets -->
+<script src="https://unpkg.com/motionary@17/dist/index.umd.js"></script>            <!-- 滚动 API：window.ScrollAnimate -->
+<script src="https://unpkg.com/motionary@17/dist/presets-extended.umd.js"></script> <!-- 再加 181 个预设 -->
+<script src="https://unpkg.com/motionary@17/dist/components.umd.js"></script>       <!-- motionary/components 的元素：window.UsaComponents -->
+<script src="https://unpkg.com/motionary@17/dist/widgets.umd.js"></script>          <!-- 小部件：window.UsaWidgets -->
 ```
 
-也可以用 jsDelivr：`https://cdn.jsdelivr.net/npm/motionary@16/dist/…`。还在用 `use-scroll-animate`？它会继续以相同版本发布；要切换，只需在 import 和 URL 中替换包名（[详情](./docs/versions.md)）。
+也可以用 jsDelivr：`https://cdn.jsdelivr.net/npm/motionary@17/dist/…`。还在用 `use-scroll-animate`？它会继续以相同版本发布；要切换，只需在 import 和 URL 中替换包名（[详情](./docs/versions.md)）。
 
 ## 快速上手
 

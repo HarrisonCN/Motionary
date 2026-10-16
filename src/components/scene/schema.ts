@@ -12,7 +12,7 @@ const tokenName = { pattern: '^[A-Za-z0-9_-]+$' };
 
 export const SCENE_V2_SCHEMA = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
-  $id: 'https://cdn.jsdelivr.net/npm/motionary@16/docs/scene-v2.schema.json',
+  $id: 'https://cdn.jsdelivr.net/npm/motionary@17/docs/scene-v2.schema.json',
   title: 'motionary-scene v2 (draft)',
   description: 'Draft of the 14.0 scene format: one document for timeline layers, <usa-player> tracks, component motion props and motion tokens. Values may reference tokens as "{duration.fast}".',
   type: 'object',

@@ -13,7 +13,7 @@ URLs. Nothing else changes: the `<usa-*>` tags, the `usa-` classes, the globals 
 |---|---|---|
 | `latest` | the newest release of the current major (<!--ver:version-->16.9.0<!--/ver--> today) | `npm i motionary` |
 | `v<major>-line` | each major line from 14 on, e.g. `v14-line` → the newest 14.x release (a bare `v14` is not allowed: npm rejects tag names that are valid SemVer ranges) | `npm i motionary@v14-line` |
-| `next` | release candidates of the next major; never moves `latest` (16.0.0 today: the 16.0 candidate line is closed, the next candidate is 17.0.0-rc.1) | `npm i motionary@next` |
+| `next` | release candidates of the next major; never moves `latest` (17.0.0-rc.1 today) | `npm i motionary@next` |
 | `v15-lts` | the last 15.x release (15.9.0 today), security and severe fixes at least until 17.0 ships | `npm i motionary@v15-lts` |
 | `v14-lts` | the last 14.x release (14.9.0), security and severe fixes until 16.0 shipped | `npm i motionary@v14-lts` |
 | `v13-lts` | the last 13.x release (13.9.0), for projects that stay on 13 | `npm i motionary@v13-lts` |
@@ -33,7 +33,7 @@ contract, size, tree-shaking, playground, the Node matrix and the Chromium / Fir
 
 ## CDN majors
 
-CDN URLs pin a major: `https://unpkg.com/motionary@16/dist/…` or `https://cdn.jsdelivr.net/npm/motionary@16/dist/…`. A new
+CDN URLs pin a major: `https://unpkg.com/motionary@17/dist/…` or `https://cdn.jsdelivr.net/npm/motionary@17/dist/…`. A new
 major changes the docs, the showcase and `RUNTIME_CDN` to the new major. URLs pinned to an exact version (`motionary@12.4.0`)
 keep working. `npx usa-codemod-13 --write` rewrites URLs pinned to `@10` / `@11` / `@12`.
 

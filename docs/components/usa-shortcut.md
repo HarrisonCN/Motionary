@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 7.9
 - **Import:** `import { defineShortcut } from 'motionary/components/widgets'` then `defineShortcut();`
-- **CDN:** `<script src="https://unpkg.com/motionary@16/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@17/dist/widgets.umd.js"></script>`
 - **Attributes:** `keys`, `label`, `listen`, `for`
 - **Events:** `usa:trigger`
 - **Slots:** —

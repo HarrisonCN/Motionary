@@ -6,7 +6,7 @@
 
 - **Category:** interaction · **since** 6.5 · **changed in** 13.1
 - **Import:** `import { defineCompare } from 'motionary/components/widgets'` then `defineCompare();`
-- **CDN:** `<script src="https://unpkg.com/motionary@16/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@17/dist/widgets.umd.js"></script>`
 - **Attributes:** `orientation`, `labels`, `label`, `position`, `hover`, `intro`
 - **Events:** `usa:change`
 - **Slots:** —

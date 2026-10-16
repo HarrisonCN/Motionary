@@ -6,7 +6,7 @@
 
 - **Category:** ui · **since** 9.3
 - **Import:** `import { defineBgGenerator } from 'motionary/components/widgets'` then `defineBgGenerator();`
-- **CDN:** `<script src="https://unpkg.com/motionary@16/dist/widgets.umd.js"></script>`
+- **CDN:** `<script src="https://unpkg.com/motionary@17/dist/widgets.umd.js"></script>`
 - **Attributes:** `label`, `palette`, `style`, `seed`
 - **Events:** `usa:change`
 - **Slots:** —
