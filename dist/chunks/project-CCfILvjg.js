@@ -215,4 +215,4 @@ function parseStudioProject(input, opts) {
 }
 
 export { CURVE_PRESETS as C, STUDIO_PROJECT_FORMAT as S, parseStudioProject as a, sampleFrames as b, springParams as c, springBezier as d, bezierEasing as e, frameTime as f, STUDIO_PROJECT_VERSION as g, cleanUiState as h, parseBezier as p, serializeStudioProject as s };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.3.0/dist/chunks/project-CCfILvjg.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/chunks/project-CCfILvjg.js.map

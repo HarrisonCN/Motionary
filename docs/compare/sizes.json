@@ -1,0 +1,73 @@
+{
+  "measured": "2026-10-15",
+  "gzipLevel": 9,
+  "node": "v22.23.3",
+  "rows": [
+    {
+      "library": "aos",
+      "version": "2.3.4",
+      "what": "aos.js + aos.css",
+      "how": "prebuilt files as shipped",
+      "raw": 40743,
+      "gzip": 6911,
+      "parts": {
+        "aos.js": {
+          "raw": 14690,
+          "gzip": 4710
+        },
+        "aos.css": {
+          "raw": 26053,
+          "gzip": 2201
+        }
+      }
+    },
+    {
+      "library": "gsap",
+      "version": "3.15.0",
+      "what": "gsap + ScrollTrigger",
+      "how": "rollup + terser, ESM",
+      "raw": 113912,
+      "gzip": 44187
+    },
+    {
+      "library": "lenis",
+      "version": "1.3.27",
+      "what": "Lenis (smooth scroll only)",
+      "how": "rollup + terser, ESM",
+      "raw": 18749,
+      "gzip": 5382
+    },
+    {
+      "library": "motion",
+      "version": "14.3.0",
+      "what": "{ animate, scroll, inView }",
+      "how": "rollup + terser, ESM",
+      "raw": 72584,
+      "gzip": 26277
+    },
+    {
+      "library": "motionary",
+      "version": "16.2.0",
+      "what": "dist/index.umd.js (scroll reveal, 33 presets)",
+      "how": "prebuilt file as shipped",
+      "raw": 26603,
+      "gzip": 9246
+    },
+    {
+      "library": "motionary",
+      "version": "16.2.0",
+      "what": "default import from 'motionary'",
+      "how": "rollup + terser, ESM",
+      "raw": 16498,
+      "gzip": 5617
+    },
+    {
+      "library": "motionary",
+      "version": "16.2.0",
+      "what": "smoothScroll from 'motionary/runtime/smooth'",
+      "how": "rollup + terser, ESM",
+      "raw": 8409,
+      "gzip": 3475
+    }
+  ]
+}

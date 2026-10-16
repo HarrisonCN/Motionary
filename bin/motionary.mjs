@@ -79,6 +79,11 @@ const HELP = `motionary <command>
                              list everything 16.0 changes: Scene v2 files (16.0 writes v3), meta["motionary:variants"],
                              studio.exportScene() without { version: 2 }, MCP 2.x shapes (check_compat, validate_snippet
                              { scene }). Exit 1 when any is found — docs/deprecations-v16.md
+  doctor --v17 [paths…] [--json]
+                             16.9: everything 17.0 removes (motionary/scene/v3-preview imports, doctor --v15 /
+                             migrate --to 15 in scripts). Exit 1 when any is found — docs/deprecations-v17.md
+  migrate --to 17 [paths…] [--write] [--report file] [--json]
+                             16.9: rewrite motionary/scene/v3-preview → motionary/scene/v3 (.bak first)
   migrate --to 16 [paths…] [--dry-run] [--report file] [--json]
                              preview Scene v2 → v3 per file (lossless? what changes, what is lost) and list manual work.
                              15.x only previews (a v3 file does not open in 15.x); 16.0 adds --write with .bak copies
@@ -434,6 +439,76 @@ export function runMigrateTo16(rest, env = {}) {
   return r.problems.length ? 1 : 0;
 }
 
+// ---------------------------------------------------------------- 16.9: v17 preparation
+const V17_DOC = 'docs/deprecations-v17.md';
+const dep17 = (id, what, fix) => ({ id, removedIn: '17.0', what, fix, doc: `${V17_DOC}#${id}` });
+/** What 17.0 removes (announced in 16.9). */
+export const DEPRECATIONS_V17 = [
+  dep17('scene-v3-preview', "the 15.9 preview import path motionary/scene/v3-preview (+ motionary/components/scene-v3-preview)", "import from 'motionary/scene/v3' (or 'motionary/components/scene-v3') — same API; npx motionary migrate --to 17 --write rewrites the imports"),
+  dep17('cli-migrate-15', 'the 13.x / 14.x → 15 project migration commands `motionary doctor --v15` and `motionary migrate --to 15`', 'run them with the 16.x CLI before upgrading: npx motionary@v16-lts migrate --to 15 --write (v16-lts keeps them)'),
+];
+const FIX17 = Object.fromEntries(DEPRECATIONS_V17.map((d) => [d.id, d.fix]));
+const ALIAS17_RE = /(['"`])motionary\/(scene\/v3|components\/scene-v3)-preview\1/g;
+const CLI15_RE = /\bmotionary(?:@[\w.-]+)?\s+(?:doctor\s+--v15|migrate\s+--to\s+15)\b/;
+/** Notice printed (stderr) by the commands 17.0 removes. */
+export const notice17 = (cmd) => `motionary ${cmd}: removed in 17.0 — run it with the 16.x CLI (npx motionary@v16-lts ${cmd}) before upgrading (${V17_DOC}#cli-migrate-15)`;
+function scanV17(f, text) {
+  const out = [];
+  text.split('\n').forEach((l, i) => {
+    if (new RegExp(ALIAS17_RE.source).test(l)) out.push({ file: f, line: i + 1, id: 'scene-v3-preview', fix: FIX17['scene-v3-preview'], text: l.trim() });
+    else if (CLI15_RE.test(l)) out.push({ file: f, line: i + 1, id: 'cli-migrate-15', fix: FIX17['cli-migrate-15'], text: l.trim() });
+  });
+  return out;
+}
+/** `doctor --v17` (16.9): every use of what 17.0 removes → [{ file, line, id, fix, text }], grouped by id (DEPRECATIONS_V17 order), then file / line. */
+export function doctorV17(paths) {
+  const found = [];
+  for (const f of v15Files(paths)) if (!/\.bak(\.\d+)?$/.test(f)) found.push(...scanV17(f, readFileSync(f, 'utf8')));
+  const ord = (x) => DEPRECATIONS_V17.findIndex((d) => d.id === x.id);
+  return found.sort((a, b) => ord(a) - ord(b) || (a.file < b.file ? -1 : a.file > b.file ? 1 : a.line - b.line)); // grouped by removal
+}
+/**
+ * `migrate --to 17` (16.9): rewrites motionary/scene/v3-preview → motionary/scene/v3 (and the components/ form) in code;
+ * a dry run unless `write` (`.bak` first, never overwriting a backup). The v15 commands are listed as manual work.
+ * Returns { format: 'motionary-migrate-report', version: 1, to: '17', write, files, manual, problems }.
+ */
+export function migrateTo17(paths, opts = {}) {
+  const write = !!opts.write;
+  const files = [], manual = [], problems = [];
+  for (const f of v15Files(paths)) {
+    if (/\.bak(\.\d+)?$/.test(f)) continue;
+    const text = readFileSync(f, 'utf8');
+    const hits = scanV17(f, text);
+    if (!hits.length) continue;
+    let n = 0;
+    const next = text.replace(ALIAS17_RE, (_m, q, p) => (n++, `${q}motionary/${p}${q}`));
+    if (n) {
+      const e = { file: f, id: 'scene-v3-preview', changed: true, rewrites: n };
+      if (write) { const b = backupPath(f); writeFileSync(b, text); writeFileSync(f, next); e.backup = b; }
+      files.push(e);
+    }
+    for (const h of hits) if (h.id !== 'scene-v3-preview') manual.push({ file: f, line: h.line, id: h.id, reason: h.fix });
+  }
+  const report = { format: 'motionary-migrate-report', version: 1, to: '17', write, files, manual, problems };
+  if (opts.report) writeFileSync(opts.report, JSON.stringify(report, null, 2) + '\n');
+  return report;
+}
+/** `motionary migrate --to 17 [paths…] [--write] [--report file] [--json]`. */
+export function runMigrateTo17(rest) {
+  const VAL = new Set(['--to', '--report']);
+  const paths = rest.filter((a, i) => !a.startsWith('--') && !VAL.has(rest[i - 1]));
+  for (const p of paths) if (!existsSync(p)) { console.error(`motionary migrate --to 17: ${p} not found`); return 2; }
+  const write = rest.includes('--write');
+  const r = migrateTo17(paths, { write, report: flag(rest, 'report') });
+  if (rest.includes('--json')) console.log(JSON.stringify(r, null, 2));
+  else {
+    for (const x of r.files) console.log(`${x.file}  motionary/scene/v3-preview → motionary/scene/v3 ×${x.rewrites}${write ? `  (backup ${x.backup})` : '  will change'}`);
+    for (const m of r.manual) console.log(`${m.file}:${m.line}  manual  ${m.reason}`);
+    console.log(`\nmotionary migrate --to 17: ${r.files.length} file(s) ${write ? 'rewritten' : 'to rewrite (dry run — add --write; backups are written first)'}, ${r.manual.length} manual item(s). See ${V17_DOC}.`);
+  }
+  return r.problems.length ? 1 : 0;
+}
+
 /** `motionary tokens …` (14.1): `T` = the motion-tokens module (dist/components/motion-tokens.cjs). Returns the exit code. */
 export function runTokens(rest, T) {
   const USAGE = 'usage: motionary tokens <import-figma <file> | export-figma [tokens.json] | validate <file> | css [tokens.json]> [--out file] [--css] [--collection name] [--modes a,b]';
@@ -509,7 +584,13 @@ export function main(argv, env = {}) {
   }
   if (cmd === 'codemod') return runCodemod(rest);
   if (cmd === 'tokens') return runTokens(rest, env.motionTokens || createRequire(import.meta.url)('../dist/components/motion-tokens.cjs'));
-  if (cmd === 'migrate' && rest.includes('--to')) return flag(rest, 'to') === '16' ? runMigrateTo16(rest, env) : runMigrateTo15(rest, env);
+  if (cmd === 'migrate' && rest.includes('--to')) {
+    const to = flag(rest, 'to');
+    if (to === '17') return runMigrateTo17(rest);
+    if (to === '16') return runMigrateTo16(rest, env);
+    console.error(notice17('migrate --to 15'));
+    return runMigrateTo15(rest, env);
+  }
   if (cmd === 'migrate' && rest.includes('--code')) return runMigrateCode(rest.filter((a) => a !== '--code'));
   if (cmd === 'migrate') {
     return runMigrate(rest, env.sceneV2 || createRequire(import.meta.url)('../dist/components/scene-v2.cjs'), env.sceneV3);
@@ -529,7 +610,18 @@ export function main(argv, env = {}) {
     }
     return found.length ? 1 : 0;
   }
+  if ((cmd === 'doctor' || cmd === 'check') && rest.includes('--v17')) {
+    const found = doctorV17(rest.filter((a) => !a.startsWith('--')));
+    if (rest.includes('--json')) console.log(JSON.stringify({ v17: found }, null, 2));
+    else if (!found.length) console.log('motionary doctor --v17: nothing that 17.0 removes was found ✓');
+    else {
+      for (const x of found) console.log(`${x.file}:${x.line}  ${x.id}  ${x.text}\n    → ${x.fix}`);
+      console.log(`\n${found.length} use(s) of what 17.0 removes (${V17_DOC}). Fix: npx motionary migrate --to 17 (dry run) then --write`);
+    }
+    return found.length ? 1 : 0;
+  }
   if ((cmd === 'doctor' || cmd === 'check') && rest.includes('--v15')) {
+    console.error(notice17('doctor --v15'));
     const found = doctorV15(rest.filter((a) => !a.startsWith('--')));
     if (rest.includes('--json')) console.log(JSON.stringify({ v15: found }, null, 2));
     else if (!found.length) console.log('motionary doctor --v15: nothing that 15.0 removes was found ✓');

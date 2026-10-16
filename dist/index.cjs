@@ -144,4 +144,4 @@ exports.resolvePreset = presets.resolvePreset;
 exports.reversePreset = presets.reversePreset;
 exports.default = ScrollAnimate;
 exports.parallax = parallax;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.3.0/dist/index.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/index.cjs.map

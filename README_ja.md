@@ -6,7 +6,7 @@
 
 _旧名 **use-scroll-animate**。旧 npm パッケージも、同じビルドのエイリアスとして引き続き公開しています。_
 
-[![npm](https://img.shields.io/npm/v/motionary?style=flat-square)](https://www.npmjs.com/package/motionary) [![CI](https://github.com/HarrisonCN/Motionary/actions/workflows/ci.yml/badge.svg)](https://github.com/HarrisonCN/Motionary/actions/workflows/ci.yml) [![motionary/core size](https://deno.bundlejs.com/?q=motionary/core&badge)](https://bundlejs.com/?q=motionary/core) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](./LICENSE)
+[![npm](https://img.shields.io/npm/v/motionary?style=flat-square)](https://www.npmjs.com/package/motionary) [![CI](https://github.com/HarrisonCN/Motionary/actions/workflows/ci.yml/badge.svg)](https://github.com/HarrisonCN/Motionary/actions/workflows/ci.yml) [![motionary/core size](https://deno.bundlejs.com/?q=motionary/core&badge)](https://bundlejs.com/?q=motionary/core) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](./LICENSE) [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/HarrisonCN/Motionary/badge)](https://scorecard.dev/viewer/?uri=github.com/HarrisonCN/Motionary)
 
 [English](./README.md) | [简体中文](./README_zh.md) | **日本語**
 
@@ -27,6 +27,8 @@ npm i motionary
 Motionary は、スクロールして画面に入ってきたコンテンツをアニメーションで表示し、さらに <!--fact:public-->209<!--/fact--> 個の `<usa-*>` カスタム要素を提供します。カード、ボタン、物理演算、ページ遷移、ジェネレーティブ背景、Lottie、WebGL などがそろっています。素の HTML でも、React・Vue・Svelte・Solid・Angular でも、Electron・Tauri・WebView2 といったデスクトップの Web ビューでも、そのまま動きます。ランタイム依存はゼロ。すべてのエントリポイントは tree-shaking でき、CI で gzip サイズの上限がチェックされます。どのアニメーションも `prefers-reduced-motion` を尊重します。
 
 各バージョンのリリースノートは [CHANGELOG.md](./CHANGELOG.md) にあります。
+
+サプライチェーン：[docs/supply-chain.md](./docs/supply-chain.md) · SRI ハッシュ付き CDN：[docs/cdn-sri.md](./docs/cdn-sri.md) · AOS・GSAP・Lenis・Motion との比較：[docs/compare](./docs/compare/README.md) · オンラインで試す：[StackBlitz の例](./examples/stackblitz/README.md)。
 
 ## 目次
 
@@ -298,7 +300,7 @@ Figma プラグイン、クロスプラットフォーム書き出し（`npx mot
 すべてのエントリポイントに、[`size-budget.json`](./size-budget.json) で固定の gzip 上限が設定されています（全 401 項目）。上限を超えるエントリがあれば CI は失敗し、上限が自動で引き上げられることはありません。
 
 <!-- size-table:start -->
-16.3.0 ビルドでの実測値（minify ＋ gzip、`scripts/size.mjs --report` で生成）：
+16.9.0 ビルドでの実測値（minify ＋ gzip、`scripts/size.mjs --report` で生成）：
 
 | インポートするもの | gzip | 上限 |
 |---|---:|---:|
@@ -312,7 +314,7 @@ Figma プラグイン、クロスプラットフォーム書き出し（`npx mot
 | `motionary/components/reveal` | 4.47 KB | 5.00 KB |
 | `motionary/components/lite`（全要素、CSS はオンデマンド） | 69.99 KB | 70.00 KB |
 | `motionary/components`（全要素 ＋ CSS） | 86.05 KB | 93.75 KB |
-| `dist/components.umd.js`（CDN、すべて） | 109.32 KB | 115.75 KB |
+| `dist/components.umd.js`（CDN、すべて） | 109.33 KB | 115.75 KB |
 <!-- size-table:end -->
 
 既定ではスクロールイベントを監視せず（IntersectionObserver を使用）、アニメーションはコンポジタで処理できるプロパティ（`transform`、`opacity`、`filter`、`clip-path`）に限られます。インポート自体に副作用はありません（[docs/tree-shaking.md](./docs/tree-shaking.md)）。PR ごとに、ヘッドレス Chrome でファーストビューの転送量、スクリプト時間、GPU リソース、フレームの安定性も計測しています（[docs/perf-ci.md](./docs/perf-ci.md)）。ソースマップは npm には含めません。タグ付きの git ツリーにあり（各ファイルの `sourceMappingURL` がそこを指します）、16.3 からは `sourcemaps` アーカイブとして GitHub の各リリースにも添付します（[docs/source-maps.md](./docs/source-maps.md)）。詳しくは [docs/performance.md](./docs/performance.md)。
@@ -340,7 +342,7 @@ npx usa-codemod-13 --write      # まとめて書き換え。@10 / @11 / @12 に
 
 ## バージョンと互換性
 
-- **npm の dist-tag：** `latest` は現在のメジャーの最新リリース（<!--ver:version-->16.3.0<!--/ver-->）を指します。14.1 からはマイナーリリースでも移動します。マイナーリリースにはそれぞれ `v<major>-<minor>` のタグも付きます（例：`v15-0`）。`v15-line` は 15.x を追い、`v14-lts` は 14.9.x です。`motionary` と `use-scroll-animate` は常に同じバージョンで同時に公開されます。
+- **npm の dist-tag：** `latest` は現在のメジャーの最新リリース（<!--ver:version-->16.9.0<!--/ver-->）を指します。14.1 からはマイナーリリースでも移動します。マイナーリリースにはそれぞれ `v<major>-<minor>` のタグも付きます（例：`v15-0`）。`v15-line` は 15.x を追い、`v14-lts` は 14.9.x です。`motionary` と `use-scroll-animate` は常に同じバージョンで同時に公開されます。
 - **CDN：** URL はメジャーで固定します（`motionary@<!--ver:major-->16<!--/ver-->`）。正確なバージョン指定（`motionary@12.4.0`）もそのまま使えます。
 - **セマンティックバージョニング：** 破壊的変更はメジャーだけで行い、毎回ガイドと codemod を用意します。非推奨になったものは次のメジャーまで残り、その間は型に `@deprecated` が付くだけで、実行時の警告は出ません。
 - **各バージョンに含まれるもの：** コンポーネントとランタイムモジュールごとの `since` / `changed`（[docs/version-compat.md](./docs/version-compat.md)）、機能ごとの対応状況（[docs/compat-matrix.md](./docs/compat-matrix.md)）。

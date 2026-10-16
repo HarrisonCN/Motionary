@@ -1,8 +1,8 @@
 'use strict';
 
-var registry = require('./chunks/registry-B6XX3AVt.cjs');
-var ticker = require('./chunks/ticker-Cy386cSs.cjs');
-var tween$1 = require('./chunks/tween-BxJQy5VJ.cjs');
+var registry = require('./chunks/registry-sRiTWT0H.cjs');
+var ticker = require('./chunks/ticker-Dc8oIrfx.cjs');
+var tween$1 = require('./chunks/tween-CLYPTo7k.cjs');
 var ease = require('./chunks/ease-HwYZnZat.cjs');
 
 /**
@@ -82,4 +82,4 @@ exports.core = core;
 exports.resolveTargets = resolveTargets;
 exports.tween = tween;
 exports.use = use;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.3.0/dist/runtime.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/runtime.cjs.map

@@ -259,4 +259,4 @@ function createPluginHost(o) {
 }
 
 export { PLUGIN_PERMISSIONS, createIframeTransport, createLocalTransport, createPluginHost, createWorkerTransport, parsePluginManifest, pluginFrameSource, pluginWorkerSource };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.3.0/dist/components/studio-plugins.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/studio-plugins.js.map

@@ -40,11 +40,11 @@ export const LAYER_ALIASES = {
   'studio/store': 'components/studio-store',
   'studio/plugins': 'components/studio-plugins',
   'studio/budget': 'components/studio-budget',
-  // 16.0: Scene Format v3 (15.9 preview name kept as an alias: scene/v3-preview → the same files)
+  // 16.0: Scene Format v3. scene/v3-preview (the 15.9 name) is its own module since 16.9 (warns once, forwards); removed in 17.0
   'scene/v3': 'components/scene-v3',
   'scene/symbols': 'components/scene-symbols',
-  'scene/v3-preview': 'components/scene-v3',
-  'components/scene-v3-preview': 'components/scene-v3',
+  // 16.9: the alias is its own module (warns once, forwards to scene/v3); removed in 17.0
+  'scene/v3-preview': 'components/scene-v3-preview',
 };
 
 /**

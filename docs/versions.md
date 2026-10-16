@@ -11,7 +11,7 @@ URLs. Nothing else changes: the `<usa-*>` tags, the `usa-` classes, the globals 
 
 | Tag | Points to | Install |
 |---|---|---|
-| `latest` | the newest release of the current major (<!--ver:version-->16.3.0<!--/ver--> today) | `npm i motionary` |
+| `latest` | the newest release of the current major (<!--ver:version-->16.9.0<!--/ver--> today) | `npm i motionary` |
 | `v<major>-line` | each major line from 14 on, e.g. `v14-line` → the newest 14.x release (a bare `v14` is not allowed: npm rejects tag names that are valid SemVer ranges) | `npm i motionary@v14-line` |
 | `next` | release candidates of the next major; never moves `latest` (16.0.0 today: the 16.0 candidate line is closed, the next candidate is 17.0.0-rc.1) | `npm i motionary@next` |
 | `v15-lts` | the last 15.x release (15.9.0 today), security and severe fixes at least until 17.0 ships | `npm i motionary@v15-lts` |
@@ -56,3 +56,9 @@ Deprecations announced in a minor stay in place, with `@deprecated` types and no
   `npx motionary compat <version>` and the `check_compat` tool of `motionary-mcp` read the same data.
 - [compat-matrix.md](./compat-matrix.md): feature-by-feature browser and format support for the runtime modules.
 - [CHANGELOG.md](../CHANGELOG.md): the notes for every release.
+
+## 17.0 and `v16-lts`
+
+When 17.0.0 ships, `latest` moves to 17.0.0 and the last 16.x release gets `v16-lts` (security and severe fixes at
+least until 18.0 ships), the same way `v15-lts` and `v14-lts` were set. What 17.0 removes is listed in
+[deprecations-v17.md](./deprecations-v17.md) (announced in 16.9).

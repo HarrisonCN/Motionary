@@ -6,7 +6,7 @@
 
 _原名 **use-scroll-animate**。旧 npm 包仍会作为别名，与 motionary 同版本、同构建一起发布。_
 
-[![npm](https://img.shields.io/npm/v/motionary?style=flat-square)](https://www.npmjs.com/package/motionary) [![CI](https://github.com/HarrisonCN/Motionary/actions/workflows/ci.yml/badge.svg)](https://github.com/HarrisonCN/Motionary/actions/workflows/ci.yml) [![motionary/core size](https://deno.bundlejs.com/?q=motionary/core&badge)](https://bundlejs.com/?q=motionary/core) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](./LICENSE)
+[![npm](https://img.shields.io/npm/v/motionary?style=flat-square)](https://www.npmjs.com/package/motionary) [![CI](https://github.com/HarrisonCN/Motionary/actions/workflows/ci.yml/badge.svg)](https://github.com/HarrisonCN/Motionary/actions/workflows/ci.yml) [![motionary/core size](https://deno.bundlejs.com/?q=motionary/core&badge)](https://bundlejs.com/?q=motionary/core) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](./LICENSE) [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/HarrisonCN/Motionary/badge)](https://scorecard.dev/viewer/?uri=github.com/HarrisonCN/Motionary)
 
 [English](./README.md) | **简体中文** | [日本語](./README_ja.md)
 
@@ -27,6 +27,8 @@ npm i motionary
 Motionary 让内容在滚入视口时自然登场，并提供 <!--fact:public-->209<!--/fact--> 个开箱即用的 `<usa-*>` 动画自定义元素：卡片、按钮、物理效果、页面转场、生成式背景、Lottie、WebGL 等等。无论是纯 HTML，还是 React、Vue、Svelte、Solid、Angular，乃至 Electron、Tauri、WebView2 这类桌面 Web 视图，都能直接使用。运行时零依赖，每个入口都可 tree-shaking，并在 CI 中有固定的 gzip 体积预算；所有动画都遵循 `prefers-reduced-motion`。
 
 各版本的更新说明见 [CHANGELOG.md](./CHANGELOG.md)。
+
+供应链：[docs/supply-chain.md](./docs/supply-chain.md) · 带 SRI 哈希的 CDN 用法：[docs/cdn-sri.md](./docs/cdn-sri.md) · 与 AOS、GSAP、Lenis、Motion 的对比：[docs/compare](./docs/compare/README.md) · 在线试用：[StackBlitz 示例](./examples/stackblitz/README.md)。
 
 ## 目录
 
@@ -298,7 +300,7 @@ AI 助手与 provider（`motionary/studio/ai`、`motionary/ai*`）、MCP 服务�
 每个入口在 [`size-budget.json`](./size-budget.json) 中都有固定的 gzip 预算（共 401 项）。任何入口超出预算，CI 就会失败，预算也从不自动上调。
 
 <!-- size-table:start -->
-16.3.0 构建的实测值（minify + gzip），由 `scripts/size.mjs --report` 生成：
+16.9.0 构建的实测值（minify + gzip），由 `scripts/size.mjs --report` 生成：
 
 | 导入内容 | gzip | 上限 |
 |---|---:|---:|
@@ -312,7 +314,7 @@ AI 助手与 provider（`motionary/studio/ai`、`motionary/ai*`）、MCP 服务�
 | `motionary/components/reveal` | 4.47 KB | 5.00 KB |
 | `motionary/components/lite`（全部元素，CSS 按需） | 69.99 KB | 70.00 KB |
 | `motionary/components`（全部元素 + CSS） | 86.05 KB | 93.75 KB |
-| `dist/components.umd.js`（CDN，全部） | 109.32 KB | 115.75 KB |
+| `dist/components.umd.js`（CDN，全部） | 109.33 KB | 115.75 KB |
 <!-- size-table:end -->
 
 默认不监听 scroll 事件（改用 IntersectionObserver），动画只作用于合成层属性（`transform`、`opacity`、`filter`、`clip-path`），导入本身没有副作用（[docs/tree-shaking.md](./docs/tree-shaking.md)）。每个 PR 还会在无头 Chrome 中测量首屏传输量、脚本耗时、GPU 资源与帧稳定性（[docs/perf-ci.md](./docs/perf-ci.md)）。source map 不随 npm 包发布：它们保存在打了标签的 git 树中（每个文件的 `sourceMappingURL` 指向那里），从 16.3 起也作为 `sourcemaps` 压缩包附在每个 GitHub Release 上（[docs/source-maps.md](./docs/source-maps.md)）。更多：[docs/performance.md](./docs/performance.md)。
@@ -340,7 +342,7 @@ npx usa-codemod-13 --write      # 一并改写，并把固定在 @10 / @11 / @12
 
 ## 版本与兼容性
 
-- **npm dist-tags：** `latest` 指向当前大版本的最新版本（<!--ver:version-->16.3.0<!--/ver-->；从 14.1 起次版本也会移动它）。每个次版本另有自己的标签 `v<major>-<minor>`（例如 `v15-0`），`v15-line` 跟随 15.x，`v14-lts` 为 14.9.x。`motionary` 与 `use-scroll-animate` 总是以相同版本一起发布。
+- **npm dist-tags：** `latest` 指向当前大版本的最新版本（<!--ver:version-->16.9.0<!--/ver-->；从 14.1 起次版本也会移动它）。每个次版本另有自己的标签 `v<major>-<minor>`（例如 `v15-0`），`v15-line` 跟随 15.x，`v14-lts` 为 14.9.x。`motionary` 与 `use-scroll-animate` 总是以相同版本一起发布。
 - **CDN：** URL 固定到大版本（`motionary@<!--ver:major-->16<!--/ver-->`）；固定到具体版本（`motionary@12.4.0`）的链接也继续可用。
 - **语义化版本：** 破坏性变更只出现在大版本，每次都附带升级指南和 codemod。弃用的内容会保留到下一个大版本，期间类型标记为 `@deprecated`，运行时不输出警告。
 - **各版本包含什么：** 每个组件和运行时模块的 `since` / `changed`（[docs/version-compat.md](./docs/version-compat.md)），以及逐项功能支持（[docs/compat-matrix.md](./docs/compat-matrix.md)）。
