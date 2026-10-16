@@ -37,4 +37,4 @@ const UsaPlugin = {
 };
 
 export { UsaPlugin, isUsaElement };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.3.0/dist/components/vue.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/vue.js.map

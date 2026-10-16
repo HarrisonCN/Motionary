@@ -11,4 +11,4 @@ function registerGlobeSpin() {
 }
 
 export { effect, registerGlobeSpin as register, registerGlobeSpin };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.3.0/dist/effects/globe-spin.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/effects/globe-spin.js.map

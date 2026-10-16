@@ -258,4 +258,4 @@ exports.defineMasonry = defineMasonry;
 exports.flipFrames = flipFrames;
 exports.masonryLayout = masonryLayout;
 exports.sharedTransition = sharedTransition;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.3.0/dist/components/layout.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/layout.cjs.map

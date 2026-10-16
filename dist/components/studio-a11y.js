@@ -164,4 +164,4 @@ function motionSensitivity(root = globalThis.document?.documentElement) {
 }
 
 export { MOTION_SENSITIVITIES, STUDIO_A11Y_VERSION, VARIANTS_META_KEY, VARIANT_META_KEY, applySensitivity, motionSensitivity, resolveVariant, scaleTransform, validateVariants, variantsOf };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.3.0/dist/components/studio-a11y.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/studio-a11y.js.map
