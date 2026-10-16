@@ -45,12 +45,12 @@ export { ALL_TAGS, LIVE_REGION_IDS, MOTION_SENSITIVITY, SENSITIVITY_CSS, STATIC_
 export { autoDegrade, categoryOf, loadCategoryStyles, loadedStyles, onDemandStyles } from './components/perf.js';
 export { BRIDGE_PROTOCOL_VERSION, applyNativeSettings, connectNativeShell, detectNativeHost, isTrustedMessage, parseNativeSettings, postToNative } from './components/bridge.js';
 export { C as COMPONENT_CATEGORIES } from './chunks/index-tags-B-JBecYg.js';
-export { B as BUILTIN_EFFECTS } from './chunks/builtins-DpYlFL8l.js';
+export { B as BUILTIN_EFFECTS } from './chunks/builtins-BYmVxuUA.js';
 export { EFFECT_KINDS, EFFECT_TRIGGERS, bindEffect, getEffect, hasEffect, listEffects, playEffect, registerEffect, registerEffects } from './chunks/registry-BdSDdeL7.js';
 export { S as SPRING_PRESETS, c as createSpring, l as linearEasing, p as projectInertia, r as resolveSpring, a as rubberBand, s as snapTo, b as spring, d as springEasing, e as springSamples, f as stepSpring, g as supportsLinearEasing } from './chunks/spring-BOKyL1Rj.js';
 export { T as TIMELINE_PRESETS, r as resolvePosition, s as supportsNativeScrub, t as timeline } from './chunks/core-CxbMpBNZ.js';
 export { g as gesture, p as pinchScale, s as swipeDirection } from './chunks/core-DISdVBH1.js';
-export { h as haptic } from './chunks/fx-DOddY8VG.js';
+export { h as haptic } from './chunks/fx-C9Bq8hdA.js';
 
 /**
  * motionary/components

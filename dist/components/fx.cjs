@@ -2,7 +2,7 @@
 
 var base = require('../chunks/base-BvH4nAcv.cjs');
 var registry = require('../chunks/registry-CibnX7Ui.cjs');
-var builtins = require('../chunks/builtins-DweCp29Z.cjs');
+var builtins = require('../chunks/builtins-fp4MVfE-.cjs');
 
 function defineFx(tag = 'usa-fx') {
     return base.defineElement(tag, (Base) => class UsaFx extends Base {

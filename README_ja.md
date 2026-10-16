@@ -300,7 +300,7 @@ Figma プラグイン、クロスプラットフォーム書き出し（`npx mot
 すべてのエントリポイントに、[`size-budget.json`](./size-budget.json) で固定の gzip 上限が設定されています（全 401 項目）。上限を超えるエントリがあれば CI は失敗し、上限が自動で引き上げられることはありません。
 
 <!-- size-table:start -->
-16.9.0 ビルドでの実測値（minify ＋ gzip、`scripts/size.mjs --report` で生成）：
+17.0.0-rc.1 ビルドでの実測値（minify ＋ gzip、`scripts/size.mjs --report` で生成）：
 
 | インポートするもの | gzip | 上限 |
 |---|---:|---:|
@@ -314,7 +314,7 @@ Figma プラグイン、クロスプラットフォーム書き出し（`npx mot
 | `motionary/components/reveal` | 4.47 KB | 5.00 KB |
 | `motionary/components/lite`（全要素、CSS はオンデマンド） | 69.99 KB | 70.00 KB |
 | `motionary/components`（全要素 ＋ CSS） | 86.05 KB | 93.75 KB |
-| `dist/components.umd.js`（CDN、すべて） | 109.33 KB | 115.75 KB |
+| `dist/components.umd.js`（CDN、すべて） | 109.92 KB | 115.75 KB |
 <!-- size-table:end -->
 
 既定ではスクロールイベントを監視せず（IntersectionObserver を使用）、アニメーションはコンポジタで処理できるプロパティ（`transform`、`opacity`、`filter`、`clip-path`）に限られます。インポート自体に副作用はありません（[docs/tree-shaking.md](./docs/tree-shaking.md)）。PR ごとに、ヘッドレス Chrome でファーストビューの転送量、スクリプト時間、GPU リソース、フレームの安定性も計測しています（[docs/perf-ci.md](./docs/perf-ci.md)）。ソースマップは npm には含めません。タグ付きの git ツリーにあり（各ファイルの `sourceMappingURL` がそこを指します）、16.3 からは `sourcemaps` アーカイブとして GitHub の各リリースにも添付します（[docs/source-maps.md](./docs/source-maps.md)）。詳しくは [docs/performance.md](./docs/performance.md)。

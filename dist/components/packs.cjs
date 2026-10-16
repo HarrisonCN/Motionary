@@ -63,7 +63,7 @@ async function flyToCart(from, to, o = {}) {
     const ghost = from.cloneNode(true);
     ghost.setAttribute('aria-hidden', 'true');
     Object.assign(ghost.style, { position: 'fixed', left: `${a.left}px`, top: `${a.top}px`, width: `${a.width}px`, height: `${a.height}px`, margin: '0', zIndex: '2147483000', pointerEvents: 'none' });
-    document.body.appendChild(ghost);
+    document.body.append(ghost);
     const dx = b.left + b.width / 2 - (a.left + a.width / 2);
     const dy = b.top + b.height / 2 - (a.top + a.height / 2);
     const f = anim(ghost, [

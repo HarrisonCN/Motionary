@@ -1,7 +1,7 @@
 import { f as defineElement } from '../chunks/base-BQmWYlDq.js';
 import { playEffect, bindEffect, EFFECT_TRIGGERS, registerEffects } from '../chunks/registry-BdSDdeL7.js';
 export { EFFECT_KINDS, getEffect, hasEffect, listEffects, registerEffect } from '../chunks/registry-BdSDdeL7.js';
-import { B as BUILTIN_EFFECTS } from '../chunks/builtins-DpYlFL8l.js';
+import { B as BUILTIN_EFFECTS } from '../chunks/builtins-BYmVxuUA.js';
 
 function defineFx(tag = 'usa-fx') {
     return defineElement(tag, (Base) => class UsaFx extends Base {

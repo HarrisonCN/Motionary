@@ -93,7 +93,7 @@ function loadCategoryStyles(category, base) {
     link.rel = 'stylesheet';
     link.href = `${base.replace(/\/?$/, '/')}${category === 'all' ? 'components.css' : `components/${category}.css`}`;
     link.setAttribute('data-usa-css', category);
-    document.head.appendChild(link);
+    document.head.append(link);
     return link;
 }
 /**

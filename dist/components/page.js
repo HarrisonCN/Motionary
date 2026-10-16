@@ -348,7 +348,7 @@ function bar() {
     if (!el) {
         defineLoadingBar();
         el = document.createElement('usa-loading-bar');
-        document.body.appendChild(el);
+        document.body.append(el);
     }
     return typeof el.start === 'function' ? el : null;
 }

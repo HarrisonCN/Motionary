@@ -26,12 +26,12 @@ var components_a11y = require('./components/a11y.cjs');
 var components_perf = require('./components/perf.cjs');
 var components_bridge = require('./components/bridge.cjs');
 var indexTags = require('./chunks/index-tags-hLIF2Clq.cjs');
-var builtins = require('./chunks/builtins-DweCp29Z.cjs');
+var builtins = require('./chunks/builtins-fp4MVfE-.cjs');
 var registry = require('./chunks/registry-CibnX7Ui.cjs');
 var spring = require('./chunks/spring-XEl_diDJ.cjs');
 var core = require('./chunks/core-DjjKLmZ6.cjs');
 var core$1 = require('./chunks/core-DbAYRKnS.cjs');
-var fx = require('./chunks/fx-DaVuB89C.cjs');
+var fx = require('./chunks/fx-DEhvlMn6.cjs');
 
 /**
  * motionary/components

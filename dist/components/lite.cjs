@@ -579,7 +579,7 @@ function loadCategoryStyles(category, base) {
     link.rel = 'stylesheet';
     link.href = `${base.replace(/\/?$/, '/')}${category === 'all' ? 'components.css' : `components/${category}.css`}`;
     link.setAttribute('data-usa-css', category);
-    document.head.appendChild(link);
+    document.head.append(link);
     return link;
 }
 /**
@@ -5591,7 +5591,7 @@ function fxLayer() {
     layer.className = 'usa-fx-layer';
     layer.setAttribute('aria-hidden', 'true');
     layer.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:2147483000;overflow:hidden;contain:strict';
-    document.body.appendChild(layer);
+    document.body.append(layer);
     return layer;
 }
 const PALETTE = ['#7c5cff', '#22d3ee', '#f472b6', '#facc15', '#34d399', '#fb923c'];
@@ -5603,7 +5603,7 @@ function particle(x, y, size, color, shape) {
         (glyph ? `font-size:${size * 2}px;line-height:${size}px;text-align:center;color:${color}` : `background:${color};border-radius:${shape === 'square' ? '2px' : '50%'}`);
     if (glyph)
         p.textContent = glyph;
-    fxLayer().appendChild(p);
+    fxLayer().append(p);
     return p;
 }
 const done = (a, el) => {
@@ -5823,7 +5823,7 @@ function injectGoo() {
     svg.setAttribute('height', '0');
     svg.style.position = 'absolute';
     svg.innerHTML = '<filter id="usa-goo"><feGaussianBlur in="SourceGraphic" stdDeviation="6" result="b"/><feColorMatrix in="b" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9" result="g"/><feComposite in="SourceGraphic" in2="g" operator="atop"/></filter>';
-    document.body.appendChild(svg);
+    document.body.append(svg);
 }
 function defineButton(tag = 'usa-button') {
     return defineElement(tag, (Base) => class UsaButton extends Base {
@@ -7873,7 +7873,7 @@ function bar() {
     if (!el) {
         defineLoadingBar();
         el = document.createElement('usa-loading-bar');
-        document.body.appendChild(el);
+        document.body.append(el);
     }
     return typeof el.start === 'function' ? el : null;
 }
@@ -9918,7 +9918,7 @@ function autoAnimate(parent, o = {}) {
                     n.style.pointerEvents = 'none';
                     if (getComputedStyle(parent).position === 'static')
                         parent.style.position = 'relative';
-                    parent.appendChild(n);
+                    parent.append(n);
                     n.__usaGhost = true;
                     const a = animate(n, [{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'scale(0.96)' }]);
                     const drop = () => {
@@ -10172,7 +10172,7 @@ async function flyToCart(from, to, o = {}) {
     const ghost = from.cloneNode(true);
     ghost.setAttribute('aria-hidden', 'true');
     Object.assign(ghost.style, { position: 'fixed', left: `${a.left}px`, top: `${a.top}px`, width: `${a.width}px`, height: `${a.height}px`, margin: '0', zIndex: '2147483000', pointerEvents: 'none' });
-    document.body.appendChild(ghost);
+    document.body.append(ghost);
     const dx = b.left + b.width / 2 - (a.left + a.width / 2);
     const dy = b.top + b.height / 2 - (a.top + a.height / 2);
     const f = anim(ghost, [
@@ -10531,7 +10531,7 @@ const click = [
             if (getComputedStyle(el).position === 'static')
                 el.style.position = 'relative';
             (_a = el.style).overflow || (_a.overflow = 'hidden');
-            el.appendChild(dot);
+            el.append(dot);
             const a = ctx.animate(dot, [{ transform: 'scale(0)', opacity: 0.3 }, { transform: 'scale(1)', opacity: 0 }], { duration: o.duration, easing: 'ease-out' });
             const done = () => dot.remove();
             if (a)
