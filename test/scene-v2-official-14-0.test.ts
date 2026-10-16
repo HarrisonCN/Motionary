@@ -99,8 +99,8 @@ describe('14.0 <usa-player> reads scene v2 natively', () => {
     expect(() => createPlayer(root(), { format: 'motionary-scene', version: 4, layers: [] } as any)).toThrow(/newer motionary/); // 16.0: flat v3 plays
   });
   it('without the compat layer, the removed 13.x formats fail with a pointer to migrate / motionary/compat-v13', () => {
-    expect(() => createPlayer(root(), fx('playground.json'))).toThrow(/removed in 14\.0.*(motionary migrate|compat-v13)/s);
-    expect(() => createPlayer(root(), fx('player-unversioned.json'))).toThrow(/removed in 14\.0.*(motionary migrate|compat-v13)/s);
+    expect(() => createPlayer(root(), fx('playground.json'))).toThrow(/removed in 14\.0.*(motionary(@v16-lts)? migrate|compat-v13)/s);
+    expect(() => createPlayer(root(), fx('player-unversioned.json'))).toThrow(/removed in 14\.0.*(motionary(@v16-lts)? migrate|compat-v13)/s);
   });
   it('<usa-player> loads an inline scene v2 document', () => {
     fakeWaapi();
