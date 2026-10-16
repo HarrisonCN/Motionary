@@ -40,7 +40,7 @@ function defineAddToCart(tag = 'usa-add-to-cart') {
                 const cart = base.queryAttr(cartSel);
                 const from = base.queryAttr(this.str('from')) || this.closest('[data-product]')?.querySelector('img') || this;
                 if (registry.getEffect('fly-to-cart'))
-                    void registry.playEffect(from, 'fly-to-cart', { to: cart?.matches('usa-cart-drawer') ? `${cartSel} .usa-cd2-toggle` : cartSel });
+                    void registry.playEffect(from, 'fly-to-cart', { to: cart?.matches('usa-cart-drawer,mo-cart-drawer') ? `${cartSel} .usa-cd2-toggle` : cartSel });
                 cart?.add?.(item);
                 this.setAttribute('data-added', '');
                 this.querySelector('.usa-atc-live').textContent = `${this.str('added', 'Added')} to cart`;
@@ -57,4 +57,4 @@ function defineAddToCart(tag = 'usa-add-to-cart') {
 }
 
 exports.defineAddToCart = defineAddToCart;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/widgets/add-to-cart.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/widgets/add-to-cart.cjs.map

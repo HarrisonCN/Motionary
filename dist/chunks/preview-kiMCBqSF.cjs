@@ -206,4 +206,4 @@ exports.createFixedClock = createFixedClock;
 exports.createTimelinePreview = createTimelinePreview;
 exports.interpolateValue = interpolateValue;
 exports.sampleTimelineDoc = sampleTimelineDoc;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/chunks/preview-kiMCBqSF.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/chunks/preview-kiMCBqSF.cjs.map

@@ -66,7 +66,7 @@ Supply chain: [docs/supply-chain.md](./docs/supply-chain.md) · CDN with SRI has
 npm i motionary
 ```
 
-No build step? Use the CDN. URLs pin the major version (`@<!--ver:major-->16<!--/ver-->`). For production, pin the exact version with SRI ([docs/cdn-sri.md](./docs/cdn-sri.md)):
+No build step? Use the CDN. URLs pin the major version (`@<!--ver:major-->17<!--/ver-->`). For production, pin the exact version with SRI ([docs/cdn-sri.md](./docs/cdn-sri.md)):
 
 ```html
 <script src="https://unpkg.com/motionary@17/dist/index.umd.js"></script>            <!-- scroll API: window.ScrollAnimate -->
@@ -405,9 +405,9 @@ Coming from another library: [AOS](./docs/migration-from-aos.md) · [GSAP Scroll
 
 ## Versions and compatibility
 
-- **npm dist-tags:** `latest` is the newest release of the current major (<!--ver:version-->16.9.0<!--/ver-->; minors move it since 14.1). Each minor release also gets its own tag `v<major>-<minor>`
+- **npm dist-tags:** `latest` is the newest release of the current major (<!--ver:version-->17.0.0-rc.1<!--/ver-->; minors move it since 14.1). Each minor release also gets its own tag `v<major>-<minor>`
   (for example `v15-0`), `v15-line` follows the 15.x line and `v14-lts` is 14.9.x. `motionary` and `use-scroll-animate` are published together at the same versions.
-- **CDN:** URLs pin a major (`motionary@<!--ver:major-->16<!--/ver-->`). Exact pins (`motionary@12.4.0`) keep working.
+- **CDN:** URLs pin a major (`motionary@<!--ver:major-->17<!--/ver-->`). Exact pins (`motionary@12.4.0`) keep working.
 - **Semver:** breaking changes come only in majors, each with a guide and a codemod. Deprecations stay in place until the
   next major, with `@deprecated` types and no runtime warning.
 - **What each version has:** `since` / `changed` for every component and runtime module ([docs/version-compat.md](./docs/version-compat.md)),

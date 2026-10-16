@@ -1,4 +1,4 @@
-import { f as defineElement, D as EASE_OUT, d as clamp, b as caf, I as queryAttr, r as raf } from '../chunks/base-QrtwTUOO.js';
+import { f as defineElement, F as EASE_OUT, d as clamp, b as caf, I as queryAttr, r as raf } from '../chunks/base-BQmWYlDq.js';
 
 /** Entrance effects shared by `<usa-reveal>` and `<usa-stagger>` (transform / opacity / filter only). */
 const REVEAL_EFFECTS = [
@@ -351,4 +351,4 @@ function defineRevealComponents() {
 }
 
 export { REVEAL_EFFECTS, defineReveal, defineRevealComponents, defineScrollProgress, defineScrolly, defineStagger, readScrollProgress, revealKeyframes };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/reveal.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/components/reveal.js.map

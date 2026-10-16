@@ -5,4 +5,4 @@ var widgets_odometer = require('../chunks/progress-ring-C75O4MUi.cjs');
 
 
 exports.defineProgressRing = widgets_odometer.defineProgressRing;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/widgets/progress-ring.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/widgets/progress-ring.cjs.map

@@ -1,4 +1,4 @@
-import { p as prefersReducedMotion, n as now, m as motionScale, r as raf, d as clamp, D as EASE_OUT, E as EASE_SPRING, f as defineElement } from '../chunks/base-QrtwTUOO.js';
+import { p as prefersReducedMotion, n as now, m as motionScale, r as raf, d as clamp, F as EASE_OUT, E as EASE_SPRING, f as defineElement } from '../chunks/base-BQmWYlDq.js';
 
 const anim = (el, frames, o) => {
     if (typeof el.animate !== 'function')
@@ -181,4 +181,4 @@ function definePacksComponents() {
 }
 
 export { PACKS, PACK_PRIMITIVES, applyPack, countUp, definePack, definePacksComponents, flyToCart };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/packs.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/components/packs.js.map

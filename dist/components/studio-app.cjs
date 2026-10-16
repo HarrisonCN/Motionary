@@ -239,4 +239,4 @@ exports.STUDIO_APP_VERSION = STUDIO_APP_VERSION;
 exports.createLocalStorage = createLocalStorage;
 exports.createMemoryStorage = createMemoryStorage;
 exports.createStudioApp = createStudioApp;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/studio-app.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/components/studio-app.cjs.map

@@ -3181,7 +3181,7 @@ function defineToaster(tag = 'usa-toaster') {
 function toast(message, options = {}) {
     if (typeof document === 'undefined' || !defineToaster())
         return null;
-    let host = typeof options.toaster === 'string' ? document.querySelector(options.toaster) : options.toaster || document.querySelector('usa-toaster');
+    let host = typeof options.toaster === 'string' ? document.querySelector(options.toaster) : options.toaster || document.querySelector('usa-toaster,mo-toaster');
     if (!host) {
         host = document.createElement('usa-toaster');
         document.body.append(host);
@@ -7869,7 +7869,7 @@ function defineLoadingBar(tag = 'usa-loading-bar') {
 function bar() {
     if (typeof document === 'undefined')
         return null;
-    let el = document.querySelector('usa-loading-bar');
+    let el = document.querySelector('usa-loading-bar,mo-loading-bar');
     if (!el) {
         defineLoadingBar();
         el = document.createElement('usa-loading-bar');
@@ -11312,4 +11312,4 @@ exports.viewTransition = viewTransition;
 exports.warnBaseline = warnBaseline;
 exports.watchPowerSaver = watchPowerSaver;
 exports.withoutDeprecations = withoutDeprecations;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/lite.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/components/lite.cjs.map

@@ -1,6 +1,6 @@
-import { r as raf, b as caf } from '../chunks/base-QrtwTUOO.js';
-import { registerEffects } from '../chunks/registry-B1ipgYF7.js';
-import { c as canvasBackground } from '../chunks/generative-BNmS-QUD.js';
+import { r as raf, b as caf } from '../chunks/base-BQmWYlDq.js';
+import { registerEffects } from '../chunks/registry-BdSDdeL7.js';
+import { c as canvasBackground } from '../chunks/generative-BFR11LSL.js';
 
 /**
  * 6.8 — Interactive physics 2.0 (`motionary/components/fx-physics`) on a tiny
@@ -354,4 +354,4 @@ function registerPhysicsPack() {
 }
 
 export { PHYSICS2_FX, VerletWorld, registerPhysicsPack };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/fx-physics.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/components/fx-physics.js.map

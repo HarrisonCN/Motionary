@@ -1,2 +1,2 @@
-export { d as defineGpuParticles } from '../chunks/gpu-particles-BCpT6_0b.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/widgets/gpu-particles.js.map
+export { d as defineGpuParticles } from '../chunks/gpu-particles-dIxou1C7.js';
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/widgets/gpu-particles.js.map

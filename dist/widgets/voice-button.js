@@ -1,2 +1,2 @@
-export { d as defineVoiceButton } from '../chunks/voice-button-leTq2whK.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/widgets/voice-button.js.map
+export { d as defineVoiceButton } from '../chunks/voice-button-BsYkfXZ8.js';
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/widgets/voice-button.js.map

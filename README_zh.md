@@ -50,7 +50,7 @@ Motionary 让内容在滚入视口时自然登场，并提供 <!--fact:public-->
 npm i motionary
 ```
 
-不想引入构建工具？直接用 CDN。URL 固定到大版本（`@<!--ver:major-->16<!--/ver-->`）。生产环境请固定到具体版本并加 SRI（[docs/cdn-sri.md](./docs/cdn-sri.md)）：
+不想引入构建工具？直接用 CDN。URL 固定到大版本（`@<!--ver:major-->17<!--/ver-->`）。生产环境请固定到具体版本并加 SRI（[docs/cdn-sri.md](./docs/cdn-sri.md)）：
 
 ```html
 <script src="https://unpkg.com/motionary@17/dist/index.umd.js"></script>            <!-- 滚动 API：window.ScrollAnimate -->
@@ -342,8 +342,8 @@ npx usa-codemod-13 --write      # 一并改写，并把固定在 @10 / @11 / @12
 
 ## 版本与兼容性
 
-- **npm dist-tags：** `latest` 指向当前大版本的最新版本（<!--ver:version-->16.9.0<!--/ver-->；从 14.1 起次版本也会移动它）。每个次版本另有自己的标签 `v<major>-<minor>`（例如 `v15-0`），`v15-line` 跟随 15.x，`v14-lts` 为 14.9.x。`motionary` 与 `use-scroll-animate` 总是以相同版本一起发布。
-- **CDN：** URL 固定到大版本（`motionary@<!--ver:major-->16<!--/ver-->`）；固定到具体版本（`motionary@12.4.0`）的链接也继续可用。
+- **npm dist-tags：** `latest` 指向当前大版本的最新版本（<!--ver:version-->17.0.0-rc.1<!--/ver-->；从 14.1 起次版本也会移动它）。每个次版本另有自己的标签 `v<major>-<minor>`（例如 `v15-0`），`v15-line` 跟随 15.x，`v14-lts` 为 14.9.x。`motionary` 与 `use-scroll-animate` 总是以相同版本一起发布。
+- **CDN：** URL 固定到大版本（`motionary@<!--ver:major-->17<!--/ver-->`）；固定到具体版本（`motionary@12.4.0`）的链接也继续可用。
 - **语义化版本：** 破坏性变更只出现在大版本，每次都附带升级指南和 codemod。弃用的内容会保留到下一个大版本，期间类型标记为 `@deprecated`，运行时不输出警告。
 - **各版本包含什么：** 每个组件和运行时模块的 `since` / `changed`（[docs/version-compat.md](./docs/version-compat.md)），以及逐项功能支持（[docs/compat-matrix.md](./docs/compat-matrix.md)）。
 - 详情：[docs/versions.md](./docs/versions.md) · [CHANGELOG.md](./CHANGELOG.md)。

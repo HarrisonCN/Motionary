@@ -559,4 +559,4 @@ exports.defineCardComponents = defineCardComponents;
 exports.defineCardStack = defineCardStack;
 exports.defineCarousel3d = defineCarousel3d;
 exports.defineStickyStack = defineStickyStack;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/cards.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/components/cards.cjs.map

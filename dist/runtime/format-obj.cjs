@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-sRiTWT0H.cjs');
+var registry = require('../chunks/registry-CwNAUn9i.cjs');
 var runtime_gl = require('./gl.cjs');
 
 /**
@@ -178,4 +178,4 @@ exports.objMaterial = objMaterial;
 exports.objToNode = objToNode;
 exports.parseMtl = parseMtl;
 exports.parseObj = parseObj;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/runtime/format-obj.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/runtime/format-obj.cjs.map

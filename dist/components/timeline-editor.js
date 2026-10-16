@@ -1,7 +1,7 @@
-export { T as TIMELINE_DOC_FORMAT, k as TIMELINE_DOC_LIMITS, l as TIMELINE_DOC_VERSION, e as TimelineDocError, m as createSeededRandom, j as createTimelineDoc, h as isLayerActive, f as isLayerLocked, i as isValidEasing, n as normalizeTimelineDoc, p as parseTimelineDoc, r as resolveRandom, s as serializeTimelineDoc, a as timelineDocDuration, t as timelineDocFromAnimation, o as timelineDocToAnimation, v as validateTimelineDoc } from '../chunks/format-BSTz6pm_.js';
-export { a as addKeyframe, f as addLayer, b as bindHistoryKeys, g as copyKeyframes, d as createTimelineHistory, j as editableKeyframes, k as groupLayers, h as historyKeyAction, l as layerSubtree, m as moveLayer, p as pasteKeyframes, r as removeKeyframes, n as removeLayers, o as scaleKeyframes, e as setKeyframeEasing, s as setKeyframeProps, i as shiftKeyframes, q as ungroupLayer, c as uniqueId, u as updateLayers } from '../chunks/history-W7ot2kyl.js';
-export { a as createFixedClock, c as createTimelinePreview, i as interpolateValue, s as sampleTimelineDoc } from '../chunks/preview-DdgqW96I.js';
-export { l as loadMotionDoc, a as timelineDocFromScene, t as timelineDocToScene } from '../chunks/scene-C7-PUIZK.js';
+export { T as TIMELINE_DOC_FORMAT, k as TIMELINE_DOC_LIMITS, l as TIMELINE_DOC_VERSION, e as TimelineDocError, m as createSeededRandom, j as createTimelineDoc, h as isLayerActive, f as isLayerLocked, i as isValidEasing, n as normalizeTimelineDoc, p as parseTimelineDoc, r as resolveRandom, s as serializeTimelineDoc, a as timelineDocDuration, t as timelineDocFromAnimation, o as timelineDocToAnimation, v as validateTimelineDoc } from '../chunks/format-CI6Vx9Ui.js';
+export { a as addKeyframe, f as addLayer, b as bindHistoryKeys, g as copyKeyframes, d as createTimelineHistory, j as editableKeyframes, k as groupLayers, h as historyKeyAction, l as layerSubtree, m as moveLayer, p as pasteKeyframes, r as removeKeyframes, n as removeLayers, o as scaleKeyframes, e as setKeyframeEasing, s as setKeyframeProps, i as shiftKeyframes, q as ungroupLayer, c as uniqueId, u as updateLayers } from '../chunks/history-DtNn2Q0g.js';
+export { a as createFixedClock, c as createTimelinePreview, i as interpolateValue, s as sampleTimelineDoc } from '../chunks/preview-DW0zh_0c.js';
+export { l as loadMotionDoc, a as timelineDocFromScene, t as timelineDocToScene } from '../chunks/scene-WZLES-B0.js';
 
 /**
  * 13.6: JSON Schema (draft 2020-12) of `motionary-timeline` v1, for editors and
@@ -13,7 +13,7 @@ const id = { type: 'string', minLength: 1, maxLength: 128 };
 const value = { oneOf: [{ type: 'number' }, { type: 'string', maxLength: 2048 }] };
 const TIMELINE_DOC_SCHEMA = {
     $schema: 'https://json-schema.org/draft/2020-12/schema',
-    $id: 'https://cdn.jsdelivr.net/npm/motionary@16/docs/timeline-doc.schema.json',
+    $id: 'https://cdn.jsdelivr.net/npm/motionary@17/docs/timeline-doc.schema.json',
     title: 'motionary-timeline v1',
     type: 'object',
     additionalProperties: false,
@@ -69,4 +69,4 @@ const TIMELINE_DOC_SCHEMA = {
 };
 
 export { TIMELINE_DOC_SCHEMA };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/timeline-editor.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/components/timeline-editor.js.map

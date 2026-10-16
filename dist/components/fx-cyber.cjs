@@ -136,4 +136,4 @@ function registerCyberPack() {
 exports.CYBER_FX = CYBER_FX;
 exports.decodeFrame = decodeFrame;
 exports.registerCyberPack = registerCyberPack;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/fx-cyber.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/components/fx-cyber.cjs.map

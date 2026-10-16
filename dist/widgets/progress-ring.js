@@ -1,2 +1,2 @@
-export { a as defineProgressRing } from '../chunks/progress-ring-BsEz1MN3.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/widgets/progress-ring.js.map
+export { a as defineProgressRing } from '../chunks/progress-ring-DfUcJbXm.js';
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/widgets/progress-ring.js.map

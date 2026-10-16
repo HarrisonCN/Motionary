@@ -66,4 +66,4 @@ exports.caf = base.caf;
 exports.installOffscreenPause = installOffscreenPause;
 exports.onFrame = onFrame;
 exports.raf = raf;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/offscreen.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/components/offscreen.cjs.map

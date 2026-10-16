@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-sRiTWT0H.cjs');
+var registry = require('../chunks/registry-CwNAUn9i.cjs');
 
 /**
  * `motionary/runtime/drag-snap` (10.8) — pointer drag with inertia and snap
@@ -266,4 +266,4 @@ exports.projectThrow = projectThrow;
 exports.rubberband = rubberband;
 exports.springStep = springStep;
 exports.velocityTracker = velocityTracker;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/runtime/drag-snap.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/runtime/drag-snap.cjs.map

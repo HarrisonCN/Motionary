@@ -228,4 +228,4 @@ exports.sampleFrames = sampleFrames;
 exports.serializeStudioProject = serializeStudioProject;
 exports.springBezier = springBezier;
 exports.springParams = springParams;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/chunks/project-DiTOvzic.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/chunks/project-DiTOvzic.cjs.map

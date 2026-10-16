@@ -15,4 +15,4 @@ function registerCardFlip3d() {
 exports.effect = effect;
 exports.register = registerCardFlip3d;
 exports.registerCardFlip3d = registerCardFlip3d;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/effects/card-flip-3d.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/effects/card-flip-3d.cjs.map

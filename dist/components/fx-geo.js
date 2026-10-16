@@ -1,4 +1,4 @@
-import { registerEffects } from '../chunks/registry-B1ipgYF7.js';
+import { registerEffects } from '../chunks/registry-BdSDdeL7.js';
 
 /** Length of a polyline through `points` (7.6). */
 function routeLength(points) {
@@ -117,4 +117,4 @@ function registerGeoPack() {
 }
 
 export { GEO_FX, registerGeoPack, routeLength };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/fx-geo.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/components/fx-geo.js.map

@@ -1,2 +1,2 @@
-export { d as definePrizeWheel } from '../chunks/prize-wheel-xiuulNSI.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/widgets/prize-wheel.js.map
+export { d as definePrizeWheel } from '../chunks/prize-wheel-CYG2gNtL.js';
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/widgets/prize-wheel.js.map

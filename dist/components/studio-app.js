@@ -1,8 +1,8 @@
 import { createStudio } from './studio.js';
-import { j as createTimelineDoc } from '../chunks/format-BSTz6pm_.js';
-import { d as createTimelineHistory } from '../chunks/history-W7ot2kyl.js';
+import { j as createTimelineDoc } from '../chunks/format-CI6Vx9Ui.js';
+import { d as createTimelineHistory } from '../chunks/history-DtNn2Q0g.js';
 import '../chunks/ease-XN8_0sXu.js';
-import { f as frameTime } from '../chunks/project-CCfILvjg.js';
+import { f as frameTime } from '../chunks/project-9WDl1Fyq.js';
 
 /**
  * `motionary/studio/app` (= `motionary/components/studio-app`, 15.0) — Motion Studio 2.0: one call puts the 14.x
@@ -234,4 +234,4 @@ async function createStudioApp(root, o = {}) {
 }
 
 export { STUDIO_APP_VERSION, createLocalStorage, createMemoryStorage, createStudioApp };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/studio-app.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/components/studio-app.js.map

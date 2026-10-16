@@ -150,9 +150,9 @@ declare function timeline(o?: TimelineOptions): Timeline;
  * inside Web Workers.
  */
 /** Runtime version (kept in sync with the package version by the release script). */
-declare const RUNTIME_VERSION = "16.9.0";
+declare const RUNTIME_VERSION = "17.0.0-rc.1";
 /** Where the CDN builds live (major-pinned). */
-declare const RUNTIME_CDN = "https://cdn.jsdelivr.net/npm/motionary@16/dist/";
+declare const RUNTIME_CDN = "https://cdn.jsdelivr.net/npm/motionary@17/dist/";
 /**
  * 11.4: runtime tiers. **basic** — ticker, tween, timeline, scroll, text, CSS / WAAPI keyframes; **standard** — smooth
  * scrolling, drag-snap, SVG, sprites, GIF / APNG / WebP, Lottie; **advanced** — WebGL, 3D file parsing and decoders,

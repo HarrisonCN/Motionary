@@ -1,6 +1,6 @@
-import { r as raf, b as caf } from '../chunks/base-QrtwTUOO.js';
-import { registerEffects } from '../chunks/registry-B1ipgYF7.js';
-import { c as canvasBackground, h as hexRgb } from '../chunks/generative-BNmS-QUD.js';
+import { r as raf, b as caf } from '../chunks/base-BQmWYlDq.js';
+import { registerEffects } from '../chunks/registry-BdSDdeL7.js';
+import { c as canvasBackground, h as hexRgb } from '../chunks/generative-BFR11LSL.js';
 import { o as overlay } from '../chunks/shared-CkKHWrtJ.js';
 
 /**
@@ -235,4 +235,4 @@ function registerLightPack() {
 }
 
 export { LIGHT_FX, registerLightPack, trackPointer };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/fx-light.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/components/fx-light.js.map

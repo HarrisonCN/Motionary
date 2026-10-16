@@ -40,7 +40,7 @@ for (const [cat, tags] of Object.entries(COMPONENT_CATEGORIES))
         TAG_TO_CAT.set(t, cat);
 const loaded = new Map();
 /** Category of a tag (`usa-button` → `click`), or `null`. */
-const categoryOfTag = (tag) => TAG_TO_CAT.get(tag.toLowerCase()) ?? null;
+const categoryOfTag = (tag) => TAG_TO_CAT.get(tag.toLowerCase().replace(/^mo-/, 'usa-')) ?? null; // 17.0: mo-* aliases
 /** Load and register one category (once). */
 function loadCategory(cat) {
     let p = loaded.get(cat);
@@ -60,7 +60,7 @@ async function defineUsed(root = document) {
         return [];
     const cats = new Set();
     const scan = (el) => {
-        const c = el.localName.startsWith('usa-') && !customElements.get(el.localName) ? categoryOfTag(el.localName) : null;
+        const c = /^(usa|mo)-/.test(el.localName) && !customElements.get(el.localName) ? categoryOfTag(el.localName) : null;
         if (c)
             cats.add(c);
     };
@@ -84,4 +84,4 @@ function lazyDefine(root = typeof document !== 'undefined' ? document : undefine
 }
 
 export { categoryOfTag, defineUsed, lazyDefine, loadCategory };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/components/lazy.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/components/lazy.js.map

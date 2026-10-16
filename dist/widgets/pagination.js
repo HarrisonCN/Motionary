@@ -1,2 +1,2 @@
-export { d as definePagination } from '../chunks/pagination-BIufB-g3.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/widgets/pagination.js.map
+export { d as definePagination } from '../chunks/pagination-D8OldTKt.js';
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/widgets/pagination.js.map

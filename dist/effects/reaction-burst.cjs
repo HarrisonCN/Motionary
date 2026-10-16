@@ -15,4 +15,4 @@ function registerReactionBurst() {
 exports.effect = effect;
 exports.register = registerReactionBurst;
 exports.registerReactionBurst = registerReactionBurst;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v16.9.0/dist/effects/reaction-burst.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0-rc.1/dist/effects/reaction-burst.cjs.map
