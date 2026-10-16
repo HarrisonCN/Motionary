@@ -1,7 +1,8 @@
 // 17.0.0 — naming: `mo-*` aliases (owner review 2026-10-15, item 3). Tests first (failing-before:
 // v17.0.0/failing-before-mo-aliases.txt).
-// - every `<usa-*>` element registered through defineElement also gets a `<mo-*>` alias (a subclass, so both tags work
-//   and behave the same); custom tags (defineX('my-tag')) get no alias.
+// - after defineMoAliases() (motionary/components/mo; the UMD bundles call it) every `<usa-*>` element also gets a
+//   `<mo-*>` alias (a subclass, so both tags work and behave the same); custom tags (defineX('my-tag')) get no alias.
+//   (2026-10-16: moved out of base.ts so usa-* pages keep their 16.9 sizes — test/mo-entry-17-0.test.ts.)
 // - the alias carries the component's light-DOM CSS with tag selectors renamed (adopted on first connect, so pages that
 //   never use mo-* pay nothing); declarations, classes and custom properties are untouched.
 // - tag lookups inside components accept both names (toaster, loading bar, cart drawer, lottie, lazy loading).
@@ -16,14 +17,15 @@ const read = (f: string) => readFileSync(join(ROOT, f), 'utf8');
 
 describe('17.0 mo-* element aliases', () => {
   it('every defined usa-* component and widget has a mo-* alias', async () => {
-    const base: any = await import('../src/components/base');
+    const mo: any = await import('../src/components/mo');
+    mo.defineMoAliases(); // ESM opt-in (motionary/components/mo); the UMD bundles call it themselves
     const { defineComponents } = await import('../src/components/index');
     const { defineWidgets } = await import('../src/components/widgets/index');
     const { COMPONENT_CATEGORIES } = await import('../src/components/index-tags');
     defineComponents();
     defineWidgets();
-    expect(base.aliasTag('usa-switch')).toBe('mo-switch');
-    expect(base.aliasTag('my-switch')).toBeNull();
+    expect(mo.aliasTag('usa-switch')).toBe('mo-switch');
+    expect(mo.aliasTag('my-switch')).toBeNull();
     const tags = Object.values(COMPONENT_CATEGORIES).flat() as string[];
     let n = 0;
     for (const t of tags) {
@@ -57,7 +59,7 @@ describe('17.0 mo-* element aliases', () => {
     el.remove();
   });
   it('aliasCss renames tag selectors only', async () => {
-    const { aliasCss } = await import('../src/components/base');
+    const { aliasCss } = await import('../src/components/mo');
     const out = aliasCss('usa-tabs{--usa-x:1;animation:usa-spin 1s}usa-tabs>usa-tab .usa-ind,[data-usa-a] usa-tab:hover{color:red}@media (min-width:1px){usa-tab{top:0}}@keyframes usa-spin{to{opacity:1}}');
     expect(out).toContain('mo-tabs{--usa-x:1;animation:usa-spin 1s}');
     expect(out).toContain('mo-tabs>mo-tab .usa-ind,[data-usa-a] mo-tab:hover{');
