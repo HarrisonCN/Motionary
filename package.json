@@ -1660,6 +1660,16 @@
         "default": "./dist/components/perf-tasks.cjs"
       }
     },
+    "./components/mo": {
+      "import": {
+        "types": "./dist/components/mo.d.ts",
+        "default": "./dist/components/mo.js"
+      },
+      "require": {
+        "types": "./dist/components/mo.d.cts",
+        "default": "./dist/components/mo.cjs"
+      }
+    },
     "./components/lite": {
       "import": {
         "types": "./dist/components/lite.d.ts",

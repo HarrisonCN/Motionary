@@ -40,10 +40,7 @@ for (const [cat, tags] of Object.entries(COMPONENT_CATEGORIES)) for (const t of 
 const loaded = new Map<ComponentCategory, Promise<void>>();
 
 /** Category of a tag (`usa-button` → `click`), or `null`. */
-export const categoryOfTag = (tag: string): ComponentCategory | null => {
-  const t = tag.toLowerCase();
-  return TAG_TO_CAT.get(t.startsWith('mo-') ? 'usa-' + t.slice(3) : t) ?? null; // 17.0: mo-* aliases
-};
+export const categoryOfTag = (tag: string): ComponentCategory | null => TAG_TO_CAT.get(tag.toLowerCase().replace(/^mo-/, 'usa-')) ?? null; // 17.0: mo-* aliases
 
 /** Load and register one category (once). */
 export function loadCategory(cat: ComponentCategory): Promise<void> {
@@ -63,7 +60,7 @@ export async function defineUsed(root: ParentNode = document): Promise<Component
   if (typeof customElements === 'undefined') return [];
   const cats = new Set<ComponentCategory>();
   const scan = (el: Element) => {
-    const c = (el.localName.startsWith('usa-') || el.localName.startsWith('mo-')) && !customElements.get(el.localName) ? categoryOfTag(el.localName) : null;
+    const c = /^(usa|mo)-/.test(el.localName) && !customElements.get(el.localName) ? categoryOfTag(el.localName) : null;
     if (c) cats.add(c);
   };
   if ((root as Element).localName) scan(root as Element);

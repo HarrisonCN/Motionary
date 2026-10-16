@@ -47,10 +47,29 @@ future major** (none is planned). Nothing to do now; prefer the new names in new
 
 | Deprecated (still works) | Preferred since 17.0 |
 |---|---|
-| every `<usa-*>` element, e.g. `<usa-switch>` | `<mo-*>`, e.g. `<mo-switch>` (same element: a subclass, same attributes, properties and `usa:*` events) |
+| every `<usa-*>` element, e.g. `<usa-switch>` | `<mo-*>`, e.g. `<mo-switch>` (same element: a subclass, same attributes, properties and `usa:*` events) — on in the CDN bundles; with ESM call `defineMoAliases()` from `motionary/components/mo` |
 | `window.UsaComponents` (CDN bundle `components.umd.js`) | `window.MotionaryComponents` (the same object) |
 | `npx -p motionary usa-codemod-<n>` | `npx -p motionary mo-codemod <n>` (same runner as `npx motionary codemod <n>`) |
 
-Notes: aliases exist for the default tags; an element you registered under your own name (`defineSwitch('my-switch')`)
+Turning the names on:
+
+- **CDN / no-build** (`components.umd.js`, `widgets.umd.js`): nothing to do, both bundles turn them on before they
+  register anything.
+- **ESM / bundlers:** one call, ideally before you define components. The alias code is its own entry, so pages that only
+  use `usa-*` names (and every per-component import, and `motionary/components/lite`) keep their 16.9 size:
+
+  ```ts
+  import { defineMoAliases } from 'motionary/components/mo';
+  import { defineComponents } from 'motionary/components';
+  defineMoAliases();
+  defineComponents(); // <mo-card>, <mo-tabs>, … and <usa-*> both work
+  ```
+
+  Called later, it still aliases the default components already defined and anything behind a `<mo-*>` element already
+  on the page; everything defined afterwards is aliased as it is defined.
+
+Notes: aliases exist for `usa-*` tags; an element you registered under your own name (`defineSwitch('my-switch')`)
 gets none. CSS that targets `usa-switch` does not match `<mo-switch>`; the component's own styles are copied for `mo-*`
-the first time a `mo-*` element connects. Event names stay `usa:*`.
+(tag selectors renamed) the first time a `mo-*` element connects. With `motionary/components/lite` the category CSS files
+are copied once they load; a CSS file served from another origin without CORS cannot be read, so `<mo-*>` stays
+unstyled there — use `<usa-*>` names with lite from a CDN. Event names stay `usa:*`.

@@ -165,7 +165,7 @@ export function defineToaster(tag = 'usa-toaster'): CustomElementConstructor | u
 export function toast(message: string, options: ToastOptions = {}): ToastHandle | null {
   if (typeof document === 'undefined' || !defineToaster()) return null;
   let host: UsaToasterElement | null =
-    typeof options.toaster === 'string' ? document.querySelector(options.toaster) : options.toaster || document.querySelector('usa-toaster, mo-toaster');
+    typeof options.toaster === 'string' ? document.querySelector(options.toaster) : options.toaster || document.querySelector('usa-toaster,mo-toaster');
   if (!host) {
     host = document.createElement('usa-toaster') as UsaToasterElement;
     document.body.append(host);

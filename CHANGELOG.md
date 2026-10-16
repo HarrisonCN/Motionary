@@ -17,9 +17,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - **`mo-*` names:** every `<usa-*>` element is also registered as `<mo-*>` (a subclass: same attributes, properties,
-  `usa:*` events; the component's styles are copied for `mo-*` on the first `mo-*` connect, so pages that never use
-  them pay nothing). `window.MotionaryComponents` is the same object as `window.UsaComponents`. `mo-codemod <n>` runs
-  the usa-codemod tools. Component lookups (toaster, loading bar, cart drawer, Lottie, lazy loading) accept both names.
+  `usa:*` events; the component's styles are copied for `mo-*` on the first `mo-*` connect). On in the CDN bundles
+  (`components.umd.js`, `widgets.umd.js`); with ESM call `defineMoAliases()` from the new entry
+  `motionary/components/mo` (own size line). The alias code is not in the component base, so `usa-*` pages, every
+  per-component import and lite keep their 16.9 sizes. `window.MotionaryComponents` is the same object as
+  `window.UsaComponents`. `mo-codemod <n>` runs the usa-codemod tools. Component lookups (toaster, loading bar, cart
+  drawer, Lottie, lazy loading) accept both names.
 
 ### Deprecated (kept)
 - The `usa-*` element names, `window.UsaComponents` and the `usa-codemod-*` bins: they keep working; removal not

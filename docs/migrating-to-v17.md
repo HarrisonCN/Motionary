@@ -7,8 +7,9 @@
 
 - **Removed:** the `motionary/scene/v3-preview` import path and the CLI's v15 project migration
   ([deprecations-v17.md](./deprecations-v17.md)).
-- **New names, old ones kept:** `<mo-*>` for every `<usa-*>` element, `window.MotionaryComponents`, `mo-codemod`. The
-  `usa-*` names are deprecated but keep working; removal not before a future major ([details](./deprecations-v17.md#mo-names)).
+- **New names, old ones kept:** `<mo-*>` for every `<usa-*>` element (on in the CDN bundles; with ESM call
+  `defineMoAliases()` from `motionary/components/mo`), `window.MotionaryComponents`, `mo-codemod`. The `usa-*` names are
+  deprecated but keep working; removal not before a future major ([details](./deprecations-v17.md#mo-names)).
 - **Unchanged:** Scene Format v3 stays stable; Studio (incl. the plugin API), MCP 3.x, AI, the Figma plugin and
   cross-platform export stay experimental.
 

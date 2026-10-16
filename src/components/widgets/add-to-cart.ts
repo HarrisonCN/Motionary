@@ -48,7 +48,7 @@ export function defineAddToCart(tag = 'usa-add-to-cart'): CustomElementConstruct
           const cartSel = this.str('cart', '[data-cart]');
           const cart = queryAttr(cartSel) as (HTMLElement & { add?: (i: unknown) => void }) | null;
           const from = queryAttr(this.str('from')) || this.closest('[data-product]')?.querySelector('img') || this;
-          if (getEffect('fly-to-cart')) void playEffect(from as HTMLElement, 'fly-to-cart', { to: cart?.matches('usa-cart-drawer, mo-cart-drawer') ? `${cartSel} .usa-cd2-toggle` : cartSel });
+          if (getEffect('fly-to-cart')) void playEffect(from as HTMLElement, 'fly-to-cart', { to: cart?.matches('usa-cart-drawer,mo-cart-drawer') ? `${cartSel} .usa-cd2-toggle` : cartSel });
           cart?.add?.(item);
           this.setAttribute('data-added', '');
           (this.querySelector('.usa-atc-live') as HTMLElement).textContent = `${this.str('added', 'Added')} to cart`;
