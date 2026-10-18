@@ -15,4 +15,4 @@ function registerParticleText() {
 exports.effect = effect;
 exports.register = registerParticleText;
 exports.registerParticleText = registerParticleText;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/effects/particle-text.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.1/dist/effects/particle-text.cjs.map

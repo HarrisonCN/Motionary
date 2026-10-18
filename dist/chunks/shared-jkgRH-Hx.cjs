@@ -55,4 +55,4 @@ exports.origin = origin;
 exports.overlay = overlay;
 exports.rand = rand;
 exports.spawn = spawn;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/chunks/shared-jkgRH-Hx.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.1/dist/chunks/shared-jkgRH-Hx.cjs.map

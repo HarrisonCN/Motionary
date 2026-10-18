@@ -85,4 +85,4 @@ function defineLiquidNav(tag = 'usa-liquid-nav') {
 }
 
 export { defineLiquidNav };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/widgets/liquid-nav.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.1/dist/widgets/liquid-nav.js.map

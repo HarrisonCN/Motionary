@@ -201,4 +201,4 @@ function createTimelinePreview(root, doc, o = {}) {
 }
 
 export { createFixedClock as a, createTimelinePreview as c, interpolateValue as i, sampleTimelineDoc as s };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/chunks/preview-DW0zh_0c.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.1/dist/chunks/preview-DW0zh_0c.js.map

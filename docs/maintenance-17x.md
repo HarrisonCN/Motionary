@@ -10,7 +10,7 @@
 - 核心零运行时依赖；lite ≤ 71,680 B gzip；`components/mo` ≤ 2,048 B gzip；其他预算保持原值。
 - `usa-*` 与 `mo-*` 并存，事件继续使用 `usa:*`；Scene v3 保持兼容，保留已承诺的迁移路径。
 - Studio、插件 API、MCP、AI、Figma 和跨平台导出仍为实验性，不因修复或补测试就改称稳定。
-- 一个修复主题一个 PR；先复现再修复，检查通过才合并。`dist/` 只在发布 PR 更新。
+- 一个修复主题一个 PR；每轮必需 CI 通过且无已知重大缺陷后直接合并，按 SemVer 发布并提供可下载包体，无需逐次确认。`dist/` 只在发布 PR 更新，外部条件阻塞时明确保留未发布状态。
 - 真机、读屏和原生编译尚未完成的项目保持待验证；不把模拟器结果写成真机结论。
 
 ## 迭代顺序与验收
@@ -34,8 +34,10 @@
 - 体积检查：**428 个条目全部在原预算内**；`components/mo` 为 **1,710 / 2,048 B gzip**，lite 保持 **71,672 / 71,680 B**。
   已重新生成体积报告并同步三语 README；文档一致性检查通过。
 - 已增加三浏览器集成用例 `test/browser/mo-css-literals.spec.mjs`，覆盖实际样式复制、属性匹配与伪元素内容。
-  本地 Playwright 浏览器安装包下载失败，浏览器结果以 PR CI 为准；没有标记为已通过。
-- 合并状态：[PR #171](https://github.com/HarrisonCN/Motionary/pull/171) 已创建，必需 CI 验证中；未合并、未发布。
+  本地 Playwright 浏览器安装包下载失败；PR #171 已在 Chromium、Firefox、WebKit 全部验证通过。
+- PR 首次 CI：三浏览器、Node 20/24、六框架与 Gateway 互通均通过；Node 22 的 npm 包体积检查超限。
+  维护计划与现有 ROADMAP 一样保留在仓库，不进入 npm 包，固定体积上限保持不变；本地打包复验通过。
+- 合并状态：[PR #171](https://github.com/HarrisonCN/Motionary/pull/171) 正在准备 17.0.1 发布，最终提交仍须全部必需 CI 通过；未合并、未发布。
 
 ## 每轮完成条件
 

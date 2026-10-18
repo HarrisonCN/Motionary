@@ -23,12 +23,33 @@ var indexTags = require('../chunks/index-tags-hLIF2Clq.cjs');
  */
 /** The `mo-*` alias of a default `usa-*` tag (`usa-switch` → `mo-switch`), or `null` for any other tag. */
 const aliasTag = (tag) => (/^usa-[a-z]/.test(tag) ? 'mo-' + tag.slice(4) : null);
-const TAG_RE = /(^|[^\w.#[\-])usa-(?=[a-z])/g;
+// Keep strings, comments, attribute selectors and escaped identifiers opaque. Braces / semicolons inside them
+// are content, not rule boundaries (and an attribute value that happens to name a component must stay unchanged).
+const CSS_TOKENS = /\/\*[\s\S]*?\*\/|"(?:\\[\s\S]|[^"\\])*"|'(?:\\[\s\S]|[^'\\])*'|\[(?:\\[\s\S]|"(?:\\[\s\S]|[^"\\])*"|'(?:\\[\s\S]|[^'\\])*'|[^\]\\])*\]|(?:\\[\s\S]|[\w-]|[^\x00-\x7f])+|[^\w]/g;
 /**
  * `usa-…` → `mo-…` in selectors only (the text in front of each `{` that is not an at-rule); declarations, at-rule
  * preludes such as `@keyframes usa-spin`, classes, attributes and custom properties are untouched.
  */
-const aliasCss = (text) => text.replace(/(^|[{};])([^{};]*)(?=\{)/g, (_m, a, s) => a + (s.trim()[0] === '@' ? s : s.replace(TAG_RE, '$1mo-')));
+const aliasCss = (text) => {
+    let out = '', raw = '', renamed = '', first = '', previous = '';
+    for (const [token] of text.matchAll(CSS_TOKENS)) {
+        if (token === '{' || token === '}' || token === ';') {
+            out += (token === '{' && first !== '@' ? renamed : raw) + token;
+            raw = renamed = first = previous = '';
+        }
+        else {
+            raw += token;
+            const comment = token.startsWith('/*');
+            if (!first && !comment && token.trim())
+                first = token;
+            renamed += /^usa-[a-z]/.test(token) && previous !== '.' && previous !== '#' && previous !== ':'
+                ? 'mo-' + token.slice(4) : token;
+            if (!comment)
+                previous = token;
+        }
+    }
+    return out + raw;
+};
 let started = false;
 let active = false;
 let last = -1;
@@ -115,4 +136,4 @@ function defineMoAliases() {
 exports.aliasCss = aliasCss;
 exports.aliasTag = aliasTag;
 exports.defineMoAliases = defineMoAliases;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/components/mo.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.1/dist/components/mo.cjs.map

@@ -11,4 +11,4 @@ function registerOrbitIn() {
 }
 
 export { effect, registerOrbitIn as register, registerOrbitIn };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/effects/orbit-in.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.1/dist/effects/orbit-in.js.map
