@@ -22,13 +22,30 @@ import { COMPONENT_CATEGORIES } from './index-tags';
 /** The `mo-*` alias of a default `usa-*` tag (`usa-switch` → `mo-switch`), or `null` for any other tag. */
 export const aliasTag = (tag: string): string | null => (/^usa-[a-z]/.test(tag) ? 'mo-' + tag.slice(4) : null);
 
-const TAG_RE = /(^|[^\w.#[\-])usa-(?=[a-z])/g;
+// Keep strings, comments, attribute selectors and escaped identifiers opaque. Braces / semicolons inside them
+// are content, not rule boundaries (and an attribute value that happens to name a component must stay unchanged).
+const CSS_TOKENS = /\/\*[\s\S]*?\*\/|"(?:\\[\s\S]|[^"\\])*"|'(?:\\[\s\S]|[^'\\])*'|\[(?:\\[\s\S]|"(?:\\[\s\S]|[^"\\])*"|'(?:\\[\s\S]|[^'\\])*'|[^\]\\])*\]|(?:\\[\s\S]|[\w-]|[^\x00-\x7f])+|[^\w]/g;
 /**
  * `usa-…` → `mo-…` in selectors only (the text in front of each `{` that is not an at-rule); declarations, at-rule
  * preludes such as `@keyframes usa-spin`, classes, attributes and custom properties are untouched.
  */
-export const aliasCss = (text: string): string =>
-  text.replace(/(^|[{};])([^{};]*)(?=\{)/g, (_m, a: string, s: string) => a + (s.trim()[0] === '@' ? s : s.replace(TAG_RE, '$1mo-')));
+export const aliasCss = (text: string): string => {
+  let out = '', raw = '', renamed = '', first = '', previous = '';
+  for (const [token] of text.matchAll(CSS_TOKENS)) {
+    if (token === '{' || token === '}' || token === ';') {
+      out += (token === '{' && first !== '@' ? renamed : raw) + token;
+      raw = renamed = first = previous = '';
+    } else {
+      raw += token;
+      const comment = token.startsWith('/*');
+      if (!first && !comment && token.trim()) first = token;
+      renamed += /^usa-[a-z]/.test(token) && previous !== '.' && previous !== '#' && previous !== ':'
+        ? 'mo-' + token.slice(4) : token;
+      if (!comment) previous = token;
+    }
+  }
+  return out + raw;
+};
 
 let started = false;
 let active = false;

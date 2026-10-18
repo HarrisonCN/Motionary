@@ -73,3 +73,6 @@ gets none. CSS that targets `usa-switch` does not match `<mo-switch>`; the compo
 (tag selectors renamed) the first time a `mo-*` element connects. With `motionary/components/lite` the category CSS files
 are copied once they load; a CSS file served from another origin without CORS cannot be read, so `<mo-*>` stays
 unstyled there — use `<usa-*>` names with lite from a CDN. Event names stay `usa:*`.
+
+The copied CSS keeps attribute values, quoted declaration content, comments and escaped class / ID names unchanged.
+For example, `usa-tab[data-kind="usa-tab"]` becomes `mo-tab[data-kind="usa-tab"]`, retaining the original attribute value.
