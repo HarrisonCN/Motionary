@@ -257,4 +257,4 @@ function timeline(options = {}) {
 }
 
 export { TIMELINE_PRESETS as T, resolvePosition as r, supportsNativeScrub as s, timeline as t };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/chunks/core-CxbMpBNZ.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.1/dist/chunks/core-CxbMpBNZ.js.map

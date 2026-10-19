@@ -11,4 +11,4 @@ function registerOrbitCamera() {
 }
 
 export { effect, registerOrbitCamera as register, registerOrbitCamera };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/effects/orbit-camera.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.1/dist/effects/orbit-camera.js.map

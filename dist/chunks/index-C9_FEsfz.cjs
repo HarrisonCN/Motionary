@@ -446,4 +446,4 @@ exports.spring = spring;
 exports.stagger = stagger;
 exports.timeline = timeline;
 exports.toEasingFn = toEasingFn;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/chunks/index-C9_FEsfz.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.1/dist/chunks/index-C9_FEsfz.cjs.map

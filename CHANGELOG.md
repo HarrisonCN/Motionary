@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [17.0.1] - 2026-10-18
+
+### Fixed
+- `mo-*` stylesheet aliases preserve attribute values, comments, escaped identifiers and declaration strings when
+  converting `usa-*` tag selectors. Attribute-qualified rules and generated content now keep their original meaning.
+
 ## [17.0.0] - 2026-10-16 — Removals, mo-* names and LTS
 
 ### Removed (announced in 16.9 — docs/deprecations-v17.md)

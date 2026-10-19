@@ -118,4 +118,4 @@ exports.categoryOf = categoryOf;
 exports.loadCategoryStyles = loadCategoryStyles;
 exports.loadedStyles = loadedStyles;
 exports.onDemandStyles = onDemandStyles;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/components/perf.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.1/dist/components/perf.cjs.map

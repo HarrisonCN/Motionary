@@ -11,4 +11,4 @@ function registerPageCurl() {
 }
 
 export { effect, registerPageCurl as register, registerPageCurl };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/effects/page-curl.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.1/dist/effects/page-curl.js.map

@@ -11,4 +11,4 @@ function registerShatter() {
 }
 
 export { effect, registerShatter as register, registerShatter };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/effects/shatter.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.1/dist/effects/shatter.js.map

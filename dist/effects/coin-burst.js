@@ -11,4 +11,4 @@ function registerCoinBurst() {
 }
 
 export { effect, registerCoinBurst as register, registerCoinBurst };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.0/dist/effects/coin-burst.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.1/dist/effects/coin-burst.js.map
