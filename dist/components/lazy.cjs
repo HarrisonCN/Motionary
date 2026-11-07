@@ -1,20 +1,7 @@
 'use strict';
 
-var indexTags = require('../chunks/index-tags-hLIF2Clq.cjs');
+var categoryForTag = require('../chunks/category-for-tag-D_QJPwpZ.cjs');
 
-/**
- * motionary/components/lazy — lazy, per-category registration (v2.9).
- *
- * `lazyDefine()` scans the page (and watches it with a MutationObserver) for
- * `<usa-*>` tags that are not registered yet and dynamically imports only the
- * categories they belong to. Bundlers split each category into its own chunk,
- * so a page that only uses `<usa-button>` loads just the click category.
- *
- * ```js
- * import { lazyDefine } from 'motionary/components/lazy';
- * lazyDefine(); // returns a stop() function
- * ```
- */
 const LOADERS = {
     reveal: () => Promise.resolve().then(function () { return require('./reveal.cjs'); }),
     text: () => Promise.resolve().then(function () { return require('./text.cjs'); }),
@@ -36,13 +23,9 @@ const LOADERS = {
     packs: () => Promise.resolve().then(function () { return require('./packs.cjs'); }),
     fx: () => Promise.resolve().then(function () { return require('./fx.cjs'); }),
 };
-const TAG_TO_CAT = /*#__PURE__*/ new Map();
-for (const [cat, tags] of Object.entries(indexTags.COMPONENT_CATEGORIES))
-    for (const t of tags)
-        TAG_TO_CAT.set(t, cat);
 const loaded = new Map();
 /** Category of a tag (`usa-button` → `click`), or `null`. */
-const categoryOfTag = (tag) => TAG_TO_CAT.get(tag.toLowerCase().replace(/^mo-/, 'usa-')) ?? null; // 17.0: mo-* aliases
+const categoryOfTag = (tag) => categoryForTag.categoryForTag(tag.toLowerCase()) ?? null;
 /** Load and register one category (once). */
 function loadCategory(cat) {
     let p = loaded.get(cat);
@@ -89,4 +72,4 @@ exports.categoryOfTag = categoryOfTag;
 exports.defineUsed = defineUsed;
 exports.lazyDefine = lazyDefine;
 exports.loadCategory = loadCategory;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.0/dist/components/lazy.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/lazy.cjs.map

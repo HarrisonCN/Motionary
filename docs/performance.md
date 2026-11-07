@@ -16,11 +16,11 @@ schedulerStats(); // { frames, callbacks, peak, pending, loops }
 - `autoDegrade({ minFps = 45, maxActive = 40, sample = 1000, patience = 2, recovery = 3 })` samples the frame rate and animation count. After `patience` bad samples it sets motion intensity to `low` and the budget to `maxActive / 2`; after `recovery` good samples it restores both. Dispatches `usa:degrade` (`{ degraded, fps, active, reason }`).
 
 ## On-demand CSS — `motionary/components/lite`
-Same API as `motionary/components`, but the light-DOM CSS is **not** inlined: the first time an element of a category connects, `dist/components/<category>.css` is added as a `<link>` (custom tag names fall back to `components.css`). Shadow-DOM styles stay inlined.
+Same API as `motionary/components`, but the light-DOM CSS is **not** inlined: the first time an element of a category connects, `dist/components/<category>.css` is added as a `<link>` (custom tag names fall back to `components.css`). Shadow-DOM styles stay inlined. With `defineMoAliases()` from `motionary/components/mo`, a
+`<mo-press>` and a `<usa-press>` share one request for `components/interaction.css`. If that request fails, the next
+mount or explicit `loadCategoryStyles()` call retries it. To let the alias entry read and copy selectors from linked CSS,
+serve the stylesheet from the same origin as the page.
 
-| Import | gzip |
-|---|---|
-| `motionary/components` (everything, CSS inlined) | ≈ 79 KB |
-| `motionary/components/lite` (everything, CSS on demand) | **≈ 62 KB** (budget 70 KB, checked in CI) |
+The [size report](./size-report.json) records the gzip sizes of both imports for this release. The lite import has a fixed 70 KiB gzip budget.
 
 Serve the CSS from somewhere else with `onDemandStyles('https://cdn.example/motionary@17/dist/')`, or preload with `loadCategoryStyles('cards', base)`.

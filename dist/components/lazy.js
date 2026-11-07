@@ -1,18 +1,5 @@
-import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-B-JBecYg.js';
+import { c as categoryForTag } from '../chunks/category-for-tag-WK7MtB-K.js';
 
-/**
- * motionary/components/lazy — lazy, per-category registration (v2.9).
- *
- * `lazyDefine()` scans the page (and watches it with a MutationObserver) for
- * `<usa-*>` tags that are not registered yet and dynamically imports only the
- * categories they belong to. Bundlers split each category into its own chunk,
- * so a page that only uses `<usa-button>` loads just the click category.
- *
- * ```js
- * import { lazyDefine } from 'motionary/components/lazy';
- * lazyDefine(); // returns a stop() function
- * ```
- */
 const LOADERS = {
     reveal: () => import('./reveal.js'),
     text: () => import('./text.js'),
@@ -34,13 +21,9 @@ const LOADERS = {
     packs: () => import('./packs.js'),
     fx: () => import('./fx.js'),
 };
-const TAG_TO_CAT = /*#__PURE__*/ new Map();
-for (const [cat, tags] of Object.entries(COMPONENT_CATEGORIES))
-    for (const t of tags)
-        TAG_TO_CAT.set(t, cat);
 const loaded = new Map();
 /** Category of a tag (`usa-button` → `click`), or `null`. */
-const categoryOfTag = (tag) => TAG_TO_CAT.get(tag.toLowerCase().replace(/^mo-/, 'usa-')) ?? null; // 17.0: mo-* aliases
+const categoryOfTag = (tag) => categoryForTag(tag.toLowerCase()) ?? null;
 /** Load and register one category (once). */
 function loadCategory(cat) {
     let p = loaded.get(cat);
@@ -84,4 +67,4 @@ function lazyDefine(root = typeof document !== 'undefined' ? document : undefine
 }
 
 export { categoryOfTag, defineUsed, lazyDefine, loadCategory };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.0/dist/components/lazy.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/lazy.js.map

@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-B9sONDgb.cjs');
-var animImage = require('../chunks/anim-image-DbsE4UOO.cjs');
+var registry = require('../chunks/registry-DphPB165.cjs');
+var animImage = require('../chunks/anim-image-BumBKRpk.cjs');
 
 /**
  * `motionary/runtime/format-apng` (10.4) — animated PNG (APNG) loader written
@@ -125,4 +125,4 @@ exports.formatApng = formatApng;
 exports.loadApng = loadApng;
 exports.parseApng = parseApng;
 exports.pngChunks = pngChunks;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.0/dist/runtime/format-apng.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/runtime/format-apng.cjs.map

@@ -11,7 +11,8 @@
  * lazyDefine(); // returns a stop() function
  * ```
  */
-import { COMPONENT_CATEGORIES, type ComponentCategory } from './index-tags';
+import type { ComponentCategory } from './index-tags';
+import { categoryForTag } from './category-for-tag';
 
 const LOADERS: Record<ComponentCategory, () => Promise<Record<string, any>>> = {
   reveal: () => import('./reveal/index'),
@@ -35,12 +36,10 @@ const LOADERS: Record<ComponentCategory, () => Promise<Record<string, any>>> = {
   fx: () => import('./fx/index'),
 };
 
-const TAG_TO_CAT = /*#__PURE__*/ new Map<string, ComponentCategory>();
-for (const [cat, tags] of Object.entries(COMPONENT_CATEGORIES)) for (const t of tags) TAG_TO_CAT.set(t, cat as ComponentCategory);
 const loaded = new Map<ComponentCategory, Promise<void>>();
 
 /** Category of a tag (`usa-button` → `click`), or `null`. */
-export const categoryOfTag = (tag: string): ComponentCategory | null => TAG_TO_CAT.get(tag.toLowerCase().replace(/^mo-/, 'usa-')) ?? null; // 17.0: mo-* aliases
+export const categoryOfTag = (tag: string): ComponentCategory | null => categoryForTag(tag.toLowerCase()) ?? null;
 
 /** Load and register one category (once). */
 export function loadCategory(cat: ComponentCategory): Promise<void> {

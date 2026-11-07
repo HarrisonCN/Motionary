@@ -274,8 +274,6 @@ function defineElement(tag, make, css) {
     if (!canDefine())
         return undefined;
     adoptStyles('base', BASE_CSS);
-    if (css)
-        adoptStyles(css.id, css.text);
     const existing = customElements.get(tag);
     if (existing)
         return existing;
@@ -486,6 +484,16 @@ const COMPONENT_CATEGORIES = {
     fx: ['usa-fx'],
 };
 
+const categoryByTag = /*#__PURE__*/ new Map();
+for (const [category, tags] of Object.entries(COMPONENT_CATEGORIES)) {
+    for (const tag of tags)
+        categoryByTag.set(tag, category);
+}
+/** Resolve either default element name without loading its component implementation. */
+function categoryForTag(tag) {
+    return categoryByTag.get(tag.replace(/^mo-/, 'usa-'));
+}
+
 /**
  * motionary/components/perf — performance toolkit (4.5).
  *
@@ -557,13 +565,11 @@ function autoDegrade(options = {}) {
         set(false, '');
     };
 }
-const TAG_CATEGORY = {};
-for (const [cat, tags] of Object.entries(COMPONENT_CATEGORIES))
-    for (const t of tags)
-        TAG_CATEGORY[t] = cat;
-/** The category of a default `<usa-*>` tag. */
-const categoryOf = (tag) => TAG_CATEGORY[tag];
 const loaded = /*#__PURE__*/ new Set();
+/** Categories with a pending or loaded Motionary stylesheet. */
+function loadedStyles() {
+    return [...loaded];
+}
 /**
  * Add `<link rel="stylesheet" href="{base}components/{category}.css">` once.
  * `base` is the URL of the package's `dist/` folder.
@@ -571,11 +577,15 @@ const loaded = /*#__PURE__*/ new Set();
 function loadCategoryStyles(category, base) {
     if (typeof document === 'undefined' || loaded.has(category))
         return null;
-    loaded.add(category);
     const link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = `${base.replace(/\/?$/, '/')}${category === 'all' ? 'components.css' : `components/${category}.css`}`;
-    link.setAttribute('data-usa-css', category);
+    link.href = `${base.replace(/\/?$/, '/')}components${category === 'all' ? '' : '/' + category}.css`;
+    link.dataset.usaCss = category;
+    loaded.add(category);
+    link.addEventListener('error', () => {
+        loaded.delete(category);
+        link.remove();
+    }, { once: true });
     document.head.append(link);
     return link;
 }
@@ -584,11 +594,9 @@ function loadCategoryStyles(category, base) {
  * (custom tags fall back to the full stylesheet). Returns an undo.
  */
 function onDemandStyles(base) {
-    setStyleLoader((tag) => loadCategoryStyles(categoryOf(tag) || 'all', base));
+    setStyleLoader((tag) => loadCategoryStyles(categoryForTag(tag) || 'all', base));
     return () => setStyleLoader(null);
 }
-/** Categories whose CSS has been requested so far. */
-const loadedStyles = () => Array.from(loaded);
 
 /** Entrance effects shared by `<usa-reveal>` and `<usa-stagger>` (transform / opacity / filter only). */
 const REVEAL_EFFECTS = [
@@ -657,7 +665,7 @@ function revealKeyframes(effect, distance) {
     return [from, to];
 }
 
-var css$13 = "";
+var css = "";
 
 function defineReveal(tag = 'usa-reveal') {
     return defineElement(tag, (Base) => class UsaReveal extends Base {
@@ -732,7 +740,7 @@ function defineReveal(tag = 'usa-reveal') {
             if (!this.reduced)
                 this.setAttribute('data-state', 'hidden');
         }
-    }, { id: 'reveal', text: css$13 });
+    });
 }
 
 function defineStagger(tag = 'usa-stagger') {
@@ -798,10 +806,8 @@ function defineStagger(tag = 'usa-stagger') {
             if (!this.reduced)
                 this.setAttribute('data-state', 'hidden');
         }
-    }, { id: 'reveal', text: css$13 });
+    });
 }
-
-var css$12 = "";
 
 /** Progress (0–1) of `target` scrolling through the viewport, or of the page. */
 function readScrollProgress(target) {
@@ -870,10 +876,8 @@ function defineScrollProgress(tag = 'usa-scroll-progress') {
                 this.setAttribute('aria-valuenow', pct);
             this.emit('progress', { progress: p });
         }
-    }, { id: 'scroll-progress', text: css$12 });
+    });
 }
-
-var css$11 = "";
 
 function defineScrolly(tag = 'usa-scrolly') {
     return defineElement(tag, (Base) => class UsaScrolly extends Base {
@@ -925,7 +929,7 @@ function defineScrolly(tag = 'usa-scrolly') {
             if (!silent)
                 this.emit('step', { index, step, name: step.dataset.step || '' });
         }
-    }, { id: 'scrolly', text: css$11 });
+    });
 }
 
 /**
@@ -939,8 +943,6 @@ function defineRevealComponents() {
     defineScrollProgress();
     defineScrolly();
 }
-
-var css$10 = "";
 
 function defineTypewriter(tag = 'usa-typewriter') {
     return defineElement(tag, (Base) => class UsaTypewriter extends Base {
@@ -1054,10 +1056,8 @@ function defineTypewriter(tag = 'usa-typewriter') {
             };
             this._timer = setTimeout(tick, this.num('delay', 0));
         }
-    }, { id: 'typewriter', text: css$10 });
+    });
 }
-
-var css$$ = "";
 
 /**
  * Motion design tokens 2.0 (10.6): the W3C Design Tokens Community Group
@@ -2046,7 +2046,7 @@ function defineSplitText(tag = 'usa-split-text') {
             clearTimeout(this._timer);
             this.setAttribute('data-state', this.reduced ? 'shown' : 'hidden');
         }
-    }, { id: 'split-text', text: css$$ });
+    });
 }
 
 const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%&*+=<>/\\?!';
@@ -2137,10 +2137,8 @@ function defineScramble(tag = 'usa-scramble') {
                 this._frame = raf(step);
             });
         }
-    }, undefined);
+    });
 }
-
-var css$_ = "";
 
 /** easeOutExpo */
 const easeOutExpo = (t) => (t >= 1 ? 1 : 1 - Math.pow(2, -10 * t));
@@ -2240,10 +2238,8 @@ function defineCounter(tag = 'usa-counter') {
                 this._frame = raf(step);
             });
         }
-    }, { id: 'counter', text: css$_ });
+    });
 }
-
-var css$Z = "";
 
 function defineShimmerText(tag = 'usa-shimmer-text') {
     return defineElement(tag, (Base) => class UsaShimmerText extends Base {
@@ -2263,10 +2259,8 @@ function defineShimmerText(tag = 'usa-shimmer-text') {
             set('shine', '--usa-shimmer-shine');
             set('angle', '--usa-shimmer-angle', 'deg');
         }
-    }, { id: 'shimmer-text', text: css$Z });
+    });
 }
-
-var css$Y = "";
 
 function defineTextRotate(tag = 'usa-text-rotate') {
     return defineElement(tag, (Base) => class UsaTextRotate extends Base {
@@ -2338,10 +2332,8 @@ function defineTextRotate(tag = 'usa-text-rotate') {
             this.motion(cur, [inFrom, pick(inFrom)], { duration: 520, easing: effect === 'slide' ? EASE_SPRING : EASE_OUT });
             this.emit('change', { index: this._index, word: cur.textContent });
         }
-    }, { id: 'text-rotate', text: css$Y });
+    });
 }
-
-var css$X = "";
 
 /** Split `text` into per-character spans (words never break). The animated copy is aria-hidden. */
 function splitChars(host, text) {
@@ -2378,7 +2370,7 @@ function defineWaveText(tag = 'usa-wave-text') {
             this.style.setProperty('--usa-wave-s', `${this.num('speed', 1.6)}s`);
             this.style.setProperty('--usa-wave-d', `${this.num('stagger', 0.06)}s`);
         }
-    }, { id: 'text-fx', text: css$X });
+    });
 }
 function defineGlitch(tag = 'usa-glitch') {
     return defineElement(tag, (Base) => class extends Base {
@@ -2390,7 +2382,7 @@ function defineGlitch(tag = 'usa-glitch') {
             if (!this.firstChild)
                 this.textContent = t;
         }
-    }, { id: 'text-fx', text: css$X });
+    });
 }
 function defineGradientText(tag = 'usa-gradient-text') {
     return defineElement(tag, (Base) => class extends Base {
@@ -2400,7 +2392,7 @@ function defineGradientText(tag = 'usa-gradient-text') {
             this.style.setProperty('--usa-grad', `linear-gradient(${this.num('angle', 90)}deg, ${[...c, c[0]].join(', ')})`);
             this.style.setProperty('--usa-grad-s', `${this.num('speed', 6)}s`);
         }
-    }, { id: 'text-fx', text: css$X });
+    });
 }
 function defineHandwriting(tag = 'usa-handwriting') {
     return defineElement(tag, (Base) => class extends Base {
@@ -2433,7 +2425,7 @@ function defineHandwriting(tag = 'usa-handwriting') {
                 this.emit('complete');
             }, this.reduced ? 0 : this.num('duration', 2400));
         }
-    }, { id: 'text-fx', text: css$X });
+    });
 }
 function defineScrollHighlight(tag = 'usa-scroll-highlight') {
     return defineElement(tag, (Base) => class extends Base {
@@ -2497,7 +2489,7 @@ function defineScrollHighlight(tag = 'usa-scroll-highlight') {
             caf(this._f);
             this._f = 0;
         }
-    }, { id: 'text-fx', text: css$X });
+    });
 }
 
 /**
@@ -2519,8 +2511,6 @@ function defineTextComponents() {
     defineHandwriting();
     defineScrollHighlight();
 }
-
-var css$W = "";
 
 function defineRipple(tag = 'usa-ripple') {
     return defineElement(tag, (Base) => class UsaRipple extends Base {
@@ -2567,10 +2557,8 @@ function defineRipple(tag = 'usa-ripple') {
             else
                 setTimeout(() => wave.remove(), 0);
         }
-    }, { id: 'ripple', text: css$W });
+    });
 }
-
-var css$V = "";
 
 function defineMagnetic(tag = 'usa-magnetic') {
     return defineElement(tag, (Base) => class UsaMagnetic extends Base {
@@ -2627,10 +2615,8 @@ function defineMagnetic(tag = 'usa-magnetic') {
         unmount() {
             this.release();
         }
-    }, { id: 'magnetic', text: css$V });
+    });
 }
-
-var css$U = "";
 
 function defineTilt(tag = 'usa-tilt') {
     return defineElement(tag, (Base) => class UsaTilt extends Base {
@@ -2699,10 +2685,8 @@ function defineTilt(tag = 'usa-tilt') {
         unmount() {
             this.reset();
         }
-    }, { id: 'tilt', text: css$U });
+    });
 }
-
-var css$T = "";
 
 function defineSpotlight(tag = 'usa-spotlight') {
     return defineElement(tag, (Base) => class UsaSpotlight extends Base {
@@ -2765,10 +2749,8 @@ function defineSpotlight(tag = 'usa-spotlight') {
             this._frame = 0;
             this.removeAttribute('data-lit');
         }
-    }, { id: 'spotlight', text: css$T });
+    });
 }
-
-var css$S = "";
 
 function definePress(tag = 'usa-press') {
     return defineElement(tag, (Base) => class UsaPress extends Base {
@@ -2832,7 +2814,7 @@ function definePress(tag = 'usa-press') {
             this._anim = null;
             this.removeAttribute('data-pressed');
         }
-    }, { id: 'press', text: css$S });
+    });
 }
 
 /**
@@ -2848,8 +2830,6 @@ function defineInteractionComponents() {
     defineSpotlight();
     definePress();
 }
-
-var css$R = "";
 
 const SPINNER_VARIANTS = ['fluent', 'windows', 'ring', 'dots', 'pulse', 'bars'];
 function markup(variant) {
@@ -2895,10 +2875,8 @@ function defineSpinner(tag = 'usa-spinner') {
             if (!this.hasAttribute('aria-label') || this.hasAttribute('label'))
                 this.setAttribute('aria-label', this.str('label', 'Loading'));
         }
-    }, { id: 'spinner', text: css$R });
+    });
 }
-
-var css$Q = "";
 
 function defineSkeleton(tag = 'usa-skeleton') {
     return defineElement(tag, (Base) => class UsaSkeleton extends Base {
@@ -2978,10 +2956,8 @@ function defineSkeleton(tag = 'usa-skeleton') {
             }
             this.emit('loaded');
         }
-    }, { id: 'skeleton', text: css$Q });
+    });
 }
-
-var css$P = "";
 
 function defineProgress(tag = 'usa-progress') {
     return defineElement(tag, (Base) => class UsaProgress extends Base {
@@ -3044,10 +3020,8 @@ function defineProgress(tag = 'usa-progress') {
             if (ratio === 1)
                 this.emit('complete');
         }
-    }, { id: 'progress', text: css$P });
+    });
 }
-
-var css$O = "";
 
 const ICONS = {
     info: '<path d="M12 8h.01M11 12h1v5h1"/>',
@@ -3163,7 +3137,7 @@ function defineToaster(tag = 'usa-toaster') {
         clear() {
             this.querySelectorAll('.usa-toast').forEach((t) => t._close?.());
         }
-    }, { id: 'toast', text: css$O });
+    });
 }
 /**
  * Show a toast. Defines `<usa-toaster>` and adds one to `<body>` if the
@@ -3183,8 +3157,6 @@ function toast(message, options = {}) {
     }
     return host.show(message, options);
 }
-
-var css$N = "";
 
 const PATHS = {
     success: 'M15 27 l7 7 l14 -15',
@@ -3261,7 +3233,7 @@ function defineCheck(tag = 'usa-check') {
                     done();
             });
         }
-    }, { id: 'check', text: css$N });
+    });
 }
 
 /**
@@ -3277,8 +3249,6 @@ function defineFeedbackComponents() {
     defineToaster();
     defineCheck();
 }
-
-var css$M = "";
 
 function defineAurora(tag = 'usa-aurora') {
     return defineElement(tag, (Base) => class UsaAurora extends Base {
@@ -3306,10 +3276,8 @@ function defineAurora(tag = 'usa-aurora') {
             this.style.setProperty('--usa-aurora-opacity', String(this.num('intensity', 0.7)));
             this.inView((v) => this.toggleAttribute('data-offscreen', !v));
         }
-    }, { id: 'aurora', text: css$M });
+    });
 }
-
-var css$L = "";
 
 function defineParticles(tag = 'usa-particles') {
     return defineElement(tag, (Base) => class UsaParticles extends Base {
@@ -3468,10 +3436,8 @@ function defineParticles(tag = 'usa-particles') {
             }
             ctx.globalAlpha = 1;
         }
-    }, { id: 'particles', text: css$L });
+    });
 }
-
-var css$K = "";
 
 const noise = (freq) => `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='${freq}' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 1.6 -0.3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`;
 function defineGrain(tag = 'usa-grain') {
@@ -3496,10 +3462,8 @@ function defineGrain(tag = 'usa-grain') {
             s.opacity = String(this.num('opacity', 0.12));
             s.mixBlendMode = this.str('blend', 'overlay');
         }
-    }, { id: 'grain', text: css$K });
+    });
 }
-
-var css$J = "";
 
 function defineMarquee(tag = 'usa-marquee') {
     return defineElement(tag, (Base) => class UsaMarquee extends Base {
@@ -3619,10 +3583,8 @@ function defineMarquee(tag = 'usa-marquee') {
             else
                 super.changed(name);
         }
-    }, { id: 'marquee', text: css$J });
+    });
 }
-
-var css$I = "";
 
 function defineAcrylic(tag = 'usa-acrylic') {
     return defineElement(tag, (Base) => class UsaAcrylic extends Base {
@@ -3643,10 +3605,8 @@ function defineAcrylic(tag = 'usa-acrylic') {
                 this.setAttribute('data-shine', '');
             }
         }
-    }, { id: 'acrylic', text: css$I });
+    });
 }
-
-var css$H = "";
 
 /** Shared canvas setup: DPR ≤ 2, resize with the host, run only while visible & tab shown. */
 function canvasLoop(host, draw, still) {
@@ -3724,7 +3684,7 @@ function defineGridGlow(tag = 'usa-grid-glow') {
             });
             this.onCleanup(() => caf(f));
         }
-    }, { id: 'bg-fx', text: css$H });
+    });
 }
 function defineBlobs(tag = 'usa-blobs') {
     return defineElement(tag, (Base) => class extends Base {
@@ -3742,7 +3702,7 @@ function defineBlobs(tag = 'usa-blobs') {
             this.style.setProperty('--usa-blobs-speed', String(this.num('speed', 1)));
             this.style.setProperty('--usa-blobs-blur', `${this.num('blur', 60)}px`);
         }
-    }, { id: 'bg-fx', text: css$H });
+    });
 }
 function defineWaterRipple(tag = 'usa-water-ripple') {
     return defineElement(tag, (Base) => class extends Base {
@@ -3808,7 +3768,7 @@ function defineWaterRipple(tag = 'usa-water-ripple') {
                 this.drop(e.clientX - r.left, e.clientY - r.top, 1.5);
             });
         }
-    }, { id: 'bg-fx', text: css$H });
+    });
 }
 function defineDotNetwork(tag = 'usa-dot-network') {
     return defineElement(tag, (Base) => class extends Base {
@@ -3854,10 +3814,8 @@ function defineDotNetwork(tag = 'usa-dot-network') {
                 }
             }, this.reduced);
         }
-    }, { id: 'bg-fx', text: css$H });
+    });
 }
-
-var css$G = "";
 
 /**
  * Style variants (v2.6): `variant="minimal | neon | glass | brutalist |
@@ -3875,7 +3833,7 @@ var css$G = "";
 const VARIANTS = ['minimal', 'neon', 'glass', 'brutalist', 'fluent', 'material'];
 /** Inject the variant token sheet (done automatically by every `ui` component). */
 function adoptVariants() {
-    adoptStyles('variants', css$G);
+    adoptStyles('variants', css);
 }
 /** Apply a variant to the whole page (or `root`); `null` removes it. */
 function setVariant(variant, root = typeof document !== 'undefined' ? document.documentElement : null) {
@@ -3887,8 +3845,6 @@ function setVariant(variant, root = typeof document !== 'undefined' ? document.d
     else
         root.removeAttribute('data-usa-variant');
 }
-
-var css$F = "";
 
 /**
  * Windows 11 **Fluent preset** (v2.8): applies the `fluent` variant
@@ -3903,7 +3859,7 @@ function fluentPreset(options = {}) {
     if (typeof document === 'undefined')
         return () => undefined;
     const root = options.root || document.documentElement;
-    adoptStyles('fluent-preset', css$F);
+    adoptStyles('fluent-preset', css);
     setVariant('fluent', root);
     root.classList.add('usa-fluent');
     if (options.mica !== false)
@@ -3965,8 +3921,6 @@ function defineBackgroundComponents() {
 }
 
 var shadowCss = ":host{display:contents}dialog{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:transparent;color:inherit;overflow:hidden}dialog:not([open]){display:none}dialog::backdrop{background:transparent}[part=\"backdrop\"]{position:absolute;inset:0;background:var(--usa-dialog-backdrop,rgb(0 0 0 / 0.42))}[part=\"panel\"]{position:absolute;left:50%;top:50%;translate:-50% -50%;box-sizing:border-box;width:min(var(--usa-dialog-width,480px),calc(100vw - 32px));max-height:calc(100vh - 32px);overflow:auto;padding:var(--usa-dialog-padding,24px);border-radius:var(--usa-dialog-radius,12px);background:var(--usa-dialog-bg,Canvas);color:var(--usa-dialog-fg,CanvasText);box-shadow:0 32px 64px -12px rgb(0 0 0 / 0.45),0 0 0 1px rgb(127 127 127 / 0.18)}dialog[data-kind^=\"drawer\"] [part=\"panel\"]{top:0;bottom:0;translate:none;max-height:none;height:100%;border-radius:0;width:min(var(--usa-dialog-width,380px),88vw)}dialog[data-kind=\"drawer-start\"] [part=\"panel\"]{left:0}dialog[data-kind=\"drawer-end\"] [part=\"panel\"]{left:auto;right:0}dialog[data-kind=\"drawer-bottom\"] [part=\"panel\"],dialog[data-kind=\"sheet\"] [part=\"panel\"]{top:auto;bottom:0;left:0;right:0;translate:none;width:100%;height:auto;max-height:85vh;border-radius:var(--usa-dialog-radius,16px) var(--usa-dialog-radius,16px) 0 0}dialog[data-kind=\"sheet\"] [part=\"panel\"]{left:50%;translate:-50% 0;width:min(var(--usa-dialog-width,560px),100vw)}";
-
-var css$E = "";
 
 const FROM = {
     modal: 'scale(0.94)',
@@ -4121,10 +4075,8 @@ function defineDialog(tag = 'usa-dialog') {
             const b = this._backdrop ? this.motion(this._backdrop, backdrop, { duration, easing: 'linear', fill }) : null;
             return Promise.all([a?.finished, b?.finished].map((p) => p?.catch(() => undefined))).then(() => undefined);
         }
-    }, { id: 'dialog', text: css$E });
+    });
 }
-
-var css$D = "";
 
 function defineAccordion(tag = 'usa-accordion') {
     return defineElement(tag, (Base) => class UsaAccordion extends Base {
@@ -4190,10 +4142,8 @@ function defineAccordion(tag = 'usa-accordion') {
                 d.removeAttribute('data-closing');
             }
         }
-    }, { id: 'accordion', text: css$D });
+    });
 }
-
-var css$C = "";
 
 function defineViewSwitch(tag = 'usa-view-switch') {
     return defineElement(tag, (Base) => class UsaViewSwitch extends Base {
@@ -4286,7 +4236,7 @@ function defineViewSwitch(tag = 'usa-view-switch') {
                 this.setVisible(from, false);
             a?.cancel();
         }
-    }, { id: 'view-switch', text: css$C });
+    });
 }
 
 /**
@@ -4598,8 +4548,6 @@ function rubberBand(distance, dimension, constant = 0.55) {
     return sign * (1 - 1 / ((d * constant) / dimension + 1)) * dimension;
 }
 
-var css$B = "";
-
 const SPRING_EFFECTS = ['bounce-in', 'pop', 'drop', 'jelly', 'rubber-band'];
 /** Entrance effects start hidden; attention effects (jelly, rubber-band) play on visible content. */
 const ENTRANCE = /*#__PURE__*/ new Set(['bounce-in', 'pop', 'drop']);
@@ -4713,10 +4661,8 @@ function defineSpring(tag = 'usa-spring') {
             this.setAttribute('data-state', 'done');
             this.emit('complete', { effect });
         }
-    }, { id: 'spring', text: css$B });
+    });
 }
-
-var css$A = "";
 
 const parseSnap = (s) => {
     if (!s.trim())
@@ -4913,10 +4859,8 @@ function defineDraggable(tag = 'usa-draggable') {
         reset() {
             this.go(0, 0);
         }
-    }, { id: 'draggable', text: css$A });
+    });
 }
-
-var css$z = "";
 
 function defineOverscroll(tag = 'usa-overscroll') {
     return defineElement(tag, (Base) => class UsaOverscroll extends Base {
@@ -5005,7 +4949,7 @@ function defineOverscroll(tag = 'usa-overscroll') {
             this._spring?.stop();
             this.set(0);
         }
-    }, { id: 'overscroll', text: css$z });
+    });
 }
 
 /**
@@ -5021,8 +4965,6 @@ function definePhysicsComponents() {
     defineDraggable();
     defineOverscroll();
 }
-
-var css$y = "";
 
 const CARD_EFFECTS = ['flip', 'holo', 'glass', 'border-glow', 'conic-border', 'lift', 'spotlight', 'sheen', 'parallax-layers', 'expand'];
 /** Effects that follow the pointer (they share one rAF-throttled tracker). */
@@ -5228,7 +5170,7 @@ function defineCard(tag = 'usa-card') {
             const a = this.motion(this, [{ transformOrigin: '0 0', transform: `translate(${dx}px, ${dy}px) scale(${sx}, ${sy})` }, { transformOrigin: '0 0', transform: 'none' }], { duration: Math.min(duration, 900), easing: easing || EASE_OUT });
             await a?.finished.catch(() => undefined);
         }
-    }, { id: 'card', text: css$y });
+    });
 }
 function deco(cls) {
     const s = document.createElement('span');
@@ -5241,8 +5183,6 @@ function interactive(t, host) {
     const el = t?.closest?.('a, button, input, select, textarea, label, [contenteditable]');
     return !!el && el !== host && host.contains(el);
 }
-
-var css$x = "";
 
 function defineCardStack(tag = 'usa-card-stack') {
     return defineElement(tag, (Base) => class UsaCardStack extends Base {
@@ -5365,10 +5305,8 @@ function defineCardStack(tag = 'usa-card-stack') {
             if (!this.top)
                 this.emit('empty');
         }
-    }, { id: 'card-stack', text: css$x });
+    });
 }
-
-var css$w = "";
 
 function defineStickyStack(tag = 'usa-sticky-stack') {
     return defineElement(tag, (Base) => class UsaStickyStack extends Base {
@@ -5432,10 +5370,8 @@ function defineStickyStack(tag = 'usa-sticky-stack') {
                 c.style.filter = covered > 0.001 ? `brightness(${(1 - Math.min(0.35, covered * 0.12)).toFixed(3)})` : '';
             });
         }
-    }, { id: 'sticky-stack', text: css$w });
+    });
 }
-
-var css$v = "";
 
 function defineCarousel3d(tag = 'usa-carousel-3d') {
     return defineElement(tag, (Base) => class UsaCarousel3d extends Base {
@@ -5554,7 +5490,7 @@ function defineCarousel3d(tag = 'usa-carousel-3d') {
         prev() {
             this.goTo(this._i - 1);
         }
-    }, { id: 'carousel-3d', text: css$v });
+    });
 }
 
 /**
@@ -5676,8 +5612,6 @@ function haptic(pattern = 10) {
         return false;
     }
 }
-
-var css$u = "";
 
 const CLICK_EFFECTS = ['ripple', 'burst', 'confetti', 'squish', 'press-spring', 'shake'];
 function defineClick(tag = 'usa-click') {
@@ -5801,10 +5735,8 @@ function defineClick(tag = 'usa-click') {
                 : [{ transform: from }, { transform: 'none' }];
             this._press = this.motion(this, frames, fx.includes('squish') ? { duration: 520, easing: 'ease-out' } : springEasing('bouncy'));
         }
-    }, { id: 'click', text: css$u });
+    });
 }
-
-var css$t = "";
 
 const BUTTON_DEFORMS = ['squash', 'wobble', 'gooey', 'dent'];
 let gooInjected = false;
@@ -6071,10 +6003,8 @@ function defineButton(tag = 'usa-button') {
             }
             this.emit('state', { state: s });
         }
-    }, { id: 'button', text: css$t });
+    });
 }
-
-var css$s = "";
 
 const C = [[12, 12], [12, 12], [12, 12], [12, 12]];
 /**
@@ -6182,10 +6112,8 @@ function defineIconMorph(tag = 'usa-icon-morph') {
         next() {
             this.show(this._i + 1);
         }
-    }, { id: 'icon-morph', text: css$s });
+    });
 }
-
-var css$r = "";
 
 const HEART = 'M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.6 1.2 5.3 3.2 1.7-2 3.2-3.2 5.3-3.2 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z';
 function defineLike(tag = 'usa-like') {
@@ -6261,10 +6189,8 @@ function defineLike(tag = 'usa-like') {
             this.dispatchEvent(new Event('change', { bubbles: true }));
             this.emit('change', { liked: next, count: this.count });
         }
-    }, { id: 'like', text: css$r });
+    });
 }
-
-var css$q = "";
 
 function defineHold(tag = 'usa-hold') {
     return defineElement(tag, (Base) => class UsaHold extends Base {
@@ -6376,10 +6302,8 @@ function defineHold(tag = 'usa-hold') {
         cancel() {
             this.stop();
         }
-    }, { id: 'hold', text: css$q });
+    });
 }
-
-var css$p = "";
 
 function defineDoubleTap(tag = 'usa-double-tap') {
     return defineElement(tag, (Base) => class UsaDoubleTap extends Base {
@@ -6440,10 +6364,8 @@ function defineDoubleTap(tag = 'usa-double-tap') {
                 haptic(15);
             this.emit('double-tap', { x: x - r.left, y: y - r.top });
         }
-    }, { id: 'double-tap', text: css$p });
+    });
 }
-
-var css$o = "";
 
 function defineCheckbox(tag = 'usa-checkbox') {
     return defineElement(tag, (Base) => {
@@ -6515,7 +6437,7 @@ function defineCheckbox(tag = 'usa-checkbox') {
         }
         UsaCheckbox.formAssociated = true;
         return UsaCheckbox;
-    }, { id: 'checkbox', text: css$o });
+    });
 }
 
 /**
@@ -6569,8 +6491,6 @@ function place(floating, anchor, placement = 'top', gap = 8) {
 }
 let uid = 0;
 const nextId = (prefix) => `${prefix}-${++uid}`;
-
-var css$n = "";
 
 function defineTabs(tag = 'usa-tabs') {
     // contract-exempt: attr-unobserved(selected) — state reflected by the element itself (set the property instead); observing it would re-mount on every change
@@ -6674,10 +6594,8 @@ function defineTabs(tag = 'usa-tabs') {
                 this.motion(p, [{ opacity: 0, transform: `translateX(${i > prev ? 16 : -16}px)` }, { opacity: 1, transform: 'none' }], { duration: 280, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' });
             this.emit('change', { index: i });
         }
-    }, { id: 'tabs', text: css$n });
+    });
 }
-
-var css$m = "";
 
 // While anything watches, <html> carries --usa-vvh (visible height) and --usa-kb (the height the keyboard covers at
 // the bottom of the layout viewport).
@@ -6923,7 +6841,7 @@ function makePanel(Base, kind) {
 }
 function defineDrawer(tag = 'usa-drawer') {
     adoptVariants();
-    return defineElement(tag, (Base) => makePanel(Base, 'drawer'), { id: 'sheet', text: css$m });
+    return defineElement(tag, (Base) => makePanel(Base, 'drawer'));
 }
 function defineBottomSheet(tag = 'usa-bottom-sheet') {
     adoptVariants();
@@ -6966,10 +6884,8 @@ function defineBottomSheet(tag = 'usa-bottom-sheet') {
                 super.render(v);
             }
         };
-    }, { id: 'sheet', text: css$m });
+    });
 }
-
-var css$l = "";
 
 function definePullRefresh(tag = 'usa-pull-refresh') {
     adoptVariants();
@@ -7072,10 +6988,8 @@ function definePullRefresh(tag = 'usa-pull-refresh') {
                     Promise.resolve(fn(ev)).then(done, done);
             });
         }
-    }, { id: 'pull-refresh', text: css$l });
+    });
 }
-
-var css$k = "";
 
 function defineFab(tag = 'usa-fab') {
     // contract-exempt: attr-unobserved(open) — state reflected by the element itself (set the property instead); observing it would re-mount on every change
@@ -7162,10 +7076,8 @@ function defineFab(tag = 'usa-fab') {
             this.apply(true);
             this.emit('toggle', { open: next });
         }
-    }, { id: 'fab', text: css$k });
+    });
 }
-
-var css$j = "";
 
 function defineNavbar(tag = 'usa-navbar') {
     adoptVariants();
@@ -7222,10 +7134,8 @@ function defineNavbar(tag = 'usa-navbar') {
             this.removeAttribute('data-hidden');
             this.emit('show');
         }
-    }, { id: 'navbar', text: css$j });
+    });
 }
-
-var css$i = "";
 
 function defineSlider(tag = 'usa-slider') {
     adoptVariants();
@@ -7346,10 +7256,8 @@ function defineSlider(tag = 'usa-slider') {
         }
         UsaSlider.formAssociated = true;
         return UsaSlider;
-    }, { id: 'slider', text: css$i });
+    });
 }
-
-var css$h = "";
 
 function definePopover(tag = 'usa-popover') {
     // contract-exempt: attr-unobserved(open) — state reflected by the element itself (set the property instead); observing it would re-mount on every change
@@ -7413,10 +7321,8 @@ function definePopover(tag = 'usa-popover') {
             this.render(true);
             this.emit(next ? 'open' : 'close');
         }
-    }, { id: 'popover', text: css$h });
+    });
 }
-
-var css$g = "";
 
 function defineBadge(tag = 'usa-badge') {
     adoptVariants();
@@ -7463,10 +7369,8 @@ function defineBadge(tag = 'usa-badge') {
             if (bump && !empty && !this.reduced)
                 this.motion(el, [{ transform: 'scale(0.4)' }, { transform: 'scale(1)' }], springEasing('bouncy'));
         }
-    }, { id: 'badge', text: css$g });
+    });
 }
-
-var css$f = "";
 
 function defineAvatarStack(tag = 'usa-avatar-stack') {
     adoptVariants();
@@ -7497,7 +7401,7 @@ function defineAvatarStack(tag = 'usa-avatar-stack') {
                 this.append(more);
             }
         }
-    }, { id: 'avatar-stack', text: css$f });
+    });
 }
 
 /**
@@ -7521,8 +7425,6 @@ function defineUiComponents() {
     defineBadge();
     defineAvatarStack();
 }
-
-var css$e = "";
 
 const CURSOR_MODES = ['dot', 'magnetic', 'glow'];
 function defineCursor(tag = 'usa-cursor') {
@@ -7618,7 +7520,7 @@ function defineCursor(tag = 'usa-cursor') {
             this._frame = 0;
             this.removeAttribute('data-active');
         }
-    }, { id: 'cursor', text: css$e });
+    });
 }
 
 function smoothScroll(options = {}) {
@@ -7705,8 +7607,6 @@ function scrollToTarget(to, options = {}) {
     });
 }
 
-var css$d = "";
-
 function defineFullpage(tag = 'usa-fullpage') {
     return defineElement(tag, (Base) => class UsaFullpage extends Base {
         constructor() {
@@ -7792,10 +7692,8 @@ function defineFullpage(tag = 'usa-fullpage') {
         prev() {
             this.go(this._i - 1);
         }
-    }, { id: 'fullpage', text: css$d });
+    });
 }
-
-var css$c = "";
 
 function defineLoadingBar(tag = 'usa-loading-bar') {
     return defineElement(tag, (Base) => class UsaLoadingBar extends Base {
@@ -7859,7 +7757,7 @@ function defineLoadingBar(tag = 'usa-loading-bar') {
                 }, 300);
             }, 250);
         }
-    }, { id: 'loading-bar', text: css$c });
+    });
 }
 function bar() {
     if (typeof document === 'undefined')
@@ -7888,8 +7786,6 @@ const loadingBar = {
         }
     },
 };
-
-var css$b = "";
 
 function defineBackToTop(tag = 'usa-back-to-top') {
     return defineElement(tag, (Base) => class UsaBackToTop extends Base {
@@ -7933,10 +7829,8 @@ function defineBackToTop(tag = 'usa-back-to-top') {
             caf(this._frame);
             this._frame = 0;
         }
-    }, { id: 'back-to-top', text: css$b });
+    });
 }
-
-var css$a = "";
 
 const AMBIENT_EFFECTS = ['particles', 'snow', 'stars', 'noise', 'gradient'];
 function defineAmbient(tag = 'usa-ambient') {
@@ -8039,10 +7933,8 @@ function defineAmbient(tag = 'usa-ambient') {
             caf(this._frame);
             this._frame = 0;
         }
-    }, { id: 'ambient', text: css$a });
+    });
 }
-
-var css$9 = "";
 
 function defineSplash(tag = 'usa-splash') {
     return defineElement(tag, (Base) => class UsaSplash extends Base {
@@ -8086,10 +7978,8 @@ function defineSplash(tag = 'usa-splash') {
             this.hidden = true;
             this.emit('done');
         }
-    }, { id: 'splash', text: css$9 });
+    });
 }
-
-var css$8 = "";
 
 function defineAutoSkeleton(tag = 'usa-auto-skeleton') {
     return defineElement(tag, (Base) => class UsaAutoSkeleton extends Base {
@@ -8117,10 +8007,8 @@ function defineAutoSkeleton(tag = 'usa-auto-skeleton') {
                     this.motion(this, [{ opacity: 0.4 }, { opacity: 1 }], { duration: 300, easing: 'ease-out' });
             }
         }
-    }, { id: 'auto-skeleton', text: css$8 });
+    });
 }
-
-var css$7 = "";
 
 const INTENSITIES = ['low', 'normal', 'high'];
 const LEVELS = ['off', 'low', 'normal', 'high'];
@@ -8225,10 +8113,8 @@ function defineMotionSwitch(tag = 'usa-motion-switch') {
                 b.tabIndex = on ? 0 : -1;
             });
         }
-    }, { id: 'motion-switch', text: css$7 });
+    });
 }
-
-var css$6 = "";
 
 /**
  * Page & app-wide transitions (v2.7), built on the View Transitions API
@@ -8272,7 +8158,7 @@ async function pageTransition(update, options = {}) {
         await update();
         return;
     }
-    adoptStyles('page-transitions', css$6);
+    adoptStyles('page-transitions', css);
     trackPointer();
     const effect = options.effect || 'fade';
     if (prefersReducedMotion() || !supportsViewTransitions()) {
@@ -8297,7 +8183,7 @@ async function pageTransition(update, options = {}) {
 function enableMpaTransitions(effect = 'fade', duration = 450) {
     if (typeof document === 'undefined')
         return;
-    adoptStyles('page-transitions', css$6);
+    adoptStyles('page-transitions', css);
     adoptStyles('mpa-transitions', prefersReducedMotion() ? '' : '@view-transition{navigation:auto}');
     const d = document.documentElement;
     d.setAttribute('data-usa-pt', effect);
@@ -8330,8 +8216,6 @@ function definePageComponents() {
     defineAutoSkeleton();
     defineMotionSwitch();
 }
-
-var css$5 = "";
 
 function defineTimeline(tag = 'usa-timeline') {
     return defineElement(tag, (Base) => class UsaTimeline extends Base {
@@ -8413,7 +8297,7 @@ function defineTimeline(tag = 'usa-timeline') {
         unmount() {
             this._tl = null;
         }
-    }, { id: 'timeline', text: css$5 });
+    });
 }
 
 /**
@@ -8604,8 +8488,6 @@ function gesture(el, h, o = {}) {
     };
 }
 
-var css$4 = "";
-
 function defineSwipeable(tag = 'usa-swipeable') {
     return defineElement(tag, (Base) => class UsaSwipeable extends Base {
         constructor() {
@@ -8696,7 +8578,7 @@ function defineSwipeable(tag = 'usa-swipeable') {
         unmount() {
             this._s?.stop();
         }
-    }, { id: 'gesture', text: css$4 });
+    });
 }
 
 function definePinchZoom(tag = 'usa-pinch-zoom') {
@@ -8788,7 +8670,7 @@ function definePinchZoom(tag = 'usa-pinch-zoom') {
         unmount() {
             [this._k, this._x, this._y].forEach((s) => s?.stop());
         }
-    }, { id: 'gesture', text: css$4 });
+    });
 }
 
 /**
@@ -8899,8 +8781,6 @@ function drawLines(root, o = {}) {
     };
 }
 
-var css$3 = "";
-
 function defineDraw(tag = 'usa-draw') {
     return defineElement(tag, (Base) => class UsaDraw extends Base {
         constructor() {
@@ -8974,7 +8854,7 @@ function defineDraw(tag = 'usa-draw') {
             }
             this.onCleanup(() => caf(this._id));
         }
-    }, { id: 'svg', text: css$3 });
+    });
 }
 
 function defineMorph(tag = 'usa-morph') {
@@ -9042,7 +8922,7 @@ function defineMorph(tag = 'usa-morph') {
                 });
             }
         }
-    }, { id: 'svg', text: css$3 });
+    });
 }
 
 /** Clip-path start / end frames for each reveal shape. */
@@ -9115,7 +8995,7 @@ function defineMaskReveal(tag = 'usa-mask-reveal') {
                 }, { threshold: 0.25 });
             }
         }
-    }, { id: 'svg', text: css$3 });
+    });
 }
 
 /** Built-in animated icons (24×24 strokes) and the motion each one plays. */
@@ -9163,7 +9043,7 @@ function defineAnimIcon(tag = 'usa-anim-icon') {
                 this.listen(this, 'focusin', () => this.play());
             }
         }
-    }, { id: 'svg', text: css$3 });
+    });
 }
 
 /**
@@ -9423,8 +9303,6 @@ function watchPowerSaver(cb) {
     };
 }
 
-var css$2 = "";
-
 function make(kind) {
     return (Base) => class extends Base {
         constructor() {
@@ -9580,21 +9458,21 @@ function make(kind) {
  * `u_mouse`, `v_uv`); `speed`. Without WebGL: the element's CSS background.
  */
 function defineShader(tag = 'usa-shader') {
-    return defineElement(tag, make('shader'), { id: 'webgl', text: css$2 });
+    return defineElement(tag, make('shader'));
 }
 /**
  * `<usa-distort>` — hover distortion + RGB split on the `<img>` inside,
  * following the pointer. Without WebGL / CORS: a gentle CSS zoom.
  */
 function defineDistort(tag = 'usa-distort') {
-    return defineElement(tag, make('distort'), { id: 'webgl', text: css$2 });
+    return defineElement(tag, make('distort'));
 }
 /**
  * `<usa-liquid>` — liquid image: clicks / taps send ripples through the
  * `<img>` inside, hover adds a gentle wobble; `strength`. Fallback: plain image.
  */
 function defineLiquid(tag = 'usa-liquid') {
-    return defineElement(tag, make('liquid'), { id: 'webgl', text: css$2 });
+    return defineElement(tag, make('liquid'));
 }
 /**
  * `<usa-post-fx effects="vignette grain crt" intensity="0.6">` — GPU
@@ -9604,7 +9482,7 @@ function defineLiquid(tag = 'usa-liquid') {
  * Fallback: the image with an approximate CSS filter.
  */
 function definePostFx(tag = 'usa-post-fx') {
-    return defineElement(tag, make('post'), { id: 'webgl', text: css$2 });
+    return defineElement(tag, make('post'));
 }
 
 /**
@@ -9620,8 +9498,6 @@ function defineWebglComponents() {
     defineLiquid();
     definePostFx();
 }
-
-var css$1 = "";
 
 const FACES = ['front', 'right', 'back', 'left', 'top', 'bottom'];
 /** Rotation (deg) that brings each face to the front. */
@@ -9724,7 +9600,7 @@ function defineCube(tag = 'usa-cube') {
             this._rx?.stop();
             this._ry?.stop();
         }
-    }, { id: 'depth', text: css$1 });
+    });
 }
 
 /** Map a DeviceOrientation reading (beta/gamma degrees) to -1…1 tilt around a resting pose (pure). */
@@ -9842,7 +9718,7 @@ function defineDepth(tag = 'usa-depth') {
             this._t = { x: 0, y: 0 };
             this.querySelectorAll('[data-depth]').forEach((el) => (el.style.transform = ''));
         }
-    }, { id: 'depth', text: css$1 });
+    });
 }
 
 /**
@@ -10015,8 +9891,6 @@ async function sharedTransition(update, root = document, o = {}) {
     await Promise.all(anims);
 }
 
-var css = "";
-
 function defineAutoAnimate(tag = 'usa-auto-animate') {
     return defineElement(tag, (Base) => class UsaAutoAnimate extends Base {
         constructor() {
@@ -10036,7 +9910,7 @@ function defineAutoAnimate(tag = 'usa-auto-animate') {
             const c = (this._c = autoAnimate(this, { duration: this.num('duration', 300), scale: !this.flag('no-scale') }));
             this.onCleanup(() => c.stop());
         }
-    }, { id: 'layout', text: css });
+    });
 }
 function defineMasonry(tag = 'usa-masonry') {
     return defineElement(tag, (Base) => class UsaMasonry extends Base {
@@ -10091,7 +9965,7 @@ function defineMasonry(tag = 'usa-masonry') {
             this.style.height = '';
             Array.from(this.children).forEach((c) => (c.style.transform = '', c.style.width = ''));
         }
-    }, { id: 'layout', text: css });
+    });
 }
 
 /**
@@ -11038,5 +10912,5 @@ function defineComponents(categories) {
 const STYLE_BASE = new URL('../', import.meta.url).href;
 onDemandStyles(STYLE_BASE);
 
-export { ALL_TAGS, AMBIENT_EFFECTS, ANIM_ICONS, BRIDGE_PROTOCOL_VERSION, BUILTIN_EFFECTS, BUTTON_DEFORMS, CARD_EFFECTS, CLICK_EFFECTS, COMPONENT_CATEGORIES, CURSOR_MODES, EFFECT_KINDS, EFFECT_TRIGGERS, GL_FALLBACKS, JOINING_SCRIPT, LIVE_REGION_IDS, MASK_SHAPES, MORPH_ICONS, MOTION_SCALE, MOTION_SENSITIVITY, MOTION_SENSITIVITY_LEVELS, MOTION_TOKENS, PACKS, PACK_PRIMITIVES, PAGE_EFFECTS, PARTICLE_PRESETS, POST_EFFECTS, REVEAL_EFFECTS, SENSITIVITY_CSS, SHADERS, SPINNER_VARIANTS, SPRING_EFFECTS, SPRING_PRESETS, STATIC_ALTERNATIVES, STYLE_BASE, TIMELINE_PRESETS, VARIANTS, activeAnimations, adaptKeyframes, adoptVariants, animateWithMotion, animationBudget, announce, applyMotionTokens, applyNativeSettings, applyPack, auditMotionA11y, autoAnimate, autoDegrade, baselineReport, bindEffect, categoryOf, configureComponents, connectNativeShell, countUp, createSpring, defineAccordion, defineAcrylic, defineAmbient, defineAnimIcon, defineAurora, defineAutoAnimate, defineAutoSkeleton, defineAvatarStack, defineBackToTop, defineBackgroundComponents, defineBadge, defineBlobs, defineBottomSheet, defineButton, defineCard, defineCardComponents, defineCardStack, defineCarousel3d, defineCheck, defineCheckbox, defineClick, defineClickComponents, defineComponents, defineCounter, defineCube, defineCursor, defineDepth, defineDepthComponents, defineDialog, defineDistort, defineDotNetwork, defineDoubleTap, defineDraggable, defineDraw, defineDrawer, defineFab, defineFeedbackComponents, defineFullpage, defineFx, defineFxComponents, defineGestureComponents, defineGlitch, defineGradientText, defineGrain, defineGridGlow, defineHandwriting, defineHold, defineIconMorph, defineInteractionComponents, defineLayoutComponents, defineLike, defineLiquid, defineLoadingBar, defineMagnetic, defineMarquee, defineMaskReveal, defineMasonry, defineMorph, defineMotionSwitch, defineNavbar, defineOverscroll, definePack, definePacksComponents, definePageComponents, defineParticles, definePhysicsComponents, definePinchZoom, definePopover, definePostFx, definePress, defineProgress, definePullRefresh, defineReveal, defineRevealComponents, defineRipple, defineScramble, defineScrollHighlight, defineScrollProgress, defineScrolly, defineShader, defineShimmerText, defineSkeleton, defineSlider, defineSpinner, defineSplash, defineSplitText, defineSpotlight, defineSpring, defineStagger, defineStickyStack, defineSvgComponents, defineSwipeable, defineTabs, defineTextComponents, defineTextRotate, defineTilt, defineTimeline, defineTimelineComponents, defineToaster, defineTransitionComponents, defineTypewriter, defineUiComponents, defineViewSwitch, defineWaterRipple, defineWaveText, defineWebglComponents, detectNativeHost, deviceTilt, drawLines, easeOutExpo, enableMpaTransitions, exportDesignTokens, flip, flipFrames, fluentPreset, flyToCart, fragmentSource, gesture, getEffect, getMotionIntensity, getMotionLevel, getMotionSensitivity, getMotionTokens, glFallbackCss, glGovernor, glQuad, graphemes, haptic, hasEffect, importDesignTokens, importMotionTokens, interpolatePath, isTrustedMessage, linearEasing, listEffects, liveRegion, loadCategoryStyles, loadedStyles, loadingBar, masonryLayout, mergeMotionTokens, morphPath, morphTo, motionAllowed, motionScale, motionToken, motionTokensToCss, motionTokensToJSON, motionTokensToVars, motionVar, onDemandStyles, onFrame, orientationToTilt, pageTransition, parseDuration, parseEasing, parseNativeSettings, pathsCompatible, pinchScale, playEffect, postFxShader, postToNative, prefersReducedMotion, projectInertia, readScrollProgress, registerBuiltinEffects, registerEffect, registerEffects, requestOrientationPermission, resolveDurationToken, resolveEasingToken, resolvePosition, resolveSpring, resolveTokenAliases, restoreMotionIntensity, restoreMotionSensitivity, revealKeyframes, rubberBand, schedulerStats, scrambleFrame, scrollToTarget, setAnimationBudget, setFrameBudget, setMotionIntensity, setMotionLevel, setMotionSensitivity, setVariant, sharedTransition, smoothScroll, snapTo, splitOrder, splitText, splitTimeline, words as splitWords, spring, springEasing, springEffectKeyframes, springSamples, staticAlternative, stepSpring, supportsLinearEasing, supportsNativeScrub, supportsOrientation, supportsViewTransitions, supportsWebGL, swipeDirection, themeTransition, timeline, toast, validateDesignTokens, viewTransition, warnBaseline, watchPowerSaver, withoutDeprecations };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.0/dist/components/lite.js.map
+export { ALL_TAGS, AMBIENT_EFFECTS, ANIM_ICONS, BRIDGE_PROTOCOL_VERSION, BUILTIN_EFFECTS, BUTTON_DEFORMS, CARD_EFFECTS, CLICK_EFFECTS, COMPONENT_CATEGORIES, CURSOR_MODES, EFFECT_KINDS, EFFECT_TRIGGERS, GL_FALLBACKS, JOINING_SCRIPT, LIVE_REGION_IDS, MASK_SHAPES, MORPH_ICONS, MOTION_SCALE, MOTION_SENSITIVITY, MOTION_SENSITIVITY_LEVELS, MOTION_TOKENS, PACKS, PACK_PRIMITIVES, PAGE_EFFECTS, PARTICLE_PRESETS, POST_EFFECTS, REVEAL_EFFECTS, SENSITIVITY_CSS, SHADERS, SPINNER_VARIANTS, SPRING_EFFECTS, SPRING_PRESETS, STATIC_ALTERNATIVES, STYLE_BASE, TIMELINE_PRESETS, VARIANTS, activeAnimations, adaptKeyframes, adoptVariants, animateWithMotion, animationBudget, announce, applyMotionTokens, applyNativeSettings, applyPack, auditMotionA11y, autoAnimate, autoDegrade, baselineReport, bindEffect, categoryForTag as categoryOf, configureComponents, connectNativeShell, countUp, createSpring, defineAccordion, defineAcrylic, defineAmbient, defineAnimIcon, defineAurora, defineAutoAnimate, defineAutoSkeleton, defineAvatarStack, defineBackToTop, defineBackgroundComponents, defineBadge, defineBlobs, defineBottomSheet, defineButton, defineCard, defineCardComponents, defineCardStack, defineCarousel3d, defineCheck, defineCheckbox, defineClick, defineClickComponents, defineComponents, defineCounter, defineCube, defineCursor, defineDepth, defineDepthComponents, defineDialog, defineDistort, defineDotNetwork, defineDoubleTap, defineDraggable, defineDraw, defineDrawer, defineFab, defineFeedbackComponents, defineFullpage, defineFx, defineFxComponents, defineGestureComponents, defineGlitch, defineGradientText, defineGrain, defineGridGlow, defineHandwriting, defineHold, defineIconMorph, defineInteractionComponents, defineLayoutComponents, defineLike, defineLiquid, defineLoadingBar, defineMagnetic, defineMarquee, defineMaskReveal, defineMasonry, defineMorph, defineMotionSwitch, defineNavbar, defineOverscroll, definePack, definePacksComponents, definePageComponents, defineParticles, definePhysicsComponents, definePinchZoom, definePopover, definePostFx, definePress, defineProgress, definePullRefresh, defineReveal, defineRevealComponents, defineRipple, defineScramble, defineScrollHighlight, defineScrollProgress, defineScrolly, defineShader, defineShimmerText, defineSkeleton, defineSlider, defineSpinner, defineSplash, defineSplitText, defineSpotlight, defineSpring, defineStagger, defineStickyStack, defineSvgComponents, defineSwipeable, defineTabs, defineTextComponents, defineTextRotate, defineTilt, defineTimeline, defineTimelineComponents, defineToaster, defineTransitionComponents, defineTypewriter, defineUiComponents, defineViewSwitch, defineWaterRipple, defineWaveText, defineWebglComponents, detectNativeHost, deviceTilt, drawLines, easeOutExpo, enableMpaTransitions, exportDesignTokens, flip, flipFrames, fluentPreset, flyToCart, fragmentSource, gesture, getEffect, getMotionIntensity, getMotionLevel, getMotionSensitivity, getMotionTokens, glFallbackCss, glGovernor, glQuad, graphemes, haptic, hasEffect, importDesignTokens, importMotionTokens, interpolatePath, isTrustedMessage, linearEasing, listEffects, liveRegion, loadCategoryStyles, loadedStyles, loadingBar, masonryLayout, mergeMotionTokens, morphPath, morphTo, motionAllowed, motionScale, motionToken, motionTokensToCss, motionTokensToJSON, motionTokensToVars, motionVar, onDemandStyles, onFrame, orientationToTilt, pageTransition, parseDuration, parseEasing, parseNativeSettings, pathsCompatible, pinchScale, playEffect, postFxShader, postToNative, prefersReducedMotion, projectInertia, readScrollProgress, registerBuiltinEffects, registerEffect, registerEffects, requestOrientationPermission, resolveDurationToken, resolveEasingToken, resolvePosition, resolveSpring, resolveTokenAliases, restoreMotionIntensity, restoreMotionSensitivity, revealKeyframes, rubberBand, schedulerStats, scrambleFrame, scrollToTarget, setAnimationBudget, setFrameBudget, setMotionIntensity, setMotionLevel, setMotionSensitivity, setVariant, sharedTransition, smoothScroll, snapTo, splitOrder, splitText, splitTimeline, words as splitWords, spring, springEasing, springEffectKeyframes, springSamples, staticAlternative, stepSpring, supportsLinearEasing, supportsNativeScrub, supportsOrientation, supportsViewTransitions, supportsWebGL, swipeDirection, themeTransition, timeline, toast, validateDesignTokens, viewTransition, warnBaseline, watchPowerSaver, withoutDeprecations };
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/lite.js.map

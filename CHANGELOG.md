@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [17.2.1] - 2026-11-07
+
+### Fixed
+- Lite resolves both `mo-*` and `usa-*` names to the same category stylesheet. A failed request can be retried
+  when another component connects or when the application calls `loadCategoryStyles()` again.
+- Already-mounted aliases pick up delayed same-origin styles, including a retry started by a legacy-name sibling.
+
 ## [17.2.0] - 2026-11-07
 
 ### Added

@@ -49,7 +49,6 @@ export const aliasCss = (text: string): string => {
 
 let started = false;
 let active = false;
-let last = -1;
 let n = 0;
 const seen = /*#__PURE__*/ new WeakSet<object>();
 
@@ -57,16 +56,6 @@ const seen = /*#__PURE__*/ new WeakSet<object>();
 function scan(): void {
   const d = document;
   const adopted: CSSStyleSheet[] = (d as any).adoptedStyleSheets || [];
-  const links = d.querySelectorAll<HTMLLinkElement>('link[data-usa-css]');
-  const key = d.styleSheets.length * 1e6 + adopted.length * 1e3 + links.length;
-  if (key === last) return;
-  last = key;
-  links.forEach((l) => {
-    if (!seen.has(l)) {
-      seen.add(l);
-      l.addEventListener('load', () => ((last = -1), scan())); // lite: CSS files arrive later
-    }
-  });
   for (const s of [...Array.from(d.styleSheets), ...adopted]) {
     const o = s.ownerNode as Element | null;
     if (seen.has(s) || (o && !o.matches('[data-usa],[data-usa-css]'))) continue;
@@ -76,6 +65,7 @@ function scan(): void {
     } catch {
       continue; // not loaded yet, or a cross-origin file without CORS
     }
+    if (!css) continue; // a pending link may expose an empty rule list before its load event
     seen.add(s);
     const a = aliasCss(css);
     if (a !== css) adoptStyles('mo:' + n++, a);
@@ -89,7 +79,13 @@ function alias(tag: string, ctor: CustomElementConstructor): void {
   class Alias extends C {
     connectedCallback(): unknown {
       const r = super.connectedCallback?.();
-      active = true;
+      if (!active) {
+        active = true;
+        // A retry may be requested by a usa-* sibling after the mo-* element has already mounted.
+        document.addEventListener('load', (event) => {
+          if (event.target instanceof HTMLLinkElement && event.target.hasAttribute('data-usa-css')) scan();
+        }, true);
+      }
       scan();
       return r;
     }

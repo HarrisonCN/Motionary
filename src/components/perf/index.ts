@@ -22,7 +22,8 @@ import {
   getMotionIntensity,
   type MotionIntensity,
 } from '../base';
-import { COMPONENT_CATEGORIES, type ComponentCategory } from '../index-tags';
+import type { ComponentCategory } from '../index-tags';
+import { categoryForTag } from '../category-for-tag';
 
 export { onFrame, schedulerStats, activeAnimations, setAnimationBudget, animationBudget, setFrameBudget };
 
@@ -101,23 +102,30 @@ export function autoDegrade(options: AutoDegradeOptions = {}): () => void {
   };
 }
 
-const TAG_CATEGORY: Record<string, ComponentCategory> = {};
-for (const [cat, tags] of Object.entries(COMPONENT_CATEGORIES)) for (const t of tags) TAG_CATEGORY[t] = cat as ComponentCategory;
-/** The category of a default `<usa-*>` tag. */
-export const categoryOf = (tag: string): ComponentCategory | undefined => TAG_CATEGORY[tag];
+export { categoryForTag as categoryOf };
 
 const loaded = /*#__PURE__*/ new Set<string>();
+
+/** Categories with a pending or loaded Motionary stylesheet. */
+export function loadedStyles(): string[] {
+  return [...loaded];
+}
+
 /**
  * Add `<link rel="stylesheet" href="{base}components/{category}.css">` once.
  * `base` is the URL of the package's `dist/` folder.
  */
 export function loadCategoryStyles(category: ComponentCategory | 'all', base: string): HTMLLinkElement | null {
   if (typeof document === 'undefined' || loaded.has(category)) return null;
-  loaded.add(category);
   const link = document.createElement('link');
   link.rel = 'stylesheet';
-  link.href = `${base.replace(/\/?$/, '/')}${category === 'all' ? 'components.css' : `components/${category}.css`}`;
-  link.setAttribute('data-usa-css', category);
+  link.href = `${base.replace(/\/?$/, '/')}components${category === 'all' ? '' : '/' + category}.css`;
+  link.dataset.usaCss = category;
+  loaded.add(category);
+  link.addEventListener('error', () => {
+    loaded.delete(category);
+    link.remove();
+  }, { once: true });
   document.head.append(link);
   return link;
 }
@@ -127,9 +135,6 @@ export function loadCategoryStyles(category: ComponentCategory | 'all', base: st
  * (custom tags fall back to the full stylesheet). Returns an undo.
  */
 export function onDemandStyles(base: string): () => void {
-  setStyleLoader((tag) => loadCategoryStyles(categoryOf(tag) || 'all', base));
+  setStyleLoader((tag) => loadCategoryStyles(categoryForTag(tag) || 'all', base));
   return () => setStyleLoader(null);
 }
-
-/** Categories whose CSS has been requested so far. */
-export const loadedStyles = (): string[] => Array.from(loaded);

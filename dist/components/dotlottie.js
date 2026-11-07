@@ -1,6 +1,6 @@
 import { f as defineElement } from '../chunks/base-BQmWYlDq.js';
-import { r as runtimeModule } from '../chunks/runtime-link-Q3WPKh5c.js';
-import { c as css, d as defineLottiePlayer } from '../chunks/lottie-player-CaVEpHLo.js';
+import { r as runtimeModule } from '../chunks/runtime-link-JzguK1oG.js';
+import { c as css, d as defineLottiePlayer } from '../chunks/lottie-player-CM0ATY3F.js';
 
 function defineDotLottie(tag = 'usa-dotlottie') {
     return defineElement(tag, () => {
@@ -116,4 +116,4 @@ function defineDotLottie(tag = 'usa-dotlottie') {
 }
 
 export { defineDotLottie };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.0/dist/components/dotlottie.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/dotlottie.js.map
