@@ -98,6 +98,14 @@ export function defineCommandPalette(tag = 'usa-command-palette'): CustomElement
         private _active = 0;
         private _shown: PaletteCommand[] = [];
         private _opener: Element | null = null;
+        private _transition: Animation | null = null;
+        private _closing = false;
+        unmount(): void {
+          this._closing = false;
+          this._transition?.cancel();
+          this._transition = null;
+          this._opener = null;
+        }
         get commands(): PaletteCommand[] {
           if (this._cmds) return this._cmds.slice();
           return Array.from(this.querySelectorAll(':scope > option')).map((o) => ({ id: (o as HTMLOptionElement).value || (o.textContent || '').trim(), label: (o.textContent || '').trim(), group: o.getAttribute('data-group') || undefined, keys: o.getAttribute('data-keys') || undefined }));
@@ -126,7 +134,11 @@ export function defineCommandPalette(tag = 'usa-command-palette'): CustomElement
           const q = this.querySelector('.usa-cp-q') as HTMLInputElement;
           this.listen(q, 'input', () => this.render(true));
           this.listen(q, 'keydown', (e: KeyboardEvent) => {
-            if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+            if (e.isComposing || e.keyCode === 229) return;
+            if (e.key === 'PageDown' || e.key === 'PageUp') {
+              e.preventDefault();
+              this.page(e.key === 'PageDown' ? 1 : -1);
+            } else if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
               e.preventDefault();
               this.move(e.key === 'ArrowDown' ? 1 : -1);
             } else if (e.key === 'Enter') {
@@ -144,13 +156,13 @@ export function defineCommandPalette(tag = 'usa-command-palette'): CustomElement
           const hk = this.str('hotkey', 'mod+k');
           if (hk !== 'none')
             this.listen(document, 'keydown', (e: KeyboardEvent) => {
-              if (matchesKeys(e, hk)) {
+              if (!e.isComposing && e.keyCode !== 229 && !e.repeat && matchesKeys(e, hk)) {
                 e.preventDefault();
                 this.toggle();
               }
             });
-          this.render();
           if (this.flag('inline')) dlg.setAttribute('open', '');
+          this.render();
         }
         private render(typed = false): void {
           const list = this.querySelector('.usa-cp-list');
@@ -205,7 +217,21 @@ export function defineCommandPalette(tag = 'usa-command-palette'): CustomElement
           hl.style.height = `${el.offsetHeight || 36}px`;
           hl.style.transform = to;
           if (glide && from && from !== to && !this.reduced) this.motion(hl, [{ transform: from }, { transform: to }], { duration: 160, easing: 'cubic-bezier(.2,.8,.2,1)' });
-          (el as any).scrollIntoView?.({ block: 'nearest' });
+          if (glide) el.scrollIntoView?.({ block: 'nearest' });
+        }
+        private page(direction: 1 | -1): void {
+          const rows = this.querySelectorAll<HTMLElement>('.usa-cp-item');
+          const row = rows[this._active];
+          if (!row) return;
+          const height = row.parentElement!.clientHeight;
+          let i = this._active;
+          while (rows[i + direction]) {
+            const distance = Math.abs(rows[i + direction].offsetTop - row.offsetTop);
+            if (i !== this._active && distance > height) break;
+            i += direction;
+            if (!distance) break;
+          }
+          this.select(i);
         }
         private move(d: number): void {
           const n = this._shown.length;
@@ -213,14 +239,20 @@ export function defineCommandPalette(tag = 'usa-command-palette'): CustomElement
         }
         private run(i: number): void {
           const c = this._shown[i];
-          if (!c) return;
+          if (!c || this._closing) return;
           this.emit('run', { id: c.id, label: c.label });
           this.close();
         }
         show(): void {
           const dlg = this.dlg;
           if (dlg && this.flag('inline')) return (this.querySelector('.usa-cp-q') as HTMLInputElement).focus();
-          if (!dlg || this.opened) return;
+          if (!dlg) return;
+          if (this._closing) {
+            this._closing = false;
+            this.animatePanel(true);
+            return;
+          }
+          if (this.opened) return;
           this._opener = document.activeElement;
           const q = this.querySelector('.usa-cp-q') as HTMLInputElement;
           q.value = '';
@@ -234,8 +266,28 @@ export function defineCommandPalette(tag = 'usa-command-palette'): CustomElement
           } else dlg.setAttribute('open', '');
           this.select(0, false);
           q.focus();
-          if (!this.reduced) this.motion(this.querySelector('.usa-cp-box') as Element, [{ opacity: 0, transform: 'translateY(-8px) scale(.96)' }, { opacity: 1, transform: 'none' }], { duration: 220, easing: 'cubic-bezier(.2,.8,.2,1)' });
+          this.animatePanel(true);
           this.emit('open');
+        }
+        private animatePanel(open: boolean): Animation | null {
+          const box = this.querySelector<HTMLElement>('.usa-cp-box')!;
+          const visible = { opacity: 1, transform: 'none' };
+          let from: Keyframe = open ? { opacity: 0, transform: 'translateY(-8px) scale(.96)' } : visible;
+          if (this._transition?.playState === 'running') {
+            const style = getComputedStyle(box);
+            from = { opacity: style.opacity, transform: style.transform };
+          }
+          this._transition?.cancel();
+          const to = open ? visible : { opacity: 0, transform: 'scale(.97)' };
+          this._transition = this.reduced ? null : this.motion(box, [from, to], {
+            duration: open ? 220 : 140, easing: open ? 'cubic-bezier(.2,.8,.2,1)' : 'ease-in',
+          });
+          // With no WAAPI or a static motion policy, motion() writes its last frame inline.
+          if (!this._transition) {
+            box.style.removeProperty('opacity');
+            box.style.removeProperty('transform');
+          }
+          return this._transition;
         }
         close(): void {
           const dlg = this.dlg;
@@ -243,19 +295,23 @@ export function defineCommandPalette(tag = 'usa-command-palette'): CustomElement
             (this.querySelector('.usa-cp-q') as HTMLInputElement).value = '';
             return this.render();
           }
-          if (!dlg || !this.opened) return;
+          if (!dlg || !this.opened || this._closing) return;
+          this._closing = true;
+          const animation = this.animatePanel(false);
           const done = () => {
+            if (!this._closing || this._transition !== animation) return;
+            this._closing = false;
+            this._transition = null;
             if (typeof dlg.close === 'function' && dlg.open) dlg.close();
             dlg.removeAttribute('open');
             (this._opener as HTMLElement | null)?.focus?.();
             this.emit('close');
           };
-          const a = this.reduced ? null : this.motion(this.querySelector('.usa-cp-box') as Element, [{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'scale(.97)' }], { duration: 140, easing: 'ease-in' });
-          if (a) a.finished.then(done, done);
+          if (animation) animation.finished.then(done, done);
           else done();
         }
         toggle(): void {
-          if (this.opened) this.close();
+          if (this.opened && !this._closing) this.close();
           else this.show();
         }
       }
