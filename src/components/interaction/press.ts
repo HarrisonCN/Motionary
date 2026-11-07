@@ -24,10 +24,9 @@ export function definePress(tag = 'usa-press'): CustomElementConstructor | undef
         }
 
         private _anim: Animation | null = null;
-        private _down = false;
 
         get pressed(): boolean {
-          return this._down;
+          return this.hasAttribute('data-pressed');
         }
 
         private frame(down: boolean): Keyframe {
@@ -36,8 +35,7 @@ export function definePress(tag = 'usa-press'): CustomElementConstructor | undef
         }
 
         private down(): void {
-          if (this._down || this.flag('disabled')) return;
-          this._down = true;
+          if (this.pressed || this.flag('disabled')) return;
           this.setAttribute('data-pressed', '');
           const from = this.currentFrame();
           this._anim?.cancel();
@@ -45,16 +43,16 @@ export function definePress(tag = 'usa-press'): CustomElementConstructor | undef
         }
 
         private up(): void {
-          if (!this._down) return;
-          this._down = false;
+          if (!this.pressed) return;
           this.removeAttribute('data-pressed');
           const from = this.currentFrame();
           this._anim?.cancel();
+          const bounce = this.flag('bounce');
           const frames: Keyframe[] =
-            this.flag('bounce') && !this.reduced
+            bounce && !this.reduced
               ? [from, { transform: 'scale(1.06)', offset: 0.45 }, { transform: 'scale(0.99)', offset: 0.75 }, this.frame(false)]
               : [from, this.frame(false)];
-          const a = this.motion(this, frames, { duration: this.flag('bounce') ? 480 : 320, easing: EASE_SPRING });
+          const a = this.motion(this, frames, { duration: bounce ? 480 : 320, easing: EASE_SPRING });
           this._anim = a;
           if (a) a.onfinish = () => this._anim === a && (this._anim = null);
         }
@@ -70,7 +68,7 @@ export function definePress(tag = 'usa-press'): CustomElementConstructor | undef
             if (e.pointerType === 'mouse' && e.button !== 0) return;
             this.down();
           });
-          for (const t of ['pointerup', 'pointerleave', 'pointercancel', 'blur']) this.listen(this, t, () => this.up());
+          for (const t of ['pointerup', 'pointerleave', 'pointercancel', 'focusout']) this.listen(this, t, () => this.up());
           this.listen(this, 'keydown', (e: KeyboardEvent) => (e.key === ' ' || e.key === 'Enter') && !e.repeat && this.down());
           this.listen(this, 'keyup', (e: KeyboardEvent) => (e.key === ' ' || e.key === 'Enter') && this.up());
         }
@@ -78,7 +76,7 @@ export function definePress(tag = 'usa-press'): CustomElementConstructor | undef
         unmount(): void {
           this._anim?.cancel();
           this._anim = null;
-          this._down = false;
+          this.removeAttribute('data-pressed');
         }
       },
     { id: 'press', text: css }

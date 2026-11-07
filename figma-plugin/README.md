@@ -20,4 +20,4 @@ Exports **motion tokens** and **runnable component snippets** from a Figma file.
   override or extend Motionary's default tokens.
 
 The plugin never touches the network (`networkAccess: none`) and never edits the document. `code.js` is generated from
-`plugin-src.js` by `node scripts/gen-figma-plugin.mjs` (it embeds the component catalog); edit the source, not the output.
+`plugin-src.js` by `node scripts/gen-figma-plugin.mjs` in a repository checkout (it embeds the component catalog). npm includes the generated installable plugin; the authoring template stays in the repository. Edit the source in a checkout, not the generated output.

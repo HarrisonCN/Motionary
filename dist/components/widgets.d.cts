@@ -1357,8 +1357,10 @@ declare function defineOrganicCard(tag?: string): CustomElementConstructor | und
  * drop of liquid: moving to another item it stretches like a droplet
  * towards the target, then settles with a wobble (gooey SVG filter).
  * Children are links or buttons; `value` (index) / `aria-current`; arrow
- * keys move focus. `usa:change` { index, item }. A labelled `nav`; reduced
- * motion: the drop jumps.
+ * keys move focus (RTL-aware); Home/End jump to the first/last enabled item.
+ * `orientation="vertical"` places the drop beside a sidebar. Interrupted
+ * transitions continue from the visible drop; layout changes realign it.
+ * `usa:change` { index, item }. A labelled `nav`; reduced motion: the drop jumps.
  */
 interface UsaLiquidNavElement extends UsaElement {
     value: number;

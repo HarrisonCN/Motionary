@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [17.1.0] - 2026-11-07
+
+### Added
+- Liquid navigation supports vertical sidebars, RTL-aware horizontal arrows, Up/Down in vertical layouts,
+  Home/End and disabled-item skipping. The showcase includes an orientation control.
+- The liquid indicator continues from its visible position during rapid selections and realigns when item sizes change.
+
+### Fixed
+- npm packages omit the Figma authoring template while retaining the generated installable plugin.
+- Press feedback clears its pressed marker on disable/disconnect and releases keyboard presses when child focus leaves.
+- Magnetic feedback cancels queued pointer frames on window blur or pointer exit, preventing stale reactivation.
+- Liquid navigation honours changes to the `value` attribute, keeps user selections across reconnects, and cancels
+  running animations and disconnects resize observers on disconnect. Reduced motion still jumps directly to the selected item.
+
 ## [17.0.1] - 2026-10-18
 
 ### Fixed

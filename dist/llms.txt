@@ -1,4 +1,4 @@
-# Motionary 17.0.1
+# Motionary 17.1.0
 
 > Motionary is a zero-dependency motion library: scroll animations, 200+ presets and 209 animated Web Components (<usa-*>) that work in plain HTML and every framework, plus motionary/runtime — its own tween/timeline engine and format loaders.
 
@@ -118,7 +118,7 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<usa-leaderboard>` (motionary/components/widgets): 7.5: a ranked list — when scores change, rows glide to their new rank, climbers flash green with ▲n and fallers red with ▼n, scores roll and the top three get m
 - `<usa-like>` (motionary/components/click): A heart that pops with a spring and bursts into particles; aria-pressed, optional count.
 - `<usa-liquid>` (motionary/components/webgl): Click or tap to send water ripples through the image; hover adds a gentle wobble. The plain image stays when WebGL is unavailable.
-- `<usa-liquid-nav>` (motionary/components/widgets): 8.3: a navigation bar whose active indicator is a drop of liquid — it stretches like a droplet towards the next item and settles with a wobble (gooey SVG filter
+- `<usa-liquid-nav>` (motionary/components/widgets): 17.1: a liquid indicator that continues smoothly through rapid selections, supports horizontal or vertical navigation, realigns after resizing, and offers RTL-a
 - `<usa-loading-bar>` (motionary/components/page): A slim NProgress-style bar for route changes and fetches: loadingBar.start() trickles, done() completes and fades.
 - `<usa-location-card>` (motionary/components/widgets): 7.6: a place card with a stylised mini map — the route from the origin draws itself, the pin drops in with a bounce and a ring pulses; distance computed with ha
 - `<usa-lottie>` (motionary/components/widgets): 9.2: plays Lottie (After Effects / bodymovin) files without lottie-web — vector layers render as SVG and their keyframes run as native animations on Motionary’s

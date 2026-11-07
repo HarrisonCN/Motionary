@@ -1,4 +1,4 @@
-# Motionary 17.0.1 — full component reference
+# Motionary 17.1.0 — full component reference
 
 Generated from the source. Machine-readable version: https://harrisoncn.github.io/Motionary/components.json (schema https://harrisoncn.github.io/Motionary/components.schema.json).
 
@@ -1914,11 +1914,11 @@ Click or tap to send water ripples through the image; hover adds a gentle wobble
 
 ### <usa-liquid-nav> — Liquid nav
 
-8.3: a navigation bar whose active indicator is a drop of liquid — it stretches like a droplet towards the next item and settles with a wobble (gooey SVG filter).
+17.1: a liquid indicator that continues smoothly through rapid selections, supports horizontal or vertical navigation, realigns after resizing, and offers RTL-aware arrow keys plus Home/End. Set orientation="vertical" for a sidebar.
 
 - Import: `import { defineLiquidNav } from 'motionary/components/widgets'; defineLiquidNav();`
 - CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
-- Attributes: `label`, `value`
+- Attributes: `label`, `value`, `orientation`
 - Events: `usa:change`
 
 ```html
