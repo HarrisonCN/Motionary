@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [17.2.0] - 2026-11-07
+
+### Added
+- Command palette Page Up and Page Down move the active result by one visible page, keeping focus in the search field.
+
+### Fixed
+- The browser CI test matrix stays in the repository and is linked from the packaged documentation, keeping the unpacked tarball within the existing budget.
+- Confirming a candidate in an IME no longer runs the selected command. Composition and held hotkeys leave the palette state intact.
+- Reopening during the exit animation reverses from the visible panel. Repeated activation or dismissal during exit emits a single run or close event.
+- Disconnecting the palette discards its pending transition so a stale close cannot steal focus or emit after remount.
+- Inline palettes measure the first highlight after opening and rendering results no longer scrolls the surrounding page into view.
+
 ## [17.1.0] - 2026-11-07
 
 ### Added
@@ -1375,7 +1387,7 @@ no budget raised.
 
 ### Added (checks)
 - `test/browser/` (Playwright, devDependency only) — lifecycle sweep of every manifest component (mount / attribute changes / unmount / re-mount: no error, no leaked window or document listener, interval, observer on a detached node, rAF loop or WebGL context), keyboard and ARIA patterns, motion sensitivity levels, WebGL / Canvas resource release and the per-browser GPU capability matrix, and a 32-component page measured against `perf/browser-baseline.json`.
-- `npm run test:browser`; CI job `browser` (chromium / firefox / webkit matrix, browsers cached by Playwright version, results uploaded as artifacts). See [docs/browser-matrix.md](docs/browser-matrix.md) for what each browser supports and the documented limitations.
+- `npm run test:browser`; CI job `browser` (chromium / firefox / webkit matrix, browsers cached by Playwright version, results uploaded as artifacts). See [docs/browser-matrix.md](https://github.com/HarrisonCN/Motionary/blob/main/docs/browser-matrix.md) for what each browser supports and the documented limitations.
 - `test/browser-compat-13-1-0.test.ts` keeps the pure logic (selector / locale fallbacks, scroll-scene validation) in the fast jsdom run.
 
 ## [13.0.2] - 2026-10-10

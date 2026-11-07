@@ -2,7 +2,7 @@
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
-7.9: a ⌘K command palette on the native <dialog> — scales in, filters as you type with fuzzy matching and highlighted letters, results stagger in and a highlight glides between rows (↑ ↓ Enter).
+7.9: a ⌘K command palette on the native <dialog> — scales in, filters as you type with fuzzy matching and highlighted letters, results stagger in and a highlight glides between rows. Use ↑/↓ for one row, Page Up/Down for a page and Enter to run a command.
 
 - **Category:** ui · **since** 7.9
 - **Import:** `import { defineCommandPalette } from 'motionary/components/widgets'` then `defineCommandPalette();`

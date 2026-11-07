@@ -11,4 +11,4 @@ function registerSuccessCheck() {
 }
 
 export { effect, registerSuccessCheck as register, registerSuccessCheck };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.1.0/dist/effects/success-check.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.0/dist/effects/success-check.js.map

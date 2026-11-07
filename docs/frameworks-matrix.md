@@ -3,7 +3,7 @@
 `test/frameworks/` holds one small fixture app per framework. Each one is server-rendered in plain Node (no DOM), then
 hydrated in Chromium against the **built** package (`dist/`, resolved through `node_modules/motionary` → repository
 root, exactly like an installed package). CI runs it in the `Frameworks` workflow (`.github/workflows/frameworks.yml`: one job per framework, Chromium only,
-not a required check). The cross-engine component suite stays in `test/browser` ([browser-matrix.md](browser-matrix.md)).
+not a required check). The cross-engine component suite stays in `test/browser` ([browser-matrix.md](https://github.com/HarrisonCN/Motionary/blob/main/docs/browser-matrix.md)).
 
 ## Tested versions and results
 

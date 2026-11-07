@@ -91,8 +91,8 @@ import { d as defineSuggestionChips } from '../chunks/suggestion-chips-FMxruJG4.
 export { p as parseChips } from '../chunks/suggestion-chips-FMxruJG4.js';
 import { d as defineVoiceButton } from '../chunks/voice-button-BsYkfXZ8.js';
 export { w as waveBars } from '../chunks/voice-button-BsYkfXZ8.js';
-import { d as defineCommandPalette } from '../chunks/command-palette-Clx0HR4L.js';
-export { f as fuzzyMatch, k as keyLabels, m as matchesKeys } from '../chunks/command-palette-Clx0HR4L.js';
+import { d as defineCommandPalette } from '../chunks/command-palette-D3BLEWg1.js';
+export { f as fuzzyMatch, k as keyLabels, m as matchesKeys } from '../chunks/command-palette-D3BLEWg1.js';
 import { defineShortcut } from '../widgets/shortcut.js';
 import { defineClockControl } from '../widgets/clock-control.js';
 import { defineHydrate } from '../widgets/hydrate.js';
@@ -140,25 +140,25 @@ import { defineMotionSpec } from '../widgets/motion-spec.js';
 import { defineNativePreview } from '../widgets/native-preview.js';
 import { definePluginCard } from '../widgets/plugin-card.js';
 import { defineInstallButton } from '../widgets/install-button.js';
-import { d as defineScrollScene } from '../chunks/scroll-scene-lKUQxx1b.js';
-export { p as parseScrub } from '../chunks/scroll-scene-lKUQxx1b.js';
+import { d as defineScrollScene } from '../chunks/scroll-scene-ek9FIiX6.js';
+export { p as parseScrub } from '../chunks/scroll-scene-ek9FIiX6.js';
 import { defineMotionInspector } from '../widgets/motion-inspector.js';
 import { defineRouteTransition } from '../widgets/route-transition.js';
 import { defineTextSplitter } from '../widgets/text-splitter.js';
 import { defineScrollRing } from '../widgets/scroll-ring.js';
 import { defineParallaxLayers } from '../widgets/parallax-layers.js';
 import { defineSmoothScroll } from '../widgets/smooth-scroll.js';
-import { d as defineGlScene } from '../chunks/gl-scene-BOV5jjqG.js';
+import { d as defineGlScene } from '../chunks/gl-scene-HWJADmzS.js';
 import { d as defineGpuParticles } from '../chunks/gpu-particles-dIxou1C7.js';
 export { P as PARTICLE_DRAW_WGSL, a as PARTICLE_SIM_WGSL } from '../chunks/gpu-particles-dIxou1C7.js';
 import { d as defineShaderBackdrop } from '../chunks/shader-backdrop-Ccg25dLQ.js';
 export { B as BACKDROP_PRESETS, P as POST_PASSES } from '../chunks/shader-backdrop-Ccg25dLQ.js';
-import { d as defineLottiePlayer } from '../chunks/lottie-player-BM9ETILJ.js';
+import { d as defineLottiePlayer } from '../chunks/lottie-player-CaVEpHLo.js';
 import { d as defineRive } from '../chunks/rive-wdC-DTmT.js';
 export { R as RIVE_CDN, a as RIVE_PEER, l as loadRiveRuntime, p as provideRiveRuntime } from '../chunks/rive-wdC-DTmT.js';
 import { defineTokenEditor } from '../widgets/token-editor.js';
-import { d as definePhysicsPlayground } from '../chunks/physics-playground-Bcto9lHQ.js';
-export { P as PHYSICS_PRESETS } from '../chunks/physics-playground-Bcto9lHQ.js';
+import { d as definePhysicsPlayground } from '../chunks/physics-playground-DvIxPvKr.js';
+export { P as PHYSICS_PRESETS } from '../chunks/physics-playground-DvIxPvKr.js';
 import { defineMotionPrompt } from '../widgets/motion-prompt.js';
 export { v as viewportHeight, w as watchViewport } from '../chunks/viewport-BAXHhZLV.js';
 
@@ -231,4 +231,4 @@ function defineWidgets(release) {
 }
 
 export { WIDGETS, WIDGET_TAGS, defineAddToCart, defineBadgeWall, defineBarChart, defineBgGenerator, defineCarousel, defineCartDrawer, defineChapterNav, defineChatComposer, defineClockControl, defineCodeExport, defineColorPicker, defineCommandPalette, defineCompare, defineCountdown, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineFestivalBanner, defineField, defineFileDrop, defineGauge, defineGenArt, defineGestureSticker, defineGlScene, defineGlobe, defineGpuParticles, defineGyroCard, defineHeroVideo, defineHudPanel, defineHydrate, defineInstallButton, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLiquidNav, defineLocationCard, defineLottie, defineLottieIcon, defineLottiePlayer, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMessageList, defineMilestones, defineModal, defineMotion, defineMotionInspector, defineMotionPrefs, defineMotionPrompt, defineMotionSpec, defineMusicPlayer, defineNativePreview, defineNavMorph, defineNotificationBell, defineOdometer, defineOrganicCard, defineOtp, definePagination, definePanorama, defineParallaxLayers, definePauseAll, definePerfMonitor, definePhysicsPlayground, definePluginCard, definePluginStore, definePresence, definePrizeWheel, defineProductGallery, defineProgressRing, definePropPanel, definePullCord, defineRadar, defineReactions, defineRedEnvelope, defineRetroButton, defineRive, defineRouteTransition, defineScene, defineScrollRing, defineScrollScene, defineSegmented, defineShaderBackdrop, defineSheet, defineShortcut, defineSkeletonReveal, defineSketchChart, defineSmoothScroll, defineSparkline, defineSpatialCard, defineStarRating, defineStepper, defineStickyWall, defineStories, defineSuggestionChips, defineSwipeDeck, defineSwitch, defineTabBar, defineTerminal, defineTextSplitter, defineThemeSurface, defineThemeSwitcher, defineTip, defineToastStack, defineTokenEditor, defineUploadProgress, defineVideoCard, defineVoiceButton, defineVolumeKnob, defineWeatherCard, defineWidgets, defineWorkerCanvas, defineXpBar };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.1.0/dist/components/widgets.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.0/dist/components/widgets.js.map
