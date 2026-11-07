@@ -171,7 +171,7 @@ export interface UsaElementAttributeMap {
   /** `<usa-liquid>` — Liquid image (motionary/components/webgl). */
   'usa-liquid': {};
   /** `<usa-liquid-nav>` — Liquid nav (motionary/components/widgets). */
-  'usa-liquid-nav': { label?: string | boolean | number; value?: string | boolean | number };
+  'usa-liquid-nav': { label?: string | boolean | number; orientation?: string | boolean | number; value?: string | boolean | number };
   /** `<usa-loading-bar>` — Top loading bar (motionary/components/page). */
   'usa-loading-bar': { color?: string | boolean | number; height?: string | boolean | number; label?: string | boolean | number };
   /** `<usa-location-card>` — Location card (motionary/components/widgets). */

@@ -2215,6 +2215,7 @@ interface UsaElementAttributeMap {
     /** `<usa-liquid-nav>` — Liquid nav (motionary/components/widgets). */
     'usa-liquid-nav': {
         label?: string | boolean | number;
+        orientation?: string | boolean | number;
         value?: string | boolean | number;
     };
     /** `<usa-loading-bar>` — Top loading bar (motionary/components/page). */

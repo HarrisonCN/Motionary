@@ -1,2 +1,2 @@
-export { d as defineScrollScene } from '../chunks/scroll-scene-D7ZSgODx.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.1/dist/widgets/scroll-scene.js.map
+export { d as defineScrollScene } from '../chunks/scroll-scene-lKUQxx1b.js';
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.1.0/dist/widgets/scroll-scene.js.map

@@ -60,14 +60,14 @@ export function defineMagnetic(tag = 'usa-magnetic'): CustomElementConstructor |
         }
 
         private release(): void {
+          caf(this._frame);
+          this._frame = 0;
           this.removeAttribute('data-active');
           this.style.removeProperty('--usa-mx');
           this.style.removeProperty('--usa-my');
         }
 
         unmount(): void {
-          caf(this._frame);
-          this._frame = 0;
           this.release();
         }
       },

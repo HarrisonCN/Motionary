@@ -1,4 +1,3 @@
-import { raf as sraf, caf as scaf } from '../base';
 import { defineElement, type UsaElement } from '../base';
 import css from './liquid-nav.css?raw';
 
@@ -7,8 +6,10 @@ import css from './liquid-nav.css?raw';
  * drop of liquid: moving to another item it stretches like a droplet
  * towards the target, then settles with a wobble (gooey SVG filter).
  * Children are links or buttons; `value` (index) / `aria-current`; arrow
- * keys move focus. `usa:change` { index, item }. A labelled `nav`; reduced
- * motion: the drop jumps.
+ * keys move focus (RTL-aware); Home/End jump to the first/last enabled item.
+ * `orientation="vertical"` places the drop beside a sidebar. Interrupted
+ * transitions continue from the visible drop; layout changes realign it.
+ * `usa:change` { index, item }. A labelled `nav`; reduced motion: the drop jumps.
  */
 export interface UsaLiquidNavElement extends UsaElement {
   value: number;
@@ -22,9 +23,10 @@ export function defineLiquidNav(tag = 'usa-liquid-nav'): CustomElementConstructo
     (Base) => {
       class UsaLiquidNav extends Base {
         static get observedAttributes(): string[] {
-          return ['label', 'value'];
+          return ['label', 'value', 'orientation'];
         }
         private _i = 0;
+        private _animations: Animation[] = [];
         private _id = `usa-lq-${++uid}`;
         private items(): HTMLElement[] {
           return Array.from(this.children).filter((c) => !c.hasAttribute('data-usa-part')) as HTMLElement[];
@@ -33,7 +35,7 @@ export function defineLiquidNav(tag = 'usa-liquid-nav'): CustomElementConstructo
           return this._i;
         }
         set value(i: number) {
-          this.select(i, false);
+          if (Number.isInteger(i) && this.items()[i]) this.setAttribute('value', String(i));
         }
         mount(): void {
           this.querySelectorAll(':scope > [data-usa-part]').forEach((n) => n.remove());
@@ -45,47 +47,92 @@ export function defineLiquidNav(tag = 'usa-liquid-nav'): CustomElementConstructo
           );
           const items = this.items();
           const cur = items.findIndex((it) => it.getAttribute('aria-current') === 'page' || it.hasAttribute('data-active'));
-          this._i = cur >= 0 ? cur : Math.max(0, Math.min(items.length - 1, Math.round(this.num('value', 0))));
+          this._i = !this.hasAttribute('value') && cur >= 0 ? cur : Math.max(0, Math.min(items.length - 1, Math.round(this.num('value', 0))));
+          this.dataset.orientation = this.vertical ? 'vertical' : 'horizontal';
           items.forEach((it, i) => {
             it.classList.add('usa-lq-item');
             this.listen(it, 'click', () => this.select(i, true));
             this.listen(it, 'keydown', (e: KeyboardEvent) => {
-              const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
-              if (!d) return;
+              const enabled = items.filter((item) => !this.disabled(item));
+              const rtl = getComputedStyle(this).direction === 'rtl';
+              const next = this.vertical ? 'ArrowDown' : rtl ? 'ArrowLeft' : 'ArrowRight';
+              const previous = this.vertical ? 'ArrowUp' : rtl ? 'ArrowRight' : 'ArrowLeft';
+              const d = e.key === next ? 1 : e.key === previous ? -1 : 0;
+              if ((!d && e.key !== 'Home' && e.key !== 'End') || !enabled.length) return;
               e.preventDefault();
-              items[(i + d + items.length) % items.length].focus();
+              const index = e.key === 'Home' ? 0 : e.key === 'End' ? enabled.length - 1 : (enabled.indexOf(items[i]) + d + enabled.length) % enabled.length;
+              enabled[index].focus();
             });
           });
-          sraf(() => this.place(false));
           this.place(false);
-          this.listen(window, 'resize', () => this.place(false));
+          // ResizeObserver already batches size changes before paint; writing
+          // transforms here does not resize the observed elements.
+          const realign = () => this.place(false);
+          if (typeof ResizeObserver === 'function') {
+            const observer = new ResizeObserver(realign);
+            observer.observe(this);
+            items.forEach((item) => observer.observe(item));
+            this.onCleanup(() => observer.disconnect());
+          }
+          this.listen(window, 'resize', realign);
+        }
+        private get vertical(): boolean {
+          return this.getAttribute('orientation') === 'vertical';
+        }
+        private disabled(item: HTMLElement): boolean {
+          return item.matches(':disabled, [aria-disabled="true"], [hidden], [inert]');
+        }
+        changed(name: string): void {
+          if (name === 'value') {
+            this.select(Math.max(0, Math.min(this.items().length - 1, Math.round(this.num('value', 0)))), false);
+          } else super.changed(name);
         }
         private select(i: number, user: boolean): void {
           const items = this.items();
-          if (!items[i] || (i === this._i && user)) return;
-          const from = this._i;
+          if (!items[i] || (user && this.disabled(items[i])) || i === this._i) return;
           this._i = i;
-          this.place(user && !this.reduced, from);
+          // Keep declarative state in sync so reconnects preserve the selection.
+          this.setAttribute('value', String(i));
+          this.place(user && !this.reduced);
           if (user) this.emit('change', { index: i, item: items[i] });
         }
-        private place(animate: boolean, from = this._i): void {
+        private stop(): void {
+          this._animations.forEach((animation) => animation.cancel());
+          this._animations = [];
+        }
+        unmount(): void {
+          this.stop();
+        }
+        private place(animate: boolean): void {
           const items = this.items();
           items.forEach((it, k) => {
             if (k === this._i) it.setAttribute('aria-current', 'page');
             else it.removeAttribute('aria-current');
           });
           const it = items[this._i];
-          const drop = this.querySelector('.usa-lq-drop') as HTMLElement | null;
-          const tail = this.querySelector('.usa-lq-tail') as HTMLElement | null;
+          const drop = this.querySelector<HTMLElement>('.usa-lq-drop');
+          const tail = this.querySelector<HTMLElement>('.usa-lq-tail');
           if (!it || !drop || !tail) return;
-          const x = it.offsetLeft + it.offsetWidth / 2;
-          const px = items[from] ? items[from].offsetLeft + items[from].offsetWidth / 2 : x;
-          drop.style.transform = `translateX(${x}px)`;
-          tail.style.transform = `translateX(${x}px)`;
-          if (!animate || px === x) return;
-          const dir = Math.sign(x - px);
-          this.motion(drop, [{ transform: `translateX(${px}px) scale(1)` }, { transform: `translateX(${px + (x - px) * 0.6}px) scale(1.35, .8)`, offset: 0.45 }, { transform: `translateX(${x + dir * 4}px) scale(.9, 1.12)`, offset: 0.75 }, { transform: `translateX(${x}px) scale(1)` }], { duration: 620, easing: 'cubic-bezier(.4,0,.2,1)' });
-          this.motion(tail, [{ transform: `translateX(${px}px) scale(1)` }, { transform: `translateX(${px + (x - px) * 0.25}px) scale(.7)`, offset: 0.5 }, { transform: `translateX(${x}px) scale(.9)`, offset: 0.85 }, { transform: `translateX(${x}px) scale(1)` }], { duration: 760, easing: 'cubic-bezier(.4,0,.2,1)' });
+          const vertical = this.vertical;
+          const axis = vertical ? 'Y' : 'X';
+          const target = vertical ? it.offsetTop + it.offsetHeight / 2 : it.offsetLeft + it.offsetWidth / 2;
+          // Capture each rendered transform before cancellation. This also
+          // preserves continuity inside scaled or transformed containers.
+          const starts = [drop, tail].map((node) => getComputedStyle(node).transform);
+          this.stop();
+          const end = `translate${axis}(${target}px)`;
+          drop.style.transform = end;
+          tail.style.transform = end;
+          if (!animate) return;
+          const stretch = vertical ? 'scale(.8, 1.35)' : 'scale(1.35, .8)';
+          [drop, tail].forEach((node, i) => {
+            const animation = this.motion(node, [
+              { transform: starts[i] },
+              { transform: `${end} ${stretch}`, offset: 0.7 },
+              { transform: end },
+            ], { duration: i ? 760 : 620, easing: 'cubic-bezier(.4,0,.2,1)' });
+            if (animation) this._animations.push(animation);
+          });
         }
       }
       return UsaLiquidNav as unknown as CustomElementConstructor;

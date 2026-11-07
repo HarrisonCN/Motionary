@@ -98,13 +98,13 @@ function defineMagnetic(tag = 'usa-magnetic') {
             this.listen(window, 'blur', () => this.release());
         }
         release() {
+            caf(this._frame);
+            this._frame = 0;
             this.removeAttribute('data-active');
             this.style.removeProperty('--usa-mx');
             this.style.removeProperty('--usa-my');
         }
         unmount() {
-            caf(this._frame);
-            this._frame = 0;
             this.release();
         }
     }, { id: 'magnetic', text: css$3 });
@@ -255,13 +255,12 @@ function definePress(tag = 'usa-press') {
         constructor() {
             super(...arguments);
             this._anim = null;
-            this._down = false;
         }
         static get observedAttributes() {
             return ['disabled', 'scale', 'bounce'];
         }
         get pressed() {
-            return this._down;
+            return this.hasAttribute('data-pressed');
         }
         frame(down) {
             if (this.reduced)
@@ -269,25 +268,24 @@ function definePress(tag = 'usa-press') {
             return { transform: down ? `scale(${this.num('scale', 0.95)})` : 'scale(1)' };
         }
         down() {
-            if (this._down || this.flag('disabled'))
+            if (this.pressed || this.flag('disabled'))
                 return;
-            this._down = true;
             this.setAttribute('data-pressed', '');
             const from = this.currentFrame();
             this._anim?.cancel();
             this._anim = this.motion(this, [from, this.frame(true)], { duration: 120, easing: 'cubic-bezier(0.3, 0, 0.7, 1)', fill: 'forwards' });
         }
         up() {
-            if (!this._down)
+            if (!this.pressed)
                 return;
-            this._down = false;
             this.removeAttribute('data-pressed');
             const from = this.currentFrame();
             this._anim?.cancel();
-            const frames = this.flag('bounce') && !this.reduced
+            const bounce = this.flag('bounce');
+            const frames = bounce && !this.reduced
                 ? [from, { transform: 'scale(1.06)', offset: 0.45 }, { transform: 'scale(0.99)', offset: 0.75 }, this.frame(false)]
                 : [from, this.frame(false)];
-            const a = this.motion(this, frames, { duration: this.flag('bounce') ? 480 : 320, easing: EASE_SPRING });
+            const a = this.motion(this, frames, { duration: bounce ? 480 : 320, easing: EASE_SPRING });
             this._anim = a;
             if (a)
                 a.onfinish = () => this._anim === a && (this._anim = null);
@@ -304,7 +302,7 @@ function definePress(tag = 'usa-press') {
                     return;
                 this.down();
             });
-            for (const t of ['pointerup', 'pointerleave', 'pointercancel', 'blur'])
+            for (const t of ['pointerup', 'pointerleave', 'pointercancel', 'focusout'])
                 this.listen(this, t, () => this.up());
             this.listen(this, 'keydown', (e) => (e.key === ' ' || e.key === 'Enter') && !e.repeat && this.down());
             this.listen(this, 'keyup', (e) => (e.key === ' ' || e.key === 'Enter') && this.up());
@@ -312,7 +310,7 @@ function definePress(tag = 'usa-press') {
         unmount() {
             this._anim?.cancel();
             this._anim = null;
-            this._down = false;
+            this.removeAttribute('data-pressed');
         }
     }, { id: 'press', text: css });
 }
@@ -332,4 +330,4 @@ function defineInteractionComponents() {
 }
 
 export { defineInteractionComponents, defineMagnetic, definePress, defineRipple, defineSpotlight, defineTilt };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.1/dist/components/interaction.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.1.0/dist/components/interaction.js.map

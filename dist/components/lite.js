@@ -2618,13 +2618,13 @@ function defineMagnetic(tag = 'usa-magnetic') {
             this.listen(window, 'blur', () => this.release());
         }
         release() {
+            caf(this._frame);
+            this._frame = 0;
             this.removeAttribute('data-active');
             this.style.removeProperty('--usa-mx');
             this.style.removeProperty('--usa-my');
         }
         unmount() {
-            caf(this._frame);
-            this._frame = 0;
             this.release();
         }
     }, { id: 'magnetic', text: css$V });
@@ -2775,13 +2775,12 @@ function definePress(tag = 'usa-press') {
         constructor() {
             super(...arguments);
             this._anim = null;
-            this._down = false;
         }
         static get observedAttributes() {
             return ['disabled', 'scale', 'bounce'];
         }
         get pressed() {
-            return this._down;
+            return this.hasAttribute('data-pressed');
         }
         frame(down) {
             if (this.reduced)
@@ -2789,25 +2788,24 @@ function definePress(tag = 'usa-press') {
             return { transform: down ? `scale(${this.num('scale', 0.95)})` : 'scale(1)' };
         }
         down() {
-            if (this._down || this.flag('disabled'))
+            if (this.pressed || this.flag('disabled'))
                 return;
-            this._down = true;
             this.setAttribute('data-pressed', '');
             const from = this.currentFrame();
             this._anim?.cancel();
             this._anim = this.motion(this, [from, this.frame(true)], { duration: 120, easing: 'cubic-bezier(0.3, 0, 0.7, 1)', fill: 'forwards' });
         }
         up() {
-            if (!this._down)
+            if (!this.pressed)
                 return;
-            this._down = false;
             this.removeAttribute('data-pressed');
             const from = this.currentFrame();
             this._anim?.cancel();
-            const frames = this.flag('bounce') && !this.reduced
+            const bounce = this.flag('bounce');
+            const frames = bounce && !this.reduced
                 ? [from, { transform: 'scale(1.06)', offset: 0.45 }, { transform: 'scale(0.99)', offset: 0.75 }, this.frame(false)]
                 : [from, this.frame(false)];
-            const a = this.motion(this, frames, { duration: this.flag('bounce') ? 480 : 320, easing: EASE_SPRING });
+            const a = this.motion(this, frames, { duration: bounce ? 480 : 320, easing: EASE_SPRING });
             this._anim = a;
             if (a)
                 a.onfinish = () => this._anim === a && (this._anim = null);
@@ -2824,7 +2822,7 @@ function definePress(tag = 'usa-press') {
                     return;
                 this.down();
             });
-            for (const t of ['pointerup', 'pointerleave', 'pointercancel', 'blur'])
+            for (const t of ['pointerup', 'pointerleave', 'pointercancel', 'focusout'])
                 this.listen(this, t, () => this.up());
             this.listen(this, 'keydown', (e) => (e.key === ' ' || e.key === 'Enter') && !e.repeat && this.down());
             this.listen(this, 'keyup', (e) => (e.key === ' ' || e.key === 'Enter') && this.up());
@@ -2832,7 +2830,7 @@ function definePress(tag = 'usa-press') {
         unmount() {
             this._anim?.cancel();
             this._anim = null;
-            this._down = false;
+            this.removeAttribute('data-pressed');
         }
     }, { id: 'press', text: css$S });
 }
@@ -11041,4 +11039,4 @@ const STYLE_BASE = new URL('../', import.meta.url).href;
 onDemandStyles(STYLE_BASE);
 
 export { ALL_TAGS, AMBIENT_EFFECTS, ANIM_ICONS, BRIDGE_PROTOCOL_VERSION, BUILTIN_EFFECTS, BUTTON_DEFORMS, CARD_EFFECTS, CLICK_EFFECTS, COMPONENT_CATEGORIES, CURSOR_MODES, EFFECT_KINDS, EFFECT_TRIGGERS, GL_FALLBACKS, JOINING_SCRIPT, LIVE_REGION_IDS, MASK_SHAPES, MORPH_ICONS, MOTION_SCALE, MOTION_SENSITIVITY, MOTION_SENSITIVITY_LEVELS, MOTION_TOKENS, PACKS, PACK_PRIMITIVES, PAGE_EFFECTS, PARTICLE_PRESETS, POST_EFFECTS, REVEAL_EFFECTS, SENSITIVITY_CSS, SHADERS, SPINNER_VARIANTS, SPRING_EFFECTS, SPRING_PRESETS, STATIC_ALTERNATIVES, STYLE_BASE, TIMELINE_PRESETS, VARIANTS, activeAnimations, adaptKeyframes, adoptVariants, animateWithMotion, animationBudget, announce, applyMotionTokens, applyNativeSettings, applyPack, auditMotionA11y, autoAnimate, autoDegrade, baselineReport, bindEffect, categoryOf, configureComponents, connectNativeShell, countUp, createSpring, defineAccordion, defineAcrylic, defineAmbient, defineAnimIcon, defineAurora, defineAutoAnimate, defineAutoSkeleton, defineAvatarStack, defineBackToTop, defineBackgroundComponents, defineBadge, defineBlobs, defineBottomSheet, defineButton, defineCard, defineCardComponents, defineCardStack, defineCarousel3d, defineCheck, defineCheckbox, defineClick, defineClickComponents, defineComponents, defineCounter, defineCube, defineCursor, defineDepth, defineDepthComponents, defineDialog, defineDistort, defineDotNetwork, defineDoubleTap, defineDraggable, defineDraw, defineDrawer, defineFab, defineFeedbackComponents, defineFullpage, defineFx, defineFxComponents, defineGestureComponents, defineGlitch, defineGradientText, defineGrain, defineGridGlow, defineHandwriting, defineHold, defineIconMorph, defineInteractionComponents, defineLayoutComponents, defineLike, defineLiquid, defineLoadingBar, defineMagnetic, defineMarquee, defineMaskReveal, defineMasonry, defineMorph, defineMotionSwitch, defineNavbar, defineOverscroll, definePack, definePacksComponents, definePageComponents, defineParticles, definePhysicsComponents, definePinchZoom, definePopover, definePostFx, definePress, defineProgress, definePullRefresh, defineReveal, defineRevealComponents, defineRipple, defineScramble, defineScrollHighlight, defineScrollProgress, defineScrolly, defineShader, defineShimmerText, defineSkeleton, defineSlider, defineSpinner, defineSplash, defineSplitText, defineSpotlight, defineSpring, defineStagger, defineStickyStack, defineSvgComponents, defineSwipeable, defineTabs, defineTextComponents, defineTextRotate, defineTilt, defineTimeline, defineTimelineComponents, defineToaster, defineTransitionComponents, defineTypewriter, defineUiComponents, defineViewSwitch, defineWaterRipple, defineWaveText, defineWebglComponents, detectNativeHost, deviceTilt, drawLines, easeOutExpo, enableMpaTransitions, exportDesignTokens, flip, flipFrames, fluentPreset, flyToCart, fragmentSource, gesture, getEffect, getMotionIntensity, getMotionLevel, getMotionSensitivity, getMotionTokens, glFallbackCss, glGovernor, glQuad, graphemes, haptic, hasEffect, importDesignTokens, importMotionTokens, interpolatePath, isTrustedMessage, linearEasing, listEffects, liveRegion, loadCategoryStyles, loadedStyles, loadingBar, masonryLayout, mergeMotionTokens, morphPath, morphTo, motionAllowed, motionScale, motionToken, motionTokensToCss, motionTokensToJSON, motionTokensToVars, motionVar, onDemandStyles, onFrame, orientationToTilt, pageTransition, parseDuration, parseEasing, parseNativeSettings, pathsCompatible, pinchScale, playEffect, postFxShader, postToNative, prefersReducedMotion, projectInertia, readScrollProgress, registerBuiltinEffects, registerEffect, registerEffects, requestOrientationPermission, resolveDurationToken, resolveEasingToken, resolvePosition, resolveSpring, resolveTokenAliases, restoreMotionIntensity, restoreMotionSensitivity, revealKeyframes, rubberBand, schedulerStats, scrambleFrame, scrollToTarget, setAnimationBudget, setFrameBudget, setMotionIntensity, setMotionLevel, setMotionSensitivity, setVariant, sharedTransition, smoothScroll, snapTo, splitOrder, splitText, splitTimeline, words as splitWords, spring, springEasing, springEffectKeyframes, springSamples, staticAlternative, stepSpring, supportsLinearEasing, supportsNativeScrub, supportsOrientation, supportsViewTransitions, supportsWebGL, swipeDirection, themeTransition, timeline, toast, validateDesignTokens, viewTransition, warnBaseline, watchPowerSaver, withoutDeprecations };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.0.1/dist/components/lite.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.1.0/dist/components/lite.js.map
