@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Studio project auto-merge preserves remotely deleted layers and keeps collaborators’ changes on successive saves from the same open editor. Editing a remotely deleted layer reports a conflict.
+
 ## [17.2.1] - 2026-11-07
 
 ### Fixed
