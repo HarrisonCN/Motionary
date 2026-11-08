@@ -1,4 +1,5 @@
 import typescript from '@rollup/plugin-typescript';
+import tsCompiler from 'typescript';
 import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
 import { dts } from 'rollup-plugin-dts';
@@ -114,16 +115,40 @@ const runtimeIife = () => [
 // on demand instead); shadow-DOM styles stay inlined.
 const cssEmpty = () => ({
   name: 'css-empty',
-  async resolveId(source, importer) {
+  resolveId(source) {
     if (!source.endsWith('.css?raw') || source.endsWith('.shadow.css?raw')) return null;
-    return '\0empty-css:' + source;
+    return '\0empty-css';
   },
   load(id) {
-    return id.startsWith('\0empty-css:') ? 'export default "";' : null;
+    return id === '\0empty-css' ? 'export default "";' : null;
   },
 });
 
-const ts = () => typescript({ tsconfig: './tsconfig.json', declaration: false, declarationDir: undefined });
+// In lite, omit the entire { id, text } registration argument when its imported light-DOM CSS is empty.
+// The conditional keeps shadow styles and component-authored inline styles intact.
+function omitEmptyStyleDescriptors(context) {
+  const ts = tsCompiler;
+  return (file) => {
+    const lightStyles = new Set(file.statements.filter((node) => ts.isImportDeclaration(node)
+      && node.moduleSpecifier.text?.endsWith('.css?raw') && !node.moduleSpecifier.text.endsWith('.shadow.css?raw'))
+      .map((node) => node.importClause?.name?.text));
+    if (!lightStyles.size) return file;
+    const visit = (node) => {
+      if (ts.isObjectLiteralExpression(node) && node.properties.length === 2 && ts.isCallExpression(node.parent)
+          && ts.isIdentifier(node.parent.expression) && node.parent.expression.text === 'defineElement' && node.parent.arguments[2] === node) {
+        const prop = node.properties.find((p) => ts.isPropertyAssignment(p) && p.name.getText(file) === 'text');
+        const id = node.properties.find((p) => ts.isPropertyAssignment(p) && p.name.getText(file) === 'id');
+        if (id && ts.isStringLiteral(id.initializer) && prop && ts.isIdentifier(prop.initializer) && lightStyles.has(prop.initializer.text)) {
+          return ts.factory.createConditionalExpression(prop.initializer, undefined, node, undefined, ts.factory.createVoidZero());
+        }
+      }
+      return ts.visitEachChild(node, visit, context);
+    };
+    return ts.visitNode(file, visit);
+  };
+}
+
+const ts = (options = {}) => typescript({ tsconfig: './tsconfig.json', declaration: false, declarationDir: undefined, ...options });
 
 // 10.5: the build runs in several processes so the sandbox / CI never needs one huge heap
 // (PART=code → JS bundles; PART=dts SLICE=i/n → the i-th of n slices of the declaration bundles; unset → everything).
@@ -188,7 +213,7 @@ export default pick([
       cssEmpty(),
       cssRaw(),
       resolve(),
-      ts(),
+      ts({ transformers: { before: [omitEmptyStyleDescriptors] } }),
       {
         // Declarations: the same API as components (+ perf), no second dts bundle.
         name: 'lite-dts',

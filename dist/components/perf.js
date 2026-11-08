@@ -1,6 +1,6 @@
 import { o as onFrame, B as setStyleLoader, v as animationBudget, w as getMotionIntensity, c as configureComponents, y as setAnimationBudget, q as activeAnimations } from '../chunks/base-BQmWYlDq.js';
 export { x as schedulerStats, z as setFrameBudget } from '../chunks/base-BQmWYlDq.js';
-import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-B-JBecYg.js';
+import { c as categoryForTag } from '../chunks/category-for-tag-WK7MtB-K.js';
 
 /**
  * motionary/components/perf — performance toolkit (4.5).
@@ -73,13 +73,11 @@ function autoDegrade(options = {}) {
         set(false, '');
     };
 }
-const TAG_CATEGORY = {};
-for (const [cat, tags] of Object.entries(COMPONENT_CATEGORIES))
-    for (const t of tags)
-        TAG_CATEGORY[t] = cat;
-/** The category of a default `<usa-*>` tag. */
-const categoryOf = (tag) => TAG_CATEGORY[tag];
 const loaded = /*#__PURE__*/ new Set();
+/** Categories with a pending or loaded Motionary stylesheet. */
+function loadedStyles() {
+    return [...loaded];
+}
 /**
  * Add `<link rel="stylesheet" href="{base}components/{category}.css">` once.
  * `base` is the URL of the package's `dist/` folder.
@@ -87,11 +85,15 @@ const loaded = /*#__PURE__*/ new Set();
 function loadCategoryStyles(category, base) {
     if (typeof document === 'undefined' || loaded.has(category))
         return null;
-    loaded.add(category);
     const link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = `${base.replace(/\/?$/, '/')}${category === 'all' ? 'components.css' : `components/${category}.css`}`;
-    link.setAttribute('data-usa-css', category);
+    link.href = `${base.replace(/\/?$/, '/')}components${category === 'all' ? '' : '/' + category}.css`;
+    link.dataset.usaCss = category;
+    loaded.add(category);
+    link.addEventListener('error', () => {
+        loaded.delete(category);
+        link.remove();
+    }, { once: true });
     document.head.append(link);
     return link;
 }
@@ -100,11 +102,9 @@ function loadCategoryStyles(category, base) {
  * (custom tags fall back to the full stylesheet). Returns an undo.
  */
 function onDemandStyles(base) {
-    setStyleLoader((tag) => loadCategoryStyles(categoryOf(tag) || 'all', base));
+    setStyleLoader((tag) => loadCategoryStyles(categoryForTag(tag) || 'all', base));
     return () => setStyleLoader(null);
 }
-/** Categories whose CSS has been requested so far. */
-const loadedStyles = () => Array.from(loaded);
 
-export { activeAnimations, animationBudget, autoDegrade, categoryOf, loadCategoryStyles, loadedStyles, onDemandStyles, onFrame, setAnimationBudget };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.0/dist/components/perf.js.map
+export { activeAnimations, animationBudget, autoDegrade, categoryForTag as categoryOf, loadCategoryStyles, loadedStyles, onDemandStyles, onFrame, setAnimationBudget };
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/perf.js.map

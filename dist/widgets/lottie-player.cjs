@@ -1,8 +1,8 @@
 'use strict';
 
-var widgets_lottiePlayer = require('../chunks/lottie-player-C-dq35tB.cjs');
+var widgets_lottiePlayer = require('../chunks/lottie-player-C8NxAf1o.cjs');
 
 
 
 exports.defineLottiePlayer = widgets_lottiePlayer.defineLottiePlayer;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.0/dist/widgets/lottie-player.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/widgets/lottie-player.cjs.map

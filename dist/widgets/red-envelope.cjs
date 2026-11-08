@@ -70,4 +70,4 @@ function defineRedEnvelope(tag = 'usa-red-envelope') {
 }
 
 exports.defineRedEnvelope = defineRedEnvelope;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.0/dist/widgets/red-envelope.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/widgets/red-envelope.cjs.map

@@ -47,6 +47,9 @@ declare const COMPONENT_CATEGORIES: {
 };
 type ComponentCategory = keyof typeof COMPONENT_CATEGORIES;
 
+/** Resolve either default element name without loading its component implementation. */
+declare function categoryForTag(tag: string): ComponentCategory | undefined;
+
 /**
  * motionary/components/perf — performance toolkit (4.5).
  *
@@ -87,8 +90,9 @@ interface DegradeState {
  * `usa:degrade` on `document`. Returns a stop function (restores settings).
  */
 declare function autoDegrade(options?: AutoDegradeOptions): () => void;
-/** The category of a default `<usa-*>` tag. */
-declare const categoryOf: (tag: string) => ComponentCategory | undefined;
+
+/** Categories with a pending or loaded Motionary stylesheet. */
+declare function loadedStyles(): string[];
 /**
  * Add `<link rel="stylesheet" href="{base}components/{category}.css">` once.
  * `base` is the URL of the package's `dist/` folder.
@@ -99,8 +103,6 @@ declare function loadCategoryStyles(category: ComponentCategory | 'all', base: s
  * (custom tags fall back to the full stylesheet). Returns an undo.
  */
 declare function onDemandStyles(base: string): () => void;
-/** Categories whose CSS has been requested so far. */
-declare const loadedStyles: () => string[];
 
-export { activeAnimations, animationBudget, autoDegrade, categoryOf, loadCategoryStyles, loadedStyles, onDemandStyles, onFrame, schedulerStats, setAnimationBudget, setFrameBudget };
+export { activeAnimations, animationBudget, autoDegrade, categoryForTag as categoryOf, loadCategoryStyles, loadedStyles, onDemandStyles, onFrame, schedulerStats, setAnimationBudget, setFrameBudget };
 export type { AutoDegradeOptions, DegradeState };
