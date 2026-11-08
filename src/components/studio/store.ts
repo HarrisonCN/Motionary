@@ -193,13 +193,15 @@ export function mergeProjects(base: string, mine: string, theirs: string): { ok:
   const B = layersOf(base), M = layersOf(mine), T = layersOf(theirs);
   const mm = new Map(M.layers.map((l) => [String(l.id), l]));
   const out = T.layers.filter((l) => !cm.includes(String(l.id)) || mm.has(String(l.id))).map((l) => (cm.includes(String(l.id)) ? mm.get(String(l.id))! : l));
-  // layers mine added: keep their position relative to mine's order (after the previous layer that exists in out)
-  for (let i = 0; i < M.layers.length; i++) {
-    const id = String(M.layers[i].id);
-    if (out.some((l) => String(l.id) === id)) continue;
-    const prev = i ? String(M.layers[i - 1].id) : undefined;
-    const j = prev === undefined ? -1 : out.findIndex((l) => String(l.id) === prev);
-    out.splice(prev === undefined ? 0 : j < 0 ? out.length : j + 1, 0, M.layers[i]);
+  // Place local additions after the nearest surviving local predecessor.
+  // A layer missing from theirs only belongs back in the result if mine added it.
+  const changedLocally = new Set(cm);
+  let insertAt = 0;
+  for (const layer of M.layers) {
+    const id = String(layer.id);
+    const index = out.findIndex((entry) => String(entry.id) === id);
+    if (index >= 0) insertAt = index + 1;
+    else if (changedLocally.has(id)) out.splice(insertAt++, 0, layer);
   }
   const pick = (b: Json, m: Json, t: Json): Json => {
     const r: Json = { ...t };
@@ -217,21 +219,29 @@ export function mergeProjects(base: string, mine: string, theirs: string): { ok:
  * else"); `merge: 'auto'` merges non-overlapping layer edits and saves the result, and throws on a real conflict.
  */
 export function toAppStorage(store: ProjectStore, o: { merge?: 'refuse' | 'auto' } = {}): { read(name: string): Promise<string | null>; write(name: string, text: string): Promise<void> } {
-  const seen = new Map<string, { rev: string; text: string }>();
+  // write() returns void, so the editor may still hold its original draft after an auto-merge.
+  const seen = new Map<string, { rev: string; text: string; draft?: string }>();
+  function mergeDraft(name: string, ancestor: string, draft: string, saved: string, rev: string): string {
+    const merged = mergeProjects(ancestor, draft, saved);
+    if (!merged.ok) throw new StoreError('conflict', `${name} was saved by someone else and layers ${merged.conflicts.join(', ')} changed on both sides`, rev);
+    return merged.text!;
+  }
   return {
     async read(name) { const r = await store.get(name); if (r) seen.set(name, { rev: r.rev, text: r.text }); else seen.delete(name); return r ? r.text : null; },
     async write(name, text) {
       const base = seen.get(name);
-      try { const { rev } = await store.put(name, text, { baseRev: base?.rev }); seen.set(name, { rev, text }); return; }
-      catch (e) {
+      let saved = base?.draft === undefined ? text : mergeDraft(name, base.draft, text, base.text, base.rev);
+      let rev: string;
+      try {
+        ({ rev } = await store.put(name, saved, { baseRev: base?.rev }));
+      } catch (e) {
         if (!(e instanceof StoreError) || e.code !== 'conflict') throw e;
         const cur = await store.get(name);
         if (o.merge !== 'auto' || !base || !cur) throw new StoreError('conflict', `${name} was saved by someone else (now ${e.currentRev ?? cur?.rev}); reopen it, or save under another name`, e.currentRev ?? cur?.rev);
-        const m = mergeProjects(base.text, text, cur.text);
-        if (!m.ok) throw new StoreError('conflict', `${name} was saved by someone else and layers ${m.conflicts.join(', ')} changed on both sides`, cur.rev);
-        const { rev } = await store.put(name, m.text!, { baseRev: cur.rev });
-        seen.set(name, { rev, text: m.text! });
+        saved = mergeDraft(name, base.text, saved, cur.text, cur.rev);
+        ({ rev } = await store.put(name, saved, { baseRev: cur.rev }));
       }
+      seen.set(name, { rev, text: saved, draft: saved === text ? undefined : text });
     },
   };
 }

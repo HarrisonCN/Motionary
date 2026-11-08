@@ -162,3 +162,42 @@ describe('15.5 toAppStorage: createStudioApp storage with conflict detection', (
     expect((await s.history('p')).length).toBe(3);
   });
 });
+
+describe('Studio saves across project revisions', () => {
+  const scene = (...ids: string[]) => proj(ids.map(id => ({ id })));
+  const ids = (text: string) => JSON.parse(text).scene.layers.map((layer: { id: string }) => layer.id);
+
+  it('places new local layers after the nearest surviving predecessor', () => {
+    const base = scene('a', 'b', 'c');
+    const mine = scene('a', 'b', 'x', 'y', 'c');
+    const result = mergeProjects(base, mine, scene('a', 'c'));
+    expect(ids(result.text!)).toEqual(['a', 'x', 'y', 'c']);
+  });
+
+  it('keeps a remote deletion when it removes the entire layer list', () => {
+    expect(ids(mergeProjects(scene('a'), scene('a'), scene()).text!)).toEqual([]);
+  });
+
+  it('retains remote edits on successive saves from an editor that has not reopened', async () => {
+    const store = createMemoryProjectStore();
+    const editor = toAppStorage(store, { merge: 'auto' });
+    await editor.write('demo', scene('a'));
+    const first = (await store.get('demo'))!;
+    await store.put('demo', scene('a', 'remote'), { baseRev: first.rev });
+    await editor.write('demo', scene('a', 'local'));
+    await editor.write('demo', scene('a', 'local', 'later'));
+    expect(ids((await editor.read('demo'))!)).toEqual(['a', 'local', 'later', 'remote']);
+  });
+
+  it('refuses a later edit to a remotely deleted layer without changing history', async () => {
+    const store = createMemoryProjectStore();
+    const editor = toAppStorage(store, { merge: 'auto' });
+    await editor.write('demo', scene('a', 'b'));
+    await store.put('demo', scene('a'), { baseRev: (await store.get('demo'))!.rev });
+    await editor.write('demo', scene('a', 'b', 'x'));
+    const before = await store.history('demo');
+    await expect(editor.write('demo', proj([{ id: 'a' }, { id: 'b', o: 0.5 }, { id: 'x' }]))).rejects.toMatchObject({ code: 'conflict' });
+    expect(await store.history('demo')).toEqual(before);
+    expect(ids((await editor.read('demo'))!)).toEqual(['a', 'x']);
+  });
+});
