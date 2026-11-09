@@ -1,5 +1,5 @@
-import '../chunks/registry-BdSDdeL7.js';
-import '../chunks/generative-BFR11LSL.js';
+import '../chunks/registry-QiOscU6y.js';
+import '../chunks/generative-DMAoHirS.js';
 import '../chunks/shared-CkKHWrtJ.js';
-export { G as GPU_FX, r as registerGpuPack } from '../chunks/gpu-Bl7ZKR8x.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/fx-gpu.js.map
+export { G as GPU_FX, r as registerGpuPack } from '../chunks/gpu-DWwiluNu.js';
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/fx-gpu.js.map

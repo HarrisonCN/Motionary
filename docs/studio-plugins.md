@@ -64,14 +64,16 @@ Exporter paths must be relative (`css/scene.css`; no `..`, no absolute paths, no
 
 ## Sandboxes
 
-- `host.load(manifest, code)` / `createWorkerTransport(code)` — a Worker from a Blob URL. Best for exporters: an
-  endless loop cannot block the Studio and is cut by the time limit.
-- `createIframeTransport(code, parent?)` — a hidden `<iframe sandbox="allow-scripts">` (opaque origin: no cookies,
-  storage or access to the Studio DOM) with a `default-src 'none'` CSP, so the plugin cannot load or send anything.
+- `host.load(manifest, code)` and `createWorkerTransport(code)` create a dedicated Worker inside an opaque-origin
+  sandboxed iframe. The plugin runs on its own thread. Its origin separates it from Studio storage, and its CSP
+  blocks network requests. The host terminates exporters that exceed their time limit.
+- `createIframeTransport(code, parent?)` runs the plugin in an opaque-origin iframe with scripts enabled.
+  Both transports exchange application data through a private MessagePort. A second frame load closes the port
+  and marks the plugin as crashed.
 - `createLocalTransport(fn)` — runs `fn(motionary)` in-process with the same message protocol. **No sandbox**: for
   tests and code you trust.
 
-`pluginWorkerSource(code)` / `pluginFrameSource(code)` return the generated sources if you host them yourself.
+`pluginWorkerSource(code)` / `pluginFrameSource(code)` return the generated sources for custom hosts. Custom hosts supply the isolation boundary. For frame sources, transfer one MessagePort from the parent on the first load.
 
 Size: `motionary/studio/plugins` is its own entry (about 3 KB gzip, budget line 4 KB); it is not part of lite or
 `motionary/studio`.

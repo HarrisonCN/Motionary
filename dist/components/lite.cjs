@@ -144,20 +144,23 @@ function getBase() {
         connectedCallback() {
             if (this._connected)
                 return;
-            this._connected = true;
             // 13.5.0: a property set before the element was defined (React 18 wrappers, Vue `.prop`, Svelte, Angular
             // `[prop]` while hydrating, then define) sits on the instance and hides the class's setter — move it through.
             for (const [k, v] of Object.entries(this))
                 if (k in Object.getPrototypeOf(this))
                     delete this[k], (this[k] = v);
+            const start = () => {
+                this._connected = true;
+                this.mount();
+            };
             styleLoader?.(this.localName);
             // Upgraded while the parser is still inside us (a <script> in <head>
             // defined the element): children/text are not there yet, so wait.
             if (document.readyState === 'loading' && !this.nextSibling && !this.childNodes.length) {
                 // listen() = addEventListener + a cleanup that removes it (same as before, smaller)
-                return this.listen(document, 'DOMContentLoaded', () => this._connected && this.isConnected && this.mount(), { once: true });
+                return this.listen(document, 'DOMContentLoaded', start, { once: true });
             }
-            this.mount();
+            start();
         }
         disconnectedCallback() {
             this._connected = false;
@@ -170,8 +173,10 @@ function getBase() {
         }
         /** Re-mount on attribute change (override for finer updates). */
         changed(_name) {
-            this.teardown();
-            this.mount();
+            if (this._connected) {
+                this.teardown();
+                this.mount();
+            }
         }
         teardown() {
             this._cleanups.splice(0).reverse().forEach((fn) => fn());
@@ -343,7 +348,19 @@ function flushFrame(t) {
     if (!c.paused) {
         const cdt = dt * c.rate;
         c.time += cdt;
-        frameListeners.forEach((el, fn) => (gate(el) ? p++ : (live++, fn(t, cdt))));
+        frameListeners.forEach((el, fn) => {
+            if (gate(el))
+                p++;
+            else {
+                live++;
+                try {
+                    fn(t, cdt);
+                }
+                catch (e) {
+                    error ?? (error = e);
+                }
+            }
+        });
     }
     st.parked += p;
     // everything parked: the pause hook's wake() restarts the loop
@@ -7804,9 +7821,11 @@ function defineBackToTop(tag = 'usa-back-to-top') {
         }
         mount() {
             if (!this.querySelector('button')) {
-                this.innerHTML = `<button type="button" aria-label="${this.str('label', 'Back to top')}"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="16" pathLength="100"/><path d="M12 20l6-6 6 6"/></svg></button>`;
+                this.innerHTML = `<button type="button" data-usa-part><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="16" pathLength="100"/><path d="M12 20l6-6 6 6"/></svg></button>`;
             }
             const btn = this.querySelector('button');
+            if (btn.hasAttribute('data-usa-part'))
+                btn.setAttribute('aria-label', this.str('label', 'Back to top'));
             const update = () => {
                 this._frame = 0;
                 const y = window.scrollY || document.documentElement.scrollTop || 0;
@@ -11184,4 +11203,4 @@ exports.viewTransition = viewTransition;
 exports.warnBaseline = warnBaseline;
 exports.watchPowerSaver = watchPowerSaver;
 exports.withoutDeprecations = withoutDeprecations;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/lite.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/lite.cjs.map

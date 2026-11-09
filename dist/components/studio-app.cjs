@@ -1,10 +1,10 @@
 'use strict';
 
 var components_studio = require('./studio.cjs');
-var format = require('../chunks/format-b5fQz-vc.cjs');
-var history = require('../chunks/history-B0Ml40k1.cjs');
+var format = require('../chunks/format-CcfR6-Jx.cjs');
+var history = require('../chunks/history-rim_8RCX.cjs');
 require('../chunks/ease-HwYZnZat.cjs');
-var project = require('../chunks/project-DiTOvzic.cjs');
+var project = require('../chunks/project-DIZ0UqvG.cjs');
 
 /**
  * `motionary/studio/app` (= `motionary/components/studio-app`, 15.0) — Motion Studio 2.0: one call puts the 14.x
@@ -239,4 +239,4 @@ exports.STUDIO_APP_VERSION = STUDIO_APP_VERSION;
 exports.createLocalStorage = createLocalStorage;
 exports.createMemoryStorage = createMemoryStorage;
 exports.createStudioApp = createStudioApp;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/studio-app.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/studio-app.cjs.map

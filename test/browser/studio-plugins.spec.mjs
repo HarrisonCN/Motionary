@@ -19,7 +19,7 @@ test.describe('16.2 Studio plugins', () => {
       host.load(m('com.example.worker', ['project:read', 'panel', 'exporter']), `(async () => {
         const p = await motionary.getProject();
         await motionary.setPanel({ title: 'W', text: p.scene.layers.length + ' layer' });
-        await motionary.onExport((q) => ({ 'scene.txt': 'duration ' + q.scene.duration }));
+        await motionary.onExport((q) => ({ 'scene.txt': 'duration ' + q.scene.duration + ' origin ' + self.origin }));
         try { await motionary.propose(p, 'no'); } catch (e) { await motionary.setPanel({ title: 'W', text: e.message }); }
       })();`);
       host.load(m('com.example.frame', ['project:read', 'project:propose']), P.createIframeTransport(`(async () => {
@@ -39,6 +39,10 @@ test.describe('16.2 Studio plugins', () => {
       const looped = await host.runExporter('com.example.loop');
       await until(() => host.plugins().find((p) => p.id === 'com.example.crash')?.status === 'crashed');
       const again = await host.runExporter('com.example.worker'); // host + healthy plugin still fine
+      // The browser replaces the plugin document with another local, empty document.
+      const frame = [...document.querySelectorAll('iframe')].find(f => f.srcdoc.includes("cookie === 'blocked'"));
+      frame.removeAttribute('srcdoc');
+      await until(() => host.plugins().find(p => p.id === 'com.example.frame')?.status === 'crashed');
       const status = Object.fromEntries(host.plugins().map((p) => [p.id, p.status]));
       const denied = host.audit.filter((a) => !a.allowed).map((a) => a.plugin + ' ' + a.method);
       return { proposals, panel: host.panels()[0], exp, looped: looped.ok, again: again.ok, status, denied };
@@ -46,10 +50,10 @@ test.describe('16.2 Studio plugins', () => {
     expect(r.proposals).toEqual([[2000, 'com.example.frame', 'longer'], [-1, 'com.example.frame', 'cookie']]);
     expect(r.panel.plugin).toBe('com.example.worker');
     expect(r.panel.text).toMatch(/permission "project:propose"/);
-    expect(r.exp).toEqual({ ok: true, value: { files: { 'scene.txt': 'duration 1000' } } });
+    expect(r.exp).toEqual({ ok: true, value: { files: { 'scene.txt': 'duration 1000 origin null' } } });
     expect(r.looped).toBe(false);
     expect(r.again).toBe(true);
-    expect(r.status).toEqual({ 'com.example.worker': 'running', 'com.example.frame': 'running', 'com.example.crash': 'crashed', 'com.example.loop': 'crashed' });
+    expect(r.status).toEqual({ 'com.example.worker': 'running', 'com.example.frame': 'crashed', 'com.example.crash': 'crashed', 'com.example.loop': 'crashed' });
     expect(r.denied).toEqual(['com.example.worker project.propose']);
     expectNoErrors(page, 'studio plugins');
   });

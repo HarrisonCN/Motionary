@@ -27,9 +27,10 @@ export function defineBackToTop(tag = 'usa-back-to-top'): CustomElementConstruct
         }
         mount(): void {
           if (!this.querySelector('button')) {
-            this.innerHTML = `<button type="button" aria-label="${this.str('label', 'Back to top')}"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="16" pathLength="100"/><path d="M12 20l6-6 6 6"/></svg></button>`;
+            this.innerHTML = `<button type="button" data-usa-part><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="16" pathLength="100"/><path d="M12 20l6-6 6 6"/></svg></button>`;
           }
           const btn = this.querySelector('button')!;
+          if (btn.hasAttribute('data-usa-part')) btn.setAttribute('aria-label', this.str('label', 'Back to top'));
           const update = () => {
             this._frame = 0;
             const y = window.scrollY || document.documentElement.scrollTop || 0;

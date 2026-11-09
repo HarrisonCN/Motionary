@@ -57,7 +57,10 @@ npm i motionary
 <script src="https://unpkg.com/motionary@17/dist/presets-extended.umd.js"></script> <!-- 再加 181 个预设 -->
 <script src="https://unpkg.com/motionary@17/dist/components.umd.js"></script>       <!-- motionary/components 的元素：window.UsaComponents -->
 <script src="https://unpkg.com/motionary@17/dist/widgets.umd.js"></script>          <!-- 小部件：window.UsaWidgets -->
+<mo-reveal effect="fade-up"><h2>Hello</h2></mo-reveal>
 ```
+
+v17 的 CDN 包会自动注册 `<mo-*>` 标签。使用 ES 模块时，先从 `motionary/components/mo` 导入并调用 `defineMoAliases()`，再注册所需组件。两套标签都使用 `usa:*` 事件和 `--usa-*` CSS 自定义属性。[v17 迁移指南](./docs/migrating-to-v17.md)
 
 也可以用 jsDelivr：`https://cdn.jsdelivr.net/npm/motionary@17/dist/…`。还在用 `use-scroll-animate`？它会继续以相同版本发布；要切换，只需在 import 和 URL 中替换包名（[详情](./docs/versions.md)）。
 
@@ -300,7 +303,7 @@ AI 助手与 provider（`motionary/studio/ai`、`motionary/ai*`）、MCP 服务�
 每个入口在 [`size-budget.json`](./size-budget.json) 中都有固定的 gzip 预算（共 401 项）。任何入口超出预算，CI 就会失败，预算也从不自动上调。
 
 <!-- size-table:start -->
-17.2.1 构建的实测值（minify + gzip），由 `scripts/size.mjs --report` 生成：
+17.2.2 构建的实测值（minify + gzip），由 `scripts/size.mjs --report` 生成：
 
 | 导入内容 | gzip | 上限 |
 |---|---:|---:|
@@ -342,7 +345,7 @@ npx usa-codemod-13 --write      # 一并改写，并把固定在 @10 / @11 / @12
 
 ## 版本与兼容性
 
-- **npm dist-tags：** `latest` 指向当前大版本的最新版本（<!--ver:version-->17.2.1<!--/ver-->；从 14.1 起次版本也会移动它）。每个次版本另有自己的标签 `v<major>-<minor>`（例如 `v15-0`），`v15-line` 跟随 15.x，`v14-lts` 为 14.9.x。`motionary` 与 `use-scroll-animate` 总是以相同版本一起发布。
+- **npm dist-tags：** `latest` 指向当前大版本的最新版本（<!--ver:version-->17.2.2<!--/ver-->；从 14.1 起次版本也会移动它）。每个次版本另有自己的标签 `v<major>-<minor>`（例如 `v15-0`），`v15-line` 跟随 15.x，`v14-lts` 为 14.9.x。`motionary` 与 `use-scroll-animate` 总是以相同版本一起发布。
 - **CDN：** URL 固定到大版本（`motionary@<!--ver:major-->17<!--/ver-->`）；固定到具体版本（`motionary@12.4.0`）的链接也继续可用。
 - **语义化版本：** 破坏性变更只出现在大版本，每次都附带升级指南和 codemod。弃用的内容会保留到下一个大版本，期间类型标记为 `@deprecated`，运行时不输出警告。
 - **各版本包含什么：** 每个组件和运行时模块的 `since` / `changed`（[docs/version-compat.md](./docs/version-compat.md)），以及逐项功能支持（[docs/compat-matrix.md](./docs/compat-matrix.md)）。

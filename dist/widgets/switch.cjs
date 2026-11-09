@@ -1,8 +1,8 @@
 'use strict';
 
-var widgets_switch = require('../chunks/switch-DiTlApGd.cjs');
+var widgets_switch = require('../chunks/switch-Cs6mszUY.cjs');
 
 
 
 exports.defineSwitch = widgets_switch.defineSwitch;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/widgets/switch.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/widgets/switch.cjs.map

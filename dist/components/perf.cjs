@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-BvH4nAcv.cjs');
+var base = require('../chunks/base-DzZEJhQB.cjs');
 var categoryForTag = require('../chunks/category-for-tag-D_QJPwpZ.cjs');
 
 /**
@@ -118,4 +118,4 @@ exports.autoDegrade = autoDegrade;
 exports.loadCategoryStyles = loadCategoryStyles;
 exports.loadedStyles = loadedStyles;
 exports.onDemandStyles = onDemandStyles;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/perf.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/perf.cjs.map

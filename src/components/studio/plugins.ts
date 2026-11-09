@@ -85,41 +85,72 @@ const report = (post: string) => `addEventListener('error',e=>${post}({t:'error'
 export function pluginWorkerSource(code: string): string {
   return `const motionary=(${pluginRuntime})(m=>postMessage(m),f=>addEventListener('message',e=>f(e.data)));${report('postMessage')}\n${code}`;
 }
-/** iframe `srcdoc`: scripts only (CSP `default-src 'none'`), messages only to and from the parent. */
-export function pluginFrameSource(code: string): string {
-  return `<!doctype html><meta id="sandbox-csp" http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'"><script>const P=m=>parent.postMessage(m,'*');const motionary=(${pluginRuntime})(P,f=>addEventListener('message',e=>{if(e.source===parent)f(e.data)}));${report('P')}\n${code.replace(/<\/(script)/gi, '<\\/$1')}\n</script>`;
+// Only this bootstrap runs before the host binds a port. Plugin code is a string until then.
+function sandboxSource(code: string, worker: boolean): string {
+  const source = JSON.stringify(worker ? pluginWorkerSource(code) : code).replace(/</g, '\\u003c');
+  const launch = worker
+    ? `const url=URL.createObjectURL(new Blob([source],{type:'text/javascript'}));
+       try {
+         const w=new Worker(url);
+         w.onmessage=e=>post(e.data);
+         w.onerror=e=>{e.preventDefault();post({t:'error',message:e.message})};
+         port.onmessage=e=>w.postMessage(e.data);
+         addEventListener('pagehide',()=>{w.terminate();URL.revokeObjectURL(url)},{once:true});
+       } catch(err) { URL.revokeObjectURL(url); throw err; }`
+    : `globalThis.motionary=(${pluginRuntime})(post,fn=>{port.onmessage=e=>fn(e.data)});
+       ${report('post')}
+       const script=document.createElement('script');script.textContent=source;document.body.append(script);`;
+  return `<!doctype html><meta id="sandbox-csp" http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; worker-src ${worker ? 'blob:' : "'none'"}; base-uri 'none'; form-action 'none'"><body><script>
+    addEventListener('message',function bind(e){
+      if(e.source!==parent || !e.ports[0])return;
+      removeEventListener('message',bind);
+      const port=e.ports[0],post=m=>port.postMessage(m),source=${source};
+      try{${launch}}catch(err){post({t:'error',message:String(err)})}
+    });
+  </script>`;
 }
 
-/** Run plugin code in a dedicated Worker (no DOM, own thread: an endless loop cannot block the Studio). */
+/** Opaque iframe srcdoc. Transfer one MessagePort from the parent on its first load. */
+export function pluginFrameSource(code: string): string {
+  return sandboxSource(code, false);
+}
+
+/** Create the dedicated Worker inside an opaque origin with network access disabled by CSP. */
 export function createWorkerTransport(code: string): PluginTransport {
   if (typeof Worker !== 'function') throw bad('Worker is not available here');
-  const url = URL.createObjectURL(new Blob([pluginWorkerSource(code)], { type: 'text/javascript' }));
-  const w = new Worker(url);
-  return {
-    send: (m) => w.postMessage(m),
-    onMessage: (f) => { w.onmessage = (e) => f(e.data); },
-    onError: (f) => { w.onerror = (e) => { e.preventDefault(); f(e.message); }; },
-    terminate: () => { w.terminate(); URL.revokeObjectURL(url); },
-  };
+  return frameTransport(sandboxSource(code, true), document.body);
 }
 
-/** Run plugin code in a hidden `sandbox="allow-scripts"` iframe (opaque origin: no cookies, storage or parent DOM). */
+/** Run plugin code in a hidden opaque-origin iframe. */
 export function createIframeTransport(code: string, parent: Element = document.body): PluginTransport {
-  const f = document.createElement('iframe');
-  f.setAttribute('sandbox', 'allow-scripts');
-  f.style.display = 'none';
-  f.srcdoc = pluginFrameSource(code);
-  let q: unknown[] | null = [], on: (m: any) => void = () => {}, err: (e: unknown) => void = () => {};
-  const listen = (e: MessageEvent) => { if (e.source && e.source === f.contentWindow) { const m = e.data; isObj(m) && m.t === 'error' ? err(m.message) : on(m); } };
-  addEventListener('message', listen);
-  f.onload = () => { for (const m of q || []) f.contentWindow?.postMessage(m, '*'); q = null; };
-  parent.appendChild(f);
-  return {
-    send: (m) => (q ? q.push(m) : f.contentWindow?.postMessage(m, '*')),
-    onMessage: (fn) => { on = fn; },
-    onError: (fn) => { err = fn; },
-    terminate: () => { removeEventListener('message', listen); f.remove(); },
+  return frameTransport(pluginFrameSource(code), parent);
+}
+
+function frameTransport(srcdoc: string, parent: Element): PluginTransport {
+  const frame = document.createElement('iframe');
+  const { port1, port2 } = new MessageChannel();
+  let loaded = false;
+  let on: (m: any) => void, err: (e: unknown) => void;
+  const terminate = () => {
+    frame.onload = frame.onerror = null;
+    port1.close();
+    port2.close();
+    frame.remove();
   };
+  const fail = (reason: string) => { terminate(); err?.(reason); };
+  port1.onmessage = ({ data }) => isObj(data) && data.t === 'error' ? err?.(data.message) : on?.(data);
+  frame.setAttribute('sandbox', 'allow-scripts');
+  frame.style.display = 'none';
+  frame.onload = () => {
+    if (loaded) return fail('plugin frame navigated');
+    loaded = true;
+    try { frame.contentWindow!.postMessage(null, '*', [port2]); }
+    catch { fail('plugin channel initialization failed'); }
+  };
+  frame.onerror = () => fail('plugin frame failed to load');
+  frame.srcdoc = srcdoc;
+  parent.appendChild(frame);
+  return { send: (m) => port1.postMessage(m), onMessage: (fn) => { on = fn; }, onError: (fn) => { err = fn; }, terminate };
 }
 
 /** In-process transport for tests and trusted code (NO sandbox). Messages are copied and delivered asynchronously. */

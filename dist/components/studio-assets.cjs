@@ -1,7 +1,7 @@
 'use strict';
 
-var format = require('../chunks/format-b5fQz-vc.cjs');
-var project = require('../chunks/project-DiTOvzic.cjs');
+var format = require('../chunks/format-CcfR6-Jx.cjs');
+var project = require('../chunks/project-DIZ0UqvG.cjs');
 
 /**
  * 14.5 project & asset workflow (`motionary/studio/assets`): image, SVG, font, video and audio references in a Studio
@@ -350,4 +350,4 @@ exports.relinkAssets = relinkAssets;
 exports.resolveAssetPath = resolveAssetPath;
 exports.toBase64 = toBase64;
 exports.unpackStudioProject = unpackStudioProject;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/studio-assets.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/studio-assets.cjs.map

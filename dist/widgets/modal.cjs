@@ -1,8 +1,8 @@
 'use strict';
 
-var widgets_modal = require('../chunks/sheet-B38ylIEW.cjs');
+var widgets_modal = require('../chunks/sheet-BzJEwGbk.cjs');
 
 
 
 exports.defineModal = widgets_modal.defineModal;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/widgets/modal.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/widgets/modal.cjs.map

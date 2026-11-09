@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-BvH4nAcv.cjs');
+var base = require('../chunks/base-DzZEJhQB.cjs');
 var indexTags = require('../chunks/index-tags-hLIF2Clq.cjs');
 
 /**
@@ -133,4 +133,4 @@ function defineMoAliases() {
 exports.aliasCss = aliasCss;
 exports.aliasTag = aliasTag;
 exports.defineMoAliases = defineMoAliases;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/mo.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/mo.cjs.map

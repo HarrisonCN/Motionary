@@ -192,7 +192,9 @@ describe('verifyTemplate: integrity + optional Ed25519 publisher signature (WebC
     expect(parseTemplate(serializeTemplate(s)).ok).toBe(true);
     expect(await verifyTemplate(s, { keys: { 'motionary-2026': raw } })).toMatchObject({ ok: true, integrity: true, signature: 'valid' });
     expect(await verifyTemplate(s, { keys: { 'motionary-2026': rawOther } })).toMatchObject({ ok: false, signature: 'invalid' });
-    expect(await verifyTemplate(s, { keys: { someone: raw } })).toMatchObject({ ok: true, signature: 'untrusted' });
+    expect(await verifyTemplate(s, { keys: { someone: raw } })).toMatchObject({ ok: false, signature: 'untrusted' });
+    expect(await verifyTemplate(s, { keys: { 'motionary-2026': 'AA==' } })).toMatchObject({ ok: false, signature: 'unsupported' });
+    expect(await verifyTemplate(s, { keys: {}, requireSignature: false })).toMatchObject({ ok: true, signature: 'untrusted' });
     expect(await verifyTemplate(s, { keys: { someone: raw }, requireSignature: true })).toMatchObject({ ok: false, signature: 'untrusted' });
     expect(await verifyTemplate(tpl(), {})).toMatchObject({ ok: true, integrity: true, signature: 'missing' });
     expect(await verifyTemplate(tpl(), { requireSignature: true })).toMatchObject({ ok: false, signature: 'missing' });

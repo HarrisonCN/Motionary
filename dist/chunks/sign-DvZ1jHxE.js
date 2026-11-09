@@ -99,4 +99,4 @@ function checkCompat(manifest, version) {
 }
 
 export { checkCompat as c, pluginIntegrity as p, satisfies as s, verifyPlugin as v };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/chunks/sign-DvZ1jHxE.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/chunks/sign-DvZ1jHxE.js.map

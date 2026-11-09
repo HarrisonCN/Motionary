@@ -280,7 +280,8 @@ export async function verifyTemplate(t: MotionaryTemplate | string, o: { keys?: 
       } catch { signature = 'unsupported'; }
     }
   }
-  const ok = errors.length === 0 && signature !== 'invalid' && (!o.requireSignature || signature === 'valid');
+  const requireSignature = o.requireSignature ?? (o.keys !== undefined);
+  const ok = errors.length === 0 && signature !== 'invalid' && (!requireSignature || signature === 'valid');
   return { ok, integrity, signature, errors };
 }
 

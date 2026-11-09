@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-CibnX7Ui.cjs');
+var registry = require('../chunks/registry-_XKU28ZC.cjs');
 var shared = require('../chunks/shared-jkgRH-Hx.cjs');
 
 const NS = 'http://www.w3.org/2000/svg';
@@ -288,4 +288,4 @@ exports.MORPH2_FX = MORPH2_FX;
 exports.pointsToPath = pointsToPath;
 exports.registerMorphPack = registerMorphPack;
 exports.samplePath = samplePath;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/fx-morph.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/fx-morph.cjs.map

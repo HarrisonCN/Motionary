@@ -55,7 +55,11 @@ export function defineProductGallery(tag = 'usa-product-gallery'): CustomElement
             b.className = 'usa-pg2-thumb';
             b.setAttribute('role', 'tab');
             b.setAttribute('aria-label', im.alt || `Image ${i + 1}`);
-            b.innerHTML = `<img alt="" src="${im.getAttribute('src') || ''}">`;
+            const thumbnail = document.createElement('img');
+            thumbnail.alt = '';
+            const src = im.getAttribute('src');
+            if (src !== null) thumbnail.setAttribute('src', src);
+            b.appendChild(thumbnail);
             this.listen(b, 'click', () => this.go(i));
             thumbs.appendChild(b);
           });

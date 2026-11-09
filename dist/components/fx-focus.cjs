@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-CibnX7Ui.cjs');
+var registry = require('../chunks/registry-_XKU28ZC.cjs');
 
 const NS = 'http://www.w3.org/2000/svg';
 function overlay(el, z = 1) {
@@ -80,8 +80,9 @@ const FOCUS_FX = [
             const layer = overlay(el, 3);
             layer.style.display = 'grid';
             layer.style.placeItems = 'center';
-            layer.innerHTML = `<svg viewBox="0 0 52 52" width="52" height="52"><circle cx="26" cy="26" r="24" fill="${o.color}" opacity=".18"/><path d="M15 27l7 7 15-16" fill="none" stroke="${o.color}" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="36" stroke-dashoffset="36"/></svg>`;
+            layer.innerHTML = `<svg viewBox="0 0 52 52" width="52" height="52"><circle cx="26" cy="26" r="24" fill="currentColor" opacity=".18"/><path d="M15 27l7 7 15-16" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="36" stroke-dashoffset="36"/></svg>`;
             const svg = layer.firstElementChild;
+            svg.style.color = o.color;
             const path = layer.querySelector('path');
             const done = () => layer.remove();
             if (ctx.reduced) {
@@ -121,4 +122,4 @@ function registerFocusPack() {
 
 exports.FOCUS_FX = FOCUS_FX;
 exports.registerFocusPack = registerFocusPack;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/fx-focus.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/fx-focus.cjs.map

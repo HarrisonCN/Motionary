@@ -65,4 +65,4 @@ exports.isUsaElement = isUsaElement;
 exports.provideUsa = provideUsa;
 exports.usaDetail = usaDetail;
 exports.usaInitializer = usaInitializer;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/angular.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/angular.cjs.map

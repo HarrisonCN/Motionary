@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-CibnX7Ui.cjs');
+var registry = require('../chunks/registry-_XKU28ZC.cjs');
 
 /** Length of a polyline through `points` (7.6). */
 function routeLength(points) {
@@ -121,4 +121,4 @@ function registerGeoPack() {
 exports.GEO_FX = GEO_FX;
 exports.registerGeoPack = registerGeoPack;
 exports.routeLength = routeLength;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/fx-geo.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/fx-geo.cjs.map

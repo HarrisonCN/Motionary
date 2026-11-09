@@ -7,7 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [17.2.2] - 2026-11-09
+
 ### Fixed
+- Weather, video, gallery, back-to-top and success-check components render user values through DOM text, attributes or CSS properties.
+- Studio plugins use document-bound message ports and launch dedicated Workers from an opaque origin. Supplying template verification keys now requires a valid signature by default.
+- Continuous animation callbacks survive a peer failure. Upgrading a component with preassigned properties mounts it once.
+- Reduced-motion Worker canvases draw a still frame and keep canvas ownership available for fallback when Worker startup fails.
+- Route transitions cancel superseded requests, handle failed fetches, and restore focus and scrolling after a swap.
+- The npm workflow checks the release tag and resumes each package independently after a partial publish.
 - Studio project auto-merge preserves remotely deleted layers and keeps collaborators’ changes on successive saves from the same open editor. Editing a remotely deleted layer reports a conflict.
 
 ## [17.2.1] - 2026-11-07

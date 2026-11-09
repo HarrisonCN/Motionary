@@ -1,8 +1,8 @@
 'use strict';
 
-var widgets_propPanel = require('../chunks/prop-panel-DFqga6H5.cjs');
+var widgets_propPanel = require('../chunks/prop-panel-CaR91ZOI.cjs');
 
 
 
 exports.definePropPanel = widgets_propPanel.definePropPanel;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/widgets/prop-panel.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/widgets/prop-panel.cjs.map

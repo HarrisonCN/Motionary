@@ -1956,10 +1956,10 @@ interface UsaWorkerCanvasElement extends UsaElement {
     program: DrawProgram | null;
     readonly backend: string;
 }
-declare const WORKER_SCENES: Record<string, string>;
 type SceneFn = (ctx: CanvasRenderingContext2D, t: number, w: number, h: number, s: any) => void;
-/** The built-in scenes as functions — the main-thread fallback when no worker / OffscreenCanvas is available (11.0: strings are never evaluated on the main thread). Same drawing as `WORKER_SCENES`. */
+/** Built-in programs must be self-contained so their source also runs in a dedicated Worker. */
 declare const WORKER_SCENE_FNS: Record<string, SceneFn>;
+declare const WORKER_SCENES: Record<string, string>;
 declare function defineWorkerCanvas(tag?: string): CustomElementConstructor | undefined;
 
 /**

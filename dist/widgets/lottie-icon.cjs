@@ -1,8 +1,8 @@
 'use strict';
 
-var widgets_lottieIcon = require('../chunks/lottie-icon-BoxkukMd.cjs');
+var widgets_lottieIcon = require('../chunks/lottie-icon-tbOmn1bQ.cjs');
 
 
 
 exports.defineLottieIcon = widgets_lottieIcon.defineLottieIcon;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/widgets/lottie-icon.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/widgets/lottie-icon.cjs.map

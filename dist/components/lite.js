@@ -141,20 +141,23 @@ function getBase() {
         connectedCallback() {
             if (this._connected)
                 return;
-            this._connected = true;
             // 13.5.0: a property set before the element was defined (React 18 wrappers, Vue `.prop`, Svelte, Angular
             // `[prop]` while hydrating, then define) sits on the instance and hides the class's setter — move it through.
             for (const [k, v] of Object.entries(this))
                 if (k in Object.getPrototypeOf(this))
                     delete this[k], (this[k] = v);
+            const start = () => {
+                this._connected = true;
+                this.mount();
+            };
             styleLoader?.(this.localName);
             // Upgraded while the parser is still inside us (a <script> in <head>
             // defined the element): children/text are not there yet, so wait.
             if (document.readyState === 'loading' && !this.nextSibling && !this.childNodes.length) {
                 // listen() = addEventListener + a cleanup that removes it (same as before, smaller)
-                return this.listen(document, 'DOMContentLoaded', () => this._connected && this.isConnected && this.mount(), { once: true });
+                return this.listen(document, 'DOMContentLoaded', start, { once: true });
             }
-            this.mount();
+            start();
         }
         disconnectedCallback() {
             this._connected = false;
@@ -167,8 +170,10 @@ function getBase() {
         }
         /** Re-mount on attribute change (override for finer updates). */
         changed(_name) {
-            this.teardown();
-            this.mount();
+            if (this._connected) {
+                this.teardown();
+                this.mount();
+            }
         }
         teardown() {
             this._cleanups.splice(0).reverse().forEach((fn) => fn());
@@ -340,7 +345,19 @@ function flushFrame(t) {
     if (!c.paused) {
         const cdt = dt * c.rate;
         c.time += cdt;
-        frameListeners.forEach((el, fn) => (gate(el) ? p++ : (live++, fn(t, cdt))));
+        frameListeners.forEach((el, fn) => {
+            if (gate(el))
+                p++;
+            else {
+                live++;
+                try {
+                    fn(t, cdt);
+                }
+                catch (e) {
+                    error ?? (error = e);
+                }
+            }
+        });
     }
     st.parked += p;
     // everything parked: the pause hook's wake() restarts the loop
@@ -7801,9 +7818,11 @@ function defineBackToTop(tag = 'usa-back-to-top') {
         }
         mount() {
             if (!this.querySelector('button')) {
-                this.innerHTML = `<button type="button" aria-label="${this.str('label', 'Back to top')}"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="16" pathLength="100"/><path d="M12 20l6-6 6 6"/></svg></button>`;
+                this.innerHTML = `<button type="button" data-usa-part><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="16" pathLength="100"/><path d="M12 20l6-6 6 6"/></svg></button>`;
             }
             const btn = this.querySelector('button');
+            if (btn.hasAttribute('data-usa-part'))
+                btn.setAttribute('aria-label', this.str('label', 'Back to top'));
             const update = () => {
                 this._frame = 0;
                 const y = window.scrollY || document.documentElement.scrollTop || 0;
@@ -10913,4 +10932,4 @@ const STYLE_BASE = new URL('../', import.meta.url).href;
 onDemandStyles(STYLE_BASE);
 
 export { ALL_TAGS, AMBIENT_EFFECTS, ANIM_ICONS, BRIDGE_PROTOCOL_VERSION, BUILTIN_EFFECTS, BUTTON_DEFORMS, CARD_EFFECTS, CLICK_EFFECTS, COMPONENT_CATEGORIES, CURSOR_MODES, EFFECT_KINDS, EFFECT_TRIGGERS, GL_FALLBACKS, JOINING_SCRIPT, LIVE_REGION_IDS, MASK_SHAPES, MORPH_ICONS, MOTION_SCALE, MOTION_SENSITIVITY, MOTION_SENSITIVITY_LEVELS, MOTION_TOKENS, PACKS, PACK_PRIMITIVES, PAGE_EFFECTS, PARTICLE_PRESETS, POST_EFFECTS, REVEAL_EFFECTS, SENSITIVITY_CSS, SHADERS, SPINNER_VARIANTS, SPRING_EFFECTS, SPRING_PRESETS, STATIC_ALTERNATIVES, STYLE_BASE, TIMELINE_PRESETS, VARIANTS, activeAnimations, adaptKeyframes, adoptVariants, animateWithMotion, animationBudget, announce, applyMotionTokens, applyNativeSettings, applyPack, auditMotionA11y, autoAnimate, autoDegrade, baselineReport, bindEffect, categoryForTag as categoryOf, configureComponents, connectNativeShell, countUp, createSpring, defineAccordion, defineAcrylic, defineAmbient, defineAnimIcon, defineAurora, defineAutoAnimate, defineAutoSkeleton, defineAvatarStack, defineBackToTop, defineBackgroundComponents, defineBadge, defineBlobs, defineBottomSheet, defineButton, defineCard, defineCardComponents, defineCardStack, defineCarousel3d, defineCheck, defineCheckbox, defineClick, defineClickComponents, defineComponents, defineCounter, defineCube, defineCursor, defineDepth, defineDepthComponents, defineDialog, defineDistort, defineDotNetwork, defineDoubleTap, defineDraggable, defineDraw, defineDrawer, defineFab, defineFeedbackComponents, defineFullpage, defineFx, defineFxComponents, defineGestureComponents, defineGlitch, defineGradientText, defineGrain, defineGridGlow, defineHandwriting, defineHold, defineIconMorph, defineInteractionComponents, defineLayoutComponents, defineLike, defineLiquid, defineLoadingBar, defineMagnetic, defineMarquee, defineMaskReveal, defineMasonry, defineMorph, defineMotionSwitch, defineNavbar, defineOverscroll, definePack, definePacksComponents, definePageComponents, defineParticles, definePhysicsComponents, definePinchZoom, definePopover, definePostFx, definePress, defineProgress, definePullRefresh, defineReveal, defineRevealComponents, defineRipple, defineScramble, defineScrollHighlight, defineScrollProgress, defineScrolly, defineShader, defineShimmerText, defineSkeleton, defineSlider, defineSpinner, defineSplash, defineSplitText, defineSpotlight, defineSpring, defineStagger, defineStickyStack, defineSvgComponents, defineSwipeable, defineTabs, defineTextComponents, defineTextRotate, defineTilt, defineTimeline, defineTimelineComponents, defineToaster, defineTransitionComponents, defineTypewriter, defineUiComponents, defineViewSwitch, defineWaterRipple, defineWaveText, defineWebglComponents, detectNativeHost, deviceTilt, drawLines, easeOutExpo, enableMpaTransitions, exportDesignTokens, flip, flipFrames, fluentPreset, flyToCart, fragmentSource, gesture, getEffect, getMotionIntensity, getMotionLevel, getMotionSensitivity, getMotionTokens, glFallbackCss, glGovernor, glQuad, graphemes, haptic, hasEffect, importDesignTokens, importMotionTokens, interpolatePath, isTrustedMessage, linearEasing, listEffects, liveRegion, loadCategoryStyles, loadedStyles, loadingBar, masonryLayout, mergeMotionTokens, morphPath, morphTo, motionAllowed, motionScale, motionToken, motionTokensToCss, motionTokensToJSON, motionTokensToVars, motionVar, onDemandStyles, onFrame, orientationToTilt, pageTransition, parseDuration, parseEasing, parseNativeSettings, pathsCompatible, pinchScale, playEffect, postFxShader, postToNative, prefersReducedMotion, projectInertia, readScrollProgress, registerBuiltinEffects, registerEffect, registerEffects, requestOrientationPermission, resolveDurationToken, resolveEasingToken, resolvePosition, resolveSpring, resolveTokenAliases, restoreMotionIntensity, restoreMotionSensitivity, revealKeyframes, rubberBand, schedulerStats, scrambleFrame, scrollToTarget, setAnimationBudget, setFrameBudget, setMotionIntensity, setMotionLevel, setMotionSensitivity, setVariant, sharedTransition, smoothScroll, snapTo, splitOrder, splitText, splitTimeline, words as splitWords, spring, springEasing, springEffectKeyframes, springSamples, staticAlternative, stepSpring, supportsLinearEasing, supportsNativeScrub, supportsOrientation, supportsViewTransitions, supportsWebGL, swipeDirection, themeTransition, timeline, toast, validateDesignTokens, viewTransition, warnBaseline, watchPowerSaver, withoutDeprecations };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/lite.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/lite.js.map

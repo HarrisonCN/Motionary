@@ -68,3 +68,35 @@ test('complex page: 32 components running together', async ({ page, browserName 
   expect.soft(teardown, 'teardown leaves nothing running').toEqual({ loops: 0, raf: 0, liveContexts: 0, intervals: 0 });
   expectNoErrors(page);
 });
+
+test('paused worker canvas paints at startup and after resize', async ({ page }) => {
+  await openFixture(page);
+  const supported = await page.evaluate(() => 'transferControlToOffscreen' in HTMLCanvasElement.prototype && typeof Worker === 'function');
+  test.skip(!supported, 'OffscreenCanvas transfer is unavailable');
+  await page.evaluate(async () => {
+    const { offscreenRender } = await import('motionary/fx/perf');
+    const canvas = document.createElement('canvas');
+    canvas.width = canvas.height = 8;
+    document.body.append(canvas);
+    const renderer = offscreenRender(canvas, (ctx, t, w, h) => {
+      ctx.fillStyle = t === 0 ? '#00ff00' : '#ff0000';
+      ctx.fillRect(0, 0, w, h);
+    }, { paused: true });
+    window.stillFrame = {
+      renderer,
+      pixel() {
+        const probe = document.createElement('canvas').getContext('2d');
+        probe.drawImage(canvas, 0, 0);
+        return [canvas.width, ...probe.getImageData(0, 0, 1, 1).data];
+      },
+    };
+  });
+  try {
+    await expect.poll(() => page.evaluate(() => window.stillFrame.pixel())).toEqual([8, 0, 255, 0, 255]);
+    expect(await page.evaluate(() => window.stillFrame.renderer.backend)).toBe('worker');
+    await page.evaluate(() => window.stillFrame.renderer.resize(16, 16));
+    await expect.poll(() => page.evaluate(() => window.stillFrame.pixel())).toEqual([16, 0, 255, 0, 255]);
+  } finally {
+    await page.evaluate(() => window.stillFrame.renderer.stop());
+  }
+});

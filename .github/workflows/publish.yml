@@ -28,31 +28,40 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
-          ref: ${{ inputs.tag }}
+          ref: refs/tags/${{ inputs.tag }}
       - uses: actions/setup-node@v7
         with:
           node-version: 24
           registry-url: https://registry.npmjs.org
           cache: npm
-      - run: npm install -g npm@latest # trusted publishing needs npm >= 11.5
+      - name: Verify release tag matches the manifest
+        env:
+          RELEASE_TAG: ${{ inputs.tag }}
+        run: node -e "if (process.env.RELEASE_TAG !== 'v' + require('./package.json').version) throw Error('tag/version mismatch')"
+      - run: npm install -g npm@11.9.0
       - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
       - run: npm run build
       - run: npm run size:check
-      - name: Already published?
-        id: seen
-        run: |
-          V=$(node -p "require('./package.json').version")
-          echo "version=$V" >> "$GITHUB_OUTPUT"
-          if npm view "motionary@$V" version >/dev/null 2>&1; then echo "skip=true" >> "$GITHUB_OUTPUT"; fi
-      - name: motionary
-        if: steps.seen.outputs.skip != 'true'
+      - run: npm run check:exports
+      - name: Publish missing packages from the verified build
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm publish --provenance --access public --tag "${{ inputs.dist_tag }}"
-      - name: use-scroll-animate (alias, same build)
-        if: steps.seen.outputs.skip != 'true'
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          DIST_TAG: ${{ inputs.dist_tag }}
         run: |
-          node -e "const f='package.json',p=require('./'+f);p.name='use-scroll-animate';require('fs').writeFileSync(f,JSON.stringify(p,null,2)+'\n')"
-          npm publish --provenance --access public --tag "${{ inputs.dist_tag }}"
+          set -euo pipefail
+          version=$(node -p "require('./package.json').version")
+          trap 'git restore -- package.json' EXIT
+          for name in motionary use-scroll-animate; do
+            status=$(curl --silent --show-error --output /dev/null --write-out '%{http_code}' \
+              "https://registry.npmjs.org/$name/$version")
+            case "$status" in
+              200) echo "$name@$version already published"; continue ;;
+              404) ;;
+              *) echo "Registry returned $status for $name@$version" >&2; exit 1 ;;
+            esac
+            node -e "const fs=require('node:fs'), p=require('./package.json'); p.name=process.argv[1]; fs.writeFileSync('package.json', JSON.stringify(p,null,2)+'\n')" "$name"
+            npm pack --ignore-scripts --pack-destination "$RUNNER_TEMP" --silent
+            npm publish "$RUNNER_TEMP/$name-$version.tgz" --provenance --access public --tag "$DIST_TAG"
+          done

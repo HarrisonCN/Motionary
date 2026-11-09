@@ -35,6 +35,22 @@ describe('shared rAF scheduler (4.5)', () => {
     expect(seen).toEqual(['ok']);
   });
 
+  it('keeps continuous listeners scheduled after a listener throws', () => {
+    const broken = onFrame(() => { throw Error('listener failed'); });
+    const seen = vi.fn();
+    const healthy = onFrame(seen);
+    try {
+      expect(() => frame(40)).toThrow('listener failed');
+      broken();
+      frame(56);
+      expect(seen).toHaveBeenCalledTimes(2);
+    } finally {
+      broken();
+      healthy();
+      frame(72);
+    }
+  });
+
   it('onFrame runs every frame with a delta until stopped', () => {
     const dts: number[] = [];
     const stop = onFrame((_t, dt) => dts.push(Math.round(dt)));

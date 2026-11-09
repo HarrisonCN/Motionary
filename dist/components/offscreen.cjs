@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-BvH4nAcv.cjs');
+var base = require('../chunks/base-DzZEJhQB.cjs');
 
 /**
  * motionary/components/offscreen (13.4) — pauses scheduler work nobody can see.
@@ -66,4 +66,4 @@ exports.caf = base.caf;
 exports.installOffscreenPause = installOffscreenPause;
 exports.onFrame = onFrame;
 exports.raf = raf;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/offscreen.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/offscreen.cjs.map

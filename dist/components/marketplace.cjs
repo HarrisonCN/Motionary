@@ -1,6 +1,6 @@
 'use strict';
 
-var manifest = require('../chunks/manifest-xr3WET80.cjs');
+var manifest = require('../chunks/manifest-DWZv7bHQ.cjs');
 var sign = require('../chunks/sign-RAkQIWrM.cjs');
 
 const MARKETPLACE_FORMAT = 'motionary/marketplace';
@@ -98,4 +98,4 @@ exports.fetchMarketplace = fetchMarketplace;
 exports.installPlugin = installPlugin;
 exports.installedPlugins = installedPlugins;
 exports.searchPlugins = searchPlugins;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/marketplace.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/marketplace.cjs.map

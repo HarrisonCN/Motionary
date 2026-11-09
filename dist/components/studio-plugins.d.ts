@@ -91,11 +91,11 @@ interface PluginHost {
 declare function parsePluginManifest(input: unknown): PluginManifest;
 /** Worker source: the runtime as a `motionary` global, error reporting, then the plugin code. */
 declare function pluginWorkerSource(code: string): string;
-/** iframe `srcdoc`: scripts only (CSP `default-src 'none'`), messages only to and from the parent. */
+/** Opaque iframe srcdoc. Transfer one MessagePort from the parent on its first load. */
 declare function pluginFrameSource(code: string): string;
-/** Run plugin code in a dedicated Worker (no DOM, own thread: an endless loop cannot block the Studio). */
+/** Create the dedicated Worker inside an opaque origin with network access disabled by CSP. */
 declare function createWorkerTransport(code: string): PluginTransport;
-/** Run plugin code in a hidden `sandbox="allow-scripts"` iframe (opaque origin: no cookies, storage or parent DOM). */
+/** Run plugin code in a hidden opaque-origin iframe. */
 declare function createIframeTransport(code: string, parent?: Element): PluginTransport;
 /** In-process transport for tests and trusted code (NO sandbox). Messages are copied and delivered asynchronously. */
 declare function createLocalTransport(plugin: (motionary: PluginApi) => unknown): PluginTransport;

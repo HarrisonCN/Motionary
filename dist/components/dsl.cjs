@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-CibnX7Ui.cjs');
+var registry = require('../chunks/registry-_XKU28ZC.cjs');
 
 /**
  * `motionary/dsl` (= `motionary/components/dsl`, 9.0) — the declarative
@@ -206,4 +206,4 @@ exports.createComponent = createComponent;
 exports.motion = motion;
 exports.parseMotion = parseMotion;
 exports.serializeMotion = serializeMotion;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/dsl.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/dsl.cjs.map

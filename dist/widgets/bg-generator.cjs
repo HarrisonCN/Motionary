@@ -1,8 +1,8 @@
 'use strict';
 
-var widgets_bgGenerator = require('../chunks/bg-generator-CML8tPN8.cjs');
+var widgets_bgGenerator = require('../chunks/bg-generator-D4ssmvZk.cjs');
 
 
 
 exports.defineBgGenerator = widgets_bgGenerator.defineBgGenerator;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/widgets/bg-generator.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/widgets/bg-generator.cjs.map

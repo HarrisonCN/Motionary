@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-CibnX7Ui.cjs');
+var registry = require('../chunks/registry-_XKU28ZC.cjs');
 
 /** Decaying sideways shake keyframes (7.7). */
 function shakeFrames(distance = 8, steps = 5) {
@@ -88,4 +88,4 @@ function registerFormPack() {
 exports.FORM_FX = FORM_FX;
 exports.registerFormPack = registerFormPack;
 exports.shakeFrames = shakeFrames;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/fx-form.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/fx-form.cjs.map

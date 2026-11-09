@@ -1,4 +1,4 @@
-import { registerEffects } from '../chunks/registry-BdSDdeL7.js';
+import { registerEffects } from '../chunks/registry-QiOscU6y.js';
 
 /** A deterministic PRNG in [0, 1) from a seed (8.5). */
 function paperRandom(seed) {
@@ -99,4 +99,4 @@ function registerPaperPack() {
 }
 
 export { PAPER_FX, paperRandom, registerPaperPack, roughLine };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/fx-paper.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/fx-paper.js.map

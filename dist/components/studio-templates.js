@@ -1,4 +1,4 @@
-import { v as validateTimelineDoc, a as timelineDocDuration } from '../chunks/format-CI6Vx9Ui.js';
+import { v as validateTimelineDoc, a as timelineDocDuration } from '../chunks/format-Crl81ga7.js';
 import { packStudioProject, isExternalAsset, normalizeAssetPath, toBase64, fromBase64, unpackStudioProject } from './studio-assets.js';
 import { exportStandalone } from './studio-export.js';
 
@@ -356,7 +356,8 @@ async function verifyTemplate(t, o = {}) {
             }
         }
     }
-    const ok = errors.length === 0 && signature !== 'invalid' && (!o.requireSignature || signature === 'valid');
+    const requireSignature = o.requireSignature ?? (o.keys !== undefined);
+    const ok = errors.length === 0 && signature !== 'invalid' && (!requireSignature || signature === 'valid');
     return { ok, integrity, signature, errors };
 }
 // --- install / uninstall -----------------------------------------------------------------------------------------------
@@ -557,4 +558,4 @@ function previewTemplate(t, o = {}) {
 }
 
 export { STUDIO_TEMPLATES_VERSION, TEMPLATE_FORMAT, TEMPLATE_LIMITS, TEMPLATE_META_KEY, TemplateError, createTemplate, installTemplate, installedTemplates, parseTemplate, previewTemplate, serializeTemplate, sha256, signTemplate, templateInfo, templateIntegrity, uninstallTemplate, verifyTemplate };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/studio-templates.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/studio-templates.js.map

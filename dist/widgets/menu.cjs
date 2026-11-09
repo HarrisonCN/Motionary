@@ -1,8 +1,8 @@
 'use strict';
 
-var widgets_menu = require('../chunks/menu-CZ1zHTT9.cjs');
+var widgets_menu = require('../chunks/menu-9GcThZZr.cjs');
 
 
 
 exports.defineMenu = widgets_menu.defineMenu;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/widgets/menu.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/widgets/menu.cjs.map

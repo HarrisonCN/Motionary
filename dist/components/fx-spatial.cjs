@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-CibnX7Ui.cjs');
+var registry = require('../chunks/registry-_XKU28ZC.cjs');
 
 /** Horizontal background offset (px) of a 360° panorama `width` px wide for a `yaw` in degrees (wraps) (8.8). */
 function yawToOffset(yaw, width) {
@@ -96,4 +96,4 @@ exports.SPATIAL_FX = SPATIAL_FX;
 exports.registerSpatialPack = registerSpatialPack;
 exports.xrSupport = xrSupport;
 exports.yawToOffset = yawToOffset;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/fx-spatial.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/fx-spatial.cjs.map

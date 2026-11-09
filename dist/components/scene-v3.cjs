@@ -1,6 +1,6 @@
 'use strict';
 
-var v2 = require('../chunks/v2-El9dfBqV.cjs');
+var v2 = require('../chunks/v2-Z2M3Ef0Y.cjs');
 var components_studioA11y = require('./studio-a11y.cjs');
 var v3Read = require('../chunks/v3-read-BNhrN3tL.cjs');
 
@@ -490,4 +490,4 @@ exports.normalizeSceneV3 = normalizeSceneV3;
 exports.sceneV3ToV2 = sceneV3ToV2;
 exports.serializeSceneV3 = serializeSceneV3;
 exports.validateSceneV3 = validateSceneV3;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/scene-v3.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/scene-v3.cjs.map

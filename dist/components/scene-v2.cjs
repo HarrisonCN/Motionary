@@ -1,6 +1,6 @@
 'use strict';
 
-var v2 = require('../chunks/v2-El9dfBqV.cjs');
+var v2 = require('../chunks/v2-Z2M3Ef0Y.cjs');
 
 /**
  * 13.9 (DRAFT): JSON Schema (draft 2020-12) of `motionary-scene` v2, for editors
@@ -120,4 +120,4 @@ exports.serializeSceneV2 = v2.serializeSceneV2;
 exports.tokenizeValue = v2.tokenizeValue;
 exports.validateSceneV2 = v2.validateSceneV2;
 exports.SCENE_V2_SCHEMA = SCENE_V2_SCHEMA;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/scene-v2.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/scene-v2.cjs.map

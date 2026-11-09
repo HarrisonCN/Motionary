@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-BvH4nAcv.cjs');
+var base = require('../chunks/base-DzZEJhQB.cjs');
 
 /**
  * motionary/components/perf — long-task helpers (13.4).
@@ -66,4 +66,4 @@ async function runChunked(items, fn, options = {}) {
 exports.runChunked = runChunked;
 exports.shouldYield = shouldYield;
 exports.yieldToMain = yieldToMain;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/perf-tasks.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/perf-tasks.cjs.map

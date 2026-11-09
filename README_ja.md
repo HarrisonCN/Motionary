@@ -57,7 +57,10 @@ npm i motionary
 <script src="https://unpkg.com/motionary@17/dist/presets-extended.umd.js"></script> <!-- プリセット +181 種 -->
 <script src="https://unpkg.com/motionary@17/dist/components.umd.js"></script>       <!-- motionary/components の要素：window.UsaComponents -->
 <script src="https://unpkg.com/motionary@17/dist/widgets.umd.js"></script>          <!-- ウィジェット：window.UsaWidgets -->
+<mo-reveal effect="fade-up"><h2>Hello</h2></mo-reveal>
 ```
+
+v17 の CDN バンドルは `<mo-*>` タグを自動登録します。ES モジュールを使う場合は、`motionary/components/mo` の `defineMoAliases()` を呼び出してから各コンポーネントを登録してください。どちらのタグ名でも `usa:*` イベントと `--usa-*` CSS カスタムプロパティを使えます。[v17 移行ガイド](./docs/migrating-to-v17.md)
 
 jsDelivr も使えます：`https://cdn.jsdelivr.net/npm/motionary@17/dist/…`。`use-scroll-animate` をお使いの場合も、同じバージョンで引き続き公開されます。乗り換えるときは、import と URL のパッケージ名を置き換えるだけです（[詳細](./docs/versions.md)）。
 
@@ -300,7 +303,7 @@ Figma プラグイン、クロスプラットフォーム書き出し（`npx mot
 すべてのエントリポイントに、[`size-budget.json`](./size-budget.json) で固定の gzip 上限が設定されています（全 401 項目）。上限を超えるエントリがあれば CI は失敗し、上限が自動で引き上げられることはありません。
 
 <!-- size-table:start -->
-17.2.1 ビルドでの実測値（minify ＋ gzip、`scripts/size.mjs --report` で生成）：
+17.2.2 ビルドでの実測値（minify ＋ gzip、`scripts/size.mjs --report` で生成）：
 
 | インポートするもの | gzip | 上限 |
 |---|---:|---:|
@@ -342,7 +345,7 @@ npx usa-codemod-13 --write      # まとめて書き換え。@10 / @11 / @12 に
 
 ## バージョンと互換性
 
-- **npm の dist-tag：** `latest` は現在のメジャーの最新リリース（<!--ver:version-->17.2.1<!--/ver-->）を指します。14.1 からはマイナーリリースでも移動します。マイナーリリースにはそれぞれ `v<major>-<minor>` のタグも付きます（例：`v15-0`）。`v15-line` は 15.x を追い、`v14-lts` は 14.9.x です。`motionary` と `use-scroll-animate` は常に同じバージョンで同時に公開されます。
+- **npm の dist-tag：** `latest` は現在のメジャーの最新リリース（<!--ver:version-->17.2.2<!--/ver-->）を指します。14.1 からはマイナーリリースでも移動します。マイナーリリースにはそれぞれ `v<major>-<minor>` のタグも付きます（例：`v15-0`）。`v15-line` は 15.x を追い、`v14-lts` は 14.9.x です。`motionary` と `use-scroll-animate` は常に同じバージョンで同時に公開されます。
 - **CDN：** URL はメジャーで固定します（`motionary@<!--ver:major-->17<!--/ver-->`）。正確なバージョン指定（`motionary@12.4.0`）もそのまま使えます。
 - **セマンティックバージョニング：** 破壊的変更はメジャーだけで行い、毎回ガイドと codemod を用意します。非推奨になったものは次のメジャーまで残り、その間は型に `@deprecated` が付くだけで、実行時の警告は出ません。
 - **各バージョンに含まれるもの：** コンポーネントとランタイムモジュールごとの `since` / `changed`（[docs/version-compat.md](./docs/version-compat.md)）、機能ごとの対応状況（[docs/compat-matrix.md](./docs/compat-matrix.md)）。
