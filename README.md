@@ -73,7 +73,10 @@ No build step? Use the CDN. URLs pin the major version (`@<!--ver:major-->17<!--
 <script src="https://unpkg.com/motionary@17/dist/presets-extended.umd.js"></script> <!-- +181 presets -->
 <script src="https://unpkg.com/motionary@17/dist/components.umd.js"></script>       <!-- the motionary/components elements: window.UsaComponents -->
 <script src="https://unpkg.com/motionary@17/dist/widgets.umd.js"></script>          <!-- the widgets: window.UsaWidgets -->
+<mo-reveal effect="fade-up"><h2>Hello</h2></mo-reveal>
 ```
+
+The v17 CDN bundles register `<mo-*>` tags automatically. With ES modules, call `defineMoAliases()` from `motionary/components/mo` before registering the components you use. The `usa:*` event names and `--usa-*` CSS properties work with both tag names. [v17 migration guide](./docs/migrating-to-v17.md)
 
 jsDelivr works too: `https://cdn.jsdelivr.net/npm/motionary@17/dist/…`. Already on `use-scroll-animate`? It keeps
 working, at the same versions. To switch, replace the name in imports and URLs ([details](./docs/versions.md)).

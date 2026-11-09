@@ -13,7 +13,7 @@ This file tells AI coding agents (and the people prompting them) how to pick and
 | Runtime modules (`motionary/runtime/*`) and their compatibility tables | [`docs/runtime/`](docs/runtime/) |
 | Prompting tips and common mistakes | [`docs/ai-prompt-guide.md`](docs/ai-prompt-guide.md) |
 
-All of these are generated from the source at build time, so they match the installed version. If a tag or attribute is not in the manifest, it does not exist — do not invent it.
+All of these are generated from the source at build time, so they match the installed version. Look up a v17 `mo-*` tag under its corresponding `usa-*` manifest entry. Use the attributes documented there.
 
 ## Rules
 
@@ -30,7 +30,7 @@ All of these are generated from the source at build time, so they match the inst
    On a plain HTML page load `runtime.iife.js` first, then each `runtime/<module>.iife.js`, then the component bundles. A missing module shows a visible error that names the exact install / import / CDN fix.
 4. **Use only documented attributes, events (`usa:*`) and methods.** Attribute values are strings; boolean attributes are present/absent.
 5. **Accessibility is built in.** Every component honours `prefers-reduced-motion`; do not add your own motion overrides unless asked. Keep real text in the light DOM (components split / animate it accessibly).
-6. **Frameworks:** Web Components work everywhere. React: `motionary/components/react` (`createUsaComponents`); Vue: mark `usa-*` as custom elements; Svelte / Solid / Angular helpers live in `motionary/components/<framework>`.
+6. **Frameworks:** Web Components work everywhere. React: `motionary/components/react` (`createUsaComponents`); Vue: mark the `mo-*` and `usa-*` prefixes as custom elements; Svelte / Solid / Angular helpers live in `motionary/components/<framework>`.
 7. **SSR:** importing any entry is safe on the server (nothing touches `window` at import); call define functions / `use()` on the client.
 8. **Prefer the smallest import:** a single category (`motionary/components/cards`), a single runtime module, or `motionary/core` for presets only.
 
@@ -40,13 +40,15 @@ Plain HTML:
 
 ```html
 <script src="https://unpkg.com/motionary@17/dist/components.umd.js"></script>
-<usa-reveal effect="fade-up"><h2>Hello</h2></usa-reveal>
+<mo-reveal effect="fade-up"><h2>Hello</h2></mo-reveal>
 ```
 
 Bundler:
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineReveal } from 'motionary/components/reveal';
+defineMoAliases();
 defineReveal();
 ```
 
@@ -64,4 +66,4 @@ Declarative motion without components (10.2):
 
 If your client speaks MCP, add `motionary-mcp` (read-only, ships with the package): `{ "command": "npx", "args": ["-y", "-p", "motionary", "motionary-mcp"] }`. Use `search_components` → `get_component` → `scaffold_snippet` (prerequisites are already in the snippet, in order). See docs/mcp.md.
 
-motionary-mcp 2.0 (10.7): `suggest_motion` turns a description (English or Chinese) into motion code and component suggestions; run `validate_snippet` on any code you write with `<usa-*>` components before handing it over — it catches unknown tags / attributes and missing or mis-ordered prerequisites.
+motionary-mcp 3.0: `suggest_motion` turns a description (English or Chinese) into motion code and component suggestions; run `validate_snippet` on any code you write with `<usa-*>` components before handing it over — it catches unknown tags / attributes and missing or mis-ordered prerequisites.

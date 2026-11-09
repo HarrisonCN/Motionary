@@ -57,7 +57,10 @@ npm i motionary
 <script src="https://unpkg.com/motionary@17/dist/presets-extended.umd.js"></script> <!-- プリセット +181 種 -->
 <script src="https://unpkg.com/motionary@17/dist/components.umd.js"></script>       <!-- motionary/components の要素：window.UsaComponents -->
 <script src="https://unpkg.com/motionary@17/dist/widgets.umd.js"></script>          <!-- ウィジェット：window.UsaWidgets -->
+<mo-reveal effect="fade-up"><h2>Hello</h2></mo-reveal>
 ```
+
+v17 の CDN バンドルは `<mo-*>` タグを自動登録します。ES モジュールを使う場合は、`motionary/components/mo` の `defineMoAliases()` を呼び出してから各コンポーネントを登録してください。どちらのタグ名でも `usa:*` イベントと `--usa-*` CSS カスタムプロパティを使えます。[v17 移行ガイド](./docs/migrating-to-v17.md)
 
 jsDelivr も使えます：`https://cdn.jsdelivr.net/npm/motionary@17/dist/…`。`use-scroll-animate` をお使いの場合も、同じバージョンで引き続き公開されます。乗り換えるときは、import と URL のパッケージ名を置き換えるだけです（[詳細](./docs/versions.md)）。
 

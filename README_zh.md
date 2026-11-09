@@ -57,7 +57,10 @@ npm i motionary
 <script src="https://unpkg.com/motionary@17/dist/presets-extended.umd.js"></script> <!-- 再加 181 个预设 -->
 <script src="https://unpkg.com/motionary@17/dist/components.umd.js"></script>       <!-- motionary/components 的元素：window.UsaComponents -->
 <script src="https://unpkg.com/motionary@17/dist/widgets.umd.js"></script>          <!-- 小部件：window.UsaWidgets -->
+<mo-reveal effect="fade-up"><h2>Hello</h2></mo-reveal>
 ```
+
+v17 的 CDN 包会自动注册 `<mo-*>` 标签。使用 ES 模块时，先从 `motionary/components/mo` 导入并调用 `defineMoAliases()`，再注册所需组件。两套标签都使用 `usa:*` 事件和 `--usa-*` CSS 自定义属性。[v17 迁移指南](./docs/migrating-to-v17.md)
 
 也可以用 jsDelivr：`https://cdn.jsdelivr.net/npm/motionary@17/dist/…`。还在用 `use-scroll-animate`？它会继续以相同版本发布；要切换，只需在 import 和 URL 中替换包名（[详情](./docs/versions.md)）。
 
