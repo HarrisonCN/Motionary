@@ -62,6 +62,10 @@ export function offscreenRender(canvas: HTMLCanvasElement, program: DrawProgram,
   if (canWorker) {
     let worker: Worker | undefined;
     let url: string | undefined;
+    const releaseUrl = () => {
+      if (url) URL.revokeObjectURL(url);
+      url = undefined;
+    };
 
     try {
       const src = `const draw=(${code});let canvas,ctx,start,paused;
@@ -82,6 +86,7 @@ export function offscreenRender(canvas: HTMLCanvasElement, program: DrawProgram,
       const stop = () => {
         w.onmessage = w.onerror = null;
         w.terminate();
+        releaseUrl();
       };
       const handle: ReturnType<typeof offscreenRender> = {
         backend: 'worker', stop,
@@ -100,6 +105,7 @@ export function offscreenRender(canvas: HTMLCanvasElement, program: DrawProgram,
       w.onerror = (e) => { e.preventDefault(); recover(); };
       w.onmessage = () => {
         w.onmessage = null;
+        releaseUrl();
         try {
           const off = canvas.transferControlToOffscreen();
           transferred = true;
@@ -109,8 +115,7 @@ export function offscreenRender(canvas: HTMLCanvasElement, program: DrawProgram,
       return handle;
     } catch {
       worker?.terminate();
-    } finally {
-      if (url) URL.revokeObjectURL(url);
+      releaseUrl();
     }
   }
   let ctx: CanvasRenderingContext2D | null = null;

@@ -17,6 +17,7 @@ it('retains canvas ownership until the worker is ready and draws a still frame o
   });
   const draw = vi.fn();
   const renderer = offscreenRender(canvas, draw, { paused: true });
+  expect(revoke).not.toHaveBeenCalled();
   renderer.resize(40, 60);
   worker!.onerror!(new ErrorEvent('error'));
   expect(renderer.backend).toBe('main');

@@ -95,8 +95,8 @@ function sandboxSource(code: string, worker: boolean): string {
          w.onmessage=e=>post(e.data);
          w.onerror=e=>{e.preventDefault();post({t:'error',message:e.message})};
          port.onmessage=e=>w.postMessage(e.data);
-         addEventListener('pagehide',()=>w.terminate(),{once:true});
-       } finally { URL.revokeObjectURL(url); }`
+         addEventListener('pagehide',()=>{w.terminate();URL.revokeObjectURL(url)},{once:true});
+       } catch(err) { URL.revokeObjectURL(url); throw err; }`
     : `globalThis.motionary=(${pluginRuntime})(post,fn=>{port.onmessage=e=>fn(e.data)});
        ${report('post')}
        const script=document.createElement('script');script.textContent=source;document.body.append(script);`;
