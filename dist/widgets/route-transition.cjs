@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-BvH4nAcv.cjs');
+var base = require('../chunks/base-DzZEJhQB.cjs');
 
 var css = "usa-route-transition{display:block;max-width:100%;box-sizing:border-box}usa-route-transition template{display:none}::view-transition-old(root),::view-transition-new(root){animation-duration:.28s}";
 
@@ -51,51 +51,86 @@ function defineRouteTransition(tag = 'usa-route-transition') {
                     if ((a.target && a.target !== '_self') || a.hasAttribute('download') || a.dataset.noRoute !== undefined)
                         return;
                     const u = new URL(a.href, location.href);
-                    if (u.origin !== location.origin || (u.pathname === location.pathname && u.hash))
+                    if (u.origin !== location.origin || (u.pathname === location.pathname && u.search === location.search && u.hash))
                         return;
                     e.preventDefault();
-                    this.navigate(u.pathname + u.search);
+                    this.go(u.pathname + u.search + u.hash, this.str('history', 'push'), 'link');
                 };
                 this.listen(scopeAll ? document : this, 'click', onClick);
                 this.listen(window, 'popstate', () => {
                     if (this.str('history', 'push') !== 'off')
-                        this.navigate(location.pathname + location.search, { history: 'off' });
+                        this.go(location.pathname + location.search + location.hash, 'off', 'popstate');
                 });
             }
-            async content(url) {
-                const tpl = Array.from(this.querySelectorAll('template[data-route]')).find((t) => t.dataset.route === url);
+            unmount() {
+                this.request?.abort();
+            }
+            async content(url, signal) {
+                const tpl = Array.from(this.querySelectorAll('template[data-route]')).find((t) => t.dataset.route === url || t.dataset.route === url.split('#')[0]);
                 if (tpl)
                     return { html: tpl.innerHTML };
-                if (typeof fetch !== 'function')
-                    return null;
-                const res = await fetch(url, { headers: { accept: 'text/html' } });
+                const res = await fetch(url, { signal, mode: 'same-origin', headers: { accept: 'text/html' } });
                 if (!res.ok)
                     return null;
                 const doc = new DOMParser().parseFromString(await res.text(), 'text/html');
-                const sel = this.str('selector') || (this.id ? `#${this.id}` : this.localName);
-                const el = doc.querySelector(sel);
+                const selector = this.str('selector');
+                const el = selector ? doc.querySelector(selector) : this.id ? doc.getElementById(this.id) : doc.querySelector(this.localName);
                 return el ? { html: el.innerHTML, title: doc.title } : null;
             }
-            async navigate(url, opts = {}) {
-                if (!this.emit('navigate', { url, from: this.cur }))
-                    return false;
-                const next = await this.content(url);
-                if (!next) {
-                    if (!this.querySelector(`template[data-route="${url}"]`) && typeof location !== 'undefined' && /^\//.test(url) && opts.history !== 'off')
-                        location.assign(url);
+            navigate(url, opts = {}) {
+                return this.go(url, opts.history || this.str('history', 'push'));
+            }
+            async go(url, hist, source) {
+                let target;
+                try {
+                    target = new URL(url, location.href);
+                }
+                catch {
                     return false;
                 }
-                const templates = Array.from(this.querySelectorAll('template[data-route]'));
+                if (target.origin !== location.origin || !this.emit('navigate', { url, from: this.cur }))
+                    return false;
+                this.request?.abort();
+                const { signal } = this.request = new AbortController();
+                const next = await this.content(url, signal).catch(() => null);
+                if (signal.aborted)
+                    return false;
+                if (!next) {
+                    if (source === 'popstate')
+                        location.reload();
+                    else if (source === 'link' || hist !== 'off')
+                        location.assign(target.href);
+                    return false;
+                }
+                let committed = false;
                 const swap = () => {
+                    if (signal.aborted)
+                        return;
+                    const templates = Array.from(this.querySelectorAll('template[data-route]'));
+                    if (hist !== 'off')
+                        history[hist === 'replace' ? 'replaceState' : 'pushState']({ usaRoute: url }, '', url);
                     this.innerHTML = next.html;
                     templates.forEach((t) => this.appendChild(t));
                     this.shared();
                     if (next.title)
                         document.title = next.title;
+                    this.cur = url;
+                    committed = true;
+                    let id = target.hash.slice(1);
+                    try {
+                        id = decodeURIComponent(id);
+                    }
+                    catch { /* literal fragment */ }
+                    const anchor = id && document.getElementById(id);
+                    const focus = anchor || this.querySelector('[autofocus],h1') || this;
+                    if (!focus.hasAttribute('tabindex') && focus.tabIndex < 0)
+                        focus.tabIndex = -1;
+                    focus.focus({ preventScroll: true });
+                    if (anchor)
+                        anchor.scrollIntoView();
+                    else if (source !== 'popstate' && (window.scrollX || window.scrollY))
+                        window.scrollTo(0, 0);
                 };
-                const hist = opts.history || this.str('history', 'push');
-                if (hist !== 'off' && typeof history !== 'undefined')
-                    history[hist === 'replace' ? 'replaceState' : 'pushState']({ usaRoute: url }, '', url);
                 const engine = this.str('engine', 'auto');
                 const fx = KF[this.str('effect', 'fade')] || KF.fade;
                 const vt = document.startViewTransition;
@@ -110,9 +145,11 @@ function defineRouteTransition(tag = 'usa-route-transition') {
                         await Promise.race([out.finished.catch(() => undefined), new Promise((r) => setTimeout(r, 200))]);
                     swap();
                     out?.cancel();
-                    this.motion(this, fx[1], { duration: 260, easing: 'cubic-bezier(.22,1,.36,1)' });
+                    if (!signal.aborted)
+                        this.motion(this, fx[1], { duration: 260, easing: 'cubic-bezier(.22,1,.36,1)' });
                 }
-                this.cur = url;
+                if (signal.aborted || !committed)
+                    return false;
                 this.emit('navigated', { url });
                 return true;
             }
@@ -122,4 +159,4 @@ function defineRouteTransition(tag = 'usa-route-transition') {
 }
 
 exports.defineRouteTransition = defineRouteTransition;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/widgets/route-transition.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/widgets/route-transition.cjs.map

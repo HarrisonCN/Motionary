@@ -1,6 +1,6 @@
-import { f as defineElement } from '../chunks/base-BQmWYlDq.js';
-import { r as runtimeModule } from '../chunks/runtime-link-JzguK1oG.js';
-import { c as css, d as defineGlScene } from '../chunks/gl-scene-B2dWjiWi.js';
+import { f as defineElement } from '../chunks/base-mwlrn8oK.js';
+import { r as runtimeModule } from '../chunks/runtime-link-DEb55Gnh.js';
+import { c as css, d as defineGlScene } from '../chunks/gl-scene-CgIgC3lb.js';
 
 function defineGlModel(tag = 'usa-gl-model') {
     return defineElement(tag, () => {
@@ -22,4 +22,4 @@ function defineGlModel(tag = 'usa-gl-model') {
 }
 
 export { defineGlModel };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/gl-model.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/gl-model.js.map

@@ -1,4 +1,4 @@
-import { n as now } from '../chunks/base-BQmWYlDq.js';
+import { n as now } from '../chunks/base-mwlrn8oK.js';
 
 /**
  * motionary/components/perf — long-task helpers (13.4).
@@ -62,4 +62,4 @@ async function runChunked(items, fn, options = {}) {
 }
 
 export { runChunked, shouldYield, yieldToMain };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/perf-tasks.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/perf-tasks.js.map

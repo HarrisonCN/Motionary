@@ -1,8 +1,8 @@
 'use strict';
 
-var base = require('../chunks/base-BvH4nAcv.cjs');
+var base = require('../chunks/base-DzZEJhQB.cjs');
 var components_tokens = require('./tokens.cjs');
-var components_motion = require('../chunks/index-C9_FEsfz.cjs');
+var components_motion = require('../chunks/index-Ci8k-y1X.cjs');
 
 /**
  * `motionary/motion/layout` (= `motionary/components/motion-layout`, 14.2) — **Layout Motion 2.0** on Motion Engine v2.
@@ -563,4 +563,4 @@ exports.solveLayoutTransform = solveLayoutTransform;
 exports.supportsCrossDocumentViewTransitions = supportsCrossDocumentViewTransitions;
 exports.supportsViewTransitions = supportsViewTransitions;
 exports.viewTransitionName = viewTransitionName;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/motion-layout.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/motion-layout.cjs.map

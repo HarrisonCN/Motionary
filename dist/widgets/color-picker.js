@@ -1,2 +1,2 @@
-export { d as defineColorPicker } from '../chunks/color-picker-DfAShjuU.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/widgets/color-picker.js.map
+export { d as defineColorPicker } from '../chunks/color-picker-DYYFjqbb.js';
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/widgets/color-picker.js.map

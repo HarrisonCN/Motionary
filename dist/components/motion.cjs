@@ -1,10 +1,10 @@
 'use strict';
 
-require('../chunks/base-BvH4nAcv.cjs');
-require('../chunks/core-DjjKLmZ6.cjs');
+require('../chunks/base-DzZEJhQB.cjs');
+require('../chunks/core-D6--jjZC.cjs');
 require('./tokens.cjs');
-require('../chunks/spring-XEl_diDJ.cjs');
-var components_motion = require('../chunks/index-C9_FEsfz.cjs');
+require('../chunks/spring-DoapHVAk.cjs');
+var components_motion = require('../chunks/index-Ci8k-y1X.cjs');
 
 
 
@@ -17,4 +17,4 @@ exports.spring = components_motion.spring;
 exports.stagger = components_motion.stagger;
 exports.timeline = components_motion.timeline;
 exports.toEasingFn = components_motion.toEasingFn;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/motion.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/motion.cjs.map

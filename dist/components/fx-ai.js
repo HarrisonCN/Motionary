@@ -1,4 +1,4 @@
-import { registerEffects } from '../chunks/registry-BdSDdeL7.js';
+import { registerEffects } from '../chunks/registry-QiOscU6y.js';
 
 /** Split text into words, keeping the whitespace after each (7.8). */
 function splitWords(text) {
@@ -122,4 +122,4 @@ function registerAiPack() {
 }
 
 export { AI_FX, registerAiPack, splitWords };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/fx-ai.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/fx-ai.js.map

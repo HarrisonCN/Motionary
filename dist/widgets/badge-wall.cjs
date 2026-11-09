@@ -1,8 +1,8 @@
 'use strict';
 
-var widgets_badgeWall = require('../chunks/badge-wall-CITexuW7.cjs');
+var widgets_badgeWall = require('../chunks/badge-wall-nHmls1DJ.cjs');
 
 
 
 exports.defineBadgeWall = widgets_badgeWall.defineBadgeWall;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/widgets/badge-wall.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/widgets/badge-wall.cjs.map

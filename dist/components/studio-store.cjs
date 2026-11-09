@@ -192,14 +192,17 @@ function mergeProjects(base, mine, theirs) {
     const B = layersOf(base), M = layersOf(mine), T = layersOf(theirs);
     const mm = new Map(M.layers.map((l) => [String(l.id), l]));
     const out = T.layers.filter((l) => !cm.includes(String(l.id)) || mm.has(String(l.id))).map((l) => (cm.includes(String(l.id)) ? mm.get(String(l.id)) : l));
-    // layers mine added: keep their position relative to mine's order (after the previous layer that exists in out)
-    for (let i = 0; i < M.layers.length; i++) {
-        const id = String(M.layers[i].id);
-        if (out.some((l) => String(l.id) === id))
-            continue;
-        const prev = i ? String(M.layers[i - 1].id) : undefined;
-        const j = prev === undefined ? -1 : out.findIndex((l) => String(l.id) === prev);
-        out.splice(prev === undefined ? 0 : j < 0 ? out.length : j + 1, 0, M.layers[i]);
+    // Place local additions after the nearest surviving local predecessor.
+    // A layer missing from theirs only belongs back in the result if mine added it.
+    const changedLocally = new Set(cm);
+    let insertAt = 0;
+    for (const layer of M.layers) {
+        const id = String(layer.id);
+        const index = out.findIndex((entry) => String(entry.id) === id);
+        if (index >= 0)
+            insertAt = index + 1;
+        else if (changedLocally.has(id))
+            out.splice(insertAt++, 0, layer);
     }
     const pick = (b, m, t) => {
         const r = { ...t };
@@ -222,7 +225,14 @@ function mergeProjects(base, mine, theirs) {
  * else"); `merge: 'auto'` merges non-overlapping layer edits and saves the result, and throws on a real conflict.
  */
 function toAppStorage(store, o = {}) {
+    // write() returns void, so the editor may still hold its original draft after an auto-merge.
     const seen = new Map();
+    function mergeDraft(name, ancestor, draft, saved, rev) {
+        const merged = mergeProjects(ancestor, draft, saved);
+        if (!merged.ok)
+            throw new StoreError('conflict', `${name} was saved by someone else and layers ${merged.conflicts.join(', ')} changed on both sides`, rev);
+        return merged.text;
+    }
     return {
         async read(name) { const r = await store.get(name); if (r)
             seen.set(name, { rev: r.rev, text: r.text });
@@ -230,10 +240,10 @@ function toAppStorage(store, o = {}) {
             seen.delete(name); return r ? r.text : null; },
         async write(name, text) {
             const base = seen.get(name);
+            let saved = base?.draft === undefined ? text : mergeDraft(name, base.draft, text, base.text, base.rev);
+            let rev;
             try {
-                const { rev } = await store.put(name, text, { baseRev: base?.rev });
-                seen.set(name, { rev, text });
-                return;
+                ({ rev } = await store.put(name, saved, { baseRev: base?.rev }));
             }
             catch (e) {
                 if (!(e instanceof StoreError) || e.code !== 'conflict')
@@ -241,12 +251,10 @@ function toAppStorage(store, o = {}) {
                 const cur = await store.get(name);
                 if (o.merge !== 'auto' || !base || !cur)
                     throw new StoreError('conflict', `${name} was saved by someone else (now ${e.currentRev ?? cur?.rev}); reopen it, or save under another name`, e.currentRev ?? cur?.rev);
-                const m = mergeProjects(base.text, text, cur.text);
-                if (!m.ok)
-                    throw new StoreError('conflict', `${name} was saved by someone else and layers ${m.conflicts.join(', ')} changed on both sides`, cur.rev);
-                const { rev } = await store.put(name, m.text, { baseRev: cur.rev });
-                seen.set(name, { rev, text: m.text });
+                saved = mergeDraft(name, base.text, saved, cur.text, cur.rev);
+                ({ rev } = await store.put(name, saved, { baseRev: cur.rev }));
             }
+            seen.set(name, { rev, text: saved, draft: saved === text ? undefined : text });
         },
     };
 }
@@ -261,4 +269,4 @@ exports.createMemoryProjectStore = createMemoryProjectStore;
 exports.detectConflict = detectConflict;
 exports.mergeProjects = mergeProjects;
 exports.toAppStorage = toAppStorage;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/studio-store.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/studio-store.cjs.map

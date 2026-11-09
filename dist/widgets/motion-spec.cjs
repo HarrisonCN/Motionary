@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-BvH4nAcv.cjs');
+var base = require('../chunks/base-DzZEJhQB.cjs');
 var components_dsl = require('../components/dsl.cjs');
 var components_design = require('../components/design.cjs');
 
@@ -67,4 +67,4 @@ function defineMotionSpec(tag = 'usa-motion-spec') {
 }
 
 exports.defineMotionSpec = defineMotionSpec;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/widgets/motion-spec.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/widgets/motion-spec.cjs.map

@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-CibnX7Ui.cjs');
-var base = require('../chunks/base-BvH4nAcv.cjs');
+var registry = require('../chunks/registry-_XKU28ZC.cjs');
+var base = require('../chunks/base-DzZEJhQB.cjs');
 
 const MOVE = /^(transform|translate|scale|rotate|offset|offsetPath|offsetDistance|clipPath|top|left|right|bottom|margin.*|perspective)$/;
 /** Keyframes with all movement removed (opacity / colour / shadow kept; blur removed from filters) (9.5). */
@@ -152,4 +152,4 @@ exports.isFlashSafe = isFlashSafe;
 exports.loadMotionPreferences = loadMotionPreferences;
 exports.registerSafePack = registerSafePack;
 exports.vestibularSafe = vestibularSafe;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/fx-safe.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/fx-safe.cjs.map

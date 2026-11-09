@@ -1,7 +1,7 @@
 'use strict';
 
-var components_motion = require('../chunks/index-C9_FEsfz.cjs');
-var play = require('../chunks/play-D9Utt9rO.cjs');
+var components_motion = require('../chunks/index-Ci8k-y1X.cjs');
+var play = require('../chunks/play-CTz93Nas.cjs');
 
 /**
  * `motionary/motion/scene` (= `motionary/components/motion-scene`, 14.0) — `playScene()`: play a
@@ -40,4 +40,4 @@ function playScene(root, doc, options = {}) {
 }
 
 exports.playScene = playScene;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/motion-scene.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/motion-scene.cjs.map

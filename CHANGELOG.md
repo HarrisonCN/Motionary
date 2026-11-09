@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [17.2.2] - 2026-11-09
+
 ### Fixed
 - Weather, video, gallery, back-to-top and success-check components render user values through DOM text, attributes or CSS properties.
 - Studio plugins use document-bound message ports and launch dedicated Workers from an opaque origin. Supplying template verification keys now requires a valid signature by default.

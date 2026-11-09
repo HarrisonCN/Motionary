@@ -1,11 +1,11 @@
 'use strict';
 
 var components_studioCanvas = require('./studio-canvas.cjs');
-var history = require('../chunks/history-B0Ml40k1.cjs');
-var preview = require('../chunks/preview-kiMCBqSF.cjs');
-var scene = require('../chunks/scene-U2YkjCm0.cjs');
-var format = require('../chunks/format-b5fQz-vc.cjs');
-var project = require('../chunks/project-DiTOvzic.cjs');
+var history = require('../chunks/history-rim_8RCX.cjs');
+var preview = require('../chunks/preview-DGpXA2hJ.cjs');
+var scene = require('../chunks/scene-C_jNHfn4.cjs');
+var format = require('../chunks/format-CcfR6-Jx.cjs');
+var project = require('../chunks/project-DIZ0UqvG.cjs');
 var v3Read = require('../chunks/v3-read-BNhrN3tL.cjs');
 
 /**
@@ -826,4 +826,4 @@ exports.springBezier = project.springBezier;
 exports.springParams = project.springParams;
 exports.STUDIO_VERSION = STUDIO_VERSION;
 exports.createStudio = createStudio;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/studio.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/studio.cjs.map

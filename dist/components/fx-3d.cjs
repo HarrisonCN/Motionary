@@ -1,7 +1,7 @@
 'use strict';
 
-var base = require('../chunks/base-BvH4nAcv.cjs');
-var registry = require('../chunks/registry-CibnX7Ui.cjs');
+var base = require('../chunks/base-DzZEJhQB.cjs');
+var registry = require('../chunks/registry-_XKU28ZC.cjs');
 var shared = require('../chunks/shared-jkgRH-Hx.cjs');
 var components_fxLight = require('./fx-light.cjs');
 
@@ -250,4 +250,4 @@ function register3dPack() {
 
 exports.DEPTH3_FX = DEPTH3_FX;
 exports.register3dPack = register3dPack;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/fx-3d.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/fx-3d.cjs.map

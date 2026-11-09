@@ -68,11 +68,11 @@ export function defineRouteTransition(tag = 'usa-route-transition'): CustomEleme
             const u = new URL(a.href, location.href);
             if (u.origin !== location.origin || (u.pathname === location.pathname && u.search === location.search && u.hash)) return;
             e.preventDefault();
-            this.navigate(u.pathname + u.search + u.hash);
+            this.go(u.pathname + u.search + u.hash, this.str('history', 'push'), 'link');
           };
           this.listen(scopeAll ? document : this, 'click', onClick);
           this.listen(window, 'popstate', () => {
-            if (this.str('history', 'push') !== 'off') this.go(location.pathname + location.search + location.hash, 'off', true);
+            if (this.str('history', 'push') !== 'off') this.go(location.pathname + location.search + location.hash, 'off', 'popstate');
           });
         }
         unmount(): void {
@@ -91,7 +91,7 @@ export function defineRouteTransition(tag = 'usa-route-transition'): CustomEleme
         navigate(url: string, opts: { history?: 'push' | 'replace' | 'off' } = {}): Promise<boolean> {
           return this.go(url, opts.history || this.str('history', 'push'));
         }
-        private async go(url: string, hist: string, pop = false): Promise<boolean> {
+        private async go(url: string, hist: string, source?: 'link' | 'popstate'): Promise<boolean> {
           let target: URL;
           try { target = new URL(url, location.href); } catch { return false; }
           if (target.origin !== location.origin || !this.emit('navigate', { url, from: this.cur })) return false;
@@ -100,8 +100,8 @@ export function defineRouteTransition(tag = 'usa-route-transition'): CustomEleme
           const next = await this.content(url, signal).catch(() => null);
           if (signal.aborted) return false;
           if (!next) {
-            if (pop) location.reload();
-            else if (hist !== 'off') location.assign(target.href);
+            if (source === 'popstate') location.reload();
+            else if (source === 'link' || hist !== 'off') location.assign(target.href);
             return false;
           }
           let committed = false;
@@ -122,7 +122,7 @@ export function defineRouteTransition(tag = 'usa-route-transition'): CustomEleme
             if (!focus.hasAttribute('tabindex') && focus.tabIndex < 0) focus.tabIndex = -1;
             focus.focus({ preventScroll: true });
             if (anchor) anchor.scrollIntoView();
-            else if (!pop && (window.scrollX || window.scrollY)) window.scrollTo(0, 0);
+            else if (source !== 'popstate' && (window.scrollX || window.scrollY)) window.scrollTo(0, 0);
           };
           const engine = this.str('engine', 'auto');
           const fx = KF[this.str('effect', 'fade')] || KF.fade;

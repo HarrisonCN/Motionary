@@ -64,7 +64,7 @@ app.use(UsaPlugin);            // or app.use(UsaPlugin, { categories: ['click', 
 `<usa-switch :checked.prop="on" @usa:change="on = $event.detail.checked" />`
 
 ## Svelte / Solid / Angular
-Custom elements work as-is: Svelte (`use:usa` action — `on:usa:change` does not compile in Svelte 3/4 and `onusa:change` warns `attribute_illegal_colon` in Svelte 5), Solid (`prop:checked` + `use:usa` directive — `on:usa:change` is not valid JSX), Angular (`schemas: [CUSTOM_ELEMENTS_SCHEMA]`, `[checked]` + a `[usaOn]` directive over `bindUsa` — `(usa:change)` does not compile in Angular 17+, see below). Every pattern here is covered by the framework regression matrix ([frameworks-matrix.md](frameworks-matrix.md)). Call `defineComponents()` or `lazyDefine()` in the client entry.
+Custom elements work as-is: Svelte (`use:usa` action — `on:usa:change` does not compile in Svelte 3/4 and `onusa:change` warns `attribute_illegal_colon` in Svelte 5), Solid (`prop:checked` + `use:usa` directive — `on:usa:change` is not valid JSX), Angular (`schemas: [CUSTOM_ELEMENTS_SCHEMA]`, `[checked]` + a `[usaOn]` directive over `bindUsa` — `(usa:change)` does not compile in Angular 17+, see below). Every pattern here is covered by the framework regression matrix ([frameworks-matrix.md](https://github.com/HarrisonCN/Motionary/blob/main/docs/frameworks-matrix.md)). Call `defineComponents()` or `lazyDefine()` in the client entry.
 
 ## Lazy registration
 `lazyDefine()` (from `motionary/components/lazy`) watches the DOM and dynamically imports only the categories whose tags appear — a page with just `<usa-button>` loads the click chunk only.

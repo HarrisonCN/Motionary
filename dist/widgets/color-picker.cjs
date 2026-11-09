@@ -1,8 +1,8 @@
 'use strict';
 
-var widgets_colorPicker = require('../chunks/color-picker-B_xWVH8H.cjs');
+var widgets_colorPicker = require('../chunks/color-picker-8N-NOvcQ.cjs');
 
 
 
 exports.defineColorPicker = widgets_colorPicker.defineColorPicker;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/widgets/color-picker.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/widgets/color-picker.cjs.map

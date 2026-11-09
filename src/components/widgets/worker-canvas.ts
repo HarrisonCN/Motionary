@@ -64,9 +64,9 @@ export const WORKER_SCENE_FNS: Record<string, SceneFn> = {
   },
 };
 
-export const WORKER_SCENES: Record<string, string> = Object.fromEntries(
+export const WORKER_SCENES: Record<string, string> = /*#__PURE__*/ (() => Object.fromEntries(
   Object.entries(WORKER_SCENE_FNS).map(([name, draw]) => [name, draw.toString()])
-);
+))();
 
 export function defineWorkerCanvas(tag = 'usa-worker-canvas'): CustomElementConstructor | undefined {
   return defineElement(

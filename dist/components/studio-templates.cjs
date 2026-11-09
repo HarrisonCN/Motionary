@@ -1,6 +1,6 @@
 'use strict';
 
-var format = require('../chunks/format-b5fQz-vc.cjs');
+var format = require('../chunks/format-CcfR6-Jx.cjs');
 var components_studioAssets = require('./studio-assets.cjs');
 var components_studioExport = require('./studio-export.cjs');
 
@@ -358,7 +358,8 @@ async function verifyTemplate(t, o = {}) {
             }
         }
     }
-    const ok = errors.length === 0 && signature !== 'invalid' && (!o.requireSignature || signature === 'valid');
+    const requireSignature = o.requireSignature ?? (o.keys !== undefined);
+    const ok = errors.length === 0 && signature !== 'invalid' && (!requireSignature || signature === 'valid');
     return { ok, integrity, signature, errors };
 }
 // --- install / uninstall -----------------------------------------------------------------------------------------------
@@ -575,4 +576,4 @@ exports.templateInfo = templateInfo;
 exports.templateIntegrity = templateIntegrity;
 exports.uninstallTemplate = uninstallTemplate;
 exports.verifyTemplate = verifyTemplate;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/studio-templates.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/studio-templates.cjs.map

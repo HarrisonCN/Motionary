@@ -1,8 +1,8 @@
 'use strict';
 
-var base = require('../chunks/base-BvH4nAcv.cjs');
-var runtimeLink = require('../chunks/runtime-link-B9ya8z4g.cjs');
-var registry = require('../chunks/registry-DphPB165.cjs');
+var base = require('../chunks/base-DzZEJhQB.cjs');
+var runtimeLink = require('../chunks/runtime-link-CuTvUriO.cjs');
+var registry = require('../chunks/registry-DSGvJapR.cjs');
 
 var css = "usa-text-splitter{display:block;max-width:100%}usa-text-splitter .usa-split-word{white-space:nowrap}usa-text-splitter .usa-split-char,usa-text-splitter .usa-split-word,usa-text-splitter .usa-split-line{will-change:transform,opacity}usa-text-splitter .usa-rt-missing{margin:0 0 8px;padding:8px;border-radius:8px;background:#fef2f2;color:#991b1b;font:11px/1.4 ui-monospace,monospace;overflow-wrap:anywhere}";
 
@@ -84,4 +84,4 @@ function defineTextSplitter(tag = 'usa-text-splitter') {
 }
 
 exports.defineTextSplitter = defineTextSplitter;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/widgets/text-splitter.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/widgets/text-splitter.cjs.map

@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('../chunks/base-BvH4nAcv.cjs');
+var base = require('../chunks/base-DzZEJhQB.cjs');
 
 /**
  * motionary/components/bridge — native shell bridges (4.7).
@@ -170,4 +170,4 @@ exports.detectNativeHost = detectNativeHost;
 exports.isTrustedMessage = isTrustedMessage;
 exports.parseNativeSettings = parseNativeSettings;
 exports.postToNative = postToNative;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/bridge.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/bridge.cjs.map

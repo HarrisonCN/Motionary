@@ -1,8 +1,8 @@
 import { applyCanvasOps } from './studio-canvas.js';
-import { e as diffJson, v as validateSceneV2 } from '../chunks/v2-BN000nHo.js';
+import { e as diffJson, v as validateSceneV2 } from '../chunks/v2-D8Jj_M2f.js';
 import { describeMotion } from './ai.js';
-import { s as sampleTimelineDoc } from '../chunks/preview-DW0zh_0c.js';
-import { i as isValidEasing, a as timelineDocDuration, v as validateTimelineDoc, e as TimelineDocError, f as isLayerLocked } from '../chunks/format-CI6Vx9Ui.js';
+import { s as sampleTimelineDoc } from '../chunks/preview-B8ZFYuCm.js';
+import { i as isValidEasing, a as timelineDocDuration, v as validateTimelineDoc, e as TimelineDocError, f as isLayerLocked } from '../chunks/format-Crl81ga7.js';
 
 /**
  * 14.6 AI Studio assistant 2.0 — `motionary/studio/ai` (= `motionary/components/studio-ai`).
@@ -821,4 +821,4 @@ function createAiPanel(root, o) {
 }
 
 export { AI_EDIT_FORMAT, AI_EDIT_SCHEMA, AI_LIMITS, STUDIO_AI_SYSTEM_PROMPT, STUDIO_AI_VERSION, applySceneOps, buildAiRequest, checkSceneCompatibility, compareVersions, createAiPanel, createAiReview, createMockProvider, describeSceneOp, localAiEdit, matchComponents, parseAiEdit, proposeAiEdit, renderSceneHeadless, suggestSceneFixes, validateAiEdit };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/studio-ai.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/studio-ai.js.map

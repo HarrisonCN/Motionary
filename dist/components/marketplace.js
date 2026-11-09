@@ -1,5 +1,5 @@
-import { l as loadEffectPack } from '../chunks/manifest-EZTGWMQl.js';
-export { E as EFFECT_PACK_FORMAT, p as packManifest, v as validateManifest } from '../chunks/manifest-EZTGWMQl.js';
+import { l as loadEffectPack } from '../chunks/manifest-T3Z7n83G.js';
+export { E as EFFECT_PACK_FORMAT, p as packManifest, v as validateManifest } from '../chunks/manifest-T3Z7n83G.js';
 export { c as checkCompat, p as pluginIntegrity, s as satisfies, v as verifyPlugin } from '../chunks/sign-DvZ1jHxE.js';
 
 const MARKETPLACE_FORMAT = 'motionary/marketplace';
@@ -84,4 +84,4 @@ async function fetchMarketplace(url, fetcher = fetch) {
 }
 
 export { MARKETPLACE, MARKETPLACE_FORMAT, fetchMarketplace, installPlugin, installedPlugins, loadEffectPack, searchPlugins };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.1/dist/components/marketplace.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/marketplace.js.map

@@ -879,6 +879,7 @@ declare function offscreenRender(canvas: HTMLCanvasElement, program: DrawProgram
     worker?: boolean;
     paused?: boolean;
     fallback?: Exclude<DrawProgram, string>;
+    onBackendChange?: (backend: 'main' | 'none') => void;
 }): {
     backend: 'worker' | 'main' | 'none';
     stop(): void;
