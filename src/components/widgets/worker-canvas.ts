@@ -100,10 +100,15 @@ export function defineWorkerCanvas(tag = 'usa-worker-canvas'): CustomElementCons
           c.width = Math.max(60, Math.round(this.clientWidth || 300));
           c.height = Math.max(40, Math.round(this.clientHeight || 160));
           this.prepend(c);
-          const r = offscreenRender(c, this._prog || WORKER_SCENES[scene], { paused: this.reduced, fallback: this._prog ? undefined : WORKER_SCENE_FNS[scene] });
-          this._backend = r.backend;
-          this.setAttribute('data-usa-backend', r.backend);
-          this.emit('backend', { backend: r.backend });
+          const update = (backend: string) => {
+            this._backend = backend;
+            this.setAttribute('data-usa-backend', backend);
+            this.emit('backend', { backend });
+          };
+          const r = offscreenRender(c, this._prog || WORKER_SCENES[scene], {
+            paused: this.reduced, fallback: this._prog ? undefined : WORKER_SCENE_FNS[scene], onBackendChange: update,
+          });
+          update(r.backend);
           this.onCleanup(() => r.stop());
         }
       }

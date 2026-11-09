@@ -75,7 +75,8 @@ export function defineWeatherCard(tag = 'usa-weather-card'): CustomElementConstr
           text.className = 'usa-wc-text';
           text.setAttribute('data-usa-part', '');
           text.setAttribute('aria-hidden', 'true');
-          text.innerHTML = `<b class="usa-wc-temp">${Number.isFinite(temp) ? Math.round(temp) + unit : ''}</b><span class="usa-wc-label"></span><span class="usa-wc-place"></span>`;
+          text.innerHTML = `<b class="usa-wc-temp"></b><span class="usa-wc-label"></span><span class="usa-wc-place"></span>`;
+          text.querySelector('.usa-wc-temp')!.textContent = Number.isFinite(temp) ? Math.round(temp) + unit : '';
           (text.querySelector('.usa-wc-label') as HTMLElement).textContent = label;
           (text.querySelector('.usa-wc-place') as HTMLElement).textContent = place;
           this.prepend(scene, text);

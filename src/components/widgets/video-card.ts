@@ -43,8 +43,9 @@ export function defineVideoCard(tag = 'usa-video-card'): CustomElementConstructo
             v.tabIndex = -1;
           }
           const dur = this.str('duration');
-          this.insertAdjacentHTML('beforeend', `<span class="usa-vc-play" aria-hidden="true" data-usa-part></span><span class="usa-vc-time" data-usa-part>${dur}</span><span class="usa-vc-bar" aria-hidden="true" data-usa-part><i></i></span>`);
+          this.insertAdjacentHTML('beforeend', `<span class="usa-vc-play" aria-hidden="true" data-usa-part></span><span class="usa-vc-time" data-usa-part></span><span class="usa-vc-bar" aria-hidden="true" data-usa-part><i></i></span>`);
           const time = this.querySelector('.usa-vc-time') as HTMLElement;
+          time.textContent = dur;
           const bar = this.querySelector('.usa-vc-bar i') as HTMLElement;
           if (v && !dur) this.listen(v, 'loadedmetadata', () => (time.textContent = fmt(v.duration)));
           if (v) this.listen(v, 'timeupdate', () => v.duration && bar.style.setProperty('--p', String(v.currentTime / v.duration)));

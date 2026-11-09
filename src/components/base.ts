@@ -215,18 +215,22 @@ export function getBase(): BaseCtor {
 
     connectedCallback(): void {
       if (this._connected) return;
-      this._connected = true;
+
       // 13.5.0: a property set before the element was defined (React 18 wrappers, Vue `.prop`, Svelte, Angular
       // `[prop]` while hydrating, then define) sits on the instance and hides the class's setter — move it through.
       for (const [k, v] of Object.entries(this)) if (k in Object.getPrototypeOf(this)) delete (this as any)[k], ((this as any)[k] = v);
+      const start = () => {
+        this._connected = true;
+        this.mount();
+      };
       styleLoader?.(this.localName);
       // Upgraded while the parser is still inside us (a <script> in <head>
       // defined the element): children/text are not there yet, so wait.
       if (document.readyState === 'loading' && !this.nextSibling && !this.childNodes.length) {
         // listen() = addEventListener + a cleanup that removes it (same as before, smaller)
-        return this.listen(document, 'DOMContentLoaded', () => this._connected && this.isConnected && this.mount(), { once: true });
+        return this.listen(document, 'DOMContentLoaded', start, { once: true });
       }
-      this.mount();
+      start();
     }
 
     disconnectedCallback(): void {
@@ -241,8 +245,10 @@ export function getBase(): BaseCtor {
 
     /** Re-mount on attribute change (override for finer updates). */
     changed(_name: string): void {
-      this.teardown();
-      this.mount();
+      if (this._connected) {
+        this.teardown();
+        this.mount();
+      }
     }
 
     private teardown(): void {
@@ -430,7 +436,13 @@ function flushFrame(t: number): void {
   if (!c.paused) {
     const cdt = dt * c.rate;
     c.time += cdt;
-    frameListeners.forEach((el, fn) => (gate(el) ? p++ : (live++, fn(t, cdt))));
+    frameListeners.forEach((el, fn) => {
+      if (gate(el)) p++;
+      else {
+        live++;
+        try { fn(t, cdt); } catch (e) { error ??= e; }
+      }
+    });
   }
   st.parked += p;
   // everything parked: the pause hook's wake() restarts the loop

@@ -76,8 +76,7 @@ await verifyTemplate(signed, { keys: { 'acme-2026': 'base64 raw 32-byte public k
 ```
 
 The signature covers the integrity value the content actually has, so a re-hashed change keeps a matching integrity
-value but fails the signature (`'invalid'`). `'untrusted'` = signed by a key you did not list; with
-`requireSignature: true` only `'valid'` passes. Ed25519 in WebCrypto: Node 20+, Chrome 137+, Firefox 129+, Safari 17+;
+value but fails the signature (`'invalid'`). `'untrusted'` = signed by a key you did not list; supplying `keys` requires a valid signature by default. Set `requireSignature: false` explicitly for optional verification. Ed25519 in WebCrypto: Node 20+, Chrome 137+, Firefox 129+, Safari 17+;
 elsewhere the answer is `'unsupported'` (integrity is still checked — SHA-256 is plain JS).
 
 ## Install / uninstall

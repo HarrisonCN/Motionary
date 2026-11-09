@@ -56,31 +56,65 @@ export type DrawProgram = string | ((ctx: CanvasRenderingContext2D, t: number, w
  * 11.0: a **string** program only runs in a worker. Without a worker it needs `opts.fallback` (a function);
  * otherwise it is refused (`backend: 'none'`, console error) — strings are never evaluated on the main thread.
  */
-export function offscreenRender(canvas: HTMLCanvasElement, program: DrawProgram, opts: { worker?: boolean; paused?: boolean; fallback?: Exclude<DrawProgram, string> } = {}): { backend: 'worker' | 'main' | 'none'; stop(): void; resize(w: number, h: number): void } {
+export function offscreenRender(canvas: HTMLCanvasElement, program: DrawProgram, opts: { worker?: boolean; paused?: boolean; fallback?: Exclude<DrawProgram, string>; onBackendChange?: (backend: 'main' | 'none') => void } = {}): { backend: 'worker' | 'main' | 'none'; stop(): void; resize(w: number, h: number): void } {
   const code = typeof program === 'string' ? program : program.toString();
   const canWorker = opts.worker !== false && typeof Worker !== 'undefined' && typeof (canvas as any).transferControlToOffscreen === 'function' && typeof Blob !== 'undefined' && !!URL.createObjectURL;
   if (canWorker) {
+    let worker: Worker | undefined;
+    let url: string | undefined;
+
     try {
-      const off = (canvas as any).transferControlToOffscreen();
-      const src = `let c,ctx,w,h,st={},run=true,t0=0;const draw=(${code});self.onmessage=(e)=>{const d=e.data;if(d.canvas){c=d.canvas;ctx=c.getContext('2d');w=c.width;h=c.height;const loop=(t)=>{if(run){if(!t0)t0=t;draw(ctx,t-t0,w,h,st)}requestAnimationFrame(loop)};requestAnimationFrame(loop)}if(d.size){w=c.width=d.size[0];h=c.height=d.size[1]}if('run' in d)run=d.run;if(d.stop)close()}`;
-      const url = URL.createObjectURL(new Blob([src], { type: 'text/javascript' }));
-      const w = new Worker(url);
-      w.postMessage({ canvas: off }, [off]);
-      if (opts.paused) w.postMessage({ run: false });
-      return {
-        backend: 'worker',
-        stop: () => {
-          w.postMessage({ stop: true });
-          w.terminate();
-          URL.revokeObjectURL(url);
-        },
-        resize: (a, b) => w.postMessage({ size: [a, b] }),
+      const src = `const draw=(${code});let canvas,ctx,start,paused;
+        const state={};
+        function paint(t){draw(ctx,t,canvas.width,canvas.height,state)}
+        function frame(t){start??=t;paint(t-start);requestAnimationFrame(frame)}
+        self.onmessage=({data})=>{
+          if(data.canvas){
+            canvas=data.canvas;ctx=canvas.getContext('2d');paused=data.paused;
+            if(paused) paint(0);else requestAnimationFrame(frame);
+          }else if(data.size){
+            [canvas.width,canvas.height]=data.size;if(paused) paint(0);
+          }
+        };postMessage('ready')`;
+      url = URL.createObjectURL(new Blob([src], { type: 'text/javascript' }));
+      const w = worker = new Worker(url);
+      let transferred = false;
+      const stop = () => {
+        w.onmessage = w.onerror = null;
+        w.terminate();
       };
+      const handle: ReturnType<typeof offscreenRender> = {
+        backend: 'worker', stop,
+        resize(a, b) {
+          if (transferred) w.postMessage({ size: [a, b] });
+          else { canvas.width = a; canvas.height = b; }
+        },
+      };
+      const recover = () => {
+        stop();
+        const fallback = transferred ? { backend: 'none' as const, stop() {}, resize() {} }
+          : offscreenRender(canvas, program, { ...opts, worker: false });
+        Object.assign(handle, fallback);
+        opts.onBackendChange?.(fallback.backend as 'none' | 'main');
+      };
+      w.onerror = (e) => { e.preventDefault(); recover(); };
+      w.onmessage = () => {
+        w.onmessage = null;
+        try {
+          const off = canvas.transferControlToOffscreen();
+          transferred = true;
+          w.postMessage({ canvas: off, paused: !!opts.paused }, [off]);
+        } catch { recover(); }
+      };
+      return handle;
     } catch {
-      /* fall back to the main thread */
+      worker?.terminate();
+    } finally {
+      if (url) URL.revokeObjectURL(url);
     }
   }
-  const ctx = canvas.getContext?.('2d');
+  let ctx: CanvasRenderingContext2D | null = null;
+  try { ctx = canvas.getContext('2d'); } catch { /* canvas already transferred */ }
   if (!ctx) return { backend: 'none', stop: () => undefined, resize: () => undefined };
   if (typeof program === 'string' && !opts.fallback) {
     console.error('[motionary] offscreenRender() / <usa-worker-canvas>: a string program can only run in a worker (OffscreenCanvas); 11.0 no longer evaluates it on the main thread (new Function) — pass a function. See docs/upgrading-11.md.');
@@ -93,7 +127,7 @@ export function offscreenRender(canvas: HTMLCanvasElement, program: DrawProgram,
     ? () => undefined
     : onFrame((_now, dt) => {
         t += dt;
-        draw(ctx, t, canvas.width, canvas.height, st);
+        draw(ctx!, t, canvas.width, canvas.height, st);
       });
   if (opts.paused) draw(ctx, 0, canvas.width, canvas.height, st);
   return {
@@ -102,6 +136,7 @@ export function offscreenRender(canvas: HTMLCanvasElement, program: DrawProgram,
     resize: (a, b) => {
       canvas.width = a;
       canvas.height = b;
+      if (opts.paused) draw(ctx!, 0, a, b, st);
     },
   };
 }

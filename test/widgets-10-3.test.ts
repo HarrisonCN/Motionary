@@ -184,6 +184,23 @@ describe('10.3 widgets', () => {
     expect(document.head.querySelector('style[data-usa-route]')!.textContent).toBe('@view-transition{navigation:auto}');
     delete (document as any).startViewTransition;
   });
+  it('commits only the newest response and focuses its heading', async () => {
+    installComponentMocks({ reducedMotion: true });
+    let finish!: (r: unknown) => void;
+    vi.stubGlobal('fetch', vi.fn()
+      .mockImplementationOnce(() => new Promise(r => { finish = r; }))
+      .mockResolvedValueOnce({ ok: true, text: async () => '<main id="app"><h1>New</h1></main>' })
+      .mockRejectedValueOnce(Error('offline')));
+    document.body.innerHTML = '<usa-route-transition id="app" history="off"></usa-route-transition>';
+    const el = document.querySelector('usa-route-transition') as any;
+    const old = el.navigate('/old');
+    expect(await el.navigate('/new')).toBe(true);
+    finish({ ok: true, text: async () => '<main id="app">Old</main>' });
+    expect(await old).toBe(false);
+    expect(el.current).toBe('/new');
+    expect(document.activeElement).toBe(el.querySelector('h1'));
+    expect(await el.navigate('/missing"route')).toBe(false);
+  });
   it('cards, Store badge and snippets carry the text prerequisite', () => {
     const card: any = COMPONENTS.find((c: any) => c.tag === 'usa-text-splitter');
     expect(card.requires).toEqual(['text']);
