@@ -129,11 +129,11 @@ Notes: an effect entry imports its pack file (the effects of a pack share helper
 | `<usa-lottie-player>` | `motionary/widgets/lottie-player` | `defineLottiePlayer()` |
 | `<usa-rive>` | `motionary/widgets/rive` | `defineRive()` |
 | `<usa-token-editor>` | `motionary/widgets/token-editor` | `defineTokenEditor()` |
+| `<usa-physics-playground>` | `motionary/widgets/physics-playground` | `definePhysicsPlayground()` |
+| `<usa-motion-prompt>` | `motionary/widgets/motion-prompt` | `defineMotionPrompt()` |
 | `<usa-file-tree>` | `motionary/widgets/file-tree` | `defineFileTree()` |
 | `<usa-download-menu>` | `motionary/widgets/download-menu` | `defineDownloadMenu()` |
 | `<usa-title-sequence>` | `motionary/widgets/title-sequence` | `defineTitleSequence()` |
-| `<usa-physics-playground>` | `motionary/widgets/physics-playground` | `definePhysicsPlayground()` |
-| `<usa-motion-prompt>` | `motionary/widgets/motion-prompt` | `defineMotionPrompt()` |
 | `<usa-snap-carousel>` | `motionary/widgets/snap-carousel` | `defineSnapCarousel()` |
 | `<usa-gl-model>` | `motionary/widgets/gl-model` | `defineGlModel()` |
 | `<usa-dotlottie>` | `motionary/widgets/dotlottie` | `defineDotLottie()` |

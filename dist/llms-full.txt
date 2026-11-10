@@ -1,4 +1,4 @@
-# Motionary 17.2.2 — full component reference
+# Motionary 17.3.0 — full component reference
 
 Generated from the source. Machine-readable version: https://harrisoncn.github.io/Motionary/components.json (schema https://harrisoncn.github.io/Motionary/components.schema.json).
 
@@ -1310,6 +1310,17 @@ Double tap or double click a photo to pop a heart (or any emoji) at the tap poin
 </usa-double-tap>
 ```
 
+### <usa-download-menu> — Download menu
+
+Choose a download format. Escape closes the picker and returns focus.
+
+- Import: `import { defineDownloadMenu } from 'motionary/components/widgets'; defineDownloadMenu();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+
+```html
+<usa-download-menu><details><summary>Download</summary><a download="palette.txt" href="data:text/plain,Ink%20%23181716">Text palette</a><a download="palette.json" href="data:application/json,%5B%22%23181716%22%5D">JSON palette</a></details></usa-download-menu>
+```
+
 ### <usa-draggable> — Draggable
 
 Drag with mouse, touch, pen or arrow keys. spring-back returns home with a wobble; inertia glides after a flick; snap to a grid or points; rubber-band bounds.
@@ -1434,6 +1445,17 @@ A floating action button whose actions fan out with a staggered spring: up, down
   const drop = document.querySelector('usa-file-drop');
   drop.addEventListener('usa:files', (e) => upload(e.detail.files, (i, p) => drop.setProgress(i, p)));
 </script>
+```
+
+### <usa-file-tree> — File tree
+
+Expandable folders with native file links and left/right keyboard navigation.
+
+- Import: `import { defineFileTree } from 'motionary/components/widgets'; defineFileTree();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+
+```html
+<usa-file-tree><details open><summary>Portfolio</summary><details><summary>Portraits</summary><a href="#contact">Contact sheet</a></details></details></usa-file-tree>
 ```
 
 ### <usa-fullpage> — Full-page sections
@@ -3812,6 +3834,17 @@ Every data-tl child becomes a step in document order. data-at ('-=200', '<', 'la
   <button>Details</button>
   <div slot="tip"><strong>Pro tip</strong> …</div>
 </usa-tip>
+```
+
+### <usa-title-sequence> — Title sequence
+
+Switch between film intertitles with a circular reveal and native disclosure controls.
+
+- Import: `import { defineTitleSequence } from 'motionary/components/widgets'; defineTitleSequence();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+
+```html
+<usa-title-sequence><details open><summary>First light</summary><p>A film by the coast.</p></details><details><summary>Credits</summary><p>Photography and sound</p></details></usa-title-sequence>
 ```
 
 ### <usa-toast-stack> — Toast stack

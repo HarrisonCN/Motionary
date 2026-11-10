@@ -2,8 +2,8 @@
  * motionary/components/mo — the 17.0 `<mo-*>` names.
  *
  * After `defineMoAliases()` every default `<usa-*>` element is also registered as `<mo-*>` (`<usa-switch>` →
- * `<mo-switch>`): a subclass, so attributes, properties and `usa:*` events are the same. The component styles are copied
- * with renamed tag selectors the first time a `<mo-*>` element connects, so pages that never use `mo-*` pay nothing.
+ * `<mo-switch>`): a subclass, so attributes, properties and `usa:*` events are the same. The component styles are extended
+ * with matching public tag selectors the first time a `<mo-*>` element connects, so pages that never use `mo-*` pay nothing.
  *
  * The no-build bundles (`components.umd.js`, `widgets.umd.js`) call it before they register anything. With ESM, call it
  * once, ideally before you define components; `usa-*` elements defined earlier (the default component set) and `mo-*`
@@ -16,7 +16,7 @@
  * defineComponents();   // <mo-card>, <mo-tabs>, … and <usa-*> both work
  * ```
  */
-import { adoptStyles, canDefine } from './base';
+import { canDefine } from './base';
 import { publicTagNames } from './public-tags.generated';
 
 /** The `mo-*` alias of a default `usa-*` tag (`usa-switch` → `mo-switch`), or `null` for any other tag. */
@@ -49,26 +49,33 @@ export const aliasCss = (text: string): string => {
 
 let started = false;
 let active = false;
-let n = 0;
 const seen = /*#__PURE__*/ new WeakSet<object>();
 
-/** Copy the Motionary stylesheets added since the last look (and the user's adopted sheets) with mo-* selectors. */
+/** Extend style selectors in place so media queries, cascade layers and declaration order stay intact. */
+function extendSelectors(rules: CSSRuleList): void {
+  for (const rule of rules) {
+    if ('selectorText' in rule) {
+      const style = rule as CSSStyleRule;
+      const selector = style.selectorText;
+      const renamed = aliasCss(selector + '{').slice(0, -1);
+      if (renamed !== selector) style.selectorText = selector + ',' + renamed;
+    }
+    if ('cssRules' in rule) extendSelectors((rule as CSSGroupingRule).cssRules);
+  }
+}
+
 function scan(): void {
   const d = document;
-  const adopted: CSSStyleSheet[] = (d as any).adoptedStyleSheets || [];
-  for (const s of [...Array.from(d.styleSheets), ...adopted]) {
+  for (const s of [...d.styleSheets, ...(d.adoptedStyleSheets || [])]) {
     const o = s.ownerNode as Element | null;
     if (seen.has(s) || (o && !o.matches('[data-usa],[data-usa-css]'))) continue;
-    let css: string;
     try {
-      css = Array.from(s.cssRules, (r) => r.cssText).join('\n');
+      if (!s.cssRules.length) continue;
+      extendSelectors(s.cssRules);
+      seen.add(s);
     } catch {
-      continue; // not loaded yet, or a cross-origin file without CORS
+      // A pending or cross-origin stylesheet may not expose writable rules.
     }
-    if (!css) continue; // a pending link may expose an empty rule list before its load event
-    seen.add(s);
-    const a = aliasCss(css);
-    if (a !== css) adoptStyles('mo:' + n++, a);
   }
 }
 
@@ -77,24 +84,19 @@ function alias(tag: string, ctor: CustomElementConstructor): void {
   if (!a || customElements.get(a)) return;
   const C = ctor as any;
   class Alias extends C {
-    connectedCallback(): unknown {
-      const r = super.connectedCallback?.();
+    connectedCallback(): void {
+      super.connectedCallback?.();
       if (!active) {
         active = true;
         // A retry may be requested by a usa-* sibling after the mo-* element has already mounted.
         document.addEventListener('load', (event) => {
-          if (event.target instanceof HTMLLinkElement && event.target.hasAttribute('data-usa-css')) scan();
+          if ((event.target as Element | null)?.matches?.('link[data-usa-css]')) scan();
         }, true);
       }
       scan();
-      return r;
     }
   }
-  try {
-    customElements.define(a, Alias as unknown as CustomElementConstructor);
-  } catch {
-    /* the name is taken by another library */
-  }
+  customElements.define(a, Alias as unknown as CustomElementConstructor);
 }
 
 /**
@@ -116,5 +118,15 @@ export function defineMoAliases(): void {
     const c = reg.get(t);
     if (c) alias(t, c);
   }
-  if (active) scan();
+}
+
+// Applications that enable the mo-* names get the same DOM methods for both spellings.
+import type { UsaElementTag } from './frameworks/elements.generated';
+type LegacyTag = Extract<UsaElementTag, `usa-${string}`>;
+type PublicDomElements = {
+  [K in LegacyTag as K extends `usa-${infer Name}` ? `mo-${Name}` : never]:
+    K extends keyof HTMLElementTagNameMap ? HTMLElementTagNameMap[K] : HTMLElement;
+};
+declare global {
+  interface HTMLElementTagNameMap extends PublicDomElements {}
 }

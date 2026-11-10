@@ -1,14 +1,15 @@
 import { beforeAll, expect, it } from 'vitest';
-import { scanSource } from '../scripts/gen-manifest.mjs';
-import { publicTagNames } from '../src/components/public-tags.generated';
+import { buildManifest, scanSource } from '../scripts/gen-manifest.mjs';
 import { defineMoAliases } from '../src/components/mo';
 import { defineTitleSequence } from '../src/components/widgets/title-sequence';
+
+const publicTagNames = buildManifest().components.map((c: { tag: string }) => c.tag.slice(4));
 
 beforeAll(async () => {
   // Register all real components first, without any corresponding elements in the document.
   const modules = import.meta.glob('../src/components/**/*.ts');
   const source = scanSource();
-  for (const name of publicTagNames.split(' ')) {
+  for (const name of publicTagNames) {
     const entry = source['usa-' + name];
     expect(entry, name).toBeDefined();
     const module = await modules['../' + entry.file]() as Record<string, () => unknown>;
@@ -19,7 +20,7 @@ beforeAll(async () => {
 }, 120000);
 
 it('registers every public mo-* constructor, including absent late opt-in widgets', () => {
-  for (const name of publicTagNames.split(' ')) {
+  for (const name of publicTagNames) {
     expect(customElements.get('mo-' + name)?.prototype, name).toBeInstanceOf(customElements.get('usa-' + name)!);
   }
 });

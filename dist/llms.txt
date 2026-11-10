@@ -1,6 +1,6 @@
-# Motionary 17.2.2
+# Motionary 17.3.0
 
-> Motionary is a zero-dependency motion library: scroll animations, 200+ presets and 209 animated Web Components (<usa-*>) that work in plain HTML and every framework, plus motionary/runtime — its own tween/timeline engine and format loaders.
+> Motionary is a zero-dependency motion library: scroll animations, 200+ presets and 212 animated Web Components (<usa-*>) that work in plain HTML and every framework, plus motionary/runtime — its own tween/timeline engine and format loaders.
 
 Install: `npm i motionary` · CDN: https://unpkg.com/motionary@17/dist/components.umd.js (+ https://unpkg.com/motionary@17/dist/widgets.umd.js for 6.x+ widgets) · Manifest: https://harrisoncn.github.io/Motionary/components.json · Full text: https://harrisoncn.github.io/Motionary/llms-full.txt
 
@@ -82,6 +82,7 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<usa-dot-network>` (motionary/components/background): A dot grid that swells and links up with lines around the pointer.
 - `<usa-dotlottie>` (motionary/components/dotlottie; requires motionary/runtime/vector + motionary/runtime/lottie-state): 10.9: plays .lottie files with their themes (slots recoloured by a theme from the file) and state machines — playback states, event / numeric / boolean guards, 
 - `<usa-double-tap>` (motionary/components/click): Double tap or double click a photo to pop a heart (or any emoji) at the tap point. L for keyboard users.
+- `<usa-download-menu>` (motionary/components/widgets): Choose a download format. Escape closes the picker and returns focus.
 - `<usa-draggable>` (motionary/components/physics): Drag with mouse, touch, pen or arrow keys. spring-back returns home with a wobble; inertia glides after a flick; snap to a grid or points; rubber-band bounds.
 - `<usa-draw>` (motionary/components/svg): Every stroke of the SVG inside draws itself — on view, hover, click or scrubbed with scroll — staggered between shapes, optional fill afterwards. No getTotalLen
 - `<usa-drawer>` (motionary/components/ui): A side panel that springs in, drags / swipes closed, traps the page behind a backdrop and returns focus on close. Left, right, top or bottom.
@@ -90,6 +91,7 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<usa-festival-banner>` (motionary/components/widgets): 8.1: an announcement banner with an ambient festive scene behind the text — lunar lanterns and sparkles, Christmas lights and snow, Halloween bats and moon, or 
 - `<usa-field>` (motionary/components/widgets): 7.7: a text input whose label floats up on focus, with a growing underline; validates on blur — invalid shakes and slides the message in, valid draws a check. s
 - `<usa-file-drop>` (motionary/components/widgets): 6.9: dragging files over it lights marching-ants borders and lifts the icon; dropped (or browsed) files fly into a list with progress bars that end in a drawn c
+- `<usa-file-tree>` (motionary/components/widgets): Expandable folders with native file links and left/right keyboard navigation.
 - `<usa-fullpage>` (motionary/components/page): Full-screen sections that snap one at a time, with keyboard paging, dot navigation and a usa:section event.
 - `<usa-fx>` (motionary/components/fx): <usa-fx> plays any registered effect on its child: pulse, pop, jelly, wiggle, heartbeat, bounce, flash (≤ 2 per second), tada, shake. Click the button.
 - `<usa-gauge>` (motionary/components/widgets): 7.2: a semicircular gauge — the needle swings to the value on a damped spring (overshoot, settle), the arc fills in the colour of its zone and the number counts
@@ -230,6 +232,7 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<usa-tilt>` (motionary/components/interaction): Tilts toward the pointer in 3D with an optional glare; exposes --usa-tilt-x/y for parallax layers inside.
 - `<usa-timeline>` (motionary/components/timeline): Every data-tl child becomes a step in document order. data-at ('-=200', '<', 'label+=100') overlaps or aligns steps; scrub ties progress to scroll; trigger view
 - `<usa-tip>` (motionary/components/widgets): 6.6: springs out of its trigger with an arrow, flips to stay inside the viewport and shifts along the edge; hover + keyboard focus (Esc closes) or click popover
+- `<usa-title-sequence>` (motionary/components/widgets): Switch between film intertitles with a circular reveal and native disclosure controls.
 - `<usa-toast-stack>` (motionary/components/widgets): 6.3: toasts pile up into a collapsed stack (newest in front, older ones peeking behind), fan out on hover or focus, auto-dismiss (paused while hovered) and swip
 - `<usa-toaster>` (motionary/components/feedback): toast("Saved") slides a notification in; it pauses on hover, stacks with FLIP and announces politely (errors assertively).
 - `<usa-token-editor>` (motionary/components/widgets): 10.6 (motion design tokens 2.0): edit duration and cubic-bézier easing tokens with a live preview per token, then export W3C Design Tokens (DTCG 2025.10 or the 

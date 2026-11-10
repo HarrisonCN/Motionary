@@ -1474,6 +1474,32 @@
  },
  {
   "kind": "widget",
+  "name": "physics-playground",
+  "entry": "motionary/widgets/physics-playground",
+  "src": "src/entries/widgets/physics-playground.ts",
+  "tag": "usa-physics-playground",
+  "define": "definePhysicsPlayground",
+  "types": [
+   "UsaPhysicsPlaygroundElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/physics-playground"
+ },
+ {
+  "kind": "widget",
+  "name": "motion-prompt",
+  "entry": "motionary/widgets/motion-prompt",
+  "src": "src/entries/widgets/motion-prompt.ts",
+  "tag": "usa-motion-prompt",
+  "define": "defineMotionPrompt",
+  "types": [
+   "UsaMotionPromptElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/motion-prompt"
+ },
+ {
+  "kind": "widget",
   "name": "file-tree",
   "entry": "motionary/widgets/file-tree",
   "src": "src/entries/widgets/file-tree.ts",
@@ -1504,32 +1530,6 @@
   "types": [],
   "dts": "../components/widgets",
   "module": "components/widgets/title-sequence"
- },
- {
-  "kind": "widget",
-  "name": "physics-playground",
-  "entry": "motionary/widgets/physics-playground",
-  "src": "src/entries/widgets/physics-playground.ts",
-  "tag": "usa-physics-playground",
-  "define": "definePhysicsPlayground",
-  "types": [
-   "UsaPhysicsPlaygroundElement"
-  ],
-  "dts": "../components/widgets",
-  "module": "components/widgets/physics-playground"
- },
- {
-  "kind": "widget",
-  "name": "motion-prompt",
-  "entry": "motionary/widgets/motion-prompt",
-  "src": "src/entries/widgets/motion-prompt.ts",
-  "tag": "usa-motion-prompt",
-  "define": "defineMotionPrompt",
-  "types": [
-   "UsaMotionPromptElement"
-  ],
-  "dts": "../components/widgets",
-  "module": "components/widgets/motion-prompt"
  },
  {
   "kind": "widget",

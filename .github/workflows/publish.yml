@@ -1,12 +1,6 @@
 name: Publish to npm (provenance)
 
-# 16.9: publish from GitHub Actions so npm shows a signed provenance statement (which commit and workflow built the
-# tarball). Run it by hand for a release tag. Needs ONE of:
-#   • npm trusted publishing: on npmjs.com → motionary / use-scroll-animate → Settings → Trusted publisher →
-#     GitHub Actions, repository HarrisonCN/Motionary, workflow publish.yml (no token needed; OIDC), or
-#   • a repository secret NPM_TOKEN (granular automation token with publish rights to both packages).
-# Until one of them is configured this workflow fails at `npm publish` and releases keep being published from the
-# maintainer's machine (without provenance) — see docs/supply-chain.md.
+# Authenticate package uploads with the repository's NPM_TOKEN secret. OIDC signs build provenance.
 on:
   workflow_dispatch:
     inputs:
@@ -26,6 +20,14 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
+      - name: Require the npm publishing token
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [ -z "$NODE_AUTH_TOKEN" ]; then
+            echo "::error::Configure the NPM_TOKEN Actions secret with publish access to both packages."
+            exit 1
+          fi
       - uses: actions/checkout@v7
         with:
           ref: refs/tags/${{ inputs.tag }}

@@ -53,7 +53,7 @@ describe('17.0 mo-* element aliases', () => {
     expect(el.checked).toBe(false);
     expect(seen).toEqual([true, false]);
     expect(el.querySelector('[role="switch"]') || (el.getAttribute('role') === 'switch' ? el : null)).toBeTruthy();
-    const css = [...document.querySelectorAll('style')].map((s) => s.textContent).join('\n')
+    const css = Array.from(document.styleSheets, s => Array.from(s.cssRules, r => r.cssText).join('\n')).join('\n')
       + [...((document as any).adoptedStyleSheets || [])].map((s: any) => [...s.cssRules].map((r: any) => r.cssText).join('\n')).join('\n');
     expect(css).toMatch(/mo-switch\s*\{/);
     el.remove();
