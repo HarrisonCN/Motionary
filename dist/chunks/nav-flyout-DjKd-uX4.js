@@ -86,8 +86,13 @@ function navPanels(tag, mode) {
                 });
                 this.listen(this, 'keydown', (e) => this.key(e));
                 this.listen(this, 'focusout', (e) => {
-                    if (this._i >= 0 && !this.contains(e.relatedTarget))
-                        this.close();
+                    if (this._i < 0 || this.contains(e.relatedTarget))
+                        return;
+                    // Firefox may report a null relatedTarget on Tab-out: settle on the real active element.
+                    setTimeout(() => {
+                        if (this._i >= 0 && !this.contains(document.activeElement))
+                            this.close();
+                    }, 0);
                 });
                 this.listen(document, 'pointerdown', (e) => {
                     if (this._i >= 0 && !this.contains(e.target))
@@ -242,4 +247,4 @@ const defineMegaMenu = (tag = 'usa-mega-menu') => navPanels(tag, 'mega');
 const defineNavFlyout = (tag = 'usa-nav-flyout') => navPanels(tag, 'flyout');
 
 export { defineMegaMenu as a, defineNavFlyout as d };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/chunks/nav-flyout-Dk5v9C5N.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/chunks/nav-flyout-DjKd-uX4.js.map

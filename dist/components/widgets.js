@@ -160,7 +160,7 @@ import { defineTokenEditor } from '../widgets/token-editor.js';
 import { d as definePhysicsPlayground } from '../chunks/physics-playground-Cxcj4i13.js';
 export { P as PHYSICS_PRESETS } from '../chunks/physics-playground-Cxcj4i13.js';
 import { defineMotionPrompt } from '../widgets/motion-prompt.js';
-import { d as defineNavFlyout, a as defineMegaMenu } from '../chunks/nav-flyout-Dk5v9C5N.js';
+import { d as defineNavFlyout, a as defineMegaMenu } from '../chunks/nav-flyout-DjKd-uX4.js';
 import { defineFullscreenMenu } from '../widgets/fullscreen-menu.js';
 import { defineBreadcrumbs } from '../widgets/breadcrumbs.js';
 import { defineMoAliases } from './mo.js';
