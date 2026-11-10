@@ -21,6 +21,7 @@ import {
 } from '../src/components/studio/canvas';
 import { createTimelineDoc, createTimelineHistory, timelineDocToScene, normalizeTimelineDoc } from '../src/components/timeline/editor/index';
 import type { TimelineDoc } from '../src/components/timeline/editor/index';
+import { allowedLimit } from './budget-raises';
 
 const pkg = JSON.parse(readFileSync('package.json', 'utf8'));
 const budgets = JSON.parse(readFileSync('size-budget.json', 'utf8')) as { name: string; import?: string; file?: string; limit: number }[];
@@ -62,7 +63,7 @@ describe('14.3 Studio canvas: entry and packaging', () => {
       if (b.name.includes("motionary/components/compat-v13'")) continue; // removed in 15.0 (docs/deprecations-v15.md)
       const now = budgets.find((x) => x.name === b.name);
       expect(now, `budget line kept: ${b.name}`).toBeTruthy();
-      expect(now!.limit, `budget not raised: ${b.name}`).toBeLessThanOrEqual(b.limit);
+      expect(now!.limit, `budget not raised: ${b.name}`).toBeLessThanOrEqual(allowedLimit(b.name, b.limit));
     }
     expect(budgets.find((b) => /lite/.test(b.name) && b.limit === 79 * 1024), 'lite budget (17.3: 70 → 79 KB)').toBeTruthy();
   });

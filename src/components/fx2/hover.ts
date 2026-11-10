@@ -16,6 +16,7 @@
  */
 import type { EffectContext, EffectDefinition } from '../fx/registry';
 import { registerEffects } from '../fx/registry';
+import { raf as sraf, caf as scaf } from '../base';
 
 type Hooks = { enter: (e?: Event) => void; leave?: () => void; cleanup: () => void };
 const active = /*#__PURE__*/ new WeakMap<HTMLElement, Map<string, Hooks>>();
@@ -240,7 +241,7 @@ export const HOVER_FX: EffectDefinition[] = [
           if (!r.width || !r.height) return;
           x = (e.clientX - r.left) / r.width;
           y = (e.clientY - r.top) / r.height;
-          raf ||= requestAnimationFrame(apply);
+          raf ||= sraf(apply, el);
         };
         el.addEventListener('pointermove', move);
         return {
@@ -248,14 +249,14 @@ export const HOVER_FX: EffectDefinition[] = [
             grid.style.opacity = '.35';
           },
           leave: () => {
-            if (raf) cancelAnimationFrame(raf), (raf = 0);
+            if (raf) scaf(raf), (raf = 0);
             const from = el.style.transform;
             el.style.transform = prev;
             grid.style.opacity = '0';
             if (from && from !== prev) ctx.animate(el, [{ transform: from }, { transform: prev || 'none' }], { duration: 600, easing: 'cubic-bezier(.34,1.56,.64,1)' });
           },
           cleanup: () => {
-            if (raf) cancelAnimationFrame(raf);
+            if (raf) scaf(raf);
             el.removeEventListener('pointermove', move);
             el.style.transform = prev;
             grid.remove();

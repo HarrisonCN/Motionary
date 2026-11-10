@@ -21,7 +21,7 @@ describe('7.5 Store live thumbnails', () => {
     for (const it of COMPONENT_ITEMS as any[]) {
       const g: any = findComponent(it.gallery);
       expect(g, it.id).toBeTruthy();
-      expect(String(g.demo), it.id).toMatch(/<usa-/);
+      expect(String(g.demo), it.id).toMatch(/<(usa|mo)-/); // 17.3: demos use <mo-*>
     }
     expect(existsSync('showcase/thumb.html')).toBe(true);
     const thumb = readFileSync('showcase/thumb.js', 'utf8');

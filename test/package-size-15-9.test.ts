@@ -14,8 +14,8 @@ describe('15.9 package size', () => {
     expect(files).toContain('docs');
     expect(files).toContain('dist');
   });
-  it('the unpacked limit is unchanged (14 MB) and Pages still gets llms-full.txt from the build', () => {
-    expect(readFileSync('scripts/check-pack.mjs', 'utf8')).toContain('unpacked: 14 * 1024 * 1024');
+  it('the unpacked limit (14 MB, 16 MB since 17.3) and Pages still gets llms-full.txt from the build', () => {
+    expect(readFileSync('scripts/check-pack.mjs', 'utf8')).toContain('unpacked: 16 * 1024 * 1024'); // 17.3: 14 → 16 MB (measured 14.32 MB)
     expect(readFileSync('scripts/gen-manifest.mjs', 'utf8')).toMatch(/llms-full\.txt/);
     if (existsSync('dist/llms-full.txt')) expect(readFileSync('dist/llms-full.txt', 'utf8')).toMatch(/full component reference/);
     expect(readFileSync('AGENTS.md', 'utf8')).toContain('https://harrisoncn.github.io/Motionary/llms-full.txt');

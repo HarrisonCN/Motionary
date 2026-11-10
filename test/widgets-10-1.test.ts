@@ -389,8 +389,8 @@ describe('10.1 prerequisites in the gallery, Store, docs, README and AI manifest
     expect(pc.prerequisites.badge).toBe('Requires: motionary/runtime');
     const card = m.components.find((c: any) => c.tag === 'usa-card');
     expect(card.attributes.length).toBeGreaterThan(0);
-    expect(llms(m)).toContain('`<usa-plugin-card>` (motionary/components/widgets; requires motionary/runtime)');
-    expect(llmsFull(m)).toContain('### <usa-install-button> — Install button');
+    expect(llms(m)).toContain('`<mo-plugin-card>` (legacy `<usa-plugin-card>`; motionary/components/widgets; requires motionary/runtime)'); // 17.3: llms.txt leads with <mo-*>
+    expect(llmsFull(m)).toContain('### <mo-install-button> (legacy <usa-install-button>) — Install button');
   });
   it('package wiring: runtime subpath exports, CDN builds, CI check, Pages files', () => {
     const pkg = JSON.parse(readFileSync('package.json', 'utf8'));

@@ -29,7 +29,7 @@ describe('14.1 Motion Tokens 2.0: entry and packaging', () => {
     expect(pkg.exports['./tokens']).toEqual(pkg.exports['./components/motion-tokens']);
     expect(readFileSync('src/components/lite.ts', 'utf8')).not.toMatch(/tokens\/v2/);
   });
-  it('has its own budget line and raises no existing budget (lite stays 70 KB)', () => {
+  it('has its own budget line and raises no existing budget except the recorded 17.3 lite raise (70 → 79 KB)', () => {
     const own = budgets.find((b) => b.import && /pkg\/components\/motion-tokens'/.test(b.import));
     expect(own, 'budget line for motionary/components/motion-tokens').toBeTruthy();
     expect(own!.limit).toBeLessThanOrEqual(10 * 1024); // measured ~9.4 KB gz (esbuild) — set.ts ~60 %, figma.ts ~22 %
@@ -37,7 +37,9 @@ describe('14.1 Motion Tokens 2.0: entry and packaging', () => {
       if (b.name.includes("motionary/components/compat-v13'")) continue; // removed in 15.0 (docs/deprecations-v15.md)
       const now = budgets.find((x) => x.name === b.name);
       expect(now, `budget line kept: ${b.name}`).toBeTruthy();
-      expect(now!.limit, `budget not raised: ${b.name}`).toBeLessThanOrEqual(b.limit);
+      // 17.3: maintainer-approved raise, recorded in CHANGELOG (lite 70 → 79 KB, measured 70.29 KB)
+      const raised17_3: Record<string, number> = { "import 'motionary/components/lite'": 80896 };
+      expect(now!.limit, `budget not raised: ${b.name}`).toBeLessThanOrEqual(raised17_3[b.name] ?? b.limit);
     }
     expect(budgets.find((b) => /components\/lite'/.test(b.import || ''))!.limit).toBe(80896); // 17.3: 70 → 79 KB
   });

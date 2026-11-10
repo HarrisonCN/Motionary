@@ -52,7 +52,7 @@ describe('component gallery catalog', () => {
   });
 
   it('every element demo actually uses its element', () => {
-    COMPONENTS.filter((c: any) => !['usa-scrolly', 'usa-toaster', 'usa-dialog', 'usa-sticky-stack', 'usa-ambient', 'usa-splash'].includes(c.tag)).forEach((c: any) => expect(c.demo, c.tag).toContain(`<${c.tag}`));
+    COMPONENTS.filter((c: any) => !['usa-scrolly', 'usa-toaster', 'usa-dialog', 'usa-sticky-stack', 'usa-ambient', 'usa-splash'].includes(c.tag)).forEach((c: any) => expect(c.demo, c.tag).toMatch(new RegExp(`<(${c.tag}|${c.tag.replace(/^usa-/, 'mo-')})`))); // 17.3: demos use <mo-*>
   });
 
   it('search matches tags, English, Chinese and category names', () => {
@@ -76,7 +76,7 @@ describe('component gallery catalog', () => {
     const tw = componentSnippets(findComponent('typewriter'));
     expect(tw.html).toContain('dist/components.umd.js');
     expect(tw.esm).toContain("import { defineTypewriter } from 'motionary/components/text';");
-    expect(tw.react).toContain('<usa-typewriter');
+    expect(tw.react).toContain('<mo-typewriter'); // 17.3: snippets use <mo-*>
     expect(tw.vue).toContain('isCustomElement');
     expect(tw.desktop).toContain('configureComponents({ injectStyles: false })');
   });

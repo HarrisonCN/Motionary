@@ -35,6 +35,7 @@ import { GENART_FX } from '../fx2/genart';
 import { VIDEO_FX } from '../fx2/video';
 import { SAFE_FX } from '../fx2/safemotion';
 import { PERF3_FX } from '../fx2/perf3';
+import { HOVER_FX } from '../fx2/hover';
 
 export interface EffectPlugin {
   name: string;
@@ -104,6 +105,8 @@ export const video = /*#__PURE__*/ P('video', VIDEO_FX);
 export const safe = /*#__PURE__*/ P('safe', SAFE_FX);
 /** The `perf3` pack. */
 export const perf3 = /*#__PURE__*/ P('perf3', PERF3_FX);
+/** The `hover` pack (17.3: text-roll, image-swap, focus-reveal, grid-warp, googly-eyes). */
+export const hover = /*#__PURE__*/ P('hover', HOVER_FX);
 
 /** Every built-in plugin. */
-export const ALL_PLUGINS: EffectPlugin[] = [gpu, text, light, depth, morph, transitions, weather, physics, focus, music, chart, shop, social, game, geo, form, ai, festival, retro, organic, cyber, paper, surface, gesture3, spatial, cinema, lottie, genart, video, safe, perf3];
+export const ALL_PLUGINS: EffectPlugin[] = [gpu, text, light, depth, morph, transitions, weather, physics, focus, music, chart, shop, social, game, geo, form, ai, festival, retro, organic, cyber, paper, surface, gesture3, spatial, cinema, lottie, genart, video, safe, perf3, hover];

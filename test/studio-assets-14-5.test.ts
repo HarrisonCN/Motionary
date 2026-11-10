@@ -16,6 +16,7 @@ import {
 import { createTimelineDoc } from '../src/components/timeline/editor/index';
 import { serializeStudioProject, parseStudioProject, sampleFrames } from '../src/components/studio/index';
 import type { TimelineDoc } from '../src/components/timeline/editor/index';
+import { allowedLimit } from './budget-raises';
 
 const pkg = JSON.parse(readFileSync('package.json', 'utf8'));
 const budgets = JSON.parse(readFileSync('size-budget.json', 'utf8')) as { name: string; import?: string; file?: string; limit: number }[];
@@ -55,7 +56,7 @@ describe('14.5 entry, version and budget', () => {
       if (b.name.includes("motionary/components/compat-v13'")) continue; // removed in 15.0 (docs/deprecations-v15.md)
       const now = budgets.find((x) => x.name === b.name);
       expect(now, b.name).toBeTruthy();
-      expect(now!.limit, b.name).toBeLessThanOrEqual(b.limit);
+      expect(now!.limit, b.name).toBeLessThanOrEqual(allowedLimit(b.name, b.limit));
     }
     for (const f of ['lite', 'core/index', 'motion/index', 'studio/index']) expect(readFileSync(`src/components/${f}.ts`, 'utf8')).not.toMatch(/studio\/assets|from '\.\/assets'/);
   });

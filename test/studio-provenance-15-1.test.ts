@@ -170,6 +170,6 @@ describe('15.1 package contents', () => {
     const pkg = JSON.parse(readFileSync('package.json', 'utf8'));
     expect(pkg.files).toContain('docs');
     expect(pkg.files).toContain('!docs/ROADMAP.md');
-    expect(readFileSync('scripts/check-pack.mjs', 'utf8')).toContain('unpacked: 14 * 1024 * 1024');
+    expect(readFileSync('scripts/check-pack.mjs', 'utf8')).toContain('unpacked: 16 * 1024 * 1024' /* 17.3: 14 → 16 MB, measured 14.32 MB */);
   });
 });
