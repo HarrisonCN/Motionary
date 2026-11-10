@@ -40,7 +40,7 @@ export type { UsaElementAttributeMap, UsaElementEventMap, UsaElementTag } from '
 export const USA_TAGS: string[] = /*#__PURE__*/ Object.values(COMPONENT_CATEGORIES).flat() as string[];
 
 /** `true` for every `<usa-*>` tag — e.g. for a custom schema check or a template linter. */
-export const isUsaElement = (tag: string): boolean => tag.startsWith('usa-');
+export const isUsaElement = (tag: string): boolean => tag.startsWith('mo-') || tag.startsWith('usa-');
 
 /** `APP_INITIALIZER` factory: registers the elements in the browser (no-op during SSR). */
 export function usaInitializer(categories?: ComponentCategory[]): () => () => void {

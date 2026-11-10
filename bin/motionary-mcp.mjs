@@ -41,7 +41,7 @@ export function loadManifest(path = process.env.MOTIONARY_MANIFEST || join(HERE,
 // ---------------------------------------------------------------- catalog logic (pure)
 const norm = (s) => String(s || '').toLowerCase();
 const tagOf = (s) => {
-  const t = norm(s).trim().replace(/^<|\/?>$/g, '');
+  const t = norm(s).trim().replace(/^<|\/?>$/g, '').replace(/^mo-/, 'usa-');
   return t.startsWith('usa-') ? t : `usa-${t}`;
 };
 // 2.0: a requirement id is a motionary/runtime module or (10.6+) an official runtime (kind 'peer', e.g. rive → @rive-app/canvas)
@@ -63,7 +63,7 @@ export function findComponent(m, tag) {
 export function searchComponents(m, query, limit = 10) {
   indexModules(m);
   // 13.7: exact-tag priority, exact keyword / tag-segment boosts, typo-tolerant matching, stable tie-break (mcp-tools-2.mjs) — same result shape
-  return rankComponents(m, query).slice(0, limit).map((x) => ({ ...brief(x.c), score: x.s }));
+  return rankComponents(m, String(query || '').replace(/^mo-/i, 'usa-')).slice(0, limit).map((x) => ({ ...brief(x.c), score: x.s }));
 }
 
 const FRAMEWORKS = ['html', 'esm', 'react', 'vue', 'svelte', 'solid', 'angular'];
@@ -421,7 +421,7 @@ export function validateSnippet(m, code) {
   indexModules(m);
   const src = String(code || '');
   const errors = [], warnings = [];
-  const tags = [...src.matchAll(/<(usa-[a-z0-9-]+)([^>]*)>/gi)];
+  const tags = [...src.matchAll(/<((?:usa|mo)-[a-z0-9-]+)([^>]*)>/gi)];
   const used = new Map();
   for (const [, rawTag, rawAttrs] of tags) {
     const tag = rawTag.toLowerCase();

@@ -12,7 +12,7 @@ registerPearlescent(); defineFx(); // <usa-fx effect="pearlescent">
 
 Notes: an effect entry imports its pack file (the effects of a pack share helpers), so its size is the pack’s, not the whole 6.x set. Runtime-powered widgets still need their prerequisites (`use(…)`, see the Requires badge). The group entries (`motionary/components/widgets`, `/fx2`, `/lite`) are unchanged.
 
-## Widgets (118)
+## Widgets (121)
 
 | Tag | Import | Define |
 |---|---|---|
@@ -129,6 +129,9 @@ Notes: an effect entry imports its pack file (the effects of a pack share helper
 | `<usa-lottie-player>` | `motionary/widgets/lottie-player` | `defineLottiePlayer()` |
 | `<usa-rive>` | `motionary/widgets/rive` | `defineRive()` |
 | `<usa-token-editor>` | `motionary/widgets/token-editor` | `defineTokenEditor()` |
+| `<usa-file-tree>` | `motionary/widgets/file-tree` | `defineFileTree()` |
+| `<usa-download-menu>` | `motionary/widgets/download-menu` | `defineDownloadMenu()` |
+| `<usa-title-sequence>` | `motionary/widgets/title-sequence` | `defineTitleSequence()` |
 | `<usa-physics-playground>` | `motionary/widgets/physics-playground` | `definePhysicsPlayground()` |
 | `<usa-motion-prompt>` | `motionary/widgets/motion-prompt` | `defineMotionPrompt()` |
 | `<usa-snap-carousel>` | `motionary/widgets/snap-carousel` | `defineSnapCarousel()` |

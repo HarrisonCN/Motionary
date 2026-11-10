@@ -65,9 +65,9 @@ export const defineB = (tag = 'x-bb') => defineThing(tag, 'b');
 });
 
 describe('13.0.1: manifest tag set == audited tag set', () => {
-  it('all 209 public manifest components are audited, and nothing else', () => {
+  it('all 212 public manifest components are audited, and nothing else', () => {
     const tags = manifestTags();
-    expect(tags.length).toBe(209);
+    expect(tags.length).toBe(212);
     const rows = audit();
     expect(coverage(rows, tags)).toEqual({ missing: [], extra: [] });
     expect(rows.map((r: any) => r.tag).sort()).toEqual([...tags].sort());
@@ -82,7 +82,7 @@ describe('13.0.1: manifest tag set == audited tag set', () => {
     expect(src).toContain('not audited');
     const r = spawnSync(process.execPath, ['scripts/contract-audit.mjs', '--check'], { encoding: 'utf8' });
     expect(r.status, r.stdout).toBe(0);
-    expect(r.stdout).toContain('209 components');
+    expect(r.stdout).toContain('212 components');
     expect(r.stdout).toContain('manifest tag set matches');
     // simulate a new public component the auditor cannot see
     const r2 = spawnSync(process.execPath, ['scripts/contract-audit.mjs', '--check'], { encoding: 'utf8', env: { ...process.env, USA_AUDIT_EXTRA_MANIFEST_TAG: 'usa-brand-new' } });
@@ -95,7 +95,7 @@ describe('13.0.1: zero non-exempt findings; exemptions are explicit and scoped',
   const rows = audit();
   it('zero findings across all audited components', () => {
     expect(rows.flatMap((r: any) => r.findings.map((f: any) => `<${r.tag}> ${f.rule} ${f.detail}`))).toEqual([]);
-    expect(summary(rows).components).toBe(209);
+    expect(summary(rows).components).toBe(212);
   });
   it('every exemption names its rule, a reason, and (for per-item rules) the exact items it covers', () => {
     for (const r of rows)

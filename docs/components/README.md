@@ -1,4 +1,4 @@
-# Motionary components (209)
+# Motionary components (212)
 
 One page per `<usa-*>` element, generated from the source. Machine-readable: `motionary/tooling/manifest.json` · Pages `/components.json` · `/llms.txt` · `/llms-full.txt`. How to use these with an AI assistant: [AGENTS.md](../../AGENTS.md) and [the prompt guide](../ai-prompt-guide.md).
 
@@ -45,10 +45,12 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<usa-date-picker>`](usa-date-picker.md) — Date picker
 - [`<usa-dock>`](usa-dock.md) — macOS-style dock
 - [`<usa-dotlottie>`](usa-dotlottie.md) — Interactive dotLottie (themes + state machine) · Requires: motionary/runtime/vector + motionary/runtime/lottie-state
+- [`<usa-download-menu>`](usa-download-menu.md) — Download menu
 - [`<usa-drawer>`](usa-drawer.md) — Drawer
 - [`<usa-fab>`](usa-fab.md) — FAB speed dial
 - [`<usa-festival-banner>`](usa-festival-banner.md) — Festival banner
 - [`<usa-field>`](usa-field.md) — Animated field
+- [`<usa-file-tree>`](usa-file-tree.md) — File tree
 - [`<usa-gauge>`](usa-gauge.md) — Spring gauge
 - [`<usa-gen-art>`](usa-gen-art.md) — Generative artwork
 - [`<usa-gesture-sticker>`](usa-gesture-sticker.md) — Multi-touch sticker
@@ -119,6 +121,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<usa-theme-surface>`](usa-theme-surface.md) — Theme surface
 - [`<usa-theme-switcher>`](usa-theme-switcher.md) — Theme switcher
 - [`<usa-tip>`](usa-tip.md) — Tooltip / popover 2.0
+- [`<usa-title-sequence>`](usa-title-sequence.md) — Title sequence
 - [`<usa-token-editor>`](usa-token-editor.md) — Motion token editor (W3C DTCG)
 - [`<usa-upload-progress>`](usa-upload-progress.md) — Upload progress
 - [`<usa-video-card>`](usa-video-card.md) — Video card

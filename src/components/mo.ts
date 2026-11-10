@@ -17,7 +17,7 @@
  * ```
  */
 import { adoptStyles, canDefine } from './base';
-import { COMPONENT_CATEGORIES } from './index-tags';
+import { publicTagNames } from './public-tags.generated';
 
 /** The `mo-*` alias of a default `usa-*` tag (`usa-switch` → `mo-switch`), or `null` for any other tag. */
 export const aliasTag = (tag: string): string | null => (/^usa-[a-z]/.test(tag) ? 'mo-' + tag.slice(4) : null);
@@ -110,7 +110,7 @@ export function defineMoAliases(): void {
     define.call(this, name, ctor, options);
     alias(name, ctor);
   };
-  const tags: string[] = Object.values(COMPONENT_CATEGORIES).flat();
+  const tags: string[] = publicTagNames.split(' ').map(name => 'usa-' + name);
   if (typeof document !== 'undefined') document.querySelectorAll('*').forEach((e) => e.localName.startsWith('mo-') && tags.push('usa-' + e.localName.slice(3)));
   for (const t of tags) {
     const c = reg.get(t);

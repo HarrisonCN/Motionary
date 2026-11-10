@@ -1,0 +1,4 @@
+usa-file-tree{display:block;font:inherit}
+usa-file-tree details{padding-inline-start:1em;border-inline-start:1px solid currentColor}
+usa-file-tree summary{cursor:pointer;padding-block:.3em}
+usa-file-tree a{display:block;width:fit-content;margin-inline-start:1.1em;padding-block:.2em}

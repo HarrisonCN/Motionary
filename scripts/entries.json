@@ -1474,6 +1474,39 @@
  },
  {
   "kind": "widget",
+  "name": "file-tree",
+  "entry": "motionary/widgets/file-tree",
+  "src": "src/entries/widgets/file-tree.ts",
+  "tag": "usa-file-tree",
+  "define": "defineFileTree",
+  "types": [],
+  "dts": "../components/widgets",
+  "module": "components/widgets/file-tree"
+ },
+ {
+  "kind": "widget",
+  "name": "download-menu",
+  "entry": "motionary/widgets/download-menu",
+  "src": "src/entries/widgets/download-menu.ts",
+  "tag": "usa-download-menu",
+  "define": "defineDownloadMenu",
+  "types": [],
+  "dts": "../components/widgets",
+  "module": "components/widgets/download-menu"
+ },
+ {
+  "kind": "widget",
+  "name": "title-sequence",
+  "entry": "motionary/widgets/title-sequence",
+  "src": "src/entries/widgets/title-sequence.ts",
+  "tag": "usa-title-sequence",
+  "define": "defineTitleSequence",
+  "types": [],
+  "dts": "../components/widgets",
+  "module": "components/widgets/title-sequence"
+ },
+ {
+  "kind": "widget",
   "name": "physics-playground",
   "entry": "motionary/widgets/physics-playground",
   "src": "src/entries/widgets/physics-playground.ts",

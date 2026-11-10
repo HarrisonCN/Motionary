@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [17.3.0] - 2026-11-10
+
+- Add file tree navigation, a multi-format download picker, and a cinematic title sequence with reduced-motion support. See [gallery components](docs/gallery-components.md).
+- Register all public mo-* names even when enabling aliases after individual widgets. Generated framework types and MCP snippet validation now recognize the public prefix.
+
 ## [17.2.2] - 2026-11-09
 
 ### Fixed
