@@ -1,7 +1,9 @@
-import { f as defineElement } from './base-SPDwWyB1.js';
-import { w as watchViewport } from './viewport-BAXHhZLV.js';
-import { p as part } from './shared-o9CtwHmi.js';
-import { b as delegateTriggers } from './sheet-DZd011Pc.js';
+'use strict';
+
+var base = require('./base-DzZEJhQB.cjs');
+var viewport = require('./viewport-EFYGqMNa.cjs');
+var shared = require('./shared-Bf72wLyt.cjs');
+var widgets_modal = require('./sheet-BzJEwGbk.cjs');
 
 var css = "usa-toast-stack{position:fixed;z-index:2147482000;width:min(360px,calc(100vw - 24px));pointer-events:none;--usa-tstack-bg:#111827;--usa-tstack-fg:#f9fafb}usa-toast-stack[contained]{position:absolute;width:min(360px,calc(100% - 24px))}usa-toast-stack[data-position^=\"bottom\"]{bottom:calc(12px + var(--usa-kb,0px))}usa-toast-stack[data-position^=\"top\"]{top:12px}usa-toast-stack[data-position$=\"right\"]{right:12px}usa-toast-stack[data-position$=\"left\"]{left:12px}usa-toast-stack[data-position$=\"center\"]{left:50%;transform:translateX(-50%)}.usa-tstack-list{position:relative;list-style:none;margin:0;padding:0;min-height:1px;transition:height .3s}.usa-tstack{position:absolute;left:0;right:0;display:flex;align-items:center;gap:10px;box-sizing:border-box;padding:12px 12px 12px 14px;border-radius:14px;background:var(--usa-tstack-bg);color:var(--usa-tstack-fg);box-shadow:0 12px 32px -10px rgba(0,0,0,.45);font:500 14px/1.35 system-ui,sans-serif;pointer-events:auto;touch-action:pan-y;transition:transform .38s cubic-bezier(.22,1,.36,1),opacity .3s;user-select:none}usa-toast-stack[data-position^=\"bottom\"] .usa-tstack{bottom:0;transform-origin:50% 100%}usa-toast-stack[data-position^=\"top\"] .usa-tstack{top:0;transform-origin:50% 0}.usa-tstack-icon{flex:none;display:grid;place-items:center;width:22px;height:22px;border-radius:50%;font-size:13px;font-weight:800;background:#3b82f6;color:#fff}.usa-tstack-success .usa-tstack-icon{background:#22c55e}.usa-tstack-warning .usa-tstack-icon{background:#f59e0b}.usa-tstack-error .usa-tstack-icon{background:#ef4444}.usa-tstack-text{flex:1;min-width:0;display:flex;flex-direction:column}.usa-tstack-text strong{font-weight:700}.usa-tstack-action{border:0;border-radius:8px;padding:6px 10px;background:rgba(255,255,255,.14);color:inherit;font:600 13px system-ui,sans-serif;cursor:pointer}.usa-tstack-close{border:0;background:none;color:inherit;opacity:.6;font-size:18px;line-height:1;cursor:pointer;padding:2px 4px}.usa-tstack-close:hover{opacity:1}@media (prefers-reduced-motion:reduce){.usa-tstack,.usa-tstack-list{transition:none}}";
 
@@ -10,7 +12,7 @@ const ICONS = { info: 'ℹ', success: '✓', warning: '!', error: '✕' };
 let tid = 0;
 function defineToastStack(tag = 'usa-toast-stack') {
     installToastTriggers();
-    return defineElement(tag, (Base) => {
+    return base.defineElement(tag, (Base) => {
         class UsaToastStack extends Base {
             constructor() {
                 super(...arguments);
@@ -30,7 +32,7 @@ function defineToastStack(tag = 'usa-toast-stack') {
                 this.setAttribute('role', 'region');
                 if (!this.hasAttribute('aria-label'))
                     this.setAttribute('aria-label', 'Notifications');
-                this._list = this.querySelector(':scope > .usa-tstack-list') || part('ol', 'usa-tstack-list', { 'aria-live': 'polite', 'aria-relevant': 'additions' });
+                this._list = this.querySelector(':scope > .usa-tstack-list') || shared.part('ol', 'usa-tstack-list', { 'aria-live': 'polite', 'aria-relevant': 'additions' });
                 if (!this._list.isConnected)
                     this.append(this._list);
                 const expand = (on) => {
@@ -45,7 +47,7 @@ function defineToastStack(tag = 'usa-toast-stack') {
                 this.listen(this, 'focusin', () => expand(true));
                 this.listen(this, 'focusout', (e) => !this.contains(e.relatedTarget) && expand(false));
                 this.onCleanup(() => this._timers.forEach((t) => t.h && clearTimeout(t.h)));
-                this.onCleanup(watchViewport()); // 13.3.0: bottom stacks sit above the soft keyboard (--usa-kb)
+                this.onCleanup(viewport.watchViewport()); // 13.3.0: bottom stacks sit above the soft keyboard (--usa-kb)
             }
             pause(_id, t) {
                 if (!t.h)
@@ -65,16 +67,16 @@ function defineToastStack(tag = 'usa-toast-stack') {
                 const o = typeof input === 'string' ? { message: input } : input || {};
                 const id = `usa-tstack-${++tid}`;
                 const type = o.type && ICONS[o.type] ? o.type : 'info';
-                const li = part('li', `usa-tstack usa-tstack-${type}`, { id, role: type === 'error' ? 'alert' : 'status' });
-                li.append(part('span', 'usa-tstack-icon', { 'aria-hidden': 'true' }, ICONS[type]));
-                const txt = part('div', 'usa-tstack-text');
+                const li = shared.part('li', `usa-tstack usa-tstack-${type}`, { id, role: type === 'error' ? 'alert' : 'status' });
+                li.append(shared.part('span', 'usa-tstack-icon', { 'aria-hidden': 'true' }, ICONS[type]));
+                const txt = shared.part('div', 'usa-tstack-text');
                 if (o.title)
                     txt.append(Object.assign(document.createElement('strong'), { textContent: o.title }));
                 if (o.message)
                     txt.append(Object.assign(document.createElement('span'), { textContent: o.message }));
                 li.append(txt);
                 if (o.action) {
-                    const b = part('button', 'usa-tstack-action', { type: 'button' });
+                    const b = shared.part('button', 'usa-tstack-action', { type: 'button' });
                     b.textContent = o.action.label;
                     b.addEventListener('click', () => {
                         o.action?.onClick?.();
@@ -82,7 +84,7 @@ function defineToastStack(tag = 'usa-toast-stack') {
                     });
                     li.append(b);
                 }
-                const x = part('button', 'usa-tstack-close', { type: 'button', 'aria-label': 'Dismiss' }, '×');
+                const x = shared.part('button', 'usa-tstack-close', { type: 'button', 'aria-label': 'Dismiss' }, '×');
                 x.addEventListener('click', () => this.dismiss(id, 'close'));
                 li.append(x);
                 this.swipe(li, id);
@@ -180,7 +182,7 @@ function defineToastStack(tag = 'usa-toast-stack') {
 /** Show a toast on the first `<usa-toast-stack>` of the page (one is created when missing). */
 function stackToast(input, stack) {
     defineToastStack();
-    let s = stack || document.querySelector('usa-toast-stack');
+    let s = stack || document.querySelector('mo-toast-stack,usa-toast-stack');
     if (!s) {
         s = document.createElement('usa-toast-stack');
         document.body.append(s);
@@ -189,7 +191,7 @@ function stackToast(input, stack) {
 }
 let trig = false;
 function installToastTriggers() {
-    delegateTriggers();
+    widgets_modal.delegateTriggers();
     if (trig || typeof document === 'undefined')
         return;
     trig = true;
@@ -204,5 +206,7 @@ function installToastTriggers() {
     });
 }
 
-export { TOAST_POSITIONS as T, defineToastStack as d, stackToast as s };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/chunks/toast-stack-B4PKfyPa.js.map
+exports.TOAST_POSITIONS = TOAST_POSITIONS;
+exports.defineToastStack = defineToastStack;
+exports.stackToast = stackToast;
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/chunks/toast-stack-DOE1cHRn.cjs.map

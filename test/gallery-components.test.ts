@@ -25,6 +25,14 @@ it('registers every public mo-* constructor, including absent late opt-in widget
   }
 });
 
+it('routes programmatic toast messages to an existing public stack', async () => {
+  const { stackToast } = await import('../src/components/widgets/toast');
+  document.body.innerHTML = '<mo-toast-stack duration="0"></mo-toast-stack>';
+  stackToast('Saved');
+  expect(document.querySelector('mo-toast-stack')!.textContent).toContain('Saved');
+  expect(document.querySelector('usa-toast-stack')).toBeNull();
+});
+
 it('file tree moves focus back to a folder and closes it', () => {
   document.body.innerHTML = '<mo-file-tree><details open><summary>Photos</summary><a href="#one">One</a></details></mo-file-tree>';
   const folder = document.querySelector('details')!;

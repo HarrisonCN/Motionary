@@ -203,7 +203,7 @@ export function defineToastStack(tag = 'usa-toast-stack'): CustomElementConstruc
 /** Show a toast on the first `<usa-toast-stack>` of the page (one is created when missing). */
 export function stackToast(input: string | StackToastOptions, stack?: UsaToastStackElement | null): string {
   defineToastStack();
-  let s = stack || document.querySelector<UsaToastStackElement>('usa-toast-stack');
+  let s = stack || document.querySelector<UsaToastStackElement>('mo-toast-stack,usa-toast-stack');
   if (!s) {
     s = document.createElement('usa-toast-stack') as UsaToastStackElement;
     document.body.append(s);
