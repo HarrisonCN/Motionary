@@ -8,7 +8,7 @@
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { join } from 'node:path';
-import { buildManifest } from './gen-manifest.mjs';
+import { buildManifest, scanSource } from './gen-manifest.mjs';
 
 const HERE = (() => { try { return fileURLToPath(new URL('..', import.meta.url)); } catch { return ''; } })();
 const ROOT = HERE && existsSync(join(HERE, 'package.json')) ? HERE : process.cwd();
@@ -95,11 +95,14 @@ export function generate() {
   const m = buildManifest();
   const n = componentCounts(m);
   const files = {};
+  // Gallery cards include multiple examples for a single registered component.
+  n.sourceComponents = Object.keys(scanSource()).length;
   const facts = (s, file) => s.replace(/<!--fact:([a-zA-Z]+)-->[^<]*<!--\/fact-->/g, (all, k) => {
     if (!(k in n)) throw new Error(`${file}: unknown fact "${k}"`);
     return `<!--fact:${k}-->${n[k]}<!--/fact-->`;
   });
   for (const [f, lang] of [['README.md', 'en'], ['README_zh.md', 'zh'], ['README_ja.md', 'ja']]) files[f] = splice(facts(read(f), f), '<!-- core-table:start -->', '<!-- core-table:end -->', coreTable(m, lang), f);
+  files['showcase/components.html'] = facts(read('showcase/components.html'), 'showcase/components.html');
   files['docs/components.md'] = splice(facts(read('docs/components.md'), 'docs/components.md'), '<!-- counting:start -->', '<!-- counting:end -->', countingSection(m), 'docs/components.md');
   const pkgText = read('package.json');
   const pkg = JSON.parse(pkgText);

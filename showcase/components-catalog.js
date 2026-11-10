@@ -303,7 +303,7 @@ export function matchesComponent(item, query) {
   const q = String(query || '').trim().toLowerCase();
   if (!q) return true;
   const cat = categoryOf(item.category);
-  const hay = [item.id, item.tag, item.fn, item.title.en, item.title.zh, item.desc.en, item.desc.zh, ...(item.tags || []), cat?.en, cat?.zh]
+  const hay = [item.id, item.tag, item.tag?.replace(/^usa-/, 'mo-'), item.fn, item.title.en, item.title.zh, item.desc.en, item.desc.zh, ...(item.tags || []), cat?.en, cat?.zh]
     .filter(Boolean)
     .join(' ')
     .toLowerCase();
