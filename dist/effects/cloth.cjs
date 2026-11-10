@@ -15,4 +15,4 @@ function registerCloth() {
 exports.effect = effect;
 exports.register = registerCloth;
 exports.registerCloth = registerCloth;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/effects/cloth.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/effects/cloth.cjs.map

@@ -1,4 +1,4 @@
-import { G as GPU_FX } from '../chunks/gpu-DWwiluNu.js';
+import { G as GPU_FX } from '../chunks/gpu-gejIQCMt.js';
 import { TEXT3_FX } from './fx-text.js';
 import { LIGHT_FX } from './fx-light.js';
 import { DEPTH3_FX } from './fx-3d.js';
@@ -29,6 +29,7 @@ import { GENART_FX } from './fx-genart.js';
 import { VIDEO_FX } from './fx-video.js';
 import { SAFE_FX } from './fx-safe.js';
 import { PERF3_FX } from './fx-perf.js';
+import { HOVER_FX } from './fx-hover.js';
 
 const P = (name, effects) => ({ name, effects });
 /** The `gpu` pack. */
@@ -93,8 +94,10 @@ const video = /*#__PURE__*/ P('video', VIDEO_FX);
 const safe = /*#__PURE__*/ P('safe', SAFE_FX);
 /** The `perf3` pack. */
 const perf3 = /*#__PURE__*/ P('perf3', PERF3_FX);
+/** The `hover` pack (17.3: text-roll, image-swap, focus-reveal, grid-warp, googly-eyes). */
+const hover = /*#__PURE__*/ P('hover', HOVER_FX);
 /** Every built-in plugin. */
-const ALL_PLUGINS = [gpu, text, light, depth, morph, transitions, weather, physics, focus, music, chart, shop, social, game, geo, form, ai, festival, retro, organic, cyber, paper, surface, gesture3, spatial, cinema, lottie, genart, video, safe, perf3];
+const ALL_PLUGINS = [gpu, text, light, depth, morph, transitions, weather, physics, focus, music, chart, shop, social, game, geo, form, ai, festival, retro, organic, cyber, paper, surface, gesture3, spatial, cinema, lottie, genart, video, safe, perf3, hover];
 
-export { ALL_PLUGINS, ai, chart, cinema, cyber, depth, festival, focus, form, game, genart, geo, gesture3, gpu, light, lottie, morph, music, organic, paper, perf3, physics, retro, safe, shop, social, spatial, surface, text, transitions, video, weather };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/plugins.js.map
+export { ALL_PLUGINS, ai, chart, cinema, cyber, depth, festival, focus, form, game, genart, geo, gesture3, gpu, hover, light, lottie, morph, music, organic, paper, perf3, physics, retro, safe, shop, social, spatial, surface, text, transitions, video, weather };
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/components/plugins.js.map

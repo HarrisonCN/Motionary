@@ -1,4 +1,4 @@
-# Motionary 17.2.2 — full component reference
+# Motionary 17.3.0 — full component reference
 
 Generated from the source. Machine-readable version: https://harrisoncn.github.io/Motionary/components.json (schema https://harrisoncn.github.io/Motionary/components.schema.json).
 
@@ -544,7 +544,7 @@ provideGltfDecoder('ktx2', () => window.BASIS);
 
 ## Components
 
-### <usa-accordion> — Accordion
+### <mo-accordion> (legacy <usa-accordion>) — Accordion
 
 Smooth expand / collapse for native <details> — semantics, keyboard and find-in-page kept; no wrapper elements.
 
@@ -561,7 +561,7 @@ Smooth expand / collapse for native <details> — semantics, keyboard and find-i
 </usa-accordion>
 ```
 
-### <usa-acrylic> — Acrylic & Mica
+### <mo-acrylic> (legacy <usa-acrylic>) — Acrylic & Mica
 
 Windows Fluent materials: frosted acrylic (backdrop blur + tint + noise) and mica. Solid fallback when transparency is reduced.
 
@@ -576,7 +576,7 @@ Windows Fluent materials: frosted acrylic (backdrop blur + tint + noise) and mic
 <usa-acrylic kind="mica">…</usa-acrylic>
 ```
 
-### <usa-add-to-cart> — Add to cart (fly-to-cart)
+### <mo-add-to-cart> (legacy <usa-add-to-cart>) — Add to cart (fly-to-cart)
 
 7.3: a buy button — the product photo flies on an arc into the cart, the cart badge bumps and the button morphs into a ✓ “Added” state. Works with <usa-cart-drawer> (calls add(item)) or any [data-cart] icon.
 
@@ -594,7 +594,7 @@ Windows Fluent materials: frosted acrylic (backdrop blur + tint + noise) and mic
 </div>
 ```
 
-### <usa-ambient> — Ambient layer
+### <mo-ambient> (legacy <usa-ambient>) — Ambient layer
 
 A fixed page-wide layer: drifting particles, falling snow, twinkling stars, film grain or a gradient that shifts with scroll.
 
@@ -607,7 +607,7 @@ A fixed page-wide layer: drifting particles, falling snow, twinkling stars, film
 <usa-ambient effect="snow" density="1.2"></usa-ambient>
 ```
 
-### <usa-anim-icon> — Animated icons
+### <mo-anim-icon> (legacy <usa-anim-icon>) — Animated icons
 
 Stroke icons that move: the bell rings, the heart beats, the check draws, the gear turns. Hover, click, in view or loop; decorative unless labelled.
 
@@ -621,7 +621,7 @@ Stroke icons that move: the bell rings, the heart beats, the check draws, the ge
 <usa-anim-icon name="heart" trigger="click"></usa-anim-icon>
 ```
 
-### <usa-audio> — Beat-triggered effects
+### <mo-audio> (legacy <usa-audio>) — Beat-triggered effects
 
 5.6: <usa-audio> renders a toggle (a user gesture starts Web Audio), detects beats and plays any registered effect on children with data-usa-beat="effect". JS: bindBeat(el, "pop"). Beats play nothing under reduced motion.
 
@@ -638,7 +638,7 @@ Stroke icons that move: the bell rings, the heart beats, the check draws, the ge
 </usa-audio>
 ```
 
-### <usa-aurora> — Aurora
+### <mo-aurora> (legacy <usa-aurora>) — Aurora
 
 A slow drifting gradient mesh behind its content. Transforms only, paused off-screen, still under reduced motion.
 
@@ -652,7 +652,7 @@ A slow drifting gradient mesh behind its content. Transforms only, paused off-sc
 </usa-aurora>
 ```
 
-### <usa-auto-animate> — Auto-animate
+### <mo-auto-animate> (legacy <usa-auto-animate>) — Auto-animate
 
 Wrap a list or grid: items that are added fade in, removed ones fade out in place, and everything else glides to its new spot — on sort, filter or resize. Zero code at the call site.
 
@@ -674,7 +674,7 @@ Wrap a list or grid: items that are added fade in, removed ones fade out in plac
 </script>
 ```
 
-### <usa-auto-skeleton> — Auto skeleton
+### <mo-auto-skeleton> (legacy <usa-auto-skeleton>) — Auto skeleton
 
 Set loading and every heading, paragraph, image and button inside becomes a shimmering placeholder of its own size — no extra markup.
 
@@ -689,7 +689,7 @@ Set loading and every heading, paragraph, image and button inside becomes a shim
 </usa-auto-skeleton>
 ```
 
-### <usa-avatar-stack> — Avatar stack
+### <mo-avatar-stack> (legacy <usa-avatar-stack>) — Avatar stack
 
 Overlapping avatars that spread apart with a spring on hover; extras collapse into “+N”.
 
@@ -705,7 +705,7 @@ Overlapping avatars that spread apart with a spring on hover; extras collapse in
 </usa-avatar-stack>
 ```
 
-### <usa-back-to-top> — Back to top
+### <mo-back-to-top> (legacy <usa-back-to-top>) — Back to top
 
 Appears after you scroll, shows reading progress as a ring and springs the page back up, then moves focus to the top.
 
@@ -717,7 +717,7 @@ Appears after you scroll, shows reading progress as a ring and springs the page 
 <usa-back-to-top offset="400"></usa-back-to-top>
 ```
 
-### <usa-badge> — Badge
+### <mo-badge> (legacy <usa-badge>) — Badge
 
 Count or dot badge that bumps with a spring when its value changes; 99+ capping, optional pulse.
 
@@ -731,7 +731,7 @@ Count or dot badge that bumps with a spring when its value changes; 99+ capping,
 </usa-badge>
 ```
 
-### <usa-badge-wall> — Badge wall
+### <mo-badge-wall> (legacy <usa-badge-wall>) — Badge wall
 
 7.5: an achievement grid — locked badges are grey with a 🔒; unlock(name) flips a badge to its colour side with a shine and the “n / m unlocked” counter updates.
 
@@ -749,7 +749,7 @@ Count or dot badge that bumps with a spring when its value changes; 99+ capping,
 <script>addEventListener('DOMContentLoaded', () => { const wall = document.querySelector('usa-badge-wall'); wall.unlock('7-day streak'); });</script>
 ```
 
-### <usa-bar-chart> — Animated bar chart
+### <mo-bar-chart> (legacy <usa-bar-chart>) — Animated bar chart
 
 7.2: bars grow from the baseline in a stagger on first view and new data glides every bar to its new height — bars that appear grow in, bars that leave shrink away. Data from values/labels, <data> children or the data property.
 
@@ -762,7 +762,7 @@ Count or dot badge that bumps with a spring when its value changes; 99+ capping,
 <script>addEventListener('DOMContentLoaded', () => { document.querySelector('usa-bar-chart').data = [{ label: 'Mon', value: 18 }, { label: 'Tue', value: 12 }, { label: 'Wed', value: 21 }]; });</script>
 ```
 
-### <usa-bg-generator> — Background generator
+### <mo-bg-generator> (legacy <usa-bg-generator>) — Background generator
 
 9.3: a background generator — pick a palette and a style (mesh gradient, grain, stripes, dots), shuffle the seed and copy the CSS.
 
@@ -776,7 +776,7 @@ Count or dot badge that bumps with a spring when its value changes; 99+ capping,
 <usa-bg-generator palette="candy" style="mesh"></usa-bg-generator>
 ```
 
-### <usa-blobs> — Fluid blobs
+### <mo-blobs> (legacy <usa-blobs>) — Fluid blobs
 
 Soft colour blobs that slowly morph and drift — a fluid gradient backdrop.
 
@@ -789,7 +789,7 @@ Soft colour blobs that slowly morph and drift — a fluid gradient backdrop.
 <usa-blobs colors="#7c5cff,#22d3ee,#f472b6">…</usa-blobs>
 ```
 
-### <usa-bottom-sheet> — Bottom sheet
+### <mo-bottom-sheet> (legacy <usa-bottom-sheet>) — Bottom sheet
 
 A draggable sheet with snap points, inertia and drag-down-to-dismiss — the iOS / Android pattern for web and Windows web-view apps.
 
@@ -802,7 +802,27 @@ A draggable sheet with snap points, inertia and drag-down-to-dismiss — the iOS
 <usa-bottom-sheet snap="0.4,0.9" label="Filters">…</usa-bottom-sheet>
 ```
 
-### <usa-button> — Button deformation
+### <mo-breadcrumbs> (legacy <usa-breadcrumbs>) — Breadcrumbs (animated, collapsing)
+
+17.3: crumbs slide in and out as you navigate (set(items) keeps the shared prefix), and a long trail collapses its middle into "…" that expands with a stagger. Navigation landmark, aria-current on the last crumb, CSS-only separators. Reduced motion: crumbs change without sliding.
+
+- Import: `import { defineBreadcrumbs } from 'motionary/components/widgets'; defineBreadcrumbs();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `max`
+- Events: `usa:expand`
+- Methods: `set()`, `expand()`
+
+```html
+<mo-breadcrumbs max="4">
+  <a href="/">Home</a>
+  <a href="/docs">Docs</a>
+  <a href="/docs/components">Components</a>
+  <a href="/docs/components/nav">Navigation</a>
+  <span>Breadcrumbs</span>
+</mo-breadcrumbs>
+```
+
+### <mo-button> (legacy <usa-button>) — Button deformation
 
 Spring-driven button click deformation: squash & stretch, elastic border-radius wobble, gooey liquid droplets, and a dent toward the pressed point. Combine them with deform="squash wobble".
 
@@ -820,7 +840,7 @@ Spring-driven button click deformation: squash & stretch, elastic border-radius 
 <usa-button deform="dent"><button>Dent</button></usa-button>
 ```
 
-### <usa-card> — Card
+### <mo-card> (legacy <usa-card>) — Card
 
 Ten card effects you can combine (effect="lift sheen"): flip (hover or click, x/y axis), holo, glass, border-glow, conic-border, lift, spotlight, sheen, parallax-layers and expand (card → detail with FLIP + spring).
 
@@ -844,7 +864,7 @@ Ten card effects you can combine (effect="lift sheen"): flip (hover or click, x/
 </usa-card>
 ```
 
-### <usa-card-stack> — Swipe stack
+### <mo-card-stack> (legacy <usa-card-stack>) — Swipe stack
 
 A deck where the top card swipes away left or right (pointer, touch, arrow keys) and the next springs forward. loop sends cards to the back.
 
@@ -862,7 +882,7 @@ A deck where the top card swipes away left or right (pointer, touch, arrow keys)
 </usa-card-stack>
 ```
 
-### <usa-carousel> — Carousel / slider
+### <mo-carousel> (legacy <usa-carousel>) — Carousel / slider
 
 6.2: swipe, drag, arrow keys, dots and autoplay (pauses on hover, focus, off screen). Four transitions — slide, fade, scale and a 3D "cards" coverflow. Reduced motion: slides switch without movement.
 
@@ -880,7 +900,7 @@ A deck where the top card swipes away left or right (pointer, touch, arrow keys)
 </usa-carousel>
 ```
 
-### <usa-carousel-3d> — 3D carousel
+### <mo-carousel-3d> (legacy <usa-carousel-3d>) — 3D carousel
 
 Items on a 3D ring, rotated by drag, arrow keys, clicks or autoplay — with spring motion. Reduced motion shows one flat item at a time.
 
@@ -898,7 +918,7 @@ Items on a 3D ring, rotated by drag, arrow keys, clicks or autoplay — with spr
 </usa-carousel-3d>
 ```
 
-### <usa-cart-drawer> — Cart drawer
+### <mo-cart-drawer> (legacy <usa-cart-drawer>) — Cart drawer
 
 7.3: a cart button with a count badge and a drawer that slides in from the side — lines slide in (or bump their quantity), removed lines collapse, the badge bumps and the total rolls. Esc / backdrop close; focus is managed.
 
@@ -913,7 +933,7 @@ Items on a 3D ring, rotated by drag, arrow keys, clicks or autoplay — with spr
 <script>addEventListener('DOMContentLoaded', () => { const cart = document.querySelector('usa-cart-drawer'); cart.add({ id: 'tee', name: 'T-shirt', price: 24 }); });</script>
 ```
 
-### <usa-chapter-nav> — Chapter nav
+### <mo-chapter-nav> (legacy <usa-chapter-nav>) — Chapter nav
 
 9.1: chapter navigation for long-form stories — one entry per chapter with a reading-progress bar that fills as you scroll, the current chapter highlighted, click to glide there.
 
@@ -931,7 +951,7 @@ Items on a 3D ring, rotated by drag, arrow keys, clicks or autoplay — with spr
 </article>
 ```
 
-### <usa-chat-composer> — AI chat composer
+### <mo-chat-composer> (legacy <usa-chat-composer>) — AI chat composer
 
 7.8: an AI chat input that grows with its text; Enter sends, the send button pops when there is text and morphs into Stop while busy, with a thinking glow running round the composer.
 
@@ -946,7 +966,7 @@ Items on a 3D ring, rotated by drag, arrow keys, clicks or autoplay — with spr
 <script>const composer = document.querySelector('usa-chat-composer'); composer.addEventListener('usa:send', async (e) => { composer.busy = true; await ask(e.detail.text); composer.busy = false; });</script>
 ```
 
-### <usa-check> — Result icon
+### <mo-check> (legacy <usa-check>) — Result icon
 
 The circle draws itself, then a check, cross or exclamation strokes in with a pop. Great after a payment or upload.
 
@@ -960,7 +980,7 @@ The circle draws itself, then a check, cross or exclamation strokes in with a po
 <usa-check kind="success" label="Payment complete"></usa-check>
 ```
 
-### <usa-checkbox> — Animated checkbox
+### <mo-checkbox> (legacy <usa-checkbox>) — Animated checkbox
 
 Form-associated checkbox: the box springs and the check draws itself; indeterminate state, circle shape.
 
@@ -974,7 +994,7 @@ Form-associated checkbox: the box springs and the check draws itself; indetermin
 <usa-checkbox name="terms">I agree</usa-checkbox>
 ```
 
-### <usa-click> — Click effects
+### <mo-click> (legacy <usa-click>) — Click effects
 
 Wrap anything: ripple, burst (circle, star, heart, emoji), confetti, squish, press-spring and error shake — combinable, keyboard-friendly, optional haptics.
 
@@ -990,7 +1010,7 @@ Wrap anything: ripple, burst (circle, star, heart, emoji), confetti, squish, pre
 </usa-click>
 ```
 
-### <usa-clock-control> — Motion clock control
+### <mo-clock-control> (legacy <usa-clock-control>) — Motion clock control
 
 8.0: a pause / speed bar for the unified motion clock — pause, slow down or speed up every Motionary animation and frame loop on the page at once (motionClock in motionary/engine).
 
@@ -1010,7 +1030,7 @@ createTimeline().add(a, [{ opacity: 0 }, { opacity: 1 }], 400).add(b, [{ transfo
 </script>
 ```
 
-### <usa-code-export> — Code export
+### <mo-code-export> (legacy <usa-code-export>) — Code export
 
 8.9 low-code: shows copy-paste code (HTML, React, Vue or JSON) for a live, configured component next to it, follows its attribute changes and copies with one click.
 
@@ -1026,7 +1046,7 @@ createTimeline().add(a, [{ opacity: 0 }, { opacity: 1 }], 400).add(b, [{ transfo
 </usa-code-export>
 ```
 
-### <usa-color-picker> — Color picker
+### <mo-color-picker> (legacy <usa-color-picker>) — Color picker
 
 6.9: a saturation / brightness square and a hue strip with spring-follow thumbs (both keyboard sliders), a preview chip that morphs to the new colour and swatches that pop.
 
@@ -1039,7 +1059,7 @@ createTimeline().add(a, [{ opacity: 0 }, { opacity: 1 }], 400).add(b, [{ transfo
 <usa-color-picker value="#7c5cff" swatches="#f43f5e,#f59e0b,#22c55e,#0ea5e9"></usa-color-picker>
 ```
 
-### <usa-command-palette> — Command palette (⌘K)
+### <mo-command-palette> (legacy <usa-command-palette>) — Command palette (⌘K)
 
 7.9: a ⌘K command palette on the native <dialog> — scales in, filters as you type with fuzzy matching and highlighted letters, results stagger in and a highlight glides between rows. Use ↑/↓ for one row, Page Up/Down for a page and Enter to run a command.
 
@@ -1057,7 +1077,7 @@ createTimeline().add(a, [{ opacity: 0 }, { opacity: 1 }], 400).add(b, [{ transfo
 <script>const palette = document.querySelector('usa-command-palette'); palette.addEventListener('usa:run', (e) => run(e.detail.id));</script>
 ```
 
-### <usa-compare> — Before / after compare
+### <mo-compare> (legacy <usa-compare>) — Before / after compare
 
 6.5: drag the handle (or hover with the hover attribute), click to jump, or use the keyboard slider; horizontal or vertical; an intro sweep plays once when it scrolls into view.
 
@@ -1073,7 +1093,7 @@ createTimeline().add(a, [{ opacity: 0 }, { opacity: 1 }], 400).add(b, [{ transfo
 </usa-compare>
 ```
 
-### <usa-countdown> — Flip countdown
+### <mo-countdown> (legacy <usa-countdown>) — Flip countdown
 
 7.3: a split-flap countdown to a date (to) or for a number of seconds — every digit flips when it changes; fires usa:done at zero. The timer label updates once a minute so screen readers are not flooded.
 
@@ -1087,7 +1107,7 @@ createTimeline().add(a, [{ opacity: 0 }, { opacity: 1 }], 400).add(b, [{ transfo
 <usa-countdown to="2026-12-24T00:00:00" units="d,h,m,s"></usa-countdown>
 ```
 
-### <usa-counter> — Number counter
+### <mo-counter> (legacy <usa-counter>) — Number counter
 
 Counts up to a number when visible, locale-formatted with tabular digits. Set .value to animate live dashboards.
 
@@ -1101,7 +1121,7 @@ Counts up to a number when visible, locale-formatted with tabular digits. Set .v
 <usa-counter to="128490" prefix="$" duration="2000"></usa-counter>
 ```
 
-### <usa-cube> — 3D cube
+### <mo-cube> (legacy <usa-cube>) — 3D cube
 
 Up to six children become the faces of a CSS 3D cube. Drag / swipe, arrow keys, autoplay or show("top"); spring-driven, the front face is the only one exposed to screen readers.
 
@@ -1117,7 +1137,7 @@ Up to six children become the faces of a CSS 3D cube. Drag / swipe, arrow keys, 
 </usa-cube>
 ```
 
-### <usa-cube-gallery> — Cube gallery
+### <mo-cube-gallery> (legacy <usa-cube-gallery>) — Cube gallery
 
 6.5: slides sit on adjacent faces of a 3D cube that turns between them — swipe, arrow keys, buttons or autoplay (pauses on hover / focus / off screen); turn around the Y or X axis.
 
@@ -1135,7 +1155,7 @@ Up to six children become the faces of a CSS 3D cube. Drag / swipe, arrow keys, 
 </usa-cube-gallery>
 ```
 
-### <usa-cursor> — Custom cursor
+### <mo-cursor> (legacy <usa-cursor>) — Custom cursor
 
 A spring-lagged ring, a magnetic ring that wraps buttons and links, or a soft glow following the pointer. Mouse / pen only. (6.0: for a comet tail use the comet-trail effect.)
 
@@ -1147,7 +1167,7 @@ A spring-lagged ring, a magnetic ring that wraps buttons and links, or a soft gl
 <usa-cursor mode="magnetic" hide-native></usa-cursor>
 ```
 
-### <usa-date-picker> — Date picker
+### <mo-date-picker> (legacy <usa-date-picker>) — Date picker
 
 6.9: months slide in from the direction of travel, the chosen day pops inside a spring circle, today has a ring. A real date grid: arrows, PageUp / PageDown, Home / End, min / max.
 
@@ -1161,7 +1181,7 @@ A spring-lagged ring, a magnetic ring that wraps buttons and links, or a soft gl
 <usa-date-picker value="2026-10-08" min="2026-01-01" first-day="1"></usa-date-picker>
 ```
 
-### <usa-depth> — Depth parallax
+### <mo-depth> (legacy <usa-depth>) — Depth parallax
 
 Layers with data-depth (-1…1) shift and scale by depth as the pointer moves, the phone tilts (source="orientation") or the page scrolls; optional whole-scene rotation.
 
@@ -1180,7 +1200,7 @@ Layers with data-depth (-1…1) shift and scale by depth as the pointer moves, t
 </usa-depth>
 ```
 
-### <usa-dialog> — Modal & drawer
+### <mo-dialog> (legacy <usa-dialog>) — Modal & drawer
 
 Animated modal, side drawers and bottom sheet on the native <dialog>: top layer, focus trap, Esc, backdrop click.
 
@@ -1199,7 +1219,7 @@ Animated modal, side drawers and bottom sheet on the native <dialog>: top layer,
 <button onclick="dlg.show()">Open</button>
 ```
 
-### <usa-disclosure> — Accordion 2.0
+### <mo-disclosure> (legacy <usa-disclosure>) — Accordion 2.0
 
 6.2: native <details> that spring open and closed (height + fade) with an overshooting chevron; one open at a time unless multiple. Find-in-page and keyboard keep working.
 
@@ -1216,7 +1236,7 @@ Animated modal, side drawers and bottom sheet on the native <dialog>: top layer,
 </usa-disclosure>
 ```
 
-### <usa-distort> — Hover distortion
+### <mo-distort> (legacy <usa-distort>) — Hover distortion
 
 The image bulges and splits into RGB around the pointer. Without WebGL (or a cross-origin image without CORS) it falls back to a gentle CSS zoom.
 
@@ -1229,7 +1249,7 @@ The image bulges and splits into RGB around the pointer. Without WebGL (or a cro
 </usa-distort>
 ```
 
-### <usa-dock> — macOS-style dock
+### <mo-dock> (legacy <usa-dock>) — macOS-style dock
 
 6.6: items magnify with a smooth cosine falloff as the pointer moves along the dock, neighbours make room, labels pop above the hovered item and a click bounces it. Keyboard focus magnifies too.
 
@@ -1245,7 +1265,7 @@ The image bulges and splits into RGB around the pointer. Without WebGL (or a cro
 </usa-dock>
 ```
 
-### <usa-dot-network> — Dot network
+### <mo-dot-network> (legacy <usa-dot-network>) — Dot network
 
 A dot grid that swells and links up with lines around the pointer.
 
@@ -1258,7 +1278,7 @@ A dot grid that swells and links up with lines around the pointer.
 <usa-dot-network gap="28">…</usa-dot-network>
 ```
 
-### <usa-dotlottie> — Interactive dotLottie (themes + state machine)
+### <mo-dotlottie> (legacy <usa-dotlottie>) — Interactive dotLottie (themes + state machine)
 
 10.9: plays .lottie files with their themes (slots recoloured by a theme from the file) and state machines — playback states, event / numeric / boolean guards, pointer and completion interactions, input and theme actions (OpenUrl is refused). Tap the dot: it starts pulsing, three taps switch it to the dark theme. Requires motionary/runtime/vector + motionary/runtime/lottie-state — npm i motionary, then use(vector, lottieState). Its own entry point: motionary/components/dotlottie.
 
@@ -1294,7 +1314,7 @@ defineDotLottie(); // registers <usa-dotlottie> — after the prerequisites
 <usa-dotlottie src="/anim/button.lottie" state-machine="toggle" theme="dark" label="Like button"></usa-dotlottie>
 ```
 
-### <usa-double-tap> — Double tap
+### <mo-double-tap> (legacy <usa-double-tap>) — Double tap
 
 Double tap or double click a photo to pop a heart (or any emoji) at the tap point. L for keyboard users.
 
@@ -1310,7 +1330,7 @@ Double tap or double click a photo to pop a heart (or any emoji) at the tap poin
 </usa-double-tap>
 ```
 
-### <usa-draggable> — Draggable
+### <mo-draggable> (legacy <usa-draggable>) — Draggable
 
 Drag with mouse, touch, pen or arrow keys. spring-back returns home with a wobble; inertia glides after a flick; snap to a grid or points; rubber-band bounds.
 
@@ -1327,7 +1347,7 @@ Drag with mouse, touch, pen or arrow keys. spring-back returns home with a wobbl
 <usa-draggable inertia snap="80" bounds="parent">…</usa-draggable>
 ```
 
-### <usa-draw> — Line drawing
+### <mo-draw> (legacy <usa-draw>) — Line drawing
 
 Every stroke of the SVG inside draws itself — on view, hover, click or scrubbed with scroll — staggered between shapes, optional fill afterwards. No getTotalLength() needed.
 
@@ -1343,7 +1363,7 @@ Every stroke of the SVG inside draws itself — on view, hover, click or scrubbe
 </usa-draw>
 ```
 
-### <usa-drawer> — Drawer
+### <mo-drawer> (legacy <usa-drawer>) — Drawer
 
 A side panel that springs in, drags / swipes closed, traps the page behind a backdrop and returns focus on close. Left, right, top or bottom.
 
@@ -1356,7 +1376,7 @@ A side panel that springs in, drags / swipes closed, traps the page behind a bac
 <usa-drawer id="nav" side="left" label="Navigation">…</usa-drawer>
 ```
 
-### <usa-equalizer> — Graphic equalizer
+### <mo-equalizer> (legacy <usa-equalizer>) — Graphic equalizer
 
 7.1: one vertical slider per band with springy caps and a smooth response curve drawn through them; presets glide every band to its gain.
 
@@ -1371,7 +1391,7 @@ A side panel that springs in, drags / swipes closed, traps the page behind a bac
 <script>addEventListener('DOMContentLoaded', () => { const eq = document.querySelector('usa-equalizer'); eq.applyPreset('vocal'); });</script>
 ```
 
-### <usa-fab> — FAB speed dial
+### <mo-fab> (legacy <usa-fab>) — FAB speed dial
 
 A floating action button whose actions fan out with a staggered spring: up, down, left, right or radial.
 
@@ -1389,7 +1409,7 @@ A floating action button whose actions fan out with a staggered spring: up, down
 </usa-fab>
 ```
 
-### <usa-festival-banner> — Festival banner
+### <mo-festival-banner> (legacy <usa-festival-banner>) — Festival banner
 
 8.1: an announcement banner with an ambient festive scene behind the text — lunar lanterns and sparkles, Christmas lights and snow, Halloween bats and moon, or fireworks.
 
@@ -1403,7 +1423,7 @@ A floating action button whose actions fan out with a staggered spring: up, down
 <usa-festival-banner theme="lunar" dismissible>🧧 Happy Lunar New Year — 20% off all week</usa-festival-banner>
 ```
 
-### <usa-field> — Animated field
+### <mo-field> (legacy <usa-field>) — Animated field
 
 7.7: a text input whose label floats up on focus, with a growing underline; validates on blur — invalid shakes and slides the message in, valid draws a check. strength adds a 4-step password meter.
 
@@ -1418,7 +1438,7 @@ A floating action button whose actions fan out with a staggered spring: up, down
 <usa-field label="Password" type="password" name="pw" minlength="8" strength></usa-field>
 ```
 
-### <usa-file-drop> — File drop zone
+### <mo-file-drop> (legacy <usa-file-drop>) — File drop zone
 
 6.9: dragging files over it lights marching-ants borders and lifts the icon; dropped (or browsed) files fly into a list with progress bars that end in a drawn check.
 
@@ -1436,7 +1456,7 @@ A floating action button whose actions fan out with a staggered spring: up, down
 </script>
 ```
 
-### <usa-fullpage> — Full-page sections
+### <mo-fullpage> (legacy <usa-fullpage>) — Full-page sections
 
 Full-screen sections that snap one at a time, with keyboard paging, dot navigation and a usa:section event.
 
@@ -1453,7 +1473,25 @@ Full-screen sections that snap one at a time, with keyboard paging, dot navigati
 </usa-fullpage>
 ```
 
-### <usa-fx> — Attention seekers
+### <mo-fullscreen-menu> (legacy <usa-fullscreen-menu>) — Full-screen menu (circle / curtain reveal)
+
+17.3: a menu button opens a full-screen overlay that grows out of the button as a circle (or drops as a curtain), then the big links rise one by one; links with data-preview show a picture beside the list. Modal dialog: focus moves in and stays inside, Esc / the button closes and focus returns. Reduced motion: no reveal.
+
+- Import: `import { defineFullscreenMenu } from 'motionary/components/widgets'; defineFullscreenMenu();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `variant`
+- Events: `usa:open`, `usa:close`
+- Methods: `show()`, `hide()`, `toggle()`
+
+```html
+<mo-fullscreen-menu label="Menu" variant="circle">
+  <a href="/" data-preview="/img/home.jpg">Home</a>
+  <a href="/work" data-preview="/img/work.jpg">Work</a>
+  <a href="/contact">Contact</a>
+</mo-fullscreen-menu>
+```
+
+### <mo-fx> (legacy <usa-fx>) — Attention seekers
 
 <usa-fx> plays any registered effect on its child: pulse, pop, jelly, wiggle, heartbeat, bounce, flash (≤ 2 per second), tada, shake. Click the button.
 
@@ -1468,7 +1506,7 @@ Full-screen sections that snap one at a time, with keyboard paging, dot navigati
 </usa-fx>
 ```
 
-### <usa-gauge> — Spring gauge
+### <mo-gauge> (legacy <usa-gauge>) — Spring gauge
 
 7.2: a semicircular gauge — the needle swings to the value on a damped spring (overshoot, settle), the arc fills in the colour of its zone and the number counts. role="meter".
 
@@ -1480,7 +1518,7 @@ Full-screen sections that snap one at a time, with keyboard paging, dot navigati
 <usa-gauge value="72" unit="%" label="CPU" zones="60:#22c55e,85:#f59e0b,100:#ef4444"></usa-gauge>
 ```
 
-### <usa-gen-art> — Generative artwork
+### <mo-gen-art> (legacy <usa-gen-art>) — Generative artwork
 
 9.3: seeded generative art on a canvas — flow fields, circle packing, Truchet tiles or layered waves in curated palettes; it draws itself in on screen and a tap re-seeds it.
 
@@ -1494,7 +1532,7 @@ Full-screen sections that snap one at a time, with keyboard paging, dot navigati
 <usa-gen-art art="flow" seed="7" palette="ocean" style="height:240px"></usa-gen-art>
 ```
 
-### <usa-gesture-fx> — Gesture triggers
+### <mo-gesture-fx> (legacy <usa-gesture-fx>) — Gesture triggers
 
 5.7: <usa-gesture-fx> plays any registered effect on a fling (fast release), a two-finger twist or a long press that charges --usa-charge 0 → 1. JS: bindGesture(el, "fling", "tada").
 
@@ -1508,7 +1546,7 @@ Full-screen sections that snap one at a time, with keyboard paging, dot navigati
 </usa-gesture-fx>
 ```
 
-### <usa-gesture-sticker> — Multi-touch sticker
+### <mo-gesture-sticker> (legacy <usa-gesture-sticker>) — Multi-touch sticker
 
 8.7: a multi-touch sticker — drag with one finger, pinch with two to scale and twist to rotate, all at once, with a lifted shadow while held (wheel / Shift + wheel and keyboard on desktop).
 
@@ -1524,7 +1562,7 @@ Full-screen sections that snap one at a time, with keyboard paging, dot navigati
 </usa-gesture-sticker>
 ```
 
-### <usa-gl-model> — Compressed 3D model (Draco / KTX2)
+### <mo-gl-model> (legacy <usa-gl-model>) — Compressed 3D model (Draco / KTX2)
 
 10.9: <usa-gl-scene> for compressed glTF — Draco meshes and KTX2 (Basis Universal) textures decoded by the official decoders (Google draco3d, Binomial’s Basis Universal transcoder), lazy-loaded optional peers: only the decoder a file needs is fetched. Requires motionary/runtime/gl + format-gltf + gltf-decoders and draco3d (+ the Basis transcoder for KTX2 textures). Its own entry point: motionary/components/gl-model.
 
@@ -1565,7 +1603,7 @@ defineGlModel(); // registers <usa-gl-model> — after the prerequisites
 <usa-gl-model src="/models/robot-draco.glb" controls label="Robot"></usa-gl-model>
 ```
 
-### <usa-gl-scene> — 3D scene (glTF / OBJ)
+### <mo-gl-scene> (legacy <usa-gl-scene>) — 3D scene (glTF / OBJ)
 
 10.5: a WebGL2 3D viewer on Motionary’s own renderer — glTF 2.0 / GLB and OBJ / MTL models or built-in shapes, PBR-style materials, orbit controls (drag, wheel, pinch, arrow keys), auto-rotate and video textures. Requires motionary/runtime/gl (+ format-gltf for .gltf / .glb, format-obj for .obj, gltf-anim for glTF animation — 10.8) — npm i motionary, then use(gl, formatGltf, formatObj, gltfAnim) before it mounts.
 
@@ -1605,7 +1643,7 @@ defineGlScene(); // registers <usa-gl-scene> — after the prerequisites
 <usa-gl-scene src="/models/chair.glb" controls auto-rotate="20" label="Chair"></usa-gl-scene>
 ```
 
-### <usa-glitch> — Glitch text
+### <mo-glitch> (legacy <usa-glitch>) — Glitch text
 
 An RGB-split, sliced glitch — always on or on hover.
 
@@ -1618,7 +1656,7 @@ An RGB-split, sliced glitch — always on or on hover.
 <usa-glitch trigger="hover">SYSTEM ERROR</usa-glitch>
 ```
 
-### <usa-globe> — Spinning globe
+### <mo-globe> (legacy <usa-globe>) — Spinning globe
 
 7.6: an SVG globe in orthographic projection — graticule, pulsing markers, spins while on screen, drag to turn it, flyTo(name) brings a city round to the front. No WebGL, no tiles.
 
@@ -1633,7 +1671,7 @@ An RGB-split, sliced glitch — always on or on hover.
 <script>addEventListener('DOMContentLoaded', () => { const globe = document.querySelector('usa-globe'); globe.flyTo('London'); });</script>
 ```
 
-### <usa-gpu-particles> — GPU particle canvas
+### <mo-gpu-particles> (legacy <usa-gpu-particles>) — GPU particle canvas
 
 10.5 (WebGPU effects 2.0): tens of thousands of particles simulated by a WebGPU compute shader and drawn as instanced quads — swirl, galaxy or fountain, pointer repulsion, trails; Canvas 2D fallback where WebGPU is missing.
 
@@ -1646,7 +1684,7 @@ An RGB-split, sliced glitch — always on or on hover.
 <usa-gpu-particles count="30000" mode="galaxy" colors="#818cf8,#f472b6" pointer></usa-gpu-particles>
 ```
 
-### <usa-gradient-text> — Gradient flow
+### <mo-gradient-text> (legacy <usa-gradient-text>) — Gradient flow
 
 Text filled with a multi-colour gradient that keeps flowing.
 
@@ -1659,7 +1697,7 @@ Text filled with a multi-colour gradient that keeps flowing.
 <usa-gradient-text colors="#7c5cff,#22d3ee,#f472b6">Gradient</usa-gradient-text>
 ```
 
-### <usa-grain> — Film grain
+### <mo-grain> (legacy <usa-grain>) — Film grain
 
 An SVG-noise grain overlay — no image to ship. animated makes it jitter like film.
 
@@ -1673,7 +1711,7 @@ An SVG-noise grain overlay — no image to ship. animated makes it jitter like f
 </usa-grain>
 ```
 
-### <usa-grid-glow> — Grid glow
+### <mo-grid-glow> (legacy <usa-grid-glow>) — Grid glow
 
 A line grid behind the content that lights up around the pointer.
 
@@ -1688,7 +1726,7 @@ A line grid behind the content that lights up around the pointer.
 </usa-grid-glow>
 ```
 
-### <usa-gyro-card> — Gyro 3D card
+### <mo-gyro-card> (legacy <usa-gyro-card>) — Gyro 3D card
 
 8.7: a 3D card that tilts with the phone’s gyroscope (and with the pointer on desktop), with a moving glare and layers that float at different depths.
 
@@ -1705,7 +1743,7 @@ A line grid behind the content that lights up around the pointer.
 </usa-gyro-card>
 ```
 
-### <usa-handwriting> — Handwriting draw
+### <mo-handwriting> (legacy <usa-handwriting>) — Handwriting draw
 
 The text draws itself stroke by stroke, then fills in — signatures, hero words.
 
@@ -1719,7 +1757,7 @@ The text draws itself stroke by stroke, then fills in — signatures, hero words
 <usa-handwriting text="Thank you" size="72"></usa-handwriting>
 ```
 
-### <usa-hero-video> — Hero video
+### <mo-hero-video> (legacy <usa-hero-video>) — Hero video
 
 9.4: a full-bleed hero with a background video — poster first, cross-fade to the video, a readable scrim, an always-there pause button and an optional scroll-scrubbed mode.
 
@@ -1735,7 +1773,7 @@ The text draws itself stroke by stroke, then fills in — signatures, hero words
 </usa-hero-video>
 ```
 
-### <usa-hold> — Hold to confirm
+### <mo-hold> (legacy <usa-hold>) — Hold to confirm
 
 Press and hold (pointer, Space or Enter) while a ring fills; releasing early rewinds. For destructive actions.
 
@@ -1749,7 +1787,7 @@ Press and hold (pointer, Space or Enter) while a ring fills; releasing early rew
 <usa-hold duration="1200" label="Delete project">Hold to delete</usa-hold>
 ```
 
-### <usa-hud-panel> — HUD panel
+### <mo-hud-panel> (legacy <usa-hud-panel>) — HUD panel
 
 8.4: a sci-fi HUD panel — angled corners, a glowing frame that draws itself in when the panel scrolls into view, a header with a blinking status light, and data rows that fill in as animated bar readouts.
 
@@ -1766,7 +1804,7 @@ Press and hold (pointer, Space or Enter) while a ring fills; releasing early rew
 </usa-hud-panel>
 ```
 
-### <usa-hydrate> — SSR hydration animation
+### <mo-hydrate> (legacy <usa-hydrate>) — SSR hydration animation
 
 8.0: server-rendered children animate in on hydration — hidden only while JS is on and not yet upgraded (ssrHead() in the head, 3 s CSS fallback), then staggered in on the unified clock.
 
@@ -1785,7 +1823,7 @@ Press and hold (pointer, Space or Enter) while a ring fills; releasing early rew
 <!-- or: <section data-usa-hydrate="blur">…</section> + hydrateMotion() -->
 ```
 
-### <usa-icon-morph> — Icon morph
+### <mo-icon-morph> (legacy <usa-icon-morph>) — Icon morph
 
 Icons that morph point-by-point with a spring: play ↔ pause, menu ↔ close, plus ↔ minus, check, arrow. toggle makes it a button with per-icon labels.
 
@@ -1800,7 +1838,7 @@ Icons that morph point-by-point with a spring: play ↔ pause, menu ↔ close, p
 <usa-icon-morph icons="menu,close" labels="Open menu,Close menu" toggle></usa-icon-morph>
 ```
 
-### <usa-install-button> — Install button
+### <mo-install-button> (legacy <usa-install-button>) — Install button
 
 10.1: one-click install snippet with npm / pnpm / yarn / bun / CDN tabs and a copy button that confirms with a check; `cdn` sets the URL of the CDN tab.
 
@@ -1814,7 +1852,7 @@ Icons that morph point-by-point with a spring: play ↔ pause, menu ↔ close, p
 <usa-install-button package="motionary" managers="npm pnpm yarn bun cdn" cdn="https://cdn.jsdelivr.net/npm/motionary@17/dist/runtime.iife.js"></usa-install-button>
 ```
 
-### <usa-kanban> — Kanban board (drag-sort)
+### <mo-kanban> (legacy <usa-kanban>) — Kanban board (drag-sort)
 
 6.8: drag cards between columns — the card lifts and tilts toward the drag, a placeholder opens where it will land and the other cards glide aside (FLIP). Full keyboard support: Space picks up, arrows move, Space drops.
 
@@ -1835,7 +1873,7 @@ Icons that morph point-by-point with a spring: play ↔ pause, menu ↔ close, p
 </usa-kanban>
 ```
 
-### <usa-keyframe-editor> — Animation editor 2.0
+### <mo-keyframe-editor> (legacy <usa-keyframe-editor>) — Animation editor 2.0
 
 6.9: a compact timeline for <usa-player> JSON — drag a bar to move a track, drag its edge to resize, scrub the playhead or press play; exports format use-scroll-animate/animation v1.
 
@@ -1854,7 +1892,7 @@ Icons that morph point-by-point with a spring: play ↔ pause, menu ↔ close, p
 </script>
 ```
 
-### <usa-kpi> — KPI card
+### <mo-kpi> (legacy <usa-kpi>) — KPI card
 
 7.2: the value counts up keeping prefix, suffix and decimals ("$12.4k", "98.2%"), the delta chip slides in with an arrow coloured by sign, and an optional trend draws a sparkline. Setting value rolls and flashes the card.
 
@@ -1866,7 +1904,7 @@ Icons that morph point-by-point with a spring: play ↔ pause, menu ↔ close, p
 <usa-kpi label="Revenue" value="$48.2k" delta="+12.5%" trend="4,6,5,9,8,12" caption="vs last month"></usa-kpi>
 ```
 
-### <usa-leaderboard> — Leaderboard
+### <mo-leaderboard> (legacy <usa-leaderboard>) — Leaderboard
 
 7.5: a ranked list — when scores change, rows glide to their new rank, climbers flash green with ▲n and fallers red with ▼n, scores roll and the top three get medals.
 
@@ -1885,7 +1923,7 @@ Icons that morph point-by-point with a spring: play ↔ pause, menu ↔ close, p
 <script>addEventListener('DOMContentLoaded', () => { const board = document.querySelector('usa-leaderboard'); board.setScore('Grace', 1000); });</script>
 ```
 
-### <usa-like> — Like button
+### <mo-like> (legacy <usa-like>) — Like button
 
 A heart that pops with a spring and bursts into particles; aria-pressed, optional count.
 
@@ -1899,7 +1937,7 @@ A heart that pops with a spring and bursts into particles; aria-pressed, optiona
 <usa-like count="128"></usa-like>
 ```
 
-### <usa-liquid> — Liquid image
+### <mo-liquid> (legacy <usa-liquid>) — Liquid image
 
 Click or tap to send water ripples through the image; hover adds a gentle wobble. The plain image stays when WebGL is unavailable.
 
@@ -1912,7 +1950,7 @@ Click or tap to send water ripples through the image; hover adds a gentle wobble
 </usa-liquid>
 ```
 
-### <usa-liquid-nav> — Liquid nav
+### <mo-liquid-nav> (legacy <usa-liquid-nav>) — Liquid nav
 
 17.1: a liquid indicator that continues smoothly through rapid selections, supports horizontal or vertical navigation, realigns after resizing, and offers RTL-aware arrow keys plus Home/End. Set orientation="vertical" for a sidebar.
 
@@ -1927,7 +1965,7 @@ Click or tap to send water ripples through the image; hover adds a gentle wobble
 </usa-liquid-nav>
 ```
 
-### <usa-loading-bar> — Top loading bar
+### <mo-loading-bar> (legacy <usa-loading-bar>) — Top loading bar
 
 A slim NProgress-style bar for route changes and fetches: loadingBar.start() trickles, done() completes and fades.
 
@@ -1943,7 +1981,7 @@ A slim NProgress-style bar for route changes and fetches: loadingBar.start() tri
 </script>
 ```
 
-### <usa-location-card> — Location card
+### <mo-location-card> (legacy <usa-location-card>) — Location card
 
 7.6: a place card with a stylised mini map — the route from the origin draws itself, the pin drops in with a bounce and a ring pulses; distance computed with haversine (km or mi).
 
@@ -1958,7 +1996,7 @@ A slim NProgress-style bar for route changes and fetches: loadingBar.start() tri
   lat="37.782" lon="-122.407" from-lat="37.776" from-lon="-122.394" href="https://maps.example/…"></usa-location-card>
 ```
 
-### <usa-lottie> — Lottie player
+### <mo-lottie> (legacy <usa-lottie>) — Lottie player
 
 9.2: plays Lottie (After Effects / bodymovin) files without lottie-web — vector layers render as SVG and their keyframes run as native animations on Motionary’s clock.
 
@@ -1972,7 +2010,7 @@ A slim NProgress-style bar for route changes and fetches: loadingBar.start() tri
 <usa-lottie src="confetti.json" autoplay loop label="Celebration"></usa-lottie>
 ```
 
-### <usa-lottie-icon> — Animated icon set
+### <mo-lottie-icon> (legacy <usa-lottie-icon>) — Animated icon set
 
 9.2: an animated icon set shipped as tiny Lottie files — heart beat, bell swing, check draw-in, spinner, star twinkle, bolt zap — on click, hover, enter or loop.
 
@@ -1986,7 +2024,7 @@ A slim NProgress-style bar for route changes and fetches: loadingBar.start() tri
 <usa-lottie-icon name="bell" trigger="hover"></usa-lottie-icon>
 ```
 
-### <usa-lottie-player> — Lottie player (JSON + dotLottie)
+### <mo-lottie-player> (legacy <usa-lottie-player>) — Lottie player (JSON + dotLottie)
 
 10.6: plays Lottie JSON and dotLottie (.lottie) files with Motionary’s own Canvas 2D renderer — shapes, gradients, trim paths, masks, track mattes, precomps and images; autoplay, loop, bounce, segments / markers, play on hover or scrub with scroll. Requires motionary/runtime/vector — npm i motionary, then use(vector) before it mounts.
 
@@ -2020,7 +2058,7 @@ defineLottiePlayer(); // registers <usa-lottie-player> — after the prerequisit
 <usa-lottie-player src="/anim/hero.lottie" autoplay loop label="Hero animation"></usa-lottie-player>
 ```
 
-### <usa-lyrics> — Synced karaoke lyrics
+### <mo-lyrics> (legacy <usa-lyrics>) — Synced karaoke lyrics
 
 7.1: LRC or [data-t] lines; the active line glows, scrolls to the centre and a highlight sweeps across it while past lines dim. Follows an <audio>, <video> or <usa-music-player> via for.
 
@@ -2038,7 +2076,7 @@ defineLottiePlayer(); // registers <usa-lottie-player> — after the prerequisit
 </usa-lyrics>
 ```
 
-### <usa-magnetic> — Magnetic button
+### <mo-magnetic> (legacy <usa-magnetic>) — Magnetic button
 
 Content leans toward the pointer when it comes near and springs back. Fine pointers only; off under reduced motion.
 
@@ -2050,7 +2088,7 @@ Content leans toward the pointer when it comes near and springs back. Fine point
 <usa-magnetic strength="0.4"><button>Hover near me</button></usa-magnetic>
 ```
 
-### <usa-marquee> — Marquee
+### <mo-marquee> (legacy <usa-marquee>) — Marquee
 
 A seamless infinite ticker with constant speed, pause on hover, soft edges and vertical mode. Clones are hidden from AT.
 
@@ -2066,7 +2104,7 @@ A seamless infinite ticker with constant speed, pause on hover, soft edges and v
 </usa-marquee>
 ```
 
-### <usa-mask-reveal> — Mask reveal
+### <mo-mask-reveal> (legacy <usa-mask-reveal>) — Mask reveal
 
 Reveal images or sections through a growing mask: circle, diamond, star, iris or wipes, from any origin.
 
@@ -2082,7 +2120,7 @@ Reveal images or sections through a growing mask: circle, diamond, star, iris or
 </usa-mask-reveal>
 ```
 
-### <usa-masonry> — Masonry
+### <mo-masonry> (legacy <usa-masonry>) — Masonry
 
 Pinterest-style masonry: items drop into the shortest column and glide when the width, the items or their sizes change. CSS columns before JS runs.
 
@@ -2098,7 +2136,7 @@ Pinterest-style masonry: items drop into the shortest column and glide when the 
 </usa-masonry>
 ```
 
-### <usa-masonry-flow> — Masonry with layout animation
+### <mo-masonry-flow> (legacy <usa-masonry-flow>) — Masonry with layout animation
 
 6.5: a masonry grid whose items glide to their new places (FLIP) on resize, insert / remove, filter(), shuffle() and sort(); hidden items scale out, new ones scale in.
 
@@ -2117,7 +2155,30 @@ Pinterest-style masonry: items drop into the shortest column and glide when the 
 <!-- grid.filter('.cats'), grid.shuffle(), grid.sort((a, b) => …) -->
 ```
 
-### <usa-menu> — Dropdown menu
+### <mo-mega-menu> (legacy <usa-mega-menu>) — Mega menu (morphing panels)
+
+17.3: a nav bar whose items open full-width mega panels on one shared surface that morphs its height from panel to panel. Hover intent, click / tap, ←/→ between triggers, ↓ into the panel, Esc back; disclosure pattern (aria-expanded) in a navigation landmark. Reduced motion: panels switch without the morph.
+
+- Import: `import { defineMegaMenu } from 'motionary/components/widgets'; defineMegaMenu();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `delay`, `close-delay`
+- Events: `usa:open`, `usa:close`
+- Methods: `openItem()`, `close()`
+
+```html
+<mo-mega-menu label="Main">
+  <div><button>Products</button>
+    <div data-panel>
+      <section><h4>Build</h4><a href="/sdk">SDK</a><a href="/cli">CLI</a></section>
+      <section><h4>Run</h4><a href="/edge">Edge</a></section>
+    </div>
+  </div>
+  <div><button>Resources</button><div data-panel>…</div></div>
+  <a href="/pricing">Pricing</a>
+</mo-mega-menu>
+```
+
+### <mo-menu> (legacy <usa-menu>) — Dropdown menu
 
 6.3: the list scales (or folds / slides) out of its button and the items cascade in. Full menu keyboard support — arrows, Home / End, Esc, Tab — and outside clicks close it.
 
@@ -2137,7 +2198,7 @@ Pinterest-style masonry: items drop into the shortest column and glide when the 
 </usa-menu>
 ```
 
-### <usa-menu-toggle> — Hamburger → close
+### <mo-menu-toggle> (legacy <usa-menu-toggle>) — Hamburger → close
 
 6.6: the three bars morph into a cross, a back arrow, a minus or a spinning plus-to-cross; a real toggle button with aria-expanded that can open the element it controls (for).
 
@@ -2152,7 +2213,7 @@ Pinterest-style masonry: items drop into the shortest column and glide when the 
 <nav id="site-menu" hidden>…</nav>
 ```
 
-### <usa-message-list> — Chat thread
+### <mo-message-list> (legacy <usa-message-list>) — Chat thread
 
 7.4: a chat thread — new bubbles pop in from their side, consecutive messages group, the list sticks to the bottom (or shows a “↓ New messages” pill when you scrolled up) and typing(name) shows animated typing dots.
 
@@ -2170,7 +2231,7 @@ Pinterest-style masonry: items drop into the shortest column and glide when the 
 <script>addEventListener('DOMContentLoaded', () => { const list = document.querySelector('usa-message-list'); list.typing('Ada'); list.push({ from: 'Ada', text: 'Ship it?' }); });</script>
 ```
 
-### <usa-milestones> — Scroll-drawn milestones
+### <mo-milestones> (legacy <usa-milestones>) — Scroll-drawn milestones
 
 6.5: a progress line grows down the rail as you scroll; each milestone pops its dot and slides its card in when the line reaches it. Alternating sides on wide screens, one column on phones; data-date labels.
 
@@ -2187,7 +2248,7 @@ Pinterest-style masonry: items drop into the shortest column and glide when the 
 </usa-milestones>
 ```
 
-### <usa-modal> — Modal dialog
+### <mo-modal> (legacy <usa-modal>) — Modal dialog
 
 6.3: native <dialog> (top layer, focus trap, Esc) with animated open / close and a blurred backdrop — scale, slide-up, flip, or origin: it grows out of the button that opened it. Focus returns to the opener.
 
@@ -2206,7 +2267,7 @@ Pinterest-style masonry: items drop into the shortest column and glide when the 
 </usa-modal>
 ```
 
-### <usa-morph> — Path morph
+### <mo-morph> (legacy <usa-morph>) — Path morph
 
 Morph an SVG path through a list of shapes (paths="A | B | C") on click, hover, in view or automatically. Same-structure paths morph point by point.
 
@@ -2221,7 +2282,7 @@ Morph an SVG path through a list of shapes (paths="A | B | C") on click, hover, 
   paths="M50 10 C75 10 90 30 90 50 C90 75 70 90 50 90 C25 90 10 70 10 50 C10 30 25 10 50 10 Z | M50 4 C80 20 96 26 86 54 C78 84 64 96 44 86 C14 80 4 64 14 44 C20 20 30 0 50 4 Z"></usa-morph>
 ```
 
-### <usa-motion> — Motion DSL
+### <mo-motion> (legacy <usa-motion>) — Motion DSL
 
 9.0: the declarative motion DSL — describe motion as one readable string (“enter: fade-up 600ms stagger 80ms; hover: pop”) on <usa-motion> or any element’s data-motion, no JavaScript per element.
 
@@ -2239,7 +2300,7 @@ Morph an SVG path through a list of shapes (paths="A | B | C") on click, hover, 
 <section data-motion="enter: fade-up 500ms; click: confetti count=40">…</section>
 ```
 
-### <usa-motion-inspector> — Motion inspector
+### <mo-motion-inspector> (legacy <usa-motion-inspector>) — Motion inspector
 
 10.2: a live panel listing the running animations in a scope (CSS animations, transitions, element.animate(), components) with state and progress, plus the motionary/runtime ticker when present — pause / play all, 0.25× slow motion and per-row scrub.
 
@@ -2253,7 +2314,7 @@ Morph an SVG path through a list of shapes (paths="A | B | C") on click, hover, 
 <usa-motion-inspector scope="#app" interval="500"></usa-motion-inspector>
 ```
 
-### <usa-motion-prefs> — Motion preference panel
+### <mo-motion-prefs> (legacy <usa-motion-prefs>) — Motion preference panel
 
 9.5: a motion settings panel for your users — motion level (full, gentle, minimal, none), animation speed, pause autoplaying video, no parallax — applied instantly to every Motionary animation and remembered.
 
@@ -2267,7 +2328,7 @@ Morph an SVG path through a list of shapes (paths="A | B | C") on click, hover, 
 <usa-motion-prefs></usa-motion-prefs>
 ```
 
-### <usa-motion-prompt> — Motion prompt (text → motion)
+### <mo-motion-prompt> (legacy <usa-motion-prompt>) — Motion prompt (text → motion)
 
 10.7 (AI-assisted motion): describe a motion in English or Chinese and get a live preview plus ready code — Web Animations, CSS (with a reduced-motion guard) or a Motionary component. A small deterministic parser (motionary/components/ai), no model and no network; the same parser powers suggest_motion in motionary-mcp 2.0.
 
@@ -2281,7 +2342,7 @@ Morph an SVG path through a list of shapes (paths="A | B | C") on click, hover, 
 <usa-motion-prompt value="fade the cards up slowly, one after another"></usa-motion-prompt>
 ```
 
-### <usa-motion-spec> — Motion spec sheet
+### <mo-motion-spec> (legacy <usa-motion-spec>) — Motion spec sheet
 
 9.7: a motion spec sheet for design hand-off — each rule of a motion string with its trigger, a duration bar on a shared timeline and the easing curve, a Play playhead and Copy CSS; pairs with the Figma plugin and Framer export of motionary/design.
 
@@ -2295,7 +2356,7 @@ Morph an SVG path through a list of shapes (paths="A | B | C") on click, hover, 
 <usa-motion-spec label="Card entrance" rules="enter: fade-up 600ms ease-out stagger 80ms; hover: pop 300ms spring"></usa-motion-spec>
 ```
 
-### <usa-motion-switch> — Motion intensity
+### <mo-motion-switch> (legacy <usa-motion-switch>) — Motion intensity
 
 Let users pick Off · Low · Normal · High for the whole app; scales every component, persists, and Off equals reduced motion.
 
@@ -2309,7 +2370,7 @@ Let users pick Off · Low · Normal · High for the whole app; scales every comp
 <!-- or: setMotionIntensity('low', true) -->
 ```
 
-### <usa-motion-theme> — Theme packs
+### <mo-motion-theme> (legacy <usa-motion-theme>) — Theme packs
 
 5.8: <usa-motion-theme name> applies a theme pack — design tokens (--usa-theme-*), motion tokens and effect presets per role (enter / hover / click / attention / background). Neon, paper, glass, retro and brutalist; applyMotionTheme() for the whole page.
 
@@ -2325,7 +2386,7 @@ Let users pick Off · Low · Normal · High for the whole app; scales every comp
 </usa-motion-theme>
 ```
 
-### <usa-music-player> — Music player
+### <mo-music-player> (legacy <usa-music-player>) — Music player
 
 7.1: the cover spins like a record while playing, play morphs to pause, mini equalizer bars dance and the progress bar is a scrubbable slider. Plays a child <audio> or simulates a track.
 
@@ -2341,7 +2402,7 @@ Let users pick Off · Low · Normal · High for the whole app; scales every comp
 </usa-music-player>
 ```
 
-### <usa-native-preview> — Native preview
+### <mo-native-preview> (legacy <usa-native-preview>) — Native preview
 
 9.8: preview web motion as it will feel on a phone — an iOS / Android device frame replays the entrance with the rule’s curve and presses with a spring — and copy the generated React Native and Flutter code.
 
@@ -2357,7 +2418,25 @@ Let users pick Off · Low · Normal · High for the whole app; scales every comp
 </usa-native-preview>
 ```
 
-### <usa-nav-morph> — Navbar with morphing indicator
+### <mo-nav-flyout> (legacy <usa-nav-flyout>) — Nav flyouts (shared background)
+
+17.3: dropdown flyouts anchored under each nav link; one background slides and resizes from flyout to flyout, so moving along the bar feels like one surface. Same keyboard and hover intent as the mega menu. Reduced motion: the background jumps.
+
+- Import: `import { defineNavFlyout } from 'motionary/components/widgets'; defineNavFlyout();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `delay`, `close-delay`
+- Events: `usa:open`, `usa:close`
+- Methods: `openItem()`, `close()`
+
+```html
+<mo-nav-flyout label="Main">
+  <div><button>Docs</button><div data-panel><a href="/start">Getting started</a><a href="/api">API</a></div></div>
+  <div><button>Company</button><div data-panel><a href="/about">About</a></div></div>
+  <a href="/blog">Blog</a>
+</mo-nav-flyout>
+```
+
+### <mo-nav-morph> (legacy <usa-nav-morph>) — Navbar with morphing indicator
 
 6.6: the indicator follows the hovered or focused link — stretching from the old one, leading edge first — and settles back on the current page. Underline, pill, blob or dot.
 
@@ -2374,7 +2453,7 @@ Let users pick Off · Low · Normal · High for the whole app; scales every comp
 </usa-nav-morph>
 ```
 
-### <usa-navbar> — Auto-hide navbar
+### <mo-navbar> (legacy <usa-navbar>) — Auto-hide navbar
 
 Hides while you scroll down, slides back on the first scroll up; shrink makes it compact once scrolled. This page’s demo scrolls an inner box.
 
@@ -2390,7 +2469,7 @@ Hides while you scroll down, slides back on the first scroll up; shrink makes it
 </usa-navbar>
 ```
 
-### <usa-notification-bell> — Notification bell
+### <mo-notification-bell> (legacy <usa-notification-bell>) — Notification bell
 
 7.4: a bell with an unread badge and a dropdown — notify() swings the bell, bumps the badge and slides the notice in; “Mark all read” shrinks the badge away. Esc / outside click close it.
 
@@ -2407,7 +2486,7 @@ Hides while you scroll down, slides back on the first scroll up; shrink makes it
 <script>addEventListener('DOMContentLoaded', () => { const bell = document.querySelector('usa-notification-bell'); bell.notify({ text: 'New follower', time: 'now' }); });</script>
 ```
 
-### <usa-odometer> — Odometer counter
+### <mo-odometer> (legacy <usa-odometer>) — Odometer counter
 
 6.4: rolling digit wheels — every digit spins forward to its new value, new digits slide in, locale grouping via Intl.NumberFormat, decimals, prefix / suffix. The accessible name is the formatted number.
 
@@ -2420,7 +2499,7 @@ Hides while you scroll down, slides back on the first scroll up; shrink makes it
 <!-- el.value = 2048 rolls every digit -->
 ```
 
-### <usa-organic-card> — Organic card
+### <mo-organic-card> (legacy <usa-organic-card>) — Organic card
 
 8.3: a card with a soft, living blob shape — its outline slowly breathes on screen, morphs on hover and comes in leaf, ocean, petal and sand tints.
 
@@ -2435,7 +2514,7 @@ Hides while you scroll down, slides back on the first scroll up; shrink makes it
 </usa-organic-card>
 ```
 
-### <usa-otp> — OTP code input
+### <mo-otp> (legacy <usa-otp>) — OTP code input
 
 7.7: one-time-code boxes that auto-advance, step back on Backspace and take a pasted code; digits pop in, error() shakes the row red, success() sends a green wave across it.
 
@@ -2450,7 +2529,7 @@ Hides while you scroll down, slides back on the first scroll up; shrink makes it
 <script>const otp = document.querySelector('usa-otp'); otp.addEventListener('usa:complete', (e) => check(e.detail.code) ? otp.success() : otp.error());</script>
 ```
 
-### <usa-overscroll> — Elastic overscroll
+### <mo-overscroll> (legacy <usa-overscroll>) — Elastic overscroll
 
 A scroll container whose edges stretch with iOS-style rubber-band resistance and spring back — touch, trackpad and wheel.
 
@@ -2464,7 +2543,7 @@ A scroll container whose edges stretch with iOS-style rubber-band resistance and
 </usa-overscroll>
 ```
 
-### <usa-pack> — E-commerce pack
+### <mo-pack> (legacy <usa-pack>) — E-commerce pack
 
 Product cards reveal and lift, “Add to cart” presses and flies the product into the cart (which bumps), prices count up, badges pulse.
 
@@ -2483,7 +2562,7 @@ Product cards reveal and lift, “Add to cart” presses and flies the product i
 </usa-pack>
 ```
 
-### <usa-pagination> — Pagination with sliding ink
+### <mo-pagination> (legacy <usa-pagination>) — Pagination with sliding ink
 
 6.7: the highlight springs to the chosen page (squashing on the way) and page numbers slide in from the direction of travel when the window shifts. Prev / next, ellipses, aria-current.
 
@@ -2496,7 +2575,7 @@ Product cards reveal and lift, “Add to cart” presses and flies the product i
 <usa-pagination total="20" page="1" siblings="1"></usa-pagination>
 ```
 
-### <usa-panorama> — 360° panorama viewer
+### <mo-panorama> (legacy <usa-panorama>) — 360° panorama viewer
 
 8.8: a 360° panorama — drag or swipe to look around with inertia, a slow auto-rotate, a compass for the heading and a “View in XR” badge when the browser offers WebXR.
 
@@ -2510,7 +2589,7 @@ Product cards reveal and lift, “Add to cart” presses and flies the product i
 <usa-panorama src="pano-equirect.jpg" label="Lake at dawn" autorotate="6"></usa-panorama>
 ```
 
-### <usa-parallax-layers> — Parallax layers
+### <mo-parallax-layers> (legacy <usa-parallax-layers>) — Parallax layers
 
 10.4: a parallax container — children with data-depth move at different speeds while it crosses the viewport (native view() scroll timeline first, JS fallback), optional pointer tilt; static under reduced motion.
 
@@ -2527,7 +2606,7 @@ Product cards reveal and lift, “Add to cart” presses and flies the product i
 </usa-parallax-layers>
 ```
 
-### <usa-particles> — Particles
+### <mo-particles> (legacy <usa-particles>) — Particles
 
 A canvas constellation that drifts away from the pointer. Runs only while visible, DPR ≤ 2, a still frame under reduced motion.
 
@@ -2540,7 +2619,7 @@ A canvas constellation that drifts away from the pointer. Runs only while visibl
 <usa-particles count="80" links="120" interactive></usa-particles>
 ```
 
-### <usa-pause-all> — Pause all motion
+### <mo-pause-all> (legacy <usa-pause-all>) — Pause all motion
 
 9.5: one button that pauses all motion on the page (WCAG 2.2.2) — Motionary’s shared clock, every CSS / Web animation and autoplaying media — and resumes it again; `scope` limits it to one area.
 
@@ -2554,7 +2633,7 @@ A canvas constellation that drifts away from the pointer. Runs only while visibl
 <usa-pause-all></usa-pause-all>
 ```
 
-### <usa-perf-monitor> — Perf monitor
+### <mo-perf-monitor> (legacy <usa-perf-monitor>) — Perf monitor
 
 9.6: a live performance overlay for motion work — FPS with a sparkline, active Motionary animations, frame-loop callbacks, long tasks and the shared clock — flagging jank.
 
@@ -2567,7 +2646,7 @@ A canvas constellation that drifts away from the pointer. Runs only while visibl
 <usa-perf-monitor corner="bottom-right"></usa-perf-monitor>
 ```
 
-### <usa-physics-playground> — Physics playground
+### <mo-physics-playground> (legacy <usa-physics-playground>) — Physics playground
 
 10.7: a 2D rigid-body sandbox on Motionary’s own physics engine — circles, boxes and polygons, friction, restitution, constraints, sleeping — loaded from a versioned motionary-scene@1 JSON (or a preset: balls, pyramid, pendulum, dominoes). Drag bodies, tap to spawn, arrow keys nudge. Requires motionary/runtime/physics + motionary/runtime/format-scene — npm i motionary, then use(physics, formatScene) before it mounts.
 
@@ -2603,7 +2682,7 @@ definePhysicsPlayground(); // registers <usa-physics-playground> — after the p
 <usa-physics-playground preset="pyramid" spawn label="Knock the pyramid over"></usa-physics-playground>
 ```
 
-### <usa-pinch-zoom> — Pinch zoom
+### <mo-pinch-zoom> (legacy <usa-pinch-zoom>) — Pinch zoom
 
 Pinch with two fingers or Ctrl + wheel / trackpad pinch, pan while zoomed, double-tap to toggle; scale and position spring back inside the bounds.
 
@@ -2619,7 +2698,7 @@ Pinch with two fingers or Ctrl + wheel / trackpad pinch, pan while zoomed, doubl
 </usa-pinch-zoom>
 ```
 
-### <usa-player> — JSON animation player
+### <mo-player> (legacy <usa-player>) — JSON animation player
 
 5.9: <usa-player> plays a JSON animation — timeline presets, your own keyframes and any registered effect on a shared clock; play / pause / seek / rate / loop, scroll-scrubbing (trigger="scroll"). Export one from the Playground (<usa-player> JSON tab).
 
@@ -2636,7 +2715,7 @@ Pinch with two fingers or Ctrl + wheel / trackpad pinch, pan while zoomed, doubl
 </usa-player>
 ```
 
-### <usa-plugin-card> — Plugin detail card
+### <mo-plugin-card> (legacy <usa-plugin-card>) — Plugin detail card
 
 10.1: a plugin’s name, version and author with a Motionary compatibility badge (semver `engine` range), a signature badge (SHA-256 integrity checked with Web Crypto), an animated download counter and expandable details. Requires motionary/runtime — npm i motionary, then use() before the card mounts.
 
@@ -2670,7 +2749,7 @@ definePluginCard(); // registers <usa-plugin-card> — after the prerequisites
 </usa-plugin-card>
 ```
 
-### <usa-plugin-store> — Plugin marketplace
+### <mo-plugin-store> (legacy <usa-plugin-store>) — Plugin marketplace
 
 9.0: the plugin marketplace as a component — search the catalogue of effect packs, see each plugin’s effects and install it with one click (imports and registers the pack).
 
@@ -2688,7 +2767,7 @@ definePluginCard(); // registers <usa-plugin-card> — after the prerequisites
 </script>
 ```
 
-### <usa-popover> — Popover
+### <mo-popover> (legacy <usa-popover>) — Popover
 
 Click-to-open panel that springs from its trigger; Esc / outside click closes, focus returns.
 
@@ -2704,7 +2783,7 @@ Click-to-open panel that springs from its trigger; Esc / outside click closes, f
 </usa-popover>
 ```
 
-### <usa-post-fx> — Post-processing
+### <mo-post-fx> (legacy <usa-post-fx>) — Post-processing
 
 Chainable GPU passes over an image (4.8): vignette, grain, chromatic aberration, scanlines, CRT, bloom, pixelate, duotone and glitch, with one intensity. Without WebGL the image gets an approximate CSS filter.
 
@@ -2717,7 +2796,7 @@ Chainable GPU passes over an image (4.8): vignette, grain, chromatic aberration,
 </usa-post-fx>
 ```
 
-### <usa-presence> — Presence avatar
+### <mo-presence> (legacy <usa-presence>) — Presence avatar
 
 7.4: an avatar with a live status dot (online, away, busy, offline) — coming online sends a ripple, speaking adds a pulsing ring and story an animated gradient ring. Initials when there is no photo.
 
@@ -2731,7 +2810,7 @@ Chainable GPU passes over an image (4.8): vignette, grain, chromatic aberration,
 <usa-presence name="Grace Hopper" status="busy" story></usa-presence>
 ```
 
-### <usa-press> — Press feedback
+### <mo-press> (legacy <usa-press>) — Press feedback
 
 Tactile press: dips while pressed and springs back, or bounces once with bounce. Mouse, touch, pen and keyboard.
 
@@ -2743,7 +2822,7 @@ Tactile press: dips while pressed and springs back, or bounces once with bounce.
 <usa-press bounce><button>Press</button></usa-press>
 ```
 
-### <usa-prize-wheel> — Prize wheel
+### <mo-prize-wheel> (legacy <usa-prize-wheel>) — Prize wheel
 
 7.5: a lottery wheel — Spin whirls it and it eases out on the result (random or spin(index)), the pointer ticks and the wheel glows; usa:result reports the prize.
 
@@ -2757,7 +2836,7 @@ Tactile press: dips while pressed and springs back, or bounces once with bounce.
 <usa-prize-wheel segments="10% off,Free ship,Try again,🎁 Gift,5% off,Jackpot"></usa-prize-wheel>
 ```
 
-### <usa-product-gallery> — Product gallery
+### <mo-product-gallery> (legacy <usa-product-gallery>) — Product gallery
 
 7.3: product photos with a thumbnail strip — the stage cross-slides in the direction of travel, the selection ring glides between thumbnails, hover zooms under the pointer, swipe and ←/→ work.
 
@@ -2775,7 +2854,7 @@ Tactile press: dips while pressed and springs back, or bounces once with bounce.
 </usa-product-gallery>
 ```
 
-### <usa-progress> — Progress bar
+### <mo-progress> (legacy <usa-progress>) — Progress bar
 
 Determinate bars glide between values; without a value it shows the Fluent indeterminate animation. Paused / error states.
 
@@ -2789,7 +2868,7 @@ Determinate bars glide between values; without a value it shows the Fluent indet
 <usa-progress indeterminate></usa-progress>
 ```
 
-### <usa-progress-ring> — Progress ring / bar / gauge
+### <mo-progress-ring> (legacy <usa-progress-ring>) — Progress ring / bar / gauge
 
 6.4: the arc eases to every new value with a little overshoot while the label counts up; ring, bar or semicircle gauge, gradient strokes, indeterminate spinner without a value. role="progressbar", usa:complete at 100%.
 
@@ -2805,7 +2884,7 @@ Determinate bars glide between values; without a value it shows the Fluent indet
 <!-- el.value = 90 animates to the new value -->
 ```
 
-### <usa-prop-panel> — Property panel
+### <mo-prop-panel> (legacy <usa-prop-panel>) — Property panel
 
 8.9 low-code: a property editor for a live component — typed fields (number / range, select, color, switch, text) bound to its attributes, so the component re-renders as you edit.
 
@@ -2820,7 +2899,7 @@ Determinate bars glide between values; without a value it shows the Fluent indet
 <usa-prop-panel for="#r" props="value:number:0:5, icon:select:star|heart, readonly:boolean"></usa-prop-panel>
 ```
 
-### <usa-pull-cord> — Lamp pull-cord switch
+### <mo-pull-cord> (legacy <usa-pull-cord>) — Lamp pull-cord switch
 
 6.8: pull the cord down and let go — past the threshold the lamp switches, and the cord swings back on a damped spring. Click, Space or Enter tug it too; role="switch".
 
@@ -2834,7 +2913,7 @@ Determinate bars glide between values; without a value it shows the Fluent indet
 <usa-pull-cord label="Desk lamp"></usa-pull-cord>
 ```
 
-### <usa-pull-refresh> — Pull to refresh
+### <mo-pull-refresh> (legacy <usa-pull-refresh>) — Pull to refresh
 
 Pull down at the top of a list: the spinner stretches in with rubber-band resistance; release past the threshold to refresh.
 
@@ -2850,7 +2929,7 @@ Pull down at the top of a list: the spinner stretches in with rubber-band resist
 <script>const el = document.querySelector('usa-pull-refresh'); el.addEventListener('usa:refresh', async (e) => { await load(); e.detail.done(); });</script>
 ```
 
-### <usa-radar> — Radar scope
+### <mo-radar> (legacy <usa-radar>) — Radar scope
 
 8.4: a sci-fi radar scope — a conic beam sweeps round and each target lights up and fades as the beam passes over it.
 
@@ -2864,7 +2943,7 @@ Pull down at the top of a list: the spinner stretches in with rubber-band resist
 <usa-radar targets="Alpha:40,0.6; Bravo:200,0.35; Echo:300,0.8" speed="4"></usa-radar>
 ```
 
-### <usa-reactions> — Emoji reactions
+### <mo-reactions> (legacy <usa-reactions>) — Emoji reactions
 
 7.4: a reaction bar — clicking a pill toggles your reaction: the emoji pops, the count rolls and copies float up; ＋ springs open a picker. Each pill is a toggle button with a count label.
 
@@ -2878,7 +2957,7 @@ Pull down at the top of a list: the spinner stretches in with rubber-band resist
 <usa-reactions emojis="👍,❤️,😂,🎉" counts="3,1,0,2"></usa-reactions>
 ```
 
-### <usa-red-envelope> — Red envelope (红包)
+### <mo-red-envelope> (legacy <usa-red-envelope>) — Red envelope (红包)
 
 8.1: a Lunar New Year red envelope — tap and the flap swings open, the card slides out with the amount counting up and gold coins pop out.
 
@@ -2892,7 +2971,7 @@ Pull down at the top of a list: the spinner stretches in with rubber-band resist
 <usa-red-envelope amount="88.88" from="Grandma" message="恭喜发财"></usa-red-envelope>
 ```
 
-### <usa-retro-button> — Retro buttons
+### <mo-retro-button> (legacy <usa-retro-button>) — Retro buttons
 
 8.2: buttons in four eras with matching press motion — 8-bit pixel (stepped press), CRT phosphor (flicker), Y2K chrome pill (bounce) and Windows 95 bevel (sink).
 
@@ -2905,7 +2984,7 @@ Pull down at the top of a list: the spinner stretches in with rubber-band resist
 <usa-retro-button variant="win95">OK</usa-retro-button>
 ```
 
-### <usa-reveal> — Reveal
+### <mo-reveal> (legacy <usa-reveal>) — Reveal
 
 Fade, slide, zoom, blur or flip content in as it enters the viewport. 12 effects, replay on re-entry with repeat.
 
@@ -2921,7 +3000,7 @@ Fade, slide, zoom, blur or flip content in as it enters the viewport. 12 effects
 </usa-reveal>
 ```
 
-### <usa-ripple> — Ripple
+### <mo-ripple> (legacy <usa-ripple>) — Ripple
 
 Ink ripple from the pointer — or from the centre for Space/Enter — on any button, list item or card.
 
@@ -2934,7 +3013,7 @@ Ink ripple from the pointer — or from the centre for Space/Enter — on any bu
 <usa-ripple><button>Click me</button></usa-ripple>
 ```
 
-### <usa-rive> — Rive player (official runtime)
+### <mo-rive> (legacy <usa-rive>) — Rive player (official runtime)
 
 10.6: plays Rive (.riv) files — artboards, animations and state machines with inputs — through the official Rive runtime @rive-app/canvas, an optional peer dependency that is lazy-loaded on first use (Motionary does not reimplement the proprietary .riv format). Requires @rive-app/canvas — npm i @rive-app/canvas, or load its CDN script first; missing → a clear message in place.
 
@@ -2966,7 +3045,7 @@ defineRive(); // registers <usa-rive> — after the prerequisites
 <usa-rive src="/anim/icon.riv" state-machine="State Machine 1" autoplay label="Icon"></usa-rive>
 ```
 
-### <usa-route-transition> — Route transition container
+### <mo-route-transition> (legacy <usa-route-transition>) — Route transition container
 
 10.3: View Transitions 2.0 — link clicks swap the container’s content with the target page (fetched) or an inline <template data-route>, animated with the View Transitions API (Web Animations fallback); data-shared elements morph between routes; cross-document enables native MPA transitions.
 
@@ -2983,7 +3062,7 @@ defineRive(); // registers <usa-rive> — after the prerequisites
 </usa-route-transition>
 ```
 
-### <usa-scene> — Cinematic scene
+### <mo-scene> (legacy <usa-scene>) — Cinematic scene
 
 9.1: a scroll-scrubbed cinematic shot — while the scene crosses the screen its image follows a camera move (dolly, pan, tilt, zoom, orbit) and captions fade in on cue.
 
@@ -3000,7 +3079,7 @@ defineRive(); // registers <usa-rive> — after the prerequisites
 </usa-scene>
 ```
 
-### <usa-scramble> — Scramble / decode
+### <mo-scramble> (legacy <usa-scramble>) — Scramble / decode
 
 Decodes text out of random glyphs, left to right. Trigger on view, hover/focus or manually.
 
@@ -3014,7 +3093,7 @@ Decodes text out of random glyphs, left to right. Trigger on view, hover/focus o
 <usa-scramble trigger="hover">ACCESS GRANTED</usa-scramble>
 ```
 
-### <usa-scroll-highlight> — Scroll highlight
+### <mo-scroll-highlight> (legacy <usa-scroll-highlight>) — Scroll highlight
 
 Words light up one by one as you read down the page, or a highlighter marker sweeps behind the text.
 
@@ -3028,7 +3107,7 @@ Words light up one by one as you read down the page, or a highlighter marker swe
 <usa-scroll-highlight mode="marker">Important</usa-scroll-highlight>
 ```
 
-### <usa-scroll-progress> — Scroll progress bar
+### <mo-scroll-progress> (legacy <usa-scroll-progress>) — Scroll progress bar
 
 Reading progress of the page or of one article. Compositor-only scaleX, role="progressbar".
 
@@ -3044,7 +3123,7 @@ Reading progress of the page or of one article. Compositor-only scaleX, role="pr
 <usa-scroll-progress target="#post" position="bottom"></usa-scroll-progress>
 ```
 
-### <usa-scroll-ring> — Scroll progress ring
+### <mo-scroll-ring> (legacy <usa-scroll-ring>) — Scroll progress ring
 
 10.4: a circular scroll-progress indicator for the page or any scroll container (for=".article"), optional percentage label and back-to-top button. Scroll-driven 3.0: native animation-timeline: scroll() first (no script per frame), a small JS loop where scroll timelines are missing.
 
@@ -3057,7 +3136,7 @@ Reading progress of the page or of one article. Compositor-only scaleX, role="pr
 <usa-scroll-ring label back-to-top></usa-scroll-ring>
 ```
 
-### <usa-scroll-scene> — Scroll scene
+### <mo-scroll-scene> (legacy <usa-scroll-scene>) — Scroll scene
 
 10.2: a scroll-linked scene — children with data-scrub="opacity: 0 -> 1; x: -80 -> 0" are tweened as you scroll, scrubbed directly or smoothed (scrub="120"), with optional pin, markers and stagger. Requires motionary/runtime/scroll — npm i motionary, then use(scroll) before the scene mounts.
 
@@ -3094,7 +3173,7 @@ defineScrollScene(); // registers <usa-scroll-scene> — after the prerequisites
 </usa-scroll-scene>
 ```
 
-### <usa-scrolly> — Sticky scrollytelling
+### <mo-scrolly> (legacy <usa-scrolly>) — Sticky scrollytelling
 
 A pinned graphic while [data-step] blocks scroll past; the active step drives the graphic via attributes, a CSS variable and events.
 
@@ -3111,7 +3190,7 @@ A pinned graphic while [data-step] blocks scroll past; the active step drives th
 </usa-scrolly>
 ```
 
-### <usa-segmented> — Segmented control
+### <mo-segmented> (legacy <usa-segmented>) — Segmented control
 
 6.7: an iOS-style thumb slides under the chosen segment with a spring and stretches while it travels. A real radio group: arrow keys, Home / End. iOS, pill or outline.
 
@@ -3128,7 +3207,7 @@ A pinned graphic while [data-step] blocks scroll past; the active step drives th
 </usa-segmented>
 ```
 
-### <usa-shader> — Shader background
+### <mo-shader> (legacy <usa-shader>) — Shader background
 
 A GPU shader behind your content: gradient, plasma, waves or aurora presets — or your own fragment shader in a <script type="x-shader/x-fragment">. Falls back to the CSS background.
 
@@ -3147,7 +3226,7 @@ A GPU shader behind your content: gradient, plasma, waves or aurora presets — 
 </usa-shader>
 ```
 
-### <usa-shader-backdrop> — Shader backdrop + post chain
+### <mo-shader-backdrop> (legacy <usa-shader-backdrop>) — Shader backdrop + post chain
 
 10.5 (WebGPU effects 2.0): an animated shader background (aurora, plasma, waves, nebula or your own GLSL) run through a post-processing chain — bloom, vignette, grain, chromatic aberration, pixelate, scanlines — in any order; CSS gradient fallback.
 
@@ -3162,7 +3241,7 @@ A GPU shader behind your content: gradient, plasma, waves or aurora presets — 
 </usa-shader-backdrop>
 ```
 
-### <usa-sheet> — Drawer / bottom sheet
+### <mo-sheet> (legacy <usa-sheet>) — Drawer / bottom sheet
 
 6.3: a side sheet from the right, left, top or bottom with a blurred backdrop; the bottom sheet can be dragged down to dismiss and springs back otherwise. Native <dialog> underneath.
 
@@ -3181,7 +3260,7 @@ A GPU shader behind your content: gradient, plasma, waves or aurora presets — 
 </usa-sheet>
 ```
 
-### <usa-shimmer-text> — Shimmer text
+### <mo-shimmer-text> (legacy <usa-shimmer-text>) — Shimmer text
 
 A light sweep across gradient-filled text. CSS only; colours and speed via attributes or custom properties.
 
@@ -3193,7 +3272,7 @@ A light sweep across gradient-filled text. CSS only; colours and speed via attri
 <usa-shimmer-text shine="#fff">Premium</usa-shimmer-text>
 ```
 
-### <usa-shortcut> — Shortcut hint
+### <mo-shortcut> (legacy <usa-shortcut>) — Shortcut hint
 
 7.9: keyboard-shortcut hints as keycaps (⌘ on Apple, Ctrl elsewhere); press the combination anywhere and the caps press down one after another and usa:trigger fires.
 
@@ -3208,7 +3287,7 @@ A light sweep across gradient-filled text. CSS only; colours and speed via attri
 <usa-shortcut keys="mod+shift+p" for="palette-button"></usa-shortcut>
 ```
 
-### <usa-skeleton> — Skeleton
+### <mo-skeleton> (legacy <usa-skeleton>) — Skeleton
 
 Shimmering placeholders while loading; remove loading and the real content fades in. aria-busy included.
 
@@ -3223,7 +3302,7 @@ Shimmering placeholders while loading; remove loading and the real content fades
 </usa-skeleton>
 ```
 
-### <usa-skeleton-reveal> — Skeleton → content reveal
+### <mo-skeleton-reveal> (legacy <usa-skeleton-reveal>) — Skeleton → content reveal
 
 6.4: the skeleton is generated from the real content — one bar per rendered text line, blocks for images and marked elements — with one synchronized shimmer (wave, pulse or glow). Remove loading and the bars dissolve top-to-bottom while the content fades in from a blur.
 
@@ -3242,7 +3321,7 @@ Shimmering placeholders while loading; remove loading and the real content fades
 <!-- el.loading = false (or el.reveal()) when the data arrived -->
 ```
 
-### <usa-sketch-chart> — Sketch chart
+### <mo-sketch-chart> (legacy <usa-sketch-chart>) — Sketch chart
 
 8.5: a hand-drawn chart — wobbly pencil axes with hatched bars or a sketchy line, sketched in stroke by stroke when it scrolls into view.
 
@@ -3256,7 +3335,7 @@ Shimmering placeholders while loading; remove loading and the real content fades
 <usa-sketch-chart values="3,7,5,9" labels="Q1,Q2,Q3,Q4" label="Revenue"></usa-sketch-chart>
 ```
 
-### <usa-slider> — Slider
+### <mo-slider> (legacy <usa-slider>) — Slider
 
 A form-associated range slider: spring-following thumb, value bubble, full keyboard support (arrows, Page Up/Down, Home/End).
 
@@ -3269,7 +3348,7 @@ A form-associated range slider: spring-following thumb, value bubble, full keybo
 <usa-slider name="volume" value="40" bubble label="Volume"></usa-slider>
 ```
 
-### <usa-smooth-scroll> — Smooth scroll
+### <mo-smooth-scroll> (legacy <usa-smooth-scroll>) — Smooth scroll
 
 10.4: smooth, inertial wheel scrolling for the page or a container (wrapper), anchor links glide (with offset for sticky headers); keyboard / scrollbar / touch stay native and it switches off under reduced motion. Requires motionary/runtime/smooth — npm i motionary, then use(smooth) before it mounts.
 
@@ -3303,7 +3382,7 @@ defineSmoothScroll(); // registers <usa-smooth-scroll> — after the prerequisit
 <usa-smooth-scroll lerp="0.1" offset="64"></usa-smooth-scroll>
 ```
 
-### <usa-snap-carousel> — Snap carousel (drag · inertia · snap)
+### <mo-snap-carousel> (legacy <usa-snap-carousel>) — Snap carousel (drag · inertia · snap)
 
 10.8: drag or swipe with real inertia — a throw keeps gliding, then springs to the nearest slide (a quick flick always moves one); rubber-band edges, arrows, dots, ←/→ / Home / End, optional autoplay that pauses on hover, focus and off screen. Slides keep their own width so the next one peeks in. Requires motionary/runtime/drag-snap — npm i motionary, then use(dragSnap) before it mounts. Its own entry point: motionary/components/snap-carousel (not in the widgets / lite bundles).
 
@@ -3341,7 +3420,7 @@ defineSnapCarousel(); // registers <usa-snap-carousel> — after the prerequisit
 </usa-snap-carousel>
 ```
 
-### <usa-sparkline> — Sparkline
+### <mo-sparkline> (legacy <usa-sparkline>) — Sparkline
 
 7.2: a tiny inline trend — draws itself on first view, a soft area fades in, the last point pulses and new data morphs the line point by point. line | area | bars; hover shows the value.
 
@@ -3353,7 +3432,7 @@ defineSnapCarousel(); // registers <usa-snap-carousel> — after the prerequisit
 <usa-sparkline values="3,5,4,8,6,9,12" variant="area"></usa-sparkline>
 ```
 
-### <usa-spatial-card> — Spatial card
+### <mo-spatial-card> (legacy <usa-spatial-card>) — Spatial card
 
 8.8: a spatial-computing window — frosted glass floating in depth, a soft gaze highlight that follows the pointer, layered content and an ornament bar; it eases towards you on hover and sinks on press.
 
@@ -3369,7 +3448,7 @@ defineSnapCarousel(); // registers <usa-snap-carousel> — after the prerequisit
 </usa-spatial-card>
 ```
 
-### <usa-spinner> — Spinners
+### <mo-spinner> (legacy <usa-spinner>) — Spinners
 
 Six indeterminate indicators: the WinUI progress ring, the Windows 10 orbiting dots, ring, typing dots, pulse and bars.
 
@@ -3382,7 +3461,7 @@ Six indeterminate indicators: the WinUI progress ring, the Windows 10 orbiting d
 <usa-spinner kind="windows" size="40"></usa-spinner>
 ```
 
-### <usa-splash> — Splash screen
+### <mo-splash> (legacy <usa-splash>) — Splash screen
 
 An app launch screen that leaves (fade, scale, slide-up, circle) once the page has loaded — never sooner than min ms.
 
@@ -3398,7 +3477,7 @@ An app launch screen that leaves (fade, scale, slide-up, circle) once the page h
 </usa-splash>
 ```
 
-### <usa-split-text> — Split-text reveal
+### <mo-split-text> (legacy <usa-split-text>) — Split-text reveal
 
 Splits a headline into letters or words and cascades them in: rise, fade, blur, flip or pop. Words never break.
 
@@ -3412,7 +3491,7 @@ Splits a headline into letters or words and cascades them in: rise, fade, blur, 
 <usa-split-text effect="rise">Animated headline</usa-split-text>
 ```
 
-### <usa-spotlight> — Reveal highlight
+### <mo-spotlight> (legacy <usa-spotlight>) — Reveal highlight
 
 The Windows Fluent “Reveal” effect: a light follows the pointer, lighting the borders of nearby items and the hovered one.
 
@@ -3428,7 +3507,7 @@ The Windows Fluent “Reveal” effect: a light follows the pointer, lighting th
 </usa-spotlight>
 ```
 
-### <usa-spring> — Spring effects
+### <mo-spring> (legacy <usa-spring>) — Spring effects
 
 bounce-in, pop and drop entrances with true spring timing (CSS linear() easing), plus jelly and rubber-band attention effects on view, hover or click.
 
@@ -3447,7 +3526,7 @@ bounce-in, pop and drop entrances with true spring timing (CSS linear() easing),
 </usa-spring>
 ```
 
-### <usa-stagger> — Stagger list
+### <mo-stagger> (legacy <usa-stagger>) — Stagger list
 
 Reveals direct children one after another — lists, grids, feature rows.
 
@@ -3465,7 +3544,7 @@ Reveals direct children one after another — lists, grids, feature rows.
 </usa-stagger>
 ```
 
-### <usa-star-rating> — Star rating 2.0
+### <mo-star-rating> (legacy <usa-star-rating>) — Star rating 2.0
 
 6.4: the fill follows the pointer (half stars with step="0.5"), a click pops the chosen star with a sparkle burst while the others ripple; stars or hearts; a keyboard slider (arrows, Home / End); readonly mode.
 
@@ -3479,7 +3558,7 @@ Reveals direct children one after another — lists, grids, feature rows.
 <usa-star-rating value="4" readonly></usa-star-rating>
 ```
 
-### <usa-stepper> — Stepper / wizard
+### <mo-stepper> (legacy <usa-stepper>) — Stepper / wizard
 
 6.7: the rail fills toward the current step, finished steps pop a drawn check mark and the current step pulses. Horizontal or vertical; next() / prev() / value.
 
@@ -3498,7 +3577,7 @@ Reveals direct children one after another — lists, grids, feature rows.
 </usa-stepper>
 ```
 
-### <usa-sticky-stack> — Sticky stack
+### <mo-sticky-stack> (legacy <usa-sticky-stack>) — Sticky stack
 
 Cards stick while you scroll and the covered ones shrink and dim as the next slides over them.
 
@@ -3515,7 +3594,7 @@ Cards stick while you scroll and the covered ones shrink and dim as the next sli
 </usa-sticky-stack>
 ```
 
-### <usa-sticky-wall> — Sticky-note wall
+### <mo-sticky-wall> (legacy <usa-sticky-wall>) — Sticky-note wall
 
 8.5: a wall of sticky notes — each child becomes a pinned paper note with a slight tilt, the notes drop onto the wall one by one, and a tap lifts a note to the front.
 
@@ -3533,7 +3612,7 @@ Cards stick while you scroll and the covered ones shrink and dim as the next sli
 </usa-sticky-wall>
 ```
 
-### <usa-stories> — Stories viewer
+### <mo-stories> (legacy <usa-stories>) — Stories viewer
 
 6.2: segmented progress bars, auto-advance, tap left / right to step, press and hold to pause, plus a pause button. Under reduced motion it waits for the user instead of advancing.
 
@@ -3550,7 +3629,7 @@ Cards stick while you scroll and the covered ones shrink and dim as the next sli
 </usa-stories>
 ```
 
-### <usa-story> — Story: before / after
+### <mo-story> (legacy <usa-story>) — Story: before / after
 
 5.4: <usa-story template="compare"> wipes from before to after as you scroll; the handle is draggable and a keyboard slider (←/→, Home/End). Full-page templates (pin, gallery, zoom) live on the Scroll stories page.
 
@@ -3568,7 +3647,7 @@ Cards stick while you scroll and the covered ones shrink and dim as the next sli
 </usa-story>
 ```
 
-### <usa-suggestion-chips> — Suggestion chips
+### <mo-suggestion-chips> (legacy <usa-suggestion-chips>) — Suggestion chips
 
 7.8: follow-up prompt chips that slide in one after another; picking one pulses it and (with dismiss) the others fade away. Real buttons, arrow-key navigation.
 
@@ -3582,7 +3661,7 @@ Cards stick while you scroll and the covered ones shrink and dim as the next sli
 <usa-suggestion-chips items="Summarise|Translate|Explain like I'm 5" dismiss></usa-suggestion-chips>
 ```
 
-### <usa-swipe-deck> — Swipe cards deck
+### <mo-swipe-deck> (legacy <usa-swipe-deck>) — Swipe cards deck
 
 6.8: drag the top card — it rotates with the pointer, LIKE / NOPE stamps fade in and past the threshold (or on a fling) it flies off; otherwise it springs back. like(), nope(), undo(), ← / →.
 
@@ -3600,7 +3679,7 @@ Cards stick while you scroll and the covered ones shrink and dim as the next sli
 </usa-swipe-deck>
 ```
 
-### <usa-swipeable> — Swipeable
+### <mo-swipeable> (legacy <usa-swipeable>) — Swipeable
 
 Swipe-to-dismiss and swipe actions: content follows the finger, flies out on a fast swipe or past the distance, otherwise springs home with your release velocity. Delete / arrow keys work too.
 
@@ -3616,7 +3695,7 @@ Swipe-to-dismiss and swipe actions: content follows the finger, flies out on a f
 </usa-swipeable>
 ```
 
-### <usa-switch> — Toggle switch variants
+### <mo-switch> (legacy <usa-switch>) — Toggle switch variants
 
 6.7: four switches — iOS (the thumb stretches while pressed), day / night (sun becomes moon, stars appear), bounce (squash at the end) and liquid (a gooey fill pours in). role="switch", forms, keyboard.
 
@@ -3630,7 +3709,7 @@ Swipe-to-dismiss and swipe actions: content follows the finger, flies out on a f
 <usa-switch variant="daynight" name="dark" label="Dark mode"></usa-switch>
 ```
 
-### <usa-tab-bar> — Tabs with animated indicator
+### <mo-tab-bar> (legacy <usa-tab-bar>) — Tabs with animated indicator
 
 6.2: the indicator stretches from the old tab to the new one (leading edge first) and the panel slides in from the side of travel. Pill, underline, glow or gooey; full tablist keyboard support.
 
@@ -3651,7 +3730,7 @@ Swipe-to-dismiss and swipe actions: content follows the finger, flies out on a f
 </usa-tab-bar>
 ```
 
-### <usa-tabs> — Tabs
+### <mo-tabs> (legacy <usa-tabs>) — Tabs
 
 Accessible tabs whose indicator slides between tabs with a spring; panels slide in from the direction you moved. Line or pill indicator.
 
@@ -3669,7 +3748,7 @@ Accessible tabs whose indicator slides between tabs with a spring; panels slide 
 </usa-tabs>
 ```
 
-### <usa-terminal> — Terminal window
+### <mo-terminal> (legacy <usa-terminal>) — Terminal window
 
 8.2: a retro terminal window that types its commands after the prompt with a blinking block cursor and prints the output line by line when it scrolls into view — dark, green-phosphor or amber.
 
@@ -3686,7 +3765,7 @@ Accessible tabs whose indicator slides between tabs with a spring; panels slide 
 </usa-terminal>
 ```
 
-### <usa-text-rotate> — Rotating words
+### <mo-text-rotate> (legacy <usa-text-rotate>) — Rotating words
 
 Cycles words in place — the box keeps the width of the longest word, so nothing around it reflows.
 
@@ -3700,7 +3779,7 @@ Cycles words in place — the box keeps the width of the longest word, so nothin
 Build <usa-text-rotate words="fast|tiny|typed"></usa-text-rotate> apps
 ```
 
-### <usa-text-splitter> — Text splitter
+### <mo-text-splitter> (legacy <usa-text-splitter>) — Text splitter
 
 10.3: splits its text into characters, words or lines and animates them in with a stagger (rise, fade, blur, flip, wave) when it scrolls into view — accessible, grapheme-aware. Requires motionary/runtime/text — npm i motionary, then use(text) before it mounts.
 
@@ -3734,7 +3813,7 @@ defineTextSplitter(); // registers <usa-text-splitter> — after the prerequisit
 <usa-text-splitter split="chars" effect="rise" stagger="30">Motion, made simple.</usa-text-splitter>
 ```
 
-### <usa-theme-surface> — Theme surface
+### <mo-theme-surface> (legacy <usa-theme-surface>) — Theme surface
 
 8.6: a themeable card that follows the nearest theme — light, dark, neon (pulsing glow edge), glass (frosted backdrop with a sheen) or soft neumorphic relief — and cross-fades when the theme changes.
 
@@ -3749,7 +3828,7 @@ defineTextSplitter(); // registers <usa-text-splitter> — after the prerequisit
 </usa-theme-surface>
 ```
 
-### <usa-theme-switcher> — Theme switcher
+### <mo-theme-switcher> (legacy <usa-theme-switcher>) — Theme switcher
 
 8.6: a segmented switcher for the 8.6 theme system — light, dark, neon, glass and soft (neumorphism); a pill slides under the active option and the page change is revealed with a circular wipe from the click point.
 
@@ -3762,7 +3841,7 @@ defineTextSplitter(); // registers <usa-text-splitter> — after the prerequisit
 <usa-theme-switcher themes="light,dark,neon,glass,neu" persist></usa-theme-switcher>
 ```
 
-### <usa-tilt> — 3D tilt card
+### <mo-tilt> (legacy <usa-tilt>) — 3D tilt card
 
 Tilts toward the pointer in 3D with an optional glare; exposes --usa-tilt-x/y for parallax layers inside.
 
@@ -3776,7 +3855,7 @@ Tilts toward the pointer in 3D with an optional glare; exposes --usa-tilt-x/y fo
 </usa-tilt>
 ```
 
-### <usa-timeline> — Timeline
+### <mo-timeline> (legacy <usa-timeline>) — Timeline
 
 Every data-tl child becomes a step in document order. data-at ('-=200', '<', 'label+=100') overlaps or aligns steps; scrub ties progress to scroll; trigger view / click / manual.
 
@@ -3794,7 +3873,7 @@ Every data-tl child becomes a step in document order. data-at ('-=200', '<', 'la
 </usa-timeline>
 ```
 
-### <usa-tip> — Tooltip / popover 2.0
+### <mo-tip> (legacy <usa-tip>) — Tooltip / popover 2.0
 
 6.6: springs out of its trigger with an arrow, flips to stay inside the viewport and shifts along the edge; hover + keyboard focus (Esc closes) or click popovers with rich content.
 
@@ -3814,7 +3893,7 @@ Every data-tl child becomes a step in document order. data-at ('-=200', '<', 'la
 </usa-tip>
 ```
 
-### <usa-toast-stack> — Toast stack
+### <mo-toast-stack> (legacy <usa-toast-stack>) — Toast stack
 
 6.3: toasts pile up into a collapsed stack (newest in front, older ones peeking behind), fan out on hover or focus, auto-dismiss (paused while hovered) and swipe away. Six positions, a polite live region, stackToast() helper and data-usa-toast triggers.
 
@@ -3830,7 +3909,7 @@ Every data-tl child becomes a step in document order. data-at ('-=200', '<', 'la
 <!-- or from JS: stackToast({ title: 'Done', message: 'Saved', type: 'success' }) -->
 ```
 
-### <usa-toaster> — Toasts
+### <mo-toaster> (legacy <usa-toaster>) — Toasts
 
 toast("Saved") slides a notification in; it pauses on hover, stacks with FLIP and announces politely (errors assertively).
 
@@ -3848,7 +3927,7 @@ toast("Saved") slides a notification in; it pauses on hover, stacks with FLIP an
 </script>
 ```
 
-### <usa-token-editor> — Motion token editor (W3C DTCG)
+### <mo-token-editor> (legacy <usa-token-editor>) — Motion token editor (W3C DTCG)
 
 10.6 (motion design tokens 2.0): edit duration and cubic-bézier easing tokens with a live preview per token, then export W3C Design Tokens (DTCG 2025.10 or the earlier draft) or import a DTCG file — aliases resolved, problems listed; apply writes the tokens to :root custom properties as you edit.
 
@@ -3862,7 +3941,7 @@ toast("Saved") slides a notification in; it pauses on hover, stacks with FLIP an
 <usa-token-editor apply format="2025.10"></usa-token-editor>
 ```
 
-### <usa-typewriter> — Typewriter
+### <mo-typewriter> (legacy <usa-typewriter>) — Typewriter
 
 Types text, or cycles through phrases with delete and pause. Full text stays available to screen readers.
 
@@ -3876,7 +3955,7 @@ Types text, or cycles through phrases with delete and pause. Full text stays ava
 <usa-typewriter words="Hello, Windows.|Hello, web." loop></usa-typewriter>
 ```
 
-### <usa-upload-progress> — Upload progress
+### <mo-upload-progress> (legacy <usa-upload-progress>) — Upload progress
 
 7.7: a file row whose bar eases to value with a running shine; at 100 it turns into a check that draws itself, on error it shakes and offers Retry.
 
@@ -3890,7 +3969,7 @@ Types text, or cycles through phrases with delete and pause. Full text stays ava
 <script>addEventListener('DOMContentLoaded', () => { const row = document.querySelector('usa-upload-progress'); row.value = 75; row.status = 'error'; });</script>
 ```
 
-### <usa-video-card> — Video card
+### <mo-video-card> (legacy <usa-video-card>) — Video card
 
 9.4: a video thumbnail card — hover or focus plays a muted preview with a progress line, a play badge and a duration chip; without a video the poster drifts (Ken Burns).
 
@@ -3907,7 +3986,7 @@ Types text, or cycles through phrases with delete and pause. Full text stays ava
 </usa-video-card>
 ```
 
-### <usa-view-switch> — View switch
+### <mo-view-switch> (legacy <usa-view-switch>) — View switch
 
 One view at a time with direction-aware slide, fade, scale or drill transitions — tabs, wizards, app pages.
 
@@ -3924,7 +4003,7 @@ One view at a time with direction-aware slide, fade, scale or drill transitions 
 </usa-view-switch>
 ```
 
-### <usa-voice-button> — Voice button
+### <mo-voice-button> (legacy <usa-voice-button>) — Voice button
 
 7.8: a push-to-talk mic button — while listening a halo breathes and level bars wave; feed it live input levels with level (0–1) and they follow your voice.
 
@@ -3938,7 +4017,7 @@ One view at a time with direction-aware slide, fade, scale or drill transitions 
 <script>const vb = document.querySelector('usa-voice-button'); vb.addEventListener('usa:start', () => (vb.level = 0.6)); // feed vb.level (0–1) from your audio analyser</script>
 ```
 
-### <usa-volume-knob> — Volume knob
+### <mo-volume-knob> (legacy <usa-volume-knob>) — Volume knob
 
 7.1: a rotary knob — drag up / down, scroll or use the keys; the value arc fills, a ring of LED ticks lights up and the pointer springs to the angle. role="slider".
 
@@ -3951,7 +4030,7 @@ One view at a time with direction-aware slide, fade, scale or drill transitions 
 <usa-volume-knob value="60" label="Volume"></usa-volume-knob>
 ```
 
-### <usa-water-ripple> — Water ripple
+### <mo-water-ripple> (legacy <usa-water-ripple>) — Water ripple
 
 Interactive water ripples on a canvas over the content: move or tap to disturb the surface.
 
@@ -3966,7 +4045,7 @@ Interactive water ripples on a canvas over the content: move or tap to disturb t
 </usa-water-ripple>
 ```
 
-### <usa-wave-text> — Wave text
+### <mo-wave-text> (legacy <usa-wave-text>) — Wave text
 
 Letters bob in a travelling wave — playful headlines and loading labels.
 
@@ -3979,7 +4058,7 @@ Letters bob in a travelling wave — playful headlines and loading labels.
 <usa-wave-text>Loading…</usa-wave-text>
 ```
 
-### <usa-weather-card> — Animated weather card
+### <mo-weather-card> (legacy <usa-weather-card>) — Animated weather card
 
 6.8: sun rays turn, clouds drift, rain and snow fall, a flash-safe bolt glows, fog bands and stars — pick a condition and the scene cross-fades; the temperature counts up.
 
@@ -3991,7 +4070,7 @@ Letters bob in a travelling wave — playful headlines and loading labels.
 <usa-weather-card condition="rain" temp="12" place="Lisbon"></usa-weather-card>
 ```
 
-### <usa-worker-canvas> — Worker canvas
+### <mo-worker-canvas> (legacy <usa-worker-canvas>) — Worker canvas
 
 9.6: a canvas animation rendered in a Web Worker on an OffscreenCanvas — the main thread stays free for input — with a main-thread fallback; particles, orbits, starfield or your own draw program.
 
@@ -4004,7 +4083,7 @@ Letters bob in a travelling wave — playful headlines and loading labels.
 <usa-worker-canvas scene="starfield" style="height:240px"></usa-worker-canvas>
 ```
 
-### <usa-xp-bar> — XP bar
+### <mo-xp-bar> (legacy <usa-xp-bar>) — XP bar
 
 7.5: an experience bar — add(n) fills it smoothly; overflowing fills to the end, the level badge pops and the bar restarts with the remainder (several levels if needed).
 

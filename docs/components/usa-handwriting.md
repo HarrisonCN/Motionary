@@ -1,4 +1,6 @@
-# `<usa-handwriting>` — Handwriting draw
+# `<mo-handwriting>` — Handwriting draw
+
+> Element name `<mo-handwriting>` (default since 17.3); the legacy name `<usa-handwriting>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -22,11 +24,13 @@ The text draws itself stroke by stroke, then fills in — signatures, hero words
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineHandwriting } from 'motionary/components/text';
 
-defineHandwriting(); // registers <usa-handwriting>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineHandwriting(); // registers <mo-handwriting>
 
 /* then use it in your HTML:
-<usa-handwriting text="Thank you" size="72"></usa-handwriting>
+<mo-handwriting text="Thank you" size="72"></mo-handwriting>
 */
 ```

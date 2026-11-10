@@ -1,4 +1,6 @@
-# `<usa-motion-spec>` — Motion spec sheet
+# `<mo-motion-spec>` — Motion spec sheet
+
+> Element name `<mo-motion-spec>` (default since 17.3); the legacy name `<usa-motion-spec>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -22,11 +24,13 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineMotionSpec } from 'motionary/components/widgets';
 
-defineMotionSpec(); // registers <usa-motion-spec>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineMotionSpec(); // registers <mo-motion-spec>
 
 /* then use it in your HTML:
-<usa-motion-spec label="Card entrance" rules="enter: fade-up 600ms ease-out stagger 80ms; hover: pop 300ms spring"></usa-motion-spec>
+<mo-motion-spec label="Card entrance" rules="enter: fade-up 600ms ease-out stagger 80ms; hover: pop 300ms spring"></mo-motion-spec>
 */
 ```

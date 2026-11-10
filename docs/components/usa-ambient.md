@@ -1,4 +1,6 @@
-# `<usa-ambient>` — Ambient layer
+# `<mo-ambient>` — Ambient layer
+
+> Element name `<mo-ambient>` (default since 17.3); the legacy name `<usa-ambient>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -22,11 +24,13 @@ A fixed page-wide layer: drifting particles, falling snow, twinkling stars, film
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineAmbient } from 'motionary/components/page';
 
-defineAmbient(); // registers <usa-ambient>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineAmbient(); // registers <mo-ambient>
 
 /* then use it in your HTML:
-<usa-ambient effect="snow" density="1.2"></usa-ambient>
+<mo-ambient effect="snow" density="1.2"></mo-ambient>
 */
 ```

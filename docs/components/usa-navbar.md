@@ -1,4 +1,6 @@
-# `<usa-navbar>` — Auto-hide navbar
+# `<mo-navbar>` — Auto-hide navbar
+
+> Element name `<mo-navbar>` (default since 17.3); the legacy name `<usa-navbar>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -24,13 +26,15 @@ Hides while you scroll down, slides back on the first scroll up; shrink makes it
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineNavbar } from 'motionary/components/ui';
 
-defineNavbar(); // registers <usa-navbar>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineNavbar(); // registers <mo-navbar>
 
 /* then use it in your HTML:
-<usa-navbar shrink>
+<mo-navbar shrink>
   <header>…</header>
-</usa-navbar>
+</mo-navbar>
 */
 ```

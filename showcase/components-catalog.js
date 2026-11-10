@@ -7,6 +7,7 @@
  * (richer) markup rendered in the live preview.
  */
 
+import { moName, toMo } from './select-tray.js';
 import { C } from './catalog/make.js';
 import { EXTENSIONS } from './catalog/index.js';
 
@@ -349,7 +350,11 @@ export function componentSnippets(item) {
     if (re.test(markup)) markup = markup.replace(re, v === '' ? '$1' : `$1 ${k}="${v}"`);
     else if (v !== '') markup = markup.replace(new RegExp(`<${item.tag}\\b`), `<${item.tag} ${k}="${v}"`);
   }
+  // 17.3: <mo-*> is the default element name (usa-* stays as a deprecated alias)
+  markup = toMo(markup);
   const html = stripScripts(markup);
+  const moImp = `import { defineMoAliases } from 'motionary/components/mo';\n`;
+  const moCall = 'defineMoAliases(); // <mo-*> names (the usa-* names keep working)\n';
   // 10.1: runtime-powered components — prerequisites first (install / import + register / CDN)
   const pq = item.requires?.length ? prereqFor(item) : null;
   const pqEsm = pq ? pq.importAndRegister.split('\n').filter((l) => !l.includes(item.define + '(') && !l.includes(`{ ${item.define} }`)).join('\n').trim() + '\n' : '';
@@ -365,10 +370,10 @@ export function componentSnippets(item) {
   const six = item.reg || item.entry === 'widgets';
   const scripts = six ? `<script src="${cdn}"></script>\n<!-- 6.x widgets + effect packs -->\n<script src="${cdn.replace('components.umd.js', 'widgets.umd.js')}"></script>` : `<script src="${cdn}"></script>`;
   return {
-    html: pq ? `<!-- ${pq.badge} — ${pq.install} -->\n${pq.cdn}\n\n${markup}` : `<!-- registers every <usa-*> element and effect -->\n${scripts}\n\n${markup}`,
-    esm: `${pqEsm}${pre}import { ${item.define} } from '${sub}';\n\n${preCall}${item.define}(); // registers <${item.tag}>\n\n/* then use it in your HTML:\n${html}\n*/`,
-    react: `${pqEsm}${pre}import { ${item.define} } from '${sub}';\n\n${preCall}${item.define}();\n\nexport function Demo() {\n  return (\n    <>\n${indent(toJsx(markup), 6)}\n    </>\n  );\n}`,
-    vue: `<!-- vite.config: vue({ template: { compilerOptions: { isCustomElement: (t) => t.startsWith('usa-') } } }) -->\n<script setup>\n${pqEsm}${pre}import { ${item.define} } from '${sub}';\n${preCall}${item.define}();\n</script>\n\n<template>\n${indent(html, 2)}\n</template>`,
+    html: pq ? `<!-- ${pq.badge} — ${pq.install} -->\n${pq.cdn}\n\n${markup}` : `<!-- registers every element under its <mo-*> name (and the legacy <usa-*> name) and every effect -->\n${scripts}\n\n${markup}`,
+    esm: `${pqEsm}${moImp}${pre}import { ${item.define} } from '${sub}';\n\n${moCall}${preCall}${item.define}(); // registers <${moName(item.tag)}>\n\n/* then use it in your HTML:\n${html}\n*/`,
+    react: `${pqEsm}${moImp}${pre}import { ${item.define} } from '${sub}';\n\n${moCall}${preCall}${item.define}();\n\nexport function Demo() {\n  return (\n    <>\n${indent(toJsx(markup), 6)}\n    </>\n  );\n}`,
+    vue: `<!-- vite.config: vue({ template: { compilerOptions: { isCustomElement: (t) => t.startsWith('mo-') || t.startsWith('usa-') } } }) -->\n<script setup>\n${pqEsm}${moImp}${pre}import { ${item.define} } from '${sub}';\n${moCall}${preCall}${item.define}();\n</script>\n\n<template>\n${indent(html, 2)}\n</template>`,
     desktop: desktopSnippet(item, sub),
   };
 }

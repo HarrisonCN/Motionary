@@ -1,4 +1,6 @@
-# `<usa-dot-network>` — Dot network
+# `<mo-dot-network>` — Dot network
+
+> Element name `<mo-dot-network>` (default since 17.3); the legacy name `<usa-dot-network>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -22,11 +24,13 @@ A dot grid that swells and links up with lines around the pointer.
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineDotNetwork } from 'motionary/components/background';
 
-defineDotNetwork(); // registers <usa-dot-network>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineDotNetwork(); // registers <mo-dot-network>
 
 /* then use it in your HTML:
-<usa-dot-network gap="28">…</usa-dot-network>
+<mo-dot-network gap="28">…</mo-dot-network>
 */
 ```

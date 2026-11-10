@@ -1,4 +1,6 @@
-# `<usa-skeleton-reveal>` — Skeleton → content reveal
+# `<mo-skeleton-reveal>` — Skeleton → content reveal
+
+> Element name `<mo-skeleton-reveal>` (default since 17.3); the legacy name `<usa-skeleton-reveal>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -27,16 +29,18 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineSkeletonReveal } from 'motionary/components/widgets';
 
-defineSkeletonReveal(); // registers <usa-skeleton-reveal>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineSkeletonReveal(); // registers <mo-skeleton-reveal>
 
 /* then use it in your HTML:
-<usa-skeleton-reveal loading variant="wave">
+<mo-skeleton-reveal loading variant="wave">
   <img src="avatar.jpg" alt="" data-skeleton="circle">
   <h3>Ada Lovelace</h3>
   <p>…</p>
-</usa-skeleton-reveal>
+</mo-skeleton-reveal>
 <!-- el.loading = false (or el.reveal()) when the data arrived -->
 */
 ```

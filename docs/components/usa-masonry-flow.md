@@ -1,4 +1,6 @@
-# `<usa-masonry-flow>` — Masonry with layout animation
+# `<mo-masonry-flow>` — Masonry with layout animation
+
+> Element name `<mo-masonry-flow>` (default since 17.3); the legacy name `<usa-masonry-flow>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -27,16 +29,18 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineMasonryFlow } from 'motionary/components/widgets';
 
-defineMasonryFlow(); // registers <usa-masonry-flow>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineMasonryFlow(); // registers <mo-masonry-flow>
 
 /* then use it in your HTML:
-<usa-masonry-flow min="160" gap="12">
+<mo-masonry-flow min="160" gap="12">
   <img src="1.jpg" alt="…">
   <img src="2.jpg" alt="…">
   …
-</usa-masonry-flow>
+</mo-masonry-flow>
 <!-- grid.filter('.cats'), grid.shuffle(), grid.sort((a, b) => …) -->
 */
 ```

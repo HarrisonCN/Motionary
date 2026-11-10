@@ -1,4 +1,6 @@
-# `<usa-leaderboard>` — Leaderboard
+# `<mo-leaderboard>` — Leaderboard
+
+> Element name `<mo-leaderboard>` (default since 17.3); the legacy name `<usa-leaderboard>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -27,15 +29,17 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineLeaderboard } from 'motionary/components/widgets';
 
-defineLeaderboard(); // registers <usa-leaderboard>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineLeaderboard(); // registers <mo-leaderboard>
 
 /* then use it in your HTML:
-<usa-leaderboard me="Ada">
+<mo-leaderboard me="Ada">
   <li data-score="980">Ada</li>
   <li data-score="870">Alan</li>
   <li data-score="760">Grace</li>
-</usa-leaderboard>
+</mo-leaderboard>
 */
 ```

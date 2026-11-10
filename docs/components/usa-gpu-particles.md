@@ -1,4 +1,6 @@
-# `<usa-gpu-particles>` — GPU particle canvas
+# `<mo-gpu-particles>` — GPU particle canvas
+
+> Element name `<mo-gpu-particles>` (default since 17.3); the legacy name `<usa-gpu-particles>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -22,11 +24,13 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineGpuParticles } from 'motionary/components/widgets';
 
-defineGpuParticles(); // registers <usa-gpu-particles>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineGpuParticles(); // registers <mo-gpu-particles>
 
 /* then use it in your HTML:
-<usa-gpu-particles count="30000" mode="galaxy" colors="#818cf8,#f472b6" pointer></usa-gpu-particles>
+<mo-gpu-particles count="30000" mode="galaxy" colors="#818cf8,#f472b6" pointer></mo-gpu-particles>
 */
 ```

@@ -1,4 +1,6 @@
-# `<usa-toaster>` — Toasts
+# `<mo-toaster>` — Toasts
+
+> Element name `<mo-toaster>` (default since 17.3); the legacy name `<usa-toaster>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -26,11 +28,13 @@ toast("Saved") slides a notification in; it pauses on hover, stacks with FLIP an
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineToaster } from 'motionary/components/feedback';
 
-defineToaster(); // registers <usa-toaster>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineToaster(); // registers <mo-toaster>
 
 /* then use it in your HTML:
-<usa-toaster position="bottom-right"></usa-toaster>
+<mo-toaster position="bottom-right"></mo-toaster>
 */
 ```

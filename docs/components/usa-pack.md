@@ -1,4 +1,6 @@
-# `<usa-pack>` — E-commerce pack
+# `<mo-pack>` — E-commerce pack
+
+> Element name `<mo-pack>` (default since 17.3); the legacy name `<usa-pack>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -29,19 +31,21 @@ Product cards reveal and lift, “Add to cart” presses and flies the product i
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { definePack } from 'motionary/components/packs';
 
-definePack(); // registers <usa-pack>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+definePack(); // registers <mo-pack>
 
 /* then use it in your HTML:
-<usa-pack name="ecommerce">
+<mo-pack name="ecommerce">
   <article data-role="product">
     <img src="shoe.jpg" alt="Runner">
     <span data-role="price">$129</span>
     <button data-role="add-to-cart">Add to cart</button>
   </article>
   <a data-role="cart" href="/cart">Cart</a>
-</usa-pack>
+</mo-pack>
 */
 ```
 

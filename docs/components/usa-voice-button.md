@@ -1,4 +1,6 @@
-# `<usa-voice-button>` — Voice button
+# `<mo-voice-button>` — Voice button
+
+> Element name `<mo-voice-button>` (default since 17.3); the legacy name `<usa-voice-button>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -23,11 +25,13 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineVoiceButton } from 'motionary/components/widgets';
 
-defineVoiceButton(); // registers <usa-voice-button>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineVoiceButton(); // registers <mo-voice-button>
 
 /* then use it in your HTML:
-<usa-voice-button label="Talk to the assistant"></usa-voice-button>
+<mo-voice-button label="Talk to the assistant"></mo-voice-button>
 */
 ```

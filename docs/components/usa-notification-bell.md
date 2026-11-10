@@ -1,4 +1,6 @@
-# `<usa-notification-bell>` — Notification bell
+# `<mo-notification-bell>` — Notification bell
+
+> Element name `<mo-notification-bell>` (default since 17.3); the legacy name `<usa-notification-bell>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -25,13 +27,15 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineNotificationBell } from 'motionary/components/widgets';
 
-defineNotificationBell(); // registers <usa-notification-bell>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineNotificationBell(); // registers <mo-notification-bell>
 
 /* then use it in your HTML:
-<usa-notification-bell>
+<mo-notification-bell>
   <li data-time="2m">Ada liked your post</li>
-</usa-notification-bell>
+</mo-notification-bell>
 */
 ```

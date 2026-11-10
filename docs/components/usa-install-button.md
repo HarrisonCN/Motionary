@@ -1,4 +1,6 @@
-# `<usa-install-button>` — Install button
+# `<mo-install-button>` — Install button
+
+> Element name `<mo-install-button>` (default since 17.3); the legacy name `<usa-install-button>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -22,11 +24,13 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineInstallButton } from 'motionary/components/widgets';
 
-defineInstallButton(); // registers <usa-install-button>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineInstallButton(); // registers <mo-install-button>
 
 /* then use it in your HTML:
-<usa-install-button package="motionary" managers="npm pnpm yarn bun cdn" cdn="https://cdn.jsdelivr.net/npm/motionary@17/dist/runtime.iife.js"></usa-install-button>
+<mo-install-button package="motionary" managers="npm pnpm yarn bun cdn" cdn="https://cdn.jsdelivr.net/npm/motionary@17/dist/runtime.iife.js"></mo-install-button>
 */
 ```

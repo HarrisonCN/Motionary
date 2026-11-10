@@ -24,7 +24,7 @@ npm i motionary
 <script type="module">import ScrollAnimate from 'motionary'; ScrollAnimate.init();</script>
 ```
 
-Motionary reveals content as it scrolls into view and gives you <!--fact:public-->209<!--/fact--> animated `<usa-*>` custom elements: cards, buttons,
+Motionary reveals content as it scrolls into view and gives you <!--fact:public-->213<!--/fact--> animated `<mo-*>` custom elements: cards, buttons,
 physics, page transitions, generative backgrounds, Lottie, WebGL and more. It runs in plain HTML, in React, Vue, Svelte,
 Solid and Angular, and in desktop web views (Electron, Tauri, WebView2). It has no runtime dependencies, every entry point
 is tree-shakeable and has a gzip budget checked in CI, and every animation respects `prefers-reduced-motion`.
@@ -46,8 +46,8 @@ Supply chain: [docs/supply-chain.md](./docs/supply-chain.md) · CDN with SRI has
 - **214 scroll-reveal presets** in 14 families (33 in the core, 181 more in `motionary/presets/extended`): fades, zooms,
   3D flips, clip-path shapes, blur and mask, bounce, depth, glitch, and scroll-linked `scrub-*`. Also `timeline()`,
   `staggerChildren()` and `parallax()`.
-- **<!--fact:public-->209<!--/fact--> `<usa-*>` Web Components**: <!--fact:core-->91<!--/fact--> core components in `motionary/components` (by category) and <!--fact:widgets-->118<!--/fact--> widgets, one entry point
-  each (`motionary/widgets/<name>`). Plus <!--fact:effects-->141<!--/fact--> effects with their own entry points (`motionary/effects/<name>`).
+- **<!--fact:public-->213<!--/fact--> `<mo-*>` Web Components**: <!--fact:core-->91<!--/fact--> core components in `motionary/components` (by category) and <!--fact:widgets-->122<!--/fact--> widgets, one entry point
+  each (`motionary/widgets/<name>`). Plus <!--fact:effects-->146<!--/fact--> effects with their own entry points (`motionary/effects/<name>`).
   [How components are counted](./docs/components.md#how-components-are-counted).
 - **Motion Core**: `createMotion()` from `motionary/core`, a plugin-based engine at about 2.5 KB gzip (budget 10 KB).
 - **A runtime of its own**: `motionary/runtime` (ticker, tween, timeline) plus <!--fact:runtimeModules-->20<!--/fact--> modules: scroll scenes, smooth scrolling,
@@ -76,7 +76,7 @@ No build step? Use the CDN. URLs pin the major version (`@<!--ver:major-->17<!--
 <mo-reveal effect="fade-up"><h2>Hello</h2></mo-reveal>
 ```
 
-The v17 CDN bundles register `<mo-*>` tags automatically. With ES modules, call `defineMoAliases()` from `motionary/components/mo` before registering the components you use. The `usa:*` event names and `--usa-*` CSS properties work with both tag names. [v17 migration guide](./docs/migrating-to-v17.md)
+Since 17.3 `<mo-*>` is the default element name. The CDN bundles, `defineComponents()` and `defineWidgets()` register it, and so do the 17.3+ widgets by themselves; when you import single components or categories as ES modules, call `defineMoAliases()` from `motionary/components/mo` first (it stays out of the per-component entries so their fixed size budgets hold). The `<usa-*>` names keep working as deprecated aliases (removal not before a future major); `npx -p motionary mo-codemod tags --write` renames them in your code. The `usa:*` event names and `--usa-*` CSS properties work with both tag names. [v17 migration guide](./docs/migrating-to-v17.md)
 
 jsDelivr works too: `https://cdn.jsdelivr.net/npm/motionary@17/dist/…`. Already on `use-scroll-animate`? It keeps
 working, at the same versions. To switch, replace the name in imports and URLs ([details](./docs/versions.md)).
@@ -132,9 +132,9 @@ More: [docs/core.md](./docs/core.md).
   defineComponents(); // or lazyDefine() from 'motionary/components/lazy': loads only the tags on the page
 </script>
 
-<usa-card effect="holo">…</usa-card>
-<usa-button deform="gooey">Buy</usa-button>
-<usa-fx effect="confetti" trigger="click"><button>Celebrate</button></usa-fx>
+<mo-card effect="holo">…</mo-card>
+<mo-button deform="gooey">Buy</mo-button>
+<mo-fx effect="confetti" trigger="click"><button>Celebrate</button></mo-fx>
 ```
 
 ### Frameworks
@@ -180,13 +180,13 @@ export const Card = () => <div use:scrollAnimate={{ animation: 'blur-in-up' }}>H
 ```
 
 ```ts
-// Angular (standalone): the <usa-*> elements
+// Angular (standalone): the <mo-*> elements (and the legacy <usa-*> names)
 import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
 import { provideUsa, usaDetail } from 'motionary/angular';
 // app.config.ts: providers: [provideUsa(APP_INITIALIZER, ['click', 'ui'])]   (the categories to register)
 // usa:* events: `(usa:change)` does not compile in Angular 17+ — use the 6-line `[usaOn]` directive from docs/frameworks-ssr.md
 @Component({ standalone: true, imports: [UsaOn], schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  template: `<usa-checkbox label="Motion" [checked]="on" [usaOn]="{ change: onChange }"></usa-checkbox>` })
+  template: `<mo-checkbox label="Motion" [checked]="on" [usaOn]="{ change: onChange }"></mo-checkbox>` })
 export class Settings { on = false; onChange = (e: Event) => (this.on = usaDetail(e).checked); }
 ```
 
@@ -225,10 +225,10 @@ CDN) when the module is missing. Details: [docs/runtime-tiers.md](./docs/runtime
 | Page | What it does |
 |---|---|
 | [Animation Store](https://harrisoncn.github.io/Motionary/showcase/) | Preview, tweak and copy every preset and effect at desktop and phone sizes |
-| [Components](https://harrisoncn.github.io/Motionary/showcase/components.html) | The gallery: every `<usa-*>` element with its attributes, prerequisites and tier |
+| [Components](https://harrisoncn.github.io/Motionary/showcase/components.html) | The gallery: every `<mo-*>` element with its attributes, prerequisites and tier |
 | [Component playground](https://harrisoncn.github.io/Motionary/showcase/run.html) | Each component as a complete runnable page: edit, **Run**, **Copy** or **Download** — all three use exactly what is in the editor (the download runs on its own). HTML (CDN) runs the whole page; npm + bundler runs the module through an import map. Missing prerequisites and errors show with the line that fixes them; deep links like `run.html#usa-tilt` |
-| [Timeline playground](https://harrisoncn.github.io/Motionary/showcase/playground.html) | Visual keyframe editor; exports JSON for `<usa-player>` |
-| [Scroll story](https://harrisoncn.github.io/Motionary/showcase/story.html) | `<usa-story>` scroll-storytelling templates |
+| [Timeline playground](https://harrisoncn.github.io/Motionary/showcase/playground.html) | Visual keyframe editor; exports JSON for `<mo-player>` |
+| [Scroll story](https://harrisoncn.github.io/Motionary/showcase/story.html) | `<mo-story>` scroll-storytelling templates |
 | [Cross-platform previewer](https://harrisoncn.github.io/Motionary/showcase/xplat.html) | One preset on the web, in a mini program and in HarmonyOS ArkUI |
 | [demo/index.html](./demo/index.html) | Every preset, no build step (open it locally) |
 
@@ -329,8 +329,8 @@ never edits the document. For the full Motion Tokens 2.0 set (distances, semanti
 
 Motionary's focus is **zero dependencies, fixed size budgets and accessible motion**. The stable core is the scroll API
 (`motionary`), `motionary/core`, `motionary/presets/*`, `motionary/motion`, `motionary/scene`, `motionary/runtime/*`,
-the `<usa-*>` components and widgets, the framework adapters and the CLI. No new components or effects are planned;
-releases improve what exists.
+the `<mo-*>` components and widgets, the framework adapters and the CLI. 17.x minors add components and effects
+(zero dependencies, own size budget lines, the same accessibility contract) and improve what exists; no new major is planned.
 
 **Experimental** (may change in a minor release, not covered by the stability promise):
 Motion Studio (`motionary/studio/*`, including the 16.2 plugin API and the 16.3 performance budget), the AI assistant
@@ -342,7 +342,7 @@ cross-platform exporters (`npx motionary export`). See [docs/stability.md](./doc
 - With `prefers-reduced-motion: reduce`, scroll reveals show content right away (no entrance, parallax or scrub), and
   components switch to calm states (`staticAlternative()`, `adaptKeyframes()`).
 - `motionary/components/a11y`: `setMotionSensitivity()` lets users turn off flashes, loops or parallax. It also has `announce()`
-  for live regions, `auditMotionA11y()` and `baselineReport()`. `<usa-motion-switch>` is a ready-made motion toggle for users.
+  for live regions, `auditMotionA11y()` and `baselineReport()`. `<mo-motion-switch>` is a ready-made motion toggle for users.
 - Every element follows one [component contract](./docs/component-contract.md) (keyboard, focus, events, lifecycle,
   reduced motion), and `npm run check:contract` enforces it in CI.
 - More: [docs/accessibility.md](./docs/accessibility.md).
@@ -353,7 +353,7 @@ Every entry point has a fixed gzip budget in [`size-budget.json`](./size-budget.
 entry goes over its budget, and budgets are never raised automatically. 
 
 <!-- size-table:start -->
-Measured on the 17.2.2 build (minified + gzip), generated by `scripts/size.mjs --report`:
+Measured on the 17.3.0 build (minified + gzip), generated by `scripts/size.mjs --report`:
 
 | What you import | gzip | Budget |
 |---|---:|---:|
@@ -365,9 +365,9 @@ Measured on the 17.2.2 build (minified + gzip), generated by `scripts/size.mjs -
 | `motionary/presets/extended` (181 presets) | 4.69 KB | 5.25 KB |
 | `motionary/runtime` (runtime core) | 5.42 KB | 5.50 KB |
 | `motionary/components/reveal` | 4.47 KB | 5.00 KB |
-| `motionary/components/lite` (every element, CSS on demand) | 69.64 KB | 70.00 KB |
-| `motionary/components` (every element + CSS) | 86.08 KB | 93.75 KB |
-| `dist/components.umd.js` (CDN, everything) | 110.09 KB | 115.75 KB |
+| `motionary/components/lite` (every element, CSS on demand) | 70.29 KB | 79.00 KB |
+| `motionary/components` (every element + CSS) | 86.72 KB | 93.75 KB |
+| `dist/components.umd.js` (CDN, everything) | 110.11 KB | 115.75 KB |
 <!-- size-table:end -->
 
 By default there are no scroll listeners (IntersectionObserver is used instead). Animations stay on the compositor
@@ -395,7 +395,7 @@ npx motionary migrate src/motion/*.json --write   # optional: motion JSON → sc
 
 | Removed from the main entries | Keep it (compat) | Move to |
 |---|---|---|
-| playground documents / animation JSON without `format` in `<usa-player>` | `installCompatV13()` from `motionary/compat-v13` | scene v2 (`npx motionary migrate`) |
+| playground documents / animation JSON without `format` in `<mo-player>` | `installCompatV13()` from `motionary/compat-v13` | scene v2 (`npx motionary migrate`) |
 | `normalizeAnimation()` (`motionary/components/effects`) | `motionary/compat-v13` | `validateSceneV2()` / `migrateToSceneV2()` (`motionary/scene`) |
 | `usa-codemod-5` … `usa-codemod-10` bins | `npx motionary codemod <n>` | — |
 
@@ -408,7 +408,7 @@ Coming from another library: [AOS](./docs/migration-from-aos.md) · [GSAP Scroll
 
 ## Versions and compatibility
 
-- **npm dist-tags:** `latest` is the newest release of the current major (<!--ver:version-->17.2.2<!--/ver-->; minors move it since 14.1). Each minor release also gets its own tag `v<major>-<minor>`
+- **npm dist-tags:** `latest` is the newest release of the current major (<!--ver:version-->17.3.0<!--/ver-->; minors move it since 14.1). Each minor release also gets its own tag `v<major>-<minor>`
   (for example `v15-0`), `v15-line` follows the 15.x line and `v14-lts` is 14.9.x. `motionary` and `use-scroll-animate` are published together at the same versions.
 - **CDN:** URLs pin a major (`motionary@<!--ver:major-->17<!--/ver-->`). Exact pins (`motionary@12.4.0`) keep working.
 - **Semver:** breaking changes come only in majors, each with a guide and a codemod. Deprecations stay in place until the

@@ -24,7 +24,7 @@ npm i motionary
 <script type="module">import ScrollAnimate from 'motionary'; ScrollAnimate.init();</script>
 ```
 
-Motionary は、スクロールして画面に入ってきたコンテンツをアニメーションで表示し、さらに <!--fact:public-->209<!--/fact--> 個の `<usa-*>` カスタム要素を提供します。カード、ボタン、物理演算、ページ遷移、ジェネレーティブ背景、Lottie、WebGL などがそろっています。素の HTML でも、React・Vue・Svelte・Solid・Angular でも、Electron・Tauri・WebView2 といったデスクトップの Web ビューでも、そのまま動きます。ランタイム依存はゼロ。すべてのエントリポイントは tree-shaking でき、CI で gzip サイズの上限がチェックされます。どのアニメーションも `prefers-reduced-motion` を尊重します。
+Motionary は、スクロールして画面に入ってきたコンテンツをアニメーションで表示し、さらに <!--fact:public-->213<!--/fact--> 個の `<mo-*>` カスタム要素を提供します。カード、ボタン、物理演算、ページ遷移、ジェネレーティブ背景、Lottie、WebGL などがそろっています。素の HTML でも、React・Vue・Svelte・Solid・Angular でも、Electron・Tauri・WebView2 といったデスクトップの Web ビューでも、そのまま動きます。ランタイム依存はゼロ。すべてのエントリポイントは tree-shaking でき、CI で gzip サイズの上限がチェックされます。どのアニメーションも `prefers-reduced-motion` を尊重します。
 
 各バージョンのリリースノートは [CHANGELOG.md](./CHANGELOG.md) にあります。
 
@@ -37,7 +37,7 @@ Motionary は、スクロールして画面に入ってきたコンテンツを�
 ## 特長
 
 - **スクロール表示プリセット 214 種**を 14 のファミリーで提供（コアに 33 種、`motionary/presets/extended` にさらに 181 種）。フェード、ズーム、3D フリップ、clip-path の図形、ブラーとマスク、バウンス、奥行き、グリッチ、スクロール量に連動する `scrub-*` など。`timeline()`、`staggerChildren()`、`parallax()` もあります。
-- **`<usa-*>` Web Components <!--fact:public-->209<!--/fact--> 個**：`motionary/components` にカテゴリ別で <!--fact:core-->91<!--/fact--> 個のコアコンポーネント、さらにウィジェットが <!--fact:widgets-->118<!--/fact--> 個あり、それぞれ専用のエントリポイント（`motionary/widgets/<name>`）を持ちます。加えて、専用エントリ（`motionary/effects/<name>`）を持つエフェクトが <!--fact:effects-->141<!--/fact--> 種あります。数え方は [docs/components.md](./docs/components.md#how-components-are-counted) を参照。
+- **`<mo-*>` Web Components <!--fact:public-->213<!--/fact--> 個**：`motionary/components` にカテゴリ別で <!--fact:core-->91<!--/fact--> 個のコアコンポーネント、さらにウィジェットが <!--fact:widgets-->122<!--/fact--> 個あり、それぞれ専用のエントリポイント（`motionary/widgets/<name>`）を持ちます。加えて、専用エントリ（`motionary/effects/<name>`）を持つエフェクトが <!--fact:effects-->146<!--/fact--> 種あります。数え方は [docs/components.md](./docs/components.md#how-components-are-counted) を参照。
 - **Motion Core**：`motionary/core` の `createMotion()`。プラグイン方式のエンジンで、gzip 後およそ 2.5 KB（上限 10 KB）です。
 - **独自のランタイム**：`motionary/runtime`（ticker・tween・timeline）と <!--fact:runtimeModules-->20<!--/fact--> のモジュール。スクロールシーン、スムーズスクロール、テキスト分割、SVG モーフィング、スプライト、GIF / APNG / WebP、Lottie と dotLottie、WebGL2、glTF / OBJ、2D 物理演算をカバーします。モジュールは 3 つの階層に分かれていて、インポートした分だけのサイズで済みます。
 - **どのフレームワークでも**：`motionary/react`、`motionary/vue`、`motionary/svelte`、`motionary/solid`、`motionary/angular`。要素用のラッパー `motionary/components/react` · `vue` · `svelte` · `solid` もあります。サーバー側でインポートしても何も起きません。
@@ -60,7 +60,7 @@ npm i motionary
 <mo-reveal effect="fade-up"><h2>Hello</h2></mo-reveal>
 ```
 
-v17 の CDN バンドルは `<mo-*>` タグを自動登録します。ES モジュールを使う場合は、`motionary/components/mo` の `defineMoAliases()` を呼び出してから各コンポーネントを登録してください。どちらのタグ名でも `usa:*` イベントと `--usa-*` CSS カスタムプロパティを使えます。[v17 移行ガイド](./docs/migrating-to-v17.md)
+17.3 から `<mo-*>` が既定の要素名です。CDN バンドル、`defineComponents()`、`defineWidgets()` が登録し、17.3 以降の新しいウィジェットは自分で登録します。単一のコンポーネントやカテゴリを ES モジュールで読み込む場合は、先に `motionary/components/mo` の `defineMoAliases()` を呼び出してください（固定サイズ予算を守るため、コンポーネント単位のエントリには含めていません）。`<usa-*>` 名は非推奨の別名として引き続き動作します（削除は将来のメジャー以降）。`npx -p motionary mo-codemod tags --write` でコード内の名前を一括変更できます。どちらのタグ名でも `usa:*` イベントと `--usa-*` CSS カスタムプロパティを使えます。[v17 移行ガイド](./docs/migrating-to-v17.md)
 
 jsDelivr も使えます：`https://cdn.jsdelivr.net/npm/motionary@17/dist/…`。`use-scroll-animate` をお使いの場合も、同じバージョンで引き続き公開されます。乗り換えるときは、import と URL のパッケージ名を置き換えるだけです（[詳細](./docs/versions.md)）。
 
@@ -115,9 +115,9 @@ await motion.play(hero, 'dolly-in', { duration: 900 });   // 1 回再生して�
   defineComponents(); // または 'motionary/components/lazy' の lazyDefine()：ページにあるタグだけを読み込む
 </script>
 
-<usa-card effect="holo">…</usa-card>
-<usa-button deform="gooey">Buy</usa-button>
-<usa-fx effect="confetti" trigger="click"><button>Celebrate</button></usa-fx>
+<mo-card effect="holo">…</mo-card>
+<mo-button deform="gooey">Buy</mo-button>
+<mo-fx effect="confetti" trigger="click"><button>Celebrate</button></mo-fx>
 ```
 
 ### フレームワーク
@@ -168,7 +168,7 @@ import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/cor
 import { provideUsa } from 'motionary/angular';
 // app.config.ts：providers: [provideUsa(APP_INITIALIZER, ['click', 'ui'])]   （登録するカテゴリ）
 @Component({ standalone: true, schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  template: `<usa-checkbox label="Motion" [checked]="on" (usa:change)="on = $any($event).detail.checked"></usa-checkbox>` })
+  template: `<mo-checkbox label="Motion" [checked]="on" (usa:change)="on = $any($event).detail.checked"></mo-checkbox>` })
 export class Settings { on = false; }
 ```
 
@@ -200,10 +200,10 @@ defineScrollScene();  // そのあとで、それを使うコンポーネント�
 | ページ | 内容 |
 |---|---|
 | [アニメーションストア](https://harrisoncn.github.io/Motionary/showcase/) | すべてのプリセットとエフェクトを、デスクトップとスマホのサイズでプレビュー・調整・コピー |
-| [コンポーネント](https://harrisoncn.github.io/Motionary/showcase/components.html) | ギャラリー：各 `<usa-*>` 要素の属性、前提モジュール、階層 |
+| [コンポーネント](https://harrisoncn.github.io/Motionary/showcase/components.html) | ギャラリー：各 `<mo-*>` 要素の属性、前提モジュール、階層 |
 | [コンポーネントプレイグラウンド](https://harrisoncn.github.io/Motionary/showcase/run.html) | コンポーネントごとに動く完全なページ。編集して **Run**、**Copy**、**Download** — 3 つともエディタの内容そのものを使います（ダウンロードしたファイルは単体で動作）。HTML (CDN) はページ全体を実行し、npm + bundler はインポートマップでモジュールを実行。前提モジュールの不足やエラーは修正方法付きで表示。`run.html#usa-tilt` のようなディープリンクにも対応 |
-| [タイムラインエディタ](https://harrisoncn.github.io/Motionary/showcase/playground.html) | ビジュアルなキーフレーム編集。`<usa-player>` 用の JSON を書き出せます |
-| [スクロールストーリー](https://harrisoncn.github.io/Motionary/showcase/story.html) | `<usa-story>` のスクロールストーリーテンプレート |
+| [タイムラインエディタ](https://harrisoncn.github.io/Motionary/showcase/playground.html) | ビジュアルなキーフレーム編集。`<mo-player>` 用の JSON を書き出せます |
+| [スクロールストーリー](https://harrisoncn.github.io/Motionary/showcase/story.html) | `<mo-story>` のスクロールストーリーテンプレート |
 | [クロスプラットフォームプレビュー](https://harrisoncn.github.io/Motionary/showcase/xplat.html) | 1 つのプリセットを Web・ミニプログラム・HarmonyOS ArkUI で見比べる |
 | [demo/index.html](./demo/index.html) | 全プリセット。ビルド不要（ローカルで開くだけ） |
 
@@ -284,8 +284,8 @@ el.animate(intent.keyframes, intent.options);
 ## 安定コアと実験的な機能
 
 Motionary の方針は **依存ゼロ・固定サイズ上限・アクセシブルなモーション** です。安定コアは、スクロール API（`motionary`）、
-`motionary/core`、`motionary/presets/*`、`motionary/motion`、`motionary/scene`、`motionary/runtime/*`、`<usa-*>` コンポーネントと
-ウィジェット、フレームワークアダプター、CLI です。新しいコンポーネントやエフェクトの追加は予定しておらず、既存の機能を磨いていきます。
+`motionary/core`、`motionary/presets/*`、`motionary/motion`、`motionary/scene`、`motionary/runtime/*`、`<mo-*>` コンポーネントと
+ウィジェット、フレームワークアダプター、CLI です。17.x のマイナーリリースでコンポーネントとエフェクトを追加し（依存ゼロ、個別のサイズ予算、同じアクセシビリティ規約）、既存の機能も磨いていきます。新しいメジャーは予定していません。
 
 **実験的**（マイナーリリースで変わる可能性があり、安定性の約束の対象外）：Motion Studio（`motionary/studio/*`、16.2 のプラグイン API と
 16.3 のパフォーマンス予算を含む）、AI アシスタントとプロバイダー（`motionary/studio/ai`、`motionary/ai*`）、MCP サーバー（`motionary-mcp`）、
@@ -294,7 +294,7 @@ Figma プラグイン、クロスプラットフォーム書き出し（`npx mot
 ## アクセシビリティ
 
 - `prefers-reduced-motion: reduce` のときは、スクロール表示がすぐにコンテンツを表示し（登場・パララックス・scrub の動きなし）、コンポーネントも落ち着いた状態に切り替わります（`staticAlternative()`、`adaptKeyframes()`）。
-- `motionary/components/a11y`：`setMotionSensitivity()` でユーザーが点滅・ループ・パララックスをオフにできます。ライブリージョン用の `announce()`、`auditMotionA11y()`、`baselineReport()` もあります。`<usa-motion-switch>` はすぐに使えるモーション切り替えスイッチです。
+- `motionary/components/a11y`：`setMotionSensitivity()` でユーザーが点滅・ループ・パララックスをオフにできます。ライブリージョン用の `announce()`、`auditMotionA11y()`、`baselineReport()` もあります。`<mo-motion-switch>` はすぐに使えるモーション切り替えスイッチです。
 - すべての要素が同じ[コンポーネント規約](./docs/component-contract.md)（キーボード、フォーカス、イベント、ライフサイクル、reduced motion）に従い、CI の `npm run check:contract` で検証されます。
 - 詳しくは [docs/accessibility.md](./docs/accessibility.md)。
 
@@ -303,7 +303,7 @@ Figma プラグイン、クロスプラットフォーム書き出し（`npx mot
 すべてのエントリポイントに、[`size-budget.json`](./size-budget.json) で固定の gzip 上限が設定されています（全 401 項目）。上限を超えるエントリがあれば CI は失敗し、上限が自動で引き上げられることはありません。
 
 <!-- size-table:start -->
-17.2.2 ビルドでの実測値（minify ＋ gzip、`scripts/size.mjs --report` で生成）：
+17.3.0 ビルドでの実測値（minify ＋ gzip、`scripts/size.mjs --report` で生成）：
 
 | インポートするもの | gzip | 上限 |
 |---|---:|---:|
@@ -315,9 +315,9 @@ Figma プラグイン、クロスプラットフォーム書き出し（`npx mot
 | `motionary/presets/extended`（181 プリセット） | 4.69 KB | 5.25 KB |
 | `motionary/runtime`（ランタイムのコア） | 5.42 KB | 5.50 KB |
 | `motionary/components/reveal` | 4.47 KB | 5.00 KB |
-| `motionary/components/lite`（全要素、CSS はオンデマンド） | 69.64 KB | 70.00 KB |
-| `motionary/components`（全要素 ＋ CSS） | 86.08 KB | 93.75 KB |
-| `dist/components.umd.js`（CDN、すべて） | 110.09 KB | 115.75 KB |
+| `motionary/components/lite`（全要素、CSS はオンデマンド） | 70.29 KB | 79.00 KB |
+| `motionary/components`（全要素 ＋ CSS） | 86.72 KB | 93.75 KB |
+| `dist/components.umd.js`（CDN、すべて） | 110.11 KB | 115.75 KB |
 <!-- size-table:end -->
 
 既定ではスクロールイベントを監視せず（IntersectionObserver を使用）、アニメーションはコンポジタで処理できるプロパティ（`transform`、`opacity`、`filter`、`clip-path`）に限られます。インポート自体に副作用はありません（[docs/tree-shaking.md](./docs/tree-shaking.md)）。PR ごとに、ヘッドレス Chrome でファーストビューの転送量、スクリプト時間、GPU リソース、フレームの安定性も計測しています（[docs/perf-ci.md](./docs/perf-ci.md)）。ソースマップは npm には含めません。タグ付きの git ツリーにあり（各ファイルの `sourceMappingURL` がそこを指します）、16.3 からは `sourcemaps` アーカイブとして GitHub の各リリースにも添付します（[docs/source-maps.md](./docs/source-maps.md)）。詳しくは [docs/performance.md](./docs/performance.md)。
@@ -345,7 +345,7 @@ npx usa-codemod-13 --write      # まとめて書き換え。@10 / @11 / @12 に
 
 ## バージョンと互換性
 
-- **npm の dist-tag：** `latest` は現在のメジャーの最新リリース（<!--ver:version-->17.2.2<!--/ver-->）を指します。14.1 からはマイナーリリースでも移動します。マイナーリリースにはそれぞれ `v<major>-<minor>` のタグも付きます（例：`v15-0`）。`v15-line` は 15.x を追い、`v14-lts` は 14.9.x です。`motionary` と `use-scroll-animate` は常に同じバージョンで同時に公開されます。
+- **npm の dist-tag：** `latest` は現在のメジャーの最新リリース（<!--ver:version-->17.3.0<!--/ver-->）を指します。14.1 からはマイナーリリースでも移動します。マイナーリリースにはそれぞれ `v<major>-<minor>` のタグも付きます（例：`v15-0`）。`v15-line` は 15.x を追い、`v14-lts` は 14.9.x です。`motionary` と `use-scroll-animate` は常に同じバージョンで同時に公開されます。
 - **CDN：** URL はメジャーで固定します（`motionary@<!--ver:major-->17<!--/ver-->`）。正確なバージョン指定（`motionary@12.4.0`）もそのまま使えます。
 - **セマンティックバージョニング：** 破壊的変更はメジャーだけで行い、毎回ガイドと codemod を用意します。非推奨になったものは次のメジャーまで残り、その間は型に `@deprecated` が付くだけで、実行時の警告は出ません。
 - **各バージョンに含まれるもの：** コンポーネントとランタイムモジュールごとの `since` / `changed`（[docs/version-compat.md](./docs/version-compat.md)）、機能ごとの対応状況（[docs/compat-matrix.md](./docs/compat-matrix.md)）。

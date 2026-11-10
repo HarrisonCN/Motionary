@@ -1,4 +1,6 @@
-# `<usa-cursor>` — Custom cursor
+# `<mo-cursor>` — Custom cursor
+
+> Element name `<mo-cursor>` (default since 17.3); the legacy name `<usa-cursor>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -22,11 +24,13 @@ A spring-lagged ring, a magnetic ring that wraps buttons and links, or a soft gl
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineCursor } from 'motionary/components/page';
 
-defineCursor(); // registers <usa-cursor>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineCursor(); // registers <mo-cursor>
 
 /* then use it in your HTML:
-<usa-cursor mode="magnetic" hide-native></usa-cursor>
+<mo-cursor mode="magnetic" hide-native></mo-cursor>
 */
 ```

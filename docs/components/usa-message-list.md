@@ -1,4 +1,6 @@
-# `<usa-message-list>` — Chat thread
+# `<mo-message-list>` — Chat thread
+
+> Element name `<mo-message-list>` (default since 17.3); the legacy name `<usa-message-list>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -26,14 +28,16 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineMessageList } from 'motionary/components/widgets';
 
-defineMessageList(); // registers <usa-message-list>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineMessageList(); // registers <mo-message-list>
 
 /* then use it in your HTML:
-<usa-message-list>
+<mo-message-list>
   <p data-from="Ada">Hi! 👋</p>
   <p data-me>Hey Ada</p>
-</usa-message-list>
+</mo-message-list>
 */
 ```

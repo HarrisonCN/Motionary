@@ -1,4 +1,6 @@
-# `<usa-rive>` — Rive player (official runtime)
+# `<mo-rive>` — Rive player (official runtime)
+
+> Element name `<mo-rive>` (default since 17.3); the legacy name `<usa-rive>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -47,11 +49,13 @@ defineRive(); // registers <usa-rive> — after the prerequisites
 import { provideRiveRuntime } from 'motionary/components/widgets';
 
 provideRiveRuntime(() => import('@rive-app/canvas')); // lazy: fetched when the first <usa-rive> mounts
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineRive } from 'motionary/components/widgets';
 
-defineRive(); // registers <usa-rive>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineRive(); // registers <mo-rive>
 
 /* then use it in your HTML:
-<usa-rive src="/anim/icon.riv" state-machine="State Machine 1" autoplay label="Icon"></usa-rive>
+<mo-rive src="/anim/icon.riv" state-machine="State Machine 1" autoplay label="Icon"></mo-rive>
 */
 ```

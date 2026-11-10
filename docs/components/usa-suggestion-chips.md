@@ -1,4 +1,6 @@
-# `<usa-suggestion-chips>` — Suggestion chips
+# `<mo-suggestion-chips>` — Suggestion chips
+
+> Element name `<mo-suggestion-chips>` (default since 17.3); the legacy name `<usa-suggestion-chips>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -22,11 +24,13 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineSuggestionChips } from 'motionary/components/widgets';
 
-defineSuggestionChips(); // registers <usa-suggestion-chips>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineSuggestionChips(); // registers <mo-suggestion-chips>
 
 /* then use it in your HTML:
-<usa-suggestion-chips items="Summarise|Translate|Explain like I'm 5" dismiss></usa-suggestion-chips>
+<mo-suggestion-chips items="Summarise|Translate|Explain like I'm 5" dismiss></mo-suggestion-chips>
 */
 ```

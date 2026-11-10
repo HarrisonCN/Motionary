@@ -1,4 +1,6 @@
-# `<usa-slider>` — Slider
+# `<mo-slider>` — Slider
+
+> Element name `<mo-slider>` (default since 17.3); the legacy name `<usa-slider>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -22,11 +24,13 @@ A form-associated range slider: spring-following thumb, value bubble, full keybo
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineSlider } from 'motionary/components/ui';
 
-defineSlider(); // registers <usa-slider>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineSlider(); // registers <mo-slider>
 
 /* then use it in your HTML:
-<usa-slider name="volume" value="40" bubble label="Volume"></usa-slider>
+<mo-slider name="volume" value="40" bubble label="Volume"></mo-slider>
 */
 ```

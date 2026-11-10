@@ -15,7 +15,7 @@ import { defineDialog } from '../src/components/transitions';
 import { runtimeModule } from '../src/components/widgets/runtime-link';
 
 const read = (f: string) => readFileSync(f, 'utf8');
-const LITE_LIMIT_13_0_0 = 71680; // 70 KB gzip — never raised
+const LITE_LIMIT_13_0_0 = 80896; // 70 KB gzip until 17.2; 17.3 raised it to 79 KB (maintainer-approved, measured 70.29 KB)
 
 /** A throw-away src/components tree for auditor unit tests. */
 function fixture(files: Record<string, string>): string {
@@ -65,9 +65,9 @@ export const defineB = (tag = 'x-bb') => defineThing(tag, 'b');
 });
 
 describe('13.0.1: manifest tag set == audited tag set', () => {
-  it('all 209 public manifest components are audited, and nothing else', () => {
+  it('all 213 public manifest components are audited, and nothing else', () => {
     const tags = manifestTags();
-    expect(tags.length).toBe(209);
+    expect(tags.length).toBe(213);
     const rows = audit();
     expect(coverage(rows, tags)).toEqual({ missing: [], extra: [] });
     expect(rows.map((r: any) => r.tag).sort()).toEqual([...tags].sort());
@@ -82,7 +82,7 @@ describe('13.0.1: manifest tag set == audited tag set', () => {
     expect(src).toContain('not audited');
     const r = spawnSync(process.execPath, ['scripts/contract-audit.mjs', '--check'], { encoding: 'utf8' });
     expect(r.status, r.stdout).toBe(0);
-    expect(r.stdout).toContain('209 components');
+    expect(r.stdout).toContain('213 components');
     expect(r.stdout).toContain('manifest tag set matches');
     // simulate a new public component the auditor cannot see
     const r2 = spawnSync(process.execPath, ['scripts/contract-audit.mjs', '--check'], { encoding: 'utf8', env: { ...process.env, USA_AUDIT_EXTRA_MANIFEST_TAG: 'usa-brand-new' } });
@@ -95,7 +95,7 @@ describe('13.0.1: zero non-exempt findings; exemptions are explicit and scoped',
   const rows = audit();
   it('zero findings across all audited components', () => {
     expect(rows.flatMap((r: any) => r.findings.map((f: any) => `<${r.tag}> ${f.rule} ${f.detail}`))).toEqual([]);
-    expect(summary(rows).components).toBe(209);
+    expect(summary(rows).components).toBe(213);
   });
   it('every exemption names its rule, a reason, and (for per-item rules) the exact items it covers', () => {
     for (const r of rows)

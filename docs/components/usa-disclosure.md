@@ -1,4 +1,6 @@
-# `<usa-disclosure>` — Accordion 2.0
+# `<mo-disclosure>` — Accordion 2.0
+
+> Element name `<mo-disclosure>` (default since 17.3); the legacy name `<usa-disclosure>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -25,14 +27,16 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineDisclosure } from 'motionary/components/widgets';
 
-defineDisclosure(); // registers <usa-disclosure>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineDisclosure(); // registers <mo-disclosure>
 
 /* then use it in your HTML:
-<usa-disclosure variant="cards">
+<mo-disclosure variant="cards">
   <details><summary>Shipping</summary><p>…</p></details>
   <details><summary>Returns</summary><p>…</p></details>
-</usa-disclosure>
+</mo-disclosure>
 */
 ```

@@ -1,4 +1,6 @@
-# `<usa-modal>` — Modal dialog
+# `<mo-modal>` — Modal dialog
+
+> Element name `<mo-modal>` (default since 17.3); the legacy name `<usa-modal>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -27,16 +29,18 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineModal } from 'motionary/components/widgets';
 
-defineModal(); // registers <usa-modal>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineModal(); // registers <mo-modal>
 
 /* then use it in your HTML:
 <button data-usa-open="welcome">Open</button>
-<usa-modal id="welcome" effect="origin" label="Welcome">
+<mo-modal id="welcome" effect="origin" label="Welcome">
   <h2>Hello 👋</h2>
   <p>…</p>
   <button data-usa-close="ok">Got it</button>
-</usa-modal>
+</mo-modal>
 */
 ```

@@ -1,4 +1,6 @@
-# `<usa-splash>` — Splash screen
+# `<mo-splash>` — Splash screen
+
+> Element name `<mo-splash>` (default since 17.3); the legacy name `<usa-splash>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -24,13 +26,15 @@ An app launch screen that leaves (fade, scale, slide-up, circle) once the page h
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineSplash } from 'motionary/components/page';
 
-defineSplash(); // registers <usa-splash>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineSplash(); // registers <mo-splash>
 
 /* then use it in your HTML:
-<usa-splash exit="circle" min="800">
+<mo-splash exit="circle" min="800">
   <img src="logo.svg" alt="">
-</usa-splash>
+</mo-splash>
 */
 ```

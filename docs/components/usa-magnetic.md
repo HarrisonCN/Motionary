@@ -1,4 +1,6 @@
-# `<usa-magnetic>` — Magnetic button
+# `<mo-magnetic>` — Magnetic button
+
+> Element name `<mo-magnetic>` (default since 17.3); the legacy name `<usa-magnetic>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -22,11 +24,13 @@ Content leans toward the pointer when it comes near and springs back. Fine point
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineMagnetic } from 'motionary/components/interaction';
 
-defineMagnetic(); // registers <usa-magnetic>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineMagnetic(); // registers <mo-magnetic>
 
 /* then use it in your HTML:
-<usa-magnetic strength="0.4"><button>Hover near me</button></usa-magnetic>
+<mo-magnetic strength="0.4"><button>Hover near me</button></mo-magnetic>
 */
 ```

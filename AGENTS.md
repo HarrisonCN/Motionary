@@ -13,12 +13,12 @@ This file tells AI coding agents (and the people prompting them) how to pick and
 | Runtime modules (`motionary/runtime/*`) and their compatibility tables | [`docs/runtime/`](docs/runtime/) |
 | Prompting tips and common mistakes | [`docs/ai-prompt-guide.md`](docs/ai-prompt-guide.md) |
 
-All of these are generated from the source at build time, so they match the installed version. Look up a v17 `mo-*` tag under its corresponding `usa-*` manifest entry. Use the attributes documented there.
+All of these are generated from the source at build time, so they match the installed version. Since 17.3 the default element name is `mo-*` (manifest field `name`); the manifest is keyed by the legacy `usa-*` name (`tag`), which still works as a deprecated alias. Use the attributes documented there.
 
 ## Rules
 
 1. **Install once:** `npm i motionary` (the old name `use-scroll-animate` is a compatibility alias). No other packages are needed except the few components whose manifest entry lists an official third-party runtime under `requires` (e.g. `<usa-rive>` from 10.6 needs `@rive-app/canvas`).
-2. **Register before use.** Each component has a define function: `import { defineX } from '<import.path>'; defineX();` — or load the CDN bundle (`components.umd.js`, plus `widgets.umd.js` for 6.x+ widgets), which registers everything.
+2. **Register before use.** Each component has a define function: `import { defineX } from '<import.path>'; defineX();` — or load the CDN bundle (`components.umd.js`, plus `widgets.umd.js` for 6.x+ widgets), which registers everything under its `mo-*` name. With single-component or category ESM imports, call `defineMoAliases()` from `motionary/components/mo` first (`defineComponents()` / `defineWidgets()` and the 17.3+ widgets do it themselves).
 3. **Prerequisites first.** If a component's `requires` is non-empty, register those modules *before* the component mounts:
    ```js
    import { use } from 'motionary/runtime';
@@ -66,4 +66,4 @@ Declarative motion without components (10.2):
 
 If your client speaks MCP, add `motionary-mcp` (read-only, ships with the package): `{ "command": "npx", "args": ["-y", "-p", "motionary", "motionary-mcp"] }`. Use `search_components` → `get_component` → `scaffold_snippet` (prerequisites are already in the snippet, in order). See docs/mcp.md.
 
-motionary-mcp 3.0: `suggest_motion` turns a description (English or Chinese) into motion code and component suggestions; run `validate_snippet` on any code you write with `<usa-*>` components before handing it over — it catches unknown tags / attributes and missing or mis-ordered prerequisites.
+motionary-mcp 3.0: `suggest_motion` turns a description (English or Chinese) into motion code and component suggestions; run `validate_snippet` on any code you write with `<mo-*>` (or legacy `<usa-*>`) components before handing it over — it catches unknown tags / attributes and missing or mis-ordered prerequisites.

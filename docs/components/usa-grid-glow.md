@@ -1,4 +1,6 @@
-# `<usa-grid-glow>` — Grid glow
+# `<mo-grid-glow>` — Grid glow
+
+> Element name `<mo-grid-glow>` (default since 17.3); the legacy name `<usa-grid-glow>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -24,13 +26,15 @@ A line grid behind the content that lights up around the pointer.
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineGridGlow } from 'motionary/components/background';
 
-defineGridGlow(); // registers <usa-grid-glow>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineGridGlow(); // registers <mo-grid-glow>
 
 /* then use it in your HTML:
-<usa-grid-glow size="32">
+<mo-grid-glow size="32">
   <h2>Hero</h2>
-</usa-grid-glow>
+</mo-grid-glow>
 */
 ```

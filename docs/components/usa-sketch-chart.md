@@ -1,4 +1,6 @@
-# `<usa-sketch-chart>` — Sketch chart
+# `<mo-sketch-chart>` — Sketch chart
+
+> Element name `<mo-sketch-chart>` (default since 17.3); the legacy name `<usa-sketch-chart>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -22,11 +24,13 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineSketchChart } from 'motionary/components/widgets';
 
-defineSketchChart(); // registers <usa-sketch-chart>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineSketchChart(); // registers <mo-sketch-chart>
 
 /* then use it in your HTML:
-<usa-sketch-chart values="3,7,5,9" labels="Q1,Q2,Q3,Q4" label="Revenue"></usa-sketch-chart>
+<mo-sketch-chart values="3,7,5,9" labels="Q1,Q2,Q3,Q4" label="Revenue"></mo-sketch-chart>
 */
 ```

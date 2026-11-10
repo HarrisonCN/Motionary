@@ -1,4 +1,6 @@
-# `<usa-bar-chart>` — Animated bar chart
+# `<mo-bar-chart>` — Animated bar chart
+
+> Element name `<mo-bar-chart>` (default since 17.3); the legacy name `<usa-bar-chart>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -23,11 +25,13 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineBarChart } from 'motionary/components/widgets';
 
-defineBarChart(); // registers <usa-bar-chart>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineBarChart(); // registers <mo-bar-chart>
 
 /* then use it in your HTML:
-<usa-bar-chart values="12,19,8,15,22" labels="Mon,Tue,Wed,Thu,Fri" unit="k"></usa-bar-chart>
+<mo-bar-chart values="12,19,8,15,22" labels="Mon,Tue,Wed,Thu,Fri" unit="k"></mo-bar-chart>
 */
 ```

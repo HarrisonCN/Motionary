@@ -1,4 +1,6 @@
-# `<usa-odometer>` — Odometer counter
+# `<mo-odometer>` — Odometer counter
+
+> Element name `<mo-odometer>` (default since 17.3); the legacy name `<usa-odometer>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -23,12 +25,14 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineOdometer } from 'motionary/components/widgets';
 
-defineOdometer(); // registers <usa-odometer>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineOdometer(); // registers <mo-odometer>
 
 /* then use it in your HTML:
-<usa-odometer value="1284" locale="en-US" prefix="$"></usa-odometer>
+<mo-odometer value="1284" locale="en-US" prefix="$"></mo-odometer>
 <!-- el.value = 2048 rolls every digit -->
 */
 ```

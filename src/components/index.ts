@@ -39,6 +39,7 @@ import { definePacksComponents } from './packs/index';
 import { defineFxComponents } from './fx/index';
 import { adoptVariants } from './ui/variants';
 import { canDefine } from './base';
+import { defineMoAliases } from './mo';
 export { configureComponents, prefersReducedMotion, getMotionIntensity, motionScale, animateWithMotion, withoutDeprecations, MOTION_SCALE } from './base';
 export type { ComponentsConfig, UsaElement, MotionIntensity, MotionSensitivity } from './base';
 
@@ -93,10 +94,12 @@ const BY_CATEGORY: Record<ComponentCategory, () => void> = {
 };
 
 /**
- * Register every `<usa-*>` component (or only the given categories).
+ * Register every component (or only the given categories). 17.3: `<mo-*>` is the default name — this turns on the
+ * `mo-*` names first (`defineMoAliases()`); the `<usa-*>` names stay registered as deprecated aliases.
  * Safe to call more than once and on the server (no-op without DOM).
  */
 export function defineComponents(categories?: ComponentCategory[]): void {
+  defineMoAliases();
   if (canDefine()) adoptVariants();
   (categories || (Object.keys(BY_CATEGORY) as ComponentCategory[])).forEach((c) => BY_CATEGORY[c]?.());
 }

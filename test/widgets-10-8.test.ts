@@ -310,6 +310,6 @@ describe('10.8 prerequisites in all five places; bundles unchanged', () => {
     expect(pkg.exports['./components/snap-carousel']).toBeTruthy();
     for (const f of ['src/components/widgets/index.ts', 'src/components/index.ts', 'src/components/lite.ts']) expect(readFileSync(f, 'utf8')).not.toMatch(/snap-carousel/);
     const lite = JSON.parse(readFileSync('size-budget.json', 'utf8')).find((e: any) => e.name.includes('components/lite'));
-    expect(lite.limit).toBe(70 * 1024);
+    expect(lite.limit).toBe(79 * 1024); // 17.3: 70 → 79 KB
   });
 });

@@ -237,6 +237,11 @@
           "type": "string",
           "pattern": "^[a-z][a-z0-9]*-[a-z0-9-]+$"
         },
+        "name": {
+          "type": "string",
+          "pattern": "^mo-[a-z0-9-]+$",
+          "description": "17.3: the default element name (mo-*). `tag` keeps the legacy usa-* name, still registered as a deprecated alias, and stays the lookup key."
+        },
         "title": {
           "type": "string"
         },

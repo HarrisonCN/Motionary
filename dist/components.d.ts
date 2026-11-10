@@ -3005,7 +3005,8 @@ declare global {
 }
 
 /**
- * Register every `<usa-*>` component (or only the given categories).
+ * Register every component (or only the given categories). 17.3: `<mo-*>` is the default name — this turns on the
+ * `mo-*` names first (`defineMoAliases()`); the `<usa-*>` names stay registered as deprecated aliases.
  * Safe to call more than once and on the server (no-op without DOM).
  */
 declare function defineComponents(categories?: ComponentCategory[]): void;

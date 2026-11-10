@@ -1,4 +1,6 @@
-# `<usa-red-envelope>` — Red envelope (红包)
+# `<mo-red-envelope>` — Red envelope (红包)
+
+> Element name `<mo-red-envelope>` (default since 17.3); the legacy name `<usa-red-envelope>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -22,11 +24,13 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineRedEnvelope } from 'motionary/components/widgets';
 
-defineRedEnvelope(); // registers <usa-red-envelope>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineRedEnvelope(); // registers <mo-red-envelope>
 
 /* then use it in your HTML:
-<usa-red-envelope amount="88.88" from="Grandma" message="恭喜发财"></usa-red-envelope>
+<mo-red-envelope amount="88.88" from="Grandma" message="恭喜发财"></mo-red-envelope>
 */
 ```

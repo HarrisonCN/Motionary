@@ -1,4 +1,6 @@
-# `<usa-theme-surface>` — Theme surface
+# `<mo-theme-surface>` — Theme surface
+
+> Element name `<mo-theme-surface>` (default since 17.3); the legacy name `<usa-theme-surface>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -24,13 +26,15 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineThemeSurface } from 'motionary/components/widgets';
 
-defineThemeSurface(); // registers <usa-theme-surface>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineThemeSurface(); // registers <mo-theme-surface>
 
 /* then use it in your HTML:
-<usa-theme-surface theme="glass">
+<mo-theme-surface theme="glass">
   <h3>Frosted</h3><p>Content…</p>
-</usa-theme-surface>
+</mo-theme-surface>
 */
 ```

@@ -2,9 +2,27 @@
 
 ## 17.x 维护与迭代
 
-当前基线为 **17.0.0**。后续执行顺序、验收条件与进度见
-[17.x 维护计划](maintenance-17x.md)；下面的 14.x–17.0 表格保留为历史追踪。
-继续遵守 [稳定性约定](stability.md)：不新增组件 / 特效，不提高已有体积预算，17.x 不删除稳定 API。
+当前基线为 **17.2.2**。维护顺序、验收条件与进度见 [17.x 维护计划](maintenance-17x.md)；下面的 14.x–17.0 表格保留为历史追踪。
+2026-11-10 维护者调整方向：17.x 小版本可以新增组件与特效（自行实现，不复制参考站点的代码、文字或素材），`mo-*` 成为所有组件的默认标签，
+`usa-*` 作为弃用别名保留（17.x 不删除）。其余约定：新入口各有独立预算行；组件增多时维护者同意按需调高已有预算（每次在 CHANGELOG 写明 旧上限 → 新上限 与实测值，留约 10–15% 余量），零运行时依赖，17.x 不删除稳定 API。
+
+### 17.3 → 17.12（2026-11-10 起规划，来源：缺口调研）
+
+| 版本 | 状态 | 主题 | 组件 | 特效包 | 工具 / 升级 |
+| --- | --- | --- | --- | --- | --- |
+| v17.3.0 | [开发中] | 导航 I + `mo-*` 默认 | mega-menu、nav-flyout、fullscreen-menu、breadcrumbs | fx/hover（5） | 展示页多选 → 复制为 AI 提示词 + 分享链接；`mo-codemod tags` |
+| v17.4.0 | [计划] | 导航 II | sidebar（基于 liquid-nav 纵向）、announcement-bar、search-bar、scrollspy | fx/path（3） | navbar CTA 插槽 |
+| v17.5.0 | [计划] | 滚动叙事 | scroll-zoom、horizontal-scroll、scroll-bg、scroll-cue | fx/velocity（3 种模式） | splash 百分比计数 + 分开退场 |
+| v17.6.0 | [计划] | 转化 | pricing、subscribe、download-button、sticky-cta | fx/anim（4） | — |
+| v17.7.0 | [计划] | 表单与弹窗 | cta-popup、consent、select、number-stepper、password | fx/draw（4） | slider 双滑块 |
+| v17.8.0 | [计划] | 画廊 I | expand-cards、fan-carousel、lightbox、hotspots | fx/lens（5） | carousel coverflow、card-stack 叠放模式 |
+| v17.9.0 | [计划] | 画廊 II（3D / 物理） | image-tunnel、orbit-gallery、clothesline、morph-card | fx/camera（5） | carousel-3d 螺旋 / 弧形、globe 点阵 |
+| v17.10.0 | [计划] | 指针与表面 | image-trail、hover-reveal-list、elastic-frame、liquid-glass | fx/glass（5） | card 文件夹 / 书签遮罩 |
+| v17.11.0 | [计划] | 页面区块 | bento、reveal-footer、shape-divider、infinite-scroll、empty-state | fx/cut（4） | 展示页排序 / New 标记 |
+| v17.12.0 | [计划] | 风格与 AI 交接 | stack-slider、file-tree、filter-chips、desktop-windows | fx/grade（7） | 原创风格预设、MOTION.md、Tailwind / CSS 变量导出、风格浏览器、术语表、ja 语言、agent skill |
+
+每个版本：键盘 / ARIA / reduced-motion、单元与浏览器测试、展示页实时演示、契约审计 0 项、全部体积预算通过、PR CI 全绿后 squash 合并、
+GitHub Release（tgz + sourcemaps）、两个 npm 包同版本发布。真机测试继续推迟，不声称通过。
 
 ## 14.x → 15.0 版本追踪（2026-10-11 起采用）
 
@@ -51,7 +69,7 @@
 ### 每个版本都必须满足的发布约束
 
 1. `motionary/core`、`motionary/motion`、`components/lite`、WebGL 和编辑器工具彼此独立；Studio 不进入 lite。
-2. lite 约 70 KB gzip 的固定预算不因新功能提高，`dependencies` 保持为空，直到 v17.0 结束（除非某个 major 明确重新定义并写明理由）；新增的大功能使用单独入口和独立预算，任何已有预算行都不静默上调。
+2. lite 约 70 KB gzip 的固定预算不因新功能提高，`dependencies` 保持为空，直到 v17.0 结束（除非某个 major 明确重新定义并写明理由）；新增的大功能使用单独入口和独立预算，任何已有预算行都不静默上调。（2026-11-10 起：17.3 经维护者同意把 lite 上限由 70 KB 调到 79 KB，实测 70.29 KB；之后的调高都在 CHANGELOG 写明 旧上限 → 新上限 与实测值。）
 3. 浏览器覆盖 Chromium、Firefox、WebKit；继续验证 SSR / Hydration 和移动端操作。
 4. 工程格式、导出器和可视化时间轴必须支持确定性测试、回滚、恶意输入限制和迁移损失报告。
 5. 必需 CI（Node 20/22/24、三种浏览器、体积 / Tree Shaking / 打包检查）为红灯时，一律不合并。

@@ -1,4 +1,6 @@
-# `<usa-auto-animate>` — Auto-animate
+# `<mo-auto-animate>` — Auto-animate
+
+> Element name `<mo-auto-animate>` (default since 17.3); the legacy name `<usa-auto-animate>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -31,14 +33,16 @@ Wrap a list or grid: items that are added fade in, removed ones fade out in plac
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineAutoAnimate } from 'motionary/components/layout';
 
-defineAutoAnimate(); // registers <usa-auto-animate>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineAutoAnimate(); // registers <mo-auto-animate>
 
 /* then use it in your HTML:
-<usa-auto-animate>
+<mo-auto-animate>
   <ul class="todo"><li>Write the brief</li><li>Review</li></ul>
-</usa-auto-animate>
+</mo-auto-animate>
 
 <!-- or on any element: -->
 <ul class="grid"><li>A</li><li>B</li></ul>

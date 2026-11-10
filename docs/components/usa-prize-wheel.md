@@ -1,4 +1,6 @@
-# `<usa-prize-wheel>` — Prize wheel
+# `<mo-prize-wheel>` — Prize wheel
+
+> Element name `<mo-prize-wheel>` (default since 17.3); the legacy name `<usa-prize-wheel>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -22,11 +24,13 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { definePrizeWheel } from 'motionary/components/widgets';
 
-definePrizeWheel(); // registers <usa-prize-wheel>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+definePrizeWheel(); // registers <mo-prize-wheel>
 
 /* then use it in your HTML:
-<usa-prize-wheel segments="10% off,Free ship,Try again,🎁 Gift,5% off,Jackpot"></usa-prize-wheel>
+<mo-prize-wheel segments="10% off,Free ship,Try again,🎁 Gift,5% off,Jackpot"></mo-prize-wheel>
 */
 ```

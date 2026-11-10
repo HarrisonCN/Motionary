@@ -1,4 +1,6 @@
-# `<usa-date-picker>` — Date picker
+# `<mo-date-picker>` — Date picker
+
+> Element name `<mo-date-picker>` (default since 17.3); the legacy name `<usa-date-picker>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -22,11 +24,13 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineDatePicker } from 'motionary/components/widgets';
 
-defineDatePicker(); // registers <usa-date-picker>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineDatePicker(); // registers <mo-date-picker>
 
 /* then use it in your HTML:
-<usa-date-picker value="2026-10-08" min="2026-01-01" first-day="1"></usa-date-picker>
+<mo-date-picker value="2026-10-08" min="2026-01-01" first-day="1"></mo-date-picker>
 */
 ```

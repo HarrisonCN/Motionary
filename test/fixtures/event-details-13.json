@@ -37,6 +37,11 @@
         "{css, seed}"
       ]
     },
+    "usa-breadcrumbs": {
+      "usa:expand": [
+        "{hidden}"
+      ]
+    },
     "usa-button": {
       "usa:state": [
         "{state}"
@@ -259,6 +264,14 @@
         "{index}"
       ]
     },
+    "usa-fullscreen-menu": {
+      "usa:close": [
+        "(none)"
+      ],
+      "usa:open": [
+        "(none)"
+      ]
+    },
     "usa-gen-art": {
       "usa:generate": [
         "{seed}"
@@ -403,6 +416,14 @@
         "{columns}"
       ]
     },
+    "usa-mega-menu": {
+      "usa:close": [
+        "{index}"
+      ],
+      "usa:open": [
+        "{index}"
+      ]
+    },
     "usa-menu": {
       "usa:close": [
         "(none)"
@@ -493,6 +514,14 @@
     "usa-native-preview": {
       "usa:replay": [
         "(none)"
+      ]
+    },
+    "usa-nav-flyout": {
+      "usa:close": [
+        "{index}"
+      ],
+      "usa:open": [
+        "{index}"
       ]
     },
     "usa-nav-morph": {

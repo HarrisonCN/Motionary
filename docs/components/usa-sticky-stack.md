@@ -1,4 +1,6 @@
-# `<usa-sticky-stack>` — Sticky stack
+# `<mo-sticky-stack>` — Sticky stack
+
+> Element name `<mo-sticky-stack>` (default since 17.3); the legacy name `<usa-sticky-stack>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -26,15 +28,17 @@ Cards stick while you scroll and the covered ones shrink and dim as the next sli
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineStickyStack } from 'motionary/components/cards';
 
-defineStickyStack(); // registers <usa-sticky-stack>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineStickyStack(); // registers <mo-sticky-stack>
 
 /* then use it in your HTML:
-<usa-sticky-stack top="80">
+<mo-sticky-stack top="80">
   <section>One</section>
   <section>Two</section>
   <section>Three</section>
-</usa-sticky-stack>
+</mo-sticky-stack>
 */
 ```

@@ -21,6 +21,7 @@ var components_packs = require('./components/packs.cjs');
 var components_fx = require('./components/fx.cjs');
 var variants = require('./chunks/variants-OGnKHKwT.cjs');
 var base = require('./chunks/base-DzZEJhQB.cjs');
+var components_mo = require('./components/mo.cjs');
 var components_tokens = require('./components/tokens.cjs');
 var components_a11y = require('./components/a11y.cjs');
 var components_perf = require('./components/perf.cjs');
@@ -76,10 +77,12 @@ const BY_CATEGORY = {
     fx: components_fx.defineFxComponents,
 };
 /**
- * Register every `<usa-*>` component (or only the given categories).
+ * Register every component (or only the given categories). 17.3: `<mo-*>` is the default name — this turns on the
+ * `mo-*` names first (`defineMoAliases()`); the `<usa-*>` names stay registered as deprecated aliases.
  * Safe to call more than once and on the server (no-op without DOM).
  */
 function defineComponents(categories) {
+    components_mo.defineMoAliases();
     if (base.canDefine())
         variants.adoptVariants();
     (categories || Object.keys(BY_CATEGORY)).forEach((c) => BY_CATEGORY[c]?.());
@@ -353,4 +356,4 @@ exports.pinchScale = core$1.pinchScale;
 exports.swipeDirection = core$1.swipeDirection;
 exports.haptic = fx.haptic;
 exports.defineComponents = defineComponents;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/components.cjs.map

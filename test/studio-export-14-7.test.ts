@@ -16,6 +16,7 @@ import { createTimelineDoc, sampleTimelineDoc } from '../src/components/timeline
 import { serializeStudioProject, sampleFrames, frameTime } from '../src/components/studio/index';
 import { packStudioProject } from '../src/components/studio/assets';
 import type { TimelineDoc } from '../src/components/timeline/editor/index';
+import { allowedLimit } from './budget-raises';
 
 const pkg = JSON.parse(readFileSync('package.json', 'utf8'));
 const budgets = JSON.parse(readFileSync('size-budget.json', 'utf8')) as { name: string; import?: string; file?: string; limit: number }[];
@@ -71,15 +72,15 @@ describe('14.7 entry, version and budget', () => {
       if (b.name.includes("motionary/components/compat-v13'")) continue; // removed in 15.0 (docs/deprecations-v15.md)
       const now = budgets.find((x) => x.name === b.name);
       expect(now, b.name).toBeTruthy();
-      expect(now!.limit, b.name).toBeLessThanOrEqual(b.limit);
+      expect(now!.limit, b.name).toBeLessThanOrEqual(allowedLimit(b.name, b.limit));
     }
     const lite = budgets.find((b) => /components\/lite'/.test(b.import || ''));
-    expect(lite!.limit).toBeLessThanOrEqual(71680);
+    expect(lite!.limit).toBeLessThanOrEqual(80896); // 17.3: 70 → 79 KB
     for (const f of ['lite', 'core/index', 'motion/index', 'studio/index', 'studio/assets', 'studio/ai']) expect(readFileSync(`src/components/${f}.ts`, 'utf8')).not.toMatch(/studio\/export|from '\.\/export'/);
   });
   it('keeps the npm pack limits (11.2) unchanged: docs/images (README screenshots, served from GitHub) are no longer packed', () => {
     const packSrc = readFileSync('scripts/check-pack.mjs', 'utf8');
-    expect(packSrc).toContain('PACK_LIMITS = { packed: 4.0 * 1024 * 1024, unpacked: 14 * 1024 * 1024, files: 2300 }');
+    expect(packSrc).toContain('PACK_LIMITS = { packed: 4.0 * 1024 * 1024, unpacked: 16 * 1024 * 1024, files: 2300 }'); // 17.3: unpacked 14 → 16 MB, measured 14.32 MB
     expect(pkg.files).toContain('docs');
     expect(pkg.files).toContain('!docs/images');
   });

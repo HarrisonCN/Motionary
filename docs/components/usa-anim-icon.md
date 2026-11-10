@@ -1,4 +1,6 @@
-# `<usa-anim-icon>` — Animated icons
+# `<mo-anim-icon>` — Animated icons
+
+> Element name `<mo-anim-icon>` (default since 17.3); the legacy name `<usa-anim-icon>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -23,12 +25,14 @@ Stroke icons that move: the bell rings, the heart beats, the check draws, the ge
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineAnimIcon } from 'motionary/components/svg';
 
-defineAnimIcon(); // registers <usa-anim-icon>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineAnimIcon(); // registers <mo-anim-icon>
 
 /* then use it in your HTML:
-<usa-anim-icon name="bell" label="Notifications"></usa-anim-icon>
-<usa-anim-icon name="heart" trigger="click"></usa-anim-icon>
+<mo-anim-icon name="bell" label="Notifications"></mo-anim-icon>
+<mo-anim-icon name="heart" trigger="click"></mo-anim-icon>
 */
 ```

@@ -1,4 +1,6 @@
-# `<usa-dialog>` — Modal & drawer
+# `<mo-dialog>` — Modal & drawer
+
+> Element name `<mo-dialog>` (default since 17.3); the legacy name `<usa-dialog>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -26,15 +28,17 @@ Animated modal, side drawers and bottom sheet on the native <dialog>: top layer,
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineDialog } from 'motionary/components/transitions';
 
-defineDialog(); // registers <usa-dialog>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineDialog(); // registers <mo-dialog>
 
 /* then use it in your HTML:
-<usa-dialog id="dlg" kind="modal" label="Settings">
+<mo-dialog id="dlg" kind="modal" label="Settings">
   <h2>Settings</h2>
   <button data-close>Done</button>
-</usa-dialog>
+</mo-dialog>
 <button onclick="dlg.show()">Open</button>
 */
 ```

@@ -1,4 +1,6 @@
-# `<usa-keyframe-editor>` — Animation editor 2.0
+# `<mo-keyframe-editor>` — Animation editor 2.0
+
+> Element name `<mo-keyframe-editor>` (default since 17.3); the legacy name `<usa-keyframe-editor>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -27,12 +29,14 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineKeyframeEditor } from 'motionary/components/widgets';
 
-defineKeyframeEditor(); // registers <usa-keyframe-editor>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineKeyframeEditor(); // registers <mo-keyframe-editor>
 
 /* then use it in your HTML:
 <div id="hero"><h1>Title</h1><div class="card">…</div><button>Go</button></div>
-<usa-keyframe-editor for="hero"></usa-keyframe-editor>
+<mo-keyframe-editor for="hero"></mo-keyframe-editor>
 */
 ```

@@ -1,4 +1,6 @@
-# `<usa-fullpage>` — Full-page sections
+# `<mo-fullpage>` — Full-page sections
+
+> Element name `<mo-fullpage>` (default since 17.3); the legacy name `<usa-fullpage>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -25,14 +27,16 @@ Full-screen sections that snap one at a time, with keyboard paging, dot navigati
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineFullpage } from 'motionary/components/page';
 
-defineFullpage(); // registers <usa-fullpage>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineFullpage(); // registers <mo-fullpage>
 
 /* then use it in your HTML:
-<usa-fullpage dots>
+<mo-fullpage dots>
   <section>One</section>
   <section>Two</section>
-</usa-fullpage>
+</mo-fullpage>
 */
 ```

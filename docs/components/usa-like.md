@@ -1,4 +1,6 @@
-# `<usa-like>` — Like button
+# `<mo-like>` — Like button
+
+> Element name `<mo-like>` (default since 17.3); the legacy name `<usa-like>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -22,11 +24,13 @@ A heart that pops with a spring and bursts into particles; aria-pressed, optiona
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineLike } from 'motionary/components/click';
 
-defineLike(); // registers <usa-like>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineLike(); // registers <mo-like>
 
 /* then use it in your HTML:
-<usa-like count="128"></usa-like>
+<mo-like count="128"></mo-like>
 */
 ```

@@ -1,4 +1,6 @@
-# `<usa-dock>` — macOS-style dock
+# `<mo-dock>` — macOS-style dock
+
+> Element name `<mo-dock>` (default since 17.3); the legacy name `<usa-dock>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -26,15 +28,17 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineDock } from 'motionary/components/widgets';
 
-defineDock(); // registers <usa-dock>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineDock(); // registers <mo-dock>
 
 /* then use it in your HTML:
-<usa-dock magnify="1.9" bounce label="Apps">
+<mo-dock magnify="1.9" bounce label="Apps">
   <button data-label="Finder" aria-label="Finder">🗂</button>
   <button data-label="Music" aria-label="Music">🎵</button>
   <a href="/mail" data-label="Mail" aria-label="Mail">✉️</a>
-</usa-dock>
+</mo-dock>
 */
 ```

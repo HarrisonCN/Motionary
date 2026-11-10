@@ -1,4 +1,6 @@
-# `<usa-pull-refresh>` — Pull to refresh
+# `<mo-pull-refresh>` — Pull to refresh
+
+> Element name `<mo-pull-refresh>` (default since 17.3); the legacy name `<usa-pull-refresh>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -25,13 +27,15 @@ Pull down at the top of a list: the spinner stretches in with rubber-band resist
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { definePullRefresh } from 'motionary/components/ui';
 
-definePullRefresh(); // registers <usa-pull-refresh>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+definePullRefresh(); // registers <mo-pull-refresh>
 
 /* then use it in your HTML:
-<usa-pull-refresh style="height: 300px">
+<mo-pull-refresh style="height: 300px">
   <ul>…</ul>
-</usa-pull-refresh>
+</mo-pull-refresh>
 */
 ```

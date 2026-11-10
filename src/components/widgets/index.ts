@@ -123,6 +123,10 @@ import { defineRive, RIVE_PEER, RIVE_CDN, loadRiveRuntime, provideRiveRuntime, t
 import { defineTokenEditor, type UsaTokenEditorElement } from './token-editor';
 import { definePhysicsPlayground, PHYSICS_PRESETS, type UsaPhysicsPlaygroundElement } from './physics-playground';
 import { defineMotionPrompt, type UsaMotionPromptElement } from './motion-prompt';
+import { defineMegaMenu, defineNavFlyout, type UsaMegaMenuElement, type UsaNavFlyoutElement } from './nav-panels';
+import { defineFullscreenMenu, type UsaFullscreenMenuElement } from './fullscreen-menu';
+import { defineBreadcrumbs, type UsaBreadcrumbsElement, type BreadcrumbItem } from './breadcrumbs';
+import { defineMoAliases } from '../mo';
 
 export { defineCarousel, defineTabBar, defineDisclosure, defineStories, CAROUSEL_EFFECTS, TAB_INDICATORS };
 export type { UsaCarouselElement, UsaTabBarElement, UsaDisclosureElement, UsaStoriesElement };
@@ -254,6 +258,9 @@ export type { UsaLottiePlayerElement, UsaRiveElement, UsaTokenEditorElement };
 export { definePhysicsPlayground, PHYSICS_PRESETS, defineMotionPrompt };
 export type { UsaPhysicsPlaygroundElement, UsaMotionPromptElement };
 
+export { defineMegaMenu, defineNavFlyout, defineFullscreenMenu, defineBreadcrumbs };
+export type { UsaMegaMenuElement, UsaNavFlyoutElement, UsaFullscreenMenuElement, UsaBreadcrumbsElement, BreadcrumbItem };
+
 /** The widgets by release (tag → define function). */
 export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElementConstructor | undefined>> = {
   '6.2': { 'usa-carousel': defineCarousel, 'usa-tab-bar': defineTabBar, 'usa-disclosure': defineDisclosure, 'usa-stories': defineStories },
@@ -299,19 +306,32 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '10.5': { 'usa-gl-scene': defineGlScene, 'usa-gpu-particles': defineGpuParticles, 'usa-shader-backdrop': defineShaderBackdrop },
   '10.6': { 'usa-lottie-player': defineLottiePlayer, 'usa-rive': defineRive, 'usa-token-editor': defineTokenEditor },
   '10.7': { 'usa-physics-playground': definePhysicsPlayground, 'usa-motion-prompt': defineMotionPrompt },
+  '17.3': { 'usa-mega-menu': defineMegaMenu, 'usa-nav-flyout': defineNavFlyout, 'usa-fullscreen-menu': defineFullscreenMenu, 'usa-breadcrumbs': defineBreadcrumbs },
 };
 
 /** Every widget tag, in release order. */
 export const WIDGET_TAGS: string[] = /*#__PURE__*/ Object.values(WIDGETS).flatMap((g) => Object.keys(g));
 
-/** Register every widget (or only those of one release, e.g. `'6.2'`) under its default tag. */
+/**
+ * Register every widget (or only those of one release, e.g. `'6.2'`). 17.3: `mo-*` is the default name — this turns on
+ * the `<mo-*>` names first (`defineMoAliases()`); the `usa-*` names stay registered as deprecated aliases.
+ */
 export function defineWidgets(release?: string): void {
+  defineMoAliases();
   for (const [v, group] of Object.entries(WIDGETS)) if (!release || release === v) for (const [tag, fn] of Object.entries(group)) fn(tag);
 }
 
 declare global {
   interface HTMLElementTagNameMap {
     'usa-carousel': UsaCarouselElement;
+    'usa-mega-menu': UsaMegaMenuElement;
+    'mo-mega-menu': UsaMegaMenuElement;
+    'usa-nav-flyout': UsaNavFlyoutElement;
+    'mo-nav-flyout': UsaNavFlyoutElement;
+    'usa-fullscreen-menu': UsaFullscreenMenuElement;
+    'mo-fullscreen-menu': UsaFullscreenMenuElement;
+    'usa-breadcrumbs': UsaBreadcrumbsElement;
+    'mo-breadcrumbs': UsaBreadcrumbsElement;
     'usa-tab-bar': UsaTabBarElement;
     'usa-disclosure': UsaDisclosureElement;
     'usa-stories': UsaStoriesElement;

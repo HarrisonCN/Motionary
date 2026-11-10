@@ -1,4 +1,6 @@
-# `<usa-morph>` — Path morph
+# `<mo-morph>` — Path morph
+
+> Element name `<mo-morph>` (default since 17.3); the legacy name `<usa-morph>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -23,12 +25,14 @@ Morph an SVG path through a list of shapes (paths="A | B | C") on click, hover, 
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineMorph } from 'motionary/components/svg';
 
-defineMorph(); // registers <usa-morph>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineMorph(); // registers <mo-morph>
 
 /* then use it in your HTML:
-<usa-morph trigger="auto" interval="1800"
-  paths="M50 10 C75 10 90 30 90 50 C90 75 70 90 50 90 C25 90 10 70 10 50 C10 30 25 10 50 10 Z | M50 4 C80 20 96 26 86 54 C78 84 64 96 44 86 C14 80 4 64 14 44 C20 20 30 0 50 4 Z"></usa-morph>
+<mo-morph trigger="auto" interval="1800"
+  paths="M50 10 C75 10 90 30 90 50 C90 75 70 90 50 90 C25 90 10 70 10 50 C10 30 25 10 50 10 Z | M50 4 C80 20 96 26 86 54 C78 84 64 96 44 86 C14 80 4 64 14 44 C20 20 30 0 50 4 Z"></mo-morph>
 */
 ```

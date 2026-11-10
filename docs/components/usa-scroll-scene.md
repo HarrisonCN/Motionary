@@ -1,4 +1,6 @@
-# `<usa-scroll-scene>` — Scroll scene
+# `<mo-scroll-scene>` — Scroll scene
+
+> Element name `<mo-scroll-scene>` (default since 17.3); the legacy name `<usa-scroll-scene>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -53,14 +55,16 @@ import { use } from 'motionary/runtime';
 import { scroll } from 'motionary/runtime/scroll';
 
 use(scroll);
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineScrollScene } from 'motionary/components/widgets';
 
-defineScrollScene(); // registers <usa-scroll-scene>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineScrollScene(); // registers <mo-scroll-scene>
 
 /* then use it in your HTML:
-<usa-scroll-scene start="top 80%" end="bottom 20%" scrub="120" stagger="120">
+<mo-scroll-scene start="top 80%" end="bottom 20%" scrub="120" stagger="120">
   <h2 data-scrub="x: -80 -> 0; opacity: 0 -> 1">Scroll</h2>
   <p data-scrub="y: 40 -> 0; opacity: 0 -> 1">and it follows.</p>
-</usa-scroll-scene>
+</mo-scroll-scene>
 */
 ```

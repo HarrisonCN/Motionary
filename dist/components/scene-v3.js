@@ -1,4 +1,4 @@
-import { a as SCENE_V2_LIMITS, m as migrateToSceneV2, n as normalizeSceneV2, v as validateSceneV2 } from '../chunks/v2-D8Jj_M2f.js';
+import { a as SCENE_V2_LIMITS, m as migrateToSceneV2, n as normalizeSceneV2, v as validateSceneV2 } from '../chunks/v2-BGAJ5peo.js';
 import { VARIANTS_META_KEY, validateVariants } from './studio-a11y.js';
 import { a as flattenSceneV3 } from '../chunks/v3-read-BqgIjLQP.js';
 export { f as flatSceneV3ToV2, s as sceneV2ToFlatV3 } from '../chunks/v3-read-BqgIjLQP.js';
@@ -477,4 +477,4 @@ function sceneV3ToV2(doc) {
 }
 
 export { DEPRECATIONS_V16, SCENE_V3_FORMAT, SCENE_V3_LIMITS, SCENE_V3_STATUS, SCENE_V3_VERSION, isSceneV3, migrateToSceneV3, normalizeSceneV3, sceneV3ToV2, serializeSceneV3, validateSceneV3 };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/scene-v3.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/components/scene-v3.js.map

@@ -1,4 +1,4 @@
-import { k as canDefine, D as adoptStyles } from '../chunks/base-mwlrn8oK.js';
+import { k as canDefine, B as adoptStyles } from '../chunks/base-DRZOlKiI.js';
 import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-B-JBecYg.js';
 
 /**
@@ -129,4 +129,4 @@ function defineMoAliases() {
 }
 
 export { aliasCss, aliasTag, defineMoAliases };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/mo.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/components/mo.js.map

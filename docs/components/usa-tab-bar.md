@@ -1,4 +1,6 @@
-# `<usa-tab-bar>` — Tabs with animated indicator
+# `<mo-tab-bar>` — Tabs with animated indicator
+
+> Element name `<mo-tab-bar>` (default since 17.3); the legacy name `<usa-tab-bar>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -29,18 +31,20 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineTabBar } from 'motionary/components/widgets';
 
-defineTabBar(); // registers <usa-tab-bar>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineTabBar(); // registers <mo-tab-bar>
 
 /* then use it in your HTML:
-<usa-tab-bar indicator="pill">
+<mo-tab-bar indicator="pill">
   <button>Overview</button>
   <button>Specs</button>
   <button>Reviews</button>
   <div data-panel>…</div>
   <div data-panel>…</div>
   <div data-panel>…</div>
-</usa-tab-bar>
+</mo-tab-bar>
 */
 ```

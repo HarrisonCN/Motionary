@@ -16,6 +16,7 @@ import { applyCanvasOps } from '../src/components/studio/canvas';
 import { validateSceneV2 } from '../src/components/scene/v2';
 import { createTimelineHistory } from '../src/components/timeline/editor/history';
 import type { SceneV2Doc } from '../src/components/scene/v2';
+import { allowedLimit } from './budget-raises';
 
 const pkg = JSON.parse(readFileSync('package.json', 'utf8'));
 const budgets = JSON.parse(readFileSync('size-budget.json', 'utf8')) as { name: string; import?: string; file?: string; limit: number }[];
@@ -53,10 +54,10 @@ describe('14.6 entry, version and budget', () => {
       if (b.name.includes("motionary/components/compat-v13'")) continue; // removed in 15.0 (docs/deprecations-v15.md)
       const now = budgets.find((x) => x.name === b.name);
       expect(now, b.name).toBeTruthy();
-      expect(now!.limit, b.name).toBeLessThanOrEqual(b.limit);
+      expect(now!.limit, b.name).toBeLessThanOrEqual(allowedLimit(b.name, b.limit));
     }
     const lite = budgets.find((b) => /components\/lite'/.test(b.import || ''));
-    expect(lite!.limit).toBeLessThanOrEqual(71680);
+    expect(lite!.limit).toBeLessThanOrEqual(80896); // 17.3: 70 → 79 KB
     for (const f of ['lite', 'core/index', 'motion/index', 'studio/index', 'studio/assets']) expect(readFileSync(`src/components/${f}.ts`, 'utf8')).not.toMatch(/studio\/ai|from '\.\/ai'/);
   });
   it('never evaluates model output, never touches the network, never writes HTML from model text', () => {

@@ -1,4 +1,6 @@
-# `<usa-auto-skeleton>` — Auto skeleton
+# `<mo-auto-skeleton>` — Auto skeleton
+
+> Element name `<mo-auto-skeleton>` (default since 17.3); the legacy name `<usa-auto-skeleton>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -25,14 +27,16 @@ Set loading and every heading, paragraph, image and button inside becomes a shim
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineAutoSkeleton } from 'motionary/components/page';
 
-defineAutoSkeleton(); // registers <usa-auto-skeleton>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineAutoSkeleton(); // registers <mo-auto-skeleton>
 
 /* then use it in your HTML:
-<usa-auto-skeleton loading>
+<mo-auto-skeleton loading>
   <h3>{{ title }}</h3>
   <p>{{ body }}</p>
-</usa-auto-skeleton>
+</mo-auto-skeleton>
 */
 ```

@@ -1,4 +1,6 @@
-# `<usa-swipe-deck>` — Swipe cards deck
+# `<mo-swipe-deck>` — Swipe cards deck
+
+> Element name `<mo-swipe-deck>` (default since 17.3); the legacy name `<usa-swipe-deck>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -26,15 +28,17 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineSwipeDeck } from 'motionary/components/widgets';
 
-defineSwipeDeck(); // registers <usa-swipe-deck>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineSwipeDeck(); // registers <mo-swipe-deck>
 
 /* then use it in your HTML:
-<usa-swipe-deck threshold="110" label="Matches">
+<mo-swipe-deck threshold="110" label="Matches">
   <article>Ada</article>
   <article>Linus</article>
   <article>Grace</article>
-</usa-swipe-deck>
+</mo-swipe-deck>
 */
 ```

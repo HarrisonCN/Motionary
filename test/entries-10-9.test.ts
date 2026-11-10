@@ -42,8 +42,9 @@ describe('10.9 per-component entry points', () => {
       const mod: any = await import(/* @vite-ignore */ '../' + e.src);
       expect(Object.keys(mod).filter((k) => typeof mod[k] === 'function'), e.entry).toEqual([e.define]);
       mod[e.define]();
-      const tags = [...reg.keys()].sort();
       const allowed = [e.tag, ...(ALSO[e.tag] || [])].sort();
+      // 17.3: widgets added from 17.3 on also register their own <mo-*> name
+      const tags = [...reg.keys()].filter((t) => !(t.startsWith('mo-') && allowed.includes(t.replace(/^mo-/, 'usa-')))).sort();
       if (JSON.stringify(tags) !== JSON.stringify(allowed)) extra.push(`${e.entry}: ${tags.join(', ')}`);
     }
     expect(extra).toEqual([]);

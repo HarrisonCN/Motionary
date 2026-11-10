@@ -1,4 +1,6 @@
-# `<usa-spinner>` — Spinners
+# `<mo-spinner>` — Spinners
+
+> Element name `<mo-spinner>` (default since 17.3); the legacy name `<usa-spinner>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -23,12 +25,14 @@ Six indeterminate indicators: the WinUI progress ring, the Windows 10 orbiting d
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineSpinner } from 'motionary/components/feedback';
 
-defineSpinner(); // registers <usa-spinner>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineSpinner(); // registers <mo-spinner>
 
 /* then use it in your HTML:
-<usa-spinner kind="fluent"></usa-spinner>
-<usa-spinner kind="windows" size="40"></usa-spinner>
+<mo-spinner kind="fluent"></mo-spinner>
+<mo-spinner kind="windows" size="40"></mo-spinner>
 */
 ```

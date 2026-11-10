@@ -1,4 +1,6 @@
-# `<usa-terminal>` — Terminal window
+# `<mo-terminal>` — Terminal window
+
+> Element name `<mo-terminal>` (default since 17.3); the legacy name `<usa-terminal>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -25,14 +27,16 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineTerminal } from 'motionary/components/widgets';
 
-defineTerminal(); // registers <usa-terminal>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineTerminal(); // registers <mo-terminal>
 
 /* then use it in your HTML:
-<usa-terminal title="zsh" theme="green">
+<mo-terminal title="zsh" theme="green">
   <p data-cmd>npm i motionary</p>
   <p>added 1 package in 2s</p>
-</usa-terminal>
+</mo-terminal>
 */
 ```

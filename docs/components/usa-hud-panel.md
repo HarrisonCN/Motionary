@@ -1,4 +1,6 @@
-# `<usa-hud-panel>` — HUD panel
+# `<mo-hud-panel>` — HUD panel
+
+> Element name `<mo-hud-panel>` (default since 17.3); the legacy name `<usa-hud-panel>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -25,14 +27,16 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineHudPanel } from 'motionary/components/widgets';
 
-defineHudPanel(); // registers <usa-hud-panel>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineHudPanel(); // registers <mo-hud-panel>
 
 /* then use it in your HTML:
-<usa-hud-panel title="SHIP STATUS" status="ONLINE">
+<mo-hud-panel title="SHIP STATUS" status="ONLINE">
   <p data-value="82">Shields</p>
   <p data-value="47">Fuel</p>
-</usa-hud-panel>
+</mo-hud-panel>
 */
 ```

@@ -1773,6 +1773,11 @@ interface UsaElementAttributeMap {
         snap?: string | boolean | number;
         start?: string | boolean | number;
     };
+    /** `<usa-breadcrumbs>` — Breadcrumbs (animated, collapsing) (motionary/components/widgets). */
+    'usa-breadcrumbs': {
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+    };
     /** `<usa-button>` — Button deformation (motionary/components/click). */
     'usa-button': {
         deform?: string | boolean | number;
@@ -2040,6 +2045,11 @@ interface UsaElementAttributeMap {
     'usa-fullpage': {
         axis?: string | boolean | number;
         dots?: string | boolean | number;
+    };
+    /** `<usa-fullscreen-menu>` — Full-screen menu (circle / curtain reveal) (motionary/components/widgets). */
+    'usa-fullscreen-menu': {
+        label?: string | boolean | number;
+        variant?: string | boolean | number;
     };
     /** `<usa-fx>` — Attention seekers (motionary/components/fx). */
     'usa-fx': {
@@ -2324,6 +2334,12 @@ interface UsaElementAttributeMap {
         gap?: string | boolean | number;
         min?: string | boolean | number;
     };
+    /** `<usa-mega-menu>` — Mega menu (morphing panels) (motionary/components/widgets). */
+    'usa-mega-menu': {
+        'close-delay'?: string | boolean | number;
+        delay?: string | boolean | number;
+        label?: string | boolean | number;
+    };
     /** `<usa-menu>` — Dropdown menu (motionary/components/widgets). */
     'usa-menu': {
         effect?: string | boolean | number;
@@ -2403,6 +2419,12 @@ interface UsaElementAttributeMap {
         name?: string | boolean | number;
         platform?: string | boolean | number;
         rules?: string | boolean | number;
+    };
+    /** `<usa-nav-flyout>` — Nav flyouts (shared background) (motionary/components/widgets). */
+    'usa-nav-flyout': {
+        'close-delay'?: string | boolean | number;
+        delay?: string | boolean | number;
+        label?: string | boolean | number;
     };
     /** `<usa-nav-morph>` — Navbar with morphing indicator (motionary/components/widgets). */
     'usa-nav-morph': {

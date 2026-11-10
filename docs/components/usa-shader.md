@@ -1,4 +1,6 @@
-# `<usa-shader>` — Shader background
+# `<mo-shader>` — Shader background
+
+> Element name `<mo-shader>` (default since 17.3); the legacy name `<usa-shader>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -30,17 +32,19 @@ A GPU shader behind your content: gradient, plasma, waves or aurora presets — 
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineShader } from 'motionary/components/webgl';
 
-defineShader(); // registers <usa-shader>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineShader(); // registers <mo-shader>
 
 /* then use it in your HTML:
-<usa-shader preset="aurora" speed="1">
+<mo-shader preset="aurora" speed="1">
   <h1>Hero title</h1>
-</usa-shader>
+</mo-shader>
 
-<usa-shader>
-  </usa-shader>
+<mo-shader>
+  </mo-shader>
 */
 ```
 

@@ -134,6 +134,11 @@ interface UsaElementAttributeMap {
         snap?: string | boolean | number;
         start?: string | boolean | number;
     };
+    /** `<usa-breadcrumbs>` — Breadcrumbs (animated, collapsing) (motionary/components/widgets). */
+    'usa-breadcrumbs': {
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+    };
     /** `<usa-button>` — Button deformation (motionary/components/click). */
     'usa-button': {
         deform?: string | boolean | number;
@@ -401,6 +406,11 @@ interface UsaElementAttributeMap {
     'usa-fullpage': {
         axis?: string | boolean | number;
         dots?: string | boolean | number;
+    };
+    /** `<usa-fullscreen-menu>` — Full-screen menu (circle / curtain reveal) (motionary/components/widgets). */
+    'usa-fullscreen-menu': {
+        label?: string | boolean | number;
+        variant?: string | boolean | number;
     };
     /** `<usa-fx>` — Attention seekers (motionary/components/fx). */
     'usa-fx': {
@@ -685,6 +695,12 @@ interface UsaElementAttributeMap {
         gap?: string | boolean | number;
         min?: string | boolean | number;
     };
+    /** `<usa-mega-menu>` — Mega menu (morphing panels) (motionary/components/widgets). */
+    'usa-mega-menu': {
+        'close-delay'?: string | boolean | number;
+        delay?: string | boolean | number;
+        label?: string | boolean | number;
+    };
     /** `<usa-menu>` — Dropdown menu (motionary/components/widgets). */
     'usa-menu': {
         effect?: string | boolean | number;
@@ -764,6 +780,12 @@ interface UsaElementAttributeMap {
         name?: string | boolean | number;
         platform?: string | boolean | number;
         rules?: string | boolean | number;
+    };
+    /** `<usa-nav-flyout>` — Nav flyouts (shared background) (motionary/components/widgets). */
+    'usa-nav-flyout': {
+        'close-delay'?: string | boolean | number;
+        delay?: string | boolean | number;
+        label?: string | boolean | number;
     };
     /** `<usa-nav-morph>` — Navbar with morphing indicator (motionary/components/widgets). */
     'usa-nav-morph': {
@@ -1490,6 +1512,9 @@ interface UsaElementEventMap {
     };
     'usa-blobs': {};
     'usa-bottom-sheet': {};
+    'usa-breadcrumbs': {
+        'usa:expand': CustomEvent<any>;
+    };
     'usa-button': {
         'usa:state': CustomEvent<any>;
         'usa:submit': CustomEvent<any>;
@@ -1615,6 +1640,10 @@ interface UsaElementEventMap {
     'usa-fullpage': {
         'usa:section': CustomEvent<any>;
     };
+    'usa-fullscreen-menu': {
+        'usa:close': CustomEvent<any>;
+        'usa:open': CustomEvent<any>;
+    };
     'usa-fx': {};
     'usa-gauge': {};
     'usa-gen-art': {
@@ -1711,6 +1740,10 @@ interface UsaElementEventMap {
     'usa-masonry-flow': {
         'usa:layout': CustomEvent<any>;
     };
+    'usa-mega-menu': {
+        'usa:close': CustomEvent<any>;
+        'usa:open': CustomEvent<any>;
+    };
     'usa-menu': {
         'usa:close': CustomEvent<any>;
         'usa:open': CustomEvent<any>;
@@ -1759,6 +1792,10 @@ interface UsaElementEventMap {
     };
     'usa-native-preview': {
         'usa:replay': CustomEvent<any>;
+    };
+    'usa-nav-flyout': {
+        'usa:close': CustomEvent<any>;
+        'usa:open': CustomEvent<any>;
     };
     'usa-nav-morph': {
         'usa:change': CustomEvent<any>;

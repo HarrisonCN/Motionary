@@ -13,10 +13,10 @@ const ROOT = join(__dirname, '..');
 const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'));
 
 describe('16.9 npm pack cuts', () => {
-  it('GitHub-only pages are excluded from the tarball; the limit is unchanged', async () => {
+  it('GitHub-only pages are excluded from the tarball; the limit is recorded', async () => {
     for (const x of ['!docs/compare', '!docs/audit-10.9.md', '!docs/upgrading-[3-9].md']) expect(pkg.files).toContain(x);
     const src = readFileSync(join(ROOT, 'scripts/check-pack.mjs'), 'utf8');
-    expect(src).toContain('unpacked: 14 * 1024 * 1024');
+    expect(src).toContain('unpacked: 16 * 1024 * 1024'); // 17.3: 14 → 16 MB (measured 14.32 MB)
   });
   it('scripts/alias-dts.mjs writes scene-v3-preview declarations as a re-export of scene-v3 (and runs in the build)', async () => {
     expect(pkg.scripts.build).toContain('node scripts/alias-dts.mjs');

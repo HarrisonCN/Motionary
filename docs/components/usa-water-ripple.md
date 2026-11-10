@@ -1,4 +1,6 @@
-# `<usa-water-ripple>` — Water ripple
+# `<mo-water-ripple>` — Water ripple
+
+> Element name `<mo-water-ripple>` (default since 17.3); the legacy name `<usa-water-ripple>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -24,13 +26,15 @@ Interactive water ripples on a canvas over the content: move or tap to disturb t
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineWaterRipple } from 'motionary/components/background';
 
-defineWaterRipple(); // registers <usa-water-ripple>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineWaterRipple(); // registers <mo-water-ripple>
 
 /* then use it in your HTML:
-<usa-water-ripple>
+<mo-water-ripple>
   <img src="lake.jpg" alt="">
-</usa-water-ripple>
+</mo-water-ripple>
 */
 ```

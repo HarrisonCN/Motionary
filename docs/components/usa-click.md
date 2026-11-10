@@ -1,4 +1,6 @@
-# `<usa-click>` — Click effects
+# `<mo-click>` — Click effects
+
+> Element name `<mo-click>` (default since 17.3); the legacy name `<usa-click>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -24,13 +26,15 @@ Wrap anything: ripple, burst (circle, star, heart, emoji), confetti, squish, pre
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineClick } from 'motionary/components/click';
 
-defineClick(); // registers <usa-click>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineClick(); // registers <mo-click>
 
 /* then use it in your HTML:
-<usa-click effect="press-spring burst" shape="star">
+<mo-click effect="press-spring burst" shape="star">
   <button>Celebrate</button>
-</usa-click>
+</mo-click>
 */
 ```

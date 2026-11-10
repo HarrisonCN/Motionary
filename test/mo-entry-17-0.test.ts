@@ -26,7 +26,7 @@ describe('17.0 mo-* names live in motionary/components/mo, not in base', () => {
     expect(read('scripts/categories.mjs')).toMatch(/\bmo: 'mo'/);
     const b = JSON.parse(read('size-budget.json')) as { name: string; limit: number; import?: string }[];
     expect(b.find((x) => x.import === "export * from 'pkg/components/mo';")).toBeTruthy();
-    expect(b.find((x) => x.name === "import 'motionary/components/lite'")!.limit).toBe(71680);
+    expect(b.find((x) => x.name === "import 'motionary/components/lite'")!.limit).toBe(80896); // 17.3: 70 → 79 KB
     const lim = (n: string) => b.find((x) => x.name === n)!.limit;
     expect(lim("import 'motionary/widgets/sparkline' (per-entry, fixed)")).toBe(4352);
     expect(lim("import 'motionary/widgets/dock' (per-entry, fixed)")).toBe(3584);

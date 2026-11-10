@@ -15,4 +15,4 @@ function registerSuccessCheck() {
 exports.effect = effect;
 exports.register = registerSuccessCheck;
 exports.registerSuccessCheck = registerSuccessCheck;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/effects/success-check.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/effects/success-check.cjs.map

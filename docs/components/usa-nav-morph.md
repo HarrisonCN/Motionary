@@ -1,4 +1,6 @@
-# `<usa-nav-morph>` — Navbar with morphing indicator
+# `<mo-nav-morph>` — Navbar with morphing indicator
+
+> Element name `<mo-nav-morph>` (default since 17.3); the legacy name `<usa-nav-morph>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -26,15 +28,17 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineNavMorph } from 'motionary/components/widgets';
 
-defineNavMorph(); // registers <usa-nav-morph>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineNavMorph(); // registers <mo-nav-morph>
 
 /* then use it in your HTML:
-<usa-nav-morph indicator="underline" label="Main">
+<mo-nav-morph indicator="underline" label="Main">
   <a href="/" aria-current="page">Home</a>
   <a href="/docs">Docs</a>
   <a href="/blog">Blog</a>
-</usa-nav-morph>
+</mo-nav-morph>
 */
 ```

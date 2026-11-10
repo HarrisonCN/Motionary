@@ -90,6 +90,7 @@ export function buildManifest() {
     const entry = {
       id: c.id,
       tag,
+      name: tag.replace(/^usa-/, 'mo-'),
       title: c.title.en,
       description: strip(c.desc.en),
       category: c.category,
@@ -122,6 +123,7 @@ export function buildManifest() {
     components.push({
       id: tag.replace(/^usa-/, ''),
       tag,
+      name: tag.replace(/^usa-/, 'mo-'),
       title: `<${tag}>`,
       description: strip(s.doc.split('\n\n')[0]).slice(0, 400) || `<${tag}> element.`,
       category: s.dir,
@@ -170,11 +172,11 @@ export function llms(m) {
   const lines = [
     `# Motionary ${m.version}`,
     '',
-    '> Motionary is a zero-dependency motion library: scroll animations, 200+ presets and ' + m.components.length + ' animated Web Components (<usa-*>) that work in plain HTML and every framework, plus motionary/runtime — its own tween/timeline engine and format loaders.',
+    '> Motionary is a zero-dependency motion library: scroll animations, 200+ presets and ' + m.components.length + ' animated Web Components (<mo-*>; the legacy <usa-*> names still work) that work in plain HTML and every framework, plus motionary/runtime — its own tween/timeline engine and format loaders.',
     '',
     `Install: \`npm i ${m.package}\` · CDN: ${m.cdn.components} (+ ${m.cdn.widgets} for 6.x+ widgets) · Manifest: ${m.homepage}components.json · Full text: ${m.homepage}llms-full.txt`,
     '',
-    'Rules for using a component: (1) import its define function from `import.path` and call it once (or load the CDN bundle); (2) if `requires` is non-empty, install / import / register the prerequisites first (see the component\'s Prerequisites); (3) then use the tag in HTML.',
+    'Rules for using a component: (1) import its define function from `import.path` and call it once (or load the CDN bundle); (2) if `requires` is non-empty, install / import / register the prerequisites first (see the component\'s Prerequisites); (3) then use the tag in HTML. Element names: `name` (mo-*) is the default since 17.3 — the CDN bundles and defineComponents() / defineWidgets() register it; with a per-component ESM import call defineMoAliases() from motionary/components/mo first (17.3+ widgets register mo-* themselves). `tag` (usa-*) is the deprecated alias and the manifest key; events stay usa:*.',
     '',
     '## Runtime modules',
     '',
@@ -182,7 +184,7 @@ export function llms(m) {
     '',
     '## Components',
     '',
-    ...m.components.map((c) => `- \`<${c.tag}>\` (${c.import.path}${c.requires.length ? `; requires ${c.requires.map((r) => PREREQS[r]?.label || r).join(' + ')}` : ''}): ${c.description.slice(0, 160)}`),
+    ...m.components.map((c) => `- \`<${c.name || c.tag}>\` (legacy \`<${c.tag}>\`; ${c.import.path}${c.requires.length ? `; requires ${c.requires.map((r) => PREREQS[r]?.label || r).join(' + ')}` : ''}): ${c.description.slice(0, 160)}`),
     '',
   ];
   return lines.join('\n');
@@ -196,7 +198,7 @@ export function llmsFull(m) {
   }
   out.push('## Components', '');
   for (const c of m.components) {
-    out.push(`### <${c.tag}> — ${c.title}`, '', c.description, '', `- Import: \`import { ${c.import.define} } from '${c.import.path}'; ${c.import.register}\``, `- CDN: ${c.cdn}`);
+    out.push(`### <${c.name || c.tag}> (legacy <${c.tag}>) — ${c.title}`, '', c.description, '', `- Import: \`import { ${c.import.define} } from '${c.import.path}'; ${c.import.register}\``, `- CDN: ${c.cdn}`);
     if (c.attributes.length) out.push(`- Attributes: ${c.attributes.map((a) => '`' + a + '`').join(', ')}`);
     if (c.events.length) out.push(`- Events: ${c.events.map((a) => '`' + a + '`').join(', ')}`);
     if (c.slots.length) out.push(`- Slots: ${c.slots.join(', ')}`);

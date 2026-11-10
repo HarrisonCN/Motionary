@@ -1,4 +1,6 @@
-# `<usa-tilt>` — 3D tilt card
+# `<mo-tilt>` — 3D tilt card
+
+> Element name `<mo-tilt>` (default since 17.3); the legacy name `<usa-tilt>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -24,13 +26,15 @@ Tilts toward the pointer in 3D with an optional glare; exposes --usa-tilt-x/y fo
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineTilt } from 'motionary/components/interaction';
 
-defineTilt(); // registers <usa-tilt>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineTilt(); // registers <mo-tilt>
 
 /* then use it in your HTML:
-<usa-tilt glare max="12">
+<mo-tilt glare max="12">
   <div class="card">…</div>
-</usa-tilt>
+</mo-tilt>
 */
 ```

@@ -1,4 +1,6 @@
-# `<usa-plugin-card>` — Plugin detail card
+# `<mo-plugin-card>` — Plugin detail card
+
+> Element name `<mo-plugin-card>` (default since 17.3); the legacy name `<usa-plugin-card>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -49,13 +51,15 @@ definePluginCard(); // registers <usa-plugin-card> — after the prerequisites
 import { use } from 'motionary/runtime';
 
 use();
+import { defineMoAliases } from 'motionary/components/mo';
 import { definePluginCard } from 'motionary/components/widgets';
 
-definePluginCard(); // registers <usa-plugin-card>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+definePluginCard(); // registers <mo-plugin-card>
 
 /* then use it in your HTML:
-<usa-plugin-card name="retro" title="Retro" version="1.2.0" author="Motionary" engine="^10.0.0" downloads="12400">
+<mo-plugin-card name="retro" title="Retro" version="1.2.0" author="Motionary" engine="^10.0.0" downloads="12400">
   <p>Pixel, CRT, VHS and Y2K effects.</p>
-</usa-plugin-card>
+</mo-plugin-card>
 */
 ```

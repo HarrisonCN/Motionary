@@ -1,4 +1,6 @@
-# `<usa-gl-scene>` — 3D scene (glTF / OBJ)
+# `<mo-gl-scene>` — 3D scene (glTF / OBJ)
+
+> Element name `<mo-gl-scene>` (default since 17.3); the legacy name `<usa-gl-scene>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -59,12 +61,14 @@ import { formatObj } from 'motionary/runtime/format-obj';
 import { gltfAnim } from 'motionary/runtime/gltf-anim';
 
 use(gl, formatGltf, formatObj, gltfAnim);
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineGlScene } from 'motionary/components/widgets';
 
-defineGlScene(); // registers <usa-gl-scene>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineGlScene(); // registers <mo-gl-scene>
 
 /* then use it in your HTML:
-<usa-gl-scene src="/models/chair.glb" controls auto-rotate="20" label="Chair"></usa-gl-scene>
+<mo-gl-scene src="/models/chair.glb" controls auto-rotate="20" label="Chair"></mo-gl-scene>
 */
 ```
 

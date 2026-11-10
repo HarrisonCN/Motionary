@@ -1,4 +1,6 @@
-# `<usa-pagination>` — Pagination with sliding ink
+# `<mo-pagination>` — Pagination with sliding ink
+
+> Element name `<mo-pagination>` (default since 17.3); the legacy name `<usa-pagination>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -22,11 +24,13 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { definePagination } from 'motionary/components/widgets';
 
-definePagination(); // registers <usa-pagination>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+definePagination(); // registers <mo-pagination>
 
 /* then use it in your HTML:
-<usa-pagination total="20" page="1" siblings="1"></usa-pagination>
+<mo-pagination total="20" page="1" siblings="1"></mo-pagination>
 */
 ```

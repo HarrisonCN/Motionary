@@ -1,4 +1,6 @@
-# `<usa-glitch>` — Glitch text
+# `<mo-glitch>` — Glitch text
+
+> Element name `<mo-glitch>` (default since 17.3); the legacy name `<usa-glitch>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -22,11 +24,13 @@ An RGB-split, sliced glitch — always on or on hover.
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineGlitch } from 'motionary/components/text';
 
-defineGlitch(); // registers <usa-glitch>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineGlitch(); // registers <mo-glitch>
 
 /* then use it in your HTML:
-<usa-glitch trigger="hover">SYSTEM ERROR</usa-glitch>
+<mo-glitch trigger="hover">SYSTEM ERROR</mo-glitch>
 */
 ```

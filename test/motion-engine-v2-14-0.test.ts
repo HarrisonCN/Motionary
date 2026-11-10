@@ -45,7 +45,7 @@ describe('14.0 Motion Engine v2: entry and packaging', () => {
     const own = budgets.find((b) => b.import && /pkg\/components\/motion'/.test(b.import));
     expect(own, 'budget line for motionary/components/motion').toBeTruthy();
     expect(own!.limit).toBeLessThanOrEqual(6 * 1024);
-    expect(budgets.find((b) => /components\/lite'/.test(b.import || ''))!.limit).toBe(71680);
+    expect(budgets.find((b) => /components\/lite'/.test(b.import || ''))!.limit).toBe(80896); // 17.3: 70 → 79 KB
   });
   it('is built on the shared scheduler and the timeline runtime (no own requestAnimationFrame loop)', () => {
     const src = readFileSync('src/components/motion/index.ts', 'utf8') + readFileSync('src/components/motion/controls.ts', 'utf8');

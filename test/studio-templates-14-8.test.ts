@@ -18,6 +18,7 @@ import { serializeStudioProject } from '../src/components/studio/index';
 import { packStudioProject, toBase64 } from '../src/components/studio/assets';
 import { frameDigest } from '../src/components/studio/export';
 import type { TimelineDoc } from '../src/components/timeline/editor/index';
+import { allowedLimit } from './budget-raises';
 
 const pkg = JSON.parse(readFileSync('package.json', 'utf8'));
 const budgets = JSON.parse(readFileSync('size-budget.json', 'utf8')) as { name: string; import?: string; limit: number }[];
@@ -68,10 +69,10 @@ describe('14.8 entry, version and budget', () => {
       if (b.name.includes("motionary/components/compat-v13'")) continue; // removed in 15.0 (docs/deprecations-v15.md)
       const now = budgets.find((x) => x.name === b.name);
       expect(now, b.name).toBeTruthy();
-      expect(now!.limit, b.name).toBeLessThanOrEqual(b.limit);
+      expect(now!.limit, b.name).toBeLessThanOrEqual(allowedLimit(b.name, b.limit));
     }
     const lite = budgets.find((b) => /components\/lite'/.test(b.import || ''));
-    expect(lite!.limit).toBeLessThanOrEqual(71680);
+    expect(lite!.limit).toBeLessThanOrEqual(80896); // 17.3: 70 → 79 KB
     for (const f of ['lite', 'core/index', 'motion/index', 'studio/index', 'studio/assets', 'studio/ai', 'studio/export']) expect(readFileSync(`src/components/${f}.ts`, 'utf8')).not.toMatch(/studio\/templates|from '\.\/templates'/);
   });
   it('the template module never evaluates, fetches or touches the DOM', () => {

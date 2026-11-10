@@ -1,4 +1,6 @@
-# `<usa-worker-canvas>` — Worker canvas
+# `<mo-worker-canvas>` — Worker canvas
+
+> Element name `<mo-worker-canvas>` (default since 17.3); the legacy name `<usa-worker-canvas>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -22,11 +24,13 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineWorkerCanvas } from 'motionary/components/widgets';
 
-defineWorkerCanvas(); // registers <usa-worker-canvas>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineWorkerCanvas(); // registers <mo-worker-canvas>
 
 /* then use it in your HTML:
-<usa-worker-canvas scene="starfield" style="height:240px"></usa-worker-canvas>
+<mo-worker-canvas scene="starfield" style="height:240px"></mo-worker-canvas>
 */
 ```

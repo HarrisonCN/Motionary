@@ -1,4 +1,6 @@
-# `<usa-lottie-player>` — Lottie player (JSON + dotLottie)
+# `<mo-lottie-player>` — Lottie player (JSON + dotLottie)
+
+> Element name `<mo-lottie-player>` (default since 17.3); the legacy name `<usa-lottie-player>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -50,12 +52,14 @@ import { use } from 'motionary/runtime';
 import { vector } from 'motionary/runtime/vector';
 
 use(vector);
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineLottiePlayer } from 'motionary/components/widgets';
 
-defineLottiePlayer(); // registers <usa-lottie-player>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineLottiePlayer(); // registers <mo-lottie-player>
 
 /* then use it in your HTML:
-<usa-lottie-player src="/anim/hero.lottie" autoplay loop label="Hero animation"></usa-lottie-player>
+<mo-lottie-player src="/anim/hero.lottie" autoplay loop label="Hero animation"></mo-lottie-player>
 */
 ```
 

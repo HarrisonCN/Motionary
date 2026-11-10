@@ -1,4 +1,6 @@
-# `<usa-weather-card>` — Animated weather card
+# `<mo-weather-card>` — Animated weather card
+
+> Element name `<mo-weather-card>` (default since 17.3); the legacy name `<usa-weather-card>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -22,11 +24,13 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineWeatherCard } from 'motionary/components/widgets';
 
-defineWeatherCard(); // registers <usa-weather-card>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineWeatherCard(); // registers <mo-weather-card>
 
 /* then use it in your HTML:
-<usa-weather-card condition="rain" temp="12" place="Lisbon"></usa-weather-card>
+<mo-weather-card condition="rain" temp="12" place="Lisbon"></mo-weather-card>
 */
 ```

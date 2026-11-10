@@ -1,4 +1,6 @@
-# `<usa-gesture-sticker>` — Multi-touch sticker
+# `<mo-gesture-sticker>` — Multi-touch sticker
+
+> Element name `<mo-gesture-sticker>` (default since 17.3); the legacy name `<usa-gesture-sticker>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -24,13 +26,15 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineGestureSticker } from 'motionary/components/widgets';
 
-defineGestureSticker(); // registers <usa-gesture-sticker>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineGestureSticker(); // registers <mo-gesture-sticker>
 
 /* then use it in your HTML:
-<usa-gesture-sticker label="Star sticker" max="3">
+<mo-gesture-sticker label="Star sticker" max="3">
   <img src="star.png" alt="Star" width="120">
-</usa-gesture-sticker>
+</mo-gesture-sticker>
 */
 ```

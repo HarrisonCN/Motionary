@@ -1,4 +1,6 @@
-# `<usa-motion-prompt>` — Motion prompt (text → motion)
+# `<mo-motion-prompt>` — Motion prompt (text → motion)
+
+> Element name `<mo-motion-prompt>` (default since 17.3); the legacy name `<usa-motion-prompt>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -22,11 +24,13 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineMotionPrompt } from 'motionary/components/widgets';
 
-defineMotionPrompt(); // registers <usa-motion-prompt>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineMotionPrompt(); // registers <mo-motion-prompt>
 
 /* then use it in your HTML:
-<usa-motion-prompt value="fade the cards up slowly, one after another"></usa-motion-prompt>
+<mo-motion-prompt value="fade the cards up slowly, one after another"></mo-motion-prompt>
 */
 ```

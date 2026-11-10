@@ -1,4 +1,6 @@
-# `<usa-command-palette>` — Command palette (⌘K)
+# `<mo-command-palette>` — Command palette (⌘K)
+
+> Element name `<mo-command-palette>` (default since 17.3); the legacy name `<usa-command-palette>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -26,14 +28,16 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineCommandPalette } from 'motionary/components/widgets';
 
-defineCommandPalette(); // registers <usa-command-palette>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineCommandPalette(); // registers <mo-command-palette>
 
 /* then use it in your HTML:
-<usa-command-palette>
+<mo-command-palette>
   <option value="new" data-group="File" data-keys="mod+n">New file</option>
   <option value="theme" data-group="View">Toggle theme</option>
-</usa-command-palette>
+</mo-command-palette>
 */
 ```

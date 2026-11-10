@@ -1,4 +1,6 @@
-# `<usa-token-editor>` — Motion token editor (W3C DTCG)
+# `<mo-token-editor>` — Motion token editor (W3C DTCG)
+
+> Element name `<mo-token-editor>` (default since 17.3); the legacy name `<usa-token-editor>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -22,11 +24,13 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineTokenEditor } from 'motionary/components/widgets';
 
-defineTokenEditor(); // registers <usa-token-editor>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineTokenEditor(); // registers <mo-token-editor>
 
 /* then use it in your HTML:
-<usa-token-editor apply format="2025.10"></usa-token-editor>
+<mo-token-editor apply format="2025.10"></mo-token-editor>
 */
 ```
