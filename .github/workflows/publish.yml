@@ -1,6 +1,6 @@
 name: Publish to npm (provenance)
 
-# Authenticate package uploads with the repository's NPM_TOKEN secret. OIDC signs build provenance.
+# Authenticate package uploads with the npm environment's NPM secret. OIDC signs build provenance.
 on:
   workflow_dispatch:
     inputs:
@@ -18,14 +18,15 @@ permissions:
 
 jobs:
   publish:
+    environment: npm
     runs-on: ubuntu-latest
     steps:
       - name: Require the npm publishing token
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM }}
         run: |
           if [ -z "$NODE_AUTH_TOKEN" ]; then
-            echo "::error::Configure the NPM_TOKEN Actions secret with publish access to both packages."
+            echo "::error::Configure the NPM secret in the npm environment with publish access to both packages."
             exit 1
           fi
       - uses: actions/checkout@v7
@@ -49,7 +50,7 @@ jobs:
       - run: npm run check:exports
       - name: Publish missing packages from the verified build
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM }}
           DIST_TAG: ${{ inputs.dist_tag }}
         run: |
           set -euo pipefail
