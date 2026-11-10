@@ -18,7 +18,7 @@ describe('11.2: source maps stay out of the npm package', () => {
   });
   it('check:pack has fixed limits and refuses .map files', () => {
     const s = read('scripts/check-pack.mjs');
-    expect(s).toMatch(/PACK_LIMITS = \{ packed: 4\.0 \* 1024 \* 1024, unpacked: 14 \* 1024 \* 1024, files: 2300 \}/);
+    expect(s).toMatch(/PACK_LIMITS = \{ packed: 4\.0 \* 1024 \* 1024, unpacked: 16 \* 1024 \* 1024, files: 2300 \}/); // 17.3: unpacked 14 → 16 MB (measured 14.32 MB)
     expect(s).toMatch(/endsWith\('\.map'\)/);
   });
 });

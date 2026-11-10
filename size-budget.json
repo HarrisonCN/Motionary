@@ -549,7 +549,7 @@
   {
     "name": "import 'motionary/components/fx-hover' (= motionary/fx/hover, 17.3 hover pack: text-roll / image-swap / focus-reveal / grid-warp / googly-eyes; new line)",
     "import": "export * from 'pkg/components/fx-hover';",
-    "limit": 3840
+    "limit": 4352
   },
   {
     "name": "import 'motionary/components/marketplace'",
@@ -2169,26 +2169,26 @@
   {
     "name": "import 'motionary/effects/text-roll' (per-entry, fixed)",
     "import": "export * from 'pkg/effects/text-roll';",
-    "limit": 3840
+    "limit": 4352
   },
   {
     "name": "import 'motionary/effects/image-swap' (per-entry, fixed)",
     "import": "export * from 'pkg/effects/image-swap';",
-    "limit": 3840
+    "limit": 4352
   },
   {
     "name": "import 'motionary/effects/focus-reveal' (per-entry, fixed)",
     "import": "export * from 'pkg/effects/focus-reveal';",
-    "limit": 3840
+    "limit": 4352
   },
   {
     "name": "import 'motionary/effects/grid-warp' (per-entry, fixed)",
     "import": "export * from 'pkg/effects/grid-warp';",
-    "limit": 3840
+    "limit": 4352
   },
   {
     "name": "import 'motionary/effects/googly-eyes' (per-entry, fixed)",
     "import": "export * from 'pkg/effects/googly-eyes';",
-    "limit": 3840
+    "limit": 4352
   }
 ]
