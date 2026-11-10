@@ -36,22 +36,23 @@ import { definePacksComponents } from './components/packs.js';
 export { PACKS, PACK_PRIMITIVES, applyPack, countUp, definePack, flyToCart } from './components/packs.js';
 import { defineFxComponents } from './components/fx.js';
 export { defineFx, registerBuiltinEffects } from './components/fx.js';
-import { a as adoptVariants } from './chunks/variants-gteRDbdc.js';
-export { V as VARIANTS, s as setVariant } from './chunks/variants-gteRDbdc.js';
-import { k as canDefine } from './chunks/base-mwlrn8oK.js';
-export { l as MOTION_SCALE, M as MOTION_SENSITIVITY_LEVELS, q as activeAnimations, u as adaptKeyframes, e as animateWithMotion, v as animationBudget, c as configureComponents, w as getMotionIntensity, g as getMotionSensitivity, m as motionScale, o as onFrame, p as prefersReducedMotion, x as schedulerStats, y as setAnimationBudget, z as setFrameBudget, A as withoutDeprecations } from './chunks/base-mwlrn8oK.js';
+import { a as adoptVariants } from './chunks/variants-DGFs5iIp.js';
+export { V as VARIANTS, s as setVariant } from './chunks/variants-DGFs5iIp.js';
+import { k as canDefine } from './chunks/base-DRZOlKiI.js';
+export { l as MOTION_SCALE, M as MOTION_SENSITIVITY_LEVELS, q as activeAnimations, u as adaptKeyframes, e as animateWithMotion, v as animationBudget, c as configureComponents, w as getMotionIntensity, g as getMotionSensitivity, m as motionScale, o as onFrame, p as prefersReducedMotion, x as schedulerStats, y as setAnimationBudget, z as setFrameBudget, A as withoutDeprecations } from './chunks/base-DRZOlKiI.js';
+import { defineMoAliases } from './components/mo.js';
 export { MOTION_TOKENS, applyMotionTokens, exportDesignTokens, getMotionTokens, importDesignTokens, importMotionTokens, mergeMotionTokens, motionToken, motionTokensToCss, motionTokensToJSON, motionTokensToVars, motionVar, parseDuration, parseEasing, resolveDurationToken, resolveEasingToken, resolveTokenAliases, validateDesignTokens } from './components/tokens.js';
 export { ALL_TAGS, LIVE_REGION_IDS, MOTION_SENSITIVITY, SENSITIVITY_CSS, STATIC_ALTERNATIVES, announce, auditMotionA11y, baselineReport, liveRegion, motionAllowed, restoreMotionSensitivity, setMotionSensitivity, staticAlternative, warnBaseline } from './components/a11y.js';
 export { autoDegrade, loadCategoryStyles, loadedStyles, onDemandStyles } from './components/perf.js';
 export { BRIDGE_PROTOCOL_VERSION, applyNativeSettings, connectNativeShell, detectNativeHost, isTrustedMessage, parseNativeSettings, postToNative } from './components/bridge.js';
 export { C as COMPONENT_CATEGORIES } from './chunks/index-tags-B-JBecYg.js';
-export { B as BUILTIN_EFFECTS } from './chunks/builtins-DZDwZCd9.js';
-export { EFFECT_KINDS, EFFECT_TRIGGERS, bindEffect, getEffect, hasEffect, listEffects, playEffect, registerEffect, registerEffects } from './chunks/registry-QiOscU6y.js';
-export { S as SPRING_PRESETS, c as createSpring, l as linearEasing, p as projectInertia, r as resolveSpring, a as rubberBand, s as snapTo, b as spring, d as springEasing, e as springSamples, f as stepSpring, g as supportsLinearEasing } from './chunks/spring-DVctv6F5.js';
-export { T as TIMELINE_PRESETS, r as resolvePosition, s as supportsNativeScrub, t as timeline } from './chunks/core-JwY25led.js';
+export { B as BUILTIN_EFFECTS } from './chunks/builtins-BIFIhepe.js';
+export { EFFECT_KINDS, EFFECT_TRIGGERS, bindEffect, getEffect, hasEffect, listEffects, playEffect, registerEffect, registerEffects } from './chunks/registry-Di_8M2Md.js';
+export { S as SPRING_PRESETS, c as createSpring, l as linearEasing, p as projectInertia, r as resolveSpring, a as rubberBand, s as snapTo, b as spring, d as springEasing, e as springSamples, f as stepSpring, g as supportsLinearEasing } from './chunks/spring-Ddhxb3nO.js';
+export { T as TIMELINE_PRESETS, r as resolvePosition, s as supportsNativeScrub, t as timeline } from './chunks/core-cXxctm3i.js';
 export { c as categoryOf } from './chunks/category-for-tag-WK7MtB-K.js';
-export { g as gesture, p as pinchScale, s as swipeDirection } from './chunks/core-DsCcNDlh.js';
-export { h as haptic } from './chunks/fx-GOxCdl5i.js';
+export { g as gesture, p as pinchScale, s as swipeDirection } from './chunks/core-D9fzpWWF.js';
+export { h as haptic } from './chunks/fx-BSLLiegk.js';
 
 /**
  * motionary/components
@@ -95,14 +96,16 @@ const BY_CATEGORY = {
     fx: defineFxComponents,
 };
 /**
- * Register every `<usa-*>` component (or only the given categories).
+ * Register every component (or only the given categories). 17.3: `<mo-*>` is the default name — this turns on the
+ * `mo-*` names first (`defineMoAliases()`); the `<usa-*>` names stay registered as deprecated aliases.
  * Safe to call more than once and on the server (no-op without DOM).
  */
 function defineComponents(categories) {
+    defineMoAliases();
     if (canDefine())
         adoptVariants();
     (categories || Object.keys(BY_CATEGORY)).forEach((c) => BY_CATEGORY[c]?.());
 }
 
 export { adoptVariants, defineBackgroundComponents, defineCardComponents, defineClickComponents, defineComponents, defineDepthComponents, defineFeedbackComponents, defineFxComponents, defineGestureComponents, defineInteractionComponents, defineLayoutComponents, definePacksComponents, definePageComponents, definePhysicsComponents, defineRevealComponents, defineSvgComponents, defineTextComponents, defineTimelineComponents, defineTransitionComponents, defineUiComponents, defineWebglComponents };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/components.js.map

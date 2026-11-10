@@ -3,7 +3,7 @@
 17.0 removes only what 16.9 announced below, and introduces the `mo-*` names ([below](#mo-names)). Studio (incl. the
 plugin API), MCP, AI, the Figma plugin and cross-platform export stay experimental ([stability.md](./stability.md)). Everything on this page still works in 16.x (`v16-lts`).
 In 16.9 each item had a development warning (once per session), a `doctor --v17` finding and a migration path; nothing
-here is in `motionary/components/lite` — lite stays ≤ 70 KB gzip with zero dependencies.
+here is in `motionary/components/lite` — lite stays within its budget (≤ 79 KB gzip since 17.3, raised from 70 KB) with zero dependencies.
 
 Find every use: `npx motionary doctor --v17` (exit 1 when anything is found). Fix it: `npx motionary migrate --to 17`
 (dry run) then `--write` (a `.bak` of every changed file first; an existing backup is never overwritten). Guide:
@@ -50,6 +50,20 @@ future major** (none is planned). Nothing to do now; prefer the new names in new
 | every `<usa-*>` element, e.g. `<usa-switch>` | `<mo-*>`, e.g. `<mo-switch>` (same element: a subclass, same attributes, properties and `usa:*` events) — on in the CDN bundles; with ESM call `defineMoAliases()` from `motionary/components/mo` |
 | `window.UsaComponents` (CDN bundle `components.umd.js`) | `window.MotionaryComponents` (the same object) |
 | `npx -p motionary usa-codemod-<n>` | `npx -p motionary mo-codemod <n>` (same runner as `npx motionary codemod <n>`) |
+
+**17.3: `mo-*` is the default name.** `defineComponents()` (`motionary/components`) and `defineWidgets()`
+(`motionary/components/widgets`) call `defineMoAliases()` before registering, the CDN bundles already did, and the
+widgets added in 17.3 and later register their `mo-*` name themselves. The docs, README, showcase snippets, `llms.txt`
+and the manifest (`name` field next to the legacy `tag`) use `mo-*`. Single-component and category entries
+(`motionary/widgets/<name>`, `motionary/components/<category>`) and lite do **not** turn the names on by themselves:
+their fixed gzip budgets have as little as 5 B of room, and the alias code is about 1.7 KB, so moving it into the
+element base would raise dozens of limits (the same reason it got its own entry in 17.0). Call `defineMoAliases()` once
+when you import those. `usa-*` stays registered as a deprecated alias for all of 17.x.
+
+Renaming your code: `npx -p motionary mo-codemod tags` (dry run) then `--write` renames `<usa-*>` tags in HTML / JSX /
+Vue / Svelte / Markdown, tag selectors in CSS (attribute values, classes and strings untouched) and tag strings passed
+to `querySelector` / `closest` / `matches` / `createElement` / `customElements.get` / `whenDefined`; it keeps a `.bak`
+of every changed file. Event names stay `usa:*`.
 
 Turning the names on:
 

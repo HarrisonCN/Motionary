@@ -1,4 +1,6 @@
-# `<usa-upload-progress>` — Upload progress
+# `<mo-upload-progress>` — Upload progress
+
+> Element name `<mo-upload-progress>` (default since 17.3); the legacy name `<usa-upload-progress>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -23,11 +25,13 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineUploadProgress } from 'motionary/components/widgets';
 
-defineUploadProgress(); // registers <usa-upload-progress>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineUploadProgress(); // registers <mo-upload-progress>
 
 /* then use it in your HTML:
-<usa-upload-progress name="report.pdf" size="2400000" value="40"></usa-upload-progress>
+<mo-upload-progress name="report.pdf" size="2400000" value="40"></mo-upload-progress>
 */
 ```

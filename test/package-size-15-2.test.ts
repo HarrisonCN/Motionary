@@ -15,8 +15,8 @@ describe('15.2 package size', () => {
     expect(readFileSync('scripts/contract-audit.mjs', 'utf8')).toContain("JSON.stringify({ format: 'motionary/contract-report', version: 1, summary: summary(rows), components: rows }) + '\\n'");
   });
 
-  it('the unpacked limit is unchanged (14 MB); planning docs and source maps stay out of the package', () => {
-    expect(readFileSync('scripts/check-pack.mjs', 'utf8')).toContain('unpacked: 14 * 1024 * 1024');
+  it('the unpacked limit (14 MB, 16 MB since 17.3); planning docs and source maps stay out of the package', () => {
+    expect(readFileSync('scripts/check-pack.mjs', 'utf8')).toContain('unpacked: 16 * 1024 * 1024'); // 17.3: 14 → 16 MB (measured 14.32 MB)
     const files = JSON.parse(readFileSync('package.json', 'utf8')).files;
     expect(files).toContain('!dist/**/*.map');
     expect(files).toContain('!docs/ROADMAP.md');

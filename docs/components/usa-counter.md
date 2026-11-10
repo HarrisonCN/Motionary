@@ -1,4 +1,6 @@
-# `<usa-counter>` — Number counter
+# `<mo-counter>` — Number counter
+
+> Element name `<mo-counter>` (default since 17.3); the legacy name `<usa-counter>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -22,11 +24,13 @@ Counts up to a number when visible, locale-formatted with tabular digits. Set .v
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineCounter } from 'motionary/components/text';
 
-defineCounter(); // registers <usa-counter>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineCounter(); // registers <mo-counter>
 
 /* then use it in your HTML:
-<usa-counter to="128490" prefix="$" duration="2000"></usa-counter>
+<mo-counter to="128490" prefix="$" duration="2000"></mo-counter>
 */
 ```

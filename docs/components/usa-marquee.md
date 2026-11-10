@@ -1,4 +1,6 @@
-# `<usa-marquee>` — Marquee
+# `<mo-marquee>` — Marquee
+
+> Element name `<mo-marquee>` (default since 17.3); the legacy name `<usa-marquee>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -25,14 +27,16 @@ A seamless infinite ticker with constant speed, pause on hover, soft edges and v
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineMarquee } from 'motionary/components/background';
 
-defineMarquee(); // registers <usa-marquee>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineMarquee(); // registers <mo-marquee>
 
 /* then use it in your HTML:
-<usa-marquee speed="50" pause-on-hover fade>
+<mo-marquee speed="50" pause-on-hover fade>
   <img src="logo-a.svg" alt="A">
   <img src="logo-b.svg" alt="B">
-</usa-marquee>
+</mo-marquee>
 */
 ```

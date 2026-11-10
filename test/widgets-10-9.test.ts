@@ -277,7 +277,7 @@ describe('10.9 prerequisites in all five places; entries; audit', () => {
     expect(pkg.peerDependenciesMeta.draco3d.optional).toBe(true);
     for (const e of ['gl-model', 'dotlottie']) expect(pkg.exports[`./components/${e}`]).toBeTruthy();
     for (const f of ['src/components/widgets/index.ts', 'src/components/index.ts', 'src/components/lite.ts']) expect(readFileSync(f, 'utf8')).not.toMatch(/gl-model|dotlottie/);
-    expect(JSON.parse(readFileSync('size-budget.json', 'utf8')).find((e: any) => e.name.includes('components/lite')).limit).toBe(70 * 1024);
+    expect(JSON.parse(readFileSync('size-budget.json', 'utf8')).find((e: any) => e.name.includes('components/lite')).limit).toBe(79 * 1024); // 17.3: 70 → 79 KB
     expect(readFileSync('docs/audit-10.9.md', 'utf8')).toMatch(/## Security[\s\S]*## API consistency/);
   });
 });

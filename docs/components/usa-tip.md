@@ -1,4 +1,6 @@
-# `<usa-tip>` — Tooltip / popover 2.0
+# `<mo-tip>` — Tooltip / popover 2.0
+
+> Element name `<mo-tip>` (default since 17.3); the legacy name `<usa-tip>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -28,17 +30,19 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineTip } from 'motionary/components/widgets';
 
-defineTip(); // registers <usa-tip>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineTip(); // registers <mo-tip>
 
 /* then use it in your HTML:
-<usa-tip text="Copied to clipboard" placement="top">
+<mo-tip text="Copied to clipboard" placement="top">
   <button>Copy</button>
-</usa-tip>
-<usa-tip trigger="click" placement="bottom">
+</mo-tip>
+<mo-tip trigger="click" placement="bottom">
   <button>Details</button>
   <div slot="tip"><strong>Pro tip</strong> …</div>
-</usa-tip>
+</mo-tip>
 */
 ```

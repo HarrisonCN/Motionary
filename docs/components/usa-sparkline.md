@@ -1,4 +1,6 @@
-# `<usa-sparkline>` — Sparkline
+# `<mo-sparkline>` — Sparkline
+
+> Element name `<mo-sparkline>` (default since 17.3); the legacy name `<usa-sparkline>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -22,11 +24,13 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineSparkline } from 'motionary/components/widgets';
 
-defineSparkline(); // registers <usa-sparkline>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineSparkline(); // registers <mo-sparkline>
 
 /* then use it in your HTML:
-<usa-sparkline values="3,5,4,8,6,9,12" variant="area"></usa-sparkline>
+<mo-sparkline values="3,5,4,8,6,9,12" variant="area"></mo-sparkline>
 */
 ```

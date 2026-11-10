@@ -8,6 +8,7 @@ import { PREREQS, prereqFor, tierFor } from './catalog/prereqs.js';
 import { highlight } from './codegen.js';
 import { GSTRINGS } from './gallery-i18n.js';
 import { WIRES } from './catalog/index.js';
+import { moName, encodeSelection, decodeSelection, selectionPrompt } from './select-tray.js';
 
 const COMPONENTS_COUNT = COMPONENTS.length;
 const LOCAL = new URL('../dist/', import.meta.url).href;
@@ -35,6 +36,8 @@ const store = {
   },
 };
 
+// 17.3 (T5): the multi-select tray — ids in order, optional note per id
+const sel = { ids: [], notes: {} };
 const ui = { lang: store.get('lang', (navigator.language || '').toLowerCase().startsWith('zh') ? 'zh' : 'en'), cat: 'all', q: '', open: null };
 const T = (k) => (GSTRINGS[ui.lang] || GSTRINGS.en)[k] ?? GSTRINGS.en[k] ?? k;
 const L = (o) => (o ? o[ui.lang] || o.en : '');
@@ -111,7 +114,10 @@ function card(item) {
   const codeBtn = h('button', { class: 'chip-btn code-btn', type: 'button', 'aria-expanded': 'false', 'aria-controls': `${id}-code`, html: `<span aria-hidden="true">&lt;/&gt;</span> <span data-i18n="card.code">${T('card.code')}</span>` });
   codeBtn.addEventListener('click', () => toggleCode(item, el));
   controls.append(codeBtn);
-  const title = h('h3', { class: 'ccard-title' }, [h('span', { 'data-l': 'title', text: L(item.title) }), h('code', { text: item.kind === 'helper' ? item.fn + '()' : `<${item.tag}>` })]);
+  const selBtn = h('button', { class: 'chip-btn select-btn', type: 'button', 'aria-pressed': String(sel.ids.includes(item.id)), 'data-select': item.id, text: T(sel.ids.includes(item.id) ? 'card.selected' : 'card.select') });
+  selBtn.addEventListener('click', () => toggleSelect(item.id));
+  controls.append(selBtn);
+  const title = h('h3', { class: 'ccard-title' }, [h('span', { 'data-l': 'title', text: L(item.title) }), h('code', { text: item.kind === 'helper' ? item.fn + '()' : `<${moName(item.tag)}>` })]);
   const el = h('article', { class: 'ccard', id, 'data-id': item.id, 'data-category': item.category }, [
     stage,
     h('div', { class: 'ccard-body' }, [
@@ -358,6 +364,7 @@ function applyLang() {
   });
   renderChips();
   applyFilter();
+  renderTray();
 }
 
 function wireChrome() {
@@ -410,7 +417,71 @@ function wireChrome() {
   syncRm();
 }
 
+/* ------------------------------------------------------------------ */
+/* 17.3 (T5): select several → copy as AI prompt / share link          */
+/* ------------------------------------------------------------------ */
+
+function toggleSelect(id, on = !sel.ids.includes(id)) {
+  if (on && !sel.ids.includes(id)) sel.ids.push(id);
+  if (!on) {
+    sel.ids = sel.ids.filter((x) => x !== id);
+    delete sel.notes[id];
+  }
+  renderTray();
+}
+
+function shareUrl() {
+  return location.href.split('#')[0] + encodeSelection(sel.ids);
+}
+
+async function copyText(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    lib?.toast(T('tray.copied'), { type: 'success', duration: 1600 });
+  } catch {
+    lib?.toast(T('code.copyFail'), { type: 'warning', duration: 2000 });
+  }
+}
+
+function renderTray() {
+  let tray = $('#sel-tray');
+  if (!tray) {
+    tray = h('aside', { id: 'sel-tray', class: 'sel-tray', 'aria-label': T('tray.label'), hidden: true });
+    document.body.append(tray);
+  }
+  $$('.select-btn').forEach((b) => {
+    const on = sel.ids.includes(b.dataset.select);
+    b.setAttribute('aria-pressed', String(on));
+    b.textContent = T(on ? 'card.selected' : 'card.select');
+  });
+  const items = sel.ids.map((id) => findComponent(id)).filter(Boolean);
+  const name = (it) => (it.kind === 'helper' ? it.fn + '()' : `<${moName(it.tag)}>`);
+  const list = h('ul', { class: 'sel-list' }, items.map((it) => h('li', { class: 'sel-item' }, [
+    h('code', { text: name(it) }),
+    h('input', { type: 'text', class: 'sel-note', value: sel.notes[it.id] || '', maxlength: '500', 'aria-label': T('tray.note').replace('{name}', name(it)), oninput: (e) => (sel.notes[it.id] = e.target.value) }),
+    h('button', { type: 'button', class: 'sel-remove', 'aria-label': T('tray.remove').replace('{name}', name(it)), text: '×', onclick: () => toggleSelect(it.id, false) }),
+  ])));
+  const prompt = () => selectionPrompt(items.map((it) => ({ ...it, imports: it.kind === 'helper' ? '' : componentSnippets(it).esm.split('\n\n').slice(0, 2).join('\n') })), ui.lang, sel.notes);
+  tray.replaceChildren(
+    h('p', { class: 'sel-count', role: 'status', text: T('tray.count').replace('{n}', String(items.length)) }),
+    list,
+    h('div', { class: 'sel-actions' }, [
+      h('button', { type: 'button', class: 'btn btn-primary', text: T('tray.prompt'), onclick: () => copyText(prompt()) }),
+      h('button', { type: 'button', class: 'btn btn-ghost', text: T('tray.link'), onclick: () => copyText(shareUrl()) }),
+      h('button', { type: 'button', class: 'btn btn-ghost', text: T('tray.clear'), onclick: () => ((sel.ids = []), (sel.notes = {}), renderTray()) }),
+    ]),
+  );
+  tray.setAttribute('aria-label', T('tray.label'));
+  tray.hidden = !items.length;
+  document.body.classList.toggle('has-tray', items.length > 0);
+}
+
 function route() {
+  const picked = decodeSelection(location.hash, (id) => !!findComponent(id));
+  if (picked.length) {
+    sel.ids = picked;
+    renderTray();
+  }
   const m = /^#cat-([a-z0-9-]+)$/.exec(location.hash);
   if (m && COMPONENT_CATEGORIES.some((c) => c.id === m[1])) setCat(m[1], false);
   const c = /^#c-([a-z0-9-]+)$/.exec(location.hash);

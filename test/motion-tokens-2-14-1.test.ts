@@ -39,7 +39,7 @@ describe('14.1 Motion Tokens 2.0: entry and packaging', () => {
       expect(now, `budget line kept: ${b.name}`).toBeTruthy();
       expect(now!.limit, `budget not raised: ${b.name}`).toBeLessThanOrEqual(b.limit);
     }
-    expect(budgets.find((b) => /components\/lite'/.test(b.import || ''))!.limit).toBe(71680);
+    expect(budgets.find((b) => /components\/lite'/.test(b.import || ''))!.limit).toBe(80896); // 17.3: 70 → 79 KB
   });
   it('docs policy: from 14 on, minors of the current major move npm latest (13.x unchanged)', async () => {
     const V: any = await import('../scripts/check-versions.mjs');

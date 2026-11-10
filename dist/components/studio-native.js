@@ -1,5 +1,5 @@
-import { a as timelineDocFromScene } from '../chunks/scene-BlBQKWeK.js';
-import { n as normalizeTimelineDoc } from '../chunks/format-Crl81ga7.js';
+import { a as timelineDocFromScene } from '../chunks/scene-DWRlvQ00.js';
+import { n as normalizeTimelineDoc } from '../chunks/format-CqOIfdW_.js';
 
 /**
  * 15.2: cross-platform export 2.0 — `motionary/studio/native` (= `motionary/components/studio-native`).
@@ -336,4 +336,4 @@ function exportNative(input, opts) {
 }
 
 export { NATIVE_TARGETS, STUDIO_NATIVE_VERSION, exportNative, nativeSupport };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/studio-native.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/components/studio-native.js.map

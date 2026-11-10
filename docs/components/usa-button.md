@@ -1,4 +1,6 @@
-# `<usa-button>` — Button deformation
+# `<mo-button>` — Button deformation
+
+> Element name `<mo-button>` (default since 17.3); the legacy name `<usa-button>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -26,16 +28,18 @@ Spring-driven button click deformation: squash & stretch, elastic border-radius 
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineButton } from 'motionary/components/click';
 
-defineButton(); // registers <usa-button>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineButton(); // registers <mo-button>
 
 /* then use it in your HTML:
-<usa-button deform="squash">
+<mo-button deform="squash">
   <button>Squash</button>
-</usa-button>
-<usa-button deform="gooey"><button>Gooey</button></usa-button>
-<usa-button deform="dent"><button>Dent</button></usa-button>
+</mo-button>
+<mo-button deform="gooey"><button>Gooey</button></mo-button>
+<mo-button deform="dent"><button>Dent</button></mo-button>
 */
 ```
 

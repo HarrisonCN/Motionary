@@ -1,4 +1,6 @@
-# `<usa-liquid-nav>` — Liquid nav
+# `<mo-liquid-nav>` — Liquid nav
+
+> Element name `<mo-liquid-nav>` (default since 17.3); the legacy name `<usa-liquid-nav>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -24,13 +26,15 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineLiquidNav } from 'motionary/components/widgets';
 
-defineLiquidNav(); // registers <usa-liquid-nav>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineLiquidNav(); // registers <mo-liquid-nav>
 
 /* then use it in your HTML:
-<usa-liquid-nav label="Main">
+<mo-liquid-nav label="Main">
   <a href="/" aria-current="page">Home</a><a href="/shop">Shop</a><a href="/about">About</a>
-</usa-liquid-nav>
+</mo-liquid-nav>
 */
 ```

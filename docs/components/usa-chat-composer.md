@@ -1,4 +1,6 @@
-# `<usa-chat-composer>` — AI chat composer
+# `<mo-chat-composer>` — AI chat composer
+
+> Element name `<mo-chat-composer>` (default since 17.3); the legacy name `<usa-chat-composer>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -23,11 +25,13 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineChatComposer } from 'motionary/components/widgets';
 
-defineChatComposer(); // registers <usa-chat-composer>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineChatComposer(); // registers <mo-chat-composer>
 
 /* then use it in your HTML:
-<usa-chat-composer placeholder="Ask anything…"></usa-chat-composer>
+<mo-chat-composer placeholder="Ask anything…"></mo-chat-composer>
 */
 ```

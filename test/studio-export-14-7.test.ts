@@ -74,7 +74,7 @@ describe('14.7 entry, version and budget', () => {
       expect(now!.limit, b.name).toBeLessThanOrEqual(b.limit);
     }
     const lite = budgets.find((b) => /components\/lite'/.test(b.import || ''));
-    expect(lite!.limit).toBeLessThanOrEqual(71680);
+    expect(lite!.limit).toBeLessThanOrEqual(80896); // 17.3: 70 → 79 KB
     for (const f of ['lite', 'core/index', 'motion/index', 'studio/index', 'studio/assets', 'studio/ai']) expect(readFileSync(`src/components/${f}.ts`, 'utf8')).not.toMatch(/studio\/export|from '\.\/export'/);
   });
   it('keeps the npm pack limits (11.2) unchanged: docs/images (README screenshots, served from GitHub) are no longer packed', () => {

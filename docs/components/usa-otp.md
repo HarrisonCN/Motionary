@@ -1,4 +1,6 @@
-# `<usa-otp>` — OTP code input
+# `<mo-otp>` — OTP code input
+
+> Element name `<mo-otp>` (default since 17.3); the legacy name `<usa-otp>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -23,11 +25,13 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineOtp } from 'motionary/components/widgets';
 
-defineOtp(); // registers <usa-otp>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineOtp(); // registers <mo-otp>
 
 /* then use it in your HTML:
-<usa-otp length="6"></usa-otp>
+<mo-otp length="6"></mo-otp>
 */
 ```

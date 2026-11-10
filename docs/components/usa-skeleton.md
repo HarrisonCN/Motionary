@@ -1,4 +1,6 @@
-# `<usa-skeleton>` — Skeleton
+# `<mo-skeleton>` — Skeleton
+
+> Element name `<mo-skeleton>` (default since 17.3); the legacy name `<usa-skeleton>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -24,13 +26,15 @@ Shimmering placeholders while loading; remove loading and the real content fades
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineSkeleton } from 'motionary/components/feedback';
 
-defineSkeleton(); // registers <usa-skeleton>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineSkeleton(); // registers <mo-skeleton>
 
 /* then use it in your HTML:
-<usa-skeleton loading avatar lines="3">
+<mo-skeleton loading avatar lines="3">
   <article>…</article>
-</usa-skeleton>
+</mo-skeleton>
 */
 ```

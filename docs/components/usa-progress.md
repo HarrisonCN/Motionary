@@ -1,4 +1,6 @@
-# `<usa-progress>` — Progress bar
+# `<mo-progress>` — Progress bar
+
+> Element name `<mo-progress>` (default since 17.3); the legacy name `<usa-progress>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -23,12 +25,14 @@ Determinate bars glide between values; without a value it shows the Fluent indet
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineProgress } from 'motionary/components/feedback';
 
-defineProgress(); // registers <usa-progress>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineProgress(); // registers <mo-progress>
 
 /* then use it in your HTML:
-<usa-progress value="40"></usa-progress>
-<usa-progress indeterminate></usa-progress>
+<mo-progress value="40"></mo-progress>
+<mo-progress indeterminate></mo-progress>
 */
 ```

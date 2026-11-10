@@ -1,4 +1,6 @@
-# `<usa-switch>` — Toggle switch variants
+# `<mo-switch>` — Toggle switch variants
+
+> Element name `<mo-switch>` (default since 17.3); the legacy name `<usa-switch>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -22,11 +24,13 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineSwitch } from 'motionary/components/widgets';
 
-defineSwitch(); // registers <usa-switch>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineSwitch(); // registers <mo-switch>
 
 /* then use it in your HTML:
-<usa-switch variant="daynight" name="dark" label="Dark mode"></usa-switch>
+<mo-switch variant="daynight" name="dark" label="Dark mode"></mo-switch>
 */
 ```

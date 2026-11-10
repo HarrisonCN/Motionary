@@ -1,4 +1,6 @@
-# `<usa-player>` — JSON animation player
+# `<mo-player>` — JSON animation player
+
+> Element name `<mo-player>` (default since 17.3); the legacy name `<usa-player>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -25,14 +27,16 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { definePlayer } from 'motionary/components/effects';
 
-definePlayer(); // registers <usa-player>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+definePlayer(); // registers <mo-player>
 
 /* then use it in your HTML:
-<usa-player src="hero.json" trigger="view">
+<mo-player src="hero.json" trigger="view">
   <h1>Title</h1>
   <a class="cta">Start</a>
-</usa-player>
+</mo-player>
 */
 ```

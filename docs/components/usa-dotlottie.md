@@ -1,4 +1,6 @@
-# `<usa-dotlottie>` — Interactive dotLottie (themes + state machine)
+# `<mo-dotlottie>` — Interactive dotLottie (themes + state machine)
+
+> Element name `<mo-dotlottie>` (default since 17.3); the legacy name `<usa-dotlottie>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -53,11 +55,13 @@ import { vector } from 'motionary/runtime/vector';
 import { lottieState } from 'motionary/runtime/lottie-state';
 
 use(vector, lottieState);
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineDotLottie } from 'motionary/components/dotlottie';
 
-defineDotLottie(); // registers <usa-dotlottie>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineDotLottie(); // registers <mo-dotlottie>
 
 /* then use it in your HTML:
-<usa-dotlottie src="/anim/button.lottie" state-machine="toggle" theme="dark" label="Like button"></usa-dotlottie>
+<mo-dotlottie src="/anim/button.lottie" state-machine="toggle" theme="dark" label="Like button"></mo-dotlottie>
 */
 ```

@@ -1,4 +1,6 @@
-# `<usa-text-splitter>` — Text splitter
+# `<mo-text-splitter>` — Text splitter
+
+> Element name `<mo-text-splitter>` (default since 17.3); the legacy name `<usa-text-splitter>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -50,11 +52,13 @@ import { use } from 'motionary/runtime';
 import { text } from 'motionary/runtime/text';
 
 use(text);
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineTextSplitter } from 'motionary/components/widgets';
 
-defineTextSplitter(); // registers <usa-text-splitter>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineTextSplitter(); // registers <mo-text-splitter>
 
 /* then use it in your HTML:
-<usa-text-splitter split="chars" effect="rise" stagger="30">Motion, made simple.</usa-text-splitter>
+<mo-text-splitter split="chars" effect="rise" stagger="30">Motion, made simple.</mo-text-splitter>
 */
 ```

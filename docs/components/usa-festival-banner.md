@@ -1,4 +1,6 @@
-# `<usa-festival-banner>` — Festival banner
+# `<mo-festival-banner>` — Festival banner
+
+> Element name `<mo-festival-banner>` (default since 17.3); the legacy name `<usa-festival-banner>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -22,11 +24,13 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineFestivalBanner } from 'motionary/components/widgets';
 
-defineFestivalBanner(); // registers <usa-festival-banner>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineFestivalBanner(); // registers <mo-festival-banner>
 
 /* then use it in your HTML:
-<usa-festival-banner theme="lunar" dismissible>🧧 Happy Lunar New Year — 20% off all week</usa-festival-banner>
+<mo-festival-banner theme="lunar" dismissible>🧧 Happy Lunar New Year — 20% off all week</mo-festival-banner>
 */
 ```

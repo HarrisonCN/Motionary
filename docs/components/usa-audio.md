@@ -1,4 +1,6 @@
-# `<usa-audio>` — Beat-triggered effects
+# `<mo-audio>` — Beat-triggered effects
+
+> Element name `<mo-audio>` (default since 17.3); the legacy name `<usa-audio>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -25,14 +27,16 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineAudio } from 'motionary/components/effects';
 
-defineAudio(); // registers <usa-audio>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineAudio(); // registers <mo-audio>
 
 /* then use it in your HTML:
 <audio id="track" src="song.mp3" controls></audio>
-<usa-audio source="#track" label="Play with visuals">
+<mo-audio source="#track" label="Play with visuals">
   <div data-usa-beat="pop">♪</div>
-</usa-audio>
+</mo-audio>
 */
 ```

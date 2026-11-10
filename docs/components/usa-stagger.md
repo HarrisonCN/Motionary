@@ -1,4 +1,6 @@
-# `<usa-stagger>` — Stagger list
+# `<mo-stagger>` — Stagger list
+
+> Element name `<mo-stagger>` (default since 17.3); the legacy name `<usa-stagger>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -26,15 +28,17 @@ Reveals direct children one after another — lists, grids, feature rows.
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineStagger } from 'motionary/components/reveal';
 
-defineStagger(); // registers <usa-stagger>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineStagger(); // registers <mo-stagger>
 
 /* then use it in your HTML:
-<usa-stagger effect="rise" interval="80">
+<mo-stagger effect="rise" interval="80">
   <li>One</li>
   <li>Two</li>
   <li>Three</li>
-</usa-stagger>
+</mo-stagger>
 */
 ```

@@ -1,4 +1,6 @@
-# `<usa-kanban>` — Kanban board (drag-sort)
+# `<mo-kanban>` — Kanban board (drag-sort)
+
+> Element name `<mo-kanban>` (default since 17.3); the legacy name `<usa-kanban>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -29,18 +31,20 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineKanban } from 'motionary/components/widgets';
 
-defineKanban(); // registers <usa-kanban>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineKanban(); // registers <mo-kanban>
 
 /* then use it in your HTML:
-<usa-kanban label="Sprint">
+<mo-kanban label="Sprint">
   <section data-title="To do">
     <h3>To do</h3>
     <div data-card>Design</div>
     <div data-card>Write docs</div>
   </section>
   <section data-title="Done"><h3>Done</h3></section>
-</usa-kanban>
+</mo-kanban>
 */
 ```

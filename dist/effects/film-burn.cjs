@@ -15,4 +15,4 @@ function registerFilmBurn() {
 exports.effect = effect;
 exports.register = registerFilmBurn;
 exports.registerFilmBurn = registerFilmBurn;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/effects/film-burn.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/effects/film-burn.cjs.map

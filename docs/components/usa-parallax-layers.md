@@ -1,4 +1,6 @@
-# `<usa-parallax-layers>` — Parallax layers
+# `<mo-parallax-layers>` — Parallax layers
+
+> Element name `<mo-parallax-layers>` (default since 17.3); the legacy name `<usa-parallax-layers>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -25,14 +27,16 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineParallaxLayers } from 'motionary/components/widgets';
 
-defineParallaxLayers(); // registers <usa-parallax-layers>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineParallaxLayers(); // registers <mo-parallax-layers>
 
 /* then use it in your HTML:
-<usa-parallax-layers range="120">
+<mo-parallax-layers range="120">
   <img data-depth="0.6" src="mountains.webp" alt="">
   <h2 data-depth="-0.3">Above the clouds</h2>
-</usa-parallax-layers>
+</mo-parallax-layers>
 */
 ```

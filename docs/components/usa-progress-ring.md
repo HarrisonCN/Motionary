@@ -1,4 +1,6 @@
-# `<usa-progress-ring>` — Progress ring / bar / gauge
+# `<mo-progress-ring>` — Progress ring / bar / gauge
+
+> Element name `<mo-progress-ring>` (default since 17.3); the legacy name `<usa-progress-ring>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -25,14 +27,16 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineProgressRing } from 'motionary/components/widgets';
 
-defineProgressRing(); // registers <usa-progress-ring>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineProgressRing(); // registers <mo-progress-ring>
 
 /* then use it in your HTML:
-<usa-progress-ring value="72" gradient="#7c5cff,#22d3ee"></usa-progress-ring>
-<usa-progress-ring variant="bar" value="40"></usa-progress-ring>
-<usa-progress-ring variant="semi" value="88"></usa-progress-ring>
+<mo-progress-ring value="72" gradient="#7c5cff,#22d3ee"></mo-progress-ring>
+<mo-progress-ring variant="bar" value="40"></mo-progress-ring>
+<mo-progress-ring variant="semi" value="88"></mo-progress-ring>
 <!-- el.value = 90 animates to the new value -->
 */
 ```

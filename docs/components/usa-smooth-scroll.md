@@ -1,4 +1,6 @@
-# `<usa-smooth-scroll>` — Smooth scroll
+# `<mo-smooth-scroll>` — Smooth scroll
+
+> Element name `<mo-smooth-scroll>` (default since 17.3); the legacy name `<usa-smooth-scroll>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -50,11 +52,13 @@ import { use } from 'motionary/runtime';
 import { smooth } from 'motionary/runtime/smooth';
 
 use(smooth);
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineSmoothScroll } from 'motionary/components/widgets';
 
-defineSmoothScroll(); // registers <usa-smooth-scroll>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineSmoothScroll(); // registers <mo-smooth-scroll>
 
 /* then use it in your HTML:
-<usa-smooth-scroll lerp="0.1" offset="64"></usa-smooth-scroll>
+<mo-smooth-scroll lerp="0.1" offset="64"></mo-smooth-scroll>
 */
 ```

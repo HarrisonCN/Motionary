@@ -1,4 +1,6 @@
-# `<usa-stories>` — Stories viewer
+# `<mo-stories>` — Stories viewer
+
+> Element name `<mo-stories>` (default since 17.3); the legacy name `<usa-stories>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -25,14 +27,16 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineStories } from 'motionary/components/widgets';
 
-defineStories(); // registers <usa-stories>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineStories(); // registers <mo-stories>
 
 /* then use it in your HTML:
-<usa-stories duration="5000" loop>
+<mo-stories duration="5000" loop>
   <img src="1.jpg" alt="…">
   <img src="2.jpg" alt="…">
-</usa-stories>
+</mo-stories>
 */
 ```

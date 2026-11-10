@@ -1,4 +1,6 @@
-# `<usa-presence>` — Presence avatar
+# `<mo-presence>` — Presence avatar
+
+> Element name `<mo-presence>` (default since 17.3); the legacy name `<usa-presence>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -24,13 +26,15 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { definePresence } from 'motionary/components/widgets';
 
-definePresence(); // registers <usa-presence>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+definePresence(); // registers <mo-presence>
 
 /* then use it in your HTML:
-<usa-presence name="Ada Lovelace" status="online"></usa-presence>
-<usa-presence name="Alan Turing" status="away" speaking></usa-presence>
-<usa-presence name="Grace Hopper" status="busy" story></usa-presence>
+<mo-presence name="Ada Lovelace" status="online"></mo-presence>
+<mo-presence name="Alan Turing" status="away" speaking></mo-presence>
+<mo-presence name="Grace Hopper" status="busy" story></mo-presence>
 */
 ```

@@ -43,4 +43,5 @@ same files).
 
 - `package.json` `files` contains `!dist/**/*.map`.
 - `npm run check:pack` (CI, Node 22): the dry-run package contains no `.map` file and stays within fixed limits —
-  4.0 MB packed, 14 MB unpacked, 2300 files. Limits are not raised automatically.
+  4.0 MB packed, 16 MB unpacked (14 MB until 17.2; raised in 17.3 at 14.32 MB measured), 2300 files. Limits are not
+  raised automatically; every raise is recorded in the CHANGELOG with old → new and the measured size.

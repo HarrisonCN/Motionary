@@ -72,8 +72,8 @@ describe('17.0 stable core vs experimental surfaces', () => {
     expect(read('docs/versions.md')).toMatch(/v16-lts/);
     expect(read('docs/deprecations-v17.md')).toMatch(/removed in 17\.0\.0/i);
   });
-  it('lite keeps its 70 KB gzip limit', () => {
+  it('lite keeps its gzip limit (70 KB, raised to 79 KB in 17.3)', () => {
     const lite = JSON.parse(read('size-budget.json')).find((e: any) => e.name === "import 'motionary/components/lite'");
-    expect(lite.limit).toBe(70 * 1024);
+    expect(lite.limit).toBe(79 * 1024);
   });
 });

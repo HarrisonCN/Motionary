@@ -1,4 +1,6 @@
-# `<usa-chapter-nav>` — Chapter nav
+# `<mo-chapter-nav>` — Chapter nav
+
+> Element name `<mo-chapter-nav>` (default since 17.3); the legacy name `<usa-chapter-nav>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -26,12 +28,14 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineChapterNav } from 'motionary/components/widgets';
 
-defineChapterNav(); // registers <usa-chapter-nav>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineChapterNav(); // registers <mo-chapter-nav>
 
 /* then use it in your HTML:
-<usa-chapter-nav for="#story"></usa-chapter-nav>
+<mo-chapter-nav for="#story"></mo-chapter-nav>
 <article id="story">
   <section data-chapter="Prologue">…</section>
   <section data-chapter="The storm">…</section>

@@ -1,4 +1,6 @@
-# `<usa-back-to-top>` — Back to top
+# `<mo-back-to-top>` — Back to top
+
+> Element name `<mo-back-to-top>` (default since 17.3); the legacy name `<usa-back-to-top>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -22,11 +24,13 @@ Appears after you scroll, shows reading progress as a ring and springs the page 
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineBackToTop } from 'motionary/components/page';
 
-defineBackToTop(); // registers <usa-back-to-top>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineBackToTop(); // registers <mo-back-to-top>
 
 /* then use it in your HTML:
-<usa-back-to-top offset="400"></usa-back-to-top>
+<mo-back-to-top offset="400"></mo-back-to-top>
 */
 ```

@@ -1,4 +1,6 @@
-# `<usa-card-stack>` — Swipe stack
+# `<mo-card-stack>` — Swipe stack
+
+> Element name `<mo-card-stack>` (default since 17.3); the legacy name `<usa-card-stack>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -26,15 +28,17 @@ A deck where the top card swipes away left or right (pointer, touch, arrow keys)
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineCardStack } from 'motionary/components/cards';
 
-defineCardStack(); // registers <usa-card-stack>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineCardStack(); // registers <mo-card-stack>
 
 /* then use it in your HTML:
-<usa-card-stack loop>
+<mo-card-stack loop>
   <article>1</article>
   <article>2</article>
   <article>3</article>
-</usa-card-stack>
+</mo-card-stack>
 */
 ```

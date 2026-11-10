@@ -1,4 +1,6 @@
-# `<usa-carousel-3d>` — 3D carousel
+# `<mo-carousel-3d>` — 3D carousel
+
+> Element name `<mo-carousel-3d>` (default since 17.3); the legacy name `<usa-carousel-3d>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -26,15 +28,17 @@ Items on a 3D ring, rotated by drag, arrow keys, clicks or autoplay — with spr
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineCarousel3d } from 'motionary/components/cards';
 
-defineCarousel3d(); // registers <usa-carousel-3d>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineCarousel3d(); // registers <mo-carousel-3d>
 
 /* then use it in your HTML:
-<usa-carousel-3d autoplay="3000">
+<mo-carousel-3d autoplay="3000">
   <img src="1.jpg" alt="">
   <img src="2.jpg" alt="">
   …
-</usa-carousel-3d>
+</mo-carousel-3d>
 */
 ```

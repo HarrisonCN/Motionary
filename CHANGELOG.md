@@ -7,6 +7,57 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [17.3.0] - 2026-11-10 — Navigation I, `mo-*` by default
+
+### Added
+- **`<mo-mega-menu>`** (`motionary/widgets/mega-menu`): a navigation bar whose items open full-width panels on one shared
+  surface that morphs its height between panels. Hover intent (`delay`, `close-delay`), click / tap, ←/→ / Home / End between
+  triggers, ↓ into the panel, Esc back to the trigger, Tab out closes. Disclosure pattern (`aria-expanded`,
+  `aria-controls`) inside a named `navigation` landmark. `usa:open` / `usa:close` (`{ index }`), `openItem()`, `close()`.
+- **`<mo-nav-flyout>`** (`motionary/widgets/nav-flyout`): dropdown flyouts anchored under their trigger; one background
+  slides and resizes from flyout to flyout. Same keyboard, hover intent and events as the mega menu.
+- **`<mo-fullscreen-menu>`** (`motionary/widgets/fullscreen-menu`): a menu button that opens a full-screen modal dialog,
+  revealed as a circle from the button (`variant="circle"`) or as a curtain (`variant="curtain"`), with staggered links
+  and optional `data-preview` pictures. Focus moves in and stays inside, Esc / the button / a link closes and focus
+  returns, page scrolling is locked while open.
+- **`<mo-breadcrumbs>`** (`motionary/widgets/breadcrumbs`): crumbs slide in and out as the trail changes (`set(items)` keeps
+  the shared prefix, labels are written as text), a trail longer than `max` collapses its middle into a "…" button that
+  expands with a stagger (`usa:expand`). `aria-current="page"` on the last crumb, CSS-only separators.
+- **Hover pack** `motionary/fx/hover` (= `motionary/components/fx-hover`, plus one `motionary/effects/<name>` entry each):
+  `text-roll`, `image-swap`, `focus-reveal`, `grid-warp`, `googly-eyes`. Persistent hover / focus effects; text effects
+  keep a screen-reader copy of the original text, every layer is `aria-hidden` and removed by the cleanup.
+- **Showcase: select → copy as AI prompt / share link.** Each gallery card has a Select toggle; the tray lists the picks
+  (with an optional note each), copies one prompt with every component's import lines and `mo-*` example, or copies a
+  `#select=…` link that reopens the same selection.
+- **`mo-codemod tags [--write]`** renames `<usa-*>` elements to `<mo-*>` in markup / JSX / Vue / Svelte / Markdown, CSS tag
+  selectors and tag strings passed to `querySelector` / `closest` / `matches` / `createElement` / `customElements.get` /
+  `whenDefined` (dry run by default, `.bak` backups).
+- Manifest: every component has `name` (its `mo-*` name) next to the legacy `tag`; `llms.txt` / `llms-full.txt` and the
+  component pages lead with the `mo-*` name.
+
+### Changed
+- **`<mo-*>` is the default element name for every component.** `defineComponents()` and `defineWidgets()` turn the
+  `mo-*` names on (`defineMoAliases()`) before registering; the CDN bundles already did; widgets from 17.3 on register
+  their `mo-*` name themselves. README (en / zh / ja), AGENTS.md, docs, showcase snippets and code tabs use `mo-*`.
+  Single-component and category entries and lite keep their size: their fixed budgets leave as little as 5 B, and the
+  alias code (~1.7 KB) stays in `motionary/components/mo` — call `defineMoAliases()` once with those imports
+  (docs/deprecations-v17.md#mo-names). `<usa-*>` remains registered as a deprecated alias for all of 17.x.
+- `motionary-mcp`: `validate_snippet`, `get_component` and the other tag lookups accept `<mo-*>` names.
+- Direction (docs/stability.md, docs/ROADMAP.md): 17.x minors add components and effect packs again, planned 17.3 → 17.12;
+  zero dependencies, own size lines; existing limits may be raised when needed (old → new and the measured size noted in
+  the changelog, ~10–15% headroom).
+
+### Size
+- New budget lines, one per new entry (`motionary/components/fx-hover`, four `motionary/widgets/*`, five `motionary/effects/*`).
+- Raised: `motionary/components/lite` 70.00 kB → 79.00 kB gzip (measured 70.29 kB after the 17.3 additions; ~12% headroom
+  for the coming 17.x minors), with the maintainer's approval to raise limits as the component count grows.
+- Raised: npm package unpacked size (`check:pack`) 14.00 MB → 16.00 MB (measured 14.32 MB, 2171 files; packed 3.70 MB
+  stays under its unchanged 4.00 MB limit).
+
+### Deferred
+- Real physical-device testing (iOS Safari + VoiceOver, Android Chrome + TalkBack, pen / trackpad, Windows forced colors)
+  stays deferred by the maintainer's decision: not run and not claimed. CI covers phones only through emulated profiles.
+
 ## [17.2.2] - 2026-11-09
 
 ### Fixed

@@ -1,4 +1,6 @@
-# `<usa-spotlight>` — Reveal highlight
+# `<mo-spotlight>` — Reveal highlight
+
+> Element name `<mo-spotlight>` (default since 17.3); the legacy name `<usa-spotlight>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -26,15 +28,17 @@ The Windows Fluent “Reveal” effect: a light follows the pointer, lighting th
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineSpotlight } from 'motionary/components/interaction';
 
-defineSpotlight(); // registers <usa-spotlight>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineSpotlight(); // registers <mo-spotlight>
 
 /* then use it in your HTML:
-<usa-spotlight>
+<mo-spotlight>
   <button>Mail</button>
   <button>Calendar</button>
   <button>Photos</button>
-</usa-spotlight>
+</mo-spotlight>
 */
 ```

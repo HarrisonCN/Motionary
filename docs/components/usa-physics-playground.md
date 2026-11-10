@@ -1,4 +1,6 @@
-# `<usa-physics-playground>` — Physics playground
+# `<mo-physics-playground>` — Physics playground
+
+> Element name `<mo-physics-playground>` (default since 17.3); the legacy name `<usa-physics-playground>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -53,11 +55,13 @@ import { physics } from 'motionary/runtime/physics';
 import { formatScene } from 'motionary/runtime/format-scene';
 
 use(physics, formatScene);
+import { defineMoAliases } from 'motionary/components/mo';
 import { definePhysicsPlayground } from 'motionary/components/widgets';
 
-definePhysicsPlayground(); // registers <usa-physics-playground>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+definePhysicsPlayground(); // registers <mo-physics-playground>
 
 /* then use it in your HTML:
-<usa-physics-playground preset="pyramid" spawn label="Knock the pyramid over"></usa-physics-playground>
+<mo-physics-playground preset="pyramid" spawn label="Knock the pyramid over"></mo-physics-playground>
 */
 ```

@@ -1,4 +1,6 @@
-# `<usa-shortcut>` — Shortcut hint
+# `<mo-shortcut>` — Shortcut hint
+
+> Element name `<mo-shortcut>` (default since 17.3); the legacy name `<usa-shortcut>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -23,12 +25,14 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineShortcut } from 'motionary/components/widgets';
 
-defineShortcut(); // registers <usa-shortcut>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineShortcut(); // registers <mo-shortcut>
 
 /* then use it in your HTML:
-<usa-shortcut keys="mod+k" label="Search"></usa-shortcut>
-<usa-shortcut keys="mod+shift+p" for="palette-button"></usa-shortcut>
+<mo-shortcut keys="mod+k" label="Search"></mo-shortcut>
+<mo-shortcut keys="mod+shift+p" for="palette-button"></mo-shortcut>
 */
 ```

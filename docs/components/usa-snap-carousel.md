@@ -1,4 +1,6 @@
-# `<usa-snap-carousel>` — Snap carousel (drag · inertia · snap)
+# `<mo-snap-carousel>` — Snap carousel (drag · inertia · snap)
+
+> Element name `<mo-snap-carousel>` (default since 17.3); the legacy name `<usa-snap-carousel>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -54,15 +56,17 @@ import { use } from 'motionary/runtime';
 import { dragSnap } from 'motionary/runtime/drag-snap';
 
 use(dragSnap);
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineSnapCarousel } from 'motionary/components/snap-carousel';
 
-defineSnapCarousel(); // registers <usa-snap-carousel>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineSnapCarousel(); // registers <mo-snap-carousel>
 
 /* then use it in your HTML:
-<usa-snap-carousel align="center" gap="16" label="Featured">
+<mo-snap-carousel align="center" gap="16" label="Featured">
   <article>…</article>
   <article>…</article>
   <article>…</article>
-</usa-snap-carousel>
+</mo-snap-carousel>
 */
 ```

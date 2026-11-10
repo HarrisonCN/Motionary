@@ -98,21 +98,25 @@ var widgets_motionSpec = require('../widgets/motion-spec.cjs');
 var widgets_nativePreview = require('../widgets/native-preview.cjs');
 var widgets_pluginCard = require('../widgets/plugin-card.cjs');
 var widgets_installButton = require('../widgets/install-button.cjs');
-var widgets_scrollScene = require('../chunks/scroll-scene-BxZ_sd2A.cjs');
+var widgets_scrollScene = require('../chunks/scroll-scene-BRnibjdP.cjs');
 var widgets_motionInspector = require('../widgets/motion-inspector.cjs');
 var widgets_routeTransition = require('../widgets/route-transition.cjs');
 var widgets_textSplitter = require('../widgets/text-splitter.cjs');
 var widgets_scrollRing = require('../widgets/scroll-ring.cjs');
 var widgets_parallaxLayers = require('../widgets/parallax-layers.cjs');
 var widgets_smoothScroll = require('../widgets/smooth-scroll.cjs');
-var widgets_glScene = require('../chunks/gl-scene-DaNGkk36.cjs');
+var widgets_glScene = require('../chunks/gl-scene-C9pBV4jG.cjs');
 var widgets_gpuParticles = require('../chunks/gpu-particles-DGwFsyz_.cjs');
 var widgets_shaderBackdrop = require('../chunks/shader-backdrop-Ct8UIKNL.cjs');
-var widgets_lottiePlayer = require('../chunks/lottie-player-GnmxujBs.cjs');
+var widgets_lottiePlayer = require('../chunks/lottie-player-kQ9J05on.cjs');
 var widgets_rive = require('../chunks/rive-xzduMxFp.cjs');
 var widgets_tokenEditor = require('../widgets/token-editor.cjs');
-var widgets_physicsPlayground = require('../chunks/physics-playground-CY_E17Eg.cjs');
+var widgets_physicsPlayground = require('../chunks/physics-playground-m9zHsri6.cjs');
 var widgets_motionPrompt = require('../widgets/motion-prompt.cjs');
+var widgets_megaMenu = require('../chunks/nav-flyout-C-oYykhN.cjs');
+var widgets_fullscreenMenu = require('../widgets/fullscreen-menu.cjs');
+var widgets_breadcrumbs = require('../widgets/breadcrumbs.cjs');
+var components_mo = require('./mo.cjs');
 var viewport = require('../chunks/viewport-EFYGqMNa.cjs');
 
 /**
@@ -172,11 +176,16 @@ const WIDGETS = {
     '10.5': { 'usa-gl-scene': widgets_glScene.defineGlScene, 'usa-gpu-particles': widgets_gpuParticles.defineGpuParticles, 'usa-shader-backdrop': widgets_shaderBackdrop.defineShaderBackdrop },
     '10.6': { 'usa-lottie-player': widgets_lottiePlayer.defineLottiePlayer, 'usa-rive': widgets_rive.defineRive, 'usa-token-editor': widgets_tokenEditor.defineTokenEditor },
     '10.7': { 'usa-physics-playground': widgets_physicsPlayground.definePhysicsPlayground, 'usa-motion-prompt': widgets_motionPrompt.defineMotionPrompt },
+    '17.3': { 'usa-mega-menu': widgets_megaMenu.defineMegaMenu, 'usa-nav-flyout': widgets_megaMenu.defineNavFlyout, 'usa-fullscreen-menu': widgets_fullscreenMenu.defineFullscreenMenu, 'usa-breadcrumbs': widgets_breadcrumbs.defineBreadcrumbs },
 };
 /** Every widget tag, in release order. */
 const WIDGET_TAGS = /*#__PURE__*/ Object.values(WIDGETS).flatMap((g) => Object.keys(g));
-/** Register every widget (or only those of one release, e.g. `'6.2'`) under its default tag. */
+/**
+ * Register every widget (or only those of one release, e.g. `'6.2'`). 17.3: `mo-*` is the default name — this turns on
+ * the `<mo-*>` names first (`defineMoAliases()`); the `usa-*` names stay registered as deprecated aliases.
+ */
 function defineWidgets(release) {
+    components_mo.defineMoAliases();
     for (const [v, group] of Object.entries(WIDGETS))
         if (!release || release === v)
             for (const [tag, fn] of Object.entries(group))
@@ -364,9 +373,13 @@ exports.defineTokenEditor = widgets_tokenEditor.defineTokenEditor;
 exports.PHYSICS_PRESETS = widgets_physicsPlayground.PHYSICS_PRESETS;
 exports.definePhysicsPlayground = widgets_physicsPlayground.definePhysicsPlayground;
 exports.defineMotionPrompt = widgets_motionPrompt.defineMotionPrompt;
+exports.defineMegaMenu = widgets_megaMenu.defineMegaMenu;
+exports.defineNavFlyout = widgets_megaMenu.defineNavFlyout;
+exports.defineFullscreenMenu = widgets_fullscreenMenu.defineFullscreenMenu;
+exports.defineBreadcrumbs = widgets_breadcrumbs.defineBreadcrumbs;
 exports.viewportHeight = viewport.viewportHeight;
 exports.watchViewport = viewport.watchViewport;
 exports.WIDGETS = WIDGETS;
 exports.WIDGET_TAGS = WIDGET_TAGS;
 exports.defineWidgets = defineWidgets;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/widgets.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/components/widgets.cjs.map

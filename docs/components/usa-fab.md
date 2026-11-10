@@ -1,4 +1,6 @@
-# `<usa-fab>` — FAB speed dial
+# `<mo-fab>` — FAB speed dial
+
+> Element name `<mo-fab>` (default since 17.3); the legacy name `<usa-fab>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -26,15 +28,17 @@ A floating action button whose actions fan out with a staggered spring: up, down
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineFab } from 'motionary/components/ui';
 
-defineFab(); // registers <usa-fab>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineFab(); // registers <mo-fab>
 
 /* then use it in your HTML:
-<usa-fab direction="up">
+<mo-fab direction="up">
   <button aria-label="Create">＋</button>
   <button aria-label="Photo">📷</button>
   <button aria-label="Note">📝</button>
-</usa-fab>
+</mo-fab>
 */
 ```

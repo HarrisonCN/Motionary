@@ -1,4 +1,6 @@
-# `<usa-volume-knob>` — Volume knob
+# `<mo-volume-knob>` — Volume knob
+
+> Element name `<mo-volume-knob>` (default since 17.3); the legacy name `<usa-volume-knob>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -22,11 +24,13 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineVolumeKnob } from 'motionary/components/widgets';
 
-defineVolumeKnob(); // registers <usa-volume-knob>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineVolumeKnob(); // registers <mo-volume-knob>
 
 /* then use it in your HTML:
-<usa-volume-knob value="60" label="Volume"></usa-volume-knob>
+<mo-volume-knob value="60" label="Volume"></mo-volume-knob>
 */
 ```

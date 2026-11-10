@@ -1,4 +1,6 @@
-# `<usa-product-gallery>` — Product gallery
+# `<mo-product-gallery>` — Product gallery
+
+> Element name `<mo-product-gallery>` (default since 17.3); the legacy name `<usa-product-gallery>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -26,15 +28,17 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineProductGallery } from 'motionary/components/widgets';
 
-defineProductGallery(); // registers <usa-product-gallery>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineProductGallery(); // registers <mo-product-gallery>
 
 /* then use it in your HTML:
-<usa-product-gallery zoom="2">
+<mo-product-gallery zoom="2">
   <img src="front.jpg" alt="Front">
   <img src="side.jpg" alt="Side">
   <img src="back.jpg" alt="Back">
-</usa-product-gallery>
+</mo-product-gallery>
 */
 ```

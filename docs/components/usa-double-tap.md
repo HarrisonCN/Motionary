@@ -1,4 +1,6 @@
-# `<usa-double-tap>` — Double tap
+# `<mo-double-tap>` — Double tap
+
+> Element name `<mo-double-tap>` (default since 17.3); the legacy name `<usa-double-tap>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -24,13 +26,15 @@ Double tap or double click a photo to pop a heart (or any emoji) at the tap poin
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineDoubleTap } from 'motionary/components/click';
 
-defineDoubleTap(); // registers <usa-double-tap>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineDoubleTap(); // registers <mo-double-tap>
 
 /* then use it in your HTML:
-<usa-double-tap>
+<mo-double-tap>
   <img src="photo.jpg" alt="…">
-</usa-double-tap>
+</mo-double-tap>
 */
 ```

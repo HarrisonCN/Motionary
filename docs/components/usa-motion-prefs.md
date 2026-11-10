@@ -1,4 +1,6 @@
-# `<usa-motion-prefs>` — Motion preference panel
+# `<mo-motion-prefs>` — Motion preference panel
+
+> Element name `<mo-motion-prefs>` (default since 17.3); the legacy name `<usa-motion-prefs>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -22,11 +24,13 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineMotionPrefs } from 'motionary/components/widgets';
 
-defineMotionPrefs(); // registers <usa-motion-prefs>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineMotionPrefs(); // registers <mo-motion-prefs>
 
 /* then use it in your HTML:
-<usa-motion-prefs></usa-motion-prefs>
+<mo-motion-prefs></mo-motion-prefs>
 */
 ```

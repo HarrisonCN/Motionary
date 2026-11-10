@@ -1,4 +1,6 @@
-# `<usa-route-transition>` — Route transition container
+# `<mo-route-transition>` — Route transition container
+
+> Element name `<mo-route-transition>` (default since 17.3); the legacy name `<usa-route-transition>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -25,14 +27,16 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineRouteTransition } from 'motionary/components/widgets';
 
-defineRouteTransition(); // registers <usa-route-transition>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineRouteTransition(); // registers <mo-route-transition>
 
 /* then use it in your HTML:
-<usa-route-transition id="app" effect="slide" cross-document>
+<mo-route-transition id="app" effect="slide" cross-document>
   <nav><a href="/">Home</a> <a href="/about">About</a></nav>
   <h1 data-shared="title">Home</h1>
-</usa-route-transition>
+</mo-route-transition>
 */
 ```

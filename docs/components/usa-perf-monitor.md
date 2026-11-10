@@ -1,4 +1,6 @@
-# `<usa-perf-monitor>` — Perf monitor
+# `<mo-perf-monitor>` — Perf monitor
+
+> Element name `<mo-perf-monitor>` (default since 17.3); the legacy name `<usa-perf-monitor>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -22,11 +24,13 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { definePerfMonitor } from 'motionary/components/widgets';
 
-definePerfMonitor(); // registers <usa-perf-monitor>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+definePerfMonitor(); // registers <mo-perf-monitor>
 
 /* then use it in your HTML:
-<usa-perf-monitor corner="bottom-right"></usa-perf-monitor>
+<mo-perf-monitor corner="bottom-right"></mo-perf-monitor>
 */
 ```

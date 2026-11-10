@@ -1,4 +1,6 @@
-# `<usa-milestones>` — Scroll-drawn milestones
+# `<mo-milestones>` — Scroll-drawn milestones
+
+> Element name `<mo-milestones>` (default since 17.3); the legacy name `<usa-milestones>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -26,15 +28,17 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineMilestones } from 'motionary/components/widgets';
 
-defineMilestones(); // registers <usa-milestones>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineMilestones(); // registers <mo-milestones>
 
 /* then use it in your HTML:
-<usa-milestones>
+<mo-milestones>
   <div data-date="2024"><h3>Idea</h3><p>…</p></div>
   <div data-date="2025"><h3>Beta</h3><p>…</p></div>
   <div data-date="2026"><h3>Launch</h3><p>…</p></div>
-</usa-milestones>
+</mo-milestones>
 */
 ```

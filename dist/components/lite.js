@@ -244,7 +244,7 @@ function getBase() {
  */
 function animateWithMotion(el, keyframes, options) {
     // no WAAPI / `static` → the unadapted final frame; over the animation budget → the adapted one
-    if (typeof el.animate !== 'function' || config.motionSensitivity === 'static' || ((keyframes = adaptKeyframes(keyframes)), active$1 >= maxActive)) {
+    if (typeof el.animate !== 'function' || config.motionSensitivity === 'static' || ((keyframes = adaptKeyframes(keyframes)), active$2 >= maxActive)) {
         applyFrame(el, keyframes[keyframes.length - 1]);
         return null;
     }
@@ -254,9 +254,9 @@ function animateWithMotion(el, keyframes, options) {
     const a = el.animate(keyframes, options);
     trackAnimation(a);
     if (options.iterations !== Infinity) {
-        active$1++;
+        active$2++;
         // settles exactly once (fulfilled or rejected), so no guard is needed
-        const end = () => void active$1--;
+        const end = () => void active$2--;
         a?.finished?.then(end, end);
     }
     return a;
@@ -439,10 +439,10 @@ function trackAnimation(a) {
     a.finished?.then(drop, drop);
 }
 // --- active animation budget (4.5) ---------------------------------------------
-let active$1 = 0;
+let active$2 = 0;
 let maxActive = Infinity;
 /** Number of component animations running right now. */
-const activeAnimations = () => active$1;
+const activeAnimations = () => active$2;
 /** Cap concurrent component animations; extra ones jump to their final frame (`Infinity` = no cap). */
 function setAnimationBudget(max) {
     maxActive = max > 0 ? max : Infinity;
@@ -1285,7 +1285,7 @@ const MOTION_TOKENS = {
         stiff: { stiffness: 500, damping: 40, mass: 1 },
     },
 };
-let active = /*#__PURE__*/ clone(MOTION_TOKENS);
+let active$1 = /*#__PURE__*/ clone(MOTION_TOKENS);
 function clone(t) {
     return { duration: { ...t.duration }, easing: { ...t.easing }, spring: Object.fromEntries(Object.entries(t.spring).map(([k, v]) => [k, { ...v }])) };
 }
@@ -1300,7 +1300,7 @@ function mergeMotionTokens(partial, base = MOTION_TOKENS) {
 }
 const kebab = (s) => s.replace(/([a-z0-9])([A-Z])/g, '$1-$2').replace(/[\s_.]+/g, '-').toLowerCase();
 /** The custom-property map: `{ '--usa-duration-fast': '150ms', … }`. */
-function motionTokensToVars(tokens = active, prefix = '--usa') {
+function motionTokensToVars(tokens = active$1, prefix = '--usa') {
     const vars = {};
     for (const [k, v] of Object.entries(tokens.duration))
         vars[`${prefix}-duration-${kebab(k)}`] = `${v}ms`;
@@ -1314,12 +1314,12 @@ function motionTokensToVars(tokens = active, prefix = '--usa') {
     return vars;
 }
 /** A stylesheet string: `:root { --usa-duration-fast: 150ms; … }`. */
-function motionTokensToCss(tokens = active, selector = ':root', prefix = '--usa') {
+function motionTokensToCss(tokens = active$1, selector = ':root', prefix = '--usa') {
     const body = Object.entries(motionTokensToVars(tokens, prefix)).map(([k, v]) => `  ${k}: ${v};`).join('\n');
     return `${selector} {\n${body}\n}\n`;
 }
 /** W3C Design Tokens (DTCG) JSON: `{ motion: { duration: { fast: { $type: 'duration', $value: '150ms' } } } }`. */
-function motionTokensToJSON(tokens = active) {
+function motionTokensToJSON(tokens = active$1) {
     const grp = (o, f) => Object.fromEntries(Object.entries(o).map(([k, v]) => [k, f(v)]));
     return {
         motion: {
@@ -1409,30 +1409,30 @@ function importMotionTokens(json, base = MOTION_TOKENS) {
 }
 /** The tokens currently applied (via `applyMotionTokens`), or the defaults. */
 function getMotionTokens() {
-    return clone(active);
+    return clone(active$1);
 }
 /**
  * Write tokens as CSS custom properties on `root` (default `<html>`) and make
  * them the active set for `motionToken()`. Returns an undo function.
  */
 function applyMotionTokens(tokens = MOTION_TOKENS, root, prefix = '--usa') {
-    const prev = active;
-    active = mergeMotionTokens(tokens, MOTION_TOKENS);
+    const prev = active$1;
+    active$1 = mergeMotionTokens(tokens, MOTION_TOKENS);
     const el = root || (typeof document !== 'undefined' ? document.documentElement : null);
-    const vars = motionTokensToVars(active, prefix);
+    const vars = motionTokensToVars(active$1, prefix);
     const old = {};
     if (el)
         for (const [k, v] of Object.entries(vars))
             ((old[k] = el.style.getPropertyValue(k)), el.style.setProperty(k, v));
     return () => {
-        active = prev;
+        active$1 = prev;
         if (el)
             for (const [k, v] of Object.entries(old))
                 v ? el.style.setProperty(k, v) : el.style.removeProperty(k);
     };
 }
 function motionToken(group, name) {
-    const g = active[group];
+    const g = active$1[group];
     return g[name] ?? MOTION_TOKENS[group][name];
 }
 /** `var(--usa-duration-fast, 150ms)` — a CSS reference with the current value as fallback. */
@@ -1450,14 +1450,14 @@ function resolveDurationToken(v, fallback) {
     if (typeof v === 'number')
         return v;
     if (typeof v === 'string')
-        return (active.duration[v] ?? parseDuration(v)) ?? fallback;
+        return (active$1.duration[v] ?? parseDuration(v)) ?? fallback;
     return fallback;
 }
 /** Resolve an easing that may be a token name (`'emphasized'`) or CSS. */
 function resolveEasingToken(v, fallback) {
     if (!v)
         return fallback;
-    return active.easing[v] ?? v;
+    return active$1.easing[v] ?? v;
 }
 
 /** 4.1: whether `scrub()` can use native ScrollTimeline / ViewTimeline here. */
@@ -10452,6 +10452,133 @@ function defineFxComponents() {
 }
 
 /**
+ * motionary/components/mo — the 17.0 `<mo-*>` names.
+ *
+ * After `defineMoAliases()` every default `<usa-*>` element is also registered as `<mo-*>` (`<usa-switch>` →
+ * `<mo-switch>`): a subclass, so attributes, properties and `usa:*` events are the same. The component styles are copied
+ * with renamed tag selectors the first time a `<mo-*>` element connects, so pages that never use `mo-*` pay nothing.
+ *
+ * The no-build bundles (`components.umd.js`, `widgets.umd.js`) call it before they register anything. With ESM, call it
+ * once, ideally before you define components; `usa-*` elements defined earlier (the default component set) and `mo-*`
+ * elements already on the page are picked up too. Kept out of the component base so `usa-*` pages keep their size.
+ *
+ * ```ts
+ * import { defineMoAliases } from 'motionary/components/mo';
+ * import { defineComponents } from 'motionary/components';
+ * defineMoAliases();
+ * defineComponents();   // <mo-card>, <mo-tabs>, … and <usa-*> both work
+ * ```
+ */
+/** The `mo-*` alias of a default `usa-*` tag (`usa-switch` → `mo-switch`), or `null` for any other tag. */
+const aliasTag = (tag) => (/^usa-[a-z]/.test(tag) ? 'mo-' + tag.slice(4) : null);
+// Keep strings, comments, attribute selectors and escaped identifiers opaque. Braces / semicolons inside them
+// are content, not rule boundaries (and an attribute value that happens to name a component must stay unchanged).
+const CSS_TOKENS = /\/\*[\s\S]*?\*\/|"(?:\\[\s\S]|[^"\\])*"|'(?:\\[\s\S]|[^'\\])*'|\[(?:\\[\s\S]|"(?:\\[\s\S]|[^"\\])*"|'(?:\\[\s\S]|[^'\\])*'|[^\]\\])*\]|(?:\\[\s\S]|[\w-]|[^\x00-\x7f])+|[^\w]/g;
+/**
+ * `usa-…` → `mo-…` in selectors only (the text in front of each `{` that is not an at-rule); declarations, at-rule
+ * preludes such as `@keyframes usa-spin`, classes, attributes and custom properties are untouched.
+ */
+const aliasCss = (text) => {
+    let out = '', raw = '', renamed = '', first = '', previous = '';
+    for (const [token] of text.matchAll(CSS_TOKENS)) {
+        if (token === '{' || token === '}' || token === ';') {
+            out += (token === '{' && first !== '@' ? renamed : raw) + token;
+            raw = renamed = first = previous = '';
+        }
+        else {
+            raw += token;
+            const comment = token.startsWith('/*');
+            if (!first && !comment && token.trim())
+                first = token;
+            renamed += /^usa-[a-z]/.test(token) && previous !== '.' && previous !== '#' && previous !== ':'
+                ? 'mo-' + token.slice(4) : token;
+            if (!comment)
+                previous = token;
+        }
+    }
+    return out + raw;
+};
+let started = false;
+let active = false;
+let n = 0;
+const seen = /*#__PURE__*/ new WeakSet();
+/** Copy the Motionary stylesheets added since the last look (and the user's adopted sheets) with mo-* selectors. */
+function scan() {
+    const d = document;
+    const adopted = d.adoptedStyleSheets || [];
+    for (const s of [...Array.from(d.styleSheets), ...adopted]) {
+        const o = s.ownerNode;
+        if (seen.has(s) || (o && !o.matches('[data-usa],[data-usa-css]')))
+            continue;
+        let css;
+        try {
+            css = Array.from(s.cssRules, (r) => r.cssText).join('\n');
+        }
+        catch {
+            continue; // not loaded yet, or a cross-origin file without CORS
+        }
+        if (!css)
+            continue; // a pending link may expose an empty rule list before its load event
+        seen.add(s);
+        const a = aliasCss(css);
+        if (a !== css)
+            adoptStyles('mo:' + n++, a);
+    }
+}
+function alias(tag, ctor) {
+    const a = aliasTag(tag);
+    if (!a || customElements.get(a))
+        return;
+    const C = ctor;
+    class Alias extends C {
+        connectedCallback() {
+            const r = super.connectedCallback?.();
+            if (!active) {
+                active = true;
+                // A retry may be requested by a usa-* sibling after the mo-* element has already mounted.
+                document.addEventListener('load', (event) => {
+                    if (event.target instanceof HTMLLinkElement && event.target.hasAttribute('data-usa-css'))
+                        scan();
+                }, true);
+            }
+            scan();
+            return r;
+        }
+    }
+    try {
+        customElements.define(a, Alias);
+    }
+    catch {
+        /* the name is taken by another library */
+    }
+}
+/**
+ * Turn on the `<mo-*>` names: every `usa-*` element defined from now on gets its `mo-*` alias, and so do the default
+ * components already defined and any `usa-*` definition behind a `<mo-*>` element already on the page. Idempotent.
+ */
+function defineMoAliases() {
+    if (!canDefine() || started)
+        return;
+    started = true;
+    const reg = customElements;
+    const define = reg.define;
+    reg.define = function (name, ctor, options) {
+        define.call(this, name, ctor, options);
+        alias(name, ctor);
+    };
+    const tags = Object.values(COMPONENT_CATEGORIES).flat();
+    if (typeof document !== 'undefined')
+        document.querySelectorAll('*').forEach((e) => e.localName.startsWith('mo-') && tags.push('usa-' + e.localName.slice(3)));
+    for (const t of tags) {
+        const c = reg.get(t);
+        if (c)
+            alias(t, c);
+    }
+    if (active)
+        scan();
+}
+
+/**
  * 4.9 — the 5.0 modern-browser baseline. `baselineReport()` lists which
  * required / progressive features this browser has; `warnBaseline()` logs
  * once in development when a required one is missing.
@@ -10906,10 +11033,12 @@ const BY_CATEGORY = {
     fx: defineFxComponents,
 };
 /**
- * Register every `<usa-*>` component (or only the given categories).
+ * Register every component (or only the given categories). 17.3: `<mo-*>` is the default name — this turns on the
+ * `mo-*` names first (`defineMoAliases()`); the `<usa-*>` names stay registered as deprecated aliases.
  * Safe to call more than once and on the server (no-op without DOM).
  */
 function defineComponents(categories) {
+    defineMoAliases();
     if (canDefine())
         adoptVariants();
     (categories || Object.keys(BY_CATEGORY)).forEach((c) => BY_CATEGORY[c]?.());
@@ -10932,4 +11061,4 @@ const STYLE_BASE = new URL('../', import.meta.url).href;
 onDemandStyles(STYLE_BASE);
 
 export { ALL_TAGS, AMBIENT_EFFECTS, ANIM_ICONS, BRIDGE_PROTOCOL_VERSION, BUILTIN_EFFECTS, BUTTON_DEFORMS, CARD_EFFECTS, CLICK_EFFECTS, COMPONENT_CATEGORIES, CURSOR_MODES, EFFECT_KINDS, EFFECT_TRIGGERS, GL_FALLBACKS, JOINING_SCRIPT, LIVE_REGION_IDS, MASK_SHAPES, MORPH_ICONS, MOTION_SCALE, MOTION_SENSITIVITY, MOTION_SENSITIVITY_LEVELS, MOTION_TOKENS, PACKS, PACK_PRIMITIVES, PAGE_EFFECTS, PARTICLE_PRESETS, POST_EFFECTS, REVEAL_EFFECTS, SENSITIVITY_CSS, SHADERS, SPINNER_VARIANTS, SPRING_EFFECTS, SPRING_PRESETS, STATIC_ALTERNATIVES, STYLE_BASE, TIMELINE_PRESETS, VARIANTS, activeAnimations, adaptKeyframes, adoptVariants, animateWithMotion, animationBudget, announce, applyMotionTokens, applyNativeSettings, applyPack, auditMotionA11y, autoAnimate, autoDegrade, baselineReport, bindEffect, categoryForTag as categoryOf, configureComponents, connectNativeShell, countUp, createSpring, defineAccordion, defineAcrylic, defineAmbient, defineAnimIcon, defineAurora, defineAutoAnimate, defineAutoSkeleton, defineAvatarStack, defineBackToTop, defineBackgroundComponents, defineBadge, defineBlobs, defineBottomSheet, defineButton, defineCard, defineCardComponents, defineCardStack, defineCarousel3d, defineCheck, defineCheckbox, defineClick, defineClickComponents, defineComponents, defineCounter, defineCube, defineCursor, defineDepth, defineDepthComponents, defineDialog, defineDistort, defineDotNetwork, defineDoubleTap, defineDraggable, defineDraw, defineDrawer, defineFab, defineFeedbackComponents, defineFullpage, defineFx, defineFxComponents, defineGestureComponents, defineGlitch, defineGradientText, defineGrain, defineGridGlow, defineHandwriting, defineHold, defineIconMorph, defineInteractionComponents, defineLayoutComponents, defineLike, defineLiquid, defineLoadingBar, defineMagnetic, defineMarquee, defineMaskReveal, defineMasonry, defineMorph, defineMotionSwitch, defineNavbar, defineOverscroll, definePack, definePacksComponents, definePageComponents, defineParticles, definePhysicsComponents, definePinchZoom, definePopover, definePostFx, definePress, defineProgress, definePullRefresh, defineReveal, defineRevealComponents, defineRipple, defineScramble, defineScrollHighlight, defineScrollProgress, defineScrolly, defineShader, defineShimmerText, defineSkeleton, defineSlider, defineSpinner, defineSplash, defineSplitText, defineSpotlight, defineSpring, defineStagger, defineStickyStack, defineSvgComponents, defineSwipeable, defineTabs, defineTextComponents, defineTextRotate, defineTilt, defineTimeline, defineTimelineComponents, defineToaster, defineTransitionComponents, defineTypewriter, defineUiComponents, defineViewSwitch, defineWaterRipple, defineWaveText, defineWebglComponents, detectNativeHost, deviceTilt, drawLines, easeOutExpo, enableMpaTransitions, exportDesignTokens, flip, flipFrames, fluentPreset, flyToCart, fragmentSource, gesture, getEffect, getMotionIntensity, getMotionLevel, getMotionSensitivity, getMotionTokens, glFallbackCss, glGovernor, glQuad, graphemes, haptic, hasEffect, importDesignTokens, importMotionTokens, interpolatePath, isTrustedMessage, linearEasing, listEffects, liveRegion, loadCategoryStyles, loadedStyles, loadingBar, masonryLayout, mergeMotionTokens, morphPath, morphTo, motionAllowed, motionScale, motionToken, motionTokensToCss, motionTokensToJSON, motionTokensToVars, motionVar, onDemandStyles, onFrame, orientationToTilt, pageTransition, parseDuration, parseEasing, parseNativeSettings, pathsCompatible, pinchScale, playEffect, postFxShader, postToNative, prefersReducedMotion, projectInertia, readScrollProgress, registerBuiltinEffects, registerEffect, registerEffects, requestOrientationPermission, resolveDurationToken, resolveEasingToken, resolvePosition, resolveSpring, resolveTokenAliases, restoreMotionIntensity, restoreMotionSensitivity, revealKeyframes, rubberBand, schedulerStats, scrambleFrame, scrollToTarget, setAnimationBudget, setFrameBudget, setMotionIntensity, setMotionLevel, setMotionSensitivity, setVariant, sharedTransition, smoothScroll, snapTo, splitOrder, splitText, splitTimeline, words as splitWords, spring, springEasing, springEffectKeyframes, springSamples, staticAlternative, stepSpring, supportsLinearEasing, supportsNativeScrub, supportsOrientation, supportsViewTransitions, supportsWebGL, swipeDirection, themeTransition, timeline, toast, validateDesignTokens, viewTransition, warnBaseline, watchPowerSaver, withoutDeprecations };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/lite.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/components/lite.js.map

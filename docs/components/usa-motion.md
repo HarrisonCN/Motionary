@@ -1,4 +1,6 @@
-# `<usa-motion>` — Motion DSL
+# `<mo-motion>` — Motion DSL
+
+> Element name `<mo-motion>` (default since 17.3); the legacy name `<usa-motion>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -27,14 +29,16 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineMotion } from 'motionary/components/widgets';
 
-defineMotion(); // registers <usa-motion>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineMotion(); // registers <mo-motion>
 
 /* then use it in your HTML:
-<usa-motion rules="enter: fade-up 600ms ease-out stagger 80ms; hover: pop">
+<mo-motion rules="enter: fade-up 600ms ease-out stagger 80ms; hover: pop">
   <div class="card">One</div><div class="card">Two</div><div class="card">Three</div>
-</usa-motion>
+</mo-motion>
 
 <!-- or on any element, with applyMotion() from motionary/dsl -->
 <section data-motion="enter: fade-up 500ms; click: confetti count=40">…</section>

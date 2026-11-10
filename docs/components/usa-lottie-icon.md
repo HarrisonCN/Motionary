@@ -1,4 +1,6 @@
-# `<usa-lottie-icon>` — Animated icon set
+# `<mo-lottie-icon>` — Animated icon set
+
+> Element name `<mo-lottie-icon>` (default since 17.3); the legacy name `<usa-lottie-icon>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -23,12 +25,14 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineLottieIcon } from 'motionary/components/widgets';
 
-defineLottieIcon(); // registers <usa-lottie-icon>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineLottieIcon(); // registers <mo-lottie-icon>
 
 /* then use it in your HTML:
-<usa-lottie-icon name="heart" trigger="click" size="32" label="Like"></usa-lottie-icon>
-<usa-lottie-icon name="bell" trigger="hover"></usa-lottie-icon>
+<mo-lottie-icon name="heart" trigger="click" size="32" label="Like"></mo-lottie-icon>
+<mo-lottie-icon name="bell" trigger="hover"></mo-lottie-icon>
 */
 ```

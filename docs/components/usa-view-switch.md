@@ -1,4 +1,6 @@
-# `<usa-view-switch>` — View switch
+# `<mo-view-switch>` — View switch
+
+> Element name `<mo-view-switch>` (default since 17.3); the legacy name `<usa-view-switch>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -25,14 +27,16 @@ One view at a time with direction-aware slide, fade, scale or drill transitions 
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineViewSwitch } from 'motionary/components/transitions';
 
-defineViewSwitch(); // registers <usa-view-switch>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineViewSwitch(); // registers <mo-view-switch>
 
 /* then use it in your HTML:
-<usa-view-switch active="home">
+<mo-view-switch active="home">
   <section data-view="home">…</section>
   <section data-view="about">…</section>
-</usa-view-switch>
+</mo-view-switch>
 */
 ```

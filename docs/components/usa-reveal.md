@@ -1,4 +1,6 @@
-# `<usa-reveal>` — Reveal
+# `<mo-reveal>` — Reveal
+
+> Element name `<mo-reveal>` (default since 17.3); the legacy name `<usa-reveal>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -24,13 +26,15 @@ Fade, slide, zoom, blur or flip content in as it enters the viewport. 12 effects
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineReveal } from 'motionary/components/reveal';
 
-defineReveal(); // registers <usa-reveal>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineReveal(); // registers <mo-reveal>
 
 /* then use it in your HTML:
-<usa-reveal effect="fade-up" duration="700">
+<mo-reveal effect="fade-up" duration="700">
   <h2>Hello</h2>
-</usa-reveal>
+</mo-reveal>
 */
 ```

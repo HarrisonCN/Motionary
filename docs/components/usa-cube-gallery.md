@@ -1,4 +1,6 @@
-# `<usa-cube-gallery>` — Cube gallery
+# `<mo-cube-gallery>` — Cube gallery
+
+> Element name `<mo-cube-gallery>` (default since 17.3); the legacy name `<usa-cube-gallery>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -26,15 +28,17 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineCubeGallery } from 'motionary/components/widgets';
 
-defineCubeGallery(); // registers <usa-cube-gallery>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineCubeGallery(); // registers <mo-cube-gallery>
 
 /* then use it in your HTML:
-<usa-cube-gallery autoplay="4000" label="Products">
+<mo-cube-gallery autoplay="4000" label="Products">
   <img src="a.jpg" alt="…">
   <img src="b.jpg" alt="…">
   <img src="c.jpg" alt="…">
-</usa-cube-gallery>
+</mo-cube-gallery>
 */
 ```

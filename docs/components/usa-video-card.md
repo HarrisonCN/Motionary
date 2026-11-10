@@ -1,4 +1,6 @@
-# `<usa-video-card>` — Video card
+# `<mo-video-card>` — Video card
+
+> Element name `<mo-video-card>` (default since 17.3); the legacy name `<usa-video-card>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -26,15 +28,17 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineVideoCard } from 'motionary/components/widgets';
 
-defineVideoCard(); // registers <usa-video-card>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineVideoCard(); // registers <mo-video-card>
 
 /* then use it in your HTML:
-<usa-video-card duration="2:41">
+<mo-video-card duration="2:41">
   <img src="poster.jpg" alt="">
   <video src="preview.mp4" muted playsinline></video>
   <h3>Making of Motionary</h3>
-</usa-video-card>
+</mo-video-card>
 */
 ```

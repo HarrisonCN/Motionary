@@ -1,4 +1,6 @@
-# `<usa-native-preview>` — Native preview
+# `<mo-native-preview>` — Native preview
+
+> Element name `<mo-native-preview>` (default since 17.3); the legacy name `<usa-native-preview>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -24,13 +26,15 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineNativePreview } from 'motionary/components/widgets';
 
-defineNativePreview(); // registers <usa-native-preview>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineNativePreview(); // registers <mo-native-preview>
 
 /* then use it in your HTML:
-<usa-native-preview platform="ios" rules="enter: fade-up 500ms smooth stagger 80ms; click: pop">
+<mo-native-preview platform="ios" rules="enter: fade-up 500ms smooth stagger 80ms; click: pop">
   <div class="row">Inbox</div><div class="row">Starred</div>
-</usa-native-preview>
+</mo-native-preview>
 */
 ```

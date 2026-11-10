@@ -24,7 +24,7 @@ npm i motionary
 <script type="module">import ScrollAnimate from 'motionary'; ScrollAnimate.init();</script>
 ```
 
-Motionary 让内容在滚入视口时自然登场，并提供 <!--fact:public-->209<!--/fact--> 个开箱即用的 `<usa-*>` 动画自定义元素：卡片、按钮、物理效果、页面转场、生成式背景、Lottie、WebGL 等等。无论是纯 HTML，还是 React、Vue、Svelte、Solid、Angular，乃至 Electron、Tauri、WebView2 这类桌面 Web 视图，都能直接使用。运行时零依赖，每个入口都可 tree-shaking，并在 CI 中有固定的 gzip 体积预算；所有动画都遵循 `prefers-reduced-motion`。
+Motionary 让内容在滚入视口时自然登场，并提供 <!--fact:public-->213<!--/fact--> 个开箱即用的 `<mo-*>` 动画自定义元素：卡片、按钮、物理效果、页面转场、生成式背景、Lottie、WebGL 等等。无论是纯 HTML，还是 React、Vue、Svelte、Solid、Angular，乃至 Electron、Tauri、WebView2 这类桌面 Web 视图，都能直接使用。运行时零依赖，每个入口都可 tree-shaking，并在 CI 中有固定的 gzip 体积预算；所有动画都遵循 `prefers-reduced-motion`。
 
 各版本的更新说明见 [CHANGELOG.md](./CHANGELOG.md)。
 
@@ -37,7 +37,7 @@ Motionary 让内容在滚入视口时自然登场，并提供 <!--fact:public-->
 ## 特性
 
 - **214 个滚动显现预设**，分为 14 个系列（核心内置 33 个，`motionary/presets/extended` 再提供 181 个）：淡入、缩放、3D 翻转、clip-path 形状、模糊与遮罩、弹跳、景深、故障风，以及随滚动进度变化的 `scrub-*`。另有 `timeline()`、`staggerChildren()` 和 `parallax()`。
-- **<!--fact:public-->209<!--/fact--> 个 `<usa-*>` Web Components**：`motionary/components` 中按分类提供 <!--fact:core-->91<!--/fact--> 个核心组件，另有 <!--fact:widgets-->118<!--/fact--> 个小部件，每个都有独立入口（`motionary/widgets/<name>`）。此外还有 <!--fact:effects-->141<!--/fact--> 个效果，同样各有独立入口（`motionary/effects/<name>`）。统计口径见 [docs/components.md](./docs/components.md#how-components-are-counted)。
+- **<!--fact:public-->213<!--/fact--> 个 `<mo-*>` Web Components**：`motionary/components` 中按分类提供 <!--fact:core-->91<!--/fact--> 个核心组件，另有 <!--fact:widgets-->122<!--/fact--> 个小部件，每个都有独立入口（`motionary/widgets/<name>`）。此外还有 <!--fact:effects-->146<!--/fact--> 个效果，同样各有独立入口（`motionary/effects/<name>`）。统计口径见 [docs/components.md](./docs/components.md#how-components-are-counted)。
 - **Motion Core**：`motionary/core` 提供的 `createMotion()`，插件化引擎，gzip 后约 2.5 KB（预算 10 KB）。
 - **自研运行时**：`motionary/runtime`（ticker、tween、timeline）加 <!--fact:runtimeModules-->20<!--/fact--> 个模块，覆盖滚动场景、平滑滚动、文字拆分、SVG 变形、精灵图、GIF / APNG / WebP、Lottie 与 dotLottie、WebGL2、glTF / OBJ、2D 物理。模块分为三个等级，只为实际导入的部分付出体积。
 - **适配所有框架**：`motionary/react`、`motionary/vue`、`motionary/svelte`、`motionary/solid`、`motionary/angular`，以及元素封装 `motionary/components/react` · `vue` · `svelte` · `solid`。在服务端导入不会产生任何副作用。
@@ -60,7 +60,7 @@ npm i motionary
 <mo-reveal effect="fade-up"><h2>Hello</h2></mo-reveal>
 ```
 
-v17 的 CDN 包会自动注册 `<mo-*>` 标签。使用 ES 模块时，先从 `motionary/components/mo` 导入并调用 `defineMoAliases()`，再注册所需组件。两套标签都使用 `usa:*` 事件和 `--usa-*` CSS 自定义属性。[v17 迁移指南](./docs/migrating-to-v17.md)
+自 17.3 起 `<mo-*>` 是默认元素名。CDN 包、`defineComponents()` 与 `defineWidgets()` 会注册它，17.3 起的新组件也会自行注册；按单个组件或分类以 ES 模块引入时，请先从 `motionary/components/mo` 调用 `defineMoAliases()`（它不放进单组件入口，以保持固定体积预算）。`<usa-*>` 名称作为已弃用的别名继续可用（最早在未来某个大版本移除）；`npx -p motionary mo-codemod tags --write` 可在代码中批量改名。两套标签都使用 `usa:*` 事件和 `--usa-*` CSS 自定义属性。[v17 迁移指南](./docs/migrating-to-v17.md)
 
 也可以用 jsDelivr：`https://cdn.jsdelivr.net/npm/motionary@17/dist/…`。还在用 `use-scroll-animate`？它会继续以相同版本发布；要切换，只需在 import 和 URL 中替换包名（[详情](./docs/versions.md)）。
 
@@ -115,9 +115,9 @@ await motion.play(hero, 'dolly-in', { duration: 900 });   // 播放一次并等�
   defineComponents(); // 或使用 'motionary/components/lazy' 的 lazyDefine()：只加载页面上出现的标签
 </script>
 
-<usa-card effect="holo">…</usa-card>
-<usa-button deform="gooey">Buy</usa-button>
-<usa-fx effect="confetti" trigger="click"><button>Celebrate</button></usa-fx>
+<mo-card effect="holo">…</mo-card>
+<mo-button deform="gooey">Buy</mo-button>
+<mo-fx effect="confetti" trigger="click"><button>Celebrate</button></mo-fx>
 ```
 
 ### 框架
@@ -168,7 +168,7 @@ import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/cor
 import { provideUsa } from 'motionary/angular';
 // app.config.ts：providers: [provideUsa(APP_INITIALIZER, ['click', 'ui'])]   （要注册的分类）
 @Component({ standalone: true, schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  template: `<usa-checkbox label="Motion" [checked]="on" (usa:change)="on = $any($event).detail.checked"></usa-checkbox>` })
+  template: `<mo-checkbox label="Motion" [checked]="on" (usa:change)="on = $any($event).detail.checked"></mo-checkbox>` })
 export class Settings { on = false; }
 ```
 
@@ -200,10 +200,10 @@ defineScrollScene();  // 再注册依赖它的组件
 | 页面 | 用途 |
 |---|---|
 | [动画商店](https://harrisoncn.github.io/Motionary/showcase/) | 在桌面和手机尺寸下预览、调整并复制所有预设与效果 |
-| [组件库](https://harrisoncn.github.io/Motionary/showcase/components.html) | 每个 `<usa-*>` 元素的属性、前置依赖与等级 |
+| [组件库](https://harrisoncn.github.io/Motionary/showcase/components.html) | 每个 `<mo-*>` 元素的属性、前置依赖与等级 |
 | [组件演练场](https://harrisoncn.github.io/Motionary/showcase/run.html) | 每个组件都是一个完整可运行的页面：编辑、**Run**、**Copy** 或 **Download** —— 三者都使用编辑器中的当前代码（下载的文件可独立运行）。HTML (CDN) 运行整个页面，npm + bundler 通过 import map 运行模块；缺少前置模块或运行出错时显示具体修复说明；支持 `run.html#usa-tilt` 这样的深链接 |
-| [时间线编辑器](https://harrisoncn.github.io/Motionary/showcase/playground.html) | 可视化关键帧编辑，导出 `<usa-player>` 可播放的 JSON |
-| [滚动叙事](https://harrisoncn.github.io/Motionary/showcase/story.html) | `<usa-story>` 滚动叙事模板 |
+| [时间线编辑器](https://harrisoncn.github.io/Motionary/showcase/playground.html) | 可视化关键帧编辑，导出 `<mo-player>` 可播放的 JSON |
+| [滚动叙事](https://harrisoncn.github.io/Motionary/showcase/story.html) | `<mo-story>` 滚动叙事模板 |
 | [跨平台预览](https://harrisoncn.github.io/Motionary/showcase/xplat.html) | 同一个预设在 Web、小程序与鸿蒙 ArkUI 中的效果对比 |
 | [demo/index.html](./demo/index.html) | 所有预设，无需构建（本地打开即可） |
 
@@ -284,8 +284,8 @@ el.animate(intent.keyframes, intent.options);
 ## 稳定核心与实验性功能
 
 Motionary 的定位是 **零依赖、固定体积预算、无障碍动效**。稳定核心包括滚动 API（`motionary`）、`motionary/core`、
-`motionary/presets/*`、`motionary/motion`、`motionary/scene`、`motionary/runtime/*`、`<usa-*>` 组件与小部件、框架适配层和 CLI。
-不再计划新增组件或效果，后续版本只打磨已有功能。
+`motionary/presets/*`、`motionary/motion`、`motionary/scene`、`motionary/runtime/*`、`<mo-*>` 组件与小部件、框架适配层和 CLI。
+17.x 的小版本会新增组件与效果（零依赖、各自的体积预算、同样的无障碍约定），并持续打磨已有功能；不再计划新的大版本。
 
 **实验性**（次版本中可能变化，不在稳定性承诺之内）：Motion Studio（`motionary/studio/*`，包括 16.2 插件 API 与 16.3 性能预算）、
 AI 助手与 provider（`motionary/studio/ai`、`motionary/ai*`）、MCP 服务器（`motionary-mcp`）、Figma 插件，以及跨平台导出
@@ -294,7 +294,7 @@ AI 助手与 provider（`motionary/studio/ai`、`motionary/ai*`）、MCP 服务�
 ## 无障碍
 
 - 当系统设置为 `prefers-reduced-motion: reduce` 时，滚动显现会直接显示内容（没有入场、视差或 scrub 动效），组件也会切换到平静的状态（`staticAlternative()`、`adaptKeyframes()`）。
-- `motionary/components/a11y`：`setMotionSensitivity()` 让用户关闭闪烁、循环或视差；另有用于实时区域的 `announce()`，以及 `auditMotionA11y()` 和 `baselineReport()`。`<usa-motion-switch>` 是现成的用户动效开关。
+- `motionary/components/a11y`：`setMotionSensitivity()` 让用户关闭闪烁、循环或视差；另有用于实时区域的 `announce()`，以及 `auditMotionA11y()` 和 `baselineReport()`。`<mo-motion-switch>` 是现成的用户动效开关。
 - 所有元素遵循同一份[组件契约](./docs/component-contract.md)（键盘、焦点、事件、生命周期、减少动态效果），由 CI 中的 `npm run check:contract` 强制执行。
 - 更多：[docs/accessibility.md](./docs/accessibility.md)。
 
@@ -303,7 +303,7 @@ AI 助手与 provider（`motionary/studio/ai`、`motionary/ai*`）、MCP 服务�
 每个入口在 [`size-budget.json`](./size-budget.json) 中都有固定的 gzip 预算（共 401 项）。任何入口超出预算，CI 就会失败，预算也从不自动上调。
 
 <!-- size-table:start -->
-17.2.2 构建的实测值（minify + gzip），由 `scripts/size.mjs --report` 生成：
+17.3.0 构建的实测值（minify + gzip），由 `scripts/size.mjs --report` 生成：
 
 | 导入内容 | gzip | 上限 |
 |---|---:|---:|
@@ -315,9 +315,9 @@ AI 助手与 provider（`motionary/studio/ai`、`motionary/ai*`）、MCP 服务�
 | `motionary/presets/extended`（181 个预设） | 4.69 KB | 5.25 KB |
 | `motionary/runtime`（运行时核心） | 5.42 KB | 5.50 KB |
 | `motionary/components/reveal` | 4.47 KB | 5.00 KB |
-| `motionary/components/lite`（全部元素，CSS 按需） | 69.64 KB | 70.00 KB |
-| `motionary/components`（全部元素 + CSS） | 86.08 KB | 93.75 KB |
-| `dist/components.umd.js`（CDN，全部） | 110.09 KB | 115.75 KB |
+| `motionary/components/lite`（全部元素，CSS 按需） | 70.29 KB | 79.00 KB |
+| `motionary/components`（全部元素 + CSS） | 86.72 KB | 93.75 KB |
+| `dist/components.umd.js`（CDN，全部） | 110.11 KB | 115.75 KB |
 <!-- size-table:end -->
 
 默认不监听 scroll 事件（改用 IntersectionObserver），动画只作用于合成层属性（`transform`、`opacity`、`filter`、`clip-path`），导入本身没有副作用（[docs/tree-shaking.md](./docs/tree-shaking.md)）。每个 PR 还会在无头 Chrome 中测量首屏传输量、脚本耗时、GPU 资源与帧稳定性（[docs/perf-ci.md](./docs/perf-ci.md)）。source map 不随 npm 包发布：它们保存在打了标签的 git 树中（每个文件的 `sourceMappingURL` 指向那里），从 16.3 起也作为 `sourcemaps` 压缩包附在每个 GitHub Release 上（[docs/source-maps.md](./docs/source-maps.md)）。更多：[docs/performance.md](./docs/performance.md)。
@@ -345,7 +345,7 @@ npx usa-codemod-13 --write      # 一并改写，并把固定在 @10 / @11 / @12
 
 ## 版本与兼容性
 
-- **npm dist-tags：** `latest` 指向当前大版本的最新版本（<!--ver:version-->17.2.2<!--/ver-->；从 14.1 起次版本也会移动它）。每个次版本另有自己的标签 `v<major>-<minor>`（例如 `v15-0`），`v15-line` 跟随 15.x，`v14-lts` 为 14.9.x。`motionary` 与 `use-scroll-animate` 总是以相同版本一起发布。
+- **npm dist-tags：** `latest` 指向当前大版本的最新版本（<!--ver:version-->17.3.0<!--/ver-->；从 14.1 起次版本也会移动它）。每个次版本另有自己的标签 `v<major>-<minor>`（例如 `v15-0`），`v15-line` 跟随 15.x，`v14-lts` 为 14.9.x。`motionary` 与 `use-scroll-animate` 总是以相同版本一起发布。
 - **CDN：** URL 固定到大版本（`motionary@<!--ver:major-->17<!--/ver-->`）；固定到具体版本（`motionary@12.4.0`）的链接也继续可用。
 - **语义化版本：** 破坏性变更只出现在大版本，每次都附带升级指南和 codemod。弃用的内容会保留到下一个大版本，期间类型标记为 `@deprecated`，运行时不输出警告。
 - **各版本包含什么：** 每个组件和运行时模块的 `since` / `changed`（[docs/version-compat.md](./docs/version-compat.md)），以及逐项功能支持（[docs/compat-matrix.md](./docs/compat-matrix.md)）。

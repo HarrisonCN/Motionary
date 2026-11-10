@@ -12,7 +12,7 @@ registerPearlescent(); defineFx(); // <usa-fx effect="pearlescent">
 
 Notes: an effect entry imports its pack file (the effects of a pack share helpers), so its size is the pack’s, not the whole 6.x set. Runtime-powered widgets still need their prerequisites (`use(…)`, see the Requires badge). The group entries (`motionary/components/widgets`, `/fx2`, `/lite`) are unchanged.
 
-## Widgets (118)
+## Widgets (122)
 
 | Tag | Import | Define |
 |---|---|---|
@@ -131,11 +131,15 @@ Notes: an effect entry imports its pack file (the effects of a pack share helper
 | `<usa-token-editor>` | `motionary/widgets/token-editor` | `defineTokenEditor()` |
 | `<usa-physics-playground>` | `motionary/widgets/physics-playground` | `definePhysicsPlayground()` |
 | `<usa-motion-prompt>` | `motionary/widgets/motion-prompt` | `defineMotionPrompt()` |
+| `<usa-mega-menu>` | `motionary/widgets/mega-menu` | `defineMegaMenu()` |
+| `<usa-nav-flyout>` | `motionary/widgets/nav-flyout` | `defineNavFlyout()` |
+| `<usa-fullscreen-menu>` | `motionary/widgets/fullscreen-menu` | `defineFullscreenMenu()` |
+| `<usa-breadcrumbs>` | `motionary/widgets/breadcrumbs` | `defineBreadcrumbs()` |
 | `<usa-snap-carousel>` | `motionary/widgets/snap-carousel` | `defineSnapCarousel()` |
 | `<usa-gl-model>` | `motionary/widgets/gl-model` | `defineGlModel()` |
 | `<usa-dotlottie>` | `motionary/widgets/dotlottie` | `defineDotLottie()` |
 
-## Effects (141)
+## Effects (146)
 
 | Effect | Import | Register | Pack |
 |---|---|---|---|
@@ -280,3 +284,8 @@ Notes: an effect entry imports its pack file (the effects of a pack share helper
 | `underline-sweep` | `motionary/effects/underline-sweep` | `registerUnderlineSweep()` | safe |
 | `idle-reveal` | `motionary/effects/idle-reveal` | `registerIdleReveal()` | perf3 |
 | `gpu-lift` | `motionary/effects/gpu-lift` | `registerGpuLift()` | perf3 |
+| `text-roll` | `motionary/effects/text-roll` | `registerTextRoll()` | hover |
+| `image-swap` | `motionary/effects/image-swap` | `registerImageSwap()` | hover |
+| `focus-reveal` | `motionary/effects/focus-reveal` | `registerFocusReveal()` | hover |
+| `grid-warp` | `motionary/effects/grid-warp` | `registerGridWarp()` | hover |
+| `googly-eyes` | `motionary/effects/googly-eyes` | `registerGooglyEyes()` | hover |

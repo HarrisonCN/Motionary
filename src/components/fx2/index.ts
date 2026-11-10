@@ -37,6 +37,7 @@ import { GENART_FX, registerGenArtPack, PALETTES, seededRandom, meshGradient } f
 import { VIDEO_FX, registerVideoPack, scrollProgress, scrubVideo, frameSequence } from './video';
 import { SAFE_FX, registerSafePack, vestibularSafe, flashCount, isFlashSafe, applyMotionPreferences, loadMotionPreferences, MOTION_PREFS_KEY, DEFAULT_MOTION_PREFS } from './safemotion';
 import { PERF3_FX, registerPerf3Pack, runInWorker, offscreenRender, fpsMeter } from './perf3';
+import { HOVER_FX, registerHoverPack } from './hover';
 import { registerEffects } from '../fx/registry';
 
 export { GPU_FX, registerGpuPack, TEXT3_FX, registerTextPack, splitChars };
@@ -102,6 +103,8 @@ export { SAFE_FX, registerSafePack, vestibularSafe, flashCount, isFlashSafe, app
 
 export { PERF3_FX, registerPerf3Pack, runInWorker, offscreenRender, fpsMeter };
 
+export { HOVER_FX, registerHoverPack };
+
 /** The 6.x effect packs by name. */
 export const EFFECT_PACKS: Record<string, EffectDefinition[]> = {
   gpu: GPU_FX,
@@ -135,6 +138,7 @@ export const EFFECT_PACKS: Record<string, EffectDefinition[]> = {
   video: VIDEO_FX,
   safe: SAFE_FX,
   perf3: PERF3_FX,
+  hover: HOVER_FX,
 };
 
 /** Register every built-in effect pack — each one is a plugin (9.9; idempotent). */
@@ -170,6 +174,7 @@ export function registerAllPlugins(): void {
   registerVideoPack();
   registerSafePack();
   registerPerf3Pack();
+  registerHoverPack();
 }
 
 const PACK_SOURCES = EFFECT_PACKS;

@@ -1,4 +1,6 @@
-# `<usa-checkbox>` — Animated checkbox
+# `<mo-checkbox>` — Animated checkbox
+
+> Element name `<mo-checkbox>` (default since 17.3); the legacy name `<usa-checkbox>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -22,11 +24,13 @@ Form-associated checkbox: the box springs and the check draws itself; indetermin
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineCheckbox } from 'motionary/components/click';
 
-defineCheckbox(); // registers <usa-checkbox>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineCheckbox(); // registers <mo-checkbox>
 
 /* then use it in your HTML:
-<usa-checkbox name="terms">I agree</usa-checkbox>
+<mo-checkbox name="terms">I agree</mo-checkbox>
 */
 ```

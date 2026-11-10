@@ -1,4 +1,6 @@
-# `<usa-compare>` — Before / after compare
+# `<mo-compare>` — Before / after compare
+
+> Element name `<mo-compare>` (default since 17.3); the legacy name `<usa-compare>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -25,14 +27,16 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineCompare } from 'motionary/components/widgets';
 
-defineCompare(); // registers <usa-compare>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineCompare(); // registers <mo-compare>
 
 /* then use it in your HTML:
-<usa-compare labels="Before,After" intro>
+<mo-compare labels="Before,After" intro>
   <img src="before.jpg" alt="Before">
   <img src="after.jpg" alt="After">
-</usa-compare>
+</mo-compare>
 */
 ```

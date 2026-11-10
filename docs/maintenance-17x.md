@@ -6,7 +6,7 @@
 
 ## 执行原则
 
-- 延续 16.3 后的方向：维护已有能力；按本轮需求升级现有交互动效与组件，不增加新的大型运行时。
+- 2026-11-10 起：17.x 小版本按 [路线图](ROADMAP.md) 新增组件与特效（17.3 → 17.12），不增加新的大型运行时；`mo-*` 为默认标签，`usa-*` 为弃用别名。
 - 核心零运行时依赖；lite ≤ 71,680 B gzip；`components/mo` ≤ 2,048 B gzip；其他预算保持原值。
 - `usa-*` 与 `mo-*` 并存，事件继续使用 `usa:*`；Scene v3 保持兼容，保留已承诺的迁移路径。
 - Studio、插件 API、MCP、AI、Figma 和跨平台导出仍为实验性，不因修复或补测试就改称稳定。
@@ -63,6 +63,13 @@
 [PR #179](https://github.com/HarrisonCN/Motionary/pull/179) 涵盖组件输入、插件隔离、模板验签、帧调度、自定义元素升级、Worker 画布、路由和双包发布重试。三语 README 补充了 v17 标签用法。浏览器矩阵和包体积预算沿用现有门槛。
 
 后续在 17.x 单独验证标签注册和 CSS 迁移。先用混合标签、第三方样式表与层叠顺序的回归用例固定兼容行为，再衡量构建时生成样式的体积。拆包前先按 core、widgets、studio 分别检查导入路径、可独立发布的边界与迁移成本。
+
+## 17.3 导航 I 与 `mo-*` 默认标签
+
+- 新组件 `<mo-mega-menu>`、`<mo-nav-flyout>`、`<mo-fullscreen-menu>`、`<mo-breadcrumbs>`（展开式导航模式、键盘、reduced-motion，零依赖，自行注册 `mo-*`）。
+- 特效包 `motionary/fx/hover`：text-roll、image-swap、focus-reveal、grid-warp、googly-eyes。
+- `defineComponents()` / `defineWidgets()` 先启用 `mo-*`；单组件 / 分类入口保持原体积，需要时调用 `defineMoAliases()`。清单新增 `name`（`mo-*`），MCP 校验接受 `mo-*`，`mo-codemod tags` 批量改名。
+- 展示页：多选 → 复制为 AI 提示词 + 分享链接。
 
 ## 每轮完成条件
 

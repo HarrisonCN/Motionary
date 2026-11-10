@@ -1,4 +1,6 @@
-# `<usa-sticky-wall>` — Sticky-note wall
+# `<mo-sticky-wall>` — Sticky-note wall
+
+> Element name `<mo-sticky-wall>` (default since 17.3); the legacy name `<usa-sticky-wall>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -26,15 +28,17 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineStickyWall } from 'motionary/components/widgets';
 
-defineStickyWall(); // registers <usa-sticky-wall>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineStickyWall(); // registers <mo-sticky-wall>
 
 /* then use it in your HTML:
-<usa-sticky-wall label="Ideas">
+<mo-sticky-wall label="Ideas">
   <p>Ship 8.5 ✏️</p>
   <p data-color="pink">Call Mia</p>
   <p data-color="blue">Buy paper</p>
-</usa-sticky-wall>
+</mo-sticky-wall>
 */
 ```

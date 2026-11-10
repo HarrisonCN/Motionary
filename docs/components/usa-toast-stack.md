@@ -1,4 +1,6 @@
-# `<usa-toast-stack>` — Toast stack
+# `<mo-toast-stack>` — Toast stack
+
+> Element name `<mo-toast-stack>` (default since 17.3); the legacy name `<usa-toast-stack>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -24,13 +26,15 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineToastStack } from 'motionary/components/widgets';
 
-defineToastStack(); // registers <usa-toast-stack>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineToastStack(); // registers <mo-toast-stack>
 
 /* then use it in your HTML:
 <button data-usa-toast="Saved to your library" data-usa-toast-type="success">Save</button>
-<usa-toast-stack position="bottom-right" duration="4000" max="3"></usa-toast-stack>
+<mo-toast-stack position="bottom-right" duration="4000" max="3"></mo-toast-stack>
 <!-- or from JS: stackToast({ title: 'Done', message: 'Saved', type: 'success' }) -->
 */
 ```

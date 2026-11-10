@@ -1,4 +1,6 @@
-# `<usa-organic-card>` — Organic card
+# `<mo-organic-card>` — Organic card
+
+> Element name `<mo-organic-card>` (default since 17.3); the legacy name `<usa-organic-card>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -24,13 +26,15 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineOrganicCard } from 'motionary/components/widgets';
 
-defineOrganicCard(); // registers <usa-organic-card>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineOrganicCard(); // registers <mo-organic-card>
 
 /* then use it in your HTML:
-<usa-organic-card tint="ocean">
+<mo-organic-card tint="ocean">
   <h3>Deep sea</h3><p>Content…</p>
-</usa-organic-card>
+</mo-organic-card>
 */
 ```

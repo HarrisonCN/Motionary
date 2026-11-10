@@ -1,4 +1,6 @@
-# `<usa-hero-video>` — Hero video
+# `<mo-hero-video>` — Hero video
+
+> Element name `<mo-hero-video>` (default since 17.3); the legacy name `<usa-hero-video>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -25,14 +27,16 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineHeroVideo } from 'motionary/components/widgets';
 
-defineHeroVideo(); // registers <usa-hero-video>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineHeroVideo(); // registers <mo-hero-video>
 
 /* then use it in your HTML:
-<usa-hero-video label="Welcome" poster="poster.jpg">
+<mo-hero-video label="Welcome" poster="poster.jpg">
   <video src="hero.mp4" autoplay muted loop playsinline></video>
   <h1>Motion, declared.</h1>
-</usa-hero-video>
+</mo-hero-video>
 */
 ```

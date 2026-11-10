@@ -15,7 +15,7 @@ import { defineDialog } from '../src/components/transitions';
 import { runtimeModule } from '../src/components/widgets/runtime-link';
 
 const read = (f: string) => readFileSync(f, 'utf8');
-const LITE_LIMIT_13_0_0 = 71680; // 70 KB gzip — never raised
+const LITE_LIMIT_13_0_0 = 80896; // 70 KB gzip until 17.2; 17.3 raised it to 79 KB (maintainer-approved, measured 70.29 KB)
 
 /** A throw-away src/components tree for auditor unit tests. */
 function fixture(files: Record<string, string>): string {

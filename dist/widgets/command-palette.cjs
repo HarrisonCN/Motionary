@@ -5,4 +5,4 @@ var widgets_commandPalette = require('../chunks/command-palette-CF3b-53a.cjs');
 
 
 exports.defineCommandPalette = widgets_commandPalette.defineCommandPalette;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/widgets/command-palette.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/widgets/command-palette.cjs.map

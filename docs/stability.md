@@ -1,7 +1,9 @@
 # Stability: stable core, experimental surfaces and LTS (17.0)
 
-Motionary's focus is **zero dependencies, fixed size budgets and accessible motion**. Since 16.3 the project adds no
-new components or effects; releases improve, document and test what exists. Breaking changes go through a minor
+Motionary's focus is **zero dependencies, fixed size budgets and accessible motion**. From 16.3 to 17.2 the project added
+no new components or effects. Since 17.3 (maintainer's decision, 2026-11-10) 17.x minors add components and effect packs
+again — each with its own size budget line, tests and the same accessibility contract — and `<mo-*>` is the default element
+name (`<usa-*>` is a deprecated alias kept through 17.x). Breaking changes go through a minor
 release with a deprecation first. 17.0 is the last planned major: after it, changes ship as minors with deprecations,
 and anything deprecated stays until a future major at the earliest.
 

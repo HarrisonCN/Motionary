@@ -1,4 +1,6 @@
-# `<usa-badge>` — Badge
+# `<mo-badge>` — Badge
+
+> Element name `<mo-badge>` (default since 17.3); the legacy name `<usa-badge>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -24,13 +26,15 @@ Count or dot badge that bumps with a spring when its value changes; 99+ capping,
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineBadge } from 'motionary/components/ui';
 
-defineBadge(); // registers <usa-badge>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineBadge(); // registers <mo-badge>
 
 /* then use it in your HTML:
-<usa-badge value="3">
+<mo-badge value="3">
   <button>Inbox</button>
-</usa-badge>
+</mo-badge>
 */
 ```

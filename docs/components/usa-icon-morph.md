@@ -1,4 +1,6 @@
-# `<usa-icon-morph>` — Icon morph
+# `<mo-icon-morph>` — Icon morph
+
+> Element name `<mo-icon-morph>` (default since 17.3); the legacy name `<usa-icon-morph>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -23,12 +25,14 @@ Icons that morph point-by-point with a spring: play ↔ pause, menu ↔ close, p
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineIconMorph } from 'motionary/components/click';
 
-defineIconMorph(); // registers <usa-icon-morph>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineIconMorph(); // registers <mo-icon-morph>
 
 /* then use it in your HTML:
-<usa-icon-morph icons="play,pause" labels="Play,Pause" toggle></usa-icon-morph>
-<usa-icon-morph icons="menu,close" labels="Open menu,Close menu" toggle></usa-icon-morph>
+<mo-icon-morph icons="play,pause" labels="Play,Pause" toggle></mo-icon-morph>
+<mo-icon-morph icons="menu,close" labels="Open menu,Close menu" toggle></mo-icon-morph>
 */
 ```

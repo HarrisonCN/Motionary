@@ -42,7 +42,8 @@ export function loadManifest(path = process.env.MOTIONARY_MANIFEST || join(HERE,
 const norm = (s) => String(s || '').toLowerCase();
 const tagOf = (s) => {
   const t = norm(s).trim().replace(/^<|\/?>$/g, '');
-  return t.startsWith('usa-') ? t : `usa-${t}`;
+  // 17.3: <mo-*> is the default name; the catalog is keyed by the legacy usa-* tag
+  return t.startsWith('usa-') ? t : t.startsWith('mo-') ? `usa-${t.slice(3)}` : `usa-${t}`;
 };
 // 2.0: a requirement id is a motionary/runtime module or (10.6+) an official runtime (kind 'peer', e.g. rive → @rive-app/canvas)
 let MOD = new Map();
@@ -165,7 +166,7 @@ export function scaffold(m, tags, framework = 'esm') {
   });
   // 13.2: elements an example uses besides its own (e.g. <usa-add-to-cart> flies into a <usa-cart-drawer>) are registered too
   const comps = [...primary];
-  for (const c of primary) for (const [, t] of String(c.example).matchAll(/<(usa-[a-z0-9-]+)/g)) { const k = findComponent(m, t); if (k && !comps.includes(k)) comps.push(k); }
+  for (const c of primary) for (const [, t] of String(c.example).matchAll(/<((?:usa|mo)-[a-z0-9-]+)/g)) { const k = findComponent(m, t); if (k && !comps.includes(k)) comps.push(k); }
   const req = [...new Set(comps.flatMap((c) => c.requires))].filter((r) => !isPeer(r));
   const peerIds = [...new Set(comps.flatMap((c) => c.requires))].filter(isPeer);
   const peers = peerIds.map(reqLabel);
@@ -421,7 +422,7 @@ export function validateSnippet(m, code) {
   indexModules(m);
   const src = String(code || '');
   const errors = [], warnings = [];
-  const tags = [...src.matchAll(/<(usa-[a-z0-9-]+)([^>]*)>/gi)];
+  const tags = [...src.matchAll(/<((?:usa|mo)-[a-z0-9-]+)([^>]*)>/gi)];
   const used = new Map();
   for (const [, rawTag, rawAttrs] of tags) {
     const tag = rawTag.toLowerCase();

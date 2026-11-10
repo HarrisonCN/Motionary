@@ -1,4 +1,6 @@
-# `<usa-draw>` — Line drawing
+# `<mo-draw>` — Line drawing
+
+> Element name `<mo-draw>` (default since 17.3); the legacy name `<usa-draw>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -24,13 +26,15 @@ Every stroke of the SVG inside draws itself — on view, hover, click or scrubbe
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineDraw } from 'motionary/components/svg';
 
-defineDraw(); // registers <usa-draw>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineDraw(); // registers <mo-draw>
 
 /* then use it in your HTML:
-<usa-draw duration="1800" stagger="0.3" fill>
+<mo-draw duration="1800" stagger="0.3" fill>
   <svg viewBox="0 0 100 40">…</svg>
-</usa-draw>
+</mo-draw>
 */
 ```

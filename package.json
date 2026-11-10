@@ -1,7 +1,7 @@
 {
   "name": "motionary",
-  "version": "17.2.2",
-  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 209 animated Web Components (91 core, 118 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
+  "version": "17.3.0",
+  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 213 animated Web Components (91 core, 122 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
   "unpkg": "dist/index.umd.js",
@@ -246,6 +246,16 @@
       "require": {
         "types": "./dist/components/fx-focus.d.cts",
         "default": "./dist/components/fx-focus.cjs"
+      }
+    },
+    "./fx/hover": {
+      "import": {
+        "types": "./dist/components/fx-hover.d.ts",
+        "default": "./dist/components/fx-hover.js"
+      },
+      "require": {
+        "types": "./dist/components/fx-hover.d.cts",
+        "default": "./dist/components/fx-hover.cjs"
       }
     },
     "./fx/marketplace": {
@@ -1548,6 +1558,16 @@
       "require": {
         "types": "./dist/components/fx-perf.d.cts",
         "default": "./dist/components/fx-perf.cjs"
+      }
+    },
+    "./components/fx-hover": {
+      "import": {
+        "types": "./dist/components/fx-hover.d.ts",
+        "default": "./dist/components/fx-hover.js"
+      },
+      "require": {
+        "types": "./dist/components/fx-hover.d.cts",
+        "default": "./dist/components/fx-hover.cjs"
       }
     },
     "./components/native": {
@@ -3040,6 +3060,46 @@
         "default": "./dist/widgets/motion-prompt.cjs"
       }
     },
+    "./widgets/mega-menu": {
+      "import": {
+        "types": "./dist/widgets/mega-menu.d.ts",
+        "default": "./dist/widgets/mega-menu.js"
+      },
+      "require": {
+        "types": "./dist/widgets/mega-menu.d.cts",
+        "default": "./dist/widgets/mega-menu.cjs"
+      }
+    },
+    "./widgets/nav-flyout": {
+      "import": {
+        "types": "./dist/widgets/nav-flyout.d.ts",
+        "default": "./dist/widgets/nav-flyout.js"
+      },
+      "require": {
+        "types": "./dist/widgets/nav-flyout.d.cts",
+        "default": "./dist/widgets/nav-flyout.cjs"
+      }
+    },
+    "./widgets/fullscreen-menu": {
+      "import": {
+        "types": "./dist/widgets/fullscreen-menu.d.ts",
+        "default": "./dist/widgets/fullscreen-menu.js"
+      },
+      "require": {
+        "types": "./dist/widgets/fullscreen-menu.d.cts",
+        "default": "./dist/widgets/fullscreen-menu.cjs"
+      }
+    },
+    "./widgets/breadcrumbs": {
+      "import": {
+        "types": "./dist/widgets/breadcrumbs.d.ts",
+        "default": "./dist/widgets/breadcrumbs.js"
+      },
+      "require": {
+        "types": "./dist/widgets/breadcrumbs.d.cts",
+        "default": "./dist/widgets/breadcrumbs.cjs"
+      }
+    },
     "./widgets/snap-carousel": {
       "import": {
         "types": "./dist/widgets/snap-carousel.d.ts",
@@ -4478,6 +4538,56 @@
       "require": {
         "types": "./dist/effects/gpu-lift.d.cts",
         "default": "./dist/effects/gpu-lift.cjs"
+      }
+    },
+    "./effects/text-roll": {
+      "import": {
+        "types": "./dist/effects/text-roll.d.ts",
+        "default": "./dist/effects/text-roll.js"
+      },
+      "require": {
+        "types": "./dist/effects/text-roll.d.cts",
+        "default": "./dist/effects/text-roll.cjs"
+      }
+    },
+    "./effects/image-swap": {
+      "import": {
+        "types": "./dist/effects/image-swap.d.ts",
+        "default": "./dist/effects/image-swap.js"
+      },
+      "require": {
+        "types": "./dist/effects/image-swap.d.cts",
+        "default": "./dist/effects/image-swap.cjs"
+      }
+    },
+    "./effects/focus-reveal": {
+      "import": {
+        "types": "./dist/effects/focus-reveal.d.ts",
+        "default": "./dist/effects/focus-reveal.js"
+      },
+      "require": {
+        "types": "./dist/effects/focus-reveal.d.cts",
+        "default": "./dist/effects/focus-reveal.cjs"
+      }
+    },
+    "./effects/grid-warp": {
+      "import": {
+        "types": "./dist/effects/grid-warp.d.ts",
+        "default": "./dist/effects/grid-warp.js"
+      },
+      "require": {
+        "types": "./dist/effects/grid-warp.d.cts",
+        "default": "./dist/effects/grid-warp.cjs"
+      }
+    },
+    "./effects/googly-eyes": {
+      "import": {
+        "types": "./dist/effects/googly-eyes.d.ts",
+        "default": "./dist/effects/googly-eyes.js"
+      },
+      "require": {
+        "types": "./dist/effects/googly-eyes.d.cts",
+        "default": "./dist/effects/googly-eyes.cjs"
       }
     },
     "./components.css": "./dist/components.css",

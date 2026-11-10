@@ -1,4 +1,6 @@
-# `<usa-motion-inspector>` — Motion inspector
+# `<mo-motion-inspector>` — Motion inspector
+
+> Element name `<mo-motion-inspector>` (default since 17.3); the legacy name `<usa-motion-inspector>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -22,11 +24,13 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineMotionInspector } from 'motionary/components/widgets';
 
-defineMotionInspector(); // registers <usa-motion-inspector>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineMotionInspector(); // registers <mo-motion-inspector>
 
 /* then use it in your HTML:
-<usa-motion-inspector scope="#app" interval="500"></usa-motion-inspector>
+<mo-motion-inspector scope="#app" interval="500"></mo-motion-inspector>
 */
 ```

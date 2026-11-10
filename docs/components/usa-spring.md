@@ -1,4 +1,6 @@
-# `<usa-spring>` — Spring effects
+# `<mo-spring>` — Spring effects
+
+> Element name `<mo-spring>` (default since 17.3); the legacy name `<usa-spring>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -27,16 +29,18 @@ bounce-in, pop and drop entrances with true spring timing (CSS linear() easing),
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineSpring } from 'motionary/components/physics';
 
-defineSpring(); // registers <usa-spring>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineSpring(); // registers <mo-spring>
 
 /* then use it in your HTML:
-<usa-spring effect="bounce-in" preset="bouncy">
+<mo-spring effect="bounce-in" preset="bouncy">
   <div class="card">Hello</div>
-</usa-spring>
-<usa-spring effect="jelly" trigger="click">
+</mo-spring>
+<mo-spring effect="jelly" trigger="click">
   <button>Tap me</button>
-</usa-spring>
+</mo-spring>
 */
 ```

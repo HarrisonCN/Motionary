@@ -1,4 +1,6 @@
-# `<usa-fx>` — Attention seekers
+# `<mo-fx>` — Attention seekers
+
+> Element name `<mo-fx>` (default since 17.3); the legacy name `<usa-fx>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -24,14 +26,16 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineFx } from 'motionary/components/fx';
 
-defineFx(); // registers <usa-fx>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineFx(); // registers <mo-fx>
 
 /* then use it in your HTML:
-<usa-fx effect="jelly" trigger="click">
+<mo-fx effect="jelly" trigger="click">
   <button>Press me</button>
-</usa-fx>
+</mo-fx>
 */
 ```
 
@@ -848,4 +852,14 @@ Every timeline preset is also an enter effect: trigger="enter" plays it when the
 ```html
 <usa-fx effect="gpu-lift" trigger="hover"><article class="card">…</article></usa-fx>
 <usa-fx effect="idle-reveal" trigger="enter"><aside>…</aside></usa-fx>
+```
+
+### Hover pack: text roll, image swap, focus reveal, grid warp, googly eyes
+
+17.3: five persistent hover / focus effects — text-roll (letters roll up and a copy rolls in), image-swap (a second picture opens as a circle from the pointer), focus-reveal (a focus frame sharpens each word), grid-warp (the element shears toward the pointer over a grid) and googly-eyes (pupils follow the pointer). Screen readers get the original text; reduced motion keeps text static.
+
+```html
+<mo-fx effect="text-roll" trigger="load">
+  <a href="/work">View work</a>
+</mo-fx>
 ```

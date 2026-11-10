@@ -14,7 +14,9 @@ const list = (xs, f = (x) => '`' + x + '`') => (xs?.length ? xs.map(f).join(', '
 
 export function componentPage(c, m) {
   const out = [
-    `# \`<${c.tag}>\` — ${c.title}`,
+    `# \`<${c.name || c.tag}>\` — ${c.title}`,
+    '',
+    `> Element name \`<${c.name || c.tag}>\` (default since 17.3); the legacy name \`<${c.tag}>\` is a deprecated alias that keeps working. With a single-component or category import call \`defineMoAliases()\` from \`motionary/components/mo\` first unless the component registers its \`mo-*\` name itself (17.3+ widgets).`,
     '',
     `> Generated from the source and the gallery catalog by \`scripts/gen-component-docs.mjs\` (same data as [components.json](${m.homepage}components.json) and [llms-full.txt](${m.homepage}llms-full.txt)).`,
     '',
@@ -55,7 +57,7 @@ export function generateComponentDocs() {
     '',
     'One page per `<usa-*>` element, generated from the source. Machine-readable: `motionary/tooling/manifest.json` · Pages `/components.json` · `/llms.txt` · `/llms-full.txt`. How to use these with an AI assistant: [AGENTS.md](../../AGENTS.md) and [the prompt guide](../ai-prompt-guide.md).',
     '',
-    ...cats.flatMap((cat) => [`## ${cat}`, '', ...m.components.filter((c) => c.category === cat).map((c) => `- [\`<${c.tag}>\`](${slug(c.tag)}.md) — ${c.title}${c.requires.length ? ` · ${c.prerequisites.badge}` : ''}`), '']),
+    ...cats.flatMap((cat) => [`## ${cat}`, '', ...m.components.filter((c) => c.category === cat).map((c) => `- [\`<${c.name || c.tag}>\`](${slug(c.tag)}.md) — ${c.title}${c.requires.length ? ` · ${c.prerequisites.badge}` : ''}`), '']),
   ].join('\n');
   return files;
 }

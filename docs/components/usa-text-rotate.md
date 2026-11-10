@@ -1,4 +1,6 @@
-# `<usa-text-rotate>` — Rotating words
+# `<mo-text-rotate>` — Rotating words
+
+> Element name `<mo-text-rotate>` (default since 17.3); the legacy name `<usa-text-rotate>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -22,11 +24,13 @@ Build <usa-text-rotate words="fast|tiny|typed"></usa-text-rotate> apps
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineTextRotate } from 'motionary/components/text';
 
-defineTextRotate(); // registers <usa-text-rotate>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineTextRotate(); // registers <mo-text-rotate>
 
 /* then use it in your HTML:
-Build <usa-text-rotate words="fast|tiny|typed"></usa-text-rotate> apps
+Build <mo-text-rotate words="fast|tiny|typed"></mo-text-rotate> apps
 */
 ```

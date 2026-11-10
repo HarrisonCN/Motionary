@@ -1,4 +1,6 @@
-# `<usa-timeline>` — Timeline
+# `<mo-timeline>` — Timeline
+
+> Element name `<mo-timeline>` (default since 17.3); the legacy name `<usa-timeline>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -26,15 +28,17 @@ Every data-tl child becomes a step in document order. data-at ('-=200', '<', 'la
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineTimeline } from 'motionary/components/timeline';
 
-defineTimeline(); // registers <usa-timeline>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineTimeline(); // registers <mo-timeline>
 
 /* then use it in your HTML:
-<usa-timeline overlap="150">
+<mo-timeline overlap="150">
   <h2 data-tl="fade-up">Title</h2>
   <p data-tl="blur">Subtitle</p>
   <button data-tl="scale" data-at="<+=100">CTA</button>
-</usa-timeline>
+</mo-timeline>
 */
 ```

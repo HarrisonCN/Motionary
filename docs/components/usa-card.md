@@ -1,4 +1,6 @@
-# `<usa-card>` — Card
+# `<mo-card>` — Card
+
+> Element name `<mo-card>` (default since 17.3); the legacy name `<usa-card>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -32,22 +34,24 @@ Ten card effects you can combine (effect="lift sheen"): flip (hover or click, x/
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineCard } from 'motionary/components/cards';
 
-defineCard(); // registers <usa-card>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineCard(); // registers <mo-card>
 
 /* then use it in your HTML:
-<usa-card effect="lift sheen">
+<mo-card effect="lift sheen">
   <h3>Pro plan</h3>
-</usa-card>
-<usa-card effect="flip" trigger="click">
+</mo-card>
+<mo-card effect="flip" trigger="click">
   <div data-front>Front</div>
   <div data-back>Back</div>
-</usa-card>
-<usa-card effect="expand">
+</mo-card>
+<mo-card effect="expand">
   <h3>Title</h3>
   <div data-detail>Long text… <button data-close>Close</button></div>
-</usa-card>
+</mo-card>
 */
 ```
 

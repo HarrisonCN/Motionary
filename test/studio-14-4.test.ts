@@ -64,7 +64,7 @@ describe('14.4 Motion Studio: entry and packaging', () => {
       expect(now, `budget line kept: ${b.name}`).toBeTruthy();
       expect(now!.limit, `budget not raised: ${b.name}`).toBeLessThanOrEqual(b.limit);
     }
-    expect(budgets.find((b) => /lite/.test(b.name) && b.limit === 70 * 1024), 'lite 70 KB budget').toBeTruthy();
+    expect(budgets.find((b) => /lite/.test(b.name) && b.limit === 79 * 1024), 'lite budget (17.3: 70 → 79 KB)').toBeTruthy();
   });
   it('zero runtime dependencies; version 14.4.x; docs (incl. the real-device checklist), changelog, roadmap', () => {
     expect(pkg.dependencies ?? {}).toEqual({});

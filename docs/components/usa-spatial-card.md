@@ -1,4 +1,6 @@
-# `<usa-spatial-card>` — Spatial card
+# `<mo-spatial-card>` — Spatial card
+
+> Element name `<mo-spatial-card>` (default since 17.3); the legacy name `<usa-spatial-card>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -26,15 +28,17 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineSpatialCard } from 'motionary/components/widgets';
 
-defineSpatialCard(); // registers <usa-spatial-card>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineSpatialCard(); // registers <mo-spatial-card>
 
 /* then use it in your HTML:
-<usa-spatial-card>
+<mo-spatial-card>
   <h3 data-depth="2">Photos</h3>
   <p data-depth="1">Spatial window</p>
   <nav slot="ornament"><button>⟲</button><button>♡</button></nav>
-</usa-spatial-card>
+</mo-spatial-card>
 */
 ```

@@ -1,4 +1,6 @@
-# `<usa-gen-art>` — Generative artwork
+# `<mo-gen-art>` — Generative artwork
+
+> Element name `<mo-gen-art>` (default since 17.3); the legacy name `<usa-gen-art>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -22,11 +24,13 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineGenArt } from 'motionary/components/widgets';
 
-defineGenArt(); // registers <usa-gen-art>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineGenArt(); // registers <mo-gen-art>
 
 /* then use it in your HTML:
-<usa-gen-art art="flow" seed="7" palette="ocean" style="height:240px"></usa-gen-art>
+<mo-gen-art art="flow" seed="7" palette="ocean" style="height:240px"></mo-gen-art>
 */
 ```

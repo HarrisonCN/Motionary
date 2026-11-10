@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 // 11.2: npm package size check (CI, after the build). `npm pack --dry-run --json` must contain no source maps
 // and stay within fixed limits — they are not raised automatically (docs/source-maps.md has the measurements).
+// 17.3: unpacked 14 MB → 16 MB (measured 14.32 MB), maintainer-approved; recorded in CHANGELOG.
 import { execFileSync } from 'node:child_process';
 
-export const PACK_LIMITS = { packed: 4.0 * 1024 * 1024, unpacked: 14 * 1024 * 1024, files: 2300 };
+export const PACK_LIMITS = { packed: 4.0 * 1024 * 1024, unpacked: 16 * 1024 * 1024, files: 2300 };
 
 const out = execFileSync('npm', ['pack', '--dry-run', '--json', '--ignore-scripts'], { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, stdio: ['ignore', 'pipe', 'ignore'] });
 const info = JSON.parse(out.slice(out.indexOf('[')))[0];

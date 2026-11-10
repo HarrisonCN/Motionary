@@ -1,4 +1,6 @@
-# `<usa-accordion>` — Accordion
+# `<mo-accordion>` — Accordion
+
+> Element name `<mo-accordion>` (default since 17.3); the legacy name `<usa-accordion>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -25,14 +27,16 @@ Smooth expand / collapse for native <details> — semantics, keyboard and find-i
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineAccordion } from 'motionary/components/transitions';
 
-defineAccordion(); // registers <usa-accordion>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineAccordion(); // registers <mo-accordion>
 
 /* then use it in your HTML:
-<usa-accordion>
+<mo-accordion>
   <details><summary>Shipping</summary><p>…</p></details>
   <details><summary>Returns</summary><p>…</p></details>
-</usa-accordion>
+</mo-accordion>
 */
 ```

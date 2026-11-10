@@ -1,4 +1,6 @@
-# `<usa-grain>` — Film grain
+# `<mo-grain>` — Film grain
+
+> Element name `<mo-grain>` (default since 17.3); the legacy name `<usa-grain>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -24,13 +26,15 @@ An SVG-noise grain overlay — no image to ship. animated makes it jitter like f
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineGrain } from 'motionary/components/background';
 
-defineGrain(); // registers <usa-grain>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineGrain(); // registers <mo-grain>
 
 /* then use it in your HTML:
-<usa-grain animated opacity="0.15">
+<mo-grain animated opacity="0.15">
   <img src="hero.jpg" alt="">
-</usa-grain>
+</mo-grain>
 */
 ```

@@ -1,4 +1,6 @@
-# `<usa-particles>` — Particles
+# `<mo-particles>` — Particles
+
+> Element name `<mo-particles>` (default since 17.3); the legacy name `<usa-particles>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -22,11 +24,13 @@ A canvas constellation that drifts away from the pointer. Runs only while visibl
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineParticles } from 'motionary/components/background';
 
-defineParticles(); // registers <usa-particles>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineParticles(); // registers <mo-particles>
 
 /* then use it in your HTML:
-<usa-particles count="80" links="120" interactive></usa-particles>
+<mo-particles count="80" links="120" interactive></mo-particles>
 */
 ```

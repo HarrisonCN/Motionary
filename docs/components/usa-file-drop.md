@@ -1,4 +1,6 @@
-# `<usa-file-drop>` — File drop zone
+# `<mo-file-drop>` — File drop zone
+
+> Element name `<mo-file-drop>` (default since 17.3); the legacy name `<usa-file-drop>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -26,11 +28,13 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineFileDrop } from 'motionary/components/widgets';
 
-defineFileDrop(); // registers <usa-file-drop>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineFileDrop(); // registers <mo-file-drop>
 
 /* then use it in your HTML:
-<usa-file-drop multiple accept="image/*" label="Drop images or browse"></usa-file-drop>
+<mo-file-drop multiple accept="image/*" label="Drop images or browse"></mo-file-drop>
 */
 ```

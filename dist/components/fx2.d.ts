@@ -895,6 +895,27 @@ declare const PERF3_FX: EffectDefinition[];
 /** Register idle-reveal and gpu-lift (9.6). */
 declare function registerPerf3Pack(): void;
 
+/**
+ * 17.3 — Hover pack (`motionary/fx/hover` = `motionary/components/fx-hover`), registered through `registerEffect()`.
+ * Each effect is persistent: run it once (`bindEffect(el, name, { trigger: 'load' })`, `<usa-fx trigger="load">` or
+ * `playEffect`) and it reacts to pointer hover and keyboard focus until the returned cleanup runs. Running it again on
+ * the same element (for example with `trigger: 'hover'`) only replays its enter state.
+ *
+ * - `text-roll` — every letter rolls up and is replaced by a copy rolling in from below, one after another.
+ * - `image-swap` — a second picture (`src`, or the element's second `<img>`) opens as a circle from the pointer.
+ * - `focus-reveal` — the words start soft; a focus frame travels across them and sharpens each one.
+ * - `grid-warp` — the element shears and tilts toward the pointer over a faint grid, then springs back.
+ * - `googly-eyes` — two eyes pop up on the element and their pupils follow the pointer.
+ *
+ * Text effects keep a visually hidden copy of the original text for screen readers; every added layer is
+ * `aria-hidden` and removed by the cleanup. Reduced motion: text effects leave the text static, `image-swap`
+ * crossfades, `grid-warp` and `googly-eyes` do nothing.
+ */
+
+declare const HOVER_FX: EffectDefinition[];
+/** Register the 17.3 hover pack (idempotent). */
+declare function registerHoverPack(): void;
+
 interface GenFrame {
     ctx: CanvasRenderingContext2D;
     /** CSS-pixel size of the canvas. */
@@ -982,5 +1003,5 @@ declare function effectPlugins(): MotionPlugin[];
 /** Register plugins (each once); returns the names of their effects (9.9). */
 declare function usePlugins(...plugins: MotionPlugin[]): string[];
 
-export { AI_FX, CAMERA_MOVES, CHART_FX, CINEMA_FX, CYBER_FX, DEFAULT_MOTION_PREFS, DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GENART_FX, GEO_FX, GESTURE3_FX, GLSL_HEAD, GPU_FX, LIGHT_FX, LOTTIE_FX, MORPH2_FX, MOTION_PREFS_KEY, MUSIC_FX, ORGANIC_FX, PALETTES, PAPER_FX, PERF3_FX, PHYSICS2_FX, RETRO_FX, SAFE_FX, SHOP_FX, SOCIAL_FX, SPATIAL_FX, SURFACE_FX, SURFACE_THEMES, TEXT3_FX, TRANSITIONS2_FX, VIDEO_FX, VerletWorld, WEATHER_FX, WGSL_HEAD, applyMotionPreferences, applySurfaceTheme, arcPath, blobRadius, cameraFrame, crossDocumentTransitions, decodeFrame, definePlugin, effectPlugins, fanAngles, fieldFallback, flashCount, fpsMeter, frameSequence, glslToWgsl, isFlashSafe, loadEffectPack, loadMotionPreferences, lottieToKeyframes, lottieToSvg, meshGradient, musicSample, offscreenRender, orientationToTilt, packManifest, pageTransition, paperRandom, parseFigure, pinchAngle, pinchScale, pixelSteps, pointsToPath, register3dPack, registerAiPack, registerAllPlugins, registerChartPack, registerCinemaPack, registerCyberPack, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGenArtPack, registerGeoPack, registerGesture3Pack, registerGpuPack, registerLightPack, registerLottiePack, registerMorphPack, registerMusicPack, registerOrganicPack, registerPaperPack, registerPerf3Pack, registerPhysicsPack, registerRetroPack, registerSafePack, registerShopPack, registerSocialPack, registerSpatialPack, registerSurfacePack, registerTextPack, registerTransitionsPack, registerVideoPack, registerWeatherPack, riveInputs, roughLine, routeLength, runInWorker, samplePath, scrollProgress, scrubVideo, seededRandom, shaderBackground, shakeFrames, skyAt, sparkVectors, splitChars, splitWords, supportsWebGL2, supportsWebGPU, syntheticSample, throwPath, trackPointer, usePlugins, validateManifest, vestibularSafe, webgpuBackground, wgslModule, xrSupport, yawToOffset };
+export { AI_FX, CAMERA_MOVES, CHART_FX, CINEMA_FX, CYBER_FX, DEFAULT_MOTION_PREFS, DEPTH3_FX, EFFECT_PACKS, EFFECT_PACK_FORMAT, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GENART_FX, GEO_FX, GESTURE3_FX, GLSL_HEAD, GPU_FX, HOVER_FX, LIGHT_FX, LOTTIE_FX, MORPH2_FX, MOTION_PREFS_KEY, MUSIC_FX, ORGANIC_FX, PALETTES, PAPER_FX, PERF3_FX, PHYSICS2_FX, RETRO_FX, SAFE_FX, SHOP_FX, SOCIAL_FX, SPATIAL_FX, SURFACE_FX, SURFACE_THEMES, TEXT3_FX, TRANSITIONS2_FX, VIDEO_FX, VerletWorld, WEATHER_FX, WGSL_HEAD, applyMotionPreferences, applySurfaceTheme, arcPath, blobRadius, cameraFrame, crossDocumentTransitions, decodeFrame, definePlugin, effectPlugins, fanAngles, fieldFallback, flashCount, fpsMeter, frameSequence, glslToWgsl, isFlashSafe, loadEffectPack, loadMotionPreferences, lottieToKeyframes, lottieToSvg, meshGradient, musicSample, offscreenRender, orientationToTilt, packManifest, pageTransition, paperRandom, parseFigure, pinchAngle, pinchScale, pixelSteps, pointsToPath, register3dPack, registerAiPack, registerAllPlugins, registerChartPack, registerCinemaPack, registerCyberPack, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGenArtPack, registerGeoPack, registerGesture3Pack, registerGpuPack, registerHoverPack, registerLightPack, registerLottiePack, registerMorphPack, registerMusicPack, registerOrganicPack, registerPaperPack, registerPerf3Pack, registerPhysicsPack, registerRetroPack, registerSafePack, registerShopPack, registerSocialPack, registerSpatialPack, registerSurfacePack, registerTextPack, registerTransitionsPack, registerVideoPack, registerWeatherPack, riveInputs, roughLine, routeLength, runInWorker, samplePath, scrollProgress, scrubVideo, seededRandom, shaderBackground, shakeFrames, skyAt, sparkVectors, splitChars, splitWords, supportsWebGL2, supportsWebGPU, syntheticSample, throwPath, trackPointer, usePlugins, validateManifest, vestibularSafe, webgpuBackground, wgslModule, xrSupport, yawToOffset };
 export type { EffectPackManifest, MotionPlugin, ShaderSpec };

@@ -1,4 +1,6 @@
-# `<usa-story>` — Story: before / after
+# `<mo-story>` — Story: before / after
+
+> Element name `<mo-story>` (default since 17.3); the legacy name `<usa-story>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -27,17 +29,19 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineStory } from 'motionary/components/effects';
 
-defineStory(); // registers <usa-story>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineStory(); // registers <mo-story>
 
 /* then use it in your HTML:
-<usa-story template="compare" label="2019 vs 2026">
+<mo-story template="compare" label="2019 vs 2026">
   <div data-sticky>
     <img data-before src="before.jpg" alt="Before">
     <img data-after src="after.jpg" alt="After">
   </div>
-</usa-story>
+</mo-story>
 */
 ```
 

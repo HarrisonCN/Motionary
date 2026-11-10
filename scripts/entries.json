@@ -1500,6 +1500,60 @@
  },
  {
   "kind": "widget",
+  "name": "mega-menu",
+  "entry": "motionary/widgets/mega-menu",
+  "src": "src/entries/widgets/mega-menu.ts",
+  "tag": "usa-mega-menu",
+  "define": "defineMegaMenu",
+  "types": [
+   "UsaMegaMenuElement",
+   "UsaNavFlyoutElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/nav-panels"
+ },
+ {
+  "kind": "widget",
+  "name": "nav-flyout",
+  "entry": "motionary/widgets/nav-flyout",
+  "src": "src/entries/widgets/nav-flyout.ts",
+  "tag": "usa-nav-flyout",
+  "define": "defineNavFlyout",
+  "types": [
+   "UsaMegaMenuElement",
+   "UsaNavFlyoutElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/nav-panels"
+ },
+ {
+  "kind": "widget",
+  "name": "fullscreen-menu",
+  "entry": "motionary/widgets/fullscreen-menu",
+  "src": "src/entries/widgets/fullscreen-menu.ts",
+  "tag": "usa-fullscreen-menu",
+  "define": "defineFullscreenMenu",
+  "types": [
+   "UsaFullscreenMenuElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/fullscreen-menu"
+ },
+ {
+  "kind": "widget",
+  "name": "breadcrumbs",
+  "entry": "motionary/widgets/breadcrumbs",
+  "src": "src/entries/widgets/breadcrumbs.ts",
+  "tag": "usa-breadcrumbs",
+  "define": "defineBreadcrumbs",
+  "types": [
+   "UsaBreadcrumbsElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/breadcrumbs"
+ },
+ {
+  "kind": "widget",
   "name": "snap-carousel",
   "entry": "motionary/widgets/snap-carousel",
   "src": "src/entries/widgets/snap-carousel.ts",
@@ -2799,5 +2853,50 @@
   "pack": "perf3",
   "register": "registerGpuLift",
   "module": "components/fx2/perf3"
+ },
+ {
+  "kind": "effect",
+  "name": "text-roll",
+  "entry": "motionary/effects/text-roll",
+  "src": "src/entries/effects/text-roll.ts",
+  "pack": "hover",
+  "register": "registerTextRoll",
+  "module": "components/fx2/hover"
+ },
+ {
+  "kind": "effect",
+  "name": "image-swap",
+  "entry": "motionary/effects/image-swap",
+  "src": "src/entries/effects/image-swap.ts",
+  "pack": "hover",
+  "register": "registerImageSwap",
+  "module": "components/fx2/hover"
+ },
+ {
+  "kind": "effect",
+  "name": "focus-reveal",
+  "entry": "motionary/effects/focus-reveal",
+  "src": "src/entries/effects/focus-reveal.ts",
+  "pack": "hover",
+  "register": "registerFocusReveal",
+  "module": "components/fx2/hover"
+ },
+ {
+  "kind": "effect",
+  "name": "grid-warp",
+  "entry": "motionary/effects/grid-warp",
+  "src": "src/entries/effects/grid-warp.ts",
+  "pack": "hover",
+  "register": "registerGridWarp",
+  "module": "components/fx2/hover"
+ },
+ {
+  "kind": "effect",
+  "name": "googly-eyes",
+  "entry": "motionary/effects/googly-eyes",
+  "src": "src/entries/effects/googly-eyes.ts",
+  "pack": "hover",
+  "register": "registerGooglyEyes",
+  "module": "components/fx2/hover"
  }
 ]

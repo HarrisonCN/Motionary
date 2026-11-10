@@ -1,4 +1,6 @@
-# `<usa-scroll-ring>` — Scroll progress ring
+# `<mo-scroll-ring>` — Scroll progress ring
+
+> Element name `<mo-scroll-ring>` (default since 17.3); the legacy name `<usa-scroll-ring>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -22,11 +24,13 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineScrollRing } from 'motionary/components/widgets';
 
-defineScrollRing(); // registers <usa-scroll-ring>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineScrollRing(); // registers <mo-scroll-ring>
 
 /* then use it in your HTML:
-<usa-scroll-ring label back-to-top></usa-scroll-ring>
+<mo-scroll-ring label back-to-top></mo-scroll-ring>
 */
 ```

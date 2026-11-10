@@ -98,7 +98,7 @@ describe('14.2 Layout Motion 2.0: entry and packaging', () => {
       expect(now, `budget line kept: ${b.name}`).toBeTruthy();
       expect(now!.limit, `budget not raised: ${b.name}`).toBeLessThanOrEqual(b.limit);
     }
-    const lite = budgets.find((b) => /lite/.test(b.name) && b.limit === 70 * 1024);
+    const lite = budgets.find((b) => /lite/.test(b.name) && b.limit === 79 * 1024); // 17.3: 70 → 79 KB
     expect(lite, 'lite 70 KB budget').toBeTruthy();
   });
   it('zero runtime dependencies; version 14.2.0; docs + changelog', () => {

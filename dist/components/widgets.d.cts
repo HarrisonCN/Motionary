@@ -3241,6 +3241,82 @@ interface UsaMotionPromptElement extends UsaElement {
 declare function defineMotionPrompt(tag?: string): CustomElementConstructor | undefined;
 
 /**
+ * 17.3 — the shared core of `<mo-mega-menu>` and `<mo-nav-flyout>`: a row of top-level items, each either a plain link
+ * or an item element holding a trigger `<button>` and a `[data-panel]`. Panels follow the disclosure navigation pattern
+ * (`aria-expanded` / `aria-controls` on a real button, no `role="menu"`), open with hover intent, click or keyboard,
+ * and sit on one shared surface (`.usa-np-bg`) that morphs between the panels instead of each panel fading on its own.
+ */
+interface UsaNavPanelsElement extends UsaElement {
+    /** Index of the open item (`-1` when every panel is closed). */
+    readonly openIndex: number;
+    /** Open the item at `index` (a plain link item is ignored); `focus` moves focus to its first focusable control. */
+    openItem(index: number, focus?: boolean): void;
+    /** Close the open panel; `focusTrigger` returns focus to its trigger. */
+    close(focusTrigger?: boolean): void;
+}
+/**
+ * `<mo-mega-menu>` (17.3; legacy name `<usa-mega-menu>`) — a navigation bar whose items open full-width mega panels
+ * (columns, a featured card, anything) on one shared surface that morphs its height from panel to panel.
+ * Children: plain links, or an item element holding a trigger `<button>` and a `[data-panel]` element:
+ * `<div><button>Products</button><div data-panel>…</div></div>`. Hover intent (`delay`, default 120 ms; once a panel
+ * is open, moving to another trigger switches at once), click / tap toggles, `close-delay` (default 220 ms) after the
+ * pointer leaves. Keyboard: ←/→ / Home / End move between triggers, ↓ opens and focuses the panel, Esc closes and
+ * returns focus, Tab out closes. Disclosure pattern (`aria-expanded`, `aria-controls`); the host is a
+ * `navigation` landmark named by `label` (default "Main"). Events `usa:open` / `usa:close` (`{ index }`); methods
+ * `openItem(i, focus?)`, `close(focusTrigger?)`. Reduced motion: panels switch without the morph.
+ */
+declare const defineMegaMenu: (tag?: string) => CustomElementConstructor | undefined;
+/**
+ * `<mo-nav-flyout>` (17.3; legacy name `<usa-nav-flyout>`) — nav links with dropdown flyouts anchored under their
+ * trigger. One shared background slides and resizes from flyout to flyout (position, width and height), so moving
+ * along the bar feels like one surface. Same markup, keyboard, hover intent and events as `<mo-mega-menu>`:
+ * `<div><button>Docs</button><div data-panel>…</div></div>` items or plain links; `label`, `delay`, `close-delay`;
+ * `openItem(i, focus?)`, `close(focusTrigger?)`; `usa:open` / `usa:close` (`{ index }`). Flyouts stay inside the bar's
+ * width. Reduced motion: the background jumps.
+ */
+declare const defineNavFlyout: (tag?: string) => CustomElementConstructor | undefined;
+type UsaMegaMenuElement = UsaNavPanelsElement;
+type UsaNavFlyoutElement = UsaNavPanelsElement;
+
+/**
+ * `<mo-fullscreen-menu>` (17.3; legacy name `<usa-fullscreen-menu>`) — a menu button that opens a full-screen overlay:
+ * the overlay grows out of the button as a circle (`variant="circle"`, default) or drops as a curtain
+ * (`variant="curtain"`), then the big links rise one after another. A link with `data-preview="image.jpg"` shows that
+ * picture beside the list while it is hovered or focused. Children: the links (any elements); they move into the
+ * overlay's `<nav>`. The overlay is a modal dialog (`role="dialog"`, `aria-modal`, named by `label`, default "Menu"):
+ * focus moves to the first link and stays inside, Esc / the button / a link click closes it and focus returns to the
+ * button, page scrolling is locked while open. Methods `show()`, `hide()`, `toggle(force?)`, property `open`; events
+ * `usa:open` / `usa:close`. Reduced motion: the overlay and links appear without the reveal.
+ */
+interface UsaFullscreenMenuElement extends UsaElement {
+    open: boolean;
+    show(): void;
+    hide(): void;
+    toggle(force?: boolean): void;
+}
+declare function defineFullscreenMenu(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * `<mo-breadcrumbs>` (17.3; legacy name `<usa-breadcrumbs>`) — a breadcrumb trail that animates as you navigate:
+ * crumbs that stay keep their place, new ones slide in, dropped ones slide out (`set(items)`). When the trail is longer
+ * than `max` (default 4), the middle collapses into a "…" button that expands the hidden crumbs with a stagger.
+ * Children: links, with the current page last (any element; it gets `aria-current="page"`). They move into an `<ol>`
+ * inside a `navigation` landmark named by `label` (default "Breadcrumb"); separators are CSS only. Methods
+ * `set(items)` (`{ label, href? }[]`; values are written as text and attributes), `expand()`; property `items`;
+ * event `usa:expand` (`{ hidden }`). Reduced motion: crumbs change without sliding.
+ */
+interface BreadcrumbItem {
+    label: string;
+    href?: string;
+}
+interface UsaBreadcrumbsElement extends UsaElement {
+    readonly items: BreadcrumbItem[];
+    set(items: BreadcrumbItem[]): void;
+    expand(): void;
+}
+declare function defineBreadcrumbs(tag?: string): CustomElementConstructor | undefined;
+
+/**
  * motionary/components — the phone viewport (13.3.0): one shared watcher for the soft keyboard
  * (`visualViewport`) and screen rotation, used by `<usa-bottom-sheet>`, `<usa-drawer>`, `<usa-modal>`, `<usa-sheet>`,
  * `<usa-toast-stack>` and `<usa-pagination>`. Public from `motionary/components/widgets`.
@@ -3273,11 +3349,22 @@ declare function watchViewport(fn?: () => void): Cleanup;
 declare const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElementConstructor | undefined>>;
 /** Every widget tag, in release order. */
 declare const WIDGET_TAGS: string[];
-/** Register every widget (or only those of one release, e.g. `'6.2'`) under its default tag. */
+/**
+ * Register every widget (or only those of one release, e.g. `'6.2'`). 17.3: `mo-*` is the default name — this turns on
+ * the `<mo-*>` names first (`defineMoAliases()`); the `usa-*` names stay registered as deprecated aliases.
+ */
 declare function defineWidgets(release?: string): void;
 declare global {
     interface HTMLElementTagNameMap {
         'usa-carousel': UsaCarouselElement;
+        'usa-mega-menu': UsaMegaMenuElement;
+        'mo-mega-menu': UsaMegaMenuElement;
+        'usa-nav-flyout': UsaNavFlyoutElement;
+        'mo-nav-flyout': UsaNavFlyoutElement;
+        'usa-fullscreen-menu': UsaFullscreenMenuElement;
+        'mo-fullscreen-menu': UsaFullscreenMenuElement;
+        'usa-breadcrumbs': UsaBreadcrumbsElement;
+        'mo-breadcrumbs': UsaBreadcrumbsElement;
         'usa-tab-bar': UsaTabBarElement;
         'usa-disclosure': UsaDisclosureElement;
         'usa-stories': UsaStoriesElement;
@@ -3395,5 +3482,5 @@ declare global {
     }
 }
 
-export { BACKDROP_PRESETS, CAROUSEL_EFFECTS, EQ_PRESETS, FESTIVAL_THEMES, LOTTIE_ICONS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PARTICLE_DRAW_WGSL, PARTICLE_SIM_WGSL, PHYSICS_PRESETS, POST_PASSES, PRESENCE_STATES, PROGRESS_VARIANTS, RETRO_VARIANTS, RIVE_CDN, RIVE_PEER, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SPARK_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, WORKER_SCENES, WORKER_SCENE_FNS, backgroundCss, badgeProgress, cartTotal, defineAddToCart, defineBadgeWall, defineBarChart, defineBgGenerator, defineCarousel, defineCartDrawer, defineChapterNav, defineChatComposer, defineClockControl, defineCodeExport, defineColorPicker, defineCommandPalette, defineCompare, defineCountdown, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineFestivalBanner, defineField, defineFileDrop, defineGauge, defineGenArt, defineGestureSticker, defineGlScene, defineGlobe, defineGpuParticles, defineGyroCard, defineHeroVideo, defineHudPanel, defineHydrate, defineInstallButton, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLiquidNav, defineLocationCard, defineLottie, defineLottieIcon, defineLottiePlayer, defineLyrics, defineMasonryFlow, defineMenu, defineMenuToggle, defineMessageList, defineMilestones, defineModal, defineMotion, defineMotionInspector, defineMotionPrefs, defineMotionPrompt, defineMotionSpec, defineMusicPlayer, defineNativePreview, defineNavMorph, defineNotificationBell, defineOdometer, defineOrganicCard, defineOtp, definePagination, definePanorama, defineParallaxLayers, definePauseAll, definePerfMonitor, definePhysicsPlayground, definePluginCard, definePluginStore, definePresence, definePrizeWheel, defineProductGallery, defineProgressRing, definePropPanel, definePullCord, defineRadar, defineReactions, defineRedEnvelope, defineRetroButton, defineRive, defineRouteTransition, defineScene, defineScrollRing, defineScrollScene, defineSegmented, defineShaderBackdrop, defineSheet, defineShortcut, defineSkeletonReveal, defineSketchChart, defineSmoothScroll, defineSparkline, defineSpatialCard, defineStarRating, defineStepper, defineStickyWall, defineStories, defineSuggestionChips, defineSwipeDeck, defineSwitch, defineTabBar, defineTerminal, defineTextSplitter, defineThemeSurface, defineThemeSwitcher, defineTip, defineToastStack, defineTokenEditor, defineUploadProgress, defineVideoCard, defineVoiceButton, defineVolumeKnob, defineWeatherCard, defineWidgets, defineWorkerCanvas, defineXpBar, describeComponent, exportComponent, formatBytes, formatDistance, fuzzyMatch, haversine, hexToHsv, hsvToHex, initials, keyLabels, levelFor, loadRiveRuntime, matchesKeys, monthGrid, pageWindow, parseChips, parseISODate, parseLRC, parseMarkers, parseProps, parseReactions, parseScrub, parseTargets, passwordStrength, project, provideRiveRuntime, rankRows, sanitizeCode, sparkPoints, splitTime, stackToast, viewportHeight, watchViewport, waveBars, wheelAngle, wrapIndex };
-export type { BellNotice, CartItem, ChatMessage, ExportFormat, ExportedNode, GlobeMarker, LeaderRow, PaletteCommand, PerfStats, PresenceState, PropSpec, RadarTarget, StackToastOptions, StickerState, UsaAddToCartElement, UsaBadgeWallElement, UsaBarChartElement, UsaBgGeneratorElement, UsaCarouselElement, UsaCartDrawerElement, UsaChapterNavElement, UsaChatComposerElement, UsaClockControlElement, UsaCodeExportElement, UsaColorPickerElement, UsaCommandPaletteElement, UsaCompareElement, UsaCountdownElement, UsaCubeGalleryElement, UsaDatePickerElement, UsaDisclosureElement, UsaDockElement, UsaEqualizerElement, UsaFestivalBannerElement, UsaFieldElement, UsaFileDropElement, UsaGaugeElement, UsaGenArtElement, UsaGestureStickerElement, UsaGlSceneElement, UsaGlobeElement, UsaGpuParticlesElement, UsaGyroCardElement, UsaHeroVideoElement, UsaHudPanelElement, UsaHydrateElement, UsaInstallButtonElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaKpiElement, UsaLeaderboardElement, UsaLiquidNavElement, UsaLocationCardElement, UsaLottieElement, UsaLottieIconElement, UsaLottiePlayerElement, UsaLyricsElement, UsaMasonryFlowElement, UsaMenuElement, UsaMenuToggleElement, UsaMessageListElement, UsaMilestonesElement, UsaModalElement, UsaMotionElement, UsaMotionInspectorElement, UsaMotionPrefsElement, UsaMotionPromptElement, UsaMotionSpecElement, UsaMusicPlayerElement, UsaNativePreviewElement, UsaNavMorphElement, UsaNotificationBellElement, UsaOdometerElement, UsaOrganicCardElement, UsaOtpElement, UsaPaginationElement, UsaPanoramaElement, UsaParallaxLayersElement, UsaPauseAllElement, UsaPerfMonitorElement, UsaPhysicsPlaygroundElement, UsaPluginCardElement, UsaPluginStoreElement, UsaPresenceElement, UsaPrizeWheelElement, UsaProductGalleryElement, UsaProgressRingElement, UsaPropPanelElement, UsaPullCordElement, UsaRadarElement, UsaReactionsElement, UsaRedEnvelopeElement, UsaRetroButtonElement, UsaRiveElement, UsaRouteTransitionElement, UsaSceneElement, UsaScrollRingElement, UsaScrollSceneElement, UsaSegmentedElement, UsaShaderBackdropElement, UsaSheetElement, UsaShortcutElement, UsaSkeletonRevealElement, UsaSketchChartElement, UsaSmoothScrollElement, UsaSparklineElement, UsaSpatialCardElement, UsaStarRatingElement, UsaStepperElement, UsaStickyWallElement, UsaStoriesElement, UsaSuggestionChipsElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTerminalElement, UsaTextSplitterElement, UsaThemeSurfaceElement, UsaThemeSwitcherElement, UsaTipElement, UsaToastStackElement, UsaTokenEditorElement, UsaUploadProgressElement, UsaVideoCardElement, UsaVoiceButtonElement, UsaVolumeKnobElement, UsaWeatherCardElement, UsaWorkerCanvasElement, UsaXpBarElement, WallBadge };
+export { BACKDROP_PRESETS, CAROUSEL_EFFECTS, EQ_PRESETS, FESTIVAL_THEMES, LOTTIE_ICONS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PARTICLE_DRAW_WGSL, PARTICLE_SIM_WGSL, PHYSICS_PRESETS, POST_PASSES, PRESENCE_STATES, PROGRESS_VARIANTS, RETRO_VARIANTS, RIVE_CDN, RIVE_PEER, SEGMENTED_VARIANTS, SHEET_SIDES, SKELETON_VARIANTS, SPARK_VARIANTS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, WORKER_SCENES, WORKER_SCENE_FNS, backgroundCss, badgeProgress, cartTotal, defineAddToCart, defineBadgeWall, defineBarChart, defineBgGenerator, defineBreadcrumbs, defineCarousel, defineCartDrawer, defineChapterNav, defineChatComposer, defineClockControl, defineCodeExport, defineColorPicker, defineCommandPalette, defineCompare, defineCountdown, defineCubeGallery, defineDatePicker, defineDisclosure, defineDock, defineEqualizer, defineFestivalBanner, defineField, defineFileDrop, defineFullscreenMenu, defineGauge, defineGenArt, defineGestureSticker, defineGlScene, defineGlobe, defineGpuParticles, defineGyroCard, defineHeroVideo, defineHudPanel, defineHydrate, defineInstallButton, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLiquidNav, defineLocationCard, defineLottie, defineLottieIcon, defineLottiePlayer, defineLyrics, defineMasonryFlow, defineMegaMenu, defineMenu, defineMenuToggle, defineMessageList, defineMilestones, defineModal, defineMotion, defineMotionInspector, defineMotionPrefs, defineMotionPrompt, defineMotionSpec, defineMusicPlayer, defineNativePreview, defineNavFlyout, defineNavMorph, defineNotificationBell, defineOdometer, defineOrganicCard, defineOtp, definePagination, definePanorama, defineParallaxLayers, definePauseAll, definePerfMonitor, definePhysicsPlayground, definePluginCard, definePluginStore, definePresence, definePrizeWheel, defineProductGallery, defineProgressRing, definePropPanel, definePullCord, defineRadar, defineReactions, defineRedEnvelope, defineRetroButton, defineRive, defineRouteTransition, defineScene, defineScrollRing, defineScrollScene, defineSegmented, defineShaderBackdrop, defineSheet, defineShortcut, defineSkeletonReveal, defineSketchChart, defineSmoothScroll, defineSparkline, defineSpatialCard, defineStarRating, defineStepper, defineStickyWall, defineStories, defineSuggestionChips, defineSwipeDeck, defineSwitch, defineTabBar, defineTerminal, defineTextSplitter, defineThemeSurface, defineThemeSwitcher, defineTip, defineToastStack, defineTokenEditor, defineUploadProgress, defineVideoCard, defineVoiceButton, defineVolumeKnob, defineWeatherCard, defineWidgets, defineWorkerCanvas, defineXpBar, describeComponent, exportComponent, formatBytes, formatDistance, fuzzyMatch, haversine, hexToHsv, hsvToHex, initials, keyLabels, levelFor, loadRiveRuntime, matchesKeys, monthGrid, pageWindow, parseChips, parseISODate, parseLRC, parseMarkers, parseProps, parseReactions, parseScrub, parseTargets, passwordStrength, project, provideRiveRuntime, rankRows, sanitizeCode, sparkPoints, splitTime, stackToast, viewportHeight, watchViewport, waveBars, wheelAngle, wrapIndex };
+export type { BellNotice, BreadcrumbItem, CartItem, ChatMessage, ExportFormat, ExportedNode, GlobeMarker, LeaderRow, PaletteCommand, PerfStats, PresenceState, PropSpec, RadarTarget, StackToastOptions, StickerState, UsaAddToCartElement, UsaBadgeWallElement, UsaBarChartElement, UsaBgGeneratorElement, UsaBreadcrumbsElement, UsaCarouselElement, UsaCartDrawerElement, UsaChapterNavElement, UsaChatComposerElement, UsaClockControlElement, UsaCodeExportElement, UsaColorPickerElement, UsaCommandPaletteElement, UsaCompareElement, UsaCountdownElement, UsaCubeGalleryElement, UsaDatePickerElement, UsaDisclosureElement, UsaDockElement, UsaEqualizerElement, UsaFestivalBannerElement, UsaFieldElement, UsaFileDropElement, UsaFullscreenMenuElement, UsaGaugeElement, UsaGenArtElement, UsaGestureStickerElement, UsaGlSceneElement, UsaGlobeElement, UsaGpuParticlesElement, UsaGyroCardElement, UsaHeroVideoElement, UsaHudPanelElement, UsaHydrateElement, UsaInstallButtonElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaKpiElement, UsaLeaderboardElement, UsaLiquidNavElement, UsaLocationCardElement, UsaLottieElement, UsaLottieIconElement, UsaLottiePlayerElement, UsaLyricsElement, UsaMasonryFlowElement, UsaMegaMenuElement, UsaMenuElement, UsaMenuToggleElement, UsaMessageListElement, UsaMilestonesElement, UsaModalElement, UsaMotionElement, UsaMotionInspectorElement, UsaMotionPrefsElement, UsaMotionPromptElement, UsaMotionSpecElement, UsaMusicPlayerElement, UsaNativePreviewElement, UsaNavFlyoutElement, UsaNavMorphElement, UsaNotificationBellElement, UsaOdometerElement, UsaOrganicCardElement, UsaOtpElement, UsaPaginationElement, UsaPanoramaElement, UsaParallaxLayersElement, UsaPauseAllElement, UsaPerfMonitorElement, UsaPhysicsPlaygroundElement, UsaPluginCardElement, UsaPluginStoreElement, UsaPresenceElement, UsaPrizeWheelElement, UsaProductGalleryElement, UsaProgressRingElement, UsaPropPanelElement, UsaPullCordElement, UsaRadarElement, UsaReactionsElement, UsaRedEnvelopeElement, UsaRetroButtonElement, UsaRiveElement, UsaRouteTransitionElement, UsaSceneElement, UsaScrollRingElement, UsaScrollSceneElement, UsaSegmentedElement, UsaShaderBackdropElement, UsaSheetElement, UsaShortcutElement, UsaSkeletonRevealElement, UsaSketchChartElement, UsaSmoothScrollElement, UsaSparklineElement, UsaSpatialCardElement, UsaStarRatingElement, UsaStepperElement, UsaStickyWallElement, UsaStoriesElement, UsaSuggestionChipsElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTerminalElement, UsaTextSplitterElement, UsaThemeSurfaceElement, UsaThemeSwitcherElement, UsaTipElement, UsaToastStackElement, UsaTokenEditorElement, UsaUploadProgressElement, UsaVideoCardElement, UsaVoiceButtonElement, UsaVolumeKnobElement, UsaWeatherCardElement, UsaWorkerCanvasElement, UsaXpBarElement, WallBadge };

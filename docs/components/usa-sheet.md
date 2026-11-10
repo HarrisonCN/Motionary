@@ -1,4 +1,6 @@
-# `<usa-sheet>` — Drawer / bottom sheet
+# `<mo-sheet>` — Drawer / bottom sheet
+
+> Element name `<mo-sheet>` (default since 17.3); the legacy name `<usa-sheet>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -27,16 +29,18 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineSheet } from 'motionary/components/widgets';
 
-defineSheet(); // registers <usa-sheet>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineSheet(); // registers <mo-sheet>
 
 /* then use it in your HTML:
 <button data-usa-open="cart">Cart</button>
-<usa-sheet id="cart" side="right" label="Cart">
+<mo-sheet id="cart" side="right" label="Cart">
   <h2>Your cart</h2>
   …
   <button data-usa-close>Close</button>
-</usa-sheet>
+</mo-sheet>
 */
 ```

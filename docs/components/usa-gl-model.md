@@ -1,4 +1,6 @@
-# `<usa-gl-model>` — Compressed 3D model (Draco / KTX2)
+# `<mo-gl-model>` — Compressed 3D model (Draco / KTX2)
+
+> Element name `<mo-gl-model>` (default since 17.3); the legacy name `<usa-gl-model>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -64,11 +66,13 @@ import { provideGltfDecoder } from 'motionary/runtime/gltf-decoders';
 use(gl, formatGltf, gltfDecoders);
 provideGltfDecoder('draco', () => import('draco3d')); // lazy: fetched when the first Draco-compressed model loads
 provideGltfDecoder('ktx2', () => import('/vendor/basis_transcoder.js').then((m) => m.default || window.BASIS)); // lazy: fetched with the first KTX2 texture
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineGlModel } from 'motionary/components/gl-model';
 
-defineGlModel(); // registers <usa-gl-model>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineGlModel(); // registers <mo-gl-model>
 
 /* then use it in your HTML:
-<usa-gl-model src="/models/robot-draco.glb" controls label="Robot"></usa-gl-model>
+<mo-gl-model src="/models/robot-draco.glb" controls label="Robot"></mo-gl-model>
 */
 ```

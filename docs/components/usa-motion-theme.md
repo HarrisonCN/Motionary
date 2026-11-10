@@ -1,4 +1,6 @@
-# `<usa-motion-theme>` — Theme packs
+# `<mo-motion-theme>` — Theme packs
+
+> Element name `<mo-motion-theme>` (default since 17.3); the legacy name `<usa-motion-theme>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -26,15 +28,17 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineMotionTheme } from 'motionary/components/effects';
 
-defineMotionTheme(); // registers <usa-motion-theme>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineMotionTheme(); // registers <mo-motion-theme>
 
 /* then use it in your HTML:
-<usa-motion-theme name="neon">
+<mo-motion-theme name="neon">
   <div class="usa-surface">
     <button data-theme-fx="click">Tap</button>
   </div>
-</usa-motion-theme>
+</mo-motion-theme>
 */
 ```

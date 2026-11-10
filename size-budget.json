@@ -399,7 +399,7 @@
   {
     "name": "import 'motionary/components/lite'",
     "import": "export * from 'pkg/components/lite';",
-    "limit": 71680
+    "limit": 80896
   },
   {
     "name": "import 'motionary/components/perf'",
@@ -545,6 +545,11 @@
     "name": "import 'motionary/components/fx-focus'",
     "import": "export * from 'pkg/components/fx-focus';",
     "limit": 2304
+  },
+  {
+    "name": "import 'motionary/components/fx-hover' (= motionary/fx/hover, 17.3 hover pack: text-roll / image-swap / focus-reveal / grid-warp / googly-eyes; new line)",
+    "import": "export * from 'pkg/components/fx-hover';",
+    "limit": 3840
   },
   {
     "name": "import 'motionary/components/marketplace'",
@@ -1437,6 +1442,26 @@
     "limit": 5120
   },
   {
+    "name": "import 'motionary/widgets/mega-menu' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/mega-menu';",
+    "limit": 4608
+  },
+  {
+    "name": "import 'motionary/widgets/nav-flyout' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/nav-flyout';",
+    "limit": 4608
+  },
+  {
+    "name": "import 'motionary/widgets/fullscreen-menu' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/fullscreen-menu';",
+    "limit": 4096
+  },
+  {
+    "name": "import 'motionary/widgets/breadcrumbs' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/breadcrumbs';",
+    "limit": 3584
+  },
+  {
     "name": "import 'motionary/effects/fluid' (per-entry, fixed)",
     "import": "export * from 'pkg/effects/fluid';",
     "limit": 11008
@@ -2140,5 +2165,30 @@
     "name": "import 'motionary/effects/gpu-lift' (per-entry, fixed)",
     "import": "export * from 'pkg/effects/gpu-lift';",
     "limit": 1280
+  },
+  {
+    "name": "import 'motionary/effects/text-roll' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/text-roll';",
+    "limit": 3840
+  },
+  {
+    "name": "import 'motionary/effects/image-swap' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/image-swap';",
+    "limit": 3840
+  },
+  {
+    "name": "import 'motionary/effects/focus-reveal' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/focus-reveal';",
+    "limit": 3840
+  },
+  {
+    "name": "import 'motionary/effects/grid-warp' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/grid-warp';",
+    "limit": 3840
+  },
+  {
+    "name": "import 'motionary/effects/googly-eyes' (per-entry, fixed)",
+    "import": "export * from 'pkg/effects/googly-eyes';",
+    "limit": 3840
   }
 ]

@@ -1,4 +1,6 @@
-# `<usa-plugin-store>` — Plugin marketplace
+# `<mo-plugin-store>` — Plugin marketplace
+
+> Element name `<mo-plugin-store>` (default since 17.3); the legacy name `<usa-plugin-store>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -26,11 +28,13 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { definePluginStore } from 'motionary/components/widgets';
 
-definePluginStore(); // registers <usa-plugin-store>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+definePluginStore(); // registers <mo-plugin-store>
 
 /* then use it in your HTML:
-<usa-plugin-store query="neon"></usa-plugin-store>
+<mo-plugin-store query="neon"></mo-plugin-store>
 */
 ```

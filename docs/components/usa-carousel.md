@@ -1,4 +1,6 @@
-# `<usa-carousel>` — Carousel / slider
+# `<mo-carousel>` — Carousel / slider
+
+> Element name `<mo-carousel>` (default since 17.3); the legacy name `<usa-carousel>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -26,15 +28,17 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineCarousel } from 'motionary/components/widgets';
 
-defineCarousel(); // registers <usa-carousel>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineCarousel(); // registers <mo-carousel>
 
 /* then use it in your HTML:
-<usa-carousel effect="cards" loop autoplay="4000" label="Featured">
+<mo-carousel effect="cards" loop autoplay="4000" label="Featured">
   <img src="a.jpg" alt="…">
   <img src="b.jpg" alt="…">
   <img src="c.jpg" alt="…">
-</usa-carousel>
+</mo-carousel>
 */
 ```

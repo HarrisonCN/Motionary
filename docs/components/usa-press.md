@@ -1,4 +1,6 @@
-# `<usa-press>` — Press feedback
+# `<mo-press>` — Press feedback
+
+> Element name `<mo-press>` (default since 17.3); the legacy name `<usa-press>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -22,11 +24,13 @@ Tactile press: dips while pressed and springs back, or bounces once with bounce.
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { definePress } from 'motionary/components/interaction';
 
-definePress(); // registers <usa-press>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+definePress(); // registers <mo-press>
 
 /* then use it in your HTML:
-<usa-press bounce><button>Press</button></usa-press>
+<mo-press bounce><button>Press</button></mo-press>
 */
 ```

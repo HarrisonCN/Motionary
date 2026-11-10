@@ -1,4 +1,6 @@
-# `<usa-cube>` — 3D cube
+# `<mo-cube>` — 3D cube
+
+> Element name `<mo-cube>` (default since 17.3); the legacy name `<usa-cube>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -24,13 +26,15 @@ Up to six children become the faces of a CSS 3D cube. Drag / swipe, arrow keys, 
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineCube } from 'motionary/components/depth';
 
-defineCube(); // registers <usa-cube>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineCube(); // registers <mo-cube>
 
 /* then use it in your HTML:
-<usa-cube size="200" autoplay="3000">
+<mo-cube size="200" autoplay="3000">
   <div>Front</div><div>Right</div><div>Back</div><div>Left</div>
-</usa-cube>
+</mo-cube>
 */
 ```

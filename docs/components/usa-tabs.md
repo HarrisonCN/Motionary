@@ -1,4 +1,6 @@
-# `<usa-tabs>` — Tabs
+# `<mo-tabs>` — Tabs
+
+> Element name `<mo-tabs>` (default since 17.3); the legacy name `<usa-tabs>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -26,15 +28,17 @@ Accessible tabs whose indicator slides between tabs with a spring; panels slide 
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineTabs } from 'motionary/components/ui';
 
-defineTabs(); // registers <usa-tabs>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineTabs(); // registers <mo-tabs>
 
 /* then use it in your HTML:
-<usa-tabs>
+<mo-tabs>
   <nav><button data-tab>One</button><button data-tab>Two</button></nav>
   <section data-panel>…</section>
   <section data-panel>…</section>
-</usa-tabs>
+</mo-tabs>
 */
 ```

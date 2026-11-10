@@ -1,4 +1,6 @@
-# `<usa-code-export>` — Code export
+# `<mo-code-export>` — Code export
+
+> Element name `<mo-code-export>` (default since 17.3); the legacy name `<usa-code-export>` is a deprecated alias that keeps working. With a single-component or category import call `defineMoAliases()` from `motionary/components/mo` first unless the component registers its `mo-*` name itself (17.3+ widgets).
 
 > Generated from the source and the gallery catalog by `scripts/gen-component-docs.mjs` (same data as [components.json](https://harrisoncn.github.io/Motionary/components.json) and [llms-full.txt](https://harrisoncn.github.io/Motionary/llms-full.txt)).
 
@@ -24,13 +26,15 @@
 ## ES module
 
 ```js
+import { defineMoAliases } from 'motionary/components/mo';
 import { defineCodeExport } from 'motionary/components/widgets';
 
-defineCodeExport(); // registers <usa-code-export>
+defineMoAliases(); // <mo-*> names (the usa-* names keep working)
+defineCodeExport(); // registers <mo-code-export>
 
 /* then use it in your HTML:
-<usa-code-export formats="html,react,vue">
-  <usa-star-rating value="4"></usa-star-rating>
-</usa-code-export>
+<mo-code-export formats="html,react,vue">
+  <mo-star-rating value="4"></mo-star-rating>
+</mo-code-export>
 */
 ```
