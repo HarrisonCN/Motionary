@@ -318,10 +318,10 @@ AI 助手与 provider（`motionary/studio/ai`、`motionary/ai*`）、MCP 服务�
 | 仅 `parallax()` | 0.94 KB | 2.00 KB |
 | `motionary/presets/extended`（181 个预设） | 4.69 KB | 5.25 KB |
 | `motionary/runtime`（运行时核心） | 5.42 KB | 5.50 KB |
-| `motionary/components/reveal` | 4.51 KB | 5.00 KB |
-| `motionary/components/lite`（全部元素，CSS 按需） | 69.69 KB | 70.00 KB |
-| `motionary/components`（全部元素 + CSS） | 86.13 KB | 93.75 KB |
-| `dist/components.umd.js`（CDN，全部） | 110.14 KB | 115.75 KB |
+| `motionary/components/reveal` | 4.47 KB | 5.00 KB |
+| `motionary/components/lite`（全部元素，CSS 按需） | 69.65 KB | 70.00 KB |
+| `motionary/components`（全部元素 + CSS） | 86.09 KB | 93.75 KB |
+| `dist/components.umd.js`（CDN，全部） | 111.12 KB | 115.75 KB |
 <!-- size-table:end -->
 
 默认不监听 scroll 事件（改用 IntersectionObserver），动画只作用于合成层属性（`transform`、`opacity`、`filter`、`clip-path`），导入本身没有副作用（[docs/tree-shaking.md](./docs/tree-shaking.md)）。每个 PR 还会在无头 Chrome 中测量首屏传输量、脚本耗时、GPU 资源与帧稳定性（[docs/perf-ci.md](./docs/perf-ci.md)）。source map 不随 npm 包发布：它们保存在打了标签的 git 树中（每个文件的 `sourceMappingURL` 指向那里），从 16.3 起也作为 `sourcemaps` 压缩包附在每个 GitHub Release 上（[docs/source-maps.md](./docs/source-maps.md)）。更多：[docs/performance.md](./docs/performance.md)。

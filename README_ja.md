@@ -318,10 +318,10 @@ Figma プラグイン、クロスプラットフォーム書き出し（`npx mot
 | `parallax()` のみ | 0.94 KB | 2.00 KB |
 | `motionary/presets/extended`（181 プリセット） | 4.69 KB | 5.25 KB |
 | `motionary/runtime`（ランタイムのコア） | 5.42 KB | 5.50 KB |
-| `motionary/components/reveal` | 4.51 KB | 5.00 KB |
-| `motionary/components/lite`（全要素、CSS はオンデマンド） | 69.69 KB | 70.00 KB |
-| `motionary/components`（全要素 ＋ CSS） | 86.13 KB | 93.75 KB |
-| `dist/components.umd.js`（CDN、すべて） | 110.14 KB | 115.75 KB |
+| `motionary/components/reveal` | 4.47 KB | 5.00 KB |
+| `motionary/components/lite`（全要素、CSS はオンデマンド） | 69.65 KB | 70.00 KB |
+| `motionary/components`（全要素 ＋ CSS） | 86.09 KB | 93.75 KB |
+| `dist/components.umd.js`（CDN、すべて） | 111.12 KB | 115.75 KB |
 <!-- size-table:end -->
 
 既定ではスクロールイベントを監視せず（IntersectionObserver を使用）、アニメーションはコンポジタで処理できるプロパティ（`transform`、`opacity`、`filter`、`clip-path`）に限られます。インポート自体に副作用はありません（[docs/tree-shaking.md](./docs/tree-shaking.md)）。PR ごとに、ヘッドレス Chrome でファーストビューの転送量、スクリプト時間、GPU リソース、フレームの安定性も計測しています（[docs/perf-ci.md](./docs/perf-ci.md)）。ソースマップは npm には含めません。タグ付きの git ツリーにあり（各ファイルの `sourceMappingURL` がそこを指します）、16.3 からは `sourcemaps` アーカイブとして GitHub の各リリースにも添付します（[docs/source-maps.md](./docs/source-maps.md)）。詳しくは [docs/performance.md](./docs/performance.md)。
