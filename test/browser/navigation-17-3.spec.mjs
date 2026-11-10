@@ -20,7 +20,9 @@ for (const [tag, usa] of [['mo-mega-menu', 'usa-mega-menu'], ['mo-nav-flyout', '
   test(`${tag}: keyboard, aria-expanded and the shared surface settle on the open panel`, async ({ page }) => {
     await openFixture(page);
     await define(page, usa);
-    await mount(page, NAV(tag));
+    // A focusable element after the bar: Firefox keeps focus on the last element when Tab has nowhere to go in the page,
+    // so "out of the bar" has to land somewhere real for the check to mean the same thing in every engine.
+    await mount(page, NAV(tag) + '<button id="after">after</button>');
     await page.locator('#t0').focus();
     await page.keyboard.press('ArrowDown');
     await expect(page.locator('#t0')).toHaveAttribute('aria-expanded', 'true');
@@ -39,6 +41,7 @@ for (const [tag, usa] of [['mo-mega-menu', 'usa-mega-menu'], ['mo-nav-flyout', '
     await page.keyboard.press('Tab'); // into the panel
     await page.keyboard.press('Tab'); // out of the panel to "Pricing"…
     await page.keyboard.press('Tab'); // …and out of the bar
+    await expect(page.locator('#after')).toBeFocused();
     await expect(page.locator('#t1')).toHaveAttribute('aria-expanded', 'false');
     expectNoErrors(page);
   });
