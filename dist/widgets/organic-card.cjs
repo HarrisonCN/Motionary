@@ -46,4 +46,4 @@ function defineOrganicCard(tag = 'usa-organic-card') {
 }
 
 exports.defineOrganicCard = defineOrganicCard;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/widgets/organic-card.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/widgets/organic-card.cjs.map

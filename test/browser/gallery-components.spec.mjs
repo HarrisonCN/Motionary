@@ -24,3 +24,12 @@ test('public gallery tags work after late registration with reduced motion', asy
   await expect(page.getByText('Night', { exact: true })).toBeVisible();
   await expect(page.getByText('Day', { exact: true })).toBeHidden();
 });
+
+test('standalone category CSS styles public tags without a script or a marked link', async ({ page }) => {
+  await openFixture(page);
+  await page.addStyleTag({ url: '/dist/components/interaction.css' });
+  await page.locator('#stage').evaluate(stage => {
+    stage.innerHTML = '<mo-press></mo-press><usa-press></usa-press>';
+  });
+  for (const tag of ['mo-press', 'usa-press']) await expect(page.locator(tag)).toHaveCSS('display', 'inline-block');
+});

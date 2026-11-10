@@ -24,7 +24,7 @@ npm i motionary
 <script type="module">import ScrollAnimate from 'motionary'; ScrollAnimate.init();</script>
 ```
 
-Motionary reveals content as it scrolls into view and gives you <!--fact:public-->212<!--/fact--> animated `<usa-*>` custom elements: cards, buttons,
+Motionary reveals content as it scrolls into view and gives you <!--fact:public-->212<!--/fact--> animated `<mo-*>` custom elements: cards, buttons,
 physics, page transitions, generative backgrounds, Lottie, WebGL and more. It runs in plain HTML, in React, Vue, Svelte,
 Solid and Angular, and in desktop web views (Electron, Tauri, WebView2). It has no runtime dependencies, every entry point
 is tree-shakeable and has a gzip budget checked in CI, and every animation respects `prefers-reduced-motion`.
@@ -46,7 +46,7 @@ Supply chain: [docs/supply-chain.md](./docs/supply-chain.md) · CDN with SRI has
 - **214 scroll-reveal presets** in 14 families (33 in the core, 181 more in `motionary/presets/extended`): fades, zooms,
   3D flips, clip-path shapes, blur and mask, bounce, depth, glitch, and scroll-linked `scrub-*`. Also `timeline()`,
   `staggerChildren()` and `parallax()`.
-- **<!--fact:public-->212<!--/fact--> `<usa-*>` Web Components**: <!--fact:core-->91<!--/fact--> core components in `motionary/components` (by category) and <!--fact:widgets-->121<!--/fact--> widgets, one entry point
+- **<!--fact:public-->212<!--/fact--> `<mo-*>` Web Components**: <!--fact:core-->91<!--/fact--> core components in `motionary/components` (by category) and <!--fact:widgets-->121<!--/fact--> widgets, one entry point
   each (`motionary/widgets/<name>`). Plus <!--fact:effects-->141<!--/fact--> effects with their own entry points (`motionary/effects/<name>`).
   [How components are counted](./docs/components.md#how-components-are-counted).
 - **Motion Core**: `createMotion()` from `motionary/core`, a plugin-based engine at about 2.5 KB gzip (budget 10 KB).
@@ -128,13 +128,15 @@ More: [docs/core.md](./docs/core.md).
 
 ```html
 <script type="module">
+  import { defineMoAliases } from 'motionary/components/mo';
   import { defineComponents } from 'motionary/components';
+  defineMoAliases();
   defineComponents(); // or lazyDefine() from 'motionary/components/lazy': loads only the tags on the page
 </script>
 
-<usa-card effect="holo">…</usa-card>
-<usa-button deform="gooey">Buy</usa-button>
-<usa-fx effect="confetti" trigger="click"><button>Celebrate</button></usa-fx>
+<mo-card effect="holo">…</mo-card>
+<mo-button deform="gooey">Buy</mo-button>
+<mo-fx effect="confetti" trigger="click"><button>Celebrate</button></mo-fx>
 ```
 
 ### Frameworks
@@ -180,13 +182,15 @@ export const Card = () => <div use:scrollAnimate={{ animation: 'blur-in-up' }}>H
 ```
 
 ```ts
-// Angular (standalone): the <usa-*> elements
+// Angular (standalone): the <mo-*> elements
 import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
 import { provideUsa, usaDetail } from 'motionary/angular';
+import { defineMoAliases } from 'motionary/components/mo';
+defineMoAliases();
 // app.config.ts: providers: [provideUsa(APP_INITIALIZER, ['click', 'ui'])]   (the categories to register)
 // usa:* events: `(usa:change)` does not compile in Angular 17+ — use the 6-line `[usaOn]` directive from docs/frameworks-ssr.md
 @Component({ standalone: true, imports: [UsaOn], schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  template: `<usa-checkbox label="Motion" [checked]="on" [usaOn]="{ change: onChange }"></usa-checkbox>` })
+  template: `<mo-checkbox label="Motion" [checked]="on" [usaOn]="{ change: onChange }"></mo-checkbox>` })
 export class Settings { on = false; onChange = (e: Event) => (this.on = usaDetail(e).checked); }
 ```
 
@@ -225,10 +229,10 @@ CDN) when the module is missing. Details: [docs/runtime-tiers.md](./docs/runtime
 | Page | What it does |
 |---|---|
 | [Animation Store](https://harrisoncn.github.io/Motionary/showcase/) | Preview, tweak and copy every preset and effect at desktop and phone sizes |
-| [Components](https://harrisoncn.github.io/Motionary/showcase/components.html) | The gallery: every `<usa-*>` element with its attributes, prerequisites and tier |
+| [Components](https://harrisoncn.github.io/Motionary/showcase/components.html) | The gallery: every `<mo-*>` element with its attributes, prerequisites and tier |
 | [Component playground](https://harrisoncn.github.io/Motionary/showcase/run.html) | Each component as a complete runnable page: edit, **Run**, **Copy** or **Download** — all three use exactly what is in the editor (the download runs on its own). HTML (CDN) runs the whole page; npm + bundler runs the module through an import map. Missing prerequisites and errors show with the line that fixes them; deep links like `run.html#usa-tilt` |
-| [Timeline playground](https://harrisoncn.github.io/Motionary/showcase/playground.html) | Visual keyframe editor; exports JSON for `<usa-player>` |
-| [Scroll story](https://harrisoncn.github.io/Motionary/showcase/story.html) | `<usa-story>` scroll-storytelling templates |
+| [Timeline playground](https://harrisoncn.github.io/Motionary/showcase/playground.html) | Visual keyframe editor; exports JSON for `<mo-player>` |
+| [Scroll story](https://harrisoncn.github.io/Motionary/showcase/story.html) | `<mo-story>` scroll-storytelling templates |
 | [Cross-platform previewer](https://harrisoncn.github.io/Motionary/showcase/xplat.html) | One preset on the web, in a mini program and in HarmonyOS ArkUI |
 | [demo/index.html](./demo/index.html) | Every preset, no build step (open it locally) |
 
@@ -243,26 +247,26 @@ Every element: [docs/components.md](./docs/components.md), one page per element 
 <!-- core-table:start -->
 | Category | Entry | Elements |
 |---|---|---|
-| **Scroll reveal** | `motionary/components/reveal` | `<usa-reveal>` · `<usa-scroll-progress>` · `<usa-scrolly>` · `<usa-stagger>` |
-| **Text** | `motionary/components/text` | `<usa-counter>` · `<usa-glitch>` · `<usa-gradient-text>` · `<usa-handwriting>` · `<usa-scramble>` · `<usa-scroll-highlight>` · `<usa-shimmer-text>` · `<usa-split-text>` · `<usa-text-rotate>` · `<usa-typewriter>` · `<usa-wave-text>` |
-| **Interaction** | `motionary/components/interaction` | `<usa-magnetic>` · `<usa-press>` · `<usa-ripple>` · `<usa-spotlight>` · `<usa-tilt>` |
-| **Feedback** | `motionary/components/feedback` | `<usa-check>` · `<usa-progress>` · `<usa-skeleton>` · `<usa-spinner>` · `<usa-toaster>` |
-| **Backgrounds** | `motionary/components/background` | `<usa-acrylic>` · `<usa-aurora>` · `<usa-blobs>` · `<usa-dot-network>` · `<usa-grain>` · `<usa-grid-glow>` · `<usa-marquee>` · `<usa-particles>` · `<usa-water-ripple>` |
-| **Transitions** | `motionary/components/transitions` | `<usa-accordion>` · `<usa-dialog>` · `<usa-view-switch>` |
-| **Spring & physics** | `motionary/components/physics` | `<usa-draggable>` · `<usa-overscroll>` · `<usa-spring>` |
-| **Cards** | `motionary/components/cards` | `<usa-card>` · `<usa-card-stack>` · `<usa-carousel-3d>` · `<usa-sticky-stack>` |
-| **Click & buttons** | `motionary/components/click` | `<usa-button>` · `<usa-checkbox>` · `<usa-click>` · `<usa-double-tap>` · `<usa-hold>` · `<usa-icon-morph>` · `<usa-like>` |
-| **UI kit** | `motionary/components/ui` | `<usa-avatar-stack>` · `<usa-badge>` · `<usa-bottom-sheet>` · `<usa-drawer>` · `<usa-fab>` · `<usa-navbar>` · `<usa-popover>` · `<usa-pull-refresh>` · `<usa-slider>` · `<usa-tabs>` |
-| **Page-wide** | `motionary/components/page` | `<usa-ambient>` · `<usa-auto-skeleton>` · `<usa-back-to-top>` · `<usa-cursor>` · `<usa-fullpage>` · `<usa-loading-bar>` · `<usa-motion-switch>` · `<usa-splash>` |
-| **Timeline** | `motionary/components/timeline` | `<usa-timeline>` |
-| **Gestures** | `motionary/components/gesture` | `<usa-pinch-zoom>` · `<usa-swipeable>` |
-| **SVG** | `motionary/components/svg` | `<usa-anim-icon>` · `<usa-draw>` · `<usa-mask-reveal>` · `<usa-morph>` |
-| **WebGL** | `motionary/components/webgl` | `<usa-distort>` · `<usa-liquid>` · `<usa-post-fx>` · `<usa-shader>` |
-| **3D depth** | `motionary/components/depth` | `<usa-cube>` · `<usa-depth>` |
-| **Layout** | `motionary/components/layout` | `<usa-auto-animate>` · `<usa-masonry>` |
-| **Packs** | `motionary/components/packs` | `<usa-pack>` |
-| **Effect registry** | `motionary/components/fx` | `<usa-fx>` |
-| **Effect packs** | `motionary/components/effects` | `<usa-audio>` · `<usa-gesture-fx>` · `<usa-motion-theme>` · `<usa-player>` · `<usa-story>` |
+| **Scroll reveal** | `motionary/components/reveal` | `<mo-reveal>` · `<mo-scroll-progress>` · `<mo-scrolly>` · `<mo-stagger>` |
+| **Text** | `motionary/components/text` | `<mo-counter>` · `<mo-glitch>` · `<mo-gradient-text>` · `<mo-handwriting>` · `<mo-scramble>` · `<mo-scroll-highlight>` · `<mo-shimmer-text>` · `<mo-split-text>` · `<mo-text-rotate>` · `<mo-typewriter>` · `<mo-wave-text>` |
+| **Interaction** | `motionary/components/interaction` | `<mo-magnetic>` · `<mo-press>` · `<mo-ripple>` · `<mo-spotlight>` · `<mo-tilt>` |
+| **Feedback** | `motionary/components/feedback` | `<mo-check>` · `<mo-progress>` · `<mo-skeleton>` · `<mo-spinner>` · `<mo-toaster>` |
+| **Backgrounds** | `motionary/components/background` | `<mo-acrylic>` · `<mo-aurora>` · `<mo-blobs>` · `<mo-dot-network>` · `<mo-grain>` · `<mo-grid-glow>` · `<mo-marquee>` · `<mo-particles>` · `<mo-water-ripple>` |
+| **Transitions** | `motionary/components/transitions` | `<mo-accordion>` · `<mo-dialog>` · `<mo-view-switch>` |
+| **Spring & physics** | `motionary/components/physics` | `<mo-draggable>` · `<mo-overscroll>` · `<mo-spring>` |
+| **Cards** | `motionary/components/cards` | `<mo-card>` · `<mo-card-stack>` · `<mo-carousel-3d>` · `<mo-sticky-stack>` |
+| **Click & buttons** | `motionary/components/click` | `<mo-button>` · `<mo-checkbox>` · `<mo-click>` · `<mo-double-tap>` · `<mo-hold>` · `<mo-icon-morph>` · `<mo-like>` |
+| **UI kit** | `motionary/components/ui` | `<mo-avatar-stack>` · `<mo-badge>` · `<mo-bottom-sheet>` · `<mo-drawer>` · `<mo-fab>` · `<mo-navbar>` · `<mo-popover>` · `<mo-pull-refresh>` · `<mo-slider>` · `<mo-tabs>` |
+| **Page-wide** | `motionary/components/page` | `<mo-ambient>` · `<mo-auto-skeleton>` · `<mo-back-to-top>` · `<mo-cursor>` · `<mo-fullpage>` · `<mo-loading-bar>` · `<mo-motion-switch>` · `<mo-splash>` |
+| **Timeline** | `motionary/components/timeline` | `<mo-timeline>` |
+| **Gestures** | `motionary/components/gesture` | `<mo-pinch-zoom>` · `<mo-swipeable>` |
+| **SVG** | `motionary/components/svg` | `<mo-anim-icon>` · `<mo-draw>` · `<mo-mask-reveal>` · `<mo-morph>` |
+| **WebGL** | `motionary/components/webgl` | `<mo-distort>` · `<mo-liquid>` · `<mo-post-fx>` · `<mo-shader>` |
+| **3D depth** | `motionary/components/depth` | `<mo-cube>` · `<mo-depth>` |
+| **Layout** | `motionary/components/layout` | `<mo-auto-animate>` · `<mo-masonry>` |
+| **Packs** | `motionary/components/packs` | `<mo-pack>` |
+| **Effect registry** | `motionary/components/fx` | `<mo-fx>` |
+| **Effect packs** | `motionary/components/effects` | `<mo-audio>` · `<mo-gesture-fx>` · `<mo-motion-theme>` · `<mo-player>` · `<mo-story>` |
 <!-- core-table:end -->
 
 </details>

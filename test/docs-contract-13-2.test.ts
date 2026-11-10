@@ -41,8 +41,8 @@ describe('13.2 component counts: one definition, generated from the manifest (sc
     for (const f of ['README.md', 'README_zh.md', 'README_ja.md']) {
       const s = read(f);
       const block = (s.match(/<!-- core-table:start -->([\s\S]*?)<!-- core-table:end -->/) || [])[1] || '';
-      const tags = [...block.matchAll(/`<(usa-[a-z0-9-]+)>`/g)].map((x) => x[1]);
-      expect(tags.sort(), f).toEqual(core.map((c: any) => c.tag).sort());
+      const tags = [...block.matchAll(/`<(mo-[a-z0-9-]+)>`/g)].map((x) => x[1]);
+      expect(tags.sort(), f).toEqual(core.map((c: any) => c.tag.replace(/^usa-/, 'mo-')).sort());
       for (const p of new Set(core.map((c: any) => c.import.path))) expect(block, `${f} ${p}`).toContain(`\`${p}\``);
     }
   });

@@ -24,7 +24,7 @@ npm i motionary
 <script type="module">import ScrollAnimate from 'motionary'; ScrollAnimate.init();</script>
 ```
 
-Motionary 让内容在滚入视口时自然登场，并提供 <!--fact:public-->212<!--/fact--> 个开箱即用的 `<usa-*>` 动画自定义元素：卡片、按钮、物理效果、页面转场、生成式背景、Lottie、WebGL 等等。无论是纯 HTML，还是 React、Vue、Svelte、Solid、Angular，乃至 Electron、Tauri、WebView2 这类桌面 Web 视图，都能直接使用。运行时零依赖，每个入口都可 tree-shaking，并在 CI 中有固定的 gzip 体积预算；所有动画都遵循 `prefers-reduced-motion`。
+Motionary 让内容在滚入视口时自然登场，并提供 <!--fact:public-->212<!--/fact--> 个开箱即用的 `<mo-*>` 动画自定义元素：卡片、按钮、物理效果、页面转场、生成式背景、Lottie、WebGL 等等。无论是纯 HTML，还是 React、Vue、Svelte、Solid、Angular，乃至 Electron、Tauri、WebView2 这类桌面 Web 视图，都能直接使用。运行时零依赖，每个入口都可 tree-shaking，并在 CI 中有固定的 gzip 体积预算；所有动画都遵循 `prefers-reduced-motion`。
 
 各版本的更新说明见 [CHANGELOG.md](./CHANGELOG.md)。
 
@@ -37,7 +37,7 @@ Motionary 让内容在滚入视口时自然登场，并提供 <!--fact:public-->
 ## 特性
 
 - **214 个滚动显现预设**，分为 14 个系列（核心内置 33 个，`motionary/presets/extended` 再提供 181 个）：淡入、缩放、3D 翻转、clip-path 形状、模糊与遮罩、弹跳、景深、故障风，以及随滚动进度变化的 `scrub-*`。另有 `timeline()`、`staggerChildren()` 和 `parallax()`。
-- **<!--fact:public-->212<!--/fact--> 个 `<usa-*>` Web Components**：`motionary/components` 中按分类提供 <!--fact:core-->91<!--/fact--> 个核心组件，另有 <!--fact:widgets-->121<!--/fact--> 个小部件，每个都有独立入口（`motionary/widgets/<name>`）。此外还有 <!--fact:effects-->141<!--/fact--> 个效果，同样各有独立入口（`motionary/effects/<name>`）。统计口径见 [docs/components.md](./docs/components.md#how-components-are-counted)。
+- **<!--fact:public-->212<!--/fact--> 个 `<mo-*>` Web Components**：`motionary/components` 中按分类提供 <!--fact:core-->91<!--/fact--> 个核心组件，另有 <!--fact:widgets-->121<!--/fact--> 个小部件，每个都有独立入口（`motionary/widgets/<name>`）。此外还有 <!--fact:effects-->141<!--/fact--> 个效果，同样各有独立入口（`motionary/effects/<name>`）。统计口径见 [docs/components.md](./docs/components.md#how-components-are-counted)。
 - **Motion Core**：`motionary/core` 提供的 `createMotion()`，插件化引擎，gzip 后约 2.5 KB（预算 10 KB）。
 - **自研运行时**：`motionary/runtime`（ticker、tween、timeline）加 <!--fact:runtimeModules-->20<!--/fact--> 个模块，覆盖滚动场景、平滑滚动、文字拆分、SVG 变形、精灵图、GIF / APNG / WebP、Lottie 与 dotLottie、WebGL2、glTF / OBJ、2D 物理。模块分为三个等级，只为实际导入的部分付出体积。
 - **适配所有框架**：`motionary/react`、`motionary/vue`、`motionary/svelte`、`motionary/solid`、`motionary/angular`，以及元素封装 `motionary/components/react` · `vue` · `svelte` · `solid`。在服务端导入不会产生任何副作用。
@@ -111,13 +111,15 @@ await motion.play(hero, 'dolly-in', { duration: 900 });   // 播放一次并等�
 
 ```html
 <script type="module">
+  import { defineMoAliases } from 'motionary/components/mo';
   import { defineComponents } from 'motionary/components';
+  defineMoAliases();
   defineComponents(); // 或使用 'motionary/components/lazy' 的 lazyDefine()：只加载页面上出现的标签
 </script>
 
-<usa-card effect="holo">…</usa-card>
-<usa-button deform="gooey">Buy</usa-button>
-<usa-fx effect="confetti" trigger="click"><button>Celebrate</button></usa-fx>
+<mo-card effect="holo">…</mo-card>
+<mo-button deform="gooey">Buy</mo-button>
+<mo-fx effect="confetti" trigger="click"><button>Celebrate</button></mo-fx>
 ```
 
 ### 框架
@@ -163,13 +165,15 @@ export const Card = () => <div use:scrollAnimate={{ animation: 'blur-in-up' }}>H
 ```
 
 ```ts
-// Angular（standalone）：使用 <usa-*> 元素
+// Angular（standalone）：使用 <mo-*> 元素
 import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
-import { provideUsa } from 'motionary/angular';
+import { provideUsa, usaDetail } from 'motionary/angular';
+import { defineMoAliases } from 'motionary/components/mo';
+defineMoAliases();
 // app.config.ts：providers: [provideUsa(APP_INITIALIZER, ['click', 'ui'])]   （要注册的分类）
-@Component({ standalone: true, schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  template: `<usa-checkbox label="Motion" [checked]="on" (usa:change)="on = $any($event).detail.checked"></usa-checkbox>` })
-export class Settings { on = false; }
+@Component({ standalone: true, imports: [UsaOn], schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  template: `<mo-checkbox label="Motion" [checked]="on" [usaOn]="{ change: onChange }"></mo-checkbox>` })
+export class Settings { on = false; onChange = (e: Event) => (this.on = usaDetail(e).checked); }
 ```
 
 SSR、Next.js、Nuxt、SvelteKit：[docs/frameworks-ssr.md](./docs/frameworks-ssr.md)。按分层列出的全部公开子路径：[docs/public-api.md](./docs/public-api.md)。
@@ -200,10 +204,10 @@ defineScrollScene();  // 再注册依赖它的组件
 | 页面 | 用途 |
 |---|---|
 | [动画商店](https://harrisoncn.github.io/Motionary/showcase/) | 在桌面和手机尺寸下预览、调整并复制所有预设与效果 |
-| [组件库](https://harrisoncn.github.io/Motionary/showcase/components.html) | 每个 `<usa-*>` 元素的属性、前置依赖与等级 |
+| [组件库](https://harrisoncn.github.io/Motionary/showcase/components.html) | 每个 `<mo-*>` 元素的属性、前置依赖与等级 |
 | [组件演练场](https://harrisoncn.github.io/Motionary/showcase/run.html) | 每个组件都是一个完整可运行的页面：编辑、**Run**、**Copy** 或 **Download** —— 三者都使用编辑器中的当前代码（下载的文件可独立运行）。HTML (CDN) 运行整个页面，npm + bundler 通过 import map 运行模块；缺少前置模块或运行出错时显示具体修复说明；支持 `run.html#usa-tilt` 这样的深链接 |
-| [时间线编辑器](https://harrisoncn.github.io/Motionary/showcase/playground.html) | 可视化关键帧编辑，导出 `<usa-player>` 可播放的 JSON |
-| [滚动叙事](https://harrisoncn.github.io/Motionary/showcase/story.html) | `<usa-story>` 滚动叙事模板 |
+| [时间线编辑器](https://harrisoncn.github.io/Motionary/showcase/playground.html) | 可视化关键帧编辑，导出 `<mo-player>` 可播放的 JSON |
+| [滚动叙事](https://harrisoncn.github.io/Motionary/showcase/story.html) | `<mo-story>` 滚动叙事模板 |
 | [跨平台预览](https://harrisoncn.github.io/Motionary/showcase/xplat.html) | 同一个预设在 Web、小程序与鸿蒙 ArkUI 中的效果对比 |
 | [demo/index.html](./demo/index.html) | 所有预设，无需构建（本地打开即可） |
 
@@ -215,26 +219,26 @@ defineScrollScene();  // 再注册依赖它的组件
 <!-- core-table:start -->
 | 分类 | 入口 | 元素 |
 |---|---|---|
-| **滚动显现** | `motionary/components/reveal` | `<usa-reveal>` · `<usa-scroll-progress>` · `<usa-scrolly>` · `<usa-stagger>` |
-| **文字** | `motionary/components/text` | `<usa-counter>` · `<usa-glitch>` · `<usa-gradient-text>` · `<usa-handwriting>` · `<usa-scramble>` · `<usa-scroll-highlight>` · `<usa-shimmer-text>` · `<usa-split-text>` · `<usa-text-rotate>` · `<usa-typewriter>` · `<usa-wave-text>` |
-| **交互** | `motionary/components/interaction` | `<usa-magnetic>` · `<usa-press>` · `<usa-ripple>` · `<usa-spotlight>` · `<usa-tilt>` |
-| **反馈** | `motionary/components/feedback` | `<usa-check>` · `<usa-progress>` · `<usa-skeleton>` · `<usa-spinner>` · `<usa-toaster>` |
-| **背景** | `motionary/components/background` | `<usa-acrylic>` · `<usa-aurora>` · `<usa-blobs>` · `<usa-dot-network>` · `<usa-grain>` · `<usa-grid-glow>` · `<usa-marquee>` · `<usa-particles>` · `<usa-water-ripple>` |
-| **过渡** | `motionary/components/transitions` | `<usa-accordion>` · `<usa-dialog>` · `<usa-view-switch>` |
-| **弹簧与物理** | `motionary/components/physics` | `<usa-draggable>` · `<usa-overscroll>` · `<usa-spring>` |
-| **卡片** | `motionary/components/cards` | `<usa-card>` · `<usa-card-stack>` · `<usa-carousel-3d>` · `<usa-sticky-stack>` |
-| **点击与按钮** | `motionary/components/click` | `<usa-button>` · `<usa-checkbox>` · `<usa-click>` · `<usa-double-tap>` · `<usa-hold>` · `<usa-icon-morph>` · `<usa-like>` |
-| **UI 套件** | `motionary/components/ui` | `<usa-avatar-stack>` · `<usa-badge>` · `<usa-bottom-sheet>` · `<usa-drawer>` · `<usa-fab>` · `<usa-navbar>` · `<usa-popover>` · `<usa-pull-refresh>` · `<usa-slider>` · `<usa-tabs>` |
-| **整页** | `motionary/components/page` | `<usa-ambient>` · `<usa-auto-skeleton>` · `<usa-back-to-top>` · `<usa-cursor>` · `<usa-fullpage>` · `<usa-loading-bar>` · `<usa-motion-switch>` · `<usa-splash>` |
-| **时间线** | `motionary/components/timeline` | `<usa-timeline>` |
-| **手势** | `motionary/components/gesture` | `<usa-pinch-zoom>` · `<usa-swipeable>` |
-| **SVG** | `motionary/components/svg` | `<usa-anim-icon>` · `<usa-draw>` · `<usa-mask-reveal>` · `<usa-morph>` |
-| **WebGL** | `motionary/components/webgl` | `<usa-distort>` · `<usa-liquid>` · `<usa-post-fx>` · `<usa-shader>` |
-| **3D 景深** | `motionary/components/depth` | `<usa-cube>` · `<usa-depth>` |
-| **布局** | `motionary/components/layout` | `<usa-auto-animate>` · `<usa-masonry>` |
-| **效果包** | `motionary/components/packs` | `<usa-pack>` |
-| **效果注册表** | `motionary/components/fx` | `<usa-fx>` |
-| **效果包元素** | `motionary/components/effects` | `<usa-audio>` · `<usa-gesture-fx>` · `<usa-motion-theme>` · `<usa-player>` · `<usa-story>` |
+| **滚动显现** | `motionary/components/reveal` | `<mo-reveal>` · `<mo-scroll-progress>` · `<mo-scrolly>` · `<mo-stagger>` |
+| **文字** | `motionary/components/text` | `<mo-counter>` · `<mo-glitch>` · `<mo-gradient-text>` · `<mo-handwriting>` · `<mo-scramble>` · `<mo-scroll-highlight>` · `<mo-shimmer-text>` · `<mo-split-text>` · `<mo-text-rotate>` · `<mo-typewriter>` · `<mo-wave-text>` |
+| **交互** | `motionary/components/interaction` | `<mo-magnetic>` · `<mo-press>` · `<mo-ripple>` · `<mo-spotlight>` · `<mo-tilt>` |
+| **反馈** | `motionary/components/feedback` | `<mo-check>` · `<mo-progress>` · `<mo-skeleton>` · `<mo-spinner>` · `<mo-toaster>` |
+| **背景** | `motionary/components/background` | `<mo-acrylic>` · `<mo-aurora>` · `<mo-blobs>` · `<mo-dot-network>` · `<mo-grain>` · `<mo-grid-glow>` · `<mo-marquee>` · `<mo-particles>` · `<mo-water-ripple>` |
+| **过渡** | `motionary/components/transitions` | `<mo-accordion>` · `<mo-dialog>` · `<mo-view-switch>` |
+| **弹簧与物理** | `motionary/components/physics` | `<mo-draggable>` · `<mo-overscroll>` · `<mo-spring>` |
+| **卡片** | `motionary/components/cards` | `<mo-card>` · `<mo-card-stack>` · `<mo-carousel-3d>` · `<mo-sticky-stack>` |
+| **点击与按钮** | `motionary/components/click` | `<mo-button>` · `<mo-checkbox>` · `<mo-click>` · `<mo-double-tap>` · `<mo-hold>` · `<mo-icon-morph>` · `<mo-like>` |
+| **UI 套件** | `motionary/components/ui` | `<mo-avatar-stack>` · `<mo-badge>` · `<mo-bottom-sheet>` · `<mo-drawer>` · `<mo-fab>` · `<mo-navbar>` · `<mo-popover>` · `<mo-pull-refresh>` · `<mo-slider>` · `<mo-tabs>` |
+| **整页** | `motionary/components/page` | `<mo-ambient>` · `<mo-auto-skeleton>` · `<mo-back-to-top>` · `<mo-cursor>` · `<mo-fullpage>` · `<mo-loading-bar>` · `<mo-motion-switch>` · `<mo-splash>` |
+| **时间线** | `motionary/components/timeline` | `<mo-timeline>` |
+| **手势** | `motionary/components/gesture` | `<mo-pinch-zoom>` · `<mo-swipeable>` |
+| **SVG** | `motionary/components/svg` | `<mo-anim-icon>` · `<mo-draw>` · `<mo-mask-reveal>` · `<mo-morph>` |
+| **WebGL** | `motionary/components/webgl` | `<mo-distort>` · `<mo-liquid>` · `<mo-post-fx>` · `<mo-shader>` |
+| **3D 景深** | `motionary/components/depth` | `<mo-cube>` · `<mo-depth>` |
+| **布局** | `motionary/components/layout` | `<mo-auto-animate>` · `<mo-masonry>` |
+| **效果包** | `motionary/components/packs` | `<mo-pack>` |
+| **效果注册表** | `motionary/components/fx` | `<mo-fx>` |
+| **效果包元素** | `motionary/components/effects` | `<mo-audio>` · `<mo-gesture-fx>` · `<mo-motion-theme>` · `<mo-player>` · `<mo-story>` |
 <!-- core-table:end -->
 
 </details>

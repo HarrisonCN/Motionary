@@ -5,20 +5,23 @@ import css from './download-menu.css?raw';
 export function defineDownloadMenu(tag = 'usa-download-menu'): CustomElementConstructor | undefined {
   return defineElement(tag, Base => class extends Base {
     mount(): void {
-      const disclosure = this.querySelector<HTMLDetailsElement>(':scope > details');
-      if (!disclosure) return;
+      const openMenu = () => this.querySelector<HTMLDetailsElement>(':scope > details[open]');
       this.listen(this, 'keydown', (event: KeyboardEvent) => {
-        if (event.key === 'Escape' && disclosure.open) {
+        const disclosure = openMenu();
+        if (event.key === 'Escape' && disclosure) {
           event.preventDefault();
           disclosure.open = false;
           disclosure.querySelector('summary')?.focus();
         }
       });
       this.listen(this.ownerDocument, 'pointerdown', (event: Event) => {
-        if (disclosure.open && !event.composedPath().includes(this)) disclosure.open = false;
+        const disclosure = openMenu();
+        if (disclosure && !event.composedPath().includes(this)) disclosure.open = false;
       });
-      this.listen(disclosure, 'click', (event: MouseEvent) => {
-        if (event.target instanceof Element && event.target.closest('a[href]')) {
+      this.listen(this, 'click', (event: MouseEvent) => {
+        const disclosure = openMenu();
+        const link = event.target instanceof Element && event.target.closest('a[href]');
+        if (disclosure && link && disclosure.contains(link)) {
           disclosure.open = false;
           disclosure.querySelector('summary')?.focus();
         }

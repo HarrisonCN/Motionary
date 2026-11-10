@@ -37,7 +37,10 @@ it('file tree moves focus back to a folder and closes it', () => {
 });
 
 it('download menu closes on Escape and preserves native download links', () => {
-  document.body.innerHTML = '<mo-download-menu><details open><summary>Formats</summary><a download href="#file">ZIP</a></details></mo-download-menu>';
+  // A head-loaded CDN bundle upgrades the host before the HTML parser appends its children.
+  const menu = document.createElement('mo-download-menu');
+  document.body.replaceChildren(menu);
+  menu.innerHTML = '<details open><summary>Formats</summary><a download href="#file">ZIP</a></details>';
   const link = document.querySelector('a')!;
   link.focus();
   link.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));

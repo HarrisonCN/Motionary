@@ -360,4 +360,4 @@ exports.disableAudio = disableAudio;
 exports.enableAudio = enableAudio;
 exports.getAudio = getAudio;
 exports.onBeat = onBeat;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/chunks/audio-BYC54FVb.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/chunks/audio-BYC54FVb.cjs.map

@@ -236,7 +236,7 @@ function auditMotionA11y(root) {
     });
     const doc = root.ownerDocument || root;
     const anims = typeof root.getAnimations === 'function' ? root.getAnimations({ subtree: true }) : [];
-    const control = doc && (doc.querySelector('usa-motion-switch, [data-usa-pause]') || doc.documentElement.hasAttribute('data-usa-sensitivity'));
+    const control = doc && (doc.querySelector('mo-motion-switch, usa-motion-switch, [data-usa-pause]') || doc.documentElement.hasAttribute('data-usa-sensitivity'));
     if (!control)
         anims.forEach((a) => {
             try {
@@ -272,4 +272,4 @@ exports.restoreMotionSensitivity = restoreMotionSensitivity;
 exports.setMotionSensitivity = setMotionSensitivity;
 exports.staticAlternative = staticAlternative;
 exports.warnBaseline = warnBaseline;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.2.2/dist/components/a11y.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/components/a11y.cjs.map

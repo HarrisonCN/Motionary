@@ -1,3 +1,4 @@
+import { rewriteTagSelectors } from './src/components/alias-css.mjs';
 import typescript from '@rollup/plugin-typescript';
 import tsCompiler from 'typescript';
 import resolve from '@rollup/plugin-node-resolve';
@@ -51,14 +52,15 @@ const BASE_CSS = '.usa-sr{position:absolute;width:1px;height:1px;margin:-1px;pad
 const componentsCss = () => ({
   name: 'components-css',
   generateBundle() {
-    const read = (f) => minifyCss(readFileSync(`src/components/${f}`, 'utf8'));
+    const read = (f) => rewriteTagSelectors(minifyCss(readFileSync(`src/components/${f}`, 'utf8')),
+      tag => `:is(${tag},mo-${tag.slice(4)})`);
     const all = [BASE_CSS];
     for (const [cat, files] of Object.entries(CSS_CATEGORIES)) {
       const css = files.map(read).join('\n');
       all.push(css);
       this.emitFile({ type: 'asset', fileName: `components/${cat}.css`, source: `/* motionary/components/${cat} */\n${BASE_CSS}\n${css}\n` });
     }
-    this.emitFile({ type: 'asset', fileName: 'components.css', source: `/* motionary/components — all <usa-*> styles */\n${all.join('\n')}\n` });
+    this.emitFile({ type: 'asset', fileName: 'components.css', source: `/* motionary/components — public and legacy component styles */\n${all.join('\n')}\n` });
   },
 });
 

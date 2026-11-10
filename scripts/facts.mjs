@@ -59,7 +59,7 @@ export function coreTable(m, lang = 'en') {
   for (const c of m.components.filter((x) => !x.entry)) {
     const k = c.import.path.replace(/^motionary\/components\//, '');
     if (!by.has(k)) by.set(k, []);
-    by.get(k).push(c.tag);
+    by.get(k).push(c.tag.replace(/^usa-/, 'mo-'));
   }
   const keys = [...by.keys()].sort((a, b) => (ORDER.indexOf(a) + 1 || 99) - (ORDER.indexOf(b) + 1 || 99) || a.localeCompare(b));
   return [`| ${L.head.join(' | ')} |`, '|---|---|---|', ...keys.map((k) => `| **${L[k] || k}** | \`motionary/components/${k}\` | ${by.get(k).map((t) => `\`<${t}>\``).join(' · ')} |`)].join('\n');
