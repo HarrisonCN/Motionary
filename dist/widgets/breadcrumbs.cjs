@@ -110,6 +110,8 @@ function defineBreadcrumbs(tag = 'usa-breadcrumbs') {
                 for (const li of old.slice(keep)) {
                     const a = this.reduced ? null : this.motion(li, [{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateX(12px)' }], { duration: 180, easing: 'ease-in' });
                     li.classList.add('usa-bc-out');
+                    li.setAttribute('aria-hidden', 'true');
+                    li.querySelector('[aria-current]')?.removeAttribute('aria-current');
                     const rm = () => li.remove();
                     if (a)
                         a.finished.then(rm, rm);

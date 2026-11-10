@@ -16,3 +16,4 @@
 :is(usa-nav-flyout,mo-nav-flyout)>*>[data-panel][hidden]{display:none}
 :is(usa-nav-flyout,mo-nav-flyout)>.usa-np-bg{position:absolute;left:0;top:0;z-index:1;pointer-events:none;opacity:0;background:var(--usa-np-surface);border-radius:var(--usa-np-radius);box-shadow:0 14px 40px -10px rgba(15,23,42,.3),0 0 0 1px rgba(127,127,127,.14)}
 :is(usa-nav-flyout,mo-nav-flyout)>.usa-np-bg[data-on]{opacity:1}
+@media (prefers-reduced-motion:reduce){:is(usa-mega-menu,mo-mega-menu,usa-nav-flyout,mo-nav-flyout)>*>button::after{transition:none}}
