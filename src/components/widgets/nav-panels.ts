@@ -93,7 +93,11 @@ function navPanels(tag: string, mode: 'mega' | 'flyout'): CustomElementConstruct
           });
           this.listen(this, 'keydown', (e: KeyboardEvent) => this.key(e));
           this.listen(this, 'focusout', (e: FocusEvent) => {
-            if (this._i >= 0 && !this.contains(e.relatedTarget as Node)) this.close();
+            if (this._i < 0 || this.contains(e.relatedTarget as Node)) return;
+            // Firefox may report a null relatedTarget on Tab-out: settle on the real active element.
+            setTimeout(() => {
+              if (this._i >= 0 && !this.contains(document.activeElement)) this.close();
+            }, 0);
           });
           this.listen(document, 'pointerdown', (e: PointerEvent) => {
             if (this._i >= 0 && !this.contains(e.target as Node)) this.close();
