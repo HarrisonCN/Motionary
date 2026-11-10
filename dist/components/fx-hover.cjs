@@ -1,6 +1,7 @@
 'use strict';
 
 var registry = require('../chunks/registry-_XKU28ZC.cjs');
+var base = require('../chunks/base-DzZEJhQB.cjs');
 
 const active = /*#__PURE__*/ new WeakMap();
 /** Wire enter (pointerenter / focusin) and leave (pointerleave / focusout) once per element and effect. */
@@ -232,7 +233,7 @@ const HOVER_FX = [
                     return;
                 x = (e.clientX - r.left) / r.width;
                 y = (e.clientY - r.top) / r.height;
-                raf || (raf = requestAnimationFrame(apply));
+                raf || (raf = base.raf(apply, el));
             };
             el.addEventListener('pointermove', move);
             return {
@@ -241,7 +242,7 @@ const HOVER_FX = [
                 },
                 leave: () => {
                     if (raf)
-                        cancelAnimationFrame(raf), (raf = 0);
+                        base.caf(raf), (raf = 0);
                     const from = el.style.transform;
                     el.style.transform = prev;
                     grid.style.opacity = '0';
@@ -250,7 +251,7 @@ const HOVER_FX = [
                 },
                 cleanup: () => {
                     if (raf)
-                        cancelAnimationFrame(raf);
+                        base.caf(raf);
                     el.removeEventListener('pointermove', move);
                     el.style.transform = prev;
                     grid.remove();

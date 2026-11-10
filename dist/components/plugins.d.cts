@@ -113,8 +113,10 @@ declare const video: EffectPlugin;
 declare const safe: EffectPlugin;
 /** The `perf3` pack. */
 declare const perf3: EffectPlugin;
+/** The `hover` pack (17.3: text-roll, image-swap, focus-reveal, grid-warp, googly-eyes). */
+declare const hover: EffectPlugin;
 /** Every built-in plugin. */
 declare const ALL_PLUGINS: EffectPlugin[];
 
-export { ALL_PLUGINS, ai, chart, cinema, cyber, depth, festival, focus, form, game, genart, geo, gesture3, gpu, light, lottie, morph, music, organic, paper, perf3, physics, retro, safe, shop, social, spatial, surface, text, transitions, video, weather };
+export { ALL_PLUGINS, ai, chart, cinema, cyber, depth, festival, focus, form, game, genart, geo, gesture3, gpu, hover, light, lottie, morph, music, organic, paper, perf3, physics, retro, safe, shop, social, spatial, surface, text, transitions, video, weather };
 export type { EffectPlugin };

@@ -1,4 +1,5 @@
 import { registerEffects } from '../chunks/registry-Di_8M2Md.js';
+import { r as raf, b as caf } from '../chunks/base-DRZOlKiI.js';
 
 const active = /*#__PURE__*/ new WeakMap();
 /** Wire enter (pointerenter / focusin) and leave (pointerleave / focusout) once per element and effect. */
@@ -218,10 +219,10 @@ const HOVER_FX = [
             const grid = layer(el, `position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;background:linear-gradient(currentColor 1px,transparent 1px) 0 0/${g}px ${g}px,linear-gradient(90deg,currentColor 1px,transparent 1px) 0 0/${g}px ${g}px;mix-blend-mode:soft-light`);
             const prev = el.style.transform;
             const amt = num(o.amount, 8);
-            let raf = 0;
+            let raf$1 = 0;
             let x = 0.5, y = 0.5;
             const apply = () => {
-                raf = 0;
+                raf$1 = 0;
                 el.style.transform = `${prev} perspective(600px) skewX(${((x - 0.5) * amt).toFixed(2)}deg) rotateX(${((0.5 - y) * amt).toFixed(2)}deg) rotateY(${((x - 0.5) * amt).toFixed(2)}deg)`;
             };
             const move = (e) => {
@@ -230,7 +231,7 @@ const HOVER_FX = [
                     return;
                 x = (e.clientX - r.left) / r.width;
                 y = (e.clientY - r.top) / r.height;
-                raf || (raf = requestAnimationFrame(apply));
+                raf$1 || (raf$1 = raf(apply, el));
             };
             el.addEventListener('pointermove', move);
             return {
@@ -238,8 +239,8 @@ const HOVER_FX = [
                     grid.style.opacity = '.35';
                 },
                 leave: () => {
-                    if (raf)
-                        cancelAnimationFrame(raf), (raf = 0);
+                    if (raf$1)
+                        caf(raf$1), (raf$1 = 0);
                     const from = el.style.transform;
                     el.style.transform = prev;
                     grid.style.opacity = '0';
@@ -247,8 +248,8 @@ const HOVER_FX = [
                         ctx.animate(el, [{ transform: from }, { transform: prev || 'none' }], { duration: 600, easing: 'cubic-bezier(.34,1.56,.64,1)' });
                 },
                 cleanup: () => {
-                    if (raf)
-                        cancelAnimationFrame(raf);
+                    if (raf$1)
+                        caf(raf$1);
                     el.removeEventListener('pointermove', move);
                     el.style.transform = prev;
                     grid.remove();
