@@ -1,6 +1,6 @@
 import { f as defineElement } from '../chunks/base-SPDwWyB1.js';
 import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
-import { c as css, a as activityClass, b as coffeeView } from '../chunks/activity-XkTm51Nm.js';
+import { c as css, a as activityClass, b as coffeeView } from '../chunks/activity-G3K6LHEP.js';
 
 function defineCoffeeTimer(tag = 'usa-coffee-timer') {
     const ctor = defineElement(tag, Base => {

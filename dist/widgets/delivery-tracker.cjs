@@ -2,7 +2,7 @@
 
 var base = require('../chunks/base-DzZEJhQB.cjs');
 var moName = require('../chunks/mo-name-DR9ysd5S.cjs');
-var activity = require('../chunks/activity-BAhympNW.cjs');
+var activity = require('../chunks/activity-XCjQREWy.cjs');
 
 function defineDeliveryTracker(tag = 'usa-delivery-tracker') {
     const ctor = base.defineElement(tag, Base => {

@@ -1,6 +1,6 @@
 import { f as defineElement } from '../chunks/base-SPDwWyB1.js';
 import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
-import { c as css, a as activityClass, e as rideView } from '../chunks/activity-XkTm51Nm.js';
+import { c as css, a as activityClass, e as rideView } from '../chunks/activity-G3K6LHEP.js';
 
 function defineRideStatus(tag = 'usa-ride-status') {
     const ctor = defineElement(tag, Base => {
