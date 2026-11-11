@@ -6,7 +6,7 @@ A small WebGL2 renderer with its own API: scene graph, camera, lights, box / pla
 
 **Runtime tier:** advanced — see [runtime tiers](../runtime-tiers.md).
 
-Part of Motionary's own zero-dependency runtime. Size budget: **9.0 KB gzip** (enforced in CI).
+Part of Motionary's own zero-dependency runtime. Historical size reference: **9.0 KB gzip** (informational; no cap).
 
 ## Prerequisites
 

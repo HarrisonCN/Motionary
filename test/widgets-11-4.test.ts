@@ -64,7 +64,7 @@ describe('11.4: manifest, Store, docs, CI', () => {
     expect(read('README.md')).toMatch(/docs\/runtime-tiers\.md/);
     expect(read('docs/ROADMAP.md')).toMatch(/✅ \*\*v11\.4 — /);
   });
-  it('check:tiers runs in CI with fixed budgets', () => {
+  it('check:tiers runs in CI with historical references', () => {
     const pkg = JSON.parse(read('package.json'));
     expect(pkg.scripts['check:tiers']).toBe('node scripts/check-tiers.mjs');
     expect(read('.github/workflows/ci.yml')).toMatch(/npm run check:tiers/);

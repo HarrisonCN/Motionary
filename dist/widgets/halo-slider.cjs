@@ -81,4 +81,4 @@ function defineHaloSlider(tag = 'usa-halo-slider') {
 }
 
 exports.defineHaloSlider = defineHaloSlider;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.4.0/dist/widgets/halo-slider.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/widgets/halo-slider.cjs.map

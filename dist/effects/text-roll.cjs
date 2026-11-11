@@ -15,4 +15,4 @@ function registerTextRoll() {
 exports.effect = effect;
 exports.register = registerTextRoll;
 exports.registerTextRoll = registerTextRoll;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.4.0/dist/effects/text-roll.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/effects/text-roll.cjs.map

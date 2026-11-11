@@ -1043,6 +1043,202 @@
       "usa:activate": [
         "{pressed}"
       ]
+    },
+    "usa-coffee-timer": {
+      "usa:action": [
+        "object: detail"
+      ],
+      "usa:change": [
+        "object: detail"
+      ],
+      "usa:complete": [
+        "object: detail"
+      ],
+      "usa:tick": [
+        "object: detail"
+      ]
+    },
+    "usa-delivery-tracker": {
+      "usa:action": [
+        "object: detail"
+      ],
+      "usa:change": [
+        "object: detail"
+      ],
+      "usa:complete": [
+        "object: detail"
+      ],
+      "usa:tick": [
+        "object: detail"
+      ]
+    },
+    "usa-flight-status": {
+      "usa:action": [
+        "object: detail"
+      ],
+      "usa:change": [
+        "object: detail"
+      ],
+      "usa:complete": [
+        "object: detail"
+      ],
+      "usa:tick": [
+        "object: detail"
+      ]
+    },
+    "usa-glucose-sparkline": {
+      "usa:action": [
+        "object: detail"
+      ],
+      "usa:change": [
+        "object: detail"
+      ],
+      "usa:complete": [
+        "object: detail"
+      ],
+      "usa:tick": [
+        "object: detail"
+      ]
+    },
+    "usa-meter-countdown": {
+      "usa:action": [
+        "object: detail"
+      ],
+      "usa:change": [
+        "object: detail"
+      ],
+      "usa:complete": [
+        "object: detail"
+      ],
+      "usa:tick": [
+        "object: detail"
+      ]
+    },
+    "usa-orbit-pass": {
+      "usa:action": [
+        "object: detail"
+      ],
+      "usa:change": [
+        "object: detail"
+      ],
+      "usa:complete": [
+        "object: detail"
+      ],
+      "usa:tick": [
+        "object: detail"
+      ]
+    },
+    "usa-race-telemetry": {
+      "usa:action": [
+        "object: detail"
+      ],
+      "usa:change": [
+        "object: detail"
+      ],
+      "usa:complete": [
+        "object: detail"
+      ],
+      "usa:tick": [
+        "object: detail"
+      ]
+    },
+    "usa-ride-status": {
+      "usa:action": [
+        "object: detail"
+      ],
+      "usa:change": [
+        "object: detail"
+      ],
+      "usa:complete": [
+        "object: detail"
+      ],
+      "usa:tick": [
+        "object: detail"
+      ]
+    },
+    "usa-route-sparkline": {
+      "usa:action": [
+        "object: detail"
+      ],
+      "usa:change": [
+        "object: detail"
+      ],
+      "usa:complete": [
+        "object: detail"
+      ],
+      "usa:tick": [
+        "object: detail"
+      ]
+    },
+    "usa-status-pill": {
+      "usa:action": [
+        "object: detail"
+      ],
+      "usa:change": [
+        "object: detail"
+      ],
+      "usa:complete": [
+        "object: detail"
+      ],
+      "usa:tick": [
+        "object: detail"
+      ]
+    },
+    "usa-sun-timeline": {
+      "usa:action": [
+        "object: detail"
+      ],
+      "usa:change": [
+        "object: detail"
+      ],
+      "usa:complete": [
+        "object: detail"
+      ],
+      "usa:tick": [
+        "object: detail"
+      ]
+    },
+    "usa-transit-progress": {
+      "usa:action": [
+        "object: detail"
+      ],
+      "usa:change": [
+        "object: detail"
+      ],
+      "usa:complete": [
+        "object: detail"
+      ],
+      "usa:tick": [
+        "object: detail"
+      ]
+    },
+    "usa-vital-wave": {
+      "usa:action": [
+        "object: detail"
+      ],
+      "usa:change": [
+        "object: detail"
+      ],
+      "usa:complete": [
+        "object: detail"
+      ],
+      "usa:tick": [
+        "object: detail"
+      ]
+    },
+    "usa-workout-player": {
+      "usa:action": [
+        "object: detail"
+      ],
+      "usa:change": [
+        "object: detail"
+      ],
+      "usa:complete": [
+        "object: detail"
+      ],
+      "usa:tick": [
+        "object: detail"
+      ]
     }
   }
 }

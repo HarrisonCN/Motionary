@@ -1672,6 +1672,11 @@ interface LegacyAttributes {
         tint?: string | boolean | number;
         'tint-opacity'?: string | boolean | number;
     };
+    'usa-activity-wall': {
+        label?: string | boolean | number;
+        paused?: string | boolean | number;
+        speed?: string | boolean | number;
+    };
     'usa-add-to-cart': {
         added?: string | boolean | number;
         cart?: string | boolean | number;
@@ -1845,6 +1850,15 @@ interface LegacyAttributes {
         for?: string | boolean | number;
         formats?: string | boolean | number;
     };
+    'usa-coffee-timer': {
+        animated?: string | boolean | number;
+        disabled?: string | boolean | number;
+        drink?: string | boolean | number;
+        duration?: string | boolean | number;
+        label?: string | boolean | number;
+        running?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-color-picker': {
         swatches?: string | boolean | number;
     };
@@ -1902,6 +1916,21 @@ interface LegacyAttributes {
         locale?: string | boolean | number;
         max?: string | boolean | number;
         min?: string | boolean | number;
+    };
+    'usa-delivery-tracker': {
+        animated?: string | boolean | number;
+        'call-label'?: string | boolean | number;
+        disabled?: string | boolean | number;
+        driver?: string | boolean | number;
+        eta?: string | boolean | number;
+        'eta-label'?: string | boolean | number;
+        label?: string | boolean | number;
+        'message-label'?: string | boolean | number;
+        running?: string | boolean | number;
+        stage?: string | boolean | number;
+        status?: string | boolean | number;
+        'status-label'?: string | boolean | number;
+        value?: string | boolean | number;
     };
     'usa-depth': {
         rotate?: string | boolean | number;
@@ -1987,6 +2016,20 @@ interface LegacyAttributes {
         simulate?: string | boolean | number;
     };
     'usa-file-tree': {};
+    'usa-flight-status': {
+        animated?: string | boolean | number;
+        arrival?: string | boolean | number;
+        departure?: string | boolean | number;
+        destination?: string | boolean | number;
+        disabled?: string | boolean | number;
+        from?: string | boolean | number;
+        label?: string | boolean | number;
+        origin?: string | boolean | number;
+        running?: string | boolean | number;
+        status?: string | boolean | number;
+        to?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-fullpage': {
         axis?: string | boolean | number;
         dots?: string | boolean | number;
@@ -2056,6 +2099,19 @@ interface LegacyAttributes {
         markers?: string | boolean | number;
         speed?: string | boolean | number;
         tilt?: string | boolean | number;
+    };
+    'usa-glucose-sparkline': {
+        animated?: string | boolean | number;
+        disabled?: string | boolean | number;
+        end?: string | boolean | number;
+        label?: string | boolean | number;
+        middle?: string | boolean | number;
+        running?: string | boolean | number;
+        start?: string | boolean | number;
+        trend?: string | boolean | number;
+        unit?: string | boolean | number;
+        value?: string | boolean | number;
+        values?: string | boolean | number;
     };
     'usa-gpu-particles': {
         colors?: string | boolean | number;
@@ -2282,6 +2338,15 @@ interface LegacyAttributes {
     'usa-message-list': {
         label?: string | boolean | number;
     };
+    'usa-meter-countdown': {
+        animated?: string | boolean | number;
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+        running?: string | boolean | number;
+        title?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-milestones': {
         layout?: string | boolean | number;
     };
@@ -2358,6 +2423,15 @@ interface LegacyAttributes {
         locale?: string | boolean | number;
         prefix?: string | boolean | number;
         suffix?: string | boolean | number;
+        value?: string | boolean | number;
+    };
+    'usa-orbit-pass': {
+        animated?: string | boolean | number;
+        disabled?: string | boolean | number;
+        eta?: string | boolean | number;
+        label?: string | boolean | number;
+        running?: string | boolean | number;
+        title?: string | boolean | number;
         value?: string | boolean | number;
     };
     'usa-orbit-progress': {
@@ -2524,6 +2598,17 @@ interface LegacyAttributes {
         label?: string | boolean | number;
         threshold?: string | boolean | number;
     };
+    'usa-race-telemetry': {
+        animated?: string | boolean | number;
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        lap?: string | boolean | number;
+        'lap-label'?: string | boolean | number;
+        laps?: string | boolean | number;
+        running?: string | boolean | number;
+        sector?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-radar': {
         label?: string | boolean | number;
         rings?: string | boolean | number;
@@ -2557,6 +2642,15 @@ interface LegacyAttributes {
         'root-margin'?: string | boolean | number;
         threshold?: string | boolean | number;
     };
+    'usa-ride-status': {
+        animated?: string | boolean | number;
+        disabled?: string | boolean | number;
+        driver?: string | boolean | number;
+        label?: string | boolean | number;
+        running?: string | boolean | number;
+        status?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-ripple': {
         centered?: string | boolean | number;
         color?: string | boolean | number;
@@ -2573,6 +2667,17 @@ interface LegacyAttributes {
         'runtime-src'?: string | boolean | number;
         src?: string | boolean | number;
         'state-machine'?: string | boolean | number;
+    };
+    'usa-route-sparkline': {
+        animated?: string | boolean | number;
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        running?: string | boolean | number;
+        status?: string | boolean | number;
+        title?: string | boolean | number;
+        unit?: string | boolean | number;
+        value?: string | boolean | number;
+        values?: string | boolean | number;
     };
     'usa-route-transition': {
         'cross-document'?: string | boolean | number;
@@ -2769,6 +2874,17 @@ interface LegacyAttributes {
         step?: string | boolean | number;
         value?: string | boolean | number;
     };
+    'usa-status-pill': {
+        animated?: string | boolean | number;
+        disabled?: string | boolean | number;
+        icon?: string | boolean | number;
+        label?: string | boolean | number;
+        running?: string | boolean | number;
+        status?: string | boolean | number;
+        tone?: string | boolean | number;
+        unit?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-stepper': {
         clickable?: string | boolean | number;
         label?: string | boolean | number;
@@ -2796,6 +2912,19 @@ interface LegacyAttributes {
         dismiss?: string | boolean | number;
         items?: string | boolean | number;
         label?: string | boolean | number;
+    };
+    'usa-sun-timeline': {
+        animated?: string | boolean | number;
+        disabled?: string | boolean | number;
+        dusk?: string | boolean | number;
+        'dusk-label'?: string | boolean | number;
+        label?: string | boolean | number;
+        now?: string | boolean | number;
+        'now-label'?: string | boolean | number;
+        running?: string | boolean | number;
+        sunset?: string | boolean | number;
+        'sunset-label'?: string | boolean | number;
+        value?: string | boolean | number;
     };
     'usa-swipe-deck': {
         label?: string | boolean | number;
@@ -2894,6 +3023,14 @@ interface LegacyAttributes {
         groups?: string | boolean | number;
         label?: string | boolean | number;
     };
+    'usa-transit-progress': {
+        animated?: string | boolean | number;
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        running?: string | boolean | number;
+        stations?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-typewriter': {
         delay?: string | boolean | number;
         'delete-speed'?: string | boolean | number;
@@ -2919,6 +3056,16 @@ interface LegacyAttributes {
         active?: string | boolean | number;
         duration?: string | boolean | number;
         effect?: string | boolean | number;
+    };
+    'usa-vital-wave': {
+        animated?: string | boolean | number;
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        period?: string | boolean | number;
+        running?: string | boolean | number;
+        unit?: string | boolean | number;
+        value?: string | boolean | number;
+        values?: string | boolean | number;
     };
     'usa-voice-button': {
         bars?: string | boolean | number;
@@ -2952,6 +3099,17 @@ interface LegacyAttributes {
         label?: string | boolean | number;
         scene?: string | boolean | number;
     };
+    'usa-workout-player': {
+        animated?: string | boolean | number;
+        disabled?: string | boolean | number;
+        distance?: string | boolean | number;
+        label?: string | boolean | number;
+        'reset-label'?: string | boolean | number;
+        running?: string | boolean | number;
+        'target-label'?: string | boolean | number;
+        unit?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-xp-bar': {
         level?: string | boolean | number;
         per?: string | boolean | number;
@@ -2964,6 +3122,7 @@ interface LegacyEvents {
         'usa:toggle': CustomEvent<any>;
     };
     'usa-acrylic': {};
+    'usa-activity-wall': {};
     'usa-add-to-cart': {
         'usa:add': CustomEvent<any>;
     };
@@ -3037,6 +3196,12 @@ interface LegacyEvents {
     'usa-code-export': {
         'usa:copy': CustomEvent<any>;
     };
+    'usa-coffee-timer': {
+        'usa:action': CustomEvent<any>;
+        'usa:change': CustomEvent<any>;
+        'usa:complete': CustomEvent<any>;
+        'usa:tick': CustomEvent<any>;
+    };
     'usa-color-picker': {
         'usa:change': CustomEvent<any>;
         'usa:input': CustomEvent<any>;
@@ -3065,6 +3230,12 @@ interface LegacyEvents {
     'usa-cursor': {};
     'usa-date-picker': {
         'usa:change': CustomEvent<any>;
+    };
+    'usa-delivery-tracker': {
+        'usa:action': CustomEvent<any>;
+        'usa:change': CustomEvent<any>;
+        'usa:complete': CustomEvent<any>;
+        'usa:tick': CustomEvent<any>;
     };
     'usa-depth': {};
     'usa-dialog': {
@@ -3115,6 +3286,12 @@ interface LegacyEvents {
         'usa:files': CustomEvent<any>;
     };
     'usa-file-tree': {};
+    'usa-flight-status': {
+        'usa:action': CustomEvent<any>;
+        'usa:change': CustomEvent<any>;
+        'usa:complete': CustomEvent<any>;
+        'usa:tick': CustomEvent<any>;
+    };
     'usa-fullpage': {
         'usa:section': CustomEvent<any>;
     };
@@ -3142,6 +3319,12 @@ interface LegacyEvents {
     'usa-glitch': {};
     'usa-globe': {
         'usa:focus': CustomEvent<any>;
+    };
+    'usa-glucose-sparkline': {
+        'usa:action': CustomEvent<any>;
+        'usa:change': CustomEvent<any>;
+        'usa:complete': CustomEvent<any>;
+        'usa:tick': CustomEvent<any>;
     };
     'usa-gpu-particles': {
         'usa:backend': CustomEvent<any>;
@@ -3243,6 +3426,12 @@ interface LegacyEvents {
     'usa-message-list': {
         'usa:message': CustomEvent<any>;
     };
+    'usa-meter-countdown': {
+        'usa:action': CustomEvent<any>;
+        'usa:change': CustomEvent<any>;
+        'usa:complete': CustomEvent<any>;
+        'usa:tick': CustomEvent<any>;
+    };
     'usa-milestones': {
         'usa:reach': CustomEvent<any>;
     };
@@ -3297,6 +3486,12 @@ interface LegacyEvents {
         'usa:read': CustomEvent<any>;
     };
     'usa-odometer': {};
+    'usa-orbit-pass': {
+        'usa:action': CustomEvent<any>;
+        'usa:change': CustomEvent<any>;
+        'usa:complete': CustomEvent<any>;
+        'usa:tick': CustomEvent<any>;
+    };
     'usa-orbit-progress': {};
     'usa-organic-card': {};
     'usa-otp': {
@@ -3371,6 +3566,12 @@ interface LegacyEvents {
         'usa:change': CustomEvent<any>;
     };
     'usa-pull-refresh': {};
+    'usa-race-telemetry': {
+        'usa:action': CustomEvent<any>;
+        'usa:change': CustomEvent<any>;
+        'usa:complete': CustomEvent<any>;
+        'usa:tick': CustomEvent<any>;
+    };
     'usa-radar': {
         'usa:ping': CustomEvent<any>;
     };
@@ -3386,11 +3587,23 @@ interface LegacyEvents {
         'usa:enter': CustomEvent<any>;
         'usa:leave': CustomEvent<any>;
     };
+    'usa-ride-status': {
+        'usa:action': CustomEvent<any>;
+        'usa:change': CustomEvent<any>;
+        'usa:complete': CustomEvent<any>;
+        'usa:tick': CustomEvent<any>;
+    };
     'usa-ripple': {};
     'usa-rive': {
         'usa:error': CustomEvent<any>;
         'usa:load': CustomEvent<any>;
         'usa:runtime-missing': CustomEvent<any>;
+    };
+    'usa-route-sparkline': {
+        'usa:action': CustomEvent<any>;
+        'usa:change': CustomEvent<any>;
+        'usa:complete': CustomEvent<any>;
+        'usa:tick': CustomEvent<any>;
     };
     'usa-route-transition': {
         'usa:navigate': CustomEvent<any>;
@@ -3478,6 +3691,12 @@ interface LegacyEvents {
     'usa-star-rating': {
         'usa:change': CustomEvent<any>;
     };
+    'usa-status-pill': {
+        'usa:action': CustomEvent<any>;
+        'usa:change': CustomEvent<any>;
+        'usa:complete': CustomEvent<any>;
+        'usa:tick': CustomEvent<any>;
+    };
     'usa-stepper': {
         'usa:change': CustomEvent<any>;
     };
@@ -3494,6 +3713,12 @@ interface LegacyEvents {
     };
     'usa-suggestion-chips': {
         'usa:pick': CustomEvent<any>;
+    };
+    'usa-sun-timeline': {
+        'usa:action': CustomEvent<any>;
+        'usa:change': CustomEvent<any>;
+        'usa:complete': CustomEvent<any>;
+        'usa:tick': CustomEvent<any>;
     };
     'usa-swipe-deck': {
         'usa:empty': CustomEvent<any>;
@@ -3550,6 +3775,12 @@ interface LegacyEvents {
         'usa:export': CustomEvent<any>;
         'usa:import': CustomEvent<any>;
     };
+    'usa-transit-progress': {
+        'usa:action': CustomEvent<any>;
+        'usa:change': CustomEvent<any>;
+        'usa:complete': CustomEvent<any>;
+        'usa:tick': CustomEvent<any>;
+    };
     'usa-typewriter': {
         'usa:complete': CustomEvent<any>;
     };
@@ -3564,6 +3795,12 @@ interface LegacyEvents {
     'usa-view-switch': {
         'usa:change': CustomEvent<any>;
     };
+    'usa-vital-wave': {
+        'usa:action': CustomEvent<any>;
+        'usa:change': CustomEvent<any>;
+        'usa:complete': CustomEvent<any>;
+        'usa:tick': CustomEvent<any>;
+    };
     'usa-voice-button': {};
     'usa-volume-knob': {
         'usa:change': CustomEvent<any>;
@@ -3574,6 +3811,12 @@ interface LegacyEvents {
     'usa-weather-card': {};
     'usa-worker-canvas': {
         'usa:backend': CustomEvent<any>;
+    };
+    'usa-workout-player': {
+        'usa:action': CustomEvent<any>;
+        'usa:change': CustomEvent<any>;
+        'usa:complete': CustomEvent<any>;
+        'usa:tick': CustomEvent<any>;
     };
     'usa-xp-bar': {
         'usa:levelup': CustomEvent<any>;

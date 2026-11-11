@@ -38,4 +38,4 @@ function defineParticleIcon(tag = 'usa-particle-icon') {
 }
 
 exports.defineParticleIcon = defineParticleIcon;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.4.0/dist/widgets/particle-icon.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/widgets/particle-icon.cjs.map

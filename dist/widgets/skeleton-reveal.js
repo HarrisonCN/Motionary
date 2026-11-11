@@ -1,2 +1,2 @@
 export { d as defineSkeletonReveal } from '../chunks/skeleton-reveal-C1w5G0dG.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.4.0/dist/widgets/skeleton-reveal.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/widgets/skeleton-reveal.js.map

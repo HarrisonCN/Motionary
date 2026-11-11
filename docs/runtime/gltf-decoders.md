@@ -6,7 +6,7 @@ Lets motionary/runtime/format-gltf load KHR_draco_mesh_compression meshes and KH
 
 **Runtime tier:** advanced — see [runtime tiers](../runtime-tiers.md).
 
-Part of Motionary's own zero-dependency runtime. Size budget: **3.0 KB gzip** (enforced in CI).
+Part of Motionary's own zero-dependency runtime. Historical size reference: **3.0 KB gzip** (informational; no cap).
 
 ## Prerequisites
 

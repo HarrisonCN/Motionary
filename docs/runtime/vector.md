@@ -6,7 +6,7 @@ Plays Lottie (bodymovin JSON) and dotLottie (.lottie) files on Canvas 2D with Mo
 
 **Runtime tier:** standard — see [runtime tiers](../runtime-tiers.md).
 
-Part of Motionary's own zero-dependency runtime. Size budget: **12.0 KB gzip** (enforced in CI).
+Part of Motionary's own zero-dependency runtime. Historical size reference: **12.0 KB gzip** (informational; no cap).
 
 ## Prerequisites
 

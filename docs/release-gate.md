@@ -11,7 +11,7 @@ list equal to the jobs in [`.github/workflows/ci.yml`](../.github/workflows/ci.y
 | Required check | What it runs |
 |---|---|
 | `Node 20` | typecheck, unit tests, build, exports, tree-shaking, runtime tiers, component contract (`check:contract`), prerequisite docs, docs and contract consistency (`check:docs`) |
-| `Node 22` | the same, plus package lint, `npm pack` contents, package size (`check:pack`), bundle size budgets (`size:check`), the component playground in headless Chrome (`check:playground`) and the performance budgets (`perf`) |
+| `Node 22` | the same, plus package lint, `npm pack` contents, package hygiene and size report (`check:pack`), bundle size report (`size:check`), the component playground in headless Chrome (`check:playground`) and the performance budgets (`perf`) |
 | `Node 24` | the same as Node 20 |
 | `Browser (chromium)` | the real-browser suite (`test/browser`): lifecycle, keyboard / ARIA, motion sensitivity, resource release, complex-page performance — [browser-matrix.md](https://github.com/HarrisonCN/Motionary/blob/main/docs/browser-matrix.md) |
 | `Browser (firefox)` | the same in Firefox |

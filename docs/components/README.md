@@ -1,4 +1,4 @@
-# Motionary components (222)
+# Motionary components (237)
 
 One page per `<usa-*>` element, generated from the source. Machine-readable: `motionary/tooling/manifest.json` · Pages `/components.json` · `/llms.txt` · `/llms-full.txt`. How to use these with an AI assistant: [AGENTS.md](../../AGENTS.md) and [the prompt guide](../ai-prompt-guide.md).
 
@@ -26,6 +26,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 
 ## ui
 
+- [`<mo-activity-wall>`](usa-activity-wall.md) — Live activity wall
 - [`<mo-add-to-cart>`](usa-add-to-cart.md) — Add to cart (fly-to-cart)
 - [`<mo-avatar-stack>`](usa-avatar-stack.md) — Avatar stack
 - [`<mo-badge>`](usa-badge.md) — Badge
@@ -40,10 +41,12 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-chat-composer>`](usa-chat-composer.md) — AI chat composer
 - [`<mo-clock-control>`](usa-clock-control.md) — Motion clock control
 - [`<mo-code-export>`](usa-code-export.md) — Code export
+- [`<mo-coffee-timer>`](usa-coffee-timer.md) — Coffee timer
 - [`<mo-color-picker>`](usa-color-picker.md) — Color picker
 - [`<mo-command-palette>`](usa-command-palette.md) — Command palette (⌘K)
 - [`<mo-countdown>`](usa-countdown.md) — Flip countdown
 - [`<mo-date-picker>`](usa-date-picker.md) — Date picker
+- [`<mo-delivery-tracker>`](usa-delivery-tracker.md) — Delivery tracker
 - [`<mo-dock>`](usa-dock.md) — macOS-style dock
 - [`<mo-dotlottie>`](usa-dotlottie.md) — Interactive dotLottie (themes + state machine) · Requires: motionary/runtime/vector + motionary/runtime/lottie-state
 - [`<mo-download-menu>`](usa-download-menu.md) — Download menu
@@ -52,6 +55,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-festival-banner>`](usa-festival-banner.md) — Festival banner
 - [`<mo-field>`](usa-field.md) — Animated field
 - [`<mo-file-tree>`](usa-file-tree.md) — File tree
+- [`<mo-flight-status>`](usa-flight-status.md) — Flight status
 - [`<mo-fullscreen-menu>`](usa-fullscreen-menu.md) — Full-screen menu (circle / curtain reveal)
 - [`<mo-gauge>`](usa-gauge.md) — Spring gauge
 - [`<mo-gen-art>`](usa-gen-art.md) — Generative artwork
@@ -59,6 +63,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-gl-model>`](usa-gl-model.md) — Compressed 3D model (Draco / KTX2) · Requires: motionary/runtime/gl + motionary/runtime/format-gltf + motionary/runtime/gltf-decoders + draco3d + basis_transcoder.js
 - [`<mo-gl-scene>`](usa-gl-scene.md) — 3D scene (glTF / OBJ) · Requires: motionary/runtime/gl + motionary/runtime/format-gltf + motionary/runtime/format-obj + motionary/runtime/gltf-anim
 - [`<mo-globe>`](usa-globe.md) — Spinning globe
+- [`<mo-glucose-sparkline>`](usa-glucose-sparkline.md) — Glucose sparkline
 - [`<mo-gpu-particles>`](usa-gpu-particles.md) — GPU particle canvas
 - [`<mo-gyro-card>`](usa-gyro-card.md) — Gyro 3D card
 - [`<mo-halo-segmented>`](usa-halo-segmented.md) — Halo segmented control
@@ -78,6 +83,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-mega-menu>`](usa-mega-menu.md) — Mega menu (morphing panels)
 - [`<mo-menu>`](usa-menu.md) — Dropdown menu
 - [`<mo-message-list>`](usa-message-list.md) — Chat thread
+- [`<mo-meter-countdown>`](usa-meter-countdown.md) — Meter countdown
 - [`<mo-motion>`](usa-motion.md) — Motion DSL
 - [`<mo-motion-inspector>`](usa-motion-inspector.md) — Motion inspector
 - [`<mo-motion-prefs>`](usa-motion-prefs.md) — Motion preference panel
@@ -89,6 +95,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-nav-morph>`](usa-nav-morph.md) — Navbar with morphing indicator
 - [`<mo-navbar>`](usa-navbar.md) — Auto-hide navbar
 - [`<mo-notification-bell>`](usa-notification-bell.md) — Notification bell
+- [`<mo-orbit-pass>`](usa-orbit-pass.md) — Orbit flyover
 - [`<mo-orbit-progress>`](usa-orbit-progress.md) — Orbit progress dial
 - [`<mo-organic-card>`](usa-organic-card.md) — Organic card
 - [`<mo-otp>`](usa-otp.md) — OTP code input
@@ -107,11 +114,14 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-product-gallery>`](usa-product-gallery.md) — Product gallery
 - [`<mo-prop-panel>`](usa-prop-panel.md) — Property panel
 - [`<mo-pull-refresh>`](usa-pull-refresh.md) — Pull to refresh
+- [`<mo-race-telemetry>`](usa-race-telemetry.md) — Race telemetry
 - [`<mo-radar>`](usa-radar.md) — Radar scope
 - [`<mo-reactions>`](usa-reactions.md) — Emoji reactions
 - [`<mo-red-envelope>`](usa-red-envelope.md) — Red envelope (红包)
 - [`<mo-retro-button>`](usa-retro-button.md) — Retro buttons
+- [`<mo-ride-status>`](usa-ride-status.md) — Ride status
 - [`<mo-rive>`](usa-rive.md) — Rive player (official runtime) · Requires: @rive-app/canvas
+- [`<mo-route-sparkline>`](usa-route-sparkline.md) — Route sparkline
 - [`<mo-scene>`](usa-scene.md) — Cinematic scene
 - [`<mo-segmented>`](usa-segmented.md) — Segmented control
 - [`<mo-shader-backdrop>`](usa-shader-backdrop.md) — Shader backdrop + post chain
@@ -121,10 +131,12 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-snap-carousel>`](usa-snap-carousel.md) — Snap carousel (drag · inertia · snap) · Requires: motionary/runtime/drag-snap
 - [`<mo-sparkline>`](usa-sparkline.md) — Sparkline
 - [`<mo-spatial-card>`](usa-spatial-card.md) — Spatial card
+- [`<mo-status-pill>`](usa-status-pill.md) — Status pill
 - [`<mo-stepper>`](usa-stepper.md) — Stepper / wizard
 - [`<mo-sticky-wall>`](usa-sticky-wall.md) — Sticky-note wall
 - [`<mo-stories>`](usa-stories.md) — Stories viewer
 - [`<mo-suggestion-chips>`](usa-suggestion-chips.md) — Suggestion chips
+- [`<mo-sun-timeline>`](usa-sun-timeline.md) — Sun timeline
 - [`<mo-tab-bar>`](usa-tab-bar.md) — Tabs with animated indicator
 - [`<mo-tabs>`](usa-tabs.md) — Tabs
 - [`<mo-terminal>`](usa-terminal.md) — Terminal window
@@ -133,10 +145,13 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-tip>`](usa-tip.md) — Tooltip / popover 2.0
 - [`<mo-title-sequence>`](usa-title-sequence.md) — Title sequence
 - [`<mo-token-editor>`](usa-token-editor.md) — Motion token editor (W3C DTCG)
+- [`<mo-transit-progress>`](usa-transit-progress.md) — Transit progress
 - [`<mo-upload-progress>`](usa-upload-progress.md) — Upload progress
 - [`<mo-video-card>`](usa-video-card.md) — Video card
+- [`<mo-vital-wave>`](usa-vital-wave.md) — Vital dot wave
 - [`<mo-voice-button>`](usa-voice-button.md) — Voice button
 - [`<mo-worker-canvas>`](usa-worker-canvas.md) — Worker canvas
+- [`<mo-workout-player>`](usa-workout-player.md) — Workout player
 - [`<mo-xp-bar>`](usa-xp-bar.md) — XP bar
 
 ## page

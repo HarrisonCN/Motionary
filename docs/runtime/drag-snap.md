@@ -6,7 +6,7 @@ Pointer drag along one axis with velocity tracking, inertial throws, rubber-band
 
 **Runtime tier:** standard — see [runtime tiers](../runtime-tiers.md).
 
-Part of Motionary's own zero-dependency runtime. Size budget: **4.0 KB gzip** (enforced in CI).
+Part of Motionary's own zero-dependency runtime. Historical size reference: **4.0 KB gzip** (informational; no cap).
 
 ## Prerequisites
 

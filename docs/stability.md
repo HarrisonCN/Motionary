@@ -1,8 +1,8 @@
 # Stability: stable core, experimental surfaces and LTS (17.0)
 
-Motionary's focus is **zero dependencies, fixed size budgets and accessible motion**. From 16.3 to 17.2 the project added
+Motionary's focus is **zero dependencies, reported artifact sizes and accessible motion**. From 16.3 to 17.2 the project added
 no new components or effects. Since 17.3 (maintainer's decision, 2026-11-10) 17.x minors add components and effect packs
-again — each with its own size budget line, tests and the same accessibility contract — and `<mo-*>` is the default element
+again — each with its own size measurement, tests and the same accessibility contract — and `<mo-*>` is the default element
 name (`<usa-*>` is a deprecated alias kept through 17.x). Breaking changes go through a minor
 release with a deprecation first. 17.0 is the last planned major: after it, changes ship as minors with deprecations,
 and anything deprecated stays until a future major at the earliest.
@@ -21,7 +21,7 @@ Covered by semver and by the deprecation policy ([deprecations.md](./deprecation
 | Components | `<mo-*>` elements and their `<usa-*>` names (17.0: `mo-*` is the preferred name; `usa-*` is deprecated but keeps working, removal not before a future major — [deprecations-v17.md](./deprecations-v17.md#mo-names)): `motionary/components`, `motionary/components/*`, `motionary/widgets/*`, `motionary/effects/*` and their CDN bundles (`window.MotionaryComponents` = `window.UsaComponents`) |
 | CLI | `npx motionary doctor` / `migrate` / `compat`, the codemods (`mo-codemod`, `usa-codemod-*`) |
 
-Every stable entry point has a gzip budget in `size-budget.json`, zero runtime dependencies and the component contract
+Every stable entry point has a gzip measurement in `size-budget.json`, zero runtime dependencies and the component contract
 (keyboard, ARIA, `prefers-reduced-motion`, lifecycle) checked in CI.
 
 <a id="experimental"></a>

@@ -351,4 +351,4 @@ function defineAudio(tag = 'usa-audio') {
 }
 
 export { AUDIO_FX as A, disableAudio as a, bindBeat as b, createBeatDetector as c, defineAudio as d, enableAudio as e, getAudio as g, onBeat as o };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.4.0/dist/chunks/audio-BiO_x6I0.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/chunks/audio-BiO_x6I0.js.map

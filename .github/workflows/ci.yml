@@ -40,7 +40,7 @@ jobs:
       - run: npm run check:exports
       - name: Tree-shaking (side-effect-free imports, one export pulls in only its own code)
         run: npm run check:treeshake
-      - name: Runtime tiers (basic / standard / advanced bundles within fixed budgets)
+      - name: Runtime tiers (size report and dependency isolation)
         run: npm run check:tiers
       - name: Component contract (12.0, blocking — docs/component-contract.md)
         run: npm run check:contract
@@ -54,10 +54,10 @@ jobs:
       - name: Package contents (dry run)
         if: matrix.node == 22
         run: npm pack --dry-run
-      - name: Package size — no source maps on npm, fixed limits (check:pack)
+      - name: Package contents and size report — no source maps on npm (check:pack)
         if: matrix.node == 22
         run: npm run check:pack | tee -a "$GITHUB_STEP_SUMMARY"
-      - name: Bundle size budget
+      - name: Bundle size report and measurement consistency
         if: matrix.node == 22
         run: npm run size:check | tee -a "$GITHUB_STEP_SUMMARY"
       - name: Component playground in headless Chrome — Run / Copy / Download share the editor, standalone download, import map, prerequisite hints, sandbox isolation, 390 px (check:playground)

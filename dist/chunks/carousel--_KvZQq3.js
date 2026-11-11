@@ -194,4 +194,4 @@ function defineCarousel(tag = 'usa-carousel') {
 }
 
 export { CAROUSEL_EFFECTS as C, defineCarousel as d };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.4.0/dist/chunks/carousel--_KvZQq3.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/chunks/carousel--_KvZQq3.js.map

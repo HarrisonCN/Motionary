@@ -13,4 +13,4 @@ function defineMoName(tag, ctor) {
 }
 
 export { defineMoName as d };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.4.0/dist/chunks/mo-name-DT5wwaGR.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/chunks/mo-name-DT5wwaGR.js.map

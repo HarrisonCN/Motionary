@@ -94,4 +94,4 @@ function defineHaloSegmented(tag = 'usa-halo-segmented') {
 }
 
 export { defineHaloSegmented };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.4.0/dist/widgets/halo-segmented.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/widgets/halo-segmented.js.map

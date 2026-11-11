@@ -66,7 +66,7 @@ Enhancement suggestions are tracked as GitHub issues. When you are creating an e
    npm test
    ```
 
-6. After building, check the published entry points and the size budgets:
+6. After building, check the published entry points and the size reports:
    ```bash
    npm run check:exports
    npm run size:check   # budgets live in size-budget.json
@@ -81,6 +81,10 @@ Enhancement suggestions are tracked as GitHub issues. When you are creating an e
   count or version description is stale — see [docs/components.md](./docs/components.md#how-components-are-counted).
 - Releases go through the release gate: required CI checks green on the PR head, merged at that exact commit —
   [docs/release-gate.md](./docs/release-gate.md).
+
+## Component growth and size policy
+
+The maintainer sets no limit on component count, individual component size, aggregate bundle size, npm archive size or package file count. Prioritize the requested visual result, interaction quality and complete APIs. `size-budget.json`, `PACK_LIMITS` and `TIER_BUDGETS` are historical references only: crossing them must not fail CI or block a release. Continue reporting actual sizes, checking generated measurements, missing outputs, package hygiene, tree shaking and tier isolation. Keyboard, reduced motion, compatibility, frame timing and cleanup checks still apply. See [size-policy.md](docs/size-policy.md).
 
 ## Commit Messages
 

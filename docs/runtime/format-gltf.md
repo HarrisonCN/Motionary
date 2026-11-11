@@ -6,7 +6,7 @@ Load glTF 2.0 (.gltf with external or data: buffers, .glb) into motionary/runtim
 
 **Runtime tier:** advanced — see [runtime tiers](../runtime-tiers.md).
 
-Part of Motionary's own zero-dependency runtime. Size budget: **6.0 KB gzip** (enforced in CI).
+Part of Motionary's own zero-dependency runtime. Historical size reference: **6.0 KB gzip** (informational; no cap).
 
 ## Prerequisites
 

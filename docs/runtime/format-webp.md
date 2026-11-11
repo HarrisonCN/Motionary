@@ -6,7 +6,7 @@ Split animated WebP files (ANIM / ANMF) into standalone frames (decoded by the b
 
 **Runtime tier:** standard — see [runtime tiers](../runtime-tiers.md).
 
-Part of Motionary's own zero-dependency runtime. Size budget: **3.0 KB gzip** (enforced in CI).
+Part of Motionary's own zero-dependency runtime. Historical size reference: **3.0 KB gzip** (informational; no cap).
 
 ## Prerequisites
 

@@ -6,7 +6,7 @@ Split animated PNGs into standalone frame PNGs (decoded by the browser), composi
 
 **Runtime tier:** standard — see [runtime tiers](../runtime-tiers.md).
 
-Part of Motionary's own zero-dependency runtime. Size budget: **3.0 KB gzip** (enforced in CI).
+Part of Motionary's own zero-dependency runtime. Historical size reference: **3.0 KB gzip** (informational; no cap).
 
 ## Prerequisites
 

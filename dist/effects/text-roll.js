@@ -11,4 +11,4 @@ function registerTextRoll() {
 }
 
 export { effect, registerTextRoll as register, registerTextRoll };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.4.0/dist/effects/text-roll.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/effects/text-roll.js.map

@@ -22,16 +22,16 @@ A module only depends on modules of its own tier or below (checked by `test/widg
 - **Store / gallery:** a tier badge next to the "Requires" badge; the prerequisites panel names the tier.
 - **Docs:** each `docs/runtime/<module>.md` states its tier.
 
-## Budgets by tier
+## Size reports by tier
 
 `npm run check:tiers` (CI, after the build) bundles all modules of a tier — plus the tiers below — registered with
-`use()`, and checks fixed gzip budgets:
+`use()`, and reports gzip sizes against historical references (no enforced size cap):
 
-| Tier bundle | Measured (11.3 build) | Budget |
+| Tier bundle | Measured (11.3 build) | Historical reference |
 |---|---|---|
 | basic (core + 4 modules) | 10.84 KB | 12 KB |
 | standard (basic + 9 modules) | 33.73 KB | 37 KB |
 | advanced (everything, 21 modules) | 54.55 KB | 60 KB |
 
 It also fails when the basic bundle contains a standard / advanced module, or the standard bundle an advanced one.
-The per-module budgets in `size-budget.json` stay as they are. Budgets are not raised automatically.
+The per-module values in `size-budget.json` are also historical references, not limits. See [size policy](size-policy.md).

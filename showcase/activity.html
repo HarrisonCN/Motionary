@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Live Activity Wall · Motionary 17.5</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;background:#181818;color:#ededee;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:inherit;text-decoration:none}.wrap{max-width:1040px;padding:0 40px;margin:auto}header{display:flex;align-items:center;justify-content:space-between;padding:28px 0;font-size:12px;color:#9e9ea2}.brand{font-size:23px;letter-spacing:-.06em;font-weight:650;color:#ededee}nav{display:flex;gap:24px}.intro{padding:38px 0 28px;display:flex;align-items:end;justify-content:space-between;gap:20px}.intro h1{font-size:clamp(30px,5vw,48px);font-weight:500;letter-spacing:-.05em;margin:8px 0 10px}.intro p{font-size:13px;line-height:1.8;color:#929298;margin:0}.eyebrow{font-size:9px;letter-spacing:.24em;color:#99c9b6}.controls{display:flex;gap:8px;flex-wrap:wrap}.controls button{font:11px inherit;font-size:11px;border:1px solid #ffffff18;border-radius:20px;padding:8px 14px;background:#242426;color:#c7c7cd;cursor:pointer}button:focus-visible,a:focus-visible{outline:2px solid #96e7d2;outline-offset:4px}.video-viewport{position:relative;width:100%;aspect-ratio:4/3;overflow:hidden;background:#292929;border-radius:22px;box-shadow:0 20px 70px #0005}.scene{position:absolute;left:0;top:0;width:960px;height:720px;transform:scale(var(--scene-scale,1));transform-origin:0 0;overflow:hidden;background:#292929}.scene mo-activity-wall{width:1248px;position:absolute;left:-148px;top:0;grid-template-columns:200px 232px 232px 224px 200px;grid-auto-columns:initial;gap:40px;padding:0;--usa-wall-row-gap:38px;--usa-wall-background:transparent;--usa-wall-speed:40s}.scene mo-activity-wall>[data-column]{--usa-wall-offset:-6px}.scene mo-activity-wall>[data-column]:nth-child(3){--usa-wall-offset:25px}.scene mo-activity-wall>[data-column]:nth-child(4){--usa-wall-offset:-2px}.scene .edge{padding-top:14px;gap:38px!important}.scene .edge .usa-activity{width:150px;margin-left:58px}.scene .edge:last-child .usa-activity{margin-left:0;margin-right:72px}.scene .edge .usa-activity[data-activity=status-pill]{width:140px}.scene mo-activity-wall{animation:wall-arrive 1.15s cubic-bezier(.2,.7,.2,1) both}.scene .edge .usa-activity[data-activity=route-sparkline]{width:170px}.scene .usa-activity{flex:none}.foot{display:flex;justify-content:space-between;gap:20px;padding:19px 0 36px;font-size:10px;line-height:1.7;color:#78787e}.legend{padding:36px 0 20px;border-top:1px solid #ffffff0e}.legend h2{font-size:21px;font-weight:450;margin:0 0 12px}.legend p{color:#929298;font-size:12px;line-height:1.8}.inventory{display:flex;flex-wrap:wrap;gap:8px;padding-bottom:45px}.inventory a{border:1px solid #ffffff13;color:#a1aaa8;border-radius:9px;padding:7px 10px;font:10px ui-monospace,monospace}.video-viewport[data-still] mo-activity-wall{animation:none}.video-viewport[data-still] .usa-activity *{animation-play-state:paused!important}@keyframes wall-arrive{from{opacity:0;filter:blur(12px);transform:scale(.95)}to{opacity:1;filter:blur(0);transform:scale(1)}}@media(max-width:650px){.wrap{padding:0 16px}.intro{display:block;padding-top:18px}.controls{margin-top:18px}nav{gap:14px}.video-viewport{border-radius:14px}.foot{display:block}.scene mo-activity-wall{grid-auto-columns:initial;overflow:hidden;scroll-snap-type:none}}@media(prefers-reduced-motion:reduce){.scene mo-activity-wall{animation:none!important}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header><a class="brand" href="./">mo. motionary</a><nav aria-label="主导航"><a href="./components.html">组件画廊 ↗</a><a href="./luminous.html">Luminous ↗</a><a href="https://github.com/HarrisonCN/Motionary">GitHub ↗</a></nav></header>
+    <section class="intro"><div><span class="eyebrow">MOTIONARY / LIVE ACTIVITIES / 17.5</span><h1>小小组件，实时发生。</h1><p>从视频里的动态卡片墙，到可独立接入数据的十五个组件。<br>相同的比例、细密的刻度，以及各自流动的时间。</p></div><div class="controls"><button id="pause" type="button" aria-pressed="false">暂停演示</button><button id="reset" type="button">重播入场</button><button id="still" type="button" aria-pressed="false">静态对照</button></div></section>
+    <main>
+      <div class="video-viewport" id="viewport"><div class="scene" id="scene">
+        <mo-activity-wall id="wall" label="视频同款实时状态卡片墙" speed="40">
+          <div data-column class="edge" aria-label="边缘状态列">
+            <mo-status-pill icon="package" tone="purple" value="" unit="" status=""></mo-status-pill><mo-status-pill tone="pink" value="" unit="" icon="message"></mo-status-pill><mo-status-pill value="6.5" unit="MT" tone="blue" icon="drop"></mo-status-pill><mo-route-sparkline title="" value="" unit="" status="45m left"></mo-route-sparkline><mo-status-pill icon="plane" value="" unit=""></mo-status-pill><mo-status-pill icon="package" tone="purple" value="" unit=""></mo-status-pill><mo-status-pill tone="pink" value="" unit="" icon="message"></mo-status-pill><mo-status-pill value="6.5" unit="MT" tone="blue" icon="drop"></mo-status-pill>
+          </div>
+          <div data-column aria-label="航班与配送">
+            <mo-flight-status value="92"></mo-flight-status><mo-delivery-tracker value="34"></mo-delivery-tracker><mo-glucose-sparkline value="7.2" animated></mo-glucose-sparkline><mo-delivery-tracker stage="out"></mo-delivery-tracker><mo-flight-status value="92"></mo-flight-status><mo-delivery-tracker value="34"></mo-delivery-tracker><mo-glucose-sparkline value="7.2" animated></mo-glucose-sparkline>
+          </div>
+          <div data-column aria-label="出行与运动">
+            <mo-transit-progress></mo-transit-progress><mo-coffee-timer value="18" duration="30" running></mo-coffee-timer><mo-orbit-pass value="76"></mo-orbit-pass><mo-workout-player value="1515" running animated></mo-workout-player><mo-transit-progress></mo-transit-progress><mo-coffee-timer value="18" duration="30" running></mo-coffee-timer><mo-orbit-pass value="76"></mo-orbit-pass><mo-workout-player value="1515" running animated></mo-workout-player>
+          </div>
+          <div data-column aria-label="时间与生命体征">
+            <mo-sun-timeline></mo-sun-timeline><mo-vital-wave value="82" unit="mmhg" animated></mo-vital-wave><mo-meter-countdown value="81" max="120" running></mo-meter-countdown><mo-race-telemetry value="72" animated></mo-race-telemetry><mo-status-pill icon="arrow" value="" unit="" status="45m" style="width:164px;align-self:flex-start"></mo-status-pill><mo-sun-timeline></mo-sun-timeline><mo-vital-wave value="82" unit="mmhg" animated></mo-vital-wave><mo-meter-countdown value="81" max="120" running></mo-meter-countdown><mo-race-telemetry value="72" animated></mo-race-telemetry>
+          </div>
+          <div data-column class="edge" aria-label="行程快捷状态">
+            <mo-status-pill value="7.2" unit="" tone="blue" icon="drop"></mo-status-pill><mo-status-pill value="" unit="" tone="lime" icon="train"></mo-status-pill><mo-status-pill value="5" unit="MT" icon="train"></mo-status-pill><mo-status-pill value="88" unit="" tone="pink" icon="heart"></mo-status-pill><mo-ride-status value="48" running></mo-ride-status><mo-status-pill value="" unit="" tone="red" icon="car"></mo-status-pill><mo-status-pill value="7.2" unit="" tone="blue" icon="drop"></mo-status-pill><mo-status-pill value="" unit="" tone="lime" icon="train"></mo-status-pill>
+          </div>
+        </mo-activity-wall>
+      </div></div>
+      <div class="foot"><span>DEMO DATA / 全部为演示数据，无实时服务连接。健康读数仅作界面展示。<br>悬停或聚焦卡片墙会暂停漂移；系统减少动态效果时保持静态。</span><span>15 COMPONENTS · SVG / CSS · MO-*<br>960 × 720 reference composition</span></div>
+      <section class="legend"><h2>每一张卡片，都能单独使用。</h2><p>原生按钮支持键盘。通过属性、value 或 update() 接入你自己的数据；时钟仅在显式 running 且可见时运行。点击组件名查看独立示例和 API。</p></section>
+      <div class="inventory" id="inventory"></div>
+    </main>
+  </div>
+  <script type="module">
+    import { defineWidgets } from '../dist/components/widgets.js';
+    defineWidgets('17.5');
+    const wall=document.querySelector('#wall'),viewport=document.querySelector('#viewport'),scene=document.querySelector('#scene');
+    const resize=new ResizeObserver(()=>scene.style.setProperty('--scene-scale',String(viewport.clientWidth/960)));resize.observe(viewport);
+    const clocks=[...wall.querySelectorAll('mo-coffee-timer,mo-meter-countdown,mo-workout-player')];
+    const motion=[...wall.querySelectorAll('[animated]')];let paused=false,still=false,stopped=false;const running=new Set();
+    const apply=()=>{const stop=paused||still;wall.paused=stop;viewport.toggleAttribute('data-still',stop);for(const el of motion)el.toggleAttribute('animated',!stop);if(stop&&!stopped){for(const el of clocks){if(el.hasAttribute('running'))running.add(el);el.pause()}}else if(!stop&&stopped){for(const el of running)el.play();running.clear()}stopped=stop;};
+    document.querySelector('#pause').addEventListener('click',event=>{paused=!paused;event.currentTarget.setAttribute('aria-pressed',String(paused));event.currentTarget.textContent=paused?'继续演示':'暂停演示';apply()});
+    document.querySelector('#still').addEventListener('click',event=>{still=!still;event.currentTarget.setAttribute('aria-pressed',String(still));apply()});
+    document.querySelector('#reset').addEventListener('click',()=>{for(const el of clocks){el.reset();if(!stopped)el.play()}wall.getAnimations().forEach(a=>a.cancel());if(!stopped&&!matchMedia('(prefers-reduced-motion:reduce)').matches)wall.animate([{opacity:0,filter:'blur(12px)',transform:'scale(.95)'},{opacity:1,filter:'blur(0)',transform:'scale(1)'}],{duration:1150,easing:'cubic-bezier(.2,.7,.2,1)'});});
+    // Repeating coffee extraction is a demo behavior; the reusable timer stops once at its duration.
+    wall.addEventListener('usa:complete',event=>{if(event.target.matches('mo-coffee-timer')&&!stopped){event.target.value=8;event.target.play()}});
+    const names=['flight-status','transit-progress','sun-timeline','delivery-tracker','glucose-sparkline','coffee-timer','vital-wave','orbit-pass','meter-countdown','race-telemetry','workout-player','status-pill','ride-status','route-sparkline','activity-wall'];
+    for(const name of names){const a=document.createElement('a');a.href='./components.html#'+name;a.textContent='mo-'+name;document.querySelector('#inventory').append(a)}
+  </script>
+</body>
+</html>

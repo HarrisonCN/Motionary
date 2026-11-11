@@ -21,6 +21,6 @@ Same API as `motionary/components`, but the light-DOM CSS is **not** inlined: th
 mount or explicit `loadCategoryStyles()` call retries it. To let the alias entry read and copy selectors from linked CSS,
 serve the stylesheet from the same origin as the page.
 
-The [size report](./size-report.json) records the gzip sizes of both imports for this release. The lite import has a fixed 70 KiB gzip budget.
+The [size report](./size-report.json) records the gzip sizes of both imports for this release. Import sizes are measured without enforced caps; see [size policy](size-policy.md).
 
 Serve the CSS from somewhere else with `onDemandStyles('https://cdn.example/motionary@17/dist/')`, or preload with `loadCategoryStyles('cards', base)`.

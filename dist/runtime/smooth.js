@@ -1,4 +1,4 @@
-import { R as RUNTIME_VERSION, r as requireModule } from '../chunks/registry-DqP2DnFc.js';
+import { R as RUNTIME_VERSION, r as requireModule } from '../chunks/registry-DKFddqVT.js';
 import { p as parseEase } from '../chunks/ease-XN8_0sXu.js';
 
 /**
@@ -276,4 +276,4 @@ const allSmooth = () => Array.from(instances);
 const smooth = { id: 'smooth', version: RUNTIME_VERSION, tier: 'standard', requires: ['core'], api: { smoothScroll, allSmooth, SmoothScroll } };
 
 export { SmoothScroll, allSmooth, smooth, smoothScroll };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.4.0/dist/runtime/smooth.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/runtime/smooth.js.map

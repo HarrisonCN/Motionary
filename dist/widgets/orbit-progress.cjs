@@ -50,4 +50,4 @@ function defineOrbitProgress(tag = 'usa-orbit-progress') {
 }
 
 exports.defineOrbitProgress = defineOrbitProgress;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.4.0/dist/widgets/orbit-progress.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/widgets/orbit-progress.cjs.map

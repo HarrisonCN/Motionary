@@ -81,7 +81,7 @@ const W = list.filter((e) => e.kind === 'widget'), E = list.filter((e) => e.kind
 files['docs/entry-points.md'] = [
   '# Per-component entry points (10.9)',
   '',
-  'Load one component instead of a whole group. Every `<usa-*>` widget has its own subpath `motionary/widgets/<name>` (the tag without `usa-`), and every 6.x+ effect has `motionary/effects/<name>`. An entry registers **only its own tag** (or effect) — verified in CI for every entry — and has a fixed gzip budget (`size-budget.json`).',
+  'Load one component instead of a whole group. Every `<usa-*>` widget has its own subpath `motionary/widgets/<name>` (the tag without `usa-`), and every 6.x+ effect has `motionary/effects/<name>`. An entry registers **only its own tag** (or effect) — verified in CI for every entry — and has a measured gzip size (`size-budget.json`; no enforced cap).',
   '',
   '```js',
   "import { defineToastStack } from 'motionary/widgets/toast-stack';",
