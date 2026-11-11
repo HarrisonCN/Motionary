@@ -1,7 +1,7 @@
 {
   "name": "motionary",
-  "version": "17.4.0",
-  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 222 animated Web Components (91 core, 131 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
+  "version": "17.5.0",
+  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 237 animated Web Components (91 core, 146 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
   "unpkg": "dist/index.umd.js",
@@ -3128,6 +3128,156 @@
       "require": {
         "types": "./dist/widgets/title-sequence.d.cts",
         "default": "./dist/widgets/title-sequence.cjs"
+      }
+    },
+    "./widgets/flight-status": {
+      "import": {
+        "types": "./dist/widgets/flight-status.d.ts",
+        "default": "./dist/widgets/flight-status.js"
+      },
+      "require": {
+        "types": "./dist/widgets/flight-status.d.cts",
+        "default": "./dist/widgets/flight-status.cjs"
+      }
+    },
+    "./widgets/transit-progress": {
+      "import": {
+        "types": "./dist/widgets/transit-progress.d.ts",
+        "default": "./dist/widgets/transit-progress.js"
+      },
+      "require": {
+        "types": "./dist/widgets/transit-progress.d.cts",
+        "default": "./dist/widgets/transit-progress.cjs"
+      }
+    },
+    "./widgets/sun-timeline": {
+      "import": {
+        "types": "./dist/widgets/sun-timeline.d.ts",
+        "default": "./dist/widgets/sun-timeline.js"
+      },
+      "require": {
+        "types": "./dist/widgets/sun-timeline.d.cts",
+        "default": "./dist/widgets/sun-timeline.cjs"
+      }
+    },
+    "./widgets/delivery-tracker": {
+      "import": {
+        "types": "./dist/widgets/delivery-tracker.d.ts",
+        "default": "./dist/widgets/delivery-tracker.js"
+      },
+      "require": {
+        "types": "./dist/widgets/delivery-tracker.d.cts",
+        "default": "./dist/widgets/delivery-tracker.cjs"
+      }
+    },
+    "./widgets/glucose-sparkline": {
+      "import": {
+        "types": "./dist/widgets/glucose-sparkline.d.ts",
+        "default": "./dist/widgets/glucose-sparkline.js"
+      },
+      "require": {
+        "types": "./dist/widgets/glucose-sparkline.d.cts",
+        "default": "./dist/widgets/glucose-sparkline.cjs"
+      }
+    },
+    "./widgets/coffee-timer": {
+      "import": {
+        "types": "./dist/widgets/coffee-timer.d.ts",
+        "default": "./dist/widgets/coffee-timer.js"
+      },
+      "require": {
+        "types": "./dist/widgets/coffee-timer.d.cts",
+        "default": "./dist/widgets/coffee-timer.cjs"
+      }
+    },
+    "./widgets/vital-wave": {
+      "import": {
+        "types": "./dist/widgets/vital-wave.d.ts",
+        "default": "./dist/widgets/vital-wave.js"
+      },
+      "require": {
+        "types": "./dist/widgets/vital-wave.d.cts",
+        "default": "./dist/widgets/vital-wave.cjs"
+      }
+    },
+    "./widgets/orbit-pass": {
+      "import": {
+        "types": "./dist/widgets/orbit-pass.d.ts",
+        "default": "./dist/widgets/orbit-pass.js"
+      },
+      "require": {
+        "types": "./dist/widgets/orbit-pass.d.cts",
+        "default": "./dist/widgets/orbit-pass.cjs"
+      }
+    },
+    "./widgets/meter-countdown": {
+      "import": {
+        "types": "./dist/widgets/meter-countdown.d.ts",
+        "default": "./dist/widgets/meter-countdown.js"
+      },
+      "require": {
+        "types": "./dist/widgets/meter-countdown.d.cts",
+        "default": "./dist/widgets/meter-countdown.cjs"
+      }
+    },
+    "./widgets/race-telemetry": {
+      "import": {
+        "types": "./dist/widgets/race-telemetry.d.ts",
+        "default": "./dist/widgets/race-telemetry.js"
+      },
+      "require": {
+        "types": "./dist/widgets/race-telemetry.d.cts",
+        "default": "./dist/widgets/race-telemetry.cjs"
+      }
+    },
+    "./widgets/workout-player": {
+      "import": {
+        "types": "./dist/widgets/workout-player.d.ts",
+        "default": "./dist/widgets/workout-player.js"
+      },
+      "require": {
+        "types": "./dist/widgets/workout-player.d.cts",
+        "default": "./dist/widgets/workout-player.cjs"
+      }
+    },
+    "./widgets/status-pill": {
+      "import": {
+        "types": "./dist/widgets/status-pill.d.ts",
+        "default": "./dist/widgets/status-pill.js"
+      },
+      "require": {
+        "types": "./dist/widgets/status-pill.d.cts",
+        "default": "./dist/widgets/status-pill.cjs"
+      }
+    },
+    "./widgets/ride-status": {
+      "import": {
+        "types": "./dist/widgets/ride-status.d.ts",
+        "default": "./dist/widgets/ride-status.js"
+      },
+      "require": {
+        "types": "./dist/widgets/ride-status.d.cts",
+        "default": "./dist/widgets/ride-status.cjs"
+      }
+    },
+    "./widgets/route-sparkline": {
+      "import": {
+        "types": "./dist/widgets/route-sparkline.d.ts",
+        "default": "./dist/widgets/route-sparkline.js"
+      },
+      "require": {
+        "types": "./dist/widgets/route-sparkline.d.cts",
+        "default": "./dist/widgets/route-sparkline.cjs"
+      }
+    },
+    "./widgets/activity-wall": {
+      "import": {
+        "types": "./dist/widgets/activity-wall.d.ts",
+        "default": "./dist/widgets/activity-wall.js"
+      },
+      "require": {
+        "types": "./dist/widgets/activity-wall.d.cts",
+        "default": "./dist/widgets/activity-wall.cjs"
       }
     },
     "./widgets/luminous-switch": {

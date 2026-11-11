@@ -130,6 +130,21 @@ import { defineMegaMenu, defineNavFlyout, type UsaMegaMenuElement, type UsaNavFl
 import { defineFullscreenMenu, type UsaFullscreenMenuElement } from './fullscreen-menu';
 import { defineBreadcrumbs, type UsaBreadcrumbsElement, type BreadcrumbItem } from './breadcrumbs';
 import { defineMoAliases } from '../mo';
+import { defineFlightStatus, type UsaFlightStatusElement } from './flight-status';
+import { defineTransitProgress, type UsaTransitProgressElement } from './transit-progress';
+import { defineSunTimeline, type UsaSunTimelineElement } from './sun-timeline';
+import { defineDeliveryTracker, type UsaDeliveryTrackerElement } from './delivery-tracker';
+import { defineGlucoseSparkline, type UsaGlucoseSparklineElement } from './glucose-sparkline';
+import { defineCoffeeTimer, type UsaCoffeeTimerElement } from './coffee-timer';
+import { defineVitalWave, type UsaVitalWaveElement } from './vital-wave';
+import { defineOrbitPass, type UsaOrbitPassElement } from './orbit-pass';
+import { defineMeterCountdown, type UsaMeterCountdownElement } from './meter-countdown';
+import { defineRaceTelemetry, type UsaRaceTelemetryElement } from './race-telemetry';
+import { defineWorkoutPlayer, type UsaWorkoutPlayerElement } from './workout-player';
+import { defineStatusPill, type UsaStatusPillElement } from './status-pill';
+import { defineRideStatus, type UsaRideStatusElement } from './ride-status';
+import { defineRouteSparkline, type UsaRouteSparklineElement } from './route-sparkline';
+import { defineActivityWall, type UsaActivityWallElement } from './activity-wall';
 import { defineLuminousSwitch, type UsaLuminousSwitchElement } from './luminous-switch';
 import { defineParticleIcon, type UsaParticleIconElement } from './particle-icon';
 import { defineParticleButton, type UsaParticleButtonElement } from './particle-button';
@@ -137,6 +152,8 @@ import { defineHaloSegmented, type UsaHaloSegmentedElement } from './halo-segmen
 import { defineHaloSlider, type UsaHaloSliderElement } from './halo-slider';
 import { defineOrbitProgress, type UsaOrbitProgressElement } from './orbit-progress';
 
+export { defineFlightStatus, defineTransitProgress, defineSunTimeline, defineDeliveryTracker, defineGlucoseSparkline, defineCoffeeTimer, defineVitalWave, defineOrbitPass, defineMeterCountdown, defineRaceTelemetry, defineWorkoutPlayer, defineStatusPill, defineRideStatus, defineRouteSparkline, defineActivityWall };
+export type { UsaFlightStatusElement, UsaTransitProgressElement, UsaSunTimelineElement, UsaDeliveryTrackerElement, UsaGlucoseSparklineElement, UsaCoffeeTimerElement, UsaVitalWaveElement, UsaOrbitPassElement, UsaMeterCountdownElement, UsaRaceTelemetryElement, UsaWorkoutPlayerElement, UsaStatusPillElement, UsaRideStatusElement, UsaRouteSparklineElement, UsaActivityWallElement };
 export { defineLuminousSwitch, defineParticleIcon, defineParticleButton, defineHaloSegmented, defineHaloSlider, defineOrbitProgress };
 export type { UsaLuminousSwitchElement, UsaParticleIconElement, UsaParticleButtonElement, UsaHaloSegmentedElement, UsaHaloSliderElement, UsaOrbitProgressElement };
 
@@ -320,6 +337,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '10.6': { 'usa-lottie-player': defineLottiePlayer, 'usa-rive': defineRive, 'usa-token-editor': defineTokenEditor },
   '10.7': { 'usa-physics-playground': definePhysicsPlayground, 'usa-motion-prompt': defineMotionPrompt },
   '17.3': { 'usa-mega-menu': defineMegaMenu, 'usa-nav-flyout': defineNavFlyout, 'usa-fullscreen-menu': defineFullscreenMenu, 'usa-breadcrumbs': defineBreadcrumbs, 'usa-file-tree': defineFileTree, 'usa-download-menu': defineDownloadMenu, 'usa-title-sequence': defineTitleSequence },
+  '17.5': { 'usa-flight-status': defineFlightStatus, 'usa-transit-progress': defineTransitProgress, 'usa-sun-timeline': defineSunTimeline, 'usa-delivery-tracker': defineDeliveryTracker, 'usa-glucose-sparkline': defineGlucoseSparkline, 'usa-coffee-timer': defineCoffeeTimer, 'usa-vital-wave': defineVitalWave, 'usa-orbit-pass': defineOrbitPass, 'usa-meter-countdown': defineMeterCountdown, 'usa-race-telemetry': defineRaceTelemetry, 'usa-workout-player': defineWorkoutPlayer, 'usa-status-pill': defineStatusPill, 'usa-ride-status': defineRideStatus, 'usa-route-sparkline': defineRouteSparkline, 'usa-activity-wall': defineActivityWall },
   '17.4': { 'usa-luminous-switch': defineLuminousSwitch, 'usa-particle-icon': defineParticleIcon, 'usa-particle-button': defineParticleButton, 'usa-halo-segmented': defineHaloSegmented, 'usa-halo-slider': defineHaloSlider, 'usa-orbit-progress': defineOrbitProgress },
 };
 
@@ -337,6 +355,36 @@ export function defineWidgets(release?: string): void {
 
 declare global {
   interface HTMLElementTagNameMap {
+    'usa-flight-status': UsaFlightStatusElement;
+    'mo-flight-status': UsaFlightStatusElement;
+    'usa-transit-progress': UsaTransitProgressElement;
+    'mo-transit-progress': UsaTransitProgressElement;
+    'usa-sun-timeline': UsaSunTimelineElement;
+    'mo-sun-timeline': UsaSunTimelineElement;
+    'usa-delivery-tracker': UsaDeliveryTrackerElement;
+    'mo-delivery-tracker': UsaDeliveryTrackerElement;
+    'usa-glucose-sparkline': UsaGlucoseSparklineElement;
+    'mo-glucose-sparkline': UsaGlucoseSparklineElement;
+    'usa-coffee-timer': UsaCoffeeTimerElement;
+    'mo-coffee-timer': UsaCoffeeTimerElement;
+    'usa-vital-wave': UsaVitalWaveElement;
+    'mo-vital-wave': UsaVitalWaveElement;
+    'usa-orbit-pass': UsaOrbitPassElement;
+    'mo-orbit-pass': UsaOrbitPassElement;
+    'usa-meter-countdown': UsaMeterCountdownElement;
+    'mo-meter-countdown': UsaMeterCountdownElement;
+    'usa-race-telemetry': UsaRaceTelemetryElement;
+    'mo-race-telemetry': UsaRaceTelemetryElement;
+    'usa-workout-player': UsaWorkoutPlayerElement;
+    'mo-workout-player': UsaWorkoutPlayerElement;
+    'usa-status-pill': UsaStatusPillElement;
+    'mo-status-pill': UsaStatusPillElement;
+    'usa-ride-status': UsaRideStatusElement;
+    'mo-ride-status': UsaRideStatusElement;
+    'usa-route-sparkline': UsaRouteSparklineElement;
+    'mo-route-sparkline': UsaRouteSparklineElement;
+    'usa-activity-wall': UsaActivityWallElement;
+    'mo-activity-wall': UsaActivityWallElement;
     'usa-luminous-switch': UsaLuminousSwitchElement;
     'mo-luminous-switch': UsaLuminousSwitchElement;
     'usa-particle-icon': UsaParticleIconElement;

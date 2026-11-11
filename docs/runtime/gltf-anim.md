@@ -6,7 +6,7 @@ Plays glTF 2.0 animations on models loaded by motionary/runtime/format-gltf: tra
 
 **Runtime tier:** advanced — see [runtime tiers](../runtime-tiers.md).
 
-Part of Motionary's own zero-dependency runtime. Size budget: **4.5 KB gzip** (enforced in CI).
+Part of Motionary's own zero-dependency runtime. Historical size reference: **4.5 KB gzip** (informational; no cap).
 
 ## Prerequisites
 

@@ -5,4 +5,4 @@ var widgets_productGallery = require('../chunks/product-gallery-B5ra4XHf.cjs');
 
 
 exports.defineProductGallery = widgets_productGallery.defineProductGallery;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.4.0/dist/widgets/product-gallery.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/widgets/product-gallery.cjs.map

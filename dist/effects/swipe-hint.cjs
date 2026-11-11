@@ -15,4 +15,4 @@ function registerSwipeHint() {
 exports.effect = effect;
 exports.register = registerSwipeHint;
 exports.registerSwipeHint = registerSwipeHint;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.4.0/dist/effects/swipe-hint.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/effects/swipe-hint.cjs.map

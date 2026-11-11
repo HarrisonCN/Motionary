@@ -438,4 +438,4 @@ exports.timelineDocDuration = timelineDocDuration;
 exports.timelineDocFromAnimation = timelineDocFromAnimation;
 exports.timelineDocToAnimation = timelineDocToAnimation;
 exports.validateTimelineDoc = validateTimelineDoc;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.4.0/dist/chunks/format-CcfR6-Jx.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/chunks/format-CcfR6-Jx.cjs.map

@@ -1,4 +1,4 @@
-# Motionary 17.4.0 — full component reference
+# Motionary 17.5.0 — full component reference
 
 Generated from the source. Machine-readable version: https://harrisoncn.github.io/Motionary/components.json (schema https://harrisoncn.github.io/Motionary/components.schema.json).
 
@@ -576,6 +576,19 @@ Windows Fluent materials: frosted acrylic (backdrop blur + tint + noise) and mic
 <usa-acrylic kind="mica">…</usa-acrylic>
 ```
 
+### <mo-activity-wall> (legacy <usa-activity-wall>) — Live activity wall
+
+Drifting columns; pauses on hover, focus, hidden tabs and reduced motion.
+
+- Import: `import { defineActivityWall } from 'motionary/components/widgets'; defineActivityWall();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `paused`, `speed`, `label`
+- Methods: `play()`, `pause()`
+
+```html
+<mo-activity-wall style="height:340px" paused><div data-column><div style="background:#050505;color:#9fe3d0;padding:24px;border-radius:24px">Flight · SFO → YEG</div></div><div data-column><div style="background:#050505;color:#f6b77a;padding:24px;border-radius:24px">Espresso · 18s</div></div></mo-activity-wall>
+```
+
 ### <mo-add-to-cart> (legacy <usa-add-to-cart>) — Add to cart (fly-to-cart)
 
 7.3: a buy button — the product photo flies on an arc into the cart, the cart badge bumps and the button morphs into a ✓ “Added” state. Works with <usa-cart-drawer> (calls add(item)) or any [data-cart] icon.
@@ -1046,6 +1059,20 @@ createTimeline().add(a, [{ opacity: 0 }, { opacity: 1 }], 400).add(b, [{ transfo
 </usa-code-export>
 ```
 
+### <mo-coffee-timer> (legacy <usa-coffee-timer>) — Coffee timer
+
+An orange segmented scale and an explicit start/stop elapsed-time clock.
+
+- Import: `import { defineCoffeeTimer } from 'motionary/components/widgets'; defineCoffeeTimer();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `value`, `disabled`, `animated`, `running`, `duration`, `drink`
+- Events: `usa:action`, `usa:change`, `usa:tick`, `usa:complete`
+- Methods: `update()`, `play()`, `pause()`, `reset()`
+
+```html
+<mo-coffee-timer value="18" duration="30"></mo-coffee-timer>
+```
+
 ### <mo-color-picker> (legacy <usa-color-picker>) — Color picker
 
 6.9: a saturation / brightness square and a hue strip with spring-follow thumbs (both keyboard sliders), a preview chip that morphs to the new colour and swatches that pop.
@@ -1179,6 +1206,20 @@ A spring-lagged ring, a magnetic ring that wraps buttons and links, or a soft gl
 
 ```html
 <usa-date-picker value="2026-10-08" min="2026-01-01" first-day="1"></usa-date-picker>
+```
+
+### <mo-delivery-tracker> (legacy <usa-delivery-tracker>) — Delivery tracker
+
+Pickup progress, driver actions, or an out-for-delivery route map.
+
+- Import: `import { defineDeliveryTracker } from 'motionary/components/widgets'; defineDeliveryTracker();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `value`, `disabled`, `animated`, `running`, `stage`, `status-label`, `status`, `eta-label`, `eta`, `driver`, `call-label`, `message-label`
+- Events: `usa:action`, `usa:change`, `usa:tick`, `usa:complete`
+- Methods: `update()`, `play()`, `pause()`, `reset()`
+
+```html
+<mo-delivery-tracker value="34"></mo-delivery-tracker>
 ```
 
 ### <mo-depth> (legacy <usa-depth>) — Depth parallax
@@ -1478,6 +1519,20 @@ Expandable folders with native file links and left/right keyboard navigation.
 <usa-file-tree><details open><summary>Portfolio</summary><details><summary>Portraits</summary><a href="#contact">Contact sheet</a></details></details></usa-file-tree>
 ```
 
+### <mo-flight-status> (legacy <usa-flight-status>) — Flight status
+
+Origin and destination codes, a moving aircraft and an arrival estimate.
+
+- Import: `import { defineFlightStatus } from 'motionary/components/widgets'; defineFlightStatus();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `value`, `disabled`, `animated`, `running`, `origin`, `destination`, `from`, `to`, `departure`, `arrival`, `status`
+- Events: `usa:action`, `usa:change`, `usa:tick`, `usa:complete`
+- Methods: `update()`, `play()`, `pause()`, `reset()`
+
+```html
+<mo-flight-status value="68"></mo-flight-status>
+```
+
 ### <mo-fullpage> (legacy <usa-fullpage>) — Full-page sections
 
 Full-screen sections that snap one at a time, with keyboard paging, dot navigation and a usa:section event.
@@ -1691,6 +1746,20 @@ An RGB-split, sliced glitch — always on or on hover.
 ```html
 <usa-globe markers="Shanghai:31.2,121.5; London:51.5,-0.1; New York:40.7,-74"></usa-globe>
 <script>addEventListener('DOMContentLoaded', () => { const globe = document.querySelector('usa-globe'); globe.flyTo('London'); });</script>
+```
+
+### <mo-glucose-sparkline> (legacy <usa-glucose-sparkline>) — Glucose sparkline
+
+Supplied readings with a colored bar history and trend text; no medical inference.
+
+- Import: `import { defineGlucoseSparkline } from 'motionary/components/widgets'; defineGlucoseSparkline();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `value`, `disabled`, `animated`, `running`, `values`, `unit`, `trend`, `start`, `middle`, `end`
+- Events: `usa:action`, `usa:change`, `usa:tick`, `usa:complete`
+- Methods: `update()`, `play()`, `pause()`, `reset()`
+
+```html
+<mo-glucose-sparkline value="7.2" animated></mo-glucose-sparkline>
 ```
 
 ### <mo-gpu-particles> (legacy <usa-gpu-particles>) — GPU particle canvas
@@ -2295,6 +2364,20 @@ Pinterest-style masonry: items drop into the shortest column and glide when the 
 <script>addEventListener('DOMContentLoaded', () => { const list = document.querySelector('usa-message-list'); list.typing('Ada'); list.push({ from: 'Ada', text: 'Ship it?' }); });</script>
 ```
 
+### <mo-meter-countdown> (legacy <usa-meter-countdown>) — Meter countdown
+
+A determinate ring and optional visible-only remaining-time clock.
+
+- Import: `import { defineMeterCountdown } from 'motionary/components/widgets'; defineMeterCountdown();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `value`, `disabled`, `animated`, `running`, `max`, `title`
+- Events: `usa:action`, `usa:change`, `usa:tick`, `usa:complete`
+- Methods: `update()`, `play()`, `pause()`, `reset()`
+
+```html
+<mo-meter-countdown value="81" max="120"></mo-meter-countdown>
+```
+
 ### <mo-milestones> (legacy <usa-milestones>) — Scroll-drawn milestones
 
 6.5: a progress line grows down the rail as you scroll; each milestone pops its dot and slides its card in when the line reaches it. Alternating sides on wide screens, one column on phones; data-date labels.
@@ -2561,6 +2644,20 @@ Hides while you scroll down, slides back on the first scroll up; shrink makes it
 ```html
 <usa-odometer value="1284" locale="en-US" prefix="$"></usa-odometer>
 <!-- el.value = 2048 rolls every digit -->
+```
+
+### <mo-orbit-pass> (legacy <usa-orbit-pass>) — Orbit flyover
+
+An arc, field-of-view cone and a progress marker for supplied pass data.
+
+- Import: `import { defineOrbitPass } from 'motionary/components/widgets'; defineOrbitPass();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `value`, `disabled`, `animated`, `running`, `title`, `eta`
+- Events: `usa:action`, `usa:change`, `usa:tick`, `usa:complete`
+- Methods: `update()`, `play()`, `pause()`, `reset()`
+
+```html
+<mo-orbit-pass value="76"></mo-orbit-pass>
 ```
 
 ### <mo-orbit-progress> (legacy <usa-orbit-progress>) — Orbit progress dial
@@ -3033,6 +3130,20 @@ Pull down at the top of a list: the spinner stretches in with rubber-band resist
 <script>const el = document.querySelector('usa-pull-refresh'); el.addEventListener('usa:refresh', async (e) => { await load(); e.detail.done(); });</script>
 ```
 
+### <mo-race-telemetry> (legacy <usa-race-telemetry>) — Race telemetry
+
+A vector track, position marker and supplied lap records.
+
+- Import: `import { defineRaceTelemetry } from 'motionary/components/widgets'; defineRaceTelemetry();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `value`, `disabled`, `animated`, `running`, `lap`, `lap-label`, `laps`, `sector`
+- Events: `usa:action`, `usa:change`, `usa:tick`, `usa:complete`
+- Methods: `update()`, `play()`, `pause()`, `reset()`
+
+```html
+<mo-race-telemetry value="72" animated></mo-race-telemetry>
+```
+
 ### <mo-radar> (legacy <usa-radar>) — Radar scope
 
 8.4: a sci-fi radar scope — a conic beam sweeps round and each target lights up and fades as the beam passes over it.
@@ -3104,6 +3215,20 @@ Fade, slide, zoom, blur or flip content in as it enters the viewport. 12 effects
 </usa-reveal>
 ```
 
+### <mo-ride-status> (legacy <usa-ride-status>) — Ride status
+
+Drop-off status, progress and driver actions.
+
+- Import: `import { defineRideStatus } from 'motionary/components/widgets'; defineRideStatus();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `value`, `disabled`, `animated`, `running`, `status`, `driver`
+- Events: `usa:action`, `usa:change`, `usa:tick`, `usa:complete`
+- Methods: `update()`, `play()`, `pause()`, `reset()`
+
+```html
+<mo-ride-status value="48"></mo-ride-status>
+```
+
 ### <mo-ripple> (legacy <usa-ripple>) — Ripple
 
 Ink ripple from the pointer — or from the centre for Space/Enter — on any button, list item or card.
@@ -3147,6 +3272,20 @@ defineRive(); // registers <usa-rive> — after the prerequisites
 
 ```html
 <usa-rive src="/anim/icon.riv" state-machine="State Machine 1" autoplay label="Icon"></usa-rive>
+```
+
+### <mo-route-sparkline> (legacy <usa-route-sparkline>) — Route sparkline
+
+A supplied route or metric curve with an action button.
+
+- Import: `import { defineRouteSparkline } from 'motionary/components/widgets'; defineRouteSparkline();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `value`, `disabled`, `animated`, `running`, `values`, `title`, `status`, `unit`
+- Events: `usa:action`, `usa:change`, `usa:tick`, `usa:complete`
+- Methods: `update()`, `play()`, `pause()`, `reset()`
+
+```html
+<mo-route-sparkline value="6.5"></mo-route-sparkline>
 ```
 
 ### <mo-route-transition> (legacy <usa-route-transition>) — Route transition container
@@ -3662,6 +3801,20 @@ Reveals direct children one after another — lists, grids, feature rows.
 <usa-star-rating value="4" readonly></usa-star-rating>
 ```
 
+### <mo-status-pill> (legacy <usa-status-pill>) — Status pill
+
+A compact metric with a built-in symbol and color tone.
+
+- Import: `import { defineStatusPill } from 'motionary/components/widgets'; defineStatusPill();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `value`, `disabled`, `animated`, `running`, `icon`, `unit`, `status`, `tone`
+- Events: `usa:action`, `usa:change`, `usa:tick`, `usa:complete`
+- Methods: `update()`, `play()`, `pause()`, `reset()`
+
+```html
+<mo-status-pill value="88" icon="heart" tone="pink" unit=""></mo-status-pill>
+```
+
 ### <mo-stepper> (legacy <usa-stepper>) — Stepper / wizard
 
 6.7: the rail fills toward the current step, finished steps pop a drawn check mark and the current step pulses. Horizontal or vertical; next() / prev() / value.
@@ -3763,6 +3916,20 @@ Cards stick while you scroll and the covered ones shrink and dim as the next sli
 
 ```html
 <usa-suggestion-chips items="Summarise|Translate|Explain like I'm 5" dismiss></usa-suggestion-chips>
+```
+
+### <mo-sun-timeline> (legacy <usa-sun-timeline>) — Sun timeline
+
+Day, sunset and dusk capsules with independently supplied times.
+
+- Import: `import { defineSunTimeline } from 'motionary/components/widgets'; defineSunTimeline();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `value`, `disabled`, `animated`, `running`, `now-label`, `sunset-label`, `dusk-label`, `now`, `sunset`, `dusk`
+- Events: `usa:action`, `usa:change`, `usa:tick`, `usa:complete`
+- Methods: `update()`, `play()`, `pause()`, `reset()`
+
+```html
+<mo-sun-timeline ></mo-sun-timeline>
 ```
 
 ### <mo-swipe-deck> (legacy <usa-swipe-deck>) — Swipe cards deck
@@ -4056,6 +4223,20 @@ toast("Saved") slides a notification in; it pauses on hover, stacks with FLIP an
 <usa-token-editor apply format="2025.10"></usa-token-editor>
 ```
 
+### <mo-transit-progress> (legacy <usa-transit-progress>) — Transit progress
+
+A luminous route strip with the active station.
+
+- Import: `import { defineTransitProgress } from 'motionary/components/widgets'; defineTransitProgress();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `value`, `disabled`, `animated`, `running`, `stations`
+- Events: `usa:action`, `usa:change`, `usa:tick`, `usa:complete`
+- Methods: `update()`, `play()`, `pause()`, `reset()`
+
+```html
+<mo-transit-progress value="50"></mo-transit-progress>
+```
+
 ### <mo-typewriter> (legacy <usa-typewriter>) — Typewriter
 
 Types text, or cycles through phrases with delete and pause. Full text stays available to screen readers.
@@ -4116,6 +4297,20 @@ One view at a time with direction-aware slide, fade, scale or drill transitions 
   <section data-view="home">…</section>
   <section data-view="about">…</section>
 </usa-view-switch>
+```
+
+### <mo-vital-wave> (legacy <usa-vital-wave>) — Vital dot wave
+
+A dot-and-stem waveform for supplied values, with configurable unit and period.
+
+- Import: `import { defineVitalWave } from 'motionary/components/widgets'; defineVitalWave();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `value`, `disabled`, `animated`, `running`, `values`, `unit`, `period`
+- Events: `usa:action`, `usa:change`, `usa:tick`, `usa:complete`
+- Methods: `update()`, `play()`, `pause()`, `reset()`
+
+```html
+<mo-vital-wave value="82" unit="mmhg" animated></mo-vital-wave>
 ```
 
 ### <mo-voice-button> (legacy <usa-voice-button>) — Voice button
@@ -4196,6 +4391,20 @@ Letters bob in a travelling wave — playful headlines and loading labels.
 
 ```html
 <usa-worker-canvas scene="starfield" style="height:240px"></usa-worker-canvas>
+```
+
+### <mo-workout-player> (legacy <usa-workout-player>) — Workout player
+
+Elapsed time, distance, waveform and keyboard-accessible playback actions.
+
+- Import: `import { defineWorkoutPlayer } from 'motionary/components/widgets'; defineWorkoutPlayer();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `value`, `disabled`, `animated`, `running`, `distance`, `unit`, `reset-label`, `target-label`
+- Events: `usa:action`, `usa:change`, `usa:tick`, `usa:complete`
+- Methods: `update()`, `play()`, `pause()`, `reset()`
+
+```html
+<mo-workout-player value="1515" animated></mo-workout-player>
 ```
 
 ### <mo-xp-bar> (legacy <usa-xp-bar>) — XP bar

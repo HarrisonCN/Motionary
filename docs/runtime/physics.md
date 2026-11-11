@@ -6,7 +6,7 @@ A small 2D rigid-body engine written for Motionary (own implementation and API â
 
 **Runtime tier:** advanced â€” see [runtime tiers](../runtime-tiers.md).
 
-Part of Motionary's own zero-dependency runtime. Size budget: **10.0 KB gzip** (enforced in CI).
+Part of Motionary's own zero-dependency runtime. Historical size reference: **10.0 KB gzip** (informational; no cap).
 
 ## Prerequisites
 

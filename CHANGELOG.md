@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [17.5.0] - 2026-11-11 — Live activities
+
+- Recreated the supplied activity-wall video's compact black cards, vector charts, gradient tracks, fine segmented scales, drifting columns and blur-to-focus entrance in a new [live activity lab](showcase/activity.html). No source video or third-party assets are distributed.
+- Added fifteen independent `mo-*` components: flight-status, transit-progress, sun-timeline, delivery-tracker, glucose-sparkline, coffee-timer, vital-wave, orbit-pass, meter-countdown, race-telemetry, workout-player, status-pill, ride-status, route-sparkline and activity-wall. Total: 237 (91 core + 146 widgets).
+- Components accept supplied data through attributes and update(). Native buttons preserve focus during in-place updates. Explicit clocks suspend offscreen/in background, stop at completion and release all resources on disconnect. Ornamental motion respects live OS reduced-motion changes. The wall pauses on hover/focus and never duplicates interactive controls.
+- Demo readings are sample data; reusable components perform no network requests, health inference, orbital prediction or automatic simulation. All new tags have individual entries, framework types, bilingual catalog cards, generated documentation and keyboard/lifecycle regression coverage.
+- Maintainer policy: component count and artifact size have no enforced caps. Bundle, package and runtime-tier size checks now report measurements against historical references. Missing outputs, documentation accuracy, source-map exclusion, tree shaking, tier isolation and performance/compatibility checks remain enforced.
+
 ## [17.4.0] - 2026-11-11 — Luminous controls
 
 - Added `<mo-luminous-switch>`: glass day/night thumb, spring slide, moving edge halo and a 64-particle sun/moon morph. Reflected checked state, native keyboard activation, form submission/reset and an optional explicit theme target.

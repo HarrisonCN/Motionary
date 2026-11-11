@@ -6,7 +6,7 @@ Resolves Lottie slots with dotLottie themes (Color / Scalar / Vector / Text rule
 
 **Runtime tier:** standard — see [runtime tiers](../runtime-tiers.md).
 
-Part of Motionary's own zero-dependency runtime. Size budget: **3.5 KB gzip** (enforced in CI).
+Part of Motionary's own zero-dependency runtime. Historical size reference: **3.5 KB gzip** (informational; no cap).
 
 ## Prerequisites
 

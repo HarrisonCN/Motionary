@@ -28,4 +28,4 @@ function defineTitleSequence(tag = 'usa-title-sequence') {
 }
 
 export { defineTitleSequence };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.4.0/dist/widgets/title-sequence.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/widgets/title-sequence.js.map

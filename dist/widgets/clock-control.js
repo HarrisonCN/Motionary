@@ -63,4 +63,4 @@ function defineClockControl(tag = 'usa-clock-control') {
 }
 
 export { defineClockControl };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.4.0/dist/widgets/clock-control.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/widgets/clock-control.js.map

@@ -6,7 +6,7 @@ Replay SVG SMIL animations (animate, set, animateTransform, animateMotion) on th
 
 **Runtime tier:** standard — see [runtime tiers](../runtime-tiers.md).
 
-Part of Motionary's own zero-dependency runtime. Size budget: **5.0 KB gzip** (enforced in CI).
+Part of Motionary's own zero-dependency runtime. Historical size reference: **5.0 KB gzip** (informational; no cap).
 
 ## Prerequisites
 

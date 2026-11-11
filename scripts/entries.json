@@ -1587,6 +1587,201 @@
  },
  {
   "kind": "widget",
+  "name": "flight-status",
+  "entry": "motionary/widgets/flight-status",
+  "src": "src/entries/widgets/flight-status.ts",
+  "tag": "usa-flight-status",
+  "define": "defineFlightStatus",
+  "types": [
+   "UsaFlightStatusElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/flight-status"
+ },
+ {
+  "kind": "widget",
+  "name": "transit-progress",
+  "entry": "motionary/widgets/transit-progress",
+  "src": "src/entries/widgets/transit-progress.ts",
+  "tag": "usa-transit-progress",
+  "define": "defineTransitProgress",
+  "types": [
+   "UsaTransitProgressElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/transit-progress"
+ },
+ {
+  "kind": "widget",
+  "name": "sun-timeline",
+  "entry": "motionary/widgets/sun-timeline",
+  "src": "src/entries/widgets/sun-timeline.ts",
+  "tag": "usa-sun-timeline",
+  "define": "defineSunTimeline",
+  "types": [
+   "UsaSunTimelineElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/sun-timeline"
+ },
+ {
+  "kind": "widget",
+  "name": "delivery-tracker",
+  "entry": "motionary/widgets/delivery-tracker",
+  "src": "src/entries/widgets/delivery-tracker.ts",
+  "tag": "usa-delivery-tracker",
+  "define": "defineDeliveryTracker",
+  "types": [
+   "UsaDeliveryTrackerElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/delivery-tracker"
+ },
+ {
+  "kind": "widget",
+  "name": "glucose-sparkline",
+  "entry": "motionary/widgets/glucose-sparkline",
+  "src": "src/entries/widgets/glucose-sparkline.ts",
+  "tag": "usa-glucose-sparkline",
+  "define": "defineGlucoseSparkline",
+  "types": [
+   "UsaGlucoseSparklineElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/glucose-sparkline"
+ },
+ {
+  "kind": "widget",
+  "name": "coffee-timer",
+  "entry": "motionary/widgets/coffee-timer",
+  "src": "src/entries/widgets/coffee-timer.ts",
+  "tag": "usa-coffee-timer",
+  "define": "defineCoffeeTimer",
+  "types": [
+   "UsaCoffeeTimerElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/coffee-timer"
+ },
+ {
+  "kind": "widget",
+  "name": "vital-wave",
+  "entry": "motionary/widgets/vital-wave",
+  "src": "src/entries/widgets/vital-wave.ts",
+  "tag": "usa-vital-wave",
+  "define": "defineVitalWave",
+  "types": [
+   "UsaVitalWaveElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/vital-wave"
+ },
+ {
+  "kind": "widget",
+  "name": "orbit-pass",
+  "entry": "motionary/widgets/orbit-pass",
+  "src": "src/entries/widgets/orbit-pass.ts",
+  "tag": "usa-orbit-pass",
+  "define": "defineOrbitPass",
+  "types": [
+   "UsaOrbitPassElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/orbit-pass"
+ },
+ {
+  "kind": "widget",
+  "name": "meter-countdown",
+  "entry": "motionary/widgets/meter-countdown",
+  "src": "src/entries/widgets/meter-countdown.ts",
+  "tag": "usa-meter-countdown",
+  "define": "defineMeterCountdown",
+  "types": [
+   "UsaMeterCountdownElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/meter-countdown"
+ },
+ {
+  "kind": "widget",
+  "name": "race-telemetry",
+  "entry": "motionary/widgets/race-telemetry",
+  "src": "src/entries/widgets/race-telemetry.ts",
+  "tag": "usa-race-telemetry",
+  "define": "defineRaceTelemetry",
+  "types": [
+   "UsaRaceTelemetryElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/race-telemetry"
+ },
+ {
+  "kind": "widget",
+  "name": "workout-player",
+  "entry": "motionary/widgets/workout-player",
+  "src": "src/entries/widgets/workout-player.ts",
+  "tag": "usa-workout-player",
+  "define": "defineWorkoutPlayer",
+  "types": [
+   "UsaWorkoutPlayerElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/workout-player"
+ },
+ {
+  "kind": "widget",
+  "name": "status-pill",
+  "entry": "motionary/widgets/status-pill",
+  "src": "src/entries/widgets/status-pill.ts",
+  "tag": "usa-status-pill",
+  "define": "defineStatusPill",
+  "types": [
+   "UsaStatusPillElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/status-pill"
+ },
+ {
+  "kind": "widget",
+  "name": "ride-status",
+  "entry": "motionary/widgets/ride-status",
+  "src": "src/entries/widgets/ride-status.ts",
+  "tag": "usa-ride-status",
+  "define": "defineRideStatus",
+  "types": [
+   "UsaRideStatusElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/ride-status"
+ },
+ {
+  "kind": "widget",
+  "name": "route-sparkline",
+  "entry": "motionary/widgets/route-sparkline",
+  "src": "src/entries/widgets/route-sparkline.ts",
+  "tag": "usa-route-sparkline",
+  "define": "defineRouteSparkline",
+  "types": [
+   "UsaRouteSparklineElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/route-sparkline"
+ },
+ {
+  "kind": "widget",
+  "name": "activity-wall",
+  "entry": "motionary/widgets/activity-wall",
+  "src": "src/entries/widgets/activity-wall.ts",
+  "tag": "usa-activity-wall",
+  "define": "defineActivityWall",
+  "types": [
+   "UsaActivityWallElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/activity-wall"
+ },
+ {
+  "kind": "widget",
   "name": "luminous-switch",
   "entry": "motionary/widgets/luminous-switch",
   "src": "src/entries/widgets/luminous-switch.ts",

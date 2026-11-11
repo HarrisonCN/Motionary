@@ -11,4 +11,4 @@ function categoryForTag(tag) {
 }
 
 export { categoryForTag as c };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.4.0/dist/chunks/category-for-tag-WK7MtB-K.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/chunks/category-for-tag-WK7MtB-K.js.map

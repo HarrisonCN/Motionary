@@ -2235,5 +2235,80 @@
     "name": "import 'motionary/widgets/orbit-progress' (per-entry, fixed)",
     "import": "export * from 'pkg/widgets/orbit-progress';",
     "limit": 3840
+  },
+  {
+    "name": "import 'motionary/widgets/flight-status' (per-entry, fixed)",
+    "import": "import { defineFlightStatus } from 'pkg/widgets/flight-status'; console.log(defineFlightStatus);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/transit-progress' (per-entry, fixed)",
+    "import": "import { defineTransitProgress } from 'pkg/widgets/transit-progress'; console.log(defineTransitProgress);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/sun-timeline' (per-entry, fixed)",
+    "import": "import { defineSunTimeline } from 'pkg/widgets/sun-timeline'; console.log(defineSunTimeline);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/delivery-tracker' (per-entry, fixed)",
+    "import": "import { defineDeliveryTracker } from 'pkg/widgets/delivery-tracker'; console.log(defineDeliveryTracker);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/glucose-sparkline' (per-entry, fixed)",
+    "import": "import { defineGlucoseSparkline } from 'pkg/widgets/glucose-sparkline'; console.log(defineGlucoseSparkline);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/coffee-timer' (per-entry, fixed)",
+    "import": "import { defineCoffeeTimer } from 'pkg/widgets/coffee-timer'; console.log(defineCoffeeTimer);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/vital-wave' (per-entry, fixed)",
+    "import": "import { defineVitalWave } from 'pkg/widgets/vital-wave'; console.log(defineVitalWave);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/orbit-pass' (per-entry, fixed)",
+    "import": "import { defineOrbitPass } from 'pkg/widgets/orbit-pass'; console.log(defineOrbitPass);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/meter-countdown' (per-entry, fixed)",
+    "import": "import { defineMeterCountdown } from 'pkg/widgets/meter-countdown'; console.log(defineMeterCountdown);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/race-telemetry' (per-entry, fixed)",
+    "import": "import { defineRaceTelemetry } from 'pkg/widgets/race-telemetry'; console.log(defineRaceTelemetry);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/workout-player' (per-entry, fixed)",
+    "import": "import { defineWorkoutPlayer } from 'pkg/widgets/workout-player'; console.log(defineWorkoutPlayer);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/status-pill' (per-entry, fixed)",
+    "import": "import { defineStatusPill } from 'pkg/widgets/status-pill'; console.log(defineStatusPill);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/ride-status' (per-entry, fixed)",
+    "import": "import { defineRideStatus } from 'pkg/widgets/ride-status'; console.log(defineRideStatus);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/route-sparkline' (per-entry, fixed)",
+    "import": "import { defineRouteSparkline } from 'pkg/widgets/route-sparkline'; console.log(defineRouteSparkline);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/activity-wall' (per-entry, fixed)",
+    "import": "import { defineActivityWall } from 'pkg/widgets/activity-wall'; console.log(defineActivityWall);",
+    "limit": 0
   }
 ]

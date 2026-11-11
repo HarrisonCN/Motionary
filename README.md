@@ -2,7 +2,7 @@
 
 # Motionary
 
-**Zero dependencies · fixed size budgets · accessible by default.** Scroll animations and animated Web Components for the web.
+**Zero dependencies · measured sizes · accessible by default.** Scroll animations and animated Web Components for the web.
 
 _Formerly **use-scroll-animate**. The old npm package is still published as an alias of the same build._
 
@@ -24,10 +24,10 @@ npm i motionary
 <script type="module">import ScrollAnimate from 'motionary'; ScrollAnimate.init();</script>
 ```
 
-Motionary reveals content as it scrolls into view and gives you <!--fact:public-->222<!--/fact--> animated `<mo-*>` custom elements: cards, buttons,
+Motionary reveals content as it scrolls into view and gives you <!--fact:public-->237<!--/fact--> animated `<mo-*>` custom elements: cards, buttons,
 physics, page transitions, generative backgrounds, Lottie, WebGL and more. It runs in plain HTML, in React, Vue, Svelte,
 Solid and Angular, and in desktop web views (Electron, Tauri, WebView2). It has no runtime dependencies, every entry point
-is tree-shakeable and has a gzip budget checked in CI, and every animation respects `prefers-reduced-motion`.
+is tree-shakeable and has its gzip size reported in CI, and every animation respects `prefers-reduced-motion`.
 
 Release notes for every version are in [CHANGELOG.md](./CHANGELOG.md).
 
@@ -46,10 +46,10 @@ Supply chain: [docs/supply-chain.md](./docs/supply-chain.md) · CDN with SRI has
 - **214 scroll-reveal presets** in 14 families (33 in the core, 181 more in `motionary/presets/extended`): fades, zooms,
   3D flips, clip-path shapes, blur and mask, bounce, depth, glitch, and scroll-linked `scrub-*`. Also `timeline()`,
   `staggerChildren()` and `parallax()`.
-- **<!--fact:public-->222<!--/fact--> `<mo-*>` Web Components**: <!--fact:core-->91<!--/fact--> core components in `motionary/components` (by category) and <!--fact:widgets-->131<!--/fact--> widgets, one entry point
+- **<!--fact:public-->237<!--/fact--> `<mo-*>` Web Components**: <!--fact:core-->91<!--/fact--> core components in `motionary/components` (by category) and <!--fact:widgets-->146<!--/fact--> widgets, one entry point
   each (`motionary/widgets/<name>`). Plus <!--fact:effects-->146<!--/fact--> effects with their own entry points (`motionary/effects/<name>`).
   [How components are counted](./docs/components.md#how-components-are-counted).
-- **Motion Core**: `createMotion()` from `motionary/core`, a plugin-based engine at about 2.5 KB gzip (budget 10 KB).
+- **Motion Core**: `createMotion()` from `motionary/core`, a plugin-based engine at about 2.5 KB gzip (historical reference 10 KB).
 - **A runtime of its own**: `motionary/runtime` (ticker, tween, timeline) plus <!--fact:runtimeModules-->20<!--/fact--> modules: scroll scenes, smooth scrolling,
   text splitting, SVG morphing, sprites, GIF / APNG / WebP, Lottie and dotLottie, WebGL2, glTF / OBJ, 2D physics. They are
   grouped in three tiers, and you pay only for the modules you import.
@@ -76,11 +76,13 @@ No build step? Use the CDN. URLs pin the major version (`@<!--ver:major-->17<!--
 <mo-reveal effect="fade-up"><h2>Hello</h2></mo-reveal>
 ```
 
+17.5 adds fifteen live-activity components and a video-inspired drifting card wall. [Interactive lab](./showcase/activity.html) · [API and data](./docs/live-activities.md). Component count and artifact size have no enforced caps.
+
 17.4 adds six luminous controls: a glass day/night switch, particle icon and button, halo segmented control and slider, and an orbit progress dial. [Interactive lab](./showcase/luminous.html) · [API and imports](./docs/luminous-controls.md).
 
 17.3.1 adds a file tree, download menu and film title sequence. [Examples and individual imports](./docs/gallery-components.md).
 
-Since 17.3 `<mo-*>` is the default element name. The CDN bundles, `defineComponents()` and `defineWidgets()` register it, and so do the 17.3+ widgets by themselves; when you import single components or categories as ES modules, call `defineMoAliases()` from `motionary/components/mo` first (it stays out of the per-component entries so their fixed size budgets hold). The `<usa-*>` names keep working as deprecated aliases (removal not before a future major); `npx -p motionary mo-codemod tags --write` renames them in your code. The `usa:*` event names and `--usa-*` CSS properties work with both tag names. [v17 migration guide](./docs/migrating-to-v17.md)
+Since 17.3 `<mo-*>` is the default element name. The CDN bundles, `defineComponents()` and `defineWidgets()` register it, and so do the 17.3+ widgets by themselves; when you import single components or categories as ES modules, call `defineMoAliases()` from `motionary/components/mo` first (it stays out of the per-component entries so their measured sizes hold). The `<usa-*>` names keep working as deprecated aliases (removal not before a future major); `npx -p motionary mo-codemod tags --write` renames them in your code. The `usa:*` event names and `--usa-*` CSS properties work with both tag names. [v17 migration guide](./docs/migrating-to-v17.md)
 
 jsDelivr works too: `https://cdn.jsdelivr.net/npm/motionary@17/dist/…`. Already on `use-scroll-animate`? It keeps
 working, at the same versions. To switch, replace the name in imports and URLs ([details](./docs/versions.md)).
@@ -205,7 +207,7 @@ SSR, Next.js, Nuxt and SvelteKit: [docs/frameworks-ssr.md](./docs/frameworks-ssr
 feature or file format (`motionary/runtime/<module>`). Register what you use with `use()`. Each module belongs to a tier,
 and a module only depends on its own tier or lower ones, so a basic page never downloads WebGL, 3D or physics code.
 
-| Tier | Modules | Bundle (gzip, 13.0) | Budget |
+| Tier | Modules | Bundle (gzip, 13.0) | Historical reference |
 |---|---|---:|---:|
 | **Basic** | core (ticker, tween, timeline), `scroll`, `text`, `format-css`, `format-motion` | 10.83 KB | 12 KB |
 | **Standard** | basic + `smooth`, `drag-snap`, `format-svg`, `format-sprite`, `format-gif`, `format-apng`, `format-webp`, `vector` (Lottie / dotLottie), `lottie-state`; official Rive runtime | 33.74 KB | 37 KB |
@@ -331,10 +333,10 @@ never edits the document. For the full Motion Tokens 2.0 set (distances, semanti
 
 ## Stable core and experimental surfaces
 
-Motionary's focus is **zero dependencies, fixed size budgets and accessible motion**. The stable core is the scroll API
+Motionary's focus is **zero dependencies, measured sizes and accessible motion**. The stable core is the scroll API
 (`motionary`), `motionary/core`, `motionary/presets/*`, `motionary/motion`, `motionary/scene`, `motionary/runtime/*`,
 the `<mo-*>` components and widgets, the framework adapters and the CLI. 17.x minors add components and effects
-(zero dependencies, own size budget lines, the same accessibility contract) and improve what exists; no new major is planned.
+(zero dependencies, individual size measurements, the same accessibility contract) and improve what exists; no new major is planned.
 
 **Experimental** (may change in a minor release, not covered by the stability promise):
 Motion Studio (`motionary/studio/*`, including the 16.2 plugin API and the 16.3 performance budget), the AI assistant
@@ -353,13 +355,13 @@ cross-platform exporters (`npx motionary export`). See [docs/stability.md](./doc
 
 ## Size budgets
 
-Every entry point has a fixed gzip budget in [`size-budget.json`](./size-budget.json) (441 entries). CI fails when an
-entry goes over its budget, and budgets are never raised automatically. 
+Component count and artifact size have no caps. [`size-budget.json`](./size-budget.json) retains historical references;
+CI reports measurements and checks output/document consistency. Exceeding a reference does not fail CI. See [size policy](./docs/size-policy.md). 
 
 <!-- size-table:start -->
-Measured on the 17.4.0 build (minified + gzip), generated by `scripts/size.mjs --report`:
+Measured on the 17.5.0 build (minified + gzip), generated by `scripts/size.mjs --report`:
 
-| What you import | gzip | Budget |
+| What you import | gzip | Historical reference |
 |---|---:|---:|
 | `motionary/core` (`createMotion`) | 2.53 KB | 10.00 KB |
 | `import ScrollAnimate from 'motionary'` (default instance) | 5.49 KB | 6.00 KB |
@@ -369,9 +371,9 @@ Measured on the 17.4.0 build (minified + gzip), generated by `scripts/size.mjs -
 | `motionary/presets/extended` (181 presets) | 4.69 KB | 5.25 KB |
 | `motionary/runtime` (runtime core) | 5.42 KB | 5.50 KB |
 | `motionary/components/reveal` | 4.47 KB | 5.00 KB |
-| `motionary/components/lite` (every element, CSS on demand) | 71.31 KB | 79.00 KB |
-| `motionary/components` (every element + CSS) | 87.73 KB | 93.75 KB |
-| `dist/components.umd.js` (CDN, everything) | 111.21 KB | 115.75 KB |
+| `motionary/components/lite` (every element, CSS on demand) | 71.39 KB | 79.00 KB |
+| `motionary/components` (every element + CSS) | 87.82 KB | 93.75 KB |
+| `dist/components.umd.js` (CDN, everything) | 111.30 KB | 115.75 KB |
 <!-- size-table:end -->
 
 By default there are no scroll listeners (IntersectionObserver is used instead). Animations stay on the compositor
@@ -412,7 +414,7 @@ Coming from another library: [AOS](./docs/migration-from-aos.md) · [GSAP Scroll
 
 ## Versions and compatibility
 
-- **npm dist-tags:** `latest` is the newest release of the current major (<!--ver:version-->17.4.0<!--/ver-->; minors move it since 14.1). Each minor release also gets its own tag `v<major>-<minor>`
+- **npm dist-tags:** `latest` is the newest release of the current major (<!--ver:version-->17.5.0<!--/ver-->; minors move it since 14.1). Each minor release also gets its own tag `v<major>-<minor>`
   (for example `v15-0`), `v15-line` follows the 15.x line and `v14-lts` is 14.9.x. `motionary` and `use-scroll-animate` are published together at the same versions.
 - **CDN:** URLs pin a major (`motionary@<!--ver:major-->17<!--/ver-->`). Exact pins (`motionary@12.4.0`) keep working.
 - **Semver:** breaking changes come only in majors, each with a guide and a codemod. Deprecations stay in place until the
@@ -459,7 +461,7 @@ MIT © HarrisonCN. See [LICENSE](./LICENSE).
 
 Motionary ships its own zero-dependency animation runtime — shared ticker, tween + timeline engine, and one tree-shakable module per feature / format (`motionary/runtime/<module>`). `npm i motionary` installs all of it; you pay only for the modules you import. Components that need a module say so with a **Requires:** badge in the gallery and the Store, and throw a clear error (install / import / CDN) when it is missing.
 
-| Module | Import | CDN (IIFE) | Register | gzip budget |
+| Module | Import | CDN (IIFE) | Register | historical gzip reference |
 |---|---|---|---|---|
 | [Runtime core](docs/runtime/core.md) | `motionary/runtime` | `https://cdn.jsdelivr.net/npm/motionary@17/dist/runtime.iife.js` | `use();` | 5.5 KB |
 | [CSS @keyframes & WAAPI keyframes loader](docs/runtime/format-css.md) | `motionary/runtime/format-css` | `https://cdn.jsdelivr.net/npm/motionary@17/dist/runtime/format-css.iife.js` | `use(formatCss);` | 2.5 KB |
@@ -857,7 +859,7 @@ From 11.0 these are stable and follow semver until 12.0 (additions only in minor
 - `motionary/runtime` and every `motionary/runtime/<module>` export and module id;
 - the AI manifest **schema v2** (`components.json`, `motionary/tooling/manifest.json`, `stability: "stable"`) and the `motionary-scene@1` format;
 - `motionary-mcp` **2.x** tool names and result shapes;
-- the individual entry points (`motionary/widgets/<name>`, `motionary/effects/<name>`, `motionary/components/<name>`) and their fixed gzip budgets;
+- the individual entry points (`motionary/widgets/<name>`, `motionary/effects/<name>`, `motionary/components/<name>`) and their measured gzip sizes;
 - the compatibility matrix below — a ✅ row is not removed before 12.0.
 
 | Module | ✅ | ◐ | ✕ |

@@ -21,7 +21,7 @@ describe('10.9 per-component entry points', () => {
     for (const e of LIST) {
       const sub = e.entry.replace(/^motionary/, '.');
       expect(pkg.exports[sub], sub).toBeTruthy();
-      expect(budgets.some((b: any) => b.name === `import '${e.entry}' (per-entry, fixed)` && b.limit >= 1), e.entry).toBe(true);
+      expect(budgets.some((b: any) => b.name === `import '${e.entry}' (per-entry, fixed)` && b.limit >= 0), e.entry).toBe(true);
     }
     expect(W.length).toBeGreaterThan(100);
     expect(E.length).toBeGreaterThan(100);

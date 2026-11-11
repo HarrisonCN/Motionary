@@ -301,4 +301,4 @@ exports.createWorkerTransport = createWorkerTransport;
 exports.parsePluginManifest = parsePluginManifest;
 exports.pluginFrameSource = pluginFrameSource;
 exports.pluginWorkerSource = pluginWorkerSource;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.4.0/dist/components/studio-plugins.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/components/studio-plugins.cjs.map

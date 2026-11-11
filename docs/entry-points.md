@@ -1,6 +1,6 @@
 # Per-component entry points (10.9)
 
-Load one component instead of a whole group. Every `<usa-*>` widget has its own subpath `motionary/widgets/<name>` (the tag without `usa-`), and every 6.x+ effect has `motionary/effects/<name>`. An entry registers **only its own tag** (or effect) — verified in CI for every entry — and has a fixed gzip budget (`size-budget.json`).
+Load one component instead of a whole group. Every `<usa-*>` widget has its own subpath `motionary/widgets/<name>` (the tag without `usa-`), and every 6.x+ effect has `motionary/effects/<name>`. An entry registers **only its own tag** (or effect) — verified in CI for every entry — and has a measured gzip size (`size-budget.json`; no enforced cap).
 
 ```js
 import { defineToastStack } from 'motionary/widgets/toast-stack';
@@ -12,7 +12,7 @@ registerPearlescent(); defineFx(); // <usa-fx effect="pearlescent">
 
 Notes: an effect entry imports its pack file (the effects of a pack share helpers), so its size is the pack’s, not the whole 6.x set. Runtime-powered widgets still need their prerequisites (`use(…)`, see the Requires badge). The group entries (`motionary/components/widgets`, `/fx2`, `/lite`) are unchanged.
 
-## Widgets (131)
+## Widgets (146)
 
 | Tag | Import | Define |
 |---|---|---|
@@ -138,6 +138,21 @@ Notes: an effect entry imports its pack file (the effects of a pack share helper
 | `<usa-file-tree>` | `motionary/widgets/file-tree` | `defineFileTree()` |
 | `<usa-download-menu>` | `motionary/widgets/download-menu` | `defineDownloadMenu()` |
 | `<usa-title-sequence>` | `motionary/widgets/title-sequence` | `defineTitleSequence()` |
+| `<usa-flight-status>` | `motionary/widgets/flight-status` | `defineFlightStatus()` |
+| `<usa-transit-progress>` | `motionary/widgets/transit-progress` | `defineTransitProgress()` |
+| `<usa-sun-timeline>` | `motionary/widgets/sun-timeline` | `defineSunTimeline()` |
+| `<usa-delivery-tracker>` | `motionary/widgets/delivery-tracker` | `defineDeliveryTracker()` |
+| `<usa-glucose-sparkline>` | `motionary/widgets/glucose-sparkline` | `defineGlucoseSparkline()` |
+| `<usa-coffee-timer>` | `motionary/widgets/coffee-timer` | `defineCoffeeTimer()` |
+| `<usa-vital-wave>` | `motionary/widgets/vital-wave` | `defineVitalWave()` |
+| `<usa-orbit-pass>` | `motionary/widgets/orbit-pass` | `defineOrbitPass()` |
+| `<usa-meter-countdown>` | `motionary/widgets/meter-countdown` | `defineMeterCountdown()` |
+| `<usa-race-telemetry>` | `motionary/widgets/race-telemetry` | `defineRaceTelemetry()` |
+| `<usa-workout-player>` | `motionary/widgets/workout-player` | `defineWorkoutPlayer()` |
+| `<usa-status-pill>` | `motionary/widgets/status-pill` | `defineStatusPill()` |
+| `<usa-ride-status>` | `motionary/widgets/ride-status` | `defineRideStatus()` |
+| `<usa-route-sparkline>` | `motionary/widgets/route-sparkline` | `defineRouteSparkline()` |
+| `<usa-activity-wall>` | `motionary/widgets/activity-wall` | `defineActivityWall()` |
 | `<usa-luminous-switch>` | `motionary/widgets/luminous-switch` | `defineLuminousSwitch()` |
 | `<usa-particle-icon>` | `motionary/widgets/particle-icon` | `defineParticleIcon()` |
 | `<usa-particle-button>` | `motionary/widgets/particle-button` | `defineParticleButton()` |
