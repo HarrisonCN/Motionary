@@ -96,7 +96,7 @@ export async function runSnippet(m, code, opts = {}) {
   const pkg = existsSync(pkgFile) ? JSON.parse(readFileSync(pkgFile, 'utf8')) : { exports: {} };
   const kind = snippetKind(code);
   const markup = markupOf(code);
-  const tags = [...new Set([...(kind === 'document' ? String(code) : markup).matchAll(/<(usa-[a-z0-9-]+)/gi)].map((x) => x[1].toLowerCase()))];
+  const tags = [...new Set([...(kind === 'document' ? String(code) : markup).matchAll(/<((?:usa|mo)-[a-z0-9-]+)/gi)].map((x) => x[1].toLowerCase()))];
   const widgets = tags.some((t) => /widgets\.umd/.test((findComponent && findComponent(m, t) || {}).cdn || ''));
   const html = pageFor(kind, code, { imports: exportsToImports(pkg.exports), runtimeIds, bundles: ['components.umd.js', ...(widgets ? ['widgets.umd.js'] : [])] });
   const errors = [], warnings = [], blocked = [], seen = new Set();

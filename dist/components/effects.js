@@ -1,16 +1,16 @@
 import { registerBuiltinEffects } from './fx.js';
 import { P as PALETTE, o as overlay, a as all, b as origin, s as spawn, r as rand, f as fxLayer } from '../chunks/shared-CkKHWrtJ.js';
-import { b as caf, r as raf, f as defineElement, B as adoptStyles } from '../chunks/base-DRZOlKiI.js';
+import { b as caf, r as raf, f as defineElement, H as adoptStyles } from '../chunks/base-SPDwWyB1.js';
 import { raf as raf$1 } from './offscreen.js';
-import { c as canvasBackground, h as hexRgb, G as GENERATIVE_FX } from '../chunks/generative-CMp5pE9Y.js';
-export { n as noise2 } from '../chunks/generative-CMp5pE9Y.js';
-import { A as AUDIO_FX, d as defineAudio } from '../chunks/audio-C1nRN28K.js';
-export { b as bindBeat, c as createBeatDetector, a as disableAudio, e as enableAudio, g as getAudio, o as onBeat } from '../chunks/audio-C1nRN28K.js';
-import { playEffect, bindEffect, registerEffects } from '../chunks/registry-Di_8M2Md.js';
+import { c as canvasBackground, h as hexRgb, G as GENERATIVE_FX } from '../chunks/generative-Cppu_oFN.js';
+export { n as noise2 } from '../chunks/generative-Cppu_oFN.js';
+import { A as AUDIO_FX, d as defineAudio } from '../chunks/audio-BiO_x6I0.js';
+export { b as bindBeat, c as createBeatDetector, a as disableAudio, e as enableAudio, g as getAudio, o as onBeat } from '../chunks/audio-BiO_x6I0.js';
+import { playEffect, bindEffect, registerEffects } from '../chunks/registry-DmYdTtl4.js';
 import { applyMotionTokens, motionTokensToVars, mergeMotionTokens } from './tokens.js';
-import { s as sceneToAnimation } from '../chunks/play-B1V6ejr7.js';
-import { c as createPlayerCore } from '../chunks/player-core-BeC-5HSm.js';
-export { A as ANIMATION_FORMAT } from '../chunks/player-core-BeC-5HSm.js';
+import { s as sceneToAnimation } from '../chunks/play-KU8T1oaZ.js';
+import { c as createPlayerCore } from '../chunks/player-core-BtZTI0Fz.js';
+export { A as ANIMATION_FORMAT } from '../chunks/player-core-BtZTI0Fz.js';
 
 const CARD_FX = [
     {
@@ -1756,4 +1756,4 @@ function registerAllEffects() {
 }
 
 export { AUDIO_FX, CARD_FX, CLICK_FX, CURSOR_FX, EFFECT_PACKS, GENERATIVE_FX, GESTURES, MICRO_FX, MOTION_THEMES, MOTION_THEME_NAMES, PAGE_FX, PHYSICS_FX, STORY_TEMPLATES, THEME_FX, THEME_ROLES, angleDelta, applyMotionTheme, bindGesture, bounceKeyframes, bumpCount, canvasBackground, createPlayer, defineAudio, defineEffectElements, defineGestureFx, defineMotionTheme, definePlayer, defineStory, flingVelocity, formatCount, fxLayer, hexRgb, playThemeEffect, registerAllEffects, registerAudioEffects, registerCardClickEffects, registerCursorEffects, registerGenerativeEffects, registerMicroEffects, registerPageEffects, registerPhysicsEffects, solveSpring, springKeyframes, storyProgress, swapLabel, themeCss, themePreset, themeVars, togglePressed };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/components/effects.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/components/effects.js.map

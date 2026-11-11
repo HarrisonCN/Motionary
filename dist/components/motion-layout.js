@@ -1,6 +1,6 @@
-import { F as EASE_OUT, p as prefersReducedMotion } from '../chunks/base-DRZOlKiI.js';
+import { D as EASE_OUT, p as prefersReducedMotion } from '../chunks/base-SPDwWyB1.js';
 import { resolveDurationToken } from './tokens.js';
-import { t as toEasingFn, c as control } from '../chunks/index-Cx-NVSlj.js';
+import { t as toEasingFn, c as control } from '../chunks/index-1R6Lie-l.js';
 
 /**
  * `motionary/motion/layout` (= `motionary/components/motion-layout`, 14.2) — **Layout Motion 2.0** on Motion Engine v2.
@@ -540,4 +540,4 @@ function createLayoutTracker(targets, options = {}) {
 }
 
 export { LAYOUT_MOTION_VERSION, correctRadius, createLayoutTracker, crossDocumentLayout, flip, getLayoutId, isLayoutAnimating, layoutDelta, layoutGroup, layoutTransform, layoutTransition, measureLayout, mixBox, playLayoutSnapshot, saveLayoutSnapshot, setLayoutId, sharedLayout, snapshotLayout, solveLayoutTransform, supportsCrossDocumentViewTransitions, supportsViewTransitions, viewTransitionName };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/components/motion-layout.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/components/motion-layout.js.map

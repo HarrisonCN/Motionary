@@ -111,4 +111,4 @@ exports.burst = burst;
 exports.confetti = confetti;
 exports.haptic = haptic;
 exports.shake = shake;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/chunks/fx-BLAi-SpO.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/chunks/fx-BLAi-SpO.cjs.map

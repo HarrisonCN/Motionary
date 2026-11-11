@@ -1,7 +1,7 @@
-import { f as defineElement } from '../chunks/base-DRZOlKiI.js';
-import { playEffect, bindEffect, EFFECT_TRIGGERS, registerEffects } from '../chunks/registry-Di_8M2Md.js';
-export { EFFECT_KINDS, getEffect, hasEffect, listEffects, registerEffect } from '../chunks/registry-Di_8M2Md.js';
-import { B as BUILTIN_EFFECTS } from '../chunks/builtins-BIFIhepe.js';
+import { f as defineElement } from '../chunks/base-SPDwWyB1.js';
+import { playEffect, bindEffect, EFFECT_TRIGGERS, registerEffects } from '../chunks/registry-DmYdTtl4.js';
+export { EFFECT_KINDS, getEffect, hasEffect, listEffects, registerEffect } from '../chunks/registry-DmYdTtl4.js';
+import { B as BUILTIN_EFFECTS } from '../chunks/builtins-J8Y5msT6.js';
 
 function defineFx(tag = 'usa-fx') {
     return defineElement(tag, (Base) => class UsaFx extends Base {
@@ -57,4 +57,4 @@ function defineFxComponents() {
 }
 
 export { BUILTIN_EFFECTS, EFFECT_TRIGGERS, bindEffect, defineFx, defineFxComponents, playEffect, registerBuiltinEffects, registerEffects };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/components/fx.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/components/fx.js.map

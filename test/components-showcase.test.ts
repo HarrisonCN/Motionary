@@ -56,6 +56,7 @@ describe('component gallery catalog', () => {
   });
 
   it('search matches tags, English, Chinese and category names', () => {
+    expect(matchesComponent(findComponent('file-tree'), 'mo-file-tree')).toBe(true);
     expect(matchesComponent(findComponent('spinner'), 'windows')).toBe(true);
     expect(matchesComponent(findComponent('typewriter'), '打字机')).toBe(true);
     expect(matchesComponent(findComponent('acrylic'), 'fluent')).toBe(true);

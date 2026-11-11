@@ -15,4 +15,4 @@ function registerGooglyEyes() {
 exports.effect = effect;
 exports.register = registerGooglyEyes;
 exports.registerGooglyEyes = registerGooglyEyes;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/effects/googly-eyes.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/effects/googly-eyes.cjs.map

@@ -2,7 +2,7 @@
 
 ## 17.x 维护与迭代
 
-当前基线为 **17.2.2**。维护顺序、验收条件与进度见 [17.x 维护计划](maintenance-17x.md)；下面的 14.x–17.0 表格保留为历史追踪。
+当前基线为 **17.3.1**。维护顺序、验收条件与进度见 [17.x 维护计划](maintenance-17x.md)；下面的 14.x–17.0 表格保留为历史追踪。
 2026-11-10 维护者调整方向：17.x 小版本可以新增组件与特效（自行实现，不复制参考站点的代码、文字或素材），`mo-*` 成为所有组件的默认标签，
 `usa-*` 作为弃用别名保留（17.x 不删除）。其余约定：新入口各有独立预算行；组件增多时维护者同意按需调高已有预算（每次在 CHANGELOG 写明 旧上限 → 新上限 与实测值，留约 10–15% 余量），零运行时依赖，17.x 不删除稳定 API。
 
@@ -10,7 +10,8 @@
 
 | 版本 | 状态 | 主题 | 组件 | 特效包 | 工具 / 升级 |
 | --- | --- | --- | --- | --- | --- |
-| v17.3.0 | [开发中] | 导航 I + `mo-*` 默认 | mega-menu、nav-flyout、fullscreen-menu、breadcrumbs | fx/hover（5） | 展示页多选 → 复制为 AI 提示词 + 分享链接；`mo-codemod tags` |
+| v17.3.0 | [已完成] | 导航 I + `mo-*` 默认 | mega-menu、nav-flyout、fullscreen-menu、breadcrumbs | fx/hover（5） | 展示页多选 → 复制为 AI 提示词 + 分享链接；`mo-codemod tags` |
+| v17.3.1 | [已完成] | 合入 #180 | file-tree、download-menu、title-sequence | — | 公开标签类型与组件演示同步 |
 | v17.4.0 | [计划] | 导航 II | sidebar（基于 liquid-nav 纵向）、announcement-bar、search-bar、scrollspy | fx/path（3） | navbar CTA 插槽 |
 | v17.5.0 | [计划] | 滚动叙事 | scroll-zoom、horizontal-scroll、scroll-bg、scroll-cue | fx/velocity（3 种模式） | splash 百分比计数 + 分开退场 |
 | v17.6.0 | [计划] | 转化 | pricing、subscribe、download-button、sticky-cta | fx/anim（4） | — |

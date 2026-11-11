@@ -34,7 +34,7 @@ export type UsaGlobalComponents = {
 };
 
 /** `compilerOptions.isCustomElement` predicate for every `<usa-*>` tag. */
-export const isUsaElement = (tag: string): boolean => tag.startsWith('usa-');
+export const isUsaElement = (tag: string): boolean => tag.startsWith('mo-') || tag.startsWith('usa-');
 
 export interface UsaPluginOptions {
   /** Only register these categories (default: all). */

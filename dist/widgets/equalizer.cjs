@@ -5,4 +5,4 @@ var widgets_equalizer = require('../chunks/equalizer-DbABxC9W.cjs');
 
 
 exports.defineEqualizer = widgets_equalizer.defineEqualizer;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/widgets/equalizer.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/widgets/equalizer.cjs.map

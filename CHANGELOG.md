@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [17.3.1] - 2026-11-11
+
+- Added `<mo-file-tree>`, `<mo-download-menu>` and `<mo-title-sequence>` with individual imports, keyboard support, and live gallery examples. The title animation respects reduced motion.
+- Added public tag types for frameworks and DOM lookups, late registration support, and static CSS selectors for both tag names. Updated the toast and accessibility helpers to recognize public tags.
+- Synchronized the gallery and README counts with the component source and aligned the npm publish workflow with its environment credential.
+
 ## [17.3.0] - 2026-11-10 — Navigation I, `mo-*` by default
 
 ### Added

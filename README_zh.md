@@ -24,7 +24,7 @@ npm i motionary
 <script type="module">import ScrollAnimate from 'motionary'; ScrollAnimate.init();</script>
 ```
 
-Motionary 让内容在滚入视口时自然登场，并提供 <!--fact:public-->213<!--/fact--> 个开箱即用的 `<mo-*>` 动画自定义元素：卡片、按钮、物理效果、页面转场、生成式背景、Lottie、WebGL 等等。无论是纯 HTML，还是 React、Vue、Svelte、Solid、Angular，乃至 Electron、Tauri、WebView2 这类桌面 Web 视图，都能直接使用。运行时零依赖，每个入口都可 tree-shaking，并在 CI 中有固定的 gzip 体积预算；所有动画都遵循 `prefers-reduced-motion`。
+Motionary 让内容在滚入视口时自然登场，并提供 <!--fact:public-->216<!--/fact--> 个开箱即用的 `<mo-*>` 动画自定义元素：卡片、按钮、物理效果、页面转场、生成式背景、Lottie、WebGL 等等。无论是纯 HTML，还是 React、Vue、Svelte、Solid、Angular，乃至 Electron、Tauri、WebView2 这类桌面 Web 视图，都能直接使用。运行时零依赖，每个入口都可 tree-shaking，并在 CI 中有固定的 gzip 体积预算；所有动画都遵循 `prefers-reduced-motion`。
 
 各版本的更新说明见 [CHANGELOG.md](./CHANGELOG.md)。
 
@@ -37,7 +37,7 @@ Motionary 让内容在滚入视口时自然登场，并提供 <!--fact:public-->
 ## 特性
 
 - **214 个滚动显现预设**，分为 14 个系列（核心内置 33 个，`motionary/presets/extended` 再提供 181 个）：淡入、缩放、3D 翻转、clip-path 形状、模糊与遮罩、弹跳、景深、故障风，以及随滚动进度变化的 `scrub-*`。另有 `timeline()`、`staggerChildren()` 和 `parallax()`。
-- **<!--fact:public-->213<!--/fact--> 个 `<mo-*>` Web Components**：`motionary/components` 中按分类提供 <!--fact:core-->91<!--/fact--> 个核心组件，另有 <!--fact:widgets-->122<!--/fact--> 个小部件，每个都有独立入口（`motionary/widgets/<name>`）。此外还有 <!--fact:effects-->146<!--/fact--> 个效果，同样各有独立入口（`motionary/effects/<name>`）。统计口径见 [docs/components.md](./docs/components.md#how-components-are-counted)。
+- **<!--fact:public-->216<!--/fact--> 个 `<mo-*>` Web Components**：`motionary/components` 中按分类提供 <!--fact:core-->91<!--/fact--> 个核心组件，另有 <!--fact:widgets-->125<!--/fact--> 个小部件，每个都有独立入口（`motionary/widgets/<name>`）。此外还有 <!--fact:effects-->146<!--/fact--> 个效果，同样各有独立入口（`motionary/effects/<name>`）。统计口径见 [docs/components.md](./docs/components.md#how-components-are-counted)。
 - **Motion Core**：`motionary/core` 提供的 `createMotion()`，插件化引擎，gzip 后约 2.5 KB（预算 10 KB）。
 - **自研运行时**：`motionary/runtime`（ticker、tween、timeline）加 <!--fact:runtimeModules-->20<!--/fact--> 个模块，覆盖滚动场景、平滑滚动、文字拆分、SVG 变形、精灵图、GIF / APNG / WebP、Lottie 与 dotLottie、WebGL2、glTF / OBJ、2D 物理。模块分为三个等级，只为实际导入的部分付出体积。
 - **适配所有框架**：`motionary/react`、`motionary/vue`、`motionary/svelte`、`motionary/solid`、`motionary/angular`，以及元素封装 `motionary/components/react` · `vue` · `svelte` · `solid`。在服务端导入不会产生任何副作用。
@@ -59,6 +59,8 @@ npm i motionary
 <script src="https://unpkg.com/motionary@17/dist/widgets.umd.js"></script>          <!-- 小部件：window.UsaWidgets -->
 <mo-reveal effect="fade-up"><h2>Hello</h2></mo-reveal>
 ```
+
+17.3.1 新增文件树、下载菜单和电影片头字幕。[用法与按需导入示例](./docs/gallery-components.md)。
 
 自 17.3 起 `<mo-*>` 是默认元素名。CDN 包、`defineComponents()` 与 `defineWidgets()` 会注册它，17.3 起的新组件也会自行注册；按单个组件或分类以 ES 模块引入时，请先从 `motionary/components/mo` 调用 `defineMoAliases()`（它不放进单组件入口，以保持固定体积预算）。`<usa-*>` 名称作为已弃用的别名继续可用（最早在未来某个大版本移除）；`npx -p motionary mo-codemod tags --write` 可在代码中批量改名。两套标签都使用 `usa:*` 事件和 `--usa-*` CSS 自定义属性。[v17 迁移指南](./docs/migrating-to-v17.md)
 
@@ -163,9 +165,9 @@ export const Card = () => <div use:scrollAnimate={{ animation: 'blur-in-up' }}>H
 ```
 
 ```ts
-// Angular（standalone）：使用 <usa-*> 元素
+// Angular（standalone）：使用 <mo-*> 元素
 import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
-import { provideUsa } from 'motionary/angular';
+import { provideUsa, usaDetail } from 'motionary/angular';
 // app.config.ts：providers: [provideUsa(APP_INITIALIZER, ['click', 'ui'])]   （要注册的分类）
 @Component({ standalone: true, schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `<mo-checkbox label="Motion" [checked]="on" (usa:change)="on = $any($event).detail.checked"></mo-checkbox>` })
@@ -215,26 +217,26 @@ defineScrollScene();  // 再注册依赖它的组件
 <!-- core-table:start -->
 | 分类 | 入口 | 元素 |
 |---|---|---|
-| **滚动显现** | `motionary/components/reveal` | `<usa-reveal>` · `<usa-scroll-progress>` · `<usa-scrolly>` · `<usa-stagger>` |
-| **文字** | `motionary/components/text` | `<usa-counter>` · `<usa-glitch>` · `<usa-gradient-text>` · `<usa-handwriting>` · `<usa-scramble>` · `<usa-scroll-highlight>` · `<usa-shimmer-text>` · `<usa-split-text>` · `<usa-text-rotate>` · `<usa-typewriter>` · `<usa-wave-text>` |
-| **交互** | `motionary/components/interaction` | `<usa-magnetic>` · `<usa-press>` · `<usa-ripple>` · `<usa-spotlight>` · `<usa-tilt>` |
-| **反馈** | `motionary/components/feedback` | `<usa-check>` · `<usa-progress>` · `<usa-skeleton>` · `<usa-spinner>` · `<usa-toaster>` |
-| **背景** | `motionary/components/background` | `<usa-acrylic>` · `<usa-aurora>` · `<usa-blobs>` · `<usa-dot-network>` · `<usa-grain>` · `<usa-grid-glow>` · `<usa-marquee>` · `<usa-particles>` · `<usa-water-ripple>` |
-| **过渡** | `motionary/components/transitions` | `<usa-accordion>` · `<usa-dialog>` · `<usa-view-switch>` |
-| **弹簧与物理** | `motionary/components/physics` | `<usa-draggable>` · `<usa-overscroll>` · `<usa-spring>` |
-| **卡片** | `motionary/components/cards` | `<usa-card>` · `<usa-card-stack>` · `<usa-carousel-3d>` · `<usa-sticky-stack>` |
-| **点击与按钮** | `motionary/components/click` | `<usa-button>` · `<usa-checkbox>` · `<usa-click>` · `<usa-double-tap>` · `<usa-hold>` · `<usa-icon-morph>` · `<usa-like>` |
-| **UI 套件** | `motionary/components/ui` | `<usa-avatar-stack>` · `<usa-badge>` · `<usa-bottom-sheet>` · `<usa-drawer>` · `<usa-fab>` · `<usa-navbar>` · `<usa-popover>` · `<usa-pull-refresh>` · `<usa-slider>` · `<usa-tabs>` |
-| **整页** | `motionary/components/page` | `<usa-ambient>` · `<usa-auto-skeleton>` · `<usa-back-to-top>` · `<usa-cursor>` · `<usa-fullpage>` · `<usa-loading-bar>` · `<usa-motion-switch>` · `<usa-splash>` |
-| **时间线** | `motionary/components/timeline` | `<usa-timeline>` |
-| **手势** | `motionary/components/gesture` | `<usa-pinch-zoom>` · `<usa-swipeable>` |
-| **SVG** | `motionary/components/svg` | `<usa-anim-icon>` · `<usa-draw>` · `<usa-mask-reveal>` · `<usa-morph>` |
-| **WebGL** | `motionary/components/webgl` | `<usa-distort>` · `<usa-liquid>` · `<usa-post-fx>` · `<usa-shader>` |
-| **3D 景深** | `motionary/components/depth` | `<usa-cube>` · `<usa-depth>` |
-| **布局** | `motionary/components/layout` | `<usa-auto-animate>` · `<usa-masonry>` |
-| **效果包** | `motionary/components/packs` | `<usa-pack>` |
-| **效果注册表** | `motionary/components/fx` | `<usa-fx>` |
-| **效果包元素** | `motionary/components/effects` | `<usa-audio>` · `<usa-gesture-fx>` · `<usa-motion-theme>` · `<usa-player>` · `<usa-story>` |
+| **滚动显现** | `motionary/components/reveal` | `<mo-reveal>` · `<mo-scroll-progress>` · `<mo-scrolly>` · `<mo-stagger>` |
+| **文字** | `motionary/components/text` | `<mo-counter>` · `<mo-glitch>` · `<mo-gradient-text>` · `<mo-handwriting>` · `<mo-scramble>` · `<mo-scroll-highlight>` · `<mo-shimmer-text>` · `<mo-split-text>` · `<mo-text-rotate>` · `<mo-typewriter>` · `<mo-wave-text>` |
+| **交互** | `motionary/components/interaction` | `<mo-magnetic>` · `<mo-press>` · `<mo-ripple>` · `<mo-spotlight>` · `<mo-tilt>` |
+| **反馈** | `motionary/components/feedback` | `<mo-check>` · `<mo-progress>` · `<mo-skeleton>` · `<mo-spinner>` · `<mo-toaster>` |
+| **背景** | `motionary/components/background` | `<mo-acrylic>` · `<mo-aurora>` · `<mo-blobs>` · `<mo-dot-network>` · `<mo-grain>` · `<mo-grid-glow>` · `<mo-marquee>` · `<mo-particles>` · `<mo-water-ripple>` |
+| **过渡** | `motionary/components/transitions` | `<mo-accordion>` · `<mo-dialog>` · `<mo-view-switch>` |
+| **弹簧与物理** | `motionary/components/physics` | `<mo-draggable>` · `<mo-overscroll>` · `<mo-spring>` |
+| **卡片** | `motionary/components/cards` | `<mo-card>` · `<mo-card-stack>` · `<mo-carousel-3d>` · `<mo-sticky-stack>` |
+| **点击与按钮** | `motionary/components/click` | `<mo-button>` · `<mo-checkbox>` · `<mo-click>` · `<mo-double-tap>` · `<mo-hold>` · `<mo-icon-morph>` · `<mo-like>` |
+| **UI 套件** | `motionary/components/ui` | `<mo-avatar-stack>` · `<mo-badge>` · `<mo-bottom-sheet>` · `<mo-drawer>` · `<mo-fab>` · `<mo-navbar>` · `<mo-popover>` · `<mo-pull-refresh>` · `<mo-slider>` · `<mo-tabs>` |
+| **整页** | `motionary/components/page` | `<mo-ambient>` · `<mo-auto-skeleton>` · `<mo-back-to-top>` · `<mo-cursor>` · `<mo-fullpage>` · `<mo-loading-bar>` · `<mo-motion-switch>` · `<mo-splash>` |
+| **时间线** | `motionary/components/timeline` | `<mo-timeline>` |
+| **手势** | `motionary/components/gesture` | `<mo-pinch-zoom>` · `<mo-swipeable>` |
+| **SVG** | `motionary/components/svg` | `<mo-anim-icon>` · `<mo-draw>` · `<mo-mask-reveal>` · `<mo-morph>` |
+| **WebGL** | `motionary/components/webgl` | `<mo-distort>` · `<mo-liquid>` · `<mo-post-fx>` · `<mo-shader>` |
+| **3D 景深** | `motionary/components/depth` | `<mo-cube>` · `<mo-depth>` |
+| **布局** | `motionary/components/layout` | `<mo-auto-animate>` · `<mo-masonry>` |
+| **效果包** | `motionary/components/packs` | `<mo-pack>` |
+| **效果注册表** | `motionary/components/fx` | `<mo-fx>` |
+| **效果包元素** | `motionary/components/effects` | `<mo-audio>` · `<mo-gesture-fx>` · `<mo-motion-theme>` · `<mo-player>` · `<mo-story>` |
 <!-- core-table:end -->
 
 </details>
@@ -300,10 +302,10 @@ AI 助手与 provider（`motionary/studio/ai`、`motionary/ai*`）、MCP 服务�
 
 ## 体积预算
 
-每个入口在 [`size-budget.json`](./size-budget.json) 中都有固定的 gzip 预算（共 401 项）。任何入口超出预算，CI 就会失败，预算也从不自动上调。
+每个入口在 [`size-budget.json`](./size-budget.json) 中都有固定的 gzip 预算（共 441 项）。任何入口超出预算，CI 就会失败，预算也从不自动上调。
 
 <!-- size-table:start -->
-17.3.0 构建的实测值（minify + gzip），由 `scripts/size.mjs --report` 生成：
+17.3.1 构建的实测值（minify + gzip），由 `scripts/size.mjs --report` 生成：
 
 | 导入内容 | gzip | 上限 |
 |---|---:|---:|
@@ -315,9 +317,9 @@ AI 助手与 provider（`motionary/studio/ai`、`motionary/ai*`）、MCP 服务�
 | `motionary/presets/extended`（181 个预设） | 4.69 KB | 5.25 KB |
 | `motionary/runtime`（运行时核心） | 5.42 KB | 5.50 KB |
 | `motionary/components/reveal` | 4.47 KB | 5.00 KB |
-| `motionary/components/lite`（全部元素，CSS 按需） | 70.29 KB | 79.00 KB |
-| `motionary/components`（全部元素 + CSS） | 86.72 KB | 93.75 KB |
-| `dist/components.umd.js`（CDN，全部） | 110.11 KB | 115.75 KB |
+| `motionary/components/lite`（全部元素，CSS 按需） | 71.28 KB | 79.00 KB |
+| `motionary/components`（全部元素 + CSS） | 87.70 KB | 93.75 KB |
+| `dist/components.umd.js`（CDN，全部） | 111.18 KB | 115.75 KB |
 <!-- size-table:end -->
 
 默认不监听 scroll 事件（改用 IntersectionObserver），动画只作用于合成层属性（`transform`、`opacity`、`filter`、`clip-path`），导入本身没有副作用（[docs/tree-shaking.md](./docs/tree-shaking.md)）。每个 PR 还会在无头 Chrome 中测量首屏传输量、脚本耗时、GPU 资源与帧稳定性（[docs/perf-ci.md](./docs/perf-ci.md)）。source map 不随 npm 包发布：它们保存在打了标签的 git 树中（每个文件的 `sourceMappingURL` 指向那里），从 16.3 起也作为 `sourcemaps` 压缩包附在每个 GitHub Release 上（[docs/source-maps.md](./docs/source-maps.md)）。更多：[docs/performance.md](./docs/performance.md)。
@@ -345,7 +347,7 @@ npx usa-codemod-13 --write      # 一并改写，并把固定在 @10 / @11 / @12
 
 ## 版本与兼容性
 
-- **npm dist-tags：** `latest` 指向当前大版本的最新版本（<!--ver:version-->17.3.0<!--/ver-->；从 14.1 起次版本也会移动它）。每个次版本另有自己的标签 `v<major>-<minor>`（例如 `v15-0`），`v15-line` 跟随 15.x，`v14-lts` 为 14.9.x。`motionary` 与 `use-scroll-animate` 总是以相同版本一起发布。
+- **npm dist-tags：** `latest` 指向当前大版本的最新版本（<!--ver:version-->17.3.1<!--/ver-->；从 14.1 起次版本也会移动它）。每个次版本另有自己的标签 `v<major>-<minor>`（例如 `v15-0`），`v15-line` 跟随 15.x，`v14-lts` 为 14.9.x。`motionary` 与 `use-scroll-animate` 总是以相同版本一起发布。
 - **CDN：** URL 固定到大版本（`motionary@<!--ver:major-->17<!--/ver-->`）；固定到具体版本（`motionary@12.4.0`）的链接也继续可用。
 - **语义化版本：** 破坏性变更只出现在大版本，每次都附带升级指南和 codemod。弃用的内容会保留到下一个大版本，期间类型标记为 `@deprecated`，运行时不输出警告。
 - **各版本包含什么：** 每个组件和运行时模块的 `since` / `changed`（[docs/version-compat.md](./docs/version-compat.md)），以及逐项功能支持（[docs/compat-matrix.md](./docs/compat-matrix.md)）。
