@@ -5,4 +5,4 @@ var widgets_presence = require('../chunks/presence-DKDktgSJ.cjs');
 
 
 exports.definePresence = widgets_presence.definePresence;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/widgets/presence.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.4.0/dist/widgets/presence.cjs.map

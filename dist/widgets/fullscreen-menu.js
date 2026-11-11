@@ -172,4 +172,4 @@ function defineFullscreenMenu(tag = 'usa-fullscreen-menu') {
 }
 
 export { defineFullscreenMenu };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/widgets/fullscreen-menu.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.4.0/dist/widgets/fullscreen-menu.js.map

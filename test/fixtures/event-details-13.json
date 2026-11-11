@@ -1020,6 +1020,29 @@
       "usa:xp": [
         "{gained, level, xp}"
       ]
+    },
+    "usa-halo-segmented": {
+      "usa:change": [
+        "{index, value}"
+      ]
+    },
+    "usa-halo-slider": {
+      "usa:change": [
+        "{value}"
+      ],
+      "usa:input": [
+        "{value}"
+      ]
+    },
+    "usa-luminous-switch": {
+      "usa:change": [
+        "{checked, theme}"
+      ]
+    },
+    "usa-particle-button": {
+      "usa:activate": [
+        "{pressed}"
+      ]
     }
   }
 }

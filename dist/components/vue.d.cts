@@ -2067,6 +2067,23 @@ interface LegacyAttributes {
         glare?: string | boolean | number;
         max?: string | boolean | number;
     };
+    'usa-halo-segmented': {
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        options?: string | boolean | number;
+        theme?: string | boolean | number;
+        value?: string | boolean | number;
+    };
+    'usa-halo-slider': {
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+        min?: string | boolean | number;
+        name?: string | boolean | number;
+        step?: string | boolean | number;
+        theme?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-handwriting': {
         duration?: string | boolean | number;
         font?: string | boolean | number;
@@ -2186,6 +2203,15 @@ interface LegacyAttributes {
         segment?: string | boolean | number;
         speed?: string | boolean | number;
         src?: string | boolean | number;
+    };
+    'usa-luminous-switch': {
+        checked?: string | boolean | number;
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        name?: string | boolean | number;
+        target?: string | boolean | number;
+        theme?: string | boolean | number;
+        value?: string | boolean | number;
     };
     'usa-lyrics': {
         for?: string | boolean | number;
@@ -2315,6 +2341,12 @@ interface LegacyAttributes {
         suffix?: string | boolean | number;
         value?: string | boolean | number;
     };
+    'usa-orbit-progress': {
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+        theme?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-organic-card': {
         seed?: string | boolean | number;
         tint?: string | boolean | number;
@@ -2351,6 +2383,21 @@ interface LegacyAttributes {
         preview?: string | boolean | number;
         range?: string | boolean | number;
         strength?: string | boolean | number;
+    };
+    'usa-particle-button': {
+        'active-icon'?: string | boolean | number;
+        disabled?: string | boolean | number;
+        icon?: string | boolean | number;
+        label?: string | boolean | number;
+        pressed?: string | boolean | number;
+        theme?: string | boolean | number;
+        toggle?: string | boolean | number;
+    };
+    'usa-particle-icon': {
+        decorative?: string | boolean | number;
+        icon?: string | boolean | number;
+        label?: string | boolean | number;
+        theme?: string | boolean | number;
     };
     'usa-particles': {
         color?: string | boolean | number;
@@ -3086,6 +3133,13 @@ interface LegacyEvents {
     'usa-gyro-card': {
         'usa:tilt': CustomEvent<any>;
     };
+    'usa-halo-segmented': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-halo-slider': {
+        'usa:change': CustomEvent<any>;
+        'usa:input': CustomEvent<any>;
+    };
     'usa-handwriting': {
         'usa:complete': CustomEvent<any>;
     };
@@ -3139,6 +3193,9 @@ interface LegacyEvents {
         'usa:error': CustomEvent<any>;
         'usa:load': CustomEvent<any>;
         'usa:runtime-missing': CustomEvent<any>;
+    };
+    'usa-luminous-switch': {
+        'usa:change': CustomEvent<any>;
     };
     'usa-lyrics': {
         'usa:seek': CustomEvent<any>;
@@ -3221,6 +3278,7 @@ interface LegacyEvents {
         'usa:read': CustomEvent<any>;
     };
     'usa-odometer': {};
+    'usa-orbit-progress': {};
     'usa-organic-card': {};
     'usa-otp': {
         'usa:complete': CustomEvent<any>;
@@ -3238,6 +3296,10 @@ interface LegacyEvents {
     'usa-parallax-layers': {
         'usa:progress': CustomEvent<any>;
     };
+    'usa-particle-button': {
+        'usa:activate': CustomEvent<any>;
+    };
+    'usa-particle-icon': {};
     'usa-particles': {};
     'usa-pause-all': {
         'usa:pause-all': CustomEvent<any>;

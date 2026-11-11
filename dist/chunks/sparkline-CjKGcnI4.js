@@ -128,4 +128,4 @@ function defineSparkline(tag = 'usa-sparkline') {
 }
 
 export { SPARK_VARIANTS as S, defineSparkline as d, sparkPoints as s };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/chunks/sparkline-CjKGcnI4.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.4.0/dist/chunks/sparkline-CjKGcnI4.js.map

@@ -130,6 +130,15 @@ import { defineMegaMenu, defineNavFlyout, type UsaMegaMenuElement, type UsaNavFl
 import { defineFullscreenMenu, type UsaFullscreenMenuElement } from './fullscreen-menu';
 import { defineBreadcrumbs, type UsaBreadcrumbsElement, type BreadcrumbItem } from './breadcrumbs';
 import { defineMoAliases } from '../mo';
+import { defineLuminousSwitch, type UsaLuminousSwitchElement } from './luminous-switch';
+import { defineParticleIcon, type UsaParticleIconElement } from './particle-icon';
+import { defineParticleButton, type UsaParticleButtonElement } from './particle-button';
+import { defineHaloSegmented, type UsaHaloSegmentedElement } from './halo-segmented';
+import { defineHaloSlider, type UsaHaloSliderElement } from './halo-slider';
+import { defineOrbitProgress, type UsaOrbitProgressElement } from './orbit-progress';
+
+export { defineLuminousSwitch, defineParticleIcon, defineParticleButton, defineHaloSegmented, defineHaloSlider, defineOrbitProgress };
+export type { UsaLuminousSwitchElement, UsaParticleIconElement, UsaParticleButtonElement, UsaHaloSegmentedElement, UsaHaloSliderElement, UsaOrbitProgressElement };
 
 export { defineFileTree, defineDownloadMenu, defineTitleSequence };
 export { defineCarousel, defineTabBar, defineDisclosure, defineStories, CAROUSEL_EFFECTS, TAB_INDICATORS };
@@ -311,6 +320,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '10.6': { 'usa-lottie-player': defineLottiePlayer, 'usa-rive': defineRive, 'usa-token-editor': defineTokenEditor },
   '10.7': { 'usa-physics-playground': definePhysicsPlayground, 'usa-motion-prompt': defineMotionPrompt },
   '17.3': { 'usa-mega-menu': defineMegaMenu, 'usa-nav-flyout': defineNavFlyout, 'usa-fullscreen-menu': defineFullscreenMenu, 'usa-breadcrumbs': defineBreadcrumbs, 'usa-file-tree': defineFileTree, 'usa-download-menu': defineDownloadMenu, 'usa-title-sequence': defineTitleSequence },
+  '17.4': { 'usa-luminous-switch': defineLuminousSwitch, 'usa-particle-icon': defineParticleIcon, 'usa-particle-button': defineParticleButton, 'usa-halo-segmented': defineHaloSegmented, 'usa-halo-slider': defineHaloSlider, 'usa-orbit-progress': defineOrbitProgress },
 };
 
 /** Every widget tag, in release order. */
@@ -327,6 +337,18 @@ export function defineWidgets(release?: string): void {
 
 declare global {
   interface HTMLElementTagNameMap {
+    'usa-luminous-switch': UsaLuminousSwitchElement;
+    'mo-luminous-switch': UsaLuminousSwitchElement;
+    'usa-particle-icon': UsaParticleIconElement;
+    'mo-particle-icon': UsaParticleIconElement;
+    'usa-particle-button': UsaParticleButtonElement;
+    'mo-particle-button': UsaParticleButtonElement;
+    'usa-halo-segmented': UsaHaloSegmentedElement;
+    'mo-halo-segmented': UsaHaloSegmentedElement;
+    'usa-halo-slider': UsaHaloSliderElement;
+    'mo-halo-slider': UsaHaloSliderElement;
+    'usa-orbit-progress': UsaOrbitProgressElement;
+    'mo-orbit-progress': UsaOrbitProgressElement;
     'usa-carousel': UsaCarouselElement;
     'usa-mega-menu': UsaMegaMenuElement;
     'mo-mega-menu': UsaMegaMenuElement;

@@ -254,4 +254,4 @@ const defineNavFlyout = (tag = 'usa-nav-flyout') => navPanels(tag, 'flyout');
 
 exports.defineMegaMenu = defineMegaMenu;
 exports.defineNavFlyout = defineNavFlyout;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/chunks/nav-flyout-CrLUC54W.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.4.0/dist/chunks/nav-flyout-CrLUC54W.cjs.map

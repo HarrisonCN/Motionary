@@ -15,4 +15,4 @@ function registerFocusReveal() {
 exports.effect = effect;
 exports.register = registerFocusReveal;
 exports.registerFocusReveal = registerFocusReveal;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/effects/focus-reveal.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.4.0/dist/effects/focus-reveal.cjs.map

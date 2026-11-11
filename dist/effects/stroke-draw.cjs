@@ -15,4 +15,4 @@ function registerStrokeDraw() {
 exports.effect = effect;
 exports.register = registerStrokeDraw;
 exports.registerStrokeDraw = registerStrokeDraw;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/effects/stroke-draw.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.4.0/dist/effects/stroke-draw.cjs.map

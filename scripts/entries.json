@@ -1587,6 +1587,84 @@
  },
  {
   "kind": "widget",
+  "name": "luminous-switch",
+  "entry": "motionary/widgets/luminous-switch",
+  "src": "src/entries/widgets/luminous-switch.ts",
+  "tag": "usa-luminous-switch",
+  "define": "defineLuminousSwitch",
+  "types": [
+   "UsaLuminousSwitchElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/luminous-switch"
+ },
+ {
+  "kind": "widget",
+  "name": "particle-icon",
+  "entry": "motionary/widgets/particle-icon",
+  "src": "src/entries/widgets/particle-icon.ts",
+  "tag": "usa-particle-icon",
+  "define": "defineParticleIcon",
+  "types": [
+   "UsaParticleIconElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/particle-icon"
+ },
+ {
+  "kind": "widget",
+  "name": "particle-button",
+  "entry": "motionary/widgets/particle-button",
+  "src": "src/entries/widgets/particle-button.ts",
+  "tag": "usa-particle-button",
+  "define": "defineParticleButton",
+  "types": [
+   "UsaParticleButtonElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/particle-button"
+ },
+ {
+  "kind": "widget",
+  "name": "halo-segmented",
+  "entry": "motionary/widgets/halo-segmented",
+  "src": "src/entries/widgets/halo-segmented.ts",
+  "tag": "usa-halo-segmented",
+  "define": "defineHaloSegmented",
+  "types": [
+   "UsaHaloSegmentedElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/halo-segmented"
+ },
+ {
+  "kind": "widget",
+  "name": "halo-slider",
+  "entry": "motionary/widgets/halo-slider",
+  "src": "src/entries/widgets/halo-slider.ts",
+  "tag": "usa-halo-slider",
+  "define": "defineHaloSlider",
+  "types": [
+   "UsaHaloSliderElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/halo-slider"
+ },
+ {
+  "kind": "widget",
+  "name": "orbit-progress",
+  "entry": "motionary/widgets/orbit-progress",
+  "src": "src/entries/widgets/orbit-progress.ts",
+  "tag": "usa-orbit-progress",
+  "define": "defineOrbitProgress",
+  "types": [
+   "UsaOrbitProgressElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/orbit-progress"
+ },
+ {
+  "kind": "widget",
   "name": "snap-carousel",
   "entry": "motionary/widgets/snap-carousel",
   "src": "src/entries/widgets/snap-carousel.ts",

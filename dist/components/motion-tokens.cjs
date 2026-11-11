@@ -874,4 +874,4 @@ exports.tokenRefPath = tokenRefPath;
 exports.validateMotionTokens = validateMotionTokens;
 exports.withMode = withMode;
 exports.withSceneTokens = withSceneTokens;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/components/motion-tokens.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.4.0/dist/components/motion-tokens.cjs.map

@@ -2086,6 +2086,23 @@ interface LegacyAttributes {
         glare?: string | boolean | number;
         max?: string | boolean | number;
     };
+    'usa-halo-segmented': {
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        options?: string | boolean | number;
+        theme?: string | boolean | number;
+        value?: string | boolean | number;
+    };
+    'usa-halo-slider': {
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+        min?: string | boolean | number;
+        name?: string | boolean | number;
+        step?: string | boolean | number;
+        theme?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-handwriting': {
         duration?: string | boolean | number;
         font?: string | boolean | number;
@@ -2205,6 +2222,15 @@ interface LegacyAttributes {
         segment?: string | boolean | number;
         speed?: string | boolean | number;
         src?: string | boolean | number;
+    };
+    'usa-luminous-switch': {
+        checked?: string | boolean | number;
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        name?: string | boolean | number;
+        target?: string | boolean | number;
+        theme?: string | boolean | number;
+        value?: string | boolean | number;
     };
     'usa-lyrics': {
         for?: string | boolean | number;
@@ -2334,6 +2360,12 @@ interface LegacyAttributes {
         suffix?: string | boolean | number;
         value?: string | boolean | number;
     };
+    'usa-orbit-progress': {
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+        theme?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-organic-card': {
         seed?: string | boolean | number;
         tint?: string | boolean | number;
@@ -2370,6 +2402,21 @@ interface LegacyAttributes {
         preview?: string | boolean | number;
         range?: string | boolean | number;
         strength?: string | boolean | number;
+    };
+    'usa-particle-button': {
+        'active-icon'?: string | boolean | number;
+        disabled?: string | boolean | number;
+        icon?: string | boolean | number;
+        label?: string | boolean | number;
+        pressed?: string | boolean | number;
+        theme?: string | boolean | number;
+        toggle?: string | boolean | number;
+    };
+    'usa-particle-icon': {
+        decorative?: string | boolean | number;
+        icon?: string | boolean | number;
+        label?: string | boolean | number;
+        theme?: string | boolean | number;
     };
     'usa-particles': {
         color?: string | boolean | number;

@@ -23,4 +23,4 @@ const COMPONENT_CATEGORIES = {
 };
 
 export { COMPONENT_CATEGORIES as C };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/chunks/index-tags-B-JBecYg.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.4.0/dist/chunks/index-tags-B-JBecYg.js.map
