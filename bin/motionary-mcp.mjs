@@ -64,7 +64,7 @@ export function findComponent(m, tag) {
 export function searchComponents(m, query, limit = 10) {
   indexModules(m);
   // 13.7: exact-tag priority, exact keyword / tag-segment boosts, typo-tolerant matching, stable tie-break (mcp-tools-2.mjs) — same result shape
-  return rankComponents(m, query).slice(0, limit).map((x) => ({ ...brief(x.c), score: x.s }));
+  return rankComponents(m, String(query).replace(/\bmo-/g, 'usa-')).slice(0, limit).map((x) => ({ ...brief(x.c), score: x.s }));
 }
 
 const FRAMEWORKS = ['html', 'esm', 'react', 'vue', 'svelte', 'solid', 'angular'];
