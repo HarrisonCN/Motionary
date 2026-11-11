@@ -2,7 +2,7 @@
 // Every entry is recorded in CHANGELOG.md with old → new and the measured size. Tests that assert "no existing budget
 // was raised" compare against these instead of the historical limit; anything not listed must still not be raised.
 export const RAISED_BUDGETS: Record<string, number> = {
-  "import 'motionary/components/widgets'": 172 * 1024, // 17.4: six new controls, measured 168.05 KB
+  "import 'motionary/components/widgets'": 172 * 1024, // 17.4: six new controls, measured 168.09 KB
 
   "import 'motionary/components/lite'": 80896, // 17.3: 70.00 → 79.00 kB gzip, measured 70.29 kB
 };

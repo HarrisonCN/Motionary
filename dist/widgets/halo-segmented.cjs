@@ -2,7 +2,7 @@
 
 var base = require('../chunks/base-DzZEJhQB.cjs');
 var moName = require('../chunks/mo-name-DR9ysd5S.cjs');
-var luminous = require('../chunks/luminous-19fVDRAm.cjs');
+var luminous = require('../chunks/luminous-B_-9G2GO.cjs');
 
 var css = ":is(mo-halo-segmented,usa-halo-segmented){max-width:100%;width:var(--mo-segment-width,320px)}.usa-hs-track{position:relative;display:flex;padding:4px;border-radius:20px;min-height:54px}.usa-hs-track>button{z-index:1;flex:1;min-width:0;padding:10px 5px;border:0;border-radius:16px;background:transparent;color:inherit;cursor:pointer;overflow:hidden;text-overflow:ellipsis;font-size:14px}.usa-hs-pill{position:absolute;box-sizing:border-box;top:4px;bottom:4px;border-radius:16px;border-bottom:2px solid var(--lu-accent);transition:inset-inline-start .65s cubic-bezier(.22,1.2,.3,1),width .35s}.usa-hs-track>button[aria-checked=false]{opacity:.6}";
 

@@ -2,7 +2,7 @@
 
 var base = require('../chunks/base-DzZEJhQB.cjs');
 var moName = require('../chunks/mo-name-DR9ysd5S.cjs');
-var luminous = require('../chunks/luminous-19fVDRAm.cjs');
+var luminous = require('../chunks/luminous-B_-9G2GO.cjs');
 
 function defineParticleIcon(tag = 'usa-particle-icon') {
     const ctor = base.defineElement(tag, Base => {

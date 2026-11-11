@@ -1,4 +1,6 @@
-import { e as animateWithMotion } from './base-SPDwWyB1.js';
+'use strict';
+
+var base = require('./base-DzZEJhQB.cjs');
 
 const NS = 'http://www.w3.org/2000/svg';
 const flights = /*#__PURE__*/ new WeakMap();
@@ -52,7 +54,7 @@ function morphGlyph(svg, name, animate, owner) {
         c.style.transform = end;
         if (!animate || owner.reduced)
             return;
-        const a = animateWithMotion(c, [
+        const a = base.animateWithMotion(c, [
             { transform: old[i] === 'none' ? end : old[i], opacity: 1 },
             { transform: `translate(${32 + Math.cos(i * 2.4) * (16 + i % 15)}px, ${32 + Math.sin(i * 2.4) * (16 + i % 15)}px)`, opacity: .3, offset: .4 },
             { transform: end, opacity: 1 },
@@ -67,7 +69,10 @@ function luminousTheme(el) {
     el.dataset.luTheme = el.str('theme') === 'light' ? 'light' : 'dark';
 }
 
-var shared = ".usa-luminous{--lu-accent:var(--mo-luminous-accent,#a6a0ff);--lu-bg:#111216;--lu-fg:#f5f4ff;--lu-edge:#ffffff20;--lu-inset:#0009;--lu-glass:linear-gradient(145deg,#ffffff2b,#ffffff06);display:inline-block;color:var(--lu-fg);font:inherit;color-scheme:dark}.usa-luminous[data-lu-theme=light]{--lu-accent:var(--mo-luminous-accent,#eeae45);--lu-bg:#e8e6e2;--lu-fg:#292b31;--lu-edge:#ffffffb8;--lu-inset:#6664;--lu-glass:linear-gradient(145deg,#fffffff0,#ffffff40);color-scheme:light}.usa-luminous button,.usa-luminous input{font:inherit}.usa-lu-surface{box-sizing:border-box;border:1px solid var(--lu-edge);background:var(--lu-bg);box-shadow:inset 0 3px 8px var(--lu-inset),0 2px 6px #0002;color:inherit}.usa-lu-glass{border:1px solid var(--lu-edge);background:var(--lu-glass);box-shadow:inset 0 1px 1px #fff5,0 6px 12px #0005,0 0 18px color-mix(in srgb,var(--lu-accent) 35%,transparent)}.usa-luminous button:focus-visible,.usa-luminous input:focus-visible{outline:3px solid var(--lu-accent);outline-offset:5px}.usa-luminous button:disabled,.usa-luminous input:disabled{cursor:not-allowed;opacity:.45}.usa-lu-glyph{display:block;width:100%;height:100%;overflow:visible;fill:currentColor;pointer-events:none}.usa-luminous[data-lu-reduced] *{transition:none!important;animation:none!important}:root:is([data-usa-sensitivity=minimal],[data-usa-sensitivity=static]) .usa-luminous *{transition:none!important;animation:none!important}:root[data-usa-sensitivity=gentle] .usa-ls-thumb:after{transition:none}@media(prefers-reduced-motion:reduce){.usa-luminous *{transition:none!important;animation:none!important}}@media(forced-colors:active){.usa-luminous{--lu-fg:ButtonText;--lu-bg:Canvas;--lu-accent:Highlight;--lu-edge:ButtonText}.usa-lu-glass,.usa-lu-surface{border:1px solid ButtonText;box-shadow:none}.usa-lu-glyph{fill:ButtonText}}";
+var shared = ".usa-luminous{--lu-accent:var(--mo-luminous-accent,#a6a0ff);--lu-bg:#111216;--lu-fg:#f5f4ff;--lu-edge:#ffffff20;--lu-inset:#0009;--lu-glass:linear-gradient(145deg,#ffffff2b,#ffffff06);display:inline-block;color:var(--lu-fg);font:inherit;color-scheme:dark}.usa-luminous[data-lu-theme=light]{--lu-accent:var(--mo-luminous-accent,#eeae45);--lu-bg:#e8e6e2;--lu-fg:#292b31;--lu-edge:#ffffffb8;--lu-inset:#6664;--lu-glass:linear-gradient(145deg,#fffffff0,#ffffff40);color-scheme:light}.usa-luminous button,.usa-luminous input{font:inherit}.usa-lu-surface{box-sizing:border-box;border:1px solid var(--lu-edge);background:var(--lu-bg);box-shadow:inset 0 3px 8px var(--lu-inset),0 2px 6px #0002;color:inherit}.usa-lu-glass{border:1px solid var(--lu-edge);background:var(--lu-glass);box-shadow:inset 0 1px 1px #fff5,0 6px 12px #0005,0 0 18px color-mix(in srgb,var(--lu-accent) 35%,transparent)}.usa-luminous button:focus-visible,.usa-luminous input:focus-visible{outline:3px solid var(--lu-accent);outline-offset:5px}.usa-luminous button:disabled,.usa-luminous input:disabled{cursor:not-allowed;opacity:.45}.usa-lu-glyph{display:block;width:100%;height:100%;overflow:visible;fill:currentColor;pointer-events:none}.usa-luminous[data-lu-reduced] *,.usa-luminous[data-lu-reduced] *:before,.usa-luminous[data-lu-reduced] *:after{transition:none!important;animation:none!important}:root:is([data-usa-sensitivity=minimal],[data-usa-sensitivity=static]) .usa-luminous *,:root:is([data-usa-sensitivity=minimal],[data-usa-sensitivity=static]) .usa-luminous *:before,:root:is([data-usa-sensitivity=minimal],[data-usa-sensitivity=static]) .usa-luminous *:after{transition:none!important;animation:none!important}:root[data-usa-sensitivity=gentle] .usa-ls-thumb:after{transition:none}@media(prefers-reduced-motion:reduce){.usa-luminous *,.usa-luminous *:before,.usa-luminous *:after{transition:none!important;animation:none!important}}@media(forced-colors:active){.usa-luminous{--lu-fg:ButtonText;--lu-bg:Canvas;--lu-accent:Highlight;--lu-edge:ButtonText}.usa-lu-glass,.usa-lu-surface{border:1px solid ButtonText;box-shadow:none}.usa-lu-glyph{fill:ButtonText}}";
 
-export { glyph as g, luminousTheme as l, morphGlyph as m, shared as s };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.4.0/dist/chunks/luminous-Djzw-mhn.js.map
+exports.glyph = glyph;
+exports.luminousTheme = luminousTheme;
+exports.morphGlyph = morphGlyph;
+exports.shared = shared;
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.4.0/dist/chunks/luminous-B_-9G2GO.cjs.map

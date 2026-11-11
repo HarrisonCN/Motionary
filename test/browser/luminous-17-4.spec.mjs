@@ -30,6 +30,7 @@ test('luminous controls work with keyboard, rapid reversal, forms and RTL', asyn
 });
 test('reduced motion has no particle flights and disconnect cancels flights', async ({ page }) => {
   await mount(page, 'reduce'); await page.getByRole('switch').click();
+  expect(await page.locator('.usa-ls-thumb').evaluate(el => getComputedStyle(el, '::after').transitionDuration)).toBe('0s');
   expect(await page.locator('#stage').evaluate(el => el.getAnimations({ subtree: true }).length)).toBe(0);
   await page.emulateMedia({ reducedMotion: 'no-preference' }); await page.getByRole('switch').click();
   expect(await page.locator('mo-luminous-switch').evaluate(el => el.getAnimations({ subtree: true }).length)).toBeGreaterThan(0);

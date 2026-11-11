@@ -6,8 +6,8 @@
 .usa-luminous button:focus-visible,.usa-luminous input:focus-visible{outline:3px solid var(--lu-accent);outline-offset:5px}
 .usa-luminous button:disabled,.usa-luminous input:disabled{cursor:not-allowed;opacity:.45}
 .usa-lu-glyph{display:block;width:100%;height:100%;overflow:visible;fill:currentColor;pointer-events:none}
-.usa-luminous[data-lu-reduced] *{transition:none!important;animation:none!important}
-:root:is([data-usa-sensitivity=minimal],[data-usa-sensitivity=static]) .usa-luminous *{transition:none!important;animation:none!important}
+.usa-luminous[data-lu-reduced] *,.usa-luminous[data-lu-reduced] *:before,.usa-luminous[data-lu-reduced] *:after{transition:none!important;animation:none!important}
+:root:is([data-usa-sensitivity=minimal],[data-usa-sensitivity=static]) .usa-luminous *,:root:is([data-usa-sensitivity=minimal],[data-usa-sensitivity=static]) .usa-luminous *:before,:root:is([data-usa-sensitivity=minimal],[data-usa-sensitivity=static]) .usa-luminous *:after{transition:none!important;animation:none!important}
 :root[data-usa-sensitivity=gentle] .usa-ls-thumb:after{transition:none}
-@media(prefers-reduced-motion:reduce){.usa-luminous *{transition:none!important;animation:none!important}}
+@media(prefers-reduced-motion:reduce){.usa-luminous *,.usa-luminous *:before,.usa-luminous *:after{transition:none!important;animation:none!important}}
 @media(forced-colors:active){.usa-luminous{--lu-fg:ButtonText;--lu-bg:Canvas;--lu-accent:Highlight;--lu-edge:ButtonText}.usa-lu-glass,.usa-lu-surface{border:1px solid ButtonText;box-shadow:none}.usa-lu-glyph{fill:ButtonText}}

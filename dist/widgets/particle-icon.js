@@ -1,6 +1,6 @@
 import { f as defineElement } from '../chunks/base-SPDwWyB1.js';
 import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
-import { s as shared, l as luminousTheme, g as glyph, m as morphGlyph } from '../chunks/luminous-Djzw-mhn.js';
+import { s as shared, l as luminousTheme, g as glyph, m as morphGlyph } from '../chunks/luminous-iQ0lxR6o.js';
 
 function defineParticleIcon(tag = 'usa-particle-icon') {
     const ctor = defineElement(tag, Base => {
