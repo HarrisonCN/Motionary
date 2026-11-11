@@ -7,6 +7,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [17.3.1] - 2026-11-10 — gallery components, complete `mo-*` lookup (integrates #180)
+
+### Added
+- **`<mo-file-tree>`** (`motionary/widgets/file-tree`): a nested file index on native `<details>` / `<summary>` and links;
+  ← / → collapse, expand and move between folders.
+- **`<mo-download-menu>`** (`motionary/widgets/download-menu`): a multi-format download picker on a native disclosure;
+  download links keep their browser behaviour, Esc closes the picker and returns focus.
+- **`<mo-title-sequence>`** (`motionary/widgets/title-sequence`): cinematic title cards; opening one card closes the
+  previous one, with a reveal that is skipped under reduced motion.
+  Like the other 17.3 widgets they register their `mo-*` name themselves (`<usa-*>` stays as the legacy alias).
+  `defineWidgets('17.3')` registers them with the Navigation I widgets. See docs/gallery-components.md.
+
+### Changed
+- **`defineMoAliases()` covers every public tag.** It now reads the full manifest tag list (core and widgets) instead
+  of the core categories, so widgets defined before the call get their `mo-*` name too.
+- The standalone CSS files (`components.css` and the category stylesheets) match both spellings
+  (`:is(usa-x,mo-x)`), so `<mo-*>` elements are styled on pages that link the CSS without a script.
+  The selector tokenizer behind `aliasCss()` moved to one shared module used by the runtime and the build.
+- Framework types: `UsaElementAttributeMap` / `UsaElementEventMap` (and so JSX, Vue, Svelte and Angular typings) are
+  keyed by both `usa-*` and `mo-*` names; they stay interfaces, so module augmentation keeps working.
+  `document.querySelector('mo-…')` gets the same element type as its `usa-*` name.
+- `stackToast()` finds a `<mo-toast-stack>`, the motion-control check finds `<mo-motion-switch>`, the Vue / Angular
+  `isUsaElement` predicates accept `mo-*`, and `motionary-mcp` browser checks see `<mo-*>` tags in snippets.
+- Showcase: gallery search matches `mo-*` names; the component count comes from the generated facts.
+- `publish.yml` (manual, provenance): authenticates with the `npm` environment's `NPM` secret.
+
+### Size
+- New budget lines, one per new entry: `motionary/widgets/file-tree`, `…/download-menu`, `…/title-sequence` (3.50 kB each).
+
+### Size budget
+- `motionary/components/mo` entry limit raised 2.00 → 2.50 kB gzip (measured 2.19 kB) because the alias list now covers every public tag (approved 2026-11-10).
+- This is the release the maintainer called 17.3.0.1 (semver has no four-part version).
+
 ## [17.3.0] - 2026-11-10 — Navigation I, `mo-*` by default
 
 ### Added

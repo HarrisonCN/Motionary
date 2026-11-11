@@ -1642,7 +1642,7 @@ declare global {
 }
 
 /** Documented attributes of every shipped `<usa-*>` element, keyed by tag (attribute values are strings / flags). */
-interface UsaElementAttributeMap {
+interface LegacyAttributes {
     /** `<usa-accordion>` — Accordion (motionary/components/transitions). */
     'usa-accordion': {
         duration?: string | boolean | number;
@@ -1971,6 +1971,8 @@ interface UsaElementAttributeMap {
         disabled?: string | boolean | number;
         icon?: string | boolean | number;
     };
+    /** `<usa-download-menu>` — Download menu (motionary/components/widgets). */
+    'usa-download-menu': {};
     /** `<usa-draggable>` — Draggable (motionary/components/physics). */
     'usa-draggable': {
         axis?: string | boolean | number;
@@ -2022,6 +2024,8 @@ interface UsaElementAttributeMap {
         multiple?: string | boolean | number;
         simulate?: string | boolean | number;
     };
+    /** `<usa-file-tree>` — File tree (motionary/components/widgets). */
+    'usa-file-tree': {};
     /** `<usa-fullpage>` — Full-page sections (motionary/components/page). */
     'usa-fullpage': {
         axis?: string | boolean | number;
@@ -3008,6 +3012,8 @@ interface UsaElementAttributeMap {
         text?: string | boolean | number;
         trigger?: string | boolean | number;
     };
+    /** `<usa-title-sequence>` — Title sequence (motionary/components/widgets). */
+    'usa-title-sequence': {};
     /** `<usa-toast-stack>` — Toast stack (motionary/components/widgets). */
     'usa-toast-stack': {
         duration?: string | boolean | number;
@@ -3103,7 +3109,7 @@ interface UsaElementAttributeMap {
     };
 }
 /** The `usa:*` events each element dispatches, keyed by tag (`detail` shape: see the element's docs). */
-interface UsaElementEventMap {
+interface LegacyEvents {
     'usa-accordion': {
         'usa:toggle': CustomEvent<any>;
     };
@@ -3231,6 +3237,7 @@ interface UsaElementEventMap {
     'usa-double-tap': {
         'usa:double-tap': CustomEvent<any>;
     };
+    'usa-download-menu': {};
     'usa-draggable': {
         'usa:drag': CustomEvent<any>;
         'usa:drag-end': CustomEvent<any>;
@@ -3257,6 +3264,7 @@ interface UsaElementEventMap {
     'usa-file-drop': {
         'usa:files': CustomEvent<any>;
     };
+    'usa-file-tree': {};
     'usa-fullpage': {
         'usa:section': CustomEvent<any>;
     };
@@ -3664,6 +3672,7 @@ interface UsaElementEventMap {
         'usa:close': CustomEvent<any>;
         'usa:open': CustomEvent<any>;
     };
+    'usa-title-sequence': {};
     'usa-toast-stack': {
         'usa:dismiss': CustomEvent<any>;
         'usa:show': CustomEvent<any>;
@@ -3707,6 +3716,15 @@ interface UsaElementEventMap {
     };
 }
 /** Every shipped `<usa-*>` tag. */
+type WithMoNames<T> = T & {
+    [K in keyof T as K extends `usa-${infer Name}` ? `mo-${Name}` : never]: T[K];
+};
+/** 17.3.1: the attribute map keyed by both spellings — each `<usa-*>` tag and its `<mo-*>` name (still an interface, so it can be augmented). */
+interface UsaElementAttributeMap extends WithMoNames<LegacyAttributes> {
+}
+/** 17.3.1: the event map keyed by both spellings (`<usa-*>` and `<mo-*>`). */
+interface UsaElementEventMap extends WithMoNames<LegacyEvents> {
+}
 type UsaElementTag = keyof UsaElementAttributeMap;
 
 /**

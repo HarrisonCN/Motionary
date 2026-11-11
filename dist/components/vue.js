@@ -24,7 +24,7 @@ import { defineComponents } from '../components.js';
  * ```
  */
 /** `compilerOptions.isCustomElement` predicate for every `<usa-*>` tag. */
-const isUsaElement = (tag) => tag.startsWith('usa-');
+const isUsaElement = (tag) => tag.startsWith('mo-') || tag.startsWith('usa-');
 /** Vue plugin: registers the `<usa-*>` elements (client only) and sets `isCustomElement` at runtime. */
 const UsaPlugin = {
     install(app, options = {}) {
@@ -37,4 +37,4 @@ const UsaPlugin = {
 };
 
 export { UsaPlugin, isUsaElement };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/components/vue.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/components/vue.js.map

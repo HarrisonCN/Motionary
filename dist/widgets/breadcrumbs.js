@@ -1,4 +1,4 @@
-import { f as defineElement } from '../chunks/base-DRZOlKiI.js';
+import { f as defineElement } from '../chunks/base-SPDwWyB1.js';
 import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
 
 var css = ":is(usa-breadcrumbs,mo-breadcrumbs){display:block;--usa-bc-sep:\"/\";--usa-bc-accent:#7c5cff;font-size:.95em}.usa-bc-list{display:flex;flex-wrap:wrap;align-items:center;gap:.35em;list-style:none;margin:0;padding:0}.usa-bc-list>li{display:inline-flex;align-items:center;gap:.35em}.usa-bc-list>li[hidden]{display:none}.usa-bc-list>li+li::before{content:var(--usa-bc-sep);content:var(--usa-bc-sep) / \"\";opacity:.45}.usa-bc-list a{color:inherit;text-decoration:none;opacity:.75;border-radius:4px}.usa-bc-list a:hover{opacity:1;text-decoration:underline;text-underline-offset:.2em}.usa-bc-list [aria-current=\"page\"]{opacity:1;font-weight:600}.usa-bc-list :focus-visible{outline:2px solid var(--usa-bc-accent);outline-offset:2px}.usa-bc-more>button{font:inherit;color:inherit;border:0;background:rgba(127,127,127,.14);border-radius:6px;padding:0 .45em;cursor:pointer;line-height:1.4}.usa-bc-out{pointer-events:none}";
@@ -140,4 +140,4 @@ function defineBreadcrumbs(tag = 'usa-breadcrumbs') {
 }
 
 export { defineBreadcrumbs };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/widgets/breadcrumbs.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/widgets/breadcrumbs.js.map

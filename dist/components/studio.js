@@ -1,10 +1,10 @@
 import { createStudioCanvas } from './studio-canvas.js';
-import { h as historyKeyAction, e as setKeyframeEasing, s as setKeyframeProps, r as removeKeyframes, a as addKeyframe, u as updateLayers, f as addLayer, g as copyKeyframes, i as shiftKeyframes, j as editableKeyframes, p as pasteKeyframes } from '../chunks/history-CTLhjhlC.js';
-import { c as createTimelinePreview, s as sampleTimelineDoc } from '../chunks/preview-C0sWbNsF.js';
-import { t as timelineDocToScene } from '../chunks/scene-DWRlvQ00.js';
-import { f as isLayerLocked, a as timelineDocDuration } from '../chunks/format-CqOIfdW_.js';
-import { p as parseBezier, C as CURVE_PRESETS, a as parseStudioProject, s as serializeStudioProject, b as sampleFrames, c as springParams, d as springBezier, e as bezierEasing, f as frameTime } from '../chunks/project-Sa13fIXw.js';
-export { S as STUDIO_PROJECT_FORMAT, g as STUDIO_PROJECT_VERSION, h as cleanUiState } from '../chunks/project-Sa13fIXw.js';
+import { h as historyKeyAction, e as setKeyframeEasing, s as setKeyframeProps, r as removeKeyframes, a as addKeyframe, u as updateLayers, f as addLayer, g as copyKeyframes, i as shiftKeyframes, j as editableKeyframes, p as pasteKeyframes } from '../chunks/history-C-nky56A.js';
+import { c as createTimelinePreview, s as sampleTimelineDoc } from '../chunks/preview-BNOUoHr9.js';
+import { t as timelineDocToScene } from '../chunks/scene-COP9gX_F.js';
+import { f as isLayerLocked, a as timelineDocDuration } from '../chunks/format-C6AKrjTW.js';
+import { p as parseBezier, C as CURVE_PRESETS, a as parseStudioProject, s as serializeStudioProject, b as sampleFrames, c as springParams, d as springBezier, e as bezierEasing, f as frameTime } from '../chunks/project-D8KHFDHI.js';
+export { S as STUDIO_PROJECT_FORMAT, g as STUDIO_PROJECT_VERSION, h as cleanUiState } from '../chunks/project-D8KHFDHI.js';
 import { s as sceneV2ToFlatV3 } from '../chunks/v3-read-BqgIjLQP.js';
 
 /**
@@ -812,4 +812,4 @@ function createStudio(root, o) {
 }
 
 export { CURVE_PRESETS, STUDIO_VERSION, bezierEasing, createStudio, frameTime, parseBezier, parseStudioProject, sampleFrames, serializeStudioProject, springBezier, springParams };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/components/studio.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/components/studio.js.map

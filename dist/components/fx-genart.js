@@ -1,4 +1,4 @@
-import { registerEffects } from '../chunks/registry-Di_8M2Md.js';
+import { registerEffects } from '../chunks/registry-DmYdTtl4.js';
 
 const PALETTES = {
     sunset: ['#ff6b6b', '#feca57', '#ff9ff3', '#5f27cd', '#1dd1a1'],
@@ -127,4 +127,4 @@ function registerGenArtPack() {
 }
 
 export { GENART_FX, PALETTES, meshGradient, registerGenArtPack, seededRandom };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/components/fx-genart.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/components/fx-genart.js.map

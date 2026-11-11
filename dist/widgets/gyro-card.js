@@ -1,4 +1,4 @@
-import { f as defineElement } from '../chunks/base-DRZOlKiI.js';
+import { f as defineElement } from '../chunks/base-SPDwWyB1.js';
 import { k as keyClick } from '../chunks/key-click-BLm3BI8_.js';
 import { orientationToTilt } from '../components/fx-gesture.js';
 
@@ -88,4 +88,4 @@ function defineGyroCard(tag = 'usa-gyro-card') {
 }
 
 export { defineGyroCard };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/widgets/gyro-card.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/widgets/gyro-card.js.map

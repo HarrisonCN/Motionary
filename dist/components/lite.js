@@ -10451,6 +10451,34 @@ function defineFxComponents() {
     defineFx();
 }
 
+// Keep strings, comments, attribute selectors and escaped identifiers opaque. Braces / semicolons inside them
+// are content, not rule boundaries (and an attribute value that happens to name a component must stay unchanged).
+const CSS_TOKENS = /\/\*[\s\S]*?\*\/|"(?:\\[\s\S]|[^"\\])*"|'(?:\\[\s\S]|[^'\\])*'|\[(?:\\[\s\S]|"(?:\\[\s\S]|[^"\\])*"|'(?:\\[\s\S]|[^'\\])*'|[^\]\\])*\]|(?:\\[\s\S]|[\w-]|[^\x00-\x7f])+|[^\w]/g;
+/**
+ * Rewrite component tag names in selectors only (the text in front of each `{` that is not an at-rule); declarations, at-rule
+ * preludes such as `@keyframes usa-spin`, classes, attributes and custom properties are untouched.
+ */
+const rewriteTagSelectors = (text, replaceTag) => {
+  let out = '', raw = '', renamed = '', first = '', previous = '';
+  for (const [token] of text.matchAll(CSS_TOKENS)) {
+    if (token === '{' || token === '}' || token === ';') {
+      out += (token === '{' && first !== '@' ? renamed : raw) + token;
+      raw = renamed = first = previous = '';
+    } else {
+      raw += token;
+      const comment = token.startsWith('/*');
+      if (!first && !comment && token.trim()) first = token;
+      renamed += /^usa-[a-z]/.test(token) && previous !== '.' && previous !== '#' && previous !== ':'
+        ? replaceTag(token) : token;
+      if (!comment) previous = token;
+    }
+  }
+  return out + raw;
+};
+
+// Generated from the component manifest.
+const publicTagNames = 'accordion acrylic add-to-cart ambient anim-icon audio aurora auto-animate auto-skeleton avatar-stack back-to-top badge badge-wall bar-chart bg-generator blobs bottom-sheet breadcrumbs button card card-stack carousel carousel-3d cart-drawer chapter-nav chat-composer check checkbox click clock-control code-export color-picker command-palette compare countdown counter cube cube-gallery cursor date-picker depth dialog disclosure distort dock dot-network dotlottie double-tap download-menu draggable draw drawer equalizer fab festival-banner field file-drop file-tree fullpage fullscreen-menu fx gauge gen-art gesture-fx gesture-sticker gl-model gl-scene glitch globe gpu-particles gradient-text grain grid-glow gyro-card handwriting hero-video hold hud-panel hydrate icon-morph install-button kanban keyframe-editor kpi leaderboard like liquid liquid-nav loading-bar location-card lottie lottie-icon lottie-player lyrics magnetic marquee mask-reveal masonry masonry-flow mega-menu menu menu-toggle message-list milestones modal morph motion motion-inspector motion-prefs motion-prompt motion-spec motion-switch motion-theme music-player native-preview nav-flyout nav-morph navbar notification-bell odometer organic-card otp overscroll pack pagination panorama parallax-layers particles pause-all perf-monitor physics-playground pinch-zoom player plugin-card plugin-store popover post-fx presence press prize-wheel product-gallery progress progress-ring prop-panel pull-cord pull-refresh radar reactions red-envelope retro-button reveal ripple rive route-transition scene scramble scroll-highlight scroll-progress scroll-ring scroll-scene scrolly segmented shader shader-backdrop sheet shimmer-text shortcut skeleton skeleton-reveal sketch-chart slider smooth-scroll snap-carousel sparkline spatial-card spinner splash split-text spotlight spring stagger star-rating stepper sticky-stack sticky-wall stories story suggestion-chips swipe-deck swipeable switch tab-bar tabs terminal text-rotate text-splitter theme-surface theme-switcher tilt timeline tip title-sequence toast-stack toaster token-editor typewriter upload-progress video-card view-switch voice-button volume-knob water-ripple wave-text weather-card worker-canvas xp-bar';
+
 /**
  * motionary/components/mo — the 17.0 `<mo-*>` names.
  *
@@ -10471,33 +10499,12 @@ function defineFxComponents() {
  */
 /** The `mo-*` alias of a default `usa-*` tag (`usa-switch` → `mo-switch`), or `null` for any other tag. */
 const aliasTag = (tag) => (/^usa-[a-z]/.test(tag) ? 'mo-' + tag.slice(4) : null);
-// Keep strings, comments, attribute selectors and escaped identifiers opaque. Braces / semicolons inside them
-// are content, not rule boundaries (and an attribute value that happens to name a component must stay unchanged).
-const CSS_TOKENS = /\/\*[\s\S]*?\*\/|"(?:\\[\s\S]|[^"\\])*"|'(?:\\[\s\S]|[^'\\])*'|\[(?:\\[\s\S]|"(?:\\[\s\S]|[^"\\])*"|'(?:\\[\s\S]|[^'\\])*'|[^\]\\])*\]|(?:\\[\s\S]|[\w-]|[^\x00-\x7f])+|[^\w]/g;
 /**
  * `usa-…` → `mo-…` in selectors only (the text in front of each `{` that is not an at-rule); declarations, at-rule
- * preludes such as `@keyframes usa-spin`, classes, attributes and custom properties are untouched.
+ * preludes such as `@keyframes usa-spin`, classes, attributes and custom properties are untouched. 17.3.1: the tokenizer
+ * lives in `alias-css.mjs`, shared with the build, which writes `:is(usa-x,mo-x)` into the standalone CSS files.
  */
-const aliasCss = (text) => {
-    let out = '', raw = '', renamed = '', first = '', previous = '';
-    for (const [token] of text.matchAll(CSS_TOKENS)) {
-        if (token === '{' || token === '}' || token === ';') {
-            out += (token === '{' && first !== '@' ? renamed : raw) + token;
-            raw = renamed = first = previous = '';
-        }
-        else {
-            raw += token;
-            const comment = token.startsWith('/*');
-            if (!first && !comment && token.trim())
-                first = token;
-            renamed += /^usa-[a-z]/.test(token) && previous !== '.' && previous !== '#' && previous !== ':'
-                ? 'mo-' + token.slice(4) : token;
-            if (!comment)
-                previous = token;
-        }
-    }
-    return out + raw;
-};
+const aliasCss = (text) => rewriteTagSelectors(text, (tag) => 'mo-' + tag.slice(4));
 let started = false;
 let active = false;
 let n = 0;
@@ -10566,7 +10573,8 @@ function defineMoAliases() {
         define.call(this, name, ctor, options);
         alias(name, ctor);
     };
-    const tags = Object.values(COMPONENT_CATEGORIES).flat();
+    // 17.3.1: every public tag from the manifest (core and widgets), so widgets defined before this call get their mo-* name too.
+    const tags = publicTagNames.split(' ').map((name) => 'usa-' + name);
     if (typeof document !== 'undefined')
         document.querySelectorAll('*').forEach((e) => e.localName.startsWith('mo-') && tags.push('usa-' + e.localName.slice(3)));
     for (const t of tags) {
@@ -10811,7 +10819,7 @@ function auditMotionA11y(root) {
     });
     const doc = root.ownerDocument || root;
     const anims = typeof root.getAnimations === 'function' ? root.getAnimations({ subtree: true }) : [];
-    const control = doc && (doc.querySelector('usa-motion-switch, [data-usa-pause]') || doc.documentElement.hasAttribute('data-usa-sensitivity'));
+    const control = doc && (doc.querySelector('mo-motion-switch, usa-motion-switch, [data-usa-pause]') || doc.documentElement.hasAttribute('data-usa-sensitivity'));
     if (!control)
         anims.forEach((a) => {
             try {
@@ -11061,4 +11069,4 @@ const STYLE_BASE = new URL('../', import.meta.url).href;
 onDemandStyles(STYLE_BASE);
 
 export { ALL_TAGS, AMBIENT_EFFECTS, ANIM_ICONS, BRIDGE_PROTOCOL_VERSION, BUILTIN_EFFECTS, BUTTON_DEFORMS, CARD_EFFECTS, CLICK_EFFECTS, COMPONENT_CATEGORIES, CURSOR_MODES, EFFECT_KINDS, EFFECT_TRIGGERS, GL_FALLBACKS, JOINING_SCRIPT, LIVE_REGION_IDS, MASK_SHAPES, MORPH_ICONS, MOTION_SCALE, MOTION_SENSITIVITY, MOTION_SENSITIVITY_LEVELS, MOTION_TOKENS, PACKS, PACK_PRIMITIVES, PAGE_EFFECTS, PARTICLE_PRESETS, POST_EFFECTS, REVEAL_EFFECTS, SENSITIVITY_CSS, SHADERS, SPINNER_VARIANTS, SPRING_EFFECTS, SPRING_PRESETS, STATIC_ALTERNATIVES, STYLE_BASE, TIMELINE_PRESETS, VARIANTS, activeAnimations, adaptKeyframes, adoptVariants, animateWithMotion, animationBudget, announce, applyMotionTokens, applyNativeSettings, applyPack, auditMotionA11y, autoAnimate, autoDegrade, baselineReport, bindEffect, categoryForTag as categoryOf, configureComponents, connectNativeShell, countUp, createSpring, defineAccordion, defineAcrylic, defineAmbient, defineAnimIcon, defineAurora, defineAutoAnimate, defineAutoSkeleton, defineAvatarStack, defineBackToTop, defineBackgroundComponents, defineBadge, defineBlobs, defineBottomSheet, defineButton, defineCard, defineCardComponents, defineCardStack, defineCarousel3d, defineCheck, defineCheckbox, defineClick, defineClickComponents, defineComponents, defineCounter, defineCube, defineCursor, defineDepth, defineDepthComponents, defineDialog, defineDistort, defineDotNetwork, defineDoubleTap, defineDraggable, defineDraw, defineDrawer, defineFab, defineFeedbackComponents, defineFullpage, defineFx, defineFxComponents, defineGestureComponents, defineGlitch, defineGradientText, defineGrain, defineGridGlow, defineHandwriting, defineHold, defineIconMorph, defineInteractionComponents, defineLayoutComponents, defineLike, defineLiquid, defineLoadingBar, defineMagnetic, defineMarquee, defineMaskReveal, defineMasonry, defineMorph, defineMotionSwitch, defineNavbar, defineOverscroll, definePack, definePacksComponents, definePageComponents, defineParticles, definePhysicsComponents, definePinchZoom, definePopover, definePostFx, definePress, defineProgress, definePullRefresh, defineReveal, defineRevealComponents, defineRipple, defineScramble, defineScrollHighlight, defineScrollProgress, defineScrolly, defineShader, defineShimmerText, defineSkeleton, defineSlider, defineSpinner, defineSplash, defineSplitText, defineSpotlight, defineSpring, defineStagger, defineStickyStack, defineSvgComponents, defineSwipeable, defineTabs, defineTextComponents, defineTextRotate, defineTilt, defineTimeline, defineTimelineComponents, defineToaster, defineTransitionComponents, defineTypewriter, defineUiComponents, defineViewSwitch, defineWaterRipple, defineWaveText, defineWebglComponents, detectNativeHost, deviceTilt, drawLines, easeOutExpo, enableMpaTransitions, exportDesignTokens, flip, flipFrames, fluentPreset, flyToCart, fragmentSource, gesture, getEffect, getMotionIntensity, getMotionLevel, getMotionSensitivity, getMotionTokens, glFallbackCss, glGovernor, glQuad, graphemes, haptic, hasEffect, importDesignTokens, importMotionTokens, interpolatePath, isTrustedMessage, linearEasing, listEffects, liveRegion, loadCategoryStyles, loadedStyles, loadingBar, masonryLayout, mergeMotionTokens, morphPath, morphTo, motionAllowed, motionScale, motionToken, motionTokensToCss, motionTokensToJSON, motionTokensToVars, motionVar, onDemandStyles, onFrame, orientationToTilt, pageTransition, parseDuration, parseEasing, parseNativeSettings, pathsCompatible, pinchScale, playEffect, postFxShader, postToNative, prefersReducedMotion, projectInertia, readScrollProgress, registerBuiltinEffects, registerEffect, registerEffects, requestOrientationPermission, resolveDurationToken, resolveEasingToken, resolvePosition, resolveSpring, resolveTokenAliases, restoreMotionIntensity, restoreMotionSensitivity, revealKeyframes, rubberBand, schedulerStats, scrambleFrame, scrollToTarget, setAnimationBudget, setFrameBudget, setMotionIntensity, setMotionLevel, setMotionSensitivity, setVariant, sharedTransition, smoothScroll, snapTo, splitOrder, splitText, splitTimeline, words as splitWords, spring, springEasing, springEffectKeyframes, springSamples, staticAlternative, stepSpring, supportsLinearEasing, supportsNativeScrub, supportsOrientation, supportsViewTransitions, supportsWebGL, swipeDirection, themeTransition, timeline, toast, validateDesignTokens, viewTransition, warnBaseline, watchPowerSaver, withoutDeprecations };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/components/lite.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/components/lite.js.map

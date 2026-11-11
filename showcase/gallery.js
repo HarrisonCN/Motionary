@@ -3,14 +3,14 @@
  * No build step: imports the component bundle from ../dist/ (dogfooding the
  * ESM build), falling back to the CDN. Every preview is a real element.
  */
-import { COMPONENT_CATEGORIES, COMPONENTS, GALLERY, CODE_TABS, componentSnippets, matchesComponent, findComponent } from './components-catalog.js';
+import { COMPONENT_CATEGORIES, GALLERY, CODE_TABS, componentSnippets, matchesComponent, findComponent } from './components-catalog.js';
 import { PREREQS, prereqFor, tierFor } from './catalog/prereqs.js';
 import { highlight } from './codegen.js';
 import { GSTRINGS } from './gallery-i18n.js';
 import { WIRES } from './catalog/index.js';
 import { moName, encodeSelection, decodeSelection, selectionPrompt } from './select-tray.js';
 
-const COMPONENTS_COUNT = COMPONENTS.length;
+const COMPONENTS_COUNT = document.getElementById('component-count').textContent.trim();
 const LOCAL = new URL('../dist/', import.meta.url).href;
 const CDN = 'https://unpkg.com/motionary@17/dist/';
 const KEY = 'usa-showcase:';
@@ -347,7 +347,7 @@ function applyFilter() {
 
 function applyLang() {
   document.documentElement.lang = ui.lang === 'zh' ? 'zh-CN' : 'en';
-  $$('[data-i18n]').forEach((el) => (el.textContent = T(el.dataset.i18n).replace('{n}', String(COMPONENTS_COUNT)).replace('{c}', String(COMPONENT_CATEGORIES.length))));
+  $$('[data-i18n]').forEach((el) => (el.textContent = T(el.dataset.i18n).replace('{n}', COMPONENTS_COUNT).replace('{c}', String(COMPONENT_CATEGORIES.length))));
   $$('[data-i18n-placeholder]').forEach((el) => el.setAttribute('placeholder', T(el.dataset.i18nPlaceholder)));
   for (const el of $$('.ccard')) {
     const item = findComponent(el.dataset.id);

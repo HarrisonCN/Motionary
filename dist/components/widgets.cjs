@@ -4,7 +4,7 @@ var widgets_carousel = require('../chunks/carousel-CtzI1LxO.cjs');
 var widgets_tabBar = require('../chunks/tab-bar-BvRhwu_Z.cjs');
 var widgets_disclosure = require('../widgets/disclosure.cjs');
 var widgets_stories = require('../widgets/stories.cjs');
-var widgets_toastStack = require('../chunks/toast-stack-CvhLNj0o.cjs');
+var widgets_toastStack = require('../chunks/toast-stack-DOE1cHRn.cjs');
 var widgets_modal = require('../chunks/sheet-BzJEwGbk.cjs');
 var widgets_menu = require('../chunks/menu-9GcThZZr.cjs');
 var widgets_odometer = require('../chunks/progress-ring-YtKPU2jM.cjs');
@@ -98,20 +98,23 @@ var widgets_motionSpec = require('../widgets/motion-spec.cjs');
 var widgets_nativePreview = require('../widgets/native-preview.cjs');
 var widgets_pluginCard = require('../widgets/plugin-card.cjs');
 var widgets_installButton = require('../widgets/install-button.cjs');
-var widgets_scrollScene = require('../chunks/scroll-scene-BRnibjdP.cjs');
+var widgets_scrollScene = require('../chunks/scroll-scene-CHIo0HSX.cjs');
 var widgets_motionInspector = require('../widgets/motion-inspector.cjs');
 var widgets_routeTransition = require('../widgets/route-transition.cjs');
 var widgets_textSplitter = require('../widgets/text-splitter.cjs');
 var widgets_scrollRing = require('../widgets/scroll-ring.cjs');
 var widgets_parallaxLayers = require('../widgets/parallax-layers.cjs');
 var widgets_smoothScroll = require('../widgets/smooth-scroll.cjs');
-var widgets_glScene = require('../chunks/gl-scene-C9pBV4jG.cjs');
+var widgets_glScene = require('../chunks/gl-scene-DY1QEFSj.cjs');
 var widgets_gpuParticles = require('../chunks/gpu-particles-DGwFsyz_.cjs');
 var widgets_shaderBackdrop = require('../chunks/shader-backdrop-Ct8UIKNL.cjs');
-var widgets_lottiePlayer = require('../chunks/lottie-player-kQ9J05on.cjs');
+var widgets_lottiePlayer = require('../chunks/lottie-player-DZ5bgb4Z.cjs');
 var widgets_rive = require('../chunks/rive-xzduMxFp.cjs');
 var widgets_tokenEditor = require('../widgets/token-editor.cjs');
-var widgets_physicsPlayground = require('../chunks/physics-playground-m9zHsri6.cjs');
+var widgets_physicsPlayground = require('../chunks/physics-playground-Gttd3YdQ.cjs');
+var widgets_fileTree = require('../widgets/file-tree.cjs');
+var widgets_downloadMenu = require('../widgets/download-menu.cjs');
+var widgets_titleSequence = require('../widgets/title-sequence.cjs');
 var widgets_motionPrompt = require('../widgets/motion-prompt.cjs');
 var widgets_megaMenu = require('../chunks/nav-flyout-CrLUC54W.cjs');
 var widgets_fullscreenMenu = require('../widgets/fullscreen-menu.cjs');
@@ -176,7 +179,7 @@ const WIDGETS = {
     '10.5': { 'usa-gl-scene': widgets_glScene.defineGlScene, 'usa-gpu-particles': widgets_gpuParticles.defineGpuParticles, 'usa-shader-backdrop': widgets_shaderBackdrop.defineShaderBackdrop },
     '10.6': { 'usa-lottie-player': widgets_lottiePlayer.defineLottiePlayer, 'usa-rive': widgets_rive.defineRive, 'usa-token-editor': widgets_tokenEditor.defineTokenEditor },
     '10.7': { 'usa-physics-playground': widgets_physicsPlayground.definePhysicsPlayground, 'usa-motion-prompt': widgets_motionPrompt.defineMotionPrompt },
-    '17.3': { 'usa-mega-menu': widgets_megaMenu.defineMegaMenu, 'usa-nav-flyout': widgets_megaMenu.defineNavFlyout, 'usa-fullscreen-menu': widgets_fullscreenMenu.defineFullscreenMenu, 'usa-breadcrumbs': widgets_breadcrumbs.defineBreadcrumbs },
+    '17.3': { 'usa-mega-menu': widgets_megaMenu.defineMegaMenu, 'usa-nav-flyout': widgets_megaMenu.defineNavFlyout, 'usa-fullscreen-menu': widgets_fullscreenMenu.defineFullscreenMenu, 'usa-breadcrumbs': widgets_breadcrumbs.defineBreadcrumbs, 'usa-file-tree': widgets_fileTree.defineFileTree, 'usa-download-menu': widgets_downloadMenu.defineDownloadMenu, 'usa-title-sequence': widgets_titleSequence.defineTitleSequence },
 };
 /** Every widget tag, in release order. */
 const WIDGET_TAGS = /*#__PURE__*/ Object.values(WIDGETS).flatMap((g) => Object.keys(g));
@@ -372,6 +375,9 @@ exports.provideRiveRuntime = widgets_rive.provideRiveRuntime;
 exports.defineTokenEditor = widgets_tokenEditor.defineTokenEditor;
 exports.PHYSICS_PRESETS = widgets_physicsPlayground.PHYSICS_PRESETS;
 exports.definePhysicsPlayground = widgets_physicsPlayground.definePhysicsPlayground;
+exports.defineFileTree = widgets_fileTree.defineFileTree;
+exports.defineDownloadMenu = widgets_downloadMenu.defineDownloadMenu;
+exports.defineTitleSequence = widgets_titleSequence.defineTitleSequence;
 exports.defineMotionPrompt = widgets_motionPrompt.defineMotionPrompt;
 exports.defineMegaMenu = widgets_megaMenu.defineMegaMenu;
 exports.defineNavFlyout = widgets_megaMenu.defineNavFlyout;
@@ -382,4 +388,4 @@ exports.watchViewport = viewport.watchViewport;
 exports.WIDGETS = WIDGETS;
 exports.WIDGET_TAGS = WIDGET_TAGS;
 exports.defineWidgets = defineWidgets;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/components/widgets.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/components/widgets.cjs.map

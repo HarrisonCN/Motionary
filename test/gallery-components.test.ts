@@ -1,0 +1,68 @@
+import { beforeAll, expect, it } from 'vitest';
+import { buildManifest, scanSource } from '../scripts/gen-manifest.mjs';
+import { defineMoAliases } from '../src/components/mo';
+import { defineTitleSequence } from '../src/components/widgets/title-sequence';
+
+const publicTagNames = buildManifest().components.map((c: { tag: string }) => c.tag.slice(4));
+
+beforeAll(async () => {
+  // Register all real components first, without any corresponding elements in the document.
+  const modules = import.meta.glob('../src/components/**/*.ts');
+  const source = scanSource();
+  for (const name of publicTagNames) {
+    const entry = source['usa-' + name];
+    expect(entry, name).toBeDefined();
+    const module = await modules['../' + entry.file]() as Record<string, () => unknown>;
+    module[entry.define]();
+  }
+  defineMoAliases();
+  defineMoAliases();
+}, 120000);
+
+it('registers every public mo-* constructor, including absent late opt-in widgets', () => {
+  for (const name of publicTagNames) {
+    expect(customElements.get('mo-' + name)?.prototype, name).toBeInstanceOf(customElements.get('usa-' + name)!);
+  }
+});
+
+it('routes programmatic toast messages to an existing public stack', async () => {
+  const { stackToast } = await import('../src/components/widgets/toast');
+  document.body.innerHTML = '<mo-toast-stack duration="0"></mo-toast-stack>';
+  stackToast('Saved');
+  expect(document.querySelector('mo-toast-stack')!.textContent).toContain('Saved');
+  expect(document.querySelector('usa-toast-stack')).toBeNull();
+});
+
+it('file tree moves focus back to a folder and closes it', () => {
+  document.body.innerHTML = '<mo-file-tree><details open><summary>Photos</summary><a href="#one">One</a></details></mo-file-tree>';
+  const folder = document.querySelector('details')!;
+  const key = () => document.activeElement!.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true }));
+  document.querySelector('a')!.focus();
+  key();
+  expect(document.activeElement).toBe(folder.querySelector('summary'));
+  key();
+  expect(folder.open).toBe(false);
+});
+
+it('download menu closes on Escape and preserves native download links', () => {
+  // A head-loaded CDN bundle upgrades the host before the HTML parser appends its children.
+  const menu = document.createElement('mo-download-menu');
+  document.body.replaceChildren(menu);
+  menu.innerHTML = '<details open><summary>Formats</summary><a download href="#file">ZIP</a></details>';
+  const link = document.querySelector('a')!;
+  link.focus();
+  link.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+  expect(document.querySelector('details')!.open).toBe(false);
+  expect(document.activeElement).toBe(document.querySelector('summary'));
+  expect(link.download).toBe('');
+});
+
+it('opening the next intertitle closes the previous one', () => {
+  defineTitleSequence();
+  document.body.innerHTML = '<mo-title-sequence><details open><summary>A</summary></details><details><summary>B</summary></details></mo-title-sequence>';
+  const [a,b] = document.querySelectorAll('details');
+  b.open = true;
+  b.dispatchEvent(new Event('toggle'));
+  expect(a.open).toBe(false);
+  expect(b.open).toBe(true);
+});

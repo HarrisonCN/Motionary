@@ -1,2 +1,2 @@
-export { d as defineUploadProgress } from '../chunks/upload-progress-DHuh8F0L.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/widgets/upload-progress.js.map
+export { d as defineUploadProgress } from '../chunks/upload-progress-Cxbh9qV2.js';
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/widgets/upload-progress.js.map

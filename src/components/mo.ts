@@ -16,36 +16,19 @@
  * defineComponents();   // <mo-card>, <mo-tabs>, … and <usa-*> both work
  * ```
  */
+import { rewriteTagSelectors } from './alias-css.mjs';
 import { adoptStyles, canDefine } from './base';
-import { COMPONENT_CATEGORIES } from './index-tags';
+import { publicTagNames } from './public-tags.generated';
 
 /** The `mo-*` alias of a default `usa-*` tag (`usa-switch` → `mo-switch`), or `null` for any other tag. */
 export const aliasTag = (tag: string): string | null => (/^usa-[a-z]/.test(tag) ? 'mo-' + tag.slice(4) : null);
 
-// Keep strings, comments, attribute selectors and escaped identifiers opaque. Braces / semicolons inside them
-// are content, not rule boundaries (and an attribute value that happens to name a component must stay unchanged).
-const CSS_TOKENS = /\/\*[\s\S]*?\*\/|"(?:\\[\s\S]|[^"\\])*"|'(?:\\[\s\S]|[^'\\])*'|\[(?:\\[\s\S]|"(?:\\[\s\S]|[^"\\])*"|'(?:\\[\s\S]|[^'\\])*'|[^\]\\])*\]|(?:\\[\s\S]|[\w-]|[^\x00-\x7f])+|[^\w]/g;
 /**
  * `usa-…` → `mo-…` in selectors only (the text in front of each `{` that is not an at-rule); declarations, at-rule
- * preludes such as `@keyframes usa-spin`, classes, attributes and custom properties are untouched.
+ * preludes such as `@keyframes usa-spin`, classes, attributes and custom properties are untouched. 17.3.1: the tokenizer
+ * lives in `alias-css.mjs`, shared with the build, which writes `:is(usa-x,mo-x)` into the standalone CSS files.
  */
-export const aliasCss = (text: string): string => {
-  let out = '', raw = '', renamed = '', first = '', previous = '';
-  for (const [token] of text.matchAll(CSS_TOKENS)) {
-    if (token === '{' || token === '}' || token === ';') {
-      out += (token === '{' && first !== '@' ? renamed : raw) + token;
-      raw = renamed = first = previous = '';
-    } else {
-      raw += token;
-      const comment = token.startsWith('/*');
-      if (!first && !comment && token.trim()) first = token;
-      renamed += /^usa-[a-z]/.test(token) && previous !== '.' && previous !== '#' && previous !== ':'
-        ? 'mo-' + token.slice(4) : token;
-      if (!comment) previous = token;
-    }
-  }
-  return out + raw;
-};
+export const aliasCss = (text: string): string => rewriteTagSelectors(text, (tag) => 'mo-' + tag.slice(4));
 
 let started = false;
 let active = false;
@@ -110,11 +93,23 @@ export function defineMoAliases(): void {
     define.call(this, name, ctor, options);
     alias(name, ctor);
   };
-  const tags: string[] = Object.values(COMPONENT_CATEGORIES).flat();
+  // 17.3.1: every public tag from the manifest (core and widgets), so widgets defined before this call get their mo-* name too.
+  const tags: string[] = publicTagNames.split(' ').map((name) => 'usa-' + name);
   if (typeof document !== 'undefined') document.querySelectorAll('*').forEach((e) => e.localName.startsWith('mo-') && tags.push('usa-' + e.localName.slice(3)));
   for (const t of tags) {
     const c = reg.get(t);
     if (c) alias(t, c);
   }
   if (active) scan();
+}
+
+// 17.3.1: the mo-* spellings get the same DOM types as their usa-* elements (document.querySelector('mo-switch') …).
+import type { UsaElementTag } from './frameworks/elements.generated';
+type LegacyTag = Extract<UsaElementTag, `usa-${string}`>;
+type PublicDomElements = {
+  [K in LegacyTag as K extends `usa-${infer Name}` ? `mo-${Name}` : never]: K extends keyof HTMLElementTagNameMap ? HTMLElementTagNameMap[K] : HTMLElement;
+};
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface HTMLElementTagNameMap extends PublicDomElements {}
 }

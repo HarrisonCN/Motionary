@@ -1,5 +1,5 @@
-import { G as deprecate, H as FOCUSABLE, g as getMotionSensitivity, M as MOTION_SENSITIVITY_LEVELS, c as configureComponents, B as adoptStyles } from '../chunks/base-DRZOlKiI.js';
-export { u as adaptKeyframes } from '../chunks/base-DRZOlKiI.js';
+import { F as deprecate, G as FOCUSABLE, g as getMotionSensitivity, M as MOTION_SENSITIVITY_LEVELS, c as configureComponents, H as adoptStyles } from '../chunks/base-SPDwWyB1.js';
+export { u as adaptKeyframes } from '../chunks/base-SPDwWyB1.js';
 import { C as COMPONENT_CATEGORIES } from '../chunks/index-tags-B-JBecYg.js';
 
 /**
@@ -235,7 +235,7 @@ function auditMotionA11y(root) {
     });
     const doc = root.ownerDocument || root;
     const anims = typeof root.getAnimations === 'function' ? root.getAnimations({ subtree: true }) : [];
-    const control = doc && (doc.querySelector('usa-motion-switch, [data-usa-pause]') || doc.documentElement.hasAttribute('data-usa-sensitivity'));
+    const control = doc && (doc.querySelector('mo-motion-switch, usa-motion-switch, [data-usa-pause]') || doc.documentElement.hasAttribute('data-usa-sensitivity'));
     if (!control)
         anims.forEach((a) => {
             try {
@@ -255,4 +255,4 @@ function auditMotionA11y(root) {
 const ALL_TAGS = Object.values(COMPONENT_CATEGORIES).flat();
 
 export { ALL_TAGS, LIVE_REGION_IDS, MOTION_SENSITIVITY, MOTION_SENSITIVITY_LEVELS, SENSITIVITY_CSS, STATIC_ALTERNATIVES, announce, auditMotionA11y, baselineReport, getMotionSensitivity, liveRegion, motionAllowed, restoreMotionSensitivity, setMotionSensitivity, staticAlternative, warnBaseline };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/components/a11y.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/components/a11y.js.map

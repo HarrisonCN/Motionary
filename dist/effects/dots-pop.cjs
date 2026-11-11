@@ -15,4 +15,4 @@ function registerDotsPop() {
 exports.effect = effect;
 exports.register = registerDotsPop;
 exports.registerDotsPop = registerDotsPop;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/effects/dots-pop.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/effects/dots-pop.cjs.map

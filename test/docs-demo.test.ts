@@ -50,15 +50,16 @@ describe('docs', () => {
     links.forEach((link) => expect(existsSync(resolve(root, 'docs', link)), `${file} -> ${link}`).toBe(true));
   });
 
-  it('component docs list every <usa-*> element and every define function', async () => {
+  it('component docs list each legacy tag and the READMEs list its public tag', async () => {
     const mod: any = await import('../src/components');
     const doc = readFileSync(resolve(root, 'docs/components.md'), 'utf8');
     const readme = readFileSync(resolve(root, 'README.md'), 'utf8');
     const zh = readFileSync(resolve(root, 'README_zh.md'), 'utf8');
     Object.values(mod.COMPONENT_CATEGORIES).flat().forEach((tag: any) => {
       expect(doc, tag).toContain(`<${tag}>`);
-      expect(readme, tag).toContain(`<${tag}>`);
-      expect(zh, tag).toContain(`<${tag}>`);
+      const publicTag = tag.replace(/^usa-/, 'mo-');
+      expect(readme, publicTag).toContain(`<${publicTag}>`);
+      expect(zh, publicTag).toContain(`<${publicTag}>`);
     });
     ['viewTransition', 'flip', 'sharedTransition', 'toast', 'configureComponents', 'defineComponents'].forEach((n) => expect(doc, n).toContain(n));
   });
