@@ -216,4 +216,4 @@ function rubberBand(distance, dimension, constant = 0.55) {
 }
 
 export { SPRING_PRESETS as S, rubberBand as a, spring as b, createSpring as c, springEasing as d, springSamples as e, stepSpring as f, supportsLinearEasing as g, linearEasing as l, projectInertia as p, resolveSpring as r, snapTo as s };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/chunks/spring-Bu3AwUgu.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.4.0/dist/chunks/spring-Bu3AwUgu.js.map

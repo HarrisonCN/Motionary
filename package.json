@@ -1,7 +1,7 @@
 {
   "name": "motionary",
-  "version": "17.3.1",
-  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 216 animated Web Components (91 core, 125 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
+  "version": "17.4.0",
+  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 222 animated Web Components (91 core, 131 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
   "unpkg": "dist/index.umd.js",
@@ -3128,6 +3128,66 @@
       "require": {
         "types": "./dist/widgets/title-sequence.d.cts",
         "default": "./dist/widgets/title-sequence.cjs"
+      }
+    },
+    "./widgets/luminous-switch": {
+      "import": {
+        "types": "./dist/widgets/luminous-switch.d.ts",
+        "default": "./dist/widgets/luminous-switch.js"
+      },
+      "require": {
+        "types": "./dist/widgets/luminous-switch.d.cts",
+        "default": "./dist/widgets/luminous-switch.cjs"
+      }
+    },
+    "./widgets/particle-icon": {
+      "import": {
+        "types": "./dist/widgets/particle-icon.d.ts",
+        "default": "./dist/widgets/particle-icon.js"
+      },
+      "require": {
+        "types": "./dist/widgets/particle-icon.d.cts",
+        "default": "./dist/widgets/particle-icon.cjs"
+      }
+    },
+    "./widgets/particle-button": {
+      "import": {
+        "types": "./dist/widgets/particle-button.d.ts",
+        "default": "./dist/widgets/particle-button.js"
+      },
+      "require": {
+        "types": "./dist/widgets/particle-button.d.cts",
+        "default": "./dist/widgets/particle-button.cjs"
+      }
+    },
+    "./widgets/halo-segmented": {
+      "import": {
+        "types": "./dist/widgets/halo-segmented.d.ts",
+        "default": "./dist/widgets/halo-segmented.js"
+      },
+      "require": {
+        "types": "./dist/widgets/halo-segmented.d.cts",
+        "default": "./dist/widgets/halo-segmented.cjs"
+      }
+    },
+    "./widgets/halo-slider": {
+      "import": {
+        "types": "./dist/widgets/halo-slider.d.ts",
+        "default": "./dist/widgets/halo-slider.js"
+      },
+      "require": {
+        "types": "./dist/widgets/halo-slider.d.cts",
+        "default": "./dist/widgets/halo-slider.cjs"
+      }
+    },
+    "./widgets/orbit-progress": {
+      "import": {
+        "types": "./dist/widgets/orbit-progress.d.ts",
+        "default": "./dist/widgets/orbit-progress.js"
+      },
+      "require": {
+        "types": "./dist/widgets/orbit-progress.d.cts",
+        "default": "./dist/widgets/orbit-progress.cjs"
       }
     },
     "./widgets/snap-carousel": {

@@ -110,7 +110,7 @@
     "limit": 12288
   },
   {
-    "name": "import 'motionary/components/studio-ai' (= motionary/studio/ai, 14.6 AI Studio assistant 2.0: prompt → Scene v2 ops, parse model output as data, component / version matching, schema + compatibility + headless-render checks, fix suggestions, per-op review applied as one undo step, diff-review panel; includes the local motion parser; own entry, not in lite / studio)",
+    "name": "import 'motionary/components/studio-ai' (= motionary/studio/ai, 14.6 AI Studio assistant 2.0: prompt \u2192 Scene v2 ops, parse model output as data, component / version matching, schema + compatibility + headless-render checks, fix suggestions, per-op review applied as one undo step, diff-review panel; includes the local motion parser; own entry, not in lite / studio)",
     "import": "export * from 'pkg/components/studio-ai';",
     "limit": 20480
   },
@@ -120,7 +120,7 @@
     "limit": 15360
   },
   {
-    "name": "import 'motionary/components/studio-templates' (= motionary/studio/templates, 14.8 templates & extension ecosystem: motionary-template v1 parse / integrity (pure-JS SHA-256) / Ed25519 verify, install / uninstall as one undo step, preview through the 14.7 standalone export — includes studio/export, the 14.5 pack rules and the timeline model; own entry, not in lite / studio / studio/export; measured 17.87 KB, plan target 10 KB was without the export-based preview)",
+    "name": "import 'motionary/components/studio-templates' (= motionary/studio/templates, 14.8 templates & extension ecosystem: motionary-template v1 parse / integrity (pure-JS SHA-256) / Ed25519 verify, install / uninstall as one undo step, preview through the 14.7 standalone export \u2014 includes studio/export, the 14.5 pack rules and the timeline model; own entry, not in lite / studio / studio/export; measured 17.87 KB, plan target 10 KB was without the export-based preview)",
     "import": "export * from 'pkg/components/studio-templates';",
     "limit": 19456
   },
@@ -130,7 +130,7 @@
     "limit": 12288
   },
   {
-    "name": "import 'motionary/components/studio-app' (= motionary/studio/app, 15.0 Motion Studio 2.0 app shell: createStudioApp new → edit → preview → save → reopen → export, storage adapters, packs + missing-asset relink; static graph = entry + statically imported chunks, the lazy export / assets / ai chunks excluded; measured 26.02 KB; own entry, not in lite / studio)",
+    "name": "import 'motionary/components/studio-app' (= motionary/studio/app, 15.0 Motion Studio 2.0 app shell: createStudioApp new \u2192 edit \u2192 preview \u2192 save \u2192 reopen \u2192 export, storage adapters, packs + missing-asset relink; static graph = entry + statically imported chunks, the lazy export / assets / ai chunks excluded; measured 26.02 KB; own entry, not in lite / studio)",
     "import": "export * from 'pkg/components/studio-app';",
     "static": true,
     "limit": 27648
@@ -147,12 +147,12 @@
     "limit": 2048
   },
   {
-    "name": "import 'motionary/components/studio-native' (= motionary/studio/native, 15.2 cross-platform export 2.0: Scene v2 / timeline / Studio project → CSS, WXSS, ArkTS, Jetpack Compose, SwiftUI with a per-property loss report; includes the scene → timeline reader; own entry, not in lite / studio / studio/export; measured ~6.6 KB)",
+    "name": "import 'motionary/components/studio-native' (= motionary/studio/native, 15.2 cross-platform export 2.0: Scene v2 / timeline / Studio project \u2192 CSS, WXSS, ArkTS, Jetpack Compose, SwiftUI with a per-property loss report; includes the scene \u2192 timeline reader; own entry, not in lite / studio / studio/export; measured ~6.6 KB)",
     "import": "export * from 'pkg/components/studio-native';",
     "limit": 8192
   },
   {
-    "name": "import 'motionary/components/studio-a11y' (= motionary/studio/a11y, 15.3 accessible & responsive motion: sensitivity tiers full / gentle / reduced, breakpoint variants in meta[\"motionary:variants\"], resolveVariant → plain Scene v2, validateVariants, motionSensitivity; own entry, not in lite / studio; measured 1.79 KB)",
+    "name": "import 'motionary/components/studio-a11y' (= motionary/studio/a11y, 15.3 accessible & responsive motion: sensitivity tiers full / gentle / reduced, breakpoint variants in meta[\"motionary:variants\"], resolveVariant \u2192 plain Scene v2, validateVariants, motionSensitivity; own entry, not in lite / studio; measured 1.79 KB)",
     "import": "export * from 'pkg/components/studio-a11y';",
     "limit": 3072
   },
@@ -177,7 +177,7 @@
     "limit": 4096
   },
   {
-    "name": "import 'motionary/components/studio-budget' (= motionary/studio/budget, 16.3 performance budget in Studio: export bytes raw / gzip, frame cost by property class, checkBudget, guardPublish, live meter; includes studio/export (the export it measures, 13.5 KB) — so its limit equals the studio-export line; own entry, not in lite / studio; new line)",
+    "name": "import 'motionary/components/studio-budget' (= motionary/studio/budget, 16.3 performance budget in Studio: export bytes raw / gzip, frame cost by property class, checkBudget, guardPublish, live meter; includes studio/export (the export it measures, 13.5 KB) \u2014 so its limit equals the studio-export line; own entry, not in lite / studio; new line)",
     "import": "export * from 'pkg/components/studio-budget';",
     "limit": 15360
   },
@@ -202,32 +202,32 @@
     "limit": 6144
   },
   {
-    "name": "import { defineTypewriter } from '…/components/text'",
+    "name": "import { defineTypewriter } from '\u2026/components/text'",
     "import": "export { defineTypewriter } from 'pkg/components/text';",
     "limit": 3328
   },
   {
-    "name": "import { defineSpinner } from '…/components/feedback'",
+    "name": "import { defineSpinner } from '\u2026/components/feedback'",
     "import": "export { defineSpinner } from 'pkg/components/feedback';",
     "limit": 3328
   },
   {
-    "name": "import { defineReveal } from '…/components/reveal'",
+    "name": "import { defineReveal } from '\u2026/components/reveal'",
     "import": "export { defineReveal } from 'pkg/components/reveal';",
     "limit": 3072
   },
   {
-    "name": "import { defineRipple } from '…/components/interaction'",
+    "name": "import { defineRipple } from '\u2026/components/interaction'",
     "import": "export { defineRipple } from 'pkg/components/interaction';",
     "limit": 2816
   },
   {
-    "name": "import { defineMarquee } from '…/components/background'",
+    "name": "import { defineMarquee } from '\u2026/components/background'",
     "import": "export { defineMarquee } from 'pkg/components/background';",
     "limit": 3072
   },
   {
-    "name": "import { viewTransition } from '…/components/transitions'",
+    "name": "import { viewTransition } from '\u2026/components/transitions'",
     "import": "export { viewTransition } from 'pkg/components/transitions';",
     "limit": 768
   },
@@ -237,7 +237,7 @@
     "limit": 7168
   },
   {
-    "name": "import { defineSpring } from '…/components/physics'",
+    "name": "import { defineSpring } from '\u2026/components/physics'",
     "import": "export { defineSpring } from 'pkg/components/physics';",
     "limit": 3840
   },
@@ -247,7 +247,7 @@
     "limit": 9728
   },
   {
-    "name": "import { defineCard } from '…/components/cards'",
+    "name": "import { defineCard } from '\u2026/components/cards'",
     "import": "export { defineCard } from 'pkg/components/cards';",
     "limit": 6144
   },
@@ -257,7 +257,7 @@
     "limit": 13312
   },
   {
-    "name": "import { defineButton } from '…/components/click'",
+    "name": "import { defineButton } from '\u2026/components/click'",
     "import": "export { defineButton } from 'pkg/components/click';",
     "limit": 6400
   },
@@ -267,7 +267,7 @@
     "limit": 13568
   },
   {
-    "name": "import { defineTabs } from '…/components/ui'",
+    "name": "import { defineTabs } from '\u2026/components/ui'",
     "import": "export { defineTabs } from 'pkg/components/ui';",
     "limit": 4864
   },
@@ -277,7 +277,7 @@
     "limit": 12544
   },
   {
-    "name": "import { pageTransition } from '…/components/page'",
+    "name": "import { pageTransition } from '\u2026/components/page'",
     "import": "export { pageTransition } from 'pkg/components/page';",
     "limit": 1792
   },
@@ -302,7 +302,7 @@
     "limit": 5632
   },
   {
-    "name": "import { defineTimelineComponents } from '…/components/timeline'",
+    "name": "import { defineTimelineComponents } from '\u2026/components/timeline'",
     "import": "export { defineTimelineComponents } from 'pkg/components/timeline';",
     "limit": 5376
   },
@@ -312,7 +312,7 @@
     "limit": 6144
   },
   {
-    "name": "import { defineGestureComponents } from '…/components/gesture'",
+    "name": "import { defineGestureComponents } from '\u2026/components/gesture'",
     "import": "export { defineGestureComponents } from 'pkg/components/gesture';",
     "limit": 5632
   },
@@ -322,7 +322,7 @@
     "limit": 5888
   },
   {
-    "name": "import { defineSvgComponents } from '…/components/svg'",
+    "name": "import { defineSvgComponents } from '\u2026/components/svg'",
     "import": "export { defineSvgComponents } from 'pkg/components/svg';",
     "limit": 5888
   },
@@ -332,7 +332,7 @@
     "limit": 8704
   },
   {
-    "name": "import { defineWebglComponents } from '…/components/webgl'",
+    "name": "import { defineWebglComponents } from '\u2026/components/webgl'",
     "import": "export { defineWebglComponents } from 'pkg/components/webgl';",
     "limit": 7936
   },
@@ -342,7 +342,7 @@
     "limit": 6656
   },
   {
-    "name": "import { defineDepthComponents } from '…/components/depth'",
+    "name": "import { defineDepthComponents } from '\u2026/components/depth'",
     "import": "export { defineDepthComponents } from 'pkg/components/depth';",
     "limit": 6656
   },
@@ -352,7 +352,7 @@
     "limit": 4352
   },
   {
-    "name": "import { defineLayoutComponents } from '…/components/layout'",
+    "name": "import { defineLayoutComponents } from '\u2026/components/layout'",
     "import": "export { defineLayoutComponents } from 'pkg/components/layout';",
     "limit": 3840
   },
@@ -377,7 +377,7 @@
     "limit": 4352
   },
   {
-    "name": "import { definePacksComponents } from '…/components/packs'",
+    "name": "import { definePacksComponents } from '\u2026/components/packs'",
     "import": "export { definePacksComponents } from 'pkg/components/packs';",
     "limit": 4096
   },
@@ -394,7 +394,7 @@
   {
     "name": "import 'motionary/components/mo' (17.0 <mo-*> names: defineMoAliases / aliasTag / aliasCss + the default tag list; opt-in, not in lite / per-entry imports; the UMD bundles include it)",
     "import": "export * from 'pkg/components/mo';",
-    "limit": 2048
+    "limit": 2304
   },
   {
     "name": "import 'motionary/components/lite'",
@@ -467,7 +467,7 @@
     "limit": 1792
   },
   {
-    "name": "import { definePostFx } from '…/components/webgl'",
+    "name": "import { definePostFx } from '\u2026/components/webgl'",
     "import": "export { definePostFx } from 'pkg/components/webgl';",
     "limit": 7680
   },
@@ -477,7 +477,7 @@
     "limit": 6144
   },
   {
-    "name": "import { defineFxComponents } from '…/components/fx'",
+    "name": "import { defineFxComponents } from '\u2026/components/fx'",
     "import": "export { defineFxComponents } from 'pkg/components/fx';",
     "limit": 5888
   },
@@ -494,7 +494,7 @@
   {
     "name": "import 'motionary/components/widgets'",
     "import": "export * from 'pkg/components/widgets';",
-    "limit": 171264
+    "limit": 176128
   },
   {
     "name": "import 'motionary/components/fx-gpu'",
@@ -562,7 +562,7 @@
     "limit": 5888
   },
   {
-    "name": "import { registerMusicPack } from '…/components/fx-music'",
+    "name": "import { registerMusicPack } from '\u2026/components/fx-music'",
     "import": "export { registerMusicPack } from 'pkg/components/fx-music';",
     "limit": 5888
   },
@@ -572,7 +572,7 @@
     "limit": 2560
   },
   {
-    "name": "import { registerChartPack } from '…/components/fx-chart'",
+    "name": "import { registerChartPack } from '\u2026/components/fx-chart'",
     "import": "export { registerChartPack } from 'pkg/components/fx-chart';",
     "limit": 2560
   },
@@ -582,7 +582,7 @@
     "limit": 2560
   },
   {
-    "name": "import { registerShopPack } from '…/components/fx-shop'",
+    "name": "import { registerShopPack } from '\u2026/components/fx-shop'",
     "import": "export { registerShopPack } from 'pkg/components/fx-shop';",
     "limit": 2560
   },
@@ -597,7 +597,7 @@
     "limit": 2048
   },
   {
-    "name": "import { registerFormPack } from '…/components/fx-form'",
+    "name": "import { registerFormPack } from '\u2026/components/fx-form'",
     "import": "export { registerFormPack } from 'pkg/components/fx-form';",
     "limit": 2048
   },
@@ -607,7 +607,7 @@
     "limit": 2304
   },
   {
-    "name": "import { registerAiPack } from '…/components/fx-ai'",
+    "name": "import { registerAiPack } from '\u2026/components/fx-ai'",
     "import": "export { registerAiPack } from 'pkg/components/fx-ai';",
     "limit": 2304
   },
@@ -622,7 +622,7 @@
     "limit": 2560
   },
   {
-    "name": "import { registerFestivalPack } from '…/components/fx-festival'",
+    "name": "import { registerFestivalPack } from '\u2026/components/fx-festival'",
     "import": "export { registerFestivalPack } from 'pkg/components/fx-festival';",
     "limit": 2560
   },
@@ -2205,5 +2205,35 @@
     "name": "import 'motionary/widgets/title-sequence' (per-entry, fixed)",
     "import": "export * from 'pkg/widgets/title-sequence';",
     "limit": 3584
+  },
+  {
+    "name": "import 'motionary/widgets/luminous-switch' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/luminous-switch';",
+    "limit": 5120
+  },
+  {
+    "name": "import 'motionary/widgets/particle-icon' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/particle-icon';",
+    "limit": 4352
+  },
+  {
+    "name": "import 'motionary/widgets/particle-button' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/particle-button';",
+    "limit": 4608
+  },
+  {
+    "name": "import 'motionary/widgets/halo-segmented' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/halo-segmented';",
+    "limit": 4096
+  },
+  {
+    "name": "import 'motionary/widgets/halo-slider' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/halo-slider';",
+    "limit": 4096
+  },
+  {
+    "name": "import 'motionary/widgets/orbit-progress' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/orbit-progress';",
+    "limit": 3840
   }
 ]

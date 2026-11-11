@@ -123,4 +123,4 @@ function defineProductGallery(tag = 'usa-product-gallery') {
 }
 
 export { defineProductGallery as d, wrapIndex as w };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/chunks/product-gallery-DUr6hkuf.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.4.0/dist/chunks/product-gallery-DUr6hkuf.js.map

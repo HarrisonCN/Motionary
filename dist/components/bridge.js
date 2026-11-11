@@ -162,4 +162,4 @@ function connectNativeShell(options = {}) {
 }
 
 export { BRIDGE_PROTOCOL_VERSION, applyNativeSettings, connectNativeShell, detectNativeHost, isTrustedMessage, parseNativeSettings, postToNative };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/components/bridge.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.4.0/dist/components/bridge.js.map

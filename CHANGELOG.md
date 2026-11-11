@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [17.4.0] - 2026-11-11 — Luminous controls
+
+- Added `<mo-luminous-switch>`: glass day/night thumb, spring slide, moving edge halo and a 64-particle sun/moon morph. Reflected checked state, native keyboard activation, form submission/reset and an optional explicit theme target.
+- Derived five independent components: `<mo-particle-icon>` (eight morphing glyphs), `<mo-particle-button>` (action/toggle), `<mo-halo-segmented>` (RTL radio group), `<mo-halo-slider>` (native range) and `<mo-orbit-progress>` (determinate progress).
+- Every new widget registers its own `mo-*` name, has an individual import, honors reduced motion, and releases particle animations/listeners on disconnect. No new dependencies or idle render loops.
+- Added a bilingual gallery catalog and an interactive [luminous lab](showcase/luminous.html), plus component/framework types, MCP metadata, keyboard/form/lifecycle tests and per-entry size budgets.
+- Following the maintainer's component-growth budget policy, the widgets aggregate limit moves 167.25 → 172 KB gzip (measured 168.09 KB); the complete public-name lookup moves 2 → 2.25 KB (measured 2.03 KB). Existing individual-component limits and core/lite limits stay fixed. New controls have individual 3.75–5 KB limits.
+- Visual reference: [Zsolt Kacso's day/night control](https://x.com/kaolti/status/2119151022014894260), shared by [观默](https://x.com/guanmo_ai/status/2120320855532306892). Independent SVG/CSS implementation; no third-party source or video assets included.
+
 ## [17.3.1] - 2026-11-11
 
 - Added `<mo-file-tree>`, `<mo-download-menu>` and `<mo-title-sequence>` with individual imports, keyboard support, and live gallery examples. The title animation respects reduced motion.

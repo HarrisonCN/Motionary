@@ -11,4 +11,4 @@ function registerScanlineSweep() {
 }
 
 export { effect, registerScanlineSweep as register, registerScanlineSweep };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/effects/scanline-sweep.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.4.0/dist/effects/scanline-sweep.js.map

@@ -1,4 +1,4 @@
-# Motionary 17.3.1 — full component reference
+# Motionary 17.4.0 — full component reference
 
 Generated from the source. Machine-readable version: https://harrisoncn.github.io/Motionary/components.json (schema https://harrisoncn.github.io/Motionary/components.schema.json).
 
@@ -1765,6 +1765,34 @@ A line grid behind the content that lights up around the pointer.
 </usa-gyro-card>
 ```
 
+### <mo-halo-segmented> (legacy <usa-halo-segmented>) — Halo segmented control
+
+Equal-width radio choices with a sliding glass pill. Arrow keys, Home/End, RTL and disabled support.
+
+- Import: `import { defineHaloSegmented } from 'motionary/components/widgets'; defineHaloSegmented();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `options`, `value`, `label`, `disabled`, `theme`
+- Events: `usa:change`
+- Methods: `changed()`, `mount()`, `luminousTheme()`, `defineMoName()`
+
+```html
+<mo-halo-segmented options="Studio,Gallery,Export" value="Studio" label="Workspace"></mo-halo-segmented>
+```
+
+### <mo-halo-slider> (legacy <usa-halo-slider>) — Halo range slider
+
+A native range with a luminous glass thumb. Touch, keyboard, min/max/step, form submission and reset.
+
+- Import: `import { defineHaloSlider } from 'motionary/components/widgets'; defineHaloSlider();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `value`, `min`, `max`, `step`, `disabled`, `label`, `name`, `theme`
+- Events: `usa:input`, `usa:change`
+- Methods: `changed()`, `mount()`, `luminousTheme()`, `defineMoName()`
+
+```html
+<mo-halo-slider value="65" label="Brightness"></mo-halo-slider>
+```
+
 ### <mo-handwriting> (legacy <usa-handwriting>) — Handwriting draw
 
 The text draws itself stroke by stroke, then fills in — signatures, hero words.
@@ -2078,6 +2106,20 @@ defineLottiePlayer(); // registers <usa-lottie-player> — after the prerequisit
 
 ```html
 <usa-lottie-player src="/anim/hero.lottie" autoplay loop label="Hero animation"></usa-lottie-player>
+```
+
+### <mo-luminous-switch> (legacy <usa-luminous-switch>) — Luminous day/night switch
+
+A spring glass thumb, moving edge halo and a 64-particle sun/moon morph. Native switch semantics and form reset. Optional explicit theme target.
+
+- Import: `import { defineLuminousSwitch } from 'motionary/components/widgets'; defineLuminousSwitch();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `checked`, `disabled`, `label`, `name`, `value`, `target`, `theme`
+- Events: `usa:change`
+- Methods: `toggle()`
+
+```html
+<mo-luminous-switch label="Light theme"></mo-luminous-switch>
 ```
 
 ### <mo-lyrics> (legacy <usa-lyrics>) — Synced karaoke lyrics
@@ -2521,6 +2563,19 @@ Hides while you scroll down, slides back on the first scroll up; shrink makes it
 <!-- el.value = 2048 rolls every digit -->
 ```
 
+### <mo-orbit-progress> (legacy <usa-orbit-progress>) — Orbit progress dial
+
+A bounded, determinate glass progress dial. Smooth updates, accessible values and no idle animation.
+
+- Import: `import { defineOrbitProgress } from 'motionary/components/widgets'; defineOrbitProgress();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `value`, `max`, `label`, `theme`
+- Methods: `changed()`, `mount()`, `luminousTheme()`, `defineMoName()`
+
+```html
+<mo-orbit-progress value="65" label="Export progress"></mo-orbit-progress>
+```
+
 ### <mo-organic-card> (legacy <usa-organic-card>) — Organic card
 
 8.3: a card with a soft, living blob shape — its outline slowly breathes on screen, morphs on hover and comes in leaf, ocean, petal and sand tints.
@@ -2626,6 +2681,33 @@ Product cards reveal and lift, “Add to cart” presses and flies the product i
   <img data-depth="0.6" src="mountains.webp" alt="">
   <h2 data-depth="-0.3">Above the clouds</h2>
 </usa-parallax-layers>
+```
+
+### <mo-particle-button> (legacy <usa-particle-button>) — Particle glass button
+
+An action or pressed toggle button with a particle burst. Real button keyboard activation; emits usa:activate.
+
+- Import: `import { defineParticleButton } from 'motionary/components/widgets'; defineParticleButton();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `icon`, `active-icon`, `toggle`, `pressed`, `disabled`, `theme`
+- Events: `usa:activate`
+- Methods: `activate()`
+
+```html
+<mo-particle-button label="Favorite" icon="spark" active-icon="heart" toggle></mo-particle-button>
+```
+
+### <mo-particle-icon> (legacy <usa-particle-icon>) — Morphing particle icon
+
+Morph between eight SVG particle glyphs by changing icon. Static at rest; labelled or decorative.
+
+- Import: `import { defineParticleIcon } from 'motionary/components/widgets'; defineParticleIcon();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `icon`, `label`, `decorative`, `theme`
+- Methods: `morph()`
+
+```html
+<mo-particle-icon icon="moon" label="Night"></mo-particle-icon>
 ```
 
 ### <mo-particles> (legacy <usa-particles>) — Particles

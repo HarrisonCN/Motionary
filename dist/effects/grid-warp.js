@@ -11,4 +11,4 @@ function registerGridWarp() {
 }
 
 export { effect, registerGridWarp as register, registerGridWarp };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/effects/grid-warp.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.4.0/dist/effects/grid-warp.js.map

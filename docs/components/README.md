@@ -1,4 +1,4 @@
-# Motionary components (216)
+# Motionary components (222)
 
 One page per `<usa-*>` element, generated from the source. Machine-readable: `motionary/tooling/manifest.json` · Pages `/components.json` · `/llms.txt` · `/llms-full.txt`. How to use these with an AI assistant: [AGENTS.md](../../AGENTS.md) and [the prompt guide](../ai-prompt-guide.md).
 
@@ -61,6 +61,8 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-globe>`](usa-globe.md) — Spinning globe
 - [`<mo-gpu-particles>`](usa-gpu-particles.md) — GPU particle canvas
 - [`<mo-gyro-card>`](usa-gyro-card.md) — Gyro 3D card
+- [`<mo-halo-segmented>`](usa-halo-segmented.md) — Halo segmented control
+- [`<mo-halo-slider>`](usa-halo-slider.md) — Halo range slider
 - [`<mo-hero-video>`](usa-hero-video.md) — Hero video
 - [`<mo-hud-panel>`](usa-hud-panel.md) — HUD panel
 - [`<mo-hydrate>`](usa-hydrate.md) — SSR hydration animation
@@ -72,6 +74,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-lottie>`](usa-lottie.md) — Lottie player
 - [`<mo-lottie-icon>`](usa-lottie-icon.md) — Animated icon set
 - [`<mo-lottie-player>`](usa-lottie-player.md) — Lottie player (JSON + dotLottie) · Requires: motionary/runtime/vector
+- [`<mo-luminous-switch>`](usa-luminous-switch.md) — Luminous day/night switch
 - [`<mo-mega-menu>`](usa-mega-menu.md) — Mega menu (morphing panels)
 - [`<mo-menu>`](usa-menu.md) — Dropdown menu
 - [`<mo-message-list>`](usa-message-list.md) — Chat thread
@@ -86,10 +89,13 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-nav-morph>`](usa-nav-morph.md) — Navbar with morphing indicator
 - [`<mo-navbar>`](usa-navbar.md) — Auto-hide navbar
 - [`<mo-notification-bell>`](usa-notification-bell.md) — Notification bell
+- [`<mo-orbit-progress>`](usa-orbit-progress.md) — Orbit progress dial
 - [`<mo-organic-card>`](usa-organic-card.md) — Organic card
 - [`<mo-otp>`](usa-otp.md) — OTP code input
 - [`<mo-pagination>`](usa-pagination.md) — Pagination with sliding ink
 - [`<mo-panorama>`](usa-panorama.md) — 360° panorama viewer
+- [`<mo-particle-button>`](usa-particle-button.md) — Particle glass button
+- [`<mo-particle-icon>`](usa-particle-icon.md) — Morphing particle icon
 - [`<mo-pause-all>`](usa-pause-all.md) — Pause all motion
 - [`<mo-perf-monitor>`](usa-perf-monitor.md) — Perf monitor
 - [`<mo-physics-playground>`](usa-physics-playground.md) — Physics playground · Requires: motionary/runtime/physics + motionary/runtime/format-scene

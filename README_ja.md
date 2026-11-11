@@ -24,7 +24,7 @@ npm i motionary
 <script type="module">import ScrollAnimate from 'motionary'; ScrollAnimate.init();</script>
 ```
 
-Motionary は、スクロールして画面に入ってきたコンテンツをアニメーションで表示し、さらに <!--fact:public-->216<!--/fact--> 個の `<mo-*>` カスタム要素を提供します。カード、ボタン、物理演算、ページ遷移、ジェネレーティブ背景、Lottie、WebGL などがそろっています。素の HTML でも、React・Vue・Svelte・Solid・Angular でも、Electron・Tauri・WebView2 といったデスクトップの Web ビューでも、そのまま動きます。ランタイム依存はゼロ。すべてのエントリポイントは tree-shaking でき、CI で gzip サイズの上限がチェックされます。どのアニメーションも `prefers-reduced-motion` を尊重します。
+Motionary は、スクロールして画面に入ってきたコンテンツをアニメーションで表示し、さらに <!--fact:public-->222<!--/fact--> 個の `<mo-*>` カスタム要素を提供します。カード、ボタン、物理演算、ページ遷移、ジェネレーティブ背景、Lottie、WebGL などがそろっています。素の HTML でも、React・Vue・Svelte・Solid・Angular でも、Electron・Tauri・WebView2 といったデスクトップの Web ビューでも、そのまま動きます。ランタイム依存はゼロ。すべてのエントリポイントは tree-shaking でき、CI で gzip サイズの上限がチェックされます。どのアニメーションも `prefers-reduced-motion` を尊重します。
 
 各バージョンのリリースノートは [CHANGELOG.md](./CHANGELOG.md) にあります。
 
@@ -37,7 +37,7 @@ Motionary は、スクロールして画面に入ってきたコンテンツを�
 ## 特長
 
 - **スクロール表示プリセット 214 種**を 14 のファミリーで提供（コアに 33 種、`motionary/presets/extended` にさらに 181 種）。フェード、ズーム、3D フリップ、clip-path の図形、ブラーとマスク、バウンス、奥行き、グリッチ、スクロール量に連動する `scrub-*` など。`timeline()`、`staggerChildren()`、`parallax()` もあります。
-- **`<mo-*>` Web Components <!--fact:public-->216<!--/fact--> 個**：`motionary/components` にカテゴリ別で <!--fact:core-->91<!--/fact--> 個のコアコンポーネント、さらにウィジェットが <!--fact:widgets-->125<!--/fact--> 個あり、それぞれ専用のエントリポイント（`motionary/widgets/<name>`）を持ちます。加えて、専用エントリ（`motionary/effects/<name>`）を持つエフェクトが <!--fact:effects-->146<!--/fact--> 種あります。数え方は [docs/components.md](./docs/components.md#how-components-are-counted) を参照。
+- **`<mo-*>` Web Components <!--fact:public-->222<!--/fact--> 個**：`motionary/components` にカテゴリ別で <!--fact:core-->91<!--/fact--> 個のコアコンポーネント、さらにウィジェットが <!--fact:widgets-->131<!--/fact--> 個あり、それぞれ専用のエントリポイント（`motionary/widgets/<name>`）を持ちます。加えて、専用エントリ（`motionary/effects/<name>`）を持つエフェクトが <!--fact:effects-->146<!--/fact--> 種あります。数え方は [docs/components.md](./docs/components.md#how-components-are-counted) を参照。
 - **Motion Core**：`motionary/core` の `createMotion()`。プラグイン方式のエンジンで、gzip 後およそ 2.5 KB（上限 10 KB）です。
 - **独自のランタイム**：`motionary/runtime`（ticker・tween・timeline）と <!--fact:runtimeModules-->20<!--/fact--> のモジュール。スクロールシーン、スムーズスクロール、テキスト分割、SVG モーフィング、スプライト、GIF / APNG / WebP、Lottie と dotLottie、WebGL2、glTF / OBJ、2D 物理演算をカバーします。モジュールは 3 つの階層に分かれていて、インポートした分だけのサイズで済みます。
 - **どのフレームワークでも**：`motionary/react`、`motionary/vue`、`motionary/svelte`、`motionary/solid`、`motionary/angular`。要素用のラッパー `motionary/components/react` · `vue` · `svelte` · `solid` もあります。サーバー側でインポートしても何も起きません。
@@ -305,7 +305,7 @@ Figma プラグイン、クロスプラットフォーム書き出し（`npx mot
 すべてのエントリポイントに、[`size-budget.json`](./size-budget.json) で固定の gzip 上限が設定されています（全 441 項目）。上限を超えるエントリがあれば CI は失敗し、上限が自動で引き上げられることはありません。
 
 <!-- size-table:start -->
-17.3.1 ビルドでの実測値（minify ＋ gzip、`scripts/size.mjs --report` で生成）：
+17.4.0 ビルドでの実測値（minify ＋ gzip、`scripts/size.mjs --report` で生成）：
 
 | インポートするもの | gzip | 上限 |
 |---|---:|---:|
@@ -317,9 +317,9 @@ Figma プラグイン、クロスプラットフォーム書き出し（`npx mot
 | `motionary/presets/extended`（181 プリセット） | 4.69 KB | 5.25 KB |
 | `motionary/runtime`（ランタイムのコア） | 5.42 KB | 5.50 KB |
 | `motionary/components/reveal` | 4.47 KB | 5.00 KB |
-| `motionary/components/lite`（全要素、CSS はオンデマンド） | 71.28 KB | 79.00 KB |
-| `motionary/components`（全要素 ＋ CSS） | 87.70 KB | 93.75 KB |
-| `dist/components.umd.js`（CDN、すべて） | 111.18 KB | 115.75 KB |
+| `motionary/components/lite`（全要素、CSS はオンデマンド） | 71.31 KB | 79.00 KB |
+| `motionary/components`（全要素 ＋ CSS） | 87.73 KB | 93.75 KB |
+| `dist/components.umd.js`（CDN、すべて） | 111.21 KB | 115.75 KB |
 <!-- size-table:end -->
 
 既定ではスクロールイベントを監視せず（IntersectionObserver を使用）、アニメーションはコンポジタで処理できるプロパティ（`transform`、`opacity`、`filter`、`clip-path`）に限られます。インポート自体に副作用はありません（[docs/tree-shaking.md](./docs/tree-shaking.md)）。PR ごとに、ヘッドレス Chrome でファーストビューの転送量、スクリプト時間、GPU リソース、フレームの安定性も計測しています（[docs/perf-ci.md](./docs/perf-ci.md)）。ソースマップは npm には含めません。タグ付きの git ツリーにあり（各ファイルの `sourceMappingURL` がそこを指します）、16.3 からは `sourcemaps` アーカイブとして GitHub の各リリースにも添付します（[docs/source-maps.md](./docs/source-maps.md)）。詳しくは [docs/performance.md](./docs/performance.md)。
@@ -347,7 +347,7 @@ npx usa-codemod-13 --write      # まとめて書き換え。@10 / @11 / @12 に
 
 ## バージョンと互換性
 
-- **npm の dist-tag：** `latest` は現在のメジャーの最新リリース（<!--ver:version-->17.3.1<!--/ver-->）を指します。14.1 からはマイナーリリースでも移動します。マイナーリリースにはそれぞれ `v<major>-<minor>` のタグも付きます（例：`v15-0`）。`v15-line` は 15.x を追い、`v14-lts` は 14.9.x です。`motionary` と `use-scroll-animate` は常に同じバージョンで同時に公開されます。
+- **npm の dist-tag：** `latest` は現在のメジャーの最新リリース（<!--ver:version-->17.4.0<!--/ver-->）を指します。14.1 からはマイナーリリースでも移動します。マイナーリリースにはそれぞれ `v<major>-<minor>` のタグも付きます（例：`v15-0`）。`v15-line` は 15.x を追い、`v14-lts` は 14.9.x です。`motionary` と `use-scroll-animate` は常に同じバージョンで同時に公開されます。
 - **CDN：** URL はメジャーで固定します（`motionary@<!--ver:major-->17<!--/ver-->`）。正確なバージョン指定（`motionary@12.4.0`）もそのまま使えます。
 - **セマンティックバージョニング：** 破壊的変更はメジャーだけで行い、毎回ガイドと codemod を用意します。非推奨になったものは次のメジャーまで残り、その間は型に `@deprecated` が付くだけで、実行時の警告は出ません。
 - **各バージョンに含まれるもの：** コンポーネントとランタイムモジュールごとの `since` / `changed`（[docs/version-compat.md](./docs/version-compat.md)）、機能ごとの対応状況（[docs/compat-matrix.md](./docs/compat-matrix.md)）。

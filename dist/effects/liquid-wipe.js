@@ -11,4 +11,4 @@ function registerLiquidWipe() {
 }
 
 export { effect, registerLiquidWipe as register, registerLiquidWipe };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/effects/liquid-wipe.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.4.0/dist/effects/liquid-wipe.js.map

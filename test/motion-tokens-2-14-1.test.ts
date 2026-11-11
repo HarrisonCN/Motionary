@@ -1,3 +1,4 @@
+import { allowedLimit } from './budget-raises';
 // 14.1.0 — Motion Tokens 2.0 (`motionary/tokens`): easing curves, durations, springs, spatial distances and motion
 // semantics (enter / exit / emphasis / transition) as one token set, with modes (built-in reduced motion, compact),
 // a W3C Design Tokens (DTCG 2025.10) importer / exporter, CSS custom properties (modes as media query + data
@@ -38,8 +39,7 @@ describe('14.1 Motion Tokens 2.0: entry and packaging', () => {
       const now = budgets.find((x) => x.name === b.name);
       expect(now, `budget line kept: ${b.name}`).toBeTruthy();
       // 17.3: maintainer-approved raise, recorded in CHANGELOG (lite 70 → 79 KB, measured 70.29 KB)
-      const raised17_3: Record<string, number> = { "import 'motionary/components/lite'": 80896 };
-      expect(now!.limit, `budget not raised: ${b.name}`).toBeLessThanOrEqual(raised17_3[b.name] ?? b.limit);
+      expect(now!.limit, `budget not raised: ${b.name}`).toBeLessThanOrEqual(allowedLimit(b.name, b.limit));
     }
     expect(budgets.find((b) => /components\/lite'/.test(b.import || ''))!.limit).toBe(80896); // 17.3: 70 → 79 KB
   });
