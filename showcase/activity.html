@@ -37,8 +37,22 @@
     </main>
   </div>
   <script type="module">
-    import { defineWidgets } from '../dist/components/widgets.js';
-    defineWidgets('17.5');
+    import { defineFlightStatus } from '../dist/widgets/flight-status.js';
+    import { defineTransitProgress } from '../dist/widgets/transit-progress.js';
+    import { defineSunTimeline } from '../dist/widgets/sun-timeline.js';
+    import { defineDeliveryTracker } from '../dist/widgets/delivery-tracker.js';
+    import { defineGlucoseSparkline } from '../dist/widgets/glucose-sparkline.js';
+    import { defineCoffeeTimer } from '../dist/widgets/coffee-timer.js';
+    import { defineVitalWave } from '../dist/widgets/vital-wave.js';
+    import { defineOrbitPass } from '../dist/widgets/orbit-pass.js';
+    import { defineMeterCountdown } from '../dist/widgets/meter-countdown.js';
+    import { defineRaceTelemetry } from '../dist/widgets/race-telemetry.js';
+    import { defineWorkoutPlayer } from '../dist/widgets/workout-player.js';
+    import { defineStatusPill } from '../dist/widgets/status-pill.js';
+    import { defineRideStatus } from '../dist/widgets/ride-status.js';
+    import { defineRouteSparkline } from '../dist/widgets/route-sparkline.js';
+    import { defineActivityWall } from '../dist/widgets/activity-wall.js';
+    defineFlightStatus(); defineTransitProgress(); defineSunTimeline(); defineDeliveryTracker(); defineGlucoseSparkline(); defineCoffeeTimer(); defineVitalWave(); defineOrbitPass(); defineMeterCountdown(); defineRaceTelemetry(); defineWorkoutPlayer(); defineStatusPill(); defineRideStatus(); defineRouteSparkline(); defineActivityWall();
     const wall=document.querySelector('#wall'),viewport=document.querySelector('#viewport'),scene=document.querySelector('#scene');
     const resize=new ResizeObserver(()=>scene.style.setProperty('--scene-scale',String(viewport.clientWidth/960)));resize.observe(viewport);
     const clocks=[...wall.querySelectorAll('mo-coffee-timer,mo-meter-countdown,mo-workout-player')];
