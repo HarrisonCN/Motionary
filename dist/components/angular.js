@@ -35,7 +35,7 @@ export { b as bindUsa, u as usaEventName } from '../chunks/bind-B_CTL6Qn.js';
 /** All `<usa-*>` tags shipped by the package (same list as `motionary/react`'s wrappers). */
 const USA_TAGS = /*#__PURE__*/ Object.values(COMPONENT_CATEGORIES).flat();
 /** `true` for every `<usa-*>` tag — e.g. for a custom schema check or a template linter. */
-const isUsaElement = (tag) => tag.startsWith('usa-');
+const isUsaElement = (tag) => tag.startsWith('mo-') || tag.startsWith('usa-');
 /** `APP_INITIALIZER` factory: registers the elements in the browser (no-op during SSR). */
 function usaInitializer(categories) {
     return () => () => {
@@ -56,4 +56,4 @@ function defineUsa(categories) {
 const usaDetail = (e) => e.detail;
 
 export { USA_TAGS, defineUsa, isUsaElement, provideUsa, usaDetail, usaInitializer };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/components/angular.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/components/angular.js.map

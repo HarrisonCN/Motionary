@@ -1,4 +1,4 @@
-# Motionary components (213)
+# Motionary components (216)
 
 One page per `<usa-*>` element, generated from the source. Machine-readable: `motionary/tooling/manifest.json` · Pages `/components.json` · `/llms.txt` · `/llms-full.txt`. How to use these with an AI assistant: [AGENTS.md](../../AGENTS.md) and [the prompt guide](../ai-prompt-guide.md).
 
@@ -46,10 +46,12 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-date-picker>`](usa-date-picker.md) — Date picker
 - [`<mo-dock>`](usa-dock.md) — macOS-style dock
 - [`<mo-dotlottie>`](usa-dotlottie.md) — Interactive dotLottie (themes + state machine) · Requires: motionary/runtime/vector + motionary/runtime/lottie-state
+- [`<mo-download-menu>`](usa-download-menu.md) — Download menu
 - [`<mo-drawer>`](usa-drawer.md) — Drawer
 - [`<mo-fab>`](usa-fab.md) — FAB speed dial
 - [`<mo-festival-banner>`](usa-festival-banner.md) — Festival banner
 - [`<mo-field>`](usa-field.md) — Animated field
+- [`<mo-file-tree>`](usa-file-tree.md) — File tree
 - [`<mo-fullscreen-menu>`](usa-fullscreen-menu.md) — Full-screen menu (circle / curtain reveal)
 - [`<mo-gauge>`](usa-gauge.md) — Spring gauge
 - [`<mo-gen-art>`](usa-gen-art.md) — Generative artwork
@@ -123,6 +125,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-theme-surface>`](usa-theme-surface.md) — Theme surface
 - [`<mo-theme-switcher>`](usa-theme-switcher.md) — Theme switcher
 - [`<mo-tip>`](usa-tip.md) — Tooltip / popover 2.0
+- [`<mo-title-sequence>`](usa-title-sequence.md) — Title sequence
 - [`<mo-token-editor>`](usa-token-editor.md) — Motion token editor (W3C DTCG)
 - [`<mo-upload-progress>`](usa-upload-progress.md) — Upload progress
 - [`<mo-video-card>`](usa-video-card.md) — Video card

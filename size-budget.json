@@ -2190,5 +2190,20 @@
     "name": "import 'motionary/effects/googly-eyes' (per-entry, fixed)",
     "import": "export * from 'pkg/effects/googly-eyes';",
     "limit": 4352
+  },
+  {
+    "name": "import 'motionary/widgets/file-tree' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/file-tree';",
+    "limit": 3584
+  },
+  {
+    "name": "import 'motionary/widgets/download-menu' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/download-menu';",
+    "limit": 3584
+  },
+  {
+    "name": "import 'motionary/widgets/title-sequence' (per-entry, fixed)",
+    "import": "export * from 'pkg/widgets/title-sequence';",
+    "limit": 3584
   }
 ]

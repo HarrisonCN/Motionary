@@ -5,4 +5,4 @@ var widgets_uploadProgress = require('../chunks/upload-progress-Dw3IXtf8.cjs');
 
 
 exports.defineUploadProgress = widgets_uploadProgress.defineUploadProgress;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/widgets/upload-progress.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/widgets/upload-progress.cjs.map

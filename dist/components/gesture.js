@@ -1,7 +1,7 @@
-import { f as defineElement, d as clamp } from '../chunks/base-DRZOlKiI.js';
-import { c as createSpring } from '../chunks/spring-Ddhxb3nO.js';
-import { g as gesture } from '../chunks/core-D9fzpWWF.js';
-export { p as pinchScale, s as swipeDirection } from '../chunks/core-D9fzpWWF.js';
+import { f as defineElement, d as clamp } from '../chunks/base-SPDwWyB1.js';
+import { c as createSpring } from '../chunks/spring-Bu3AwUgu.js';
+import { g as gesture } from '../chunks/core-C0-LxgXr.js';
+export { p as pinchScale, s as swipeDirection } from '../chunks/core-C0-LxgXr.js';
 
 var css = "usa-swipeable{display:block;touch-action:pan-y;user-select:none;-webkit-user-select:none}usa-swipeable[axis=\"y\"]{touch-action:pan-x}usa-swipeable>*{transform:translate3d(var(--usa-swipe,0px),0,0);opacity:calc(1 - var(--usa-swipe-p,0) * 0.5)}usa-swipeable[axis=\"y\"]>*{transform:translate3d(0,var(--usa-swipe,0px),0)}usa-swipeable:focus-visible{outline:2px solid currentColor;outline-offset:2px}usa-pinch-zoom{display:block;overflow:hidden;touch-action:none;position:relative}usa-pinch-zoom>*{transform:translate3d(var(--usa-zoom-x,0px),var(--usa-zoom-y,0px),0) scale(var(--usa-zoom,1));transform-origin:50% 50%}usa-pinch-zoom[data-zoomed]{cursor:grab}usa-pinch-zoom:focus-visible{outline:2px solid currentColor;outline-offset:2px}";
 
@@ -203,4 +203,4 @@ function defineGestureComponents() {
 }
 
 export { defineGestureComponents, definePinchZoom, defineSwipeable, gesture };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/components/gesture.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/components/gesture.js.map

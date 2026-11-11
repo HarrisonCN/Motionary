@@ -247,7 +247,7 @@ function getBase() {
  */
 function animateWithMotion(el, keyframes, options) {
     // no WAAPI / `static` → the unadapted final frame; over the animation budget → the adapted one
-    if (typeof el.animate !== 'function' || config.motionSensitivity === 'static' || ((keyframes = adaptKeyframes(keyframes)), active$2 >= maxActive)) {
+    if (typeof el.animate !== 'function' || config.motionSensitivity === 'static' || ((keyframes = adaptKeyframes(keyframes)), active$1 >= maxActive)) {
         applyFrame(el, keyframes[keyframes.length - 1]);
         return null;
     }
@@ -257,9 +257,9 @@ function animateWithMotion(el, keyframes, options) {
     const a = el.animate(keyframes, options);
     trackAnimation(a);
     if (options.iterations !== Infinity) {
-        active$2++;
+        active$1++;
         // settles exactly once (fulfilled or rejected), so no guard is needed
-        const end = () => void active$2--;
+        const end = () => void active$1--;
         a?.finished?.then(end, end);
     }
     return a;
@@ -442,10 +442,10 @@ function trackAnimation(a) {
     a.finished?.then(drop, drop);
 }
 // --- active animation budget (4.5) ---------------------------------------------
-let active$2 = 0;
+let active$1 = 0;
 let maxActive = Infinity;
 /** Number of component animations running right now. */
-const activeAnimations = () => active$2;
+const activeAnimations = () => active$1;
 /** Cap concurrent component animations; extra ones jump to their final frame (`Infinity` = no cap). */
 function setAnimationBudget(max) {
     maxActive = max > 0 ? max : Infinity;
@@ -1288,7 +1288,7 @@ const MOTION_TOKENS = {
         stiff: { stiffness: 500, damping: 40, mass: 1 },
     },
 };
-let active$1 = /*#__PURE__*/ clone(MOTION_TOKENS);
+let active = /*#__PURE__*/ clone(MOTION_TOKENS);
 function clone(t) {
     return { duration: { ...t.duration }, easing: { ...t.easing }, spring: Object.fromEntries(Object.entries(t.spring).map(([k, v]) => [k, { ...v }])) };
 }
@@ -1303,7 +1303,7 @@ function mergeMotionTokens(partial, base = MOTION_TOKENS) {
 }
 const kebab = (s) => s.replace(/([a-z0-9])([A-Z])/g, '$1-$2').replace(/[\s_.]+/g, '-').toLowerCase();
 /** The custom-property map: `{ '--usa-duration-fast': '150ms', … }`. */
-function motionTokensToVars(tokens = active$1, prefix = '--usa') {
+function motionTokensToVars(tokens = active, prefix = '--usa') {
     const vars = {};
     for (const [k, v] of Object.entries(tokens.duration))
         vars[`${prefix}-duration-${kebab(k)}`] = `${v}ms`;
@@ -1317,12 +1317,12 @@ function motionTokensToVars(tokens = active$1, prefix = '--usa') {
     return vars;
 }
 /** A stylesheet string: `:root { --usa-duration-fast: 150ms; … }`. */
-function motionTokensToCss(tokens = active$1, selector = ':root', prefix = '--usa') {
+function motionTokensToCss(tokens = active, selector = ':root', prefix = '--usa') {
     const body = Object.entries(motionTokensToVars(tokens, prefix)).map(([k, v]) => `  ${k}: ${v};`).join('\n');
     return `${selector} {\n${body}\n}\n`;
 }
 /** W3C Design Tokens (DTCG) JSON: `{ motion: { duration: { fast: { $type: 'duration', $value: '150ms' } } } }`. */
-function motionTokensToJSON(tokens = active$1) {
+function motionTokensToJSON(tokens = active) {
     const grp = (o, f) => Object.fromEntries(Object.entries(o).map(([k, v]) => [k, f(v)]));
     return {
         motion: {
@@ -1412,30 +1412,30 @@ function importMotionTokens(json, base = MOTION_TOKENS) {
 }
 /** The tokens currently applied (via `applyMotionTokens`), or the defaults. */
 function getMotionTokens() {
-    return clone(active$1);
+    return clone(active);
 }
 /**
  * Write tokens as CSS custom properties on `root` (default `<html>`) and make
  * them the active set for `motionToken()`. Returns an undo function.
  */
 function applyMotionTokens(tokens = MOTION_TOKENS, root, prefix = '--usa') {
-    const prev = active$1;
-    active$1 = mergeMotionTokens(tokens, MOTION_TOKENS);
+    const prev = active;
+    active = mergeMotionTokens(tokens, MOTION_TOKENS);
     const el = root || (typeof document !== 'undefined' ? document.documentElement : null);
-    const vars = motionTokensToVars(active$1, prefix);
+    const vars = motionTokensToVars(active, prefix);
     const old = {};
     if (el)
         for (const [k, v] of Object.entries(vars))
             ((old[k] = el.style.getPropertyValue(k)), el.style.setProperty(k, v));
     return () => {
-        active$1 = prev;
+        active = prev;
         if (el)
             for (const [k, v] of Object.entries(old))
                 v ? el.style.setProperty(k, v) : el.style.removeProperty(k);
     };
 }
 function motionToken(group, name) {
-    const g = active$1[group];
+    const g = active[group];
     return g[name] ?? MOTION_TOKENS[group][name];
 }
 /** `var(--usa-duration-fast, 150ms)` — a CSS reference with the current value as fallback. */
@@ -1453,14 +1453,14 @@ function resolveDurationToken(v, fallback) {
     if (typeof v === 'number')
         return v;
     if (typeof v === 'string')
-        return (active$1.duration[v] ?? parseDuration(v)) ?? fallback;
+        return (active.duration[v] ?? parseDuration(v)) ?? fallback;
     return fallback;
 }
 /** Resolve an easing that may be a token name (`'emphasized'`) or CSS. */
 function resolveEasingToken(v, fallback) {
     if (!v)
         return fallback;
-    return active$1.easing[v] ?? v;
+    return active.easing[v] ?? v;
 }
 
 /** 4.1: whether `scrub()` can use native ScrollTimeline / ViewTimeline here. */
@@ -10454,12 +10454,40 @@ function defineFxComponents() {
     defineFx();
 }
 
+// Keep strings, comments, attribute selectors and escaped identifiers opaque. Braces / semicolons inside them
+// are content, not rule boundaries (and an attribute value that happens to name a component must stay unchanged).
+const CSS_TOKENS = /\/\*[\s\S]*?\*\/|"(?:\\[\s\S]|[^"\\])*"|'(?:\\[\s\S]|[^'\\])*'|\[(?:\\[\s\S]|"(?:\\[\s\S]|[^"\\])*"|'(?:\\[\s\S]|[^'\\])*'|[^\]\\])*\]|(?:\\[\s\S]|[\w-]|[^\x00-\x7f])+|[^\w]/g;
+/**
+ * Rewrite component tag names in selectors only (the text in front of each `{` that is not an at-rule); declarations, at-rule
+ * preludes such as `@keyframes usa-spin`, classes, attributes and custom properties are untouched.
+ */
+const rewriteTagSelectors = (text, replaceTag) => {
+  let out = '', raw = '', renamed = '', first = '', previous = '';
+  for (const [token] of text.matchAll(CSS_TOKENS)) {
+    if (token === '{' || token === '}' || token === ';') {
+      out += (token === '{' && first !== '@' ? renamed : raw) + token;
+      raw = renamed = first = previous = '';
+    } else {
+      raw += token;
+      const comment = token.startsWith('/*');
+      if (!first && !comment && token.trim()) first = token;
+      renamed += /^usa-[a-z]/.test(token) && previous !== '.' && previous !== '#' && previous !== ':'
+        ? replaceTag(token) : token;
+      if (!comment) previous = token;
+    }
+  }
+  return out + raw;
+};
+
+// Generated from the component manifest.
+const publicTagNames = 'accordion acrylic add-to-cart ambient anim-icon audio aurora auto-animate auto-skeleton avatar-stack back-to-top badge badge-wall bar-chart bg-generator blobs bottom-sheet breadcrumbs button card card-stack carousel carousel-3d cart-drawer chapter-nav chat-composer check checkbox click clock-control code-export color-picker command-palette compare countdown counter cube cube-gallery cursor date-picker depth dialog disclosure distort dock dot-network dotlottie double-tap download-menu draggable draw drawer equalizer fab festival-banner field file-drop file-tree fullpage fullscreen-menu fx gauge gen-art gesture-fx gesture-sticker gl-model gl-scene glitch globe gpu-particles gradient-text grain grid-glow gyro-card handwriting hero-video hold hud-panel hydrate icon-morph install-button kanban keyframe-editor kpi leaderboard like liquid liquid-nav loading-bar location-card lottie lottie-icon lottie-player lyrics magnetic marquee mask-reveal masonry masonry-flow mega-menu menu menu-toggle message-list milestones modal morph motion motion-inspector motion-prefs motion-prompt motion-spec motion-switch motion-theme music-player native-preview nav-flyout nav-morph navbar notification-bell odometer organic-card otp overscroll pack pagination panorama parallax-layers particles pause-all perf-monitor physics-playground pinch-zoom player plugin-card plugin-store popover post-fx presence press prize-wheel product-gallery progress progress-ring prop-panel pull-cord pull-refresh radar reactions red-envelope retro-button reveal ripple rive route-transition scene scramble scroll-highlight scroll-progress scroll-ring scroll-scene scrolly segmented shader shader-backdrop sheet shimmer-text shortcut skeleton skeleton-reveal sketch-chart slider smooth-scroll snap-carousel sparkline spatial-card spinner splash split-text spotlight spring stagger star-rating stepper sticky-stack sticky-wall stories story suggestion-chips swipe-deck swipeable switch tab-bar tabs terminal text-rotate text-splitter theme-surface theme-switcher tilt timeline tip title-sequence toast-stack toaster token-editor typewriter upload-progress video-card view-switch voice-button volume-knob water-ripple wave-text weather-card worker-canvas xp-bar';
+
 /**
  * motionary/components/mo — the 17.0 `<mo-*>` names.
  *
  * After `defineMoAliases()` every default `<usa-*>` element is also registered as `<mo-*>` (`<usa-switch>` →
- * `<mo-switch>`): a subclass, so attributes, properties and `usa:*` events are the same. The component styles are copied
- * with renamed tag selectors the first time a `<mo-*>` element connects, so pages that never use `mo-*` pay nothing.
+ * `<mo-switch>`): a subclass, so attributes, properties and `usa:*` events are the same. The component styles are extended
+ * with matching public tag selectors the first time a `<mo-*>` element connects, so pages that never use `mo-*` pay nothing.
  *
  * The no-build bundles (`components.umd.js`, `widgets.umd.js`) call it before they register anything. With ESM, call it
  * once, ideally before you define components; `usa-*` elements defined earlier (the default component set) and `mo-*`
@@ -10474,58 +10502,43 @@ function defineFxComponents() {
  */
 /** The `mo-*` alias of a default `usa-*` tag (`usa-switch` → `mo-switch`), or `null` for any other tag. */
 const aliasTag = (tag) => (/^usa-[a-z]/.test(tag) ? 'mo-' + tag.slice(4) : null);
-// Keep strings, comments, attribute selectors and escaped identifiers opaque. Braces / semicolons inside them
-// are content, not rule boundaries (and an attribute value that happens to name a component must stay unchanged).
-const CSS_TOKENS = /\/\*[\s\S]*?\*\/|"(?:\\[\s\S]|[^"\\])*"|'(?:\\[\s\S]|[^'\\])*'|\[(?:\\[\s\S]|"(?:\\[\s\S]|[^"\\])*"|'(?:\\[\s\S]|[^'\\])*'|[^\]\\])*\]|(?:\\[\s\S]|[\w-]|[^\x00-\x7f])+|[^\w]/g;
-/**
- * `usa-…` → `mo-…` in selectors only (the text in front of each `{` that is not an at-rule); declarations, at-rule
- * preludes such as `@keyframes usa-spin`, classes, attributes and custom properties are untouched.
- */
-const aliasCss = (text) => {
-    let out = '', raw = '', renamed = '', first = '', previous = '';
-    for (const [token] of text.matchAll(CSS_TOKENS)) {
-        if (token === '{' || token === '}' || token === ';') {
-            out += (token === '{' && first !== '@' ? renamed : raw) + token;
-            raw = renamed = first = previous = '';
-        }
-        else {
-            raw += token;
-            const comment = token.startsWith('/*');
-            if (!first && !comment && token.trim())
-                first = token;
-            renamed += /^usa-[a-z]/.test(token) && previous !== '.' && previous !== '#' && previous !== ':'
-                ? 'mo-' + token.slice(4) : token;
-            if (!comment)
-                previous = token;
-        }
-    }
-    return out + raw;
-};
+/** Return a copy of the stylesheet with public tag selectors. */
+const aliasCss = (text) => rewriteTagSelectors(text, tag => 'mo-' + tag.slice(4));
 let started = false;
-let active = false;
-let n = 0;
+function styleLoaded(event) {
+    if (event.target?.matches?.('link[data-usa-css]'))
+        scan();
+}
 const seen = /*#__PURE__*/ new WeakSet();
-/** Copy the Motionary stylesheets added since the last look (and the user's adopted sheets) with mo-* selectors. */
+/** Extend style selectors in place so media queries, cascade layers and declaration order stay intact. */
+function extendSelectors(rules) {
+    for (const rule of rules) {
+        if ('selectorText' in rule) {
+            const style = rule;
+            const selector = style.selectorText;
+            const renamed = aliasCss(selector + '{').slice(0, -1);
+            if (renamed !== selector)
+                style.selectorText = selector + ',' + renamed;
+        }
+        if ('cssRules' in rule)
+            extendSelectors(rule.cssRules);
+    }
+}
 function scan() {
     const d = document;
-    const adopted = d.adoptedStyleSheets || [];
-    for (const s of [...Array.from(d.styleSheets), ...adopted]) {
+    for (const s of [...d.styleSheets, ...(d.adoptedStyleSheets || [])]) {
         const o = s.ownerNode;
         if (seen.has(s) || (o && !o.matches('[data-usa],[data-usa-css]')))
             continue;
-        let css;
         try {
-            css = Array.from(s.cssRules, (r) => r.cssText).join('\n');
+            if (!s.cssRules.length)
+                continue;
+            extendSelectors(s.cssRules);
+            seen.add(s);
         }
         catch {
-            continue; // not loaded yet, or a cross-origin file without CORS
+            // A pending or cross-origin stylesheet may not expose writable rules.
         }
-        if (!css)
-            continue; // a pending link may expose an empty rule list before its load event
-        seen.add(s);
-        const a = aliasCss(css);
-        if (a !== css)
-            adoptStyles('mo:' + n++, a);
     }
 }
 function alias(tag, ctor) {
@@ -10535,25 +10548,13 @@ function alias(tag, ctor) {
     const C = ctor;
     class Alias extends C {
         connectedCallback() {
-            const r = super.connectedCallback?.();
-            if (!active) {
-                active = true;
-                // A retry may be requested by a usa-* sibling after the mo-* element has already mounted.
-                document.addEventListener('load', (event) => {
-                    if (event.target instanceof HTMLLinkElement && event.target.hasAttribute('data-usa-css'))
-                        scan();
-                }, true);
-            }
+            super.connectedCallback?.();
+            // A stable listener also handles a later stylesheet load without adding duplicate listeners.
+            document.addEventListener('load', styleLoaded, true);
             scan();
-            return r;
         }
     }
-    try {
-        customElements.define(a, Alias);
-    }
-    catch {
-        /* the name is taken by another library */
-    }
+    customElements.define(a, Alias);
 }
 /**
  * Turn on the `<mo-*>` names: every `usa-*` element defined from now on gets its `mo-*` alias, and so do the default
@@ -10569,16 +10570,17 @@ function defineMoAliases() {
         define.call(this, name, ctor, options);
         alias(name, ctor);
     };
-    const tags = Object.values(COMPONENT_CATEGORIES).flat();
-    if (typeof document !== 'undefined')
-        document.querySelectorAll('*').forEach((e) => e.localName.startsWith('mo-') && tags.push('usa-' + e.localName.slice(3)));
-    for (const t of tags) {
-        const c = reg.get(t);
-        if (c)
-            alias(t, c);
+    const names = publicTagNames.split(' ');
+    globalThis.document?.querySelectorAll('*').forEach(({ localName }) => {
+        if (localName.startsWith('mo-'))
+            names.push(localName.slice(3));
+    });
+    for (const name of names) {
+        const tag = 'usa-' + name;
+        const ctor = reg.get(tag);
+        if (ctor)
+            alias(tag, ctor);
     }
-    if (active)
-        scan();
 }
 
 /**
@@ -10814,7 +10816,7 @@ function auditMotionA11y(root) {
     });
     const doc = root.ownerDocument || root;
     const anims = typeof root.getAnimations === 'function' ? root.getAnimations({ subtree: true }) : [];
-    const control = doc && (doc.querySelector('usa-motion-switch, [data-usa-pause]') || doc.documentElement.hasAttribute('data-usa-sensitivity'));
+    const control = doc && (doc.querySelector('mo-motion-switch, usa-motion-switch, [data-usa-pause]') || doc.documentElement.hasAttribute('data-usa-sensitivity'));
     if (!control)
         anims.forEach((a) => {
             try {
@@ -11332,4 +11334,4 @@ exports.viewTransition = viewTransition;
 exports.warnBaseline = warnBaseline;
 exports.watchPowerSaver = watchPowerSaver;
 exports.withoutDeprecations = withoutDeprecations;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/components/lite.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/components/lite.cjs.map

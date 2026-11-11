@@ -1,7 +1,7 @@
 {
   "name": "motionary",
-  "version": "17.3.0",
-  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 213 animated Web Components (91 core, 122 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
+  "version": "17.3.1",
+  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 216 animated Web Components (91 core, 125 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
   "unpkg": "dist/index.umd.js",
@@ -3098,6 +3098,36 @@
       "require": {
         "types": "./dist/widgets/breadcrumbs.d.cts",
         "default": "./dist/widgets/breadcrumbs.cjs"
+      }
+    },
+    "./widgets/file-tree": {
+      "import": {
+        "types": "./dist/widgets/file-tree.d.ts",
+        "default": "./dist/widgets/file-tree.js"
+      },
+      "require": {
+        "types": "./dist/widgets/file-tree.d.cts",
+        "default": "./dist/widgets/file-tree.cjs"
+      }
+    },
+    "./widgets/download-menu": {
+      "import": {
+        "types": "./dist/widgets/download-menu.d.ts",
+        "default": "./dist/widgets/download-menu.js"
+      },
+      "require": {
+        "types": "./dist/widgets/download-menu.d.cts",
+        "default": "./dist/widgets/download-menu.cjs"
+      }
+    },
+    "./widgets/title-sequence": {
+      "import": {
+        "types": "./dist/widgets/title-sequence.d.ts",
+        "default": "./dist/widgets/title-sequence.js"
+      },
+      "require": {
+        "types": "./dist/widgets/title-sequence.d.cts",
+        "default": "./dist/widgets/title-sequence.cjs"
       }
     },
     "./widgets/snap-carousel": {

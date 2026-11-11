@@ -1,5 +1,5 @@
-import { registerEffects } from '../chunks/registry-Di_8M2Md.js';
-import { r as raf, b as caf } from '../chunks/base-DRZOlKiI.js';
+import { registerEffects } from '../chunks/registry-DmYdTtl4.js';
+import { r as raf, b as caf } from '../chunks/base-SPDwWyB1.js';
 
 const active = /*#__PURE__*/ new WeakMap();
 /** Wire enter (pointerenter / focusin) and leave (pointerleave / focusout) once per element and effect. */
@@ -311,4 +311,4 @@ function registerHoverPack() {
 }
 
 export { HOVER_FX, registerHoverPack };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/components/fx-hover.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/components/fx-hover.js.map

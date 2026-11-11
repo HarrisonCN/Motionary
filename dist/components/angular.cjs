@@ -37,7 +37,7 @@ var bind = require('../chunks/bind-Ui43-n2d.cjs');
 /** All `<usa-*>` tags shipped by the package (same list as `motionary/react`'s wrappers). */
 const USA_TAGS = /*#__PURE__*/ Object.values(indexTags.COMPONENT_CATEGORIES).flat();
 /** `true` for every `<usa-*>` tag — e.g. for a custom schema check or a template linter. */
-const isUsaElement = (tag) => tag.startsWith('usa-');
+const isUsaElement = (tag) => tag.startsWith('mo-') || tag.startsWith('usa-');
 /** `APP_INITIALIZER` factory: registers the elements in the browser (no-op during SSR). */
 function usaInitializer(categories) {
     return () => () => {
@@ -65,4 +65,4 @@ exports.isUsaElement = isUsaElement;
 exports.provideUsa = provideUsa;
 exports.usaDetail = usaDetail;
 exports.usaInitializer = usaInitializer;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/components/angular.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/components/angular.cjs.map

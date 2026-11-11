@@ -1,0 +1,3 @@
+:is(usa-download-menu,mo-download-menu){display:inline-block}
+:is(usa-download-menu,mo-download-menu) summary{cursor:pointer;border:1px solid currentColor;border-radius:.5em;padding:.55em .9em}
+:is(usa-download-menu,mo-download-menu) a{display:block;padding:.45em .9em;color:inherit}

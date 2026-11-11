@@ -223,7 +223,7 @@ export function auditMotionA11y(root: Element | Document): { errors: A11yIssue[]
   });
   const doc = (root as Node).ownerDocument || (root as Document);
   const anims = typeof (root as any).getAnimations === 'function' ? ((root as any).getAnimations({ subtree: true }) as Animation[]) : [];
-  const control = doc && (doc.querySelector('usa-motion-switch, [data-usa-pause]') || doc.documentElement.hasAttribute('data-usa-sensitivity'));
+  const control = doc && (doc.querySelector('mo-motion-switch, usa-motion-switch, [data-usa-pause]') || doc.documentElement.hasAttribute('data-usa-sensitivity'));
   if (!control)
     anims.forEach((a) => {
       try {

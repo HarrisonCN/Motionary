@@ -1,4 +1,4 @@
-import { f as defineElement } from '../chunks/base-DRZOlKiI.js';
+import { f as defineElement } from '../chunks/base-SPDwWyB1.js';
 
 var css = "usa-liquid-nav{position:relative;display:inline-flex;align-items:center;gap:4px;padding:8px 10px 18px;border-radius:18px;background:var(--usa-lq-bg,#0f172a);color:#e2e8f0;font:600 13px/1 system-ui,sans-serif;--usa-lq-accent:#38bdf8}.usa-lq-defs{position:absolute}.usa-lq-goo{position:absolute;left:0;right:0;bottom:4px;height:14px;pointer-events:none}.usa-lq-goo i{position:absolute;left:-6px;top:1px;width:12px;height:12px;border-radius:50%;background:var(--usa-lq-accent)}.usa-lq-tail{width:9px!important;height:9px!important;left:-4.5px!important;top:2.5px!important}.usa-lq-item{position:relative;padding:8px 12px;border:0;border-radius:10px;background:none;color:inherit;font:inherit;text-decoration:none;cursor:pointer;opacity:.7;transition:opacity .2s,color .2s}.usa-lq-item[aria-current]{opacity:1;color:var(--usa-lq-accent)}.usa-lq-item:focus-visible{outline:2px solid var(--usa-lq-accent);outline-offset:1px;opacity:1}usa-liquid-nav[data-orientation=\"vertical\"]{flex-direction:column;align-items:stretch;padding:10px 18px 10px 10px}usa-liquid-nav[data-orientation=\"vertical\"]>.usa-lq-goo{left:auto;right:4px;top:0;bottom:0;width:14px;height:auto}usa-liquid-nav[data-orientation=\"vertical\"]>.usa-lq-goo i{left:1px;top:-6px}usa-liquid-nav[data-orientation=\"vertical\"]>.usa-lq-goo .usa-lq-tail{left:2.5px!important;top:-4.5px!important}.usa-lq-item:disabled,.usa-lq-item[aria-disabled=\"true\"]{cursor:default;opacity:.4}";
 
@@ -135,4 +135,4 @@ function defineLiquidNav(tag = 'usa-liquid-nav') {
 }
 
 export { defineLiquidNav };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/widgets/liquid-nav.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/widgets/liquid-nav.js.map

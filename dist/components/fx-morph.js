@@ -1,4 +1,4 @@
-import { registerEffects } from '../chunks/registry-Di_8M2Md.js';
+import { registerEffects } from '../chunks/registry-DmYdTtl4.js';
 import { a as all } from '../chunks/shared-CkKHWrtJ.js';
 
 const NS = 'http://www.w3.org/2000/svg';
@@ -283,4 +283,4 @@ function registerMorphPack() {
 }
 
 export { MORPH2_FX, pointsToPath, registerMorphPack, samplePath };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.0/dist/components/fx-morph.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.3.1/dist/components/fx-morph.js.map

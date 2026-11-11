@@ -122,12 +122,16 @@ import { defineLottiePlayer, type UsaLottiePlayerElement } from './lottie-player
 import { defineRive, RIVE_PEER, RIVE_CDN, loadRiveRuntime, provideRiveRuntime, type UsaRiveElement } from './rive';
 import { defineTokenEditor, type UsaTokenEditorElement } from './token-editor';
 import { definePhysicsPlayground, PHYSICS_PRESETS, type UsaPhysicsPlaygroundElement } from './physics-playground';
+import { defineFileTree } from './file-tree';
+import { defineDownloadMenu } from './download-menu';
+import { defineTitleSequence } from './title-sequence';
 import { defineMotionPrompt, type UsaMotionPromptElement } from './motion-prompt';
 import { defineMegaMenu, defineNavFlyout, type UsaMegaMenuElement, type UsaNavFlyoutElement } from './nav-panels';
 import { defineFullscreenMenu, type UsaFullscreenMenuElement } from './fullscreen-menu';
 import { defineBreadcrumbs, type UsaBreadcrumbsElement, type BreadcrumbItem } from './breadcrumbs';
 import { defineMoAliases } from '../mo';
 
+export { defineFileTree, defineDownloadMenu, defineTitleSequence };
 export { defineCarousel, defineTabBar, defineDisclosure, defineStories, CAROUSEL_EFFECTS, TAB_INDICATORS };
 export type { UsaCarouselElement, UsaTabBarElement, UsaDisclosureElement, UsaStoriesElement };
 export { defineToastStack, stackToast, TOAST_POSITIONS, defineModal, defineSheet, MODAL_EFFECTS, SHEET_SIDES, defineMenu, MENU_EFFECTS };
@@ -306,7 +310,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '10.5': { 'usa-gl-scene': defineGlScene, 'usa-gpu-particles': defineGpuParticles, 'usa-shader-backdrop': defineShaderBackdrop },
   '10.6': { 'usa-lottie-player': defineLottiePlayer, 'usa-rive': defineRive, 'usa-token-editor': defineTokenEditor },
   '10.7': { 'usa-physics-playground': definePhysicsPlayground, 'usa-motion-prompt': defineMotionPrompt },
-  '17.3': { 'usa-mega-menu': defineMegaMenu, 'usa-nav-flyout': defineNavFlyout, 'usa-fullscreen-menu': defineFullscreenMenu, 'usa-breadcrumbs': defineBreadcrumbs },
+  '17.3': { 'usa-mega-menu': defineMegaMenu, 'usa-nav-flyout': defineNavFlyout, 'usa-fullscreen-menu': defineFullscreenMenu, 'usa-breadcrumbs': defineBreadcrumbs, 'usa-file-tree': defineFileTree, 'usa-download-menu': defineDownloadMenu, 'usa-title-sequence': defineTitleSequence },
 };
 
 /** Every widget tag, in release order. */
