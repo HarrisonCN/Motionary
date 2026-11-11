@@ -1,6 +1,6 @@
 import { f as defineElement } from '../chunks/base-SPDwWyB1.js';
 import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
-import { c as css, a as activityClass, f as flightView } from '../chunks/activity-Dk2_9o_s.js';
+import { c as css, a as activityClass, f as flightView } from '../chunks/activity-XkTm51Nm.js';
 
 function defineFlightStatus(tag = 'usa-flight-status') {
     const ctor = defineElement(tag, Base => {

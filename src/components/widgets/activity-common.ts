@@ -31,6 +31,7 @@ export const activityIcon = (name: string): string => {
     : name === 'home' ? 'M2 11L12 2l10 9v11h-7v-7H9v7H2z'
     : name === 'car' ? 'M3 10l3-6h12l3 6v10h-4v-3H7v3H3zM3 11h18M6 13v2m12-2v2'
     : name === 'package' ? 'M2 6l10-5 10 5v13l-10 4-10-4zM2 6l10 5 10-5M12 11v12M7 4l10 5'
+    : name === 'bike' ? 'M9 17a4 4 0 1 1-8 0 4 4 0 0 1 8 0M23 17a4 4 0 1 1-8 0 4 4 0 0 1 8 0M5 17l5-9 5 9H5m14 0L14 5h-3M7 5h4'
     : name === 'train' ? 'M5 2h14v16H5zM8 21l2-3m6 3l-2-3M5 11h14M8 15h1m6 0h1'
     : name === 'drop' ? 'M12 2C10 6 4 11 4 16a8 8 0 0 0 16 0c0-5-6-10-8-14z'
     : 'M4 12h16m-6-6l6 6-6 6';

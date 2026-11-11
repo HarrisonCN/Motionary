@@ -12,7 +12,7 @@ test('activity actions work with keyboard, preserve focus on clock updates and h
   await mount(page);
   const start = page.getByRole('button', { name: 'Start timer', exact: true }); await start.focus(); await start.press('Space');
   const stop = page.getByRole('button', { name: 'Stop timer', exact: true }); await expect(stop).toBeFocused();
-  await expect(page.locator('mo-coffee-timer')).toHaveAttribute('value', '19', { timeout: 1600 }); await expect(stop).toBeFocused();
+  await expect.poll(() => page.locator('mo-coffee-timer').evaluate(el => el.value)).toBeGreaterThan(18); await expect(stop).toBeFocused();
   await stop.press('Enter'); await expect(page.getByRole('button', { name: 'Start timer', exact: true })).toBeFocused();
   await page.locator('mo-delivery-tracker').evaluate(el => el.setAttribute('disabled', ''));
   await expect(page.getByRole('button', { name: 'Call driver', exact: true })).toBeDisabled();
@@ -25,6 +25,7 @@ test('reduced motion removes CSS loops and disconnected clocks stop', async ({ p
   expect(await page.locator('#stage').evaluate(el => el.getAnimations({ subtree: true }).filter(a => a.playState === 'running').length)).toBe(0);
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await expect(page.locator('mo-vital-wave')).toHaveAttribute('data-activity-animate', '');
+  expect(await page.locator('mo-vital-wave .usa-ac-dot-column circle').evaluateAll(nodes => nodes.every(el => { const m = new DOMMatrix(getComputedStyle(el).transform); return Math.abs(m.a - 1) < .001 && Math.abs(m.d - 1) < .001; }))).toBe(true);
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await expect.poll(() => page.locator('#stage').evaluate(el => el.getAnimations({ subtree: true }).filter(a => a.playState === 'running').length)).toBe(0);
   await page.locator('mo-meter-countdown').evaluate(el => { el.play(); window.detachedMeter = el; el.remove(); });

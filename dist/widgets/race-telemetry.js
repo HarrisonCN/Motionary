@@ -1,6 +1,6 @@
 import { f as defineElement } from '../chunks/base-SPDwWyB1.js';
 import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
-import { c as css, a as activityClass, r as raceView } from '../chunks/activity-Dk2_9o_s.js';
+import { c as css, a as activityClass, r as raceView } from '../chunks/activity-XkTm51Nm.js';
 
 function defineRaceTelemetry(tag = 'usa-race-telemetry') {
     const ctor = defineElement(tag, Base => {

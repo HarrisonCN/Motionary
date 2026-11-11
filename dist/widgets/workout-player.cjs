@@ -2,7 +2,7 @@
 
 var base = require('../chunks/base-DzZEJhQB.cjs');
 var moName = require('../chunks/mo-name-DR9ysd5S.cjs');
-var activity = require('../chunks/activity-BAIQ_ZAz.cjs');
+var activity = require('../chunks/activity-BAhympNW.cjs');
 
 function defineWorkoutPlayer(tag = 'usa-workout-player') {
     const ctor = base.defineElement(tag, Base => {
