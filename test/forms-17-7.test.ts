@@ -4,13 +4,13 @@ import { configureComponents } from '../src/components/base';
 import { DRAW_FX, registerDrawPack } from '../src/components/fx2/draw';
 import { bindEffect, playEffect } from '../src/components/fx/registry';
 import { installComponentMocks, tick, anims } from './components-setup';
-const names = ['select', 'combobox', 'multi-select', 'number-stepper', 'password', 'range-slider', 'consent', 'cta-popup', 'validation-summary'];
+const names = ['select', 'combobox', 'multi-select', 'number-stepper', 'password', 'range-slider', 'consent', 'cta-popup', 'validation-summary', 'textarea', 'search-field', 'form-stepper'];
 const options = [{ value: 'a', label: '<img src=x onerror=1>' }, { value: 'b', label: 'Blocked', disabled: true }, { value: 'c', label: 'Cinema', group: 'Art' }];
 const host = (name: string): any => document.querySelector('mo-' + name)!;
 beforeAll(() => { defineWidgets('17.7'); registerDrawPack(); });
 beforeEach(() => { installComponentMocks(); configureComponents({ reducedMotion: 'user', motionSensitivity: 'full' }); vi.spyOn(document, 'hidden', 'get').mockReturnValue(false); });
 afterEach(() => { document.body.replaceChildren(); vi.restoreAllMocks(); });
-it('registers nine aliases, reconnects once, and keeps option text inert', () => {
+it('registers twelve aliases, reconnects once, and keeps option text inert', () => {
   document.body.innerHTML = names.map(n => `<mo-${n}></mo-${n}>`).join('');
   for (const name of names) { const el = host(name), count = el.querySelectorAll('input,button,select,dialog').length; expect(customElements.get('usa-' + name)).toBeDefined(); el.remove(); document.body.append(el); expect(el.querySelectorAll('input,button,select,dialog')).toHaveLength(count); }
   const el = host('select'); el.options = options; expect(el.querySelector('img')).toBeNull(); expect(el.input.options[1].textContent).toBe(options[0].label); expect(el.input.querySelector('optgroup')!.label).toBe('Art');
@@ -64,4 +64,35 @@ it('finite drawing overlays preserve content, restore shared positioning and can
   const el = document.createElement('button'); el.textContent = 'Submit'; el.style.position = 'static'; document.body.append(el);
   const handles = DRAW_FX.slice(0, 2).map(effect => bindEffect(el, effect.name, { duration: 300, trigger: 'load' })); expect(el.querySelectorAll('svg')).toHaveLength(2); expect(el.textContent).toBe('Submit'); expect(el.style.position).toBe('relative'); handles[0](); expect(el.querySelectorAll('svg')).toHaveLength(1); expect(el.style.position).toBe('relative'); handles[1](); expect(el.querySelector('svg')).toBeNull(); expect(el.style.position).toBe('static'); expect(anims.every(a => a.cancelled)).toBe(true);
   configureComponents({ reducedMotion: 'reduce' }); await playEffect(el, 'focus-brackets'); expect(el.querySelector('svg')).toBeNull();
+});
+
+it('textarea preserves caret, inert text, form values and reset while enforcing native constraints', async () => {
+  document.body.innerHTML = '<form><mo-textarea name="brief" label="Brief" value="A portrait" maxlength="20" required auto-resize></mo-textarea></form>';
+  const el: any = host('textarea'), input = el.input as HTMLTextAreaElement, form = document.querySelector('form')!;
+  input.focus(); input.value = 'A new portrait'; input.setSelectionRange(5, 5); input.dispatchEvent(new Event('input', { bubbles: true }));
+  expect(input.selectionStart).toBe(5); expect(document.activeElement).toBe(input); expect(new FormData(form).get('brief')).toBe('A new portrait'); expect(el.querySelector('output').textContent).toContain('14 / 20');
+  el.value = '<img src=x>'; expect(el.querySelector('img')).toBeNull(); el.value = ''; expect(form.checkValidity()).toBe(false);
+  form.reset(); await tick(); expect(input.value).toBe('A portrait'); expect(el.value).toBe('A portrait');
+});
+it('async search aborts previous providers, ignores late results and emits inert choices', async () => {
+  document.body.innerHTML = '<form><mo-search-field name="query" delay="0"></mo-search-field></form>';
+  const el: any = host('search-field'), calls: { query: string; signal: AbortSignal; resolve: (value: any) => void }[] = [];
+  el.provider = (query: string, { signal }: { signal: AbortSignal }) => new Promise(resolve => calls.push({ query, signal, resolve }));
+  el.search('old'); await tick(); el.search('new'); await tick(); expect(calls[0].signal.aborted).toBe(true);
+  calls[1].resolve([{ value: 'new', label: '<img src=x>', description: 'New result' }]); await tick(); calls[0].resolve([{ value: 'old', label: 'Stale' }]); await tick();
+  expect(el.results.map((row: any) => row.value)).toEqual(['new']); expect(el.querySelector('img')).toBeNull(); const selected = vi.fn(); el.addEventListener('usa:select', selected); el.querySelector('ul button').click(); expect(el.value).toBe('<img src=x>'); expect(selected.mock.calls[0][0].detail.value).toBe('new'); expect(new FormData(document.querySelector('form')!).get('query')).toBe('<img src=x>');
+  el.search('disconnect'); await tick(); el.remove(); expect(calls[2].signal.aborted).toBe(true); calls[2].resolve([]); await tick(); expect(el.results).toEqual([]);
+});
+it('search waits for composition and cancels debounce on disable or form reset', async () => {
+  document.body.innerHTML = '<form><mo-search-field delay="0" value="initial"></mo-search-field></form>'; const el: any = host('search-field'), provider = vi.fn(() => []); el.provider = provider;
+  const input = el.input as HTMLInputElement; input.dispatchEvent(new CompositionEvent('compositionstart')); input.value = '南'; input.dispatchEvent(new Event('input')); await tick(); expect(provider).not.toHaveBeenCalled(); input.dispatchEvent(new CompositionEvent('compositionend')); await tick(); await tick(); expect(provider).toHaveBeenCalledTimes(1);
+  input.value = 'cancel'; input.dispatchEvent(new Event('input')); el.setAttribute('disabled', ''); await tick(); expect(provider).toHaveBeenCalledTimes(1); document.querySelector('form')!.reset(); await tick(); expect(el.value).toBe('initial');
+});
+it('stepper validates skipped steps, retains FormData and original nodes, completes and restores panels', async () => {
+  document.body.innerHTML = '<form><mo-form-stepper><section data-form-step data-step-title="Details"><input name="title" required></section><section data-form-step data-step-title="Review"><textarea name="note">Initial note</textarea></section></mo-form-stepper></form>';
+  const el: any = host('form-stepper'), form = document.querySelector('form')!, panels = el.querySelectorAll('section'), input = el.querySelector('input');
+  expect(el.count).toBe(2); expect(el.next()).toBe(false); expect(el.step).toBe(0); expect(document.activeElement).toBe(input);
+  input.value = 'Portrait'; expect(el.next()).toBe(true); expect(el.step).toBe(1); expect(panels[0].hidden).toBe(true); expect(new FormData(form).get('title')).toBe('Portrait');
+  const complete = vi.fn(); el.addEventListener('usa:complete', complete); el.querySelector('.usa-form-step-actions button:last-child').click(); expect(complete.mock.calls[0][0].detail).toEqual({ step: 1, count: 2 }); expect(el.querySelector('input')).toBe(input);
+  el.setAttribute('disabled', ''); form.reset(); await tick(); expect(el.step).toBe(0); el.remove(); expect(panels[0].hidden || panels[1].hidden).toBe(false); expect(el.querySelector('.usa-form-step-actions')).toBeNull(); form.append(el); expect(el.querySelectorAll('.usa-form-step-actions')).toHaveLength(1);
 });

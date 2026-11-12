@@ -1587,6 +1587,45 @@
  },
  {
   "kind": "widget",
+  "name": "textarea",
+  "entry": "motionary/widgets/textarea",
+  "src": "src/entries/widgets/textarea.ts",
+  "tag": "usa-textarea",
+  "define": "defineTextarea",
+  "types": [
+   "UsaTextareaElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/textarea"
+ },
+ {
+  "kind": "widget",
+  "name": "search-field",
+  "entry": "motionary/widgets/search-field",
+  "src": "src/entries/widgets/search-field.ts",
+  "tag": "usa-search-field",
+  "define": "defineSearchField",
+  "types": [
+   "UsaSearchFieldElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/search-field"
+ },
+ {
+  "kind": "widget",
+  "name": "form-stepper",
+  "entry": "motionary/widgets/form-stepper",
+  "src": "src/entries/widgets/form-stepper.ts",
+  "tag": "usa-form-stepper",
+  "define": "defineFormStepper",
+  "types": [
+   "UsaFormStepperElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/form-stepper"
+ },
+ {
+  "kind": "widget",
   "name": "select",
   "entry": "motionary/widgets/select",
   "src": "src/entries/widgets/select.ts",

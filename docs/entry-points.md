@@ -12,7 +12,7 @@ registerPearlescent(); defineFx(); // <usa-fx effect="pearlescent">
 
 Notes: an effect entry imports its pack file (the effects of a pack share helpers), so its size is the pack’s, not the whole 6.x set. Runtime-powered widgets still need their prerequisites (`use(…)`, see the Requires badge). The group entries (`motionary/components/widgets`, `/fx2`, `/lite`) are unchanged.
 
-## Widgets (168)
+## Widgets (171)
 
 | Tag | Import | Define |
 |---|---|---|
@@ -138,6 +138,9 @@ Notes: an effect entry imports its pack file (the effects of a pack share helper
 | `<usa-file-tree>` | `motionary/widgets/file-tree` | `defineFileTree()` |
 | `<usa-download-menu>` | `motionary/widgets/download-menu` | `defineDownloadMenu()` |
 | `<usa-title-sequence>` | `motionary/widgets/title-sequence` | `defineTitleSequence()` |
+| `<usa-textarea>` | `motionary/widgets/textarea` | `defineTextarea()` |
+| `<usa-search-field>` | `motionary/widgets/search-field` | `defineSearchField()` |
+| `<usa-form-stepper>` | `motionary/widgets/form-stepper` | `defineFormStepper()` |
 | `<usa-select>` | `motionary/widgets/select` | `defineSelect()` |
 | `<usa-combobox>` | `motionary/widgets/combobox` | `defineCombobox()` |
 | `<usa-multi-select>` | `motionary/widgets/multi-select` | `defineMultiSelect()` |

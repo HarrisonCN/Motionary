@@ -1,4 +1,4 @@
-# Motionary components (259)
+# Motionary components (262)
 
 One page per `<usa-*>` element, generated from the source. Machine-readable: `motionary/tooling/manifest.json` · Pages `/components.json` · `/llms.txt` · `/llms-full.txt`. How to use these with an AI assistant: [AGENTS.md](../../AGENTS.md) and [the prompt guide](../ai-prompt-guide.md).
 
@@ -59,6 +59,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-field>`](usa-field.md) — Animated field
 - [`<mo-file-tree>`](usa-file-tree.md) — File tree
 - [`<mo-flight-status>`](usa-flight-status.md) — Flight status
+- [`<mo-form-stepper>`](usa-form-stepper.md) — Validated form steps
 - [`<mo-fullscreen-menu>`](usa-fullscreen-menu.md) — Full-screen menu (circle / curtain reveal)
 - [`<mo-gauge>`](usa-gauge.md) — Spring gauge
 - [`<mo-gen-art>`](usa-gen-art.md) — Generative artwork
@@ -132,6 +133,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-route-sparkline>`](usa-route-sparkline.md) — Route sparkline
 - [`<mo-scene>`](usa-scene.md) — Cinematic scene
 - [`<mo-scrub-number>`](usa-scrub-number.md) — Scrub number
+- [`<mo-search-field>`](usa-search-field.md) — Cancelable async search
 - [`<mo-segmented>`](usa-segmented.md) — Segmented control
 - [`<mo-select>`](usa-select.md) — Native select
 - [`<mo-shader-backdrop>`](usa-shader-backdrop.md) — Shader backdrop + post chain
@@ -150,6 +152,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-tab-bar>`](usa-tab-bar.md) — Tabs with animated indicator
 - [`<mo-tabs>`](usa-tabs.md) — Tabs
 - [`<mo-terminal>`](usa-terminal.md) — Terminal window
+- [`<mo-textarea>`](usa-textarea.md) — Adaptive textarea
 - [`<mo-theme-surface>`](usa-theme-surface.md) — Theme surface
 - [`<mo-theme-switcher>`](usa-theme-switcher.md) — Theme switcher
 - [`<mo-tip>`](usa-tip.md) — Tooltip / popover 2.0

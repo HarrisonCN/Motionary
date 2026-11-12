@@ -1415,6 +1415,42 @@
       "usa:validate": [
         "{count, valid}"
       ]
+    },
+    "usa-form-stepper": {
+      "usa:complete": [
+        "{count, step}"
+      ],
+      "usa:invalid": [
+        "{step}"
+      ],
+      "usa:step-change": [
+        "{count, previous, step}"
+      ]
+    },
+    "usa-search-field": {
+      "usa:error": [
+        "{query}"
+      ],
+      "usa:input": [
+        "{value}"
+      ],
+      "usa:query": [
+        "{query, signal}"
+      ],
+      "usa:results": [
+        "{count, query}"
+      ],
+      "usa:select": [
+        "{...result}"
+      ]
+    },
+    "usa-textarea": {
+      "usa:change": [
+        "{value}"
+      ],
+      "usa:input": [
+        "{value}"
+      ]
     }
   }
 }

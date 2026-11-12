@@ -2,7 +2,7 @@
 
 The goal is a broad, beautiful and usable motion repository. Component count and artifact size have no imposed caps. Breadth is tracked through independent public capabilities, not aliases, palette variations or repeated examples. “World’s most complete / best looking” is an ambition, not a verified ranking.
 
-The 17.7 source inventory contains **259 components** (91 core, 168 widgets), **214 reveal presets** and **156 effects**. Counts are generated from the source manifest; `mo-*` and `usa-*` aliases count once. A source implementation is not automatically a released or remotely verified feature. [Release history](../CHANGELOG.md), PR checks and npm dist-tags are the respective sources of truth.
+The 17.7 source inventory contains **262 components** (91 core, 171 widgets), **214 reveal presets** and **156 effects**. Counts are generated from the source manifest; `mo-*` and `usa-*` aliases count once. A source implementation is not automatically a released or remotely verified feature. [Release history](../CHANGELOG.md), PR checks and npm dist-tags are the respective sources of truth.
 
 ## Coverage matrix
 
@@ -13,7 +13,7 @@ This is a source-based family map, not a claim that every feature in a family is
 | Text and typography | Reveal, split text, typewriter, rotating and fluid type, loupe, film titles | Editable typographic treatments, expressive multilingual text layouts, selection annotations |
 | Backgrounds and materials | Gradients, particles, liquid metal, reaction field, ink flow, gravity and magnetic fields | Material presets with shared tokens; fine-grained GPU/CPU fallbacks; new original procedural scenes |
 | Navigation and discovery | Dock, tabs, tab bar, command palette, breadcrumbs, menus | Full sidebar layouts, announcement bar, dedicated search bar, synchronized scrollspy |
-| Forms and selection | Animated native text field, switch, checkbox, date picker and Form Atelier’s nine entries | Dedicated textarea, async autocomplete with cancellation, date range, multi-step forms, subscription form |
+| Forms and selection | Animated native text field, switch, checkbox, date picker and Form Atelier’s twelve entries | Date range, subscription form and advanced asynchronous pagination |
 | Calls to action and conversion | Magnetic / particle / hold buttons, explicit CTA popup, download menu | Pricing comparison, sticky CTA layouts, coupon entry, dedicated download button and empty-state actions |
 | Media and galleries | Carousel, swipe deck, product gallery, video card, card wall, film titles | Independent expanding-card and fan carousels, robust zoomable lightbox, hotspots and captions |
 | Data and inspection | Sparkline, bar/sketch charts, KPIs, file tree, timeline and terminal | Dedicated data table and JSON viewer, large-data virtualization, tree-grid navigation, filtering/sorting with accessible status |
@@ -39,7 +39,7 @@ Capabilities already embedded in a compound component are credited as partial co
 | Batch | Deliverable | Current status |
 |---|---|---|
 | 17.6 Matter & Motion | 13 widgets, six effects, interaction laboratory | Published: GitHub and both npm package names at 17.6.0 |
-| 17.7 Form Atelier | Nine widgets, four finite feedback effects, form APIs and demo | Implemented; acceptance is recorded in [PR #187](https://github.com/HarrisonCN/Motionary/pull/187), publication in the release tags |
+| 17.7 Form Atelier | Twelve widgets, four finite feedback effects, form APIs and demo | Implemented; acceptance is recorded in [PR #187](https://github.com/HarrisonCN/Motionary/pull/187), publication in the release tags |
 | Navigation and conversion | Sidebar, scrollspy, announcement/search, pricing/sticky CTA compositions | Proposed; not implemented or counted |
 | Media and editorial | Expanded/fan galleries, lightbox/hotspots, editorial compositions | Proposed; not implemented or counted |
 | Data and application surfaces | Virtualized exploration, tree grids, complete reference layouts | Proposed; not implemented or counted |

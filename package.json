@@ -1,7 +1,7 @@
 {
   "name": "motionary",
   "version": "17.7.0",
-  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 259 animated Web Components (91 core, 168 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
+  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 262 animated Web Components (91 core, 171 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
   "unpkg": "dist/index.umd.js",
@@ -3168,6 +3168,36 @@
       "require": {
         "types": "./dist/widgets/title-sequence.d.cts",
         "default": "./dist/widgets/title-sequence.cjs"
+      }
+    },
+    "./widgets/textarea": {
+      "import": {
+        "types": "./dist/widgets/textarea.d.ts",
+        "default": "./dist/widgets/textarea.js"
+      },
+      "require": {
+        "types": "./dist/widgets/textarea.d.cts",
+        "default": "./dist/widgets/textarea.cjs"
+      }
+    },
+    "./widgets/search-field": {
+      "import": {
+        "types": "./dist/widgets/search-field.d.ts",
+        "default": "./dist/widgets/search-field.js"
+      },
+      "require": {
+        "types": "./dist/widgets/search-field.d.cts",
+        "default": "./dist/widgets/search-field.cjs"
+      }
+    },
+    "./widgets/form-stepper": {
+      "import": {
+        "types": "./dist/widgets/form-stepper.d.ts",
+        "default": "./dist/widgets/form-stepper.js"
+      },
+      "require": {
+        "types": "./dist/widgets/form-stepper.d.cts",
+        "default": "./dist/widgets/form-stepper.cjs"
       }
     },
     "./widgets/select": {

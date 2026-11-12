@@ -43,3 +43,20 @@ for (const width of [1280, 390]) {
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true); await page.evaluate(() => window.scrollTo(0, 0)); await page.screenshot({ path: info.outputPath(`form-atelier-${width}.png`), fullPage: true }); expectNoErrors(page);
   });
 }
+
+test('user reset buttons reconcile all native controls after their default action', async ({ page }) => {
+  await setup(page, '<form><mo-textarea name="brief" label="Brief" value="Initial" auto-resize></mo-textarea><mo-number-stepper value="3"></mo-number-stepper><mo-range-slider low="20" high="80"></mo-range-slider><button type="reset">Reset all</button></form>');
+  for (let i = 0; i < 2; i++) { await page.getByRole('textbox', { name: 'Brief' }).fill('Changed'); await page.getByRole('button', { name: 'Increase', exact: true }).click(); await page.getByRole('button', { name: 'Reset all' }).click(); await expect(page.getByRole('textbox', { name: 'Brief' })).toHaveValue('Initial'); await expect(page.getByRole('spinbutton')).toHaveValue('3'); await expect(page.getByRole('slider').first()).toHaveValue('20'); } expectNoErrors(page);
+});
+test('search keeps only the newest request and supports result keyboard activation', async ({ page }) => {
+  await setup(page, '<mo-search-field label="Search collections" delay="0"></mo-search-field>');
+  await page.locator('mo-search-field').evaluate(el => { window.requests = []; el.provider = (query, { signal }) => new Promise(resolve => window.requests.push({ query, signal, resolve })); });
+  const input = page.getByRole('searchbox', { name: 'Search collections' }); await input.fill('old'); await expect.poll(() => page.evaluate(() => window.requests.length)).toBe(1); await input.fill('new'); await expect.poll(() => page.evaluate(() => window.requests.length)).toBe(2);
+  expect(await page.evaluate(() => window.requests[0].signal.aborted)).toBe(true); await page.evaluate(() => { window.requests[1].resolve([{ value: 'new', label: 'New collection' }]); window.requests[0].resolve([{ value: 'old', label: 'Stale collection' }]); });
+  await expect(page.getByRole('button', { name: 'New collection' })).toBeVisible(); await expect(page.getByRole('button', { name: 'Stale collection' })).toHaveCount(0); await input.press('ArrowDown'); await page.getByRole('button', { name: 'New collection' }).press('Enter'); await expect(input).toHaveValue('New collection'); await expect(input).toBeFocused(); expectNoErrors(page);
+});
+test('stepper validates each step, focuses fields and keeps earlier values in the form', async ({ page }) => {
+  await setup(page, '<form><mo-form-stepper><section data-form-step data-step-title="Project"><label>Project title<input name="title" required></label></section><section data-form-step data-step-title="Notes"><mo-textarea label="Notes" name="notes"></mo-textarea></section></mo-form-stepper><button type="reset">Reset flow</button></form>');
+  const input = page.getByRole('textbox', { name: 'Project title' }); await page.getByRole('button', { name: 'Continue', exact: true }).click(); await expect(input).toBeFocused(); await input.fill('Hero City'); await page.getByRole('button', { name: 'Continue', exact: true }).click(); await expect(page.getByRole('textbox', { name: 'Notes' })).toBeFocused(); await page.getByRole('textbox', { name: 'Notes' }).fill('A city in motion'); expect(await page.locator('form').evaluate(form => Object.fromEntries(new FormData(form)))).toEqual({ title: 'Hero City', notes: 'A city in motion' });
+  await page.locator('mo-form-stepper').evaluate(el => { el.addEventListener('usa:complete', () => el.dataset.complete = 'true'); }); await page.getByRole('button', { name: 'Complete', exact: true }).click(); await expect(page.locator('mo-form-stepper')).toHaveAttribute('data-complete', 'true'); await page.getByRole('button', { name: 'Reset flow' }).click(); await expect(input).toBeVisible(); await expect(input).toHaveValue(''); expectNoErrors(page);
+});

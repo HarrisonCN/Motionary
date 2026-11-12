@@ -7,9 +7,15 @@ export function numberValue(value: unknown, fallback: number, min = -1e12, max =
   const n = Number(value); return Math.max(min, Math.min(max, Number.isFinite(n) ? n : fallback));
 }
 export function formReset(host: UsaBase, reset: () => void): void {
-  let active = true; host.onCleanup(() => { active = false; });
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  host.onCleanup(() => clearTimeout(timer));
   const form = host.closest('form');
-  if (form) host.listen(form, 'reset', (event: Event) => queueMicrotask(() => { if (active && host.isConnected && !event.defaultPrevented) reset(); }));
+  // A microtask from a user-activated reset listener can run before the browser
+  // resets native controls. Reconcile in the next task, after the default action.
+  if (form) host.listen(form, 'reset', (event: Event) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => { if (host.isConnected && !event.defaultPrevented) reset(); }, 0);
+  });
 }
 export function formMotion(host: UsaBase): (el: Element) => void {
   const animations = new Set<Animation>();

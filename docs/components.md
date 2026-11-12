@@ -1,6 +1,6 @@
 # Animated components (`motionary/components`)
 
-The package ships **<!--fact:public-->259<!--/fact--> animated Web Components** (`<usa-*>` custom elements): <!--fact:core-->91<!--/fact--> core components in `motionary/components` and <!--fact:widgets-->168<!--/fact--> widgets with their own entry points (see [How components are counted](#how-components-are-counted)). They are built only on Custom Elements, CSS and the Web Animations API, so the same code runs:
+The package ships **<!--fact:public-->262<!--/fact--> animated Web Components** (`<usa-*>` custom elements): <!--fact:core-->91<!--/fact--> core components in `motionary/components` and <!--fact:widgets-->171<!--/fact--> widgets with their own entry points (see [How components are counted](#how-components-are-counted)). They are built only on Custom Elements, CSS and the Web Animations API, so the same code runs:
 
 - in any modern browser (Chrome, Edge, Firefox, Safari), and with React, Vue, Svelte, Solid, Angular or no framework;
 - in **Windows desktop software** that renders its UI with a web view — Electron, Tauri (WebView2), WinUI 3 / WPF / WinForms with WebView2, and installed PWAs. See **[Windows apps guide](./windows-apps.md)**.
@@ -14,13 +14,13 @@ Live gallery: <https://harrisoncn.github.io/Motionary/showcase/components.html>
 
 | Count | Value | What it counts |
 |---|---|---|
-| **All public components** | **259** | Every `<usa-*>` element in the manifest (`motionary/tooling/manifest.json`, `/components.json`). Each has a contract (`npm run check:contract`), a docs page and a gzip budget. |
+| **All public components** | **262** | Every `<usa-*>` element in the manifest (`motionary/tooling/manifest.json`, `/components.json`). Each has a contract (`npm run check:contract`), a docs page and a gzip budget. |
 | **Core components** | **91** | Elements registered by `motionary/components` (`defineComponents()`, CDN `components.umd.js`), imported by category (`motionary/components/<category>`). |
-| Widgets | 168 | Elements with their own entry point `motionary/widgets/<name>`. 165 of them are also in the no-build `widgets.umd.js`; 3 (`<usa-dotlottie>`, `<usa-gl-model>`, `<usa-snap-carousel>`) load only from their own ES module entry. |
+| Widgets | 171 | Elements with their own entry point `motionary/widgets/<name>`. 168 of them are also in the no-build `widgets.umd.js`; 3 (`<usa-dotlottie>`, `<usa-gl-model>`, `<usa-snap-carousel>`) load only from their own ES module entry. |
 | Effects | 156 | Effects with their own entry point `motionary/effects/<name>` (not elements, not in the counts above). |
 | Runtime modules | 20 + core | `motionary/runtime/<module>`; plus 3 official runtimes as optional peer dependencies. |
 
-Core + widgets = all public components (91 + 168 = 259). "Core" is about how an element is registered, not about its quality or stability: every public component is held to the same contract.
+Core + widgets = all public components (91 + 171 = 262). "Core" is about how an element is registered, not about its quality or stability: every public component is held to the same contract.
 <!-- counting:end -->
 
 ## Principles

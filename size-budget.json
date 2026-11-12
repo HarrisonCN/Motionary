@@ -2580,5 +2580,20 @@
     "name": "import 'motionary/fx/draw' (17.7; report only)",
     "import": "export * from 'pkg/fx/draw';",
     "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/textarea' (per-entry, fixed)",
+    "import": "import { defineTextarea } from 'pkg/widgets/textarea'; console.log(defineTextarea);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/search-field' (per-entry, fixed)",
+    "import": "import { defineSearchField } from 'pkg/widgets/search-field'; console.log(defineSearchField);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/form-stepper' (per-entry, fixed)",
+    "import": "import { defineFormStepper } from 'pkg/widgets/form-stepper'; console.log(defineFormStepper);",
+    "limit": 0
   }
 ]

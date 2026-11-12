@@ -1,3 +1,7 @@
+export type { SearchProvider, SearchResult } from './search-field';
+import { defineTextarea, type UsaTextareaElement } from './textarea';
+import { defineSearchField, type UsaSearchFieldElement } from './search-field';
+import { defineFormStepper, type UsaFormStepperElement } from './form-stepper';
 export type { FormChoice } from './form-options';
 export type { FormIssue } from './validation-summary';
 import { defineSelect, type UsaSelectElement } from './select';
@@ -333,6 +337,8 @@ export { defineRevisionReveal, type UsaRevisionRevealElement };
 export { defineHoldAction, type UsaHoldActionElement };
 export { defineScrubNumber, type UsaScrubNumberElement };
 
+export { defineTextarea, type UsaTextareaElement, defineSearchField, type UsaSearchFieldElement, defineFormStepper, type UsaFormStepperElement };
+
 export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElementConstructor | undefined>> = {
   '6.2': { 'usa-carousel': defineCarousel, 'usa-tab-bar': defineTabBar, 'usa-disclosure': defineDisclosure, 'usa-stories': defineStories },
   '6.3': { 'usa-toast-stack': defineToastStack, 'usa-modal': defineModal, 'usa-sheet': defineSheet, 'usa-menu': defineMenu },
@@ -378,7 +384,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '10.6': { 'usa-lottie-player': defineLottiePlayer, 'usa-rive': defineRive, 'usa-token-editor': defineTokenEditor },
   '10.7': { 'usa-physics-playground': definePhysicsPlayground, 'usa-motion-prompt': defineMotionPrompt },
   '17.3': { 'usa-mega-menu': defineMegaMenu, 'usa-nav-flyout': defineNavFlyout, 'usa-fullscreen-menu': defineFullscreenMenu, 'usa-breadcrumbs': defineBreadcrumbs, 'usa-file-tree': defineFileTree, 'usa-download-menu': defineDownloadMenu, 'usa-title-sequence': defineTitleSequence },
-  '17.7': { 'usa-select': defineSelect, 'usa-combobox': defineCombobox, 'usa-multi-select': defineMultiSelect, 'usa-number-stepper': defineNumberStepper, 'usa-password': definePassword, 'usa-range-slider': defineRangeSlider, 'usa-consent': defineConsent, 'usa-cta-popup': defineCtaPopup, 'usa-validation-summary': defineValidationSummary },
+  '17.7': { 'usa-textarea': defineTextarea, 'usa-search-field': defineSearchField, 'usa-form-stepper': defineFormStepper, 'usa-select': defineSelect, 'usa-combobox': defineCombobox, 'usa-multi-select': defineMultiSelect, 'usa-number-stepper': defineNumberStepper, 'usa-password': definePassword, 'usa-range-slider': defineRangeSlider, 'usa-consent': defineConsent, 'usa-cta-popup': defineCtaPopup, 'usa-validation-summary': defineValidationSummary },
   '17.6': { 'usa-gravity-well': defineGravityWell, 'usa-liquid-metal': defineLiquidMetal, 'usa-reaction-field': defineReactionField, 'usa-ink-flow': defineInkFlow, 'usa-fluid-type': defineFluidType, 'usa-magnetic-field': defineMagneticField, 'usa-elastic-mesh': defineElasticMesh, 'usa-spring-lab': defineSpringLab, 'usa-bezier-lab': defineBezierLab, 'usa-text-loupe': defineTextLoupe, 'usa-revision-reveal': defineRevisionReveal, 'usa-hold-action': defineHoldAction, 'usa-scrub-number': defineScrubNumber },
   '17.5': { 'usa-flight-status': defineFlightStatus, 'usa-transit-progress': defineTransitProgress, 'usa-sun-timeline': defineSunTimeline, 'usa-delivery-tracker': defineDeliveryTracker, 'usa-glucose-sparkline': defineGlucoseSparkline, 'usa-coffee-timer': defineCoffeeTimer, 'usa-vital-wave': defineVitalWave, 'usa-orbit-pass': defineOrbitPass, 'usa-meter-countdown': defineMeterCountdown, 'usa-race-telemetry': defineRaceTelemetry, 'usa-workout-player': defineWorkoutPlayer, 'usa-status-pill': defineStatusPill, 'usa-ride-status': defineRideStatus, 'usa-route-sparkline': defineRouteSparkline, 'usa-activity-wall': defineActivityWall },
   '17.4': { 'usa-luminous-switch': defineLuminousSwitch, 'usa-particle-icon': defineParticleIcon, 'usa-particle-button': defineParticleButton, 'usa-halo-segmented': defineHaloSegmented, 'usa-halo-slider': defineHaloSlider, 'usa-orbit-progress': defineOrbitProgress },
@@ -404,6 +410,12 @@ declare global {
     'mo-combobox': UsaComboboxElement;
     'usa-multi-select': UsaMultiSelectElement;
     'mo-multi-select': UsaMultiSelectElement;
+    'usa-textarea': UsaTextareaElement;
+    'mo-textarea': UsaTextareaElement;
+    'usa-search-field': UsaSearchFieldElement;
+    'mo-search-field': UsaSearchFieldElement;
+    'usa-form-stepper': UsaFormStepperElement;
+    'mo-form-stepper': UsaFormStepperElement;
     'usa-number-stepper': UsaNumberStepperElement;
     'mo-number-stepper': UsaNumberStepperElement;
     'usa-password': UsaPasswordElement;
