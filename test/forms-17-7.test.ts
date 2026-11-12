@@ -96,3 +96,12 @@ it('stepper validates skipped steps, retains FormData and original nodes, comple
   const complete = vi.fn(); el.addEventListener('usa:complete', complete); el.querySelector('.usa-form-step-actions button:last-child').click(); expect(complete.mock.calls[0][0].detail).toEqual({ step: 1, count: 2 }); expect(el.querySelector('input')).toBe(input);
   el.setAttribute('disabled', ''); form.reset(); await tick(); expect(el.step).toBe(0); el.remove(); expect(panels[0].hidden || panels[1].hidden).toBe(false); expect(el.querySelector('.usa-form-step-actions')).toBeNull(); form.append(el); expect(el.querySelectorAll('.usa-form-step-actions')).toHaveLength(1);
 });
+
+
+it('a synchronous query listener can cancel or disable search before its provider starts', async () => {
+  document.body.innerHTML = '<mo-search-field></mo-search-field>'; const el: any = host('search-field'), provider = vi.fn(() => []); el.provider = provider;
+  el.addEventListener('usa:query', () => el.setAttribute('disabled', ''), { once: true }); el.search('portrait'); await tick();
+  expect(provider).not.toHaveBeenCalled(); expect(el.querySelector('[aria-busy]')).toBeNull(); expect(el.querySelector('[role=status]').textContent).toBe('');
+  el.removeAttribute('disabled'); el.addEventListener('usa:query', () => el.cancel(), { once: true }); el.search('city'); await tick();
+  expect(provider).not.toHaveBeenCalled(); expect(el.querySelector('[aria-busy]')).toBeNull();
+});

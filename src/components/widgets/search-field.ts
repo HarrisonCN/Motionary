@@ -51,7 +51,7 @@ export function defineSearchField(tag = 'usa-search-field'): CustomElementConstr
         cancel(); if (this.flag('disabled') || query.trim().length < numberValue(this.num('min-length', 1), 1, 0, 1000)) return;
         const id = serial, controller = new AbortController(); request = controller;
         this.emit('query', { query, signal: controller.signal });
-        if (!this._provider) return;
+        if (!alive || id !== serial || controller.signal.aborted || this.flag('disabled') || !this._provider) return;
         root.setAttribute('aria-busy', 'true'); status.textContent = this.str('loading-text', 'Searching…');
         Promise.resolve().then(() => { if (controller.signal.aborted) return []; return this._provider?.(query, { signal: controller.signal }) ?? []; }).then(rows => {
           if (!alive || id !== serial || controller.signal.aborted) return;
