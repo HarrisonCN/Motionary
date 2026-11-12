@@ -111,3 +111,8 @@ Register with `defineFormStepper()` from `motionary/widgets/form-stepper`. Direc
 `step` is zero-based; `count` is read-only. `next()`, `back()` and `goTo(index)` return whether navigation succeeded; `reset()` returns to the first step (the surrounding native form resets values); `refresh()` discovers changed direct panels. `back-label`, `next-label`, `complete-label`, `label`, `hint` and `disabled` customize navigation. Completion validates every step and emits cancelable `usa:complete` with `{ step, count }`; it does not submit or send data. The application can read `FormData` or explicitly call its form’s `requestSubmit()`. `usa:step-change` includes `{ step, previous, count }`; `usa:invalid` includes `{ step }`. Removing the component restores panels’ original visibility and tabindex.
 
 A user-activated form reset is reconciled in the next task after the browser’s native default action. Touch combobox selection commits on a stationary pointer release, so Safari does not depend on a compatibility click after canceled pointerdown; scrolling/canceled gestures do not choose an option.
+
+
+## Remote build acceptance
+
+CI builds from source before running the contract and unit suites, so checks read current CDN bundles rather than a previous distribution. For same-repository pull requests authored and updated by the repository owner, the distribution-sync workflow regenerates and commits only `dist/`. It never runs with write access on fork contributions and does not persist checkout credentials. Final acceptance is recorded on the resulting PR head, including its generated distribution.
