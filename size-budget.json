@@ -2310,5 +2310,200 @@
     "name": "import 'motionary/widgets/activity-wall' (per-entry, fixed)",
     "import": "import { defineActivityWall } from 'pkg/widgets/activity-wall'; console.log(defineActivityWall);",
     "limit": 0
+  },
+  {
+    "name": "dist/widgets/gravity-well.js (17.6; report only)",
+    "file": "dist/widgets/gravity-well.js",
+    "limit": 0
+  },
+  {
+    "name": "dist/widgets/liquid-metal.js (17.6; report only)",
+    "file": "dist/widgets/liquid-metal.js",
+    "limit": 0
+  },
+  {
+    "name": "dist/widgets/reaction-field.js (17.6; report only)",
+    "file": "dist/widgets/reaction-field.js",
+    "limit": 0
+  },
+  {
+    "name": "dist/widgets/ink-flow.js (17.6; report only)",
+    "file": "dist/widgets/ink-flow.js",
+    "limit": 0
+  },
+  {
+    "name": "dist/widgets/fluid-type.js (17.6; report only)",
+    "file": "dist/widgets/fluid-type.js",
+    "limit": 0
+  },
+  {
+    "name": "dist/widgets/magnetic-field.js (17.6; report only)",
+    "file": "dist/widgets/magnetic-field.js",
+    "limit": 0
+  },
+  {
+    "name": "dist/widgets/elastic-mesh.js (17.6; report only)",
+    "file": "dist/widgets/elastic-mesh.js",
+    "limit": 0
+  },
+  {
+    "name": "dist/widgets/spring-lab.js (17.6; report only)",
+    "file": "dist/widgets/spring-lab.js",
+    "limit": 0
+  },
+  {
+    "name": "dist/widgets/bezier-lab.js (17.6; report only)",
+    "file": "dist/widgets/bezier-lab.js",
+    "limit": 0
+  },
+  {
+    "name": "dist/widgets/text-loupe.js (17.6; report only)",
+    "file": "dist/widgets/text-loupe.js",
+    "limit": 0
+  },
+  {
+    "name": "dist/widgets/revision-reveal.js (17.6; report only)",
+    "file": "dist/widgets/revision-reveal.js",
+    "limit": 0
+  },
+  {
+    "name": "dist/widgets/hold-action.js (17.6; report only)",
+    "file": "dist/widgets/hold-action.js",
+    "limit": 0
+  },
+  {
+    "name": "dist/widgets/scrub-number.js (17.6; report only)",
+    "file": "dist/widgets/scrub-number.js",
+    "limit": 0
+  },
+  {
+    "name": "dist/effects/dust-vortex.js (17.6; report only)",
+    "file": "dist/effects/dust-vortex.js",
+    "limit": 0
+  },
+  {
+    "name": "dist/effects/mercury-morph.js (17.6; report only)",
+    "file": "dist/effects/mercury-morph.js",
+    "limit": 0
+  },
+  {
+    "name": "dist/effects/chemical-bloom.js (17.6; report only)",
+    "file": "dist/effects/chemical-bloom.js",
+    "limit": 0
+  },
+  {
+    "name": "dist/effects/magnetic-align.js (17.6; report only)",
+    "file": "dist/effects/magnetic-align.js",
+    "limit": 0
+  },
+  {
+    "name": "dist/effects/elastic-ripple.js (17.6; report only)",
+    "file": "dist/effects/elastic-ripple.js",
+    "limit": 0
+  },
+  {
+    "name": "dist/effects/liquid-level.js (17.6; report only)",
+    "file": "dist/effects/liquid-level.js",
+    "limit": 0
+  },
+  {
+    "name": "dist/components/fx-matter.js (17.6; report only)",
+    "file": "dist/components/fx-matter.js",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/gravity-well' (per-entry, fixed)",
+    "import": "import { defineGravityWell } from 'pkg/widgets/gravity-well'; console.log(defineGravityWell);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/liquid-metal' (per-entry, fixed)",
+    "import": "import { defineLiquidMetal } from 'pkg/widgets/liquid-metal'; console.log(defineLiquidMetal);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/reaction-field' (per-entry, fixed)",
+    "import": "import { defineReactionField } from 'pkg/widgets/reaction-field'; console.log(defineReactionField);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/ink-flow' (per-entry, fixed)",
+    "import": "import { defineInkFlow } from 'pkg/widgets/ink-flow'; console.log(defineInkFlow);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/fluid-type' (per-entry, fixed)",
+    "import": "import { defineFluidType } from 'pkg/widgets/fluid-type'; console.log(defineFluidType);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/magnetic-field' (per-entry, fixed)",
+    "import": "import { defineMagneticField } from 'pkg/widgets/magnetic-field'; console.log(defineMagneticField);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/elastic-mesh' (per-entry, fixed)",
+    "import": "import { defineElasticMesh } from 'pkg/widgets/elastic-mesh'; console.log(defineElasticMesh);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/spring-lab' (per-entry, fixed)",
+    "import": "import { defineSpringLab } from 'pkg/widgets/spring-lab'; console.log(defineSpringLab);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/bezier-lab' (per-entry, fixed)",
+    "import": "import { defineBezierLab } from 'pkg/widgets/bezier-lab'; console.log(defineBezierLab);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/text-loupe' (per-entry, fixed)",
+    "import": "import { defineTextLoupe } from 'pkg/widgets/text-loupe'; console.log(defineTextLoupe);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/revision-reveal' (per-entry, fixed)",
+    "import": "import { defineRevisionReveal } from 'pkg/widgets/revision-reveal'; console.log(defineRevisionReveal);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/hold-action' (per-entry, fixed)",
+    "import": "import { defineHoldAction } from 'pkg/widgets/hold-action'; console.log(defineHoldAction);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/scrub-number' (per-entry, fixed)",
+    "import": "import { defineScrubNumber } from 'pkg/widgets/scrub-number'; console.log(defineScrubNumber);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/effects/dust-vortex' (per-entry, fixed)",
+    "import": "import { registerDustVortex } from 'pkg/effects/dust-vortex'; console.log(registerDustVortex);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/effects/mercury-morph' (per-entry, fixed)",
+    "import": "import { registerMercuryMorph } from 'pkg/effects/mercury-morph'; console.log(registerMercuryMorph);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/effects/chemical-bloom' (per-entry, fixed)",
+    "import": "import { registerChemicalBloom } from 'pkg/effects/chemical-bloom'; console.log(registerChemicalBloom);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/effects/magnetic-align' (per-entry, fixed)",
+    "import": "import { registerMagneticAlign } from 'pkg/effects/magnetic-align'; console.log(registerMagneticAlign);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/effects/elastic-ripple' (per-entry, fixed)",
+    "import": "import { registerElasticRipple } from 'pkg/effects/elastic-ripple'; console.log(registerElasticRipple);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/effects/liquid-level' (per-entry, fixed)",
+    "import": "import { registerLiquidLevel } from 'pkg/effects/liquid-level'; console.log(registerLiquidLevel);",
+    "limit": 0
   }
 ]

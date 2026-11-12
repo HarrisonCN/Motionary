@@ -3,6 +3,8 @@
 
 /** New subpath → the existing subpath whose files it serves. Aliases point at the SAME dist files, so they add 0 bytes anywhere. */
 export const LAYER_ALIASES = {
+  // 17.6: original Matter studies; both paths remain public.
+  'fx/matter': 'components/fx-matter',
   'tooling/ai': 'components/ai',
   'tooling/design': 'components/design',
   'tooling/manifest.json': 'manifest.json',

@@ -1,7 +1,7 @@
 {
   "name": "motionary",
-  "version": "17.5.0",
-  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 237 animated Web Components (91 core, 146 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
+  "version": "17.6.0",
+  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 250 animated Web Components (91 core, 159 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
   "unpkg": "dist/index.umd.js",
@@ -1570,6 +1570,16 @@
         "default": "./dist/components/fx-hover.cjs"
       }
     },
+    "./components/fx-matter": {
+      "import": {
+        "types": "./dist/components/fx-matter.d.ts",
+        "default": "./dist/components/fx-matter.js"
+      },
+      "require": {
+        "types": "./dist/components/fx-matter.d.cts",
+        "default": "./dist/components/fx-matter.cjs"
+      }
+    },
     "./components/native": {
       "import": {
         "types": "./dist/components/native.d.ts",
@@ -3128,6 +3138,136 @@
       "require": {
         "types": "./dist/widgets/title-sequence.d.cts",
         "default": "./dist/widgets/title-sequence.cjs"
+      }
+    },
+    "./widgets/gravity-well": {
+      "import": {
+        "types": "./dist/widgets/gravity-well.d.ts",
+        "default": "./dist/widgets/gravity-well.js"
+      },
+      "require": {
+        "types": "./dist/widgets/gravity-well.d.cts",
+        "default": "./dist/widgets/gravity-well.cjs"
+      }
+    },
+    "./widgets/liquid-metal": {
+      "import": {
+        "types": "./dist/widgets/liquid-metal.d.ts",
+        "default": "./dist/widgets/liquid-metal.js"
+      },
+      "require": {
+        "types": "./dist/widgets/liquid-metal.d.cts",
+        "default": "./dist/widgets/liquid-metal.cjs"
+      }
+    },
+    "./widgets/reaction-field": {
+      "import": {
+        "types": "./dist/widgets/reaction-field.d.ts",
+        "default": "./dist/widgets/reaction-field.js"
+      },
+      "require": {
+        "types": "./dist/widgets/reaction-field.d.cts",
+        "default": "./dist/widgets/reaction-field.cjs"
+      }
+    },
+    "./widgets/ink-flow": {
+      "import": {
+        "types": "./dist/widgets/ink-flow.d.ts",
+        "default": "./dist/widgets/ink-flow.js"
+      },
+      "require": {
+        "types": "./dist/widgets/ink-flow.d.cts",
+        "default": "./dist/widgets/ink-flow.cjs"
+      }
+    },
+    "./widgets/fluid-type": {
+      "import": {
+        "types": "./dist/widgets/fluid-type.d.ts",
+        "default": "./dist/widgets/fluid-type.js"
+      },
+      "require": {
+        "types": "./dist/widgets/fluid-type.d.cts",
+        "default": "./dist/widgets/fluid-type.cjs"
+      }
+    },
+    "./widgets/magnetic-field": {
+      "import": {
+        "types": "./dist/widgets/magnetic-field.d.ts",
+        "default": "./dist/widgets/magnetic-field.js"
+      },
+      "require": {
+        "types": "./dist/widgets/magnetic-field.d.cts",
+        "default": "./dist/widgets/magnetic-field.cjs"
+      }
+    },
+    "./widgets/elastic-mesh": {
+      "import": {
+        "types": "./dist/widgets/elastic-mesh.d.ts",
+        "default": "./dist/widgets/elastic-mesh.js"
+      },
+      "require": {
+        "types": "./dist/widgets/elastic-mesh.d.cts",
+        "default": "./dist/widgets/elastic-mesh.cjs"
+      }
+    },
+    "./widgets/spring-lab": {
+      "import": {
+        "types": "./dist/widgets/spring-lab.d.ts",
+        "default": "./dist/widgets/spring-lab.js"
+      },
+      "require": {
+        "types": "./dist/widgets/spring-lab.d.cts",
+        "default": "./dist/widgets/spring-lab.cjs"
+      }
+    },
+    "./widgets/bezier-lab": {
+      "import": {
+        "types": "./dist/widgets/bezier-lab.d.ts",
+        "default": "./dist/widgets/bezier-lab.js"
+      },
+      "require": {
+        "types": "./dist/widgets/bezier-lab.d.cts",
+        "default": "./dist/widgets/bezier-lab.cjs"
+      }
+    },
+    "./widgets/text-loupe": {
+      "import": {
+        "types": "./dist/widgets/text-loupe.d.ts",
+        "default": "./dist/widgets/text-loupe.js"
+      },
+      "require": {
+        "types": "./dist/widgets/text-loupe.d.cts",
+        "default": "./dist/widgets/text-loupe.cjs"
+      }
+    },
+    "./widgets/revision-reveal": {
+      "import": {
+        "types": "./dist/widgets/revision-reveal.d.ts",
+        "default": "./dist/widgets/revision-reveal.js"
+      },
+      "require": {
+        "types": "./dist/widgets/revision-reveal.d.cts",
+        "default": "./dist/widgets/revision-reveal.cjs"
+      }
+    },
+    "./widgets/hold-action": {
+      "import": {
+        "types": "./dist/widgets/hold-action.d.ts",
+        "default": "./dist/widgets/hold-action.js"
+      },
+      "require": {
+        "types": "./dist/widgets/hold-action.d.cts",
+        "default": "./dist/widgets/hold-action.cjs"
+      }
+    },
+    "./widgets/scrub-number": {
+      "import": {
+        "types": "./dist/widgets/scrub-number.d.ts",
+        "default": "./dist/widgets/scrub-number.js"
+      },
+      "require": {
+        "types": "./dist/widgets/scrub-number.d.cts",
+        "default": "./dist/widgets/scrub-number.cjs"
       }
     },
     "./widgets/flight-status": {
@@ -4830,6 +4970,66 @@
         "default": "./dist/effects/googly-eyes.cjs"
       }
     },
+    "./effects/dust-vortex": {
+      "import": {
+        "types": "./dist/effects/dust-vortex.d.ts",
+        "default": "./dist/effects/dust-vortex.js"
+      },
+      "require": {
+        "types": "./dist/effects/dust-vortex.d.cts",
+        "default": "./dist/effects/dust-vortex.cjs"
+      }
+    },
+    "./effects/mercury-morph": {
+      "import": {
+        "types": "./dist/effects/mercury-morph.d.ts",
+        "default": "./dist/effects/mercury-morph.js"
+      },
+      "require": {
+        "types": "./dist/effects/mercury-morph.d.cts",
+        "default": "./dist/effects/mercury-morph.cjs"
+      }
+    },
+    "./effects/chemical-bloom": {
+      "import": {
+        "types": "./dist/effects/chemical-bloom.d.ts",
+        "default": "./dist/effects/chemical-bloom.js"
+      },
+      "require": {
+        "types": "./dist/effects/chemical-bloom.d.cts",
+        "default": "./dist/effects/chemical-bloom.cjs"
+      }
+    },
+    "./effects/magnetic-align": {
+      "import": {
+        "types": "./dist/effects/magnetic-align.d.ts",
+        "default": "./dist/effects/magnetic-align.js"
+      },
+      "require": {
+        "types": "./dist/effects/magnetic-align.d.cts",
+        "default": "./dist/effects/magnetic-align.cjs"
+      }
+    },
+    "./effects/elastic-ripple": {
+      "import": {
+        "types": "./dist/effects/elastic-ripple.d.ts",
+        "default": "./dist/effects/elastic-ripple.js"
+      },
+      "require": {
+        "types": "./dist/effects/elastic-ripple.d.cts",
+        "default": "./dist/effects/elastic-ripple.cjs"
+      }
+    },
+    "./effects/liquid-level": {
+      "import": {
+        "types": "./dist/effects/liquid-level.d.ts",
+        "default": "./dist/effects/liquid-level.js"
+      },
+      "require": {
+        "types": "./dist/effects/liquid-level.d.cts",
+        "default": "./dist/effects/liquid-level.cjs"
+      }
+    },
     "./components.css": "./dist/components.css",
     "./components/reveal.css": "./dist/components/reveal.css",
     "./components/text.css": "./dist/components/text.css",
@@ -4850,6 +5050,16 @@
     "./components/layout.css": "./dist/components/layout.css",
     "./components/packs.css": "./dist/components/packs.css",
     "./components/fx.css": "./dist/components/fx.css",
+    "./fx/matter": {
+      "import": {
+        "types": "./dist/components/fx-matter.d.ts",
+        "default": "./dist/components/fx-matter.js"
+      },
+      "require": {
+        "types": "./dist/components/fx-matter.d.cts",
+        "default": "./dist/components/fx-matter.cjs"
+      }
+    },
     "./package.json": "./package.json"
   },
   "files": [

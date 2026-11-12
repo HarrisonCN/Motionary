@@ -41,4 +41,4 @@ function defineActivityWall(tag = 'usa-activity-wall') {
 }
 
 export { defineActivityWall };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/widgets/activity-wall.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/widgets/activity-wall.js.map

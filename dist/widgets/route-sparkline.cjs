@@ -26,4 +26,4 @@ function defineRouteSparkline(tag = 'usa-route-sparkline') {
 }
 
 exports.defineRouteSparkline = defineRouteSparkline;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/widgets/route-sparkline.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/widgets/route-sparkline.cjs.map

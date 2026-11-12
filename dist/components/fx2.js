@@ -60,6 +60,7 @@ export { DEFAULT_MOTION_PREFS, MOTION_PREFS_KEY, applyMotionPreferences, flashCo
 import { PERF3_FX, registerPerf3Pack } from './fx-perf.js';
 export { fpsMeter, offscreenRender, runInWorker } from './fx-perf.js';
 import { HOVER_FX, registerHoverPack } from './fx-hover.js';
+import { MATTER_FX, registerMatterPack } from './fx-matter.js';
 import { registerEffects } from '../chunks/registry-DmYdTtl4.js';
 
 /** The 6.x effect packs by name. */
@@ -96,6 +97,7 @@ const EFFECT_PACKS = {
     safe: SAFE_FX,
     perf3: PERF3_FX,
     hover: HOVER_FX,
+    matter: MATTER_FX,
 };
 /** Register every built-in effect pack — each one is a plugin (9.9; idempotent). */
 function registerAllPlugins() {
@@ -131,6 +133,7 @@ function registerAllPlugins() {
     registerSafePack();
     registerPerf3Pack();
     registerHoverPack();
+    registerMatterPack();
 }
 const PACK_SOURCES = EFFECT_PACKS;
 /** Make a plugin object (9.9). */
@@ -158,5 +161,5 @@ function usePlugins(...plugins) {
     return names;
 }
 
-export { AI_FX, CHART_FX, CINEMA_FX, CYBER_FX, DEPTH3_FX, EFFECT_PACKS, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GENART_FX, GEO_FX, GESTURE3_FX, GPU_FX, HOVER_FX, LIGHT_FX, LOTTIE_FX, MORPH2_FX, MUSIC_FX, ORGANIC_FX, PAPER_FX, PERF3_FX, PHYSICS2_FX, RETRO_FX, SAFE_FX, SHOP_FX, SOCIAL_FX, SPATIAL_FX, SURFACE_FX, TEXT3_FX, TRANSITIONS2_FX, VIDEO_FX, WEATHER_FX, definePlugin, effectPlugins, register3dPack, registerAiPack, registerAllPlugins, registerChartPack, registerCinemaPack, registerCyberPack, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGenArtPack, registerGeoPack, registerGesture3Pack, registerGpuPack, registerHoverPack, registerLightPack, registerLottiePack, registerMorphPack, registerMusicPack, registerOrganicPack, registerPaperPack, registerPerf3Pack, registerPhysicsPack, registerRetroPack, registerSafePack, registerShopPack, registerSocialPack, registerSpatialPack, registerSurfacePack, registerTextPack, registerTransitionsPack, registerVideoPack, registerWeatherPack, usePlugins };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/components/fx2.js.map
+export { AI_FX, CHART_FX, CINEMA_FX, CYBER_FX, DEPTH3_FX, EFFECT_PACKS, FESTIVAL_FX, FOCUS_FX, FORM_FX, GAME_FX, GENART_FX, GEO_FX, GESTURE3_FX, GPU_FX, HOVER_FX, LIGHT_FX, LOTTIE_FX, MATTER_FX, MORPH2_FX, MUSIC_FX, ORGANIC_FX, PAPER_FX, PERF3_FX, PHYSICS2_FX, RETRO_FX, SAFE_FX, SHOP_FX, SOCIAL_FX, SPATIAL_FX, SURFACE_FX, TEXT3_FX, TRANSITIONS2_FX, VIDEO_FX, WEATHER_FX, definePlugin, effectPlugins, register3dPack, registerAiPack, registerAllPlugins, registerChartPack, registerCinemaPack, registerCyberPack, registerFestivalPack, registerFocusPack, registerFormPack, registerGamePack, registerGenArtPack, registerGeoPack, registerGesture3Pack, registerGpuPack, registerHoverPack, registerLightPack, registerLottiePack, registerMatterPack, registerMorphPack, registerMusicPack, registerOrganicPack, registerPaperPack, registerPerf3Pack, registerPhysicsPack, registerRetroPack, registerSafePack, registerShopPack, registerSocialPack, registerSpatialPack, registerSurfacePack, registerTextPack, registerTransitionsPack, registerVideoPack, registerWeatherPack, usePlugins };
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/components/fx2.js.map

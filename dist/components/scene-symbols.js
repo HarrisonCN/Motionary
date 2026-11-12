@@ -363,4 +363,4 @@ function symbolsToCss(doc, o = {}) {
 }
 
 export { addInstance, clearOverride, createSymbol, detachInstance, renameSymbol, setOverride, symbolUsage, symbolsToCss, updateSymbol, validateSymbols };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/components/scene-symbols.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/components/scene-symbols.js.map

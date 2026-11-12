@@ -1,2 +1,2 @@
 export { d as defineTabBar } from '../chunks/tab-bar-Bl0c_Z2L.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/widgets/tab-bar.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/widgets/tab-bar.js.map

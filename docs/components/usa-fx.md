@@ -863,3 +863,51 @@ Every timeline preset is also an enter effect: trigger="enter" plays it when the
   <a href="/work">View work</a>
 </mo-fx>
 ```
+
+### Dust vortex
+
+A finite Matter overlay; native content and focus stay intact.
+
+```html
+<mo-fx effect="dust-vortex" trigger="click"><button type="button" style="min-height:160px;width:100%;border-radius:14px;background:#10131a;color:#c9d9f4;border:1px solid #354056">Play dust-vortex</button></mo-fx>
+```
+
+### Mercury morph
+
+A finite Matter overlay; native content and focus stay intact.
+
+```html
+<mo-fx effect="mercury-morph" trigger="click"><button type="button" style="min-height:160px;width:100%;border-radius:14px;background:#10131a;color:#c9d9f4;border:1px solid #354056">Play mercury-morph</button></mo-fx>
+```
+
+### Chemical bloom
+
+A finite Matter overlay; native content and focus stay intact.
+
+```html
+<mo-fx effect="chemical-bloom" trigger="click"><button type="button" style="min-height:160px;width:100%;border-radius:14px;background:#10131a;color:#c9d9f4;border:1px solid #354056">Play chemical-bloom</button></mo-fx>
+```
+
+### Magnetic alignment
+
+A finite Matter overlay; native content and focus stay intact.
+
+```html
+<mo-fx effect="magnetic-align" trigger="click"><button type="button" style="min-height:160px;width:100%;border-radius:14px;background:#10131a;color:#c9d9f4;border:1px solid #354056">Play magnetic-align</button></mo-fx>
+```
+
+### Elastic ripple
+
+A finite Matter overlay; native content and focus stay intact.
+
+```html
+<mo-fx effect="elastic-ripple" trigger="click"><button type="button" style="min-height:160px;width:100%;border-radius:14px;background:#10131a;color:#c9d9f4;border:1px solid #354056">Play elastic-ripple</button></mo-fx>
+```
+
+### Liquid level
+
+A finite Matter overlay; native content and focus stay intact.
+
+```html
+<mo-fx effect="liquid-level" trigger="click"><button type="button" style="min-height:160px;width:100%;border-radius:14px;background:#10131a;color:#c9d9f4;border:1px solid #354056">Play liquid-level</button></mo-fx>
+```

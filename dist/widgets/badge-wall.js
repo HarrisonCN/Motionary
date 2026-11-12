@@ -1,2 +1,2 @@
 export { d as defineBadgeWall } from '../chunks/badge-wall-BIYTO_47.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/widgets/badge-wall.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/widgets/badge-wall.js.map

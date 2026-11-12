@@ -5,7 +5,7 @@ import { execFileSync } from 'node:child_process';
 import { installComponentMocks, anims } from './components-setup';
 import { MockIO } from './setup';
 import { createMotion, PRESETS, preferredBackend, VERSION } from '../src/components/core';
-import { ALL_PLUGINS, retro, cinema, paper } from '../src/components/plugins';
+import { ALL_PLUGINS, retro, cinema, paper, matter } from '../src/components/plugins';
 import { EFFECT_PACKS } from '../src/components/fx2';
 
 afterEach(() => vi.restoreAllMocks());
@@ -78,13 +78,15 @@ describe('10.0 zero-dependency core + plugins', () => {
 
   it('every built-in effect pack is a plugin; core.use() runs pack effects', () => {
     installComponentMocks();
-    expect(ALL_PLUGINS.length).toBe(Object.keys(EFFECT_PACKS).length);
+    expect(ALL_PLUGINS.map(p => p.name).sort()).toEqual(Object.keys(EFFECT_PACKS).sort());
+    for (const plugin of ALL_PLUGINS) expect(plugin.effects).toBe(EFFECT_PACKS[plugin.name]);
     expect(retro.effects).toBe(EFFECT_PACKS.retro);
     expect(cinema.name).toBe('cinema');
-    const m = createMotion().use(retro, cinema, paper);
+    const m = createMotion().use(retro, cinema, paper, matter);
     expect(m.has('vhs-glitch')).toBe(true);
     expect(m.has('dolly-in')).toBe(true);
     expect(m.has('paper-unfold')).toBe(true);
+    for (const effect of EFFECT_PACKS.matter) expect(m.has(effect.name)).toBe(true);
     expect(m.effects().length).toBeGreaterThan(Object.keys(PRESETS).length + 10);
   });
 

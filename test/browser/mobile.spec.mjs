@@ -385,3 +385,20 @@ test.describe('15.0 Motion Studio 2.0 app on a phone', () => {
     await expectNoErrors(page);
   });
 });
+
+// 17.6: touch gestures are opt-in; a visible exit restores normal scrolling.
+test('Matter canvas requires touch activation and provides an explicit exit', async ({ page }) => {
+  await openFixture(page);
+  await page.evaluate(async () => {
+    const { defineGravityWell } = await import('motionary/widgets/gravity-well'); defineGravityWell();
+    document.getElementById('stage').innerHTML = '<mo-gravity-well style="width:100%;max-width:400px"></mo-gravity-well>';
+    window.matterChanges = 0; document.querySelector('mo-gravity-well').addEventListener('usa:change', () => window.matterChanges++);
+  });
+  const canvas = page.locator('mo-gravity-well canvas');
+  await expect(canvas).toBeVisible(); expect(await canvas.evaluate(el => getComputedStyle(el).touchAction)).toBe('pan-y');
+  await canvas.tap(); expect(await page.evaluate(() => window.matterChanges)).toBe(0);
+  await page.getByRole('button', { name: 'Interact', exact: true }).tap(); expect(await canvas.evaluate(el => getComputedStyle(el).touchAction)).toBe('none');
+  await canvas.tap({ position: { x: 100, y: 100 } }); await expect.poll(() => page.evaluate(() => window.matterChanges)).toBeGreaterThan(0);
+  await page.getByRole('button', { name: 'Done', exact: true }).tap(); expect(await canvas.evaluate(el => getComputedStyle(el).touchAction)).toBe('pan-y');
+  expectNoErrors(page);
+});

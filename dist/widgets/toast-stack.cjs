@@ -5,4 +5,4 @@ var widgets_toastStack = require('../chunks/toast-stack-DOE1cHRn.cjs');
 
 
 exports.defineToastStack = widgets_toastStack.defineToastStack;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/widgets/toast-stack.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/widgets/toast-stack.cjs.map

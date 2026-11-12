@@ -1726,6 +1726,15 @@ interface LegacyAttributes {
         unit?: string | boolean | number;
         values?: string | boolean | number;
     };
+    'usa-bezier-lab': {
+        disabled?: string | boolean | number;
+        duration?: string | boolean | number;
+        label?: string | boolean | number;
+        x1?: string | boolean | number;
+        x2?: string | boolean | number;
+        y1?: string | boolean | number;
+        y2?: string | boolean | number;
+    };
     'usa-bg-generator': {
         label?: string | boolean | number;
         palette?: string | boolean | number;
@@ -1970,6 +1979,15 @@ interface LegacyAttributes {
         trigger?: string | boolean | number;
     };
     'usa-drawer': {};
+    'usa-elastic-mesh': {
+        accent?: string | boolean | number;
+        animated?: string | boolean | number;
+        color?: string | boolean | number;
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        paused?: string | boolean | number;
+        strength?: string | boolean | number;
+    };
     'usa-equalizer': {
         bands?: string | boolean | number;
         label?: string | boolean | number;
@@ -2010,6 +2028,16 @@ interface LegacyAttributes {
         status?: string | boolean | number;
         to?: string | boolean | number;
         value?: string | boolean | number;
+    };
+    'usa-fluid-type': {
+        accent?: string | boolean | number;
+        animated?: string | boolean | number;
+        color?: string | boolean | number;
+        disabled?: string | boolean | number;
+        fill?: string | boolean | number;
+        label?: string | boolean | number;
+        paused?: string | boolean | number;
+        text?: string | boolean | number;
     };
     'usa-fullpage': {
         axis?: string | boolean | number;
@@ -2114,6 +2142,17 @@ interface LegacyAttributes {
         opacity?: string | boolean | number;
         scale?: string | boolean | number;
     };
+    'usa-gravity-well': {
+        accent?: string | boolean | number;
+        animated?: string | boolean | number;
+        color?: string | boolean | number;
+        count?: string | boolean | number;
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        paused?: string | boolean | number;
+        seed?: string | boolean | number;
+        strength?: string | boolean | number;
+    };
     'usa-grid-glow': {
         color?: string | boolean | number;
         radius?: string | boolean | number;
@@ -2158,6 +2197,12 @@ interface LegacyAttributes {
         duration?: string | boolean | number;
         label?: string | boolean | number;
     };
+    'usa-hold-action': {
+        'complete-label'?: string | boolean | number;
+        disabled?: string | boolean | number;
+        duration?: string | boolean | number;
+        label?: string | boolean | number;
+    };
     'usa-hud-panel': {
         color?: string | boolean | number;
         status?: string | boolean | number;
@@ -2175,6 +2220,17 @@ interface LegacyAttributes {
         preset?: string | boolean | number;
         size?: string | boolean | number;
         toggle?: string | boolean | number;
+    };
+    'usa-ink-flow': {
+        accent?: string | boolean | number;
+        animated?: string | boolean | number;
+        color?: string | boolean | number;
+        count?: string | boolean | number;
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        paused?: string | boolean | number;
+        seed?: string | boolean | number;
+        strength?: string | boolean | number;
     };
     'usa-install-button': {
         cdn?: string | boolean | number;
@@ -2212,6 +2268,16 @@ interface LegacyAttributes {
         size?: string | boolean | number;
     };
     'usa-liquid': {};
+    'usa-liquid-metal': {
+        accent?: string | boolean | number;
+        animated?: string | boolean | number;
+        color?: string | boolean | number;
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        paused?: string | boolean | number;
+        seed?: string | boolean | number;
+        strength?: string | boolean | number;
+    };
     'usa-liquid-nav': {
         label?: string | boolean | number;
         orientation?: string | boolean | number;
@@ -2276,6 +2342,15 @@ interface LegacyAttributes {
     'usa-magnetic': {
         disabled?: string | boolean | number;
         radius?: string | boolean | number;
+        strength?: string | boolean | number;
+    };
+    'usa-magnetic-field': {
+        accent?: string | boolean | number;
+        animated?: string | boolean | number;
+        color?: string | boolean | number;
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        paused?: string | boolean | number;
         strength?: string | boolean | number;
     };
     'usa-marquee': {
@@ -2596,6 +2671,19 @@ interface LegacyAttributes {
         speed?: string | boolean | number;
         targets?: string | boolean | number;
     };
+    'usa-reaction-field': {
+        accent?: string | boolean | number;
+        animated?: string | boolean | number;
+        color?: string | boolean | number;
+        disabled?: string | boolean | number;
+        feed?: string | boolean | number;
+        kill?: string | boolean | number;
+        label?: string | boolean | number;
+        mode?: string | boolean | number;
+        paused?: string | boolean | number;
+        seed?: string | boolean | number;
+        shape?: string | boolean | number;
+    };
     'usa-reactions': {
         counts?: string | boolean | number;
         emojis?: string | boolean | number;
@@ -2622,6 +2710,13 @@ interface LegacyAttributes {
         repeat?: string | boolean | number;
         'root-margin'?: string | boolean | number;
         threshold?: string | boolean | number;
+    };
+    'usa-revision-reveal': {
+        disabled?: string | boolean | number;
+        draft?: string | boolean | number;
+        label?: string | boolean | number;
+        text?: string | boolean | number;
+        value?: string | boolean | number;
     };
     'usa-ride-status': {
         animated?: string | boolean | number;
@@ -2712,6 +2807,15 @@ interface LegacyAttributes {
     };
     'usa-scrolly': {
         offset?: string | boolean | number;
+    };
+    'usa-scrub-number': {
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+        min?: string | boolean | number;
+        step?: string | boolean | number;
+        unit?: string | boolean | number;
+        value?: string | boolean | number;
     };
     'usa-segmented': {
         label?: string | boolean | number;
@@ -2837,6 +2941,13 @@ interface LegacyAttributes {
         stiffness?: string | boolean | number;
         trigger?: string | boolean | number;
     };
+    'usa-spring-lab': {
+        damping?: string | boolean | number;
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        mass?: string | boolean | number;
+        stiffness?: string | boolean | number;
+    };
     'usa-stagger': {
         delay?: string | boolean | number;
         distance?: string | boolean | number;
@@ -2939,6 +3050,11 @@ interface LegacyAttributes {
         speed?: string | boolean | number;
         theme?: string | boolean | number;
         title?: string | boolean | number;
+    };
+    'usa-text-loupe': {
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        text?: string | boolean | number;
     };
     'usa-text-rotate': {
         effect?: string | boolean | number;
@@ -3123,6 +3239,10 @@ interface LegacyEvents {
         'usa:unlock': CustomEvent<any>;
     };
     'usa-bar-chart': {};
+    'usa-bezier-lab': {
+        'usa:action': CustomEvent<any>;
+        'usa:change': CustomEvent<any>;
+    };
     'usa-bg-generator': {
         'usa:change': CustomEvent<any>;
     };
@@ -3250,6 +3370,10 @@ interface LegacyEvents {
         'usa:complete': CustomEvent<any>;
     };
     'usa-drawer': {};
+    'usa-elastic-mesh': {
+        'usa:action': CustomEvent<any>;
+        'usa:change': CustomEvent<any>;
+    };
     'usa-equalizer': {
         'usa:change': CustomEvent<any>;
     };
@@ -3272,6 +3396,10 @@ interface LegacyEvents {
         'usa:change': CustomEvent<any>;
         'usa:complete': CustomEvent<any>;
         'usa:tick': CustomEvent<any>;
+    };
+    'usa-fluid-type': {
+        'usa:action': CustomEvent<any>;
+        'usa:change': CustomEvent<any>;
     };
     'usa-fullpage': {
         'usa:section': CustomEvent<any>;
@@ -3312,6 +3440,10 @@ interface LegacyEvents {
     };
     'usa-gradient-text': {};
     'usa-grain': {};
+    'usa-gravity-well': {
+        'usa:action': CustomEvent<any>;
+        'usa:change': CustomEvent<any>;
+    };
     'usa-grid-glow': {};
     'usa-gyro-card': {
         'usa:tilt': CustomEvent<any>;
@@ -3332,6 +3464,11 @@ interface LegacyEvents {
         'usa:confirm': CustomEvent<any>;
         'usa:progress': CustomEvent<any>;
     };
+    'usa-hold-action': {
+        'usa:cancel': CustomEvent<any>;
+        'usa:change': CustomEvent<any>;
+        'usa:confirm': CustomEvent<any>;
+    };
     'usa-hud-panel': {
         'usa:boot': CustomEvent<any>;
     };
@@ -3339,6 +3476,10 @@ interface LegacyEvents {
         'usa:hydrated': CustomEvent<any>;
     };
     'usa-icon-morph': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-ink-flow': {
+        'usa:action': CustomEvent<any>;
         'usa:change': CustomEvent<any>;
     };
     'usa-install-button': {
@@ -3358,6 +3499,10 @@ interface LegacyEvents {
         'usa:change': CustomEvent<any>;
     };
     'usa-liquid': {};
+    'usa-liquid-metal': {
+        'usa:action': CustomEvent<any>;
+        'usa:change': CustomEvent<any>;
+    };
     'usa-liquid-nav': {
         'usa:change': CustomEvent<any>;
     };
@@ -3384,6 +3529,10 @@ interface LegacyEvents {
         'usa:seek': CustomEvent<any>;
     };
     'usa-magnetic': {};
+    'usa-magnetic-field': {
+        'usa:action': CustomEvent<any>;
+        'usa:change': CustomEvent<any>;
+    };
     'usa-marquee': {};
     'usa-mask-reveal': {
         'usa:complete': CustomEvent<any>;
@@ -3556,6 +3705,10 @@ interface LegacyEvents {
     'usa-radar': {
         'usa:ping': CustomEvent<any>;
     };
+    'usa-reaction-field': {
+        'usa:action': CustomEvent<any>;
+        'usa:change': CustomEvent<any>;
+    };
     'usa-reactions': {
         'usa:react': CustomEvent<any>;
     };
@@ -3567,6 +3720,10 @@ interface LegacyEvents {
         'usa:complete': CustomEvent<any>;
         'usa:enter': CustomEvent<any>;
         'usa:leave': CustomEvent<any>;
+    };
+    'usa-revision-reveal': {
+        'usa:action': CustomEvent<any>;
+        'usa:change': CustomEvent<any>;
     };
     'usa-ride-status': {
         'usa:action': CustomEvent<any>;
@@ -3612,6 +3769,10 @@ interface LegacyEvents {
     };
     'usa-scrolly': {
         'usa:step': CustomEvent<any>;
+    };
+    'usa-scrub-number': {
+        'usa:change': CustomEvent<any>;
+        'usa:input': CustomEvent<any>;
     };
     'usa-segmented': {
         'usa:change': CustomEvent<any>;
@@ -3664,6 +3825,10 @@ interface LegacyEvents {
     'usa-spotlight': {};
     'usa-spring': {
         'usa:complete': CustomEvent<any>;
+    };
+    'usa-spring-lab': {
+        'usa:action': CustomEvent<any>;
+        'usa:change': CustomEvent<any>;
     };
     'usa-stagger': {
         'usa:complete': CustomEvent<any>;
@@ -3720,6 +3885,10 @@ interface LegacyEvents {
     };
     'usa-terminal': {
         'usa:done': CustomEvent<any>;
+    };
+    'usa-text-loupe': {
+        'usa:action': CustomEvent<any>;
+        'usa:change': CustomEvent<any>;
     };
     'usa-text-rotate': {
         'usa:change': CustomEvent<any>;

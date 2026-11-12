@@ -164,4 +164,4 @@ function defineShaderBackdrop(tag = 'usa-shader-backdrop') {
 }
 
 export { BACKDROP_PRESETS as B, POST_PASSES as P, defineShaderBackdrop as d };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/chunks/shader-backdrop-BjSIcvSf.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/chunks/shader-backdrop-BjSIcvSf.js.map

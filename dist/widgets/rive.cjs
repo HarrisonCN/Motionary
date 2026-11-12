@@ -5,4 +5,4 @@ var widgets_rive = require('../chunks/rive-xzduMxFp.cjs');
 
 
 exports.defineRive = widgets_rive.defineRive;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/widgets/rive.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/widgets/rive.cjs.map

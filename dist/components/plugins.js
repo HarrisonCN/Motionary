@@ -30,6 +30,7 @@ import { VIDEO_FX } from './fx-video.js';
 import { SAFE_FX } from './fx-safe.js';
 import { PERF3_FX } from './fx-perf.js';
 import { HOVER_FX } from './fx-hover.js';
+import { MATTER_FX } from './fx-matter.js';
 
 const P = (name, effects) => ({ name, effects });
 /** The `gpu` pack. */
@@ -96,8 +97,10 @@ const safe = /*#__PURE__*/ P('safe', SAFE_FX);
 const perf3 = /*#__PURE__*/ P('perf3', PERF3_FX);
 /** The `hover` pack (17.3: text-roll, image-swap, focus-reveal, grid-warp, googly-eyes). */
 const hover = /*#__PURE__*/ P('hover', HOVER_FX);
+/** The Matter pack (17.6: particles, liquid metal, reaction diffusion and elastic fields). */
+const matter = /*#__PURE__*/ P('matter', MATTER_FX);
 /** Every built-in plugin. */
-const ALL_PLUGINS = [gpu, text, light, depth, morph, transitions, weather, physics, focus, music, chart, shop, social, game, geo, form, ai, festival, retro, organic, cyber, paper, surface, gesture3, spatial, cinema, lottie, genart, video, safe, perf3, hover];
+const ALL_PLUGINS = [gpu, text, light, depth, morph, transitions, weather, physics, focus, music, chart, shop, social, game, geo, form, ai, festival, retro, organic, cyber, paper, surface, gesture3, spatial, cinema, lottie, genart, video, safe, perf3, hover, matter];
 
-export { ALL_PLUGINS, ai, chart, cinema, cyber, depth, festival, focus, form, game, genart, geo, gesture3, gpu, hover, light, lottie, morph, music, organic, paper, perf3, physics, retro, safe, shop, social, spatial, surface, text, transitions, video, weather };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/components/plugins.js.map
+export { ALL_PLUGINS, ai, chart, cinema, cyber, depth, festival, focus, form, game, genart, geo, gesture3, gpu, hover, light, lottie, matter, morph, music, organic, paper, perf3, physics, retro, safe, shop, social, spatial, surface, text, transitions, video, weather };
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/components/plugins.js.map

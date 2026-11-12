@@ -215,4 +215,4 @@ function defineGpuParticles(tag = 'usa-gpu-particles') {
 exports.PARTICLE_DRAW_WGSL = PARTICLE_DRAW_WGSL;
 exports.PARTICLE_SIM_WGSL = PARTICLE_SIM_WGSL;
 exports.defineGpuParticles = defineGpuParticles;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/chunks/gpu-particles-DGwFsyz_.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/chunks/gpu-particles-DGwFsyz_.cjs.map
