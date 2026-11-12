@@ -58,6 +58,9 @@ function defineCtaPopup(tag = 'usa-cta-popup') {
             this.listen(confirm, 'click', () => { if (this.flag('disabled'))
                 return; if (this.emit('confirm', { confirmed: true }))
                 this.hide('confirm'); });
+            this.listen(dialog, 'keydown', (event) => { if (event.key !== 'Tab' || !dialog.open)
+                return; const buttons = [close, confirm].filter(button => !button.disabled); if (!buttons.length)
+                return; event.preventDefault(); const current = buttons.indexOf(document.activeElement), direction = event.shiftKey ? -1 : 1; buttons[current < 0 ? 0 : (current + direction + buttons.length) % buttons.length].focus(); });
             this.listen(dialog, 'cancel', (e) => { e.preventDefault(); this.hide('escape'); });
             this.listen(dialog, 'close', () => { if (!alive)
                 return; this.setFlag('open', false); if (opener?.isConnected)

@@ -2575,5 +2575,10 @@
     "name": "dist/components/fx-draw.js (17.7; report only)",
     "file": "dist/components/fx-draw.js",
     "limit": 0
+  },
+  {
+    "name": "import 'motionary/fx/draw' (17.7; report only)",
+    "import": "export * from 'pkg/fx/draw';",
+    "limit": 0
   }
 ]

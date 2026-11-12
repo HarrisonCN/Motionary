@@ -730,6 +730,16 @@
         "default": "./dist/components/fx-matter.cjs"
       }
     },
+    "./fx/draw": {
+      "import": {
+        "types": "./dist/components/fx-draw.d.ts",
+        "default": "./dist/components/fx-draw.js"
+      },
+      "require": {
+        "types": "./dist/components/fx-draw.d.cts",
+        "default": "./dist/components/fx-draw.cjs"
+      }
+    },
     "./components/reveal": {
       "import": {
         "types": "./dist/components/reveal.d.ts",
