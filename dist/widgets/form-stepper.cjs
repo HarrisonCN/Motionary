@@ -2,7 +2,7 @@
 
 var base = require('../chunks/base-DzZEJhQB.cjs');
 var moName = require('../chunks/mo-name-DR9ysd5S.cjs');
-var formCraft = require('../chunks/form-craft-CrSzXiPt.cjs');
+var formCraft = require('../chunks/form-craft-i3CaepYO.cjs');
 
 /** Validated steps around original light-DOM fields. Completion emits an event; the application owns submission. */
 function defineFormStepper(tag = 'usa-form-stepper') {
@@ -31,6 +31,8 @@ function defineFormStepper(tag = 'usa-form-stepper') {
         else
             this._sync?.(); }
         mount() {
+            this.classList.add('usa-form-flow');
+            this.onCleanup(() => this.classList.remove('usa-form-flow'));
             const { root, title, hint } = formCraft.formShell(this, 'One step at a time'), nav = formCraft.node('ol', 'usa-form-step-nav'), status = formCraft.node('div', 'usa-form-hint'), meter = formCraft.node('div', 'usa-form-meter'), fill = formCraft.node('i'), actions = formCraft.node('div', 'usa-form-row usa-form-step-actions'), back = formCraft.node('button'), next = formCraft.node('button');
             status.setAttribute('role', 'status');
             nav.setAttribute('aria-label', 'Form steps');

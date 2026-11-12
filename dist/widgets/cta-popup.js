@@ -1,6 +1,6 @@
 import { f as defineElement } from '../chunks/base-SPDwWyB1.js';
 import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
-import { c as css, f as formShell, n as node, a as formMotion } from '../chunks/form-craft-saDInBKK.js';
+import { c as css, f as formShell, n as node, a as formMotion } from '../chunks/form-craft-CGsmJjVw.js';
 import { a as choiceId } from '../chunks/form-options-e_FWVRvi.js';
 
 /** Explicit native modal dialog. No exit-intent tracking, timers, navigation or subscription requests. */

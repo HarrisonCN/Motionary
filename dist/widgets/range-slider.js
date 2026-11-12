@@ -1,6 +1,6 @@
 import { f as defineElement } from '../chunks/base-SPDwWyB1.js';
 import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
-import { c as css, d as numberValue, f as formShell, n as node, b as formReset } from '../chunks/form-craft-saDInBKK.js';
+import { c as css, d as numberValue, f as formShell, n as node, b as formReset } from '../chunks/form-craft-CGsmJjVw.js';
 
 function defineRangeSlider(tag = 'usa-range-slider') {
     const ctor = defineElement(tag, Base => class RangeSlider extends Base {

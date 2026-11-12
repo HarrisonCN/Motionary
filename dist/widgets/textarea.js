@@ -1,6 +1,6 @@
 import { f as defineElement } from '../chunks/base-SPDwWyB1.js';
 import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
-import { c as css, f as formShell, n as node, b as formReset, d as numberValue } from '../chunks/form-craft-saDInBKK.js';
+import { c as css, f as formShell, n as node, b as formReset, d as numberValue } from '../chunks/form-craft-CGsmJjVw.js';
 import { a as choiceId } from '../chunks/form-options-e_FWVRvi.js';
 
 /** Native multiline entry with optional bounded auto-resize, a UTF-16 character counter and form reset. */

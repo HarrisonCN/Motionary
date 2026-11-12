@@ -2,7 +2,7 @@
 
 var base = require('../chunks/base-DzZEJhQB.cjs');
 var moName = require('../chunks/mo-name-DR9ysd5S.cjs');
-var formCraft = require('../chunks/form-craft-CrSzXiPt.cjs');
+var formCraft = require('../chunks/form-craft-i3CaepYO.cjs');
 var formOptions = require('../chunks/form-options-lnCyapKT.cjs');
 
 /** Native multiline entry with optional bounded auto-resize, a UTF-16 character counter and form reset. */

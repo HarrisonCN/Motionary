@@ -2,7 +2,7 @@
 
 var base = require('../chunks/base-DzZEJhQB.cjs');
 var moName = require('../chunks/mo-name-DR9ysd5S.cjs');
-var formCraft = require('../chunks/form-craft-CrSzXiPt.cjs');
+var formCraft = require('../chunks/form-craft-i3CaepYO.cjs');
 
 function defineNumberStepper(tag = 'usa-number-stepper') {
     const ctor = base.defineElement(tag, Base => class NumberStepper extends Base {

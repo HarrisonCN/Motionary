@@ -2,7 +2,7 @@
 
 var base = require('../chunks/base-DzZEJhQB.cjs');
 var moName = require('../chunks/mo-name-DR9ysd5S.cjs');
-var formCraft = require('../chunks/form-craft-CrSzXiPt.cjs');
+var formCraft = require('../chunks/form-craft-i3CaepYO.cjs');
 var formOptions = require('../chunks/form-options-lnCyapKT.cjs');
 
 /** Debounced native search with an application-supplied provider, abortable requests and stale-result protection. */
@@ -54,7 +54,7 @@ function defineSearchField(tag = 'usa-search-field') {
                 const id = serial, controller = new AbortController();
                 request = controller;
                 this.emit('query', { query, signal: controller.signal });
-                if (!this._provider)
+                if (!alive || id !== serial || controller.signal.aborted || this.flag('disabled') || !this._provider)
                     return;
                 root.setAttribute('aria-busy', 'true');
                 status.textContent = this.str('loading-text', 'Searching…');

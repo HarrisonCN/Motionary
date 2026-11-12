@@ -1,6 +1,6 @@
 import { f as defineElement } from '../chunks/base-SPDwWyB1.js';
 import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
-import { c as css, f as formShell, n as node, a as formMotion, d as numberValue, b as formReset } from '../chunks/form-craft-saDInBKK.js';
+import { c as css, f as formShell, n as node, a as formMotion, d as numberValue, b as formReset } from '../chunks/form-craft-CGsmJjVw.js';
 
 /** Validated steps around original light-DOM fields. Completion emits an event; the application owns submission. */
 function defineFormStepper(tag = 'usa-form-stepper') {
@@ -29,6 +29,8 @@ function defineFormStepper(tag = 'usa-form-stepper') {
         else
             this._sync?.(); }
         mount() {
+            this.classList.add('usa-form-flow');
+            this.onCleanup(() => this.classList.remove('usa-form-flow'));
             const { root, title, hint } = formShell(this, 'One step at a time'), nav = node('ol', 'usa-form-step-nav'), status = node('div', 'usa-form-hint'), meter = node('div', 'usa-form-meter'), fill = node('i'), actions = node('div', 'usa-form-row usa-form-step-actions'), back = node('button'), next = node('button');
             status.setAttribute('role', 'status');
             nav.setAttribute('aria-label', 'Form steps');

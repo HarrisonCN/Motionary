@@ -1,6 +1,6 @@
 import { f as defineElement } from '../chunks/base-SPDwWyB1.js';
 import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
-import { c as css, f as formShell, n as node, a as formMotion, b as formReset, d as numberValue } from '../chunks/form-craft-saDInBKK.js';
+import { c as css, f as formShell, n as node, a as formMotion, b as formReset, d as numberValue } from '../chunks/form-craft-CGsmJjVw.js';
 import { a as choiceId } from '../chunks/form-options-e_FWVRvi.js';
 
 /** Debounced native search with an application-supplied provider, abortable requests and stale-result protection. */
@@ -52,7 +52,7 @@ function defineSearchField(tag = 'usa-search-field') {
                 const id = serial, controller = new AbortController();
                 request = controller;
                 this.emit('query', { query, signal: controller.signal });
-                if (!this._provider)
+                if (!alive || id !== serial || controller.signal.aborted || this.flag('disabled') || !this._provider)
                     return;
                 root.setAttribute('aria-busy', 'true');
                 status.textContent = this.str('loading-text', 'Searching…');
