@@ -241,4 +241,4 @@ var css = ".usa-matter{display:block;min-width:0;color:var(--usa-matter-fg,#e7e8
 exports.css = css;
 exports.matterClass = matterClass;
 exports.setMatterData = setMatterData;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/chunks/matter-CeAHN-RP.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/chunks/matter-CeAHN-RP.cjs.map

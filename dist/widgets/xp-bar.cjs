@@ -5,4 +5,4 @@ var widgets_xpBar = require('../chunks/xp-bar-CgH7Z424.cjs');
 
 
 exports.defineXpBar = widgets_xpBar.defineXpBar;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/widgets/xp-bar.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/widgets/xp-bar.cjs.map

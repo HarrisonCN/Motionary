@@ -106,4 +106,4 @@ function registerMatterPack() { registry.registerEffects(MATTER_FX); }
 
 exports.MATTER_FX = MATTER_FX;
 exports.registerMatterPack = registerMatterPack;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/components/fx-matter.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/components/fx-matter.cjs.map

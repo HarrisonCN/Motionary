@@ -117,8 +117,10 @@ declare const perf3: EffectPlugin;
 declare const hover: EffectPlugin;
 /** The Matter pack (17.6: particles, liquid metal, reaction diffusion and elastic fields). */
 declare const matter: EffectPlugin;
+/** SVG feedback strokes for deliberate forms (17.7). */
+declare const draw: EffectPlugin;
 /** Every built-in plugin. */
 declare const ALL_PLUGINS: EffectPlugin[];
 
-export { ALL_PLUGINS, ai, chart, cinema, cyber, depth, festival, focus, form, game, genart, geo, gesture3, gpu, hover, light, lottie, matter, morph, music, organic, paper, perf3, physics, retro, safe, shop, social, spatial, surface, text, transitions, video, weather };
+export { ALL_PLUGINS, ai, chart, cinema, cyber, depth, draw, festival, focus, form, game, genart, geo, gesture3, gpu, hover, light, lottie, matter, morph, music, organic, paper, perf3, physics, retro, safe, shop, social, spatial, surface, text, transitions, video, weather };
 export type { EffectPlugin };

@@ -1,5 +1,14 @@
 'use strict';
 
+var widgets_select = require('../widgets/select.cjs');
+var widgets_combobox = require('../widgets/combobox.cjs');
+var widgets_multiSelect = require('../widgets/multi-select.cjs');
+var widgets_numberStepper = require('../widgets/number-stepper.cjs');
+var widgets_password = require('../widgets/password.cjs');
+var widgets_rangeSlider = require('../widgets/range-slider.cjs');
+var widgets_consent = require('../widgets/consent.cjs');
+var widgets_ctaPopup = require('../widgets/cta-popup.cjs');
+var widgets_validationSummary = require('../widgets/validation-summary.cjs');
 var widgets_carousel = require('../chunks/carousel-CtzI1LxO.cjs');
 var widgets_tabBar = require('../chunks/tab-bar-BvRhwu_Z.cjs');
 var widgets_disclosure = require('../widgets/disclosure.cjs');
@@ -98,20 +107,20 @@ var widgets_motionSpec = require('../widgets/motion-spec.cjs');
 var widgets_nativePreview = require('../widgets/native-preview.cjs');
 var widgets_pluginCard = require('../widgets/plugin-card.cjs');
 var widgets_installButton = require('../widgets/install-button.cjs');
-var widgets_scrollScene = require('../chunks/scroll-scene-B3bkzocQ.cjs');
+var widgets_scrollScene = require('../chunks/scroll-scene-bhKJefLg.cjs');
 var widgets_motionInspector = require('../widgets/motion-inspector.cjs');
 var widgets_routeTransition = require('../widgets/route-transition.cjs');
 var widgets_textSplitter = require('../widgets/text-splitter.cjs');
 var widgets_scrollRing = require('../widgets/scroll-ring.cjs');
 var widgets_parallaxLayers = require('../widgets/parallax-layers.cjs');
 var widgets_smoothScroll = require('../widgets/smooth-scroll.cjs');
-var widgets_glScene = require('../chunks/gl-scene-DpCAWWkJ.cjs');
+var widgets_glScene = require('../chunks/gl-scene-lG0HvTr5.cjs');
 var widgets_gpuParticles = require('../chunks/gpu-particles-DGwFsyz_.cjs');
 var widgets_shaderBackdrop = require('../chunks/shader-backdrop-Ct8UIKNL.cjs');
-var widgets_lottiePlayer = require('../chunks/lottie-player-BOy1LqLV.cjs');
+var widgets_lottiePlayer = require('../chunks/lottie-player-CY5npFg0.cjs');
 var widgets_rive = require('../chunks/rive-xzduMxFp.cjs');
 var widgets_tokenEditor = require('../widgets/token-editor.cjs');
-var widgets_physicsPlayground = require('../chunks/physics-playground-BcjqkdDG.cjs');
+var widgets_physicsPlayground = require('../chunks/physics-playground-CT29Alyt.cjs');
 var widgets_fileTree = require('../widgets/file-tree.cjs');
 var widgets_downloadMenu = require('../widgets/download-menu.cjs');
 var widgets_titleSequence = require('../widgets/title-sequence.cjs');
@@ -156,18 +165,6 @@ var widgets_haloSlider = require('../widgets/halo-slider.cjs');
 var widgets_orbitProgress = require('../widgets/orbit-progress.cjs');
 var viewport = require('../chunks/viewport-EFYGqMNa.cjs');
 
-/**
- * motionary/components/widgets — the 6.x animated UI widgets, in their own
- * entry so `motionary/components` and `components/lite` keep their size
- * budgets. Every widget is reduced-motion safe and keyboard accessible.
- *
- * ```ts
- * import { defineWidgets } from 'motionary/components/widgets';
- * defineWidgets(); // or defineCarousel(), defineTabBar(), …
- * ```
- * No build step: `<script src="https://unpkg.com/motionary@6/dist/widgets.umd.js">`
- * (registers every widget and every 6.x effect pack; `window.UsaWidgets`).
- */
 const WIDGETS = {
     '6.2': { 'usa-carousel': widgets_carousel.defineCarousel, 'usa-tab-bar': widgets_tabBar.defineTabBar, 'usa-disclosure': widgets_disclosure.defineDisclosure, 'usa-stories': widgets_stories.defineStories },
     '6.3': { 'usa-toast-stack': widgets_toastStack.defineToastStack, 'usa-modal': widgets_modal.defineModal, 'usa-sheet': widgets_modal.defineSheet, 'usa-menu': widgets_menu.defineMenu },
@@ -213,6 +210,7 @@ const WIDGETS = {
     '10.6': { 'usa-lottie-player': widgets_lottiePlayer.defineLottiePlayer, 'usa-rive': widgets_rive.defineRive, 'usa-token-editor': widgets_tokenEditor.defineTokenEditor },
     '10.7': { 'usa-physics-playground': widgets_physicsPlayground.definePhysicsPlayground, 'usa-motion-prompt': widgets_motionPrompt.defineMotionPrompt },
     '17.3': { 'usa-mega-menu': widgets_megaMenu.defineMegaMenu, 'usa-nav-flyout': widgets_megaMenu.defineNavFlyout, 'usa-fullscreen-menu': widgets_fullscreenMenu.defineFullscreenMenu, 'usa-breadcrumbs': widgets_breadcrumbs.defineBreadcrumbs, 'usa-file-tree': widgets_fileTree.defineFileTree, 'usa-download-menu': widgets_downloadMenu.defineDownloadMenu, 'usa-title-sequence': widgets_titleSequence.defineTitleSequence },
+    '17.7': { 'usa-select': widgets_select.defineSelect, 'usa-combobox': widgets_combobox.defineCombobox, 'usa-multi-select': widgets_multiSelect.defineMultiSelect, 'usa-number-stepper': widgets_numberStepper.defineNumberStepper, 'usa-password': widgets_password.definePassword, 'usa-range-slider': widgets_rangeSlider.defineRangeSlider, 'usa-consent': widgets_consent.defineConsent, 'usa-cta-popup': widgets_ctaPopup.defineCtaPopup, 'usa-validation-summary': widgets_validationSummary.defineValidationSummary },
     '17.6': { 'usa-gravity-well': widgets_gravityWell.defineGravityWell, 'usa-liquid-metal': widgets_liquidMetal.defineLiquidMetal, 'usa-reaction-field': widgets_reactionField.defineReactionField, 'usa-ink-flow': widgets_inkFlow.defineInkFlow, 'usa-fluid-type': widgets_fluidType.defineFluidType, 'usa-magnetic-field': widgets_magneticField.defineMagneticField, 'usa-elastic-mesh': widgets_elasticMesh.defineElasticMesh, 'usa-spring-lab': widgets_springLab.defineSpringLab, 'usa-bezier-lab': widgets_bezierLab.defineBezierLab, 'usa-text-loupe': widgets_textLoupe.defineTextLoupe, 'usa-revision-reveal': widgets_revisionReveal.defineRevisionReveal, 'usa-hold-action': widgets_holdAction.defineHoldAction, 'usa-scrub-number': widgets_scrubNumber.defineScrubNumber },
     '17.5': { 'usa-flight-status': widgets_flightStatus.defineFlightStatus, 'usa-transit-progress': widgets_transitProgress.defineTransitProgress, 'usa-sun-timeline': widgets_sunTimeline.defineSunTimeline, 'usa-delivery-tracker': widgets_deliveryTracker.defineDeliveryTracker, 'usa-glucose-sparkline': widgets_glucoseSparkline.defineGlucoseSparkline, 'usa-coffee-timer': widgets_coffeeTimer.defineCoffeeTimer, 'usa-vital-wave': widgets_vitalWave.defineVitalWave, 'usa-orbit-pass': widgets_orbitPass.defineOrbitPass, 'usa-meter-countdown': widgets_meterCountdown.defineMeterCountdown, 'usa-race-telemetry': widgets_raceTelemetry.defineRaceTelemetry, 'usa-workout-player': widgets_workoutPlayer.defineWorkoutPlayer, 'usa-status-pill': widgets_statusPill.defineStatusPill, 'usa-ride-status': widgets_rideStatus.defineRideStatus, 'usa-route-sparkline': widgets_routeSparkline.defineRouteSparkline, 'usa-activity-wall': widgets_activityWall.defineActivityWall },
     '17.4': { 'usa-luminous-switch': widgets_luminousSwitch.defineLuminousSwitch, 'usa-particle-icon': widgets_particleIcon.defineParticleIcon, 'usa-particle-button': widgets_particleButton.defineParticleButton, 'usa-halo-segmented': widgets_haloSegmented.defineHaloSegmented, 'usa-halo-slider': widgets_haloSlider.defineHaloSlider, 'usa-orbit-progress': widgets_orbitProgress.defineOrbitProgress },
@@ -231,6 +229,15 @@ function defineWidgets(release) {
                 fn(tag);
 }
 
+exports.defineSelect = widgets_select.defineSelect;
+exports.defineCombobox = widgets_combobox.defineCombobox;
+exports.defineMultiSelect = widgets_multiSelect.defineMultiSelect;
+exports.defineNumberStepper = widgets_numberStepper.defineNumberStepper;
+exports.definePassword = widgets_password.definePassword;
+exports.defineRangeSlider = widgets_rangeSlider.defineRangeSlider;
+exports.defineConsent = widgets_consent.defineConsent;
+exports.defineCtaPopup = widgets_ctaPopup.defineCtaPopup;
+exports.defineValidationSummary = widgets_validationSummary.defineValidationSummary;
 exports.CAROUSEL_EFFECTS = widgets_carousel.CAROUSEL_EFFECTS;
 exports.defineCarousel = widgets_carousel.defineCarousel;
 exports.TAB_INDICATORS = widgets_tabBar.TAB_INDICATORS;
@@ -458,4 +465,4 @@ exports.watchViewport = viewport.watchViewport;
 exports.WIDGETS = WIDGETS;
 exports.WIDGET_TAGS = WIDGET_TAGS;
 exports.defineWidgets = defineWidgets;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/components/widgets.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/components/widgets.cjs.map

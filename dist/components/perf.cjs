@@ -118,4 +118,4 @@ exports.autoDegrade = autoDegrade;
 exports.loadCategoryStyles = loadCategoryStyles;
 exports.loadedStyles = loadedStyles;
 exports.onDemandStyles = onDemandStyles;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/components/perf.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/components/perf.cjs.map

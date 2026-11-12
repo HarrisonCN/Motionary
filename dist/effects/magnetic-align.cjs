@@ -15,4 +15,4 @@ function registerMagneticAlign() {
 exports.effect = effect;
 exports.register = registerMagneticAlign;
 exports.registerMagneticAlign = registerMagneticAlign;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/effects/magnetic-align.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/effects/magnetic-align.cjs.map

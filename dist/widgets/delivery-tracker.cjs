@@ -26,4 +26,4 @@ function defineDeliveryTracker(tag = 'usa-delivery-tracker') {
 }
 
 exports.defineDeliveryTracker = defineDeliveryTracker;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/widgets/delivery-tracker.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/widgets/delivery-tracker.cjs.map

@@ -46,7 +46,13 @@ it('password reveal preserves selection, emits no credential and hides after rec
 });
 it('range endpoints never cross, submit both names and restore both endpoints', async () => {
   document.body.innerHTML = '<form><mo-range-slider name="budget" low="20" high="80" min-gap="10"></mo-range-slider></form>'; const el = host('range-slider'), form = document.querySelector('form')!; el.low = 100; expect(el.low).toBe(70); el.high = -1; expect(el.high).toBe(80); expect(new FormData(form).get('budget-low')).toBe('70');
-  form.reset(); await tick(); expect([el.low, el.high]).toEqual([20, 80]); form.reset(); await tick(); expect(new FormData(form).get('budget-low')).toBe('20'); el.update({ min: 'Infinity', max: 'NaN' }); expect(Number.isFinite(el.low) && Number.isFinite(el.high)).toBe(true);
+  form.reset(); await tick(); expect([el.low, el.high]).toEqual([20, 80]); form.reset(); await tick(); expect(new FormData(form).get('budget-low')).toBe('20'); el.setAttribute('min', 'Infinity'); el.setAttribute('max', 'NaN'); expect(Number.isFinite(el.low) && Number.isFinite(el.high)).toBe(true);
+});
+it('range public values, native sliders and form submission share the same fractional step grid', () => {
+  document.body.innerHTML = '<form><mo-range-slider name="size" min="0.1" max="1" step="0.2" low="0.24" high="0.86" min-gap="0.21"></mo-range-slider></form>';
+  const el = host('range-slider'), form = document.querySelector('form')!, inputs = el.querySelectorAll('input');
+  expect(el.low).toBe(.3); expect(el.high).toBe(.9); expect(inputs[0].valueAsNumber).toBe(el.low); expect(inputs[1].valueAsNumber).toBe(el.high);
+  el.low = .8; expect(el.low).toBe(.5); expect(new FormData(form).get('size-low')).toBe('0.5'); expect(el.high - el.low).toBeGreaterThanOrEqual(.21); expect(inputs[0].validity.stepMismatch || inputs[1].validity.stepMismatch).toBe(false);
 });
 it('consent emits explicit choices without writing storage, and required preferences remain checked after reset', async () => {
   const set = vi.spyOn(Storage.prototype, 'setItem'); document.body.innerHTML = '<form><mo-consent></mo-consent></form>'; const el = host('consent'), event = vi.fn(); el.addEventListener('usa:consent', event); el.preferences = { analytics: true, marketing: true }; el.querySelectorAll('button')[0].click(); expect(event.mock.calls[0][0].detail).toEqual({ analytics: false, marketing: false }); expect(set).not.toHaveBeenCalled(); document.querySelector('form')!.reset(); await tick(); const required = el.querySelector('input'); expect(required.checked && required.disabled).toBe(true);
@@ -57,5 +63,5 @@ it('validation links focus native controls and omit submitted values from their 
 it('finite drawing overlays preserve content, restore shared positioning and cancel on disposal', async () => {
   const el = document.createElement('button'); el.textContent = 'Submit'; el.style.position = 'static'; document.body.append(el);
   const handles = DRAW_FX.slice(0, 2).map(effect => bindEffect(el, effect.name, { duration: 300, trigger: 'load' })); expect(el.querySelectorAll('svg')).toHaveLength(2); expect(el.textContent).toBe('Submit'); expect(el.style.position).toBe('relative'); handles[0](); expect(el.querySelectorAll('svg')).toHaveLength(1); expect(el.style.position).toBe('relative'); handles[1](); expect(el.querySelector('svg')).toBeNull(); expect(el.style.position).toBe('static'); expect(anims.every(a => a.cancelled)).toBe(true);
-  configureComponents({ reducedMotion: 'always' }); await playEffect(el, 'focus-brackets'); expect(el.querySelector('svg')).toBeNull();
+  configureComponents({ reducedMotion: 'reduce' }); await playEffect(el, 'focus-brackets'); expect(el.querySelector('svg')).toBeNull();
 });

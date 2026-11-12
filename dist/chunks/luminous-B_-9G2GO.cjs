@@ -75,4 +75,4 @@ exports.glyph = glyph;
 exports.luminousTheme = luminousTheme;
 exports.morphGlyph = morphGlyph;
 exports.shared = shared;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/chunks/luminous-B_-9G2GO.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/chunks/luminous-B_-9G2GO.cjs.map

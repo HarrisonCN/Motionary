@@ -25,7 +25,7 @@ For all nine at once: import `defineWidgets` from `motionary/components/widgets`
 | `mo-multi-select` / `widgets/multi-select` | `options`, `values`, `max`, `reset()` | Native checkboxes; repeated values under `name`; disabled choices excluded |
 | `mo-number-stepper` / `widgets/number-stepper` | `value`, `min`, `max`, `step`, `stepUp(n?)`, `stepDown(n?)`, `reset()` | Native number input, named value, required, disabled |
 | `mo-password` / `widgets/password` | `value`, `revealed`, `input`, `reset()` | Native password field; name, required, autocomplete, minlength and maxlength |
-| `mo-range-slider` / `widgets/range-slider` | `low`, `high`, `min`, `max`, `step`, `min-gap`, `unit`, `reset()` | Two native sliders; `${name}-low` and `${name}-high` |
+| `mo-range-slider` / `widgets/range-slider` | `low`, `high`, `min`, `max`, `step`, `min-gap`, `unit`, `reset()` | Two native sliders; `${name}-low` and `${name}-high`; values and minimum gap normalize to the step grid |
 | `mo-consent` / `widgets/consent` | `preferences`, `reset()` | Optional checkbox values `${name}-analytics/marketing=yes`; essential always enabled |
 | `mo-cta-popup` / `widgets/cta-popup` | `open`, `show()`, `hide(reason?)` | Explicit native modal dialog; no submitted value |
 | `mo-validation-summary` / `widgets/validation-summary` | `errors`, `validate()`, `clear()`, `target` form ID | Reads native validity; links focus the invalid field |

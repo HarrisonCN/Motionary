@@ -11,4 +11,4 @@ function registerSplash() {
 }
 
 export { effect, registerSplash as register, registerSplash };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/effects/splash.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/effects/splash.js.map

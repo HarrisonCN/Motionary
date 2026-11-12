@@ -103,4 +103,4 @@ const MATTER_FX = [
 function registerMatterPack() { registerEffects(MATTER_FX); }
 
 export { MATTER_FX, registerMatterPack };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/components/fx-matter.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/components/fx-matter.js.map

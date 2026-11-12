@@ -1,3 +1,5 @@
+export type { FormChoice } from './form-options';
+export type { FormIssue } from './validation-summary';
 import { defineSelect, type UsaSelectElement } from './select';
 import { defineCombobox, type UsaComboboxElement } from './combobox';
 import { defineMultiSelect, type UsaMultiSelectElement } from './multi-select';

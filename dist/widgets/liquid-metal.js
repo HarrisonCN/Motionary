@@ -20,4 +20,4 @@ function defineLiquidMetal(tag = 'usa-liquid-metal') {
 }
 
 export { defineLiquidMetal };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/widgets/liquid-metal.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/widgets/liquid-metal.js.map

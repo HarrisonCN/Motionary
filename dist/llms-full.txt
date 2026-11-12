@@ -1,4 +1,4 @@
-# Motionary 17.6.0 — full component reference
+# Motionary 17.7.0 — full component reference
 
 Generated from the source. Machine-readable version: https://harrisoncn.github.io/Motionary/components.json (schema https://harrisoncn.github.io/Motionary/components.schema.json).
 
@@ -1100,6 +1100,20 @@ An orange segmented scale and an explicit start/stop elapsed-time clock.
 <usa-color-picker value="#7c5cff" swatches="#f43f5e,#f59e0b,#22c55e,#0ea5e9"></usa-color-picker>
 ```
 
+### <mo-combobox> (legacy <usa-combobox>) — Search combobox
+
+Filter choices, navigate enabled results with arrows and keep input focus.
+
+- Import: `import { defineCombobox } from 'motionary/components/widgets'; defineCombobox();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `hint`, `value`, `options`, `name`, `placeholder`, `required`, `disabled`
+- Events: `usa:change`, `usa:query`
+- Methods: `show()`, `changed()`, `mount()`, `formReset()`
+
+```html
+<mo-combobox label="Find a collection" name="collection" options='[{"value":"editorial","label":"Editorial"},{"value":"portrait","label":"Portrait"},{"value":"travel","label":"Travel"},{"value":"archive","label":"Archive","disabled":true}]'></mo-combobox>
+```
+
 ### <mo-command-palette> (legacy <usa-command-palette>) — Command palette (⌘K)
 
 7.9: a ⌘K command palette on the native <dialog> — scales in, filters as you type with fuzzy matching and highlighted letters, results stagger in and a highlight glides between rows. Use ↑/↓ for one row, Page Up/Down for a page and Enter to run a command.
@@ -1134,6 +1148,20 @@ An orange segmented scale and an explicit start/stop elapsed-time clock.
 </usa-compare>
 ```
 
+### <mo-consent> (legacy <usa-consent>) — Preference consent
+
+Explicit essential and optional choices; no cookies, storage or services are changed.
+
+- Import: `import { defineConsent } from 'motionary/components/widgets'; defineConsent();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `hint`, `analytics`, `marketing`, `disabled`, `name`
+- Events: `usa:change`, `usa:consent`
+- Methods: `reset()`, `changed()`, `mount()`, `formReset()`
+
+```html
+<mo-consent label="Your preferences"></mo-consent>
+```
+
 ### <mo-countdown> (legacy <usa-countdown>) — Flip countdown
 
 7.3: a split-flap countdown to a date (to) or for a number of seconds — every digit flips when it changes; fires usa:done at zero. The timer label updates once a minute so screen readers are not flooded.
@@ -1160,6 +1188,20 @@ Counts up to a number when visible, locale-formatted with tabular digits. Set .v
 
 ```html
 <usa-counter to="128490" prefix="$" duration="2000"></usa-counter>
+```
+
+### <mo-cta-popup> (legacy <usa-cta-popup>) — Deliberate popup
+
+A native modal dialog with focus return, Escape and cancelable confirmation.
+
+- Import: `import { defineCtaPopup } from 'motionary/components/widgets'; defineCtaPopup();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `hint`, `title`, `message`, `action-label`, `open`, `disabled`
+- Events: `usa:open`, `usa:close`, `usa:confirm`
+- Methods: `show()`, `hide()`, `changed()`, `mount()`
+
+```html
+<mo-cta-popup label="Open invitation" title="A little space for your next idea." action-label="Count me in"></mo-cta-popup>
 ```
 
 ### <mo-cube> (legacy <usa-cube>) — 3D cube
@@ -2645,6 +2687,20 @@ Let users pick Off · Low · Normal · High for the whole app; scales every comp
 </usa-motion-theme>
 ```
 
+### <mo-multi-select> (legacy <usa-multi-select>) — Token multi-select
+
+Filter native checkboxes, remove tokens and submit multiple form values.
+
+- Import: `import { defineMultiSelect } from 'motionary/components/widgets'; defineMultiSelect();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `hint`, `values`, `options`, `name`, `max`, `disabled`
+- Events: `usa:change`
+- Methods: `reset()`, `changed()`, `mount()`, `formReset()`
+
+```html
+<mo-multi-select label="Interests" name="interests" values='["portrait"]' max="3" options='[{"value":"editorial","label":"Editorial"},{"value":"portrait","label":"Portrait"},{"value":"travel","label":"Travel"},{"value":"archive","label":"Archive","disabled":true}]'></mo-multi-select>
+```
+
 ### <mo-music-player> (legacy <usa-music-player>) — Music player
 
 7.1: the cover spins like a record while playing, play morphs to pause, mini equalizer bars dance and the progress bar is a scrubbable slider. Plays a child <audio> or simulates a track.
@@ -2743,6 +2799,20 @@ Hides while you scroll down, slides back on the first scroll up; shrink makes it
   <li data-time="2m">Ada liked your post</li>
 </usa-notification-bell>
 <script>addEventListener('DOMContentLoaded', () => { const bell = document.querySelector('usa-notification-bell'); bell.notify({ text: 'New follower', time: 'now' }); });</script>
+```
+
+### <mo-number-stepper> (legacy <usa-number-stepper>) — Number stepper
+
+Decimal steps, native numeric input, bounded buttons and form reset.
+
+- Import: `import { defineNumberStepper } from 'motionary/components/widgets'; defineNumberStepper();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `hint`, `value`, `min`, `max`, `step`, `name`, `disabled`, `required`
+- Events: `usa:input`, `usa:change`
+- Methods: `stepUp()`, `stepDown()`, `reset()`, `changed()`, `mount()`, `formReset()`
+
+```html
+<mo-number-stepper label="Print quantity" name="quantity" value="3" min="1" max="12"></mo-number-stepper>
 ```
 
 ### <mo-odometer> (legacy <usa-odometer>) — Odometer counter
@@ -2930,6 +3000,20 @@ A canvas constellation that drifts away from the pointer. Runs only while visibl
 
 ```html
 <usa-particles count="80" links="120" interactive></usa-particles>
+```
+
+### <mo-password> (legacy <usa-password>) — Private password field
+
+Reveal and hide without losing the selection; no secret values in custom events.
+
+- Import: `import { definePassword } from 'motionary/components/widgets'; definePassword();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `hint`, `value`, `name`, `disabled`, `required`, `minlength`, `maxlength`, `autocomplete`, `placeholder`, `revealed`
+- Events: `usa:action`, `usa:input`, `usa:change`
+- Methods: `reset()`, `changed()`, `mount()`, `formReset()`
+
+```html
+<mo-password label="Password" name="password" minlength="8" hint="Use a unique password."></mo-password>
 ```
 
 ### <mo-pause-all> (legacy <usa-pause-all>) — Pause all motion
@@ -3270,6 +3354,20 @@ A vector track, position marker and supplied lap records.
 <usa-radar targets="Alpha:40,0.6; Bravo:200,0.35; Echo:300,0.8" speed="4"></usa-radar>
 ```
 
+### <mo-range-slider> (legacy <usa-range-slider>) — Interval slider
+
+Two native ranges enforce a non-crossing interval and a minimum gap.
+
+- Import: `import { defineRangeSlider } from 'motionary/components/widgets'; defineRangeSlider();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `hint`, `low`, `high`, `min`, `max`, `step`, `min-gap`, `name`, `unit`, `disabled`
+- Events: `usa:input`, `usa:change`
+- Methods: `reset()`, `changed()`, `mount()`, `formReset()`
+
+```html
+<mo-range-slider label="Budget" name="budget" min="0" max="1000" low="200" high="800" min-gap="50" step="10" unit=" €"></mo-range-slider>
+```
+
 ### <mo-reaction-field> (legacy <usa-reaction-field>) — Reaction field
 
 Real Gray–Scott chemistry, with dot and contour rendering and shape masks.
@@ -3602,6 +3700,20 @@ Editable bounded numbers, horizontal drag, precision mode and keyboard stepping.
   <button>Week</button>
   <button>Month</button>
 </usa-segmented>
+```
+
+### <mo-select> (legacy <usa-select>) — Native select
+
+Native platform selection, optgroups, validation and form reset.
+
+- Import: `import { defineSelect } from 'motionary/components/widgets'; defineSelect();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `hint`, `value`, `options`, `name`, `placeholder`, `required`, `disabled`
+- Events: `usa:change`
+- Methods: `reset()`, `changed()`, `mount()`
+
+```html
+<mo-select label="Project type" name="project" value="editorial" options='[{"value":"editorial","label":"Editorial"},{"value":"portrait","label":"Portrait"},{"value":"travel","label":"Travel"},{"value":"archive","label":"Archive","disabled":true}]'></mo-select>
 ```
 
 ### <mo-shader> (legacy <usa-shader>) — Shader background
@@ -4445,6 +4557,20 @@ Types text, or cycles through phrases with delete and pause. Full text stays ava
 ```html
 <usa-upload-progress name="report.pdf" size="2400000" value="40"></usa-upload-progress>
 <script>addEventListener('DOMContentLoaded', () => { const row = document.querySelector('usa-upload-progress'); row.value = 75; row.status = 'error'; });</script>
+```
+
+### <mo-validation-summary> (legacy <usa-validation-summary>) — Validation summary
+
+Native validity messages become links to the actual fields; no values are emitted.
+
+- Import: `import { defineValidationSummary } from 'motionary/components/widgets'; defineValidationSummary();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `hint`, `target`
+- Events: `usa:validate`
+- Methods: `validate()`, `clear()`, `changed()`, `mount()`
+
+```html
+<form><label>Email <input id="form-craft-email" type="email" required></label><mo-validation-summary></mo-validation-summary><button type="submit">Check form</button></form>
 ```
 
 ### <mo-video-card> (legacy <usa-video-card>) — Video card

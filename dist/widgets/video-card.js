@@ -87,4 +87,4 @@ function defineVideoCard(tag = 'usa-video-card') {
 }
 
 export { defineVideoCard };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/widgets/video-card.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/widgets/video-card.js.map

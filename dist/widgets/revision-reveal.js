@@ -21,4 +21,4 @@ function defineRevisionReveal(tag = 'usa-revision-reveal') {
 }
 
 export { defineRevisionReveal };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/widgets/revision-reveal.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/widgets/revision-reveal.js.map

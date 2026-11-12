@@ -580,4 +580,4 @@ function registerGpuPack() {
 }
 
 export { GPU_FX as G, WGSL_HEAD as W, GLSL_HEAD as a, supportsWebGL2 as b, supportsWebGPU as c, wgslModule as d, fieldFallback as f, glslToWgsl as g, registerGpuPack as r, shaderBackground as s, webgpuBackground as w };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/chunks/gpu-CJnu4Ty1.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/chunks/gpu-CJnu4Ty1.js.map

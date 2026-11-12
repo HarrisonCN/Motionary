@@ -13,10 +13,10 @@ This is a source-based family map, not a claim that every feature in a family is
 | Text and typography | Reveal, split text, typewriter, rotating and fluid type, loupe, film titles | Editable typographic treatments, expressive multilingual text layouts, selection annotations |
 | Backgrounds and materials | Gradients, particles, liquid metal, reaction field, ink flow, gravity and magnetic fields | Material presets with shared tokens; fine-grained GPU/CPU fallbacks; new original procedural scenes |
 | Navigation and discovery | Dock, tabs, tab bar, command palette, breadcrumbs, menus | Full sidebar layouts, announcement bar, dedicated search bar, synchronized scrollspy |
-| Forms and selection | Input, textarea, switch, checkbox, date/calendar and Form Atelier’s nine entries | Async autocomplete with cancellation, date range, multi-step forms, dedicated subscription form |
+| Forms and selection | Animated native text field, switch, checkbox, date picker and Form Atelier’s nine entries | Dedicated textarea, async autocomplete with cancellation, date range, multi-step forms, subscription form |
 | Calls to action and conversion | Magnetic / particle / hold buttons, explicit CTA popup, download menu | Pricing comparison, sticky CTA layouts, coupon entry, dedicated download button and empty-state actions |
 | Media and galleries | Carousel, swipe deck, product gallery, video card, card wall, film titles | Independent expanding-card and fan carousels, robust zoomable lightbox, hotspots and captions |
-| Data and inspection | Sparkline, charts, tables, file tree, timeline and JSON-related tools | Large-data virtualization, tree-grid navigation, richer filtering/sorting with accessible status |
+| Data and inspection | Sparkline, bar/sketch charts, KPIs, file tree, timeline and terminal | Dedicated data table and JSON viewer, large-data virtualization, tree-grid navigation, filtering/sorting with accessible status |
 | Spatial and physics | Tilt, depth, springs, elastic mesh, spring/Bezier labs, draggable interactions | Reusable snapping and collision compositions, direct manipulation on touch, coordinated layout choreography |
 | Time and live activity | Transit, workout, upload, weather, timer and live-activity widgets | Shared real-time data adapters with cancellation; offline and interrupted-state examples |
 | Feedback and overlays | Toasts, dialogs, progress, validation summary, finite draw effects | Unified placement/stacking behavior, undo flows, accessible nonblocking notifications |

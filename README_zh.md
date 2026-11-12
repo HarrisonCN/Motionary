@@ -311,7 +311,7 @@ AI 助手与 provider（`motionary/studio/ai`、`motionary/ai*`）、MCP 服务�
 组件数量、单组件及整体包体积均不设上限。[`size-budget.json`](./size-budget.json) 保留历史参考值；CI 只报告体积并验证构建产物和文档一致性，超出参考值不会失败。详见[体积策略](./docs/size-policy.md)。
 
 <!-- size-table:start -->
-17.6.0 构建的实测值（minify + gzip），由 `scripts/size.mjs --report` 生成：
+17.7.0 构建的实测值（minify + gzip），由 `scripts/size.mjs --report` 生成：
 
 | 导入内容 | gzip | 历史参考 |
 |---|---:|---:|
@@ -323,9 +323,9 @@ AI 助手与 provider（`motionary/studio/ai`、`motionary/ai*`）、MCP 服务�
 | `motionary/presets/extended`（181 个预设） | 4.69 KB | 5.25 KB |
 | `motionary/runtime`（运行时核心） | 5.42 KB | 5.50 KB |
 | `motionary/components/reveal` | 4.47 KB | 5.00 KB |
-| `motionary/components/lite`（全部元素，CSS 按需） | 71.46 KB | 79.00 KB |
-| `motionary/components`（全部元素 + CSS） | 87.90 KB | 93.75 KB |
-| `dist/components.umd.js`（CDN，全部） | 111.37 KB | 115.75 KB |
+| `motionary/components/lite`（全部元素，CSS 按需） | 71.50 KB | 79.00 KB |
+| `motionary/components`（全部元素 + CSS） | 87.95 KB | 93.75 KB |
+| `dist/components.umd.js`（CDN，全部） | 111.42 KB | 115.75 KB |
 <!-- size-table:end -->
 
 默认不监听 scroll 事件（改用 IntersectionObserver），动画只作用于合成层属性（`transform`、`opacity`、`filter`、`clip-path`），导入本身没有副作用（[docs/tree-shaking.md](./docs/tree-shaking.md)）。每个 PR 还会在无头 Chrome 中测量首屏传输量、脚本耗时、GPU 资源与帧稳定性（[docs/perf-ci.md](./docs/perf-ci.md)）。source map 不随 npm 包发布：它们保存在打了标签的 git 树中（每个文件的 `sourceMappingURL` 指向那里），从 16.3 起也作为 `sourcemaps` 压缩包附在每个 GitHub Release 上（[docs/source-maps.md](./docs/source-maps.md)）。更多：[docs/performance.md](./docs/performance.md)。

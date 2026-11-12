@@ -9,11 +9,22 @@ export function defineRangeSlider(tag = 'usa-range-slider'): CustomElementConstr
   const ctor = defineElement(tag, Base => class RangeSlider extends Base {
     static get observedAttributes(): string[] { return ['label', 'hint', 'low', 'high', 'min', 'max', 'step', 'min-gap', 'name', 'unit', 'disabled']; }
     private _sync?: () => void; private _initial?: [number, number];
-    private bounds(): [number, number, number] { const a = numberValue(this.num('min', 0), 0), b = numberValue(this.num('max', 100), 100), min = Math.min(a, b), max = Math.max(a, b); return [min, max, numberValue(this.num('min-gap', 0), 0, 0, max - min)]; }
-    get low(): number { const [a, b, gap] = this.bounds(); return numberValue(this.num('low', a), a, a, Math.max(a, numberValue(this.num('high', b), b, a + gap, b) - gap)); }
-    set low(value: number) { const [a, , gap] = this.bounds(); this.setAttribute('low', String(numberValue(value, a, a, this.high - gap))); }
-    get high(): number { const [a, b, gap] = this.bounds(); return numberValue(this.num('high', b), b, this.low + gap, b); }
-    set high(value: number) { const [, b, gap] = this.bounds(); this.setAttribute('high', String(numberValue(value, b, this.low + gap, b))); }
+    private stepSize(): number { return numberValue(this.num('step', 1), 1, 1e-6, 1e6); }
+    private bounds(): [number, number, number] {
+      const a = numberValue(this.num('min', 0), 0), b = numberValue(this.num('max', 100), 100), min = Math.min(a, b), step = this.stepSize();
+      const ticks = Math.max(0, Math.floor((Math.max(a, b) - min) / step + 1e-8)), max = Number((min + ticks * step).toFixed(10));
+      const gap = Math.min(ticks, Math.ceil(numberValue(this.num('min-gap', 0), 0, 0, max - min) / step - 1e-8)) * step;
+      return [min, max, Number(gap.toFixed(10))];
+    }
+    private snap(value: number, min: number, max: number): number {
+      const [base] = this.bounds(), step = this.stepSize();
+      const rounded = base + Math.round((numberValue(value, min, min, max) - base) / step) * step;
+      return Number(numberValue(rounded, min, min, max).toFixed(10));
+    }
+    get low(): number { const [a, b, gap] = this.bounds(); return this.snap(this.num('low', a), a, this.snap(this.num('high', b), a + gap, b) - gap); }
+    set low(value: number) { const [a, , gap] = this.bounds(); this.setAttribute('low', String(this.snap(value, a, this.high - gap))); }
+    get high(): number { const [, b, gap] = this.bounds(); return this.snap(this.num('high', b), this.low + gap, b); }
+    set high(value: number) { const [, b, gap] = this.bounds(); this.setAttribute('high', String(this.snap(value, this.low + gap, b))); }
     reset(): void { if (this._initial) { this.setAttribute('high', String(this._initial[1])); this.setAttribute('low', String(this._initial[0])); } this._sync?.(); }
     changed(): void { this._sync?.(); }
     mount(): void {

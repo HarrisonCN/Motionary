@@ -232,6 +232,16 @@ interface LegacyAttributes {
     'usa-color-picker': {
         swatches?: string | boolean | number;
     };
+    'usa-combobox': {
+        disabled?: string | boolean | number;
+        hint?: string | boolean | number;
+        label?: string | boolean | number;
+        name?: string | boolean | number;
+        options?: string | boolean | number;
+        placeholder?: string | boolean | number;
+        required?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-command-palette': {
         hotkey?: string | boolean | number;
         inline?: string | boolean | number;
@@ -245,6 +255,14 @@ interface LegacyAttributes {
         labels?: string | boolean | number;
         orientation?: string | boolean | number;
         position?: string | boolean | number;
+    };
+    'usa-consent': {
+        analytics?: string | boolean | number;
+        disabled?: string | boolean | number;
+        hint?: string | boolean | number;
+        label?: string | boolean | number;
+        marketing?: string | boolean | number;
+        name?: string | boolean | number;
     };
     'usa-countdown': {
         label?: string | boolean | number;
@@ -263,6 +281,15 @@ interface LegacyAttributes {
         start?: string | boolean | number;
         suffix?: string | boolean | number;
         to?: string | boolean | number;
+    };
+    'usa-cta-popup': {
+        'action-label'?: string | boolean | number;
+        disabled?: string | boolean | number;
+        hint?: string | boolean | number;
+        label?: string | boolean | number;
+        message?: string | boolean | number;
+        open?: string | boolean | number;
+        title?: string | boolean | number;
     };
     'usa-cube': {
         autoplay?: string | boolean | number;
@@ -824,6 +851,15 @@ interface LegacyAttributes {
     'usa-motion-theme': {
         name?: string | boolean | number;
     };
+    'usa-multi-select': {
+        disabled?: string | boolean | number;
+        hint?: string | boolean | number;
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+        name?: string | boolean | number;
+        options?: string | boolean | number;
+        values?: string | boolean | number;
+    };
     'usa-music-player': {
         artist?: string | boolean | number;
         cover?: string | boolean | number;
@@ -852,6 +888,17 @@ interface LegacyAttributes {
     };
     'usa-notification-bell': {
         label?: string | boolean | number;
+    };
+    'usa-number-stepper': {
+        disabled?: string | boolean | number;
+        hint?: string | boolean | number;
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+        min?: string | boolean | number;
+        name?: string | boolean | number;
+        required?: string | boolean | number;
+        step?: string | boolean | number;
+        value?: string | boolean | number;
     };
     'usa-odometer': {
         decimals?: string | boolean | number;
@@ -936,6 +983,19 @@ interface LegacyAttributes {
         paused?: string | boolean | number;
         size?: string | boolean | number;
         speed?: string | boolean | number;
+    };
+    'usa-password': {
+        autocomplete?: string | boolean | number;
+        disabled?: string | boolean | number;
+        hint?: string | boolean | number;
+        label?: string | boolean | number;
+        maxlength?: string | boolean | number;
+        minlength?: string | boolean | number;
+        name?: string | boolean | number;
+        placeholder?: string | boolean | number;
+        required?: string | boolean | number;
+        revealed?: string | boolean | number;
+        value?: string | boolean | number;
     };
     'usa-pause-all': {
         label?: string | boolean | number;
@@ -1050,6 +1110,19 @@ interface LegacyAttributes {
         rings?: string | boolean | number;
         speed?: string | boolean | number;
         targets?: string | boolean | number;
+    };
+    'usa-range-slider': {
+        disabled?: string | boolean | number;
+        high?: string | boolean | number;
+        hint?: string | boolean | number;
+        label?: string | boolean | number;
+        low?: string | boolean | number;
+        max?: string | boolean | number;
+        min?: string | boolean | number;
+        'min-gap'?: string | boolean | number;
+        name?: string | boolean | number;
+        step?: string | boolean | number;
+        unit?: string | boolean | number;
     };
     'usa-reaction-field': {
         accent?: string | boolean | number;
@@ -1201,6 +1274,16 @@ interface LegacyAttributes {
         label?: string | boolean | number;
         value?: string | boolean | number;
         variant?: string | boolean | number;
+    };
+    'usa-select': {
+        disabled?: string | boolean | number;
+        hint?: string | boolean | number;
+        label?: string | boolean | number;
+        name?: string | boolean | number;
+        options?: string | boolean | number;
+        placeholder?: string | boolean | number;
+        required?: string | boolean | number;
+        value?: string | boolean | number;
     };
     'usa-shader': {};
     'usa-shader-backdrop': {
@@ -1525,6 +1608,11 @@ interface LegacyAttributes {
         status?: string | boolean | number;
         value?: string | boolean | number;
     };
+    'usa-validation-summary': {
+        hint?: string | boolean | number;
+        label?: string | boolean | number;
+        target?: string | boolean | number;
+    };
     'usa-video-card': {
         duration?: string | boolean | number;
         label?: string | boolean | number;
@@ -1687,6 +1775,10 @@ interface LegacyEvents {
         'usa:change': CustomEvent<any>;
         'usa:input': CustomEvent<any>;
     };
+    'usa-combobox': {
+        'usa:change': CustomEvent<any>;
+        'usa:query': CustomEvent<any>;
+    };
     'usa-command-palette': {
         'usa:close': CustomEvent<any>;
         'usa:open': CustomEvent<any>;
@@ -1695,12 +1787,21 @@ interface LegacyEvents {
     'usa-compare': {
         'usa:change': CustomEvent<any>;
     };
+    'usa-consent': {
+        'usa:change': CustomEvent<any>;
+        'usa:consent': CustomEvent<any>;
+    };
     'usa-countdown': {
         'usa:done': CustomEvent<any>;
         'usa:tick': CustomEvent<any>;
     };
     'usa-counter': {
         'usa:complete': CustomEvent<any>;
+    };
+    'usa-cta-popup': {
+        'usa:close': CustomEvent<any>;
+        'usa:confirm': CustomEvent<any>;
+        'usa:open': CustomEvent<any>;
     };
     'usa-cube': {
         'usa:change': CustomEvent<any>;
@@ -1972,6 +2073,9 @@ interface LegacyEvents {
         'usa:change': CustomEvent<any>;
     };
     'usa-motion-theme': {};
+    'usa-multi-select': {
+        'usa:change': CustomEvent<any>;
+    };
     'usa-music-player': {
         'usa:pause': CustomEvent<any>;
         'usa:play': CustomEvent<any>;
@@ -1994,6 +2098,10 @@ interface LegacyEvents {
     'usa-notification-bell': {
         'usa:notify': CustomEvent<any>;
         'usa:read': CustomEvent<any>;
+    };
+    'usa-number-stepper': {
+        'usa:change': CustomEvent<any>;
+        'usa:input': CustomEvent<any>;
     };
     'usa-odometer': {};
     'usa-orbit-pass': {
@@ -2025,6 +2133,11 @@ interface LegacyEvents {
     };
     'usa-particle-icon': {};
     'usa-particles': {};
+    'usa-password': {
+        'usa:action': CustomEvent<any>;
+        'usa:change': CustomEvent<any>;
+        'usa:input': CustomEvent<any>;
+    };
     'usa-pause-all': {
         'usa:pause-all': CustomEvent<any>;
     };
@@ -2084,6 +2197,10 @@ interface LegacyEvents {
     };
     'usa-radar': {
         'usa:ping': CustomEvent<any>;
+    };
+    'usa-range-slider': {
+        'usa:change': CustomEvent<any>;
+        'usa:input': CustomEvent<any>;
     };
     'usa-reaction-field': {
         'usa:action': CustomEvent<any>;
@@ -2155,6 +2272,9 @@ interface LegacyEvents {
         'usa:input': CustomEvent<any>;
     };
     'usa-segmented': {
+        'usa:change': CustomEvent<any>;
+    };
+    'usa-select': {
         'usa:change': CustomEvent<any>;
     };
     'usa-shader': {};
@@ -2318,6 +2438,9 @@ interface LegacyEvents {
         'usa:done': CustomEvent<any>;
         'usa:error': CustomEvent<any>;
         'usa:retry': CustomEvent<any>;
+    };
+    'usa-validation-summary': {
+        'usa:validate': CustomEvent<any>;
     };
     'usa-video-card': {
         'usa:open': CustomEvent<any>;

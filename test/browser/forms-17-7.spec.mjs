@@ -8,6 +8,12 @@ test('native form values, validation and repeated resets agree with public state
   expect(await page.locator('form').evaluate(form => Object.fromEntries(new FormData(form)))).toMatchObject({ kind: 'photo', quantity: '4', 'budget-low': '20', 'budget-high': '80' }); expect(await page.locator('form').evaluate(form => new FormData(form).getAll('topics'))).toEqual(['photo', 'film']);
   for (let i = 0; i < 2; i++) { await page.locator('form').evaluate(form => form.reset()); await expect(page.getByRole('spinbutton')).toHaveValue('3'); await expect(page.getByRole('combobox')).toHaveValue(''); await expect(page.getByRole('checkbox', { name: 'Photography' })).not.toBeChecked(); } expectNoErrors(page);
 });
+test('fractional range steps submit the displayed interval in every engine', async ({ page }) => {
+  await setup(page, '<form><mo-range-slider name="range" label="Range" min="0.1" max="1" step="0.2" low="0.24" high="0.86" min-gap="0.21"></mo-range-slider></form>');
+  await expect(page.getByRole('slider', { name: 'Range lower' })).toHaveValue('0.3'); await expect(page.getByRole('slider', { name: 'Range upper' })).toHaveValue('0.9');
+  await page.getByRole('slider', { name: 'Range lower' }).press('End');
+  expect(await page.locator('form').evaluate(form => { const el = form.querySelector('mo-range-slider'), data = new FormData(form); return [el.low, el.high, data.get('range-low'), data.get('range-high'), form.checkValidity()]; })).toEqual([0.5, 0.9, '0.5', '0.9', true]); expectNoErrors(page);
+});
 test('combobox keyboard skips disabled choices, keeps focus and closes uncommitted search', async ({ page }) => {
   await setup(page, '<mo-combobox label="Collection"></mo-combobox>'); const input = page.getByRole('combobox', { name: 'Collection' }); await input.focus(); await input.press('ArrowDown'); await input.press('ArrowDown'); await input.press('Enter'); await expect(input).toHaveValue('Film'); await expect(input).toBeFocused(); await expect(input).toHaveAttribute('aria-expanded', 'false'); await input.fill('unmatched'); await expect(page.getByText('No results', { exact: true })).toBeVisible(); await input.press('Escape'); await expect(input).toHaveValue('Film'); await expect(input).toBeFocused(); expectNoErrors(page);
 });

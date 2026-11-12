@@ -1,0 +1,108 @@
+'use strict';
+
+var base = require('../chunks/base-DzZEJhQB.cjs');
+var moName = require('../chunks/mo-name-DR9ysd5S.cjs');
+var formCraft = require('../chunks/form-craft-DqHn_0mc.cjs');
+var formOptions = require('../chunks/form-options-lnCyapKT.cjs');
+
+function defineCombobox(tag = 'usa-combobox') {
+    const ctor = base.defineElement(tag, Base => class Combobox extends Base {
+        static get observedAttributes() { return ['label', 'hint', 'value', 'options', 'name', 'placeholder', 'required', 'disabled']; }
+        get value() { const value = this.str('value'); return this.options.some(o => o.value === value && !o.disabled) ? value : ''; }
+        set value(value) { this.setAttribute('value', String(value)); }
+        get options() { return formOptions.choices(this._options ?? this.str('options', '[]')); }
+        set options(value) { this._options = formOptions.choices(value); this._sync?.(); }
+        show() { this._show?.(true); }
+        hide() { this._show?.(false); }
+        reset() { this.value = this._initial ?? ''; this.hide(); this._sync?.(); }
+        changed(name) { if (name === 'options')
+            this._options = undefined; this._sync?.(); }
+        mount() {
+            this._initial ?? (this._initial = this.value);
+            const { root, title, hint } = formCraft.formShell(this, 'Search and choose'), input = formCraft.node('input'), hidden = formCraft.node('input'), list = formCraft.node('div', 'usa-form-options');
+            input.type = 'text';
+            input.autocomplete = 'off';
+            input.setAttribute('role', 'combobox');
+            input.setAttribute('aria-autocomplete', 'list');
+            input.setAttribute('aria-haspopup', 'listbox');
+            list.id = formOptions.choiceId();
+            list.setAttribute('role', 'listbox');
+            input.setAttribute('aria-controls', list.id);
+            hidden.type = 'hidden';
+            root.append(input, hidden, list, hint);
+            let opened = false, query = '', active = -1, visible = [], alive = true;
+            const animate = formCraft.formMotion(this);
+            const render = () => { visible = this.options.filter(o => o.label.toLocaleLowerCase().includes(query.toLocaleLowerCase())); if (active < 0 || active >= visible.length || visible[active].disabled)
+                active = visible.findIndex(o => !o.disabled); list.replaceChildren(); visible.forEach((option, i) => { const row = formCraft.node('div', 'usa-form-option', option.label); row.id = list.id + '-' + i; row.dataset.value = option.value; row.setAttribute('role', 'option'); row.setAttribute('aria-selected', String(option.value === this.value)); row.setAttribute('aria-disabled', String(!!option.disabled)); row.toggleAttribute('data-active', i === active); list.append(row); }); if (!visible.length)
+                list.append(formCraft.node('div', 'usa-form-option', 'No results')); if (opened && active >= 0)
+                input.setAttribute('aria-activedescendant', list.id + '-' + active);
+            else
+                input.removeAttribute('aria-activedescendant'); };
+            const setOpen = (on) => { opened = on && !this.flag('disabled'); if (!opened) {
+                query = '';
+                input.value = this.options.find(o => o.value === this.value)?.label || '';
+            } list.hidden = !opened; input.setAttribute('aria-expanded', String(opened)); render(); if (opened)
+                animate(list); };
+            const sync = () => { title.textContent = this.str('label', 'Search and choose'); hint.textContent = this.str('hint'); input.setAttribute('aria-label', title.textContent); input.placeholder = this.str('placeholder', 'Search options'); input.disabled = this.flag('disabled'); input.required = this.flag('required'); input.setCustomValidity(this.flag('required') && !this.options.some(o => o.value === this.value && !o.disabled) ? 'Choose an option from the list.' : ''); hidden.name = this.str('name'); hidden.value = this.value; hidden.disabled = input.disabled; if (!opened)
+                input.value = this.options.find(o => o.value === this.value)?.label || ''; if (input.disabled)
+                setOpen(false);
+            else
+                render(); };
+            this._sync = sync;
+            this._show = on => { setOpen(on); if (on)
+                input.focus(); };
+            const select = (option) => { if (!option || option.disabled || this.flag('disabled'))
+                return; this.value = option.value; setOpen(false); input.focus(); this.emit('change', { value: this.value }); };
+            this.listen(input, 'input', () => { query = input.value; active = -1; setOpen(true); this.emit('query', { query }); });
+            this.listen(input, 'click', () => { query = ''; setOpen(true); });
+            this.listen(input, 'keydown', (e) => { if (this.flag('disabled') || e.isComposing)
+                return; if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                const was = opened;
+                if (!opened) {
+                    query = '';
+                    setOpen(true);
+                }
+                const enabled = visible.map((o, i) => o.disabled ? -1 : i).filter(i => i >= 0);
+                if (enabled.length && was) {
+                    const current = enabled.indexOf(active);
+                    active = enabled[(current + (e.key === 'ArrowDown' ? 1 : -1) + enabled.length) % enabled.length];
+                    render();
+                    document.getElementById(list.id + '-' + active)?.scrollIntoView({ block: 'nearest' });
+                }
+            }
+            else if (e.key === 'Enter' && opened) {
+                e.preventDefault();
+                select(visible[active]);
+            }
+            else if (e.key === 'Escape' && opened) {
+                e.preventDefault();
+                setOpen(false);
+            }
+            else if (e.key === 'Tab')
+                setOpen(false);
+            else if (opened && (e.key === 'Home' || e.key === 'End')) {
+                e.preventDefault();
+                const indexes = visible.map((o, i) => o.disabled ? -1 : i).filter(i => i >= 0);
+                active = e.key === 'Home' ? indexes[0] ?? -1 : indexes[indexes.length - 1] ?? -1;
+                render();
+            } });
+            this.listen(list, 'pointerdown', (e) => e.preventDefault());
+            this.listen(list, 'click', (e) => { const row = e.target.closest('[data-value]'); if (row && list.contains(row))
+                select(visible.find(o => o.value === row.dataset.value)); });
+            this.listen(document, 'pointerdown', (e) => { if (!e.composedPath().includes(this))
+                setOpen(false); });
+            this.listen(this, 'focusout', () => queueMicrotask(() => { if (alive && !this.contains(document.activeElement))
+                setOpen(false); }));
+            formCraft.formReset(this, () => this.reset());
+            this.onCleanup(() => { alive = false; this._sync = this._show = undefined; });
+            sync();
+            setOpen(false);
+        }
+    }, { id: 'form-craft', text: formCraft.css });
+    moName.defineMoName(tag, ctor);
+    return ctor;
+}
+
+exports.defineCombobox = defineCombobox;
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/widgets/combobox.cjs.map

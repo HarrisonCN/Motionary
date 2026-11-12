@@ -107,4 +107,4 @@ function onDemandStyles(base) {
 }
 
 export { activeAnimations, animationBudget, autoDegrade, categoryForTag as categoryOf, loadCategoryStyles, loadedStyles, onDemandStyles, onFrame, setAnimationBudget };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/components/perf.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/components/perf.js.map

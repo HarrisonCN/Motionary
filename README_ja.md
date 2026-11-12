@@ -311,7 +311,7 @@ Figma プラグイン、クロスプラットフォーム書き出し（`npx mot
 コンポーネント数とサイズに上限はありません。[`size-budget.json`](./size-budget.json) は過去の参考値を保持します。CI はサイズを報告し、出力とドキュメントの整合性を確認します。参考値を超えても失敗しません。[サイズ方針](./docs/size-policy.md)を参照してください。
 
 <!-- size-table:start -->
-17.6.0 ビルドでの実測値（minify ＋ gzip、`scripts/size.mjs --report` で生成）：
+17.7.0 ビルドでの実測値（minify ＋ gzip、`scripts/size.mjs --report` で生成）：
 
 | インポートするもの | gzip | 参考値 |
 |---|---:|---:|
@@ -323,9 +323,9 @@ Figma プラグイン、クロスプラットフォーム書き出し（`npx mot
 | `motionary/presets/extended`（181 プリセット） | 4.69 KB | 5.25 KB |
 | `motionary/runtime`（ランタイムのコア） | 5.42 KB | 5.50 KB |
 | `motionary/components/reveal` | 4.47 KB | 5.00 KB |
-| `motionary/components/lite`（全要素、CSS はオンデマンド） | 71.46 KB | 79.00 KB |
-| `motionary/components`（全要素 ＋ CSS） | 87.90 KB | 93.75 KB |
-| `dist/components.umd.js`（CDN、すべて） | 111.37 KB | 115.75 KB |
+| `motionary/components/lite`（全要素、CSS はオンデマンド） | 71.50 KB | 79.00 KB |
+| `motionary/components`（全要素 ＋ CSS） | 87.95 KB | 93.75 KB |
+| `dist/components.umd.js`（CDN、すべて） | 111.42 KB | 115.75 KB |
 <!-- size-table:end -->
 
 既定ではスクロールイベントを監視せず（IntersectionObserver を使用）、アニメーションはコンポジタで処理できるプロパティ（`transform`、`opacity`、`filter`、`clip-path`）に限られます。インポート自体に副作用はありません（[docs/tree-shaking.md](./docs/tree-shaking.md)）。PR ごとに、ヘッドレス Chrome でファーストビューの転送量、スクリプト時間、GPU リソース、フレームの安定性も計測しています（[docs/perf-ci.md](./docs/perf-ci.md)）。ソースマップは npm には含めません。タグ付きの git ツリーにあり（各ファイルの `sourceMappingURL` がそこを指します）、16.3 からは `sourcemaps` アーカイブとして GitHub の各リリースにも添付します（[docs/source-maps.md](./docs/source-maps.md)）。詳しくは [docs/performance.md](./docs/performance.md)。

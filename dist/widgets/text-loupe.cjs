@@ -23,4 +23,4 @@ function defineTextLoupe(tag = 'usa-text-loupe') {
 }
 
 exports.defineTextLoupe = defineTextLoupe;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/widgets/text-loupe.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/widgets/text-loupe.cjs.map
