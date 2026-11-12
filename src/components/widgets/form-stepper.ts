@@ -33,6 +33,7 @@ export function defineFormStepper(tag = 'usa-form-stepper'): CustomElementConstr
     refresh(): void { this._refresh?.(); }
     changed(name: string): void { if (this._reflecting) return; if (name === 'step') this._go?.(this.num('step', 0)); else this._sync?.(); }
     mount(): void {
+      this.classList.add('usa-form-flow'); this.onCleanup(() => this.classList.remove('usa-form-flow'));
       const { root, title, hint } = formShell(this, 'One step at a time'), nav = node('ol', 'usa-form-step-nav'), status = node('div', 'usa-form-hint'), meter = node('div', 'usa-form-meter'), fill = node('i'), actions = node('div', 'usa-form-row usa-form-step-actions'), back = node('button'), next = node('button');
       status.setAttribute('role', 'status'); nav.setAttribute('aria-label', 'Form steps'); meter.setAttribute('aria-hidden', 'true'); meter.append(fill); root.append(nav, meter, hint); back.type = next.type = 'button'; next.dataset.primary = ''; actions.append(back, next); this.append(status, actions);
       let panels: HTMLElement[] = [], buttons: HTMLButtonElement[] = [], checking = false, invalidPending = false, invalidTimer: ReturnType<typeof setTimeout> | undefined;

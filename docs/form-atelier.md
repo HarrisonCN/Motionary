@@ -115,4 +115,6 @@ A user-activated form reset is reconciled in the next task after the browser’s
 
 ## Remote build acceptance
 
-CI builds from source before running the contract and unit suites, so checks read current CDN bundles rather than a previous distribution. For same-repository pull requests authored and updated by the repository owner, the distribution-sync workflow regenerates and commits only `dist/`. It never runs with write access on fork contributions and does not persist checkout credentials. Final acceptance is recorded on the resulting PR head, including its generated distribution.
+CI builds from source before running the contract and unit suites, so checks read current CDN bundles rather than a previous distribution. For same-repository pull requests authored and updated by the repository owner, the distribution-sync workflow regenerates `dist/`, the size report and README size tables through an explicit generated-file allowlist. It never runs with write access on fork contributions and does not persist checkout credentials. Final acceptance is recorded on the resulting PR head, including its generated distribution.
+
+The step flow uses a single material surface around its progress, original panels and navigation. Panel labels and actions retain the same contrast as the other form controls on both light and dark application pages.
