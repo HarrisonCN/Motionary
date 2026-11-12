@@ -2,7 +2,7 @@
 
 var base = require('../chunks/base-DzZEJhQB.cjs');
 var moName = require('../chunks/mo-name-DR9ysd5S.cjs');
-var formCraft = require('../chunks/form-craft-DqHn_0mc.cjs');
+var formCraft = require('../chunks/form-craft-CrSzXiPt.cjs');
 var formOptions = require('../chunks/form-options-lnCyapKT.cjs');
 
 function defineCombobox(tag = 'usa-combobox') {
@@ -87,8 +87,31 @@ function defineCombobox(tag = 'usa-combobox') {
                 active = e.key === 'Home' ? indexes[0] ?? -1 : indexes[indexes.length - 1] ?? -1;
                 render();
             } });
-            this.listen(list, 'pointerdown', (e) => e.preventDefault());
-            this.listen(list, 'click', (e) => { const row = e.target.closest('[data-value]'); if (row && list.contains(row))
+            // WebKit touch does not promise a compatibility click after a canceled
+            // pointerdown. Commit a stationary pointer release directly; scrolling
+            // cancels the gesture. Keep click for keyboard/assistive activation.
+            let press;
+            this.listen(list, 'pointerdown', (e) => {
+                if (!e.isPrimary || e.button !== 0)
+                    return;
+                const row = e.target.closest('[data-value]');
+                if (row && list.contains(row)) {
+                    e.preventDefault();
+                    press = { id: e.pointerId, x: e.clientX, y: e.clientY, value: row.dataset.value };
+                }
+            });
+            this.listen(list, 'pointercancel', () => { press = undefined; });
+            this.listen(list, 'pointerup', (e) => {
+                const down = press;
+                press = undefined;
+                const row = e.target.closest('[data-value]');
+                if (down && down.id === e.pointerId && row?.dataset.value === down.value && Math.hypot(e.clientX - down.x, e.clientY - down.y) < 10) {
+                    e.preventDefault();
+                    select(visible.find(o => o.value === down.value));
+                }
+            });
+            this.listen(list, 'click', (e) => { if (e.detail)
+                return; const row = e.target.closest('[data-value]'); if (row && list.contains(row))
                 select(visible.find(o => o.value === row.dataset.value)); });
             this.listen(document, 'pointerdown', (e) => { if (!e.composedPath().includes(this))
                 setOpen(false); });

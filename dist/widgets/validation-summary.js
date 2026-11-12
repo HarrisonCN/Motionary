@@ -1,6 +1,6 @@
 import { f as defineElement } from '../chunks/base-SPDwWyB1.js';
 import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
-import { c as css, f as formShell, n as node, a as formMotion } from '../chunks/form-craft-DgeQGc4w.js';
+import { c as css, f as formShell, n as node, a as formMotion } from '../chunks/form-craft-saDInBKK.js';
 import { a as choiceId } from '../chunks/form-options-e_FWVRvi.js';
 
 /** Native validity summary or supplied errors; links focus real controls. No values are collected or emitted. */

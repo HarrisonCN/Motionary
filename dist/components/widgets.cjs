@@ -1,5 +1,8 @@
 'use strict';
 
+var widgets_textarea = require('../widgets/textarea.cjs');
+var widgets_searchField = require('../widgets/search-field.cjs');
+var widgets_formStepper = require('../widgets/form-stepper.cjs');
 var widgets_select = require('../widgets/select.cjs');
 var widgets_combobox = require('../widgets/combobox.cjs');
 var widgets_multiSelect = require('../widgets/multi-select.cjs');
@@ -210,7 +213,7 @@ const WIDGETS = {
     '10.6': { 'usa-lottie-player': widgets_lottiePlayer.defineLottiePlayer, 'usa-rive': widgets_rive.defineRive, 'usa-token-editor': widgets_tokenEditor.defineTokenEditor },
     '10.7': { 'usa-physics-playground': widgets_physicsPlayground.definePhysicsPlayground, 'usa-motion-prompt': widgets_motionPrompt.defineMotionPrompt },
     '17.3': { 'usa-mega-menu': widgets_megaMenu.defineMegaMenu, 'usa-nav-flyout': widgets_megaMenu.defineNavFlyout, 'usa-fullscreen-menu': widgets_fullscreenMenu.defineFullscreenMenu, 'usa-breadcrumbs': widgets_breadcrumbs.defineBreadcrumbs, 'usa-file-tree': widgets_fileTree.defineFileTree, 'usa-download-menu': widgets_downloadMenu.defineDownloadMenu, 'usa-title-sequence': widgets_titleSequence.defineTitleSequence },
-    '17.7': { 'usa-select': widgets_select.defineSelect, 'usa-combobox': widgets_combobox.defineCombobox, 'usa-multi-select': widgets_multiSelect.defineMultiSelect, 'usa-number-stepper': widgets_numberStepper.defineNumberStepper, 'usa-password': widgets_password.definePassword, 'usa-range-slider': widgets_rangeSlider.defineRangeSlider, 'usa-consent': widgets_consent.defineConsent, 'usa-cta-popup': widgets_ctaPopup.defineCtaPopup, 'usa-validation-summary': widgets_validationSummary.defineValidationSummary },
+    '17.7': { 'usa-textarea': widgets_textarea.defineTextarea, 'usa-search-field': widgets_searchField.defineSearchField, 'usa-form-stepper': widgets_formStepper.defineFormStepper, 'usa-select': widgets_select.defineSelect, 'usa-combobox': widgets_combobox.defineCombobox, 'usa-multi-select': widgets_multiSelect.defineMultiSelect, 'usa-number-stepper': widgets_numberStepper.defineNumberStepper, 'usa-password': widgets_password.definePassword, 'usa-range-slider': widgets_rangeSlider.defineRangeSlider, 'usa-consent': widgets_consent.defineConsent, 'usa-cta-popup': widgets_ctaPopup.defineCtaPopup, 'usa-validation-summary': widgets_validationSummary.defineValidationSummary },
     '17.6': { 'usa-gravity-well': widgets_gravityWell.defineGravityWell, 'usa-liquid-metal': widgets_liquidMetal.defineLiquidMetal, 'usa-reaction-field': widgets_reactionField.defineReactionField, 'usa-ink-flow': widgets_inkFlow.defineInkFlow, 'usa-fluid-type': widgets_fluidType.defineFluidType, 'usa-magnetic-field': widgets_magneticField.defineMagneticField, 'usa-elastic-mesh': widgets_elasticMesh.defineElasticMesh, 'usa-spring-lab': widgets_springLab.defineSpringLab, 'usa-bezier-lab': widgets_bezierLab.defineBezierLab, 'usa-text-loupe': widgets_textLoupe.defineTextLoupe, 'usa-revision-reveal': widgets_revisionReveal.defineRevisionReveal, 'usa-hold-action': widgets_holdAction.defineHoldAction, 'usa-scrub-number': widgets_scrubNumber.defineScrubNumber },
     '17.5': { 'usa-flight-status': widgets_flightStatus.defineFlightStatus, 'usa-transit-progress': widgets_transitProgress.defineTransitProgress, 'usa-sun-timeline': widgets_sunTimeline.defineSunTimeline, 'usa-delivery-tracker': widgets_deliveryTracker.defineDeliveryTracker, 'usa-glucose-sparkline': widgets_glucoseSparkline.defineGlucoseSparkline, 'usa-coffee-timer': widgets_coffeeTimer.defineCoffeeTimer, 'usa-vital-wave': widgets_vitalWave.defineVitalWave, 'usa-orbit-pass': widgets_orbitPass.defineOrbitPass, 'usa-meter-countdown': widgets_meterCountdown.defineMeterCountdown, 'usa-race-telemetry': widgets_raceTelemetry.defineRaceTelemetry, 'usa-workout-player': widgets_workoutPlayer.defineWorkoutPlayer, 'usa-status-pill': widgets_statusPill.defineStatusPill, 'usa-ride-status': widgets_rideStatus.defineRideStatus, 'usa-route-sparkline': widgets_routeSparkline.defineRouteSparkline, 'usa-activity-wall': widgets_activityWall.defineActivityWall },
     '17.4': { 'usa-luminous-switch': widgets_luminousSwitch.defineLuminousSwitch, 'usa-particle-icon': widgets_particleIcon.defineParticleIcon, 'usa-particle-button': widgets_particleButton.defineParticleButton, 'usa-halo-segmented': widgets_haloSegmented.defineHaloSegmented, 'usa-halo-slider': widgets_haloSlider.defineHaloSlider, 'usa-orbit-progress': widgets_orbitProgress.defineOrbitProgress },
@@ -229,6 +232,9 @@ function defineWidgets(release) {
                 fn(tag);
 }
 
+exports.defineTextarea = widgets_textarea.defineTextarea;
+exports.defineSearchField = widgets_searchField.defineSearchField;
+exports.defineFormStepper = widgets_formStepper.defineFormStepper;
 exports.defineSelect = widgets_select.defineSelect;
 exports.defineCombobox = widgets_combobox.defineCombobox;
 exports.defineMultiSelect = widgets_multiSelect.defineMultiSelect;

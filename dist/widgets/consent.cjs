@@ -2,7 +2,7 @@
 
 var base = require('../chunks/base-DzZEJhQB.cjs');
 var moName = require('../chunks/mo-name-DR9ysd5S.cjs');
-var formCraft = require('../chunks/form-craft-DqHn_0mc.cjs');
+var formCraft = require('../chunks/form-craft-CrSzXiPt.cjs');
 
 /** Explicit preference controls. Emits a decision; does not read/write cookies or storage, or activate services. */
 function defineConsent(tag = 'usa-consent') {

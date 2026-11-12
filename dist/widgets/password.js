@@ -1,6 +1,6 @@
 import { f as defineElement } from '../chunks/base-SPDwWyB1.js';
 import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
-import { c as css, f as formShell, n as node, b as formReset } from '../chunks/form-craft-DgeQGc4w.js';
+import { c as css, f as formShell, n as node, b as formReset } from '../chunks/form-craft-saDInBKK.js';
 
 function definePassword(tag = 'usa-password') {
     const ctor = defineElement(tag, Base => class Password extends Base {

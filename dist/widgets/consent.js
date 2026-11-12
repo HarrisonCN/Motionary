@@ -1,6 +1,6 @@
 import { f as defineElement } from '../chunks/base-SPDwWyB1.js';
 import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
-import { c as css, f as formShell, n as node, a as formMotion, b as formReset } from '../chunks/form-craft-DgeQGc4w.js';
+import { c as css, f as formShell, n as node, a as formMotion, b as formReset } from '../chunks/form-craft-saDInBKK.js';
 
 /** Explicit preference controls. Emits a decision; does not read/write cookies or storage, or activate services. */
 function defineConsent(tag = 'usa-consent') {

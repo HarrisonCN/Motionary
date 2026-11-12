@@ -1,6 +1,6 @@
 import { f as defineElement } from '../chunks/base-SPDwWyB1.js';
 import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
-import { c as css, d as numberValue, f as formShell, n as node, a as formMotion, b as formReset } from '../chunks/form-craft-DgeQGc4w.js';
+import { c as css, d as numberValue, f as formShell, n as node, a as formMotion, b as formReset } from '../chunks/form-craft-saDInBKK.js';
 
 function defineNumberStepper(tag = 'usa-number-stepper') {
     const ctor = defineElement(tag, Base => class NumberStepper extends Base {

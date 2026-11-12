@@ -446,6 +446,15 @@ interface LegacyAttributes {
         paused?: string | boolean | number;
         text?: string | boolean | number;
     };
+    'usa-form-stepper': {
+        'back-label'?: string | boolean | number;
+        'complete-label'?: string | boolean | number;
+        disabled?: string | boolean | number;
+        hint?: string | boolean | number;
+        label?: string | boolean | number;
+        'next-label'?: string | boolean | number;
+        step?: string | boolean | number;
+    };
     'usa-fullpage': {
         axis?: string | boolean | number;
         dots?: string | boolean | number;
@@ -1270,6 +1279,19 @@ interface LegacyAttributes {
         unit?: string | boolean | number;
         value?: string | boolean | number;
     };
+    'usa-search-field': {
+        delay?: string | boolean | number;
+        disabled?: string | boolean | number;
+        'empty-text'?: string | boolean | number;
+        'error-text'?: string | boolean | number;
+        hint?: string | boolean | number;
+        label?: string | boolean | number;
+        'loading-text'?: string | boolean | number;
+        'min-length'?: string | boolean | number;
+        name?: string | boolean | number;
+        placeholder?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-segmented': {
         label?: string | boolean | number;
         value?: string | boolean | number;
@@ -1532,6 +1554,20 @@ interface LegacyAttributes {
         split?: string | boolean | number;
         stagger?: string | boolean | number;
         trigger?: string | boolean | number;
+    };
+    'usa-textarea': {
+        'auto-resize'?: string | boolean | number;
+        disabled?: string | boolean | number;
+        hint?: string | boolean | number;
+        label?: string | boolean | number;
+        'max-rows'?: string | boolean | number;
+        maxlength?: string | boolean | number;
+        name?: string | boolean | number;
+        placeholder?: string | boolean | number;
+        readonly?: string | boolean | number;
+        required?: string | boolean | number;
+        rows?: string | boolean | number;
+        value?: string | boolean | number;
     };
     'usa-theme-surface': {
         theme?: string | boolean | number;
@@ -1881,6 +1917,11 @@ interface LegacyEvents {
     'usa-fluid-type': {
         'usa:action': CustomEvent<any>;
         'usa:change': CustomEvent<any>;
+    };
+    'usa-form-stepper': {
+        'usa:complete': CustomEvent<any>;
+        'usa:invalid': CustomEvent<any>;
+        'usa:step-change': CustomEvent<any>;
     };
     'usa-fullpage': {
         'usa:section': CustomEvent<any>;
@@ -2271,6 +2312,13 @@ interface LegacyEvents {
         'usa:change': CustomEvent<any>;
         'usa:input': CustomEvent<any>;
     };
+    'usa-search-field': {
+        'usa:error': CustomEvent<any>;
+        'usa:input': CustomEvent<any>;
+        'usa:query': CustomEvent<any>;
+        'usa:results': CustomEvent<any>;
+        'usa:select': CustomEvent<any>;
+    };
     'usa-segmented': {
         'usa:change': CustomEvent<any>;
     };
@@ -2397,6 +2445,10 @@ interface LegacyEvents {
         'usa:done': CustomEvent<any>;
         'usa:runtime-missing': CustomEvent<any>;
         'usa:split': CustomEvent<any>;
+    };
+    'usa-textarea': {
+        'usa:change': CustomEvent<any>;
+        'usa:input': CustomEvent<any>;
     };
     'usa-theme-surface': {
         'usa:theme': CustomEvent<any>;

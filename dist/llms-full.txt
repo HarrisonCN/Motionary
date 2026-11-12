@@ -1617,6 +1617,20 @@ Supplied text becomes a halftone vessel with a tilting liquid surface.
 <mo-fluid-type animated></mo-fluid-type>
 ```
 
+### <mo-form-stepper> (legacy <usa-form-stepper>) — Validated form steps
+
+Preserve original fields and FormData while validating steps and managing focus.
+
+- Import: `import { defineFormStepper } from 'motionary/components/widgets'; defineFormStepper();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `hint`, `step`, `disabled`, `back-label`, `next-label`, `complete-label`
+- Events: `usa:step-change`, `usa:invalid`, `usa:complete`
+- Methods: `next()`, `back()`, `goTo()`, `reset()`, `refresh()`
+
+```html
+<form><mo-form-stepper label="Your next project"><section data-form-step data-step-title="Project"><label>Project title<input name="title" required placeholder="Give your project a name"></label></section><section data-form-step data-step-title="Review"><label>Notes<textarea name="notes" rows="3"></textarea></label></section></mo-form-stepper></form>
+```
+
 ### <mo-fullpage> (legacy <usa-fullpage>) — Full-page sections
 
 Full-screen sections that snap one at a time, with keyboard paging, dot navigation and a usa:section event.
@@ -3685,6 +3699,20 @@ Editable bounded numbers, horizontal drag, precision mode and keyboard stepping.
 <mo-scrub-number label="Stiffness" value="180" min="1" max="800" unit="N/m"></mo-scrub-number>
 ```
 
+### <mo-search-field> (legacy <usa-search-field>) — Cancelable async search
+
+Debounced search providers with abort signals and protection against late results.
+
+- Import: `import { defineSearchField } from 'motionary/components/widgets'; defineSearchField();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `hint`, `value`, `name`, `placeholder`, `delay`, `min-length`, `disabled`, `loading-text`, `empty-text`, `error-text`
+- Events: `usa:input`, `usa:query`, `usa:results`, `usa:error`, `usa:select`
+- Methods: `search()`, `clear()`, `cancel()`, `reset()`
+
+```html
+<mo-search-field label="Search collections" name="query" placeholder="Try portrait or city" delay="200"></mo-search-field>
+```
+
 ### <mo-segmented> (legacy <usa-segmented>) — Segmented control
 
 6.7: an iOS-style thumb slides under the chosen segment with a spring and stretches while it travels. A real radio group: arrow keys, Home / End. iOS, pill or outline.
@@ -4376,6 +4404,20 @@ defineTextSplitter(); // registers <usa-text-splitter> — after the prerequisit
 
 ```html
 <usa-text-splitter split="chars" effect="rise" stagger="30">Motion, made simple.</usa-text-splitter>
+```
+
+### <mo-textarea> (legacy <usa-textarea>) — Adaptive textarea
+
+Native multiline input, bounded auto-resize, character counter and reset.
+
+- Import: `import { defineTextarea } from 'motionary/components/widgets'; defineTextarea();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `hint`, `value`, `name`, `placeholder`, `rows`, `max-rows`, `maxlength`, `required`, `disabled`, `readonly`, `auto-resize`
+- Events: `usa:input`, `usa:change`
+- Methods: `focusInput()`, `reset()`
+
+```html
+<mo-textarea label="Creative brief" name="brief" value="Light, people, and the city between them." maxlength="280" auto-resize hint="A few words about your next project."></mo-textarea>
 ```
 
 ### <mo-theme-surface> (legacy <usa-theme-surface>) — Theme surface
