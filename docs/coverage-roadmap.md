@@ -39,7 +39,7 @@ Capabilities already embedded in a compound component are credited as partial co
 | Batch | Deliverable | Current status |
 |---|---|---|
 | 17.6 Matter & Motion | 13 widgets, six effects, interaction laboratory | Published: GitHub and both npm package names at 17.6.0 |
-| 17.7 Form Atelier | Nine widgets, four finite feedback effects, form APIs and demo | Implemented in this branch; remote acceptance required before merge |
+| 17.7 Form Atelier | Nine widgets, four finite feedback effects, form APIs and demo | Implemented; acceptance is recorded in [PR #187](https://github.com/HarrisonCN/Motionary/pull/187), publication in the release tags |
 | Navigation and conversion | Sidebar, scrollspy, announcement/search, pricing/sticky CTA compositions | Proposed; not implemented or counted |
 | Media and editorial | Expanded/fan galleries, lightbox/hotspots, editorial compositions | Proposed; not implemented or counted |
 | Data and application surfaces | Virtualized exploration, tree grids, complete reference layouts | Proposed; not implemented or counted |
