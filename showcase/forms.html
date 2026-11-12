@@ -21,7 +21,7 @@ import { defineValidationSummary } from '../dist/widgets/validation-summary.js';
 import { defineFx } from '../dist/components/fx.js';
 import { registerDrawPack } from '../dist/components/fx-draw.js';
 defineSelect(); defineCombobox(); defineMultiSelect(); defineNumberStepper(); definePassword(); defineRangeSlider(); defineConsent(); defineCtaPopup(); defineValidationSummary();
-registerDrawPack(); defineFx();
+registerDrawPack(); defineFx('mo-fx');
 for(const form of document.querySelectorAll('form'))form.addEventListener('submit',event=>event.preventDefault());
 const worked=document.getElementById('worked-form'), result=document.getElementById('worked-result');
 worked.addEventListener('submit',()=>{const data=new FormData(worked), kinds={portrait:'人像',editorial:'纪实',travel:'旅行'}, deliveries={digital:'数字影像',prints:'实体照片',book:'摄影集'};result.textContent=`${kinds[data.get('project')]} · ${data.get('quantity')} 份 · ${data.get('budget-low')}–${data.get('budget-high')} 元 · ${data.getAll('deliverables').map(value=>deliveries[value]).join('、')||'尚未选择交付内容'}`;});

@@ -32,3 +32,14 @@ test('draw feedback ends, keeps button focus and cancels when motion preference 
   await page.evaluate(async () => { const { registerDrawPack } = await import('motionary/fx/draw'); const { bindEffect } = await import('motionary/components/fx'); registerDrawPack(); window.disposeDraw = bindEffect(document.getElementById('feedback'), 'check-orbit', { duration: 1000 }); });
   const button = page.getByRole('button', { name: 'Save', exact: true }); await button.focus(); await button.press('Enter'); await expect(button.locator('svg')).toHaveCount(1); await expect(button).toBeFocused(); await page.emulateMedia({ reducedMotion: 'reduce' }); await expect(button.locator('svg')).toHaveCount(0); await button.press('Enter'); await expect(button.locator('svg')).toHaveCount(0); await page.evaluate(() => window.disposeDraw()); expectNoErrors(page);
 });
+for (const width of [1280, 390]) {
+  test(`Form Atelier page works as a complete form at ${width}px and records a remote screenshot`, async ({ page }, info) => {
+    await openFixture(page); await page.setViewportSize({ width, height: 960 }); await page.goto('/showcase/forms.html');
+    const form = page.locator('#worked-form'); await expect(form.getByRole('combobox', { name: '摄影类型' })).toHaveValue('portrait');
+    await form.getByRole('button', { name: 'Increase', exact: true }).click(); await form.getByRole('button', { name: '查看选择 ↗', exact: true }).click(); await expect(page.locator('#worked-result')).toContainText('人像 · 4 份');
+    await form.getByRole('button', { name: '重新开始', exact: true }).click(); await expect(form.getByRole('spinbutton')).toHaveValue('3');
+    await page.getByRole('button', { name: 'Soft mint', exact: true }).click(); expect(await form.locator('mo-number-stepper').evaluate(el => getComputedStyle(el).getPropertyValue('--mo-form-accent').trim())).toBe('#aee0c5');
+    const effect = page.locator('.fx-grid mo-fx').first(); await effect.getByRole('button').click(); await expect(effect.locator('svg')).toHaveCount(1); await expect(effect.locator('svg')).toHaveCount(0);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true); await page.evaluate(() => window.scrollTo(0, 0)); await page.screenshot({ path: info.outputPath(`form-atelier-${width}.png`), fullPage: true }); expectNoErrors(page);
+  });
+}
