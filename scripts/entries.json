@@ -1587,6 +1587,123 @@
  },
  {
   "kind": "widget",
+  "name": "select",
+  "entry": "motionary/widgets/select",
+  "src": "src/entries/widgets/select.ts",
+  "tag": "usa-select",
+  "define": "defineSelect",
+  "types": [
+   "UsaSelectElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/select"
+ },
+ {
+  "kind": "widget",
+  "name": "combobox",
+  "entry": "motionary/widgets/combobox",
+  "src": "src/entries/widgets/combobox.ts",
+  "tag": "usa-combobox",
+  "define": "defineCombobox",
+  "types": [
+   "UsaComboboxElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/combobox"
+ },
+ {
+  "kind": "widget",
+  "name": "multi-select",
+  "entry": "motionary/widgets/multi-select",
+  "src": "src/entries/widgets/multi-select.ts",
+  "tag": "usa-multi-select",
+  "define": "defineMultiSelect",
+  "types": [
+   "UsaMultiSelectElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/multi-select"
+ },
+ {
+  "kind": "widget",
+  "name": "number-stepper",
+  "entry": "motionary/widgets/number-stepper",
+  "src": "src/entries/widgets/number-stepper.ts",
+  "tag": "usa-number-stepper",
+  "define": "defineNumberStepper",
+  "types": [
+   "UsaNumberStepperElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/number-stepper"
+ },
+ {
+  "kind": "widget",
+  "name": "password",
+  "entry": "motionary/widgets/password",
+  "src": "src/entries/widgets/password.ts",
+  "tag": "usa-password",
+  "define": "definePassword",
+  "types": [
+   "UsaPasswordElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/password"
+ },
+ {
+  "kind": "widget",
+  "name": "range-slider",
+  "entry": "motionary/widgets/range-slider",
+  "src": "src/entries/widgets/range-slider.ts",
+  "tag": "usa-range-slider",
+  "define": "defineRangeSlider",
+  "types": [
+   "UsaRangeSliderElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/range-slider"
+ },
+ {
+  "kind": "widget",
+  "name": "consent",
+  "entry": "motionary/widgets/consent",
+  "src": "src/entries/widgets/consent.ts",
+  "tag": "usa-consent",
+  "define": "defineConsent",
+  "types": [
+   "UsaConsentElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/consent"
+ },
+ {
+  "kind": "widget",
+  "name": "cta-popup",
+  "entry": "motionary/widgets/cta-popup",
+  "src": "src/entries/widgets/cta-popup.ts",
+  "tag": "usa-cta-popup",
+  "define": "defineCtaPopup",
+  "types": [
+   "UsaCtaPopupElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/cta-popup"
+ },
+ {
+  "kind": "widget",
+  "name": "validation-summary",
+  "entry": "motionary/widgets/validation-summary",
+  "src": "src/entries/widgets/validation-summary.ts",
+  "tag": "usa-validation-summary",
+  "define": "defineValidationSummary",
+  "types": [
+   "UsaValidationSummaryElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/validation-summary"
+ },
+ {
+  "kind": "widget",
   "name": "gravity-well",
   "entry": "motionary/widgets/gravity-well",
   "src": "src/entries/widgets/gravity-well.ts",
@@ -3427,5 +3544,41 @@
   "pack": "matter",
   "register": "registerLiquidLevel",
   "module": "components/fx2/matter"
+ },
+ {
+  "kind": "effect",
+  "name": "check-orbit",
+  "entry": "motionary/effects/check-orbit",
+  "src": "src/entries/effects/check-orbit.ts",
+  "pack": "draw",
+  "register": "registerCheckOrbit",
+  "module": "components/fx2/draw"
+ },
+ {
+  "kind": "effect",
+  "name": "error-underline",
+  "entry": "motionary/effects/error-underline",
+  "src": "src/entries/effects/error-underline.ts",
+  "pack": "draw",
+  "register": "registerErrorUnderline",
+  "module": "components/fx2/draw"
+ },
+ {
+  "kind": "effect",
+  "name": "focus-brackets",
+  "entry": "motionary/effects/focus-brackets",
+  "src": "src/entries/effects/focus-brackets.ts",
+  "pack": "draw",
+  "register": "registerFocusBrackets",
+  "module": "components/fx2/draw"
+ },
+ {
+  "kind": "effect",
+  "name": "submit-trail",
+  "entry": "motionary/effects/submit-trail",
+  "src": "src/entries/effects/submit-trail.ts",
+  "pack": "draw",
+  "register": "registerSubmitTrail",
+  "module": "components/fx2/draw"
  }
 ]

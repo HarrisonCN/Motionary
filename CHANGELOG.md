@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [17.7.0] - 2026-11-12 — Form Atelier
+
+- Added nine mo-* widgets: select, combobox, multi-select, number-stepper, password, range-slider, consent, cta-popup and validation-summary. Total: 259 components (91 core + 168 widgets).
+- Added four finite SVG feedback effects: check-orbit, error-underline, focus-brackets and submit-trail, independently importable and available as the draw plugin. Total: 156 effects. Overlays preserve target content/focus, restore positioning across overlapping effects and clean up on completion, removal or reduced motion.
+- Native form controls submit real values and reset in place. Search selection retains input focus and skips disabled results. Multi-select submits repeated values. Password reveal preserves selection; custom events omit password values. Range controls cannot cross and enforce an optional minimum gap.
+- Preference controls emit choices without writing cookies/storage or starting services. Confirmation uses an explicitly opened native modal dialog. Validation summaries link to real native invalid fields and emit validity/count only.
+- New Form Atelier lab with three accent palettes, bilingual live catalog, generated APIs/framework types, independent exports and a source-based coverage roadmap. Tests and browser previews are performed remotely, per maintainer preference.
+
 ## [17.6.0] - 2026-11-12 — Matter & Motion
 
 - Added thirteen mo-* widgets: gravity-well, liquid-metal, reaction-field, ink-flow, fluid-type, magnetic-field, elastic-mesh, spring-lab, bezier-lab, text-loupe, revision-reveal, hold-action and scrub-number. Total: 250 components (91 core + 159 widgets).

@@ -24,7 +24,7 @@ npm i motionary
 <script type="module">import ScrollAnimate from 'motionary'; ScrollAnimate.init();</script>
 ```
 
-Motionary reveals content as it scrolls into view and gives you <!--fact:public-->250<!--/fact--> animated `<mo-*>` custom elements: cards, buttons,
+Motionary reveals content as it scrolls into view and gives you <!--fact:public-->259<!--/fact--> animated `<mo-*>` custom elements: cards, buttons,
 physics, page transitions, generative backgrounds, Lottie, WebGL and more. It runs in plain HTML, in React, Vue, Svelte,
 Solid and Angular, and in desktop web views (Electron, Tauri, WebView2). It has no runtime dependencies, every entry point
 is tree-shakeable and has its gzip size reported in CI, and every animation respects `prefers-reduced-motion`.
@@ -46,8 +46,8 @@ Supply chain: [docs/supply-chain.md](./docs/supply-chain.md) · CDN with SRI has
 - **214 scroll-reveal presets** in 14 families (33 in the core, 181 more in `motionary/presets/extended`): fades, zooms,
   3D flips, clip-path shapes, blur and mask, bounce, depth, glitch, and scroll-linked `scrub-*`. Also `timeline()`,
   `staggerChildren()` and `parallax()`.
-- **<!--fact:public-->250<!--/fact--> `<mo-*>` Web Components**: <!--fact:core-->91<!--/fact--> core components in `motionary/components` (by category) and <!--fact:widgets-->159<!--/fact--> widgets, one entry point
-  each (`motionary/widgets/<name>`). Plus <!--fact:effects-->152<!--/fact--> effects with their own entry points (`motionary/effects/<name>`).
+- **<!--fact:public-->259<!--/fact--> `<mo-*>` Web Components**: <!--fact:core-->91<!--/fact--> core components in `motionary/components` (by category) and <!--fact:widgets-->168<!--/fact--> widgets, one entry point
+  each (`motionary/widgets/<name>`). Plus <!--fact:effects-->156<!--/fact--> effects with their own entry points (`motionary/effects/<name>`).
   [How components are counted](./docs/components.md#how-components-are-counted).
 - **Motion Core**: `createMotion()` from `motionary/core`, a plugin-based engine at about 2.5 KB gzip (historical reference 10 KB).
 - **A runtime of its own**: `motionary/runtime` (ticker, tween, timeline) plus <!--fact:runtimeModules-->20<!--/fact--> modules: scroll scenes, smooth scrolling,
@@ -75,6 +75,8 @@ No build step? Use the CDN. URLs pin the major version (`@<!--ver:major-->17<!--
 <script src="https://unpkg.com/motionary@17/dist/widgets.umd.js"></script>          <!-- the widgets: window.UsaWidgets -->
 <mo-reveal effect="fade-up"><h2>Hello</h2></mo-reveal>
 ```
+
+17.7 adds nine Form Atelier components and four finite SVG feedback effects. Native form values, keyboard interaction, reset and deliberate confirmation share a coherent visual language. [Form Atelier](./showcase/forms.html) · [API](./docs/form-atelier.md) · [Coverage roadmap](./docs/coverage-roadmap.md).
 
 17.6 adds thirteen Matter & Motion widgets and six standalone effects: interactive fields, fluid type, curve labs and deliberate controls. [Interactive lab](./showcase/matter.html) · [API and inspiration](./docs/matter-motion.md).
 
@@ -416,7 +418,7 @@ Coming from another library: [AOS](./docs/migration-from-aos.md) · [GSAP Scroll
 
 ## Versions and compatibility
 
-- **npm dist-tags:** `latest` is the newest release of the current major (<!--ver:version-->17.6.0<!--/ver-->; minors move it since 14.1). Each minor release also gets its own tag `v<major>-<minor>`
+- **npm dist-tags:** `latest` is the newest release of the current major (<!--ver:version-->17.7.0<!--/ver-->; minors move it since 14.1). Each minor release also gets its own tag `v<major>-<minor>`
   (for example `v15-0`), `v15-line` follows the 15.x line and `v14-lts` is 14.9.x. `motionary` and `use-scroll-animate` are published together at the same versions.
 - **CDN:** URLs pin a major (`motionary@<!--ver:major-->17<!--/ver-->`). Exact pins (`motionary@12.4.0`) keep working.
 - **Semver:** breaking changes come only in majors, each with a guide and a codemod. Deprecations stay in place until the

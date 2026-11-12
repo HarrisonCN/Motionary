@@ -1,3 +1,12 @@
+import { defineSelect, type UsaSelectElement } from './select';
+import { defineCombobox, type UsaComboboxElement } from './combobox';
+import { defineMultiSelect, type UsaMultiSelectElement } from './multi-select';
+import { defineNumberStepper, type UsaNumberStepperElement } from './number-stepper';
+import { definePassword, type UsaPasswordElement } from './password';
+import { defineRangeSlider, type UsaRangeSliderElement } from './range-slider';
+import { defineConsent, type UsaConsentElement } from './consent';
+import { defineCtaPopup, type UsaCtaPopupElement } from './cta-popup';
+import { defineValidationSummary, type UsaValidationSummaryElement } from './validation-summary';
 /**
  * motionary/components/widgets — the 6.x animated UI widgets, in their own
  * entry so `motionary/components` and `components/lite` keep their size
@@ -164,6 +173,9 @@ import { defineParticleButton, type UsaParticleButtonElement } from './particle-
 import { defineHaloSegmented, type UsaHaloSegmentedElement } from './halo-segmented';
 import { defineHaloSlider, type UsaHaloSliderElement } from './halo-slider';
 import { defineOrbitProgress, type UsaOrbitProgressElement } from './orbit-progress';
+
+export { defineSelect, defineCombobox, defineMultiSelect, defineNumberStepper, definePassword, defineRangeSlider, defineConsent, defineCtaPopup, defineValidationSummary };
+export type { UsaSelectElement, UsaComboboxElement, UsaMultiSelectElement, UsaNumberStepperElement, UsaPasswordElement, UsaRangeSliderElement, UsaConsentElement, UsaCtaPopupElement, UsaValidationSummaryElement };
 
 export { defineFlightStatus, defineTransitProgress, defineSunTimeline, defineDeliveryTracker, defineGlucoseSparkline, defineCoffeeTimer, defineVitalWave, defineOrbitPass, defineMeterCountdown, defineRaceTelemetry, defineWorkoutPlayer, defineStatusPill, defineRideStatus, defineRouteSparkline, defineActivityWall };
 export type { UsaFlightStatusElement, UsaTransitProgressElement, UsaSunTimelineElement, UsaDeliveryTrackerElement, UsaGlucoseSparklineElement, UsaCoffeeTimerElement, UsaVitalWaveElement, UsaOrbitPassElement, UsaMeterCountdownElement, UsaRaceTelemetryElement, UsaWorkoutPlayerElement, UsaStatusPillElement, UsaRideStatusElement, UsaRouteSparklineElement, UsaActivityWallElement };
@@ -364,6 +376,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '10.6': { 'usa-lottie-player': defineLottiePlayer, 'usa-rive': defineRive, 'usa-token-editor': defineTokenEditor },
   '10.7': { 'usa-physics-playground': definePhysicsPlayground, 'usa-motion-prompt': defineMotionPrompt },
   '17.3': { 'usa-mega-menu': defineMegaMenu, 'usa-nav-flyout': defineNavFlyout, 'usa-fullscreen-menu': defineFullscreenMenu, 'usa-breadcrumbs': defineBreadcrumbs, 'usa-file-tree': defineFileTree, 'usa-download-menu': defineDownloadMenu, 'usa-title-sequence': defineTitleSequence },
+  '17.7': { 'usa-select': defineSelect, 'usa-combobox': defineCombobox, 'usa-multi-select': defineMultiSelect, 'usa-number-stepper': defineNumberStepper, 'usa-password': definePassword, 'usa-range-slider': defineRangeSlider, 'usa-consent': defineConsent, 'usa-cta-popup': defineCtaPopup, 'usa-validation-summary': defineValidationSummary },
   '17.6': { 'usa-gravity-well': defineGravityWell, 'usa-liquid-metal': defineLiquidMetal, 'usa-reaction-field': defineReactionField, 'usa-ink-flow': defineInkFlow, 'usa-fluid-type': defineFluidType, 'usa-magnetic-field': defineMagneticField, 'usa-elastic-mesh': defineElasticMesh, 'usa-spring-lab': defineSpringLab, 'usa-bezier-lab': defineBezierLab, 'usa-text-loupe': defineTextLoupe, 'usa-revision-reveal': defineRevisionReveal, 'usa-hold-action': defineHoldAction, 'usa-scrub-number': defineScrubNumber },
   '17.5': { 'usa-flight-status': defineFlightStatus, 'usa-transit-progress': defineTransitProgress, 'usa-sun-timeline': defineSunTimeline, 'usa-delivery-tracker': defineDeliveryTracker, 'usa-glucose-sparkline': defineGlucoseSparkline, 'usa-coffee-timer': defineCoffeeTimer, 'usa-vital-wave': defineVitalWave, 'usa-orbit-pass': defineOrbitPass, 'usa-meter-countdown': defineMeterCountdown, 'usa-race-telemetry': defineRaceTelemetry, 'usa-workout-player': defineWorkoutPlayer, 'usa-status-pill': defineStatusPill, 'usa-ride-status': defineRideStatus, 'usa-route-sparkline': defineRouteSparkline, 'usa-activity-wall': defineActivityWall },
   '17.4': { 'usa-luminous-switch': defineLuminousSwitch, 'usa-particle-icon': defineParticleIcon, 'usa-particle-button': defineParticleButton, 'usa-halo-segmented': defineHaloSegmented, 'usa-halo-slider': defineHaloSlider, 'usa-orbit-progress': defineOrbitProgress },
@@ -383,6 +396,24 @@ export function defineWidgets(release?: string): void {
 
 declare global {
   interface HTMLElementTagNameMap {
+    'usa-select': UsaSelectElement;
+    'mo-select': UsaSelectElement;
+    'usa-combobox': UsaComboboxElement;
+    'mo-combobox': UsaComboboxElement;
+    'usa-multi-select': UsaMultiSelectElement;
+    'mo-multi-select': UsaMultiSelectElement;
+    'usa-number-stepper': UsaNumberStepperElement;
+    'mo-number-stepper': UsaNumberStepperElement;
+    'usa-password': UsaPasswordElement;
+    'mo-password': UsaPasswordElement;
+    'usa-range-slider': UsaRangeSliderElement;
+    'mo-range-slider': UsaRangeSliderElement;
+    'usa-consent': UsaConsentElement;
+    'mo-consent': UsaConsentElement;
+    'usa-cta-popup': UsaCtaPopupElement;
+    'mo-cta-popup': UsaCtaPopupElement;
+    'usa-validation-summary': UsaValidationSummaryElement;
+    'mo-validation-summary': UsaValidationSummaryElement;
     'usa-gravity-well': UsaGravityWellElement;
     'mo-gravity-well': UsaGravityWellElement;
     'usa-liquid-metal': UsaLiquidMetalElement;

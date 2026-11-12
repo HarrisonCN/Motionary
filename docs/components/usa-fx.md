@@ -911,3 +911,35 @@ A finite Matter overlay; native content and focus stay intact.
 ```html
 <mo-fx effect="liquid-level" trigger="click"><button type="button" style="min-height:160px;width:100%;border-radius:14px;background:#10131a;color:#c9d9f4;border:1px solid #354056">Play liquid-level</button></mo-fx>
 ```
+
+### Orbit check
+
+Finite SVG feedback; original content and focus are preserved.
+
+```html
+<mo-fx effect="check-orbit" trigger="click"><button type="button" style="width:100%;min-height:100px;border:1px solid #8a9dbc44;border-radius:16px;background:#12161e;color:#d8e7ff">Orbit check</button></mo-fx>
+```
+
+### Error underline
+
+Finite SVG feedback; original content and focus are preserved.
+
+```html
+<mo-fx effect="error-underline" trigger="click"><button type="button" style="width:100%;min-height:100px;border:1px solid #8a9dbc44;border-radius:16px;background:#12161e;color:#d8e7ff">Error underline</button></mo-fx>
+```
+
+### Focus brackets
+
+Finite SVG feedback; original content and focus are preserved.
+
+```html
+<mo-fx effect="focus-brackets" trigger="click"><button type="button" style="width:100%;min-height:100px;border:1px solid #8a9dbc44;border-radius:16px;background:#12161e;color:#d8e7ff">Focus brackets</button></mo-fx>
+```
+
+### Submit trail
+
+Finite SVG feedback; original content and focus are preserved.
+
+```html
+<mo-fx effect="submit-trail" trigger="click"><button type="button" style="width:100%;min-height:100px;border:1px solid #8a9dbc44;border-radius:16px;background:#12161e;color:#d8e7ff">Submit trail</button></mo-fx>
+```

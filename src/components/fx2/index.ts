@@ -39,6 +39,7 @@ import { SAFE_FX, registerSafePack, vestibularSafe, flashCount, isFlashSafe, app
 import { PERF3_FX, registerPerf3Pack, runInWorker, offscreenRender, fpsMeter } from './perf3';
 import { HOVER_FX, registerHoverPack } from './hover';
 import { MATTER_FX, registerMatterPack } from './matter';
+import { DRAW_FX, registerDrawPack } from './draw';
 import { registerEffects } from '../fx/registry';
 
 export { GPU_FX, registerGpuPack, TEXT3_FX, registerTextPack, splitChars };
@@ -106,6 +107,7 @@ export { PERF3_FX, registerPerf3Pack, runInWorker, offscreenRender, fpsMeter };
 
 export { HOVER_FX, registerHoverPack };
 export { MATTER_FX, registerMatterPack };
+export { DRAW_FX, registerDrawPack };
 
 /** The 6.x effect packs by name. */
 export const EFFECT_PACKS: Record<string, EffectDefinition[]> = {
@@ -142,6 +144,7 @@ export const EFFECT_PACKS: Record<string, EffectDefinition[]> = {
   perf3: PERF3_FX,
   hover: HOVER_FX,
   matter: MATTER_FX,
+  draw: DRAW_FX,
 };
 
 /** Register every built-in effect pack — each one is a plugin (9.9; idempotent). */
@@ -178,7 +181,7 @@ export function registerAllPlugins(): void {
   registerSafePack();
   registerPerf3Pack();
   registerHoverPack();
-  registerMatterPack();
+  registerMatterPack(); registerDrawPack();
 }
 
 const PACK_SOURCES = EFFECT_PACKS;

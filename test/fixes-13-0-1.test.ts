@@ -67,7 +67,7 @@ export const defineB = (tag = 'x-bb') => defineThing(tag, 'b');
 describe('13.0.1: manifest tag set == audited tag set', () => {
   it('all public manifest components are audited, and nothing else', () => {
     const tags = manifestTags();
-    expect(tags.length).toBe(250);
+    expect(tags.length).toBe(259);
     const rows = audit();
     expect(coverage(rows, tags)).toEqual({ missing: [], extra: [] });
     expect(rows.map((r: any) => r.tag).sort()).toEqual([...tags].sort());
