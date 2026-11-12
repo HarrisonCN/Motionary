@@ -24,4 +24,4 @@ function defineMeterCountdown(tag = 'usa-meter-countdown') {
 }
 
 export { defineMeterCountdown };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/widgets/meter-countdown.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/widgets/meter-countdown.js.map

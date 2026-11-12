@@ -242,4 +242,4 @@ exports.routeView = routeView;
 exports.sunView = sunView;
 exports.transitView = transitView;
 exports.workoutView = workoutView;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/chunks/activity-XCjQREWy.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/chunks/activity-XCjQREWy.cjs.map

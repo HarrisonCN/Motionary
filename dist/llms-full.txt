@@ -1,4 +1,4 @@
-# Motionary 17.5.0 — full component reference
+# Motionary 17.6.0 — full component reference
 
 Generated from the source. Machine-readable version: https://harrisoncn.github.io/Motionary/components.json (schema https://harrisoncn.github.io/Motionary/components.schema.json).
 
@@ -775,6 +775,20 @@ Count or dot badge that bumps with a spring when its value changes; 99+ capping,
 <script>addEventListener('DOMContentLoaded', () => { document.querySelector('usa-bar-chart').data = [{ label: 'Mon', value: 18 }, { label: 'Tue', value: 12 }, { label: 'Wed', value: 21 }]; });</script>
 ```
 
+### <mo-bezier-lab> (legacy <usa-bezier-lab>) — Bezier laboratory
+
+Drag control handles or edit native ranges; replay CSS timing with x inversion.
+
+- Import: `import { defineBezierLab } from 'motionary/components/widgets'; defineBezierLab();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `disabled`, `x1`, `y1`, `x2`, `y2`, `duration`
+- Events: `usa:action`, `usa:change`
+- Methods: `update()`, `reset()`, `play()`, `pause()`
+
+```html
+<mo-bezier-lab></mo-bezier-lab>
+```
+
 ### <mo-bg-generator> (legacy <usa-bg-generator>) — Background generator
 
 9.3: a background generator — pick a palette and a style (mesh gradient, grain, stripes, dots), shuffle the seed and copy the CSS.
@@ -1428,6 +1442,20 @@ A side panel that springs in, drags / swipes closed, traps the page behind a bac
 <usa-drawer id="nav" side="left" label="Navigation">…</usa-drawer>
 ```
 
+### <mo-elastic-mesh> (legacy <usa-elastic-mesh>) — Elastic mesh
+
+Pull a spring mesh and release it to settle back to its rest positions.
+
+- Import: `import { defineElasticMesh } from 'motionary/components/widgets'; defineElasticMesh();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `disabled`, `animated`, `paused`, `color`, `accent`, `strength`
+- Events: `usa:action`, `usa:change`
+- Methods: `update()`, `reset()`, `play()`, `pause()`, `activate()`, `deactivate()`
+
+```html
+<mo-elastic-mesh animated></mo-elastic-mesh>
+```
+
 ### <mo-equalizer> (legacy <usa-equalizer>) — Graphic equalizer
 
 7.1: one vertical slider per band with springy caps and a smooth response curve drawn through them; presets glide every band to its gain.
@@ -1531,6 +1559,20 @@ Origin and destination codes, a moving aircraft and an arrival estimate.
 
 ```html
 <mo-flight-status value="68"></mo-flight-status>
+```
+
+### <mo-fluid-type> (legacy <usa-fluid-type>) — Fluid type
+
+Supplied text becomes a halftone vessel with a tilting liquid surface.
+
+- Import: `import { defineFluidType } from 'motionary/components/widgets'; defineFluidType();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `disabled`, `animated`, `paused`, `color`, `accent`, `text`, `fill`
+- Events: `usa:action`, `usa:change`
+- Methods: `update()`, `reset()`, `play()`, `pause()`, `activate()`, `deactivate()`
+
+```html
+<mo-fluid-type animated></mo-fluid-type>
 ```
 
 ### <mo-fullpage> (legacy <usa-fullpage>) — Full-page sections
@@ -1802,6 +1844,20 @@ An SVG-noise grain overlay — no image to ship. animated makes it jitter like f
 </usa-grain>
 ```
 
+### <mo-gravity-well> (legacy <usa-gravity-well>) — Gravity well
+
+Seeded orbital dust, a pointer attractor and a press-to-collapse gesture.
+
+- Import: `import { defineGravityWell } from 'motionary/components/widgets'; defineGravityWell();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `disabled`, `animated`, `paused`, `color`, `accent`, `seed`, `count`, `strength`
+- Events: `usa:action`, `usa:change`
+- Methods: `update()`, `reset()`, `play()`, `pause()`, `activate()`, `deactivate()`
+
+```html
+<mo-gravity-well animated></mo-gravity-well>
+```
+
 ### <mo-grid-glow> (legacy <usa-grid-glow>) — Grid glow
 
 A line grid behind the content that lights up around the pointer.
@@ -1906,6 +1962,20 @@ Press and hold (pointer, Space or Enter) while a ring fills; releasing early rew
 <usa-hold duration="1200" label="Delete project">Hold to delete</usa-hold>
 ```
 
+### <mo-hold-action> (legacy <usa-hold-action>) — Hold action
+
+Hold with a pointer, Space or Enter; release or Escape cancels. Emits an event only.
+
+- Import: `import { defineHoldAction } from 'motionary/components/widgets'; defineHoldAction();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `complete-label`, `duration`, `disabled`
+- Events: `usa:cancel`, `usa:change`, `usa:confirm`
+- Methods: `reset()`, `cancel()`, `update()`
+
+```html
+<mo-hold-action duration="800"></mo-hold-action>
+```
+
 ### <mo-hud-panel> (legacy <usa-hud-panel>) — HUD panel
 
 8.4: a sci-fi HUD panel — angled corners, a glowing frame that draws itself in when the panel scrolls into view, a header with a blinking status light, and data rows that fill in as animated bar readouts.
@@ -1955,6 +2025,20 @@ Icons that morph point-by-point with a spring: play ↔ pause, menu ↔ close, p
 ```html
 <usa-icon-morph icons="play,pause" labels="Play,Pause" toggle></usa-icon-morph>
 <usa-icon-morph icons="menu,close" labels="Open menu,Close menu" toggle></usa-icon-morph>
+```
+
+### <mo-ink-flow> (legacy <usa-ink-flow>) — Ink flow
+
+Two colors of particles advect through a pointer-stirred flow field.
+
+- Import: `import { defineInkFlow } from 'motionary/components/widgets'; defineInkFlow();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `disabled`, `animated`, `paused`, `color`, `accent`, `seed`, `count`, `strength`
+- Events: `usa:action`, `usa:change`
+- Methods: `update()`, `reset()`, `play()`, `pause()`, `activate()`, `deactivate()`
+
+```html
+<mo-ink-flow animated></mo-ink-flow>
 ```
 
 ### <mo-install-button> (legacy <usa-install-button>) — Install button
@@ -2067,6 +2151,20 @@ Click or tap to send water ripples through the image; hover adds a gentle wobble
 <usa-liquid strength="1">
   <img src="photo.jpg" alt="…">
 </usa-liquid>
+```
+
+### <mo-liquid-metal> (legacy <usa-liquid-metal>) — Liquid metal
+
+Stippled metaballs pull toward the pointer and merge into a bead.
+
+- Import: `import { defineLiquidMetal } from 'motionary/components/widgets'; defineLiquidMetal();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `disabled`, `animated`, `paused`, `color`, `accent`, `seed`, `strength`
+- Events: `usa:action`, `usa:change`
+- Methods: `update()`, `reset()`, `play()`, `pause()`, `activate()`, `deactivate()`
+
+```html
+<mo-liquid-metal animated></mo-liquid-metal>
 ```
 
 ### <mo-liquid-nav> (legacy <usa-liquid-nav>) — Liquid nav
@@ -2219,6 +2317,20 @@ Content leans toward the pointer when it comes near and springs back. Fine point
 
 ```html
 <usa-magnetic strength="0.4"><button>Hover near me</button></usa-magnetic>
+```
+
+### <mo-magnetic-field> (legacy <usa-magnetic-field>) — Magnetic field
+
+Fine filings orient around a pointer-controlled magnetic dipole.
+
+- Import: `import { defineMagneticField } from 'motionary/components/widgets'; defineMagneticField();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `disabled`, `animated`, `paused`, `color`, `accent`, `strength`
+- Events: `usa:action`, `usa:change`
+- Methods: `update()`, `reset()`, `play()`, `pause()`, `activate()`, `deactivate()`
+
+```html
+<mo-magnetic-field animated></mo-magnetic-field>
 ```
 
 ### <mo-marquee> (legacy <usa-marquee>) — Marquee
@@ -3158,6 +3270,20 @@ A vector track, position marker and supplied lap records.
 <usa-radar targets="Alpha:40,0.6; Bravo:200,0.35; Echo:300,0.8" speed="4"></usa-radar>
 ```
 
+### <mo-reaction-field> (legacy <usa-reaction-field>) — Reaction field
+
+Real Gray–Scott chemistry, with dot and contour rendering and shape masks.
+
+- Import: `import { defineReactionField } from 'motionary/components/widgets'; defineReactionField();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `disabled`, `animated`, `paused`, `color`, `accent`, `seed`, `feed`, `kill`, `mode`, `shape`
+- Events: `usa:action`, `usa:change`
+- Methods: `update()`, `reset()`, `play()`, `pause()`, `activate()`, `deactivate()`
+
+```html
+<mo-reaction-field animated></mo-reaction-field>
+```
+
 ### <mo-reactions> (legacy <usa-reactions>) — Emoji reactions
 
 7.4: a reaction bar — clicking a pill toggles your reaction: the emoji pops, the count rolls and copies float up; ＋ springs open a picker. Each pill is a toggle button with a count label.
@@ -3213,6 +3339,20 @@ Fade, slide, zoom, blur or flip content in as it enters the viewport. 12 effects
 <usa-reveal effect="fade-up" duration="700">
   <h2>Hello</h2>
 </usa-reveal>
+```
+
+### <mo-revision-reveal> (legacy <usa-revision-reveal>) — Revision reveal
+
+Slide between supplied draft and final text, with accessible copies of both.
+
+- Import: `import { defineRevisionReveal } from 'motionary/components/widgets'; defineRevisionReveal();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `disabled`, `text`, `draft`, `value`
+- Events: `usa:action`, `usa:change`
+- Methods: `update()`, `reset()`
+
+```html
+<mo-revision-reveal></mo-revision-reveal>
 ```
 
 ### <mo-ride-status> (legacy <usa-ride-status>) — Ride status
@@ -3431,6 +3571,20 @@ A pinned graphic while [data-step] blocks scroll past; the active step drives th
   <section data-step="intro">…</section>
   <section data-step="detail">…</section>
 </usa-scrolly>
+```
+
+### <mo-scrub-number> (legacy <usa-scrub-number>) — Scrub number
+
+Editable bounded numbers, horizontal drag, precision mode and keyboard stepping.
+
+- Import: `import { defineScrubNumber } from 'motionary/components/widgets'; defineScrubNumber();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `value`, `min`, `max`, `step`, `unit`, `disabled`
+- Events: `usa:input`, `usa:change`
+- Methods: `stepUp()`, `stepDown()`, `reset()`, `update()`
+
+```html
+<mo-scrub-number label="Stiffness" value="180" min="1" max="800" unit="N/m"></mo-scrub-number>
 ```
 
 ### <mo-segmented> (legacy <usa-segmented>) — Segmented control
@@ -3769,6 +3923,20 @@ bounce-in, pop and drop entrances with true spring timing (CSS linear() easing),
 </usa-spring>
 ```
 
+### <mo-spring-lab> (legacy <usa-spring-lab>) — Spring laboratory
+
+Tune mass, damping and stiffness; inspect the real step response and replay it.
+
+- Import: `import { defineSpringLab } from 'motionary/components/widgets'; defineSpringLab();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `disabled`, `stiffness`, `damping`, `mass`
+- Events: `usa:action`, `usa:change`
+- Methods: `update()`, `reset()`, `play()`, `pause()`
+
+```html
+<mo-spring-lab></mo-spring-lab>
+```
+
 ### <mo-stagger> (legacy <usa-stagger>) — Stagger list
 
 Reveals direct children one after another — lists, grids, feature rows.
@@ -4034,6 +4202,20 @@ Accessible tabs whose indicator slides between tabs with a spring; panels slide 
   <p data-cmd>npm i motionary</p>
   <p>added 1 package in 2s</p>
 </usa-terminal>
+```
+
+### <mo-text-loupe> (legacy <usa-text-loupe>) — Text loupe
+
+A pointer and keyboard controlled lens preserves the readable original text.
+
+- Import: `import { defineTextLoupe } from 'motionary/components/widgets'; defineTextLoupe();`
+- CDN: https://unpkg.com/motionary@17/dist/widgets.umd.js
+- Attributes: `label`, `disabled`, `text`
+- Events: `usa:action`, `usa:change`
+- Methods: `update()`, `reset()`, `focusAt()`
+
+```html
+<mo-text-loupe></mo-text-loupe>
 ```
 
 ### <mo-text-rotate> (legacy <usa-text-rotate>) — Rotating words

@@ -1239,6 +1239,113 @@
       "usa:tick": [
         "object: detail"
       ]
+    },
+    "usa-bezier-lab": {
+      "usa:action": [
+        "object: detail"
+      ],
+      "usa:change": [
+        "object: detail"
+      ]
+    },
+    "usa-elastic-mesh": {
+      "usa:action": [
+        "object: detail"
+      ],
+      "usa:change": [
+        "object: detail"
+      ]
+    },
+    "usa-fluid-type": {
+      "usa:action": [
+        "object: detail"
+      ],
+      "usa:change": [
+        "object: detail"
+      ]
+    },
+    "usa-gravity-well": {
+      "usa:action": [
+        "object: detail"
+      ],
+      "usa:change": [
+        "object: detail"
+      ]
+    },
+    "usa-hold-action": {
+      "usa:cancel": [
+        "{value}"
+      ],
+      "usa:change": [
+        "{confirmed, value}"
+      ],
+      "usa:confirm": [
+        "{duration, value}"
+      ]
+    },
+    "usa-ink-flow": {
+      "usa:action": [
+        "object: detail"
+      ],
+      "usa:change": [
+        "object: detail"
+      ]
+    },
+    "usa-liquid-metal": {
+      "usa:action": [
+        "object: detail"
+      ],
+      "usa:change": [
+        "object: detail"
+      ]
+    },
+    "usa-magnetic-field": {
+      "usa:action": [
+        "object: detail"
+      ],
+      "usa:change": [
+        "object: detail"
+      ]
+    },
+    "usa-reaction-field": {
+      "usa:action": [
+        "object: detail"
+      ],
+      "usa:change": [
+        "object: detail"
+      ]
+    },
+    "usa-revision-reveal": {
+      "usa:action": [
+        "object: detail"
+      ],
+      "usa:change": [
+        "object: detail"
+      ]
+    },
+    "usa-scrub-number": {
+      "usa:change": [
+        "{value}"
+      ],
+      "usa:input": [
+        "{value}"
+      ]
+    },
+    "usa-spring-lab": {
+      "usa:action": [
+        "object: detail"
+      ],
+      "usa:change": [
+        "object: detail"
+      ]
+    },
+    "usa-text-loupe": {
+      "usa:action": [
+        "object: detail"
+      ],
+      "usa:change": [
+        "object: detail"
+      ]
     }
   }
 }

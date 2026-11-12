@@ -592,4 +592,4 @@ exports.supportsWebGL2 = supportsWebGL2;
 exports.supportsWebGPU = supportsWebGPU;
 exports.webgpuBackground = webgpuBackground;
 exports.wgslModule = wgslModule;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/chunks/gpu-B7egA-fl.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/chunks/gpu-B7egA-fl.cjs.map

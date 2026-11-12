@@ -24,4 +24,4 @@ function defineGlucoseSparkline(tag = 'usa-glucose-sparkline') {
 }
 
 export { defineGlucoseSparkline };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/widgets/glucose-sparkline.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/widgets/glucose-sparkline.js.map

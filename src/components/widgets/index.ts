@@ -130,6 +130,19 @@ import { defineMegaMenu, defineNavFlyout, type UsaMegaMenuElement, type UsaNavFl
 import { defineFullscreenMenu, type UsaFullscreenMenuElement } from './fullscreen-menu';
 import { defineBreadcrumbs, type UsaBreadcrumbsElement, type BreadcrumbItem } from './breadcrumbs';
 import { defineMoAliases } from '../mo';
+import { defineGravityWell, type UsaGravityWellElement } from './gravity-well';
+import { defineLiquidMetal, type UsaLiquidMetalElement } from './liquid-metal';
+import { defineReactionField, type UsaReactionFieldElement } from './reaction-field';
+import { defineInkFlow, type UsaInkFlowElement } from './ink-flow';
+import { defineFluidType, type UsaFluidTypeElement } from './fluid-type';
+import { defineMagneticField, type UsaMagneticFieldElement } from './magnetic-field';
+import { defineElasticMesh, type UsaElasticMeshElement } from './elastic-mesh';
+import { defineSpringLab, type UsaSpringLabElement } from './spring-lab';
+import { defineBezierLab, type UsaBezierLabElement } from './bezier-lab';
+import { defineTextLoupe, type UsaTextLoupeElement } from './text-loupe';
+import { defineRevisionReveal, type UsaRevisionRevealElement } from './revision-reveal';
+import { defineHoldAction, type UsaHoldActionElement } from './hold-action';
+import { defineScrubNumber, type UsaScrubNumberElement } from './scrub-number';
 import { defineFlightStatus, type UsaFlightStatusElement } from './flight-status';
 import { defineTransitProgress, type UsaTransitProgressElement } from './transit-progress';
 import { defineSunTimeline, type UsaSunTimelineElement } from './sun-timeline';
@@ -292,6 +305,20 @@ export { defineMegaMenu, defineNavFlyout, defineFullscreenMenu, defineBreadcrumb
 export type { UsaMegaMenuElement, UsaNavFlyoutElement, UsaFullscreenMenuElement, UsaBreadcrumbsElement, BreadcrumbItem };
 
 /** The widgets by release (tag → define function). */
+export { defineGravityWell, type UsaGravityWellElement };
+export { defineLiquidMetal, type UsaLiquidMetalElement };
+export { defineReactionField, type UsaReactionFieldElement };
+export { defineInkFlow, type UsaInkFlowElement };
+export { defineFluidType, type UsaFluidTypeElement };
+export { defineMagneticField, type UsaMagneticFieldElement };
+export { defineElasticMesh, type UsaElasticMeshElement };
+export { defineSpringLab, type UsaSpringLabElement };
+export { defineBezierLab, type UsaBezierLabElement };
+export { defineTextLoupe, type UsaTextLoupeElement };
+export { defineRevisionReveal, type UsaRevisionRevealElement };
+export { defineHoldAction, type UsaHoldActionElement };
+export { defineScrubNumber, type UsaScrubNumberElement };
+
 export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElementConstructor | undefined>> = {
   '6.2': { 'usa-carousel': defineCarousel, 'usa-tab-bar': defineTabBar, 'usa-disclosure': defineDisclosure, 'usa-stories': defineStories },
   '6.3': { 'usa-toast-stack': defineToastStack, 'usa-modal': defineModal, 'usa-sheet': defineSheet, 'usa-menu': defineMenu },
@@ -337,6 +364,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '10.6': { 'usa-lottie-player': defineLottiePlayer, 'usa-rive': defineRive, 'usa-token-editor': defineTokenEditor },
   '10.7': { 'usa-physics-playground': definePhysicsPlayground, 'usa-motion-prompt': defineMotionPrompt },
   '17.3': { 'usa-mega-menu': defineMegaMenu, 'usa-nav-flyout': defineNavFlyout, 'usa-fullscreen-menu': defineFullscreenMenu, 'usa-breadcrumbs': defineBreadcrumbs, 'usa-file-tree': defineFileTree, 'usa-download-menu': defineDownloadMenu, 'usa-title-sequence': defineTitleSequence },
+  '17.6': { 'usa-gravity-well': defineGravityWell, 'usa-liquid-metal': defineLiquidMetal, 'usa-reaction-field': defineReactionField, 'usa-ink-flow': defineInkFlow, 'usa-fluid-type': defineFluidType, 'usa-magnetic-field': defineMagneticField, 'usa-elastic-mesh': defineElasticMesh, 'usa-spring-lab': defineSpringLab, 'usa-bezier-lab': defineBezierLab, 'usa-text-loupe': defineTextLoupe, 'usa-revision-reveal': defineRevisionReveal, 'usa-hold-action': defineHoldAction, 'usa-scrub-number': defineScrubNumber },
   '17.5': { 'usa-flight-status': defineFlightStatus, 'usa-transit-progress': defineTransitProgress, 'usa-sun-timeline': defineSunTimeline, 'usa-delivery-tracker': defineDeliveryTracker, 'usa-glucose-sparkline': defineGlucoseSparkline, 'usa-coffee-timer': defineCoffeeTimer, 'usa-vital-wave': defineVitalWave, 'usa-orbit-pass': defineOrbitPass, 'usa-meter-countdown': defineMeterCountdown, 'usa-race-telemetry': defineRaceTelemetry, 'usa-workout-player': defineWorkoutPlayer, 'usa-status-pill': defineStatusPill, 'usa-ride-status': defineRideStatus, 'usa-route-sparkline': defineRouteSparkline, 'usa-activity-wall': defineActivityWall },
   '17.4': { 'usa-luminous-switch': defineLuminousSwitch, 'usa-particle-icon': defineParticleIcon, 'usa-particle-button': defineParticleButton, 'usa-halo-segmented': defineHaloSegmented, 'usa-halo-slider': defineHaloSlider, 'usa-orbit-progress': defineOrbitProgress },
 };
@@ -355,6 +383,32 @@ export function defineWidgets(release?: string): void {
 
 declare global {
   interface HTMLElementTagNameMap {
+    'usa-gravity-well': UsaGravityWellElement;
+    'mo-gravity-well': UsaGravityWellElement;
+    'usa-liquid-metal': UsaLiquidMetalElement;
+    'mo-liquid-metal': UsaLiquidMetalElement;
+    'usa-reaction-field': UsaReactionFieldElement;
+    'mo-reaction-field': UsaReactionFieldElement;
+    'usa-ink-flow': UsaInkFlowElement;
+    'mo-ink-flow': UsaInkFlowElement;
+    'usa-fluid-type': UsaFluidTypeElement;
+    'mo-fluid-type': UsaFluidTypeElement;
+    'usa-magnetic-field': UsaMagneticFieldElement;
+    'mo-magnetic-field': UsaMagneticFieldElement;
+    'usa-elastic-mesh': UsaElasticMeshElement;
+    'mo-elastic-mesh': UsaElasticMeshElement;
+    'usa-spring-lab': UsaSpringLabElement;
+    'mo-spring-lab': UsaSpringLabElement;
+    'usa-bezier-lab': UsaBezierLabElement;
+    'mo-bezier-lab': UsaBezierLabElement;
+    'usa-text-loupe': UsaTextLoupeElement;
+    'mo-text-loupe': UsaTextLoupeElement;
+    'usa-revision-reveal': UsaRevisionRevealElement;
+    'mo-revision-reveal': UsaRevisionRevealElement;
+    'usa-hold-action': UsaHoldActionElement;
+    'mo-hold-action': UsaHoldActionElement;
+    'usa-scrub-number': UsaScrubNumberElement;
+    'mo-scrub-number': UsaScrubNumberElement;
     'usa-flight-status': UsaFlightStatusElement;
     'mo-flight-status': UsaFlightStatusElement;
     'usa-transit-progress': UsaTransitProgressElement;

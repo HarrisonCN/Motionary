@@ -1587,6 +1587,175 @@
  },
  {
   "kind": "widget",
+  "name": "gravity-well",
+  "entry": "motionary/widgets/gravity-well",
+  "src": "src/entries/widgets/gravity-well.ts",
+  "tag": "usa-gravity-well",
+  "define": "defineGravityWell",
+  "types": [
+   "UsaGravityWellElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/gravity-well"
+ },
+ {
+  "kind": "widget",
+  "name": "liquid-metal",
+  "entry": "motionary/widgets/liquid-metal",
+  "src": "src/entries/widgets/liquid-metal.ts",
+  "tag": "usa-liquid-metal",
+  "define": "defineLiquidMetal",
+  "types": [
+   "UsaLiquidMetalElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/liquid-metal"
+ },
+ {
+  "kind": "widget",
+  "name": "reaction-field",
+  "entry": "motionary/widgets/reaction-field",
+  "src": "src/entries/widgets/reaction-field.ts",
+  "tag": "usa-reaction-field",
+  "define": "defineReactionField",
+  "types": [
+   "UsaReactionFieldElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/reaction-field"
+ },
+ {
+  "kind": "widget",
+  "name": "ink-flow",
+  "entry": "motionary/widgets/ink-flow",
+  "src": "src/entries/widgets/ink-flow.ts",
+  "tag": "usa-ink-flow",
+  "define": "defineInkFlow",
+  "types": [
+   "UsaInkFlowElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/ink-flow"
+ },
+ {
+  "kind": "widget",
+  "name": "fluid-type",
+  "entry": "motionary/widgets/fluid-type",
+  "src": "src/entries/widgets/fluid-type.ts",
+  "tag": "usa-fluid-type",
+  "define": "defineFluidType",
+  "types": [
+   "UsaFluidTypeElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/fluid-type"
+ },
+ {
+  "kind": "widget",
+  "name": "magnetic-field",
+  "entry": "motionary/widgets/magnetic-field",
+  "src": "src/entries/widgets/magnetic-field.ts",
+  "tag": "usa-magnetic-field",
+  "define": "defineMagneticField",
+  "types": [
+   "UsaMagneticFieldElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/magnetic-field"
+ },
+ {
+  "kind": "widget",
+  "name": "elastic-mesh",
+  "entry": "motionary/widgets/elastic-mesh",
+  "src": "src/entries/widgets/elastic-mesh.ts",
+  "tag": "usa-elastic-mesh",
+  "define": "defineElasticMesh",
+  "types": [
+   "UsaElasticMeshElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/elastic-mesh"
+ },
+ {
+  "kind": "widget",
+  "name": "spring-lab",
+  "entry": "motionary/widgets/spring-lab",
+  "src": "src/entries/widgets/spring-lab.ts",
+  "tag": "usa-spring-lab",
+  "define": "defineSpringLab",
+  "types": [
+   "UsaSpringLabElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/spring-lab"
+ },
+ {
+  "kind": "widget",
+  "name": "bezier-lab",
+  "entry": "motionary/widgets/bezier-lab",
+  "src": "src/entries/widgets/bezier-lab.ts",
+  "tag": "usa-bezier-lab",
+  "define": "defineBezierLab",
+  "types": [
+   "UsaBezierLabElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/bezier-lab"
+ },
+ {
+  "kind": "widget",
+  "name": "text-loupe",
+  "entry": "motionary/widgets/text-loupe",
+  "src": "src/entries/widgets/text-loupe.ts",
+  "tag": "usa-text-loupe",
+  "define": "defineTextLoupe",
+  "types": [
+   "UsaTextLoupeElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/text-loupe"
+ },
+ {
+  "kind": "widget",
+  "name": "revision-reveal",
+  "entry": "motionary/widgets/revision-reveal",
+  "src": "src/entries/widgets/revision-reveal.ts",
+  "tag": "usa-revision-reveal",
+  "define": "defineRevisionReveal",
+  "types": [
+   "UsaRevisionRevealElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/revision-reveal"
+ },
+ {
+  "kind": "widget",
+  "name": "hold-action",
+  "entry": "motionary/widgets/hold-action",
+  "src": "src/entries/widgets/hold-action.ts",
+  "tag": "usa-hold-action",
+  "define": "defineHoldAction",
+  "types": [
+   "UsaHoldActionElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/hold-action"
+ },
+ {
+  "kind": "widget",
+  "name": "scrub-number",
+  "entry": "motionary/widgets/scrub-number",
+  "src": "src/entries/widgets/scrub-number.ts",
+  "tag": "usa-scrub-number",
+  "define": "defineScrubNumber",
+  "types": [
+   "UsaScrubNumberElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/scrub-number"
+ },
+ {
+  "kind": "widget",
   "name": "flight-status",
   "entry": "motionary/widgets/flight-status",
   "src": "src/entries/widgets/flight-status.ts",
@@ -3204,5 +3373,59 @@
   "pack": "hover",
   "register": "registerGooglyEyes",
   "module": "components/fx2/hover"
+ },
+ {
+  "kind": "effect",
+  "name": "dust-vortex",
+  "entry": "motionary/effects/dust-vortex",
+  "src": "src/entries/effects/dust-vortex.ts",
+  "pack": "matter",
+  "register": "registerDustVortex",
+  "module": "components/fx2/matter"
+ },
+ {
+  "kind": "effect",
+  "name": "mercury-morph",
+  "entry": "motionary/effects/mercury-morph",
+  "src": "src/entries/effects/mercury-morph.ts",
+  "pack": "matter",
+  "register": "registerMercuryMorph",
+  "module": "components/fx2/matter"
+ },
+ {
+  "kind": "effect",
+  "name": "chemical-bloom",
+  "entry": "motionary/effects/chemical-bloom",
+  "src": "src/entries/effects/chemical-bloom.ts",
+  "pack": "matter",
+  "register": "registerChemicalBloom",
+  "module": "components/fx2/matter"
+ },
+ {
+  "kind": "effect",
+  "name": "magnetic-align",
+  "entry": "motionary/effects/magnetic-align",
+  "src": "src/entries/effects/magnetic-align.ts",
+  "pack": "matter",
+  "register": "registerMagneticAlign",
+  "module": "components/fx2/matter"
+ },
+ {
+  "kind": "effect",
+  "name": "elastic-ripple",
+  "entry": "motionary/effects/elastic-ripple",
+  "src": "src/entries/effects/elastic-ripple.ts",
+  "pack": "matter",
+  "register": "registerElasticRipple",
+  "module": "components/fx2/matter"
+ },
+ {
+  "kind": "effect",
+  "name": "liquid-level",
+  "entry": "motionary/effects/liquid-level",
+  "src": "src/entries/effects/liquid-level.ts",
+  "pack": "matter",
+  "register": "registerLiquidLevel",
+  "module": "components/fx2/matter"
  }
 ]

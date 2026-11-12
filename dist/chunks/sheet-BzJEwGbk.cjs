@@ -271,4 +271,4 @@ exports.SHEET_SIDES = SHEET_SIDES;
 exports.defineModal = defineModal;
 exports.defineSheet = defineSheet;
 exports.delegateTriggers = delegateTriggers;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/chunks/sheet-BzJEwGbk.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/chunks/sheet-BzJEwGbk.cjs.map

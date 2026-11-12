@@ -24,4 +24,4 @@ function defineOrbitPass(tag = 'usa-orbit-pass') {
 }
 
 export { defineOrbitPass };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/widgets/orbit-pass.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/widgets/orbit-pass.js.map

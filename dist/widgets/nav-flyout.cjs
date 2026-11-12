@@ -5,4 +5,4 @@ var widgets_megaMenu = require('../chunks/nav-flyout-CrLUC54W.cjs');
 
 
 exports.defineNavFlyout = widgets_megaMenu.defineNavFlyout;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/widgets/nav-flyout.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/widgets/nav-flyout.cjs.map

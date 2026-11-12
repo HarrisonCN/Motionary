@@ -24,4 +24,4 @@ function defineCoffeeTimer(tag = 'usa-coffee-timer') {
 }
 
 export { defineCoffeeTimer };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/widgets/coffee-timer.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/widgets/coffee-timer.js.map

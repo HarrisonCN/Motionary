@@ -1,4 +1,4 @@
-# Motionary components (237)
+# Motionary components (250)
 
 One page per `<usa-*>` element, generated from the source. Machine-readable: `motionary/tooling/manifest.json` · Pages `/components.json` · `/llms.txt` · `/llms-full.txt`. How to use these with an AI assistant: [AGENTS.md](../../AGENTS.md) and [the prompt guide](../ai-prompt-guide.md).
 
@@ -69,6 +69,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-halo-segmented>`](usa-halo-segmented.md) — Halo segmented control
 - [`<mo-halo-slider>`](usa-halo-slider.md) — Halo range slider
 - [`<mo-hero-video>`](usa-hero-video.md) — Hero video
+- [`<mo-hold-action>`](usa-hold-action.md) — Hold action
 - [`<mo-hud-panel>`](usa-hud-panel.md) — HUD panel
 - [`<mo-hydrate>`](usa-hydrate.md) — SSR hydration animation
 - [`<mo-install-button>`](usa-install-button.md) — Install button
@@ -123,6 +124,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-rive>`](usa-rive.md) — Rive player (official runtime) · Requires: @rive-app/canvas
 - [`<mo-route-sparkline>`](usa-route-sparkline.md) — Route sparkline
 - [`<mo-scene>`](usa-scene.md) — Cinematic scene
+- [`<mo-scrub-number>`](usa-scrub-number.md) — Scrub number
 - [`<mo-segmented>`](usa-segmented.md) — Segmented control
 - [`<mo-shader-backdrop>`](usa-shader-backdrop.md) — Shader backdrop + post chain
 - [`<mo-shortcut>`](usa-shortcut.md) — Shortcut hint
@@ -188,6 +190,14 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-masonry>`](usa-masonry.md) — Masonry
 - [`<mo-masonry-flow>`](usa-masonry-flow.md) — Masonry with layout animation
 
+## timeline
+
+- [`<mo-bezier-lab>`](usa-bezier-lab.md) — Bezier laboratory
+- [`<mo-keyframe-editor>`](usa-keyframe-editor.md) — Animation editor 2.0
+- [`<mo-milestones>`](usa-milestones.md) — Scroll-drawn milestones
+- [`<mo-spring-lab>`](usa-spring-lab.md) — Spring laboratory
+- [`<mo-timeline>`](usa-timeline.md) — Timeline
+
 ## click
 
 - [`<mo-button>`](usa-button.md) — Button deformation
@@ -238,15 +248,18 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 ## text
 
 - [`<mo-counter>`](usa-counter.md) — Number counter
+- [`<mo-fluid-type>`](usa-fluid-type.md) — Fluid type
 - [`<mo-glitch>`](usa-glitch.md) — Glitch text
 - [`<mo-gradient-text>`](usa-gradient-text.md) — Gradient flow
 - [`<mo-handwriting>`](usa-handwriting.md) — Handwriting draw
 - [`<mo-lyrics>`](usa-lyrics.md) — Synced karaoke lyrics
 - [`<mo-odometer>`](usa-odometer.md) — Odometer counter
+- [`<mo-revision-reveal>`](usa-revision-reveal.md) — Revision reveal
 - [`<mo-scramble>`](usa-scramble.md) — Scramble / decode
 - [`<mo-scroll-highlight>`](usa-scroll-highlight.md) — Scroll highlight
 - [`<mo-shimmer-text>`](usa-shimmer-text.md) — Shimmer text
 - [`<mo-split-text>`](usa-split-text.md) — Split-text reveal
+- [`<mo-text-loupe>`](usa-text-loupe.md) — Text loupe
 - [`<mo-text-rotate>`](usa-text-rotate.md) — Rotating words
 - [`<mo-text-splitter>`](usa-text-splitter.md) — Text splitter · Requires: motionary/runtime/text
 - [`<mo-typewriter>`](usa-typewriter.md) — Typewriter
@@ -267,14 +280,14 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 ## physics
 
 - [`<mo-draggable>`](usa-draggable.md) — Draggable
+- [`<mo-elastic-mesh>`](usa-elastic-mesh.md) — Elastic mesh
+- [`<mo-gravity-well>`](usa-gravity-well.md) — Gravity well
+- [`<mo-ink-flow>`](usa-ink-flow.md) — Ink flow
+- [`<mo-liquid-metal>`](usa-liquid-metal.md) — Liquid metal
+- [`<mo-magnetic-field>`](usa-magnetic-field.md) — Magnetic field
 - [`<mo-overscroll>`](usa-overscroll.md) — Elastic overscroll
+- [`<mo-reaction-field>`](usa-reaction-field.md) — Reaction field
 - [`<mo-spring>`](usa-spring.md) — Spring effects
-
-## timeline
-
-- [`<mo-keyframe-editor>`](usa-keyframe-editor.md) — Animation editor 2.0
-- [`<mo-milestones>`](usa-milestones.md) — Scroll-drawn milestones
-- [`<mo-timeline>`](usa-timeline.md) — Timeline
 
 ## packs
 

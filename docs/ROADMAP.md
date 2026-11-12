@@ -2,7 +2,7 @@
 
 ## 17.x 维护与迭代
 
-当前基线为 **17.5.0**。维护顺序、验收条件与进度见 [17.x 维护计划](maintenance-17x.md)；下面的 14.x–17.0 表格保留为历史追踪。
+当前基线为 **17.6.0**。维护顺序、验收条件与进度见 [17.x 维护计划](maintenance-17x.md)；下面的 14.x–17.0 表格保留为历史追踪。
 2026-11-10 维护者调整方向：17.x 小版本可以新增组件与特效（自行实现，不复制参考站点的代码、文字或素材），`mo-*` 成为所有组件的默认标签，
 `usa-*` 作为弃用别名保留（17.x 不删除）。2026-11-11 维护者进一步明确：组件数量及组件、聚合包、npm 包体积均不设上限；旧预算只作历史参考，CI 保留体积报告、性能、兼容性与资源释放验证，见[体积策略](size-policy.md)。新入口增加测量记录，零运行时依赖，17.x 不删除稳定 API。
 
@@ -15,8 +15,9 @@
 | v17.4.0 | [已完成] | 光晕交互组件 | luminous-switch、particle-icon、particle-button、halo-segmented、halo-slider、orbit-progress | — | 六组件交互实验室、独立入口、双语画廊 |
 | 后续 17.x | [计划] | 导航 II | sidebar（基于 liquid-nav 纵向）、announcement-bar、search-bar、scrollspy | fx/path（3） | navbar CTA 插槽 |
 | v17.5.0 | [已完成] | 视频同款实时状态墙 | 15 个独立 live-activity 组件 | — | 237 个组件、数据接口、时钟与生命周期、无体积上限 |
+| v17.6.0 | [已完成] | Matter & Motion | 13 个物理、文字、曲线和精细操作组件 | fx/matter（6） | 250 个组件、152 个动效、独立入口、交互实验室与来源说明 |
 | 后续 17.x | [计划] | 滚动叙事 | scroll-zoom、horizontal-scroll、scroll-bg、scroll-cue | fx/velocity（3 种模式） | splash 百分比计数 + 分开退场 |
-| v17.6.0 | [计划] | 转化 | pricing、subscribe、download-button、sticky-cta | fx/anim（4） | — |
+| 后续 17.x | [计划] | 转化 | pricing、subscribe、download-button、sticky-cta | fx/anim（4） | — |
 | v17.7.0 | [计划] | 表单与弹窗 | cta-popup、consent、select、number-stepper、password | fx/draw（4） | slider 双滑块 |
 | v17.8.0 | [计划] | 画廊 I | expand-cards、fan-carousel、lightbox、hotspots | fx/lens（5） | carousel coverflow、card-stack 叠放模式 |
 | v17.9.0 | [计划] | 画廊 II（3D / 物理） | image-tunnel、orbit-gallery、clothesline、morph-card | fx/camera（5） | carousel-3d 螺旋 / 弧形、globe 点阵 |

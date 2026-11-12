@@ -24,4 +24,4 @@ function defineRaceTelemetry(tag = 'usa-race-telemetry') {
 }
 
 export { defineRaceTelemetry };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/widgets/race-telemetry.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/widgets/race-telemetry.js.map

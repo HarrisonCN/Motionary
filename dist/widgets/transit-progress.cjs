@@ -26,4 +26,4 @@ function defineTransitProgress(tag = 'usa-transit-progress') {
 }
 
 exports.defineTransitProgress = defineTransitProgress;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/widgets/transit-progress.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/widgets/transit-progress.cjs.map

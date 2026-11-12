@@ -79,4 +79,4 @@ function defineLuminousSwitch(tag = 'usa-luminous-switch') {
 }
 
 export { defineLuminousSwitch };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/widgets/luminous-switch.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/widgets/luminous-switch.js.map

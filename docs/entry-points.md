@@ -12,7 +12,7 @@ registerPearlescent(); defineFx(); // <usa-fx effect="pearlescent">
 
 Notes: an effect entry imports its pack file (the effects of a pack share helpers), so its size is the pack’s, not the whole 6.x set. Runtime-powered widgets still need their prerequisites (`use(…)`, see the Requires badge). The group entries (`motionary/components/widgets`, `/fx2`, `/lite`) are unchanged.
 
-## Widgets (146)
+## Widgets (159)
 
 | Tag | Import | Define |
 |---|---|---|
@@ -138,6 +138,19 @@ Notes: an effect entry imports its pack file (the effects of a pack share helper
 | `<usa-file-tree>` | `motionary/widgets/file-tree` | `defineFileTree()` |
 | `<usa-download-menu>` | `motionary/widgets/download-menu` | `defineDownloadMenu()` |
 | `<usa-title-sequence>` | `motionary/widgets/title-sequence` | `defineTitleSequence()` |
+| `<usa-gravity-well>` | `motionary/widgets/gravity-well` | `defineGravityWell()` |
+| `<usa-liquid-metal>` | `motionary/widgets/liquid-metal` | `defineLiquidMetal()` |
+| `<usa-reaction-field>` | `motionary/widgets/reaction-field` | `defineReactionField()` |
+| `<usa-ink-flow>` | `motionary/widgets/ink-flow` | `defineInkFlow()` |
+| `<usa-fluid-type>` | `motionary/widgets/fluid-type` | `defineFluidType()` |
+| `<usa-magnetic-field>` | `motionary/widgets/magnetic-field` | `defineMagneticField()` |
+| `<usa-elastic-mesh>` | `motionary/widgets/elastic-mesh` | `defineElasticMesh()` |
+| `<usa-spring-lab>` | `motionary/widgets/spring-lab` | `defineSpringLab()` |
+| `<usa-bezier-lab>` | `motionary/widgets/bezier-lab` | `defineBezierLab()` |
+| `<usa-text-loupe>` | `motionary/widgets/text-loupe` | `defineTextLoupe()` |
+| `<usa-revision-reveal>` | `motionary/widgets/revision-reveal` | `defineRevisionReveal()` |
+| `<usa-hold-action>` | `motionary/widgets/hold-action` | `defineHoldAction()` |
+| `<usa-scrub-number>` | `motionary/widgets/scrub-number` | `defineScrubNumber()` |
 | `<usa-flight-status>` | `motionary/widgets/flight-status` | `defineFlightStatus()` |
 | `<usa-transit-progress>` | `motionary/widgets/transit-progress` | `defineTransitProgress()` |
 | `<usa-sun-timeline>` | `motionary/widgets/sun-timeline` | `defineSunTimeline()` |
@@ -163,7 +176,7 @@ Notes: an effect entry imports its pack file (the effects of a pack share helper
 | `<usa-gl-model>` | `motionary/widgets/gl-model` | `defineGlModel()` |
 | `<usa-dotlottie>` | `motionary/widgets/dotlottie` | `defineDotLottie()` |
 
-## Effects (146)
+## Effects (152)
 
 | Effect | Import | Register | Pack |
 |---|---|---|---|
@@ -313,3 +326,9 @@ Notes: an effect entry imports its pack file (the effects of a pack share helper
 | `focus-reveal` | `motionary/effects/focus-reveal` | `registerFocusReveal()` | hover |
 | `grid-warp` | `motionary/effects/grid-warp` | `registerGridWarp()` | hover |
 | `googly-eyes` | `motionary/effects/googly-eyes` | `registerGooglyEyes()` | hover |
+| `dust-vortex` | `motionary/effects/dust-vortex` | `registerDustVortex()` | matter |
+| `mercury-morph` | `motionary/effects/mercury-morph` | `registerMercuryMorph()` | matter |
+| `chemical-bloom` | `motionary/effects/chemical-bloom` | `registerChemicalBloom()` | matter |
+| `magnetic-align` | `motionary/effects/magnetic-align` | `registerMagneticAlign()` | matter |
+| `elastic-ripple` | `motionary/effects/elastic-ripple` | `registerElasticRipple()` | matter |
+| `liquid-level` | `motionary/effects/liquid-level` | `registerLiquidLevel()` | matter |

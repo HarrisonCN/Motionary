@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [17.6.0] - 2026-11-12 — Matter & Motion
+
+- Added thirteen mo-* widgets: gravity-well, liquid-metal, reaction-field, ink-flow, fluid-type, magnetic-field, elastic-mesh, spring-lab, bezier-lab, text-loupe, revision-reveal, hold-action and scrub-number. Total: 250 components (91 core + 159 widgets).
+- Added six independent effects: dust-vortex, mercury-morph, chemical-bloom, magnetic-align, elastic-ripple and liquid-level. Total: 152 effects. Finite overlays preserve the target's content and focus and clean up on completion or unbind.
+- Original implementations inspired by public X interaction studies: deterministic particles, Gray–Scott reaction diffusion, metaballs, magnetic dipoles, a deformable mesh, liquid type, analytic damped springs and CSS cubic-bezier x inversion. Source links and scope are documented in docs/matter-motion.md; no third-party code or assets are included.
+- New interactive lab, bilingual catalog examples, individual ESM/CJS entries and generated framework types. Explicit touch activation, horizontal-only scrubbing, native ranges, keyboard alternatives, disabled states, live reduced motion, hidden/offscreen suspension and teardown are covered.
+
 ## [17.5.0] - 2026-11-11 — Live activities
 
 - Recreated the supplied activity-wall video's compact black cards, vector charts, gradient tracks, fine segmented scales, drifting columns and blur-to-focus entrance in a new [live activity lab](showcase/activity.html). No source video or third-party assets are distributed.

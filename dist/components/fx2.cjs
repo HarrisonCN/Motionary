@@ -33,6 +33,7 @@ var components_fxVideo = require('./fx-video.cjs');
 var components_fxSafe = require('./fx-safe.cjs');
 var components_fxPerf = require('./fx-perf.cjs');
 var components_fxHover = require('./fx-hover.cjs');
+var components_fxMatter = require('./fx-matter.cjs');
 var registry = require('../chunks/registry-_XKU28ZC.cjs');
 
 /** The 6.x effect packs by name. */
@@ -69,6 +70,7 @@ const EFFECT_PACKS = {
     safe: components_fxSafe.SAFE_FX,
     perf3: components_fxPerf.PERF3_FX,
     hover: components_fxHover.HOVER_FX,
+    matter: components_fxMatter.MATTER_FX,
 };
 /** Register every built-in effect pack — each one is a plugin (9.9; idempotent). */
 function registerAllPlugins() {
@@ -104,6 +106,7 @@ function registerAllPlugins() {
     components_fxSafe.registerSafePack();
     components_fxPerf.registerPerf3Pack();
     components_fxHover.registerHoverPack();
+    components_fxMatter.registerMatterPack();
 }
 const PACK_SOURCES = EFFECT_PACKS;
 /** Make a plugin object (9.9). */
@@ -259,9 +262,11 @@ exports.registerPerf3Pack = components_fxPerf.registerPerf3Pack;
 exports.runInWorker = components_fxPerf.runInWorker;
 exports.HOVER_FX = components_fxHover.HOVER_FX;
 exports.registerHoverPack = components_fxHover.registerHoverPack;
+exports.MATTER_FX = components_fxMatter.MATTER_FX;
+exports.registerMatterPack = components_fxMatter.registerMatterPack;
 exports.EFFECT_PACKS = EFFECT_PACKS;
 exports.definePlugin = definePlugin;
 exports.effectPlugins = effectPlugins;
 exports.registerAllPlugins = registerAllPlugins;
 exports.usePlugins = usePlugins;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/components/fx2.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/components/fx2.cjs.map

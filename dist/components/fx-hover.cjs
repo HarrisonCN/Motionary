@@ -314,4 +314,4 @@ function registerHoverPack() {
 
 exports.HOVER_FX = HOVER_FX;
 exports.registerHoverPack = registerHoverPack;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.5.0/dist/components/fx-hover.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/components/fx-hover.cjs.map
