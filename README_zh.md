@@ -62,7 +62,7 @@ npm i motionary
 
 17.3.1 新增文件树、下载菜单和电影片头字幕。[用法与按需导入示例](./docs/gallery-components.md)。
 
-17.7 新增九个 Form Atelier 表单组件和四个有限描线动效，统一原生表单提交、键盘操作、重置与确认体验。[表单工坊](./showcase/forms.html) · [API](./docs/form-atelier.md) · [能力补全路线](./docs/coverage-roadmap.md)。
+17.7 新增十二个 Form Atelier 表单组件和四个有限描线动效，统一原生表单提交、键盘操作、重置与确认体验。[表单工坊](./showcase/forms.html) · [API](./docs/form-atelier.md) · [能力补全路线](./docs/coverage-roadmap.md)。
 
 17.6 新增十三个 Matter & Motion 组件和六个独立动效：交互流场、液面文字、曲线实验室与精细操作。[交互演示](./showcase/matter.html) · [API 与灵感来源](./docs/matter-motion.md)。
 
