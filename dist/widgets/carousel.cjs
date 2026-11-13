@@ -5,4 +5,4 @@ var widgets_carousel = require('../chunks/carousel-CtzI1LxO.cjs');
 
 
 exports.defineCarousel = widgets_carousel.defineCarousel;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/widgets/carousel.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/widgets/carousel.cjs.map

@@ -85,4 +85,4 @@ function defineLottieIcon(tag = 'usa-lottie-icon') {
 }
 
 export { LOTTIE_ICONS as L, defineLottieIcon as d };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/chunks/lottie-icon-DYVkUCf7.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/chunks/lottie-icon-DYVkUCf7.js.map

@@ -2,6 +2,10 @@
 
 This file tells AI coding agents (and the people prompting them) how to pick and use Motionary components correctly. It applies to code that *uses* Motionary; contributors should also read [CONTRIBUTING.md](CONTRIBUTING.md).
 
+## Contributor validation environment
+
+Maintainer instruction (2026-11-12): run test suites and browser previews in remote GitHub Actions. Do not run local tests or use the local browser for previews. Local editing and generation of build artifacts/documentation remain allowed.
+
 ## Sources of truth (read these, do not guess)
 
 | What | Where |

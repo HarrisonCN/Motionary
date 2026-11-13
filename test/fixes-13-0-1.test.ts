@@ -8,6 +8,7 @@ import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { audit, summary, coverage, manifestTags, parseExemptions, RULES, META_RULES } from '../scripts/contract-audit.mjs';
 import { buildManifest } from '../scripts/gen-manifest.mjs';
+import { publicTagNames } from '../src/components/public-tags.generated';
 import { installComponentMocks, anims, finishAll } from './components-setup';
 import { configureComponents, defineElement } from '../src/components/base';
 import { defineWidgets } from '../src/components/widgets';
@@ -67,7 +68,7 @@ export const defineB = (tag = 'x-bb') => defineThing(tag, 'b');
 describe('13.0.1: manifest tag set == audited tag set', () => {
   it('all public manifest components are audited, and nothing else', () => {
     const tags = manifestTags();
-    expect(tags.length).toBe(250);
+    expect([...tags].sort()).toEqual(publicTagNames.split(' ').map(name => 'usa-' + name).sort());
     const rows = audit();
     expect(coverage(rows, tags)).toEqual({ missing: [], extra: [] });
     expect(rows.map((r: any) => r.tag).sort()).toEqual([...tags].sort());

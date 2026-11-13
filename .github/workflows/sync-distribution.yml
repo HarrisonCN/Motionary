@@ -1,0 +1,59 @@
+name: Sync generated distribution
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - 'src/**'
+      - 'scripts/**'
+      - 'showcase/catalog/**'
+      - 'showcase/components-catalog.js'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'rollup.config.mjs'
+      - '.github/workflows/sync-distribution.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: distribution-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    name: Generated distribution
+    # Never execute fork/untrusted pull request code with repository write access.
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.user.login == github.repository_owner && github.actor == github.repository_owner
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npm run build
+      - run: node scripts/size.mjs --report
+      - run: node scripts/readme-sync.mjs
+      - name: Commit generated artifacts on the same branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_HEAD: ${{ github.event.pull_request.head.sha }}
+          SOURCE_BRANCH: ${{ github.event.pull_request.head.ref }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add -- dist docs/size-report.json README.md README_zh.md README_ja.md
+          if git diff --cached --quiet; then exit 0; fi
+          git config user.name 'HarrisonCN'
+          git config user.email '88879497+HarrisonCN@users.noreply.github.com'
+          git commit -m 'build: synchronize distribution from reviewed source'
+          AUTH=$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)
+          git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $AUTH" push --force-with-lease="refs/heads/$SOURCE_BRANCH:$SOURCE_HEAD" origin "HEAD:refs/heads/$SOURCE_BRANCH"

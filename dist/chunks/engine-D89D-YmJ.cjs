@@ -316,4 +316,4 @@ exports.createMatterEngine = createMatterEngine;
 exports.cubicResponse = cubicResponse;
 exports.finite = finite;
 exports.springResponse = springResponse;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/chunks/engine-D89D-YmJ.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/chunks/engine-D89D-YmJ.cjs.map

@@ -1,7 +1,7 @@
-import { R as RUNTIME_VERSION } from '../chunks/registry-CeEFBxw8.js';
-import { T as Timeline } from '../chunks/tween-NYQu20Qn.js';
+import { R as RUNTIME_VERSION } from '../chunks/registry-DFWqcv5h.js';
+import { T as Timeline } from '../chunks/tween-ltfzzNhy.js';
 import { c as cubicBezier, E as EASES } from '../chunks/ease-XN8_0sXu.js';
-import { f as framesToTimeline } from '../chunks/keyframes-BOqLumJm.js';
+import { f as framesToTimeline } from '../chunks/keyframes-CiwQ9xWF.js';
 
 /**
  * `motionary/runtime/format-motion` (10.1) — play Motion / Framer-style
@@ -130,4 +130,4 @@ function playMotion(target, def, o = {}) {
 const formatMotion = { id: 'format-motion', version: RUNTIME_VERSION, tier: 'basic', requires: ['core'], api: { fromMotion, playMotion, springEase, motionEase } };
 
 export { formatMotion, fromMotion, motionEase, playMotion, springEase };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/runtime/format-motion.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/runtime/format-motion.js.map

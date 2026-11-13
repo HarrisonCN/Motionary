@@ -115,4 +115,4 @@ function matterTextClass(Base, kind) {
 }
 
 exports.matterTextClass = matterTextClass;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/chunks/matter-text-CjPBzmSX.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/chunks/matter-text-CjPBzmSX.cjs.map

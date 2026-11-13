@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-HSe7clPM.cjs');
+var registry = require('../chunks/registry-CvzRzv5N.cjs');
 
 /**
  * `motionary/runtime/gl` (10.5) — a small WebGL2 scene renderer written for
@@ -774,4 +774,4 @@ exports.standardMaterial = standardMaterial;
 exports.texture = texture;
 exports.torus = torus;
 exports.unlitMaterial = unlitMaterial;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/runtime/gl.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/runtime/gl.cjs.map

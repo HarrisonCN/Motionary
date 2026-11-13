@@ -1,2 +1,2 @@
 export { d as defineLottieIcon } from '../chunks/lottie-icon-DYVkUCf7.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/widgets/lottie-icon.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/widgets/lottie-icon.js.map

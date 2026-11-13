@@ -12,7 +12,7 @@ registerPearlescent(); defineFx(); // <usa-fx effect="pearlescent">
 
 Notes: an effect entry imports its pack file (the effects of a pack share helpers), so its size is the pack’s, not the whole 6.x set. Runtime-powered widgets still need their prerequisites (`use(…)`, see the Requires badge). The group entries (`motionary/components/widgets`, `/fx2`, `/lite`) are unchanged.
 
-## Widgets (159)
+## Widgets (171)
 
 | Tag | Import | Define |
 |---|---|---|
@@ -138,6 +138,18 @@ Notes: an effect entry imports its pack file (the effects of a pack share helper
 | `<usa-file-tree>` | `motionary/widgets/file-tree` | `defineFileTree()` |
 | `<usa-download-menu>` | `motionary/widgets/download-menu` | `defineDownloadMenu()` |
 | `<usa-title-sequence>` | `motionary/widgets/title-sequence` | `defineTitleSequence()` |
+| `<usa-textarea>` | `motionary/widgets/textarea` | `defineTextarea()` |
+| `<usa-search-field>` | `motionary/widgets/search-field` | `defineSearchField()` |
+| `<usa-form-stepper>` | `motionary/widgets/form-stepper` | `defineFormStepper()` |
+| `<usa-select>` | `motionary/widgets/select` | `defineSelect()` |
+| `<usa-combobox>` | `motionary/widgets/combobox` | `defineCombobox()` |
+| `<usa-multi-select>` | `motionary/widgets/multi-select` | `defineMultiSelect()` |
+| `<usa-number-stepper>` | `motionary/widgets/number-stepper` | `defineNumberStepper()` |
+| `<usa-password>` | `motionary/widgets/password` | `definePassword()` |
+| `<usa-range-slider>` | `motionary/widgets/range-slider` | `defineRangeSlider()` |
+| `<usa-consent>` | `motionary/widgets/consent` | `defineConsent()` |
+| `<usa-cta-popup>` | `motionary/widgets/cta-popup` | `defineCtaPopup()` |
+| `<usa-validation-summary>` | `motionary/widgets/validation-summary` | `defineValidationSummary()` |
 | `<usa-gravity-well>` | `motionary/widgets/gravity-well` | `defineGravityWell()` |
 | `<usa-liquid-metal>` | `motionary/widgets/liquid-metal` | `defineLiquidMetal()` |
 | `<usa-reaction-field>` | `motionary/widgets/reaction-field` | `defineReactionField()` |
@@ -176,7 +188,7 @@ Notes: an effect entry imports its pack file (the effects of a pack share helper
 | `<usa-gl-model>` | `motionary/widgets/gl-model` | `defineGlModel()` |
 | `<usa-dotlottie>` | `motionary/widgets/dotlottie` | `defineDotLottie()` |
 
-## Effects (152)
+## Effects (156)
 
 | Effect | Import | Register | Pack |
 |---|---|---|---|
@@ -332,3 +344,7 @@ Notes: an effect entry imports its pack file (the effects of a pack share helper
 | `magnetic-align` | `motionary/effects/magnetic-align` | `registerMagneticAlign()` | matter |
 | `elastic-ripple` | `motionary/effects/elastic-ripple` | `registerElasticRipple()` | matter |
 | `liquid-level` | `motionary/effects/liquid-level` | `registerLiquidLevel()` | matter |
+| `check-orbit` | `motionary/effects/check-orbit` | `registerCheckOrbit()` | draw |
+| `error-underline` | `motionary/effects/error-underline` | `registerErrorUnderline()` | draw |
+| `focus-brackets` | `motionary/effects/focus-brackets` | `registerFocusBrackets()` | draw |
+| `submit-trail` | `motionary/effects/submit-trail` | `registerSubmitTrail()` | draw |

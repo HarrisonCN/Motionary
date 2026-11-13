@@ -1,0 +1,62 @@
+import { expect, test } from '@playwright/test';
+import { openFixture, expectNoErrors } from './helpers.mjs';
+const options = JSON.stringify([{ value: 'photo', label: 'Photography' }, { value: 'blocked', label: 'Disabled', disabled: true }, { value: 'film', label: 'Film' }]);
+async function setup(page, html) { await openFixture(page); await page.evaluate(async ({ html, options }) => { const { defineWidgets } = await import('motionary/components/widgets'); defineWidgets('17.7'); document.getElementById('stage').innerHTML = html; for (const el of document.querySelectorAll('mo-select,mo-combobox,mo-multi-select')) el.options = JSON.parse(options); }, { html, options }); }
+test('native form values, validation and repeated resets agree with public state', async ({ page }) => {
+  await setup(page, '<form><mo-select name="kind" label="Kind" required></mo-select><mo-number-stepper name="quantity" value="3"></mo-number-stepper><mo-multi-select name="topics" max="2"></mo-multi-select><mo-range-slider name="budget" low="20" high="80" min-gap="10"></mo-range-slider></form>');
+  await page.getByRole('combobox', { name: 'Kind' }).selectOption('photo'); await page.getByRole('button', { name: 'Increase', exact: true }).click(); await page.getByRole('checkbox', { name: 'Photography' }).check(); await page.getByRole('checkbox', { name: 'Film', exact: true }).check();
+  expect(await page.locator('form').evaluate(form => Object.fromEntries(new FormData(form)))).toMatchObject({ kind: 'photo', quantity: '4', 'budget-low': '20', 'budget-high': '80' }); expect(await page.locator('form').evaluate(form => new FormData(form).getAll('topics'))).toEqual(['photo', 'film']);
+  for (let i = 0; i < 2; i++) { await page.locator('form').evaluate(form => form.reset()); await expect(page.getByRole('spinbutton')).toHaveValue('3'); await expect(page.getByRole('combobox')).toHaveValue(''); await expect(page.getByRole('checkbox', { name: 'Photography' })).not.toBeChecked(); } expectNoErrors(page);
+});
+test('fractional range steps submit the displayed interval in every engine', async ({ page }) => {
+  await setup(page, '<form><mo-range-slider name="range" label="Range" min="0.1" max="1" step="0.2" low="0.24" high="0.86" min-gap="0.21"></mo-range-slider></form>');
+  await expect(page.getByRole('slider', { name: 'Range lower' })).toHaveValue('0.3'); await expect(page.getByRole('slider', { name: 'Range upper' })).toHaveValue('0.9');
+  await page.getByRole('slider', { name: 'Range lower' }).press('End');
+  expect(await page.locator('form').evaluate(form => { const el = form.querySelector('mo-range-slider'), data = new FormData(form); return [el.low, el.high, data.get('range-low'), data.get('range-high'), form.checkValidity()]; })).toEqual([0.5, 0.9, '0.5', '0.9', true]); expectNoErrors(page);
+});
+test('combobox keyboard skips disabled choices, keeps focus and closes uncommitted search', async ({ page }) => {
+  await setup(page, '<mo-combobox label="Collection"></mo-combobox>'); const input = page.getByRole('combobox', { name: 'Collection' }); await input.focus(); await input.press('ArrowDown'); await input.press('ArrowDown'); await input.press('Enter'); await expect(input).toHaveValue('Film'); await expect(input).toBeFocused(); await expect(input).toHaveAttribute('aria-expanded', 'false'); await input.fill('unmatched'); await expect(page.getByText('No results', { exact: true })).toBeVisible(); await input.press('Escape'); await expect(input).toHaveValue('Film'); await expect(input).toBeFocused(); expectNoErrors(page);
+});
+test('password reveal preserves selected text; interval keyboard respects the other endpoint', async ({ page }) => {
+  await setup(page, '<mo-password label="Password"></mo-password><mo-range-slider label="Budget" min="0" max="100" low="20" high="80" min-gap="10"></mo-range-slider>'); const input = page.getByLabel('Password', { exact: true }); await input.fill('a-private-secret'); await input.evaluate(el => el.setSelectionRange(2, 7)); await page.getByRole('button', { name: 'Show password' }).click(); await expect(input).toBeFocused(); expect(await input.evaluate(el => [el.type, el.selectionStart, el.selectionEnd])).toEqual(['text', 2, 7]); const lower = page.getByRole('slider', { name: 'Budget lower' }); await lower.focus(); await lower.press('End'); await expect(lower).toHaveValue('70'); await expect(lower).toBeFocused(); expectNoErrors(page);
+});
+test('modal dialog traps focus, allows cancelable confirmation and returns to its trigger', async ({ page }) => {
+  await setup(page, '<mo-cta-popup label="Open invitation" action-label="Confirm"></mo-cta-popup>'); const trigger = page.getByRole('button', { name: 'Open invitation' }); await trigger.click(); const dialog = page.getByRole('dialog'); await expect(dialog).toBeVisible(); await expect(page.getByRole('button', { name: 'Not now' })).toBeFocused(); await page.getByRole('button', { name: 'Confirm', exact: true }).press('Tab'); expect(await dialog.evaluate(el => el.contains(document.activeElement))).toBe(true);
+  await page.locator('mo-cta-popup').evaluate(el => el.addEventListener('usa:confirm', event => event.preventDefault(), { once: true })); await page.getByRole('button', { name: 'Confirm', exact: true }).click(); await expect(dialog).toBeVisible(); await page.keyboard.press('Escape'); await expect(dialog).not.toBeVisible(); await expect(trigger).toBeFocused(); expectNoErrors(page);
+});
+test('validation summary focuses real native fields and clears on corrected input', async ({ page }) => {
+  await setup(page, '<form><label>Email<input type="email" required></label><mo-validation-summary></mo-validation-summary></form>'); await page.locator('mo-validation-summary').evaluate(el => el.validate()); await page.locator('mo-validation-summary a').click(); await expect(page.getByRole('textbox', { name: 'Email' })).toBeFocused(); await page.getByRole('textbox', { name: 'Email' }).fill('photo@example.com'); await expect(page.locator('mo-validation-summary [role=status]')).toHaveText('No errors'); expectNoErrors(page);
+});
+test('draw feedback ends, keeps button focus and cancels when motion preference changes', async ({ page }) => {
+  await setup(page, '<button id="feedback">Save</button>');
+  await page.evaluate(async () => { const { registerDrawPack } = await import('motionary/fx/draw'); const { bindEffect } = await import('motionary/components/fx'); registerDrawPack(); window.disposeDraw = bindEffect(document.getElementById('feedback'), 'check-orbit', { duration: 1000 }); });
+  const button = page.getByRole('button', { name: 'Save', exact: true }); await button.focus(); await button.press('Enter'); await expect(button.locator('svg')).toHaveCount(1); await expect(button).toBeFocused(); await page.emulateMedia({ reducedMotion: 'reduce' }); await expect(button.locator('svg')).toHaveCount(0); await button.press('Enter'); await expect(button.locator('svg')).toHaveCount(0); await page.evaluate(() => window.disposeDraw()); expectNoErrors(page);
+});
+for (const width of [1280, 390]) {
+  test(`Form Atelier page works as a complete form at ${width}px and records a remote screenshot`, async ({ page }, info) => {
+    await openFixture(page); await page.setViewportSize({ width, height: 960 }); await page.goto('/showcase/forms.html');
+    const form = page.locator('#worked-form'); await expect(form.getByRole('combobox', { name: '摄影类型' })).toHaveValue('portrait');
+    await form.getByRole('button', { name: 'Increase', exact: true }).click(); await form.getByRole('button', { name: '查看选择 ↗', exact: true }).click(); await expect(page.locator('#worked-result')).toContainText('人像 · 4 份');
+    await form.getByRole('button', { name: '重新开始', exact: true }).click(); await expect(form.getByRole('spinbutton')).toHaveValue('3');
+    await page.getByRole('button', { name: 'Soft mint', exact: true }).click(); expect(await form.locator('mo-number-stepper').evaluate(el => getComputedStyle(el).getPropertyValue('--mo-form-accent').trim())).toBe('#aee0c5');
+    const effect = page.locator('.fx-grid mo-fx').first(); await effect.getByRole('button').click(); await expect(effect.locator('svg')).toHaveCount(1); await expect(effect.locator('svg')).toHaveCount(0);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true); await page.evaluate(() => window.scrollTo(0, 0)); await page.screenshot({ path: info.outputPath(`form-atelier-${width}.png`), fullPage: true }); expectNoErrors(page);
+  });
+}
+
+test('user reset buttons reconcile all native controls after their default action', async ({ page }) => {
+  await setup(page, '<form><mo-textarea name="brief" label="Brief" value="Initial" auto-resize></mo-textarea><mo-number-stepper value="3"></mo-number-stepper><mo-range-slider low="20" high="80"></mo-range-slider><button type="reset">Reset all</button></form>');
+  for (let i = 0; i < 2; i++) { await page.getByRole('textbox', { name: 'Brief' }).fill('Changed'); await page.getByRole('button', { name: 'Increase', exact: true }).click(); await page.getByRole('button', { name: 'Reset all' }).click(); await expect(page.getByRole('textbox', { name: 'Brief' })).toHaveValue('Initial'); await expect(page.getByRole('spinbutton')).toHaveValue('3'); await expect(page.getByRole('slider').first()).toHaveValue('20'); } expectNoErrors(page);
+});
+test('search keeps only the newest request and supports result keyboard activation', async ({ page }) => {
+  await setup(page, '<mo-search-field label="Search collections" delay="0"></mo-search-field>');
+  await page.locator('mo-search-field').evaluate(el => { window.requests = []; el.provider = (query, { signal }) => new Promise(resolve => window.requests.push({ query, signal, resolve })); });
+  const input = page.getByRole('searchbox', { name: 'Search collections' }); await input.fill('old'); await expect.poll(() => page.evaluate(() => window.requests.length)).toBe(1); await input.fill('new'); await expect.poll(() => page.evaluate(() => window.requests.length)).toBe(2);
+  expect(await page.evaluate(() => window.requests[0].signal.aborted)).toBe(true); await page.evaluate(() => { window.requests[1].resolve([{ value: 'new', label: 'New collection' }]); window.requests[0].resolve([{ value: 'old', label: 'Stale collection' }]); });
+  await expect(page.getByRole('button', { name: 'New collection' })).toBeVisible(); await expect(page.getByRole('button', { name: 'Stale collection' })).toHaveCount(0); await input.press('ArrowDown'); await page.getByRole('button', { name: 'New collection' }).press('Enter'); await expect(input).toHaveValue('New collection'); await expect(input).toBeFocused(); expectNoErrors(page);
+});
+test('stepper validates each step, focuses fields and keeps earlier values in the form', async ({ page }) => {
+  await setup(page, '<form><mo-form-stepper><section data-form-step data-step-title="Project"><label>Project title<input name="title" required></label></section><section data-form-step data-step-title="Notes"><mo-textarea label="Notes" name="notes"></mo-textarea></section></mo-form-stepper><button type="reset">Reset flow</button></form>');
+  const input = page.getByRole('textbox', { name: 'Project title' }); await page.getByRole('button', { name: 'Continue', exact: true }).click(); await expect(input).toBeFocused(); await input.fill('Hero City'); await page.getByRole('button', { name: 'Continue', exact: true }).click(); await expect(page.getByRole('textbox', { name: 'Notes' })).toBeFocused(); await page.getByRole('textbox', { name: 'Notes' }).fill('A city in motion'); expect(await page.locator('form').evaluate(form => Object.fromEntries(new FormData(form)))).toEqual({ title: 'Hero City', notes: 'A city in motion' });
+  await page.locator('mo-form-stepper').evaluate(el => { el.addEventListener('usa:complete', () => el.dataset.complete = 'true'); }); await page.getByRole('button', { name: 'Complete', exact: true }).click(); await expect(page.locator('mo-form-stepper')).toHaveAttribute('data-complete', 'true'); await page.getByRole('button', { name: 'Reset flow' }).click(); await expect(input).toBeVisible(); await expect(input).toHaveValue(''); expectNoErrors(page);
+});

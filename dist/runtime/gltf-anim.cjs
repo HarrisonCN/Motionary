@@ -1,6 +1,6 @@
 'use strict';
 
-var registry = require('../chunks/registry-HSe7clPM.cjs');
+var registry = require('../chunks/registry-CvzRzv5N.cjs');
 var runtime_gl = require('./gl.cjs');
 
 /**
@@ -248,4 +248,4 @@ exports.gltfAnim = gltfAnim;
 exports.gltfAnimator = gltfAnimator;
 exports.gltfClips = gltfClips;
 exports.sampleChannel = sampleChannel;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/runtime/gltf-anim.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/runtime/gltf-anim.cjs.map

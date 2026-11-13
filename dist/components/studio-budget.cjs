@@ -124,4 +124,4 @@ exports.frameCost = frameCost;
 exports.guardPublish = guardPublish;
 exports.measureExport = measureExport;
 exports.propClass = propClass;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/components/studio-budget.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/components/studio-budget.cjs.map

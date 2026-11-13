@@ -461,4 +461,4 @@ exports.shiftKeyframes = shiftKeyframes;
 exports.ungroupLayer = ungroupLayer;
 exports.uniqueId = uniqueId;
 exports.updateLayers = updateLayers;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/chunks/history-rim_8RCX.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/chunks/history-rim_8RCX.cjs.map

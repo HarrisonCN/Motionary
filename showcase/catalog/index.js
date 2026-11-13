@@ -17,8 +17,9 @@ import * as widgets from './widgets.js';
 import * as luminous from './luminous.js';
 import * as activity from './activity.js';
 import * as matter from './matter.js';
+import * as forms from './forms.js';
 
-export const EXTENSIONS = [physics, cards, click, ui, page, v28, timeline, gesture, svg, webgl, depth, layout, packs, fx, widgets, luminous, activity, matter];
+export const EXTENSIONS = [physics, cards, click, ui, page, v28, timeline, gesture, svg, webgl, depth, layout, packs, fx, widgets, luminous, activity, matter, forms];
 
 /** item id → (stage, lib, T) => void: live-demo wiring contributed by the extensions. */
 export const WIRES = Object.assign({}, ...EXTENSIONS.map((e) => e.wire || {}));

@@ -1346,6 +1346,111 @@
       "usa:change": [
         "object: detail"
       ]
+    },
+    "usa-combobox": {
+      "usa:change": [
+        "{value}"
+      ],
+      "usa:query": [
+        "{query}"
+      ]
+    },
+    "usa-consent": {
+      "usa:change": [
+        "{...this.preferences}"
+      ],
+      "usa:consent": [
+        "{...this.preferences}"
+      ]
+    },
+    "usa-cta-popup": {
+      "usa:close": [
+        "{reason}"
+      ],
+      "usa:confirm": [
+        "{confirmed}"
+      ],
+      "usa:open": [
+        "{open}"
+      ]
+    },
+    "usa-multi-select": {
+      "usa:change": [
+        "{values}"
+      ]
+    },
+    "usa-number-stepper": {
+      "usa:change": [
+        "{value}"
+      ],
+      "usa:input": [
+        "{value}"
+      ]
+    },
+    "usa-password": {
+      "usa:action": [
+        "{action}"
+      ],
+      "usa:change": [
+        "{filled}"
+      ],
+      "usa:input": [
+        "{filled}"
+      ]
+    },
+    "usa-range-slider": {
+      "usa:change": [
+        "{high, low}"
+      ],
+      "usa:input": [
+        "{high, low}"
+      ]
+    },
+    "usa-select": {
+      "usa:change": [
+        "{value}"
+      ]
+    },
+    "usa-validation-summary": {
+      "usa:validate": [
+        "{count, valid}"
+      ]
+    },
+    "usa-form-stepper": {
+      "usa:complete": [
+        "{count, step}"
+      ],
+      "usa:invalid": [
+        "{step}"
+      ],
+      "usa:step-change": [
+        "{count, previous, step}"
+      ]
+    },
+    "usa-search-field": {
+      "usa:error": [
+        "{query}"
+      ],
+      "usa:input": [
+        "{value}"
+      ],
+      "usa:query": [
+        "{query, signal}"
+      ],
+      "usa:results": [
+        "{count, query}"
+      ],
+      "usa:select": [
+        "{...result}"
+      ]
+    },
+    "usa-textarea": {
+      "usa:change": [
+        "{value}"
+      ],
+      "usa:input": [
+        "{value}"
+      ]
     }
   }
 }

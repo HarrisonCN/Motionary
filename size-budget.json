@@ -2505,5 +2505,95 @@
     "name": "import 'motionary/effects/liquid-level' (per-entry, fixed)",
     "import": "import { registerLiquidLevel } from 'pkg/effects/liquid-level'; console.log(registerLiquidLevel);",
     "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/select' (per-entry, fixed)",
+    "import": "import { defineSelect } from 'pkg/widgets/select'; console.log(defineSelect);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/combobox' (per-entry, fixed)",
+    "import": "import { defineCombobox } from 'pkg/widgets/combobox'; console.log(defineCombobox);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/multi-select' (per-entry, fixed)",
+    "import": "import { defineMultiSelect } from 'pkg/widgets/multi-select'; console.log(defineMultiSelect);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/number-stepper' (per-entry, fixed)",
+    "import": "import { defineNumberStepper } from 'pkg/widgets/number-stepper'; console.log(defineNumberStepper);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/password' (per-entry, fixed)",
+    "import": "import { definePassword } from 'pkg/widgets/password'; console.log(definePassword);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/range-slider' (per-entry, fixed)",
+    "import": "import { defineRangeSlider } from 'pkg/widgets/range-slider'; console.log(defineRangeSlider);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/consent' (per-entry, fixed)",
+    "import": "import { defineConsent } from 'pkg/widgets/consent'; console.log(defineConsent);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/cta-popup' (per-entry, fixed)",
+    "import": "import { defineCtaPopup } from 'pkg/widgets/cta-popup'; console.log(defineCtaPopup);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/validation-summary' (per-entry, fixed)",
+    "import": "import { defineValidationSummary } from 'pkg/widgets/validation-summary'; console.log(defineValidationSummary);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/effects/check-orbit' (per-entry, fixed)",
+    "import": "import { registerCheckOrbit } from 'pkg/effects/check-orbit'; console.log(registerCheckOrbit);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/effects/error-underline' (per-entry, fixed)",
+    "import": "import { registerErrorUnderline } from 'pkg/effects/error-underline'; console.log(registerErrorUnderline);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/effects/focus-brackets' (per-entry, fixed)",
+    "import": "import { registerFocusBrackets } from 'pkg/effects/focus-brackets'; console.log(registerFocusBrackets);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/effects/submit-trail' (per-entry, fixed)",
+    "import": "import { registerSubmitTrail } from 'pkg/effects/submit-trail'; console.log(registerSubmitTrail);",
+    "limit": 0
+  },
+  {
+    "name": "dist/components/fx-draw.js (17.7; report only)",
+    "file": "dist/components/fx-draw.js",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/fx/draw' (17.7; report only)",
+    "import": "export * from 'pkg/fx/draw';",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/textarea' (per-entry, fixed)",
+    "import": "import { defineTextarea } from 'pkg/widgets/textarea'; console.log(defineTextarea);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/search-field' (per-entry, fixed)",
+    "import": "import { defineSearchField } from 'pkg/widgets/search-field'; console.log(defineSearchField);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/form-stepper' (per-entry, fixed)",
+    "import": "import { defineFormStepper } from 'pkg/widgets/form-stepper'; console.log(defineFormStepper);",
+    "limit": 0
   }
 ]

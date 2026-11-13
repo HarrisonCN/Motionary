@@ -11,4 +11,4 @@ function registerChemicalBloom() {
 }
 
 export { effect, registerChemicalBloom as register, registerChemicalBloom };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/effects/chemical-bloom.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/effects/chemical-bloom.js.map

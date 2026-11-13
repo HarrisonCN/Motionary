@@ -20,4 +20,4 @@ function defineMagneticField(tag = 'usa-magnetic-field') {
 }
 
 export { defineMagneticField };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/widgets/magnetic-field.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/widgets/magnetic-field.js.map

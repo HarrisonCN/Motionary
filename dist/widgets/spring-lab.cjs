@@ -23,4 +23,4 @@ function defineSpringLab(tag = 'usa-spring-lab') {
 }
 
 exports.defineSpringLab = defineSpringLab;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/widgets/spring-lab.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/widgets/spring-lab.cjs.map

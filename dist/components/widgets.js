@@ -1,3 +1,15 @@
+import { defineTextarea } from '../widgets/textarea.js';
+import { defineSearchField } from '../widgets/search-field.js';
+import { defineFormStepper } from '../widgets/form-stepper.js';
+import { defineSelect } from '../widgets/select.js';
+import { defineCombobox } from '../widgets/combobox.js';
+import { defineMultiSelect } from '../widgets/multi-select.js';
+import { defineNumberStepper } from '../widgets/number-stepper.js';
+import { definePassword } from '../widgets/password.js';
+import { defineRangeSlider } from '../widgets/range-slider.js';
+import { defineConsent } from '../widgets/consent.js';
+import { defineCtaPopup } from '../widgets/cta-popup.js';
+import { defineValidationSummary } from '../widgets/validation-summary.js';
 import { d as defineCarousel } from '../chunks/carousel--_KvZQq3.js';
 export { C as CAROUSEL_EFFECTS } from '../chunks/carousel--_KvZQq3.js';
 import { d as defineTabBar } from '../chunks/tab-bar-Bl0c_Z2L.js';
@@ -140,25 +152,25 @@ import { defineMotionSpec } from '../widgets/motion-spec.js';
 import { defineNativePreview } from '../widgets/native-preview.js';
 import { definePluginCard } from '../widgets/plugin-card.js';
 import { defineInstallButton } from '../widgets/install-button.js';
-import { d as defineScrollScene } from '../chunks/scroll-scene-Cb-qW9iD.js';
-export { p as parseScrub } from '../chunks/scroll-scene-Cb-qW9iD.js';
+import { d as defineScrollScene } from '../chunks/scroll-scene-Di3Qy51Y.js';
+export { p as parseScrub } from '../chunks/scroll-scene-Di3Qy51Y.js';
 import { defineMotionInspector } from '../widgets/motion-inspector.js';
 import { defineRouteTransition } from '../widgets/route-transition.js';
 import { defineTextSplitter } from '../widgets/text-splitter.js';
 import { defineScrollRing } from '../widgets/scroll-ring.js';
 import { defineParallaxLayers } from '../widgets/parallax-layers.js';
 import { defineSmoothScroll } from '../widgets/smooth-scroll.js';
-import { d as defineGlScene } from '../chunks/gl-scene-CA_CWr1F.js';
+import { d as defineGlScene } from '../chunks/gl-scene-9uhMddjN.js';
 import { d as defineGpuParticles } from '../chunks/gpu-particles-D1H4dnJY.js';
 export { P as PARTICLE_DRAW_WGSL, a as PARTICLE_SIM_WGSL } from '../chunks/gpu-particles-D1H4dnJY.js';
 import { d as defineShaderBackdrop } from '../chunks/shader-backdrop-BjSIcvSf.js';
 export { B as BACKDROP_PRESETS, P as POST_PASSES } from '../chunks/shader-backdrop-BjSIcvSf.js';
-import { d as defineLottiePlayer } from '../chunks/lottie-player-6rxodeWA.js';
+import { d as defineLottiePlayer } from '../chunks/lottie-player-D-nae5je.js';
 import { d as defineRive } from '../chunks/rive-D7DZNUuN.js';
 export { R as RIVE_CDN, a as RIVE_PEER, l as loadRiveRuntime, p as provideRiveRuntime } from '../chunks/rive-D7DZNUuN.js';
 import { defineTokenEditor } from '../widgets/token-editor.js';
-import { d as definePhysicsPlayground } from '../chunks/physics-playground-DldXE6d4.js';
-export { P as PHYSICS_PRESETS } from '../chunks/physics-playground-DldXE6d4.js';
+import { d as definePhysicsPlayground } from '../chunks/physics-playground-D22g5Nus.js';
+export { P as PHYSICS_PRESETS } from '../chunks/physics-playground-D22g5Nus.js';
 import { defineFileTree } from '../widgets/file-tree.js';
 import { defineDownloadMenu } from '../widgets/download-menu.js';
 import { defineTitleSequence } from '../widgets/title-sequence.js';
@@ -203,18 +215,6 @@ import { defineHaloSlider } from '../widgets/halo-slider.js';
 import { defineOrbitProgress } from '../widgets/orbit-progress.js';
 export { v as viewportHeight, w as watchViewport } from '../chunks/viewport-BAXHhZLV.js';
 
-/**
- * motionary/components/widgets — the 6.x animated UI widgets, in their own
- * entry so `motionary/components` and `components/lite` keep their size
- * budgets. Every widget is reduced-motion safe and keyboard accessible.
- *
- * ```ts
- * import { defineWidgets } from 'motionary/components/widgets';
- * defineWidgets(); // or defineCarousel(), defineTabBar(), …
- * ```
- * No build step: `<script src="https://unpkg.com/motionary@6/dist/widgets.umd.js">`
- * (registers every widget and every 6.x effect pack; `window.UsaWidgets`).
- */
 const WIDGETS = {
     '6.2': { 'usa-carousel': defineCarousel, 'usa-tab-bar': defineTabBar, 'usa-disclosure': defineDisclosure, 'usa-stories': defineStories },
     '6.3': { 'usa-toast-stack': defineToastStack, 'usa-modal': defineModal, 'usa-sheet': defineSheet, 'usa-menu': defineMenu },
@@ -260,6 +260,7 @@ const WIDGETS = {
     '10.6': { 'usa-lottie-player': defineLottiePlayer, 'usa-rive': defineRive, 'usa-token-editor': defineTokenEditor },
     '10.7': { 'usa-physics-playground': definePhysicsPlayground, 'usa-motion-prompt': defineMotionPrompt },
     '17.3': { 'usa-mega-menu': defineMegaMenu, 'usa-nav-flyout': defineNavFlyout, 'usa-fullscreen-menu': defineFullscreenMenu, 'usa-breadcrumbs': defineBreadcrumbs, 'usa-file-tree': defineFileTree, 'usa-download-menu': defineDownloadMenu, 'usa-title-sequence': defineTitleSequence },
+    '17.7': { 'usa-textarea': defineTextarea, 'usa-search-field': defineSearchField, 'usa-form-stepper': defineFormStepper, 'usa-select': defineSelect, 'usa-combobox': defineCombobox, 'usa-multi-select': defineMultiSelect, 'usa-number-stepper': defineNumberStepper, 'usa-password': definePassword, 'usa-range-slider': defineRangeSlider, 'usa-consent': defineConsent, 'usa-cta-popup': defineCtaPopup, 'usa-validation-summary': defineValidationSummary },
     '17.6': { 'usa-gravity-well': defineGravityWell, 'usa-liquid-metal': defineLiquidMetal, 'usa-reaction-field': defineReactionField, 'usa-ink-flow': defineInkFlow, 'usa-fluid-type': defineFluidType, 'usa-magnetic-field': defineMagneticField, 'usa-elastic-mesh': defineElasticMesh, 'usa-spring-lab': defineSpringLab, 'usa-bezier-lab': defineBezierLab, 'usa-text-loupe': defineTextLoupe, 'usa-revision-reveal': defineRevisionReveal, 'usa-hold-action': defineHoldAction, 'usa-scrub-number': defineScrubNumber },
     '17.5': { 'usa-flight-status': defineFlightStatus, 'usa-transit-progress': defineTransitProgress, 'usa-sun-timeline': defineSunTimeline, 'usa-delivery-tracker': defineDeliveryTracker, 'usa-glucose-sparkline': defineGlucoseSparkline, 'usa-coffee-timer': defineCoffeeTimer, 'usa-vital-wave': defineVitalWave, 'usa-orbit-pass': defineOrbitPass, 'usa-meter-countdown': defineMeterCountdown, 'usa-race-telemetry': defineRaceTelemetry, 'usa-workout-player': defineWorkoutPlayer, 'usa-status-pill': defineStatusPill, 'usa-ride-status': defineRideStatus, 'usa-route-sparkline': defineRouteSparkline, 'usa-activity-wall': defineActivityWall },
     '17.4': { 'usa-luminous-switch': defineLuminousSwitch, 'usa-particle-icon': defineParticleIcon, 'usa-particle-button': defineParticleButton, 'usa-halo-segmented': defineHaloSegmented, 'usa-halo-slider': defineHaloSlider, 'usa-orbit-progress': defineOrbitProgress },
@@ -278,5 +279,5 @@ function defineWidgets(release) {
                 fn(tag);
 }
 
-export { WIDGETS, WIDGET_TAGS, defineActivityWall, defineAddToCart, defineBadgeWall, defineBarChart, defineBezierLab, defineBgGenerator, defineBreadcrumbs, defineCarousel, defineCartDrawer, defineChapterNav, defineChatComposer, defineClockControl, defineCodeExport, defineCoffeeTimer, defineColorPicker, defineCommandPalette, defineCompare, defineCountdown, defineCubeGallery, defineDatePicker, defineDeliveryTracker, defineDisclosure, defineDock, defineDownloadMenu, defineElasticMesh, defineEqualizer, defineFestivalBanner, defineField, defineFileDrop, defineFileTree, defineFlightStatus, defineFluidType, defineFullscreenMenu, defineGauge, defineGenArt, defineGestureSticker, defineGlScene, defineGlobe, defineGlucoseSparkline, defineGpuParticles, defineGravityWell, defineGyroCard, defineHaloSegmented, defineHaloSlider, defineHeroVideo, defineHoldAction, defineHudPanel, defineHydrate, defineInkFlow, defineInstallButton, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLiquidMetal, defineLiquidNav, defineLocationCard, defineLottie, defineLottieIcon, defineLottiePlayer, defineLuminousSwitch, defineLyrics, defineMagneticField, defineMasonryFlow, defineMegaMenu, defineMenu, defineMenuToggle, defineMessageList, defineMeterCountdown, defineMilestones, defineModal, defineMotion, defineMotionInspector, defineMotionPrefs, defineMotionPrompt, defineMotionSpec, defineMusicPlayer, defineNativePreview, defineNavFlyout, defineNavMorph, defineNotificationBell, defineOdometer, defineOrbitPass, defineOrbitProgress, defineOrganicCard, defineOtp, definePagination, definePanorama, defineParallaxLayers, defineParticleButton, defineParticleIcon, definePauseAll, definePerfMonitor, definePhysicsPlayground, definePluginCard, definePluginStore, definePresence, definePrizeWheel, defineProductGallery, defineProgressRing, definePropPanel, definePullCord, defineRaceTelemetry, defineRadar, defineReactionField, defineReactions, defineRedEnvelope, defineRetroButton, defineRevisionReveal, defineRideStatus, defineRive, defineRouteSparkline, defineRouteTransition, defineScene, defineScrollRing, defineScrollScene, defineScrubNumber, defineSegmented, defineShaderBackdrop, defineSheet, defineShortcut, defineSkeletonReveal, defineSketchChart, defineSmoothScroll, defineSparkline, defineSpatialCard, defineSpringLab, defineStarRating, defineStatusPill, defineStepper, defineStickyWall, defineStories, defineSuggestionChips, defineSunTimeline, defineSwipeDeck, defineSwitch, defineTabBar, defineTerminal, defineTextLoupe, defineTextSplitter, defineThemeSurface, defineThemeSwitcher, defineTip, defineTitleSequence, defineToastStack, defineTokenEditor, defineTransitProgress, defineUploadProgress, defineVideoCard, defineVitalWave, defineVoiceButton, defineVolumeKnob, defineWeatherCard, defineWidgets, defineWorkerCanvas, defineWorkoutPlayer, defineXpBar };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/components/widgets.js.map
+export { WIDGETS, WIDGET_TAGS, defineActivityWall, defineAddToCart, defineBadgeWall, defineBarChart, defineBezierLab, defineBgGenerator, defineBreadcrumbs, defineCarousel, defineCartDrawer, defineChapterNav, defineChatComposer, defineClockControl, defineCodeExport, defineCoffeeTimer, defineColorPicker, defineCombobox, defineCommandPalette, defineCompare, defineConsent, defineCountdown, defineCtaPopup, defineCubeGallery, defineDatePicker, defineDeliveryTracker, defineDisclosure, defineDock, defineDownloadMenu, defineElasticMesh, defineEqualizer, defineFestivalBanner, defineField, defineFileDrop, defineFileTree, defineFlightStatus, defineFluidType, defineFormStepper, defineFullscreenMenu, defineGauge, defineGenArt, defineGestureSticker, defineGlScene, defineGlobe, defineGlucoseSparkline, defineGpuParticles, defineGravityWell, defineGyroCard, defineHaloSegmented, defineHaloSlider, defineHeroVideo, defineHoldAction, defineHudPanel, defineHydrate, defineInkFlow, defineInstallButton, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLiquidMetal, defineLiquidNav, defineLocationCard, defineLottie, defineLottieIcon, defineLottiePlayer, defineLuminousSwitch, defineLyrics, defineMagneticField, defineMasonryFlow, defineMegaMenu, defineMenu, defineMenuToggle, defineMessageList, defineMeterCountdown, defineMilestones, defineModal, defineMotion, defineMotionInspector, defineMotionPrefs, defineMotionPrompt, defineMotionSpec, defineMultiSelect, defineMusicPlayer, defineNativePreview, defineNavFlyout, defineNavMorph, defineNotificationBell, defineNumberStepper, defineOdometer, defineOrbitPass, defineOrbitProgress, defineOrganicCard, defineOtp, definePagination, definePanorama, defineParallaxLayers, defineParticleButton, defineParticleIcon, definePassword, definePauseAll, definePerfMonitor, definePhysicsPlayground, definePluginCard, definePluginStore, definePresence, definePrizeWheel, defineProductGallery, defineProgressRing, definePropPanel, definePullCord, defineRaceTelemetry, defineRadar, defineRangeSlider, defineReactionField, defineReactions, defineRedEnvelope, defineRetroButton, defineRevisionReveal, defineRideStatus, defineRive, defineRouteSparkline, defineRouteTransition, defineScene, defineScrollRing, defineScrollScene, defineScrubNumber, defineSearchField, defineSegmented, defineSelect, defineShaderBackdrop, defineSheet, defineShortcut, defineSkeletonReveal, defineSketchChart, defineSmoothScroll, defineSparkline, defineSpatialCard, defineSpringLab, defineStarRating, defineStatusPill, defineStepper, defineStickyWall, defineStories, defineSuggestionChips, defineSunTimeline, defineSwipeDeck, defineSwitch, defineTabBar, defineTerminal, defineTextLoupe, defineTextSplitter, defineTextarea, defineThemeSurface, defineThemeSwitcher, defineTip, defineTitleSequence, defineToastStack, defineTokenEditor, defineTransitProgress, defineUploadProgress, defineValidationSummary, defineVideoCard, defineVitalWave, defineVoiceButton, defineVolumeKnob, defineWeatherCard, defineWidgets, defineWorkerCanvas, defineWorkoutPlayer, defineXpBar };
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/components/widgets.js.map

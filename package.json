@@ -1,7 +1,7 @@
 {
   "name": "motionary",
-  "version": "17.6.0",
-  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 250 animated Web Components (91 core, 159 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
+  "version": "17.7.0",
+  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 262 animated Web Components (91 core, 171 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
   "unpkg": "dist/index.umd.js",
@@ -718,6 +718,26 @@
       "require": {
         "types": "./dist/components/studio-store.d.cts",
         "default": "./dist/components/studio-store.cjs"
+      }
+    },
+    "./fx/matter": {
+      "import": {
+        "types": "./dist/components/fx-matter.d.ts",
+        "default": "./dist/components/fx-matter.js"
+      },
+      "require": {
+        "types": "./dist/components/fx-matter.d.cts",
+        "default": "./dist/components/fx-matter.cjs"
+      }
+    },
+    "./fx/draw": {
+      "import": {
+        "types": "./dist/components/fx-draw.d.ts",
+        "default": "./dist/components/fx-draw.js"
+      },
+      "require": {
+        "types": "./dist/components/fx-draw.d.cts",
+        "default": "./dist/components/fx-draw.cjs"
       }
     },
     "./components/reveal": {
@@ -1578,6 +1598,16 @@
       "require": {
         "types": "./dist/components/fx-matter.d.cts",
         "default": "./dist/components/fx-matter.cjs"
+      }
+    },
+    "./components/fx-draw": {
+      "import": {
+        "types": "./dist/components/fx-draw.d.ts",
+        "default": "./dist/components/fx-draw.js"
+      },
+      "require": {
+        "types": "./dist/components/fx-draw.d.cts",
+        "default": "./dist/components/fx-draw.cjs"
       }
     },
     "./components/native": {
@@ -3138,6 +3168,126 @@
       "require": {
         "types": "./dist/widgets/title-sequence.d.cts",
         "default": "./dist/widgets/title-sequence.cjs"
+      }
+    },
+    "./widgets/textarea": {
+      "import": {
+        "types": "./dist/widgets/textarea.d.ts",
+        "default": "./dist/widgets/textarea.js"
+      },
+      "require": {
+        "types": "./dist/widgets/textarea.d.cts",
+        "default": "./dist/widgets/textarea.cjs"
+      }
+    },
+    "./widgets/search-field": {
+      "import": {
+        "types": "./dist/widgets/search-field.d.ts",
+        "default": "./dist/widgets/search-field.js"
+      },
+      "require": {
+        "types": "./dist/widgets/search-field.d.cts",
+        "default": "./dist/widgets/search-field.cjs"
+      }
+    },
+    "./widgets/form-stepper": {
+      "import": {
+        "types": "./dist/widgets/form-stepper.d.ts",
+        "default": "./dist/widgets/form-stepper.js"
+      },
+      "require": {
+        "types": "./dist/widgets/form-stepper.d.cts",
+        "default": "./dist/widgets/form-stepper.cjs"
+      }
+    },
+    "./widgets/select": {
+      "import": {
+        "types": "./dist/widgets/select.d.ts",
+        "default": "./dist/widgets/select.js"
+      },
+      "require": {
+        "types": "./dist/widgets/select.d.cts",
+        "default": "./dist/widgets/select.cjs"
+      }
+    },
+    "./widgets/combobox": {
+      "import": {
+        "types": "./dist/widgets/combobox.d.ts",
+        "default": "./dist/widgets/combobox.js"
+      },
+      "require": {
+        "types": "./dist/widgets/combobox.d.cts",
+        "default": "./dist/widgets/combobox.cjs"
+      }
+    },
+    "./widgets/multi-select": {
+      "import": {
+        "types": "./dist/widgets/multi-select.d.ts",
+        "default": "./dist/widgets/multi-select.js"
+      },
+      "require": {
+        "types": "./dist/widgets/multi-select.d.cts",
+        "default": "./dist/widgets/multi-select.cjs"
+      }
+    },
+    "./widgets/number-stepper": {
+      "import": {
+        "types": "./dist/widgets/number-stepper.d.ts",
+        "default": "./dist/widgets/number-stepper.js"
+      },
+      "require": {
+        "types": "./dist/widgets/number-stepper.d.cts",
+        "default": "./dist/widgets/number-stepper.cjs"
+      }
+    },
+    "./widgets/password": {
+      "import": {
+        "types": "./dist/widgets/password.d.ts",
+        "default": "./dist/widgets/password.js"
+      },
+      "require": {
+        "types": "./dist/widgets/password.d.cts",
+        "default": "./dist/widgets/password.cjs"
+      }
+    },
+    "./widgets/range-slider": {
+      "import": {
+        "types": "./dist/widgets/range-slider.d.ts",
+        "default": "./dist/widgets/range-slider.js"
+      },
+      "require": {
+        "types": "./dist/widgets/range-slider.d.cts",
+        "default": "./dist/widgets/range-slider.cjs"
+      }
+    },
+    "./widgets/consent": {
+      "import": {
+        "types": "./dist/widgets/consent.d.ts",
+        "default": "./dist/widgets/consent.js"
+      },
+      "require": {
+        "types": "./dist/widgets/consent.d.cts",
+        "default": "./dist/widgets/consent.cjs"
+      }
+    },
+    "./widgets/cta-popup": {
+      "import": {
+        "types": "./dist/widgets/cta-popup.d.ts",
+        "default": "./dist/widgets/cta-popup.js"
+      },
+      "require": {
+        "types": "./dist/widgets/cta-popup.d.cts",
+        "default": "./dist/widgets/cta-popup.cjs"
+      }
+    },
+    "./widgets/validation-summary": {
+      "import": {
+        "types": "./dist/widgets/validation-summary.d.ts",
+        "default": "./dist/widgets/validation-summary.js"
+      },
+      "require": {
+        "types": "./dist/widgets/validation-summary.d.cts",
+        "default": "./dist/widgets/validation-summary.cjs"
       }
     },
     "./widgets/gravity-well": {
@@ -5030,6 +5180,46 @@
         "default": "./dist/effects/liquid-level.cjs"
       }
     },
+    "./effects/check-orbit": {
+      "import": {
+        "types": "./dist/effects/check-orbit.d.ts",
+        "default": "./dist/effects/check-orbit.js"
+      },
+      "require": {
+        "types": "./dist/effects/check-orbit.d.cts",
+        "default": "./dist/effects/check-orbit.cjs"
+      }
+    },
+    "./effects/error-underline": {
+      "import": {
+        "types": "./dist/effects/error-underline.d.ts",
+        "default": "./dist/effects/error-underline.js"
+      },
+      "require": {
+        "types": "./dist/effects/error-underline.d.cts",
+        "default": "./dist/effects/error-underline.cjs"
+      }
+    },
+    "./effects/focus-brackets": {
+      "import": {
+        "types": "./dist/effects/focus-brackets.d.ts",
+        "default": "./dist/effects/focus-brackets.js"
+      },
+      "require": {
+        "types": "./dist/effects/focus-brackets.d.cts",
+        "default": "./dist/effects/focus-brackets.cjs"
+      }
+    },
+    "./effects/submit-trail": {
+      "import": {
+        "types": "./dist/effects/submit-trail.d.ts",
+        "default": "./dist/effects/submit-trail.js"
+      },
+      "require": {
+        "types": "./dist/effects/submit-trail.d.cts",
+        "default": "./dist/effects/submit-trail.cjs"
+      }
+    },
     "./components.css": "./dist/components.css",
     "./components/reveal.css": "./dist/components/reveal.css",
     "./components/text.css": "./dist/components/text.css",
@@ -5050,16 +5240,6 @@
     "./components/layout.css": "./dist/components/layout.css",
     "./components/packs.css": "./dist/components/packs.css",
     "./components/fx.css": "./dist/components/fx.css",
-    "./fx/matter": {
-      "import": {
-        "types": "./dist/components/fx-matter.d.ts",
-        "default": "./dist/components/fx-matter.js"
-      },
-      "require": {
-        "types": "./dist/components/fx-matter.d.cts",
-        "default": "./dist/components/fx-matter.cjs"
-      }
-    },
     "./package.json": "./package.json"
   },
   "files": [

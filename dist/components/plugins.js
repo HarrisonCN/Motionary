@@ -31,6 +31,7 @@ import { SAFE_FX } from './fx-safe.js';
 import { PERF3_FX } from './fx-perf.js';
 import { HOVER_FX } from './fx-hover.js';
 import { MATTER_FX } from './fx-matter.js';
+import { DRAW_FX } from './fx-draw.js';
 
 const P = (name, effects) => ({ name, effects });
 /** The `gpu` pack. */
@@ -99,8 +100,10 @@ const perf3 = /*#__PURE__*/ P('perf3', PERF3_FX);
 const hover = /*#__PURE__*/ P('hover', HOVER_FX);
 /** The Matter pack (17.6: particles, liquid metal, reaction diffusion and elastic fields). */
 const matter = /*#__PURE__*/ P('matter', MATTER_FX);
+/** SVG feedback strokes for deliberate forms (17.7). */
+const draw = /*#__PURE__*/ P('draw', DRAW_FX);
 /** Every built-in plugin. */
-const ALL_PLUGINS = [gpu, text, light, depth, morph, transitions, weather, physics, focus, music, chart, shop, social, game, geo, form, ai, festival, retro, organic, cyber, paper, surface, gesture3, spatial, cinema, lottie, genart, video, safe, perf3, hover, matter];
+const ALL_PLUGINS = [gpu, text, light, depth, morph, transitions, weather, physics, focus, music, chart, shop, social, game, geo, form, ai, festival, retro, organic, cyber, paper, surface, gesture3, spatial, cinema, lottie, genart, video, safe, perf3, hover, matter, draw];
 
-export { ALL_PLUGINS, ai, chart, cinema, cyber, depth, festival, focus, form, game, genart, geo, gesture3, gpu, hover, light, lottie, matter, morph, music, organic, paper, perf3, physics, retro, safe, shop, social, spatial, surface, text, transitions, video, weather };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/components/plugins.js.map
+export { ALL_PLUGINS, ai, chart, cinema, cyber, depth, draw, festival, focus, form, game, genart, geo, gesture3, gpu, hover, light, lottie, matter, morph, music, organic, paper, perf3, physics, retro, safe, shop, social, spatial, surface, text, transitions, video, weather };
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/components/plugins.js.map

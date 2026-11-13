@@ -15,4 +15,4 @@ function registerDustVortex() {
 exports.effect = effect;
 exports.register = registerDustVortex;
 exports.registerDustVortex = registerDustVortex;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/effects/dust-vortex.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/effects/dust-vortex.cjs.map

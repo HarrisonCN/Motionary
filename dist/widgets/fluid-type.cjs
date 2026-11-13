@@ -22,4 +22,4 @@ function defineFluidType(tag = 'usa-fluid-type') {
 }
 
 exports.defineFluidType = defineFluidType;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/widgets/fluid-type.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/widgets/fluid-type.cjs.map

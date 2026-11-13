@@ -1,7 +1,7 @@
 'use strict';
 
-var registry = require('../chunks/registry-HSe7clPM.cjs');
-var tween = require('../chunks/tween-BENWOCyd.cjs');
+var registry = require('../chunks/registry-CvzRzv5N.cjs');
+var tween = require('../chunks/tween-CSQ2EFBm.cjs');
 
 const ALLOWED = /*#__PURE__*/ new Set(['time', 'value', 'thisComp', 'thisLayer', 'thisProperty', 'Math', 'wiggle', 'loopOut', 'loopIn', 'loopOutDuration', 'loopInDuration', 'linear', 'ease', 'easeIn', 'easeOut', 'clamp', 'valueAtTime', 'framesToTime', 'timeToFrames', 'degreesToRadians', 'radiansToDegrees', 'add', 'sub', 'mul', 'div', 'length', 'true', 'false', '$bm_rt', 'index']);
 function lex(src) {
@@ -1158,4 +1158,4 @@ exports.transformAt = transformAt;
 exports.trimContours = trimContours;
 exports.unzipEntries = unzipEntries;
 exports.vector = vector;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/runtime/vector.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/runtime/vector.cjs.map

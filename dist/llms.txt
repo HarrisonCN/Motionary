@@ -1,6 +1,6 @@
-# Motionary 17.6.0
+# Motionary 17.7.0
 
-> Motionary is a zero-dependency motion library: scroll animations, 200+ presets and 250 animated Web Components (<mo-*>; the legacy <usa-*> names still work) that work in plain HTML and every framework, plus motionary/runtime — its own tween/timeline engine and format loaders.
+> Motionary is a zero-dependency motion library: scroll animations, 200+ presets and 262 animated Web Components (<mo-*>; the legacy <usa-*> names still work) that work in plain HTML and every framework, plus motionary/runtime — its own tween/timeline engine and format loaders.
 
 Install: `npm i motionary` · CDN: https://unpkg.com/motionary@17/dist/components.umd.js (+ https://unpkg.com/motionary@17/dist/widgets.umd.js for 6.x+ widgets) · Manifest: https://harrisoncn.github.io/Motionary/components.json · Full text: https://harrisoncn.github.io/Motionary/llms-full.txt
 
@@ -70,10 +70,13 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<mo-code-export>` (legacy `<usa-code-export>`; motionary/components/widgets): 8.9 low-code: shows copy-paste code (HTML, React, Vue or JSON) for a live, configured component next to it, follows its attribute changes and copies with one cl
 - `<mo-coffee-timer>` (legacy `<usa-coffee-timer>`; motionary/components/widgets): An orange segmented scale and an explicit start/stop elapsed-time clock.
 - `<mo-color-picker>` (legacy `<usa-color-picker>`; motionary/components/widgets): 6.9: a saturation / brightness square and a hue strip with spring-follow thumbs (both keyboard sliders), a preview chip that morphs to the new colour and swatch
+- `<mo-combobox>` (legacy `<usa-combobox>`; motionary/components/widgets): Filter choices, navigate enabled results with arrows and keep input focus.
 - `<mo-command-palette>` (legacy `<usa-command-palette>`; motionary/components/widgets): 7.9: a ⌘K command palette on the native <dialog> — scales in, filters as you type with fuzzy matching and highlighted letters, results stagger in and a highligh
 - `<mo-compare>` (legacy `<usa-compare>`; motionary/components/widgets): 6.5: drag the handle (or hover with the hover attribute), click to jump, or use the keyboard slider; horizontal or vertical; an intro sweep plays once when it s
+- `<mo-consent>` (legacy `<usa-consent>`; motionary/components/widgets): Explicit essential and optional choices; no cookies, storage or services are changed.
 - `<mo-countdown>` (legacy `<usa-countdown>`; motionary/components/widgets): 7.3: a split-flap countdown to a date (to) or for a number of seconds — every digit flips when it changes; fires usa:done at zero. The timer label updates once 
 - `<mo-counter>` (legacy `<usa-counter>`; motionary/components/text): Counts up to a number when visible, locale-formatted with tabular digits. Set .value to animate live dashboards.
+- `<mo-cta-popup>` (legacy `<usa-cta-popup>`; motionary/components/widgets): A native modal dialog with focus return, Escape and cancelable confirmation.
 - `<mo-cube>` (legacy `<usa-cube>`; motionary/components/depth): Up to six children become the faces of a CSS 3D cube. Drag / swipe, arrow keys, autoplay or show("top"); spring-driven, the front face is the only one exposed t
 - `<mo-cube-gallery>` (legacy `<usa-cube-gallery>`; motionary/components/widgets): 6.5: slides sit on adjacent faces of a 3D cube that turns between them — swipe, arrow keys, buttons or autoplay (pauses on hover / focus / off screen); turn aro
 - `<mo-cursor>` (legacy `<usa-cursor>`; motionary/components/page): A spring-lagged ring, a magnetic ring that wraps buttons and links, or a soft glow following the pointer. Mouse / pen only. (6.0: for a comet tail use the comet
@@ -100,6 +103,7 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<mo-file-tree>` (legacy `<usa-file-tree>`; motionary/components/widgets): Expandable folders with native file links and left/right keyboard navigation.
 - `<mo-flight-status>` (legacy `<usa-flight-status>`; motionary/components/widgets): Origin and destination codes, a moving aircraft and an arrival estimate.
 - `<mo-fluid-type>` (legacy `<usa-fluid-type>`; motionary/components/widgets): Supplied text becomes a halftone vessel with a tilting liquid surface.
+- `<mo-form-stepper>` (legacy `<usa-form-stepper>`; motionary/components/widgets): Preserve original fields and FormData while validating steps and managing focus.
 - `<mo-fullpage>` (legacy `<usa-fullpage>`; motionary/components/page): Full-screen sections that snap one at a time, with keyboard paging, dot navigation and a usa:section event.
 - `<mo-fullscreen-menu>` (legacy `<usa-fullscreen-menu>`; motionary/components/widgets): 17.3: a menu button opens a full-screen overlay that grows out of the button as a circle (or drops as a curtain), then the big links rise one by one; links with
 - `<mo-fx>` (legacy `<usa-fx>`; motionary/components/fx): <usa-fx> plays any registered effect on its child: pulse, pop, jelly, wiggle, heartbeat, bounce, flash (≤ 2 per second), tada, shake. Click the button.
@@ -165,12 +169,14 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<mo-motion-spec>` (legacy `<usa-motion-spec>`; motionary/components/widgets): 9.7: a motion spec sheet for design hand-off — each rule of a motion string with its trigger, a duration bar on a shared timeline and the easing curve, a Play p
 - `<mo-motion-switch>` (legacy `<usa-motion-switch>`; motionary/components/page): Let users pick Off · Low · Normal · High for the whole app; scales every component, persists, and Off equals reduced motion.
 - `<mo-motion-theme>` (legacy `<usa-motion-theme>`; motionary/components/effects): 5.8: <usa-motion-theme name> applies a theme pack — design tokens (--usa-theme-*), motion tokens and effect presets per role (enter / hover / click / attention 
+- `<mo-multi-select>` (legacy `<usa-multi-select>`; motionary/components/widgets): Filter native checkboxes, remove tokens and submit multiple form values.
 - `<mo-music-player>` (legacy `<usa-music-player>`; motionary/components/widgets): 7.1: the cover spins like a record while playing, play morphs to pause, mini equalizer bars dance and the progress bar is a scrubbable slider. Plays a child <au
 - `<mo-native-preview>` (legacy `<usa-native-preview>`; motionary/components/widgets): 9.8: preview web motion as it will feel on a phone — an iOS / Android device frame replays the entrance with the rule’s curve and presses with a spring — and co
 - `<mo-nav-flyout>` (legacy `<usa-nav-flyout>`; motionary/components/widgets): 17.3: dropdown flyouts anchored under each nav link; one background slides and resizes from flyout to flyout, so moving along the bar feels like one surface. Sa
 - `<mo-nav-morph>` (legacy `<usa-nav-morph>`; motionary/components/widgets): 6.6: the indicator follows the hovered or focused link — stretching from the old one, leading edge first — and settles back on the current page. Underline, pill
 - `<mo-navbar>` (legacy `<usa-navbar>`; motionary/components/ui): Hides while you scroll down, slides back on the first scroll up; shrink makes it compact once scrolled. This page’s demo scrolls an inner box.
 - `<mo-notification-bell>` (legacy `<usa-notification-bell>`; motionary/components/widgets): 7.4: a bell with an unread badge and a dropdown — notify() swings the bell, bumps the badge and slides the notice in; “Mark all read” shrinks the badge away. Es
+- `<mo-number-stepper>` (legacy `<usa-number-stepper>`; motionary/components/widgets): Decimal steps, native numeric input, bounded buttons and form reset.
 - `<mo-odometer>` (legacy `<usa-odometer>`; motionary/components/widgets): 6.4: rolling digit wheels — every digit spins forward to its new value, new digits slide in, locale grouping via Intl.NumberFormat, decimals, prefix / suffix. T
 - `<mo-orbit-pass>` (legacy `<usa-orbit-pass>`; motionary/components/widgets): An arc, field-of-view cone and a progress marker for supplied pass data.
 - `<mo-orbit-progress>` (legacy `<usa-orbit-progress>`; motionary/components/widgets): A bounded, determinate glass progress dial. Smooth updates, accessible values and no idle animation.
@@ -184,6 +190,7 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<mo-particle-button>` (legacy `<usa-particle-button>`; motionary/components/widgets): An action or pressed toggle button with a particle burst. Real button keyboard activation; emits usa:activate.
 - `<mo-particle-icon>` (legacy `<usa-particle-icon>`; motionary/components/widgets): Morph between eight SVG particle glyphs by changing icon. Static at rest; labelled or decorative.
 - `<mo-particles>` (legacy `<usa-particles>`; motionary/components/background): A canvas constellation that drifts away from the pointer. Runs only while visible, DPR ≤ 2, a still frame under reduced motion.
+- `<mo-password>` (legacy `<usa-password>`; motionary/components/widgets): Reveal and hide without losing the selection; no secret values in custom events.
 - `<mo-pause-all>` (legacy `<usa-pause-all>`; motionary/components/widgets): 9.5: one button that pauses all motion on the page (WCAG 2.2.2) — Motionary’s shared clock, every CSS / Web animation and autoplaying media — and resumes it aga
 - `<mo-perf-monitor>` (legacy `<usa-perf-monitor>`; motionary/components/widgets): 9.6: a live performance overlay for motion work — FPS with a sparkline, active Motionary animations, frame-loop callbacks, long tasks and the shared clock — fla
 - `<mo-physics-playground>` (legacy `<usa-physics-playground>`; motionary/components/widgets; requires motionary/runtime/physics + motionary/runtime/format-scene): 10.7: a 2D rigid-body sandbox on Motionary’s own physics engine — circles, boxes and polygons, friction, restitution, constraints, sleeping — loaded from a vers
@@ -204,6 +211,7 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<mo-pull-refresh>` (legacy `<usa-pull-refresh>`; motionary/components/ui): Pull down at the top of a list: the spinner stretches in with rubber-band resistance; release past the threshold to refresh.
 - `<mo-race-telemetry>` (legacy `<usa-race-telemetry>`; motionary/components/widgets): A vector track, position marker and supplied lap records.
 - `<mo-radar>` (legacy `<usa-radar>`; motionary/components/widgets): 8.4: a sci-fi radar scope — a conic beam sweeps round and each target lights up and fades as the beam passes over it.
+- `<mo-range-slider>` (legacy `<usa-range-slider>`; motionary/components/widgets): Two native ranges enforce a non-crossing interval and a minimum gap.
 - `<mo-reaction-field>` (legacy `<usa-reaction-field>`; motionary/components/widgets): Real Gray–Scott chemistry, with dot and contour rendering and shape masks.
 - `<mo-reactions>` (legacy `<usa-reactions>`; motionary/components/widgets): 7.4: a reaction bar — clicking a pill toggles your reaction: the emoji pops, the count rolls and copies float up; ＋ springs open a picker. Each pill is a toggle
 - `<mo-red-envelope>` (legacy `<usa-red-envelope>`; motionary/components/widgets): 8.1: a Lunar New Year red envelope — tap and the flap swings open, the card slides out with the amount counting up and gold coins pop out.
@@ -223,7 +231,9 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<mo-scroll-scene>` (legacy `<usa-scroll-scene>`; motionary/components/widgets; requires motionary/runtime/scroll): 10.2: a scroll-linked scene — children with data-scrub="opacity: 0 -> 1; x: -80 -> 0" are tweened as you scroll, scrubbed directly or smoothed (scrub="120"), wi
 - `<mo-scrolly>` (legacy `<usa-scrolly>`; motionary/components/reveal): A pinned graphic while [data-step] blocks scroll past; the active step drives the graphic via attributes, a CSS variable and events.
 - `<mo-scrub-number>` (legacy `<usa-scrub-number>`; motionary/components/widgets): Editable bounded numbers, horizontal drag, precision mode and keyboard stepping.
+- `<mo-search-field>` (legacy `<usa-search-field>`; motionary/components/widgets): Debounced search providers with abort signals and protection against late results.
 - `<mo-segmented>` (legacy `<usa-segmented>`; motionary/components/widgets): 6.7: an iOS-style thumb slides under the chosen segment with a spring and stretches while it travels. A real radio group: arrow keys, Home / End. iOS, pill or o
+- `<mo-select>` (legacy `<usa-select>`; motionary/components/widgets): Native platform selection, optgroups, validation and form reset.
 - `<mo-shader>` (legacy `<usa-shader>`; motionary/components/webgl): A GPU shader behind your content: gradient, plasma, waves or aurora presets — or your own fragment shader in a <script type="x-shader/x-fragment">. Falls back t
 - `<mo-shader-backdrop>` (legacy `<usa-shader-backdrop>`; motionary/components/widgets): 10.5 (WebGPU effects 2.0): an animated shader background (aurora, plasma, waves, nebula or your own GLSL) run through a post-processing chain — bloom, vignette,
 - `<mo-sheet>` (legacy `<usa-sheet>`; motionary/components/widgets): 6.3: a side sheet from the right, left, top or bottom with a blurred backdrop; the bottom sheet can be dragged down to dismiss and springs back otherwise. Nativ
@@ -262,6 +272,7 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<mo-text-loupe>` (legacy `<usa-text-loupe>`; motionary/components/widgets): A pointer and keyboard controlled lens preserves the readable original text.
 - `<mo-text-rotate>` (legacy `<usa-text-rotate>`; motionary/components/text): Cycles words in place — the box keeps the width of the longest word, so nothing around it reflows.
 - `<mo-text-splitter>` (legacy `<usa-text-splitter>`; motionary/components/widgets; requires motionary/runtime/text): 10.3: splits its text into characters, words or lines and animates them in with a stagger (rise, fade, blur, flip, wave) when it scrolls into view — accessible,
+- `<mo-textarea>` (legacy `<usa-textarea>`; motionary/components/widgets): Native multiline input, bounded auto-resize, character counter and reset.
 - `<mo-theme-surface>` (legacy `<usa-theme-surface>`; motionary/components/widgets): 8.6: a themeable card that follows the nearest theme — light, dark, neon (pulsing glow edge), glass (frosted backdrop with a sheen) or soft neumorphic relief — 
 - `<mo-theme-switcher>` (legacy `<usa-theme-switcher>`; motionary/components/widgets): 8.6: a segmented switcher for the 8.6 theme system — light, dark, neon, glass and soft (neumorphism); a pill slides under the active option and the page change 
 - `<mo-tilt>` (legacy `<usa-tilt>`; motionary/components/interaction): Tilts toward the pointer in 3D with an optional glare; exposes --usa-tilt-x/y for parallax layers inside.
@@ -274,6 +285,7 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<mo-transit-progress>` (legacy `<usa-transit-progress>`; motionary/components/widgets): A luminous route strip with the active station.
 - `<mo-typewriter>` (legacy `<usa-typewriter>`; motionary/components/text): Types text, or cycles through phrases with delete and pause. Full text stays available to screen readers.
 - `<mo-upload-progress>` (legacy `<usa-upload-progress>`; motionary/components/widgets): 7.7: a file row whose bar eases to value with a running shine; at 100 it turns into a check that draws itself, on error it shakes and offers Retry.
+- `<mo-validation-summary>` (legacy `<usa-validation-summary>`; motionary/components/widgets): Native validity messages become links to the actual fields; no values are emitted.
 - `<mo-video-card>` (legacy `<usa-video-card>`; motionary/components/widgets): 9.4: a video thumbnail card — hover or focus plays a muted preview with a progress line, a play badge and a duration chip; without a video the poster drifts (Ke
 - `<mo-view-switch>` (legacy `<usa-view-switch>`; motionary/components/transitions): One view at a time with direction-aware slide, fade, scale or drill transitions — tabs, wizards, app pages.
 - `<mo-vital-wave>` (legacy `<usa-vital-wave>`; motionary/components/widgets): A dot-and-stem waveform for supplied values, with configurable unit and period.

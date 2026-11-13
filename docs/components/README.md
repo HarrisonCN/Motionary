@@ -1,4 +1,4 @@
-# Motionary components (250)
+# Motionary components (262)
 
 One page per `<usa-*>` element, generated from the source. Machine-readable: `motionary/tooling/manifest.json` · Pages `/components.json` · `/llms.txt` · `/llms-full.txt`. How to use these with an AI assistant: [AGENTS.md](../../AGENTS.md) and [the prompt guide](../ai-prompt-guide.md).
 
@@ -43,8 +43,11 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-code-export>`](usa-code-export.md) — Code export
 - [`<mo-coffee-timer>`](usa-coffee-timer.md) — Coffee timer
 - [`<mo-color-picker>`](usa-color-picker.md) — Color picker
+- [`<mo-combobox>`](usa-combobox.md) — Search combobox
 - [`<mo-command-palette>`](usa-command-palette.md) — Command palette (⌘K)
+- [`<mo-consent>`](usa-consent.md) — Preference consent
 - [`<mo-countdown>`](usa-countdown.md) — Flip countdown
+- [`<mo-cta-popup>`](usa-cta-popup.md) — Deliberate popup
 - [`<mo-date-picker>`](usa-date-picker.md) — Date picker
 - [`<mo-delivery-tracker>`](usa-delivery-tracker.md) — Delivery tracker
 - [`<mo-dock>`](usa-dock.md) — macOS-style dock
@@ -56,6 +59,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-field>`](usa-field.md) — Animated field
 - [`<mo-file-tree>`](usa-file-tree.md) — File tree
 - [`<mo-flight-status>`](usa-flight-status.md) — Flight status
+- [`<mo-form-stepper>`](usa-form-stepper.md) — Validated form steps
 - [`<mo-fullscreen-menu>`](usa-fullscreen-menu.md) — Full-screen menu (circle / curtain reveal)
 - [`<mo-gauge>`](usa-gauge.md) — Spring gauge
 - [`<mo-gen-art>`](usa-gen-art.md) — Generative artwork
@@ -90,12 +94,14 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-motion-prefs>`](usa-motion-prefs.md) — Motion preference panel
 - [`<mo-motion-prompt>`](usa-motion-prompt.md) — Motion prompt (text → motion)
 - [`<mo-motion-spec>`](usa-motion-spec.md) — Motion spec sheet
+- [`<mo-multi-select>`](usa-multi-select.md) — Token multi-select
 - [`<mo-music-player>`](usa-music-player.md) — Music player
 - [`<mo-native-preview>`](usa-native-preview.md) — Native preview
 - [`<mo-nav-flyout>`](usa-nav-flyout.md) — Nav flyouts (shared background)
 - [`<mo-nav-morph>`](usa-nav-morph.md) — Navbar with morphing indicator
 - [`<mo-navbar>`](usa-navbar.md) — Auto-hide navbar
 - [`<mo-notification-bell>`](usa-notification-bell.md) — Notification bell
+- [`<mo-number-stepper>`](usa-number-stepper.md) — Number stepper
 - [`<mo-orbit-pass>`](usa-orbit-pass.md) — Orbit flyover
 - [`<mo-orbit-progress>`](usa-orbit-progress.md) — Orbit progress dial
 - [`<mo-organic-card>`](usa-organic-card.md) — Organic card
@@ -104,6 +110,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-panorama>`](usa-panorama.md) — 360° panorama viewer
 - [`<mo-particle-button>`](usa-particle-button.md) — Particle glass button
 - [`<mo-particle-icon>`](usa-particle-icon.md) — Morphing particle icon
+- [`<mo-password>`](usa-password.md) — Private password field
 - [`<mo-pause-all>`](usa-pause-all.md) — Pause all motion
 - [`<mo-perf-monitor>`](usa-perf-monitor.md) — Perf monitor
 - [`<mo-physics-playground>`](usa-physics-playground.md) — Physics playground · Requires: motionary/runtime/physics + motionary/runtime/format-scene
@@ -117,6 +124,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-pull-refresh>`](usa-pull-refresh.md) — Pull to refresh
 - [`<mo-race-telemetry>`](usa-race-telemetry.md) — Race telemetry
 - [`<mo-radar>`](usa-radar.md) — Radar scope
+- [`<mo-range-slider>`](usa-range-slider.md) — Interval slider
 - [`<mo-reactions>`](usa-reactions.md) — Emoji reactions
 - [`<mo-red-envelope>`](usa-red-envelope.md) — Red envelope (红包)
 - [`<mo-retro-button>`](usa-retro-button.md) — Retro buttons
@@ -125,7 +133,9 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-route-sparkline>`](usa-route-sparkline.md) — Route sparkline
 - [`<mo-scene>`](usa-scene.md) — Cinematic scene
 - [`<mo-scrub-number>`](usa-scrub-number.md) — Scrub number
+- [`<mo-search-field>`](usa-search-field.md) — Cancelable async search
 - [`<mo-segmented>`](usa-segmented.md) — Segmented control
+- [`<mo-select>`](usa-select.md) — Native select
 - [`<mo-shader-backdrop>`](usa-shader-backdrop.md) — Shader backdrop + post chain
 - [`<mo-shortcut>`](usa-shortcut.md) — Shortcut hint
 - [`<mo-sketch-chart>`](usa-sketch-chart.md) — Sketch chart
@@ -142,6 +152,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-tab-bar>`](usa-tab-bar.md) — Tabs with animated indicator
 - [`<mo-tabs>`](usa-tabs.md) — Tabs
 - [`<mo-terminal>`](usa-terminal.md) — Terminal window
+- [`<mo-textarea>`](usa-textarea.md) — Adaptive textarea
 - [`<mo-theme-surface>`](usa-theme-surface.md) — Theme surface
 - [`<mo-theme-switcher>`](usa-theme-switcher.md) — Theme switcher
 - [`<mo-tip>`](usa-tip.md) — Tooltip / popover 2.0
@@ -149,6 +160,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-token-editor>`](usa-token-editor.md) — Motion token editor (W3C DTCG)
 - [`<mo-transit-progress>`](usa-transit-progress.md) — Transit progress
 - [`<mo-upload-progress>`](usa-upload-progress.md) — Upload progress
+- [`<mo-validation-summary>`](usa-validation-summary.md) — Validation summary
 - [`<mo-video-card>`](usa-video-card.md) — Video card
 - [`<mo-vital-wave>`](usa-vital-wave.md) — Vital dot wave
 - [`<mo-voice-button>`](usa-voice-button.md) — Voice button

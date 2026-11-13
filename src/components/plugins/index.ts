@@ -37,6 +37,7 @@ import { SAFE_FX } from '../fx2/safemotion';
 import { PERF3_FX } from '../fx2/perf3';
 import { HOVER_FX } from '../fx2/hover';
 import { MATTER_FX } from '../fx2/matter';
+import { DRAW_FX } from '../fx2/draw';
 
 export interface EffectPlugin {
   name: string;
@@ -112,5 +113,8 @@ export const hover = /*#__PURE__*/ P('hover', HOVER_FX);
 /** The Matter pack (17.6: particles, liquid metal, reaction diffusion and elastic fields). */
 export const matter = /*#__PURE__*/ P('matter', MATTER_FX);
 
+/** SVG feedback strokes for deliberate forms (17.7). */
+export const draw = /*#__PURE__*/ P('draw', DRAW_FX);
+
 /** Every built-in plugin. */
-export const ALL_PLUGINS: EffectPlugin[] = [gpu, text, light, depth, morph, transitions, weather, physics, focus, music, chart, shop, social, game, geo, form, ai, festival, retro, organic, cyber, paper, surface, gesture3, spatial, cinema, lottie, genart, video, safe, perf3, hover, matter];
+export const ALL_PLUGINS: EffectPlugin[] = [gpu, text, light, depth, morph, transitions, weather, physics, focus, music, chart, shop, social, game, geo, form, ai, festival, retro, organic, cyber, paper, surface, gesture3, spatial, cinema, lottie, genart, video, safe, perf3, hover, matter, draw];

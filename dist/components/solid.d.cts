@@ -1871,6 +1871,16 @@ interface LegacyAttributes {
     'usa-color-picker': {
         swatches?: string | boolean | number;
     };
+    'usa-combobox': {
+        disabled?: string | boolean | number;
+        hint?: string | boolean | number;
+        label?: string | boolean | number;
+        name?: string | boolean | number;
+        options?: string | boolean | number;
+        placeholder?: string | boolean | number;
+        required?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-command-palette': {
         hotkey?: string | boolean | number;
         inline?: string | boolean | number;
@@ -1884,6 +1894,14 @@ interface LegacyAttributes {
         labels?: string | boolean | number;
         orientation?: string | boolean | number;
         position?: string | boolean | number;
+    };
+    'usa-consent': {
+        analytics?: string | boolean | number;
+        disabled?: string | boolean | number;
+        hint?: string | boolean | number;
+        label?: string | boolean | number;
+        marketing?: string | boolean | number;
+        name?: string | boolean | number;
     };
     'usa-countdown': {
         label?: string | boolean | number;
@@ -1902,6 +1920,15 @@ interface LegacyAttributes {
         start?: string | boolean | number;
         suffix?: string | boolean | number;
         to?: string | boolean | number;
+    };
+    'usa-cta-popup': {
+        'action-label'?: string | boolean | number;
+        disabled?: string | boolean | number;
+        hint?: string | boolean | number;
+        label?: string | boolean | number;
+        message?: string | boolean | number;
+        open?: string | boolean | number;
+        title?: string | boolean | number;
     };
     'usa-cube': {
         autoplay?: string | boolean | number;
@@ -2057,6 +2084,15 @@ interface LegacyAttributes {
         label?: string | boolean | number;
         paused?: string | boolean | number;
         text?: string | boolean | number;
+    };
+    'usa-form-stepper': {
+        'back-label'?: string | boolean | number;
+        'complete-label'?: string | boolean | number;
+        disabled?: string | boolean | number;
+        hint?: string | boolean | number;
+        label?: string | boolean | number;
+        'next-label'?: string | boolean | number;
+        step?: string | boolean | number;
     };
     'usa-fullpage': {
         axis?: string | boolean | number;
@@ -2463,6 +2499,15 @@ interface LegacyAttributes {
     'usa-motion-theme': {
         name?: string | boolean | number;
     };
+    'usa-multi-select': {
+        disabled?: string | boolean | number;
+        hint?: string | boolean | number;
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+        name?: string | boolean | number;
+        options?: string | boolean | number;
+        values?: string | boolean | number;
+    };
     'usa-music-player': {
         artist?: string | boolean | number;
         cover?: string | boolean | number;
@@ -2491,6 +2536,17 @@ interface LegacyAttributes {
     };
     'usa-notification-bell': {
         label?: string | boolean | number;
+    };
+    'usa-number-stepper': {
+        disabled?: string | boolean | number;
+        hint?: string | boolean | number;
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+        min?: string | boolean | number;
+        name?: string | boolean | number;
+        required?: string | boolean | number;
+        step?: string | boolean | number;
+        value?: string | boolean | number;
     };
     'usa-odometer': {
         decimals?: string | boolean | number;
@@ -2575,6 +2631,19 @@ interface LegacyAttributes {
         paused?: string | boolean | number;
         size?: string | boolean | number;
         speed?: string | boolean | number;
+    };
+    'usa-password': {
+        autocomplete?: string | boolean | number;
+        disabled?: string | boolean | number;
+        hint?: string | boolean | number;
+        label?: string | boolean | number;
+        maxlength?: string | boolean | number;
+        minlength?: string | boolean | number;
+        name?: string | boolean | number;
+        placeholder?: string | boolean | number;
+        required?: string | boolean | number;
+        revealed?: string | boolean | number;
+        value?: string | boolean | number;
     };
     'usa-pause-all': {
         label?: string | boolean | number;
@@ -2689,6 +2758,19 @@ interface LegacyAttributes {
         rings?: string | boolean | number;
         speed?: string | boolean | number;
         targets?: string | boolean | number;
+    };
+    'usa-range-slider': {
+        disabled?: string | boolean | number;
+        high?: string | boolean | number;
+        hint?: string | boolean | number;
+        label?: string | boolean | number;
+        low?: string | boolean | number;
+        max?: string | boolean | number;
+        min?: string | boolean | number;
+        'min-gap'?: string | boolean | number;
+        name?: string | boolean | number;
+        step?: string | boolean | number;
+        unit?: string | boolean | number;
     };
     'usa-reaction-field': {
         accent?: string | boolean | number;
@@ -2836,10 +2918,33 @@ interface LegacyAttributes {
         unit?: string | boolean | number;
         value?: string | boolean | number;
     };
+    'usa-search-field': {
+        delay?: string | boolean | number;
+        disabled?: string | boolean | number;
+        'empty-text'?: string | boolean | number;
+        'error-text'?: string | boolean | number;
+        hint?: string | boolean | number;
+        label?: string | boolean | number;
+        'loading-text'?: string | boolean | number;
+        'min-length'?: string | boolean | number;
+        name?: string | boolean | number;
+        placeholder?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-segmented': {
         label?: string | boolean | number;
         value?: string | boolean | number;
         variant?: string | boolean | number;
+    };
+    'usa-select': {
+        disabled?: string | boolean | number;
+        hint?: string | boolean | number;
+        label?: string | boolean | number;
+        name?: string | boolean | number;
+        options?: string | boolean | number;
+        placeholder?: string | boolean | number;
+        required?: string | boolean | number;
+        value?: string | boolean | number;
     };
     'usa-shader': {};
     'usa-shader-backdrop': {
@@ -3089,6 +3194,20 @@ interface LegacyAttributes {
         stagger?: string | boolean | number;
         trigger?: string | boolean | number;
     };
+    'usa-textarea': {
+        'auto-resize'?: string | boolean | number;
+        disabled?: string | boolean | number;
+        hint?: string | boolean | number;
+        label?: string | boolean | number;
+        'max-rows'?: string | boolean | number;
+        maxlength?: string | boolean | number;
+        name?: string | boolean | number;
+        placeholder?: string | boolean | number;
+        readonly?: string | boolean | number;
+        required?: string | boolean | number;
+        rows?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-theme-surface': {
         theme?: string | boolean | number;
     };
@@ -3163,6 +3282,11 @@ interface LegacyAttributes {
         size?: string | boolean | number;
         status?: string | boolean | number;
         value?: string | boolean | number;
+    };
+    'usa-validation-summary': {
+        hint?: string | boolean | number;
+        label?: string | boolean | number;
+        target?: string | boolean | number;
     };
     'usa-video-card': {
         duration?: string | boolean | number;

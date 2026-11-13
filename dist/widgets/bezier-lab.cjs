@@ -23,4 +23,4 @@ function defineBezierLab(tag = 'usa-bezier-lab') {
 }
 
 exports.defineBezierLab = defineBezierLab;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/widgets/bezier-lab.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/widgets/bezier-lab.cjs.map

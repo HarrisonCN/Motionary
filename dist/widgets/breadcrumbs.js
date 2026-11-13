@@ -140,4 +140,4 @@ function defineBreadcrumbs(tag = 'usa-breadcrumbs') {
 }
 
 export { defineBreadcrumbs };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.6.0/dist/widgets/breadcrumbs.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/widgets/breadcrumbs.js.map

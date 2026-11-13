@@ -35,8 +35,8 @@ jobs:
           cache: npm
       - run: npm ci --no-audit --no-fund
       - run: npm run typecheck
-      - run: npm test
       - run: npm run build
+      - run: npm test
       - run: npm run check:exports
       - name: Tree-shaking (side-effect-free imports, one export pulls in only its own code)
         run: npm run check:treeshake
