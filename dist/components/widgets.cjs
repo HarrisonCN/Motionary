@@ -6,6 +6,9 @@ var widgets_formStepper = require('../widgets/form-stepper.cjs');
 var widgets_select = require('../widgets/select.cjs');
 var widgets_combobox = require('../widgets/combobox.cjs');
 var widgets_multiSelect = require('../widgets/multi-select.cjs');
+var widgets_lensStack = require('../widgets/lens-stack.cjs');
+var widgets_irisDiaphragm = require('../widgets/iris-diaphragm.cjs');
+var widgets_contourRelief = require('../widgets/contour-relief.cjs');
 var widgets_numberStepper = require('../widgets/number-stepper.cjs');
 var widgets_password = require('../widgets/password.cjs');
 var widgets_rangeSlider = require('../widgets/range-slider.cjs');
@@ -110,20 +113,20 @@ var widgets_motionSpec = require('../widgets/motion-spec.cjs');
 var widgets_nativePreview = require('../widgets/native-preview.cjs');
 var widgets_pluginCard = require('../widgets/plugin-card.cjs');
 var widgets_installButton = require('../widgets/install-button.cjs');
-var widgets_scrollScene = require('../chunks/scroll-scene-bhKJefLg.cjs');
+var widgets_scrollScene = require('../chunks/scroll-scene-DDMklFRX.cjs');
 var widgets_motionInspector = require('../widgets/motion-inspector.cjs');
 var widgets_routeTransition = require('../widgets/route-transition.cjs');
 var widgets_textSplitter = require('../widgets/text-splitter.cjs');
 var widgets_scrollRing = require('../widgets/scroll-ring.cjs');
 var widgets_parallaxLayers = require('../widgets/parallax-layers.cjs');
 var widgets_smoothScroll = require('../widgets/smooth-scroll.cjs');
-var widgets_glScene = require('../chunks/gl-scene-lG0HvTr5.cjs');
+var widgets_glScene = require('../chunks/gl-scene-CIyi6z--.cjs');
 var widgets_gpuParticles = require('../chunks/gpu-particles-DGwFsyz_.cjs');
 var widgets_shaderBackdrop = require('../chunks/shader-backdrop-Ct8UIKNL.cjs');
-var widgets_lottiePlayer = require('../chunks/lottie-player-CY5npFg0.cjs');
+var widgets_lottiePlayer = require('../chunks/lottie-player-BZfk0_s_.cjs');
 var widgets_rive = require('../chunks/rive-xzduMxFp.cjs');
 var widgets_tokenEditor = require('../widgets/token-editor.cjs');
-var widgets_physicsPlayground = require('../chunks/physics-playground-CT29Alyt.cjs');
+var widgets_physicsPlayground = require('../chunks/physics-playground-CuZ7ixEz.cjs');
 var widgets_fileTree = require('../widgets/file-tree.cjs');
 var widgets_downloadMenu = require('../widgets/download-menu.cjs');
 var widgets_titleSequence = require('../widgets/title-sequence.cjs');
@@ -213,6 +216,7 @@ const WIDGETS = {
     '10.6': { 'usa-lottie-player': widgets_lottiePlayer.defineLottiePlayer, 'usa-rive': widgets_rive.defineRive, 'usa-token-editor': widgets_tokenEditor.defineTokenEditor },
     '10.7': { 'usa-physics-playground': widgets_physicsPlayground.definePhysicsPlayground, 'usa-motion-prompt': widgets_motionPrompt.defineMotionPrompt },
     '17.3': { 'usa-mega-menu': widgets_megaMenu.defineMegaMenu, 'usa-nav-flyout': widgets_megaMenu.defineNavFlyout, 'usa-fullscreen-menu': widgets_fullscreenMenu.defineFullscreenMenu, 'usa-breadcrumbs': widgets_breadcrumbs.defineBreadcrumbs, 'usa-file-tree': widgets_fileTree.defineFileTree, 'usa-download-menu': widgets_downloadMenu.defineDownloadMenu, 'usa-title-sequence': widgets_titleSequence.defineTitleSequence },
+    '17.8': { 'usa-lens-stack': widgets_lensStack.defineLensStack, 'usa-iris-diaphragm': widgets_irisDiaphragm.defineIrisDiaphragm, 'usa-contour-relief': widgets_contourRelief.defineContourRelief },
     '17.7': { 'usa-textarea': widgets_textarea.defineTextarea, 'usa-search-field': widgets_searchField.defineSearchField, 'usa-form-stepper': widgets_formStepper.defineFormStepper, 'usa-select': widgets_select.defineSelect, 'usa-combobox': widgets_combobox.defineCombobox, 'usa-multi-select': widgets_multiSelect.defineMultiSelect, 'usa-number-stepper': widgets_numberStepper.defineNumberStepper, 'usa-password': widgets_password.definePassword, 'usa-range-slider': widgets_rangeSlider.defineRangeSlider, 'usa-consent': widgets_consent.defineConsent, 'usa-cta-popup': widgets_ctaPopup.defineCtaPopup, 'usa-validation-summary': widgets_validationSummary.defineValidationSummary },
     '17.6': { 'usa-gravity-well': widgets_gravityWell.defineGravityWell, 'usa-liquid-metal': widgets_liquidMetal.defineLiquidMetal, 'usa-reaction-field': widgets_reactionField.defineReactionField, 'usa-ink-flow': widgets_inkFlow.defineInkFlow, 'usa-fluid-type': widgets_fluidType.defineFluidType, 'usa-magnetic-field': widgets_magneticField.defineMagneticField, 'usa-elastic-mesh': widgets_elasticMesh.defineElasticMesh, 'usa-spring-lab': widgets_springLab.defineSpringLab, 'usa-bezier-lab': widgets_bezierLab.defineBezierLab, 'usa-text-loupe': widgets_textLoupe.defineTextLoupe, 'usa-revision-reveal': widgets_revisionReveal.defineRevisionReveal, 'usa-hold-action': widgets_holdAction.defineHoldAction, 'usa-scrub-number': widgets_scrubNumber.defineScrubNumber },
     '17.5': { 'usa-flight-status': widgets_flightStatus.defineFlightStatus, 'usa-transit-progress': widgets_transitProgress.defineTransitProgress, 'usa-sun-timeline': widgets_sunTimeline.defineSunTimeline, 'usa-delivery-tracker': widgets_deliveryTracker.defineDeliveryTracker, 'usa-glucose-sparkline': widgets_glucoseSparkline.defineGlucoseSparkline, 'usa-coffee-timer': widgets_coffeeTimer.defineCoffeeTimer, 'usa-vital-wave': widgets_vitalWave.defineVitalWave, 'usa-orbit-pass': widgets_orbitPass.defineOrbitPass, 'usa-meter-countdown': widgets_meterCountdown.defineMeterCountdown, 'usa-race-telemetry': widgets_raceTelemetry.defineRaceTelemetry, 'usa-workout-player': widgets_workoutPlayer.defineWorkoutPlayer, 'usa-status-pill': widgets_statusPill.defineStatusPill, 'usa-ride-status': widgets_rideStatus.defineRideStatus, 'usa-route-sparkline': widgets_routeSparkline.defineRouteSparkline, 'usa-activity-wall': widgets_activityWall.defineActivityWall },
@@ -238,6 +242,9 @@ exports.defineFormStepper = widgets_formStepper.defineFormStepper;
 exports.defineSelect = widgets_select.defineSelect;
 exports.defineCombobox = widgets_combobox.defineCombobox;
 exports.defineMultiSelect = widgets_multiSelect.defineMultiSelect;
+exports.defineLensStack = widgets_lensStack.defineLensStack;
+exports.defineIrisDiaphragm = widgets_irisDiaphragm.defineIrisDiaphragm;
+exports.defineContourRelief = widgets_contourRelief.defineContourRelief;
 exports.defineNumberStepper = widgets_numberStepper.defineNumberStepper;
 exports.definePassword = widgets_password.definePassword;
 exports.defineRangeSlider = widgets_rangeSlider.defineRangeSlider;
@@ -471,4 +478,4 @@ exports.watchViewport = viewport.watchViewport;
 exports.WIDGETS = WIDGETS;
 exports.WIDGET_TAGS = WIDGET_TAGS;
 exports.defineWidgets = defineWidgets;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/components/widgets.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/components/widgets.cjs.map

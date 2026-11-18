@@ -11,4 +11,4 @@ function registerElasticRipple() {
 }
 
 export { effect, registerElasticRipple as register, registerElasticRipple };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/effects/elastic-ripple.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/effects/elastic-ripple.js.map

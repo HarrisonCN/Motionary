@@ -53,4 +53,4 @@ function definePassword(tag = 'usa-password') {
 }
 
 export { definePassword };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/widgets/password.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/widgets/password.js.map

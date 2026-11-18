@@ -80,4 +80,4 @@ function registerDrawPack() { registry.registerEffects(DRAW_FX); }
 
 exports.DRAW_FX = DRAW_FX;
 exports.registerDrawPack = registerDrawPack;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/components/fx-draw.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/components/fx-draw.cjs.map

@@ -58,4 +58,4 @@ function defineRangeSlider(tag = 'usa-range-slider') {
 }
 
 exports.defineRangeSlider = defineRangeSlider;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/widgets/range-slider.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/widgets/range-slider.cjs.map

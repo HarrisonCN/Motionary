@@ -15,4 +15,4 @@ function registerCheckOrbit() {
 exports.effect = effect;
 exports.register = registerCheckOrbit;
 exports.registerCheckOrbit = registerCheckOrbit;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/effects/check-orbit.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/effects/check-orbit.cjs.map

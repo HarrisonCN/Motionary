@@ -86,6 +86,42 @@ const SPATIAL_FX = [
             return ctx.animate(el, [{ transform: 'perspective(700px) translateZ(0)' }, { transform: 'perspective(700px) translateZ(90px)', filter: 'brightness(1.1)', offset: 0.35 }, { transform: 'perspective(700px) translateZ(-10px)', offset: 0.7 }, { transform: 'perspective(700px) translateZ(0)' }], { duration: o.duration, easing: 'ease-out' })?.finished.catch(() => undefined);
         },
     },
+    {
+        name: 'iris-reveal', kind: 'enter',
+        description: 'Open a polygonal aperture from the center of the surface.',
+        defaults: { duration: 420 },
+        run(el, options, ctx) {
+            if (ctx.reduced)
+                return;
+            const animation = ctx.animate(el, [
+                { clipPath: 'polygon(49% 49%,51% 49%,52% 50%,51% 51%,49% 51%,48% 50%)' },
+                { clipPath: 'polygon(-50% -35%,150% -35%,180% 50%,150% 135%,-50% 135%,-80% 50%)' },
+            ], { duration: options.duration, easing: 'ease-out' });
+            return animation?.finished.catch(() => undefined);
+        },
+    },
+    {
+        name: 'shutter-catch', kind: 'attention',
+        description: 'A quick vertical compression and rebound.',
+        defaults: { duration: 340 },
+        run(el, options, ctx) {
+            if (ctx.reduced)
+                return;
+            const animation = ctx.animate(el, [{ "scale": "1 1" }, { "scale": "1.035 0.93", "offset": 0.24 }, { "scale": "0.986 1.024", "offset": 0.58 }, { "scale": "1 1" }], { duration: options.duration, easing: 'ease-out' });
+            return animation?.finished.catch(() => undefined);
+        },
+    },
+    {
+        name: 'detent-tick', kind: 'attention',
+        description: 'A short lateral nudge that settles like a dial detent.',
+        defaults: { duration: 230 },
+        run(el, options, ctx) {
+            if (ctx.reduced)
+                return;
+            const animation = ctx.animate(el, [{ "translate": "0" }, { "translate": "5px", "offset": 0.24 }, { "translate": "-2px", "offset": 0.58 }, { "translate": "0" }], { duration: options.duration, easing: 'ease-out' });
+            return animation?.finished.catch(() => undefined);
+        },
+    },
 ];
 /** Register portal-open, orbit-in, spatial-float and depth-pop (8.8). */
 function registerSpatialPack() {
@@ -96,4 +132,4 @@ exports.SPATIAL_FX = SPATIAL_FX;
 exports.registerSpatialPack = registerSpatialPack;
 exports.xrSupport = xrSupport;
 exports.yawToOffset = yawToOffset;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/components/fx-spatial.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/components/fx-spatial.cjs.map
