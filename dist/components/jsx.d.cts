@@ -264,6 +264,10 @@ interface LegacyAttributes {
         marketing?: string | boolean | number;
         name?: string | boolean | number;
     };
+    'usa-contour-relief': {
+        label?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-countdown': {
         label?: string | boolean | number;
         labels?: string | boolean | number;
@@ -655,6 +659,10 @@ interface LegacyAttributes {
         managers?: string | boolean | number;
         package?: string | boolean | number;
     };
+    'usa-iris-diaphragm': {
+        label?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-kanban': {
         label?: string | boolean | number;
     };
@@ -673,6 +681,10 @@ interface LegacyAttributes {
         label?: string | boolean | number;
         limit?: string | boolean | number;
         me?: string | boolean | number;
+    };
+    'usa-lens-stack': {
+        label?: string | boolean | number;
+        value?: string | boolean | number;
     };
     'usa-like': {
         color?: string | boolean | number;
@@ -1827,6 +1839,10 @@ interface LegacyEvents {
         'usa:change': CustomEvent<any>;
         'usa:consent': CustomEvent<any>;
     };
+    'usa-contour-relief': {
+        'usa:change': CustomEvent<any>;
+        'usa:input': CustomEvent<any>;
+    };
     'usa-countdown': {
         'usa:done': CustomEvent<any>;
         'usa:tick': CustomEvent<any>;
@@ -2007,6 +2023,10 @@ interface LegacyEvents {
     'usa-install-button': {
         'usa:copy': CustomEvent<any>;
     };
+    'usa-iris-diaphragm': {
+        'usa:change': CustomEvent<any>;
+        'usa:input': CustomEvent<any>;
+    };
     'usa-kanban': {
         'usa:move': CustomEvent<any>;
     };
@@ -2016,6 +2036,10 @@ interface LegacyEvents {
     'usa-kpi': {};
     'usa-leaderboard': {
         'usa:rank': CustomEvent<any>;
+    };
+    'usa-lens-stack': {
+        'usa:change': CustomEvent<any>;
+        'usa:input': CustomEvent<any>;
     };
     'usa-like': {
         'usa:change': CustomEvent<any>;

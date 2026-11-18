@@ -1587,6 +1587,45 @@
  },
  {
   "kind": "widget",
+  "name": "lens-stack",
+  "entry": "motionary/widgets/lens-stack",
+  "src": "src/entries/widgets/lens-stack.ts",
+  "tag": "usa-lens-stack",
+  "define": "defineLensStack",
+  "types": [
+   "UsaLensStackElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/lens-stack"
+ },
+ {
+  "kind": "widget",
+  "name": "iris-diaphragm",
+  "entry": "motionary/widgets/iris-diaphragm",
+  "src": "src/entries/widgets/iris-diaphragm.ts",
+  "tag": "usa-iris-diaphragm",
+  "define": "defineIrisDiaphragm",
+  "types": [
+   "UsaIrisDiaphragmElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/iris-diaphragm"
+ },
+ {
+  "kind": "widget",
+  "name": "contour-relief",
+  "entry": "motionary/widgets/contour-relief",
+  "src": "src/entries/widgets/contour-relief.ts",
+  "tag": "usa-contour-relief",
+  "define": "defineContourRelief",
+  "types": [
+   "UsaContourReliefElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/contour-relief"
+ },
+ {
+  "kind": "widget",
   "name": "textarea",
   "entry": "motionary/widgets/textarea",
   "src": "src/entries/widgets/textarea.ts",
@@ -3321,6 +3360,33 @@
   "src": "src/entries/effects/depth-pop.ts",
   "pack": "spatial",
   "register": "registerDepthPop",
+  "module": "components/fx2/spatial"
+ },
+ {
+  "kind": "effect",
+  "name": "iris-reveal",
+  "entry": "motionary/effects/iris-reveal",
+  "src": "src/entries/effects/iris-reveal.ts",
+  "pack": "spatial",
+  "register": "registerIrisReveal",
+  "module": "components/fx2/spatial"
+ },
+ {
+  "kind": "effect",
+  "name": "shutter-catch",
+  "entry": "motionary/effects/shutter-catch",
+  "src": "src/entries/effects/shutter-catch.ts",
+  "pack": "spatial",
+  "register": "registerShutterCatch",
+  "module": "components/fx2/spatial"
+ },
+ {
+  "kind": "effect",
+  "name": "detent-tick",
+  "entry": "motionary/effects/detent-tick",
+  "src": "src/entries/effects/detent-tick.ts",
+  "pack": "spatial",
+  "register": "registerDetentTick",
   "module": "components/fx2/spatial"
  },
  {

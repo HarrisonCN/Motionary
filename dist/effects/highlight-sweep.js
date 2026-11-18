@@ -11,4 +11,4 @@ function registerHighlightSweep() {
 }
 
 export { effect, registerHighlightSweep as register, registerHighlightSweep };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/effects/highlight-sweep.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/effects/highlight-sweep.js.map

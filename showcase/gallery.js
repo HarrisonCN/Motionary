@@ -45,7 +45,7 @@ let lib = null;
 
 // 10.1: motionary/runtime + its modules (the prerequisites of runtime-powered components)
 async function loadRuntime(base) {
-  const ids = Object.values(PREREQS).filter((p) => p.kind === 'runtime' && p.id !== 'core').map((p) => p.id);
+  const ids = Object.values(PREREQS).filter(p => p.kind === 'runtime' && p.id !== 'core' && p.id !== 'spatial-instruments').map(p => p.id);
   const [core, ...mods] = await Promise.all([import(base + 'runtime.js'), ...ids.map((id) => import(base + 'runtime/' + id + '.js'))]);
   core.use(...mods.map((m, i) => m[ids[i].replace(/-(\w)/g, (_, c) => c.toUpperCase())]));
   return core;
@@ -87,9 +87,34 @@ async function loadLibrary() {
 /* Cards                                                               */
 /* ------------------------------------------------------------------ */
 
+// A visitor browsing other categories should not download a Three.js renderer.
+let instrumentRuntime;
+function mountInstrumentPreview(stage, item) {
+  async function mount() {
+    try {
+      instrumentRuntime ??= Promise.all([import(LOCAL + 'runtime.js'), import(LOCAL + 'runtime/spatial-instruments.js')])
+        .then(([core, mod]) => core.use(mod.spatialInstruments));
+      await instrumentRuntime;
+    } catch {
+      instrumentRuntime = undefined;
+    }
+    stage.innerHTML = item.demo;
+    wire(item, stage);
+  }
+  if (!('IntersectionObserver' in window)) { void mount(); return; }
+  const observer = new IntersectionObserver(entries => {
+    if (entries.some(entry => entry.isIntersecting)) {
+      observer.disconnect();
+      void mount();
+    }
+  }, { rootMargin: '250px' });
+  observer.observe(stage);
+}
+
 function card(item) {
   const id = `c-${item.id}`;
-  const stage = h('div', { class: 'ccard-stage', html: item.demo });
+  const instrument = item.requires?.includes('spatial-instruments');
+  const stage = h('div', { class: 'ccard-stage', html: instrument ? '' : item.demo });
   const controls = h('div', { class: 'ccard-controls' });
   if (item.controls) {
     for (const c of item.controls) {
@@ -129,7 +154,8 @@ function card(item) {
       h('div', { class: 'ccard-code', id: `${id}-code`, hidden: true }),
     ]),
   ]);
-  wire(item, stage);
+  if (instrument) mountInstrumentPreview(stage, item);
+  else wire(item, stage);
   return el;
 }
 

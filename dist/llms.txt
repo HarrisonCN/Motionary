@@ -1,6 +1,6 @@
-# Motionary 17.7.0
+# Motionary 17.8.0
 
-> Motionary is a zero-dependency motion library: scroll animations, 200+ presets and 262 animated Web Components (<mo-*>; the legacy <usa-*> names still work) that work in plain HTML and every framework, plus motionary/runtime — its own tween/timeline engine and format loaders.
+> Motionary is a zero-dependency motion library: scroll animations, 200+ presets and 265 animated Web Components (<mo-*>; the legacy <usa-*> names still work) that work in plain HTML and every framework, plus motionary/runtime — its own tween/timeline engine and format loaders.
 
 Install: `npm i motionary` · CDN: https://unpkg.com/motionary@17/dist/components.umd.js (+ https://unpkg.com/motionary@17/dist/widgets.umd.js for 6.x+ widgets) · Manifest: https://harrisoncn.github.io/Motionary/components.json · Full text: https://harrisoncn.github.io/Motionary/llms-full.txt
 
@@ -8,6 +8,7 @@ Rules for using a component: (1) import its define function from `import.path` a
 
 ## Runtime modules
 
+- [motionary/runtime/spatial-instruments](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/spatial-instruments.md): An independently loaded renderer built with Three.js. Ships with Motionary. The lens, iris and relief cards each provide a native range and a schematic view for devices without WebGL2.
 - [motionary/runtime](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/core.md): Shared ticker (one rAF loop), tween + timeline engine with easing, module registry with clear errors.
 - [motionary/runtime/format-css](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/format-css.md): Import CSS @keyframes text or live CSSKeyframesRule objects and Web Animations API keyframes (array or property-indexed) into a runtime timeline.
 - [motionary/runtime/format-motion](https://github.com/HarrisonCN/Motionary/blob/main/docs/runtime/format-motion.md): Play Motion / Framer-style { initial, animate, transition } JSON (arrays as keyframes, times, repeatType, springs) with the runtime.
@@ -74,6 +75,7 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<mo-command-palette>` (legacy `<usa-command-palette>`; motionary/components/widgets): 7.9: a ⌘K command palette on the native <dialog> — scales in, filters as you type with fuzzy matching and highlighted letters, results stagger in and a highligh
 - `<mo-compare>` (legacy `<usa-compare>`; motionary/components/widgets): 6.5: drag the handle (or hover with the hover attribute), click to jump, or use the keyboard slider; horizontal or vertical; an intro sweep plays once when it s
 - `<mo-consent>` (legacy `<usa-consent>`; motionary/components/widgets): Explicit essential and optional choices; no cookies, storage or services are changed.
+- `<mo-contour-relief>` (legacy `<usa-contour-relief>`; motionary/components/widgets; requires motionary/runtime/spatial-instruments): Lift thirteen contour plates to study the relief in perspective.
 - `<mo-countdown>` (legacy `<usa-countdown>`; motionary/components/widgets): 7.3: a split-flap countdown to a date (to) or for a number of seconds — every digit flips when it changes; fires usa:done at zero. The timer label updates once 
 - `<mo-counter>` (legacy `<usa-counter>`; motionary/components/text): Counts up to a number when visible, locale-formatted with tabular digits. Set .value to animate live dashboards.
 - `<mo-cta-popup>` (legacy `<usa-cta-popup>`; motionary/components/widgets): A native modal dialog with focus return, Escape and cancelable confirmation.
@@ -133,10 +135,12 @@ Rules for using a component: (1) import its define function from `import.path` a
 - `<mo-icon-morph>` (legacy `<usa-icon-morph>`; motionary/components/click): Icons that morph point-by-point with a spring: play ↔ pause, menu ↔ close, plus ↔ minus, check, arrow. toggle makes it a button with per-icon labels.
 - `<mo-ink-flow>` (legacy `<usa-ink-flow>`; motionary/components/widgets): Two colors of particles advect through a pointer-stirred flow field.
 - `<mo-install-button>` (legacy `<usa-install-button>`; motionary/components/widgets): 10.1: one-click install snippet with npm / pnpm / yarn / bun / CDN tabs and a copy button that confirms with a check; `cdn` sets the URL of the CDN tab.
+- `<mo-iris-diaphragm>` (legacy `<usa-iris-diaphragm>`; motionary/components/widgets; requires motionary/runtime/spatial-instruments): Pivot nine overlapping blades to vary the opening.
 - `<mo-kanban>` (legacy `<usa-kanban>`; motionary/components/widgets): 6.8: drag cards between columns — the card lifts and tilts toward the drag, a placeholder opens where it will land and the other cards glide aside (FLIP). Full 
 - `<mo-keyframe-editor>` (legacy `<usa-keyframe-editor>`; motionary/components/widgets): 6.9: a compact timeline for <usa-player> JSON — drag a bar to move a track, drag its edge to resize, scrub the playhead or press play; exports format use-scroll
 - `<mo-kpi>` (legacy `<usa-kpi>`; motionary/components/widgets): 7.2: the value counts up keeping prefix, suffix and decimals ("$12.4k", "98.2%"), the delta chip slides in with an arrow coloured by sign, and an optional trend
 - `<mo-leaderboard>` (legacy `<usa-leaderboard>`; motionary/components/widgets): 7.5: a ranked list — when scores change, rows glide to their new rank, climbers flash green with ▲n and fallers red with ▼n, scores roll and the top three get m
+- `<mo-lens-stack>` (legacy `<usa-lens-stack>`; motionary/components/widgets; requires motionary/runtime/spatial-instruments): Separate seven coaxial lens sections with a horizontal drag.
 - `<mo-like>` (legacy `<usa-like>`; motionary/components/click): A heart that pops with a spring and bursts into particles; aria-pressed, optional count.
 - `<mo-liquid>` (legacy `<usa-liquid>`; motionary/components/webgl): Click or tap to send water ripples through the image; hover adds a gentle wobble. The plain image stays when WebGL is unavailable.
 - `<mo-liquid-metal>` (legacy `<usa-liquid-metal>`; motionary/components/widgets): Stippled metaballs pull toward the pointer and merge into a bead.

@@ -25,20 +25,21 @@ const H = 240;
 document.documentElement.classList.add(mode === 'card' ? 'is-card' : 'is-detail');
 
 // 10.1: motionary/runtime + its modules (the prerequisites of runtime-powered components)
-async function loadRuntime(base) {
-  const ids = Object.values(PREREQS).filter((p) => p.kind === 'runtime' && p.id !== 'core').map((p) => p.id);
+async function loadRuntime(base, item) {
+  const ids = Object.values(PREREQS).filter((p) => p.kind === 'runtime' && p.id !== 'core').map((p) => p.id).filter(moduleId => moduleId !== 'spatial-instruments' || item.requires?.includes(moduleId));
   const [core, ...mods] = await Promise.all([import(base + 'runtime.js'), ...ids.map((id) => import(base + 'runtime/' + id + '.js'))]);
   core.use(...mods.map((m, i) => m[ids[i].replace(/-(\w)/g, (_, c) => c.toUpperCase())]));
   return core;
 }
 
-async function loadLibrary() {
+async function loadLibrary(item) {
   const load = (base) => Promise.all(['components.js', 'components/effects.js', 'components/widgets.js', 'components/fx2.js', 'components/snap-carousel.js', 'components/gl-model.js', 'components/dotlottie.js'].map((f) => import(base + f).catch((e) => (/snap-carousel|gl-model|dotlottie/.test(f) ? {} : Promise.reject(e)))));
   let mods;
   try {
-    await loadRuntime(LOCAL);
+    await loadRuntime(LOCAL, item);
     mods = await load(LOCAL);
   } catch {
+    await loadRuntime(CDN, item);
     mods = await load(CDN);
   }
   const lib = Object.assign({}, ...mods);
@@ -76,7 +77,7 @@ async function boot() {
   document.title = `${item.title.en} — Motionary live preview`;
   let lib;
   try {
-    lib = await loadLibrary();
+    lib = await loadLibrary(item);
   } catch (err) {
     stage.innerHTML = '<p class="thumb-err">Preview unavailable offline</p>';
     console.warn(err);

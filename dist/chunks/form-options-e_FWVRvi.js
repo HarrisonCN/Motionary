@@ -16,4 +16,4 @@ let sequence = 0;
 function choiceId() { return `usa-choice-${++sequence}`; }
 
 export { choiceId as a, choices as c };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/chunks/form-options-e_FWVRvi.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/chunks/form-options-e_FWVRvi.js.map

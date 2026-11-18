@@ -61,4 +61,4 @@ function defineValidationSummary(tag = 'usa-validation-summary') {
 }
 
 export { defineValidationSummary };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/widgets/validation-summary.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/widgets/validation-summary.js.map

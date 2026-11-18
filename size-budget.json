@@ -2595,5 +2595,40 @@
     "name": "import 'motionary/widgets/form-stepper' (per-entry, fixed)",
     "import": "import { defineFormStepper } from 'pkg/widgets/form-stepper'; console.log(defineFormStepper);",
     "limit": 0
+  },
+  {
+    "name": "import 'motionary/runtime/spatial-instruments' (Three.js instruments)",
+    "import": "export * from 'pkg/runtime/spatial-instruments';",
+    "limit": 163840
+  },
+  {
+    "name": "import 'motionary/widgets/lens-stack' (per-entry, fixed)",
+    "import": "import { defineLensStack } from 'pkg/widgets/lens-stack'; console.log(defineLensStack);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/iris-diaphragm' (per-entry, fixed)",
+    "import": "import { defineIrisDiaphragm } from 'pkg/widgets/iris-diaphragm'; console.log(defineIrisDiaphragm);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/contour-relief' (per-entry, fixed)",
+    "import": "import { defineContourRelief } from 'pkg/widgets/contour-relief'; console.log(defineContourRelief);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/effects/iris-reveal' (per-entry, fixed)",
+    "import": "import { registerIrisReveal } from 'pkg/effects/iris-reveal'; console.log(registerIrisReveal);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/effects/shutter-catch' (per-entry, fixed)",
+    "import": "import { registerShutterCatch } from 'pkg/effects/shutter-catch'; console.log(registerShutterCatch);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/effects/detent-tick' (per-entry, fixed)",
+    "import": "import { registerDetentTick } from 'pkg/effects/detent-tick'; console.log(registerDetentTick);",
+    "limit": 0
   }
 ]

@@ -101,7 +101,8 @@ describe('8.8 widgets behave', () => {
     expect(ev).toHaveBeenCalledTimes(3);
   });
   it('spatial pack: names, kinds, ring cleaned, float stops, reduced', async () => {
-    expect(SP.map((e: any) => `${e.name}:${e.kind}`)).toEqual(['portal-open:enter', 'orbit-in:enter', 'spatial-float:loop', 'depth-pop:attention']);
+    expect(SP.map((e: any) => `${e.name}:${e.kind}`)).toEqual(['portal-open:enter', 'orbit-in:enter', 'spatial-float:loop', 'depth-pop:attention',
+      'iris-reveal:enter', 'shutter-catch:attention', 'detent-tick:attention']);
     const el = document.createElement('div');
     document.body.append(el);
     const ctx: any = { reduced: false, sensitivity: 'normal', animate: vi.fn(() => null), onCleanup: vi.fn() };

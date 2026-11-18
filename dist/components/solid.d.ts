@@ -1903,6 +1903,10 @@ interface LegacyAttributes {
         marketing?: string | boolean | number;
         name?: string | boolean | number;
     };
+    'usa-contour-relief': {
+        label?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-countdown': {
         label?: string | boolean | number;
         labels?: string | boolean | number;
@@ -2294,6 +2298,10 @@ interface LegacyAttributes {
         managers?: string | boolean | number;
         package?: string | boolean | number;
     };
+    'usa-iris-diaphragm': {
+        label?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-kanban': {
         label?: string | boolean | number;
     };
@@ -2312,6 +2320,10 @@ interface LegacyAttributes {
         label?: string | boolean | number;
         limit?: string | boolean | number;
         me?: string | boolean | number;
+    };
+    'usa-lens-stack': {
+        label?: string | boolean | number;
+        value?: string | boolean | number;
     };
     'usa-like': {
         color?: string | boolean | number;

@@ -24,4 +24,4 @@ function defineSunTimeline(tag = 'usa-sun-timeline') {
 }
 
 export { defineSunTimeline };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/widgets/sun-timeline.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/widgets/sun-timeline.js.map

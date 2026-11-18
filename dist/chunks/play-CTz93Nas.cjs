@@ -82,4 +82,4 @@ function sceneToAnimation(d) {
 }
 
 exports.sceneToAnimation = sceneToAnimation;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/chunks/play-CTz93Nas.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/chunks/play-CTz93Nas.cjs.map

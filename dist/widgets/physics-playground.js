@@ -1,2 +1,2 @@
-export { d as definePhysicsPlayground } from '../chunks/physics-playground-D22g5Nus.js';
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/widgets/physics-playground.js.map
+export { d as definePhysicsPlayground } from '../chunks/physics-playground-C_GbxDuc.js';
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/widgets/physics-playground.js.map

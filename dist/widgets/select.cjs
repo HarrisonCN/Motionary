@@ -62,4 +62,4 @@ function defineSelect(tag = 'usa-select') {
 }
 
 exports.defineSelect = defineSelect;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.7.0/dist/widgets/select.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/widgets/select.cjs.map
