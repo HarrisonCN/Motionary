@@ -1,5 +1,6 @@
+import { r as raf, b as caf } from './base-SPDwWyB1.js';
 import { c as createSpring, a as rubberBand } from './spring-Bu3AwUgu.js';
-import { velocityTracker } from '../runtime/drag-snap.js';
+import { f as flingVelocity } from './cursor-CAe9piPR.js';
 import { r as runtimeModule } from './runtime-link-NX2mB56H.js';
 
 const bounded = (n) => Math.max(0, Math.min(100, Number.isFinite(n) ? n : 0));
@@ -45,10 +46,15 @@ function instrumentPanel(host, kind, input, change) {
     let lost = false;
     let frame = 0;
     let pointer;
-    let originX = 0, originY = 0, startValue = 0, width = 1;
+    let originX = 0, originY = 0, startValue = 0, startPose = 0, width = 1;
     let dragging = false;
     let internal = false;
-    const tracker = velocityTracker();
+    const samples = [];
+    const sample = (e) => {
+        samples.push({ x: e.clientX, y: e.clientY, t: e.timeStamp });
+        if (samples.length > 32)
+            samples.shift();
+    };
     const paint = () => {
         frame = 0;
         root.style.setProperty('--progress', String(position.value / 100));
@@ -57,7 +63,7 @@ function instrumentPanel(host, kind, input, change) {
     };
     const invalidate = () => {
         if (visible && !frame)
-            frame = requestAnimationFrame(paint);
+            frame = raf(paint, host);
     };
     const position = createSpring({ value: host.value, spring: { stiffness: 325, damping: 23 }, onUpdate: invalidate });
     const tilt = createSpring({ spring: { stiffness: 180, damping: 19, precision: 0.0001 }, onUpdate: invalidate });
@@ -97,7 +103,7 @@ function instrumentPanel(host, kind, input, change) {
         visible = on;
         if (!on) {
             if (frame)
-                cancelAnimationFrame(frame);
+                caf(frame);
             frame = 0;
             tilt.jump(0);
             position.jump(host.value);
@@ -141,9 +147,10 @@ function instrumentPanel(host, kind, input, change) {
         originX = e.clientX;
         originY = e.clientY;
         startValue = host.value;
+        startPose = position.value;
         width = Math.max(1, stage.getBoundingClientRect().width * 0.8);
-        tracker.reset();
-        tracker.add(e.timeStamp, originX);
+        samples.length = 0;
+        sample(e);
         stage.setPointerCapture(pointer);
     });
     host.listen(stage, 'pointermove', (e) => {
@@ -162,8 +169,8 @@ function instrumentPanel(host, kind, input, change) {
             return;
         dragging = true;
         root.dataset.dragging = '';
-        tracker.add(e.timeStamp, e.clientX);
-        const raw = startValue + dx / width * 100;
+        sample(e);
+        const raw = startPose + dx / width * 100;
         const logical = bounded(raw);
         write(logical);
         position.jump(host.reduced ? logical : logical + rubberBand(raw - logical, 10));
@@ -178,7 +185,8 @@ function instrumentPanel(host, kind, input, change) {
             return;
         dragging = false;
         delete root.dataset.dragging;
-        const velocity = host.reduced ? 0 : tracker.velocity(e.timeStamp) / width * 100;
+        const held = e.timeStamp - samples[samples.length - 1].t > 60;
+        const velocity = host.reduced || held ? 0 : flingVelocity(samples).vx * 1000 / width * 100;
         const travel = Math.max(-12, Math.min(12, velocity * 0.075));
         const final = cancel ? startValue : Math.round(bounded(host.value + travel));
         write(final);
@@ -196,7 +204,7 @@ function instrumentPanel(host, kind, input, change) {
         position.stop();
         tilt.stop();
         if (frame)
-            cancelAnimationFrame(frame);
+            caf(frame);
         view?.dispose();
         root.remove();
         host.querySelector(':scope > .usa-rt-missing')?.remove();
@@ -208,4 +216,4 @@ function instrumentPanel(host, kind, input, change) {
 var css = "usa-lens-stack,usa-iris-diaphragm,usa-contour-relief{display:block;min-width:0}.mo-instrument{--tint:#a6e4dd;--progress:.35;position:relative;isolation:isolate;min-width:0;overflow:hidden;box-sizing:border-box;border:1px solid #495658;border-radius:22px;color:#eff3ee;background:#101b20;font:500 14px/1.35 system-ui,sans-serif;color-scheme:dark}.mo-instrument[data-kind=iris]{--tint:#f5c28b;background:#221c1c;border-color:#625345}.mo-instrument[data-kind=relief]{--tint:#bde2a9;background:#14221e;border-color:#435c4e}.mo-instrument header,.mo-instrument label{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 20px}.mo-instrument header strong{font-size:1.06em;font-weight:550;overflow-wrap:anywhere}.mo-instrument header span{font:500 .93em ui-monospace,monospace;color:var(--tint);font-variant-numeric:tabular-nums}.mo-instrument-stage{position:relative;height:clamp(176px,28vw,290px);touch-action:pan-y pinch-zoom;user-select:none;cursor:ew-resize;overflow:hidden;background:radial-gradient(ellipse at 48% 50%,#ffffff12,transparent 68%)}.mo-instrument-stage canvas,.mo-instrument-diagram{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}.mo-instrument-stage canvas{visibility:hidden}.mo-instrument[data-renderer=webgl] canvas{visibility:visible}.mo-instrument[data-renderer=webgl] .mo-instrument-diagram{display:none}.mo-instrument label{align-items:center;margin:0;border-top:1px solid #ffffff20;font-size:.87em;color:#d5dcd6}.mo-instrument input{width:58%;min-width:0;height:32px;margin:0;accent-color:var(--tint);cursor:pointer}.mo-instrument input:focus-visible{outline:2px solid var(--tint);outline-offset:4px;border-radius:4px}.mo-instrument-diagram i{position:absolute;top:50%;left:50%;box-sizing:border-box;width:82px;height:115px;border-radius:50%;border:3px solid var(--tint);background:#24353ce0;transform:translate(calc(-50% + var(--layer) * (5px + var(--progress) * 14px)),-50%) skewY(-12deg)}.mo-instrument[data-kind=iris] i{width:120px;height:120px;transform:translate(-50%,-50%);border:2px solid #d5b692;background:radial-gradient(circle,#151518 calc(8% + var(--progress) * 48%),transparent calc(9% + var(--progress) * 48%)),repeating-conic-gradient(from 15deg,#7c6960 0deg,#483d39 38deg,#a08d73 40deg)}.mo-instrument[data-kind=relief] i{width:calc(140px - var(--layer) * 20px);height:calc(60px - var(--layer) * 7px);border-radius:40% 60% 38% 62%;border:2px solid #bdddb1;background:#387364;transform:translate(-50%,calc(-50% - var(--layer) * (4px + var(--progress) * 8px))) rotate(-12deg)}";
 
 export { bounded as b, css as c, instrumentPanel as i };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/chunks/instrument-panel-BwmOxq1m.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.8.0/dist/chunks/instrument-panel-Dl9RztS5.js.map

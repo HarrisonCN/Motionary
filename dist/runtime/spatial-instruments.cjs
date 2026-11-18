@@ -47254,7 +47254,11 @@ function relief() {
 const models = { lens, iris, relief };
 /** A demand-rendered Three.js scene. The caller owns input, visibility and canvas lifetime. */
 function createInstrument(canvas, kind) {
-    const renderer = new WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'low-power' });
+    const options = { alpha: true, antialias: true, powerPreference: 'low-power' };
+    const context = canvas.getContext('webgl2', options);
+    if (!context)
+        throw new Error('Spatial instruments require a WebGL2 context.');
+    const renderer = new WebGLRenderer({ canvas, context, ...options });
     renderer.setClearColor(0, 0);
     renderer.setPixelRatio(Math.min(2, globalThis.devicePixelRatio || 1));
     const scene = new Scene();

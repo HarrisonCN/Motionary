@@ -1,6 +1,6 @@
 import { f as defineElement } from '../chunks/base-SPDwWyB1.js';
 import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
-import { c as css, b as bounded, i as instrumentPanel } from '../chunks/instrument-panel-BwmOxq1m.js';
+import { c as css, b as bounded, i as instrumentPanel } from '../chunks/instrument-panel-Dl9RztS5.js';
 
 function defineIrisDiaphragm(tag = 'usa-iris-diaphragm') {
     const ctor = defineElement(tag, Base => class IrisDiaphragm extends Base {

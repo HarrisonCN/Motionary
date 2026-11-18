@@ -2,7 +2,7 @@
 
 var base = require('../chunks/base-DzZEJhQB.cjs');
 var moName = require('../chunks/mo-name-DR9ysd5S.cjs');
-var instrumentPanel = require('../chunks/instrument-panel-B1RQC3R6.cjs');
+var instrumentPanel = require('../chunks/instrument-panel-BFEIBs0Q.cjs');
 
 function defineLensStack(tag = 'usa-lens-stack') {
     const ctor = base.defineElement(tag, Base => class LensStack extends Base {

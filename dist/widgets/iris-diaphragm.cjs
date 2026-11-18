@@ -2,7 +2,7 @@
 
 var base = require('../chunks/base-DzZEJhQB.cjs');
 var moName = require('../chunks/mo-name-DR9ysd5S.cjs');
-var instrumentPanel = require('../chunks/instrument-panel-B1RQC3R6.cjs');
+var instrumentPanel = require('../chunks/instrument-panel-BFEIBs0Q.cjs');
 
 function defineIrisDiaphragm(tag = 'usa-iris-diaphragm') {
     const ctor = base.defineElement(tag, Base => class IrisDiaphragm extends Base {

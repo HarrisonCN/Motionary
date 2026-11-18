@@ -1,6 +1,6 @@
 import { f as defineElement } from '../chunks/base-SPDwWyB1.js';
 import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
-import { c as css, b as bounded, i as instrumentPanel } from '../chunks/instrument-panel-BwmOxq1m.js';
+import { c as css, b as bounded, i as instrumentPanel } from '../chunks/instrument-panel-Dl9RztS5.js';
 
 function defineLensStack(tag = 'usa-lens-stack') {
     const ctor = defineElement(tag, Base => class LensStack extends Base {
