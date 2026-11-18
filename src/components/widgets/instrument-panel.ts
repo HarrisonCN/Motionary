@@ -1,6 +1,6 @@
-import type { UsaBase } from '../base';
+import { caf, raf, type UsaBase } from '../base';
 import { createSpring, rubberBand } from '../physics/spring';
-import { velocityTracker } from '../../runtime/drag-snap';
+import { flingVelocity } from '../effects/cursor';
 import type { InstrumentKind, InstrumentView, SpatialInstrumentsApi } from '../../runtime/spatial-instruments';
 import { runtimeModule } from './runtime-link';
 
@@ -57,17 +57,21 @@ export function instrumentPanel(
   let lost = false;
   let frame = 0;
   let pointer: number | undefined;
-  let originX = 0, originY = 0, startValue = 0, width = 1;
+  let originX = 0, originY = 0, startValue = 0, startPose = 0, width = 1;
   let dragging = false;
   let internal = false;
-  const tracker = velocityTracker();
+  const samples: { x: number; y: number; t: number }[] = [];
+  const sample = (e: PointerEvent) => {
+    samples.push({ x: e.clientX, y: e.clientY, t: e.timeStamp });
+    if (samples.length > 32) samples.shift();
+  };
   const paint = () => {
     frame = 0;
     root.style.setProperty('--progress', String(position.value / 100));
     if (!lost && visible) view?.render(position.value / 100, tilt.value);
   };
   const invalidate = () => {
-    if (visible && !frame) frame = requestAnimationFrame(paint);
+    if (visible && !frame) frame = raf(paint, host);
   };
   const position = createSpring({ value: host.value, spring: { stiffness: 325, damping: 23 }, onUpdate: invalidate });
   const tilt = createSpring({ spring: { stiffness: 180, damping: 19, precision: 0.0001 }, onUpdate: invalidate });
@@ -99,7 +103,7 @@ export function instrumentPanel(
   const show = (on: boolean) => {
     visible = on;
     if (!on) {
-      if (frame) cancelAnimationFrame(frame);
+      if (frame) caf(frame);
       frame = 0;
       tilt.jump(0);
       position.jump(host.value);
@@ -137,9 +141,10 @@ export function instrumentPanel(
     originX = e.clientX;
     originY = e.clientY;
     startValue = host.value;
+    startPose = position.value;
     width = Math.max(1, stage.getBoundingClientRect().width * 0.8);
-    tracker.reset();
-    tracker.add(e.timeStamp, originX);
+    samples.length = 0;
+    sample(e);
     stage.setPointerCapture(pointer);
   });
   host.listen(stage, 'pointermove', (e: PointerEvent) => {
@@ -155,8 +160,8 @@ export function instrumentPanel(
     if (!dragging && (Math.abs(dx) < 5 || Math.abs(dx) < Math.abs(e.clientY - originY))) return;
     dragging = true;
     root.dataset.dragging = '';
-    tracker.add(e.timeStamp, e.clientX);
-    const raw = startValue + dx / width * 100;
+    sample(e);
+    const raw = startPose + dx / width * 100;
     const logical = bounded(raw);
     write(logical);
     position.jump(host.reduced ? logical : logical + rubberBand(raw - logical, 10));
@@ -168,7 +173,8 @@ export function instrumentPanel(
     if (!dragging) return;
     dragging = false;
     delete root.dataset.dragging;
-    const velocity = host.reduced ? 0 : tracker.velocity(e.timeStamp) / width * 100;
+    const held = e.timeStamp - samples[samples.length - 1].t > 60;
+    const velocity = host.reduced || held ? 0 : flingVelocity(samples).vx * 1000 / width * 100;
     const travel = Math.max(-12, Math.min(12, velocity * 0.075));
     const final = cancel ? startValue : Math.round(bounded(host.value + travel));
     write(final);
@@ -183,7 +189,7 @@ export function instrumentPanel(
     visible = false;
     position.stop();
     tilt.stop();
-    if (frame) cancelAnimationFrame(frame);
+    if (frame) caf(frame);
     view?.dispose();
     root.remove();
     host.querySelector(':scope > .usa-rt-missing')?.remove();

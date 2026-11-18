@@ -87,7 +87,8 @@ for (const c of COMPONENTS) {
   const need = [p.install, ...c.requires.map((id) => PREREQS[id].importPath), ...regs, PREREQS[c.requires[c.requires.length - 1]].cdn.split('\n').pop()];
   const has = (text, place) => {
     for (const s of need) if (!text.includes(s)) fail(where, `${place} is missing ${JSON.stringify(s)}`);
-    if (!text.includes(`<${c.tag}`)) fail(where, `${place} has no minimal example`);
+    const names = [c.tag, c.tag.replace(/^usa-/, 'mo-')];
+    if (!names.some(tag => new RegExp(`<${tag}(?=[\\s/>])`).test(text))) fail(where, `${place} has no minimal example`);
   };
   // (1) gallery card — rendered from card.requires via prereqFor(); its text must be complete
   has([p.badge, p.install, p.importAndRegister, p.cdn, p.example].join('\n'), 'gallery card');
@@ -99,7 +100,7 @@ for (const c of COMPONENTS) {
   // (3) docs page
   const sec = compDoc.split(`\`<${c.tag}>\` — ${p.badge}`)[1]?.split('\n### ')[0];
   if (!sec) fail(where, 'docs/components.md has no prerequisites block');
-  else has(sec + `<${c.tag}`, 'docs page');
+  else has(sec, 'docs page');
   // (4) README
   const rs = readme.split(`\`<${c.tag}>\` — ${p.badge}`)[1]?.split('\n#### ')[0];
   if (!rs) fail(where, 'README has no prerequisites block');
