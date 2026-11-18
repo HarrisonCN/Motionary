@@ -1,5 +1,13 @@
 import { expect, test } from '@playwright/test';
 
+// Exercise a real WebGL2 context on headless Linux without a hardware GPU.
+test.use({
+  launchOptions: async ({ browserName, launchOptions }, use) => {
+    if (browserName !== 'chromium') return use(launchOptions);
+    await use({ ...launchOptions, args: [...(launchOptions.args ?? []), '--use-angle=swiftshader', '--enable-unsafe-swiftshader'] });
+  },
+});
+
 test('instrument cards render, respond to mouse and keyboard, and survive reconnection', async ({ page }, info) => {
   await page.goto('/showcase/instruments.html');
   const card = page.locator('mo-lens-stack');
@@ -25,7 +33,7 @@ test('instrument cards render, respond to mouse and keyboard, and survive reconn
   await page.screenshot({ path: info.outputPath('spatial-instruments.png'), fullPage: true });
 });
 
-test('with a WebGL2 context the three real scenes produce different frames', async ({ page }) => {
+test('with a WebGL2 context the three real scenes produce different frames', async ({ page, browserName }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/showcase/instruments.html');
   const supported = await page.evaluate(() => {
@@ -33,7 +41,8 @@ test('with a WebGL2 context the three real scenes produce different frames', asy
     probe?.getExtension('WEBGL_lose_context')?.loseContext();
     return Boolean(probe);
   });
-  test.skip(!supported, 'Runner exposes no WebGL2 context');
+  if (browserName === 'chromium') expect(supported).toBe(true);
+  else test.skip(!supported, 'Runner exposes no WebGL2 context');
   for (const tag of ['mo-lens-stack', 'mo-iris-diaphragm', 'mo-contour-relief']) {
     const card = page.locator(tag);
     await card.scrollIntoViewIfNeeded();
@@ -58,4 +67,20 @@ test('schematics and values stay interactive without WebGL2', async ({ page }) =
   await expect(card.locator('.mo-instrument')).toHaveAttribute('data-renderer', 'diagram');
   await card.getByRole('slider').press('End');
   await expect(card.locator('header span')).toHaveText('100%');
+});
+
+
+test('all three effect buttons play their registered animation and respect reduced motion', async ({ page }) => {
+  await page.goto('/showcase/instruments.html');
+  await page.evaluate(() => customElements.whenDefined('mo-fx'));
+  const buttons = page.locator('.actions button');
+  const activeAfterClick = button => {
+    button.click();
+    return button.getAnimations().length > 0;
+  };
+  for (const button of await buttons.all()) expect(await button.evaluate(activeAfterClick)).toBe(true);
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.reload();
+  await page.evaluate(() => customElements.whenDefined('mo-fx'));
+  for (const button of await buttons.all()) expect(await button.evaluate(activeAfterClick)).toBe(false);
 });

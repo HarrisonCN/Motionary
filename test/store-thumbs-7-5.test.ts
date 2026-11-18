@@ -45,7 +45,7 @@ describe('7.5 Store live thumbnails', () => {
     expect(app).toMatch(/mod\.scrollAnimate\(tile, opts\)/);
   });
   it('the category is no longer labelled 6.x only', () => {
-    expect(COMPONENT_CATEGORY.zh).toBe('组件 6.x–7.x');
+    expect(COMPONENT_CATEGORY.zh).toBe('组件与动效');
   });
   it('showcase icon CSS does not shrink SVGs inside live demos (gauge/sparkline regression)', () => {
     expect(css).not.toMatch(/^svg:not\(\[width\]\) \{/m);
