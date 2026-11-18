@@ -1,0 +1,23 @@
+usa-lens-stack, usa-iris-diaphragm, usa-contour-relief {display:block; min-width:0}
+.mo-instrument {
+  --tint:#a6e4dd; --progress:.35;
+  position:relative; isolation:isolate; min-width:0; overflow:hidden; box-sizing:border-box;
+  border:1px solid #495658; border-radius:22px; color:#eff3ee; background:#101b20;
+  font:500 14px/1.35 system-ui,sans-serif; color-scheme:dark;
+}
+.mo-instrument[data-kind=iris] {--tint:#f5c28b; background:#221c1c; border-color:#625345}
+.mo-instrument[data-kind=relief] {--tint:#bde2a9; background:#14221e; border-color:#435c4e}
+.mo-instrument header,.mo-instrument label {position:relative; z-index:1; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:18px 20px}
+.mo-instrument header strong {font-size:1.06em; font-weight:550; overflow-wrap:anywhere}
+.mo-instrument header span {font:500 .93em ui-monospace,monospace; color:var(--tint); font-variant-numeric:tabular-nums}
+.mo-instrument-stage {position:relative; height:clamp(176px,28vw,290px); touch-action:pan-y pinch-zoom; user-select:none; cursor:ew-resize; overflow:hidden; background:radial-gradient(ellipse at 48% 50%,#ffffff12,transparent 68%)}
+.mo-instrument-stage canvas,.mo-instrument-diagram {position:absolute; inset:0; width:100%; height:100%; display:block; pointer-events:none}
+.mo-instrument-stage canvas {visibility:hidden}
+.mo-instrument[data-renderer=webgl] canvas {visibility:visible}
+.mo-instrument[data-renderer=webgl] .mo-instrument-diagram {display:none}
+.mo-instrument label {align-items:center; margin:0; border-top:1px solid #ffffff20; font-size:.87em; color:#d5dcd6}
+.mo-instrument input {width:58%; min-width:0; height:32px; margin:0; accent-color:var(--tint); cursor:pointer}
+.mo-instrument input:focus-visible {outline:2px solid var(--tint); outline-offset:4px; border-radius:4px}
+.mo-instrument-diagram i {position:absolute; top:50%; left:50%; box-sizing:border-box; width:82px; height:115px; border-radius:50%; border:3px solid var(--tint); background:#24353ce0; transform:translate(calc(-50% + var(--layer) * (5px + var(--progress) * 14px)), -50%) skewY(-12deg)}
+.mo-instrument[data-kind=iris] i {width:120px; height:120px; transform:translate(-50%,-50%); border:2px solid #d5b692; background:radial-gradient(circle,#151518 calc(8% + var(--progress) * 48%),transparent calc(9% + var(--progress) * 48%)),repeating-conic-gradient(from 15deg,#7c6960 0deg,#483d39 38deg,#a08d73 40deg)}
+.mo-instrument[data-kind=relief] i {width:calc(140px - var(--layer) * 20px); height:calc(60px - var(--layer) * 7px); border-radius:40% 60% 38% 62%; border:2px solid #bdddb1; background:#387364; transform:translate(-50%,calc(-50% - var(--layer) * (4px + var(--progress) * 8px))) rotate(-12deg)}

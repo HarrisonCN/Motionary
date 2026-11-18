@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>空间仪器 · Motionary</title>
+  <style>
+    * {box-sizing:border-box}
+    :root {color-scheme:dark; font-family:system-ui,sans-serif; color:#eff1e8; background:#111512}
+    body {margin:0}
+    main,nav {width:min(1120px,calc(100% - 40px)); margin-inline:auto}
+    nav {display:flex; justify-content:space-between; align-items:center; padding:24px 0; border-bottom:1px solid #42483f}
+    a {color:#d3e8c6; text-decoration-thickness:1px; text-underline-offset:.25em}
+    .intro {padding:clamp(42px,8vw,88px) 0 32px}
+    h1,h2,p {margin:0}
+    h1 {font:500 clamp(46px,8vw,96px)/1.06 Georgia,'Songti SC',serif; letter-spacing:-.045em}
+    h2 {font-size:1.15rem; font-weight:550}
+    p {max-width:45em; line-height:1.65; color:#bdc7bb}
+    .intro p {margin-top:20px}
+    .grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr)); gap:16px}
+    article {min-width:0}
+    article p {margin:12px 4px 0; font-size:.875rem}
+    .effects {margin-block:48px; padding-top:24px; border-top:1px solid #42483f}
+    .actions {display:flex; flex-wrap:wrap; gap:12px; margin-top:18px}
+    .actions button {border:1px solid #61705d; border-radius:10px; background:#202a22; color:#e0e9d9; font:inherit; padding:12px 18px; cursor:pointer}
+    button:focus-visible,a:focus-visible {outline:2px solid #d6efae; outline-offset:4px}
+    @media(max-width:430px) {main,nav {width:calc(100% - 28px)}}
+  </style>
+</head>
+<body>
+  <nav aria-label="页面导航"><a href="./">Motionary</a><a href="components.html">组件目录 ↗</a></nav>
+  <main>
+    <header class="intro"><h1>空间仪器</h1><p>左右拖动模型，或用滑块调节。快速松手会带出一点惯性。用键盘操作时，按 Tab 选中滑块，再用方向键微调。</p></header>
+    <section class="grid" aria-label="可交互三维模型">
+      <article><mo-lens-stack label="镜组拆解" value="54"></mo-lens-stack><p>沿光轴展开七组部件，观察玻璃镜片与金属压圈的间距。</p></article>
+      <article><mo-iris-diaphragm label="机械光圈" value="45"></mo-iris-diaphragm><p>推动九片叶片绕各自的支点旋转，观察中央开孔。</p></article>
+      <article><mo-contour-relief label="立体等高线" value="38"></mo-contour-relief><p>拉开十三层地形切片，从侧面读出峰顶偏移和山脊走向。</p></article>
+    </section>
+    <section class="effects" aria-labelledby="effects-title">
+      <h2 id="effects-title">点按试用动效</h2>
+      <div class="actions">
+        <mo-fx effect="iris-reveal" trigger="click"><button type="button">光圈揭幕</button></mo-fx>
+        <mo-fx effect="shutter-catch" trigger="click"><button type="button">快门回弹</button></mo-fx>
+        <mo-fx effect="detent-tick" trigger="click"><button type="button">刻度卡位</button></mo-fx>
+      </div>
+    </section>
+  </main>
+  <script type="module">
+    import { use } from '../dist/runtime.js';
+    import { spatialInstruments } from '../dist/runtime/spatial-instruments.js';
+    import { defineLensStack } from '../dist/widgets/lens-stack.js';
+    import { defineIrisDiaphragm } from '../dist/widgets/iris-diaphragm.js';
+    import { defineContourRelief } from '../dist/widgets/contour-relief.js';
+    import { defineFx } from '../dist/components/fx.js';
+    import { defineMoAliases } from '../dist/components/mo.js';
+    import { registerSpatialPack } from '../dist/components/fx-spatial.js';
+    use(spatialInstruments);
+    defineMoAliases();
+    defineLensStack();
+    defineIrisDiaphragm();
+    defineContourRelief();
+    registerSpatialPack();
+    defineFx();
+  </script>
+</body>
+</html>

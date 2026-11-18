@@ -24,7 +24,7 @@ npm i motionary
 <script type="module">import ScrollAnimate from 'motionary'; ScrollAnimate.init();</script>
 ```
 
-Motionary 让内容在滚入视口时自然登场，并提供 <!--fact:public-->262<!--/fact--> 个开箱即用的 `<mo-*>` 动画自定义元素：卡片、按钮、物理效果、页面转场、生成式背景、Lottie、WebGL 等等。无论是纯 HTML，还是 React、Vue、Svelte、Solid、Angular，乃至 Electron、Tauri、WebView2 这类桌面 Web 视图，都能直接使用。运行时零依赖，每个入口都可 tree-shaking，并在 CI 中报告 gzip 体积；所有动画都遵循 `prefers-reduced-motion`。
+Motionary 让内容在滚入视口时自然登场，并提供 <!--fact:public-->265<!--/fact--> 个开箱即用的 `<mo-*>` 动画自定义元素：卡片、按钮、物理效果、页面转场、生成式背景、Lottie、WebGL 等等。无论是纯 HTML，还是 React、Vue、Svelte、Solid、Angular，乃至 Electron、Tauri、WebView2 这类桌面 Web 视图，都能直接使用。运行时零依赖，每个入口都可 tree-shaking，并在 CI 中报告 gzip 体积；所有动画都遵循 `prefers-reduced-motion`。
 
 各版本的更新说明见 [CHANGELOG.md](./CHANGELOG.md)。
 
@@ -37,9 +37,9 @@ Motionary 让内容在滚入视口时自然登场，并提供 <!--fact:public-->
 ## 特性
 
 - **214 个滚动显现预设**，分为 14 个系列（核心内置 33 个，`motionary/presets/extended` 再提供 181 个）：淡入、缩放、3D 翻转、clip-path 形状、模糊与遮罩、弹跳、景深、故障风，以及随滚动进度变化的 `scrub-*`。另有 `timeline()`、`staggerChildren()` 和 `parallax()`。
-- **<!--fact:public-->262<!--/fact--> 个 `<mo-*>` Web Components**：`motionary/components` 中按分类提供 <!--fact:core-->91<!--/fact--> 个核心组件，另有 <!--fact:widgets-->171<!--/fact--> 个小部件，每个都有独立入口（`motionary/widgets/<name>`）。此外还有 <!--fact:effects-->156<!--/fact--> 个效果，同样各有独立入口（`motionary/effects/<name>`）。统计口径见 [docs/components.md](./docs/components.md#how-components-are-counted)。
+- **<!--fact:public-->265<!--/fact--> 个 `<mo-*>` Web Components**：`motionary/components` 中按分类提供 <!--fact:core-->91<!--/fact--> 个核心组件，另有 <!--fact:widgets-->174<!--/fact--> 个小部件，每个都有独立入口（`motionary/widgets/<name>`）。此外还有 <!--fact:effects-->159<!--/fact--> 个效果，同样各有独立入口（`motionary/effects/<name>`）。统计口径见 [docs/components.md](./docs/components.md#how-components-are-counted)。
 - **Motion Core**：`motionary/core` 提供的 `createMotion()`，插件化引擎，gzip 后约 2.5 KB（历史参考 10 KB）。
-- **自研运行时**：`motionary/runtime`（ticker、tween、timeline）加 <!--fact:runtimeModules-->20<!--/fact--> 个模块，覆盖滚动场景、平滑滚动、文字拆分、SVG 变形、精灵图、GIF / APNG / WebP、Lottie 与 dotLottie、WebGL2、glTF / OBJ、2D 物理。模块分为三个等级，只为实际导入的部分付出体积。
+- **自研运行时**：`motionary/runtime`（ticker、tween、timeline）加 <!--fact:runtimeModules-->21<!--/fact--> 个模块，覆盖滚动场景、平滑滚动、文字拆分、SVG 变形、精灵图、GIF / APNG / WebP、Lottie 与 dotLottie、WebGL2、glTF / OBJ、2D 物理。模块分为三个等级，只为实际导入的部分付出体积。
 - **适配所有框架**：`motionary/react`、`motionary/vue`、`motionary/svelte`、`motionary/solid`、`motionary/angular`，以及元素封装 `motionary/components/react` · `vue` · `svelte` · `solid`。在服务端导入不会产生任何副作用。
 - **配套工具**：面向 AI 助手的 MCP 服务器、本地动效解析器（可接入你自己的 LLM）、Figma 插件、可导出 CSS / 小程序 WXSS / 鸿蒙 ArkTS 的 CLI，以及每个大版本的 codemod。
 - **默认无障碍**：处处支持减少动态效果，提供面向用户的动效开关；所有元素遵循同一份组件契约（属性、事件、键盘、生命周期），由 CI 强制检查。
@@ -353,7 +353,7 @@ npx usa-codemod-13 --write      # 一并改写，并把固定在 @10 / @11 / @12
 
 ## 版本与兼容性
 
-- **npm dist-tags：** `latest` 指向当前大版本的最新版本（<!--ver:version-->17.7.0<!--/ver-->；从 14.1 起次版本也会移动它）。每个次版本另有自己的标签 `v<major>-<minor>`（例如 `v15-0`），`v15-line` 跟随 15.x，`v14-lts` 为 14.9.x。`motionary` 与 `use-scroll-animate` 总是以相同版本一起发布。
+- **npm dist-tags：** `latest` 指向当前大版本的最新版本（<!--ver:version-->17.8.0<!--/ver-->；从 14.1 起次版本也会移动它）。每个次版本另有自己的标签 `v<major>-<minor>`（例如 `v15-0`），`v15-line` 跟随 15.x，`v14-lts` 为 14.9.x。`motionary` 与 `use-scroll-animate` 总是以相同版本一起发布。
 - **CDN：** URL 固定到大版本（`motionary@<!--ver:major-->17<!--/ver-->`）；固定到具体版本（`motionary@12.4.0`）的链接也继续可用。
 - **语义化版本：** 破坏性变更只出现在大版本，每次都附带升级指南和 codemod。弃用的内容会保留到下一个大版本，期间类型标记为 `@deprecated`，运行时不输出警告。
 - **各版本包含什么：** 每个组件和运行时模块的 `since` / `changed`（[docs/version-compat.md](./docs/version-compat.md)），以及逐项功能支持（[docs/compat-matrix.md](./docs/compat-matrix.md)）。

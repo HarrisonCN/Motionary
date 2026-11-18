@@ -1,6 +1,6 @@
 # Animated components (`motionary/components`)
 
-The package ships **<!--fact:public-->262<!--/fact--> animated Web Components** (`<usa-*>` custom elements): <!--fact:core-->91<!--/fact--> core components in `motionary/components` and <!--fact:widgets-->171<!--/fact--> widgets with their own entry points (see [How components are counted](#how-components-are-counted)). They are built only on Custom Elements, CSS and the Web Animations API, so the same code runs:
+The package ships **<!--fact:public-->265<!--/fact--> animated Web Components** (`<usa-*>` custom elements): <!--fact:core-->91<!--/fact--> core components in `motionary/components` and <!--fact:widgets-->174<!--/fact--> widgets with their own entry points (see [How components are counted](#how-components-are-counted)). They are built only on Custom Elements, CSS and the Web Animations API, so the same code runs:
 
 - in any modern browser (Chrome, Edge, Firefox, Safari), and with React, Vue, Svelte, Solid, Angular or no framework;
 - in **Windows desktop software** that renders its UI with a web view — Electron, Tauri (WebView2), WinUI 3 / WPF / WinForms with WebView2, and installed PWAs. See **[Windows apps guide](./windows-apps.md)**.
@@ -14,13 +14,13 @@ Live gallery: <https://harrisoncn.github.io/Motionary/showcase/components.html>
 
 | Count | Value | What it counts |
 |---|---|---|
-| **All public components** | **262** | Every `<usa-*>` element in the manifest (`motionary/tooling/manifest.json`, `/components.json`). Each has a contract (`npm run check:contract`), a docs page and a gzip budget. |
+| **All public components** | **265** | Every `<usa-*>` element in the manifest (`motionary/tooling/manifest.json`, `/components.json`). Each has a contract (`npm run check:contract`), a docs page and a gzip budget. |
 | **Core components** | **91** | Elements registered by `motionary/components` (`defineComponents()`, CDN `components.umd.js`), imported by category (`motionary/components/<category>`). |
-| Widgets | 171 | Elements with their own entry point `motionary/widgets/<name>`. 168 of them are also in the no-build `widgets.umd.js`; 3 (`<usa-dotlottie>`, `<usa-gl-model>`, `<usa-snap-carousel>`) load only from their own ES module entry. |
-| Effects | 156 | Effects with their own entry point `motionary/effects/<name>` (not elements, not in the counts above). |
-| Runtime modules | 20 + core | `motionary/runtime/<module>`; plus 3 official runtimes as optional peer dependencies. |
+| Widgets | 174 | Elements with their own entry point `motionary/widgets/<name>`. 171 of them are also in the no-build `widgets.umd.js`; 3 (`<usa-dotlottie>`, `<usa-gl-model>`, `<usa-snap-carousel>`) load only from their own ES module entry. |
+| Effects | 159 | Effects with their own entry point `motionary/effects/<name>` (not elements, not in the counts above). |
+| Runtime modules | 21 + core | `motionary/runtime/<module>`; plus 3 official runtimes as optional peer dependencies. |
 
-Core + widgets = all public components (91 + 171 = 262). "Core" is about how an element is registered, not about its quality or stability: every public component is held to the same contract.
+Core + widgets = all public components (91 + 174 = 265). "Core" is about how an element is registered, not about its quality or stability: every public component is held to the same contract.
 <!-- counting:end -->
 
 ## Principles
@@ -1712,6 +1712,96 @@ defineGlModel(); // registers <usa-gl-model> — after the prerequisites
 
 ```html
 <usa-gl-model src="/models/robot-draco.glb" controls label="Robot"></usa-gl-model>
+```
+
+### `<usa-lens-stack>` — Requires: motionary/runtime/spatial-instruments
+
+- **Install:** `npm i motionary`
+- **Import order & registration:** Register the core first, then the module: use(spatialInstruments) also registers the core. CDN: load runtime.iife.js, then runtime/spatial-instruments.iife.js (it registers itself).
+
+```js
+import { use } from 'motionary/runtime';
+import { spatialInstruments } from 'motionary/runtime/spatial-instruments';
+import { defineLensStack } from 'motionary/components/widgets';
+
+use(spatialInstruments);
+defineLensStack(); // registers <usa-lens-stack> — after the prerequisites
+```
+
+- **CDN:**
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/motionary@17/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@17/dist/runtime/spatial-instruments.iife.js"></script>
+<!-- then the component bundles -->
+<script src="https://unpkg.com/motionary@17/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@17/dist/widgets.umd.js"></script>
+```
+
+- **Minimal example:**
+
+```html
+<mo-lens-stack value="42"></mo-lens-stack>
+```
+
+### `<usa-iris-diaphragm>` — Requires: motionary/runtime/spatial-instruments
+
+- **Install:** `npm i motionary`
+- **Import order & registration:** Register the core first, then the module: use(spatialInstruments) also registers the core. CDN: load runtime.iife.js, then runtime/spatial-instruments.iife.js (it registers itself).
+
+```js
+import { use } from 'motionary/runtime';
+import { spatialInstruments } from 'motionary/runtime/spatial-instruments';
+import { defineIrisDiaphragm } from 'motionary/components/widgets';
+
+use(spatialInstruments);
+defineIrisDiaphragm(); // registers <usa-iris-diaphragm> — after the prerequisites
+```
+
+- **CDN:**
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/motionary@17/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@17/dist/runtime/spatial-instruments.iife.js"></script>
+<!-- then the component bundles -->
+<script src="https://unpkg.com/motionary@17/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@17/dist/widgets.umd.js"></script>
+```
+
+- **Minimal example:**
+
+```html
+<mo-iris-diaphragm value="45"></mo-iris-diaphragm>
+```
+
+### `<usa-contour-relief>` — Requires: motionary/runtime/spatial-instruments
+
+- **Install:** `npm i motionary`
+- **Import order & registration:** Register the core first, then the module: use(spatialInstruments) also registers the core. CDN: load runtime.iife.js, then runtime/spatial-instruments.iife.js (it registers itself).
+
+```js
+import { use } from 'motionary/runtime';
+import { spatialInstruments } from 'motionary/runtime/spatial-instruments';
+import { defineContourRelief } from 'motionary/components/widgets';
+
+use(spatialInstruments);
+defineContourRelief(); // registers <usa-contour-relief> — after the prerequisites
+```
+
+- **CDN:**
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/motionary@17/dist/runtime.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motionary@17/dist/runtime/spatial-instruments.iife.js"></script>
+<!-- then the component bundles -->
+<script src="https://unpkg.com/motionary@17/dist/components.umd.js"></script>
+<script src="https://unpkg.com/motionary@17/dist/widgets.umd.js"></script>
+```
+
+- **Minimal example:**
+
+```html
+<mo-contour-relief value="35"></mo-contour-relief>
 ```
 
 <!-- prereqs:end -->

@@ -26,7 +26,7 @@ document.documentElement.classList.add(mode === 'card' ? 'is-card' : 'is-detail'
 
 // 10.1: motionary/runtime + its modules (the prerequisites of runtime-powered components)
 async function loadRuntime(base) {
-  const ids = Object.values(PREREQS).filter((p) => p.kind === 'runtime' && p.id !== 'core').map((p) => p.id);
+  const ids = Object.values(PREREQS).filter((p) => p.kind === 'runtime' && p.id !== 'core').map((p) => p.id).filter(idNeeded => idNeeded !== 'spatial-instruments' || findComponent(id)?.requires?.includes(idNeeded));
   const [core, ...mods] = await Promise.all([import(base + 'runtime.js'), ...ids.map((id) => import(base + 'runtime/' + id + '.js'))]);
   core.use(...mods.map((m, i) => m[ids[i].replace(/-(\w)/g, (_, c) => c.toUpperCase())]));
   return core;

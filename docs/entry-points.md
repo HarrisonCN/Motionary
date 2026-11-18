@@ -12,7 +12,7 @@ registerPearlescent(); defineFx(); // <usa-fx effect="pearlescent">
 
 Notes: an effect entry imports its pack file (the effects of a pack share helpers), so its size is the pack’s, not the whole 6.x set. Runtime-powered widgets still need their prerequisites (`use(…)`, see the Requires badge). The group entries (`motionary/components/widgets`, `/fx2`, `/lite`) are unchanged.
 
-## Widgets (171)
+## Widgets (174)
 
 | Tag | Import | Define |
 |---|---|---|
@@ -138,6 +138,9 @@ Notes: an effect entry imports its pack file (the effects of a pack share helper
 | `<usa-file-tree>` | `motionary/widgets/file-tree` | `defineFileTree()` |
 | `<usa-download-menu>` | `motionary/widgets/download-menu` | `defineDownloadMenu()` |
 | `<usa-title-sequence>` | `motionary/widgets/title-sequence` | `defineTitleSequence()` |
+| `<usa-lens-stack>` | `motionary/widgets/lens-stack` | `defineLensStack()` |
+| `<usa-iris-diaphragm>` | `motionary/widgets/iris-diaphragm` | `defineIrisDiaphragm()` |
+| `<usa-contour-relief>` | `motionary/widgets/contour-relief` | `defineContourRelief()` |
 | `<usa-textarea>` | `motionary/widgets/textarea` | `defineTextarea()` |
 | `<usa-search-field>` | `motionary/widgets/search-field` | `defineSearchField()` |
 | `<usa-form-stepper>` | `motionary/widgets/form-stepper` | `defineFormStepper()` |
@@ -188,7 +191,7 @@ Notes: an effect entry imports its pack file (the effects of a pack share helper
 | `<usa-gl-model>` | `motionary/widgets/gl-model` | `defineGlModel()` |
 | `<usa-dotlottie>` | `motionary/widgets/dotlottie` | `defineDotLottie()` |
 
-## Effects (156)
+## Effects (159)
 
 | Effect | Import | Register | Pack |
 |---|---|---|---|
@@ -315,6 +318,9 @@ Notes: an effect entry imports its pack file (the effects of a pack share helper
 | `orbit-in` | `motionary/effects/orbit-in` | `registerOrbitIn()` | spatial |
 | `spatial-float` | `motionary/effects/spatial-float` | `registerSpatialFloat()` | spatial |
 | `depth-pop` | `motionary/effects/depth-pop` | `registerDepthPop()` | spatial |
+| `iris-reveal` | `motionary/effects/iris-reveal` | `registerIrisReveal()` | spatial |
+| `shutter-catch` | `motionary/effects/shutter-catch` | `registerShutterCatch()` | spatial |
+| `detent-tick` | `motionary/effects/detent-tick` | `registerDetentTick()` | spatial |
 | `dolly-in` | `motionary/effects/dolly-in` | `registerDollyIn()` | cinema |
 | `pan-reveal` | `motionary/effects/pan-reveal` | `registerPanReveal()` | cinema |
 | `letterbox` | `motionary/effects/letterbox` | `registerLetterbox()` | cinema |

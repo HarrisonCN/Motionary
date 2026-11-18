@@ -8,7 +8,7 @@
  */
 
 /** Runtime version (kept in sync with the package version by the release script). */
-export const RUNTIME_VERSION = '17.7.0';
+export const RUNTIME_VERSION = '17.8.0';
 
 /** Where the CDN builds live (major-pinned). */
 export const RUNTIME_CDN = 'https://cdn.jsdelivr.net/npm/motionary@17/dist/';
@@ -38,6 +38,7 @@ export const RUNTIME_TIERS: Readonly<Record<string, RuntimeTier>> = {
   'lottie-state': 'standard',
   'rive': 'standard',
   'gl': 'advanced',
+  'spatial-instruments': 'advanced',
   'format-gltf': 'advanced',
   'format-obj': 'advanced',
   'gltf-anim': 'advanced',

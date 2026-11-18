@@ -7,6 +7,9 @@ export type { FormIssue } from './validation-summary';
 import { defineSelect, type UsaSelectElement } from './select';
 import { defineCombobox, type UsaComboboxElement } from './combobox';
 import { defineMultiSelect, type UsaMultiSelectElement } from './multi-select';
+import { defineLensStack, type UsaLensStackElement } from './lens-stack';
+import { defineIrisDiaphragm, type UsaIrisDiaphragmElement } from './iris-diaphragm';
+import { defineContourRelief, type UsaContourReliefElement } from './contour-relief';
 import { defineNumberStepper, type UsaNumberStepperElement } from './number-stepper';
 import { definePassword, type UsaPasswordElement } from './password';
 import { defineRangeSlider, type UsaRangeSliderElement } from './range-slider';
@@ -180,6 +183,9 @@ import { defineHaloSegmented, type UsaHaloSegmentedElement } from './halo-segmen
 import { defineHaloSlider, type UsaHaloSliderElement } from './halo-slider';
 import { defineOrbitProgress, type UsaOrbitProgressElement } from './orbit-progress';
 
+export { defineLensStack, type UsaLensStackElement };
+export { defineIrisDiaphragm, type UsaIrisDiaphragmElement };
+export { defineContourRelief, type UsaContourReliefElement };
 export { defineSelect, defineCombobox, defineMultiSelect, defineNumberStepper, definePassword, defineRangeSlider, defineConsent, defineCtaPopup, defineValidationSummary };
 export type { UsaSelectElement, UsaComboboxElement, UsaMultiSelectElement, UsaNumberStepperElement, UsaPasswordElement, UsaRangeSliderElement, UsaConsentElement, UsaCtaPopupElement, UsaValidationSummaryElement };
 
@@ -384,6 +390,7 @@ export const WIDGETS: Record<string, Record<string, (tag?: string) => CustomElem
   '10.6': { 'usa-lottie-player': defineLottiePlayer, 'usa-rive': defineRive, 'usa-token-editor': defineTokenEditor },
   '10.7': { 'usa-physics-playground': definePhysicsPlayground, 'usa-motion-prompt': defineMotionPrompt },
   '17.3': { 'usa-mega-menu': defineMegaMenu, 'usa-nav-flyout': defineNavFlyout, 'usa-fullscreen-menu': defineFullscreenMenu, 'usa-breadcrumbs': defineBreadcrumbs, 'usa-file-tree': defineFileTree, 'usa-download-menu': defineDownloadMenu, 'usa-title-sequence': defineTitleSequence },
+  '17.8': { 'usa-lens-stack': defineLensStack, 'usa-iris-diaphragm': defineIrisDiaphragm, 'usa-contour-relief': defineContourRelief },
   '17.7': { 'usa-textarea': defineTextarea, 'usa-search-field': defineSearchField, 'usa-form-stepper': defineFormStepper, 'usa-select': defineSelect, 'usa-combobox': defineCombobox, 'usa-multi-select': defineMultiSelect, 'usa-number-stepper': defineNumberStepper, 'usa-password': definePassword, 'usa-range-slider': defineRangeSlider, 'usa-consent': defineConsent, 'usa-cta-popup': defineCtaPopup, 'usa-validation-summary': defineValidationSummary },
   '17.6': { 'usa-gravity-well': defineGravityWell, 'usa-liquid-metal': defineLiquidMetal, 'usa-reaction-field': defineReactionField, 'usa-ink-flow': defineInkFlow, 'usa-fluid-type': defineFluidType, 'usa-magnetic-field': defineMagneticField, 'usa-elastic-mesh': defineElasticMesh, 'usa-spring-lab': defineSpringLab, 'usa-bezier-lab': defineBezierLab, 'usa-text-loupe': defineTextLoupe, 'usa-revision-reveal': defineRevisionReveal, 'usa-hold-action': defineHoldAction, 'usa-scrub-number': defineScrubNumber },
   '17.5': { 'usa-flight-status': defineFlightStatus, 'usa-transit-progress': defineTransitProgress, 'usa-sun-timeline': defineSunTimeline, 'usa-delivery-tracker': defineDeliveryTracker, 'usa-glucose-sparkline': defineGlucoseSparkline, 'usa-coffee-timer': defineCoffeeTimer, 'usa-vital-wave': defineVitalWave, 'usa-orbit-pass': defineOrbitPass, 'usa-meter-countdown': defineMeterCountdown, 'usa-race-telemetry': defineRaceTelemetry, 'usa-workout-player': defineWorkoutPlayer, 'usa-status-pill': defineStatusPill, 'usa-ride-status': defineRideStatus, 'usa-route-sparkline': defineRouteSparkline, 'usa-activity-wall': defineActivityWall },
@@ -404,6 +411,12 @@ export function defineWidgets(release?: string): void {
 
 declare global {
   interface HTMLElementTagNameMap {
+    'usa-lens-stack': UsaLensStackElement;
+    'mo-lens-stack': UsaLensStackElement;
+    'usa-iris-diaphragm': UsaIrisDiaphragmElement;
+    'mo-iris-diaphragm': UsaIrisDiaphragmElement;
+    'usa-contour-relief': UsaContourReliefElement;
+    'mo-contour-relief': UsaContourReliefElement;
     'usa-select': UsaSelectElement;
     'mo-select': UsaSelectElement;
     'usa-combobox': UsaComboboxElement;

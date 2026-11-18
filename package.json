@@ -1,7 +1,7 @@
 {
   "name": "motionary",
-  "version": "17.7.0",
-  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 262 animated Web Components (91 core, 171 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
+  "version": "17.8.0",
+  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 265 animated Web Components (91 core, 174 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
   "unpkg": "dist/index.umd.js",
@@ -1860,6 +1860,16 @@
         "default": "./dist/runtime/gl.cjs"
       }
     },
+    "./runtime/spatial-instruments": {
+      "import": {
+        "types": "./dist/runtime/spatial-instruments.d.ts",
+        "default": "./dist/runtime/spatial-instruments.js"
+      },
+      "require": {
+        "types": "./dist/runtime/spatial-instruments.d.cts",
+        "default": "./dist/runtime/spatial-instruments.cjs"
+      }
+    },
     "./runtime/format-gltf": {
       "import": {
         "types": "./dist/runtime/format-gltf.d.ts",
@@ -3168,6 +3178,36 @@
       "require": {
         "types": "./dist/widgets/title-sequence.d.cts",
         "default": "./dist/widgets/title-sequence.cjs"
+      }
+    },
+    "./widgets/lens-stack": {
+      "import": {
+        "types": "./dist/widgets/lens-stack.d.ts",
+        "default": "./dist/widgets/lens-stack.js"
+      },
+      "require": {
+        "types": "./dist/widgets/lens-stack.d.cts",
+        "default": "./dist/widgets/lens-stack.cjs"
+      }
+    },
+    "./widgets/iris-diaphragm": {
+      "import": {
+        "types": "./dist/widgets/iris-diaphragm.d.ts",
+        "default": "./dist/widgets/iris-diaphragm.js"
+      },
+      "require": {
+        "types": "./dist/widgets/iris-diaphragm.d.cts",
+        "default": "./dist/widgets/iris-diaphragm.cjs"
+      }
+    },
+    "./widgets/contour-relief": {
+      "import": {
+        "types": "./dist/widgets/contour-relief.d.ts",
+        "default": "./dist/widgets/contour-relief.js"
+      },
+      "require": {
+        "types": "./dist/widgets/contour-relief.d.cts",
+        "default": "./dist/widgets/contour-relief.cjs"
       }
     },
     "./widgets/textarea": {
@@ -4890,6 +4930,36 @@
         "default": "./dist/effects/depth-pop.cjs"
       }
     },
+    "./effects/iris-reveal": {
+      "import": {
+        "types": "./dist/effects/iris-reveal.d.ts",
+        "default": "./dist/effects/iris-reveal.js"
+      },
+      "require": {
+        "types": "./dist/effects/iris-reveal.d.cts",
+        "default": "./dist/effects/iris-reveal.cjs"
+      }
+    },
+    "./effects/shutter-catch": {
+      "import": {
+        "types": "./dist/effects/shutter-catch.d.ts",
+        "default": "./dist/effects/shutter-catch.js"
+      },
+      "require": {
+        "types": "./dist/effects/shutter-catch.d.cts",
+        "default": "./dist/effects/shutter-catch.cjs"
+      }
+    },
+    "./effects/detent-tick": {
+      "import": {
+        "types": "./dist/effects/detent-tick.d.ts",
+        "default": "./dist/effects/detent-tick.js"
+      },
+      "require": {
+        "types": "./dist/effects/detent-tick.d.cts",
+        "default": "./dist/effects/detent-tick.cjs"
+      }
+    },
     "./effects/dolly-in": {
       "import": {
         "types": "./dist/effects/dolly-in.d.ts",
@@ -5371,6 +5441,7 @@
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@rollup/plugin-terser": "^1.0.0",
     "@rollup/plugin-typescript": "^12.3.0",
+    "@types/three": "0.180.0",
     "axe-core": "^4.14.0",
     "draco3d": "1.5.7",
     "esbuild": "^0.28.2",
@@ -5379,6 +5450,7 @@
     "rollup": "^4.60.0",
     "rollup-plugin-dts": "^6.5.1",
     "solid-js": "^1.9.16",
+    "three": "0.180.0",
     "tslib": "^2.8.1",
     "typescript": "^6.0.2",
     "vitest": "^3.2.7"

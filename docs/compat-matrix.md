@@ -2,10 +2,11 @@
 
 > Generated from `showcase/catalog/prereqs.js` by `scripts/gen-runtime-docs.mjs` — the same data as each module page in [docs/runtime/](runtime/); every ✅ row is covered by the module tests and sample files. Edit the data, not this page.
 
-From 11.0 this matrix is part of the stable API: a ✅ row is not removed or downgraded before 12.0; minors may only add rows or turn ◐ / ✕ into ✅. Totals: **147** ✅ · **16** ◐ · **25** ✕ across 24 modules.
+From 11.0 this matrix is part of the stable API: a ✅ row is not removed or downgraded before 12.0; minors may only add rows or turn ◐ / ✕ into ✅. Totals: **150** ✅ · **16** ◐ · **25** ✕ across 25 modules.
 
 | Module | Import | ✅ | ◐ | ✕ |
 |---|---|---|---|---|
+| [Three.js instrument scenes](runtime/spatial-instruments.md) | `motionary/runtime/spatial-instruments` | 3 | 0 | 0 |
 | [Runtime core](runtime/core.md) | `motionary/runtime` | 7 | 0 | 0 |
 | [CSS @keyframes & WAAPI keyframes loader](runtime/format-css.md) | `motionary/runtime/format-css` | 5 | 1 | 2 |
 | [Motion / Framer keyframe JSON loader](runtime/format-motion.md) | `motionary/runtime/format-motion` | 5 | 0 | 1 |
@@ -30,6 +31,14 @@ From 11.0 this matrix is part of the stable API: a ✅ row is not removed or dow
 | [glTF decoder hooks (Draco, KTX2)](runtime/gltf-decoders.md) | `motionary/runtime/gltf-decoders` | 4 | 1 | 1 |
 | [Official Draco decoder (Google)](runtime/draco3d.md) | `draco3d` | 1 | 0 | 1 |
 | [Official Basis Universal transcoder (Binomial)](runtime/basis-transcoder.md) | `basis_transcoder.js` | 1 | 0 | 1 |
+
+## Three.js instrument scenes — `motionary/runtime/spatial-instruments`
+
+| Feature | Supported | Notes |
+|---|---|---|
+| Perspective meshes and lighting | ✅ yes | WebGL2 |
+| Interactive schematic | ✅ yes | Available without a graphics context |
+| Server-side import | ✅ yes | Canvas is needed only to create a view |
 
 ## Runtime core — `motionary/runtime`
 

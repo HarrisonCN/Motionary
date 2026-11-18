@@ -9,6 +9,30 @@
     "usa:beat": "<usa-audio>: the { energy, time } object onBeat() passes (src/components/effects/audio.ts)"
   },
   "components": {
+    "usa-contour-relief": {
+      "usa:change": [
+        "{value}"
+      ],
+      "usa:input": [
+        "{value}"
+      ]
+    },
+    "usa-iris-diaphragm": {
+      "usa:change": [
+        "{value}"
+      ],
+      "usa:input": [
+        "{value}"
+      ]
+    },
+    "usa-lens-stack": {
+      "usa:change": [
+        "{value}"
+      ],
+      "usa:input": [
+        "{value}"
+      ]
+    },
     "usa-accordion": {
       "usa:toggle": [
         "{details, open}"

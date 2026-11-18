@@ -943,3 +943,27 @@ Finite SVG feedback; original content and focus are preserved.
 ```html
 <mo-fx effect="submit-trail" trigger="click"><button type="button" style="width:100%;min-height:100px;border:1px solid #8a9dbc44;border-radius:16px;background:#12161e;color:#d8e7ff">Submit trail</button></mo-fx>
 ```
+
+### Iris reveal
+
+Open a polygonal aperture from the center of the surface.
+
+```html
+<mo-fx effect="iris-reveal" trigger="click"><button type="button">Iris reveal</button></mo-fx>
+```
+
+### Shutter catch
+
+A quick vertical compression and rebound.
+
+```html
+<mo-fx effect="shutter-catch" trigger="click"><button type="button">Shutter catch</button></mo-fx>
+```
+
+### Detent tick
+
+A short lateral nudge that settles like a dial detent.
+
+```html
+<mo-fx effect="detent-tick" trigger="click"><button type="button">Detent tick</button></mo-fx>
+```

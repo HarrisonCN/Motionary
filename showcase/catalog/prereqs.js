@@ -15,7 +15,7 @@ const camel = (id) => id.replace(/-(\w)/g, (_, c) => c.toUpperCase());
 
 /** A `motionary/runtime/<id>` module entry. */
 /** 11.4: runtime tier of every prerequisite (same table as RUNTIME_TIERS in src/runtime/registry.ts; a test keeps them equal). */
-export const PREREQ_TIERS = { 'core': 'basic', 'scroll': 'basic', 'text': 'basic', 'format-css': 'basic', 'format-motion': 'basic', 'smooth': 'standard', 'drag-snap': 'standard', 'format-svg': 'standard', 'format-sprite': 'standard', 'format-gif': 'standard', 'format-apng': 'standard', 'format-webp': 'standard', 'vector': 'standard', 'lottie-state': 'standard', 'rive': 'standard', 'gl': 'advanced', 'format-gltf': 'advanced', 'format-obj': 'advanced', 'gltf-anim': 'advanced', 'gltf-decoders': 'advanced', 'basis-transcoder': 'advanced', 'draco3d': 'advanced', 'physics': 'advanced', 'format-scene': 'advanced' };
+export const PREREQ_TIERS = { 'core': 'basic', 'scroll': 'basic', 'text': 'basic', 'format-css': 'basic', 'format-motion': 'basic', 'smooth': 'standard', 'drag-snap': 'standard', 'format-svg': 'standard', 'format-sprite': 'standard', 'format-gif': 'standard', 'format-apng': 'standard', 'format-webp': 'standard', 'vector': 'standard', 'lottie-state': 'standard', 'rive': 'standard', 'gl': 'advanced', 'spatial-instruments': 'advanced', 'format-gltf': 'advanced', 'format-obj': 'advanced', 'gltf-anim': 'advanced', 'gltf-decoders': 'advanced', 'basis-transcoder': 'advanced', 'draco3d': 'advanced', 'physics': 'advanced', 'format-scene': 'advanced' };
 const TIER_ORDER = ['basic', 'standard', 'advanced'];
 /** The tier a component pays for: the highest tier among its prerequisites (basic for none). */
 export const tierFor = (ids = []) => TIER_ORDER[Math.max(0, ...ids.map((id) => TIER_ORDER.indexOf(PREREQ_TIERS[id] || 'basic')))];
@@ -67,6 +67,11 @@ const P = (id, label, title, summary, install, imp, register, cdn, cdnEsm, order
 });
 
 export const PREREQS = {
+  'spatial-instruments': R('spatial-instruments', 'Three.js instrument scenes',
+    'An independently loaded renderer built with Three.js. Ships with Motionary. The lens, iris and relief cards each provide a native range and a schematic view for devices without WebGL2.', 160 * 1024,
+    ['spatialInstruments', 'createInstrument'],
+    [['Perspective meshes and lighting', 'yes', 'WebGL2'], ['Interactive schematic', 'yes', 'Available without a graphics context'], ['Server-side import', 'yes', 'Canvas is needed only to create a view']],
+    "import { use } from 'motionary/runtime';\nimport { spatialInstruments } from 'motionary/runtime/spatial-instruments';\nimport { defineLensStack } from 'motionary/widgets/lens-stack';\nuse(spatialInstruments);\ndefineLensStack();"),
   core: R('core', 'Runtime core', 'Shared ticker (one rAF loop), tween + timeline engine with easing, module registry with clear errors.', 5632,
     ['use', 'requireModule', 'hasModule', 'getTicker', 'tween', 'timeline', 'Tween', 'Timeline', 'EASES', 'parseEase', 'cubicBezier', 'steps', 'RuntimeModuleError'],
     [

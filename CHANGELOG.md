@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [17.8.0] - 2026-11-18 — Spatial Instruments
+
+- Added three independent cards, `mo-lens-stack`, `mo-iris-diaphragm` and `mo-contour-relief`. Drag to separate lens sections, open mechanical blades or lift topographic layers. The native sliders offer the same controls by keyboard.
+- Added an opt-in Three.js renderer in `motionary/runtime/spatial-instruments` with perspective, directional lighting, on-demand drawing and context-loss fallback.
+- Added `iris-reveal`, `shutter-catch` and `detent-tick` effects. Try the six additions in the [instrument showcase](https://harrisoncn.github.io/Motionary/showcase/instruments.html).
+
 ## [17.7.0] - 2026-11-12 — Form Atelier
 
 - Added twelve mo-* widgets: select, combobox, multi-select, number-stepper, password, range-slider, consent, cta-popup, validation-summary, textarea, search-field and form-stepper. Total: 262 components (91 core + 171 widgets).

@@ -1,4 +1,4 @@
-# Motionary components (262)
+# Motionary components (265)
 
 One page per `<usa-*>` element, generated from the source. Machine-readable: `motionary/tooling/manifest.json` · Pages `/components.json` · `/llms.txt` · `/llms-full.txt`. How to use these with an AI assistant: [AGENTS.md](../../AGENTS.md) and [the prompt guide](../ai-prompt-guide.md).
 
@@ -257,6 +257,14 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-tilt>`](usa-tilt.md) — 3D tilt card
 - [`<mo-volume-knob>`](usa-volume-knob.md) — Volume knob
 
+## depth
+
+- [`<mo-contour-relief>`](usa-contour-relief.md) — Contour relief · Requires: motionary/runtime/spatial-instruments
+- [`<mo-cube>`](usa-cube.md) — 3D cube
+- [`<mo-depth>`](usa-depth.md) — Depth parallax
+- [`<mo-iris-diaphragm>`](usa-iris-diaphragm.md) — Iris diaphragm · Requires: motionary/runtime/spatial-instruments
+- [`<mo-lens-stack>`](usa-lens-stack.md) — Lens assembly · Requires: motionary/runtime/spatial-instruments
+
 ## text
 
 - [`<mo-counter>`](usa-counter.md) — Number counter
@@ -276,11 +284,6 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-text-splitter>`](usa-text-splitter.md) — Text splitter · Requires: motionary/runtime/text
 - [`<mo-typewriter>`](usa-typewriter.md) — Typewriter
 - [`<mo-wave-text>`](usa-wave-text.md) — Wave text
-
-## depth
-
-- [`<mo-cube>`](usa-cube.md) — 3D cube
-- [`<mo-depth>`](usa-depth.md) — Depth parallax
 
 ## webgl
 
