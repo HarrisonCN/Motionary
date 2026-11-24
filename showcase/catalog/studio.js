@@ -1,0 +1,48 @@
+import { C } from './make.js';
+
+const x = { entry: 'widgets', since: '17.13' };
+export const components = [
+  // UI
+  C("usa-tour", "ui", "Product tour", "产品导览", "A guided tour: the page dims around each target and a card with Back / Next / Skip walks through the steps; Escape ends it.", "引导式导览：页面变暗，只留目标高亮，卡片带上一步 / 下一步 / 跳过逐步讲解；Esc 结束。", ['ui', 'onboarding', '17.13'],
+    '<mo-tour><button data-start>Start tour</button><div data-step data-target="#tour-demo-a" data-title="Search">Find anything here.</div><div data-step data-target="#tour-demo-b" data-title="Save">Your work is kept here.</div></mo-tour><p><span id="tour-demo-a">🔍 Search</span> · <span id="tour-demo-b">💾 Save</span></p>', undefined, x),
+  C("usa-signature-pad", "gesture", "Signature pad", "签名板", "Draw a signature with mouse, pen or finger; strokes are smoothed and thin out when fast. Undo, clear, or type a name instead.", "用鼠标、笔或手指签名；笔迹平滑，写得快会变细。可撤销、清除，或改为输入姓名。", ['ui', 'form', '17.13'],
+    '<mo-signature-pad name="signature"></mo-signature-pad>', undefined, x),
+  C("usa-wheel-picker", "gesture", "Wheel picker", "滚轮选择器", "Phone-style drum wheels built from native selects; rows lean back in 3D and the select stays in sync.", "仿手机的滚轮选择器，由原生 select 生成；行随距离向后倾斜，select 保持同步。", ['ui', 'form', '17.13'],
+    '<mo-wheel-picker label="Time"><select aria-label="Hour"><option>07</option><option>08</option><option selected>09</option><option>10</option><option>11</option></select><select aria-label="Minute"><option>00</option><option selected>15</option><option>30</option><option>45</option></select></mo-wheel-picker>', undefined, x),
+  C("usa-mention-input", "ui", "Mention input", "@提及输入框", "Type @ to get a list of matching people that pops in; arrows and Enter insert a name.", "输入 @ 弹出匹配的人名列表；方向键和回车插入名字。", ['ui', 'form', '17.13'],
+    '<mo-mention-input people="Ada Lovelace,Alan Turing,Grace Hopper,Linus Torvalds"><textarea rows="3" placeholder="Try typing @a"></textarea></mo-mention-input>', undefined, x),
+  C("usa-emoji-picker", "ui", "Emoji picker", "表情选择器", "Search, group tabs and a grid walked with arrow keys; a pick pops and can type into a field.", "搜索、分组标签和可用方向键浏览的网格；选中会弹一下，也可插入输入框。", ['ui', 'form', '17.13'],
+    '<mo-emoji-picker></mo-emoji-picker>', undefined, x),
+  C("usa-comment-thread", "ui", "Comment thread", "评论串", "Nested articles become a thread with avatars, likes that pop, reply forms and foldable replies.", "嵌套的 article 变成评论串：头像、会弹跳的点赞、回复表单和可折叠的回复。", ['ui', 'social', '17.13'],
+    '<mo-comment-thread><article data-author="Mei" data-time="2h" data-likes="4"><p>Shipped the new chart!</p><article data-author="Sam" data-time="1h"><p>Looks great.</p></article></article></mo-comment-thread>', undefined, x),
+  C("usa-diff-viewer", "layout", "Diff viewer", "代码差异", "Two pre blocks compared line by line, unified or side by side, with changed characters marked.", "两个 pre 逐行对比，统一视图或并排视图，并标出改动的字符。", ['code', 'docs', '17.13'],
+    '<mo-diff-viewer file="greet.js"><pre data-before>function greet(name) {\n  return "Hi " + name;\n}</pre><pre data-after>function greet(name = "you") {\n  return `Hello, ${name}!`;\n}</pre></mo-diff-viewer>', undefined, x),
+  // Data
+  C("usa-line-chart", "svg", "Line chart", "折线图", "Lines draw in with a soft area fill; a crosshair and tooltip follow the pointer or arrow keys; the legend toggles series.", "折线画入并带柔和面积填充；十字线和提示跟随指针或方向键；图例可开关系列。", ['data', 'chart', '17.13'],
+    '<mo-line-chart values="12,18,15,24,30,28,36|8,10,14,12,16,22,25" labels="Mon,Tue,Wed,Thu,Fri,Sat,Sun" series="Visits,Signups"></mo-line-chart>', undefined, x),
+  C("usa-funnel-chart", "layout", "Funnel chart", "漏斗图", "Stages grow from the middle one after another with a conversion badge between them.", "各阶段从中间依次展开，阶段之间显示转化率徽标。", ['data', 'chart', '17.13'],
+    '<mo-funnel-chart values="1200,640,310,120" labels="Visited,Signed up,Tried,Paid"></mo-funnel-chart>', undefined, x),
+  C("usa-treemap", "layout", "Treemap", "矩形树图", "Squarified tiles sized by share scale in biggest first; tiles are buttons walked with arrow keys.", "按占比切分的方块，从大到小缩放出现；每块都是可用方向键移动的按钮。", ['data', 'chart', '17.13'],
+    '<mo-treemap values="40,25,15,10,6,4" labels="Web,iOS,Android,Desktop,TV,Watch"></mo-treemap>', undefined, x),
+  C("usa-gantt", "timeline", "Gantt timeline", "甘特图", "Task bars grow from their start dates with progress fills, dependency links and a today marker.", "任务条从开始日期展开，带进度填充、依赖连线和今日标记。", ['data', 'schedule', '17.13'],
+    '<mo-gantt today="2026-03-11"><ul><li data-start="2026-03-02" data-end="2026-03-06" data-progress="100">Research</li><li data-start="2026-03-07" data-end="2026-03-15" data-progress="60" data-after="1">Design</li><li data-start="2026-03-14" data-end="2026-03-24" data-progress="10" data-after="2">Build</li></ul></mo-gantt>', undefined, x),
+  C("usa-waffle-chart", "layout", "Waffle chart", "华夫图", "A 10 × 10 grid where each square is one percent; squares pop in along a wave and the legend highlights a share.", "10 × 10 网格，每格代表百分之一；格子沿波浪弹出，图例可高亮某一类。", ['data', 'chart', '17.13'],
+    '<mo-waffle-chart values="46,31,23" labels="Mobile,Desktop,Tablet"></mo-waffle-chart>', undefined, x),
+  // Motion
+  C("usa-split-flap", "text", "Split-flap board", "翻牌显示屏", "Letters fold down through the alphabet like a departures board; cycles through words.", "像机场出发牌一样，字母依次翻转到目标；可循环多组文字。", ['text', 'retro', '17.13'],
+    '<mo-split-flap words="BOARDING,DELAYED,ON TIME"></mo-split-flap>', undefined, x),
+  C("usa-scratch-card", "gesture", "Scratch card", "刮刮卡", "Rub away a foil to reveal what is underneath; sparkles trail the scratch and a Reveal button uncovers it in one go.", "刮开涂层露出下面的内容；刮时有碎屑飞出，也可一键揭晓。", ['gesture', 'fun', '17.13'],
+    '<mo-scratch-card><p><strong>20% off</strong><br>Code SPRING</p></mo-scratch-card>', undefined, x),
+  C("usa-page-flip", "depth", "Page flip book", "翻页书", "Pages turn around the spine in 3D; drag an edge, swipe, use the arrow keys or the buttons.", "书页绕书脊 3D 翻动；可拖动页角、滑动、方向键或按钮翻页。", ['3d', 'story', '17.13'],
+    '<mo-page-flip><section><h4>Chapter 1</h4><p>It began with a single frame.</p></section><section><h4>Chapter 2</h4><p>Then everything moved.</p></section><section><h4>The end</h4><p>Thanks for reading.</p></section></mo-page-flip>', undefined, x),
+  C("usa-circular-text", "text", "Circular text", "环形文字", "Text set around a slowly turning ring, with any content in the middle; hover slows, speeds or reverses it.", "文字沿圆环缓慢旋转，中间可放任意内容；悬停可减速、加速或反转。", ['text', 'badge', '17.13'],
+    '<mo-circular-text text="Scroll down · Scroll down"><span>↓</span></mo-circular-text>', undefined, x),
+  C("usa-pixel-transition", "click", "Pixel transition", "像素切换", "Square pixels blink in at random to cover a card, the faces swap, and the pixels blink out.", "方形像素随机闪现盖住卡片，翻到另一面后再散去。", ['hover', 'card', '17.13'],
+    '<mo-pixel-transition><div style="padding:40px 20px;text-align:center;background:#eef2ff">Hover me</div><div style="padding:40px 20px;text-align:center;background:#fde68a">Hello 👋</div></mo-pixel-transition>', undefined, x),
+  C("usa-magnet-lines", "background", "Magnet lines", "磁力线", "A field of short lines that turn toward the pointer like iron filings around a magnet.", "一片短线像磁铁周围的铁屑一样转向指针。", ['background', 'pointer', '17.13'],
+    '<mo-magnet-lines rows="7" columns="10"><strong>Move here</strong></mo-magnet-lines>', undefined, x),
+  C("usa-text-pressure", "text", "Text pressure", "文字压感", "Letters swell heavier and taller as the pointer comes near, so a bulge follows it along the word.", "指针靠近时字母变粗变高，鼓起的效果跟着指针沿文字移动。", ['text', 'pointer', '17.13'],
+    '<mo-text-pressure>PRESSURE</mo-text-pressure>', undefined, x),
+  C("usa-shuffle-grid", "layout", "Shuffle grid", "洗牌网格", "Tiles trade places every few seconds and glide to their new spots; reading order never changes.", "方块每隔几秒交换位置并滑到新位置；阅读顺序保持不变。", ['layout', 'logos', '17.13'],
+    '<mo-shuffle-grid columns="4"><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>G</span><span>H</span></mo-shuffle-grid>', undefined, x),
+];

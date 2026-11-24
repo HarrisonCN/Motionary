@@ -24,7 +24,7 @@ npm i motionary
 <script type="module">import ScrollAnimate from 'motionary'; ScrollAnimate.init();</script>
 ```
 
-Motionary 让内容在滚入视口时自然登场，并提供 <!--fact:public-->358<!--/fact--> 个开箱即用的 `<mo-*>` 动画自定义元素：按钮、卡片、表单、加载动画、页面区块、物理效果、页面转场、生成式背景、Lottie、WebGL 等等。纯 HTML、React、Vue、Svelte、Solid、Angular，以及 Electron、Tauri、WebView2 这类桌面 Web 视图都能直接使用。运行时零依赖，每个入口都可 tree-shaking 并在 CI 中实测 gzip 体积；所有动画都遵循 `prefers-reduced-motion`。
+Motionary 让内容在滚入视口时自然登场，并提供 <!--fact:public-->378<!--/fact--> 个开箱即用的 `<mo-*>` 动画自定义元素：按钮、卡片、表单、加载动画、页面区块、物理效果、页面转场、生成式背景、Lottie、WebGL 等等。纯 HTML、React、Vue、Svelte、Solid、Angular，以及 Electron、Tauri、WebView2 这类桌面 Web 视图都能直接使用。运行时零依赖，每个入口都可 tree-shaking 并在 CI 中实测 gzip 体积；所有动画都遵循 `prefers-reduced-motion`。
 
 各版本的更新说明：[CHANGELOG.md](./CHANGELOG.md) · 供应链：[docs/supply-chain.md](./docs/supply-chain.md) · 带 SRI 哈希的 CDN 用法：[docs/cdn-sri.md](./docs/cdn-sri.md) · 与 AOS、GSAP、Lenis、Motion 的对比：[docs/compare](./docs/compare/README.md) · 在线试用：[StackBlitz 示例](./examples/stackblitz/README.md)。
 
@@ -38,7 +38,7 @@ Motionary 让内容在滚入视口时自然登场，并提供 <!--fact:public-->
 |---|---|---|
 | **滚动显现** | 14 个系列共 214 个预设：核心 33 个，`motionary/presets/extended` 再提供 181 个（淡入、缩放、3D 翻转、clip-path 形状、模糊与遮罩、弹跳、故障风、随滚动进度变化的 `scrub-*`）。另有 `timeline()`、`staggerChildren()`、`parallax()` | [预设](./docs/presets.md) · [API](./docs/API.md) |
 | **核心组件** | `motionary/components` 中的 <!--fact:core-->91<!--/fact--> 个元素，按分类导入：文字、按钮、卡片、背景、过渡、手势、SVG、WebGL 等 | [组件](#组件) |
-| **小部件** | <!--fact:widgets-->267<!--/fact--> 个元素，每个都有独立入口 `motionary/widgets/<name>`：页面区块、界面部件、表单、数据与媒体、纵深动效、加载动画、触感控件、实时动态卡片、3D 仪器 | [主题合集](#主题合集) |
+| **小部件** | <!--fact:widgets-->287<!--/fact--> 个元素，每个都有独立入口 `motionary/widgets/<name>`：页面区块、界面部件、表单、数据与媒体、纵深动效、加载动画、触感控件、实时动态卡片、3D 仪器 | [主题合集](#主题合集) |
 | **效果** | <!--fact:effects-->159<!--/fact--> 个效果，每个都有独立入口 `motionary/effects/<name>`，也可以通过 `<mo-fx>` 加到任意元素上 | [动画商店](https://harrisoncn.github.io/Motionary/showcase/) |
 | **风格变体与样式预设** | 六种内置风格变体（`minimal`、`neon`、`glass`、`brutalist`、`fluent`、`material`），通过共享的设计令牌切换；另有 17.11 小部件专用的 324 种样式预设：12 套配色 × 9 种效果 × 3 类 | [风格变体](#风格变体) · [样式预设](#样式预设) |
 | **Motion Core 与运行时** | `motionary/core` 的 `createMotion()`（约 2.5 KB gzip），以及 `motionary/runtime` 和分为三级的 <!--fact:runtimeModules-->21<!--/fact--> 个模块：滚动场景、平滑滚动、文字拆分、SVG、精灵图、GIF / APNG / WebP、Lottie、WebGL2、glTF / OBJ、2D 物理 | [运行时](#运行时与分级) |
@@ -250,6 +250,7 @@ export class Settings { on = false; onChange = (e: Event) => (this.on = usaDetai
 
 | 合集 | 内容 | 实验页 · 文档 |
 |---|---|---|
+| 工作室：协作、图表与趣味动效（17.13） | 20 个小部件：协作与输入（产品导览、签名板、滚轮选择器、@提及输入框、表情选择器、评论串、代码差异）、数据图表（折线图、漏斗图、矩形树图、甘特图、华夫图）和趣味动效（翻牌显示屏、刮刮卡、翻页书、环形文字、像素切换、磁力线、文字压感、洗牌网格）。可用 324 种样式预设 | [实验页](https://harrisoncn.github.io/Motionary/showcase/studio.html) · [文档](./docs/studio-17-13.md) |
 | 部件与首页合集（17.12） | 18 个小部件：界面部件（进度标签页、代码标签页、有用投票、分享按钮、行内编辑、标签云）、数据与交互（热力图、环形图、可排序列表、放大镜、评分条、待办清单）和动效（流星、连接光束、复古网格、环绕轨道、字母翻转、波纹网格） | [实验页](https://harrisoncn.github.io/Motionary/showcase/parts.html) · [文档](./docs/parts-17-12.md) |
 | 页面块、组件与纵深动效（17.11） | 20 个小部件：页面区块（搜索栏、订阅框、下载按钮、揭示式页脚、形状分隔线）、界面部件（虚拟列表、无限滚动、右键菜单、分栏、桌面窗口、变形卡片）和纵深动效（滚动缩放、图片隧道、环绕画廊、边框光束）。可配合 [324 种样式预设](#样式预设) | [实验页](https://harrisoncn.github.io/Motionary/showcase/blocks.html) · [文档](./docs/blocks-17-11.md) |
 | 界面、组件与动效（17.10） | 21 个小部件：页面区块（侧边栏、目录跟随、价格表、便当格布局、吸底按钮）、数据与媒体（灯箱、数据表、JSON 查看器、热点图）和动效界面（横向滚动、图片拖尾、液态玻璃、路径动画） | [实验页](https://harrisoncn.github.io/Motionary/showcase/kit.html) · [文档](./docs/kit-17-10.md) |
@@ -380,9 +381,9 @@ el.animate(intent.keyframes, intent.options);
 | `motionary/presets/extended`（181 个预设） | 4.69 KB | 5.25 KB |
 | `motionary/runtime`（运行时核心） | 5.43 KB | 5.50 KB |
 | `motionary/components/reveal` | 4.47 KB | 5.00 KB |
-| `motionary/components/lite`（全部元素，CSS 按需） | 72.19 KB | 79.00 KB |
-| `motionary/components`（全部元素 + CSS） | 88.80 KB | 93.75 KB |
-| `dist/components.umd.js`（CDN，全部） | 112.30 KB | 115.75 KB |
+| `motionary/components/lite`（全部元素，CSS 按需） | 72.27 KB | 79.00 KB |
+| `motionary/components`（全部元素 + CSS） | 88.91 KB | 93.75 KB |
+| `dist/components.umd.js`（CDN，全部） | 112.41 KB | 115.75 KB |
 <!-- size-table:end -->
 
 - 默认不注册滚动监听（改用 IntersectionObserver），动画只走合成层属性（`transform`、`opacity`、`filter`、`clip-path`）。

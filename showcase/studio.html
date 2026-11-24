@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>协作部件、数据图表与趣味动效 · Motionary</title>
+  <style>
+    * {box-sizing:border-box}
+    :root {font-family:system-ui,sans-serif; color:#1b1b1a; background:#f1f0ec}
+    body {margin:0}
+    main,nav {width:min(1120px,calc(100% - 40px)); margin-inline:auto}
+    nav {display:flex; justify-content:space-between; align-items:center; gap:16px; padding:24px 0; border-bottom:1px solid #d6d4cc; flex-wrap:wrap}
+    a {color:#2c3a6b; text-underline-offset:.25em}
+    .intro {padding:clamp(42px,8vw,88px) 0 32px}
+    h1,h2,p {margin:0}
+    h1 {font:500 clamp(42px,7vw,88px)/1.05 Georgia,'Songti SC',serif; letter-spacing:-.04em}
+    h2 {font-size:1.1rem; font-weight:600; margin:48px 0 16px}
+    p {max-width:44em; line-height:1.65; color:#55544e}
+    .intro p {margin-top:20px}
+    .grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr)); gap:14px}
+    article {display:grid; align-content:space-between; gap:18px; min-height:220px; padding:24px; border-radius:22px; background:#fbfaf7; border:1px solid #e2e0d8; min-width:0}
+    article .stage {display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:center; min-height:120px; min-width:0}
+    article p {font-size:.85rem}
+    output.log {display:block; min-height:1.4em; font:12px ui-monospace,monospace; color:#6b6a62}
+    button:focus-visible,a:focus-visible {outline:2px solid #2c3a6b; outline-offset:4px}
+    .wide {grid-column:1/-1}
+    .stage.block {display:block}
+    .dark {min-height:240px; padding:40px; display:grid; place-items:center; text-align:center; color:#fff; background:#0b1020; border-radius:16px}
+    .dark h3 {margin:0; font:500 clamp(24px,4vw,40px)/1.1 Georgia,serif}
+    .nodes {display:flex; justify-content:space-between; align-items:center; gap:24px; padding:30px 10px}
+    .nodes b {display:grid; place-items:center; min-width:72px; min-height:52px; padding:8px 12px; border-radius:14px; background:#fff; border:1px solid #d6d4cc}
+    .pill {display:grid; place-items:center; width:42px; height:42px; border-radius:50%; background:#fff; border:1px solid #d6d4cc; font-size:12px; font-weight:600}
+    .core {display:grid; place-items:center; width:72px; height:72px; border-radius:50%; background:#2c3a6b; color:#fff; font-weight:700}
+    .big-link {font:500 clamp(26px,4vw,40px)/1.2 Georgia,serif; text-decoration:none}
+    pre {margin:0; padding:14px 16px; font:13px/1.5 ui-monospace,monospace; overflow:auto}
+    @media(max-width:430px) {main,nav {width:calc(100% - 28px)}}
+      .face {display:grid; place-items:center; min-height:150px; padding:20px; border-radius:16px; font:500 1.3rem Georgia,serif}
+    .face.a {background:#e7ebfb; color:#2c3a6b}
+    .face.b {background:#2c3a6b; color:#fff}
+    .seal {display:grid; place-items:center; width:46px; height:46px; border-radius:50%; background:#2c3a6b; color:#fff; font-size:1.3rem; text-decoration:none}
+    .tile {display:grid; place-items:center; min-height:56px; border-radius:12px; background:#fff; border:1px solid #d6d4cc; font-weight:600}
+    .press {font:800 clamp(40px,8vw,84px)/1 system-ui,sans-serif; letter-spacing:.02em; color:#2c3a6b}
+    .prize {display:grid; gap:4px; place-items:center}
+    .prize strong {font:600 2rem Georgia,serif; color:#2c3a6b}
+    .targets {display:flex; flex-wrap:wrap; gap:10px}
+    .targets span {padding:8px 14px; border-radius:999px; background:#fff; border:1px solid #d6d4cc}
+  </style>
+</head>
+<body>
+  <nav aria-label="页面导航"><a href="./">Motionary</a><span><a href="parts.html">文档部件与数据组件</a> · <a href="components.html">组件目录 ↗</a></span></nav>
+  <main id="top">
+    <header class="intro"><h1>协作部件、数据图表与趣味动效</h1><p>二十个新部件：七个协作与输入部件、五个数据图表、八个趣味动效。它们都在原生元素上增强，没有脚本时内容照常显示；开启“减少动态效果”后直接停在结果上。三百多套外观同样适用于它们。</p></header>
+
+    <h2 id="ui">协作与输入</h2>
+    <section class="grid" aria-label="协作与输入">
+      <article class="wide"><div class="stage block"><mo-tour label="新手导览" next-label="下一步" back-label="上一步" done-label="完成" skip-label="跳过" count-label="{n} / {total}"><button data-start>开始导览</button><div data-step data-target="#t-search" data-title="搜索">在这里找到任何组件。</div><div data-step data-target="#t-looks" data-title="外观">一键换上三百多套外观之一。</div><div data-step data-target="#t-copy" data-title="复制">复制代码，粘贴即可使用。</div></mo-tour><p class="targets" style="margin-top:14px"><span id="t-search">🔍 搜索</span><span id="t-looks">🎨 外观</span><span id="t-copy">📋 复制</span></p></div><p>页面变暗，只留目标高亮，卡片逐步讲解；Esc 结束，焦点回到原处。</p><output class="log" data-log="tour"></output></article>
+      <article><div class="stage block"><mo-signature-pad label="签名" name="signature" clear-label="清除" undo-label="撤销" type-label="或输入姓名" placeholder="在此签名"></mo-signature-pad></div><p>鼠标、笔或手指都能签；写得快笔画变细。也可以改为输入姓名。</p><output class="log" data-log="sign"></output></article>
+      <article><div class="stage"><mo-wheel-picker label="提醒时间"><select aria-label="小时"><option>06</option><option>07</option><option selected>08</option><option>09</option><option>10</option><option>11</option><option>12</option></select><select aria-label="分钟"><option>00</option><option>10</option><option selected>20</option><option>30</option><option>40</option><option>50</option></select></mo-wheel-picker></div><p>滚动后吸附到一行；方向键、Page Up / Down 也能调。下面的 select 始终同步。</p><output class="log" data-log="wheel"></output></article>
+      <article><div class="stage block"><mo-mention-input label="消息" people="林小雨,林子轩,王晨,张明,陈思" empty-label="没有匹配的人"><textarea rows="3" placeholder="输入 @林 试试" style="width:100%"></textarea></mo-mention-input></div><p>输入 @ 弹出人名；方向键选择，回车或 Tab 插入，Esc 关闭。</p><output class="log" data-log="mention"></output></article>
+      <article><div class="stage block"><mo-emoji-picker label="表情" search-label="搜索表情" recent-label="最近" empty-label="没有找到" for="#emoji-field"></mo-emoji-picker><input id="emoji-field" aria-label="插入表情的输入框" placeholder="选中的表情会出现在这里" style="width:100%; margin-top:10px"></div><p>搜索、分组切换，方向键在网格里移动；选中后插入到输入框。</p><output class="log" data-log="emoji"></output></article>
+      <article class="wide"><div class="stage block"><mo-comment-thread label="讨论" you="我" reply-label="回复" like-label="赞" send-label="发送" hide-label="收起回复" show-label="{n} 条回复" show-one-label="1 条回复" placeholder="写下回复…"><article data-author="林小雨" data-time="2 小时前" data-likes="6"><p>新的折线图上线了，十字线跟着键盘走很顺手。</p><article data-author="王晨" data-time="1 小时前" data-likes="2"><p>图例还能开关系列，太好了。</p></article><article data-author="张明" data-time="40 分钟前"><p>漏斗图下一版加上对比吧？</p></article></article><article data-author="陈思" data-time="昨天"><p>翻页书用来做产品手册正合适。</p></article></mo-comment-thread></div><p>嵌套 article 变成评论串：点赞会弹一下，回复表单滑出，回复可以折叠。不会发送到任何地方。</p><output class="log" data-log="thread"></output></article>
+      <article class="wide"><div class="stage block"><mo-diff-viewer label="代码差异" file="greet.js" unified-label="统一" split-label="并排" added-label="新增" removed-label="删除"><pre data-before>export function greet(name) {
+  const text = "Hi " + name;
+  console.log(text);
+  return text;
+}</pre><pre data-after>export function greet(name = "朋友") {
+  const text = `你好，${name}！`;
+  return text;
+}</pre></mo-diff-viewer></div><p>逐行比较，统一或并排显示；成对的修改行会标出具体改动的字符。</p><output class="log" data-log="diff"></output></article>
+    </section>
+
+    <h2 id="data">数据图表</h2>
+    <section class="grid" aria-label="数据图表">
+      <article class="wide"><div class="stage block"><mo-line-chart label="一周访问" values="320,410,380,520,610,580,720|120,160,150,210,260,240,300" labels="周一,周二,周三,周四,周五,周六,周日" series="访问,注册" unit="次"></mo-line-chart></div><p>折线画入；指针或方向键移动十字线，提示列出各系列的值；图例按钮开关系列。</p><output class="log" data-log="line"></output></article>
+      <article><div class="stage block"><mo-funnel-chart label="转化漏斗" values="5200,2600,1180,420" labels="访问,注册,试用,付费" unit="人" conversion-label="{p} 进入下一步"></mo-funnel-chart></div><p>各阶段从中间依次展开，阶段之间显示转化率。</p><output class="log" data-log="funnel"></output></article>
+      <article><div class="stage block"><mo-treemap label="收入构成" values="42,23,14,9,6,4,2" labels="网页,iOS,安卓,桌面,电视,手表,车载" unit="%"></mo-treemap></div><p>方块面积对应占比，从大到小缩放出现；方向键在方块间移动。</p><output class="log" data-log="tmap"></output></article>
+      <article class="wide"><div class="stage block"><mo-gantt label="发布计划" today="2026-03-12" today-label="今天" done-label="已完成"><ul><li data-start="2026-03-02" data-end="2026-03-06" data-progress="100">调研</li><li data-start="2026-03-07" data-end="2026-03-13" data-progress="70" data-after="1">设计</li><li data-start="2026-03-12" data-end="2026-03-24" data-progress="20" data-after="2">开发</li><li data-start="2026-03-23" data-end="2026-03-28" data-progress="0" data-after="3" data-color="#16a34a">发布</li></ul></mo-gantt></div><p>任务条从开始日期依次展开，带进度、依赖连线和今日标记。</p><output class="log" data-log="gantt"></output></article>
+      <article><div class="stage"><mo-waffle-chart label="设备占比" values="52,33,15" labels="手机,电脑,平板"></mo-waffle-chart></div><p>每格代表百分之一，沿波浪弹出；悬停图例高亮对应的格子。</p><output class="log" data-log="waffle"></output></article>
+    </section>
+
+    <h2 id="motion">趣味动效</h2>
+    <section class="grid" aria-label="趣味动效">
+      <article><div class="stage"><mo-split-flap words="BOARDING,ON TIME,DELAYED,GATE 12"></mo-split-flap></div><p>像机场出发牌一样逐字翻转，循环显示几组文字。</p><output class="log" data-log="flap"></output></article>
+      <article><div class="stage block"><mo-scratch-card label="刮开看看" reveal-label="直接揭晓"><div class="prize"><strong>八折</strong><span>优惠码 SPRING</span></div></mo-scratch-card></div><p>刮开涂层，刮够一半时其余部分自动落下；键盘用户可以直接揭晓。</p><output class="log" data-log="scratch"></output></article>
+      <article><div class="stage block"><mo-page-flip label="产品手册" prev-label="上一页" next-label="下一页" page-label="第 {n} 页，共 {total} 页"><section><h3>第一章</h3><p>一切从一帧开始。</p></section><section><h3>第二章</h3><p>然后，所有东西都动了起来。</p></section><section><h3>尾声</h3><p>谢谢阅读。</p></section></mo-page-flip></div><p>书页绕书脊翻动；拖动页角、滑动、方向键或按钮都能翻页。</p><output class="log" data-log="book"></output></article>
+      <article><div class="stage"><mo-circular-text text="向下滚动 · SCROLL DOWN" hover="reverse"><a class="seal" href="#data" aria-label="跳到数据图表">↓</a></mo-circular-text></div><p>文字沿圆环缓慢旋转，中间可以放链接；悬停时反转方向。</p></article>
+      <article><div class="stage block"><mo-pixel-transition><div class="face a">悬停我</div><div class="face b">你好 👋</div></mo-pixel-transition></div><p>像素随机闪现盖住卡片，翻到另一面后再散去；触屏轻点切换。</p><output class="log" data-log="pixel"></output></article>
+      <article><div class="stage block"><mo-magnet-lines rows="8" columns="12"><strong style="font:500 1.4rem Georgia,serif">把指针移进来</strong></mo-magnet-lines></div><p>短线像铁屑一样转向指针，移开后回到静止角度。</p></article>
+      <article><div class="stage"><mo-text-pressure class="press">MOTION</mo-text-pressure></div><p>指针靠近时字母变粗变高，鼓起的效果跟着指针沿文字移动。</p></article>
+      <article><div class="stage block"><mo-shuffle-grid columns="4" pause-label="暂停" play-label="播放"><span class="tile">JS</span><span class="tile">CSS</span><span class="tile">SVG</span><span class="tile">GL</span><span class="tile">TS</span><span class="tile">WASM</span><span class="tile">Vue</span><span class="tile">React</span></mo-shuffle-grid></div><p>方块每隔几秒交换位置并滑过去；阅读顺序保持不变，悬停或聚焦时暂停。</p><output class="log" data-log="shuffle"></output></article>
+    </section>
+  </main>
+  <script type="module">
+    import { defineMoAliases } from '../dist/components/mo.js';
+    import { defineTour } from '../dist/widgets/tour.js';
+    import { defineSignaturePad } from '../dist/widgets/signature-pad.js';
+    import { defineWheelPicker } from '../dist/widgets/wheel-picker.js';
+    import { defineMentionInput } from '../dist/widgets/mention-input.js';
+    import { defineEmojiPicker } from '../dist/widgets/emoji-picker.js';
+    import { defineCommentThread } from '../dist/widgets/comment-thread.js';
+    import { defineDiffViewer } from '../dist/widgets/diff-viewer.js';
+    import { defineLineChart } from '../dist/widgets/line-chart.js';
+    import { defineFunnelChart } from '../dist/widgets/funnel-chart.js';
+    import { defineTreemap } from '../dist/widgets/treemap.js';
+    import { defineGantt } from '../dist/widgets/gantt.js';
+    import { defineWaffleChart } from '../dist/widgets/waffle-chart.js';
+    import { defineSplitFlap } from '../dist/widgets/split-flap.js';
+    import { defineScratchCard } from '../dist/widgets/scratch-card.js';
+    import { definePageFlip } from '../dist/widgets/page-flip.js';
+    import { defineCircularText } from '../dist/widgets/circular-text.js';
+    import { definePixelTransition } from '../dist/widgets/pixel-transition.js';
+    import { defineMagnetLines } from '../dist/widgets/magnet-lines.js';
+    import { defineTextPressure } from '../dist/widgets/text-pressure.js';
+    import { defineShuffleGrid } from '../dist/widgets/shuffle-grid.js';
+    defineMoAliases();
+    for (const define of [defineTour, defineSignaturePad, defineWheelPicker, defineMentionInput, defineEmojiPicker, defineCommentThread, defineDiffViewer, defineLineChart, defineFunnelChart, defineTreemap, defineGantt, defineWaffleChart, defineSplitFlap, defineScratchCard, definePageFlip, defineCircularText, definePixelTransition, defineMagnetLines, defineTextPressure, defineShuffleGrid]) define();
+    const log = (name, text) => { const out = document.querySelector(`[data-log="${name}"]`); if (out) out.textContent = text; };
+    const on = (sel, type, fn) => document.querySelector(sel)?.addEventListener(`usa:${type}`, (e) => fn(e.detail));
+    on('mo-tour', 'step', (d) => log('tour', `step ${d.index + 1}`));
+    on('mo-tour', 'end', (d) => log('tour', d.completed ? 'done' : 'skipped'));
+    on('mo-signature-pad', 'change', (d) => log('sign', d.empty ? 'empty' : d.typed ? 'typed' : `${d.strokes} strokes`));
+    on('mo-wheel-picker', 'change', (d) => log('wheel', d.values.join(':')));
+    on('mo-mention-input', 'mention', (d) => log('mention', `@${d.name}`));
+    on('mo-emoji-picker', 'pick', (d) => log('emoji', `${d.emoji} ${d.name}`));
+    on('mo-comment-thread', 'like', (d) => log('thread', `like ${d.index + 1}: ${d.likes}`));
+    on('mo-comment-thread', 'reply', (d) => log('thread', `reply ${d.index + 1} (${d.text.length} chars)`));
+    on('mo-comment-thread', 'toggle', (d) => log('thread', `${d.open ? 'show' : 'hide'} ${d.index + 1}`));
+    on('mo-diff-viewer', 'mode', (d) => log('diff', `mode ${d.mode}`));
+    on('mo-line-chart', 'point', (d) => log('line', `point ${d.index + 1}`));
+    on('mo-line-chart', 'toggle', (d) => log('line', `series ${d.series + 1} ${d.visible ? 'on' : 'off'}`));
+    on('mo-funnel-chart', 'select', (d) => log('funnel', `stage ${d.index + 1}: ${d.value}`));
+    on('mo-treemap', 'select', (d) => log('tmap', `tile ${d.index + 1}: ${d.value}`));
+    on('mo-gantt', 'select', (d) => log('gantt', `task ${d.index + 1}`));
+    on('mo-waffle-chart', 'select', (d) => log('waffle', `${d.index + 1}: ${d.cells} cells`));
+    on('mo-split-flap', 'change', (d) => log('flap', d.value));
+    on('mo-scratch-card', 'reveal', (d) => log('scratch', `reveal by ${d.by}`));
+    on('mo-page-flip', 'change', (d) => log('book', `page ${d.index + 1}`));
+    on('mo-pixel-transition', 'change', (d) => log('pixel', d.flipped ? 'back' : 'front'));
+    on('mo-shuffle-grid', 'shuffle', (d) => log('shuffle', d.order.join(' ')));
+  </script>
+</body>
+</html>

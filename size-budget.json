@@ -3082,6 +3082,106 @@
     "limit": 0
   },
   {
+    "name": "import 'motionary/widgets/tour' (per-entry, fixed)",
+    "import": "import { defineTour } from 'pkg/widgets/tour'; console.log(defineTour);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/signature-pad' (per-entry, fixed)",
+    "import": "import { defineSignaturePad } from 'pkg/widgets/signature-pad'; console.log(defineSignaturePad);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/wheel-picker' (per-entry, fixed)",
+    "import": "import { defineWheelPicker } from 'pkg/widgets/wheel-picker'; console.log(defineWheelPicker);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/mention-input' (per-entry, fixed)",
+    "import": "import { defineMentionInput } from 'pkg/widgets/mention-input'; console.log(defineMentionInput);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/emoji-picker' (per-entry, fixed)",
+    "import": "import { defineEmojiPicker } from 'pkg/widgets/emoji-picker'; console.log(defineEmojiPicker);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/comment-thread' (per-entry, fixed)",
+    "import": "import { defineCommentThread } from 'pkg/widgets/comment-thread'; console.log(defineCommentThread);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/diff-viewer' (per-entry, fixed)",
+    "import": "import { defineDiffViewer } from 'pkg/widgets/diff-viewer'; console.log(defineDiffViewer);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/line-chart' (per-entry, fixed)",
+    "import": "import { defineLineChart } from 'pkg/widgets/line-chart'; console.log(defineLineChart);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/funnel-chart' (per-entry, fixed)",
+    "import": "import { defineFunnelChart } from 'pkg/widgets/funnel-chart'; console.log(defineFunnelChart);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/treemap' (per-entry, fixed)",
+    "import": "import { defineTreemap } from 'pkg/widgets/treemap'; console.log(defineTreemap);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/gantt' (per-entry, fixed)",
+    "import": "import { defineGantt } from 'pkg/widgets/gantt'; console.log(defineGantt);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/waffle-chart' (per-entry, fixed)",
+    "import": "import { defineWaffleChart } from 'pkg/widgets/waffle-chart'; console.log(defineWaffleChart);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/split-flap' (per-entry, fixed)",
+    "import": "import { defineSplitFlap } from 'pkg/widgets/split-flap'; console.log(defineSplitFlap);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/scratch-card' (per-entry, fixed)",
+    "import": "import { defineScratchCard } from 'pkg/widgets/scratch-card'; console.log(defineScratchCard);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/page-flip' (per-entry, fixed)",
+    "import": "import { definePageFlip } from 'pkg/widgets/page-flip'; console.log(definePageFlip);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/circular-text' (per-entry, fixed)",
+    "import": "import { defineCircularText } from 'pkg/widgets/circular-text'; console.log(defineCircularText);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/pixel-transition' (per-entry, fixed)",
+    "import": "import { definePixelTransition } from 'pkg/widgets/pixel-transition'; console.log(definePixelTransition);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/magnet-lines' (per-entry, fixed)",
+    "import": "import { defineMagnetLines } from 'pkg/widgets/magnet-lines'; console.log(defineMagnetLines);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/text-pressure' (per-entry, fixed)",
+    "import": "import { defineTextPressure } from 'pkg/widgets/text-pressure'; console.log(defineTextPressure);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/shuffle-grid' (per-entry, fixed)",
+    "import": "import { defineShuffleGrid } from 'pkg/widgets/shuffle-grid'; console.log(defineShuffleGrid);",
+    "limit": 0
+  },
+  {
     "name": "import 'motionary/effects/iris-reveal' (per-entry, fixed)",
     "import": "import { registerIrisReveal } from 'pkg/effects/iris-reveal'; console.log(registerIrisReveal);",
     "limit": 0

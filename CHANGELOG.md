@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Added seven collaboration and input widgets: `mo-tour` (a guided product tour with a dimmed cut-out), `mo-signature-pad` (smoothed ink with undo and a typed fallback), `mo-wheel-picker` (phone-style wheels over native selects), `mo-mention-input` (@-mentions), `mo-emoji-picker`, `mo-comment-thread` and `mo-diff-viewer` (unified or split, with changed characters marked).
+- Added five data charts: `mo-line-chart` (crosshair, tooltip and series toggles), `mo-funnel-chart`, `mo-treemap` (squarified), `mo-gantt` (progress, dependencies and a today marker) and `mo-waffle-chart`.
+- Added eight playful motion pieces: `mo-split-flap`, `mo-scratch-card`, `mo-page-flip`, `mo-circular-text`, `mo-pixel-transition`, `mo-magnet-lines`, `mo-text-pressure` and `mo-shuffle-grid`.
+- All twenty register under `defineWidgets('17.13')`, keep their content usable without JavaScript, stand still under reduced motion and take the 324 looks through the `--mo-kit-*` tokens. Details in docs/studio-17-13.md; demo page at showcase/studio.html. The home page Collections section opens on a new 17.13 tab.
+
 - Added six UI parts: `mo-progress-tabs` (tabs that advance with a progress bar), `mo-code-tabs` (install snippets per package manager, synced by `group`, with copy), `mo-helpful-vote`, `mo-share-button`, `mo-inline-edit` and `mo-tag-cloud`.
 - Added six data and interaction widgets: `mo-heatmap` (an activity grid you can walk with arrow keys), `mo-donut-chart`, `mo-sortable-list` (drag or Space and arrows), `mo-zoom-lens`, `mo-rating-bars` and `mo-checklist` (onboarding steps with a progress ring).
 - Added six motion surfaces: `mo-meteors`, `mo-connect-beam`, `mo-retro-grid`, `mo-orbit-rings`, `mo-letter-swap` and `mo-ripple-grid`.
