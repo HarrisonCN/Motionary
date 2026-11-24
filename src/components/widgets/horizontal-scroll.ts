@@ -1,4 +1,4 @@
-import { defineElement, type UsaElement } from '../base';
+import { caf, defineElement, raf, type UsaElement } from '../base';
 import { defineMoName } from './mo-name';
 import { make } from './moments';
 import { ownChildren } from './kit';
@@ -67,7 +67,7 @@ export function defineHorizontalScroll(tag = 'usa-horizontal-scroll'): CustomEle
         const index = Math.round(p * Math.max(0, panels.length - 1));
         if (index !== this._index) { this._index = index; this.emit('change', { index }); }
       };
-      const queue = () => { if (!pending) pending = requestAnimationFrame(update); };
+      const queue = () => { if (!pending) pending = raf(update); };
       this.listen(window, 'scroll', queue, { passive: true });
       this.listen(window, 'resize', layout, { passive: true });
       // keyboard users: bring the focused panel into the pinned frame by scrolling the page to its position
@@ -87,7 +87,7 @@ export function defineHorizontalScroll(tag = 'usa-horizontal-scroll'): CustomEle
         this.onCleanup(() => ro.disconnect());
       }
       this.onCleanup(() => {
-        if (pending) cancelAnimationFrame(pending);
+        if (pending) caf(pending);
         this.append(...kids);
         root.remove();
         this._index = 0;

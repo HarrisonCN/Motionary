@@ -1,4 +1,4 @@
-import { defineElement, type UsaElement } from '../base';
+import { caf, defineElement, raf, type UsaElement } from '../base';
 import { defineMoName } from './mo-name';
 import { make } from './moments';
 import css from './ui-blocks.css?raw';
@@ -92,10 +92,10 @@ export function defineScrollspy(tag = 'usa-scrollspy'): CustomElementConstructor
         if (end) for (let i = sections.length - 1; i >= 0; i--) if (sections[i]) { index = i; break; }
         setCurrent(index);
       };
-      const queue = () => { if (!pending) pending = requestAnimationFrame(update); };
+      const queue = () => { if (!pending) pending = raf(update); };
       this.listen(window, 'scroll', queue, { passive: true });
       this.listen(window, 'resize', queue, { passive: true });
-      this.onCleanup(() => pending && cancelAnimationFrame(pending));
+      this.onCleanup(() => pending && caf(pending));
       this.listen(list, 'click', (e: MouseEvent) => {
         const a = (e.target as Element).closest?.('a') as HTMLAnchorElement | null;
         const index = a ? links.indexOf(a) : -1;

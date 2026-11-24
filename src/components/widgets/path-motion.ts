@@ -1,4 +1,4 @@
-import { defineElement, now, onFrame, type UsaElement } from '../base';
+import { caf, defineElement, now, onFrame, raf, type UsaElement } from '../base';
 import { defineMoName } from './mo-name';
 import { make } from './moments';
 import { easeOut, ownChildren } from './kit';
@@ -107,10 +107,10 @@ export function definePathMotion(tag = 'usa-path-motion'): CustomElementConstruc
           const r = root.getBoundingClientRect(), vh = window.innerHeight;
           paint(Math.min(1, Math.max(0, (vh - r.top) / (vh + r.height))) * end);
         };
-        const queue = () => { if (!pending) pending = requestAnimationFrame(update); };
+        const queue = () => { if (!pending) pending = raf(update); };
         this.listen(window, 'scroll', queue, { passive: true });
         this.listen(window, 'resize', queue, { passive: true });
-        this.onCleanup(() => pending && cancelAnimationFrame(pending));
+        this.onCleanup(() => pending && caf(pending));
         update();
       } else {
         let t0 = 0, from = 0, paused = false, visible = false;

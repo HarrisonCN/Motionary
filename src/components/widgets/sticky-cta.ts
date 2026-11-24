@@ -1,4 +1,4 @@
-import { defineElement, type UsaElement } from '../base';
+import { caf, defineElement, raf, type UsaElement } from '../base';
 import { defineMoName } from './mo-name';
 import { make } from './moments';
 import { ownChildren } from './kit';
@@ -64,8 +64,8 @@ export function defineStickyCta(tag = 'usa-sticky-cta'): CustomElementConstructo
         const offset = Math.max(0, this.num('offset', 320));
         let pending = 0;
         const check = () => { pending = 0; set(window.scrollY > offset); };
-        this.listen(window, 'scroll', () => { if (!pending) pending = requestAnimationFrame(check); }, { passive: true });
-        this.onCleanup(() => pending && cancelAnimationFrame(pending));
+        this.listen(window, 'scroll', () => { if (!pending) pending = raf(check); }, { passive: true });
+        this.onCleanup(() => pending && caf(pending));
         check();
       }
       this.onCleanup(() => {
