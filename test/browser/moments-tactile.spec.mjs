@@ -89,7 +89,7 @@ test('17.9 UI moments respond by keyboard and pointer without page errors', asyn
   await expect(accord).toHaveAttribute('aria-expanded', 'true');
   await expect(page.locator('mo-elastic-accordion .usa-accord-body')).toBeVisible();
 
-  await page.locator('mo-squish-indicator').getByText('C', { exact: true }).click();
+  await page.locator('mo-squish-indicator .usa-pick-key').nth(2).click();
   await expect.poll(() => page.locator('mo-squish-indicator').evaluate((el) => el.value)).toBe('C');
 
   await page.screenshot({ path: info.outputPath('moments-ui.png'), fullPage: true });
