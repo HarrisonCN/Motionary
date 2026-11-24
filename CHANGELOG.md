@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Moments & Tactile
+## [17.9.0] - 2026-11-24 — Moments & Tactile
 
 - Added six micro-interaction widgets: `mo-eclipse-toggle`, `mo-hue-orbit`, `mo-notch-slider`, `mo-bulge-volume`, `mo-copy-button` and `mo-tile-relay`. Each sits on a native switch button, radio group, range input or button, and stands still under reduced motion.
 - Added four tactile controls on a shared press spring: `mo-squish-key`, `mo-squish-stepper` (hold to repeat), `mo-analog-stick` (rubber-band pull, arrow keys, dead zone) and `mo-transfer-button` (progress ring driven by the page). `defineWidgets('17.9')` registers all ten.
