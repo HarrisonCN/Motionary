@@ -40,7 +40,7 @@ Motionary 让内容在滚入视口时自然登场，并提供 <!--fact:public-->
 | **核心组件** | `motionary/components` 中的 <!--fact:core-->91<!--/fact--> 个元素，按分类导入：文字、按钮、卡片、背景、过渡、手势、SVG、WebGL 等 | [组件](#组件) |
 | **小部件** | <!--fact:widgets-->287<!--/fact--> 个元素，每个都有独立入口 `motionary/widgets/<name>`：页面区块、界面部件、表单、数据与媒体、纵深动效、加载动画、触感控件、实时动态卡片、3D 仪器 | [主题合集](#主题合集) |
 | **效果** | <!--fact:effects-->159<!--/fact--> 个效果，每个都有独立入口 `motionary/effects/<name>`，也可以通过 `<mo-fx>` 加到任意元素上 | [动画商店](https://harrisoncn.github.io/Motionary/showcase/) |
-| **风格变体与样式预设** | 六种内置风格变体（`minimal`、`neon`、`glass`、`brutalist`、`fluent`、`material`），通过共享的设计令牌切换；另有 17.11 小部件专用的 324 种样式预设：12 套配色 × 9 种效果 × 3 类 | [风格变体](#风格变体) · [样式预设](#样式预设) |
+| **风格变体与样式预设** | 六种内置风格变体（`minimal`、`neon`、`glass`、`brutalist`、`fluent`、`material`），通过共享的设计令牌切换；另有小部件专用的 1020 种样式预设：20 套配色 × 17 种效果 × 3 类 | [风格变体](#风格变体) · [样式预设](#样式预设) |
 | **Motion Core 与运行时** | `motionary/core` 的 `createMotion()`（约 2.5 KB gzip），以及 `motionary/runtime` 和分为三级的 <!--fact:runtimeModules-->21<!--/fact--> 个模块：滚动场景、平滑滚动、文字拆分、SVG、精灵图、GIF / APNG / WebP、Lottie、WebGL2、glTF / OBJ、2D 物理 | [运行时](#运行时与分级) |
 | **框架** | `motionary/react`、`motionary/vue`、`motionary/svelte`、`motionary/solid`、`motionary/angular`，以及元素封装。在服务端导入不会产生任何副作用 | [框架](#框架) |
 | **AI 工作流** | 每个演练场都有“复制为 AI 提示词”，另有 Agent Skill、只读 MCP 服务器和本地的文字转动效解析器 | [AI 工作流](#ai-工作流) |
@@ -193,7 +193,7 @@ export class Settings { on = false; onChange = (e: Event) => (this.on = usaDetai
 | [时间线编辑器](https://harrisoncn.github.io/Motionary/showcase/playground.html) | 可视化关键帧编辑器，导出给 `<mo-player>` 用的 JSON |
 | [滚动叙事](https://harrisoncn.github.io/Motionary/showcase/story.html) | `<mo-story>` 滚动叙事模板 |
 | [风格对照](https://harrisoncn.github.io/Motionary/showcase/styles.html) | 同一个组件的六种风格变体，每种都有自己的复制按钮 |
-| [样式预设](https://harrisoncn.github.io/Motionary/showcase/looks.html) | 全部 324 种样式预设，点一种，页面上的真实组件就换上它 |
+| [样式预设](https://harrisoncn.github.io/Motionary/showcase/looks.html) | 全部 1020 种样式预设，点一种，页面上的真实组件就换上它 |
 | [跨平台预览](https://harrisoncn.github.io/Motionary/showcase/xplat.html) | 同一个预设分别在 Web、小程序和鸿蒙 ArkUI 中的效果 |
 | [demo/index.html](./demo/index.html) | 全部预设，无需构建（本地直接打开） |
 
@@ -250,9 +250,9 @@ export class Settings { on = false; onChange = (e: Event) => (this.on = usaDetai
 
 | 合集 | 内容 | 实验页 · 文档 |
 |---|---|---|
-| 工作室：协作、图表与趣味动效（17.13） | 20 个小部件：协作与输入（产品导览、签名板、滚轮选择器、@提及输入框、表情选择器、评论串、代码差异）、数据图表（折线图、漏斗图、矩形树图、甘特图、华夫图）和趣味动效（翻牌显示屏、刮刮卡、翻页书、环形文字、像素切换、磁力线、文字压感、洗牌网格）。可用 324 种样式预设 | [实验页](https://harrisoncn.github.io/Motionary/showcase/studio.html) · [文档](./docs/studio-17-13.md) |
+| 工作室：协作、图表与趣味动效（17.13） | 20 个小部件：协作与输入（产品导览、签名板、滚轮选择器、@提及输入框、表情选择器、评论串、代码差异）、数据图表（折线图、漏斗图、矩形树图、甘特图、华夫图）和趣味动效（翻牌显示屏、刮刮卡、翻页书、环形文字、像素切换、磁力线、文字压感、洗牌网格）。可用 1020 种样式预设 | [实验页](https://harrisoncn.github.io/Motionary/showcase/studio.html) · [文档](./docs/studio-17-13.md) |
 | 部件与首页合集（17.12） | 18 个小部件：界面部件（进度标签页、代码标签页、有用投票、分享按钮、行内编辑、标签云）、数据与交互（热力图、环形图、可排序列表、放大镜、评分条、待办清单）和动效（流星、连接光束、复古网格、环绕轨道、字母翻转、波纹网格） | [实验页](https://harrisoncn.github.io/Motionary/showcase/parts.html) · [文档](./docs/parts-17-12.md) |
-| 页面块、组件与纵深动效（17.11） | 20 个小部件：页面区块（搜索栏、订阅框、下载按钮、揭示式页脚、形状分隔线）、界面部件（虚拟列表、无限滚动、右键菜单、分栏、桌面窗口、变形卡片）和纵深动效（滚动缩放、图片隧道、环绕画廊、边框光束）。可配合 [324 种样式预设](#样式预设) | [实验页](https://harrisoncn.github.io/Motionary/showcase/blocks.html) · [文档](./docs/blocks-17-11.md) |
+| 页面块、组件与纵深动效（17.11） | 20 个小部件：页面区块（搜索栏、订阅框、下载按钮、揭示式页脚、形状分隔线）、界面部件（虚拟列表、无限滚动、右键菜单、分栏、桌面窗口、变形卡片）和纵深动效（滚动缩放、图片隧道、环绕画廊、边框光束）。可配合 [1020 种样式预设](#样式预设) | [实验页](https://harrisoncn.github.io/Motionary/showcase/blocks.html) · [文档](./docs/blocks-17-11.md) |
 | 界面、组件与动效（17.10） | 21 个小部件：页面区块（侧边栏、目录跟随、价格表、便当格布局、吸底按钮）、数据与媒体（灯箱、数据表、JSON 查看器、热点图）和动效界面（横向滚动、图片拖尾、液态玻璃、路径动画） | [实验页](https://harrisoncn.github.io/Motionary/showcase/kit.html) · [文档](./docs/kit-17-10.md) |
 | 微交互与触感（17.9） | 34 个小部件：微交互、Q 弹的触感控件、纯 CSS 加载动画、表单细节（标签输入、套餐选择、弹性滑块、密码强度） | [实验页](https://harrisoncn.github.io/Motionary/showcase/moments.html) · [文档](./docs/moments-tactile.md) |
 | 空间仪器（17.8） | 3 个可拖动探索的 3D 卡片和 3 个效果，基于可选的 Three.js 渲染器 | [实验页](https://harrisoncn.github.io/Motionary/showcase/instruments.html) · [文档](./docs/runtime/spatial-instruments.md) |
@@ -276,7 +276,7 @@ setVariant('glass'); // minimal · neon · glass · brutalist · fluent · mater
 
 ### 样式预设
 
-17.11 的小部件另有 324 种现成的样式预设：12 套配色 × 9 种效果，分界面、组件、动效三类，每类 108 种。效果改的不只是颜色，还有边框、圆角、阴影、发光、毛玻璃、字体、图片滤镜、相框和循环速度；每种预设的文字对比度都达到 WCAG AA。预设只设置 `--mo-kit-*` 令牌，所以任何读取这些令牌的小部件都能用任意一种。
+小部件另有 1020 种现成的样式预设：20 套配色 × 17 种效果，分界面、组件、动效三类，每类 340 种（17.14 新增 8 套配色，每类新增 8 种效果）。效果改的不只是颜色，还有边框、圆角、阴影、发光、毛玻璃、字体、图片滤镜、相框和循环速度；每种预设的文字对比度都达到 WCAG AA。预设只设置 `--mo-kit-*` 令牌，所以任何读取这些令牌的小部件都能用任意一种。
 
 ```js
 import { adoptLooks, applyLook } from 'motionary/components/widgets';

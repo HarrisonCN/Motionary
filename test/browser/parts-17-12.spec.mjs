@@ -122,7 +122,7 @@ test('the home page shows the release pages as live collections', async ({ page 
   await expect(section.locator('.col-panel:not([hidden]) mo-search-bar')).toHaveAttribute('shortcut', 'none');
 
   await tabs.nth(3).click();
-  await expect(section.locator('.col-panel:not([hidden]) .col-look')).toHaveCount(8, { timeout: 15000 });
+  await expect(section.locator('.col-panel:not([hidden]) .col-look')).toHaveCount(16, { timeout: 15000 });
 
   await page.locator('#lang-toggle').click();
   await expect(tabs.first()).toContainText('17.13 新品');

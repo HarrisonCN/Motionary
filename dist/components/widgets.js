@@ -394,18 +394,21 @@ export { v as viewportHeight, w as watchViewport } from '../chunks/viewport-BAXH
  * 17.11 looks: ready-made styles for the 17.11 widgets (and every other widget that reads the kit tokens).
  *
  * A look is a palette (its colors) combined with a treatment (its surfaces and effects: borders, shadows, glow,
- * frosted glass, type, picture filters, loop speed). Three families of nine treatments each, over twelve palettes,
- * give 108 looks per family:
+ * frosted glass, type, picture filters, loop speed). Three families of seventeen treatments each, over twenty palettes,
+ * give 340 looks per family (17.11 shipped nine treatments over twelve palettes; 17.14 added eight of each):
  *
- * - `ui` for page blocks: solid, outline, soft, glass, neon, brutal, paper, gradient, terminal
- * - `parts` for interface parts: flat, elevated, outlined, frosted, cyber, blocky, pastel, window, console
- * - `motion` for motion and depth: vivid, noir, sepia, duotone, glow, polaroid, film, blueprint, holo
+ * - `ui` for page blocks: solid, outline, soft, glass, neon, brutal, paper, gradient, terminal, clay, neumorph, retro,
+ *   pill, editorial, sketch, luxe, synth
+ * - `parts` for interface parts: flat, elevated, outlined, frosted, cyber, blocky, pastel, window, console, tonal,
+ *   acrylic, cupertino, compact, skeuo, inset, hairline, dusk
+ * - `motion` for motion and depth: vivid, noir, sepia, duotone, glow, polaroid, film, blueprint, holo, charcoal,
+ *   infrared, blockbuster, dreamy, matte, thermal, nightvision, comic
  *
  * Put `look="neon-ocean"` (or `data-mo-look="neon-ocean"`) on a widget or any ancestor after `adoptLooks()`, or call
  * `applyLook(el, 'neon-ocean')`, which adopts just that one rule. A look only sets `--mo-kit-*` tokens, the text color
  * and sometimes the font family, so any token can still be overridden next to it. See docs/looks-17-11.md.
  */
-/** Palette: ink, paper, accent, second accent. The last two palettes are dark. */
+/** Palette: ink, paper, accent, second accent. `DARK_PALETTES` lists the dark ones. */
 const LOOK_PALETTES = {
     indigo: ['#18181b', '#ffffff', '#4f46e5', '#a855f7'],
     ocean: ['#0c2a3e', '#f0f9ff', '#0369a1', '#22d3ee'],
@@ -419,7 +422,18 @@ const LOOK_PALETTES = {
     coral: ['#3a1410', '#fff5f2', '#c43d1c', '#ffb703'],
     midnight: ['#e2e8f0', '#0b1020', '#818cf8', '#22d3ee'],
     ember: ['#fef3c7', '#1c1210', '#fb923c', '#f87171'],
+    // 17.14
+    cherry: ['#3b0a0f', '#fff5f5', '#b91c1c', '#fca5a5'],
+    olive: ['#1f2410', '#f9faf1', '#4d6b0f', '#bef264'],
+    cobalt: ['#0b1640', '#f3f6ff', '#1d4ed8', '#60a5fa'],
+    plum: ['#2b0b2a', '#fdf4fb', '#a21caf', '#f0abfc'],
+    sand: ['#2b2418', '#fbf8f1', '#8a5a1f', '#e7c98b'],
+    teal: ['#042f2e', '#effcfa', '#0e7490', '#5eead4'],
+    aurora: ['#e0f2fe', '#06121f', '#a78bfa', '#34d399'],
+    velvet: ['#fce7f3', '#1a0b16', '#f472b6', '#fbbf24'],
 };
+/** The palettes with a dark paper. */
+const DARK_PALETTES = ['midnight', 'ember', 'aurora', 'velvet'];
 /* ---------- color math (hex in, hex or rgb() out) ---------- */
 const rgbOf = (hex) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
 const hexOf = (c) => '#' + c.map((v) => Math.round(Math.max(0, Math.min(255, v))).toString(16).padStart(2, '0')).join('');
@@ -491,6 +505,40 @@ const LOOK_TREATMENTS = {
             const d = darkSet(p, '#070908', p.accent, 0.06, mixHex(p.a2, 0.25, '#e8f5e9'));
             return { ...d, soft: mixHex(p.a2, 0.08, d.paper), line: alpha(p.a2, 0.4), radius: '4px', shadow: NONE, glow: `0 0 0 1px ${alpha(p.a2, 0.25)}`, font: MONO };
         },
+        // 17.14
+        clay: (p) => {
+            const l = lightSet(p, mixHex(p.a2, 0.16, '#fbfaf8'));
+            return { ...l, soft: mixHex(p.a2, 0.26, '#ffffff'), line: 'transparent', radius: '26px', shadow: `0 16px 28px -14px ${alpha(l.accent, 0.45)}, inset 0 -6px 12px ${alpha(l.accent, 0.12)}, inset 0 6px 10px rgb(255 255 255 / .7)`, cta: l.accent, onCta: '#ffffff' };
+        },
+        neumorph: (p) => {
+            const base = p.dark ? mixHex(p.accent, 0.06, '#1b1d24') : mixHex(p.accent, 0.05, '#e9ecf2');
+            const ink = p.dark ? '#e8eaf0' : p.ink;
+            const accent = p.dark ? mixHex(p.accent, 0.8, '#ffffff') : mixHex(p.accent, 0.85, '#000000');
+            return { dark: p.dark, paper: base, bg: base, ink, accent, onAccent: p.dark ? base : '#ffffff', soft: base, line: 'transparent', radius: '20px', shadow: p.dark ? '8px 8px 18px rgb(0 0 0 / .55), -6px -6px 14px rgb(255 255 255 / .05)' : '8px 8px 18px rgb(0 0 0 / .14), -8px -8px 18px rgb(255 255 255 / .9)', cta: accent, onCta: p.dark ? base : '#ffffff' };
+        },
+        retro: (p) => {
+            const l = lightSet(p, '#c9c9c4');
+            return { ...l, ink: '#111111', soft: '#dcdcd8', line: '#7a7a74', bw: '2px', bs: 'outset', radius: '0px', shadow: '1px 1px 0 #111111', accent: mixHex(l.accent, 0.7, '#000000'), cta: '#000080', onCta: '#ffffff', font: 'Tahoma, Verdana, "MS Sans Serif", sans-serif' };
+        },
+        pill: (p) => ({ radius: '999px', bw: '1.5px', line: alpha(p.accent, 0.45), soft: mixHex(p.accent, 0.1, p.paper), shadow: `0 6px 16px -10px ${alpha(p.accent, 0.7)}`, cta: p.accent, onCta: p.on }),
+        editorial: (p) => {
+            const l = lightSet(p, '#fffffb');
+            return { ...l, ink: '#111111', soft: '#f3f2ec', line: '#111111', bw: '1px', radius: '0px', shadow: NONE, cta: '#111111', onCta: '#fffffb', font: '"Playfair Display", Didot, "Bodoni MT", Georgia, serif' };
+        },
+        sketch: (p) => {
+            const l = lightSet(p, '#fdfcf7');
+            return { ...l, soft: mixHex(p.a2, 0.14, '#fdfcf7'), line: l.ink, bw: '2px', bs: 'solid', radius: '255px 15px 225px 15px / 15px 225px 15px 255px', shadow: `2px 3px 0 ${alpha(l.ink, 0.85)}`, cta: l.accent, onCta: '#ffffff', font: '"Comic Neue", "Comic Sans MS", "Chalkboard SE", "Marker Felt", cursive' };
+        },
+        luxe: (p) => {
+            const d = darkSet(p, '#0d0b08', p.accent, 0.05, '#f3ead6');
+            const gold = mixHex(p.a2, 0.25, '#d9b45a');
+            return { ...d, accent: gold, onAccent: d.paper, cta: gold, onCta: d.paper, soft: mixHex(gold, 0.08, d.paper), line: alpha(gold, 0.5), radius: '2px', shadow: '0 24px 50px -26px rgb(0 0 0 / .9)', glow: `0 0 0 1px ${alpha(gold, 0.3)}`, font: '"Cormorant Garamond", "Didot", Georgia, serif' };
+        },
+        synth: (p) => {
+            const d = darkSet(p, '#12052a', p.accent, 0.12, '#fbe7ff');
+            const pink = mixHex(p.a2, 0.35, '#ff4fd8');
+            return { ...d, accent: pink, onAccent: d.paper, cta: `linear-gradient(90deg, ${pink}, ${mixHex(p.a2, 0.4, '#38e1ff')})`, onCta: d.paper, soft: mixHex(pink, 0.1, d.paper), line: alpha(pink, 0.55), radius: '10px', shadow: NONE, glow: `0 0 20px ${alpha(pink, 0.5)}, 0 0 2px ${alpha('#38e1ff', 0.8)}` };
+        },
     },
     parts: {
         flat: (p) => ({ shadow: NONE, line: alpha(p.ink, 0.1), soft: mixHex(p.ink, 0.05, p.paper), radius: '10px', cta: p.accent, onCta: p.on }),
@@ -527,6 +575,39 @@ const LOOK_TREATMENTS = {
             const d = darkSet(p, '#101216', p.accent, 0.05, '#e5e7eb');
             return { ...d, soft: mixHex('#ffffff', 0.06, d.paper), line: 'rgb(255 255 255 / .12)', radius: '8px', shadow: '0 20px 40px -24px rgb(0 0 0 / .8)', font: MONO };
         },
+        // 17.14
+        tonal: (p) => ({ soft: mixHex(p.accent, 0.14, p.paper), line: 'transparent', radius: '16px', shadow: NONE, cta: p.accent, onCta: p.on }),
+        acrylic: (p) => ({
+            bg: mixHex(p.a2, p.dark ? 0.22 : 0.45, p.paper),
+            paper: alpha(p.paper, 0.72),
+            soft: alpha(mixHex(p.accent, 0.1, p.paper), 0.6),
+            line: p.dark ? 'rgb(255 255 255 / .1)' : 'rgb(0 0 0 / .08)',
+            backdrop: 'blur(30px) saturate(1.25) brightness(1.05)',
+            radius: '8px',
+            shadow: '0 8px 16px rgb(0 0 0 / .14)',
+            cta: p.accent,
+            onCta: p.on,
+            font: '"Segoe UI Variable", "Segoe UI", system-ui, sans-serif',
+        }),
+        cupertino: (p) => ({ radius: '13px', bw: '.5px', line: alpha(p.ink, 0.18), soft: mixHex(p.ink, 0.04, p.paper), shadow: '0 1px 2px rgb(0 0 0 / .08), 0 8px 24px -12px rgb(0 0 0 / .2)', cta: p.accent, onCta: p.on, font: '-apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif' }),
+        compact: (p) => ({ radius: '4px', bw: '1px', line: alpha(p.ink, 0.2), soft: mixHex(p.ink, 0.03, p.paper), shadow: NONE, cta: p.ink, onCta: p.paper, font: 'Inter, "Helvetica Neue", Arial, sans-serif' }),
+        skeuo: (p) => ({
+            radius: '10px',
+            bw: '1px',
+            line: alpha(p.ink, 0.28),
+            soft: mixHex(p.ink, 0.06, p.paper),
+            shadow: `inset 0 1px 0 rgb(255 255 255 / ${p.dark ? 0.12 : 0.8}), 0 1px 2px rgb(0 0 0 / .3), 0 6px 14px -6px rgb(0 0 0 / .35)`,
+            cta: `linear-gradient(${mixHex(p.accent, 0.82, '#ffffff')}, ${mixHex(p.accent, 0.85, '#000000')})`,
+            onCta: '#ffffff',
+        }),
+        inset: (p) => ({ radius: '12px', line: 'transparent', soft: mixHex(p.ink, 0.07, p.paper), shadow: `inset 0 2px 6px ${alpha('#000000', p.dark ? 0.6 : 0.16)}, inset 0 0 0 1px ${alpha(p.ink, 0.08)}`, cta: p.accent, onCta: p.on }),
+        hairline: (p) => ({ radius: '0px', bw: '1px', line: alpha(p.ink, 0.32), soft: p.paper, shadow: NONE, cta: 'transparent', onCta: p.ink, dash: '1 3', glow: `0 0 0 1px ${alpha(p.accent, 0.18)}` }),
+        dusk: (p) => {
+            const d = darkSet(p, '#141826', p.accent, 0.1, '#e6e9f5');
+            // the second accent lifted toward white, so accent text stays readable on the slate
+            const lit = mixHex(p.a2, 0.55, '#ffffff');
+            return { ...d, accent: lit, cta: lit, soft: mixHex('#ffffff', 0.07, d.paper), line: 'rgb(255 255 255 / .1)', radius: '14px', shadow: '0 18px 36px -20px rgb(0 0 0 / .9)', glow: `0 1px 0 ${alpha(p.a2, 0.4)} inset` };
+        },
     },
     motion: {
         vivid: (p) => ({ mediaFilter: 'saturate(1.35) contrast(1.06)', speed: '1.25', glow: `0 0 24px ${alpha(p.accent, 0.35)}` }),
@@ -559,6 +640,27 @@ const LOOK_TREATMENTS = {
             return { dark: true, paper, bg: paper, ink: '#e8f1ff', accent: '#e8f1ff', onAccent: paper, line: 'rgb(255 255 255 / .4)', bs: 'dashed', dash: '6 5', mediaFilter: 'grayscale(1) brightness(1.15) contrast(.95)', mediaRadius: '4px', frame: mixHex(p.accent, 0.3, '#0f2550'), beamA: '#e8f1ff', beamB: p.a2 };
         },
         holo: (p) => ({ mediaFilter: 'saturate(1.6) hue-rotate(18deg) contrast(1.05)', glow: `0 0 26px ${alpha(p.a2, 0.45)}`, beamA: p.a2, beamB: p.accent, speed: '1.5', mediaRadius: '22px' }),
+        // 17.14
+        charcoal: (p) => {
+            const paper = '#f2f1ee';
+            return { ...lightSet(p, paper), ink: '#1a1a1a', accent: '#1a1a1a', onAccent: paper, mediaFilter: 'grayscale(1) contrast(1.75) brightness(1.05)', mediaRadius: '0px', frame: '#fafaf8', beamA: '#1a1a1a', beamB: '#9ca3af', speed: '.85' };
+        },
+        infrared: (p) => ({ mediaFilter: 'invert(1) hue-rotate(180deg) saturate(1.8) contrast(1.1)', glow: `0 0 22px ${alpha('#ff3b6b', 0.4)}`, beamA: '#ff3b6b', beamB: p.a2, speed: '1.1' }),
+        blockbuster: (p) => {
+            const paper = mixHex(p.accent, 0.08, '#0d1416');
+            return { dark: true, paper, bg: paper, ink: '#f1ede6', accent: '#ffb35c', onAccent: paper, mediaFilter: 'contrast(1.15) saturate(1.25) sepia(.2) hue-rotate(-12deg)', mediaRadius: '2px', frame: '#0a0f10', beamA: '#ffb35c', beamB: '#2dd4bf', speed: '.75' };
+        },
+        dreamy: (p) => ({ mediaFilter: 'blur(.6px) brightness(1.08) saturate(1.2) contrast(.92)', glow: `0 0 40px ${alpha(p.a2, 0.4)}`, mediaRadius: '28px', radius: '28px', speed: '.6', beamA: mixHex(p.a2, 0.5, '#ffffff'), beamB: p.a2 }),
+        matte: (p) => ({ mediaFilter: 'contrast(.85) brightness(1.08) saturate(.78)', shadow: NONE, mediaRadius: '6px', frame: mixHex(p.ink, 0.05, p.paper), speed: '.9' }),
+        thermal: (p) => {
+            const paper = '#0a0612';
+            return { dark: true, paper, bg: paper, ink: '#fdf2f8', accent: '#facc15', onAccent: paper, mediaFilter: 'grayscale(1) invert(.1) sepia(1) saturate(6) hue-rotate(-40deg) contrast(1.4)', glow: `0 0 26px ${alpha('#f97316', 0.5)}`, frame: '#1a0f24', beamA: '#facc15', beamB: mixHex(p.a2, 0.4, '#ef4444'), speed: '1.3' };
+        },
+        nightvision: () => {
+            const paper = '#030a05';
+            return { dark: true, paper, bg: paper, ink: '#c6f7c6', accent: '#4ade80', onAccent: paper, mediaFilter: 'grayscale(1) sepia(1) hue-rotate(70deg) saturate(3.2) brightness(1.15) contrast(1.2)', mediaRadius: '50% / 46%', frame: '#071a0c', glow: '0 0 30px rgb(74 222 128 / .35)', beamA: '#4ade80', beamB: '#bbf7d0', speed: '.95', font: MONO };
+        },
+        comic: (p) => ({ mediaFilter: 'contrast(1.45) saturate(1.7) brightness(1.03)', bw: '3px', line: p.ink, radius: '4px', mediaRadius: '0px', shadow: `5px 5px 0 ${p.ink}`, frame: '#ffffff', speed: '1.2', font: '"Bangers", "Comic Neue", "Comic Sans MS", cursive' }),
     },
 };
 const LOOK_FAMILIES = /*#__PURE__*/ Object.keys(LOOK_TREATMENTS);
@@ -570,7 +672,7 @@ function build() {
         for (const [treatment, make] of Object.entries(LOOK_TREATMENTS[family])) {
             for (const palette of Object.keys(LOOK_PALETTES)) {
                 const [ink, paper, accent, a2] = LOOK_PALETTES[palette];
-                const dark = palette === 'midnight' || palette === 'ember';
+                const dark = DARK_PALETTES.includes(palette);
                 const p = { ink, paper, accent, a2, on: dark ? paper : '#ffffff', dark };
                 const name = `${treatment}-${palette}`;
                 const t = { ink, paper, accent, onAccent: p.on, bg: paper, dark, beamA: accent, beamB: a2, ...make(p) };
