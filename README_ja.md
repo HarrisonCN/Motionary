@@ -62,7 +62,7 @@ npm i motionary
 
 17.3.1 ではファイルツリー、ダウンロードメニュー、映画のタイトルシーケンスを追加しました。[使用例と個別インポート](./docs/gallery-components.md)。
 
-17.7 では Form Atelier の9コンポーネントと4つの描画エフェクトを追加。ネイティブフォーム、キーボード操作、リセットに対応。[デモ](./showcase/forms.html) · [API](./docs/form-atelier.md) · [ロードマップ](./docs/coverage-roadmap.md)。
+17.7 では Form Atelier の12コンポーネントと4つの描画エフェクトを追加。ネイティブフォーム、キーボード操作、リセットに対応。[デモ](./showcase/forms.html) · [API](./docs/form-atelier.md) · [ロードマップ](./docs/coverage-roadmap.md)。
 
 17.6 では Matter & Motion の13コンポーネントと6つの独立エフェクトを追加。[デモ](./showcase/matter.html) · [API と参考](./docs/matter-motion.md)。
 

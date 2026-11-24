@@ -76,7 +76,7 @@ No build step? Use the CDN. URLs pin the major version (`@<!--ver:major-->17<!--
 <mo-reveal effect="fade-up"><h2>Hello</h2></mo-reveal>
 ```
 
-17.7 adds nine Form Atelier components and four finite SVG feedback effects. Native form values, keyboard interaction, reset and deliberate confirmation share a coherent visual language. [Form Atelier](./showcase/forms.html) · [API](./docs/form-atelier.md) · [Coverage roadmap](./docs/coverage-roadmap.md).
+17.7 adds twelve Form Atelier components and four finite SVG feedback effects. Native form values, keyboard interaction, reset and deliberate confirmation share a coherent visual language. [Form Atelier](./showcase/forms.html) · [API](./docs/form-atelier.md) · [Coverage roadmap](./docs/coverage-roadmap.md).
 
 17.6 adds thirteen Matter & Motion widgets and six standalone effects: interactive fields, fluid type, curve labs and deliberate controls. [Interactive lab](./showcase/matter.html) · [API and inspiration](./docs/matter-motion.md).
 
