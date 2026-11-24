@@ -1583,6 +1583,422 @@ interface UsaRippleGridElement extends UsaElement {
 declare function defineRippleGrid(tag?: string): CustomElementConstructor | undefined;
 
 /**
+ * A guided product tour. Each child with `data-step` is one step: its `data-target` (a CSS selector) names the part of
+ * the page to point at, `data-title` its heading and its content the text. A child button with `data-start` starts the
+ * tour (so does `start()` or the `open` attribute). The page dims except for a soft cut-out around the target, and a
+ * card with Back / Next / Done and Skip sits next to it, scrolling the target into view first. The card is a labelled
+ * non-modal dialog that takes focus; Escape ends the tour and focus goes back to where it was.
+ *
+ * Attributes: `open`, `label` (Tour), `next-label` (Next), `back-label` (Back), `done-label` (Done), `skip-label` (Skip),
+ * `count-label` ("{n} of {total}"), `padding` (cut-out padding in px; 8).
+ * Events `usa:step` ({ index }), `usa:end` ({ completed }).
+ */
+interface UsaTourElement extends UsaElement {
+    readonly index: number;
+    start(index?: number): void;
+    next(): void;
+    back(): void;
+    end(): void;
+}
+declare function defineTour(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * A signature pad. Draw with a mouse, pen or finger: strokes are smoothed into curves and get thinner when drawn fast,
+ * like ink (pen pressure is used when the device reports it). Undo takes back the last stroke and Clear empties the
+ * pad. People who cannot draw can type their name instead; it is set in a handwriting style. With `name` the
+ * signature is also put into a hidden form field as a PNG data URL, so a surrounding form submits it.
+ *
+ * Attributes: `label` (Signature), `color` (ink; #111827), `width` (base stroke in px; 2.5), `name`, `clear-label`
+ * (Clear), `undo-label` (Undo), `type-label` (Or type your name), `placeholder` (Sign here).
+ * Event `usa:change` ({ empty, strokes, typed }). Methods `clear()`, `undo()`, `toDataURL()`; property `empty`.
+ */
+interface UsaSignaturePadElement extends UsaElement {
+    readonly empty: boolean;
+    clear(): void;
+    undo(): void;
+    toDataURL(type?: string): string;
+}
+declare function defineSignaturePad(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * Drum-style wheels like a phone's time picker, built from the native `select` children (one wheel per select). Each
+ * wheel scrolls and snaps to a row, the rows lean back in 3D the further they are from the centre, and the select
+ * underneath is kept in sync, so forms and `change` listeners keep working. Each wheel is a `spinbutton`: arrow keys,
+ * Page Up / Down, Home and End move it, and its value is read out. Clicking a row picks it.
+ *
+ * Attributes: `label` (Picker), `rows` (visible rows, odd, 3–9; 5).
+ * Event `usa:change` ({ index, values }) where `index` is the wheel that moved and `values` the selected values.
+ */
+interface UsaWheelPickerElement extends UsaElement {
+    readonly values: string[];
+}
+declare function defineWheelPicker(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * @-mentions for a text field. Wraps the child `textarea` or `input` (one is created when there is none). Typing the
+ * trigger character opens a list of matching people under the field that pops in; arrow keys move through it, Enter or
+ * Tab inserts the name, Escape closes it, and clicking a name works too. The field is a combobox, so screen readers
+ * hear the active suggestion. Names come from `people` (comma-separated).
+ *
+ * Attributes: `people`, `trigger` (@), `max` (suggestions shown; 6), `label` (Message), `empty-label` (No matches).
+ * Event `usa:mention` ({ name }).
+ */
+interface UsaMentionInputElement extends UsaElement {
+    people: string[];
+    readonly mentions: string[];
+}
+declare function defineMentionInput(tag?: string): CustomElementConstructor | undefined;
+
+type EmojiEntry = {
+    emoji: string;
+    name: string;
+    group: string;
+};
+/** Every built-in emoji with its keywords and group. */
+declare const EMOJI: EmojiEntry[];
+/** Emoji whose keywords contain every word of `query` (case-insensitive); all of them for an empty query. */
+declare function filterEmoji(query: string, set?: readonly EmojiEntry[]): EmojiEntry[];
+/**
+ * An emoji panel: a search field, one tab per group, a "recent" row (kept in local storage when it is available) and a
+ * grid of buttons that you walk with the arrow keys. Picking an emoji pops it and, with `for`, inserts it at the caret
+ * of that input or textarea.
+ *
+ * Attributes: `for` (selector of a field to type into), `label` (Emoji), `search-label` (Search emoji),
+ * `recent-label` (Recent), `empty-label` (No emoji found), `columns` (6–12; 8), `remember` (local storage key; off when
+ * absent).
+ * Event `usa:pick` ({ emoji, name }).
+ */
+interface UsaEmojiPickerElement extends UsaElement {
+}
+declare function defineEmojiPicker(tag?: string): CustomElementConstructor | undefined;
+
+/** "3 replies" style text: `{n}` in `label` is replaced by the count; a separate singular form is used for 1. */
+declare function replyCount(n: number, one?: string, many?: string): string;
+/**
+ * A threaded discussion built from nested `article` children: each has `data-author`, optional `data-time` and
+ * `data-likes`, its text, and its replies as nested `article`s. Every comment gets an avatar with the author's initial,
+ * a thread line, a like button that counts (and pops), a Reply button that opens a small form, and, when it has
+ * replies, a toggle that folds them away with the count. Posted replies slide in under the comment and fire an event;
+ * nothing is sent anywhere. The articles stay where they are, so the content reads the same without JavaScript.
+ *
+ * Attributes: `label` (Comments), `you` (author name for new replies; You), `reply-label` (Reply), `like-label` (Like),
+ * `send-label` (Post), `hide-label` ("Hide replies"), `show-label` ("{n} replies"), `show-one-label` ("1 reply"),
+ * `placeholder` (Write a reply…).
+ * Events `usa:like` ({ index, liked, likes }), `usa:reply` ({ index, text }), `usa:toggle` ({ index, open }).
+ */
+interface UsaCommentThreadElement extends UsaElement {
+}
+declare function defineCommentThread(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * 17.13 helpers shared by the studio widgets (tour, wheel-picker, mention-input, diff-viewer, the charts, split-flap, …).
+ * Pure functions with no DOM access, so they are easy to test. Original implementations; see docs/studio-17-13.md.
+ */
+/** Clamp `n` to [min, max]; a non-finite `n` becomes `min`. */
+declare const clampTo: (n: number, min: number, max: number) => number;
+/**
+ * Where a tour card of size `card` goes next to the `target` rectangle inside a `view` of the given size: below the
+ * target when it fits, otherwise above, otherwise whichever side has more room. The card is kept `margin` px inside
+ * the view horizontally and centred on the target where possible.
+ */
+declare function tourPlace(target: {
+    top: number;
+    left: number;
+    width: number;
+    height: number;
+}, card: {
+    width: number;
+    height: number;
+}, view: {
+    width: number;
+    height: number;
+}, gap?: number, margin?: number): {
+    top: number;
+    left: number;
+    side: 'below' | 'above';
+};
+/** The wheel row under the centre line for a scroll offset: rounded, clamped to the `n` rows. */
+declare function wheelIndex(scrollTop: number, rowHeight: number, n: number): number;
+/** How far a wheel row leans back, in degrees, when it is `offset` rows from the centre (±80° at most). */
+declare const wheelTilt: (offset: number) => number;
+/**
+ * The mention being typed just before `caret`: the `trigger` character at the start of the text or after a space,
+ * followed by up to 30 non-space characters. Returns its start index and the query, or `null`.
+ */
+declare function mentionQuery(text: string, caret: number, trigger?: string): {
+    start: number;
+    query: string;
+} | null;
+/** Names that start with the query first, then names that contain it; case-insensitive; at most `max`. */
+declare function matchNames(names: readonly string[], query: string, max?: number): string[];
+type DiffLine = {
+    type: 'same' | 'add' | 'del';
+    text: string;
+    a?: number;
+    b?: number;
+};
+/**
+ * A line diff of `before` → `after` from their longest common subsequence. Removed lines come before the lines that
+ * replace them. `a` / `b` are 1-based line numbers in the old / new text. Inputs over 2000 lines each are cut there.
+ */
+declare function diffLines(before: string, after: string): DiffLine[];
+/** The part of `a` and `b` that differs, as [start, endA, endB] after the shared prefix and suffix. */
+declare function changedSpan(a: string, b: string): [number, number, number];
+/** Round tick values covering [min, max], about `count` of them (1, 2, 2.5 or 5 × a power of ten apart). */
+declare function niceTicks(min: number, max: number, count?: number): number[];
+/**
+ * An SVG path through `values` spread over `width` × `height` (y up), scaled to [min, max]. With `smooth` the line is a
+ * monotone cubic curve (no overshoot between points); otherwise straight segments. Non-finite values are skipped.
+ */
+declare function linePath(values: readonly number[], width: number, height: number, min: number, max: number, smooth?: boolean): string;
+/** Each funnel stage's width as a share of the first, and its conversion from the previous stage and from the first. */
+declare function funnelRows(values: readonly number[]): {
+    share: number;
+    step: number;
+    overall: number;
+}[];
+/**
+ * Squarified treemap: rectangles for `values` (largest first is best) filling `width` × `height`, in input order.
+ * Zero or negative values get an empty rectangle.
+ */
+declare function squarify(values: readonly number[], width: number, height: number): {
+    x: number;
+    y: number;
+    w: number;
+    h: number;
+}[];
+/** Whole days since 1970-01-01 for a `YYYY-MM-DD` date (UTC), or NaN. */
+declare function dayNumber(text: string): number;
+/** A bar's left edge and width as percentages of the [min, max] day range (end day included). */
+declare function ganttSpan(start: number, end: number, min: number, max: number): {
+    left: number;
+    width: number;
+};
+/**
+ * Which category fills each of `cells` waffle cells, by largest remainder so the counts add up exactly.
+ * Cells after the categories (when the values sum to less than `total`) get -1.
+ */
+declare function waffleCells(values: readonly number[], total?: number, cells?: number): number[];
+/** How many flaps a split-flap character turns through to get from `from` to `to` in `charset` (always forward). */
+declare function flapSteps(from: string, to: string, charset: string): number;
+/** A stable shuffle of 0…n-1 for `seed` (Fisher–Yates over a small hash; no Math.random). */
+declare function shuffleOrder(n: number, seed?: number): number[];
+/** Pointer pull on a letter: 1 at the pointer, falling smoothly to 0 at `radius` px away. */
+declare function pressureAt(distance: number, radius: number): number;
+/** The angle (degrees, 0 = right, clockwise) from (x, y) toward (px, py). */
+declare const angleTo: (x: number, y: number, px: number, py: number) => number;
+/** Width of a signature stroke for a pointer speed (px per ms): faster is thinner, within 0.45×–1.6× of `base`. */
+declare const strokeWidth: (speed: number, base?: number) => number;
+
+/**
+ * A code diff from two child `pre` elements, `data-before` and `data-after`. Lines are compared, then shown unified
+ * (one column with − and + lines) or split (old and new side by side); a toggle switches between them. Changed lines
+ * cascade in, and inside a pair of changed lines the characters that differ are marked. A header gives the file name
+ * and the +added / −removed counts. The table is real text with line numbers that screen readers can step through.
+ *
+ * Attributes: `mode` (unified, split; unified), `file`, `label` (Diff), `unified-label` (Unified), `split-label` (Split),
+ * `added-label` (added), `removed-label` (removed).
+ * Event `usa:mode` ({ mode }).
+ */
+interface UsaDiffViewerElement extends UsaElement {
+    readonly lines: DiffLine[];
+}
+declare function defineDiffViewer(tag?: string): CustomElementConstructor | undefined;
+
+/** Series from a `values` attribute: series separated by `|`, numbers by commas or spaces; at most 6 × 200. */
+declare function parseSeries(text: string): number[][];
+/**
+ * A line chart that draws itself in when it scrolls into view, with a soft area fill under each line and round y-axis
+ * ticks. Hover anywhere on the plot (or focus it and use the arrow keys) to move a crosshair from point to point; a
+ * tooltip lists every series at that point. Legend entries are toggle buttons that hide and show a series. A hidden
+ * table carries the same numbers for screen readers.
+ *
+ * Attributes: `values` ("1,4,3 | 2,2,5"), `labels` (x labels, comma-separated), `series` (series names), `colors`,
+ * `label` (Chart), `unit`, `smooth` (on unless "false"), `area` (on unless "false"), `height` (px; 220).
+ * Events `usa:point` ({ index }), `usa:toggle` ({ series, visible }).
+ */
+interface UsaLineChartElement extends UsaElement {
+    data: number[][];
+}
+declare function defineLineChart(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * A conversion funnel. Each stage is a centred bar as wide as its share of the first stage; the bars grow out from the
+ * middle one after another when the funnel scrolls into view, the numbers count up, and between stages a small badge
+ * shows how many made it to the next step. Every stage is a button that reports a pick, and the whole funnel is an
+ * ordered list, so it reads in order as text.
+ *
+ * Attributes: `values` (comma-separated), `labels` (comma-separated), `colors`, `label` (Funnel), `unit`,
+ * `conversion-label` ("{p} continue").
+ * Event `usa:select` ({ index, value, step, overall }).
+ */
+interface UsaFunnelChartElement extends UsaElement {
+}
+declare function defineFunnelChart(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * A squarified treemap: each value becomes a tile whose area matches its share, laid out to keep tiles close to
+ * square. Tiles scale in from their own centres, biggest first, when the map scrolls into view, and label themselves
+ * when there is room. Every tile is a button in one tab stop (arrow keys move between them in reading order) with its
+ * name, value and share, and a pick is reported.
+ *
+ * Attributes: `values`, `labels`, `colors`, `label` (Treemap), `unit`, `ratio` (width / height; 1.8).
+ * Event `usa:select` ({ index, value, share }).
+ */
+interface UsaTreemapElement extends UsaElement {
+}
+declare function defineTreemap(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * A small Gantt timeline from list items: each `li` is a task with `data-start` and `data-end` (YYYY-MM-DD), optional
+ * `data-progress` (0–100), `data-color` and `data-after` (the 1-based number of a task it follows, drawn as a link).
+ * Bars grow from their start date one after another, a progress fill runs inside them, week lines sit behind, and a
+ * "today" marker shows where the schedule stands. Each task row reads its name, dates and progress as text.
+ *
+ * Attributes: `today` (YYYY-MM-DD; none), `label` (Timeline), `today-label` (Today), `done-label` (done).
+ * Event `usa:select` ({ index }).
+ */
+interface UsaGanttElement extends UsaElement {
+}
+declare function defineGantt(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * A waffle chart: a 10 × 10 grid where every square is one percent, coloured by category. The squares pop in along a
+ * diagonal wave when the chart scrolls into view. Hovering or focusing a legend entry lifts that category's squares and
+ * dims the rest. The legend is a list of buttons with each share in words, so the grid itself is decorative.
+ *
+ * Attributes: `values`, `labels`, `colors`, `label` (Chart), `total` (what a full grid stands for; 100 or the sum),
+ * `shape` (square, round; square).
+ * Event `usa:select` ({ index, value, cells }).
+ */
+interface UsaWaffleChartElement extends UsaElement {
+}
+declare function defineWaffleChart(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * A split-flap display, like an old departures board. Each character sits on a flap that folds down through the
+ * alphabet until it reaches its letter, one column slightly after the other. Set `value` to change the text, or give
+ * `words` to cycle through a list. Screen readers get the plain text through a polite live region, once per change.
+ * Under reduced motion the letters change without flipping.
+ *
+ * Attributes: `value` (the child text), `words` (comma-separated; cycles), `interval` (ms between words; 3000),
+ * `length` (columns; the longest text), `charset` (letters to flip through; A–Z, 0–9 and :.-/), `speed` (ms per flap; 60).
+ * Event `usa:change` ({ value }).
+ */
+interface UsaSplitFlapElement extends UsaElement {
+    value: string;
+}
+declare function defineSplitFlap(tag?: string): CustomElementConstructor | undefined;
+
+/** The share (0–1) of fully transparent pixels in RGBA `data`, sampling every `step`-th pixel. */
+declare function clearedShare(data: ArrayLike<number>, step?: number): number;
+/**
+ * A scratch-off card. Its content sits under a foil that you rub away with a mouse, pen or finger; sparkles trail the
+ * scratch, and once enough is gone the rest of the foil fades and falls away. A Reveal button (shown to keyboard and
+ * screen reader users, and to everyone if drawing is not possible) uncovers it in one go. The content is always in the
+ * page for assistive technology; the foil is decorative.
+ *
+ * Attributes: `color` (foil; silver), `label` (Scratch to reveal), `reveal-label` (Reveal), `threshold` (share that
+ * finishes it; 0.5), `brush` (px; 22).
+ * Event `usa:reveal` ({ by }) — "scratch" or "button".
+ */
+interface UsaScratchCardElement extends UsaElement {
+    readonly revealed: boolean;
+    reveal(): void;
+}
+declare function defineScratchCard(tag?: string): CustomElementConstructor | undefined;
+
+/** How far (degrees, 0 to -180) a page has turned when dragged `dx` px across a page `width` px wide. */
+declare const turnAngle: (dx: number, width: number) => number;
+/**
+ * A book whose pages turn in 3D. Each child is one page (a `section`, `figure` or any element). Pages turn around the
+ * spine with a shadow that deepens mid-turn; drag a page edge to turn it by hand (let go past halfway and it finishes,
+ * otherwise it falls back), or use the Previous / Next buttons, the arrow keys on the book, or a swipe. Only the open
+ * page is exposed to assistive technology, and a polite status says which page it is. Reduced motion swaps pages
+ * without turning them.
+ *
+ * Attributes: `index` (0-based; 0), `label` (Book), `prev-label` (Previous page), `next-label` (Next page),
+ * `page-label` ("Page {n} of {total}").
+ * Event `usa:change` ({ index }).
+ */
+interface UsaPageFlipElement extends UsaElement {
+    index: number;
+    next(): void;
+    prev(): void;
+}
+declare function definePageFlip(tag?: string): CustomElementConstructor | undefined;
+
+/** An SVG path for a full circle of radius `r` centred at (cx, cy), starting at the top and going clockwise. */
+declare function circlePath(r: number, cx?: number, cy?: number): string;
+/**
+ * Text set around a circle that turns slowly, like a badge or a "scroll down" seal. The text comes from `text` (it is
+ * repeated with a separator to fill the ring); the children sit in the middle, so a link or icon can live there.
+ * Hovering slows it down, speeds it up or reverses it (`hover`). It stops off screen and under reduced motion. The ring
+ * is decorative; the text is also given once as plain text for screen readers.
+ *
+ * Attributes: `text`, `separator` (" • "), `duration` (seconds per turn; 16), `direction` (cw, ccw; cw), `hover` (slow,
+ * fast, reverse, pause, none; slow), `size` (px; 140), `color`.
+ */
+interface UsaCircularTextElement extends UsaElement {
+}
+declare function defineCircularText(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * Two faces that swap through a grid of pixels. The first child is the front, the second the back. On hover, focus
+ * inside or a tap, square pixels blink in at random until they cover the card, the faces swap underneath, and the
+ * pixels blink out again. Under reduced motion the faces cross-fade. The hidden face is `inert` and hidden from
+ * assistive technology, so only what is shown can be read or reached.
+ *
+ * Attributes: `grid` (pixels per row, 4–30; 12), `color` (pixel colour; the accent), `duration` (ms for each half;
+ * 320), `trigger` (hover, click; hover), `flipped`.
+ * Event `usa:change` ({ flipped }).
+ */
+interface UsaPixelTransitionElement extends UsaElement {
+    flipped: boolean;
+    toggle(force?: boolean): void;
+}
+declare function definePixelTransition(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * A field of short lines that turn to point at the pointer, like iron filings around a magnet; lines near the pointer
+ * also grow a little. Without a pointer (or on touch after the finger lifts) they settle back to a resting angle.
+ * The children sit on top. One frame is drawn per pointer move at most, and nothing moves under reduced motion.
+ *
+ * Attributes: `rows` (3–30; 9), `columns` (3–40; 12), `color` (the ink, faded), `angle` (resting angle in degrees; -30),
+ * `length` (line length in px; 18).
+ */
+interface UsaMagnetLinesElement extends UsaElement {
+}
+declare function defineMagnetLines(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * A headline whose letters swell as the pointer comes near: each letter gets heavier, taller and wider by how close
+ * the pointer is, so a soft bulge follows it along the word. With a variable font the weight axis is used; otherwise
+ * the letters scale. Away from the pointer they ease back. Screen readers get the text once, unsplit; nothing moves
+ * under reduced motion.
+ *
+ * Attributes: `radius` (reach in px; 160), `min-weight` (300), `max-weight` (900), `stretch` (extra height at the
+ * pointer, 0–1; 0.35).
+ */
+interface UsaTextPressureElement extends UsaElement {
+}
+declare function defineTextPressure(tag?: string): CustomElementConstructor | undefined;
+
+/**
+ * A grid of tiles (logos, avatars, photos) that every few seconds trade places, gliding to their new spots. The
+ * shuffle only changes where tiles are drawn (CSS order), never the document order, so keyboard and screen reader
+ * order stay as written. It pauses while hovered, focused or off screen, and not at all under reduced motion; a
+ * pause button lets anyone stop it.
+ *
+ * Attributes: `interval` (ms; 2800), `columns` (2–10; 4), `gap` (px; 10), `pause-label` (Pause), `play-label` (Play).
+ * Event `usa:shuffle` ({ order }).
+ */
+interface UsaShuffleGridElement extends UsaElement {
+    shuffle(): void;
+}
+declare function defineShuffleGrid(tag?: string): CustomElementConstructor | undefined;
+
+/**
  * A pair of squishy − / + keys around a number that rolls as it changes. Hold a key to repeat. Both keys are native
  * buttons; ArrowUp / ArrowDown on either key step too, and the value is announced through a polite live region.
  *
@@ -5706,6 +6122,46 @@ declare global {
         'mo-letter-swap': UsaLetterSwapElement;
         'usa-ripple-grid': UsaRippleGridElement;
         'mo-ripple-grid': UsaRippleGridElement;
+        'usa-tour': UsaTourElement;
+        'mo-tour': UsaTourElement;
+        'usa-signature-pad': UsaSignaturePadElement;
+        'mo-signature-pad': UsaSignaturePadElement;
+        'usa-wheel-picker': UsaWheelPickerElement;
+        'mo-wheel-picker': UsaWheelPickerElement;
+        'usa-mention-input': UsaMentionInputElement;
+        'mo-mention-input': UsaMentionInputElement;
+        'usa-emoji-picker': UsaEmojiPickerElement;
+        'mo-emoji-picker': UsaEmojiPickerElement;
+        'usa-comment-thread': UsaCommentThreadElement;
+        'mo-comment-thread': UsaCommentThreadElement;
+        'usa-diff-viewer': UsaDiffViewerElement;
+        'mo-diff-viewer': UsaDiffViewerElement;
+        'usa-line-chart': UsaLineChartElement;
+        'mo-line-chart': UsaLineChartElement;
+        'usa-funnel-chart': UsaFunnelChartElement;
+        'mo-funnel-chart': UsaFunnelChartElement;
+        'usa-treemap': UsaTreemapElement;
+        'mo-treemap': UsaTreemapElement;
+        'usa-gantt': UsaGanttElement;
+        'mo-gantt': UsaGanttElement;
+        'usa-waffle-chart': UsaWaffleChartElement;
+        'mo-waffle-chart': UsaWaffleChartElement;
+        'usa-split-flap': UsaSplitFlapElement;
+        'mo-split-flap': UsaSplitFlapElement;
+        'usa-scratch-card': UsaScratchCardElement;
+        'mo-scratch-card': UsaScratchCardElement;
+        'usa-page-flip': UsaPageFlipElement;
+        'mo-page-flip': UsaPageFlipElement;
+        'usa-circular-text': UsaCircularTextElement;
+        'mo-circular-text': UsaCircularTextElement;
+        'usa-pixel-transition': UsaPixelTransitionElement;
+        'mo-pixel-transition': UsaPixelTransitionElement;
+        'usa-magnet-lines': UsaMagnetLinesElement;
+        'mo-magnet-lines': UsaMagnetLinesElement;
+        'usa-text-pressure': UsaTextPressureElement;
+        'mo-text-pressure': UsaTextPressureElement;
+        'usa-shuffle-grid': UsaShuffleGridElement;
+        'mo-shuffle-grid': UsaShuffleGridElement;
         'usa-lens-stack': UsaLensStackElement;
         'mo-lens-stack': UsaLensStackElement;
         'usa-iris-diaphragm': UsaIrisDiaphragmElement;
@@ -5930,5 +6386,5 @@ declare global {
     }
 }
 
-export { ALIGNMENTS, BACKDROP_PRESETS, CAROUSEL_EFFECTS, CUE_KINDS, DIVIDER_SHAPES, EMPTY_ICONS, EQ_PRESETS, FESTIVAL_THEMES, LOOK_FAMILIES, LOOK_PALETTES, LOOK_TREATMENTS, LOTTIE_ICONS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PARTICLE_DRAW_WGSL, PARTICLE_SIM_WGSL, PHYSICS_PRESETS, POST_PASSES, PRESENCE_STATES, PROGRESS_VARIANTS, RETRO_VARIANTS, RIVE_CDN, RIVE_PEER, SEGMENTED_VARIANTS, SHARE_TARGETS, SHEET_SIDES, SKELETON_VARIANTS, SPARK_VARIANTS, STRENGTH_WORDS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, WORKER_SCENES, WORKER_SCENE_FNS, adoptLooks, applyLook, backgroundCss, badgeProgress, badgeText, beamPath, cartTotal, clampSplit, clampWindow, cleanColor, cleanPathData, compareKeys, copyText, deadZone, defineActivityWall, defineAddToCart, defineAlignSwitch, defineAnalogStick, defineAnnouncementBar, defineBadgeWall, defineBarChart, defineBento, defineBezierLab, defineBgGenerator, defineBorderBeam, defineBounceButton, defineBreadcrumbs, defineBreathOrb, defineBulgeVolume, defineCarousel, defineCartBadge, defineCartDrawer, defineCenterBars, defineChapterNav, defineChatComposer, defineChecklist, defineChipInput, defineClockControl, defineClothesline, defineCodeExport, defineCodeShake, defineCodeTabs, defineCoffeeTimer, defineColorPicker, defineCombobox, defineCommandPalette, defineCompare, defineConnectBeam, defineConsent, defineContextMenu, defineContourRelief, defineCopyButton, defineCountdown, defineCtaPopup, defineCubeGallery, defineCutReveal, defineDataTable, defineDatePicker, defineDeliveryTracker, defineDesktopWindows, defineDisclosure, defineDock, defineDonutChart, defineDownloadButton, defineDownloadMenu, defineEclipseToggle, defineElasticAccordion, defineElasticFrame, defineElasticMesh, defineElasticSlider, defineEmptyState, defineEqualizer, defineExpandCards, defineFanCarousel, defineFestivalBanner, defineField, defineFileDrop, defineFileTree, defineFilterChips, defineFlightStatus, defineFluidType, defineFormStepper, defineFullscreenMenu, defineGauge, defineGenArt, defineGestureSticker, defineGlScene, defineGlobe, defineGlucoseSparkline, defineGpuParticles, defineGravityWell, defineGrooveToggle, defineGyroCard, defineHaloSegmented, defineHaloSlider, defineHeatmap, defineHelpfulVote, defineHeroVideo, defineHoldAction, defineHorizontalScroll, defineHotspots, defineHoverRevealList, defineHudPanel, defineHueOrbit, defineHydrate, defineImageTrail, defineImageTunnel, defineInfiniteScroll, defineInfinityLoop, defineInkFlow, defineInlineEdit, defineInstallButton, defineIrisDiaphragm, defineJellyButton, defineJsonViewer, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLensStack, defineLetterSwap, defineLightbox, defineLiquidGlass, defineLiquidMetal, defineLiquidNav, defineLocationCard, defineLottie, defineLottieIcon, defineLottiePlayer, defineLuminousSwitch, defineLyrics, defineMagneticField, defineMasonryFlow, defineMegaMenu, defineMenu, defineMenuToggle, defineMessageList, defineMeteors, defineMeterCountdown, defineMilestones, defineModal, defineMorphCard, defineMotion, defineMotionInspector, defineMotionPrefs, defineMotionPrompt, defineMotionSpec, defineMultiSelect, defineMusicPlayer, defineNativePreview, defineNavFlyout, defineNavMorph, defineNotchSlider, defineNotificationBell, defineNumberStepper, defineOdometer, defineOrbitGallery, defineOrbitPass, defineOrbitProgress, defineOrbitRings, defineOrganicCard, defineOtp, definePagination, definePanorama, defineParallaxLayers, defineParticleButton, defineParticleIcon, definePassword, definePathMotion, definePauseAll, definePerfMonitor, definePhysicsPlayground, definePlanPicker, definePluginCard, definePluginStore, definePresence, definePricing, definePrizeWheel, defineProductGallery, defineProgressRing, defineProgressTabs, definePropPanel, definePullCord, defineQuarterRing, defineRaceTelemetry, defineRadar, defineRangeSlider, defineRatingBars, defineReactionField, defineReactions, defineRedEnvelope, defineRetroButton, defineRetroGrid, defineRevealFooter, defineRevisionReveal, defineRideStatus, defineRippleGrid, defineRive, defineRouteSparkline, defineRouteTransition, defineScene, defineScrollBg, defineScrollCue, defineScrollRing, defineScrollScene, defineScrollVelocity, defineScrollZoom, defineScrollspy, defineScrubNumber, defineSearchBar, defineSearchField, defineSegmented, defineSelect, defineShaderBackdrop, defineShapeDivider, defineShareButton, defineSheet, defineShortcut, defineSidebar, defineSixDotOrbit, defineSkeletonReveal, defineSketchChart, defineSmoothScroll, defineSortableList, defineSparkline, defineSpatialCard, defineSplitPane, defineSpringLab, defineSquishIndicator, defineSquishKey, defineSquishStepper, defineStackSlider, defineStarRating, defineStatusPill, defineStepTrack, defineStepper, defineStickyCta, defineStickyWall, defineStories, defineStrengthMeter, defineSubscribe, defineSuggestionChips, defineSunTimeline, defineSweepLines, defineSwipeDeck, defineSwitch, defineTabBar, defineTadaButton, defineTagCloud, defineTerminal, defineTextLoupe, defineTextReveal, defineTextSplitter, defineTextarea, defineThemeSurface, defineThemeSwitcher, defineThreeDotBounce, defineTileRelay, defineTip, defineTitleSequence, defineToastStack, defineTokenEditor, defineTransferButton, defineTransitProgress, defineTriplePulse, defineUploadProgress, defineValidationSummary, defineVideoCard, defineVirtualList, defineVitalWave, defineVoiceButton, defineVolumeKnob, defineWeatherCard, defineWidgets, defineWifiSignal, defineWorkerCanvas, defineWorkoutPlayer, defineXpBar, defineZoomLens, describeComponent, digitsOf, dividerPath, donutArcs, dropIndex, elasticPath, exportComponent, fanPose, flip, formatBytes, formatDistance, frontIndex, fuzzyMatch, haversine, heatLevel, hexToHsv, hsvToHex, hueColor, initials, invertRect, isEmail, jsonPath, keyLabels, lensOffset, levelFor, loadRiveRuntime, lookInfo, lookNames, lookRule, lookTokens, looksCss, matchSuggestions, matchesKeys, measure, meteorAt, monthGrid, moveItem, numbers, orbitAngle, pageWindow, parseChips, parseISODate, parseLRC, parseMarkers, parseOptions, parsePlans, parseProps, parseReactions, parseScrub, parseTargets, passwordScore, passwordStrength, percentLabel, placeMenu, project, provideRiveRuntime, rankRows, ratingSummary, relayOrder, revealPieces, ringDash, ringRadius, rippleAt, riseProgress, rovingIndex, safeImageUrl, sagAt, sanitizeCode, sectionAt, seeded, shareUrl, sortKey, sparkPoints, splitChips, splitTime, stackPose, stackToast, stripClips, swingStep, tagSize, trackOffset, tunnelPose, tween, velocityAmount, viewportHeight, virtualWindow, watchViewport, waveBars, wheelAngle, wrapIndex, zoomAt };
-export type { Alignment, BellNotice, BillingPeriod, BreadcrumbItem, CartItem, ChatMessage, CutStyle, DividerShape, ExportFormat, ExportedNode, FormChoice, FormIssue, GlobeMarker, LeaderRow, LookFamily, LookInfo, LookPalette, PaletteCommand, PerfStats, PlanOption, PresenceState, PropSpec, RadarTarget, SearchProvider, SearchResult, ShareTarget, SortDirection, StackToastOptions, StickerState, UsaActivityWallElement, UsaAddToCartElement, UsaAlignSwitchElement, UsaAnalogStickElement, UsaAnnouncementBarElement, UsaBadgeWallElement, UsaBarChartElement, UsaBentoElement, UsaBezierLabElement, UsaBgGeneratorElement, UsaBorderBeamElement, UsaBounceButtonElement, UsaBreadcrumbsElement, UsaBreathOrbElement, UsaBulgeVolumeElement, UsaCarouselElement, UsaCartBadgeElement, UsaCartDrawerElement, UsaCenterBarsElement, UsaChapterNavElement, UsaChatComposerElement, UsaChecklistElement, UsaChipInputElement, UsaClockControlElement, UsaClotheslineElement, UsaCodeExportElement, UsaCodeShakeElement, UsaCodeTabsElement, UsaCoffeeTimerElement, UsaColorPickerElement, UsaComboboxElement, UsaCommandPaletteElement, UsaCompareElement, UsaConnectBeamElement, UsaConsentElement, UsaContextMenuElement, UsaContourReliefElement, UsaCopyButtonElement, UsaCountdownElement, UsaCtaPopupElement, UsaCubeGalleryElement, UsaCutRevealElement, UsaDataTableElement, UsaDatePickerElement, UsaDeliveryTrackerElement, UsaDesktopWindowsElement, UsaDisclosureElement, UsaDockElement, UsaDonutChartElement, UsaDownloadButtonElement, UsaEclipseToggleElement, UsaElasticAccordionElement, UsaElasticFrameElement, UsaElasticMeshElement, UsaElasticSliderElement, UsaEmptyStateElement, UsaEqualizerElement, UsaExpandCardsElement, UsaFanCarouselElement, UsaFestivalBannerElement, UsaFieldElement, UsaFileDropElement, UsaFilterChipsElement, UsaFlightStatusElement, UsaFluidTypeElement, UsaFormStepperElement, UsaFullscreenMenuElement, UsaGaugeElement, UsaGenArtElement, UsaGestureStickerElement, UsaGlSceneElement, UsaGlobeElement, UsaGlucoseSparklineElement, UsaGpuParticlesElement, UsaGravityWellElement, UsaGrooveToggleElement, UsaGyroCardElement, UsaHaloSegmentedElement, UsaHaloSliderElement, UsaHeatmapElement, UsaHelpfulVoteElement, UsaHeroVideoElement, UsaHoldActionElement, UsaHorizontalScrollElement, UsaHotspotsElement, UsaHoverRevealListElement, UsaHudPanelElement, UsaHueOrbitElement, UsaHydrateElement, UsaImageTrailElement, UsaImageTunnelElement, UsaInfiniteScrollElement, UsaInfinityLoopElement, UsaInkFlowElement, UsaInlineEditElement, UsaInstallButtonElement, UsaIrisDiaphragmElement, UsaJellyButtonElement, UsaJsonViewerElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaKpiElement, UsaLeaderboardElement, UsaLensStackElement, UsaLetterSwapElement, UsaLightboxElement, UsaLiquidGlassElement, UsaLiquidMetalElement, UsaLiquidNavElement, UsaLocationCardElement, UsaLottieElement, UsaLottieIconElement, UsaLottiePlayerElement, UsaLuminousSwitchElement, UsaLyricsElement, UsaMagneticFieldElement, UsaMasonryFlowElement, UsaMegaMenuElement, UsaMenuElement, UsaMenuToggleElement, UsaMessageListElement, UsaMeteorsElement, UsaMeterCountdownElement, UsaMilestonesElement, UsaModalElement, UsaMorphCardElement, UsaMotionElement, UsaMotionInspectorElement, UsaMotionPrefsElement, UsaMotionPromptElement, UsaMotionSpecElement, UsaMultiSelectElement, UsaMusicPlayerElement, UsaNativePreviewElement, UsaNavFlyoutElement, UsaNavMorphElement, UsaNotchSliderElement, UsaNotificationBellElement, UsaNumberStepperElement, UsaOdometerElement, UsaOrbitGalleryElement, UsaOrbitPassElement, UsaOrbitProgressElement, UsaOrbitRingsElement, UsaOrganicCardElement, UsaOtpElement, UsaPaginationElement, UsaPanoramaElement, UsaParallaxLayersElement, UsaParticleButtonElement, UsaParticleIconElement, UsaPasswordElement, UsaPathMotionElement, UsaPauseAllElement, UsaPerfMonitorElement, UsaPhysicsPlaygroundElement, UsaPlanPickerElement, UsaPluginCardElement, UsaPluginStoreElement, UsaPresenceElement, UsaPricingElement, UsaPrizeWheelElement, UsaProductGalleryElement, UsaProgressRingElement, UsaProgressTabsElement, UsaPropPanelElement, UsaPullCordElement, UsaQuarterRingElement, UsaRaceTelemetryElement, UsaRadarElement, UsaRangeSliderElement, UsaRatingBarsElement, UsaReactionFieldElement, UsaReactionsElement, UsaRedEnvelopeElement, UsaRetroButtonElement, UsaRetroGridElement, UsaRevealFooterElement, UsaRevisionRevealElement, UsaRideStatusElement, UsaRippleGridElement, UsaRiveElement, UsaRouteSparklineElement, UsaRouteTransitionElement, UsaSceneElement, UsaScrollBgElement, UsaScrollCueElement, UsaScrollRingElement, UsaScrollSceneElement, UsaScrollVelocityElement, UsaScrollZoomElement, UsaScrollspyElement, UsaScrubNumberElement, UsaSearchBarElement, UsaSearchFieldElement, UsaSegmentedElement, UsaSelectElement, UsaShaderBackdropElement, UsaShapeDividerElement, UsaShareButtonElement, UsaSheetElement, UsaShortcutElement, UsaSidebarElement, UsaSixDotOrbitElement, UsaSkeletonRevealElement, UsaSketchChartElement, UsaSmoothScrollElement, UsaSortableListElement, UsaSparklineElement, UsaSpatialCardElement, UsaSplitPaneElement, UsaSpringLabElement, UsaSquishIndicatorElement, UsaSquishKeyElement, UsaSquishStepperElement, UsaStackSliderElement, UsaStarRatingElement, UsaStatusPillElement, UsaStepTrackElement, UsaStepperElement, UsaStickyCtaElement, UsaStickyWallElement, UsaStoriesElement, UsaStrengthMeterElement, UsaSubscribeElement, UsaSuggestionChipsElement, UsaSunTimelineElement, UsaSweepLinesElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTadaButtonElement, UsaTagCloudElement, UsaTerminalElement, UsaTextLoupeElement, UsaTextRevealElement, UsaTextSplitterElement, UsaTextareaElement, UsaThemeSurfaceElement, UsaThemeSwitcherElement, UsaThreeDotBounceElement, UsaTileRelayElement, UsaTipElement, UsaToastStackElement, UsaTokenEditorElement, UsaTransferButtonElement, UsaTransitProgressElement, UsaTriplePulseElement, UsaUploadProgressElement, UsaValidationSummaryElement, UsaVideoCardElement, UsaVirtualListElement, UsaVitalWaveElement, UsaVoiceButtonElement, UsaVolumeKnobElement, UsaWeatherCardElement, UsaWifiSignalElement, UsaWorkerCanvasElement, UsaWorkoutPlayerElement, UsaXpBarElement, UsaZoomLensElement, VelocityMode, WallBadge };
+export { ALIGNMENTS, BACKDROP_PRESETS, CAROUSEL_EFFECTS, CUE_KINDS, DIVIDER_SHAPES, EMOJI, EMPTY_ICONS, EQ_PRESETS, FESTIVAL_THEMES, LOOK_FAMILIES, LOOK_PALETTES, LOOK_TREATMENTS, LOTTIE_ICONS, MENU_EFFECTS, MODAL_EFFECTS, NAV_INDICATORS, PARTICLE_DRAW_WGSL, PARTICLE_SIM_WGSL, PHYSICS_PRESETS, POST_PASSES, PRESENCE_STATES, PROGRESS_VARIANTS, RETRO_VARIANTS, RIVE_CDN, RIVE_PEER, SEGMENTED_VARIANTS, SHARE_TARGETS, SHEET_SIDES, SKELETON_VARIANTS, SPARK_VARIANTS, STRENGTH_WORDS, SWITCH_VARIANTS, TAB_INDICATORS, TIP_PLACEMENTS, TOAST_POSITIONS, TOGGLE_VARIANTS, WEATHER_CONDITIONS, WIDGETS, WIDGET_TAGS, WORKER_SCENES, WORKER_SCENE_FNS, adoptLooks, angleTo, applyLook, backgroundCss, badgeProgress, badgeText, beamPath, cartTotal, changedSpan, circlePath, clampSplit, clampTo, clampWindow, cleanColor, cleanPathData, clearedShare, compareKeys, copyText, dayNumber, deadZone, defineActivityWall, defineAddToCart, defineAlignSwitch, defineAnalogStick, defineAnnouncementBar, defineBadgeWall, defineBarChart, defineBento, defineBezierLab, defineBgGenerator, defineBorderBeam, defineBounceButton, defineBreadcrumbs, defineBreathOrb, defineBulgeVolume, defineCarousel, defineCartBadge, defineCartDrawer, defineCenterBars, defineChapterNav, defineChatComposer, defineChecklist, defineChipInput, defineCircularText, defineClockControl, defineClothesline, defineCodeExport, defineCodeShake, defineCodeTabs, defineCoffeeTimer, defineColorPicker, defineCombobox, defineCommandPalette, defineCommentThread, defineCompare, defineConnectBeam, defineConsent, defineContextMenu, defineContourRelief, defineCopyButton, defineCountdown, defineCtaPopup, defineCubeGallery, defineCutReveal, defineDataTable, defineDatePicker, defineDeliveryTracker, defineDesktopWindows, defineDiffViewer, defineDisclosure, defineDock, defineDonutChart, defineDownloadButton, defineDownloadMenu, defineEclipseToggle, defineElasticAccordion, defineElasticFrame, defineElasticMesh, defineElasticSlider, defineEmojiPicker, defineEmptyState, defineEqualizer, defineExpandCards, defineFanCarousel, defineFestivalBanner, defineField, defineFileDrop, defineFileTree, defineFilterChips, defineFlightStatus, defineFluidType, defineFormStepper, defineFullscreenMenu, defineFunnelChart, defineGantt, defineGauge, defineGenArt, defineGestureSticker, defineGlScene, defineGlobe, defineGlucoseSparkline, defineGpuParticles, defineGravityWell, defineGrooveToggle, defineGyroCard, defineHaloSegmented, defineHaloSlider, defineHeatmap, defineHelpfulVote, defineHeroVideo, defineHoldAction, defineHorizontalScroll, defineHotspots, defineHoverRevealList, defineHudPanel, defineHueOrbit, defineHydrate, defineImageTrail, defineImageTunnel, defineInfiniteScroll, defineInfinityLoop, defineInkFlow, defineInlineEdit, defineInstallButton, defineIrisDiaphragm, defineJellyButton, defineJsonViewer, defineKanban, defineKeyframeEditor, defineKpi, defineLeaderboard, defineLensStack, defineLetterSwap, defineLightbox, defineLineChart, defineLiquidGlass, defineLiquidMetal, defineLiquidNav, defineLocationCard, defineLottie, defineLottieIcon, defineLottiePlayer, defineLuminousSwitch, defineLyrics, defineMagnetLines, defineMagneticField, defineMasonryFlow, defineMegaMenu, defineMentionInput, defineMenu, defineMenuToggle, defineMessageList, defineMeteors, defineMeterCountdown, defineMilestones, defineModal, defineMorphCard, defineMotion, defineMotionInspector, defineMotionPrefs, defineMotionPrompt, defineMotionSpec, defineMultiSelect, defineMusicPlayer, defineNativePreview, defineNavFlyout, defineNavMorph, defineNotchSlider, defineNotificationBell, defineNumberStepper, defineOdometer, defineOrbitGallery, defineOrbitPass, defineOrbitProgress, defineOrbitRings, defineOrganicCard, defineOtp, definePageFlip, definePagination, definePanorama, defineParallaxLayers, defineParticleButton, defineParticleIcon, definePassword, definePathMotion, definePauseAll, definePerfMonitor, definePhysicsPlayground, definePixelTransition, definePlanPicker, definePluginCard, definePluginStore, definePresence, definePricing, definePrizeWheel, defineProductGallery, defineProgressRing, defineProgressTabs, definePropPanel, definePullCord, defineQuarterRing, defineRaceTelemetry, defineRadar, defineRangeSlider, defineRatingBars, defineReactionField, defineReactions, defineRedEnvelope, defineRetroButton, defineRetroGrid, defineRevealFooter, defineRevisionReveal, defineRideStatus, defineRippleGrid, defineRive, defineRouteSparkline, defineRouteTransition, defineScene, defineScratchCard, defineScrollBg, defineScrollCue, defineScrollRing, defineScrollScene, defineScrollVelocity, defineScrollZoom, defineScrollspy, defineScrubNumber, defineSearchBar, defineSearchField, defineSegmented, defineSelect, defineShaderBackdrop, defineShapeDivider, defineShareButton, defineSheet, defineShortcut, defineShuffleGrid, defineSidebar, defineSignaturePad, defineSixDotOrbit, defineSkeletonReveal, defineSketchChart, defineSmoothScroll, defineSortableList, defineSparkline, defineSpatialCard, defineSplitFlap, defineSplitPane, defineSpringLab, defineSquishIndicator, defineSquishKey, defineSquishStepper, defineStackSlider, defineStarRating, defineStatusPill, defineStepTrack, defineStepper, defineStickyCta, defineStickyWall, defineStories, defineStrengthMeter, defineSubscribe, defineSuggestionChips, defineSunTimeline, defineSweepLines, defineSwipeDeck, defineSwitch, defineTabBar, defineTadaButton, defineTagCloud, defineTerminal, defineTextLoupe, defineTextPressure, defineTextReveal, defineTextSplitter, defineTextarea, defineThemeSurface, defineThemeSwitcher, defineThreeDotBounce, defineTileRelay, defineTip, defineTitleSequence, defineToastStack, defineTokenEditor, defineTour, defineTransferButton, defineTransitProgress, defineTreemap, defineTriplePulse, defineUploadProgress, defineValidationSummary, defineVideoCard, defineVirtualList, defineVitalWave, defineVoiceButton, defineVolumeKnob, defineWaffleChart, defineWeatherCard, defineWheelPicker, defineWidgets, defineWifiSignal, defineWorkerCanvas, defineWorkoutPlayer, defineXpBar, defineZoomLens, describeComponent, diffLines, digitsOf, dividerPath, donutArcs, dropIndex, elasticPath, exportComponent, fanPose, filterEmoji, flapSteps, flip, formatBytes, formatDistance, frontIndex, funnelRows, fuzzyMatch, ganttSpan, haversine, heatLevel, hexToHsv, hsvToHex, hueColor, initials, invertRect, isEmail, jsonPath, keyLabels, lensOffset, levelFor, linePath, loadRiveRuntime, lookInfo, lookNames, lookRule, lookTokens, looksCss, matchNames, matchSuggestions, matchesKeys, measure, mentionQuery, meteorAt, monthGrid, moveItem, niceTicks, numbers, orbitAngle, pageWindow, parseChips, parseISODate, parseLRC, parseMarkers, parseOptions, parsePlans, parseProps, parseReactions, parseScrub, parseSeries, parseTargets, passwordScore, passwordStrength, percentLabel, placeMenu, pressureAt, project, provideRiveRuntime, rankRows, ratingSummary, relayOrder, replyCount, revealPieces, ringDash, ringRadius, rippleAt, riseProgress, rovingIndex, safeImageUrl, sagAt, sanitizeCode, sectionAt, seeded, shareUrl, shuffleOrder, sortKey, sparkPoints, splitChips, splitTime, squarify, stackPose, stackToast, stripClips, strokeWidth, swingStep, tagSize, tourPlace, trackOffset, tunnelPose, turnAngle, tween, velocityAmount, viewportHeight, virtualWindow, waffleCells, watchViewport, waveBars, wheelAngle, wheelIndex, wheelTilt, wrapIndex, zoomAt };
+export type { Alignment, BellNotice, BillingPeriod, BreadcrumbItem, CartItem, ChatMessage, CutStyle, DiffLine, DividerShape, EmojiEntry, ExportFormat, ExportedNode, FormChoice, FormIssue, GlobeMarker, LeaderRow, LookFamily, LookInfo, LookPalette, PaletteCommand, PerfStats, PlanOption, PresenceState, PropSpec, RadarTarget, SearchProvider, SearchResult, ShareTarget, SortDirection, StackToastOptions, StickerState, UsaActivityWallElement, UsaAddToCartElement, UsaAlignSwitchElement, UsaAnalogStickElement, UsaAnnouncementBarElement, UsaBadgeWallElement, UsaBarChartElement, UsaBentoElement, UsaBezierLabElement, UsaBgGeneratorElement, UsaBorderBeamElement, UsaBounceButtonElement, UsaBreadcrumbsElement, UsaBreathOrbElement, UsaBulgeVolumeElement, UsaCarouselElement, UsaCartBadgeElement, UsaCartDrawerElement, UsaCenterBarsElement, UsaChapterNavElement, UsaChatComposerElement, UsaChecklistElement, UsaChipInputElement, UsaCircularTextElement, UsaClockControlElement, UsaClotheslineElement, UsaCodeExportElement, UsaCodeShakeElement, UsaCodeTabsElement, UsaCoffeeTimerElement, UsaColorPickerElement, UsaComboboxElement, UsaCommandPaletteElement, UsaCommentThreadElement, UsaCompareElement, UsaConnectBeamElement, UsaConsentElement, UsaContextMenuElement, UsaContourReliefElement, UsaCopyButtonElement, UsaCountdownElement, UsaCtaPopupElement, UsaCubeGalleryElement, UsaCutRevealElement, UsaDataTableElement, UsaDatePickerElement, UsaDeliveryTrackerElement, UsaDesktopWindowsElement, UsaDiffViewerElement, UsaDisclosureElement, UsaDockElement, UsaDonutChartElement, UsaDownloadButtonElement, UsaEclipseToggleElement, UsaElasticAccordionElement, UsaElasticFrameElement, UsaElasticMeshElement, UsaElasticSliderElement, UsaEmojiPickerElement, UsaEmptyStateElement, UsaEqualizerElement, UsaExpandCardsElement, UsaFanCarouselElement, UsaFestivalBannerElement, UsaFieldElement, UsaFileDropElement, UsaFilterChipsElement, UsaFlightStatusElement, UsaFluidTypeElement, UsaFormStepperElement, UsaFullscreenMenuElement, UsaFunnelChartElement, UsaGanttElement, UsaGaugeElement, UsaGenArtElement, UsaGestureStickerElement, UsaGlSceneElement, UsaGlobeElement, UsaGlucoseSparklineElement, UsaGpuParticlesElement, UsaGravityWellElement, UsaGrooveToggleElement, UsaGyroCardElement, UsaHaloSegmentedElement, UsaHaloSliderElement, UsaHeatmapElement, UsaHelpfulVoteElement, UsaHeroVideoElement, UsaHoldActionElement, UsaHorizontalScrollElement, UsaHotspotsElement, UsaHoverRevealListElement, UsaHudPanelElement, UsaHueOrbitElement, UsaHydrateElement, UsaImageTrailElement, UsaImageTunnelElement, UsaInfiniteScrollElement, UsaInfinityLoopElement, UsaInkFlowElement, UsaInlineEditElement, UsaInstallButtonElement, UsaIrisDiaphragmElement, UsaJellyButtonElement, UsaJsonViewerElement, UsaKanbanElement, UsaKeyframeEditorElement, UsaKpiElement, UsaLeaderboardElement, UsaLensStackElement, UsaLetterSwapElement, UsaLightboxElement, UsaLineChartElement, UsaLiquidGlassElement, UsaLiquidMetalElement, UsaLiquidNavElement, UsaLocationCardElement, UsaLottieElement, UsaLottieIconElement, UsaLottiePlayerElement, UsaLuminousSwitchElement, UsaLyricsElement, UsaMagnetLinesElement, UsaMagneticFieldElement, UsaMasonryFlowElement, UsaMegaMenuElement, UsaMentionInputElement, UsaMenuElement, UsaMenuToggleElement, UsaMessageListElement, UsaMeteorsElement, UsaMeterCountdownElement, UsaMilestonesElement, UsaModalElement, UsaMorphCardElement, UsaMotionElement, UsaMotionInspectorElement, UsaMotionPrefsElement, UsaMotionPromptElement, UsaMotionSpecElement, UsaMultiSelectElement, UsaMusicPlayerElement, UsaNativePreviewElement, UsaNavFlyoutElement, UsaNavMorphElement, UsaNotchSliderElement, UsaNotificationBellElement, UsaNumberStepperElement, UsaOdometerElement, UsaOrbitGalleryElement, UsaOrbitPassElement, UsaOrbitProgressElement, UsaOrbitRingsElement, UsaOrganicCardElement, UsaOtpElement, UsaPageFlipElement, UsaPaginationElement, UsaPanoramaElement, UsaParallaxLayersElement, UsaParticleButtonElement, UsaParticleIconElement, UsaPasswordElement, UsaPathMotionElement, UsaPauseAllElement, UsaPerfMonitorElement, UsaPhysicsPlaygroundElement, UsaPixelTransitionElement, UsaPlanPickerElement, UsaPluginCardElement, UsaPluginStoreElement, UsaPresenceElement, UsaPricingElement, UsaPrizeWheelElement, UsaProductGalleryElement, UsaProgressRingElement, UsaProgressTabsElement, UsaPropPanelElement, UsaPullCordElement, UsaQuarterRingElement, UsaRaceTelemetryElement, UsaRadarElement, UsaRangeSliderElement, UsaRatingBarsElement, UsaReactionFieldElement, UsaReactionsElement, UsaRedEnvelopeElement, UsaRetroButtonElement, UsaRetroGridElement, UsaRevealFooterElement, UsaRevisionRevealElement, UsaRideStatusElement, UsaRippleGridElement, UsaRiveElement, UsaRouteSparklineElement, UsaRouteTransitionElement, UsaSceneElement, UsaScratchCardElement, UsaScrollBgElement, UsaScrollCueElement, UsaScrollRingElement, UsaScrollSceneElement, UsaScrollVelocityElement, UsaScrollZoomElement, UsaScrollspyElement, UsaScrubNumberElement, UsaSearchBarElement, UsaSearchFieldElement, UsaSegmentedElement, UsaSelectElement, UsaShaderBackdropElement, UsaShapeDividerElement, UsaShareButtonElement, UsaSheetElement, UsaShortcutElement, UsaShuffleGridElement, UsaSidebarElement, UsaSignaturePadElement, UsaSixDotOrbitElement, UsaSkeletonRevealElement, UsaSketchChartElement, UsaSmoothScrollElement, UsaSortableListElement, UsaSparklineElement, UsaSpatialCardElement, UsaSplitFlapElement, UsaSplitPaneElement, UsaSpringLabElement, UsaSquishIndicatorElement, UsaSquishKeyElement, UsaSquishStepperElement, UsaStackSliderElement, UsaStarRatingElement, UsaStatusPillElement, UsaStepTrackElement, UsaStepperElement, UsaStickyCtaElement, UsaStickyWallElement, UsaStoriesElement, UsaStrengthMeterElement, UsaSubscribeElement, UsaSuggestionChipsElement, UsaSunTimelineElement, UsaSweepLinesElement, UsaSwipeDeckElement, UsaSwitchElement, UsaTabBarElement, UsaTadaButtonElement, UsaTagCloudElement, UsaTerminalElement, UsaTextLoupeElement, UsaTextPressureElement, UsaTextRevealElement, UsaTextSplitterElement, UsaTextareaElement, UsaThemeSurfaceElement, UsaThemeSwitcherElement, UsaThreeDotBounceElement, UsaTileRelayElement, UsaTipElement, UsaToastStackElement, UsaTokenEditorElement, UsaTourElement, UsaTransferButtonElement, UsaTransitProgressElement, UsaTreemapElement, UsaTriplePulseElement, UsaUploadProgressElement, UsaValidationSummaryElement, UsaVideoCardElement, UsaVirtualListElement, UsaVitalWaveElement, UsaVoiceButtonElement, UsaVolumeKnobElement, UsaWaffleChartElement, UsaWeatherCardElement, UsaWheelPickerElement, UsaWifiSignalElement, UsaWorkerCanvasElement, UsaWorkoutPlayerElement, UsaXpBarElement, UsaZoomLensElement, VelocityMode, WallBadge };
