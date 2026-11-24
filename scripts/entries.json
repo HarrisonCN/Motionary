@@ -1587,6 +1587,240 @@
  },
  {
   "kind": "widget",
+  "name": "progress-tabs",
+  "entry": "motionary/widgets/progress-tabs",
+  "src": "src/entries/widgets/progress-tabs.ts",
+  "tag": "usa-progress-tabs",
+  "define": "defineProgressTabs",
+  "types": [
+   "UsaProgressTabsElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/progress-tabs"
+ },
+ {
+  "kind": "widget",
+  "name": "code-tabs",
+  "entry": "motionary/widgets/code-tabs",
+  "src": "src/entries/widgets/code-tabs.ts",
+  "tag": "usa-code-tabs",
+  "define": "defineCodeTabs",
+  "types": [
+   "UsaCodeTabsElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/code-tabs"
+ },
+ {
+  "kind": "widget",
+  "name": "helpful-vote",
+  "entry": "motionary/widgets/helpful-vote",
+  "src": "src/entries/widgets/helpful-vote.ts",
+  "tag": "usa-helpful-vote",
+  "define": "defineHelpfulVote",
+  "types": [
+   "UsaHelpfulVoteElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/helpful-vote"
+ },
+ {
+  "kind": "widget",
+  "name": "share-button",
+  "entry": "motionary/widgets/share-button",
+  "src": "src/entries/widgets/share-button.ts",
+  "tag": "usa-share-button",
+  "define": "defineShareButton",
+  "types": [
+   "UsaShareButtonElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/share-button"
+ },
+ {
+  "kind": "widget",
+  "name": "inline-edit",
+  "entry": "motionary/widgets/inline-edit",
+  "src": "src/entries/widgets/inline-edit.ts",
+  "tag": "usa-inline-edit",
+  "define": "defineInlineEdit",
+  "types": [
+   "UsaInlineEditElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/inline-edit"
+ },
+ {
+  "kind": "widget",
+  "name": "tag-cloud",
+  "entry": "motionary/widgets/tag-cloud",
+  "src": "src/entries/widgets/tag-cloud.ts",
+  "tag": "usa-tag-cloud",
+  "define": "defineTagCloud",
+  "types": [
+   "UsaTagCloudElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/tag-cloud"
+ },
+ {
+  "kind": "widget",
+  "name": "heatmap",
+  "entry": "motionary/widgets/heatmap",
+  "src": "src/entries/widgets/heatmap.ts",
+  "tag": "usa-heatmap",
+  "define": "defineHeatmap",
+  "types": [
+   "UsaHeatmapElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/heatmap"
+ },
+ {
+  "kind": "widget",
+  "name": "donut-chart",
+  "entry": "motionary/widgets/donut-chart",
+  "src": "src/entries/widgets/donut-chart.ts",
+  "tag": "usa-donut-chart",
+  "define": "defineDonutChart",
+  "types": [
+   "UsaDonutChartElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/donut-chart"
+ },
+ {
+  "kind": "widget",
+  "name": "sortable-list",
+  "entry": "motionary/widgets/sortable-list",
+  "src": "src/entries/widgets/sortable-list.ts",
+  "tag": "usa-sortable-list",
+  "define": "defineSortableList",
+  "types": [
+   "UsaSortableListElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/sortable-list"
+ },
+ {
+  "kind": "widget",
+  "name": "zoom-lens",
+  "entry": "motionary/widgets/zoom-lens",
+  "src": "src/entries/widgets/zoom-lens.ts",
+  "tag": "usa-zoom-lens",
+  "define": "defineZoomLens",
+  "types": [
+   "UsaZoomLensElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/zoom-lens"
+ },
+ {
+  "kind": "widget",
+  "name": "rating-bars",
+  "entry": "motionary/widgets/rating-bars",
+  "src": "src/entries/widgets/rating-bars.ts",
+  "tag": "usa-rating-bars",
+  "define": "defineRatingBars",
+  "types": [
+   "UsaRatingBarsElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/rating-bars"
+ },
+ {
+  "kind": "widget",
+  "name": "checklist",
+  "entry": "motionary/widgets/checklist",
+  "src": "src/entries/widgets/checklist.ts",
+  "tag": "usa-checklist",
+  "define": "defineChecklist",
+  "types": [
+   "UsaChecklistElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/checklist"
+ },
+ {
+  "kind": "widget",
+  "name": "meteors",
+  "entry": "motionary/widgets/meteors",
+  "src": "src/entries/widgets/meteors.ts",
+  "tag": "usa-meteors",
+  "define": "defineMeteors",
+  "types": [
+   "UsaMeteorsElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/meteors"
+ },
+ {
+  "kind": "widget",
+  "name": "connect-beam",
+  "entry": "motionary/widgets/connect-beam",
+  "src": "src/entries/widgets/connect-beam.ts",
+  "tag": "usa-connect-beam",
+  "define": "defineConnectBeam",
+  "types": [
+   "UsaConnectBeamElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/connect-beam"
+ },
+ {
+  "kind": "widget",
+  "name": "retro-grid",
+  "entry": "motionary/widgets/retro-grid",
+  "src": "src/entries/widgets/retro-grid.ts",
+  "tag": "usa-retro-grid",
+  "define": "defineRetroGrid",
+  "types": [
+   "UsaRetroGridElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/retro-grid"
+ },
+ {
+  "kind": "widget",
+  "name": "orbit-rings",
+  "entry": "motionary/widgets/orbit-rings",
+  "src": "src/entries/widgets/orbit-rings.ts",
+  "tag": "usa-orbit-rings",
+  "define": "defineOrbitRings",
+  "types": [
+   "UsaOrbitRingsElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/orbit-rings"
+ },
+ {
+  "kind": "widget",
+  "name": "letter-swap",
+  "entry": "motionary/widgets/letter-swap",
+  "src": "src/entries/widgets/letter-swap.ts",
+  "tag": "usa-letter-swap",
+  "define": "defineLetterSwap",
+  "types": [
+   "UsaLetterSwapElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/letter-swap"
+ },
+ {
+  "kind": "widget",
+  "name": "ripple-grid",
+  "entry": "motionary/widgets/ripple-grid",
+  "src": "src/entries/widgets/ripple-grid.ts",
+  "tag": "usa-ripple-grid",
+  "define": "defineRippleGrid",
+  "types": [
+   "UsaRippleGridElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/ripple-grid"
+ },
+ {
+  "kind": "widget",
   "name": "search-bar",
   "entry": "motionary/widgets/search-bar",
   "src": "src/entries/widgets/search-bar.ts",

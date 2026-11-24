@@ -1,7 +1,7 @@
 {
   "name": "motionary",
   "version": "17.9.0",
-  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 340 animated Web Components (91 core, 249 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
+  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 358 animated Web Components (91 core, 267 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
   "unpkg": "dist/index.umd.js",
@@ -3178,6 +3178,186 @@
       "require": {
         "types": "./dist/widgets/title-sequence.d.cts",
         "default": "./dist/widgets/title-sequence.cjs"
+      }
+    },
+    "./widgets/progress-tabs": {
+      "import": {
+        "types": "./dist/widgets/progress-tabs.d.ts",
+        "default": "./dist/widgets/progress-tabs.js"
+      },
+      "require": {
+        "types": "./dist/widgets/progress-tabs.d.cts",
+        "default": "./dist/widgets/progress-tabs.cjs"
+      }
+    },
+    "./widgets/code-tabs": {
+      "import": {
+        "types": "./dist/widgets/code-tabs.d.ts",
+        "default": "./dist/widgets/code-tabs.js"
+      },
+      "require": {
+        "types": "./dist/widgets/code-tabs.d.cts",
+        "default": "./dist/widgets/code-tabs.cjs"
+      }
+    },
+    "./widgets/helpful-vote": {
+      "import": {
+        "types": "./dist/widgets/helpful-vote.d.ts",
+        "default": "./dist/widgets/helpful-vote.js"
+      },
+      "require": {
+        "types": "./dist/widgets/helpful-vote.d.cts",
+        "default": "./dist/widgets/helpful-vote.cjs"
+      }
+    },
+    "./widgets/share-button": {
+      "import": {
+        "types": "./dist/widgets/share-button.d.ts",
+        "default": "./dist/widgets/share-button.js"
+      },
+      "require": {
+        "types": "./dist/widgets/share-button.d.cts",
+        "default": "./dist/widgets/share-button.cjs"
+      }
+    },
+    "./widgets/inline-edit": {
+      "import": {
+        "types": "./dist/widgets/inline-edit.d.ts",
+        "default": "./dist/widgets/inline-edit.js"
+      },
+      "require": {
+        "types": "./dist/widgets/inline-edit.d.cts",
+        "default": "./dist/widgets/inline-edit.cjs"
+      }
+    },
+    "./widgets/tag-cloud": {
+      "import": {
+        "types": "./dist/widgets/tag-cloud.d.ts",
+        "default": "./dist/widgets/tag-cloud.js"
+      },
+      "require": {
+        "types": "./dist/widgets/tag-cloud.d.cts",
+        "default": "./dist/widgets/tag-cloud.cjs"
+      }
+    },
+    "./widgets/heatmap": {
+      "import": {
+        "types": "./dist/widgets/heatmap.d.ts",
+        "default": "./dist/widgets/heatmap.js"
+      },
+      "require": {
+        "types": "./dist/widgets/heatmap.d.cts",
+        "default": "./dist/widgets/heatmap.cjs"
+      }
+    },
+    "./widgets/donut-chart": {
+      "import": {
+        "types": "./dist/widgets/donut-chart.d.ts",
+        "default": "./dist/widgets/donut-chart.js"
+      },
+      "require": {
+        "types": "./dist/widgets/donut-chart.d.cts",
+        "default": "./dist/widgets/donut-chart.cjs"
+      }
+    },
+    "./widgets/sortable-list": {
+      "import": {
+        "types": "./dist/widgets/sortable-list.d.ts",
+        "default": "./dist/widgets/sortable-list.js"
+      },
+      "require": {
+        "types": "./dist/widgets/sortable-list.d.cts",
+        "default": "./dist/widgets/sortable-list.cjs"
+      }
+    },
+    "./widgets/zoom-lens": {
+      "import": {
+        "types": "./dist/widgets/zoom-lens.d.ts",
+        "default": "./dist/widgets/zoom-lens.js"
+      },
+      "require": {
+        "types": "./dist/widgets/zoom-lens.d.cts",
+        "default": "./dist/widgets/zoom-lens.cjs"
+      }
+    },
+    "./widgets/rating-bars": {
+      "import": {
+        "types": "./dist/widgets/rating-bars.d.ts",
+        "default": "./dist/widgets/rating-bars.js"
+      },
+      "require": {
+        "types": "./dist/widgets/rating-bars.d.cts",
+        "default": "./dist/widgets/rating-bars.cjs"
+      }
+    },
+    "./widgets/checklist": {
+      "import": {
+        "types": "./dist/widgets/checklist.d.ts",
+        "default": "./dist/widgets/checklist.js"
+      },
+      "require": {
+        "types": "./dist/widgets/checklist.d.cts",
+        "default": "./dist/widgets/checklist.cjs"
+      }
+    },
+    "./widgets/meteors": {
+      "import": {
+        "types": "./dist/widgets/meteors.d.ts",
+        "default": "./dist/widgets/meteors.js"
+      },
+      "require": {
+        "types": "./dist/widgets/meteors.d.cts",
+        "default": "./dist/widgets/meteors.cjs"
+      }
+    },
+    "./widgets/connect-beam": {
+      "import": {
+        "types": "./dist/widgets/connect-beam.d.ts",
+        "default": "./dist/widgets/connect-beam.js"
+      },
+      "require": {
+        "types": "./dist/widgets/connect-beam.d.cts",
+        "default": "./dist/widgets/connect-beam.cjs"
+      }
+    },
+    "./widgets/retro-grid": {
+      "import": {
+        "types": "./dist/widgets/retro-grid.d.ts",
+        "default": "./dist/widgets/retro-grid.js"
+      },
+      "require": {
+        "types": "./dist/widgets/retro-grid.d.cts",
+        "default": "./dist/widgets/retro-grid.cjs"
+      }
+    },
+    "./widgets/orbit-rings": {
+      "import": {
+        "types": "./dist/widgets/orbit-rings.d.ts",
+        "default": "./dist/widgets/orbit-rings.js"
+      },
+      "require": {
+        "types": "./dist/widgets/orbit-rings.d.cts",
+        "default": "./dist/widgets/orbit-rings.cjs"
+      }
+    },
+    "./widgets/letter-swap": {
+      "import": {
+        "types": "./dist/widgets/letter-swap.d.ts",
+        "default": "./dist/widgets/letter-swap.js"
+      },
+      "require": {
+        "types": "./dist/widgets/letter-swap.d.cts",
+        "default": "./dist/widgets/letter-swap.cjs"
+      }
+    },
+    "./widgets/ripple-grid": {
+      "import": {
+        "types": "./dist/widgets/ripple-grid.d.ts",
+        "default": "./dist/widgets/ripple-grid.js"
+      },
+      "require": {
+        "types": "./dist/widgets/ripple-grid.d.cts",
+        "default": "./dist/widgets/ripple-grid.cjs"
       }
     },
     "./widgets/search-bar": {

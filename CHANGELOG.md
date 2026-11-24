@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Added six UI parts: `mo-progress-tabs` (tabs that advance with a progress bar), `mo-code-tabs` (install snippets per package manager, synced by `group`, with copy), `mo-helpful-vote`, `mo-share-button`, `mo-inline-edit` and `mo-tag-cloud`.
+- Added six data and interaction widgets: `mo-heatmap` (an activity grid you can walk with arrow keys), `mo-donut-chart`, `mo-sortable-list` (drag or Space and arrows), `mo-zoom-lens`, `mo-rating-bars` and `mo-checklist` (onboarding steps with a progress ring).
+- Added six motion surfaces: `mo-meteors`, `mo-connect-beam`, `mo-retro-grid`, `mo-orbit-rings`, `mo-letter-swap` and `mo-ripple-grid`.
+- All eighteen register under `defineWidgets('17.12')`, keep their content usable without JavaScript and stand still under reduced motion. Details in docs/parts-17-12.md; demo page at showcase/parts.html.
+- The showcase home page has a new **Collections** section: one tab per release from 17.12 back to 17.4 with the widgets running in place, so they can be tried without opening each lab page. Tabs load only when opened and can be linked (`#collections-blocks`). The floating Spatial Instruments link and the row of lab-page buttons in the hero are folded into it.
+
 - Added seven UI blocks: `mo-sidebar` (folds to an icon rail), `mo-scrollspy` (a table of contents that follows the reader), `mo-pricing` (monthly / yearly switch with rolling prices), `mo-announcement-bar`, `mo-sticky-cta`, `mo-bento` and `mo-empty-state` (a self-drawing illustration).
 - Added seven components: `mo-lightbox` (native dialog, zoom, pan and swipe), `mo-data-table` (sort, filter, rows glide into place), `mo-filter-chips`, `mo-hotspots`, `mo-fan-carousel`, `mo-expand-cards` and `mo-json-viewer` (an ARIA tree).
 - Added seven motion surfaces: `mo-scroll-velocity`, `mo-horizontal-scroll`, `mo-image-trail`, `mo-hover-reveal-list`, `mo-liquid-glass`, `mo-path-motion` and `mo-cut-reveal`.

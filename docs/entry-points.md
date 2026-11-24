@@ -12,7 +12,7 @@ registerPearlescent(); defineFx(); // <usa-fx effect="pearlescent">
 
 Notes: an effect entry imports its pack file (the effects of a pack share helpers), so its size is the pack’s, not the whole 6.x set. Runtime-powered widgets still need their prerequisites (`use(…)`, see the Requires badge). The group entries (`motionary/components/widgets`, `/fx2`, `/lite`) are unchanged.
 
-## Widgets (249)
+## Widgets (267)
 
 | Tag | Import | Define |
 |---|---|---|
@@ -138,6 +138,24 @@ Notes: an effect entry imports its pack file (the effects of a pack share helper
 | `<usa-file-tree>` | `motionary/widgets/file-tree` | `defineFileTree()` |
 | `<usa-download-menu>` | `motionary/widgets/download-menu` | `defineDownloadMenu()` |
 | `<usa-title-sequence>` | `motionary/widgets/title-sequence` | `defineTitleSequence()` |
+| `<usa-progress-tabs>` | `motionary/widgets/progress-tabs` | `defineProgressTabs()` |
+| `<usa-code-tabs>` | `motionary/widgets/code-tabs` | `defineCodeTabs()` |
+| `<usa-helpful-vote>` | `motionary/widgets/helpful-vote` | `defineHelpfulVote()` |
+| `<usa-share-button>` | `motionary/widgets/share-button` | `defineShareButton()` |
+| `<usa-inline-edit>` | `motionary/widgets/inline-edit` | `defineInlineEdit()` |
+| `<usa-tag-cloud>` | `motionary/widgets/tag-cloud` | `defineTagCloud()` |
+| `<usa-heatmap>` | `motionary/widgets/heatmap` | `defineHeatmap()` |
+| `<usa-donut-chart>` | `motionary/widgets/donut-chart` | `defineDonutChart()` |
+| `<usa-sortable-list>` | `motionary/widgets/sortable-list` | `defineSortableList()` |
+| `<usa-zoom-lens>` | `motionary/widgets/zoom-lens` | `defineZoomLens()` |
+| `<usa-rating-bars>` | `motionary/widgets/rating-bars` | `defineRatingBars()` |
+| `<usa-checklist>` | `motionary/widgets/checklist` | `defineChecklist()` |
+| `<usa-meteors>` | `motionary/widgets/meteors` | `defineMeteors()` |
+| `<usa-connect-beam>` | `motionary/widgets/connect-beam` | `defineConnectBeam()` |
+| `<usa-retro-grid>` | `motionary/widgets/retro-grid` | `defineRetroGrid()` |
+| `<usa-orbit-rings>` | `motionary/widgets/orbit-rings` | `defineOrbitRings()` |
+| `<usa-letter-swap>` | `motionary/widgets/letter-swap` | `defineLetterSwap()` |
+| `<usa-ripple-grid>` | `motionary/widgets/ripple-grid` | `defineRippleGrid()` |
 | `<usa-search-bar>` | `motionary/widgets/search-bar` | `defineSearchBar()` |
 | `<usa-subscribe>` | `motionary/widgets/subscribe` | `defineSubscribe()` |
 | `<usa-download-button>` | `motionary/widgets/download-button` | `defineDownloadButton()` |

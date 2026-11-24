@@ -1845,6 +1845,87 @@
       "usa:range": [
         "{end, start}"
       ]
+    },
+    "usa-checklist": {
+      "usa:change": [
+        "{checked, done, index, total}"
+      ],
+      "usa:complete": [
+        "(none)"
+      ]
+    },
+    "usa-code-tabs": {
+      "usa:change": [
+        "{index, label}"
+      ],
+      "usa:copy": [
+        "{index}"
+      ]
+    },
+    "usa-donut-chart": {
+      "usa:select": [
+        "{index, value}"
+      ]
+    },
+    "usa-heatmap": {
+      "usa:select": [
+        "{index, value}"
+      ]
+    },
+    "usa-helpful-vote": {
+      "usa:feedback": [
+        "{text, vote}"
+      ],
+      "usa:vote": [
+        "{vote}"
+      ]
+    },
+    "usa-inline-edit": {
+      "usa:cancel": [
+        "(none)"
+      ],
+      "usa:change": [
+        "{previous, value}"
+      ],
+      "usa:edit": [
+        "(none)"
+      ]
+    },
+    "usa-progress-tabs": {
+      "usa:change": [
+        "{index}"
+      ]
+    },
+    "usa-rating-bars": {
+      "usa:select": [
+        "{stars}"
+      ]
+    },
+    "usa-ripple-grid": {
+      "usa:ripple": [
+        "{x, y}"
+      ]
+    },
+    "usa-share-button": {
+      "usa:close": [
+        "(none)"
+      ],
+      "usa:open": [
+        "(none)"
+      ],
+      "usa:share": [
+        "{target}"
+      ]
+    },
+    "usa-sortable-list": {
+      "usa:sort": [
+        "{from, to}"
+      ]
+    },
+    "usa-zoom-lens": {
+      "usa:zoom": [
+        "{zoom}"
+      ]
     }
   }
 }
