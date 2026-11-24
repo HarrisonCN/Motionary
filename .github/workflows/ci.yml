@@ -71,7 +71,8 @@ jobs:
     name: Browser (${{ matrix.browser }})
     # 13.1.0: real-browser regression suite (test/browser, Playwright) on the built package — docs/browser-matrix.md
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    # chromium runs desktop and phone projects in one job; its tests alone take about 23 minutes with 17.13
+    timeout-minutes: 45
     strategy:
       fail-fast: false
       matrix:
