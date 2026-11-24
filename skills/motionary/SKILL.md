@@ -60,6 +60,9 @@ A few starting points:
 | Page blocks | `<mo-sidebar>`, `<mo-scrollspy>`, `<mo-pricing>`, `<mo-announcement-bar>`, `<mo-sticky-cta>`, `<mo-bento>`, `<mo-empty-state>` |
 | Data and media | `<mo-data-table>`, `<mo-filter-chips>`, `<mo-json-viewer>`, `<mo-lightbox>`, `<mo-hotspots>`, `<mo-fan-carousel>`, `<mo-expand-cards>` |
 | Scroll and cursor motion | `<mo-scroll-velocity>`, `<mo-horizontal-scroll>`, `<mo-path-motion>`, `<mo-cut-reveal>`, `<mo-image-trail>`, `<mo-hover-reveal-list>`, `<mo-liquid-glass>` |
+| Page furniture | `<mo-search-bar>`, `<mo-subscribe>`, `<mo-download-button>`, `<mo-reveal-footer>`, `<mo-shape-divider>`, `<mo-scroll-cue>` |
+| App parts | `<mo-virtual-list>`, `<mo-infinite-scroll>`, `<mo-context-menu>`, `<mo-split-pane>`, `<mo-desktop-windows>`, `<mo-stack-slider>`, `<mo-morph-card>` |
+| Depth and scroll scenes | `<mo-scroll-zoom>`, `<mo-scroll-bg>`, `<mo-image-tunnel>`, `<mo-orbit-gallery>`, `<mo-clothesline>`, `<mo-elastic-frame>`, `<mo-border-beam>` |
 
 ## 3. Rules
 
