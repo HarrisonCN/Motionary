@@ -46,7 +46,7 @@ orbit rings and ripples stand still, letter swap changes no letters.
 | `mo-meteors` | falling streaks behind the children | `count` (18), `angle` (215), `color`, `speed` | none |
 | `mo-connect-beam` | animated SVG curves between children marked `data-beam` | `links` ("a>b, a>c"), `curve`, `colors`, `duration` | none |
 | `mo-retro-grid` | a perspective grid scrolling to the horizon, optional sun | `angle`, `cell`, `color`, `speed`, `sun` | none |
-| `mo-orbit-rings` | children placed on rings that turn; hover or focus pauses them | `radius` (list), `duration`, `label` | none |
+| `mo-orbit-rings` | children placed on up to three rings that turn (`data-center` marks the middle, `data-ring` 1–3 picks a ring); hover or focus pauses them | `radius` (gap between rings, 72), `duration` (s per lap, 24), `label` | none |
 | `mo-letter-swap` | a word whose letters roll on hover or focus of its link or button | `stagger` (ms), `direction` (up, down) | none |
 | `mo-ripple-grid` | a dot grid that ripples out from a click, a key press or on its own | `gap`, `dot`, `color`, `accent`, `auto`, `label` | `usa:ripple { x, y }` |
 

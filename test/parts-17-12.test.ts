@@ -385,6 +385,9 @@ describe('motion', () => {
     expect(r.querySelector('.usa-retro-scene')!.getAttribute('aria-hidden')).toBe('true');
     const o = mount<HTMLElement>('<mo-orbit-rings label="Stack"><b data-center>Core</b><i>a</i><i>b</i><i data-ring="2">c</i></mo-orbit-rings>');
     expect(o.querySelectorAll('.usa-rings-orbit')).toHaveLength(2);
+    expect(o.querySelectorAll('.usa-rings-orbit')[0].querySelectorAll('i')).toHaveLength(2);
+    const spread = mount<HTMLElement>('<mo-orbit-rings><b>Core</b><i>a</i><i>b</i><i>c</i></mo-orbit-rings>');
+    expect(spread.querySelectorAll('.usa-rings-orbit')).toHaveLength(3);
     expect(o.querySelector('.usa-rings-center b')!.textContent).toBe('Core');
     expect(o.querySelector('.usa-rings')!.getAttribute('aria-label')).toBe('Stack');
   });

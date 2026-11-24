@@ -101,7 +101,8 @@ test('the home page shows the release pages as live collections', async ({ page 
 
   const section = page.locator('#collections');
   await section.scrollIntoViewIfNeeded();
-  const tabs = section.getByRole('tab');
+  // only the section's own tabs: the demos inside the panels have tablists too
+  const tabs = section.locator('.col-tabs').getByRole('tab');
   await expect(tabs).toHaveCount(9);
   await expect(tabs.first()).toHaveAttribute('aria-selected', 'true');
   const open = section.locator('.col-panel:not([hidden])');
@@ -122,7 +123,7 @@ test('the home page shows the release pages as live collections', async ({ page 
   await expect(tabs.first()).toContainText('17.12 新品');
 
   await page.goto('/showcase/index.html#collections-luminous');
-  await expect(page.locator('#collections').getByRole('tab', { name: /Luminous|发光控件/ })).toHaveAttribute('aria-selected', 'true');
+  await expect(page.locator('#collections .col-tabs').getByRole('tab', { name: /Luminous|发光控件/ })).toHaveAttribute('aria-selected', 'true');
   await expect(page.locator('#collections .col-panel:not([hidden]) mo-luminous-switch')).toBeAttached({ timeout: 15000 });
 
   expect(errors).toEqual([]);

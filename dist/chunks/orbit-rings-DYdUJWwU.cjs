@@ -31,8 +31,10 @@ function defineOrbitRings(tag = 'usa-orbit-rings') {
                 root.setAttribute('aria-label', label);
             }
             const rings = new Map();
+            // children without data-ring share ring 1 once any child names a ring; with none named they spread over three
+            const named = others.some((k) => k.hasAttribute('data-ring'));
             others.forEach((k, i) => {
-                const r = Math.min(3, Math.max(1, Math.round(kit.dataNum(k, 'ring', (i % 3) + 1))));
+                const r = Math.min(3, Math.max(1, Math.round(kit.dataNum(k, 'ring', named ? 1 : (i % 3) + 1))));
                 if (!rings.has(r))
                     rings.set(r, []);
                 rings.get(r).push(k);
@@ -67,4 +69,4 @@ function defineOrbitRings(tag = 'usa-orbit-rings') {
 
 exports.defineOrbitRings = defineOrbitRings;
 exports.orbitAngle = orbitAngle;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/orbit-rings-DIuljMhp.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/orbit-rings-DYdUJWwU.cjs.map

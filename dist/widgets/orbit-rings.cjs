@@ -1,6 +1,6 @@
 'use strict';
 
-var widgets_orbitRings = require('../chunks/orbit-rings-DIuljMhp.cjs');
+var widgets_orbitRings = require('../chunks/orbit-rings-DYdUJWwU.cjs');
 
 
 

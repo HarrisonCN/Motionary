@@ -36,8 +36,10 @@ export function defineOrbitRings(tag = 'usa-orbit-rings'): CustomElementConstruc
       const label = this.str('label');
       if (label) { root.setAttribute('role', 'group'); root.setAttribute('aria-label', label); }
       const rings = new Map<number, HTMLElement[]>();
+      // children without data-ring share ring 1 once any child names a ring; with none named they spread over three
+      const named = others.some((k) => k.hasAttribute('data-ring'));
       others.forEach((k, i) => {
-        const r = Math.min(3, Math.max(1, Math.round(dataNum(k, 'ring', (i % 3) + 1))));
+        const r = Math.min(3, Math.max(1, Math.round(dataNum(k, 'ring', named ? 1 : (i % 3) + 1))));
         if (!rings.has(r)) rings.set(r, []);
         rings.get(r)!.push(k);
       });
