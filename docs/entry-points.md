@@ -12,7 +12,7 @@ registerPearlescent(); defineFx(); // <usa-fx effect="pearlescent">
 
 Notes: an effect entry imports its pack file (the effects of a pack share helpers), so its size is the pack’s, not the whole 6.x set. Runtime-powered widgets still need their prerequisites (`use(…)`, see the Requires badge). The group entries (`motionary/components/widgets`, `/fx2`, `/lite`) are unchanged.
 
-## Widgets (208)
+## Widgets (229)
 
 | Tag | Import | Define |
 |---|---|---|
@@ -138,6 +138,27 @@ Notes: an effect entry imports its pack file (the effects of a pack share helper
 | `<usa-file-tree>` | `motionary/widgets/file-tree` | `defineFileTree()` |
 | `<usa-download-menu>` | `motionary/widgets/download-menu` | `defineDownloadMenu()` |
 | `<usa-title-sequence>` | `motionary/widgets/title-sequence` | `defineTitleSequence()` |
+| `<usa-sidebar>` | `motionary/widgets/sidebar` | `defineSidebar()` |
+| `<usa-scrollspy>` | `motionary/widgets/scrollspy` | `defineScrollspy()` |
+| `<usa-pricing>` | `motionary/widgets/pricing` | `definePricing()` |
+| `<usa-announcement-bar>` | `motionary/widgets/announcement-bar` | `defineAnnouncementBar()` |
+| `<usa-sticky-cta>` | `motionary/widgets/sticky-cta` | `defineStickyCta()` |
+| `<usa-bento>` | `motionary/widgets/bento` | `defineBento()` |
+| `<usa-empty-state>` | `motionary/widgets/empty-state` | `defineEmptyState()` |
+| `<usa-lightbox>` | `motionary/widgets/lightbox` | `defineLightbox()` |
+| `<usa-data-table>` | `motionary/widgets/data-table` | `defineDataTable()` |
+| `<usa-filter-chips>` | `motionary/widgets/filter-chips` | `defineFilterChips()` |
+| `<usa-hotspots>` | `motionary/widgets/hotspots` | `defineHotspots()` |
+| `<usa-fan-carousel>` | `motionary/widgets/fan-carousel` | `defineFanCarousel()` |
+| `<usa-expand-cards>` | `motionary/widgets/expand-cards` | `defineExpandCards()` |
+| `<usa-json-viewer>` | `motionary/widgets/json-viewer` | `defineJsonViewer()` |
+| `<usa-scroll-velocity>` | `motionary/widgets/scroll-velocity` | `defineScrollVelocity()` |
+| `<usa-horizontal-scroll>` | `motionary/widgets/horizontal-scroll` | `defineHorizontalScroll()` |
+| `<usa-image-trail>` | `motionary/widgets/image-trail` | `defineImageTrail()` |
+| `<usa-hover-reveal-list>` | `motionary/widgets/hover-reveal-list` | `defineHoverRevealList()` |
+| `<usa-liquid-glass>` | `motionary/widgets/liquid-glass` | `defineLiquidGlass()` |
+| `<usa-path-motion>` | `motionary/widgets/path-motion` | `definePathMotion()` |
+| `<usa-cut-reveal>` | `motionary/widgets/cut-reveal` | `defineCutReveal()` |
 | `<usa-eclipse-toggle>` | `motionary/widgets/eclipse-toggle` | `defineEclipseToggle()` |
 | `<usa-hue-orbit>` | `motionary/widgets/hue-orbit` | `defineHueOrbit()` |
 | `<usa-notch-slider>` | `motionary/widgets/notch-slider` | `defineNotchSlider()` |

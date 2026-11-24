@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Added seven UI blocks: `mo-sidebar` (folds to an icon rail), `mo-scrollspy` (a table of contents that follows the reader), `mo-pricing` (monthly / yearly switch with rolling prices), `mo-announcement-bar`, `mo-sticky-cta`, `mo-bento` and `mo-empty-state` (a self-drawing illustration).
+- Added seven components: `mo-lightbox` (native dialog, zoom, pan and swipe), `mo-data-table` (sort, filter, rows glide into place), `mo-filter-chips`, `mo-hotspots`, `mo-fan-carousel`, `mo-expand-cards` and `mo-json-viewer` (an ARIA tree).
+- Added seven motion surfaces: `mo-scroll-velocity`, `mo-horizontal-scroll`, `mo-image-trail`, `mo-hover-reveal-list`, `mo-liquid-glass`, `mo-path-motion` and `mo-cut-reveal`.
+- All twenty-one enhance their own children, work without JavaScript as plain content, register under `defineWidgets('17.10')` and stand still under reduced motion. Details in docs/kit-17-10.md; demo page at showcase/kit.html.
+
 ## [17.9.0] - 2026-11-24 — Moments & Tactile
 
 - Added six micro-interaction widgets: `mo-eclipse-toggle`, `mo-hue-orbit`, `mo-notch-slider`, `mo-bulge-volume`, `mo-copy-button` and `mo-tile-relay`. Each sits on a native switch button, radio group, range input or button, and stands still under reduced motion.

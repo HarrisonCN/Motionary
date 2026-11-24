@@ -1614,6 +1614,113 @@
       "usa:change": [
         "{pressed}"
       ]
+    },
+    "usa-announcement-bar": {
+      "usa:change": [
+        "{index}"
+      ],
+      "usa:dismiss": [
+        "(none)"
+      ]
+    },
+    "usa-cut-reveal": {
+      "usa:done": [
+        "{direction}"
+      ]
+    },
+    "usa-data-table": {
+      "usa:filter": [
+        "{count, query}"
+      ],
+      "usa:sort": [
+        "{column, direction}"
+      ]
+    },
+    "usa-expand-cards": {
+      "usa:change": [
+        "{index}"
+      ]
+    },
+    "usa-fan-carousel": {
+      "usa:change": [
+        "{index}"
+      ]
+    },
+    "usa-filter-chips": {
+      "usa:change": [
+        "{count, value}"
+      ]
+    },
+    "usa-horizontal-scroll": {
+      "usa:change": [
+        "{index}"
+      ]
+    },
+    "usa-hotspots": {
+      "usa:close": [
+        "(none)"
+      ],
+      "usa:open": [
+        "{index}"
+      ]
+    },
+    "usa-hover-reveal-list": {
+      "usa:change": [
+        "{index}"
+      ]
+    },
+    "usa-json-viewer": {
+      "usa:toggle": [
+        "{open, path}"
+      ]
+    },
+    "usa-lightbox": {
+      "usa:change": [
+        "{index}"
+      ],
+      "usa:close": [
+        "(none)"
+      ],
+      "usa:open": [
+        "{index}"
+      ]
+    },
+    "usa-path-motion": {
+      "usa:done": [
+        "(none)"
+      ]
+    },
+    "usa-pricing": {
+      "usa:change": [
+        "{period}"
+      ],
+      "usa:select": [
+        "{period, plan, price}"
+      ]
+    },
+    "usa-scrollspy": {
+      "usa:change": [
+        "{id, index}"
+      ]
+    },
+    "usa-sidebar": {
+      "usa:select": [
+        "{index, item}"
+      ],
+      "usa:toggle": [
+        "{collapsed}"
+      ]
+    },
+    "usa-sticky-cta": {
+      "usa:dismiss": [
+        "(none)"
+      ],
+      "usa:hide": [
+        "(none)"
+      ],
+      "usa:show": [
+        "(none)"
+      ]
     }
   }
 }
