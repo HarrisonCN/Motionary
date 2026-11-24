@@ -16,7 +16,8 @@ test('17.14 looks: the new palettes filter and the new treatments restyle the re
   await expect.poll(() => bar.evaluate((el) => getComputedStyle(el).borderTopStyle)).toBe('outset');
   await page.getByRole('button', { name: '试用 pill-cobalt' }).click();
   await expect.poll(() => bar.evaluate((el) => getComputedStyle(el).borderTopStyle)).toBe('solid');
-  await expect.poll(() => bar.evaluate((el) => getComputedStyle(el).borderTopWidth)).toBe('1.5px');
+  // Firefox snaps a 1.5px border to whole device pixels, so check the width token the look sets
+  await expect.poll(() => bar.evaluate((el) => getComputedStyle(el).getPropertyValue('--mo-kit-border-width').trim())).toBe('1.5px');
 
   await page.getByRole('tab', { name: /组件/ }).click();
   await page.getByRole('button', { name: '极光' }).click();
