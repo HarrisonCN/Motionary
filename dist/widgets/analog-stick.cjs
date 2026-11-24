@@ -1,6 +1,6 @@
 'use strict';
 
-var widgets_analogStick = require('../chunks/analog-stick-BkLE7nqQ.cjs');
+var widgets_analogStick = require('../chunks/analog-stick-BjHCsEpF.cjs');
 
 
 

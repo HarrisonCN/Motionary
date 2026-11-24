@@ -4,7 +4,7 @@ var base = require('../chunks/base-DzZEJhQB.cjs');
 var moName = require('../chunks/mo-name-DR9ysd5S.cjs');
 var moments = require('../chunks/moments-eoZA2npZ.cjs');
 var tactile$1 = require('../chunks/tactile-Dfg7b_8s.cjs');
-var tactile = require('../chunks/tactile-BQ8EFRI9.cjs');
+var tactile = require('../chunks/tactile-DqlGeBjU.cjs');
 
 function defineSquishStepper(tag = 'usa-squish-stepper') {
     const ctor = base.defineElement(tag, Base => class SquishStepper extends Base {

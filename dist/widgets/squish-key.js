@@ -2,7 +2,7 @@ import { f as defineElement } from '../chunks/base-SPDwWyB1.js';
 import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
 import { m as make } from '../chunks/moments-Cg_NlOYG.js';
 import { p as pressSpring, t as tap } from '../chunks/tactile-BYcJBRbl.js';
-import { c as css } from '../chunks/tactile-CFgWPKyr.js';
+import { c as css } from '../chunks/tactile-CJEqqRov.js';
 
 function defineSquishKey(tag = 'usa-squish-key') {
     const ctor = defineElement(tag, Base => class SquishKey extends Base {

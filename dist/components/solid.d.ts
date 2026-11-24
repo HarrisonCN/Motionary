@@ -1689,6 +1689,11 @@ interface LegacyAttributes {
         item?: string | boolean | number;
         label?: string | boolean | number;
     };
+    'usa-align-switch': {
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-ambient': {
         color?: string | boolean | number;
         density?: string | boolean | number;
@@ -1779,9 +1784,19 @@ interface LegacyAttributes {
         snap?: string | boolean | number;
         start?: string | boolean | number;
     };
+    'usa-bounce-button': {
+        direction?: string | boolean | number;
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+    };
     'usa-breadcrumbs': {
         label?: string | boolean | number;
         max?: string | boolean | number;
+    };
+    'usa-breath-orb': {
+        duration?: string | boolean | number;
+        label?: string | boolean | number;
+        paused?: string | boolean | number;
     };
     'usa-bulge-volume': {
         disabled?: string | boolean | number;
@@ -1826,10 +1841,22 @@ interface LegacyAttributes {
         perspective?: string | boolean | number;
         radius?: string | boolean | number;
     };
+    'usa-cart-badge': {
+        'add-label'?: string | boolean | number;
+        count?: string | boolean | number;
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+    };
     'usa-cart-drawer': {
         currency?: string | boolean | number;
         items?: string | boolean | number;
         label?: string | boolean | number;
+    };
+    'usa-center-bars': {
+        duration?: string | boolean | number;
+        label?: string | boolean | number;
+        paused?: string | boolean | number;
     };
     'usa-chapter-nav': {
         for?: string | boolean | number;
@@ -1856,6 +1883,14 @@ interface LegacyAttributes {
         label?: string | boolean | number;
         value?: string | boolean | number;
     };
+    'usa-chip-input': {
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+        name?: string | boolean | number;
+        placeholder?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-click': {
         color?: string | boolean | number;
         count?: string | boolean | number;
@@ -1872,6 +1907,11 @@ interface LegacyAttributes {
     'usa-code-export': {
         for?: string | boolean | number;
         formats?: string | boolean | number;
+    };
+    'usa-code-shake': {
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        length?: string | boolean | number;
     };
     'usa-coffee-timer': {
         animated?: string | boolean | number;
@@ -2057,6 +2097,11 @@ interface LegacyAttributes {
         disabled?: string | boolean | number;
         label?: string | boolean | number;
     };
+    'usa-elastic-accordion': {
+        disabled?: string | boolean | number;
+        heading?: string | boolean | number;
+        open?: string | boolean | number;
+    };
     'usa-elastic-mesh': {
         accent?: string | boolean | number;
         animated?: string | boolean | number;
@@ -2065,6 +2110,17 @@ interface LegacyAttributes {
         label?: string | boolean | number;
         paused?: string | boolean | number;
         strength?: string | boolean | number;
+    };
+    'usa-elastic-slider': {
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        max?: string | boolean | number;
+        min?: string | boolean | number;
+        name?: string | boolean | number;
+        step?: string | boolean | number;
+        ticks?: string | boolean | number;
+        unit?: string | boolean | number;
+        value?: string | boolean | number;
     };
     'usa-equalizer': {
         bands?: string | boolean | number;
@@ -2245,6 +2301,11 @@ interface LegacyAttributes {
         radius?: string | boolean | number;
         size?: string | boolean | number;
     };
+    'usa-groove-toggle': {
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        pressed?: string | boolean | number;
+    };
     'usa-gyro-card': {
         glare?: string | boolean | number;
         max?: string | boolean | number;
@@ -2316,6 +2377,11 @@ interface LegacyAttributes {
         size?: string | boolean | number;
         toggle?: string | boolean | number;
     };
+    'usa-infinity-loop': {
+        duration?: string | boolean | number;
+        label?: string | boolean | number;
+        paused?: string | boolean | number;
+    };
     'usa-ink-flow': {
         accent?: string | boolean | number;
         animated?: string | boolean | number;
@@ -2337,6 +2403,11 @@ interface LegacyAttributes {
     'usa-iris-diaphragm': {
         label?: string | boolean | number;
         value?: string | boolean | number;
+    };
+    'usa-jelly-button': {
+        disabled?: string | boolean | number;
+        glyph?: string | boolean | number;
+        label?: string | boolean | number;
     };
     'usa-kanban': {
         label?: string | boolean | number;
@@ -2728,6 +2799,13 @@ interface LegacyAttributes {
         min?: string | boolean | number;
         preset?: string | boolean | number;
     };
+    'usa-plan-picker': {
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        name?: string | boolean | number;
+        plans?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-player': {
         controls?: string | boolean | number;
         loop?: string | boolean | number;
@@ -2802,6 +2880,11 @@ interface LegacyAttributes {
         disabled?: string | boolean | number;
         label?: string | boolean | number;
         threshold?: string | boolean | number;
+    };
+    'usa-quarter-ring': {
+        duration?: string | boolean | number;
+        label?: string | boolean | number;
+        paused?: string | boolean | number;
     };
     'usa-race-telemetry': {
         animated?: string | boolean | number;
@@ -3033,6 +3116,11 @@ interface LegacyAttributes {
         label?: string | boolean | number;
         listen?: string | boolean | number;
     };
+    'usa-six-dot-orbit': {
+        duration?: string | boolean | number;
+        label?: string | boolean | number;
+        paused?: string | boolean | number;
+    };
     'usa-skeleton': {
         avatar?: string | boolean | number;
         circle?: string | boolean | number;
@@ -3133,6 +3221,13 @@ interface LegacyAttributes {
         mass?: string | boolean | number;
         stiffness?: string | boolean | number;
     };
+    'usa-squish-indicator': {
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        name?: string | boolean | number;
+        options?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-squish-key': {
         disabled?: string | boolean | number;
         label?: string | boolean | number;
@@ -3176,6 +3271,12 @@ interface LegacyAttributes {
         unit?: string | boolean | number;
         value?: string | boolean | number;
     };
+    'usa-step-track': {
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        steps?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-stepper': {
         clickable?: string | boolean | number;
         label?: string | boolean | number;
@@ -3199,6 +3300,12 @@ interface LegacyAttributes {
         template?: string | boolean | number;
         zoom?: string | boolean | number;
     };
+    'usa-strength-meter': {
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        name?: string | boolean | number;
+        placeholder?: string | boolean | number;
+    };
     'usa-suggestion-chips': {
         dismiss?: string | boolean | number;
         items?: string | boolean | number;
@@ -3216,6 +3323,11 @@ interface LegacyAttributes {
         sunset?: string | boolean | number;
         'sunset-label'?: string | boolean | number;
         value?: string | boolean | number;
+    };
+    'usa-sweep-lines': {
+        duration?: string | boolean | number;
+        label?: string | boolean | number;
+        paused?: string | boolean | number;
     };
     'usa-swipe-deck': {
         label?: string | boolean | number;
@@ -3243,6 +3355,11 @@ interface LegacyAttributes {
     'usa-tabs': {
         indicator?: string | boolean | number;
     };
+    'usa-tada-button': {
+        disabled?: string | boolean | number;
+        label?: string | boolean | number;
+        pressed?: string | boolean | number;
+    };
     'usa-terminal': {
         loop?: string | boolean | number;
         prompt?: string | boolean | number;
@@ -3253,6 +3370,12 @@ interface LegacyAttributes {
     'usa-text-loupe': {
         disabled?: string | boolean | number;
         label?: string | boolean | number;
+        text?: string | boolean | number;
+    };
+    'usa-text-reveal': {
+        by?: string | boolean | number;
+        once?: string | boolean | number;
+        stagger?: string | boolean | number;
         text?: string | boolean | number;
     };
     'usa-text-rotate': {
@@ -3292,6 +3415,11 @@ interface LegacyAttributes {
         target?: string | boolean | number;
         themes?: string | boolean | number;
         value?: string | boolean | number;
+    };
+    'usa-three-dot-bounce': {
+        duration?: string | boolean | number;
+        label?: string | boolean | number;
+        paused?: string | boolean | number;
     };
     'usa-tile-relay': {
         duration?: string | boolean | number;
@@ -3352,6 +3480,11 @@ interface LegacyAttributes {
         running?: string | boolean | number;
         stations?: string | boolean | number;
         value?: string | boolean | number;
+    };
+    'usa-triple-pulse': {
+        duration?: string | boolean | number;
+        label?: string | boolean | number;
+        paused?: string | boolean | number;
     };
     'usa-typewriter': {
         delay?: string | boolean | number;
@@ -3421,6 +3554,11 @@ interface LegacyAttributes {
         place?: string | boolean | number;
         temp?: string | boolean | number;
         unit?: string | boolean | number;
+    };
+    'usa-wifi-signal': {
+        label?: string | boolean | number;
+        level?: string | boolean | number;
+        searching?: string | boolean | number;
     };
     'usa-worker-canvas': {
         label?: string | boolean | number;

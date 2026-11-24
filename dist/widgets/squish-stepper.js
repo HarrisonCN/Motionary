@@ -2,7 +2,7 @@ import { f as defineElement } from '../chunks/base-SPDwWyB1.js';
 import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
 import { b as bound, r as roundTo, m as make } from '../chunks/moments-Cg_NlOYG.js';
 import { p as pressSpring, t as tap } from '../chunks/tactile-BYcJBRbl.js';
-import { c as css } from '../chunks/tactile-CFgWPKyr.js';
+import { c as css } from '../chunks/tactile-CJEqqRov.js';
 
 function defineSquishStepper(tag = 'usa-squish-stepper') {
     const ctor = defineElement(tag, Base => class SquishStepper extends Base {

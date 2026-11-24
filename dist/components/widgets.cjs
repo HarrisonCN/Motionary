@@ -13,8 +13,32 @@ var widgets_bulgeVolume = require('../widgets/bulge-volume.cjs');
 var widgets_copyButton = require('../widgets/copy-button.cjs');
 var widgets_tileRelay = require('../chunks/tile-relay-mMK6LAU0.cjs');
 var widgets_squishKey = require('../widgets/squish-key.cjs');
+var widgets_sixDotOrbit = require('../widgets/six-dot-orbit.cjs');
+var widgets_centerBars = require('../widgets/center-bars.cjs');
+var widgets_quarterRing = require('../widgets/quarter-ring.cjs');
+var widgets_triplePulse = require('../widgets/triple-pulse.cjs');
+var widgets_breathOrb = require('../widgets/breath-orb.cjs');
+var widgets_threeDotBounce = require('../widgets/three-dot-bounce.cjs');
+var widgets_infinityLoop = require('../widgets/infinity-loop.cjs');
+var widgets_sweepLines = require('../widgets/sweep-lines.cjs');
+var widgets_wifiSignal = require('../widgets/wifi-signal.cjs');
+var widgets_textReveal = require('../chunks/text-reveal-BHA_e_r_.cjs');
+var widgets_jellyButton = require('../widgets/jelly-button.cjs');
+var widgets_bounceButton = require('../widgets/bounce-button.cjs');
+var widgets_tadaButton = require('../widgets/tada-button.cjs');
+var widgets_grooveToggle = require('../widgets/groove-toggle.cjs');
+var widgets_cartBadge = require('../chunks/cart-badge-B9j90whk.cjs');
+var widgets_chipInput = require('../chunks/chip-input-CgQ9ploI.cjs');
+var widgets_planPicker = require('../chunks/plan-picker-BvyfSPXs.cjs');
+var widgets_alignSwitch = require('../chunks/align-switch-CElDejnc.cjs');
+var widgets_elasticSlider = require('../widgets/elastic-slider.cjs');
+var widgets_codeShake = require('../chunks/code-shake-BXKp92Iq.cjs');
+var widgets_strengthMeter = require('../chunks/strength-meter-B1ESwLkU.cjs');
+var widgets_stepTrack = require('../widgets/step-track.cjs');
+var widgets_elasticAccordion = require('../widgets/elastic-accordion.cjs');
+var widgets_squishIndicator = require('../chunks/squish-indicator-T2majnp5.cjs');
 var widgets_squishStepper = require('../widgets/squish-stepper.cjs');
-var widgets_analogStick = require('../chunks/analog-stick-BkLE7nqQ.cjs');
+var widgets_analogStick = require('../chunks/analog-stick-BjHCsEpF.cjs');
 var widgets_transferButton = require('../widgets/transfer-button.cjs');
 var widgets_lensStack = require('../widgets/lens-stack.cjs');
 var widgets_irisDiaphragm = require('../widgets/iris-diaphragm.cjs');
@@ -226,7 +250,7 @@ const WIDGETS = {
     '10.6': { 'usa-lottie-player': widgets_lottiePlayer.defineLottiePlayer, 'usa-rive': widgets_rive.defineRive, 'usa-token-editor': widgets_tokenEditor.defineTokenEditor },
     '10.7': { 'usa-physics-playground': widgets_physicsPlayground.definePhysicsPlayground, 'usa-motion-prompt': widgets_motionPrompt.defineMotionPrompt },
     '17.3': { 'usa-mega-menu': widgets_megaMenu.defineMegaMenu, 'usa-nav-flyout': widgets_megaMenu.defineNavFlyout, 'usa-fullscreen-menu': widgets_fullscreenMenu.defineFullscreenMenu, 'usa-breadcrumbs': widgets_breadcrumbs.defineBreadcrumbs, 'usa-file-tree': widgets_fileTree.defineFileTree, 'usa-download-menu': widgets_downloadMenu.defineDownloadMenu, 'usa-title-sequence': widgets_titleSequence.defineTitleSequence },
-    '17.9': { 'usa-eclipse-toggle': widgets_eclipseToggle.defineEclipseToggle, 'usa-hue-orbit': widgets_hueOrbit.defineHueOrbit, 'usa-notch-slider': widgets_notchSlider.defineNotchSlider, 'usa-bulge-volume': widgets_bulgeVolume.defineBulgeVolume, 'usa-copy-button': widgets_copyButton.defineCopyButton, 'usa-tile-relay': widgets_tileRelay.defineTileRelay, 'usa-squish-key': widgets_squishKey.defineSquishKey, 'usa-squish-stepper': widgets_squishStepper.defineSquishStepper, 'usa-analog-stick': widgets_analogStick.defineAnalogStick, 'usa-transfer-button': widgets_transferButton.defineTransferButton },
+    '17.9': { 'usa-eclipse-toggle': widgets_eclipseToggle.defineEclipseToggle, 'usa-hue-orbit': widgets_hueOrbit.defineHueOrbit, 'usa-notch-slider': widgets_notchSlider.defineNotchSlider, 'usa-bulge-volume': widgets_bulgeVolume.defineBulgeVolume, 'usa-copy-button': widgets_copyButton.defineCopyButton, 'usa-tile-relay': widgets_tileRelay.defineTileRelay, 'usa-squish-key': widgets_squishKey.defineSquishKey, 'usa-squish-stepper': widgets_squishStepper.defineSquishStepper, 'usa-analog-stick': widgets_analogStick.defineAnalogStick, 'usa-transfer-button': widgets_transferButton.defineTransferButton, 'usa-six-dot-orbit': widgets_sixDotOrbit.defineSixDotOrbit, 'usa-center-bars': widgets_centerBars.defineCenterBars, 'usa-quarter-ring': widgets_quarterRing.defineQuarterRing, 'usa-triple-pulse': widgets_triplePulse.defineTriplePulse, 'usa-breath-orb': widgets_breathOrb.defineBreathOrb, 'usa-three-dot-bounce': widgets_threeDotBounce.defineThreeDotBounce, 'usa-infinity-loop': widgets_infinityLoop.defineInfinityLoop, 'usa-sweep-lines': widgets_sweepLines.defineSweepLines, 'usa-wifi-signal': widgets_wifiSignal.defineWifiSignal, 'usa-text-reveal': widgets_textReveal.defineTextReveal, 'usa-jelly-button': widgets_jellyButton.defineJellyButton, 'usa-bounce-button': widgets_bounceButton.defineBounceButton, 'usa-tada-button': widgets_tadaButton.defineTadaButton, 'usa-groove-toggle': widgets_grooveToggle.defineGrooveToggle, 'usa-cart-badge': widgets_cartBadge.defineCartBadge, 'usa-chip-input': widgets_chipInput.defineChipInput, 'usa-plan-picker': widgets_planPicker.definePlanPicker, 'usa-align-switch': widgets_alignSwitch.defineAlignSwitch, 'usa-elastic-slider': widgets_elasticSlider.defineElasticSlider, 'usa-code-shake': widgets_codeShake.defineCodeShake, 'usa-strength-meter': widgets_strengthMeter.defineStrengthMeter, 'usa-step-track': widgets_stepTrack.defineStepTrack, 'usa-elastic-accordion': widgets_elasticAccordion.defineElasticAccordion, 'usa-squish-indicator': widgets_squishIndicator.defineSquishIndicator },
     '17.8': { 'usa-lens-stack': widgets_lensStack.defineLensStack, 'usa-iris-diaphragm': widgets_irisDiaphragm.defineIrisDiaphragm, 'usa-contour-relief': widgets_contourRelief.defineContourRelief },
     '17.7': { 'usa-textarea': widgets_textarea.defineTextarea, 'usa-search-field': widgets_searchField.defineSearchField, 'usa-form-stepper': widgets_formStepper.defineFormStepper, 'usa-select': widgets_select.defineSelect, 'usa-combobox': widgets_combobox.defineCombobox, 'usa-multi-select': widgets_multiSelect.defineMultiSelect, 'usa-number-stepper': widgets_numberStepper.defineNumberStepper, 'usa-password': widgets_password.definePassword, 'usa-range-slider': widgets_rangeSlider.defineRangeSlider, 'usa-consent': widgets_consent.defineConsent, 'usa-cta-popup': widgets_ctaPopup.defineCtaPopup, 'usa-validation-summary': widgets_validationSummary.defineValidationSummary },
     '17.6': { 'usa-gravity-well': widgets_gravityWell.defineGravityWell, 'usa-liquid-metal': widgets_liquidMetal.defineLiquidMetal, 'usa-reaction-field': widgets_reactionField.defineReactionField, 'usa-ink-flow': widgets_inkFlow.defineInkFlow, 'usa-fluid-type': widgets_fluidType.defineFluidType, 'usa-magnetic-field': widgets_magneticField.defineMagneticField, 'usa-elastic-mesh': widgets_elasticMesh.defineElasticMesh, 'usa-spring-lab': widgets_springLab.defineSpringLab, 'usa-bezier-lab': widgets_bezierLab.defineBezierLab, 'usa-text-loupe': widgets_textLoupe.defineTextLoupe, 'usa-revision-reveal': widgets_revisionReveal.defineRevisionReveal, 'usa-hold-action': widgets_holdAction.defineHoldAction, 'usa-scrub-number': widgets_scrubNumber.defineScrubNumber },
@@ -262,6 +286,39 @@ exports.defineCopyButton = widgets_copyButton.defineCopyButton;
 exports.defineTileRelay = widgets_tileRelay.defineTileRelay;
 exports.relayOrder = widgets_tileRelay.relayOrder;
 exports.defineSquishKey = widgets_squishKey.defineSquishKey;
+exports.defineSixDotOrbit = widgets_sixDotOrbit.defineSixDotOrbit;
+exports.defineCenterBars = widgets_centerBars.defineCenterBars;
+exports.defineQuarterRing = widgets_quarterRing.defineQuarterRing;
+exports.defineTriplePulse = widgets_triplePulse.defineTriplePulse;
+exports.defineBreathOrb = widgets_breathOrb.defineBreathOrb;
+exports.defineThreeDotBounce = widgets_threeDotBounce.defineThreeDotBounce;
+exports.defineInfinityLoop = widgets_infinityLoop.defineInfinityLoop;
+exports.defineSweepLines = widgets_sweepLines.defineSweepLines;
+exports.defineWifiSignal = widgets_wifiSignal.defineWifiSignal;
+exports.defineTextReveal = widgets_textReveal.defineTextReveal;
+exports.revealPieces = widgets_textReveal.revealPieces;
+exports.defineJellyButton = widgets_jellyButton.defineJellyButton;
+exports.defineBounceButton = widgets_bounceButton.defineBounceButton;
+exports.defineTadaButton = widgets_tadaButton.defineTadaButton;
+exports.defineGrooveToggle = widgets_grooveToggle.defineGrooveToggle;
+exports.badgeText = widgets_cartBadge.badgeText;
+exports.defineCartBadge = widgets_cartBadge.defineCartBadge;
+exports.defineChipInput = widgets_chipInput.defineChipInput;
+exports.splitChips = widgets_chipInput.splitChips;
+exports.definePlanPicker = widgets_planPicker.definePlanPicker;
+exports.parsePlans = widgets_planPicker.parsePlans;
+exports.ALIGNMENTS = widgets_alignSwitch.ALIGNMENTS;
+exports.defineAlignSwitch = widgets_alignSwitch.defineAlignSwitch;
+exports.defineElasticSlider = widgets_elasticSlider.defineElasticSlider;
+exports.defineCodeShake = widgets_codeShake.defineCodeShake;
+exports.digitsOf = widgets_codeShake.digitsOf;
+exports.STRENGTH_WORDS = widgets_strengthMeter.STRENGTH_WORDS;
+exports.defineStrengthMeter = widgets_strengthMeter.defineStrengthMeter;
+exports.passwordScore = widgets_strengthMeter.passwordScore;
+exports.defineStepTrack = widgets_stepTrack.defineStepTrack;
+exports.defineElasticAccordion = widgets_elasticAccordion.defineElasticAccordion;
+exports.defineSquishIndicator = widgets_squishIndicator.defineSquishIndicator;
+exports.parseOptions = widgets_squishIndicator.parseOptions;
 exports.defineSquishStepper = widgets_squishStepper.defineSquishStepper;
 exports.deadZone = widgets_analogStick.deadZone;
 exports.defineAnalogStick = widgets_analogStick.defineAnalogStick;
