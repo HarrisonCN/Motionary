@@ -58,7 +58,7 @@ test('17.9 UI moments respond by keyboard and pointer without page errors', asyn
   await tada.click();
   await expect(tada).toHaveAttribute('aria-pressed', 'true');
 
-  await page.locator('mo-plan-picker').getByText('团队').click();
+  await page.locator('mo-plan-picker .usa-plan').nth(2).click();
   await expect.poll(() => page.locator('mo-plan-picker').evaluate((el) => el.value)).toBe('团队');
 
   await page.locator('mo-align-switch').getByRole('radio', { name: 'Align right' }).check();
