@@ -35,7 +35,8 @@ export function defineScrollspy(tag = 'usa-scrollspy'): CustomElementConstructor
       const list = make('ol', 'usa-spy-list');
       const marker = make('span', 'usa-spy-marker');
       marker.setAttribute('aria-hidden', 'true');
-      const scope: ParentNode = (this.str('target') && document.querySelector(this.str('target'))) || document;
+      let scope: ParentNode = document;
+      try { scope = (this.str('target') && document.querySelector(this.str('target'))) || document; } catch { /* invalid selector → the document */ }
       let links: HTMLAnchorElement[];
       if (own.length) {
         links = own;
