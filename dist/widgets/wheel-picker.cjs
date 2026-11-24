@@ -94,15 +94,28 @@ function defineWheelPicker(tag = 'usa-wheel-picker') {
             };
             wheels.forEach((w, wi) => {
                 let settle = 0;
+                // only a scroll the person started picks a value; a scroll the browser makes on its own (re-snapping after
+                // layout, restoring a position) is put back on the current row instead
+                let byUser = false;
+                const touched = () => (byUser = true);
+                for (const t of ['wheel', 'pointerdown', 'touchstart'])
+                    this.listen(w.view, t, touched, { passive: true });
                 this.listen(w.view, 'scroll', () => {
                     if (frames[wi])
                         base.caf(frames[wi]);
                     frames[wi] = base.raf(() => { frames[wi] = 0; paint(w); }, this);
                     clearTimeout(settle);
                     settle = window.setTimeout(() => {
-                        const k = kit13.wheelIndex(w.view.scrollTop, rowH(w), w.opts.length);
+                        const h = rowH(w);
+                        if (!byUser) {
+                            if (Math.abs(w.view.scrollTop - w.current * h) > 1)
+                                w.view.scrollTop = w.current * h;
+                            return;
+                        }
+                        byUser = false;
+                        const k = kit13.wheelIndex(w.view.scrollTop, h, w.opts.length);
                         if (k !== w.current)
-                            set(wi, k, Math.abs(w.view.scrollTop - k * rowH(w)) > 1);
+                            set(wi, k, Math.abs(w.view.scrollTop - k * h) > 1);
                     }, 90);
                 }, { passive: true });
                 this.onCleanup(() => clearTimeout(settle));

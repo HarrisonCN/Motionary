@@ -4,7 +4,7 @@ import { m as make } from '../chunks/moments-Cg_NlOYG.js';
 import { l as list, c as cleanColor, a as formatNumber } from '../chunks/kit-DugHPVcq.js';
 import { n as numbers } from '../chunks/kit-12-C5AMRg3h.js';
 import { w as waffleCells } from '../chunks/kit-13-hC4WCTBH.js';
-import { c as css } from '../chunks/parts-kit-13-CWT9RiQA.js';
+import { c as css } from '../chunks/parts-kit-13-CQI5zrN-.js';
 
 const PALETTE = ['#4f46e5', '#06b6d4', '#f59e0b', '#ec4899', '#10b981', '#8b5cf6'];
 function defineWaffleChart(tag = 'usa-waffle-chart') {

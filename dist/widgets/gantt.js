@@ -3,7 +3,7 @@ import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
 import { m as make } from '../chunks/moments-Cg_NlOYG.js';
 import { c as cleanColor } from '../chunks/kit-DugHPVcq.js';
 import { d as dayNumber, h as ganttSpan } from '../chunks/kit-13-hC4WCTBH.js';
-import { c as css } from '../chunks/parts-kit-13-CWT9RiQA.js';
+import { c as css } from '../chunks/parts-kit-13-CQI5zrN-.js';
 
 const day = (n, locale) => {
     try {
@@ -87,7 +87,7 @@ function defineGantt(tag = 'usa-gantt') {
             root.append(axis, rows);
             if (Number.isFinite(today) && today >= min && today <= max) {
                 const mark = make('span', 'usa-gantt-today');
-                mark.style.setProperty('--x', `${((today - min + 0.5) / days) * 100}%`);
+                mark.style.setProperty('--x', ((today - min + 0.5) / days * 100).toFixed(3));
                 mark.append(make('span', '', this.str('today-label', 'Today')));
                 mark.setAttribute('aria-hidden', 'true');
                 root.append(mark);

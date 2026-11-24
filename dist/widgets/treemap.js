@@ -4,7 +4,7 @@ import { m as make } from '../chunks/moments-Cg_NlOYG.js';
 import { l as list, c as cleanColor, a as formatNumber } from '../chunks/kit-DugHPVcq.js';
 import { n as numbers, r as rovingIndex } from '../chunks/kit-12-C5AMRg3h.js';
 import { j as squarify } from '../chunks/kit-13-hC4WCTBH.js';
-import { c as css } from '../chunks/parts-kit-13-CWT9RiQA.js';
+import { c as css } from '../chunks/parts-kit-13-CQI5zrN-.js';
 
 const PALETTE = ['#4f46e5', '#0891b2', '#d97706', '#db2777', '#059669', '#7c3aed', '#ea580c', '#475569'];
 function defineTreemap(tag = 'usa-treemap') {

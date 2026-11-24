@@ -6,7 +6,7 @@ var moments = require('../chunks/moments-eoZA2npZ.cjs');
 var kit = require('../chunks/kit-CujTUbPK.cjs');
 var kit12 = require('../chunks/kit-12-B4H_NaC_.cjs');
 var kit13 = require('../chunks/kit-13-CsarW7Cz.cjs');
-var partsKit13 = require('../chunks/parts-kit-13-C0a7-R_a.cjs');
+var partsKit13 = require('../chunks/parts-kit-13-BzwC3E_M.cjs');
 
 function defineFunnelChart(tag = 'usa-funnel-chart') {
     const ctor = base.defineElement(tag, Base => class FunnelChart extends Base {

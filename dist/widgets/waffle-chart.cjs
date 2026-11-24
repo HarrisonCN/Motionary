@@ -6,7 +6,7 @@ var moments = require('../chunks/moments-eoZA2npZ.cjs');
 var kit = require('../chunks/kit-CujTUbPK.cjs');
 var kit12 = require('../chunks/kit-12-B4H_NaC_.cjs');
 var kit13 = require('../chunks/kit-13-CsarW7Cz.cjs');
-var partsKit13 = require('../chunks/parts-kit-13-C0a7-R_a.cjs');
+var partsKit13 = require('../chunks/parts-kit-13-BzwC3E_M.cjs');
 
 const PALETTE = ['#4f46e5', '#06b6d4', '#f59e0b', '#ec4899', '#10b981', '#8b5cf6'];
 function defineWaffleChart(tag = 'usa-waffle-chart') {

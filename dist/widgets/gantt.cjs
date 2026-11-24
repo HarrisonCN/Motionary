@@ -5,7 +5,7 @@ var moName = require('../chunks/mo-name-DR9ysd5S.cjs');
 var moments = require('../chunks/moments-eoZA2npZ.cjs');
 var kit = require('../chunks/kit-CujTUbPK.cjs');
 var kit13 = require('../chunks/kit-13-CsarW7Cz.cjs');
-var partsKit13 = require('../chunks/parts-kit-13-C0a7-R_a.cjs');
+var partsKit13 = require('../chunks/parts-kit-13-BzwC3E_M.cjs');
 
 const day = (n, locale) => {
     try {
@@ -89,7 +89,7 @@ function defineGantt(tag = 'usa-gantt') {
             root.append(axis, rows);
             if (Number.isFinite(today) && today >= min && today <= max) {
                 const mark = moments.make('span', 'usa-gantt-today');
-                mark.style.setProperty('--x', `${((today - min + 0.5) / days) * 100}%`);
+                mark.style.setProperty('--x', ((today - min + 0.5) / days * 100).toFixed(3));
                 mark.append(moments.make('span', '', this.str('today-label', 'Today')));
                 mark.setAttribute('aria-hidden', 'true');
                 root.append(mark);

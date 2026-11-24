@@ -4,7 +4,7 @@ import { m as make } from '../chunks/moments-Cg_NlOYG.js';
 import { l as list, c as cleanColor, a as formatNumber, t as tween } from '../chunks/kit-DugHPVcq.js';
 import { n as numbers } from '../chunks/kit-12-C5AMRg3h.js';
 import { g as funnelRows } from '../chunks/kit-13-hC4WCTBH.js';
-import { c as css } from '../chunks/parts-kit-13-CWT9RiQA.js';
+import { c as css } from '../chunks/parts-kit-13-CQI5zrN-.js';
 
 function defineFunnelChart(tag = 'usa-funnel-chart') {
     const ctor = defineElement(tag, Base => class FunnelChart extends Base {

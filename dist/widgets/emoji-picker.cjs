@@ -1,6 +1,6 @@
 'use strict';
 
-var widgets_emojiPicker = require('../chunks/emoji-picker-BxXmJJ0z.cjs');
+var widgets_emojiPicker = require('../chunks/emoji-picker-Cxbnq_yU.cjs');
 
 
 
