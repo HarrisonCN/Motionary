@@ -1,0 +1,80 @@
+import { caf, defineElement, raf, type UsaElement } from '../base';
+import { defineMoName } from './mo-name';
+import { make } from './moments';
+import { ownChildren } from './kit';
+import css from './ui-blocks.css?raw';
+
+/**
+ * A call-to-action bar that slides in once the reader has scrolled past the point where the page's own call to
+ * action was (the `watch` element, or `offset` pixels), and slides away again when that comes back into view. While
+ * hidden it is `inert`, so its buttons leave the tab order. Its own children are the bar's content.
+ *
+ * Attributes: `watch` (selector of the element whose leaving the top of the viewport shows the bar), `offset`
+ * (px scrolled before showing when there is no `watch`; 320), `position` (bottom | top), `label` (Call to action),
+ * `dismissible` (adds a close button; once closed it stays closed until the element is re-mounted), `close-label`.
+ * Events `usa:show`, `usa:hide`, `usa:dismiss`.
+ */
+export interface UsaStickyCtaElement extends UsaElement {
+  readonly shown: boolean;
+}
+
+export function defineStickyCta(tag = 'usa-sticky-cta'): CustomElementConstructor | undefined {
+  const ctor = defineElement(tag, Base => class StickyCta extends Base {
+    static get observedAttributes(): string[] { return ['watch', 'offset', 'position', 'label', 'dismissible', 'close-label']; }
+    private _shown = false;
+    get shown(): boolean { return this._shown; }
+    mount(): void {
+      const kids = ownChildren(this);
+      const root = make('section', 'usa-kit usa-cta-bar');
+      root.setAttribute('aria-label', this.str('label', 'Call to action'));
+      root.dataset.position = this.str('position') === 'top' ? 'top' : 'bottom';
+      const inner = make('div', 'usa-cta-inner');
+      inner.append(...kids);
+      root.append(inner);
+      let closed = false;
+      if (this.flag('dismissible')) {
+        const close = make('button', 'usa-ann-btn usa-ann-close');
+        close.type = 'button';
+        close.setAttribute('aria-label', this.str('close-label', 'Dismiss'));
+        close.append(make('span', 'usa-ann-x'));
+        root.append(close);
+        this.listen(close, 'click', () => { closed = true; set(false); this.emit('dismiss'); });
+      }
+      root.toggleAttribute('data-static', this.reduced);
+      this.append(root);
+      const set = (on: boolean) => {
+        on = on && !closed;
+        root.inert = !on;
+        root.toggleAttribute('data-shown', on);
+        root.setAttribute('aria-hidden', String(!on));
+        if (on === this._shown) return;
+        // moving focus out of a bar that is about to hide keeps it from being lost
+        if (!on && root.contains(document.activeElement)) (document.activeElement as HTMLElement).blur();
+        this._shown = on;
+        this.emit(on ? 'show' : 'hide');
+      };
+      set(false);
+      let watched: Element | null = null;
+      try { watched = this.str('watch') ? document.querySelector(this.str('watch')) : null; } catch { /* invalid selector */ }
+      if (watched && typeof IntersectionObserver !== 'undefined') {
+        const io = new IntersectionObserver(([e]) => set(!e.isIntersecting && e.boundingClientRect.top < 0));
+        io.observe(watched);
+        this.onCleanup(() => io.disconnect());
+      } else {
+        const offset = Math.max(0, this.num('offset', 320));
+        let pending = 0;
+        const check = () => { pending = 0; set(window.scrollY > offset); };
+        this.listen(window, 'scroll', () => { if (!pending) pending = raf(check); }, { passive: true });
+        this.onCleanup(() => pending && caf(pending));
+        check();
+      }
+      this.onCleanup(() => {
+        this.append(...kids);
+        root.remove();
+        this._shown = false;
+      });
+    }
+  }, { id: 'ui-blocks', text: css });
+  defineMoName(tag, ctor);
+  return ctor;
+}

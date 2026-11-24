@@ -1,4 +1,4 @@
-# Motionary components (299)
+# Motionary components (320)
 
 One page per `<usa-*>` element, generated from the source. Machine-readable: `motionary/tooling/manifest.json` · Pages `/components.json` · `/llms.txt` · `/llms-full.txt`. How to use these with an AI assistant: [AGENTS.md](../../AGENTS.md) and [the prompt guide](../ai-prompt-guide.md).
 
@@ -29,6 +29,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-activity-wall>`](usa-activity-wall.md) — Live activity wall
 - [`<mo-add-to-cart>`](usa-add-to-cart.md) — Add to cart (fly-to-cart)
 - [`<mo-align-switch>`](usa-align-switch.md) — Align switch
+- [`<mo-announcement-bar>`](usa-announcement-bar.md) — Announcement bar
 - [`<mo-avatar-stack>`](usa-avatar-stack.md) — Avatar stack
 - [`<mo-badge>`](usa-badge.md) — Badge
 - [`<mo-badge-wall>`](usa-badge-wall.md) — Badge wall
@@ -87,12 +88,14 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-halo-slider>`](usa-halo-slider.md) — Halo range slider
 - [`<mo-hero-video>`](usa-hero-video.md) — Hero video
 - [`<mo-hold-action>`](usa-hold-action.md) — Hold action
+- [`<mo-hotspots>`](usa-hotspots.md) — Image hotspots
 - [`<mo-hud-panel>`](usa-hud-panel.md) — HUD panel
 - [`<mo-hue-orbit>`](usa-hue-orbit.md) — Hue orbit
 - [`<mo-hydrate>`](usa-hydrate.md) — SSR hydration animation
 - [`<mo-infinity-loop>`](usa-infinity-loop.md) — Infinity loop
 - [`<mo-install-button>`](usa-install-button.md) — Install button
 - [`<mo-jelly-button>`](usa-jelly-button.md) — Jelly button
+- [`<mo-json-viewer>`](usa-json-viewer.md) — JSON viewer
 - [`<mo-kpi>`](usa-kpi.md) — KPI card
 - [`<mo-leaderboard>`](usa-leaderboard.md) — Leaderboard
 - [`<mo-liquid-nav>`](usa-liquid-nav.md) — Liquid nav
@@ -136,6 +139,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-plugin-store>`](usa-plugin-store.md) — Plugin marketplace
 - [`<mo-popover>`](usa-popover.md) — Popover
 - [`<mo-presence>`](usa-presence.md) — Presence avatar
+- [`<mo-pricing>`](usa-pricing.md) — Pricing table
 - [`<mo-prize-wheel>`](usa-prize-wheel.md) — Prize wheel
 - [`<mo-product-gallery>`](usa-product-gallery.md) — Product gallery
 - [`<mo-prop-panel>`](usa-prop-panel.md) — Property panel
@@ -157,6 +161,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-select>`](usa-select.md) — Native select
 - [`<mo-shader-backdrop>`](usa-shader-backdrop.md) — Shader backdrop + post chain
 - [`<mo-shortcut>`](usa-shortcut.md) — Shortcut hint
+- [`<mo-sidebar>`](usa-sidebar.md) — Collapsible sidebar
 - [`<mo-six-dot-orbit>`](usa-six-dot-orbit.md) — Six dot orbit
 - [`<mo-sketch-chart>`](usa-sketch-chart.md) — Sketch chart
 - [`<mo-slider>`](usa-slider.md) — Slider
@@ -204,13 +209,19 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-back-to-top>`](usa-back-to-top.md) — Back to top
 - [`<mo-cursor>`](usa-cursor.md) — Custom cursor
 - [`<mo-fullpage>`](usa-fullpage.md) — Full-page sections
+- [`<mo-horizontal-scroll>`](usa-horizontal-scroll.md) — Horizontal scroll section
 - [`<mo-loading-bar>`](usa-loading-bar.md) — Top loading bar
 - [`<mo-motion-switch>`](usa-motion-switch.md) — Motion intensity
+- [`<mo-scroll-velocity>`](usa-scroll-velocity.md) — Scroll velocity
+- [`<mo-scrollspy>`](usa-scrollspy.md) — Scrollspy table of contents
 - [`<mo-splash>`](usa-splash.md) — Splash screen
+- [`<mo-sticky-cta>`](usa-sticky-cta.md) — Sticky call to action
 
 ## gesture
 
 - [`<mo-analog-stick>`](usa-analog-stick.md) — Analog stick
+- [`<mo-image-trail>`](usa-image-trail.md) — Image trail
+- [`<mo-lightbox>`](usa-lightbox.md) — Lightbox gallery
 - [`<mo-pinch-zoom>`](usa-pinch-zoom.md) — Pinch zoom
 - [`<mo-swipe-deck>`](usa-swipe-deck.md) — Swipe cards deck
 - [`<mo-swipeable>`](usa-swipeable.md) — Swipeable
@@ -219,8 +230,10 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 
 - [`<mo-anim-icon>`](usa-anim-icon.md) — Animated icons
 - [`<mo-draw>`](usa-draw.md) — Line drawing
+- [`<mo-empty-state>`](usa-empty-state.md) — Empty state
 - [`<mo-mask-reveal>`](usa-mask-reveal.md) — Mask reveal
 - [`<mo-morph>`](usa-morph.md) — Path morph
+- [`<mo-path-motion>`](usa-path-motion.md) — Path motion
 
 ## fx
 
@@ -234,6 +247,9 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 ## layout
 
 - [`<mo-auto-animate>`](usa-auto-animate.md) — Auto-animate
+- [`<mo-bento>`](usa-bento.md) — Bento grid
+- [`<mo-data-table>`](usa-data-table.md) — Sortable data table
+- [`<mo-filter-chips>`](usa-filter-chips.md) — Filter chips
 - [`<mo-kanban>`](usa-kanban.md) — Kanban board (drag-sort)
 - [`<mo-masonry>`](usa-masonry.md) — Masonry
 - [`<mo-masonry-flow>`](usa-masonry-flow.md) — Masonry with layout animation
@@ -241,6 +257,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 ## timeline
 
 - [`<mo-bezier-lab>`](usa-bezier-lab.md) — Bezier laboratory
+- [`<mo-cut-reveal>`](usa-cut-reveal.md) — Cut reveal
 - [`<mo-keyframe-editor>`](usa-keyframe-editor.md) — Animation editor 2.0
 - [`<mo-milestones>`](usa-milestones.md) — Scroll-drawn milestones
 - [`<mo-spring-lab>`](usa-spring-lab.md) — Spring laboratory
@@ -270,6 +287,9 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-card-stack>`](usa-card-stack.md) — Swipe stack
 - [`<mo-carousel-3d>`](usa-carousel-3d.md) — 3D carousel
 - [`<mo-cube-gallery>`](usa-cube-gallery.md) — Cube gallery
+- [`<mo-expand-cards>`](usa-expand-cards.md) — Expanding cards
+- [`<mo-fan-carousel>`](usa-fan-carousel.md) — Fan carousel
+- [`<mo-hover-reveal-list>`](usa-hover-reveal-list.md) — Hover reveal list
 - [`<mo-sticky-stack>`](usa-sticky-stack.md) — Sticky stack
 
 ## feedback
@@ -304,6 +324,7 @@ One page per `<usa-*>` element, generated from the source. Machine-readable: `mo
 - [`<mo-depth>`](usa-depth.md) — Depth parallax
 - [`<mo-iris-diaphragm>`](usa-iris-diaphragm.md) — Iris diaphragm · Requires: motionary/runtime/spatial-instruments
 - [`<mo-lens-stack>`](usa-lens-stack.md) — Lens assembly · Requires: motionary/runtime/spatial-instruments
+- [`<mo-liquid-glass>`](usa-liquid-glass.md) — Liquid glass
 
 ## text
 

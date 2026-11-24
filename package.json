@@ -1,7 +1,7 @@
 {
   "name": "motionary",
   "version": "17.9.0",
-  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 299 animated Web Components (91 core, 208 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
+  "description": "Motionary (formerly use-scroll-animate): dependency-free scroll animations + 320 animated Web Components (91 core, 229 widgets) — 214 scroll-reveal presets, physics, page transitions, generative backgrounds, Lottie, WebGL and a motion runtime. React, Vue, Svelte, Solid, Angular or plain HTML.",
   "type": "module",
   "main": "./dist/index.cjs",
   "unpkg": "dist/index.umd.js",
@@ -3178,6 +3178,216 @@
       "require": {
         "types": "./dist/widgets/title-sequence.d.cts",
         "default": "./dist/widgets/title-sequence.cjs"
+      }
+    },
+    "./widgets/sidebar": {
+      "import": {
+        "types": "./dist/widgets/sidebar.d.ts",
+        "default": "./dist/widgets/sidebar.js"
+      },
+      "require": {
+        "types": "./dist/widgets/sidebar.d.cts",
+        "default": "./dist/widgets/sidebar.cjs"
+      }
+    },
+    "./widgets/scrollspy": {
+      "import": {
+        "types": "./dist/widgets/scrollspy.d.ts",
+        "default": "./dist/widgets/scrollspy.js"
+      },
+      "require": {
+        "types": "./dist/widgets/scrollspy.d.cts",
+        "default": "./dist/widgets/scrollspy.cjs"
+      }
+    },
+    "./widgets/pricing": {
+      "import": {
+        "types": "./dist/widgets/pricing.d.ts",
+        "default": "./dist/widgets/pricing.js"
+      },
+      "require": {
+        "types": "./dist/widgets/pricing.d.cts",
+        "default": "./dist/widgets/pricing.cjs"
+      }
+    },
+    "./widgets/announcement-bar": {
+      "import": {
+        "types": "./dist/widgets/announcement-bar.d.ts",
+        "default": "./dist/widgets/announcement-bar.js"
+      },
+      "require": {
+        "types": "./dist/widgets/announcement-bar.d.cts",
+        "default": "./dist/widgets/announcement-bar.cjs"
+      }
+    },
+    "./widgets/sticky-cta": {
+      "import": {
+        "types": "./dist/widgets/sticky-cta.d.ts",
+        "default": "./dist/widgets/sticky-cta.js"
+      },
+      "require": {
+        "types": "./dist/widgets/sticky-cta.d.cts",
+        "default": "./dist/widgets/sticky-cta.cjs"
+      }
+    },
+    "./widgets/bento": {
+      "import": {
+        "types": "./dist/widgets/bento.d.ts",
+        "default": "./dist/widgets/bento.js"
+      },
+      "require": {
+        "types": "./dist/widgets/bento.d.cts",
+        "default": "./dist/widgets/bento.cjs"
+      }
+    },
+    "./widgets/empty-state": {
+      "import": {
+        "types": "./dist/widgets/empty-state.d.ts",
+        "default": "./dist/widgets/empty-state.js"
+      },
+      "require": {
+        "types": "./dist/widgets/empty-state.d.cts",
+        "default": "./dist/widgets/empty-state.cjs"
+      }
+    },
+    "./widgets/lightbox": {
+      "import": {
+        "types": "./dist/widgets/lightbox.d.ts",
+        "default": "./dist/widgets/lightbox.js"
+      },
+      "require": {
+        "types": "./dist/widgets/lightbox.d.cts",
+        "default": "./dist/widgets/lightbox.cjs"
+      }
+    },
+    "./widgets/data-table": {
+      "import": {
+        "types": "./dist/widgets/data-table.d.ts",
+        "default": "./dist/widgets/data-table.js"
+      },
+      "require": {
+        "types": "./dist/widgets/data-table.d.cts",
+        "default": "./dist/widgets/data-table.cjs"
+      }
+    },
+    "./widgets/filter-chips": {
+      "import": {
+        "types": "./dist/widgets/filter-chips.d.ts",
+        "default": "./dist/widgets/filter-chips.js"
+      },
+      "require": {
+        "types": "./dist/widgets/filter-chips.d.cts",
+        "default": "./dist/widgets/filter-chips.cjs"
+      }
+    },
+    "./widgets/hotspots": {
+      "import": {
+        "types": "./dist/widgets/hotspots.d.ts",
+        "default": "./dist/widgets/hotspots.js"
+      },
+      "require": {
+        "types": "./dist/widgets/hotspots.d.cts",
+        "default": "./dist/widgets/hotspots.cjs"
+      }
+    },
+    "./widgets/fan-carousel": {
+      "import": {
+        "types": "./dist/widgets/fan-carousel.d.ts",
+        "default": "./dist/widgets/fan-carousel.js"
+      },
+      "require": {
+        "types": "./dist/widgets/fan-carousel.d.cts",
+        "default": "./dist/widgets/fan-carousel.cjs"
+      }
+    },
+    "./widgets/expand-cards": {
+      "import": {
+        "types": "./dist/widgets/expand-cards.d.ts",
+        "default": "./dist/widgets/expand-cards.js"
+      },
+      "require": {
+        "types": "./dist/widgets/expand-cards.d.cts",
+        "default": "./dist/widgets/expand-cards.cjs"
+      }
+    },
+    "./widgets/json-viewer": {
+      "import": {
+        "types": "./dist/widgets/json-viewer.d.ts",
+        "default": "./dist/widgets/json-viewer.js"
+      },
+      "require": {
+        "types": "./dist/widgets/json-viewer.d.cts",
+        "default": "./dist/widgets/json-viewer.cjs"
+      }
+    },
+    "./widgets/scroll-velocity": {
+      "import": {
+        "types": "./dist/widgets/scroll-velocity.d.ts",
+        "default": "./dist/widgets/scroll-velocity.js"
+      },
+      "require": {
+        "types": "./dist/widgets/scroll-velocity.d.cts",
+        "default": "./dist/widgets/scroll-velocity.cjs"
+      }
+    },
+    "./widgets/horizontal-scroll": {
+      "import": {
+        "types": "./dist/widgets/horizontal-scroll.d.ts",
+        "default": "./dist/widgets/horizontal-scroll.js"
+      },
+      "require": {
+        "types": "./dist/widgets/horizontal-scroll.d.cts",
+        "default": "./dist/widgets/horizontal-scroll.cjs"
+      }
+    },
+    "./widgets/image-trail": {
+      "import": {
+        "types": "./dist/widgets/image-trail.d.ts",
+        "default": "./dist/widgets/image-trail.js"
+      },
+      "require": {
+        "types": "./dist/widgets/image-trail.d.cts",
+        "default": "./dist/widgets/image-trail.cjs"
+      }
+    },
+    "./widgets/hover-reveal-list": {
+      "import": {
+        "types": "./dist/widgets/hover-reveal-list.d.ts",
+        "default": "./dist/widgets/hover-reveal-list.js"
+      },
+      "require": {
+        "types": "./dist/widgets/hover-reveal-list.d.cts",
+        "default": "./dist/widgets/hover-reveal-list.cjs"
+      }
+    },
+    "./widgets/liquid-glass": {
+      "import": {
+        "types": "./dist/widgets/liquid-glass.d.ts",
+        "default": "./dist/widgets/liquid-glass.js"
+      },
+      "require": {
+        "types": "./dist/widgets/liquid-glass.d.cts",
+        "default": "./dist/widgets/liquid-glass.cjs"
+      }
+    },
+    "./widgets/path-motion": {
+      "import": {
+        "types": "./dist/widgets/path-motion.d.ts",
+        "default": "./dist/widgets/path-motion.js"
+      },
+      "require": {
+        "types": "./dist/widgets/path-motion.d.cts",
+        "default": "./dist/widgets/path-motion.cjs"
+      }
+    },
+    "./widgets/cut-reveal": {
+      "import": {
+        "types": "./dist/widgets/cut-reveal.d.ts",
+        "default": "./dist/widgets/cut-reveal.js"
+      },
+      "require": {
+        "types": "./dist/widgets/cut-reveal.d.cts",
+        "default": "./dist/widgets/cut-reveal.cjs"
       }
     },
     "./widgets/eclipse-toggle": {

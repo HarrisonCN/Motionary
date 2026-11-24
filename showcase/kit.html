@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>界面、组件与动效 · Motionary</title>
+  <style>
+    * {box-sizing:border-box}
+    :root {font-family:system-ui,sans-serif; color:#1b1b1a; background:#f1f0ec}
+    body {margin:0}
+    main,nav {width:min(1120px,calc(100% - 40px)); margin-inline:auto}
+    nav {display:flex; justify-content:space-between; align-items:center; gap:16px; padding:24px 0; border-bottom:1px solid #d6d4cc}
+    a {color:#2c3a6b; text-underline-offset:.25em}
+    .intro {padding:clamp(42px,8vw,88px) 0 32px}
+    h1,h2,p {margin:0}
+    h1 {font:500 clamp(42px,7vw,88px)/1.05 Georgia,'Songti SC',serif; letter-spacing:-.04em}
+    h2 {font-size:1.1rem; font-weight:600; margin:48px 0 16px}
+    p {max-width:44em; line-height:1.65; color:#55544e}
+    .intro p {margin-top:20px}
+    .grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr)); gap:14px}
+    article {display:grid; align-content:space-between; gap:18px; min-height:220px; padding:24px; border-radius:22px; background:#fbfaf7; border:1px solid #e2e0d8}
+    article .stage {display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:center; min-height:120px}
+    article p {font-size:.85rem}
+    output.log {display:block; min-height:1.4em; font:12px ui-monospace,monospace; color:#6b6a62}
+    .magnet {display:flex; flex-wrap:wrap; gap:28px; align-items:center}
+    .magnet button {padding:14px 24px; border:0; border-radius:999px; background:#1b1b1a; color:#f4f3ef; font:inherit; cursor:pointer}
+    button:focus-visible,a:focus-visible {outline:2px solid #2c3a6b; outline-offset:4px}
+    .wide {grid-column:1/-1}
+    .stage.block {display:block}
+    .demo-box {display:grid; place-items:center; min-height:90px; padding:16px; border-radius:14px; background:#ecebe5; font-weight:600}
+    .glass-bg {padding:28px; border-radius:18px; background:linear-gradient(135deg,#f6c28b,#9fb8f7 55%,#c69ff7)}
+    .chip-list {display:flex; flex-wrap:wrap; gap:8px; padding:0; margin:12px 0 0; list-style:none}
+    .chip-list li {padding:6px 12px; border-radius:10px; background:#ecebe5; font-size:.85rem}
+    .panel {display:grid; place-items:center; min-height:46vh; border-radius:22px; background:#1b1b1a; color:#f4f3ef; font:500 clamp(28px,5vw,56px)/1 Georgia,serif}
+    @media(max-width:430px) {main,nav {width:calc(100% - 28px)}}
+  </style>
+</head>
+<body>
+  <nav aria-label="页面导航"><a href="./">Motionary</a><span><a href="moments.html">微交互与触感</a> · <a href="components.html">组件目录 ↗</a></span></nav>
+  <mo-announcement-bar dismissible label="公告" close-label="关闭公告"><span>17.10 新增 21 个界面、组件和动效</span><span>全部支持键盘和读屏</span><a href="components.html">打开组件目录</a></mo-announcement-bar>
+  <main id="top">
+    <header class="intro"><h1>界面、组件与动效</h1><p>二十一个新部件：七个界面块、七个组件、七个动效。它们都在原生元素上增强，没有脚本时内容照常显示；开启“减少动态效果”后直接停在结果上。</p></header>
+
+    <h2 id="ui">UI 类</h2>
+    <section class="grid" aria-label="UI 类">
+      <article><div class="stage"><mo-sidebar label="主导航" expand-label="展开侧栏" collapse-label="收起侧栏"><a href="#ui" data-icon="⌂" aria-current="page">首页</a><a href="#components" data-icon="✉">收件箱</a><a href="#motion" data-icon="★">收藏</a><a href="#top" data-icon="⚙">设置</a></mo-sidebar></div><p>可折成图标栏，高亮胶囊滑到当前项。</p><output class="log" data-log="sidebar"></output></article>
+      <article><div class="stage block"><mo-scrollspy target="main" selector="h2[id]" label="本页目录" offset="20"></mo-scrollspy></div><p>本页目录跟随阅读位置，点击平滑滚动并把焦点移到标题。</p><output class="log" data-log="spy"></output></article>
+      <article class="wide"><div class="stage block"><mo-pricing currency="¥" label="计费周期" monthly-label="月付" yearly-label="年付" yearly-note="省两个月" month-unit="/月" year-unit="/年"><div data-name="基础" data-monthly="0" data-yearly="0" data-cta="免费开始">个人试用</div><div data-name="专业" data-monthly="68" data-yearly="680" data-featured data-badge="推荐" data-cta="升级">小团队</div><div data-name="团队" data-monthly="198" data-yearly="1980" data-cta="联系我们">大团队</div></mo-pricing></div><p>切换周期时价格滚动到新数字。</p><output class="log" data-log="pricing"></output></article>
+      <article><div class="stage block"><mo-announcement-bar tone="accent" interval="3000" label="提示"><span>第一条消息</span><span>第二条消息</span><span>第三条消息</span></mo-announcement-bar></div><p>消息轮播，悬停或聚焦时暂停。页面顶部那条可以关闭。</p></article>
+      <article><div class="stage block"><p>往下滚过这一块后，底部会滑出行动条。</p><mo-sticky-cta offset="600" dismissible label="注册提示" close-label="关闭"><span>准备好开始了吗？</span><a href="components.html">浏览组件</a></mo-sticky-cta></div><p>回到顶部附近时收起，关闭后不再出现。</p></article>
+      <article class="wide"><div class="stage block"><mo-bento columns="4" collapse="560"><div class="demo-box" data-span="2">快</div><div class="demo-box" data-rows="2">小</div><div class="demo-box">有类型</div><div class="demo-box">无障碍</div><div class="demo-box" data-span="2">可树摇</div></mo-bento></div><p>拼块依次升起，光斑跟随指针。</p></article>
+      <article><div class="stage"><mo-empty-state icon="inbox" heading="还没有消息" description="新邮件会出现在这里。"><button type="button">刷新</button></mo-empty-state></div><p>线条画出插画，然后文字依次浮现。</p></article>
+    </section>
+
+    <h2 id="components">组件类</h2>
+    <section class="grid" aria-label="组件类">
+      <article><div class="stage"><mo-lightbox label="相册"><img src="assets/demo-photo.jpg" alt="示例照片 1" data-full="assets/demo-photo.jpg"><img src="assets/demo-photo.jpg" alt="示例照片 2" data-full="assets/demo-photo.jpg"><img src="assets/demo-photo.jpg" alt="示例照片 3" data-full="assets/demo-photo.jpg"><img src="assets/demo-photo.jpg" alt="示例照片 4" data-full="assets/demo-photo.jpg"></mo-lightbox></div><p>缩略图放大成全屏，方向键或滑动翻页，双击缩放。</p><output class="log" data-log="lightbox"></output></article>
+      <article class="wide"><div class="stage block"><mo-data-table filterable filter-label="筛选行" placeholder="输入关键词…"><table><thead><tr><th>部件</th><th>分组</th><th>大小 (KB)</th></tr></thead><tbody><tr><td>侧边栏</td><td>UI</td><td>3.2</td></tr><tr><td>价格表</td><td>UI</td><td>4.1</td></tr><tr><td>灯箱</td><td>组件</td><td>5.6</td></tr><tr><td>JSON 查看器</td><td>组件</td><td>4.4</td></tr><tr><td>路径运动</td><td>动效</td><td>3.0</td></tr><tr><td>切片转场</td><td>动效</td><td>2.7</td></tr></tbody></table></mo-data-table></div><p>点表头排序，行平滑移到新位置。</p><output class="log" data-log="table"></output></article>
+      <article><div class="stage block"><mo-filter-chips options="UI, 组件, 动效" multiple label="分组" all-label="全部"></mo-filter-chips><ul class="chip-list"><li data-tags="UI">侧边栏</li><li data-tags="UI">价格表</li><li data-tags="组件">灯箱</li><li data-tags="组件">表格</li><li data-tags="动效">液态玻璃</li><li data-tags="动效">路径运动</li></ul></div><p>筛掉的项淡出，其余补位。</p><output class="log" data-log="chips"></output></article>
+      <article><div class="stage"><mo-hotspots label="书桌"><img src="assets/demo-photo.jpg" alt="书桌照片"><div data-x="28" data-y="38" data-title="台灯">暖光，三档亮度。</div><div data-x="68" data-y="62" data-title="笔记本">点阵纸。</div></mo-hotspots></div><p>点开热点看说明，Esc 关闭。</p></article>
+      <article><div class="stage"><mo-fan-carousel label="卡片" loop><div class="demo-box">一</div><div class="demo-box">二</div><div class="demo-box">三</div><div class="demo-box">四</div><div class="demo-box">五</div></mo-fan-carousel></div><p>像一手牌一样展开，方向键或滑动切换。</p><output class="log" data-log="fan"></output></article>
+      <article class="wide"><div class="stage block"><mo-expand-cards label="地点"><div data-title="海边" data-image="assets/demo-photo.jpg">清晨的潮水。</div><div data-title="森林" data-image="assets/demo-photo.jpg">松林小路。</div><div data-title="城市" data-image="assets/demo-photo.jpg">夜里的灯。</div><div data-title="山顶" data-image="assets/demo-photo.jpg">云海。</div></mo-expand-cards></div><p>选中的面板展开并显示文字，窄屏时竖排。</p></article>
+      <article><div class="stage block"><mo-json-viewer label="配置" expand-depth="1"><script type="application/json">{"name":"motionary","version":"17.10","widgets":["sidebar","lightbox","path-motion"],"options":{"reducedMotion":"respect","theme":{"accent":"#4f46e5"}}}</script></mo-json-viewer></div><p>方向键浏览，回车展开或收起。</p><output class="log" data-log="json"></output></article>
+    </section>
+
+    <h2 id="motion">动效类</h2>
+    <section class="grid" aria-label="动效类">
+      <article><div class="stage"><mo-scroll-velocity mode="skew"><div class="demo-box">倾斜</div></mo-scroll-velocity><mo-scroll-velocity mode="stretch"><div class="demo-box">拉伸</div></mo-scroll-velocity><mo-scroll-velocity mode="blur"><div class="demo-box">模糊</div></mo-scroll-velocity></div><p>快速滚动页面时变形，停下后回稳。</p></article>
+      <article><div class="stage block"><mo-image-trail size="110"><img src="assets/demo-photo.jpg" alt="示例照片 1"><img src="assets/demo-photo.jpg" alt="示例照片 2"><img src="assets/demo-photo.jpg" alt="示例照片 3"><img src="assets/demo-photo.jpg" alt="示例照片 4"><p style="padding:40px 0; text-align:center">在这里移动鼠标</p></mo-image-trail></div><p>指针身后留下一串图片。触屏和减少动态效果时不出现。</p></article>
+      <article class="wide"><div class="stage block"><mo-hover-reveal-list label="作品" size="200"><a href="#motion" data-image="assets/demo-photo.jpg">工作室</a><a href="#motion" data-image="assets/demo-photo.jpg">日志</a><a href="#motion" data-image="assets/demo-photo.jpg">联系</a></mo-hover-reveal-list></div><p>图片带弹簧跟随指针，并随速度倾斜。</p></article>
+      <article><div class="stage"><div class="glass-bg"><mo-liquid-glass pressable><strong>液态玻璃</strong><p>按下会轻压。</p></mo-liquid-glass></div></div><p>背景模糊并在边缘折射，Chrome 里效果最完整。</p></article>
+      <article><div class="stage block"><mo-path-motion trigger="loop" rotate trace duration="3200"><span aria-hidden="true">✈</span></mo-path-motion></div><p>沿路径循环飞行并描出轨迹，带暂停按钮。</p></article>
+      <article><div class="stage block"><mo-path-motion trigger="scroll" show-path spacing="0.1"><span class="demo-box">1</span><span class="demo-box">2</span><span class="demo-box">3</span></mo-path-motion></div><p>进度跟随滚动。</p></article>
+      <article><div class="stage block"><mo-cut-reveal cut="slice" pieces="6" trigger="manual"><div class="demo-box">切片转场</div></mo-cut-reveal></div><p><button type="button" data-cut="slice">切片</button> <button type="button" data-cut="shred">切条</button> <button type="button" data-cut="split">对半</button> <button type="button" data-cut="tear">撕开</button></p><output class="log" data-log="cut"></output></article>
+    </section>
+
+    <h2>横向滚动</h2>
+  </main>
+  <mo-horizontal-scroll panel-width="70vw" progress label="横向展示"><section class="panel">一</section><section class="panel">二</section><section class="panel">三</section><section class="panel">四</section></mo-horizontal-scroll>
+  <main><p style="padding:48px 0 120px">往下滚动时面板横向移动；窄屏或减少动态效果时改为横向滑动。</p></main>
+  <script type="module">
+    import { defineMoAliases } from '../dist/components/mo.js';
+    import { defineSidebar } from '../dist/widgets/sidebar.js';
+    import { defineScrollspy } from '../dist/widgets/scrollspy.js';
+    import { definePricing } from '../dist/widgets/pricing.js';
+    import { defineAnnouncementBar } from '../dist/widgets/announcement-bar.js';
+    import { defineStickyCta } from '../dist/widgets/sticky-cta.js';
+    import { defineBento } from '../dist/widgets/bento.js';
+    import { defineEmptyState } from '../dist/widgets/empty-state.js';
+    import { defineLightbox } from '../dist/widgets/lightbox.js';
+    import { defineDataTable } from '../dist/widgets/data-table.js';
+    import { defineFilterChips } from '../dist/widgets/filter-chips.js';
+    import { defineHotspots } from '../dist/widgets/hotspots.js';
+    import { defineFanCarousel } from '../dist/widgets/fan-carousel.js';
+    import { defineExpandCards } from '../dist/widgets/expand-cards.js';
+    import { defineJsonViewer } from '../dist/widgets/json-viewer.js';
+    import { defineScrollVelocity } from '../dist/widgets/scroll-velocity.js';
+    import { defineHorizontalScroll } from '../dist/widgets/horizontal-scroll.js';
+    import { defineImageTrail } from '../dist/widgets/image-trail.js';
+    import { defineHoverRevealList } from '../dist/widgets/hover-reveal-list.js';
+    import { defineLiquidGlass } from '../dist/widgets/liquid-glass.js';
+    import { definePathMotion } from '../dist/widgets/path-motion.js';
+    import { defineCutReveal } from '../dist/widgets/cut-reveal.js';
+    defineMoAliases();
+    for (const define of [defineSidebar, defineScrollspy, definePricing, defineAnnouncementBar, defineStickyCta, defineBento, defineEmptyState, defineLightbox, defineDataTable, defineFilterChips, defineHotspots, defineFanCarousel, defineExpandCards, defineJsonViewer, defineScrollVelocity, defineHorizontalScroll, defineImageTrail, defineHoverRevealList, defineLiquidGlass, definePathMotion, defineCutReveal]) define();
+    const log = (name, text) => { const out = document.querySelector(`[data-log="${name}"]`); if (out) out.textContent = text; };
+    const on = (sel, type, fn) => document.querySelector(sel)?.addEventListener(`usa:${type}`, (e) => fn(e.detail));
+    on('mo-sidebar', 'select', (d) => log('sidebar', `select ${d.index}`));
+    on('mo-sidebar', 'toggle', (d) => log('sidebar', `collapsed ${d.collapsed}`));
+    on('mo-scrollspy', 'change', (d) => log('spy', `current #${d.id}`));
+    on('mo-pricing', 'change', (d) => log('pricing', `period ${d.period}`));
+    on('mo-pricing', 'select', (d) => log('pricing', `select ${d.plan} ${d.price}/${d.period}`));
+    on('mo-lightbox', 'change', (d) => log('lightbox', `photo ${d.index + 1}`));
+    on('mo-data-table', 'sort', (d) => log('table', `column ${d.column} ${d.direction}`));
+    on('mo-data-table', 'filter', (d) => log('table', `${d.count} rows`));
+    on('mo-filter-chips', 'change', (d) => log('chips', `${d.value.join(', ') || '全部'} · ${d.count}`));
+    on('mo-fan-carousel', 'change', (d) => log('fan', `card ${d.index + 1}`));
+    on('mo-json-viewer', 'toggle', (d) => log('json', `${d.path} ${d.open ? 'open' : 'closed'}`));
+    const cut = document.querySelector('mo-cut-reveal');
+    cut?.addEventListener('usa:done', (e) => log('cut', `done ${e.detail.direction}`));
+    document.querySelectorAll('[data-cut]').forEach((b) => b.addEventListener('click', async () => {
+      cut.setAttribute('cut', b.dataset.cut);
+      await Promise.resolve();
+      await cut.play('out');
+      await cut.play('in');
+    }));
+  </script>
+</body>
+</html>

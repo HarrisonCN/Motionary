@@ -1587,6 +1587,279 @@
  },
  {
   "kind": "widget",
+  "name": "sidebar",
+  "entry": "motionary/widgets/sidebar",
+  "src": "src/entries/widgets/sidebar.ts",
+  "tag": "usa-sidebar",
+  "define": "defineSidebar",
+  "types": [
+   "UsaSidebarElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/sidebar"
+ },
+ {
+  "kind": "widget",
+  "name": "scrollspy",
+  "entry": "motionary/widgets/scrollspy",
+  "src": "src/entries/widgets/scrollspy.ts",
+  "tag": "usa-scrollspy",
+  "define": "defineScrollspy",
+  "types": [
+   "UsaScrollspyElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/scrollspy"
+ },
+ {
+  "kind": "widget",
+  "name": "pricing",
+  "entry": "motionary/widgets/pricing",
+  "src": "src/entries/widgets/pricing.ts",
+  "tag": "usa-pricing",
+  "define": "definePricing",
+  "types": [
+   "UsaPricingElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/pricing"
+ },
+ {
+  "kind": "widget",
+  "name": "announcement-bar",
+  "entry": "motionary/widgets/announcement-bar",
+  "src": "src/entries/widgets/announcement-bar.ts",
+  "tag": "usa-announcement-bar",
+  "define": "defineAnnouncementBar",
+  "types": [
+   "UsaAnnouncementBarElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/announcement-bar"
+ },
+ {
+  "kind": "widget",
+  "name": "sticky-cta",
+  "entry": "motionary/widgets/sticky-cta",
+  "src": "src/entries/widgets/sticky-cta.ts",
+  "tag": "usa-sticky-cta",
+  "define": "defineStickyCta",
+  "types": [
+   "UsaStickyCtaElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/sticky-cta"
+ },
+ {
+  "kind": "widget",
+  "name": "bento",
+  "entry": "motionary/widgets/bento",
+  "src": "src/entries/widgets/bento.ts",
+  "tag": "usa-bento",
+  "define": "defineBento",
+  "types": [
+   "UsaBentoElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/bento"
+ },
+ {
+  "kind": "widget",
+  "name": "empty-state",
+  "entry": "motionary/widgets/empty-state",
+  "src": "src/entries/widgets/empty-state.ts",
+  "tag": "usa-empty-state",
+  "define": "defineEmptyState",
+  "types": [
+   "UsaEmptyStateElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/empty-state"
+ },
+ {
+  "kind": "widget",
+  "name": "lightbox",
+  "entry": "motionary/widgets/lightbox",
+  "src": "src/entries/widgets/lightbox.ts",
+  "tag": "usa-lightbox",
+  "define": "defineLightbox",
+  "types": [
+   "UsaLightboxElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/lightbox"
+ },
+ {
+  "kind": "widget",
+  "name": "data-table",
+  "entry": "motionary/widgets/data-table",
+  "src": "src/entries/widgets/data-table.ts",
+  "tag": "usa-data-table",
+  "define": "defineDataTable",
+  "types": [
+   "UsaDataTableElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/data-table"
+ },
+ {
+  "kind": "widget",
+  "name": "filter-chips",
+  "entry": "motionary/widgets/filter-chips",
+  "src": "src/entries/widgets/filter-chips.ts",
+  "tag": "usa-filter-chips",
+  "define": "defineFilterChips",
+  "types": [
+   "UsaFilterChipsElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/filter-chips"
+ },
+ {
+  "kind": "widget",
+  "name": "hotspots",
+  "entry": "motionary/widgets/hotspots",
+  "src": "src/entries/widgets/hotspots.ts",
+  "tag": "usa-hotspots",
+  "define": "defineHotspots",
+  "types": [
+   "UsaHotspotsElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/hotspots"
+ },
+ {
+  "kind": "widget",
+  "name": "fan-carousel",
+  "entry": "motionary/widgets/fan-carousel",
+  "src": "src/entries/widgets/fan-carousel.ts",
+  "tag": "usa-fan-carousel",
+  "define": "defineFanCarousel",
+  "types": [
+   "UsaFanCarouselElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/fan-carousel"
+ },
+ {
+  "kind": "widget",
+  "name": "expand-cards",
+  "entry": "motionary/widgets/expand-cards",
+  "src": "src/entries/widgets/expand-cards.ts",
+  "tag": "usa-expand-cards",
+  "define": "defineExpandCards",
+  "types": [
+   "UsaExpandCardsElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/expand-cards"
+ },
+ {
+  "kind": "widget",
+  "name": "json-viewer",
+  "entry": "motionary/widgets/json-viewer",
+  "src": "src/entries/widgets/json-viewer.ts",
+  "tag": "usa-json-viewer",
+  "define": "defineJsonViewer",
+  "types": [
+   "UsaJsonViewerElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/json-viewer"
+ },
+ {
+  "kind": "widget",
+  "name": "scroll-velocity",
+  "entry": "motionary/widgets/scroll-velocity",
+  "src": "src/entries/widgets/scroll-velocity.ts",
+  "tag": "usa-scroll-velocity",
+  "define": "defineScrollVelocity",
+  "types": [
+   "UsaScrollVelocityElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/scroll-velocity"
+ },
+ {
+  "kind": "widget",
+  "name": "horizontal-scroll",
+  "entry": "motionary/widgets/horizontal-scroll",
+  "src": "src/entries/widgets/horizontal-scroll.ts",
+  "tag": "usa-horizontal-scroll",
+  "define": "defineHorizontalScroll",
+  "types": [
+   "UsaHorizontalScrollElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/horizontal-scroll"
+ },
+ {
+  "kind": "widget",
+  "name": "image-trail",
+  "entry": "motionary/widgets/image-trail",
+  "src": "src/entries/widgets/image-trail.ts",
+  "tag": "usa-image-trail",
+  "define": "defineImageTrail",
+  "types": [
+   "UsaImageTrailElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/image-trail"
+ },
+ {
+  "kind": "widget",
+  "name": "hover-reveal-list",
+  "entry": "motionary/widgets/hover-reveal-list",
+  "src": "src/entries/widgets/hover-reveal-list.ts",
+  "tag": "usa-hover-reveal-list",
+  "define": "defineHoverRevealList",
+  "types": [
+   "UsaHoverRevealListElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/hover-reveal-list"
+ },
+ {
+  "kind": "widget",
+  "name": "liquid-glass",
+  "entry": "motionary/widgets/liquid-glass",
+  "src": "src/entries/widgets/liquid-glass.ts",
+  "tag": "usa-liquid-glass",
+  "define": "defineLiquidGlass",
+  "types": [
+   "UsaLiquidGlassElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/liquid-glass"
+ },
+ {
+  "kind": "widget",
+  "name": "path-motion",
+  "entry": "motionary/widgets/path-motion",
+  "src": "src/entries/widgets/path-motion.ts",
+  "tag": "usa-path-motion",
+  "define": "definePathMotion",
+  "types": [
+   "UsaPathMotionElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/path-motion"
+ },
+ {
+  "kind": "widget",
+  "name": "cut-reveal",
+  "entry": "motionary/widgets/cut-reveal",
+  "src": "src/entries/widgets/cut-reveal.ts",
+  "tag": "usa-cut-reveal",
+  "define": "defineCutReveal",
+  "types": [
+   "UsaCutRevealElement"
+  ],
+  "dts": "../components/widgets",
+  "module": "components/widgets/cut-reveal"
+ },
+ {
+  "kind": "widget",
   "name": "eclipse-toggle",
   "entry": "motionary/widgets/eclipse-toggle",
   "src": "src/entries/widgets/eclipse-toggle.ts",

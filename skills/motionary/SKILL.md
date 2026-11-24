@@ -57,6 +57,9 @@ A few starting points:
 | Small moments | `<mo-eclipse-toggle>`, `<mo-hue-orbit>`, `<mo-notch-slider>`, `<mo-bulge-volume>`, `<mo-copy-button>`, `<mo-text-reveal>`, `<mo-cart-badge>`, `<mo-chip-input>`, `<mo-code-shake>`, `<mo-elastic-accordion>` |
 | Loading | `<mo-tile-relay>`, `<mo-six-dot-orbit>`, `<mo-three-dot-bounce>`, `<mo-sweep-lines>`, `<mo-spinner>`, `<mo-skeleton>` |
 | Forms | `<mo-select>`, `<mo-combobox>`, `<mo-number-stepper>`, `<mo-range-slider>`, `<mo-password>` |
+| Page blocks | `<mo-sidebar>`, `<mo-scrollspy>`, `<mo-pricing>`, `<mo-announcement-bar>`, `<mo-sticky-cta>`, `<mo-bento>`, `<mo-empty-state>` |
+| Data and media | `<mo-data-table>`, `<mo-filter-chips>`, `<mo-json-viewer>`, `<mo-lightbox>`, `<mo-hotspots>`, `<mo-fan-carousel>`, `<mo-expand-cards>` |
+| Scroll and cursor motion | `<mo-scroll-velocity>`, `<mo-horizontal-scroll>`, `<mo-path-motion>`, `<mo-cut-reveal>`, `<mo-image-trail>`, `<mo-hover-reveal-list>`, `<mo-liquid-glass>` |
 
 ## 3. Rules
 

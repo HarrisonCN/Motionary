@@ -46,6 +46,13 @@ interface LegacyAttributes {
         size?: string | boolean | number;
         trigger?: string | boolean | number;
     };
+    'usa-announcement-bar': {
+        'close-label'?: string | boolean | number;
+        dismissible?: string | boolean | number;
+        interval?: string | boolean | number;
+        label?: string | boolean | number;
+        tone?: string | boolean | number;
+    };
     'usa-audio': {
         cooldown?: string | boolean | number;
         label?: string | boolean | number;
@@ -92,6 +99,12 @@ interface LegacyAttributes {
         max?: string | boolean | number;
         unit?: string | boolean | number;
         values?: string | boolean | number;
+    };
+    'usa-bento': {
+        collapse?: string | boolean | number;
+        columns?: string | boolean | number;
+        gap?: string | boolean | number;
+        stagger?: string | boolean | number;
     };
     'usa-bezier-lab': {
         disabled?: string | boolean | number;
@@ -348,6 +361,19 @@ interface LegacyAttributes {
         size?: string | boolean | number;
         targets?: string | boolean | number;
     };
+    'usa-cut-reveal': {
+        cut?: string | boolean | number;
+        duration?: string | boolean | number;
+        pieces?: string | boolean | number;
+        trigger?: string | boolean | number;
+    };
+    'usa-data-table': {
+        'filter-label'?: string | boolean | number;
+        filterable?: string | boolean | number;
+        placeholder?: string | boolean | number;
+        'sort-column'?: string | boolean | number;
+        'sort-direction'?: string | boolean | number;
+    };
     'usa-date-picker': {
         'first-day'?: string | boolean | number;
         locale?: string | boolean | number;
@@ -456,14 +482,33 @@ interface LegacyAttributes {
         unit?: string | boolean | number;
         value?: string | boolean | number;
     };
+    'usa-empty-state': {
+        compact?: string | boolean | number;
+        description?: string | boolean | number;
+        heading?: string | boolean | number;
+        'heading-level'?: string | boolean | number;
+        icon?: string | boolean | number;
+    };
     'usa-equalizer': {
         bands?: string | boolean | number;
         label?: string | boolean | number;
         preset?: string | boolean | number;
     };
+    'usa-expand-cards': {
+        index?: string | boolean | number;
+        label?: string | boolean | number;
+        stack?: string | boolean | number;
+        trigger?: string | boolean | number;
+    };
     'usa-fab': {
         direction?: string | boolean | number;
         gap?: string | boolean | number;
+    };
+    'usa-fan-carousel': {
+        index?: string | boolean | number;
+        label?: string | boolean | number;
+        loop?: string | boolean | number;
+        spread?: string | boolean | number;
     };
     'usa-festival-banner': {
         dismissible?: string | boolean | number;
@@ -483,6 +528,15 @@ interface LegacyAttributes {
         simulate?: string | boolean | number;
     };
     'usa-file-tree': {};
+    'usa-filter-chips': {
+        'all-label'?: string | boolean | number;
+        label?: string | boolean | number;
+        match?: string | boolean | number;
+        multiple?: string | boolean | number;
+        options?: string | boolean | number;
+        target?: string | boolean | number;
+        value?: string | boolean | number;
+    };
     'usa-flight-status': {
         animated?: string | boolean | number;
         arrival?: string | boolean | number;
@@ -685,6 +739,22 @@ interface LegacyAttributes {
         duration?: string | boolean | number;
         label?: string | boolean | number;
     };
+    'usa-horizontal-scroll': {
+        gap?: string | boolean | number;
+        label?: string | boolean | number;
+        'min-width'?: string | boolean | number;
+        'panel-width'?: string | boolean | number;
+        progress?: string | boolean | number;
+    };
+    'usa-hotspots': {
+        label?: string | boolean | number;
+        pulse?: string | boolean | number;
+    };
+    'usa-hover-reveal-list': {
+        label?: string | boolean | number;
+        size?: string | boolean | number;
+        tilt?: string | boolean | number;
+    };
     'usa-hud-panel': {
         color?: string | boolean | number;
         status?: string | boolean | number;
@@ -710,6 +780,12 @@ interface LegacyAttributes {
         preset?: string | boolean | number;
         size?: string | boolean | number;
         toggle?: string | boolean | number;
+    };
+    'usa-image-trail': {
+        distance?: string | boolean | number;
+        life?: string | boolean | number;
+        max?: string | boolean | number;
+        size?: string | boolean | number;
     };
     'usa-infinity-loop': {
         duration?: string | boolean | number;
@@ -743,6 +819,12 @@ interface LegacyAttributes {
         glyph?: string | boolean | number;
         label?: string | boolean | number;
     };
+    'usa-json-viewer': {
+        'expand-depth'?: string | boolean | number;
+        json?: string | boolean | number;
+        label?: string | boolean | number;
+        'max-nodes'?: string | boolean | number;
+    };
     'usa-kanban': {
         label?: string | boolean | number;
     };
@@ -766,6 +848,10 @@ interface LegacyAttributes {
         label?: string | boolean | number;
         value?: string | boolean | number;
     };
+    'usa-lightbox': {
+        label?: string | boolean | number;
+        loop?: string | boolean | number;
+    };
     'usa-like': {
         color?: string | boolean | number;
         count?: string | boolean | number;
@@ -776,6 +862,13 @@ interface LegacyAttributes {
         size?: string | boolean | number;
     };
     'usa-liquid': {};
+    'usa-liquid-glass': {
+        blur?: string | boolean | number;
+        pressable?: string | boolean | number;
+        radius?: string | boolean | number;
+        strength?: string | boolean | number;
+        tint?: string | boolean | number;
+    };
     'usa-liquid-metal': {
         accent?: string | boolean | number;
         animated?: string | boolean | number;
@@ -1111,6 +1204,15 @@ interface LegacyAttributes {
         revealed?: string | boolean | number;
         value?: string | boolean | number;
     };
+    'usa-path-motion': {
+        duration?: string | boolean | number;
+        path?: string | boolean | number;
+        rotate?: string | boolean | number;
+        'show-path'?: string | boolean | number;
+        spacing?: string | boolean | number;
+        trace?: string | boolean | number;
+        trigger?: string | boolean | number;
+    };
     'usa-pause-all': {
         label?: string | boolean | number;
         'resume-label'?: string | boolean | number;
@@ -1175,6 +1277,17 @@ interface LegacyAttributes {
         bounce?: string | boolean | number;
         disabled?: string | boolean | number;
         scale?: string | boolean | number;
+    };
+    'usa-pricing': {
+        currency?: string | boolean | number;
+        label?: string | boolean | number;
+        locale?: string | boolean | number;
+        'month-unit'?: string | boolean | number;
+        'monthly-label'?: string | boolean | number;
+        period?: string | boolean | number;
+        'year-unit'?: string | boolean | number;
+        'yearly-label'?: string | boolean | number;
+        'yearly-note'?: string | boolean | number;
     };
     'usa-prize-wheel': {
         duration?: string | boolean | number;
@@ -1384,6 +1497,17 @@ interface LegacyAttributes {
         start?: string | boolean | number;
         'toggle-class'?: string | boolean | number;
     };
+    'usa-scroll-velocity': {
+        max?: string | boolean | number;
+        mode?: string | boolean | number;
+        strength?: string | boolean | number;
+    };
+    'usa-scrollspy': {
+        label?: string | boolean | number;
+        offset?: string | boolean | number;
+        selector?: string | boolean | number;
+        target?: string | boolean | number;
+    };
     'usa-scrolly': {
         offset?: string | boolean | number;
     };
@@ -1449,6 +1573,12 @@ interface LegacyAttributes {
         keys?: string | boolean | number;
         label?: string | boolean | number;
         listen?: string | boolean | number;
+    };
+    'usa-sidebar': {
+        'collapse-label'?: string | boolean | number;
+        collapsed?: string | boolean | number;
+        'expand-label'?: string | boolean | number;
+        label?: string | boolean | number;
     };
     'usa-six-dot-orbit': {
         duration?: string | boolean | number;
@@ -1615,6 +1745,14 @@ interface LegacyAttributes {
         clickable?: string | boolean | number;
         label?: string | boolean | number;
         orientation?: string | boolean | number;
+    };
+    'usa-sticky-cta': {
+        'close-label'?: string | boolean | number;
+        dismissible?: string | boolean | number;
+        label?: string | boolean | number;
+        offset?: string | boolean | number;
+        position?: string | boolean | number;
+        watch?: string | boolean | number;
     };
     'usa-sticky-stack': {
         gap?: string | boolean | number;

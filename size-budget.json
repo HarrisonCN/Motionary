@@ -2787,6 +2787,111 @@
     "limit": 0
   },
   {
+    "name": "import 'motionary/widgets/sidebar' (per-entry, fixed)",
+    "import": "import { defineSidebar } from 'pkg/widgets/sidebar'; console.log(defineSidebar);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/scrollspy' (per-entry, fixed)",
+    "import": "import { defineScrollspy } from 'pkg/widgets/scrollspy'; console.log(defineScrollspy);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/pricing' (per-entry, fixed)",
+    "import": "import { definePricing } from 'pkg/widgets/pricing'; console.log(definePricing);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/announcement-bar' (per-entry, fixed)",
+    "import": "import { defineAnnouncementBar } from 'pkg/widgets/announcement-bar'; console.log(defineAnnouncementBar);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/sticky-cta' (per-entry, fixed)",
+    "import": "import { defineStickyCta } from 'pkg/widgets/sticky-cta'; console.log(defineStickyCta);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/bento' (per-entry, fixed)",
+    "import": "import { defineBento } from 'pkg/widgets/bento'; console.log(defineBento);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/empty-state' (per-entry, fixed)",
+    "import": "import { defineEmptyState } from 'pkg/widgets/empty-state'; console.log(defineEmptyState);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/lightbox' (per-entry, fixed)",
+    "import": "import { defineLightbox } from 'pkg/widgets/lightbox'; console.log(defineLightbox);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/data-table' (per-entry, fixed)",
+    "import": "import { defineDataTable } from 'pkg/widgets/data-table'; console.log(defineDataTable);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/filter-chips' (per-entry, fixed)",
+    "import": "import { defineFilterChips } from 'pkg/widgets/filter-chips'; console.log(defineFilterChips);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/hotspots' (per-entry, fixed)",
+    "import": "import { defineHotspots } from 'pkg/widgets/hotspots'; console.log(defineHotspots);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/fan-carousel' (per-entry, fixed)",
+    "import": "import { defineFanCarousel } from 'pkg/widgets/fan-carousel'; console.log(defineFanCarousel);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/expand-cards' (per-entry, fixed)",
+    "import": "import { defineExpandCards } from 'pkg/widgets/expand-cards'; console.log(defineExpandCards);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/json-viewer' (per-entry, fixed)",
+    "import": "import { defineJsonViewer } from 'pkg/widgets/json-viewer'; console.log(defineJsonViewer);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/scroll-velocity' (per-entry, fixed)",
+    "import": "import { defineScrollVelocity } from 'pkg/widgets/scroll-velocity'; console.log(defineScrollVelocity);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/horizontal-scroll' (per-entry, fixed)",
+    "import": "import { defineHorizontalScroll } from 'pkg/widgets/horizontal-scroll'; console.log(defineHorizontalScroll);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/image-trail' (per-entry, fixed)",
+    "import": "import { defineImageTrail } from 'pkg/widgets/image-trail'; console.log(defineImageTrail);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/hover-reveal-list' (per-entry, fixed)",
+    "import": "import { defineHoverRevealList } from 'pkg/widgets/hover-reveal-list'; console.log(defineHoverRevealList);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/liquid-glass' (per-entry, fixed)",
+    "import": "import { defineLiquidGlass } from 'pkg/widgets/liquid-glass'; console.log(defineLiquidGlass);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/path-motion' (per-entry, fixed)",
+    "import": "import { definePathMotion } from 'pkg/widgets/path-motion'; console.log(definePathMotion);",
+    "limit": 0
+  },
+  {
+    "name": "import 'motionary/widgets/cut-reveal' (per-entry, fixed)",
+    "import": "import { defineCutReveal } from 'pkg/widgets/cut-reveal'; console.log(defineCutReveal);",
+    "limit": 0
+  },
+  {
     "name": "import 'motionary/effects/iris-reveal' (per-entry, fixed)",
     "import": "import { registerIrisReveal } from 'pkg/effects/iris-reveal'; console.log(registerIrisReveal);",
     "limit": 0
