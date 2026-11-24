@@ -503,7 +503,7 @@ const LOOK_TREATMENTS = {
         holo: (p) => ({ mediaFilter: 'saturate(1.6) hue-rotate(18deg) contrast(1.05)', glow: `0 0 26px ${alpha(p.a2, 0.45)}`, beamA: p.a2, beamB: p.accent, speed: '1.5', mediaRadius: '22px' }),
     },
 };
-const LOOK_FAMILIES = Object.keys(LOOK_TREATMENTS);
+const LOOK_FAMILIES = /*#__PURE__*/ Object.keys(LOOK_TREATMENTS);
 /* ---------- lookup ---------- */
 let index = null;
 function build() {
