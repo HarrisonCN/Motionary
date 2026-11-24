@@ -249,7 +249,7 @@ export const LOOK_TREATMENTS: Record<LookFamily, Record<string, Treatment>> = {
   },
 };
 
-export const LOOK_FAMILIES = Object.keys(LOOK_TREATMENTS) as LookFamily[];
+export const LOOK_FAMILIES = /*#__PURE__*/ Object.keys(LOOK_TREATMENTS) as LookFamily[];
 
 /* ---------- lookup ---------- */
 
