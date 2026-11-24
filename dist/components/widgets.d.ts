@@ -5831,7 +5831,7 @@ declare function moveItem<T>(list: readonly T[], from: number, to: number): T[];
 declare function numbers(text: string, max?: number): number[];
 
 type LookFamily = 'ui' | 'parts' | 'motion';
-/** Palette: ink, paper, accent, second accent. The last two palettes are dark. */
+/** Palette: ink, paper, accent, second accent. `DARK_PALETTES` lists the dark ones. */
 declare const LOOK_PALETTES: {
     readonly indigo: readonly ["#18181b", "#ffffff", "#4f46e5", "#a855f7"];
     readonly ocean: readonly ["#0c2a3e", "#f0f9ff", "#0369a1", "#22d3ee"];
@@ -5845,6 +5845,14 @@ declare const LOOK_PALETTES: {
     readonly coral: readonly ["#3a1410", "#fff5f2", "#c43d1c", "#ffb703"];
     readonly midnight: readonly ["#e2e8f0", "#0b1020", "#818cf8", "#22d3ee"];
     readonly ember: readonly ["#fef3c7", "#1c1210", "#fb923c", "#f87171"];
+    readonly cherry: readonly ["#3b0a0f", "#fff5f5", "#b91c1c", "#fca5a5"];
+    readonly olive: readonly ["#1f2410", "#f9faf1", "#4d6b0f", "#bef264"];
+    readonly cobalt: readonly ["#0b1640", "#f3f6ff", "#1d4ed8", "#60a5fa"];
+    readonly plum: readonly ["#2b0b2a", "#fdf4fb", "#a21caf", "#f0abfc"];
+    readonly sand: readonly ["#2b2418", "#fbf8f1", "#8a5a1f", "#e7c98b"];
+    readonly teal: readonly ["#042f2e", "#effcfa", "#0e7490", "#5eead4"];
+    readonly aurora: readonly ["#e0f2fe", "#06121f", "#a78bfa", "#34d399"];
+    readonly velvet: readonly ["#fce7f3", "#1a0b16", "#f472b6", "#fbbf24"];
 };
 type LookPalette = keyof typeof LOOK_PALETTES;
 /** What a look sets. Colors that a reader has to read against (`ink`, `paper`, `bg`, `cta`) are plain hex where they can be. */
