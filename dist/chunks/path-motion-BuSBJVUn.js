@@ -1,4 +1,4 @@
-import { f as defineElement, n as now, o as onFrame } from './base-SPDwWyB1.js';
+import { f as defineElement, r as raf, b as caf, n as now, o as onFrame } from './base-SPDwWyB1.js';
 import { d as defineMoName } from './mo-name-DT5wwaGR.js';
 import { m as make } from './moments-Cg_NlOYG.js';
 import { o as ownChildren, e as easeOut } from './kit-Dmjuhvd8.js';
@@ -112,10 +112,10 @@ function definePathMotion(tag = 'usa-path-motion') {
                     paint(Math.min(1, Math.max(0, (vh - r.top) / (vh + r.height))) * end);
                 };
                 const queue = () => { if (!pending)
-                    pending = requestAnimationFrame(update); };
+                    pending = raf(update); };
                 this.listen(window, 'scroll', queue, { passive: true });
                 this.listen(window, 'resize', queue, { passive: true });
-                this.onCleanup(() => pending && cancelAnimationFrame(pending));
+                this.onCleanup(() => pending && caf(pending));
                 update();
             }
             else {
@@ -178,4 +178,4 @@ function definePathMotion(tag = 'usa-path-motion') {
 }
 
 export { cleanPathData as c, definePathMotion as d };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/path-motion-Bx_5aPbb.js.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/path-motion-BuSBJVUn.js.map

@@ -1,4 +1,4 @@
-import { f as defineElement } from '../chunks/base-SPDwWyB1.js';
+import { f as defineElement, r as raf, b as caf } from '../chunks/base-SPDwWyB1.js';
 import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
 import { m as make } from '../chunks/moments-Cg_NlOYG.js';
 import { o as ownChildren } from '../chunks/kit-Dmjuhvd8.js';
@@ -60,8 +60,8 @@ function defineStickyCta(tag = 'usa-sticky-cta') {
                 let pending = 0;
                 const check = () => { pending = 0; set(window.scrollY > offset); };
                 this.listen(window, 'scroll', () => { if (!pending)
-                    pending = requestAnimationFrame(check); }, { passive: true });
-                this.onCleanup(() => pending && cancelAnimationFrame(pending));
+                    pending = raf(check); }, { passive: true });
+                this.onCleanup(() => pending && caf(pending));
                 check();
             }
             this.onCleanup(() => {

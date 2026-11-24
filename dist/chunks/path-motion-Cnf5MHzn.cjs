@@ -114,10 +114,10 @@ function definePathMotion(tag = 'usa-path-motion') {
                     paint(Math.min(1, Math.max(0, (vh - r.top) / (vh + r.height))) * end);
                 };
                 const queue = () => { if (!pending)
-                    pending = requestAnimationFrame(update); };
+                    pending = base.raf(update); };
                 this.listen(window, 'scroll', queue, { passive: true });
                 this.listen(window, 'resize', queue, { passive: true });
-                this.onCleanup(() => pending && cancelAnimationFrame(pending));
+                this.onCleanup(() => pending && base.caf(pending));
                 update();
             }
             else {
@@ -181,4 +181,4 @@ function definePathMotion(tag = 'usa-path-motion') {
 
 exports.cleanPathData = cleanPathData;
 exports.definePathMotion = definePathMotion;
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/path-motion-CEuA1AN5.cjs.map
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/path-motion-Cnf5MHzn.cjs.map

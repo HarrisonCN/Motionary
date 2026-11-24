@@ -62,8 +62,8 @@ function defineStickyCta(tag = 'usa-sticky-cta') {
                 let pending = 0;
                 const check = () => { pending = 0; set(window.scrollY > offset); };
                 this.listen(window, 'scroll', () => { if (!pending)
-                    pending = requestAnimationFrame(check); }, { passive: true });
-                this.onCleanup(() => pending && cancelAnimationFrame(pending));
+                    pending = base.raf(check); }, { passive: true });
+                this.onCleanup(() => pending && base.caf(pending));
                 check();
             }
             this.onCleanup(() => {

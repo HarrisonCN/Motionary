@@ -1,6 +1,6 @@
 'use strict';
 
-var widgets_horizontalScroll = require('../chunks/horizontal-scroll-Dncwoa76.cjs');
+var widgets_horizontalScroll = require('../chunks/horizontal-scroll-DjddI8e6.cjs');
 
 
 

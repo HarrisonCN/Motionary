@@ -1,4 +1,4 @@
-import { f as defineElement } from '../chunks/base-SPDwWyB1.js';
+import { f as defineElement, r as raf, b as caf } from '../chunks/base-SPDwWyB1.js';
 import { d as defineMoName } from '../chunks/mo-name-DT5wwaGR.js';
 import { m as make } from '../chunks/moments-Cg_NlOYG.js';
 import { c as css } from '../chunks/ui-blocks-CBiLi5cj.js';
@@ -23,7 +23,11 @@ function defineScrollspy(tag = 'usa-scrollspy') {
             const list = make('ol', 'usa-spy-list');
             const marker = make('span', 'usa-spy-marker');
             marker.setAttribute('aria-hidden', 'true');
-            const scope = (this.str('target') && document.querySelector(this.str('target'))) || document;
+            let scope = document;
+            try {
+                scope = (this.str('target') && document.querySelector(this.str('target'))) || document;
+            }
+            catch { /* invalid selector → the document */ }
             let links;
             if (own.length) {
                 links = own;
@@ -103,10 +107,10 @@ function defineScrollspy(tag = 'usa-scrollspy') {
                 setCurrent(index);
             };
             const queue = () => { if (!pending)
-                pending = requestAnimationFrame(update); };
+                pending = raf(update); };
             this.listen(window, 'scroll', queue, { passive: true });
             this.listen(window, 'resize', queue, { passive: true });
-            this.onCleanup(() => pending && cancelAnimationFrame(pending));
+            this.onCleanup(() => pending && caf(pending));
             this.listen(list, 'click', (e) => {
                 const a = e.target.closest?.('a');
                 const index = a ? links.indexOf(a) : -1;

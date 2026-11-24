@@ -1,8 +1,10 @@
-import { f as defineElement } from './base-SPDwWyB1.js';
-import { d as defineMoName } from './mo-name-DT5wwaGR.js';
-import { m as make } from './moments-Cg_NlOYG.js';
-import { o as ownChildren } from './kit-Dmjuhvd8.js';
-import { c as css } from './motion-surfaces-D35JWuaW.js';
+'use strict';
+
+var base = require('./base-DzZEJhQB.cjs');
+var moName = require('./mo-name-DR9ysd5S.cjs');
+var moments = require('./moments-eoZA2npZ.cjs');
+var kit = require('./kit-D8ZWl5Wc.cjs');
+var motionSurfaces = require('./motion-surfaces-BSXtpQ2Z.cjs');
 
 /** The track's x offset (px, ≤ 0) for a section `progress` (0–1) through, given the overflow width. */
 function trackOffset(progress, overflow) {
@@ -10,7 +12,7 @@ function trackOffset(progress, overflow) {
     return -p * Math.max(0, overflow);
 }
 function defineHorizontalScroll(tag = 'usa-horizontal-scroll') {
-    const ctor = defineElement(tag, Base => class HorizontalScroll extends Base {
+    const ctor = base.defineElement(tag, Base => class HorizontalScroll extends Base {
         constructor() {
             super(...arguments);
             this._index = 0;
@@ -18,13 +20,13 @@ function defineHorizontalScroll(tag = 'usa-horizontal-scroll') {
         static get observedAttributes() { return ['panel-width', 'gap', 'progress', 'min-width', 'label']; }
         get index() { return this._index; }
         mount() {
-            const kids = ownChildren(this);
-            const root = make('section', 'usa-kit usa-hscroll');
+            const kids = kit.ownChildren(this);
+            const root = moments.make('section', 'usa-kit usa-hscroll');
             root.setAttribute('aria-label', this.str('label', 'Gallery'));
-            const pin = make('div', 'usa-hscroll-pin');
-            const track = make('div', 'usa-hscroll-track');
-            const panels = kids.map((k) => { const p = make('div', 'usa-hscroll-panel'); p.append(k); track.append(p); return p; });
-            const bar = make('div', 'usa-hscroll-bar');
+            const pin = moments.make('div', 'usa-hscroll-pin');
+            const track = moments.make('div', 'usa-hscroll-track');
+            const panels = kids.map((k) => { const p = moments.make('div', 'usa-hscroll-panel'); p.append(k); track.append(p); return p; });
+            const bar = moments.make('div', 'usa-hscroll-bar');
             bar.setAttribute('aria-hidden', 'true');
             bar.hidden = this.str('progress') === 'false';
             pin.append(track, bar);
@@ -63,7 +65,7 @@ function defineHorizontalScroll(tag = 'usa-horizontal-scroll') {
                 }
             };
             const queue = () => { if (!pending)
-                pending = requestAnimationFrame(update); };
+                pending = base.raf(update); };
             this.listen(window, 'scroll', queue, { passive: true });
             this.listen(window, 'resize', layout, { passive: true });
             // keyboard users: bring the focused panel into the pinned frame by scrolling the page to its position
@@ -86,17 +88,18 @@ function defineHorizontalScroll(tag = 'usa-horizontal-scroll') {
             }
             this.onCleanup(() => {
                 if (pending)
-                    cancelAnimationFrame(pending);
+                    base.caf(pending);
                 this.append(...kids);
                 root.remove();
                 this._index = 0;
             });
             layout();
         }
-    }, { id: 'motion-surfaces', text: css });
-    defineMoName(tag, ctor);
+    }, { id: 'motion-surfaces', text: motionSurfaces.css });
+    moName.defineMoName(tag, ctor);
     return ctor;
 }
 
-export { defineHorizontalScroll as d, trackOffset as t };
-//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/horizontal-scroll-DgeR12ZG.js.map
+exports.defineHorizontalScroll = defineHorizontalScroll;
+exports.trackOffset = trackOffset;
+//# sourceMappingURL=https://raw.githubusercontent.com/HarrisonCN/Motionary/v17.9.0/dist/chunks/horizontal-scroll-DjddI8e6.cjs.map
