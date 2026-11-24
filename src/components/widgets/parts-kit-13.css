@@ -112,7 +112,7 @@ mo-line-chart, mo-funnel-chart, mo-treemap, mo-gantt, mo-waffle-chart) {display:
 @keyframes usa-gantt-fill {from {width:0}}
 .usa-gantt-link {position:absolute; left:var(--x1); width:max(10px, calc(var(--x2) - var(--x1))); top:50%; height:calc(var(--rows) * 34px); border-top:1.5px solid var(--kit-mute); border-right:1.5px solid var(--kit-mute); border-top-right-radius:6px; opacity:.55; pointer-events:none}
 .usa-gantt-today {position:absolute; top:0; bottom:0; width:2px; background:#ef4444; pointer-events:none}
-.usa-gantt-today {left:calc(26% + 10px + (74% - 10px) * (var(--x) / 100%))}
+.usa-gantt-today {left:calc(26% + 10px + (74% - 10px) * var(--x) / 100)}
 .usa-gantt-today span {position:absolute; top:-2px; left:4px; padding:0 5px; border-radius:4px; background:#ef4444; color:#fff; font-size:.65rem}
 
 /* waffle */

@@ -352,10 +352,10 @@ describe('collaboration and input', () => {
     expect(el.querySelectorAll('.usa-diff-line.add').length).toBe(3);
     expect(el.querySelectorAll('.usa-diff-line.same').length).toBe(1);
     expect(el.querySelector('.usa-diff-line.add mark')?.textContent).toBe('!');
-    click(el.querySelector('[data-mode="split"]'));
+    click(el.querySelector('.usa-diff-mode[data-mode="split"]'));
     expect(got).toEqual([{ mode: 'split' }]);
     expect(el.querySelectorAll('.usa-diff-line.pair').length).toBe(3);
-    expect(el.querySelector('[data-mode="split"]').getAttribute('aria-checked')).toBe('true');
+    expect(el.querySelector('.usa-diff-mode[data-mode="split"]').getAttribute('aria-checked')).toBe('true');
   });
 });
 

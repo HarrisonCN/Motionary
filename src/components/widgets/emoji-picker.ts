@@ -17,7 +17,7 @@ const SET: [string, string, string, string][] = [
 
 export type EmojiEntry = { emoji: string; name: string; group: string };
 /** Every built-in emoji with its keywords and group. */
-export const EMOJI: EmojiEntry[] = SET.flatMap(([group, , , items]) => items.split('|').map((s) => {
+export const EMOJI: EmojiEntry[] = /*#__PURE__*/ SET.flatMap(([group, , , items]) => items.split('|').map((s) => {
   const [emoji, ...words] = s.split(' ');
   return { emoji, name: words.join(' '), group };
 }));

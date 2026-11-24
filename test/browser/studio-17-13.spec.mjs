@@ -93,19 +93,24 @@ test('17.13 charts and motion run without page errors', async ({ page }, info) =
   await page.locator('mo-line-chart').getByRole('button', { name: '注册' }).click();
   await expect(page.locator('[data-log="line"]')).toHaveText('series 2 off');
 
+  // each chart plays its entrance once it is on screen, so bring it into view first
+  await page.locator('mo-funnel-chart').scrollIntoViewIfNeeded();
   await page.locator('mo-funnel-chart .usa-funnel-bar').nth(1).click();
   await expect(page.locator('[data-log="funnel"]')).toHaveText('stage 2: 2600');
 
+  await page.locator('mo-treemap').scrollIntoViewIfNeeded();
   const tile = page.locator('mo-treemap .usa-tmap-tile').first();
   await tile.focus();
   await page.keyboard.press('ArrowRight');
   await page.keyboard.press('Enter');
   await expect(page.locator('[data-log="tmap"]')).toHaveText(/^tile \d: \d+$/);
 
+  await page.locator('mo-gantt').scrollIntoViewIfNeeded();
   await page.locator('mo-gantt .usa-gantt-bar').first().click();
   await expect(page.locator('[data-log="gantt"]')).toHaveText('task 1');
   await expect(page.locator('mo-gantt .usa-gantt-today')).toBeAttached();
 
+  await page.locator('mo-waffle-chart').scrollIntoViewIfNeeded();
   await page.locator('mo-waffle-chart .usa-waffle-key').nth(1).click();
   await expect(page.locator('[data-log="waffle"]')).toHaveText('2: 33 cells');
 
